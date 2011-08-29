@@ -1,0 +1,54 @@
+
+# -----------------------------------------------------------------------------
+# OpenEaagles 'make' configuration file
+# -----------------------------------------------------------------------------
+
+# ---
+# OpenEaagles home directory
+#   Use the environment variable OE_ROOT to locate OpenEaagles
+#   Default path is "/usr/local/OpenEaagles"
+# ---
+ifdef OE_ROOT
+   OPENEAAGLES = ${OE_ROOT}
+else
+OPENEAAGLES = /usr/local/OpenEaagles
+endif
+
+# ---
+# Include and library directories
+# ---
+OPENEAAGLES_INC_DIR = $(OPENEAAGLES)/include
+OPENEAAGLES_LIB_DIR = $(OPENEAAGLES)/lib/linux
+
+# Uncomment if using FTGL version 2.1.2 or earlier
+# CPPFLAGS += -DFTGL_2_1_2 
+
+# Uncomment if using JSBSim version 0.9.13 or earlier
+# CPPFLAGS += -DJSBSIM_0_9_13 
+
+# ---
+# freetype2 include path
+# ---
+FREETYPE2_INC_DIR = /usr/include/freetype2
+
+# ---
+# deviceIO device options
+# ---
+JOYSTICKDEVICE = 1
+
+# ---
+# JSBSim include directory
+# ---
+JSBSIM_INC_DIR = /usr/local/include/JSBSim
+
+# ---
+# Optimize?
+# ---
+#OPTIMIZE = -g
+OPTIMIZE = -O3
+
+# ---
+# Modify standard flags
+# ---
+CPPFLAGS += -I$(OPENEAAGLES_INC_DIR) -I/usr/local/include $(OPTIMIZE) -Wno-long-long -pthread
+

@@ -1,0 +1,11 @@
+Energy (Joule: KiloWattHours, BTUs, Calories, Foot Pounds)
+http://www-cta.ornl.gov/cta/data/tedb22/Edition22_AppendixB.pdf 1
+- Transportation Energy Data Book: Edition 22 - 2002
+1 joule = 9.478 x 10 -04 BTU
+	= 0.7376 foot pounds
+	= 2.778 x 10 -07 KiloWattHours
+	= 0.2388888888888888889 calories
+
+1 kilowatthour = 860000 calories so 1 joule = (.00000027777)*(860000) = 0.23888888888889 calories
+
+

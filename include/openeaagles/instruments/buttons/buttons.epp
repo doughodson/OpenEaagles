@@ -1,0 +1,397 @@
+// This tests the button classes
+button1:
+( Button
+    transform: ( Translation -6 0 )
+    eventId: 500
+    selectName: 1
+    components: {
+        ( AsciiText
+            transform: ( Translation -0.25 -0.25 )
+            color: white
+            text: "B"
+        )
+        ( LineLoop
+            color: white
+            linewidth: 4
+            vertices: {
+                [ -1 -1 ]
+                [  1 -1 ]
+                [  0  1.5 ]
+            }
+        )
+        ( Polygon
+            color: gray2
+            vertices: {
+                [ -1 -1 ]
+                [  1 -1 ]
+                [  0  1.5 ]
+            }
+        )
+    }
+)
+
+button2:
+( PushButton
+    transform: ( Translation -3 0 )
+    eventId: 501
+    selectName: 2
+    maintained: true
+    components: {
+        buttons:
+        ( Rotary2 
+            components: {
+                ( Graphic
+                    components: {
+                        ( AsciiText
+                            transform: ( Translation -0.4 -0.25 )
+                            color: white
+                            text: "UP"
+                        )
+                        ( LineLoop
+                            color: white
+                            linewidth: 4
+                            vertices: {
+                                [ -1 -1 ]
+                                [ -1  1 ]
+                                [  1  1 ]
+                                [  1 -1 ]
+                            }
+                        )
+                        ( Polygon
+                            color: gray2
+                            vertices: {
+                                [ -1 -1 ]
+                                [ -1  1 ]
+                                [  1  1 ]
+                                [  1 -1 ]
+                            }
+                        )
+                    }
+                )
+                ( Graphic
+                    components: {
+                        ( AsciiText
+                            transform: ( Translation -0.4 -0.25 )
+                            color: black
+                            text: "DN"
+                        )
+                        ( LineLoop
+                            color: gray2
+                            linewidth: 4
+                            vertices: {
+                                [ -1 -1 ]
+                                [ -1  1 ]
+                                [  1  1 ]
+                                [  1 -1 ]
+                            }
+                        )
+                        ( Polygon
+                            color: white
+                            vertices: {
+                                [ -1 -1 ]
+                                [ -1  1 ]
+                                [  1  1 ]
+                                [  1 -1 ]
+                            }
+                        )
+                    }
+                )
+            }
+        )
+    }
+)
+
+button3:
+( PushButton
+    transform: ( Translation 0 0 )
+    eventId: 502
+    selectName: 3
+    maintained: false
+    components: {
+        buttons:
+        ( Rotary2 
+            components: {
+                ( Graphic
+                    components: {
+                        ( AsciiText
+                            transform: ( Translation -0.4 -0.25 )
+                            color: white
+                            text: "UP"
+                        )
+                        ( OcclusionCircle
+                            color: white
+                            radius: 1
+                            outerRadius: 1.1
+                            slices: 50
+                        )
+                       ( Circle
+                            color: gray2
+                            radius: 1
+                            filled: 1
+                            slices: 25
+                        )
+                    }
+                )
+                ( Graphic
+                    components: {
+                        ( AsciiText
+                            transform: ( Translation -0.4 -0.25 )
+                            color: black
+                            text: "DN"
+                        )
+                        ( OcclusionCircle
+                            color: gray
+                            radius: 1
+                            outerRadius: 1.1
+                            slices: 50
+                        )
+                       ( Circle
+                            color: white
+                            radius: 1
+                            filled: 1
+                            slices: 25
+                        )
+                    }
+                )
+            }
+        )
+    }
+)
+
+button4:
+( RotarySwitch
+    transform: ( Translation 3 0 )
+    angles: { 320 270 120 10}
+    selectName: 4
+    eventId: 503
+    components: {
+        switch:
+        ( Rotators
+            components: {
+                ( Polygon
+                    color: gray
+                    vertices: {
+                        [ -0.25 1 ]
+                        [ 0.25 1 ]
+                        [  0 1.5 ]
+                    }
+                )
+                ( Line
+                    color: white
+                    linewidth: 7
+                    vertices: {
+                        [ 0 0 ] [ 0 1 ]
+                    }
+                )
+            }
+        )
+        ( Polygon
+            color: black
+            vertices: {
+                [ -1 -1 ]
+                [ -1  1 ]
+                [  1  1 ]
+                [  1 -1 ]
+            }
+        )
+    }
+)
+
+knob:
+( Knob
+    selectName: 5
+    eventId: 504
+    endless: true
+    transform: ( Translation 0 -5 ) 
+    #if 1
+    valueTable: 
+    ( Table1 
+        x: [ 0 500 ]
+        data: [ 1 50 ]
+    )
+    #endif
+    components: {
+        ( Line
+            color: yellow
+            linewidth: 3
+            vertices: {
+                [ 0 0 ] [ -2 0 ]
+            }
+        )
+        ( Sphere
+            filled: 1
+            radius: 2
+            slices: 50
+            material: m1
+            translateLight: { 0 0 1 }
+            stacks: 50
+            transform: ( Translation 0 0 -1.5 )
+            color: red
+        )
+    }
+)
+
+solenoid:
+( SolenoidSwitch
+    transform: ( Translation 6 0 )
+    //holdTimeSec: 1    // this is for timing, if you don't put it in it will use logic
+    eventMap: {
+        505  // event id for button 1 (center button)
+        506  // event id for button 2 (top button)
+        507  // event id for button 3 (bottom button)
+    }
+    components: {
+        // outline
+        ( LineLoop
+            color: white
+            linewidth: 2
+            vertices: {
+                [ -1.1 3.1 ]
+                [  1.1 3.1 ]
+                [  1.1 -3.1 ]
+                [ -1.1 -3.1 ]
+            }
+        )
+        // here are our buttons
+        button1:
+        ( SolenoidButton
+            // center button = 1
+            eventId: 1
+            selectName: 6
+            transform: ( Translation 0 0 )
+            components: {            
+                push:
+                ( Rotary2
+                    components: {
+                        // not picked
+                        ( Graphic
+                            components: {
+                                ( Polygon
+                                    color: gray
+                                    mask: 0
+                                    vertices: {
+                                        [ -1 -1 ]
+                                        [  1 -1 ]
+                                        [  1  1 ]
+                                        [ -1  1 ]
+                                    }
+                                )
+                            }
+                        )
+                        // picked
+                        ( Graphic
+                            components: {
+                                ( Circle
+                                    color: white
+                                    radius: 0.8
+                                    filled: 1
+                                )
+                            }
+                        )
+                    }
+                )
+            }
+        )
+        button2:
+        ( SolenoidButton
+            // top button = 2
+            eventId: 2
+            selectName: 7
+            transform: ( Translation 0 2 )
+            components: {
+                push:
+                ( Rotary2
+                    components: {
+                        // not picked
+                        ( Graphic
+                            components: {
+                                ( Polygon
+                                    color: gray
+                                    mask: 0
+                                    vertices: {
+                                        [ -1 -1 ]
+                                        [  1 -1 ]
+                                        [  1  1 ]
+                                        [ -1  1 ]
+                                    }
+                                )
+                            }
+                        )
+                        // picked
+                        ( Graphic
+                            components: {
+                                ( Circle
+                                    color: white
+                                    radius: 0.8
+                                    filled: 1
+                                )
+                                ( Polygon
+                                    color: white
+                                    transform: ( Translation 0 -1 )
+                                    vertices: {
+                                        [ -0.5 -0.5 ]
+                                        [ -0.5  0.5 ]
+                                        [  0.5  0.5 ]
+                                        [  0.5 -0.5 ]
+                                    }
+                                )
+                            }
+                        )
+                    }
+                )                
+            }
+        )
+        button3:
+        ( SolenoidButton
+            // bottom button = 3
+            eventId: 3
+            selectName: 8
+            transform: ( Translation 0 -2 )
+            components: {
+                push:
+                ( Rotary2
+                    components: {
+                        // not picked
+                        ( Graphic
+                            components: {
+                                ( Polygon
+                                    color: gray
+                                    mask: 0 // you can set this to 1 to have nothing draw
+                                    vertices: {
+                                        [ -1 -1 ]
+                                        [  1 -1 ]
+                                        [  1  1 ]
+                                        [ -1  1 ]
+                                    }
+                                )
+                            }
+                        )
+                        // picked
+                        ( Graphic
+                            components: {
+                                ( Circle
+                                    color: white
+                                    radius: 0.8
+                                    filled: 1
+                                )
+                                ( Polygon
+                                    color: white
+                                    transform: ( Translation 0 1 )
+                                    vertices: {
+                                        [ -0.5 -0.5 ]
+                                        [ -0.5  0.5 ]
+                                        [  0.5  0.5 ]
+                                        [  0.5 -0.5 ]
+                                    }
+                                )
+                            }
+                        )
+
+                    }
+                )
+            }
+        )
+        
+    }
+)
+

@@ -1,0 +1,26 @@
+
+================================================================================
+Changes since v10.02b
+================================================================================
+
+--------------------------------------------------------------------------------
+EDL/EPP changes ---
+
+
+--------------------------------------------------------------------------------
+General changes ---
+
+simulation:
+
+   SimLogger class
+      1) fixed a bug that caused the logger to "log" blank lines.
+
+   TabLogger class
+      1) fixed a bug that caused the logger to "log" blank lines.
+
+	Weapon class
+	  1) fixed a bug in updateTC() when calculating time of flight
+
+--------------------------------------------------------------------------------
+
+

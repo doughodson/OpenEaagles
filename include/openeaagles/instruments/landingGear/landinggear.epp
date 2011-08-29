@@ -1,0 +1,329 @@
+	// Landing gear is a simple instrument that has one value given to it, and that is gear position.  Based on the gear up and gear down value, 
+	// it will let you know if you are in transit, have the gear up, or have the gear down.  Also, 
+gear:   
+    ( LandingGear
+        transform: { ( Translation -5 0 ) ( Scale 5 ) }
+        // position of the gear when we are down
+        gearDownValue: 1
+        // and up
+        gearUpValue: 0
+        components: {
+            // this is our main landing gear rotary (which has 4 graphics)
+            gearpos:
+            ( Rotary
+                components: {
+                    // up and not in transition
+                    ( Graphic
+                        components: {
+                            ( Graphic
+                                transform: ( Translation 0 1 )
+                                components: {
+                                    ( Line
+                                        segment: 1
+                                        color: black
+                                        vertices: {
+                                            [ -0.3 -0.6 ] [ -0.3 0.6 ]
+                                            [ -0.1 -0.6 ] [ -0.1 0.6 ]
+                                            [ 0.1 -0.6 ] [ 0.1 0.6 ]
+                                            [ 0.3 -0.6 ] [ 0.3 0.6 ]
+                                        }
+                                    )
+                                    // the handle
+                                    ( Polygon
+                                        color: white        
+                                        vertices: {
+                                            [ -0.4 -0.6 ]
+                                            [ 0.4 -0.6 ]
+                                            [ 0.4 0.6 ]
+                                            [ -0.4 0.6 ]
+                                        }
+                                    )
+                                }
+                            )
+                                    
+                            // the arm
+                            ( Polygon
+                                color: ( rgb 0.3 0.3 0.3 )        
+                                vertices: {
+                                    [ -0.3 0 ]
+                                    [ 0.3 0 ]
+                                    [ 0.3 1 ]
+                                    [ -0.3 1 ]
+                                }
+                            )                            
+                        }
+                    )
+                    // up and in transition
+                    ( Graphic
+                        components: {
+                            ( Graphic
+                                transform: ( Translation 0 1 )
+                                components: {
+                                    ( Line
+                                        segment: 1
+                                        color: black
+                                        vertices: {
+                                            [ -0.3 -0.6 ] [ -0.3 0.6 ]
+                                            [ -0.1 -0.6 ] [ -0.1 0.6 ]
+                                            [ 0.1 -0.6 ] [ 0.1 0.6 ]
+                                            [ 0.3 -0.6 ] [ 0.3 0.6 ]
+                                        }
+                                    )
+                                    // the handle
+                                    ( Polygon
+                                        color: red        
+                                        vertices: {
+                                            [ -0.4 -0.6 ]
+                                            [ 0.4 -0.6 ]
+                                            [ 0.4 0.6 ]
+                                            [ -0.4 0.6 ]
+                                        }
+                                    )
+                                }
+                            )
+                                    
+                            // the arm
+                            ( Polygon
+                                color: ( rgb 0.3 0.3 0.3 )        
+                                vertices: {
+                                    [ -0.3 0 ]
+                                    [ 0.3 0 ]
+                                    [ 0.3 1 ]
+                                    [ -0.3 1 ]
+                                }
+                            )                            
+                        }
+                    )
+                    // down and in transition
+                    ( Graphic
+                        components: {
+                            ( Graphic
+                                transform: ( Translation 0 -1 )
+                                components: {
+                                    ( Line
+                                        segment: 1
+                                        color: black
+                                        vertices: {
+                                            [ -0.3 -0.6 ] [ -0.3 0.6 ]
+                                            [ -0.1 -0.6 ] [ -0.1 0.6 ]
+                                            [ 0.1 -0.6 ] [ 0.1 0.6 ]
+                                            [ 0.3 -0.6 ] [ 0.3 0.6 ]
+                                        }
+                                    )
+                                    // the handle
+                                    ( Polygon
+                                        color: red        
+                                        vertices: {
+                                            [ -0.4 -0.6 ]
+                                            [ 0.4 -0.6 ]
+                                            [ 0.4 0.6 ]
+                                            [ -0.4 0.6 ]
+                                        }
+                                    )
+                                }
+                            )
+                                    
+                            // the arm
+                            ( Polygon
+                                color: ( rgb 0.3 0.3 0.3 )        
+                                vertices: {
+                                    [ -0.3 0 ]
+                                    [ 0.3 0 ]
+                                    [ 0.3 -1 ]
+                                    [ -0.3 -1 ]
+                                }
+                            )                            
+                        }
+                    )
+                    // down and not in transition
+                    ( Graphic
+                        components: {
+                            ( Graphic
+                                transform: ( Translation 0 -1 )
+                                components: {
+                                    ( Line
+                                        segment: 1
+                                        color: black
+                                        vertices: {
+                                            [ -0.3 -0.6 ] [ -0.3 0.6 ]
+                                            [ -0.1 -0.6 ] [ -0.1 0.6 ]
+                                            [ 0.1 -0.6 ] [ 0.1 0.6 ]
+                                            [ 0.3 -0.6 ] [ 0.3 0.6 ]
+                                        }
+                                    )
+                                    // the handle
+                                    ( Polygon
+                                        color: white        
+                                        vertices: {
+                                            [ -0.4 -0.6 ]
+                                            [ 0.4 -0.6 ]
+                                            [ 0.4 0.6 ]
+                                            [ -0.4 0.6 ]
+                                        }
+                                    )
+                                }
+                            )
+                                    
+                            // the arm
+                            ( Polygon
+                                color: ( rgb 0.3 0.3 0.3 )        
+                                vertices: {                                
+                                    [ -0.3 0 ]
+                                    [ 0.3 0 ]
+                                    [ 0.3 -1 ]
+                                    [ -0.3 -1 ]
+                                }
+                            )                            
+                        }
+                    )
+                }
+            )
+            // this is the NLG
+            // LandingLight is derived from the landing gear, only it simply draws a circle that is either green or black,
+            // depending on what value they receive from the landing gear.  (up or down, and everything in between
+            // is in transit)
+            ( LandingLight
+                // we only have to give one value, because it toggles on and off if it is below the up value
+                gearUpValue: 0.1
+                gearDownValue: 0.8
+                transform: ( Translation 2 1 ) 
+                components: {
+                    index:
+                    ( Rotary2
+                        components: {
+                            // this is our up light
+                            ( Circle
+                                radius: 0.23
+                                color: black
+                                slices: 50
+                                filled: 1
+                            )
+                            // down light
+                            ( Circle
+                                radius: 0.23
+                                color: green
+                                slices: 50
+                                filled: 1
+                            )
+                            
+                        }
+                    )
+                    // this is our outline, tell it to always be gray!
+                    ( OcclusionCircle
+                        radius: 0.23
+                        outerRadius: 0.25
+                        slices: 100
+                        color: gray
+                    )
+                }
+            )
+            // this is the MLG - done the static openGL way
+            ( LandingLight
+                gearUpValue: 0
+                gearDownValue: 0.7
+                transform: ( Translation 2.5 0 )
+                lightRadius: 0.23
+                components: {
+                    ( OcclusionCircle
+                        radius: 0.23
+                        outerRadius: 0.25
+                        slices: 100
+                        color: gray
+                    )
+                }   
+            )
+            ( LandingLight
+                gearUpValue: 0
+                gearDownValue: 0.7
+                transform: ( Translation 1.5 0 )
+                components: {
+                    index:
+                    ( Rotary2
+                        components: {
+                            // this is our up light
+                            ( Circle
+                                radius: 0.23
+                                color: black
+                                slices: 50
+                                filled: 1
+                            )
+                            // down light
+                            ( Circle
+                                radius: 0.23
+                                color: green
+                                slices: 50
+                                filled: 1
+                            )
+                            
+                        }
+                    )
+                    ( OcclusionCircle
+                        radius: 0.23
+                        outerRadius: 0.25
+                        slices: 100
+                        color: gray
+                    )
+                }                    
+            )
+            // this is the background
+            ( LineLoop
+                color: (rgb 0.5 0.5 0.5)
+                linewidth: 2
+                vertices: {
+                    [ -0.5 -1.7 ]
+                    [ -0.5 1.7 ]
+                    [ 0.5 1.7 ]
+                    [ 0.5 -1.7 ]
+                    [ -0.5 -1.7 ]
+                }
+            )
+            ( Polygon
+                transform: ( Translation 0 0 -1 )
+                color: (rgb 0.05 0.05 0.05)
+                vertices: {
+                    [ -0.5 -1.7 ]
+                    [ -0.5 1.7 ]
+                    [ 0.5 1.7 ]
+                    [ 0.5 -1.7 ]
+                    [ -0.5 -1.7 ]
+                }
+            )                                
+        }
+    ) // end of gear
+    ( Graphic
+        transform: { ( Scale 5 ) ( Translation 1 0.1 ) }
+        components: {
+            // this is the airplane outline
+            ( LineLoop
+                color: white
+                vertices: {
+                    [ -1 0 ]
+                    [ -0.3 0.2 ]
+                    [ 0 1.25 ]
+                    [ 0.3 0.2 ]
+                    [ 1 0 ]
+                    [ 1 -0.3 ]
+                    [ 0.3 -0.3 ]
+                    [ 0.3 -0.8 ]
+                    [ 0.7 -1.1 ]
+                    [ 0.3 -1.1 ]
+                    [ 0.25 -1.25 ]
+                    [ -0.25 -1.25 ]
+                    [ -0.3 -1.1 ]
+                    [ -0.7 -1.1 ]
+                    [ -0.3 -0.8 ]
+                    [ -0.3 -0.3 ]
+                    [ -1 -0.3 ]
+                    [ -1 0 ]
+                }
+            )
+            ( AsciiText
+                vertical: 1
+                color: white
+                transform: { ( Translation -0.05 0.3 ) ( Scale 0.2 ) }
+                text: "WHEELS"
+            )                                        
+        }
+    )        
+
+

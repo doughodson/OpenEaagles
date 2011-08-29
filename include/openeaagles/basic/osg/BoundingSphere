@@ -1,0 +1,129 @@
+/* -*-c++-*- OpenSceneGraph - Copyright (C) 1998-2005 Robert Osfield 
+ *
+ * This library is open source and may be redistributed and/or modified under  
+ * the terms of the OpenSceneGraph Public License (OSGPL) version 0.0 or 
+ * (at your option) any later version.  The full license is in LICENSE file
+ * included with this distribution, and on the openscenegraph.org website.
+ * 
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ * OpenSceneGraph Public License for more details.
+*/
+
+#ifndef OSG_BOUNDINGSPHERE_ETK
+#define OSG_BOUNDINGSPHERE_ETK 1
+
+#include "Vec3"
+
+namespace Eaagles {
+namespace osg {
+
+class BoundingBox;
+
+/** General purpose bounding sphere class for enclosing nodes/objects/vertices.
+  * Bounds internal osg::Nodes in the scene, assists in view frustum culling,
+  * etc. Similar in function to BoundingBox, it's quicker for evaluating
+  * culling but generally will not cull as aggressively because it encloses a
+  * greater volume.
+*/
+class OSG_EXPORT_ETK BoundingSphere
+{
+    public:
+        
+        Vec3 _center;
+        float _radius;
+
+        /** Construct a default bounding sphere with radius to -1.0f, representing an invalid/unset bounding sphere.*/ 
+        BoundingSphere() : _center(0.0f,0.0f,0.0f),_radius(-1.0f) {}
+    
+        /** Creates a bounding sphere initialized to the given extents. */
+        BoundingSphere(const Vec3& center,float radius) : _center(center),_radius(radius) {}
+
+        /** Creates a bounding sphere initialized to the given extents. */
+        BoundingSphere(const BoundingSphere& bs) : _center(bs._center),_radius(bs._radius) {}
+
+        /** Creates a bounding sphere initialized to the given extents. */
+        BoundingSphere(const BoundingBox& bb) : _center(0.0f,0.0f,0.0f),_radius(-1.0f) { expandBy(bb); }
+
+        /** Clear the bounding sphere. Reset to default values. */
+        inline void init()
+        {
+            _center.set(0.0f,0.0f,0.0f);
+            _radius = -1.0f;
+        }
+
+        /** Returns true of the bounding sphere extents are valid, false
+          * otherwise. */
+        inline bool valid() const { return _radius>=0.0f; }
+
+        /** Set the bounding sphere to the given center/radius. */ 
+        inline void set(const Vec3& center,float radius)
+        {
+            _center = center;
+            _radius = radius;
+        }
+
+        /** Returns the center of the bounding sphere. */
+        inline Vec3& center() { return _center; }
+        /** Returns the const center of the bounding sphere. */
+        inline const Vec3& center() const { return _center; }
+
+        /** Returns the radius of the bounding sphere. */
+        inline float& radius() { return _radius; }
+        /** Returns the const radius of the bounding sphere. */
+        inline float radius() const { return _radius; }
+        
+        /** Returns the squared length of the radius. Note, For performance
+          * reasons, the calling method is responsible for checking to make
+          * sure the sphere is valid. */
+        inline float radius2() const { return _radius*_radius; }
+
+        /** Expands the sphere to encompass the given point. Repositions the
+          * sphere center to minimize the radius increase. If the sphere is
+          * uninitialized, set its center to v and radius to zero. */
+        void expandBy(const Vec3& v);
+
+        /** Expands the sphere to encompass the given point. Does not
+          * reposition the sphere center. If the sphere is
+          * uninitialized, set its center to v and radius to zero. */
+        void expandRadiusBy(const Vec3& v);
+
+        /** Expands the sphere to encompass the given sphere. Repositions the
+          * sphere center to minimize the radius increase. If the sphere is
+          * uninitialized, set its center and radius to match sh. */
+        void expandBy(const BoundingSphere& sh);
+
+        /** Expands the sphere to encompass the given sphere. Does not
+          * repositions the sphere center. If the sphere is
+          * uninitialized, set its center and radius to match sh. */
+        void expandRadiusBy(const BoundingSphere& sh);
+
+        /** Expands the sphere to encompass the given box. Repositions the
+          * sphere center to minimize the radius increase. */
+        void expandBy(const BoundingBox& bb);
+
+        /** Expands the sphere to encompass the given box. Does not
+          * repositions the sphere center. */
+        void expandRadiusBy(const BoundingBox& bb);
+
+        /** Returns true if v is within the sphere. */
+        inline bool contains(const Vec3& v) const
+        {
+            return valid() && ((v-_center).length2()<=radius2());
+        }
+
+        /** Returns true if there is a non-empty intersection with the given
+          * bounding sphere. */
+        inline bool intersects( const BoundingSphere& bs ) const
+        {
+            return valid() && bs.valid() &&
+                   ((_center - bs._center).length2() <= (_radius + bs._radius)*(_radius + bs._radius));
+        }
+
+};
+
+}
+} // End Eaagles namespace
+
+#endif

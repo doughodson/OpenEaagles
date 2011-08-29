@@ -1,0 +1,51 @@
+//------------------------------------------------------------------------------
+// Class:  Rgb
+//------------------------------------------------------------------------------
+#ifndef __Rgb_H_666B224F_370A_432e_9372_5662DC485007__
+#define __Rgb_H_666B224F_370A_432e_9372_5662DC485007__
+
+#include "openeaagles/basic/Color.h"
+
+namespace Eaagles {
+namespace Basic {
+
+//------------------------------------------------------------------------------
+// Class:  Rgb
+// Base class:  Object -> Color -> Rgb
+//
+// Description:  Defines a color by Red, Green, and Blue
+//
+// Form name: rgb
+// Slots:
+//     red   <Number>  ! Red component (0.0 to 1.0) (default: 0)
+//     green <Number>  ! Green component (0.0 to 1.0) (default: 0)
+//     blue  <Number>  ! Blue component (0.0 to 1.0) (default: 0)
+//
+// Events: None
+//
+//
+// Public methods: Base class public methods, plus ...
+//
+//      Rgb(const LCreal r, const LCreal g, const LCreal b)
+//          Special constuctor what initializes the object to r, g,  and b
+//
+//------------------------------------------------------------------------------
+class Rgb : public Color {
+    DECLARE_SUBCLASS(Rgb,Color)
+
+public:
+    Rgb(const LCreal r, const LCreal g, const LCreal b);
+    Rgb();
+
+    // Slot functions
+    virtual bool setSlotRed(Number* const msg);
+    virtual bool setSlotGreen(Number* const msg);
+    virtual bool setSlotBlue(Number* const msg);
+    virtual bool setSlotAlpha(Number* const msg);
+};
+
+} // End Basic namespace
+} // End Eaagles namespace
+
+#endif      /* __Rgb_H_666B224F_370A_432e_9372_5662DC485007__ */
+

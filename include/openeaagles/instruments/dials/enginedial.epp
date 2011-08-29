@@ -1,0 +1,150 @@
+// Engine dial - a an instrument that passes the engine rpm value down to it's components, and each component does their own thing accordingly
+enginedial:
+    ( Instrument
+        components: {
+            // here is the pointer
+            ( DialPointer
+                scalingTable: 
+                    ( Table1
+                        x: [ 0 100 ]
+                    data: [ 0 270 ]
+                    )
+                startAngle: 0
+                sweepAngle: 270
+                slices: 100
+                // the specific colors we want to be at certain values
+                color: ( ColorRotary 
+                            breakpoints: {
+                                0 
+                                59
+                                100 
+                            }
+                            breakcolors: {
+                                (rgb 1 1 0)
+                                (rgb 0 1 0) 
+                                (rgb 1 0 0)
+                            }
+                        )   
+                // we actually draw the pointer here
+                components: {
+                    ( Polygon
+                        vertices: {
+                            [ -0.1 0 ]
+                            [ 0.1 0 ]
+                            [ 0.1 3 ]
+                            [ -0.1 3 ]
+                        }
+                    )
+                    ( Polygon
+                        vertices: {
+                            [ -0.25 3 ]
+                            [ 0.25 3 ]
+                            [ 0 3.8 ]
+                        }
+                    )
+                }
+            ) 
+            // here is the first segment of the arc 
+            ( DialArcSegment
+                dialRadius: 4.7
+                color: ( ColorRotary 
+                            breakpoints: {
+                                0 
+                                100 
+                            }
+                            breakcolors: {
+                                (rgb 1 1 0)
+                                (rgb 1 0 0)
+                            }
+                        )      
+                                            
+                outerRadius: 4.8
+                startAngle: 0
+                slices: 100
+                sweepAngle: 159
+            )  
+            // here is the second segment of the arc
+            ( DialArcSegment
+                dialRadius: 4.7
+                color: ( ColorRotary
+                            breakpoints: {
+                                0 
+                                59
+                                100
+                            }  
+                            breakcolors: {
+                                (rgb 1 1 0)
+                                (rgb 0 1 0)
+                                (rgb 1 0 0)
+                            }
+                        )
+                outerRadius: 4.8
+                startAngle: 159
+                sweepAngle: 111
+                slices: 75
+            )
+            // here are the tick marks
+            ( DialTickMarks
+                color: ( ColorRotary 
+                            breakpoints: {
+                                0 
+                                59
+                                100 
+                            }
+                            breakcolors: {
+                                (rgb 1 1 0)
+                                (rgb 0 1 0)
+                                (rgb 1 0 0)
+                            }
+                        )   
+                quantity: 1
+                dialRadius: 4.7
+                startAngle: 159
+                length: -1.5
+                linewidth: 4
+            )   
+            ( DialTickMarks
+                color: ( ColorRotary 
+                            breakpoints: {
+                                0 
+                                59
+                            }
+                            breakcolors: {
+                                (rgb 1 1 0)
+                                (rgb 1 0 0)
+                            }
+                        )   
+                quantity: 1
+                dialRadius: 4.7
+                startAngle: 270
+                length: -1.5
+                linewidth: 4
+            ) 
+        
+        // engine digital readout - will change the text colors accordingly.  This is just an instrument that will change the numeric readouts color for a given value.
+        ( Instrument
+            color: 
+                ( ColorRotary 
+                    breakpoints: {
+                        0 
+                        59
+                        100
+                    }
+                    breakcolors: {
+                        (rgb 1 1 0)
+                        (rgb 0 1 0)
+                        (rgb 1 0 0)
+                    }
+                )                       
+            components: {
+                enginereadout:      
+                ( NumericReadout
+                    inheritColor: 1
+                    transform: ( Translation -3 1.5 ) 
+                    format: "###"
+                )
+            }    
+        ) 
+    }
+)
+

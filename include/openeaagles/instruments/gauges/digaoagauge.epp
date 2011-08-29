@@ -1,0 +1,645 @@
+    // Digital aoa gauge and corresponding analog tape scale with it
+    // Inputs can be found in AoAIndexer.h
+    ( Graphic 
+        transform: ( Translation 5.0 0 )
+        components: {
+        // AoAIndexer is a simple instrument that simply takes an aoa value, and based on the values given to it, 
+        // determines what color to paint each portion of the gauge.
+        aoagauge:
+        ( AoAIndexer 
+				// these are values of the aoa that trigger each level of the digital aoa.  The drawing is done in AoAIndexer.cpp
+                aboveMin: 14
+                aboveMax: 17
+                belowMin: 9
+                belowMax: 12
+                inRangeMin: 12
+                inRangeMax: 14  
+                components: {
+                    index:
+                    ( Rotary
+                        components: {
+                            ( Graphic
+                                color: gray
+                                components: {
+                                    // top arc
+                                    ( OcclusionArc
+                                        transform: ( Translation 0 0.125 )
+                                        startAngle: -90
+                                        arcLength: 180
+                                        linewidth: 3
+                                        radius: 1
+                                        outerRadius: 1.1
+                                        slices: 10
+                                    )
+                                    ( OcclusionArc
+                                        transform: ( Translation 0 -0.125 )
+                                        startAngle: -270
+                                        arcLength: 180
+                                        outerRadius: 1.1
+                                        radius: 1
+                                        slices: 10
+                                    )
+                                    // top mark
+                                    ( Line
+                                        transform: ( Translation 0 5 )
+                                        segment: 1
+                                        linewidth: 3
+                                        vertices: {
+                                            [ -0.25 0 ] [ -1 2 ]
+                                            [ 0.25 0 ] [ 1 2 ]
+                                        }
+                                    )  
+                                    // bottom mark
+                                    ( Line
+                                        transform: ( Translation 0 -5 )
+                                        segment: 1
+                                        linewidth: 3
+                                        vertices: {
+                                            [ -0.05 0 ] [ -1 -2 ] 
+                                            [ 0.05 0 ] [ 1 -2 ]
+                                        }
+                                    )                                                                      
+                                }
+                            )
+                            // green
+                            ( Graphic
+                                color: gray
+                                components: {
+                                    // top mark
+                                    ( Line
+                                        transform: ( Translation 0 5 )
+                                        segment: 1
+                                        linewidth: 3
+                                        vertices: {
+                                            [ -0.25 0 ] [ -1 2 ]
+                                            [ 0.25 0 ] [ 1 2 ]
+                                        }
+                                    ) 
+                                    // bottom mark
+                                    ( Line
+                                        transform: ( Translation 0 -5 )
+                                        segment: 1
+                                        linewidth: 3
+                                        vertices: {
+                                            [ -0.05 0 ] [ -1 -2 ] 
+                                            [ 0.05 0 ] [ 1 -2 ]
+                                        }
+                                    )                                                                                                                                                                                             // top arc
+                                    ( OcclusionArc
+                                        transform: ( Translation 0 0.125 )
+                                        startAngle: -90
+                                        arcLength: 180
+                                        outerRadius: 1.1
+                                        radius: 1
+                                        color: green
+                                        slices: 10
+                                    )
+                                    ( OcclusionArc
+                                        transform: ( Translation 0 -0.125 )
+                                        startAngle: -270
+                                        arcLength: 180
+                                        outerRadius: 1.1
+                                        radius: 1
+                                        color: green
+                                        slices: 10
+                                    )                        
+                                }
+                            )
+                            // yellow
+                            ( Graphic
+                                color: gray
+                                components: {
+                                    // top arc
+                                    ( OcclusionArc
+                                        transform: ( Translation 0 0.125 )
+                                        startAngle: -90
+                                        arcLength: 180
+                                        outerRadius: 1.1
+                                        radius: 1
+                                        slices: 10
+                                    )
+                                    ( OcclusionArc
+                                        transform: ( Translation 0 -0.125 )
+                                        startAngle: -270
+                                        arcLength: 180
+                                        outerRadius: 1.1
+                                        radius: 1
+                                        slices: 10
+                                    )
+                                    // top mark
+                                    ( Line
+                                        transform: ( Translation 0 5 )
+                                        segment: 1
+                                        linewidth: 3
+                                        vertices: {
+                                            [ -0.25 0 ] [ -1 2 ]
+                                            [ 0.25 0 ] [ 1 2 ]
+                                        }
+                                    )    
+                                    // bottom mark
+                                    ( Line
+                                        transform: ( Translation 0 -5 )
+                                        segment: 1
+                                        color: yellow
+                                        linewidth: 3
+                                        vertices: {
+                                            [ -0.05 0 ] [ -1 -2 ] 
+                                            [ 0.05 0 ] [ 1 -2 ]
+                                        }
+                                    )                                                                                                                                                                              
+                                }
+                            )
+                            // red
+                            ( Graphic
+                                color: gray
+                                components: {
+                                    // top arc
+                                    ( OcclusionArc
+                                        transform: ( Translation 0 0.125 )
+                                        startAngle: -90
+                                        arcLength: 180
+                                        outerRadius: 1.1
+                                        radius: 1
+                                        slices: 10
+                                    )
+                                    ( OcclusionArc
+                                        transform: ( Translation 0 -0.125 )
+                                        startAngle: -270
+                                        arcLength: 180
+                                        outerRadius: 1.1
+                                        radius: 1
+                                        slices: 10
+                                    )
+                                    // bottom mark
+                                    ( Line
+                                        transform: ( Translation 0 -5 )
+                                        segment: 1
+                                        linewidth: 3
+                                        vertices: {
+                                            [ -0.05 0 ] [ -1 -2 ] 
+                                            [ 0.05 0 ] [ 1 -2 ]
+                                        }
+                                    )                                    
+                                    // top mark
+                                    ( Line
+                                        color: red
+                                        transform: ( Translation 0 5 )
+                                        segment: 1
+                                        linewidth: 3
+                                        vertices: {
+                                            [ -0.25 0 ] [ -1 2 ]
+                                            [ 0.25 0 ] [ 1 2 ]
+                                        }
+                                    )                                    
+                                }
+                            )
+                        }
+                    )
+                }
+            )
+            // background - this is static
+            ( LineLoop
+                color: gray
+                linewidth: 3
+                vertices: {
+                    [ -2.25 -7.5 ]
+                    [ -2.25 7.5 ]
+                    [ 2.25 7.5 ]
+                    [ 2.25 -7.5 ] 
+                }
+            )                
+        }
+    )
+    
+    // readouts
+    ( AsciiText
+        color: white
+        position: [ 1 2 ]
+        text: "AOA:"
+    )
+    aoa:
+    ( NumericReadout
+        color: white
+        position: [ 2 2 ]
+        format: "##.#"
+    )
+    
+    
+    ( Graphic
+        transform: ( Translation -5 0 )
+        components: {
+            // outside line loop
+            ( LineLoop
+                color: white
+                linewidth: 3
+                vertices: {
+                    [ -3 -7.5 ]
+                    [ -3  7.5 ]
+                    [  3  7.5 ]
+                    [  3 -7.5 ]
+                }
+            )
+
+            ( Polygon
+                color: gray1
+                transform: ( Translation 0 0 -0.4 )
+                vertices: {
+                    [ -3 -7.5 ]
+                    [ -3  7.5 ]
+                    [  3  7.5 ]
+                    [  3 -7.5 ]
+                }
+            )
+            // inside line loop
+            ( LineLoop
+                color: black
+                linewidth: 5
+                vertices: {
+                    [ -1.4 -6 ]
+                    [ -1.4  6 ]
+                    [  1.4  6 ]
+                    [  1.4 -6 ]
+                }
+            )
+            // here is the static pointers
+            ( Polygon
+                color: white
+                vertices: { 
+                    [ -2.5 -0.5 ] 
+                    [ -2.5 0.5 ] 
+                    [ -1.5 0 ]
+                }
+            )
+            ( Polygon
+                color: white
+                vertices: { 
+                    [ 2.5 -0.5 ] 
+                    [ 2.5 0.5 ] 
+                    [ 1.5 0 ]
+                }
+            )
+            // this is the analog aoa tape gauge
+            // Use a generic tape gauge and scissor it accordingly 
+        
+            // this graphic doesn't move either
+            ( AsciiText
+                vertical: 1
+                color: white
+                font: smallfont
+                transform: ( Translation -2.5 2.5 )
+                text: "AOA"
+            )
+            ( AsciiText
+                vertical: 1
+                color: white
+                font: smallfont
+                transform: ( Translation -2.5 -1.5 )
+                text: "DEG"
+            )
+            
+        ( Graphic
+            scissorX: -1.5
+            scissorWidth: 3
+            scissorY: -6
+            scissorHeight: 12                    
+            components: {
+                analogaoa:   
+                ( GaugeSlider
+                            scalingTable: 
+                                ( Table1
+                                    // angle of attack
+                                    x: [ 0 40 ]
+                                    // inches to translate
+                                data: [  0 -40 ]
+                                )
+                            components: {
+                                ( Graphic
+                                    components: {
+                                        // here are the warning and caution polygons (red/green/yellow)
+                                        // green
+                                        ( Polygon
+                                            transform: ( Translation 0.8 13 )
+                                            color: green
+                                            vertices: {
+                                                [ -0.3 -1 ]
+                                                [ -0.3  1 ]
+                                                [  0.3  1 ]
+                                                [  0.3 -1 ]
+                                            }
+                                        )
+                                        // red
+                                        ( Polygon
+                                            transform: ( Translation 0.8 15.5 )
+                                            color: red
+                                            vertices: {
+                                                [ -0.3 -1.5 ]
+                                                [ -0.3  1.5 ]
+                                                [  0.3  1.5 ]
+                                                [  0.3 -1.5 ]
+                                            }
+                                        )
+                                        // yellow
+                                        ( Polygon
+                                            transform: ( Translation 0.8 10.5 )
+                                            color: yellow
+                                            vertices: {
+                                                [ -0.3 -1.5 ]
+                                                [ -0.3  1.5 ]
+                                                [  0.3  1.5 ]
+                                                [  0.3 -1.5 ]
+                                            }
+                                        )
+                                        
+                                        // here are our text readouts with their mini backgrounds
+                                        ( Graphic
+                                            components: {
+                                                ( AsciiText
+                                                    color: white
+                                                    text: "0"
+                                                    transform: ( Translation -0.2 -0.3 )
+                                                )
+                                                ( Polygon
+                                                    color: black
+                                                    vertices: {
+                                                        [ -0.5 -0.5 ]
+                                                        [ -0.5  0.5 ]
+                                                        [  0.5  0.5 ]
+                                                        [  0.5 -0.5 ]
+                                                    }
+                                                )
+                                            }
+                                        )
+                                        // here are our text readouts with their mini backgrounds
+                                        ( Graphic
+                                            transform: ( Translation 0 5 )
+                                            components: {
+                                                ( AsciiText
+                                                    color: white
+                                                    text: "5"
+                                                    transform: ( Translation -0.2 -0.3 )
+                                                )
+                                                ( Polygon
+                                                    color: black
+                                                    vertices: {
+                                                        [ -0.5 -0.5 ]
+                                                        [ -0.5  0.5 ]
+                                                        [  0.5  0.5 ]
+                                                        [  0.5 -0.5 ]
+                                                    }
+                                                )
+                                            }
+                                        )
+                                        // here are our text readouts with their mini backgrounds
+                                        ( Graphic
+                                            transform: ( Translation 0 10 )
+                                            components: {
+                                                ( AsciiText
+                                                    color: white
+                                                    text: "10"
+                                                    transform: ( Translation -0.4725 -0.3 )
+                                                )
+                                                ( Polygon
+                                                    color: black
+                                                    vertices: {
+                                                        [ -0.5 -0.5 ]
+                                                        [ -0.5  0.5 ]
+                                                        [  0.5  0.5 ]
+                                                        [  0.5 -0.5 ]
+                                                    }
+                                                )
+                                            }
+                                        )
+                                        // here are our text readouts with their mini backgrounds
+                                        ( Graphic
+                                            transform: ( Translation 0 15 )
+                                            components: {
+                                                ( AsciiText
+                                                    color: white
+                                                    text: "15"
+                                                    transform: ( Translation -0.4725 -0.3 )
+                                                )
+                                                ( Polygon
+                                                    color: black
+                                                    vertices: {
+                                                        [ -0.5 -0.5 ]
+                                                        [ -0.5  0.5 ]
+                                                        [  0.5  0.5 ]
+                                                        [  0.5 -0.5 ]
+                                                    }
+                                                )
+                                            }
+                                        )
+                                        // here are our text readouts with their mini backgrounds
+                                        ( Graphic
+                                            transform: ( Translation 0 20 )
+                                            components: {
+                                                ( AsciiText
+                                                    color: white
+                                                    text: "20"
+                                                    transform: ( Translation -0.4725 -0.3 )
+                                                )
+                                                ( Polygon
+                                                    color: black
+                                                    vertices: {
+                                                        [ -0.5 -0.5 ]
+                                                        [ -0.5  0.5 ]
+                                                        [  0.5  0.5 ]
+                                                        [  0.5 -0.5 ]
+                                                    }
+                                                )
+                                            }
+                                        )
+                                        // here are our text readouts with their mini backgrounds
+                                        ( Graphic
+                                            transform: ( Translation 0 25 )
+                                            components: {
+                                                ( AsciiText
+                                                    color: white
+                                                    text: "25"
+                                                    transform: ( Translation -0.4725 -0.3 )
+                                                )
+                                                ( Polygon
+                                                    color: black
+                                                    vertices: {
+                                                        [ -0.5 -0.5 ]
+                                                        [ -0.5  0.5 ]
+                                                        [  0.5  0.5 ]
+                                                        [  0.5 -0.5 ]
+                                                    }
+                                                )
+                                            }
+                                        )
+                                        // here are our text readouts with their mini backgrounds
+                                        ( Graphic
+                                            transform: ( Translation 0 30 )
+                                            components: {
+                                                ( AsciiText
+                                                    color: white
+                                                    text: "30"
+                                                    transform: ( Translation -0.4725 -0.3 )
+                                                )
+                                                ( Polygon
+                                                    color: black
+                                                    vertices: {
+                                                        [ -0.5 -0.5 ]
+                                                        [ -0.5  0.5 ]
+                                                        [  0.5  0.5 ]
+                                                        [  0.5 -0.5 ]
+                                                    }
+                                                )
+                                            }
+                                        )
+                                        // here are our text readouts with their mini backgrounds
+                                        ( Graphic
+                                            transform: ( Translation 0 35 )
+                                            components: {
+                                                ( AsciiText
+                                                    color: white
+                                                    text: "35"
+                                                    transform: ( Translation -0.4725 -0.3 )
+                                                )
+                                                ( Polygon
+                                                    color: black
+                                                    vertices: {
+                                                        [ -0.5 -0.5 ]
+                                                        [ -0.5  0.5 ]
+                                                        [  0.5  0.5 ]
+                                                        [  0.5 -0.5 ]
+                                                    }
+                                                )
+                                            }
+                                        )
+                                        // here are our text readouts with their mini backgrounds
+                                        ( Graphic
+                                            transform: ( Translation 0 40 )
+                                            components: {
+                                                ( AsciiText
+                                                    color: white
+                                                    text: "40"
+                                                    transform: ( Translation -0.4725 -0.3 )
+                                                )
+                                                ( Polygon
+                                                    color: black
+                                                    vertices: {
+                                                        [ -0.5 -0.5 ]
+                                                        [ -0.5  0.5 ]
+                                                        [  0.5  0.5 ]
+                                                        [  0.5 -0.5 ]
+                                                    }
+                                                )
+                                            }
+                                        )
+                                        // negative
+                                        // here are our text readouts with their mini backgrounds
+                                        ( Graphic
+                                            transform: ( Translation 0 -5 )
+                                            components: {
+                                                ( AsciiText
+                                                    color: white
+                                                    text: "5"
+                                                    transform: ( Translation -0.2 -0.3 )
+                                                )
+                                                ( Polygon
+                                                    color: black
+                                                    vertices: {
+                                                        [ -0.5 -0.5 ]
+                                                        [ -0.5  0.5 ]
+                                                        [  0.5  0.5 ]
+                                                        [  0.5 -0.5 ]
+                                                    }
+                                                )
+                                            }
+                                        )
+                                        // here are our text readouts with their mini backgrounds
+                                        ( Graphic
+                                            transform: ( Translation 0 -10 )
+                                            components: {
+                                                ( AsciiText
+                                                    color: white
+                                                    text: "10"
+                                                    transform: ( Translation -0.4725 -0.3 )
+                                                )
+                                                ( Polygon
+                                                    color: black
+                                                    vertices: {
+                                                        [ -0.5 -0.5 ]
+                                                        [ -0.5  0.5 ]
+                                                        [  0.5  0.5 ]
+                                                        [  0.5 -0.5 ]
+                                                    }
+                                                )
+                                            }
+                                        )
+                                        
+                                        // make sure you put the "negative indicator here"
+                                        ( AsciiText
+                                            text: "NEG"
+                                            vertical: 1
+                                            color: white
+                                            transform: ( Translation 0.8 -1.55 )
+                                        )
+                                        
+                                    }
+                                )
+                                ( TickMarks
+                                    transform: ( Translation -0.25 0 )
+                                    gaugeLength: 40
+                                    quantity: 41
+                                    linewidth: 3
+                                    color: white
+                                    tickLength: 0.5
+                                    vertical: 1
+                                )
+                                ( TickMarks
+                                    transform: ( Translation -1.25 0 )
+                                    gaugeLength: 40
+                                    color: white
+                                    quantity: 9
+                                    tickLength: 2.5
+                                    linewidth: 3
+                                    vertical: 1
+                                )
+                                // negative tick marks
+                                ( TickMarks
+                                    transform: ( Translation -0.5 0 )
+                                    gaugeLength: -10
+                                    quantity: 11
+                                    color: white
+                                    tickLength: 0.25
+                                    linewidth: 3
+                                    vertical: 1
+                                )
+                                ( TickMarks
+                                    transform: ( Translation 0.5 0 )
+                                    gaugeLength: -10
+                                    quantity: 11
+                                    color: white
+                                    tickLength: -0.25
+                                    linewidth: 3
+                                    vertical: 1
+                                )
+                                ( TickMarks
+                                    transform: ( Translation -1.25 0 )
+                                    gaugeLength: -10
+                                    quantity: 3
+                                    color: white
+                                    tickLength: 2.5
+                                    linewidth: 3
+                                    vertical: 1
+                                )
+                            }         
+                        )
+                        ( Polygon
+                            color: black
+                            vertices: {
+                                [ -100 -100 ]
+                                [ -100  100 ]
+                                [  100  100 ]
+                                [  100 -100 ]
+                            }
+                        )
+                    }
+                )
+            }
+        )           
+

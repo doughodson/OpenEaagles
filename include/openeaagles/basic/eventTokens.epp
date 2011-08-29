@@ -1,0 +1,232 @@
+//------------------------------------------------------------------------------
+// Event Tokens IDs (EID) for configuration files
+// 
+// (Master event list is eventTokens.h)
+//------------------------------------------------------------------------------
+#ifndef __EVENT_IDS_EPP__
+#define __EVENT_IDS_EPP__
+
+// ---
+// Key events -- Are passed up to an object's container if not used.
+// ---
+
+// Keyboard key events
+#define  EID_CLR_KEY                  1
+#define  EID_BACK_SPACE               8
+#define  EID_TAB_KEY                  9
+#define  EID_ENTER_KEY               13
+#define  EID_ESC_KEY                 27
+#define  EID_FORWARD_SPACE           28
+#define  EID_UP_ARROW_KEY            30
+#define  EID_DOWN_ARROW_KEY          31
+#define  EID_SPACE_BAR               32
+#define  EID_DELETE_KEY             127
+#define  EID_BUTTON_HIT             128  /* Button name passed as LcString */
+#define  EID_INPUT_RIGHT_EDGE       129
+#define  EID_INPUT_LEFT_EDGE        130
+#define  EID_ON_SINGLE_CLICK        131
+#define  EID_ON_DOUBLE_CLICK        132
+#define  EID_ON_CANCEL              133
+#define  EID_ON_MOTION              134
+#define  EID_LEFT_ARROW_KEY         EID_BACK_SPACE
+#define  EID_RIGHT_ARROW_KEY        EID_FORWARD_SPACE
+
+// "Special" (according to GLUT anyway) Keyboard events:
+#define  EID_PAGE_UP_KEY            136
+#define  EID_PAGE_DOWN_KEY          137
+#define  EID_HOME_KEY               138
+#define  EID_END_KEY                139
+#define  EID_INSERT_KEY             140
+
+// Function key events
+#define  EID_F1_KEY                 141
+#define  EID_F2_KEY                 142
+#define  EID_F3_KEY                 143
+#define  EID_F4_KEY                 144
+#define  EID_F5_KEY                 145
+#define  EID_F6_KEY                 146
+#define  EID_F7_KEY                 147
+#define  EID_F8_KEY                 148
+#define  EID_F9_KEY                 149
+#define  EID_F10_KEY                150
+#define  EID_F11_KEY                151
+#define  EID_F12_KEY                152
+
+// Bezel keys
+#define  EID_OSB_T1                 200  /* LeftT1 to right T10 */
+#define  EID_OSB_T2                 201
+#define  EID_OSB_T3                 202        
+#define  EID_OSB_T4                 203        
+#define  EID_OSB_T5                 204
+#define  EID_OSB_T6                 205
+#define  EID_OSB_T7                 206
+#define  EID_OSB_T8                 207
+#define  EID_OSB_T9                 208
+#define  EID_OSB_T10                209
+
+#define  EID_OSB_R1                 210  /* top R1 to bottom R10 */
+#define  EID_OSB_R2                 211
+#define  EID_OSB_R3                 212
+#define  EID_OSB_R4                 213
+#define  EID_OSB_R5                 214
+#define  EID_OSB_R6                 215
+#define  EID_OSB_R7                 216
+#define  EID_OSB_R8                 217
+#define  EID_OSB_R9                 218
+#define  EID_OSB_R10                219
+
+#define  EID_OSB_B1                 220  /* Left B1 to right B10 */
+#define  EID_OSB_B2                 221
+#define  EID_OSB_B3                 222
+#define  EID_OSB_B4                 223
+#define  EID_OSB_B5                 224
+#define  EID_OSB_B6                 225
+#define  EID_OSB_B7                 226
+#define  EID_OSB_B8                 227
+#define  EID_OSB_B9                 228
+#define  EID_OSB_B10                229
+
+#define  EID_OSB_L1                 230  /* top L1 to bottom L10 */
+#define  EID_OSB_L2                 231
+#define  EID_OSB_L3                 232
+#define  EID_OSB_L4                 233
+#define  EID_OSB_L5                 234
+#define  EID_OSB_L6                 235
+#define  EID_OSB_L7                 236
+#define  EID_OSB_L8                 237
+#define  EID_OSB_L9                 238
+#define  EID_OSB_L10                239
+
+#define  EID_USER_KEY_EVENT         512
+
+#define  EID_MAX_KEY_EVENT          999
+
+// --- --- ---
+// Regular events -- are not passed up to the container
+// --- --- ---
+
+// ---
+// Basic events
+// ---
+#define  EID_SHUTDOWN_EVENT         1001  /* Shutdown notification event */
+
+// ---
+// BasicGL events
+// ---
+#define  EID_ON_ENTRY               1201      /* Entry (active) */
+#define  EID_ON_EXIT                1202      /* Exit  (inactive) */
+#define  EID_ON_RETURN              1203      /* Return */
+#define  EID_SELECT                 1204
+
+#define  EID_UPDATE_INSTRUMENTS     1210      /* For all instruments to update themselves with new data */
+#define  EID_UPDATE_VALUE           1211
+#define  EID_UPDATE_VALUE1          UPDATE_VALUE
+#define  EID_UPDATE_VALUE2          1212
+#define  EID_UPDATE_VALUE3          1213
+#define  EID_UPDATE_VALUE4          1214
+#define  EID_UPDATE_VALUE5          1215
+#define  EID_UPDATE_VALUE6          1216
+#define  EID_UPDATE_VALUE7          1217
+#define  EID_UPDATE_VALUE8          1218
+#define  EID_UPDATE_VALUE9          1219
+
+#define  EID_SET_VISIBILITY         1221
+#define  EID_SET_COLOR              1222
+#define  EID_SET_LINEWIDTH          1223
+#define  EID_SET_POSITION           1224
+#define  EID_SET_WIDTH              1225
+#define  EID_SET_HIGHLIGHT          1226
+#define  EID_SET_UNDERLINE          1227
+#define  EID_SET_REVERSED           1228
+#define  EID_SET_SPECIAL            1229
+#define  EID_SET_JUSTIFICATION      1230
+#define  EID_SET_FLASHRATE          1231
+#define  EID_SET_LINE               1232
+#define  EID_SET_COLUMN             1233
+#define  EID_SET_MATERIAL           1234
+#define  EID_SET_TEXTURE            1235
+
+// ---
+// Simulation events
+// ---
+#define  EID_RESET_EVENT            1301  /* Reset component */
+#define  EID_FREEZE_EVENT           1302  /* Passes requested freeze state as LcBoolean */
+#define  EID_FREEZE_EVENT_ALL       1303  /* Passes requested freeze state as LcBoolean */
+#define  EID_KILL_EVENT             1304  /* Passes 'killed by' player */
+#define  EID_CRASH_EVENT            1305  /* Passes 'collided with' player or zero if terrain */
+#define  EID_JETTISON_EVENT         1306  /* Jettision external store event */
+#define  EID_RF_EMISSION            1307  /* RF emission event */
+#define  EID_RF_EMISSION_RETURN     1308  /* RF emission return event */
+#define  EID_DESIGNATOR_EVENT       1309  /* Passes Designator message */
+#define  EID_DATALINK_MESSAGE       1310  /* Passes Datalink message */
+
+#define  EID_ON_OWNSHIP_CONNECT     1311  /* To new 'ownship' player */
+#define  EID_ON_OWNSHIP_DISCONNECT  1312  /* To old 'ownship' player at disconnection */
+
+#define  EID_SCAN_START             1313  /* Scan pattern started */
+#define  EID_SCAN_END               1314  /* Scan pattern ended */
+
+#define  EID_WPN_RELOAD             1315  /* Reload weapons */
+
+#define  EID_RF_REFLECTED_EMISSION  1316  /* Reflected RF emission event */
+#define  EID_RF_REFLECTIONS_REQUEST 1317  /* Request reflected RF emissions */
+#define  EID_RF_REFLECTIONS_CANCEL  1318  /* Cancel reflected RF emissions */
+
+#define  EID_IR_QUERY               1319  /* IR query message */
+#define  EID_IR_QUERY_RETURN        1320  /* IR query return message */
+#define  EID_SAT_COMM_MSG           1321  /* Sat Comm message */
+#define  EID_DE_EMISSION            1322  /* Directed Energy emission message */
+
+// ---
+// HOTAS switches
+// ---
+#define  EID_SENSOR_RTS             1400  /* Sensor - Return to search */
+#define  EID_TGT_STEP_EVENT         1401  /* Target step (reject) */
+#define  EID_TGT_DESIGNATE          1402  /* Target designate */
+
+#define  EID_WPN_REL_EVENT          1405  /* Passes requested switch state as LcBoolean */
+                                          /* or no argument for one-shot event */
+
+#define  EID_TRIGGER_SW_EVENT       1406  /* Passes requested switch state as LcBoolean */
+                                          /* or no argument for one-shot event */
+#define  EID_TMS_FWD_EVENT          1407  /* Passes requested switch state as LcBoolean */
+                                          /* or no argument for one-shot event */
+#define  EID_TMS_AFT_EVENT          1408  /* Passes requested switch state as LcBoolean */
+                                          /* or no argument for one-shot event */
+#define  EID_TMS_LEFT_EVENT         1409  /* Passes requested switch state as LcBoolean */
+                                          /* or no argument for one-shot event */
+#define  EID_TMS_RIGHT_EVENT        1410  /* Passes requested switch state as LcBoolean */
+                                          /* or no argument for one-shot event */
+
+#define  EID_DMS_FWD_EVENT          1411  /* Passes requested switch state as LcBoolean */
+                                          /* or no argument for one-shot event */
+#define  EID_DMS_AFT_EVENT          1412  /* Passes requested switch state as LcBoolean */
+                                          /* or no argument for one-shot event */
+#define  EID_DMS_LEFT_EVENT         1413  /*  Passes requested switch state as LcBoolean */
+                                          /* or no argument for one-shot event */
+#define  EID_DMS_RIGHT_EVENT        1414  /* Passes requested switch state as LcBoolean */
+                                          /* or no argument for one-shot event */
+
+#define  EID_CMS_FWD_EVENT          1415  /* Passes requested switch state as LcBoolean */
+                                          /* or no argument for one-shot event */
+#define  EID_CMS_AFT_EVENT          1416  /* Passes requested switch state as LcBoolean */
+                                          /* or no argument for one-shot event */
+#define  EID_CMS_LEFT_EVENT         1417  /* Passes requested switch state as LcBoolean */
+                                          /* or no argument for one-shot event */
+#define  EID_CMS_RIGHT_EVENT        1418  /* Passes requested switch state as LcBoolean */
+                                          /* or no argument for one-shot event */
+
+#define  EID_PINKY_SW_EVENT         1419  /* Passes requested switch state as LcBoolean */
+                                          /* or no argument for one-shot event */
+#define  EID_NWS_SW_EVENT           1420  /* Passes requested switch state as LcBoolean */
+                                          /* or no argument for one-shot event */
+#define  EID_CURSOR_ZERO_EVENT      1421  /* Passes requested switch state as LcBoolean */
+                                          /* or no argument for one-shot event */
+
+#define  EID_CURSOR_X_EVENT         1422  /* Passes requested position state as LcReal */
+#define  EID_CURSOR_Y_EVENT         1423  /* Passes requested position state as LcReal */
+
+
+#define  EID_USER_EVENTS            2000  /* First user defined event */
+
+#endif // __EVENT_IDS_EPP__

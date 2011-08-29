@@ -1,0 +1,57 @@
+//------------------------------------------------------------------------------
+// Handy conversion constants --
+//------------------------------------------------------------------------------
+
+// Inch to meters and meter to inches.
+// The new standard of 1 inch equals exactly 2.54 centimeters is used.
+#define IN2M         0.0254f
+#define M2IN         (1.0f / IN2M)
+
+// Foot to meters and meter to feet.
+// The new standard of 1 inch equals exactly 2.54 centimeters is used.
+#define FT2M         0.3048f                // (12.0f * IN2M)
+#define M2FT         (1.0f / FT2M)
+
+// Foot to kilometers and kilometer to feet.
+// The new standard of 1 inch equals exactly 2.54 centimeters is used.
+#define FT2KM         0.0003048f            // (FT2M / 1000.0f)
+#define KM2FT         (1.0f / FT2KM)
+
+// Nautical mile to meters and meter to nautical miles; NM2M from MultiGen14.1
+#define NM2M         1852.0000041f
+#define M2NM         (1.0f / NM2M)
+
+// Nautical mile to kilometers and kilometer to nautical miles.
+#define NM2KM         1.8520000041f         // (NM2M / 1000.0f)
+#define KM2NM         (1.0f / NM2KM)
+
+// Nautical mile to feet and foot to nautical miles.
+#define	NM2FT        (NM2M * M2FT)
+#define	FT2NM        (1.0f / NM2FT)
+
+// Statute mile to kilometers and kilometer to statute miles.
+#define SM2KM         1.609344f             // (5280.0f * FT2KM)
+#define KM2SM         (1.0f / SM2KM)
+
+// Degree of latitude to nautical miles and nautical mile to degrees
+// of latitude (degree of longitude to nautical miles varies with latitude)
+#define DEG2NM       60.0f
+#define NM2DEG       (1.0f / DEG2NM)
+
+// Knot to feet per second and feet per second to knots
+#define	KTS2FPS      (NM2FT / 3600.0f)
+#define	FPS2KTS      (3600.0f / NM2FT)
+
+// Equatorial radius of the Earth in nautical miles
+// This is an estimated average.  The Earth is not a perfect sphere
+#define ERAD         3443.933577689f
+
+// One "G" to feet per second per second
+// This is an estimated average.
+// One actual "G" is a function of latitude, longitude, and other exotic parameters.
+#define ETHG         32.16f
+
+// Convert Barometric Pressure (Inches Mercury to/from Millibars)
+// This is an estimate.
+#define INCH2MBAR    (1013.2f / 29.92f)     // LDB -  Inches->Mbars
+#define MBAR2INCH    (1.0f / INCH2MBAR)     //

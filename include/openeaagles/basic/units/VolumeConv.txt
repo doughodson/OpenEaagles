@@ -1,0 +1,29 @@
+Volume:  (Cubic meters:  cubic inches, cubic ft, cubic yards, liters, gallons(U.S.), imperial gallons)
+
+http://www-cta.ornl.gov/cta/data/tedb22/Edition22_AppendixB.pdf - Transportation Energy Data Book: Edition 22 - 2002
+1 cubic meter 	= 264.2007926 U.S. gallons
+		= 1000 litres	
+		= 220 imperial gallons
+		= 61030.38309 cubic inches
+		= 35.3236459709 cubic feet
+
+http://www.gcsaa.org/resource/supertools/volume_form.asp - Golf Course Superintendents Association of America
+1 cubic meter 	= 1.3079506 cubic yards
+		= 264.1720373 U.S. gallons
+		= 61023.7440947 cubic inches
+		= 35.314667 cubic feet
+		
+http://www.calculator.org/properties/volume.prop - Flow Simulation Calculator
+1 cubic meter 	= 61023.7440947 cubic inches
+		= 35.3146667215 cubic feet
+		= 1.30795061931 cubic yards
+		= 264.172052637 U.S. gallons
+		= 219.969253782 Imperial gallons
+
+
+//used for cross-reference only, not a credible source
+http://www.hawkinspharmaceutical.com/conversiontbl.pdf - Hawkins Pharmaceutical
+1 cubic meter  	= 35.31 cubic feet
+		= 1.308 cubic yards
+		= 264.2 U.S. Gallons
+

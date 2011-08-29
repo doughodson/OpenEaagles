@@ -1,0 +1,203 @@
+// this is the g-force meter dial
+// gmeterTex texture is found in testinstruments.epp
+// Send UPDATE_INSTRUMENTS
+// this is a little extra graphic
+( Graphic
+    components: {
+        ( Line
+            color: black
+            segment: 1
+            linewidth: 3
+            vertices: {
+                [ -0.3 0 ] [ 0.3 0 ]
+                [ 0 -0.3 ] [ 0 0.3 ]
+            }
+        )
+        ( Circle
+            color: ( rgb 0.2 0.2 0.2 )
+            radius: 0.5
+            slices: 50
+            filled: 1
+        )
+    }
+)
+
+gdial:
+( GMeterDial 
+    allowComponentPass: 0
+    scalingTable:
+        ( Table1
+            // g's
+            x: [  -6  -4   -2    0    2    4    6    8   10  12 ]
+            // degrees 
+            data: [ -40 -60 -105 -150 -195 -245 -295 -340 -380 -400 ]
+        )
+    components: {
+        gs: 
+        ( DialPointer
+            color: white
+            scalingTable:
+                ( Table1
+                    // g's
+                    x: [ -6 0  11 ]
+                    // degrees 
+                 data: [ 105 240 487.5 ]
+                )
+            components: {
+                ( Polygon 
+                    vertices: {
+                        [ -0.2 0.1 ] 
+                        [ 0.2 0.1 ] 
+                        [ 0 2.5 ]
+                    }
+                )
+            }
+        )
+        minG: 
+        ( DialPointer
+            color: yellow
+            scalingTable:
+                ( Table1
+                    // g's
+                    x: [ -6 0  11 ]
+                    // degrees 
+                 data: [ 105 240 487.5 ]
+                )
+            components: {
+                ( Polygon 
+                    vertices: {
+                        [ -0.2 0.1 ] 
+                        [ 0.2 0.1 ] 
+                        [ 0 2.5 ]
+                    }
+                )
+            }
+        )
+        maxG: 
+        ( DialPointer
+            color: red
+            scalingTable:
+                ( Table1
+                    // g's
+                    x: [ -6 0  11 ]
+                    // degrees 
+                 data: [ 105 240 487.5 ]
+                )
+            components: {
+                ( Polygon 
+                    vertices: {
+                        [ -0.2 0.1 ] 
+                        [ 0.2 0.1 ] 
+                        [ 0 2.5 ]
+                    }
+                )
+            }
+        )
+    } 
+)
+// here is the outer border of our g meter dial
+( OcclusionCircle
+    color: gray2
+    outerRadius: 4.1
+    slices: 100
+    radius: 4
+)
+( OcclusionCircle
+    color: white
+    outerRadius: 4.2
+    slices: 100
+    radius: 4.1
+)
+( OcclusionCircle
+    color: gray2
+    outerRadius: 4.3
+    slices: 100
+    radius: 4.2
+)
+
+// here are the tick marks
+( DialTickMarks
+    quantity: 16
+    length: 0.75
+    linewidth: 2
+    startAngle: 240
+    dialRadius: 4
+    color: white
+)
+( DialTickMarks
+    quantity: 32
+    length: 0.5
+    linewidth: 2
+    startAngle: 240
+    dialRadius: 4
+    color: white
+)
+
+
+// here are the numbers
+( Graphic
+    transform: ( Rotation 2.094 )
+    components: {
+        ( AsciiText color: white text: "0" transform: { ( Translation -0.2 3 ) ( Rotation -2.094 ) } )
+    }
+)   
+( Graphic
+    transform: ( Rotation 1.31 )
+    components: {
+        ( AsciiText color: white  text: "2" transform: { ( Translation -0.3 3 ) ( Rotation -1.31 ) } )
+    }
+)
+( Graphic
+    transform: ( Rotation 0.523 )
+    components: {
+        ( AsciiText color: white  text: "4" transform: { ( Translation -0.3 2.7 ) ( Rotation -0.523 ) } )
+    }
+)
+( Graphic
+    transform: ( Rotation -0.2624 )
+    components: {
+        ( AsciiText color: white  text: "6" transform: { ( Translation -0.1 2.45 ) ( Rotation 0.2624 ) } )
+    }
+)
+( Graphic
+    transform: ( Rotation -1.048 )
+    components: {
+        ( AsciiText color: white  text: "8" transform: { ( Translation 0.2 2.5 ) ( Rotation 1.048 ) } )
+    }
+)
+( Graphic
+    transform: ( Rotation -1.833 )
+    components: {
+        ( AsciiText color: white  text: "10" transform: { ( Translation 0.5 2.3 ) ( Rotation 1.833 ) } )
+    }
+)
+( Graphic
+    transform: ( Rotation -2.618 )
+    components: {
+        ( AsciiText color: white  text: "-4" transform: { ( Translation 0.6 2.7 ) ( Rotation 2.618 ) } )
+    }
+)
+( Graphic
+    transform: ( Rotation -3.4 )
+    components: {
+        ( AsciiText color: white  text: "-2" transform: { ( Translation 0.6 3.2 ) ( Rotation 3.4 ) } )
+    }
+)
+
+// here is the arc segments between 10 and 12
+( Arc
+    startAngle: 105
+    arcLength: 22.5
+    linewidth: 2
+    radius: 3.35
+    slices: 5
+)
+( Arc
+    startAngle: 105
+    arcLength: 22.5
+    linewidth: 2
+    radius: 3.55
+    slices: 5
+)
+    
+

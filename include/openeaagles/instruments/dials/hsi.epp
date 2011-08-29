@@ -1,0 +1,329 @@
+// Simple HSI indicator
+
+// A couple of simple readouts that tell us our DME and HSI course.
+hsiRO:  
+( NumericReadout
+    transform: ( Translation 3.5 4.8 ) 
+    color: white
+    format: ###
+)
+// here is the DME readout, if we need it
+dmeRO:  
+( NumericReadout
+    color: white
+    transform:  ( Translation -5.8 4.8 ) 
+    format: ###
+)
+
+
+// here is the hsi graphic (just a rotator)
+// This could also be an DialPointer, because basically it just rotates it's components.  However, since we have no need
+// for color rotaries, and the dial is fairly simple, all we need is an object that will rotate it's components, which
+// is called a rotator.  When given an UPDATE_VALUE event, it simple rotates it's components to that value, in RADIANS.
+// However, if we send the UPDATE_VALUE2 event, it will rotate it's components to that value, in DEGREES.
+hsi:  
+( Rotators
+    components: {
+        ( Graphic 
+            //transform: ( Scale 4 )
+            components: {
+                ( AsciiText
+                    color: white
+                    //transform: { ( Translation -0.05 0.95 ) ( Scale 0.25 ) }
+                    transform: ( Translation -0.15 3.7 ) 
+                    text: "N"
+                    font: smallfont
+                ) 
+                ( AsciiText
+                    color: white
+                    //transform: { ( Rotation -0.523598 ) ( Translation -0.05 0.9 ) ( Scale 0.2 ) }
+                    transform: { ( Rotation -0.523598 ) ( Translation -0.15 3.7 ) }
+                    font: smallfont
+                    text: "3"
+                )             
+                ( AsciiText
+                    color: white
+                    //transform: { ( Rotation -1.0471975 ) ( Translation -0.05 0.9 ) ( Scale 0.2 ) }
+                    transform: { ( Rotation -1.0471975 ) ( Translation -0.15 3.7 ) }
+                    font: smallfont
+                    text: "6"
+                )                         
+                ( AsciiText
+                    color: white
+                    //transform: { ( Rotation -1.570796 ) ( Translation -0.05 0.95 ) ( Scale 0.25 ) }
+                    transform: { ( Rotation -1.570796 ) ( Translation -0.15 3.7 ) }
+                    font: smallfont
+                    text: "E"
+                )
+                ( AsciiText
+                    color: white
+                    //transform: { ( Rotation -2.094395 ) ( Translation -0.1 0.9 ) ( Scale 0.2 ) }
+                    transform: { ( Rotation -2.094395 ) ( Translation -0.35 3.7 ) }
+                    font: smallfont
+                    text: "12"
+                )                                     
+                ( AsciiText
+                    color: white
+                    //transform: { ( Rotation -2.617993 ) ( Translation -0.1 0.9 ) ( Scale 0.2 ) }
+                    transform: { ( Rotation -2.617993 ) ( Translation -0.35 3.7 ) }
+                    font: smallfont
+                    text: "15"
+                )                                                 
+                ( AsciiText
+                    color: white
+                    //transform: { ( Rotation -3.141592 ) ( Translation -0.05 0.95 ) ( Scale 0.25 ) }
+                    transform: { ( Rotation -3.141592 ) ( Translation -0.35 3.7 ) }
+                    font: smallfont
+                    text: "S"
+                )
+                ( AsciiText
+                    color: white
+                    //transform: { ( Rotation -3.665191 ) ( Translation -0.1 0.9 ) ( Scale 0.2 ) }
+                    transform: { ( Rotation -3.665191 ) ( Translation -0.35 3.7 ) }
+                    font: smallfont
+                    text: "21"
+                )                                                 
+                ( AsciiText
+                    color: white
+                    //transform: { ( Rotation -4.188790 ) ( Translation -0.1 0.9 ) ( Scale 0.2 ) }
+                    transform: { ( Rotation -4.188790 ) ( Translation -0.35 3.7 ) }
+                    font: smallfont
+                    text: "24"
+                )                                                 
+                
+                ( AsciiText
+                    color: white
+                    //transform: { ( Rotation -4.712388 ) ( Translation -0.05 0.95 ) ( Scale 0.25 ) }
+                    transform: { ( Rotation -4.712388 ) ( Translation -0.15 3.7 ) }
+                    font: smallfont
+                    text: "W"
+                )     
+                ( AsciiText
+                    color: white
+                    //transform: { ( Rotation -5.235987 ) ( Translation -0.1 0.9 ) ( Scale 0.2 ) }
+                    transform: { ( Rotation -5.235987 ) ( Translation -0.35 3.7 ) }
+                    font: smallfont
+                    text: "30"
+                )  
+                ( AsciiText
+                    color: white
+                    //transform: { ( Rotation -5.759586 ) ( Translation -0.1 0.9 ) ( Scale 0.2 ) }
+                    transform: { ( Rotation -5.759586 ) ( Translation -0.35 3.7 ) }
+                    font: smallfont
+                    text: "33"
+                )             
+            }    
+        )                                                                                         
+		// Just tick marks, we have seen these before (speedbrake.epp)
+        ( DialTickMarks
+            color: white
+            quantity: 36
+            length:  0.5
+            dialRadius: 4.8
+            linewidth: 2
+        )
+        ( DialTickMarks
+            color: white
+            startAngle: 5
+            sweepAngle: 360
+            quantity: 36
+            length: 0.25
+            linewidth: 2
+            dialRadius: 4.8
+        )
+    
+    }
+)
+// background
+( Graphic
+    components: {
+        // full background
+        ( LineLoop
+            color: white
+            linewidth: 3
+            vertices: {
+                [ -6.7 -5.9 ]
+                [ -6.7  7.5 ]
+                [  6.7  7.5 ]
+                [  6.7 -5.9 ]
+            }
+        )
+        // left bar
+        ( Polygon
+            color: gray2
+            vertices: {
+                [ -6.7 -2.1 ]
+                [ -6.7 5.5 ]
+                [ -6.1 5.5 ]
+                [ -6.1 -2.1 ]
+            }
+        )
+        // bottom left corner
+        ( Graphic
+            color: gray2
+            components: {
+                ( Polygon
+                    vertices: {
+                        [ -6.7 -5.9 ]
+                        [ -6.7 -1.4 ]
+                        [ -2.2 -5.9 ]
+                    }
+                )
+            }
+        )
+        // top left corner
+        ( Graphic
+            components: {
+                ( Graphic
+                    transform: ( Translation -5.9 6.7 )
+                    components: {
+                        ( Line
+                            color: gray2
+                            segment: 1
+                            linewidth: 5
+                            vertices: {
+                                [ -0.25 0 ] [ 0.25 0 ]
+                                [ 0 -0.25 ] [ 0 0.25 ]
+                            }
+                        )                     
+                        // here is the "screw"
+                        ( Circle
+                            color: black
+                            filled: 1
+                            radius: 0.5 
+                            slices: 50
+                        )   
+                    }
+                )
+                ( Polygon
+                    color: gray2
+                    vertices: {
+                        [ -6.7 7.5 ]
+                        [ -6.7 4.8 ]
+                        [ -4 7.5 ]
+                    }
+                )
+            }
+        )
+        // top bar
+        ( Polygon
+            color: gray2
+            vertices: {
+                [ -5 7.5 ]
+                [ -5 6.9 ]
+                [ 5 6.9 ]
+                [ 5 7.5 ]
+            }
+        )
+        // top right corner
+        ( Graphic
+            components: {
+                ( Graphic
+                    transform: ( Translation 5.9 6.7 )
+                    components: {
+                        ( Line
+                            color: gray2
+                            segment: 1
+                            linewidth: 5
+                            vertices: {
+                                [ -0.25 0 ] [ 0.25 0 ]
+                                [ 0 -0.25 ] [ 0 0.25 ]
+                            }
+                        )                     
+                        // here is the "screw"
+                        ( Circle
+                            color: black
+                            filled: 1
+                            radius: 0.5 
+                            slices: 50
+                        )   
+                    }
+                )
+                ( Polygon  
+                    color: gray2
+                    vertices: {
+                        [ 6.7 7.5 ]
+                        [ 6.7 4.8 ]
+                        [ 4 7.5 ]
+                    }
+                )
+            }
+        )
+        // right bar
+        ( Polygon
+            color: gray2
+            vertices: {
+                [ 6.7 -2.1 ]
+                [ 6.7 5.5 ]
+                [ 6.1 5.5 ]
+                [ 6.1 -2.1 ]
+            }
+        )
+        // bottom right corner
+        ( Graphic
+            color: gray2
+            components: {
+                ( Polygon
+                    vertices: {
+                        [ 6.7 -5.9 ]
+                        [ 6.7 -1.4 ]
+                        [ 2.2 -5.9 ]
+                    }
+                )
+            }
+        )
+        // bottom bar
+        ( Polygon
+            color: gray2
+            vertices: {
+                [ -5 -5.9 ]
+                [ -5 -5.3 ]
+                [ 5 -5.3 ]
+                [ 5 -5.9 ]
+            }
+        )
+        // here are the tick markers (every 90 degrees)
+        ( DialTickMarks
+            color: white
+            quantity: 4
+            length:  0.75
+            dialRadius: 5.7
+            linewidth: 4
+            
+        )    
+        // every 90 degrees starting at 45 degrees.
+        ( DialTickMarks
+            color: white
+            startAngle: 45
+            quantity: 4
+            length:  0.5
+            dialRadius: 5.45
+            linewidth: 4 
+        )    
+        // here is the aircraft symbol in the middle
+        ( Line
+            color: white
+            segment: 1
+            linewidth: 7
+            vertices: {
+                [ 0 -1.1 ] [ 0 1.1 ]
+                [ -0.95 0.3 ] [ 0.95 0.3 ]
+                [ -0.5 -0.85 ] [ 0.5 -0.85 ]
+            }
+        )
+        // this is the MILES readout
+        ( AsciiText
+            color: white
+            transform: ( Translation -5.5 4.15 )
+            text: "MILES"
+            font: smallfont
+        )
+        // this is the COURSE readout
+        ( AsciiText
+            color: white
+            transform: ( Translation 3.15 4.15 )
+            text: "COURSE"
+            font: smallfont
+        )
+    }
+)

@@ -1,0 +1,131 @@
+// FTIT - Internal temerature
+
+// Simple dial pointer, which is the pointer that goes around the dial
+ftit:   
+( DialPointer
+	// We have a more complex scaling table here than in speedbrake, because we have a non-linear scale.  This is because we are using a 
+	// texture, and the ftit dial is non-linear.  So we set up our table to rotate to the appropriate degree based on the temperature
+	// given
+    scalingTable: ( Table1
+                    // temperatures
+                    x: [ 0  700  1000  1200 ]
+                    // degrees
+                data: [ 0   120   300   334.28 ]
+                )
+    startAngle: 90
+    components: {
+        ( Circle
+            transform: ( Translation 0 0.15 )
+            color: black
+            filled: 1
+            slices: 50
+            radius: 0.1
+        )
+        ( Polygon
+            color: white
+            vertices: {
+                [ -0.2 0 ]
+                [ 0.2 0 ]
+                [ 0 3 ]
+            }
+        )
+    }
+)
+
+// background graphic (replaces texture)
+( Graphic
+    components: {
+        ( Graphic
+            components: {
+                // occlude our other tick marks
+                ( DialArcSegment
+                    color: black
+                    startAngle: 70
+                    sweepAngle: 48
+                    outerRadius: 5.1
+                    dialRadius: 4.5
+                    slices: 20
+                )
+            }
+        )
+    
+        ( DialTickMarks
+            quantity: 7
+            dialRadius: 5
+            length: 0.5
+            linewidth: 3
+            startAngle: 90
+            sweepAngle: 120
+            color: white
+        )
+        ( DialTickMarks
+            quantity: 14
+            dialRadius: 5
+            length: 0.25
+            linewidth: 3
+            startAngle: 90
+            sweepAngle: 120
+        )
+        ( DialTickMarks
+            quantity: 6
+            dialRadius: 5
+            linewidth: 3
+            length: 0.5
+            startAngle: 210
+            sweepAngle: 180
+        )
+        ( DialTickMarks
+            quantity: 30
+            dialRadius: 5
+            linewidth: 3
+            length: 0.25
+            startAngle: 210
+            sweepAngle: 180
+        )
+        ( DialTickMarks
+            quantity: 3
+            dialRadius: 5
+            linewidth: 3
+            length: 0.5
+            startAngle: 30
+            sweepAngle: 51
+        )
+        ( DialTickMarks
+            quantity: 6
+            dialRadius: 5
+            linewidth: 3
+            length: 0.25
+            startAngle: 30
+            sweepAngle: 51
+        )
+        
+        // here are our red markers 
+        ( Line transform: ( Rotation -0.035 ) color: red vertices: { [ 0 4.6 ] [ 0 5 ] } linewidth: 3 )
+        ( Line transform: ( Rotation -0.5 ) color: red vertices: { [ 0 4.6 ] [ 0 5 ] } linewidth: 3 )
+        
+        
+        // text
+        ( AsciiText color: white text: "2" transform: ( Translation 3.1 -2.6 )  )
+        ( AsciiText color: white text: "3" transform: ( Translation 2.4 -3.35 )  )
+        ( AsciiText color: white text: "4" transform: ( Translation 1.3 -4 )  )
+        ( AsciiText color: white text: "5" transform: ( Translation 0.1 -4.3 )  )
+        ( AsciiText color: white text: "6" transform: ( Translation -1.1 -4.2 )  )
+        ( AsciiText color: white text: "7" transform: ( Translation -2.2 -3.75 )  )
+        ( AsciiText color: white text: "8" transform: ( Translation -4.3 -0.3 )  )
+        ( AsciiText color: white text: "9" transform: ( Translation -2.2 3.1 )  )
+        ( AsciiText color: white text: "10" transform: ( Translation 1.3 3.1 )  )
+        ( AsciiText color: white text: "11" transform: ( Translation 2.4 2.4 )  )
+        ( AsciiText color: white text: "12" transform: ( Translation 3 1.4 )  )
+        
+        // Inside text
+        ( AsciiText color: white text: "FTIT" font: smallfont transform: ( Translation -0.6 2 )  )
+        ( AsciiText color: white text: "C x 100" font: smallerfont transform: ( Translation -0.7 1.5 )  )
+        ( Circle
+            color: gray1
+            radius: 5.1
+            slices: 50
+            filled: 1
+        )
+        
+    }
+)

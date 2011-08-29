@@ -1,0 +1,106 @@
+// foreground graphic
+( Graphic
+    components: {
+        ( Line
+            color: black
+            segment: 1
+            linewidth: 3
+            vertices: {
+                [ -0.3 0 ] [ 0.3 0 ]
+                [ 0 -0.3 ] [ 0 0.3 ]
+            }
+        )
+        ( Circle
+            color: gray1
+            radius: 0.5
+            slices: 50
+            filled: 1
+        )
+    }
+)
+
+
+rpm:   
+( DialPointer
+    color: white
+    scalingTable:   
+    ( Table1
+        // rpms
+        x: [ 0 60 100 110 ]
+        // degrees
+        data: [ 0 135 315 337.5 ]
+    )
+    components: {
+        ( Polygon
+            color: white
+            vertices: {
+                [ -0.25 0 ]
+                [ 0.25 0 ]
+                [ 0 3 ]
+            } 
+        )                  
+    }
+)
+
+// background stuff (replace texture)
+( Graphic
+    components: {
+    
+        ( DialTickMarks
+            dialRadius: 4
+            quantity: 15
+            startAngle: 0
+            sweepAngle: 337.5
+            linewidth: 3
+            length: 0.5
+            color: white
+        )
+        // here are the small ticks from 60 - 100 rpm
+        ( DialTickMarks
+            dialRadius: 4
+            quantity: 40
+            length: 0.25
+            linewidth: 2
+            color: white
+            startAngle: 135
+            sweepAngle: 180
+        )
+        
+        // Here is the text at each for each on
+        ( AsciiText color: white text: "0" transform: ( Translation -0.2 2.7 ) )
+        ( AsciiText color: white text: "20" transform: ( Translation 1.5 1.7 ) )
+        ( AsciiText color: white text: "40" transform: ( Translation 2.4 -0.3 ) )
+        ( AsciiText color: white text: "60" transform: ( Translation 1.5 -2.3 ) )
+        ( AsciiText color: white text: "70" transform: ( Translation -0.4 -3.35 ) )
+        ( AsciiText color: white text: "80" transform: ( Translation -2.4 -2.3 ) )
+        ( AsciiText color: white text: "90" transform: ( Translation -3.3 -0.3 ) )
+        ( AsciiText color: white text: "100" transform: ( Translation -2.5 1.7 ) )
+        
+        // here is the text to tell us what this is
+        ( AsciiText color: white text: "RPM" font: smallerfont transform: ( Translation -0.35 1.5 ) )
+        ( AsciiText color: white text: "PERCENT" font: smallerfont transform: ( Translation -0.75 0.95 ) )
+                
+        // here is our "redline" (100 - 110)
+        ( DialArcSegment 
+            dialRadius: 3.5
+            outerRadius: 4
+            startAngle: 315
+            sweepAngle: 22.5
+            color: red
+            slices: 5
+        )
+        ( Circle
+            slices: 100
+            radius: 4.1
+            color: ( rgb 0.15 0.15 0.15 )
+            filled: 1
+        )
+        ( OcclusionCircle
+            slices: 100
+            radius: 4.3
+            outerRadius: 4.45
+            color: gray2
+        )
+        
+    }
+)

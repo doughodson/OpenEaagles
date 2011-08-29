@@ -1,0 +1,115 @@
+//------------------------------------------------------------------------------
+// Class:  LatLon
+//------------------------------------------------------------------------------
+#ifndef __LatLon_H_79314AD2_111D_4d95_A087_1A5FD100FF0B__
+#define __LatLon_H_79314AD2_111D_4d95_A087_1A5FD100FF0B__
+
+#include "openeaagles/basic/Number.h"
+
+namespace Eaagles {
+namespace Basic {
+
+class String;
+class Number;
+
+//------------------------------------------------------------------------------
+// Class:  LatLon
+// Base class:  Object -> Number -> LatLon
+//
+// Description:  Class/form for latitude or longitude numbers.
+//
+// Form name: LatLon
+// Slots:
+//    direction <String>  ! Set the direction ("North, South", "East", or "West") (default: NONE)
+//    degrees   <Number>  ! Set the degrees component. (default: 0)
+//    minutes   <Number>  ! Set the minutes component. (default: 0)
+//    seconds   <Number>  ! Set the seconds component. (default: 0.0)
+//
+// Events: None
+//
+//
+// Constructor:
+//
+//  LatLon()
+//      Instantiates an LatLon instance, and sets its attributes as follows:
+//          dir = none
+//          deg = 0
+//          min = 0
+//          sec = 0.0
+//
+//
+// Public methods:
+//
+//  Conversion operator:
+//
+//      double()
+//          Is C++ equivalent.
+//
+//      Dir getDir()
+//      int getDeg()
+//      int getMin();
+//      LCreal getSec();
+//          Return the direction { north, south, east, west }, degrees,
+//          minutes, and seconds components, respectively.
+//
+//      void LatLon::computeVal()
+//          Converts direction, degrees, minutes, and seconds to a lat/long value.
+//
+//      void LatLon::setDir(const char* d)
+//          Sets Direction - N,S,E,W
+//
+//      void LatLon::setDeg(const LCreal d)
+//          Sets degrees, minutes, seconds -- then calls computeVal().
+//
+//      void LatLon::setMin(const LCreal m)
+//          Sets minutes, seconds -- then calls computeVal().
+//
+//      void LatLon::setSec(const LCreal s)
+//          Sets seconds -- then calls computeVal().
+//
+//      Object* LatLon::getSlotByIndex(const int si)
+//          getSlotByIndex() for LatLon
+//
+//      std::ostream& LatLon::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
+//          serialize() -- print the value of this object to the output stream sout.
+//
+//------------------------------------------------------------------------------
+class LatLon : public Number {
+    DECLARE_SUBCLASS(LatLon,Number)
+
+public:
+    enum Dir { NONE, NORTH, SOUTH, EAST, WEST };
+
+    LatLon();
+
+    operator double() const                 { return Number::getDouble(); }
+
+    Dir getDir() const                      { return dir; }
+    int getDeg() const                      { return deg; }
+    int getMin() const                      { return min; }
+    LCreal getSec() const                   { return sec; }
+    
+    //slottable functions start here
+    virtual bool setDirection(const String* const sdobj);
+    virtual bool setDegrees(const Number* const sdeobj);
+    virtual bool setMinutes(const Number* const smobj);
+    virtual bool setSeconds(const Number* const ssobj);
+
+protected:
+    void computeVal();
+    void setDir(const char* direction);
+    void setDeg(const LCreal degrees);
+    void setMin(const LCreal minutes);
+    void setSec(const LCreal seconds);
+
+private:
+    Dir     dir;                // direction
+    int     deg;                // degrees
+    int     min;                // minutes
+    LCreal  sec;                // seconds
+};
+
+} // End Basic namespace
+} // End Eaagles namespace
+
+#endif  /* __LatLon_H_79314AD2_111D_4d95_A087_1A5FD100FF0B__ */

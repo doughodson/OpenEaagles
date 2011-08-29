@@ -1,0 +1,70 @@
+ANGLES:
+NIST - http://physics.nist.gov/cuu/Units/outside.html
+  	1 degree = (Pi/180) * Radians  so 1 Radian = (Pi * 180) * degrees
+	1 semicircle = 180 degrees so 1 degree = 0.0055555555555555555555555555555556 semicircles
+	
+
+DISTANCES:
+http://people.uncw.edu/dixonrd/distconv.htm - University of North Carolina at Wilmington
+	1 meter = 39.3701 inches		 
+	1 meter = 3.28084 feet			
+	1 meter = 0.00054 nautical miles
+	1 meter = 0.00062 statute miles
+	1 statute mile = 1609.34 meters
+	1 statute mile = 63360 inches
+	1 inch = 1.5782828282828282828282828282828e-5 statute miles
+	1 nautical mile = 1852 meters
+	1 nautical mile = 72913.4 inches
+	1 foot = 0.30480 meters
+	1 foot = 12 inches
+	1 inch = 0.02540 meters
+	1 inch = 0.08333 feet
+	1 inch = 0.00001 nautical miles
+	
+	by deduction:
+		1 nautical mile = 185200 centimeters
+		1 centimeter = 5.3995680345572354211663066954644e-6 nautical miles
+		1 statute mile = 160934 centimeters
+		1 centimeter = 6.2137273664980675307890191009979e-6 statute miles
+		1 nautical mile = 1.852 kilometers
+		1 kilometer = 0.53995680345572354211663066954644 nautical miles
+		1 statute mile = 1.60934 kilometers
+		1 kilometer = 0.62137273664980675307890191009979 statute miles
+
+http://www.wsdot.wa.gov/metrics/#length - Washington State Department of transportation
+	1 inch = 2.54 centimeters
+	1 centimeter = 0.3937007874015748031496062992126 inches
+
+http://www.cs.utexas.edu/users/s2s/latest/metrics1/src/m2cm.htm	- University of Texas
+	1 meter = 100 centimeters
+	1 centimeter = 0.01 meters
+	
+
+http://www.cs.utexas.edu/users/s2s/latest/metrics1/src/km2m.htm  - University of Texas
+	1 kilometer = 1000 meters
+	1 meter = 0.001 kilometers
+	1 kilometer = 100000 centimeters
+	1 centimeter= .00001 kilometers
+
+http://waynesword.palomar.edu/1java1.htm  - Wayne's Word 
+	1 centimeter = 0.03281 feet
+	1 foot = 30.478512648582749161840902163974 centimeters
+	1 kilometer = 39370 inches
+	1 inch = 2.5400050800101600203200406400813e-5 kilometers
+	1 kilometer = 3281 feet
+	1 foot = 3.0478512648582749161840902163974e-4 kilometers
+
+http://virtualskies.arc.nasa.gov/navigation/tutorial/tutorial5.html - NASA navigational tutorial page
+	1 nautical mile = 6076.11549 feet
+	1 foot = 1.6457883357315843251030766697952e-4 nautical miles
+	1 statute mile = 5280 feet
+	1 foot = 1.8939393939393939393939393939394e-4 statute miles
+	1 nautical mile = 1.15 statute miles
+	1 statute mile = 0.86956521739130434782608695652174 nautical miles
+	
+ENERGY:
+http://www.eia.doe.gov/kids/units.xls - Department of Energy
+	- see Excel spreadsheet  Energy.xls
+
+		
+		

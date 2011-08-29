@@ -1,0 +1,644 @@
+// this is our map page module, which displays waypoints, tacans, ground and air tracks, and a compass rose
+// Map page is actually not derived from an instrument, but it acts as a simple way to draw tacans, waypoints, and other nav data on a page, using
+// lat longs and such to determine screen position.  Map page also tells all of it's components which are map pages what it's reference lat and lon is, what the
+// range is, displacement, and any other pertinent information (see MapPage.cpp, and .h).  This is very similar to instrument in the fact that it eliminates
+// redundancy.  
+// The MapPage event handler does different things depending on the event message sent to it.  See MapPage.h for an explanation of what each event does.
+mappage:
+( MapPage
+	// This slot sets the outer circular radius of our map, in units.  It uses this to calculate nautical miles per inches and for other calculations
+    outerRadius: 10.5
+    // Some maps are based on a centered/decentered mode, in which in one mode the aircraft is the center, and in the other mode the aircraft is displaced
+    // towards the bottom of the screen, for a forward looking view.  This slot tells us what our new radius should be if we go to decentered mode.
+    outerRadiusDecentered: 15
+    // Range, in nautical miles, that we are using at first
+    range: 80
+    // Displacement is how far we translate during decentered mode.
+    displacement: -7
+    components: {
+		( AsciiText
+			position: [ 1 27 ]
+			text: "MAP PAGE" 
+			color: cyan
+		)    
+		// Bearing pointer is a unique pointer that is derived from Graphic and will draw it's head and tail graphic on a radius determined by our test program
+		// This is not derived from map page because it really doesn't use any conversion routines from lat lon to screen, but it does need to know how to 
+		// displace, and what radius to be at.  
+        bearing:
+        ( BearingPointer 
+            centeredRad: 10.5
+            decenteredRad: 15
+            displacement: -7
+            // Head graphic is the graphic object that is drawn on one end of the pointer
+            headGraphic: 
+                ( Polygon
+                    color: white
+                    vertices: {
+                        [ -0.3 0 ]
+                        [ 0.3 0 ]
+                        [ 0 0.3 ]
+                    }
+                )
+            // obviously the tail graphic is the other end of the pointer
+            tailGraphic:
+                ( Line   
+                    color: white
+                    linewidth: 3
+                    vertices: {
+                        [ 0 0 ]
+                        [ 0 -0.7 ]
+                    }
+                )
+        )
+#define NAVAIR_SYM_SCALE  4
+#define NAVAIR_TEXT_SCALE 0.5
+            
+				// This is our first example of a symbol loader.  A symbol loader is a MapPage derived object that is given a list of tracks, navaids,
+				// waypoint, etc.. that have certain traits.  Based on the type or some other trait of each symbol, you can go through a list of different items and 
+				// draw them simply from calling them from this list.  For example, if you have a list of waypoints, and some of them are also entry points, which are 
+				// drawn differently, then symbol loader would be used to determine which symbol to draw based on the type.  Once a certain type of symbol is
+				// determined, symbol loader adds it to the list of symbols it is drawing.  It can also manage the list, removing any symbols that are no longer
+				// there (IE... tracks that are killed).  
+                navaids:
+                ( SymbolLoader 
+                    // load our templates for each graphic
+                    // Templates are the type of symbol we will draw for each type of symbol trait we get.  Here, we are drawing navaids.  If we get a list
+                    // of navaids that have type VOR, VORTAC, TACAN, and VORDME.  We bring all of the symbols in at once, and based on the type, we create
+                    // a graphic object of each type.  Also, if there are labels associated with each symbol, you can send that value to it as well, 
+                    // that way you can label each symbol.  You can see more documentation in SymbolLoader.cpp and .h.
+                    templates: {
+                    
+                        // VOR
+                        1:  ( Graphic
+                                components: {
+                                    name:
+                                    ( AsciiText
+                                        color: white
+                                        transform: { ( Translation -0.4 -0.65 ) ( Scale NAVAIR_TEXT_SCALE ) }
+                                        text: "XXXXX"
+                                    )
+                                    
+                                    symbol:
+                                    ( Graphic
+										color: cyan
+                                        transform: ( Scale NAVAIR_SYM_SCALE )
+                                        components: {
+                                            ( Line        
+                                                vertices: {
+                                                    [ -0.0325 0.056250 ]
+                                                    [ 0.0325 0.05625  ]
+                                                    [ 0.064750 0 ]
+                                                    [ 0.0325 -0.05625 ]
+                                                    [ -0.0325 -0.05625 ]
+                                                    [ -0.064750 0 ]
+                                                    [ -0.0325 0.05625 ]
+                                                }
+                                            )
+                                            ( Polygon
+                                                vertices: {
+                                                    [ 0.0325 0.0565 ]
+                                                    [ 0.064750 0 ]
+                                                    [ 0.0325 -0.05625 ]
+                                                    [ -0.0325 -0.05625 ]
+                                                    [ -0.064750 0 ]
+                                                    [ -0.0325 0.05625 ]
+                                                }
+                                            )
+                                        }
+                                    )
+                                }
+                            )
+                            
+                            // VORTAC 
+                        2:  ( Graphic
+                                components: {
+                                
+                                    name:
+                                    ( AsciiText
+                                        color: white
+                                        transform: { ( Translation -0.4 -0.65 ) ( Scale NAVAIR_TEXT_SCALE ) }
+                                        text: "XXXXX"
+                                    )
+                                    
+                                    symbol:
+                                    ( Graphic
+                                        transform: ( Scale NAVAIR_SYM_SCALE )
+										color: cyan
+                                        components: {
+                                            ( Line
+                                                vertices: {
+                                                    [ 0.0225 0.035 ]    
+                                                    [ 0.0575 0.0575 ]
+                                                    [ 0.08 0.0225 ]
+                                                    [ 0.035 0 ]
+                                                    [ 0.0225 -0.035 ]
+                                                    [ 0.0225 -0.075 ]
+                                                    [ -0.0225 -0.075 ]
+                                                    [ -0.0225 -0.035 ]
+                                                    [ -0.035 0 ]
+                                                    [ -0.08 0.0225 ]
+                                                    [ -0.0575 0.0575 ]
+                                                    [ -0.0225 0.035 ]
+                                                    [ 0.0225 0.035 ]        
+                                                }
+                                            )
+                                            ( Line
+                                                vertices: {
+                                                    [ 0.0225 0.035 ]        
+                                                    [ 0.035 0 ]                
+                                                }
+                                            )
+                                            ( Line
+                                                vertices: {
+                                                    [ 0.0225 -0.035 ]
+                                                    [ -0.0225 -0.035 ]            
+                                                }
+                                            )
+                                            ( Line
+                                                vertices: {
+                                                    [ -0.035 0 ]
+                                                    [ -0.0225 0.035 ]
+                                                }
+                                            )                                
+                                            ( Polygon
+                                                vertices: {
+                                                    [ 0.0225 0.035 ]
+                                                    [ 0.035 0 ]
+                                                    [ 0.0225 -0.035 ]
+                                                    [ -0.0225 -0.035 ]
+                                                    [ -0.035 0 ]
+                                                    [ -0.0225 0.035 ]                                       
+                                                }
+                                            )
+                                            ( Polygon  
+                                                vertices: {
+                                                    [ 0.0225 0.035 ]
+                                                    [ 0.0575 0.0575 ]
+                                                    [ 0.08 0.0225 ]
+                                                    [ 0.035 0 ]
+                                                }
+                                            )
+                                            ( Polygon
+                                                vertices: {
+                                                    [ 0.0225 -0.035 ]
+                                                    [ 0.0225 -0.075 ]
+                                                    [ -0.0225 -0.075 ]
+                                                    [ -0.0225 -0.035 ]
+                                                }
+                                            )
+                                            ( Polygon
+                                                vertices: {
+                                                    [ -0.035 0 ]
+                                                    [ -0.08 0.0225 ]
+                                                    [ -0.0575 0.0575 ]
+                                                    [ -0.0225 0.035 ]
+                                                }
+                                            )
+                                        }
+                                    )
+                                }
+                            ) 
+                            
+                            // TACAN 
+                        3:  ( Graphic
+                                components: {
+                                
+                                    name:
+                                    ( AsciiText
+                                        color: white
+                                        transform: { ( Translation -0.4 -0.65 ) ( Scale NAVAIR_TEXT_SCALE ) }
+                                        text: "XXXXX"
+                                    )
+                                    
+                                    symbol:
+                                    ( Graphic
+										color: cyan
+                                        transform: ( Scale NAVAIR_SYM_SCALE )
+                                        components: {
+                                            ( Line
+                                                segment: 0
+                                                vertices: {
+                                                    [ 0.0225 0.035 ]    
+                                                    [ 0.0575 0.0575 ]
+                                                    [ 0.08 0.0225 ]
+                                                    [ 0.035 0 ]
+                                                    [ 0.0225 -0.035 ]
+                                                    [ 0.0225 -0.075 ]
+                                                    [ -0.0225 -0.075 ]
+                                                    [ -0.0225 -0.035 ]
+                                                    [ -0.035 0 ]
+                                                    [ -0.08 0.0225 ]
+                                                    [ -0.0575 0.0575 ]
+                                                    [ -0.0225 0.035 ]
+                                                    [ 0.0225 0.035 ]        
+                                                }
+                                            )
+                                            ( Polygon
+                                                vertices: {
+                                                    [ 0.0225 0.035 ]
+                                                    [ 0.035 0 ]
+                                                    [ 0.0225 -0.035 ]
+                                                    [ -0.0225 -0.035 ]
+                                                    [ -0.035 0 ]
+                                                    [ -0.0225 0.035 ]                                       
+                                                }
+                                            )
+                                            ( Polygon  
+                                                vertices: {
+                                                    [ 0.0225 0.035 ]
+                                                    [ 0.0575 0.0575 ]
+                                                    [ 0.08 0.0225 ]
+                                                    [ 0.035 0 ]
+                                                }
+                                            )
+                                            ( Polygon
+                                                vertices: {
+                                                    [ 0.0225 -0.035 ]
+                                                    [ 0.0225 -0.075 ]
+                                                    [ -0.0225 -0.075 ]
+                                                    [ -0.0225 -0.035 ]
+                                                }
+                                            )
+                                            ( Polygon
+                                                vertices: {
+                                                    [ -0.035 0 ]
+                                                    [ -0.08 0.0225 ]
+                                                    [ -0.0575 0.0575 ]
+                                                    [ -0.0225 0.035 ]
+                                                }
+                                            )
+                                        }
+                                    )
+                                }
+                            ) 
+                            // VORDME
+                       4:   ( Graphic
+                                components: {
+                                
+                                    name:
+                                    ( AsciiText
+                                        color: white
+                                        transform: { ( Translation -0.4 -0.65 ) ( Scale NAVAIR_TEXT_SCALE ) }
+                                        text: "XXXXX"
+                                    )
+                                                                        
+                                    symbol:
+                                    ( Graphic
+                                        transform: ( Scale NAVAIR_SYM_SCALE )
+                                        color: cyan
+                                        components: {
+                                            ( Line
+                                                vertices: {
+                                                    [ -0.064750 -0.056250 ]
+                                                    [ -0.064750 0.056250 ]
+                                                    [ 0.064750 0.056250 ]
+                                                    [ 0.064750 -0.056250 ]
+                                                    [ -0.064750 -0.056250 ]
+                                                }
+                                            )
+                                            ( Polygon
+                                                vertices: {
+                                                    [ 0.032500 0.056250 ]
+                                                    [ 0.064750 0.000000 ]
+                                                    [ 0.032500 -0.056250 ]
+                                                    [ -0.032500 -0.056250 ]
+                                                    [ -0.064750 0.000000 ]
+                                                    [ -0.032500 0.056250 ]
+                                                    [ 0.032500 0.056250 ]
+                                                }
+                                            )
+                                            (Polygon
+                                                vertices: {
+                                                    [ -0.064740 -0.056250 ] 
+                                                    [ -0.064740 0.056250 ] 
+                                                    [ 0.064740 0.056250 ] 
+                                                    [ 0.064740 -0.056250 ]
+                                                }
+                                            )
+                                        }
+                                    )
+                                }
+                            )
+                            
+                    }// end of template
+                )   // end of nav aid symbol loader          
+            
+
+#define AIRPORT_SYM_SCALE  4
+#define AIRPORT_TEXT_SCALE 0.5
+                // to test these symbol loaders, you must run a test page which loads an array of airports, using the given inputs
+                // in SymbolLoader.h
+            
+                // load our nav aids and draw them
+                airports:
+                ( SymbolLoader 
+                    // load our templates for each graphic
+                    templates: {
+                        
+                        1:  // civil airport
+                        ( Graphic
+                            components: {
+                            
+                                name:
+                                ( AsciiText
+                                    color: white
+                                    transform: { ( Translation -0.3 -0.65 ) ( Scale AIRPORT_TEXT_SCALE ) }
+                                    text: "XXXXX"
+                                )
+                                
+                                symbol:
+                                ( Graphic
+                                    transform: ( Scale AIRPORT_SYM_SCALE )
+                                    components: {
+                                        ( Line
+                                            color: white
+                                            vertices: {
+                                                [ -0.03 -0.03 ] 
+                                                [  0.03  0.03 ] 
+                                            }
+                                        )
+                                        ( Circle
+                                            color: green
+                                            radius: 0.07
+                                            filled: 1
+                                            slices: 12
+                                        )
+                                    }
+                                )
+                            }
+                        )
+                        
+                        2:  // joint (civil/military) airport
+                        ( Graphic
+                            components: {
+                            
+                                name:
+                                ( AsciiText
+                                    color: white
+                                    transform: { ( Translation -0.3 -0.65 ) ( Scale AIRPORT_TEXT_SCALE ) }
+                                    text: "XXXXX"
+                                )
+                                
+                                symbol:
+                                ( Graphic
+                                    transform: ( Scale AIRPORT_SYM_SCALE )
+                                    components: {
+                                        ( Line
+                                            color: white
+                                            vertices: {
+                                                [ -0.03 -0.03 ] 
+                                                [  0.03  0.03 ] 
+                                            }
+                                        )
+                                        ( Circle
+                                            color: cyan
+                                            radius: 0.07
+                                            filled: 1
+                                            slices: 12
+                                        )
+                                    }
+                                )
+                            }
+                        )
+                        
+                        3:  // military airport
+                        ( Graphic
+                            components: {
+                            
+                                name:
+                                ( AsciiText
+                                    color: white
+                                    transform: { ( Translation -0.3 -0.65 ) ( Scale AIRPORT_TEXT_SCALE ) }
+                                    text: "XXXXX"
+                                )
+                                
+                                symbol:
+                                ( Graphic
+                                    transform: ( Scale AIRPORT_SYM_SCALE )
+                                    components: {
+                                        ( Line
+                                            color: white
+                                            vertices: {
+                                                [ -0.03 -0.03 ] 
+                                                [  0.03  0.03 ] 
+                                            }
+                                        )
+                                        ( Circle
+                                            color: blue
+                                            radius: 0.07
+                                            filled: 1
+                                            slices: 12
+                                        )
+                                    }
+                                )
+                            }
+                        )
+                        
+                        4:  // inactive airport
+                        ( Graphic
+                            components: {
+                            
+                                name:
+                                ( AsciiText
+                                    color: white
+                                    transform: { ( Translation -0.3 -0.65 ) ( Scale AIRPORT_TEXT_SCALE ) }
+                                    text: "XXXXX"
+                                )
+                                
+                                symbol:
+                                ( Graphic
+                                    transform: ( Scale AIRPORT_SYM_SCALE )
+                                    components: {
+                                        ( Line
+                                            color: white
+                                            vertices: {
+                                                [ -0.03 -0.03 ] 
+                                                [  0.03  0.03 ] 
+                                            }
+                                        )
+                                        ( Circle
+                                            color: yellow
+                                            radius: 0.07
+                                            filled: 1
+                                            slices: 12
+                                        )
+                                    }
+                                )
+                            }
+                        )
+                            
+                    }// end of template
+                ) 
+
+
+#define AIRTRACK_SYM_SCALE  6
+            
+                // Air tracks ..
+                airTracks:
+                ( SymbolLoader 
+                
+                    // load our templates for each graphic
+                    templates: {
+
+                        // Friendly track
+                        1: ( Graphic
+                            color: green
+                            components: {
+                                ( Graphic
+                                    transform: ( Scale AIRTRACK_SYM_SCALE )
+                                    components: {
+                                        hdg: ( Rotators
+                                            components: {
+                                                ( Line
+                                                    vertices: {
+                                                        [ 0.0  0.0 ]
+                                                        [ 0.0  0.08 ]
+                                                    }
+                                                )
+                                            }
+                                        )
+                                        ( Line
+                                            vertices: {
+                                                [ -0.0402 -0.0402 ]
+                                                [ -0.0402  0.0134 ]
+                                                [ -0.0201  0.0402 ]
+                                                [  0.0201  0.0402 ]
+                                                [  0.0402  0.0134 ]
+                                                [  0.0402 -0.0402 ]
+                                            }
+                                        )
+                                    }
+                                )
+                            }
+                        )
+                        
+                        // foe track
+                        2: ( Graphic
+                            color: red
+                            components: {
+                                ( Graphic
+                                    transform: ( Scale AIRTRACK_SYM_SCALE )
+                                    components: {
+                                        hdg: ( Rotators
+                                            components: {
+                                                ( Line
+                                                    vertices: {
+                                                        [ 0.0  0.0 ]
+                                                        [ 0.0  0.08 ]
+                                                    }
+                                                )
+                                            }
+                                        )
+                                        ( Line
+                                            vertices: {
+                                                [ -0.05226  -0.0402 ]
+                                                [  0.0       0.0402 ]
+                                                [  0.05226  -0.0402 ]
+                                            }
+                                        )
+                                    }
+                                )
+                            }
+                        )
+                        
+                        
+                        // neutral tracks
+                        3: ( Graphic
+                            color: white
+                            components: {
+                                ( Graphic
+                                    transform: ( Scale AIRTRACK_SYM_SCALE )
+                                    components: {
+                                        hdg: ( Rotators
+                                            components: {
+                                                ( Line
+                                                    vertices: {
+                                                        [ 0.0  0.0 ]
+                                                        [ 0.0  0.08 ]
+                                                    }
+                                                )
+                                            }
+                                        )
+                                        ( Line
+                                            vertices: {
+                                                [ -0.02747  -0.03149 ]
+                                                [ -0.05226  -0.00871 ]
+                                                [  0.0       0.0402 ]
+                                                [  0.05226  -0.00871 ]
+                                                [  0.02747  -0.03149 ]
+                                            }
+                                        )
+                                    }
+                                )
+                            }
+                        )
+                       
+                        // unknown tracks
+                        4: ( Graphic
+                            color: ( rgba 1.0 0.5 0.0 1.0 )
+                            components: {
+                                ( Graphic
+                                    transform: ( Scale AIRTRACK_SYM_SCALE )
+                                    components: {
+                                        hdg: ( Rotators
+                                            components: {
+                                                ( Line
+                                                    vertices: {
+                                                        [ 0.0  0.0 ]
+                                                        [ 0.0  0.08 ]
+                                                    }
+                                                )
+                                            }
+                                        )
+                                        ( Line
+                                            vertices: {
+                                                [ -0.02747  -0.03149 ]
+                                                [ -0.05226  -0.00871 ]
+                                                [  0.0       0.0402 ]
+                                                [  0.05226  -0.00871 ]
+                                                [  0.02747  -0.03149 ]
+                                            }
+                                        )
+                                    }
+                                )
+                            }
+                        )
+
+                    }// end of template
+                ) 
+        // this is the outer compass rose.  This is also a unique graphic that isn't derived from MapPage, but instead needs a centered radius and decentered radius, and also 
+        // a value to deteremine how to rotate.  This may eventually be incorporated into a MapPage derived class, along with BearingPointer.  But for right now, they are treated
+        // as seperate graphic objects.
+        compassrose:
+        ( CompassRose 
+            centeredRad: 10.5
+            decenteredRad: 15
+            displacement: -7
+
+            color: white
+            components: {                    
+                // here are our tick marks
+                longticks:
+                ( DialTickMarks
+                    startAngle: 0
+                    quantity: 36
+                    length: 0.5
+                )
+                shortticks:
+                ( DialTickMarks
+                    startAngle: 5
+                    quantity: 36
+                    length: 0.25 
+                )
+                dial:
+                ( DialArcSegment
+                    color: white
+                    dialRadius: 5
+                    outerRadius: 5.1
+                )
+                
+            }
+        )
+    }
+)
+

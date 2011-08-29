@@ -1,0 +1,23 @@
+Power Conversions (Kilowatts: watts, horsepower)
+
+http://www-cta.ornl.gov/cta/data/tedb22/Edition22_AppendixB.pdf - U.S. Center for Transportation Analysis
+	1 watt = 1341 horsepower
+	1 watt = .001 kilowatts
+
+http://www.energy.rochester.edu/units/conversions.pdf - Henry Manczyk, C.P.E., C.E.M.
+	1 watt = 1340 horsepower
+
+http://www.uwsp.edu/cnr/wcee/keep/Mod1/Whatis/energyresourcetables.htm - U. of Wisconsin
+	same as above.
+
+http://lectureonline.cl.msu.edu/~mmp/kap5/cd129.htm - Michigan State University
+	same as above.
+
+Radar detection slide 47:
+10 log(watt) = dBW
+10 log(watt * 100 (to get milliwatts)) = dBM
+
+1 wattt = 100 milliwattts
+
+dBW = dBM - 30 and dBM = dBw + 30
+	

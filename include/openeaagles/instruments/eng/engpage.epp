@@ -1,0 +1,2196 @@
+// this will show all of the engine readouts
+( EngPage 
+    components: {
+        // n1 label
+        ( AsciiText
+            transform: ( Translation -0.5 8 ) 
+            color: cyan
+            text: "FAN"
+        )
+        
+        // engine 1 n1 gauge
+        eng1n1:
+        ( AnalogDial
+            transform: ( Translation -8 8 )
+            startAngle: 0
+            sweepAngle: 270 
+            dialRadius: 1.5
+            color: black
+            components: {
+                ( Instrument
+                    color: 
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                17
+                                106
+                            }
+                            breakcolors: {
+                                (rgb 1 1 0)
+                                (rgb 1 1 1)
+                                (rgb 1 0 0)
+                            }
+                        )
+                    components: {
+                        ( Graphic
+                            transform: ( Translation -1 0.7 )
+                            components: {
+                                eng1n1ro:
+                                ( NumericReadout
+                                    inheritColor: 1
+                                    font: smallfont
+                                    transform: ( Translation -0.95 -0.2 ) 
+                                    format: "###.#"
+                                )
+                                // outline, only visible when airborne and above or below the breakpoints
+                                eng1n1box:
+                                ( LineLoop 
+                                    vertices: {
+                                        [ -1 -0.5 ]
+                                        [ -1  0.5 ]
+                                        [  1  0.5 ]
+                                        [  1  -0.5 ]
+                                    }
+                                )
+                            }
+                        )
+                    }
+                )
+                // low segment
+                ( DialArcSegment
+                    color:
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                106
+                            }
+                            breakcolors: {
+                                (rgb 1 1 0)
+                                (rgb 1 0 0)
+                            }
+                        )
+                    startAngle: 0
+                    outerRadius: 1.55
+                    sweepAngle: 41.481
+                    dialRadius: 1.5
+                    slices: 5
+                )
+                ( DialTickMarks
+                    quantity: 1
+                    color: yellow
+                    startAngle: 41.481
+                    length: -0.3
+                    dialRadius: 1.5
+                    linewidth: 2
+                    slices: 10
+                ) 
+                // normal segment
+                ( DialArcSegment
+                    color:
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                106
+                            }
+                            breakcolors: {
+                                (rgb 0 1 0)
+                                (rgb 1 0 0)
+                            }
+                        )
+                    startAngle: 41.405
+                    outerRadius: 1.55
+                    sweepAngle: 218.455
+                    slices: 10
+                    dialRadius: 1.5
+                )
+                // high segment
+                ( DialArcSegment
+                    color: red
+                    startAngle: 260.182
+                    sweepAngle: 9.82
+                    dialRadius: 1.5
+                    slices: 2
+                    outerRadius: 1.55
+                )
+                ( DialTickMarks
+                    color: red
+                    startAngle: 260.182
+                    linewidth: 2
+                    quantity: 1
+                    dialRadius: 1.5 
+                    length: -0.3
+                )
+                
+                ( DialPointer
+                    color: 
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                17
+                                106
+                            }
+                            breakcolors: {
+                                (rgb 1 1 0)
+                                (rgb 1 1 1)
+                                (rgb 1 0 0)
+                            }
+                        )   
+                    scalingTable:
+                        ( Table1
+                            // eng n value
+                            x: [ 0 110 ]
+                            // degrees
+                         data: [ 0 270 ]
+                        )
+                    components: {
+                        ( Line
+                            linewidth: 2
+                            vertices: { [ 0 0 ] [ 0 1.2 ] }
+                        )
+                        ( Polygon   
+                            vertices: {
+                                [ -0.1 1.2 ]
+                                [  0.1 1.2 ]
+                                [  0  1.5 ]
+                            }
+                        )
+                    }
+                )     
+            }
+        )   // end of engine 1 n1 gauge
+        
+        // engine 2 n1 gauge
+        eng2n1:
+        ( AnalogDial
+            transform: ( Translation -4 8 )
+            startAngle: 0
+            sweepAngle: 270 
+            dialRadius: 1.5
+            color: black
+            components: {
+                ( Instrument
+                    color: 
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                17
+                                106
+                            }
+                            breakcolors: {
+                                (rgb 1 1 0)
+                                (rgb 1 1 1)
+                                (rgb 1 0 0)
+                            }
+                        )
+                    components: {
+                        ( Graphic
+                            transform: ( Translation -1 0.7 )
+                            components: {
+                                eng2n1ro:
+                                ( NumericReadout
+                                    inheritColor: 1
+                                    font: smallfont
+                                    transform: ( Translation -0.95 -0.2 ) 
+                                    format: "###.#"
+                                )
+                                // outline, only visible when airborne and above or below the breakpoints
+                                eng2n1box:
+                                ( LineLoop 
+                                    vertices: {
+                                        [ -1 -0.5 ]
+                                        [ -1  0.5 ]
+                                        [  1  0.5 ]
+                                        [  1  -0.5 ]
+                                    }
+                                )
+                            }
+                        )
+                    }
+                )
+                // low segment
+                ( DialArcSegment
+                    color:
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                106
+                            }
+                            breakcolors: {
+                                (rgb 1 1 0)
+                                (rgb 1 0 0)
+                            }
+                        )
+                    startAngle: 0
+                    outerRadius: 1.55
+                    sweepAngle: 41.481
+                    dialRadius: 1.5
+                    slices: 5
+                )
+                ( DialTickMarks
+                    quantity: 1
+                    color: yellow
+                    startAngle: 41.481
+                    length: -0.3
+                    dialRadius: 1.5
+                    linewidth: 2
+                ) 
+                // normal segment
+                ( DialArcSegment
+                    color:
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                106
+                            }
+                            breakcolors: {
+                                (rgb 0 1 0)
+                                (rgb 1 0 0)
+                            }
+                        )
+                    startAngle: 41.405
+                    outerRadius: 1.55
+                    sweepAngle: 218.455
+                    dialRadius: 1.5
+                    slices: 10
+                )
+                // high segment
+                ( DialArcSegment
+                     
+                    color: red
+                    startAngle: 260.182
+                    sweepAngle: 9.82
+                    dialRadius: 1.5
+                    outerRadius: 1.55
+                    slices: 2
+                )
+                ( DialTickMarks
+                    color: red
+                    startAngle: 260.182
+                    linewidth: 2
+                    quantity: 1
+                    dialRadius: 1.5 
+                    length: -0.3
+                )
+                
+                ( DialPointer
+                    color: 
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                17
+                                106
+                            }
+                            breakcolors: {
+                                (rgb 1 1 0)
+                                (rgb 1 1 1)
+                                (rgb 1 0 0)
+                            }
+                        )   
+                    scalingTable:
+                        ( Table1
+                            // eng n value
+                            x: [ 0 110 ]
+                            // degrees
+                         data: [ 0 270 ]
+                        )
+                    components: {
+                        ( Line
+                            linewidth: 2
+                            vertices: { [ 0 0 ] [ 0 1.2 ] }
+                        )
+                        ( Polygon   
+                            vertices: {
+                                [ -0.1 1.2 ]
+                                [  0.1 1.2 ]
+                                [  0  1.5 ]
+                            }
+                        )
+                    }
+                )     
+            }
+        )   // end of engine 2 n1 gauge        
+
+        // engine 3 n1 gauge
+        eng3n1:
+        ( AnalogDial
+            transform: ( Translation 4 8 )
+            startAngle: 0
+            sweepAngle: 270 
+            dialRadius: 1.5
+            color: black
+            components: {
+                ( Instrument
+                    color: 
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                17
+                                106
+                            }
+                            breakcolors: {
+                                (rgb 1 1 0)
+                                (rgb 1 1 1)
+                                (rgb 1 0 0)
+                            }
+                        )
+                    components: {
+                        ( Graphic
+                            transform: ( Translation -1 0.7 )
+                            components: {
+                                eng3n1ro:
+                                ( NumericReadout
+                                    inheritColor: 1
+                                    font: smallfont
+                                    transform: ( Translation -0.95 -0.2 ) 
+                                    format: "###.#"
+                                )
+                                // outline, only visible when airborne and above or below the breakpoints
+                                eng3n1box:
+                                ( LineLoop 
+                                    vertices: {
+                                        [ -1 -0.5 ]
+                                        [ -1  0.5 ]
+                                        [  1  0.5 ]
+                                        [  1  -0.5 ]
+                                    }
+                                )
+                            }
+                        )
+                    }
+                )
+                // low segment
+                ( DialArcSegment
+                    color:
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                106
+                            }
+                            breakcolors: {
+                                (rgb 1 1 0)
+                                (rgb 1 0 0)
+                            }
+                        )
+                    startAngle: 0
+                    outerRadius: 1.55
+                    sweepAngle: 41.481
+                    dialRadius: 1.5
+                    slices: 5
+                )
+                ( DialTickMarks
+                    quantity: 1
+                    color: yellow
+                    startAngle: 41.481
+                    length: -0.3
+                    dialRadius: 1.5
+                    linewidth: 2
+                ) 
+                // normal segment
+                ( DialArcSegment
+                    color:
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                106
+                            }
+                            breakcolors: {
+                                (rgb 0 1 0)
+                                (rgb 1 0 0)
+                            }
+                        )
+                    startAngle: 41.405
+                    outerRadius: 1.55
+                    slices: 10
+                    sweepAngle: 218.455
+                    dialRadius: 1.5
+                )
+                // high segment
+                ( DialArcSegment 
+                    color: red
+                    startAngle: 260.182
+                    sweepAngle: 9.82
+                    dialRadius: 1.5
+                    outerRadius: 1.55
+                    slices: 2
+                )
+                ( DialTickMarks
+                    color: red
+                    startAngle: 260.182
+                    linewidth: 2
+                    quantity: 1
+                    dialRadius: 1.5 
+                    length: -0.3
+                )
+                
+                ( DialPointer
+                    color: 
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                17
+                                106
+                            }
+                            breakcolors: {
+                                (rgb 1 1 0)
+                                (rgb 1 1 1)
+                                (rgb 1 0 0)
+                            }
+                        )   
+                    scalingTable:
+                        ( Table1
+                            // eng n value
+                            x: [ 0 110 ]
+                            // degrees
+                         data: [ 0 270 ]
+                        )
+                    components: {
+                        ( Line
+                            linewidth: 2
+                            vertices: { [ 0 0 ] [ 0 1.2 ] }
+                        )
+                        ( Polygon   
+                            vertices: {
+                                [ -0.1 1.2 ]
+                                [  0.1 1.2 ]
+                                [  0  1.5 ]
+                            }
+                        )
+                    }
+                )     
+            }
+        )   // end of engine 3 n1 gauge 
+        
+        // engine 4 n1 gauge
+        eng4n1:
+        ( AnalogDial
+            transform: ( Translation 8 8 )
+            startAngle: 0
+            sweepAngle: 270 
+            dialRadius: 1.5
+            color: black
+            components: {
+                ( Instrument
+                    color: 
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                17
+                                106
+                            }
+                            breakcolors: {
+                                (rgb 1 1 0)
+                                (rgb 1 1 1)
+                                (rgb 1 0 0)
+                            }
+                        )
+                    components: {
+                        ( Graphic
+                            transform: ( Translation -1 0.7 )
+                            components: {
+                                eng4n1ro:
+                                ( NumericReadout
+                                    inheritColor: 1
+                                    font: smallfont
+                                    transform: ( Translation -0.95 -0.2 ) 
+                                    format: "###.#"
+                                )
+                                // outline, only visible when airborne and above or below the breakpoints
+                                eng4n1box:
+                                ( LineLoop 
+                                    vertices: {
+                                        [ -1 -0.5 ]
+                                        [ -1  0.5 ]
+                                        [  1  0.5 ]
+                                        [  1  -0.5 ]
+                                    }
+                                )
+                            }
+                        )
+                    }
+                )
+                // low segment
+                ( DialArcSegment
+                    color:
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                106
+                            }
+                            breakcolors: {
+                                (rgb 1 1 0)
+                                (rgb 1 0 0)
+                            }
+                        )
+                    startAngle: 0
+                    outerRadius: 1.55
+                    slices: 5
+                    sweepAngle: 41.481
+                    dialRadius: 1.5
+                )
+                ( DialTickMarks
+                    quantity: 1
+                    color: yellow
+                    startAngle: 41.481
+                    length: -0.3
+                    dialRadius: 1.5
+                    linewidth: 2
+                ) 
+                // normal segment
+                ( DialArcSegment
+                    color:
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                106
+                            }
+                            breakcolors: {
+                                (rgb 0 1 0)
+                                (rgb 1 0 0)
+                            }
+                        )
+                    startAngle: 41.405
+                    outerRadius: 1.55
+                    slices: 10
+                    sweepAngle: 218.455
+                    dialRadius: 1.5
+                )
+                // high segment
+                ( DialArcSegment
+                    color: red
+                    startAngle: 260.182
+                    sweepAngle: 9.82
+                    dialRadius: 1.5
+                    outerRadius: 1.55
+                    slices: 2
+                )
+                ( DialTickMarks
+                    color: red
+                    startAngle: 260.182
+                    linewidth: 2
+                    quantity: 1
+                    dialRadius: 1.5 
+                    length: -0.3
+                )
+                
+                ( DialPointer
+                    color: 
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                17
+                                106
+                            }
+                            breakcolors: {
+                                (rgb 1 1 0)
+                                (rgb 1 1 1)
+                                (rgb 1 0 0)
+                            }
+                        )   
+                    scalingTable:
+                        ( Table1
+                            // eng n value
+                            x: [ 0 110 ]
+                            // degrees
+                         data: [ 0 270 ]
+                        )
+                    components: {
+                        ( Line
+                            linewidth: 2
+                            vertices: { [ 0 0 ] [ 0 1.2 ] }
+                        )
+                        ( Polygon   
+                            vertices: {
+                                [ -0.1 1.2 ]
+                                [  0.1 1.2 ]
+                                [  0  1.5 ]
+                            }
+                        )
+                    }
+                )     
+            }
+        )   // end of engine 4 n1 gauge    
+
+
+
+
+        // n2 label
+        ( AsciiText
+            transform: ( Translation -0.8 4 )
+            color: cyan
+            text: "CORE"
+        )
+        
+        // engine 1 n2 gauge
+        eng1n2:
+        ( AnalogDial
+            transform: ( Translation -8 4 )
+            startAngle: 0
+            sweepAngle: 270 
+            dialRadius: 1.5
+            color: black
+            components: {
+                ( Instrument
+                    color: 
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                61
+                                102.4
+                            }
+                            breakcolors: {
+                                (rgb 1 1 0)
+                                (rgb 1 1 1)
+                                (rgb 1 0 0)
+                            }
+                        )
+                    components: {
+                        ( Graphic
+                            transform: ( Translation -1 0.7 )
+                            components: {
+                                eng1n2ro:
+                                ( NumericReadout
+                                    inheritColor: 1
+                                    font: smallfont
+                                    transform: ( Translation -0.95 -0.2 ) 
+                                    format: "###.#"
+                                )
+                                // outline, only visible when airborne and above or below the breakpoints
+                                eng1n2box:
+                                ( LineLoop 
+                                    vertices: {
+                                        [ -1 -0.5 ]
+                                        [ -1  0.5 ]
+                                        [  1  0.5 ]
+                                        [  1  -0.5 ]
+                                    }
+                                )
+                            }
+                        )
+                    }
+                )
+                // low segment
+                ( DialArcSegment
+                    color:
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                102.4
+                            }
+                            breakcolors: {
+                                (rgb 1 1 0)
+                                (rgb 1 0 0)
+                            }
+                        )
+                    startAngle: 0
+                    outerRadius: 1.55
+                    slices: 10
+                    sweepAngle: 147.27
+                    dialRadius: 1.5
+                )
+                ( DialTickMarks
+                    quantity: 1
+                    color: yellow
+                    startAngle: 147.27
+                    length: -0.3
+                    dialRadius: 1.5
+                    linewidth: 2
+                ) 
+                // normal segment
+                ( DialArcSegment
+                    color:
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                102.4
+                            }
+                            breakcolors: {
+                                (rgb 0 1 0)
+                                (rgb 1 0 0)
+                            }
+                        )
+                    startAngle: 147.27
+                    outerRadius: 1.55
+                    slices: 10
+                    sweepAngle: 100.64
+                    dialRadius: 1.5
+                )
+                // high segment
+                ( DialArcSegment
+                    color: red
+                    startAngle: 247.91
+                    sweepAngle: 22.09
+                    dialRadius: 1.5
+                    outerRadius: 1.55
+                    slices: 2
+                )
+                ( DialTickMarks
+                    color: red
+                    startAngle: 247.91
+                    linewidth: 2
+                    quantity: 1
+                    dialRadius: 1.5 
+                    length: -0.3
+                )
+                
+                ( DialPointer
+                    color: 
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                61
+                                102.4
+                            }
+                            breakcolors: {
+                                (rgb 1 1 0)
+                                (rgb 1 1 1)
+                                (rgb 1 0 0)
+                            }
+                        )
+                    scalingTable:
+                        ( Table1
+                            // eng n value
+                            x: [ 0 110 ]
+                            // degrees
+                         data: [ 0 270 ]
+                        )
+                    components: {
+                        ( Line
+                            linewidth: 2
+                            vertices: { [ 0 0 ] [ 0 1.2 ] }
+                        )
+                        ( Polygon   
+                            vertices: {
+                                [ -0.1 1.2 ]
+                                [  0.1 1.2 ]
+                                [  0  1.5 ]
+                            }
+                        )
+                    }
+                )     
+            }
+        )   // end of engine 1 n2 gauge
+        
+        // engine 2 n2 gauge
+        eng2n2:
+        ( AnalogDial
+            transform: ( Translation -4 4 )
+            startAngle: 0
+            sweepAngle: 270 
+            dialRadius: 1.5
+            color: black
+            components: {
+                ( Instrument
+                    color: 
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                61
+                                102.4
+                            }
+                            breakcolors: {
+                                (rgb 1 1 0)
+                                (rgb 1 1 1)
+                                (rgb 1 0 0)
+                            }
+                        )
+                    components: {
+                        ( Graphic
+                            transform: ( Translation -1 0.7 )
+                            components: {
+                                eng2n2ro:
+                                ( NumericReadout
+                                    inheritColor: 1
+                                    font: smallfont
+                                    transform: ( Translation -0.95 -0.2 ) 
+                                    format: "###.#"
+                                )
+                                // outline, only visible when airborne and above or below the breakpoints
+                                eng2n2box:
+                                ( LineLoop 
+                                    vertices: {
+                                        [ -1 -0.5 ]
+                                        [ -1  0.5 ]
+                                        [  1  0.5 ]
+                                        [  1  -0.5 ]
+                                    }
+                                )
+                            }
+                        )
+                    }
+                )
+                // low segment
+                ( DialArcSegment
+                    color:
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                102.4
+                            }
+                            breakcolors: {
+                                (rgb 1 1 0)
+                                (rgb 1 0 0)
+                            }
+                        )
+                    startAngle: 0
+                    outerRadius: 1.55
+                    slices: 10
+                    sweepAngle: 147.27
+                    dialRadius: 1.5
+                )
+                ( DialTickMarks
+                    quantity: 1
+                    color: yellow
+                    startAngle: 147.27
+                    length: -0.3
+                    dialRadius: 1.5
+                    linewidth: 2
+                ) 
+                // normal segment
+                ( DialArcSegment
+                    color:
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                102.4
+                            }
+                            breakcolors: {
+                                (rgb 0 1 0)
+                                (rgb 1 0 0)
+                            }
+                        )
+                    startAngle: 147.27
+                    outerRadius: 1.55
+                    sweepAngle: 100.64
+                    dialRadius: 1.5
+                    slices: 10
+                )
+                // high segment
+                ( DialArcSegment
+                    slices: 2
+                    color: red
+                    startAngle: 247.91
+                    sweepAngle: 22.09
+                    dialRadius: 1.5
+                    outerRadius: 1.55
+                )
+                ( DialTickMarks
+                    color: red
+                    startAngle: 247.91
+                    linewidth: 2
+                    quantity: 1
+                    dialRadius: 1.5 
+                    length: -0.3
+                )
+                
+                ( DialPointer
+                    color: 
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                61
+                                102.4
+                            }
+                            breakcolors: {
+                                (rgb 1 1 0)
+                                (rgb 1 1 1)
+                                (rgb 1 0 0)
+                            }
+                        )
+                    scalingTable:
+                        ( Table1
+                            // eng n value
+                            x: [ 0 110 ]
+                            // degrees
+                         data: [ 0 270 ]
+                        )
+                    components: {
+                        ( Line
+                            linewidth: 2
+                            vertices: { [ 0 0 ] [ 0 1.2 ] }
+                        )
+                        ( Polygon   
+                            vertices: {
+                                [ -0.1 1.2 ]
+                                [  0.1 1.2 ]
+                                [  0  1.5 ]
+                            }
+                        )
+                    }
+                )     
+            }
+        )   // end of engine 2 n2 gauge        
+
+        // engine 3 n2 gauge
+        eng3n2:
+        ( AnalogDial
+            transform: ( Translation 4 4 )
+            startAngle: 0
+            sweepAngle: 270 
+            dialRadius: 1.5
+            color: black
+            components: {
+                ( Instrument
+                    color: 
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                61
+                                102.4
+                            }
+                            breakcolors: {
+                                (rgb 1 1 0)
+                                (rgb 1 1 1)
+                                (rgb 1 0 0)
+                            }
+                        )
+                    components: {
+                        ( Graphic
+                            transform: ( Translation -1 0.7 )
+                            components: {
+                                eng3n2ro:
+                                ( NumericReadout
+                                    inheritColor: 1
+                                    font: smallfont
+                                    transform: ( Translation -0.95 -0.2 ) 
+                                    format: "###.#"
+                                )
+                                // outline, only visible when airborne and above or below the breakpoints
+                                eng3n2box:
+                                ( LineLoop 
+                                    vertices: {
+                                        [ -1 -0.5 ]
+                                        [ -1  0.5 ]
+                                        [  1  0.5 ]
+                                        [  1  -0.5 ]
+                                    }
+                                )
+                            }
+                        )
+                    }
+                )
+                // low segment
+                ( DialArcSegment
+                    color:
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                102.4
+                            }
+                            breakcolors: {
+                                (rgb 1 1 0)
+                                (rgb 1 0 0)
+                            }
+                        )
+                    startAngle: 0
+                    outerRadius: 1.55
+                    slices: 10
+                    sweepAngle: 147.27
+                    dialRadius: 1.5
+                )
+                ( DialTickMarks
+                    quantity: 1
+                    color: yellow
+                    startAngle: 147.27
+                    length: -0.3
+                    dialRadius: 1.5
+                    linewidth: 2
+                ) 
+                // normal segment
+                ( DialArcSegment
+                    color:
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                102.4
+                            }
+                            breakcolors: {
+                                (rgb 0 1 0)
+                                (rgb 1 0 0)
+                            }
+                        )
+                    slices: 10
+                    startAngle: 147.27
+                    outerRadius: 1.55
+                    sweepAngle: 100.64
+                    dialRadius: 1.5
+                )
+                // high segment
+                ( DialArcSegment
+                    slices: 2 
+                    color: red
+                    startAngle: 247.91
+                    sweepAngle: 22.09
+                    dialRadius: 1.5
+                    outerRadius: 1.55
+                )
+                ( DialTickMarks
+                    color: red
+                    startAngle: 247.91
+                    linewidth: 2
+                    quantity: 1
+                    dialRadius: 1.5 
+                    length: -0.3
+                )
+                
+                ( DialPointer
+                    color: 
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                61
+                                102.4
+                            }
+                            breakcolors: {
+                                (rgb 1 1 0)
+                                (rgb 1 1 1)
+                                (rgb 1 0 0)
+                            }
+                        )
+                    scalingTable:
+                        ( Table1
+                            // eng n value
+                            x: [ 0 110 ]
+                            // degrees
+                         data: [ 0 270 ]
+                        )
+                    components: {
+                        ( Line
+                            linewidth: 2
+                            vertices: { [ 0 0 ] [ 0 1.2 ] }
+                        )
+                        ( Polygon   
+                            vertices: {
+                                [ -0.1 1.2 ]
+                                [  0.1 1.2 ]
+                                [  0  1.5 ]
+                            }
+                        )
+                    }
+                )     
+            }
+        )   // end of engine 3 n2 gauge 
+        
+        // engine 4 n2 gauge
+        eng4n2:
+        ( AnalogDial
+            transform: ( Translation 8 4 )
+            startAngle: 0
+            sweepAngle: 270 
+            dialRadius: 1.5
+            color: black
+            components: {
+                ( Instrument
+                    color: 
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                61
+                                102.4
+                            }
+                            breakcolors: {
+                                (rgb 1 1 0)
+                                (rgb 1 1 1)
+                                (rgb 1 0 0)
+                            }
+                        )
+                    components: {
+                        ( Graphic
+                            transform: ( Translation -1 0.7 )
+                            components: {
+                                eng4n2ro:
+                                ( NumericReadout
+                                    inheritColor: 1
+                                    font: smallfont
+                                    transform: ( Translation -0.95 -0.2 ) 
+                                    format: "###.#"
+                                )
+                                // outline, only visible when airborne and above or below the breakpoints
+                                eng4n2box:
+                                ( LineLoop 
+                                    vertices: {
+                                        [ -1 -0.5 ]
+                                        [ -1  0.5 ]
+                                        [  1  0.5 ]
+                                        [  1  -0.5 ]
+                                    }
+                                )
+                            }
+                        )
+                    }
+                )
+                // low segment
+                ( DialArcSegment
+                    color:
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                102.4
+                            }
+                            breakcolors: {
+                                (rgb 1 1 0)
+                                (rgb 1 0 0)
+                            }
+                        )
+                    startAngle: 0
+                    outerRadius: 1.55
+                    slices: 10
+                    sweepAngle: 147.27
+                    dialRadius: 1.5
+                )
+                ( DialTickMarks
+                    quantity: 1
+                    color: yellow
+                    startAngle: 147.27
+                    length: -0.3
+                    dialRadius: 1.5
+                    linewidth: 2
+                ) 
+                // normal segment
+                ( DialArcSegment
+                    slices: 10
+                    color:
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                102.4
+                            }
+                            breakcolors: {
+                                (rgb 0 1 0)
+                                (rgb 1 0 0)
+                            }
+                        )
+                    startAngle: 147.27
+                    outerRadius: 1.55
+                    sweepAngle: 100.64
+                    dialRadius: 1.5
+                )
+                // high segment
+                ( DialArcSegment
+                    slices: 2
+                    color: red
+                    startAngle: 247.91
+                    sweepAngle: 22.09
+                    dialRadius: 1.5
+                    outerRadius: 1.55
+                )
+                ( DialTickMarks
+                    color: red
+                    startAngle: 247.91
+                    linewidth: 2
+                    quantity: 1
+                    dialRadius: 1.5 
+                    length: -0.3
+                )
+                
+                ( DialPointer
+                    color: 
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                61
+                                102.4
+                            }
+                            breakcolors: {
+                                (rgb 1 1 0)
+                                (rgb 1 1 1)
+                                (rgb 1 0 0)
+                            }
+                        )
+                    scalingTable:
+                        ( Table1
+                            // eng n value
+                            x: [ 0 110 ]
+                            // degrees
+                         data: [ 0 270 ]
+                        )
+                    components: {
+                        ( Line
+                            linewidth: 2
+                            vertices: { [ 0 0 ] [ 0 1.2 ] }
+                        )
+                        ( Polygon   
+                            vertices: {
+                                [ -0.1 1.2 ]
+                                [  0.1 1.2 ]
+                                [  0  1.5 ]
+                            }
+                        )
+                    }
+                )     
+            }
+        )   // end of engine 4 n2 gauge    
+
+        // tit label
+        ( AsciiText
+            transform: ( Translation -0.8 0 )
+            color: cyan
+            text: "TEMP"
+        )
+
+        // engine 1 tit gauge
+        eng1tit:
+        ( AnalogDial
+            transform: ( Translation -8 0 )
+            startAngle: 0
+            sweepAngle: 270 
+            dialRadius: 1.5
+            color: black
+            components: {
+                ( Instrument
+                    color: 
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                219
+                                915
+                                960
+                            }
+                            breakcolors: {
+                                (rgb 1 1 0)
+                                (rgb 1 1 1)
+                                (rgb 1 1 0)
+                                (rgb 1 0 0)
+                            }
+                        )
+                    components: {
+                        ( Graphic
+                            transform: ( Translation -1 0.7 )
+                            components: {
+                                eng1titro:
+                                ( NumericReadout
+                                    inheritColor: 1
+                                    font: smallfont
+                                    transform: ( Translation -0.95 -0.2 ) 
+                                    format: "###.#"
+                                )
+                                // outline, only visible when airborne and above or below the breakpoints
+                                eng1titbox:
+                                ( LineLoop 
+                                    vertices: {
+                                        [ -1 -0.5 ]
+                                        [ -1  0.5 ]
+                                        [  1  0.5 ]
+                                        [  1  -0.5 ]
+                                    }
+                                )
+                            }
+                        )
+                    }
+                )
+                // low segment - (0 - 219) celcius
+                ( DialArcSegment
+                    color:
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                961
+                            }
+                            breakcolors: {
+                                (rgb 1 1 0)
+                                (rgb 1 0 0)
+                            }
+                        )
+                    startAngle: 0
+                    outerRadius: 1.55
+                    slices: 5
+                    sweepAngle: 59.13
+                    dialRadius: 1.5
+                )
+                ( DialTickMarks
+                    quantity: 1
+                    color: yellow
+                    startAngle: 59.13
+                    length: -0.3
+                    dialRadius: 1.5
+                    linewidth: 2
+                ) 
+                
+                // normal segment 
+                ( DialArcSegment
+                    color:
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                961
+                            }
+                            breakcolors: {
+                                (rgb 0 1 0)
+                                (rgb 1 0 0)
+                            }
+                        )
+                    startAngle: 59.13
+                    outerRadius: 1.55
+                    sweepAngle: 187.65
+                    dialRadius: 1.5
+                    slices: 10
+                )
+                
+                // high segment - yellow
+                ( DialArcSegment 
+                    color: 
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                961
+                            }
+                            breakcolors: {
+                                (rgb 1 1 0)
+                                (rgb 1 0 0)
+                            }
+                        )
+                    startAngle: 246.78
+                    sweepAngle: 11.88
+                    dialRadius: 1.5
+                    outerRadius: 1.55
+                    slices: 2
+                )
+                ( DialTickMarks
+                    color: yellow
+                    startAngle: 246.78
+                    length: -0.3
+                    linewidth: 2
+                    dialRadius: 1.5
+                    quantity: 1
+                )
+               // high segment - red
+                ( DialArcSegment 
+                    color: red
+                    startAngle: 258.66
+                    sweepAngle: 11.34
+                    dialRadius: 1.5
+                    outerRadius: 1.55
+                    slices: 2
+                )
+                ( DialTickMarks
+                    color: red
+                    startAngle: 258.66
+                    linewidth: 2
+                    quantity: 1
+                    dialRadius: 1.5 
+                    length: -0.3
+                )
+               
+                ( DialPointer
+                    color: 
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                219
+                                915
+                                960
+                            }
+                            breakcolors: {
+                                (rgb 1 1 0)
+                                (rgb 1 1 1)
+                                (rgb 1 1 0)
+                                (rgb 1 0 0)
+                            }
+                        )
+                    scalingTable:
+                        ( Table1
+                            // eng temp
+                            x: [ 0 1000 ]
+                            // degrees
+                         data: [ 0 270 ]
+                        )
+                    components: {
+                        ( Line
+                            linewidth: 2
+                            vertices: { [ 0 0 ] [ 0 1.2 ] }
+                        )
+                        ( Polygon   
+                            vertices: {
+                                [ -0.1 1.2 ]
+                                [  0.1 1.2 ]
+                                [  0  1.5 ]
+                            }
+                        )
+                    }
+                )     
+            }
+        )   // end of engine 1 tit gauge
+
+        // engine 2 tit gauge
+        eng2tit:
+        ( AnalogDial
+            transform: ( Translation -4 0 )
+            startAngle: 0
+            sweepAngle: 270 
+            dialRadius: 1.5
+            color: black
+            components: {
+                ( Instrument
+                    color: 
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                219
+                                915
+                                960
+                            }
+                            breakcolors: {
+                                (rgb 1 1 0)
+                                (rgb 1 1 1)
+                                (rgb 1 1 0)
+                                (rgb 1 0 0)
+                            }
+                        )
+                    components: {
+                        ( Graphic
+                            transform: ( Translation -1 0.7 )
+                            components: {
+                                eng2titro:
+                                ( NumericReadout
+                                    inheritColor: 1
+                                    font: smallfont
+                                    transform: ( Translation -0.95 -0.2 ) 
+                                    format: "###.#"
+                                )
+                                // outline, only visible when airborne and above or below the breakpoints
+                                eng2titbox:
+                                ( LineLoop 
+                                    vertices: {
+                                        [ -1 -0.5 ]
+                                        [ -1  0.5 ]
+                                        [  1  0.5 ]
+                                        [  1  -0.5 ]
+                                    }
+                                )
+                            }
+                        )
+                    }
+                )
+                // low segment - (0 - 219) celcius
+                ( DialArcSegment
+                    color:
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                961
+                            }
+                            breakcolors: {
+                                (rgb 1 1 0)
+                                (rgb 1 0 0)
+                            }
+                        )
+                    startAngle: 0
+                    outerRadius: 1.55
+                    slices: 5
+                    sweepAngle: 59.13
+                    dialRadius: 1.5
+                )
+                ( DialTickMarks
+                    quantity: 1
+                    color: yellow
+                    startAngle: 59.13
+                    length: -0.3
+                    dialRadius: 1.5
+                    linewidth: 2
+                ) 
+                
+                // normal segment 
+                ( DialArcSegment
+                    color:
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                961
+                            }
+                            breakcolors: {
+                                (rgb 0 1 0)
+                                (rgb 1 0 0)
+                            }
+                        )
+                    startAngle: 59.13
+                    outerRadius: 1.55
+                    sweepAngle: 187.65
+                    dialRadius: 1.5
+                    slices: 10
+                )
+                
+                // high segment - yellow
+                ( DialArcSegment 
+                    color: 
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                961
+                            }
+                            breakcolors: {
+                                (rgb 1 1 0)
+                                (rgb 1 0 0)
+                            }
+                        )
+                    startAngle: 246.78
+                    sweepAngle: 11.88
+                    dialRadius: 1.5
+                    slices: 2
+                    outerRadius: 1.55
+                )
+                ( DialTickMarks
+                    color: yellow
+                    startAngle: 246.78
+                    length: -0.3
+                    linewidth: 2
+                    dialRadius: 1.5
+                    quantity: 1
+                )
+               // high segment - red
+                ( DialArcSegment 
+                    color: red
+                    startAngle: 258.66
+                    sweepAngle: 11.34
+                    dialRadius: 1.5
+                    slices: 2
+                    outerRadius: 1.55
+                )
+                ( DialTickMarks
+                    color: red
+                    startAngle: 258.66
+                    linewidth: 2
+                    quantity: 1
+                    dialRadius: 1.5 
+                    length: -0.3
+                )
+               
+                ( DialPointer
+                    color: 
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                219
+                                915
+                                960
+                            }
+                            breakcolors: {
+                                (rgb 1 1 0)
+                                (rgb 1 1 1)
+                                (rgb 1 1 0)
+                                (rgb 1 0 0)
+                            }
+                        )
+                    scalingTable:
+                        ( Table1
+                            // eng temp
+                            x: [ 0 1000 ]
+                            // degrees
+                         data: [ 0 270 ]
+                        )
+                    components: {
+                        ( Line
+                            linewidth: 2
+                            vertices: { [ 0 0 ] [ 0 1.2 ] }
+                        )
+                        ( Polygon   
+                            vertices: {
+                                [ -0.1 1.2 ]
+                                [  0.1 1.2 ]
+                                [  0  1.5 ]
+                            }
+                        )
+                    }
+                )     
+            }
+        )   // end of engine 2 tit gauge
+
+        // engine 3 tit gauge
+        eng3tit:
+        ( AnalogDial
+            transform: ( Translation 4 0 )
+            startAngle: 0
+            sweepAngle: 270 
+            dialRadius: 1.5
+            color: black
+            components: {
+                ( Instrument
+                    color: 
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                219
+                                915
+                                960
+                            }
+                            breakcolors: {
+                                (rgb 1 1 0)
+                                (rgb 1 1 1)
+                                (rgb 1 1 0)
+                                (rgb 1 0 0)
+                            }
+                        )
+                    components: {
+                        ( Graphic
+                            transform: ( Translation -1 0.7 )
+                            components: {
+                                eng3titro:
+                                ( NumericReadout
+                                    inheritColor: 1
+                                    font: smallfont
+                                    transform: ( Translation -0.95 -0.2 ) 
+                                    format: "###.#"
+                                )
+                                // outline, only visible when airborne and above or below the breakpoints
+                                eng3titbox:
+                                ( LineLoop 
+                                    vertices: {
+                                        [ -1 -0.5 ]
+                                        [ -1  0.5 ]
+                                        [  1  0.5 ]
+                                        [  1  -0.5 ]
+                                    }
+                                )
+                            }
+                        )
+                    }
+                )
+                // low segment - (0 - 219) celcius
+                ( DialArcSegment
+                    color:
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                961
+                            }
+                            breakcolors: {
+                                (rgb 1 1 0)
+                                (rgb 1 0 0)
+                            }
+                        )
+                    startAngle: 0
+                    outerRadius: 1.55
+                    sweepAngle: 59.13
+                    dialRadius: 1.5
+                    slices: 5
+                )
+                ( DialTickMarks
+                    quantity: 1
+                    color: yellow
+                    startAngle: 59.13
+                    length: -0.3
+                    dialRadius: 1.5
+                    linewidth: 2
+                ) 
+                
+                // normal segment 
+                ( DialArcSegment
+                    color:
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                961
+                            }
+                            breakcolors: {
+                                (rgb 0 1 0)
+                                (rgb 1 0 0)
+                            }
+                        )
+                    startAngle: 59.13
+                    outerRadius: 1.55
+                    sweepAngle: 187.65
+                    slices: 10
+                    dialRadius: 1.5
+                )
+                
+                // high segment - yellow
+                ( DialArcSegment 
+                    color: 
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                961
+                            }
+                            breakcolors: {
+                                (rgb 1 1 0)
+                                (rgb 1 0 0)
+                            }
+                        )
+                    startAngle: 246.78
+                    sweepAngle: 11.88
+                    dialRadius: 1.5
+                    slices: 2
+                    outerRadius: 1.55
+                )
+                ( DialTickMarks
+                    color: yellow
+                    startAngle: 246.78
+                    length: -0.3
+                    linewidth: 2
+                    dialRadius: 1.5
+                    quantity: 1
+                )
+               // high segment - red
+                ( DialArcSegment 
+                    color: red
+                    startAngle: 258.66
+                    sweepAngle: 11.34
+                    slices: 2
+                    dialRadius: 1.5
+                    outerRadius: 1.55
+                )
+                ( DialTickMarks
+                    color: red
+                    startAngle: 258.66
+                    linewidth: 2
+                    quantity: 1
+                    dialRadius: 1.5 
+                    length: -0.3
+                )
+               
+                ( DialPointer
+                    color: 
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                219
+                                915
+                                960
+                            }
+                            breakcolors: {
+                                (rgb 1 1 0)
+                                (rgb 1 1 1)
+                                (rgb 1 1 0)
+                                (rgb 1 0 0)
+                            }
+                        )
+                    scalingTable:
+                        ( Table1
+                            // eng temp
+                            x: [ 0 1000 ]
+                            // degrees
+                         data: [ 0 270 ]
+                        )
+                    components: {
+                        ( Line
+                            linewidth: 2
+                            vertices: { [ 0 0 ] [ 0 1.2 ] }
+                        )
+                        ( Polygon   
+                            vertices: {
+                                [ -0.1 1.2 ]
+                                [  0.1 1.2 ]
+                                [  0  1.5 ]
+                            }
+                        )
+                    }
+                )     
+            }
+        )   // end of engine 3 tit gauge
+
+        // engine 4 tit gauge
+        eng4tit:
+        ( AnalogDial
+            transform: ( Translation 8 0 )
+            startAngle: 0
+            sweepAngle: 270 
+            dialRadius: 1.5
+            color: black
+            components: {
+                ( Instrument
+                    color: 
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                219
+                                915
+                                960
+                            }
+                            breakcolors: {
+                                (rgb 1 1 0)
+                                (rgb 1 1 1)
+                                (rgb 1 1 0)
+                                (rgb 1 0 0)
+                            }
+                        )
+                    components: {
+                        ( Graphic
+                            transform: ( Translation -1 0.7 )
+                            components: {
+                                eng4titro:
+                                ( NumericReadout
+                                    inheritColor: 1
+                                    font: smallfont
+                                    transform: ( Translation -0.95 -0.2 ) 
+                                    format: "###.#"
+                                )
+                                // outline, only visible when airborne and above or below the breakpoints
+                                eng4titbox:
+                                ( LineLoop 
+                                    vertices: {
+                                        [ -1 -0.5 ]
+                                        [ -1  0.5 ]
+                                        [  1  0.5 ]
+                                        [  1  -0.5 ]
+                                    }
+                                )
+                            }
+                        )
+                    }
+                )
+                // low segment - (0 - 219) celcius
+                ( DialArcSegment
+                    color:
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                961
+                            }
+                            breakcolors: {
+                                (rgb 1 1 0)
+                                (rgb 1 0 0)
+                            }
+                        )
+                    startAngle: 0
+                    slices: 5
+                    outerRadius: 1.55
+                    sweepAngle: 59.13
+                    dialRadius: 1.5
+                )
+                ( DialTickMarks
+                    quantity: 1
+                    color: yellow
+                    startAngle: 59.13
+                    length: -0.3
+                    dialRadius: 1.5
+                    linewidth: 2
+                ) 
+                
+                // normal segment 
+                ( DialArcSegment
+                    color:
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                961
+                            }
+                            breakcolors: {
+                                (rgb 0 1 0)
+                                (rgb 1 0 0)
+                            }
+                        )
+                    startAngle: 59.13
+                    outerRadius: 1.55
+                    sweepAngle: 187.65
+                    slices: 10
+                    dialRadius: 1.5
+                )
+                
+                // high segment - yellow
+                ( DialArcSegment 
+                    color: 
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                961
+                            }
+                            breakcolors: {
+                                (rgb 1 1 0)
+                                (rgb 1 0 0)
+                            }
+                        )
+                    startAngle: 246.78
+                    sweepAngle: 11.88
+                    dialRadius: 1.5
+                    slices: 2
+                    outerRadius: 1.55
+                )
+                ( DialTickMarks
+                    color: yellow
+                    startAngle: 246.78
+                    length: -0.3
+                    linewidth: 2
+                    dialRadius: 1.5
+                    quantity: 1
+                )
+               // high segment - red
+                ( DialArcSegment 
+                    color: red
+                    startAngle: 258.66
+                    sweepAngle: 11.34
+                    slices: 2
+                    dialRadius: 1.5
+                    outerRadius: 1.55
+                )
+                ( DialTickMarks
+                    color: red
+                    startAngle: 258.66
+                    linewidth: 2
+                    quantity: 1
+                    dialRadius: 1.5 
+                    length: -0.3
+                )
+               
+                ( DialPointer
+                    color: 
+                        ( ColorRotary
+                            breakpoints: {
+                                0 
+                                219
+                                915
+                                960
+                            }
+                            breakcolors: {
+                                (rgb 1 1 0)
+                                (rgb 1 1 1)
+                                (rgb 1 1 0)
+                                (rgb 1 0 0)
+                            }
+                        )
+                    scalingTable:
+                        ( Table1
+                            // eng temp
+                            x: [ 0 1000 ]
+                            // degrees
+                         data: [ 0 270 ]
+                        )
+                    components: {
+                        ( Line
+                            linewidth: 2
+                            vertices: { [ 0 0 ] [ 0 1.2 ] }
+                        )
+                        ( Polygon   
+                            vertices: {
+                                [ -0.1 1.2 ]
+                                [  0.1 1.2 ]
+                                [  0  1.5 ]
+                            }
+                        )
+                    }
+                )     
+            }
+        )   // end of engine 4 tit gauge      
+
+
+        // Fuelf Flow label
+        ( AsciiText
+            transform: ( Translation -0.3 -4 )
+            color: cyan
+            text: "FF"
+        )
+        ( AsciiText
+            color: cyan
+            transform: ( Translation -1.1 -4.7 )
+            text: "x1000"
+        )
+
+        // engine 1 fuel flow
+        eng1ff:
+        ( AnalogDial
+            transform: ( Translation -8 -4 )
+            startAngle: 0
+            sweepAngle: 270 
+            dialRadius: 1.5
+            color: black
+            components: {
+                ( Graphic
+                    transform: ( Translation -1 0.7 )
+                    components: {
+                        eng1ffro:
+                        ( NumericReadout
+                            color: white
+                            font: smallfont
+                            transform: ( Translation -0.95 -0.2 ) 
+                            format: "##.#"
+                        )
+                    }
+                )
+                ( DialArcSegment
+                    color: green
+                    startAngle: 0
+                    sweepAngle: 270
+                    outerRadius: 1.55
+                    slices: 20
+                    dialRadius: 1.5
+                )
+                ( DialPointer
+                    color: white
+                    scalingTable:
+                        ( Table1
+                            // ftit PPH
+                            x: [ 0 16 ]
+                            // rotation
+                         data: [ 0 270 ]
+                        )
+                    components: {
+                        ( Line
+                            linewidth: 2
+                            vertices: { [ 0 0 ] [ 0 1.2 ] }
+                        )
+                        ( Polygon   
+                            vertices: {
+                                [ -0.1 1.2 ]
+                                [  0.1 1.2 ]
+                                [  0  1.5 ]
+                            }
+                        )
+                    }
+                )
+            }
+        )
+
+        // engine 2 fuel flow
+        eng2ff:
+        ( AnalogDial
+            transform: ( Translation -4 -4 )
+            startAngle: 0
+            sweepAngle: 270 
+            dialRadius: 1.5
+            color: black
+            components: {
+                ( Graphic
+                    transform: ( Translation -1 0.7 )
+                    components: {
+                        eng2ffro:
+                        ( NumericReadout
+                            color: white
+                            font: smallfont
+                            transform: ( Translation -0.95 -0.2 ) 
+                            format: "##.#"
+                        )
+                    }
+                )
+                ( DialArcSegment
+                    color: green
+                    startAngle: 0
+                    sweepAngle: 270
+                    outerRadius: 1.55
+                    slices: 20
+                    dialRadius: 1.5
+                )
+                ( DialPointer
+                    color: white
+                    scalingTable:
+                        ( Table1
+                            // ftit PPH
+                            x: [ 0 16 ]
+                            // rotation
+                         data: [ 0 270 ]
+                        )
+                    components: {
+                        ( Line
+                            linewidth: 2
+                            vertices: { [ 0 0 ] [ 0 1.2 ] }
+                        )
+                        ( Polygon   
+                            vertices: {
+                                [ -0.1 1.2 ]
+                                [  0.1 1.2 ]
+                                [  0  1.5 ]
+                            }
+                        )
+                    }
+                )
+            }
+        )
+
+        // engine 3 fuel flow
+        eng3ff:
+        ( AnalogDial
+            transform: ( Translation 4 -4 )
+            startAngle: 0
+            sweepAngle: 270 
+            dialRadius: 1.5
+            color: black
+            components: {
+                ( Graphic
+                    transform: ( Translation -1 0.7 )
+                    components: {
+                        eng3ffro:
+                        ( NumericReadout
+                            color: white
+                            font: smallfont
+                            transform: ( Translation -0.95 -0.2 ) 
+                            format: "##.#"
+                        )
+                    }
+                )
+                ( DialArcSegment
+                    color: green
+                    startAngle: 0
+                    sweepAngle: 270
+                    outerRadius: 1.55
+                    slices: 20
+                    dialRadius: 1.5
+                )
+                ( DialPointer
+                    color: white
+                    scalingTable:
+                        ( Table1
+                            // ftit PPH
+                            x: [ 0 16 ]
+                            // rotation
+                         data: [ 0 270 ]
+                        )
+                    components: {
+                        ( Line
+                            linewidth: 2
+                            vertices: { [ 0 0 ] [ 0 1.2 ] }
+                        )
+                        ( Polygon   
+                            vertices: {
+                                [ -0.1 1.2 ]
+                                [  0.1 1.2 ]
+                                [  0  1.5 ]
+                            }
+                        )
+                    }
+                )
+            }
+        )
+
+        // engine 4 fuel flow
+        eng4ff:
+        ( AnalogDial
+            transform: ( Translation 8 -4 )
+            startAngle: 0
+            sweepAngle: 270 
+            dialRadius: 1.5
+            color: black
+            components: {
+                ( Graphic
+                    transform: ( Translation -1 0.7 )
+                    components: {
+                        eng4ffro:
+                        ( NumericReadout
+                            color: white
+                            font: smallfont
+                            transform: ( Translation -0.95 -0.2 ) 
+                            format: "##.#"
+                        )
+                    }
+                )
+                ( DialArcSegment
+                    color: green
+                    startAngle: 0
+                    slices: 20
+                    sweepAngle: 270
+                    outerRadius: 1.55
+                    dialRadius: 1.5
+                )
+                ( DialPointer
+                    color: white
+                    scalingTable:
+                        ( Table1
+                            // ftit PPH
+                            x: [ 0 16 ]
+                            // rotation
+                         data: [ 0 270 ]
+                        )
+                    components: {
+                        ( Line
+                            linewidth: 2
+                            vertices: { [ 0 0 ] [ 0 1.2 ] }
+                        )
+                        ( Polygon   
+                            vertices: {
+                                [ -0.1 1.2 ]
+                                [  0.1 1.2 ]
+                                [  0  1.5 ]
+                            }
+                        )
+                    }
+                )                    
+            }
+        )             
+    }
+)
+

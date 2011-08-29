@@ -1,0 +1,12 @@
+Masses: (Kilograms: grams, slugs)
+http://oncampus.richmond.edu/academics/as/education/projects/webunits/measurement/mass1.html - University of Richmond
+	1 kilogram = 1000 grams
+	
+http://www.ex.ac.uk/cimt/dictunit/ccmass.htm - University of Exeter
+	1 kilogram = 0.0685 slugs
+	
+http://iul.eng.fiu.edu/Teaching/controls/course/summer2001/Appendices.pdf - Florida International University
+	1 kilogram = 0.06852 slugs
+
+http://faculty.millikin.edu/~jaskill.nsm.faculty.mu/slug.html - Millikin University
+	1 kilogram = 0.068521765856791590056822248948213 slugs

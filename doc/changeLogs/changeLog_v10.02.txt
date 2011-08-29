@@ -1,0 +1,471 @@
+
+================================================================================
+Changes since v9.07b
+================================================================================
+
+--------------------------------------------------------------------------------
+EDL/EPP changes ---
+
+
+--------------------------------------------------------------------------------
+General changes ---
+
+
+--------------------------------------------------------------------------------
+basic:
+
+   BcHandler class
+      1) bindSocket() -- changed the value assigned to the host address 
+         from 'INADDR_ANY' to getLocalAddr(), which can be set using
+         the 'localIpAddress' slot.
+
+   Component class
+      1) Member functions isFrozen() and isNotFrozen() are now virtual
+      2) Added member function isSelectedComponent(), which returns true if
+         a single subcomponent has been selected for single execution (even
+         if the subcomponent wasn't found).
+
+   Function classes
+      1) All functions parameters and returned values are now type 'double'
+
+   Integer class
+      1) Constructor now passes a 'double' to the base Number class.
+
+   List class
+      1) Change parameter types on the constructor and the getNumberList()
+         function from 'int' to 'unsigned int'
+
+   macros.h
+      1) Just in case someone does this:  p = p; add a guard around the
+         call to copyData() in the assignment operator functions of the
+         form: ThisType& operator=(const ThisType& org)
+
+   Matrix, CVector, RVector classes
+      1) new classes -- beta versions: still needs some additional testing
+      2) General updates
+      3) Removed the Householder methods (temporary)
+
+   MulticastHandler class
+      1) bindSocket() -- changed the value assigned to the host address 
+         from 'INADDR_ANY' to getLocalAddr(), which can be set using
+         the 'localIpAddress' slot.
+
+   Nav class
+      1) Numerous new functions (see Nav.h)
+      2) All function parameters are now 'double'
+      3) Nav.h -- Corrected the argument list for the vll2bd() function
+
+   Object class
+      1) Removed function formName(); use getFormName() instead
+      2) Added function getClassName(), which returns the full C++ class name
+      3) Added a table of known Eaagles classes
+         -- Added function writeClassList() to write out the list of known classes
+            with their form names, full class names and the number of objects
+            instanciated for each class
+      4) SET_SLOTTABLE macro has been renamed to STANDARD_CONSTRUCTOR(), and it's required
+         in all constructor functions
+      5) Added macro STANDARD_DESTRUCTOR(), which is required in all destructor functions.
+         Only needed if defining your own destructor (i.e. using IMPLEMENT_PARTIAL_SUBCLASS()
+         and IMPLEMENT_ABSTRACT_SUBCLASS() macros)  This is handled by the IMPLEMENT_SUBCLASS()
+         macro.
+
+   osg package:
+      1) Added add and subtract operators to the matrix classes
+      2) Added scalar multiplication operators to the matrix classes
+
+   PairSteam class
+      1) Changed parameter type on the getPosition function  from 'int' to 'unsigned int'
+
+   parser:
+      1) Lexical.l --  Octal and hex inputs values -- fixed how the sign bit is handled
+
+   Rng class
+      1) Added the Rayleigh Probability Distribution Function, rayleigh()
+
+   SlotTable class
+      1) index() function modified: when search for the slot name, it now searches
+         the local slot names before searching the base class slot names.
+
+   Terrain class
+      1) Added the targetOcculting2() and occultCheck2() functions that check
+         for terrain occulting using the look angle to the target instead of
+         the target's position.
+
+   QQueue class
+      1) Removed the peek() function
+      2) Added the peek0() function that corrects the peek order.  Peek() will now
+         the items starting at the front of the queue (i.e., the next get()).
+         Will rename peek0() back to peek() after the next release.
+
+   support.h
+      1) Move average earth radius (ERAD) to the Basic::Nav class (Nav::ERAD)
+
+      2) Added new sign() function
+
+      3) Added new double and float versions of preMultVec4Array(),
+         preMultVec3Array(), postMultVec4Array() and postMultVec3Array()
+         functions
+
+      4) Added new double and float versions of the sinCos(), sinArray(), cosArray(),
+         sinCosArray(), acosArray(), atan2Array(), sqrtArray(), pow10Array(),
+         and multArrayConst() functions
+
+      5) Added three optional parameters, 'day', 'month' and 'year', to the
+         getTimeUtc() function
+
+      6) Add two versions of a new function, getTime(), that returns the UTC
+         time in seconds since midnight (00:00:00), January 1, 1970.
+
+      7) Add two time conversion functions, convertSec2Ymdhms() and convertYmdhms2Sec(),
+         which convert seconds since midnight (00:00:00), January 1, 1970 to/from
+         year, month, day, hour, minute and second.
+
+      8) Added two NTP timestamp conversion functions, convertSec2Ntp() and convertNtp2Sec2(),
+         that convert NTP timestamps to/from seconds since midnight (00:00:00), January 1, 1970
+
+      9) Removed the functions lcSystemTime2Ntp(), lcComputerTimeNtp() and lcNtp2SystemTime
+
+      10) 'PI' is now type 'double'
+
+      11) 'lightSpeed' and 'boltzmann' have been renamed to 'LIGHTSPEED' and 'BOLTZMANN'
+          and are now type 'double'
+
+      12) added the Kronecker delta, kron(), function
+
+      13) added the signum, sgn(), function
+
+      14) added the getDigits() function
+
+   Vectors
+      1) added the public ref() and unref() wrappers functions
+
+   units:
+      1) Distances: moved the conversion constants DEG2NM and NM2DEG to the
+         Basic::Nav class (Nav::DEG2NM and Nav::NM2DEG)
+      2) Distances: added statue miles to/from feet conversion constants (SM2FT and FT2SM)
+      3) Distances: adjusted nautical miles to meters conversion constant, NM2M,
+         from 1851.999942 to 1852.0
+      3) Distances: adjusted statue miles to meters conversion constant, SM2M,
+         from 1609.34313095 to 1609.344
+
+--------------------------------------------------------------------------------
+basic/units:
+
+--------------------------------------------------------------------------------
+basicGL:
+
+   GlutDisplay class
+      1) Added the pickWidth and pickHeight slots that allow changing the size
+         of the pick area.
+
+   Readouts.*
+      1) Changed several interal variables from float to double
+
+
+--------------------------------------------------------------------------------
+dafif:
+ 
+--------------------------------------------------------------------------------
+dis:
+   
+   -- Modified to use the player's geocentric (ECEF) data
+
+
+--------------------------------------------------------------------------------
+instruments:
+
+
+--------------------------------------------------------------------------------
+maps:
+
+
+--------------------------------------------------------------------------------
+otw:
+
+   CigiCl
+      1) Now derived from Basic::Component (was Object)
+
+   OtwCigiCl class
+      1) added OnHotResp() callback method
+
+   CigiClNetwork class
+      1) createCigiProcess() -- fixed bug -- now passing the correct parent
+         when creating the NetThread(), and modified NetThread::userFunc()
+         to use the correct parent object type.
+
+--------------------------------------------------------------------------------
+simulation:
+
+   --- Changed #include directives in several files to the full
+   'openeaagles/simulation/*.h" path name
+
+   Agm class
+      1) Function calculateVectors() modified to optionally compute the vectors
+         based on being passed a vector pointer or a null(0) pointer.
+
+   AngleOnlyTrackManager class
+      1) aNow setting track position only if "haveU[i]" is true.
+
+   Antenna class
+      1) All 'LCreal', osg::Vec2, osg::Vec3 and osg::Matrix are changed to double,
+         osg::Vec2d, osg::Vec3d and osg::Matrixd, respectively.
+      2) Modified the onRfEmissionEvent() function to use the new SensorMgr::getTgtLosVec()
+         function to access the LOS vector
+
+   Autopilot.cpp --
+      1) changed various member funciton parameter and member variables to type 'double'
+      
+   Gimbal class
+      1) All 'LCreal', osg::Vec2, osg::Vec3 and osg::Matrix are changed to double,
+         osg::Vec2d, osg::Vec3d and osg::Matrixd, respectively.
+      2) Removed the Tdb class from the Gimbal.* files; now located in the Tdb.* files
+      3) no longer passes emissions to subcomponent gimbals that are powered off.
+      4) If only a single subcomponent gimbal is selected then the emissions are only
+         passed to the selected subcomponent gimbal.
+
+   Gun class
+      1) Transposed the rotational matrix and renamed the function getRotationalMatrix()
+      to getRotMat().  Now returns a transformation matrix (M) from the player's body
+      coordinates (Vb) to the gun's coordinates (Vg)
+      (i.e., Vg = M * Vb)
+
+   Iff class
+      1) Renamed slot 'whichmode4' to 'whichMode4'
+
+   IrSeeker class
+      1) added the processPlayersOfInterest() function
+      2) added earth stabilized and non-earth stabilized gimbal calculations
+      
+   IrSensor class
+      1) Using the updated QQueue.peek0() function
+
+   IrSystem class
+      1) Removed the seekerEnabled flag; use the 'queries disabled" flag
+
+   Missile class
+      1) weaponGuidance() -- Fusing logic and point of closest
+         approach now use target truth data.
+
+   Navigation class
+      1) Transposed the rotational matrix and renamed the function getRotationalMatrix()
+         to getRotMat().  Now returns a transformation matrix (M) from the system's platform
+         coordinates (Vp) to body coordinates (Vb)
+         (i.e., Vb = M * Vp)
+      1a) Removed the rotational matrix parameter from the setAttidue() function
+      1b) The rotation matrix is now type 'double' (osg::Matrixd)
+      2) The rotational angles, altitudes, mag var and system time are now type 'double'
+      3) Changed all 'inline' functions to real functions (located in the *.cpp file)
+      4) Added protected 'set' functions
+      5) Added wind functions: areWindsValid(), getWindDirD() and getWindSpeedKts()
+         --- Winds are not currently being driven
+      6) Removed functions getRefLatitude() and getRefLongitude()
+         --- Now use the Simulation class functions directly
+
+
+   NetIO class
+      1) createIPlayer() -- now setting the new player's container pointer (bug fix)
+      2) Fucntion createIPlayer() now sets the player's geocentric
+         velocity, accelertion and angular rate
+
+   Nib class
+      1) member variables 'emitterSysHandler', 'numEmissionSystems' and
+         'emissionSystemsIndex' were moved from private to protected.
+         (Tempoary fix to a problem that will be addressed)
+
+   Player class
+      1) Transposed the rotational matrix and renamed the function getRotationalMatrix()
+         to getRotMat().  Now returns a transformation matrix (M) from the local inertial
+         coordinates (Vi) to the player's body coordinates (Vb)
+         (i.e., Vb = M * Vi)
+
+      1a) Also, renamed the function getRotationalMatrix() to setRotMat(), which accepts
+         a matrix transposed from the old version (see #1 above).
+
+      2) Added member function getWorldMat(), which returns the transformation matrix (M)
+         from the ECEF coordinates (Vw) to the player's inertial coordinates (Vi)
+         (i.e., Vi = M * Vw)
+         
+      3) Added member function getRotMatW2B(), which returns the transformation matrix (M)
+         from the ECEF coordinates (Vw) to the player's body coordinates (Vb)
+         (i.e., Vb = M * Vw)
+     
+      4) Added methods to set the velocity and acceleration vectors in body, local and
+         world coordinates; setting the velocity or acceleration in one coordinate system
+         now sets the vectors in all three coordinate systems.
+      
+      5) Modified how the player's position is updated (see Player.h)
+      
+      6) Added the function isPositionVectorValid() that returns true if the gaming
+         area position vector is valid (see the Simulation 'gamingAreaRange' slot).
+      
+      7) Euler angles (i.e., pitch, roll and yaw) are now type double.
+          
+      8) Removed the getEulerRates() function
+         
+      9) Added a setAltitude() function
+      
+      10) Added an optional 'slaved' parameter to the setPosition(), setAltitude(),
+         setPositionLL(), setPositionLLA() and setGeocPosition() member functions.
+         The 'slaved' flag indicates that the position and/or altitude is not to be
+         updated by the player's dynamics() function.  (default: false)
+         
+      11) Removed the member functions setSlavedAltitude(), setSlavedPositionXY() and
+          setSlavedPositionLL(); now using the set position functions with the 'slaved' flag
+      
+      12) Added Player::isFrozen(), which overrides Component::isFrozen().  Now returns true
+          if either the player's freeze flag or the simulation's freeze flag is set. 
+         
+      13a) onRfEmissionEventPlayer() -- now both local and networked type players passes
+          emissions to their own gimbal (previously only local players did).
+      13b) onRfEmissionEventPlayer() -- no longer passes emissions to the player's own
+          gimbal if the gimbal is powered off.
+      
+      14) Modified the onRfEmissionEventPlayer() and onIrMsgEventPlayer() functions to 
+          use the new SensorMgr::getTgtLosVec() function to access the LOS vector
+
+      15a) aer2xyz() and aer2xyzArray() changed from using Vec4 to using Vec3
+      15b) aer2xyz(): renamed the variable 'n', which is being returned, to 'cnt' (bug fix).
+      15c) Move the functions aer2xyz() and aer2xyzArray() to the Basic::Nav class
+      
+      16) Added slots to accept test (euler or body) angular rates.  This allows a player,
+          without a dynamics model, to spin as required for testing.
+
+      17) Added the getInitAngles() member function that returns a vector
+          with the initial conditions euler angles 
+
+      18) Fucntion deadReckonPosition() now sets the player's geocentric
+          velocity, accelertion and angular rate
+
+   Radar class
+      1) Added an integration gain
+
+   Radio class
+      1) Updated to handle channel/frequency pairs
+
+   RfSensor class
+      1) Set default initial range to 50 nm
+
+   RfSystem class
+      1) Added the setReceiverNoise() function
+      2) Function computeReceiverNoise() is now 'virtual' and 'protected' (was 'private')
+      3) Added the affectsRfSystem() functions, which check to see if an emission
+         will have an effect on the R/F system
+
+   Route class
+      1) function getStptIndex() now returns an 'unsigned int' type
+      2) function getAutoSequence() now returns a 'bool' type
+      3) function directTo(), insertSteerpoint() and findSteerpoint() now take
+         an 'unsigned int' type parameter
+
+   RfSystem class
+      
+   ScanGimbal class
+      1) All 'LCreal', osg::Vec2, osg::Vec3 and osg::Matrix are changed to double,
+         osg::Vec2d, osg::Vec3d and osg::Matrixd, respectively.
+      2) added the getRevPerSec() member function
+
+   SensorMgr class
+      1) Added a LOS vector from the target back to ownship in the target's
+         NED coordinates; added funcitons getTgtLosVec() and setTgtLosVec()
+      2) Vectors now type 'double' (i.e., osg::Vec3d)
+      3) Renamed functions getAzimuthAoa(), getElevationAoa() and getAoaVector()
+         to getAzimuthAoi(), getElevationAoi() and getAoiVector(); to be
+         consistent with other Angle Of Incidence (AOI) functions.
+
+   SimpleStoresMgr class
+      1) The getNext*() functions now return the pointer to the flyout weapon
+         when the weapon is in the release hold (i.e., prerelease) mode.
+
+   Simulation class
+      1) Added the new slot 'gamingAreaRange' that sets an optional maximum range
+         for the simulation gaming area, and added the function getMaxRefRange()
+         that returns the max range is meters.
+
+      2a) Renamed member function getTimeSimulation() to getSimTimeOfDay()
+      2b) Renamed member function getTimeUTC to getSysTimeOfDay()
+      2c) Removed member function setTimeUTC()
+
+      3) Added the member function getWorldMat(), which returns the transformation matrix
+         from the ECEF system to the gaming area NED tangent plane 
+
+      4) Added the member function getEarthRadiusM(), which returns the earth's
+         radius at the center of the gaming area (i.e., ref point).
+         ### currently this is returning a constant based on Basic::Nav::ERAD60 ###
+         
+      5) Added new function, getSimTimeValues(), that returns the simulation time as
+         seconds since midnight, January 1, 1970.
+                  
+      6) Added new slots, 'year', 'month' and 'day', the command the initial simulated
+         time to start at the specified date.  Only entered values are modified from
+         the current date.  Example, if the current date is Jan 1st, 2010 and if 'day'
+         is set to 15 then the simulated date is Jan 15th 2010.
+
+      7) Added gaming area max range
+
+      8) getSimTimeValues() is now a 'const' function
+
+   Station class
+      1) The startup reset timer change to only provide a startup reset event as
+         requested by the 'startupResetTimer' slot.  The new default is no startup
+         reset event.  And the deleteData() function now unref()'s the reset time object.
+
+   Steerpoint class
+      1) Slot functions are now protected
+
+   Stores class
+
+   StoresMgr class
+      1) Renamed it's form name to "BaseStoresMgr"; the class SimpleStoresMgr is
+         still the default "StoresMgr" form.
+
+   System class
+      1) findOwnship() -- removed the "unabled to locate ownship" warning message
+      2) Added System::isFrozen(), which overrides Component::isFrozen().  Now returns true
+         if either the system's freeze flag or its ownship's freeze flag is set
+         (see also Player::isFrozen())
+
+   Tdb class
+      1) Now located in files Tdb.cpp and Tdb.h; removed from the Gimbal.* files
+     
+      2) Changed member function name from getTarget() to getTargets()
+      
+      3) processPlayers() Fixed bug in terrain occulting; was using ownship location
+         instead of the target coordinates
+         
+      4) Now supports ECEF player coordinates
+      
+      5) Added that new function getTargetLosVectors() that returns the array of line
+         of sight vectors from the targets player back to the ownship player (in the
+         target's NED coordinates).  These vectors are computed in computeBoresightData()
+
+      6) processPlayers() -- 
+         a) added a horizon check
+         b) modified the terrain occulting check for space vehicles
+
+   TrackManager class
+      1) added the setMaxTrackAge() member function; age must be greater than zero.
+
+   Weapon class
+      1) Removed the member functions setSlavedAltitude(), setSlavedPositionXY() and
+         setSlavedPositionLL(); see changes to the Player class
+      2) Added a new public member function computeTargetLocation(), which computes
+         the weapon's location relative to a given target's body coordinates
+      3) Renamed the protected member function computeLocationOfDetonation() to
+         setTgtDetonationLocation(), and it's now using computeTargetLocation()
+         to compute the location.
+      4) reset() -- now sets the launcher vehicle pointer for weapons that are
+         not flyout weapons.  (bug fix)
+      5) dynamics() -- in PRE_RELEASE mode only -- now using initial conditions
+         angles to compute the weapon's current euler angles (bug fix)
+      6) Added a target player name (for testing only); new slot 'testTgtName'
+
+--------------------------------------------------------------------------------
+vehicles:
+
+   JSBSimModel
+      1) dynamics() -- modified how the velocity vector, acceration vector and euler
+         are passed to the base Player class (see Player class changes)
+
+   RacModel
+      1) updateRAC() -- modified how the velocity vector, acceration vector and euler
+         are passed to the base Player class (see Player class changes)

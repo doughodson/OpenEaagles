@@ -1,0 +1,104 @@
+// here is the screw over the nozzle
+( Graphic
+    components: {
+        ( Circle
+            color: gray2
+            radius: 0.15
+            slices: 50
+            filled: 1
+        )
+        ( Circle
+            color: black
+            radius: 0.4
+            slices: 50
+            filled: 1
+        )
+    }
+)
+
+noz:  
+// send this using UPDATE_INSTRUMENTS
+( DialPointer
+    transform: ( Translation 0 0.03 )
+    color: white
+    startAngle: 60
+    scalingTable: 
+        ( Table1
+            // noz percentage
+            x: [ 0 100 ]
+            // angle
+            data: [ 0 240 ]
+        )
+    components: {
+        ( Polygon
+            color: white
+            vertices: {
+                [ -0.1 0 ]
+                [ 0.1 0 ]
+                [ 0 1.5 ]
+            }
+        )
+    }
+)
+
+// background graphics (replaces texture)
+( Graphic
+    components: {
+        ( AsciiText
+            color: white
+            transform: ( Translation -1.2 2.35 )
+            font: smallfont
+            text: "NOZ POS"
+        )
+        ( AsciiText
+            color: white
+            transform: ( Translation -1.2 1.8 )
+            font: smallfont
+            text: "% OPEN"
+        )
+        
+        // we have to draw each line individually, because they are non-linear and not symettrical.
+        // 0 percent
+        ( Line color: white transform: ( Rotation -1.047 ) linewidth: 3 vertices: { [ 0 2.8 ] [ 0 3.3 ] } )
+        ( AsciiText inheritColor: 1 transform: ( Translation 1.8 0.75 ) text: "0" )   
+        // 10 percent
+        ( Line transform: ( Rotation -1.466 ) linewidth: 3 vertices: { [ 0 3 ] [ 0 3.3 ] } )   
+        // 20 percent
+        ( Line transform: ( Rotation -1.885 ) linewidth: 3 vertices: { [ 0 2.8 ] [ 0 3.3 ] } )   
+        ( AsciiText inheritColor: 1 transform: ( Translation 1.5 -1.1 ) text: "20" )   
+        // 30 percent
+        ( Line transform: ( Rotation -2.304 ) linewidth: 3 vertices: { [ 0 3 ] [ 0 3.3 ] } )   
+        // 40 percent
+        ( Line transform: ( Rotation -2.723 ) linewidth: 3 vertices: { [ 0 2.8 ] [ 0 3.3 ] } )   
+        ( AsciiText inheritColor: 1 transform: ( Translation 0.5 -2.3 ) text: "40" )   
+        // 50 percent
+        ( Line transform: ( Rotation -3.14 ) linewidth: 3 vertices: { [ 0 3 ] [ 0 3.3 ] } )   
+        // 60 percent
+        ( Line transform: ( Rotation -3.56 ) linewidth: 3 vertices: { [ 0 2.8 ] [ 0 3.3 ] } )   
+        ( AsciiText inheritColor: 1 transform: ( Translation -1.5 -2.3 ) text: "60" )   
+        // 70 percent
+        ( Line transform: ( Rotation -3.979 ) linewidth: 3 vertices: { [ 0 3 ] [ 0 3.3 ] } )   
+        // 80 percent
+        ( Line transform: ( Rotation -4.398 ) linewidth: 3 vertices: { [ 0 2.8 ] [ 0 3.3 ] } )   
+        ( AsciiText inheritColor: 1 transform: ( Translation -2.4 -1 ) text: "80" )   
+        // 90 percent
+        ( Line transform: ( Rotation -4.817 ) linewidth: 3 vertices: { [ 0 3 ] [ 0 3.3 ] } )   
+        // 100 percent
+        ( Line transform: ( Rotation -5.23 ) linewidth: 3 vertices: { [ 0 2.8 ] [ 0 3.3 ] } )
+        ( AsciiText inheritColor: 1 transform: ( Translation -2.2 0.85 ) text: "100" ) 
+        
+        // background
+        ( OcclusionCircle
+            color: white
+            radius: 3.5
+            outerRadius: 3.65
+            slices: 100
+        )  
+        ( Circle
+            color: ( rgb 0.1 0.1 0.1 )
+            radius: 3.5
+            filled: 1
+            slices: 50
+        )
+    }
+)    

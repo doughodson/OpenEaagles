@@ -1,0 +1,261 @@
+//------------------------------------------------------------------------------
+// Classes: Point, Circle, Arc, LineLoop, Line
+//------------------------------------------------------------------------------
+#ifndef __OpenEaagles_BasicGL_Shapes_H__
+#define __OpenEaagles_BasicGL_Shapes_H__
+
+#include "Graphic.h"
+
+namespace Eaagles {
+   
+   namespace Basic {
+      class Number;
+   }
+
+namespace BasicGL {
+
+//------------------------------------------------------------------------------
+// Class: Circle
+//
+// Form name: Circle
+// Slots:
+//  radius    <Number>    ! Radius of the circle (default: 1 )
+//  filled    <Number>    ! True if circle is filled (default: false)
+//  slices    <Number>    ! Number of slices in the circle (i.e. number of sides)
+//                        ! (default: 16)
+//
+//
+// Public member functions:
+//
+//  bool setRadius(Number* srobj)
+//      Sets the radius to srobj and returns true if successful.
+//
+//  bool setFilled(Number* sfobj)
+//      Sets filled to sfobj and returns true if successful.
+//
+//  bool setSlices(Number* ssobj)
+//      Sets slices to ssobj and returns true if successful.
+//
+//------------------------------------------------------------------------------
+class Circle : public Graphic {
+    DECLARE_SUBCLASS(Circle,Graphic)
+public:
+    Circle();
+    virtual void drawFunc(); 
+    
+    // set functions
+    virtual bool setRadius(const LCreal x)   { radius = x; return true; }
+    virtual bool setFilled(const bool x)    { filled = x; return true; }
+    virtual bool setSlices(const int x)     { slices = x; return true; }
+
+    // get functions
+    LCreal getRadius()       { return radius; }
+    bool isFilled()         { return filled; }
+    int getSlices()         { return slices; }
+
+    // Component override
+    virtual bool event(const int event, Basic::Object* const obj = 0);
+    
+protected:
+    bool setSlotRadius(const Basic::Number* const x);
+    bool setSlotFilled(const Basic::Number* const x);
+    bool setSlotSlices(const Basic::Number* const x);
+
+    // even functions
+    bool updateRadius(const Basic::Number* const x);
+
+private:
+    LCreal radius;
+    bool  filled;
+    int   slices;
+};
+
+//------------------------------------------------------------------------------
+// Class: OcclusionCircle
+//
+// Form name: OcclusionCircle
+// Slots:
+//  outerRadius   <Number>    ! Outer radius of our circle (default: 1.1 )
+//
+// Draws a nice dougnut type circle, based on inner and outer radius
+//------------------------------------------------------------------------------
+class OcclusionCircle : public Circle {
+
+    DECLARE_SUBCLASS(OcclusionCircle,Circle)
+
+public:
+    OcclusionCircle();
+
+    // BasicGL::Graphic interface
+    virtual void drawFunc();
+    
+    // Set functions
+    virtual bool setOuterRadius(const LCreal x)  { outerRadius = x; return true; }
+
+    // get functions
+    LCreal getOuterRadius()     { return outerRadius; }
+    
+protected:
+    bool setSlotOuterRadius(const Basic::Number* const x);        
+
+private:
+    LCreal outerRadius;          // portion that is occluded         
+};
+
+
+//------------------------------------------------------------------------------
+// Class: Arc
+//
+// Form name: Arc
+// Slots:
+//  startAngle   <Number>    ! Start angle of the arc in degrees (default: 0 )
+//  arcLength    <Number>    ! length of the arc in degrees (default: 90)
+//  connect      <Number>    ! if true, we connect the lines (so the circle looks like a piece of pie,
+//                           ! instead of an open ended arc) (default: false)
+//
+// Public member functions:
+//
+//  bool setStartAngle(Number* ssaobj)
+//      Sets the start angle to ssaobj and returns true if successful.
+//
+//  bool setArcLength(Number* seaobj)
+//      Sets the arc length te seaobj and returns true if successful.
+//
+//  bool setIsConnected(Number* iscobj)
+//      Sets isConnected (boolean) and returns true if successful.
+//
+//------------------------------------------------------------------------------
+class Arc : public Circle {
+    DECLARE_SUBCLASS(Arc,Circle)
+public:
+    Arc();
+    virtual void drawFunc(); 
+    
+    // set functions
+    virtual bool setStartAngle(const LCreal x) { startAngle = x; return true; }
+    virtual bool setArcLength(const LCreal x)  { arcLength = x; return true; }
+    virtual bool setIsConnected(const bool x) { connected = x; return true; }
+    
+    // get functions
+    LCreal getStartAngle()   { return startAngle; }
+    LCreal getArcLength()    { return arcLength; }
+    bool  isConnected()     { return connected; }
+
+protected:
+    bool setSlotStartAngle(const Basic::Number* const x);
+    bool setSlotArcLength(const Basic::Number* const x);
+    bool setSlotIsConnected(const Basic::Number* const x);
+    
+private:
+    LCreal startAngle;
+    LCreal arcLength;
+    bool  connected;
+};
+
+//------------------------------------------------------------------------------
+// Class: OcclusionArc
+//
+// Form name: OcclusionArc
+// Slots:
+//  outerRadius   <Number>    ! Outer radius of our circle (default: 1.1)
+//
+// Just like OcclusionCircle, only draws from a start angle to a finish angle
+//------------------------------------------------------------------------------
+class OcclusionArc : public Arc {
+    DECLARE_SUBCLASS(OcclusionArc,Arc)
+
+public:
+    OcclusionArc();
+
+    // BasicGL::Graphic interface
+    virtual void drawFunc();
+    
+    // Set functions
+    bool setOuterRadius(const LCreal x)  { outerRadius = x; return true; }    
+
+    // get functions
+    LCreal getOuterRadius()     { return outerRadius; }
+    
+protected:
+    bool setSlotOuterRadius(const Basic::Number* const x);        
+    
+private:
+    LCreal outerRadius;          // portion that is occluded         
+};
+
+
+//------------------------------------------------------------------------------
+// Class: Point
+//
+// Form name: Point
+//
+// Public member functions:
+//   virtual void drawFunc()
+//   Draws a point for each vertex
+//
+//------------------------------------------------------------------------------
+class Point : public Graphic {
+    DECLARE_SUBCLASS(Point,Graphic)
+public:
+    Point();
+    virtual void drawFunc(); 
+};
+
+
+//------------------------------------------------------------------------------
+// Class: LineLoop
+//
+// Form name: LineLoop
+//
+// Public member functions:
+//    virtual void drawFunc()
+//    Draws a line based on a set of vertices
+//
+//------------------------------------------------------------------------------
+class LineLoop : public Graphic {
+    DECLARE_SUBCLASS(LineLoop,Graphic)
+public:
+    LineLoop();
+    virtual void drawFunc(); 
+};
+
+//------------------------------------------------------------------------------
+// Class: Line
+//
+// Form name: Line
+// Slots:
+//  segment   <Number>    ! True if line segments (default: false)
+//
+//
+// Public member functions:
+//
+//  bool setSegments(Number* ssobj)
+//      Sets segments (boolean) and returns true if successful.
+//  bool isSegmented()
+//      Returns number of segments.
+//
+//------------------------------------------------------------------------------
+class Line : public Graphic {
+    DECLARE_SUBCLASS(Line,Graphic)
+public:
+    Line();
+    virtual void drawFunc(); 
+
+    // set 
+    bool setSegments(const bool x)  { segment = x; return true; }
+
+    // get segments indicator
+    bool isSegmented() { return segment; }
+    
+protected:
+    bool setSlotSegments(const Basic::Number* const x);
+
+private:
+    bool segment;            // True if line segments
+};
+
+} // End BasicGL namespace
+} // End Eaagles namespace
+
+#endif  /* __OpenEaagles_BasicGL_Shapes_H__ */
+

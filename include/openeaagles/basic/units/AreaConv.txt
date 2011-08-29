@@ -1,0 +1,44 @@
+Area: (square meters: square feet, square inch, square yard, square mile, square kilometer)
+
+Extras?:  1 square foot = 2.29568e -05 acres
+
+http://www.engineering.ucsb.edu/~me15web/top_menu/tables/table_4_unit_conversion.htm#4a
+- California State Berkley Engineering Department
+1 square meter = 10.7639104167097223083335055559 square feet
+
+http://web.aces.uiuc.edu/aim/IAH/math/area.html - University of Illinois
+1 square meter = 1.196 square yards
+
+http://marian.creighton.edu/~besser/javascr/area.html - Creighton University
+1 square meter = 10000 square centimeters***
+1 square meter = 1000000 square millimeters***
+1 square meter = 0.0002471 acres***
+1 square meter = 0.0395369 rods***
+1 square meter = 0.000001 square kilometers
+1 square meter = 3.8610216e -07 square miles
+1 square meter = 10.76391 square feet
+1 square meter = 1550.0030399 square inches 
+1 square meter = 1.19599 square yards
+
+http://www.units.muohio.edu/hydrogeology/glg207l/207lexercises/areas.jpg
+1 square meter 	= 10.76 ft2
+	 	= 2.471 x 10-04 acres
+		= 1550 inches2// same as Creighton
+		= 3.861 x 10 -07 miles2
+
+http://www.dola.wa.gov.au/home.nsf/faac4bf0812ce412482566e1002b3071/e22f2dba47fc014d482569530013e21c?OpenDocument
+- cross referenced meter - acre conversion***
+
+http://quickfacts.census.gov/qfd/meta/long_101619.htm
+1 square meter = 3.8610217499077215801772054542338e-7 square miles
+
+http://academic.regis.edu/mlotfy/cs422/Problem%20Document.htm - Regis University
+
+*Cross References
+http://unr.edu/homepage/kimura/tables.html - University of Nevada, Reno
+1 square meter = 1.196 square yards
+		
+
+Radar detection slide 47:
+10log(square meter) = dBsm
+*** Denotes not necessarily needed

@@ -1,0 +1,279 @@
+( Graphic
+    components: {
+        // here is a line around the altitude
+        ( LineLoop
+            color: white
+            linewidth: 2
+            transform: ( Translation 0 -0.3 )
+            vertices: {
+                // 1.15 top, -0.05 bottom
+                [ -1.55 -0.05 ]
+                [ -1.55 0.725 ]
+                [ -0.6 0.725 ]
+                [ -0.6 1.15 ]
+                [ 0 1.15 ]
+                [ 0 0.725 ]
+                [ 1.05 0.725 ]
+                [ 1.05 -0.05 ]
+                [ 0 -0.05 ]
+                [ 0 -0.55 ]
+                [ -0.6 -0.55 ]
+                [ -0.6 -0.05 ]
+            }
+        )
+    alt:    
+    ( AltitudeDial 
+            allowComponentPass: 0   // - keep this 0 for this to work optimally 
+            components: {
+                dialalt:
+                ( DialPointer
+                    scalingTable: 
+                        ( Table1
+                            // altitude (1000s of feet)
+                            x: [ 0 100000 ]
+                            // rotation in degrees
+                         data: [ 0 36000 ]
+                        )
+                    components: {
+                        ( Line
+                            linewidth: 3
+                            color: gray
+                            vertices: {
+                                [ 0 0 ] [ 0 3 ]
+                            }
+                        )
+                        ( Polygon
+                            transform: ( Translation 0 3 )
+                            color: white
+                            vertices: {
+                                [ -0.35 0 ]
+                                [ 0.35 0 ]
+                                [ 0 0.7 ]
+                            }
+                        )
+                    }
+                )
+            
+                ( DialTickMarks
+                    startAngle: 0
+                    quantity: 10
+                    color: white
+                    startAngle: 0
+                    length: -1
+                    dialRadius: 4
+                    linewidth: 2
+                )
+                ( DialTickMarks
+                    startAngle: 0
+                    quantity: 50
+                    color: white
+                    startAngle: 0
+                    length: -0.5
+                    dialRadius: 4.5
+                    linewidth: 2
+                )
+                
+                // here is our hundreds
+                ( Graphic
+                    transform: ( Translation -0.5 -0.3 )
+                    scissorX: -0.05
+                    scissorWidth: 0.55
+                    scissorY: -0.5
+                    scissorHeight: 1.65
+                    components: {
+                        hundreds:
+                        ( GaugeSlider
+                            scalingTable:
+                            ( Table1
+                                x: [ 0 9 ]
+                                data: [ 0 9 ]
+                            )
+                            components: {
+                                #include "altTape.epp"    
+                            }
+                        )
+                    }
+                )
+                // here is our one thousands
+                ( Graphic
+                    transform: ( Translation -1 -0.3 )
+                    scissorX: -0.05
+                    scissorWidth: 0.55
+                    scissorY: -0.05
+                    scissorHeight: 0.775
+                    components: {
+                        onethousands:
+                        ( GaugeSlider
+                            scalingTable:
+                            ( Table1
+                                x: [ 0 9 ]
+                                data: [ 0 9 ]
+                            )
+                            components: {
+                                #include "altTape.epp"    
+                            }
+                        )
+                    }
+                )
+                // here is our ten thousands
+                ( Graphic
+                    transform: ( Translation -1.5 -0.3 )
+                    scissorX: -0.05
+                    scissorWidth: 0.55
+                    scissorY: -0.05
+                    scissorHeight: 0.775
+                    components: {
+                        tenthousands:
+                        ( GaugeSlider
+                            scalingTable:
+                            ( Table1
+                                x: [ 0 9 ]
+                                data: [ 0 9 ]
+                            )
+                            components: {
+                                #include "altTape.epp"    
+                            }
+                        )
+                    }
+                )
+            }
+        )
+        // here are our numbers
+        ( AsciiText
+            transform: ( Translation -0.2 3.3 ) 
+            color: white
+            text: "0"
+        )
+        ( Graphic
+            transform: ( Rotation -0.628 )
+            components: {
+                ( AsciiText
+                    transform: { ( Translation -0.1 3.3 ) ( Rotation 0.628 ) } 
+                    color: white
+                    text: "1"
+                )
+            }
+        )
+        ( Graphic
+            transform: ( Rotation -1.256 )
+            components: {
+                ( AsciiText
+                    transform: { ( Translation 0.2 3.3 ) ( Rotation 1.256 ) } 
+                    color: white
+                    text: "2"
+                )
+            }
+        )
+        ( Graphic
+            transform: ( Rotation -1.884 )
+            components: {
+                ( AsciiText
+                    transform: { ( Translation 0.45 3.55 ) ( Rotation 1.884 ) } 
+                    color: white
+                    text: "3"
+                )
+            }
+        )
+        ( Graphic
+            transform: ( Rotation -2.512 )
+            components: {
+                ( AsciiText
+                    transform: { ( Translation 0.3 3.7 ) ( Rotation 2.512 ) } 
+                    color: white
+                    text: "4"
+                )
+            }
+        )
+        ( Graphic
+            transform: ( Rotation -3.14 )
+            components: {
+                ( AsciiText
+                    transform: { ( Translation 0.2 3.9 ) ( Rotation 3.14 ) } 
+                    color: white
+                    text: "5"
+                )
+            }
+        )
+        ( Graphic
+            transform: ( Rotation -3.768 )
+            components: {
+                ( AsciiText
+                    transform: { ( Translation 0.1 3.9 ) ( Rotation 3.768 ) } 
+                    color: white
+                    text: "6"
+                )
+            }
+        )
+        ( Graphic
+            transform: ( Rotation -4.396 )
+            components: {
+                ( AsciiText
+                    transform: { ( Translation -0.3 3.9 ) ( Rotation 4.396 ) } 
+                    color: white
+                    text: "7"
+                )
+            }
+        )
+        ( Graphic
+            transform: ( Rotation -5.024 )
+            components: {
+                ( AsciiText
+                    transform: { ( Translation -0.3 3.75 ) ( Rotation 5.024 ) } 
+                    color: white
+                    text: "8"
+                )
+            }
+        )
+        ( Graphic
+            transform: ( Rotation -5.652 )
+            components: {
+                ( AsciiText
+                    transform: { ( Translation -0.3 3.4 ) ( Rotation 5.652 ) } 
+                    color: white
+                    text: "9"
+                )
+            }
+        )
+       
+        ( NumericReadout
+            value: 00
+            format: "0#"
+            color: white
+            transform: ( Translation 0 -0.3 ) 
+        )
+        // put a black polygon underneath it
+        ( Polygon
+            color: black
+            vertices: {
+                [ -1 -0.35 ]
+                [ -1  0.4 ]
+                [  1  0.4 ]
+                [  1 -0.35 ]
+            }
+        )
+       
+        ( Graphic
+            transform: ( Translation 0 0 -0.2 )
+            components: {
+                // outside color 
+                ( Circle
+                    color: gray1
+                    slices: 100
+                    filled: 1
+                    radius: 5.2
+                    linewidth: 7
+                )
+                // outside color 
+                ( OcclusionCircle
+                    color: white
+                    slices: 50
+                    filled: 1
+                    radius: 5.2
+                    outerRadius: 5.3
+                )
+                
+            }
+        )
+    }
+)
+

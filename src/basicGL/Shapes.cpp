@@ -1,0 +1,557 @@
+// Shapes
+
+#include "openeaagles/basicGL/Shapes.h"
+#include "openeaagles/basic/Number.h"
+#include "openeaagles/basic/PairStream.h"
+#include <GL/glu.h>
+
+namespace Eaagles {
+namespace BasicGL {
+
+//==============================================================================
+// Class: Circle
+//==============================================================================
+IMPLEMENT_SUBCLASS(Circle,"Circle")
+EMPTY_DELETEDATA(Circle)
+
+BEGIN_SLOTTABLE(Circle)
+	"radius",	// Radius of circle
+	"filled",	// True if circle is filled
+	"slices",	// Number of slices in the circle
+END_SLOTTABLE(Circle)
+
+BEGIN_SLOT_MAP(Circle)
+    ON_SLOT(1,setSlotRadius,Basic::Number)
+    ON_SLOT(2,setSlotFilled,Basic::Number)
+    ON_SLOT(3,setSlotSlices,Basic::Number)
+END_SLOT_MAP()
+
+BEGIN_EVENT_HANDLER(Circle)
+    ON_EVENT_OBJ(UPDATE_VALUE, updateRadius, Basic::Number)
+END_EVENT_HANDLER()
+
+// Constructor
+Circle::Circle()
+{
+    STANDARD_CONSTRUCTOR()
+    radius = 1.0;
+    filled = false;
+    slices = 16;
+}
+
+// Copy data
+void Circle::copyData(const Circle& org, const bool)
+{
+   BaseClass::copyData(org);
+   radius = org.radius;
+   filled = org.filled;
+   slices = org.slices;
+}
+
+// Update the circle's radius
+bool Circle::updateRadius(const Basic::Number* const x)
+{
+    bool ok = false;
+    if (x != 0) ok = setRadius(x->getReal());
+    return ok;
+}
+
+// Draw function
+void Circle::drawFunc()
+{
+   BEGIN_DLIST
+   GLUquadricObj *qobj = gluNewQuadric();
+   if (filled) {
+      gluQuadricDrawStyle(qobj, GLU_FILL);
+   }
+   else {
+      gluQuadricDrawStyle(qobj, GLU_SILHOUETTE);
+   }
+   gluDisk( qobj, 0.,  radius, slices, 1);
+   gluDeleteQuadric(qobj);
+   END_DLIST
+}
+
+// Set slot functions
+bool Circle::setSlotRadius(const Basic::Number* const x)
+{
+    bool ok = false;
+    if (x != 0) ok = setRadius(x->getReal());
+    return ok;
+}
+
+bool Circle::setSlotFilled(const Basic::Number* const x)
+{
+    bool ok = false;
+    if (x != 0) ok = setFilled(x->getBoolean());
+    return ok;
+}
+
+bool Circle::setSlotSlices(const Basic::Number* const x)
+{
+    bool ok = false;
+    if (x != 0) ok = setSlices(x->getInt());
+    return ok;
+}
+
+// getSlotByIndex() 
+Basic::Object* Circle::getSlotByIndex(const int si)
+{
+    return BaseClass::getSlotByIndex(si);
+}
+
+// serialize()
+std::ostream& Circle::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
+{
+   int j = 0;
+   if ( !slotsOnly ) {
+      //indent(sout,i);
+      sout << "( " << getFormName() << std::endl;
+      j = 4;
+   }
+
+   BaseClass::serialize(sout,i+j,true);
+
+   indent(sout,i+j);
+   sout << "radius: " << radius << std::endl;
+
+   indent(sout,i+j);
+   sout << "filled: " << filled << std::endl;
+
+   indent(sout,i+j);
+   sout << "slices: " << slices << std::endl;
+
+   if ( !slotsOnly ) {
+      indent(sout,i);
+      sout << ")" << std::endl;
+   }
+   return sout;
+}
+
+
+//==============================================================================
+// Class: OcclusionCircle
+//==============================================================================
+IMPLEMENT_SUBCLASS(OcclusionCircle,"OcclusionCircle")
+EMPTY_DELETEDATA(OcclusionCircle)
+
+BEGIN_SLOTTABLE(OcclusionCircle)
+    "outerRadius",  // Outer radius of our circle
+END_SLOTTABLE(OcclusionCircle)
+
+BEGIN_SLOT_MAP(OcclusionCircle)
+    ON_SLOT(1,setSlotOuterRadius,Basic::Number)
+END_SLOT_MAP()
+
+// Constructor
+OcclusionCircle::OcclusionCircle()
+{
+    STANDARD_CONSTRUCTOR()
+    // outer radius just a bit bigger than inner radius
+    outerRadius = 1.1f;   
+    setFilled(true);
+    setSlices(100);
+}
+
+// Copy data
+void OcclusionCircle::copyData(const OcclusionCircle& org, const bool)
+{
+    BaseClass::copyData(org);
+    outerRadius = org.outerRadius;
+}
+
+// Draw function
+void OcclusionCircle::drawFunc()
+{
+   BEGIN_DLIST
+   GLUquadricObj *qobj = gluNewQuadric();
+   if (isFilled()) {
+      gluQuadricDrawStyle(qobj, GLU_FILL);
+   }
+   else {
+      gluQuadricDrawStyle(qobj, GLU_SILHOUETTE);
+   }
+   gluDisk( qobj, getRadius(),  outerRadius, getSlices(), 1);
+   gluDeleteQuadric(qobj);
+   END_DLIST
+}
+
+// Set slot functions
+bool OcclusionCircle::setSlotOuterRadius(const Basic::Number* const x)
+{
+    bool ok = false;
+    if (x != 0) ok = setOuterRadius(x->getReal());
+    return ok;
+}
+
+// getSlotByIndex() 
+Basic::Object* OcclusionCircle::getSlotByIndex(const int si)
+{
+    return BaseClass::getSlotByIndex(si);
+}
+
+// serialize()
+std::ostream& OcclusionCircle::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
+{
+   int j = 0;
+   if ( !slotsOnly ) {
+      //indent(sout,i);
+      sout << "( " << getFormName() << std::endl;
+      j = 4;
+   }
+
+   BaseClass::serialize(sout,i+j,true);
+
+   indent(sout,i+j);
+   sout << "outerRadius: " << outerRadius << std::endl;
+
+
+   if ( !slotsOnly ) {
+      indent(sout,i);
+      sout << ")" << std::endl;
+   }
+   return sout;
+}
+
+
+//==============================================================================
+// Class: Arc
+//==============================================================================
+IMPLEMENT_SUBCLASS(Arc,"Arc")
+EMPTY_DELETEDATA(Arc)
+
+BEGIN_SLOTTABLE(Arc)
+	"startAngle",	// Start angle of arc
+	"arcLength",	// Length of arc
+	"connect",      // if true, we connect the lines (so the circle looks like a piece of pie,
+	                // instead of an open ended arc)
+END_SLOTTABLE(Arc)
+
+BEGIN_SLOT_MAP(Arc)
+    ON_SLOT(1,setSlotStartAngle,Basic::Number)
+    ON_SLOT(2,setSlotArcLength,Basic::Number)
+    ON_SLOT(3,setSlotIsConnected,Basic::Number)
+END_SLOT_MAP()
+
+// Constructor
+Arc::Arc()
+{
+    STANDARD_CONSTRUCTOR()
+    startAngle = 0.0;
+    arcLength = 90.0;
+    setIsConnected(false);
+}
+
+// Copy data
+void Arc::copyData(const Arc& org, const bool)
+{
+   BaseClass::copyData(org);
+   startAngle = org.startAngle;
+   arcLength = org.arcLength;
+   connected = org.connected;
+}
+
+// Draw function
+void Arc::drawFunc()
+{
+   BEGIN_DLIST
+   GLUquadricObj *qobj = gluNewQuadric();
+   if (isFilled()) {
+      gluQuadricDrawStyle(qobj, GLU_FILL);
+   }
+   else {
+      gluQuadricDrawStyle(qobj, GLU_SILHOUETTE);
+   }
+   if (connected) {
+      gluPartialDisk(qobj, 0, getRadius(), getSlices(), 2, startAngle, arcLength);
+   }
+   else {
+      gluPartialDisk(qobj, getRadius(), getRadius(), getSlices(), 2, startAngle, arcLength);
+   }
+   gluDeleteQuadric(qobj);
+   END_DLIST
+}
+
+// Set slot functions
+bool Arc::setSlotStartAngle(const Basic::Number* const x)
+{
+    bool ok = false;
+    if (x != 0) ok = setStartAngle(x->getReal());
+    return ok;
+}
+
+bool Arc::setSlotArcLength(const Basic::Number* const x)
+{
+    bool ok = false;
+    if (x != 0) ok = setArcLength(x->getReal());
+    return ok;
+}
+
+bool Arc::setSlotIsConnected(const Basic::Number* const x)
+{
+    bool ok = false;
+    if (x != 0) ok = setIsConnected(x->getBoolean());
+    return ok;
+}
+
+// getSlotByIndex() 
+Basic::Object* Arc::getSlotByIndex(const int si)
+{
+    return BaseClass::getSlotByIndex(si);
+}
+
+// serialize()
+std::ostream& Arc::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
+{
+   int j = 0;
+   if ( !slotsOnly ) {
+      //indent(sout,i);
+      sout << "( " << getFormName() << std::endl;
+      j = 4;
+   }
+
+   BaseClass::serialize(sout,i+j,true);
+
+   indent(sout,i+j);
+   sout << "startAngle: " << startAngle << std::endl;
+
+   indent(sout,i+j);
+   sout << "arcLength: " << arcLength << std::endl;
+
+   if ( !slotsOnly ) {
+      indent(sout,i);
+      sout << ")" << std::endl;
+   }
+   return sout;
+}
+
+
+//==============================================================================
+// Class: OcclusionArc
+//==============================================================================
+IMPLEMENT_SUBCLASS(OcclusionArc,"OcclusionArc")
+EMPTY_DELETEDATA(OcclusionArc)
+
+BEGIN_SLOTTABLE(OcclusionArc)
+    "outerRadius",  // Outer radius of our arc
+END_SLOTTABLE(OcclusionArc)
+
+BEGIN_SLOT_MAP(OcclusionArc)
+    ON_SLOT(1,setSlotOuterRadius,Basic::Number)
+END_SLOT_MAP()
+
+// Constructor
+OcclusionArc::OcclusionArc()
+{
+    STANDARD_CONSTRUCTOR()
+    // outer radius just a bit bigger than inner radius
+    outerRadius = 1.1f;   
+    setFilled(true);
+    setSlices(100);
+}
+
+// Copy data
+void OcclusionArc::copyData(const OcclusionArc& org, const bool)
+{
+    BaseClass::copyData(org);
+    outerRadius = org.outerRadius;
+}
+
+// Draw function
+void OcclusionArc::drawFunc()
+{
+   BEGIN_DLIST
+   GLUquadricObj *qobj = gluNewQuadric();
+   if (isFilled()) {
+      gluQuadricDrawStyle(qobj, GLU_FILL);
+   }
+   else {
+      gluQuadricDrawStyle(qobj, GLU_SILHOUETTE);
+   }
+   
+   gluPartialDisk(qobj, getRadius(), outerRadius, getSlices(), 2, getStartAngle(), getArcLength());
+   
+   gluDeleteQuadric(qobj);
+   END_DLIST
+}
+
+// Set slot functions
+bool OcclusionArc::setSlotOuterRadius(const Basic::Number* const x)
+{
+    bool ok = false;
+    if (x != 0) ok = setOuterRadius(x->getReal());
+    return ok;
+}
+
+// getSlotByIndex() 
+Basic::Object* OcclusionArc::getSlotByIndex(const int si)
+{
+    return BaseClass::getSlotByIndex(si);
+}
+
+// serialize()
+std::ostream& OcclusionArc::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
+{
+   int j = 0;
+   if ( !slotsOnly ) {
+      //indent(sout,i);
+      sout << "( " << getFormName() << std::endl;
+      j = 4;
+   }
+
+   BaseClass::serialize(sout,i+j,true);
+
+   indent(sout,i+j);
+   sout << "outerRadius: " << outerRadius << std::endl;
+
+
+   if ( !slotsOnly ) {
+      indent(sout,i);
+      sout << ")" << std::endl;
+   }
+   return sout;
+}
+
+
+//==============================================================================
+// Class: Point
+//==============================================================================
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Point,"Point")
+EMPTY_SERIALIZER(Point)
+EMPTY_CONSTRUCTOR(Point);
+EMPTY_COPYDATA(Point)
+EMPTY_DELETEDATA(Point)
+
+// Draw function
+void Point::drawFunc()
+{
+   BEGIN_DLIST
+   unsigned int n = getNumberOfVertices();
+   const osg::Vec3* v = getVertices();
+   glBegin(GL_POINTS);
+   for (unsigned int i = 0; i < n; i++) {
+      lcVertex3v( v[i].ptr() );
+   }
+   glEnd();
+   END_DLIST
+}
+
+
+//==============================================================================
+// Class: LineLoop
+//==============================================================================
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(LineLoop,"LineLoop")
+EMPTY_SERIALIZER(LineLoop)
+EMPTY_CONSTRUCTOR(LineLoop);
+EMPTY_COPYDATA(LineLoop)
+EMPTY_DELETEDATA(LineLoop)
+
+// Draw function
+void LineLoop::drawFunc()
+{
+   BEGIN_DLIST
+   unsigned int n = getNumberOfVertices();
+   const osg::Vec3* v = getVertices();
+   if (n >= 2) {
+      glBegin(GL_LINE_LOOP);
+      for (unsigned int i = 0; i < n; i++) {
+         lcVertex3v( v[i].ptr() );
+      }
+      glEnd();
+   }
+   END_DLIST
+}
+
+
+//==============================================================================
+// Class: Line
+//==============================================================================
+IMPLEMENT_SUBCLASS(Line,"Line")
+EMPTY_DELETEDATA(Line)
+
+BEGIN_SLOTTABLE(Line)
+	"segment",	// True if line segments
+END_SLOTTABLE(Line)
+
+BEGIN_SLOT_MAP(Line)
+    ON_SLOT(1,setSlotSegments,Basic::Number)
+END_SLOT_MAP()
+
+// Constructor
+Line::Line()
+{
+   STANDARD_CONSTRUCTOR()
+   segment = false;
+}
+
+void Line::copyData(const Line& org, const bool)
+{
+   BaseClass::copyData(org);
+   segment = org.segment;
+}
+
+// Draw function
+void Line::drawFunc()
+{
+   BEGIN_DLIST
+   unsigned int n = getNumberOfVertices();
+   const osg::Vec3* v = getVertices();
+   if (n >= 2) {
+      if (segment) {
+         // Draw as line segments (pairs of vertices)
+         glBegin(GL_LINES);
+         for (unsigned int i = 0; i < n; i++) {
+            lcVertex3v( v[i].ptr() );
+         }
+         glEnd();
+      }
+      else {
+         // Draw one long line
+         glBegin(GL_LINE_STRIP);
+         for (unsigned int i = 0; i < n; i++) {
+            lcVertex3v( v[i].ptr() );
+         }
+         glEnd();
+      }
+   }
+   END_DLIST
+}
+
+// Set slot functions
+bool Line::setSlotSegments(const Basic::Number* const x)
+{
+    bool ok = false;
+    if (x != 0) ok = setSegments(x->getBoolean());
+    return ok;
+}
+
+// getSlotByIndex() 
+Basic::Object* Line::getSlotByIndex(const int si)
+{
+    return BaseClass::getSlotByIndex(si);
+}
+
+// serialize()
+std::ostream& Line::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
+{
+   int j = 0;
+   if ( !slotsOnly ) {
+      //indent(sout,i);
+      sout << "( " << getFormName() << std::endl;
+      j = 4;
+   }
+
+   BaseClass::serialize(sout,i+j,true);
+
+   indent(sout,i+j);
+   sout << "segment: " << segment << std::endl;
+
+   if ( !slotsOnly ) {
+      indent(sout,i);
+      sout << ")" << std::endl;
+   }
+   return sout;
+}
+
+} // End BasicGL namespace
+} // End Eaagles namespace

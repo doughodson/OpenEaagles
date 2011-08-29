@@ -1,0 +1,195 @@
+// Speedbrake instrument, which is actually a few instrument objects put together.
+
+// The cool thing about the instrument object is that you can send it one value and it will update all other instruments that are it's components.
+// This is accomplished by the fact that each time an instrument object is updated, it goes through it's components, finds all the instruments, and updates
+// them with the new value as well.  This eliminates redundancy.  For example, the dial pointer needs the speedbrake value to determine where to rotate to, and the dial arc segment needs to know
+// the speedbrake position to determine which color to switch to (for cautions or warnings, perhaps.)  This can all be accomplished by making them components of a base instrument, which updates everybody
+// when it is updated.  The event message to update a value in instrument is UPDATE_INSTRUMENTS.  
+
+// From TestSpeedBrake.cpp, you can see we are using the command
+// send("sbrake", UPDATE_INSTRUMENTS, someValue, someValueSendData);
+// This sends this object the speedbrake value, or whatever value you want to send.  This is the only line of code you have to use to update all of the instruments that are components of this instrument.
+// You can change the value of the speedbrake in your .cpp file, and see the output here.  TestSpeedBrake.cpp does this for you, as an example.
+sbrake:
+// We have named our speedbrake sbrake, which will be sent a value from our test routing (TestSpeedBrake.cpp).  
+( Instrument
+    components: {
+        // Dialpointer is an instrument that understands that when it received the UPDATE_INSTRUMENTS, it takes the value, looks up it's table for scaling, and then rotates according to that scaling.
+        // In the example below, first we set up our color, which you can see is a color rotary.  That is another special thing about instrument, it can determine what color to be based on a specific value.
+        // In this case, if we send the value 80 to the instrument, it will be the color (rgb 0 0 1), which is blue.  Instrument also tells each component that is an instrument that if you have a color
+        // rotary, look up the color you are suppose to be and switch to that color.  This once again allows us to send one value to multiple instruments to be updated.  
+        ( DialPointer
+			// instead of the normal value for color, such as "red", we put in a ColorRotary, which will change colors based on value
+            color: 
+                ( ColorRotary
+					// breakpoints defines the value at which we want to change colors.
+                    breakpoints: {
+                        0
+                        20
+                        70
+                    }
+                    // these are the rgb values of the colors we want to use at that specific break point.  
+                    breakcolors: {
+                        (rgb 1 1 1)
+                        (rgb 1 0 0)
+                        (rgb 0 0 1)
+                    }
+                )
+            // scaling table is an instrument slot that tells us that based on our value, we need to rotate, translate or do something with some other value.  
+            // For example, here, if the speedbrake position is 30, which is half way in our gauge.  Well, in
+            // order to view that graphically, via a pointer, we need to know how far to rotate for a value of 30.  
+            scalingTable:   
+				// A Table1 is an object that understands a one dimensional table with values
+                ( Table1 
+					// x is the value range in which we are receiving, which is 30 (speedbrake position) - we are accepting values from 0 - 60
+                    x: [ 60 0 ]
+                    // data is the value we wish to use for our instrument.  In this case, we have set up that for 0 as a speedbrake position, we rotate 180 degrees, and for 60, we want to rotate 0 degrees.  
+                    // The table will interpolate the value which you give it to get the proper output.  So, we send a 30 for the speedbrake position, and we get back 90 as our rotation angle. 
+                    data: [ 0 180 ]
+                )
+            
+            // we want to start our pointer at a 90 degree angle to the left, so we subtract 90, and that is where we start.
+            startAngle: -90
+			// ok, here is DialPointer's components, which will be rotated the appropriate amount by dial pointer.
+			components: {
+				// this is the end of the pointer, which is an arrow.  You can see we translate out the y-axis 3.5, to get us closer to the numbers on the dial.
+				// Also notice we haven't given a color to these objects.  That is because the dial pointer instrument that owns us will determine the color using ColorRotary, and these
+				// objects will use that same color.  If we specified a color here, then those objects would stay that same color, as described earlier.
+                ( Polygon
+                    transform: ( Translation 0 3.5)
+                    vertices: {                    
+                        [ 0.5 0.0 ]
+                        [ -0.5 0.0 ]
+                        [ 0.0 1 ]
+                    }
+                )
+                // Here is the line, which also rotates.  
+                ( Line
+                    linewidth: 6
+                    vertices: {
+                        [ 0 0 ]
+                        [ 0 3.5 ]
+                    }
+                )
+            }
+        )
+        
+        // bottom line of dial - static object
+        ( Line
+            color: white
+            linewidth: 2
+            vertices: {
+                [ -6 0 ]
+                [ 6 0 ]
+            }
+        )
+        
+        // SemiCircular arc - arc around the outside of the dial.
+        // DialArcSegment is another class derived from instrument, and again knows how to handle color rotaries.  This object, however, simply draws an arc from a given start angle around a circle
+        // for a value of sweep angle.  In this instance, the arc has a 6 unit radius, starts at 90 degrees to the left, and sweeps 180 degrees.  This gives us a semi-circle.  Also remember that
+        // when drawing, our angles all start at 0 degrees, which is pointing straight up.  This is why we rotate -90 degrees to get us to the left.  Positive degrees go in a clockwise direction, and
+        // negative counter-clockwise.
+        ( DialArcSegment
+            color: 
+                ( ColorRotary
+                    breakpoints: {
+                        0 
+                        50
+                    }
+                    breakcolors: {
+                        (rgb 1 1 1)
+                        (rgb 1 1 0)
+                    }
+                )
+            dialRadius: 6
+            // linewidth is a graphic slot, which determines how thick the line will be
+            outerRadius: 6.1
+            slices: 50
+            filled: 1
+            startAngle: -90
+            sweepAngle: 180
+        )
+            
+        // major tick marks
+        // DialTickMarks - instrument derived object that will draw tick marks around a radius.  This object is set up much like DialArcSegment, only it draws differently.
+        ( DialTickMarks 
+			// Again, all instruments understand what a color rotary is.
+            color: 
+                ( ColorRotary
+                    breakpoints: {
+                        0 
+                        20
+                        60
+                    }
+                    breakcolors: {
+                        (rgb 1 1 1)
+                        (rgb 1 0 1)
+                        (rgb 0.5 0.5 0)
+                    }
+                )
+            // length of each tick mark.  If you wanted the tick marks to go OUTSIDE of the arc, you would make this negative
+            length: 1
+            // radius to start from 
+            dialRadius: 6
+            // how many tick marks?
+            quantity: 5
+            // start at this angle
+            startAngle: -58
+            // sweep this angle
+            sweepAngle: 148
+            linewidth: 2
+        )
+      
+		// These are simply the readouts for the values associated with the speedbrake.  As a note, we can translate and rotate all objects.  When we rotate, we use RADIANS, not degrees, in the transform
+		// statement.  So, instead of 
+		//		transform: ( Rotation 180 )
+		//	WE put
+		//		transform : ( Rotation 3.14 )
+        ( AsciiText 
+            transform: ( Translation 4.5 0.05 1 )
+            color: white
+            text: "CLS"
+        )
+        ( AsciiText
+            transform: ( Translation -5.8 0.05 1 )
+            color: white
+            text: "OPN"
+        )
+        ( AsciiText
+            color: white
+            transform: ( Translation -1.3 1.5 )
+            text: "SPDBRK"
+        )
+        ( NumericReadout
+            color: white
+            transform: ( Translation -4 2 )
+            format: "##"
+            value: 50
+        )
+        ( NumericReadout
+            color: white
+            transform: ( Translation 3.1 2 )
+            format: "##"
+            value: 10
+        )
+        ( NumericReadout
+            transform: ( Translation 1.5 3.45 )
+            color: white
+            format: "##"
+            value: 20
+        )
+        ( NumericReadout
+            color: white
+            transform: ( Translation -0.5 4.1 )
+            format: "##"
+            value: 30
+        )     
+        ( NumericReadout
+            color: white
+            transform: ( Translation -2.5 3.5 )
+            format: "##"
+            value: 40
+        )         
+    }
+)    
+

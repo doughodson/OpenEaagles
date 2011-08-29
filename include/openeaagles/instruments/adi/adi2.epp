@@ -1,0 +1,804 @@
+// This is a second example of an ADI
+( Graphic
+    components: {
+        magneticheading: 
+        ( Graphic
+            transform: ( Translation 0 5.5  )
+            components: {
+                magreadout: 
+                ( NumericReadout
+                    color: white
+                    value: 999
+                    transform: ( Translation -0.7 -0.35 ) 
+                    format: "###"
+                )                        
+                ( LineLoop
+                    color: white
+                    linewidth: 2
+                    vertices: {
+                        [ -0.9 -0.5 ]
+                        [ -0.9  0.5 ]
+                        [  0.9  0.5 ] 
+                        [  0.9 -0.5 ]
+                    }
+                )
+                ( Polygon 
+                    color: black
+                    vertices: {
+                        [ -0.9 -0.5 ]
+                        [ -0.9  0.5 ]
+                        [  0.9  0.5 ] 
+                        [  0.9 -0.5 ]
+                    }
+                )
+            }
+        ) // end of magnetic heading graphic  
+                          
+        //  this is the airspeed readout box
+        ( Graphic
+            transform: ( Translation -7.1 0 )
+            components: {
+                calibratedreadout:  
+                ( NumericReadout
+                    color: white
+                    transform: ( Translation -0.75 -0.35  ) 
+                    format: "###"
+                )
+                ( LineLoop
+                    linewidth: 2
+                    color: white
+                    vertices: {
+                        [ -0.9 -0.5 ]
+                        [ -0.9  0.5 ]
+                        [  0.9  0.5 ] 
+                        [  0.9 -0.5 ]
+                    }
+                )
+                ( Polygon 
+                    color: black
+                    vertices: {
+                        [ -0.9 -0.5 ]
+                        [ -0.9  0.5 ]
+                        [  0.9  0.5 ] 
+                        [  0.9 -0.5 ]
+                    }
+                )            
+            }
+        ) // end of calibrated air speed graphic                               
+                              
+                            
+        altitude: 
+        ( Graphic
+            transform: ( Translation 6.65 0 ) 
+            components: {
+                altreadout: 
+                ( NumericReadout
+                    color: white
+                    transform: ( Translation -1.65 -0.3 )
+                    format: "######"
+                )
+                ( LineLoop
+                    color: white
+                    linewidth: 2
+                    vertices: {
+                        [ -1.35 -0.5 ]
+                        [ -1.35  0.5 ]
+                        [  1.35  0.5 ] 
+                        [  1.35 -0.5 ]
+                    }
+                )
+                ( Polygon
+                    color: black
+                    vertices: {
+                        [ -1.35 -0.5 ]
+                        [ -1.35  0.5 ]
+                        [  1.35  0.5 ] 
+                        [  1.35 -0.5 ]
+                    }
+                )
+            }
+        ) // end of altitude graphic   
+    }
+) // end of readouts graphic    
+
+// this is the rest of the gauge
+( Graphic
+    color: black
+    components: {
+        // waterline
+        ( Line
+            segment: 1
+            vertices: {
+                [ 0 0 ] [ -0.2 -0.2 ]
+                [ -0.2 -0.2 ] [ -0.4 0 ]
+                [ -0.4 0 ] [ -1 0 ]
+                [ 0 0 ] [ 0.2 -0.2 ]
+                [ 0.2 -0.2 ] [ 0.4 0 ]
+                [ 0.4 0 ] [ 1 0 ]
+            }
+        )
+        // this rotates with our bank angle, and is our bank angle - dialpointer is explained in speedbrake.epp
+        bankangle:  
+        ( DialPointer
+            components: {
+                ( Polygon
+                    transform: ( Translation 0.0 -4.5 ) 
+                    vertices: {
+                        [ -0.2 0.0 ] 
+                        [ 0.2 0.0 ]
+                        [ 0.0 0.4 ]
+                    }
+                )
+            }
+        )
+	    // our side slip is also a pointer
+        sideslip:   
+        ( DialPointer
+            components: {
+                ( Polygon 
+                    transform: ( Translation 0 -4.7 )
+                    vertices: {
+                        [ -0.2 0.0 ]
+                        [ 0.2 0.0 ]
+                        [ 0.2 0.2 ]
+                        [ -0.2 0.2 ]
+                    }
+                )
+            }
+        )
+                        
+                          
+                
+        // these are the tic marks that are ALWAYS visible
+        bankangleticmarks: 
+        ( Graphic
+            color: black
+            components: {
+                ( Polygon
+                    transform: ( Translation 0.0 -4.1 )
+                    vertices: {
+                        [ -0.1 0.0 ]
+                        [ 0.1 0.0 ]
+                        [ 0.1 0.1 ]
+                        [ -0.1 0.1 ]
+                    }
+                )
+                // +- 10 and 20 degree tics
+                ( Line 
+                    transform: ( Rotation 0.174444584  ) 
+                    vertices: { [ 0.0 -4.1 ] [ 0.0 -3.9 ] }
+                )
+                ( Line 
+                    transform: ( Rotation 0.348889168  ) 
+                    vertices: { [ 0.0 -4.1 ] [ 0.0 -3.9 ] }
+                )
+                ( Line 
+                    transform: ( Rotation -0.174444584  ) 
+                    vertices: { [ 0.0 -4.1 ] [ 0.0 -3.9 ] }
+                )
+                ( Line 
+                    transform: ( Rotation -0.348889168  ) 
+                    vertices: { [ 0.0 -4.1 ] [ 0.0 -3.9 ] }
+                )
+                // +- 30 degree tics
+                ( Line 
+                    linewidth: 2
+                    transform: ( Rotation 0.523333752 )
+                    vertices: { [ 0.0 -4.1 ] [ 0.0 -3.6 ] }
+                )
+                ( Line 
+                    linewidth: 2
+                    transform: ( Rotation -0.523333752 )
+                    vertices: { [ 0.0 -4.1 ] [ 0.0 -3.6 ] }
+                )
+                
+            }
+        ) // end of bank angle tic marks graphic 
+				
+		// Our test routine TestMfdAdi.cpp will look up each of these graphics by name, and depending on the roll value, will make them visible or not, by
+		// sending the event message SET_VISIBILITY
+        // 45 and 60 degree tic marks for a roll over 25 degrees                                               
+        over25: 
+        ( Graphic
+            color: black
+            linewidth: 2
+            components: {
+                ( Line
+                    transform: ( Rotation 0.785000628 )
+                    vertices: { [ 0.0 -4.1 ] [ 0.0 -3.6 ] }
+                )
+                ( Line
+                    transform: ( Rotation 1.046667504 )
+                    vertices: { [ 0.0 -4.1 ] [ 0.0 -3.6 ] }
+                )            
+                ( Line
+                    transform: ( Rotation -0.785000628 )
+                    vertices: { [ 0.0 -4.1 ] [ 0.0 -3.6 ] }
+                )
+                ( Line
+                    transform: ( Rotation -1.046667504 )
+                    vertices: { [ 0.0 -4.1 ] [ 0.0 -3.6 ] }
+                )
+            }
+        ) // end of over 25 neg graphic
+                   
+        // 90 degree tic mark for a roll over 55 degrees 
+        over55: 
+        ( Graphic 
+            linewidth: 2
+            color: black
+            components: {
+                ( Line
+                        transform: ( Rotation 1.570001256 )
+                    vertices: { [ 0.0 -4.1 ] [ 0.0 -3.6 ] }
+                )
+                ( Line
+                        transform: ( Rotation -1.570001256 )
+                    vertices: { [ 0.0 -4.1 ] [ 0.0 -3.6 ] }
+                )   
+            }
+        ) // end of over 55 graphic        
+                    
+         
+        // 135 degree tic mark for a roll over 85 degrees                                                
+        over85: 
+        ( Graphic
+            linewidth: 2
+            components: {
+                ( Line
+                    transform: ( Rotation 2.355001884 )
+                    vertices: { [ 0.0 -4.1 ] [ 0.0 -3.6 ] }
+                )
+                ( Line
+                    transform: ( Rotation -2.355001884 )
+                    vertices: { [ 0.0 -4.1 ] [ 0.0 -3.6 ] }
+                )           
+            }
+        )
+    }
+)              
+
+// Climb dive marker takes x, y, and roll values, and translates and rotates accordingly
+// see inputs for send in ClimbDiveMarker.h.  This is basically a mini adi, but it moves about seperately
+// from the adi.  TestMfdAdi.cpp sends the events to this named object for it to respond.
+climbdivemarker: 
+( Translator
+    color: black
+    components: {
+        climbdivemarkerroll:
+        ( Rotators
+            components: {
+                wing1: 
+                ( Line 
+                    linewidth: 2
+                    segment: 1
+                    vertices: { 
+                        [ -0.5 0.0 ] [ -1 0.0 ]
+                        [ 0.5 0.0 ] [ 1  0.0 ]
+                        [ 0 0.5 ] [ 0 1 ]
+                    }
+                )
+
+                ( OcclusionArc
+                    radius: 0.46
+                    outerRadius: 0.5
+                    slices: 100
+                    startAngle: 200
+                    arcLength: 320   
+                )    
+                
+                // Dot in the middle
+                ( Circle
+                    radius: 0.05
+                    filled: 1
+                    slices: 100
+                ) 
+            }
+        )                    
+    }
+)
+
+    // here is our MfdAdi - notice we scissor it instead of giving it an AdiOcclusionCircle
+( Graphic
+    scissorX: -8
+    scissorWidth: 16 
+    scissorY: -6
+    scissorHeight: 12
+    components: {
+        // MfdAdi works a lot like adi, which is explained in adi.epp.  However, MfdAdi also has a slot which handles the ghost horizon, and tells us how
+        // much pitch we have to exceed for the ghost horizon to show up.  MfdAdi also has a climb dive marker, which will translate and rotate
+        // in accordance to the values it receives.  Other than that, it works exactly like the regular adi.
+        mfdadi:
+        ( Adi
+			// Every time you pitch over 40 or -40 degrees, the ghost horizon bar will become visible
+            scalingTable: 
+            ( Table1
+                x: [ -90 90 ]
+                data: [ 20 -20 ]
+            ) 
+            components: {
+                pitchladder:  
+                ( Graphic
+                    components: {
+					    // sky background
+					    ( Polygon 
+                            color: ( rgb 0 0 0.5  )
+                            transform: ( Translation 0 0 -1 )
+                            vertices: {
+                                [ -100.0 0.0 ] 
+                                [ -100.0 100.0 ]
+                                [  100.0 100.0 ]
+                                [  100.0 0.0 ]
+                            }
+                        )
+					    // ground background
+                        ( Polygon
+                            color: gray
+                            transform: ( Translation 0 0 -1 )
+                            vertices: {
+                                [ -100.0 0.0 ]
+                                [ -100.0 -100.0 ]
+                                [ 100.0 -100.0 ]
+                                [ 100.0 0.0 ]
+                            }
+                        )
+                        zenith: 
+                        ( Graphic
+                            transform: ( Translation 0.0 20 ) 
+                            color: white
+                            linewidth: 2
+                            components: {
+                                ( LineLoop
+                                    vertices: { 
+                                        [ 0.0 -0.92 ]
+                                        [ 0.06  -0.08 ]
+                                        [ 0.29 0 ]
+                                        [ 0.06  0.08 ]
+                                        [ 0.0 0.39 ]
+                                        [ -0.06 0.08 ]
+                                        [ -0.29 0 ]
+                                        [ -0.06 -0.08 ]
+                                    }
+                                )
+                                // underlying polygon
+                                ( Polygon
+                                    color: ( rgb 0 0 0.5 )
+                                    vertices: {
+                                        [ -2 -0.25 ]
+                                        [ -2  0.25 ]
+                                        [  2  0.25 ]
+                                        [  2  -0.25 ]
+                                    }
+                                )
+                            }
+                        ) // end of zenith graphic                                  
+                        horizonbar: 
+                        ( Line
+                            color: white                
+                            linewidth: 2
+                            segment: 1
+                            vertices: {
+                                [ -1 0.0 ] [ -100 0.0 ]
+                                [ 1 0.0 ] [ 100 0.0 ]
+                            }
+                        )
+                        // occlude the bottom tick marks
+                        ( Polygon
+                            color: gray
+                            vertices: {
+                                [ -2 0 ]
+                                [  2 0 ]
+                                [  2 -0.3 ]
+                                [ -2 -0.3 ]
+                            }
+                        )
+                        ( TickMarks  
+                            linewidth: 2
+                            transform: ( Translation 1 0 )
+                            gaugeLength: 20
+                            quantity: 10
+                            tickLength: 0.7
+                            color: white
+                        )               
+                        ( TickMarks  
+                            linewidth: 2
+                            transform: ( Translation -1 0 )
+                            gaugeLength: 20
+                            quantity: 10
+                            tickLength: -0.7
+                            color: white
+                        )   
+                        ( TickMarks  
+                            linewidth: 2
+                            transform: ( Translation 1.7 0 )
+                            gaugeLength: 20
+                            quantity: 10
+                            tickLength: -0.2
+                            flip: 1
+                            color: white
+                        )               
+                        ( TickMarks  
+                            linewidth: 2
+                            transform: ( Translation -1.7 0 )
+                            gaugeLength: 20
+                            quantity: 10
+                            tickLength: -0.2
+                            flip: 1
+                            color: white
+                        )               
+            
+                        30degreetext:   
+                        ( NumericReadout
+                            color: cyan
+                            font: smallerfont
+                            transform: ( Translation -1.6 6.2 ) 
+                            value: 30
+                            format: "##"
+                        )
+                        60degreetext:   
+                        ( NumericReadout
+                            color: cyan
+                            font: smallerfont
+                            transform: ( Translation -1.6 12.9 ) 
+                            value: 60
+                            format: "##"
+                        )
+                        
+                        nadir: 
+                        ( Graphic
+                            transform: ( Translation 0.0 -20 )
+                            color: white
+                            components: {
+                                ( OcclusionCircle 
+                                    radius: 0.35 
+                                    outerRadius: 0.4
+                                    slices: 100
+                                    filled: 1
+                                )
+                                ( Line 
+                                    linewidth: 2
+                                    vertices: { 
+                                        [ 0.0 0.4 ] 
+                                        [ 0.0 0.8 ] 
+                                    } 
+                                )
+                                // occlude those last two tick marks
+                                ( Polygon
+                                    color: gray
+                                    vertices: {
+                                        [ -1.5 -2.5 ]
+                                        [ -1.5  0.5 ]
+                                        [  1.5  0.5 ]
+                                        [  1.5 -2.5 ]
+                                    }
+                                )
+                            }
+                        ) // end of nadir graphic
+                            
+                        // negative tick marks
+                        ( TickMarks  
+                            linewidth: 2
+                            transform: ( Translation 1 -2.2 )
+                            gaugeLength: -20
+                            quantity: 10
+                            flip: 1
+                            tickLength: 0.3
+                            color: white
+                        )               
+                        ( TickMarks  
+                            linewidth: 2
+                            transform: ( Translation -1 -2.2 )
+                            gaugeLength: -20
+                            quantity: 10
+                            flip: 1
+                            tickLength: 0.3
+                            color: white
+                        )               
+                                                                                                                                          
+                        -10degree:      
+                        ( Graphic 
+                            color: white
+                            transform: ( Translation 0 -2.2 )
+                            components: {
+                                // dotted lines with 1/2 dive angle articulated (radians)
+                                ( Line
+                                    linewidth: 2
+                                    transform: { ( Translation 1 0 ) ( Rotation -0.087 ) }
+                                    segment: 1
+                                    vertices: {
+                                        [ 0.0 0.0 ] [ 0.195 0.0 ]
+                                        [ 0.2925 0.0 ] [ 0.4875 0.0 ]
+                                        [ 0.585  0.0 ] [ 0.78 0.0 ]
+                                    }
+                                )
+                                ( Line
+                                    linewidth: 2
+                                    transform: { ( Translation -1 0 ) ( Rotation 0.087 ) }
+                                    segment: 1
+                                    vertices: {
+                                        [ 0.0 0.0 ] [ -0.195 0.0 ]
+                                        [ -0.2925 0.0 ] [ -0.4875 0.0 ]
+                                        [ -0.585  0.0 ] [ -0.78 0.0 ]
+                                    }
+                                )
+                            }
+                        ) // end of -10 degree graphic (small bar)
+
+
+                        -20degree:      
+                        ( Graphic
+                            color: white
+                            transform: ( Translation 0 -4.4 )
+                            components: {
+                                // dotted lines with 1/2 dive angle articulated (radians)
+                                ( Line
+                                    linewidth: 2
+                                    transform: { ( Translation 1 0 ) ( Rotation -0.174 ) }
+                                    segment: 1
+                                    vertices: {
+                                        [ 0.0 0.0 ] [ 0.195 0.0 ]
+                                        [ 0.2925 0.0 ] [ 0.4875 0.0 ]
+                                        [ 0.585  0.0 ] [ 0.78 0.0 ]
+                                    }
+                                )
+                                ( Line
+                                    linewidth: 2
+                                    transform: { ( Translation -1 0 ) ( Rotation 0.174 ) }
+                                    segment: 1
+                                    vertices: {
+                                        [ 0.0 0.0 ] [ -0.195 0.0 ]
+                                        [ -0.2925 0.0 ] [ -0.4875 0.0 ]
+                                        [ -0.585  0.0 ] [ -0.78 0.0 ]
+                                    }
+                                )
+                            }
+                        ) // end of -20 degree graphic (small bar)
+                            
+                        -30degree:      
+                        ( Graphic
+                            color: white
+                            transform: ( Translation 0 -6.6 )
+                            components: {
+                                // dotted lines with 1/2 dive angle articulated (radians)
+                                ( Line
+                                    linewidth: 2
+                                    transform: { ( Translation 1 0 ) ( Rotation -0.262 ) }
+                                    segment: 1
+                                    vertices: {
+                                        [ 0.0 0.0 ] [ 0.195 0.0 ]
+                                        [ 0.2925 0.0 ] [ 0.4875 0.0 ]
+                                        [ 0.585  0.0 ] [ 0.78 0.0 ]
+                                    }
+                                )
+                                ( Line
+                                    linewidth: 2
+                                    transform: { ( Translation -1 0 ) ( Rotation 0.262 ) }
+                                    segment: 1
+                                    vertices: {
+                                        [ 0.0 0.0 ] [ -0.195 0.0 ]
+                                        [ -0.2925 0.0 ] [ -0.4875 0.0 ]
+                                        [ -0.585  0.0 ] [ -0.78 0.0 ]
+                                    }
+                                )
+                            }
+                        ) // end of -30 degree graphic (small bar)
+                        
+                        -30degreetext:   
+                        ( NumericReadout
+                            color: cyan
+                            font: smallerfont
+                            transform: ( Translation 1.6 -6.6 ) 
+                            value: 30
+                            format: "##"
+                        )
+
+                        -40degree:      
+                        ( Graphic
+                            color: white
+                            transform: ( Translation 0 -8.9 )
+                            components: {
+                                // dotted lines with 1/2 dive angle articulated (radians)
+                                ( Line
+                                    linewidth: 2
+                                    transform: { ( Translation 1 0 ) ( Rotation -0.349 ) }
+                                    segment: 1
+                                    vertices: {
+                                        [ 0.0 0.0 ] [ 0.195 0.0 ]
+                                        [ 0.2925 0.0 ] [ 0.4875 0.0 ]
+                                        [ 0.585  0.0 ] [ 0.78 0.0 ]
+                                    }
+                                )
+                                ( Line
+                                    linewidth: 2
+                                    transform: { ( Translation -1 0 ) ( Rotation 0.349 ) }
+                                    segment: 1
+                                    vertices: {
+                                        [ 0.0 0.0 ] [ -0.195 0.0 ]
+                                        [ -0.2925 0.0 ] [ -0.4875 0.0 ]
+                                        [ -0.585  0.0 ] [ -0.78 0.0 ]
+                                    }
+                                )
+                            }
+                        ) // end of -40 degree graphic (small bar)
+
+
+
+                        -50degree:      
+                        ( Graphic
+                            color: white
+                            transform: ( Translation 0 -11.1 )
+                            components: {
+                                // dotted lines with 1/2 dive angle articulated (radians)
+                                ( Line
+                                    linewidth: 2
+                                    transform: { ( Translation 1 0 ) ( Rotation -0.436 ) }
+                                    segment: 1
+                                    vertices: {
+                                        [ 0.0 0.0 ] [ 0.195 0.0 ]
+                                        [ 0.2925 0.0 ] [ 0.4875 0.0 ]
+                                        [ 0.585  0.0 ] [ 0.78 0.0 ]
+                                    }
+                                )
+                                ( Line
+                                    linewidth: 2
+                                    transform: { ( Translation -1 0 ) ( Rotation 0.436 ) }
+                                    segment: 1
+                                    vertices: {
+                                        [ 0.0 0.0 ] [ -0.195 0.0 ]
+                                        [ -0.2925 0.0 ] [ -0.4875 0.0 ]
+                                        [ -0.585  0.0 ] [ -0.78 0.0 ]
+                                    }
+                                )
+                            }
+                        ) // end of -50 degree graphic (small bar)
+
+
+                        -60degree:      
+                        ( Graphic
+                            color: white
+                            transform: ( Translation 0 -13.3 )
+                            components: {
+                                // dotted lines with 1/2 dive angle articulated (radians)
+                                ( Line
+                                    linewidth: 2
+                                    transform: { ( Translation 1 0 ) ( Rotation -0.52 ) }
+                                    segment: 1
+                                    vertices: {
+                                        [ 0.0 0.0 ] [ 0.195 0.0 ]
+                                        [ 0.2925 0.0 ] [ 0.4875 0.0 ]
+                                        [ 0.585  0.0 ] [ 0.78 0.0 ]
+                                    }
+                                )
+                                ( Line
+                                    linewidth: 2
+                                    transform: { ( Translation -1 0 ) ( Rotation 0.52 ) }
+                                    segment: 1
+                                    vertices: {
+                                        [ 0.0 0.0 ] [ -0.195 0.0 ]
+                                        [ -0.2925 0.0 ] [ -0.4875 0.0 ]
+                                        [ -0.585  0.0 ] [ -0.78 0.0 ]
+                                    }
+                                )
+                            }
+                        ) // end of -60 degree graphic (small bar)
+                        -60degreetext:   
+                        ( NumericReadout
+                            color: cyan
+                            font: smallerfont
+                            transform: ( Translation 1.6 -13.3 ) 
+                            value: 60
+                            format: "##"
+                        )
+
+                        -70degree:      
+                        ( Graphic
+                            color: white
+                            transform: ( Translation 0 -15.5 )
+                            components: {
+                                // dotted lines with 1/2 dive angle articulated (radians)
+                                ( Line
+                                    linewidth: 2
+                                    transform: { ( Translation 1 0 ) ( Rotation -0.61 ) }
+                                    segment: 1
+                                    vertices: {
+                                        [ 0.0 0.0 ] [ 0.195 0.0 ]
+                                        [ 0.2925 0.0 ] [ 0.4875 0.0 ]
+                                        [ 0.585  0.0 ] [ 0.78 0.0 ]
+                                    }
+                                )
+                                ( Line
+                                    linewidth: 2
+                                    transform: { ( Translation -1 0 ) ( Rotation 0.61 ) }
+                                    segment: 1
+                                    vertices: {
+                                        [ 0.0 0.0 ] [ -0.195 0.0 ]
+                                        [ -0.2925 0.0 ] [ -0.4875 0.0 ]
+                                        [ -0.585  0.0 ] [ -0.78 0.0 ]
+                                    }
+                                )
+                            }
+                        ) // end of -70 degree graphic (small bar)
+
+                        -80degree:      
+                        ( Graphic
+                            color: white
+                            transform: ( Translation 0 -17.8 )
+                            components: {
+                                // dotted lines with 1/2 dive angle articulated (radians)
+                                ( Line
+                                    linewidth: 2
+                                    transform: { ( Translation 1 0 ) ( Rotation -0.7 ) }
+                                    segment: 1
+                                    vertices: {
+                                        [ 0.0 0.0 ] [ 0.195 0.0 ]
+                                        [ 0.2925 0.0 ] [ 0.4875 0.0 ]
+                                        [ 0.585  0.0 ] [ 0.78 0.0 ]
+                                    }
+                                )
+                                ( Line
+                                    linewidth: 2
+                                    transform: { ( Translation -1 0 ) ( Rotation 0.7 ) }
+                                    segment: 1
+                                    vertices: {
+                                        [ 0.0 0.0 ] [ -0.195 0.0 ]
+                                        [ -0.2925 0.0 ] [ -0.4875 0.0 ]
+                                        [ -0.585  0.0 ] [ -0.78 0.0 ]
+                                    }
+                                )
+                            }
+                        ) // end of -80 degree graphic (small bar)
+                        // Ghost horizon example
+                     }
+                )
+            }
+        ) // end of the adi
+        ghosthorizon:               
+        ( GhostHorizon
+            linewidth: 2
+            width: 50
+            height: 50
+            skyColor: ( rgb 0 0 0.5 )
+            groundColor: gray
+            scalingTable: 
+            // same as the pitchladder, although we will never get past +- 40 degrees pitch before going visible
+            ( Table1
+                x: [ -20 20 ]
+                data: [ 4.45 -4.45 ]
+            ) 
+            components: {
+                ( Line
+                    linewidth: 2
+                    transform: ( Translation 0 0 0.05 )
+                    segment: 1
+                    vertices: {
+                        // top
+                        [ 1 0 ] [ 2 0 ]
+                        [ 3 0 ] [ 4 0 ]
+                        [ 5 0 ] [ 6 0 ]
+                        [ 7 0 ] [ 8 0 ]
+                        [ 8 0 ] [ 9 0 ] 
+                        [ 10 0 ] [ 11 0 ]
+                        [ 12 0 ] [ 13 0 ]
+                        [ 14 0 ] [ 15 0 ]
+                        [ 16 0 ] [ 17 0 ]
+                        [ 18 0 ] [ 19 0 ]
+                        [ 20 0 ] [ 21 0 ]
+                        // bottom
+                        [ -1 0 ] [ -2 0 ]
+                        [ -3 0 ] [ -4 0 ]
+                        [ -5 0 ] [ -6 0 ]
+                        [ -7 0 ] [ -8 0 ]
+                        [ -8 0 ] [ -9 0 ] 
+                        [ -10 0 ] [ -11 0 ]
+                        [ -12 0 ] [ -13 0 ]
+                        [ -14 0 ] [ -15 0 ]
+                        [ -16 0 ] [ -17 0 ]
+                        [ -18 0 ] [ -19 0 ]
+                        [ -20 0 ] [ -21 0 ]
+                    }
+                ) 
+            }
+        ) // end of ghost horizon instance  
+        
+    }
+)

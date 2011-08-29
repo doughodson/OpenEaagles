@@ -1,0 +1,209 @@
+//------------------------------------------------------------------------------
+// Classes:	TrackManager, AirTrkMgr, GmtiGrkMgr, RwrGrkMgr
+//------------------------------------------------------------------------------
+#ifndef __TrackManager_H_60129798_2F31_4c5c_886A_F0001E76B490__
+#define __TrackManager_H_60129798_2F31_4c5c_886A_F0001E76B490__
+
+#include "openeaagles/simulation/System.h"
+
+namespace Eaagles {
+namespace Simulation {
+
+class Emission;
+class Player;
+class Track;
+
+//==============================================================================
+// Class:	TrackManager
+//
+// Description: Abstract class for Track Managers
+//
+// Form name: TrackManager
+// Slots:
+//    maxTracks       <Number>   ! Maximum number of tracks (default: MAX_TRKS)
+//
+//    maxTrackAge     <Time>     ! Maximum track age (default: 3) ### NES: the comment in the src says 2 sec
+//    maxTrackAge     <Number>   ! Maximum track age (seconds)
+//
+//    firstTrackId    <Integer>  ! First track ID (default: 1000)
+//
+//    alpha           <Number>   ! Alpha (default: 1.0)
+//    beta            <Number>   ! Beta  (default: 0.0)
+//    gamma           <Number>   ! Gamma (default: 0.0)
+//
+//    logTrackUpdates <Boolean>  ! True to log all updates to tracks (default: true)
+//
+//==============================================================================
+class TrackManager : public System  
+{
+   DECLARE_SUBCLASS(TrackManager,System)
+   
+public:
+   TrackManager();
+
+   virtual LCreal getMaxTrackAge() const;
+   virtual bool setMaxTrackAge(const double sec);
+
+   virtual unsigned int getMaxTracks() const;
+   virtual unsigned int getNumTracks() const;
+
+   virtual int getTrackList(SPtr<Track>* const slist, const unsigned int max) const;
+
+   // Note: Tracks have been ref() before being returned and need to
+   // be unref() by the user.
+   virtual int getTrackList(Track* tlist[], const unsigned int max);
+   virtual int getTrackList(const Track* tlist[], const unsigned int max) const;
+
+   // Type of tracks managed (see enum TypeBits in Track.h)   
+   virtual bool isType(const short t) const;
+   virtual short getType() const;
+   virtual void setType(const short t);
+   virtual void setSubtype(const short t);
+
+   virtual bool getLogTrackUpdates() const;
+   virtual bool setLogTrackUpdates(const bool b);
+   
+   // Add a track
+   virtual bool addTrack(Track* const t);
+
+   // Clear all tracks and queues
+   virtual void clearTracksAndQueues();
+
+   // Add a new emission report (RF track managers only)
+   virtual void newReport(Emission* em, LCreal snDbl);
+
+   // System Interface -- Event handler(s)
+   virtual bool killedNotification(Player* const killedBy = 0);
+
+   // Component Interface
+   virtual void reset();
+
+protected:
+   static const int MAX_TRKS = 200;                         // Max tracks
+   static const int MAX_REPORTS = 200;                      // Max number of reports
+
+   unsigned int getNewTrackID()                             { return nextTrkId++; }
+
+   virtual void processTrackList(const LCreal dt) =0;                  // Derived class unique
+
+   virtual Emission* getReport(LCreal* const sn);                      // Get the next 'new' report from the queue
+   virtual bool setSlotMaxTracks(const Basic::Number* const num);    // Sets the maximum numberof track files
+   virtual bool setSlotMaxTrackAge(const Basic::Number* const num);  // Sets the maximum age of tracks
+   virtual bool setSlotFirstTrackId(const Basic::Number* const num); // Sets the first (starting) track id number
+   virtual bool setSlotAlpha(const Basic::Number* const num);        // Sets alpha
+   virtual bool setSlotBeta(const Basic::Number* const num);         // Sets beta
+   virtual bool setSlotGamma(const Basic::Number* const num);        // Sets gamma
+   virtual bool setSlotLogTrackUpdates(const Basic::Number* const num); // Sets logTrackUpdates
+
+   // Track List
+   Track*              tracks[MAX_TRKS];   // Tracks
+   unsigned int        nTrks;              // Number of tracks
+   unsigned int        maxTrks;            // Max number of tracks (input)
+   mutable long        trkListLock;        // Semaphore to protect the track list
+
+   // Prediction parameters
+   void makeMatrixA(const LCreal dt);
+   LCreal              A[3][3];            // A Matrix
+   bool                haveMatrixA;        // Matrix A has be initialized
+   LCreal              alpha;              // Alpha parameter
+   LCreal              beta;               // Beta parameter
+   LCreal              gamma;              // Gamma parameter
+
+   unsigned int        nextTrkId;          // Next track ID
+   unsigned int        firstTrkId;         // First (starting) track ID
+
+   QQueue<Emission*>   emQueue;            // Emission input queue
+   QQueue<LCreal>      snQueue;            // S/N input queue.
+   mutable long        queueLock;          // Semaphore to protect both emQueue and snQueue
+
+   // System class Interface -- phase() callbacks
+   virtual void process(const LCreal dt);     // Phase 3
+
+   // Basic::Component protected interface
+   virtual bool shutdownNotification();
+
+private:
+   void initData();
+
+   LCreal              maxTrackAge;        // Max Track age (sec)
+   short               type;               // Track type: the bit-wise OR of various type bits (see enum TypeBits in Track.h)
+   bool                logTrackUpdates;    // input slot; if false, updates to tracks are not logged.
+};
+
+//==============================================================================
+// Class:	AirTrkMgr
+// Base class:	Basic::Object -> Basic::Component -> TrackManager -> System -> AirTrkMgr
+//
+// Description: Track Manager for A/A modes (e.g., TWS, ACM, SST)
+// Form name: AirTrkMgr
+// Slots:
+//   positionGate   <Basic::Number>  ! Position Gate (meters) (default: 2.0f * NM2M)
+//   rangeGate      <Basic::Number>  ! Range Gate (meters) (default: 500.0f)
+//   velocityGate   <Basic::Number>  ! Velocity Gate (m/s) (default: 10.0f)
+//
+// GUID: EEC6F6A1_DB0F_4a08_8B34_078F3DCC6025
+//==============================================================================
+class AirTrkMgr : public TrackManager  
+{
+    DECLARE_SUBCLASS(AirTrkMgr,TrackManager)
+public:
+    AirTrkMgr();
+
+    LCreal getPosGate()                             { return posGate;}
+    LCreal getRngGate()                             { return rngGate;}
+    LCreal getVelGate()                             { return velGate;}
+
+protected:
+    virtual void processTrackList(const LCreal dt);     // Process the reports into a track list
+
+private:
+    bool setPositionGate(const Basic::Number* const num);
+    bool setRangeGate(const Basic::Number* const num);
+    bool setVelocityGate(const Basic::Number* const num);
+
+    // Prediction parameters
+    LCreal              posGate;            // Position Gate (meters)
+    LCreal              rngGate;            // Range Gate (meters)
+    LCreal              velGate;            // Velocity Gate (m/s)
+};
+
+//==============================================================================
+// Class:	GmtiTrkMgr
+// Base class:	Basic::Object -> Basic::Component -> TrackManager -> System -> GmtiTrkMgr
+//
+// Description: Very simple Ground Moving Target Indication (GMTI) Track Manager
+// Form name: GmtiTrkMgr
+//
+// GUID: 38A80514_9E11_4961_BFCD_755372A1C7CE
+//==============================================================================
+class GmtiTrkMgr : public TrackManager  
+{
+    DECLARE_SUBCLASS(GmtiTrkMgr,TrackManager)
+public:
+    GmtiTrkMgr();
+protected:
+    virtual void processTrackList(const LCreal dt);     // Process the reports into a track list
+};
+
+//------------------------------------------------------------------------------
+// Class:	RwrTrkMgr
+// Base class:	Basic::Object -> Basic::Component -> TrackManager -> System -> RwrTrkMgr
+//
+// Description: RADAR Warning Receiver (RWR) Track Manager
+// Form name: RwrTrkMgr
+//
+// GUID: 95ED6BC2_D5C0_46ce_ABAF_FC4ABB53F835
+//==============================================================================
+class RwrTrkMgr : public TrackManager  
+{
+    DECLARE_SUBCLASS(RwrTrkMgr,TrackManager)
+public:
+    RwrTrkMgr();
+protected:
+    virtual void processTrackList(const LCreal dt);     // Process the reports into a track list
+};
+
+} // End Simulation namespace
+} // End Eaagles namespace
+
+#endif // __TrackManager_H_60129798_2F31_4c5c_886A_F0001E76B490__

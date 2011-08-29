@@ -1,0 +1,609 @@
+( Graphic
+    scissorX: -2
+    scissorWidth: 4
+    scissorY: -0.4
+    scissorHeight: 0.8
+    transform: ( Translation 0 -5.45 )
+    components: {              
+        // Side slip uses the GaugeSlider instrument, which, given a side slip value, will move from left to right and vice versa.  Guage slider
+        // is explained in detail in /gauges/gauge1.epp
+        // This is where we send our side slip send command
+        sideslip: 
+        ( GaugeSlider
+            vertical: 0
+            scalingTable: 
+                ( Table1
+                    // slip - in degrees
+                    x: [ -20 20 ]
+                    // inches to translate
+                data: [ -2 2 ]
+                )
+            components: {
+                ( OcclusionCircle
+                    color: ( rgb 0.1 0.1 0.1 )
+                    radius: 0.3
+                    outerRadius: 0.4
+                    filled: 1
+                )
+                ( Line
+                    linewidth: 3
+                    segment: 1
+                    color: black
+                    vertices: {
+                        [ -0.25 0.25 ] [ 0.25 -0.25 ]
+                        [ -0.25 -0.25 ] [ 0.25 0.25 ]
+                    }
+                )
+            }
+        )    
+        ( Line
+            color: black
+            linewidth: 2
+            segment: 1
+            vertices: { 
+                [  -0.4 -0.4 ] [  -0.4 0.4 ] 
+                [  0.4 -0.4 ] [  0.4 0.4 ] 
+            }
+        )
+                            
+        // main polygon
+        ( Polygon 
+            color: white
+            vertices: {
+                [ -2 -0.4 ]
+                [ 2 -0.4 ]
+                [ 2 0.4 ]
+                [ -2 0.4 ]
+            }
+        )
+        
+    }
+) // end of the side slip graphic          
+
+// ADI - altitude direction indicator
+// See Adi.h for input/output parameters and send commands
+// Setting up the outline of the adi
+( Graphic 
+    scissorX: -5.05
+    scissorWidth: 10.1
+    scissorY: -6
+    scissorHeight: 11.1
+    components: {
+        // just an outline
+        ( Line
+            linewidth: 5
+            segment: 1
+            color: gray2
+            vertices: {
+                [ -5 -2.5 ] [ -2.5 -6 ]
+                [ -2.5 -6 ] [ 2.5 -6 ]
+                [ 2.5 -6 ] [ 5 -2.5 ]
+                [ 5 -2.5 ] [ 5 5 ]
+                [ 5 5 ] [ -5 5 ] 
+                [ -5 5 ] [ -5 -2.5 ]
+            }
+        )
+        // these are the tic marks that are ALWAYS visible
+        ( Graphic
+            color: white
+            components: {
+                // ground
+                ( Polygon
+                    color: white
+                    transform: ( Translation 0.0 -5 )
+                    vertices: {
+                        [ -0.3 0.0 ]
+                        [ 0.3 0.0 ]
+                        [ 0.1 1 ]
+                        [ -0.1 1 ]
+                    }
+                )
+                // ground
+                ( Polygon
+                    color: white
+                    transform: ( Translation 0.0 5 )
+                    vertices: {
+                        [ -0.3 0.0 ]
+                        [ 0.3 0.0 ]
+                        [ 0.1 -1 ]
+                        [ -0.1 -1 ]
+                    }
+                )
+                // +- 10 ticks
+                ( Line 
+                    color: white
+                    linewidth: 2
+                    transform: { ( Rotation 2.96  ) ( Translation 0 4 ) }
+                    vertices: { [ 0.0 0 ] [ 0.0 0.4 ] }
+                )
+                ( Line 
+                    color: white
+                    linewidth: 2
+                    transform: { ( Rotation -2.96  ) ( Translation 0 4 ) }
+                    vertices: { [ 0.0 0 ] [ 0.0 0.4 ] }
+                )
+                // +/- 20 ticks
+                ( Line 
+                    color: white
+                    linewidth: 2
+                    transform: { ( Rotation 2.79  ) ( Translation 0 4 ) }
+                    vertices: { [ 0.0 0 ] [ 0.0 0.4 ] }
+                )
+                ( Line 
+                    color: white
+                    linewidth: 2
+                    transform: { ( Rotation -2.79  ) ( Translation 0 4 ) }
+                    vertices: { [ 0.0 0 ] [ 0.0 0.4 ] }
+                )
+                // +- 30 degree tics
+                ( Line 
+                    color: white
+                    linewidth: 3
+                    transform: { ( Rotation 2.62  ) ( Translation 0 4 ) }
+                    vertices: { [ 0.0 0 ] [ 0.0 0.8 ] }
+                )
+                ( Line 
+                    color: white
+                    linewidth: 3
+                    transform: { ( Rotation -2.62  ) ( Translation 0 4 ) }
+                    vertices: { [ 0.0 0 ] [ 0.0 0.8 ] }
+                )
+                // +/- 45
+                ( Line 
+                    color: white
+                    linewidth: 3
+                    transform: { ( Rotation 2.35  ) ( Translation 0 4 ) }
+                    vertices: { [ 0.0 0 ] [ 0.0 0.8 ] }
+                )
+                ( Line 
+                    color: white
+                    linewidth: 3
+                    transform: { ( Rotation -2.35  ) ( Translation 0 4 ) }
+                    vertices: { [ 0.0 0 ] [ 0.0 0.8 ] }
+                )
+                // +/- 90
+                ( Line 
+                    color: white
+                    linewidth: 3
+                    transform: { ( Rotation 1.57  ) ( Translation 0 4 ) }
+                    vertices: { [ 0.0 0 ] [ 0.0 0.8 ] }
+                )
+                ( Line 
+                    color: white
+                    linewidth: 3
+                    transform: { ( Rotation -1.57  ) ( Translation 0 4 ) }
+                    vertices: { [ 0.0 0 ] [ 0.0 0.8 ] }
+                )                
+            }
+        ) 
+         
+        // draw the aircraft symbol
+        ( Graphic
+            components: {                
+                // right wing
+                ( Graphic
+                    transform: ( Translation 1 0 )
+                    components: {
+                        ( Line
+                            linewidth: 2
+                            color: black
+                            segment: 1
+                            vertices: {
+                                [ -0.075 0.075 ] [ 2 0.075 ]
+                                [ 2 0.075 ] [ 2 -0.075 ]
+                                [ 2 -0.075 ] [ 2 -0.5 ]
+                                [ 2 -0.5 ] [ 1.85 -0.5 ]
+                                [ 1.85 -0.5 ] [ 1.85 -0.075 ]
+                                [ 1.85 -0.075 ] [ -0.075 -0.075 ]
+                                [ -0.075 -0.075 ] [ -0.075 0.075 ]
+                            }
+                        )
+                        ( Polygon
+                            color: white
+                            vertices: {
+                                [ -0.075 0.075 ] 
+                                [ 2 0.075 ]
+                                [ 2 -0.075 ]
+                                [ -0.075 -0.075 ]
+                            }
+                        )
+                        ( Polygon
+                            color: white
+                            vertices: {
+                                [ 2 -0.075 ]
+                                [ 2 -0.5 ]
+                                [ 1.85 -0.5 ]
+                                [ 1.85 -0.075 ]
+                            }
+                        )
+                        
+                    }
+                )
+                // left wing
+                ( Graphic
+                    transform: ( Translation -1 0 )
+                    components: {
+                        ( Line
+                            linewidth: 2
+                            color: black
+                            segment: 1
+                            vertices: {
+                                [ 0.075 0.075 ] [ -2 0.075 ]
+                                [ -2 0.075 ] [ -2 -0.075 ]
+                                [ -2 -0.075 ] [ -2 -0.5 ]
+                                [ -2 -0.5 ] [ -1.85 -0.5 ]
+                                [ -1.85 -0.5 ] [ -1.85 -0.075 ]
+                                [ -1.85 -0.075 ] [ 0.075 -0.075 ]
+                                [ 0.075 -0.075 ] [ 0.075 0.075 ]
+                            }
+                        )
+                        ( Polygon
+                            color: white
+                            vertices: {
+                                [ 0.075 0.075 ] 
+                                [ -2 0.075 ]
+                                [ -2 -0.075 ]
+                                [ 0.075 -0.075 ]
+                            }
+                        )
+                        ( Polygon
+                            color: white
+                            vertices: {
+                                [ -2 -0.075 ]
+                                [ -2 -0.5 ]
+                                [ -1.85 -0.5 ]
+                                [ -1.85 -0.075 ]
+                            }
+                        )
+                        
+                    }
+                )
+                        
+                
+                // body                       
+                ( LineLoop
+                    color: black
+                    linewidth: 2
+                    vertices: {
+                        [ -0.15 0.15 ]
+                        [  0.15 0.15 ]
+                        [  0.15 -0.15 ]
+                        [ -0.15 -0.15 ]
+                    }
+                )
+                ( Polygon
+                    color: white        
+                    vertices: {
+                        [ -0.15 0.15 ]
+                        [  0.15 0.15 ]
+                        [  0.15 -0.15 ]
+                        [ -0.15 -0.15 ]
+                    }
+                )
+            }
+        ) // end of the aircraft symbol
+
+
+        // occlusion
+        ( OcclusionCircle 
+            color: black
+            outerRadius: 10
+            radius: 4
+        )         
+
+        // Send UPDATE_VALUE (pitch) and UPDATE_VALUE2 (roll) to this name (adi)
+        adi:
+        // The adi is a simple instrument that will take two values, pitch and roll, and will rotate and translate our components, just like an Adi 
+        ( Adi
+            scalingTable: 
+                ( Table1
+                    // pitch degrees
+                    x: [ -90 90 ]
+                    // inches to translate
+                    data: [ 20 -20 ]
+                )  
+            components: {
+                // pitchladder - the graphic we will be translating and rotating   
+                ( Graphic
+                    components: {
+                        zenith: 
+                        ( Circle
+                            transform: ( Translation 0.0 20 ) 
+                            color: black
+                            filled: 1
+                            slices: 100
+                            radius: 0.5
+                        ) // end of zenith graphic     
+                        nadir:      
+                        ( Circle
+                            transform: ( Translation 0.0 -20 )
+                            color: white
+                            filled: 1
+                            slices: 100
+                            radius: 0.5
+                        ) // end of nadir graphic
+                        // positive tick marks (10 degrees)
+                        ( TickMarks 
+                            transform: ( Translation -1.5 0 )
+                            gaugeLength: 20
+                            quantity: 10
+                            color: black
+                            tickLength: 3
+                            linewidth: 3
+                        )
+                        // negative tick marks (10 degrees)
+                        ( TickMarks 
+                            transform: ( Translation -1.5 0 )
+                            gaugeLength: -20
+                            quantity: 10
+                            color: white
+                            tickLength: 3
+                            linewidth: 3
+                        )
+                        // 5 degree tick marks!
+                        ( TickMarks 
+                            transform: ( Translation -0.5 0 )
+                            gaugeLength: 20
+                            quantity: 19
+                            color: black
+                            tickLength: 1
+                            linewidth: 3
+                        )
+                        ( TickMarks 
+                            transform: ( Translation -0.5 0 )
+                            gaugeLength: -20
+                            quantity: 19
+                            color: white
+                            tickLength: 1
+                            linewidth: 3
+                        )
+                        // one big line going up the positive axis and down the negative
+                        ( Line
+                            linewidth: 3
+                            color: black
+                            vertices: {
+                                [ 0 0 ] [ 0 100 ]
+                            }
+                        )
+                        ( Line
+                            linewidth: 3
+                            color: white
+                            vertices: {
+                                [ 0 0 ] [ 0 -100 ]
+                            }
+                        )
+                        // here is the horizon line
+                        ( Line
+                            color: black
+                            linewidth: 3
+                            vertices: {
+                                [ -100 0 ] [ 100 0 ]
+                            }
+                        )
+                        
+                        backsky:
+                        ( Polygon 
+                            color: blue
+                            transform: ( Translation 0 0 -1 )
+                            vertices: {
+                                [ -100.0 0.0 ] 
+                                [ -100.0 100.0 ]
+                                [  100.0 100.0 ]
+                                [  100.0 0.0 ]
+                            }
+                        )
+                        background: 
+                        ( Polygon
+                            color: ( rgb 0 0.5 0 )
+                            transform: ( Translation 0 0 -1 )
+                            vertices: {
+                                [ -100.0 0.0 ]
+                                [ -100.0 -100.0 ]
+                                [ 100.0 -100.0 ]
+                                [ 100.0 0.0 ]
+                            }
+                        )
+                        // generic numbers at every 10 degrees
+                        // positive
+                        ( AsciiText
+                            text: "10"
+                            font: smallfont
+                            transform: ( Translation 1.55 2 )
+                            color: black
+                        )
+                        ( AsciiText
+                            text: "10"
+                            font: smallfont
+                            transform: ( Translation -2.25 2 )
+                            color: black
+                        )
+                        ( AsciiText
+                            text: "20"
+                            font: smallfont
+                            transform: ( Translation 1.55 4.2 )
+                            color: black
+                        )
+                        ( AsciiText
+                            text: "20"
+                            font: smallfont
+                            transform: ( Translation -2.25 4.2 )
+                            color: black
+                        )
+                        ( AsciiText
+                            text: "30"
+                            font: smallfont
+                            transform: ( Translation 1.55 6.45 )
+                            color: black
+                        )
+                        ( AsciiText
+                            text: "30"
+                            font: smallfont
+                            transform: ( Translation -2.25 6.45 )
+                            color: black
+                        )
+                        ( AsciiText
+                            text: "40"
+                            font: smallfont
+                            transform: ( Translation 1.55 8.7 )
+                            color: black
+                        )
+                        ( AsciiText
+                            text: "40"
+                            font: smallfont
+                            transform: ( Translation -2.25 8.7 )
+                            color: black
+                        )
+                        ( AsciiText
+                            text: "50"
+                            font: smallfont
+                            transform: ( Translation 1.55 10.9 )
+                            color: black
+                        )
+                        ( AsciiText
+                            text: "50"
+                            font: smallfont
+                            transform: ( Translation -2.25 10.9 )
+                            color: black
+                        )
+                        ( AsciiText
+                            text: "60"
+                            font: smallfont
+                            transform: ( Translation 1.55 13.1 )
+                            color: black
+                        )
+                        ( AsciiText
+                            text: "60"
+                            font: smallfont
+                            transform: ( Translation -2.25 13.1 )
+                            color: black
+                        )
+                        ( AsciiText
+                            text: "70"
+                            font: smallfont
+                            transform: ( Translation 1.55 15.3 )
+                            color: black
+                        )
+                        ( AsciiText
+                            text: "70"
+                            font: smallfont
+                            transform: ( Translation -2.25 15.3 )
+                            color: black
+                        )
+                        ( AsciiText
+                            text: "80"
+                            font: smallfont
+                            transform: ( Translation 1.55 17.6 )
+                            color: black
+                        )
+                        ( AsciiText
+                            text: "80"
+                            font: smallfont
+                            transform: ( Translation -2.25 17.6 )
+                            color: black
+                        )
+                        
+                        // negative
+                        ( AsciiText
+                            text: "10"
+                            font: smallfont
+                            transform: ( Translation 1.55 -2.45 )
+                            color: white
+                        )
+                        ( AsciiText
+                            text: "10"
+                            font: smallfont
+                            transform: ( Translation -2.25 -2.45 )
+                            color: white
+                        )
+                        ( AsciiText
+                            text: "20"
+                            font: smallfont
+                            transform: ( Translation 1.55 -4.7 )
+                            color: white
+                        )
+                        ( AsciiText
+                            text: "20"
+                            font: smallfont
+                            transform: ( Translation -2.25 -4.7 )
+                            color: white
+                        )
+                        ( AsciiText
+                            text: "30"
+                            font: smallfont
+                            transform: ( Translation 1.55 -6.9 )
+                            color: white
+                        )
+                        ( AsciiText
+                            text: "30"
+                            font: smallfont
+                            transform: ( Translation -2.25 -6.9 )
+                            color: white
+                        )
+                        ( AsciiText
+                            text: "40"
+                            font: smallfont
+                            transform: ( Translation 1.55 -9.1 )
+                            color: white
+                        )
+                        ( AsciiText
+                            text: "40"
+                            font: smallfont
+                            transform: ( Translation -2.25 -9.1 )
+                            color: white
+                        )
+                        ( AsciiText
+                            text: "50"
+                            font: smallfont
+                            transform: ( Translation 1.55 -11.3 )
+                            color: white
+                        )
+                        ( AsciiText
+                            text: "50"
+                            font: smallfont
+                            transform: ( Translation -2.25 -11.3 )
+                            color: white
+                        )
+                        ( AsciiText
+                            text: "60"
+                            font: smallfont
+                            transform: ( Translation 1.55 -13.55 )
+                            color: white
+                        )
+                        ( AsciiText
+                            text: "60"
+                            font: smallfont
+                            transform: ( Translation -2.25 -13.55 )
+                            color: white
+                        )
+                        ( AsciiText
+                            text: "70"
+                            font: smallfont
+                            transform: ( Translation 1.55 -15.75 )
+                            color: white
+                        )
+                        ( AsciiText
+                            text: "70"
+                            font: smallfont
+                            transform: ( Translation -2.25 -15.75 )
+                            color: white
+                        )
+                        ( AsciiText
+                            text: "80"
+                            font: smallfont
+                            transform: ( Translation 1.55 -18 )
+                            color: white
+                        )
+                        ( AsciiText
+                            text: "80"
+                            font: smallfont
+                            transform: ( Translation -2.25 -18 )
+                            color: white
+                        )
+                    }
+                ) // end of pitch ladder
+            }
+        )
+    }
+
+)                            
+

@@ -1,0 +1,370 @@
+// foreground stuff
+( Graphic
+    components: {
+        ( AsciiText
+            color: white
+            vertical: 1
+            text: "VVI"
+            transform: ( Translation -3 2.5 )
+        )
+        ( AsciiText
+            color: white
+            vertical: 1
+            text: "1000FPM"
+            font: smallfont
+            transform: ( Translation -3 -1.5 )
+        )
+        // static pointers in the middle
+        ( Polygon
+            color: yellow
+            vertices: {
+                [ -3 -0.5 ]
+                [ -3 0.5 ]
+                [ -2 0 ]        
+            }
+        )
+        ( Polygon
+            color: yellow
+            vertices: {
+                [ 3 -0.5 ]
+                [ 3 0.5 ]
+                [ 2 0 ]        
+            }
+        )
+        // here is the lineloop surrounding it all
+        ( LineLoop
+            color: white
+            linewidth: 2
+            vertices: {
+                [ -3.5 -7 ]
+                [ -3.5  7 ]
+                [  3.5  7 ]
+                [  3.5 -7 ]
+            }
+        )
+    }
+)
+
+
+( Graphic
+    scissorX: -2
+    scissorWidth: 4
+    scissorY: -6
+    scissorHeight: 12
+    components: {    
+        vvi:
+        ( GaugeSlider  
+            vertical: 1
+            scalingTable: 
+                ( Table1
+                    // velocity (FPM)
+                    x: [ -10000 10000 ]
+                    // inches
+                data: [ 30 -30 ]
+                )
+            components: {
+                // here are the texts (positive)
+                ( Graphic
+                    transform: ( Translation 0 3 )
+                    components: {
+                        ( AsciiText
+                            color: black
+                            transform: ( Translation -0.2 -0.33 )
+                            text: "1"
+                        )
+                        ( Polygon
+                            color: adiCyan        
+                            vertices: {
+                                [ -0.4 -0.4 ]
+                                [ -0.4  0.4 ]
+                                [  0.4  0.4 ]
+                                [  0.4 -0.4 ]
+                            }
+                        )
+                    }
+                )
+                ( Graphic
+                    transform: ( Translation 0 6 )
+                    components: {
+                        ( AsciiText
+                            color: black
+                            transform: ( Translation -0.2 -0.33 )
+                            text: "2"
+                        )
+                        ( Polygon
+                            color: adiCyan        
+                            vertices: {
+                                [ -0.4 -0.4 ]
+                                [ -0.4  0.4 ]
+                                [  0.4  0.4 ]
+                                [  0.4 -0.4 ]
+                            }
+                        )
+                    }
+                )
+                ( Graphic
+                    transform: ( Translation 0 9 )
+                    components: {
+                        ( AsciiText
+                            color: black
+                            transform: ( Translation -0.2 -0.33 )
+                            text: "3"
+                        )
+                        ( Polygon
+                            color: adiCyan        
+                            vertices: {
+                                [ -0.4 -0.4 ]
+                                [ -0.4  0.4 ]
+                                [  0.4  0.4 ]
+                                [  0.4 -0.4 ]
+                            }
+                        )
+                    }
+                )
+                ( Graphic
+                    transform: ( Translation 0 12 )
+                    components: {
+                        ( AsciiText
+                            color: black
+                            transform: ( Translation -0.2 -0.33 )
+                            text: "4"
+                        )
+                        ( Polygon
+                            color: adiCyan        
+                            vertices: {
+                                [ -0.4 -0.4 ]
+                                [ -0.4  0.4 ]
+                                [  0.4  0.4 ]
+                                [  0.4 -0.4 ]
+                            }
+                        )
+                    }
+                )
+                ( Graphic
+                    transform: ( Translation 0 15 )
+                    components: {
+                        ( AsciiText
+                            color: black
+                            transform: ( Translation -0.2 -0.33 )
+                            text: "5"
+                        )
+                        ( Polygon
+                            color: adiCyan        
+                            vertices: {
+                                [ -0.4 -0.4 ]
+                                [ -0.4  0.4 ]
+                                [  0.4  0.4 ]
+                                [  0.4 -0.4 ]
+                            }
+                        )
+                    }
+                )
+                ( Graphic
+                    transform: ( Translation 0 18 )
+                    components: {
+                        ( AsciiText
+                            color: black
+                            transform: ( Translation -0.2 -0.33 )
+                            text: "6"
+                        )
+                        ( Polygon
+                            color: adiCyan        
+                            vertices: {
+                                [ -0.4 -0.4 ]
+                                [ -0.4  0.4 ]
+                                [  0.4  0.4 ]
+                                [  0.4 -0.4 ]
+                            }
+                        )
+                    }
+                )
+                // negative
+                ( Graphic
+                    transform: ( Translation 0 -3 )
+                    components: {
+                        ( AsciiText
+                            color: white
+                            transform: ( Translation -0.2 -0.33 )
+                            text: "1"
+                        )
+                        ( Polygon
+                            color: brown        
+                            vertices: {
+                                [ -0.4 -0.4 ]
+                                [ -0.4  0.4 ]
+                                [  0.4  0.4 ]
+                                [  0.4 -0.4 ]
+                            }
+                        )
+                    }
+                )
+                ( Graphic
+                    transform: ( Translation 0 -6 )
+                    components: {
+                        ( AsciiText
+                            color: white
+                            transform: ( Translation -0.2 -0.33 )
+                            text: "2"
+                        )
+                        ( Polygon
+                            color: brown        
+                            vertices: {
+                                [ -0.4 -0.4 ]
+                                [ -0.4  0.4 ]
+                                [  0.4  0.4 ]
+                                [  0.4 -0.4 ]
+                            }
+                        )
+                    }
+                )
+                ( Graphic
+                    transform: ( Translation 0 -9 )
+                    components: {
+                        ( AsciiText
+                            color: white
+                            transform: ( Translation -0.2 -0.33 )
+                            text: "3"
+                        )
+                        ( Polygon
+                            color: brown        
+                            vertices: {
+                                [ -0.4 -0.4 ]
+                                [ -0.4  0.4 ]
+                                [  0.4  0.4 ]
+                                [  0.4 -0.4 ]
+                            }
+                        )
+                    }
+                )
+                ( Graphic
+                    transform: ( Translation 0 -12 )
+                    components: {
+                        ( AsciiText
+                            color: white
+                            transform: ( Translation -0.2 -0.33 )
+                            text: "4"
+                        )
+                        ( Polygon
+                            color: brown        
+                            vertices: {
+                                [ -0.4 -0.4 ]
+                                [ -0.4  0.4 ]
+                                [  0.4  0.4 ]
+                                [  0.4 -0.4 ]
+                            }
+                        )
+                    }
+                )
+                ( Graphic
+                    transform: ( Translation 0 -15 )
+                    components: {
+                        ( AsciiText
+                            color: white
+                            transform: ( Translation -0.2 -0.33 )
+                            text: "5"
+                        )
+                        ( Polygon
+                            color: brown        
+                            vertices: {
+                                [ -0.4 -0.4 ]
+                                [ -0.4  0.4 ]
+                                [  0.4  0.4 ]
+                                [  0.4 -0.4 ]
+                            }
+                        )
+                    }
+                )
+                ( Graphic
+                    transform: ( Translation 0 -18 )
+                    components: {
+                        ( AsciiText
+                            color: white
+                            transform: ( Translation -0.2 -0.33 )
+                            text: "6"
+                        )
+                        ( Polygon
+                            color: brown        
+                            vertices: {
+                                [ -0.4 -0.4 ]
+                                [ -0.4  0.4 ]
+                                [  0.4  0.4 ]
+                                [  0.4 -0.4 ]
+                            }
+                        )
+                    }
+                )
+             
+                // this is a linear VVI, we aren't worried about non-linear scaling or looking like anything in particular.
+                ( TickMarks
+                    transform: ( Translation -1.8 0 )
+                    quantity: 11
+                    gaugeLength: 30
+                    linewidth: 2
+                    tickLength: 1
+                    color: black
+                )
+                ( TickMarks
+                    transform: ( Translation 1.8 0 )
+                    quantity: 11
+                    gaugeLength: 30
+                    linewidth: 2
+                    tickLength: -1
+                    color: black
+                )
+                ( TickMarks
+                    transform: ( Translation -0.25 0 )
+                    quantity: 51
+                    gaugeLength: 30
+                    linewidth: 2
+                    tickLength: 0.5
+                    color: black
+                )
+                // negative tick marks
+                ( TickMarks
+                    transform: ( Translation -1.8 0 )
+                    quantity: 11
+                    gaugeLength: -30
+                    linewidth: 2
+                    tickLength: 1
+                    color: white
+                )
+                ( TickMarks
+                    transform: ( Translation 1.8 0 )
+                    quantity: 11
+                    gaugeLength: -30
+                    linewidth: 2
+                    tickLength: -1
+                    color: white
+                )
+                ( TickMarks
+                    transform: ( Translation -0.25 0 )
+                    quantity: 51
+                    gaugeLength: -30
+                    linewidth: 2
+                    tickLength: 0.5
+                    color: white
+                )
+                
+                     
+                ( Polygon
+                    color: brown
+                    vertices: {
+                        [ -100 -100 ] 
+                        [ -100  0 ] 
+                        [  100  0 ] 
+                        [  100 -100 ] 
+                    }
+                )
+                ( Polygon
+                    color: adiCyan
+                    vertices: {
+                        [ -100 100 ] 
+                        [ -100 0 ] 
+                        [  100 0 ] 
+                        [  100 100 ] 
+                    }
+                )
+            }
+        )
+    }
+)

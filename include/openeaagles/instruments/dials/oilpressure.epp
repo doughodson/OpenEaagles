@@ -1,0 +1,91 @@
+oil:  
+// send using UPDATE_INSTRUMENTS
+// oilText path can be found in testinstruments.epp
+( DialPointer 
+    startAngle: 110
+    scalingTable: 
+    ( Table1
+        x: [ 0 100 ]
+        data: [ 0 320 ]
+    )
+    components: {
+        ( Polygon
+            color: white
+            vertices: {
+                [ -0.15 0 ]
+                [ 0.15 0 ]
+                [ 0 1.25 ]
+            }
+        )
+    } 
+)    
+
+// here is the rest of the graphic (replaces texture)
+( Graphic
+    color: white
+    components: {
+        // 0 PSI
+        ( AsciiText inheritColor: 1 font: smallfont text: "0" transform: ( Translation 1.25 -0.9 ) )
+        ( Line transform: ( Rotation -1.92 ) linewidth: 3 vertices: { [ 0 1.8 ] [ 0 2.2 ] } ) 
+        // 5 PSI
+        ( Line transform: ( Rotation -2.2 ) linewidth: 3 vertices: { [ 0 2 ] [ 0 2.2 ] } ) 
+        // 10 PSI
+        ( Line transform: ( Rotation -2.478 ) linewidth: 3 vertices: { [ 0 1.8 ] [ 0 2.2 ] } ) 
+        // 13 PSI - critical
+        ( Line color: red transform: ( Rotation -2.65 ) linewidth: 3 vertices: { [ 0 1.8 ] [ 0 2.2 ] } ) 
+        // 15 PSI 
+        ( Line color: white transform: ( Rotation -2.758 ) linewidth: 3 vertices: { [ 0 2 ] [ 0 2.2 ] } ) 
+        // 20 PSI
+        ( AsciiText inheritColor: 1 font: smallfont text: "20" transform: ( Translation -0.25 -1.75 ) )
+        ( Line transform: ( Rotation -3.037 ) linewidth: 3 vertices: { [ 0 1.8 ] [ 0 2.2 ] } ) 
+        // 25 PSI 
+        ( Line color: white transform: ( Rotation -3.316 ) linewidth: 3 vertices: { [ 0 2 ] [ 0 2.2 ] } ) 
+        // 30 PSI
+        ( Line transform: ( Rotation -3.56 ) linewidth: 3 vertices: { [ 0 1.8 ] [ 0 2.2 ] } ) 
+        // 35 PSI 
+        ( Line color: white transform: ( Rotation -3.875 ) linewidth: 3 vertices: { [ 0 2 ] [ 0 2.2 ] } ) 
+        // 40 PSI
+        ( AsciiText inheritColor: 1 font: smallfont text: "40" transform: ( Translation -1.6 -1 ) )
+        ( Line transform: ( Rotation -4.154 ) linewidth: 3 vertices: { [ 0 1.8 ] [ 0 2.2 ] } ) 
+        // 45 PSI 
+        ( Line color: white transform: ( Rotation -4.433 ) linewidth: 3 vertices: { [ 0 2 ] [ 0 2.2 ] } ) 
+        // 50 PSI
+        ( Line transform: ( Rotation -4.712 ) linewidth: 3 vertices: { [ 0 1.8 ] [ 0 2.2 ] } ) 
+        // 55 PSI 
+        ( Line color: white transform: ( Rotation -4.99 ) linewidth: 3 vertices: { [ 0 2 ] [ 0 2.2 ] } ) 
+        // 60 PSI
+        ( AsciiText inheritColor: 1 font: smallfont text: "60" transform: ( Translation -1.5 0.6 ) )
+        ( Line transform: ( Rotation -5.27 ) linewidth: 3 vertices: { [ 0 1.8 ] [ 0 2.2 ] } ) 
+        // 65 PSI 
+        ( Line color: white transform: ( Rotation -5.55 ) linewidth: 3 vertices: { [ 0 2 ] [ 0 2.2 ] } ) 
+        // 67 PSI - critical
+        ( Line color: red transform: ( Rotation -5.662 ) linewidth: 3 vertices: { [ 0 1.8 ] [ 0 2.2 ] } ) 
+        // 70 PSI
+        ( Line color: white transform: ( Rotation -5.829 ) linewidth: 3 vertices: { [ 0 1.8 ] [ 0 2.2 ] } ) 
+        // 75 PSI 
+        ( Line color: white transform: ( Rotation -6.109 ) linewidth: 3 vertices: { [ 0 2 ] [ 0 2.2 ] } ) 
+        // 80 PSI
+        ( AsciiText inheritColor: 1 font: smallfont text: "80" transform: ( Translation -0.15 1.25 ) )
+        ( Line transform: ( Rotation -0.1047 ) linewidth: 3 vertices: { [ 0 1.8 ] [ 0 2.2 ] } ) 
+        // 85 PSI 
+        ( Line color: white transform: ( Rotation -0.384 ) linewidth: 3 vertices: { [ 0 2 ] [ 0 2.2 ] } ) 
+        // 90 PSI
+        ( Line color: white transform: ( Rotation -0.6283 ) linewidth: 3 vertices: { [ 0 1.8 ] [ 0 2.2 ] } ) 
+        // 95 PSI 
+        ( Line color: white transform: ( Rotation -0.9424 ) linewidth: 3 vertices: { [ 0 2 ] [ 0 2.2 ] } ) 
+        
+        // 100 PSI
+        ( AsciiText inheritColor: 1 font: smallfont text: "100" transform: ( Translation 0.6 0.25 ) )
+        ( Line transform: ( Rotation -1.22 ) linewidth: 3 vertices: { [ 0 1.8 ] [ 0 2.2 ] } )
+        
+        // OIL Text
+        ( AsciiText font: smallerfont inheritColor: 1 text: "OIL" transform: ( Translation -0.35 -1.2 ) ) 
+        
+        ( OcclusionCircle
+            color: gray2
+            slices: 100
+            radius: 2.3
+            outerRadius: 2.4
+        )
+    }
+)        

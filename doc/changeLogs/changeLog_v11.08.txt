@@ -1,0 +1,204 @@
+================================================================================
+Changes since v11.07
+================================================================================
+
+--------------------------------------------------------------------------------
+Global changes ---
+
+-- Created a new "glut" library that contains all OpenEaagles-specific GLUT
+   related classes.
+
+--------------------------------------------------------------------------------
+EDL/EPP changes ---
+
+
+General changes ---
+
+--------------------------------------------------------------------------------
+basic: 
+
+   EarthModel class
+      ### New class (see EarthModel.h and Nav.h)
+
+   Nav class
+      1) The following functions can accept an optional EarthModel:
+            fbd2llE(), fll2bdE(), gbd2ll(), gll2bd(), glla2bd(),
+            vbd2ll(), vll2bd(), convertEcef2Geod(), convertGeod2Ecef()
+
+      2) Added new functions (see Nav.h)
+         fbd2llE(), fll2bdE(), fbd2llS(), fll2bdS(),
+         convertPosVec2llE(), convertLL2PosVecE(),
+         convertPosVec2llS() and convertLL2PosVecS()
+         
+      3) New, overloaded versions of existing functions (see Nav.h)
+         aer2xyz(), aer2xyzArray(),
+
+      4) Corrected the sign of the down(z) component in the functions
+         aer2xyz(), aer2xyz(), xyz2aer() and xyz2aer().  (bug fix)
+
+      5) legacy functions convertPosVec2LL() and convertLL2PosVec() 
+         now only support type osg::Vec3d position vectors. 
+
+      6) Renamed computeWorldMatrix1() to computeWorldMatrix(),
+         convertGeodAngles2EcefAngles1() to convertGeodAngles2EcefAngles()
+         and convertEcefAngles2GeodAngles1() to convertEcefAngles2GeodAngles()
+
+      7) Removed public constants Nav::DEG2NM and Nav::NM2DEG
+      
+      8) Moved inline functions to a new Nav.inl file
+
+   NavDR class
+      ### New class -- Standard DIS dead reckoning functions
+
+--------------------------------------------------------------------------------
+basicGL:
+
+   Display class
+      -- general cleanup of the *.cpp and *.h files --
+
+      1) Added the configure() function to configure the GL context
+         (previously configureIt() in GlutDisplay)
+
+      2) Added hide() and show() window functions
+
+      3) DrawIt() now calls configure()
+      
+      4) Added the readFrameBuffer() functions that can be used to capture
+         the frame buffer as an Image.
+
+   Image class
+      ### New class -- Base class for images and textures
+
+   Texture class
+      1) Now derived from the new Image class
+
+--------------------------------------------------------------------------------
+dafif:
+   
+   Database class
+      1) range2() -- no longer using Nav::DEG2NM, which as removed from Basic::Nav
+
+--------------------------------------------------------------------------------
+dis:
+
+   EmissionPduHandler class
+      1) updateIncoming() -- No longer creates a default R/F system or antenna
+
+      2) added slots 'defaultIn' and 'defaultOut' that indicate that the handler
+         is the default for incoming or outgoing emissions.
+
+   Dis::NetIO class
+      1) netInputHander() -- change the max number of PDUs read per frame
+         from 50 to 400.
+
+      2) processElectromagneticEmissionPDU() -- All EmissionPduHandler must be defined
+         in the 'EmissionPduHandlers' list.  A 'default' EmissionPduHandler is
+         only created from an EmissionPduHandler in the list with its default flag set.
+
+      3) findEmissionPduHandler() functions now check for default handlers in
+         the 'EmissionPduHandlers' list.
+
+
+   Dis::Nib class
+      1) entityStateManager() -- setting the power plant status appearance bit
+
+--------------------------------------------------------------------------------
+gui-glut:
+
+   GlutDisplay class
+      -- general cleanup of the *.cpp and *.h files --
+      -- no longer including "openeaagles/basic/Timers.h" in the header file
+
+      1) createSubWindow() is now a protected function
+
+      2) configureIt() was renamed configure() and moved to the BasicGL::Display class
+
+      3) The default ESC key event handler, onEscKey(), will shutdown the
+      application from the main window only (previously any window).  Override
+      this event handler, as required.
+
+      4) Added slots 'accumBuff' and 'stencilBuff' to enable the accumulation
+         and stencil buffers, respectively.
+
+      5) findSelected() -- added a max hit count check on loop (bug fix)
+
+      6) updated the printSelectBuffer() function
+
+--------------------------------------------------------------------------------
+otw:
+
+   OtwCigiCl class
+      1) Modified setCommonModelData() to use the player's lat/lon/alt functions
+         instead of the player's NED position vector.
+
+--------------------------------------------------------------------------------
+simulation: 
+
+   Antenna class
+      1) rfTransmit() -- now sets the emission's local players only flag
+         based on the its own local only flag.
+         
+      2) constructor -- removed the player filter "OLD DEFAULTS"
+
+   Gimbal class
+      1) Changed the default max number of players of interest from 1000 to 4000
+
+      2) changed the default "player of interest" types from none to ALL,
+         and changed the default max number of players of interest to 200.
+
+   Jammer class
+      1) transmit() no longer sets the template emission's local player
+         only flag (see Antenna::rfTransmit() above)
+
+   NetIo class
+      1) Changed the max number of new entities published per frame from 10 to 150
+      
+      2) The 'maxEntityRange' now defaults to zero, or no range filtering.
+
+   Player class
+      1) Modified setPosition(), setPositionLLA() and setGeocPosition() to use
+         the simulation's earth model.
+ 
+      2) positionUpdate() -- added the simulation's earth model when
+         updating using the geodetic lat/lon coordinates.
+
+      3) positionUpdate() -- added ground clamping when updating using
+         the geocentric EFEC coordinates 
+
+      4) Modified setPosition(), setPositionLLA() and setGeocPosition() to use
+         the simulation's sine and cosine of the reference latitude.
+ 
+      5) Basic::Nav::computeWorldMatrix() name change
+
+      6) Added slot 'useCoordSys' and function setUseCoordSys() to set the
+         coordinate system used to update the player's position.
+         
+      7) For performance, converted most of the access (get) functions to inline
+         functions and moved them to the new Player.inl file.
+
+   Radio class
+      1) transmitDataMessage() no longer sets the template emission's local player
+         only flag (see Antenna::rfTransmit() above)
+
+   Radar class
+      1) transmit() no longer sets the template emission's local player
+         only flag (see Antenna::rfTransmit() above)
+
+      2) process() -- added a check for max reports before adding a new one (bug fix)
+
+   Simulation class
+      1) EarthModel support (see Simulation.h and basic/EarthModel.h)
+         a) New slots: "earthModel" and "gamingAreaUseEarthModel"
+         b) New functions: getEarthModel() and isGamingAreaUsingEarthModel()
+
+      2) Modified getEarthRadiusM() to use the new earth model
+
+      3) Added functions getSinRefLat() and getCosRefLat(), which return the sine
+         and cosine of the reference latitude.
+
+      4) Modified for Basic::Nav::computeWorldMatrix() name change
+
+      5) Changed the size of the new player queue from 100 to 1000.
+
+   TrackManager class
+      1) newReport() -- now checking the queue before ref'n the emission.

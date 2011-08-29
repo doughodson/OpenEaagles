@@ -1,0 +1,51 @@
+================================================================================
+Changes since v10.02c
+================================================================================
+
+--------------------------------------------------------------------------------
+Global changes ---
+
+  Updated LCreal datatype consistency across the entire framework so that
+  LCreal can be defined as either float or double
+
+--------------------------------------------------------------------------------
+EDL/EPP changes ---
+
+
+--------------------------------------------------------------------------------
+General changes ---
+
+basic:
+
+basicGL:
+   GlutDisplay class
+      1) createSubWindow() now calls the function configureIt() for each window.
+
+dis:
+   Nib class
+      1) emitterBeamsManager() -- modified to call all of the entity's emission
+         handlers each frame.  Previously only did one per frame.
+
+   NetIo class
+      1) added the virtual member function processUserPDU(), which allows users
+         to process PDUs that are not handled by the default PDU handlers.
+      2) netInputHander() -- modified to save time; the PDU type and exercise
+         numbers are checked without swapping the PDU header's bytes.
+
+simulation:
+
+   ScanGimbal class
+      1) changed 'int' variables to 'unsigned int'
+      2) getRefPosition() now returns a refernece to a osg::Vec2d
+      3) changed 'ScanMode' to 'unsigned int' and added 'USER_MODES' to allow
+         users to extend the enumerated scan modes with their own modes.
+      4) added the virtual member function userModesScanController(), which
+         allows users to add controllers for user defined scan modes.
+      5) Added several new protected get and set functions to allow user
+         defined scan controllers access to the data.
+
+   Steerpoint class
+      1) copyData() bug fix with 'haveCmdAs'
+--------------------------------------------------------------------------------
+
+

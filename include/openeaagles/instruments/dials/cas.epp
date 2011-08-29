@@ -1,0 +1,231 @@
+
+
+
+// this is where the UPDATE_INSTRUMENTS value should be sent
+// Analog Dial is an instrument that acts like a rotating filled in circle, which gives us a good masking effect.  It works almost exactly like DialArcSegment, only it filles in
+// to it's center, creating an overaly.  In this case, we are masking the texture to only show a small portion of the dial, based on the speed value we are given.
+tas:    
+( AnalogDial
+    startAngle: 15
+    transform: ( Translation 0 0 0.1 )
+    dialRadius: 3
+    sweepAngle: 330
+    scalingTable: 
+        ( Table1
+            // speed (knots)
+            x: [ 0 900 ]
+            // degrees 
+            data: [ 0 324 ]
+        )
+    color: (rgb 0.15 0.15 0.15)
+    // this slot will allow the analog dial to rotate.  If you don't set this flag, you will get no rotation.
+    mobile: 1
+    components: {
+        
+        ( DialPointer
+            startAngle: 0
+            scalingTable: 
+                ( Table1
+                    // speed (knots)
+                    x: [ 0 900 ]
+                    // degrees 
+                    data: [ 0 325 ]
+                )
+            components: {
+                ( Line
+                    color: white
+                    linewidth: 4
+                    vertices: { [ 0 3 ] [ 0 4 ] }
+                )
+                ( Line
+                    color: white
+                    linewidth: 4
+                    vertices: { [ 0 0 ] [ 0 2 ] }
+                )                        
+            }
+        )
+    }
+)
+
+// background graphic to replace the texture
+( Graphic
+    components: {
+        ( DialTickMarks
+            dialRadius: 4.7
+            length: 0.7
+            linewidth: 4
+            quantity: 10
+            startAngle: 0
+        )
+        ( DialTickMarks
+            dialRadius: 4.7
+            length: 0.3
+            linewidth: 4
+            quantity: 45
+            startAngle: 0
+            sweepAngle: 324
+        )
+        // ok, put our text readouts up
+        ( AsciiText color: white transform: ( Translation -0.2 3.2 ) text: "0" )
+        ( AsciiText color: white transform: ( Translation 1.9 2.5 ) text: "1" )
+        ( AsciiText color: white transform: ( Translation 3.2 0.8 ) text: "2" )
+        ( AsciiText color: white transform: ( Translation 3.2 -1.5 ) text: "3" )
+        ( AsciiText color: white transform: ( Translation 1.9 -3.1 ) text: "4" )
+        ( AsciiText color: white transform: ( Translation -0.2 -3.8 ) text: "5" )
+        ( AsciiText color: white transform: ( Translation -2.3 -3.1 ) text: "6" )
+        ( AsciiText color: white transform: ( Translation -3.6 -1.5 ) text: "7" )
+        ( AsciiText color: white transform: ( Translation -3.6 0.8 ) text: "8" )
+        ( AsciiText color: white transform: ( Translation -2.3 2.5 ) text: "9" )
+        
+        // top text
+        ( AsciiText color: white transform: ( Translation -0.6 5.5 ) font: smallerfont text: "KNOTS" )
+        ( AsciiText color: white transform: ( Translation -0.5 5 ) font: smallerfont text: "X100" )
+        
+        ( OcclusionCircle
+            slices: 100
+            radius: 4.8
+            outerRadius: 4.9
+            filled: 1
+            color: gray2
+        )
+        
+        ( Graphic
+            transform: ( Translation -5 5 )
+            components: {
+                ( Line
+                    color: black
+                    segment: 1
+                    linewidth: 3
+                    vertices: {
+                        [ -0.3 0 ] [ 0.3 0 ]
+                        [ 0 -0.3 ] [ 0 0.3 ]
+                    }
+                )
+                ( Circle
+                    color: ( rgb 0.15 0.15 0.15 )
+                    radius: 0.5
+                    slices: 50
+                    filled: 1
+                )
+            }
+        )
+        
+        ( Graphic
+            transform: ( Translation 5 5 )
+            components: {
+                ( Line
+                    color: black
+                    segment: 1
+                    linewidth: 3
+                    vertices: {
+                        [ -0.3 0 ] [ 0.3 0 ]
+                        [ 0 -0.3 ] [ 0 0.3 ]
+                    }
+                )
+                ( Circle
+                    color: ( rgb 0.15 0.15 0.15 )
+                    radius: 0.5
+                    slices: 50
+                    filled: 1
+                )
+            }
+        )
+        
+        ( Graphic
+            transform: ( Translation -5 -5 )
+            components: {
+                ( Line
+                    color: black
+                    segment: 1
+                    linewidth: 3
+                    vertices: {
+                        [ -0.3 0 ] [ 0.3 0 ]
+                        [ 0 -0.3 ] [ 0 0.3 ]
+                    }
+                )
+                ( Circle
+                    color: ( rgb 0.15 0.15 0.15 )
+                    radius: 0.5
+                    slices: 50
+                    filled: 1
+                )
+            }
+        )
+
+        ( Graphic
+            transform: ( Translation 5 -5 )
+            components: {
+                ( Line
+                    color: black
+                    segment: 1
+                    linewidth: 3
+                    vertices: {
+                        [ -0.3 0 ] [ 0.3 0 ]
+                        [ 0 -0.3 ] [ 0 0.3 ]
+                    }
+                )
+                ( Circle
+                    color: ( rgb 0.15 0.15 0.15 )
+                    radius: 0.5
+                    slices: 50
+                    filled: 1
+                )
+            }
+        )
+        
+        ( LineLoop
+            color: gray2
+            linewidth: 2
+            vertices: {
+                [ -6 -6 ]
+                [ -6  6 ]
+                [  6  6 ]
+                [  6 -6 ]
+            }
+        )
+    }
+)
+
+// here are the mach readouts
+( Graphic
+    components: {
+        // here is the mach text
+        ( AsciiText color: white transform: ( Translation -0.15 2.3 ) font: arialfont text: "0" )
+        ( AsciiText color: white transform: { ( Rotation -0.417 ) ( Translation -0.33 2.3 ) } font: arialfont text: ".1" )
+        ( AsciiText color: white transform: { ( Rotation -0.834 ) ( Translation -0.33 2.3 ) } font: arialfont text: ".2" )
+        ( AsciiText color: white transform: { ( Rotation -1.251 ) ( Translation -0.33 2.3 ) } font: arialfont text: ".3" )
+        ( AsciiText color: white transform: { ( Rotation -1.668 ) ( Translation -0.33 2.3 ) } font: arialfont text: ".4" )
+        ( AsciiText color: white transform: { ( Rotation -2.085 ) ( Translation -0.33 2.3 ) } font: arialfont text: ".5" )
+        ( AsciiText color: white transform: { ( Rotation -2.502 ) ( Translation -0.33 2.3 ) } font: arialfont text: ".6" )
+        ( AsciiText color: white transform: { ( Rotation -2.919 ) ( Translation -0.33 2.3 ) } font: arialfont text: ".7" )
+        ( AsciiText color: white transform: { ( Rotation -3.336 ) ( Translation -0.33 2.3 ) } font: arialfont text: ".8" )
+        ( AsciiText color: white transform: { ( Rotation -3.753 ) ( Translation -0.33 2.3 ) } font: arialfont text: ".9" )
+        ( AsciiText color: white transform: { ( Rotation -4.17 ) ( Translation -0.4 2.3 ) } font: arialfont text: "1.0" )
+        ( AsciiText color: white transform: { ( Rotation -4.587 ) ( Translation -0.4 2.3 ) } font: arialfont text: "1.1" )
+        ( AsciiText color: white transform: { ( Rotation -5.004 ) ( Translation -0.4 2.3 ) } font: arialfont text: "1.2" )
+        ( AsciiText color: white transform: { ( Rotation -5.421 ) ( Translation -0.4 2.3 ) } font: arialfont text: "1.3" )
+        ( AsciiText color: white transform: { ( Rotation -5.838 ) ( Translation -0.4 2.3 ) } font: arialfont text: "1.4" )         
+    }
+)
+
+
+#if 0
+// now for the texture - make sure to name your texture casTex in your input file texture list, or this will not display properly
+( Polygon
+    texture: casTex
+    transform:( Translation 0 0 -1 )
+    vertices: {
+        [ -6 -6 ]
+        [ -6 6 ]
+        [ 6 6 ]
+        [ 6 -6 ]
+    }
+    texCoord: {
+        [ 0 0 ]
+        [ 0 1 ]
+        [ 1 1 ]
+        [ 1 0 ]
+    }
+)  
+#endif
+

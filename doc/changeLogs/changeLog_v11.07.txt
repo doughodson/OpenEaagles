@@ -1,0 +1,382 @@
+================================================================================
+Changes since v10.04
+================================================================================
+
+--------------------------------------------------------------------------------
+Global changes ---
+
+
+--------------------------------------------------------------------------------
+EDL/EPP changes ---
+
+
+General changes ---
+
+--------------------------------------------------------------------------------
+basic: 
+   eventTokens(.h;*.epp) --
+      1) added Directed energy emission event token
+      2) Added additional keyboard tokens: PAGE_UP_KEY, PAGE_DOWN_KEY, HOME_KEY,
+         END_KEY, INSERT_KEY, TAB_KEY, SPACE_BAR and DELETE_KEY
+
+   eventTokens.epp file
+      1) Added "EID_" to the following event token names: EID_RF_REFLECTED_EMISSION,
+      EID_RF_REFLECTIONS_REQUEST, EID_RF_REFLECTIONS_CANCEL, EID_IR_QUERY,
+      EID_IR_QUERY_RETURN, EID_SAT_COMM_MSG, and EID_DE_EMISSION.
+      2) Added the SET_TEXTURE token
+
+   BcHandler class
+      1) bindSocket() -- now binding to the broadcast address
+
+   ColorRotary class
+      ### MOVED to 'basicGL' ###
+   
+   ColorRotaryB clas
+      ### Removed this class ###
+
+   IoAdapter class
+      ## new class ## -- Manages the flow of individual i/o items between
+      the I/O devices (IoDevice) and the I/O data buffers (IoData).
+   
+   IoDevice class
+      1) Moved from the "ioDevice" library
+      
+      2) Added slot "adapters".  The I/O adapters (e.g., AnalogIn, AnalogOut),
+         which were derived from Component and set using the "components" slot,
+         are now derived from IoAdapter and set using this new slot.
+         
+      3) Added slot "devices" to allow IoDevice to manage sub-devices.
+      
+      4) added the isInputDevice() and isOutputDevice() functions
+
+   IoHandler class
+      1) Added slot "devices" for the I/O device handlers (ie., IoDevice
+         objects), which were previously set as components.
+
+   lock.h
+      1) lcLock() and lcUnlock() take a 'long' type instead of a 'const int' type.
+      2) Windows: now using intrinsic functions for lock and unlock.
+
+   Matrix class
+      1) Friend functions are now inline functions
+
+   McHandler class
+      1) bindSocket() -- now binding to the multicast address
+
+   Nav class
+      1) Updated the getGeocAngle() function
+      2) gbd2ll() and gll2bd() -- increased the precision of the flattening and
+         eccentricity values
+      3) gbd2ll() and gll2bd() -- limit checked the value being passed to the
+         acos() function
+
+   Object class
+      1) _Static class -- added a pointer to the base class' _Static object.
+
+   parser.y
+      1) memory usage: now deleting the char strings used by STRING_LITERAL,
+         IDENT and SLOT_ID.
+
+   String class
+      1) Added class parameter MAX_STRING_LENGTH, which is used only setString()
+      2) Increased MAX_STRING_LENGTH from 255 to 1024
+      3) (bug fix) setString() -- fixed overrun when the source string was
+         greater than MAX_STRING_LENGTH
+
+   support.h
+      1) renamed function Integer2Str() to lcInteger2Str()
+      2) Added functions lcStrcasecmp() and lcStrncasecmp(), which are string
+         compare functions ignoring case (compares using lower case).
+
+   Table classes
+      1) Break point slots may now contain only one break point entry.
+         Examples: a 1D table (Table1) with only one entry, or
+         a 2D table (Table2) with only one y break point, etc.
+
+   Terrain class
+      1) getElevationColor() -- modified to allow min/maz Z to range from 0 to 1.
+
+--------------------------------------------------------------------------------
+basicGL:
+
+   BmpTexture class
+      1) Added the setTextureFileName() and setTexturePath() functions
+
+   ColorGradient class
+      ### New class ###
+
+   ColorRotary class
+      ### MOVED from 'basic' ###
+
+   Display class
+      1) Removed possible calls to OpenGL functions before the OpenGL display
+         context was created:
+         a) Display::Display() -- removed the call to the select() function
+         b) setStdLineWidth() -- removed the call to setLinewidth()
+
+   Graphic class
+      1) move the setTexture() to public
+      2) Added a SET_TEXTURE event handler
+
+   GlutDisplay class
+      1) onEscKey() function now calls the shutdownNotification() function
+         before exiting.
+      2) Functions createWindow(), createSubWindow(), specialEvent(), 
+         pick() and findSelected() are now all virtual.
+      3) Modified pick() to properly handle the number of hits.
+      4) Modified findSelected() and its argument list to properly handle
+         the number of hits.
+      5) Supporting new keyboard tokens (see eventTokens above)
+
+   MapPage class
+      1) changed several default slot values from 0.0 to 1.0 (see MapPage.h) to
+         avoid any initial divide by zero.
+      2) Internally, all 'LCreal' type member variables are now type 'double'
+      3) Event handlers are now virtual & protected.
+      4) Added the latLon2Screen() and screen2LatLon() functions
+      5) aircraft2Screen(), earth2Aircraft() and latLon2Earth() are now 'const' functions
+
+
+   Page class
+      1) Internal to the Page class, the paging argument (see newSubpage(),
+         getArgument(), etc) is now a 'smart' pointer, SPtr<>.  This will
+         effect the reference counting on the argument being passed to the
+         new page.
+
+      2) bug fix: onExit() function now sends an ON_EXIT event to its
+         selected subpage.
+
+   Polygon class
+      1) Modified to support color gradients
+
+   Readouts class
+      1) added the 'blankIfZero' slot, which blanks the readout if the value
+      is zero.
+      2) (bug fix) setSlotOverflowChar() now sets the correct member variable
+      3) (bug fix) setSlotUndefinedChar() now sets the correct member variable
+
+   Shapes.cpp
+      -- Rearranged file
+      
+   SymbolLoader
+      -- Rearranged the header file
+
+      1) renamed the changeSymbolColor() functions to setSymbolColor(), and
+         they no longer have default arguments
+
+      2) renamed changeSymbolType() to setSymbolType(), and changed the
+         order of its arguments to be consistent with other functions.
+
+      3) removed the setSymbolScale() function
+
+      4) removed updateSymbolTextVis(); use setSymbolVisible() instead
+      
+      5) For updateSymbolText(), setSymbolFlashRate() and setSymbolColor(),
+         if a zero pointer is passed for the 'name' then the top level
+         graphical component is modified, otherwise the named  graphical
+         subcomponent is modified.
+
+      6) updateSymbolText() no longer changes the width of the original text field.
+
+   TimeReadout class
+      1) bug fix: Modified the makeText() function to correctly generate
+         the '-' sign for small negative values on formats like "+HH:MM:SS",
+         "+MM:SS" and "+HH:MM"
+
+   Texture class
+      1) General rearrangement of the Texture.h file
+      2) getPixels() -- added a const version
+
+--------------------------------------------------------------------------------
+dis:
+
+   DIS global --
+      -- functions now checks computers byte order before calling 
+         the swapBytes() function
+      -- Move the pdu.h, structs.h and enums.h files from the source
+         directory to the include directory.
+
+   NetIO class
+      1) member functions processSignalPDU(), processTransmitterPDU(), 
+         processDataQueryPDU(), processDataPDU(), processCommentPDU() and
+         processUserPDU() now all take a 'const' PDU argument.
+      2) netInputHander() -- added checks to make sure the PDU isn't a loopback
+         coming from us (i.e., our site and app IDs)
+
+   NtmInputNode class
+      1) add2OurLists() function is now unref's 'newNode' (memory lead fix)
+
+--------------------------------------------------------------------------------
+ioDevice:
+
+   ### Library was modified as required to support the updates to the IoHander,
+       IoDevice and the new IoAdapter classes (see 'basic' above). ###
+
+   DiscreteInput class
+      1) Added the ability to manage more than one contiguous DIs per pass.
+      The number of DIs is defined by the new slot 'num', which defaults to one.
+
+   DiscreteOutput class
+      1) Added the ability to manage more than one contiguous DOs per pass.
+      The number of DOs is defined by the new slot 'num', which defaults to one.
+   
+   IoDevice class
+      1) Moved to the "basic" library
+
+
+--------------------------------------------------------------------------------
+otw:
+
+   OtwCigiCl class
+      1) 'hideOwnshipModel' slot now defaults to true (not seen)
+      2) updateOwnshipModel -- modified to allow updates for pre-release weapons
+      3) Added support for the CigiSensorCtrlV3 packet
+
+
+--------------------------------------------------------------------------------
+simulation:
+
+   AirAngleOnlyTrkMgr class
+      1) processTrackList() -- now returns if delta time is zero.
+
+   AircraftIrSignature class
+      1) New class that derives from IrSignature that provide aircraft specific 
+         signature information.
+
+   Antenna class
+      1) rfTransmit() -- insteal of creating 'new' Emission object, it now
+         clones the template emission.
+      2) initData() -- moved base class init functions to the constructor.
+      3) Added shutdown notification
+
+   Bomb class
+      1) initData() -- bug fix: moved base class init functions to the constructor.
+      2) impactPrediction() -- new, virtual function that computes the impact
+         position of a generic bomb.
+
+   Datalink class
+      1) queueIncomingMessage() bug fix with 'local' player check
+      2) Max datalink range (w/o a radio) is now a double
+      3) Removed the'useLOSandMaxRange' slot, along with the getUseLOS()
+         and setUseLOS() functions (may add them back in later).
+      4) Added a 'radioId' slot, and this radio ID can override the
+         radio ID of the datalink's comm radio.
+      5) The 'maxRange' slot now takes a Basic::Distance argument
+
+   Gimbal class
+      1) Added the 'useOwnHeadingOnly' slot, which was previously the IrSeeker's
+         'ownHeadingOnly' slot, and this flag is now being used by both the
+         computeBoresightData() and processPlayers() functions in the
+         Tdb class.
+         ## note: 'useOwnHeadingOnly' default is true; heading only ###
+      2) Added shutdown notification
+
+   IrSeeker class, IrSensor class, IrSignature class
+      1) Many of these specific classes have been reworked to provide a more
+         flexible modeling environment.
+
+   IrSeeker class
+      1) Moved the 'ownHeadingOnly' to the Gimbal class
+         (and renamed to 'useOwnHeadingOnly')
+
+   IrSensor class
+      1) Fixed a few pointer errors in mergeIrReturns().
+
+   IrAtmosphere, IrAtmosphere1 classes
+      1) IrAmosphere class has been considerably reworked to provide multiple
+         level of fidelity - IrAtmosphere provides a simple representation,
+         IrAtmosphere1 (will be renamed later) provides a more complex representation
+         based upon MODTRAN generated data.
+
+   IrSignature class
+      1) This class has been reworked to provide a simplier signature representation.
+         Detailed representation for an aircraft is now provided by the AircraftIrSignature
+         class.
+
+   IrTrack class
+      1) Added its own setPosition(), which does not compute the track's
+         azimuth or elevation angles.
+
+   Message class
+      1) Updated implementation code to fix memory leak.
+
+   NetIO class
+      1) destroyInputNib() -- no longer sets the player's NIB pointer to zero,
+         or the NIB's player pointer to zero (bug fix: race condition).
+      2) Limiting the network ID values to the max number of networks
+      3) Passing the pointers of outgoing NIBs to the players they're managing.
+      4) Added shutdown notification
+
+   Nib class
+      1) Added shutdown notification
+      2) createIPlayer() -- added a reset() for the new network player.
+
+   Missile class
+      1) atReleaseInit() -- checks and uses track position, if available
+
+   Player class
+      1) added directed energy emission event handle (stub)
+      2) added an array of pointers to outgoing network NIBs
+
+   Radar class
+      1) initData() -- moved base class init functions to the constructor.
+      2) clearTracksAndQueues() -- checks reports[] before unref()'n
+      3) Added MAX_REPORTS checks in loops
+      4) receive() -- clearing the previous reports when finished
+      5) process() -- clearing the reports pointers after unref()
+
+   RfSystem class
+      1) deleteData() sets 'np' to zero
+      2) In packet loop, added check for less than 'np
+      3) Added reset(), which finds the Antenna component and does an
+         initial call to processPlayersOfInterest().
+
+   Route class
+      1) Added the getAutoSeqDistance() and setAutoSeqDistance() member functions
+      2) Added the isWrapEnabled() and setWrapEnable() member functions
+      3) General rearrangement of the Route.h file
+
+   Rwr class
+      1) initData() -- moved base class init functions to the constructor.
+      2) deleteData() sets 'np' to zero
+      3) In packet loop, added check for less than 'np
+      4) receive() -- added check for delta time not equal zero
+
+   Station class
+      1) getIoHandlers() -- added this new function
+      2) Moved the setting of the ownship player from updateTC() to reset().
+      3) updateTC() -- Now handles I/O devices and the reset timer without
+         a simulation (prior version did nothing without a simulation)
+      4) shutdownNotification() function no longer zeros the simulation pointer,
+         this give the simulation time to shutdown.
+      5) setOwnshipByName() -- added a check to see if the simulation exists (bug fix)
+
+   System class
+      1) Added the 'powerSwitch' slot
+
+   TrackManager class
+      1) Added shutdown notification
+      2) clearTracksAndQueues() -- added zero pointer check
+
+   Tdb class
+      1) computeBoresightData() -- removed the 'ownHdgOnly' argument; the "heading
+         only" flag is now provided by the gimbal's 'useOwnHeadingOnly' slot.
+      2) processPlayers() -- is now using the gimbal's "heading only" flag.
+
+   Weapon class
+      1) initData() -- bug fix: moved base class init functions to the constructor.
+
+--------------------------------------------------------------------------------
+terrain:
+
+   QuadMap and Datafile classes
+      1) The deleteData() functions now calls the clearData() function (memory lead fix)
+
+--------------------------------------------------------------------------------
+vehicles:
+
+   RacModel class
+      1) (forum) Added slot functions for the initial conditions
+
+--------------------------------------------------------------------------------
+

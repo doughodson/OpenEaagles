@@ -1,0 +1,3 @@
+
+OE_ROOT=$PWD
+export OE_ROOT

@@ -1,0 +1,12 @@
+Time Conversions (Seconds: milliseconds, minutes, hours, days)
+
+www.nist.gov
+1 second = 100 milliseconds
+1 second = 0.016666666666666666666666666666667 minutes
+1 second = 0.000277777777777777777777777777778 hours
+1 second = 0.000015740740740740740740740740741 days
+
+1 millisecond = .01 seconds
+1 minute = 60 seconds
+1 hour = 3600 seconds 
+1 day = 86400 seconds

@@ -1,0 +1,79 @@
+// This is our graphic for the tens and ones tape for the Altimeter
+
+( Graphic 
+    components: {
+        ( AsciiText
+            color: white
+            vertical: 1 
+            transform: ( Translation 0 0.99 )
+            text: "901234567890"
+        )
+        #if 0
+        ( AsciiText
+            color: white
+            transform: ( Translation 0 -0.68 ) 
+            text: "0"
+        )
+        ( AsciiText
+            color: white
+            transform: ( Translation 0 0.64 )
+            text: "1"
+        )
+        ( AsciiText
+            color: white
+            transform: ( Translation 0 1.96 ) 
+            text: "2"
+        )
+        ( AsciiText
+            color: white
+            transform: ( Translation 0 3.28 ) 
+            text: "3"
+        )
+        ( AsciiText
+            color: white
+            transform: ( Translation 0 1.15 ) 
+            text: "4"
+        )
+        ( AsciiText
+            color: white
+            transform: ( Translation 0 1.48 )
+            text: "5"
+        )
+        ( AsciiText
+            color: white
+            transform: ( Translation 0 1.81 )
+            text: "6"
+        )
+        ( AsciiText
+            color: white
+            transform: ( Translation 0 2.14 )
+            text: "7"
+        )
+        ( AsciiText
+            color: white
+            transform: ( Translation 0 2.47 )
+            text: "8"
+        )
+        ( AsciiText
+            color: white
+            transform: ( Translation 0 2.8 )
+            text: "9"
+        )
+        ( AsciiText
+            color: white
+            transform: ( Translation 0 3.13 )
+            text: "0"
+        )
+    #endif
+        ( Polygon
+            color: black
+            vertices: {
+                [ -10 -10 ]
+                [ -10 10 ]
+                [ 10 10 ]
+                [ 10 -10 ]
+            }
+        )
+    }
+)           
+
