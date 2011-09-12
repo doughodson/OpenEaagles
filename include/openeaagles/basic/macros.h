@@ -141,7 +141,7 @@
     protected: virtual Eaagles::Basic::Object* getSlotByIndex(const int slotindex);                   \
     public: static const Eaagles::Basic::SlotTable& getSlotTable();                                   \
     protected: static const Eaagles::Basic::SlotTable slottable;                                      \
-    private: static const char* slots[];                                                              \
+    private: static const char* slotnames[];                                                              \
     private: static const int nslots;                                                                 \
     public: virtual std::ostream&                                                                     \
     serialize(std::ostream& sout, const int i = 0, const bool slotsOnly = false) const;               \
@@ -263,7 +263,7 @@
 
 
 #define EMPTY_SLOTTABLE(ThisType)                                                      \
-    const char* ThisType::slots[] = { "" };                                            \
+    const char* ThisType::slotnames[] = { "" };                                            \
     const int ThisType::nslots = 0;                                                    \
     const Eaagles::Basic::SlotTable ThisType::slottable(0, 0, BaseClass::getSlotTable());  \
     bool ThisType::setSlotByIndex(const int si, Eaagles::Basic::Object* const obj)     \
@@ -327,14 +327,14 @@
 
 
 #define BEGIN_SLOTTABLE(ThisType)                                                      \
-    const char* ThisType::slots[] = {
+    const char* ThisType::slotnames[] = {
 
 
 
 #define END_SLOTTABLE(ThisType)                                                        \
     };                                                                                 \
-    const int ThisType::nslots = (sizeof(slots)/sizeof(char*));                        \
-    const Eaagles::Basic::SlotTable ThisType::slottable(ThisType::slots, ThisType::nslots, \
+    const int ThisType::nslots = (sizeof(slotnames)/sizeof(char*));                        \
+    const Eaagles::Basic::SlotTable ThisType::slottable(ThisType::slotnames, ThisType::nslots, \
                                                ThisType::BaseClass::getSlotTable());
 
 

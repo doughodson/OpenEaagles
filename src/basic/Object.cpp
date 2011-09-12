@@ -32,7 +32,7 @@ Object::_Static Object::_static(0, typeid(Object).name(), "Object", &Object::slo
 //    from Object (e.g., the classes for colors, numbers and units) that expect their
 //    slots to be the first slots -- starting at slot number 1.
 // ---
-const char* Object::slots[] = { "" };
+const char* Object::slotnames[] = { "" };
 const int Object::nslots = 0;
 const SlotTable Object::slottable(0, 0);
 
