@@ -318,7 +318,7 @@ LCreal NetIO::getMaxAge(const Nib* const) const
 const Basic::String* NetIO::getFederateName() const
 {
    return federateName;
-    }
+}
 
 // Federation name as String
 const Basic::String* NetIO::getFederationName() const
@@ -353,7 +353,7 @@ bool NetIO::setMaxTimeDR(const LCreal v)
 {
    maxTimeDR = v;
    return true;
-      }
+}
       
 // Sets the max positional error (meters)
 bool NetIO::setMaxPositionErr(const LCreal v)
@@ -374,7 +374,7 @@ bool NetIO::setMaxAge(const LCreal v)
 {
    maxAge = v;
    return true;
-    }
+}
 
 // Sets the max entity range (meters)
 bool NetIO::setMaxEntityRange(const LCreal v)
@@ -412,7 +412,7 @@ void NetIO::inputFrame(const LCreal)
         cleanupInputList();   // Cleanup the Input-List (remove old NABs)
 
       }
-   }
+}
 
 //------------------------------------------------------------------------------
 // outputFrame() -- output side of the network
@@ -775,7 +775,7 @@ Player* NetIO::createIPlayer(Nib* const nib)
          Basic::Pair* playerPair = new Basic::Pair(nib->getPlayerName(), player);
          getSimulation()->addNewPlayer(playerPair);
 
-		 player->reset();
+         player->reset();
 
          // the simulation has it, so we should unref() both the player and the pair.
          player->unref();
@@ -1026,13 +1026,13 @@ bool NetIO::addOutputEntityType(Ntm* const ntm)
       // Make sure we have a root node ...
       if (outputNtmTree == 0) {
          outputNtmTree = rootNtmOutputNodeFactory();
-}
+      }
 
       // add to the root node
       if (outputNtmTree != 0 && ntm != 0) {
          ok = outputNtmTree->add2OurLists(ntm);
       }
-}
+   }
 
    return ok;
 }
@@ -1044,14 +1044,14 @@ bool NetIO::clearInputEntityTypes()
    if (inputNtmTree != 0) {
       inputNtmTree->unref();
       inputNtmTree = 0;
-}
+   }
 
    // Clear our old input entity type table --
    while (nInputEntityTypes > 0) {
       nInputEntityTypes--;
       inputEntityTypes[nInputEntityTypes]->unref();
       inputEntityTypes[nInputEntityTypes] = 0;
-}
+   }
 
    return true;
 }
@@ -1063,16 +1063,16 @@ bool NetIO::clearOutputEntityTypes()
    if (outputNtmTree != 0) {
       outputNtmTree->unref();
       outputNtmTree = 0 ;
-}
+   }
 
    // Clear our old output entity type table --
    while (nOutputEntityTypes > 0) {
       nOutputEntityTypes--;
       outputEntityTypes[nOutputEntityTypes]->unref();
       outputEntityTypes[nOutputEntityTypes] = 0;
-}
+   }
 
-    return true;
+   return true;
 }
 
 // Return the quick look root node for incoming entity types
@@ -1327,7 +1327,7 @@ bool NetIO::setSlotMaxEntityRange(const Basic::Distance* const msg)
 //------------------------------------------------------------------------------
 Basic::Object* NetIO::getSlotByIndex(const int si)
 {
-    return BaseClass::getSlotByIndex(si);
+   return BaseClass::getSlotByIndex(si);
 }
 
 //------------------------------------------------------------------------------
@@ -1389,7 +1389,7 @@ std::ostream& NetIO::serialize(std::ostream& sout, const int i, const bool slots
    }
    else {
       sout << "UTC";
-      }
+   }
    sout << std::endl;
 
    if (nInputEntityTypes > 0) {
@@ -1397,10 +1397,10 @@ std::ostream& NetIO::serialize(std::ostream& sout, const int i, const bool slots
       sout << "inputEntityTypes: {" << std::endl;
       for (unsigned int k = 0; k < nInputEntityTypes; k++) {
          inputEntityTypes[k]->serialize(sout,i+j+4);
-   }
+      }
       indent(sout,i+j);
       sout << "}" << std::endl;
-}
+   }
 
    if (nOutputEntityTypes > 0) {
       indent(sout,i+j);
@@ -1436,8 +1436,6 @@ std::ostream& NetIO::serialize(std::ostream& sout, const int i, const bool slots
 
    return sout;
 }
-
-
 
 
 //==============================================================================
@@ -1590,7 +1588,7 @@ void NtmOutputNodeStd::copyData(const NtmOutputNodeStd& org, const bool cc)
       const size_t LENGTH = strlen(org.nodeFormName) + 1;
       nodeFormName = new char[LENGTH];
       lcStrcpy(nodeFormName,LENGTH,org.nodeFormName);
-}
+   }
 
    if (tp != 0) {
       tp->unref();
@@ -1721,7 +1719,7 @@ bool NtmOutputNodeStd::add2OurLists(Ntm* const tgtNtm)
             NtmOutputNodeStd* subnode = (NtmOutputNodeStd*) item->getValue();
             found = subnode->add2OurLists(tgtNtm);
             item = item->getNext();
-    }
+         }
 
          // If not found then add it to our local lists
          if (!found) ok = checkAndAddNtm(tgtNtm);
@@ -1770,7 +1768,7 @@ bool NtmOutputNodeStd::checkAndAddNtm(Ntm* const tgtNtm)
                // Move it from our subnode list to the new node's subnode list
                newNode->subnodeList->put(subnode);
                this->subnodeList->remove(subnode);
-    }
+            }
 
          }
 

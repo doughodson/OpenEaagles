@@ -387,13 +387,13 @@ void NetIO::processInputList()
       if (nib != 0) nib->updateTheIPlayer();
    }
 
-   std::cout << "n = " << getInputListSize();      // #DPG#
-   Basic::PairStream* p = getSimulation()->getPlayers();
-   if (p != 0) {
-      std::cout << ";  np = " << p->entries();
-      p->unref();
-   }
-   std::cout << std::endl;
+//   std::cout << "n = " << getInputListSize();      // #DPG#
+//   Basic::PairStream* p = getSimulation()->getPlayers();
+//   if (p != 0) {
+//      std::cout << ";  np = " << p->entries();
+//      p->unref();
+//   }
+//   std::cout << std::endl;
 }
 
 //------------------------------------------------------------------------------
@@ -449,7 +449,7 @@ bool NetIO::processUserPDU(const PDUHeader* const)
 //------------------------------------------------------------------------------
 Simulation::Nib* NetIO::nibFactory(const Simulation::NetIO::IoType ioType)
 {
-    return new Nib(ioType);
+   return new Nib(ioType);
 }
 
 
