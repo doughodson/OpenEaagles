@@ -73,8 +73,6 @@ void CadrgFrame::load(CadrgFrameEntry* entry)
 
 	// All subframes present indicator 
 	bool allSubframes = false;
-	// Current position
-	uint currentPos = 0;
 	// Lookup offset table offset 
 	uint lookupOffTblOff = 0;
 	// Lookup table offset record length 
@@ -308,7 +306,6 @@ void CadrgFrame::load(CadrgFrameEntry* entry)
 	}
 	else {
 		// Position at start of image spatial data subsection 
-		currentPos = fin.tellg();
 		fin.seekg(loc[3].physicalIdx, std::ios::beg);
 	}
 

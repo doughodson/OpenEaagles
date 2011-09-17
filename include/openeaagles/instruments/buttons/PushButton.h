@@ -26,8 +26,6 @@ public:
    // sets the pushbutton type ie momentary = false or maintained = true
    virtual bool setFunction(const bool x);
    
-   // sets the current state of the pushbutton ie off = false or on = true
-   virtual bool setCurrentState(const bool x); 
 
    // The left mouse button has been depressed
    virtual bool onMouseDown();
@@ -50,6 +48,7 @@ private:
    bool  currentState;     //false = off, true = on
    bool  mouseDown;        //mouse press down status
    SendData buttonStatusSD; // what is our button doing?
+   bool initState;          // initial state
 };
 
 } // end Instruments namespace

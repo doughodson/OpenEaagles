@@ -24,7 +24,6 @@ IMPLEMENT_SUBCLASS(GlutDisplay,"GlutDisplay")
 int GlutDisplay::idList[GlutDisplay::MAX_DISPLAYS];                     // List of window IDs
 GlutDisplay* GlutDisplay::displayList[GlutDisplay::MAX_DISPLAYS];       // Display List
 int GlutDisplay::numGlutDisplays = 0;                                   // Number of  registered GlutDisplays
-osg::Vec4 GlutDisplay::ratios[GlutDisplay::MAX_DISPLAYS];
 
 const float GlutDisplay::CLICK_TIME = 0.5f;                             // our double click timeout
 const unsigned int DEFAULT_IDLE_SLEEP = 40;                             // default idle CB sleep time
@@ -86,8 +85,11 @@ void GlutDisplay::initData()
    idleSleepTimeMS = DEFAULT_IDLE_SLEEP;
    okToResize = false;
    picked = 0;
+
+   mainWinId = -1;
+   swPosition.set(0.0, 0.0);
+   swSize.set(50.0, 50.0);
 }
-int numDisplaysToResize;                            // number of displays to resize
 
 //------------------------------------------------------------------------------
 // copyData() -- copy our objects data
@@ -98,13 +100,18 @@ void GlutDisplay::copyData(const GlutDisplay& org, const bool cc)
    if (cc) initData();
 
    winId = org.winId;
-   fullScreenFlg = org.fullScreenFlg;
    pickWidth = org.pickWidth;
    pickHeight = org.pickHeight;
    accumBuff = org.accumBuff;
    stencilBuff = org.stencilBuff;
+
    idleSleepTimeMS = org.idleSleepTimeMS;
+   fullScreenFlg = org.fullScreenFlg;
    okToResize = org.okToResize;
+
+   mainWinId = org.mainWinId;
+   swPosition = org.swPosition;
+   swSize = org.swSize;
 
    if (picked != 0) picked->unref();
    picked = 0;
@@ -125,40 +132,6 @@ void GlutDisplay::deleteData()
 void GlutDisplay::reset()
 {
    BaseClass::reset();
-   if (subDisplays() != 0) {
-
-      // go through and get our ratios
-      int numDisplaysToResize = 0;
-      Basic::List::Item* item = subDisplays()->getFirstItem();
-      while (item != 0) {
-         Basic::Pair* pair = (Basic::Pair*)item->getValue();
-         if (pair != 0) {
-            GlutDisplay* gd = dynamic_cast<GlutDisplay*>(pair->object());
-            if (gd != 0) {
-               // figure our ratios
-               GLsizei width = 0, height = 0;
-               getViewportSize(&width, &height);
-
-               // now figure our left width ratio
-               GLint lx = 0, ly = 0;
-               GLsizei lWidth = 0, lHeight = 0;
-               gd->getViewport(&lx, &ly, &lWidth, &lHeight);
-
-               // now take our width / lWidth to get the ratio
-               LCreal widthRatio = (LCreal)((LCreal)lWidth / (LCreal)width);
-               LCreal heightRatio = (LCreal)((LCreal)lHeight/ (LCreal)height);
-
-               // figure our x and y position ratios
-               LCreal xRatio = (LCreal)((LCreal)lx / (LCreal)width);
-               LCreal yRatio = (LCreal)((LCreal)ly / (LCreal)height);    
-                               
-               // set our osg vectors up
-               ratios[numDisplaysToResize++].set(xRatio, yRatio, widthRatio, heightRatio);
-            }
-         }
-         item = item->getNext();
-      }
-   }
 }
 
 //-----------------------------------------------------------------------------
@@ -198,6 +171,9 @@ int GlutDisplay::createWindow()
    if (stencilBuff) { wmode = wmode | GLUT_STENCIL; }
    glutInitDisplayMode( wmode );
 
+   GLint  vpX(0), vpY(0);                   // our initial viewport position
+   GLsizei vpWidth(0), vpHeight(0);    // our initial viewport size
+   getViewport(&vpX, &vpY, &vpWidth, &vpHeight);
    glutInitWindowPosition(vpX, vpY);
    glutInitWindowSize(vpWidth, vpHeight);
    winId = glutCreateWindow(getName());
@@ -245,10 +221,17 @@ int GlutDisplay::createWindow()
 //-----------------------------------------------------------------------------
 // createSubWindow() -- create the screen for a subwindow
 //-----------------------------------------------------------------------------
-int GlutDisplay::createSubWindow(const int mainWin)
+int GlutDisplay::createSubWindow(const int mainId)
 {
+   GLint  vpX(0), vpY(0);                   // our initial viewport position
+   GLsizei vpWidth(0), vpHeight(0);    // our initial viewport size
+   getViewport(&vpX, &vpY, &vpWidth, &vpHeight);
+
+   // Must have a width and height
    winId = -1;
-   if (vpWidth == 0) return winId;
+   if (vpWidth == 0 || vpHeight == 0) return winId;
+
+   mainWinId = mainId;
 
    unsigned int wmode = GLUT_DOUBLE | GLUT_RGB | GLUT_ALPHA;
    if (getClearDepth() >= 0.0f) { wmode = wmode | GLUT_DEPTH; }
@@ -256,10 +239,27 @@ int GlutDisplay::createSubWindow(const int mainWin)
    if (stencilBuff) { wmode = wmode | GLUT_STENCIL; }
    glutInitDisplayMode( wmode );
 
-   winId = glutCreateSubWindow (mainWin, vpX, vpY, vpWidth, vpHeight);
+   winId = glutCreateSubWindow (mainWinId, vpX, vpY, vpWidth, vpHeight);
    if (winId > 0) {
       if (isMessageEnabled(MSG_INFO)) {
          std::cout << "GlutDisplay::createSubWindow() name = " << getName() << ", winId = " << winId << std::endl;
+      }
+
+      // compute our sub-display to main display ratios
+      const GlutDisplay* pMainWin = findRegisteredGlutDisplay(mainWinId);
+      if (pMainWin != 0) {
+         GLint mainWinX = 0, mainWinY = 0;
+         GLsizei mainWinWidth = 0, mainWinHeight = 0;
+         pMainWin->getViewport(&mainWinX, &mainWinY, &mainWinWidth, &mainWinHeight);
+
+         double widthRatio = (double)vpWidth / (double)mainWinWidth;
+         double heightRatio = (double)vpHeight/ (double)mainWinHeight;
+
+         double xRatio = (double)vpX / (double)mainWinWidth;
+         double yRatio = (double)vpY / (double)mainWinHeight;    
+
+         swPosition.set(xRatio, yRatio);
+         swSize.set(widthRatio, heightRatio);
       }
 
       glutDisplayFunc(drawFuncCB);
@@ -299,6 +299,15 @@ void GlutDisplay::swapbuffers()
    glutSwapBuffers();
 }
 
+//------------------------------------------------------------------------------
+// select() -- select this display
+//------------------------------------------------------------------------------
+void GlutDisplay::select()
+{
+   glutSetWindow(winId);
+   BaseClass::select();
+}
+
 //-----------------------------------------------------------------------------
 // hide our glut window (set ourself to the current window first)
 //-----------------------------------------------------------------------------
@@ -331,12 +340,14 @@ bool GlutDisplay::setResizeWindows(const bool flg)
 //-----------------------------------------------------------------------------
 void GlutDisplay::reshapeIt(int w, int h)
 {
+   //std::cout << "reshapeIt() winID = " << winId;
+   //std::cout << "; size(" << w << ", " << h << ")";
+   //std::cout << std::endl;
    // make sure we have a min height and width or our displays will get destroyed
    if (w > 10 && h > 10) {
       BaseClass::reshapeIt(w, h);
 
       if (subDisplays() != 0 && okToResize) {
-         int displayCount = 0;
 
          // go through and put our new numbers in
          Basic::List::Item* item = subDisplays()->getFirstItem();
@@ -344,30 +355,70 @@ void GlutDisplay::reshapeIt(int w, int h)
             Basic::Pair* pair = (Basic::Pair*)item->getValue();
             if (pair != 0) {
                GlutDisplay* gd = dynamic_cast<GlutDisplay*>(pair->object());
-               if (gd != 0) {
-                  glutSetWindow(gd->getWindowId());
-
-                  // we have our new vieport width and height
-                  // multiply it by our ratio and reset our width and height
-                  LCreal newX = (LCreal)(ratios[displayCount].x() * (LCreal)(vpWidth));
-                  LCreal newY = (LCreal)(ratios[displayCount].y() * (LCreal)(vpHeight));
-                  LCreal newWidth = (LCreal)(ratios[displayCount].z() * (LCreal)(vpWidth));
-                  LCreal newHeight = (LCreal)(ratios[displayCount].w() * (LCreal)(vpHeight));
-
-                  // now resize
-                  glutPositionWindow((int)newX, (int)newY);
-                  glutReshapeWindow((int)newWidth, (int)newHeight);
-
-                  displayCount++;                    
-               }
+               if (gd != 0) gd->reshapeSubWindow();
             }
             item = item->getNext();
          }
+
+         // Restore our window ID
          glutSetWindow(this->getWindowId());
       }
    }
 }
 
+//-----------------------------------------------------------------------------
+// Reshape subwindow using the subwindows position and size (see note #4)
+//-----------------------------------------------------------------------------
+bool GlutDisplay::reshapeSubWindow(const osg::Vec2d& position, const osg::Vec2d& size)
+{
+   //std::cout << "reshapeSubWindow(p,s) winID = " << winId << std::endl;
+   bool ok = false;
+   if (position.x() >= 0 && position.x() <= 1.0 && position.y() >= 0 && position.y() <= 1.0) {
+      if (size.x() >= 0 && size.x() <= 1.0 && size.y() >= 0 && size.y() <= 1.0) {
+         swPosition = position;
+         swSize = size;
+         reshapeSubWindow();
+         ok = true;
+      }
+   }
+   return ok;
+}
+
+//-----------------------------------------------------------------------------
+// reshape a sub-window
+//-----------------------------------------------------------------------------
+void GlutDisplay::reshapeSubWindow()
+{
+   if (mainWinId >= 0) {
+      const GlutDisplay* pMainWin = findRegisteredGlutDisplay(mainWinId);
+      if (pMainWin != 0) {
+         GLint mainWinX = 0, mainWinY = 0;
+         GLsizei mainWinWidth = 0, mainWinHeight = 0;
+         pMainWin->getViewport(&mainWinX, &mainWinY, &mainWinWidth, &mainWinHeight);
+
+         // we have our new vieport width and height
+         // multiply it by our ratio and reset our width and height
+         int newX = int(swPosition.x() * double(mainWinWidth) + 0.5);
+         int newY = int(swPosition.y() * double(mainWinHeight) + 0.5);
+         int newWidth = int(swSize.x() * double(mainWinWidth) + 0.5);
+         int newHeight = int(swSize.y() * double(mainWinHeight) + 0.5);
+
+         setViewport(newX, newY, newWidth, newHeight);
+
+         //std::cout << "reshapeSubWindow(void) winID = " << winId;
+         //std::cout << "; mainWinID = " << mainWinId;
+         //std::cout << "; pos(" << newX << ", " << newY << ")";
+         //std::cout << "; size(" << newWidth << ", " << newHeight << ")";
+         //std::cout << std::endl;
+
+         // now resize
+         glutSetWindow(winId);
+         glutPositionWindow(newX, newY);
+         glutReshapeWindow(newWidth, newHeight);
+         reshapeIt(newWidth, newHeight);
+      }
+   }
+}
 
 //-----------------------------------------------------------------------------
 // pick() -- Perform for select/pick operation; returns the selected (picked)
@@ -396,6 +447,11 @@ BasicGL::Graphic* GlutDisplay::pick(const int item)
    glPushMatrix();
    glLoadIdentity();
    gluPickMatrix(x, y, getPickWidth(), getPickHeight(), viewport);  
+
+   // Get our ortho parameters
+   GLdouble oLeft(0), oRight(0), oBottom(0), oTop(0), oNear(0), oFar(0);
+   getOrtho(oLeft, oRight, oBottom, oTop, oNear, oFar);
+
    glOrtho(oLeft, oRight, oBottom, oTop, oNear, oFar);
    glMatrixMode(GL_MODELVIEW);
 
@@ -726,12 +782,14 @@ void GlutDisplay::idleCB()
    // Update displays
    unsigned int sleepFor = DEFAULT_IDLE_SLEEP;
    for (int i = 0; i < numGlutDisplays; i++) {
-      glutSetWindow(idList[i]);
-      displayList[i]->updateData( (LCreal) dt);
-      if (displayList[i]->isMainDisplay()) {
-         sleepFor = displayList[i]->getIdleSleepTime();
+      if (idList[i] >= 0) {
+         glutSetWindow(idList[i]);
+         displayList[i]->updateData( (LCreal) dt);
+         if (displayList[i]->isMainDisplay()) {
+            sleepFor = displayList[i]->getIdleSleepTime();
+         }
+         displayList[i]->drawIt();
       }
-      displayList[i]->drawIt();
    }
    glutSetWindow(id);
 

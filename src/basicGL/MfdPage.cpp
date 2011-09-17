@@ -74,7 +74,6 @@ MfdPage::MfdPage()
 //------------------------------------------------------------------------------
 // Default OSB event handlers (just returns false -- not used)
 //------------------------------------------------------------------------------
-#if 1
 bool MfdPage::onOsbT1()    { return false; }
 bool MfdPage::onOsbT2()    { return false; }
 bool MfdPage::onOsbT3()    { return false; }
@@ -118,52 +117,6 @@ bool MfdPage::onOsbL7()    { return false; }
 bool MfdPage::onOsbL8()    { return false; }
 bool MfdPage::onOsbL9()    { return false; }
 bool MfdPage::onOsbL10()   { return false; }
-#else
-   /* TEST TEST TEST */
-   bool MfdPage::onOsbT1()    { std::cout << "T1 KEY" << std::endl; return true; }
-   bool MfdPage::onOsbT2()    { std::cout << "T2 KEY" << std::endl; return true; }
-   bool MfdPage::onOsbT3()    { std::cout << "T3 KEY" << std::endl; return true; }
-   bool MfdPage::onOsbT4()    { std::cout << "T4 KEY" << std::endl; return true; }
-   bool MfdPage::onOsbT5()    { std::cout << "T5 KEY" << std::endl; return true; }
-   bool MfdPage::onOsbT6()    { std::cout << "T6 KEY" << std::endl; return true; }
-   bool MfdPage::onOsbT7()    { std::cout << "T7 KEY" << std::endl; return true; }
-   bool MfdPage::onOsbT8()    { std::cout << "T8 KEY" << std::endl; return true; }
-   bool MfdPage::onOsbT9()    { std::cout << "T9 KEY" << std::endl; return true; }
-   bool MfdPage::onOsbT10()   { std::cout << "T10 KEY" << std::endl; return true; }
-
-   bool MfdPage::onOsbR1()    { std::cout << "R1 KEY" << std::endl; return true; }
-   bool MfdPage::onOsbR2()    { std::cout << "R2 KEY" << std::endl; return true; }
-   bool MfdPage::onOsbR3()    { std::cout << "R3 KEY" << std::endl; return true; }
-   bool MfdPage::onOsbR4()    { std::cout << "R4 KEY" << std::endl; return true; }
-   bool MfdPage::onOsbR5()    { std::cout << "R5 KEY" << std::endl; return true; }
-   bool MfdPage::onOsbR6()    { std::cout << "R6 KEY" << std::endl; return true; }
-   bool MfdPage::onOsbR7()    { std::cout << "R7 KEY" << std::endl; return true; }
-   bool MfdPage::onOsbR8()    { std::cout << "R8 KEY" << std::endl; return true; }
-   bool MfdPage::onOsbR9()    { std::cout << "R9 KEY" << std::endl; return true; }
-   bool MfdPage::onOsbR10()   { std::cout << "R10 KEY" << std::endl; return true; }
-
-   bool MfdPage::onOsbB1()    { std::cout << "B1 KEY" << std::endl; return true; }
-   bool MfdPage::onOsbB2()    { std::cout << "B2 KEY" << std::endl; return true; }
-   bool MfdPage::onOsbB3()    { std::cout << "B3 KEY" << std::endl; return true; }
-   bool MfdPage::onOsbB4()    { std::cout << "B4 KEY" << std::endl; return true; }
-   bool MfdPage::onOsbB5()    { std::cout << "B5 KEY" << std::endl; return true; }
-   bool MfdPage::onOsbB6()    { std::cout << "B6 KEY" << std::endl; return true; }
-   bool MfdPage::onOsbB7()    { std::cout << "B7 KEY" << std::endl; return true; }
-   bool MfdPage::onOsbB8()    { std::cout << "B8 KEY" << std::endl; return true; }
-   bool MfdPage::onOsbB9()    { std::cout << "B9 KEY" << std::endl; return true; }
-   bool MfdPage::onOsbB10()   { std::cout << "B10 KEY" << std::endl; return true; }
-
-   bool MfdPage::onOsbL1()    { std::cout << "L1 KEY" << std::endl; return true; }
-   bool MfdPage::onOsbL2()    { std::cout << "L2 KEY" << std::endl; return true; }
-   bool MfdPage::onOsbL3()    { std::cout << "L3 KEY" << std::endl; return true; }
-   bool MfdPage::onOsbL4()    { std::cout << "L4 KEY" << std::endl; return true; }
-   bool MfdPage::onOsbL5()    { std::cout << "L5 KEY" << std::endl; return true; }
-   bool MfdPage::onOsbL6()    { std::cout << "L6 KEY" << std::endl; return true; }
-   bool MfdPage::onOsbL7()    { std::cout << "L7 KEY" << std::endl; return true; }
-   bool MfdPage::onOsbL8()    { std::cout << "L8 KEY" << std::endl; return true; }
-   bool MfdPage::onOsbL9()    { std::cout << "L9 KEY" << std::endl; return true; }
-   bool MfdPage::onOsbL10()   { std::cout << "L10 KEY" << std::endl; return true; }
-#endif
 
 }  // end of BasicGL namespace
 }  // end of Eaagles namespace

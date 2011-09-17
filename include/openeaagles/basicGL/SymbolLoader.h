@@ -62,6 +62,10 @@ namespace BasicGL {
 //    counter rotation angle (in degrees) is sent via an UPDATE_VALUE6 event
 //    to the "hdg" subcomponent of the symbols graphical component.
 //
+//    7) SymbolLoader will interconnect lines between each symbol, if given the right
+//    data.  Set the interconnect flag to true, and then give a line width and color
+//    (if so desired), and the symbol loader will draw lines between the symbols (this
+//    is an easy way to draw routes).
 //
 // Form name: SymbolLoader
 // Slots:
@@ -157,8 +161,17 @@ public:
    // Update the symbol's "select name", which is used for pick() operations
    virtual bool updateSymbolSelectName(const int idx, const int newSN);
 
+   // Interconnect settings
+   virtual bool setInterconnect(const bool x);
+   bool isInterconnected()  { return interconnect; };
+    
+
    // BasicGL::Graphic interface
    virtual void draw();
+
+   // BasicGL::Graphic interface
+   // interface for drawing interconnect
+   virtual void drawFunc();
 
    // Basic::Component interface
    virtual void updateTC(const LCreal dt = 0.0f);
@@ -166,6 +179,7 @@ public:
 protected: 
    bool setSlotTemplates(Basic::PairStream* myTemps);
    bool setSlotShowInRangeOnly(const Basic::Number* const x);
+   bool setSlotInterconnect(const Basic::Number* const x);
 
    virtual SlSymbol* symbolFactory();  // Creates symbols objects
 
@@ -177,6 +191,7 @@ private:
    Basic::PairStream* templates;    // holds our pairstream of templates
    SlSymbol* symbols[MAX_SYMBOLS];  // holds our array of symbols                      
    bool showInRangeOnly;            // only show the symbols within our range, else draw all the symbols if false
+   bool interconnect;               // Connect our symbols with a line?
 };
 
 
@@ -265,6 +280,7 @@ private:
 // -------------------------------------------------------------------------------
     
 inline int SymbolLoader::getMaxSymbols() const { return MAX_SYMBOLS; }
+inline bool SymbolLoader::setInterconnect(const bool flg) { interconnect = flg; return true; }
 
 inline SlSymbol* SymbolLoader::getSymbol(const int idx)
 {

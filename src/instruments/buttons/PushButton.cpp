@@ -42,6 +42,7 @@ PushButton::PushButton()
    functionType = false;				//false = momentary, true = maintained
    currentState = false;	
    mouseDown    = false;
+   initState = false;
    buttonStatusSD.empty();
 }
 
@@ -54,6 +55,7 @@ void PushButton::copyData(const PushButton& org, const bool)
    functionType = org.functionType;
    currentState = org.currentState;
    buttonStatusSD.empty();
+   initState = org.initState;
 }
 
 //------------------------------------------------------------------------------
@@ -81,7 +83,9 @@ bool PushButton::setSlotStartState(const Basic::Number* const newFunction)
 {
    bool ok = false;
    if (newFunction != 0) {
-      ok = setCurrentState(newFunction->getBoolean());
+      initState = newFunction->getBoolean();
+      // set our current state initially
+      currentState = initState;
    }
    return ok;
 }
@@ -96,14 +100,6 @@ bool PushButton::setFunction(const bool x)
     return true;
 }
 
-//------------------------------------------------------------------------------
-// setCurrentState() - set our current state
-//------------------------------------------------------------------------------
-bool PushButton::setCurrentState(const bool x)
-{
-    currentState = x; 
-    return true; 
-}
 
 //------------------------------------------------------------------------------
 // onSingleClick() - the left mouse button has been released
@@ -111,7 +107,7 @@ bool PushButton::setCurrentState(const bool x)
 bool PushButton::onSingleClick()
 {
    //if button is not maintained (ie momentary) then switch it after mouse button released
-   if(!functionType && mouseDown) currentState = !currentState;
+   if(!functionType && mouseDown) currentState = initState;
 
    mouseDown = false;
    BaseClass::onSingleClick();
@@ -126,7 +122,7 @@ bool PushButton::onCancel()
 {
     // we go back to our original state
     mouseDown = false;
-    currentState = !currentState;
+    currentState = initState;
     return true;
 }
 
@@ -135,7 +131,7 @@ bool PushButton::onCancel()
 //------------------------------------------------------------------------------
 bool PushButton::onMouseDown()
 {
-   currentState = !currentState;
+   currentState = !initState;
    mouseDown = true;
    return true;
 }

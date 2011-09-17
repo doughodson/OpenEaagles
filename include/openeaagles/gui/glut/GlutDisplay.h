@@ -27,6 +27,11 @@ namespace Glut {
 //    is not enabled.  To enabled the depth buffer and the depth test, set the
 //    clear depth values using the 'clearDepth' slot.
 //
+//    4) The size and position of a subwindow is maintained as a ratio [ 0 .. 1 ] of
+//    its main window.  These ratios are computed by createSubWindow() using the main
+//    window and subwindow's viewport parameters (vpX, vpY, vpWidth and vpHeight).  They are
+//    used whenever the main window is reshaped with subwindow reshaping (resizeSubwindows)
+//    enabled.  They can be changed and the subwindow reshaped using reshapeSubWindow().
 //
 // Form name: GlutDisplay
 // Slots:
@@ -75,11 +80,17 @@ public:
 
    // Gets/sets the idle sleep time in milliseconds.  This is used by
    // the idle time callback, idleCB(), to release the CPU.
-   unsigned int getIdleSleepTime() const       { return idleSleepTimeMS; }
+   unsigned int getIdleSleepTime() const;
    virtual bool setIdleSleepTime(const unsigned int ms);
 
    // Enable/disable resizing of our subwindows.
    virtual bool setResizeWindows(const bool flg);
+
+   // Subwindow position [ x y ] within our main window as a ratio of its main window (see note #4)
+   const osg::Vec2d& getSubwindowPosition() const;
+
+   // Subwindow size [ width height ] as a ratio of its main window (see note #4)
+   const osg::Vec2d& getSubwindowSize() const;
 
    // Slot functions
    bool setSlotFullScreen(const Basic::Number* const msg);
@@ -91,6 +102,7 @@ public:
    bool setSlotStencilBuff(const Basic::Number* const msg);
 
    // BasicGL::Display functions
+   virtual void select();                       // Selects this display.
    virtual void hide();
    virtual void show();
    virtual void swapbuffers();
@@ -104,6 +116,12 @@ public:
 protected:
    // Creates a subwindow and returns the window ID (or -1 if failed)
    virtual int createSubWindow(const int mainWin);
+
+   // Reshape subwindow
+   virtual void reshapeSubWindow();
+
+   // Reshape this subwindow using the subwindows position and size (see note #4)
+   virtual bool reshapeSubWindow(const osg::Vec2d& position, const osg::Vec2d& size);
 
    virtual bool onEscKey();
    virtual void specialEvent(const int key);
@@ -144,19 +162,25 @@ private:
    static void entryFuncCB(int state);
 
    int   winId;                     // Window ID
-   bool  fullScreenFlg;             // Full screen flag (main window only)
-   bool  okToResize;                // Ok to resize subwindows
    bool  accumBuff;                 // Accumulation buffer enabled
    bool  stencilBuff;               // Stencil buffer enabled
-   unsigned int idleSleepTimeMS;    // Idle callback sleep time (MS)
    GLdouble pickWidth;              // Width of the pick area
    GLdouble pickHeight;             // Height of the pick area
+   bool  okToResize;                // Ok to resize our subwindows (main windows only)
+
+   // main window only data
+   bool  fullScreenFlg;             // Full screen flag (main window only)
+   unsigned int idleSleepTimeMS;    // Idle callback sleep time (MS)
+
+   // Subwindow only data
+   int   mainWinId;                 // Main window ID (sub-window only)
+   osg::Vec2d swPosition;           // Our X and Y positions as a ratio [ 0 ... 1 ] of our main window
+   osg::Vec2d swSize;               // Our width and height as a ratio [ 0 ... 1 ] of our main window
 
    // Registered GlutDisplay list
    static int idList[MAX_DISPLAYS];                    // List of window IDs
    static GlutDisplay* displayList[MAX_DISPLAYS];      // Display List
    static int numGlutDisplays;                         // Number of GlutDisplays
-   static osg::Vec4 ratios[MAX_DISPLAYS];              // ratios of our subdisplays
    Graphic* picked;                                    // our "picked graphic"
 };
 
@@ -171,6 +195,9 @@ inline GLdouble GlutDisplay::getPickWidth() const           { return pickWidth; 
 inline GLdouble GlutDisplay::getPickHeight() const          { return pickHeight; }
 inline bool GlutDisplay::isAccumBuff() const                { return accumBuff; }
 inline bool GlutDisplay::isStencilBuff() const              { return stencilBuff; }
+inline unsigned int GlutDisplay::getIdleSleepTime() const   { return idleSleepTimeMS; }
+inline const osg::Vec2d& GlutDisplay::getSubwindowPosition() const { return swPosition; }
+inline const osg::Vec2d& GlutDisplay::getSubwindowSize() const     { return swSize; }
 
 } // End Glut namespace
 } // End Eaagles namespace

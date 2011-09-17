@@ -32,36 +32,33 @@ IMPLEMENT_SUBCLASS(Display,"Display")
 // Slot table for this form type
 //------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Display)
-"name",                 //  1) Display name
-"colorTable",           //  2) Color table
-
-//  Fonts can be defined as the Font or the name of
-//  the font in the 'fonts' list
-"normalFont",           //  3) Normal font; Font or Basic::Identifier
-"left",                 //  4) Left ortho bound
-"right",                //  5) Right ortho bound
-"bottom",               //  6) Bottom ortho bound
-"top",                  //  7) Top ortho bound
-"near",                 //  8) Near ortho bound
-"far",                  //  9) Far ortho bound
-"vpX",                  // 10) Viewport x origin
-"vpY",                  // 11) Viewport y origin
-"vpWidth",              // 12) Viewport width
-"vpHeight",             // 13) Viewport height 	
-"displays",             // 14) Sub-displays
-"stdLineWidth",         // 15) Standard Line width
-"textures",             // 16) Texture(s)
-"clearColor",           // 17) Clear (Background) color; Basic::Color
-"leftBracketChar",      // 18) Left bracket character;  Basic::String or Basic::Number; default: '['
-"rightBracketChar",     // 19) Right bracket character; Basic::String or Basic::Number; default: ']'
-"reverseVideoBrackets", // 20) Reverse video brackets flag:
-//     If true, brackets are drawn with reversed video font, 
-//     otherwise follow the field's drawing mode.  default: false
-"fonts",                // 21) List of fonts
-"clearDepth",           // 22) clear depth; range: [ 0, 1 ] or negative for no depth buffer
-"orientation",          // 23) display orientation { normal, cw90, ccw90, inverted } default: normal
-"materials",            // 24) List of material objects
-"antiAliasing",         // 25) Turn on/off anti-aliasing.
+   "name",                 //  1) Display name
+   "colorTable",           //  2) Color table
+   "normalFont",           //  3) Normal font; Font or Basic::Identifier
+   "left",                 //  4) Left ortho bound
+   "right",                //  5) Right ortho bound
+   "bottom",               //  6) Bottom ortho bound
+   "top",                  //  7) Top ortho bound
+   "near",                 //  8) Near ortho bound
+   "far",                  //  9) Far ortho bound
+   "vpX",                  // 10) Viewport x origin
+   "vpY",                  // 11) Viewport y origin
+   "vpWidth",              // 12) Viewport width
+   "vpHeight",             // 13) Viewport height 	
+   "displays",             // 14) Sub-displays
+   "stdLineWidth",         // 15) Standard Line width
+   "textures",             // 16) Texture(s)
+   "clearColor",           // 17) Clear (Background) color; Basic::Color
+   "leftBracketChar",      // 18) Left bracket character;  Basic::String or Basic::Number; default: '['
+   "rightBracketChar",     // 19) Right bracket character; Basic::String or Basic::Number; default: ']'
+   "reverseVideoBrackets", // 20) Reverse video brackets flag:
+                           //     If true, brackets are drawn with reversed video font, 
+                           //     otherwise follow the field's drawing mode.  default: false
+   "fonts",                // 21) List of fonts
+   "clearDepth",           // 22) clear depth; range: [ 0, 1 ] or negative for no depth buffer
+   "orientation",          // 23) display orientation { normal, cw90, ccw90, inverted } default: normal
+   "materials",            // 24) List of material objects
+   "antiAliasing",         // 25) Turn on/off anti-aliasing.
 END_SLOTTABLE(Display)
 
 //------------------------------------------------------------------------------
@@ -109,7 +106,7 @@ Display::Display()
 {
    STANDARD_CONSTRUCTOR()
 
-      initData();
+   initData();
 }
 
 void Display::initData()
@@ -144,10 +141,14 @@ void Display::initData()
       colorName = new Basic::Identifier();
 
       normColor = 0;
-      setNormColor( getColor("green") );
+      Basic::Rgba* nc = new Basic::Rgba(0.0, 1.0, 0.0, 1.0); // default: green
+      setNormColor( nc );
+      nc->unref();
 
       hiColor = 0;
-      setHighlightColor( getColor("red") );
+      Basic::Rgba* hc = new Basic::Rgba(1.0, 0.0, 0.0, 1.0); // default: red
+      setHighlightColor( hc );
+      hc->unref();
    }
 
    // Font
@@ -409,9 +410,25 @@ void Display::setMouse(const int x, const int y, Display* const subdisplay)
       subdisplay->getViewportOrigin(&sdX, &sdY);
       lx = x + sdX;
       ly = y + sdY;
+        if (focus() != 0 && focus() != subdisplay) {
+            // if our previous focus was a display, exit it properly
+            if (focus()->isClassType(typeid(Display))) {
+                BasicGL::Display* dis = (BasicGL::Display*)focus();
+                dis->onMouseExit();
+            }
       focus(subdisplay);
+            // enter our new mouse display
+            subdisplay->onMouseEnter();
+        }
    }
    else {
+        // if we aren't a subdisplay, but we are a display, we 
+        // still need to call our entry and exit routines
+        if (focus() != 0 && focus()->isClassType(typeid(Display))) {
+            BasicGL::Display* dis = (BasicGL::Display*)focus();
+            dis->onMouseExit();
+        }
+
       // When we are NOT called from a sub-display,
       //   reset the focus to one of our own pages or components
       if (focus() != 0) {
@@ -433,7 +450,12 @@ void Display::setMouse(const int x, const int y, Display* const subdisplay)
    }
 
    // If we have no focus whatsoever at the end, we take the focus
-   if (focusPtr == 0) focus(this);
+    if (focusPtr == 0) {
+        // call our entry procedure!
+        onMouseEnter();
+        focus(this);
+        
+    }
 }
 
 //------------------------------------------------------------------------------
@@ -538,7 +560,7 @@ void Display::setOrtho(GLdouble l, GLdouble r, GLdouble b, GLdouble t, GLdouble 
    oFar    = f;
 }
 
-void Display::getOrtho(GLdouble &left, GLdouble &right, GLdouble &bottom, GLdouble &top, GLdouble &x, GLdouble &y)
+void Display::getOrtho(GLdouble &left, GLdouble &right, GLdouble &bottom, GLdouble &top, GLdouble &x, GLdouble &y) const
 {
    left = oLeft;
    right = oRight;
@@ -563,6 +585,14 @@ void Display::forceOrtho(GLdouble l, GLdouble r, GLdouble b, GLdouble t, GLdoubl
 void Display::drawIt()
 {
    select();
+
+   glViewport(0,0,vpWidth,vpHeight);
+   glMatrixMode(GL_PROJECTION);
+   glLoadIdentity();
+   glOrtho(oLeft, oRight, oBottom, oTop, oNear, oFar);
+   glMatrixMode(GL_MODELVIEW);
+   glLoadIdentity();
+
    configure();
    clear();
 

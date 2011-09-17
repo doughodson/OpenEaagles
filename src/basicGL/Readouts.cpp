@@ -4,6 +4,7 @@
 #include "openeaagles/basic/Float.h"
 #include "openeaagles/basic/Integer.h"
 #include "openeaagles/basic/PairStream.h"
+#include "openeaagles/basic/Pair.h"
 #include "Reformat.h"
 #include <stdio.h>
 
@@ -224,6 +225,7 @@ Rotary::Rotary()
    Basic::Integer* p = new Basic::Integer(1);    // default rotary item
    setSelectionName(p);
    p->unref();
+   preDrawSelectList = true;
 }
 
 Rotary2::Rotary2()
@@ -321,6 +323,30 @@ EMPTY_DELETEDATA(Rotary2)
 void NumericReadout::updateData(const LCreal dt)
 {
     BaseClass::updateData(dt);
+}
+
+
+//------------------------------------------------------------------------------
+// draw() -- draw our graphics
+//------------------------------------------------------------------------------
+
+// Rotary - we do this "pre-draw" of all of our possible selections, that will 
+// eliminate the "flicker" on the first selection of the item, because we will have
+// already drawn the item one time before (here). 
+void Rotary::draw()
+{
+    if (preDrawSelectList) {
+        int start = 1;
+        Basic::Pair* p = findByIndex(start);
+        while (p != 0) {
+            BasicGL::Graphic* g = dynamic_cast<BasicGL::Graphic*>(p->object());
+            if (g != 0) g->draw();
+            p = findByIndex(++start);
+        }
+        preDrawSelectList = false;
+    }
+
+    BaseClass::draw();
 }
 
 //------------------------------------------------------------------------------

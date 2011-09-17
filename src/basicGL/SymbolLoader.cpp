@@ -20,14 +20,16 @@ IMPLEMENT_SUBCLASS(SymbolLoader, "SymbolLoader")
 EMPTY_SERIALIZER(SymbolLoader)
 
 BEGIN_SLOTTABLE(SymbolLoader)
-   "templates",    // List of templates to use for navaids
-   "showOnlyInRange", // only show symbols within range
+   "templates",         // 1) List of templates to use for navaids
+   "showOnlyInRange",   // 2) only show symbols within map range
+   "interconnect",      // 3) Interfconnect the symbols   
 END_SLOTTABLE(SymbolLoader)
 
 // Map slot table to handles 
 BEGIN_SLOT_MAP(SymbolLoader)
    ON_SLOT(1,setSlotTemplates,Basic::PairStream)
    ON_SLOT(2,setSlotShowInRangeOnly,Basic::Number)
+   ON_SLOT(3,setSlotInterconnect,Basic::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -47,6 +49,7 @@ void SymbolLoader::initData()
       symbols[i] = 0;
    }
    showInRangeOnly = true;
+   interconnect = false;
 }
 
 //------------------------------------------------------------------------------
@@ -71,6 +74,7 @@ void SymbolLoader::copyData(const SymbolLoader& org, const bool cc)
    }
 
    showInRangeOnly = org.showInRangeOnly;
+   interconnect = org.interconnect;
 }
 
 //------------------------------------------------------------------------------
@@ -809,6 +813,24 @@ void SymbolLoader::updateTC(const LCreal)
 
 
 //------------------------------------------------------------------------------
+// drawFunc() - interconnects the symbols (if we are interconnecting)
+//------------------------------------------------------------------------------
+void SymbolLoader::drawFunc()
+{
+    if (interconnect) {
+        glPushMatrix();
+        glBegin(GL_LINE_STRIP);
+        for (int i = 0; i < MAX_SYMBOLS; i++) {
+            if (symbols[i] != 0) glVertex2f((GLfloat)symbols[i]->getScreenXPos(), (GLfloat)symbols[i]->getScreenYPos());                
+        }
+        glEnd();
+        glPopMatrix();
+    }
+    BaseClass::drawFunc();
+}
+
+
+//------------------------------------------------------------------------------
 // draw() - draw the objects in their proper place
 //------------------------------------------------------------------------------
 void SymbolLoader::draw()
@@ -1001,6 +1023,15 @@ bool SymbolLoader::setSlotShowInRangeOnly(const Basic::Number* const msg)
    if (msg != 0) ok = setShowInRangeOnly(msg->getBoolean());
    return ok;
 }
+
+// Interconnect flag
+bool SymbolLoader::setSlotInterconnect(const Basic::Number* const msg)
+{
+   bool ok = false;
+   if (msg != 0) ok = setInterconnect(msg->getBoolean());
+   return ok;
+}
+
 
 //------------------------------------------------------------------------------
 // getSlotByIndex()

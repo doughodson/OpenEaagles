@@ -91,6 +91,9 @@ public:
    // Returns the loiter pattern length (nm)
    virtual double getLoiterPatternLengthNM() const { return loiterLength; }
 
+   // get our loiter point anchor points
+   virtual bool getLoiterPointAnchors(double* const anLat, double* const anLon, double* const mAnLat, double* const mAnLon) const;
+
    // Returns true if the Loiter pattern is counter-clockwise
    virtual bool isLoiterPatternCounterClockwise() const { return loiterCcwFlag; }
 

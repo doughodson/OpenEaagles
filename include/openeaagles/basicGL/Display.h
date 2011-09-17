@@ -185,7 +185,7 @@ public:
    virtual void setViewportSize(const GLsizei vpWidth, const GLsizei vpHeight);
 
    // Returns the orthogonal parameters
-   virtual void getOrtho(GLdouble &left, GLdouble &right, GLdouble &bottom, GLdouble &top, GLdouble &near, GLdouble &far);
+   virtual void getOrtho(GLdouble &left, GLdouble &right, GLdouble &bottom, GLdouble &top, GLdouble &near, GLdouble &far) const;
 
    // Sets the orthogonal parameters.
    virtual void setOrtho(
@@ -369,9 +369,6 @@ protected:
    Basic::PairStream* subDisplays();
    void setSubdisplayFlag(const bool flg);
 
-   GLsizei  vpX, vpY, vpWidth, vpHeight;                   // viewport size
-   GLdouble oLeft, oRight, oBottom, oTop, oNear, oFar;     // Ortho parameters
-
 private:
     void initData();
 
@@ -386,6 +383,9 @@ private:
     Basic::PairStream* materials;      // list of material objects
     
     Basic::PairStream* textures;       // List of textures
+
+    GLsizei  vpX, vpY, vpWidth, vpHeight;                   // viewport size
+    GLdouble oLeft, oRight, oBottom, oTop, oNear, oFar;     // Ortho parameters
 
     GLfloat linewidth;                 // Current Linewidth (last glLineWidth())
     GLfloat stdLinewidth;              // Standard linewidth

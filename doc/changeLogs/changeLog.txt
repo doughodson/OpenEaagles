@@ -1,0 +1,63 @@
+================================================================================
+Changes since v11.08
+================================================================================
+
+--------------------------------------------------------------------------------
+basicGL: 
+
+   Display class
+      1) THere are now onMouseEnter() and onMouseExit() calls when we leave or enter the display.  This was implemented to 
+         support display of interest functionality.
+
+      2) Display's ortho and viewport member variables are now private
+
+   formFunc
+      1) Added quads and triangle classes
+
+   PushButton class
+      1) Updated the state functions to have an initState variable, so it's much easier to see what state we 
+         started from, instead of just toggling the current state.  This is transparent to the user.
+
+   Readouts class
+      1) Added a preDrawSelectList variable under Rotary, which will allow us to draw the non-selected
+         rotary graphical items before we select them.  This fixes an irritating bug in which on the first selection
+         of an item the graphic would "flicker", because it was being drawn for the first time.
+
+   Shapes class
+      1) Added two new classes, QUad and Triangle
+         Quad - used for drawing quad strips or quads, with the ability to draw textures or gradients
+         Triangle - draws either triangles, triangle fan, or triangle strips, with textures or gradients
+
+   SymbolLoader class
+      1) Added a new slot function, "interconnect", which will tell the symbol loader to draw lines between
+         the symbols that it draws.  This is useful for drawing routes, etc..  
+
+
+--------------------------------------------------------------------------------
+gui-glut:
+
+   GlutDisplay class
+
+      1) Added support for reshaping sub-windows as their main window is reshaped.
+
+
+--------------------------------------------------------------------------------
+maps:
+ 
+   CadrgFrame class
+      1) Removed an un-used currentPos variable.
+
+   VpfRecord class
+      1) Under createRecord(), the begin, end, and mySize variables were changed from ints to std::streamoff,
+         to remove warnings of type mismatch.
+
+
+--------------------------------------------------------------------------------
+
+simulation: 
+ 
+   Autopilot class
+      1) Added an accessor function to return the anchor points of the autopilot's loiter pattern.  
+
+   NetIO class
+      1) Removed less than 0 checks for unsigned ints in four functions: getInputNib(x2) and getOutputNib(x2).

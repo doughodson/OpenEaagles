@@ -3,6 +3,7 @@
 #include "openeaagles/basicGL/Shapes.h"
 #include "openeaagles/basic/Number.h"
 #include "openeaagles/basic/PairStream.h"
+#include "openeaagles/basicGL/ColorGradient.h"
 #include <GL/glu.h>
 
 namespace Eaagles {
@@ -552,6 +553,277 @@ std::ostream& Line::serialize(std::ostream& sout, const int i, const bool slotsO
    }
    return sout;
 }
+
+
+//==============================================================================
+// Class: Quad
+//==============================================================================
+IMPLEMENT_SUBCLASS(Quad,"Quad")
+EMPTY_DELETEDATA(Quad)
+
+BEGIN_SLOTTABLE(Quad)
+	"strip",	// True if we want a quad strip
+END_SLOTTABLE(Quad)
+
+BEGIN_SLOT_MAP(Quad)
+    ON_SLOT(1,setSlotStrip,Basic::Number)
+END_SLOT_MAP()
+
+// Constructor
+Quad::Quad()
+{
+    STANDARD_CONSTRUCTOR()
+    strip = false;    
+}
+
+void Quad::copyData(const Quad& org, const bool)
+{
+    BaseClass::copyData(org);
+    
+    strip = org.strip;
+}
+
+// Slot functions
+bool Quad::setSlotStrip(const Basic::Number* const x)
+{
+    bool ok = false;
+    if (x != 0) {
+        ok = setStrip(x->getBoolean());
+    }
+    return ok;
+}
+
+
+// Draw function
+void Quad::drawFunc()
+{
+    
+    bool ok = false;
+    
+    // Draw with texture
+    unsigned int nv = getNumberOfVertices();
+    if (nv > 3) {
+        if (!strip) {
+            int rem = nv % 4;
+            if (rem != 0) std::cerr << "Quad::drawFunc() - Quad have to have multiple of 4 vertices, add or remove vertices!!" << std::endl;
+            else {
+                BEGIN_DLIST
+                glBegin(GL_QUADS);
+                ok = true;
+            }
+        }
+        else {
+            int rem = nv % 2;
+            if (rem != 0) std::cerr << "Quad::drawFunc() - quad strips have to have multiple of 2 vertices, add or remove vertices!!" << std::endl;
+            else {
+                BEGIN_DLIST
+                glBegin(GL_QUAD_STRIP);
+                ok = true;
+            }
+        }
+        
+        if (ok) {
+            // get our regular vertices here
+            const osg::Vec3* v = getVertices();
+
+            unsigned int ntc = getNumberOfTextureCoords();
+            // draw with texture
+            if (ntc > 0 && hasTexture()) {
+                const osg::Vec2* texCoord = getTextureCoord();
+                unsigned int tc = 0; // texture count
+                for (unsigned int i = 0; i < nv; i++) {
+                    // add our textures coordinates
+                    if (tc < ntc)  lcTexCoord2v(texCoord[tc++].ptr());
+                    // now our vertices
+                    lcVertex3v( v[i].ptr() );
+                }
+                
+            }
+            // draw without texture
+            else {
+                // get our color gradient and apply it (if we have one)            
+                ColorGradient* colGradient = dynamic_cast<ColorGradient*>(getColor());
+
+                for (unsigned int i = 0; i < nv; i++) {
+                    if (colGradient != 0) {
+	                    Basic::Color* col = colGradient->getColorByIdx(i+1);
+	                    if (col != 0) glColor4f((GLfloat)col->red(), (GLfloat)col->green(), (GLfloat)col->blue(), (GLfloat)col->alpha());
+                    }
+                    // now add our vertex
+                    lcVertex3v( v[i].ptr() );
+                }
+            }
+            glEnd();
+            END_DLIST
+        }
+    }
+    
+    else std::cerr << "Quad::drawFunc() - Quad or QuadStrip needs at least 4 vertices!" << std::endl;
+}
+
+// getSlotByIndex() 
+Basic::Object* Quad::getSlotByIndex(const int si)
+{
+    return BaseClass::getSlotByIndex(si);
+}
+
+// serialize()
+std::ostream& Quad::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
+{
+   int j = 0;
+   if ( !slotsOnly ) {
+      //indent(sout,i);
+      sout << "( " << getFormName() << std::endl;
+      j = 4;
+   }
+
+   BaseClass::serialize(sout,i+j,true);
+
+   indent(sout,i+j);
+   sout << "strip: " << strip << std::endl;
+
+   if ( !slotsOnly ) {
+      indent(sout,i);
+      sout << ")" << std::endl;
+   }
+   return sout;
+}
+
+
+//==============================================================================
+// Class: Triangle
+//==============================================================================
+IMPLEMENT_SUBCLASS(Triangle,"Triangle")
+EMPTY_DELETEDATA(Triangle)
+
+BEGIN_SLOTTABLE(Triangle)
+	"fan",	// True if we want a triangle fan
+END_SLOTTABLE(Triangle)
+
+BEGIN_SLOT_MAP(Triangle)
+    ON_SLOT(1,setSlotFan,Basic::Number)
+END_SLOT_MAP()
+
+// Constructor
+Triangle::Triangle()
+{
+    STANDARD_CONSTRUCTOR()
+    fan = false;
+}
+
+void Triangle::copyData(const Triangle& org, const bool)
+{
+    BaseClass::copyData(org);
+    
+    fan = org.fan;
+}
+
+// Slot functions
+bool Triangle::setSlotFan(const Basic::Number* const x)
+{
+    bool ok = false;
+    if (x != 0) {
+        ok = setFan(x->getBoolean());
+    }
+    return ok;
+}
+
+
+
+// Draw function
+void Triangle::drawFunc()
+{
+    // get our color gradient and apply it (if we have one)
+    unsigned int nv = getNumberOfVertices();
+    
+    bool ok = false;
+    if (nv > 2) {
+        if (!strip && !fan) {
+            int rem = nv % 3;
+            if (rem != 0) std::cerr << "Triangle::drawFunc() - Triangles have to have multiple of 3 vertices, add or remove vertices!!" << std::endl;
+            else {
+                BEGIN_DLIST
+                glBegin(GL_TRIANGLES);
+                ok = true;
+            }
+        }
+        else if (fan) {
+            BEGIN_DLIST
+            glBegin(GL_TRIANGLE_FAN);
+            ok = true;
+        }
+        else if (strip){
+            BEGIN_DLIST
+            glBegin(GL_TRIANGLE_STRIP);
+            ok = true;
+        }
+        
+        if (ok) {
+            // get our regular vertices here
+            const osg::Vec3* v = getVertices();
+
+            unsigned int ntc = getNumberOfTextureCoords();
+            // draw with texture
+            if (ntc > 0 && hasTexture()) {
+                const osg::Vec2* texCoord = getTextureCoord();
+                unsigned int tc = 0; // texture count
+                for (unsigned int i = 0; i < nv; i++) {
+                    // add our textures coordinates
+                    if (tc < ntc)  lcTexCoord2v(texCoord[tc++].ptr());
+                    // now our vertices
+                    lcVertex3v( v[i].ptr() );
+                }
+                
+            }
+            // draw without texture
+            else {
+                // get our color gradient and apply it (if we have one)            
+                ColorGradient* colGradient = dynamic_cast<ColorGradient*>(getColor());
+
+                for (unsigned int i = 0; i < nv; i++) {
+                    if (colGradient != 0) {
+	                    Basic::Color* col = colGradient->getColorByIdx(i+1);
+	                    if (col != 0) glColor4f((GLfloat)col->red(), (GLfloat)col->green(), (GLfloat)col->blue(), (GLfloat)col->alpha());
+                    }
+                    // now add our vertex
+                    lcVertex3v( v[i].ptr() );
+                }
+            }
+            glEnd();
+            END_DLIST
+        }
+    }
+    else std::cerr << "Triangle::drawFunc() - Triangle or Triangle needs at least 3 vertices!" << std::endl;
+}
+
+// getSlotByIndex() 
+Basic::Object* Triangle::getSlotByIndex(const int si)
+{
+    return BaseClass::getSlotByIndex(si);
+}
+
+// serialize()
+std::ostream& Triangle::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
+{
+   int j = 0;
+   if ( !slotsOnly ) {
+      //indent(sout,i);
+      sout << "( " << getFormName() << std::endl;
+      j = 4;
+   }
+
+   BaseClass::serialize(sout,i+j,true);
+
+   indent(sout,i+j);
+   sout << "fan: " << fan << std::endl;
+
+   if ( !slotsOnly ) {
+      indent(sout,i);
+      sout << ")" << std::endl;
+   }
+   return sout;
+}
+
 
 } // End BasicGL namespace
 } // End Eaagles namespace

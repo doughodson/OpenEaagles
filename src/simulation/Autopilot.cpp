@@ -770,6 +770,16 @@ bool Autopilot::requestLoiter(const double anchorLat, const double anchorLon, co
    return ok;
 }
 
+// Get our anchor points for our loiter pattern
+bool Autopilot::getLoiterPointAnchors(double* const anLat, double* const anLon, double* const mAnLat, double* const mAnLon) const
+{
+   if (anLat != 0) *anLat = loiterAnchorLat;
+   if (anLon != 0) *anLon = loiterAnchorLon;
+   if (mAnLat != 0) *mAnLat = loiterMirrorLat;
+   if (mAnLon != 0) *mAnLon = loiterMirrorLon;
+   return true;
+}
+
 // Sets the loiter pattern length (nm)
 bool Autopilot::setLoiterPatternLengthNM(const double nm)
 {

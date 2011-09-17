@@ -80,6 +80,12 @@ Basic::Object* basicGLFormFunc(const char* formname)
     else if ( strcmp(formname, OcclusionArc::getFormName()) == 0 ) {
         newform = new OcclusionArc();
     }
+    else if ( strcmp(formname, Quad::getFormName()) == 0 ) {
+        newform = new Quad();
+    }
+    else if ( strcmp(formname, Triangle::getFormName()) == 0 ) {
+        newform = new Triangle();
+    }
 
     // Test Fields
     else if ( strcmp(formname, AsciiText::getFormName()) == 0 ) {

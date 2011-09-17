@@ -254,6 +254,61 @@ private:
     bool segment;            // True if line segments
 };
 
+//------------------------------------------------------------------------------
+// Class: Quad
+//
+// Form name: Quad
+// Description:
+//      Simple openGL quad strip 
+//------------------------------------------------------------------------------
+class Quad : public Graphic {
+    DECLARE_SUBCLASS(Quad,Graphic)
+public:
+    Quad();
+
+    // set function
+    bool setStrip(const bool x)     { strip = x; return true; }
+
+    // get function
+    bool isStrip()                  { return strip; }
+
+    // BasicGL::Graphic interface
+    virtual void drawFunc(); 
+
+protected:
+    bool setSlotStrip(const Basic::Number* const x);
+    bool strip;     // are we a Quad Strip?
+
+};
+
+//------------------------------------------------------------------------------
+// Class: Triangle
+//
+// Form name: Triangle
+// Description:
+//      Simple openGL triangle primitive (or strip, or fan)
+//------------------------------------------------------------------------------
+class Triangle : public Quad {
+    DECLARE_SUBCLASS(Triangle,Quad)
+public:
+    Triangle();
+
+    // set function
+    bool setFan(const bool x)     { fan = x; return true; }
+
+    // get function
+    bool isFan()                  { return fan; }
+
+    // BasicGL::Graphic interface
+    virtual void drawFunc(); 
+
+protected:
+    bool setSlotFan(const Basic::Number* const x);
+
+private:
+    bool fan;       // are we a triangle fan?
+};
+
 } // End BasicGL namespace
 } // End Eaagles namespace
 

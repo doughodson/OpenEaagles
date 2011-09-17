@@ -64,10 +64,10 @@ void VPFRecord::createRecord(VPFTable* x, const char* file, const int idx)
     if (!stream.fail() && parent != 0) {
         // let's try to get the size of my file contents
         stream.seekg(0);
-        int begin = stream.tellg();
+        std::streamoff begin = stream.tellg();
         stream.seekg(0, std::ios::end);
-        int end = stream.tellg();
-        int mySize = end - begin;
+        std::streamoff end = stream.tellg();
+        std::streamoff mySize = end - begin;
         int size = parent->getRecordSize();
         if (size > 0) {
             int recordOffset = size * (idx - 1);

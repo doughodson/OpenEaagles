@@ -316,12 +316,12 @@ protected:
 
    // Returns the idx'th NIB from the input list
    Nib* getInputNib(const unsigned int idx) {
-      return (idx >= 0 && idx < nInNibs) ? inputList[idx] : 0;
+      return (idx < nInNibs) ? inputList[idx] : 0;
    }
 
    // Returns the idx'th NIB from the input list (const version)
    const Nib* getInputNib(const unsigned int idx) const  {
-      return (idx >= 0 && idx < nInNibs) ? inputList[idx] : 0;
+      return (idx < nInNibs) ? inputList[idx] : 0;
    }
 
    // Returns the input list
@@ -341,12 +341,12 @@ protected:
 
    // Returns the idx'th NIB from the output list
    Nib* getOutputNib(const unsigned int idx) {
-      return (idx >= 0 && idx < nOutNibs) ? outputList[idx] : 0;
+      return (idx < nOutNibs) ? outputList[idx] : 0;
    }
 
    // Returns the idx'th NIB from the output list (const version)
    const Nib* getOutputNib(const unsigned int idx) const {
-      return (idx >= 0 && idx < nOutNibs) ? outputList[idx] : 0;
+      return (idx < nOutNibs) ? outputList[idx] : 0;
    }
 
 
