@@ -195,7 +195,7 @@ namespace Basic {
 //
 //
 // Examples of state machines can be found in the OpenEaagles
-// example applicaiton 'testStateMach'.
+// example application 'testStateMach'.
 //------------------------------------------------------------------------------
 class StateMachine : public Component {
    DECLARE_SUBCLASS(StateMachine,Component)
