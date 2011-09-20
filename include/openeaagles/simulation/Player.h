@@ -211,7 +211,7 @@ class Track;
 //
 //          1) Geocentric or world (ECEF) position vector [ x y z ]
 //
-//          2) Geodetic positon: latitude, longitude and altitude (HAE)
+//          2) Geodetic position: latitude, longitude and altitude (HAE)
 //
 //          3) NED position vector on the simulation's gaming area.
 //             -- May not be valid for all player types (e.g., SPACE_VEHICLE), so

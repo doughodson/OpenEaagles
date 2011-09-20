@@ -259,7 +259,7 @@ void Radar::receive(const LCreal dt)
          // Integration gain
          signal *= rfIGain;
 
-         // Range attinuation: we don't want the strong signal from short range targets
+         // Range attenuation: we don't want the strong signal from short range targets
          LCreal maxRng = getRange() * Basic::Distance::NM2M;
          //LCreal maxRng4 = (maxRng*maxRng*maxRng*maxRng);
          //LCreal rng = (em->getRange());

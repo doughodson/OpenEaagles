@@ -47,7 +47,7 @@ namespace Simulation {
 //    maxOrientationError  (Basic::Angle)       ! Max DR angular error (default: 3 degrees)
 //    maxAge               (Basic::Time)        ! Max age (without update) of networked players (default: 12.5 seconds)
 //
-//    maxEntityRange       (Basic::Distance)    ! Max enity range of networked players,
+//    maxEntityRange       (Basic::Distance)    ! Max entity range of networked players,
 //                                              !  or zero for no max range (default: 0 -- no range filtering)
 //
 //
@@ -92,7 +92,7 @@ namespace Simulation {
 //
 //    Incoming entities can be filtered by range using the 'maxEntityRange'
 //    slot, which defaults to zero or no range filtering.  Currently, this
-//    applies only to new entites; existing IPlayers are not filtered.
+//    applies only to new entities; existing IPlayers are not filtered.
 //
 // Outgoing entities:
 //

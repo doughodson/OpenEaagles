@@ -613,7 +613,7 @@ std::ostream& SimLogger::SimLogEvent::makeEmissionDataMsg(std::ostream& sout, co
         sout << "\t AOI Azimuth   = " << (Basic::Angle::R2DCC * em->getAzimuthAoi())   << "\n";
         sout << "\t AOI Elevation = " << (Basic::Angle::R2DCC * em->getElevationAoi()) << "\n";
         sout << "\t Frequency     = " << (em->getFrequency())                     << "\n";
-        sout << "\t Lamda         = " << (em->getWavelength())                    << "\n";
+        sout << "\t Lambda        = " << (em->getWavelength())                    << "\n";
         sout << "\t Pulse width   = " << (em->getPulseWidth())                    << "\n";
         sout << "\t PRF           = " << (em->getPRF())                           << "\n";
     }

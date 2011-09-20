@@ -14,10 +14,10 @@ class Ntm;
 
 //==============================================================================
 // Class: Dis::Nib
-// Description: Unqiue DIS Network Interface Block (NIB)
+// Description: Unique DIS Network Interface Block (NIB)
 //
 //    This class, which is derived from the Simulation::Nib, is used to manage
-//    the releationship between players and their corresponding DIS entities.
+//    the relationship between players and their corresponding DIS entities.
 //
 //==============================================================================
 class Nib : public Simulation::Nib  
