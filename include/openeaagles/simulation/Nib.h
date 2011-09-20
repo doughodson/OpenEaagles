@@ -23,7 +23,7 @@ namespace Simulation {
 //    set by the constructor and is accessed using the getIoType() function.
 //
 //    The parent NetIO class object maintains two lists of Nib objects: one to
-//    manager the incoming entities and a second to manage the outgoing players.
+//    manage the incoming entities and a second to manage the outgoing players.
 //    To create Nib objects, NetIO uses a NIB factory function, nibFactory(),
 //    which is implemented by the NetIO network specific derived class.
 //
