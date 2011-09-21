@@ -247,7 +247,7 @@ private:
    const Player* lead;        // Our lead player
    const Basic::Identifier* leadName;   // Name of our lead player
    double leadHdg;            // lead's heading (rad)
-   bool     followLeadModeOn; // Loiter mode flag
+   bool     followLeadModeOn; // Follow the lead mode flag
 };
 
 } // End Simulation namespace
