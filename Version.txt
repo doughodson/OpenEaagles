@@ -1,1 +1,1 @@
-Developmental version based on v11.09
+Stable version v11.09a
