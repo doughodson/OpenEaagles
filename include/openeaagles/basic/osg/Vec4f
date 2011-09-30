@@ -1,4 +1,4 @@
-/* -*-c++-*- OpenSceneGraph - Copyright (C) 1998-2005 Robert Osfield 
+/* -*-c++-*- OpenSceneGraph - Copyright (C) 1998-2006 Robert Osfield 
  *
  * This library is open source and may be redistributed and/or modified under  
  * the terms of the OpenSceneGraph Public License (OSGPL) version 0.0 or 
@@ -11,10 +11,10 @@
  * OpenSceneGraph Public License for more details.
 */
 
-#ifndef OSG_VEC4F_ETK
-#define OSG_VEC4F_ETK 1
+#ifndef OSG_VEC4F_OE
+#define OSG_VEC4F_OE 1
 
-#include "Vec3f"
+#include "./Vec3f"
 
 namespace Eaagles {
 namespace osg {
@@ -29,13 +29,19 @@ class Vec4f
 {
     public:
 
+        /** Data type of vector components.*/
         typedef float value_type;
 
+        /** Number of vector components. */
+        enum { num_components = 4 };
+        
+        /** Vec member variable. */
         value_type _v[4];
 
         // Methods are defined here so that they are implicitly inlined
 
-        Vec4f() { _v[0]=0.0; _v[1]=0.0; _v[2]=0.0; _v[3]=0.0;}
+        /** Constructor that sets all components of the vector to zero */
+        Vec4f() { _v[0]=0.0f; _v[1]=0.0f; _v[2]=0.0f; _v[3]=0.0f;}
         
         Vec4f(value_type x, value_type y, value_type z, value_type w)
         {
@@ -89,33 +95,35 @@ class Vec4f
         inline value_type z() const { return _v[2]; }
         inline value_type w() const { return _v[3]; }
 
-        inline value_type& red() { return _v[0]; }
-        inline value_type& green() { return _v[1]; }
-        inline value_type& blue() { return _v[2]; }
-        inline value_type& alpha() { return _v[3]; }
+        inline value_type& r() { return _v[0]; }
+        inline value_type& g() { return _v[1]; }
+        inline value_type& b() { return _v[2]; }
+        inline value_type& a() { return _v[3]; }
 
-        inline value_type red() const { return _v[0]; }
-        inline value_type green() const { return _v[1]; }
-        inline value_type blue() const { return _v[2]; }
-        inline value_type alpha() const { return _v[3]; }
+        inline value_type r() const { return _v[0]; }
+        inline value_type g() const { return _v[1]; }
+        inline value_type b() const { return _v[2]; }
+        inline value_type a() const { return _v[3]; }
 
-        inline unsigned long asABGR() const
+        inline unsigned int asABGR() const
         {
-            return (unsigned long)clampTo((_v[0]*255.0f),0.0f,255.0f)<<24 |
-                   (unsigned long)clampTo((_v[1]*255.0f),0.0f,255.0f)<<16 |
-                   (unsigned long)clampTo((_v[2]*255.0f),0.0f,255.0f)<<8  |
-                   (unsigned long)clampTo((_v[3]*255.0f),0.0f,255.0f);
+            return (unsigned int)clampTo((_v[0]*255.0f),0.0f,255.0f)<<24 |
+                   (unsigned int)clampTo((_v[1]*255.0f),0.0f,255.0f)<<16 |
+                   (unsigned int)clampTo((_v[2]*255.0f),0.0f,255.0f)<<8  |
+                   (unsigned int)clampTo((_v[3]*255.0f),0.0f,255.0f);
         }
 
-        inline unsigned long asRGBA() const
+        inline unsigned int asRGBA() const
         {
-            return (unsigned long)clampTo((_v[3]*255.0f),0.0f,255.0f)<<24 |
-                   (unsigned long)clampTo((_v[2]*255.0f),0.0f,255.0f)<<16 |
-                   (unsigned long)clampTo((_v[1]*255.0f),0.0f,255.0f)<<8  |
-                   (unsigned long)clampTo((_v[0]*255.0f),0.0f,255.0f);
+            return (unsigned int)clampTo((_v[3]*255.0f),0.0f,255.0f)<<24 |
+                   (unsigned int)clampTo((_v[2]*255.0f),0.0f,255.0f)<<16 |
+                   (unsigned int)clampTo((_v[1]*255.0f),0.0f,255.0f)<<8  |
+                   (unsigned int)clampTo((_v[0]*255.0f),0.0f,255.0f);
         }
 
+        /** Returns true if all components have values that are not NaN. */
         inline bool valid() const { return !isNaN(); }
+        /** Returns true if at least one component has value NaN. */
         inline bool isNaN() const { return osg::isNaN(_v[0]) || osg::isNaN(_v[1]) || osg::isNaN(_v[2]) || osg::isNaN(_v[3]); }
 
         /** Dot product. */
@@ -232,8 +240,6 @@ class Vec4f
 
 };    // end of class Vec4f
 
-
-
 /** Compute the dot product of a (Vec3,1.0) and a Vec4f. */
 inline Vec4f::value_type operator * (const Vec3f& lhs,const Vec4f& rhs)
 {
@@ -244,6 +250,18 @@ inline Vec4f::value_type operator * (const Vec3f& lhs,const Vec4f& rhs)
 inline Vec4f::value_type operator * (const Vec4f& lhs,const Vec3f& rhs)
 {
     return lhs[0]*rhs[0]+lhs[1]*rhs[1]+lhs[2]*rhs[2]+lhs[3];
+}
+
+/** multiply by vector components. */
+inline Vec4f componentMultiply(const Vec4f& lhs, const Vec4f& rhs)
+{
+    return Vec4f(lhs[0]*rhs[0], lhs[1]*rhs[1], lhs[2]*rhs[2], lhs[3]*rhs[3]);
+}
+
+/** divide rhs components by rhs vector components. */
+inline Vec4f componentDivide(const Vec4f& lhs, const Vec4f& rhs)
+{
+    return Vec4f(lhs[0]/rhs[0], lhs[1]/rhs[1], lhs[2]/rhs[2], lhs[3]/rhs[3]);
 }
 
 }    // end of namespace osg

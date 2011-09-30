@@ -1,4 +1,4 @@
-/* -*-c++-*- OpenSceneGraph - Copyright (C) 1998-2005 Robert Osfield 
+/* -*-c++-*- OpenSceneGraph - Copyright (C) 1998-2006 Robert Osfield 
  *
  * This library is open source and may be redistributed and/or modified under  
  * the terms of the OpenSceneGraph Public License (OSGPL) version 0.0 or 
@@ -18,9 +18,9 @@
 
 //#include <osg/GL>
 
+#include <limits>
 #include <stdlib.h>
-
-using namespace osg;
+#include <float.h>
 
 #define SET_ROW(row, v1, v2, v3, v4 )    \
     _mat[(row)][0] = (v1); \
@@ -34,6 +34,10 @@ using namespace osg;
     +((a)._mat[r][2] * (b)._mat[2][c]) \
     +((a)._mat[r][3] * (b)._mat[3][c])
 
+namespace Eaagles {
+namespace osg {
+
+//using namespace osg;
 
 Matrix_implementation::Matrix_implementation( value_type a00, value_type a01, value_type a02, value_type a03,
                   value_type a10, value_type a11, value_type a12, value_type a13,
@@ -62,67 +66,184 @@ void Matrix_implementation::set( value_type a00, value_type a01, value_type a02,
 #define QZ  q._v[2]
 #define QW  q._v[3]
 
-void Matrix_implementation::set(const Quat& q_in)
+void Matrix_implementation::setRotate(const Quat& q)
 {
-    Quat q(q_in);
     double length2 = q.length2();
-	if (length2!=1.0 && length2!=0)
+    if (fabs(length2) <= std::numeric_limits<double>::min())
     {
+        _mat[0][0] = 0.0; _mat[1][0] = 0.0; _mat[2][0] = 0.0;
+        _mat[0][1] = 0.0; _mat[1][1] = 0.0; _mat[2][1] = 0.0;
+        _mat[0][2] = 0.0; _mat[1][2] = 0.0; _mat[2][2] = 0.0;
+    }
+    else
+    {
+        double rlength2;
         // normalize quat if required.
-        q /= sqrt(length2);
+        // We can avoid the expensive sqrt in this case since all 'coefficients' below are products of two q components.
+        // That is a square of a square root, so it is possible to avoid that
+        if (length2 != 1.0)
+        {
+            rlength2 = 2.0/length2;
+        }
+        else
+        {
+            rlength2 = 2.0;
+        }
+        
+        // Source: Gamasutra, Rotating Objects Using Quaternions
+        //
+        //http://www.gamasutra.com/features/19980703/quaternions_01.htm
+        
+        double wx, wy, wz, xx, yy, yz, xy, xz, zz, x2, y2, z2;
+        
+        // calculate coefficients
+        x2 = rlength2*QX;
+        y2 = rlength2*QY;
+        z2 = rlength2*QZ;
+        
+        xx = QX * x2;
+        xy = QX * y2;
+        xz = QX * z2;
+        
+        yy = QY * y2;
+        yz = QY * z2;
+        zz = QZ * z2;
+        
+        wx = QW * x2;
+        wy = QW * y2;
+        wz = QW * z2;
+        
+        // Note.  Gamasutra gets the matrix assignments inverted, resulting
+        // in left-handed rotations, which is contrary to OpenGL and OSG's 
+        // methodology.  The matrix assignment has been altered in the next
+        // few lines of code to do the right thing.
+        // Don Burns - Oct 13, 2001
+        _mat[0][0] = value_type( 1.0 - (yy + zz) );
+        _mat[1][0] = value_type( xy - wz );
+        _mat[2][0] = value_type( xz + wy );
+        
+        
+        _mat[0][1] = value_type( xy + wz );
+        _mat[1][1] = value_type( 1.0 - (xx + zz) );
+        _mat[2][1] = value_type( yz - wx );
+        
+        _mat[0][2] = value_type( xz - wy );
+        _mat[1][2] = value_type( yz + wx );
+        _mat[2][2] = value_type( 1.0 - (xx + yy) );
     }
 
-    // Source: Gamasutra, Rotating Objects Using Quaternions
-    //
-    //http://www.gamasutra.com/features/programming/19980703/quaternions_01.htm
+#if 0
+    _mat[0][3] = 0.0;
+    _mat[1][3] = 0.0;
+    _mat[2][3] = 0.0;
 
-    double wx, wy, wz, xx, yy, yz, xy, xz, zz, x2, y2, z2;
-
-    // calculate coefficients
-    x2 = QX + QX;
-    y2 = QY + QY;
-    z2 = QZ + QZ;
-
-    xx = QX * x2;
-    xy = QX * y2;
-    xz = QX * z2;
-
-    yy = QY * y2;
-    yz = QY * z2;
-    zz = QZ * z2;
-
-    wx = QW * x2;
-    wy = QW * y2;
-    wz = QW * z2;
-
-    // Note.  Gamasutra gets the matrix assignments inverted, resulting
-    // in left-handed rotations, which is contrary to OpenGL and OSG's 
-    // methodology.  The matrix assignment has been altered in the next
-    // few lines of code to do the right thing.
-    // Don Burns - Oct 13, 2001
-    _mat[0][0] = (value_type) ( 1.0 - (yy + zz) );
-    _mat[1][0] = (value_type) ( xy - wz );
-    _mat[2][0] = (value_type) ( xz + wy );
-    _mat[3][0] = (value_type) 0.0;
-
-    _mat[0][1] = (value_type) ( xy + wz );
-    _mat[1][1] = (value_type) ( 1.0 - (xx + zz) );
-    _mat[2][1] = (value_type) ( yz - wx );
-    _mat[3][1] = (value_type) 0.0;
-
-    _mat[0][2] = (value_type) ( xz - wy );
-    _mat[1][2] = (value_type) ( yz + wx );
-    _mat[2][2] = (value_type) ( 1.0 - (xx + yy) );
-    _mat[3][2] = (value_type) 0.0;
-
-    _mat[0][3] = (value_type) 0.0;
-    _mat[1][3] = (value_type) 0.0;
-    _mat[2][3] = (value_type) 0.0;
-    _mat[3][3] = (value_type) 1.0;
+    _mat[3][0] = 0.0;
+    _mat[3][1] = 0.0;
+    _mat[3][2] = 0.0;
+    _mat[3][3] = 1.0;
+#endif
 }
 
-void Matrix_implementation::get( Quat& q ) const
+#define COMPILE_getRotate_David_Spillings_Mk1
+//#define COMPILE_getRotate_David_Spillings_Mk2
+//#define COMPILE_getRotate_Original
+
+#ifdef COMPILE_getRotate_David_Spillings_Mk1
+// David Spillings implementation Mk 1
+Quat Matrix_implementation::getRotate() const
 {
+    Quat q;
+
+    value_type s;
+    value_type tq[4];
+    int    i, j;
+
+    // Use tq to store the largest trace
+    tq[0] = 1 + _mat[0][0]+_mat[1][1]+_mat[2][2];
+    tq[1] = 1 + _mat[0][0]-_mat[1][1]-_mat[2][2];
+    tq[2] = 1 - _mat[0][0]+_mat[1][1]-_mat[2][2];
+    tq[3] = 1 - _mat[0][0]-_mat[1][1]+_mat[2][2];
+
+    // Find the maximum (could also use stacked if's later)
+    j = 0;
+    for(i=1;i<4;i++) j = (tq[i]>tq[j])? i : j;
+
+    // check the diagonal
+    if (j==0)
+    {
+        /* perform instant calculation */
+        QW = tq[0];
+        QX = _mat[1][2]-_mat[2][1]; 
+        QY = _mat[2][0]-_mat[0][2]; 
+        QZ = _mat[0][1]-_mat[1][0]; 
+    }
+    else if (j==1)
+    {
+        QW = _mat[1][2]-_mat[2][1]; 
+        QX = tq[1];
+        QY = _mat[0][1]+_mat[1][0]; 
+        QZ = _mat[2][0]+_mat[0][2]; 
+    }
+    else if (j==2)
+    {
+        QW = _mat[2][0]-_mat[0][2]; 
+        QX = _mat[0][1]+_mat[1][0]; 
+        QY = tq[2];
+        QZ = _mat[1][2]+_mat[2][1]; 
+    }
+    else /* if (j==3) */
+    {
+        QW = _mat[0][1]-_mat[1][0]; 
+        QX = _mat[2][0]+_mat[0][2]; 
+        QY = _mat[1][2]+_mat[2][1]; 
+        QZ = tq[3];
+    }
+
+    s = value_type( sqrt(0.25/tq[j]) );
+    QW *= s;
+    QX *= s;
+    QY *= s;
+    QZ *= s;
+
+    return q;
+
+}
+#endif
+
+
+#ifdef COMPILE_getRotate_David_Spillings_Mk2
+// David Spillings implementation Mk 2
+Quat Matrix_implementation::getRotate() const
+{
+    Quat q;
+
+    // From http://www.euclideanspace.com/maths/geometry/rotations/conversions/matrixToQuaternion/index.htm
+    QW = 0.5 * sqrt( osg::maximum( 0.0, 1.0 + _mat[0][0] + _mat[1][1] + _mat[2][2] ) );
+    QX = 0.5 * sqrt( osg::maximum( 0.0, 1.0 + _mat[0][0] - _mat[1][1] - _mat[2][2] ) );
+    QY = 0.5 * sqrt( osg::maximum( 0.0, 1.0 - _mat[0][0] + _mat[1][1] - _mat[2][2] ) );
+    QZ = 0.5 * sqrt( osg::maximum( 0.0, 1.0 - _mat[0][0] - _mat[1][1] + _mat[2][2] ) );
+
+#if 0
+    // Robert Osfield, June 7th 2007, arggg this new implementation produces many many errors, so have to revert to sign(..) orignal below.
+    QX = QX * osg::signOrZero(  _mat[1][2] - _mat[2][1]) ;
+    QY = QY * osg::signOrZero(  _mat[2][0] - _mat[0][2]) ;
+    QZ = QZ * osg::signOrZero(  _mat[0][1] - _mat[1][0]) ;
+#else
+    QX = QX * osg::sign(  _mat[1][2] - _mat[2][1]) ;
+    QY = QY * osg::sign(  _mat[2][0] - _mat[0][2]) ;
+    QZ = QZ * osg::sign(  _mat[0][1] - _mat[1][0]) ;
+#endif
+
+    return q;
+}
+#endif
+
+#ifdef COMPILE_getRotate_Original
+// Original implementation
+Quat Matrix_implementation::getRotate() const
+{
+    Quat q;
+
     // Source: Gamasutra, Rotating Objects Using Quaternions
     //
     //http://www.gamasutra.com/features/programming/19980703/quaternions_01.htm
@@ -133,14 +254,14 @@ void Matrix_implementation::get( Quat& q ) const
 
     int nxt[3] = {1, 2, 0};
 
-    tr = (value_type) (_mat[0][0] + _mat[1][1] + _mat[2][2]+1.0);
+    tr = _mat[0][0] + _mat[1][1] + _mat[2][2]+1.0;
 
     // check the diagonal
     if (tr > 0.0)
     {
         s = (value_type)sqrt (tr);
         QW = s / 2.0;
-        s = (value_type) (0.5 / s);
+        s = 0.5 / s;
         QX = (_mat[1][2] - _mat[2][1]) * s;
         QY = (_mat[2][0] - _mat[0][2]) * s;
         QZ = (_mat[0][1] - _mat[1][0]) * s;
@@ -158,10 +279,10 @@ void Matrix_implementation::get( Quat& q ) const
 
         s = (value_type)sqrt ((_mat[i][i] - (_mat[j][j] + _mat[k][k])) + 1.0);
 
-        tq[i] = (value_type) (s * 0.5);
+        tq[i] = s * 0.5;
 
         if (s != 0.0)
-            s = (value_type) (0.5 / s);
+            s = 0.5 / s;
 
         tq[3] = (_mat[j][k] - _mat[k][j]) * s;
         tq[j] = (_mat[i][j] + _mat[j][i]) * s;
@@ -172,7 +293,10 @@ void Matrix_implementation::get( Quat& q ) const
         QZ = tq[2];
         QW = tq[3];
     }
+
+    return q;
 }
+#endif
 
 int Matrix_implementation::compare(const Matrix_implementation& m) const
 {
@@ -203,9 +327,9 @@ void Matrix_implementation::setTrans( const Vec3f& v )
 }
 void Matrix_implementation::setTrans( const Vec3d& v )
 {
-    _mat[3][0] = (value_type) v[0];
-    _mat[3][1] = (value_type) v[1];
-    _mat[3][2] = (value_type) v[2];
+    _mat[3][0] = value_type(v[0]);
+    _mat[3][1] = value_type(v[1]);
+    _mat[3][2] = value_type(v[2]);
 }
 
 void Matrix_implementation::makeIdentity()
@@ -223,7 +347,7 @@ void Matrix_implementation::makeScale( const Vec3f& v )
 
 void Matrix_implementation::makeScale( const Vec3d& v )
 {
-    makeScale((value_type) v[0], (value_type) v[1], (value_type) v[2] );
+    makeScale( value_type(v[0]), value_type(v[1]), value_type(v[2]) );
 }
 
 void Matrix_implementation::makeScale( value_type x, value_type y, value_type z )
@@ -241,7 +365,7 @@ void Matrix_implementation::makeTranslate( const Vec3f& v )
 
 void Matrix_implementation::makeTranslate( const Vec3d& v )
 {
-    makeTranslate( (value_type) v[0], (value_type) v[1], (value_type) v[2] );
+    makeTranslate( value_type(v[0]), value_type(v[1]), value_type(v[2]) );
 }
 
 void Matrix_implementation::makeTranslate( value_type x, value_type y, value_type z )
@@ -254,62 +378,78 @@ void Matrix_implementation::makeTranslate( value_type x, value_type y, value_typ
 
 void Matrix_implementation::makeRotate( const Vec3f& from, const Vec3f& to )
 {
+    makeIdentity();
+
     Quat quat;
     quat.makeRotate(from,to);
-    set(quat);
+    setRotate(quat);
 }
 void Matrix_implementation::makeRotate( const Vec3d& from, const Vec3d& to )
 {
+    makeIdentity();
+
     Quat quat;
     quat.makeRotate(from,to);
-    set(quat);
+    setRotate(quat);
 }
 
 void Matrix_implementation::makeRotate( value_type angle, const Vec3f& axis )
 {
+    makeIdentity();
+
     Quat quat;
     quat.makeRotate( angle, axis);
-    set(quat);
+    setRotate(quat);
 }
 void Matrix_implementation::makeRotate( value_type angle, const Vec3d& axis )
 {
+    makeIdentity();
+
     Quat quat;
     quat.makeRotate( angle, axis);
-    set(quat);
+    setRotate(quat);
 }
 
 void Matrix_implementation::makeRotate( value_type angle, value_type x, value_type y, value_type z ) 
 {
+    makeIdentity();
+
     Quat quat;
     quat.makeRotate( angle, x, y, z);
-    set(quat);
+    setRotate(quat);
 }
 
 void Matrix_implementation::makeRotate( const Quat& quat )
 {
-    set(quat);
+    makeIdentity();
+
+    setRotate(quat);
 }
 
 void Matrix_implementation::makeRotate( value_type angle1, const Vec3f& axis1, 
                          value_type angle2, const Vec3f& axis2,
                          value_type angle3, const Vec3f& axis3)
 {
+    makeIdentity();
+
     Quat quat;
     quat.makeRotate(angle1, axis1, 
                     angle2, axis2,
                     angle3, axis3);
-    set(quat);
+    setRotate(quat);
 }
 
 void Matrix_implementation::makeRotate( value_type angle1, const Vec3d& axis1, 
                          value_type angle2, const Vec3d& axis2,
                          value_type angle3, const Vec3d& axis3)
 {
+    makeIdentity();
+
     Quat quat;
     quat.makeRotate(angle1, axis1, 
                     angle2, axis2,
                     angle3, axis3);
-    set(quat);
+    setRotate(quat);
 }
 
 void Matrix_implementation::mult( const Matrix_implementation& lhs, const Matrix_implementation& rhs )
@@ -386,44 +526,64 @@ void Matrix_implementation::postMult( const Matrix_implementation& other )
 
 #undef INNER_PRODUCT
 
-
-bool Matrix_implementation::invert( const Matrix_implementation& rhs)
+// orthoNormalize the 3x3 rotation matrix
+void Matrix_implementation::orthoNormalize(const Matrix_implementation& rhs)
 {
-#if 1
-    return invert_4x4_new(rhs);
-#else
-    static const osg::Timer& timer = *Timer::instance();
-
-    Matrix_implementation a;
-    Matrix_implementation b;
-
-    Timer_t t1 = timer.tick();
-
-    a.invert_4x4_new(rhs);
+    value_type x_colMag = (rhs._mat[0][0] * rhs._mat[0][0]) + (rhs._mat[1][0] * rhs._mat[1][0]) + (rhs._mat[2][0] * rhs._mat[2][0]);
+    value_type y_colMag = (rhs._mat[0][1] * rhs._mat[0][1]) + (rhs._mat[1][1] * rhs._mat[1][1]) + (rhs._mat[2][1] * rhs._mat[2][1]);
+    value_type z_colMag = (rhs._mat[0][2] * rhs._mat[0][2]) + (rhs._mat[1][2] * rhs._mat[1][2]) + (rhs._mat[2][2] * rhs._mat[2][2]);
     
-    Timer_t t2 = timer.tick();
+    if(!equivalent((double)x_colMag, 1.0) && !equivalent((double)x_colMag, 0.0))
+    {
+      x_colMag = sqrt(x_colMag);
+      _mat[0][0] = rhs._mat[0][0] / x_colMag;
+      _mat[1][0] = rhs._mat[1][0] / x_colMag;
+      _mat[2][0] = rhs._mat[2][0] / x_colMag;
+    }
+    else
+    {
+      _mat[0][0] = rhs._mat[0][0];
+      _mat[1][0] = rhs._mat[1][0];
+      _mat[2][0] = rhs._mat[2][0];
+    }
 
-    b.invert_4x4_orig(rhs);
-    
-    Timer_t t3 = timer.tick();
+    if(!equivalent((double)y_colMag, 1.0) && !equivalent((double)y_colMag, 0.0))
+    {
+      y_colMag = sqrt(y_colMag);
+      _mat[0][1] = rhs._mat[0][1] / y_colMag;
+      _mat[1][1] = rhs._mat[1][1] / y_colMag;
+      _mat[2][1] = rhs._mat[2][1] / y_colMag;
+    }
+    else
+    {
+      _mat[0][1] = rhs._mat[0][1];
+      _mat[1][1] = rhs._mat[1][1];
+      _mat[2][1] = rhs._mat[2][1];
+    }
 
-    static double new_time = 0.0;
-    static double orig_time = 0.0;
-    static double count = 0.0;
-    
-    new_time += timer.delta_u(t1,t2);
-    orig_time += timer.delta_u(t2,t3);
-    ++count;
-    
-    std::cout<<"Average new="<<new_time/count<<"  orig = "<<orig_time/count<<std::endl;
+    if(!equivalent((double)z_colMag, 1.0) && !equivalent((double)z_colMag, 0.0))
+    {
+      z_colMag = sqrt(z_colMag);
+      _mat[0][2] = rhs._mat[0][2] / z_colMag;
+      _mat[1][2] = rhs._mat[1][2] / z_colMag;
+      _mat[2][2] = rhs._mat[2][2] / z_colMag;
+    }
+    else
+    {
+      _mat[0][2] = rhs._mat[0][2];
+      _mat[1][2] = rhs._mat[1][2];
+      _mat[2][2] = rhs._mat[2][2];
+    }
 
-    std::cout<<"new matrix invert time="<<timer.delta_u(t1,t2)<<" "<<a<<std::endl;
-    std::cout<<"orig matrix invert time="<<timer.delta_u(t2,t3)<<" "<<b<<std::endl;
-    
-    set(b);
-    
-    return true;
-#endif
+    _mat[3][0] = rhs._mat[3][0];
+    _mat[3][1] = rhs._mat[3][1];
+    _mat[3][2] = rhs._mat[3][2];
+
+    _mat[0][3] = rhs._mat[0][3];
+    _mat[1][3] = rhs._mat[1][3];
+    _mat[2][3] = rhs._mat[2][3];
+    _mat[3][3] = rhs._mat[3][3];
+
 }
 
 /******************************************
@@ -452,12 +612,12 @@ So the inverse is mat' = (trans * corr)' * rot', where rot' must be computed the
 This problem is simplified if [px py pz s] = [0 0 0 1], which will happen if mat was composed only of rotations, scales, and translations (which is common).  In this case, we can ignore corr entirely which saves on a lot of computations.
 ******************************************/
 
-bool Matrix_implementation::invert_4x4_new( const Matrix_implementation& mat )
+bool Matrix_implementation::invert_4x3( const Matrix_implementation& mat )
 {
     if (&mat==this)
     {
        Matrix_implementation tm(mat);
-       return invert_4x4_new(tm);
+       return invert_4x3(tm);
     }
 
     register value_type r00, r01, r02,
@@ -474,7 +634,7 @@ bool Matrix_implementation::invert_4x4_new( const Matrix_implementation& mat )
     _mat[0][2] = r01*r12 - r02*r11;
 
       // Compute determinant of rot from 3 elements just computed
-    register value_type one_over_det = (value_type) ( 1.0/(r00*_mat[0][0] + r10*_mat[0][1] + r20*_mat[0][2]) );
+    register value_type one_over_det = value_type( 1.0/(r00*_mat[0][0] + r10*_mat[0][1] + r20*_mat[0][2]) );
     r00 *= one_over_det; r10 *= one_over_det; r20 *= one_over_det;  // Saves on later computations
 
       // Finish computing inverse of rot
@@ -524,27 +684,27 @@ bool Matrix_implementation::invert_4x4_new( const Matrix_implementation& mat )
 #define tz r12
 
         tx = mat._mat[3][0]; ty = mat._mat[3][1]; tz = mat._mat[3][2];
-        one_over_s  = (value_type) ( 1.0/(d - (tx*px + ty*py + tz*pz)) );
+        one_over_s  = value_type( 1.0/(d - (tx*px + ty*py + tz*pz)) );
 
         tx *= one_over_s; ty *= one_over_s; tz *= one_over_s;  // Reduces number of calculations later on
 
         // Compute inverse of trans*corr
-        TPinv._mat[0][0] = (value_type) ( tx*px + 1.0 );
-        TPinv._mat[0][1] = (value_type) ( ty*px );
-        TPinv._mat[0][2] = (value_type) ( tz*px );
-        TPinv._mat[0][3] = (value_type) ( -px * one_over_s );
-        TPinv._mat[1][0] = (value_type) ( tx*py );
-        TPinv._mat[1][1] = (value_type) ( ty*py + 1.0 );
-        TPinv._mat[1][2] = (value_type) ( tz*py );
-        TPinv._mat[1][3] = (value_type) ( -py * one_over_s );
-        TPinv._mat[2][0] = (value_type) ( tx*pz );
-        TPinv._mat[2][1] = (value_type) ( ty*pz );
-        TPinv._mat[2][2] = (value_type) ( tz*pz + 1.0 );
-        TPinv._mat[2][3] = (value_type) ( -pz * one_over_s );
-        TPinv._mat[3][0] = (value_type) ( -tx );
-        TPinv._mat[3][1] = (value_type) ( -ty );
-        TPinv._mat[3][2] = (value_type) ( -tz );
-        TPinv._mat[3][3] = (value_type) ( one_over_s );
+        TPinv._mat[0][0] = value_type( tx*px + 1.0 );
+        TPinv._mat[0][1] = ty*px;
+        TPinv._mat[0][2] = tz*px;
+        TPinv._mat[0][3] = -px * one_over_s;
+        TPinv._mat[1][0] = tx*py;
+        TPinv._mat[1][1] = value_type( ty*py + 1.0 );
+        TPinv._mat[1][2] = tz*py;
+        TPinv._mat[1][3] = -py * one_over_s;
+        TPinv._mat[2][0] = tx*pz;
+        TPinv._mat[2][1] = ty*pz;
+        TPinv._mat[2][2] = value_type( tz*pz + 1.0 );
+        TPinv._mat[2][3] = -pz * one_over_s;
+        TPinv._mat[3][0] = -tx;
+        TPinv._mat[3][1] = -ty;
+        TPinv._mat[3][2] = -tz;
+        TPinv._mat[3][3] = one_over_s;
 
         preMult(TPinv); // Finish computing full inverse of mat
 
@@ -579,14 +739,14 @@ inline T SGL_ABS(T a)
 }
 
 #ifndef SGL_SWAP
-#define SGL_SWAP(a,b,temp) ((temp)=(value_type)(a),(a)=(value_type)(b),(b)=(value_type)(temp))
+#define SGL_SWAP(a,b,temp) ((temp)=value_type(a),(a)=value_type(b),(b)=value_type(temp))
 #endif
 
-bool Matrix_implementation::invert_4x4_orig( const Matrix_implementation& mat )
+bool Matrix_implementation::invert_4x4( const Matrix_implementation& mat )
 {
     if (&mat==this) {
        Matrix_implementation tm(mat);
-       return invert_4x4_orig(tm);
+       return invert_4x4(tm);
     }
 
     unsigned int indxc[4], indxr[4], ipiv[4];
@@ -632,13 +792,13 @@ bool Matrix_implementation::invert_4x4_orig( const Matrix_implementation& mat )
 
        pivinv = 1.0/operator()(icol,icol);
        operator()(icol,icol) = 1;
-       for (l=0; l<4; l++) operator()(icol,l) *= (value_type)pivinv;
+       for (l=0; l<4; l++) operator()(icol,l) *= value_type(pivinv);
        for (ll=0; ll<4; ll++)
           if (ll != icol)
           {
              dum=operator()(ll,icol);
              operator()(ll,icol) = 0;
-             for (l=0; l<4; l++) operator()(ll,l) -= (value_type)(operator()(icol,l)*dum);
+             for (l=0; l<4; l++) operator()(ll,l) -= value_type( operator()(icol,l)*dum );
           }
     }
     for (int lx=4; lx>0; --lx)
@@ -659,10 +819,10 @@ void Matrix_implementation::makeOrtho(double left, double right,
     double tx = -(right+left)/(right-left);
     double ty = -(top+bottom)/(top-bottom);
     double tz = -(zFar+zNear)/(zFar-zNear);
-    SET_ROW(0, (value_type) (2.0/(right-left)),               (value_type) (0.0),                (value_type) (0.0), (value_type) (0.0) )
-    SET_ROW(1,              (value_type) (0.0),  (value_type) (2.0/(top-bottom)),                (value_type) (0.0), (value_type) (0.0) )
-    SET_ROW(2,              (value_type) (0.0),               (value_type) (0.0),  (value_type) (-2.0/(zFar-zNear)), (value_type) (0.0) )
-    SET_ROW(3,               (value_type) (tx),                (value_type) (ty),                 (value_type) (tz), (value_type) (1.0) )
+    SET_ROW(0, value_type(2.0/(right-left)),               value_type(0.0),                value_type(0.0),  value_type(0.0) )
+    SET_ROW(1,              value_type(0.0),  value_type(2.0/(top-bottom)),                value_type(0.0),  value_type(0.0) )
+    SET_ROW(2,              value_type(0.0),               value_type(0.0),  value_type(-2.0/(zFar-zNear)),  value_type(0.0) )
+    SET_ROW(3,               value_type(tx),                value_type(ty),                 value_type(tz),  value_type(1.0) )
 }
 
 bool Matrix_implementation::getOrtho(double& left, double& right,
@@ -691,30 +851,35 @@ void Matrix_implementation::makeFrustum(double left, double right,
     // note transpose of Matrix_implementation wr.t OpenGL documentation, since the OSG use post multiplication rather than pre.
     double A = (right+left)/(right-left);
     double B = (top+bottom)/(top-bottom);
-    double C = -(zFar+zNear)/(zFar-zNear);
-    double D = -2.0*zFar*zNear/(zFar-zNear);
-    SET_ROW(0, (value_type)(2.0*zNear/(right-left)),                    (value_type)(0.0), (value_type)(0.0),  (value_type)(0.0) )
-    SET_ROW(1,                    (value_type)(0.0), (value_type)(2.0*zNear/(top-bottom)), (value_type)(0.0),  (value_type)(0.0) )
-    SET_ROW(2,                      (value_type)(A),                      (value_type)(B),   (value_type)(C), (value_type)(-1.0) )
-    SET_ROW(3,                    (value_type)(0.0),                    (value_type)(0.0),   (value_type)(D),  (value_type)(0.0) )
+    double C = (fabs(zFar)>DBL_MAX) ? -1. : -(zFar+zNear)/(zFar-zNear);
+    double D = (fabs(zFar)>DBL_MAX) ? -2.*zNear : -2.0*zFar*zNear/(zFar-zNear);
+    SET_ROW(0, value_type(2.0*zNear/(right-left)),                      value_type(0.0),   value_type(0.0),   value_type(0.0) )
+    SET_ROW(1,                    value_type(0.0),   value_type(2.0*zNear/(top-bottom)),   value_type(0.0),   value_type(0.0) )
+    SET_ROW(2,                      value_type(A),                        value_type(B),     value_type(C),  value_type(-1.0) )
+    SET_ROW(3,                    value_type(0.0),                      value_type(0.0),     value_type(D),   value_type(0.0) )
 }
 
 bool Matrix_implementation::getFrustum(double& left, double& right,
                                        double& bottom, double& top,
                                        double& zNear, double& zFar) const
 {
-    if (_mat[0][3]!=0.0 || _mat[1][3]!=0.0 || _mat[2][3]!=-1.0 || _mat[3][3]!=0.0) return false;
+    if (_mat[0][3]!=0.0 || _mat[1][3]!=0.0 || _mat[2][3]!=-1.0 || _mat[3][3]!=0.0)
+        return false;
 
+    // note: near and far must be used inside this method instead of zNear and zFar
+    // because zNear and zFar are references and they may point to the same variable.
+    double temp_near = _mat[3][2] / (_mat[2][2]-1.0);
+    double temp_far = _mat[3][2] / (1.0+_mat[2][2]);
 
-    zNear = _mat[3][2] / (_mat[2][2]-1.0);
-    zFar = _mat[3][2] / (1.0+_mat[2][2]);
+    left = temp_near * (_mat[2][0]-1.0) / _mat[0][0];
+    right = temp_near * (1.0+_mat[2][0]) / _mat[0][0];
+
+    top = temp_near * (1.0+_mat[2][1]) / _mat[1][1];
+    bottom = temp_near * (_mat[2][1]-1.0) / _mat[1][1];
     
-    left = zNear * (_mat[2][0]-1.0) / _mat[0][0];
-    right = zNear * (1.0+_mat[2][0]) / _mat[0][0];
+    zNear = temp_near;
+    zFar = temp_far;
 
-    top = zNear * (1.0+_mat[2][1]) / _mat[1][1];
-    bottom = zNear * (_mat[2][1]-1.0) / _mat[1][1];
-    
     return true;
 }                 
 
@@ -738,13 +903,22 @@ bool Matrix_implementation::getPerspective(double& fovy,double& aspectRatio,
     double left   =  0.0;
     double top    =  0.0;
     double bottom =  0.0;
-    if (getFrustum(left,right,bottom,top,zNear,zFar))
+
+    // note: near and far must be used inside this method instead of zNear and zFar
+    // because zNear and zFar are references and they may point to the same variable.
+    double temp_near   =  0.0;
+    double temp_far    =  0.0;
+
+    // get frustum and compute results
+    bool r = getFrustum(left,right,bottom,top,temp_near,temp_far);
+    if (r)
     {
-        fovy = RadiansToDegrees(atan(top/zNear)-atan(bottom/zNear));
+        fovy = RadiansToDegrees(atan(top/temp_near)-atan(bottom/temp_near));
         aspectRatio = (right-left)/(top-bottom);
-        return true;
     }
-    return false;
+    zNear = temp_near;
+    zFar = temp_far;
+    return r;
 }
 
 void Matrix_implementation::makeLookAt(const Vec3d& eye,const Vec3d& center,const Vec3d& up)
@@ -757,12 +931,12 @@ void Matrix_implementation::makeLookAt(const Vec3d& eye,const Vec3d& center,cons
     u.normalize();
 
     set(
-        (value_type) (s[0]),     (value_type) (u[0]),     (value_type) (-f[0]),     (value_type) (0.0),
-        (value_type) (s[1]),     (value_type) (u[1]),     (value_type) (-f[1]),     (value_type) (0.0),
-        (value_type) (s[2]),     (value_type) (u[2]),     (value_type) (-f[2]),     (value_type) (0.0),
-        (value_type)  (0.0),     (value_type) (0.0),      (value_type) (0.0),       (value_type) (1.0) );
+        value_type(s[0]),     value_type(u[0]),     value_type(-f[0]),     value_type(0.0),
+        value_type(s[1]),     value_type(u[1]),     value_type(-f[1]),     value_type(0.0),
+        value_type(s[2]),     value_type(u[2]),     value_type(-f[2]),     value_type(0.0),
+        value_type(0.0),      value_type(0.0),      value_type(0.0),       value_type(1.0) );
 
-    preMult(Matrix_implementation::translate(-eye));
+    preMultTranslate(-eye);
 }
 
 
@@ -770,22 +944,39 @@ void Matrix_implementation::getLookAt(Vec3f& eye,Vec3f& center,Vec3f& up,value_t
 {
     Matrix_implementation inv;
     inv.invert(*this);
-    eye = osg::Vec3f(0.0,0.0,0.0)*inv;
+
+    // note: e and c variables must be used inside this method instead of eye and center
+    // because eye and center are references and they may point to the same variable.
+    Vec3f e = osg::Vec3f(0.0,0.0,0.0)*inv;
     up = transform3x3(*this,osg::Vec3f(0.0,1.0,0.0));
-    center = transform3x3(*this,osg::Vec3f(0.0,0.0,-1));
-    center.normalize();
-    center = eye + center*((Vec3f::value_type)lookDistance);
+    Vec3f c = transform3x3(*this,osg::Vec3f(0.0,0.0,-1));
+    c.normalize();
+    c = e + c * ((Vec3f::value_type)lookDistance);
+
+    // assign the results
+    eye = e;
+    center = c;
 }
 
 void Matrix_implementation::getLookAt(Vec3d& eye,Vec3d& center,Vec3d& up,value_type lookDistance) const
 {
     Matrix_implementation inv;
     inv.invert(*this);
-    eye = osg::Vec3d(0.0,0.0,0.0)*inv;
+
+    // note: e and c variables must be used inside this method instead of eye and center
+    // because eye and center are references and they may point to the same variable.
+    Vec3d e = osg::Vec3d(0.0,0.0,0.0)*inv;
     up = transform3x3(*this,osg::Vec3d(0.0,1.0,0.0));
-    center = transform3x3(*this,osg::Vec3d(0.0,0.0,-1));
-    center.normalize();
-    center = eye + center*lookDistance;
+    Vec3d c = transform3x3(*this,osg::Vec3d(0.0,0.0,-1));
+    c.normalize();
+    c = e + c*lookDistance;
+
+    // assign the results
+    eye = e;
+    center = c;
 }
+
+} // End osg namespace
+} // End Eaagles namespace
 
 #undef SET_ROW

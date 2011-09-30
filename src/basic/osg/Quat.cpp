@@ -1,4 +1,4 @@
-/* -*-c++-*- OpenSceneGraph - Copyright (C) 1998-2005 Robert Osfield 
+/* -*-c++-*- OpenSceneGraph - Copyright (C) 1998-2006 Robert Osfield 
  *
  * This library is open source and may be redistributed and/or modified under  
  * the terms of the OpenSceneGraph Public License (OSGPL) version 0.0 or 
@@ -12,38 +12,36 @@
 */
 #include <stdio.h>
 #include "openeaagles/basic/osg/Quat"
-#include "openeaagles/basic/osg/Matrixf"
 #include "openeaagles/basic/osg/Matrixd"
-//#include <osg/Notify>
+#include "openeaagles/basic/osg/Matrixf"
 
-#include <cmath>
+#include <math.h>
 
 /// Good introductions to Quaternions at:
 /// http://www.gamasutra.com/features/programming/19980703/quaternions_01.htm
 /// http://mathworld.wolfram.com/Quaternion.html
 
 namespace Eaagles {
-using namespace osg;
-
+namespace osg {
 
 void Quat::set(const Matrixf& matrix)
 {
-    matrix.get(*this);
+    *this = matrix.getRotate();
 }
 
 void Quat::set(const Matrixd& matrix)
 {
-    matrix.get(*this);
+    *this = matrix.getRotate();
 }
 
 void Quat::get(Matrixf& matrix) const
 {
-    matrix.set(*this);
+    matrix.makeRotate(*this);
 }
 
 void Quat::get(Matrixd& matrix) const
 {
-    matrix.set(*this);
+    matrix.makeRotate(*this);
 }
 
 
@@ -218,7 +216,7 @@ void Quat::makeRotate_original( const Vec3d& from, const Vec3d& to )
 
     if ( fabs(cosangle - 1) < epsilon )
     {
-        //osg::notify(osg::INFO)<<"*** Quat::makeRotate(from,to) with near co-linear vectors, epsilon= "<<fabs(cosangle-1)<<std::endl;
+        //OSG_INFO<<"*** Quat::makeRotate(from,to) with near co-linear vectors, epsilon= "<<fabs(cosangle-1)<<std::endl;
     
         // cosangle is close to 1, so the vectors are close to being coincident
         // Need to generate an angle of zero with any vector we like
@@ -263,9 +261,9 @@ void Quat::getRotate( value_type& angle, Vec3f& vec ) const
 {
     value_type x,y,z;
     getRotate(angle,x,y,z);
-    vec[0]= (Vec3f::value_type)x;
-    vec[1]=(Vec3f::value_type)y;
-    vec[2]=(Vec3f::value_type)z;
+    vec[0]= Vec3f::value_type(x);
+    vec[1]= Vec3f::value_type(y);
+    vec[2]= Vec3f::value_type(z);
 }
 void Quat::getRotate( value_type& angle, Vec3d& vec ) const
 {
@@ -352,48 +350,5 @@ void Quat::slerp( value_type t, const Quat& from, const Quat& to )
 #define QZ  _v[2]
 #define QW  _v[3]
 
-
-#ifdef OSG_USE_UNIT_TESTS
-void test_Quat_Eueler(value_type heading,value_type pitch,value_type roll)
-{
-    osg::Quat q;
-    q.makeRotate(heading,pitch,roll);
-    
-    osg::Matrix q_m;
-    q.get(q_m);
-    
-    osg::Vec3 xAxis(1,0,0);
-    osg::Vec3 yAxis(0,1,0);
-    osg::Vec3 zAxis(0,0,1);
-    
-    cout << "heading = "<<heading<<"  pitch = "<<pitch<<"  roll = "<<roll<<endl;
-
-    cout <<"q_m = "<<q_m;
-    cout <<"xAxis*q_m = "<<xAxis*q_m << endl;
-    cout <<"yAxis*q_m = "<<yAxis*q_m << endl;
-    cout <<"zAxis*q_m = "<<zAxis*q_m << endl;
-    
-    osg::Matrix r_m = osg::Matrix::rotate(roll,0.0,1.0,0.0)*
-                      osg::Matrix::rotate(pitch,1.0,0.0,0.0)*
-                      osg::Matrix::rotate(-heading,0.0,0.0,1.0);
-                      
-    cout << "r_m = "<<r_m;
-    cout <<"xAxis*r_m = "<<xAxis*r_m << endl;
-    cout <<"yAxis*r_m = "<<yAxis*r_m << endl;
-    cout <<"zAxis*r_m = "<<zAxis*r_m << endl;
-    
-    cout << endl<<"*****************************************" << endl<< endl;
-    
-}
-
-void test_Quat()
-{
-
-    test_Quat_Eueler(osg::DegreesToRadians(20),0,0);
-    test_Quat_Eueler(0,osg::DegreesToRadians(20),0);
-    test_Quat_Eueler(0,0,osg::DegreesToRadians(20));
-    test_Quat_Eueler(osg::DegreesToRadians(20),osg::DegreesToRadians(20),osg::DegreesToRadians(20));
-    return 0;
-}
-#endif
+} // End osg namespace
 } // End Eaagles namespace

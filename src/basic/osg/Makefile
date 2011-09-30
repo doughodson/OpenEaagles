@@ -4,9 +4,9 @@ include ../../makedefs
 LIB = $(OPENEAAGLES_LIB_DIR)/liboeBasic.a
 
 OBJS =  \
-	$(LIB)(BoundingBox.o) \
-	$(LIB)(BoundingSphere.o) \
+	$(LIB)(Math.o) \
 	$(LIB)(Matrixd.o) \
+	$(LIB)(MatrixDecomposition.o) \
 	$(LIB)(Matrixf.o) \
 	$(LIB)(Quat.o)
 

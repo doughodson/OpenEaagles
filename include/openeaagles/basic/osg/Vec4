@@ -1,4 +1,4 @@
-/* -*-c++-*- OpenSceneGraph - Copyright (C) 1998-2005 Robert Osfield 
+/* -*-c++-*- OpenSceneGraph - Copyright (C) 1998-2006 Robert Osfield 
  *
  * This library is open source and may be redistributed and/or modified under  
  * the terms of the OpenSceneGraph Public License (OSGPL) version 0.0 or 
@@ -11,11 +11,12 @@
  * OpenSceneGraph Public License for more details.
 */
 
-#ifndef OSG_VEC4_ETK
-#define OSG_VEC4_ETK 1
+#ifndef OSG_VEC4_OE
+#define OSG_VEC4_OE 1
 
-#include "Vec4f"
-#include "Vec4d"
+#include "openeaagles/basic/support.h"
+#include "./Vec4f"
+#include "./Vec4d"
 
 namespace Eaagles {
 namespace osg {
