@@ -136,7 +136,7 @@ bool SrtmHgtFile::loadData()
     }
 
     in.seekg(0, std::ios::end);
-    unsigned int byteSize = in.tellg();
+    std::streamoff byteSize = in.tellg();
     in.seekg(0, std::ios::beg);
     int nameSize = (int)srtmFilename.size();
     if (nameSize < 11 || !determineSrtmInfo(srtmFilename.substr(nameSize - 11, 11), byteSize))
@@ -165,27 +165,27 @@ bool SrtmHgtFile::loadData()
     return true;
 }
 
-bool SrtmHgtFile::determineSrtmInfo(const std::string& srtmFilename, unsigned int size)
+bool SrtmHgtFile::determineSrtmInfo(const std::string& srtmFilename, std::streamoff size)
 {
     // Extract the number of latitude and longitude lines
     unsigned int num_lat;
     unsigned int num_lon;
     // Extract the data intervals for latitude and longitude
     switch (size) {
-    case 2884802:
-	latSpacing = 3.0 / 3600.0;
-	lonSpacing = 3.0 / 3600.0;
-	num_lat = 1201;
-	num_lon = 1201;
-	break;
-    case 25934402:
-	latSpacing = 1.0 / 3600.0;
-	lonSpacing = 1.0 / 3600.0;
-	num_lat = 3601;
-	num_lon = 3601;
-	break;
-    default:
-	return false;
+       case 2884802:
+         latSpacing = 3.0 / 3600.0;
+         lonSpacing = 3.0 / 3600.0;
+         num_lat = 1201;
+         num_lon = 1201;
+         break;
+      case 25934402:
+         latSpacing = 1.0 / 3600.0;
+         lonSpacing = 1.0 / 3600.0;
+         num_lat = 3601;
+         num_lon = 3601;
+         break;
+      default:
+         return false;
     }
 
     // valid SRTM file extensions

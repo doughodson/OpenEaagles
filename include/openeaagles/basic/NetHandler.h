@@ -252,6 +252,12 @@ inline void NetHandler::toNetOrder(long* const vout, const long vin)
         *--q = *p++;
         *--q = *p++;
         *--q = *p++;
+        if (sizeof(long) == 8) { /* 64 bit */
+           *--q = *p++;
+           *--q = *p++;
+           *--q = *p++;
+           *--q = *p++;
+        }
     }
 }
 
@@ -264,6 +270,12 @@ inline void NetHandler::toNetOrder(unsigned long* const vout, const unsigned lon
         *--q = *p++;
         *--q = *p++;
         *--q = *p++;
+        if (sizeof(long) == 8) { /* 64 bit */
+           *--q = *p++;
+           *--q = *p++;
+           *--q = *p++;
+           *--q = *p++;
+        }
     }
 }
 

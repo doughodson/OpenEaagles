@@ -80,16 +80,16 @@ public:
   // default constructor: uses default seed only if this is the first instance
   Rng();
   // constructor with 32 bit int as seed
-  Rng(unsigned long s);
+  Rng(unsigned int s);
   // constructor with array of size 32 bit ints as seed
-  Rng(const unsigned long* array, int size);
+  Rng(const unsigned int* array, int size);
 
   // the two seed functions
-  void seed(unsigned long); // seed with 32 bit integer
-  void seed(const unsigned long*, int size); // seed with array
+  void seed(unsigned int); // seed with 32 bit integer
+  void seed(const unsigned int*, int size); // seed with array
 
   // generate 32 bit random integer
-  unsigned long drawInt32();
+  unsigned int drawInt32();
 
   // this will be defined in the distribution classes
   virtual double draw()       { return 0.0; }
@@ -133,21 +133,21 @@ private:
   static const int n = 624, m = 397; // compile time constants
 
   // the variables below are static (no duplicates can exist)
-  static unsigned long state[n]; // state vector array
+  static unsigned int state[n]; // state vector array
   static int p; // position in state array
   static bool init;
 
   // private functions used to generate the pseudo random numbers
-  unsigned long twiddle(unsigned long, unsigned long); // used by gen_state()
+  unsigned int twiddle(unsigned int, unsigned int); // used by gen_state()
   void gen_state(); // generate new state
 
 };
 
-inline unsigned long Rng::drawInt32() { // generate 32 bit random int
+inline unsigned int Rng::drawInt32() { // generate 32 bit random int
   if (p == n) gen_state(); // new state vector needed
 // gen_state() is split off to be non-inline, because it is only called once
 // in every 624 calls and otherwise irand() would become too big to get inlined
-  unsigned long x = state[p++];
+  unsigned int x = state[p++];
   x ^= (x >> 11);
   x ^= (x << 7) & 0x9D2C5680UL;
   x ^= (x << 15) & 0xEFC60000UL;
@@ -155,7 +155,7 @@ inline unsigned long Rng::drawInt32() { // generate 32 bit random int
 }
 
 // inline for speed, must therefore reside in header file
-inline unsigned long Rng::twiddle(unsigned long u, unsigned long v) {
+inline unsigned int Rng::twiddle(unsigned int u, unsigned int v) {
   return (((u & 0x80000000UL) | (v & 0x7FFFFFFFUL)) >> 1)
     ^ ((v & 1UL) ? 0x9908B0DFUL : 0x0UL);
 }

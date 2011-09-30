@@ -347,7 +347,7 @@ bool Image::writeFileBMP(const char* const filename, const char* const path)
    unsigned int offset = bitmapFileHdrSize + sizeof(BITMAPINFOHEADER);
 
    // Image size
-   unsigned int isize = getHeight() * widthBytes;
+   unsigned int isize = getHeight() * (unsigned int) widthBytes;
 
    // File size (active bytes)
    unsigned int size = isize + offset;

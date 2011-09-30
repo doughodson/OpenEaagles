@@ -12,15 +12,15 @@ class RngStream
 {
 public:
     RngStream (const char *name = "");
-    static bool SetPackageSeed (const unsigned long seed[6]);
+    static bool SetPackageSeed (const unsigned int seed[6]);
     void ResetStartStream ();
     void ResetStartSubstream ();
     void ResetNextSubstream ();
     void SetAntithetic (bool a);
     void IncreasedPrecis (bool incp);
-    bool SetSeed (const unsigned long seed[6]);
-    void AdvanceState (long e, long c);
-    void GetState (unsigned long seed[6]) const;
+    bool SetSeed (const unsigned int seed[6]);
+    void AdvanceState (int e, int c);
+    void GetState (unsigned int seed[6]) const;
     void WriteState () const;
     void WriteStateFull () const;
     double RandU01 ();
@@ -128,9 +128,9 @@ bool Rand::setSeed(Number* num)
     seed->setValue(num->getInt());
     unsigned int mySeed = seed->getInt();
     srand(mySeed);
-    unsigned long seeds[6];
+    unsigned int seeds[6];
     for(int i=0; i<6; i++) {
-        seeds[i] = (unsigned long)rand();
+        seeds[i] = (unsigned int)rand();
     }
     prng->SetPackageSeed(seeds);
     return true;
@@ -623,18 +623,18 @@ const double A2p127[3][3] = {
 double MultModM (double a, double s, double c, double m)
 {
     double v;
-    long a1;
+    int a1;
 
     v = a * s + c;
 
     if (v >= two53 || v <= -two53) {
-        a1 = static_cast<long> (a / two17);    a -= a1 * two17;
+        a1 = static_cast<int> (a / two17);    a -= a1 * two17;
         v  = a1 * s;
-        a1 = static_cast<long> (v / m);     v -= a1 * m;
+        a1 = static_cast<int> (v / m);     v -= a1 * m;
         v = v * two17 + a * s + c;
     }
 
-    a1 = static_cast<long> (v / m);
+    a1 = static_cast<int> (v / m);
     /* in case v < 0)*/
     if ((v -= a1 * m) < 0.0) return v += m;   else return v;
 }
@@ -686,7 +686,7 @@ void MatMatModM (const double A[3][3], const double B[3][3],
 //-------------------------------------------------------------------------
 // Compute the matrix B = (A^(2^e) Mod m);  works also if A = B. 
 //
-void MatTwoPowModM (const double A[3][3], double B[3][3], double m, long e)
+void MatTwoPowModM (const double A[3][3], double B[3][3], double m, int e)
 {
    int i, j;
 
@@ -705,7 +705,7 @@ void MatTwoPowModM (const double A[3][3], double B[3][3], double m, long e)
 //-------------------------------------------------------------------------
 // Compute the matrix B = (A^n Mod m);  works even if A = B.
 //
-void MatPowModM (const double A[3][3], double B[3][3], double m, long n)
+void MatPowModM (const double A[3][3], double B[3][3], double m, int n)
 {
     int i, j;
     double W[3][3];
@@ -732,7 +732,7 @@ void MatPowModM (const double A[3][3], double B[3][3], double m, long n)
 // Check that the seeds are legitimate values. Returns 0 if legal seeds,
 // -1 otherwise.
 //
-int CheckSeed (const unsigned long seed[6])
+int CheckSeed (const unsigned int seed[6])
 {
     int i;
 
@@ -776,19 +776,19 @@ int CheckSeed (const unsigned long seed[6])
 //
 double RngStream::U01 ()
 {
-    long k;
+    int k;
     double p1, p2, u;
 
     /* Component 1 */
     p1 = a12 * Cg[1] - a13n * Cg[0];
-    k = static_cast<long> (p1 / m1);
+    k = static_cast<int> (p1 / m1);
     p1 -= k * m1;
     if (p1 < 0.0) p1 += m1;
     Cg[0] = Cg[1]; Cg[1] = Cg[2]; Cg[2] = p1;
 
     /* Component 2 */
     p2 = a21 * Cg[5] - a23n * Cg[3];
-    k = static_cast<long> (p2 / m2);
+    k = static_cast<int> (p2 / m2);
     p2 -= k * m2;
     if (p2 < 0.0) p2 += m2;
     Cg[3] = Cg[4]; Cg[4] = Cg[5]; Cg[5] = p2;
@@ -889,7 +889,7 @@ void RngStream::ResetNextSubstream ()
 
 
 //-------------------------------------------------------------------------
-bool RngStream::SetPackageSeed (const unsigned long seed[6])
+bool RngStream::SetPackageSeed (const unsigned int seed[6])
 {
    if (CheckSeed (seed))
       return false;                   // FAILURE     
@@ -900,7 +900,7 @@ bool RngStream::SetPackageSeed (const unsigned long seed[6])
 
 
 //-------------------------------------------------------------------------
-bool RngStream::SetSeed (const unsigned long seed[6])
+bool RngStream::SetSeed (const unsigned int seed[6])
 {
    if (CheckSeed (seed))
       return false;                   // FAILURE     
@@ -916,7 +916,7 @@ bool RngStream::SetSeed (const unsigned long seed[6])
 // if e = 0, let n = c.
 // Jump n steps forward if n > 0, backwards if n < 0.
 //
-void RngStream::AdvanceState (long e, long c)
+void RngStream::AdvanceState (int e, int c)
 {
     double B1[3][3], C1[3][3], B2[3][3], C2[3][3];
 
@@ -947,10 +947,10 @@ void RngStream::AdvanceState (long e, long c)
 
 
 //-------------------------------------------------------------------------
-void RngStream::GetState (unsigned long seed[6]) const
+void RngStream::GetState (unsigned int seed[6]) const
 {
    for (int i = 0; i < 6; ++i)
-      seed[i] = static_cast<unsigned long> (Cg[i]);
+      seed[i] = static_cast<unsigned int> (Cg[i]);
 }
 
 
@@ -963,9 +963,9 @@ void RngStream::WriteState () const
     cout << ":\n   Cg = { ";
 
     for (int i = 0; i < 5; i++) {
-        cout << static_cast<unsigned long> (Cg [i]) << ", ";
+        cout << static_cast<unsigned int> (Cg [i]) << ", ";
     }
-    cout << static_cast<unsigned long> (Cg [5]) << " }\n\n";
+    cout << static_cast<unsigned int> (Cg [5]) << " }\n\n";
 }
 
 
@@ -982,21 +982,21 @@ void RngStream::WriteStateFull () const
 
     cout << "   Ig = { ";
     for (i = 0; i < 5; i++) {
-        cout << static_cast<unsigned long> (Ig [i]) << ", ";
+        cout << static_cast<unsigned int> (Ig [i]) << ", ";
     }
-    cout << static_cast<unsigned long> (Ig [5]) << " }\n";
+    cout << static_cast<unsigned int> (Ig [5]) << " }\n";
 
     cout << "   Bg = { ";
     for (i = 0; i < 5; i++) {
-        cout << static_cast<unsigned long> (Bg [i]) << ", ";
+        cout << static_cast<unsigned int> (Bg [i]) << ", ";
     }
-    cout << static_cast<unsigned long> (Bg [5]) << " }\n";
+    cout << static_cast<unsigned int> (Bg [5]) << " }\n";
 
     cout << "   Cg = { ";
     for (i = 0; i < 5; i++) {
-        cout << static_cast<unsigned long> (Cg [i]) << ", ";
+        cout << static_cast<unsigned int> (Cg [i]) << ", ";
     }
-    cout << static_cast<unsigned long> (Cg [5]) << " }\n\n";
+    cout << static_cast<unsigned int> (Cg [5]) << " }\n\n";
 }
 
 

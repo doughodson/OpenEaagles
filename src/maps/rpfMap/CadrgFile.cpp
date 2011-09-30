@@ -227,7 +227,9 @@ bool CadrgFile::initialize(const char* dir)
     // Number of boundary records
 	ushort          numBndryRecords = 0;
     ushort          ffPathLength = 0;
-	int i = 0, j = 0, currTocPos = 0;
+	int i = 0;
+	int j = 0;
+	std::streamoff currTocPos = 0;
 	//char            filename[80];
 	// Boundary record number
     ushort          boundaryRecNum = 0;

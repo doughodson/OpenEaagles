@@ -28,10 +28,10 @@ typedef enum { RADIANS=0, FEET, METERS, ARC_SECONDS, DEGREES } GEO_UNITS;
 
 typedef unsigned char        uint_1;
 typedef unsigned short int   uint_2;
-typedef unsigned long int    uint_4;
+typedef unsigned int         uint_4;
 typedef char                 int_1;
 typedef short int            int_2;
-typedef long int             int_4;
+typedef int                  int_4;
 typedef float                float_4;
 typedef double               float_8;
 
