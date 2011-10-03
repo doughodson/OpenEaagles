@@ -71,8 +71,8 @@ namespace Dis {
 //    maxAge         <Basic::Time>        ! Max age (without update) (default: 12.5 seconds)
 //                   <Basic::PairStream>  ! List of max ages (without update) by kinds and domains (see note #4)
 //
-//    maxEntityRange <Basic::Distance>    ! Max enity range, or zero for no max range (default: 0 -- no range filtering)
-//                   <Basic::PairStream>  ! List of max enity ranges by kinds and domains (see note #4)
+//    maxEntityRange <Basic::Distance>    ! Max entity range, or zero for no max range (default: 0 -- no range filtering)
+//                   <Basic::PairStream>  ! List of max entity ranges by kinds and domains (see note #4)
 //
 //    EmissionPduHandlers <Basic::PairStream> ! List of Electromagnetic-Emission PDU handlers
 //

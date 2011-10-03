@@ -1201,7 +1201,7 @@ void NetIO::clearEmissionPduHandlers()
 
 
 //------------------------------------------------------------------------------
-// Find Emisison PDU handlers
+// Find Emission PDU handlers
 //------------------------------------------------------------------------------
 
 // By RfSensor data
@@ -1225,7 +1225,7 @@ const EmissionPduHandler* NetIO::findEmissionPduHandler(const Simulation::RfSens
    return handler;
 }
 
-// By Emisison System PDU data
+// By Emission System PDU data
 const EmissionPduHandler* NetIO::findEmissionPduHandler(const EmissionSystem* const msg)
 {
    const EmissionPduHandler* handler = 0;
