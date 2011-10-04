@@ -606,7 +606,7 @@ const Player* Autopilot::getLeadPlayer()
    // check to see if we are setting the same player again
    bool ok = false;
    if (p != 0) {
-        // if we already have a laed player, and we have a lead name, and they don't match, reset our player
+        // if we already have a lead player, and we have a lead name, and they don't match, reset our player
         if ((p->getName() != 0 && leadName != 0) && (p->getName() != leadName)) {
             // reset our player to 0
             setLeadPlayer(0);
