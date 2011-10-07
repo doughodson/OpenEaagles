@@ -42,6 +42,9 @@ otw:
 
 simulation: 
  
+   Autopilot class
+      1) getLeadPlayer modified to check to see if we are setting the same player
+
    Player class
       1) setSlotInitLat() and setSlotInitLon() -- changed local variable from LCreal to double
 

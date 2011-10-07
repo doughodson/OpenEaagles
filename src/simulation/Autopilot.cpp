@@ -1,7 +1,7 @@
 
 #include "openeaagles/simulation/Autopilot.h"
 
-// Eaagles includes
+//
 #include "openeaagles/simulation/Navigation.h"
 #include "openeaagles/simulation/Route.h"
 #include "openeaagles/simulation/Steerpoint.h"

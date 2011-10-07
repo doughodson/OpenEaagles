@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: Autopilot
 //------------------------------------------------------------------------------
-#ifndef __Autopilot_H_A766D68B_4ABD_442c_812A_0897903FD55E__
-#define __Autopilot_H_A766D68B_4ABD_442c_812A_0897903FD55E__
+#ifndef __Autopilot_H__
+#define __Autopilot_H__
 
 #include "openeaagles/simulation/Pilot.h"
 
@@ -13,7 +13,6 @@ namespace Simulation {
 
 //------------------------------------------------------------------------------
 // Class: Autopilot
-// Base class:  Basic::Object -> ... -> Pilot -> Autopilot
 //
 // Form name: Autopilot
 //
@@ -58,7 +57,6 @@ namespace Simulation {
 //      while requestLoiter() will turn on loiter mode with a given anchor point and course.
 //      setLointer(false) will turn off loiter mode in both cases.
 //
-// GUID: {A766D68B-4ABD-442c-812A-0897903FD55E}
 //------------------------------------------------------------------------------
 class Autopilot : public Pilot
 {
@@ -253,4 +251,5 @@ private:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // __Autopilot_H_A766D68B_4ABD_442c_812A_0897903FD55E__
+#endif
+
