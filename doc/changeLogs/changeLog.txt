@@ -6,7 +6,7 @@ Changes since v11.09a
 global 
 
    -- internal variables in several functions changed from 'int' to 'std::streamoff' type
-
+   -- misc changes to the 'setenv' and 'makedefs' files
 
 --------------------------------------------------------------------------------
 basic: 
@@ -52,6 +52,15 @@ dis:
 
       4) Renamed the byte swap functions 
 
+
+--------------------------------------------------------------------------------
+maps:
+
+   vpfRecord class
+      1) (64 bit) createRecord() -- For "I" type; changed 'long int' to 'int'
+
+   VPFTable class
+      1) (64 bit) determineRecordSize() -- For "I" type; changed "long int" to "int"
 
 
 --------------------------------------------------------------------------------

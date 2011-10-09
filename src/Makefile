@@ -39,9 +39,7 @@ PROJECTS += otw
 # Rules
 #
 all:
-	@echo BEFORE
 	@echo ${OE_ROOT}
-	@echo AFTER
 	for subdir in $(PROJECTS); do \
 	  echo making $@ in $$subdir; \
 	  (cd $$subdir && $(MAKE)) || exit 1; \

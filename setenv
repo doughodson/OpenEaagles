@@ -1,3 +1,24 @@
 
+# ---------------------------------------------------------------------
+# Setup environment variables for OpenEaagles and examples
+# (Edit as required)
+# ---------------------------------------------------------------------
+
+# ---
+# OpenEaagles root
+# ---
 OE_ROOT=$PWD
 export OE_ROOT
+
+# ---
+# OpenEaagles 3rd party (e.g. cigi, JSBSim) root
+# ---
+OE_3RD_PARTY_ROOT=$HOME/projects
+export OE_3RD_PARTY_ROOT
+
+# ---
+# Update the loader library path with our 3rd party library path
+# ---
+LD_LIBRARY_PATH=$OE_3RD_PARTY_ROOT/lib:${LD_LIBRARY_PATH}
+export LD_LIBRARY_PATH
+

@@ -6,24 +6,34 @@
 # ---
 # OpenEaagles home directory
 #   Use the environment variable OE_ROOT to locate OpenEaagles
-#   Default path is "/usr/local/OpenEaagles"
+#   -- No Default 
+#   -- see $(OE_ROOT)/setenv
 # ---
-ifdef OE_ROOT
-   OPENEAAGLES = ${OE_ROOT}
-else
-OPENEAAGLES = /usr/local/OpenEaagles
+
+# ---
+# OpenEaagles 3rd party root 
+#   Use the environment variable OE_3RD_PARTY_ROOT to locate the include and
+#   lib directories for the OpenEaagles 3rd party software(e.g., cigi, JSBSim)
+#   -- Default path is "/usr/local
+#   -- see $(OE_ROOT)/setenv
+# ---
+ifndef OE_3RD_PARTY_ROOT
+   OE_3RD_PARTY_ROOT = /usr/local
 endif
 
 # ---
-# Include and library directories
+# library directories
 # ---
-OPENEAAGLES_INC_DIR = $(OPENEAAGLES)/include
-OPENEAAGLES_LIB_DIR = $(OPENEAAGLES)/lib/linux
+OPENEAAGLES_LIB_DIR = $(OE_ROOT)/lib/linux
 
+# ---
 # Uncomment if using FTGL version 2.1.2 or earlier
+# ---
 # CPPFLAGS += -DFTGL_2_1_2 
 
+# ---
 # Uncomment if using JSBSim version 0.9.13 or earlier
+# ---
 # CPPFLAGS += -DJSBSIM_0_9_13 
 
 # ---
@@ -39,7 +49,7 @@ JOYSTICKDEVICE = 1
 # ---
 # JSBSim include directory
 # ---
-JSBSIM_INC_DIR = /usr/local/include/JSBSim
+JSBSIM_INC_DIR = $(OE_3RD_PARTY_ROOT)/include/JSBSim
 
 # ---
 # Optimize?
@@ -50,5 +60,5 @@ OPTIMIZE = -O3
 # ---
 # Modify standard flags
 # ---
-CPPFLAGS += -I$(OPENEAAGLES_INC_DIR) -I/usr/local/include $(OPTIMIZE) -Wno-long-long -pthread
+CPPFLAGS += -I$(OE_ROOT)/include -I$(OE_3RD_PARTY_ROOT)/include $(OPTIMIZE) -Wno-long-long -pthread
 
