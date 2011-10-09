@@ -152,8 +152,8 @@ bool UdpHandler::bindSocket()
 bool UdpHandler::sendDataTo(
          const char* const packet,  // Data packet
          const int size,            // Size of the data packet
-         unsigned long ip0,         // Destination IP address (this packet only)
-         const unsigned short port0 // Destination port (this packet only)
+         const uint32_t ip0,        // Destination IP address (this packet only)
+         const uint16_t port0       // Destination port (this packet only)
       )
 {
 #if defined(WIN32)

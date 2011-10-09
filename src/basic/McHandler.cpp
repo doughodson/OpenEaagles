@@ -219,7 +219,7 @@ bool MulticastHandler::joinTheGroup()
 #endif
     
    // Find our network address
-   unsigned long mg = htonl (INADDR_NONE);
+   uint32_t mg = htonl (INADDR_NONE);
    if (multicastGroup != 0) mg = inet_addr(multicastGroup);
    if (mg != INADDR_NONE) {
       setNetAddr(mg);
@@ -230,7 +230,7 @@ bool MulticastHandler::joinTheGroup()
    }
 
    // Use our local IP address to select which interface to use
-   unsigned long iface = getLocalAddr();
+   uint32_t iface = getLocalAddr();
 
    // Set the socket option to add membership to the multicast group
    struct ip_mreq mreq;

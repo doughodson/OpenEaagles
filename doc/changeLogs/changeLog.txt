@@ -14,17 +14,28 @@ basic:
    osg package
       -- (64 bit) updated to OpenSceneGraph-3.0.1
 
+   support.h
+      -- (64 bit) added include for <stdint.h>
+
    Nav class
       1) Correction for crossing 180 meridian
 
-   NetHandler.h
+   NetHandler class
       1) (64 bit) toNetOrder(long) and toNetOrder(unsigned long) now check the sizeof 'long'
+      2) (64 bit) internal 'long' and 'short' types changed to 'uint32_t' and 'uint16_t'
+      3) (64 bit) now using 'uint32_t' type argument for functions setNetAddr() and setLocalAddr()
+      4) (64 bit) now using 'uint16_t' type argument for functions setPort() and setLocalPort()
+      5) the 'get' functions are now 'inline'
 
    Rand class
       1) (64 bit) changed all 'long' type variables to 'int' type
 
    Rnd class
       1) (64 bit) changed all 'long' type variables to 'int' type
+
+   UdpHandler class
+      1) (64 bit) sendDataTo() function is now using 'uint32_t' and 'uint16_t'
+         type for address and port arguments
 
 --------------------------------------------------------------------------------
 gui-glut:
@@ -42,8 +53,8 @@ otw:
 
 simulation: 
  
-   Autopilot class
-      1) getLeadPlayer modified to check to see if we are setting the same player
+   Autopilot classs
+      1) getLeadPlayer() -- allows for a lead player change by player name.
 
    Player class
       1) setSlotInitLat() and setSlotInitLon() -- changed local variable from LCreal to double
