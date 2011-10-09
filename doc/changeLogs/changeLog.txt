@@ -38,7 +38,19 @@ basic:
          type for address and port arguments
 
 --------------------------------------------------------------------------------
-gui-glut:
+dis:
+
+   structs.h and pdu.h
+
+      1) (64 bit) Removed the pointers from the VariableDatum struct and the Detonation PDU
+
+      2) deleted unused function checkSwap()
+
+      3) (64 bit) changed all internal variable types from 'short' to 'int16_t',
+         'int' and 'long' to 'int32_'t, and 'Integer64' to 'int64_t", as well as
+         the unsigned versions to 'uint16_t', 'uint32_t' and 'uint64_t'
+
+      4) Renamed the byte swap functions 
 
 
 
