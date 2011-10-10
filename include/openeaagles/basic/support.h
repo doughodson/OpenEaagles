@@ -35,7 +35,6 @@ namespace Eaagles {
 #include <cmath>
 #include <cstdio>
 #include <cstdlib>
-#include <stdint.h>
 
 
 // ---

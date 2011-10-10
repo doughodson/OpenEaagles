@@ -9,6 +9,7 @@
 #include <netinet/in.h>
 #include <unistd.h>
 #include <string.h>
+#include <stdint.h>
 
 namespace Eaagles {
 
