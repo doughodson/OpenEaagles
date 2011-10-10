@@ -247,7 +247,7 @@ void VMAP0RefCoverageDirectory::buildFeatureClasses()
             size_t size = strlen(d);
             size_t count = 0;
             while (d[count] != ' ' && count < size) count++;
-            d[count] = NULL;            
+            d[count] = 0;            
 
             exists = false;
             holder = 0;
