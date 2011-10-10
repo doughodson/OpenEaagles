@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: NetHandler
 //------------------------------------------------------------------------------
-#ifndef	__NetHandler_H_44BBDF97_4FC6_43d1_AE73_BD4D53186431__
-#define __NetHandler_H_44BBDF97_4FC6_43d1_AE73_BD4D53186431__
+#ifndef	__Eaagles_Basic_NetHandler_H__
+#define __Eaagles_Basic_NetHandler_H__
 
 #include "openeaagles/basic/Object.h"
 
@@ -14,7 +14,6 @@ class String;
 
 //------------------------------------------------------------------------------
 // Class: NetHandler
-// Base class: Object -> NetHandler
 //
 // Description: General (connectionless) network handler: Can be used for UDP/IP,
 //              TCP/IP, Multicast and Broadcast.  Each handler manages a socket
@@ -75,12 +74,12 @@ public:  // Define the Windows vs Unix socket type
 public:
    NetHandler();
 
-   unsigned short getPort() const;              // Port#
-   unsigned short getLocalPort() const;         // Local port #
-   unsigned short getIgnoreSourcePort() const;  // Ignore source port #
+   uint16_t getPort() const;                    // Port#
+   uint16_t getLocalPort() const;               // Local port #
+   uint16_t getIgnoreSourcePort() const;        // Ignore source port #
 
-   unsigned int getLocalAddr() const;           // Gets the local host IP address
-   unsigned int getNetAddr() const;             // Gets the network (remote) host IP address
+   uint32_t getLocalAddr() const;               // Gets the local host IP address
+   uint32_t getNetAddr() const;                 // Gets the network (remote) host IP address
 
    bool getSharedFlag() const;                  // Is the socket address shared?
    void setSharedFlag(const bool b);
@@ -109,8 +108,8 @@ public:
    virtual unsigned int recvData(char* const packet, const int maxSize);
 
    // Last recvData() origin IP and port
-   unsigned int getLastFromAddr() const;     // IP address of last valid recvData()
-   unsigned short getLastFromPort() const;   // Port address of last valid recvData()
+   uint32_t getLastFromAddr() const;     // IP address of last valid recvData()
+   uint16_t getLastFromPort() const;     // Port address of last valid recvData()
 
    // Slot functions
    virtual bool setSlotLocalIpAddress(const String* const msg);
@@ -155,22 +154,22 @@ protected:
    virtual bool bindSocket();          // Bind socket to address
 
    // Sets the network IP address
-   bool setNetAddr(unsigned long netAddr);
+   bool setNetAddr(const uint32_t netAddr);
 
    // Sets the network IP address by host name
    bool setNetAddr(const char* const hostname);
 
    // Sets the port number
-   bool setPort(const unsigned short n);
+   bool setPort(const uint16_t n);
 
    // Sets the local IP address
-   bool setLocalAddr(unsigned long addr);
+   bool setLocalAddr(const uint32_t addr);
 
    // Sets the local IP address using the Internet standard "." (dotted) notation
    bool setLocalAddr(const char* const addr);
 
    // Sets the local port number
-   bool setLocalPort(const unsigned short n);
+   bool setLocalPort(const uint16_t n);
 
    // Set the output buffer size
    bool setSendBuffSize();
@@ -182,19 +181,69 @@ protected:
 
 private:
    char* localIpAddr;              // Local host IP address
-   unsigned long  localAddr;       // Local host address
-   unsigned long  netAddr;         // Network (remote) host address
-   unsigned long  fromAddr1;       // Last recvData() 'from' ip address
-   unsigned short port;            // Port
-   unsigned short localPort;       // Local (source) port
-   unsigned short ignoreSourcePort; // Ignore message from this source port
-   unsigned short fromPort1;       // Last recvData() 'from' port number
+   uint32_t localAddr;             // Local host address
+   uint32_t netAddr;               // Network (remote) host address
+   uint32_t fromAddr1;             // Last recvData() 'from' ip address
+   uint16_t port;                  // Port
+   uint16_t localPort;             // Local (source) port
+   uint16_t ignoreSourcePort;      // Ignore message from this source port
+   uint16_t fromPort1;             // Last recvData() 'from' port number
    bool sharedFlg;                 // Shared port flag
    bool initialized;               // handler has been initialized
-   unsigned long  sendBuffSizeKb;  // Send buffer size in KBs
-   unsigned long  recvBuffSizeKb;  // Receive buffer size in KBs
+   unsigned int  sendBuffSizeKb;   // Send buffer size in KBs
+   unsigned int  recvBuffSizeKb;   // Receive buffer size in KBs
    static bool netByteOrder;       // True if this machine is in 'network byte order'
 };
+
+//------------------------------------------------------------------------------
+// Inline functions
+//------------------------------------------------------------------------------
+
+// Port#
+inline uint16_t NetHandler::getPort() const
+{
+   return port;
+}
+
+// Local port #
+inline uint16_t NetHandler::getLocalPort() const
+{
+   return localPort;
+} 
+
+// Ignore source port #
+inline uint16_t NetHandler::getIgnoreSourcePort() const
+{
+   return ignoreSourcePort;
+}
+
+// Gets the local host IP address
+inline uint32_t NetHandler::getLocalAddr() const
+{
+   return localAddr;
+}
+
+// Gets the network (remote) host IP address
+inline uint32_t NetHandler::getNetAddr() const
+{
+   return netAddr;
+}
+
+// Shared flag
+inline bool NetHandler::getSharedFlag() const
+{
+   return sharedFlg;
+}
+
+inline uint32_t NetHandler::getLastFromAddr() const
+{
+   return fromAddr1;
+}
+
+inline uint16_t NetHandler::getLastFromPort() const
+{
+   return fromPort1;
+}
 
 // ---
 // Convert to network byte order
@@ -362,4 +411,4 @@ inline void NetHandler::fromNetOrder(double* const vout, const double vin)
 } // End Basic namespace
 } // End Eaagles namespace
 
-#endif	/* __NetHandler_H_44BBDF97_4FC6_43d1_AE73_BD4D53186431__ */
+#endif

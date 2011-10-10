@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: MulticastHandler
 //------------------------------------------------------------------------------
-#ifndef	__MulticastHandler_H_F5F7BD1B_5FB7_4b95_BDFB_E089BE52489C__
-#define __MulticastHandler_H_F5F7BD1B_5FB7_4b95_BDFB_E089BE52489C__
+#ifndef	__Eaagles_Basic_MulticastHandler_H__
+#define __Eaagles_Basic_MulticastHandler_H__
 
 #include "openeaagles/basic/NetHandler.h"
 
@@ -13,7 +13,6 @@ class String;
 
 //------------------------------------------------------------------------------
 // Class: MulticastHandler
-// Base class: Object -> NetHandler -> MulticastHandler
 // Form name: MulticastHandler
 //
 // Description: Multicast network handler.
@@ -105,4 +104,4 @@ private:
 } // End Basic namespace
 } // End Eaagles namespace
 
-#endif	/* __MulticastIO_H_F5F7BD1B_5FB7_4b95_BDFB_E089BE52489C__ */
+#endif

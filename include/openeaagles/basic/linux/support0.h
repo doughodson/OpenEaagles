@@ -1,14 +1,15 @@
 //------------------------------------------------------------------------------
 // Linux GCC unique stuff
 //------------------------------------------------------------------------------
-#ifndef _BASIC_LINUX_GCC_SUPPORT0_H_
-#define _BASIC_LINUX_GCC_SUPPORT0_H_
+#ifndef __Eaagles_Linux_Support0_H__
+#define __Eaagles_Linux_Support0_H__
 
 #include <values.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <unistd.h>
 #include <string.h>
+#include <stdint.h>
 
 namespace Eaagles {
 
@@ -17,5 +18,4 @@ typedef unsigned long long int LCuint64;
 
 } // End Eaagles namespace
 
-#endif // _BASIC_LINUX_GCC_SUPPORT0_H_
-
+#endif

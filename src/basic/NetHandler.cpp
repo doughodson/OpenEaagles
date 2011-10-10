@@ -276,19 +276,19 @@ bool NetHandler::setRecvBuffSize()
 
 //------------------------------------------------------------------------------
 // toNet() -- byte swaps a host to network buffer.  The buffer MUST consist
-//            of 'nl' long (4 byte) words followed by 'ns' short (2 byte) words.
+//            of 'nl' int (4 byte) words followed by 'ns' short (2 byte) words.
 //            The parameters 'nl' and 'ns' can be zero.
 //------------------------------------------------------------------------------
 void NetHandler::toNet(const void* const hostData, void* const netData, const int nl, const int ns)
 {
    int i;
 
-   // Compute pointers to the long word (4 byte) and short
+   // Compute pointers to the int word (4 byte) and short
    // short word (2 byte) areas of the source (this).
    const u_long* psl = (const u_long*) hostData;
    const u_short* pss = (const u_short*) (psl + nl);
 
-   // Compute pointers to the long word (4 byte) and short
+   // Compute pointers to the int word (4 byte) and short
    // short word (2 byte) areas of the destination (netData).
    u_long* pdl = (u_long*) netData;
    u_short* pds = (u_short*) (pdl + nl);
@@ -308,19 +308,19 @@ void NetHandler::toNet(const void* const hostData, void* const netData, const in
 
 //------------------------------------------------------------------------------
 // toHost() -- byte swaps a network to host buffer.  The buffer MUST consist
-//            of 'nl' long (4 byte) words followed by 'ns' short (2 byte) words.
+//            of 'nl' int (4 byte) words followed by 'ns' short (2 byte) words.
 //            The parameters 'nl' and 'ns' can be zero.
 //------------------------------------------------------------------------------
 void NetHandler::toHost(const void* const netData, void* const hostData, const int nl, const int ns)
 {
    int i;
 
-   // Compute pointers to the long word (4 byte) and short
+   // Compute pointers to the int word (4 byte) and short
    // short word (2 byte) areas of the source (this).
    const u_long* psl = (const u_long*) netData;
    const u_short* pss = (const u_short*) (psl + nl);
 
-   // Compute pointers to the long word (4 byte) and short
+   // Compute pointers to the int word (4 byte) and short
    // short word (2 byte) areas of the destination (hostData).
    u_long* pdl = (u_long*) hostData;
    u_short* pds = (u_short*) (pdl + nl);
@@ -480,7 +480,7 @@ unsigned int NetHandler::recvData(char* const packet, const int maxSize)
 
       if (result > 0 && ignoreSourcePort != 0) {
          // Ok we have one; make sure it's not one we should ignore
-         short rport = ntohs(raddr.sin_port);
+         uint16_t rport = ntohs(raddr.sin_port);
          if (rport == ignoreSourcePort) {
             tryAgain = true;
          }
@@ -497,55 +497,6 @@ unsigned int NetHandler::recvData(char* const packet, const int maxSize)
    return n;
 }
 
-//------------------------------------------------------------------------------
-// Get functions
-//------------------------------------------------------------------------------
-
-// Port#
-unsigned short NetHandler::getPort() const
-{
-   return port;
-}
-
-// Local port #
-unsigned short NetHandler::getLocalPort() const
-{
-   return localPort;
-} 
-
-// Ignore source port #
-unsigned short NetHandler::getIgnoreSourcePort() const
-{
-   return ignoreSourcePort;
-}
-
-// Gets the local host IP address
-unsigned int NetHandler::getLocalAddr() const
-{
-   return localAddr;
-}
-
-// Gets the network (remote) host IP address
-unsigned int NetHandler::getNetAddr() const
-{
-   return netAddr;
-}
-
-// Shared flag
-bool NetHandler::getSharedFlag() const
-{
-   return sharedFlg;
-}
-
-unsigned int NetHandler::getLastFromAddr() const
-{
-   return fromAddr1;
-}
-
-unsigned short NetHandler::getLastFromPort() const
-{
-   return fromPort1;
-}
 
 //------------------------------------------------------------------------------
 // Set functions
@@ -558,21 +509,21 @@ void NetHandler::setSharedFlag(const bool b)
 }
 
 // Set port number
-bool NetHandler::setPort(const unsigned short n1)
+bool NetHandler::setPort(const uint16_t n1)
 {
    port = n1;
    return true;
 }
 
 // Set local (source) port number
-bool NetHandler::setLocalPort(const unsigned short n1)
+bool NetHandler::setLocalPort(const uint16_t n1)
 {
    localPort = n1;
    return true;
 }
 
 // Sets the network IP address
-bool NetHandler::setNetAddr(unsigned long addr0)
+bool NetHandler::setNetAddr(const uint32_t addr0)
 {
     bool ok = false;
     if (addr0 != INADDR_NONE) {
@@ -587,7 +538,7 @@ bool NetHandler::setNetAddr(const char* const hostname)
 {
     bool ok = false;
     if (hostname != 0) {
-        unsigned long addr0 = INADDR_NONE;
+        uint32_t addr0 = INADDR_NONE;
         if (isdigit(hostname[0])) {
             // If 'hostname' starts with a number then first try to use it as an IP address
             addr0 = inet_addr(hostname);
@@ -600,27 +551,11 @@ bool NetHandler::setNetAddr(const char* const hostname)
             }
             const hostent* const p = gethostbyname(hostname);
             if (p != 0 && p->h_length > 0) {
-#if 0
-                const char* const q = p->h_addr_list[0];
-                if (q != 0) {
-                    struct in_addr in;
-                    union {
-                        unsigned long int s_addr;
-                        struct {
-                            unsigned char b[4];
-                        } uc;
-                    } tmp;
-                    tmp.uc.b[0] = q[0];
-                    tmp.uc.b[1] = q[1];
-                    tmp.uc.b[2] = q[2];
-                    tmp.uc.b[3] = q[3];
-                    in.s_addr = htonl(tmp.s_addr);
-#else
+
                 const unsigned int* const q = (unsigned int*) (p->h_addr_list[0]);
                 if (q != 0) {
                     struct in_addr in;
                     in.s_addr = *q;
-#endif
                     addr0 = in.s_addr;
                     const char* const ipAddr = inet_ntoa(in);
                     if (ipAddr != 0) {
@@ -641,7 +576,7 @@ bool NetHandler::setNetAddr(const char* const hostname)
 }
 
 // Sets the local IP address
-bool NetHandler::setLocalAddr(unsigned long addr0)
+bool NetHandler::setLocalAddr(const uint32_t addr0)
 {
     bool ok = false;
     if (addr0 != INADDR_NONE) {
@@ -656,7 +591,7 @@ bool NetHandler::setLocalAddr(const char* const hostname)
 {
     bool ok = false;
     if (hostname != 0) {
-        unsigned long addr0 = INADDR_NONE;
+        uint32_t addr0 = INADDR_NONE;
         if (isdigit(hostname[0])) {
             // If 'hostname' starts with a number then first try to use it as an IP address
             addr0 = inet_addr(hostname);
@@ -716,7 +651,7 @@ bool NetHandler::setSlotPort(const Number* const msg)
     if (msg != 0) {
         int ii = msg->getInt();
         if (ii >= 0x0 && ii <= 0xffff) {
-            ok = setPort( (unsigned short) ii );
+            ok = setPort( (uint16_t) ii );
         }
     }
     return ok;
@@ -729,7 +664,7 @@ bool NetHandler::setSlotLocalPort(const Number* const msg)
     if (msg != 0) {
         int ii = msg->getInt();
         if (ii >= 0x0 && ii <= 0xffff) {
-            ok = setLocalPort( (unsigned short) ii );
+            ok = setLocalPort( (uint16_t) ii );
         }
     }
     return ok;
@@ -781,7 +716,7 @@ bool NetHandler::setSlotIgnoreSourcePort(const Number* const msg)
     if (msg != 0) {
         int ii = msg->getInt();
         if (ii >= 0x0 && ii <= 0xffff) {
-            ignoreSourcePort = static_cast<unsigned short>(ii);
+            ignoreSourcePort = uint16_t(ii);
             ok = true;
         }
     }

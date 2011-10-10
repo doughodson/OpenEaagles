@@ -6,7 +6,7 @@ Changes since v11.09a
 global 
 
    -- internal variables in several functions changed from 'int' to 'std::streamoff' type
-
+   -- misc changes to the 'setenv' and 'makedefs' files
 
 --------------------------------------------------------------------------------
 basic: 
@@ -14,11 +14,18 @@ basic:
    osg package
       -- (64 bit) updated to OpenSceneGraph-3.0.1
 
+   support.h
+      -- (64 bit) added include for <stdint.h>
+
    Nav class
       1) Correction for crossing 180 meridian
 
-   NetHandler.h
+   NetHandler class
       1) (64 bit) toNetOrder(long) and toNetOrder(unsigned long) now check the sizeof 'long'
+      2) (64 bit) internal 'long' and 'short' types changed to 'uint32_t' and 'uint16_t'
+      3) (64 bit) now using 'uint32_t' type argument for functions setNetAddr() and setLocalAddr()
+      4) (64 bit) now using 'uint16_t' type argument for functions setPort() and setLocalPort()
+      5) the 'get' functions are now 'inline'
 
    Rand class
       1) (64 bit) changed all 'long' type variables to 'int' type
@@ -26,9 +33,34 @@ basic:
    Rnd class
       1) (64 bit) changed all 'long' type variables to 'int' type
 
---------------------------------------------------------------------------------
-gui-glut:
+   UdpHandler class
+      1) (64 bit) sendDataTo() function is now using 'uint32_t' and 'uint16_t'
+         type for address and port arguments
 
+--------------------------------------------------------------------------------
+dis:
+
+   structs.h and pdu.h
+
+      1) (64 bit) Removed the pointers from the VariableDatum struct and the Detonation PDU
+
+      2) deleted unused function checkSwap()
+
+      3) (64 bit) changed all internal variable types from 'short' to 'int16_t',
+         'int' and 'long' to 'int32_'t, and 'Integer64' to 'int64_t", as well as
+         the unsigned versions to 'uint16_t', 'uint32_t' and 'uint64_t'
+
+      4) Renamed the byte swap functions 
+
+
+--------------------------------------------------------------------------------
+maps:
+
+   vpfRecord class
+      1) (64 bit) createRecord() -- For "I" type; changed 'long int' to 'int'
+
+   VPFTable class
+      1) (64 bit) determineRecordSize() -- For "I" type; changed "long int" to "int"
 
 
 --------------------------------------------------------------------------------
@@ -43,7 +75,7 @@ otw:
 simulation: 
  
    Autopilot class
-      1) getLeadPlayer modified to check to see if we are setting the same player
+      1) getLeadPlayer() -- allows for a lead player change by player name.
 
    Player class
       1) setSlotInitLat() and setSlotInitLon() -- changed local variable from LCreal to double

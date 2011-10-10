@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Classes: TcpHandler, TcpClient, TcpServerMulti, TcpServerSingle
 //------------------------------------------------------------------------------
-#ifndef	__TcpHandler_H_2ED047D8_1BD1_4ba9_BF2D_91CA6A0563A0__
-#define __TcpHandler_H_2ED047D8_1BD1_4ba9_BF2D_91CA6A0563A0__
+#ifndef	__Eaagles_Basic_TcpHandler_H__
+#define __Eaagles_Basic_TcpHandler_H__
 
 #include "openeaagles/basic/NetHandler.h"
 
@@ -13,7 +13,6 @@ class String;
 
 //------------------------------------------------------------------------------
 // Class: TcpHandler
-// Base class: Object -> NetHandler -> TcpHandler
 //
 // Description: General TCP/IP support class.
 //------------------------------------------------------------------------------
@@ -39,14 +38,14 @@ public:
 
 protected:
    // NetHandler interface
-   virtual bool init();            // Initialize this socket handler
-   virtual bool bindSocket();      // Bind socket to address
+   virtual bool init();         // Initialize this socket handler
+   virtual bool bindSocket();   // Bind socket to address
 
    bool connected;              // true if we are connected
    bool connectionTerminated;   // true if we had a connection, then lost it (or terminated it ourselves)
 
-   LcSocket  tcpSocket;           // Our Connected TCP Socket
-   bool  noWait;                  // TCP's no wait I/O flag
+   LcSocket  tcpSocket;         // Our Connected TCP Socket
+   bool  noWait;                // TCP's no wait I/O flag
 };
 
 //------------------------------------------------------------------------------
@@ -90,10 +89,10 @@ protected:
     bool connectToServer();      // Connect to the server
 
     // NetHandler interface
-    virtual bool init();            // Initialize this socket handler
+    virtual bool init();         // Initialize this socket handler
 
 private:
-    char* ipAddr;           // IP Address
+    char* ipAddr;                // IP Address
 };
 
 //------------------------------------------------------------------------------
@@ -181,4 +180,4 @@ protected:
 } // End Basic namespace
 } // End Eaagles namespace
 
-#endif	/* __TcpHandler_H_2ED047D8_1BD1_4ba9_BF2D_91CA6A0563A0__ */
+#endif

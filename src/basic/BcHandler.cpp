@@ -134,13 +134,13 @@ bool BroadcastHandler::bindSocket()
     // ---
     if (ok) {
         ok = false;
-        unsigned int ba = 0;
+        uint32_t ba = 0;
         if (networkMask != 0) {
             // User defined broadcast address
-            unsigned long localNetAddr = getLocalAddr();
-            unsigned long localNetMask = inet_addr(networkMask);
+            uint32_t localNetAddr = getLocalAddr();
+            uint32_t localNetMask = inet_addr(networkMask);
             if (localNetAddr != INADDR_NONE && localNetMask != INADDR_NONE) {
-               unsigned long localNet = localNetAddr & localNetMask;
+               uint32_t localNet = localNetAddr & localNetMask;
                ba = localNet | ~localNetMask;
                if (isMessageEnabled(MSG_INFO)) {
                   std::cout << std::hex << "Broadcast address: " << ba << std::dec << std::endl;
