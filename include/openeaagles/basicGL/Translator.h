@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class:	Graphic -> Translator
 //------------------------------------------------------------------------------
-#ifndef	__Translator_H_ADDFFC31_ED9E_427c_95AD_886CEBD0EAE0
-#define __Translator_H_ADDFFC31_ED9E_427c_95AD_886CEBD0EAE0
+#ifndef	__Eaagles_BasicGL_Translator_H__
+#define __Eaagles_BasicGL_Translator_H__
 
 #include "Graphic.h"
 
@@ -56,4 +56,4 @@ private:
 } // End BasicGL namespace
 } // End Eaagles namespace
 
-#endif	/* __Translator_H_ADDFFC31_ED9E_427c_95AD_886CEBD0EAE0 */
+#endif

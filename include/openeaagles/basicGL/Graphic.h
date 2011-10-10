@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
-// Class:       Graphic
+// Class: Graphic
 //------------------------------------------------------------------------------
-#ifndef __Graphic_H_291C708B_3685_4782_952B_BB6400FAA236__
-#define __Graphic_H_291C708B_3685_4782_952B_BB6400FAA236__
+#ifndef __Eaagles_BasicGL_Graphic_H__
+#define __Eaagles_BasicGL_Graphic_H__
 
 #include "openeaagles/basic/Component.h"
 #include "openeaagles/basic/osg/Vec2"
@@ -601,4 +601,4 @@ inline void Graphic::Color(Basic::Color* nc)
 } // End BasicGL namespace
 } // End Eaagles namespace
 
-#endif      /* __Graphic_H_291C708B_3685_4782_952B_BB6400FAA236__ */
+#endif

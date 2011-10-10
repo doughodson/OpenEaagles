@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
-// Class:  ColorRotary
+// Class: ColorRotary
 //------------------------------------------------------------------------------
-#ifndef __ColorRotary_H_89EC9924_C7E8_4d4b_B9A0_C6F9AE60197D
-#define __ColorRotary_H_89EC9924_C7E8_4d4b_B9A0_C6F9AE60197D
+#ifndef __Eaagles_BasicGL_ColorRotary_H__
+#define __Eaagles_BasicGL_ColorRotary_H__
 
 #include "openeaagles/basic/Color.h"
 
@@ -13,8 +13,7 @@ namespace BasicGL {
 
 //------------------------------------------------------------------------------
 // Class:  ColorRotary
-// Date:   01/29/04
-// Author: Lee Sines
+//
 // Base class:  Object -> Color -> ColorRotary
 //
 // Description: Takes a list of colors and breakpoints, and changes colors based
@@ -73,4 +72,4 @@ private:
 } // End BasicGL namespace
 } // End Eaagles namespace
 
-#endif      /* __ColorRotary_H_89EC9924_C7E8_4d4b_B9A0_C6F9AE60197D */
+#endif

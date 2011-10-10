@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
-// Class:  Font
+// Class: Font
 //------------------------------------------------------------------------------
-#ifndef __Font_H_977E1FE5_CFC6_4ef9_B7FF_EE0586F3336C__
-#define __Font_H_977E1FE5_CFC6_4ef9_B7FF_EE0586F3336C__
+#ifndef __Eaagles_BasicGL_Font_H__
+#define __Eaagles_BasicGL_Font_H__
 
 #include "openeaagles/basic/Object.h"
 #include <GL/gl.h>
@@ -229,4 +229,4 @@ private:
 } // End BasicGL namespace
 } // End Eaagles namespace
 
-#endif      /* __Font_H_977E1FE5_CFC6_4ef9_B7FF_EE0586F3336C__ */
+#endif

@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Classes: Point, Circle, Arc, LineLoop, Line
 //------------------------------------------------------------------------------
-#ifndef __OpenEaagles_BasicGL_Shapes_H__
-#define __OpenEaagles_BasicGL_Shapes_H__
+#ifndef __Eaagles_BasicGL_Shapes_H__
+#define __Eaagles_BasicGL_Shapes_H__
 
 #include "Graphic.h"
 
@@ -312,5 +312,4 @@ private:
 } // End BasicGL namespace
 } // End Eaagles namespace
 
-#endif  /* __OpenEaagles_BasicGL_Shapes_H__ */
-
+#endif

@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class:  StrokeFont
 //------------------------------------------------------------------------------
-#ifndef __StrokeFont_H_6AB79747_BC92_4bb6_ACD7_9610EBBDCCB0__
-#define __StrokeFont_H_6AB79747_BC92_4bb6_ACD7_9610EBBDCCB0__
+#ifndef __Eaagles_BasicGL_StrokeFont_H__
+#define __Eaagles_BasicGL_StrokeFont_H__
 
 #include "Font.h"
 
@@ -41,4 +41,4 @@ public:
 } // End BasicGL namespace
 } // End Eaagles namespace
 
-#endif  /* __StrokeFont_H_6AB79747_BC92_4bb6_ACD7_9610EBBDCCB0__ */
+#endif

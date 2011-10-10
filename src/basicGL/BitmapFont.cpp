@@ -4,7 +4,6 @@
 #include "openeaagles/basicGL/BitmapFont.h"
 #include "openeaagles/basic/String.h"
 #include "openeaagles/basic/Number.h"
-#include <stdio.h>
 
 // disable all deprecation warnings for now, until we fix
 // they are quite annoying to see over and over again...
@@ -16,6 +15,7 @@ namespace Eaagles {
 namespace BasicGL {
 
 IMPLEMENT_SUBCLASS(BitmapFont,"BitmapFont")
+EMPTY_DELETEDATA(BitmapFont)
 
 // Default font size
 const int defaultFontWidth = 10;
@@ -25,7 +25,7 @@ const int defaultFontHeight = 15;
 // Slot table for this form type
 //------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(BitmapFont)
-        "reverse",      // Invert the bitmap's bits (reverse video)
+    "reverse",      // Invert the bitmap's bits (reverse video)
 END_SLOTTABLE(BitmapFont)
 
 //------------------------------------------------------------------------------
@@ -62,13 +62,6 @@ void BitmapFont::copyData(const BitmapFont& org, const bool)
     fontMap = org.fontMap;
     numFonts = org.numFonts;
     reverse = org.reverse;
-}
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete this object's data
-//------------------------------------------------------------------------------
-void BitmapFont::deleteData()
-{
 }
 
 //------------------------------------------------------------------------------
@@ -149,15 +142,14 @@ void BitmapFont::outputText(const char* txt, const int n, const bool vf, const b
 //------------------------------------------------------------------------------
 void BitmapFont::loadFont()
 {
-    if (isLoaded()) return;
-    
-    int i;
+    if (isLoaded())
+        return;
 
     setBase( glGenLists(256) );
 
     // Loop through the font map
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-    for (i=0; i < numFonts; i++)
+    for (unsigned int i=0; i < numFonts; i++)
     {
         GLubyte* bitmap = loadTypeFace(i, reverse);
         if (bitmap == 0) continue;
@@ -174,14 +166,13 @@ void BitmapFont::loadFont()
     setFontLoaded();
 }
 
-
-
 //------------------------------------------------------------------------------
 // setReverse() -- sets text in reverse type
 //------------------------------------------------------------------------------
 bool BitmapFont::setReverse(const Basic::Number* const rnumber)
 {
-    if (rnumber != 0)  reverse = rnumber->getBoolean();
+    if (rnumber != 0)
+        reverse = rnumber->getBoolean();
     return true;
 }
 
@@ -200,22 +191,20 @@ Basic::Object* BitmapFont::getSlotByIndex(const int si)
 //------------------------------------------------------------------------------
 std::ostream& BitmapFont::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
-    using namespace std;
-
-    int j = 0;
+    unsigned int j = 0;
     if ( !slotsOnly ) {
-        sout << "( " << getFormName() << endl;
+        sout << "( " << getFormName() << std::endl;
         j = 4;
     }
 
     indent(sout,i+j);
-    sout << "reverse: " << reverse << endl;
+    sout << "reverse: " << reverse << std::endl;
 
     BaseClass::serialize(sout,i+j,true);
 
     if ( !slotsOnly ) {
         indent(sout,i);
-        sout << ")" << endl;
+        sout << ")" << std::endl;
     }
 
     return sout;
@@ -360,30 +349,28 @@ static const char* defaultMap[] =
    0,                   // del
 };
 
-const int BitmapFont::defaultNumFonts = sizeof(defaultMap) / sizeof(const char*);
+const unsigned int BitmapFont::defaultNumFonts = sizeof(defaultMap) / sizeof(const char*);
 const char** BitmapFont::defaultFontMap = &defaultMap[0];
 
 // Reverse the order of the bits
 GLubyte BitmapFont::reverseByteOrder(GLubyte byte)
 {
-   int i;
    GLubyte n = 0;
 
-   for (i = 0; i < 8; i++)
+   for (unsigned int i = 0; i < 8; i++)
       n |= ((byte >> i) & 0x01) << (7 - i);
 
    return n;
 }
 
 // Reverse the order of the bytes
-void BitmapFont::reverseBitmapOrder(GLubyte* bitmap, int numBitmapBytes, int numBytesWide)
+void BitmapFont::reverseBitmapOrder(GLubyte* bitmap, unsigned int numBitmapBytes, unsigned int numBytesWide)
 {
-   int i;
    GLubyte* temp = new GLubyte[numBytesWide];
 
-   for (i = 0; i < numBitmapBytes/2; i += numBytesWide)
-   {
-      int j;
+   for (unsigned int i = 0; i < numBitmapBytes/2; i += numBytesWide) {
+
+      unsigned int j = 0;
 
       for (j = 0; j < numBytesWide; j++)
          temp[j] = reverseByteOrder(bitmap[i+j]);
@@ -394,21 +381,24 @@ void BitmapFont::reverseBitmapOrder(GLubyte* bitmap, int numBitmapBytes, int num
       for (j = 0; j < numBytesWide; j++)
          bitmap[numBitmapBytes-i-numBytesWide+j] = temp[j];
    }
-   
-    delete [] temp;
+
+   delete [] temp;
 }
 
 // Load the font for one character
 GLubyte* BitmapFont::loadTypeFace(const GLint index, const GLenum reverse)
 {
    // If no font to load, return
-   if (fontMap[index] == 0) return 0;
+   if (fontMap[index] == 0)
+      return 0;
 
    // Create the font file name
    const size_t FONTPATHNAME_LENGTH = 256;
    char fontPathname[FONTPATHNAME_LENGTH];
-   if (fontDirectory() != 0) lcStrcpy(fontPathname, FONTPATHNAME_LENGTH, fontDirectory());
-   else lcStrcpy(fontPathname, FONTPATHNAME_LENGTH, "./");
+   if (fontDirectory() != 0)
+      lcStrcpy(fontPathname, FONTPATHNAME_LENGTH, fontDirectory());
+   else
+      lcStrcpy(fontPathname, FONTPATHNAME_LENGTH, "./");
    lcStrcat(fontPathname, FONTPATHNAME_LENGTH, fontMap[index]);
 
    // Open the font file
@@ -425,30 +415,27 @@ GLubyte* BitmapFont::loadTypeFace(const GLint index, const GLenum reverse)
    int nItemsMatched;
 
    // Calculate the size of the font
-   int width1;
-   nItemsMatched = fscanf(fp, "%d\n", &width1);
+   unsigned int width1;
+   nItemsMatched = fscanf(fp, "%u\n", &width1);
+   unsigned int height1;
+   nItemsMatched = fscanf(fp, "%u\n", &height1);
 
-   int height1;
-   nItemsMatched = fscanf(fp, "%d\n", &height1);
-
-   int numBytesWide = int(ceil(double(width1) / 8.0));
-   int numFileBytes = numBytesWide * height1;
-   int numFontBytes = numBytesWide * getBitmapHeight();
+   unsigned int numBytesWide = int(ceil(double(width1) / 8.0));
+   unsigned int numFileBytes = numBytesWide * height1;
+   unsigned int numFontBytes = numBytesWide * getBitmapHeight();
 
    GLubyte* bitmap = new GLubyte[numFontBytes];
 
    unsigned int i;  // index
 
    // Pad rest of the height
-   int diff = numFontBytes - numFileBytes;
-   for (i = 0; i < diff; i++)
-   {
+   unsigned int diff = numFontBytes - numFileBytes;
+   for (i = 0; i < diff; i++) {
       bitmap[i] = reverse ? 255 : 0;
    }
 
    // Read in the bitmap bytes
-   for (; i < numFontBytes; i++)
-   {
+   for (; i < numFontBytes; i++) {
       int value;
       nItemsMatched = fscanf(fp, "0x%x\n", &value);
       bitmap[i] = reverse ? GLubyte(~value) : GLubyte(value);
@@ -464,4 +451,3 @@ GLubyte* BitmapFont::loadTypeFace(const GLint index, const GLenum reverse)
 
 } // End BasicGL namespace
 } // End Eaagles namespace
-

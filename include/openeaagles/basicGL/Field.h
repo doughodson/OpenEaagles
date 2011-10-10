@@ -1,12 +1,11 @@
 //------------------------------------------------------------------------------
-// Class:   Field
+// Class: Field
 //------------------------------------------------------------------------------
-#ifndef __Field_H_774DBFEF_18BE_4403_AEA3_DA911CF34E87__
-#define __Field_H_774DBFEF_18BE_4403_AEA3_DA911CF34E87__
+#ifndef __Eaagles_BasicGL_Field_H__
+#define __Eaagles_BasicGL_Field_H__
 
 #include "Graphic.h"
 #include "openeaagles/basic/String.h"
-
 
 namespace Eaagles {
 
@@ -314,4 +313,4 @@ private:
 } // End BasicGL namespace
 } // End Eaagles namespace
 
-#endif  /* __Field_H_774DBFEF_18BE_4403_AEA3_DA911CF34E87__ */
+#endif

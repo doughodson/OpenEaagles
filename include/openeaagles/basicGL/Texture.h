@@ -1,9 +1,8 @@
 //------------------------------------------------------------------------------
 // Class:	Texture
 //------------------------------------------------------------------------------
-#ifndef	__OPENEAAGLES_BASICGL_TEXTURE_H__
-#define __OPENEAAGLES_BASICGL_TEXTURE_H__
-
+#ifndef	__Eaagles_BasicGL_Texture_H__
+#define __Eaagles_BasicGL_Texture_H__
 
 #include "openeaagles/basicGL/Image.h"
 
@@ -199,5 +198,4 @@ inline GLfloat Texture::getBlueBias() const        { return blueBias; }
 } // End BasicGL namespace
 } // End Eaagles namespace
 
-#endif	// __OPENEAAGLES_BASICGL_TEXTURE_H__
-
+#endif

@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
-// Class:  Display
+// Class: Display
 //------------------------------------------------------------------------------
-#ifndef __OpenEaagles_BasicGL_Display_H__
-#define __OpenEaagles_BasicGL_Display_H__
+#ifndef __Eaagles_BasicGL_Display_H__
+#define __Eaagles_BasicGL_Display_H__
 
 #include "Page.h"
 
@@ -464,4 +464,4 @@ inline void Display::setOkToSwap(const bool x)              { okToSwap = x; }
 } // End BasicGL namespace
 } // End Eaagles namespace
 
-#endif	/* __OpenEaagles_BasicGL_Display_H__ */
+#endif
