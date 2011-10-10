@@ -14,7 +14,6 @@ class Number;
 
 //------------------------------------------------------------------------------
 // Class: BroadcastHandler
-// Base class: Object -> NetHandler -> BroadcastHandler
 // Form name: BroadcastHandler
 //
 // Description: Broadcast network handler.

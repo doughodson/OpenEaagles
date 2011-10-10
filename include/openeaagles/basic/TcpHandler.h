@@ -13,7 +13,6 @@ class String;
 
 //------------------------------------------------------------------------------
 // Class: TcpHandler
-// Base class: Object -> NetHandler -> TcpHandler
 //
 // Description: General TCP/IP support class.
 //------------------------------------------------------------------------------

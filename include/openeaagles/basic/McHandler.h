@@ -13,7 +13,6 @@ class String;
 
 //------------------------------------------------------------------------------
 // Class: MulticastHandler
-// Base class: Object -> NetHandler -> MulticastHandler
 // Form name: MulticastHandler
 //
 // Description: Multicast network handler.

@@ -49,40 +49,26 @@ struct EmissionSystem;
 // Byte swap functions used by this file
 //--------------------------------------------------------------
 
-inline int checkSwap()
-{
-  unsigned short s;
-  unsigned char *c;
- 
-  s = 1;
-  c = (unsigned char *) &s;
- 
-  if (*c == 0)
-    return 0;
- 
-  return 1;
-}
-
 union convDoubleData
 {
-  Integer64   llword;
-  LCuint64  ullword;
+  int64_t   llword;
+  uint64_t  ullword;
   double    dword;
   char      byte[8];
 };
 
 union convData
 {
-  long    lword;
-  unsigned int uint;
+  int32_t  lword;
+  uint32_t uint;
   float   fword;
-  short   sword[2];
-  unsigned short usword[2];
+  int16_t  sword[2];
+  uint16_t usword[2];
   char    byte[4];
 };
 
                                                                                                            
-inline long convertLong(const long v){
+inline int32_t convertInt32(const int32_t v){
   convData value;
   value.lword = v;
   convData newValue;
@@ -95,7 +81,7 @@ inline long convertLong(const long v){
   return newValue.lword;
 }
 
-inline unsigned int convertUInt(const unsigned int v){
+inline uint32_t convertUInt32(const uint32_t v){
   convData value;
   value.uint = v;
   convData newValue;
@@ -121,7 +107,7 @@ inline float convertFloat(const float v){
   return newValue.fword;
 }
 
-inline Integer64 convertLongLong(const Integer64 v){
+inline int64_t convertInt64(const int64_t v){
   convDoubleData value;
   value.llword = v;
   convDoubleData newValue;
@@ -138,7 +124,7 @@ inline Integer64 convertLongLong(const Integer64 v){
   return newValue.llword;
 }
 
-inline LCuint64 convertULongLong(const LCuint64 v){
+inline uint64_t convertUInt64(const uint64_t v){
   convDoubleData value;
   value.ullword = v;
   convDoubleData newValue;
@@ -172,7 +158,7 @@ inline double convertDouble(const double v){
   return newValue.dword;
 }
  
-inline short convertShort(const short v)
+inline int16_t convertInt16(const int16_t v)
 {
   convData value;
   value.sword[0] = v;
@@ -184,7 +170,7 @@ inline short convertShort(const short v)
   return newValue.sword[0];
 }
  
-inline unsigned short convertUShort(const unsigned short v)
+inline uint16_t convertUInt16(const uint16_t v)
 {
   convData value;
   value.usword[0] = v;
@@ -201,17 +187,17 @@ inline unsigned short convertUShort(const unsigned short v)
 //-----------------------------------------------
 struct simulationAddressDIS{
 
-   unsigned short siteIdentification;
-   unsigned short applicationIdentification;
+   uint16_t siteIdentification;
+   uint16_t applicationIdentification;
    
    // Constructors
-   simulationAddressDIS(const unsigned short a, const unsigned short b) : siteIdentification(a), applicationIdentification(b) { }
+   simulationAddressDIS(const uint16_t a, const uint16_t b) : siteIdentification(a), applicationIdentification(b) { }
    simulationAddressDIS() : siteIdentification(0), applicationIdentification(0) { }
 
    // Swap bytes 'to' or 'from' the network
    void swapBytes() {
-      siteIdentification        = convertUShort(siteIdentification);
-      applicationIdentification = convertUShort(applicationIdentification);
+      siteIdentification        = convertUInt16(siteIdentification);
+      applicationIdentification = convertUInt16(applicationIdentification);
    }
 
    // Assignment operator
@@ -246,8 +232,8 @@ struct simulationAddressDIS{
    }
 
    friend std::ostream& operator << ( std::ostream& s, const simulationAddressDIS& v ) {
-      s << "  siteIdentification:        " << (long)v.siteIdentification << std::endl
-        << "  applicationIdentification: " << (long)v.applicationIdentification << std::endl;
+      s << "  siteIdentification:        " << (int)v.siteIdentification << std::endl
+        << "  applicationIdentification: " << (int)v.applicationIdentification << std::endl;
 
       return s;
    }
@@ -270,10 +256,10 @@ struct simulationAddressDIS{
 struct entityIdentifierDIS{
 
    simulationAddressDIS simulationID;      // ID of the simulation
-   unsigned short    ID;                   // Entity ID within the simulation
+   uint16_t             ID;                // Entity ID within the simulation
    
    // Constructors
-   entityIdentifierDIS(const unsigned short a, const unsigned short b, const unsigned short c) : simulationID(a,b), ID(c) {}
+   entityIdentifierDIS(const uint16_t a, const uint16_t b, const uint16_t c) : simulationID(a,b), ID(c) {}
    entityIdentifierDIS() : simulationID(), ID(0)  {}
 
    // Assignment operator
@@ -284,7 +270,7 @@ struct entityIdentifierDIS{
 
    void swapBytes(){
       simulationID.swapBytes();
-      ID = convertUShort(ID);
+      ID = convertUInt16(ID);
    };
 
    bool operator<(const entityIdentifierDIS& a) const {
@@ -315,7 +301,7 @@ struct entityIdentifierDIS{
    {
       s << "Sim ID:" << std::endl
         << v.simulationID
-        << "  entityID:                  " << (long)v.ID << std::endl;
+        << "  entityID:                  " << (int)v.ID << std::endl;
 
       return s;
    }
@@ -338,7 +324,7 @@ struct entityIdentifierDIS{
 class EntityType {
 public:
   void swapBytes(){
-      country = convertShort((short)country);
+      country = convertUInt16(country);
   };
 
   inline bool operator<(const EntityType& a) const {
@@ -419,25 +405,25 @@ public:
 
     s.width(3);
     s.fill('0');
-    s << (long)v.kind << ":";
+    s << (int)v.kind << ":";
     s.width(3);
     s.fill('0');
-    s << (long)v.domain << ":";
+    s << (int)v.domain << ":";
     s.width(4);
     s.fill('0');
-    s << (long)v.country << ":";
+    s << (int)v.country << ":";
     s.width(3);
     s.fill('0');
-    s << (long)v.category << ":";
+    s << (int)v.category << ":";
     s.width(3);
     s.fill('0');
-    s << (long)v.subcategory << ":";
+    s << (int)v.subcategory << ":";
     s.width(3);
     s.fill('0');
-    s << (long)v.specific << ":";
+    s << (int)v.specific << ":";
     s.width(3);
     s.fill('0');
-    s << (long)v.extra;
+    s << (int)v.extra;
 
     return s;
   };
@@ -456,7 +442,7 @@ public:
 
   unsigned char  kind;
   unsigned char  domain;
-  unsigned short country;
+  uint16_t       country;
   unsigned char  category;
   unsigned char  subcategory;
   unsigned char  specific;
@@ -469,16 +455,16 @@ public:
 class AngularVelocityvectorDIS{
 public:
   void swapBytes(){
-    x_axis = convertFloat((float)x_axis);
-    y_axis = convertFloat((float)y_axis);
-    z_axis = convertFloat((float)z_axis);
+    x_axis = convertFloat(x_axis);
+    y_axis = convertFloat(y_axis);
+    z_axis = convertFloat(z_axis);
   };
 
   friend std::ostream& operator << ( std::ostream& s, const AngularVelocityvectorDIS& v )
   {
-    s << "  x_axis:      " << (long)v.x_axis << std::endl
-      << "  y_axis:      " << (long)v.y_axis << std::endl
-      << "  z_axis:      " << (long)v.z_axis << std::endl;
+    s << "  x_axis:      " << (int)v.x_axis << std::endl
+      << "  y_axis:      " << (int)v.y_axis << std::endl
+      << "  z_axis:      " << (int)v.z_axis << std::endl;
 
     return s;
   };
@@ -506,27 +492,27 @@ public:
 class BeamAntennaPattern{
 public:
   void swapBytes(){
-    psi                = convertFloat((float)psi);
-    theta              = convertFloat((float)theta);
-    phi                = convertFloat((float)phi);
-    azimuthBeamWidth   = convertFloat((float)azimuthBeamWidth);
-    elevationBeamWidth = convertFloat((float)elevationBeamWidth);
-    ez                 = convertFloat((float)ez);
-    ex                 = convertFloat((float)ex);
-    phase              = convertFloat((float)phase);
+    psi                = convertFloat(psi);
+    theta              = convertFloat(theta);
+    phi                = convertFloat(phi);
+    azimuthBeamWidth   = convertFloat(azimuthBeamWidth);
+    elevationBeamWidth = convertFloat(elevationBeamWidth);
+    ez                 = convertFloat(ez);
+    ex                 = convertFloat(ex);
+    phase              = convertFloat(phase);
   };
 
   friend std::ostream& operator << ( std::ostream& s, const BeamAntennaPattern& v )
   {
-    s << "  psi:                   " << (float)v.psi << std::endl
-      << "  theta:                 " << (float)v.theta << std::endl
-      << "  phi:                   " << (float)v.phi << std::endl
-      << "  azimuthBeamWidth:      " << (float)v.azimuthBeamWidth << std::endl
-      << "  elevationBeamWidth:    " << (float)v.elevationBeamWidth << std::endl
-      << "  referenceSystem:       " << (long)v.referenceSystem << std::endl
-      << "  ez:                    " << (float)v.ez << std::endl
-      << "  ex:                    " << (float)v.ex << std::endl
-      << "  phase:                 " << (float)v.phase << std::endl;
+    s << "  psi:                   " << v.psi << std::endl
+      << "  theta:                 " << v.theta << std::endl
+      << "  phi:                   " << v.phi << std::endl
+      << "  azimuthBeamWidth:      " << v.azimuthBeamWidth << std::endl
+      << "  elevationBeamWidth:    " << v.elevationBeamWidth << std::endl
+      << "  referenceSystem:       " << (int)v.referenceSystem << std::endl
+      << "  ez:                    " << v.ez << std::endl
+      << "  ex:                    " << v.ex << std::endl
+      << "  phase:                 " << v.phase << std::endl;
 
     return s;
   };
@@ -615,8 +601,8 @@ public:
 
 public:
    void swapBytes() {
-      id = convertUShort(id);
-      parameterType = convertUInt(parameterType);
+      id = convertUInt16(id);
+      parameterType = convertUInt32(parameterType);
       if (parameterTypeDesignator == ATTACHED_PART) {
          parameterValue.entityType.swapBytes();
       }
@@ -628,10 +614,10 @@ public:
 
    friend std::ostream& operator << ( std::ostream& s, const ArticulationParameter& v )
    {
-      s << "  parameterTypeDesignator: " << (long)v.parameterTypeDesignator << std::endl
-        << "  changeIndicator:         " << (long)v.changeIndicator << std::endl
-        << "  id:                      " << (long)v.id << std::endl
-        << "  parameterType:           " << (long)v.parameterType << std::endl;
+      s << "  parameterTypeDesignator: " << (int)v.parameterTypeDesignator << std::endl
+        << "  changeIndicator:         " << (int)v.changeIndicator << std::endl
+        << "  id:                      " << (int)v.id << std::endl
+        << "  parameterType:           " << (int)v.parameterType << std::endl;
 
       if (v.parameterTypeDesignator == ATTACHED_PART)
          s << v.parameterValue.entityType << std::endl;
@@ -655,8 +641,8 @@ public:
 
   unsigned char  parameterTypeDesignator;
   unsigned char  changeIndicator;
-  unsigned short id;
-  unsigned int   parameterType;
+  uint16_t       id;
+  uint32_t       parameterType;
   union ParameterValue {
      float value[2];
      EntityType entityType;
@@ -670,20 +656,20 @@ class BurstDescriptor{
 public:
   void swapBytes(){
     munision.swapBytes();
-    warhead  = convertShort((short)warhead);
-    fuse     = convertShort((short)fuse);
-    quantity = convertShort((short)quantity);
-    rate     = convertShort((short)rate);
+    warhead  = convertUInt16(warhead);
+    fuse     = convertUInt16(fuse);
+    quantity = convertUInt16(quantity);
+    rate     = convertUInt16(rate);
   };
 
   friend std::ostream& operator << ( std::ostream& s, const BurstDescriptor& v )
   {
     s << "  Munision ID:"
       << v.munision << std::endl
-      << "  warhead:      " << (long)v.warhead << std::endl
-      << "  fuse:         " << (long)v.fuse << std::endl
-      << "  quantity:     " << (long)v.quantity << std::endl
-      << "  rate:         " << (long)v.rate << std::endl;
+      << "  warhead:      " << (int)v.warhead << std::endl
+      << "  fuse:         " << (int)v.fuse << std::endl
+      << "  quantity:     " << (int)v.quantity << std::endl
+      << "  rate:         " << (int)v.rate << std::endl;
 
     return s;
   };
@@ -701,10 +687,10 @@ public:
   };
 
   EntityType munision;
-  unsigned short warhead;
-  unsigned short fuse;
-  unsigned short quantity;
-  unsigned short rate;
+  uint16_t warhead;
+  uint16_t fuse;
+  uint16_t quantity;
+  uint16_t rate;
 };
 
 //-----------------------------------------------
@@ -713,14 +699,14 @@ public:
 class ClockTime{
 public:
   void swapBytes(){
-    hour            = convertFloat((float)hour);
-    timePastTheHour = convertFloat((float)timePastTheHour);
+    hour            = convertFloat(hour);
+    timePastTheHour = convertFloat(timePastTheHour);
   };
 
   friend std::ostream& operator << ( std::ostream& s, const ClockTime& v )
   {
-    s << "hour:            " << (float)v.hour << std::endl
-      << "timePastTheHour: " << (float)v.timePastTheHour << std::endl;
+    s << "hour:            " << v.hour << std::endl
+      << "timePastTheHour: " << v.timePastTheHour << std::endl;
 
     return s;
   };
@@ -780,16 +766,16 @@ public:
   ~EulerAngles(){};
 
   void swapBytes(){
-    psi   = convertFloat((float)psi);
-    theta = convertFloat((float)theta);
-    phi   = convertFloat((float)phi);
+    psi   = convertFloat(psi);
+    theta = convertFloat(theta);
+    phi   = convertFloat(phi);
   };
 
   friend std::ostream& operator << ( std::ostream& s, const EulerAngles& v )
   {
-    s << "  psi:          " << (float)v.psi << std::endl
-      << "  theta:        " << (float)v.theta << std::endl
-      << "  phi:          " << (float)v.phi << std::endl;
+    s << "  psi:          " << v.psi << std::endl
+      << "  theta:        " << v.theta << std::endl
+      << "  phi:          " << v.phi << std::endl;
 
     return s;
   };
@@ -840,16 +826,16 @@ public:
   ~SimEulerAngles(){};
 
   void swapBytes(){
-    roll  = convertFloat((float)roll);
-    pitch = convertFloat((float)pitch);
-    hdg   = convertFloat((float)hdg);
+    roll  = convertFloat(roll);
+    pitch = convertFloat(pitch);
+    hdg   = convertFloat(hdg);
   };
 
   friend std::ostream& operator << ( std::ostream& s, const SimEulerAngles& v )
   {
-    s << "  roll:         " << (float)v.roll << std::endl
-      << "  pitch:        " << (float)v.pitch << std::endl
-      << "  hdg:          " << (float)v.hdg << std::endl;
+    s << "  roll:         " << v.roll << std::endl
+      << "  pitch:        " << v.pitch << std::endl
+      << "  hdg:          " << v.hdg << std::endl;
 
     return s;
   };
@@ -880,14 +866,14 @@ class EventIdentifier{
 public:
   void swapBytes(){
     simulationID.swapBytes();
-    eventNumber = convertUShort(eventNumber);
+    eventNumber = convertUInt16(eventNumber);
   };
 
   friend std::ostream& operator << ( std::ostream& s, const EventIdentifier& v )
   {
     s << "  Event Identifier:" << std::endl
       << v.simulationID 
-      << "  eventNumber:     " << (long)v.eventNumber << std::endl;
+      << "  eventNumber:     " << (int)v.eventNumber << std::endl;
 
     return s;
   };
@@ -905,7 +891,7 @@ public:
   };
 
   simulationAddressDIS simulationID;
-  unsigned short    eventNumber;
+  uint16_t             eventNumber;
 };
 
 //-----------------------------------------------
@@ -914,12 +900,12 @@ public:
 class FixedDatum{
 public:
   void swapBytes(){
-    fixedDatumID    = convertLong((long)fixedDatumID);
-    fixedDatumValue = convertLong((long)fixedDatumValue);
+    fixedDatumID    = convertUInt32(fixedDatumID);
+    fixedDatumValue = convertUInt32(fixedDatumValue);
   };
 
-  unsigned int fixedDatumID;
-  unsigned int fixedDatumValue;
+  uint32_t fixedDatumID;
+  uint32_t fixedDatumValue;
 };
 
 
@@ -929,8 +915,8 @@ public:
 class PDUHeader{
 public:
   void swapBytes(){
-    timeStamp = convertUInt(timeStamp);
-    length    = convertUShort((short)length);
+    timeStamp = convertUInt32(timeStamp);
+    length    = convertUInt16(length);
   };
  
   friend std::ostream& operator << ( std::ostream& s, const PDUHeader& v )
@@ -961,9 +947,9 @@ public:
   unsigned char  exerciseIdentifier;
   unsigned char  PDUType;
   unsigned char  protocolFamily;
-  unsigned int timeStamp;
-  unsigned short length;
-  unsigned short padding;
+  uint32_t       timeStamp;
+  uint16_t       length;
+  uint16_t       padding;
 };
 
 //-----------------------------------------------
@@ -1013,7 +999,7 @@ class SupplyQuantity{
 public:
   void swapBytes(){
     supplyType.swapBytes();
-    quantity = convertFloat((float)quantity);
+    quantity = convertFloat(quantity);
   };
 
   friend std::ostream& operator << ( std::ostream& s, const SupplyQuantity& v )
@@ -1046,8 +1032,8 @@ public:
 class SystemID{
 public:
   void swapBytes(){
-    systemType = convertUShort((short)systemType);
-    systemName = convertUShort((short)systemName);
+    systemType = convertUInt16(systemType);
+    systemName = convertUInt16(systemName);
   };
 
   friend std::ostream& operator << ( std::ostream &s, const SystemID &v )
@@ -1056,10 +1042,10 @@ public:
       << "  System Name:    " << v.systemName << std::endl;
     s.width(2);
     s.fill('0'); 
-    s << "  System Mode:    " << std::hex << (long)v.systemMode << std::endl;
+    s << "  System Mode:    " << std::hex << (int)v.systemMode << std::endl;
     s.width(2);
     s.fill('0'); 
-    s << "  Change/Options: " << (long)v.options << std::dec << std::endl; 
+    s << "  Change/Options: " << (int)v.options << std::dec << std::endl; 
 
     return s;
   };
@@ -1076,8 +1062,8 @@ public:
     return s;
   };
 
-  unsigned short systemType;
-  unsigned short systemName;
+  uint16_t      systemType;
+  uint16_t      systemName;
   unsigned char  systemMode;
   unsigned char  options;
 };
@@ -1099,39 +1085,39 @@ public:
    };
 
   void swapBytes(){
-    param1 = convertUShort(param1);
-    param2 = convertUShort(param2);
-    param3 = convertUShort(param3);
-    param4 = convertUShort(param4);
-    param5 = convertUShort(param5);
-    param6 = convertUShort(param6);
+    param1 = convertUInt16(param1);
+    param2 = convertUInt16(param2);
+    param3 = convertUInt16(param3);
+    param4 = convertUInt16(param4);
+    param5 = convertUInt16(param5);
+    param6 = convertUInt16(param6);
   };
 
   friend std::ostream& operator << ( std::ostream &s, const FundamentalOpData &v )
   {
-    s << "  System Status:      " << (long)v.systemStatus << std::endl
-      << "  Alternate Param4:   " << (long)v.alternateParam4 << std::endl
-      << "  Information Layers: " << (long)v.informationLayers << std::endl
-      << "  Modifier:           " << (long)v.modifier << std::endl;
+    s << "  System Status:      " << (int)v.systemStatus << std::endl
+      << "  Alternate Param4:   " << (int)v.alternateParam4 << std::endl
+      << "  Information Layers: " << (int)v.informationLayers << std::endl
+      << "  Modifier:           " << (int)v.modifier << std::endl;
 
     s.width(2);
     s.fill('0'); 
-    s << "    Parameter 1:    " << std::hex << (long)v.param1 << std::endl;
+    s << "    Parameter 1:    " << std::hex << (int)v.param1 << std::endl;
     s.width(2);
     s.fill('0'); 
-    s << "    Parameter 2:    " << std::hex << (long)v.param2 << std::endl;
+    s << "    Parameter 2:    " << std::hex << (int)v.param2 << std::endl;
     s.width(2);
     s.fill('0'); 
-    s << "    Parameter 3:    " << std::hex << (long)v.param3 << std::endl;
+    s << "    Parameter 3:    " << std::hex << (int)v.param3 << std::endl;
     s.width(2);
     s.fill('0'); 
-    s << "    Parameter 4:    " << std::hex << (long)v.param4 << std::endl;
+    s << "    Parameter 4:    " << std::hex << (int)v.param4 << std::endl;
     s.width(2);
     s.fill('0'); 
-    s << "    Parameter 5:    " << std::hex << (long)v.param5 << std::endl;
+    s << "    Parameter 5:    " << std::hex << (int)v.param5 << std::endl;
     s.width(2);
     s.fill('0'); 
-    s << "    Parameter 6:    " << std::hex << (long)v.param6 << std::endl;
+    s << "    Parameter 6:    " << std::hex << (int)v.param6 << std::endl;
     s << std::dec;
     return s;
   };
@@ -1152,35 +1138,31 @@ public:
   unsigned char   alternateParam4;
   unsigned char   informationLayers;
   unsigned char   modifier;
-  unsigned short  param1;
-  unsigned short  param2;
-  unsigned short  param3;
-  unsigned short  param4;
-  unsigned short  param5;
-  unsigned short  param6;
+  uint16_t        param1;
+  uint16_t        param2;
+  uint16_t        param3;
+  uint16_t        param4;
+  uint16_t        param5;
+  uint16_t        param6;
 };
 
 //-----------------------------------------------
 // Variable Datum Record
 struct VariableDatum {
 
-   unsigned int   variableDatumID;
-   unsigned int   variableDatumLength;
-   LCuint64*      variableDatumValue;     // DPG ### pointer in a PDU structure?
+   uint32_t   variableDatumID;
+   uint32_t   variableDatumLength;
 
    // Swap bytes 'to' or 'from' the network.
    void swapBytes(){
-      variableDatumID     = convertUInt(variableDatumID);
-      variableDatumLength = convertUInt(variableDatumLength);
+      variableDatumID     = convertUInt32(variableDatumID);
+      variableDatumLength = convertUInt32(variableDatumLength);
    };
 
-   friend std::ostream& operator << ( std::ostream& s, const VariableDatum&  )
+   friend std::ostream& operator << ( std::ostream& s, const VariableDatum&  v)
    {
-      #if 0  /* DPG -- "long long" */
-         s << "  variableDatumID:       " << (long)v.variableDatumID << std::endl
-         << "  variableDatumLength:   " << (long)v.variableDatumLength << std::endl
-         << "  variableDatumValue:    " << (long long)v.variableDatumValue << std::endl;
-      #endif
+         s << "  variableDatumID:       " << (int)v.variableDatumID << std::endl
+         << "  variableDatumLength:   " << (int)v.variableDatumLength << std::endl;
 
       return s;
    };
@@ -1204,12 +1186,12 @@ struct EntityMarking {
 
    unsigned char characterSet;      // Marking character set
 
-   static const unsigned int BUFF_SIZE = 11;
+   static const uint32_t BUFF_SIZE = 11;
    char marking[BUFF_SIZE];         // Entity marking buffer
 
    friend std::ostream& operator << ( std::ostream& s, const EntityMarking& v )
    {
-      s << "  Character Set:   " << (long)v.characterSet << std::endl
+      s << "  Character Set:   " << (int)v.characterSet << std::endl
         << "  Markings:        " << v.marking << std::endl;
 
       return s;
@@ -1235,10 +1217,10 @@ struct RadioEntityType {
 
    unsigned char  kind;                // Kind
    unsigned char  domain;              // Domain
-   unsigned short country;             // Country
+   uint16_t       country;             // Country
    unsigned char  category;            // Category
    unsigned char  nomenclatureVersion; // Nomenclature Version
-   unsigned short nomenclature;        // Nomenclature
+   uint16_t       nomenclature;        // Nomenclature
 
    // Constructor(s)
    RadioEntityType() : kind(0), domain(0), country(0), category(0), nomenclatureVersion(0), nomenclature(0) {}
@@ -1270,18 +1252,18 @@ struct RadioEntityType {
 
    // Swap bytes 'to' or 'from' the network.
    void swapBytes(){
-      country      = convertUShort(country);
-      nomenclature = convertUShort(nomenclature);
+      country      = convertUInt16(country);
+      nomenclature = convertUInt16(nomenclature);
    };
 
    friend std::ostream& operator << ( std::ostream& s, const RadioEntityType& v )
    {
-      s  << "  kind:                " << (long)v.kind << std::endl
-         << "  domain:              " << (long)v.domain << std::endl
-         << "  country:             " << (long)v.country << std::endl
-         << "  category:            " << (long)v.category << std::endl
-         << "  nomenclatureVersion: " << (long)v.nomenclatureVersion << std::endl
-         << "  nomenclature:        " << (long)v.nomenclature << std::endl;
+      s  << "  kind:                " << (int)v.kind << std::endl
+         << "  domain:              " << (int)v.domain << std::endl
+         << "  country:             " << (int)v.country << std::endl
+         << "  category:            " << (int)v.category << std::endl
+         << "  nomenclatureVersion: " << (int)v.nomenclatureVersion << std::endl
+         << "  nomenclature:        " << (int)v.nomenclature << std::endl;
 
       return s;
    };
@@ -1303,10 +1285,10 @@ struct RadioEntityType {
 //-----------------------------------------------
 struct ModulationType{
 
-   unsigned short spreadSpectrum;         // Spread Spectrum
-   unsigned short majorModulationType;    // Major Modulation type
-   unsigned short detail;                 // Detail
-   unsigned short system;                 // system 
+   uint16_t spreadSpectrum;         // Spread Spectrum
+   uint16_t majorModulationType;    // Major Modulation type
+   uint16_t detail;                 // Detail
+   uint16_t system;                 // system 
 
    // Constructor(s)
    ModulationType() : spreadSpectrum(0), majorModulationType(0), detail(0), system(0) {}
@@ -1334,10 +1316,10 @@ struct ModulationType{
 
    // Swap bytes 'to' or 'from' the network.
    void swapBytes() {
-      spreadSpectrum      = convertUShort(spreadSpectrum);
-      majorModulationType = convertUShort(majorModulationType);
-      detail              = convertUShort(detail);
-      system              = convertUShort(system);
+      spreadSpectrum      = convertUInt16(spreadSpectrum);
+      majorModulationType = convertUInt16(majorModulationType);
+      detail              = convertUInt16(detail);
+      system              = convertUInt16(system);
    };
 
    friend std::ostream& operator << ( std::ostream& s, const ModulationType& v )
@@ -1404,9 +1386,9 @@ struct vectorDIS {
 
    friend std::ostream& operator << ( std::ostream& s, const vectorDIS& v )
    {
-      s << "  component[0]:       " << (float)v.component[0] << std::endl
-        << "  component[1]:       " << (float)v.component[1] << std::endl
-        << "  component[2]:       " << (float)v.component[2] << std::endl;
+      s << "  component[0]:       " << v.component[0] << std::endl
+        << "  component[1]:       " << v.component[1] << std::endl
+        << "  component[2]:       " << v.component[2] << std::endl;
 
       return s;
    }
@@ -1638,8 +1620,8 @@ struct TrackJamTargets {
    friend std::ostream& operator << ( std::ostream& s, const TrackJamTargets& v )
    {
       s  << "Target ID:       " << std::endl << v.targetID
-         << "  emitterID:     " << (long)v.emitterID << std::endl
-         << "  beamID:        " << (long)v.beamID << std::endl;
+         << "  emitterID:     " << (int)v.emitterID << std::endl
+         << "  beamID:        " << (int)v.beamID << std::endl;
 
       return s;
    }
@@ -1765,13 +1747,13 @@ struct EmitterBeamData {
 
    unsigned char            beamDataLength;        // Length of this beam data, in 32bit words, including the track/jam targets
    unsigned char            beamIDNumber;          // Unique ID for this beam
-   unsigned short           beamParameterIndex;    // Use for the lookup of stored database parameters
+   uint16_t                 beamParameterIndex;    // Use for the lookup of stored database parameters
    FundamentalParameterData parameterData;         // Parameter data
    unsigned char            beamFunction;          // Beam function enum (see IST-CF-03-01, May 5, 2003, Sec 8.1.4)
    unsigned char            numberOfTargetsInTrack; // Number of track/jam targets that will follow
    unsigned char            highDensityTracks;     // High Density Tracks flag 
    unsigned char            padding2;
-   unsigned int             jammingModeSequence;   // Jamming techniques
+   uint32_t                 jammingModeSequence;   // Jamming techniques
 
    // Constructor(s)
    EmitterBeamData() :
@@ -1831,9 +1813,9 @@ struct EmitterBeamData {
    // Swap bytes 'to' or 'from' the network.
    void swapBytes() {
       // Swap our stuff first
-      beamParameterIndex  = convertUShort(beamParameterIndex);
+      beamParameterIndex  = convertUInt16(beamParameterIndex);
       parameterData.swapBytes();
-      jammingModeSequence = convertUInt(jammingModeSequence);
+      jammingModeSequence = convertUInt32(jammingModeSequence);
 
       // Then swap the "targets in track" data
       for (int i = 0; i < numberOfTargetsInTrack; i++) {
@@ -1844,14 +1826,14 @@ struct EmitterBeamData {
 
    // Friendly print function
    friend std::ostream& operator << ( std::ostream& s, const EmitterBeamData& v ) {
-      s  << "  beamDataLength:         " << (long)v.beamDataLength << std::endl
-         << "  beamIDNumber:           " << (long)v.beamIDNumber << std::endl
-         << "  beamParameterIndex:     " << (long)v.beamParameterIndex << std::endl
+      s  << "  beamDataLength:         " << (int)v.beamDataLength << std::endl
+         << "  beamIDNumber:           " << (int)v.beamIDNumber << std::endl
+         << "  beamParameterIndex:     " << (int)v.beamParameterIndex << std::endl
          << "Parameter Data:           " << std::endl << v.parameterData << std::endl
-         << "  beamFunction:           " << (long)v.beamFunction << std::endl
-         << "  numberOfTargetsInTrack: " << (long)v.numberOfTargetsInTrack << std::endl
-         << "  highDensityTracks:      " << (long)v.highDensityTracks << std::endl
-         << "  jammingModeSequence:    " << (long)v.jammingModeSequence << std::endl;
+         << "  beamFunction:           " << (int)v.beamFunction << std::endl
+         << "  numberOfTargetsInTrack: " << (int)v.numberOfTargetsInTrack << std::endl
+         << "  highDensityTracks:      " << (int)v.highDensityTracks << std::endl
+         << "  jammingModeSequence:    " << (int)v.jammingModeSequence << std::endl;
 
       for(int i=0; i < v.numberOfTargetsInTrack; i++)
       {
@@ -1883,7 +1865,7 @@ struct EmitterBeamData {
 //-----------------------------------------------
 struct EmitterSystem {
 
-   unsigned short emitterName;                  // Emitter Name enum (see IST-CF-03-01, May 5, 2003, Sec 8.1.1.1)
+   uint16_t       emitterName;                  // Emitter Name enum (see IST-CF-03-01, May 5, 2003, Sec 8.1.1.1)
    unsigned char  function;                     // Function enum (see IST-CF-03-01, May 5, 2003, Sec 8.1.2)
    unsigned char  emitterIdentificationNumber;  // Unique emitter system number
 
@@ -1911,14 +1893,14 @@ struct EmitterSystem {
 
    // Swap bytes 'to' or 'from' the network.
    void swapBytes() {
-      emitterName = convertUShort(emitterName);
+      emitterName = convertUInt16(emitterName);
    }
 
    // Friendly print functions
    friend std::ostream& operator << ( std::ostream& s, const EmitterSystem& v ) {
-      s  << "emitterName:                 " << (long)v.emitterName << std::endl
-         << "function:                    " << (long)v.function << std::endl
-         << "emitterIdentificationNumber: " << (long)v.emitterIdentificationNumber << std::endl;
+      s  << "emitterName:                 " << (int)v.emitterName << std::endl
+         << "function:                    " << (int)v.function << std::endl
+         << "emitterIdentificationNumber: " << (int)v.emitterIdentificationNumber << std::endl;
 
       return s;
    }
@@ -1942,7 +1924,7 @@ struct EmissionSystem {
 
    unsigned char     systemDataLength;    // Length of this system data, in 32bit words, including the Emitter Beam Data
    unsigned char     numberOfBeams;       // Number of beams (EmitterBeamData's that follow)
-   unsigned short    padding1;
+   uint16_t          padding1;
    EmitterSystem     emitterSystem;       // Descrption of the Emitter System
    vectorDIS         location;            // Location of emitter system; entities ref system (meters)
 
@@ -2026,8 +2008,8 @@ struct EmissionSystem {
 
    // Friendly print function
    friend std::ostream& operator << ( std::ostream& s, const EmissionSystem& v ) {
-      s  << "  systemDataLength:       " << (long)v.systemDataLength << std::endl
-         << "  numberOfBeams:          " << (long)v.numberOfBeams << std::endl
+      s  << "  systemDataLength:       " << (int)v.systemDataLength << std::endl
+         << "  numberOfBeams:          " << (int)v.numberOfBeams << std::endl
          << "Emitter System:           " << std::endl << v.emitterSystem << std::endl
          << "Reference Location:       " << std::endl << v.location << std::endl;
 

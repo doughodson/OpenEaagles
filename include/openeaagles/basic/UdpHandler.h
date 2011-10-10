@@ -13,7 +13,6 @@ class String;
 
 //------------------------------------------------------------------------------
 // Class: UdpHandler
-// Base class: Object -> NetHandler -> UdpHandler
 //
 // Description: UDP/IP Unicast network handler.  Sends unicast packets to the
 //             destination IP and port.
@@ -49,20 +48,20 @@ public:
    UdpHandler();
 
    // Sets the destination IP address (all future packets)
-   bool setNetAddr(unsigned long netAddr)       { return BaseClass::setNetAddr(netAddr); }
+   bool setNetAddr(const uint32_t netAddr)      { return BaseClass::setNetAddr(netAddr); }
 
    // Sets the destination IP address by host name (all future packets)
    bool setNetAddr(const char* const hostname)  { return BaseClass::setNetAddr(hostname); }
 
    // Sets the destination port number (all future packets)
-   bool setPort(const unsigned short n)         { return BaseClass::setPort(n); }
+   bool setPort(const uint16_t n)               { return BaseClass::setPort(n); }
 
    // Send data to a specific IP/Port
    virtual bool sendDataTo(
          const char* const packet,  // Data packet
          const int size,            // Size of the data packet
-         unsigned long ip,          // Destination IP address (this packet only)
-         const unsigned short port  // Destination port (this packet only)
+         const uint32_t ip,         // Destination IP address (this packet only)
+         const uint16_t port        // Destination port (this packet only)
       );
 
    // Slot functions
