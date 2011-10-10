@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Classes: Weapon
 //------------------------------------------------------------------------------
-#if !defined(__WEAPON_H_0F20AFBD_1DC4_420f_B9BC_58C621BB3750__)
-#define __WEAPON_H_0F20AFBD_1DC4_420f_B9BC_58C621BB3750__
+#ifndef __Eaagles_Simulation_Weapon_H__
+#define __Eaagles_Simulation_Weapon_H__
 
 #include "openeaagles/simulation/Player.h"
 
@@ -128,7 +128,6 @@ namespace Simulation {
 //
 // 3) When a weapon is copied or cloned, the launcher and station are set to zero.
 //
-// GUID: {0F20AFBD-1DC4-420f-B9BC-58C621BB3750}
 //==============================================================================
 class Weapon : public Player  
 {
@@ -401,4 +400,4 @@ private:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // !defined(__WEAPON_H_0F20AFBD_1DC4_420f_B9BC_58C621BB3750__)
+#endif

@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: Agm
 //------------------------------------------------------------------------------
-#ifndef __AGM_H_D9637139_E85B_4c2f_9BE2_1FF28A80BAF4__
-#define __AGM_H_D9637139_E85B_4c2f_9BE2_1FF28A80BAF4__
+#ifndef __Eaagles_Simulation_Agm_H__
+#define __Eaagles_Simulation_Agm_H__
 
 #include "openeaagles/simulation/Missile.h"
 
@@ -38,4 +38,4 @@ private:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // __AGM_H_D9637139_E85B_4c2f_9BE2_1FF28A80BAF4__
+#endif

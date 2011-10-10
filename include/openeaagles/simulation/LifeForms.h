@@ -2,8 +2,8 @@
 // Classes:	LifeForm
 // Description: Life form models
 //------------------------------------------------------------------------------
-#if !defined(__LIFE_FORM_H_95FD838D_4877_4490_9B35_718513CE70E6__)
-#define __LIFE_FORM_H_95FD838D_4877_4490_9B35_718513CE70E6__
+#ifndef __Eaagles_Simulation_LifeForm_H__
+#define __Eaagles_Simulation_LifeForm_H__
 
 #include "openeaagles/simulation/Player.h"
 
@@ -14,7 +14,6 @@ namespace Simulation {
 // Class LifeForm
 // Description: Generic life form
 // Form name: LifeForm
-// GUID: {95FD838D-4877-4490-9B35-718513CE70E6}
 //==============================================================================
 class LifeForm : public Player  
 {
@@ -70,7 +69,6 @@ private:
 //==============================================================================
 // Class InfantryMan
 // Description: Generic dismounted unarmed infantryman (carries a M4 carbine - default)
-// GUID: {FEDB7E37-5C1A-431b-84BD-8290AEDE5CC7}
 //==============================================================================
 class InfantryMan : public LifeForm
 {
@@ -83,7 +81,6 @@ public:
 //==============================================================================
 // Class Parachutist
 // Description: Generic parachutist - default weapon (M4 carbine)
-// GUID: {{6A95F20E-9C1A-47b7-A117-C5682054C225}}
 //==============================================================================
 class Parachutist : public LifeForm
 {
@@ -98,4 +95,4 @@ public:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // !defined(__LIFE_FORM_H_95FD838D_4877_4490_9B35_718513CE70E6__)
+#endif

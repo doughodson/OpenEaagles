@@ -1,12 +1,10 @@
 //------------------------------------------------------------------------------
 // Class:	Stt
-// Base class:	Basic::Object -> ... -> RfSystem -> RfSensor -> Radar -> Stt
-//
 // Description: Simple, Single-Target-Track Mode Radar
 //
 //------------------------------------------------------------------------------
-#ifndef __STT_H_9FE7BD12_E414_4e0f_B542_6CDEE8D7E5B6__
-#define __STT_H_9FE7BD12_E414_4e0f_B542_6CDEE8D7E5B6__
+#ifndef __Eaagles_Sensor_Stt_H__
+#define __Eaagles_Sensor_Stt_H__
 
 #include "openeaagles/simulation/Radar.h"
 
@@ -28,4 +26,4 @@ protected:
 } // End Sensor namespace
 } // End Eaagles namespace
 
-#endif // __STT_H_9FE7BD12_E414_4e0f_B542_6CDEE8D7E5B6__
+#endif

@@ -5,8 +5,8 @@
 // Description: PC Visual Interface
 //
 //------------------------------------------------------------------------------
-#ifndef __OpenEaagles_Otw_OtwPC_h__
-#define __OpenEaagles_Otw_OtwPC_h__
+#ifndef __Eaagles_Otw_OtwPC_H__
+#define __Eaagles_Otw_OtwPC_H__
 
 #include "openeaagles/simulation/Otw.h"
 
@@ -51,4 +51,4 @@ private:
 } // End Otw namespace
 } // End Eaagles namespace
 
-#endif //
+#endif

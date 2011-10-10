@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: RacModel
 //------------------------------------------------------------------------------
-#if !defined(__RacModel_H_987A2BFE_56F4_4f2e_A1A7_53710FD9709D__)
-#define __RacModel_H_987A2BFE_56F4_4f2e_A1A7_53710FD9709D__
+#ifndef __Eaagles_Vehicle_RacModel_H__
+#define __Eaagles_Vehicle_RacModel_H__
 
 #include "openeaagles/simulation/DynamicsModels.h"
 
@@ -84,4 +84,4 @@ private:
 } // End Vehicle namespace
 } // End Eaagles namespace
 
-#endif // !defined(__RacModel_H_987A2BFE_56F4_4f2e_A1A7_53710FD9709D__)
+#endif

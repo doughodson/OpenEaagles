@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Form function for the 'dafif' library
 //------------------------------------------------------------------------------
-#ifndef __OpenEaagles_Dafif_FormFunc_H__
-#define __OpenEaagles_Dafif_FormFunc_H__
+#ifndef __Eaagles_Dafif_FormFunc_H__
+#define __Eaagles_Dafif_FormFunc_H__
 
 namespace Eaagles {
    namespace Basic { class Object; }

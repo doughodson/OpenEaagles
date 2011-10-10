@@ -2,8 +2,8 @@
 // Class: Ship
 // Description: Generic ship models
 //------------------------------------------------------------------------------
-#if !defined(__SHIP_H_818CF7F5_AF6D_4d24_AEBB_299FBFB67036__)
-#define __SHIP_H_818CF7F5_AF6D_4d24_AEBB_299FBFB67036__
+#ifndef __Eaagles_Simulation_Ship_H__
+#define __Eaagles_Simulation_Ship_H__
 
 #include "openeaagles/simulation/Player.h"
 
@@ -14,7 +14,6 @@ namespace Simulation {
 // Class Ship
 // Description: Generic ship model
 // Form name: Ship
-// GUID: {818CF7F5-AF6D-4d24-AEBB-299FBFB67036}
 //==============================================================================
 class Ship : public Player  
 {
@@ -30,4 +29,4 @@ public:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // !defined(__SHIP_H_818CF7F5_AF6D_4d24_AEBB_299FBFB67036__)
+#endif

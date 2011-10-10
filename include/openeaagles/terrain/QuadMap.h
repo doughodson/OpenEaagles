@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: QuadMap
 //------------------------------------------------------------------------------
-#ifndef __QuadMap_H_E897ADDE_9CF0_49b5_9132_9EA8F76DA500__
-#define __QuadMap_H_E897ADDE_9CF0_49b5_9132_9EA8F76DA500__
+#ifndef __Eaagles_Terrain_QuadMap_H__
+#define __Eaagles_Terrain_QuadMap_H__
 
 #include "openeaagles/basic/Terrain.h"
 
@@ -12,11 +12,8 @@ namespace Terrain {
 
 //------------------------------------------------------------------------------
 // Class: QuadMap
-// Base classes: Basic::Object -> Basic::Component -> Basic::Terrain -> Terrain::QuadMap
-//
 // Description: Manage up to 4 elevation files in a 2x2 pattern
 // Form name: QuadMap
-// GUID: {E897ADDE-9CF0-49b5-9132-9EA8F76DA500}
 //------------------------------------------------------------------------------
 class QuadMap : public Basic::Terrain
 {
@@ -79,6 +76,4 @@ private:
 } // End Terrain namspace
 } // End Eaagles namespace
 
-#endif /* __QuadMap_H_E897ADDE_9CF0_49b5_9132_9EA8F76DA500__ */
-
-
+#endif

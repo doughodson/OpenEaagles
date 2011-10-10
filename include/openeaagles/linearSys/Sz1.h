@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Sz1 class -- First order transfer function
 //------------------------------------------------------------------------------
-#ifndef __LinearSystem_Sz1_H_821D44EB_A8D7_435b_89D6_EF29C17307FB__
-#define __LinearSystem_Sz1_H_821D44EB_A8D7_435b_89D6_EF29C17307FB__
+#ifndef __Eaagles_LinearSystem_Sz1_H__
+#define __Eaagles_LinearSystem_Sz1_H__
 
 #include "openeaagles/linearSys/FirstOrderTf.h"
 
@@ -34,8 +34,6 @@ namespace LinearSystem {
 //    D2    <Number>     Coefficent D2 (default: 0)
 //    d1    <Number>     Coefficent D2 (default: 0)
 //
-//
-// GUID: {821D44EB-A8D7-435b-89D6-EF29C17307FB}
 //------------------------------------------------------------------------------
 class Sz1 : public FirstOrderTf {
     DECLARE_SUBCLASS(Sz1,FirstOrderTf)
@@ -53,4 +51,4 @@ public:
 } // End LinearSystem namespace
 } // End Eaagles namespace
 
-#endif      /* __LinearSystem_Sz1_H_821D44EB_A8D7_435b_89D6_EF29C17307FB__ */
+#endif

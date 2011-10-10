@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class:	FileReader
 //------------------------------------------------------------------------------
-#ifndef __FileReader_H_50672E3A_9FF9_45ca_A3D5_0A94DA0346F3__
-#define __FileReader_H_50672E3A_9FF9_45ca_A3D5_0A94DA0346F3__
+#ifndef __Eaagles_Basic_FileReader_H__
+#define __Eaagles_Basic_FileReader_H__
 
 #include "openeaagles/basic/Object.h"
 

@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // ScalerFunc class -- Abstract scaler function
 //------------------------------------------------------------------------------
-#ifndef __LinearSystem_ScalerFunc_H_FF9998A9_A1EC_487a_9FDD_934A46797364__
-#define __LinearSystem_ScalerFunc_H_FF9998A9_A1EC_487a_9FDD_934A46797364__
+#ifndef __Eaagles_LinearSystem_ScalerFunc_H__
+#define __Eaagles_LinearSystem_ScalerFunc_H__
 
 #include "openeaagles/basic/Object.h"
 
@@ -40,7 +40,6 @@ namespace LinearSystem {
 //    x0    <Number>     Initial (previous) input value: X(0) (default: 0)
 //    y0    <Number>     Initial (previous) output value: Y(0) (default: 0)
 //
-// GUID: {FF9998A9-A1EC-487a-9FDD-934A46797364}
 //------------------------------------------------------------------------------
 class ScalerFunc : public Basic::Object {
     DECLARE_SUBCLASS(ScalerFunc,Basic::Object)
@@ -100,4 +99,4 @@ private:
 } // End LinearSystem namespace
 } // End Eaagles namespace
 
-#endif      /* __LinearSystem_ScalerFunc_H_FF9998A9_A1EC_487a_9FDD_934A46797364__ */
+#endif

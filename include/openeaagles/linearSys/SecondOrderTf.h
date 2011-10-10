@@ -2,8 +2,8 @@
 // SecondOrderTf class -- Second order transfer function
 // ##### IN-WORK #####
 //------------------------------------------------------------------------------
-#ifndef __LinearSystem_SecondOrderTf_H_8F6B2AD4_67D6_427d_BB5C_7ED8BA22E0C5__
-#define __LinearSystem_SecondOrderTf_H_8F6B2AD4_67D6_427d_BB5C_7ED8BA22E0C5__
+#ifndef __Eaagles_LinearSystem_SecondOrderTf_H__
+#define __Eaagles_LinearSystem_SecondOrderTf_H__
 
 #include "openeaagles/linearSys/DiffEquation.h"
 
@@ -22,7 +22,6 @@ namespace LinearSystem {
 //       ------------------
 //       D1*s*s + D2*s + D3
 //
-// GUID: {8F6B2AD4-67D6-427d-BB5C-7ED8BA22E0C5}
 //------------------------------------------------------------------------------
 class SecondOrderTf : public DiffEquation {
     DECLARE_SUBCLASS(SecondOrderTf,DiffEquation)
@@ -73,4 +72,4 @@ private:
 } // End LinearSystem namespace
 } // End Eaagles namespace
 
-#endif      /* __LinearSystem_SecondOrderTf_H_8F6B2AD4_67D6_427d_BB5C_7ED8BA22E0C5__ */
+#endif

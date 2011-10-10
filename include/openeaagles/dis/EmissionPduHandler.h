@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Classes: EmissionPduHandler
 //------------------------------------------------------------------------------
-#ifndef __Dis_EmissionPduHandler_H_3979F05E_16B3_400d_9F89_3479F2A410B6__
-#define __Dis_EmissionPduHandler_H_3979F05E_16B3_400d_9F89_3479F2A410B6__
+#ifndef __Eaagles_Network_Dis_EmissionPduHandler_H__
+#define __Eaagles_Network_Dis_EmissionPduHandler_H__
 
 #include "openeaagles/dis/NetIO.h"
 
@@ -194,4 +194,4 @@ inline bool EmissionPduHandler::isDefaultOutgoingHandler() const     { return de
 } // End Network namespace
 } // End Eaagles namespace
 
-#endif // __Dis_EmissionPduHandler_H_3979F05E_16B3_400d_9F89_3479F2A410B6__
+#endif

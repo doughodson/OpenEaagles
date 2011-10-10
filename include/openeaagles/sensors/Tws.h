@@ -1,12 +1,10 @@
 //------------------------------------------------------------------------------
 // Class:	Tws
-// Base class:	Basic::Object -> ... -> RfSystem -> RfSensor -> Radar -> Tws
-//
 // Description: Simple, Track-While-Scan Mode Radar
 //
 //------------------------------------------------------------------------------
-#ifndef __TWS_H_BCCBFC13_3710_4aac_AE81_20EB503BF3D2__
-#define __TWS_H_BCCBFC13_3710_4aac_AE81_20EB503BF3D2__
+#ifndef __Eaagles_Sensor_Tws_H__
+#define __Eaagles_Sensor_Tws_H__
 
 #include "openeaagles/simulation/Radar.h"
 
@@ -27,4 +25,4 @@ private:
 } // End Sensor namespace
 } // End Eaagles namespace
 
-#endif // __TWS_H_BCCBFC13_3710_4aac_AE81_20EB503BF3D2__
+#endif

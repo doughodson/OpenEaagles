@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: Aam
 //------------------------------------------------------------------------------
-#ifndef __AAM_H_500C8990_BAC9_4b2c_A7E7_A162221A5A8C__
-#define __AAM_H_500C8990_BAC9_4b2c_A7E7_A162221A5A8C__
+#ifndef __Eaagles_Simulation_Aam_H__
+#define __Eaagles_Simulation_Aam_H__
 
 #include "openeaagles/simulation/Missile.h"
 
@@ -34,4 +34,4 @@ public:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // __AAM_H_500C8990_BAC9_4b2c_A7E7_A162221A5A8C__
+#endif

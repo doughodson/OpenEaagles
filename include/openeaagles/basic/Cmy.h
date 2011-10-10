@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class:  Cmy
 //------------------------------------------------------------------------------
-#ifndef __Cmy_H_included__
-#define __Cmy_H_included__
+#ifndef __Eaagles_Basic_Cmy_H__
+#define __Eaagles_Basic_Cmy_H__
 
 #include "openeaagles/basic/Color.h"
 
@@ -80,5 +80,4 @@ protected:
 } // End Basic namespace
 } // End Eaagles namespace
 
-#endif      /* __Cmy_H_included__ */
-
+#endif

@@ -3,13 +3,12 @@
 //		LatitudeReadout, LongitudeReadout, DirectionReadout, Rotary, Rotary2,
 //	        Cursor
 //------------------------------------------------------------------------------
-#ifndef	__Readouts_H_3D8556B0_47BA_49e4_B3A7_3164B46D3439__
-#define __Readouts_H_3D8556B0_47BA_49e4_B3A7_3164B46D3439__
+#ifndef	__Eaagles_BasicGL_Readouts_H__
+#define __Eaagles_BasicGL_Readouts_H__
 
 #include "Field.h"
 #include "openeaagles/basic/Number.h"
 #include "openeaagles/basic/Integer.h"
-
 
 namespace Eaagles {
    namespace Basic { class Float; class Integer; }
@@ -36,7 +35,6 @@ namespace BasicGL {
 //	bool setTextList(List* stlobj)
 //		Returns true if the text list was set to stlobj.
 //
-// Guid: {3D8556B0-47BA-49e4-B3A7-3164B46D3439}
 //------------------------------------------------------------------------------
 class AsciiText : public Field {
     DECLARE_SUBCLASS(AsciiText,Field)
@@ -55,11 +53,9 @@ public:
 
 //------------------------------------------------------------------------------
 // Class:	Cursor
-// Base class: Object > Graphic > Field > Cursor
 //
 // Form name: Cursor
 //
-// Guid: {951C6495-F576-433d-B6E2-61F6AF16402C}
 //------------------------------------------------------------------------------
 class Cursor : public Field {
     DECLARE_SUBCLASS(Cursor,Field)
@@ -72,7 +68,7 @@ public:
 
 //------------------------------------------------------------------------------
 // Class:	NumericReadout
-// Base class: Object > Graphic > Field > NumericReadout
+//
 // Form name: NumericReadout
 //
 // Slots:
@@ -122,9 +118,6 @@ public:
 //	bool isInputValueValid()
 //		Checks the input value and returns true if it is valid.
 //
-//Comment sections last updated: 2004.10.14 by MJK
-//
-// Guid: {F4255967-7E11-4300-942F-0B4C9A7E1687}
 //------------------------------------------------------------------------------
 class NumericReadout : public Field {
    DECLARE_SUBCLASS(NumericReadout,Field)
@@ -209,7 +202,6 @@ private:
 //    ######	// Hex number
 //    00000#	// Hex number w/leading zeros
 //
-// Guid: {1B78328A-D4A5-4ad3-A194-FE69B5A368B6}
 //------------------------------------------------------------------------------
 class HexReadout : public NumericReadout {
    DECLARE_SUBCLASS(HexReadout,NumericReadout)
@@ -236,7 +228,6 @@ protected:
 //    ######	// Octal number
 //    00000#	// Octal number w/leading zeros
 //
-// Guid: {495FBE81-E6E4-4ff9-BF35-07D3111750DF}
 //------------------------------------------------------------------------------
 class OctalReadout : public NumericReadout {
    DECLARE_SUBCLASS(OctalReadout,NumericReadout)
@@ -272,7 +263,6 @@ protected:
 // Notes: The seconds and third numbers always have leading zeros.  The first
 // number requires a zero, '0', to have leading zeros.
 //
-// Guid: {28202353-B187-4814-969D-F51A7E944EA0}
 //------------------------------------------------------------------------------
 class TimeReadout : public NumericReadout {
    DECLARE_SUBCLASS(TimeReadout,NumericReadout)
@@ -296,7 +286,6 @@ protected:
 //
 // Form name: DirectionReadout
 //
-// Guid: {731A5994-384A-4ef5-91EF-93194D838B83}
 //------------------------------------------------------------------------------
 class DirectionReadout : public NumericReadout {
    DECLARE_SUBCLASS(DirectionReadout,NumericReadout)
@@ -320,7 +309,6 @@ protected:
 //
 // Form name: LatitudeReadout
 //
-// Guid: {872DA29B-A6CA-4e4b-A4D1-E071B7F79A89}
 //------------------------------------------------------------------------------
 class LatitudeReadout : public DirectionReadout {
     DECLARE_SUBCLASS(LatitudeReadout,DirectionReadout)
@@ -336,7 +324,6 @@ public:
 //
 // Form name: LongitudeReadout
 //
-// Guid: {4958F477-3AAB-48fa-AF34-4788EFB95CD0}
 //------------------------------------------------------------------------------
 class LongitudeReadout : public DirectionReadout {
     DECLARE_SUBCLASS(LongitudeReadout,DirectionReadout)
@@ -354,8 +341,6 @@ public:
 //
 // Form name: Rotary
 //
-//
-// Guid: {6976864B-D419-4b46-B73D-8DB1FE4ECED1}
 //------------------------------------------------------------------------------
 class Rotary : public Field {
     DECLARE_SUBCLASS(Rotary,Field)
@@ -382,7 +367,6 @@ private:
 //
 // Form name: Rotary2
 //
-// Guid: {612CC5EF-B400-489b-8978-23A583004BB6}
 //------------------------------------------------------------------------------
 class Rotary2 : public Rotary {
     DECLARE_SUBCLASS(Rotary2,Rotary)
@@ -397,4 +381,4 @@ public:
 } // End BasicGL namespace
 } // End Eaagles namespace
 
-#endif	/* __Readouts_H_3D8556B0_47BA_49e4_B3A7_3164B46D3439__ */
+#endif

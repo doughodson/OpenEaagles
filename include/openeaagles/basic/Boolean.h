@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class:  Boolean
 //------------------------------------------------------------------------------
-#ifndef __Boolean_H_6462993B_A0DE_4344_A20C_0E3D0F534F06__
-#define __Boolean_H_6462993B_A0DE_4344_A20C_0E3D0F534F06__
+#ifndef __Eaagles_Basic_Boolean_H__
+#define __Eaagles_Basic_Boolean_H__
 
 #include "openeaagles/basic/Number.h"
 
@@ -183,4 +183,4 @@ inline std::ostream& operator<<(std::ostream& sout, const Boolean& n)
 } // End Basic namespace
 } // End Eaagles namespace
 
-#endif  /* __Boolean_H_6462993B_A0DE_4344_A20C_0E3D0F534F06__ */
+#endif

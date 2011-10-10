@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: Clip3D
 //------------------------------------------------------------------------------
-#ifndef	__Clip3D_H_A5CC7646_9F1B_431c_9D96_EB55F0C0E30E__
-#define __Clip3D_H_A5CC7646_9F1B_431c_9D96_EB55F0C0E30E__
+#ifndef	__Eaagles_BasicGL_Clip3D_H__
+#define __Eaagles_BasicGL_Clip3D_H__
 
 #include "openeaagles/basic/Object.h"
 #include "Polygon.h"
@@ -18,7 +18,6 @@ namespace BasicGL {
 // Form name: Clip3D
 // Description: 3D polygon clipping
 //
-// GUID: {A5CC7646-9F1B-431c-9D96-EB55F0C0E30E}
 //------------------------------------------------------------------------------
 class Clip3D : public Basic::Object {
     DECLARE_SUBCLASS(Clip3D,Basic::Object)
@@ -88,4 +87,4 @@ private:
 } // End Eaagles namespace
 
 
-#endif	/* __Clip3D_H_A5CC7646_9F1B_431c_9D96_EB55F0C0E30E__ */
+#endif

@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Classes:	AirVehicle, Aircraft, helicopter, UnmannedAirVehicle
 //------------------------------------------------------------------------------
-#if !defined(__AIRVEHICLE_H__B57DCF1D_4A5C_4caf_B72B_B30D102517B8__)
-#define __AIRVEHICLE_H__B57DCF1D_4A5C_4caf_B72B_B30D102517B8__
+#ifndef __Eaagles_Simulation_AirVehicle_H__
+#define __Eaagles_Simulation_AirVehicle_H__
 
 #include "openeaagles/simulation/Player.h"
 
@@ -66,7 +66,6 @@ namespace Simulation {
 //      setCmdWingSweepAngle(const LCreal rad)
 //          Sets the commanded wing sweep angle (radians; zero for none)
 //
-// GUID: (B57DCF1D-4A5C-4caf-B72B-B30D102517B8)
 //==============================================================================
 class AirVehicle : public Player  
 {
@@ -167,7 +166,6 @@ private:
 //==============================================================================
 // Class Aircraft
 // Form name: Aircraft
-// GUID: {CB059CAB-1476-46a5-99C3-1B655A1716E5}
 //==============================================================================
 class Aircraft : public AirVehicle  
 {
@@ -181,7 +179,6 @@ public:
 //==============================================================================
 // Class Helicopter
 // Form name: Helicopter
-// GUID: {E4CF7B1C-0DC0-4502-9AB1-1A2B676678C9}
 //==============================================================================
 class Helicopter : public AirVehicle  
 {
@@ -195,7 +192,6 @@ public:
 //==============================================================================
 // Class UnmannedAirVehicle
 // Form name: UnmannedAirVehicle
-// GUID: {28A87368-BEEE-4968-A8FF-A9D7276B02BF}
 //==============================================================================
 class UnmannedAirVehicle : public AirVehicle  
 {
@@ -208,4 +204,4 @@ public:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // !defined(__AIRVEHICLE_H__B57DCF1D_4A5C_4caf_B72B_B30D102517B8__)
+#endif

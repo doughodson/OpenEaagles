@@ -5,8 +5,8 @@
 //    Generic multi-variable functions:   Func1, Func2, Func3, Func4 and Func5
 //    Function storage:                   FStorage
 //------------------------------------------------------------------------------
-#ifndef __Functions_H_85107D9B_361F_4f52_BA57_D34EFEE62DEA__
-#define __Functions_H_85107D9B_361F_4f52_BA57_D34EFEE62DEA__
+#ifndef __Eaagles_Basic_Functions_H__
+#define __Eaagles_Basic_Functions_H__
 
 #include "openeaagles/basic/Object.h"
 
@@ -34,7 +34,6 @@ class Table;
 // Slots:
 //    table    <Table>     ! Optional LFI table
 //
-// GUID: {85107D9B-361F-4f52-BA57-D34EFEE62DEA}
 //==============================================================================
 class Function : public Object {
     DECLARE_SUBCLASS(Function, Object)
@@ -197,4 +196,4 @@ public:
 } // End Basic namespace
 } // End Eaagles namespace
 
-#endif  /* __Functions_H_85107D9B_361F_4f52_BA57_D34EFEE62DEA__ */
+#endif

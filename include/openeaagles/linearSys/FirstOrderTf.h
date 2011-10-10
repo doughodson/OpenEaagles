@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // FirstOrderTf class -- General first order transfer function
 //------------------------------------------------------------------------------
-#ifndef __LinearSystem_FirstOrderTf_H_306FB6C5_E8CA_479d_8B28_EBBB84617663__
-#define __LinearSystem_FirstOrderTf_H_306FB6C5_E8CA_479d_8B28_EBBB84617663__
+#ifndef __Eaagles_LinearSystem_FirstOrderTf_H__
+#define __Eaagles_LinearSystem_FirstOrderTf_H__
 
 #include "openeaagles/linearSys/DiffEquation.h"
 
@@ -21,7 +21,6 @@ namespace LinearSystem {
 //       ---------
 //       D1*s + D2
 //
-// GUID: {306FB6C5-E8CA-479d-8B28-EBBB84617663}
 //------------------------------------------------------------------------------
 class FirstOrderTf : public DiffEquation {
     DECLARE_SUBCLASS(FirstOrderTf,DiffEquation)
@@ -64,4 +63,4 @@ private:
 } // End LinearSystem namespace
 } // End Eaagles namespace
 
-#endif      /* __LinearSystem_FirstOrderTf_H_306FB6C5_E8CA_479d_8B28_EBBB84617663__ */
+#endif

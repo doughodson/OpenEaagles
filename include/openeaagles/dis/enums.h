@@ -1,9 +1,10 @@
 //--------------------------------------------------------------
 // IEEE Standard for Distributed Interactive Simulation (DIS)
 // Application Protocols - Enumerations for DIS PDU's
+// Standard: 1278.1a
 //--------------------------------------------------------------
-#ifndef _1278_1a_ENUM_H_
-#define _1278_1a_ENUM_H_
+#ifndef __Eaagles_Network_Dis_Enum_H__
+#define __Eaagles_Network_Dis_Enum_H__
 
 namespace Eaagles {
 namespace Network {

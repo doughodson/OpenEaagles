@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Classes: DynamicsModel, AerodynamicsModel
 //------------------------------------------------------------------------------
-#if !defined(__DynamicsModel_H_D3D8A752_A129_4968_B624_3C840397BB8A__)
-#define __DynamicsModel_H_D3D8A752_A129_4968_B624_3C840397BB8A__
+#ifndef __Eaagles_Simulation_DynamicsModel_H__
+#define __Eaagles_Simulation_DynamicsModel_H__
 
 #include "openeaagles/basic/Component.h"
 
@@ -32,7 +32,6 @@ namespace Simulation {
 //
 // Form name: DynamicsModel
 //
-// GUID: {D3D8A752-A129-4968-B624-3C840397BB8A}
 //==============================================================================
 class DynamicsModel : public Basic::Component  
 {
@@ -102,7 +101,6 @@ public:
 // Description:  Aerodynamics model for air vehicles and weapons
 //
 // Form name: AerodynamicsModel
-// GUID: {9B9205FF-5248-489e-8EDD-D6FA47FE1DD3}
 //==============================================================================
 class AerodynamicsModel : public DynamicsModel  
 {
@@ -168,4 +166,4 @@ public:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // !defined(__DynamicsModel_H_D3D8A752_A129_4968_B624_3C840397BB8A__)
+#endif

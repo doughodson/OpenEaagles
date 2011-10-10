@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // LimitFunc class -- General Limit function
 //------------------------------------------------------------------------------
-#ifndef __LinearSystem_LimitFunc_H_CCFC289D_E6DF_4512_BBCD_7AFADB2D744A__
-#define __LinearSystem_LimitFunc_H_CCFC289D_E6DF_4512_BBCD_7AFADB2D744A__
+#ifndef __Eaagles_LinearSystem_LimitFunc_H__
+#define __Eaagles_LinearSystem_LimitFunc_H__
 
 #include "openeaagles/linearSys/ScalerFunc.h"
 
@@ -15,7 +15,6 @@ namespace LinearSystem {
 //
 // Description: Genaric limits function: limits X to the upper and lower boundries.
 //
-// GUID: {CCFC289D-E6DF-4512-BBCD-7AFADB2D744A}
 //------------------------------------------------------------------------------
 class LimitFunc : public ScalerFunc {
     DECLARE_SUBCLASS(LimitFunc,ScalerFunc)
@@ -50,4 +49,4 @@ private:
 } // End LinearSystem namespace
 } // End Eaagles namespace
 
-#endif      /* __LinearSystem_LimitFunc_H_CCFC289D_E6DF_4512_BBCD_7AFADB2D744A__ */
+#endif

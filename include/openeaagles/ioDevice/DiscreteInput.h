@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: DiscreteInput
 //------------------------------------------------------------------------------
-#ifndef __OpenEaagles_IoDevice_DiscreteInput_H__
-#define __OpenEaagles_IoDevice_DiscreteInput_H__
+#ifndef __Eaagles_IoDevice_DiscreteInput_H__
+#define __Eaagles_IoDevice_DiscreteInput_H__
 
 #include "openeaagles/basic/IoAdapter.h"
 

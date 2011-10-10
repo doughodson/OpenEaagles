@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: IoData
 //------------------------------------------------------------------------------
-#ifndef __IoDevice_IoData_H_E1DC0070_62E7_4894_9B59_FE4DBB0580B7__
-#define __IoDevice_IoData_H_E1DC0070_62E7_4894_9B59_FE4DBB0580B7__
+#ifndef __Eaagles_IoDevice_IoData_H__
+#define __Eaagles_IoDevice_IoData_H__
 
 #include "openeaagles/basic/IoData.h"
 

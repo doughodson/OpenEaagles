@@ -1,13 +1,10 @@
 //------------------------------------------------------------------------------
 // Class:	JSBSimModel
-// Base class:	Basic::Object -> Component -> AirVehicle -> Aircraft -> JSBSimModel
-//
 // Description: JSBSim Model
 //  
-//
 //------------------------------------------------------------------------------
-#if !defined(__JSBSimModel_H_90E0035F_6052_4970_8189_E39C6287F88C__)
-#define __JSBSimModel_H_90E0035F_6052_4970_8189_E39C6287F88C__
+#ifndef __Eaagles_Vehicle_JSBSimModel_H__
+#define __Eaagles_Vehicle_JSBSimModel_H__
 
 #include "openeaagles/simulation/DynamicsModels.h"
 #include "openeaagles/basic/String.h"
@@ -118,4 +115,4 @@ private:
 } // End Vehicle namespace
 } // End Eaagles namespace
 
-#endif // !defined(__JSBSimModel_H_90E0035F_6052_4970_8189_E39C6287F88C__)
+#endif

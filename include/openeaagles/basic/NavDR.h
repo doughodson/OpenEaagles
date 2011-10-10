@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: NavDR
 //------------------------------------------------------------------------------
-#ifndef __EAGLES_BASIC_NAVDR_H__
-#define __EAGLES_BASIC_NAVDR_H__
+#ifndef __Eaagles_Basic_NavDR_H__
+#define __Eaagles_Basic_NavDR_H__
 
 #include "openeaagles/basic/support.h"
 
@@ -142,9 +142,8 @@ public:
 //--------------------------------------------------------------------------
 #include "openeaagles/basic/NavDR.inl"
 
-
 }  // end namespace Basic
 }  // end namespace Eaagles
 
-#endif  // NAVDR_H
+#endif
 

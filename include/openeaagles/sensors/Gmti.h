@@ -1,12 +1,10 @@
 //------------------------------------------------------------------------------
 // Class:	Gmti
-// Base class:	Basic::Object -> ... -> RfSystem -> RfSensor -> Radar -> Gmti
-//
 // Description: Very simple, Ground-Moving-Target-Indication (GMTI) mode radar
 //
 //------------------------------------------------------------------------------
-#ifndef __GMTI_H_B21DB31C_8951_4033_ADF8_F815144879D4__
-#define __GMTI_H_B21DB31C_8951_4033_ADF8_F815144879D4__
+#ifndef __Eaagles_Sensor_Gmti_H__
+#define __Eaagles_Sensor_Gmti_H__
 
 #include "openeaagles/simulation/Radar.h"
 
@@ -38,4 +36,4 @@ private:
 } // End Sensor namespace
 } // End Eaagles namespace
 
-#endif // __GMTI_H_B21DB31C_8951_4033_ADF8_F815144879D4__
+#endif

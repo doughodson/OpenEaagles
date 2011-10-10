@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Form function for the Keithley I/O device
 //------------------------------------------------------------------------------
-#ifndef __OpenEaagles_IoDevice_Keithley_FormFunc_H__
-#define __OpenEaagles_IoDevice_Keithley_FormFunc_H__
+#ifndef __Eaagles_IoDevice_Keithley_FormFunc_H__
+#define __Eaagles_IoDevice_Keithley_FormFunc_H__
 
 namespace Eaagles {
    namespace Basic { class Object; }

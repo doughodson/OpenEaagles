@@ -7,15 +7,13 @@
 //
 //    (see Object.h, parser.y, and varous OpenEaagles examples)
 //------------------------------------------------------------------------------
-#ifndef __OpenEaagles_Basic_FormFunc_H__
-#define __OpenEaagles_Basic_FormFunc_H__
+#ifndef __Eaagles_Basic_FormFunc_H__
+#define __Eaagles_Basic_FormFunc_H__
 
 namespace Eaagles {
    namespace Basic {
-
       class Object;
       extern Object* basicFormFunc(const char* formname);
-
    }
 }
 

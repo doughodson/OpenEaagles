@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: Gps
 //------------------------------------------------------------------------------
-#ifndef __Gps_H_A190E4FF_2EF4_4c81_9A5D_CB72D224062A__
-#define __Gps_H_A190E4FF_2EF4_4c81_9A5D_CB72D224062A__
+#ifndef __Eaagles_Simulation_Gps_H__
+#define __Eaagles_Simulation_Gps_H__
 
 #include "openeaagles/simulation/Navigation.h"
 
@@ -15,7 +15,6 @@ namespace Simulation {
 //
 // Description: Generic Global Positioning System (GPS) Data
 // Form name: Gps
-// GUID: {A190E4FF-2EF4-4c81-9A5D-CB72D224062A}
 //------------------------------------------------------------------------------
 class Gps : public Navigation
 {
@@ -101,4 +100,4 @@ private:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // __Gps_H_A190E4FF_2EF4_4c81_9A5D_CB72D224062A__
+#endif

@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: UsbJoystick
 //------------------------------------------------------------------------------
-#ifndef __IoDevice_UsbJoystick_H_A071745D_7C9C_40f6_8096_2B6BA37EF117__
-#define __IoDevice_UsbJoystick_H_A071745D_7C9C_40f6_8096_2B6BA37EF117__
+#ifndef __Eaagles_IoDevice_UsbJoystick_H__
+#define __Eaagles_IoDevice_UsbJoystick_H__
 
 #include "openeaagles/basic/IoDevice.h"
 
@@ -37,8 +37,6 @@ namespace IoDevice {
 // Slots:
 //    deviceIndex <Number>    Unit index
 //
-//
-// Guid: {A071745D-7C9C-40f6-8096-2B6BA37EF117}
 //------------------------------------------------------------------------------
 class UsbJoystick : public Basic::IoDevice {
     DECLARE_SUBCLASS(UsbJoystick,Basic::IoDevice)

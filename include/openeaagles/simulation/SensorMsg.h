@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: SensorMsg
 //------------------------------------------------------------------------------
-#ifndef __SensorMsg_H_46D5A3B8_0CA7_4d4d_AF0A_A994DC5182DA__
-#define __SensorMsg_H_46D5A3B8_0CA7_4d4d_AF0A_A994DC5182DA__
+#ifndef __Eaagles_Simulation_SensorMsg_H__
+#define __Eaagles_Simulation_SensorMsg_H__
 
 #include "openeaagles/basic/Object.h"
 
@@ -17,7 +17,6 @@ namespace Simulation {
 //              between sensors (i.e., antennas, IR seekers) and players.
 //
 // Form name: SensorMsg
-// GUID: {46D5A3B8-0CA7-4d4d-AF0A-A994DC5182DA}
 //------------------------------------------------------------------------------
 class SensorMsg : public Basic::Object  
 {
@@ -190,4 +189,4 @@ private:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // __SensorMsg_H_46D5A3B8_0CA7_4d4d_AF0A_A994DC5182DA__
+#endif

@@ -1,8 +1,8 @@
 //----------------------------------------------------
 // Classes: AngleOnlyTrackManager, AirAngleOnlytrkMgr
 //----------------------------------------------------
-#ifndef __AngleOnlyTrackManager_H_12DC56A3_66F9_4f8c_BF20_A85650934B23__
-#define __AngleOnlyTrackManager_H_12DC56A3_66F9_4f8c_BF20_A85650934B23__
+#ifndef __Eaagles_Simulation_AngleOnlyTrackManager_H__
+#define __Eaagles_Simulation_AngleOnlyTrackManager_H__
 
 #include "openeaagles/simulation/TrackManager.h"
 
@@ -20,7 +20,6 @@ namespace Simulation {
 //    azimuthBin    <Number>   ! Azimuth Bin (default: PI)
 //    elevationBin  <Number>   ! Elevation Bin (default: PI)
 //
-// GUID: {12DC56A3-66F9-4f8c-BF20-A85650934B23}
 //==============================================================================
 class AngleOnlyTrackManager : public TrackManager  
 {
@@ -66,7 +65,6 @@ private:
 // Description: Track Manager for A/A modes (e.g., TWS, ACM, SST)
 // Form name: AirAngleOnlyTrkMgr
 //
-// GUID: EEC6F6A1_DB0F_4a08_8B34_078F3DCC6025
 //==============================================================================
 class AirAngleOnlyTrkMgr : public AngleOnlyTrackManager  
 {
@@ -112,4 +110,4 @@ private:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // __AngleOnlyTrackManager_H_12DC56A3_66F9_4f8c_BF20_A85650934B23__
+#endif

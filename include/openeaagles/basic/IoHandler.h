@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: IoHandler
 //------------------------------------------------------------------------------
-#ifndef __Basic_IoHandler_H_93996C71_868B_4205_B00F_5E3C2674EB63__
-#define __Basic_IoHandler_H_93996C71_868B_4205_B00F_5E3C2674EB63__
+#ifndef __Eaagles_Basic_IoHandler_H__
+#define __Eaagles_Basic_IoHandler_H__
 
 #include "openeaagles/basic/Component.h"
 
@@ -57,7 +57,6 @@ namespace Basic {
 //    rate        <Frequency>    ! Optional thread's update rate (default: 50hz)
 //    priority    <Number>       ! Optional thread's priority: lowest(0.0) to highest(1.0)  (default: 0.5 )
 //
-// Guid: {93996C71-868B-4205-B00F-5E3C2674EB63}
 //------------------------------------------------------------------------------
 class IoHandler : public Component {
    DECLARE_SUBCLASS(IoHandler,Component)

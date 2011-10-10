@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: Ai2DiSwitch
 //------------------------------------------------------------------------------
-#ifndef __IoDevice_Ai2DiSwitch_H_49DC7798_8CA4_4de3_A692_8421AB2BEDE1__
-#define __IoDevice_Ai2DiSwitch_H_49DC7798_8CA4_4de3_A692_8421AB2BEDE1__
+#ifndef __Eaagles_IoDevice_Ai2DiSwitch_H__
+#define __Eaagles_IoDevice_Ai2DiSwitch_H__
 
 #include "openeaagles/basic/IoAdapter.h"
 
@@ -37,7 +37,6 @@ namespace IoDevice {
 //      level        <Number>    Level to switch DI (default: 0)
 //      inverted     <Boolean>   Inverted bit flag (default: false)
 //
-// GUID: {49DC7798-8CA4-4de3-A692-8421AB2BEDE1}
 //------------------------------------------------------------------------------
 class Ai2DiSwitch : public Basic::IoAdapter {
    DECLARE_SUBCLASS(Ai2DiSwitch,Basic::IoAdapter)
@@ -76,7 +75,7 @@ private:
    bool         invert;       // Inverted bit flag
 };
 
-} // end IoDevice
+} // end IoDevice namespace
 } // end Eaagles namespace
 
 #endif

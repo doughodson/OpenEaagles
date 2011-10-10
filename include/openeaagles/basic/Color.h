@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class:  Color
 //------------------------------------------------------------------------------
-#ifndef __Color_H_68A6D335_3BF1_4386_9992_D2C87EB5EFB0__
-#define __Color_H_68A6D335_3BF1_4386_9992_D2C87EB5EFB0__
+#ifndef __Eaagles_Basic_Color_H__
+#define __Eaagles_Basic_Color_H__
 
 #include "openeaagles/basic/Object.h"
 #include "openeaagles/basic/osg/Vec3"
@@ -91,4 +91,4 @@ protected:
 } // End Basic namespace
 } // End Eaagles namespace
 
-#endif      /* __Color_H_68A6D335_3BF1_4386_9992_D2C87EB5EFB0__ */
+#endif

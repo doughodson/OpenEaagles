@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Limit11 function
 //------------------------------------------------------------------------------
-#ifndef __LinearSystem_Limit11_H_EDDAC812_2D80_4baf_971E_229F1272592B__
-#define __LinearSystem_Limit11_H_EDDAC812_2D80_4baf_971E_229F1272592B__
+#ifndef __Eaagles_LinearSystem_Limit11_H__
+#define __Eaagles_LinearSystem_Limit11_H__
 
 #include "openeaagles/linearSys/LimitFunc.h"
 
@@ -15,7 +15,6 @@ namespace LinearSystem {
 //
 // Description: Limits between -1 and 1, enclusive
 //
-// GUID: {EDDAC812-2D80-4baf-971E-229F1272592B}
 //------------------------------------------------------------------------------
 class Limit11 : public LimitFunc {
     DECLARE_SUBCLASS(Limit11,LimitFunc)
@@ -27,4 +26,4 @@ public:
 } // End LinearSystem namespace
 } // End Eaagles namespace
 
-#endif      /* __LinearSystem_Limit11_H_EDDAC812_2D80_4baf_971E_229F1272592B__ */
+#endif

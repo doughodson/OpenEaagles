@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: ExternalStore
 //------------------------------------------------------------------------------
-#ifndef __ExternalStore_H_61E93E3C_90E2_405a_B2E3_9E7BA25F6683__
-#define __ExternalStore_H_61E93E3C_90E2_405a_B2E3_9E7BA25F6683__
+#ifndef __Eaagles_Simulation_ExternalStore_H__
+#define __Eaagles_Simulation_ExternalStore_H__
 
 #include "openeaagles/simulation/System.h"
 
@@ -33,7 +33,6 @@ namespace Simulation {
 //    2) ExternalStore objects are not released, but may be jettisoned. If the object
 //       if jettisoned, it will no longer be updated.
 //
-// GUID: {61E93E3C-90E2-405a-B2E3-9E7BA25F6683}
 //------------------------------------------------------------------------------
 class ExternalStore : public System
 {
@@ -72,4 +71,4 @@ private:
 } // end Simulation namespace
 } // end Eaagles namespace
 
-#endif // __ExternalStore_H_61E93E3C_90E2_405a_B2E3_9E7BA25F6683__
+#endif
