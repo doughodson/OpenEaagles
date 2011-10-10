@@ -1,8 +1,8 @@
+
 #include "openeaagles/instruments/eadi3D/Eadi3DPage.h"
 #include "openeaagles/basic/Pair.h"
 #include "openeaagles/basicGL/Display.h"
 #include "openeaagles/basic/Number.h"
-
 
 // setup local variables and static variables
 #define RADIUS_180      1.625                   /* 180 in view */
@@ -382,17 +382,20 @@ void Eadi3DPage::draw()
     BasicGL::Display* dsp = getDisplay();
     if (dsp != 0) {
 
-	eadiObjs.makeObjects();
+        eadiObjs.makeObjects();
 
-        int vpWidth;
-        int vpHeight;
+        GLsizei vpWidth;
+        GLsizei vpHeight;
         dsp->getViewportSize(&vpWidth, &vpHeight);
         LCreal ratio = (LCreal) vpWidth / (LCreal) vpHeight;
 
-  bool depthTest = false;
-        if (glIsEnabled(GL_DEPTH_TEST)) depthTest = true;
+        bool depthTest = false;
+        if (glIsEnabled(GL_DEPTH_TEST))
+            depthTest = true;
 
-	    if (depthTest) glDisable(GL_DEPTH_TEST);
+        if (depthTest)
+            glDisable(GL_DEPTH_TEST);
+
         glMatrixMode(GL_PROJECTION);
         glPushMatrix();
         glLoadIdentity();
@@ -400,21 +403,22 @@ void Eadi3DPage::draw()
         glMatrixMode(GL_MODELVIEW);
         glPushMatrix();
         glLoadIdentity();
-            globeBall(pitchDEG, rollDEG, pitchSteeringCmd, rollSteeringCmd, pitchSteeringValid, rollSteeringValid, landingMode);        
-    
+        globeBall(pitchDEG, rollDEG, pitchSteeringCmd, rollSteeringCmd, pitchSteeringValid, rollSteeringValid, landingMode);        
+
         background();
-    
-            char* airSpeedType = "C";
+
+        const char* airSpeedType = "C";
         scales(glideslopeDevDOTS, localizerDevDOTS, turnRateDOTS, slipIndDOTS, glideslopeDevValid, localizerDevValid, landingMode);
-            windows(airspeedKTS, altitudeFT, aoaDEG, machNo, vviFPM, airSpeedType, Gload);
-            LCreal hdgCmd = 0.0;
-            heading(headingDEG, hdgCmd);
+        windows(airspeedKTS, altitudeFT, aoaDEG, machNo, vviFPM, airSpeedType, Gload);
+        LCreal hdgCmd = 0.0;
+        heading(headingDEG, hdgCmd);
 
         glMatrixMode(GL_PROJECTION);
         glPopMatrix();
         glMatrixMode(GL_MODELVIEW);
         glPopMatrix();
-	    if (depthTest) glEnable(GL_DEPTH_TEST);
+        if (depthTest)
+            glEnable(GL_DEPTH_TEST);
 
         // now draw our components
         BaseClass::draw();
@@ -1097,3 +1101,5 @@ void Eadi3DPage::setLocalizerValid(const bool locValid)
 
 }; // end Instruments namespace
 }; // end Eaagles namespace
+
+
