@@ -401,8 +401,6 @@ void BitmapFont::reverseBitmapOrder(GLubyte* bitmap, int numBitmapBytes, int num
 // Load the font for one character
 GLubyte* BitmapFont::loadTypeFace(const GLint index, const GLenum reverse)
 {
-   int i;
-
    // If no font to load, return
    if (fontMap[index] == 0) return 0;
 
@@ -422,18 +420,24 @@ GLubyte* BitmapFont::loadTypeFace(const GLint index, const GLenum reverse)
       return 0;
    }
 
+   // used to store the num of input items successfully matched and assigned
+   // by fscanf function
+   int nItemsMatched;
+
    // Calculate the size of the font
    int width1;
-   fscanf(fp, "%d\n", &width1);
+   nItemsMatched = fscanf(fp, "%d\n", &width1);
 
    int height1;
-   fscanf(fp, "%d\n", &height1);
+   nItemsMatched = fscanf(fp, "%d\n", &height1);
 
    int numBytesWide = int(ceil(double(width1) / 8.0));
    int numFileBytes = numBytesWide * height1;
    int numFontBytes = numBytesWide * getBitmapHeight();
 
    GLubyte* bitmap = new GLubyte[numFontBytes];
+
+   unsigned int i;  // index
 
    // Pad rest of the height
    int diff = numFontBytes - numFileBytes;
@@ -446,7 +450,7 @@ GLubyte* BitmapFont::loadTypeFace(const GLint index, const GLenum reverse)
    for (; i < numFontBytes; i++)
    {
       int value;
-      fscanf(fp, "0x%x\n", &value);
+      nItemsMatched = fscanf(fp, "0x%x\n", &value);
       bitmap[i] = reverse ? GLubyte(~value) : GLubyte(value);
    }
 

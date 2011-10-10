@@ -1,0 +1,372 @@
+/home/me/oe/OpenEaagles
+for subdir in basic basicGL instruments dafif ioDevice linearSys  simulation sensors terrain dis vehicles maps  "gui/glut" otw; do \
+	  echo making all in $subdir; \
+	  (cd $subdir && make) || exit 1; \
+	done
+making all in basic
+make[1]: Entering directory `/home/me/oe/OpenEaagles/src/basic'
+for subdir in osg units distributions; do \
+	  echo making subdirs in $subdir; \
+	  (cd $subdir && make) || exit 1; \
+	done
+making subdirs in osg
+make[2]: Entering directory `/home/me/oe/OpenEaagles/src/basic/osg'
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Math.o Math.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Math.o
+a - Math.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Matrixd.o Matrixd.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Matrixd.o
+a - Matrixd.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o MatrixDecomposition.o MatrixDecomposition.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a MatrixDecomposition.o
+a - MatrixDecomposition.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Matrixf.o Matrixf.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Matrixf.o
+a - Matrixf.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Quat.o Quat.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Quat.o
+a - Quat.o
+rm MatrixDecomposition.o Matrixd.o Quat.o Math.o Matrixf.o
+make[2]: Leaving directory `/home/me/oe/OpenEaagles/src/basic/osg'
+making subdirs in units
+make[2]: Entering directory `/home/me/oe/OpenEaagles/src/basic/units'
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Angles.o Angles.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Angles.o
+a - Angles.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o AngularVelocity.o AngularVelocity.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a AngularVelocity.o
+a - AngularVelocity.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Areas.o Areas.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Areas.o
+a - Areas.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Density.o Density.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Density.o
+a - Density.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Distances.o Distances.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Distances.o
+a - Distances.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Energies.o Energies.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Energies.o
+a - Energies.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o FlowRate.o FlowRate.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a FlowRate.o
+a - FlowRate.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Forces.o Forces.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Forces.o
+a - Forces.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Frequencies.o Frequencies.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Frequencies.o
+a - Frequencies.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o LinearVelocity.o LinearVelocity.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a LinearVelocity.o
+a - LinearVelocity.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Masses.o Masses.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Masses.o
+a - Masses.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Powers.o Powers.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Powers.o
+a - Powers.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Times.o Times.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Times.o
+a - Times.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Volumes.o Volumes.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Volumes.o
+a - Volumes.o
+rm Angles.o Density.o Masses.o Times.o Forces.o AngularVelocity.o Volumes.o Distances.o FlowRate.o Frequencies.o Energies.o Areas.o LinearVelocity.o Powers.o
+make[2]: Leaving directory `/home/me/oe/OpenEaagles/src/basic/units'
+making subdirs in distributions
+make[2]: Entering directory `/home/me/oe/OpenEaagles/src/basic/distributions'
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Exponential.o Exponential.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Exponential.o
+a - Exponential.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Lognormal.o Lognormal.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Lognormal.o
+a - Lognormal.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Pareto.o Pareto.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Pareto.o
+a - Pareto.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Uniform.o Uniform.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Uniform.o
+a - Uniform.o
+rm Uniform.o Lognormal.o Pareto.o Exponential.o
+make[2]: Leaving directory `/home/me/oe/OpenEaagles/src/basic/distributions'
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o support.o support.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a support.o
+a - support.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o basicFF.o basicFF.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a basicFF.o
+a - basicFF.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o BcHandler.o BcHandler.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a BcHandler.o
+a - BcHandler.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Boolean.o Boolean.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Boolean.o
+a - Boolean.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Cie.o Cie.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Cie.o
+a - Cie.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Cmy.o Cmy.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Cmy.o
+a - Cmy.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Color.o Color.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Color.o
+a - Color.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Component.o Component.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Component.o
+a - Component.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Decibel.o Decibel.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Decibel.o
+a - Decibel.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o EarthModel.o EarthModel.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a EarthModel.o
+a - EarthModel.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o FileReader.o FileReader.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a FileReader.o
+a - FileReader.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Float.o Float.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Float.o
+a - Float.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Functions.o Functions.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Functions.o
+a - Functions.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Hls.o Hls.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Hls.o
+a - Hls.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Hsva.o Hsva.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Hsva.o
+a - Hsva.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Hsv.o Hsv.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Hsv.o
+a - Hsv.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Identifier.o Identifier.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Identifier.o
+a - Identifier.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Integer.o Integer.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Integer.o
+a - Integer.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o IoAdapter.o IoAdapter.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a IoAdapter.o
+a - IoAdapter.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o IoData.o IoData.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a IoData.o
+a - IoData.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o IoDevice.o IoDevice.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a IoDevice.o
+a - IoDevice.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o IoHandler.o IoHandler.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a IoHandler.o
+a - IoHandler.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o LatLon.o LatLon.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a LatLon.o
+a - LatLon.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Lexical.o Lexical.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Lexical.o
+a - Lexical.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o List.o List.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a List.o
+a - List.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Locus.o Locus.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Locus.o
+a - Locus.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Logger.o Logger.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Logger.o
+a - Logger.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Matrix.o Matrix.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Matrix.o
+a - Matrix.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o McHandler.o McHandler.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a McHandler.o
+a - McHandler.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Nav.o Nav.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Nav.o
+a - Nav.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o NavDR.o NavDR.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a NavDR.o
+a - NavDR.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o NetHandler.o NetHandler.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a NetHandler.o
+a - NetHandler.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Number.o Number.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Number.o
+a - Number.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Object.o Object.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Object.o
+a - Object.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Operators.o Operators.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Operators.o
+a - Operators.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Pair.o Pair.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Pair.o
+a - Pair.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o PairStream.o PairStream.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a PairStream.o
+a - PairStream.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Parser.o Parser.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Parser.o
+a - Parser.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Rand.o Rand.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Rand.o
+a - Rand.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Rgba.o Rgba.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Rgba.o
+a - Rgba.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Rgb.o Rgb.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Rgb.o
+a - Rgb.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Rng.o Rng.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Rng.o
+a - Rng.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o SlotTable.o SlotTable.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a SlotTable.o
+a - SlotTable.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Stack.o Stack.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Stack.o
+a - Stack.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Statistic.o Statistic.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Statistic.o
+a - Statistic.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o StateMachine.o StateMachine.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a StateMachine.o
+a - StateMachine.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o String.o String.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a String.o
+a - String.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Tables.o Tables.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Tables.o
+a - Tables.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o TcpHandler.o TcpHandler.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a TcpHandler.o
+a - TcpHandler.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Terrain.o Terrain.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Terrain.o
+a - Terrain.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Thread.o Thread.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Thread.o
+a - Thread.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o ThreadPool.o ThreadPool.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a ThreadPool.o
+a - ThreadPool.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Timers.o Timers.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Timers.o
+a - Timers.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Transforms.o Transforms.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Transforms.o
+a - Transforms.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o UdpHandler.o UdpHandler.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a UdpHandler.o
+a - UdpHandler.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Vectors.o Vectors.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Vectors.o
+a - Vectors.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Yiq.o Yiq.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasic.a Yiq.o
+a - Yiq.o
+rm BcHandler.o McHandler.o Rng.o Object.o support.o Operators.o UdpHandler.o IoDevice.o Vectors.o EarthModel.o Terrain.o Logger.o Nav.o Identifier.o Component.o Stack.o Rgb.o IoAdapter.o Locus.o Number.o NavDR.o Matrix.o IoHandler.o TcpHandler.o Parser.o Decibel.o Color.o SlotTable.o PairStream.o Statistic.o Cmy.o Functions.o FileReader.o Boolean.o Integer.o Rgba.o IoData.o List.o Lexical.o NetHandler.o String.o LatLon.o Thread.o Timers.o Yiq.o Tables.o Float.o Hsv.o StateMachine.o ThreadPool.o Cie.o Pair.o basicFF.o Hls.o Rand.o Hsva.o Transforms.o
+make[1]: Leaving directory `/home/me/oe/OpenEaagles/src/basic'
+making all in basicGL
+make[1]: Entering directory `/home/me/oe/OpenEaagles/src/basicGL'
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread -I/usr/include/freetype2  -c -o basicGLFF.o basicGLFF.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasicGL.a basicGLFF.o
+a - basicGLFF.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread -I/usr/include/freetype2  -c -o BmpTexture.o BmpTexture.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasicGL.a BmpTexture.o
+a - BmpTexture.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread -I/usr/include/freetype2  -c -o BitmapFont.o BitmapFont.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasicGL.a BitmapFont.o
+a - BitmapFont.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread -I/usr/include/freetype2  -c -o Clip3D.o Clip3D.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasicGL.a Clip3D.o
+a - Clip3D.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread -I/usr/include/freetype2  -c -o ColorGradient.o ColorGradient.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasicGL.a ColorGradient.o
+a - ColorGradient.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread -I/usr/include/freetype2  -c -o ColorRotary.o ColorRotary.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasicGL.a ColorRotary.o
+a - ColorRotary.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread -I/usr/include/freetype2  -c -o Display.o Display.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasicGL.a Display.o
+a - Display.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread -I/usr/include/freetype2  -c -o Field.o Field.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasicGL.a Field.o
+a - Field.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread -I/usr/include/freetype2  -c -o Font.o Font.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasicGL.a Font.o
+a - Font.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread -I/usr/include/freetype2  -c -o FtglFonts.o FtglFonts.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasicGL.a FtglFonts.o
+a - FtglFonts.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread -I/usr/include/freetype2  -c -o Graphic.o Graphic.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasicGL.a Graphic.o
+a - Graphic.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread -I/usr/include/freetype2  -c -o Image.o Image.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasicGL.a Image.o
+a - Image.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread -I/usr/include/freetype2  -c -o Material.o Material.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasicGL.a Material.o
+a - Material.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread -I/usr/include/freetype2  -c -o Page.o Page.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasicGL.a Page.o
+a - Page.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread -I/usr/include/freetype2  -c -o Polygon.o Polygon.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasicGL.a Polygon.o
+a - Polygon.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread -I/usr/include/freetype2  -c -o Readouts.o Readouts.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasicGL.a Readouts.o
+a - Readouts.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread -I/usr/include/freetype2  -c -o Reformat.o Reformat.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasicGL.a Reformat.o
+a - Reformat.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread -I/usr/include/freetype2  -c -o Rotators.o Rotators.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasicGL.a Rotators.o
+a - Rotators.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread -I/usr/include/freetype2  -c -o Scanline.o Scanline.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasicGL.a Scanline.o
+a - Scanline.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread -I/usr/include/freetype2  -c -o Shapes.o Shapes.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasicGL.a Shapes.o
+a - Shapes.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread -I/usr/include/freetype2  -c -o StrokeFont.o StrokeFont.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasicGL.a StrokeFont.o
+a - StrokeFont.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread -I/usr/include/freetype2  -c -o Texture.o Texture.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasicGL.a Texture.o
+a - Texture.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread -I/usr/include/freetype2  -c -o MfdPage.o MfdPage.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasicGL.a MfdPage.o
+a - MfdPage.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread -I/usr/include/freetype2  -c -o MapPage.o MapPage.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasicGL.a MapPage.o
+a - MapPage.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread -I/usr/include/freetype2  -c -o SymbolLoader.o SymbolLoader.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasicGL.a SymbolLoader.o
+a - SymbolLoader.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread -I/usr/include/freetype2  -c -o Translator.o Translator.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeBasicGL.a Translator.o
+a - Translator.o
+rm Field.o MfdPage.o Reformat.o Polygon.o StrokeFont.o SymbolLoader.o ColorRotary.o BmpTexture.o Scanline.o FtglFonts.o Shapes.o Texture.o Graphic.o Readouts.o Translator.o Page.o Image.o Display.o BitmapFont.o ColorGradient.o Font.o basicGLFF.o Clip3D.o Rotators.o MapPage.o Material.o
+make[1]: Leaving directory `/home/me/oe/OpenEaagles/src/basicGL'
+making all in instruments
+make[1]: Entering directory `/home/me/oe/OpenEaagles/src/instruments'
+for subdir in adi buttons dials landingGear maps eng gauges eadi3D ; do \
+	  echo making subdirs in $subdir; \
+	  (cd $subdir && make) || exit 1; \
+	done
+making subdirs in adi
+make[2]: Entering directory `/home/me/oe/OpenEaagles/src/instruments/adi'
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Adi.o Adi.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeInstruments.a Adi.o
+a - Adi.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o GhostHorizon.o GhostHorizon.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeInstruments.a GhostHorizon.o
+a - GhostHorizon.o
+rm Adi.o GhostHorizon.o
+make[2]: Leaving directory `/home/me/oe/OpenEaagles/src/instruments/adi'
+making subdirs in buttons
+make[2]: Entering directory `/home/me/oe/OpenEaagles/src/instruments/buttons'
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o Button.o Button.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeInstruments.a Button.o
+a - Button.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o PushButton.o PushButton.cpp
+ar rv /home/me/oe/OpenEaagles/lib/linux/liboeInstruments.a PushButton.o
+a - PushButton.o
+g++  -I/home/me/oe/OpenEaagles/include -I/usr/local/include -O3 -Wno-long-long -pthread  -c -o RotarySwitch.o RotarySwitch.cpp
