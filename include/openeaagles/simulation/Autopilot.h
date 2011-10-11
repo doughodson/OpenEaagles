@@ -109,7 +109,7 @@ public:
    virtual double getLeadFollowingDistanceTrail() const { return -leadOffset[0]; }
    virtual double getLeadFollowingDistanceRight() const { return  leadOffset[1]; }
    virtual double getLeadFollowingDeltaAltitude() const { return -leadOffset[2]; }
-   virtual bool isFollowTheLeadModeOn() { return (followLeadModeOn && getLeadPlayer() != 0); }  // "Follow the lead" mode flag
+   virtual bool isFollowTheLeadModeOn()           const { return followLeadModeOn; }  // "Follow the lead" mode flag
    virtual const Basic::Identifier* getLeadPlayerName() { return leadName; }
    virtual const Player* getLeadPlayer();                            // Our lead player
 
@@ -117,7 +117,8 @@ public:
    virtual bool setLeadFollowingDistanceRight(const double right);   // Desired distance (meters) right(+) of the lead
    virtual bool setLeadFollowingDeltaAltitude(const double above);   // Desired delta altitude (meters) above(+) the lead
    virtual bool setFollowTheLeadMode(const bool f);                  // "Follow the lead" mode flag
-   virtual bool setLeadPlayerName(const Basic::Identifier* const);      // Name of our lead player
+   virtual bool setLeadPlayerName(const Basic::Identifier* const);   // Changes the name of our lead player
+   virtual bool setLeadPlayerName(const char* x);                    // set the lead player name by characters
    virtual bool setLeadPlayer(const Player* const);                  // Our lead player
 
    virtual bool isRollSasOn() const { return rollSasOn; }
@@ -168,31 +169,32 @@ public:
                double* const mlon      // Out:  Mirror point longitude (degs)
                );
 
-
-   // Slot functions
-   virtual bool setSlotNavMode(const Basic::Number* const msg);                       // Nav (route follow) mode flag
-   virtual bool setSlotHoldAltitude(const Basic::Distance* const msg);                // Hold altiude
-   virtual bool setSlotAltitudeHoldMode(const Basic::Number* const msg);              // Altitude hold mode flag
-   virtual bool setSlotHoldVelocityKts(const Basic::Number* const msg);               // Hold velocity (kts)
-   virtual bool setSlotVelocityHoldMode(const Basic::Number* const msg);              // Velocity hold mode flag
-   virtual bool setSlotHoldHeading(const Basic::Angle* const msg);                    // Hold heading
-   virtual bool setSlotHeadingHoldMode(const Basic::Number* const msg);               // Heading altitude mode flag
-   virtual bool setSlotLoiterMode(const Basic::Number* const msg);                    // Loiter mode flag
-   virtual bool setSlotLoiterPatternLength(const Basic::Distance* const msg);         // Loiter orbit pattern length
-   virtual bool setSlotLoiterPatternLength(const Basic::Number* const msg);           // Loiter orbit pattern length (NM)
-   virtual bool setSlotLoiterPatternCcwFlag(const Basic::Number* const msg);          // Loiter orbit pattern counter-clockwise flag
-   virtual bool setSlotLeadFollowingDistanceTrail(const Basic::Distance* const msg);  // Desired distance behind(+) the lead
-   virtual bool setSlotLeadFollowingDistanceTrail(const Basic::Number* const msg);    // Desired distance (meters) behind(+) the lead
-   virtual bool setSlotLeadFollowingDistanceRight(const Basic::Distance* const msg);  // Desired distance right(+) of the lead
-   virtual bool setSlotLeadFollowingDistanceRight(const Basic::Number* const msg);    // Desired distance (meters) right(+) of the lead
-   virtual bool setSlotLeadFollowingDeltaAltitude(const Basic::Distance* const msg);  // Desired delta altitude above(+) the lead
-   virtual bool setSlotLeadFollowingDeltaAltitude(const Basic::Number* const msg);    // Desired delta altitude (meters) above(+) the lead
-   virtual bool setSlotFollowTheLeadMode(const Basic::Number* const msg);             // "Follow the lead" mode flag
-
    // Basic::Component interface
    virtual void reset();
     
 protected:
+   // Slot functions
+   bool setSlotNavMode(const Basic::Number* const msg);                       // Nav (route follow) mode flag
+   bool setSlotHoldAltitude(const Basic::Distance* const msg);                // Hold altiude
+   bool setSlotAltitudeHoldMode(const Basic::Number* const msg);              // Altitude hold mode flag
+   bool setSlotHoldVelocityKts(const Basic::Number* const msg);               // Hold velocity (kts)
+   bool setSlotVelocityHoldMode(const Basic::Number* const msg);              // Velocity hold mode flag
+   bool setSlotHoldHeading(const Basic::Angle* const msg);                    // Hold heading
+   bool setSlotHeadingHoldMode(const Basic::Number* const msg);               // Heading altitude mode flag
+   bool setSlotLoiterMode(const Basic::Number* const msg);                    // Loiter mode flag
+   bool setSlotLoiterPatternLength(const Basic::Distance* const msg);         // Loiter orbit pattern length
+   bool setSlotLoiterPatternLength(const Basic::Number* const msg);           // Loiter orbit pattern length (NM)
+   bool setSlotLoiterPatternCcwFlag(const Basic::Number* const msg);          // Loiter orbit pattern counter-clockwise flag
+   bool setSlotLeadFollowingDistanceTrail(const Basic::Distance* const msg);  // Desired distance behind(+) the lead
+   bool setSlotLeadFollowingDistanceTrail(const Basic::Number* const msg);    // Desired distance (meters) behind(+) the lead
+   bool setSlotLeadFollowingDistanceRight(const Basic::Distance* const msg);  // Desired distance right(+) of the lead
+   bool setSlotLeadFollowingDistanceRight(const Basic::Number* const msg);    // Desired distance (meters) right(+) of the lead
+   bool setSlotLeadFollowingDeltaAltitude(const Basic::Distance* const msg);  // Desired delta altitude above(+) the lead
+   bool setSlotLeadFollowingDeltaAltitude(const Basic::Number* const msg);    // Desired delta altitude (meters) above(+) the lead
+   bool setSlotLeadPlayerName(const Basic::Identifier* const msg);            // Name of the player we are following
+   bool setSlotFollowTheLeadMode(const Basic::Number* const msg);             // "Follow the lead" mode flag
+
+
    virtual bool modeManager();
    virtual bool headingController();
    virtual bool altitudeController();
