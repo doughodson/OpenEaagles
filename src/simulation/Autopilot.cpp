@@ -107,6 +107,7 @@ Autopilot::Autopilot()
    loiterMirrorLon = 0;
    loiterState = 0;
    loiterLength = 10.0f;
+   loiterCourse = 0;
    loiterCcwFlag = false;
 
    setLeadFollowingDistanceTrail( Basic::Distance::NM2M );             // Default: 1 NM trail
@@ -163,6 +164,7 @@ void Autopilot::copyData(const Autopilot& org, const bool cc)
    loiterState = org.loiterState;
    loiterLength = org.loiterLength;
    loiterCcwFlag = org.loiterCcwFlag;
+   loiterCourse = org.loiterCourse;
 
    leadOffset = org.leadOffset;
    setLeadPlayer( org.lead );
@@ -305,9 +307,10 @@ bool Autopilot::processModeLoiter()
          // 2) computer the mirror point
          loiterAnchorLat = navLat;
          loiterAnchorLon = navLon;
+         loiterCourse = nav->getHeadingDeg();
          computerOrbitHoldingPatternMirrorWaypoint(
             loiterAnchorLat, loiterAnchorLon,            // Anchor point
-            nav->getHeadingDeg(),                        // In-bound course
+            loiterCourse,                                // In-bound course
             getLoiterPatternLengthNM(),                  // Min length (nm)
             nav->getTrueAirspeedKts(),                   // Speed (kts)
             isLoiterPatternCounterClockwise(),           // Counter-Clockwise pattern flag
@@ -750,7 +753,7 @@ bool Autopilot::requestLoiter(const double anchorLat, const double anchorLon, co
 
    const Navigation* nav = getOwnship()->getNavigation();
    if (nav != 0) {
-
+      loiterCourse = course;
       ok = setLoiterMode(true);
       if (ok) {
          loiterAnchorLat = anchorLat;
@@ -779,6 +782,12 @@ bool Autopilot::getLoiterPointAnchors(double* const anLat, double* const anLon, 
    if (mAnLat != 0) *mAnLat = loiterMirrorLat;
    if (mAnLon != 0) *mAnLon = loiterMirrorLon;
    return true;
+}
+
+// gets the loiter inbound course
+double Autopilot::getLoiterCourse()
+{
+    return loiterCourse;
 }
 
 // Sets the loiter pattern length (nm)

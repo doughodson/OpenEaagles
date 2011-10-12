@@ -93,6 +93,7 @@ public:
 
    // get our loiter point anchor points
    virtual bool getLoiterPointAnchors(double* const anLat, double* const anLon, double* const mAnLat, double* const mAnLon) const;
+   virtual double getLoiterCourse();
 
    // Returns true if the Loiter pattern is counter-clockwise
    virtual bool isLoiterPatternCounterClockwise() const { return loiterCcwFlag; }
@@ -243,6 +244,7 @@ private:
    unsigned int loiterState;  // Loiter state machine
    double   loiterLength;     // Loiter pattern length (nm)
    bool     loiterCcwFlag;    // Loiter pattern counter-clockwise flag 
+   double   loiterCourse;     // Loiter course we started the loiter pattern on (degs)
 
    // Follow that lead mode data
    osg::Vec3d leadOffset;     // Offsets from lead player (meters) Default -1NM and 2NM and 2000ft
