@@ -607,7 +607,10 @@ bool SymbolLoader:: setSymbolVisible(const int idx, const char* name, bool visib
    if (idx >= 1 && idx <= MAX_SYMBOLS) {
       const int i = (idx - 1);
       if (symbols[i] != 0) {
-
+         // if no name is passed, the symbol is invisible, otherwise just
+         // parts are
+         if (name == 0) symbols[i]->setVisible(visibility);
+        
          // Get its graphical component
          Basic::Pair* p = symbols[i]->getSymbolPair();
          if (p != 0) {
