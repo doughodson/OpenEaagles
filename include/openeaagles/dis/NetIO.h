@@ -4,8 +4,8 @@
 //    Dis::Nib    -- DIS Network Interface Block class
 //    Dis::Ntm    -- DIS Type Mapper class
 //------------------------------------------------------------------------------
-#ifndef __Dis_NetIO_H_C13329F6_3B9F_402a_B973_5D37A772E12D__
-#define __Dis_NetIO_H_C13329F6_3B9F_402a_B973_5D37A772E12D__
+#ifndef __Eaagles_Network_Dis_NetIO_H__
+#define __Eaagles_Network_Dis_NetIO_H__
 
 #include "openeaagles/simulation/NetIO.h"
 
@@ -373,4 +373,4 @@ private:
 } // End Network namespace
 } // End Eaagles namespace
 
-#endif // __Dis_NetIO_H_C13329F6_3B9F_402a_B973_5D37A772E12D__
+#endif

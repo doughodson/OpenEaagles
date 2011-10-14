@@ -24,7 +24,7 @@ END_SLOT_MAP()
 
 
 // initialization of static private members
-unsigned long Rng::state[n] = {0x0UL};
+unsigned int Rng::state[n] = {0x0UL};
 int Rng::p = 0;
 bool Rng::init = false;
 
@@ -39,14 +39,14 @@ Rng::Rng()
 }
 
 // constructor with 32 bit int as seed
-Rng::Rng(unsigned long s)
+Rng::Rng(unsigned int s)
 {
   seed(s);
   init = true;
 }
 
 // constructor with array of size 32 bit ints as seed
-Rng::Rng(const unsigned long* array, int size)
+Rng::Rng(const unsigned int* array, int size)
 {
   seed(array, size);
   init = true;
@@ -64,7 +64,7 @@ void Rng::gen_state()
 }
 
 // init by 32 bit seed
-void Rng::seed(unsigned long s)
+void Rng::seed(unsigned int s)
 {
   state[0] = s & 0xFFFFFFFFUL; // for > 32 bit machines
   for (int i = 1; i < n; ++i) {
@@ -78,7 +78,7 @@ void Rng::seed(unsigned long s)
 }
 
 // init by array
-void Rng::seed(const unsigned long* array, int size)
+void Rng::seed(const unsigned int* array, int size)
 {
   seed(19650218UL);
   int i = 1, j = 0;

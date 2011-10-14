@@ -75,7 +75,7 @@ void Runway::printRecord(std::ostream& sout) const
    sout << id;
    sout << ": ";
 
-   int old = sout.precision();
+   std::streamoff old = sout.precision();
    sout.precision(12);
 
    sout << latitude(HIGH_END);

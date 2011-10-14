@@ -294,8 +294,8 @@ bool Nav::gll2bd(
    // Ellipsoidal correction factor
    double ellip = 0.00334 * pow( std::cos(slat*Angle::D2RCC), 2 );
 
-   double dlat0 = dlat + ellip * (dlat - slat);
-   double dlon0 = dlon - ellip * (dlon -slon);
+   double dlat0 = Angle::aepcdDeg( dlat + ellip * Angle::aepcdDeg(dlat - slat) );
+   double dlon0 = Angle::aepcdDeg( dlon - ellip * Angle::aepcdDeg(dlon - slon) );
 
    // *** Transform lat/lon about zero longitude **
    double tslat = slat;          // Transformed source lat (deg)

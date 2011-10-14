@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: KeithleyDevice
 //------------------------------------------------------------------------------
-#ifndef __IoDevice_KeithleyDevice_H_C0C293BD_9954_447d_9ADF_E0D436BF6C56__
-#define __IoDevice_KeithleyDevice_H_C0C293BD_9954_447d_9ADF_E0D436BF6C56__
+#ifndef __Eaagles_IoDevice_KeithleyDevice_H__
+#define __Eaagles_IoDevice_KeithleyDevice_H__
 
 #include "openeaagles/basic/IoDevice.h"
 
@@ -15,14 +15,11 @@ namespace IoDevice {
 // Class:  KeithleyDevice
 // Description:  Communicates with a standard Keithley I/O device.
 //
-//
 // Form Name: KeithleyDevice
 //
 // Slots:
 //    deviceIndex <Number>    Unit index
 //
-//
-// Guid: {C0C293BD-9954-447d-9ADF-E0D436BF6C56}
 //------------------------------------------------------------------------------
 class KeithleyDevice : public Basic::IoDevice {
     DECLARE_SUBCLASS(KeithleyDevice,Basic::IoDevice)

@@ -282,7 +282,7 @@ void VPFTable::determineRecordSize()
     int num = atoi(getColumnNumber());
 
     if (num != 0) {
-        if (x == 'I') recordSize += sizeof(long int) * num;
+        if (x == 'I') recordSize += sizeof(int) * num;
         else if (x == 'S') recordSize += sizeof(short int) * num;
         else if (x == 'T') recordSize += num;
         else if (x == 'D') recordSize += num * 20;

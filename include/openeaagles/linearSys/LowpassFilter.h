@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // LowpassFilter class -- First order low pass filter
 //------------------------------------------------------------------------------
-#ifndef __LinearSystem_LowpassFilter_H_3E25DB1C_24FD_4f9b_A65D_40CBF4442ABC__
-#define __LinearSystem_LowpassFilter_H_3E25DB1C_24FD_4f9b_A65D_40CBF4442ABC__
+#ifndef __Eaagles_LinearSystem_LowpassFilter_H__
+#define __Eaagles_LinearSystem_LowpassFilter_H__
 
 #include "openeaagles/linearSys/FirstOrderTf.h"
 
@@ -27,7 +27,6 @@ namespace LinearSystem {
 //    wc    <Number>     Cutoff frequency (radian/sec)
 //
 //
-// GUID: {3E25DB1C-24FD-4f9b-A65D-40CBF4442ABC}
 //------------------------------------------------------------------------------
 class LowpassFilter : public FirstOrderTf {
     DECLARE_SUBCLASS(LowpassFilter,FirstOrderTf)
@@ -49,4 +48,4 @@ private:
 } // End LinearSystem namespace
 } // End Eaagles namespace
 
-#endif      /* __LinearSystem_LowpassFilter_H_3E25DB1C_24FD_4f9b_A65D_40CBF4442ABC__ */
+#endif

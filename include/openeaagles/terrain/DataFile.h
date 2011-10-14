@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: DataFile
 //------------------------------------------------------------------------------
-#ifndef __DataFile_H_AA1BB8E7_C422_4ab3_8850_431CAD6F5753__
-#define __DataFile_H_AA1BB8E7_C422_4ab3_8850_431CAD6F5753__
+#ifndef __Eaagles_Terrain_DataFile_H__
+#define __Eaagles_Terrain_DataFile_H__
 
 #include "openeaagles/basic/Terrain.h"
 
@@ -11,11 +11,8 @@ namespace Terrain {
 
 //------------------------------------------------------------------------------
 // Class: DataFile
-// Base classes: Basic::Object -> Basic::Component -> Basic::Terrain -> Terrain::DataFile
-//
 // Description: Common terrain data file
 // Form name: DataFile
-// GUID: {AA1BB8E7-C422-4ab3-8850-431CAD6F5753}
 //
 // Notes:
 //    1) the first elevation point [0] of all arrays is at the reference point
@@ -100,6 +97,4 @@ protected:
 } // End Terrain namspace
 } // End Eaagles namespace
 
-#endif /* __DataFile_H_AA1BB8E7_C422_4ab3_8850_431CAD6F5753__ */
-
-
+#endif

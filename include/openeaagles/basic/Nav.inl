@@ -44,7 +44,7 @@ inline bool Nav::fbd2llE(
 
    if (dlon != 0) {
       if (cosSlat != 0)
-         *dlon = slon + Angle::R2DCC * (dE / rn) / cosSlat;
+         *dlon = Angle::aepcdDeg( slon + Angle::R2DCC * (dE / rn) / cosSlat );
       else
          *dlon = slon;
    }
@@ -90,8 +90,8 @@ inline bool Nav::fll2bdE(
 
    // Compute brg/dist
    else {
-      double dN = Angle::D2RCC * (dlat - slat) * rm;
-      double dE = Angle::D2RCC * (dlon - slon) * rn * cosSlat;
+      double dN = Angle::D2RCC * Angle::aepcdDeg(dlat - slat) * rm;
+      double dE = Angle::D2RCC * Angle::aepcdDeg(dlon - slon) * rn * cosSlat;
       
       *brng = Angle::R2DCC * std::atan2(dE, dN);
       *dist = std::sqrt(dN*dN + dE*dE);
@@ -121,10 +121,13 @@ inline bool Nav::fbd2llS(
       double ang = brg * Angle::D2RCC;
       double ew = std::sin(ang) * dist;
       double ns = std::cos(ang) * dist;
+
       *dlat = slat + (ns/60.0);
+
       double tlat = slat;
       if (tlat > 89.0 || tlat < -89.0) tlat = 89.0;
-      *dlon = slon + ( ew / (60.0 * std::cos(tlat*Angle::D2RCC)) );
+
+      *dlon = Angle::aepcdDeg( slon + ( ew / (60.0 * std::cos(tlat*Angle::D2RCC)) ) );
       ok = true;
    }
    return ok;
@@ -146,8 +149,8 @@ inline bool Nav::fll2bdS(
 {
    bool ok = false;
    if (brg != 0 && dist != 0) {
-      double ns = ( (dlat - slat) * 60.0 );
-      double ew = ( (dlon - slon) * 60.0 * std::cos(slat*Angle::D2RCC) );
+      double ns = ( Angle::aepcdDeg(dlat - slat) * 60.0 );
+      double ew = ( Angle::aepcdDeg(dlon - slon) * 60.0 * std::cos(slat*Angle::D2RCC) );
       *brg = std::atan2(ew,ns) * Angle::R2DCC;
       *dist = sqrt(ns*ns + ew*ew);
       ok = true;
@@ -604,7 +607,7 @@ inline bool Nav::convertPosVec2llE(
    if (lat != 0) *lat = slat + Angle::R2DCC * (north / rm);
    if (lon != 0) {
       if (cosSlat != 0)
-         *lon = slon + Angle::R2DCC * (east / rn) / cosSlat;
+         *lon = Angle::aepcdDeg( slon + Angle::R2DCC * (east / rn) / cosSlat );
       else
          *lon = slon;
    }
@@ -650,7 +653,7 @@ inline bool Nav::convertPosVec2llS(
       *lat = (pos[INORTH] * Distance::M2NM)/60.0 + slat;
 
       if (cosSlat != 0)
-         *lon = (pos[IEAST] * Distance::M2NM)/(60.0 * cosSlat) + slon;
+         *lon = Angle::aepcdDeg( (pos[IEAST] * Distance::M2NM)/(60.0 * cosSlat) + slon );
       else
          *lon = slon;
 
@@ -721,8 +724,8 @@ inline bool Nav::convertLL2PosVecE(
       const double rm      = rn * (1.0 - e2) / q;
 
       // Compute NED variables
-      double x = Angle::D2RCC * (lat - slat) * rm;
-      double y = Angle::D2RCC * (lon - slon) * rn * cosSlat;
+      double x = Angle::D2RCC * Angle::aepcdDeg(lat - slat) * rm;
+      double y = Angle::D2RCC * Angle::aepcdDeg(lon - slon) * rn * cosSlat;
       double z = ( -alt );
       pos->set(x, y, z);
       ok = true;
@@ -748,8 +751,8 @@ inline bool Nav::convertLL2PosVecS(
 {
    bool ok = false;
    if (pos != 0) {
-      double x = ( (lat - slat) * 60.0 * Distance::NM2M );
-      double y = ( (lon - slon) * (60.0 * cosSlat) * Distance::NM2M );
+      double x = ( Angle::aepcdDeg(lat - slat) * 60.0 * Distance::NM2M );
+      double y = ( Angle::aepcdDeg(lon - slon) * (60.0 * cosSlat) * Distance::NM2M );
       double z = ( -alt );
       pos->set(x, y, z);
       ok = true;

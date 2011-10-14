@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: Component
 //------------------------------------------------------------------------------
-#ifndef __Component_H_B1E1CCA4_8039_4771_8265_2E086C5EE342__
-#define __Component_H_B1E1CCA4_8039_4771_8265_2E086C5EE342__
+#ifndef __Eaagles_Basic_Component_H__
+#define __Eaagles_Basic_Component_H__
 
 #include "openeaagles/basic/Object.h"
 
@@ -444,4 +444,4 @@ private:
 } // End Eaagles namespace
 
 
-#endif  /* __Component_H_B1E1CCA4_8039_4771_8265_2E086C5EE342__ */
+#endif

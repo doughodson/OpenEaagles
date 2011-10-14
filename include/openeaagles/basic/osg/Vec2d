@@ -1,4 +1,4 @@
-/* -*-c++-*- OpenSceneGraph - Copyright (C) 1998-2005 Robert Osfield 
+/* -*-c++-*- OpenSceneGraph - Copyright (C) 1998-2006 Robert Osfield 
  *
  * This library is open source and may be redistributed and/or modified under  
  * the terms of the OpenSceneGraph Public License (OSGPL) version 0.0 or 
@@ -11,10 +11,10 @@
  * OpenSceneGraph Public License for more details.
 */
 
-#ifndef OSG_VEC2D_ETK
-#define OSG_VEC2D_ETK 1
+#ifndef OSG_VEC2D_OE
+#define OSG_VEC2D_OE 1
 
-#include "Vec2f"
+#include "./Vec2f"
 
 namespace Eaagles {
 namespace osg {
@@ -30,9 +30,15 @@ class Vec2d
 {
     public:
 
+        /** Data type of vector components.*/
         typedef double value_type;
+
+        /** Number of vector components. */
+        enum { num_components = 2 };
+        
         value_type _v[2];
 
+        /** Constructor that sets all components of the vector to zero */
         Vec2d() {_v[0]=0.0; _v[1]=0.0;}
 
         Vec2d(value_type x,value_type y) { _v[0]=x; _v[1]=y; }
@@ -46,7 +52,7 @@ class Vec2d
 
         inline bool operator != (const Vec2d& v) const { return _v[0]!=v._v[0] || _v[1]!=v._v[1]; }
 
-	inline bool operator <  (const Vec2d& v) const
+        inline bool operator <  (const Vec2d& v) const
         {
             if (_v[0]<v._v[0]) return true;
             else if (_v[0]>v._v[0]) return false;
@@ -67,7 +73,9 @@ class Vec2d
         inline value_type x() const { return _v[0]; }
         inline value_type y() const { return _v[1]; }
 
+        /** Returns true if all components have values that are not NaN. */
         inline bool valid() const { return !isNaN(); }
+        /** Returns true if at least one component has value NaN. */
         inline bool isNaN() const { return osg::isNaN(_v[0]) || osg::isNaN(_v[1]); }
 
         /** Dot product. */
@@ -86,8 +94,8 @@ class Vec2d
         inline Vec2d& operator *= (value_type rhs)
         {
             _v[0]*=rhs;
-	    _v[1]*=rhs;
-	    return *this;
+            _v[1]*=rhs;
+            return *this;
         }
 
         /** Divide by scalar. */
@@ -100,8 +108,8 @@ class Vec2d
         inline Vec2d& operator /= (value_type rhs)
         {
             _v[0]/=rhs;
-	    _v[1]/=rhs;
-	    return *this;
+            _v[1]/=rhs;
+            return *this;
         }
 
         /** Binary vector add. */
@@ -112,12 +120,12 @@ class Vec2d
 
         /** Unary vector add. Slightly more efficient because no temporary
           * intermediate object.
-		*/
+        */
         inline Vec2d& operator += (const Vec2d& rhs)
         {
             _v[0] += rhs._v[0];
             _v[1] += rhs._v[1];
-	    return *this;
+            return *this;
         }
 
         /** Binary vector subtract. */
@@ -131,20 +139,20 @@ class Vec2d
         {
             _v[0]-=rhs._v[0];
             _v[1]-=rhs._v[1];
-	    return *this;
-	}
+            return *this;
+        }
 
         /** Negation operator. Returns the negative of the Vec2d. */
         inline const Vec2d operator - () const
         {
-	    return Vec2d (-_v[0], -_v[1]);
-	}
+            return Vec2d (-_v[0], -_v[1]);
+        }
 
         /** Length of the vector = sqrt( vec . vec ) */
-	inline value_type length() const
-	{
-	    return sqrt( _v[0]*_v[0] + _v[1]*_v[1] );
-	}
+        inline value_type length() const
+        {
+            return sqrt( _v[0]*_v[0] + _v[1]*_v[1] );
+        }
 
         /** Length squared of the vector = vec . vec */
         inline value_type length2( void ) const
@@ -154,21 +162,34 @@ class Vec2d
 
         /** Normalize the vector so that it has length unity.
           * Returns the previous length of the vector.
-		*/
-	inline value_type normalize()
-	{
-	    value_type norm = Vec2d::length();
+        */
+        inline value_type normalize()
+        {
+            value_type norm = Vec2d::length();
             if (norm>0.0)
             {
                 value_type inv = 1.0/norm;
-	        _v[0] *= inv;
-	        _v[1] *= inv;
+                _v[0] *= inv;
+                _v[1] *= inv;
             }
-	    return( norm );
-	}
+            return( norm );
+        }
 
-};	// end of class Vec2d
+};    // end of class Vec2d
 
-}	// end of namespace osg
+
+/** multiply by vector components. */
+inline Vec2d componentMultiply(const Vec2d& lhs, const Vec2d& rhs)
+{
+    return Vec2d(lhs[0]*rhs[0], lhs[1]*rhs[1]);
+}
+
+/** divide rhs components by rhs vector components. */
+inline Vec2d componentDivide(const Vec2d& lhs, const Vec2d& rhs)
+{
+    return Vec2d(lhs[0]/rhs[0], lhs[1]/rhs[1]);
+}
+
+}    // end of namespace osg
 } // End Eaagles namespace
 #endif

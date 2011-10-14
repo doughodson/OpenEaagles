@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // SaH class -- Sample & Hold function
 //------------------------------------------------------------------------------
-#ifndef __LinearSystem_SaH_H_CFB2FFE8_F44F_48fe_84FA_25572FDF99DB__
-#define __LinearSystem_SaH_H_CFB2FFE8_F44F_48fe_84FA_25572FDF99DB__
+#ifndef __Eaagles_LinearSystem_SaH_H__
+#define __Eaagles_LinearSystem_SaH_H__
 
 #include "openeaagles/linearSys/ScalerFunc.h"
 
@@ -23,8 +23,6 @@ namespace LinearSystem {
 //    rate  <Frequency>  Sample rate
 //    rate  <Number>     Sample rate Hz 
 //
-//
-// GUID: {CFB2FFE8-F44F-48fe-84FA-25572FDF99DB}
 //------------------------------------------------------------------------------
 class SaH : public ScalerFunc {
     DECLARE_SUBCLASS(SaH,ScalerFunc)
@@ -66,4 +64,4 @@ private:
 } // End LinearSystem namespace
 } // End Eaagles namespace
 
-#endif      /* __LinearSystem_SaH_H_CFB2FFE8_F44F_48fe_84FA_25572FDF99DB__ */
+#endif

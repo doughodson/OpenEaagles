@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Classes: Dis::Nib    -- DIS Network Interface Block class
 //------------------------------------------------------------------------------
-#ifndef __Dis_Nib_H_0AEBE07B_7062_4ebc_86B3_A5002F1177C0__
-#define __Dis_Nib_H_0AEBE07B_7062_4ebc_86B3_A5002F1177C0__
+#ifndef __Eaagles_Network_Dis_Nib_H__
+#define __Eaagles_Network_Dis_Nib_H__
 
 #include "openeaagles/simulation/Nib.h"
 #include "openeaagles/dis/NetIO.h"
@@ -110,4 +110,4 @@ private:
 } // End Network namespace
 } // End Eaagles namespace
 
-#endif // __Dis_Nib_H_0AEBE07B_7062_4ebc_86B3_A5002F1177C0__
+#endif

@@ -366,15 +366,8 @@ std::ostream& TabLogger::TabLogEvent::makePlayerLatLonHdr(  std::ostream& sout)
 std::ostream& TabLogger::TabLogEvent::makePlayerLatLonMsg(  std::ostream& sout,
                                                    double theLat, double theLon)
 {
-    if ((theLat <= 90.0) && (theLat >= -90.0))
-        sout << theLat << "\t" ;                   // (1 field)
-    else
-        sout << "\t" ;
-
-    if ((theLon <= 180.0) && (theLon >= -180.0))
-        sout << theLon << "\t" ;                   // (1 field)
-    else
-        sout << "\t" ;
+   sout << theLat << "\t" ;                   // (1 field)
+   sout << theLon << "\t" ;                   // (1 field)
 
     return sout;
 }

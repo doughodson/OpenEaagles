@@ -4,8 +4,8 @@
 // Note: The "Lc" prefix stands for "Link class" in honor of Ed Link, who
 //       invented the "Link Blue Box", which was the first flight simulator.
 //------------------------------------------------------------------------------
-#ifndef _BASIC_SUPPORT_H_
-#define _BASIC_SUPPORT_H_
+#ifndef __Eaagles_Support_H__
+#define __Eaagles_Support_H__
 
 // ---
 // Defined the following to use double,
@@ -35,6 +35,7 @@ namespace Eaagles {
 #include <cmath>
 #include <cstdio>
 #include <cstdlib>
+
 
 // ---
 // Include OS/Processor unique stuff
@@ -529,5 +530,5 @@ unsigned int getDigits(const double x);
 } // End Eaagles namespace
 
 
-#endif // _BASIC_SUPPORT_H_
+#endif
 

@@ -220,11 +220,12 @@ bool Image::readFileBMP(const char* const filename, const char* const path)
    unsigned int bitmapFileHdrSize =
       sizeof(bfType) + sizeof(bfSize) + sizeof(bfReserved1) + sizeof(bfReserved2) + sizeof(bfOffBits);
 
-   fread(&bfType, sizeof(bfType), 1, fp);
-   fread(&bfSize, sizeof(bfSize), 1, fp);
-   fread(&bfReserved1, sizeof(bfReserved1), 1, fp);
-   fread(&bfReserved2, sizeof(bfReserved2), 1, fp);
-   fread(&bfOffBits, sizeof(bfOffBits), 1, fp);
+   size_t nItemsRead;
+   nItemsRead = fread(&bfType, sizeof(bfType), 1, fp);
+   nItemsRead = fread(&bfSize, sizeof(bfSize), 1, fp);
+   nItemsRead = fread(&bfReserved1, sizeof(bfReserved1), 1, fp);
+   nItemsRead = fread(&bfReserved2, sizeof(bfReserved2), 1, fp);
+   nItemsRead = fread(&bfOffBits, sizeof(bfOffBits), 1, fp);
 
    if (bfType != 0x4D42) {
       // Not a bitmap file
@@ -236,7 +237,7 @@ bool Image::readFileBMP(const char* const filename, const char* const path)
 
    // Read the bitmap file info
    BITMAPINFOHEADER bmfi;
-   fread(&bmfi, sizeof(BITMAPINFOHEADER), 1, fp);
+   nItemsRead = fread(&bmfi, sizeof(BITMAPINFOHEADER), 1, fp);
 
    if (bmfi.biSize != sizeof(BITMAPINFOHEADER) || bmfi.biPlanes != 1) {
       // Not a bitmap file
@@ -347,7 +348,7 @@ bool Image::writeFileBMP(const char* const filename, const char* const path)
    unsigned int offset = bitmapFileHdrSize + sizeof(BITMAPINFOHEADER);
 
    // Image size
-   unsigned int isize = getHeight() * widthBytes;
+   unsigned int isize = getHeight() * (unsigned int) widthBytes;
 
    // File size (active bytes)
    unsigned int size = isize + offset;
@@ -462,8 +463,8 @@ GLubyte* Image::readColorValuesBMP(FILE* const fp, const unsigned int offset, co
     size_t ctSize = 256;
     if (bmfi->biClrUsed > 0) ctSize = bmfi->biClrUsed;
     GLubyte* colorTable = new GLubyte[ctSize*4];
-    fread(colorTable, 4, ctSize, fp);
-    
+    size_t nItemsRead = fread(colorTable, 4, ctSize, fp);
+
     // Position to start of colors
    fseek(fp, offset, SEEK_SET);
 

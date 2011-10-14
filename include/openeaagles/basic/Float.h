@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class:  Float
 //------------------------------------------------------------------------------
-#ifndef __Float_H_3780E9BC_7125_4112_8FB7_2BB0A6EDF47B__
-#define __Float_H_3780E9BC_7125_4112_8FB7_2BB0A6EDF47B__
+#ifndef __Eaagles_Basic_Float_H__
+#define __Eaagles_Basic_Float_H__
 
 #include "openeaagles/basic/Number.h"
 
@@ -386,4 +386,4 @@ inline std::ostream& operator<<(std::ostream& sout, const Float& n)
 } // End Eaagles namespace
 
 
-#endif  /* __Float_H_3780E9BC_7125_4112_8FB7_2BB0A6EDF47B__ */
+#endif

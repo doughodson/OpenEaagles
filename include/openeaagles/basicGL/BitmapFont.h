@@ -1,16 +1,14 @@
 //------------------------------------------------------------------------------
-// Class:  BitmapFont
+// Class: BitmapFont
 //------------------------------------------------------------------------------
-#ifndef __BitmapFont_H_F0762956_4A41_48fe_A132_B93468A9F690__
-#define __BitmapFont_H_F0762956_4A41_48fe_A132_B93468A9F690__
+#ifndef __Eaagles_BasicGL_BitmapFont_H__
+#define __Eaagles_BasicGL_BitmapFont_H__
 
 #include "Font.h"
 
 namespace Eaagles {
 
-   namespace Basic {
-      class Number;
-   }
+namespace Basic { class Number; }
 
 namespace BasicGL {
 
@@ -40,7 +38,6 @@ namespace BasicGL {
 //	  setReverse(Number* rnumber)
 //		Sets the font to reverse if rnumber != 0.
 //
-//Comment section last updated: 2004.10.13 by MJK
 //------------------------------------------------------------------------------
 class BitmapFont : public Font {
     DECLARE_SUBCLASS(BitmapFont,Font)
@@ -51,25 +48,24 @@ public:
     virtual void outputText(const double x, const double y, const char* txt, const int n, const bool vf = false, const bool rf = false);
     virtual void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false);
     virtual void loadFont();
-    virtual bool setReverse(const Basic::Number* const rnumber); //I added the variable name from the cpp here: MJK
+    virtual bool setReverse(const Basic::Number* const rnumber);
 
 private:
     // Loader support functions
     GLubyte* loadTypeFace(const GLint index, const GLenum reverse);  
-    static void reverseBitmapOrder(GLubyte* bitmap, int numBitmapBytes, int numBytesWide);
+    static void reverseBitmapOrder(GLubyte* bitmap, unsigned int numBitmapBytes, unsigned int numBytesWide);
     static GLubyte reverseByteOrder(GLubyte byte);
     
     bool reverse;                   // Reverse the font
     const char** fontMap;           // Font map (ASCII code to file name mapping)
-    int numFonts;                   // Number of fonts in the map
+    unsigned int numFonts;          // Number of fonts in the map
     
     // Default fontMap
     static const char** defaultFontMap;
-    static const int defaultNumFonts;
+    static const unsigned int defaultNumFonts;
 };
 
 } // End BasicGL namespace
 } // End Eaagles namespace
 
-
-#endif	/* __BitmapFont_H_F0762956_4A41_48fe_A132_B93468A9F690__ */
+#endif

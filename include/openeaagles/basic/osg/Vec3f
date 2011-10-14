@@ -1,4 +1,4 @@
-/* -*-c++-*- OpenSceneGraph - Copyright (C) 1998-2005 Robert Osfield 
+/* -*-c++-*- OpenSceneGraph - Copyright (C) 1998-2006 Robert Osfield 
  *
  * This library is open source and may be redistributed and/or modified under  
  * the terms of the OpenSceneGraph Public License (OSGPL) version 0.0 or 
@@ -11,11 +11,11 @@
  * OpenSceneGraph Public License for more details.
 */
 
-#ifndef OSG_VEC3F_ETK
-#define OSG_VEC3F_ETK 1
+#ifndef OSG_VEC3F_OE
+#define OSG_VEC3F_OE 1
 
-#include "Vec2f"
-#include "Math"
+#include "./Vec2f"
+#include "./Math"
 
 namespace Eaagles {
 namespace osg {
@@ -30,10 +30,16 @@ class Vec3f
 {
     public:
 
+        /** Data type of vector components.*/
         typedef float value_type;
+
+        /** Number of vector components. */
+        enum { num_components = 3 };
+        
         value_type _v[3];
 
-        Vec3f() { _v[0]=0.0; _v[1]=0.0; _v[2]=0.0;}
+        /** Constructor that sets all components of the vector to zero */
+        Vec3f() { _v[0]=0.0f; _v[1]=0.0f; _v[2]=0.0f;}
         Vec3f(value_type x,value_type y,value_type z) { _v[0]=x; _v[1]=y; _v[2]=z; }
         Vec3f(const Vec2f& v2,value_type zz)
         {
@@ -80,7 +86,9 @@ class Vec3f
         inline value_type y() const { return _v[1]; }
         inline value_type z() const { return _v[2]; }
 
+        /** Returns true if all components have values that are not NaN. */
         inline bool valid() const { return !isNaN(); }
+        /** Returns true if at least one component has value NaN. */
         inline bool isNaN() const { return osg::isNaN(_v[0]) || osg::isNaN(_v[1]) || osg::isNaN(_v[2]); }
 
         /** Dot product. */
@@ -195,6 +203,17 @@ class Vec3f
 
 };    // end of class Vec3f
 
+/** multiply by vector components. */
+inline Vec3f componentMultiply(const Vec3f& lhs, const Vec3f& rhs)
+{
+    return Vec3f(lhs[0]*rhs[0], lhs[1]*rhs[1], lhs[2]*rhs[2]);
+}
+
+/** divide rhs components by rhs vector components. */
+inline Vec3f componentDivide(const Vec3f& lhs, const Vec3f& rhs)
+{
+    return Vec3f(lhs[0]/rhs[0], lhs[1]/rhs[1], lhs[2]/rhs[2]);
+}
 
 const Vec3f X_AXIS(1.0,0.0,0.0);
 const Vec3f Y_AXIS(0.0,1.0,0.0);

@@ -1,4 +1,4 @@
-/* -*-c++-*- OpenSceneGraph - Copyright (C) 1998-2005 Robert Osfield 
+/* -*-c++-*- OpenSceneGraph - Copyright (C) 1998-2006 Robert Osfield 
  *
  * This library is open source and may be redistributed and/or modified under  
  * the terms of the OpenSceneGraph Public License (OSGPL) version 0.0 or 
@@ -11,11 +11,11 @@
  * OpenSceneGraph Public License for more details.
 */
 
-#ifndef OSG_VEC3D_ETK
-#define OSG_VEC3D_ETK 1
+#ifndef OSG_VEC3D_OE
+#define OSG_VEC3D_OE 1
 
-#include "Vec2d"
-#include "Vec3f"
+#include "./Vec2d"
+#include "./Vec3f"
 
 namespace Eaagles {
 namespace osg {
@@ -31,9 +31,15 @@ class Vec3d
 {
     public:
 
+        /** Data type of vector components.*/
         typedef double value_type;
+
+        /** Number of vector components. */
+        enum { num_components = 3 };
+        
         value_type _v[3];
 
+        /** Constructor that sets all components of the vector to zero */
         Vec3d() { _v[0]=0.0; _v[1]=0.0; _v[2]=0.0;}
 
         inline Vec3d(const Vec3f& vec) { _v[0]=vec._v[0]; _v[1]=vec._v[1]; _v[2]=vec._v[2];}
@@ -85,7 +91,9 @@ class Vec3d
         inline value_type y() const { return _v[1]; }
         inline value_type z() const { return _v[2]; }
 
+        /** Returns true if all components have values that are not NaN. */
         inline bool valid() const { return !isNaN(); }
+        /** Returns true if at least one component has value NaN. */
         inline bool isNaN() const { return osg::isNaN(_v[0]) || osg::isNaN(_v[1]) || osg::isNaN(_v[2]); }
 
         /** Dot product. */
@@ -184,6 +192,7 @@ class Vec3d
 
         /** Normalize the vector so that it has length unity.
           * Returns the previous length of the vector.
+          * If the vector is zero length, it is left unchanged and zero is returned.
         */
         inline value_type normalize()
         {
@@ -199,6 +208,18 @@ class Vec3d
         }
 
 };    // end of class Vec3d
+
+/** multiply by vector components. */
+inline Vec3d componentMultiply(const Vec3d& lhs, const Vec3d& rhs)
+{
+    return Vec3d(lhs[0]*rhs[0], lhs[1]*rhs[1], lhs[2]*rhs[2]);
+}
+
+/** divide rhs components by rhs vector components. */
+inline Vec3d componentDivide(const Vec3d& lhs, const Vec3d& rhs)
+{
+    return Vec3d(lhs[0]/rhs[0], lhs[1]/rhs[1], lhs[2]/rhs[2]);
+}
 
 }    // end of namespace osg
 } // End Eaagles namespace

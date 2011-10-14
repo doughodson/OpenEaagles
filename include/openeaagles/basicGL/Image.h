@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
-// Image class
+// Class: Image
 //------------------------------------------------------------------------------
-#ifndef __OpenEaagles_BasicGL_Image_H__
-#define __OpenEaagles_BasicGL_Image_H__
+#ifndef __Eaagles_BasicGL_Image_H__
+#define __Eaagles_BasicGL_Image_H__
 
 #if !defined(WIN32)
 struct BITMAPFILEHEADER;

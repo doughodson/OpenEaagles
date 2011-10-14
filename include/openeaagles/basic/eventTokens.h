@@ -15,8 +15,8 @@
 //       Event values (MAX_KEY_EVENT+1) to (USER_EVENTS-1) reserved for the OpenEaagles toolkit
 //       Event values above USER_EVENT are avaiable for user events
 //------------------------------------------------------------------------------
-#ifndef __OPENEAAGLES_EVENT_TOKENS_H___
-#define __OPENEAAGLES_EVENT_TOKENS_H___
+#ifndef __Eaagles_Event_Tokens_H__
+#define __Eaagles_Event_Tokens_H__
 
 // ---
 // Key events -- Are passed up to an object's container if not used.
@@ -245,4 +245,4 @@ enum {
 
 };
 
-#endif // __EVENT_TOKENS_H___
+#endif

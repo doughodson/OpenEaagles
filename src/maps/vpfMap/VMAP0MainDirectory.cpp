@@ -68,7 +68,7 @@ void VMAP0MainDirectory::loadTables()
                 size_t size = strlen(x);
                 size_t count = 0;
                 while (x[count] != ' ' && count < size) count++;
-                x[count] = NULL;
+                x[count] = 0;
                 if (strcmp(x, "rference") == 0) {
                     string->catStr(getPath());
                     string->catStr(x);

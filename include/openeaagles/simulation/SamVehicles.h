@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Classes: SamVehicle
 //------------------------------------------------------------------------------
-#if !defined(__SAMVEHICLE_H_5F30476B_4409_4d7e_915E_CA8585DEC6A9__)
-#define __SAMVEHICLE_H_5F30476B_4409_4d7e_915E_CA8585DEC6A9__
+#ifndef __Eaagles_Simulation_SamVehicle_H__
+#define __Eaagles_Simulation_SamVehicle_H__
 
 #include "openeaagles/simulation/GroundVehicle.h"
 
@@ -25,7 +25,6 @@ namespace Simulation {
 //    maxLaunchRange    <Basic::Distance>   ! Max launch range (Basic::Distance)
 //                                          ! (default: DEFAULT_MAX_LAUNCH_RANGE)
 //
-// GUID: {5F30476B-4409-4d7e-915E-CA8585DEC6A9}
 //==============================================================================
 class SamVehicle : public GroundVehicle  
 {
@@ -62,4 +61,4 @@ private:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // !defined(__SAMVEHICLE_H_5F30476B_4409_4d7e_915E_CA8585DEC6A9__)
+#endif

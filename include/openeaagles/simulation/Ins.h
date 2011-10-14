@@ -1,9 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: Ins
 //------------------------------------------------------------------------------
-#ifndef __Ins_H_AEC74A05_B5CD_4410_8C21_D111AA4B85FE__
-#define __Ins_H_AEC74A05_B5CD_4410_8C21_D111AA4B85FE__
-
+#ifndef __Eaagles_Simulation_Ins_H__
+#define __Eaagles_Simulation_Ins_H__
 
 #include "openeaagles/simulation/Navigation.h"
 
@@ -12,11 +11,8 @@ namespace Simulation {
 
 //------------------------------------------------------------------------------
 // Classes:     Ins
-// Base class:  Basic::Object -> ... -> Navigation -> Ins
-//
 // Description: Generic Inerial Navigation System (INS) Data
 // Form name: Ins
-// GUID: {AEC74A05-B5CD-4410-8C21-D111AA4B85FE}
 //------------------------------------------------------------------------------
 class Ins : public Navigation
 {
@@ -65,4 +61,4 @@ private:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // __Ins_H_AEC74A05_B5CD_4410_8C21_D111AA4B85FE__
+#endif

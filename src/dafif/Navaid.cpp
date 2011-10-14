@@ -115,7 +115,7 @@ void Navaid::printRecord(std::ostream& sout) const
    sout << keyCode();
    sout << ":";
 
-   int old = sout.precision();
+   std::streamoff old = sout.precision();
    sout.precision(12);
 
    sout << "  ";

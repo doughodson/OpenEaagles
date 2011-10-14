@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: DedFile
 //------------------------------------------------------------------------------
-#ifndef __DedFile_H_6BC3E40A_6A47_4db4_9E76_53DF152FB289__
-#define __DedFile_H_6BC3E40A_6A47_4db4_9E76_53DF152FB289__
+#ifndef __Eaagles_Terrain_DedFile_H__
+#define __Eaagles_Terrain_DedFile_H__
 
 #include "../DataFile.h"
 
@@ -15,9 +15,6 @@ struct DedCellHdr;
 
 //------------------------------------------------------------------------------
 // Class: DedFile
-// Base classes: Basic::Object -> Basic::Component -> Terrain::Database -> Terrain::DedFile
-// GUID: {6BC3E40A-6A47-4db4-9E76-53DF152FB289}
-//
 // Description: Manages MultiGen, Inc.'s Digitial Elevation Data (DED) file.
 // See FORMAT.DED for the original MultiGen documentation.
 //
@@ -55,6 +52,4 @@ private:
 } // End Terrain namspace
 } // End Eaagles namespace
 
-#endif /* __DedFile_H_6BC3E40A_6A47_4db4_9E76_53DF152FB289__ */
-
-
+#endif

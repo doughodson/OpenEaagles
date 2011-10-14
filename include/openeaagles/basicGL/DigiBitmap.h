@@ -1,11 +1,12 @@
 //------------------------------------------------------------------------------
-// Class:	DigiBitmap
+// Class: DigiBitmap
 //------------------------------------------------------------------------------
-#ifndef __DigiBitmap_H__
-#define __DigiBitmap_H__
+#ifndef __Eaagles_BasicGL_DigiBitmap_H__
+#define __Eaagles_BasicGL_DigiBitmap_H__
 
 class MapDisplay;
 class DigitalMap;
+
 #include "MapPage.h"
 
 //------------------------------------------------------------------------------
@@ -104,5 +105,4 @@ private:
    int         scaledSize;    // Square Textures x and y dimensions
 };
 
-#endif	/* __DigiBitmap_H__ */
-
+#endif

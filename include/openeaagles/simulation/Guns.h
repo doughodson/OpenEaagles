@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Classes: Gun, Bullet
 //------------------------------------------------------------------------------
-#ifndef __GUNS_H_87CA313D_10F2_4fd2_A78F_702D1F1A4626__
-#define __GUNS_H_87CA313D_10F2_4fd2_A78F_702D1F1A4626__
+#ifndef __Eaagles_Simulation_Gun_H__
+#define __Eaagles_Simulation_Gun_H__
 
 #include "openeaagles/simulation/ExternalStore.h"
 #include "openeaagles/simulation/Weapon.h"
@@ -33,9 +33,7 @@ namespace Simulation {
 //    roll        <Number>   ! roll angle; relative to ownship axis (radians, Basic::Angle) (default: 0)
 //    pitch       <Number>   ! pitch; relative to ownship axis (radians, Basic::Angle) (default: 0)
 //    yaw         <Number>   ! heading; relative to ownship axis (radians, Basic::Angle) (default: 0)
-
 //
-// GUID: (87CA313D-10F2-4fd2-A78F-702D1F1A4626)
 //==============================================================================
 class Gun : public ExternalStore  
 {
@@ -137,7 +135,6 @@ private:
 //    weapon player.  During flyout, the bullets are grouped into bursts.
 //
 // Form name: Bullet
-// GUID: {21C03CEB-B84C-40f0-874E-E0459534453E}
 //==============================================================================
 class Bullet : public Weapon  
 {
@@ -208,4 +205,4 @@ private:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // !defined(__GUNS_H_87CA313D_10F2_4fd2_A78F_702D1F1A4626__)
+#endif

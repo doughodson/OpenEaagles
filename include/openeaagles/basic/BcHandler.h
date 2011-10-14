@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: BroadcastHandler
 //------------------------------------------------------------------------------
-#ifndef	__BroadcastHandler_H_99144A70_4A50_4854_8CE3_CF0D3E517124__
-#define __BroadcastHandler_H_99144A70_4A50_4854_8CE3_CF0D3E517124__
+#ifndef	__Eaagles_Basic_BroadcastHandler_H__
+#define __Eaagles_Basic_BroadcastHandler_H__
 
 #include "openeaagles/basic/NetHandler.h"
 
@@ -14,7 +14,6 @@ class Number;
 
 //------------------------------------------------------------------------------
 // Class: BroadcastHandler
-// Base class: Object -> NetHandler -> BroadcastHandler
 // Form name: BroadcastHandler
 //
 // Description: Broadcast network handler.
@@ -57,4 +56,4 @@ private:
 } // End Basic namespace
 } // End Eaagles namespace
 
-#endif	/* __BroadcastHandler_H_99144A70_4A50_4854_8CE3_CF0D3E517124__ */
+#endif

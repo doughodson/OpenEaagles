@@ -1,8 +1,8 @@
 //----------------------------------------------------------------------------------------------------------------------------------
-// Class:  FtglFonts, FtglBitmapFont, FtglExtrdFont, FtglOutlineFont, FtglPixmapFont, FtglPolygonFont, FtglTextureFont
+// Class: FtglFonts, FtglBitmapFont, FtglExtrdFont, FtglOutlineFont, FtglPixmapFont, FtglPolygonFont, FtglTextureFont
 //----------------------------------------------------------------------------------------------------------------------------------
-#ifndef __FtglFont_H_F426AAF5_F157_49bf_9AB6_2883CE48E1E5
-#define __FtglFont_H_F426AAF5_F157_49bf_9AB6_2883CE48E1E5
+#ifndef __Eaagles_BasicGL_FtglFont_H__
+#define __Eaagles_BasicGL_FtglFont_H__
 
 #include "Font.h"
 
@@ -341,4 +341,4 @@ public:
 } // End BasicGL namespace
 } // End Eaagles namespace
 
-#endif      /* __FtglTextureFont_4789D5E6_5916_4539_89B4_636EC9DBB1F0 */
+#endif

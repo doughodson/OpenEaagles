@@ -69,7 +69,7 @@ void Waypoint::printRecord(std::ostream& sout) const
    sout << id << "-";
    sout << ccode << ", ";
 
-   int old = sout.precision();
+   std::streamoff old = sout.precision();
    sout.precision(12);
 
    sout << latitude();

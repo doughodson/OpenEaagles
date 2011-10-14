@@ -62,7 +62,7 @@ private:
     static short readValue(const unsigned char hbyte, const unsigned char lbyte);
 
     bool readSrtmData(std::istream& in);
-    bool determineSrtmInfo(const std::string& srtmFilename, unsigned int size);
+    bool determineSrtmInfo(const std::string& srtmFilename, std::streamoff size);
 
    // Terrain::Database private interface
    virtual bool loadData();   // Load the data file

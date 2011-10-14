@@ -87,11 +87,11 @@ void VPFRecord::createRecord(VPFTable* x, const char* file, const int idx)
                     int num = atoi(parent->getColumnNumber());
                     // now compare the data types to figure our data
                     if (data[i] == 0) data[i] = new VPFDataType();
-                    // long integer (4 bytes)
+                    // integer (4 bytes)
                     if (dType == 'I') {
                         // we read an integer
-                        long int y = 0;
-                        // 4 byte long integer
+                        int y = 0;
+                        // 4 byte integer
                         stream.read((char*)&y, num*sizeof(y));
                         // convert to string
                         char tempBuff[255];
@@ -108,7 +108,7 @@ void VPFRecord::createRecord(VPFTable* x, const char* file, const int idx)
                     else if (dType == 'S') {
                         // we read a short integer
                         short int y = 0;
-                        // 4 byte long integer
+                        // 2 byte integer
                         stream.read((char*)&y, num*sizeof(y));
                         // convert to string
                         char tempBuff[255];
@@ -230,11 +230,11 @@ void VPFRecord::createRecord(VPFTable* x, const char* file, const int idx)
                     }
                     // now compare the data types to figure our data
                     if (data[i] == 0) data[i] = new VPFDataType();
-                    // long integer (4 bytes)
+                    // integer (4 bytes)
                     if (dType == 'I') {
                         // we read an integer
-                        long int y = 0;
-                        // 4 byte long integer
+                        int y = 0;
+                        // 4 byte integer
                         stream.read((char*)&y, num*sizeof(y));
                         // convert to string
                         char tempBuff[255];
@@ -251,7 +251,7 @@ void VPFRecord::createRecord(VPFTable* x, const char* file, const int idx)
                     else if (dType == 'S') {
                         // we read a short integer
                         short int y = 0;
-                        // 4 byte long integer
+                        // 2 byte integer
                         stream.read((char*)&y, num*sizeof(y));
                         // convert to string
                         char tempBuff[255];

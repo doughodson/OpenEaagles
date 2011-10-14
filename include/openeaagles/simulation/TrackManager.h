@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Classes:	TrackManager, AirTrkMgr, GmtiGrkMgr, RwrGrkMgr
 //------------------------------------------------------------------------------
-#ifndef __TrackManager_H_60129798_2F31_4c5c_886A_F0001E76B490__
-#define __TrackManager_H_60129798_2F31_4c5c_886A_F0001E76B490__
+#ifndef __Eaagles_Simulation_TrackManager_H__
+#define __Eaagles_Simulation_TrackManager_H__
 
 #include "openeaagles/simulation/System.h"
 
@@ -141,7 +141,6 @@ private:
 //   rangeGate      <Basic::Number>  ! Range Gate (meters) (default: 500.0f)
 //   velocityGate   <Basic::Number>  ! Velocity Gate (m/s) (default: 10.0f)
 //
-// GUID: EEC6F6A1_DB0F_4a08_8B34_078F3DCC6025
 //==============================================================================
 class AirTrkMgr : public TrackManager  
 {
@@ -174,7 +173,6 @@ private:
 // Description: Very simple Ground Moving Target Indication (GMTI) Track Manager
 // Form name: GmtiTrkMgr
 //
-// GUID: 38A80514_9E11_4961_BFCD_755372A1C7CE
 //==============================================================================
 class GmtiTrkMgr : public TrackManager  
 {
@@ -192,7 +190,6 @@ protected:
 // Description: RADAR Warning Receiver (RWR) Track Manager
 // Form name: RwrTrkMgr
 //
-// GUID: 95ED6BC2_D5C0_46ce_ABAF_FC4ABB53F835
 //==============================================================================
 class RwrTrkMgr : public TrackManager  
 {
@@ -206,4 +203,4 @@ protected:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // __TrackManager_H_60129798_2F31_4c5c_886A_F0001E76B490__
+#endif

@@ -103,7 +103,7 @@ void Airport::printRecord(std::ostream& sout) const
    sout << char(airportType());
    sout << "  ";
 
-   int old = sout.precision();
+   std::streamoff old = sout.precision();
    sout.precision(12);
 
    sout << latitude();

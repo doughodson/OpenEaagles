@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class:  Decibel
 //------------------------------------------------------------------------------
-#ifndef __Decibel_H_FD67AFE6_1A35_43ba_805A_50FE337DD824__
-#define __Decibel_H_FD67AFE6_1A35_43ba_805A_50FE337DD824__
+#ifndef __Eaagles_Basic_Decibel_H__
+#define __Eaagles_Basic_Decibel_H__
 
 #include "openeaagles/basic/Number.h"
 
@@ -265,4 +265,4 @@ inline std::ostream& operator<<(std::ostream& sout, const Decibel& n)
 } // End Basic namespace
 } // End Eaagles namespace
 
-#endif  /* __Decibel_H_FD67AFE6_1A35_43ba_805A_50FE337DD824__ */
+#endif

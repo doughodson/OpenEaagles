@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: Ntm
 //------------------------------------------------------------------------------
-#ifndef __Ntm_H_6667FEE8_1F90_49a7_BB7B_DA73B1DA8469__
-#define __Ntm_H_6667FEE8_1F90_49a7_BB7B_DA73B1DA8469__
+#ifndef __Eaagles_Simulation_Ntm_H__
+#define __Eaagles_Simulation_Ntm_H__
 
 #include "openeaagles/simulation/NetIO.h"
 
@@ -58,8 +58,6 @@ class Nib;
 //
 //          Best match is returned: #1 (best), #2, #5 and #6 (worst)
 //
-//
-// GUID: {6667FEE8-1F90-49a7-BB7B-DA73B1DA8469}
 //------------------------------------------------------------------------------
 class Ntm : public Basic::Object
 {
@@ -85,4 +83,4 @@ private:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // __Ntm_H_6667FEE8_1F90_49a7_BB7B_DA73B1DA8469__
+#endif

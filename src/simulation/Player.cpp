@@ -34,6 +34,7 @@
 #include "openeaagles/basic/PairStream.h"
 #include "openeaagles/basic/Statistic.h"
 #include "openeaagles/basic/units/Times.h"
+#include "openeaagles/basic/osg/Quat"
 
 namespace Eaagles {
 namespace Simulation {
@@ -2222,7 +2223,7 @@ bool Player::setQuaternions(const osg::Quat& newQ)
    q = newQ;
 
    // Set the rotational matrix
-   rm.set(q);
+   rm.makeRotate(q);
 
    // Compute the euler angles and the sin/cos values of the angles
    Basic::Nav::computeEulerAngles(rm, &angles, &scPhi, &scTheta, &scPsi);
@@ -3684,8 +3685,8 @@ bool Player::setSlotInitLat(const Basic::Angle* const msg)
 {
    bool ok = false;
    if (msg != 0) {
-      LCreal val = (LCreal) Basic::Degrees::convertStatic(*msg);
-      if (val >= -90.0f && val <= 90.0f) {
+      double val = (LCreal) Basic::Degrees::convertStatic(*msg);
+      if (val >= -90.0 && val <= 90.0) {
          ok = setInitLat( val );
       }
       else {
@@ -3700,8 +3701,8 @@ bool Player::setSlotInitLat(const Basic::Number* const msg)
 {
    bool ok = false;
    if (msg != 0) {
-      LCreal val = msg->getReal();
-      if (val >= -90.0f && val <= 90.0f) {
+      double val = msg->getDouble();
+      if (val >= -90.0 && val <= 90.0) {
          ok = setInitLat( val );
       }
       else {
@@ -3732,8 +3733,8 @@ bool Player::setSlotInitLon(const Basic::Angle* const msg)
 {
    bool ok = false;
    if (msg != 0) {
-      LCreal val = (LCreal) Basic::Degrees::convertStatic(*msg);
-      if (val >= -180.0f && val <= 180.0f) {
+      double val = (LCreal) Basic::Degrees::convertStatic(*msg);
+      if (val >= -180.0 && val <= 180.0) {
          ok = setInitLon( val );
       }
       else {
@@ -3748,8 +3749,8 @@ bool Player::setSlotInitLon(const Basic::Number* const msg)
 {
    bool ok = false;
    if (msg != 0) {
-      LCreal val = msg->getReal();
-      if (val >= -180.0f && val <= 180.0f) {
+      double val = msg->getDouble();
+      if (val >= -180.0 && val <= 180.0) {
          ok = setInitLon( val );
       }
       else {

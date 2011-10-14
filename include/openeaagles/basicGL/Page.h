@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: Page
 //------------------------------------------------------------------------------
-#ifndef __OpenEaagles_BasicGL_Page_H__
-#define __OpenEaagles_BasicGL_Page_H__
+#ifndef __Eaagles_BasicGL_Page_H__
+#define __Eaagles_BasicGL_Page_H__
 
 #include "Graphic.h"
 #include "openeaagles/basic/Identifier.h"
@@ -182,4 +182,4 @@ private:
 } // End BasicGL namespace
 } // End Eaagles namespace
 
-#endif	/* __OpenEaagles_BasicGL_Page_H__ */
+#endif

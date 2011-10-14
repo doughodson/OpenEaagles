@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: Material
 //------------------------------------------------------------------------------
-#ifndef __Material_H_B9CB087C_FAC1_472f_B5EC_405B3F0567B1__
-#define __Material_H_B9CB087C_FAC1_472f_B5EC_405B3F0567B1__
+#ifndef __Eaagles_BasicGL_Material_H__
+#define __Eaagles_BasicGL_Material_H__
 
 #include "openeaagles/basic/Component.h"
 #include <GL/glu.h>
@@ -83,4 +83,4 @@ private:
 } // End BasicGL namespace
 } // End Eaagles namespace
 
-#endif	/* __Material_H_B9CB087C_FAC1_472f_B5EC_405B3F0567B1__ */
+#endif

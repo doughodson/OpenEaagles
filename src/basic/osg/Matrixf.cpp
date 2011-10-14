@@ -1,4 +1,4 @@
-/* -*-c++-*- OpenSceneGraph - Copyright (C) 1998-2005 Robert Osfield 
+/* -*-c++-*- OpenSceneGraph - Copyright (C) 1998-2006 Robert Osfield 
  *
  * This library is open source and may be redistributed and/or modified under  
  * the terms of the OpenSceneGraph Public License (OSGPL) version 0.0 or 
@@ -35,6 +35,8 @@ void osg::Matrixf::set(const osg::Matrixd& rhs)
     set(rhs.ptr());
 }
 
+} // End Eaagles namespace
+
 // now compile up Matrix via Matrix_implementation
 #include "Matrix_implementation.cpp"
-} // End Eaagles namespace
+

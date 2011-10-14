@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: Object   
 //------------------------------------------------------------------------------
-#ifndef __Object_H_A96DA5AA_C819_4442_B731_D215AD4A9DF9__
-#define __Object_H_A96DA5AA_C819_4442_B731_D215AD4A9DF9__
+#ifndef __Eaagles_Basic_Object_H__
+#define __Eaagles_Basic_Object_H__
 
 #include "openeaagles/basic/support.h"
 #include "openeaagles/basic/macros.h"
@@ -458,4 +458,4 @@ private:
 } // End Basic namespace
 } // End Eaagles namespace
 
-#endif	/* __Object_H_A96DA5AA_C819_4442_B731_D215AD4A9DF9__ */
+#endif

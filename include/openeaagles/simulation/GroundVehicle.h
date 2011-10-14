@@ -5,8 +5,8 @@
 // Description: Generic Ground Vehicles
 //
 //------------------------------------------------------------------------------
-#if !defined(__GROUNDVEHICLE_H_12DE4387_0EC8_407c_A4B9_4974E8223847__)
-#define __GROUNDVEHICLE_H_12DE4387_0EC8_407c_A4B9_4974E8223847__
+#ifndef __Eaagles_Simulation_GroundVehicle_H__
+#define __Eaagles_Simulation_GroundVehicle_H__
 
 #include "openeaagles/simulation/Player.h"
 
@@ -33,7 +33,6 @@ namespace Simulation {
 //       angle should be greater than the down angle.
 //   (2) This launcher is a temp solution -- this will be removed.
 //
-// GUID: (12DE4387-0EC8-407c-A4B9-4974E8223847)
 //==============================================================================
 class GroundVehicle : public Player  
 {
@@ -93,7 +92,6 @@ private:
 //==============================================================================
 // Class Tank
 // Form name: Tank
-// GUID: (1707667D-6228-4df6-A69F-3A1DD586E4F1)
 //==============================================================================
 class Tank : public GroundVehicle  
 {
@@ -106,7 +104,6 @@ public:
 //==============================================================================
 // Class ArmoredVehicle
 // Form name: ArmoredVehicle
-// GUID: {351F40BF-1AB4-43c2-98E8-69ADB8C08C2D}
 //==============================================================================
 class ArmoredVehicle : public GroundVehicle  
 {
@@ -119,7 +116,6 @@ public:
 //==============================================================================
 // Class WheeledVehicle
 // Form name: WheeledVehicle
-// GUID: {1A69ADA9-7ADA-4002-9E46-3009B45D41EC}
 //==============================================================================
 class WheeledVehicle : public GroundVehicle  
 {
@@ -132,7 +128,6 @@ public:
 //==============================================================================
 // Class Artillery
 // Form name: Artillery
-// GUID: {E8A3B240-1910-4bdf-8E6C-7C4C75012FAA}
 //==============================================================================
 class Artillery : public GroundVehicle  
 {
@@ -146,7 +141,6 @@ public:
 //==============================================================================
 // Class GroundStation
 // Form name: GroundStation
-// GUID: {0B6D5395-D834-4251-A4B3-B14FE59D267C}
 //==============================================================================
 class GroundStation : public GroundVehicle  
 {
@@ -159,7 +153,6 @@ public:
 //==============================================================================
 // Class GroundStationRadar
 // Form name: GroundStationRadar
-// GUID: {07F53C9F-E017-46a3-9DF2-6D02F100967C}
 //==============================================================================
 class GroundStationRadar : public GroundStation  
 {
@@ -172,7 +165,6 @@ public:
 //==============================================================================
 // Class GroundStationUav
 // Form name: GroundStationUav
-// GUID: {6EC343F0-304C-4e9e-BF4F-C48B90719826}
 //==============================================================================
 class GroundStationUav : public GroundStation  
 {
@@ -185,4 +177,4 @@ public:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // !defined(__GROUNDVEHICLE_H_12DE4387_0EC8_407c_A4B9_4974E8223847__)
+#endif

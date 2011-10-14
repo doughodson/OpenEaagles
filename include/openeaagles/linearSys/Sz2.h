@@ -2,8 +2,8 @@
 // Sz2 class -- Second order transfer function
 // ##### IN-WORK #####
 //------------------------------------------------------------------------------
-#ifndef __LinearSystem_Sz2_H_5E5ABB8B_B45B_48e4_8D8E_4EFF066B9C86__
-#define __LinearSystem_Sz2_H_5E5ABB8B_B45B_48e4_8D8E_4EFF066B9C86__
+#ifndef __Eaagles_LinearSystem_Sz2_H__
+#define __Eaagles_LinearSystem_Sz2_H__
 
 #include "openeaagles/linearSys/SecondOrderTf.h"
 
@@ -42,8 +42,6 @@ namespace LinearSystem {
 //    D3    <Number>     Coefficent D3 (default: 0)
 //    d3    <Number>     Coefficent D3 (default: 0)
 //
-//
-// GUID: {5E5ABB8B-B45B-48e4-8D8E-4EFF066B9C86}
 //------------------------------------------------------------------------------
 class Sz2 : public SecondOrderTf {
     DECLARE_SUBCLASS(Sz2,SecondOrderTf)
@@ -63,4 +61,4 @@ public:
 } // End LinearSystem namespace
 } // End Eaagles namespace
 
-#endif      /* __LinearSystem_Sz2_H_5E5ABB8B_B45B_48e4_8D8E_4EFF066B9C86__ */
+#endif

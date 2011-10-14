@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Form function for the 'instruments' library
 //------------------------------------------------------------------------------
-#ifndef __OpenEaagles_Instruments_FormFunc_H__
-#define __OpenEaagles_Instruments_FormFunc_H__
+#ifndef __Eaagles_Instruments_FormFunc_H__
+#define __Eaagles_Instruments_FormFunc_H__
 
 namespace Eaagles {
    namespace Basic { class Object; }

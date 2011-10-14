@@ -1,4 +1,4 @@
-/* -*-c++-*- OpenSceneGraph - Copyright (C) 1998-2005 Robert Osfield 
+/* -*-c++-*- OpenSceneGraph - Copyright (C) 1998-2006 Robert Osfield 
  *
  * This library is open source and may be redistributed and/or modified under  
  * the terms of the OpenSceneGraph Public License (OSGPL) version 0.0 or 
@@ -11,26 +11,20 @@
  * OpenSceneGraph Public License for more details.
 */
 
-#ifndef OSG_MATRIX_ETK
-#define OSG_MATRIX_ETK 1
+#ifndef OSG_MATRIX_OE
+#define OSG_MATRIX_OE 1
 
-#include "Matrixd"
-#include "Matrixf"
-
-#ifdef LCREAL_DOUBLE
-#define OSG_USE_DOUBLE_MATRICES 1
-#endif
+#include "openeaagles/basic/support.h"
+#include "./Matrixd"
+#include "./Matrixf"
 
 namespace Eaagles {
 namespace osg {
 
-#ifdef OSG_USE_DOUBLE_MATRICES
+#ifdef LCREAL_DOUBLE
     typedef Matrixd Matrix;
-    //typedef RefMatrixd RefMatrix;
 #else
     typedef Matrixf Matrix;
-    //typedef RefMatrixf RefMatrix;
-
 #endif
 
 } //namespace osg

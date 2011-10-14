@@ -114,7 +114,7 @@ void VMAP0ReferenceDirectory::loadTables()
                 size_t size = strlen(x);
                 size_t count = 0;
                 while (x[count] != ' ' && count < size) count++;
-                x[count] = NULL;            
+                x[count] = 0;            
 
 #if 1
                 //if (strcmp(x, "polbnd") == 0) {

@@ -2,8 +2,8 @@
 // Class:	Locus
 //------------------------------------------------------------------------------
 
-#ifndef  __Locus_H_0C19A382_2FF9_4410_8BC5_B27028070D5A__
-#define  __Locus_H_0C19A382_2FF9_4410_8BC5_B27028070D5A__
+#ifndef  __Eaagles_Basic_Locus_H__
+#define  __Eaagles_Basic_Locus_H__
 
 #include "openeaagles/basic/Object.h"
 
@@ -14,7 +14,6 @@ namespace Basic {
 // Class: Locus
 // Base class: Object -> Locus
 // Form name: Locus
-// GUID: {0C19A382-2FF9-4410-8BC5-B27028070D5A}
 //
 // Description: A line of evenly spaced data points in a specific direction and
 //              range from a reference point.  Or according to Webster, "Set of
@@ -80,4 +79,4 @@ private:
 } // End Basic namspace
 } // End Eaagles namespace
 
-#endif	/* __Locus_H_0C19A382_2FF9_4410_8BC5_B27028070D5A__ */
+#endif

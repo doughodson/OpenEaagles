@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: SignalGen
 //------------------------------------------------------------------------------
-#ifndef __IoDevice_SignalGen_H_11D1F89D_2136_49df_96FE_FBA550298082__
-#define __IoDevice_SignalGen_H_11D1F89D_2136_49df_96FE_FBA550298082__
+#ifndef __Eaagles_IoDevice_SignalGen_H__
+#define __Eaagles_IoDevice_SignalGen_H__
 
 #include "openeaagles/basic/IoAdapter.h"
 
@@ -42,8 +42,6 @@ namespace IoDevice {
 //      ai        <Number>       ! IoData's AI channel (AI signal generator only)
 //      channel   <Number>       ! Output device channel number (AO signal generator only)
 //
-//
-// Guid: {11D1F89D-2136-49df-96FE-FBA550298082}
 //------------------------------------------------------------------------------
 class SignalGen : public Basic::IoAdapter {
    DECLARE_SUBCLASS(SignalGen,Basic::IoAdapter)

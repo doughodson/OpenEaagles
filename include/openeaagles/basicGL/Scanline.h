@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: Scanline
 //------------------------------------------------------------------------------
-#ifndef	__Scanline_H_1302EDF7_242B_48cb_AF75_B72A26BBFA7D__
-#define __Scanline_H_1302EDF7_242B_48cb_AF75_B72A26BBFA7D__
+#ifndef	__Eaagles_BasicGL_Scanline_H__
+#define __Eaagles_BasicGL_Scanline_H__
 
 #include "openeaagles/basic/Object.h"
 
@@ -17,8 +17,6 @@ class Polygon;
 // Base class:	Object -> Scanline
 // Description:  (Abstract) 2D scan line engine.  
 // Form name: Scanline
-// 
-// GUID: {1302EDF7-242B-48cb-AF75-B72A26BBFA7D}
 //------------------------------------------------------------------------------
 class Scanline : public Basic::Object {
    DECLARE_SUBCLASS(Scanline,Basic::Object)
@@ -135,5 +133,4 @@ private:
 } // End BasicGL namespace
 } // End Eaagles namespace
 
-#endif	/* __Scanline_H_1302EDF7_242B_48cb_AF75_B72A26BBFA7D__ */
-
+#endif

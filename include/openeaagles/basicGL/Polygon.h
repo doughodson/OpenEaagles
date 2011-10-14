@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
-// Class:       Polygon
+// Class: Polygon
 //------------------------------------------------------------------------------
-#ifndef	__Polygon_H_FDA40F2F_E187_4102_8159_032566BF4438__
-#define __Polygon_H_FDA40F2F_E187_4102_8159_032566BF4438__
+#ifndef	__Eaagles_BasicGL_Polygon_H__
+#define __Eaagles_BasicGL_Polygon_H__
 
 #include "Graphic.h"
 
@@ -105,5 +105,4 @@ private:
 } // End BasicGL namespace
 } // End Eaagles namespace
 
-#endif	/* __Polygon_H_FDA40F2F_E187_4102_8159_032566BF4438__ */
-
+#endif

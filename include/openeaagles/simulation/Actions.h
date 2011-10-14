@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Actions -- Things to do.
 //------------------------------------------------------------------------------
-#ifndef __Action_H_F4772DC9_F695_4cdb_BBE2_6431B2D43A8B__
-#define __Action_H_F4772DC9_F695_4cdb_BBE2_6431B2D43A8B__
+#ifndef __Eaagles_Simulation_Action_H__
+#define __Eaagles_Simulation_Action_H__
 
 #include "openeaagles/basic/Component.h"
 
@@ -33,7 +33,6 @@ class Steerpoint;
 //  4) Any action that will take time to complete must have a manager
 //     passed via trigger().
 //
-// Guid: {F4772DC9-F695-4cdb-BBE2-6431B2D43A8B}
 //------------------------------------------------------------------------------
 class Action : public Basic::Component 
 {
@@ -77,7 +76,6 @@ private:
 //   resolution    <Distance> ! Image (pixel) resolution   (Distance) (default: 3)
 //   imageSize     <Number>   ! Image size: height & width (pixels) (default: 512)
 //
-// Guid: {5B19BC09-BEC9-4752-8FA2-F43FC37472E2}
 //------------------------------------------------------------------------------
 class ActionImagingSar : public Action 
 {
@@ -144,7 +142,6 @@ private:
 //   targetElevation  <Number>  ! Target's elevation (feet) (default: 0)
 //   station          <Number>  ! Station number to use (default: 0)
 //
-// Guid: {A63DF7A5-E114-43a4-887C-469183FC960D}
 //------------------------------------------------------------------------------
 class ActionWeaponRelease : public Action 
 {
@@ -189,7 +186,6 @@ private:
 //   numToLaunch  <Number>  ! number of decoys to launch (default: 1)
 //   interval     <Number>  ! time, in seconds, between launches (default: 0)
 //
-// Guid: {7382B697_767A_4c91_837F_CAA410485820}
 //------------------------------------------------------------------------------
 class ActionDecoyRelease : public Action 
 {
@@ -227,7 +223,6 @@ private:
 //   camouflageType  <Number>  ! User-defined camouflage type (positive integer or zero for none)
 //                             ! (default: 0)
 //
-// Guid: {5860BD7C-C17F-4486-8FDA-1E763881A658}
 //------------------------------------------------------------------------------
 class ActionCamouflageType : public Action 
 {
@@ -250,4 +245,4 @@ private:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // __Action_H_F4772DC9_F695_4cdb_BBE2_6431B2D43A8B__
+#endif

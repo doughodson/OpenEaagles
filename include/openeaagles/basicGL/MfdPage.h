@@ -2,8 +2,8 @@
 // Class: MfdPage
 //------------------------------------------------------------------------------
 
-#if !defined EAAGLES_BASICGL_MFDPAGE_H__
-#define EAAGLES_BASICGL_MFDPAGE_H__
+#ifndef __Eaagles_BasicGL_MfdPage_H__
+#define __Eaagles_BasicGL_MfdPage_H__
 
 #include "openeaagles/basicGL/Page.h"
 
@@ -83,4 +83,4 @@ protected:
 }  // end of BasicGL namespace
 }  // end of Eaagles namespace
 
-#endif // EAAGLES_BASICGL_MFDPAGE_H__
+#endif

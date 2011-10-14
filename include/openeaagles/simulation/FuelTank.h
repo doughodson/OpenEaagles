@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: FuelTank
 //------------------------------------------------------------------------------
-#ifndef __FuelTank_H_A857B4DA_D812_4cbb_B54A_6D15CF500B03__
-#define __FuelTank_H_A857B4DA_D812_4cbb_B54A_6D15CF500B03__
+#ifndef __Eaagles_Simulation_FuelTank_H__
+#define __Eaagles_Simulation_FuelTank_H__
 
 #include "openeaagles/simulation/ExternalStore.h"
 
@@ -19,7 +19,6 @@ namespace Simulation {
 //    fuelWt      <Number>  ! Fuel wt (lb) (default: -1)
 //    capacity    <Number>  ! Tank capacity (lb) (default: -1)
 //
-// GUID: {A857B4DA-D812-4cbb-B54A-6D15CF500B03}
 //------------------------------------------------------------------------------
 class FuelTank : public ExternalStore
 {
@@ -54,4 +53,4 @@ private:
 } // end Simulation namespace
 } // end Eaagles namespace
 
-#endif // __FuelTank_H_A857B4DA_D812_4cbb_B54A_6D15CF500B03__
+#endif

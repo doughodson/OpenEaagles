@@ -1,190 +1,472 @@
-# $Id: AUTHORS.txt,v 1.15 2004/11/30 18:13:53 don Exp $
-#
-# The is a list of authors and contributors to the project.
-# Feel free to add your name and change list.
+OpenSceneGraph Library 3.0.1
 
-Robert Osfield <robert@openscenegraph.com>
-        - osg, osgUtil, osgText, osgSim and osgDB.
-        - osg, osgText, pfb, 3ds, gif, jpeg, tiff, tga, pic, tgz & zip plugins.
-        - sgv, various revisions, now most of code is in osgGLUT.
-        - 2nd iteration of impostor implemtentation.
-        - 2nd iteration of shadow occlusion culling.
-        - documentation?!
-        - visual studio workspace files/unix makefiles.
-        - project admin & lead.
+466 Contributors:
 
-Don Burns <don@andesengineering.com>
-        - Open Producer
-        - unix makefiles.
-        - osg (particularily OpenGL)
-        - first version of sgv.
-        - osghangglide database & osgtgz plugins.
-        
-Marco Jez <marco.jez@arsenal.it>
-        - osgParticle
-        - osgFX
-        - IO support for osgText.
-
-Brede Johansen <bredej@email.com>
-        - flt loader.
-        - osg::Point.
-        - osg::TextureCubeMap
-        - osg::VertexProgram
-        - assistance on visual studio workspace files.
-
-Neil Salter <neil@nackle.org>
-        - osgGA
-        - unit test framework
-        - osgSim::SphereSegment and osgSim::ScalarBar
-        - web site.
-
-Karsten Weiss <knweiss@gmx.de>
-        - 1st iteration of impostor implemtentation.
-        - rpm spec file.
-        - documentation.
-        - bug fixes.
-
-Graeme Harkness <graeme@phys.strath.ac.uk>
-        - osg::Vec2,Vec3,Vec4 & osg::Quat classes.
-        - reworking of old sgv into osgGLUT and a slim line Demos/sgv.
-        - Demos/cube.
-
-
-Ben Discoe <ben@vterrain.org>
-        - osgWX and wxsgv demos for integration of OSG with wxWindows.
-        - png plugin.
-        - fixes to OBJ plugin.
-       
-Mike Weiblen <mike.weiblen@3dlabs.com> <mew@mew.cx>
-        - osgGL2, osgshaders example
-	- win32 binary installer package.
-	- rot, scale, trans pseudoloader plugins.
-        - assistance on visual studio workspace files.
-	- osg.ico windows icon
-
-Randall Hopper <aa8vb@yahoo.com>
-        - port to FreeBSD.
-        - warning fixes to IRIX compilation.
-        - Open DX writer.
-
-Ulrich Hertlein <u.hertlein@bit-side.com>
-        - support for IBM Mirror Repeat extension in osg::Texture
-        - support for texture subloading in osg::Texture
-        - osg::Sequence support.
-        - improvements to the pfb loader.
-        - .lwo, .obj and .x (DirectX model) plugins.
-        - osg::TextureRectangle * osgtexturerectangle example.
-
-Axel Volley <volley@acm.org>
-        - support for OBJECT_LINEAR and EYE_LINEAR TexGen modes.
-        - support for the Anistropic texture filter extension.
-
+Firstname Surname
+-----------------
+Robert Osfield
+Don Burns
+Stephan Huber
+Paul Martz
+Marco Jez
+Mathias Fröhlich
+Mike Weiblen
+Jean-Sébastien Guay
+Farshid Lashkari
+Eric Wing
+Wang Rui
+Ulrich Hertlein
+Cedric Pinson
+Brede Johansen
+Sukender 
+Michael Platings
+Bob Kuehne
 Geoff Michel
-        - .dw (design workshop) loader plugin.
-        - .bmp (Windows Bitmap file) loader plugin.
-        - .geo (Carbon Graphics GEO) loader plugin.
-        - OpenGL based stats reporting added to osgGLUT::Viewer.
-        
-Mike Connell <mikec@vsect.chalmers.se>
-        - First implementation of shadow occlusion culling.
-        - improvements to 3ds plugin.
-
-Michael Gronager <Michael.Gronager@uni-c.dk>
-        - jp2 plugin - for reading and writing JPEG2000 image files
-
-Phil Atkin <philatkin@philatkin.com>
-        - MacOS X port.
-
-Boris Bralo <boris.bralo@zg.tel.hr>
-        - txp TerraPage loader.
-
-Sasa Bistrovic <sasa.bistrovic@zg.hinet.hr>
-        - option for detailed calculation of the near clipping plane during cull traversal.
-        - osg::DOFTransform
-
-Vivek Rajan <vrajan@magic-earth.com>
-        - Inventor based .iv/.wrl plugin.
-
-Nikolaus Hanekamp <hanekamp@stn-atlas.de>
-        - added support billboards to Open Flight loader.
- 
-Yefei He <yhe@nads-sc.uiowa.edu>
-        - added support for nested extension, instance defination and reference
-          to the Open Flight loader.
-          
-Norman Vine <nhv@cape.com>
-        - Cygwin and Mingw ports.
-
-Bob Kuehne <rpk@mac.com>
-        - assistance with MacOSX port.
-        
-Kristopher Bixler <kbixler@mac.com>        
-        - port to OSX's native dynamic library support.
-
-Tino Schwarze <tino.schwarze@informatik.tu-chemnitz.de>
-        -port to HP-UX.
-
-Ruben Lopez <ryu@gpul.org>
-        - Inventor ascii/VRML 1.0 loader.
-
-Pavel Moloshtan <pasha@moloshtan.com>
-        - First version of LightWave LWO2 format in lwo plugin.
-        - Support of GL_ARB_occlusion_query in osg::Drawable.
-        - Support of GL_ARB_shadow in osg::Texture, osgdepthtexture example.
-        - Support of GL_ARB_shadow_ambient in osg::Texture.
-        - Improvement to the ive plugin.
-
-Daniel Sjölie <deepone@acc.umu.se>
-        - Support for multitextured flt files.
-           
-Alberto Barbati <abarbati@iaanus.com>
-        - lazy evaluation of the inverse in the MatrixTransform.
-
-Gideon May <gideon@computer.org>
-        - Fixed spacing in osgText.
-        
-Tree <tree@stain.org>
-        - Support for encoded text types in osgText.
-
-Vladimir Vukicevic <vladimir@pobox.com>
-        - md2 loader.
-        
-Rune Schmidt Jensen <rune@schmidt-jensen.com>
-        - dds loader.
-	- ive plugin.
-        
-Romano José Magacho da Silva <rmagacho@predialnet.com.br>
-        - pause/resume in osgGA::AnimationPathManipulator
-        - support for managing deleted vertex programs in osg::VertexProgram.
-        - osg::FragmentProgram.
-
-Eric Sokolowsky <esok@cosimo.gsfc.nasa.gov>
-        - pbm/pgm/ppm reader.
-
-        
-Indirect Contributors
----------------------
-    
-J.E. Hoffmann <je-h@gmx.net>
-    - lib3ds library.
-    
-Systems in Motion <http://www.sim.no>
-    Peder Blekken <pederb@sim.no>
-    Morten Eriksen <mortene@sim.no>
-    Marius Bugge Monsen <mariusbu@sim.no>
-    - simage library which provide base for gif,jpg,pic,tga,tiff image loaders.
-    
-Janne Löf <jlof@mail.student.oulu.fi>
-    - lw is a LightWave mesh reader, used to develop osgPlugins/lwo.
-
-Nate Robins - http://www.pobox.com/~ndr/
-    - glm file format reader, usedf to develop osgPlugin/obj. 
-
-Bryan Walsh
-    - original txp loader for sgl (scene graph library)
- 
-Terrex
-    - the original base source for txp loader.
-
-Tanguy Fautré <softdev@pandora.be>
-    - tri_stripper code utilized in the src/osgUtil/TriStipVisitor.cpp.
+Eric Sokolowsky
+Wojciech Lewandowski
+David Callu
+Trajce Nikolov
+Tim Moore
+Martin Lavery
+Colin McDonald
+Tree 
+Luigi Calori
+Mike Wittman
+Roland Smeenk
+Roger James
+Jeremy Moles
+Chris Hanson
+Jason Beverage
+Mattias Helsing
+Jan Peciva
+Andy Skinner
+Paul Melis
+J.P. Delport
+David Fries
+Tom Jolley
+Pavel Moloshtan
+Jason Daly
+Alberto Luaces
+Philip Lowman
+Per Fahlberg
+Norman Vine
+Art Tevs
+Serge Lages
+Magnus Kessler
+Laurens Voerman
+Alberto Farre
+Terry Welsh
+Sherman Wilcox
+Robert Milharcic
+Olaf Flebbe
+Mathieu Marache
+André Garneau
+Adrian Egli
+Ruben Lopez
+Randall Hopper
+Mourad Boufarguine
+Brad Christiansen
+Gideon May
+Don Tidrow
+Chris Denham
+Stephane Lamoliatte
+Romano José Magacho da Silva
+Michael Gronager
+Joakim Simonsson
+David Spilling
+Daniel Sjölie
+Bryan Thrall
+Glenn Waldron
+Fabien Lavignotte
+Torben Dannhauer
+Melchior Franz
+Lionel Lagarde
+Jan Ciger
+Rafa Gaitan
+Neil Hughes
+Mike Connell
+Martin Beckett
+Joran Jessurun
+Gino van den Bergen
+Frederic Marmond
+David Guthrie
+Csaba Halasz
+Boris Bralo
+Andreas Ekstrand
+Yefei He
+Sondra Iverson
+Simon Julier
+Rune Schmidt Jensen
+Rainer Oder
+Martin Naylor
+Martin Aumueller
+Mario Valle
+Luc Frauciel
+Gordon Tomlinson
+Cory Riddell
+Carlo Camporesi
+Ben Discoe
+Thibault Genessay
+Sasa Bistrovic
+Ravi Mathur
+Ralf Habacker
+Neil Groves
+Markus Trenkwalder
+Loic Dachary
+Joseph Steel
+Jorge Izquierdo
+John Shue
+Johannes Baeuerle
+Chuck Seberino
+Brad Colbert
+Vivek Rajan
+Uwe Woessner
+Thom DeCarlo
+Tatsuhiro Nishioka
+Tanguy Fautré
+Sean Spicer
+Richard Schmidt
+Peter Hrenka
+Paul de Repentigny
+Nikolaus Hanekamp
+Neil Salter
+Mihai Radu
+Michael Hartman
+Martins Innus
+Maciej Krol
+Johan Nouvel
+Hartwig Wiesmann
+Frederic Bouvier
+Donn Mielcarek
+Corbin Holtz
+Blasius Czink
+Toshiyuki Takahei
+Tony Horrobin
+Sebastien Grignard
+Ryan Kawicki
+Romano Magacho
+Riccardo Corsi
+Nico Kruithof
+Mikhail Izmestev
+Maria Ten
+Liang Aibin
+Leandro Motta Barros
+Katharina Plugge
+John Vidar Larring
+John Kelso
+John Ivar
+Gustav Haapalahti
+Emmanuel Roche
+Daniel Larimer
+Colin Dunlop
+Bruce Clay
+Bradley Anderegg
+Andreas Goebel
+Alok Priyadarshi
+Alexander Irion
+Alberto Barbati
+Alan Dickinson
+Vladimir Shabanov
+Tugkan Calapoglu
+Tim Daoust
+Thomas Hogarth
+Sohey Yamamoto
+Sergey Leontyev
+Santosh Gaikwad
+Ryan Pavlik
+Rudolf Wiedemann
+Rene Molenaar
+Phil Atkin
+Nathan Monteleone
+Miguel Escriva
+Mattias Linde
+Mark Sciabica
+Lilin Xiong
+Lee Butler
+Konstantin Sinitsyn
+Ken Sewell
+Julian Ortiz
+Jim Vaughan
+Jeremy Bell
+Jaromir Vitek
+James French
+Gary Quinn
+Garrett Potts
+Gabor Dorka
+Fabio Mierlo
+Erik den Dekker
+Doug McCorkle
+Donald Cipperly
+Don Leich
+Domenico Mangieri
+Charles Cole
+Blake Williams
+Antoine Hue
+Andrew Bettison
+Anders Backman
+Ali Botorabi
+Alexander Wiebel
+Zach Deedler
+Yuzhong Shen
+Warren Macchi
+Vincent Bourdier
+Terrex 
+Tassilo Glander
+Sylvain Marie
+Steve Lunsford
+Stephane Simon
+Stephan Eilemann
+Stanislav Blinov
+Sebastian Messerschmidt
+Raymond de Vries
+Ralf Kern
+Piotr Gwiazdowski
+Pierre Haritchabalet
+Perry Miller
+Paul Obermeier
+Nguyen Van Truong
+Nathan Cournia
+Morné Pistorius
+Michael Henheffer
+Michael Guerrero
+Maya Leonard
+Max Bandazian
+Mathias Fiedler
+Mathew May
+Martin Spott
+Martijn Kragtwijk
+Marius Heise
+Marcin Hajder
+Lukasz Izdebski
+Lilith Bryant
+Lars Nilsson
+Kevin Moiule
+Keith Steffen
+Julen Garcia
+Joseph Winston
+John Aughey
+Joachim Pouderoux
+Jean-Christophe Lombardo
+Javier Taibo
+James Moliere
+Igor Kravtchenko
+Himar Carmona
+He Sicong
+Guy Volckaert
+Gustavo Wagner
+Guillaume Taze
+Guillaume Chouvenc
+Gerrick Bivins
+George Tarantilis
+Ferdi Smit
+Eric Buehler
+Eduardo Poyart
+Edgar Ellis
+Dimi Christopoulos
+Dietmar Funck
+David Ergo
+Daniel Trstenjak
+Craig Bosma
+Christophe Loustaunau
+Brad Anderegg
+Aric Aumann
+Andrew Sampson
+Andrew Lorino
+Alexandre Amalric
+Alessandro Terenzi
+Zbigniew Sroczynski
+Yuri Vilmanis
+Xin Li
+Wang Lam
+Walter J. Altice
+Volker Walkiewicz
+Vladimir Vukicevic
+Vlad Danciu
+Vivien Delage
+Vincent Vivanloc
+Vincent Gadoury
+Vasily Radostev
+Valery Bickov
+Vaclav Bilek
+Tyge Løvset
+Troy Yee
+Tomas Hogarth
+Tomas Hnilica
+Todd Furlong
+Tino Schwarze
+Thomas Weidner
+Tan Dunning
+Stewart Andreason
+Steven Thomas
+Simon Hammett
+Simon Carmody
+Simon Buckley
+Sid Byce
+Shuxing Xiao
+Shane Arnott
+Sebastien Kuntz
+Ruth Lang
+Ruben Smelik
+Ross Anderson
+Ronny Krueger
+Ronald van Maarseveen
+Romain Charbit
+Robert Swain
+Rob Smith
+Rob Radtke
+Rob Bloemkool
+Rick Pingry
+Rick Appleton
+Reinhard Sainitzer
+Rein Kadijk
+Ragnar Hammarqvist
+Qing Shen
+Piotr Rak
+Pierre Bourdin
+Philipp Svehla
+Philipp Siemoleit
+Philipp Mächler
+Philip Lamb
+Petr Salinger
+Peter Bear
+Peter Amstutz
+Paul Palumbo
+Paul Fredrikson
+Paul Fotheringham
+Pau Garcia
+Patrick Hartling
+Parag Chaudhur
+Panagiotis Papadakos
+Panagiotis Koutsourakis
+Orhun Birsoy
+Oliver Neumann
+Ole-Morten Duesund
+Nicolas Brodu
+Morten Haukness
+Mojtaba Fathi
+Mirko Viviani
+Mikkel GjÃ¸l
+Mike Garrity
+Michael Polak
+Michael Morrison
+Michael Logan
+Max Rhiener
+Max Behensky
+Mauricio Hofmam
+Matthew May
+Matthew Johnson-Roberson
+Matt Green
+Matt Burke
+Mathias Walker
+Mathias Goldau
+Mason Menninger
+Martin von Gargern
+Martin Scheffler
+Martin Lambers
+Martin Innus
+Martin Beck
+Mario Guimaraes
+Marco Sciabica
+Marco Lehmann
+Marcin Prus
+Maik Keller
+Lukas Diduch
+Louis Hamilton
+Lewis Harmon
+Laurence Muller
+Laura Cerritelli
+Kyle Centers
+Kristopher Bixler
+Konstantin Matveyev
+Kim Seokhwan
+Karsten Weiss
+Karl Heijdenberg
+Jutta Sauer
+Julian Scheid
+Juan Hernando
+Josh Portway
+John Tan
+John Grant
+John Donovan
+John Davis
+John Cummings
+John Argentieri
+Joan Abadie
+Jim Brooks
+Jeroen den Dekker
+Jay Zuckerman
+Jason Howlett
+Jason Ballenger
+Jan Klimke
+James Killian
+J.E. Hoffmann
+Holger Helmich
+Henrique Bucher
+Hautio Jari
+Gunter Huber
+Guillaume Millet
+Gregory Jaegy
+Graeme Harkness
+Gian Lorenzetto
+George Papagiannakis
+Galen Faidley
+Frida Schlaug
+Frederic Smith
+Frank Warmerdam
+Frank Midgley
+Frank Lindeman
+Frank Lichtenheld
+Ferdinand Cornelissen
+Fajran Iman
+Fabien Dachicourt
+Erik Johnson
+Eduardo Alberto
+Edmond Gheury
+Ed Ralston
+Duvan Cope
+Duncan Cavens
+Drew Whitehouse
+Douglas A. Pouk
+Dean Iverson
+David Jung
+Danny Valente
+Daniel Stien
+Dan Minor
+César L. B. Silveira
+Cyril Brulebois
+Clay Fowler
+Claus Scheiblauer
+Chuck Sembroski
+Christopher Blaesius
+Christian Kaser
+Christian Ehrlicher
+Christian Buchner
+Chris McGlone
+Carlos Garcea
+Bryce Eldridge
+Bruno Herbelin
+Brian Keener
+Brandon Hamm
+Bora Utka
+Björn Hein
+Bill Prendergast
+Bernardt Duvenhage
+Benoit Laniel
+Benjamin Wasty
+Ben van Basten
+Bart Gallet
+Axel Volley
+Anthousis Andreadis
+Andy Preece
+Andrew Reyonolds
+Andreas Roth
+Andreas Jochens
+Andre Normann
+Almalric Alexandre
+Allen Bierbaum
+Alexander Sinditskiy
+Alberto Jaspe
+Alan Purvis
+Alan Ott
+Alan Harris
+Adam Richard

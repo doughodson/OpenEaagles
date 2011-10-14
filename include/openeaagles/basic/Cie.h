@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Classes: Cie, MonitorMetrics
 //------------------------------------------------------------------------------
-#ifndef __Cie_H_included__
-#define __Cie_H_included__
+#ifndef __Eaagles_Basic_Cie_H__
+#define __Eaagles_Basic_Cie_H__
 
 #include "openeaagles/basic/Color.h"
 #include "openeaagles/basic/osg/Matrix"
@@ -150,5 +150,5 @@ private:
 } // End Eaagles namespace
 
 
-#endif      /* __Cie_H_included__ */
+#endif
 

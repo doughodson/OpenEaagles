@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class:	Rotators
 //------------------------------------------------------------------------------
-#ifndef	__Rotators_H_F6427E97_0CFB_4271_BC71_B7680D853849
-#define __Rotators_H_F6427E97_0CFB_4271_BC71_B7680D853849
+#ifndef	__Eaagles_BasicGL_Rotators_H__
+#define __Eaagles_BasicGL_Rotators_H__
 
 #include "Graphic.h"
 #include "openeaagles/basic/units/Angles.h"
@@ -82,4 +82,4 @@ private:
 } // End BasicGL namespace
 } // End Eaagles namespace
 
-#endif	/* __Rotators_H_F6427E97_0CFB_4271_BC71_B7680D853849 */
+#endif

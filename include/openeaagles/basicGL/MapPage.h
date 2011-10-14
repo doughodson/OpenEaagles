@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: MapPage
 //------------------------------------------------------------------------------
-#if !defined EAAGLES_BASICGL_MAPPAGE_H__
-#define EAAGLES_BASICGL_MAPPAGE_H__
+#ifndef __Eaagles_BasicGL_MapPage_H__
+#define __Eaagles_BasicGL_MapPage_H__
 
 #include "openeaagles/basicGL/MfdPage.h"
 #include "openeaagles/basic/units/Angles.h"
@@ -298,8 +298,7 @@ inline bool MapPage::toggleCentered()
    return true;
 }
 
-}  // end of BasicGL namespace
-}  // end of Eaagles namespace
+}  // End BasicGL namespace
+}  // End Eaagles namespace
 
 #endif
-

@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: Dis::Ntm
 //------------------------------------------------------------------------------
-#ifndef __Dis_Ntm_H_AFD24E93_2161_46a2_B9F3_E9C64DEE3D31__
-#define __Dis_Ntm_H_AFD24E93_2161_46a2_B9F3_E9C64DEE3D31__
+#ifndef __Eaagles_Network_Dis_Ntm_H__
+#define __Eaagles_Network_Dis_Ntm_H__
 
 #include "openeaagles/simulation/Ntm.h"
 #include "openeaagles/dis/NetIO.h"
@@ -73,4 +73,4 @@ private:
 } // End Network namespace
 } // End Eaagles namespace
 
-#endif // __Dis_Ntm_H_AFD24E93_2161_46a2_B9F3_E9C64DEE3D31__
+#endif

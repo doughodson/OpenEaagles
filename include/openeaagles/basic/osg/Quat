@@ -1,4 +1,4 @@
-/* -*-c++-*- OpenSceneGraph - Copyright (C) 1998-2005 Robert Osfield 
+/* -*-c++-*- OpenSceneGraph - Copyright (C) 1998-2006 Robert Osfield 
  *
  * This library is open source and may be redistributed and/or modified under  
  * the terms of the OpenSceneGraph Public License (OSGPL) version 0.0 or 
@@ -11,13 +11,13 @@
  * OpenSceneGraph Public License for more details.
 */
 
-#ifndef OSG_QUAT_ETK
-#define OSG_QUAT_ETK 1
+#ifndef OSG_QUAT_OE
+#define OSG_QUAT_OE 1
 
-#include "Vec3f"
-#include "Vec4f"
-#include "Vec3d"
-#include "Vec4d"
+#include "./Vec3f"
+#include "./Vec4f"
+#include "./Vec3d"
+#include "./Vec4d"
 
 namespace Eaagles {
 namespace osg {
@@ -26,7 +26,7 @@ class Matrixf;
 class Matrixd;
 
 /** A quaternion class. It can be used to represent an orientation in 3D space.*/
-class OSG_EXPORT_ETK Quat
+class Quat
 {
 
     public:
@@ -363,7 +363,7 @@ class OSG_EXPORT_ETK Quat
         {
             // nVidia SDK implementation
             Vec3f uv, uuv; 
-            Vec3f qvec((Vec3f::value_type)_v[0], (Vec3f::value_type)_v[1], (Vec3f::value_type)_v[2]);
+            Vec3f qvec( (Vec3f::value_type) _v[0], (Vec3f::value_type) _v[1], (Vec3f::value_type) _v[2]);
             uv = qvec ^ v;
             uuv = qvec ^ uv; 
             uv *= (Vec3f::value_type) ( 2.0f * _v[3] ); 

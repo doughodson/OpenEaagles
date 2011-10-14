@@ -7,8 +7,8 @@
 //
 //    (see Object.h, parser.y, and various OpenEaagles examples)
 //------------------------------------------------------------------------------
-#ifndef _Glut_FormFunc_H_
-#define _Glut_FormFunc_H_
+#ifndef __Eaagles_Glut_FormFunc_H__
+#define __Eaagles_Glut_FormFunc_H__
 
 namespace Eaagles {
    namespace Basic { class Object; }

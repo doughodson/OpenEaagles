@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Classes: OtwCigiCl, CigiCl, CigiClNetwork, OtwModelCigiCl
 //------------------------------------------------------------------------------
-#ifndef __OpenEaagles_Otw_OtwCigiCl_h__
-#define __OpenEaagles_Otw_OtwCigiCl_h__
+#ifndef __Eaagles_Otw_OtwCigiCl_H__
+#define __Eaagles_Otw_OtwCigiCl_H__
 
 class CigiEntityCtrlV3;
 class CigiCompCtrlV3;
@@ -451,4 +451,4 @@ private:
 } // End Otw namespace
 } // End Eaagles namespace
 
-#endif // __OpenEaagles_Otw_OtwCigiCl_h__
+#endif

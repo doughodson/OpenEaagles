@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Classes: Terrain
 //------------------------------------------------------------------------------
-#ifndef __Terrain_H_E0B53E18_2BEE_4dc1_9380_30BEEA48B3A3___
-#define __Terrain_H_E0B53E18_2BEE_4dc1_9380_30BEEA48B3A3___
+#ifndef __Eaagles_Basic_Terrain_H__
+#define __Eaagles_Basic_Terrain_H__
 
 #include "openeaagles/basic/Component.h"
 
@@ -16,7 +16,6 @@ class String;
 //------------------------------------------------------------------------------
 // Class:   Terrain
 // Base classes: Object -> Component -> Terrain
-// GUID: {E0B53E18-2BEE-4dc1-9380-30BEEA48B3A3}
 //
 // Description: Abstract class for managing the terrain elevation databases.
 //              Database specific, derived classes will be used to handle the
@@ -205,4 +204,4 @@ private:
 } // End Basic namspace
 } // End Eaagles namespace
 
-#endif	/* __Terrain_H_E0B53E18_2BEE_4dc1_9380_30BEEA48B3A3___ */
+#endif

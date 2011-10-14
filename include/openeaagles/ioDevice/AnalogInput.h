@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: AnalogInput
 //------------------------------------------------------------------------------
-#ifndef __IoDevice_AnalogInput_H_57884031_E1D2_4bb4_A8E3_BA9EEBB90428__
-#define __IoDevice_AnalogInput_H_57884031_E1D2_4bb4_A8E3_BA9EEBB90428__
+#ifndef __Eaagles_IoDevice_AnalogInput_H__
+#define __Eaagles_IoDevice_AnalogInput_H__
 
 #include "openeaagles/basic/IoAdapter.h"
 
@@ -48,7 +48,6 @@ namespace IoDevice {
 //      gain         <Number>    Gain value   (default: 1.0)
 //      table        <Table1>    Shapping function table (default: none)
 //
-// Guid: {57884031-E1D2-4bb4-A8E3-BA9EEBB90428}
 //------------------------------------------------------------------------------
 class AnalogInput : public Basic::IoAdapter {
    DECLARE_SUBCLASS(AnalogInput,Basic::IoAdapter)

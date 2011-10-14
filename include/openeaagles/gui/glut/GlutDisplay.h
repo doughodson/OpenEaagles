@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
-// Class:  GlutDisplay
+// Class: GlutDisplay
 //------------------------------------------------------------------------------
-#ifndef _Glut_GlutDisplay_H_
-#define _Glut_GlutDisplay_H_
+#ifndef __Eaagles_Glut_GlutDisplay_H__
+#define __Eaagles_Glut_GlutDisplay_H__
 
 #include "openeaagles/basicGL/Display.h"
 
@@ -202,4 +202,4 @@ inline const osg::Vec2d& GlutDisplay::getSubwindowSize() const     { return swSi
 } // End Glut namespace
 } // End Eaagles namespace
 
-#endif  // _Glut_GlutDisplay_H_
+#endif
