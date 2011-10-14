@@ -71,7 +71,7 @@ namespace Simulation {
 //       ------------------   ------------------   -------------------------
 //       (INACTIVE)           <doesn't exit>       1) Weapon is inactive; attached to the launch vehicle
 //
-//       (LAUNCHED)           (PRE_RELEASE)        2) releae() is called; the flyout weapon
+//       (LAUNCHED)           (PRE_RELEASE)        2) release() is called; the flyout weapon
 //                                                 is created and added to player list
 //
 //       (LAUNCHED)           (ACTIVE)             3) At the end of the next time-critcal frame --

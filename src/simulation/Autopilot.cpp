@@ -46,7 +46,7 @@ BEGIN_SLOTTABLE(Autopilot)
    "followTheLeadMode",          // 15)"Follow the lead" mode flag               (Number)
 END_SLOTTABLE(Autopilot)
 
-//  Map slot table to handles 
+//  Map slot table to handles
 BEGIN_SLOT_MAP(Autopilot)
     ON_SLOT( 1, setSlotNavMode,                    Basic::Number)
     ON_SLOT( 2, setSlotHoldAltitude,               Basic::Distance)
@@ -65,7 +65,7 @@ BEGIN_SLOT_MAP(Autopilot)
     ON_SLOT(12, setSlotLeadFollowingDistanceRight, Basic::Number)
     ON_SLOT(13, setSlotLeadFollowingDeltaAltitude, Basic::Distance)
     ON_SLOT(13, setSlotLeadFollowingDeltaAltitude, Basic::Number)
-    ON_SLOT(14, setLeadPlayerName,                 Basic::Identifier)
+    ON_SLOT(14, setSlotLeadPlayerName,             Basic::Identifier)
     ON_SLOT(15, setSlotFollowTheLeadMode,          Basic::Number)
 END_SLOT_MAP()
 
@@ -107,6 +107,7 @@ Autopilot::Autopilot()
    loiterMirrorLon = 0;
    loiterState = 0;
    loiterLength = 10.0f;
+   loiterCourse = 0;
    loiterCcwFlag = false;
 
    setLeadFollowingDistanceTrail( Basic::Distance::NM2M );             // Default: 1 NM trail
@@ -163,10 +164,11 @@ void Autopilot::copyData(const Autopilot& org, const bool cc)
    loiterState = org.loiterState;
    loiterLength = org.loiterLength;
    loiterCcwFlag = org.loiterCcwFlag;
+   loiterCourse = org.loiterCourse;
 
    leadOffset = org.leadOffset;
    setLeadPlayer( org.lead );
-   setLeadPlayerName( org.leadName );
+   setSlotLeadPlayerName( org.leadName );
    followLeadModeOn =  org.followLeadModeOn;
    leadHdg = org.leadHdg;
 }
@@ -210,7 +212,7 @@ void Autopilot::process(const LCreal dt)
 }
 
 //------------------------------------------------------------------------------
-// Manage the modes -- 
+// Manage the modes --
 //------------------------------------------------------------------------------
 bool Autopilot::modeManager()
 {
@@ -305,9 +307,10 @@ bool Autopilot::processModeLoiter()
          // 2) computer the mirror point
          loiterAnchorLat = navLat;
          loiterAnchorLon = navLon;
+         loiterCourse = nav->getHeadingDeg();
          computerOrbitHoldingPatternMirrorWaypoint(
             loiterAnchorLat, loiterAnchorLon,            // Anchor point
-            nav->getHeadingDeg(),                        // In-bound course
+            loiterCourse,                                // In-bound course
             getLoiterPatternLengthNM(),                  // Min length (nm)
             nav->getTrueAirspeedKts(),                   // Speed (kts)
             isLoiterPatternCounterClockwise(),           // Counter-Clockwise pattern flag
@@ -356,15 +359,19 @@ bool Autopilot::processModeLoiter()
 bool Autopilot::processModeFollowTheLead()
 {
    bool ok = false;
-   const Player* const lp = getLeadPlayer();
-   if (followLeadModeOn && lp != 0 && (lp->isActive() && lp->getDamage() < 0.5f)) {
+   
+   // attempt to get our lead player, if we don't have one initially
+   if (lead == 0) getLeadPlayer();
+   
+   // if we got a lead player, great... if not, we break out of follow the lead mode.
+   if (lead->isActive() && lead->getDamage() < 0.5f) {
 
       // Position error gains
       static const double KX = 0.05;
       static const double KY = 0.05;
 
       // Velocity limits (m/s)
-      static const double T_VPMAX = 350.0; 
+      static const double T_VPMAX = 350.0;
       static const double T_VPMIN = 150.0;
 
       // ---
@@ -375,7 +382,7 @@ bool Autopilot::processModeFollowTheLead()
          // our lead's heading
 
          // ... first check for angle wrap around.
-         double newHdg = Basic::Angle::aepcdRad( lp->getHeading() );
+         double newHdg = Basic::Angle::aepcdRad( lead->getHeading() );
          if ( (leadHdg - newHdg) >  PI) newHdg += (2.0 * PI);
          if ( (leadHdg - newHdg) < -PI) newHdg -= (2.0 * PI);
 
@@ -393,7 +400,7 @@ bool Autopilot::processModeFollowTheLead()
       // ---
       // Compute displacement vector
       // ---
-      osg::Vec3d posLead = lp->getPosition();
+      osg::Vec3d posLead = lead->getPosition();
       osg::Vec3d posOwn  = getOwnship()->getPosition();
       double xi = posLead.x() - posOwn.x();
       double yi = posLead.y() - posOwn.y();
@@ -415,7 +422,7 @@ bool Autopilot::processModeFollowTheLead()
       // ... match leaders velocity vector [ vp  0 ] plus
       //     a delta velocity vector for position errors.
       // ---
-      double vx = lp->getTotalVelocity() + KX * dx0;
+      double vx = lead->getTotalVelocity() + KX * dx0;
       double vy =                      0 + KY * dy0;
 
       // ---
@@ -447,16 +454,15 @@ bool Autopilot::processModeFollowTheLead()
       double chhdg = Basic::Angle::aepcdRad(dhdg + leadHdg);
       setCommandedHeadingD( chhdg * Basic::Angle::R2DCC );
 
-      double calt = lp->getAltitude() + (-leadOffset.z());
+      double calt = lead->getAltitude() + (-leadOffset.z());
       setCommandedAltitudeFt( calt * Basic::Distance::M2FT );
 
       double vKts = vt * Basic::Time::H2S / Basic::Distance::NM2M;
       setCommandedVelocityKts( vKts );
-
       ok = true;
    }
 
-   if (!ok) setFollowTheLeadMode( false );
+   if (!ok) setFollowTheLeadMode(false);
    return ok;
 }
 
@@ -464,9 +470,9 @@ bool Autopilot::processModeFollowTheLead()
 // orbitwp() -- computes the orbit holding pattern's 'mirror' waypoint
 //  where:
 //     alat, alon    -- Anchor point latitude & longitude (degs)
-//     vp            -- Vehicle 'true' ground speed (m/s) 
+//     vp            -- Vehicle 'true' ground speed (m/s)
 //     length        -- Orbit length (meters)
-//     ccwFlg        -- 
+//     ccwFlg        --
 //     rlat, rlon    -- Result: mirror point latitude & longitude (degs)
 //------------------------------------------------------------------------------
 bool Autopilot::computerOrbitHoldingPatternMirrorWaypoint(
@@ -599,42 +605,27 @@ bool Autopilot::velocityContoller()
 // Get (access) functions
 //------------------------------------------------------------------------------
 
-// Our lead player
+// Attempt to get our lead player
 const Player* Autopilot::getLeadPlayer()
 {
-   const Player* p = lead;
-   // check to see if we are setting the same player again
-   bool ok = false;
-   if (p != 0) {
-        // if we already have a lead player, and we have a lead name, and they don't match, reset our player
-        if ((p->getName() != 0 && leadName != 0) && (p->getName() != leadName)) {
-            // reset our player to 0
-            setLeadPlayer(0);
-            ok = true;
-        }
-   }
-   // reset our lead pointer, to make sure we get it again
-   p = lead;
-   
-   if (p == 0 && leadName != 0) {
-      const Simulation* const sim = getSimulation();
-      if (sim != 0) {
-
-         const Basic::PairStream* players = sim->getPlayers();
-         if (players != 0) {
-
-            const Basic::Pair* pair = players->findByName(*leadName);
-            if (pair != 0) {
-               setLeadPlayer( static_cast<const Player*>( pair->object() ) );
-               p = lead;
+    if (lead == 0 && leadName != 0) {
+        // we have no lead player, but we have a lead name, let's try to get this player
+        // find the player in the simulation
+        const Simulation* const sim = getSimulation();
+        if (sim != 0) {
+            const Basic::PairStream* players = sim->getPlayers();
+            if (players != 0) {
+                const Basic::Pair* pair = players->findByName(*leadName);
+                if (pair != 0) {
+                    setLeadPlayer( static_cast<const Player*>( pair->object() ) );
+                }
             }
-
             players->unref();
             players = 0;
-         }
-      }
-   }
-   return p;
+        }
+    }
+
+    return lead;
 }
 
 //------------------------------------------------------------------------------
@@ -762,7 +753,7 @@ bool Autopilot::requestLoiter(const double anchorLat, const double anchorLon, co
 
    const Navigation* nav = getOwnship()->getNavigation();
    if (nav != 0) {
-
+      loiterCourse = course;
       ok = setLoiterMode(true);
       if (ok) {
          loiterAnchorLat = anchorLat;
@@ -791,6 +782,12 @@ bool Autopilot::getLoiterPointAnchors(double* const anLat, double* const anLon, 
    if (mAnLat != 0) *mAnLat = loiterMirrorLat;
    if (mAnLon != 0) *mAnLon = loiterMirrorLon;
    return true;
+}
+
+// gets the loiter inbound course
+double Autopilot::getLoiterCourse()
+{
+    return loiterCourse;
 }
 
 // Sets the loiter pattern length (nm)
@@ -833,25 +830,75 @@ bool Autopilot::setLeadFollowingDeltaAltitude(const double above)
    return true;
 }
 
-// Name of our lead player
-bool Autopilot::setLeadPlayerName(const Basic::Identifier* const p)
-{
-   if (leadName != 0) leadName->unref();
-   leadName = p;
-   if (leadName != 0) leadName->ref();
-   return true;
-}
-
 // Our lead player
 bool Autopilot::setLeadPlayer(const Player* const p)
 {
+   // remove old lead information
    if (lead != 0) lead->unref();
+   if (leadName != 0) {
+      leadName->unref();
+      leadName = 0;
+   }
+
+   // set our lead
    lead = p;
+
    if (lead != 0) {
       lead->ref();
       leadHdg = (LCreal) lead->getHeadingR();
+      // grab our lead name
+      if (lead->getName() != 0) leadName = (Basic::Identifier*)lead->getName()->clone();
    }
+
    return true;
+}
+
+// set the lead player dynamically by name
+bool Autopilot::setLeadPlayerName(const Basic::Identifier* const msg)
+{
+    // find the player in the simulation
+    const Simulation* const sim = getSimulation();
+    bool found = false;
+    if (sim != 0) {
+        const Basic::PairStream* players = sim->getPlayers();
+        if (players != 0) {
+            const Basic::Pair* pair = players->findByName(*msg);
+            if (pair != 0) {
+                setLeadPlayer( static_cast<const Player*>( pair->object() ) );
+                found = true;
+            }
+        }
+        players->unref();
+        players = 0;
+    }
+    // if we didn't find the player, remove the lead name and player
+    if (!found) setLeadPlayer(0);
+
+    return true;
+}
+
+// set the lead player dynamically by name using char*
+bool Autopilot::setLeadPlayerName(const char* x)
+{
+    // find the player in the simulation
+    const Simulation* const sim = getSimulation();
+    bool found = false;
+    if (sim != 0) {
+        const Basic::PairStream* players = sim->getPlayers();
+        if (players != 0) {
+            const Basic::Pair* pair = players->findByName(x);
+            if (pair != 0) {
+                setLeadPlayer( static_cast<const Player*>( pair->object() ) );
+                found = true;
+            }
+        }
+        players->unref();
+        players = 0;
+    }
+    // if we didn't find the player, remove the lead name and player
+    if (!found) setLeadPlayer(0);
+
+    return true;
 }
 
 // "Follow the lead" mode flag
@@ -952,7 +999,7 @@ bool Autopilot::setSlotAltitudeHoldMode(const Basic::Number* const msg)
     }
     return ok;
 }
-   
+
 // Hold velocity (kts)
 bool Autopilot::setSlotHoldVelocityKts(const Basic::Number* const msg)
 {
@@ -1100,6 +1147,16 @@ bool Autopilot::setSlotLeadFollowingDeltaAltitude(const Basic::Number* const msg
     return ok;
 }
 
+// Initial name of our lead player
+bool Autopilot::setSlotLeadPlayerName(const Basic::Identifier* const p)
+{
+   if (leadName != 0) leadName->unref();
+   leadName = p;
+   if (leadName != 0) leadName->ref();
+   return true;
+}
+
+
 // Set slot: "Follow the lead" mode flag
 bool Autopilot::setSlotFollowTheLeadMode(const Basic::Number* const msg)
 {
@@ -1126,8 +1183,8 @@ std::ostream& Autopilot::serialize(std::ostream& sout, const int i, const bool s
         sout << "( " << getFormName();
         j = 4;
     }
-    
-    
+
+
     if (loiterLength > 0) {
         // loiter pattern length
         indent(sout,i+j);
@@ -1136,7 +1193,7 @@ std::ostream& Autopilot::serialize(std::ostream& sout, const int i, const bool s
         indent(sout,i+j);
         sout << "loiterPatternCcwFlag:  " << loiterCcwFlag << std::endl;
     }
-    
+
     // follow the leader stuff
     if (leadName != 0) {
         // leader name
@@ -1154,9 +1211,9 @@ std::ostream& Autopilot::serialize(std::ostream& sout, const int i, const bool s
         // follow the lead mode
         indent(sout,i+j);
         sout << "followTheLeadMode:  " <<  followLeadModeOn << std::endl;
-        
+
     }
-        
+
     if ( !slotsOnly ) {
         indent(sout,i);
         sout << ")" << std::endl;
