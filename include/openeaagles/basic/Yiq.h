@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class:  Yiq
 //------------------------------------------------------------------------------
-#ifndef __Yiq_H_included__
-#define __Yiq_H_included__
+#ifndef __Eaagles_Basic_Yiq_H__
+#define __Eaagles_Basic_Yiq_H__
 
 #include "openeaagles/basic/Color.h"
 
@@ -84,4 +84,4 @@ protected:
 } // End Basic namespace
 } // End Eaagles namespace
 
-#endif      /* __Yiq_H_included__ */
+#endif

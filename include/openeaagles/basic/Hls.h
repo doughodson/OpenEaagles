@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
-// Class:  Hls
+// Class: Hls
 //------------------------------------------------------------------------------
-#ifndef __Hls_H_included__
-#define __Hls_H_included__
+#ifndef __Eaagles_Basic_Hls_H__
+#define __Eaagles_Basic_Hls_H__
 
 #include "openeaagles/basic/Color.h"
 
@@ -82,5 +82,4 @@ protected:
 } // End Basic namespace
 } // End Eaagles namespace
 
-#endif      /* __Hls_H_included__ */
-
+#endif

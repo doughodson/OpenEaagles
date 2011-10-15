@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: IoDevice
 //------------------------------------------------------------------------------
-#ifndef __IoDevice_Basic_H_46395C6E_D704_44af_AD75_7E3AAB0AC3B2__
-#define __IoDevice_Basic_H_46395C6E_D704_44af_AD75_7E3AAB0AC3B2__
+#ifndef __Eaagles_Basic_IoDevice_H__
+#define __Eaagles_Basic_IoDevice_H__
 
 #include "openeaagles/basic/Component.h"
 
@@ -97,7 +97,7 @@ private:
    SPtr<PairStream>  devices;    // Device list
 };
 
-} // end IoDevice
+} // end IoDevice namespace
 } // end Eaagles namespace
 
 #endif

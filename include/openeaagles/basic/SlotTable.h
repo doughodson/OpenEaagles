@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: SlotTable
 //------------------------------------------------------------------------------
-#ifndef __SlotTable_H_7B2B4A84_3AE0_48c0_B09F_412544233400__
-#define __SlotTable_H_7B2B4A84_3AE0_48c0_B09F_412544233400__
+#ifndef __Eaagles_Basic_SlotTable_H__
+#define __Eaagles_Basic_SlotTable_H__
 
 #include "openeaagles/basic/support.h"
 
@@ -57,4 +57,4 @@ private:
 } // End Basic namespace
 } // End Eaagles namespace
 
-#endif  /* __SlotTable_H_7B2B4A84_3AE0_48c0_B09F_412544233400__ */
+#endif

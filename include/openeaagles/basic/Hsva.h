@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
-// Class:  Hsva
+// Class: Hsva
 //------------------------------------------------------------------------------
-#ifndef __Hsva_H_D09CB6A9_2808_454a_984E_90522A3A397B__
-#define __Hsva_H_D09CB6A9_2808_454a_984E_90522A3A397B__
+#ifndef __Eaagles_Basic_Hsva_H__
+#define __Eaagles_Basic_Hsva_H__
 
 #include "openeaagles/basic/Hsv.h"
 
@@ -65,4 +65,4 @@ public:
 } // End Basic namespace
 } // End Eaagles namespace
 
-#endif      /* __Hsva_H_D09CB6A9_2808_454a_984E_90522A3A397B__ */
+#endif

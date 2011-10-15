@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: Pair
 //------------------------------------------------------------------------------
-#ifndef __Pair_H_A8F3F31F_EC45_44a8_84F4_AB112CE98A3C__
-#define __Pair_H_A8F3F31F_EC45_44a8_84F4_AB112CE98A3C__
+#ifndef __Eaagles_Basic_Pair_H__
+#define __Eaagles_Basic_Pair_H__
 
 #include "openeaagles/basic/Object.h"
 #include "openeaagles/basic/Identifier.h"
@@ -51,4 +51,4 @@ private:
 } // End Basic namespace
 } // End Eaagles namespace
 
-#endif	/* __Pair_H_A8F3F31F_EC45_44a8_84F4_AB112CE98A3C__ */
+#endif

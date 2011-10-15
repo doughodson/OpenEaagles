@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // ref(), unref() and getRefCount() functions
 //------------------------------------------------------------------------------
-#ifndef __RefCount_H_335A9285_2F8B_49f4_B36F_D5981357DFA6__
-#define __RefCount_H_335A9285_2F8B_49f4_B36F_D5981357DFA6__
+#ifndef __Eaagles_Basic_RefCount_H__
+#define __Eaagles_Basic_RefCount_H__
 
    // ---
    // If the following is defined then ref() will print a message to standard
@@ -53,4 +53,4 @@
       else lcUnlock(semaphore);
    }
 
-#endif	/* __RefCount_H_335A9285_2F8B_49f4_B36F_D5981357DFA6__ */
+#endif

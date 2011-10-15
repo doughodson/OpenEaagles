@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class:  Statistic
 //------------------------------------------------------------------------------
-#ifndef StatisticH
-#define StatisticH
+#ifndef __Eaagles_Basic_Statistic_H__
+#define __Eaagles_Basic_Statistic_H__
 
 #include "openeaagles/basic/Object.h"
 
@@ -208,4 +208,3 @@ inline double Statistic::ci(const double Z) const
 } // End namespace
 
 #endif
-

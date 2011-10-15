@@ -4,8 +4,8 @@
 // Description:	General purpose up/down timers.  
 //
 //------------------------------------------------------------------------------
-#ifndef __Timer_H_3D3A4F1E_B6F3_4a8f_B949_DD77131D420D__
-#define __Timer_H_3D3A4F1E_B6F3_4a8f_B949_DD77131D420D__
+#ifndef __Eaagles_Basic_Timer_H__
+#define __Eaagles_Basic_Timer_H__
 
 #include "openeaagles/basic/Object.h"
 #include "openeaagles/basic/List.h"

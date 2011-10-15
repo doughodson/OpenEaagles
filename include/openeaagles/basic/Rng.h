@@ -2,8 +2,8 @@
 // Class:  Rng - Mersenne Twister random number generator
 //------------------------------------------------------------------------------
 
-#ifndef RngH
-#define RngH
+#ifndef __Eaagles_Basic_Rng_H__
+#define __Eaagles_Basic_Rng_H__
 
 #include "openeaagles/basic/Object.h"
 
@@ -163,6 +163,4 @@ inline unsigned int Rng::twiddle(unsigned int u, unsigned int v) {
 } // End Basic namespace
 } // End Eaagles namespace
 
-#endif // RngH
-
-
+#endif

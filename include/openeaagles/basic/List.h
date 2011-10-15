@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
-// Class:	List
+// Class: List
 //------------------------------------------------------------------------------
-#ifndef __List_H_5A345A8B_C58E_4b14_B2EB_AB1C08FC0975__
-#define __List_H_5A345A8B_C58E_4b14_B2EB_AB1C08FC0975__
+#ifndef __Eaagles_Basic_List_H__
+#define __Eaagles_Basic_List_H__
 
 #include "openeaagles/basic/Object.h"
 
@@ -208,4 +208,3 @@ private:
 } // End Eaagles namespace
 
 #endif
-

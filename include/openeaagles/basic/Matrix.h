@@ -7,8 +7,8 @@
 // "Applied Numerical Methods for Digital Computation", 4ed, James-Smith-Wolford, Harper Collins (1993)
 // "Applied Numerical Analysis Using Matlab", 1ed, Laurene V. Fausett, Prentice Hall (1999)
 //------------------------------------------------------------------------------
-#ifndef __Matrix_H_7417A08A_28EF_4528_82A4_7A6CDBED4C32__
-#define __Matrix_H_7417A08A_28EF_4528_82A4_7A6CDBED4C32__
+#ifndef __Eaagles_Basic_Matrix_H__
+#define __Eaagles_Basic_Matrix_H__
 
 #include "openeaagles/basic/Object.h"
 

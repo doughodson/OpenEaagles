@@ -19,8 +19,8 @@
 // ThreadSyncTask thread clases that are used can be found in the "otw/OtwCigiCl.cpp",
 // "simulation/Station.cpp" and "simulation/Simulation.cpp" files, respectively.
 //------------------------------------------------------------------------------
-#ifndef __Thread_H_8555ED65_D0EB_4a7c_A124_3176B530CFA2__
-#define __Thread_H_8555ED65_D0EB_4a7c_A124_3176B530CFA2__
+#ifndef __Eaagles_Basic_Thread_H__
+#define __Eaagles_Basic_Thread_H__
 
 #include "openeaagles/basic/Object.h"
 
@@ -254,4 +254,4 @@ private:
 } // End Basic namespace
 } // End Eaagles namespace
 
-#endif /* __Thread_H_8555ED65_D0EB_4a7c_A124_3176B530CFA2__ */
+#endif

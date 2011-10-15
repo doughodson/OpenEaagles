@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: StateMachine
 //------------------------------------------------------------------------------
-#ifndef __StateMachine_H_8DAFB0FF_BC4C_4682_9B28_EAC83A5F9DCF__
-#define __StateMachine_H_8DAFB0FF_BC4C_4682_9B28_EAC83A5F9DCF__
+#ifndef __Eaagles_Basic_StateMachine_H__
+#define __Eaagles_Basic_StateMachine_H__
 
 #include "openeaagles/basic/Component.h"
 
@@ -356,6 +356,4 @@ private:
 } // End Basic namespace
 } // End Eaagles namespace
 
-#endif	// __StateMachine_H_8DAFB0FF_BC4C_4682_9B28_EAC83A5F9DCF__ 
-
-
+#endif

@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
-// Class:  Integer
+// Class: Integer
 //------------------------------------------------------------------------------
-#ifndef __Integer_H_381F921E_2DB9_4440_A00D_367006C56B66__
-#define __Integer_H_381F921E_2DB9_4440_A00D_367006C56B66__
+#ifndef __Eaagles_Basic_Integer_H__
+#define __Eaagles_Basic_Integer_H__
 
 #include "openeaagles/basic/Number.h"
 
@@ -428,4 +428,4 @@ inline std::ostream& operator<<(std::ostream& sout, const Integer& n)
 } // End Basic namespace
 } // End Eaagles namespace
 
-#endif      /* __Integer_H_381F921E_2DB9_4440_A00D_367006C56B66__ */
+#endif

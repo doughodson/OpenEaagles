@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Classes:  Add, Subtract, Multiply, Divide
 //------------------------------------------------------------------------------
-#ifndef __Operators_H_F9878EDB_F500_49a9_A835_B0066FDC4518__
-#define __Operators_H_F9878EDB_F500_49a9_A835_B0066FDC4518__
+#ifndef __Eaagles_Basic_Operators_H__
+#define __Eaagles_Basic_Operators_H__
 
 #include "openeaagles/basic/Number.h"
 
@@ -119,4 +119,4 @@ public:
 } // End Basic namespace
 } // End Eaagles namespace
 
-#endif      /* __Operators_H_F9878EDB_F500_49a9_A835_B0066FDC4518__ */
+#endif

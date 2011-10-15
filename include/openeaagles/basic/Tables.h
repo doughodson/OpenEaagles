@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Classes: Table, Table1, Table2, Table3, Table4, Table5
 //------------------------------------------------------------------------------
-#ifndef __Tables_H_FE7FB195_EDAB_4ce2_A2FB_3E238A8B729A__
-#define __Tables_H_FE7FB195_EDAB_4ce2_A2FB_3E238A8B729A__
+#ifndef __Eaagles_Basc_Tables_H__
+#define __Eaagles_Basc_Tables_H__
 
 #include "openeaagles/basic/Object.h"
 #include "openeaagles/basic/Functions.h"

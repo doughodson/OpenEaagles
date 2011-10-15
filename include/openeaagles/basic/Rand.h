@@ -2,8 +2,8 @@
 // Classes: Rand, UniformRand, NormalRand, ExponentialRand, TriangularRand
 //
 //--------------------------------------------------------------------------
-#ifndef RAND_H_79425753_53BB_4640_8A21_21411B24599B__
-#define RAND_H_79425753_53BB_4640_8A21_21411B24599B__
+#ifndef __Eaagles_Basic_Rand_H__
+#define __Eaagles_Basic_Rand_H__
 
 #include "openeaagles/basic/Object.h"
 
@@ -226,4 +226,4 @@ private:
 } // End Basic namespace
 } // End Eaagles namespace
 
-#endif //RAND_H_79425753_53BB_4640_8A21_21411B24599B__
+#endif

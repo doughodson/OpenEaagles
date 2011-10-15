@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class:  Rgba
 //------------------------------------------------------------------------------
-#ifndef __Rgba_H_F1CE1263_F8D2_44f0_9BFF_515AB32DED77__
-#define __Rgba_H_F1CE1263_F8D2_44f0_9BFF_515AB32DED77__
+#ifndef __Eaagles_Basic_Rgba_H__
+#define __Eaagles_Basic_Rgba_H__
 
 #include "openeaagles/basic/Rgb.h"
 
@@ -40,4 +40,4 @@ public:
 } // End Basic namespace
 } // End Eaagles namespace
 
-#endif      /* __Rgba_H_F1CE1263_F8D2_44f0_9BFF_515AB32DED77__ */
+#endif

@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class:  Number
 //------------------------------------------------------------------------------
-#ifndef __Number_H_411A662B_1988_4daa_B9BA_6202C588AA54__
-#define __Number_H_411A662B_1988_4daa_B9BA_6202C588AA54__
+#ifndef __Eaagles_Basic_Number_H__
+#define __Eaagles_Basic_Number_H__
 
 #include "openeaagles/basic/Object.h"
 
@@ -69,4 +69,4 @@ protected:
 } // End Basic namespace
 } // End Eaagles namespace
 
-#endif      /* __Number_H_411A662B_1988_4daa_B9BA_6202C588AA54__ */
+#endif

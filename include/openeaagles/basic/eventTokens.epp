@@ -3,8 +3,8 @@
 // 
 // (Master event list is eventTokens.h)
 //------------------------------------------------------------------------------
-#ifndef __EVENT_IDS_EPP__
-#define __EVENT_IDS_EPP__
+#ifndef __Eaagles_Event_Tokens_EPP__
+#define __Eaagles_Event_Tokens_EPP__
 
 // ---
 // Key events -- Are passed up to an object's container if not used.
@@ -229,4 +229,4 @@
 
 #define  EID_USER_EVENTS            2000  /* First user defined event */
 
-#endif // __EVENT_IDS_EPP__
+#endif

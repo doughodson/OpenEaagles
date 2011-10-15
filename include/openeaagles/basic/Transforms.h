@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Classes: Transform, Translation, Rotation, Scale
 //------------------------------------------------------------------------------
-#ifndef __Transform_H_A1E00846_4D30_45ed_9FF2_1F53C3F6E277__
-#define __Transform_H_A1E00846_4D30_45ed_9FF2_1F53C3F6E277__
+#ifndef __Eaagles_Basic_Transform_H__
+#define __Eaagles_Basic_Transform_H__
 
 #include "openeaagles/basic/Object.h"
 #include "openeaagles/basic/osg/Matrix"
@@ -147,4 +147,4 @@ protected:
 } // End Basic namespace
 } // End Eaagles namespace
 
-#endif  /* __Transform_H_A1E00846_4D30_45ed_9FF2_1F53C3F6E277__ */
+#endif

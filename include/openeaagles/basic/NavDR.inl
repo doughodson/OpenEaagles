@@ -1,3 +1,9 @@
+//------------------------------------------------------------------------------
+// Class: NavDR
+// inline functions
+//------------------------------------------------------------------------------
+#ifndef __Eaagles_Basic_NavDR_Inline__
+#define __Eaagles_Basic_NavDR_Inline__
 
 //==============================================================================
 // Compute R0 Matrix
@@ -421,3 +427,5 @@ inline bool NavDR::getRpyVector(
    
    return true;
 }
+
+#endif

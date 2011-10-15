@@ -2,8 +2,8 @@
 // Class: Nav
 // inline functions
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_Nav_INL__
-#define __Eaagles_Basic_Nav_INL__
+#ifndef __Eaagles_Basic_Nav_Inline__
+#define __Eaagles_Basic_Nav_Inline__
 
 //------------------------------------------------------------------------------
 // Flat-Earth: Computes the destination (target) lat/lon from starting (ref)

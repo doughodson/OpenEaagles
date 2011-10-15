@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class:	String
 //------------------------------------------------------------------------------
-#ifndef __String_H_3140CD6E_88BF_4ac0_8606_AF224D491AD4__
-#define __String_H_3140CD6E_88BF_4ac0_8606_AF224D491AD4__
+#ifndef __Eaagles_Basic_String_H__
+#define __Eaagles_Basic_String_H__
 
 #include "openeaagles/basic/Object.h"
 

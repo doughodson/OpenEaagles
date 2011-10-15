@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
-// Class:  LatLon
+// Class: LatLon
 //------------------------------------------------------------------------------
-#ifndef __LatLon_H_79314AD2_111D_4d95_A087_1A5FD100FF0B__
-#define __LatLon_H_79314AD2_111D_4d95_A087_1A5FD100FF0B__
+#ifndef __Eaagles_Basic_LatLon_H__
+#define __Eaagles_Basic_LatLon_H__
 
 #include "openeaagles/basic/Number.h"
 
@@ -112,4 +112,4 @@ private:
 } // End Basic namespace
 } // End Eaagles namespace
 
-#endif  /* __LatLon_H_79314AD2_111D_4d95_A087_1A5FD100FF0B__ */
+#endif

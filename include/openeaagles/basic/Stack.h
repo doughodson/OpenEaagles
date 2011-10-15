@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class:   Stack
 //------------------------------------------------------------------------------
-#ifndef	__Stack_H_5F23BF96_1BED_4cfd_BF00_07E1BB9CBF30__
-#define __Stack_H_5F23BF96_1BED_4cfd_BF00_07E1BB9CBF30__
+#ifndef	__Eaagles_Basic_Stack_H__
+#define __Eaagles_Basic_Stack_H__
 
 #include "openeaagles/basic/List.h"
 

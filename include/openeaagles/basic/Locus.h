@@ -1,9 +1,8 @@
 //------------------------------------------------------------------------------
-// Class:	Locus
+// Class: Locus
 //------------------------------------------------------------------------------
-
-#ifndef  __Eaagles_Basic_Locus_H__
-#define  __Eaagles_Basic_Locus_H__
+#ifndef __Eaagles_Basic_Locus_H__
+#define __Eaagles_Basic_Locus_H__
 
 #include "openeaagles/basic/Object.h"
 

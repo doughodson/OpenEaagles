@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
-// Class:  Hsv
+// Class: Hsv
 //------------------------------------------------------------------------------
-#ifndef __Hsv_H_9CE3C1D3_DD38_446d_99DE_DE8E520A1C4E__
-#define __Hsv_H_9CE3C1D3_DD38_446d_99DE_DE8E520A1C4E__
+#ifndef __Eaagles_Basic_Hsv_H__
+#define __Eaagles_Basic_Hsv_H__
 
 #include "openeaagles/basic/Color.h"
 
@@ -121,6 +121,4 @@ protected:
 } // End Basic namespace
 } // End Eaagles namespace
 
-
-#endif      /* __Hsv_H_9CE3C1D3_DD38_446d_99DE_DE8E520A1C4E__ */
-
+#endif

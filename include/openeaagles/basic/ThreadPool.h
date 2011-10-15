@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: ThreadPool
 //------------------------------------------------------------------------------
-#ifndef __ThreadPool_H__
-#define __ThreadPool_H__
+#ifndef __Eaagles_Basic_ThreadPool_H__
+#define __Eaagles_Basic_ThreadPool_H__
 
 #include "openeaagles/basic/Object.h"
 #include "openeaagles/basic/Number.h"
@@ -150,4 +150,3 @@ private:
 } // End Eaagles namespace
 
 #endif
-

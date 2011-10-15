@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Class:	FileReader
+// Class: FileReader
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_Basic_FileReader_H__
 #define __Eaagles_Basic_FileReader_H__

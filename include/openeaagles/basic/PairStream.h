@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: PairStream
 //------------------------------------------------------------------------------
-#ifndef	__PairStream_H_86CD1F22_CCD5_4c24_90DC_C969D1D235DC__
-#define __PairStream_H_86CD1F22_CCD5_4c24_90DC_C969D1D235DC__
+#ifndef	__Eaagles_Basic_PairStream_H__
+#define __Eaagles_Basic_PairStream_H__
 
 #include "openeaagles/basic/List.h"
 

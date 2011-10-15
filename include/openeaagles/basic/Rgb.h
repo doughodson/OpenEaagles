@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class:  Rgb
 //------------------------------------------------------------------------------
-#ifndef __Rgb_H_666B224F_370A_432e_9372_5662DC485007__
-#define __Rgb_H_666B224F_370A_432e_9372_5662DC485007__
+#ifndef __Eaagles_Basic_Rgb_H__
+#define __Eaagles_Basic_Rgb_H__
 
 #include "openeaagles/basic/Color.h"
 
@@ -47,5 +47,4 @@ public:
 } // End Basic namespace
 } // End Eaagles namespace
 
-#endif      /* __Rgb_H_666B224F_370A_432e_9372_5662DC485007__ */
-
+#endif

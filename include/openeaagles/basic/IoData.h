@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: IoData
 //------------------------------------------------------------------------------
-#ifndef __Basic_IoData_H_8EA6209E_25C3_49ac_8E2C_CF7BAF31C901__
-#define __Basic_IoData_H_8EA6209E_25C3_49ac_8E2C_CF7BAF31C901__
+#ifndef __Eaagles_Basic_IoData_H__
+#define __Eaagles_Basic_IoData_H__
 
 #include "openeaagles/basic/Object.h"
 
@@ -99,7 +99,7 @@ public:
    virtual void clear();
 };
 
-} // end Basic
+} // end Basic namespace
 } // end Eaagles namespace
 
 #endif

@@ -3,8 +3,8 @@
 //
 // ### Need to document this
 //------------------------------------------------------------------------------
-#ifndef __OpenEaagles_Basic_Parser_H__
-#define __OpenEaagles_Basic_Parser_H__
+#ifndef __Eaagles_Basic_Parser_H__
+#define __Eaagles_Basic_Parser_H__
 
 // parser and form functions
 #include "openeaagles/basic/support.h"

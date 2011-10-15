@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
-// Class:   Identifier
+// Class: Identifier
 //------------------------------------------------------------------------------
-#ifndef __Ident_H_31ABC4CE_29BE_4cea_8F07_996A91C0C54E__
-#define __Ident_H_31ABC4CE_29BE_4cea_8F07_996A91C0C54E__
+#ifndef __Eaagles_Basic_Identifier_H__
+#define __Eaagles_Basic_Identifier_H__
 
 #include "openeaagles/basic/String.h"
 

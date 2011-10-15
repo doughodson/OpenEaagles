@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: IoAdapter
 //------------------------------------------------------------------------------
-#ifndef __Basic_IoAdapter_H_0591F9CF_5C1D_4d81_8963_2F109B2C2682__
-#define __Basic_IoAdapter_H_0591F9CF_5C1D_4d81_8963_2F109B2C2682__
+#ifndef __Eaagles_Basic_IoAdapter_H__
+#define __Eaagles_Basic_IoAdapter_H__
 
 #include "openeaagles/basic/Component.h"
 

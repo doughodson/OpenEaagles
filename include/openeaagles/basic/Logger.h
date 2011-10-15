@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
-// Classes:   Logger, Logger::LogEvent
+// Classes: Logger, Logger::LogEvent
 //------------------------------------------------------------------------------
-#ifndef __Logger_H_03103FAB_82F5_460e_BA9F_2050042905C3__
-#define __Logger_H_03103FAB_82F5_460e_BA9F_2050042905C3__
+#ifndef __Eaagles_Basic_Logger_H__
+#define __Eaagles_Basic_Logger_H__
 
 #include "openeaagles/basic/Component.h"
 #include <fstream>
@@ -86,5 +86,4 @@ private:
 } // End Basic namespace
 } // End Eaagles namespace
 
-
-#endif	/* __Logger_H_03103FAB_82F5_460e_BA9F_2050042905C3__ */
+#endif
