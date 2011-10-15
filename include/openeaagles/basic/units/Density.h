@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Classes: Density
 //------------------------------------------------------------------------------
-#ifndef __Density_H_included
-#define __Density_H_included
+#ifndef __Eaagles_Basic_Density_H__
+#define __Eaagles_Basic_Density_H__
 
 #include "../Number.h"
 #include "Masses.h"
@@ -85,4 +85,4 @@ inline std::ostream& operator<<(std::ostream& sout, const Density& n)
 } // End Basic namespace
 } // End Eaagles namespace
 
-#endif // __Density_H_included
+#endif

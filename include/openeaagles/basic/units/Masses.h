@@ -45,9 +45,8 @@
 //		    into the units of a specific Mass derived class.
 //
 //------------------------------------------------------------------------------
-#if !defined(AFX_MASSES_H__CF123491_31FE_11D7_A0FD_00609776E1E8__INCLUDED_)
-#define AFX_MASSES_H__CF123491_31FE_11D7_A0FD_00609776E1E8__INCLUDED_
-
+#ifndef __Eaagles_Basic_Masses_H__
+#define __Eaagles_Basic_Masses_H__
 
 #include "../Number.h"
 
@@ -181,4 +180,4 @@ public:
 } // End Basic namespace
 } // End Eaagles namespace
 
-#endif // !defined(AFX_MASSES_H__CF123491_31FE_11D7_A0FD_00609776E1E8__INCLUDED_)
+#endif

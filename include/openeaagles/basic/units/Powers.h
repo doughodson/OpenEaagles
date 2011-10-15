@@ -58,8 +58,8 @@
 //		    instance into the units of another Power derived class.
 //
 //----------------------------------------------------------------------------
-#if !defined(AFX_POWERS_H__A959CF93_32C1_11D7_A0FD_00609776E1E8__INCLUDED_)
-#define AFX_POWERS_H__A959CF93_32C1_11D7_A0FD_00609776E1E8__INCLUDED_
+#ifndef __Eaagles_Basic_Powers_H__
+#define __Eaagles_Basic_Powers_H__
 
 #include "../Number.h"
 
@@ -257,4 +257,4 @@ public:
 } // End Basic namespace
 } // End Eaagles namespace
 
-#endif // !defined(AFX_POWERS_H__A959CF93_32C1_11D7_A0FD_00609776E1E8__INCLUDED_)
+#endif

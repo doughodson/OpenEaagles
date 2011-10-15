@@ -44,9 +44,8 @@
 //
 //------------------------------------------------------------------------------
 
-#if !defined(VOLUMES_H__INCLUDED_)
-#define VOLUMES_H__INCLUDED_
-
+#ifndef __Eaagles_Basic_Volumes_H__
+#define __Eaagles_Basic_Volumes_H__
 
 #include "../Number.h"
 
@@ -191,4 +190,4 @@ public:
 } // End Basic namespace
 } // End Eaagles namespace
 
-#endif // !defined(VOLUMES_H__INCLUDED_)
+#endif

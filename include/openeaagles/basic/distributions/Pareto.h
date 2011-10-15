@@ -1,6 +1,6 @@
 
-#ifndef ParetoH
-#define ParetoH
+#ifndef __Eaagles_Basic_Pareto_H__
+#define __Eaagles_Basic_Pareto_H__
 
 #include "../Rng.h"
 

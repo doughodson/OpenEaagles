@@ -44,8 +44,8 @@
 //		    instance into the units of a specific Angle derived class.
 //
 //------------------------------------------------------------------------------
-#ifndef __Angles_H_E826D801_CD37_4af6_94AB_556BA7D07BF6__
-#define __Angles_H_E826D801_CD37_4af6_94AB_556BA7D07BF6__
+#ifndef __Eaagles_Basic_Angles_H__
+#define __Eaagles_Basic_Angles_H__
 
 #include "../Number.h"
 
@@ -241,5 +241,5 @@ public:
 } // End Basic namespace
 } // End Eaagles namespace
 
-#endif // __Angles_H_E826D801_CD37_4af6_94AB_556BA7D07BF6__
+#endif
 

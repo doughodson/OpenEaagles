@@ -73,9 +73,8 @@
 //		    into the units of a specific Area derived class.
 //
 //------------------------------------------------------------------------------
-#if !defined(AFX_AREAS_H__02F46933_3AB6_11D7_A106_00609776E1E8__INCLUDED_)
-#define AFX_AREAS_H__02F46933_3AB6_11D7_A106_00609776E1E8__INCLUDED_
-
+#ifndef __Eaagles_Basic_Areas_H__
+#define __Eaagles_Basic_Areas_H__
 
 #include "../Number.h"
 
@@ -343,4 +342,4 @@ public:
 } // End Basic namespace
 } // End Eaagles namespace
 
-#endif // !defined(AFX_AREAS_H__02F46933_3AB6_11D7_A106_00609776E1E8__INCLUDED_)
+#endif

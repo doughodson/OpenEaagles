@@ -64,8 +64,8 @@
 //
 //------------------------------------------------------------------------------
 
-#if !defined(AFX_ENERGIES_H__A959CF94_32C1_11D7_A0FD_00609776E1E8__INCLUDED_)
-#define AFX_ENERGIES_H__A959CF94_32C1_11D7_A0FD_00609776E1E8__INCLUDED_
+#ifndef __Eaagles_Energies_H__
+#define __Eaagles_Energies_H__
 
 
 #include "../Number.h"
@@ -247,4 +247,4 @@ public:
 } // End Basic namespace
 } // End Eaagles namespace
 
-#endif // !defined(AFX_ENERGIES_H__A959CF94_32C1_11D7_A0FD_00609776E1E8__INCLUDED_)
+#endif

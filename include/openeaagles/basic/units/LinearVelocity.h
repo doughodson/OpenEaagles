@@ -1,8 +1,8 @@
 //---------------------------------------------------------------------
 // Class: LinearVelocity
 //---------------------------------------------------------------------
-#ifndef _LinearVelocity_H_
-#define _LinearVelocity_H_
+#ifndef __Eaagles_Basic_LinearVelocity_H__
+#define __Eaagles_Basic_LinearVelocity_H__
 
 #include "../Number.h"
 
@@ -150,4 +150,4 @@ private:
 } // End Basic namespace
 } // End Eaagles namespace
 
-#endif // _LinearVelocity_H_
+#endif

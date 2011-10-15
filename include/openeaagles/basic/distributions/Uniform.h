@@ -1,6 +1,6 @@
 
-#ifndef UniformH
-#define UniformH
+#ifndef __Eaagles_Basic_Uniform_H__
+#define __Eaagles_Basic_Uniform_H__
 
 #include "../Rng.h"
 

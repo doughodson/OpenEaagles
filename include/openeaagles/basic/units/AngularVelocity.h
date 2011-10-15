@@ -2,8 +2,8 @@
 // Class AngularVelocity
 //------------------------------------------------------------------------------
 
-#ifndef _AngularVelocity_H_
-#define _AngularVelocity_H_
+#ifndef __Eaagles_Basic_AngularVelocity_H__
+#define __Eaagles_Basic_AngularVelocity_H__
 
 #include "../Number.h"
 
@@ -135,4 +135,4 @@ private:
 } // End Basic namespace
 } // End Eaagles namespace
 
-#endif // _AngularVelocity_H_
+#endif

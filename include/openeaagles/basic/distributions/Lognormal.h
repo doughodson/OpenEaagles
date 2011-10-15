@@ -1,6 +1,6 @@
 
-#ifndef LognormalH
-#define LognormalH
+#ifndef __Eaagles_Basic_Lognormal_H__
+#define __Eaagles_Basic_Lognormal_H__
 
 #include "../Rng.h"
 

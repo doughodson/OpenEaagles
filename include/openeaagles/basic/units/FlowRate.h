@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Classes: FlowRate
 //------------------------------------------------------------------------------
-#ifndef __FlowRate_H_E7C0AF96_8D64_4839_9EC3_5BD39D254856
-#define __FlowRate_H_E7C0AF96_8D64_4839_9EC3_5BD39D254856
+#ifndef __Eaagles_Basic_FlowRate_H__
+#define __Eaagles_Basic_FlowRate_H__
 
 #include "../Number.h"
 #include "Volumes.h"
@@ -69,4 +69,4 @@ public:
 } // End Basic namespace
 } // End Eaagles namespace
 
-#endif // __FlowRate_H_E7C0AF96_8D64_4839_9EC3_5BD39D254856
+#endif

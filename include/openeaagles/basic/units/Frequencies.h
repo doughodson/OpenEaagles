@@ -44,8 +44,8 @@
 //		    class.
 //
 //------------------------------------------------------------------------------
-#ifndef FREQUENCIES_H_04EB6C58_3CF8_11D7_A109_00609776E1E8__INCLUDED_
-#define FREQUENCIES_H_04EB6C58_3CF8_11D7_A109_00609776E1E8__INCLUDED_
+#ifndef __Eaagles_Basic_Frequencies_H__
+#define __Eaagles_Basic_Frequencies_H__
 
 #include "../Number.h"
 
@@ -204,4 +204,4 @@ public:
 } // End Basic namespace
 } // End Eaagles namespace
 
-#endif // !defined(AFX_FREQUENCIES_H__04EB6C58_3CF8_11D7_A109_00609776E1E8__INCLUDED_)
+#endif

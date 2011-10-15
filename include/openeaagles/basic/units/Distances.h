@@ -62,8 +62,8 @@
 //       class.
 //
 //------------------------------------------------------------------------------
-#ifndef __Distance_H_984C2923_CE29_420e_AA29_58318D738462__
-#define __Distance_H_984C2923_CE29_420e_AA29_58318D738462__
+#ifndef __Eaagles_Basic_Distance_H__
+#define __Eaagles_Basic_Distance_H__
 
 #include "../Number.h"
 
@@ -328,4 +328,4 @@ public:
 } // End Basic namespace
 } // End Eaagles namespace
 
-#endif // __Distance_H_984C2923_CE29_420e_AA29_58318D738462__
+#endif

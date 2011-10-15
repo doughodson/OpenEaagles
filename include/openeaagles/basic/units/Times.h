@@ -48,8 +48,8 @@
 //		    instance into the units of another Time derived instance.
 //
 //------------------------------------------------------------------------------
-#ifndef __Times_H_2AA71208_07E5_4b3b_90C4_FEEE09771DD1__
-#define __Times_H_2AA71208_07E5_4b3b_90C4_FEEE09771DD1__
+#ifndef __Eaagles_Basic_Times_H__
+#define __Eaagles_Basic_Times_H__
 
 #include "../Number.h"
 
@@ -300,4 +300,4 @@ public:
 } // End Basic namespace
 } // End Eaagles namespace
 
-#endif //__Times_H_2AA71208_07E5_4b3b_90C4_FEEE09771DD1__
+#endif

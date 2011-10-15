@@ -1,6 +1,6 @@
 
-#ifndef ExponentialH
-#define ExponentialH
+#ifndef __Eaagles_Basic_Exponential_H__
+#define __Eaagles_Basic_Exponential_H__
 
 #include "../Rng.h"
 
