@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: Player
 //------------------------------------------------------------------------------
-#if !defined(__PLAYER_H_E8BFA8F5_F14C_41bc_91D9_B0A6E39C3D62__)
-#define __PLAYER_H_E8BFA8F5_F14C_41bc_91D9_B0A6E39C3D62__
+#ifndef __Eaagles_Simulation_Player_H__
+#define __Eaagles_Simulation_Player_H__
 
 #include "openeaagles/basic/Component.h"
 
@@ -1202,4 +1202,4 @@ private:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // !defined(__PLAYER_H_E8BFA8F5_F14C_41bc_91D9_B0A6E39C3D62__)
+#endif

@@ -12,8 +12,8 @@
 //
 // Description: RF Signatures
 //------------------------------------------------------------------------------
-#ifndef __Signature_H_03EFDE82_484C_44b3_9424_DE07575A85C1__
-#define __Signature_H_03EFDE82_484C_44b3_9424_DE07575A85C1__
+#ifndef __Eaagles_Simulation_Signature_H__
+#define __Eaagles_Simulation_Signature_H__
 
 #include "openeaagles/basic/Component.h"
 
@@ -246,4 +246,4 @@ protected:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // __Signature_H_03EFDE82_484C_44b3_9424_DE07575A85C1__
+#endif

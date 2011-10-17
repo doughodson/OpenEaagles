@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: Pilot
 //------------------------------------------------------------------------------
-#ifndef __Pilot_H_3735E456_019C_41e5_B40F_2D9A1C75D24D__
-#define __Pilot_H_3735E456_019C_41e5_B40F_2D9A1C75D24D__
+#ifndef __Eaagles_Simulation_Pilot_H__
+#define __Eaagles_Simulation_Pilot_H__
 
 #include "openeaagles/simulation/System.h"
 
@@ -31,4 +31,4 @@ public:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // __Pilot_H_3735E456_019C_41e5_B40F_2D9A1C75D24D__
+#endif

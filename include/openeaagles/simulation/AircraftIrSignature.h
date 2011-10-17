@@ -1,9 +1,8 @@
 //------------------------------------------------------------------------------
 // Classes: AircraftIrSignature
 //------------------------------------------------------------------------------
-
-#ifndef __AircraftIrSignature_H__
-#define __AircraftIrSignature_H__
+#ifndef __Eaagles_Simulation_AircraftIrSignature_H__
+#define __Eaagles_Simulation_AircraftIrSignature_H__
 
 #include "openeaagles/simulation/IrSignature.h"
 
@@ -148,5 +147,4 @@ private:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // __AircraftIrSignature_H__
-
+#endif

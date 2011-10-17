@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
-// Class:	Sar
+// Class: Sar
 //------------------------------------------------------------------------------
-#ifndef __Sar_H_EA297BAF_D39A_48ed_939A_B45CD50AC6A1__
-#define __Sar_H_EA297BAF_D39A_48ed_939A_B45CD50AC6A1__
+#ifndef __Eaagles_Simulation_Sar_H__
+#define __Eaagles_Simulation_Sar_H__
 
 #include "openeaagles/simulation/Radar.h"
 
@@ -110,4 +110,4 @@ private:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // __Sar_H_EA297BAF_D39A_48ed_939A_B45CD50AC6A1__
+#endif

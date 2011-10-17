@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: Sam
 //------------------------------------------------------------------------------
-#ifndef __SAM_H_65C041B7_FE92_407c_81F3_6600447AE194__
-#define __SAM_H_65C041B7_FE92_407c_81F3_6600447AE194__
+#ifndef __Eaagles_Simulation_Sam_H__
+#define __Eaagles_Simulation_Sam_H__
 
 #include "openeaagles/simulation/Missile.h"
 
@@ -30,4 +30,4 @@ public:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // !defined(__SAM_H_65C041B7_FE92_407c_81F3_6600447AE194__)
+#endif

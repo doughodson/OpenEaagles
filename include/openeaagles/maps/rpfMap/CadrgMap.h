@@ -1,5 +1,5 @@
 // ---------------------------------------------------------------------------------
-// Class:  BasicGL::MapPage -> CadrgMap
+// Class: CadrgMap
 // 
 // Description: This is the main map drawing class, CadrgMap.  This class is derived
 // from MapPage, so it inherently knows all the map calculations for range, displacement,
@@ -111,8 +111,8 @@
 //      Basic::Object* CadrgMap::getSlotByIndex(const int si)
 
 // ---------------------------------------------------------------------------------
-#ifndef __EAAGLES_MAPS_RPF_CADRGMAP_H__
-#define __EAAGLES_MAPS_RPF_CADRGMAP_H__
+#ifndef __Eaagles_Maps_Rpf_CadrgMap_H__
+#define __Eaagles_Maps_Rpf_CadrgMap_H__
 
 #include "openeaagles/basicGL/MapPage.h"
 
@@ -206,4 +206,4 @@ private:
 };  // End Maps namespace 
 };  // End Eaagles namespace
 
-#endif // __EAAGLES_MAPS_RPF_CADRGMAP_H__
+#endif

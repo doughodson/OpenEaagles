@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // classes: StoresMgr, SimpleStoresMgr
 //------------------------------------------------------------------------------
-#ifndef __StoresMgr_H_A9949B93_44EA_4034_A905_ED4312708A8C__
-#define __StoresMgr_H_A9949B93_44EA_4034_A905_ED4312708A8C__
+#ifndef __Eaagles_Simulation_StoresMgr_H__
+#define __Eaagles_Simulation_StoresMgr_H__
 
 #include "openeaagles/simulation/Stores.h"
 
@@ -227,4 +227,4 @@ private:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // __StoresMgr_H_A9949B93_44EA_4034_A905_ED4312708A8C__
+#endif

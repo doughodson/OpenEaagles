@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
-// Class:	Emission
+// Class: Emission
 //------------------------------------------------------------------------------
-#ifndef __Emission_H_D50208E4_5822_4d5e_918F_37EA741A84DF__
-#define __Emission_H_D50208E4_5822_4d5e_918F_37EA741A84DF__
+#ifndef __Eaagles_Simulation_Emission_H__
+#define __Eaagles_Simulation_Emission_H__
 
 #include "openeaagles/simulation/SensorMsg.h"
 #include "openeaagles/simulation/Antenna.h"
@@ -12,7 +12,7 @@ namespace Simulation {
    class RfSystem;
 
 //------------------------------------------------------------------------------
-// Class:	Emission
+// Class: Emission
 //
 // Description: Generic RF Emission class -- Used to pass RF emission data
 //              between antennas and players.
@@ -158,4 +158,4 @@ private:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // __Emission_H_D50208E4_5822_4d5e_918F_37EA741A84DF__
+#endif

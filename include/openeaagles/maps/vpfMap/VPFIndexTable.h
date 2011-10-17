@@ -3,8 +3,8 @@
 // Descr: Associated Index table with all tables which have
 // variable length text or coordinate strings
 // ------------------------------------------------------------
-#ifndef	__EAAGLES_MAPS_VPF_VPFINDEXTABLE_H__
-#define __EAAGLES_MAPS_VPF_VPFINDEXTABLE_H__
+#ifndef	__Eaagles_Maps_Vpf_VPFIndexTable_H__
+#define __Eaagles_Maps_Vpf_VPFIndexTable_H__
 
 #include "openeaagles/basic/Object.h"
 #include "openeaagles/maps/vpfMap/VPFDataType.h"
@@ -41,4 +41,4 @@ private:
 }; // End Maps namespace 
 }; // End Eaagles namespace
 
-#endif // __EAAGLES_MAPS_VPF_VPFINDEXTABLE_H__
+#endif

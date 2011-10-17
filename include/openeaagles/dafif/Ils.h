@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
-// Class:	Ils
-// Base class:	Basic::Object -> Basic::String -> DafifRecord -> Ils
+// Class: Ils
+// Base class: Basic::Object -> Basic::String -> DafifRecord -> Ils
 //
 // Description: Access to the DAFIF ILS records.
 //
@@ -37,8 +37,8 @@
 //		Length of a DAFIF ILS record pair.
 //
 //------------------------------------------------------------------------------
-#ifndef __Ils_H_22F514FF_F890_4fc4_B795_1DF69F90992E__
-#define __Ils_H_22F514FF_F890_4fc4_B795_1DF69F90992E__
+#ifndef __Eaagles_Dafif_Ils_H__
+#define __Eaagles_Dafif_Ils_H__
 
 #include "Dafif.h"
 

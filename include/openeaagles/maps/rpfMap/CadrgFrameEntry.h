@@ -1,7 +1,5 @@
 //------------------------------------------------------------------------------
-// Original Author: Chris Buell
-// Base class: Basic::Object -> CadrgFrameEntry
-// 
+// Class: CadrgFrameEntry
 // Description: Basic Table of Contents Frame entry that holds a frame and the
 // Color Look up table associated with that frame.
 //
@@ -18,8 +16,8 @@
 //    void CadrgFrameEntry::setFrame(CadrgFrame* newFrame)
 //
 //------------------------------------------------------------------------------
-#ifndef __EAAGLES_MAPS_RPF_CADRGFRAMEENTRY_H__
-#define __EAAGLES_MAPS_RPF_CADRGFRAMEENTRY_H__
+#ifndef __Eaagles_Maps_Rpf_CadrgFrameEntry_H__
+#define __Eaagles_Maps_Rpf_CadrgFrameEntry_H__
 
 #include "openeaagles/maps/rpfMap/CadrgClut.h"
 #include "openeaagles/basic/Object.h"
@@ -63,4 +61,4 @@ private:
 };  // End Rpf namespace 
 };  // End Eaagles namespace
 
-#endif // __EAAGLES_MAPS_RPF_CADRGFRAMEENTRY_H__
+#endif

@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: Radar
 //------------------------------------------------------------------------------
-#ifndef __Radar_H_B2C2C35B_F12E_4856_A052_2C29C8E942FC__
-#define __Radar_H_B2C2C35B_F12E_4856_A052_2C29C8E942FC__
+#ifndef __Eaagles_Simulation_Radar_H__
+#define __Eaagles_Simulation_Radar_H__
 
 #include "openeaagles/simulation/RfSensor.h"
 
@@ -110,4 +110,4 @@ private:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // __Radar_H_B2C2C35B_F12E_4856_A052_2C29C8E942FC__
+#endif

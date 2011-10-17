@@ -11,8 +11,8 @@
 //        virtual int decompressSubframe(const int x, const int y, Subframe& subFrame); 
 //
 //------------------------------------------------------------------------------
-#ifndef __EAAGLES_MAPS_RPF_CADRGFRAME_H__
-#define __EAAGLES_MAPS_RPF_CADRGFRAME_H__
+#ifndef __Eaagles_Maps_Rpf_CadrgFrame_H__
+#define __Eaagles_Maps_Rpf_CadrgFrame_H__
 
 #include "openeaagles/basic/Object.h"
 #include "openeaagles/maps/rpfMap/Support.h"
@@ -47,4 +47,4 @@ private:
 };  // End Maps namespace 
 };  // End Eaagles namespace
 
-#endif // __EAAGLES_MAPS_RPF_CADRGFRAME_H__
+#endif

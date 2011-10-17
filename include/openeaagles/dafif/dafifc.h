@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // DAFIF Support Utilities and Data 
 //------------------------------------------------------------------------------
-#ifndef __dafifc_H__
-#define __dafifc_H__
+#ifndef __Eaagles_Dafif_dafifc_H__
+#define __Eaagles_Dafif_dafifc_H__
 
 namespace Eaagles {
 namespace Dafif {
@@ -202,4 +202,4 @@ const int WP_MAGVAR     = 106;
 } // End Dafif namespace
 } // End Eaagles namespace
 
-#endif    /* __dafifc_H__ */
+#endif

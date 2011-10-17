@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Classes: Track, RfTrack, IrTrack
 //------------------------------------------------------------------------------
-#ifndef __Track_H_404C9D4D_2D86_498a_A8DB_48F977A9DC0F__
-#define __Track_H_404C9D4D_2D86_498a_A8DB_48F977A9DC0F__
+#ifndef __Eaagles_Simulation_Track_H__
+#define __Eaagles_Simulation_Track_H__
 
 #include "openeaagles/basic/Object.h"
 
@@ -19,7 +19,7 @@ class IrQueryMsg;
 class Player;
 
 //------------------------------------------------------------------------------
-// Class:	Track
+// Class: Track
 // Base class:	Basic::Object -> Track
 // Form name: Track
 // Description: Generic Target Track
@@ -271,7 +271,7 @@ protected:
 
 
 //------------------------------------------------------------------------------
-// Class:	RfTrack
+// Class: RfTrack
 // Base class:	Basic::Object -> Track -> RfTrack
 // Form name: RfTrack
 // Description: Generic R/F Target Track (onboard sensors)
@@ -306,7 +306,7 @@ protected:
 };
 
 //------------------------------------------------------------------------------
-// Class:	IrTrack
+// Class: IrTrack
 // Form name: IrTrack
 // Description: Generic IR Target Track (onboard sensors)
 //------------------------------------------------------------------------------
@@ -343,4 +343,4 @@ protected:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // __Track_H_404C9D4D_2D86_498a_A8DB_48F977A9DC0F__
+#endif

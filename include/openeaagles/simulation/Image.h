@@ -4,8 +4,8 @@
 // Form name: SarImage
 // Description: SAR image structure
 //------------------------------------------------------------------------------
-#ifndef	__Image_H__4F982901_D1C4_4956_83DF_74326CA2FB48
-#define __Image_H__4F982901_D1C4_4956_83DF_74326CA2FB48
+#ifndef	__Eaagles_Simulation_Image_H__
+#define __Eaagles_Simulation_Image_H__
 
 #include "openeaagles/basic/Object.h"
 
@@ -80,5 +80,4 @@ private:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif	/* __Image_H__4F982901_D1C4_4956_83DF_74326CA2FB48 */
-
+#endif

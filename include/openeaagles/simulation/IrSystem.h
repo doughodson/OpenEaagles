@@ -1,9 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: IrSystem
 //------------------------------------------------------------------------------
-
-#ifndef _OpenEaagles_Simulation_IrSystem_H_
-#define _OpenEaagles_Simulation_IrSystem_H_
+#ifndef __Eaagles_Simulation_IrSystem_H__
+#define __Eaagles_Simulation_IrSystem_H__
 
 #include "openeaagles/simulation/System.h"
 
@@ -77,6 +76,4 @@ private:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // _OpenEaagles_Simulation_IrSystem_H_
-
-
+#endif

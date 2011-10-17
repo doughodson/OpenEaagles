@@ -1,3 +1,4 @@
+
 #ifndef __DsMagvar_H__
 #define __DsMagvar_H__
 

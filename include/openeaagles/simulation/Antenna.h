@@ -1,9 +1,8 @@
 //------------------------------------------------------------------------------
-// Class:	Antenna
+// Class: Antenna
 //------------------------------------------------------------------------------
-#ifndef __Antenna_H_9D00418F_2A71_48d1_BF5B_A49DE9CF2514__
-#define __Antenna_H_9D00418F_2A71_48d1_BF5B_A49DE9CF2514__
-
+#ifndef __Eaagles_Simulation_Antenna_H__
+#define __Eaagles_Simulation_Antenna_H__
 
 #include "openeaagles/simulation/ScanGimbal.h"
 
@@ -139,4 +138,4 @@ private:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // __Antenna_H_9D00418F_2A71_48d1_BF5B_A49DE9CF2514__
+#endif

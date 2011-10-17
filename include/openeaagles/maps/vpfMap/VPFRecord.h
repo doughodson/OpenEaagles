@@ -1,19 +1,21 @@
 // -------------------------------------------------------------------------------
-// Class -> VPFRecord
+// Class: VPFRecord
 // Description: This is a single fixed length or variable length object that
 // will store a list of VPFDataType values for quick access.
 // -------------------------------------------------------------------------------
-#ifndef	__EAAGLES_MAPS_VPF_VPFRECORD_H__
-#define __EAAGLES_MAPS_VPF_VPFRECORD_H__
+#ifndef	__Eaagles_Maps_Vpf_VPFRecord_H__
+#define __Eaagles_Maps_Vpf_VPFRecord_H__
 
 #include "openeaagles/basic/Object.h"
 #include "openeaagles/maps/vpfMap/VPFTable.h"
 
 namespace Eaagles {
+   namespace Basic { class String; }
+
 namespace Maps {
 namespace Vpf {
 
-class VPFTable;
+class VPFDataType;
 
 class VPFRecord : public Basic::Object {
    DECLARE_SUBCLASS(VPFRecord,Basic::Object)
@@ -44,4 +46,4 @@ private:
 }; // End Maps namespace 
 }; // End Eaagles namespace
 
-#endif // __EAAGLES_MAPS_VPF_VPFRECORD_H__
+#endif

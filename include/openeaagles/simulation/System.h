@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
-// Class:	System
+// Class: System
 //------------------------------------------------------------------------------
-#ifndef __System_H_71A65DA8_898D_41ac_B5CF_F0009D652441__
-#define __System_H_71A65DA8_898D_41ac_B5CF_F0009D652441__
+#ifndef __Eaagles_Simulation_System_H__
+#define __Eaagles_Simulation_System_H__
 
 #include "openeaagles/basic/Component.h"
 
@@ -113,4 +113,4 @@ private:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // __System_H_71A65DA8_898D_41ac_B5CF_F0009D652441__
+#endif

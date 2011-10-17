@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: Route
 //------------------------------------------------------------------------------
-#ifndef __Route_H_A514CFC4_475D_4661_B989_508AB891DB2E__
-#define __Route_H_A514CFC4_475D_4661_B989_508AB891DB2E__
+#ifndef __Eaagles_Simulation_Route_H__
+#define __Eaagles_Simulation_Route_H__
 
 #include "openeaagles/basic/Component.h"
 
@@ -226,4 +226,4 @@ inline const Basic::Pair* Route::findSteerpoint(const unsigned int idx) const
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // __Route_H_A514CFC4_475D_4661_B989_508AB891DB2E__
+#endif

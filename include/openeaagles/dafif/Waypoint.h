@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Class:	Waypoint
+// Class: Waypoint
 // Base class:	Basic::Object -> Basic::String -> DafifRecord -> Waypoint
 //
 // Description: Access to the DAFIF Waypoint records.
@@ -13,8 +13,8 @@
 //		Length of a DAFIF Waypoint record.
 //
 //------------------------------------------------------------------------------
-#ifndef __Waypoint_H_89108B7B_89A8_49cd_BF81_154C92427337__
-#define __Waypoint_H_89108B7B_89A8_49cd_BF81_154C92427337__
+#ifndef __Eaagles_Dafif_Waypoint_H__
+#define __Eaagles_Dafif_Waypoint_H__
 
 #include "Dafif.h"
 

@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: Gimbal
 //------------------------------------------------------------------------------
-#ifndef __Gimbal_H_D3D14A4E_177D_428d_9852_D20CE508BC26__
-#define __Gimbal_H_D3D14A4E_177D_428d_9852_D20CE508BC26__
+#ifndef __Eaagles_Simulation_Gimbal_H__
+#define __Eaagles_Simulation_Gimbal_H__
 
 #include "openeaagles/simulation/System.h"
 
@@ -389,4 +389,4 @@ private:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // __Gimbal_H_D3D14A4E_177D_428d_9852_D20CE508BC26__
+#endif

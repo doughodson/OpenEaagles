@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Class:  StrokeFont
+// Class: StrokeFont
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_BasicGL_StrokeFont_H__
 #define __Eaagles_BasicGL_StrokeFont_H__

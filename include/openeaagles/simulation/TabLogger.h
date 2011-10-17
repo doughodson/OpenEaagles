@@ -8,21 +8,23 @@
 //      TabLogger::LogActiveTrack     -- Log active (radar) track event (header, new, update, removed)
 //      TabLogger::LogPassiveTrack    -- Log passive (rwr)  track event (header, new, update, removed)
 //------------------------------------------------------------------------------
-#ifndef __TabLogger_H_
-#define __TabLogger_H_
+#ifndef __Eaagles_Simulation_TabLogger_H__
+#define __Eaagles_Simulation_TabLogger_H__
 
 #include "openeaagles/simulation/SimLogger.h"
 
-
 namespace Eaagles {
-    namespace Simulation { class Weapon; }
-    namespace Simulation { class Track; }
-    namespace Simulation { class TrackManager; }
-    namespace Simulation { class Player; }
-    namespace Simulation { class Emission; }
-    namespace Simulation { class Simulation; }
-    namespace Basic      { class Identifier; }
+
+namespace Basic { class Identifier; }
+
 namespace Simulation {
+
+class Weapon;
+class Track;
+class TrackManager;
+class Player;
+class Emission;
+class Simulation;
 
 
 //------------------------------------------------------------------------------
@@ -36,27 +38,12 @@ class TabLogger : public SimLogger {
 
 public:
 
-    class TabLogEvent;
-
-public:
     TabLogger();
    
     // Basic::Component interface
     virtual void updateTC(const LCreal dt = 0.0f);
     virtual void updateData(const LCreal dt = 0.0);
 
-protected:
-
-private:
-
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-////////  The real fun starts here.  ///////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-
-
-public:
     //==============================================================================
     // ######### Simulation Log Event Classes #########
     //==============================================================================
@@ -103,7 +90,6 @@ public:
     };
 
  
-    //mcp07__starting here
     //------------------------------------------------------------------------------
     // Class:   TabLogger::LogPlayerData
     // Base class:  Basic::Object -> Basic::Logger::LogEvent -> SimLogEvent -> TabLogEvent -> LogPlayerData
@@ -231,18 +217,9 @@ public:
         osg::Vec3 tgtAngles;
         LCreal sn;              // Signal/Noise
     };
-    
-
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-////////   The real fun ends here.   ///////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-
-
 };
 
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif	/* __TabLogger_H_ */
+#endif

@@ -1,7 +1,5 @@
 //------------------------------------------------------------------------------
-//
-// Class:   DafifRecord
-// Base class:  Basic::Object -> Basic::String -> DafifRecord
+// Class: DafifRecord
 //
 // Description: General class used to access DAFIF record information
 //
@@ -111,8 +109,8 @@
 //       set this variable to their own <class>::ptable.
 //
 //------------------------------------------------------------------------------
-#ifndef __DsDafif_H_D295BFD7_F146_4401_A86D_E867461B67EA__
-#define __DsDafif_H_D295BFD7_F146_4401_A86D_E867461B67EA__
+#ifndef __Eaagles_Dafif_DafifRecord_H__
+#define __Eaagles_Dafif_DafifRecord_H__
 
 #include "openeaagles/basic/String.h"
 #include "dafifc.h"
@@ -235,5 +233,4 @@ protected:
 } // End Dafif namespace
 } // End Eaagles namespace
 
-#endif  /* __DsDafif_H_D295BFD7_F146_4401_A86D_E867461B67EA__ */
-
+#endif

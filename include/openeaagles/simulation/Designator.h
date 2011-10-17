@@ -1,12 +1,11 @@
 //------------------------------------------------------------------------------
-// Classes:	Designator
-// Base class:	Basic::Object -> Designator
+// Class: Designator
 //
-// Description: General Designator class (e.g., Lasor Designator)
+// Description: General designator (e.g., laser)
 //
 //------------------------------------------------------------------------------
-#ifndef __Designator_H_5B350317_2BE9_42ea_B40A_69187E3E459D__
-#define __Designator_H_5B350317_2BE9_42ea_B40A_69187E3E459D__
+#ifndef __Eaagles_Simulation_Designator_H__
+#define __Eaagles_Simulation_Designator_H__
 
 #include "openeaagles/basic/Object.h"
 
@@ -70,4 +69,4 @@ private:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // __Designator_H_5B350317_2BE9_42ea_B40A_69187E3E459D__
+#endif

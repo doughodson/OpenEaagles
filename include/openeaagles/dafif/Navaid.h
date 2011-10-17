@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
-// Class:	Navaid
+// Class: Navaid
 //------------------------------------------------------------------------------
-#ifndef __Navaid_H_C11590C4_159D_4dce_BD70_6C11897A8474__
-#define __Navaid_H_C11590C4_159D_4dce_BD70_6C11897A8474__
+#ifndef __Eaagles_Dafif_Navaid_H__
+#define __Eaagles_Dafif_Navaid_H__
 
 #include "Dafif.h"
 

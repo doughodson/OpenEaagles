@@ -17,7 +17,7 @@ class Sar;
 class Steerpoint;
 
 //------------------------------------------------------------------------------
-// Class:	Action
+// Class: Action
 // Description: Actions that occur at steerpoints.
 //
 // Notes:

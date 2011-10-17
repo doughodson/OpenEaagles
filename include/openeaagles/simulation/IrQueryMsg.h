@@ -1,9 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: IrQueryMsg
 //------------------------------------------------------------------------------
-
-#ifndef _OpenEaagles_Simulation_IrQueryMsg_H_
-#define _OpenEaagles_Simulation_IrQueryMsg_H_
+#ifndef __Eaagles_Simulation_IrQueryMsg_H__
+#define __Eaagles_Simulation_IrQueryMsg_H__
 
 #include "openeaagles/simulation/SensorMsg.h"
 
@@ -174,4 +173,4 @@ private:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // _OpenEaagles_Simulation_IrQueryMsg_H_
+#endif

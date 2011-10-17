@@ -1,10 +1,9 @@
 //------------------------------------------------------------------------------
-// Class: Nav
+// Class: Player
 // inline functions
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_Player_INL__
-#define __Eaagles_Simulation_Player_INL__
-
+#ifndef __Eaagles_Simulation_Player_Inline__
+#define __Eaagles_Simulation_Player_Inline__
 
 // The player's type string (.e.g, "F-16C")
 inline const Basic::String* Player::getType() const

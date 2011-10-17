@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------------
-// Class:  BasicGL::MapPage -> MapDrawer
+// Class: MapDrawer
 //
 // Description: 
 // This is the actual class that does the drawing of the map.  It cycles through
@@ -46,8 +46,8 @@
 
 // -------------------------------------------------------------------------------
 
-#ifndef __EAAGLES_MAPS_RPF_MOVINGMAPIMAGE_H__
-#define __EAAGLES_MAPS_RPF_MOVINGMAPIMAGE_H__
+#ifndef __Eaagles_Maps_Rpf_MapDrawer_H__
+#define __Eaagles_Maps_Rpf_MapDrawer_H__
 
 #include "openeaagles/basicGL/MapPage.h"
 
@@ -131,4 +131,4 @@ private:
 };  // End Maps namespace
 };  // End Eaagles namespace
 
-#endif // __EAAGLES_MAPS_RPF_MOVINGMAPIMAGE_H__
+#endif

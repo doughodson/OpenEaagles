@@ -1,5 +1,7 @@
+//
 #include "openeaagles/maps/vpfMap/VPFSpatialIndexTable.h"
 #include "openeaagles/maps/vpfMap/VPFDirectory.h"
+
 #include "openeaagles/basic/String.h"
 // for opening and closing files
 #include <fstream>

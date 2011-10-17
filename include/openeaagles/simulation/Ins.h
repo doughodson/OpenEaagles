@@ -10,7 +10,7 @@ namespace Eaagles {
 namespace Simulation {
 
 //------------------------------------------------------------------------------
-// Classes:     Ins
+// Classes: Ins
 // Description: Generic Inerial Navigation System (INS) Data
 // Form name: Ins
 //------------------------------------------------------------------------------

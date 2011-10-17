@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Class:	StabilizingGimbal
+// Class: StabilizingGimbal
 // Base class:	Basic::Object -> Basic::Component -> System -> Gimbal -> StabilizingGimbal
 //
 // Description: This gimbal tries to counter the player's roll, pitch and yaw movements.
@@ -7,8 +7,8 @@
 // Public Member functions:
 //
 //------------------------------------------------------------------------------
-#ifndef __StabilizingGimbal_H_ECABB073_88C2_4363_AF65_C590F020D97A__
-#define __StabilizingGimbal_H_ECABB073_88C2_4363_AF65_C590F020D97A__
+#ifndef __Eaagles_Simulation_StabilizingGimbal_H__
+#define __Eaagles_Simulation_StabilizingGimbal_H__
 
 #include "openeaagles/simulation/Gimbal.h"
 
@@ -59,4 +59,4 @@ private:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // __StabilizingGimbal_H_ECABB073_88C2_4363_AF65_C590F020D97A__
+#endif

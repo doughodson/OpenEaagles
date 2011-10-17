@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Classes: NetIO
 //------------------------------------------------------------------------------
-#ifndef __NetIO_H_E07B49D3_16C3_458e_9ECC_24DD2E2E443A__
-#define __NetIO_H_E07B49D3_16C3_458e_9ECC_24DD2E2E443A__
+#ifndef __Eaagles_Simulation_NetIO_H__
+#define __Eaagles_Simulation_NetIO_H__
 
 #include "openeaagles/basic/Component.h"
 #include "openeaagles/simulation/Player.h"
@@ -487,4 +487,4 @@ private:  // Ntm related private
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // __NetIO_H_E07B49D3_16C3_458e_9ECC_24DD2E2E443A__
+#endif

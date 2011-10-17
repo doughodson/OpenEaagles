@@ -18,8 +18,8 @@
 
 //------------------------------------------------------------------------------
 
-#ifndef __EAAGLES_MAPS_RPF_SUPPORT_H__
-#define __EAAGLES_MAPS_RPF_SUPPORT_H__
+#ifndef __Eaagles_Maps_Rpf_Support_H__
+#define __Eaagles_Maps_Rpf_Support_H__
 
 #include <fstream>
 
@@ -151,5 +151,4 @@ void parseLocations(std::ifstream& fin, Location* locs, int count);
 };  // End Maps namespace
 };  // End Eaagles namespace	
 
-#endif // __EAAGLES_MAPS_RPF_SUPPORT_H__
-
+#endif

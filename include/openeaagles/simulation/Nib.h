@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Classes: Nib
 //------------------------------------------------------------------------------
-#ifndef __Nib_H_0E85E1F4_D13A_45ad_BA21_F4DDB204B83B__
-#define __Nib_H_0E85E1F4_D13A_45ad_BA21_F4DDB204B83B__
+#ifndef __Eaagles_Simulation_Nib_H__
+#define __Eaagles_Simulation_Nib_H__
 
 #include "openeaagles/simulation/NetIO.h"
 
@@ -346,4 +346,4 @@ private:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // __Nib_H_0E85E1F4_D13A_45ad_BA21_F4DDB204B83B__
+#endif

@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: SpaceDynamicsModel
 //------------------------------------------------------------------------------
-#if !defined(__SpaceDynamicsModel_H_90ABD4BF_03F2_4e20_9032_1881F28556B2__)
-#define __SpaceDynamicsModel_H_90ABD4BF_03F2_4e20_9032_1881F28556B2__
+#ifndef __Eaagles_Simulation_SpaceDynamicsModel_H__
+#define __Eaagles_Simulation_SpaceDynamicsModel_H__
 
 #include "openeaagles/simulation/DynamicsModels.h"
 
@@ -41,4 +41,4 @@ public:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // !defined(__SpaceDynamicsModel_H_90ABD4BF_03F2_4e20_9032_1881F28556B2__)
+#endif

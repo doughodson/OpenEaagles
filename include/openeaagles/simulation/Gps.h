@@ -11,8 +11,6 @@ namespace Simulation {
 
 //------------------------------------------------------------------------------
 // Classes:     Gps
-// Base class:  Basic::Object -> ... -> Navigation -> Gps
-//
 // Description: Generic Global Positioning System (GPS) Data
 // Form name: Gps
 //------------------------------------------------------------------------------

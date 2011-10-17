@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Class:  Basic::Object -> CadrgTocEntry
+// Class: CadrgTocEntry
 //
 // This is a Table of Contents Boundary Rectangle Entry, which describes the
 // boundary of a given set of frames, including the scale and size of the
@@ -25,8 +25,8 @@
 //      bool CadrgTocEntry::isInZone(double lat, double lon)
 //------------------------------------------------------------------------------
 
-#ifndef __EAAGLES_MAPS_RPF_CADRGTOCENTRY_H__
-#define __EAAGLES_MAPS_RPF_CADRGTOCENTRY_H__
+#ifndef __Eaagles_Maps_Rpf_CadrgTocEntry_H__
+#define __Eaagles_Maps_Rpf_CadrgTocEntry_H__
 
 #include "openeaagles/maps/rpfMap/CadrgFrameEntry.h"
 #include "openeaagles/basic/Object.h"
@@ -118,4 +118,4 @@ private:
 };  // End Maps namespace
 };  // End Eaagles namespace
 
-#endif // __EAAGLES_MAPS_RPF_CADRGTOCENTRY_H__
+#endif

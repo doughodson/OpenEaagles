@@ -16,8 +16,8 @@
 //      SimLogger::RemovedRwrTrack  -- Removed old RWR track
 //      SimLogger::DetonationEvent  -- Weapon Detonated
 //------------------------------------------------------------------------------
-#ifndef __SimLogger_H_2B586DE5_26DB_4087_83E8_6FB4424975A8__
-#define __SimLogger_H_2B586DE5_26DB_4087_83E8_6FB4424975A8__
+#ifndef __Eaagles_Simulation_SimLogger_H__
+#define __Eaagles_Simulation_SimLogger_H__
 
 #include "openeaagles/basic/Logger.h"
 
@@ -421,4 +421,4 @@ public:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif	/* __SimLogger_H_2B586DE5_26DB_4087_83E8_6FB4424975A8__ */
+#endif

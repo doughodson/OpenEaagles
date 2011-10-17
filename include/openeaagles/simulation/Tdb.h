@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: Tdb
 //------------------------------------------------------------------------------
-#ifndef __TDB_H_8789EA63_4E6F_483f_9717_302045E687B1__
-#define __TDB_H_8789EA63_4E6F_483f_9717_302045E687B1__
+#ifndef __Eaagles_Simulation_Tdb_H__
+#define __Eaagles_Simulation_Tdb_H__
 
 #include "openeaagles/simulation/System.h"
 
@@ -162,4 +162,4 @@ protected:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // __TDB_H_8789EA63_4E6F_483f_9717_302045E687B1__
+#endif

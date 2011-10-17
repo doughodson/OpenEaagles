@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
-// Classes: Dted::DtedFile
+// Classes: DtedFile
 //------------------------------------------------------------------------------
-#ifndef __OpenEaagles_Terrain_DtedFile_H__
-#define __OpenEaagles_Terrain_DtedFile_H__
+#ifndef __Eaagles_Terrain_DtedFile_H__
+#define __Eaagles_Terrain_DtedFile_H__
 
 #include "../DataFile.h"
 
@@ -11,7 +11,7 @@ namespace Eaagles {
 namespace Terrain {
 
 //------------------------------------------------------------------------------
-// Class:   Terrain::DtedFile
+// Class: DtedFile
 //
 // Description: DTED data loader.
 //
@@ -46,7 +46,7 @@ private:
 };
 
 
-} // End Dted namspace
+} // End Terrain namspace
 } // End Eaagles namespace
 
-#endif	// __OpenEaagles_Terrain_DtedFile_H__
+#endif

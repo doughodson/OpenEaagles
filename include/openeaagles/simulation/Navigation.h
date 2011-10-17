@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: Navigation
 //------------------------------------------------------------------------------
-#ifndef __Navigation_H_7CFF88FE_EEB7_4420_B1C8_480265BB83BE__
-#define __Navigation_H_7CFF88FE_EEB7_4420_B1C8_480265BB83BE__
+#ifndef __Eaagles_Simulation_Navigation_H__
+#define __Eaagles_Simulation_Navigation_H__
 
 #include "openeaagles/simulation/System.h"
 #include "openeaagles/basic/osg/Vec2"
@@ -249,4 +249,4 @@ private:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // __Navigation_H_7CFF88FE_EEB7_4420_B1C8_480265BB83BE__
+#endif

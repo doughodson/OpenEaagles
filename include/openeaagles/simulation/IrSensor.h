@@ -6,9 +6,8 @@
 // In some cases (during missile launch), waiting for the background thread to perform this 
 // operation may disrupt a seeker/sensor's ability to track a target.
 //------------------------------------------------------------------------------
-
-#ifndef _OpenEaagles_Simulation_IrSensor_H_
-#define _OpenEaagles_Simulation_IrSensor_H_
+#ifndef __Eaagles_Simulation_IrSensor_H__
+#define __Eaagles_Simulation_IrSensor_H__
 
 #include "openeaagles/simulation/IrSystem.h"
 
@@ -247,4 +246,4 @@ private:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // _OpenEaagles_Simulation_IrSensor_H_
+#endif

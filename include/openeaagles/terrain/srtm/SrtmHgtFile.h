@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
-// Classes: Srtm::SrtmHgtFile
+// Classes: SrtmHgtFile
 //------------------------------------------------------------------------------
-#ifndef __Terrain_SrtmHgtFile_H__
-#define __Terrain_SrtmHgtFile_H__
+#ifndef __Eaagles_Terrain_SrtmHgtFile_H__
+#define __Eaagles_Terrain_SrtmHgtFile_H__
 
 #include "../DataFile.h"
 
@@ -11,7 +11,7 @@ namespace Eaagles {
 namespace Terrain {
 
 //------------------------------------------------------------------------------
-// Class:   Terrain::SrtmHgtFile
+// Class: SrtmHgtFile
 // Base classes: Basic::Object -> Basic::Component 
 //               -> Terrain::Database -> Terrain::DataFile
 //
@@ -69,7 +69,7 @@ private:
 };
 
 
-} // End Srtm namspace
+} // End Terrain namspace
 } // End Eaagles namespace
 
-#endif	// __Terrain_SrtmHgtFile_H__
+#endif

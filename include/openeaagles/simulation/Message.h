@@ -43,8 +43,8 @@
 //      Description: clears the list of destination names
 //----------------------------------------------------------------------------------
 
-#ifndef Message_H
-#define Message_H
+#ifndef __Eaagles_Simulation_Message_H__
+#define __Eaagles_Simulation_Message_H__
 
 #include "openeaagles/basic/Object.h"
 #include "openeaagles/basic/String.h"
@@ -95,5 +95,3 @@ private:
 } // End Eaagles Namespace
 
 #endif
-
-

@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class:	Iff
 //------------------------------------------------------------------------------
-#ifndef __IFF_H_5BF06AD6_B12F_44d8_BD34_26D7FCC25AA4__
-#define __IFF_H_5BF06AD6_B12F_44d8_BD34_26D7FCC25AA4__
+#ifndef __Eaagles_Simulation_Iff_H__
+#define __Eaagles_Simulation_Iff_H__
 
 #include "openeaagles/simulation/Radio.h"
 
@@ -124,4 +124,4 @@ private:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // __IFF_H_5BF06AD6_B12F_44d8_BD34_26D7FCC25AA4__
+#endif

@@ -1,7 +1,5 @@
 //------------------------------------------------------------------------------
 // Class: CadrgFile
-// Base class: Basic::Object -> CadrgFile
-// 
 // Description: 
 // This is the data file that is created by CadrgMap when the CADRG files are '
 // initially loaded.  These files contain all the TocEntries that are created,
@@ -40,8 +38,8 @@
 //
 //------------------------------------------------------------------------------
 
-#ifndef __EAAGLES_MAPS_RPF_CADRGFILE_H__
-#define __EAAGLES_MAPS_RPF_CADRGFILE_H__
+#ifndef __Eaagles_Maps_Rpf_CadrgFile_H__
+#define __Eaagles_Maps_Rpf_CadrgFile_H__
 
 #include "openeaagles/basic/Object.h"
 
@@ -91,4 +89,4 @@ private:
 };  // End Maps namespace
 };  // End Eaagles namespace
 
-#endif  // __EAAGLES_MAPS_RPF_CADRGFILE_H__
+#endif

@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------------
-// Class -> VMAP0LibDirectory
+// Class: VMAP0LibDirectory
 // Description: VMAP level 0 library directory which contains
 // 
 // - lat (library attribute table)
@@ -9,8 +9,8 @@
 //      void VMAP0LibDirectory::loadTables()
 
 // -------------------------------------------------------------------------------
-#ifndef	__EAAGLES_MAPS_VPF_VMAP0LIBDIRECTORY_H__
-#define __EAAGLES_MAPS_VPF_VMAP0LIBDIRECTORY_H__
+#ifndef	__Eaagles_Maps_Vpf_VMAP0LibDirectory_H__
+#define __Eaagles_Maps_Vpf_VMAP0LibDirectory_H__
 
 #include "openeaagles/maps/vpfMap/VPFDirectory.h"
 #include "openeaagles/maps/vpfMap/VMAP0RefCoverageDirectory.h"
@@ -42,4 +42,4 @@ private:
 }; // End Maps namespace 
 }; // End Eaagles namespace
 
-#endif // __EAAGLES_MAPS_VPF_VMAP0LIBDIRECTORY_H__
+#endif

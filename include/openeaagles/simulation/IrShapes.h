@@ -1,9 +1,8 @@
 //------------------------------------------------------------------------------
 // Classes: IrShape, IrSphere, IrBox
 //------------------------------------------------------------------------------
-
-#ifndef _OpenEaagles_Simulation_IrShape_H_
-#define _OpenEaagles_Simulation_IrShape_H_
+#ifndef __Eaagles_Simulation_IrShape_H__
+#define __Eaagles_Simulation_IrShape_H__
 
 #include "openeaagles/basic/Object.h"
 
@@ -99,5 +98,4 @@ private:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // _OpenEaagles_Simulation_IrShape_H_
-
+#endif

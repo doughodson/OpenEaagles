@@ -1,9 +1,8 @@
 //------------------------------------------------------------------------------
 // Classes: IrSignature
 //------------------------------------------------------------------------------
-
-#ifndef _OpenEaagles_Simulation_IrSignature_H_
-#define _OpenEaagles_Simulation_IrSignature_H_
+#ifndef __Eaagles_Simulation_IrSignature_H__
+#define __Eaagles_Simulation_IrSignature_H__
 
 #include "openeaagles/basic/Component.h"
 
@@ -148,5 +147,4 @@ private:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // _OpenEaagles_Simulation_IrSignature_H_
-
+#endif

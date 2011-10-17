@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Class:   AirportLoader
+// Class: AirportLoader
 // Base class: Database -> AirportLoader
 //
 // Description: DAFIF Airport file class (file0)
@@ -37,8 +37,8 @@
 //       Range: 0 .. numberFound()-1
 //
 //------------------------------------------------------------------------------
-#ifndef __AirportLoader_H_AB79322D_85DA_4d3f_B1D1_E5349C6E511C__
-#define __AirportLoader_H_AB79322D_85DA_4d3f_B1D1_E5349C6E511C__
+#ifndef __Eaagles_Dafif_AirportLoader_H__
+#define __Eaagles_Dafif_AirportLoader_H__
 
 #include "DafifDatabase.h"
 #include "Airport.h"

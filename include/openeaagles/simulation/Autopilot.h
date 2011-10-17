@@ -108,7 +108,7 @@ public:
    virtual double getLeadFollowingDistanceTrail() const { return -leadOffset[0]; }
    virtual double getLeadFollowingDistanceRight() const { return  leadOffset[1]; }
    virtual double getLeadFollowingDeltaAltitude() const { return -leadOffset[2]; }
-   virtual bool isFollowTheLeadModeOn()           const { return followLeadModeOn; }  // "Follow the lead" mode flag
+   virtual bool isFollowTheLeadModeOn() const           { return followLeadModeOn; }  // "Follow the lead" mode flag
    virtual const Basic::Identifier* getLeadPlayerName() { return leadName; }
    virtual const Player* getLeadPlayer();                            // Our lead player
 

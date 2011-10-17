@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Class:	Adi
+// Class: Adi
 // Base class: BasicGL::Graphic -> Instrument ->  Adi
 // 
 // Description: Adi that knows how to translate and rotate it's pitch and roll 
@@ -14,8 +14,8 @@
 //      UPDATE_VALUE2 = updates roll (radians)
 //      UPDATE_VALUE3 = updates max rate (degrees/second)
 //------------------------------------------------------------------------------
-#ifndef	__OPENEAAGLES_INSTRUMENTS_ADI_H__
-#define __OPENEAAGLES_INSTRUMENTS_ADI_H__
+#ifndef	__Eaagles_Instruments_Adi_H__
+#define __Eaagles_Instruments_Adi_H__
 
 #include "openeaagles/instruments/Instrument.h"
 #include "openeaagles/basic/units/Angles.h"
@@ -72,5 +72,4 @@ private:
 }; // end Instruments namespace
 }; // end Eaagles namespace
 
-#endif	// __OPENEAAGLES_INSTRUMENTS_ADI_H__
-
+#endif

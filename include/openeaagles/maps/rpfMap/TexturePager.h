@@ -1,5 +1,5 @@
 // ------------------------------------------------------------------------------
-// Class:  Basic::Object -> TexturePager
+// Class: TexturePager
 // 
 // Description: holds the texture tables and gets "paged" through the textures, freeing,
 // re-using, and loading new textures in the table as needed.  This is driven
@@ -39,8 +39,8 @@
 
 // ------------------------------------------------------------------------------
 
-#ifndef __EAAGLES_MAPS_RPF_TEXTUREPAGER_H__
-#define __EAAGLES_MAPS_RPF_TEXTUREPAGER_H__
+#ifndef __Eaagles_Maps_Rpf_TexturePager_H__
+#define __Eaagles_Maps_Rpf_TexturePager_H__
 
 #include "openeaagles/basic/Object.h"
 #include "TextureTable.h"
@@ -94,5 +94,4 @@ private:
 };  // End Maps namespace
 };  // End Eaagles namespace
 
-#endif // __EAAGLES_MAPS_RPF_TEXTUREPAGER_H__
-
+#endif

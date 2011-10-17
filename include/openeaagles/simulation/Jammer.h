@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class:	Jammer
 //------------------------------------------------------------------------------
-#ifndef __Jammer_H_EDBC34AC_10D9_41ff_8521_33FC12BBE674__
-#define __Jammer_H_EDBC34AC_10D9_41ff_8521_33FC12BBE674__
+#ifndef __Eaagles_Simulation_Jammer_H__
+#define __Eaagles_Simulation_Jammer_H__
 
 #include "openeaagles/simulation/RfSensor.h"
 
@@ -10,8 +10,6 @@ namespace Eaagles {
 namespace Simulation {
 //------------------------------------------------------------------------------
 // Class: Jammer
-// Base class: Basic::Object -> ... -> RfSystem -> RfSensor -> Jammer
-//
 // Description: Example Jammer
 // Form name: Jammer
 //
@@ -35,4 +33,4 @@ protected:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // __Jammer_H_EDBC34AC_10D9_41ff_8521_33FC12BBE674__
+#endif

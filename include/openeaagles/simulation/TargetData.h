@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
-// Classes:     TargetData
+// Classes: TargetData
 //------------------------------------------------------------------------------
-#ifndef __TargetData_H_9208838A_6336_4d68_B097_961991628378__
-#define __TargetData_H_9208838A_6336_4d68_B097_961991628378__
+#ifndef __Eaagles_Simulation_TargetData_H__
+#define __Eaagles_Simulation_TargetData_H__
 
 #include "openeaagles/basic/Object.h"
 
@@ -112,4 +112,4 @@ private:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // __TargetData_H_9208838A_6336_4d68_B097_961991628378__
+#endif

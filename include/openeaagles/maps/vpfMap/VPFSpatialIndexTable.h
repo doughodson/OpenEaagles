@@ -5,18 +5,15 @@
 // for quick referencing of primitives by area
 // 
 // ---------------------------------------------------------------
-#ifndef	__EAAGLES_MAPS_VPF_VPFSPATIALINDEXTABLE_H__
-#define __EAAGLES_MAPS_VPF_VPFSPATIALINDEXTABLE_H__
+#ifndef	__Eaagles_Maps_Vpf_VPFSpatialIndexTable_H__
+#define __Eaagles_Maps_Vpf_VPFSpatialIndexTable_H__
 
 #include "openeaagles/basic/Object.h"
-#include "openeaagles/maps/vpfMap/VPFDataType.h"
 
 namespace Eaagles {
-namespace Basic { class String; }
+   namespace Basic { class String; }
 namespace Maps {
 namespace Vpf {
-
-class VPFDataType;
 
 class VPFSpatialIndexTable : public Basic::Object {
    DECLARE_SUBCLASS(VPFSpatialIndexTable,Basic::Object)
@@ -51,4 +48,4 @@ private:
 }; // End Maps namespace 
 }; // End Eaagles namespace
 
-#endif // __EAAGLES_MAPS_VPF_VPFSPATIALINDEXTABLE_H__
+#endif

@@ -99,8 +99,8 @@
 //       Prints the records in the ICAO sorted list
 //
 //------------------------------------------------------------------------------
-#ifndef __Database_H_F2630230_5AB3_4174_AD4E_7DB3028CF987__
-#define __Database_H_F2630230_5AB3_4174_AD4E_7DB3028CF987__
+#ifndef __Eaagles_Dafif_Database_H__
+#define __Eaagles_Dafif_Database_H__
 
 #include "openeaagles/basic/Object.h"
 #include "dafifc.h"
@@ -111,7 +111,6 @@ namespace Eaagles {
       class String;
    }
 namespace Dafif {
-
 
 class Database : public Basic::Object {
     DECLARE_SUBCLASS(Database,Basic::Object)

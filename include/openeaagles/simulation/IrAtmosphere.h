@@ -1,9 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: IrAtmosphere
 //------------------------------------------------------------------------------
-
-#ifndef _OpenEaagles_Simulation_IrAtmosphere_H_
-#define _OpenEaagles_Simulation_IrAtmosphere_H_
+#ifndef __Eaagles_Simulation_IrAtmosphere_H__
+#define __Eaagles_Simulation_IrAtmosphere_H__
 
 #include "openeaagles/basic/Component.h"
 
@@ -154,5 +153,4 @@ private:
 } // End Simulation namspace
 } // End Eaagles namespace
 
-#endif  // _OpenEaagles_Simulation_IrAtmosphere_H_
-
+#endif

@@ -1,10 +1,10 @@
 // -------------------------------------------------------------------------------
-// Class -> VPFDataType
+// Class: VPFDataType
 // Description: Simple object which keeps track of data type, length, and value
 // of our table.
 // -------------------------------------------------------------------------------
-#ifndef	__EAAGLES_MAPS_VPF_VPFDATATYPE_H__
-#define __EAAGLES_MAPS_VPF_VPFDATATYPE_H__
+#ifndef	__Eaagles_Maps_Vpf_VPFDataType_H__
+#define __Eaagles_Maps_Vpf_VPFDataType_H__
 
 #include "openeaagles/basic/Object.h"
 
@@ -45,4 +45,4 @@ private:
 }; // End Maps namespace 
 }; // End Eaagles namespace
 
-#endif // __EAAGLES_MAPS_VPF_VPFDATATYPE_H__
+#endif

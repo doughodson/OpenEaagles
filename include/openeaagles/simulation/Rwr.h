@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class:	Rwr
 //------------------------------------------------------------------------------
-#ifndef __RWR_H_88B6FD96_1ABB_414c_B188_A65E6F9F0999__
-#define __RWR_H_88B6FD96_1ABB_414c_B188_A65E6F9F0999__
+#ifndef __Eaagles_Simulation_Rwr_H__
+#define __Eaagles_Simulation_Rwr_H__
 
 #include "openeaagles/simulation/RfSensor.h"
 
@@ -66,4 +66,4 @@ private:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // __RWR_H_88B6FD96_1ABB_414c_B188_A65E6F9F0999__
+#endif

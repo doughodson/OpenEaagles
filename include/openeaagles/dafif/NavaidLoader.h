@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Class:   NavaidLoader
+// Class: NavaidLoader
 // Base class:	Database -> NavaidLoader
 //
 // Description: DAFIF NAVAID file class (file2)
@@ -42,15 +42,14 @@
 //       Prints the records loaded in channel number order.
 //
 //------------------------------------------------------------------------------
-#ifndef __NavaidLoader_H_4AC67E2E_B6E1_498b_B5F6_450ABC0357A5__
-#define __NavaidLoader_H_4AC67E2E_B6E1_498b_B5F6_450ABC0357A5__
+#ifndef __Eaagles_Dafif_NavaidLoader_H__
+#define __Eaagles_Dafif_NavaidLoader_H__
 
 #include "DafifDatabase.h"
 #include "Navaid.h"
 
 namespace Eaagles {
 namespace Dafif {
-
 
 class NavaidLoader : public Database {
     DECLARE_SUBCLASS(NavaidLoader,Database)
@@ -126,4 +125,3 @@ private:
 } // End Eaagles namespace
 
 #endif
-

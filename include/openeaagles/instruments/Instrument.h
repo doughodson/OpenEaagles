@@ -12,8 +12,8 @@
 //      it if there is a scaling table available.  The flag allowPassing will
 //      determine if we pass the token down to our component instruments or not.
 //------------------------------------------------------------------------------
-#ifndef	__OPENEAAGLES_INSTRUMENTS_INSTRUMENT_H__
-#define __OPENEAAGLES_INSTRUMENTS_INSTRUMENT_H__
+#ifndef	__Eaagles_Instruments_Instrument_H__
+#define __Eaagles_Instruments_Instrument_H__
 
 #include "openeaagles/basicGL/Graphic.h"
 
@@ -62,5 +62,4 @@ private:
 }  // end Instruments namespace
 }  // end Eaagles namespace
 
-#endif	// __OPENEAAGLES_INSTRUMENTS_INSTRUMENT_H__
-
+#endif

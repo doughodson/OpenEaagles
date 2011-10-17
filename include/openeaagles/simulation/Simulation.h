@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
-// Class:	Simulation
+// Class: Simulation
 //------------------------------------------------------------------------------
-#ifndef __Simulation_H_2EF9B5F1_F61A_496a_829C_4BC419301C88__
-#define __Simulation_H_2EF9B5F1_F61A_496a_829C_4BC419301C88__
+#ifndef __Eaagles_Simulation_Simulation_H__
+#define __Eaagles_Simulation_Simulation_H__
 
 #include "openeaagles/basic/Component.h"
 
@@ -436,4 +436,4 @@ private:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // __Simulation_H_2EF9B5F1_F61A_496a_829C_4BC419301C88__
+#endif

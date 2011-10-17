@@ -1,15 +1,15 @@
 //------------------------------------------------------------------------------
-// Class:	ScanGimbal
+// Class: ScanGimbal
 //------------------------------------------------------------------------------
-#ifndef __ScanGimbal_H_26A432DC_B994_4e5d_A0D9_743C79640A31__
-#define __ScanGimbal_H_26A432DC_B994_4e5d_A0D9_743C79640A31__
+#ifndef __Eaagles_Simulation_ScanGimbal_H__
+#define __Eaagles_Simulation_ScanGimbal_H__
 
 #include "openeaagles/simulation/Gimbal.h"
 
 namespace Eaagles {
-   namespace Basic {
-      class Integer;
-   }
+
+namespace Basic { class Integer; }
+
 namespace Simulation {
 
 //------------------------------------------------------------------------------
@@ -269,4 +269,4 @@ private:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // __ScanGimbal_H_26A432DC_B994_4e5d_A0D9_743C79640A31__
+#endif

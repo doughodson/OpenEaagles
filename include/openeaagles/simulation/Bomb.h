@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: Bomb
 //------------------------------------------------------------------------------
-#ifndef __BOMBS_H_B7046FAC_E621_4c60_A9BC_11E15699D665__
-#define __BOMBS_H_B7046FAC_E621_4c60_A9BC_11E15699D665__
+#ifndef __Eaagles_Simulation_Bomb_H__
+#define __Eaagles_Simulation_Bomb_H__
 
 #include "openeaagles/simulation/Weapon.h"
 
@@ -127,4 +127,4 @@ private:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // !defined(__BOMBS_H_B7046FAC_E621_4c60_A9BC_11E15699D665__)
+#endif

@@ -1,9 +1,8 @@
 //------------------------------------------------------------------------------
 // Classes: IrSeeker, TdbIr
 //------------------------------------------------------------------------------
-
-#ifndef _OpenEaagles_Simulation_IrSeeker_H_
-#define _OpenEaagles_Simulation_IrSeeker_H_
+#ifndef __Eaagles_Simulation_IrSeeker_H__
+#define __Eaagles_Simulation_IrSeeker_H__
 
 #include "openeaagles/simulation/ScanGimbal.h"
 #include "openeaagles/simulation/Tdb.h"
@@ -100,5 +99,4 @@ protected:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // _OpenEaagles_Simulation_IrSeeker_H_
-
+#endif

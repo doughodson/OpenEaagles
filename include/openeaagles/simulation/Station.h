@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class:  Station
 //------------------------------------------------------------------------------
-#ifndef __Station_H_623CCA3C_52D5_45ed_B594_90B2677E97EC__
-#define __Station_H_623CCA3C_52D5_45ed_B594_90B2677E97EC__
+#ifndef __Eaagles_Simulation_Station_H__
+#define __Eaagles_Simulation_Station_H__
 
 #include "openeaagles/basic/Component.h"
 
@@ -295,4 +295,4 @@ private:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif  /* __Station_H_623CCA3C_52D5_45ed_B594_90B2677E97EC__ */
+#endif

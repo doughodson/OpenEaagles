@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: Steerpoint
 //------------------------------------------------------------------------------
-#ifndef __Steerpoint_H_A0CEB17E_CC2F_4bf7_9C02_642037626E4F__
-#define __Steerpoint_H_A0CEB17E_CC2F_4bf7_9C02_642037626E4F__
+#ifndef __Eaagles_Simulation_Steerpoint_H__
+#define __Eaagles_Simulation_Steerpoint_H__
 
 #include "openeaagles/basic/Component.h"
 #include "openeaagles/basic/osg/Vec3"
@@ -270,4 +270,4 @@ private:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // __Steerpoint_H_A0CEB17E_CC2F_4bf7_9C02_642037626E4F__
+#endif

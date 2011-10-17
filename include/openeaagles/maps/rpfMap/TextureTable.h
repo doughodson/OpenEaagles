@@ -1,5 +1,5 @@
 // ------------------------------------------------------------------------------
-// Class:  Basic::Object -> TextureTable
+// Class: TextureTable
 //
 // Description: Table to hold our texel information for texture viewing.  This is
 // called upon for data by the TexturePager, which is driven by the MapDrawer, which
@@ -29,8 +29,8 @@
 //      BasicGL::Texture* TextureTable::getTexture(int row, int col)
 
 // ------------------------------------------------------------------------------
-#ifndef __EAAGLES_MAPS_RPF_TEXTURETABLE_H__
-#define __EAAGLES_MAPS_RPF_TEXTURETABLE_H__
+#ifndef __Eaagles_Maps_Rpf_TextureTable_H__
+#define __Eaagles_Maps_Rpf_TextureTable_H__
 
 #include "openeaagles/basic/Object.h"
 
@@ -45,7 +45,6 @@ class TextureTable : public Basic::Object
 
 public:
     TextureTable();
-
 
     // Get functions
     int getMaxTableSize()       { return maxTableSize; }
@@ -81,5 +80,4 @@ private:
 };  // End Maps namespace
 };  // End Eaagles namespace
 
-#endif // __EAAGLES_MAPS_RPF_TEXTURETABLE_H__
-
+#endif

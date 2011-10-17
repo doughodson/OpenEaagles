@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Classes: Stores
 //------------------------------------------------------------------------------
-#ifndef __Stores_H_A13D8EEF_2954_49bc_9366_223B1CF456EC__
-#define __Stores_H_A13D8EEF_2954_49bc_9366_223B1CF456EC__
+#ifndef __Eaagles_Simulation_Stores_H__
+#define __Eaagles_Simulation_Stores_H__
 
 #include "openeaagles/simulation/ExternalStore.h"
 
@@ -231,4 +231,4 @@ private:
 } // end Simulation namespace
 } // end Eaagles namespace
 
-#endif // __Stores_H_A13D8EEF_2954_49bc_9366_223B1CF456EC__
+#endif

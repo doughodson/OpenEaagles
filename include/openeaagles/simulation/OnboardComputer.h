@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
-// Class:	OnboardComputer
+// Class: OnboardComputer
 //------------------------------------------------------------------------------
-#ifndef __OnboardComputer_H_5D60536F_6A5C_4777_B076_7D4989D0A1C8__
-#define __OnboardComputer_H_5D60536F_6A5C_4777_B076_7D4989D0A1C8__
+#ifndef __Eaagles_Simulation_OnboardComputer_H__
+#define __Eaagles_Simulation_OnboardComputer_H__
 
 #include "openeaagles/simulation/System.h"
 
@@ -80,4 +80,4 @@ private:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // __OnboardComputer_H_5D60536F_6A5C_4777_B076_7D4989D0A1C8__
+#endif

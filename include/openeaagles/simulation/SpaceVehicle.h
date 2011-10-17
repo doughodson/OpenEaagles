@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Classes:	SpaceVehicle, BoosterSpaceVehicle, MannedSpaceVehicle, UnmannedSpaceVehicle
 //------------------------------------------------------------------------------
-#if !defined(__SPACEVEHICLE_H_D59B09FF_A3DB_42f0_9DFC_15C9ED9788CF__)
-#define __SPACEVEHICLE_H_D59B09FF_A3DB_42f0_9DFC_15C9ED9788CF__
+#ifndef __Eaagles_Simulation_SpaceVehicle_H__
+#define __Eaagles_Simulation_SpaceVehicle_H__
 
 #include "openeaagles/simulation/Player.h"
 
@@ -100,4 +100,4 @@ protected:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // !defined(__SPACEVEHICLE_H_D59B09FF_A3DB_42f0_9DFC_15C9ED9788CF__)
+#endif

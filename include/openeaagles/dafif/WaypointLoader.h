@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Class:	WaypointLoader
+// Class: WaypointLoader
 // Base class:	DsDafifDatabase -> WaypointLoader
 //
 // Description: DAFIF Waypoint file class (file3)
@@ -25,15 +25,14 @@
 //       Range: 0 .. numberFound()-1
 //
 //------------------------------------------------------------------------------
-#ifndef __WaypointLoader_H_D72786BD_B325_44dd_A96B_B16F9E472049__
-#define __WaypointLoader_H_D72786BD_B325_44dd_A96B_B16F9E472049__
+#ifndef __Eaagles_Dafif_WaypointLoader_H__
+#define __Eaagles_Dafif_WaypointLoader_H__
 
 #include "DafifDatabase.h"
 #include "Waypoint.h"
 
 namespace Eaagles {
 namespace Dafif {
-
 
 class WaypointLoader : public Database {
     DECLARE_SUBCLASS(WaypointLoader,Database)

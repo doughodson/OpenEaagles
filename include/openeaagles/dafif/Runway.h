@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Class:	Runway
+// Class: Runway
 // Base class:	Basic::Object -> Basic::String -> DafifRecord -> Runway
 //
 // Description: Access to the DAFIF Airport/Runway records.
@@ -40,8 +40,8 @@
 //		Length of a DAFIF Runway record pair.
 //
 //------------------------------------------------------------------------------
-#ifndef __Runway_H_4B45B7A5_9227_46db_B265_8BC8F3C345C8__
-#define __Runway_H_4B45B7A5_9227_46db_B265_8BC8F3C345C8__
+#ifndef __Eaagles_Dafif_Runway_H__
+#define __Eaagles_Dafif_Runway_H__
 
 #include "Dafif.h"
 

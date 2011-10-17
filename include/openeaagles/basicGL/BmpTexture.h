@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
-// Class:	BmpTexture
+// Class: BmpTexture
 //------------------------------------------------------------------------------
-#ifndef	__OPENEAAGLES_BASICGL_BMPTEXTURE_H__
-#define __OPENEAAGLES_BASICGL_BMPTEXTURE_H__
+#ifndef	__Eaagles_BasicGL_BmpTexture_H__
+#define __Eaagles_BasicGL_BmpTexture_H__
 
 #include "openeaagles/basicGL/Texture.h"
 #include <GL/gl.h>
@@ -66,5 +66,4 @@ inline const char* BmpTexture::getTextureFileName() const   { return texFile; }
 } // End BasicGL namespace
 } // End Eaagles namespace
 
-#endif	// __OPENEAAGLES_BASICGL_BMPTEXTURE_H__
-
+#endif

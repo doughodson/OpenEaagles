@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
-// Class:	Missile
+// Class: Missile
 //------------------------------------------------------------------------------
-#ifndef __MISSLE_H_2D37B13A_6531_4110_A73A_124935B01685__
-#define __MISSLE_H_2D37B13A_6531_4110_A73A_124935B01685__
+#ifndef __Eaagles_Simulation_Missile_H__
+#define __Eaagles_Simulation_Missile_H__
 
 #include "openeaagles/simulation/Weapon.h"
 #include "openeaagles/basic/units/Angles.h"
@@ -102,4 +102,4 @@ private:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // !defined(__MISSLE_H_2D37B13A_6531_4110_A73A_124935B01685__)
+#endif

@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Classes:	Radio, CommRadio
 //------------------------------------------------------------------------------
-#ifndef __Radio_H_04E62FB0_5153_492e_B9D1_79A40E1950AE__
-#define __Radio_H_04E62FB0_5153_492e_B9D1_79A40E1950AE__
+#ifndef __Eaagles_Simulation_Radio_H__
+#define __Eaagles_Simulation_Radio_H__
 
 #include "RfSystem.h"
 
@@ -179,4 +179,4 @@ private:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // __Radio_H_04E62FB0_5153_492e_B9D1_79A40E1950AE__
+#endif

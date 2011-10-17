@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: Datalink
 //------------------------------------------------------------------------------
-#ifndef __Datalink_H_E943A1E8_965E_4ecd_BFB0_C3E9DF0D2171__
-#define __Datalink_H_E943A1E8_965E_4ecd_BFB0_C3E9DF0D2171__
+#ifndef __Eaagles_Simulation_Datalink_H__
+#define __Eaagles_Simulation_Datalink_H__
 
 #include "openeaagles/simulation/System.h"
 
@@ -121,4 +121,4 @@ private:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // __Datalink_H_E943A1E8_965E_4ecd_BFB0_C3E9DF0D2171__
+#endif

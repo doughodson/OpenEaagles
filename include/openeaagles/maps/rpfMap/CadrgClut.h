@@ -1,6 +1,5 @@
 //------------------------------------------------------------------------------
-// Class:	CadrgClut.h
-// Base class:	Basic::Object -> Maps::Rpf::CadrgClut.h
+// Class: CadrgClut
 //
 // Description: Used by CadrgFile, this is a Color Lookup Table (Clut), which loads a 
 // CadrgFrameEntry with it's proper color table
@@ -11,8 +10,8 @@
 //     const CadrgClut::Rgb& getColor(unsigned int index) const; 
 //
 //------------------------------------------------------------------------------
-#ifndef __EAAGLES_MAPS_RPF_CADRGCLUT_H__
-#define __EAAGLES_MAPS_RPF_CADRGCLUT_H__
+#ifndef __Eaagles_Maps_Rpf_CadrgClut_H__
+#define __Eaagles_Maps_Rpf_CadrgClut_H__
 
 #include "openeaagles/basic/Object.h"
 
@@ -58,4 +57,4 @@ private:
 };  // end Maps namespace 
 };  // end Eaagles namespace 
 
-#endif  // __EAAGLES_MAPS_CADRGCLUT_H__
+#endif

@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Class:	Graphic -> Translator
+// Class: Translator
 //------------------------------------------------------------------------------
 #ifndef	__Eaagles_BasicGL_Translator_H__
 #define __Eaagles_BasicGL_Translator_H__

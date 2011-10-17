@@ -1,13 +1,13 @@
 // -------------------------------------------------------------------------------
-// Class -> VMAP0RefCoverageDirectory
+// Class: VMAP0RefCoverageDirectory
 // Description: VMAP level 0 coverage directorie(s), which contain
 // - fcs (feature class schema)
 // - libref.lft 
 // - libref.tft
 // - primitive tables
 // -------------------------------------------------------------------------------
-#ifndef	__EAAGLES_MAPS_VPF_VMAP0REFCOVERAGEDIRECTORY_H__
-#define __EAAGLES_MAPS_VPF_VMAP0REFCOVERAGEDIRECTORY_H__
+#ifndef	__Eaagles_Maps_Vpf_VMAP0RefCoverageDirectory_H__
+#define __Eaagles_Maps_Vpf_VMAP0RefCoverageDirectory_H__
 
 #include "openeaagles/maps/vpfMap/VPFDirectory.h"
 #include "openeaagles/maps/vpfMap/VMAP0FeatureClass.h"
@@ -69,4 +69,4 @@ private:
 }; // End Maps namespace 
 }; // End Eaagles namespace
 
-#endif // __EAAGLES_MAPS_VPF_VMAP0REFCOVERAGEDIRECTORY_H__
+#endif

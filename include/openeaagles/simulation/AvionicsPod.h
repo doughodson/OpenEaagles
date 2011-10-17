@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Classes: AvionicsPod
 //------------------------------------------------------------------------------
-#ifndef __OpenEaagles_Simulation_AvionicsPod_H__
-#define __OpenEaagles_Simulation_AvionicsPod_H__
+#ifndef __Eaagles_Simulation_AvionicsPod_H__
+#define __Eaagles_Simulation_AvionicsPod_H__
 
 #include "openeaagles/simulation/ExternalStore.h"
 
@@ -26,4 +26,4 @@ public:
 } // end Simulation namespace
 } // end Eaagles namespace
 
-#endif // __OpenEaagles_Simulation_AvionicsPod_H__
+#endif

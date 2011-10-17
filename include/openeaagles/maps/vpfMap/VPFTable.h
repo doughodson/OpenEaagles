@@ -3,18 +3,16 @@
 // Descr: Default vector product format table
 // 
 // --------------------------------------------------------------
-#ifndef	__EAAGLES_MAPS_VPF_VPFTABLE_H__
-#define __EAAGLES_MAPS_VPF_VPFTABLE_H__
+#ifndef	__Eaagles_Maps_Vpf_VPFTable_H__
+#define __Eaagles_Maps_Vpf_VPFTable_H__
 
 #include "openeaagles/basic/Object.h"
-#include "openeaagles/maps/vpfMap/VPFDataType.h"
 
 namespace Eaagles {
-namespace Basic { class List; }
+namespace Basic { class List; class String; }
 namespace Maps {
 namespace Vpf {
 
-class VPFDataType;
 class VPFIndexTable;
 class VPFRecord;
 
@@ -84,6 +82,7 @@ public:
     static const int MAX_ROWS = 5000;
 
     virtual void loadIndexFile();
+
 private:
     void determineRecordSize();
     int headerLength;   
@@ -109,4 +108,4 @@ private:
 }; // End Maps namespace 
 }; // End Eaagles namespace
 
-#endif // __EAAGLES_MAPS_VPF_VPFTABLE_H__
+#endif

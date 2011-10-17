@@ -1,11 +1,11 @@
 // ------------------------------------------------------------
 // Class: VMAP0FeatureClass
 //
-// Descr: Defines relationships between feature tables and 
+// Description: Defines relationships between feature tables and 
 // primitives.
 // ------------------------------------------------------------
-#ifndef	__EAAGLES_MAPS_VPF_VMAP0FeatureClass_H__
-#define __EAAGLES_MAPS_VPF_VMAP0FeatureClass_H__
+#ifndef	__Eaagles_Maps_Vpf_VMAP0FeatureClass_H__
+#define __Eaagles_Maps_Vpf_VMAP0FeatureClass_H__
 
 #include "openeaagles/basic/Object.h"
 
@@ -47,4 +47,4 @@ private:
 }; // End Maps namespace 
 }; // End Eaagles namespace
 
-#endif // __EAAGLES_MAPS_VPF_VMAP0FeatureClass_H__
+#endif

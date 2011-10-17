@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Class:	Airport
+// Class: Airport
 // Base class:	Basic::Object -> Basic::String -> DafifRecord -> Airport
 //
 // Description: DAFIF Airport record class
@@ -25,8 +25,8 @@
 //		Length of a DAFIF Airport record.
 //
 //------------------------------------------------------------------------------
-#ifndef __Airport_H_0AB0EB58_DD56_4e05_8A90_55BFA0253CBE__
-#define __Airport_H_0AB0EB58_DD56_4e05_8A90_55BFA0253CBE__
+#ifndef __Eaagles_Dafif_Airport_H__
+#define __Eaagles_Dafif_Airport_H__
 
 #include "Dafif.h"
 

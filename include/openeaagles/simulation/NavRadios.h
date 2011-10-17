@@ -1,10 +1,10 @@
 //------------------------------------------------------------------------------
 // Classes: NavRadio, TacanRadio, IlsRadio
 //
-// DPG -- the NAV radios are being updated and are not current fully functional!!!
+// The NAV radios are being updated and are not current fully functional!!!
 //------------------------------------------------------------------------------
-#ifndef __OpenEaagles_Simulation_NavRadio_H__
-#define __OpenEaagles_Simulation_NavRadio_H__
+#ifndef __Eaagles_Simulation_NavRadio_H__
+#define __Eaagles_Simulation_NavRadio_H__
 
 #include "openeaagles/simulation/Radio.h"
 

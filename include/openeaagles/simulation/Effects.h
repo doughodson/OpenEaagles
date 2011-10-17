@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Classes: Effects, Chaff, Flare and Decoy
 //------------------------------------------------------------------------------
-#ifndef __Effects_H_7DA43EF9_03ED_4466_AFCB_79C8A87A0F52__
-#define __Effects_H_7DA43EF9_03ED_4466_AFCB_79C8A87A0F52__
+#ifndef __Eaagles_Simulation_Effects_H__
+#define __Eaagles_Simulation_Effects_H__
 
 #include "openeaagles/simulation/Weapon.h"
 
@@ -54,7 +54,7 @@ private:
 };
 
 //------------------------------------------------------------------------------
-// class: Chaff
+// Class: Chaff
 // Description: Generic chaff class
 // Form name: Chaff
 //------------------------------------------------------------------------------
@@ -72,7 +72,7 @@ public:
 };
 
 //------------------------------------------------------------------------------
-// class: Flare
+// Class: Flare
 // Description: Generic flare class
 // Form name: Flare
 //------------------------------------------------------------------------------
@@ -90,7 +90,7 @@ public:
 };
 
 //------------------------------------------------------------------------------
-// class: Decoy
+// Class: Decoy
 // Description: Generic decoy class
 // Form name: Decoy
 //------------------------------------------------------------------------------
@@ -110,4 +110,4 @@ public:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // !defined(__Effects_H_7DA43EF9_03ED_4466_AFCB_79C8A87A0F52__)
+#endif

@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Classes:	SymbolLoader, SlSymbol
 //------------------------------------------------------------------------------
-#ifndef __OPENEAAGLES_BASICGL_SYMBOLLOADER_H__
-#define __OPENEAAGLES_BASICGL_SYMBOLLOADER_H__
+#ifndef __Eaagles_BasicGL_SymbolLoader_H__
+#define __Eaagles_BasicGL_SymbolLoader_H__
 
 #include "openeaagles/basicGL/MapPage.h"
 
@@ -338,4 +338,4 @@ inline void SlSymbol::setScreenFlag(const bool flg)   { scrnFlg = flg; }
 }  // end of BasicGL namespace
 }  // end of Eaagles namespace
 
-#endif	// __OPENEAAGLES_BASICGL_SYMBOLLOADER_H__
+#endif

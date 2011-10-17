@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // rpfMapFormFunc() -- parser form function for rpf map stuff
 //------------------------------------------------------------------------------
-#include "openeaagles/basic/support.h"
-
+#ifndef __Eaagles_Maps_Rpf_FormFunc_H__
+#define __Eaagles_Maps_Rpf_FormFunc_H__
 
 namespace Eaagles {
 namespace Basic { class Object; }
@@ -14,3 +14,4 @@ namespace Rpf {
 };  // end Maps namespace
 };  // end Eaagles namespace
 
+#endif

@@ -14,7 +14,7 @@ class Player;
 class Track;
 
 //==============================================================================
-// Class:	TrackManager
+// Class: TrackManager
 //
 // Description: Abstract class for Track Managers
 //
@@ -131,7 +131,7 @@ private:
 };
 
 //==============================================================================
-// Class:	AirTrkMgr
+// Class: AirTrkMgr
 // Base class:	Basic::Object -> Basic::Component -> TrackManager -> System -> AirTrkMgr
 //
 // Description: Track Manager for A/A modes (e.g., TWS, ACM, SST)
@@ -167,7 +167,7 @@ private:
 };
 
 //==============================================================================
-// Class:	GmtiTrkMgr
+// Class: GmtiTrkMgr
 // Base class:	Basic::Object -> Basic::Component -> TrackManager -> System -> GmtiTrkMgr
 //
 // Description: Very simple Ground Moving Target Indication (GMTI) Track Manager
@@ -184,7 +184,7 @@ protected:
 };
 
 //------------------------------------------------------------------------------
-// Class:	RwrTrkMgr
+// Class: RwrTrkMgr
 // Base class:	Basic::Object -> Basic::Component -> TrackManager -> System -> RwrTrkMgr
 //
 // Description: RADAR Warning Receiver (RWR) Track Manager
