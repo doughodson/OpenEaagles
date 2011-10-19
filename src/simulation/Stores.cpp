@@ -262,7 +262,7 @@ const ExternalStore* Stores::getExternalStore(const unsigned int s) const
    int idx = mapSta2Idx(s);
 
    const ExternalStore* p = 0;
-   if (idx >= 0) p = esTbl[idx];
+   if (idx >= 0) p = esTbl[idx].getRefPtr();
 
    return p;
 }
@@ -274,7 +274,7 @@ ExternalStore* Stores::getExternalStore(const unsigned int s)
    int idx = mapSta2Idx(s);
 
    ExternalStore* p = 0;
-   if (idx >= 0) p = esTbl[idx];
+   if (idx >= 0) p = esTbl[idx].getRefPtr();
 
    return p;
 }

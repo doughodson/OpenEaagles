@@ -243,6 +243,26 @@ Weapon* StoresMgr::getCurrentWeapon()
    return wpn;
 }
 
+const Weapon* StoresMgr::getCurrentWeapon() const
+{
+   // Get the selected station's weapon
+   const Weapon* wpn = getWeapon();
+
+   if (wpn == 0) {
+      // If not found then check to see if the selected station 
+      // was really a Stores class object.  If so then ask it
+      // for its selected station's weapon
+      const ExternalStore* es = getExternalStore();
+      if (es != 0) {
+         const Stores* ss = dynamic_cast<const Stores*>( es );
+         if (ss != 0) wpn = ss->getWeapon();
+         es->unref();
+      }
+   }
+
+   return wpn;
+}
+
 //------------------------------------------------------------------------------
 // Set functions
 //------------------------------------------------------------------------------
@@ -273,11 +293,17 @@ bool StoresMgr::setGunSelected(const bool flg)
 //------------------------------------------------------------------------------
 
 Missile* StoresMgr::getNextMissile()      { return 0; }
+const Missile* StoresMgr::getNextMissile() const   { return 0; }
 Sam* StoresMgr::getNextSam()              { return 0; }
+const Sam* StoresMgr::getNextSam() const           { return 0; }
 Bomb* StoresMgr::getNextBomb()            { return 0; }
+const Bomb* StoresMgr::getNextBomb() const         { return 0; }
 Chaff* StoresMgr::getNextChaff()          { return 0; }
+const Chaff* StoresMgr::getNextChaff() const       { return 0; }
 Flare* StoresMgr::getNextFlare()          { return 0; }
+const Flare* StoresMgr::getNextFlare() const       { return 0; }
 Decoy* StoresMgr::getNextDecoy()          { return 0; }
+const Decoy* StoresMgr::getNextDecoy() const       { return 0; }
 
 Missile* StoresMgr::releaseOneMissile()   { return 0; }
 Sam* StoresMgr::releaseOneSam()           { return 0; }
@@ -542,6 +568,18 @@ Weapon* SimpleStoresMgr::getCurrentWeapon()
    return wpn;
 }
 
+const Weapon* SimpleStoresMgr::getCurrentWeapon() const
+{
+   const Weapon* wpn = 0;
+   if ( isWeaponDeliveryMode(A2A) ) {
+      wpn = getNextMissile();    // We need a missile
+   }
+   else {
+      wpn = getNextBomb();       // We need a bomb
+   }
+   return wpn;
+}
+
 // Get the current weapon ID
 int SimpleStoresMgr::getCurrentWeaponID() const
 {
@@ -560,8 +598,13 @@ bool SimpleStoresMgr::isWeaponReleased() const
    return (wpnRelTimer > 0.0);
 }
 
+// ---
 // Default function to get the next free missile in our stores (Pre-ref()'d)
-Missile* SimpleStoresMgr::getNextMissile()
+// ---
+Missile* SimpleStoresMgr::getNextMissile()               { return getNextMissileImp(); }
+const Missile* SimpleStoresMgr::getNextMissile() const   { return ((SimpleStoresMgr*)this)->getNextMissileImp(); }
+
+Missile* SimpleStoresMgr::getNextMissileImp()
 {
    Missile* msl = 0;
 
@@ -585,8 +628,13 @@ Missile* SimpleStoresMgr::getNextMissile()
    return msl;
 }
 
+// ---
 // Default function to get the next free SAM in our stores (Pre-ref()'d)
-Sam* SimpleStoresMgr::getNextSam()
+// ---
+Sam* SimpleStoresMgr::getNextSam()              { return getNextSamImp(); }
+const Sam* SimpleStoresMgr::getNextSam() const  { return ((SimpleStoresMgr*)this)->getNextSamImp(); }
+
+Sam* SimpleStoresMgr::getNextSamImp()
 {
    Sam* msl = 0;
 
@@ -611,8 +659,13 @@ Sam* SimpleStoresMgr::getNextSam()
    return msl;
 }
 
+// ---
 // Default function to get the next free bomb in our stores (Pre-ref()'d)
-Bomb* SimpleStoresMgr::getNextBomb()
+// ---
+Bomb* SimpleStoresMgr::getNextBomb()               { return getNextBombImp(); }
+const Bomb* SimpleStoresMgr::getNextBomb() const   { return ((SimpleStoresMgr*)this)->getNextBombImp(); }
+
+Bomb* SimpleStoresMgr::getNextBombImp()
 {
    Bomb* bomb = 0;
 
@@ -637,8 +690,13 @@ Bomb* SimpleStoresMgr::getNextBomb()
    return bomb;
 }
 
+// ---
 // Default function to get the next free chaff bundle in our stores (Pre-ref()'d)
-Chaff* SimpleStoresMgr::getNextChaff()
+// ---
+Chaff* SimpleStoresMgr::getNextChaff()                { return getNextChaffImp(); }
+const Chaff* SimpleStoresMgr::getNextChaff() const    { return ((SimpleStoresMgr*)this)->getNextChaffImp(); }
+
+Chaff* SimpleStoresMgr::getNextChaffImp()
 {
    Chaff* chaff = 0;
 
@@ -663,8 +721,13 @@ Chaff* SimpleStoresMgr::getNextChaff()
    return chaff;
 }
 
+// ---
 // Default function to get the next free flare in our stores (Pre-ref()'d)
-Flare* SimpleStoresMgr::getNextFlare()
+// ---
+Flare* SimpleStoresMgr::getNextFlare()                { return getNextFlareImp(); }
+const Flare* SimpleStoresMgr::getNextFlare() const    { return ((SimpleStoresMgr*)this)->getNextFlareImp(); }
+
+Flare* SimpleStoresMgr::getNextFlareImp()
 {
    Flare* flare = 0;
 
@@ -689,8 +752,13 @@ Flare* SimpleStoresMgr::getNextFlare()
    return flare;
 }
 
+// ---
 // Default function to get the next decoy from our stores (Pre-ref()'d)
-Decoy* SimpleStoresMgr::getNextDecoy()
+// ---
+Decoy* SimpleStoresMgr::getNextDecoy()             { return getNextDecoyImp(); }
+const Decoy* SimpleStoresMgr::getNextDecoy() const { return ((SimpleStoresMgr*)this)->getNextDecoyImp(); }
+
+Decoy* SimpleStoresMgr::getNextDecoyImp()
 {
    Decoy* decoy = 0;
 

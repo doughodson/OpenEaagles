@@ -92,6 +92,7 @@ public:
    virtual bool isWeaponReleased() const;             // Are weapons being release?
 
    virtual Weapon* getCurrentWeapon();                // The current weapon (Pre-ref()'d)
+   virtual const Weapon* getCurrentWeapon() const;     // The current weapon (Pre-ref()'d) (const version)
 
    virtual bool setMasterArm(const unsigned int newMode); // Sets the master arm mode
    virtual bool setWeaponDeliveryMode(const unsigned int mode);  // Sets the weapon delivery mode
@@ -100,11 +101,17 @@ public:
    // The following are simple weapon access functions; all return pref-ref()'d
    // pointers to a weapon or zero if no weapon is available.
    virtual Missile* getNextMissile();                 // Simple get next missile function (Pre-ref()'d)
+   virtual const Missile* getNextMissile() const;     // Simple get next missile function (Pre-ref()'d) (const version)
    virtual Sam* getNextSam();                         // Simple get next SAM function  (Pre-ref()'d)
+   virtual const Sam* getNextSam() const;             // Simple get next SAM function  (Pre-ref()'d) (const version)
    virtual Bomb* getNextBomb();                       // Simple get next bomb function  (Pre-ref()'d)
+   virtual const Bomb* getNextBomb() const;           // Simple get next bomb function  (Pre-ref()'d) (const version)
    virtual Chaff* getNextChaff();                     // Simple get next chaff bundle function  (Pre-ref()'d)
+   virtual const Chaff* getNextChaff() const;         // Simple get next chaff bundle function  (Pre-ref()'d) (const version)
    virtual Flare* getNextFlare();                     // Simple get next flare function  (Pre-ref()'d)
+   virtual const Flare* getNextFlare() const;         // Simple get next flare function  (Pre-ref()'d) (const version)
    virtual Decoy* getNextDecoy();                     // Simple get next decoy function  (Pre-ref()'d)
+   virtual const Decoy* getNextDecoy() const;         // Simple get next decoy function  (Pre-ref()'d) (const version)
 
    // The following are simple release functions; all return pref-ref()'d
    // pointers to the flyout weapon or zero if no weapon was released.
@@ -171,13 +178,6 @@ public:
    int getCurrentWeaponID() const;                       // Current weapon ID number
    int getNumCurrentWeapons() const;                     // Number of weapons with current weapon ID (e.g. # MK84 bombs on the platform)
 
-   virtual Missile* getNextMissile();                    // First avaliable missile from our weapons list (Pre-ref()'d)
-   virtual Sam* getNextSam();                            // First avaliable SAM from our weapons list (Pre-ref()'d)
-   virtual Bomb* getNextBomb();                          // First avaliable bomb from our weapons list (Pre-ref()'d)
-   virtual Chaff* getNextChaff();                        // First avaliable chaff bundle from our weapons list (Pre-ref()'d)
-   virtual Flare* getNextFlare();                        // First avaliable flare from our weapons list (Pre-ref()'d)
-   virtual Decoy* getNextDecoy();                        // First avaliable decoy from our weapons list (Pre-ref()'d)
-
    // Get the first missile of type weaponType from our weapons list (Pre-ref()'d)
    virtual Missile* getSpecificMissile(const Basic::String* const missileType);
 
@@ -190,15 +190,6 @@ public:
    // Get the target track
    virtual Track* getNextTarget();
 
-   // The following release functions return pre-ref()'d pointers to the
-   // flyout weapon, or zero if the weapon failed to release.
-   virtual Missile* releaseOneMissile();                 // Release one missile
-   virtual Sam* releaseOneSam();                         // Release one surface to air (SAM) missile
-   virtual Bomb* releaseOneBomb();                       // Release one bomb
-   virtual Chaff* releaseOneChaff();                     // Release one chaff bundle
-   virtual Flare* releaseOneFlare();                     // Release one flare
-   virtual Decoy* releaseOneDecoy();                     // Release one decoy
-
    virtual bool setWeaponReleaseTimer(const LCreal v);   // Sets the release timer
 
    // StoresMgr class events
@@ -206,8 +197,27 @@ public:
    virtual bool onTriggerSwEvent(const Basic::Boolean* const sw = 0);
 
    // StoresMgr class functions
-   virtual Weapon* getCurrentWeapon();                   // The current weapon (Pre-ref()'d)
-   virtual bool isWeaponReleased() const;                // In weapons release mode?
+   virtual Weapon* getCurrentWeapon();
+   virtual const Weapon* getCurrentWeapon() const;
+   virtual bool isWeaponReleased() const;
+   virtual Missile* getNextMissile();
+   virtual const Missile* getNextMissile() const;
+   virtual Sam* getNextSam();
+   virtual const Sam* getNextSam() const;
+   virtual Bomb* getNextBomb();
+   virtual const Bomb* getNextBomb() const;
+   virtual Chaff* getNextChaff();
+   virtual const Chaff* getNextChaff() const;
+   virtual Flare* getNextFlare();
+   virtual const Flare* getNextFlare() const;
+   virtual Decoy* getNextDecoy();
+   virtual const Decoy* getNextDecoy() const;
+   virtual Missile* releaseOneMissile();
+   virtual Sam* releaseOneSam();
+   virtual Bomb* releaseOneBomb();
+   virtual Chaff* releaseOneChaff();
+   virtual Flare* releaseOneFlare();
+   virtual Decoy* releaseOneDecoy();
 
    // Component Interface
    virtual void updateData(const LCreal dt = 0.0f);
@@ -218,6 +228,13 @@ protected:
 
 private:
    void initData();
+
+   Missile* getNextMissileImp();        // First avaliable missile from our weapons list (Pre-ref()'d) (const version)
+   Sam* getNextSamImp();                // First avaliable SAM from our weapons list (Pre-ref()'d) (const version)
+   Bomb* getNextBombImp();              // First avaliable bomb from our weapons list (Pre-ref()'d) (const version)
+   Chaff* getNextChaffImp();            // First avaliable chaff bundle from our weapons list (Pre-ref()'d) (const version)
+   Flare* getNextFlareImp();            // First avaliable flare from our weapons list (Pre-ref()'d) (const version)
+   Decoy* getNextDecoyImp();            // First avaliable decoy from our weapons list (Pre-ref()'d) (const version)
 
    LCreal wpnRelTimer;     // Weapon released timer
    int    curWpnID;        // Current Weapon ID

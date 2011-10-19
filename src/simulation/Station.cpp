@@ -63,7 +63,7 @@ IMPLEMENT_SUBCLASS(Station,"Station")
 
 const LCreal Station::DEFAULT_TC_THREAD_PRI  = 0.8f;
 const LCreal Station::DEFAULT_BG_THREAD_PRI  = 0.5f;
-const LCreal Station::DEFAULT_NET_THREAD_PRI = 0.6f;
+const LCreal Station::DEFAULT_NET_THREAD_PRI = 0.5f;
 
 //------------------------------------------------------------------------------
 // Slot table
@@ -144,11 +144,11 @@ void Station::initData()
    fastForwardRate = DEFAULT_FAST_FORWARD_RATE;
 
    netRate = 0;      // default network thread rate
-   netPri = 0.5f;
+   netPri = DEFAULT_NET_THREAD_PRI;
    netThread = 0;
 
    bgRate = 0;      // default network thread rate
-   bgPri = 0.5f;
+   bgPri = DEFAULT_BG_THREAD_PRI;
    bgThread = 0;
 
    tmrUpdateEnbl = false;
