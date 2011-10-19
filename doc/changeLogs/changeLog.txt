@@ -80,9 +80,25 @@ simulation:
    Player class
       1) setSlotInitLat() and setSlotInitLon() -- changed local variable from LCreal to double
 
+	Station class
+      1) Added default thread priorites to constructor
+
+   Station class
+      1) Set default priorites for background and network threads.
+
+   Stores class
+      1) getExternalStore() -- (bug fix) now properly returns a pre-ref'd pointer, as documented
+
+   StoresMgr class
+      1) Added const versions of the get current and get next weapon functions
+         (e.g., getNextBomb(), getNextFlare(), getCurrentWeapon(), etc)
+
    TabLogger class
       1) makePlayerLatLonMsg() -- now prints the latitude and/or longitude regardless
          of their values.
+
+   TargetData class
+      -- General cleanup and upgrade
 
 --------------------------------------------------------------------------------
 
