@@ -19,4 +19,5 @@ vs2010/
 # compiled object files
 *.[oa]
 
-
+# backup files
+*.bak
