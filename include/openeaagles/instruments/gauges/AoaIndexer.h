@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Class:	Instrument -> AoAIndexer
+// Class: Instrument -> AoAIndexer
 //
 // Description: Generic AOA gauge that, given limits, will indicate over, under,
 // and in-range aoa values.
@@ -12,8 +12,8 @@
 //      green -> in limit area
 //      yellow -> under limit area
 //------------------------------------------------------------------------------
-#ifndef	__OPENEAAGLES_INSTRUMENTS_AOAINDEXER_H__
-#define __OPENEAAGLES_INSTRUMENTS_AOAINDEXER_H__
+#ifndef	__Eaagles_Instruments_AoAIndexer_H__
+#define __Eaagles_Instruments_AoAIndexer_H__
 
 #include "openeaagles/instruments/Instrument.h"
 
@@ -21,9 +21,11 @@ namespace Eaagles {
 namespace Instruments {
 
 class AoAIndexer : public Instrument {
+
     DECLARE_SUBCLASS(AoAIndexer,Instrument)
 
 public:
+
     AoAIndexer();
 
     // set functions
@@ -50,6 +52,7 @@ public:
     virtual void updateData(const LCreal dt = 0);
     
 protected:
+
     // slot functions
     virtual bool setSlotAoaRedMin(const Basic::Number* const newRMin);
     virtual bool setSlotAoaRedMax(const Basic::Number* const newRMax);
@@ -59,19 +62,12 @@ protected:
     virtual bool setSlotAoaGreenMin(const Basic::Number* const newGMin);
     
 private:
-//  --
-//
-//  --
-//
+
 //  --  -> aoaMax
 //
 //  --  -> aoaZero
 //
 //  --  -> aoaMin
-//
-//  --
-//
-//  --
 
     LCreal aoaRedMin;       // min value of where the red portion of our aoa lights up
     LCreal aoaRedMax;       // max value of where the red portion of our aoa lights up
@@ -89,4 +85,4 @@ private:
 }  // end Instruments namespace
 }  // end Eaagles namespace
 
-#endif	// __OPENEAAGLES_INSTRUMENTS_AOAINDEXER_H__
+#endif

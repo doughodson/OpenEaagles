@@ -3,8 +3,8 @@
 // Base class:  Basic::Object -> Basic::Component -> BasicGL::Graphic -> Button -> PushButton
 // Description: Button which will select one or another graphic based on being pressed or not.
 //------------------------------------------------------------------------------
-#ifndef __OPENEAAGLES_INSTRUMENTS_PUSHBUTTON_H__
-#define __OPENEAAGLES_INSTRUMENTS_PUSHBUTTON_H__
+#ifndef __Eaagles_Instruments_PushButton_H__
+#define __Eaagles_Instruments_PushButton_H__
 
 #include "openeaagles/instruments/buttons/Button.h"
 
@@ -54,4 +54,4 @@ private:
 } // end Instruments namespace
 } // end Eaagles namespace
 
-#endif // __OPENEAAGLES_INSTRUMENTS_PUSHBUTTON_H__
+#endif

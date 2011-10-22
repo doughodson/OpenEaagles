@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
-// Class:	TickMarks
+// Class: TickMarks
 //------------------------------------------------------------------------------
-#ifndef	__OPENEAAGLES_INSTRUMENTS_TICKMARKS_H__
-#define __OPENEAAGLES_INSTRUMENTS_TICKMARKS_H__
+#ifndef	__Eaagles_Instruments_TickMarks_H__
+#define __Eaagles_Instruments_TickMarks_H__
 
 #include "openeaagles/instruments/gauges/AnalogGauge.h"
 
@@ -44,14 +44,14 @@ protected:
     bool setSlotFlip(const Basic::Number* const x);
     
 private:
-    LCreal      lengthTM;       // tick mark length (if not a graphic)
-    int         quantity;       // how many tick marks will we have?
-    LCreal      gaugeLength;    // length we are spanning our tick marks over
-    bool        flip;           // our flip variable
-    BasicGL::Graphic*  myGraphic; // our graphic (if we choose to use on for a tick mark)
+    LCreal lengthTM;       // tick mark length (if not a graphic)
+    int    quantity;       // how many tick marks will we have?
+    LCreal gaugeLength;    // length we are spanning our tick marks over
+    bool   flip;           // our flip variable
+    BasicGL::Graphic* myGraphic; // our graphic (if we choose to use on for a tick mark)
 };
 
 }  // end of Instruments namespace
 }  // end of Eaagles namespace
 
-#endif	// __OPENEAAGLES_INSTRUMENTS_TICKMARKS_H__
+#endif

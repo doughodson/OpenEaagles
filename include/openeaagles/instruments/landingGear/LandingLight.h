@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: LandingLight
 //------------------------------------------------------------------------------
-#ifndef	__OPENEAAGLES_INSTRUMENTS_LANDINGLIGHT_H__
-#define __OPENEAAGLES_INSTRUMENTS_LANDINGLIGHT_H__
+#ifndef	__Eaagles_Instruments_LandingLight_H__
+#define __Eaagles_Instruments_LandingLight_H__
 
 #include "LandingGear.h"
 
@@ -51,4 +51,4 @@ private:
 }  // end Instruments namespace
 }  // end Eaagles namespace
 
-#endif	// __OPENEAAGLES_INSTRUMENTS_LANDINGLIGHT_H__
+#endif

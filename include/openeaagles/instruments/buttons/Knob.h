@@ -12,8 +12,8 @@
 //  )
 //  startAngle: 20      // angle from which to start rotation
 //------------------------------------------------------------------------------
-#ifndef __OPENEAAGLES_INSTRUMENTS_KNOB_H__
-#define __OPENEAAGLES_INSTRUMENTS_KNOB_H__
+#ifndef __Eaagles_Instruments_Knob_H__
+#define __Eaagles_Instruments_Knob_H__
 
 #include "openeaagles/instruments/buttons/Button.h"
 
@@ -77,4 +77,4 @@ private:
 }  // end Instruments namespace
 }  // end Eaagles namespace
 
-#endif // __OPENEAAGLES_INSTRUMENTS_KNOB_H__
+#endif

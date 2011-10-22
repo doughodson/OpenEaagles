@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
-// Class:  IrisGLCompat
+// Class: IrisGLCompat
 //------------------------------------------------------------------------------
-#ifndef __OPENEAAGLES_INSTRUMENTS_IRISGLCOMPAT_H__
-#define __OPENEAAGLES_INSTRUMENTS_IRISGLCOMPAT_H__
+#ifndef __Eaagles_Instruments_IrisGLCompat_H__
+#define __Eaagles_Instruments_IrisGLCompat_H__
 
 #include "openeaagles/basic/Object.h"
 
@@ -40,4 +40,4 @@ private:
 } // End Instruments namespace
 } // End Eaagles namespace
 
-#endif // __OPENEAAGLES_INSTRUMENTS_IRISGLCOMPAT_H__
+#endif

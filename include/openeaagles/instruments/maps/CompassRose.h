@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
-// Class:	CompassRose
-// Base Class: Basic::Object -> BasicGL::Graphic -> BasicGL::Rotators -> CompassRose
+// Class: CompassRose
+// Base Class: Basic::Object -> BasicGL::Graphic -> CompassRose
 //
 // Description: Generic compass used as a direction indicator.  It will 
 // rotate about a heading either by someone telling it through a member function.
@@ -12,8 +12,8 @@
 //      UPDATE_VALUE5 -> displacement
 //      UPDATE_VALUE6 -> centered or not
 //------------------------------------------------------------------------------
-#ifndef	__OPENEAAGLES_INSTRUMENTS_COMPASSROSE_H__
-#define __OPENEAAGLES_INSTRUMENTS_COMPASSROSE_H__
+#ifndef	__Eaagles_Instruments_CompassRose_H__
+#define __Eaagles_Instruments_CompassRose_H__
 
 #include "openeaagles/basicGL/Graphic.h"
 #include "openeaagles/basic/units/Angles.h"
@@ -79,4 +79,4 @@ private:
 }  // end Instruments namespace
 }  // end Eaagles namespace
 
-#endif	// __OPENEAAGLES_INSTRUMENTS_COMPASSROSE_H__
+#endif

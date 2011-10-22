@@ -4,8 +4,8 @@
 //
 // Description:	Tests the secondary pfd page
 //------------------------------------------------------------------------------
-#ifndef	__OPENEAAGLES_INSTRUMENTS_ENGPAGE_H__
-#define __OPENEAAGLES_INSTRUMENTS_ENGPAGE_H__
+#ifndef	__Eaagles_Instruments_EngPage_H__
+#define __Eaagles_Instruments_EngPage_H__
 
 #include "openeaagles/basicGL/Page.h"
 
@@ -13,13 +13,14 @@ namespace Eaagles {
 namespace Instruments {
 
 class EngPage : public BasicGL::Page {
+
    DECLARE_SUBCLASS(EngPage,BasicGL::Page)
 
 public:
-    static const int NUM_ENG = 4;
 
-public:
     EngPage();    
+
+    static const int NUM_ENG = 4;
 
     // set functions: engine index range [ 1 .. NUM_ENG ]
     virtual bool setEngN1(const int idx, const LCreal newN1);       // %RPM
@@ -65,4 +66,4 @@ private:
 }  // end Instruments namespace
 }  // end Eaagles namespace
 
-#endif  // __OPENEAAGLES_INSTRUMENTS_ENGPAGE_H__
+#endif

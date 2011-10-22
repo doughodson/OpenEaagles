@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Class:	BearingPointer
+// Class: BearingPointer
 // Base Class: Basic::Object -> BasicGL::Graphic -> CompassRose -> BearingPointer
 //
 // Description: This is a bearing pointer, which works in conjunction with 
@@ -13,8 +13,8 @@
 //      UPDATE_VALUE7 - sets bearing (radians or Basic::Angle)
 //      UPDATE_VALUE8 - sets bearing (degrees)
 //------------------------------------------------------------------------------
-#ifndef	__OPENEAAGLES_INSTRUMENTS_BEARINGPOINTER_H__
-#define __OPENEAAGLES_INSTRUMENTS_BEARINGPOINTER_H__
+#ifndef	__Eaagles_Instruments_BearingPointer_H__
+#define __Eaagles_Instruments_BearingPointer_H__
 
 #include "openeaagles/instruments/maps/CompassRose.h"
 
@@ -66,4 +66,4 @@ private:
 }  // end of Instruments namespace
 }  // end of Eaagles namespace
 
-#endif	// __OPENEAAGLES_INSTRUMENTS_BEARINGPOINTER_H__
+#endif

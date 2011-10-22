@@ -7,8 +7,8 @@
 // center position (no holding).  
 // You can retrieve the button position at any time, or 
 //------------------------------------------------------------------------------
-#ifndef __EAAGLES_INSTRUMENTS_SolenoidSwitch_H__
-#define __EAAGLES_INSTRUMENTS_SolenoidSwitch_H__
+#ifndef __Eaagles_Instruments_SolenoidSwitch_H__
+#define __Eaagles_Instruments_SolenoidSwitch_H__
 
 #include "openeaagles/basicGL/Graphic.h"
 #include "openeaagles/instruments/buttons/Button.h"
@@ -100,4 +100,4 @@ private:
 } // end Instruments namespace
 } // end Eaagles namespace
 
-#endif // __EAAGLES_INSTRUMENTS_SolenoidSwitch_H__
+#endif

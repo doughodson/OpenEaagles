@@ -4,8 +4,8 @@
 // Description: Button that can have multiple formats, up to as many as the user
 // wants.  
 //------------------------------------------------------------------------------
-#ifndef __OPENEAAGLES_INSTRUMENTS_SWITCH_H__
-#define __OPENEAAGLES_INSTRUMENTS_SWITCH_H__
+#ifndef __Eaagles_Instruments_Switch_H__
+#define __Eaagles_Instruments_Switch_H__
 
 #include "openeaagles/instruments/buttons/Button.h"
 
@@ -45,4 +45,4 @@ private:
 }  // end Instruments namespace
 }  // end Eaagles namespace
 
-#endif // __OPENEAAGLES_INSTRUMENTS_SWITCH_H__
+#endif

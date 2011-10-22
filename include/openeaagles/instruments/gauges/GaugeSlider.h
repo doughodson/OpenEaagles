@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
-// Class:	GaugeSlider
+// Class: GaugeSlider
 //------------------------------------------------------------------------------
-#ifndef	__OPENEAAGLES_INSTRUMENTS_GAUGESLIDER_H__
-#define __OPENEAAGLES_INSTRUMENTS_GAUGESLIDER_H__
+#ifndef	__Eaagles_Instruments_GuageSlider_H__
+#define __Eaagles_Instruments_GuageSlider_H__
 
 #include "openeaagles/instruments/gauges/AnalogGauge.h"
 
@@ -31,4 +31,4 @@ private:
 }  // end Instruments namespace
 }  // end Eaagles namespace
 
-#endif	// __OPENEAAGLES_INSTRUMENTS_GAUGESLIDER_H__
+#endif

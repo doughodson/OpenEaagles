@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
-// Class:	AnalogGauge
+// Class: AnalogGauge
 //------------------------------------------------------------------------------
-#ifndef	__OPENEAAGLES_INSTRUMENTS_ANALOGGAUGE_H__
-#define __OPENEAAGLES_INSTRUMENTS_ANALOGGAUGE_H__
+#ifndef	__Eaagles_Instruments_AnalogGuage_H__
+#define __Eaagles_Instruments_AnalogGuage_H__
 
 #include "openeaagles/instruments/Instrument.h"
 
@@ -67,4 +67,4 @@ private:
 }  // end Instruments namespace
 }  // end Eaagles namespace
 
-#endif	// __OPENEAAGLES_INSTRUMENTS_ANALOGGAUGE_H__
+#endif

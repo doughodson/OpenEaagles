@@ -6,8 +6,8 @@
 // angle and sweep angle set in AnalogDial.  
 // Input:  UPDATE_INSTRUMENTS (from Instrument) 
 //------------------------------------------------------------------------------
-#ifndef	__OPENEAAGLES_INSTRUMENTS_DIALARCSEGMENT_H__
-#define __OPENEAAGLES_INSTRUMENTS_DIALARCSEGMENT_H__
+#ifndef	__Eaagles_Instruments_DialArcSegment_H__
+#define __Eaagles_Instruments_DialArcSegment_H__
 
 #include "openeaagles/instruments/dials/AnalogDial.h"
 
@@ -48,4 +48,4 @@ private:
 }  // end Instruments namespace
 }  // end Eaagles namespace
 
-#endif	// __OPENEAAGLES_INSTRUMENTS_DIALARCSEGMENT_H__
+#endif

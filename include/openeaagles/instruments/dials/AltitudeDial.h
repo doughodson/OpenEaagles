@@ -13,8 +13,8 @@
 //      5) thouScissors - same as hun
 //      6) tenThouScissors - same as hun and thou
 //------------------------------------------------------------------------------
-#ifndef	__OPENEAAGLES_INSTRUMENTS_ALTITUDEDIAL_H__
-#define __OPENEAAGLES_INSTRUMENTS_ALTITUDEDIAL_H__
+#ifndef	__Eaagles_Instruments_AltitudeDial_H__
+#define __Eaagles_Instruments_AltitudeDial_H__
 
 #include "openeaagles/instruments/Instrument.h"
 
@@ -43,5 +43,4 @@ private:
 }  // end Instruments namespace
 }  // end Eaagles namespace
 
-#endif	// __OPENEAAGLES_INSTRUMENTS_ALTITUDEDIAL_H__
-
+#endif

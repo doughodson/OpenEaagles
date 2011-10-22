@@ -1,10 +1,9 @@
 //------------------------------------------------------------------------------
 // Class:  BasicGL::Page -> Eadi3DPage
 //
-// Description: 
 //------------------------------------------------------------------------------
-#ifndef	__OPENEAAGLES_INSTRUMENTS_EADE3DPAGE_H__
-#define __OPENEAAGLES_INSTRUMENTS_EADE3DPAGE_H__
+#ifndef	__Eaagles_Instruments_Eadi3DPage_H__
+#define __Eaagles_Instruments_Eadi3DPage_H__
 
 #include "openeaagles/basicGL/Page.h"
 #include "openeaagles/instruments/eadi3D/Eadi3DObjects.h"
@@ -13,7 +12,9 @@ namespace Eaagles {
 namespace Instruments {
 
 class Eadi3DPage : public BasicGL::Page{
-    DECLARE_SUBCLASS(Eadi3DPage,BasicGL::Page)
+
+   DECLARE_SUBCLASS(Eadi3DPage,BasicGL::Page)
+
 public:
 
     Eadi3DPage();
@@ -75,32 +76,32 @@ private:
     void background();
 
     LCreal radius;
-    Eadi3DObjects	eadiObjs;
+    Eadi3DObjects eadiObjs;
 
-    LCreal		altitudeFT;
-    LCreal		airspeedKTS;
-    LCreal		headingDEG;
-    LCreal		aoaDEG;
-    LCreal		vviFPM;
-    LCreal		pitchDEG;
-    LCreal		rollDEG;
-    LCreal		machNo;
+    LCreal altitudeFT;
+    LCreal airspeedKTS;
+    LCreal headingDEG;
+    LCreal aoaDEG;
+    LCreal vviFPM;
+    LCreal pitchDEG;
+    LCreal rollDEG;
+    LCreal machNo;
 
-    LCreal		Gload;
-    bool		landingMode;
-    LCreal		pitchSteeringCmd;
-    LCreal		rollSteeringCmd;
-    bool		pitchSteeringValid;
-    bool		rollSteeringValid;
-    LCreal		glideslopeDevDOTS;
-    LCreal		localizerDevDOTS;
-    LCreal		turnRateDOTS;
-    LCreal		slipIndDOTS;
-    bool		glideslopeDevValid;
-    bool		localizerDevValid;
+    LCreal Gload;
+    bool   landingMode;
+    LCreal pitchSteeringCmd;
+    LCreal rollSteeringCmd;
+    bool   pitchSteeringValid;
+    bool   rollSteeringValid;
+    LCreal glideslopeDevDOTS;
+    LCreal localizerDevDOTS;
+    LCreal turnRateDOTS;
+    LCreal slipIndDOTS;
+    bool   glideslopeDevValid;
+    bool   localizerDevValid;
 };
 
 }; // end of Instruments namespace
 }; // end of Eaagles namespace
 
-#endif	// __OPENEAAGLES_INSTRUMENTS_EADE3DPAGE_H__ 
+#endif

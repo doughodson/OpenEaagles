@@ -6,8 +6,8 @@
 // scaled rate.  
 // Input:  UPDATE_INSTRUMENTS (from instruments)
 //------------------------------------------------------------------------------
-#ifndef	__OPENEAAGLES_INSTRUMENTS_DIALPOINTER_H__
-#define __OPENEAAGLES_INSTRUMENTS_DIALPOINTER_H__
+#ifndef	__Eaagles_Instruments_DialPointer_H__
+#define __Eaagles_Instruments_DialPointer_H__
 
 #include "openeaagles/instruments/dials/AnalogDial.h"
 
@@ -27,5 +27,4 @@ public:
 }  // end of Instruments namespace
 }  // end of Eaagles namespace
 
-#endif	// __OPENEAAGLES_INSTRUMENTS_DIALPOINTER_H__
-
+#endif

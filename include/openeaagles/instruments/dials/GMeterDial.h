@@ -7,8 +7,8 @@
 //      UPDATE_INSTRUMENTS (from instruments) -> g's
 //      RESET_EVENT -> resets min and max g's
 //------------------------------------------------------------------------------
-#ifndef	__OPENEAAGLES_INSTRUMENTS_GMETERDIAL_H__
-#define __OPENEAAGLES_INSTRUMENTS_GMETERDIAL_H__
+#ifndef	__Eaagles_Instruments_GMeterDial_H__
+#define __Eaagles_Instruments_GMeterDial_H__
 
 #include "openeaagles/instruments/dials/AnalogDial.h"
 
@@ -41,4 +41,4 @@ private:
 }  // end Instruments namespace
 }  // end Eaagles namespace
 
-#endif	// __OPENEAAGLES_INSTRUMENTS_GMETERDIAL_H__
+#endif

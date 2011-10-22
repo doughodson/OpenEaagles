@@ -13,8 +13,8 @@
 //      this will override the setLength() function and will use a graphic to
 //      draw.
 //------------------------------------------------------------------------------
-#ifndef	__OPENEAAGLES_INSTRUMENTS_DIALTICKMARKS_H__
-#define __OPENEAAGLES_INSTRUMENTS_DIALTICKMARKS_H__
+#ifndef	__Eaagles_Instruments_DialTickMarks_H__
+#define __Eaagles_Instruments_DialTickMarks_H__
 
 #include "openeaagles/instruments/dials/AnalogDial.h"
 
@@ -54,4 +54,4 @@ private:
 }  // end Instruments namespace
 }  // end Eaagles namespace
 
-#endif	// __OPENEAAGLES_INSTRUMENTS_DIALTICKMARKS_H__
+#endif

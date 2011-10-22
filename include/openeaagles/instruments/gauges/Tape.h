@@ -1,11 +1,11 @@
 //------------------------------------------------------------------------------
 // Class: Tape
 // Base class: Instrument -> Tape
-// Dynamic class that will render only the portion of the tape that is needed 
-// on the screen
+// Description: Dynamic class that renders only the portion of the tape
+//              that is needed on the screen
 //------------------------------------------------------------------------------
-#ifndef	__OPENEAAGLES_INSTRUMENTS_TAPE_H__
-#define __OPENEAAGLES_INSTRUMENTS_TAPE_H__
+#ifndef	__Eaagles_Instruments_Tape_H__
+#define __Eaagles_Instruments_Tape_H__
 
 #include "openeaagles/instruments/Instrument.h"
 
@@ -13,9 +13,11 @@ namespace Eaagles {
 namespace Instruments {
 
 class Tape : public Instrument {
+
     DECLARE_SUBCLASS(Tape, Instrument)
     
 public:
+
     Tape();
 
     virtual void updateData(const LCreal dt = 0.0000000);
@@ -62,5 +64,4 @@ private:
 }  // end of Instruments namespace
 }  // end of Eaagles namespace
 
-#endif	// __OPENEAAGLES_INSTRUMENTS_TAPE_H__
-
+#endif

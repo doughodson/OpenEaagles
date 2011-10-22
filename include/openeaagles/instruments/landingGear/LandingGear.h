@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: LandingGear
 //------------------------------------------------------------------------------
-#ifndef	__OPENEAAGLES_INSTRUMENTS_LANDINGGEAR_H__
-#define __OPENEAAGLES_INSTRUMENTS_LANDINGGEAR_H__
+#ifndef	__Eaagles_Instruments_LandingGear_H__
+#define __Eaagles_Instruments_LandingGear_H__
 
 #include "openeaagles/instruments/Instrument.h"
 
@@ -61,4 +61,4 @@ private:
 }  // end Instruments namespace
 }  // end Eaagles namespace
 
-#endif	// __OPENEAAGLES_INSTRUMENTS_LANDINGGEAR_H__
+#endif

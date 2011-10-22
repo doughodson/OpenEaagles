@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class:  Eadi3DObjects
 //------------------------------------------------------------------------------
-#ifndef	__OPENEAAGLES_INSTRUMENTS_EAI3DOBJECTS_H__
-#define __OPENEAAGLES_INSTRUMENTS_EAI3DOBJECTS_H__
+#ifndef	__Eaagles_Instruments_Eadi3DObjects_H__
+#define __Eaagles_Instruments_Eadi3DObjects_H__
 
 #include "openeaagles/basic/Object.h"
 #include "openeaagles/instruments/eadi3D/IrisGLCompat.h"
@@ -16,7 +16,6 @@ namespace Instruments {
 //
 // Description:  Eadi3D font
 //
-//
 // public methods (member functions):
 //      (All of the classes derived from Objects have the same public methods.)
 //
@@ -26,6 +25,7 @@ namespace Instruments {
 //------------------------------------------------------------------------------
 class Eadi3DObjects : public Basic::Object {
     DECLARE_SUBCLASS(Eadi3DObjects,Basic::Object)
+
 public:
     Eadi3DObjects(float radius = 1.625);
 
@@ -101,7 +101,7 @@ public:
 
     void makeObjects(void);
     void drawObj(EadiObj obj);
-    IrisGLCompat	irisgl;
+    IrisGLCompat irisgl;
 
     // drawing functions
     void makeFTZRO(unsigned int obj);
@@ -150,12 +150,12 @@ private:
     void drawArrow(float bAngle, float s, float c);
     void drawArrow2(float bAngle, float s, float c);
 
-    unsigned int	base;
+    unsigned int base;
     float radius;
-    bool		made;
+    bool made;
 };
 
 } // End Instruments namespace
 } // End Eaagles namespace
 
-#endif	// __OPENEAAGLES_INSTRUMENTS_EAI3DOBJECTS_H__
+#endif
