@@ -1,3 +1,4 @@
+
 #include "openeaagles/dafif/Airport.h"
 #include <iostream>
 
@@ -33,7 +34,7 @@ Airport::Airport()
    ptbl = &ptable;
 }
 
-Airport::Airport(const char* const s) : DafifRecord(s)
+Airport::Airport(const char* const s) : Record(s)
 {
    STANDARD_CONSTRUCTOR()
    ptbl = &ptable;

@@ -508,7 +508,7 @@ Airport* AirportLoader::getAirport(const int n)
    Airport* ap = 0;
    const char* s = getRecord(n);
    if (s != 0) {
-      if ( DafifRecord::dsAtoln( &s[FORMAT_CODE_POS-1], FORMAT_CODE_LEN ) == 1 ) {
+      if ( Record::dsAtoln( &s[FORMAT_CODE_POS-1], FORMAT_CODE_LEN ) == 1 ) {
          // when we have an airport record
          ap = new Airport(s);
       }
@@ -521,7 +521,7 @@ Runway* AirportLoader::getRunway(const int n)
    Runway* rw = 0;
    const char* s = getRecord(n);
    if (s != 0) {
-      if ( DafifRecord::dsAtoln( &s[FORMAT_CODE_POS-1], FORMAT_CODE_LEN ) == 2 ) {
+      if ( Record::dsAtoln( &s[FORMAT_CODE_POS-1], FORMAT_CODE_LEN ) == 2 ) {
          // when we have a runway record
          rw = new Runway(s);
       }
@@ -534,7 +534,7 @@ Ils* AirportLoader::getIls(const int n)
    Ils* ils = 0;
    const char* s = getRecord(n);
    if (s != 0) {
-      if ( DafifRecord::dsAtoln( &s[FORMAT_CODE_POS-1], FORMAT_CODE_LEN ) == 5 ) {
+      if ( Record::dsAtoln( &s[FORMAT_CODE_POS-1], FORMAT_CODE_LEN ) == 5 ) {
          // when we have an ILS record
          ils = new Ils(s);
       }
@@ -1359,7 +1359,7 @@ AirportLoader::IlsKey::IlsKey(const long idx,
 AirportLoader::IlsKey::IlsKey(const char* key1) : Key(0)
 {
    size = ILS_RECORD_LEN;
-   DafifRecord::dsGetString(key,key1,ILS_KEY_LEN);
+   Record::dsGetString(key,key1,ILS_KEY_LEN);
    id[0] = '\0';
    next = 0;
    freq = 0.0f;
@@ -1416,7 +1416,7 @@ AirportLoader::RunwayKey::RunwayKey(const long idx,
 AirportLoader::RunwayKey::RunwayKey(const char* key1) : Key(0)
 {
    size = RUNWAY_RECORD_LEN;
-   DafifRecord::dsGetString(key,key1,RW_KEY_LEN);
+   Record::dsGetString(key,key1,RW_KEY_LEN);
    rwlen = 0;
    next = 0;
    ils = 0;
@@ -1468,7 +1468,7 @@ AirportLoader::AirportKey::AirportKey(const long idx,
 AirportLoader::AirportKey::AirportKey(const char* key1) : Key(0)
 {
    size = AIRPORT_RECORD_LEN;
-   DafifRecord::dsGetString(key,key1,AP_KEY_LEN);
+   Record::dsGetString(key,key1,AP_KEY_LEN);
    runways = 0;
    type = Airport::ANY;
 }

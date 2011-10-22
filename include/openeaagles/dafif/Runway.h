@@ -43,13 +43,13 @@
 #ifndef __Eaagles_Dafif_Runway_H__
 #define __Eaagles_Dafif_Runway_H__
 
-#include "Dafif.h"
+#include "Record.h"
 
 namespace Eaagles {
 namespace Dafif {
 
-class Runway : public DafifRecord {
-    DECLARE_SUBCLASS(Runway,DafifRecord)
+class Runway : public Record {
+    DECLARE_SUBCLASS(Runway,Record)
 
 public:
    enum { RECORD_LENGTH = RUNWAY_RECORD_LEN };

@@ -33,7 +33,7 @@ Waypoint::Waypoint()
    ptbl = &ptable;
 }
 
-Waypoint::Waypoint(const char* const s) : DafifRecord(s)
+Waypoint::Waypoint(const char* const s) : Record(s)
 {
    STANDARD_CONSTRUCTOR()
    ptbl = &ptable;

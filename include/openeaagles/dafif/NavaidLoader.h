@@ -45,7 +45,7 @@
 #ifndef __Eaagles_Dafif_NavaidLoader_H__
 #define __Eaagles_Dafif_NavaidLoader_H__
 
-#include "DafifDatabase.h"
+#include "Database.h"
 #include "Navaid.h"
 
 namespace Eaagles {

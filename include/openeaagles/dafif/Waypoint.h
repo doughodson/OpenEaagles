@@ -16,13 +16,13 @@
 #ifndef __Eaagles_Dafif_Waypoint_H__
 #define __Eaagles_Dafif_Waypoint_H__
 
-#include "Dafif.h"
+#include "Record.h"
 
 namespace Eaagles {
 namespace Dafif {
 
-class Waypoint : public DafifRecord {
-    DECLARE_SUBCLASS(Waypoint,DafifRecord)
+class Waypoint : public Record {
+    DECLARE_SUBCLASS(Waypoint,Record)
 
 public:
    static const int RECORD_LENGTH = WAYPOINT_RECORD_LEN;

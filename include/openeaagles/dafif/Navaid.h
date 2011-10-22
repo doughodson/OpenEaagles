@@ -4,7 +4,7 @@
 #ifndef __Eaagles_Dafif_Navaid_H__
 #define __Eaagles_Dafif_Navaid_H__
 
-#include "Dafif.h"
+#include "Record.h"
 
 namespace Eaagles {
 namespace Dafif {
@@ -13,8 +13,8 @@ namespace Dafif {
 // Class:	Navaid
 // Description: Access to the DAFIF NAVAID database.
 //------------------------------------------------------------------------------
-class Navaid : public DafifRecord {
-    DECLARE_SUBCLASS(Navaid,DafifRecord)
+class Navaid : public Record {
+    DECLARE_SUBCLASS(Navaid,Record)
 
 public:
    enum { RECORD_LENGTH = NAVAID_RECORD_LEN };

@@ -1,14 +1,14 @@
 //------------------------------------------------------------------------------
-// Class: DafifRecord
+// Class: Record
 //
 // Description: General class used to access DAFIF record information
 //
 //
 // Public Member Functions:
 //
-//    DafifRecord()
-//    DafifRecord(const char* string)
-//    DafifRecord(DafifRecord& dafif)
+//    Record()
+//    Record(const char* string)
+//    Record(DafifRecord& dafif)
 //       Constructors: (creates a copy of 'string')
 //
 //    setRecord(const char* string)
@@ -109,8 +109,8 @@
 //       set this variable to their own <class>::ptable.
 //
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Dafif_DafifRecord_H__
-#define __Eaagles_Dafif_DafifRecord_H__
+#ifndef __Eaagles_Dafif_Record_H__
+#define __Eaagles_Dafif_Record_H__
 
 #include "openeaagles/basic/String.h"
 #include "dafifc.h"
@@ -118,19 +118,19 @@
 namespace Eaagles {
 namespace Dafif {
 
-class DafifRecord : public Basic::String {
-    DECLARE_SUBCLASS(DafifRecord,Basic::String)
+class Record : public Basic::String {
+    DECLARE_SUBCLASS(Record,Basic::String)
 
 public:
-   // DafifRecord types
+   // record types
     enum Type { INVALID = -1, ANY = 0,
         NAVAID = 2, WAYPOINT = 3,
         AIRPORT = 10, RUNWAY = 11, ILS = 12
     };
 
 public:
-   DafifRecord();
-   DafifRecord(const char* const s);
+   Record();
+   Record(const char* const s);
 
    void setRecord(const char* const s);
    void setRecord(Basic::String* const s);

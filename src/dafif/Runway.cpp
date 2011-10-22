@@ -34,7 +34,7 @@ Runway::Runway()
    ptbl = &ptable;
 }
 
-Runway::Runway(const char* const s) : DafifRecord(s)
+Runway::Runway(const char* const s) : Record(s)
 {
    STANDARD_CONSTRUCTOR()
    ptbl = &ptable;

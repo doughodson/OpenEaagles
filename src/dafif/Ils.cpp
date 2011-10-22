@@ -35,7 +35,7 @@ Ils::Ils()
    ptbl = &ptable;
 }
 
-Ils::Ils(const char* const s) : DafifRecord(s)
+Ils::Ils(const char* const s) : Record(s)
 {
    STANDARD_CONSTRUCTOR()
    ptbl = &ptable;

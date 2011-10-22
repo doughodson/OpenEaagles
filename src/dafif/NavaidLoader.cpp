@@ -429,10 +429,10 @@ NavaidLoader::NavaidKey::NavaidKey(const long chan) : Key(0)
 NavaidLoader::NavaidKey::NavaidKey(const char* key1) : Key(0)
 {
    size = NAVAID_RECORD_LEN;
-   DafifRecord::dsGetString(ident,key1,4);
+   Record::dsGetString(ident,key1,4);
    type = Navaid::NavaidType(key1[4]);
-   DafifRecord::dsGetString(countryCode,&key1[5],2);
-   DafifRecord::dsGetString(key,key1,NA_KEY_LEN);
+   Record::dsGetString(countryCode,&key1[5],2);
+   Record::dsGetString(key,key1,NA_KEY_LEN);
    freq = 0.0f;
    channel = 0;
 }

@@ -40,13 +40,13 @@
 #ifndef __Eaagles_Dafif_Ils_H__
 #define __Eaagles_Dafif_Ils_H__
 
-#include "Dafif.h"
+#include "Record.h"
 
 namespace Eaagles {
 namespace Dafif {
 
-class Ils : public DafifRecord {
-    DECLARE_SUBCLASS(Ils,DafifRecord)
+class Ils : public Record {
+    DECLARE_SUBCLASS(Ils,Record)
 
 public:
    enum { RECORD_LENGTH = ILS_RECORD_LEN };

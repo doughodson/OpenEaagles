@@ -40,7 +40,7 @@
 #ifndef __Eaagles_Dafif_AirportLoader_H__
 #define __Eaagles_Dafif_AirportLoader_H__
 
-#include "DafifDatabase.h"
+#include "Database.h"
 #include "Airport.h"
 #include "Runway.h"
 #include "Ils.h"

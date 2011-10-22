@@ -1,6 +1,6 @@
 
-#include "openeaagles/dafif/DafifDatabase.h"
-#include "openeaagles/dafif/Dafif.h"
+#include "openeaagles/dafif/Database.h"
+#include "openeaagles/dafif/Record.h"
 #include "openeaagles/basic/FileReader.h"
 #include "openeaagles/basic/Nav.h"
 #include "openeaagles/basic/String.h"
@@ -592,7 +592,7 @@ Database::Key::Key(const char* code)
    lon  = 0.0f;
    rng2 = 0.0f;
 
-   DafifRecord::dsGetString(icao,code,ICAO_CODE_LEN);
+   Record::dsGetString(icao,code,ICAO_CODE_LEN);
 }
 
 Database::Key::~Key()

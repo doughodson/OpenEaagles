@@ -38,7 +38,7 @@ Navaid::Navaid()
 //------------------------------------------------------------------------------
 // Constructor(s)
 //------------------------------------------------------------------------------
-Navaid::Navaid(const char* const s) : DafifRecord(s)
+Navaid::Navaid(const char* const s) : Record(s)
 {
    STANDARD_CONSTRUCTOR()
    ptbl = &ptable;

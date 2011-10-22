@@ -1,4 +1,5 @@
-#include "openeaagles/dafif/Dafif.h"
+
+#include "openeaagles/dafif/Record.h"
 #include "openeaagles/basic/Nav.h"
 #include "openeaagles/basic/String.h"
 #include <iostream>
@@ -6,19 +7,19 @@
 namespace Eaagles {
 namespace Dafif {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(DafifRecord,"DafifRecord")
-EMPTY_SERIALIZER(DafifRecord)
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Record,"Record")
+EMPTY_SERIALIZER(Record)
 
 //------------------------------------------------------------------------------
 // Constructor
 //------------------------------------------------------------------------------
-DafifRecord::DafifRecord()
+Record::Record()
 {
    STANDARD_CONSTRUCTOR()
    ptbl = 0; 
 }
 
-DafifRecord::DafifRecord(const char* const s)
+Record::Record(const char* const s)
 {
    STANDARD_CONSTRUCTOR()
 
@@ -29,7 +30,7 @@ DafifRecord::DafifRecord(const char* const s)
 //------------------------------------------------------------------------------
 // copyData() -- copy this object's data
 //------------------------------------------------------------------------------
-void DafifRecord::copyData(const DafifRecord& org, const bool cc)
+void Record::copyData(const Record& org, const bool cc)
 {
    BaseClass::copyData(org);
    if (cc) {
@@ -42,7 +43,7 @@ void DafifRecord::copyData(const DafifRecord& org, const bool cc)
 //------------------------------------------------------------------------------
 // deleteData() -- delete this object's data
 //------------------------------------------------------------------------------
-void DafifRecord::deleteData()
+void Record::deleteData()
 {
    resetData();
 }
@@ -51,7 +52,7 @@ void DafifRecord::deleteData()
 //------------------------------------------------------------------------------
 // resetData: clears our member data
 //------------------------------------------------------------------------------
-void DafifRecord::resetData()
+void Record::resetData()
 {
    setStr( 0 );
 }
@@ -59,7 +60,7 @@ void DafifRecord::resetData()
 //------------------------------------------------------------------------------
 // setRecord() -- set our record string to 's'. 
 //------------------------------------------------------------------------------
-void DafifRecord::setRecord(Basic::String* const s)
+void Record::setRecord(Basic::String* const s)
 {
    setStr( *s );
 }
@@ -67,7 +68,7 @@ void DafifRecord::setRecord(Basic::String* const s)
 //------------------------------------------------------------------------------
 // setRecord() -- set our record string to 's'. 
 //------------------------------------------------------------------------------
-void DafifRecord::setRecord(const char* const s)
+void Record::setRecord(const char* const s)
 {
    setStr( s );
 }
@@ -77,19 +78,19 @@ void DafifRecord::setRecord(const char* const s)
 //------------------------------------------------------------------------------
 
 // formatCode: returns the value of the Format Code field
-int DafifRecord::formatCode() const
+int Record::formatCode() const
 {
    return dsAtoln( makePointer(FORMAT_CODE_POS), FORMAT_CODE_LEN );
 }
 
 // isFormatCode: returns true if code matches the Format Code field
-bool DafifRecord::isFormatCode(const int code) const
+bool Record::isFormatCode(const int code) const
 {
    return formatCode() == code;
 }
 
 // transactionCode: returns the Transaction Code field
-char DafifRecord::transactionCode() const
+char Record::transactionCode() const
 {
    const char* p = makePointer(TRANSACTION_CODE_POS);
    if (p != 0)
@@ -99,151 +100,151 @@ char DafifRecord::transactionCode() const
 }
 
 // isTransactionCode: returns true if code matches the Transaction Code field
-bool DafifRecord::isTransactionCode(const char code) const
+bool Record::isTransactionCode(const char code) const
 {
    return transactionCode() == code;
 }
 
 // icaoCode: returns the ICAO code field
-void DafifRecord::icaoCode(char code[]) const
+void Record::icaoCode(char code[]) const
 {
    dsGetString( code, makePointer(ICAO_CODE_POS), ICAO_CODE_LEN );
 }
 
 // isIcaoCode: returns true if code matches the ICAO field
-bool DafifRecord::isIcaoCode(const char code[]) const
+bool Record::isIcaoCode(const char code[]) const
 {
    return dsIsString( makePointer(ICAO_CODE_POS), code );
 }
 
 // key: returns the key field
-void DafifRecord::key(char k[]) const
+void Record::key(char k[]) const
 {
    dsGetString( k, makePointer(ptbl->key), ptbl->keyLength );
 }
 
 // isKey: returns true if k matches the key field
-bool DafifRecord::isKey(const char k[]) const
+bool Record::isKey(const char k[]) const
 {
    return dsIsString( makePointer(ptbl->key), k );
 }
 
 // ident: returns the identifier field
-void DafifRecord::ident(char id[]) const
+void Record::ident(char id[]) const
 {
    dsGetString( id, makePointer(ptbl->ident), ptbl->identLength );
 }
 
 // isIdent: returns true if id matches the identifier field
-bool DafifRecord::isIdent(const char id[]) const
+bool Record::isIdent(const char id[]) const
 {
    return dsIsString( makePointer(ptbl->ident), id );
 }
 
 // name: returns the name field
-void DafifRecord::name(char nname[]) const
+void Record::name(char nname[]) const
 {
    dsGetString( nname, makePointer(ptbl->name), ptbl->nameLength );
 }
 
 // isName: returns true if name matches the name field
-bool DafifRecord::isName(const char name[]) const
+bool Record::isName(const char name[]) const
 {
    return dsIsString( makePointer(ptbl->name), name );
 }
 
 // dafifType: returns the DAFIF Type field
-void DafifRecord::dafifType(char type[]) const
+void Record::dafifType(char type[]) const
 {
    dsGetString( type, makePointer(ptbl->type), ptbl->typeLength );
 }
 
 // isDafifType: returns true if name matches the DAFIF Type field
-bool DafifRecord::isDafifType(const char type[]) const
+bool Record::isDafifType(const char type[]) const
 {
    return dsIsString( makePointer(ptbl->type), type );
 }
 
 // countryCode: returns the country code field
-void DafifRecord::countryCode(char country[]) const
+void Record::countryCode(char country[]) const
 {
    dsGetString( country, makePointer(ptbl->countryCode), ptbl->countryLength );
 }
 
 // isCountryCode: returns true if country matches the country code field
-bool DafifRecord::isCountryCode(const char country[]) const
+bool Record::isCountryCode(const char country[]) const
 {
    return dsIsString( makePointer(ptbl->countryCode), country );
 }
 
 // stateCode: returns the value of the State/Province Code field
-int DafifRecord::stateCode() const
+int Record::stateCode() const
 {
    return dsAtoln( makePointer(ptbl->stateCode), ptbl->stateLength );
 }
 
 // isStateCode: returns true if code matches the State/Province Code field
-bool DafifRecord::isStateCode(const int code) const
+bool Record::isStateCode(const int code) const
 {
    return stateCode() == code;
 }
 
 // wac: returns the World Area Code field
-void DafifRecord::wac(char code[]) const
+void Record::wac(char code[]) const
 {
    dsGetString( code, makePointer(ptbl->wac), ptbl->wacLength );
 }
 
 // isWac: returns true if code matches the World Area Code field
-bool DafifRecord::isWac(const char code[]) const
+bool Record::isWac(const char code[]) const
 {
    return dsIsString( makePointer(ptbl->wac), code );
 }
 
 // latitude: returns the value of the latitude field
-double DafifRecord::latitude() const
+double Record::latitude() const
 {
    return dsLatitude( makePointer(ptbl->latitude) );
 }
 
 // longitude: returns the value of the longitude field
-double DafifRecord::longitude() const
+double Record::longitude() const
 {
    return dsLongitude( makePointer(ptbl->longitude) );
 }
 
 // elevation: returns the value of the elevation field
-float DafifRecord::elevation() const
+float Record::elevation() const
 {
    return dsElevation( makePointer(ptbl->elevation) );
 }
 
 // magVariance: returns the value of the magnetic variance field
-float DafifRecord::magVariance() const
+float Record::magVariance() const
 {
    return dsMagVariance( makePointer(ptbl->magVariance) );
 }
 
 // dafifRecordNumber: returns the value of the DAFIF Record Number field
-int DafifRecord::dafifRecordNumber() const
+int Record::dafifRecordNumber() const
 {
    return dsAtoln( makePointer(RECORD_NUMBER_POS), RECORD_NUMBER_LEN );
 }
 
 // isDafifRecordNumber: returns true if num matches the Record Number field
-bool DafifRecord::isDafifRecordNumber(const int num) const
+bool Record::isDafifRecordNumber(const int num) const
 {
    return dafifRecordNumber() == num;
 }
 
 // cycleData: returns the Cycle Date field
-void DafifRecord::cycleDate(char date[]) const
+void Record::cycleDate(char date[]) const
 {
    dsGetString( date, makePointer(CYCLE_DATE_POS), CYCLE_DATE_LEN );
 }
 
 // isCycleDate: returns true if date matches the Cycle Date field
-bool DafifRecord::isCycleDate(const char date[]) const
+bool Record::isCycleDate(const char date[]) const
 {
    return dsIsString( makePointer(CYCLE_DATE_POS), date );
 }
@@ -251,7 +252,7 @@ bool DafifRecord::isCycleDate(const char date[]) const
 //------------------------------------------------------------------------------
 // makePointer: make a pointer to the string starting at record column 'n'
 //------------------------------------------------------------------------------
-const char* DafifRecord::makePointer(const size_t n) const
+const char* Record::makePointer(const size_t n) const
 {
    const char* p = 0;
    if (len() != 0) {
@@ -264,7 +265,7 @@ const char* DafifRecord::makePointer(const size_t n) const
 //------------------------------------------------------------------------------
 // dsFreq2chan() -- freq (MHz) to TACAN channel
 //------------------------------------------------------------------------------
-int DafifRecord::dsFreq2chan(const float f)
+int Record::dsFreq2chan(const float f)
 {
    long freq = (long)(f*10000.0f);
    int c = 0;
@@ -284,7 +285,7 @@ int DafifRecord::dsFreq2chan(const float f)
 //------------------------------------------------------------------------------
 // dsChan2freq() -- TACAN channel to freq (MHz)
 //------------------------------------------------------------------------------
-float DafifRecord::dsChan2freq(const int chan, const char type)
+float Record::dsChan2freq(const int chan, const char type)
 {
    long freq = 0;
 
@@ -307,7 +308,7 @@ float DafifRecord::dsChan2freq(const int chan, const char type)
 //------------------------------------------------------------------------------
 // dsAtofn() -- convert n-characters to float  
 //------------------------------------------------------------------------------
-double DafifRecord::dsAtofn(const char* const s, const int n)
+double Record::dsAtofn(const char* const s, const int n)
 {
    if (s == 0) return 0.0f;
    if (*s == 'U') return 0.0f;
@@ -325,7 +326,7 @@ double DafifRecord::dsAtofn(const char* const s, const int n)
 //------------------------------------------------------------------------------
 // dsAtoln() -- convert n-characters to long  
 //------------------------------------------------------------------------------
-long DafifRecord::dsAtoln(const char* const s, const int n)
+long Record::dsAtoln(const char* const s, const int n)
 {
    if (s == 0) return 0;
    if (*s == 'U') return 0;
@@ -344,7 +345,7 @@ long DafifRecord::dsAtoln(const char* const s, const int n)
 // dsGetString() -- like strncpy() with 0 char* checking and the    
 // spaces removed from the tail of the string.                         
 //------------------------------------------------------------------------------
-void DafifRecord::dsGetString(char* const d, const char* const s, const int n)
+void Record::dsGetString(char* const d, const char* const s, const int n)
 {
    // Make sure we have a place to copy it 
    if (d == 0) return;
@@ -373,7 +374,7 @@ void DafifRecord::dsGetString(char* const d, const char* const s, const int n)
 //------------------------------------------------------------------------------
 // dsIsString() -- true if string p matches refStr                  
 //------------------------------------------------------------------------------
-bool DafifRecord::dsIsString(const char* const p, const char* const refStr)
+bool Record::dsIsString(const char* const p, const char* const refStr)
 {
    size_t len;
    if (p == 0 || refStr == 0) return false;
@@ -384,7 +385,7 @@ bool DafifRecord::dsIsString(const char* const p, const char* const refStr)
 //------------------------------------------------------------------------------
 // dsLatitude() -- convert string to latitude                          
 //------------------------------------------------------------------------------
-double DafifRecord::dsLatitude(const char* const p)
+double Record::dsLatitude(const char* const p)
 {
    double lat = 0.0f;
    if (p != 0) {
@@ -402,7 +403,7 @@ double DafifRecord::dsLatitude(const char* const p)
 //------------------------------------------------------------------------------
 // dsLongitude() --  convert string to longitude                      
 //------------------------------------------------------------------------------
-double DafifRecord::dsLongitude(const char* const p)
+double Record::dsLongitude(const char* const p)
 {
    double lon = 0.0;
    if (p != 0) {
@@ -420,7 +421,7 @@ double DafifRecord::dsLongitude(const char* const p)
 //------------------------------------------------------------------------------
 // dsMagVariance() --  convert string to magnetic variation           
 //------------------------------------------------------------------------------
-float DafifRecord::dsMagVariance(const char* const p)
+float Record::dsMagVariance(const char* const p)
 {
    double mv = 0.0;
    if (p != 0) {
@@ -436,7 +437,7 @@ float DafifRecord::dsMagVariance(const char* const p)
 //------------------------------------------------------------------------------
 // dsSlaveVariance() -- convert string to slave magnetic variation     
 //------------------------------------------------------------------------------
-float DafifRecord::dsSlaveVariance(const char* const p)
+float Record::dsSlaveVariance(const char* const p)
 {
    double sv = 0.0;
    if (p != 0) {
@@ -451,7 +452,7 @@ float DafifRecord::dsSlaveVariance(const char* const p)
 //------------------------------------------------------------------------------
 // dsMagHeading() -- magnetic heading                                  
 //------------------------------------------------------------------------------
-float DafifRecord::dsMagHeading(const char* const p)
+float Record::dsMagHeading(const char* const p)
 {
    char ct;
    double mh = 0.0;
@@ -466,7 +467,7 @@ float DafifRecord::dsMagHeading(const char* const p)
 //------------------------------------------------------------------------------
 // dsElevation() -- format#1: convert string to elevation (to nearest foot) 
 //------------------------------------------------------------------------------
-float DafifRecord::dsElevation(const char* const p)
+float Record::dsElevation(const char* const p)
 {
    if (p == 0) return 0.0f;
    if (*p == '\0') return 0.0f;
@@ -479,7 +480,7 @@ float DafifRecord::dsElevation(const char* const p)
 // dsElevation1() -- format#2: convert string to elevation (to tenths  
 // of feet)                                                            
 //------------------------------------------------------------------------------
-float DafifRecord::dsElevation1(const char* const p)
+float Record::dsElevation1(const char* const p)
 {
    double e, et;
    char ct;
@@ -505,7 +506,7 @@ float DafifRecord::dsElevation1(const char* const p)
 //------------------------------------------------------------------------------
 // dsFrequency() -- convert string to frequency  (MHz)   
 //------------------------------------------------------------------------------
-float DafifRecord::dsFrequency(const char* const p)
+float Record::dsFrequency(const char* const p)
 {
    long freq = 0;
 
@@ -526,7 +527,7 @@ float DafifRecord::dsFrequency(const char* const p)
 //------------------------------------------------------------------------------
 // serialize true bearing and range to system
 //------------------------------------------------------------------------------
-void DafifRecord::printTrueBearingRange(std::ostream& sout, const double aclat, const double aclon, const double acelev)const
+void Record::printTrueBearingRange(std::ostream& sout, const double aclat, const double aclon, const double acelev)const
 {
    double bearing, range, grdrange;
    Basic::Nav::glla2bd(aclat, aclon, acelev, latitude(), longitude(), elevation(), &bearing, &range, &grdrange);

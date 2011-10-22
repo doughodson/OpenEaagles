@@ -28,7 +28,7 @@
 #ifndef __Eaagles_Dafif_WaypointLoader_H__
 #define __Eaagles_Dafif_WaypointLoader_H__
 
-#include "DafifDatabase.h"
+#include "Database.h"
 #include "Waypoint.h"
 
 namespace Eaagles {

@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 // Class: Airport
-// Base class:	Basic::Object -> Basic::String -> DafifRecord -> Airport
+// Base class:	Basic::Object -> Basic::String -> Record -> Airport
 //
 // Description: DAFIF Airport record class
 //
@@ -28,13 +28,13 @@
 #ifndef __Eaagles_Dafif_Airport_H__
 #define __Eaagles_Dafif_Airport_H__
 
-#include "Dafif.h"
+#include "Record.h"
 
 namespace Eaagles {
 namespace Dafif {
 
-class Airport : public DafifRecord {
-    DECLARE_SUBCLASS(Airport,DafifRecord)
+class Airport : public Record {
+    DECLARE_SUBCLASS(Airport,Record)
 
 public:
    enum { RECORD_LENGTH = AIRPORT_RECORD_LEN  };
@@ -52,7 +52,7 @@ public:
 
    virtual void ident(char id[]) const;
 
-   // DafifRecord Interface
+   // Record Interface
    virtual void printRecord(std::ostream& sout) const;
 
 private:

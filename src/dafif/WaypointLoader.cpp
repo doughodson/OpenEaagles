@@ -292,9 +292,9 @@ WaypointLoader::WaypointKey::WaypointKey(
 WaypointLoader::WaypointKey::WaypointKey(const char* key1) : Key(0)
 {
    size = WAYPOINT_RECORD_LEN;
-   DafifRecord::dsGetString(key,key1,WP_KEY_LEN);
-   DafifRecord::dsGetString(ident,key1,8);
-   DafifRecord::dsGetString(countryCode,&key1[8],2);
+   Record::dsGetString(key,key1,WP_KEY_LEN);
+   Record::dsGetString(ident,key1,8);
+   Record::dsGetString(countryCode,&key1[8],2);
 }
 
 WaypointLoader::WaypointKey::~WaypointKey()

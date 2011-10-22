@@ -1,8 +1,8 @@
+
 #include "openeaagles/simulation/NavRadios.h"
 
 #include "openeaagles/dafif/AirportLoader.h"
 #include "openeaagles/dafif/NavaidLoader.h"
-#include "openeaagles/dafif/Dafif.h"
 #include "openeaagles/simulation/Player.h"
 #include "openeaagles/simulation/Simulation.h"
 #include "openeaagles/basic/Nav.h"

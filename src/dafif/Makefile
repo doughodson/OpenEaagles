@@ -8,8 +8,8 @@ OBJS1 =  \
 	$(LIB)(dafifFF.o) \
 	$(LIB)(Airport.o) \
 	$(LIB)(AirportLoader.o) \
-	$(LIB)(Dafif.o) \
-	$(LIB)(DafifDatabase.o) \
+	$(LIB)(Record.o) \
+	$(LIB)(Database.o) \
 	$(LIB)(Ils.o) \
 	$(LIB)(Navaid.o) \
 	$(LIB)(NavaidLoader.o) \
