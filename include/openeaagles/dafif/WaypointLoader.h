@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 // Class: WaypointLoader
-// Base class:	DsDafifDatabase -> WaypointLoader
+// Base class:	Database -> WaypointLoader
 //
 // Description: DAFIF Waypoint file class (file3)
 //

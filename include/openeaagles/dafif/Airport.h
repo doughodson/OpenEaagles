@@ -34,18 +34,19 @@ namespace Eaagles {
 namespace Dafif {
 
 class Airport : public Record {
+
     DECLARE_SUBCLASS(Airport,Record)
 
 public:
+
+   Airport();
+   Airport(const char* const s);
+
    enum { RECORD_LENGTH = AIRPORT_RECORD_LEN  };
 
    enum AirportType { INVALID = -1, ANY = 'Z',
 		  CIVIL  = 'A', JOINT = 'B', MILITARY = 'C', INACTIVE = 'D'
 	 	  };
-
-public:
-   Airport();
-   Airport(const char* const s);
 
    virtual AirportType airportType() const;
    virtual int isAirportType(const AirportType type) const;

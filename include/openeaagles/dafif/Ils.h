@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 // Class: Ils
-// Base class: Basic::Object -> Basic::String -> DafifRecord -> Ils
+// Base class: Basic::Object -> Basic::String -> Record -> Ils
 //
 // Description: Access to the DAFIF ILS records.
 //
@@ -46,9 +46,14 @@ namespace Eaagles {
 namespace Dafif {
 
 class Ils : public Record {
+
     DECLARE_SUBCLASS(Ils,Record)
 
 public:
+
+   Ils();
+   Ils(const char* const s);
+
    enum { RECORD_LENGTH = ILS_RECORD_LEN };
 
    enum IlsType { INVALID = -1, ANY = 'Y',
@@ -56,10 +61,6 @@ public:
 		  BACKCOURSE_MARKER = 'B', INNER_MARKER = 'I', MIDDLE_MARKER = 'M',
 	 	  OUTER_MARKER = 'O', UNKNOWN = 'U'
 		  };
-		  
-public:
-   Ils();
-   Ils(const char* const s);
 
    virtual IlsType ilsType() const;
    virtual int isIlsType(const IlsType type) const;
@@ -74,7 +75,7 @@ public:
    void  printGlideSlopeData(std::ostream& sout, const double aclat, const double aclon, const double acelev) const;
 
 
-   // DafifRecord Interface
+   // Record Interface
    virtual void printRecord(std::ostream& sout) const;
 
 private:
