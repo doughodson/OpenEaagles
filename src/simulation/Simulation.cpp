@@ -1197,6 +1197,7 @@ bool Simulation::setSlotPlayers(Basic::PairStream* const pl)
    }
 
     bool ok = true;
+	unsigned short maxID=0;
 
     // First, make sure they are all Players.
     {
@@ -1210,9 +1211,17 @@ bool Simulation::setSlotPlayers(Basic::PairStream* const pl)
                 std::cerr << "Simulation::setSlotPlayers: slot: " << *pair->slot() << " is NOT of a Player type!" << std::endl;
                 ok = false;
             }
+			else {
+				// find the max ID# of players with preassigned IDs
+				if (ip->getID() > maxID)
+					maxID = ip->getID();
+			}
         }
     }
     
+	// increment to next available ID
+	maxID++;
+
     // Next, make sure we have unique player names and IDs
     if (ok) {
         // For all players ...
@@ -1221,12 +1230,24 @@ bool Simulation::setSlotPlayers(Basic::PairStream* const pl)
             Basic::Pair* pair1 = (Basic::Pair*) item1->getValue();
             item1 = item1->getNext();
             Player* ip1 = (Player*)( pair1->object() );
+
+			   // unassigned ID
+			   if ( (ip1->getID() == 0) && (maxID < 65535) ) {
+				   ip1->setID(maxID);
+				   ++maxID;
+			   }
             
             Basic::List::Item* item2 = item1;
             while (item2 != 0) {
                 Basic::Pair* pair2 = (Basic::Pair*) item2->getValue();
                 Player* ip2 = (Player*)( pair2->object() );
                 
+               // unassigned ID
+			      if ( (ip2->getID() == 0)  && (maxID < 65535) ) {
+				      ip2->setID(maxID);
+				      ++maxID;
+			      }
+
                 if (ip1->getID() == ip2->getID()) {
                     std::cerr << "Simulation::setSlotPlayers: duplicate player ID: " << ip1->getID() << std::endl;
                     ok = false;                    
