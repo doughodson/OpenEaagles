@@ -62,7 +62,7 @@ public:
    Polarization getPolarization() const        { return polar; }
 
    // Antenna gain
-   double getGain() const                      { return gain; }
+   virtual double getGain() const                      { return gain; }
 
    // Gain pattern 
    const Basic::Function* gainPatternTable() const { return gainPattern; }
