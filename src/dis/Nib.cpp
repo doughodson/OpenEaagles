@@ -7,6 +7,7 @@
 #include "openeaagles/simulation/AirVehicle.h"
 #include "openeaagles/simulation/Jammer.h"
 #include "openeaagles/simulation/Radar.h"
+#include "openeaagles/simulation/Simulation.h"
 #include "openeaagles/basic/Pair.h"
 #include "openeaagles/basic/PairStream.h"
 
@@ -185,21 +186,36 @@ void Nib::updateTheIPlayer()
 {
     Simulation::Player* p = getPlayer();
 
-    // ---
-    // If we haven't tried to created the IPlayer yet ...
-    // ---
-    if (p == 0 && isEntityTypeUnchecked()) {
-        // create the player
-        p = getNetIO()->createIPlayer(this);
-    }
-    
-    // ---
-    // Update the player's data from our object's attributes
-    // ---
-    if (p != 0) {
-        // This transfers player data from our basic NIB to the player.
-        nib2PlayerState();
-        // ... transfer additional data in the future ....
+   // ---
+   // If we haven't tried to created the IPlayer yet ...
+   // ---
+   if (p == 0 && isEntityTypeUnchecked()) {
+      // create the player
+      p = getNetIO()->createIPlayer(this);
+   }
+
+   // ---
+   // Update the player's data from our object's attributes
+   // ---
+   if (p != 0) {
+      // This transfers player data from our basic NIB to the player.
+      nib2PlayerState();
+      // ... transfer additional data in the future ....
+
+#ifdef DISV7
+      // ---
+      // check all emission handlers for timeout
+      // ---
+      NetIO* const disIO = (NetIO*)(getNetIO());
+      double curExecTime = disIO->getSimulation()->getExecTimeSec();
+      for (unsigned char i = 0; i < numEmissionSystems; i++) {
+         LCreal drTime = curExecTime - emitterSysHandler[i]->getEmPduExecTime();
+         if ( drTime >= (disIO->get_HBT_PDU_EE() * disIO->get_HBT_TIMEOUT_MPLIER()) ) {
+            emitterSysHandler[i]->setTimedOut();
+         }
+      }
+#endif
+
     }
 }
 
@@ -265,7 +281,7 @@ bool Nib::processElectromagneticEmissionPDU(const ElectromagneticEmissionPDU* co
          // ---
          if (handler == 0 && numEmissionSystems < MAX_EM_SYSTEMS) {
 
-            // First, try to find an Emisison PDU handler for this type system.
+            // First, try to find an Emission PDU handler for this type system.
             // If we find one, then clone it for our use.
             NetIO* const disIO = (NetIO*)(getNetIO());
             const EmissionPduHandler* tmp = disIO->findEmissionPduHandler(es);
@@ -323,7 +339,7 @@ bool Nib::emitterBeamsManager(const LCreal curExecTime)
             // When we have a R/F sensor, create a handler for it
             EmissionPduHandler* handler = 0;
 
-            // First, try to find an Emisison PDU handler for this type system.
+            // First, try to find an Emission PDU handler for this type system.
             // If we find one, then clone it for our use.
             NetIO* const disIO = (NetIO*)(getNetIO());
             const EmissionPduHandler* tmp = disIO->findEmissionPduHandler(rs);
@@ -365,7 +381,7 @@ bool Nib::emitterBeamsManager(const LCreal curExecTime)
                      // When we have a R/F sensor, create a handler for it
                      EmissionPduHandler* handler = 0;
 
-                     // First, try to find an Emisison PDU handler for this type system.
+                     // First, try to find an Emission PDU handler for this type system.
                      // If we find one, then clone it for our use.
                      NetIO* const disIO = (NetIO*)(getNetIO());
                      const EmissionPduHandler* tmp = disIO->findEmissionPduHandler(jam);
@@ -398,7 +414,7 @@ bool Nib::emitterBeamsManager(const LCreal curExecTime)
                // When we have a R/F sensor, create a handler for it
                EmissionPduHandler* handler = 0;
 
-               // First, try to find an Emisison PDU handler for this type system.
+               // First, try to find an Emission PDU handler for this type system.
                // If we find one, then clone it for our use.
                NetIO* const disIO = (NetIO*)(getNetIO());
                const EmissionPduHandler* tmp = disIO->findEmissionPduHandler(js);
@@ -426,7 +442,7 @@ bool Nib::emitterBeamsManager(const LCreal curExecTime)
    }  // end (numEmissionSystems == 0)
 
    // ---
-   // Have the handles check their electomagnatic emission systems
+   // Have the handlers check their electromagnetic emission systems
    // and generate the PDUs as needed.
    // ---
    for (emissionSystemsIndex = 0; emissionSystemsIndex < numEmissionSystems; emissionSystemsIndex++) {
