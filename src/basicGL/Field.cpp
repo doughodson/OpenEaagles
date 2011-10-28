@@ -835,11 +835,9 @@ bool Field::setSlotStartCharPos(const Basic::Number* const msg) {
 //------------------------------------------------------------------------------
 std::ostream& Field::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
-    using namespace std;
-
     int j = 0;
     if ( !slotsOnly ) {
-        sout << "( " << getFormName() << endl;
+        sout << "( " << getFormName() << std::endl;
         j = 4;
     }
 
@@ -847,37 +845,37 @@ std::ostream& Field::serialize(std::ostream& sout, const int i, const bool slots
 
     if (line() > 0 && column() > 0) {
         indent(sout,i+j);
-        sout << "position: [ " << line() << " " << column() << " ]" << endl;
+        sout << "position: [ " << line() << " " << column() << " ]" << std::endl;
     }
 
     if ( width() > 0) {
         indent(sout,i+j);
-        sout << "width: "	<< (unsigned int)width()	<< endl;
+        sout << "width: "	<< (unsigned int)width()	<< std::endl;
     }
 
     if ( isHighLighted() ) {
         indent(sout,i+j);
-        sout << "highLight: " << isHighLighted() << endl;
+        sout << "highLight: " << isHighLighted() << std::endl;
     }
 
     if ( isUnderlined() ) {
         indent(sout,i+j);
-        sout << "underline: " << isUnderlined() << endl;
+        sout << "underline: " << isUnderlined() << std::endl;
     }
 
     if ( isReversed() ) {
         indent(sout,i+j);
-        sout << "reversed: " << isReversed() << endl;
+        sout << "reversed: " << isReversed() << std::endl;
     }
 
     if ( isVertical() ) {
         indent(sout,i+j);
-        sout << "vertical: " << isVertical() << endl;
+        sout << "vertical: " << isVertical() << std::endl;
     }
 
     if ( areBracketsOn() ) {
         indent(sout,i+j);
-        sout << "brackets: " << areBracketsOn() << endl;
+        sout << "brackets: " << areBracketsOn() << std::endl;
     }
 
     indent(sout,i+j);
@@ -888,11 +886,11 @@ std::ostream& Field::serialize(std::ostream& sout, const int i, const bool slots
         case Basic::String::CENTER : sout << "\"center\"";  break;
         case Basic::String::RIGHT  : sout << "\"right\"";   break;
     }
-    sout << endl;
+    sout << std::endl;
 
     if ( !slotsOnly ) {
         indent(sout,i);
-        sout << ")" << endl;
+        sout << ")" << std::endl;
     }
     return sout;
 }

@@ -163,26 +163,24 @@ void Cmy::rgb2cmy(osg::Vec3& cmy, const osg::Vec4& rgb)
 //------------------------------------------------------------------------------
 std::ostream& Cmy::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
-    using namespace std;
-
     int j = 0;
     if ( !slotsOnly ) {
-        sout << "( " << getFormName() << endl;
+        sout << "( " << getFormName() << std::endl;
         j = 4;
     }
 
     indent(sout,i+j);
-    sout << "cyan:    " << cyan() << endl;
+    sout << "cyan:    " << cyan() << std::endl;
 
     indent(sout,i+j);
-    sout << "magenta: " << magenta() << endl;
+    sout << "magenta: " << magenta() << std::endl;
 
     indent(sout,i+j);
-    sout << "yellow:  " << yellow() << endl;
+    sout << "yellow:  " << yellow() << std::endl;
 
     if ( !slotsOnly ) {
         indent(sout,i);
-        sout << ")" << endl;
+        sout << ")" << std::endl;
     }
 
     return sout;

@@ -152,30 +152,29 @@ Object* Density::getSlotByIndex(const int si)
 // serialize() -- print the value of this object to the output stream sout.
 //------------------------------------------------------------------------------
 std::ostream& Density::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{    
-    using namespace std;
+{
     int j = 0;
     if (!slotsOnly) {
-        sout << "( " << getFormName() << endl;
+        sout << "( " << getFormName() << std::endl;
         // tab here
         j = 4;
     }
     
     indent(sout, i+j);
-    sout << "value: " << val << endl;
+    sout << "value: " << val << std::endl;
     
     if (myMass != 0) {
         indent(sout, i+j);
-        sout << "mass: " << *myMass << endl;
+        sout << "mass: " << *myMass << std::endl;
     }
     if (myVolume != 0) {
         indent(sout, i+j);
-        sout << "volume: " << *myVolume << endl;
+        sout << "volume: " << *myVolume << std::endl;
     }
     
     if (!slotsOnly) {
         indent(sout,i);
-        sout << ")" << endl;
+        sout << ")" << std::endl;
     }
             
     return sout;

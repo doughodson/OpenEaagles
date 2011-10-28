@@ -549,7 +549,6 @@ Object* ExponentialRand::getSlotByIndex(const int si)
 //{
 //    return BaseClass::getSlotByIndex(si);
 //}
-using namespace std;
 
 namespace
 {
@@ -738,7 +737,7 @@ int CheckSeed (const unsigned int seed[6])
 
     for (i = 0; i < 3; ++i) {
         if (seed[i] >= m1) {
-            cerr << "****************************************\n"
+            std::cerr << "****************************************\n"
                  << "ERROR: Seed[" << i << "] >= 4294967087, Seed is not set."
                  << "\n****************************************\n\n";
             return (-1);
@@ -746,20 +745,20 @@ int CheckSeed (const unsigned int seed[6])
     }
     for (i = 3; i < 6; ++i) {
         if (seed[i] >= m2) {
-            cerr << "*****************************************\n"
+            std::cerr << "*****************************************\n"
                  << "ERROR: Seed[" << i << "] >= 4294944443, Seed is not set."
                  << "\n*****************************************\n\n";
             return (-1);
         }
     }
     if (seed[0] == 0 && seed[1] == 0 && seed[2] == 0) {
-         cerr << "****************************\n"
+         std::cerr << "****************************\n"
               << "ERROR: First 3 seeds = 0.\n"
               << "****************************\n\n";
          return (-1);
     }
     if (seed[3] == 0 && seed[4] == 0 && seed[5] == 0) {
-         cerr << "****************************\n"
+         std::cerr << "****************************\n"
               << "ERROR: Last 3 seeds = 0.\n"
               << "****************************\n\n";
          return (-1);
@@ -957,15 +956,15 @@ void RngStream::GetState (unsigned int seed[6]) const
 //-------------------------------------------------------------------------
 void RngStream::WriteState () const
 {
-    cout << "The current state of the Rngstream";
+    std::cout << "The current state of the Rngstream";
     if (name.size() > 0)
-        cout << " " << name;
-    cout << ":\n   Cg = { ";
+        std::cout << " " << name;
+    std::cout << ":\n   Cg = { ";
 
     for (int i = 0; i < 5; i++) {
-        cout << static_cast<unsigned int> (Cg [i]) << ", ";
+        std::cout << static_cast<unsigned int> (Cg [i]) << ", ";
     }
-    cout << static_cast<unsigned int> (Cg [5]) << " }\n\n";
+    std::cout << static_cast<unsigned int> (Cg [5]) << " }\n\n";
 }
 
 
@@ -974,29 +973,29 @@ void RngStream::WriteStateFull () const
 {
     int i;
 
-    cout << "The RngStream";
+    std::cout << "The RngStream";
     if (name.size() > 0)
-        cout << " " << name;
-    cout << ":\n   anti = " << (anti ? "true" : "false") << "\n";
-    cout << "   incPrec = " << (incPrec ? "true" : "false") << "\n";
+        std::cout << " " << name;
+    std::cout << ":\n   anti = " << (anti ? "true" : "false") << "\n";
+    std::cout << "   incPrec = " << (incPrec ? "true" : "false") << "\n";
 
-    cout << "   Ig = { ";
+    std::cout << "   Ig = { ";
     for (i = 0; i < 5; i++) {
-        cout << static_cast<unsigned int> (Ig [i]) << ", ";
+        std::cout << static_cast<unsigned int> (Ig [i]) << ", ";
     }
-    cout << static_cast<unsigned int> (Ig [5]) << " }\n";
+    std::cout << static_cast<unsigned int> (Ig [5]) << " }\n";
 
-    cout << "   Bg = { ";
+    std::cout << "   Bg = { ";
     for (i = 0; i < 5; i++) {
-        cout << static_cast<unsigned int> (Bg [i]) << ", ";
+        std::cout << static_cast<unsigned int> (Bg [i]) << ", ";
     }
-    cout << static_cast<unsigned int> (Bg [5]) << " }\n";
+    std::cout << static_cast<unsigned int> (Bg [5]) << " }\n";
 
-    cout << "   Cg = { ";
+    std::cout << "   Cg = { ";
     for (i = 0; i < 5; i++) {
-        cout << static_cast<unsigned int> (Cg [i]) << ", ";
+        std::cout << static_cast<unsigned int> (Cg [i]) << ", ";
     }
-    cout << static_cast<unsigned int> (Cg [5]) << " }\n\n";
+    std::cout << static_cast<unsigned int> (Cg [5]) << " }\n\n";
 }
 
 

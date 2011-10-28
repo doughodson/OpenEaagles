@@ -1038,40 +1038,38 @@ Basic::Object* GlutDisplay::getSlotByIndex(const int si)
 //------------------------------------------------------------------------------
 std::ostream& GlutDisplay::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
-   using namespace std;
-
    int j = 0;
    if ( !slotsOnly ) {
-      sout << "( " << getFormName() << endl;
+      sout << "( " << getFormName() << std::endl;
       j = 4;
    }
 
    indent(sout,i+j);
-   sout << "fullScreen: " << (isFullScreen() ? "true" : "false") << endl;
+   sout << "fullScreen: " << (isFullScreen() ? "true" : "false") << std::endl;
 
    indent(sout,i+j);
-   sout << "resizeSubwindows: " << (okToResize ? "true" : "false") << endl;
+   sout << "resizeSubwindows: " << (okToResize ? "true" : "false") << std::endl;
 
    indent(sout,i+j);
-   sout << "idleSleepTime: " << idleSleepTimeMS << endl;
+   sout << "idleSleepTime: " << idleSleepTimeMS << std::endl;
 
    indent(sout,i+j);
-   sout << "pickWidth: " << getPickWidth() << endl;
+   sout << "pickWidth: " << getPickWidth() << std::endl;
 
    indent(sout,i+j);
-   sout << "pickHeight: " << getPickHeight() << endl;
+   sout << "pickHeight: " << getPickHeight() << std::endl;
    
    indent(sout,i+j);
-   sout << "accumBuff: " << (isAccumBuff() ? "true" : "false") << endl;
+   sout << "accumBuff: " << (isAccumBuff() ? "true" : "false") << std::endl;
 
    indent(sout,i+j);
-   sout << "stencilBuff: " << (isStencilBuff() ? "true" : "false") << endl;
+   sout << "stencilBuff: " << (isStencilBuff() ? "true" : "false") << std::endl;
 
-   BaseClass::serialize(sout,i+j,true);
+   BaseClass::serialize(sout,i+j, true);
 
    if ( !slotsOnly ) {
       indent(sout,i);
-      sout << ")" << endl;
+      sout << ")" << std::endl;
    }
 
    return sout;

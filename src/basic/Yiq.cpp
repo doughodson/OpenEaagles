@@ -159,26 +159,24 @@ void Yiq::rgb2yiq(osg::Vec3& yiq, const osg::Vec4& rgb)
 //------------------------------------------------------------------------------
 std::ostream& Yiq::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
-    using namespace std;
-
     int j = 0;
     if ( !slotsOnly ) {
-        sout << "( " << getFormName() << endl;
+        sout << "( " << getFormName() << std::endl;
         j = 4;
     }
 
     indent(sout,i+j);
-    sout << "y: " << this->y() << endl;
+    sout << "y: " << this->y() << std::endl;
 
     indent(sout,i+j);
-    sout << "i: " << this->i() << endl;
+    sout << "i: " << this->i() << std::endl;
 
     indent(sout,i+j);
-    sout << "q: " << this->q() << endl;
+    sout << "q: " << this->q() << std::endl;
 
     if ( !slotsOnly ) {
         indent(sout,i);
-        sout << ")" << endl;
+        sout << ")" << std::endl;
     }
 
     return sout;

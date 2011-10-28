@@ -219,26 +219,24 @@ void Hls::rgb2hls(osg::Vec3& hls, const osg::Vec4& rgb)
 //------------------------------------------------------------------------------
 std::ostream& Hls::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
-    using namespace std;
-
     int j = 0;
     if ( !slotsOnly ) {
-        sout << "( " << getFormName() << endl;
+        sout << "( " << getFormName() << std::endl;
         j = 4;
     }
 
     indent(sout,i+j);
-    sout << "hue:        " << hue() << endl;
+    sout << "hue:        " << hue() << std::endl;
 
     indent(sout,i+j);
-    sout << "lightness:  " << lightness() << endl;
+    sout << "lightness:  " << lightness() << std::endl;
 
     indent(sout,i+j);
-    sout << "saturation: " << saturation() << endl;
+    sout << "saturation: " << saturation() << std::endl;
 
     if ( !slotsOnly ) {
         indent(sout,i);
-        sout << ")" << endl;
+        sout << ")" << std::endl;
     }
 
     return sout;

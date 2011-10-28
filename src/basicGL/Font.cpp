@@ -200,73 +200,71 @@ Basic::Object* Font::getSlotByIndex(const int si)
 //------------------------------------------------------------------------------
 std::ostream& Font::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
-    using namespace std;
-
     int j = 0;
     if ( !slotsOnly ) {
-        sout << "( " << getFormName() << endl;
+        sout << "( " << getFormName() << std::endl;
         j = 4;
     }
 
     if (getFontWidth() > 0) {
         indent(sout,i+j);
-        sout << "fontWidth: " << getFontWidth() << endl;
+        sout << "fontWidth: " << getFontWidth() << std::endl;
     }
 
     if (getFontHeight() > 0) {
         indent(sout,i+j);
-        sout << "fontHeight: " << getFontHeight() << endl;
+        sout << "fontHeight: " << getFontHeight() << std::endl;
     }
 
     if (leftSide != 0 || topSide != 0) {
         indent(sout,i+j);
-        sout << "fontPosition: [ " << leftSide << " " << topSide << " ]" << endl;
+        sout << "fontPosition: [ " << leftSide << " " << topSide << " ]" << std::endl;
     }
 
     if (getBitmapWidth() > 0) {
         indent(sout,i+j);
-        sout << "bitmapWidth: " << getBitmapWidth() << endl;
+        sout << "bitmapWidth: " << getBitmapWidth() << std::endl;
     }
 
     if (getBitmapHeight() > 0) {
         indent(sout,i+j);
-        sout << "bitmapHeight: " << getBitmapHeight() << endl;
+        sout << "bitmapHeight: " << getBitmapHeight() << std::endl;
     }
 
     if (fontDirectory() != 0) {
         indent(sout,i+j);
-        sout << "path: " << fontDirectory() << endl;
+        sout << "path: " << fontDirectory() << std::endl;
     }
 
     if (filename() != 0) {
         indent(sout,i+j);
-        sout << "file: " << filename() << endl;
+        sout << "file: " << filename() << std::endl;
     }
 
     if (lut() != 0) {
         indent(sout,i+j);
-        sout << "lut: [" << endl;
+        sout << "lut: [" << std::endl;
         indent(sout,i+j+10);
         int iiCount = 0;
         for (int ii = 0; ii < LUT_SIZE; ii++) {
             int vLUT = 0x000000FF & int(pLUT[ii]);
-            sout << hex << "0x" << vLUT << dec;
+            sout << std::hex << "0x" << vLUT << std::dec;
             iiCount++;
             if (iiCount == 256 && LUT_SIZE == 256) break;    // last one
             else if (iiCount % 64 == 0) {
-                sout << endl << endl;
+                sout << std::endl << std::endl;
                 indent(sout,i+j+10);
             }
             else if (iiCount % 16 == 0) {
-                sout << endl;
+                sout << std::endl;
                 indent(sout,i+j+10);
             }
             else if (iiCount % 4 == 0) sout << "  ";
             else sout << " ";
         }
-        sout << endl;
+        sout << std::endl;
         indent(sout,i+j+5);
-        sout << "]" << endl;
+        sout << "]" << std::endl;
     }
 
 
@@ -274,7 +272,7 @@ std::ostream& Font::serialize(std::ostream& sout, const int i, const bool slotsO
 
     if ( !slotsOnly ) {
     	indent(sout,i);
-    	sout << ")" << endl;
+    	sout << ")" << std::endl;
     }
 
     return sout;

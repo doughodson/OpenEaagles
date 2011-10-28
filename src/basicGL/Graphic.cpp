@@ -1428,12 +1428,10 @@ Basic::Object* Graphic::getSlotByIndex(const int si)
 //------------------------------------------------------------------------------
 std::ostream& Graphic::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
-    using namespace std;
-
     int j = 0;
     if ( !slotsOnly ) {
         //indent(sout,i);
-        sout << "( " << getFormName() << endl;
+        sout << "( " << getFormName() << std::endl;
         j = 4;
     }
 
@@ -1450,33 +1448,33 @@ std::ostream& Graphic::serialize(std::ostream& sout, const int i, const bool slo
             Basic::Color* cc = (Basic::Color*) color;
             cc->serialize(sout,i+j);
         }
-        sout << endl;
+        sout << std::endl;
     }
 
     if (linewidth > 0.0) {
         indent(sout,i+j);
         sout << "linewidth: ";
         sout << linewidth;
-        sout << endl;
+        sout << std::endl;
     }
 
     if ( isFlashing() ) {
         indent(sout,i+j);
-        sout << "flashRate: " << getFlashRate() << endl;
+        sout << "flashRate: " << getFlashRate() << std::endl;
     }
 
     if (transforms != 0) {
         indent(sout,i+j);
-        sout << "transform: {" << endl;
+        sout << "transform: {" << std::endl;
         transforms->serialize(sout,i+j+4,slotsOnly);
         indent(sout,i+j);
-        sout << "}" << endl;
+        sout << "}" << std::endl;
     }
 
     if (nv > 0) {
         indent(sout,i+j);
         sout << "vertices: ";
-        sout << "{ " << endl;;
+        sout << "{ " << std::endl;;
         for (unsigned int ii = 0; ii < nv; ii++) {
             indent(sout,i+j+4);
             sout << "[ ";
@@ -1484,16 +1482,16 @@ std::ostream& Graphic::serialize(std::ostream& sout, const int i, const bool slo
             sout << vertices[ii][1] << " ";
             sout << vertices[ii][2] << " ";
             sout << " ]";
-            sout << endl;
+            sout << std::endl;
         }
         indent(sout,i+j);
-        sout << "}" << endl;;
+        sout << "}" << std::endl;;
     }
 
     if (nn > 0) {
         indent(sout,i+j);
         sout << "normals: ";
-        sout << "{ " << endl;;
+        sout << "{ " << std::endl;;
         for (unsigned int ii = 0; ii < nn; ii++) {
             indent(sout,i+j+4);
             sout << "[ ";
@@ -1501,49 +1499,49 @@ std::ostream& Graphic::serialize(std::ostream& sout, const int i, const bool slo
             sout << norms[ii][1] << " ";
             sout << norms[ii][2] << " ";
             sout << " ]";
-            sout << endl;
+            sout << std::endl;
         }
         indent(sout,i+j);
-        sout << "}" << endl;;
+        sout << "}" << std::endl;;
     }
 
     if (ntc > 0) {
         indent(sout,i+j);
         sout << "texCoord: ";
-        sout << "{ " << endl;;
+        sout << "{ " << std::endl;;
         for (unsigned int ii = 0; ii < ntc; ii++) {
             indent(sout,i+j+4);
             sout << "[ ";
             sout << texCoord[ii][0] << " ";
             sout << texCoord[ii][1] << " ";
             sout << " ]";
-            sout << endl;
+            sout << std::endl;
         }
         indent(sout,i+j);
-        sout << "}" << endl;;
+        sout << "}" << std::endl;;
     }
 
     if (noDisplayList) {
         indent(sout,i+j);
-        sout << "noDisplayList: 1" << endl;;
+        sout << "noDisplayList: 1" << std::endl;;
     }
 
     if (postDraw) {
         indent(sout,i+j);
-        sout << "setSlotSubcomponentsFirst: 1" << endl;;
+        sout << "setSlotSubcomponentsFirst: 1" << std::endl;;
     }
 
     if (getSelectName() > 0) {
         int name = (int) getSelectName();
         indent(sout,i+j);
-        sout << "selectName: " << name << endl;
+        sout << "selectName: " << name << std::endl;
     }
 
     BaseClass::serialize(sout,i+j,true);
 
     if ( !slotsOnly ) {
         indent(sout,i);
-        sout << ")" << endl;
+        sout << ")" << std::endl;
     }
 
     return sout;

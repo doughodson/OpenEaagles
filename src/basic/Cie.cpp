@@ -18,8 +18,8 @@ IMPLEMENT_SUBCLASS(Cie,"cie")
 BEGIN_SLOTTABLE(Cie)
     "luminance", // 1: ... Luminance component, range(0.0 to 1.0)
     "x",         // 2: ... X component, range(0.0 to 1.0)
-	"y",         // 3: ... Y component, range(0.0 to 1.0)
-	"monitor",   // 4: ... Characteristics of intended display
+    "y",         // 3: ... Y component, range(0.0 to 1.0)
+    "monitor",   // 4: ... Characteristics of intended display
 END_SLOTTABLE(Cie)
 
 // Map slot table to handles 
@@ -68,7 +68,7 @@ void Cie::copyData(const Cie& org, const bool cc)
 
 void Cie::deleteData()
 {
-	monitor = 0;
+   monitor = 0;
 }
 
 
@@ -141,7 +141,7 @@ bool Cie::setMonitor(MonitorMetrics* const msg)
 {
     if (msg == 0) return false;
     monitor = msg;
-	cie2rgb(color,cie,monitor);
+    cie2rgb(color,cie,monitor);
     return true;
 }
 
@@ -158,10 +158,10 @@ Object* Cie::getSlotByIndex(const int si)
 //------------------------------------------------------------------------------
 void Cie::cie2rgb(osg::Vec4& rgb, const osg::Vec3& cie, const MonitorMetrics* m)
 {
-	if ( m == 0 )
-		return;
+   if ( m == 0 )
+      return;
 
-	m->cie2rgb(rgb, cie);
+   m->cie2rgb(rgb, cie);
 }
 
 //------------------------------------------------------------------------------
@@ -169,26 +169,24 @@ void Cie::cie2rgb(osg::Vec4& rgb, const osg::Vec3& cie, const MonitorMetrics* m)
 //------------------------------------------------------------------------------
 std::ostream& Cie::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
-    using namespace std;
-
     int j = 0;
     if ( !slotsOnly ) {
-        sout << "( " << getFormName() << endl;
+        sout << "( " << getFormName() << std::endl;
         j = 4;
     }
 
     indent(sout,i+j);
-    sout << "Luminance: " << luminance() << endl;
+    sout << "Luminance: " << luminance() << std::endl;
 
     indent(sout,i+j);
-    sout << "X:         " << x() << endl;
+    sout << "X:         " << x() << std::endl;
 
     indent(sout,i+j);
-    sout << "Y:         " << y() << endl;
+    sout << "Y:         " << y() << std::endl;
 
     if ( !slotsOnly ) {
         indent(sout,i);
-        sout << ")" << endl;
+        sout << ")" << std::endl;
     }
 
     return sout;

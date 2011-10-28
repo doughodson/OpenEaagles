@@ -2036,17 +2036,15 @@ Basic::Object* Display::getSlotByIndex(const int si)
 //------------------------------------------------------------------------------
 std::ostream& Display::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
-   using namespace std;
-
    int j = 0;
    if ( !slotsOnly ) {
-      sout << "( " << getFormName() << endl;
+      sout << "( " << getFormName() << std::endl;
       j = 4;
    }
 
    if (name != 0) {
       indent(sout,i+j);
-      sout << "name:" << *name << endl;
+      sout << "name:" << *name << std::endl;
    }
 
    // Orientation
@@ -2065,44 +2063,44 @@ std::ostream& Display::serialize(std::ostream& sout, const int i, const bool slo
    }
 
    indent(sout,i+j);
-   sout << "left: " << oLeft << endl;
+   sout << "left: " << oLeft << std::endl;
 
    indent(sout,i+j);
-   sout << "right: " << oRight << endl;
+   sout << "right: " << oRight << std::endl;
 
    indent(sout,i+j);
-   sout << "bottom: " << oBottom << endl;
+   sout << "bottom: " << oBottom << std::endl;
 
    indent(sout,i+j);
-   sout << "top: " << oTop << endl;
+   sout << "top: " << oTop << std::endl;
 
    indent(sout,i+j);
-   sout << "near: " << oNear << endl;
+   sout << "near: " << oNear << std::endl;
 
    indent(sout,i+j);
-   sout << "far: " << oFar << endl;
+   sout << "far: " << oFar << std::endl;
 
    indent(sout,i+j);
-   sout << "vpX: " << vpX << endl;
+   sout << "vpX: " << vpX << std::endl;
 
    indent(sout,i+j);
-   sout << "vpY: " << vpY << endl;
+   sout << "vpY: " << vpY << std::endl;
 
    indent(sout,i+j);
-   sout << "vpWidth: " << vpWidth << endl;
+   sout << "vpWidth: " << vpWidth << std::endl;
 
    indent(sout,i+j);
-   sout << "vpHeight: " << vpHeight << endl;
+   sout << "vpHeight: " << vpHeight << std::endl;
 
    indent(sout,i+j);
-   sout << "colorTable: {" << endl;
+   sout << "colorTable: {" << std::endl;
    colorTable->serialize(sout,i+j+4,slotsOnly);
    indent(sout,i+j);
-   sout << "}" << endl;
+   sout << "}" << std::endl;
 
    if (getNormalFont() != 0) {
       indent(sout,i+j);
-      sout << "normalFont:" << endl;
+      sout << "normalFont:" << std::endl;
       indent(sout,i+j+4);
       getNormalFont()->serialize(sout,i+j+4);
    }
@@ -2124,20 +2122,20 @@ std::ostream& Display::serialize(std::ostream& sout, const int i, const bool slo
    }
 
    indent(sout,i+j);
-   sout << "leftBracketChar: " << getLeftBracketCharacter() << endl;
+   sout << "leftBracketChar: " << getLeftBracketCharacter() << std::endl;
 
    indent(sout,i+j);
-   sout << "rightBracketChar: " << getRightBracketCharacter() << endl;
+   sout << "rightBracketChar: " << getRightBracketCharacter() << std::endl;
 
    indent(sout,i+j);
-   sout << "reverseVideoBrackets: " << getReverseVideoBrackets() << endl;
+   sout << "reverseVideoBrackets: " << getReverseVideoBrackets() << std::endl;
 
 
    BaseClass::serialize(sout,i+j,true);
 
    if ( !slotsOnly ) {
       indent(sout,i);
-      sout << ")" << endl;
+      sout << ")" << std::endl;
    }
 
    return sout;

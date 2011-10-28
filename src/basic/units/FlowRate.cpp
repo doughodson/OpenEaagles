@@ -189,17 +189,16 @@ Object* FlowRate::getSlotByIndex(const int si)
 // serialize() -- print the value of this object to the output stream sout.
 //------------------------------------------------------------------------------
 std::ostream& FlowRate::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{    
-    using namespace std;
+{
     int j = 0;
     if (!slotsOnly) {
-        sout << "( " << getFormName() << endl;
+        sout << "( " << getFormName() << std::endl;
         // tab here
         j = 4;
     }
     
     indent(sout, i+j);
-    sout << "value: " << flowRate << endl;
+    sout << "value: " << flowRate << std::endl;
     
     if (myVolume != 0) {
         indent(sout, i+j);
@@ -214,7 +213,7 @@ std::ostream& FlowRate::serialize(std::ostream& sout, const int i, const bool sl
         mt->serialize(sout, i+j);
     }
     
-    sout << ")" << endl;
+    sout << ")" << std::endl;
         
     return sout;
 }
