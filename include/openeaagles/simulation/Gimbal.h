@@ -174,7 +174,7 @@ public:  // Public section
    // is 1/10th of a degree.
    virtual bool isPositioned(const double tol = -1) const;
 
-   // Returns true if the gimbal is at a 'phyisical' limit
+   // Returns true if the gimbal is at a 'physical' limit
    virtual bool isAtLimits() const;
 
    const osg::Vec3d& getRates() const { return rate; }         // Returns the current rate vector (rad/sec)
