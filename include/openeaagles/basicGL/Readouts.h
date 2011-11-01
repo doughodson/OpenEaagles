@@ -315,6 +315,8 @@ class LatitudeReadout : public DirectionReadout {
 public:
     LatitudeReadout();
     virtual char filterInputEvent(const int event, const int tc);
+protected:
+   virtual void makeText();
 };
 
 
@@ -330,6 +332,8 @@ class LongitudeReadout : public DirectionReadout {
 public:
     LongitudeReadout();
     virtual char filterInputEvent(const int event, const int tc);
+protected:
+   virtual void makeText();
 };
 
 
