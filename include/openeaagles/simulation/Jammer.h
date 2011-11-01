@@ -23,7 +23,7 @@ public:
     Jammer();
 
     // RfSystem interface
-    virtual void rfReceivedEmission(Emission* const em, Antenna* const ra, const LCreal raGain);
+    //virtual void rfReceivedEmission(Emission* const em, Antenna* const ra, const LCreal raGain);
 
 protected:
     // System Interface -- phase callbacks

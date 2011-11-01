@@ -23,6 +23,14 @@ class Emission : public SensorMsg
    DECLARE_SUBCLASS(Emission,SensorMsg)
 
 public:
+   // ECM enumerations (can be expanded by derived classes)
+   enum {
+      ECM_OFF,
+      ECM_NOISE,
+      ECM_LAST       // Hook for subclasses to expand
+   };
+
+public:
    Emission();
 
    // Frequency (hz)
@@ -128,10 +136,13 @@ public:
    void setTransmitter(RfSystem* const t);
 
    // ECM emission flag (this is an ECM emission)
-   bool isECM() const { return ecmFlag; }
+   //bool isECM() const { return ecmFlag; }
+   bool isECM() const { return (ecmFlag!=ECM_OFF); }
+   virtual bool isECMType(const unsigned int ecm) const { return (ecmFlag==ecm); }
 
    // Sets the ECM emission flag
-   void setECM(const bool b) { ecmFlag = b; }
+   //void setECM(const bool b) { ecmFlag = b; }
+   virtual void setECM(const unsigned int b) { ecmFlag = b; }
 
    // SensorMsg class interface
    virtual void setRange(const LCreal r);   // Sets the range to the target (meters) (which we use to set the range loss)
@@ -152,7 +163,8 @@ private:
    LCreal          rcs;            // Radar Cross Section (RCS)        (m^2)
    Antenna::Polarization polar;    // Antenna polarization             (enum)
    RfSystem*       transmitter;    // The system that transmitted the emission
-   bool            ecmFlag;        // ECM flag
+   //bool            ecmFlag;        // ECM flag
+   unsigned int    ecmFlag;        // ECM enumeration
 };
 
 } // End Simulation namespace

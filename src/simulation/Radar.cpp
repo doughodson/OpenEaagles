@@ -244,8 +244,8 @@ void Radar::receive(const LCreal dt)
    lcUnlock(packetLock);
 
    while (em != 0) {
-
-      if (em->getTransmitter() == this) {
+      // exclude noise jammers (accounted for already in RfSystem::rfReceivedEmission)
+      if (em->getTransmitter() == this || (em->isECM() && !em->isECMType(Emission::ECM_NOISE)) ) {
 
          // compute the return trip loss ...
 

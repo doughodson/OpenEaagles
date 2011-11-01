@@ -24,6 +24,7 @@ Jammer::Jammer()
 {
     STANDARD_CONSTRUCTOR()
     setTransmitterEnableFlag(true);
+    setReceiverEnabledFlag(false);
     setTypeId("JAMMER");
 }
 
@@ -55,7 +56,7 @@ void Jammer::transmit(const LCreal)
         em->setBandwidth(getBandwidth());
         em->setTransmitter(this);
         em->setReturnRequest(false);
-        em->setECM(true);
+        em->setECM(Emission::ECM_NOISE);	// em->setECM(true);
         getAntenna()->rfTransmit(em);
         em->unref();
     }
@@ -64,9 +65,9 @@ void Jammer::transmit(const LCreal)
 //------------------------------------------------------------------------------
 // rfReceivedEmission() -- process returned RF Emission
 //------------------------------------------------------------------------------
-void Jammer::rfReceivedEmission(Emission* const, Antenna* const, LCreal)
-{
-}
+//void Jammer::rfReceivedEmission(Emission* const, Antenna* const, LCreal)
+//{
+//}
 
 } // End Simulation namespace
 } // End Eaagles namespace
