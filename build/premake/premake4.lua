@@ -44,6 +44,9 @@ solution "oe"
          buildoptions { "/Oi", "/Ot" }
          defines { "WIN32", "_LIB", "NDEBUG" }
       end
+      if (os.is("linux")) then
+         buildoptions { "-O3 -Wno-long-long -pthread" }
+      end
 
    -- common debug configuration flags and symbols
    configuration { "Debug" }
@@ -52,6 +55,9 @@ solution "oe"
          -- enable compilier intrinsics
          buildoptions { "/Oi" }
          defines { "WIN32", "_LIB", "_DEBUG" }
+      end
+      if (os.is("linux")) then
+         buildoptions { "-Wno-long-long -pthread" }
       end
 
    --
@@ -81,10 +87,16 @@ solution "oe"
          "../../include/openeaagles/basicGL/**.h",
          "../../src/basicGL/**.cpp"
       }
+      if (os.is("linux")) then
+      includedirs {
+         "/usr/include/freetype2"
+      }
+      else
       includedirs {
          "../../../OpenEaagles3rdParty/include",
          "../../../OpenEaagles3rdParty/include/freetype2"
       }
+      end
       defines { "FTGL_LIBRARY_STATIC" }
       configuration { "Release" }
          -- base filename for compiled binary target
@@ -165,12 +177,19 @@ solution "oe"
          "../../include/openeaagles/ioDevice/**.h",
          "../../src/ioDevice/**.cpp"
       }
+      if (os.is("linux")) then
+      excludes {
+         "../../src/ioDevice/windows/*",
+         "../../src/ioDevice/**eithley**.cpp"
+      }
+      else
       excludes {
          "../../src/ioDevice/linux/*"
       }
       includedirs {
          "../../../OpenEaagles3rdParty/include"
       }
+      end
       configuration { "Release" }
          -- base filename for compiled binary target
          targetname "oeioDevice"
@@ -270,10 +289,16 @@ solution "oe"
          "../../include/openeaagles/vehicles/**.h",
          "../../src/vehicles/**.cpp"
       }
+      if (os.is("linux")) then
+      includedirs {
+         "/usr/local/include/JSBSim"
+      }
+      else
       includedirs {
          "../../../OpenEaagles3rdParty/include",
          "../../../OpenEaagles3rdParty/include/JSBSim"
       }
+      end
       configuration { "Release" }
          -- base filename for compiled binary target
          targetname "oevehicles"
