@@ -16,10 +16,13 @@ solution "oe"
 
    -- destination directory for generated solution/project files
    location ("../" .. _ACTION)
-
+if (os.is("linux")) then
+   -- destination directory for compiled binary target
+   targetdir ("../../lib/linux")
+else
    -- destination directory for compiled binary target
    targetdir ("../../lib/".._ACTION)
-
+end
    -- creating static libraries
    kind "StaticLib"
 
