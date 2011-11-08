@@ -185,7 +185,6 @@ private:
    // (we keep these seperate because we need both of them)
    double outerRadius;         // radius of the outer circle's ring (screen units)
    double outerRadiusDC;       // radius if we are de-centered (screen units)
-   double myRadius;            // current radius being used; outer or decentered (screen units)
 
    double displacement;        // how far to translate up or down when centered/decentered (display units)
    bool   isCentered;          // flag for centering our map page
@@ -203,7 +202,7 @@ inline LCreal MapPage::getCosRefLat() const        { return (LCreal) cosineLatRe
 inline LCreal MapPage::getHeadingDeg() const       { return (LCreal) heading; }
 inline LCreal MapPage::getHeadingRad() const       { return (LCreal)(heading * Basic::Angle::D2RCC); }
 inline LCreal MapPage::getOuterRadius() const      { return (LCreal) outerRadius; }
-inline LCreal MapPage::getCurrentRadius() const    { return (LCreal) myRadius;  }
+inline LCreal MapPage::getCurrentRadius() const    { return (LCreal) ( isCentered ? outerRadius : outerRadiusDC);  }
 inline LCreal MapPage::getOuterRadiusDC() const    { return (LCreal) outerRadiusDC; }
 inline LCreal MapPage::getRange() const            { return (LCreal) range; }
 inline LCreal MapPage::getScale() const            { return (LCreal) nm2Screen; }
