@@ -1158,6 +1158,8 @@ struct VariableDatum {
    void swapBytes(){
       variableDatumID     = convertUInt32(variableDatumID);
       variableDatumLength = convertUInt32(variableDatumLength);
+   };
+
    unsigned int getSize()
    {	
       return variableDatumLength/8;

@@ -394,9 +394,9 @@ public:
 };
 
 //-----------------------------------
-// Start PDU
+// Acknowledge PDU
 
-class StartPDU{
+class AcknowledgePDU{
 public:
   void dumpData() const {
     std::cout << "------------------------------------------------" << std::endl;
