@@ -24,8 +24,9 @@ namespace Simulation {
 class Radar : public RfSensor  
 {
    DECLARE_SUBCLASS(Radar,RfSensor)
-
+public:
    static const unsigned int MAX_REPORTS = 100;         // Max number of reports (per scan)
+private:
    static const unsigned int NUM_SWEEPS = 121;          // Number of sweeps in Real-Beam display
    static const unsigned int PTRS_PER_SWEEP = 128;      // Number of points per sweep in RB display
 
@@ -84,6 +85,8 @@ private:
    int computeSweepIndex(const LCreal az);
    int computeRangeIndex(const LCreal rng);
 
+protected:
+   // allow subclasses to access and use report queue
    // Semaphore to protect 'rptQueue', 'rptSnQueue', 'reports' and 'rptMaxSn'
    mutable long myLock;
 
@@ -95,6 +98,8 @@ private:
    Emission*   reports[MAX_REPORTS];   // Best emission for this report
    LCreal      rptMaxSn[MAX_REPORTS];  // Signal/Nose value            (dB)
    unsigned int numReports;            // Number of reports this sweep
+
+private:
    bool        endOfScanFlg;           // End of scan flag
 
    LCreal      sweeps[NUM_SWEEPS][PTRS_PER_SWEEP];

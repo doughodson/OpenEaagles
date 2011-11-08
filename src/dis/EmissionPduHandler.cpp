@@ -438,6 +438,7 @@ bool EmissionPduHandler::updateIncoming(const EmissionSystem* const es, Nib* con
             // Standard search volume parameters
             antenna->setRefAzimuth( bd->parameterData.beamAzimuthCenter );
             antenna->setRefElevation( bd->parameterData.beamElevationCenter );
+            // note that beamElevationSweep corresponds to scanHeight; setSearchVolume is expecting el component to be scanHeight+.5*barspacing
             antenna->setSearchVolume( bd->parameterData.beamAzimuthSweep * 2.0f, bd->parameterData.beamElevationSweep * 2.0f);
          }
 
@@ -667,8 +668,15 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
 
          bd.beamParameterIndex = 0;
 
+#ifdef DISV7
+         bd.jammingTechnique.kind = 0;
+         bd.jammingTechnique.category = 0;
+         bd.jammingTechnique.subcat = 0;
+         bd.jammingTechnique.specific = 0;
+#else
          // For now ... no tracks or jamming data
          bd.jammingModeSequence    = 0;
+#endif
          bd.highDensityTracks      = EmitterBeamData::NOT_SELECTED;
          bd.numberOfTargetsInTrack = 0;
 

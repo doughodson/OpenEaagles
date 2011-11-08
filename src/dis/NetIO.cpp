@@ -74,6 +74,17 @@ const LCreal HRT_BEAT_TIMER = 5;                               //  seconds
 const LCreal DRA_POS_THRST_DFLT = 3.0;                         //  meters
 const LCreal DRA_ORIENT_THRST_DFLT = (LCreal)(3.0 * PI/180.0); //  radians
 
+// DISv7 default heartbeats   // DRAC-FAB
+const LCreal HBT_PDU_EE = 10;                                  //  seconds 
+const LCreal HBT_PDU_IFF = 10;                                 //  seconds 
+const LCreal HBT_PDU_RECEIVER = 60;                            //  seconds 
+const LCreal HBT_PDU_TRANSMITTER = 2;                          //  seconds 
+const LCreal HBT_TIMEOUT_MPLIER = 2.4;                         //  Multiplier
+
+// DISv7 default thresholds
+const LCreal EE_AZ_THRSH = (LCreal)(1.0 * PI/180.0);            //  radians
+const LCreal EE_EL_THRSH = (LCreal)(1.0 * PI/180.0);            //  radians
+
 //------------------------------------------------------------------------------
 // Slot table
 //------------------------------------------------------------------------------
@@ -1175,6 +1186,15 @@ bool NetIO::setMaxAge(const Basic::Time* const p, const unsigned char kind, cons
     }
     return ok;
 }
+
+// DISv7 additions
+LCreal NetIO::get_HBT_PDU_EE(void) const { return HBT_PDU_EE; }
+LCreal NetIO::get_HBT_TIMEOUT_MPLIER(void) const { return HBT_TIMEOUT_MPLIER; }
+LCreal NetIO::get_EE_AZ_THRSH(void) const { return EE_AZ_THRSH; }
+LCreal NetIO::get_EE_EL_THRSH(void) const { return EE_EL_THRSH; }
+
+
+
 
 // Adds an item to the emission PDU handler table
 void NetIO::addEmissionPduHandler(const EmissionPduHandler* const item)

@@ -250,8 +250,8 @@ void RfSystem::rfReceivedEmission(Emission* const em, Antenna* const, LCreal raG
          // Signal (equation 3-3)
          LCreal signal = em->getPower() * rl * raGain / losses;
 
-         // Noise Jammer -- add this signal to the total interferance signal (noise)
-         if (em->isECM()) {
+         // Noise Jammer -- add this signal to the total interference signal (noise)
+         if ( em->isECMType(Emission::ECM_NOISE) ) {
             // CGB part of the noise jamming equation says we're only affected by the ratio of the
             // transmitter and receiver bandwidths.
             // It's possible that we'll want to account for this in the signal calculation above.
