@@ -135,7 +135,7 @@ public:
    virtual bool updateIncoming(const EmissionSystem* const es, Nib* const nib);
    
    // tell input handler to disable its sensors due to timeout
-   virtual void setTimedOut(void);
+   virtual void setTimedOut();
 
    // Check to see if a PDU needs to be sent; returns true if a PDU was sent
    virtual bool updateOutgoing(const LCreal curExecTime, Nib* const nib);
@@ -151,7 +151,8 @@ public:
 protected:
     virtual unsigned short emissionSystemData2PDU(EmissionSystem* const es);
     virtual bool isUpdateRequired(const LCreal curExecTime, bool* const stateChg, Nib* const nib);
-   // allow subclasses access to these
+
+protected:   // (#temporary#) allow subclasses access to these
    EmissionSystem*  emissionSystem;                // Saved (n-1) Description of the Emitter System
    EmitterBeamData* emitterBeamData[MAX_EM_BEAMS]; // Saved (n-1) EmitterBeamData
    TrackJamTargets* tjTargets[MAX_EM_BEAMS][MAX_TARGETS_IN_TJ_FIELD];  // Saved (n-1) TrackJamTargets
@@ -172,9 +173,6 @@ private:
    SPtr<Simulation::Antenna>  antennaModel;        // Our template antenna model
 
    LCreal           emPduExecTime;                 // Exec time of last Emission PDU output (seconds)
-   //EmissionSystem*  emissionSystem;                // Saved (n-1) Descrption of the Emitter System
-   //EmitterBeamData* emitterBeamData[MAX_EM_BEAMS]; // Saved (n-1) EmitterBeamData
-   //TrackJamTargets* tjTargets[MAX_EM_BEAMS][MAX_TARGETS_IN_TJ_FIELD];  // Saved (n-1) TrackJamTargets
 };
 
 
@@ -197,7 +195,7 @@ inline const Simulation::Antenna* EmissionPduHandler::getAntennaModel() const { 
 inline bool EmissionPduHandler::isDefaultIncomingHandler() const     { return defaultIn; }
 inline bool EmissionPduHandler::isDefaultOutgoingHandler() const     { return defaultOut; }
 
-inline void EmissionPduHandler::setTimedOut(void) { return; }
+inline void EmissionPduHandler::setTimedOut()                        { }
 
 } // End Dis namespace
 } // End Network namespace

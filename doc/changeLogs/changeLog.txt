@@ -9,9 +9,4 @@ basicGL
       1) (bug fix) Fixed getCurrentRadius() to return the correct centered or
          decentered radius value
 
---------------------------------------------------------------------------------
-dafif
-
-   -- Reinstalled the Dafif and DafifDatabase files
-
 

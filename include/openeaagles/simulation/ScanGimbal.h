@@ -121,10 +121,12 @@ namespace Simulation {
 //          If 'reqBars' is zero or not provided, then the number of bars is
 //          computed based on default parameters.
 //
-//    options for slot-initializing a scan gimbal in bar scan:
-//    either set searchVolume slot and accept defaults it sets
-//    or, for more control, set barSpacing, numBars, and scanWidth slots - scan height will be calculated for you.
-//    if you mix the two, you're likely to get unexpected results.
+// Notes:
+//    1) Options for slot-initializing a scan gimbal in bar scan:
+//       either set searchVolume slot and accept defaults it sets
+//       or, for more control, set barSpacing, numBars, and scanWidth
+//       slots - scan height will be calculated for you.  if you mix
+//       the two, you're likely to get unexpected results.
 //
 //------------------------------------------------------------------------------
 class ScanGimbal : public Gimbal  

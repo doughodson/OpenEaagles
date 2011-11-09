@@ -56,18 +56,11 @@ void Jammer::transmit(const LCreal)
         em->setBandwidth(getBandwidth());
         em->setTransmitter(this);
         em->setReturnRequest(false);
-        em->setECM(Emission::ECM_NOISE);	// em->setECM(true);
+        em->setECM(Emission::ECM_NOISE);
         getAntenna()->rfTransmit(em);
         em->unref();
     }
 }
-
-//------------------------------------------------------------------------------
-// rfReceivedEmission() -- process returned RF Emission
-//------------------------------------------------------------------------------
-//void Jammer::rfReceivedEmission(Emission* const, Antenna* const, LCreal)
-//{
-//}
 
 } // End Simulation namespace
 } // End Eaagles namespace

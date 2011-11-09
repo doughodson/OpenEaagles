@@ -1188,12 +1188,10 @@ bool NetIO::setMaxAge(const Basic::Time* const p, const unsigned char kind, cons
 }
 
 // DISv7 additions
-LCreal NetIO::get_HBT_PDU_EE(void) const { return HBT_PDU_EE; }
-LCreal NetIO::get_HBT_TIMEOUT_MPLIER(void) const { return HBT_TIMEOUT_MPLIER; }
-LCreal NetIO::get_EE_AZ_THRSH(void) const { return EE_AZ_THRSH; }
-LCreal NetIO::get_EE_EL_THRSH(void) const { return EE_EL_THRSH; }
-
-
+LCreal NetIO::getHbtPduEe() const         { return HBT_PDU_EE; }
+LCreal NetIO::getHbtTimeoutMplier() const { return HBT_TIMEOUT_MPLIER; }
+LCreal NetIO::getEeAzThrsh() const        { return EE_AZ_THRSH; }
+LCreal NetIO::getEeElThrsh() const        { return EE_EL_THRSH; }
 
 
 // Adds an item to the emission PDU handler table

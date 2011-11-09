@@ -136,12 +136,10 @@ public:
    void setTransmitter(RfSystem* const t);
 
    // ECM emission flag (this is an ECM emission)
-   //bool isECM() const { return ecmFlag; }
    bool isECM() const { return (ecmFlag!=ECM_OFF); }
    virtual bool isECMType(const unsigned int ecm) const { return (ecmFlag==ecm); }
 
    // Sets the ECM emission flag
-   //void setECM(const bool b) { ecmFlag = b; }
    virtual void setECM(const unsigned int b) { ecmFlag = b; }
 
    // SensorMsg class interface
@@ -163,7 +161,6 @@ private:
    LCreal          rcs;            // Radar Cross Section (RCS)        (m^2)
    Antenna::Polarization polar;    // Antenna polarization             (enum)
    RfSystem*       transmitter;    // The system that transmitted the emission
-   //bool            ecmFlag;        // ECM flag
    unsigned int    ecmFlag;        // ECM enumeration
 };
 

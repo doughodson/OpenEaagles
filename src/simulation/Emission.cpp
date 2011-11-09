@@ -35,7 +35,7 @@ Emission::Emission()
     rcs = 0.0;
     polar = Antenna::NONE;
     transmitter = 0;
-    ecmFlag = ECM_OFF;  //false;
+    ecmFlag = ECM_OFF;
 }
 
 

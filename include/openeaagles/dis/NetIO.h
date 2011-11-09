@@ -274,10 +274,10 @@ public:
    virtual Simulation::Nib* createNewOutputNib(Simulation::Player* const player);
 
    // DIS v7 additions
-   virtual LCreal get_HBT_PDU_EE(void) const ;
-   virtual LCreal get_HBT_TIMEOUT_MPLIER(void) const ;
-   virtual LCreal get_EE_AZ_THRSH(void) const ;
-   virtual LCreal get_EE_EL_THRSH(void) const ;
+   virtual LCreal getHbtPduEe() const;
+   virtual LCreal getHbtTimeoutMplier() const;
+   virtual LCreal getEeAzThrsh() const;
+   virtual LCreal getEeElThrsh() const;
 
 protected:
    virtual void processEntityStatePDU(const EntityStatePDU* const pdu);

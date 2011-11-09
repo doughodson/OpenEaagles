@@ -441,9 +441,6 @@ bool Station::shutdownNotification()
          item = item->getNext();
       }
    }
-   // wait on this until after shutdown event is fully propagated
-   // net thread userfunc was seeing effect of this (& crashing) before it saw shutdown
-   //setSlotNetworks(0);
 
    // Tell the I/O devices that we're shutting down
    if (ioHandlers != 0) {
