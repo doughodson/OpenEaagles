@@ -524,7 +524,7 @@ unsigned int Tdb::computeBoresightData()
    }
 
    // ---
-   // Get gibmal coordinate component arrays and x-y range squared
+   // Get gimbal coordinate component arrays and x-y range squared
    // ---
    double xa[Gimbal::MAX_PLAYERS];
    double ya[Gimbal::MAX_PLAYERS];

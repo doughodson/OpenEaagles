@@ -279,6 +279,25 @@ int TrackManager::getTrackList(SPtr<Track>* const tlist, const unsigned int max)
 }
 
 //------------------------------------------------------------------------------
+// getTrackList() -- Sets entries in 'tlist' to a maximum of 'max' target
+//                  tracks and returns the actual number of tracks.
+//------------------------------------------------------------------------------
+int TrackManager::getTrackList(SPtr<const Track>* const tlist, const unsigned int max) const
+{
+   int n = 0;
+
+   if (tlist != 0) {
+      lcLock(trkListLock);
+      for (unsigned int i = 0; i < nTrks && i < max; i++) {
+         tlist[n++] = tracks[i];
+      }
+      lcUnlock(trkListLock);
+   }
+
+   return n;
+}
+
+//------------------------------------------------------------------------------
 // getTrackList() -- returns the track list as an array of pointers
 //------------------------------------------------------------------------------
 int TrackManager::getTrackList(Track* tlist[], const unsigned int max)

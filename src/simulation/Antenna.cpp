@@ -157,6 +157,7 @@ void Antenna::process(const LCreal dt)
    // ---
    lcLock(inUseEmLock);
       int n = inUseEmQueue.entries();
+   //std::cout << "antenna::process, inUseEmQueue before n= " << n << std::endl;
    for (int i = 0; i < n; i++) {
          Emission* em = inUseEmQueue.get();
          if (em != 0) {
@@ -178,6 +179,7 @@ void Antenna::process(const LCreal dt)
             }
          }
       }
+   //std::cout << "antenna::process, inUseEmQueue after n= " << inUseEmQueue.entries() << std::endl;
    lcUnlock(inUseEmLock);
 }
 
@@ -424,7 +426,7 @@ void Antenna::rfTransmit(Emission* const xmit)
 
       // Compute antenna effective gain
       double aeGain[MAX_PLAYERS];
-      multArrayConst(gainTgt, gain, aeGain, ntgts);
+      multArrayConst(gainTgt, getGain(), aeGain, ntgts);
 
       // Compute Effective Radiated Power (watts) (Equation 2-1)
       double erp[MAX_PLAYERS];
@@ -480,7 +482,7 @@ void Antenna::rfTransmit(Emission* const xmit)
                em->setPolarization(getPolarization());
                em->setLocalPlayersOnly( isLocalPlayersOfInterestOnly() );
 
-               // c) Send the emisison to the target
+               // c) Send the emission to the target
                targets[i]->event(RF_EMISSION, em);
 
                // d) Dispose of the emission
@@ -637,8 +639,8 @@ bool Antenna::onRfEmissionEvent(Emission* const em)
          // Compute off-boresight gain
          double rGain = pow(10.0,rGainDb/10.0);
 
-         //Compute Antenna Effective Gain
-         double aeGain = rGain * gain;
+         // Compute Antenna Effective Gain
+         double aeGain = rGain * getGain();
          double lambda = em->getWavelength();
          double aea = getEffectiveArea(aeGain, lambda);
 
