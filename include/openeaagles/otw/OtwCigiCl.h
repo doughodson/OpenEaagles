@@ -388,9 +388,10 @@ protected:
    bool createCigiProcess();        // Create the CIGI network thread
    bool initCigiNetwork();          // Initialize the network
 
-private:    
    SPtr<Basic::NetHandler>   netInput;    // Input network handler
    SPtr<Basic::NetHandler>   netOutput;   // Output network handler
+
+private: 
    SPtr<Basic::Thread>       thread;      // The thread
    bool   networkInitialized;               // CIGI has been initialized
    bool   networkInitFailed;                // CIGI initialization has failed

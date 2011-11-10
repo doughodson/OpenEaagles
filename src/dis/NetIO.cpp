@@ -366,6 +366,66 @@ void NetIO::netInputHander()
                                  }
                                  break;
 
+				case PDU_START_RESUME: {
+					StartPDU* pPdu = (StartPDU*)header;
+					if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
+					if (getSiteID() != pPdu->sendingEntityID.simulationID.siteIdentification ||
+						getApplicationID() != pPdu->sendingEntityID.simulationID.applicationIdentification) {
+						processStartPDU(pPdu);
+					}
+				}
+				break;
+
+				case PDU_STOP_FREEZE: {
+					StopPDU* pPdu = (StopPDU*)header;
+					if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
+					if (getSiteID() != pPdu->sendingEntityID.simulationID.siteIdentification ||
+						getApplicationID() != pPdu->sendingEntityID.simulationID.applicationIdentification) {
+						processStopPDU(pPdu);
+					}
+				}
+				break;
+
+				case PDU_ACKNOWLEDGE: {
+					AcknowledgePDU* pPdu = (AcknowledgePDU*)header;
+					if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
+					if (getSiteID() != pPdu->sendingEntityID.simulationID.siteIdentification ||
+						getApplicationID() != pPdu->sendingEntityID.simulationID.applicationIdentification) {
+						processAcknowledgePDU(pPdu);
+					}
+				}
+				break;
+
+				case PDU_ACTION_REQUEST: {
+					ActionRequestPDU* pPdu = (ActionRequestPDU*)header;
+					if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
+					if (getSiteID() != pPdu->emittingEntityID.simulationID.siteIdentification ||
+						getApplicationID() != pPdu->emittingEntityID.simulationID.applicationIdentification) {
+						processActionRequestPDU(pPdu);
+					}
+				}
+				break; 
+
+				case PDU_ACTION_REQUEST_R: {
+					ActionRequestPDU_R* pPdu = (ActionRequestPDU_R*)header;
+					if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
+					if (getSiteID() != pPdu->emittingEntityID.simulationID.siteIdentification ||
+						getApplicationID() != pPdu->emittingEntityID.simulationID.applicationIdentification) {
+						processActionRequestPDU_R(pPdu);
+					}
+				}
+				break;
+
+				case PDU_ACTION_RESPONSE_R: {
+					ActionResponsePDU_R* pPdu = (ActionResponsePDU_R*)header;
+					if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
+					if (getSiteID() != pPdu->emittingEntityID.simulationID.siteIdentification ||
+						getApplicationID() != pPdu->emittingEntityID.simulationID.applicationIdentification) {
+						processActionResponsePDU_R(pPdu);
+					}
+				}
+				break;
+
                default: {
                   // Note: users will need to do their own byte swapping and checks
                   processUserPDU(header);
@@ -445,6 +505,54 @@ bool NetIO::processDataPDU(const DataPDU* const)
 bool NetIO::processCommentPDU(const CommentPDU* const)
 {
    return true;
+}
+
+//------------------------------------------------------------------------------
+// processStartPDU() callback -- 
+//------------------------------------------------------------------------------
+bool NetIO::processStartPDU(const Eaagles::Network::Dis::StartPDU* const startPdu)
+{
+    return true;
+}
+
+//------------------------------------------------------------------------------
+// processStopPDU() callback -- 
+//------------------------------------------------------------------------------
+bool NetIO::processStopPDU(const Eaagles::Network::Dis::StopPDU* const stopPdu)
+{
+     return true;
+}
+
+//------------------------------------------------------------------------------
+// processAcknowledgePDU() callback -- 
+//------------------------------------------------------------------------------
+bool NetIO::processAcknowledgePDU(const Eaagles::Network::Dis::AcknowledgePDU* const ackPdu)
+{
+    return true;
+}
+
+//------------------------------------------------------------------------------
+// processActionRequestPDU() callback -- 
+//------------------------------------------------------------------------------
+bool NetIO::processActionRequestPDU(const Eaagles::Network::Dis::ActionRequestPDU* const actionPdu)
+{
+    return true;
+}
+
+//------------------------------------------------------------------------------
+// processActionRequestPDU_R() callback -- 
+//------------------------------------------------------------------------------
+bool NetIO::processActionRequestPDU_R(const Eaagles::Network::Dis::ActionRequestPDU_R* const actionPdu)
+{
+    return true;
+}
+
+//------------------------------------------------------------------------------
+// processActionResponsePDU_R() callback -- 
+//------------------------------------------------------------------------------
+bool NetIO::processActionResponsePDU_R(const Eaagles::Network::Dis::ActionResponsePDU_R* const responsePdu)
+{
+    return true;
 }
 
 //------------------------------------------------------------------------------
