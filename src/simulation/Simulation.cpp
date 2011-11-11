@@ -1196,71 +1196,92 @@ bool Simulation::setSlotPlayers(Basic::PairStream* const pl)
       return true;
    }
 
-    bool ok = true;
+   bool ok = true;
+   unsigned short maxID=0;
 
-    // First, make sure they are all Players.
-    {
-        Basic::List::Item* item = pl->getFirstItem();
-        while (item != 0 && ok) {
-            Basic::Pair* pair = (Basic::Pair*) item->getValue();
-            item = item->getNext();
-            Player* ip = dynamic_cast<Player*>( pair->object() );
-            if (ip == 0) {
-                // Item is NOT a Eaagle::Player
-                std::cerr << "Simulation::setSlotPlayers: slot: " << *pair->slot() << " is NOT of a Player type!" << std::endl;
-                ok = false;
+   // First, make sure they are all Players.
+   {
+      Basic::List::Item* item = pl->getFirstItem();
+      while (item != 0 && ok) {
+         Basic::Pair* pair = (Basic::Pair*) item->getValue();
+         item = item->getNext();
+         Player* ip = dynamic_cast<Player*>( pair->object() );
+         if (ip == 0) {
+            // Item is NOT a Eaagle::Player
+            std::cerr << "Simulation::setSlotPlayers: slot: " << *pair->slot() << " is NOT of a Player type!" << std::endl;
+            ok = false;
+         }
+         else {
+            // find the max ID# of players with preassigned IDs
+            if (ip->getID() > maxID)
+               maxID = ip->getID();
+         }
+      }
+   }
+
+   // increment to next available ID
+   maxID++;
+
+   // Next, make sure we have unique player names and IDs
+   if (ok) {
+      // For all players ...
+      Basic::List::Item* item1 = pl->getFirstItem();
+      while (item1 != 0) {
+         Basic::Pair* pair1 = (Basic::Pair*) item1->getValue();
+         item1 = item1->getNext();
+         Player* ip1 = (Player*)( pair1->object() );
+
+         // unassigned ID
+         if ( (ip1->getID() == 0) && (maxID < 65535) ) {
+            ip1->setID(maxID);
+            ++maxID;
+         }
+
+         Basic::List::Item* item2 = item1;
+         while (item2 != 0) {
+            Basic::Pair* pair2 = (Basic::Pair*) item2->getValue();
+            Player* ip2 = (Player*)( pair2->object() );
+
+            // unassigned ID
+            if ( (ip2->getID() == 0)  && (maxID < 65535) ) {
+               ip2->setID(maxID);
+               ++maxID;
             }
-        }
-    }
-    
-    // Next, make sure we have unique player names and IDs
-    if (ok) {
-        // For all players ...
-        Basic::List::Item* item1 = pl->getFirstItem();
-        while (item1 != 0) {
-            Basic::Pair* pair1 = (Basic::Pair*) item1->getValue();
-            item1 = item1->getNext();
-            Player* ip1 = (Player*)( pair1->object() );
-            
-            Basic::List::Item* item2 = item1;
-            while (item2 != 0) {
-                Basic::Pair* pair2 = (Basic::Pair*) item2->getValue();
-                Player* ip2 = (Player*)( pair2->object() );
-                
-                if (ip1->getID() == ip2->getID()) {
-                    std::cerr << "Simulation::setSlotPlayers: duplicate player ID: " << ip1->getID() << std::endl;
-                    ok = false;                    
-                }
-                
-                if (*pair1->slot() == *pair2->slot()) {
-                    std::cerr << "Simulation::setSlotPlayers: duplicate player name: " << *pair1->slot() << std::endl;
-                    ok = false;                    
-                }
-                
-                item2 = item2->getNext();
+
+            if (ip1->getID() == ip2->getID()) {
+               std::cerr << "Simulation::setSlotPlayers: duplicate player ID: " << ip1->getID() << std::endl;
+               ok = false;                    
             }
-            
-        }
-    }
+
+            if (*pair1->slot() == *pair2->slot()) {
+               std::cerr << "Simulation::setSlotPlayers: duplicate player name: " << *pair1->slot() << std::endl;
+               ok = false;                    
+            }
+
+            item2 = item2->getNext();
+         }
+
+      }
+   }
 
    // Next, set the container pointer, set the player's name
    // and setup the player lists.
-    if (ok) {
-        Basic::List::Item* item = pl->getFirstItem();
-        while (item != 0) {
-            Basic::Pair* pair = (Basic::Pair*) item->getValue();
-            item = item->getNext();
-            Player* ip = (Player*)( pair->object() );
-            ip->container(this);
-            ip->setName(*pair->slot());
-        }
+   if (ok) {
+      Basic::List::Item* item = pl->getFirstItem();
+      while (item != 0) {
+         Basic::Pair* pair = (Basic::Pair*) item->getValue();
+         item = item->getNext();
+         Player* ip = (Player*)( pair->object() );
+         ip->container(this);
+         ip->setName(*pair->slot());
+      }
 
       // Set the original player list pointer
-        origPlayers = pl;
-        
+      origPlayers = pl;
+
       // Create the new active player list
       Basic::PairStream* newList( new Basic::PairStream() );
-        
+
       // Copy original players to the new list
       if (origPlayers != 0) {
          SPtr<Basic::PairStream> origPlayerList = origPlayers;
@@ -1270,14 +1291,14 @@ bool Simulation::setSlotPlayers(Basic::PairStream* const pl)
             insertPlayerSort(pair, newList);
             item = item->getNext();
          }
-    }
-        
+      }
+
       // Set the active player list pointer
       players = newList;
       newList->unref();
-    }
+   }
 
-    return ok;
+   return ok;
 }
 
 //------------------------------------------------------------------------------

@@ -441,7 +441,6 @@ bool Station::shutdownNotification()
          item = item->getNext();
       }
    }
-   setSlotNetworks(0);
 
    // Tell the I/O devices that we're shutting down
    if (ioHandlers != 0) {
@@ -482,10 +481,17 @@ bool Station::shutdownNotification()
    netThread = 0;
    bgThread = 0;
 
+   // propagate shutdown event to base/component, and all subcomponents
+   bool shutdown = BaseClass::shutdownNotification();
+
+   // probably should move all setSlot...(0) lines here,
+   // but networks was the only obviously crashing problem
+   setSlotNetworks(0);
+
    // remove the reset timer
    setSlotStartupResetTime(0);
 
-   return BaseClass::shutdownNotification();
+   return shutdown;
 }
 
 

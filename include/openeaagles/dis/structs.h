@@ -8,6 +8,8 @@
 
 #include <iostream>
 
+//#define DISV7
+
 namespace Eaagles {
 namespace Network {
 namespace Dis {
@@ -1737,6 +1739,195 @@ struct FundamentalParameterData {
 
 };
 
+#ifdef DISV7
+
+// DISv7 compatibility
+//-----------------------------------------------
+// JammingTechnique Record
+//-----------------------------------------------
+struct JammingTechnique {
+   unsigned char kind;                // Jamming technique kind
+   unsigned char category;            // Jamming technique category
+   unsigned char subcat;              // Jamming technique subcategory
+   unsigned char specific;            // Jamming technique specific
+
+   // Constructor(s)
+   JammingTechnique() : kind(0), category(0), subcat(0), specific(0) {}
+
+   // Assignment operator
+   void operator=(const JammingTechnique& _v) {
+      kind = _v.kind;
+      category = _v.category;
+      subcat = _v.subcat;
+      specific = _v.specific;
+   }
+
+   // Compare to another EmitterSystem structure
+   bool operator==(const JammingTechnique& s2) const {
+      return (
+         kind == s2.kind && 
+         category == s2.category && 
+         subcat == s2.subcat &&
+         specific == s2.specific
+         );
+   }
+   bool operator!=(const JammingTechnique& a) const {
+      return !(*this == a);
+   }
+
+   // Swap bytes 'to' or 'from' the network.
+   void swapBytes() {}
+
+   // Friendly print functions
+   friend std::ostream& operator << ( std::ostream& s, const JammingTechnique& v ) {
+      s  << "kind:                 " << (long)v.kind << std::endl
+         << "category:                    " << (long)v.category << std::endl
+         << "subcat: " << (long)v.subcat << std::endl
+         << "specific: " << (long)v.specific << std::endl;
+
+      return s;
+   }
+
+   friend std::ostream& operator << ( std::ostream& s, const JammingTechnique* const v ) {
+      if ( v == 0 )
+         return s;
+      else {
+         s << *v;
+      }
+      return s;
+   }
+
+};
+
+//-----------------------------------
+// Emitter Beam Data
+//-----------------------------------
+struct EmitterBeamData {
+
+   // Enum for highDensityTracks, (see IST-CF-03-01, May 5, 2003, Sec 8.1.5)
+   enum { NOT_SELECTED, SELECTED };
+
+   unsigned char            beamDataLength;        // Length of this beam data, in 32bit words, including the track/jam targets
+   unsigned char            beamIDNumber;          // Unique ID for this beam
+   uint16_t                 beamParameterIndex;    // Use for the lookup of stored database parameters
+   FundamentalParameterData parameterData;         // Parameter data
+   unsigned char            beamFunction;          // Beam function enum (see IST-CF-03-01, May 5, 2003, Sec 8.1.4)
+   unsigned char            numberOfTargetsInTrack; // Number of track/jam targets that will follow
+   unsigned char            highDensityTracks;     // High Density Tracks flag 
+   unsigned char            beamStatus;            // Beam active/inactive flag DRAC-FAB
+   //uint32_t             jammingModeSequence;   // Jamming techniques
+   JammingTechnique         jammingTechnique;
+
+   // Constructor(s)
+   EmitterBeamData() :
+      beamDataLength(0), beamIDNumber(0), beamParameterIndex(0), parameterData(),
+      beamFunction(0), numberOfTargetsInTrack(0), highDensityTracks(0), beamStatus(0),
+      jammingTechnique() { }
+      //jammingModeSequence(0) { }
+
+   // Assignment operator
+   void operator=(const EmitterBeamData& _v) {
+      beamDataLength = _v.beamDataLength;
+      beamIDNumber = _v.beamIDNumber;
+      beamParameterIndex = _v.beamParameterIndex;
+      parameterData = _v.parameterData;
+      beamFunction = _v.beamFunction;
+      numberOfTargetsInTrack = _v.numberOfTargetsInTrack;
+      highDensityTracks = _v.highDensityTracks;
+      beamStatus = _v.beamStatus;
+      //jammingModeSequence = _v.jammingModeSequence;
+      jammingTechnique = _v.jammingTechnique;
+   }
+
+   // Returns a pointer to the idx'th TrackJamTarget structure;
+   // Note: This ONLY works after the numberOfTargetsInTrack have been initialized!
+   // Note: 'idx' is zero based, so a idx == 1 will return the second TrackJamTargets structure
+   TrackJamTargets* getTrackTarget(const int idx) {
+      TrackJamTargets* tjt = 0;
+      if (idx < numberOfTargetsInTrack) {
+         unsigned char* p = ((unsigned char*)this) + sizeof(*this) + (sizeof(TrackJamTargets) * idx);
+         tjt = (TrackJamTargets*) p;	   
+      }
+      return tjt;
+   }
+   const TrackJamTargets* getTrackTarget(const int idx) const {
+      const TrackJamTargets* tjt = 0;
+      if (idx < numberOfTargetsInTrack) {
+         unsigned char* p = ((unsigned char*)this) + sizeof(*this) + (sizeof(TrackJamTargets) * idx);
+         tjt = (const TrackJamTargets*) p;	   
+      }
+      return tjt;
+   }
+
+   // Compare to another EmitterBeamData structure
+   bool operator==(const EmitterBeamData& s2) const {
+      return (
+         beamDataLength == s2.beamDataLength && 
+         beamIDNumber == s2.beamIDNumber && 
+         beamParameterIndex == s2.beamParameterIndex && 
+         parameterData == s2.parameterData && 
+         beamFunction == s2.beamFunction && 
+         numberOfTargetsInTrack == s2.numberOfTargetsInTrack && 
+         highDensityTracks == s2.highDensityTracks && 
+         jammingTechnique == s2.jammingTechnique
+         //jammingModeSequence == s2.jammingModeSequence
+         );
+   }
+   bool operator!=(const EmitterBeamData& a) const {
+      return !(*this == a);
+   }
+
+   // Swap bytes 'to' or 'from' the network.
+   void swapBytes() {
+      // Swap our stuff first
+      beamParameterIndex  = convertUInt16(beamParameterIndex);
+      parameterData.swapBytes();
+      jammingTechnique.swapBytes();
+      //jammingModeSequence = convertUInt(jammingModeSequence);
+
+      // Then swap the "targets in track" data
+      for (int i = 0; i < numberOfTargetsInTrack; i++) {
+         TrackJamTargets* tjt = getTrackTarget(i);
+         if (tjt != 0) tjt->swapBytes();
+      }
+   }
+
+   // Friendly print function
+   friend std::ostream& operator << ( std::ostream& s, const EmitterBeamData& v ) {
+      s  << "  beamDataLength:         " << (long)v.beamDataLength << std::endl
+         << "  beamIDNumber:           " << (long)v.beamIDNumber << std::endl
+         << "  beamParameterIndex:     " << (long)v.beamParameterIndex << std::endl
+         << "Parameter Data:           " << std::endl << v.parameterData << std::endl
+         << "  beamFunction:           " << (long)v.beamFunction << std::endl
+         << "  numberOfTargetsInTrack: " << (long)v.numberOfTargetsInTrack << std::endl
+         << "  highDensityTracks:      " << (long)v.highDensityTracks << std::endl
+         << "  jammingTechnique:       " << v.jammingTechnique << std::endl;
+         //<< "  jammingModeSequence:    " << (long)v.jammingModeSequence << std::endl;
+
+      for(int i=0; i < v.numberOfTargetsInTrack; i++)
+      {
+         const TrackJamTargets* tgt = v.getTrackTarget(i); 
+         if (tgt != 0) {
+            s  << "-----------------------------------------" << std::endl
+               << "Target: " << i
+               << tgt  
+               << "-----------------------------------------" << std::endl;
+         }
+      }
+
+      return s;
+   }
+
+   friend std::ostream& operator << ( std::ostream& s, const EmitterBeamData* const v ) {
+      if ( v == 0 )
+         return s;
+      else {
+         s << *v;
+      }
+      return s;
+   }
+};
+#else
 
 //-----------------------------------
 // Emitter Beam Data
@@ -1860,6 +2051,7 @@ struct EmitterBeamData {
    }
 };
 
+#endif
 
 //-----------------------------------------------
 // Emitter System Record

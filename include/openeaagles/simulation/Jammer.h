@@ -22,9 +22,6 @@ class Jammer : public RfSensor
 public:
     Jammer();
 
-    // RfSystem interface
-    virtual void rfReceivedEmission(Emission* const em, Antenna* const ra, const LCreal raGain);
-
 protected:
     // System Interface -- phase callbacks
     virtual void transmit(const LCreal dt);

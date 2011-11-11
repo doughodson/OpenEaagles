@@ -54,6 +54,7 @@ namespace Dis {
 //                                        !   4 => DIS PDU version 2.0 - fourth draft (revised) March 16, 1994
 //                                        !   5 => IEEE 1278.1-1995
 //                                        !   6 => IEEE 1278.1A-1998
+//                                        !   7 => IEEE 1278.1-200X
 //
 //    siteID         <Basic::Number>      ! Site Identification    
 //    applicationID  <Basic::Number>      ! Application Identification
@@ -160,6 +161,7 @@ public:
          VERSION_204,      // DIS PDU version 2.0 - fourth draft (revised) March 16, 1994
          VERSION_1278_1,   // IEEE 1278.1-1995
          VERSION_1278_1A,  // IEEE 1278.1A-1998
+         VERSION_7,        // IEEE 1278.1-200X
          VERSION_MAX,      // Max version numbers
     };
 
@@ -270,6 +272,12 @@ public:
    virtual LCreal getMaxOrientationErr(const Simulation::Nib* const nib) const;
    virtual LCreal getMaxAge(const Simulation::Nib* const nib) const;
    virtual Simulation::Nib* createNewOutputNib(Simulation::Player* const player);
+
+   // DIS v7 additions
+   virtual LCreal getHbtPduEe() const;
+   virtual LCreal getHbtTimeoutMplier() const;
+   virtual LCreal getEeAzThrsh() const;
+   virtual LCreal getEeElThrsh() const;
 
 protected:
    virtual void processEntityStatePDU(const EntityStatePDU* const pdu);

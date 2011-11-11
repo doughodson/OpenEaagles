@@ -48,6 +48,7 @@ public:
    virtual unsigned int getNumTracks() const;
 
    virtual int getTrackList(SPtr<Track>* const slist, const unsigned int max) const;
+   virtual int getTrackList(SPtr<const Track>* const slist, const unsigned int max) const;
 
    // Note: Tracks have been ref() before being returned and need to
    // be unref() by the user.
