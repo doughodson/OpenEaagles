@@ -1162,8 +1162,7 @@ struct VariableDatum {
       variableDatumLength = convertUInt32(variableDatumLength);
    };
 
-   unsigned int getSize()
-   {	
+   unsigned int getSize() {	
       return variableDatumLength/8;
    };
 

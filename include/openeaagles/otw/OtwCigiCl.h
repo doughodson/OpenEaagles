@@ -53,8 +53,7 @@ class OtwModelCigiCl;
 class CigiClNetworkSignalProcessing;
 
 //------------------------------------------------------------------------------
-// Class:	OtwCigiCl
-// Base class:	Basic::Object -> Component -> Otw -> OtwCigiCl
+// Class: OtwCigiCl
 //
 // Description: Boeing's Common Image Generator Interface (CIGI)
 //
@@ -78,7 +77,7 @@ class CigiClNetworkSignalProcessing;
 //------------------------------------------------------------------------------
 class OtwCigiCl : public Simulation::Otw
 {
-    DECLARE_SUBCLASS(OtwCigiCl,Simulation::Otw)
+   DECLARE_SUBCLASS(OtwCigiCl,Simulation::Otw)
 
 public:
    static const unsigned int NUM_BUFFERS = 2;
@@ -148,131 +147,131 @@ public:
    virtual void reset();
 
 protected:
-    enum LIFE_FORM_STATE { DEAD = 0, STANDING = 1, WALK = 2, RUN = 3 };
+   enum LIFE_FORM_STATE { DEAD = 0, STANDING = 1, WALK = 2, RUN = 3 };
 
-    virtual bool updateOwnshipModel();          // update the ownship model; returns true if ok
-    virtual int updateModels();                 // update the other models; returns number of active models
+   virtual bool updateOwnshipModel();          // update the ownship model; returns true if ok
+   virtual int updateModels();                 // update the other models; returns number of active models
 
-    // Access functions
-    CigiIGCtrlV3* getIgControlPacket()                   { return igc; }
-    CigiLosVectReqV3* getLosRangeRequestPacket()      { return los; }
-    CigiViewCtrlV3* getViewControlPacket()               { return view; }
-	CigiSensorCtrlV3* getSensorControlPacket()        { return sensor; }
-    CigiViewDefV3* getViewDefinitionPacket()         { return fov; }
-    CigiCompCtrlV3* getOwnshipComponentControlPacket(const unsigned int buffer) {
-        return (buffer < NUM_BUFFERS ? ownshipCC[buffer] : 0);
-    }
-    CigiEntityCtrlV3* getOwnshipEntityControlPacket(const unsigned int buffer) { 
-       return (buffer < NUM_BUFFERS ? ownshipEC[buffer] : 0);
-    }
+   // Access functions
+   CigiIGCtrlV3* getIgControlPacket()                   { return igc; }
+   CigiLosVectReqV3* getLosRangeRequestPacket()      { return los; }
+   CigiViewCtrlV3* getViewControlPacket()               { return view; }
+   CigiSensorCtrlV3* getSensorControlPacket()        { return sensor; }
+   CigiViewDefV3* getViewDefinitionPacket()         { return fov; }
+   CigiCompCtrlV3* getOwnshipComponentControlPacket(const unsigned int buffer) {
+      return (buffer < NUM_BUFFERS ? ownshipCC[buffer] : 0);
+   }
+   CigiEntityCtrlV3* getOwnshipEntityControlPacket(const unsigned int buffer) { 
+      return (buffer < NUM_BUFFERS ? ownshipEC[buffer] : 0);
+   }
 
-    unsigned int getWriteBuffer() const { return iw; }      // Write buffer index
-    unsigned int getLastWriteBuffer() const { return iw0; } // Last write buffer index
-    unsigned int getReadBuffer() const { return ir; }       // Read index {returns index or NUM_BUFFERS if not valid)
-    void swapReadBuffer() { if (iw0 < NUM_BUFFERS) ir = iw0; } // Swap the read buffer
+   unsigned int getWriteBuffer() const { return iw; }      // Write buffer index
+   unsigned int getLastWriteBuffer() const { return iw0; } // Last write buffer index
+   unsigned int getReadBuffer() const { return ir; }       // Read index {returns index or NUM_BUFFERS if not valid)
+   void swapReadBuffer() { if (iw0 < NUM_BUFFERS) ir = iw0; } // Swap the read buffer
 
-    bool isIgResetRequested() const { return resetRequest; }
-    void clearIgResetRequest() { resetRequest = false; } 
+   bool isIgResetRequested() const { return resetRequest; }
+   void clearIgResetRequest() { resetRequest = false; } 
 
-    unsigned short getNexLosId() { return ++losReqId; }
-    bool isNewLosequested() const { return newLosReq; }
-    void losRequestSend();          // LOS request has been sent to the IG
+   unsigned short getNexLosId() { return ++losReqId; }
+   bool isNewLosequested() const { return newLosReq; }
+   void losRequestSend();          // LOS request has been sent to the IG
 
-    void elevationRequestSend();    // Elevation request has been sent to the IG
+   void elevationRequestSend();    // Elevation request has been sent to the IG
 
-    // Get Line of sight data from previous request
-    virtual bool getLineOfSightData(
-            double* const lat,      // Point latitude         (deg)
-            double* const lon,      // Point longitude        (deg)
-            double* const alt,      // Point altitude         (m)
-            LCreal* const rng,      // Range to point         (m)
-	    int* const material     // Material code - not used in Cigi V3, returns 0
-         );
+   // Get Line of sight data from previous request
+   virtual bool getLineOfSightData(
+      double* const lat,      // Point latitude         (deg)
+      double* const lon,      // Point longitude        (deg)
+      double* const alt,      // Point altitude         (m)
+      LCreal* const rng,      // Range to point         (m)
+      int* const material     // Material code - not used in Cigi V3, returns 0
+      );
 
-    // Issue a new light of sight request
-    virtual bool lineOfSightRequest(
-            const double lat,          // Source latitude         (deg)
-            const double lon,          // Source longitude        (deg)
-            const double alt,          // Source altitude         (m)
-            const LCreal hdg,          // Source heading          (deg)
-            const LCreal pitch,        // Source pitch            (deg)
-            const LCreal minRange,     // Request minimum range   (m)
-            const LCreal maxRange      // Request maximum range   (m)
-         );
+   // Issue a new light of sight request
+   virtual bool lineOfSightRequest(
+      const double lat,          // Source latitude         (deg)
+      const double lon,          // Source longitude        (deg)
+      const double alt,          // Source altitude         (m)
+      const LCreal hdg,          // Source heading          (deg)
+      const LCreal pitch,        // Source pitch            (deg)
+      const LCreal minRange,     // Request minimum range   (m)
+      const LCreal maxRange      // Request maximum range   (m)
+      );
 
-    // Set functions
-    virtual bool setViewControlPacket(CigiViewCtrlV3* const p);
-    virtual bool setViewDefinitionPacket(CigiViewDefV3* const p);
-    virtual bool setSensorControlPacket(CigiSensorCtrlV3* const p);
+   // Set functions
+   virtual bool setViewControlPacket(CigiViewCtrlV3* const p);
+   virtual bool setViewDefinitionPacket(CigiViewDefV3* const p);
+   virtual bool setSensorControlPacket(CigiSensorCtrlV3* const p);
 
-    // Otw Interface
-    virtual void sendOwnshipAndModels();    // Send state data for ownship and models
-    virtual void sendElevationRequests();   // Sends terrain height requests
-    virtual void recvElevations();          // Receives terrain height data
-    virtual void frameSync();               // Send frame sync (if any)
-    virtual Simulation::OtwModel* modelFactory();       // Create OtwModel objects unique to interface
-    virtual Simulation::OtwModel* hotFactory();         // Create OtwHot objects unique to interface
+   // Otw Interface
+   virtual void sendOwnshipAndModels();    // Send state data for ownship and models
+   virtual void sendElevationRequests();   // Sends terrain height requests
+   virtual void recvElevations();          // Receives terrain height data
+   virtual void frameSync();               // Send frame sync (if any)
+   virtual Simulation::OtwModel* modelFactory();       // Create OtwModel objects unique to interface
+   virtual Simulation::OtwModel* hotFactory();         // Create OtwHot objects unique to interface
 
-    virtual bool setAirVehicleData(OtwModelCigiCl* const m, const unsigned short entity, const Simulation::AirVehicle* const p);
-    virtual bool setBuildingData(OtwModelCigiCl* const m, const unsigned short entity, const Simulation::Building* const p);
-    virtual bool setEffectsData(OtwModelCigiCl* const m, const unsigned short entity, const Simulation::Effects* const p);
-    virtual bool setGndVehicleData(OtwModelCigiCl* const m, const unsigned short entity, const Simulation::GroundVehicle* const p);
-    virtual bool setLifeFormData(OtwModelCigiCl* const m, const unsigned short entity, const Simulation::LifeForm* const p);
-    virtual bool setMissileData(OtwModelCigiCl* const m, const unsigned short entity, const Simulation::Missile* const p);
-    virtual bool setShipData(OtwModelCigiCl* const m, const unsigned short entity, const Simulation::Ship* const p);
-    virtual bool setSpaceVehicleData(OtwModelCigiCl* const m, const unsigned short entity, const Simulation::SpaceVehicle* const p);
-    virtual bool setWeaponData(OtwModelCigiCl* const m, const unsigned short entity, const Simulation::Weapon* const p);
-    virtual bool setCommonModelData(CigiEntityCtrlV3* const ec, const unsigned short entity, const Simulation::Player* const p);
+   virtual bool setAirVehicleData(OtwModelCigiCl* const m, const unsigned short entity, const Simulation::AirVehicle* const p);
+   virtual bool setBuildingData(OtwModelCigiCl* const m, const unsigned short entity, const Simulation::Building* const p);
+   virtual bool setEffectsData(OtwModelCigiCl* const m, const unsigned short entity, const Simulation::Effects* const p);
+   virtual bool setGndVehicleData(OtwModelCigiCl* const m, const unsigned short entity, const Simulation::GroundVehicle* const p);
+   virtual bool setLifeFormData(OtwModelCigiCl* const m, const unsigned short entity, const Simulation::LifeForm* const p);
+   virtual bool setMissileData(OtwModelCigiCl* const m, const unsigned short entity, const Simulation::Missile* const p);
+   virtual bool setShipData(OtwModelCigiCl* const m, const unsigned short entity, const Simulation::Ship* const p);
+   virtual bool setSpaceVehicleData(OtwModelCigiCl* const m, const unsigned short entity, const Simulation::SpaceVehicle* const p);
+   virtual bool setWeaponData(OtwModelCigiCl* const m, const unsigned short entity, const Simulation::Weapon* const p);
+   virtual bool setCommonModelData(CigiEntityCtrlV3* const ec, const unsigned short entity, const Simulation::Player* const p);
 
 private:    
-    SPtr<CigiCl> cigi;                      // CIGI handler (direct, networked, ...)
-    bool   asyncMode;                     // Running in ASYNC mode if true
-    bool   hideOwn;                       // Hide ownship model flag
+   SPtr<CigiCl> cigi;                      // CIGI handler (direct, networked, ...)
+   bool   asyncMode;                     // Running in ASYNC mode if true
+   bool   hideOwn;                       // Hide ownship model flag
 
-    bool   resetRequest;                  // IG reset request
-    unsigned short entityIdCount;         // Entity ID count
-    unsigned short elevReqIdCount;        // Elevation request ID count
+   bool   resetRequest;                  // IG reset request
+   unsigned short entityIdCount;         // Entity ID count
+   unsigned short elevReqIdCount;        // Elevation request ID count
 
-    // Terrain elevation request data
-    bool    elevReqFlg;                   // Elevation request flag
-    LCreal  elevReqTimer;                 // Elevation request timer
+   // Terrain elevation request data
+   bool    elevReqFlg;                   // Elevation request flag
+   LCreal  elevReqTimer;                 // Elevation request timer
 
-    // Line of sight (LOS) data
-    double  losRespLat;                   // LOS Response latitude intersection point (deg)
-    double  losRespLon;                   // LOS Response longitude intersection point (deg)
-    double  losRespAlt;                   // LOS Response altitude intersection point (m)
-    LCreal  losRespRange;                 // LOS response range (m)
-    unsigned short losRespId;             // LOS Response ID
-    bool    losRespDataValid;             // LOS response data is valid flag
-    unsigned short losReqId;              // LOS Request ID
-    bool    newLosReq;                    // New LOS request flag
-    LCreal  losReqTimer;                  // LOS request timer
+   // Line of sight (LOS) data
+   double  losRespLat;                   // LOS Response latitude intersection point (deg)
+   double  losRespLon;                   // LOS Response longitude intersection point (deg)
+   double  losRespAlt;                   // LOS Response altitude intersection point (m)
+   LCreal  losRespRange;                 // LOS response range (m)
+   unsigned short losRespId;             // LOS Response ID
+   bool    losRespDataValid;             // LOS response data is valid flag
+   unsigned short losReqId;              // LOS Request ID
+   bool    newLosReq;                    // New LOS request flag
+   LCreal  losReqTimer;                  // LOS request timer
 
-    // CIGI entity data buffers
-    unsigned int iw;                      // Write buffer index
-    unsigned int iw0;                     // Last write buffer index
-    unsigned int ir;                      // Read index
+   // CIGI entity data buffers
+   unsigned int iw;                      // Write buffer index
+   unsigned int iw0;                     // Last write buffer index
+   unsigned int ir;                      // Read index
 
-    // Packets
-    CigiEntityCtrlV3*	ownshipEC[NUM_BUFFERS];	// Ownship entity control packet
-    CigiCompCtrlV3*	ownshipCC[NUM_BUFFERS];	// ownship component control packet
-    CigiIGCtrlV3*	igc;			// IG control packet
-    CigiLosVectReqV3*	los;			// LOS request packet
-    CigiViewCtrlV3*	view;			// View control packet (optional, set by derived classes)
-    CigiViewDefV3*	fov;			// FOV defination packet (optional, set by derived classes
-	CigiSensorCtrlV3* sensor;       // Sensor Control packet
+   // Packets
+   CigiEntityCtrlV3* ownshipEC[NUM_BUFFERS]; // Ownship entity control packet
+   CigiCompCtrlV3*   ownshipCC[NUM_BUFFERS]; // ownship component control packet
+   CigiIGCtrlV3*     igc;                    // IG control packet
+   CigiLosVectReqV3* los;                    // LOS request packet
+   CigiViewCtrlV3*   view;                   // View control packet (optional, set by derived classes)
+   CigiViewDefV3*    fov;                    // FOV defination packet (optional, set by derived classes
+   CigiSensorCtrlV3* sensor;                 // Sensor Control packet
 
-    // special model IDs
-    unsigned short cmtOwnship;             // Ownship's model ID
-    unsigned short cmtMslTrail;            // "Missile Trail" effect model ID 
-    unsigned short cmtSmokePlume;          // "Smoke Plume" effect model ID
-    unsigned short cmtAirExplosion;        // "Air Explosion" effect model ID
-    unsigned short cmtGroundExplosion;     // "GroundE xplosion" effect model ID
-    unsigned short cmtShipWake;            // "Ship Wake" effect model ID
+   // special model IDs
+   unsigned short cmtOwnship;             // Ownship's model ID
+   unsigned short cmtMslTrail;            // "Missile Trail" effect model ID 
+   unsigned short cmtSmokePlume;          // "Smoke Plume" effect model ID
+   unsigned short cmtAirExplosion;        // "Air Explosion" effect model ID
+   unsigned short cmtGroundExplosion;     // "GroundE xplosion" effect model ID
+   unsigned short cmtShipWake;            // "Ship Wake" effect model ID
 
-    // CIGI init support
-    bool cigiInitialized;            // CIGI has been initialized
-    bool cigiInitFailed;             // CIGI initialization has failed
+   // CIGI init support
+   bool cigiInitialized;            // CIGI has been initialized
+   bool cigiInitFailed;             // CIGI initialization has failed
 };
 
 //------------------------------------------------------------------------------
@@ -283,7 +282,7 @@ private:
 //------------------------------------------------------------------------------
 class CigiCl : public Basic::Component
 {
-    DECLARE_SUBCLASS(CigiCl,Basic::Component)
+   DECLARE_SUBCLASS(CigiCl,Basic::Component)
 
 public:
    CigiCl();
@@ -327,19 +326,19 @@ protected:
    static CigiCl* getSession(const int id) { return (id >= 0 && id < MAX_SESSIONS) ? sessions[id] : 0; }
 
 private:
-    OtwCigiCl* otwCigi;   // Our parent OtwCigiCl
-                        // (no need to ref(), it owns us and it's not going to be deleted before us)
+   OtwCigiCl* otwCigi;   // Our parent OtwCigiCl
+   // (no need to ref(), it owns us and it's not going to be deleted before us)
 
-    CigiHostSession*	session;
+   CigiHostSession* session;
 
-    // Static table of CIGI session objects ...
-    static const int MAX_SESSIONS = 8;
-    static CigiCl* sessions[MAX_SESSIONS];
+   // Static table of CIGI session objects ...
+   static const int MAX_SESSIONS = 8;
+   static CigiCl* sessions[MAX_SESSIONS];
 
-    // CIGI init support
-    static bool initCigi();                 // init the CIGI static system
-    static bool cigiInitialized;            // CIGI has been initialized
-    static bool cigiInitFailed;             // CIGI initialization has failed
+   // CIGI init support
+   static bool initCigi();                 // init the CIGI static system
+   static bool cigiInitialized;            // CIGI has been initialized
+   static bool cigiInitFailed;             // CIGI initialization has failed
 };
 
 //------------------------------------------------------------------------------
@@ -355,10 +354,16 @@ private:
 //------------------------------------------------------------------------------
 class CigiClNetwork : public CigiCl
 {
-    DECLARE_SUBCLASS(CigiClNetwork,CigiCl)
+   DECLARE_SUBCLASS(CigiClNetwork,CigiCl)
 
 public:
    CigiClNetwork();
+
+   // get a pre-ref'd pointer to the network input handler
+   virtual Basic::NetHandler* getInputHandler();
+
+   // get a pre-ref'd pointer to the network output handler
+   virtual Basic::NetHandler* getOutputHandler();
 
    // Set Slot functions
    virtual bool setSlotNetInput(Basic::NetHandler* const msg);
@@ -388,17 +393,16 @@ protected:
    bool createCigiProcess();        // Create the CIGI network thread
    bool initCigiNetwork();          // Initialize the network
 
+private:    
    SPtr<Basic::NetHandler>   netInput;    // Input network handler
    SPtr<Basic::NetHandler>   netOutput;   // Output network handler
-
-private: 
    SPtr<Basic::Thread>       thread;      // The thread
    bool   networkInitialized;               // CIGI has been initialized
    bool   networkInitFailed;                // CIGI initialization has failed
 
-    CigiIncomingMsg* msgIn;
-    CigiOutgoingMsg* msgOut;
-    CigiClNetworkSignalProcessing* sigProcessor;
+   CigiIncomingMsg* msgIn;
+   CigiOutgoingMsg* msgOut;
+   CigiClNetworkSignalProcessing* sigProcessor;
 };
 
 //------------------------------------------------------------------------------
@@ -408,44 +412,44 @@ private:
 //------------------------------------------------------------------------------
 class OtwModelCigiCl : public Simulation::OtwModel
 {
-    DECLARE_SUBCLASS(OtwModelCigiCl,Simulation::OtwModel)
+   DECLARE_SUBCLASS(OtwModelCigiCl,Simulation::OtwModel)
 
 public:
-    OtwModelCigiCl();
+   OtwModelCigiCl();
 
-    // OtwModel interface
-    virtual void clear();
-    virtual void initialize(Simulation::Player* const p);
+   // OtwModel interface
+   virtual void clear();
+   virtual void initialize(Simulation::Player* const p);
 
-    unsigned short getID() const          { return id; }
-    void setID(const unsigned short i)    { id = i; }
+   unsigned short getID() const          { return id; }
+   void setID(const unsigned short i)    { id = i; }
 
-// private: or at least should have been!
-    CigiEntityCtrlV3* parentEC[OtwCigiCl::NUM_BUFFERS];    // (entity_id)   Our main entity
-    CigiEntityCtrlV3* trailEC[OtwCigiCl::NUM_BUFFERS];     // (entity_id+1) Trails (missile, smoke, wake, etc.)
-    CigiEntityCtrlV3* explosionEC[OtwCigiCl::NUM_BUFFERS]; // (entity_id+2) Expolsions (air or ground)
-    CigiEntityCtrlV3* smokeEC[OtwCigiCl::NUM_BUFFERS];     // (entity_id+3) Smoke from damage
-    CigiCompCtrlV3* damageCC[OtwCigiCl::NUM_BUFFERS];    // Damage Component Control (CC)
-    CigiCompCtrlV3* animationCC[OtwCigiCl::NUM_BUFFERS]; // animation component control
-    CigiEntityCtrlV3* attachedEC[OtwCigiCl::NUM_BUFFERS];  // (entity_id+4) Attached missile
-    CigiArtPartCtrlV3* launcherAPC[OtwCigiCl::NUM_BUFFERS];  // Entity's launcher Articulated Part Control (APC)
-    CigiCompCtrlV3* attachedCC[OtwCigiCl::NUM_BUFFERS];  // attached missile component control
+   // private: or at least should have been!
+   CigiEntityCtrlV3* parentEC[OtwCigiCl::NUM_BUFFERS];    // (entity_id)   Our main entity
+   CigiEntityCtrlV3* trailEC[OtwCigiCl::NUM_BUFFERS];     // (entity_id+1) Trails (missile, smoke, wake, etc.)
+   CigiEntityCtrlV3* explosionEC[OtwCigiCl::NUM_BUFFERS]; // (entity_id+2) Expolsions (air or ground)
+   CigiEntityCtrlV3* smokeEC[OtwCigiCl::NUM_BUFFERS];     // (entity_id+3) Smoke from damage
+   CigiCompCtrlV3* damageCC[OtwCigiCl::NUM_BUFFERS];    // Damage Component Control (CC)
+   CigiCompCtrlV3* animationCC[OtwCigiCl::NUM_BUFFERS]; // animation component control
+   CigiEntityCtrlV3* attachedEC[OtwCigiCl::NUM_BUFFERS];  // (entity_id+4) Attached missile
+   CigiArtPartCtrlV3* launcherAPC[OtwCigiCl::NUM_BUFFERS];  // Entity's launcher Articulated Part Control (APC)
+   CigiCompCtrlV3* attachedCC[OtwCigiCl::NUM_BUFFERS];  // attached missile component control
 
-    bool parentActive;
-    bool trailActive;
-    bool explosionActive;
-    bool smokeActive;
-    bool damageActive;
-    bool animationActive;
-    bool attachedEcActive;
-    bool launcherApcActive;
-    bool attachedCcActive;
+   bool parentActive;
+   bool trailActive;
+   bool explosionActive;
+   bool smokeActive;
+   bool damageActive;
+   bool animationActive;
+   bool attachedEcActive;
+   bool launcherApcActive;
+   bool attachedCcActive;
 
-    bool isGroundPlayer;
-    LCreal effectsTimer;
+   bool isGroundPlayer;
+   LCreal effectsTimer;
 
 private:
-    // Entity ID  
+   // Entity ID  
    unsigned short id;
 };
 

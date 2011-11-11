@@ -254,8 +254,6 @@ public:
     location.swapBytes();
     burst.swapBytes();
     locationInEntityCoordinates.swapBytes();
-    for(int i=0;i<numberOfArticulationParameters;i++)
-      articulationPart[i].swapBytes();
   };
 
   PDUHeader              header;
@@ -270,7 +268,6 @@ public:
   unsigned char		 detonationResult;
   unsigned char		 numberOfArticulationParameters;
   uint16_t            padding;
-  ArticulationParameter *articulationPart;
 
   void dumpData() const {
     WorldCoordinates loc;

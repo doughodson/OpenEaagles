@@ -3,10 +3,27 @@ Changes since v11.10
 ================================================================================
 
 --------------------------------------------------------------------------------
+basic
+
+   NavDR class
+      1) removed function getRpyVector()
+      2) deadReckoning() function is now using  Basic::Nav::computeEulerAngles()
+         instead of getRpyVector()
+
+
+--------------------------------------------------------------------------------
 basicGL
 
    MapPage class
       1) (bug fix) Fixed getCurrentRadius() to return the correct centered or
          decentered radius value
+
+--------------------------------------------------------------------------------
+simulation
+
+   Nib class
+      1) removed function drComputeEulerAngles()
+      2) mainDeadReckoning() function is now using Basic::Nav::computeEulerAngles()
+         instead of drComputeEulerAngles()
 
 
