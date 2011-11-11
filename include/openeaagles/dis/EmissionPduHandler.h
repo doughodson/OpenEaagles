@@ -90,6 +90,11 @@ public:
       BF_NAV_DIRECTIONAL_BEACON        = 17
    };
 
+   enum BeamStatusCode {
+      BS_ACTIVE                        =  0,
+      BS_INACTIVE                      =  1
+   };
+
 public:
    EmissionPduHandler();
 
@@ -195,7 +200,7 @@ inline const Simulation::Antenna* EmissionPduHandler::getAntennaModel() const { 
 inline bool EmissionPduHandler::isDefaultIncomingHandler() const     { return defaultIn; }
 inline bool EmissionPduHandler::isDefaultOutgoingHandler() const     { return defaultOut; }
 
-inline void EmissionPduHandler::setTimedOut()                        { }
+//inline void EmissionPduHandler::setTimedOut()                        { }
 
 } // End Dis namespace
 } // End Network namespace

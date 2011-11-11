@@ -11,6 +11,7 @@
 #include "openeaagles/simulation/TrackManager.h"
 #include "openeaagles/simulation/Jammer.h"
 #include "openeaagles/simulation/Radar.h"
+#include "openeaagles/simulation/Simulation.h"
 #include "openeaagles/basic/Decibel.h"
 #include "openeaagles/basic/Functions.h"
 #include "openeaagles/basic/NetHandler.h"
@@ -320,6 +321,24 @@ Basic::Object* EmissionPduHandler::getSlotByIndex(const int si)
     return BaseClass::getSlotByIndex(si);
 }
 
+
+#ifdef DISV7
+//------------------------------------------------------------------------------
+// setTimedOut() -- incoming player has not sent EE PDU recently
+//------------------------------------------------------------------------------
+void EmissionPduHandler::setTimedOut(void)
+{ 
+   Simulation::RfSensor* rfSys = getSensor();
+   if (rfSys != 0) {
+      rfSys->setTransmitterEnableFlag(false);
+      rfSys->setReceiverEnabledFlag(false);
+   }
+   return; 
+}
+#else
+void EmissionPduHandler::setTimedOut()                        { }
+#endif
+
 //------------------------------------------------------------------------------
 // updateIncoming() -- Process an emission system from incoming PDUs
 //------------------------------------------------------------------------------
@@ -414,6 +433,9 @@ bool EmissionPduHandler::updateIncoming(const EmissionSystem* const es, Nib* con
       if (rfSys != 0 && !noTemplatesFound) {
          Simulation::Antenna* antenna = rfSys->getAntenna();
 
+         // reset the timeout clock for this Iplayer's emissions
+         setEmPduExecTime(player->getSimulation()->getExecTimeSec());
+         
          rfSys->setFrequency( bd->parameterData.frequency );
          rfSys->setBandwidth( bd->parameterData.frequencyRange );
 
@@ -442,8 +464,12 @@ bool EmissionPduHandler::updateIncoming(const EmissionSystem* const es, Nib* con
             antenna->setSearchVolume( bd->parameterData.beamAzimuthSweep * 2.0f, bd->parameterData.beamElevationSweep * 2.0f);
          }
 
-         // IPlayer's transmit but don't need to receive
+         // IPlayer's transmit (when they're active) but don't need to receive
+#ifdef DISV7
+         rfSys->setTransmitterEnableFlag((bd->beamStatus == BS_ACTIVE));
+#else
          rfSys->setTransmitterEnableFlag(true);
+#endif
          rfSys->setReceiverEnabledFlag(false);
       }
    }
@@ -616,7 +642,9 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
          numberOfBeams = 1;
          EmitterBeamData bd;
          bd.beamIDNumber = (ib+1);
-
+#ifdef DISV7
+         bd.beamStatus = BS_ACTIVE;
+#endif
          // Beam parameters
          bd.parameterData.frequency = float( beam->getFrequency() );            // Hz
          bd.parameterData.frequencyRange  = float( beam->getBandwidth() );      // Hz
@@ -744,6 +772,28 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
          }
          bd.numberOfTargetsInTrack = numTJT;
 
+#ifdef DISV7
+         // change in beamSweepSync should not force new PDU
+         (*emitterBeamData[ib]).parameterData.beamSweepSync = bd.parameterData.beamSweepSync;
+
+         // d) Changes in beam geometry descriptors exceed specified thresholds. Beam geometry descriptors
+         // include beam azimuth center, beam azimuth sweep, beam elevation center and beam elevation
+         // sweep. The azimuth and elevation thresholds shall be identified by the symbolic names
+         // EE_AZ_THRSH and EE_EL_THRSH respectively. (See 4.2.8.3 for parameter details and default
+         // values.)
+         // store these values temporarily
+         float tmpbeamAzimuthCenter = bd.parameterData.beamAzimuthCenter;
+         float tmpbeamElevationCenter = bd.parameterData.beamElevationCenter;
+
+         if (fabs( (*emitterBeamData[ib]).parameterData.beamAzimuthCenter - bd.parameterData.beamAzimuthCenter ) <= disIO->getEeAzThrsh()) {
+            // did not exceed threshold, set current val to previous val
+            bd.parameterData.beamAzimuthCenter = (*emitterBeamData[ib]).parameterData.beamAzimuthCenter;
+         }
+         if (fabs( (*emitterBeamData[ib]).parameterData.beamElevationCenter - bd.parameterData.beamElevationCenter ) <= disIO->getEeElThrsh()) {
+            // did not exceed threshold, set current val to previous val
+            bd.parameterData.beamElevationCenter = (*emitterBeamData[ib]).parameterData.beamElevationCenter;
+         }
+#endif
          // ---
          // Compute beam data length (in 32bit words, including the track/jam targets)
          // ---
@@ -754,11 +804,38 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
          // compare & transfer the emitter beam data
          // ---
          if ( bd != *emitterBeamData[ib] ) {
+#ifdef DISV7
+            // there will be an update PDU, make sure it includes current values.
+            bd.parameterData.beamAzimuthCenter = tmpbeamAzimuthCenter;
+            bd.parameterData.beamElevationCenter = tmpbeamElevationCenter;
+#endif
             *emitterBeamData[ib] = bd;
             result = YES;
          }
 
       } // End transmitter enabled (beam is emitting)
+      else {
+         // player is notOK, or not transmitting
+         // this should only result in one YES result, thereafter no change, unless
+         // player becomes OK, or transmitter is re-enabled
+         Network::Dis::EmitterBeamData bd;
+         bd.beamIDNumber = (ib+1);
+         bd.beamStatus = BS_INACTIVE;   // inactive
+         bd.numberOfTargetsInTrack = 0;
+
+         // ---
+         // Compute beam data length (in 32bit words, including the track/jam targets)
+         // ---
+         unsigned char lenB = sizeof(Network::Dis::EmitterBeamData);
+         bd.beamDataLength = (lenB/4);
+         // ---
+         // compare & transfer the emitter beam data
+         // ---
+         if ( bd != *emitterBeamData[ib] ) {
+            *emitterBeamData[ib] = bd;
+            result = YES;
+         }
+      } // End !(playerOK && transmitter enabled (beam is emitting))
 
       // Number of emitter beams
       es.numberOfBeams = numberOfBeams;
@@ -779,18 +856,27 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
          result = YES;
       }
 
-   }
-
-   // ---   
-   // Last -- Timeout (use Max DR time) -- do this check after the data comparison
-   //    to make sure all of the PDU data has been loaded
-   // ---   
-   if ( (result == UNSURE) && nib->getPlayer()->isLocalPlayer() && emissionSystem != 0) {
-      LCreal drTime = curExecTime - getEmPduExecTime();
-      if ( drTime >= disIO->getMaxTimeDR(nib) ) {
-         result = YES;
-         sc = true;
+#ifdef DISV7
+      if ( playerOk && (result == UNSURE) && nib->getPlayer()->isLocalPlayer() && emissionSystem != 0) {
+         LCreal drTime = curExecTime - getEmPduExecTime();
+         if ( drTime >= disIO->getHbtPduEe() ) {
+            result = YES;
+            sc = true;
+         }
       }
+#else
+      // ---   
+      // Last -- Timeout (use Max DR time) -- do this check after the data comparison
+      //    to make sure all of the PDU data has been loaded
+      // ---   
+      if ( (result == UNSURE) && nib->getPlayer()->isLocalPlayer() && emissionSystem != 0) {
+         LCreal drTime = curExecTime - getEmPduExecTime();
+         if ( drTime >= disIO->getMaxTimeDR(nib) ) {
+            result = YES;
+            sc = true;
+         }
+      }
+#endif
    }
 
    // ---
