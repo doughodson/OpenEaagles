@@ -152,7 +152,7 @@ void Rwr::receive(const LCreal dt)
       }
 
       // finished
-      em->unref();
+      em->unref();   // this unref() undoes the ref() done by RfSystem::rfReceivedEmission
       em = 0;
 
 
@@ -183,7 +183,7 @@ void Rwr::process(const LCreal dt)
    // ---
    for (Emission* em = rptQueue.get(); em != 0; em = rptQueue.get()) { 
       // finished
-      em->unref();
+      em->unref();   // this undoes the ref() added in Rwr::receive()
    }
 }
 

@@ -2,4 +2,11 @@
 Changes since v11.10
 ================================================================================
 
+--------------------------------------------------------------------------------
+basicGL
+
+   MapPage class
+      1) (bug fix) Fixed getCurrentRadius() to return the correct centered or
+         decentered radius value
+
 

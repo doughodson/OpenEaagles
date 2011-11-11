@@ -78,7 +78,6 @@ void MapPage::initData()
    nm2Screen = 1.0;    
    displacement = 0;           
    isCentered = true;   // we are centered
-   myRadius = 0;
    northUp = true;      // start in north up mode
 }
 
@@ -104,7 +103,6 @@ void MapPage::copyData(const MapPage& org, const bool cc)
    nm2Screen = org.nm2Screen;     
    displacement = org.displacement;
    isCentered = org.isCentered;
-   myRadius = org.myRadius;
    northUp = org.northUp;
 }
 
