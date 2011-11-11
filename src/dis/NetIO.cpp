@@ -74,7 +74,7 @@ const LCreal HRT_BEAT_TIMER = 5;                               //  seconds
 const LCreal DRA_POS_THRST_DFLT = 3.0;                         //  meters
 const LCreal DRA_ORIENT_THRST_DFLT = (LCreal)(3.0 * PI/180.0); //  radians
 
-// DISv7 default heartbeats   // DRAC-FAB
+// DISv7 default heartbeats
 const LCreal HBT_PDU_EE = 10;                                  //  seconds 
 const LCreal HBT_PDU_IFF = 10;                                 //  seconds 
 const LCreal HBT_PDU_RECEIVER = 60;                            //  seconds 
