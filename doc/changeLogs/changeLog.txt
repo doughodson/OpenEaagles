@@ -9,4 +9,14 @@ basicGL
       1) (bug fix) Fixed getCurrentRadius() to return the correct centered or
          decentered radius value
 
+    Readout class
+      1) Added makeText method to lat/lon readouts to change "@" to degree symbol
+
+--------------------------------------------------------------------------------
+simulation
+
+   Autopilot class
+      1) Update to loiter pattern calculation
+
+
 

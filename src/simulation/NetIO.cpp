@@ -573,7 +573,7 @@ void NetIO::updateOutputList()
                }
             }
             else {
-               // Finished with local playes and we're not relaying 
+               // Finished with local players and we're not relaying 
                finished = !isRelayEnabled();
             }
 
