@@ -924,6 +924,31 @@ void DirectionReadout::makeText()
     }
 }
 
+void LatitudeReadout::makeText()
+{
+   // Let our base class do its thing
+   BaseClass::makeText();
+
+   // then turn any '@' characters to degree symbols.
+   size_t len = strlen(cbuf);
+
+   for (unsigned int i = 0; i < len; i++) {
+      if (cbuf[i] == '@') cbuf[i] = '°';
+   }
+}
+
+void LongitudeReadout::makeText()
+{
+   // Let our base class do its thing
+   BaseClass::makeText();
+
+   // then turn any '@' characters to degree symbols.
+   size_t len = strlen(cbuf);
+
+   for (unsigned int i = 0; i < len; i++) {
+      if (cbuf[i] == '@') cbuf[i] = '°';
+   }
+}
 
 //------------------------------------------------------------------------------
 // reformat() -- convert the numerical value into an ascii character string

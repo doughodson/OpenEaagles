@@ -1,7 +1,5 @@
 
 #include "openeaagles/simulation/Autopilot.h"
-
-//
 #include "openeaagles/simulation/Navigation.h"
 #include "openeaagles/simulation/Route.h"
 #include "openeaagles/simulation/Steerpoint.h"
@@ -490,15 +488,25 @@ bool Autopilot::computerOrbitHoldingPatternMirrorWaypoint(
    if (mlat != 0 && mlon != 0) {
 
       // Turn radius (ft)
-      double radius  = 0.053833866 * speed * speed;
+      //double radius  = 0.053833866 * speed * speed;
 
       // Offset (width) of the orbit pattern (ft)
-      double orbitOffsetFt  = 2.0 * radius;
+      //double orbitOffsetFt  = 2.0 * radius;
+      
+      const double AOG = 32.174;  // Acceleration of gravity, 32.174 feet/sec/sec
+      const double SRT = 3.0;     // Standard rate turn, 3 degrees/sec (also, 180 deg/min)
+      
+      double airSpeedFps   = speed * Basic::Distance::NM2FT / Basic::Time::H2S;  // airspeed  [feet/sec]
+      double turnRateRps   = SRT * Basic::Angle::D2RCC;                          // standard rate turn  [radians/sec]
+      double tanBankAngle  = airSpeedFps * turnRateRps / AOG;                    // standard rate turn tan(bank angle)  [no units]
+      double radiusFT      = airSpeedFps * airSpeedFps / AOG / tanBankAngle;     // standard rate turn radius  [feet]
+      double bankAngleDeg  = std::atan(tanBankAngle) * Basic::Angle::R2DCC;      // standard rate turn bank angle  [degrees]
+      double orbitOffsetFt = 2.0 * radiusFT;
 
       // ---
       // Pattern length (ft)
       //  -- must be at least 1 nm greater than the offset
-      // ---
+
       double orbitLengthFt = length * Basic::Distance::NM2FT;
       const double lengthLowerLimit = orbitOffsetFt + Basic::Distance::NM2FT;
       if (orbitLengthFt < lengthLowerLimit) {
@@ -519,6 +527,7 @@ bool Autopilot::computerOrbitHoldingPatternMirrorWaypoint(
          trueBrgDeg = Basic::Angle::aepcdDeg( crs + relBrgDeg );
       }
 
+      
       // ---
       // Distance to mirror point (nm)
       // ---
