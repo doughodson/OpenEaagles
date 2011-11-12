@@ -1162,6 +1162,14 @@ struct VariableDatum {
       variableDatumLength = convertUInt32(variableDatumLength);
    };
 
+   unsigned int getSize() {	
+      return variableDatumLength/8;
+   };
+
+   /* Temp connection to data, better way... */
+   unsigned char* getData(){return ((unsigned char*)&variableDatumLength)+sizeof(long);};
+
+
    friend std::ostream& operator << ( std::ostream& s, const VariableDatum&  v)
    {
          s << "  variableDatumID:       " << (int)v.variableDatumID << std::endl

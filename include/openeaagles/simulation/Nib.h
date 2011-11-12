@@ -228,12 +228,6 @@ protected:
    virtual bool shutdownNotification();
 
 private:
-   // compute the euler angles from a rotational matrix
-   static bool drComputeEulerAngles(
-         const osg::Matrixd& A,      // rotational matrix
-         osg::Vec3d* const pRPY     // Euler angles (radians)
-      );
-
    // compute the rotational matrix R0
    static bool drComputeMatrixR0(
          const osg::Vec3d& RPY,      // [radians]

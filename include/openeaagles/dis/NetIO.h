@@ -31,6 +31,12 @@ namespace Dis {
    class DataQueryPDU;
    class DataPDU;
    class CommentPDU;
+   class StartPDU;
+   class StopPDU;
+   class AcknowledgePDU;
+   class ActionRequestPDU;
+   class ActionRequestPDU_R;
+   class ActionResponsePDU_R;
 
    struct TrackJamTargets;
    struct FundamentalParameterData;
@@ -289,6 +295,12 @@ protected:
    virtual bool processDataQueryPDU(const DataQueryPDU* const pdu);
    virtual bool processDataPDU(const DataPDU* const pdu);
    virtual bool processCommentPDU(const CommentPDU* const pdu);
+   virtual bool processStartPDU(const StartPDU* const pdu);
+   virtual bool processStopPDU(const StopPDU* const pdu);
+   virtual bool processAcknowledgePDU(const AcknowledgePDU* const pdu);
+   virtual bool processActionRequestPDU(const ActionRequestPDU* const pdu);
+   virtual bool processActionRequestPDU_R(const ActionRequestPDU_R* const pdu);
+   virtual bool processActionResponsePDU_R(const ActionResponsePDU_R* const pdu);
 
    // User defined function to process unknown PDUs (PDU bytes are still in network order)
    virtual bool processUserPDU(const PDUHeader* const pdu);

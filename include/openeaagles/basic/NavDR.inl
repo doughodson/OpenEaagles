@@ -384,48 +384,4 @@ inline bool NavDR::getRwbMatrix(
    return true;
 }
 
-//==============================================================================
-// Compute Rpy Vector
-//==============================================================================
-inline bool NavDR::getRpyVector(
-         const osg::Matrixd A,
-         osg::Vec4d* const pRPY          // body roll, pitch, yaw [radians]
-      )
-{   
-   const double EPS = 1.0e-10;
-
-   double Rol = 0.0;
-   double Pch = 0.0;
-   double Yaw = 0.0;
-
-   double beta = alimd(A(0,2), 1.0);
-   Pch = std::asin(-beta);
-   double cosPch = std::cos(Pch);
-
-   if (EPS < std::fabs(cosPch)) {
-      double signA01 = 1.0;
-      if (A(0,1) < 0.0) signA01 = -1.0;
-      double gama = alimd(A(0,0)/cosPch, 1.0);
-      Yaw = signA01 * std::acos(gama);
-      
-      double signA12 = 1.0;
-      if (A(1,2) < 0.0) signA12 = -1.0;
-      double alfa = alimd(A(2,2)/cosPch, 1.0);
-      Rol = signA12 * std::acos(alfa);
-   }
-   else {
-      if (0.0 < A(0,2))
-         Pch = +PI/2.0;
-      else
-         Pch = -PI/2.0;
-   }
-
-   //pRPY->set(Rol, Pch, Yaw);
-   (*pRPY)[0] = Rol;
-   (*pRPY)[1] = Pch;
-   (*pRPY)[2] = Yaw;
-   
-   return true;
-}
-
 #endif
