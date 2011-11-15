@@ -10,7 +10,7 @@
 #include "openeaagles/basic/Pair.h"
 #include "openeaagles/basic/PairStream.h"
 
-#include <GL/glut.h>
+#include <GL/freeglut.h>
 
 #if !defined(WIN32)
 #include <sys/time.h>
@@ -144,7 +144,13 @@ bool GlutDisplay::onEscKey()
       if (isMessageEnabled(MSG_INFO)) {
          std::cout<<"Eaagles::Glut::GlutDisplay::onEscKey()Exit by the ESC key!"<<std::endl;
       }
+#if 1
+      glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_CONTINUE_EXECUTION);
+      glutLeaveMainLoop();
+      return true;
+#else
       exit(0);
+#endif
    }
    return false;
 }
