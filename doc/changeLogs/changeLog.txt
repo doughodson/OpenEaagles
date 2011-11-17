@@ -5,11 +5,17 @@ Changes since v11.10
 --------------------------------------------------------------------------------
 basic
 
+   ## config.h  -- new file that will contain OpenEaagles configuration parameters
+
    NavDR class
       1) removed function getRpyVector()
       2) deadReckoning() function is now using  Basic::Nav::computeEulerAngles()
          instead of getRpyVector()
 
+   Timer class
+      1) changed internally how the static list of timers is maintained
+      2) Changed 'LCreal' variables to 'double'
+      3) and general clean up
 
 --------------------------------------------------------------------------------
 basicGL
