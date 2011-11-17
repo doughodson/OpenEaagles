@@ -8,17 +8,9 @@
 #define __Eaagles_Support_H__
 
 // ---
-// Defined the following to use double,
-// default is float
+// OpenEaagles main configuration file
 // ---
-#define LCREAL_DOUBLE
-namespace Eaagles {
-   #ifdef LCREAL_DOUBLE
-      typedef double      LCreal;
-   #else
-      typedef float       LCreal;
-   #endif
-}
+#include "openeaagles/config.h"
 
 // ---
 // Common header files
@@ -66,48 +58,6 @@ namespace Eaagles {
 #else
   // Linux GCC lock
   #include "openeaagles/basic/linux/lock.h"
-#endif
-
-
-// ---
-// Functions for native resolutions
-// ---
-#ifdef LCREAL_DOUBLE
-    // ---
-    // When double sse standard C functions
-    // ---
-    #define lcSqrt      ::sqrt
-    #define lcSin       ::sin
-    #define lcCos       ::cos
-    #define lcTan       ::tan
-    #define lcAtan      ::atan
-    #define lcAtan2     ::atan2
-    #define lcAcos      ::acos
-    #define lcAbs       ::fabs
-    #define lcFmod      ::fmod
-    #define lcPow       ::pow
-    #define lcExp       ::exp
-    #define lcLog       ::log
-    #define lcLog10     ::log10
-    #define lcAepcDeg   Basic::Angle::aepcdDeg   /* needs basic/units/Angles.h */
-    #define lcAepcRad   Basic::Angle::aepcdRad   /* needs basic/units/Angles.h */
-#else
-    // Standard C functions
-    #define lcSqrt      ::sqrtf
-    #define lcSin       ::sinf
-    #define lcCos       ::cosf  
-    #define lcTan       ::tanf
-    #define lcAtan      ::atanf
-    #define lcAtan2     ::atan2f
-    #define lcAcos      ::acosf
-    #define lcAbs       ::fabsf
-    #define lcFmod      ::fmodf
-    #define lcPow       ::powf
-    #define lcExp       ::expf
-    #define lcLog       ::logf
-    #define lcLog10     ::log10f
-    #define lcAepcDeg   Basic::Angle::aepcfDeg   /* needs basic/units/Angles.h */
-    #define lcAepcRad   Basic::Angle::aepcfRad   /* needs basic/units/Angles.h */
 #endif
 
 // ---
