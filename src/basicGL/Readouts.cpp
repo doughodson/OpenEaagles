@@ -6,7 +6,6 @@
 #include "openeaagles/basic/PairStream.h"
 #include "openeaagles/basic/Pair.h"
 #include "Reformat.h"
-#include <stdio.h>
 
 // disable all deprecation warnings for now, until we fix
 // they are quite annoying to see over and over again...

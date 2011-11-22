@@ -14,7 +14,6 @@
 #include "openeaagles/basic/units/Times.h"
 #include <string>
 #include <sstream>
-#include <stdio.h>
 
 // disable all deprecation warnings for now, until we fix
 // they are quite annoying to see over and over again...

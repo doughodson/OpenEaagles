@@ -1,4 +1,6 @@
-#include <stdio.h>
+
+#include <cstdio>
+
 unsigned int base = 0;
 
 #define MR2IN   0.026785714

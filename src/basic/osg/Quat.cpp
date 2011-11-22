@@ -10,7 +10,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
  * OpenSceneGraph Public License for more details.
 */
-#include <stdio.h>
+//#include <stdio.h>
 #include "openeaagles/basic/osg/Quat"
 #include "openeaagles/basic/osg/Matrixd"
 #include "openeaagles/basic/osg/Matrixf"
