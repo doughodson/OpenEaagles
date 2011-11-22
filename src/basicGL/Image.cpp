@@ -2,6 +2,11 @@
 #include "openeaagles/basicGL/Image.h"
 #include <fstream>
 
+// if OpenGL extension is not defined by glu.h, try loading glext.h
+#ifndef GL_BGR_EXT
+#include <GL/glext.h>
+#endif
+
 #if(_MSC_VER>=1400)   // VC8+
 # pragma warning(disable: 4996)
 #endif
@@ -100,7 +105,7 @@ void Image::copyData(const Image& org, const bool cc)
    yPixPerMeter = org.yPixPerMeter;
 }
 
-// deleteData() - 
+// deleteData() -
 void Image::deleteData()
 {
    setPixels(0);
@@ -255,7 +260,7 @@ bool Image::readFileBMP(const char* const filename, const char* const path)
    setXResolutionPPM(bmfi.biXPelsPerMeter);
    setYResolutionPPM(bmfi.biYPelsPerMeter);
 
-   // Read the colors    
+   // Read the colors
    GLubyte* bmap = 0;
    if (bmfi.biBitCount == 24) {
       setNumComponents(3);
@@ -425,10 +430,10 @@ GLubyte* Image::readRgbValuesBMP(FILE* const fp, const unsigned int offset, cons
     // Alloate the texture memory bits
     unsigned int bmSize = getWidth() * getHeight() * getNumComponents();
     GLubyte* bmap = new GLubyte[bmSize];
-    
+
     // Position to start of bitmap
    fseek(fp, offset, SEEK_SET);
-    
+
     // Read the bitmap
     size_t widthBytes = (getWidth() * getNumComponents());          // Number of bytes we want per row
     size_t origWidthBytes = (bmfi->biWidth * getNumComponents());   // Original number of bytes per row
@@ -458,7 +463,7 @@ GLubyte* Image::readColorValuesBMP(FILE* const fp, const unsigned int offset, co
     // Alloate the texture memory bits
     unsigned int bmSize = getWidth() * getHeight() * getNumComponents();
     GLubyte* bmap = new GLubyte[bmSize];
-    
+
     // Read the color table
     size_t ctSize = 256;
     if (bmfi->biClrUsed > 0) ctSize = bmfi->biClrUsed;

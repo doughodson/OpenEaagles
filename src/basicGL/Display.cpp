@@ -14,8 +14,13 @@
 #include "openeaagles/basic/Pair.h"
 #include "openeaagles/basic/Identifier.h"
 #include "openeaagles/basic/PairStream.h"
-#include <stdio.h>
+
 #include <GL/glu.h>
+
+// if OpenGL extension is not defined by glu.h, try loading glext.h
+#ifndef GL_BGR_EXT
+#include <GL/glext.h>
+#endif
 
 // disable all deprecation warnings for now, until we fix
 // they are quite annoying to see over and over again...
@@ -44,7 +49,7 @@ BEGIN_SLOTTABLE(Display)
    "vpX",                  // 10) Viewport x origin
    "vpY",                  // 11) Viewport y origin
    "vpWidth",              // 12) Viewport width
-   "vpHeight",             // 13) Viewport height 	
+   "vpHeight",             // 13) Viewport height
    "displays",             // 14) Sub-displays
    "stdLineWidth",         // 15) Standard Line width
    "textures",             // 16) Texture(s)
@@ -52,7 +57,7 @@ BEGIN_SLOTTABLE(Display)
    "leftBracketChar",      // 18) Left bracket character;  Basic::String or Basic::Number; default: '['
    "rightBracketChar",     // 19) Right bracket character; Basic::String or Basic::Number; default: ']'
    "reverseVideoBrackets", // 20) Reverse video brackets flag:
-                           //     If true, brackets are drawn with reversed video font, 
+                           //     If true, brackets are drawn with reversed video font,
                            //     otherwise follow the field's drawing mode.  default: false
    "fonts",                // 21) List of fonts
    "clearDepth",           // 22) clear depth; range: [ 0, 1 ] or negative for no depth buffer
@@ -62,7 +67,7 @@ BEGIN_SLOTTABLE(Display)
 END_SLOTTABLE(Display)
 
 //------------------------------------------------------------------------------
-//  Map slot table to handles 
+//  Map slot table to handles
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(Display)
    ON_SLOT(1,setName,Basic::String)
@@ -215,7 +220,7 @@ void Display::copyData(const Display& org, const bool cc)
    if (org.materials != 0) {
       materials = (Basic::PairStream*) org.materials->clone();
       processMaterials();
-   }    
+   }
 
    stdLinewidth = org.stdLinewidth;
    linewidth = org.linewidth;
@@ -349,7 +354,7 @@ void Display::keyboardEvent(const int key)
       // Null pointer?  Try to set to our current subpage
       if (focusPtr == 0 && subpage() != 0) focusPtr = subpage();
       if (isMessageEnabled(MSG_DEBUG)) {
-         std::cout << "Display::keyboardEvent(" << this << "," << key << "), focusPtr = " << focusPtr << std::endl; 
+         std::cout << "Display::keyboardEvent(" << this << "," << key << "), focusPtr = " << focusPtr << std::endl;
       }
       if (focusPtr != 0) focusPtr->event(key);
    }
@@ -359,7 +364,7 @@ void Display::keyboardEvent(const int key)
 //------------------------------------------------------------------------------
 // onMouseEnter() - called when the mouse enters the display
 //------------------------------------------------------------------------------
-void Display::onMouseEnter() 
+void Display::onMouseEnter()
 {
    // Derive from this class and do what you want with this function call
 }
@@ -381,7 +386,7 @@ void Display::buttonEvent(const int b)
    if (focusPtr == 0 && subpage() != 0) focusPtr = subpage();
 
    //if (isMessageEnabled(MSG_DEBUG)) {
-   //std::cout << "Display::buttonEvent(" << this << "," << b << "), focusPtr = " << focusPtr << std::endl; 
+   //std::cout << "Display::buttonEvent(" << this << "," << b << "), focusPtr = " << focusPtr << std::endl;
    //}
    if (focusPtr != 0) focusPtr->event(b);
 }
@@ -422,7 +427,7 @@ void Display::setMouse(const int x, const int y, Display* const subdisplay)
         }
    }
    else {
-        // if we aren't a subdisplay, but we are a display, we 
+        // if we aren't a subdisplay, but we are a display, we
         // still need to call our entry and exit routines
         if (focus() != 0 && focus()->isClassType(typeid(Display))) {
             BasicGL::Display* dis = (BasicGL::Display*)focus();
@@ -454,7 +459,7 @@ void Display::setMouse(const int x, const int y, Display* const subdisplay)
         // call our entry procedure!
         onMouseEnter();
         focus(this);
-        
+
     }
 }
 
@@ -472,7 +477,7 @@ Graphic* Display::focus(Graphic* s)
 }
 
 //------------------------------------------------------------------------------
-// clear() -- 
+// clear() --
 //------------------------------------------------------------------------------
 void Display::clear()
 {
@@ -602,7 +607,7 @@ void Display::drawIt()
          glRotated(-90.0, 0.0, 0.0, 1.0);
       else if (getDisplayOrientation() == CCW90)
          glRotated(90.0, 0.0, 0.0, 1.0);
-      else 
+      else
          glRotated(180.0, 0.0, 0.0, 1.0);
    }
 
@@ -646,7 +651,7 @@ void Display::reshapeIt(int w, int h)
 
 //------------------------------------------------------------------------------
 // getViewport() -- get the viewport parameters
-// setViewport() -- set the viewport parameters 
+// setViewport() -- set the viewport parameters
 //------------------------------------------------------------------------------
 void Display::getViewport(GLint* x, GLint* y, GLsizei* w, GLsizei* h) const
 {
@@ -666,7 +671,7 @@ void Display::setViewport(const GLint x, const GLint y, const GLsizei w, const G
 
 //------------------------------------------------------------------------------
 // getViewportOrigin() -- get the viewport origin
-// setViewportOrigin() -- set the viewport origin 
+// setViewportOrigin() -- set the viewport origin
 //------------------------------------------------------------------------------
 void Display::getViewportOrigin(GLsizei* x, GLsizei* y) const
 {
@@ -683,7 +688,7 @@ void Display::setViewportOrigin(const GLsizei x, const GLsizei y)
 
 //------------------------------------------------------------------------------
 // getViewportSize() -- get the viewport size
-// setViewportSize() -- set the viewport size 
+// setViewportSize() -- set the viewport size
 //------------------------------------------------------------------------------
 void Display::getViewportSize(GLsizei* w, GLsizei* h) const
 {
@@ -733,7 +738,7 @@ void Display::setScissor(const GLdouble scissorLeft, const GLdouble scissorRight
    // get our coordinates and transform them to window coordinates
    GLdouble objz = 0;
 
-   // we have to get our model and 
+   // we have to get our model and
    GLdouble modelMatrix[16];
    glGetDoublev(GL_MODELVIEW_MATRIX, modelMatrix);
    GLdouble projMatrix[16];
@@ -804,7 +809,7 @@ void Display::setScissor(const GLdouble scissorLeft, const GLdouble scissorRight
 //-----------------------------------------------------------------------------
 void Display::clearScissor()
 {
-   glDisable(GL_SCISSOR_TEST);    
+   glDisable(GL_SCISSOR_TEST);
 }
 
 //------------------------------------------------------------------------------
@@ -1041,7 +1046,7 @@ const Font* Display::getNormalFont() const
    return normalFont;
 }
 
-// setNormalFont() --- 
+// setNormalFont() ---
 bool Display::setNormalFont(Font* const f)
 {
    bool ok = true;
@@ -1095,13 +1100,13 @@ void Display::outputTextLC(const int ln, const int cp, const char* sp, const int
    if (currentFont == 0 || n <= 0) return;
    osg::Vec4 ocolor = getCurrentColor();
 
-   Display* that = (Display*)this;        
+   Display* that = (Display*)this;
    // If manual reverse text, draw a background polygon
    // Computer posiiton
    GLdouble x = 0.0;
    GLdouble y = 0.0;
    currentFont->position(ln,cp,x,y);
-   GLdouble dx = (currentFont->getCharacterSpacing());   
+   GLdouble dx = (currentFont->getCharacterSpacing());
    GLdouble dy = (currentFont->getLineSpacing());
    size_t len = strlen(sp);
 
@@ -1121,7 +1126,7 @@ void Display::outputTextLC(const int ln, const int cp, const char* sp, const int
 
 
          GLdouble vv[4][3] = {
-            { -myX, -myY, -0.001 }, { -myX, 0, -0.001 }, { myX, 0, -0.001 }, { myX, -myY, -0.001 } 
+            { -myX, -myY, -0.001 }, { -myX, 0, -0.001 }, { myX, 0, -0.001 }, { myX, -myY, -0.001 }
          };
          glBegin(GL_POLYGON);
          for (int i = 0; i < 4; i++) {
@@ -1143,7 +1148,7 @@ void Display::outputTextLC(const int ln, const int cp, const char* sp, const int
          x1 = x1 - dx;
          y1 = y1 - dy;
          GLdouble vv[4][3] = {
-            { x0, y0, -0.001 }, { x1, y0, -0.001 }, { x1, y1, -0.001 }, { x0, y1, -0.001 } 
+            { x0, y0, -0.001 }, { x1, y0, -0.001 }, { x1, y1, -0.001 }, { x0, y1, -0.001 }
          };
          glPushMatrix();
          glBegin(GL_POLYGON);
@@ -1174,7 +1179,7 @@ void Display::outputTextLC(const int ln, const int cp, const char* sp, const int
          //glBegin(GL_LINES);
          //    glVertex2f(myX, y + width);
          //    glVertex2f(myX, myY);
-         //glEnd();            
+         //glEnd();
       }
       else {
          height /= 2;
@@ -1184,7 +1189,7 @@ void Display::outputTextLC(const int ln, const int cp, const char* sp, const int
          glBegin(GL_LINES);
          glVertex2d(x, myY);
          glVertex2d(myX, myY);
-         glEnd();            
+         glEnd();
       }
 
       glPopMatrix();
@@ -1207,12 +1212,12 @@ void Display::outputText(const char* sp, const int n, const bool vf) const
 {
    if (currentFont == 0 || n <= 0) return;
 
-   Display* that = (Display*)this;        
+   Display* that = (Display*)this;
    osg::Vec4 ocolor = getCurrentColor();
    // If manual reverse text, draw a background polygon
    if (reversedFlg) {
       // Offsets to center to polygon
-      GLdouble cSpace = (currentFont->getCharacterSpacing());   
+      GLdouble cSpace = (currentFont->getCharacterSpacing());
       GLdouble lSpace = (currentFont->getLineSpacing());
       size_t len = strlen(sp);
       // are we vertical?
@@ -1232,7 +1237,7 @@ void Display::outputText(const char* sp, const int n, const bool vf) const
          GLdouble deltaY = startY + (lSpace * 1.1);
 
          GLdouble vv[4][3] = {
-            { -deltaX, -deltaY, -0.001 }, { -deltaX, deltaY, -0.001 }, { deltaX, deltaY, -0.001 }, { deltaX, -deltaY, -0.001 } 
+            { -deltaX, -deltaY, -0.001 }, { -deltaX, deltaY, -0.001 }, { deltaX, deltaY, -0.001 }, { deltaX, -deltaY, -0.001 }
          };
          glBegin(GL_POLYGON);
          for (int i = 0; i < 4; i++) {
@@ -1257,7 +1262,7 @@ void Display::outputText(const char* sp, const int n, const bool vf) const
          GLdouble deltaY = startY + (lSpace * 0.1);
 
          GLdouble vv[4][3] = {
-            { -deltaX, -deltaY, -0.001 }, { -deltaX, deltaY, -0.001 }, { deltaX, deltaY, -0.001 }, { deltaX, -deltaY, -0.001 } 
+            { -deltaX, -deltaY, -0.001 }, { -deltaX, deltaY, -0.001 }, { deltaX, deltaY, -0.001 }, { deltaX, -deltaY, -0.001 }
          };
          glBegin(GL_POLYGON);
          for (int i = 0; i < 4; i++) {
@@ -1281,7 +1286,7 @@ void Display::outputText(const char* sp, const int n, const bool vf) const
          //glBegin(GL_LINES);
          //    glVertex2f(myX, y + width);
          //    glVertex2f(myX, myY);
-         //glEnd();            
+         //glEnd();
       }
       else {
          // only come down about a third for underlining
@@ -1305,7 +1310,7 @@ void Display::outputText(const char* sp, const int n, const bool vf) const
 
    // Switch back to the original color
    if (reversedFlg) that->setColor(ocolor);
-}    
+}
 
 
 //------------------------------------------------------------------------------
@@ -1406,7 +1411,7 @@ void Display::addColor(Basic::Pair* pp)
 //-----------------------------------------------------------------------------
 Basic::PairStream* Display::defaultColors()
 {
-   // allocate our new colortable 
+   // allocate our new colortable
    Basic::PairStream* defColorTable = new Basic::PairStream();
 
    // black
@@ -1513,7 +1518,7 @@ bool Display::setSlotMaterials(Basic::PairStream* const msg)
    materials = 0;
    if (msg != 0) {
       materials = msg;
-      materials->ref();    
+      materials->ref();
       processMaterials();
    }
    return true;
@@ -1576,7 +1581,7 @@ bool Display::setSlotTopOrthoBound(const Basic::Number* const stobobj)
 //------------------------------------------------------------------------------
 bool Display::setSlotNearOrthoBound(const Basic::Number* const snobobj)
 {
-   if (snobobj != 0) oNear = snobobj->getDouble();  
+   if (snobobj != 0) oNear = snobobj->getDouble();
    return true;
 }
 
@@ -1586,7 +1591,7 @@ bool Display::setSlotNearOrthoBound(const Basic::Number* const snobobj)
 //------------------------------------------------------------------------------
 bool Display::setSlotFarOrthoBound(const Basic::Number* const sfobobj)
 {
-   if (sfobobj != 0) oFar = sfobobj->getDouble(); 
+   if (sfobobj != 0) oFar = sfobobj->getDouble();
    return true;
 }
 
@@ -1622,19 +1627,19 @@ bool Display::setSlotViewportWidth(const Basic::Number* const svwobj)
 //------------------------------------------------------------------------------
 bool Display::setSlotViewportHeight(const Basic::Number* const svhobj)
 {
-   if (svhobj != 0) vpHeight = svhobj->getInt(); 
+   if (svhobj != 0) vpHeight = svhobj->getInt();
    return true;
 }
 
 //------------------------------------------------------------------------------
-//  setSlotSubdisplayStream() -- it takes a pair stream 
+//  setSlotSubdisplayStream() -- it takes a pair stream
 //------------------------------------------------------------------------------
 bool Display::setSlotSubdisplayStream (Basic::PairStream* const dsobj)
 {
    bool ok = false;
    if (dsobj != 0) {
       // When a PairStream (i.e., more than one, a list) of displays
-      if (subdisplays != 0) subdisplays->unref();                               
+      if (subdisplays != 0) subdisplays->unref();
       subdisplays = dsobj;
       subdisplays->ref();
 
@@ -1660,14 +1665,14 @@ bool Display::setSlotSubdisplaySingle(Display* const dobj)
 }
 
 //------------------------------------------------------------------------------
-//  setSlotTexturesStream() -- it takes a pair stream 
+//  setSlotTexturesStream() -- it takes a pair stream
 //------------------------------------------------------------------------------
 bool Display::setSlotTexturesStream (Basic::PairStream* const obj)
 {
    bool ok = false;
    if (obj != 0) {
       // When a PairStream (i.e., more than one, a list) of displays
-      if (textures != 0) textures->unref();                               
+      if (textures != 0) textures->unref();
       textures = obj;
       textures->ref();
 
@@ -1785,7 +1790,7 @@ bool Display::setSlotReverseVideoBrackets(const Basic::Number* const msg)
 }
 
 //------------------------------------------------------------------------------
-// setSlotClearDepth() -- sets the clear depth buffer slot 
+// setSlotClearDepth() -- sets the clear depth buffer slot
 //------------------------------------------------------------------------------
 bool Display::setSlotClearDepth(const Basic::Number* const msg)
 {
@@ -1799,7 +1804,7 @@ bool Display::setSlotClearDepth(const Basic::Number* const msg)
 
 //------------------------------------------------------------------------------
 // setSlotDisplayOrientation() -- sets display orientation slot
-//                                 ( normal, cw90, ccw90, inverted } 
+//                                 ( normal, cw90, ccw90, inverted }
 //------------------------------------------------------------------------------
 bool Display::setSlotDisplayOrientation(const Basic::String* const msg)
 {
@@ -1948,7 +1953,7 @@ void Display::configure()
    glPixelTransferi(GL_ALPHA_SCALE, 1);
    glPixelTransferi(GL_ALPHA_BIAS, 0);
 
-#if GL_SGI_index_func 
+#if GL_SGI_index_func
    glDisable(GL_INDEX_TEST_SGI);
 #endif
 }

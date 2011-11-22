@@ -28,6 +28,12 @@ basicGL
    Readout class
       1) added makeText method to lat/lon readouts to change "@" to degree symbol
 
+   Display class
+      1) added a check to ensure OpenGL extension GL_BGR_EXT is defined
+
+   Image class
+      1) added a check to ensure OpenGL extension GL_BGR_EXT is defined
+
 
 --------------------------------------------------------------------------------
 simulation
