@@ -399,7 +399,7 @@ void Nib::processArticulationParameters(const EntityStatePDU* const pdu)
                               // station number
                               wpn = (Simulation::Weapon*) tp->clone();
                               char cbuf[20];
-                              sprintf(cbuf,"%i",sta);
+                              std::sprintf(cbuf,"%i",sta);
                               Basic::Pair* pair = new Basic::Pair(cbuf, wpn);
                               wpn->unref();   // pair owns it
                               sms->addComponent(pair);

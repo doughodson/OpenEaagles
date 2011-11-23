@@ -159,7 +159,7 @@ arglist :                           { $$ = new Eaagles::Basic::PairStream(); }
         | arglist form              { if ($2 != 0) {
                                         int i = $1->entries();
                                         char cbuf[20];
-                                        sprintf(cbuf,"%i",i+1);
+                                        std::sprintf(cbuf,"%i",i+1);
                                         Eaagles::Basic::Pair* p = new Eaagles::Basic::Pair(cbuf, $2);
                                         $2->unref();
                                         $1->put(p);
@@ -171,7 +171,7 @@ arglist :                           { $$ = new Eaagles::Basic::PairStream(); }
         | arglist prim              {
                                     int i = $1->entries();
                                     char cbuf[20];
-                                    sprintf(cbuf,"%i",i+1);
+                                    std::sprintf(cbuf,"%i",i+1);
                                     Eaagles::Basic::Pair* p = new Eaagles::Basic::Pair(cbuf, $2);
                                     $2->unref();
                                     $1->put(p);

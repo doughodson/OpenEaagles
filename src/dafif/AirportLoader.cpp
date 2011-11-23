@@ -1551,7 +1551,7 @@ void printLatitude( char* buff, double lat )
 
    int fsec = int((dsec - double(sec)) * 100.0 );
 
-   sprintf( &buff[1], "%2d%02d%02d%02d", deg, min, sec, fsec );
+   std::sprintf( &buff[1], "%2d%02d%02d%02d", deg, min, sec, fsec );
 }
 
 
@@ -1577,7 +1577,7 @@ void printLongitude( char* buff, double lon )
 
    int fsec = int((dsec - double(sec)) * 100.0 );
 
-   sprintf( &buff[1], "%3d%02d%02d%02d", deg, min, sec, fsec );
+   std:;sprintf( &buff[1], "%3d%02d%02d%02d", deg, min, sec, fsec );
 }
 
 
@@ -1600,7 +1600,7 @@ void printMagvar( char* buff, float magvar )
 
    int fmin = int((dmin - float(min)) * 10.0 );
 
-   sprintf( &buff[1], "%3d%02d%01d", deg, min, fmin );
+   std::sprintf( &buff[1], "%3d%02d%01d", deg, min, fmin );
 }
 
 const char* AirportLoader::createIlsRecord(const Key* key)
@@ -1629,16 +1629,16 @@ const char* AirportLoader::createIlsRecord(const Key* key)
    // Frequency 
    fillSpaces(irec, ILS_FREQUENCY_POS-1);
    int ifreq = int( ilsk->freq * 1000.0f + 0.5f );
-   sprintf( &irec[ILS_FREQUENCY_POS-1], "%7dM", ifreq );
+   std::sprintf( &irec[ILS_FREQUENCY_POS-1], "%7dM", ifreq );
 
    // Channel 
    fillSpaces(irec, ILS_CHANNEL_POS-1);
-   sprintf( &irec[ILS_CHANNEL_POS-1], "%3dX", ilsk->chan );
+   std::sprintf( &irec[ILS_CHANNEL_POS-1], "%3dX", ilsk->chan );
 
    // Glide slope
    fillSpaces(irec, ILS_GSA_POS-1);
    int igs = int( ilsk->gs * 100.0f + 0.5f );
-   sprintf( &irec[ILS_GSA_POS-1], "%3d", igs );
+   std::sprintf( &irec[ILS_GSA_POS-1], "%3d", igs );
 
    // Location of localizer or glide slope
    fillSpaces(irec, ILS_LOC_POS-1);
@@ -1648,11 +1648,11 @@ const char* AirportLoader::createIlsRecord(const Key* key)
    else {
       irec[ILS_LOC_POS-1] = '+';
    }
-   sprintf( &irec[ILS_LOC_POS], "%05d", ilsk->loc );
+   std::sprintf( &irec[ILS_LOC_POS], "%05d", ilsk->loc );
 
    // Elevation
    fillSpaces(irec, ILS_ELEVATION-1);
-   sprintf( &irec[ILS_ELEVATION-1], "%5d", ilsk->elev );
+   std::sprintf( &irec[ILS_ELEVATION-1], "%5d", ilsk->elev );
 
    // Latitude
    fillSpaces(irec, ILS_LATITUDE-1);

@@ -805,17 +805,17 @@ void NumericReadout::redisplay()
 //------------------------------------------------------------------------------
 void NumericReadout::makeText()
 {
-   sprintf(cbuf, format, getFloat());
+   std::sprintf(cbuf, format, getFloat());
 }
 
 void HexReadout::makeText()
 {
-   sprintf(cbuf, format, getInt());
+   std::sprintf(cbuf, format, getInt());
 }
 
 void OctalReadout::makeText()
 {
-   sprintf(cbuf, format, getInt());
+   std::sprintf(cbuf, format, getInt());
 }
 
 void TimeReadout::makeText()
@@ -833,7 +833,7 @@ void TimeReadout::makeText()
             double min = minutes - double(ihrs*60);
             int imin = int(min);
             double sec = (min - double(imin))*60.0f;
-            sprintf(cbuf, format, ihrs, imin, sec);
+            std::sprintf(cbuf, format, ihrs, imin, sec);
             if (neg) { /* if it was negative, swap the the posible + sign to the - sign */
                bool done = false;
                for (unsigned int i = 0; !done && i < CBUF_LENGTH; i++) {
@@ -847,7 +847,7 @@ void TimeReadout::makeText()
             double minutes = seconds/60.0f;
             int  ihrs = int(minutes/60.0f);
             double min = minutes - double(ihrs*60);
-            sprintf(cbuf, format, ihrs, min);
+            std::sprintf(cbuf, format, ihrs, min);
             if (neg) { /* if it was negative, swap the the posible + sign to the - sign */
                bool done = false;
                for (unsigned int i = 0; !done && i < CBUF_LENGTH; i++) {
@@ -860,13 +860,13 @@ void TimeReadout::makeText()
         case hh : {	// Hours only
             double hrs = getFloat()/3600.0f;
             if (neg) hrs = -hrs;
-            sprintf(cbuf, format, hrs);
+            std::sprintf(cbuf, format, hrs);
         }
         break;
         case mmss : {	// Minutes and seconds
             int  imin = int(seconds/60.0f);
             double sec = seconds - double(imin*60);
-            sprintf(cbuf, format, imin, sec);
+            std::sprintf(cbuf, format, imin, sec);
             if (neg) { /* if it was negative, swap the the posible + sign to the - sign */
                bool done = false;
                for (unsigned int i = 0; !done && i < CBUF_LENGTH; i++) {
@@ -879,12 +879,12 @@ void TimeReadout::makeText()
         case mm : {	// Minutes only
             double min = seconds/60.0f;
             if (neg) min = -min;
-            sprintf(cbuf, format, min);
+            std::sprintf(cbuf, format, min);
         }
         break;
         case ss : {	// Seconds only
             if (neg) seconds = -seconds;
-            sprintf(cbuf, format, seconds);
+            std::sprintf(cbuf, format, seconds);
         }
         break;
     }
@@ -905,19 +905,19 @@ void DirectionReadout::makeText()
             int     imin = int(min);
             double sec = (min - double(imin))*60.0f;
             if (neg) ideg = -ideg;
-            sprintf(cbuf, format, ideg, imin, sec);
+            std::sprintf(cbuf, format, ideg, imin, sec);
         }
         break;
         case ddmm : {	// Degrees and minutes
             int     ideg = int(degrees);
             double  min  = (degrees - double(ideg))*60.0f;
             if (neg) ideg = -ideg;
-            sprintf(cbuf, format, ideg, min);
+            std::sprintf(cbuf, format, ideg, min);
         }
         break;
         case dd : {	// Degrees only
             if (neg) degrees = -degrees;
-            sprintf(cbuf, format, degrees);
+            std::sprintf(cbuf, format, degrees);
         }
         break;
     }

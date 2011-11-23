@@ -1391,7 +1391,7 @@ void Display::addColor(Basic::Color* cc)
    if (cc != 0 && colorTable != 0) {
       int i = colorTable->entries();
       char cbuf[20];
-      sprintf(cbuf,"%i",i);
+      std::sprintf(cbuf,"%i",i);
       colorTable->put( new Basic::Pair(cbuf, cc) );
    }
 }

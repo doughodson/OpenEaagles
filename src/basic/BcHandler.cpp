@@ -174,8 +174,8 @@ bool BroadcastHandler::bindSocket()
        else {
          addr.sin_port = htons(getPort());
        }
-       printf("bind() addr = %08x\n", addr.sin_addr.s_addr);
-       printf("bind() port = %08x\n", addr.sin_port);
+       std::printf("bind() addr = %08x\n", addr.sin_addr.s_addr);
+       std::printf("bind() port = %08x\n", addr.sin_port);
 
        if (bind(socketNum, (const struct sockaddr *) &addr, sizeof(addr)) == SOCKET_ERROR) {
          perror("bindSocket(): bind error");

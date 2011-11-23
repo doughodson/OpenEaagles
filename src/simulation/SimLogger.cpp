@@ -433,7 +433,7 @@ std::ostream& SimLogger::SimLogEvent::makeTimeMsg(std::ostream& sout)
     int mm = 0;     // Min
     LCreal ss = 0;  // Sec
     Basic::Time::getHHMMSS(LCreal(time), &hh, &mm, &ss);
-    sprintf(cbuf, "%02d:%02d:%06.3f", hh, mm, ss);
+    std::sprintf(cbuf, "%02d:%02d:%06.3f", hh, mm, ss);
     sout << cbuf;
     return sout;
 }
@@ -451,7 +451,7 @@ std::ostream& SimLogger::SimLogEvent::makeExecTimeMsg(std::ostream& sout)
 
     // exec time
     Basic::Time::getHHMMSS(LCreal(execTime), &hh, &mm, &ss);
-    sprintf(cbuf, "%02d:%02d:%06.3f", hh, mm, ss);
+    std::sprintf(cbuf, "%02d:%02d:%06.3f", hh, mm, ss);
     sout << cbuf;
 
     return sout;
@@ -470,7 +470,7 @@ std::ostream& SimLogger::SimLogEvent::makeUtcTimeMsg(std::ostream& sout)
 
     // sim time
     Basic::Time::getHHMMSS(LCreal(utcTime), &hh, &mm, &ss);
-    sprintf(cbuf, "%02d:%02d:%06.3f", hh, mm, ss);
+    std::sprintf(cbuf, "%02d:%02d:%06.3f", hh, mm, ss);
     sout << cbuf;
 
     return sout;
@@ -489,7 +489,7 @@ std::ostream& SimLogger::SimLogEvent::makeSimTimeMsg(std::ostream& sout)
 
     // utc time
     Basic::Time::getHHMMSS(LCreal(simTime), &hh, &mm, &ss);
-    sprintf(cbuf, "%02d:%02d:%06.3f", hh, mm, ss);
+    std:sprintf(cbuf, "%02d:%02d:%06.3f", hh, mm, ss);
     sout << cbuf;
 
     return sout;

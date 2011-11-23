@@ -62,8 +62,8 @@ bool convertSec2Ymdhms(
    if (hour != 0)  *hour = tmx->tm_hour;
    if (min != 0)   *min = tmx->tm_min;
    if (sec != 0)   *sec = tmx->tm_sec;
-   //printf("s2ymd = seconds = %d\n", seconds);
-   //printf("s2ymd = y=%d, m=%d, d=%d, h=%d, m=%d, s=%d\n", *year, *month, *day, *hour, *min, *sec);
+   //std::printf("s2ymd = seconds = %d\n", seconds);
+   //std::printf("s2ymd = y=%d, m=%d, d=%d, h=%d, m=%d, s=%d\n", *year, *month, *day, *hour, *min, *sec);
 
    return true;
 }
@@ -95,8 +95,8 @@ bool convertYmdhms2Sec(
       tmx.tm_yday = 0;
 
       *seconds = timegm(&tmx);
-   //printf("ymd2s = y=%d, m=%d, d=%d, h=%d, m=%d, s=%d\n", year, month, day, hour, min, sec);
-   //printf("ymd2s = seconds = %d\n", *seconds);
+   //std::printf("ymd2s = y=%d, m=%d, d=%d, h=%d, m=%d, s=%d\n", year, month, day, hour, min, sec);
+   //std::printf("ymd2s = seconds = %d\n", *seconds);
       ok = true;
    }
    return ok;

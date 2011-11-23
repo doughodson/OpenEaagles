@@ -706,7 +706,7 @@ while (YYID (0))
 #ifndef YY_LOCATION_PRINT
 # if YYLTYPE_IS_TRIVIAL
 #  define YY_LOCATION_PRINT(File, Loc)			\
-     fprintf (File, "%d.%d-%d.%d",			\
+     std::fprintf (File, "%d.%d-%d.%d",			\
 	      (Loc).first_line, (Loc).first_column,	\
 	      (Loc).last_line,  (Loc).last_column)
 # else
@@ -728,7 +728,7 @@ while (YYID (0))
 
 # ifndef YYFPRINTF
 #  include <stdio.h> /* INFRINGES ON USER NAME SPACE */
-#  define YYFPRINTF fprintf
+#  define YYFPRINTF std::fprintf
 # endif
 
 # define YYDPRINTF(Args)			\
@@ -1469,7 +1469,7 @@ yyreduce:
     { if ((yyvsp[(2) - (2)].ovalp) != 0) {
                                         int i = (yyvsp[(1) - (2)].svalp)->entries();
                                         char cbuf[20];
-                                        sprintf(cbuf,"%i",i+1);
+                                        std::sprintf(cbuf,"%i",i+1);
                                         Eaagles::Basic::Pair* p = new Eaagles::Basic::Pair(cbuf, (yyvsp[(2) - (2)].ovalp));
                                         (yyvsp[(2) - (2)].ovalp)->unref();
                                         (yyvsp[(1) - (2)].svalp)->put(p);
@@ -1486,7 +1486,7 @@ yyreduce:
     {
                                     int i = (yyvsp[(1) - (2)].svalp)->entries();
                                     char cbuf[20];
-                                    sprintf(cbuf,"%i",i+1);
+                                    std::sprintf(cbuf,"%i",i+1);
                                     Eaagles::Basic::Pair* p = new Eaagles::Basic::Pair(cbuf, (yyvsp[(2) - (2)].ovalp));
                                     (yyvsp[(2) - (2)].ovalp)->unref();
                                     (yyvsp[(1) - (2)].svalp)->put(p);

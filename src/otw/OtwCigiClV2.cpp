@@ -1855,11 +1855,11 @@ void OtwCigiClV2::startOfFrame(const CigiSOFV2* const)
 void OtwCigiClV2::hatResp(const CigiHatRespV2* const p)
 {
    if (p != 0) {
-      printf("<< Incoming\n");
+      std::printf("<< Incoming\n");
 #if 0
       CigiPrintHatResponsePacket(p, 2);
 #endif
-      printf("\n");
+      std::printf("\n");
    }
 }
 
@@ -1918,11 +1918,11 @@ void OtwCigiClV2::elevationRequestSend()
 void OtwCigiClV2::collisionSegmentResp(const CigiCollDetSegRespV2* const p)
 {
    if (p != 0) {
-      printf("<< Incoming\n");
+      std::printf("<< Incoming\n");
 #if 0
       CigiPrintCollisionSegmentRespPacket(p, 2);
 #endif
-      printf("\n");
+      std::printf("\n");
    }
 }
 
@@ -1932,11 +1932,11 @@ void OtwCigiClV2::collisionSegmentResp(const CigiCollDetSegRespV2* const p)
 void OtwCigiClV2::sensorResp(const CigiSensorRespV2* const p)
 {
    if (p != 0) {
-      printf("<< Incoming\n");
+      std::printf("<< Incoming\n");
 #if 0
       CigiPrintSensorResponsePacket(p, 2);
 #endif
-      printf("\n");
+      std::printf("\n");
    }
 }
 
@@ -1974,11 +1974,11 @@ void OtwCigiClV2::hotResp(const CigiHotRespV2* const p)
 void OtwCigiClV2::collisionVolumeResp(const CigiCollDetVolRespV2* const p)
 {
    if (p != 0) {
-      printf("<< Incoming\n");
+      std::printf("<< Incoming\n");
 #if 0
       CigiPrintCollisionVolumeRespPacket(p, 2);
 #endif
-      printf("\n");
+      std::printf("\n");
    }
 }
 
@@ -1988,11 +1988,11 @@ void OtwCigiClV2::collisionVolumeResp(const CigiCollDetVolRespV2* const p)
 void OtwCigiClV2::igResponse(const CigiIGMsgV2* const p)
 {
    if (p != 0) {
-      printf("<< Incoming\n");
+      std::printf("<< Incoming\n");
 #if 0
       CigiPrintIGResponseMessagePacket(p, 2);
 #endif
-      printf("\n");
+      std::printf("\n");
    }
 }
 

@@ -452,8 +452,8 @@ void Simulation::reset()
    unsigned int cMin = 0;
    unsigned int cSec = 0;
    convertSec2Ymdhms(pcTvSec, &cYear, &cMonth, &cDay, &cHour, &cMin, &cSec);
-      //printf("RESET PC Times: y=%d; m=%d; d=%d; h=%d; m=%d; s=%d\n", cYear, cMonth, cDay, cHour, cMin, cSec);
-      //printf("RESET PC sec = %d, uSec=%d\n", pcTvSec, pcTvUSec);
+      //std::printf("RESET PC Times: y=%d; m=%d; d=%d; h=%d; m=%d; s=%d\n", cYear, cMonth, cDay, cHour, cMin, cSec);
+      //std::printf("RESET PC sec = %d, uSec=%d\n", pcTvSec, pcTvUSec);
 
    // Computer time of day (seconds since midnight)
    pcTime = ( cHour * 3600.0 + cMin * 60.0 + cSec );
@@ -484,8 +484,8 @@ void Simulation::reset()
 
    // Recompute simulated whole seconds since midnight, January 1, 1970
    convertYmdhms2Sec(cYear, cMonth, cDay, cHour, cMin, cSec, &simTvSec);
-      //printf("RESET sim Times: y=%d; m=%d; d=%d; h=%d; m=%d; s=%d\n", cYear, cMonth, cDay, cHour, cMin, cSec);
-      //printf("RESET SIM sec = %d, uSec=%d\n", simTvSec, simTvUSec);
+      //std::printf("RESET sim Times: y=%d; m=%d; d=%d; h=%d; m=%d; s=%d\n", cYear, cMonth, cDay, cHour, cMin, cSec);
+      //std::printf("RESET SIM sec = %d, uSec=%d\n", simTvSec, simTvUSec);
 
    // simulated time of day (seconds since midnight)
    simTime = ( cHour * 3600.0 + cMin * 60.0 + cSec );
@@ -729,9 +729,9 @@ void Simulation::updateTC(const LCreal dt)
       // Computer time of day (seconds since midnight)
       pcTime = ( cHour * 3600.0 + cMin * 60.0 + cSec + double(pcTvUSec) / 1000000.0 );
 
-      //printf("ComputerTimes: y=%d; m=%d; d=%d; h=%d; m=%d; s=%d, us=%06d\n", cYear, cMonth, cDay, cHour, cMin, cSec, pcTvUSec);
-      //printf("PC sec = %d\n", pcTvSec);
-      //printf("PC Time = %f\n", pcTime);
+      //std::printf("ComputerTimes: y=%d; m=%d; d=%d; h=%d; m=%d; s=%d, us=%06d\n", cYear, cMonth, cDay, cHour, cMin, cSec, pcTvUSec);
+      //std::printf("PC sec = %d\n", pcTvSec);
+      //std::printf("PC Time = %f\n", pcTime);
    }
 
    // ---
@@ -772,9 +772,9 @@ void Simulation::updateTC(const LCreal dt)
       // Computer time of day (seconds since midnight)
       simTime = ( cHour * 3600.0 + cMin * 60.0 + cSec + double(simTvUSec) / 1000000.0 );
 
-      //printf("SimTimes: y=%d; m=%d; d=%d; h=%d; m=%d; s=%d, us=%06d\n", cYear, cMonth, cDay, cHour, cMin, cSec, simTvUSec);
-      //printf("Sim sec = %d\n", simTvSec);
-      //printf("simTime = %f\n", simTime);
+      //std::printf("SimTimes: y=%d; m=%d; d=%d; h=%d; m=%d; s=%d, us=%06d\n", cYear, cMonth, cDay, cHour, cMin, cSec, simTvUSec);
+      //std::printf("Sim sec = %d\n", simTvSec);
+      //std::printf("simTime = %f\n", simTime);
    }
 
    // ---

@@ -95,7 +95,7 @@ void VPFRecord::createRecord(VPFTable* x, const char* file, const int idx)
                         stream.read((char*)&y, num*sizeof(y));
                         // convert to string
                         char tempBuff[255];
-                        sprintf(tempBuff, "%i", y);
+                        std::sprintf(tempBuff, "%i", y);
                         //itoa(y, tempBuff, 10);
                         if (y == 0) rowNull = true;
                         // create a data type
@@ -112,7 +112,7 @@ void VPFRecord::createRecord(VPFTable* x, const char* file, const int idx)
                         stream.read((char*)&y, num*sizeof(y));
                         // convert to string
                         char tempBuff[255];
-                        sprintf(tempBuff, "%i", y);
+                        std::sprintf(tempBuff, "%i", y);
                         //itoa(y, tempBuff, 10);
                         if (rowNull) data[i]->setValue(NULL);
                         else data[i]->setValue(tempBuff);
@@ -147,7 +147,7 @@ void VPFRecord::createRecord(VPFTable* x, const char* file, const int idx)
                         char buff[255];
                         stream.read((char*)&tempFloat, num*sizeof(tempFloat));
                         //gcvt(tempFloat, 10, buff);  
-                        sprintf(buff, "%f", tempFloat);
+                        std::sprintf(buff, "%f", tempFloat);
                         if (rowNull) data[i]->setValue(0);
                         else data[i]->setValue(buff);
                         data[i]->setLength(num*sizeof(tempFloat));
@@ -159,7 +159,7 @@ void VPFRecord::createRecord(VPFTable* x, const char* file, const int idx)
                         char buff[255];
                         stream.read((char*)&tempDouble, num*sizeof(tempDouble));
                         //gcvt(tempDouble, 10, buff);
-                        sprintf(buff, "%f", tempDouble);
+                        std::sprintf(buff, "%f", tempDouble);
                         if (rowNull) data[i]->setValue(0);
                         else data[i]->setValue(buff);
                         data[i]->setLength(num*sizeof(tempDouble));
@@ -172,12 +172,12 @@ void VPFRecord::createRecord(VPFTable* x, const char* file, const int idx)
                         char buff[255];
                         stream.read((char*)&tempFloat, sizeof(tempFloat));
                         //gcvt(tempFloat, 8, buff);
-                        sprintf(buff, "%f", tempFloat);
+                        std::sprintf(buff, "%f", tempFloat);
                         string->catStr(buff);
                         string->catStr(", ");
                         stream.read((char*)&tempFloat, sizeof(tempFloat));
                         //gcvt(tempFloat, 8, buff);
-                        sprintf(buff, "%f", tempFloat);
+                        std::sprintf(buff, "%f", tempFloat);
                         string->catStr(buff);
                         string->catStr(", ");
                         //stream.read((char*)&tempFloat, sizeof(tempFloat));
@@ -187,7 +187,7 @@ void VPFRecord::createRecord(VPFTable* x, const char* file, const int idx)
                             tempFloat = 1.0f;
                         }
                         //gcvt(tempFloat, 8, buff);
-                        sprintf(buff, "%f", tempFloat);
+                        std::sprintf(buff, "%f", tempFloat);
                         string->catStr(buff);
                         string->catStr(" ");
                         //std::cout << "COORDINATE STRING = " << string->getString() << std::endl;
@@ -238,7 +238,7 @@ void VPFRecord::createRecord(VPFTable* x, const char* file, const int idx)
                         stream.read((char*)&y, num*sizeof(y));
                         // convert to string
                         char tempBuff[255];
-                        sprintf(tempBuff, "%i", y);
+                        std::sprintf(tempBuff, "%i", y);
                         //itoa(y, tempBuff, 10);
                         if (y == 0) rowNull = true;
                         // create a data type
@@ -255,7 +255,7 @@ void VPFRecord::createRecord(VPFTable* x, const char* file, const int idx)
                         stream.read((char*)&y, num*sizeof(y));
                         // convert to string
                         char tempBuff[255];
-                        sprintf(tempBuff, "%i", y);                        
+                        std::sprintf(tempBuff, "%i", y);                        
                         //itoa(y, tempBuff, 10);
                         if (rowNull) data[i]->setValue(0);
                         else data[i]->setValue(tempBuff);
@@ -298,7 +298,7 @@ void VPFRecord::createRecord(VPFTable* x, const char* file, const int idx)
                         char buff[255];
                         stream.read((char*)&tempFloat, num*sizeof(tempFloat));
                         //gcvt(tempFloat, 10, buff);
-                        sprintf(buff, "%f", tempFloat);
+                        std::sprintf(buff, "%f", tempFloat);
                         if (rowNull) data[i]->setValue(0);
                         else data[i]->setValue(buff);
                         data[i]->setLength(num*sizeof(tempFloat));
@@ -310,7 +310,7 @@ void VPFRecord::createRecord(VPFTable* x, const char* file, const int idx)
                         char buff[255];
                         stream.read((char*)&tempDouble, num*sizeof(tempDouble));
                         //gcvt(tempDouble, 10, buff);
-                        sprintf(buff, "%f", tempDouble);
+                        std::sprintf(buff, "%f", tempDouble);
                         if (rowNull) data[i]->setValue(0);
                         else data[i]->setValue(buff);
                         data[i]->setLength(num*sizeof(tempDouble));
@@ -328,17 +328,17 @@ void VPFRecord::createRecord(VPFTable* x, const char* file, const int idx)
                             for (int j = 0; j < numCoords; j++) {
                                 stream.read((char*)&tempFloat, sizeof(tempFloat));
                                 //gcvt(tempFloat, 8, buff);
-                                sprintf(buff, "%f", tempFloat);
+                                std::sprintf(buff, "%f", tempFloat);
                                 string->catStr(buff);
                                 string->catStr(" ");
                                 stream.read((char*)&tempFloat, sizeof(tempFloat));
                                 //gcvt(tempFloat, 8, buff);
-                                sprintf(buff, "%f", tempFloat);
+                                std::sprintf(buff, "%f", tempFloat);
                                 string->catStr(buff);
                                 string->catStr(" ");
                                 stream.read((char*)&tempFloat, sizeof(tempFloat));
                                 //gcvt(tempFloat, 8, buff);
-                                sprintf(buff, "%f", tempFloat);
+                                std::sprintf(buff, "%f", tempFloat);
                                 string->catStr(buff);
                                 string->catStr(" ");
                             }
@@ -356,17 +356,17 @@ void VPFRecord::createRecord(VPFTable* x, const char* file, const int idx)
                             char buff[255];
                             stream.read((char*)&tempFloat, sizeof(tempFloat));
                             //gcvt(tempFloat, 8, buff);
-                            sprintf(buff, "%f", tempFloat);
+                            std::sprintf(buff, "%f", tempFloat);
                             string->catStr(buff);
                             string->catStr(" ");
                             stream.read((char*)&tempFloat, sizeof(tempFloat));
                             //gcvt(tempFloat, 8, buff);
-                            sprintf(buff, "%f", tempFloat);
+                            std::sprintf(buff, "%f", tempFloat);
                             string->catStr(buff);
                             string->catStr(" ");
                             stream.read((char*)&tempFloat, sizeof(tempFloat));
                             //gcvt(tempFloat, 8, buff);
-                            sprintf(buff, "%f", tempFloat);
+                            std::sprintf(buff, "%f", tempFloat);
                             string->catStr(buff);
                             string->catStr(" ");
                             if (rowNull) data[i]->setValue(0);

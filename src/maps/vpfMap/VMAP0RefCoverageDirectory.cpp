@@ -211,7 +211,7 @@ bool VMAP0RefCoverageDirectory::getPlacenameByRecord(const int r, char* p)
             ok = true;
             //lcStrcpy(p, sizeof(p), rec->getData(2));
             strcpy(p, rec->getData(2));
-            //sprintf(p, "%s", rec->getData(2));
+            //std::sprintf(p, "%s", rec->getData(2));
         }
     }
     else std::cout << "NO PLACENAME POINT FEATURE TABLE FOUND, PATH = " << getPath() << std::endl;

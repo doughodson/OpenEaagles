@@ -73,12 +73,12 @@ void UsbJoystickImp::reset()
       {
          char cbuff[128];
          // search for device at "/dev/jsX" first
-         sprintf(cbuff, "/dev/js%d", getDeviceIndex());
+         std::sprintf(cbuff, "/dev/js%d", getDeviceIndex());
          if (doesFileExist(cbuff)) {
            lcStrcpy(deviceName, sizeof(deviceName), cbuff);
          } else {
             // search for device at "/dev/input/jsX" next
-            sprintf(cbuff, "/dev/input/js%d", getDeviceIndex());
+            std::sprintf(cbuff, "/dev/input/js%d", getDeviceIndex());
             if (doesFileExist(cbuff)) {
                lcStrcpy(deviceName, sizeof(deviceName), cbuff);
             }
@@ -127,17 +127,17 @@ void UsbJoystickImp::reset()
             numDI = tmp;
          }
 
-         printf("\n");
-         printf("---------------------------\n");
-         printf("USB Joystick Configuration:\n");
-         printf("---------------------------\n");
-         printf("  Port          : %s\n", deviceName);
-         printf("  Name          : %s\n", modelName);
-         printf("  NumAIs        : %d\n", numAI);
-         printf("  NumDIs        : %d\n", numDI);
-         printf("  Driver version: %d.%d.%d\n", driverVersion >> 16,
+         std::printf("\n");
+         std::printf("---------------------------\n");
+         std::printf("USB Joystick Configuration:\n");
+         std::printf("---------------------------\n");
+         std::printf("  Port          : %s\n", deviceName);
+         std::printf("  Name          : %s\n", modelName);
+         std::printf("  NumAIs        : %d\n", numAI);
+         std::printf("  NumDIs        : %d\n", numDI);
+         std::printf("  Driver version: %d.%d.%d\n", driverVersion >> 16,
                        (driverVersion >> 8) & 0xff, driverVersion & 0xff);
-         printf("\n");
+         std::printf("\n");
       }
    }
 }
