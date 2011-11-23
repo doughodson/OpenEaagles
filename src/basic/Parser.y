@@ -29,10 +29,10 @@
 # pragma warning(disable: 4996)
 #endif
 
-#include <ctype.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <cctype>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
 #include "openeaagles/basic/Parser.h"
 #include "openeaagles/basic/support.h"
 #include "openeaagles/basic/Object.h"

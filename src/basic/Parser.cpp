@@ -77,10 +77,10 @@
 # pragma warning(disable: 4996)
 #endif
 
-#include <ctype.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <cctype>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
 #include "openeaagles/basic/Parser.h"
 #include "openeaagles/basic/support.h"
 #include "openeaagles/basic/Object.h"
@@ -706,7 +706,7 @@ while (YYID (0))
 #ifndef YY_LOCATION_PRINT
 # if YYLTYPE_IS_TRIVIAL
 #  define YY_LOCATION_PRINT(File, Loc)			\
-     std::fprintf (File, "%d.%d-%d.%d",			\
+     fprintf (File, "%d.%d-%d.%d",			\
 	      (Loc).first_line, (Loc).first_column,	\
 	      (Loc).last_line,  (Loc).last_column)
 # else
@@ -728,7 +728,7 @@ while (YYID (0))
 
 # ifndef YYFPRINTF
 #  include <stdio.h> /* INFRINGES ON USER NAME SPACE */
-#  define YYFPRINTF std::fprintf
+#  define YYFPRINTF fprintf
 # endif
 
 # define YYDPRINTF(Args)			\
