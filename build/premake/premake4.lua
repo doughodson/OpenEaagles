@@ -91,10 +91,10 @@ solution "oe"
       }
       configuration { "Release" }
          -- base filename for compiled binary target
-         targetname "oebasic"
+         targetname "oeBasic"
       configuration { "Debug" }
          -- base filename for compiled binary target
-         targetname "oebasic_d"
+         targetname "oeBasic_d"
 
    project "basicGL"
       files {
@@ -114,10 +114,10 @@ solution "oe"
       defines { "FTGL_LIBRARY_STATIC" }
       configuration { "Release" }
          -- base filename for compiled binary target
-         targetname "oebasicGL"
+         targetname "oeBasicGL"
       configuration { "Debug" }
          -- base filename for compiled binary target
-         targetname "oebasicGL_d"
+         targetname "oeBasicGL_d"
 
    project "gui-glut"
       files {
@@ -129,10 +129,10 @@ solution "oe"
       }
       configuration { "Release" }
          -- base filename for compiled binary target
-         targetname "oeglut"
+         targetname "oeGlut"
       configuration { "Debug" }
          -- base filename for compiled binary target
-         targetname "oeglut_d"
+         targetname "oeGlut_d"
 
    project "dafif"
       files {
@@ -141,10 +141,10 @@ solution "oe"
       }
       configuration { "Release" }
          -- base filename for compiled binary target
-         targetname "oedafif"
+         targetname "oeDafif"
       configuration { "Debug" }
          -- base filename for compiled binary target
-         targetname "oedafif_d"
+         targetname "oeDafif_d"
 
    project "dis"
       files {
@@ -153,10 +153,10 @@ solution "oe"
       }
       configuration { "Release" }
          -- base filename for compiled binary target
-         targetname "oedis"
+         targetname "oeDis"
       configuration { "Debug" }
          -- base filename for compiled binary target
-         targetname "oedis_d"
+         targetname "oeDis_d"
 
    project "instruments"
       files {
@@ -166,10 +166,10 @@ solution "oe"
       }
       configuration { "Release" }
          -- base filename for compiled binary target
-         targetname "oeinstruments"
+         targetname "oeInstruments"
       configuration { "Debug" }
          -- base filename for compiled binary target
-         targetname "oeinstruments_d"
+         targetname "oeInstruments_d"
 
    project "ioDevice"
       files {
@@ -190,10 +190,10 @@ solution "oe"
       end
       configuration { "Release" }
          -- base filename for compiled binary target
-         targetname "oeioDevice"
+         targetname "oeIoDevice"
       configuration { "Debug" }
          -- base filename for compiled binary target
-         targetname "oeioDevice_d"
+         targetname "oeIoDevice_d"
 
    project "linearSys"
       files {
@@ -202,10 +202,10 @@ solution "oe"
       }
       configuration { "Release" }
          -- base filename for compiled binary target
-         targetname "oelinearSys"
+         targetname "oeLinearSys"
       configuration { "Debug" }
          -- base filename for compiled binary target
-         targetname "oelinearSys_d"
+         targetname "oeLinearSys_d"
 
    project "maps"
       files {
@@ -214,10 +214,10 @@ solution "oe"
       }
       configuration { "Release" }
          -- base filename for compiled binary target
-         targetname "oemaps"
+         targetname "oeMaps"
       configuration { "Debug" }
          -- base filename for compiled binary target
-         targetname "oemaps_d"
+         targetname "oeMaps_d"
 
    project "otw"
       files {
@@ -234,10 +234,10 @@ solution "oe"
       }
       configuration { "Release" }
          -- base filename for compiled binary target
-         targetname "oeotw"
+         targetname "oeOtw"
       configuration { "Debug" }
          -- base filename for compiled binary target
-         targetname "oeotw_d"
+         targetname "oeOtw_d"
 
    project "sensors"
       files {
@@ -249,10 +249,10 @@ solution "oe"
       }
       configuration { "Release" }
          -- base filename for compiled binary target
-         targetname "oesensors"
+         targetname "oeSensors"
       configuration { "Debug" }
          -- base filename for compiled binary target
-         targetname "oesensors_d"
+         targetname "oeSensors_d"
 
    project "simulation"
       files {
@@ -265,10 +265,10 @@ solution "oe"
       }
       configuration { "Release" }
          -- base filename for compiled binary target
-         targetname "oesimulation"
+         targetname "oeSimulation"
       configuration { "Debug" }
          -- base filename for compiled binary target
-         targetname "oesimulation_d"
+         targetname "oeSimulation_d"
 
    project "terrain"
       files {
@@ -277,10 +277,10 @@ solution "oe"
       }
       configuration { "Release" }
          -- base filename for compiled binary target
-         targetname "oeterrain"
+         targetname "oeTerrain"
       configuration { "Debug" }
          -- base filename for compiled binary target
-         targetname "oeterrain_d"
+         targetname "oeTerrain_d"
 
    project "vehicles"
       files {
@@ -299,8 +299,8 @@ solution "oe"
       end
       configuration { "Release" }
          -- base filename for compiled binary target
-         targetname "oevehicles"
+         targetname "oeVehicles"
       configuration { "Debug" }
          -- base filename for compiled binary target
-         targetname "oevehicles_d"
+         targetname "oeVehicles_d"
 
