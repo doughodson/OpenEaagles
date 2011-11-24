@@ -2,7 +2,7 @@
 --
 -- If premake command is not supplied an action (target compiler), exit!
 --
--- Target of interest:
+-- Targets of interest:
 --     vs2008     (Visual Studio 2008)
 --     vs2010     (Visual Studio 2010)
 --     codeblocks (Code::Blocks)
@@ -12,17 +12,28 @@ if (_ACTION == nil) then
     return
 end
 
+--
+-- determine target directory for compiled libraries
+--
+if (_ACTION == "vs2008") or (_ACTION == "vs2010") then
+  targetDirPath = "../../lib/".._ACTION
+end
+if (_ACTION == "codelite") or (_ACTION == "codeblocks") then
+  targetDirPath = "../../lib/mingw"
+end
+if (os.is("linux")) then
+  targetDirPath = "../../lib/linux"
+end
+print ("Target directory path: "..targetDirPath)
+
 solution "oe"
 
    -- destination directory for generated solution/project files
    location ("../" .. _ACTION)
-if (os.is("linux")) then
+
    -- destination directory for compiled binary target
-   targetdir ("../../lib/linux")
-else
-   -- destination directory for compiled binary target
-   targetdir ("../../lib/".._ACTION)
-end
+   targetdir (targetDirPath)
+
    -- creating static libraries
    kind "StaticLib"
 
@@ -147,21 +158,6 @@ end
          -- base filename for compiled binary target
          targetname "oedis_d"
 
---    project "hla"
---        files {
---            "../../include/openeaagles/hla/**.h",
---            "../../src/hla/**.cpp"
---        }
---        includedirs {
---            "../../../OpenEaagles3rdParty/include/hla"
---        }
---        configuration { "Release" }
---            -- base filename for compiled binary target
---            targetname "oehla"
---        configuration { "Debug" }
---            -- base filename for compiled binary target
---            targetname "oehla_d"
-
    project "instruments"
       files {
          "../../include/openeaagles/instruments/**.h",
@@ -183,7 +179,6 @@ end
       if (os.is("linux")) then
       excludes {
          "../../src/ioDevice/windows/*",
-         "../../src/ioDevice/**eithley**.cpp"
       }
       else
       excludes {

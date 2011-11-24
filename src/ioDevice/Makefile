@@ -21,9 +21,6 @@ endif
 
 all: ${OBJS}
 
-Reformat.cpp: Reformat.l
-	flex -f -p -p -oReformat.cpp Reformat.l
-
 clean:
 	-rm -f *.o
 	-rm -f $(LIB)

@@ -3,6 +3,14 @@ Changes since v11.10
 ================================================================================
 
 --------------------------------------------------------------------------------
+Global changes:
+
+   -- removed almost all remaining "C" include files such as "stdio.h"
+   -- added "std::" prefix to all printf and sprintf calls - support.h
+      already includes <cstdio>
+   -- updated premake files
+ 
+--------------------------------------------------------------------------------
 basic
 
    ## config.h -- a new file that will eventually contain most or all framework
@@ -34,6 +42,10 @@ basicGL
    Image class
       1) added a check to ensure OpenGL extension GL_BGR_EXT is defined
 
+--------------------------------------------------------------------------------
+ioDevice
+
+   -- removed all Keithly I/O device driver classes (these are not used anymore)
 
 --------------------------------------------------------------------------------
 simulation
