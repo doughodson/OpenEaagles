@@ -489,7 +489,7 @@ std::ostream& SimLogger::SimLogEvent::makeSimTimeMsg(std::ostream& sout)
 
     // utc time
     Basic::Time::getHHMMSS(LCreal(simTime), &hh, &mm, &ss);
-    std:sprintf(cbuf, "%02d:%02d:%06.3f", hh, mm, ss);
+    std::sprintf(cbuf, "%02d:%02d:%06.3f", hh, mm, ss);
     sout << cbuf;
 
     return sout;
