@@ -13,6 +13,19 @@ if (_ACTION == nil) then
 end
 
 --
+-- directory location for 3rd party dependencies
+--
+OE_3RD_PARTY_ROOT = "../../../OpenEaagles3rdParty"
+if (os.is("linux")) then
+   OE_3RD_PARTY_ROOT = "/usr/local"
+end
+--
+-- set include and library paths
+--
+OEIncPath         = "../../include"
+OE3rdPartyIncPath = OE_3RD_PARTY_ROOT.."/include"
+
+--
 -- determine target directory for compiled libraries
 --
 if (_ACTION == "vs2008") or (_ACTION == "vs2010") then
@@ -41,7 +54,7 @@ solution "oe"
    language "C++"
 
    -- common include directories (all configurations/all projects)
-   includedirs { "../../include" }
+   includedirs { OEIncPath, OE3rdPartyIncPath }
 
    --
    -- Build (solution) configuration options:
@@ -101,16 +114,7 @@ solution "oe"
          "../../include/openeaagles/basicGL/**.h",
          "../../src/basicGL/**.cpp"
       }
-      if (os.is("linux")) then
-      includedirs {
-         "/usr/include/freetype2"
-      }
-      else
-      includedirs {
-         "../../../OpenEaagles3rdParty/include",
-         "../../../OpenEaagles3rdParty/include/freetype2"
-      }
-      end
+      includedirs { OE3rdPartyIncPath.."/freetype2" }
       defines { "FTGL_LIBRARY_STATIC" }
       configuration { "Release" }
          -- base filename for compiled binary target
@@ -123,9 +127,6 @@ solution "oe"
       files {
          "../../include/openeaagles/gui/glut/**.h",
          "../../src/gui/glut/**.cpp"
-      }
-      includedirs {
-         "../../../OpenEaagles3rdParty/include"
       }
       configuration { "Release" }
          -- base filename for compiled binary target
@@ -177,16 +178,9 @@ solution "oe"
          "../../src/ioDevice/**.cpp"
       }
       if (os.is("linux")) then
-      excludes {
-         "../../src/ioDevice/windows/*",
-      }
+         excludes { "../../src/ioDevice/windows/*" }
       else
-      excludes {
-         "../../src/ioDevice/linux/*"
-      }
-      includedirs {
-         "../../../OpenEaagles3rdParty/include"
-      }
+         excludes { "../../src/ioDevice/linux/*"   }
       end
       configuration { "Release" }
          -- base filename for compiled binary target
@@ -229,9 +223,6 @@ solution "oe"
          "../../include/openeaagles/otw/OtwCigiClV2.h",
          "../../src/otw/OtwCigiClV2.cpp"
       }
-      includedirs {
-         "../../../OpenEaagles3rdParty/include"
-      }
       configuration { "Release" }
          -- base filename for compiled binary target
          targetname "oeOtw"
@@ -243,9 +234,6 @@ solution "oe"
       files {
          "../../include/openeaagles/sensors/**.h",
          "../../src/sensors/**.cpp"
-      }
-      excludes {
-         "../../src/sensors/Makefile"
       }
       configuration { "Release" }
          -- base filename for compiled binary target
@@ -259,9 +247,6 @@ solution "oe"
          "../../include/openeaagles/simulation/**.h",
          "../../include/openeaagles/simulation/*.inl",
          "../../src/simulation/**.cpp"
-      }
-      excludes {
-         "../../src/simulation/Makefile"
       }
       configuration { "Release" }
          -- base filename for compiled binary target
@@ -287,16 +272,7 @@ solution "oe"
          "../../include/openeaagles/vehicles/**.h",
          "../../src/vehicles/**.cpp"
       }
-      if (os.is("linux")) then
-      includedirs {
-         "/usr/local/include/JSBSim"
-      }
-      else
-      includedirs {
-         "../../../OpenEaagles3rdParty/include",
-         "../../../OpenEaagles3rdParty/include/JSBSim"
-      }
-      end
+      includedirs { OE3rdPartyIncPath.."/JSBSim" }
       configuration { "Release" }
          -- base filename for compiled binary target
          targetname "oeVehicles"
