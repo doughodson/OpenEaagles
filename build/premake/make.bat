@@ -7,7 +7,7 @@ rmdir /S /Q ..\vs2010
 rem
 rem delete old compiled libraries
 rem
-rmdir /S /Q ..\..\lib\codeblocks
+rmdir /S /Q ..\..\lib\mingw
 rmdir /S /Q ..\..\lib\vs2008
 rmdir /S /Q ..\..\lib\vs2010
 rem
