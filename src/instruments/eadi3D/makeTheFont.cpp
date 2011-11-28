@@ -1,37 +1,39 @@
-#include <stdio.h>
+
+#include <cstdio>
+
 unsigned int base = 0;
 
 #define MR2IN   0.026785714
 #define IN2MR	(1.0 / MR2IN)
 
 #if 0
-#define glNewList(x, y) printf("%d,\n", x);
-#define glBegin(x) printf("{ FONT_BEGIN },\n");
-#define glVertex2fv(vec); printf("{ FONT_NEXT, %f, %f },\n", vec[0] * IN2MR, vec[1] * IN2MR);
-#define glEnd() printf("{ FONT_END },\n");
-#define glEndList() printf("{ FONT_ADVANCE, 6.0, 0.0 },\n\n");
+#define glNewList(x, y) std::printf("%d,\n", x);
+#define glBegin(x) std::printf("{ FONT_BEGIN },\n");
+#define glVertex2fv(vec); std::printf("{ FONT_NEXT, %f, %f },\n", vec[0] * IN2MR, vec[1] * IN2MR);
+#define glEnd() std::printf("{ FONT_END },\n");
+#define glEndList() std::printf("{ FONT_ADVANCE, 6.0, 0.0 },\n\n");
 #else
 bool begin = false;
 bool wasbegin = false;
 float savex = 0.0;
 float savey = 0.0;
-#define glNewList(x, y) printf("    {\n        %d,\n", x);
+#define glNewList(x, y) std::printf("    {\n        %d,\n", x);
 #define glBegin(x) begin = true;
 #define glVertex2fv(vec) \
     if (begin) { \
-        printf("        FONT_BEGIN, %f, %f,\n", vec[0] * IN2MR, vec[1] * IN2MR); \
+        std::printf("        FONT_BEGIN, %f, %f,\n", vec[0] * IN2MR, vec[1] * IN2MR); \
 	begin = false; \
 	wasbegin = true; \
     } else { \
 	if (!wasbegin) { \
-            printf("        FONT_NEXT, %f, %f,\n", savex * IN2MR, savey * IN2MR); \
+            std::printf("        FONT_NEXT, %f, %f,\n", savex * IN2MR, savey * IN2MR); \
 	} \
 	wasbegin = false; \
 	savex = vec[0]; \
 	savey = vec[1]; \
     }
-#define glEnd() printf("        FONT_END, %f, %f,\n", savex * IN2MR, savey * IN2MR);
-#define glEndList() printf("        FONT_ADVANCE, 6.0, 0.0\n    },\n\n");
+#define glEnd() std::printf("        FONT_END, %f, %f,\n", savex * IN2MR, savey * IN2MR);
+#define glEndList() std::printf("        FONT_ADVANCE, 6.0, 0.0\n    },\n\n");
 #endif
 
 void make_FT_ZRO(unsigned int obj)

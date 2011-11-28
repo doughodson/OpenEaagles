@@ -2,7 +2,7 @@
 --
 -- If premake command is not supplied an action (target compiler), exit!
 --
--- Target of interest:
+-- Targets of interest:
 --     vs2008     (Visual Studio 2008)
 --     vs2010     (Visual Studio 2010)
 --     codeblocks (Code::Blocks)
@@ -12,17 +12,41 @@ if (_ACTION == nil) then
     return
 end
 
+--
+-- directory location for 3rd party dependencies
+--
+OE_3RD_PARTY_ROOT = "../../../OpenEaagles3rdParty"
+if (os.is("linux")) then
+   OE_3RD_PARTY_ROOT = "/usr/local"
+end
+--
+-- set include and library paths
+--
+OEIncPath         = "../../include"
+OE3rdPartyIncPath = OE_3RD_PARTY_ROOT.."/include"
+
+--
+-- determine target directory for compiled libraries
+--
+if (_ACTION == "vs2008") or (_ACTION == "vs2010") then
+  targetDirPath = "../../lib/".._ACTION
+end
+if (_ACTION == "codelite") or (_ACTION == "codeblocks") then
+  targetDirPath = "../../lib/mingw"
+end
+if (os.is("linux")) then
+  targetDirPath = "../../lib/linux"
+end
+print ("Target directory path: "..targetDirPath)
+
 solution "oe"
 
    -- destination directory for generated solution/project files
    location ("../" .. _ACTION)
-if (os.is("linux")) then
+
    -- destination directory for compiled binary target
-   targetdir ("../../lib/linux")
-else
-   -- destination directory for compiled binary target
-   targetdir ("../../lib/".._ACTION)
-end
+   targetdir (targetDirPath)
+
    -- creating static libraries
    kind "StaticLib"
 
@@ -30,7 +54,7 @@ end
    language "C++"
 
    -- common include directories (all configurations/all projects)
-   includedirs { "../../include" }
+   includedirs { OEIncPath, OE3rdPartyIncPath }
 
    --
    -- Build (solution) configuration options:
@@ -80,48 +104,36 @@ end
       }
       configuration { "Release" }
          -- base filename for compiled binary target
-         targetname "oebasic"
+         targetname "oeBasic"
       configuration { "Debug" }
          -- base filename for compiled binary target
-         targetname "oebasic_d"
+         targetname "oeBasic_d"
 
    project "basicGL"
       files {
          "../../include/openeaagles/basicGL/**.h",
          "../../src/basicGL/**.cpp"
       }
-      if (os.is("linux")) then
-      includedirs {
-         "/usr/include/freetype2"
-      }
-      else
-      includedirs {
-         "../../../OpenEaagles3rdParty/include",
-         "../../../OpenEaagles3rdParty/include/freetype2"
-      }
-      end
+      includedirs { OE3rdPartyIncPath.."/freetype2" }
       defines { "FTGL_LIBRARY_STATIC" }
       configuration { "Release" }
          -- base filename for compiled binary target
-         targetname "oebasicGL"
+         targetname "oeBasicGL"
       configuration { "Debug" }
          -- base filename for compiled binary target
-         targetname "oebasicGL_d"
+         targetname "oeBasicGL_d"
 
    project "gui-glut"
       files {
          "../../include/openeaagles/gui/glut/**.h",
          "../../src/gui/glut/**.cpp"
       }
-      includedirs {
-         "../../../OpenEaagles3rdParty/include"
-      }
       configuration { "Release" }
          -- base filename for compiled binary target
-         targetname "oeglut"
+         targetname "oeGlut"
       configuration { "Debug" }
          -- base filename for compiled binary target
-         targetname "oeglut_d"
+         targetname "oeGlut_d"
 
    project "dafif"
       files {
@@ -130,10 +142,10 @@ end
       }
       configuration { "Release" }
          -- base filename for compiled binary target
-         targetname "oedafif"
+         targetname "oeDafif"
       configuration { "Debug" }
          -- base filename for compiled binary target
-         targetname "oedafif_d"
+         targetname "oeDafif_d"
 
    project "dis"
       files {
@@ -142,25 +154,10 @@ end
       }
       configuration { "Release" }
          -- base filename for compiled binary target
-         targetname "oedis"
+         targetname "oeDis"
       configuration { "Debug" }
          -- base filename for compiled binary target
-         targetname "oedis_d"
-
---    project "hla"
---        files {
---            "../../include/openeaagles/hla/**.h",
---            "../../src/hla/**.cpp"
---        }
---        includedirs {
---            "../../../OpenEaagles3rdParty/include/hla"
---        }
---        configuration { "Release" }
---            -- base filename for compiled binary target
---            targetname "oehla"
---        configuration { "Debug" }
---            -- base filename for compiled binary target
---            targetname "oehla_d"
+         targetname "oeDis_d"
 
    project "instruments"
       files {
@@ -170,10 +167,10 @@ end
       }
       configuration { "Release" }
          -- base filename for compiled binary target
-         targetname "oeinstruments"
+         targetname "oeInstruments"
       configuration { "Debug" }
          -- base filename for compiled binary target
-         targetname "oeinstruments_d"
+         targetname "oeInstruments_d"
 
    project "ioDevice"
       files {
@@ -181,24 +178,16 @@ end
          "../../src/ioDevice/**.cpp"
       }
       if (os.is("linux")) then
-      excludes {
-         "../../src/ioDevice/windows/*",
-         "../../src/ioDevice/**eithley**.cpp"
-      }
+         excludes { "../../src/ioDevice/windows/*" }
       else
-      excludes {
-         "../../src/ioDevice/linux/*"
-      }
-      includedirs {
-         "../../../OpenEaagles3rdParty/include"
-      }
+         excludes { "../../src/ioDevice/linux/*"   }
       end
       configuration { "Release" }
          -- base filename for compiled binary target
-         targetname "oeioDevice"
+         targetname "oeIoDevice"
       configuration { "Debug" }
          -- base filename for compiled binary target
-         targetname "oeioDevice_d"
+         targetname "oeIoDevice_d"
 
    project "linearSys"
       files {
@@ -207,10 +196,10 @@ end
       }
       configuration { "Release" }
          -- base filename for compiled binary target
-         targetname "oelinearSys"
+         targetname "oeLinearSys"
       configuration { "Debug" }
          -- base filename for compiled binary target
-         targetname "oelinearSys_d"
+         targetname "oeLinearSys_d"
 
    project "maps"
       files {
@@ -219,10 +208,10 @@ end
       }
       configuration { "Release" }
          -- base filename for compiled binary target
-         targetname "oemaps"
+         targetname "oeMaps"
       configuration { "Debug" }
          -- base filename for compiled binary target
-         targetname "oemaps_d"
+         targetname "oeMaps_d"
 
    project "otw"
       files {
@@ -234,30 +223,24 @@ end
          "../../include/openeaagles/otw/OtwCigiClV2.h",
          "../../src/otw/OtwCigiClV2.cpp"
       }
-      includedirs {
-         "../../../OpenEaagles3rdParty/include"
-      }
       configuration { "Release" }
          -- base filename for compiled binary target
-         targetname "oeotw"
+         targetname "oeOtw"
       configuration { "Debug" }
          -- base filename for compiled binary target
-         targetname "oeotw_d"
+         targetname "oeOtw_d"
 
    project "sensors"
       files {
          "../../include/openeaagles/sensors/**.h",
          "../../src/sensors/**.cpp"
       }
-      excludes {
-         "../../src/sensors/Makefile"
-      }
       configuration { "Release" }
          -- base filename for compiled binary target
-         targetname "oesensors"
+         targetname "oeSensors"
       configuration { "Debug" }
          -- base filename for compiled binary target
-         targetname "oesensors_d"
+         targetname "oeSensors_d"
 
    project "simulation"
       files {
@@ -265,15 +248,12 @@ end
          "../../include/openeaagles/simulation/*.inl",
          "../../src/simulation/**.cpp"
       }
-      excludes {
-         "../../src/simulation/Makefile"
-      }
       configuration { "Release" }
          -- base filename for compiled binary target
-         targetname "oesimulation"
+         targetname "oeSimulation"
       configuration { "Debug" }
          -- base filename for compiled binary target
-         targetname "oesimulation_d"
+         targetname "oeSimulation_d"
 
    project "terrain"
       files {
@@ -282,30 +262,21 @@ end
       }
       configuration { "Release" }
          -- base filename for compiled binary target
-         targetname "oeterrain"
+         targetname "oeTerrain"
       configuration { "Debug" }
          -- base filename for compiled binary target
-         targetname "oeterrain_d"
+         targetname "oeTerrain_d"
 
    project "vehicles"
       files {
          "../../include/openeaagles/vehicles/**.h",
          "../../src/vehicles/**.cpp"
       }
-      if (os.is("linux")) then
-      includedirs {
-         "/usr/local/include/JSBSim"
-      }
-      else
-      includedirs {
-         "../../../OpenEaagles3rdParty/include",
-         "../../../OpenEaagles3rdParty/include/JSBSim"
-      }
-      end
+      includedirs { OE3rdPartyIncPath.."/JSBSim" }
       configuration { "Release" }
          -- base filename for compiled binary target
-         targetname "oevehicles"
+         targetname "oeVehicles"
       configuration { "Debug" }
          -- base filename for compiled binary target
-         targetname "oevehicles_d"
+         targetname "oeVehicles_d"
 

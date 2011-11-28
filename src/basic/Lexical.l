@@ -14,7 +14,7 @@
 
 %{
 #include <iostream>
-#include <string>
+#include <cstring>
 using namespace std;
 #include "openeaagles/basic/support.h"
 #include "openeaagles/basic/Object.h"

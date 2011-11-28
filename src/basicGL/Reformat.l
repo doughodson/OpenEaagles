@@ -184,7 +184,7 @@ int Reformat::processInteger(const char* text, const int len)
    if (lz > 0)
       format[j++] = '0';			// Add a '0' if leading zeros
 
-   j += sprintf(&format[j], "%d", fw);		// Add total field size
+   j += std::sprintf(&format[j], "%d", fw);		// Add total field size
 
    if (dataType == number) {
       format[j++] = '.';
@@ -267,16 +267,16 @@ int Reformat::processFloat(const char* text, const int len)
    // Create the sprintf() format string
    int j = 0;
 
-   format[j++] = '%';				// Start with %
+   format[j++] = '%';                           // Start with %
 
    if (s)
-      format[j++] = '+';			// Add a '+' if signed
+      format[j++] = '+';                        // Add a '+' if signed
 
    if (lz > 0)
-      format[j++] = '0';			// Add a '0' if leading zeros
+      format[j++] = '0';                        // Add a '0' if leading zeros
 
-   j += sprintf(&format[j], "%d", fw);		// Add total field size
-   j += sprintf(&format[j], ".%d", nr);		// Add trailing numbers
+   j += std::sprintf(&format[j], "%d", fw);     // Add total field size
+   j += std::sprintf(&format[j], ".%d", nr);    // Add trailing numbers
 
    format[j++] = 'f';				// Add the data type
 
@@ -409,9 +409,9 @@ int Reformat::processTime(const TimeReadout::TimeMode tm,
       if (lz) hh++;
 
       if (hd || mm == 0)
-         j+= sprintf(&format[j], "%d.%df", hh+hr+(hr>0), hr);
+         j+= std::sprintf(&format[j], "%d.%df", hh+hr+(hr>0), hr);
       else
-         j+= sprintf(&format[j], "%dd", hh);
+         j+= std::sprintf(&format[j], "%dd", hh);
 
       if (hc)
 	 format[j++] = ':';
@@ -429,9 +429,9 @@ int Reformat::processTime(const TimeReadout::TimeMode tm,
       if (lz && hh <= 0) mm++;
 
       if (md || ss == 0)
-         j+= sprintf(&format[j], "%d.%df", mm+mr+(mr>0), mr);
+         j+= std::sprintf(&format[j], "%d.%df", mm+mr+(mr>0), mr);
       else
-         j+= sprintf(&format[j], "%dd", mm);
+         j+= std::sprintf(&format[j], "%dd", mm);
 
       if (mc)
 	 format[j++] = ':';
@@ -448,7 +448,7 @@ int Reformat::processTime(const TimeReadout::TimeMode tm,
       if (s  && hh <= 0 && mm <= 0) ss++;
       if (lz && hh <= 0 && mm <= 0) ss++;
 
-      j+= sprintf(&format[j], "%d.%df", ss+sr+(sr>0), sr);
+      j+= std::sprintf(&format[j], "%d.%df", ss+sr+(sr>0), sr);
    }
 
    format[j] = '\0';
@@ -577,9 +577,9 @@ int Reformat::processDirection(const DirectionReadout::DirMode dm,
       if (s) dd++;
       if (lz) dd++;
       if (ddc || mm == 0)
-         j+= sprintf(&format[j], "%d.%df", dd+dr+(dr>0), dr);
+         j+= std::sprintf(&format[j], "%d.%df", dd+dr+(dr>0), dr);
       else
-         j+= sprintf(&format[j], "%dd", dd);
+         j+= std::sprintf(&format[j], "%dd", dd);
 
       if (dc)
 	 format[j++] = dc;
@@ -597,9 +597,9 @@ int Reformat::processDirection(const DirectionReadout::DirMode dm,
       if (lz && dd <= 0) mm++;
 
       if (md || ss == 0)
-         j+= sprintf(&format[j], "%d.%df", mm+mr+(mr>0), mr);
+         j+= std::sprintf(&format[j], "%d.%df", mm+mr+(mr>0), mr);
       else
-         j+= sprintf(&format[j], "%dd", mm);
+         j+= std::sprintf(&format[j], "%dd", mm);
 
       if (mc)
 	 format[j++] = mc;
@@ -616,7 +616,7 @@ int Reformat::processDirection(const DirectionReadout::DirMode dm,
       if (s  && dd <= 0 && mm <= 0) ss++;
       if (lz && dd <= 0 && mm <= 0) ss++;
 
-      j+= sprintf(&format[j], "%d.%df", ss+sr+(sr>0), sr);
+      j+= std::sprintf(&format[j], "%d.%df", ss+sr+(sr>0), sr);
 
       if (sc)
 	 format[j++] = sc;

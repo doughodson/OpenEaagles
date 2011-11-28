@@ -856,7 +856,7 @@ bool Nib::mainDeadReckoning(
          osg::Matrixd DR;
          drComputeMatrixDR(dT, drAV0, drWwT, drOmega, &DR);
          osg::Matrixd Rwb = DR * drR0;
-         drComputeEulerAngles(Rwb, pNewRPY);
+         Basic::Nav::computeEulerAngles(Rwb, pNewRPY);
 
          *pNewP0 = drP0 + drV0*dT;
       }
@@ -867,7 +867,7 @@ bool Nib::mainDeadReckoning(
          osg::Matrixd DR;
          drComputeMatrixDR(dT, drAV0, drWwT, drOmega, &DR);
          osg::Matrixd Rwb = DR * drR0;
-         drComputeEulerAngles(Rwb, pNewRPY);
+         Basic::Nav::computeEulerAngles(Rwb, pNewRPY);
 
          *pNewP0 = drP0 + drV0*dT + drA0*(0.5*dT*dT);
       }
@@ -900,7 +900,7 @@ bool Nib::mainDeadReckoning(
          drComputeMatrixDR(dT, drAV0, drWwT, drOmega, &DR);
          osg::Matrixd Rwb = DR * drR0;
 
-         drComputeEulerAngles(Rwb, pNewRPY);
+         Basic::Nav::computeEulerAngles(Rwb, pNewRPY);
 
          osg::Matrixd R1;
          drComputeMatrixR1(dT, drAV0, drWwT, drOmega, &R1);
@@ -916,7 +916,7 @@ bool Nib::mainDeadReckoning(
          drComputeMatrixDR(dT, drAV0, drWwT, drOmega, &DR);
          osg::Matrixd Rwb = DR * drR0;
 
-         drComputeEulerAngles(Rwb, pNewRPY);
+         Basic::Nav::computeEulerAngles(Rwb, pNewRPY);
 
          osg::Matrixd R1;
          drComputeMatrixR1(dT, drAV0, drWwT, drOmega, &R1);
@@ -997,47 +997,6 @@ bool Nib::drComputeMatrixR0(
    (*pR0)(2,2) = cosRol * cosPch;
 
    return true;
-}
-
-
-//------------------------------------------------------------------------------
-// Compute euler angles from a rotational matrix
-//------------------------------------------------------------------------------
-bool Nib::drComputeEulerAngles(
-      const osg::Matrixd& A,      // rotational matrix
-      osg::Vec3d* const pRPY     // Euler angles (radians)
-   )
-{
-   double Rol = 0.0;
-   double Pch = 0.0;
-   double Yaw = 0.0;
-
-   Pch = std::asin(-A(0,2));
-   double cosPch = std::cos(Pch);
-
-   const double eps = 1.0e-5;
-   if (eps < std::fabs(cosPch))
-   {
-      double sgnA01 = 1.0;
-      if (A(0,1) < 0.0) sgnA01 = -1.0;
-
-      double sgnA12 = 1.0;
-      if (A(1,2) < 0.0) sgnA12 = -1.0;
-
-      Yaw = sgnA01 * std::acos(A(0,0) / cosPch);
-      Rol = sgnA12 * std::acos(A(2,2) / cosPch);
-   }
-   else
-   {
-      if (0.0 < A(0,2))
-         Pch = PI/2.0;
-      else
-         Pch = -PI/2.0;
-   }
-
-   pRPY->set(Rol, Pch, Yaw);
-
-   return 0;
 }
 
 

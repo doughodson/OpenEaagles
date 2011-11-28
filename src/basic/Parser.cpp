@@ -77,10 +77,10 @@
 # pragma warning(disable: 4996)
 #endif
 
-#include <ctype.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <cctype>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
 #include "openeaagles/basic/Parser.h"
 #include "openeaagles/basic/support.h"
 #include "openeaagles/basic/Object.h"
@@ -1469,7 +1469,7 @@ yyreduce:
     { if ((yyvsp[(2) - (2)].ovalp) != 0) {
                                         int i = (yyvsp[(1) - (2)].svalp)->entries();
                                         char cbuf[20];
-                                        sprintf(cbuf,"%i",i+1);
+                                        std::sprintf(cbuf,"%i",i+1);
                                         Eaagles::Basic::Pair* p = new Eaagles::Basic::Pair(cbuf, (yyvsp[(2) - (2)].ovalp));
                                         (yyvsp[(2) - (2)].ovalp)->unref();
                                         (yyvsp[(1) - (2)].svalp)->put(p);
@@ -1486,7 +1486,7 @@ yyreduce:
     {
                                     int i = (yyvsp[(1) - (2)].svalp)->entries();
                                     char cbuf[20];
-                                    sprintf(cbuf,"%i",i+1);
+                                    std::sprintf(cbuf,"%i",i+1);
                                     Eaagles::Basic::Pair* p = new Eaagles::Basic::Pair(cbuf, (yyvsp[(2) - (2)].ovalp));
                                     (yyvsp[(2) - (2)].ovalp)->unref();
                                     (yyvsp[(1) - (2)].svalp)->put(p);

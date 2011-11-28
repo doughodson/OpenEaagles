@@ -582,7 +582,7 @@ Weapon* Weapon::prerelease()
 
       // add it to the flyout weapont to the player list
       char pname[32];
-      sprintf(pname,"W%05d", flyout->getID());
+      std::sprintf(pname,"W%05d", flyout->getID());
       sim->addNewPlayer(pname,flyout);
 
    }
@@ -672,7 +672,7 @@ Weapon* Weapon::release()
 
                // add it to the flyout weapont to the player list
                char pname[32];
-               sprintf(pname,"W%05d", flyout->getID());
+               std::sprintf(pname,"W%05d", flyout->getID());
                sim->addNewPlayer(pname,flyout);
             }
 

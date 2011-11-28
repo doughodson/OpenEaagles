@@ -14,7 +14,6 @@
 #include "openeaagles/basic/units/Times.h"
 #include <string>
 #include <sstream>
-#include <stdio.h>
 
 // ---
 // TABLOGEVENT_B -- 

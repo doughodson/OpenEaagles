@@ -719,8 +719,8 @@ void JSBSimModel::dynamics(const LCreal dt)
     JSBSim::FGColumnVector3 vVeldot = Tb2l * vUVWdot;
     p->setAcceleration((LCreal)(Basic::Distance::FT2M * vVeldot(1)), (LCreal)(Basic::Distance::FT2M * vVeldot(2)), (LCreal)(Basic::Distance::FT2M * vVeldot(3)));
 
-    //printf("(%6.1f, %6.1f, %6.1f)   vel=%8.1f   alt=%8.1f alt2=%8.1f\n", acData->phi, acData->theta, acData->psi, acData->vp, acData->hp, (M2FT*getAltitude()) );
-    //printf("f=%6.1f p=%6.1f, qa=%6.1f, a=%6.1f, g=%6.1f\n", hotasIO->pitchForce, acData->theta, acData->qa, acData->alpha, acData->gamma );
+    //std::printf("(%6.1f, %6.1f, %6.1f)   vel=%8.1f   alt=%8.1f alt2=%8.1f\n", acData->phi, acData->theta, acData->psi, acData->vp, acData->hp, (M2FT*getAltitude()) );
+    //std::printf("f=%6.1f p=%6.1f, qa=%6.1f, a=%6.1f, g=%6.1f\n", hotasIO->pitchForce, acData->theta, acData->qa, acData->alpha, acData->gamma );
 
         //{
         // std::cout << "JSBSim: ---------------------------------" << std::endl;
@@ -733,30 +733,30 @@ void JSBSimModel::dynamics(const LCreal dt)
         //    acData->n1, acData->n2, acData->n3, 0,
         //    0,          0,          0,          1
         //    );
-        // printf("Eaagles*EA: (%6.1f, %6.1f, %6.1f)\n", getRollD(), getPitchD(), getHeadingD());
+        // std::printf("Eaagles*EA: (%6.1f, %6.1f, %6.1f)\n", getRollD(), getPitchD(), getHeadingD());
         // osg::Matrix m0 = getRotationalMatrix();
         // osg::Quat q0 = getQuaternions();
         // setRotationalMatrix(m2);
         // //setQuaternions(fq);
         // osg::Quat eq = getQuaternions();
         // osg::Matrix m1 = getRotationalMatrix();
-        // printf("Eaagles EA: (%6.1f, %6.1f, %6.1f)\n", getRollD(), getPitchD(), getHeadingD());
-        // printf("JSBSim    EA: (%6.1f, %6.1f, %6.1f)\n", acData->phi, acData->theta, acData->psi);
-        // printf("Eaagles* Q: (%6.3f, %6.3f, %6.3f, %6.3f)\n", q0[0], q0[1], q0[2], q0[3]);
-        // printf("Eaagles  Q: (%6.3f, %6.3f, %6.3f, %6.3f)\n", eq[0], eq[1], eq[2], eq[3]);
-        // printf("JSBSim     Q: (%6.3f, %6.3f, %6.3f, %6.3f)\n", fq[0], fq[1], fq[2], fq[3]);
-        // printf("Eaagles*mm: (%6.3f, %6.3f, %6.3f, %6.3f)\n", m0(0,0), m0(0,1), m0(0,2), m0(0,3));
-        // printf("            (%6.3f, %6.3f, %6.3f, %6.3f)\n", m0(1,0), m0(1,1), m0(1,2), m0(1,3));
-        // printf("            (%6.3f, %6.3f, %6.3f, %6.3f)\n", m0(2,0), m0(2,1), m0(2,2), m0(2,3));
-        // printf("            (%6.3f, %6.3f, %6.3f, %6.3f)\n", m0(3,0), m0(3,1), m0(3,2), m0(3,3));
-        // printf("Eaagles mm: (%6.3f, %6.3f, %6.3f, %6.3f)\n", m1(0,0), m1(0,1), m1(0,2), m1(0,3));
-        // printf("            (%6.3f, %6.3f, %6.3f, %6.3f)\n", m1(1,0), m1(1,1), m1(1,2), m1(1,3));
-        // printf("            (%6.3f, %6.3f, %6.3f, %6.3f)\n", m1(2,0), m1(2,1), m1(2,2), m1(2,3));
-        // printf("            (%6.3f, %6.3f, %6.3f, %6.3f)\n", m1(3,0), m1(3,1), m1(3,2), m1(3,3));
-        // printf("JSBSim    mm: (%6.3f, %6.3f, %6.3f, %6.3f)\n", m2(0,0), m2(0,1), m2(0,2), m2(0,3));
-        // printf("            (%6.3f, %6.3f, %6.3f, %6.3f)\n", m2(1,0), m2(1,1), m2(1,2), m2(1,3));
-        // printf("            (%6.3f, %6.3f, %6.3f, %6.3f)\n", m2(2,0), m2(2,1), m2(2,2), m2(2,3));
-        // printf("            (%6.3f, %6.3f, %6.3f, %6.3f)\n", m2(3,0), m2(3,1), m2(3,2), m2(3,3));
+        // std::printf("Eaagles EA: (%6.1f, %6.1f, %6.1f)\n", getRollD(), getPitchD(), getHeadingD());
+        // std::printf("JSBSim    EA: (%6.1f, %6.1f, %6.1f)\n", acData->phi, acData->theta, acData->psi);
+        // std::printf("Eaagles* Q: (%6.3f, %6.3f, %6.3f, %6.3f)\n", q0[0], q0[1], q0[2], q0[3]);
+        // std::printf("Eaagles  Q: (%6.3f, %6.3f, %6.3f, %6.3f)\n", eq[0], eq[1], eq[2], eq[3]);
+        // std::printf("JSBSim     Q: (%6.3f, %6.3f, %6.3f, %6.3f)\n", fq[0], fq[1], fq[2], fq[3]);
+        // std::printf("Eaagles*mm: (%6.3f, %6.3f, %6.3f, %6.3f)\n", m0(0,0), m0(0,1), m0(0,2), m0(0,3));
+        // std::printf("            (%6.3f, %6.3f, %6.3f, %6.3f)\n", m0(1,0), m0(1,1), m0(1,2), m0(1,3));
+        // std::printf("            (%6.3f, %6.3f, %6.3f, %6.3f)\n", m0(2,0), m0(2,1), m0(2,2), m0(2,3));
+        // std::printf("            (%6.3f, %6.3f, %6.3f, %6.3f)\n", m0(3,0), m0(3,1), m0(3,2), m0(3,3));
+        // std::printf("Eaagles mm: (%6.3f, %6.3f, %6.3f, %6.3f)\n", m1(0,0), m1(0,1), m1(0,2), m1(0,3));
+        // std::printf("            (%6.3f, %6.3f, %6.3f, %6.3f)\n", m1(1,0), m1(1,1), m1(1,2), m1(1,3));
+        // std::printf("            (%6.3f, %6.3f, %6.3f, %6.3f)\n", m1(2,0), m1(2,1), m1(2,2), m1(2,3));
+        // std::printf("            (%6.3f, %6.3f, %6.3f, %6.3f)\n", m1(3,0), m1(3,1), m1(3,2), m1(3,3));
+        // std::printf("JSBSim    mm: (%6.3f, %6.3f, %6.3f, %6.3f)\n", m2(0,0), m2(0,1), m2(0,2), m2(0,3));
+        // std::printf("            (%6.3f, %6.3f, %6.3f, %6.3f)\n", m2(1,0), m2(1,1), m2(1,2), m2(1,3));
+        // std::printf("            (%6.3f, %6.3f, %6.3f, %6.3f)\n", m2(2,0), m2(2,1), m2(2,2), m2(2,3));
+        // std::printf("            (%6.3f, %6.3f, %6.3f, %6.3f)\n", m2(3,0), m2(3,1), m2(3,2), m2(3,3));
         //}
 
     // CGB Set Autopilot Properties directly for now

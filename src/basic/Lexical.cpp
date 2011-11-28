@@ -2011,7 +2011,7 @@ static yyconst yy_state_type yy_NUL_trans[93] =
 
 #line 16 "Lexical.l"
 #include <iostream>
-#include <string>
+#include <cstring>
 using namespace std;
 #include "openeaagles/basic/support.h"
 #include "openeaagles/basic/Object.h"

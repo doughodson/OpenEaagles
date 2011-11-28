@@ -111,15 +111,15 @@ void CadrgTocEntry::generateItems(void)
 	mapImage = 0;
     // Check for overview image
     if ((strncmp(type, "OVERVIEW", 8) == 0) || (strncmp(scale, "OVERVIEW", 8) == 0)) {
-        sprintf(tempTitle, "%s %s", type, scale);
+        std::sprintf(tempTitle, "%s %s", type, scale);
     }
     // Image has a nwLat of ~0
-	else if (nwLat == (unsigned int) ~0) sprintf(title, "%s %s", type, scale);
+	else if (nwLat == (unsigned int) ~0) std::sprintf(title, "%s %s", type, scale);
 	else {
-		sprintf(tempTitle, "%s %s Zone%s: %6.3f,%6.3f / %6.3f,%6.3f", type, scale, zone, nwLat, nwLon, seLat, seLon);
+		std::sprintf(tempTitle, "%s %s Zone%s: %6.3f,%6.3f / %6.3f,%6.3f", type, scale, zone, nwLat, nwLon, seLat, seLon);
 		mapImage = 1;
 	}
-    sprintf(title, "%s", tempTitle);
+    std::sprintf(title, "%s", tempTitle);
 }
 
 // Set functions

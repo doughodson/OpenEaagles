@@ -1,5 +1,6 @@
 
 #include "openeaagles/basic/NavDR.h"
+#include "openeaagles/basic/Nav.h"
 
 namespace Eaagles {
 namespace Basic {
@@ -59,7 +60,9 @@ bool NavDR::deadReckoning(
          // get new roll, pitch, yaw
          osg::Matrixd Rwb;
          getRwbMatrix(dT, rpy, av, &Rwb);
-         getRpyVector(Rwb, &newRPY);            // newRPY
+         osg::Vec3d rpy3;
+         Nav::computeEulerAngles(Rwb, &rpy3);            // newRPY
+         newRPY.set(rpy3[0], rpy3[1], rpy3[2], 0.0);
          break;
       }
       
@@ -73,7 +76,9 @@ bool NavDR::deadReckoning(
          // get new roll, pitch, yaw
          osg::Matrixd Rwb;
          getRwbMatrix(dT, rpy, av, &Rwb);
-         getRpyVector(Rwb, &newRPY);            // new RPY
+         osg::Vec3d rpy3;
+         Nav::computeEulerAngles(Rwb, &rpy3);            // newRPY
+         newRPY.set(rpy3[0], rpy3[1], rpy3[2], 0.0);
          break;
       }
       
@@ -111,7 +116,9 @@ bool NavDR::deadReckoning(
          // get new roll, pitch, yaw
          osg::Matrixd Rwb;
          getRwbMatrix(dT, rpy, av, &Rwb);
-         getRpyVector(Rwb, &newRPY);            // new RPY
+         osg::Vec3d rpy3;
+         Nav::computeEulerAngles(Rwb, &rpy3);            // newRPY
+         newRPY.set(rpy3[0], rpy3[1], rpy3[2], 0.0);
          break;
       }
       
@@ -129,7 +136,9 @@ bool NavDR::deadReckoning(
          // get new roll, pitch, yaw
          osg::Matrixd Rwb;
          getRwbMatrix(dT, rpy, av, &Rwb);
-         getRpyVector(Rwb, &newRPY);            // new RPY
+         osg::Vec3d rpy3;
+         Nav::computeEulerAngles(Rwb, &rpy3);            // newRPY
+         newRPY.set(rpy3[0], rpy3[1], rpy3[2], 0.0);
          break;
       }
 

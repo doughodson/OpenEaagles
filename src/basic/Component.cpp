@@ -4,7 +4,6 @@
 
 #include <limits.h>
 #include <float.h>
-#include <stdio.h>
 
 #include "openeaagles/basic/Component.h"
 
@@ -1079,7 +1078,7 @@ bool Component::send(const char* const id, const int event, Object* const value,
 
 // ---
 // Send 'n' event messages with int type values to components.  The 'id' is used
-// with sprintf() to create the component names.  Example: n = 4, id="test%02d"
+// with std::sprintf() to create the component names.  Example: n = 4, id="test%02d"
 // will generate component names test01, test02, test03 and test04.
 // ---
 bool Component::send(const char* const id, const int event, const int value[], SendData sd[], const int n)
@@ -1097,7 +1096,7 @@ bool Component::send(const char* const id, const int event, const int value[], S
 
 // ---
 // Send 'n' event messages with float type values to components.  The 'id' is used
-// with sprintf() to create the component names.  Example: n = 4, id="test%02d"
+// with std::sprintf() to create the component names.  Example: n = 4, id="test%02d"
 // will generate component names test01, test02, test03 and test04.
 // ---
 bool Component::send(const char* const id, const int event, const float value[], SendData sd[], const int n)
@@ -1115,7 +1114,7 @@ bool Component::send(const char* const id, const int event, const float value[],
 
 // ---
 // Send 'n' event messages with char type values to components.  The 'id' is used
-// with sprintf() to create the component names.  Example: n = 4, id="test%02d"
+// with std::sprintf() to create the component names.  Example: n = 4, id="test%02d"
 // will generate component names test01, test02, test03 and test04.
 // ---
 bool Component::send(const char* const id, const int event, const double value[], SendData sd[], const int n)
@@ -1367,7 +1366,7 @@ Component* Component::SendData::getObject(Component* gobj, const char* const id,
             //      gives name = xxx.5
             // ---
             char name[128];
-            sprintf(name,id,n);
+            std::sprintf(name,id,n);
             p = gobj->findByName(name);
         }
         if (p != 0) obj = (Component*) p->object();

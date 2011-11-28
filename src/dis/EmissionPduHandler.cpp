@@ -74,14 +74,6 @@ void EmissionPduHandler::initData()
    emitterFunction = ESF_FIRE_CONTROL; // Default
 
    emPduExecTime = 0;
-
-   emissionSystem = 0;
-   for (unsigned int j = 0; j < MAX_EM_BEAMS; j++) {
-      emitterBeamData[j] = 0;
-      for (unsigned int k = 0; k < MAX_TARGETS_IN_TJ_FIELD; k++) {
-         tjTargets[j][k] = 0;
-      }
-   }
 }
 
 //------------------------------------------------------------------------------
@@ -118,21 +110,17 @@ void EmissionPduHandler::copyData(const EmissionPduHandler& org, const bool cc)
       tmp->unref();
    }
 
+   // ---
+   // copy the saved (N-1) data
+   // ---
+   setSavedEmissionSystemData( *( org.getSavedEmissionSystemData() ) );
 
-   if (emissionSystem != 0) {
-      delete emissionSystem;
-      emissionSystem = 0;
-   }
    for (unsigned int j = 0; j < MAX_EM_BEAMS; j++) {
-      if (emitterBeamData[j] != 0) {
-         delete emitterBeamData[j];
-         emitterBeamData[j] = 0;
-      }
+
+      setSavedEmitterBeamData( j,  *( org.getSavedEmitterBeamData(j) ) );
+
       for (int k = 0; k < MAX_TARGETS_IN_TJ_FIELD; k++) {
-         if (tjTargets[j][k] != 0) {
-            delete tjTargets[j][k];
-            tjTargets[j][k] = 0;
-         }
+         setSavedTrackJamTargetData(j, k, *( org.getSavedTrackJamTargetData(j,k) ) );
       }
    }
 }
@@ -145,23 +133,6 @@ void EmissionPduHandler::deleteData()
    setSensor(0);
    setSensorModel(0);
    setAntennaModel(0);
-
-   if (emissionSystem != 0) {
-      delete emissionSystem;
-      emissionSystem = 0;
-   }
-   for (unsigned int j = 0; j < MAX_EM_BEAMS; j++) {
-      if (emitterBeamData[j] != 0) {
-         delete emitterBeamData[j];
-         emitterBeamData[j] = 0;
-      }
-      for (int k = 0; k < MAX_TARGETS_IN_TJ_FIELD; k++) {
-         if (tjTargets[j][k] != 0) {
-            delete tjTargets[j][k];
-            tjTargets[j][k] = 0;
-         }
-      }
-   }
 }
 
 //------------------------------------------------------------------------------
@@ -228,6 +199,36 @@ bool EmissionPduHandler::setDefaultOut(const bool flg)
    return true;
 }
 
+// Saved EmissionSystem data
+bool EmissionPduHandler::setSavedEmissionSystemData(const EmissionSystem& newES)
+{
+   emissionSystemN1 = newES;
+   return true;
+}
+
+// Saved EmitterBeamData
+bool EmissionPduHandler::setSavedEmitterBeamData(const unsigned int idx, const EmitterBeamData& newEBD)
+{
+   bool ok = false;
+   if (idx < MAX_EM_BEAMS) {
+      emitterBeamDataN1[idx] = newEBD;
+      ok = true;
+   }
+   return ok;
+}
+
+// Save track/jam target data
+bool EmissionPduHandler::setSavedTrackJamTargetData(const unsigned int ibeam, const unsigned int ifield, const TrackJamTargets& newTJT)
+{
+{
+   bool ok = false;
+   if (ibeam < MAX_EM_BEAMS && ifield < MAX_TARGETS_IN_TJ_FIELD) {
+      tjTargetsN1[ibeam][ifield] = newTJT;
+      ok = true;
+   }
+   return ok;
+}
+}
 
 //------------------------------------------------------------------------------
 // Slot functions
@@ -606,13 +607,6 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
    if ( (result == UNSURE)) {
 
       // ---
-      // Make sure we have the saved (n-1) EmitterSystem structure
-      // ---
-      if (emissionSystem == 0) {
-         emissionSystem = new EmissionSystem();
-      }
-
-      // ---
       // Emission system data
       // ---
       EmissionSystem es;  // used to build the final EmissionSystem
@@ -627,24 +621,10 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
       unsigned char ib = 0;
 
       // ---
-      // Make sure we have the saved (n-1) EmitterBeamData and TrackJamTargets structures
-      // ---
-      {
-         if (emitterBeamData[ib] == 0) {
-            emitterBeamData[ib] = new EmitterBeamData();
-         }
-         if (tjTargets[ib][0] == 0) {
-            for (int it = 0; it < MAX_TARGETS_IN_TJ_FIELD; it++) {
-               tjTargets[ib][it] = new TrackJamTargets();
-            }
-         }
-      }
-
-      // ---
-      // If the transmitter is enabled (emitting) then create the beam data
+      // If the transmitter is emitting then create the beam data
       // ---
       bool playerOk = nib->getPlayer()->isActive() && !nib->getPlayer()->isDestroyed();
-      if (playerOk && beam->isTransmitterEnabled()) {
+      if (playerOk && beam->isTransmitting()) {
 
          // Antenna (if any)
          const Simulation::Antenna* const ant = beam->getAntenna();
@@ -776,8 +756,8 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
          // compare & transfer T/J targets
          // ---
          for (int it = 0; it < numTJT; it++) {
-            if ( tjt[it] != *tjTargets[ib][it] ) {
-               *tjTargets[ib][it] = tjt[it];
+            if ( tjt[it] != *getSavedTrackJamTargetData(ib,it) ) {
+               setSavedTrackJamTargetData(ib, it, tjt[it]);
                result = YES;
             }
          }
@@ -819,13 +799,13 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
          // ---
          // compare & transfer the emitter beam data
          // ---
-         if ( bd != *emitterBeamData[ib] ) {
+         if ( bd != *getSavedEmitterBeamData(ib) ) {
 #ifdef DISV7
             // there will be an update PDU, make sure it includes current values.
             bd.parameterData.beamAzimuthCenter = tmpbeamAzimuthCenter;
             bd.parameterData.beamElevationCenter = tmpbeamElevationCenter;
 #endif
-            *emitterBeamData[ib] = bd;
+            setSavedEmitterBeamData(ib,bd);
             result = YES;
          }
 
@@ -847,8 +827,8 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
          // ---
          // compare & transfer the emitter beam data
          // ---
-         if ( bd != *emitterBeamData[ib] ) {
-            *emitterBeamData[ib] = bd;
+         if ( bd != *getSavedEmitterBeamData(ib) ) {
+            setSavedEmitterBeamData(ib,bd);
             result = YES;
          }
       } // End !(playerOK && transmitter enabled (beam is emitting))
@@ -867,8 +847,8 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
       // ---
       // compare & transfer the emission system data
       // ---
-      if ( es != *emissionSystem ) {
-         *emissionSystem = es;
+      if ( es != *getSavedEmissionSystemData() ) {
+         setSavedEmissionSystemData(es);
          result = YES;
       }
 
@@ -885,7 +865,7 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
       // Last -- Timeout (use Max DR time) -- do this check after the data comparison
       //    to make sure all of the PDU data has been loaded
       // ---   
-      if ( (result == UNSURE) && nib->getPlayer()->isLocalPlayer() && emissionSystem != 0) {
+      if ( (result == UNSURE) && nib->getPlayer()->isLocalPlayer()) {
          LCreal drTime = curExecTime - getEmPduExecTime();
          if ( drTime >= disIO->getMaxTimeDR(nib) ) {
             result = YES;
@@ -912,12 +892,12 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
 unsigned short EmissionPduHandler::emissionSystemData2PDU(EmissionSystem* const es)
 {
     // Make sure we have all the data we need
-    if (es == 0 || emissionSystem == 0) return 0;
+    if (es == 0) return 0;
 
     // ---
     // Copy the EmissionSystem structures (this does not copy the beam data)
     // ---
-    *es = *emissionSystem;
+    *es = *( getSavedEmissionSystemData() );
 
     // total length in bytes
     unsigned short totalLength = sizeof(EmissionSystem);
@@ -929,27 +909,24 @@ unsigned short EmissionPduHandler::emissionSystemData2PDU(EmissionSystem* const 
     // The EmitterBeamData structures follow the EmissionSystem structure
     unsigned char* p = ((unsigned char*) es) + sizeof(EmissionSystem);
 
-    for (unsigned int ib = 0; ib < es->numberOfBeams; ib++) {
-
-      if (emitterBeamData[ib] == 0) return 0; // error check
+    for (unsigned int ib = 0; ib < es->numberOfBeams && ib < MAX_EM_BEAMS; ib++) {
 
       // Copy emitter beam data
       EmitterBeamData* eb = (EmitterBeamData*) p;
-      *eb = *emitterBeamData[ib];
+      *eb = *getSavedEmitterBeamData(ib);
       p += sizeof(EmitterBeamData);
 
       // The TrackJamTargets structures follow their EmitterBeamData structure
-      int n = emitterBeamData[ib]->numberOfTargetsInTrack;
-      for (int it = 0; it < n; it++) {
-         if (tjTargets[ib][it] == 0) return 0;   // error check
+      int n = getSavedEmitterBeamData(ib)->numberOfTargetsInTrack;
+      for (int it = 0; it < n && it < MAX_TARGETS_IN_TJ_FIELD; it++) {
 
          // Copy the Track/Jam target data
          TrackJamTargets* tjt = (TrackJamTargets*) p;
-         *tjt = *tjTargets[ib][it];
+         *tjt = *getSavedTrackJamTargetData(ib,it);
          p += sizeof(TrackJamTargets);
       }
 
-      totalLength += (emitterBeamData[ib]->beamDataLength*4);
+      totalLength += (getSavedEmitterBeamData(ib)->beamDataLength*4);
     }
 
     // ---

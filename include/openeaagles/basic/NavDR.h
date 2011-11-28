@@ -126,14 +126,6 @@ public:
          osg::Matrixd* const pRwb
       );
 
-   //--------------------------------------------------------------------------
-   // Compute Rpy Vector
-   //--------------------------------------------------------------------------
-   static bool getRpyVector(
-         const osg::Matrixd A,
-         osg::Vec4d* const pRPY          // body roll, pitch, yaw [radians]
-      );
-
 }; // End class NavDR
 
 

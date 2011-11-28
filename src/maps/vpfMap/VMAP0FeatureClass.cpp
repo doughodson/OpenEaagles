@@ -31,7 +31,7 @@ void VMAP0FeatureClass::deleteData()
 void VMAP0FeatureClass::setName(const char* x)
 {
     //std::cout << "CREATING FEATURE CLASS = " << x << std::endl;
-    sprintf(name, "%s", x);
+    std::sprintf(name, "%s", x);
 }
 
 void VMAP0FeatureClass::addRelation(const char* table1, const char* table2, const char *table1key, const char *table2key)
@@ -65,16 +65,16 @@ void VMAP0FeatureClass::addRelation(const char* table1, const char* table2, cons
     relations[numRelations] = new Relation();
     
     strcpy(relations[numRelations]->table1, tempTable1);
-    //sprintf(relations[numRelations]->table1, "%s", tempTable1);
+    //std::sprintf(relations[numRelations]->table1, "%s", tempTable1);
     //lcStrcpy(relations[numRelations]->table1, sizeof(relations[numRelations]->table1), tempTable1);
     strcpy(relations[numRelations]->table2, tempTable2);
-    //sprintf(relations[numRelations]->table2, "%s", tempTable2);
+    //std::sprintf(relations[numRelations]->table2, "%s", tempTable2);
     //lcStrcpy(relations[numRelations]->table2, sizeof(relations[numRelations]->table2), tempTable2);
     strcpy(relations[numRelations]->table1key, tempTable1Key);
-    //sprintf(relations[numRelations]->table1key, "%s", tempTable1Key);
+    //std::sprintf(relations[numRelations]->table1key, "%s", tempTable1Key);
     //lcStrcpy(relations[numRelations]->table1key, sizeof(relations[numRelations]->table1key), tempTable1Key);
     strcpy(relations[numRelations]->table2key, tempTable2Key);
-    //sprintf(relations[numRelations]->table2key, "%s", tempTable2Key);
+    //std::sprintf(relations[numRelations]->table2key, "%s", tempTable2Key);
     //lcStrcpy(relations[numRelations]->table2key, sizeof(relations[numRelations]->table2key), tempTable2Key);
     relations[numRelations]->table1Type = -1;
     relations[numRelations]->table2Type = -1;

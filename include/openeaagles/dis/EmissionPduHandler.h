@@ -5,6 +5,7 @@
 #define __Eaagles_Network_Dis_EmissionPduHandler_H__
 
 #include "openeaagles/dis/NetIO.h"
+#include "openeaagles/dis/structs.h"
 
 namespace Eaagles {
    namespace Simulation {
@@ -154,16 +155,24 @@ public:
    virtual bool setSlotDefaultOut(const Basic::Number* const msg);
 
 protected:
+    const EmissionSystem* getSavedEmissionSystemData() const;
+    bool setSavedEmissionSystemData(const EmissionSystem& newES);
+
+    const EmitterBeamData* getSavedEmitterBeamData(const unsigned int idx) const;
+    bool setSavedEmitterBeamData(const unsigned int idx, const EmitterBeamData& newEBD);
+
+    const TrackJamTargets* getSavedTrackJamTargetData(const unsigned int ibeam, const unsigned int ifield) const;
+    bool setSavedTrackJamTargetData(const unsigned int ibeam, const unsigned int ifield, const TrackJamTargets& newTJT);
+
     virtual unsigned short emissionSystemData2PDU(EmissionSystem* const es);
     virtual bool isUpdateRequired(const LCreal curExecTime, bool* const stateChg, Nib* const nib);
 
-protected:   // (#temporary#) allow subclasses access to these
-   EmissionSystem*  emissionSystem;                // Saved (n-1) Description of the Emitter System
-   EmitterBeamData* emitterBeamData[MAX_EM_BEAMS]; // Saved (n-1) EmitterBeamData
-   TrackJamTargets* tjTargets[MAX_EM_BEAMS][MAX_TARGETS_IN_TJ_FIELD];  // Saved (n-1) TrackJamTargets
-
 private:
    void initData();
+
+   EmissionSystem  emissionSystemN1;                // Saved (n-1) Description of the Emitter System
+   EmitterBeamData emitterBeamDataN1[MAX_EM_BEAMS]; // Saved (n-1) EmitterBeamData
+   TrackJamTargets tjTargetsN1[MAX_EM_BEAMS][MAX_TARGETS_IN_TJ_FIELD];  // Saved (n-1) TrackJamTargets
 
    bool defaultIn;                  // This is the default handler for incoming PDUs
    bool defaultOut;                 // This is the default handler for outgoing PDUs
@@ -201,6 +210,18 @@ inline bool EmissionPduHandler::isDefaultIncomingHandler() const     { return de
 inline bool EmissionPduHandler::isDefaultOutgoingHandler() const     { return defaultOut; }
 
 //inline void EmissionPduHandler::setTimedOut()                        { }
+
+inline const EmissionSystem* EmissionPduHandler::getSavedEmissionSystemData() const  { return &emissionSystemN1; }
+
+inline const EmitterBeamData* EmissionPduHandler::getSavedEmitterBeamData(const unsigned int idx) const
+{
+   return (idx < MAX_EM_BEAMS ? &emitterBeamDataN1[idx] : 0);
+}
+
+inline const TrackJamTargets* EmissionPduHandler::getSavedTrackJamTargetData(const unsigned int ibeam, const unsigned int ifield) const
+{
+   return (ibeam < MAX_EM_BEAMS && ifield < MAX_TARGETS_IN_TJ_FIELD ? &tjTargetsN1[ibeam][ifield] : 0);
+}
 
 } // End Dis namespace
 } // End Network namespace

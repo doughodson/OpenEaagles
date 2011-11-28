@@ -371,7 +371,7 @@ bool MonitorMetrics::computeMatrix()
 	// Invert phosphor matrix
 	if ( phosInv.invert( phosphorCoordinates ) == false )
 	{
-		fprintf(stderr, "MonitorMetrics: Cannot invert phosphor coordinate matrix!");
+		std::fprintf(stderr, "MonitorMetrics: Cannot invert phosphor coordinate matrix!");
 		return false;
 	}
 
