@@ -588,7 +588,7 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
    // otherwise, could be entirely removed.
 #ifdef DISV7
    LCreal drTime = curExecTime - getEmPduExecTime();
-   if ( drTime < (disIO->getHbtPduEe() /100.0f) ) {
+   if ( drTime < (disIO->getHbtPduEe() /10.0f) ) {
       result = NO;
       return NO;
    }
@@ -767,27 +767,29 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
          // implement DISv7 parameter thresholds and other restrictions on parameters that could otherwise cause updated PDUs to be sent.
 
          // change in beamSweepSync should not force new PDU
-         (*emitterBeamData[ib]).parameterData.beamSweepSync = bd.parameterData.beamSweepSync;
+         float tmpbeamSweepSync = bd.parameterData.beamSweepSync;
+         bd.parameterData.beamSweepSync = (*getSavedEmitterBeamData(ib)).parameterData.beamSweepSync;
 
          // d) Changes in beam geometry descriptors exceed specified thresholds. Beam geometry descriptors
          // include beam azimuth center, beam azimuth sweep, beam elevation center and beam elevation
          // sweep. The azimuth and elevation thresholds shall be identified by the symbolic names
          // EE_AZ_THRSH and EE_EL_THRSH respectively. (See 4.2.8.3 for parameter details and default
          // values.)
-         // store values that will be used in threshold comparisons temporarily
+
+         // store current values temporarily
          float tmpbeamAzimuthCenter = bd.parameterData.beamAzimuthCenter;
          float tmpbeamElevationCenter = bd.parameterData.beamElevationCenter;
 
          // do threshold tests - if new value is not over threshold, reset it in bd struct to old value, so that it will not affect
          // the comparison of new bd with old emitterBeamData: ( bd != *emitterBeamData[ib] ) below
          // (but if new bd will be sent, make sure to restore the new values that we've temporarily stored (above))
-         if (fabs( (*emitterBeamData[ib]).parameterData.beamAzimuthCenter - bd.parameterData.beamAzimuthCenter ) <= disIO->getEeAzThrsh()) {
-            // did not exceed threshold, set current val to previous val, so it will not affect ( bd != *emitterBeamData[ib] ) comparison
-            bd.parameterData.beamAzimuthCenter = (*emitterBeamData[ib]).parameterData.beamAzimuthCenter;
+         if (fabs( (*getSavedEmitterBeamData(ib)).parameterData.beamAzimuthCenter - bd.parameterData.beamAzimuthCenter ) <= disIO->getEeAzThrsh()) {
+            // did not exceed threshold, set current val to previous val, so it will not affect comparison
+            bd.parameterData.beamAzimuthCenter = (*getSavedEmitterBeamData(ib)).parameterData.beamAzimuthCenter;
          }
-         if (fabs( (*emitterBeamData[ib]).parameterData.beamElevationCenter - bd.parameterData.beamElevationCenter ) <= disIO->getEeElThrsh()) {
-            // did not exceed threshold, set current val to previous val, so it will not affect ( bd != *emitterBeamData[ib] ) comparison
-            bd.parameterData.beamElevationCenter = (*emitterBeamData[ib]).parameterData.beamElevationCenter;
+         if (fabs( (*getSavedEmitterBeamData(ib)).parameterData.beamElevationCenter - bd.parameterData.beamElevationCenter ) <= disIO->getEeElThrsh()) {
+            // did not exceed threshold, set current val to previous val, so it will not affect comparison
+            bd.parameterData.beamElevationCenter = (*getSavedEmitterBeamData(ib)).parameterData.beamElevationCenter;
          }
 #endif
          // ---
@@ -804,6 +806,7 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
             // there will be an update PDU, make sure it includes current values.
             bd.parameterData.beamAzimuthCenter = tmpbeamAzimuthCenter;
             bd.parameterData.beamElevationCenter = tmpbeamElevationCenter;
+            bd.parameterData.beamSweepSync = tmpbeamSweepSync;
 #endif
             setSavedEmitterBeamData(ib,bd);
             result = YES;
@@ -853,7 +856,7 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
       }
 
 #ifdef DISV7
-      if ( playerOk && (result == UNSURE) && nib->getPlayer()->isLocalPlayer() && emissionSystem != 0) {
+      if ( playerOk && (result == UNSURE) && nib->getPlayer()->isLocalPlayer() ) {
          LCreal drTime = curExecTime - getEmPduExecTime();
          if ( drTime >= disIO->getHbtPduEe() ) {
             result = YES;
