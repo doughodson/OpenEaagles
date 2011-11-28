@@ -584,10 +584,10 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
       unsigned char ib = 0;
 
       // ---
-      // If the transmitter is enabled (emitting) then create the beam data
+      // If the transmitter is emitting then create the beam data
       // ---
       bool playerOk = nib->getPlayer()->isActive() && !nib->getPlayer()->isDestroyed();
-      if (playerOk && beam->isTransmitterEnabled()) {
+      if (playerOk && beam->isTransmitting()) {
 
          // Antenna (if any)
          const Simulation::Antenna* const ant = beam->getAntenna();
