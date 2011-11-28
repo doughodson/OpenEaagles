@@ -26,6 +26,7 @@ basic
       2) changed 'LCreal' variables to 'double'
       3) general clean up
 
+
 --------------------------------------------------------------------------------
 basicGL
 
@@ -42,10 +43,19 @@ basicGL
    Image class
       1) added a check to ensure OpenGL extension GL_BGR_EXT is defined
 
+
+--------------------------------------------------------------------------------
+dis
+
+   EmissionPduHandler class
+      1) isUpdateRequired() -- changed the system transmitting check from
+         RfSystem::isTransmitterEnabled() to RfSystem::isTransmitting()
+
 --------------------------------------------------------------------------------
 ioDevice
 
    -- removed all Keithly I/O device driver classes (these are not used anymore)
+
 
 --------------------------------------------------------------------------------
 simulation
@@ -58,6 +68,8 @@ simulation
       2) mainDeadReckoning() function is now using Basic::Nav::computeEulerAngles()
          instead of drComputeEulerAngles()
 
-
+   RfSystem class
+      1) isReceiverEnabled() now checks for system power.
+      2) isTransmitterEnabled() now checks for system power.
 
 

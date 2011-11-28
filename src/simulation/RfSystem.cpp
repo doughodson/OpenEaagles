@@ -292,13 +292,13 @@ LCreal RfSystem::transmitPower(const LCreal peakPwr) const
 // Returns true if the R/F system's receiver is enabled
 bool RfSystem::isReceiverEnabled() const
 {
-   return recvEnable;
+   return recvEnable && (getPowerSwitch() > PWR_STBY);
 }
 
 // Returns true if the R/F system's transmitter is enabled
 bool RfSystem::isTransmitterEnabled() const
 {
-   return xmitEnable;
+   return xmitEnable && (getPowerSwitch() > PWR_STBY);
 } 
 
 // Returns true if the R/F system is transmitting
