@@ -441,7 +441,7 @@ bool EmissionPduHandler::updateIncoming(const EmissionSystem* const es, Nib* con
          rfSys->setBandwidth( bd->parameterData.frequencyRange );
 
          // DPG ### Setting peak power to the effected radiated power from the PDU,
-         // so our transmitter loss and anteena gain should both be set to 0 dB (real 1.0).
+         // so our transmitter loss and antenna gain should both be set to 0 dB (real 1.0).
          Basic::Decibel db( bd->parameterData.effectiveRadiatedPower  );  // dBm (dB milliwatts)
          rfSys->setPeakPower( db.getReal() / 1000.0f );
 
@@ -669,6 +669,16 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
          }
          bd.parameterData.beamSweepSync = 0;
 
+#ifdef DISV7
+         bd.jammingTechnique.kind = 0;
+         bd.jammingTechnique.category = 0;
+         bd.jammingTechnique.subcat = 0;
+         bd.jammingTechnique.specific = 0;
+#else
+         // For now ... no tracks or jamming data
+         bd.jammingModeSequence    = 0;
+#endif
+
          if (getEmitterFunction() != ESF_JAMMING) {
             // Radar
             if ( bd.parameterData.beamAzimuthSweep == 0 || bd.parameterData.beamAzimuthSweep >= (180.0f * Basic::Angle::D2RCC) ) {
@@ -683,19 +693,12 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
          else {
             // Jammer 
             bd.beamFunction = BF_JAMMER;
+#ifdef DISV7
+            bd.jammingTechnique.kind = JT_NOISE;
+#endif
          }
 
          bd.beamParameterIndex = 0;
-
-#ifdef DISV7
-         bd.jammingTechnique.kind = 0;
-         bd.jammingTechnique.category = 0;
-         bd.jammingTechnique.subcat = 0;
-         bd.jammingTechnique.specific = 0;
-#else
-         // For now ... no tracks or jamming data
-         bd.jammingModeSequence    = 0;
-#endif
          bd.highDensityTracks      = EmitterBeamData::NOT_SELECTED;
          bd.numberOfTargetsInTrack = 0;
 

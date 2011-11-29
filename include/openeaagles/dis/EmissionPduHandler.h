@@ -96,6 +96,13 @@ public:
       BS_INACTIVE                      =  1
    };
 
+   enum JammingTechniqueKind {
+      JT_OTHER                      =  0,
+      JT_NOISE                        =  1,
+      JT_DECEPTION                    =  2,
+      JT_SPECIAL                      =  3,
+   };
+
 public:
    EmissionPduHandler();
 
