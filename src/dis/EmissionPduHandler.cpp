@@ -230,6 +230,12 @@ bool EmissionPduHandler::setSavedTrackJamTargetData(const unsigned int ibeam, co
 }
 }
 
+bool EmissionPduHandler::setTemplatesFound(const bool newTF)
+{
+   noTemplatesFound = !newTF;
+   return true;
+}
+
 //------------------------------------------------------------------------------
 // Slot functions
 //------------------------------------------------------------------------------

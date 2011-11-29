@@ -174,6 +174,9 @@ protected:
     virtual unsigned short emissionSystemData2PDU(EmissionSystem* const es);
     virtual bool isUpdateRequired(const LCreal curExecTime, bool* const stateChg, Nib* const nib);
 
+    bool getTemplatesFound() const;
+    bool setTemplatesFound(const bool flg);
+
 private:
    void initData();
 
@@ -216,6 +219,7 @@ inline const Simulation::Antenna* EmissionPduHandler::getAntennaModel() const { 
 inline bool EmissionPduHandler::isDefaultIncomingHandler() const     { return defaultIn; }
 inline bool EmissionPduHandler::isDefaultOutgoingHandler() const     { return defaultOut; }
 
+inline bool EmissionPduHandler::getTemplatesFound() const { return !noTemplatesFound; }
 //inline void EmissionPduHandler::setTimedOut()                        { }
 
 inline const EmissionSystem* EmissionPduHandler::getSavedEmissionSystemData() const  { return &emissionSystemN1; }
