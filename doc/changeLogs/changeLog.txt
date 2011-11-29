@@ -62,6 +62,9 @@ simulation
 
    Autopilot class
       1) update to loiter pattern calculation
+      
+   Missile class
+       1) fuzing logic is reset if missile's target changes mid-flight
 
    Nib class
       1) removed function drComputeEulerAngles()
