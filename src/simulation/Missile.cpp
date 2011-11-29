@@ -266,8 +266,8 @@ bool Missile::setSlotCmdVelocity(const Basic::Number* const msg)
 bool Missile::setTargetPlayer(Player* const tgt, const bool pt)
 {
    // if our tgt has changed, reset ground truth vals for weaponGuidance's fuzing logic
-   if (tgt != getTargetPlayer()) {
-      trngT = 0;
+   if (tgt!=0 && tgt != getTargetPlayer()) {
+      trngT = (tgt->getPosition()-getPosition()).length();
       trdotT=0;
    }
    return BaseClass::setTargetPlayer(tgt, pt);
@@ -277,9 +277,9 @@ bool Missile::setTargetPlayer(Player* const tgt, const bool pt)
 bool Missile::setTargetTrack(Track* const trk, const bool pt)
 {
    // if our track has changed, reset ground truth vals for weaponGuidance's fuzing logic
-   if (trk != getTargetTrack()) {
-      trngT = 0;
-      trdotT=0;
+   if (trk!=0 && trk != getTargetTrack()) {
+      trngT = (trk->getPosition()).length();
+      trdotT = 0;
    }
    return BaseClass::setTargetTrack(trk, pt);
 }
