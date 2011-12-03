@@ -500,7 +500,7 @@ bool Autopilot::computerOrbitHoldingPatternMirrorWaypoint(
       double turnRateRps   = SRT * Basic::Angle::D2RCC;                          // standard rate turn  [radians/sec]
       double tanBankAngle  = airSpeedFps * turnRateRps / AOG;                    // standard rate turn tan(bank angle)  [no units]
       double radiusFT      = airSpeedFps * airSpeedFps / AOG / tanBankAngle;     // standard rate turn radius  [feet]
-      double bankAngleDeg  = std::atan(tanBankAngle) * Basic::Angle::R2DCC;      // standard rate turn bank angle  [degrees]
+      //double bankAngleDeg  = std::atan(tanBankAngle) * Basic::Angle::R2DCC;      // standard rate turn bank angle  [degrees]
       double orbitOffsetFt = 2.0 * radiusFT;
 
       // ---

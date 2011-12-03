@@ -859,7 +859,7 @@ MergingIrSensor::MergingIrSensor()
 //------------------------------------------------------------------------------
 // copyData() -- copy member data
 //------------------------------------------------------------------------------
-void MergingIrSensor::copyData(const MergingIrSensor& org, const bool cc)
+void MergingIrSensor::copyData(const MergingIrSensor& org, const bool)
 {
    BaseClass::copyData(org);
    azimuthBin = org.azimuthBin;

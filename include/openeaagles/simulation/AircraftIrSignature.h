@@ -30,12 +30,12 @@ namespace Simulation {
 //
 // Form Name: AircraftIrSignature
 // Slots:
-//    airframeSignatureTable          <Table4>      ! 
-//    airframeWavebandFactorTable     <Table2>      ! 
-//    plumeSignatureTable             <Table5>      ! 
-//    plumeWavebandFactorTable        <Table2>      ! 
-//    hotPartsSignatureTable          <Table5>      !         
-//    hotPartsWavebandFactorTable     <Table2>      ! 
+//    airframeSignatureTable          <Table4>      !
+//    airframeWavebandFactorTable     <Table2>      !
+//    plumeSignatureTable             <Table5>      !
+//    plumeWavebandFactorTable        <Table2>      !
+//    hotPartsSignatureTable          <Table5>      !
+//    hotPartsWavebandFactorTable     <Table2>      !
 //
 // Public member functions:
 //      LCreal getIrSignature(IrQueryMsg* msg)

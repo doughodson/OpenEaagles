@@ -302,7 +302,7 @@ void Missile::weaponGuidance(const LCreal dt)
       trng = los.length();
 
       // compute range rate,
-      LCreal trdot0 = trdot;
+      //LCreal trdot0 = trdot;
       if (dt > 0)
          trdot = (trng - trng0)/dt;
       else

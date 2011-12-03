@@ -2937,7 +2937,7 @@ bool Player::onDatalinkMessageEventPlayer(Basic::Object* const msg)
 }
 
 // Handles the DE_EMISSION event
-bool Player::onDeEmissionEvent(Basic::Object* const msg)
+bool Player::onDeEmissionEvent(Basic::Object* const)
 {
    return false;
 }

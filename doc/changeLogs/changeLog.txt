@@ -1,75 +1,29 @@
 ================================================================================
-Changes since v11.10
+Changes since v11.11
 ================================================================================
 
 --------------------------------------------------------------------------------
 Global changes:
 
-   -- removed almost all remaining "C" include files such as "stdio.h"
-   -- added "std::" prefix to all printf and sprintf calls - support.h
-      already includes <cstdio>
-   -- updated premake files
  
 --------------------------------------------------------------------------------
 basic
 
-   ## config.h -- a new file that will eventually contain most or all framework
-                  configuration parameters
-
-   NavDR class
-      1) removed function getRpyVector()
-      2) deadReckoning() function is now using  Basic::Nav::computeEulerAngles()
-         instead of getRpyVector()
-
-   Timer class
-      1) changed how the static list of timers is maintained
-      2) changed 'LCreal' variables to 'double'
-      3) general clean up
 
 
 --------------------------------------------------------------------------------
 basicGL
 
-   MapPage class
-      1) (bug fix) fixed getCurrentRadius() to return the correct centered or
-         decentered radius value
-
-   Readout class
-      1) added makeText method to lat/lon readouts to change "@" to degree symbol
-
-   Display class
-      1) added a check to ensure OpenGL extension GL_BGR_EXT is defined
-
-   Image class
-      1) added a check to ensure OpenGL extension GL_BGR_EXT is defined
 
 
 --------------------------------------------------------------------------------
 dis
 
-   EmissionPduHandler class
-      1) isUpdateRequired() -- changed the system transmitting check from
-         RfSystem::isTransmitterEnabled() to RfSystem::isTransmitting()
 
 --------------------------------------------------------------------------------
 ioDevice
 
-   -- removed all Keithly I/O device driver classes (these are not used anymore)
-
 
 --------------------------------------------------------------------------------
 simulation
-
-   Autopilot class
-      1) update to loiter pattern calculation
-
-   Nib class
-      1) removed function drComputeEulerAngles()
-      2) mainDeadReckoning() function is now using Basic::Nav::computeEulerAngles()
-         instead of drComputeEulerAngles()
-
-   RfSystem class
-      1) isReceiverEnabled() now checks for system power.
-      2) isTransmitterEnabled() now checks for system power.
-
 
