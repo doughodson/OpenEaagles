@@ -28,7 +28,7 @@ public:
     Locus();
     Locus(
        const LCreal* const data,    // Array of data points
-       const int n,                 // Number of data points
+       const unsigned int n,        // Number of data points
        const double lat,            // Reference latitude (degs)
        const double lon,            // Reference longitude (degs)
        const LCreal direction,      // True direction (heading) angle of the data (degs)
@@ -36,7 +36,7 @@ public:
        const LCreal maxRng          // Range to last data point (meters)
        );
 
-    bool isDataValid() const           { return data != 0; }   // True if we have a valid data array        
+    bool isDataValid() const           { return data != 0; }   // True if we have a valid data array
     LCreal getData(const unsigned int idx) const;              // The idx'th data point, [ idx: 0 ... (getNumPts()-1) ]
     LCreal getRange(const unsigned int idx) const;             // The range to the idx'th point (meters), [ idx: 0 ... (getNumPts()-1) ]
 
@@ -52,7 +52,7 @@ public:
     // Sets the data array and its stated conditions
     virtual void setData(
        const LCreal* const data,    // Array of data points
-       const int n,                 // Number of points in the data array
+       const unsigned int n,        // Number of points in the data array
        const double lat,            // Reference latitude (degs)
        const double lon,            // Reference longitude (degs)
        const LCreal direction,      // True direction (heading) angle of the data (degs)

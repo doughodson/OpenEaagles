@@ -7,7 +7,7 @@ namespace Eaagles {
 namespace Basic {
 
 //------------------------------------------------------------------------------
-// Navigation constants 
+// Navigation constants
 //------------------------------------------------------------------------------
 const double Nav::WGS84_A  = 6378137.0;                  // WGS-84 semi major axis (Meters)
 const double Nav::WGS84_B  = 6356752.314;                // WGS-84 semi minor axis (Meters)
@@ -64,7 +64,7 @@ bool Nav::aer2xyzArray(
    double* cel = new double[n];
    sinCosArray(el,sel,cel,n);
 
-   // --- 
+   // ---
    // Compute to x, y and z positions (player coordinates)
    // ---
    osg::Vec3d* pos0 = new osg::Vec3d[n];
@@ -101,10 +101,10 @@ bool Nav::aer2xyzArray(
    double* cel = new double[n];
    sinCosArray(el,sel,cel,n);
 
-   // --- 
+   // ---
    // Compute to x, y and z positions (player coordinates)
    // ---
-   osg::Vec3d* pos0 = new osg::Vec3d[n];
+   //osg::Vec3d* pos0 = new osg::Vec3d[n];
    for (unsigned int i = 0; i < n; i++) {
       double d = -rng[i] * sel[i];    // Down
       double r = rng[i] * cel[i];     // [Ground Range]
@@ -139,7 +139,7 @@ bool Nav::gbd2ll(
    if (pModel == 0) { pModel = &EarthModel::wgs84; }
 
    const double eemA  = Distance::M2NM * pModel->getA();
-   const double eemF  = pModel->getF();
+   //const double eemF  = pModel->getF();
    const double eemE2 = pModel->getE2();
 
    // ---
@@ -248,7 +248,7 @@ bool Nav::gbd2llS(
    // compute longitude
    k1 = sinBrng * sinArc * cosLat1;
    k2 = cosArc - sinLat1 * (k1 + k2);
-   k3 = Angle::R2DCC * std::atan2(k1, k2); 
+   k3 = Angle::R2DCC * std::atan2(k1, k2);
    *dlon = Angle::aepcdDeg(slon + k3);
 
    return true;
@@ -277,7 +277,7 @@ bool Nav::gll2bd(
    if (pModel == 0) { pModel = &EarthModel::wgs84; }
 
    const double eemA  = Distance::M2NM * pModel->getA();
-   const double eemF  = pModel->getF();
+   //const double eemF  = pModel->getF();
    const double eemE2 = pModel->getE2();
 
    // Early out: check for source and destination at same point.
@@ -380,8 +380,8 @@ bool Nav::gll2bdS(
    // -----------------------------------------------------
    // compute bearing
    if (brg != 0) {
-      double k1 = sinDLon * cosLat2; 
-      double k2 = cosLat1 * sinLat2 - sinLat1 * cosLat2 * cosDLon; 
+      double k1 = sinDLon * cosLat2;
+      double k2 = cosLat1 * sinLat2 - sinLat1 * cosLat2 * cosDLon;
       double k3 = std::atan2(k1, k2);
       *brg = Angle::aepcdDeg(Angle::R2DCC * k3);
    }
@@ -516,7 +516,7 @@ bool Nav::vbd2ll(
    const double eemA  = pModel->getA();
    const double eemF  = pModel->getF();
    const double eemB  = pModel->getB();
-   const double eemE2 = pModel->getE2();
+   //const double eemE2 = pModel->getE2();
 
    //-----------------------------------
    // local constants
@@ -529,7 +529,7 @@ bool Nav::vbd2ll(
    const double sinAlpha1   = std::sin(alpha1);
    const double cosAlpha1   = std::cos(alpha1);
    const double sigma1      = std::atan2(tanU1, cosAlpha1);
-   const double tanSigma1   = tanU1 / cosAlpha1;                        // Eq. 1
+   //const double tanSigma1   = tanU1 / cosAlpha1;                        // Eq. 1
    const double sinAlpha    = cosU1 * sinAlpha1;                        // Eq. 2
    const double cosSqrAlpha = 1.0 - sinAlpha * sinAlpha;
 
@@ -560,10 +560,10 @@ bool Nav::vbd2ll(
    double r             = 0.0;
 
    //-----------------------------------
-   // initialization 
+   // initialization
    //-----------------------------------
    double s     = dist*Distance::NM2M;  // geodesic distance in meters
-   double baseS = (s / eemB / a); 
+   double baseS = (s / eemB / a);
    double sigma = baseS;
 
    //-----------------------------------
@@ -573,7 +573,7 @@ bool Nav::vbd2ll(
       twoSigmaM     = 2.0*sigma1 + sigma;                               // Eq. 5
       cos2SigmaM    = std::cos(twoSigmaM);
       cosSqr2SigmaM = cos2SigmaM * cos2SigmaM;
-      
+
       cosSigma      = std::cos(sigma);
       sinSigma      = std::sin(sigma);
       sinSqrSigma   = sinSigma * sinSigma;
@@ -593,7 +593,7 @@ bool Nav::vbd2ll(
    //-----------------------------------
    sinSigma      = std::sin(sigma);
    cosSigma      = std::cos(sigma);
-   
+
    twoSigmaM     = 2.0*sigma1 + sigma;                                  // Eq. 5
    cos2SigmaM    = std::cos(twoSigmaM);
    cosSqr2SigmaM = cos2SigmaM * cos2SigmaM;
@@ -607,7 +607,7 @@ bool Nav::vbd2ll(
    // calculate destination longitude
    //-----------------------------------
    p = sinSigma * sinAlpha1;
-   q = cosU1 * cosSigma - sinU1 * sinSigma * cosAlpha1;   
+   q = cosU1 * cosSigma - sinU1 * sinSigma * cosAlpha1;
    lambda = std::atan2(p, q);                                           // Eq. 9
 
    r = (4.0 + eemF * (4.0 - 3.0 * cosSqrAlpha));
@@ -649,12 +649,12 @@ bool Nav::vll2bd(
    const double eemA  = pModel->getA();
    const double eemF  = pModel->getF();
    const double eemB  = pModel->getB();
-   const double eemE2 = pModel->getE2();
+   //const double eemE2 = pModel->getE2();
 
    //-----------------------------------
    // local constants
    //-----------------------------------
-   const double EPS      = 1.0E-12;
+   //const double EPS      = 1.0E-12;
    const double deltaLon = Angle::aepcdDeg(dlon - slon);
    const double l        = Angle::D2RCC * deltaLon;
    const double u1       = std::atan((1.0 - eemF) * std::tan(Angle::D2RCC * slat));
@@ -665,7 +665,7 @@ bool Nav::vll2bd(
    const double cosU2    = std::cos(u2);
    const double ra       = eemA;
    const double rb       = eemB;
-   
+
    //-----------------------------------
    // intermediate variables
    //-----------------------------------
@@ -686,16 +686,16 @@ bool Nav::vll2bd(
    double r             = 0.0;
 
    //-----------------------------------
-   // check for identical or antipodal input points 
+   // check for identical or antipodal input points
    //-----------------------------------
-   int status = NORMAL;
-   
+   //int status = NORMAL;
+
    bool b1 = (slat ==  dlat) && (slon == dlon);                         // identical points
-   if (b1) status = IDENTICAL_POINTS;
-   
+   //if (b1) status = IDENTICAL_POINTS;
+
    bool b2 = (slat == -dlat) && (std::fabs(deltaLon) == 180.0);         // antipodal points
-   if (b2) status = ANTIPODAL_POINTS;
-   
+   //if (b2) status = ANTIPODAL_POINTS;
+
    if (b1 || b2)  return false;
 
    //-----------------------------------
@@ -738,12 +738,12 @@ bool Nav::vll2bd(
    //-----------------------------------
    sinLambda = std::sin(lambda);
    cosLambda = std::cos(lambda);
-   
+
    p = cosU2 * sinLambda;
    q = cosU1 * sinU2 - sinU1 * cosU2 * cosLambda;
    double Alfa1 = std::atan2(p, q);                                     // Eq. 20
    *brng = Angle::aepcdDeg(Angle::R2DCC * Alfa1);
-   
+
    //-----------------------------------
    // calculate destination bearing (deg)
    //-----------------------------------
@@ -762,7 +762,7 @@ bool Nav::vll2bd(
    p = (-768.0 + Usqr * (320.0 - 175.0 * Usqr));
    q = (Usqr / 16384.0) * (4096.0 + Usqr * p);
    double a = 1.0 + q;                                                  // Eq. 3
-   
+
    p = (-128.0 + Usqr * ( 74.0 -  47.0 * Usqr));
    q = (Usqr / 1024.0) * ( 256.0 + Usqr * p);
    double b = q;                                                        // Eq. 4
@@ -941,9 +941,9 @@ bool Nav::convertEcef2Geod(
    //---------------------------------------------
    const EarthModel* pModel = em;
    if (pModel == 0) { pModel = &EarthModel::wgs84; }
-   
+
    const double a  = pModel->getA();
-   const double f  = pModel->getF();
+   //const double f  = pModel->getF();
    const double b  = pModel->getB();
    const double e2 = pModel->getE2();
 
@@ -954,12 +954,12 @@ bool Nav::convertEcef2Geod(
    const double ACCURACY = 0.1;  // iterate to accuracy of 0.1 meter
    const double EPS = 1.0E-10;
    const int    MAX_LOOPS = 10;
-   
+
    //---------------------------------------------
    // Initialize Local Variables
    //---------------------------------------------
    int status  = NORMAL;
-   
+
    double rn   = a;
    double phi  = 0.0;
    double oldH = 0.0;
@@ -969,9 +969,9 @@ bool Nav::convertEcef2Geod(
    //---------------------------------------------
    // check status
    //---------------------------------------------
-   double polarXY = std::fabs(x) + std::fabs(y);   
+   double polarXY = std::fabs(x) + std::fabs(y);
    if (polarXY < EPS) { status = POLAR_POINT; }
-      
+
    //---------------------------------------------
    // iterate for accurate latitude and altitude
    //---------------------------------------------
@@ -987,17 +987,17 @@ bool Nav::convertEcef2Geod(
          newH          = p/cosPhi - rn;
       }
    }
-   
+
    //---------------------------------------------
    // re-check status after iteration
    //---------------------------------------------
    if (idx > MAX_LOOPS) { status = TOO_MANY_LOOPS; }
-   
+
    //---------------------------------------------
    // process based on status
    //---------------------------------------------
    switch (status) {
-      case NORMAL: {         
+      case NORMAL: {
    // begin iteration loop
 
    // Calculate Outputs
@@ -1006,7 +1006,7 @@ bool Nav::convertEcef2Geod(
          *pAlt = newH;
          break;
       } // NORMAL
-      
+
       case POLAR_POINT: {
          if (z < 0.0) {
             *pLat = -90.0;
@@ -1020,15 +1020,15 @@ bool Nav::convertEcef2Geod(
          }
          break;
       } // POLAR_POINT
-      
+
       case TOO_MANY_LOOPS: {
          break;
       } // TOO_MANY_LOOPS
-      
+
       default: {
          break;
       } // DEFAULT
-      
+
    } // end switch
 
    return (status == NORMAL || status == POLAR_POINT);
@@ -1041,7 +1041,7 @@ bool Nav::convertGeod2Ecef(
       const double lat,    // IN: Geodetic latitude  (degrees)
       const double lon,    // IN: Geodetic longitude (degrees)
       const double alt,    // IN: Geodetic altitude  (meters)
-      double* const pX,    // OUT: ECEF X component   (meters)   
+      double* const pX,    // OUT: ECEF X component   (meters)
       double* const pY,    // OUT: ECEF Y component   (meters)
       double* const pZ,    // OUT: ECEF Z component   (meters)
       const EarthModel* const em // IN: Pointer to an optional earth model (default: WGS-84)
@@ -1052,9 +1052,9 @@ bool Nav::convertGeod2Ecef(
    //---------------------------------------------
    const EarthModel* p = em;
    if (p == 0) { p = &EarthModel::wgs84; }
-   
+
    const double a  = p->getA();
-   const double f  = p->getF();
+   //const double f  = p->getF();
    const double b  = p->getB();
    const double e2 = p->getE2();
 
@@ -1082,7 +1082,7 @@ bool Nav::convertGeod2Ecef(
    bool b2 = (lon < -180.0) || (lon > +180.0);
    bool b3 = (90.0 - lat) < EPS;
    bool b4 = (90.0 + lat) < EPS;
-   
+
    if (b1 || b2) {
       status = BAD_INPUT;
    }
@@ -1092,7 +1092,7 @@ bool Nav::convertGeod2Ecef(
    else {
       status = NORMAL;
    }
-   
+
    //---------------------------------------------
    // process according to status
    //---------------------------------------------
@@ -1103,14 +1103,14 @@ bool Nav::convertGeod2Ecef(
          *pZ = (alt + rn*(1.0 - e2)) * sinLat;
          break;
       } // NORMAL
-      
+
       case BAD_INPUT: {
          *pX = 0.0;
          *pY = 0.0;
          *pZ = 0.0;
          break;
       } // BAD_INPUT
-      
+
       case POLAR_POINT: {
          *pX = 0.0;
          *pY = 0.0;
@@ -1120,7 +1120,7 @@ bool Nav::convertGeod2Ecef(
             { *pZ = -(b + alt); }
          break;
       } // POLAR_POINT
-      
+
       default: {
          break;
       } // DEFAULT
@@ -1147,7 +1147,7 @@ bool Nav::getGeocCoords(
 {
    static const double ellipseC1   = (1.0 - ellipseF) * (1.0 - ellipseF);
 
-   double lat = geodPos[ILAT] * Angle::D2RCC; 
+   double lat = geodPos[ILAT] * Angle::D2RCC;
    double lon = geodPos[ILON] * Angle::D2RCC;
    double alt = geodPos[IALT]; /* Meters */
 
@@ -1316,7 +1316,7 @@ bool Nav::getGeodCoords(
    if( special_case2 == 0 )
    {
       double tanphi = 0;
-      //if( wp != w )     /* if denominator not 0 */ 
+      //if( wp != w )     /* if denominator not 0 */
       if( (wp - w) > 1.0 )     /* if denominator not 0 */
       {
          tanphi = (zp - z) / (wp - w);
@@ -1332,7 +1332,7 @@ bool Nav::getGeodCoords(
       }
    }
 
-   geodPos[ILAT] = lat * Angle::R2DCC; /* return as degrees */ 
+   geodPos[ILAT] = lat * Angle::R2DCC; /* return as degrees */
    geodPos[ILON] = lon * Angle::R2DCC; /* return as degrees */
    geodPos[IALT] = alt;   /* return as meters */
 
@@ -1468,8 +1468,8 @@ bool Nav::getSimPosAccVel(
 {
    getGeodCoords(geocPos, geodPos);
 
-   double lat = geodPos[ILAT] * Angle::D2RCC; 
-   double lon = geodPos[ILON] * Angle::D2RCC; 
+   double lat = geodPos[ILAT] * Angle::D2RCC;
+   double lon = geodPos[ILON] * Angle::D2RCC;
 
    double cos_lat = std::cos(lat);
    double sin_lat = std::sin(lat);

@@ -44,7 +44,7 @@ unsigned short Thread::getNumProcessors()
    int rtn = sched_getaffinity(0, sizeof(cpu_set_t), &mask);
    if (rtn == 0) {
       // we're checking the number of bits that are set in 'mask'
-      for (int cpu = 0; cpu < MAX_CPUS; cpu++) {
+      for (unsigned int cpu = 0; cpu < MAX_CPUS; cpu++) {
          if ( CPU_ISSET(cpu, &mask) != 0 ) num++;
       }
    }
@@ -105,7 +105,7 @@ bool Thread::createThread()
    // Create the thread
    // ---
    pthread_t* thread = new pthread_t;
-   int stat = pthread_create(thread, &attr, staticThreadFunc, this); 
+   int stat = pthread_create(thread, &attr, staticThreadFunc, this);
 
    //if ( stat != 0 && parent->isMessageEnabled(MSG_INFO) ) {
       std::cout << "Thread(" << this << ")::createThread(): pthread_create() thread = " << thread << ", pri = " << param.sched_priority << std::endl;
@@ -212,7 +212,7 @@ unsigned long ThreadPeriodicTask::mainThreadFunc()
          tp.tv_nsec -= 1000000000;
       }
       pthread_cond_timedwait(&cond, &mutex, &tp);
- 
+
    }
 
    pthread_mutex_unlock(&mutex);
@@ -221,7 +221,7 @@ unsigned long ThreadPeriodicTask::mainThreadFunc()
       std::cout << "Thread(" << this << ")::mainLoopFunc(): ... end of main loop." << std::endl;
    }
 
-   return 0; 
+   return 0;
 }
 
 //==============================================================================
@@ -334,7 +334,7 @@ int ThreadSyncTask::waitForAnyCompleted(ThreadSyncTask** threads, const unsigned
          }
       }
       if(i != num) {
-         //Loop until one of them releases 
+         //Loop until one of them releases
          while(true) {
             for (i = 0; i < num; i++) {
                if (threads[i] != 0) {

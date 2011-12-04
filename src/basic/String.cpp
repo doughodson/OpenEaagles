@@ -67,7 +67,7 @@ void String::deleteData()
 
 
 //------------------------------------------------------------------------------
-// setString() -- 
+// setString() --
 //------------------------------------------------------------------------------
 void String::setString(const String& origStr, const size_t w, const Justify j)
 {
@@ -120,7 +120,7 @@ void String::setString(const String& origStr, const size_t w, const Justify j)
 
    switch (j) {
 
-      // NONE or LEFT justifed 
+      // NONE or LEFT justifed
       case NONE :
       case LEFT :
       {
@@ -155,7 +155,7 @@ void String::setString(const String& origStr, const size_t w, const Justify j)
 
 //------------------------------------------------------------------------------
 // getSubString() -- Returns in "subStr" a "numChars" character sub-string
-//                   of 'this' string that starts a "startIndex" 
+//                   of 'this' string that starts a "startIndex"
 //------------------------------------------------------------------------------
 bool String::getSubString(String& subStr, const unsigned int startIndex, const size_t numChars) const
 {
@@ -195,7 +195,7 @@ void String::setStr(const char* string)
    }
    else {
       // remove the old text string
-      n = 0;      
+      n = 0;
    }
 }
 

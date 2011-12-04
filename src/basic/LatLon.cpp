@@ -22,7 +22,7 @@ BEGIN_SLOTTABLE(LatLon)
 END_SLOTTABLE(LatLon)
 
 //------------------------------------------------------------------------------
-//  Map slot table to handles 
+//  Map slot table to handles
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(LatLon)
     ON_SLOT(1,setDirection,String)
@@ -146,7 +146,7 @@ void LatLon::setMin(const LCreal m) //
 }
 
 // Sets seconds -- then calls computeVal().
-void LatLon::setSec(const LCreal s) 
+void LatLon::setSec(const LCreal s)
 {
     LCreal ss = lcAbs(s);
     // check for valid second numbers
@@ -177,10 +177,10 @@ Object* LatLon::getSlotByIndex(const int si)
 //------------------------------------------------------------------------------
 std::ostream& LatLon::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
-    int j = 0;
+    //int j = 0;
     if ( !slotsOnly ) {
         sout << "( " << getFormName()  << std::endl;
-        j = 4;
+        //j = 4;
     }
 
     if ( !slotsOnly ) {
@@ -219,7 +219,7 @@ bool LatLon::setMinutes(const Number* const smobj)
 }
 
 //------------------------------------------------------------------------------
-// setSeconds() -- 
+// setSeconds() --
 //------------------------------------------------------------------------------
 bool LatLon::setSeconds(const Number* const ssobj)
 {
