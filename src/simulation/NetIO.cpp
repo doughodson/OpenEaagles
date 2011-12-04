@@ -46,7 +46,7 @@ IMPLEMENT_ABSTRACT_SUBCLASS(NetIO,"NetIO")
 // Parameters
 //------------------------------------------------------------------------------
 const double NET_TIMEOUT          = 12.5;                //  seconds
-const double NET_UPDATE_RATE      = 5.0;                 //  seconds 
+const double NET_UPDATE_RATE      = 5.0;                 //  seconds
 const double NET_THRESHOLD_MTR    = 3.0;                 //  meters
 const double NET_THRESHOLD_RAD    = (3.0 * PI/180.0);    //  radians
 
@@ -74,7 +74,7 @@ BEGIN_SLOTTABLE(NetIO)
    "maxEntityRange",       // 14: Max enity range of networked players
 END_SLOTTABLE(NetIO)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(NetIO)
    ON_SLOT(1,  setSlotNetworkID,          Basic::Number)
    ON_SLOT(2,  setSlotFederationName,     Basic::String)
@@ -121,18 +121,18 @@ NetIO::NetIO()
    setMaxPositionErr(NET_THRESHOLD_MTR);       //  (meters)
    setMaxOrientationErr(NET_THRESHOLD_RAD);    //  (radians)
    setMaxAge(NET_TIMEOUT);                     //  (seconds)
-   
+
    nInNibs = 0;
    nOutNibs = 0;
-   
-   for (int i = 0; i < MAX_ENTITY_TYPES; i++) {
+
+   for (unsigned int i = 0; i < MAX_ENTITY_TYPES; i++) {
       inputEntityTypes[i] = 0;
-   }    
+   }
    nInputEntityTypes = 0;
 
-   for (int i = 0; i < MAX_ENTITY_TYPES; i++) {
+   for (unsigned int i = 0; i < MAX_ENTITY_TYPES; i++) {
       outputEntityTypes[i] = 0;
-   }    
+   }
    nOutputEntityTypes = 0;
 
    inputNtmTree = 0;
@@ -154,14 +154,14 @@ void NetIO::copyData(const NetIO& org, const bool cc)
       federateName = 0;
       federationName = 0;
 
-      for (int i = 0; i < MAX_ENTITY_TYPES; i++) {
+      for (unsigned int i = 0; i < MAX_ENTITY_TYPES; i++) {
          inputEntityTypes[i] = 0;
-      }    
+      }
       nInputEntityTypes = 0;
 
-      for (int i = 0; i < MAX_ENTITY_TYPES; i++) {
+      for (unsigned int i = 0; i < MAX_ENTITY_TYPES; i++) {
          outputEntityTypes[i] = 0;
-      }    
+      }
       nOutputEntityTypes = 0;
 
    }
@@ -171,9 +171,9 @@ void NetIO::copyData(const NetIO& org, const bool cc)
    timeline = org.timeline;
    iffEventID = 0;
    emEventID = 0;
-   
+
    netID = org.netID;
-   
+
    const Basic::String* p1 = org.federateName;
    federateName = p1;
    const Basic::String* p2 = org.federationName;
@@ -283,7 +283,7 @@ LCreal NetIO::getMaxEntityRange(const Nib* const) const
 {
    return maxEntityRange;
 }
-        
+
 // Entity filter: Returns max entity ranged squared (meters^2)
 LCreal NetIO::getMaxEntityRangeSquared(const Nib* const) const
 {
@@ -313,7 +313,7 @@ LCreal NetIO::getMaxAge(const Nib* const) const
 {
    return maxAge;
 }
-        
+
 // Federate name as String
 const Basic::String* NetIO::getFederateName() const
 {
@@ -354,7 +354,7 @@ bool NetIO::setMaxTimeDR(const LCreal v)
    maxTimeDR = v;
    return true;
 }
-      
+
 // Sets the max positional error (meters)
 bool NetIO::setMaxPositionErr(const LCreal v)
 {
@@ -436,7 +436,7 @@ bool NetIO::networkInitialization()
     // reset flags
     netInit = false;
     netInitFail = false;
-        
+
     // 1) Find our Station
     station = dynamic_cast<Station*>( findContainerByType(typeid(Station)) );
     if (station != 0) {
@@ -448,13 +448,13 @@ bool NetIO::networkInitialization()
         }
     }
 
-    // Did we fail?    
+    // Did we fail?
     if (!netInit) {
         station = 0;
         simulation = 0;
         netInitFail = true;
     }
-    
+
     return netInit;
 }
 
@@ -469,10 +469,10 @@ void NetIO::cleanupInputList()
    for (unsigned int idx = 0; idx < nInNibs; idx++) {
       Nib* nib = inputList[idx];
       if ( (nib->isTimeoutEnabled() && ((curExecTime - nib->getTimeExec()) > getMaxAge(nib)) )) {
-            // We have one that's timed-out -- 
+            // We have one that's timed-out --
             //std::cout << "REMOVED(TO): cur=" << curExecTime << ", NIB=" << nib->getTimeExec() << std::endl;
 
-            // 1) Shift the rest of the list down one 
+            // 1) Shift the rest of the list down one
             nInNibs--;
             for (unsigned int i = idx; i < nInNibs; i++) {
                inputList[i] = inputList[i+1];
@@ -486,7 +486,7 @@ void NetIO::cleanupInputList()
             // We have one that has a DELETE_REQUEST
             //std::cout << "REMOVED(DR): cur=" << curExecTime << ", NIB=" << nib->getTimeExec() << std::endl;
 
-            // 1) Shift the rest of the list down one 
+            // 1) Shift the rest of the list down one
             nInNibs--;
             for (unsigned int i = idx; i < nInNibs; i++) {
                inputList[i] = inputList[i+1];
@@ -500,7 +500,7 @@ void NetIO::cleanupInputList()
 }
 
 //------------------------------------------------------------------------------
-// updateOutputList() -- 
+// updateOutputList() --
 //   Update the Output-List from the simulation player list (Background thread)
 //------------------------------------------------------------------------------
 void NetIO::updateOutputList()
@@ -512,7 +512,7 @@ void NetIO::updateOutputList()
       // Remove all DELETE_REQUEST mode NIBs
       //   -- The DELETE_REQUEST were issued last pass, so the network
       //       specific software should have handled them by now.
-      //   -- As NIBs are removed, the table above the NIB is shifted down.  
+      //   -- As NIBs are removed, the table above the NIB is shifted down.
       //   -- We're also clearing the NIB's 'checked' flag
       // ---
       {
@@ -541,8 +541,8 @@ void NetIO::updateOutputList()
 
          // Get the player list pointer (pre-ref()'d)
          Basic::PairStream* players = getSimulation()->getPlayers();
-                   
-         // For all players 
+
+         // For all players
          bool finished = false;
          unsigned int newCount = 0;
          Basic::List::Item* playerItem = players->getFirstItem();
@@ -573,7 +573,7 @@ void NetIO::updateOutputList()
                }
             }
             else {
-               // Finished with local players and we're not relaying 
+               // Finished with local players and we're not relaying
                finished = !isRelayEnabled();
             }
 
@@ -583,13 +583,13 @@ void NetIO::updateOutputList()
 
          players->unref();
       }
-            
+
       // ---
       // Any NIB that was not checked needs to be removed
       // ---
       for (unsigned int i = 0; i < nOutNibs; i++) {
          if ( !outputList[i]->isChecked() ) {
-            // Request removel; 
+            // Request removel;
             // (note: the network specific code now has one frame to cleanup it's own code
             //  before the NIB is dropped from the output list next frame -- see above)
             outputList[i]->setMode(Player::DELETE_REQUEST);
@@ -606,7 +606,7 @@ void NetIO::updateOutputList()
 void NetIO::processOutputList()
 {
    // ---
-   // Send player states 
+   // Send player states
    // ---
    for (unsigned int idx = 0; idx < getOutputListSize(); idx++) {
 
@@ -621,7 +621,7 @@ void NetIO::processOutputList()
          // but it's NIB state is still inactive, then we say the weapon has just
          // been fired. (delay until after the entity state PDU)
          bool fired =
-            (nib->isMode(Player::INACTIVE) || nib->isMode(Player::PRE_RELEASE)) && 
+            (nib->isMode(Player::INACTIVE) || nib->isMode(Player::PRE_RELEASE)) &&
             nib->getPlayer()->isMode(Player::ACTIVE) &&
             nib->getPlayer()->isMajorType(Player::WEAPON);
 
@@ -675,8 +675,8 @@ Nib* NetIO::createNewOutputNib(Player* const player)
          fName = pNib->getFederateName();
       }
       nib->setFederateName(fName);
-      
-      // Maps the player type to an output entity type. 
+
+      // Maps the player type to an output entity type.
       // Note: isEntityTypeValid() will return false if there
       // isn't a type mapper (Ntb) assigned to this Nib.
       nib->setOutputPlayerType(player);
@@ -688,7 +688,7 @@ Nib* NetIO::createNewOutputNib(Player* const player)
 }
 
 //------------------------------------------------------------------------------
-// Destory the NIBs 
+// Destory the NIBs
 //------------------------------------------------------------------------------
 void NetIO::destroyInputNib(Nib* const nib)
 {
@@ -710,7 +710,7 @@ void NetIO::destroyOutputNib(Nib* const nib)
 }
 
 //------------------------------------------------------------------------------
-// createIPlayer() -- Create a new IPlayer 
+// createIPlayer() -- Create a new IPlayer
 //------------------------------------------------------------------------------
 Player* NetIO::createIPlayer(Nib* const nib)
 {
@@ -782,12 +782,12 @@ Player* NetIO::createIPlayer(Nib* const nib)
          playerPair->unref();
       }
    }
-    
+
    return player;
 }
 
 //------------------------------------------------------------------------------
-// insertNewOutputNib() -- 
+// insertNewOutputNib() --
 //    Create a new Network Interface Block (NIB) for 'player' and insert it
 //    in the output list.  Returns a pointer to the new NIB or 0.
 //------------------------------------------------------------------------------
@@ -808,7 +808,7 @@ Nib* NetIO::insertNewOutputNib(Player* const player)
 
 
 //------------------------------------------------------------------------------
-// addNib2InputList() -- 
+// addNib2InputList() --
 //    Adds a new NIB to the input-list
 //------------------------------------------------------------------------------
 bool NetIO::addNib2InputList(Nib* const nib)
@@ -830,12 +830,12 @@ Nib* NetIO::findNib(const unsigned short playerID, const Basic::String* const fe
    // Binary search the table for the NIB
    Nib* found = 0;
    if (ioType == INPUT_NIB) {
-      Nib** k = 
+      Nib** k =
          (Nib**) bsearch(&key, inputList, nInNibs, sizeof(Nib*), compareKey2Nib);
       if (k != 0) found = *k;
    }
    else {
-      Nib** k = 
+      Nib** k =
          (Nib**) bsearch(&key, outputList, nOutNibs, sizeof(Nib*), compareKey2Nib);
       if (k != 0) found = *k;
    }
@@ -953,8 +953,8 @@ int NetIO::compareKey2Nib(const void* key, const void* nib)
    // Default to equal
    int result = 0;
 
-   // First, compare the player IDs 
-   if (pKey->id > pNib->getPlayerID()) result = +1; 
+   // First, compare the player IDs
+   if (pKey->id > pNib->getPlayerID()) result = +1;
    else if (pKey->id < pNib->getPlayerID()) result = -1;
 
    if (result == 0) {
@@ -1133,7 +1133,7 @@ bool NetIO::setSlotNetworkID(const Basic::Number* const num)
     bool ok = false;
     if (num != 0) {
         int v = num->getInt();
-        if (v >= 1 && v <= MAX_NETWORD_ID) {
+        if (v >= 1 && v <= (int)MAX_NETWORD_ID) {
             ok = setNetworkID((unsigned short)(v));
         }
         else {
@@ -1681,7 +1681,7 @@ const Ntm* NtmOutputNodeStd::findNetworkTypeMapper(const Player* const p) const
                   result = tstNtm;
                }
             }
-            
+
             item = item->getNext();
          }
 

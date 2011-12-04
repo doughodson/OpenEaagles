@@ -119,7 +119,7 @@ void Nib::copyData(const Nib& org, const bool cc)
    flames = org.flames;
    camouflage = org.camouflage;
    detMsgSent = org.detMsgSent;
- 
+
    execTime = org.execTime;
    utcTime = org.utcTime;
 
@@ -162,7 +162,7 @@ void Nib::copyData(const Nib& org, const bool cc)
 
    entityTypeChecked = org.entityTypeChecked;
 }
-    
+
 
 void Nib::deleteData()
 {
@@ -280,7 +280,7 @@ bool Nib::setOutputPlayerType(const Player* const p)
    bool ok = false;
 
    if (getNetIO() != 0) {
-      
+
       // Mark that we've been here.
       setEntityTypeChecked( true );
 
@@ -403,20 +403,20 @@ bool Nib::isPlayerStateUpdateRequired(const LCreal curExecTime)
 {
    enum { NO, YES, UNSURE } result = UNSURE;
 
-   // ---   
+   // ---
    // 1) Make sure that we have a valid player and entity type
-   // ---   
+   // ---
    const Player* player = getPlayer();
    if (player == 0 || isEntityTypeInvalid()) result = NO;
 
-   // ---   
+   // ---
    // 2) Mode changes
-   // ---   
+   // ---
    if ( (result == UNSURE) && isNotMode( player->getMode()) ) result = YES;
 
-   // ---   
+   // ---
    // 3) When we're a local player, check for one of the following ...
-   // ---   
+   // ---
    if ( (result == UNSURE) && player->isLocalPlayer()) {
 
       LCreal drTime = curExecTime - getTimeExec();
@@ -426,7 +426,7 @@ bool Nib::isPlayerStateUpdateRequired(const LCreal curExecTime)
          result = YES;
       }
 
-      // 3-b) Max DR timeout 
+      // 3-b) Max DR timeout
       if (result == UNSURE) {
          if ( drTime >= getNetIO()->getMaxTimeDR(this) ) {
             result = YES;
@@ -434,9 +434,9 @@ bool Nib::isPlayerStateUpdateRequired(const LCreal curExecTime)
       }
 
       // 3-c) Appearance has changed
-      if (result == UNSURE && 
-         (player->getDamage() != getDamage() || 
-         player->getSmoke()  != getSmoke()   || 
+      if (result == UNSURE &&
+         (player->getDamage() != getDamage() ||
+         player->getSmoke()  != getSmoke()   ||
          player->getFlames() != getFlames() ||
          player->getCamouflageType() != getCamouflageType() )
          ) {
@@ -621,10 +621,10 @@ bool Nib::isPlayerStateUpdateRequired(const LCreal curExecTime)
 
    }
 
-   // ---   
-   // 6) When we're a network player -- Update when the exec time of the 
+   // ---
+   // 6) When we're a network player -- Update when the exec time of the
    //    last input (player's NIB) is different that our exec time.
-   // ---   
+   // ---
    if ( (result == UNSURE) && player->isNetworkedPlayer() ) {
       const Nib* playerNib = player->getNib();
       if (playerNib->getTimeExec() != getTimeExec()) {
@@ -635,9 +635,9 @@ bool Nib::isPlayerStateUpdateRequired(const LCreal curExecTime)
 
    return (result == YES);
 }
-    
+
 //------------------------------------------------------------------------------
-// playerState2Nib() -- Sets this NIB's player data 
+// playerState2Nib() -- Sets this NIB's player data
 //------------------------------------------------------------------------------
 void Nib::playerState2Nib()
 {
@@ -673,9 +673,9 @@ void Nib::playerState2Nib()
       setTimeExec( (LCreal) sim->getExecTimeSec() );
       setTimeUtc( (LCreal) sim->getSysTimeOfDay() );
 
-      { 
-         osg::Vec3d pos = player->getGeocPosition();
-         osg::Vec3d vec = player->getGeocVelocity();
+      {
+         //osg::Vec3d pos = player->getGeocPosition();
+         //osg::Vec3d vec = player->getGeocVelocity();
 
          //std::cout << "playerState2Nib(): geoc pos: (";
          //std::cout << pos[0] << ", ";
@@ -844,14 +844,14 @@ bool Nib::mainDeadReckoning(
 {
    switch (drNum) {
 
-      // World, No rotation, 1st order linear 
+      // World, No rotation, 1st order linear
       case FPW_DRM: {
          *pNewRPY = drRPY0;
          *pNewP0 = drP0 + drV0*dT;
       }
       break;
 
-      // World, 1st order rotation, 1st order linear 
+      // World, 1st order rotation, 1st order linear
       case RPW_DRM: {
          osg::Matrixd DR;
          drComputeMatrixDR(dT, drAV0, drWwT, drOmega, &DR);
@@ -910,7 +910,7 @@ bool Nib::mainDeadReckoning(
       }
       break;
 
-      // Body, 1st order rotation, 2nd order linear 
+      // Body, 1st order rotation, 2nd order linear
       case RVB_DRM: {
          osg::Matrixd DR;
          drComputeMatrixDR(dT, drAV0, drWwT, drOmega, &DR);
@@ -929,7 +929,7 @@ bool Nib::mainDeadReckoning(
       }
       break;
 
-      // Body, No rotation, 2nd order linear 
+      // Body, No rotation, 2nd order linear
       case FVB_DRM: {
          *pNewRPY = drRPY0;
 
@@ -947,7 +947,7 @@ bool Nib::mainDeadReckoning(
       break;
 
       case OTHER_DRM:   // User defined
-      case STATIC_DRM:  // No dead reckoning 
+      case STATIC_DRM:  // No dead reckoning
       default:          // default
          std::cout << "drNum == default" << std::endl;
          *pNewP0 = drP0;
@@ -1076,7 +1076,7 @@ bool Nib::drComputeMatrixDR(
    )
 {
    //--------------------------------------------------------------------------
-   // intermediate values 
+   // intermediate values
    //--------------------------------------------------------------------------
 
    double Wx = av[0];
@@ -1123,7 +1123,7 @@ bool Nib::drComputeMatrixR1(
    )
 {
    //--------------------------------------------------------------------------
-   // intermediate values 
+   // intermediate values
    //--------------------------------------------------------------------------
 
    double Wx = av[0];

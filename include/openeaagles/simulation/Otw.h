@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Classes:	
+// Classes:
 //    Otw      -- Abstract Out-The-Window (OTW) visual system interface class
 //    OtwModel -- Model class; manages player to OTW model relationships
 //    Otm      -- Type Mapper class; maps player types to OTW model types
@@ -66,7 +66,7 @@ public:
     enum TableType {
        MODEL_TABLE,     // Model table -- maps players to visual system models
        HOT_TABLE        // Height-Of-Terrain request table
-    };  
+    };
 
 public:
     Otw();
@@ -157,8 +157,8 @@ protected:
 
 
 private:
-   static const int MAX_MODELS = 400;             // Max model table size
-   static const int MAX_MODELS_TYPES = 400;       // Max OTW model type table size
+   static const unsigned int MAX_MODELS = 400;          // Max model table size
+   static const unsigned int MAX_MODELS_TYPES = 400;    // Max OTW model type table size
 
    void processesModels();                        // Process ownship & player models
    void processesElevations();                    // Process terrain elevation requests
@@ -191,7 +191,7 @@ private:
    // Height-Of-Terrain request table
    OtwModel*      hotTbl[MAX_MODELS];              // Height-Of-Terrain request table
    unsigned int   nHots;                           // Number of HOTs requests
-   
+
    // OtwModel quick lookup key
     struct OtwModelKey {
       OtwModelKey(const unsigned short pid, const Basic::String* const federateName);
@@ -243,7 +243,7 @@ public:
     bool isState(const State tst) const      { return (tst == state); } // True if the model is this state ( INACTIVE, ACTIVE, etc. }
     State getState() const                   { return state; }          // Model's state  ( INACTIVE, ACTIVE, etc. }
     void setState(const State newState)      { state = newState; }      // Sets the model's state  ( INACTIVE, ACTIVE, etc. }
-    
+
     Player* getPlayer()                      { return player; }         // The player object associated with this model
     const Player* getPlayer() const          { return player; }         // The player object associated with this model (const version)
 
@@ -251,14 +251,14 @@ public:
 
     unsigned short getPlayerID() const       { return playerID; }       // Player ID for the player associated with this model
     const Basic::String* getFederateName() const { return federateName; } // Player's federate name (if networked)
-    
+
     int getAgeCount() const                  { return ageCount; }       // Age counter value (number of OTW frames since last OTW update)
     int incAgeCount()                        { return ++ageCount; }     // Increments the age counter
     void setAgeCount(const int v)            { ageCount = v; }          // Sets the age counter
 
     bool isHotActive() const                 { return hotActive; }      // True if a Height-Of-Terrain request is active for this model
     void setHotActive(const bool b)          { hotActive = b; }         // Sets the  Height-Of-Terrain request active flag for this model
-    
+
     int getReqCount() const                  { return rcount; }         // HOT request age counter value (number of OTW frames since last HOT request)
     int incReqCount()                        { return ++rcount; }       // Increments the HOT request age counter
     void setReqCount(const int v)            { rcount = v; }            // Sets the HOT request age counter
@@ -288,7 +288,7 @@ private:
 
     int           rcount;        // HOT request counter (how many times have we asked)
     bool          hotActive;     // HOT entry is active
-   
+
     // Model IDs  -- Comparisons in this order --
     unsigned short playerID;     // Player ID
     SPtr<const Basic::String> federateName; // Federate name
@@ -298,9 +298,9 @@ private:
 // Class:	Otm
 // Base class:	Basic::Object -> Otm
 //
-// Description: OTW-Type-Mapper (OTM) -- 
+// Description: OTW-Type-Mapper (OTM) --
 //              Maps player's form name and type string to a OTW entity type ID.
-//              
+//
 //
 // Form name: Otm
 // Slots:

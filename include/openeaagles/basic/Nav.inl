@@ -35,7 +35,7 @@ inline bool Nav::fbd2llE(
    const double q       = 1.0 - e2 * sinSlat * sinSlat;
    const double rn      = a / std::sqrt(q);
    const double rm      = rn * (1.0 - e2) / q;
-   
+
    // Compute new lat/lon
    double dN = cosBrng * dist;
    double dE = sinBrng * dist;
@@ -48,7 +48,7 @@ inline bool Nav::fbd2llE(
       else
          *dlon = slon;
    }
-   
+
    return true;
 }
 
@@ -81,9 +81,9 @@ inline bool Nav::fll2bdE(
    const double q       = 1.0 - e2 * sinSlat * sinSlat;
    const double rn      = a / std::sqrt(q);
    const double rm      = rn * (1.0 - e2) / q;
-   
+
    // IDENTICAL_POINTS;
-   if ((slat == dlat) && (slon == dlon)) { 
+   if ((slat == dlat) && (slon == dlon)) {
       *brng = 0.0;
       *dist = 0.0;
    }
@@ -92,11 +92,11 @@ inline bool Nav::fll2bdE(
    else {
       double dN = Angle::D2RCC * Angle::aepcdDeg(dlat - slat) * rm;
       double dE = Angle::D2RCC * Angle::aepcdDeg(dlon - slon) * rn * cosSlat;
-      
+
       *brng = Angle::R2DCC * std::atan2(dE, dN);
       *dist = std::sqrt(dN*dN + dE*dE);
    }
-      
+
 
    return true;
 }
@@ -160,7 +160,7 @@ inline bool Nav::fll2bdS(
 
 
 //------------------------------------------------------------------------------
-// Legacy flat-earth projection; use fbd2llS() 
+// Legacy flat-earth projection; use fbd2llS()
 //------------------------------------------------------------------------------
 inline bool Nav::fbd2ll(
             const double slat,         // IN: Starting (reference) latitude (degs)
@@ -176,7 +176,7 @@ inline bool Nav::fbd2ll(
 
 
 //------------------------------------------------------------------------------
-// Legacy flat-earth projection; use fll2bdS() 
+// Legacy flat-earth projection; use fll2bdS()
 //------------------------------------------------------------------------------
 inline bool Nav::fll2bd(
             const double slat,         // IN: Starting (reference) latitude (degs)
@@ -215,7 +215,7 @@ inline bool Nav::aer2xyz(
       double sel, cel;
       sinCos(el,&sel,&cel);
 
-      // --- 
+      // ---
       // Compute to x, y and z positions (player coordinates)
       // ---
       double d = -rng * sel;
@@ -253,7 +253,7 @@ inline bool Nav::aer2xyz(
       double sel, cel;
       sinCos(el,&sel,&cel);
 
-      // --- 
+      // ---
       // Compute to x, y and z positions (player coordinates)
       // ---
       double d = -rng * sel;
@@ -284,11 +284,11 @@ inline bool Nav::xyz2aer(
       const double z             // IN:  z                        [meters]
    )
 {
-   // Compute AER position vector  
+   // Compute AER position vector
    double ranj = std::sqrt(x*x + y*y + z*z);
    double elev = Angle::R2DCC * std::asin(-z / ranj);
    double azim = Angle::R2DCC * std::atan2(y, x);
-   
+
    (*aer)[0] = azim;
    (*aer)[1] = elev;
    (*aer)[2] = ranj;
@@ -311,11 +311,11 @@ inline bool Nav::xyz2aer(
    double y = vb[1];
    double z = vb[2];
 
-   // Compute AER position vector  
+   // Compute AER position vector
    double ranj = std::sqrt(x*x + y*y + z*z);
    double elev = Angle::R2DCC * std::asin(-z / ranj);
    double azim = Angle::R2DCC * std::atan2(y, x);
-   
+
    (*aer)[0] = azim;
    (*aer)[1] = elev;
    (*aer)[2] = ranj;
@@ -512,7 +512,7 @@ inline bool Nav::convertGeodAngles2EcefAngles(
          )
 {
    osg::Matrixd wm; // World (earth) matrix
-   computeWorldMatrix(ll[0], ll[1], &wm); 
+   computeWorldMatrix(ll[0], ll[1], &wm);
    return convertGeodAngles2EcefAngles(wm,rpy,vc);
 }
 
@@ -562,7 +562,7 @@ inline bool Nav::convertEcefAngles2GeodAngles(
          )
 {
    osg::Matrixd wm;
-   computeWorldMatrix(ll[0], ll[1], &wm); 
+   computeWorldMatrix(ll[0], ll[1], &wm);
    osg::Matrixd rm;
    computeRotationalMatrix(rpy[0], rpy[1], rpy[2], &rm);
    return convertEcefAngles2GeodAngles(wm, rm, vd);
@@ -630,11 +630,12 @@ inline bool Nav::convertPosVec2llE(
    const double sinSlat = std::sin(Angle::D2RCC * slat);
    const double cosSlat = std::cos(Angle::D2RCC * slat);
    convertPosVec2llE(slat, slon, sinSlat, cosSlat, pos, lat, lon, alt, em);
+   return true;
 }
 
 
 //----------------------------------------------------------
-// NED position vector to LLA using a flat earth projection 
+// NED position vector to LLA using a flat earth projection
 // with a spherical earth radius of ERAD60
 //----------------------------------------------------------
 inline bool Nav::convertPosVec2llS(
