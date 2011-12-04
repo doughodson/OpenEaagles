@@ -52,7 +52,7 @@ namespace Dis {
 //    netInput    <Basic::NetHandler>     ! Network input handler
 //    netOutput   <Basic::NetHandler>     ! Network output handler
 //
-//    version     <Basic::Number>         ! DIS version number [ 0 .. 6 ] (IST-CF-03-01, May 5, 2003) 
+//    version     <Basic::Number>         ! DIS version number [ 0 .. 6 ] (IST-CF-03-01, May 5, 2003)
 //                                        !   0 => Other
 //                                        !   1 => DIS PDU version 1.0 (May 92)
 //                                        !   2 => IEEE 1278-1993
@@ -62,7 +62,7 @@ namespace Dis {
 //                                        !   6 => IEEE 1278.1A-1998
 //                                        !   7 => IEEE 1278.1-200X
 //
-//    siteID         <Basic::Number>      ! Site Identification    
+//    siteID         <Basic::Number>      ! Site Identification
 //    applicationID  <Basic::Number>      ! Application Identification
 //    exerciseID     <Basic::Number>      ! Exercise Identification
 //
@@ -85,7 +85,7 @@ namespace Dis {
 //
 //
 // Notes:
-//    1) NetIO creates its own federate name based on the site and application numbers 
+//    1) NetIO creates its own federate name based on the site and application numbers
 //       using makeFederateName().  (e.g., site = 10 and  app = 143 gives the federate name "S10A143")
 //
 //    2) NetIO creates its own federation name based on the exercise number
@@ -106,10 +106,10 @@ namespace Dis {
 //          maxTimeDR: { K5: ( Seconds 10.0 )  K1D11: ( Seconds 5.0 ) }
 //             K5 will set the parameter for all domains of kinds #5
 //             K1D11 will set the parameter for kind #1, domain #11
-//     
+//
 //    5) Setting the 'maxEntityRange' slot to zero(0) for an entity kind/demain
 //       will filter out all entities of that kind/domain type.
-//     
+//
 //    6) For outgoing emission PDUs, the list of EmissionPduHandlers are matched
 //       with RfSensors using the RfSensor::getTypeId().  That is, the type id
 //       of the sensor is matched with the type id of the EmissionPduHandler's
@@ -121,25 +121,25 @@ class NetIO : public Simulation::NetIO
 {
     DECLARE_SUBCLASS(NetIO,Simulation::NetIO)
 
-public: 
+public:
    // Max PDU buffer size
    enum { MAX_PDU_SIZE = 1536 };
 
    // Standard (IST-CF-03-01, May 5, 2003) entity type "kind" codes [ 0 .. 9 ]
-   enum EntityTypeKindEnum { 
-      KIND_OTHER, KIND_PLATFORM, KIND_MUNITION, KIND_LIFEFORM, 
+   enum EntityTypeKindEnum {
+      KIND_OTHER, KIND_PLATFORM, KIND_MUNITION, KIND_LIFEFORM,
       KIND_ENVIRONMENTAL, KIND_CULTURAL_FEATURE, KIND_SUPPLY, KIND_RADIO,
       KIND_EXPENDABLE, KIND_SENSOR_EMITTER, NUM_ENTITY_KINDS
    };
 
    // Standard (IST-CF-03-01, May 5, 2003) "platform domain" codes [ 0 .. 5 ]
-   enum PlatformDomainEnum { 
+   enum PlatformDomainEnum {
       PLATFORM_DOMAIN_OTHER, PLATFORM_DOMAIN_LAND, PLATFORM_DOMAIN_AIR, PLATFORM_DOMAIN_SURFACE,
       PLATFORM_DOMAIN_SUBSURFACE, PLATFORM_DOMAIN_SPACE
    };
 
    // Standard (IST-CF-03-01, May 5, 2003) "munition domain" codes [ 0 .. 11 ]
-   enum MunitionDomainEnum { 
+   enum MunitionDomainEnum {
       MUNITION_DOMAIN_OTHER, MUNITION_DOMAIN_ANTI_AIR, MUNITION_DOMAIN_ANTI_ARMOR, MUNITION_DOMAIN_ANTI_GUIDED_MUNITION,
       MUNITION_DOMAIN_ANTIRADAR, MUNITION_DOMAIN_ANTISATELLITE, MUNITION_DOMAIN_ANTISHIP, MUNITION_DOMAIN_ANTISUBMARINE,
       MUNITION_DOMAIN_ANTIPERSONNEL, MUNITION_DOMAIN_BATTLEFIELD_SUPPORT, MUNITION_DOMAIN_STRATEGIC, MUNITION_DOMAIN_TACTICAL
@@ -147,19 +147,19 @@ public:
 
    // Larges number of domains in any kind (IST-CF-03-01, May 5, 2003)
    enum { MAX_ENTITY_DOMAINS = MUNITION_DOMAIN_TACTICAL };
-   
-   // Standard (IST-CF-03-01, May 5, 2003) "country" codes 
+
+   // Standard (IST-CF-03-01, May 5, 2003) "country" codes
    enum EntityTypeCountryEnum {
       COUNTRY_OTHER = 0, COUNTRY_FRANCE = 71, COUNTRY_CIS = 222, COUNTRY_UK = 224, COUNTRY_USA = 225,
    };
 
     // Standard (IST-CF-03-01, May 5, 2003) "force" codes [ 0 .. 3 ]
-    enum ForceEnum { 
+    enum ForceEnum {
         OTHER_FORCE,   FRIENDLY_FORCE,   OPPOSING_FORCE,   NEUTRAL_FORCE
     };
 
    // Standard (IST-CF-03-01, May 5, 2003) "DIS Protocol Version" codes [ 0 .. 6 ]
-   enum { 
+   enum {
          VERSION_OTHER,    // Other
          VERSION_100,      // DIS PDU version 1.0 (May 92)
          VERSION_1278,     // IEEE 1278-1993
@@ -171,7 +171,7 @@ public:
          VERSION_MAX,      // Max version numbers
     };
 
-   // Standard (IST-CF-03-01, May 5, 2003) "3.2  PDU Type 
+   // Standard (IST-CF-03-01, May 5, 2003) "3.2  PDU Type
    enum {
       PDU_OTHER, PDU_ENTITY_STATE, PDU_FIRE,PDU_DETONATION,PDU_COLLISION,
       PDU_SERVICE_REQUEST, PDU_RESUPPLY_OFFER, PDU_RESUPPLY_RECEIVED, PDU_RESUPPLY_CANCEL,
@@ -180,19 +180,19 @@ public:
       PDU_ACTION_RESPONSE, PDU_DATA_QUERY, PDU_SET_DATA, PDU_DATA,
       PDU_EVENT_REPORT, PDU_COMMENT, PDU_ELECTROMAGNETIC_EMISSION, PDU_DESIGNATOR,
       PDU_TRANSMITTER, PDU_SIGNAL, PDU_RECEIVER, PDU_IFF_ATC_NAVAIDS,
-      PDU_UNDERWATER_ACOUSTIC, PDU_SUPPLEMENTAL_EMISSION, PDU_INTERCOM_SIGNAL, PDU_INTERCOM_CONTROL, 
-      PDU_AGGREGATE_STATE, PDU_ISGROUPOF, PDU_TRANSFER_CONTROL, PDU_ISPARTOF, 
-      PDU_MINEFIELD_STATE, PDU_MINEFIELD_QUERY, PDU_MINEFIELD_DATA, PDU_MINEFIELD_RESPONSE_NAK, 
-      PDU_ENVIRONMENTAL_PROCESS, PDU_GRIDDED_DATA, PDU_POINT_OBJECT_STATE, PDU_LINEAR_OBJECT_STATE, 
-      PDU_AREAL_OBJECT_STATE, PDU_TSPI, PDU_APPEARANCE, PDU_ARTICULATED_PARTS, 
-      PDU_LE_FIRE, PDU_LE_DETONATION, PDU_CREATE_ENTITY_R, PDU_REMOVE_ENTITY_R, 
-      PDU_START_RESUME_R, PDU_STOP_FREEZE_R, PDU_ACKNOWLEDGE_R, PDU_ACTION_REQUEST_R, 
-      PDU_ACTION_RESPONSE_R, PDU_DATA_QUERY_R, PDU_SET_DATA_R, PDU_DATA_R, 
-      PDU_EVENT_REPORT_R, PDU_COMMENT_R, PDU_RECORD_R, PDU_SET_RECORD_R, 
+      PDU_UNDERWATER_ACOUSTIC, PDU_SUPPLEMENTAL_EMISSION, PDU_INTERCOM_SIGNAL, PDU_INTERCOM_CONTROL,
+      PDU_AGGREGATE_STATE, PDU_ISGROUPOF, PDU_TRANSFER_CONTROL, PDU_ISPARTOF,
+      PDU_MINEFIELD_STATE, PDU_MINEFIELD_QUERY, PDU_MINEFIELD_DATA, PDU_MINEFIELD_RESPONSE_NAK,
+      PDU_ENVIRONMENTAL_PROCESS, PDU_GRIDDED_DATA, PDU_POINT_OBJECT_STATE, PDU_LINEAR_OBJECT_STATE,
+      PDU_AREAL_OBJECT_STATE, PDU_TSPI, PDU_APPEARANCE, PDU_ARTICULATED_PARTS,
+      PDU_LE_FIRE, PDU_LE_DETONATION, PDU_CREATE_ENTITY_R, PDU_REMOVE_ENTITY_R,
+      PDU_START_RESUME_R, PDU_STOP_FREEZE_R, PDU_ACKNOWLEDGE_R, PDU_ACTION_REQUEST_R,
+      PDU_ACTION_RESPONSE_R, PDU_DATA_QUERY_R, PDU_SET_DATA_R, PDU_DATA_R,
+      PDU_EVENT_REPORT_R, PDU_COMMENT_R, PDU_RECORD_R, PDU_SET_RECORD_R,
       PDU_RECORD_QUERY_R, PDU_COLLISION_ELASTIC, PDU_ENTITY_STATE_UPDATE,
-      PDU_ANNOUNCE_OBJECT = 129,      PDU_DELETE_OBJECT = 130, 
-      PDU_DESCRIBE_APPLICATION = 131, PDU_DESCRIBE_EVENT = 132, 
-      PDU_DESCRIBE_OBJECT = 133,      PDU_REQUEST_EVENT = 134, 
+      PDU_ANNOUNCE_OBJECT = 129,      PDU_DELETE_OBJECT = 130,
+      PDU_DESCRIBE_APPLICATION = 131, PDU_DESCRIBE_EVENT = 132,
+      PDU_DESCRIBE_OBJECT = 133,      PDU_REQUEST_EVENT = 134,
       PDU_REQUEST_OBJECT = 135
    };
 
@@ -230,7 +230,7 @@ public:
    int recvData(char* const packet, const int maxSize);
 
    unsigned int timeStamp();                                                  // Gets the current timestamp
-   unsigned int makeTimeStamp(const LCreal ctime, const bool absolute);       // Make a PDU time stamp 
+   unsigned int makeTimeStamp(const LCreal ctime, const bool absolute);       // Make a PDU time stamp
 
    bool isVersion(const unsigned char v) const    { return (v == version); }  // True if versions match
    unsigned char getVersion() const               { return version; }         // Returns the current version number
@@ -241,7 +241,7 @@ public:
    const EmissionPduHandler* findEmissionPduHandler(const EmissionSystem* const msg);
 
    // Generate a federate name from the site and application numbers:
-   //  "SnnAmm" -- where nn and mm are the site and app numbers. 
+   //  "SnnAmm" -- where nn and mm are the site and app numbers.
    static bool makeFederateName(char* const fedName, const unsigned int len, const unsigned short site, const unsigned short app);
 
    // Parse federate name for the site and application numbers
@@ -317,7 +317,7 @@ protected:
 
    virtual bool setSlotNetInput(Basic::NetHandler* const msg);               // Network input handler
    virtual bool setSlotNetOutput(Basic::NetHandler* const msg);              // Network output handler
-   virtual bool setSlotVersion(const Basic::Number* const num);              // DIS version 
+   virtual bool setSlotVersion(const Basic::Number* const num);              // DIS version
    virtual bool setSlotMaxTimeDR(const Basic::PairStream* const msg);        // Sets the max DR time(s) for selected entity types
    virtual bool setSlotMaxTimeDR(const Basic::Time* const msg);              // Sets the max DR time(s) for all entity types
    virtual bool setSlotMaxPositionErr(const Basic::PairStream* const msg);   // Sets the max positional error(s) for selected entity types
@@ -350,7 +350,7 @@ protected:
    virtual bool setSlotFederationName(const Basic::String* const msg);       // Sets our federation name
 
    // NetIO Interface
-   virtual bool initNetwork();             // Initialize the network 
+   virtual bool initNetwork();             // Initialize the network
    virtual void netInputHander();          // Network input handler
    virtual void processInputList();        // Update players/systems from the Input-list
    virtual Simulation::Nib* nibFactory(const Simulation::NetIO::IoType ioType);  // Create a new Nib
@@ -379,7 +379,7 @@ private:
    LCreal  maxOrientationErr[NUM_ENTITY_KINDS][MAX_ENTITY_DOMAINS];  // Maximum orientation error        (radians)
    LCreal  maxAge[NUM_ENTITY_KINDS][MAX_ENTITY_DOMAINS];             // Maximum age of networked players (seconds)
 
-   static const int MAX_EMISSION_HANDLERS = 500;       // Max table size
+   static const unsigned int MAX_EMISSION_HANDLERS = 500;            // Max table size
 
    // Table of pointers to emission PDU handlers; EmissionPduHandler objects
    const EmissionPduHandler* emissionHandlers[MAX_EMISSION_HANDLERS];
