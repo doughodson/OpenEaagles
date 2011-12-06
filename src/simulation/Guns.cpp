@@ -208,7 +208,7 @@ bool Bullet::checkForTargetHit()
       // For all active bursts ...
       for (int i = 0; i < nbt; i++) {
          if (bursts[i].bStatus == Burst::ACTIVE) {
- 
+
             // Check if we're within range of the target
             osg::Vec3 rPos = bursts[i].bPos - osPos;
             LCreal rng = rPos.length();
@@ -225,11 +225,11 @@ bool Bullet::checkForTargetHit()
    }
    // if we are just flying along, check our range to the nearest player and tell him we killed it
    else {
-        osg::Vec3 old = getEulerAngles();
+        //osg::Vec3 old = getEulerAngles();
         osg::Vec3 myPos = getPosition();
         osg::Vec3 tgtPos;
         osg::Vec3 vecPos;
-        LCreal az = 0;
+        //LCreal az = 0;
         //LCreal el = 0;
         LCreal range = 0;
         //LCreal diffAz = 0;
@@ -248,7 +248,7 @@ bool Bullet::checkForTargetHit()
                             // ok, calculate our position from this guy
                             tgtPos = player->getPosition();
                             vecPos = tgtPos - myPos;
-                            az = lcAtan2(vecPos.y(), vecPos.x());
+                            //az = lcAtan2(vecPos.y(), vecPos.x());
                             range = (vecPos.x() * vecPos.x() + vecPos.y() * vecPos.y());
                             range = sqrt(range);
                             if (range < maxRange) {
@@ -263,7 +263,7 @@ bool Bullet::checkForTargetHit()
                 players = 0;
             }
         }
-   
+
    }
    return false;
 }
@@ -302,7 +302,7 @@ BEGIN_SLOTTABLE(Gun)
     "yaw"               //  9: heading; relative to ownship axis (radians, Basic::Angle)
 END_SLOTTABLE(Gun)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(Gun)
     ON_SLOT(1, setBulletType, Bullet)
     ON_SLOT(2, setSlotNumRounds,  Basic::Number)
@@ -325,7 +325,7 @@ Gun::Gun()
    bullet = 0;
 
    armed = false;
-   fire = false; 
+   fire = false;
    unlimited = false;
 
    burstFrameTimer = 0;
@@ -371,7 +371,7 @@ void Gun::copyData(const Gun& org, const bool cc)
    rcount = org.rcount;
 
    fire = org.fire;
-   unlimited = org.unlimited;     
+   unlimited = org.unlimited;
 
    shortBurstTimer = org.shortBurstTimer;
    shortBurstTime  = org.shortBurstTime;
@@ -451,7 +451,7 @@ LCreal Gun::computeBulletRatePerSecond()
 }
 
 //------------------------------------------------------------------------------
-// fireControl() -- Starts/stops gun firing; 
+// fireControl() -- Starts/stops gun firing;
 //    'trigger' will start or stop firing;
 //    if 'burst' is true, only a single burst is fired;
 //    returns true if gun is now firing
@@ -527,7 +527,7 @@ bool Gun::setBulletType(Bullet* const b)
 }
 
 //------------------------------------------------------------------------------
-// initBullet() -- init the bullet 
+// initBullet() -- init the bullet
 //------------------------------------------------------------------------------
 void Gun::initBullet()
 {
@@ -555,7 +555,7 @@ void Gun::burstFrame()
          rounds -= ibullets;
       }
 
-      
+
       // Update the rounds fired count
       rcount -= ibullets;
 
@@ -577,10 +577,10 @@ void Gun::burstFrame()
          osg::Vec3 ipos = computeInitBulletPosition();
          osg::Vec3 ivel = computeInitBulletVelocity();
 
-         // Get the bullet player being used to fly-out the bullets 
+         // Get the bullet player being used to fly-out the bullets
          Bullet* flyout = (Bullet*)( wpn->getFlyoutWeapon() );
          if (flyout == 0) {
-            // If we don't have the flyout bullet (i.e., weapon and player) ... create it 
+            // If we don't have the flyout bullet (i.e., weapon and player) ... create it
             wpn->setLaunchVehicle(ownship);
             flyout = (Bullet*)( wpn->release() );
          }

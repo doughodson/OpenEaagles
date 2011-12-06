@@ -31,7 +31,7 @@ BEGIN_SLOTTABLE(Otw)
     "otwModelTypes",    // 6: OTW system's model type IDs (PairStream of Otm objects)
 END_SLOTTABLE(Otw)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(Otw)
     ON_SLOT(1, setSlotMaxRange,      Basic::Distance)
     ON_SLOT(1, setSlotMaxRange,      Basic::Number)
@@ -49,7 +49,7 @@ Otw::Otw()
 {
     STANDARD_CONSTRUCTOR()
 
-    ownship = 0; 
+    ownship = 0;
     playerList = 0;
     rstFlg = false;
     rstReq = false;
@@ -62,21 +62,21 @@ Otw::Otw()
     maxModels = 0;               // Default: no models
     maxElevations = 0;           // Default: no elevation requests
 
-    // Clear the tables 
-    for (int i = 0; i < MAX_MODELS; i++) {
+    // Clear the tables
+    for (unsigned int i = 0; i < MAX_MODELS; i++) {
         modelTbl[i] = 0;
-    }    
+    }
     nModels = 0;
 
-    for (int i = 0; i < MAX_MODELS; i++) {
+    for (unsigned int i = 0; i < MAX_MODELS; i++) {
         hotTbl[i] = 0;
-    }    
+    }
     nHots = 0;
 
 
-    for (int i = 0; i < MAX_MODELS_TYPES; i++) {
+    for (unsigned int i = 0; i < MAX_MODELS_TYPES; i++) {
         otwModelTypes[i] = 0;
-    }    
+    }
     nOtwModelTypes = 0;
 
 }
@@ -89,19 +89,19 @@ void Otw::copyData(const Otw& org, const bool cc)
    BaseClass::copyData(org);
 
    if (cc) {
-      ownship = 0; 
+      ownship = 0;
       playerList = 0;
-      for (int i = 0; i < MAX_MODELS; i++) {
+      for (unsigned int i = 0; i < MAX_MODELS; i++) {
          modelTbl[i] = 0;
-      }    
+      }
       nModels = 0;
-      for (int i = 0; i < MAX_MODELS; i++) {
+      for (unsigned int i = 0; i < MAX_MODELS; i++) {
          hotTbl[i] = 0;
-      }    
+      }
       nHots = 0;
-      for (int i = 0; i < MAX_MODELS_TYPES; i++) {
+      for (unsigned int i = 0; i < MAX_MODELS_TYPES; i++) {
          otwModelTypes[i] = 0;
-      }    
+      }
       nOtwModelTypes = 0;
    }
 
@@ -142,7 +142,7 @@ void Otw::deleteData()
 }
 
 //------------------------------------------------------------------------------
-// reset() -- Reset the visual system interface 
+// reset() -- Reset the visual system interface
 //------------------------------------------------------------------------------
 void Otw::reset()
 {
@@ -152,19 +152,19 @@ void Otw::reset()
 }
 
 //------------------------------------------------------------------------------
-// resetTables() -- Resets all of the working tables 
+// resetTables() -- Resets all of the working tables
 //------------------------------------------------------------------------------
 void Otw::resetTables()
 {
     // Clear the model table
-    // (in reverse order just in case another thread is traversing the 
+    // (in reverse order just in case another thread is traversing the
     //  table from bottom up)
     while (nModels > 0) {
         removeModelFromList(nModels-1, MODEL_TABLE);
     }
 
     // Clear the elevation table
-    // (in reverse order just in case another thread is traversing the 
+    // (in reverse order just in case another thread is traversing the
     //  table from bottom up)
     while (nHots > 0) {
         removeModelFromList(nHots-1, HOT_TABLE);
@@ -199,12 +199,12 @@ void Otw::updateTC(const LCreal dt)
         rstFlg = true;
         rstReq = false;
     }
-    
+
     // update one visual system frame
     processesModels();
     processesElevations();
     frameSync();
-    
+
     rstFlg = false;
 }
 
@@ -229,7 +229,7 @@ void Otw::processesElevations()
 
 //------------------------------------------------------------------------------
 // mapPlayerList2ModelTable() - Map the player list to the model table
-//  
+//
 //  model states are:
 //     INACTIVE     -- unused model entry
 //     ACTIVE       -- player is alive and in-range
@@ -257,7 +257,7 @@ void Otw::mapPlayerList2ModelTable()
    // Remove all inactive, dead or out-of-range models
    //   -- These states were issued last pass, so the OTW system
    //       specific software should have handled them by now.
-   //   -- As models are removed, the table above the model is shifted down.  
+   //   -- As models are removed, the table above the model is shifted down.
    //   -- We're also clearing the model's 'checked' flag
    // ---
    for (int i = getModelTableSize(); i > 0; --i) {
@@ -270,7 +270,7 @@ void Otw::mapPlayerList2ModelTable()
    for (unsigned int i = 0; i < getModelTableSize(); i++) {
       modelTbl[i]->setCheckedFlag(false);
    }
-    
+
    if (playerList != 0) {
       // We must have a player list ...
 
@@ -279,7 +279,7 @@ void Otw::mapPlayerList2ModelTable()
       // ---
       Basic::List::Item* item = playerList->getFirstItem();
       while (item != 0) {
-    
+
          // Get a pointer to the player, 'p'
          Basic::Pair* pair = dynamic_cast<Basic::Pair*>(item->getValue());
          Player* p = (Player*) pair->object();
@@ -295,7 +295,7 @@ void Otw::mapPlayerList2ModelTable()
 
             // Check if in-range
             bool inRange = computeRangeToPlayer(p) <= maxRange;
-         
+
             // Check if this player is alive and within range.
             if (p->isActive() && inRange) {
                // When alive and in range ...
@@ -336,7 +336,7 @@ void Otw::mapPlayerList2ModelTable()
    // ---
    for (unsigned int i = 0; i < getModelTableSize(); i++) {
       if ( modelTbl[i]->isNotChecked() ) {
-         // Request removel; 
+         // Request removel;
          // (note: the OTW system specific code now has one frame to cleanup it's own code
          //  before the model is dropped from the output list next frame -- see above)
          modelTbl[i]->setState( OtwModel::OUT_OF_RANGE );
@@ -373,9 +373,9 @@ void Otw::mapPlayers2ElevTable()
 
             // Check if in-range
             bool inRange = computeRangeToPlayer(p) <= maxRange;
-            
+
             if (inRange) {
-            
+
                // Find the player's model entry (if any)
                OtwModel* model = findModel(p, HOT_TABLE);
 
@@ -545,7 +545,7 @@ bool Otw::addModelToList(OtwModel* const model, const TableType type)
    bool ok = false;
    if (model != 0) {
 
-      // Select the table 
+      // Select the table
       OtwModel** tbl = modelTbl;
       int n = nModels;
       int max = maxModels;
@@ -676,12 +676,12 @@ OtwModel* Otw::findModel(const unsigned short playerID, const Basic::String* con
    // Binary search the table for the models
    OtwModel* found = 0;
    if (type == HOT_TABLE) {
-      OtwModel** k = 
+      OtwModel** k =
          (OtwModel**) bsearch(&key, hotTbl, nHots, sizeof(OtwModel*), compareKey2Model);
       if (k != 0) found = *k;
    }
    else {
-      OtwModel** k = 
+      OtwModel** k =
          (OtwModel**) bsearch(&key, modelTbl, nModels, sizeof(OtwModel*), compareKey2Model);
       if (k != 0) found = *k;
    }
@@ -723,7 +723,7 @@ int Otw::compareKey2Model(const void* key, const void* model)
 
    // Compare player IDs
    if (pKey->playerID < pModel->getPlayerID()) result = -1;
-   else if (pKey->playerID > pModel->getPlayerID()) result = +1; 
+   else if (pKey->playerID > pModel->getPlayerID()) result = +1;
 
    if (result == 0) {
       // If they're the same playr IDs, compare the federate names
@@ -856,7 +856,7 @@ bool Otw::setSlotRefLongitude(const Basic::Number* const num)
     }
     return ok;
 }
-  
+
 // Sets the list of OTW model type IDs (Otm objects)
 bool Otw::setSlotOtwModelTypes(const Basic::PairStream* const msg)
 {
@@ -927,7 +927,7 @@ void OtwModel::copyData(const OtwModel& org, const bool cc)
     if (cc) {
         player = 0;
     }
-    
+
     setPlayer(org.player);
 
     state = org.state;
@@ -1037,7 +1037,7 @@ BEGIN_SLOTTABLE(Otm)
    "modelTypeId",    // 3) OTW entity type ID number
 END_SLOTTABLE(Otm)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(Otm)
     ON_SLOT(1, setSlotRefFormName, Basic::Identifier)
     ON_SLOT(2, setSlotRefTypeName, Basic::String)
@@ -1124,11 +1124,11 @@ bool Otm::setSlotRefTypeName(const Basic::String* const msg)
 //------------------------------------------------------------------------------
 // isMatchingPlayerType() -- Returns true if the form & type names match
 //------------------------------------------------------------------------------
-bool Otm::isMatchingPlayerType(const Player* const p) const 
+bool Otm::isMatchingPlayerType(const Player* const p) const
 {
    bool match = false;
    if (p != 0 && refFormName != 0) {
-      // first match the form name -- 
+      // first match the form name --
       if (p->isFormName( *refFormName ) ) {
 
          // The form names match!

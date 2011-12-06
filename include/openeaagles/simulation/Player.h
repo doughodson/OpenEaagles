@@ -222,7 +222,7 @@ class Track;
 //    b) Setting the position in any one coordinate system will set the
 //       position for all three coordinate systems and will compute the
 //       world matrix, getWorldMat().
-//      
+//
 //    c) Set the initial (i.e., reset) present position using one of the three
 //       sets of initial position slots defined above.
 //
@@ -361,13 +361,13 @@ class Track;
 //
 //
 //------------------------------------------------------------------------------
-class Player : public Basic::Component  
+class Player : public Basic::Component
 {
    DECLARE_SUBCLASS(Player,Basic::Component)
 
 public:
 
-   // Player mode 
+   // Player mode
    enum Mode {
       INACTIVE,         // Player is not being updated and is not being sent to the networks
       ACTIVE,           // Player is being updated and is being sent to the networks
@@ -719,14 +719,14 @@ public:
    virtual void resetJustKilled();                             // Resets the just killed flag
    virtual bool setDamage(const LCreal v);                     // Sets the player's damage state
    virtual bool setSmoke(const LCreal v);                      // Sets the player's smoke state
-   virtual bool setFlames(const LCreal v);                     // Sets the player's flames state 
+   virtual bool setFlames(const LCreal v);                     // Sets the player's flames state
    virtual bool setCamouflageType(const unsigned int v);       // Sets the user defined camouflage type (or zero for none)
    virtual bool setPositionFreeze(const bool f);               // Sets the player's freeze flag
    virtual bool setAltitudeFreeze(const bool f);               // Sets the player's altitude freeze flag
    virtual bool setAttitudeFreeze(const bool f);               // Sets the player's attitude freeze flag
 
    virtual bool setHeadingHoldOn(const bool b);                // Turns heading-hold mode on/off
-   virtual bool setCommandedHeading(const double h);           // Sets the commanded (true) heading default (radians) 
+   virtual bool setCommandedHeading(const double h);           // Sets the commanded (true) heading default (radians)
    virtual bool setCommandedHeadingD(const double h);          // Sets the commanded (true) heading (degrees)
    virtual bool setCommandedHeadingR(const double h);          // Sets the commanded (true) heading (radians)
 
@@ -741,7 +741,7 @@ public:
    virtual bool setNib(Nib* const p);                          // Sets the networked player's Nib object
 
    virtual bool setEnableNetOutput(const bool f);              // Sets the network output enabled flag
-   virtual bool setOutgoingNib(Nib* const p, const unsigned int id); // Sets the outgoing NIB for network 'id' 
+   virtual bool setOutgoingNib(Nib* const p, const unsigned int id); // Sets the outgoing NIB for network 'id'
 
    virtual void setTerrainElevation(const LCreal v);           // Sets the elevation of the terrain at this player's location (meters)
    virtual bool setTerrainOffset(const LCreal v);              // Sets the ground clamping offset (meters)
@@ -750,11 +750,11 @@ public:
 
    // ---
    // Set the player's position
-   // 
+   //
    // 1) Setting the position in any one of the three coordinate systems,
    //    i.e., geocentric(ECEF), geodetic lat/lon or local gaming area NED, will set
    //    the player's position in the other two systems as well.
-   // 
+   //
    // 2) The world transformation matrix, getWorldMat(), is computed by
    //    these set position functions.
    //
@@ -809,7 +809,7 @@ public:
    virtual bool setQuaternions(const osg::Quat&);
 
    // ---
-   // Set the player's angular velocities: 
+   // Set the player's angular velocities:
    //    body and geocentric (ecef) coordinate systems
    //
    // 1) Setting the angular rate in eithercoordinate system will set the
@@ -1113,7 +1113,7 @@ private:
    bool        posSlaved;        // Player's position is slaved to the dynamics software (default: false)
    bool        posFrz;           // Player's position is frozen
    bool        altFrz;           // Player's altitude is frozen
-   bool        attFrz;           // Player's attitude is frozen 
+   bool        attFrz;           // Player's attitude is frozen
    bool        fuelFrz;          // Player's fuel quanity is frozen
    bool        crashOverride;    // If true, player can NOT crash
    bool        killOverride;     // If true, player can NOT be killed
@@ -1189,9 +1189,9 @@ private:
    // ---
    // Reflected emissions
    // ---
-   static const int MAX_RF_REFLECTIONS = 4;    // Max number of reflected emissions we'll send (let's keep it small)
-   Basic::Component* rfReflect[MAX_RF_REFLECTIONS]; // Objects that are interested in the emissions hitting us
-   LCreal  rfReflectTimer[MAX_RF_REFLECTIONS]; // Request for reflected emissions will timeout
+   static const unsigned int MAX_RF_REFLECTIONS = 4;   // Max number of reflected emissions we'll send (let's keep it small)
+   Basic::Component* rfReflect[MAX_RF_REFLECTIONS];    // Objects that are interested in the emissions hitting us
+   LCreal  rfReflectTimer[MAX_RF_REFLECTIONS];         // Request for reflected emissions will timeout
 };
 
 // -----------------------------------------------------------------------------

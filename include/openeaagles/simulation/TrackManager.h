@@ -34,10 +34,10 @@ class Track;
 //    logTrackUpdates <Boolean>  ! True to log all updates to tracks (default: true)
 //
 //==============================================================================
-class TrackManager : public System  
+class TrackManager : public System
 {
    DECLARE_SUBCLASS(TrackManager,System)
-   
+
 public:
    TrackManager();
 
@@ -55,7 +55,7 @@ public:
    virtual int getTrackList(Track* tlist[], const unsigned int max);
    virtual int getTrackList(const Track* tlist[], const unsigned int max) const;
 
-   // Type of tracks managed (see enum TypeBits in Track.h)   
+   // Type of tracks managed (see enum TypeBits in Track.h)
    virtual bool isType(const short t) const;
    virtual short getType() const;
    virtual void setType(const short t);
@@ -63,7 +63,7 @@ public:
 
    virtual bool getLogTrackUpdates() const;
    virtual bool setLogTrackUpdates(const bool b);
-   
+
    // Add a track
    virtual bool addTrack(Track* const t);
 
@@ -80,8 +80,8 @@ public:
    virtual void reset();
 
 protected:
-   static const int MAX_TRKS = 200;                         // Max tracks
-   static const int MAX_REPORTS = 200;                      // Max number of reports
+   static const unsigned int MAX_TRKS = 200;         // Max tracks
+   static const unsigned int MAX_REPORTS = 200;      // Max number of reports
 
    unsigned int getNewTrackID()                             { return nextTrkId++; }
 
@@ -143,7 +143,7 @@ private:
 //   velocityGate   <Basic::Number>  ! Velocity Gate (m/s) (default: 10.0f)
 //
 //==============================================================================
-class AirTrkMgr : public TrackManager  
+class AirTrkMgr : public TrackManager
 {
     DECLARE_SUBCLASS(AirTrkMgr,TrackManager)
 public:
@@ -175,7 +175,7 @@ private:
 // Form name: GmtiTrkMgr
 //
 //==============================================================================
-class GmtiTrkMgr : public TrackManager  
+class GmtiTrkMgr : public TrackManager
 {
     DECLARE_SUBCLASS(GmtiTrkMgr,TrackManager)
 public:
@@ -192,7 +192,7 @@ protected:
 // Form name: RwrTrkMgr
 //
 //==============================================================================
-class RwrTrkMgr : public TrackManager  
+class RwrTrkMgr : public TrackManager
 {
     DECLARE_SUBCLASS(RwrTrkMgr,TrackManager)
 public:

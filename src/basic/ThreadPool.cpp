@@ -387,8 +387,8 @@ bool ThreadPool::setSlotNumThreads(const Number* const msg)
    bool ok = false;
    if (msg != 0) {
       int num = msg->getInt();
-      if (num >= 0 && num <= MAX_THREADS) {
-         numThreads = num;
+      if (num >= 0 && num <= (int)MAX_THREADS) {
+         numThreads = (unsigned int)num;
          ok = true;
       }
       else {

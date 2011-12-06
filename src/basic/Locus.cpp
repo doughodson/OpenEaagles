@@ -27,7 +27,7 @@ Locus::Locus()
 
 Locus::Locus(
        const LCreal* const newData, // Array of data points
-       const int n,                 // Number of data points
+       const unsigned int n,        // Number of data points
        const double lat,            // Reference latitude (degs)
        const double lon,            // Reference longitude (degs)
        const LCreal ang,            // True direction (heading) angle of the data (degs)
@@ -98,7 +98,7 @@ LCreal Locus::getData(const unsigned int idx) const
 //------------------------------------------------------------------------------
 void Locus::setData(
        const LCreal* const newData, // Array of data points
-       const int n,                 // Number of data points
+       const unsigned int n,        // Number of data points
        const double lat,            // Reference latitude (degs)
        const double lon,            // Reference longitude (degs)
        const LCreal ang,            // True direction (heading) angle of the data (degs)
@@ -114,7 +114,7 @@ void Locus::setData(
    }
 
    // Copy the new data
-   if (n > 0 && n < MAX_SIZE && newData != 0) {
+   if (n < MAX_SIZE && newData != 0) {
       np = n;
       data = new LCreal[np];
       LCreal* p = data;
@@ -147,5 +147,5 @@ void Locus::clearData()
    setData(0, 0, 0, 0, 0, 0, 0);
 }
 
-} // end Basic namespace} 
+} // end Basic namespace}
 } // end Eaagles namespace

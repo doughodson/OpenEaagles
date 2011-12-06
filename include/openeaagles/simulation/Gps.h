@@ -44,8 +44,8 @@ public:
     OperMode getOperatingMode() const       { return mode; }
     BsrStat getBsrStatus() const            { return bsr; }
     RcvrStat getRcvrStatus() const          { return rcvr; }
-    bool isGpsAidedOn() const                { return aided; }
-    bool isKeyOvrdEnabled() const            { return keyOvrd; }
+    bool isGpsAidedOn() const               { return aided; }
+    bool isKeyOvrdEnabled() const           { return keyOvrd; }
     LoadStat getCryptoLoadStatus() const    { return crypto; }
     LoadStat getAlmanacLoadStatus() const   { return almanac; }
     QualCode getQuality() const             { return quality; }
@@ -66,7 +66,7 @@ public:
    virtual void setGpsAidedOn(const bool aided);
    virtual void setKeyOvrdEnabled(const bool keyOvrd);
 
-private:   
+private:
     static const unsigned int MAX_CRYPTO_KEYS = 8; // max GPS Crypto variables
 
    // GPS Status Data
@@ -75,11 +75,11 @@ private:
    bool      aided;     // GPS Aiding YES/NO
    BsrStat  bsr;        // Bus Switch Relay Status
    bool      keyOvrd;   // Key Override DSBL/ENBL
-   
+
    // Load Status Data
    LoadStat crypto;     // Status of crypto key data files
    LoadStat almanac;    // status of GPS almanac
-   
+
    // GPS Quality Data
    QualCode quality;    // Data quality code
    long     state;      // GPS state

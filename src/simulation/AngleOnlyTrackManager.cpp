@@ -26,7 +26,7 @@ BEGIN_SLOTTABLE(AngleOnlyTrackManager)
     "elevationBin",     // 2: Elevation Bin
 END_SLOTTABLE(AngleOnlyTrackManager)
 
-//  Map slot table 
+//  Map slot table
 BEGIN_SLOT_MAP(AngleOnlyTrackManager)
     ON_SLOT(1, setSlotAzimuthBin, Basic::Number)
     ON_SLOT(2, setSlotElevationBin, Basic::Number)
@@ -39,7 +39,7 @@ AngleOnlyTrackManager::AngleOnlyTrackManager() : queryQueue(MAX_TRKS)
 {
     STANDARD_CONSTRUCTOR()
 
-        oneMinusAlpha = 0.0;
+    oneMinusAlpha = 0.0;
     oneMinusBeta = 1.0;
     azimuthBin = (LCreal) PI;
     elevationBin = (LCreal) PI;
@@ -68,7 +68,7 @@ Basic::Object* AngleOnlyTrackManager::clone() const
 }
 
 //------------------------------------------------------------------------------
-// copyData() -- copy member data 
+// copyData() -- copy member data
 //------------------------------------------------------------------------------
 void AngleOnlyTrackManager::copyData(const AngleOnlyTrackManager& org, const bool)
 {
@@ -295,7 +295,7 @@ AirAngleOnlyTrkMgr::AirAngleOnlyTrkMgr()
 }
 
 //------------------------------------------------------------------------------
-// copyData() -- copy member data 
+// copyData() -- copy member data
 //------------------------------------------------------------------------------
 void AirAngleOnlyTrkMgr::copyData(const AirAngleOnlyTrkMgr& org, const bool)
 {
@@ -359,8 +359,8 @@ void AirAngleOnlyTrkMgr::processTrackList(const LCreal dt)
             dummy = ((const Weapon*) tgt)->isDummy();
         }
 
-        if ( tgt->isMajorType(Player::AIR_VEHICLE) || 
-            tgt->isMajorType(Player::SHIP) || 
+        if ( tgt->isMajorType(Player::AIR_VEHICLE) ||
+            tgt->isMajorType(Player::SHIP) ||
             (tgt->isMajorType(Player::WEAPON) && !dummy)
             ) {
                 // Using only air vehicles
@@ -467,7 +467,7 @@ void AirAngleOnlyTrkMgr::processTrackList(const LCreal dt)
         if (haveU[i]) {
             tracks[i]->setPosition(tracks[i]->getTarget()->getPosition() - ownship->getPosition());
 
-            // If the track is updated set the new azimuth and elevation data based on 
+            // If the track is updated set the new azimuth and elevation data based on
             // a weighted average of the updated value and the predicted value from the
             // previous time step
             LCreal pTaz = tracks[i]->getPredictedAzimuth();
@@ -495,7 +495,7 @@ void AirAngleOnlyTrkMgr::processTrackList(const LCreal dt)
             telAccel = tracks[i]->getElevationAcceleration();
 
         }
-        else {          
+        else {
             ageAtNextTimeStep += age[i];
         }
 
@@ -503,10 +503,10 @@ void AirAngleOnlyTrkMgr::processTrackList(const LCreal dt)
 
         LCreal deltaTimeSquaredOverTwo = (ageAtNextTimeStep* ageAtNextTimeStep) / 2.0f;
 
-        tracks[i]->setPredictedAzimuth(taz + tazRate*ageAtNextTimeStep 
+        tracks[i]->setPredictedAzimuth(taz + tazRate*ageAtNextTimeStep
             + tazAccel*deltaTimeSquaredOverTwo);
         tracks[i]->setPredictedAzimuthRate(tazRate + tazAccel*ageAtNextTimeStep);
-        tracks[i]->setPredictedElevation(tel + telRate*ageAtNextTimeStep 
+        tracks[i]->setPredictedElevation(tel + telRate*ageAtNextTimeStep
             + telAccel*deltaTimeSquaredOverTwo);
         tracks[i]->setPredictedElevationRate(telRate + telAccel*ageAtNextTimeStep);
 
@@ -614,7 +614,7 @@ std::ostream& AirAngleOnlyTrkMgr::serialize(std::ostream& sout, const int i, con
 // Class:	AirAngleOnlyTrkMgrPT - perceived truth version of above
 //==============================================================================
 
-// this tm uses merged tracks for its attempts at managing tracks. This means it is 
+// this tm uses merged tracks for its attempts at managing tracks. This means it is
 // perceived az and el for managing tracks.
 
 // usePerceivedData determines whether track's potentially merged position and velocity are set in the
@@ -734,8 +734,8 @@ void AirAngleOnlyTrkMgrPT::processTrackList(const LCreal dt)
             dummy = ((const Weapon*) tgt)->isDummy();
         }
 
-        if ( tgt->isMajorType(Player::AIR_VEHICLE) || 
-            tgt->isMajorType(Player::SHIP) || 
+        if ( tgt->isMajorType(Player::AIR_VEHICLE) ||
+            tgt->isMajorType(Player::SHIP) ||
             (tgt->isMajorType(Player::WEAPON) && !dummy)
             ) {
                 // Using only air vehicles
@@ -780,7 +780,7 @@ void AirAngleOnlyTrkMgrPT::processTrackList(const LCreal dt)
                         trackNumMatches[it]++;
                         reportNumMatches[ir]++;
                     }
-                    else 
+                    else
                         report2TrackMatch[ir][it] = 0;
                 }
             }
@@ -812,7 +812,7 @@ void AirAngleOnlyTrkMgrPT::processTrackList(const LCreal dt)
                 for (unsigned int ir = 0; ir < nReports; ir++) {
                     if (report2TrackMatch[ir][it]==1 && reportNumMatches[ir]>1 && trackNumMatches[it]>1) {
                         // there are multiple matches for this report and for this track
-                        // disable this match, since report and track each have a subsequent match to use 
+                        // disable this match, since report and track each have a subsequent match to use
                         // iterating up, prioritizes assignment of reports to later tracks
                         report2TrackMatch[ir][it] = 0;
                         trackNumMatches[it]--;
@@ -892,7 +892,7 @@ void AirAngleOnlyTrkMgrPT::processTrackList(const LCreal dt)
                 }
             }
 
-            // finished processing new inputs for this track. 
+            // finished processing new inputs for this track.
             // but note that we only look at the last report that is matched to this track...
 
 
@@ -935,8 +935,8 @@ void AirAngleOnlyTrkMgrPT::processTrackList(const LCreal dt)
                         std::cout << "AirAngleOnlyTrkMgrPT: track " << it << " changed target " << tracks[it]->getTarget()->getID() << std::endl;
                 }
             }
-            else if (dt > 0.0f) 
-            {	  
+            else if (dt > 0.0f)
+            {
                 // update az/el for ownship dynamics only, since no new report
                 // do not update for ownship dynamics if sim is frozen
                 // assume same los, but use GT rotmat to generate new rel az and rel el
@@ -978,7 +978,7 @@ void AirAngleOnlyTrkMgrPT::processTrackList(const LCreal dt)
                 // Project the values for the next time step
                 LCreal deltaTimeSquaredOverTwo = (ageAtNextTimeStep* ageAtNextTimeStep) / 2.0f;
 
-                tracks[it]->setPredictedAzimuth(taz + tazRate*ageAtNextTimeStep 
+                tracks[it]->setPredictedAzimuth(taz + tazRate*ageAtNextTimeStep
                     + tazAccel*deltaTimeSquaredOverTwo);
                 tracks[it]->setPredictedAzimuthRate(tazRate + tazAccel*ageAtNextTimeStep);
                 tracks[it]->setPredictedElevation(tel + telRate*ageAtNextTimeStep

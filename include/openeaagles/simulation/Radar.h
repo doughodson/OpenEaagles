@@ -21,10 +21,10 @@ namespace Simulation {
 //             <Basic::Decibel>    ! Integrator gain (dB)
 //
 //------------------------------------------------------------------------------
-class Radar : public RfSensor  
+class Radar : public RfSensor
 {
    DECLARE_SUBCLASS(Radar,RfSensor)
-   
+
 public:
    static const unsigned int MAX_REPORTS = 100;         // Max number of reports (per scan)
    static const unsigned int NUM_SWEEPS = 121;          // Number of sweeps in Real-Beam display
@@ -33,13 +33,13 @@ public:
 public:
    Radar();
 
-   const LCreal* getSweep(const int n) const       { return (n >= 0 && n < NUM_SWEEPS ?  sweeps[n] : 0); }
-   const LCreal* getClosure(const int n) const     { return (n >= 0 && n < NUM_SWEEPS ?  vclos[n] : 0); }
-   int getNumSweeps() const                        { return NUM_SWEEPS; }
-   int getPtrsPerSweep() const                     { return PTRS_PER_SWEEP; }
+   const LCreal* getSweep(const unsigned int n) const     { return (n < NUM_SWEEPS ?  sweeps[n] : 0); }
+   const LCreal* getClosure(const unsigned int n) const   { return (n < NUM_SWEEPS ?  vclos[n]  : 0); }
+   unsigned int getNumSweeps() const                      { return NUM_SWEEPS; }
+   unsigned int getPtrsPerSweep() const                   { return PTRS_PER_SWEEP; }
 
-   unsigned int getMaxReports() const              { return MAX_REPORTS; }
-   unsigned int getNumReports() const              { return numReports; }
+   unsigned int getMaxReports() const                     { return MAX_REPORTS; }
+   unsigned int getNumReports() const                     { return numReports; }
 
    // Returns the number of emission reports, up to 'max', that are loaded into the 'list'
    // Emission pointers are pre-ref()'d, so unref() when finished.
@@ -83,7 +83,7 @@ protected: // (#temporary#) allow subclasses to access and use report queue
    mutable long myLock;
 
    // Queues
-   QQueue<Emission*>   rptQueue;       // Reporting emission queue 
+   QQueue<Emission*>   rptQueue;       // Reporting emission queue
    QQueue<LCreal>      rptSnQueue;     // Reporting Signal/Nose queue  (dB)
 
    // Reports
@@ -94,10 +94,10 @@ protected: // (#temporary#) allow subclasses to access and use report queue
 private:
    void initData();
    void clearTracksAndQueues();
-   void clearSweep(const int i);
+   void clearSweep(const unsigned int i);
    void ageSweeps();
-   int computeSweepIndex(const LCreal az);
-   int computeRangeIndex(const LCreal rng);
+   unsigned int computeSweepIndex(const LCreal az);
+   unsigned int computeRangeIndex(const LCreal rng);
 
    bool        endOfScanFlg;           // End of scan flag
 
@@ -108,7 +108,7 @@ private:
    LCreal      currentJamSignal;
    int         numberOfJammedEmissions;
 
-   LCreal      rfIGain;                // Integrator gain (default: 1.0) (no units) 
+   LCreal      rfIGain;                // Integrator gain (default: 1.0) (no units)
 };
 
 } // End Simulation namespace
