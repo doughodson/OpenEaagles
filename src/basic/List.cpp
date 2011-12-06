@@ -33,7 +33,7 @@ List::List(const LCreal values[], const unsigned int nv) : headP(0), tailP(0), n
 List::List(const int values[], const unsigned int nv) : headP(0), tailP(0), num(0)
 {
     STANDARD_CONSTRUCTOR()
-    
+
     // Create Integer's for each value and add to the list.
     for (unsigned int i = 0; i < nv; i++) {
         Integer* p = new Integer(values[i]);
@@ -101,11 +101,6 @@ void List::clear()
     while (!isEmpty()) {
         Object* p = removeHead(); // First remove them
         if (p != 0) {
-            Pair* pair1 = dynamic_cast<Pair*>(p);
-            Object* obj1 = 0;
-            if (pair1 != 0) {
-                obj1 = pair1->object();
-            }
             p->unref();     // and unref() them
         }
     }
@@ -134,7 +129,7 @@ unsigned int List::find(const Object* const obj) const
 
 
 //------------------------------------------------------------------------------
-// find(Object*) -- find an object on the list 
+// find(Object*) -- find an object on the list
 //------------------------------------------------------------------------------
 unsigned int List::getIndex(const Object* const obj) const
 {

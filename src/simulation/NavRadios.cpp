@@ -162,44 +162,44 @@ TacanRadio::TacanRadio()
 
 void TacanRadio::initData()
 {
-     setMaxDetectRange(120.0);
+    setMaxDetectRange(120.0);
 
-   setNumberOfChannels(126);
+    setNumberOfChannels(126);
 
-     rangeIsValid = false;
-     bearingIsValid = false;
-     range = 0;
-     grdrange = 0;
-     bearing = 0; 
-     destLatitude = 0;
-     destLongitude = 0;
-     currentMagVar = 0;
-     band = TCN_X_BAND;
+    rangeIsValid = false;
+    bearingIsValid = false;
+    range = 0;
+    grdrange = 0;
+    bearing = 0;
+    destLatitude = 0;
+    destLongitude = 0;
+    currentMagVar = 0;
+    band = TCN_X_BAND;
 
-   // Set frequencies
-   {
-      unsigned short chan = 1;
+    // Set frequencies
+    {
+        unsigned short chan = 1;
 
-      // channels [ 1 .. 16 ]
-      while (chan <= 16) {
-         setChannelFrequency(chan++, 0.0f);
-}
+        // channels [ 1 .. 16 ]
+        while (chan <= 16) {
+            setChannelFrequency(chan++, 0.0f);
+        }
 
-      // channels [ 17 .. 59 ]
-      while (chan < 59) {
-         setChannelFrequency(chan++, (LCreal(chan) * 0.1f + 106.3f));
-      }
+        // channels [ 17 .. 59 ]
+        while (chan < 59) {
+            setChannelFrequency(chan++, (LCreal(chan) * 0.1f + 106.3f));
+        }
 
-      // channels [ 60 .. 69 ]
-      while (chan <= 69) {
-         setChannelFrequency(chan++, 0.0f);
-      }
+        // channels [ 60 .. 69 ]
+        while (chan <= 69) {
+            setChannelFrequency(chan++, 0.0f);
+        }
 
-      // channels [ 70 .. 126 ]
-      while (chan <= 126) {
-         setChannelFrequency(chan++, (LCreal(chan) * 0.1f + 107.3f) );
-      }
-   }
+        // channels [ 70 .. 126 ]
+        while (chan <= 126) {
+            setChannelFrequency(chan++, (LCreal(chan) * 0.1f + 107.3f) );
+        }
+    }
 }
 
 //------------------------------------------------------------------------------
@@ -214,7 +214,7 @@ void TacanRadio::copyData(const TacanRadio& org, const bool cc)
      bearingIsValid = org.bearingIsValid;
      range = org.range;
      grdrange = org.grdrange;
-     bearing = org.bearing; 
+     bearing = org.bearing;
      destLatitude = org.destLatitude;
      destLongitude = org.destLongitude;
      currentMagVar = org.currentMagVar;
@@ -226,7 +226,7 @@ void TacanRadio::copyData(const TacanRadio& org, const bool cc)
 //------------------------------------------------------------------------------
 void TacanRadio::deleteData()
 {
-}    
+}
 
 //------------------------------------------------------------------------------
 // updateData() -- update background data here
@@ -237,11 +237,11 @@ void TacanRadio::updateData(const LCreal dt)
 
     //Must have ownship
     if (getOwnship() == 0) return;
-    
-   // Set our position to that of our ownship vehicle
-   setPosition();                
 
-   // 
+   // Set our position to that of our ownship vehicle
+   setPosition();
+
+   //
 
         //Get Range and Bearing...
    //bool rangeBearingTestResult = getRangeBearing(&rangeIsValid,&range,&grdrange,&bearingIsValid,&bearing);
@@ -258,7 +258,7 @@ TacanRadio::Band TacanRadio::getBand() const
 
 double TacanRadio::getRange() const
 {
-    return range; 
+    return range;
 };
 
 double TacanRadio::getBearing() const
@@ -344,10 +344,10 @@ IlsRadio::IlsRadio()
     destLongitude = 0;
     currentMagVar = 0;
     localizerValid = false;
-    glideSlopeValid = false; 
+    glideSlopeValid = false;
     range = 0;
     grdrange = 0;
-    bearing = 0; 
+    bearing = 0;
     ilsGlideSlope = 0;
     acGlideSlope = 0;
     deltaGlideSlope = 0;
@@ -368,10 +368,10 @@ void IlsRadio::copyData(const IlsRadio& org, const bool)
     destLongitude = org.destLongitude;
     currentMagVar = org.currentMagVar;
     localizerValid = org.localizerValid;
-    glideSlopeValid = org.glideSlopeValid; 
+    glideSlopeValid = org.glideSlopeValid;
     range = org.range;
     grdrange = org.grdrange;
-    bearing = org.bearing; 
+    bearing = org.bearing;
     ilsGlideSlope = org.ilsGlideSlope;
     acGlideSlope = org.acGlideSlope;
     deltaGlideSlope = org.deltaGlideSlope;
@@ -394,16 +394,16 @@ void IlsRadio::updateData(const LCreal dt)
 {
    //Must have ownship
     if (getOwnship() == 0) return;
-    
+
     // Set our position to that of our ownship vehicle
-    setPosition();                
+    setPosition();
 
     //Do not update data every time...Hard code delay length...
     if(timerCounter==0){
         //Get Glideslope and Runway orientation:
         glideSlopeValid = findILSGlideslopeByFreq(getFrequency());
         localizerValid = findLocalizerByFreq(getFrequency());
-        
+
         //Get test results - make sure dest LL do not change as plane flies
         Basic::Nav::gbd2ll(getLatitude(),getLongitude(),bearing,grdrange,&destLatitude,&destLongitude);
         //Test for bad result...
@@ -429,7 +429,7 @@ LCreal IlsRadio::getGlideslopeDifference(void)
     return deltaGlideSlope;
 }
 
-LCreal IlsRadio::getGlideslopeDifferenceDots() 
+LCreal IlsRadio::getGlideslopeDifferenceDots()
 {
     return deltaGlideSlope / GS_DEG_PER_DOT;
 }
@@ -458,7 +458,7 @@ bool IlsRadio::findILSGlideslopeByFreq(LCreal freq)
          getAirportLoader()->setArea(getLatitude(), getLongitude(), getMaxDetectRange());
          //See what the results are:
          int found = getAirportLoader()->queryIlsByFreq((float)freq);
-         
+
          //Sort through the results and check the type - assume the closest ones are correct
          //"found" list is already sorted from closest to farthest away:
          for (int i = 0; i < found; i++) {
@@ -512,7 +512,7 @@ bool IlsRadio::findLocalizerByFreq(LCreal freq)
    //            p->getRunwayMagHeading(getLatitude(),getLongitude(),getAltitude(),&magHeading1,&magHeading2,&trueBearing1,&trueBearing2);
    //            //Just for kicks find how far away we are from the end of the runway:
                //p->getTrueBearingRange(getLatitude(),getLongitude(),getAltitude(),&bearing,&range,&grdrange);
-   //            
+   //
    //            //Need a test to see if we want the low end or high end here:
    //            acLocalizerBearing = (LCreal)trueBearing1;
    //            //If localizer is from -270 - 90 we know the plane is south and will use low end of RWY
@@ -528,7 +528,7 @@ bool IlsRadio::findLocalizerByFreq(LCreal freq)
    //               ilsLocalizerBearing = magHeading2+currentMagVar;
    //               deltaLocalizerBearing = ilsLocalizerBearing-acLocalizerBearing;
    //            }
-               
+
    //            localizerValid = true;
    //            //Delete the object
    //            p->unref();

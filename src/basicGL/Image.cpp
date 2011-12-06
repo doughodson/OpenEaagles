@@ -222,8 +222,8 @@ bool Image::readFileBMP(const char* const filename, const char* const path)
    unsigned short bfReserved2(0);
    unsigned int  bfOffBits(0);
 
-   unsigned int bitmapFileHdrSize =
-      sizeof(bfType) + sizeof(bfSize) + sizeof(bfReserved1) + sizeof(bfReserved2) + sizeof(bfOffBits);
+   //unsigned int bitmapFileHdrSize =
+   //   sizeof(bfType) + sizeof(bfSize) + sizeof(bfReserved1) + sizeof(bfReserved2) + sizeof(bfOffBits);
 
    size_t nItemsRead;
    nItemsRead = fread(&bfType, sizeof(bfType), 1, fp);

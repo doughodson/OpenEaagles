@@ -72,7 +72,7 @@ solution "oe"
          defines { "WIN32", "_LIB", "NDEBUG" }
       end
       if (os.is("linux")) then
-         buildoptions { "-O3 -Wno-long-long -pthread" }
+         buildoptions { "-O3 -Wall -Wno-long-long -pthread" }
       end
 
    -- common debug configuration flags and symbols
@@ -84,7 +84,7 @@ solution "oe"
          defines { "WIN32", "_LIB", "_DEBUG" }
       end
       if (os.is("linux")) then
-         buildoptions { "-Wno-long-long -pthread" }
+         buildoptions { "-Wall -Wno-long-long -pthread" }
       end
 
    --

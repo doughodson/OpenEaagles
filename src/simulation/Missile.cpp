@@ -28,7 +28,7 @@ BEGIN_SLOTTABLE(Missile)
 "cmdSpeed",         //  8: Command speed              (m/s)
 END_SLOTTABLE(Missile)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(Missile)
    ON_SLOT(1, setSlotVpMin, Basic::Number)
    ON_SLOT(2, setSlotVpMax, Basic::Number)
@@ -480,7 +480,7 @@ void Missile::weaponDynamics(const LCreal dt)
    LCreal qa_min = -qa_max;
 
    // ---
-   // Get old angular values 
+   // Get old angular values
    // ---
    const osg::Vec3 oldRates = getAngularVelocities();
    //LCreal pa1 = oldRates[IROLL];
@@ -529,7 +529,7 @@ void Missile::weaponDynamics(const LCreal dt)
    LCreal newVP = getTotalVelocity() + vpdot * dt;
 
    // Set acceleration vector
-   osg::Vec3 ve0 = getVelocity();
+   //osg::Vec3 ve0 = getVelocity();
    osg::Vec3 va(newVP, 0.0, 0.0);
    osg::Vec3 ve1 = va * getRotMat();
    setVelocity(ve1);

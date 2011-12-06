@@ -76,7 +76,7 @@ namespace Simulation {
 //    is set using the 'inputEntityTypes' slot.  An entity is ignored if its
 //    entity type does not match any of the Ntm objects on the incoming list.
 //    (Note: without the incoming Ntm list, all network entities are ignored)
-//    
+//
 //    When an entity's type matches a Ntm object, the matching Ntm's "template
 //    player" (see Ntm.h) is cloned to create the surrogate "interoperability
 //    player" or IPlayer, which is added to simulation's player list.
@@ -111,7 +111,7 @@ namespace Simulation {
 //    manage the flow of data from the Eaagles player to the network entity.
 //    The outgoing Nib objects are managed using the "output Nib" list.
 //
-//    The Eaagles player objects do not contain any state data related to the 
+//    The Eaagles player objects do not contain any state data related to the
 //    interoperability networks that their being sent to.  As a result, an
 //    Eaagles player can be sent to more than one interoperability network,
 //    and the 'enableRelay' slot can be used to enable the relaying of Eaagles
@@ -285,7 +285,7 @@ public:
     };
 
 public:
-   // NIB support    
+   // NIB support
    virtual Nib* findNib(const unsigned short playerID, const Basic::String* const federateName, const IoType ioType);
    virtual Nib* findNib(const Player* const player, const IoType ioType);
    virtual bool addNibToList(Nib* const nib, const IoType ioType);
@@ -301,7 +301,7 @@ public:
 protected:
    // Maximum number of active objects
    static const int MAX_OBJECTS = 5000;
-   
+
    // Create NIB unique to protocol (pure functions!)
    virtual Nib* nibFactory(const NetIO::IoType ioType)=0;
 
@@ -430,7 +430,7 @@ private:
    // Network Model mode flags
    bool              inputFlg;         // Network input enabled
    bool              outputFlg;        // Network output enabled
-   bool              relayFlg;         // Network relay enabled 
+   bool              relayFlg;         // Network relay enabled
    bool              netInit;          // Network has been initialized
    bool              netInitFail;      // Initialization attempt failed
 
@@ -446,11 +446,11 @@ private:
 
 private: // Nib related private
    // input tables
-   Nib*  inputList[MAX_OBJECTS];    // Table of input objects in name order 
+   Nib*  inputList[MAX_OBJECTS];    // Table of input objects in name order
    unsigned int   nInNibs;          // Number of input objects in both tables
 
    // output tables
-   Nib*  outputList[MAX_OBJECTS];   // Table of output objects in name order 
+   Nib*  outputList[MAX_OBJECTS];   // Table of output objects in name order
    unsigned int   nOutNibs;         // Number of output objects in both tables
 
    // NIB quick lookup key
@@ -469,7 +469,7 @@ private: // Nib related private
    static int compareKey2Nib(const void* key, const void* nib);
 
 private:  // Ntm related private
-   static const int MAX_ENTITY_TYPES = 5000;
+   static const unsigned int MAX_ENTITY_TYPES = 5000;
 
    NtmInputNode* inputNtmTree;   // Input NTM quick lookup tree
    NtmOutputNode* outputNtmTree; // Output NTM quick lookuptree

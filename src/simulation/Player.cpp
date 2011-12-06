@@ -47,12 +47,12 @@ IMPLEMENT_SUBCLASS(Player,"Player")
 BEGIN_SLOTTABLE(Player)
    // Player's initial position relative to the simulation's reference point
    "initXPos",          //  1) Initial X position    (meters, Basic::Distance)
-   "initYPos",          //  2) Initial Y position    (meters, Basic::Distance) 
+   "initYPos",          //  2) Initial Y position    (meters, Basic::Distance)
    "initAlt",           //  3) Initial Altitude      (meters, Basic::Distance)
    "initPosition",      //  4) Initial Position Vector: meters [ north east down ]
 
    // Player's initial position in latitude, longitude and altitude (from initAlt above)
-   "initLatitude",      //  5) Initial latitude    (Basic::Angle, Basic::LatLon or degrees) 
+   "initLatitude",      //  5) Initial latitude    (Basic::Angle, Basic::LatLon or degrees)
    "initLongitude",     //  6) Initial longitude    (Basic::Angle, Basic::LatLon or degrees)
 
    // Player's initial geocentric position
@@ -90,7 +90,7 @@ BEGIN_SLOTTABLE(Player)
    "killRemoval",       // 29) If true destroyed players are set to KILLED and are eventually removed (default: false)
    "enableNetOutput",   // 30) Enable the network output!
 
-   "dataLogTime",       // 31) Data logging time -- time between player data samples 
+   "dataLogTime",       // 31) Data logging time -- time between player data samples
 
    // Player's test angular velocities
    "testRollRate",      // 32) Test roll rate (units per second)
@@ -101,7 +101,7 @@ BEGIN_SLOTTABLE(Player)
    "useCoordSys"        // 36) Coord system to use for position updating { WORLD, GEOD, LOCAL }
 END_SLOTTABLE(Player)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(Player)
 
    ON_SLOT( 1, setSlotInitXPos, Basic::Distance)
@@ -349,7 +349,7 @@ void Player::initData()
    sms = 0;
    loadSysPtrs = true;
 
-   for (int i = 0; i < MAX_RF_REFLECTIONS; i++) {
+   for (unsigned int i = 0; i < MAX_RF_REFLECTIONS; i++) {
       rfReflect[i] = 0;
       rfReflectTimer[i] = 0;
    }
@@ -479,16 +479,16 @@ void Player::copyData(const Player& org, const bool cc)
    setDatalink(0);
    setGimbal(0);
    setIrSystem(0);
-   setNavigation(0);    
+   setNavigation(0);
    setOnboardComputer(0);
    setPilot(0);
-   setRadio(0); 
+   setRadio(0);
    setSensor(0);
    setStoresMgr(0);
    loadSysPtrs = true;
 
    // Reflected emission requests are not copied
-   for (int i = 0; i < MAX_RF_REFLECTIONS; i++) {
+   for (unsigned int i = 0; i < MAX_RF_REFLECTIONS; i++) {
       if (rfReflect[i] != 0) { rfReflect[i]->unref(); rfReflect[i] = 0; }
       rfReflectTimer[i] = 0;
    }
@@ -512,20 +512,20 @@ void Player::deleteData()
       delete[] nibList;
       nibList = 0;
    }
-   
+
 
    setDynamicsModel(0);
    setDatalink(0);
    setGimbal(0);
    setIrSystem(0);
-   setNavigation(0);    
+   setNavigation(0);
    setOnboardComputer(0);
    setPilot(0);
-   setRadio(0); 
+   setRadio(0);
    setSensor(0);
    setStoresMgr(0);
 
-   for (int i = 0; i < MAX_RF_REFLECTIONS; i++) {
+   for (unsigned int i = 0; i < MAX_RF_REFLECTIONS; i++) {
       if (rfReflect[i] != 0) { rfReflect[i]->unref(); rfReflect[i] = 0; }
    }
 }
@@ -635,7 +635,7 @@ void Player::updateTC(const LCreal dt0)
       // ---
       // Time-out requests for reflections of RF emissions hitting us
       // ---
-      for (int i = 0; i < MAX_RF_REFLECTIONS; i++) {
+      for (unsigned int i = 0; i < MAX_RF_REFLECTIONS; i++) {
          if (rfReflect[i] != 0) {
             rfReflectTimer[i] -= dt0;
             if (rfReflectTimer[i] <= 0) {
@@ -675,7 +675,7 @@ void Player::updateTC(const LCreal dt0)
                      evt->unref();
                   }
                   // reset the timer.
-                  dataLogTimer = dataLogTime; 
+                  dataLogTimer = dataLogTime;
                }
             }
 
@@ -715,7 +715,7 @@ void Player::updateTC(const LCreal dt0)
 // updateData() -- update background data here
 //------------------------------------------------------------------------------
 void Player::updateData(const LCreal dt)
-{         
+{
    if (mode == ACTIVE || mode == PRE_RELEASE) {
 
       // Update signatures
@@ -760,7 +760,7 @@ LCreal Player::getMach() const
    const LCreal G = 1.4;     // density ratio      // number
    const LCreal R = 287.06;  // gas constant       // mps/degK
    const LCreal L = 0.0065;  // temp. lapse rate   // degC/meter
-   
+
    LCreal altitude   = getAltitude();              // meters
    LCreal velocPlane = getTotalVelocity();         // meters/sec
    LCreal Tc         = 15.0 - L * altitude;        // degrees Celsius
@@ -1327,7 +1327,7 @@ OnboardComputer* Player::getOnboardComputer()
 }
 
 // Player's top level OnboardComputer (const version)
-const OnboardComputer* Player::getOnboardComputer() const 
+const OnboardComputer* Player::getOnboardComputer() const
 {
    return (obc != 0) ? ((OnboardComputer*) obc->object()) : 0;
 }
@@ -1676,27 +1676,27 @@ bool Player::setType(Basic::String* const msg)
    return ok;
 }
 
-// Set the player's name 
+// Set the player's name
 void Player::setName(const Basic::String& n)
-{ 
+{
    pname = n;
 }
 
-// Set the player's name 
+// Set the player's name
 void Player::setName(const char* const str)
-{ 
+{
    pname = str;
 }
 
 // Sets the player's ID
 void Player::setID(const unsigned short v)
-{ 
+{
    id = v;
 }
 
 // Sets the player's side (BLUE, RED, etc)
 void Player::setSide(const Side s)
-{ 
+{
    side = s;
 }
 
@@ -1912,8 +1912,8 @@ bool Player::setEnableNetOutput(const bool x)
    enableNetOutput = x;
    return true;
 }
-   
-// Sets the outgoing NIB for network 'id' 
+
+// Sets the outgoing NIB for network 'id'
 bool Player::setOutgoingNib(Nib* const p, const unsigned int id)
 {
    bool ok = false;
@@ -2073,10 +2073,10 @@ bool Player::setPositionLLA(const double lat, const double lon, const double alt
    double cosRlat = s->getCosRefLat();
    if (s->isGamingAreaUsingEarthModel()) {
       double sinRlat = s->getSinRefLat();
-      Basic::Nav::convertLL2PosVecE(refLat, refLon, sinRlat, cosRlat, lat, lon, alt, &posVecNED, em);   
+      Basic::Nav::convertLL2PosVecE(refLat, refLon, sinRlat, cosRlat, lat, lon, alt, &posVecNED, em);
    }
    else {
-      Basic::Nav::convertLL2PosVecS(refLat, refLon, cosRlat, lat, lon, alt, &posVecNED);   
+      Basic::Nav::convertLL2PosVecS(refLat, refLon, cosRlat, lat, lon, alt, &posVecNED);
    }
 
    // The position vector is valid if the gaming area range is umlimited (zero) or
@@ -2126,10 +2126,10 @@ bool Player::setGeocPosition(const osg::Vec3d& pos, const bool slaved)
    double cosRlat = s->getCosRefLat();
    if (s->isGamingAreaUsingEarthModel()) {
       double sinRlat = s->getSinRefLat();
-      Basic::Nav::convertLL2PosVecE(refLat, refLon, sinRlat, cosRlat, latitude, longitude, altitude, &posVecNED, em);   
+      Basic::Nav::convertLL2PosVecE(refLat, refLon, sinRlat, cosRlat, latitude, longitude, altitude, &posVecNED, em);
    }
    else {
-      Basic::Nav::convertLL2PosVecS(refLat, refLon, cosRlat, latitude, longitude, altitude, &posVecNED);   
+      Basic::Nav::convertLL2PosVecS(refLat, refLon, cosRlat, latitude, longitude, altitude, &posVecNED);
    }
 
    // The position vector is valid if the gaming area range is umlimited (zero) or
@@ -2489,7 +2489,7 @@ int Player::setThrottles(const LCreal* const data, const int num)
 }
 
 //------------------------------------------------------------------------------
-// Process weapon detonation 
+// Process weapon detonation
 //------------------------------------------------------------------------------
 void Player::processDetonation(const LCreal detRange, Weapon* const wpn)
 {
@@ -2579,7 +2579,7 @@ bool Player::killedNotification(Player* const p)
 
    }
 
-   // record kill, even if killOverride 
+   // record kill, even if killOverride
    if (getAnyEventLogger() != 0) {
       TabLogger::TabLogEvent* evt = new TabLogger::LogPlayerData(7, this, p); // type 7: kill
       getAnyEventLogger()->log(evt);
@@ -2615,7 +2615,7 @@ bool Player::collisionNotification(Player* const p)
       justKilled = true;
       if (p != 0) killedBy = p->getID();
       else  killedBy = 0;
-      setMode(CRASHED);        
+      setMode(CRASHED);
    }
 
    // record EVERYTHING that had the potential to cause damage, even if crashOverride
@@ -2668,7 +2668,7 @@ bool Player::crashNotification()
 }
 
 //------------------------------------------------------------------------------
-// onWpnRelEvent() -- Manage the Wpn Release event 
+// onWpnRelEvent() -- Manage the Wpn Release event
 //------------------------------------------------------------------------------
 bool Player::onWpnRelEvent(const Basic::Boolean* const sw)
 {
@@ -2691,7 +2691,7 @@ bool Player::onWpnRelEvent(const Basic::Boolean* const sw)
 }
 
 //------------------------------------------------------------------------------
-// onTriggerSwEvent() -- Manage the trigger switch event 
+// onTriggerSwEvent() -- Manage the trigger switch event
 //------------------------------------------------------------------------------
 bool Player::onTriggerSwEvent(const Basic::Boolean* const sw)
 {
@@ -2740,7 +2740,7 @@ bool Player::onTgtStepEvent()
 // 7) Pass the emission to anyone requesting reflected emissions
 //------------------------------------------------------------------------------
 bool Player::onRfEmissionEventPlayer(Emission* const em)
-{   
+{
    // Player must be active ...
    if (isNotMode(ACTIVE)) return false;
 
@@ -2814,7 +2814,7 @@ bool Player::onRfReflectedEmissionEventPlayer(Emission* const)
 
 
 //------------------------------------------------------------------------------
-// onReflectionsRequest() -- request reflected R/F emissions 
+// onReflectionsRequest() -- request reflected R/F emissions
 //                           (must continue to request once per second)
 //------------------------------------------------------------------------------
 bool Player::onReflectionsRequest(Basic::Component* const p)
@@ -2824,7 +2824,7 @@ bool Player::onReflectionsRequest(Basic::Component* const p)
 
    // First see if this is a re-request ...
    //  (and look for an empty slot while we're at it)
-   for (int i = 0; i < MAX_RF_REFLECTIONS && !ok; i++) {
+   for (unsigned int i = 0; i < MAX_RF_REFLECTIONS && !ok; i++) {
       if (rfReflect[i] == p) {
          // Old request -- reset the timer
          rfReflectTimer[i] = 1.1f;
@@ -2848,14 +2848,14 @@ bool Player::onReflectionsRequest(Basic::Component* const p)
 
 
 //------------------------------------------------------------------------------
-// onReflectionsCancel() -- cancel a request for reflected R/F emissions 
+// onReflectionsCancel() -- cancel a request for reflected R/F emissions
 //------------------------------------------------------------------------------
 bool Player::onReflectionsCancel(const Basic::Component* const p)
 {
    bool ok = false;        // Did we succeed?
 
    // Find player 'p' and clear it's request
-   for (int i = 0; i < MAX_RF_REFLECTIONS && !ok; i++) {
+   for (unsigned int i = 0; i < MAX_RF_REFLECTIONS && !ok; i++) {
       if (rfReflect[i] == p) {
          // Clear the request
          rfReflect[i]->unref();
@@ -3041,7 +3041,7 @@ void Player::positionUpdate(const LCreal dt)
          if (!afrz) {
             if (gcEnabled) {
                // Ground clampping enabled
-               double alt = tElev + tOffset; 
+               double alt = tElev + tOffset;
                newPosVecNED[IDOWN] = -alt;
             }
             else {
@@ -3051,7 +3051,7 @@ void Player::positionUpdate(const LCreal dt)
          }
 
          // Set the new position
-         setPosition(newPosVecNED); 
+         setPosition(newPosVecNED);
 
          // And save our old velocity vector
          velVecN1 = velVecNED;
@@ -3067,7 +3067,7 @@ void Player::positionUpdate(const LCreal dt)
          //std::cout << "( " << posVecECEF[0] << ", " << posVecECEF[1] << ", " << posVecECEF[2] << " ); ";
          //std::cout << std::endl;
 
-         double newLatitude = latitude; 
+         double newLatitude = latitude;
          double newLongitude = longitude;
          double newAltitude = altitude;
 
@@ -3082,7 +3082,7 @@ void Player::positionUpdate(const LCreal dt)
          double we0 = velVecN1.z();
 
          if (!pfrz) {
- 
+
             double slat = std::sin(latitude * Basic::Angle::D2RCC);
             double clat = std::cos(latitude * Basic::Angle::D2RCC);
 
@@ -3124,7 +3124,7 @@ void Player::positionUpdate(const LCreal dt)
          if (!afrz) {
             if (gcEnabled) {
                // Ground clampping enabled
-               double alt = tElev + tOffset; 
+               double alt = tElev + tOffset;
                newAltitude = alt;
             }
             else {
@@ -3134,7 +3134,7 @@ void Player::positionUpdate(const LCreal dt)
          }
 
          // Set the new position
-         setPositionLLA(newLatitude, newLongitude, newAltitude); 
+         setPositionLLA(newLatitude, newLongitude, newAltitude);
 
          // And save our old velocity vector
          velVecN1 = velVecNED;
@@ -3163,7 +3163,7 @@ void Player::positionUpdate(const LCreal dt)
                // Ground clamping!
 
                // 1) Compute the ground clamped altitude
-               double alt = tElev + tOffset; 
+               double alt = tElev + tOffset;
 
                // 2) Compute the geodetic lat/lon position
                double ecef[3] = { newPosVecECEF[0], newPosVecECEF[1], newPosVecECEF[2] };
@@ -3268,7 +3268,7 @@ void Player::deadReckonPosition(const LCreal dt)
       // Ground clamping!
 
       // 1) Compute the ground clamped altitude
-      double alt = tElev + tOffset; 
+      double alt = tElev + tOffset;
 
       // 2) Compute the geodetic lat/lon position
       const Basic::EarthModel* em = getSimulation()->getEarthModel();

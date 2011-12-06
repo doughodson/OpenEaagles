@@ -31,7 +31,7 @@ BEGIN_SLOTTABLE(TrackManager)
    "logTrackUpdates",  // 7: whether to log all updates to tracks (default: true)
 END_SLOTTABLE(TrackManager)
 
-//  Map slot table 
+//  Map slot table
 BEGIN_SLOT_MAP(TrackManager)
    ON_SLOT(1, setSlotMaxTracks,Basic::Number)
    ON_SLOT(2, setSlotMaxTrackAge,Basic::Number)
@@ -82,7 +82,7 @@ Basic::Object* TrackManager::clone() const
 void TrackManager::initData()
 {
    nTrks = 0;
-   for (int i = 0; i < MAX_TRKS; i++) tracks[i] = 0;
+   for (unsigned int i = 0; i < MAX_TRKS; i++) tracks[i] = 0;
    maxTrks = MAX_TRKS;
    maxTrackAge = 3;        // default age (2 sec)
 
@@ -108,7 +108,7 @@ void TrackManager::initData()
 }
 
 //------------------------------------------------------------------------------
-// copyData() -- copy member data 
+// copyData() -- copy member data
 //------------------------------------------------------------------------------
 void TrackManager::copyData(const TrackManager& org, const bool cc)
 {
@@ -154,7 +154,7 @@ void TrackManager::clearTracksAndQueues()
    // Clear out the queue(s)
    // ---
    lcLock(queueLock);
-   for (Emission* em = emQueue.get(); em != 0; em = emQueue.get()) { 
+   for (Emission* em = emQueue.get(); em != 0; em = emQueue.get()) {
       em->unref();    // unref() the emission
       snQueue.get();  // and every emission had a S/N value
    }
@@ -428,7 +428,7 @@ bool TrackManager::setSlotMaxTracks(const Basic::Number* const num)
    bool ok = false;
    if (num != 0) {
       int max = num->getInt();
-      if (max > 0 && max <= MAX_TRKS) {
+      if (max > 0 && max <= (int)MAX_TRKS) {
          maxTrks = (unsigned int) max;
          ok = true;
       }
@@ -625,7 +625,7 @@ IMPLEMENT_SUBCLASS(AirTrkMgr,"AirTrkMgr")
    "velocityGate",     // 3: Velocity Gate (m/s)
    END_SLOTTABLE(AirTrkMgr)
 
-   //  Map slot table 
+   //  Map slot table
    BEGIN_SLOT_MAP(AirTrkMgr)
       ON_SLOT(1, setPositionGate, Basic::Number)
       ON_SLOT(2, setRangeGate, Basic::Number)
@@ -648,7 +648,7 @@ IMPLEMENT_SUBCLASS(AirTrkMgr,"AirTrkMgr")
 }
 
 //------------------------------------------------------------------------------
-// copyData() -- copy member data 
+// copyData() -- copy member data
 //------------------------------------------------------------------------------
 void AirTrkMgr::copyData(const AirTrkMgr& org, const bool)
 {
@@ -707,7 +707,7 @@ void AirTrkMgr::processTrackList(const LCreal dt)
    // ---
 
    // Get each new emission report from the queue
-   int nReports = 0;
+   unsigned int nReports = 0;
    Emission* emissions[MAX_REPORTS];
    LCreal newSignal[MAX_REPORTS];
    LCreal newRdot[MAX_REPORTS];
@@ -723,8 +723,8 @@ void AirTrkMgr::processTrackList(const LCreal dt)
          dummy = ((const Weapon*) tgt)->isDummy();
       }
 
-      if ( tgt->isMajorType(Player::AIR_VEHICLE) || 
-         tgt->isMajorType(Player::SHIP) || 
+      if ( tgt->isMajorType(Player::AIR_VEHICLE) ||
+         tgt->isMajorType(Player::SHIP) ||
          (tgt->isMajorType(Player::WEAPON) && !dummy)
          ) {
             // Using only air vehicles
@@ -754,7 +754,7 @@ void AirTrkMgr::processTrackList(const LCreal dt)
       trackNumMatches[it] = 0;
       const RfTrack* const trk = (const RfTrack*) tracks[it];  // we produce only RfTracks
       const Player* const tgt = trk->getLastEmission()->getTarget();
-      for (int ir = 0; ir < nReports; ir++) {
+      for (unsigned int ir = 0; ir < nReports; ir++) {
          if (emissions[ir]->getTarget() == tgt) {
             // We have a new report for the same target as this track ...
             report2TrackMatch[ir][it] = 1;
@@ -784,7 +784,7 @@ void AirTrkMgr::processTrackList(const LCreal dt)
       u[it].set(0,0,0);
       haveU[it] = false;
       if (trackNumMatches[it] > 0) {
-         for (int ir = 0; ir < nReports; ir++) {
+         for (unsigned int ir = 0; ir < nReports; ir++) {
             if (report2TrackMatch[ir][it] > 0) {
                RfTrack* const trk = (RfTrack*) tracks[it];  // we produce only RfTracks
 
@@ -831,7 +831,7 @@ void AirTrkMgr::processTrackList(const LCreal dt)
          LCreal b2 = 0.0;
          //LCreal b2 = gamma * 2.0f / (age[i]*age[i]);
          if (u[i].length2() > d2) {
-            // Large position change: just set position 
+            // Large position change: just set position
             b0 = 1.0;
             b1 = 0.0;
          }
@@ -894,7 +894,7 @@ void AirTrkMgr::processTrackList(const LCreal dt)
    // 8) Create new tracks from unmatched reports and free up emissions
    // ---
    lcLock(trkListLock);
-   for (int i = 0; i < nReports; i++) {
+   for (unsigned int i = 0; i < nReports; i++) {
       if ((reportNumMatches[i] == 0) && (nTrks < maxTrks)) {
          // This is a new report, so create a new track for it
          RfTrack* newTrk = new RfTrack();
@@ -1060,7 +1060,7 @@ IMPLEMENT_SUBCLASS(GmtiTrkMgr,"GmtiTrkMgr")
 }
 
 //------------------------------------------------------------------------------
-// copyData() -- copy member data 
+// copyData() -- copy member data
 //------------------------------------------------------------------------------
 void GmtiTrkMgr::copyData(const GmtiTrkMgr& org, const bool)
 {
@@ -1322,7 +1322,7 @@ IMPLEMENT_SUBCLASS(RwrTrkMgr,"RwrTrkMgr")
 }
 
 //------------------------------------------------------------------------------
-// copyData() -- copy member data 
+// copyData() -- copy member data
 //------------------------------------------------------------------------------
 void RwrTrkMgr::copyData(const RwrTrkMgr& org, const bool)
 {
@@ -1373,7 +1373,7 @@ void RwrTrkMgr::processTrackList(const LCreal dt)
    // ---
 
    // Get each new emission report from the queue
-   int nReports = 0;
+   unsigned int nReports = 0;
    Emission* emissions[MAX_REPORTS];
    LCreal newSignal[MAX_REPORTS];
    LCreal newRdot[MAX_REPORTS];
@@ -1403,7 +1403,7 @@ void RwrTrkMgr::processTrackList(const LCreal dt)
       trackNumMatches[it] = 0;
       const RfTrack* const trk = (const RfTrack*) tracks[it];        // we produce only RfTracks
       const Player* const tgt = trk->getLastEmission()->getOwnship(); // The emissions ownship is our target!
-      for (int ir = 0; ir < nReports; ir++) {
+      for (unsigned int ir = 0; ir < nReports; ir++) {
          if (emissions[ir]->getOwnship() == tgt) {  // The emissions ownship is our target!
             // We have a new report for the same target as this track ...
             report2TrackMatch[ir][it] = 1;
@@ -1426,14 +1426,14 @@ void RwrTrkMgr::processTrackList(const LCreal dt)
    // 5) Create input vectors for the current tracks
    // ---
    osg::Vec3 u[MAX_TRKS];
-   LCreal age[MAX_TRKS];
+   //LCreal age[MAX_TRKS];
    bool haveU[MAX_TRKS];
    lcLock(trkListLock);
    for (unsigned int it = 0; it < nTrks; it++) {
       u[it].set(0,0,0);
       haveU[it] = false;
       if (trackNumMatches[it] > 0) {
-         for (int ir = 0; ir < nReports; ir++) {
+         for (unsigned int ir = 0; ir < nReports; ir++) {
             if (report2TrackMatch[ir][it] > 0) {
 
                // Update the track's signal
@@ -1442,11 +1442,11 @@ void RwrTrkMgr::processTrackList(const LCreal dt)
 
                // Create a track input vector
                u[it] = (tgtPos[ir] - tracks[it]->getPosition());
-               osg::Vec3 trkPos = tracks[it]->getPosition();
+               //osg::Vec3 trkPos = tracks[it]->getPosition();
 
                // Track age and flags
                if (!haveU[it]) {
-                  age[it] = trk->getTrackAge();
+                  //age[it] = trk->getTrackAge();
                   tracks[it]->resetTrackAge();
                   haveU[it] = true;
                }
@@ -1531,7 +1531,7 @@ void RwrTrkMgr::processTrackList(const LCreal dt)
    // 8) Create new tracks from unmatched reports and free up emissions
    // ---
    lcLock(trkListLock);
-   for (int i = 0; i < nReports; i++) {
+   for (unsigned int i = 0; i < nReports; i++) {
       if ((reportNumMatches[i] == 0) && (nTrks < maxTrks)) {
          // This is a new report, so create a new track for it
          RfTrack* newTrk = new RfTrack();

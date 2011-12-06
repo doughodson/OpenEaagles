@@ -60,5 +60,6 @@ OPTIMIZE = -O3
 # ---
 # Modify standard flags
 # ---
-CPPFLAGS += -I$(OE_ROOT)/include -I$(OE_3RD_PARTY_ROOT)/include $(OPTIMIZE) -Wno-long-long -pthread
+CPPFLAGS += -I$(OE_ROOT)/include -I$(OE_3RD_PARTY_ROOT)/include $(OPTIMIZE) -pthread
+CPPFLAGS += -Wno-long-long -Wall
 

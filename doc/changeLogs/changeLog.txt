@@ -5,7 +5,11 @@ Changes since v11.11
 --------------------------------------------------------------------------------
 Global changes:
 
- 
+  -- turned on "Wall" compiler switch to display all GCC warnings
+  -- resolved a number of "sign compare" warning associated with comparing
+     "unsigned int" with "int".
+
+
 --------------------------------------------------------------------------------
 basic
 

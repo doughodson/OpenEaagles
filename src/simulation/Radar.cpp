@@ -19,10 +19,10 @@ IMPLEMENT_PARTIAL_SUBCLASS(Radar,"Radar")
 
 // Slot table
 BEGIN_SLOTTABLE(Radar)
-   "igain",    //  1: RF: Integrator gain (dB or no units; def: 1.0) 
+   "igain",    //  1: RF: Integrator gain (dB or no units; def: 1.0)
 END_SLOTTABLE(Radar)
 
-//  Map slot table 
+//  Map slot table
 BEGIN_SLOT_MAP(Radar)
     ON_SLOT(1,  setSlotIGain, Basic::Number)
 END_SLOT_MAP()
@@ -44,7 +44,7 @@ Radar::Radar() :
 
 Radar::Radar(const Radar& org) :
       rptSnQueue(MAX_EMISSIONS), rptQueue(MAX_EMISSIONS), myLock(0)
-{ 
+{
     STANDARD_CONSTRUCTOR()
     copyData(org,true);
 }
@@ -179,7 +179,7 @@ void Radar::transmit(const LCreal dt)
 {
     BaseClass::transmit(dt);
 
-    // Transmitting, scanning and have an antenna? 
+    // Transmitting, scanning and have an antenna?
     if ( !areEmissionsDisabled() && isTransmitting() ) {
         // Send the emission to the other player
         Emission* em = new Emission();
@@ -210,7 +210,7 @@ void Radar::receive(const LCreal dt)
 {
    BaseClass::receive(dt);
 
-   // Can't do anything without an antenna 
+   // Can't do anything without an antenna
    if (getAntenna() == 0) return;
 
    // Clear the next sweep
@@ -355,7 +355,7 @@ void Radar::process(const LCreal dt)
    if (tm == 0) {
         // No track manager! Then just flush the input queue.
       lcLock(myLock);
-        for (Emission* em = rptQueue.get(); em != 0; em = rptQueue.get()) { 
+        for (Emission* em = rptQueue.get(); em != 0; em = rptQueue.get()) {
             em->unref();
             rptSnQueue.get();
         }
@@ -394,7 +394,7 @@ void Radar::process(const LCreal dt)
         // Get the emission
         Emission* em = rptQueue.get();
         LCreal snDbl = rptSnQueue.get();
-        
+
         if (em != 0) {
             // ---
             // 1) Match the emission with existing reports
@@ -488,9 +488,9 @@ bool Radar::onEndScanEvent(const Basic::Integer* const bar)
 //------------------------------------------------------------------------------
 // clearSweep -- Computer power at angle off center of beam
 //------------------------------------------------------------------------------
-void Radar::clearSweep(const int n)
+void Radar::clearSweep(const unsigned int n)
 {
-    if (n >= 0 && n < NUM_SWEEPS) {
+    if (n < NUM_SWEEPS) {
         for (unsigned int i = 0; i < PTRS_PER_SWEEP; i++) {
             sweeps[n][i] = 0.0f;
             vclos[n][i] = 0.0;
@@ -504,8 +504,8 @@ void Radar::clearSweep(const int n)
 void Radar::ageSweeps()
 {
     const LCreal aging = 0.002f;
-    for (int i = 0; i < NUM_SWEEPS; i++) {
-        for (int j = 0; j < PTRS_PER_SWEEP; j++) {
+    for (unsigned int i = 0; i < NUM_SWEEPS; i++) {
+        for (unsigned int j = 0; j < PTRS_PER_SWEEP; j++) {
             LCreal p = sweeps[i][j];
             if (p > 0) {
                 p -= aging;
@@ -519,28 +519,31 @@ void Radar::ageSweeps()
 //------------------------------------------------------------------------------
 // computeSweepIndex -- compute the sweep index
 //------------------------------------------------------------------------------
-int Radar::computeSweepIndex(const LCreal az)
+unsigned int Radar::computeSweepIndex(const LCreal az)
 {
-    LCreal s = LCreal(NUM_SWEEPS-1)/60.0;      // sweeps per display scaling
+    // azmuith must be positive, if not, return an index of 0
+    if (az < 0) return 0;
 
-    LCreal az1 = az + 30.0f;        // Offset from left side (sweep 0)
-    int n = int(az1*s + 0.5);       // Compute index
+    LCreal s = LCreal(NUM_SWEEPS-1)/60.0;           // sweeps per display scaling
+    LCreal az1 = az + 30.0f;                        // Offset from left side (sweep 0)
+    unsigned int n = (unsigned int)(az1*s + 0.5);   // Compute index
     if (n >= NUM_SWEEPS) n = NUM_SWEEPS - 1;
-    if (n < 0) n = 0;
     return n;
 }
 
 //------------------------------------------------------------------------------
 // computeRangeIndex -- compute the range index
 //------------------------------------------------------------------------------
-int Radar::computeRangeIndex(const LCreal rng)
+unsigned int Radar::computeRangeIndex(const LCreal rng)
 {
+    // range must be positive, if not, return return an index of 0
+    if (rng < 0) return 0;
+
     //LCreal maxRng = 40000.0;
     LCreal maxRng = getRange() * Basic::Distance::NM2M;
     LCreal rng1 = (rng/ maxRng );
-    int n = int(rng1 * LCreal(PTRS_PER_SWEEP) + 0.5);
+    unsigned int n = (unsigned int)(rng1 * LCreal(PTRS_PER_SWEEP) + 0.5);
     if (n >= PTRS_PER_SWEEP) n = PTRS_PER_SWEEP - 1;
-    if (n < 0) n = 0;
     return n;
 }
 
@@ -548,7 +551,7 @@ int Radar::computeRangeIndex(const LCreal rng)
 // Slot functions
 //------------------------------------------------------------------------------
 
-// igain: Integrator gain (dB or no units; def: 1.0) 
+// igain: Integrator gain (dB or no units; def: 1.0)
 bool Radar::setSlotIGain(Basic::Number* const v)
 {
     bool ok = false;
