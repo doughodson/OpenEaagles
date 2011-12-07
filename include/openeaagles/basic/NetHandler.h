@@ -56,7 +56,7 @@ class String;
 //      port#           <-------     <any-port>    ! Receiving with only port defined
 //
 //      localPort#      <-------     <any-port>    ! Receiving anytime that 'localPort' is defined.
-//      
+//
 //------------------------------------------------------------------------------
 class NetHandler : public Object
 {
@@ -177,7 +177,7 @@ protected:
    // Sets the input buffer size
    bool setRecvBuffSize();
 
-   LcSocket  socketNum;            // Our Socket
+   LcSocket socketNum;             // Our Socket
 
 private:
    char* localIpAddr;              // Local host IP address
@@ -190,8 +190,8 @@ private:
    uint16_t fromPort1;             // Last recvData() 'from' port number
    bool sharedFlg;                 // Shared port flag
    bool initialized;               // handler has been initialized
-   unsigned int  sendBuffSizeKb;   // Send buffer size in KBs
-   unsigned int  recvBuffSizeKb;   // Receive buffer size in KBs
+   unsigned int sendBuffSizeKb;    // Send buffer size in KBs
+   unsigned int recvBuffSizeKb;    // Receive buffer size in KBs
    static bool netByteOrder;       // True if this machine is in 'network byte order'
 };
 
@@ -209,7 +209,7 @@ inline uint16_t NetHandler::getPort() const
 inline uint16_t NetHandler::getLocalPort() const
 {
    return localPort;
-} 
+}
 
 // Ignore source port #
 inline uint16_t NetHandler::getIgnoreSourcePort() const

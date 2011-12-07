@@ -45,15 +45,15 @@ BEGIN_SLOTTABLE(NetHandler)
     "ignoreSourcePort",     // 7) Ignore message from this source port
 END_SLOTTABLE(NetHandler)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(NetHandler)
     ON_SLOT(1, setSlotLocalIpAddress, String)
     ON_SLOT(2, setSlotLocalPort,    Number)
     ON_SLOT(3, setSlotPort,         Number)
-    ON_SLOT(4, setSlotShared,       Number)   
-    ON_SLOT(5, setSlotSendBuffSize, Number)   
-    ON_SLOT(6, setSlotRecvBuffSize, Number)   
-    ON_SLOT(7, setSlotIgnoreSourcePort, Number)   
+    ON_SLOT(4, setSlotShared,       Number)
+    ON_SLOT(5, setSlotSendBuffSize, Number)
+    ON_SLOT(6, setSlotRecvBuffSize, Number)
+    ON_SLOT(7, setSlotIgnoreSourcePort, Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -61,9 +61,17 @@ END_SLOT_MAP()
 //------------------------------------------------------------------------------
 NetHandler::NetHandler() :
                localIpAddr(0),
-               port(0), localPort(0), ignoreSourcePort(0),
-               sendBuffSizeKb(32), recvBuffSizeKb(128),
-               netAddr(INADDR_ANY), localAddr(INADDR_ANY)
+               localAddr(INADDR_ANY),
+               netAddr(INADDR_ANY),
+               fromAddr1(INADDR_NONE),
+               port(0),
+               localPort(0),
+               ignoreSourcePort(0),
+               fromPort1(0),
+               sharedFlg(false),
+               initialized(false),
+               sendBuffSizeKb(32),
+               recvBuffSizeKb(128)
 {
    STANDARD_CONSTRUCTOR()
 
@@ -72,12 +80,6 @@ NetHandler::NetHandler() :
    #else
       socketNum = -1;
    #endif
-
-   setSharedFlag(false);
-   initialized = false;
-
-   fromAddr1 = INADDR_NONE;
-   fromPort1 = 0;
 }
 
 
@@ -121,7 +123,7 @@ void NetHandler::deleteData()
 }
 
 //------------------------------------------------------------------------------
-// Initialize the network handler -- 
+// Initialize the network handler --
 //------------------------------------------------------------------------------
 bool NetHandler::initNetwork(const bool noWaitFlag)
 {
@@ -181,7 +183,7 @@ bool NetHandler::init()
 
 // -------------------------------------------------------------
 // bindSocket() -- bind the socket to an address, and configure
-// the send and receive buffers. 
+// the send and receive buffers.
 // -------------------------------------------------------------
 bool NetHandler::bindSocket()
 {
@@ -432,7 +434,7 @@ bool NetHandler::sendData(const char* const packet, const int size)
     bzero(&addr, sizeof(addr));
     addr.sin_family = AF_INET;
     addr.sin_addr.s_addr = netAddr;
-    addr.sin_port = htons(port); 
+    addr.sin_port = htons(port);
     Len addrlen = sizeof(addr);
     int result = sendto(socketNum, packet, size, 0, (const struct sockaddr *) &addr, addrlen);
 #if defined(WIN32)
@@ -503,7 +505,7 @@ unsigned int NetHandler::recvData(char* const packet, const int maxSize)
 //------------------------------------------------------------------------------
 
 // Set the shared flag
-void NetHandler::setSharedFlag(const bool b)      
+void NetHandler::setSharedFlag(const bool b)
 {
    sharedFlg = b;
 }
@@ -636,9 +638,9 @@ bool NetHandler::setLocalAddr(const char* const hostname)
 bool NetHandler::setSlotLocalIpAddress(const String* const msg)
 {
     bool ok = false;
-    if (msg != 0) { 
+    if (msg != 0) {
         if (localIpAddr != 0) delete[] localIpAddr;
-        localIpAddr = msg->getCopyString(); 
+        localIpAddr = msg->getCopyString();
         ok = true;
     }
     return ok;
