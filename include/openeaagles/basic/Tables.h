@@ -14,7 +14,7 @@ class List;
 class Number;
 
 //==============================================================================
-// Class: Table 
+// Class: Table
 //
 // Description: Abstract table class ---
 //
@@ -56,8 +56,8 @@ class Number;
 //          Thrown by Table's method loadVector() when it's passed an invalid
 //          vector.
 //
-//      ExpInvalidFStorage 
-//          Thrown by Table's storage class when the data in FStorage in incorrect. 
+//      ExpInvalidFStorage
+//          Thrown by Table's storage class when the data in FStorage in incorrect.
 //
 //==============================================================================
 class Table : public Object {
@@ -65,9 +65,9 @@ class Table : public Object {
 
 public:
    Table();
-   Table(const LCreal* dtbl, const unsigned int dsize); 
+   Table(const LCreal* dtbl, const unsigned int dsize);
 
-   // Returns a pointer to the dependent variable data table. 
+   // Returns a pointer to the dependent variable data table.
    const LCreal* getDataTable() const    { return dtable; }
 
    // Returns the number of entries in the data table
@@ -86,7 +86,7 @@ public:
 
    // Data storage factory (pre-ref()'d)
    virtual FStorage* storageFactory() const;
- 
+
    // ---
    // Static 1D Linear Function Interpolator
    //    x       - Independent variable #1
@@ -101,7 +101,7 @@ public:
          const LCreal x,
          const LCreal *x_data, const unsigned int nx,
          const LCreal *a_data,
-         const bool eFlg, 
+         const bool eFlg,
          unsigned int* const xbp=0
       );
 
@@ -139,9 +139,9 @@ public:
          const LCreal *y_data, const unsigned int ny,
          const LCreal *z_data, const unsigned int nz,
          const LCreal *a_data,
-         const bool eFlg, 
+         const bool eFlg,
          unsigned int* const xbp=0,
-         unsigned int* const ybp=0, 
+         unsigned int* const ybp=0,
          unsigned int* const zbp=0
       );
 
@@ -161,9 +161,9 @@ public:
          const LCreal *z_data, const unsigned int nz,
          const LCreal *w_data, const unsigned int nw,
          const LCreal *a_data,
-         const bool eFlg, 
+         const bool eFlg,
          unsigned int* const xbp=0,
-         unsigned int* const ybp=0, 
+         unsigned int* const ybp=0,
          unsigned int* const zbp=0,
          unsigned int* const wbp=0
       );
@@ -185,11 +185,11 @@ public:
          const LCreal *w_data, const unsigned int nw,
          const LCreal *v_data, const unsigned int nv,
          const LCreal *a_data,
-         const bool eFlg, 
+         const bool eFlg,
          unsigned int* const xbp=0,
-         unsigned int* const ybp=0, 
+         unsigned int* const ybp=0,
          unsigned int* const zbp=0,
-         unsigned int* const wbp=0, 
+         unsigned int* const wbp=0,
          unsigned int* const vbp=0
       );
 
@@ -229,6 +229,8 @@ protected:
    bool    valid;     // Table is valid
 
 private:
+   void initData();
+
    LCreal* dtable;    // Data Table
    unsigned int nd;   // Number of data points
    bool    extFlg;    // Extrapolation enabled flag
@@ -236,7 +238,7 @@ private:
 
 
 //==============================================================================
-// Class: Table1 
+// Class: Table1
 //
 // Description: 1D LFI data table
 //
@@ -255,7 +257,7 @@ public:
    // Returns the number of x breakpoints.
    unsigned int getNumXPoints() const { return nx; }
 
-   // Returns a pointer to the breakpoint data for x. 
+   // Returns a pointer to the breakpoint data for x.
    const LCreal* getXData() const     { return xtable; }
 
    LCreal getMinX() const;    // Min value of the X (iv1) breakpoints
@@ -284,7 +286,7 @@ private:
 
 
 //==============================================================================
-// Class: Table2 
+// Class: Table2
 //
 // Description: 2D LFI data table
 //
@@ -305,7 +307,7 @@ public:
    // Returns the number of y breakpoints.
    unsigned int getNumYPoints() const { return ny; }
 
-   // Returns a pointer to the breakpoint data for y. 
+   // Returns a pointer to the breakpoint data for y.
    const LCreal* getYData() const     { return ytable; }
 
    LCreal getMinY() const;    // Min value of the Y (iv2) breakpoints
@@ -335,7 +337,7 @@ private:
 
 
 //==============================================================================
-// Class: Table3 
+// Class: Table3
 //
 // Description: 3D LFI data table
 //
@@ -388,7 +390,7 @@ private:
 
 
 //==============================================================================
-// Class: Table4 
+// Class: Table4
 //
 // Description: 4D LFI data table
 //
@@ -411,7 +413,7 @@ public:
    // Returns the number of w breakpoints.
    unsigned int getNumWPoints() const { return nw; }
 
-   // Returns a pointer to the breakpoint data for w. 
+   // Returns a pointer to the breakpoint data for w.
    const LCreal* getWData() const     { return wtable; }
 
    LCreal getMinW() const;    // Min value of the W (iv4) breakpoints
@@ -442,7 +444,7 @@ private:
 };
 
 //==============================================================================
-// Class: Table5 
+// Class: Table5
 //
 // Description: 5D LFI data table
 //
@@ -466,7 +468,7 @@ public:
    // Returns the number of v breakpoints.
    unsigned int getNumVPoints() const { return nv; }
 
-   // Returns a pointer to the breakpoint data for v. 
+   // Returns a pointer to the breakpoint data for v.
    const LCreal* getVData() const     { return vtable; }
 
    LCreal getMinV() const;    // Min value of the V (iv5) breakpoints

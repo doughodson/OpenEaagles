@@ -46,17 +46,16 @@ END_SLOT_MAP()
 //------------------------------------------------------------------------------
 // Class support functions
 //------------------------------------------------------------------------------
-Table::Table() : valid(false), extFlg(false)
-{
-   STANDARD_CONSTRUCTOR()
-   dtable = 0;
-   nd = 0;
-}
-
-Table::Table(const LCreal* dtbl, const unsigned int dsize) 
-   : dtable(0), nd(0), valid(false), extFlg(false)
+Table::Table()
 {
     STANDARD_CONSTRUCTOR()
+    initData();
+}
+
+Table::Table(const LCreal* dtbl, const unsigned int dsize)
+{
+    STANDARD_CONSTRUCTOR()
+    initData();
     if (dtbl != 0 && dsize > 0) {   /* Copy the data table */
         dtable = new LCreal[dsize];
         if (dtable != 0) {
@@ -66,12 +65,19 @@ Table::Table(const LCreal* dtbl, const unsigned int dsize)
     }
 }
 
-Table::Table(const Table& org) : valid(false), extFlg(false)
-{ 
+Table::Table(const Table& org)
+{
     STANDARD_CONSTRUCTOR()
-    dtable = 0;
-    nd = 0;
+    initData();
     copyData(org,true);
+}
+
+void Table::initData()
+{
+   valid = false;
+   extFlg = false;
+   dtable = 0;
+   nd = 0;
 }
 
 Table::~Table()
@@ -168,13 +174,13 @@ void Table::findMinMax(LCreal* minValue, LCreal* maxValue) const
 
 
 //------------------------------------------------------------------------------
-// loadVector() -- 
+// loadVector() --
 //------------------------------------------------------------------------------
 bool Table::loadVector(const List& list, LCreal** table, unsigned int* nn)
 {
     unsigned int n = list.entries();
     if (n <= 0) return false;
-    
+
     LCreal* p = new LCreal[n];
     unsigned int n2 = list.getNumberList(p, n);
     bool ok = (n == n2);
@@ -313,7 +319,7 @@ Table1::Table1(const LCreal* dtbl, const unsigned int dsize,
 void Table1::copyData(const Table1& org, const bool cc)
 {
     BaseClass::copyData(org);
-  
+
     // Delete old data
     if (!cc && xtable != 0) { delete[] xtable; xtable = 0; }
 
@@ -329,7 +335,7 @@ void Table1::copyData(const Table1& org, const bool cc)
 
 void Table1::deleteData()
 {
-    if (xtable != 0) delete[] xtable;       
+    if (xtable != 0) delete[] xtable;
     xtable = 0;
     nx = 0;
 }
@@ -343,7 +349,7 @@ bool Table1::loadData(const List& list, LCreal* const table)
     // Make sure we have the proper number of entries in the list
     unsigned int n1 = list.entries();
     if (n1 <= 0 || n1 != nx) return false;
-    
+
     // Transfer numbers from the list to a temp table
     LCreal* p = new LCreal[nx];
     unsigned int n2 = list.getNumberList(p, nx);
@@ -356,7 +362,7 @@ bool Table1::loadData(const List& list, LCreal* const table)
     delete[] p;
     return ok;
 }
-  
+
 //------------------------------------------------------------------------------
 // isValid() -- Returns true if the data table and breakpoint tables are valid.
 //------------------------------------------------------------------------------
@@ -376,7 +382,7 @@ unsigned int Table1::tableSize() const
 //------------------------------------------------------------------------------
 // Minimum and maximum breakpoint functions --
 //     Return the min/max values from the breakpoint tables
-//     Throw an ExpInvalidTable exception if the breakpoint table is empty 
+//     Throw an ExpInvalidTable exception if the breakpoint table is empty
 //------------------------------------------------------------------------------
 LCreal Table1::getMinX() const
 {
@@ -512,7 +518,7 @@ Table2::Table2(const LCreal* dtbl, const unsigned int dsize,
 void Table2::copyData(const Table2& org, const bool cc)
 {
     BaseClass::copyData(org);
-  
+
     // Delete old data
     if (!cc && ytable != 0) { delete[] ytable; ytable = 0; }
 
@@ -528,7 +534,7 @@ void Table2::copyData(const Table2& org, const bool cc)
 
 void Table2::deleteData()
 {
-    if (ytable != 0) delete[] ytable;   
+    if (ytable != 0) delete[] ytable;
     ytable = 0;
     ny = 0;
 }
@@ -538,7 +544,7 @@ void Table2::deleteData()
 // Example:  { [ 11 12 13 ] [ 21 22 23 ] [ 31 32 33 ] }
 //------------------------------------------------------------------------------
 bool Table2::loadData(const List& list, LCreal* const table)
-{ 
+{
     // Make sure we have the proper number of entries in the list
     unsigned int n1 = list.entries();
     bool ok = (n1 > 0 && n1 == ny);
@@ -581,7 +587,7 @@ unsigned int Table2::tableSize() const
 //------------------------------------------------------------------------------
 // Minimum and maximum breakpoint functions --
 //     Return the min/max values from the breakpoint tables
-//     Throw an ExpInvalidTable exception if the breakpoint table is empty 
+//     Throw an ExpInvalidTable exception if the breakpoint table is empty
 //------------------------------------------------------------------------------
 LCreal Table2::getMinY() const
 {
@@ -645,7 +651,7 @@ Table2::lfi(const LCreal iv1, const LCreal iv2, FStorage* const f) const
 }
 
 //------------------------------------------------------------------------------
-// setYBreakpoints2() -- for Table2 
+// setYBreakpoints2() -- for Table2
 //------------------------------------------------------------------------------
 bool Table2::setYBreakpoints2(const List* const syb2obj)
 {
@@ -756,7 +762,7 @@ Table3::Table3(const LCreal* dtbl, const unsigned int dsize,
 void Table3::copyData(const Table3& org, const bool cc)
 {
     BaseClass::copyData(org);
-  
+
     // Delete old data
     if (!cc && ztable != 0) { delete[] ztable; ztable = 0; }
 
@@ -772,7 +778,7 @@ void Table3::copyData(const Table3& org, const bool cc)
 
 void Table3::deleteData()
 {
-    if (ztable != 0) delete[] ztable;       
+    if (ztable != 0) delete[] ztable;
     ztable = 0;
     nz = 0;
 }
@@ -827,7 +833,7 @@ unsigned int Table3::tableSize() const
 //------------------------------------------------------------------------------
 // Minimum and maximum breakpoint functions --
 //     Return the min/max values from the breakpoint tables
-//     Throw an ExpInvalidTable exception if the breakpoint table is empty 
+//     Throw an ExpInvalidTable exception if the breakpoint table is empty
 //------------------------------------------------------------------------------
 LCreal Table3::getMinZ() const
 {
@@ -1024,7 +1030,7 @@ Table4::Table4(const LCreal* dtbl, const unsigned int dsize,
 void Table4::copyData(const Table4& org, const bool cc)
 {
     BaseClass::copyData(org);
-  
+
     // Delete old data
     if (!cc && wtable != 0) { delete[] wtable; wtable = 0; }
 
@@ -1040,7 +1046,7 @@ void Table4::copyData(const Table4& org, const bool cc)
 
 void Table4::deleteData()
 {
-    if (wtable != 0) delete[] wtable;       
+    if (wtable != 0) delete[] wtable;
     wtable = 0;
     nw = 0;
 }
@@ -1099,7 +1105,7 @@ bool Table4::isValid() const
 //------------------------------------------------------------------------------
 // tableSize() -- return the size of the (sub)table
 //------------------------------------------------------------------------------
-unsigned int Table4::tableSize() const           
+unsigned int Table4::tableSize() const
 {
     return nw * BaseClass::tableSize();
 }
@@ -1107,7 +1113,7 @@ unsigned int Table4::tableSize() const
 //------------------------------------------------------------------------------
 // Minimum and maximum breakpoint functions --
 //     Return the min/max values from the breakpoint tables
-//     Throw an ExpInvalidTable exception if the breakpoint table is empty 
+//     Throw an ExpInvalidTable exception if the breakpoint table is empty
 //------------------------------------------------------------------------------
 LCreal Table4::getMinW() const
 {
@@ -1133,7 +1139,7 @@ LCreal
 Table4::lfi(const LCreal iv1, FStorage* const f) const
 {
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
-    
+
    const LCreal* y_data = getYData();
    const LCreal* z_data = getZData();
    if (f != 0) {
@@ -1158,7 +1164,7 @@ LCreal
 Table4::lfi(const LCreal iv1, const LCreal iv2, FStorage* const f) const
 {
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
-    
+
    const LCreal* z_data = getZData();
    if (f != 0) {
       TableStorage* s = dynamic_cast<TableStorage*>(f);
@@ -1182,7 +1188,7 @@ LCreal
 Table4::lfi(const LCreal iv1, const LCreal iv2, const LCreal iv3, FStorage* const f) const
 {
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
-    
+
    if (f != 0) {
       TableStorage* s = dynamic_cast<TableStorage*>(f);
       if (s == 0) throw new ExpInvalidFStorage();
@@ -1205,7 +1211,7 @@ LCreal
 Table4::lfi(const LCreal iv1, const LCreal iv2, const LCreal iv3, const LCreal iv4, FStorage* const f) const
 {
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
-    
+
    if (f != 0) {
        TableStorage* s = dynamic_cast<TableStorage*>(f);
        if (s == 0) throw new ExpInvalidFStorage();
@@ -1225,7 +1231,7 @@ Table4::lfi(const LCreal iv1, const LCreal iv2, const LCreal iv3, const LCreal i
 }
 
 //------------------------------------------------------------------------------
-// setWBreakpoints4() -- For Table4 
+// setWBreakpoints4() -- For Table4
 //------------------------------------------------------------------------------
 bool Table4::setWBreakpoints4(const List* const swb4obj)
 {
@@ -1338,7 +1344,7 @@ Table5::Table5(const LCreal* dtbl, const unsigned int dsize,
 void Table5::copyData(const Table5& org, const bool cc)
 {
     BaseClass::copyData(org);
-  
+
     // Delete old data
     if (!cc && vtable != 0) { delete[] vtable; vtable = 0; }
 
@@ -1354,7 +1360,7 @@ void Table5::copyData(const Table5& org, const bool cc)
 
 void Table5::deleteData()
 {
-    if (vtable != 0) delete[] vtable;       
+    if (vtable != 0) delete[] vtable;
     vtable = 0;
     nv = 0;
 }
@@ -1398,7 +1404,7 @@ bool Table5::isValid() const
 //------------------------------------------------------------------------------
 // tableSize() -- return the size of the (sub)table
 //------------------------------------------------------------------------------
-unsigned int Table5::tableSize() const           
+unsigned int Table5::tableSize() const
 {
     return nv * BaseClass::tableSize();
 }
@@ -1406,7 +1412,7 @@ unsigned int Table5::tableSize() const
 //------------------------------------------------------------------------------
 // Minimum and maximum breakpoint functions --
 //     Return the min/max values from the breakpoint tables
-//     Throw an ExpInvalidTable exception if the breakpoint table is empty 
+//     Throw an ExpInvalidTable exception if the breakpoint table is empty
 //------------------------------------------------------------------------------
 LCreal Table5::getMinV() const
 {
@@ -1559,7 +1565,7 @@ Table5::lfi(const LCreal iv1, const LCreal iv2, const LCreal iv3, const LCreal i
 }
 
 //------------------------------------------------------------------------------
-// setVBreakpoints5() -- For Table5 
+// setVBreakpoints5() -- For Table5
 //------------------------------------------------------------------------------
 bool Table5::setVBreakpoints5(const List* const swb5obj)
 {
@@ -1632,7 +1638,7 @@ void Table5::printData(std::ostream& sout, const LCreal* tbl, const unsigned int
 //==============================================================================
 
 //------------------------------------------------------------------------------
-// lfi - One dimensional Linear Function Interpolator	
+// lfi - One dimensional Linear Function Interpolator
 //------------------------------------------------------------------------------
 LCreal Table::lfi(
          const LCreal x,            // Independent variable #1
@@ -1705,7 +1711,7 @@ LCreal Table::lfi(
    unsigned int x1 = x2 - delta;
    LCreal m = (x - x_data[x1]) / (x_data[x2] - x_data[x1]);
    return m * (a_data[x2] - a_data[x1]) + a_data[x1];
-} 
+}
 
 //------------------------------------------------------------------------------
 // lfi - Two dimensional Linear Function Interpolator
@@ -1729,7 +1735,7 @@ LCreal Table::lfi(
    if (ny == 1) {
       return Table::lfi(x, x_data, nx, &a_data[0], eFlg, xbp);
    }
-    
+
    // ---
    // Check increasing vs decreasing order of the breakpoints
    // ---
@@ -1742,7 +1748,7 @@ LCreal Table::lfi(
       high = 0;
       delta = -1;
    }
-    
+
    // ---
    // Find the breakpoints with endpoint checks
    // ---
@@ -1798,7 +1804,7 @@ LCreal Table::lfi(
    // ---
    LCreal m = (y - y_data[y1]) / (y_data[y2] - y_data[y1]);
    return m * (a2 - a1) + a1;
-} 
+}
 
 //------------------------------------------------------------------------------
 // lfi - Three dimensional Linear Function Interpolator
@@ -1839,7 +1845,7 @@ LCreal Table::lfi(
       high = 0;
       delta = -1;
    }
-    
+
    // ---
    // Find the breakpoints with endpoint checks
    // ---
@@ -1896,7 +1902,7 @@ LCreal Table::lfi(
    // ---
    LCreal m = (z - z_data[z1]) / (z_data[z2] - z_data[z1]);
    return m * (a2 - a1) + a1;
-} 
+}
 
 //------------------------------------------------------------------------------
 // lfi - Four dimension Linear Function Interpolator
@@ -1941,7 +1947,7 @@ LCreal Table::lfi(
       high = 0;
       delta = -1;
    }
-    
+
    // ---
    // Find the breakpoints with endpoint checks
    // ---
@@ -1999,7 +2005,7 @@ LCreal Table::lfi(
    // ---
    LCreal m  = (w - w_data[w1]) / (w_data[w2] - w_data[w1]);
    return m * (a2 - a1) + a1;
-} 
+}
 
 //------------------------------------------------------------------------------
 // lfi - Five dimension Linear Function Interpolator
@@ -2048,7 +2054,7 @@ LCreal Table::lfi(
       high = 0;
       delta = -1;
    }
-    
+
    // ---
    // Find the breakpoints with endpoint checks
    // ---
@@ -2107,7 +2113,7 @@ LCreal Table::lfi(
    // ---
    LCreal m  = (v - v_data[v1]) / (v_data[v2] - v_data[v1]);
    return m * (a2 - a1) + a1;
-} 
+}
 
 } // End Basic namespace
 } // End Eaagles namespace
