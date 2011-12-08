@@ -828,7 +828,11 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
          // player becomes OK, or transmitter is re-enabled
          Network::Dis::EmitterBeamData bd;
          bd.beamIDNumber = (ib+1);
+
+#ifdef DISV7
          bd.beamStatus = BS_INACTIVE;   // inactive
+#endif
+
          bd.numberOfTargetsInTrack = 0;
 
          // ---

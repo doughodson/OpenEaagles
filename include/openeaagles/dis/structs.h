@@ -1,7 +1,8 @@
 //--------------------------------------------------------------
 // IEEE Standard for Distributed Interactive Simulation (DIS)
 // Application Protocols - Record Structures for DIS PDU's
-// Standard: 1278.1a
+//
+// Standard: IEEE P1278.1/D15
 //--------------------------------------------------------------
 #ifndef __Eaagles_Network_Dis_Struct_H__
 #define __Eaagles_Network_Dis_Struct_H__
@@ -14,39 +15,39 @@ namespace Eaagles {
 namespace Network {
 namespace Dis {
 
-struct simulationAddressDIS;
-struct entityIdentifierDIS;
+   struct simulationAddressDIS;
+   struct entityIdentifierDIS;
 
-class EntityType;
-class AngularVelocityvectorDIS;
-class BeamAntennaPattern;
-class SphericalHarmonicAntennaPattern;
-class ArticulationParameter;
-class BurstDescriptor;
-class ClockTime;
-class DataQueryDatumSpecification;
-class DatumSpecification;
-class EulerAngles;
-class EventIdentifier;
-class FixedDatum;
-class PDUHeader;
-class SimulationManagementPDUHeader;
-class SupplyQuantity;
-class SystemID;
-class FundamentalOpData;
-struct VariableDatum;
+   class EntityType;
+   class AngularVelocityvectorDIS;
+   class BeamAntennaPattern;
+   class SphericalHarmonicAntennaPattern;
+   class ArticulationParameter;
+   class BurstDescriptor;
+   class ClockTime;
+   class DataQueryDatumSpecification;
+   class DatumSpecification;
+   class EulerAngles;
+   class EventIdentifier;
+   class FixedDatum;
+   class PDUHeader;
+   class SimulationManagementPDUHeader;
+   class SupplyQuantity;
+   class SystemID;
+   class FundamentalOpData;
+   struct VariableDatum;
 
-struct EntityMarking;
-struct RadioEntityType;
-struct ModulationType;
-struct vectorDIS;
-struct SimCoordinates;
-struct WorldCoordinates;
-struct TrackJamTargets;
-struct FundamentalParameterData;
-struct EmitterBeamData;
-struct EmitterSystem;
-struct EmissionSystem;
+   struct EntityMarking;
+   struct RadioEntityType;
+   struct ModulationType;
+   struct vectorDIS;
+   struct SimCoordinates;
+   struct WorldCoordinates;
+   struct TrackJamTargets;
+   struct FundamentalParameterData;
+   struct EmitterBeamData;
+   struct EmitterSystem;
+   struct EmissionSystem;
 
 //--------------------------------------------------------------
 // Byte swap functions used by this file
@@ -54,135 +55,135 @@ struct EmissionSystem;
 
 union convDoubleData
 {
-  int64_t   llword;
-  uint64_t  ullword;
-  double    dword;
-  char      byte[8];
+   int64_t   llword;
+   uint64_t  ullword;
+   double    dword;
+   char      byte[8];
 };
 
 union convData
 {
-  int32_t  lword;
-  uint32_t uint;
-  float   fword;
-  int16_t  sword[2];
-  uint16_t usword[2];
-  char    byte[4];
+   int32_t  lword;
+   uint32_t uint;
+   float   fword;
+   int16_t  sword[2];
+   uint16_t usword[2];
+   char    byte[4];
 };
 
-                                                                                                           
+
 inline int32_t convertInt32(const int32_t v){
-  convData value;
-  value.lword = v;
-  convData newValue;
- 
-  newValue.byte[3] = value.byte[0];
-  newValue.byte[2] = value.byte[1];
-  newValue.byte[1] = value.byte[2];
-  newValue.byte[0] = value.byte[3];
- 
-  return newValue.lword;
+   convData value;
+   value.lword = v;
+   convData newValue;
+
+   newValue.byte[3] = value.byte[0];
+   newValue.byte[2] = value.byte[1];
+   newValue.byte[1] = value.byte[2];
+   newValue.byte[0] = value.byte[3];
+
+   return newValue.lword;
 }
 
 inline uint32_t convertUInt32(const uint32_t v){
-  convData value;
-  value.uint = v;
-  convData newValue;
- 
-  newValue.byte[3] = value.byte[0];
-  newValue.byte[2] = value.byte[1];
-  newValue.byte[1] = value.byte[2];
-  newValue.byte[0] = value.byte[3];
- 
-  return newValue.uint;
+   convData value;
+   value.uint = v;
+   convData newValue;
+
+   newValue.byte[3] = value.byte[0];
+   newValue.byte[2] = value.byte[1];
+   newValue.byte[1] = value.byte[2];
+   newValue.byte[0] = value.byte[3];
+
+   return newValue.uint;
 }
- 
+
 inline float convertFloat(const float v){
-  convData value;
-  value.fword = v;
-  convData newValue;
- 
-  newValue.byte[3] = value.byte[0];
-  newValue.byte[2] = value.byte[1];
-  newValue.byte[1] = value.byte[2];
-  newValue.byte[0] = value.byte[3];
- 
-  return newValue.fword;
+   convData value;
+   value.fword = v;
+   convData newValue;
+
+   newValue.byte[3] = value.byte[0];
+   newValue.byte[2] = value.byte[1];
+   newValue.byte[1] = value.byte[2];
+   newValue.byte[0] = value.byte[3];
+
+   return newValue.fword;
 }
 
 inline int64_t convertInt64(const int64_t v){
-  convDoubleData value;
-  value.llword = v;
-  convDoubleData newValue;
+   convDoubleData value;
+   value.llword = v;
+   convDoubleData newValue;
 
-  newValue.byte[7] = value.byte[0];
-  newValue.byte[6] = value.byte[1];
-  newValue.byte[5] = value.byte[2];
-  newValue.byte[4] = value.byte[3];
-  newValue.byte[3] = value.byte[4];
-  newValue.byte[2] = value.byte[5];
-  newValue.byte[1] = value.byte[6];
-  newValue.byte[0] = value.byte[7];
+   newValue.byte[7] = value.byte[0];
+   newValue.byte[6] = value.byte[1];
+   newValue.byte[5] = value.byte[2];
+   newValue.byte[4] = value.byte[3];
+   newValue.byte[3] = value.byte[4];
+   newValue.byte[2] = value.byte[5];
+   newValue.byte[1] = value.byte[6];
+   newValue.byte[0] = value.byte[7];
 
-  return newValue.llword;
+   return newValue.llword;
 }
 
 inline uint64_t convertUInt64(const uint64_t v){
-  convDoubleData value;
-  value.ullword = v;
-  convDoubleData newValue;
+   convDoubleData value;
+   value.ullword = v;
+   convDoubleData newValue;
 
-  newValue.byte[7] = value.byte[0];
-  newValue.byte[6] = value.byte[1];
-  newValue.byte[5] = value.byte[2];
-  newValue.byte[4] = value.byte[3];
-  newValue.byte[3] = value.byte[4];
-  newValue.byte[2] = value.byte[5];
-  newValue.byte[1] = value.byte[6];
-  newValue.byte[0] = value.byte[7];
+   newValue.byte[7] = value.byte[0];
+   newValue.byte[6] = value.byte[1];
+   newValue.byte[5] = value.byte[2];
+   newValue.byte[4] = value.byte[3];
+   newValue.byte[3] = value.byte[4];
+   newValue.byte[2] = value.byte[5];
+   newValue.byte[1] = value.byte[6];
+   newValue.byte[0] = value.byte[7];
 
-  return newValue.ullword;
+   return newValue.ullword;
 }
 
 inline double convertDouble(const double v){
-  convDoubleData value;
-  value.dword = v;
-  convDoubleData newValue;
- 
-  newValue.byte[7] = value.byte[0];
-  newValue.byte[6] = value.byte[1];
-  newValue.byte[5] = value.byte[2];
-  newValue.byte[4] = value.byte[3];
-  newValue.byte[3] = value.byte[4];
-  newValue.byte[2] = value.byte[5];
-  newValue.byte[1] = value.byte[6];
-  newValue.byte[0] = value.byte[7];
- 
-  return newValue.dword;
+   convDoubleData value;
+   value.dword = v;
+   convDoubleData newValue;
+
+   newValue.byte[7] = value.byte[0];
+   newValue.byte[6] = value.byte[1];
+   newValue.byte[5] = value.byte[2];
+   newValue.byte[4] = value.byte[3];
+   newValue.byte[3] = value.byte[4];
+   newValue.byte[2] = value.byte[5];
+   newValue.byte[1] = value.byte[6];
+   newValue.byte[0] = value.byte[7];
+
+   return newValue.dword;
 }
- 
+
 inline int16_t convertInt16(const int16_t v)
 {
-  convData value;
-  value.sword[0] = v;
-  convData newValue;
- 
-  newValue.byte[1] = value.byte[0];
-  newValue.byte[0] = value.byte[1];
- 
-  return newValue.sword[0];
+   convData value;
+   value.sword[0] = v;
+   convData newValue;
+
+   newValue.byte[1] = value.byte[0];
+   newValue.byte[0] = value.byte[1];
+
+   return newValue.sword[0];
 }
- 
+
 inline uint16_t convertUInt16(const uint16_t v)
 {
-  convData value;
-  value.usword[0] = v;
-  convData newValue;
- 
-  newValue.byte[1] = value.byte[0];
-  newValue.byte[0] = value.byte[1];
- 
-  return newValue.usword[0];
+   convData value;
+   value.usword[0] = v;
+   convData newValue;
+
+   newValue.byte[1] = value.byte[0];
+   newValue.byte[0] = value.byte[1];
+
+   return newValue.usword[0];
 }
 
 //-----------------------------------------------
@@ -192,7 +193,7 @@ struct simulationAddressDIS{
 
    uint16_t siteIdentification;
    uint16_t applicationIdentification;
-   
+
    // Constructors
    simulationAddressDIS(const uint16_t a, const uint16_t b) : siteIdentification(a), applicationIdentification(b) { }
    simulationAddressDIS() : siteIdentification(0), applicationIdentification(0) { }
@@ -213,15 +214,15 @@ struct simulationAddressDIS{
       if (siteIdentification < a.siteIdentification) return true;
 
       if (siteIdentification == a.siteIdentification &&
-          applicationIdentification < a.applicationIdentification) return true;
+         applicationIdentification < a.applicationIdentification) return true;
 
       return false;
    }
 
    bool operator==(const simulationAddressDIS& a) const {
       if (siteIdentification == a.siteIdentification &&
-            applicationIdentification == a.applicationIdentification) {
-         return true;
+         applicationIdentification == a.applicationIdentification) {
+            return true;
       }
       return false;
    }
@@ -235,8 +236,8 @@ struct simulationAddressDIS{
    }
 
    friend std::ostream& operator << ( std::ostream& s, const simulationAddressDIS& v ) {
-      s << "  siteIdentification:        " << (int)v.siteIdentification << std::endl
-        << "  applicationIdentification: " << (int)v.applicationIdentification << std::endl;
+      s  << "  siteIdentification:        " << (int)v.siteIdentification << std::endl
+         << "  applicationIdentification: " << (int)v.applicationIdentification << std::endl;
 
       return s;
    }
@@ -254,13 +255,13 @@ struct simulationAddressDIS{
 
 
 //-----------------------------------------------
-// Entity Identifier Record
+// Entity Identifier Record (48 bits)
 //-----------------------------------------------
-struct entityIdentifierDIS{
+struct entityIdentifierDIS {
 
    simulationAddressDIS simulationID;      // ID of the simulation
    uint16_t             ID;                // Entity ID within the simulation
-   
+
    // Constructors
    entityIdentifierDIS(const uint16_t a, const uint16_t b, const uint16_t c) : simulationID(a,b), ID(c) {}
    entityIdentifierDIS() : simulationID(), ID(0)  {}
@@ -271,7 +272,7 @@ struct entityIdentifierDIS{
       ID = a.ID;           
    }
 
-   void swapBytes(){
+   void swapBytes() {
       simulationID.swapBytes();
       ID = convertUInt16(ID);
    };
@@ -280,7 +281,7 @@ struct entityIdentifierDIS{
       if (simulationID.siteIdentification < a.simulationID.siteIdentification) return true;
 
       if (simulationID.siteIdentification == a.simulationID.siteIdentification &&
-          simulationID.applicationIdentification < a.simulationID.applicationIdentification) return true;
+         simulationID.applicationIdentification < a.simulationID.applicationIdentification) return true;
 
       if (simulationID == a.simulationID && ID < a.ID) return true;
 
@@ -300,17 +301,15 @@ struct entityIdentifierDIS{
       return !(*this < a);
    }
 
-   friend std::ostream& operator << ( std::ostream& s, const entityIdentifierDIS& v )
-   {
-      s << "Sim ID:" << std::endl
-        << v.simulationID
-        << "  entityID:                  " << (int)v.ID << std::endl;
+   friend std::ostream& operator << ( std::ostream& s, const entityIdentifierDIS& v ) {
+      s  << "Sim ID:" << std::endl
+         << v.simulationID
+         << "  entityID:                  " << (int)v.ID << std::endl;
 
       return s;
    }
 
-   friend std::ostream& operator << ( std::ostream& s, const entityIdentifierDIS* const v )
-   {
+   friend std::ostream& operator << ( std::ostream& s, const entityIdentifierDIS* const v ) {
       if ( v == 0 )
          return s;
       else {
@@ -322,241 +321,233 @@ struct entityIdentifierDIS{
 
 
 //-----------------------------------------------
-// Entity Type Record
-
+// Entity Type Record (64 bits)
+//-----------------------------------------------
 class EntityType {
 public:
-  void swapBytes(){
+
+   void swapBytes() {
       country = convertUInt16(country);
-  };
+   };
 
-  inline bool operator<(const EntityType& a) const {
+   inline bool operator<(const EntityType& a) const {
       if (kind < a.kind)
-        return true;
+         return true;
 
       if (kind == a.kind &&
-          domain < a.domain) return true;
+         domain < a.domain) return true;
 
       if (kind == a.kind &&
-          domain == a.domain &&
-          country < a.country) return true;
+         domain == a.domain &&
+         country < a.country) return true;
 
       if (kind == a.kind &&
-          domain == a.domain &&
-          country == a.country &&
-          category < a.category) return true;
-          //( category < a.category && category != 0 )) return true;
+         domain == a.domain &&
+         country == a.country &&
+         category < a.category) return true;
+      //( category < a.category && category != 0 )) return true;
 
       if (kind == a.kind &&
-          domain == a.domain &&
-          country == a.country &&
-          category == a.category &&
-          subcategory < a.subcategory) return true;
-          //(category == a.category || category == 0 || a.category == 0) &&
-          //( subcategory < a.subcategory && subcategory != 0 )) return true;
+         domain == a.domain &&
+         country == a.country &&
+         category == a.category &&
+         subcategory < a.subcategory) return true;
+      //(category == a.category || category == 0 || a.category == 0) &&
+      //( subcategory < a.subcategory && subcategory != 0 )) return true;
 
       if (kind == a.kind &&
-          domain == a.domain &&
-          country == a.country &&
-          category == a.category &&
-          subcategory == a.subcategory &&
-          specific < a.specific) return true;
-          //(category == a.category || category == 0 || a.category == 0) &&
-          //(subcategory == a.subcategory || subcategory == 0 || a.subcategory == 0) && 
-          //(specific < a.specific && specific != 0)) return true;
+         domain == a.domain &&
+         country == a.country &&
+         category == a.category &&
+         subcategory == a.subcategory &&
+         specific < a.specific) return true;
+      //(category == a.category || category == 0 || a.category == 0) &&
+      //(subcategory == a.subcategory || subcategory == 0 || a.subcategory == 0) && 
+      //(specific < a.specific && specific != 0)) return true;
 
       if (kind == a.kind &&
-          domain == a.domain &&
-          country == a.country &&
-          category == a.category &&
-          subcategory == a.subcategory &&
-          specific == a.specific &&
-          extra < a.extra) return true;
-          //(category == a.category || category == 0 || a.category == 0) &&
-          //(subcategory == a.subcategory || subcategory == 0 || a.subcategory == 0) && 
-          //(specific == a.specific || specific == 0 || a.specific == 0) && 
-          //(extra < a.extra && extra != 0)) return true;
+         domain == a.domain &&
+         country == a.country &&
+         category == a.category &&
+         subcategory == a.subcategory &&
+         specific == a.specific &&
+         extra < a.extra) return true;
+      //(category == a.category || category == 0 || a.category == 0) &&
+      //(subcategory == a.subcategory || subcategory == 0 || a.subcategory == 0) && 
+      //(specific == a.specific || specific == 0 || a.specific == 0) && 
+      //(extra < a.extra && extra != 0)) return true;
 
       return false;
-  };
+   };
 
-  inline bool operator==(const EntityType& a) const {
+   inline bool operator==(const EntityType& a) const {
       if (kind == a.kind &&
-          domain == a.domain &&
-          country == a.country &&
-          (category == a.category || category == 0 || a.category == 0) &&
-          (subcategory == a.subcategory || subcategory == 0 || a.subcategory == 0) && 
-          (specific == a.specific || specific == 0 || a.specific == 0) && 
-          (extra == a.extra || extra == 0 || a.extra == 0)) return true;
+         domain == a.domain &&
+         country == a.country &&
+         (category == a.category || category == 0 || a.category == 0) &&
+         (subcategory == a.subcategory || subcategory == 0 || a.subcategory == 0) && 
+         (specific == a.specific || specific == 0 || a.specific == 0) && 
+         (extra == a.extra || extra == 0 || a.extra == 0)) return true;
 
       return false;
-  };
+   };
 
-  inline bool operator!=(const EntityType& a) const {
-          return !(*this == a);
-  };
+   inline bool operator!=(const EntityType& a) const {
+      return !(*this == a);
+   };
 
-  inline bool operator>=(const EntityType& a) const {
-          return !(*this < a);
-  };
+   inline bool operator>=(const EntityType& a) const {
+      return !(*this < a);
+   };
 
-  friend std::ostream& operator << ( std::ostream& s, const EntityType& v )
-  {
+   friend std::ostream& operator << ( std::ostream& s, const EntityType& v ) {
+      s  << "  KD:DN:CN:CT:SC:SP:EX" 
+         << " -  ";
 
-    s << "  KD:DN:CN:CT:SC:SP:EX" 
-      << " -  ";
+      s.width(3);
+      s.fill('0');
+      s << (int)v.kind << ":";
+      s.width(3);
+      s.fill('0');
+      s << (int)v.domain << ":";
+      s.width(4);
+      s.fill('0');
+      s << (int)v.country << ":";
+      s.width(3);
+      s.fill('0');
+      s << (int)v.category << ":";
+      s.width(3);
+      s.fill('0');
+      s << (int)v.subcategory << ":";
+      s.width(3);
+      s.fill('0');
+      s << (int)v.specific << ":";
+      s.width(3);
+      s.fill('0');
+      s << (int)v.extra;
 
-    s.width(3);
-    s.fill('0');
-    s << (int)v.kind << ":";
-    s.width(3);
-    s.fill('0');
-    s << (int)v.domain << ":";
-    s.width(4);
-    s.fill('0');
-    s << (int)v.country << ":";
-    s.width(3);
-    s.fill('0');
-    s << (int)v.category << ":";
-    s.width(3);
-    s.fill('0');
-    s << (int)v.subcategory << ":";
-    s.width(3);
-    s.fill('0');
-    s << (int)v.specific << ":";
-    s.width(3);
-    s.fill('0');
-    s << (int)v.extra;
+      return s;
+   };
 
-    return s;
-  };
+   friend std::ostream& operator << ( std::ostream& s, const EntityType* v ) {
+      if ( !v )
+         return s;
+      else
+      {
+         s << *v;
+      }
+      return s;
+   };
 
-  friend std::ostream& operator << ( std::ostream& s, const EntityType* v )
-  {
-
-    if ( !v )
-       return s;
-    else
-    {
-       s << *v;
-    }
-    return s;
-  };
-
-  unsigned char  kind;
-  unsigned char  domain;
-  uint16_t       country;
-  unsigned char  category;
-  unsigned char  subcategory;
-  unsigned char  specific;
-  unsigned char  extra;
+   unsigned char  kind;
+   unsigned char  domain;
+   uint16_t       country;
+   unsigned char  category;
+   unsigned char  subcategory;
+   unsigned char  specific;
+   unsigned char  extra;
 };
 
 //-----------------------------------------------
-// Angular Velocity vectorDIS Record
-
+// Angular Velocity vectorDIS Record (96 bits)
+//-----------------------------------------------
 class AngularVelocityvectorDIS{
 public:
-  void swapBytes(){
-    x_axis = convertFloat(x_axis);
-    y_axis = convertFloat(y_axis);
-    z_axis = convertFloat(z_axis);
-  };
 
-  friend std::ostream& operator << ( std::ostream& s, const AngularVelocityvectorDIS& v )
-  {
-    s << "  x_axis:      " << (int)v.x_axis << std::endl
-      << "  y_axis:      " << (int)v.y_axis << std::endl
-      << "  z_axis:      " << (int)v.z_axis << std::endl;
+   void swapBytes() {
+      x_axis = convertFloat(x_axis);
+      y_axis = convertFloat(y_axis);
+      z_axis = convertFloat(z_axis);
+   };
 
-    return s;
-  };
+   friend std::ostream& operator << ( std::ostream& s, const AngularVelocityvectorDIS& v ) {
+      s  << "  x_axis:      " << (int)v.x_axis << std::endl
+         << "  y_axis:      " << (int)v.y_axis << std::endl
+         << "  z_axis:      " << (int)v.z_axis << std::endl;
 
-  friend std::ostream& operator << ( std::ostream& s, const AngularVelocityvectorDIS* v )
-  {
+      return s;
+   };
 
-    if ( !v )
-       return s;
-    else
-    {
-       s << *v;
-    }
-    return s;
-  };
+   friend std::ostream& operator << ( std::ostream& s, const AngularVelocityvectorDIS* v ) {
+      if ( !v )
+         return s;
+      else {
+         s << *v;
+      }
+      return s;
+   };
 
-  float	x_axis;
-  float	y_axis;
-  float	z_axis;
+   float x_axis;
+   float y_axis;
+   float z_axis;
 };
 
 //-----------------------------------------------
-// Beam Antenna Pattern Record
-
+// Beam Antenna Pattern Record (288 bits)
+//-----------------------------------------------
 class BeamAntennaPattern{
 public:
-  void swapBytes(){
-    psi                = convertFloat(psi);
-    theta              = convertFloat(theta);
-    phi                = convertFloat(phi);
-    azimuthBeamWidth   = convertFloat(azimuthBeamWidth);
-    elevationBeamWidth = convertFloat(elevationBeamWidth);
-    ez                 = convertFloat(ez);
-    ex                 = convertFloat(ex);
-    phase              = convertFloat(phase);
-  };
 
-  friend std::ostream& operator << ( std::ostream& s, const BeamAntennaPattern& v )
-  {
-    s << "  psi:                   " << v.psi << std::endl
-      << "  theta:                 " << v.theta << std::endl
-      << "  phi:                   " << v.phi << std::endl
-      << "  azimuthBeamWidth:      " << v.azimuthBeamWidth << std::endl
-      << "  elevationBeamWidth:    " << v.elevationBeamWidth << std::endl
-      << "  referenceSystem:       " << (int)v.referenceSystem << std::endl
-      << "  ez:                    " << v.ez << std::endl
-      << "  ex:                    " << v.ex << std::endl
-      << "  phase:                 " << v.phase << std::endl;
+   void swapBytes() {
+      psi                = convertFloat(psi);
+      theta              = convertFloat(theta);
+      phi                = convertFloat(phi);
+      azimuthBeamWidth   = convertFloat(azimuthBeamWidth);
+      elevationBeamWidth = convertFloat(elevationBeamWidth);
+      ez                 = convertFloat(ez);
+      ex                 = convertFloat(ex);
+      phase              = convertFloat(phase);
+   };
 
-    return s;
-  };
+   friend std::ostream& operator << ( std::ostream& s, const BeamAntennaPattern& v ) {
+      s  << "  psi:                   " << v.psi << std::endl
+         << "  theta:                 " << v.theta << std::endl
+         << "  phi:                   " << v.phi << std::endl
+         << "  azimuthBeamWidth:      " << v.azimuthBeamWidth << std::endl
+         << "  elevationBeamWidth:    " << v.elevationBeamWidth << std::endl
+         << "  referenceSystem:       " << (int)v.referenceSystem << std::endl
+         << "  ez:                    " << v.ez << std::endl
+         << "  ex:                    " << v.ex << std::endl
+         << "  phase:                 " << v.phase << std::endl;
 
-  friend std::ostream& operator << ( std::ostream& s, const BeamAntennaPattern* v )
-  {
+      return s;
+   };
 
-    if ( !v )
-       return s;
-    else
-    {
-       s << *v;
-    }
-    return s;
-  };
+   friend std::ostream& operator << ( std::ostream& s, const BeamAntennaPattern* v ) {
 
-  // Beam Direction
-  float psi;
-  float theta;
-  float phi;
-  
-  float azimuthBeamWidth;
-  float elevationBeamWidth;
-  char  referenceSystem;
-  char  padding[3];
-  float ez;
-  float ex;
-  float phase;
+      if ( !v )
+         return s;
+      else {
+         s << *v;
+      }
+      return s;
+   };
+
+   // Beam Direction
+   float psi;
+   float theta;
+   float phi;
+
+   float azimuthBeamWidth;
+   float elevationBeamWidth;
+   char  referenceSystem;
+   char  padding[3];
+   float ez;
+   float ex;
+   float phase;
 };
 
 //-----------------------------------------------
 // Spherical Harmonic Antenna Pattern Record
-
+//-----------------------------------------------
 class SphericalHarmonicAntennaPattern {
 public:
-  // Not Finished
+   // Not Finished
 };
 
 //-----------------------------------------------
-// Articulation Parameter Record
-
+// Articulation Parameter Record (128 bits)
+//-----------------------------------------------
 class ArticulationParameter {
 
 public:
@@ -603,6 +594,7 @@ public:
    };
 
 public:
+
    void swapBytes() {
       id = convertUInt16(id);
       parameterType = convertUInt32(parameterType);
@@ -615,12 +607,11 @@ public:
       }
    };
 
-   friend std::ostream& operator << ( std::ostream& s, const ArticulationParameter& v )
-   {
-      s << "  parameterTypeDesignator: " << (int)v.parameterTypeDesignator << std::endl
-        << "  changeIndicator:         " << (int)v.changeIndicator << std::endl
-        << "  id:                      " << (int)v.id << std::endl
-        << "  parameterType:           " << (int)v.parameterType << std::endl;
+   friend std::ostream& operator << ( std::ostream& s, const ArticulationParameter& v ) {
+      s  << "  parameterTypeDesignator: " << (int)v.parameterTypeDesignator << std::endl
+         << "  changeIndicator:         " << (int)v.changeIndicator << std::endl
+         << "  id:                      " << (int)v.id << std::endl
+         << "  parameterType:           " << (int)v.parameterType << std::endl;
 
       if (v.parameterTypeDesignator == ATTACHED_PART)
          s << v.parameterValue.entityType << std::endl;
@@ -630,447 +621,429 @@ public:
       return s;
    };
 
-  friend std::ostream& operator << ( std::ostream& s, const ArticulationParameter* v )
-  {
+   friend std::ostream& operator << ( std::ostream& s, const ArticulationParameter* v ) {
+      if ( !v )
+         return s;
+      else {
+         s << *v;
+      }
+      return s;
+   };
 
-    if ( !v )
-       return s;
-    else
-    {
-       s << *v;
-    }
-    return s;
-  };
-
-  unsigned char  parameterTypeDesignator;
-  unsigned char  changeIndicator;
-  uint16_t       id;
-  uint32_t       parameterType;
-  union ParameterValue {
-     float value[2];
-     EntityType entityType;
-  } parameterValue;
+   unsigned char  parameterTypeDesignator;
+   unsigned char  changeIndicator;
+   uint16_t       id;
+   uint32_t       parameterType;
+   union ParameterValue {
+      float value[2];
+      EntityType entityType;
+   } parameterValue;
 };
 
 //-----------------------------------------------
 // Burst Descriptor Record
-
+//-----------------------------------------------
 class BurstDescriptor{
 public:
-  void swapBytes(){
-    munision.swapBytes();
-    warhead  = convertUInt16(warhead);
-    fuse     = convertUInt16(fuse);
-    quantity = convertUInt16(quantity);
-    rate     = convertUInt16(rate);
-  };
 
-  friend std::ostream& operator << ( std::ostream& s, const BurstDescriptor& v )
-  {
-    s << "  Munision ID:"
-      << v.munision << std::endl
-      << "  warhead:      " << (int)v.warhead << std::endl
-      << "  fuse:         " << (int)v.fuse << std::endl
-      << "  quantity:     " << (int)v.quantity << std::endl
-      << "  rate:         " << (int)v.rate << std::endl;
+   void swapBytes() {
+      munition.swapBytes();
+      warhead  = convertUInt16(warhead);
+      fuse     = convertUInt16(fuse);
+      quantity = convertUInt16(quantity);
+      rate     = convertUInt16(rate);
+   };
 
-    return s;
-  };
+   friend std::ostream& operator << ( std::ostream& s, const BurstDescriptor& v ) {
+      s  << "  Munition ID:"
+         << v.munition << std::endl
+         << "  warhead:      " << (int)v.warhead << std::endl
+         << "  fuse:         " << (int)v.fuse << std::endl
+         << "  quantity:     " << (int)v.quantity << std::endl
+         << "  rate:         " << (int)v.rate << std::endl;
 
-  friend std::ostream& operator << ( std::ostream& s, const BurstDescriptor* v )
-  {
+      return s;
+   };
 
-    if ( !v )
-       return s;
-    else
-    {
-       s << *v;
-    }
-    return s;
-  };
+   friend std::ostream& operator << ( std::ostream& s, const BurstDescriptor* v ) {
+      if ( !v )
+         return s;
+      else {
+         s << *v;
+      }
+      return s;
+   };
 
-  EntityType munision;
-  uint16_t warhead;
-  uint16_t fuse;
-  uint16_t quantity;
-  uint16_t rate;
+   EntityType munition;
+   uint16_t warhead;
+   uint16_t fuse;
+   uint16_t quantity;
+   uint16_t rate;
 };
 
 //-----------------------------------------------
 // Clock Time Record
-
+//-----------------------------------------------
 class ClockTime{
 public:
-  void swapBytes(){
-    hour            = convertFloat(hour);
-    timePastTheHour = convertFloat(timePastTheHour);
-  };
 
-  friend std::ostream& operator << ( std::ostream& s, const ClockTime& v )
-  {
-    s << "hour:            " << v.hour << std::endl
-      << "timePastTheHour: " << v.timePastTheHour << std::endl;
+   void swapBytes() {
+      hour            = convertFloat(hour);
+      timePastTheHour = convertFloat(timePastTheHour);
+   };
 
-    return s;
-  };
+   friend std::ostream& operator << ( std::ostream& s, const ClockTime& v ) {
+      s  << "hour:            " << v.hour << std::endl
+         << "timePastTheHour: " << v.timePastTheHour << std::endl;
 
-  friend std::ostream& operator << ( std::ostream& s, const ClockTime* v )
-  {
+      return s;
+   };
 
-    if ( !v )
-       return s;
-    else
-    {
-       s << *v;
-    }
-    return s;
-  };
+   friend std::ostream& operator << ( std::ostream& s, const ClockTime* v ) {
+      if ( !v )
+         return s;
+      else {
+         s << *v;
+      }
+      return s;
+   };
 
-  float hour;
-  float timePastTheHour;
+   float hour;
+   float timePastTheHour;
 };
 
 //-----------------------------------------------
 // Data Query Datum Specification Record
-
+//-----------------------------------------------
 class DataQueryDatumSpecification{
 public:
-  // Not Finished
+   // Not Finished
 }; 
 
 //-----------------------------------------------
 // Datum Specification Record
-
+//-----------------------------------------------
 class DatumSpecification{
 public:
-  // Not Finished
+   // Not Finished
 };
 
 
 
 //-----------------------------------------------
-// Euler Angles Record
-
+// Euler Angles Record (96)
+//-----------------------------------------------
 class EulerAngles{
 public:
 
-  float psi;
-  float theta;
-  float phi;
+   float psi;
+   float theta;
+   float phi;
 
-  EulerAngles(){};
+   EulerAngles() {};
 
-  EulerAngles(float a,float b,float c){
-    psi   = a;
-    theta = b;
-    phi   = c;
-  };
+   EulerAngles(float a,float b,float c){
+      psi   = a;
+      theta = b;
+      phi   = c;
+   };
 
-  ~EulerAngles(){};
+   ~EulerAngles() {};
 
-  void swapBytes(){
-    psi   = convertFloat(psi);
-    theta = convertFloat(theta);
-    phi   = convertFloat(phi);
-  };
+   void swapBytes() {
+      psi   = convertFloat(psi);
+      theta = convertFloat(theta);
+      phi   = convertFloat(phi);
+   };
 
-  friend std::ostream& operator << ( std::ostream& s, const EulerAngles& v )
-  {
-    s << "  psi:          " << v.psi << std::endl
-      << "  theta:        " << v.theta << std::endl
-      << "  phi:          " << v.phi << std::endl;
+   friend std::ostream& operator << ( std::ostream& s, const EulerAngles& v ) {
+      s  << "  psi:          " << v.psi << std::endl
+         << "  theta:        " << v.theta << std::endl
+         << "  phi:          " << v.phi << std::endl;
 
-    return s;
-  };
+      return s;
+   };
 
-  friend std::ostream& operator << ( std::ostream& s, const EulerAngles* v )
-  {
+   friend std::ostream& operator << ( std::ostream& s, const EulerAngles* v ) {
+      if ( !v )
+         return s;
+      else {
+         s << *v;
+      }
+      return s;
+   };
 
-    if ( !v )
-       return s;
-    else
-    {
-       s << *v;
-    }
-    return s;
-  };
+   /*
+   inline EulerAngles operator *(const DISmatrix& _v) {
+   float x,y,z;
+   x = _v.X0Y0 * psi + _v.X1Y0 * theta + _v.X2Y0 * phi;
+   y = _v.X0Y1 * psi + _v.X1Y1 * theta + _v.X2Y1 * phi;
+   z = _v.X0Y2 * psi + _v.X1Y2 * theta + _v.X2Y2 * phi;
+   return EulerAngles( x,y,z );
+   };
+   */
 
-/*
-  inline EulerAngles operator *(const DISmatrix& _v) {
-      float x,y,z;
-      x = _v.X0Y0 * psi + _v.X1Y0 * theta + _v.X2Y0 * phi;
-      y = _v.X0Y1 * psi + _v.X1Y1 * theta + _v.X2Y1 * phi;
-      z = _v.X0Y2 * psi + _v.X1Y2 * theta + _v.X2Y2 * phi;
-      return EulerAngles( x,y,z );
-  };
-*/
-  inline void operator =(const EulerAngles& _s) {
+   inline void operator =(const EulerAngles& _s) {
       psi   = _s.psi;
       theta = _s.theta;
       phi   = _s.phi;
-  };
-};
-
-class SimEulerAngles{
-public:
-
-  float roll;
-  float pitch;
-  float hdg;
-
-  SimEulerAngles(){};
-
-  SimEulerAngles(float a,float b,float c){
-    roll  = a;
-    pitch = b;
-    hdg   = c;
-  };
-
-  ~SimEulerAngles(){};
-
-  void swapBytes(){
-    roll  = convertFloat(roll);
-    pitch = convertFloat(pitch);
-    hdg   = convertFloat(hdg);
-  };
-
-  friend std::ostream& operator << ( std::ostream& s, const SimEulerAngles& v )
-  {
-    s << "  roll:         " << v.roll << std::endl
-      << "  pitch:        " << v.pitch << std::endl
-      << "  hdg:          " << v.hdg << std::endl;
-
-    return s;
-  };
-
-  friend std::ostream& operator << ( std::ostream& s, const SimEulerAngles* v )
-  {
-
-    if ( !v )
-       return s;
-    else
-    {
-       s << *v;
-    }
-    return s;
-  };
-
-  inline void operator =(const SimEulerAngles& _s) {
-      roll  = _s.roll;
-      pitch = _s.pitch;
-      hdg   = _s.hdg;
-  };
+   };
 };
 
 //-----------------------------------------------
-// Event Identifier Record
+// Sim Euler Angles
+//-----------------------------------------------
+class SimEulerAngles{
+public:
 
+   float roll;
+   float pitch;
+   float hdg;
+
+   SimEulerAngles() {};
+
+   SimEulerAngles(float a,float b,float c){
+      roll  = a;
+      pitch = b;
+      hdg   = c;
+   };
+
+   ~SimEulerAngles() {};
+
+   void swapBytes() {
+      roll  = convertFloat(roll);
+      pitch = convertFloat(pitch);
+      hdg   = convertFloat(hdg);
+   };
+
+   friend std::ostream& operator << ( std::ostream& s, const SimEulerAngles& v ) {
+      s  << "  roll:         " << v.roll << std::endl
+         << "  pitch:        " << v.pitch << std::endl
+         << "  hdg:          " << v.hdg << std::endl;
+
+      return s;
+   };
+
+   friend std::ostream& operator << ( std::ostream& s, const SimEulerAngles* v ) {
+      if ( !v )
+         return s;
+      else {
+         s << *v;
+      }
+      return s;
+   };
+
+   inline void operator =(const SimEulerAngles& _s) {
+      roll  = _s.roll;
+      pitch = _s.pitch;
+      hdg   = _s.hdg;
+   };
+};
+
+//-----------------------------------------------
+// Event Identifier Record (48 bits)
+//-----------------------------------------------
 class EventIdentifier{
 public:
-  void swapBytes(){
-    simulationID.swapBytes();
-    eventNumber = convertUInt16(eventNumber);
-  };
 
-  friend std::ostream& operator << ( std::ostream& s, const EventIdentifier& v )
-  {
-    s << "  Event Identifier:" << std::endl
-      << v.simulationID 
-      << "  eventNumber:     " << (int)v.eventNumber << std::endl;
+   void swapBytes() {
+      simulationID.swapBytes();
+      eventNumber = convertUInt16(eventNumber);
+   };
 
-    return s;
-  };
+   friend std::ostream& operator << ( std::ostream& s, const EventIdentifier& v ) {
+      s  << "  Event Identifier:" << std::endl
+         << v.simulationID 
+         << "  eventNumber:     " << (int)v.eventNumber << std::endl;
 
-  friend std::ostream& operator << ( std::ostream& s, const EventIdentifier* v )
-  {
+      return s;
+   };
 
-    if ( !v )
-       return s;
-    else
-    {
-       s << *v;
-    }
-    return s;
-  };
+   friend std::ostream& operator << ( std::ostream& s, const EventIdentifier* v ) {
+      if ( !v )
+         return s;
+      else {
+         s << *v;
+      }
+      return s;
+   };
 
-  simulationAddressDIS simulationID;
-  uint16_t             eventNumber;
+   simulationAddressDIS simulationID;
+   uint16_t             eventNumber;
 };
 
 //-----------------------------------------------
 // Fixed Datum Record
-
+//-----------------------------------------------
 class FixedDatum{
 public:
-  void swapBytes(){
-    fixedDatumID    = convertUInt32(fixedDatumID);
-    fixedDatumValue = convertUInt32(fixedDatumValue);
-  };
 
-  uint32_t fixedDatumID;
-  uint32_t fixedDatumValue;
+   void swapBytes() {
+      fixedDatumID    = convertUInt32(fixedDatumID);
+      fixedDatumValue = convertUInt32(fixedDatumValue);
+   };
+
+   uint32_t fixedDatumID;
+   uint32_t fixedDatumValue;
 };
 
 
 //-----------------------------------------------
-// PDU Header Record
-
-class PDUHeader{
+// PDU Header Record (96 bits)
+//-----------------------------------------------
+class PDUHeader {
 public:
-  void swapBytes(){
-    timeStamp = convertUInt32(timeStamp);
-    length    = convertUInt16(length);
-  };
- 
-  friend std::ostream& operator << ( std::ostream& s, const PDUHeader& v )
-  {
-    s << "  protocolVersion:     " << int(v.protocolVersion) << std::endl
-      << "  exerciseIdentifier:  " << int(v.exerciseIdentifier) << std::endl
-      << "  PDUType:             " << int(v.PDUType) << std::endl
-      << "  protocolFamily:      " << int(v.protocolFamily) << std::endl
-      << "  timeStamp:           " << v.timeStamp << std::endl
-      << "  length:              " << v.length << std::endl;
 
-    return s;
-  };
+   void swapBytes() {
+      timeStamp = convertUInt32(timeStamp);
+      length    = convertUInt16(length);
+   };
 
-  friend std::ostream& operator << ( std::ostream& s, const PDUHeader* v )
-  {
+   friend std::ostream& operator << ( std::ostream& s, const PDUHeader& v ) {
+      s  << "  protocolVersion:     " << int(v.protocolVersion) << std::endl
+         << "  exerciseIdentifier:  " << int(v.exerciseIdentifier) << std::endl
+         << "  PDUType:             " << int(v.PDUType) << std::endl
+         << "  protocolFamily:      " << int(v.protocolFamily) << std::endl
+         << "  timeStamp:           " << v.timeStamp << std::endl
+         << "  length:              " << v.length << std::endl
+         << "  status:              " << v.status << std::endl;
 
-    if ( !v )
-       return s;
-    else
-    {
-       s << *v;
-    }
-    return s;
-  };
- 
-  unsigned char  protocolVersion;
-  unsigned char  exerciseIdentifier;
-  unsigned char  PDUType;
-  unsigned char  protocolFamily;
-  uint32_t       timeStamp;
-  uint16_t       length;
-  uint16_t       padding;
+      return s;
+   };
+
+   friend std::ostream& operator << ( std::ostream& s, const PDUHeader* v ) {
+      if ( !v )
+         return s;
+      else {
+         s << *v;
+      }
+      return s;
+   };
+
+   unsigned char  protocolVersion;
+   unsigned char  exerciseIdentifier;
+   unsigned char  PDUType;
+   unsigned char  protocolFamily;
+   uint32_t       timeStamp;
+   uint16_t       length;
+   uint8_t        status;     // IEEE P1278.1/D15
+   uint8_t        padding;
 };
 
 //-----------------------------------------------
 // Simulation Management PDU Header Record
-
+//-----------------------------------------------
 class SimulationManagementPDUHeader{
 public:
-  void swapBytes(){
-    header.swapBytes();
-    originatingEntityID.swapBytes();
-    receivingEntityID.swapBytes();
-  };
 
-  friend std::ostream& operator << ( std::ostream& s, const SimulationManagementPDUHeader& v )
-  {
-    s << "Header:" << std::endl
-      << v.header << std::endl
-      << "Originating Entity ID:" << std::endl
-      << v.originatingEntityID << std::endl
-      << "Receiving Entity ID:" << std::endl
-      << v.receivingEntityID << std::endl;
+   void swapBytes() {
+      header.swapBytes();
+      originatingEntityID.swapBytes();
+      receivingEntityID.swapBytes();
+   };
 
-    return s;
-  };
+   friend std::ostream& operator << ( std::ostream& s, const SimulationManagementPDUHeader& v ) {
+      s  << "Header:" << std::endl
+         << v.header << std::endl
+         << "Originating Entity ID:" << std::endl
+         << v.originatingEntityID << std::endl
+         << "Receiving Entity ID:" << std::endl
+         << v.receivingEntityID << std::endl;
 
-  friend std::ostream& operator << ( std::ostream& s, const SimulationManagementPDUHeader* v )
-  {
+      return s;
+   };
 
-    if ( !v )
-       return s;
-    else
-    {
-       s << *v;
-    }
-    return s;
-  };
+   friend std::ostream& operator << ( std::ostream& s, const SimulationManagementPDUHeader* v ) {
+      if ( !v )
+         return s;
+      else {
+         s << *v;
+      }
+      return s;
+   };
 
-  PDUHeader        header;
-  entityIdentifierDIS originatingEntityID;
-  entityIdentifierDIS receivingEntityID;
+   PDUHeader        header;
+   entityIdentifierDIS originatingEntityID;
+   entityIdentifierDIS receivingEntityID;
 };
 
 //-----------------------------------------------
 // Supply Quantity Record
-
+//-----------------------------------------------
 class SupplyQuantity{
 public:
-  void swapBytes(){
-    supplyType.swapBytes();
-    quantity = convertFloat(quantity);
-  };
 
-  friend std::ostream& operator << ( std::ostream& s, const SupplyQuantity& v )
-  {
-    s << "Supply Type:" << std::endl
-      << v.supplyType << std::endl
-      << "Quantity:" << std::endl
-      << v.quantity << std::endl;
+   void swapBytes() {
+      supplyType.swapBytes();
+      quantity = convertFloat(quantity);
+   };
 
-    return s;
-  };
+   friend std::ostream& operator << ( std::ostream& s, const SupplyQuantity& v ) {
+      s  << "Supply Type:" << std::endl
+         << v.supplyType << std::endl
+         << "Quantity:" << std::endl
+         << v.quantity << std::endl;
 
-  friend std::ostream& operator << ( std::ostream& s, const SupplyQuantity* v )
-  {
+      return s;
+   };
 
-    if ( !v )
-       return s;
-    else
-    {
-       s << *v;
-    }
-    return s;
-  };
+   friend std::ostream& operator << ( std::ostream& s, const SupplyQuantity* v ) {
+      if ( !v )
+         return s;
+      else {
+         s << *v;
+      }
+      return s;
+   };
 
-  EntityType supplyType;
-  float      quantity;
+   EntityType supplyType;
+   float      quantity;
 };
 
-
+//-----------------------------------------------
+// System ID
+//-----------------------------------------------
 class SystemID{
 public:
-  void swapBytes(){
-    systemType = convertUInt16(systemType);
-    systemName = convertUInt16(systemName);
-  };
 
-  friend std::ostream& operator << ( std::ostream &s, const SystemID &v )
-  {
-    s << "  System Type:    " << v.systemType << std::endl
-      << "  System Name:    " << v.systemName << std::endl;
-    s.width(2);
-    s.fill('0'); 
-    s << "  System Mode:    " << std::hex << (int)v.systemMode << std::endl;
-    s.width(2);
-    s.fill('0'); 
-    s << "  Change/Options: " << (int)v.options << std::dec << std::endl; 
+   void swapBytes() {
+      systemType = convertUInt16(systemType);
+      systemName = convertUInt16(systemName);
+   };
 
-    return s;
-  };
+   friend std::ostream& operator << ( std::ostream &s, const SystemID &v ) {
+      s  << "  System Type:    " << v.systemType << std::endl
+         << "  System Name:    " << v.systemName << std::endl;
 
-  friend std::ostream& operator << ( std::ostream &s, const SystemID *v )
-  {
+      s.width(2);
+      s.fill('0'); 
+      s << "  System Mode:    " << std::hex << (int)v.systemMode << std::endl;
 
-    if ( !v )
-       return s;
-    else
-    {
-       s << *v;
-    }
-    return s;
-  };
+      s.width(2);
+      s.fill('0'); 
+      s << "  Change/Options: " << (int)v.options << std::dec << std::endl; 
 
-  uint16_t      systemType;
-  uint16_t      systemName;
-  unsigned char  systemMode;
-  unsigned char  options;
+      return s;
+   };
+
+   friend std::ostream& operator << ( std::ostream &s, const SystemID *v ) {
+      if ( !v )
+         return s;
+      else {
+         s << *v;
+      }
+      return s;
+   };
+
+   uint16_t      systemType;
+   uint16_t      systemName;
+   unsigned char  systemMode;
+   unsigned char  options;
 };
 
+//-----------------------------------------------
+// Fundamental Op Data (128 bits)
+//-----------------------------------------------
 class FundamentalOpData{
 public:
 
@@ -1087,99 +1060,99 @@ public:
       param6 = 0;
    };
 
-  void swapBytes(){
-    param1 = convertUInt16(param1);
-    param2 = convertUInt16(param2);
-    param3 = convertUInt16(param3);
-    param4 = convertUInt16(param4);
-    param5 = convertUInt16(param5);
-    param6 = convertUInt16(param6);
-  };
+   void swapBytes() {
+      param1 = convertUInt16(param1);
+      param2 = convertUInt16(param2);
+      param3 = convertUInt16(param3);
+      param4 = convertUInt16(param4);
+      param5 = convertUInt16(param5);
+      param6 = convertUInt16(param6);
+   };
 
-  friend std::ostream& operator << ( std::ostream &s, const FundamentalOpData &v )
-  {
-    s << "  System Status:      " << (int)v.systemStatus << std::endl
-      << "  Alternate Param4:   " << (int)v.alternateParam4 << std::endl
-      << "  Information Layers: " << (int)v.informationLayers << std::endl
-      << "  Modifier:           " << (int)v.modifier << std::endl;
+   friend std::ostream& operator << ( std::ostream &s, const FundamentalOpData &v ) {
+      s  << "  System Status:      " << (int)v.systemStatus << std::endl
+         << "  Alternate Param4:   " << (int)v.alternateParam4 << std::endl
+         << "  Information Layers: " << (int)v.informationLayers << std::endl
+         << "  Modifier:           " << (int)v.modifier << std::endl;
 
-    s.width(2);
-    s.fill('0'); 
-    s << "    Parameter 1:    " << std::hex << (int)v.param1 << std::endl;
-    s.width(2);
-    s.fill('0'); 
-    s << "    Parameter 2:    " << std::hex << (int)v.param2 << std::endl;
-    s.width(2);
-    s.fill('0'); 
-    s << "    Parameter 3:    " << std::hex << (int)v.param3 << std::endl;
-    s.width(2);
-    s.fill('0'); 
-    s << "    Parameter 4:    " << std::hex << (int)v.param4 << std::endl;
-    s.width(2);
-    s.fill('0'); 
-    s << "    Parameter 5:    " << std::hex << (int)v.param5 << std::endl;
-    s.width(2);
-    s.fill('0'); 
-    s << "    Parameter 6:    " << std::hex << (int)v.param6 << std::endl;
-    s << std::dec;
-    return s;
-  };
+      s.width(2);
+      s.fill('0'); 
+      s << "    Parameter 1:    " << std::hex << (int)v.param1 << std::endl;
 
-  friend std::ostream& operator << ( std::ostream &s, const FundamentalOpData *v )
-  {
+      s.width(2);
+      s.fill('0'); 
+      s << "    Parameter 2:    " << std::hex << (int)v.param2 << std::endl;
 
-    if ( !v )
-       return s;
-    else
-    {
-       s << *v;
-    }
-    return s;
-  };
+      s.width(2);
+      s.fill('0'); 
+      s << "    Parameter 3:    " << std::hex << (int)v.param3 << std::endl;
 
-  unsigned char   systemStatus;
-  unsigned char   alternateParam4;
-  unsigned char   informationLayers;
-  unsigned char   modifier;
-  uint16_t        param1;
-  uint16_t        param2;
-  uint16_t        param3;
-  uint16_t        param4;
-  uint16_t        param5;
-  uint16_t        param6;
+      s.width(2);
+      s.fill('0'); 
+      s << "    Parameter 4:    " << std::hex << (int)v.param4 << std::endl;
+
+      s.width(2);
+      s.fill('0'); 
+      s << "    Parameter 5:    " << std::hex << (int)v.param5 << std::endl;
+
+      s.width(2);
+      s.fill('0'); 
+      s << "    Parameter 6:    " << std::hex << (int)v.param6 << std::endl;
+
+      s << std::dec;
+      return s;
+   };
+
+   friend std::ostream& operator << ( std::ostream &s, const FundamentalOpData *v ) {
+      if ( !v )
+         return s;
+      else {
+         s << *v;
+      }
+      return s;
+   };
+
+   unsigned char   systemStatus;
+   unsigned char   alternateParam4;
+   unsigned char   informationLayers;
+   unsigned char   modifier;
+   uint16_t        param1;
+   uint16_t        param2;
+   uint16_t        param3;
+   uint16_t        param4;
+   uint16_t        param5;
+   uint16_t        param6;
 };
 
 //-----------------------------------------------
 // Variable Datum Record
+//-----------------------------------------------
 struct VariableDatum {
 
    uint32_t   variableDatumID;
    uint32_t   variableDatumLength;
 
    // Swap bytes 'to' or 'from' the network.
-   void swapBytes(){
+   void swapBytes() {
       variableDatumID     = convertUInt32(variableDatumID);
       variableDatumLength = convertUInt32(variableDatumLength);
    };
 
-   unsigned int getSize() {	
+   unsigned int getSize() {
       return variableDatumLength/8;
    };
 
    // Temp connection to data, better way...
    unsigned char* getData(){return ((unsigned char*)&variableDatumLength)+sizeof(long);};
 
-
-   friend std::ostream& operator << ( std::ostream& s, const VariableDatum&  v)
-   {
-         s << "  variableDatumID:       " << (int)v.variableDatumID << std::endl
+   friend std::ostream& operator << ( std::ostream& s, const VariableDatum&  v) {
+      s  << "  variableDatumID:       " << (int)v.variableDatumID << std::endl
          << "  variableDatumLength:   " << (int)v.variableDatumLength << std::endl;
 
       return s;
    };
 
-   friend std::ostream& operator << ( std::ostream& s, const VariableDatum* const v )
-   {
+   friend std::ostream& operator << ( std::ostream& s, const VariableDatum* const v ) {
       if ( v == 0 )
          return s;
       else {
@@ -1191,29 +1164,26 @@ struct VariableDatum {
 };
 
 //-----------------------------------------------
-// Entity Marking Record
+// Entity Marking Record (96 bits)
 //-----------------------------------------------
 struct EntityMarking {
 
-   unsigned char characterSet;      // Marking character set
+   unsigned char characterSet;         // Marking character set
 
    static const uint32_t BUFF_SIZE = 11;
-   char marking[BUFF_SIZE];         // Entity marking buffer
+   unsigned char marking[BUFF_SIZE];   // Entity marking buffer
 
-   friend std::ostream& operator << ( std::ostream& s, const EntityMarking& v )
-   {
-      s << "  Character Set:   " << (int)v.characterSet << std::endl
-        << "  Markings:        " << v.marking << std::endl;
+   friend std::ostream& operator << ( std::ostream& s, const EntityMarking& v ) {
+      s  << "  Character Set:   " << (int)v.characterSet << std::endl
+         << "  Markings:        " << v.marking << std::endl;
 
       return s;
    };
 
-   friend std::ostream& operator << ( std::ostream& s, const EntityMarking* v )
-   {
+   friend std::ostream& operator << ( std::ostream& s, const EntityMarking* v ) {
       if ( v == 0 )
          return s;
-      else
-      {
+      else {
          s << *v;
       }
       return s;
@@ -1222,7 +1192,7 @@ struct EntityMarking {
 
 
 //-----------------------------------------------
-// Radio Entity Type Record
+// Radio Entity Type Record (64 bits)
 //-----------------------------------------------
 struct RadioEntityType {
 
@@ -1255,20 +1225,20 @@ struct RadioEntityType {
          category == s2.category && 
          nomenclatureVersion == s2.nomenclatureVersion && 
          nomenclature == s2.nomenclature
-      );
+         );
    }
+
    bool operator!=(const RadioEntityType& a) const {
       return !(*this == a);
    }
 
    // Swap bytes 'to' or 'from' the network.
-   void swapBytes(){
+   void swapBytes() {
       country      = convertUInt16(country);
       nomenclature = convertUInt16(nomenclature);
    };
 
-   friend std::ostream& operator << ( std::ostream& s, const RadioEntityType& v )
-   {
+   friend std::ostream& operator << ( std::ostream& s, const RadioEntityType& v ) {
       s  << "  kind:                " << (int)v.kind << std::endl
          << "  domain:              " << (int)v.domain << std::endl
          << "  country:             " << (int)v.country << std::endl
@@ -1279,8 +1249,7 @@ struct RadioEntityType {
       return s;
    };
 
-   friend std::ostream& operator << ( std::ostream& s, const RadioEntityType* const v )
-   {
+   friend std::ostream& operator << ( std::ostream& s, const RadioEntityType* const v ) {
       if ( v == 0 )
          return s;
       else {
@@ -1291,10 +1260,11 @@ struct RadioEntityType {
 
 };
 
+
 //-----------------------------------------------
-// Modulation Type Record
+// Modulation Type Record (64 bits)
 //-----------------------------------------------
-struct ModulationType{
+struct ModulationType {
 
    uint16_t spreadSpectrum;         // Spread Spectrum
    uint16_t majorModulationType;    // Major Modulation type
@@ -1321,6 +1291,7 @@ struct ModulationType{
          system == s2.system
          );
    }
+
    bool operator!=(const ModulationType& a) const {
       return !(*this == a);
    }
@@ -1333,8 +1304,7 @@ struct ModulationType{
       system              = convertUInt16(system);
    };
 
-   friend std::ostream& operator << ( std::ostream& s, const ModulationType& v )
-   {
+   friend std::ostream& operator << ( std::ostream& s, const ModulationType& v ) {
       s  << "  spreadSpectrum:      " << v.spreadSpectrum << std::endl
          << "  majorModulationType: " << v.majorModulationType << std::endl
          << "  detail:              " << v.detail << std::endl
@@ -1343,8 +1313,7 @@ struct ModulationType{
       return s;
    };
 
-   friend std::ostream& operator << ( std::ostream& s, const ModulationType* const v )
-   {
+   friend std::ostream& operator << ( std::ostream& s, const ModulationType* const v ) {
       if ( v == 0 )
          return s;
       else {
@@ -1356,9 +1325,8 @@ struct ModulationType{
 };
 
 
-
 //-----------------------------------------------
-// vectorDIS Record
+// vectorDIS Record (96 bits)
 //-----------------------------------------------
 struct vectorDIS {
 
@@ -1382,8 +1350,9 @@ struct vectorDIS {
          component[0] == s2.component[0] && 
          component[1] == s2.component[1] && 
          component[2] == s2.component[2]
-         );
+      );
    }
+
    bool operator!=(const vectorDIS& a) const {
       return !(*this == a);
    }
@@ -1395,17 +1364,15 @@ struct vectorDIS {
       component[2] = convertFloat(component[2]);
    }
 
-   friend std::ostream& operator << ( std::ostream& s, const vectorDIS& v )
-   {
-      s << "  component[0]:       " << v.component[0] << std::endl
-        << "  component[1]:       " << v.component[1] << std::endl
-        << "  component[2]:       " << v.component[2] << std::endl;
+   friend std::ostream& operator << ( std::ostream& s, const vectorDIS& v ) {
+      s  << "  component[0]:       " << v.component[0] << std::endl
+         << "  component[1]:       " << v.component[1] << std::endl
+         << "  component[2]:       " << v.component[2] << std::endl;
 
       return s;
    }
 
-   friend std::ostream& operator << ( std::ostream& s, const vectorDIS* const v )
-   {
+   friend std::ostream& operator << ( std::ostream& s, const vectorDIS* const v ) {
       if ( v == 0 )
          return s;
       else {
@@ -1441,7 +1408,7 @@ inline vectorDIS vectorDIS::operator *(const double _s) const
 
 
 //-----------------------------------------------
-// World Coordinates Record
+// World Coordinates Record (192 bits)
 //-----------------------------------------------
 struct WorldCoordinates {
 
@@ -1467,6 +1434,7 @@ struct WorldCoordinates {
          Z_coord == s2.Z_coord
          );
    }
+
    bool operator!=(const WorldCoordinates& a) const {
       return !(*this == a);
    }
@@ -1478,8 +1446,7 @@ struct WorldCoordinates {
       Z_coord = convertDouble((double)Z_coord);
    }
 
-   friend std::ostream& operator << ( std::ostream& s, const WorldCoordinates& v )
-   {
+   friend std::ostream& operator << ( std::ostream& s, const WorldCoordinates& v ) {
       s  << "  X_coord:       " << (double)v.X_coord << std::endl
          << "  Y_coord:       " << (double)v.Y_coord << std::endl
          << "  Z_coord:       " << (double)v.Z_coord << std::endl;
@@ -1487,8 +1454,7 @@ struct WorldCoordinates {
       return s;
    };
 
-   friend std::ostream& operator << ( std::ostream& s, const WorldCoordinates* const v )
-   {
+   friend std::ostream& operator << ( std::ostream& s, const WorldCoordinates* const v ) {
       if ( v == 0 )
          return s;
       else {
@@ -1505,16 +1471,16 @@ struct WorldCoordinates {
       return WorldCoordinates( _s.X_coord - _v.component[0], _s.Y_coord - _v.component[1], _s.Z_coord - _v.component[2] );
    };
 
-/*
-  friend inline WorldCoordinates operator +(const vectorDIS& _v,const WorldCoordinates& _s) {
-      return WorldCoordinates( _s.X_coord + _v.component[0], _s.Y_coord + _v.component[1], _s.Z_coord + _v.component[2] );
-  };
+   /*
+   friend inline WorldCoordinates operator +(const vectorDIS& _v,const WorldCoordinates& _s) {
+   return WorldCoordinates( _s.X_coord + _v.component[0], _s.Y_coord + _v.component[1], _s.Z_coord + _v.component[2] );
+   };
 
-  friend inline WorldCoordinates operator -(const vectorDIS& _v,const WorldCoordinates& _s) {
-      return WorldCoordinates( _s.X_coord - _v.component[0], _s.Y_coord - _v.component[1], _s.Z_coord - _v.component[2] );
-  };
-*/
-  
+   friend inline WorldCoordinates operator -(const vectorDIS& _v,const WorldCoordinates& _s) {
+   return WorldCoordinates( _s.X_coord - _v.component[0], _s.Y_coord - _v.component[1], _s.Z_coord - _v.component[2] );
+   };
+   */
+
 };
 
 inline vectorDIS vectorDIS::operator +(const WorldCoordinates& _s) const
@@ -1547,7 +1513,7 @@ struct SimCoordinates {
       lon = _v.lon;
       alt = _v.alt;
    }
- 
+
    // Compare to another SimCoordinates structure
    bool operator==(const SimCoordinates& s2) const {
       return (
@@ -1556,6 +1522,7 @@ struct SimCoordinates {
          alt == s2.alt
          );
    }
+
    bool operator!=(const SimCoordinates& a) const {
       return !(*this == a);
    }
@@ -1567,8 +1534,7 @@ struct SimCoordinates {
       alt = convertDouble(alt);
    }
 
-   friend std::ostream& operator << ( std::ostream& s, const SimCoordinates& v )
-   {
+   friend std::ostream& operator << ( std::ostream& s, const SimCoordinates& v ) {
       s  << "  lat:       " << (double)v.lat << std::endl
          << "  lon:       " << (double)v.lon << std::endl
          << "  alt:       " << (double)v.alt << std::endl;
@@ -1585,7 +1551,7 @@ struct SimCoordinates {
       }
       return s;
    }
-  
+
 };
 
 
@@ -1597,7 +1563,6 @@ struct TrackJamTargets {
    entityIdentifierDIS targetID; // Track/Jam target ID
    unsigned char emitterID;      // Target's emitter ID being jammed
    unsigned char beamID;         // Target's beam ID being jammed
-
 
    // Constructor(s)
    TrackJamTargets() : targetID(), emitterID(0), beamID(0) {}
@@ -1618,18 +1583,18 @@ struct TrackJamTargets {
          beamID == s2.beamID 
          );
    }
+
    bool operator!=(const TrackJamTargets& a) const {
       return !(*this == a);
    }
 
    // Swap bytes 'to' or 'from' the network.
-   void swapBytes(){
+   void swapBytes() {
       targetID.swapBytes();
    }
 
    // Friendly print function
-   friend std::ostream& operator << ( std::ostream& s, const TrackJamTargets& v )
-   {
+   friend std::ostream& operator << ( std::ostream& s, const TrackJamTargets& v ) {
       s  << "Target ID:       " << std::endl << v.targetID
          << "  emitterID:     " << (int)v.emitterID << std::endl
          << "  beamID:        " << (int)v.beamID << std::endl;
@@ -1637,8 +1602,7 @@ struct TrackJamTargets {
       return s;
    }
 
-   friend std::ostream& operator << ( std::ostream& s, const TrackJamTargets* const v )
-   {
+   friend std::ostream& operator << ( std::ostream& s, const TrackJamTargets* const v ) {
       if ( v == 0 )
          return s;
       else
@@ -1668,7 +1632,7 @@ struct FundamentalParameterData {
 
    // Constructor(s)
    FundamentalParameterData() : 
-      frequency(0), frequencyRange(0), effectiveRadiatedPower(0), pulseRepetitiveFrequency(0),
+   frequency(0), frequencyRange(0), effectiveRadiatedPower(0), pulseRepetitiveFrequency(0),
       pulseWidth(0), beamAzimuthCenter(0), beamAzimuthSweep(0), beamElevationCenter(0),
       beamElevationSweep(0), beamSweepSync(0) { }
 
@@ -1687,19 +1651,18 @@ struct FundamentalParameterData {
    }
 
    // Compare to another FundamentalParameterData structure
-   bool operator==(const FundamentalParameterData& s2) const
-   {
+   bool operator==(const FundamentalParameterData& s2) const {
       return (
-         frequency == s2.frequency && 
-         frequencyRange == s2.frequencyRange && 
-         effectiveRadiatedPower == s2.effectiveRadiatedPower && 
-         pulseRepetitiveFrequency == s2.pulseRepetitiveFrequency && 
-         pulseWidth == s2.pulseWidth && 
-         beamAzimuthCenter == s2.beamAzimuthCenter && 
-         beamAzimuthSweep == s2.beamAzimuthSweep && 
-         beamElevationCenter == s2.beamElevationCenter && 
-         beamElevationSweep == s2.beamElevationSweep && 
-         beamSweepSync == s2.beamSweepSync
+            frequency == s2.frequency && 
+            frequencyRange == s2.frequencyRange && 
+            effectiveRadiatedPower == s2.effectiveRadiatedPower && 
+            pulseRepetitiveFrequency == s2.pulseRepetitiveFrequency && 
+            pulseWidth == s2.pulseWidth && 
+            beamAzimuthCenter == s2.beamAzimuthCenter && 
+            beamAzimuthSweep == s2.beamAzimuthSweep && 
+            beamElevationCenter == s2.beamElevationCenter && 
+            beamElevationSweep == s2.beamElevationSweep && 
+            beamSweepSync == s2.beamSweepSync
          );
    }
    bool operator!=(const FundamentalParameterData& a) const {
@@ -1828,10 +1791,10 @@ struct EmitterBeamData {
 
    // Constructor(s)
    EmitterBeamData() :
-      beamDataLength(0), beamIDNumber(0), beamParameterIndex(0), parameterData(),
+   beamDataLength(0), beamIDNumber(0), beamParameterIndex(0), parameterData(),
       beamFunction(0), numberOfTargetsInTrack(0), highDensityTracks(0), beamStatus(0),
       jammingTechnique() { }
-      //jammingModeSequence(0) { }
+   //jammingModeSequence(0) { }
 
    // Assignment operator
    void operator=(const EmitterBeamData& _v) {
@@ -1854,7 +1817,7 @@ struct EmitterBeamData {
       TrackJamTargets* tjt = 0;
       if (idx < numberOfTargetsInTrack) {
          unsigned char* p = ((unsigned char*)this) + sizeof(*this) + (sizeof(TrackJamTargets) * idx);
-         tjt = (TrackJamTargets*) p;	   
+         tjt = (TrackJamTargets*) p;
       }
       return tjt;
    }
@@ -1862,7 +1825,7 @@ struct EmitterBeamData {
       const TrackJamTargets* tjt = 0;
       if (idx < numberOfTargetsInTrack) {
          unsigned char* p = ((unsigned char*)this) + sizeof(*this) + (sizeof(TrackJamTargets) * idx);
-         tjt = (const TrackJamTargets*) p;	   
+         tjt = (const TrackJamTargets*) p;
       }
       return tjt;
    }
@@ -1910,7 +1873,7 @@ struct EmitterBeamData {
          << "  numberOfTargetsInTrack: " << (long)v.numberOfTargetsInTrack << std::endl
          << "  highDensityTracks:      " << (long)v.highDensityTracks << std::endl
          << "  jammingTechnique:       " << v.jammingTechnique << std::endl;
-         //<< "  jammingModeSequence:    " << (long)v.jammingModeSequence << std::endl;
+      //<< "  jammingModeSequence:    " << (long)v.jammingModeSequence << std::endl;
 
       for(int i=0; i < v.numberOfTargetsInTrack; i++)
       {
@@ -1957,7 +1920,7 @@ struct EmitterBeamData {
 
    // Constructor(s)
    EmitterBeamData() :
-      beamDataLength(0), beamIDNumber(0), beamParameterIndex(0), parameterData(),
+   beamDataLength(0), beamIDNumber(0), beamParameterIndex(0), parameterData(),
       beamFunction(0), numberOfTargetsInTrack(0), highDensityTracks(0), padding2(0),
       jammingModeSequence(0) { }
 
@@ -1980,7 +1943,7 @@ struct EmitterBeamData {
       TrackJamTargets* tjt = 0;
       if (idx < numberOfTargetsInTrack) {
          unsigned char* p = ((unsigned char*)this) + sizeof(*this) + (sizeof(TrackJamTargets) * idx);
-         tjt = (TrackJamTargets*) p;	   
+         tjt = (TrackJamTargets*) p;
       }
       return tjt;
    }
@@ -1988,7 +1951,7 @@ struct EmitterBeamData {
       const TrackJamTargets* tjt = 0;
       if (idx < numberOfTargetsInTrack) {
          unsigned char* p = ((unsigned char*)this) + sizeof(*this) + (sizeof(TrackJamTargets) * idx);
-         tjt = (const TrackJamTargets*) p;	   
+         tjt = (const TrackJamTargets*) p;
       }
       return tjt;
    }
@@ -2006,6 +1969,7 @@ struct EmitterBeamData {
          jammingModeSequence == s2.jammingModeSequence
          );
    }
+
    bool operator!=(const EmitterBeamData& a) const {
       return !(*this == a);
    }
@@ -2035,8 +1999,7 @@ struct EmitterBeamData {
          << "  highDensityTracks:      " << (int)v.highDensityTracks << std::endl
          << "  jammingModeSequence:    " << (int)v.jammingModeSequence << std::endl;
 
-      for(int i=0; i < v.numberOfTargetsInTrack; i++)
-      {
+      for(int i=0; i < v.numberOfTargetsInTrack; i++) {
          const TrackJamTargets* tgt = v.getTrackTarget(i); 
          if (tgt != 0) {
             s  << "-----------------------------------------" << std::endl
@@ -2088,6 +2051,7 @@ struct EmitterSystem {
          emitterIdentificationNumber == s2.emitterIdentificationNumber
          );
    }
+
    bool operator!=(const EmitterSystem& a) const {
       return !(*this == a);
    }
@@ -2149,6 +2113,7 @@ struct EmissionSystem {
          location == s2.location
          );
    }
+
    bool operator!=(const EmissionSystem& a) const {
       return !(*this == a);
    }
@@ -2160,8 +2125,7 @@ struct EmissionSystem {
       location.swapBytes();
 
       // Then swap emission data
-      for(int i = 0; i < numberOfBeams; i++)
-      {
+      for(int i = 0; i < numberOfBeams; i++) {
          EmitterBeamData* bd = getEmitterBeamData(i);
          if (bd != 0) bd->swapBytes();
       }
@@ -2189,6 +2153,7 @@ struct EmissionSystem {
       }
       return bd;
    }
+
    const EmitterBeamData* getEmitterBeamData(const int idx) const {
       const EmitterBeamData* bd = 0;
       if (idx < numberOfBeams) {
@@ -2216,7 +2181,7 @@ struct EmissionSystem {
 
       for(int i = 0; i < v.numberOfBeams; i++){
          const EmitterBeamData* bd = v.getEmitterBeamData(i); 
-         s << "-----------------------------------------" << std::endl
+         s  << "-----------------------------------------" << std::endl
             << "Emitter Beam: " << i
             << bd  
             << "-----------------------------------------" << std::endl;

@@ -26,9 +26,45 @@ basicGL
 --------------------------------------------------------------------------------
 dis
 
+   struct.h
+      1) general cleanup and modifications to support IEEE P1278.1 Draft 15.
+      2) PDUHeader struct -- added 'status' field
+      3) EntityMarking struct -- changed 'marking' from signed to unsigned char
+      4) BurstDescriptor -- changed 'munision' field to 'munition'
+
+   pdu.h
+      1) general cleanup and modifications to support IEEE P1278.1 Draft 15.
+
+      2) Start, Stop, Acknowledge, Action Request, Data Query, Data,
+         Comment, Action Request-R and Action Response-R PDUs
+            a) changed 'sendingEntityID' to 'originatingID'
+            b) changed 'destinationEntityID' to 'receivingID'
+            c) getData() functions now return unsigned char
+            d) Moved padding field from StartPDU to StopPDU
+
+      3) Transmitter PDU
+            a) changed 'emittingEntityID' to 'radioRefID'
+            b) changed 'radioEntity' to 'radioEntityType'
+            c) getModulationData() functions now return unsigned char
+         
+      4) Signal PDU
+            a) changed 'emittingEntityID' to 'radioRefID'
+            b) getData() functions now return unsigned char
+
+      5) IFF/ATC/NAVAIDS PDU
+            a) added fields 'sysDesig' and 'sysSpecData'
+
    EmissionPduHandler class
       1) isUpdateRequired() -- changed the system transmitting check from
          RfSystem::isTransmitterEnabled() to RfSystem::isTransmitting()
+
+   NetIO class
+      1) PDU Type enum values now have explicit values
+
+   Nib class
+      1) munitionDetonationMsgFactory() - changed 'munision' to 'munition'
+      2) weaponFireMsgFactory() -- changed 'munision' to 'munition'
+
 
 --------------------------------------------------------------------------------
 ioDevice

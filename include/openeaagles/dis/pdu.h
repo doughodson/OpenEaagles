@@ -1,7 +1,26 @@
 //--------------------------------------------------------------
-// IEEE Standard for Distributed Interactive Simulation (DIS)
-// Application Protocols - PDU Structures for DIS
-// Standard: 1278.1a
+// PDU Structures
+// Standard: IEEE P1278.1/D15
+//
+// PDU List
+//    7.2.2    EntityStatePDU
+//    7.2.3    CollisionPDU
+//    7.3.2    FirePDU
+//    7.3.3    DetonationPDU
+//    7.5.4    StartPDU
+//    7.5.5    StopPDU
+//    7.5.6    AcknowledgePDU
+//    7.5.7    ActionRequestPDU
+//    7.5.9    DataQueryPDU
+//    7.5.11   DataPDU
+//    7.5.13   CommentPDU
+//    7.6.2    ElectromagneticEmissionPDU
+//    7.6.5.2  IffAtcNavaidsPDU
+//    7.7.2    TransmitterPDU
+//    7.7.3    SignalPDU
+//    7.11.7   ActionRequestPDU_R
+//    7.11.8   ActionResponsePDU_R
+//
 //--------------------------------------------------------------
 #ifndef __Eaagles_Network_Dis_Pdu_H__
 #define __Eaagles_Network_Dis_Pdu_H__
@@ -15,46 +34,11 @@ namespace Eaagles {
 namespace Network {
 namespace Dis {
 
-class EntityStatePDU;
-class CollisionPDU;
-class FirePDU;
-class DetonationPDU;
-class IffAtcNavaidsPDU;
-class ElectromagneticEmissionPDU;
-class StopPDU;
-class StartPDU;
-class AcknowledgePDU;
-class ActionRequestPDU;
-class ActionRequestPDU_R;
-class ActionResponsePDU_R;
-
-//-----------------------------------
-// EntityStatePDU
-
+//-----------------------------------------------
+// EntityStatePDU (1152 + 128*n bits)
+//-----------------------------------------------
 class EntityStatePDU {
 public:
-
-   void swapBytes(){
-      // Swap our stuff first
-      header.swapBytes();
-      entityID.swapBytes();
-      entityType.swapBytes();
-      alternativeType.swapBytes();
-      entityLinearVelocity.swapBytes();
-      entityLocation.swapBytes();
-      entityOrientation.swapBytes();
-      DRentityLinearAcceleration.swapBytes();
-      DRentityAngularVelocity.swapBytes();
-      appearance = convertUInt32(appearance);
-      capabilites = convertUInt32(capabilites);
-
-      // then swap the articulation parameters
-      for(int i = 0; i < numberOfArticulationParameters; i++) {
-         ArticulationParameter* ap = getArticulationParameter(i);
-         if (ap != 0) ap->swapBytes();
-      }
-   };
-
    PDUHeader            header;
    entityIdentifierDIS  entityID;
    unsigned char        forceID;
@@ -77,7 +61,7 @@ public:
    //   (The "numberOfArticulationParameters' member variable needs to be correct
    //    for this to work)
    // Note: 'idx' is zero based, so an idx == 1 will return the second ArticulationParameter structure
-   ArticulationParameter* getArticulationParameter(const int idx)
+   ArticulationParameter* getArticulationParameter(const unsigned int idx)
    {
       ArticulationParameter* ap = 0;
       if (idx < numberOfArticulationParameters) {
@@ -86,7 +70,7 @@ public:
          // First Emission system data is just after this structure
          ap = (ArticulationParameter*) p;
 
-         for (int i = 0; i < idx; i++) {
+         for (unsigned int i = 0; i < idx; i++) {
             // step down to the correct emission system data using 'systemDataLength'
             p += sizeof(ArticulationParameter);
             ap = (ArticulationParameter*) p;
@@ -95,7 +79,8 @@ public:
       }
       return ap;
    }
-   const ArticulationParameter* getArticulationParameter(const int idx) const
+
+   const ArticulationParameter* getArticulationParameter(const unsigned int idx) const
    {
       const ArticulationParameter* ap = 0;
       if (idx < numberOfArticulationParameters) {
@@ -104,7 +89,7 @@ public:
          const unsigned char *p = ((unsigned char *)this) + sizeof(*this);
          ap = (const ArticulationParameter*) p;
 
-         for (int i = 0; i < idx; i++) {
+         for (unsigned int i = 0; i < idx; i++) {
             // step down to the correct ArticulationParameter structure 
             p += sizeof(ArticulationParameter);
             ap = (const ArticulationParameter*) p;
@@ -114,630 +99,607 @@ public:
       return ap;
    }
 
-  void dumpData() const {
-    std::cout << "------------------------------------------------" << std::endl;
-    std::cout << "Entity State PDU(" << (int)header.PDUType << ")" << std::endl;
-    std::cout << "Time Stamp (" << (int)header.timeStamp << ")" << std::endl;
-    std::cout << entityID << std::endl;
-    std::cout << "ForceID (" << (int)forceID << ")" << std::endl;
-    std::cout << "Num Articulation Params (" << (int)numberOfArticulationParameters << ")" << std::endl;
-    std::cout << "Entity Type:" << std::endl;
-    std::cout << entityType << std::endl;
-    std::cout << "Entity Alternate Type:" << std::endl;
-    std::cout << alternativeType << std::endl;
-    std::cout << "Entity Linear Velocity:" << std::endl;
-    std::cout << entityLinearVelocity;
-    std::cout << "Entity Location:" << std::endl;
-    WorldCoordinates loc;
-    memcpy(&loc,&entityLocation,sizeof(WorldCoordinates));
-    std::cout << loc;
-    std::cout << "Entity Orientation:" << std::endl;
-    std::cout << entityOrientation;
-    std::cout << "  Appearance (" << std::hex << appearance << ")" << std::endl;
-    std::cout << std::dec;
-    std::cout << "  DR Algor   (" << (int)deadReckoningAlgorithm << ")" << std::endl;
-    std::cout << "  DR Params  ( ";
-    std::cout << std::hex;
-    for(unsigned int i = 0; i < 15; i++){
-      std::cout.width(2);
-      std::cout.fill('0');
-      std::cout << (int)otherParameters[i] << " ";
-    }
-    std::cout.width(0);
-    std::cout << std::dec << ")" << std::endl;;
-    std::cout << "DR Entity Linear Acceleration:" << std::endl;
-    std::cout << DRentityLinearAcceleration;
-    std::cout << "DR Angular Velocity:" << std::endl;
-    std::cout << DRentityAngularVelocity;
-    std::cout << "Entity Markings:" << std::endl;
-    std::cout << entityMarking;
-    std::cout << "Capabilities (" << capabilites << ")" << std::endl;
-    for (unsigned int i = 0; i < numberOfArticulationParameters; i++) {
-      const ArticulationParameter* ap = getArticulationParameter(i);
-      std::cout << "Articulation Parameter(" << i << ") = " << *ap << std::endl;
-    }
-    std::cout.flush();
-  };
+   void swapBytes() {
+      // Swap our stuff first
+      header.swapBytes();
+      entityID.swapBytes();
+      entityType.swapBytes();
+      alternativeType.swapBytes();
+      entityLinearVelocity.swapBytes();
+      entityLocation.swapBytes();
+      entityOrientation.swapBytes();
+      DRentityLinearAcceleration.swapBytes();
+      DRentityAngularVelocity.swapBytes();
+      appearance = convertUInt32(appearance);
+      capabilites = convertUInt32(capabilites);
+
+      // then swap the articulation parameters
+      for(int i = 0; i < numberOfArticulationParameters; i++) {
+         ArticulationParameter* ap = getArticulationParameter(i);
+         if (ap != 0) ap->swapBytes();
+      }
+   };
+
+   void dumpData() const {
+      std::cout << "------------------------------------------------" << std::endl;
+      std::cout << "Entity State PDU(" << (int)header.PDUType << ")" << std::endl;
+      std::cout << "Time Stamp (" << (int)header.timeStamp << ")" << std::endl;
+      std::cout << entityID << std::endl;
+      std::cout << "ForceID (" << (int)forceID << ")" << std::endl;
+      std::cout << "Num Articulation Params (" << (int)numberOfArticulationParameters << ")" << std::endl;
+      std::cout << "Entity Type:" << std::endl;
+      std::cout << entityType << std::endl;
+      std::cout << "Entity Alternate Type:" << std::endl;
+      std::cout << alternativeType << std::endl;
+      std::cout << "Entity Linear Velocity:" << std::endl;
+      std::cout << entityLinearVelocity;
+      std::cout << "Entity Location:" << std::endl;
+      WorldCoordinates loc;
+      memcpy(&loc,&entityLocation,sizeof(WorldCoordinates));
+      std::cout << loc;
+      std::cout << "Entity Orientation:" << std::endl;
+      std::cout << entityOrientation;
+      std::cout << "  Appearance (" << std::hex << appearance << ")" << std::endl;
+      std::cout << std::dec;
+      std::cout << "  DR Algor   (" << (int)deadReckoningAlgorithm << ")" << std::endl;
+      std::cout << "  DR Params  ( ";
+      std::cout << std::hex;
+      for(unsigned int i = 0; i < 15; i++) {
+         std::cout.width(2);
+         std::cout.fill('0');
+         std::cout << (int)otherParameters[i] << " ";
+      }
+      std::cout.width(0);
+      std::cout << std::dec << ")" << std::endl;;
+      std::cout << "DR Entity Linear Acceleration:" << std::endl;
+      std::cout << DRentityLinearAcceleration;
+      std::cout << "DR Angular Velocity:" << std::endl;
+      std::cout << DRentityAngularVelocity;
+      std::cout << "Entity Markings:" << std::endl;
+      std::cout << entityMarking;
+      std::cout << "Capabilities (" << capabilites << ")" << std::endl;
+      for (unsigned int i = 0; i < numberOfArticulationParameters; i++) {
+         const ArticulationParameter* ap = getArticulationParameter(i);
+         std::cout << "Articulation Parameter(" << i << ") = " << *ap << std::endl;
+      }
+      std::cout.flush();
+   };
 };
 
-//-----------------------------------
-// CollisionPDU
 
-class CollisionPDU{
+//-----------------------------------------------
+// CollisionPDU (480 bits)
+//-----------------------------------------------
+class CollisionPDU {
 public:
-  void swapBytes(){
-    header.swapBytes();
-    issuingEntityID.swapBytes();
-    collidingEntityID.swapBytes();
-    eventID.swapBytes();
-    velocity.swapBytes();
-    mass = convertFloat(mass);
-    location.swapBytes();
-  };
+   PDUHeader            header;
+   entityIdentifierDIS  issuingEntityID;
+   entityIdentifierDIS  collidingEntityID;
+   EventIdentifier      eventID;
+   unsigned char        collisionType;
+   unsigned char        padding;
+   vectorDIS            velocity;
+   float                mass;
+   vectorDIS            location;
 
-  PDUHeader              header;
-  entityIdentifierDIS       issuingEntityID;
-  entityIdentifierDIS       collidingEntityID;
-  EventIdentifier	 eventID;
-  unsigned char		 collisionType;
-  unsigned char		 padding;
-  vectorDIS                 velocity;
-  float			 mass;
-  vectorDIS		 location;
+   void swapBytes() {
+      header.swapBytes();
+      issuingEntityID.swapBytes();
+      collidingEntityID.swapBytes();
+      eventID.swapBytes();
+      velocity.swapBytes();
+      mass = convertFloat(mass);
+      location.swapBytes();
+   };
 
-  void dumpData() const {
-  };
+   void dumpData() const {
+   };
 };
 
-/////////////////////////////////////
-// Warfare Protocol Family
 
-//-----------------------------------
-// Fire PDU
-
-class FirePDU{
+//-----------------------------------------------
+// Fire PDU (768 bits)
+//-----------------------------------------------
+class FirePDU {
 public:
-  void swapBytes(){
-    header.swapBytes();
-    firingEntityID.swapBytes();
-    targetEntityID.swapBytes();
-    munitionID.swapBytes();
-    eventID.swapBytes();
-    fireMissionIndex = convertUInt32(fireMissionIndex);
-    location.swapBytes();
-    burst.swapBytes();
-    velocity.swapBytes();
-    range = convertFloat(range);
-  };
+   PDUHeader            header;
+   entityIdentifierDIS  firingEntityID;
+   entityIdentifierDIS  targetEntityID;
+   entityIdentifierDIS  munitionID;
+   EventIdentifier      eventID;
+   uint32_t             fireMissionIndex;
+   WorldCoordinates     location;
+   BurstDescriptor      burst;
+   vectorDIS            velocity;
+   float                range;
 
-  PDUHeader              header;
-  entityIdentifierDIS       firingEntityID;
-  entityIdentifierDIS       targetEntityID;
-  entityIdentifierDIS       munitionID;
-  EventIdentifier        eventID;
-  uint32_t              fireMissionIndex;
-  WorldCoordinates       location;
-  BurstDescriptor	 burst;
-  vectorDIS		 velocity;
-  float			 range;
+   void swapBytes() {
+      header.swapBytes();
+      firingEntityID.swapBytes();
+      targetEntityID.swapBytes();
+      munitionID.swapBytes();
+      eventID.swapBytes();
+      fireMissionIndex = convertUInt32(fireMissionIndex);
+      location.swapBytes();
+      burst.swapBytes();
+      velocity.swapBytes();
+      range = convertFloat(range);
+   };
 
-  void dumpData() const {
-    WorldCoordinates loc;
-    std::cout << "------------------------------------------------" << std::endl;
-    std::cout << "Fire PDU(" << (int)header.PDUType << ")" << std::endl;
-    std::cout << "Firing   Entity:" << std::endl << firingEntityID;
-    std::cout << "Target   Entity:" << std::endl << targetEntityID;
-    std::cout << "Munition Entity:" << std::endl << munitionID;
-    std::cout << "Event ID:" << std::endl << eventID;
-    std::cout << "fireMissionIndex (" << fireMissionIndex << ")" << std::endl;
-    memcpy(&loc,&location,sizeof(WorldCoordinates));
-    std::cout << "Location:" << std::endl << loc;
-    std::cout << "Burst Descriptor:" << std::endl << burst;
-    std::cout << "Velocity vectorDISy:" << std::endl << velocity;
-    std::cout << "Range:" << std::endl << range << std::endl;
-    std::cout.flush();
-  };
+   void dumpData() const {
+      WorldCoordinates loc;
+      std::cout << "------------------------------------------------" << std::endl;
+      std::cout << "Fire PDU(" << (int)header.PDUType << ")" << std::endl;
+      std::cout << "Firing   Entity:" << std::endl << firingEntityID;
+      std::cout << "Target   Entity:" << std::endl << targetEntityID;
+      std::cout << "Munition Entity:" << std::endl << munitionID;
+      std::cout << "Event ID:" << std::endl << eventID;
+      std::cout << "fireMissionIndex (" << fireMissionIndex << ")" << std::endl;
+      memcpy(&loc,&location,sizeof(WorldCoordinates));
+      std::cout << "Location:" << std::endl << loc;
+      std::cout << "Burst Descriptor:" << std::endl << burst;
+      std::cout << "Velocity vectorDISy:" << std::endl << velocity;
+      std::cout << "Range:" << std::endl << range << std::endl;
+      std::cout.flush();
+   };
 };
 
-//-----------------------------------
+
+//-----------------------------------------------
 // Detonation PDU
-
-class DetonationPDU{
+//-----------------------------------------------
+class DetonationPDU {
 public:
-  void swapBytes(){
-    header.swapBytes();
-    firingEntityID.swapBytes();
-    targetEntityID.swapBytes();
-    munitionID.swapBytes();
-    eventID.swapBytes();
-    velocity.swapBytes();
-    location.swapBytes();
-    burst.swapBytes();
-    locationInEntityCoordinates.swapBytes();
-  };
 
-  PDUHeader              header;
-  entityIdentifierDIS       firingEntityID;
-  entityIdentifierDIS       targetEntityID;
-  entityIdentifierDIS       munitionID;
-  EventIdentifier        eventID;
-  vectorDIS		 velocity;
-  WorldCoordinates       location;
-  BurstDescriptor        burst;
-  vectorDIS                 locationInEntityCoordinates;
-  unsigned char		 detonationResult;
-  unsigned char		 numberOfArticulationParameters;
-  uint16_t            padding;
+   PDUHeader            header;
+   entityIdentifierDIS  firingEntityID;
+   entityIdentifierDIS  targetEntityID;
+   entityIdentifierDIS  munitionID;
+   EventIdentifier      eventID;
+   vectorDIS            velocity;
+   WorldCoordinates     location;
+   BurstDescriptor      burst;
+   vectorDIS            locationInEntityCoordinates;
+   unsigned char        detonationResult;
+   unsigned char        numberOfArticulationParameters;
+   uint16_t             padding;
 
-  void dumpData() const {
-    WorldCoordinates loc;
-    std::cout << "------------------------------------------------" << std::endl;
-    std::cout << "Detonation PDU(" << (int)header.PDUType << ")" << std::endl;
-    std::cout << "Firing   Entity:" << std::endl << firingEntityID;
-    std::cout << "Target   Entity:" << std::endl << targetEntityID;
-    std::cout << "Munition Entity:" << std::endl << munitionID;
-    std::cout << "Event ID:" << std::endl << eventID;
-    std::cout << "Velocity vectorDISy:" << std::endl << velocity;
-    memcpy(&loc,&location,sizeof(WorldCoordinates));
-    std::cout << "Location:" << std::endl << loc;
-    std::cout << "Burst Descriptor:" << std::endl << burst;
-    std::cout << "Location In Entity Coords:" << std::endl << locationInEntityCoordinates;
-    std::cout << "Detonation Result (" << (int)detonationResult << ")" << std::endl;
-    std::cout << "Num Of Atriculation Params (" << (int)numberOfArticulationParameters << ")" << std::endl;
-    std::cout.flush();
-  };
+   void swapBytes() {
+      header.swapBytes();
+      firingEntityID.swapBytes();
+      targetEntityID.swapBytes();
+      munitionID.swapBytes();
+      eventID.swapBytes();
+      velocity.swapBytes();
+      location.swapBytes();
+      burst.swapBytes();
+      locationInEntityCoordinates.swapBytes();
+   };
+
+   void dumpData() const {
+      WorldCoordinates loc;
+      std::cout << "------------------------------------------------" << std::endl;
+      std::cout << "Detonation PDU(" << (int)header.PDUType << ")" << std::endl;
+      std::cout << "Firing   Entity:" << std::endl << firingEntityID;
+      std::cout << "Target   Entity:" << std::endl << targetEntityID;
+      std::cout << "Munition Entity:" << std::endl << munitionID;
+      std::cout << "Event ID:" << std::endl << eventID;
+      std::cout << "Velocity vectorDISy:" << std::endl << velocity;
+      memcpy(&loc,&location,sizeof(WorldCoordinates));
+      std::cout << "Location:" << std::endl << loc;
+      std::cout << "Burst Descriptor:" << std::endl << burst;
+      std::cout << "Location In Entity Coords:" << std::endl << locationInEntityCoordinates;
+      std::cout << "Detonation Result (" << (int)detonationResult << ")" << std::endl;
+      std::cout << "Num Of Atriculation Params (" << (int)numberOfArticulationParameters << ")" << std::endl;
+      std::cout.flush();
+   };
 };
 
-
-class IffAtcNavaidsPDU
-{
-public:
-  void swapBytes(){
-    header.swapBytes();
-    emittingEntityID.swapBytes();
-    eventID.swapBytes();
-    location.swapBytes();
-    systemID.swapBytes();
-    operationalData.swapBytes();
-  };
-
-  PDUHeader              header;
-  entityIdentifierDIS    emittingEntityID;
-  EventIdentifier        eventID;
-  vectorDIS              location;
-  SystemID               systemID;
-  uint16_t               padding;
-  FundamentalOpData      operationalData;
-
-  void dumpData() const {
-    std::cout << "------------------------------------------------" << std::endl;
-    std::cout << "IFF/ATC/NAVAIDS PDU(" << (int)header.PDUType << ")" << std::endl;
-    std::cout << "Header:" << std::endl << header;
-    std::cout << "Emitting Entity:" << std::endl << emittingEntityID;
-    std::cout << "Event ID:" << std::endl << eventID;
-    std::cout << "Emission Location:" << std::endl << location;
-    std::cout << "SystemID:" << std::endl << systemID;
-    std::cout << "Operation Data:" << std::endl << operationalData;
-    std::cout.flush();
-  };
-};
 
 //-----------------------------------
-// Start PDU
-
+// Start/Resume PDU (352 bits)
+//-----------------------------------
 class StartPDU{
 public:
-  void dumpData() const {
-    std::cout << "------------------------------------------------" << std::endl;
-    std::cout << "Start PDU(" << (long)header.PDUType << ")" << std::endl;
-    std::cout << "Sending     Entity:" << std::endl << sendingEntityID;
-    std::cout << "Destination Entity:" << std::endl << destinationEntityID;
-    std::cout << "Real World Time:" << std::endl << realWorldTime;
-    std::cout << "Simulation Time:" << std::endl << simTime;
-    std::cout << "Request ID: " << std::endl << requestID;
-    std::cout.flush();
-  };
 
-  PDUHeader              header;
-  entityIdentifierDIS    sendingEntityID;
-  entityIdentifierDIS    destinationEntityID;
-  ClockTime              realWorldTime;
-  ClockTime              simTime;
-  uint16_t               padding;
-  uint32_t               requestID;
+   PDUHeader            header;
+   entityIdentifierDIS  originatingID;
+   entityIdentifierDIS  receivingID;
+   ClockTime            realWorldTime;
+   ClockTime            simTime;
+   uint32_t             requestID;
 
-  void swapBytes(){
-    header.swapBytes();
-    sendingEntityID.swapBytes();
-    destinationEntityID.swapBytes();
-    realWorldTime.swapBytes();
-    simTime.swapBytes();
-    requestID = convertUInt32(requestID);
-  };
+   void swapBytes() {
+      header.swapBytes();
+      originatingID.swapBytes();
+      receivingID.swapBytes();
+      realWorldTime.swapBytes();
+      simTime.swapBytes();
+      requestID = convertUInt32(requestID);
+   };
+
+   void dumpData() const {
+      std::cout << "------------------------------------------------" << std::endl;
+      std::cout << "Start PDU(" << (long)header.PDUType << ")" << std::endl;
+      std::cout << "Sending     Entity:" << std::endl << originatingID;
+      std::cout << "Destination Entity:" << std::endl << receivingID;
+      std::cout << "Real World Time:" << std::endl << realWorldTime;
+      std::cout << "Simulation Time:" << std::endl << simTime;
+      std::cout << "Request ID: " << std::endl << requestID;
+      std::cout.flush();
+   };
 };
 
 //-----------------------------------
-// Stop PDU
+// Stop/Freeze PDU (320 bits)
+//-----------------------------------
 
 class StopPDU{
 public:
-  void dumpData() const {
-    std::cout << "------------------------------------------------" << std::endl;
-    std::cout << "Start PDU(" << (long)header.PDUType << ")" << std::endl;
-    std::cout << "Sending     Entity:" << std::endl << sendingEntityID;
-    std::cout << "Destination Entity:" << std::endl << destinationEntityID;
-    std::cout << "Real World Time:" << std::endl << realWorldTime;
-    std::cout << "Reason: (" << std::endl << (long)reason << ")" << std::endl;
-    std::cout << "Frozen Behavior (: " << (long)frozenBehavior << ")" << std::endl;
-    std::cout << "Request ID: "  << requestID << std::endl;
-    std::cout.flush();
-  };
 
-  PDUHeader              header;
-  entityIdentifierDIS    sendingEntityID;
-  entityIdentifierDIS    destinationEntityID;
-  ClockTime              realWorldTime;
-  unsigned char          reason;
-  unsigned char          frozenBehavior;
-  uint32_t               requestID;
+   PDUHeader            header;
+   entityIdentifierDIS  originatingID;
+   entityIdentifierDIS  receivingID;
+   ClockTime            realWorldTime;
+   unsigned char        reason;
+   unsigned char        frozenBehavior;
+   uint16_t             padding;
+   uint32_t             requestID;
 
-  void swapBytes(){
-    header.swapBytes();
-    sendingEntityID.swapBytes();
-    destinationEntityID.swapBytes();
-    realWorldTime.swapBytes();
-    requestID = convertUInt32(requestID);
-  };
+   void swapBytes() {
+      header.swapBytes();
+      originatingID.swapBytes();
+      receivingID.swapBytes();
+      realWorldTime.swapBytes();
+      requestID = convertUInt32(requestID);
+   };
+
+   void dumpData() const {
+      std::cout << "------------------------------------------------" << std::endl;
+      std::cout << "Start PDU(" << (long)header.PDUType << ")" << std::endl;
+      std::cout << "Sending     Entity:" << std::endl << originatingID;
+      std::cout << "Destination Entity:" << std::endl << receivingID;
+      std::cout << "Real World Time:" << std::endl << realWorldTime;
+      std::cout << "Reason: (" << std::endl << (long)reason << ")" << std::endl;
+      std::cout << "Frozen Behavior (: " << (long)frozenBehavior << ")" << std::endl;
+      std::cout << "Request ID: "  << requestID << std::endl;
+      std::cout.flush();
+   };
 };
+
 
 //-----------------------------------
 // Acknowledge PDU
-
+//-----------------------------------
 class AcknowledgePDU{
 public:
-  void dumpData() const {
-    std::cout << "------------------------------------------------" << std::endl;
-    std::cout << "Start PDU(" << (long)header.PDUType << ")" << std::endl;
-    std::cout << "Sending     Entity:" << std::endl << sendingEntityID;
-    std::cout << "Destination Entity:" << std::endl << destinationEntityID;
-    std::cout << "Acknowledge Flag:" << std::endl << acknowledgeFlag;
-    std::cout << "Response Flag:" << std::endl << responseFlag;
-    std::cout << "Request ID: " << std::endl << requestID;
-    std::cout.flush();
-  };
+   PDUHeader              header;
+   entityIdentifierDIS    originatingID;
+   entityIdentifierDIS    receivingID;
+   uint16_t               acknowledgeFlag;
+   uint16_t               responseFlag;
+   uint32_t               requestID;
 
-  PDUHeader              header;
-  entityIdentifierDIS    sendingEntityID;
-  entityIdentifierDIS    destinationEntityID;
-  uint16_t               acknowledgeFlag;
-  uint16_t               responseFlag;
-  uint32_t               requestID;
+   void dumpData() const {
+      std::cout << "------------------------------------------------" << std::endl;
+      std::cout << "Start PDU(" << (long)header.PDUType << ")" << std::endl;
+      std::cout << "Sending     Entity:" << std::endl << originatingID;
+      std::cout << "Destination Entity:" << std::endl << receivingID;
+      std::cout << "Acknowledge Flag:" << std::endl << acknowledgeFlag;
+      std::cout << "Response Flag:" << std::endl << responseFlag;
+      std::cout << "Request ID: " << std::endl << requestID;
+      std::cout.flush();
+   };
 
-  void swapBytes(){
-    header.swapBytes();
-    sendingEntityID.swapBytes();
-    destinationEntityID.swapBytes();
-    acknowledgeFlag = convertUInt16(acknowledgeFlag);
-    responseFlag = convertUInt16(responseFlag);
-    requestID = convertUInt32(requestID);
-  };
+   void swapBytes() {
+      header.swapBytes();
+      originatingID.swapBytes();
+      receivingID.swapBytes();
+      acknowledgeFlag = convertUInt16(acknowledgeFlag);
+      responseFlag = convertUInt16(responseFlag);
+      requestID = convertUInt32(requestID);
+   };
 };
 
-//-----------------------------------
-// Signal PDU
 
-class SignalPDU{
+//-----------------------------------
+// Action Request PDU
+//-----------------------------------
+class ActionRequestPDU {
 public:
-  void swapBytes(){
-    header.swapBytes();
-    emittingEntityID.swapBytes();
-    radioID        = convertUInt16(radioID);
-    encodingScheme = convertUInt16(encodingScheme);
-    TDLType        = convertUInt16(TDLType);
-    sampleRate     = convertUInt32(sampleRate);
-    dataLength     = convertUInt16(dataLength);
-    samples        = convertUInt16(samples);
-  };
+   PDUHeader            header;
+   entityIdentifierDIS  originatingID;
+   entityIdentifierDIS  receivingID;
+   uint32_t             requestID;
+   uint32_t             actionID;
+   uint32_t             numFixedRecords;
+   uint32_t             numVariableRecords;
 
-  PDUHeader              header;
-  entityIdentifierDIS       emittingEntityID;
-  uint16_t            radioID;
-  uint16_t            encodingScheme;
-  uint16_t            TDLType;
-  uint32_t            sampleRate;
-  uint16_t            dataLength;
-  uint16_t            samples;
+   unsigned char* getData() {
+      unsigned char *p = (unsigned char *)this;
+      int pcount = sizeof(PDUHeader)
+         + sizeof(originatingID)
+         + sizeof(receivingID)
+         + sizeof(requestID)
+         + sizeof(actionID)
+         + sizeof(numFixedRecords)
+         + sizeof(numVariableRecords);
+      return &p[pcount];
+   };
 
-  char* getData() {
-    unsigned char *p = (unsigned char *)this;
-    int pcount = sizeof(PDUHeader) + sizeof(emittingEntityID) + 14; 
-    return (char *)&p[pcount];
-  };
-
-  const char* getData() const {
+   const unsigned char* getData() const {
       const unsigned char *p = (const unsigned char *)this;
-      int pcount = sizeof(PDUHeader) + sizeof(emittingEntityID) + 14; 
-      return (const char *)&p[pcount];
-  };
+      int pcount = sizeof(PDUHeader)
+         + sizeof(originatingID)
+         + sizeof(receivingID)
+         + sizeof(requestID)
+         + sizeof(actionID)
+         + sizeof(numFixedRecords)
+         + sizeof(numVariableRecords);
+      return &p[pcount];
+   };
 
-  void dumpData() const {
-    std::cout << "------------------------------------------------" << std::endl;
-    std::cout << "Signal PDU(" << (int)header.PDUType << ")" << std::endl;
-    std::cout << "Emitting Entity:" << std::endl << emittingEntityID;
-    std::cout << "Radio ID: ( " << radioID << " )" << std::endl;
-    std::cout << "encodingScheme: ( " << std::hex << encodingScheme << std::dec << " )" << std::endl;
-    std::cout << "TDLType: ( " << TDLType << " )" << std::endl;
-    std::cout << "sampleRate: ( " << sampleRate << " )" << std::endl;
-    std::cout << "dataLength: ( " << dataLength << " )" << std::endl;
-    std::cout << "samples: ( " << samples << " )" << std::endl;
-    std::cout << "Data:" << std::endl;
+   void swapBytes() {
+      header.swapBytes();
+      originatingID.swapBytes();
+      receivingID.swapBytes();
+      requestID           = convertUInt32(requestID);
+      actionID            = convertUInt32(actionID);
+      numFixedRecords     = convertUInt32(numFixedRecords);
+      numVariableRecords  = convertUInt32(numVariableRecords);
+   };
 
-    int count;
-
-    count = 0;
-
-    const char* p = getData();
-
-    std::cout << std::hex;
-
-    for(int i=0; i<dataLength; i++){
-
-      std::cout.width(2);
-      std::cout.fill('0');
-      std::cout << (int)p[i] << " ";
-
-      if (count >= 16){
-        std::cout << std::endl;   
-        count = 0;
-      }else{
-        count++;
-      }
-    }
-
-    std::cout << std::dec << std::endl;
-    
-    std::cout.flush();
-  };
+   void dumpData() const {
+      std::cout << "------------------------------------------------" << std::endl;
+      std::cout << "Data Query PDU(" << (int)header.PDUType << ")" << std::endl;
+      std::cout << "Emitting Entity:" << std::endl << originatingID;
+      std::cout << "Destination Entity:" << std::endl << receivingID;
+      std::cout << "Request ID: " << std::endl << requestID;
+      std::cout << "Action ID: " << std::endl << actionID;
+      std::cout << "Number of fixed records: " << std::endl << numFixedRecords;
+      std::cout << "Number of variable records: " << std::endl << numVariableRecords;
+   };
 };
 
 
-//-----------------------------------
+//-----------------------------------------------
 // Data Query PDU
-
+//-----------------------------------------------
 class DataQueryPDU{
 public:
-  void swapBytes(){
-    header.swapBytes();
-    emittingEntityID.swapBytes();
-    destinationEntityID.swapBytes();
-    requestID           = convertUInt32(requestID);
-    timeInterval        = convertUInt32(timeInterval);
-    numFixedRecords     = convertUInt32(numFixedRecords);
-    numVariableRecords  = convertUInt32(numVariableRecords);
-  };
 
-  PDUHeader              header;
-  entityIdentifierDIS    emittingEntityID;
-  entityIdentifierDIS    destinationEntityID;
-  uint32_t               requestID;
-  uint32_t               timeInterval;
-  uint32_t               numFixedRecords;
-  uint32_t               numVariableRecords;
- 
+   PDUHeader              header;
+   entityIdentifierDIS    originatingID;
+   entityIdentifierDIS    receivingID;
+   uint32_t               requestID;
+   uint32_t               timeInterval;
+   uint32_t               numFixedRecords;
+   uint32_t               numVariableRecords;
 
-  char* getData() {
-    unsigned char *p = (unsigned char *)this;
-    int pcount = sizeof(PDUHeader)
-           + sizeof(emittingEntityID)
-           + sizeof(destinationEntityID)
-           + 16; 
-    return (char *)&p[pcount];
-  };
+   // Returns a pointer to the start of the fixed/variable records
+   unsigned char* getData() {
+      unsigned char *p = (unsigned char *)this;
+      int pcount = sizeof(PDUHeader)
+         + sizeof(originatingID)
+         + sizeof(receivingID)
+         + sizeof(requestID)
+         + sizeof(timeInterval)
+         + sizeof(numFixedRecords)
+         + sizeof(numVariableRecords);
+      return &p[pcount];
+   };
 
-  const char* getData() const {
-    const unsigned char *p = (const unsigned char *)this;
-    int pcount = sizeof(PDUHeader)
-         + sizeof(emittingEntityID)
-         + sizeof(destinationEntityID)
-         + 16; 
-    return (const char *)&p[pcount];
+   // Returns a const pointer to the start of the fixed/variable records
+   const unsigned char* getData() const {
+      const unsigned char *p = (const unsigned char *)this;
+      int pcount = sizeof(PDUHeader)
+         + sizeof(originatingID)
+         + sizeof(receivingID)
+         + sizeof(requestID)
+         + sizeof(timeInterval)
+         + sizeof(numFixedRecords)
+         + sizeof(numVariableRecords);
+      return &p[pcount];
+   };
+
+   void swapBytes() {
+      header.swapBytes();
+      originatingID.swapBytes();
+      receivingID.swapBytes();
+      requestID           = convertUInt32(requestID);
+      timeInterval        = convertUInt32(timeInterval);
+      numFixedRecords     = convertUInt32(numFixedRecords);
+      numVariableRecords  = convertUInt32(numVariableRecords);
+   };
+
+   void dumpData() const {
+      std::cout << "------------------------------------------------" << std::endl;
+      std::cout << "Data Query PDU(" << (int)header.PDUType << ")" << std::endl;
+      std::cout << "Emitting Entity:" << std::endl << originatingID;
+      std::cout << "Destination Entity:" << std::endl << receivingID;
+      std::cout << "Request ID: " << std::endl << requestID;
+      std::cout << "Time Interval: " << std::endl << timeInterval;
+      std::cout << "Number of fixed records: " << std::endl << numFixedRecords;
+      std::cout << "Number of variable records: " << std::endl << numVariableRecords;
+   };
 };
 
-  void dumpData() const {
-    std::cout << "------------------------------------------------" << std::endl;
-    std::cout << "Data Query PDU(" << (int)header.PDUType << ")" << std::endl;
-    std::cout << "Emitting Entity:" << std::endl << emittingEntityID;
-    std::cout << "Destination Entity:" << std::endl << destinationEntityID;
-    std::cout << "Request ID: " << std::endl << requestID;
-    std::cout << "Time Interval: " << std::endl << timeInterval;
-    std::cout << "Number of fixed records: " << std::endl << numFixedRecords;
-    std::cout << "Number of variable records: " << std::endl << numVariableRecords;
-    };
-};
 
-
-//-----------------------------------
+//-----------------------------------------------
 // Data PDU
+//-----------------------------------------------
 class DataPDU{
 public:
-  void swapBytes(){
-    header.swapBytes();
-    emittingEntityID.swapBytes();
-    destinationEntityID.swapBytes();
-    requestID           = convertUInt32(requestID);
-    numFixedRecords     = convertUInt32(numFixedRecords);
-    numVariableRecords  = convertUInt32(numVariableRecords);
-  };
+   PDUHeader              header;
+   entityIdentifierDIS    originatingID;
+   entityIdentifierDIS    receivingID;
+   uint32_t               requestID;
+   uint32_t               padding;
+   uint32_t               numFixedRecords;
+   uint32_t               numVariableRecords;
 
-  PDUHeader              header;
-  entityIdentifierDIS    emittingEntityID;
-  entityIdentifierDIS    destinationEntityID;
-  uint32_t               requestID;
-  uint32_t               padding;
-  uint32_t               numFixedRecords;
-  uint32_t               numVariableRecords;
- 
-  char* getData() {
-    unsigned char *p = (unsigned char *)this;
-    int pcount = sizeof(PDUHeader)
-           + sizeof(emittingEntityID)
-           + sizeof(destinationEntityID)
-           + 16; 
-    return (char *)&p[pcount];
-  };
-  const char* getData() const {
-    const unsigned char *p = (const unsigned char *)this;
-    int pcount = sizeof(PDUHeader)
-           + sizeof(emittingEntityID)
-           + sizeof(destinationEntityID)
-           + 16; 
-    return (const char *)&p[pcount];
-  };
-  
-  void dumpData() const {
-    std::cout << "------------------------------------------------" << std::endl;
-    std::cout << "Data Query PDU(" << (int)header.PDUType << ")" << std::endl;
-    std::cout << "Emitting Entity:" << std::endl << emittingEntityID;
-    std::cout << "Destination Entity:" << std::endl << destinationEntityID;
-    std::cout << "Request ID: " << std::endl << requestID;
-    std::cout << "Padding: " << std::endl << padding;
-    std::cout << "Number of fixed records: " << std::endl << numFixedRecords;
-    std::cout << "Number of variable records: " << std::endl << numVariableRecords;
-    };
+   unsigned char* getData() {
+      unsigned char *p = (unsigned char *)this;
+      int pcount = sizeof(PDUHeader)
+         + sizeof(originatingID)
+         + sizeof(receivingID)
+         + sizeof(requestID)
+         + sizeof(padding)
+         + sizeof(numFixedRecords)
+         + sizeof(numVariableRecords);
+      return &p[pcount];
+   };
+   const unsigned char* getData() const {
+      const unsigned char *p = (const unsigned char *)this;
+      int pcount = sizeof(PDUHeader)
+         + sizeof(originatingID)
+         + sizeof(receivingID)
+         + sizeof(requestID)
+         + sizeof(padding)
+         + sizeof(numFixedRecords)
+         + sizeof(numVariableRecords);
+      return &p[pcount];
+   };
+
+   void swapBytes() {
+      header.swapBytes();
+      originatingID.swapBytes();
+      receivingID.swapBytes();
+      requestID           = convertUInt32(requestID);
+      numFixedRecords     = convertUInt32(numFixedRecords);
+      numVariableRecords  = convertUInt32(numVariableRecords);
+   };
+
+   void dumpData() const {
+      std::cout << "------------------------------------------------" << std::endl;
+      std::cout << "Data Query PDU(" << (int)header.PDUType << ")" << std::endl;
+      std::cout << "Emitting Entity:" << std::endl << originatingID;
+      std::cout << "Destination Entity:" << std::endl << receivingID;
+      std::cout << "Request ID: " << std::endl << requestID;
+      std::cout << "Padding: " << std::endl << padding;
+      std::cout << "Number of fixed records: " << std::endl << numFixedRecords;
+      std::cout << "Number of variable records: " << std::endl << numVariableRecords;
+   };
 };
 
 
-//-----------------------------------
+//-----------------------------------------------
 // Comment PDU
+//-----------------------------------------------
 class CommentPDU{
 public:
-  void pack(){
-    header.swapBytes();
-    emittingEntityID.swapBytes();
-    destinationEntityID.swapBytes();
-	swapVariableDatum();
-	swapFixedDatum();
-    numFixedRecords     = convertUInt32(numFixedRecords);
-    numVariableRecords  = convertUInt32(numVariableRecords);
-  };
+   PDUHeader              header;
+   entityIdentifierDIS    originatingID;
+   entityIdentifierDIS    receivingID;
+   uint32_t               numFixedRecords;
+   uint32_t               numVariableRecords;
 
-  void unpack(){
-    header.swapBytes();
-    emittingEntityID.swapBytes();
-    destinationEntityID.swapBytes();
-    numFixedRecords     = convertUInt32(numFixedRecords);
-    numVariableRecords  = convertUInt32(numVariableRecords);
-	swapVariableDatum();
-	swapFixedDatum();
-  };
+   unsigned char* getData() {
+      unsigned char *p = (unsigned char*)this;
+      int pcount = sizeof(PDUHeader)
+         + sizeof(originatingID)
+         + sizeof(receivingID)
+         + 8; 
+      return &p[pcount];
+   };
 
-  void swapBytes(){
-	unpack();
-  };
+   const unsigned char* getData() const {
+      const unsigned char *p = (const unsigned char*)this;
+      int pcount = sizeof(PDUHeader)
+         + sizeof(originatingID)
+         + sizeof(receivingID)
+         + 8; 
+      return &p[pcount];
+   };
 
-  PDUHeader              header;
-  entityIdentifierDIS    emittingEntityID;
-  entityIdentifierDIS    destinationEntityID;
-  uint32_t               numFixedRecords;
-  uint32_t               numVariableRecords;
- 
 
-  char* getData() {
-    unsigned char *p = (unsigned char *)this;
-    int pcount = sizeof(PDUHeader)
-           + sizeof(emittingEntityID)
-           + sizeof(destinationEntityID)
-           + 8; 
-    return (char *)&p[pcount];
-  };
-  const char* getData() const {
-    const unsigned char *p = (const unsigned char *)this;
-    int pcount = sizeof(PDUHeader)
-           + sizeof(emittingEntityID)
-           + sizeof(destinationEntityID)
-           + 8; 
-    return (const char *)&p[pcount];
-  };
+   FixedDatum* getFixedDatum(const unsigned int index) {
+      if (index >= numFixedRecords) return 0;
 
-	FixedDatum *getFixedDatum(unsigned int index)
-	{
-		if (index >= numFixedRecords) return 0;
+      unsigned char* ptr = getData();  
+      FixedDatum* datum = (FixedDatum *) ptr;
+      for(unsigned int i = 0; i < index; i++) {
+         datum++;
+      }
 
-		char *ptr = getData();  
+      return datum;
+   };
 
-		FixedDatum *datum = (FixedDatum *)ptr;
+   void swapFixedDatum() {
+      FixedDatum *datum = 0;
+      for(unsigned int  i= 0; i < numFixedRecords; i++) {
+         datum = getFixedDatum(i);
+         datum->swapBytes();
+      }
+   };
 
-		for(unsigned int i = 0;i < index;i++)
-		{
-			datum++;
-		}
+   VariableDatum* getVariableDatum(const unsigned int index) {
+      if (index >= numVariableRecords) return 0;
 
-		return datum;
-	};
+      unsigned char *ptr = getData();
+      if (numFixedRecords > 0) {
+         FixedDatum *datum = getFixedDatum(numFixedRecords-1);
+         ptr = (unsigned char*)datum;
+         ptr += sizeof(FixedDatum);
+      }
 
-	void swapFixedDatum()
-	{
-		FixedDatum *datum = 0;
+      VariableDatum *vdatum = (VariableDatum *)ptr;
+      for(unsigned int i = 0;i < index;i++) {
+         ptr += vdatum->getSize();
+         vdatum = (VariableDatum *)ptr;
+      }
 
-		for(unsigned int i=0;i<numFixedRecords;i++)
-		{
-			datum = getFixedDatum(i);
-			datum->swapBytes();
-		}
-	};
+      return vdatum;
+   };
 
-	VariableDatum *getVariableDatum(unsigned int index)
-	{
-		if (index >= numVariableRecords) return 0;
+   void swapVariableDatum() {
+      VariableDatum *datum = 0;
+      for(unsigned int i = 0; i < numVariableRecords; i++) {
+         datum = getVariableDatum(i);
+         datum->swapBytes();
+      }
+   };
 
-		char *ptr = getData();
+   void pack() {
+      header.swapBytes();
+      originatingID.swapBytes();
+      receivingID.swapBytes();
+      swapVariableDatum();
+      swapFixedDatum();
+      numFixedRecords     = convertUInt32(numFixedRecords);
+      numVariableRecords  = convertUInt32(numVariableRecords);
+   };
 
-		if (numFixedRecords > 0)
-		{
-			FixedDatum *datum = getFixedDatum(numFixedRecords-1);
-			ptr = (char*)datum;
-			ptr += sizeof(FixedDatum);
-		}
+   void unpack() {
+      header.swapBytes();
+      originatingID.swapBytes();
+      receivingID.swapBytes();
+      numFixedRecords     = convertUInt32(numFixedRecords);
+      numVariableRecords  = convertUInt32(numVariableRecords);
+      swapVariableDatum();
+      swapFixedDatum();
+   };
 
-		VariableDatum *vdatum = (VariableDatum *)ptr;
+   void swapBytes() {
+      unpack();
+   };
 
-		for(unsigned int i = 0;i < index;i++)
-		{
-			ptr += vdatum->getSize();
-			vdatum = (VariableDatum *)ptr;
-		}
-
-		return vdatum;
-	};
-
-	void swapVariableDatum()
-	{
-		VariableDatum *datum = 0;
-
-		for(unsigned int i=0;i<numVariableRecords;i++)
-		{
-			datum = getVariableDatum(i);
-			datum->swapBytes();
-		}
-	};
-  
-  void dumpData() const {
-    std::cout << "------------------------------------------------" << std::endl;
-    std::cout << "Data Query PDU(" << (int)header.PDUType << ")" << std::endl;
-    std::cout << "Emitting Entity:" << std::endl << emittingEntityID;
-    std::cout << "Destination Entity:" << std::endl << destinationEntityID;
-    std::cout << "Number of fixed records: " << std::endl << numFixedRecords;
-    std::cout << "Number of variable records: " << std::endl << numVariableRecords;
-    };
+   void dumpData() const {
+      std::cout << "------------------------------------------------" << std::endl;
+      std::cout << "Data Query PDU(" << (int)header.PDUType << ")" << std::endl;
+      std::cout << "Emitting Entity:" << std::endl << originatingID;
+      std::cout << "Destination Entity:" << std::endl << receivingID;
+      std::cout << "Number of fixed records: " << std::endl << numFixedRecords;
+      std::cout << "Number of variable records: " << std::endl << numVariableRecords;
+   };
 };
 
 
-//-----------------------------------
+//-----------------------------------------------
 // Electromagnetic Emission PDU
-//-----------------------------------
+//-----------------------------------------------
 class ElectromagneticEmissionPDU {
 public:
-
    // (IST-CF-03-01, May 5, 2003)
    enum { STATE_UPDATE = 0, CHANGED_DATA_UPDATE = 1 };
 
@@ -753,8 +715,7 @@ public:
    //   (The systemDataLength's in the EmissionSystem structures, as well as our
    //    'numberOfSystems' member variable, need to be correct for this to work)
    // Note: 'idx' is zero based, so a idx == 1 will return the second EmissionSystem structure
-   EmissionSystem* getEmissionSystem(const int idx)
-   {
+   EmissionSystem* getEmissionSystem(const unsigned int idx) {
       EmissionSystem* es = 0;
       if (idx < numberOfSystems) {
          unsigned char *p = ((unsigned char *)this) + sizeof(*this);
@@ -762,7 +723,7 @@ public:
          // First Emission system data is just after this structure
          es = (EmissionSystem*) p;
 
-         for (int i = 0; i < idx; i++) {
+         for (unsigned int i = 0; i < idx; i++) {
             // step down to the correct emission system data using 'systemDataLength'
             p += (es->systemDataLength * 4);
             es = (EmissionSystem*) p;
@@ -771,8 +732,7 @@ public:
       }
       return es;
    }
-   const EmissionSystem* getEmissionSystem(const int idx) const
-   {
+   const EmissionSystem* getEmissionSystem(const unsigned int idx) const {
       const EmissionSystem* es = 0;
       if (idx < numberOfSystems) {
          unsigned char *p = ((unsigned char *)this) + sizeof(*this);
@@ -780,7 +740,7 @@ public:
          // First Emission system data is just after this structure
          es = (const EmissionSystem*) p;
 
-         for (int i = 0; i < idx; i++) {
+         for (unsigned int i = 0; i < idx; i++) {
             // step down to the correct emission system data using 'systemDataLength'
             p += (es->systemDataLength * 4);
             es = (const EmissionSystem*) p;
@@ -791,22 +751,21 @@ public:
    }
 
    // Swap bytes 'to' or 'from' the network.
-   void swapBytes()
-   {
+   void swapBytes() {
       // Swap our stuff first
       header.swapBytes();
       emittingEntityID.swapBytes();
       eventID.swapBytes();
 
       // then swap emission data
-      for(int i = 0; i < numberOfSystems; i++) {
+      for(unsigned int i = 0; i < numberOfSystems; i++) {
          EmissionSystem* em = getEmissionSystem(i);
          if (em != 0) em->swapBytes();
       }
    }
 
    // Dump the PDU's data to the standard output device, std::cout.
-   void dumpData()  const {
+   void dumpData() const {
       std::cout << "------------------------------------------------" << std::endl;
       std::cout << "Electromagnetic PDU(" << (int)header.PDUType << ")" << std::endl;
       std::cout << "Header:" << std::endl << header;
@@ -815,7 +774,7 @@ public:
       std::cout << "State Update Indicator: " << (int)stateUpdateIndicator << std::endl;
       std::cout << "Num Of Systems:         " << (int)numberOfSystems << std::endl;
 
-      for(int i = 0; i < numberOfSystems; i++){
+      for(unsigned int i = 0; i < numberOfSystems; i++){
          std::cout << "*****************************************" << std::endl;
          std::cout << ">>>System (" << i << ")<<<" << std::endl;
          const EmissionSystem* es = getEmissionSystem(i);
@@ -827,21 +786,61 @@ public:
 };
 
 
-//-----------------------------------
+//-----------------------------------------------
+// IFF/ATC/NAVAIDS PDU
+//-----------------------------------------------
+class IffAtcNavaidsPDU
+{
+public:
+   // Layer 1 -- basic data
+   PDUHeader            header;
+   entityIdentifierDIS  emittingEntityID;
+   EventIdentifier      eventID;
+   vectorDIS            location;
+   SystemID             systemID;
+   uint8_t              sysDesig;         // IEEE P1278.1/D15
+   uint8_t              sysSpecData;      // IEEE P1278.1/D15
+   FundamentalOpData    operationalData;
+
+   void swapBytes() {
+      header.swapBytes();
+      emittingEntityID.swapBytes();
+      eventID.swapBytes();
+      location.swapBytes();
+      systemID.swapBytes();
+      operationalData.swapBytes();
+   };
+
+   void dumpData() const {
+      std::cout << "------------------------------------------------" << std::endl;
+      std::cout << "IFF/ATC/NAVAIDS PDU(" << (int)header.PDUType << ")" << std::endl;
+      std::cout << "Header:" << std::endl << header;
+      std::cout << "Emitting Entity:" << std::endl << emittingEntityID;
+      std::cout << "Event ID:" << std::endl << eventID;
+      std::cout << "Emission Location:" << std::endl << location;
+      std::cout << "SystemID:" << std::endl << systemID;
+      std::cout << "Operation Data:" << std::endl << operationalData;
+      std::cout.flush();
+   };
+};
+
+
+//-----------------------------------------------
 // Transmitter PDU
-//-----------------------------------
+//-----------------------------------------------
 class TransmitterPDU {
 public:
 
    PDUHeader            header;                 // PDU Header
-   entityIdentifierDIS  emittingEntityID;       // Entity that owns these systems
+   entityIdentifierDIS  radioRefID;             // Entity that owns these systems
    uint16_t             radioID;                // Radio ID (unique to entity)
-   RadioEntityType      radioEntity;            // Radio type
+   RadioEntityType      radioEntityType;        // Radio entity type
    unsigned char        txState;                // Transmit state
    unsigned char        inputSource;            // Operator position: pilot, co-pilot, etc
    uint16_t             padding;
-                                                
-   double               antLoc_X_coord;         // Antenna location on entity
+
+   // Antenna location on entity
+   double               antLoc_X_coord;
    double               antLoc_Y_coord;
    double               antLoc_Z_coord; 
    float                antLoc_x_coord;
@@ -863,9 +862,9 @@ public:
 
    void swapBytes(){
       header.swapBytes();
-      emittingEntityID.swapBytes();
+      radioRefID.swapBytes();
       radioID = convertUInt16(radioID);
-      radioEntity.swapBytes();
+      radioEntityType.swapBytes();
       antLoc_X_coord = convertDouble(antLoc_X_coord);
       antLoc_Y_coord = convertDouble(antLoc_Y_coord);
       antLoc_Z_coord = convertDouble(antLoc_Z_coord);
@@ -883,28 +882,26 @@ public:
       //modulationParam5 = convertUInt32(modulationParam5);
    };
 
-   char* getModulationData()
-   {
+   unsigned char* getModulationData() {
       unsigned char* p = (unsigned char*)this;
       size_t offset = sizeof(TransmitterPDU);
-      return (char*) &p[offset];
+      return &p[offset];
    };
-  
-   const char* getModulationData() const
-   {
+
+   const unsigned char* getModulationData() const {
       const unsigned char* p = (const unsigned char*)this;
       size_t offset = sizeof(TransmitterPDU);
-      return (const char*) &p[offset];
+      return &p[offset];
    };
 
    void dumpData() const {
       std::cout << "--------------------data---------------------" << std::endl;
       std::cout << "Emitting Entity ID:" << std::endl;
-      std::cout << "\tEntity: " << emittingEntityID.ID << std::endl;
-      std::cout << "\tAppID:  " << emittingEntityID.simulationID.applicationIdentification << std::endl;
-      std::cout << "\tSiteID: " << emittingEntityID.simulationID.siteIdentification << std::endl;
+      std::cout << "\tEntity: " << radioRefID.ID << std::endl;
+      std::cout << "\tAppID:  " << radioRefID.simulationID.applicationIdentification << std::endl;
+      std::cout << "\tSiteID: " << radioRefID.simulationID.siteIdentification << std::endl;
       std::cout << "Radio ID: " << radioID << std::endl;
-      std::cout << "RadioEntity:" << radioEntity << std::endl;
+      std::cout << "RadioEntity:" << radioEntityType << std::endl;
       std::cout << "Transmission State: " << (int)txState << std::endl;
       std::cout << "Input Source: " << (int)inputSource << std::endl;
       std::cout << "antLoc_X_coord: " << (int)antLoc_X_coord << std::endl;
@@ -927,170 +924,195 @@ public:
 
 };
 
-//-----------------------------------
-// Action Request PDU
 
-class ActionRequestPDU {
+//-----------------------------------------------
+// Signal PDU
+//-----------------------------------------------
+class SignalPDU {
 public:
-  void swapBytes(){
-    header.swapBytes();
-    emittingEntityID.swapBytes();
-    destinationEntityID.swapBytes();
-    requestID           = convertUInt32(requestID);
-    actionID            = convertUInt32(actionID);
-    numFixedRecords     = convertUInt32(numFixedRecords);
-    numVariableRecords  = convertUInt32(numVariableRecords);
-  };
+   PDUHeader           header;
+   entityIdentifierDIS radioRefID;
+   uint16_t            radioID;
+   uint16_t            encodingScheme;
+   uint16_t            TDLType;
+   uint32_t            sampleRate;
+   uint16_t            dataLength;
+   uint16_t            samples;
 
-  PDUHeader                 header;
-  entityIdentifierDIS       emittingEntityID;
-  entityIdentifierDIS       destinationEntityID;
-  uint32_t                  requestID;
-  uint32_t                  actionID;
-  uint32_t                  numFixedRecords;
-  uint32_t                  numVariableRecords;
- 
-  char* getData() {
-    unsigned char *p = (unsigned char *)this;
-    int pcount = sizeof(PDUHeader)
-           + sizeof(emittingEntityID)
-           + sizeof(destinationEntityID)
-           + 16; //requestid, actionid, numfixedrecords, numvariablerecords
-    return (char *)&p[pcount];
-  };
+   unsigned char* getData() {
+      unsigned char *p = (unsigned char *)this;
+      int pcount = sizeof(PDUHeader) + sizeof(radioRefID) + 14; 
+      return &p[pcount];
+   };
 
-  const char* getData() const {
-    const unsigned char *p = (const unsigned char *)this;
-    int pcount = sizeof(PDUHeader)
-         + sizeof(emittingEntityID)
-         + sizeof(destinationEntityID)
-         + 16; //requestid, actionid, numfixedrecords, numvariablerecords
-    return (const char *)&p[pcount];
+   const unsigned char* getData() const {
+      const unsigned char *p = (const unsigned char *)this;
+      int pcount = sizeof(PDUHeader) + sizeof(radioRefID) + 14; 
+      return &p[pcount];
+   };
+
+   void swapBytes() {
+      header.swapBytes();
+      radioRefID.swapBytes();
+      radioID        = convertUInt16(radioID);
+      encodingScheme = convertUInt16(encodingScheme);
+      TDLType        = convertUInt16(TDLType);
+      sampleRate     = convertUInt32(sampleRate);
+      dataLength     = convertUInt16(dataLength);
+      samples        = convertUInt16(samples);
+   };
+
+   void dumpData() const {
+      std::cout << "------------------------------------------------" << std::endl;
+      std::cout << "Signal PDU(" << (int)header.PDUType << ")" << std::endl;
+      std::cout << "Emitting Entity:" << std::endl << radioRefID;
+      std::cout << "Radio ID: ( " << radioID << " )" << std::endl;
+      std::cout << "encodingScheme: ( " << std::hex << encodingScheme << std::dec << " )" << std::endl;
+      std::cout << "TDLType: ( " << TDLType << " )" << std::endl;
+      std::cout << "sampleRate: ( " << sampleRate << " )" << std::endl;
+      std::cout << "dataLength: ( " << dataLength << " )" << std::endl;
+      std::cout << "samples: ( " << samples << " )" << std::endl;
+      std::cout << "Data:" << std::endl;
+
+      unsigned int count = 0;
+
+      const unsigned char* p = getData();
+
+      std::cout << std::hex;
+
+      for (unsigned int i = 0; i < dataLength; i++) {
+
+         std::cout.width(2);
+         std::cout.fill('0');
+         std::cout << (int)p[i] << " ";
+
+         if (count >= 16) {
+            std::cout << std::endl;   
+            count = 0;
+         }
+         else {
+            count++;
+         }
+      }
+
+      std::cout << std::dec << std::endl;
+      std::cout.flush();
+   };
 };
 
-  void dumpData() const {
-    std::cout << "------------------------------------------------" << std::endl;
-    std::cout << "Data Query PDU(" << (int)header.PDUType << ")" << std::endl;
-    std::cout << "Emitting Entity:" << std::endl << emittingEntityID;
-    std::cout << "Destination Entity:" << std::endl << destinationEntityID;
-    std::cout << "Request ID: " << std::endl << requestID;
-    std::cout << "Action ID: " << std::endl << actionID;
-    std::cout << "Number of fixed records: " << std::endl << numFixedRecords;
-    std::cout << "Number of variable records: " << std::endl << numVariableRecords;
-    };
-};
 
 //-----------------------------------
 // Action Request-R PDU
-
+//-----------------------------------
 class ActionRequestPDU_R {
 public:
-  void swapBytes(){
-    header.swapBytes();
-    emittingEntityID.swapBytes();
-    destinationEntityID.swapBytes();
-    requestID           = convertUInt32(requestID);
-    actionID            = convertUInt32(actionID);
-    numFixedRecords     = convertUInt32(numFixedRecords);
-    numVariableRecords  = convertUInt32(numVariableRecords);
-  };
+   PDUHeader            header;
+   entityIdentifierDIS  originatingID;
+   entityIdentifierDIS  receivingID;
+   unsigned char        reliabilityService;
+   unsigned char        padding1;
+   unsigned char        padding2;
+   unsigned char        padding3;
+   uint32_t             requestID;
+   uint32_t             actionID;
+   uint32_t             numFixedRecords;
+   uint32_t             numVariableRecords;
 
-  PDUHeader                 header;
-  entityIdentifierDIS       emittingEntityID;
-  entityIdentifierDIS       destinationEntityID;
-  unsigned char             reliabilityService;
-  unsigned char             padding1;
-  unsigned char             padding2;
-  unsigned char             padding3;
-  uint32_t                  requestID;
-  uint32_t                  actionID;
-  uint32_t                  numFixedRecords;
-  uint32_t                  numVariableRecords;
- 
-  char* getData() {
-    unsigned char *p = (unsigned char *)this;
-    int pcount = sizeof(PDUHeader)
-           + sizeof(emittingEntityID)
-           + sizeof(destinationEntityID)
-           + 1 + 3 //reliabilityservice and padding
-           + 16; //requestid, actionid, numfixedrecords, numvariablerecords
-    return (char *)&p[pcount];
-  };
-
-  const char* getData() const {
-    const unsigned char *p = (const unsigned char *)this;
-    int pcount = sizeof(PDUHeader)
-         + sizeof(emittingEntityID)
-         + sizeof(destinationEntityID)
+   unsigned char* getData() {
+      unsigned char *p = (unsigned char *)this;
+      int pcount = sizeof(PDUHeader)
+         + sizeof(originatingID)
+         + sizeof(receivingID)
          + 1 + 3 //reliabilityservice and padding
-         + 16; //requestid, actionid, numfixedrecords, numvariablerecords
-    return (const char *)&p[pcount];
+         + 16;   //requestid, actionid, numfixedrecords, numvariablerecords
+      return &p[pcount];
+   };
+
+   const unsigned char* getData() const {
+      const unsigned char *p = (const unsigned char *)this;
+      int pcount = sizeof(PDUHeader)
+         + sizeof(originatingID)
+         + sizeof(receivingID)
+         + 1 + 3 //reliabilityservice and padding
+         + 16;   //requestid, actionid, numfixedrecords, numvariablerecords
+      return &p[pcount];
+   };
+   
+   void swapBytes() {
+      header.swapBytes();
+      originatingID.swapBytes();
+      receivingID.swapBytes();
+      requestID           = convertUInt32(requestID);
+      actionID            = convertUInt32(actionID);
+      numFixedRecords     = convertUInt32(numFixedRecords);
+      numVariableRecords  = convertUInt32(numVariableRecords);
+   };
+
+   void dumpData() const {
+      std::cout << "------------------------------------------------" << std::endl;
+      std::cout << "Data Query PDU(" << (int)header.PDUType << ")" << std::endl;
+      std::cout << "Emitting Entity:" << std::endl << originatingID;
+      std::cout << "Destination Entity:" << std::endl << receivingID;
+      std::cout << "Reliability Service: " << std::endl << reliabilityService;
+      std::cout << "Request ID: " << std::endl << requestID;
+      std::cout << "Action ID: " << std::endl << actionID;
+      std::cout << "Number of fixed records: " << std::endl << numFixedRecords;
+      std::cout << "Number of variable records: " << std::endl << numVariableRecords;
+   };
 };
 
-  void dumpData() const {
-    std::cout << "------------------------------------------------" << std::endl;
-    std::cout << "Data Query PDU(" << (int)header.PDUType << ")" << std::endl;
-    std::cout << "Emitting Entity:" << std::endl << emittingEntityID;
-    std::cout << "Destination Entity:" << std::endl << destinationEntityID;
-    std::cout << "Reliability Service: " << std::endl << reliabilityService;
-    std::cout << "Request ID: " << std::endl << requestID;
-    std::cout << "Action ID: " << std::endl << actionID;
-    std::cout << "Number of fixed records: " << std::endl << numFixedRecords;
-    std::cout << "Number of variable records: " << std::endl << numVariableRecords;
-    };
-};
 
 //-----------------------------------
 // Action Response PDU
-
+//-----------------------------------
 class ActionResponsePDU_R {
 public:
-  void swapBytes(){
-    header.swapBytes();
-    emittingEntityID.swapBytes();
-    destinationEntityID.swapBytes();
-    requestID           = convertUInt32(requestID);
-    responseStatus      = convertUInt32(responseStatus);
-    numFixedRecords     = convertUInt32(numFixedRecords);
-    numVariableRecords  = convertUInt32(numVariableRecords);
-  };
+   PDUHeader                 header;
+   entityIdentifierDIS       originatingID;
+   entityIdentifierDIS       receivingID;
+   uint32_t                  requestID;
+   uint32_t                  responseStatus;
+   uint32_t                  numFixedRecords;
+   uint32_t                  numVariableRecords;
 
-  PDUHeader                 header;
-  entityIdentifierDIS       emittingEntityID;
-  entityIdentifierDIS       destinationEntityID;
-  uint32_t                  requestID;
-  uint32_t                  responseStatus;
-  uint32_t                  numFixedRecords;
-  uint32_t                  numVariableRecords;
- 
-  char* getData() {
-    unsigned char *p = (unsigned char *)this;
-    int pcount = sizeof(PDUHeader)
-           + sizeof(emittingEntityID)
-           + sizeof(destinationEntityID)
-           + 16; //requestid, responseStatus, numfixedrecords, numvariablerecords
-    return (char *)&p[pcount];
-  };
+   unsigned char* getData() {
+      unsigned char *p = (unsigned char *)this;
+      int pcount = sizeof(PDUHeader)
+         + sizeof(originatingID)
+         + sizeof(receivingID)
+         + 16;  //requestid, responseStatus, numfixedrecords, numvariablerecords
+      return &p[pcount];
+   };
 
-  const char* getData() const {
-    const unsigned char *p = (const unsigned char *)this;
-    int pcount = sizeof(PDUHeader)
-         + sizeof(emittingEntityID)
-         + sizeof(destinationEntityID)
-         + 16; //requestid, responseStatus, numfixedrecords, numvariablerecords
-    return (const char *)&p[pcount];
-};
+   const unsigned char* getData() const {
+      const unsigned char *p = (const unsigned char *)this;
+      int pcount = sizeof(PDUHeader)
+         + sizeof(originatingID)
+         + sizeof(receivingID)
+         + 16;  //requestid, responseStatus, numfixedrecords, numvariablerecords
+      return &p[pcount];
+   };
 
-  void dumpData() const {
-    std::cout << "------------------------------------------------" << std::endl;
-    std::cout << "Data Query PDU(" << (int)header.PDUType << ")" << std::endl;
-    std::cout << "Emitting Entity:" << std::endl << emittingEntityID;
-    std::cout << "Destination Entity:" << std::endl << destinationEntityID;
-    std::cout << "Request ID: " << std::endl << requestID;
-    std::cout << "Response Status: " << std::endl << responseStatus;
-    std::cout << "Number of fixed records: " << std::endl << numFixedRecords;
-    std::cout << "Number of variable records: " << std::endl << numVariableRecords;
-    };
+   void swapBytes() {
+      header.swapBytes();
+      originatingID.swapBytes();
+      receivingID.swapBytes();
+      requestID           = convertUInt32(requestID);
+      responseStatus      = convertUInt32(responseStatus);
+      numFixedRecords     = convertUInt32(numFixedRecords);
+      numVariableRecords  = convertUInt32(numVariableRecords);
+   };
+
+   void dumpData() const {
+      std::cout << "------------------------------------------------" << std::endl;
+      std::cout << "Data Query PDU(" << (int)header.PDUType << ")" << std::endl;
+      std::cout << "Emitting Entity:" << std::endl << originatingID;
+      std::cout << "Destination Entity:" << std::endl << receivingID;
+      std::cout << "Request ID: " << std::endl << requestID;
+      std::cout << "Response Status: " << std::endl << responseStatus;
+      std::cout << "Number of fixed records: " << std::endl << numFixedRecords;
+      std::cout << "Number of variable records: " << std::endl << numVariableRecords;
+   };
 };
 
 } // End Dis namespace

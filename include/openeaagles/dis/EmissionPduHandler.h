@@ -15,8 +15,7 @@ namespace Network {
 namespace Dis {
 
 //------------------------------------------------------------------------------
-// Class:	EmissionPduHandler
-// Base class:	Basic::Object -> EmissionPduHandler
+// Class: EmissionPduHandler
 //
 // Description: Handles the DIS input/output from an emitter system
 //              (e.g., RfSensor class)
