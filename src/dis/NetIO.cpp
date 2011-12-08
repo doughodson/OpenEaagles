@@ -85,6 +85,14 @@ const LCreal HBT_TIMEOUT_MPLIER = 2.4;                         //  Multiplier
 const LCreal EE_AZ_THRSH = (LCreal)(1.0 * PI/180.0);            //  radians
 const LCreal EE_EL_THRSH = (LCreal)(1.0 * PI/180.0);            //  radians
 
+const LCreal EE_ERP_THRSH = (LCreal)(1.0);                      //  dB
+const LCreal EE_FREQ_THRSH = (LCreal)(1.0);                     //  Hz
+const LCreal EE_FRNG_THRSH = (LCreal)(1.0);                     //  Hz
+const LCreal EE_PRF_THRSH = (LCreal)(1.0);                     //  Hz
+const LCreal EE_PW_THRSH = (LCreal)(1e-6);                     //  seconds
+//const unsigned int EE_HIGH_DENSITY_THRSH = 10;                  //  no units
+
+
 //------------------------------------------------------------------------------
 // Slot table
 //------------------------------------------------------------------------------
@@ -1300,6 +1308,14 @@ LCreal NetIO::getHbtPduEe() const         { return HBT_PDU_EE; }
 LCreal NetIO::getHbtTimeoutMplier() const { return HBT_TIMEOUT_MPLIER; }
 LCreal NetIO::getEeAzThrsh() const        { return EE_AZ_THRSH; }
 LCreal NetIO::getEeElThrsh() const        { return EE_EL_THRSH; }
+
+LCreal NetIO::get_EE_ERP_THRSH(void) const { return EE_ERP_THRSH; }
+LCreal NetIO::get_EE_FREQ_THRSH(void) const { return EE_FREQ_THRSH; }
+LCreal NetIO::get_EE_FRNG_THRSH(void) const { return EE_FRNG_THRSH; }
+LCreal NetIO::get_EE_PRF_THRSH(void) const { return EE_PRF_THRSH; }
+LCreal NetIO::get_EE_PW_THRSH(void) const { return EE_PW_THRSH; }
+
+//unsigned int NetIO::get_EE_HIGH_DENSITY_THRSH(void) const { return EE_HIGH_DENSITY_THRSH; }
 
 
 // Adds an item to the emission PDU handler table

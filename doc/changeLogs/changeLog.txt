@@ -23,6 +23,9 @@ basicGL
 --------------------------------------------------------------------------------
 dis
 
+   EmissionPduHandler class
+      1) isUpdateRequired() -- changed the system transmitting check from
+         RfSystem::isTransmitterEnabled() to RfSystem::isTransmitting()
 
 --------------------------------------------------------------------------------
 ioDevice
@@ -30,4 +33,7 @@ ioDevice
 
 --------------------------------------------------------------------------------
 simulation
+
+   Missile class
+       1) fuzing logic is reset if missile's target changes mid-flight
 

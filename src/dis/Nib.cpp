@@ -210,7 +210,7 @@ void Nib::updateTheIPlayer()
       double curExecTime = disIO->getSimulation()->getExecTimeSec();
       for (unsigned char i = 0; i < numEmissionSystems; i++) {
          LCreal drTime = curExecTime - emitterSysHandler[i]->getEmPduExecTime();
-         if ( drTime >= (disIO->get_HBT_PDU_EE() * disIO->get_HBT_TIMEOUT_MPLIER()) ) {
+         if ( drTime >= (disIO->getHbtPduEe() * disIO->getHbtTimeoutMplier()) ) {
             emitterSysHandler[i]->setTimedOut();
          }
       }

@@ -285,6 +285,12 @@ public:
    virtual LCreal getEeAzThrsh() const;
    virtual LCreal getEeElThrsh() const;
 
+   virtual LCreal get_EE_ERP_THRSH(void) const ;
+   virtual LCreal get_EE_FREQ_THRSH(void) const ;
+   virtual LCreal get_EE_FRNG_THRSH(void) const ;
+   virtual LCreal get_EE_PRF_THRSH(void) const ;
+   virtual LCreal get_EE_PW_THRSH(void) const ;
+
 protected:
    virtual void processEntityStatePDU(const EntityStatePDU* const pdu);
    virtual void processFirePDU(const FirePDU* const pdu);
