@@ -13,7 +13,10 @@ Global changes:
 --------------------------------------------------------------------------------
 basic
 
-
+   NetHandler class
+      1) The toNetOrder() and fromNetOrder() functions now process int16_t, uint16_t,
+         int32_t, uint32_t, int64_t and uint64_t types instead of signed and unsigned
+         short, int and long types.
 
 --------------------------------------------------------------------------------
 basicGL
@@ -36,4 +39,5 @@ simulation
 
    Missile class
        1) fuzing logic is reset if missile's target changes mid-flight
+       
 
