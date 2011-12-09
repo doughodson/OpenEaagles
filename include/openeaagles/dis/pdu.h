@@ -37,62 +37,62 @@ namespace Dis {
 //-----------------------------------------------
 // EntityStatePDU (1152 + 128*n bits)
 //-----------------------------------------------
-class EntityStatePDU {
-public:
+struct EntityStatePDU {
+
    PDUHeader            header;
-   entityIdentifierDIS  entityID;
-   unsigned char        forceID;
-   unsigned char        numberOfArticulationParameters;
+   EntityIdentifierDIS  entityID;
+   uint8_t              forceID;
+   uint8_t              numberOfArticulationParameters;
    EntityType           entityType;
    EntityType           alternativeType;
-   vectorDIS            entityLinearVelocity;
+   VectorDIS            entityLinearVelocity;
    WorldCoordinates     entityLocation;
    EulerAngles          entityOrientation;
    uint32_t             appearance;
-   unsigned char        deadReckoningAlgorithm;
-   unsigned char        otherParameters[15];
-   vectorDIS            DRentityLinearAcceleration;
-   AngularVelocityvectorDIS DRentityAngularVelocity;
+   uint8_t              deadReckoningAlgorithm;
+   uint8_t              otherParameters[15];
+   VectorDIS            DRentityLinearAcceleration;
+   AngularVelocityVectorDIS DRentityAngularVelocity;
    EntityMarking        entityMarking;
    uint32_t             capabilites;
 
-   // Returns a pointer to the idx'th ArticulationParameter structure;
+   // Returns a pointer to the idx'th VpArticulatedPart structure;
    // Note: This ONLY works after the PDU have been created and initialized!
    //   (The "numberOfArticulationParameters' member variable needs to be correct
    //    for this to work)
-   // Note: 'idx' is zero based, so an idx == 1 will return the second ArticulationParameter structure
-   ArticulationParameter* getArticulationParameter(const unsigned int idx)
+   // Note: 'idx' is zero based, so an idx == 1 will return the second VpArticulatedPart structure
+   VpArticulatedPart* getArticulationParameter(const unsigned int idx)
    {
-      ArticulationParameter* ap = 0;
+      VpArticulatedPart* ap = 0;
       if (idx < numberOfArticulationParameters) {
-         unsigned char *p = ((unsigned char *)this) + sizeof(*this);
+         uint8_t *p = ((uint8_t *)this) + sizeof(*this);
 
          // First Emission system data is just after this structure
-         ap = (ArticulationParameter*) p;
+         ap = (VpArticulatedPart*) p;
 
          for (unsigned int i = 0; i < idx; i++) {
             // step down to the correct emission system data using 'systemDataLength'
-            p += sizeof(ArticulationParameter);
-            ap = (ArticulationParameter*) p;
+            p += sizeof(VpArticulatedPart);
+            ap = (VpArticulatedPart*) p;
          }
 
       }
       return ap;
    }
 
-   const ArticulationParameter* getArticulationParameter(const unsigned int idx) const
+   const VpArticulatedPart* getArticulationParameter(const unsigned int idx) const
    {
-      const ArticulationParameter* ap = 0;
+      const VpArticulatedPart* ap = 0;
       if (idx < numberOfArticulationParameters) {
 
          // First articulation parameter is just after this structure
-         const unsigned char *p = ((unsigned char *)this) + sizeof(*this);
-         ap = (const ArticulationParameter*) p;
+         const uint8_t *p = ((uint8_t *)this) + sizeof(*this);
+         ap = (const VpArticulatedPart*) p;
 
          for (unsigned int i = 0; i < idx; i++) {
-            // step down to the correct ArticulationParameter structure 
-            p += sizeof(ArticulationParameter);
-            ap = (const ArticulationParameter*) p;
+            // step down to the correct VpArticulatedPart structure 
+            p += sizeof(VpArticulatedPart);
+            ap = (const VpArticulatedPart*) p;
          }
 
       }
@@ -115,7 +115,7 @@ public:
 
       // then swap the articulation parameters
       for(int i = 0; i < numberOfArticulationParameters; i++) {
-         ArticulationParameter* ap = getArticulationParameter(i);
+         VpArticulatedPart* ap = getArticulationParameter(i);
          if (ap != 0) ap->swapBytes();
       }
    };
@@ -159,7 +159,7 @@ public:
       std::cout << entityMarking;
       std::cout << "Capabilities (" << capabilites << ")" << std::endl;
       for (unsigned int i = 0; i < numberOfArticulationParameters; i++) {
-         const ArticulationParameter* ap = getArticulationParameter(i);
+         const VpArticulatedPart* ap = getArticulationParameter(i);
          std::cout << "Articulation Parameter(" << i << ") = " << *ap << std::endl;
       }
       std::cout.flush();
@@ -170,17 +170,17 @@ public:
 //-----------------------------------------------
 // CollisionPDU (480 bits)
 //-----------------------------------------------
-class CollisionPDU {
-public:
+struct CollisionPDU {
+
    PDUHeader            header;
-   entityIdentifierDIS  issuingEntityID;
-   entityIdentifierDIS  collidingEntityID;
+   EntityIdentifierDIS  issuingEntityID;
+   EntityIdentifierDIS  collidingEntityID;
    EventIdentifier      eventID;
-   unsigned char        collisionType;
-   unsigned char        padding;
-   vectorDIS            velocity;
+   uint8_t              collisionType;
+   uint8_t              padding;
+   VectorDIS            velocity;
    float                mass;
-   vectorDIS            location;
+   VectorDIS            location;
 
    void swapBytes() {
       header.swapBytes();
@@ -200,17 +200,17 @@ public:
 //-----------------------------------------------
 // Fire PDU (768 bits)
 //-----------------------------------------------
-class FirePDU {
-public:
+struct FirePDU {
+
    PDUHeader            header;
-   entityIdentifierDIS  firingEntityID;
-   entityIdentifierDIS  targetEntityID;
-   entityIdentifierDIS  munitionID;
+   EntityIdentifierDIS  firingEntityID;
+   EntityIdentifierDIS  targetEntityID;
+   EntityIdentifierDIS  munitionID;
    EventIdentifier      eventID;
    uint32_t             fireMissionIndex;
    WorldCoordinates     location;
    BurstDescriptor      burst;
-   vectorDIS            velocity;
+   VectorDIS            velocity;
    float                range;
 
    void swapBytes() {
@@ -248,20 +248,19 @@ public:
 //-----------------------------------------------
 // Detonation PDU
 //-----------------------------------------------
-class DetonationPDU {
-public:
+struct DetonationPDU {
 
    PDUHeader            header;
-   entityIdentifierDIS  firingEntityID;
-   entityIdentifierDIS  targetEntityID;
-   entityIdentifierDIS  munitionID;
+   EntityIdentifierDIS  firingEntityID;
+   EntityIdentifierDIS  targetEntityID;
+   EntityIdentifierDIS  munitionID;
    EventIdentifier      eventID;
-   vectorDIS            velocity;
+   VectorDIS            velocity;
    WorldCoordinates     location;
    BurstDescriptor      burst;
-   vectorDIS            locationInEntityCoordinates;
-   unsigned char        detonationResult;
-   unsigned char        numberOfArticulationParameters;
+   VectorDIS            locationInEntityCoordinates;
+   uint8_t              detonationResult;
+   uint8_t              numberOfArticulationParameters;
    uint16_t             padding;
 
    void swapBytes() {
@@ -299,12 +298,11 @@ public:
 //-----------------------------------
 // Start/Resume PDU (352 bits)
 //-----------------------------------
-class StartPDU{
-public:
+struct StartPDU{
 
    PDUHeader            header;
-   entityIdentifierDIS  originatingID;
-   entityIdentifierDIS  receivingID;
+   EntityIdentifierDIS  originatingID;
+   EntityIdentifierDIS  receivingID;
    ClockTime            realWorldTime;
    ClockTime            simTime;
    uint32_t             requestID;
@@ -334,15 +332,14 @@ public:
 // Stop/Freeze PDU (320 bits)
 //-----------------------------------
 
-class StopPDU{
-public:
+struct StopPDU{
 
    PDUHeader            header;
-   entityIdentifierDIS  originatingID;
-   entityIdentifierDIS  receivingID;
+   EntityIdentifierDIS  originatingID;
+   EntityIdentifierDIS  receivingID;
    ClockTime            realWorldTime;
-   unsigned char        reason;
-   unsigned char        frozenBehavior;
+   uint8_t              reason;
+   uint8_t              frozenBehavior;
    uint16_t             padding;
    uint32_t             requestID;
 
@@ -371,11 +368,11 @@ public:
 //-----------------------------------
 // Acknowledge PDU
 //-----------------------------------
-class AcknowledgePDU{
-public:
+struct AcknowledgePDU{
+
    PDUHeader              header;
-   entityIdentifierDIS    originatingID;
-   entityIdentifierDIS    receivingID;
+   EntityIdentifierDIS    originatingID;
+   EntityIdentifierDIS    receivingID;
    uint16_t               acknowledgeFlag;
    uint16_t               responseFlag;
    uint32_t               requestID;
@@ -405,18 +402,18 @@ public:
 //-----------------------------------
 // Action Request PDU
 //-----------------------------------
-class ActionRequestPDU {
-public:
+struct ActionRequestPDU {
+
    PDUHeader            header;
-   entityIdentifierDIS  originatingID;
-   entityIdentifierDIS  receivingID;
+   EntityIdentifierDIS  originatingID;
+   EntityIdentifierDIS  receivingID;
    uint32_t             requestID;
    uint32_t             actionID;
    uint32_t             numFixedRecords;
    uint32_t             numVariableRecords;
 
-   unsigned char* getData() {
-      unsigned char *p = (unsigned char *)this;
+   uint8_t* getData() {
+      uint8_t *p = (uint8_t *)this;
       int pcount = sizeof(PDUHeader)
          + sizeof(originatingID)
          + sizeof(receivingID)
@@ -427,8 +424,8 @@ public:
       return &p[pcount];
    };
 
-   const unsigned char* getData() const {
-      const unsigned char *p = (const unsigned char *)this;
+   const uint8_t* getData() const {
+      const uint8_t *p = (const uint8_t *)this;
       int pcount = sizeof(PDUHeader)
          + sizeof(originatingID)
          + sizeof(receivingID)
@@ -465,20 +462,19 @@ public:
 //-----------------------------------------------
 // Data Query PDU
 //-----------------------------------------------
-class DataQueryPDU{
-public:
+struct DataQueryPDU{
 
    PDUHeader              header;
-   entityIdentifierDIS    originatingID;
-   entityIdentifierDIS    receivingID;
+   EntityIdentifierDIS    originatingID;
+   EntityIdentifierDIS    receivingID;
    uint32_t               requestID;
    uint32_t               timeInterval;
    uint32_t               numFixedRecords;
    uint32_t               numVariableRecords;
 
    // Returns a pointer to the start of the fixed/variable records
-   unsigned char* getData() {
-      unsigned char *p = (unsigned char *)this;
+   uint8_t* getData() {
+      uint8_t *p = (uint8_t *)this;
       int pcount = sizeof(PDUHeader)
          + sizeof(originatingID)
          + sizeof(receivingID)
@@ -490,8 +486,8 @@ public:
    };
 
    // Returns a const pointer to the start of the fixed/variable records
-   const unsigned char* getData() const {
-      const unsigned char *p = (const unsigned char *)this;
+   const uint8_t* getData() const {
+      const uint8_t *p = (const uint8_t *)this;
       int pcount = sizeof(PDUHeader)
          + sizeof(originatingID)
          + sizeof(receivingID)
@@ -528,18 +524,18 @@ public:
 //-----------------------------------------------
 // Data PDU
 //-----------------------------------------------
-class DataPDU{
-public:
+struct DataPDU{
+
    PDUHeader              header;
-   entityIdentifierDIS    originatingID;
-   entityIdentifierDIS    receivingID;
+   EntityIdentifierDIS    originatingID;
+   EntityIdentifierDIS    receivingID;
    uint32_t               requestID;
    uint32_t               padding;
    uint32_t               numFixedRecords;
    uint32_t               numVariableRecords;
 
-   unsigned char* getData() {
-      unsigned char *p = (unsigned char *)this;
+   uint8_t* getData() {
+      uint8_t *p = (uint8_t *)this;
       int pcount = sizeof(PDUHeader)
          + sizeof(originatingID)
          + sizeof(receivingID)
@@ -549,8 +545,8 @@ public:
          + sizeof(numVariableRecords);
       return &p[pcount];
    };
-   const unsigned char* getData() const {
-      const unsigned char *p = (const unsigned char *)this;
+   const uint8_t* getData() const {
+      const uint8_t *p = (const uint8_t *)this;
       int pcount = sizeof(PDUHeader)
          + sizeof(originatingID)
          + sizeof(receivingID)
@@ -586,16 +582,16 @@ public:
 //-----------------------------------------------
 // Comment PDU
 //-----------------------------------------------
-class CommentPDU{
-public:
+struct CommentPDU{
+
    PDUHeader              header;
-   entityIdentifierDIS    originatingID;
-   entityIdentifierDIS    receivingID;
+   EntityIdentifierDIS    originatingID;
+   EntityIdentifierDIS    receivingID;
    uint32_t               numFixedRecords;
    uint32_t               numVariableRecords;
 
-   unsigned char* getData() {
-      unsigned char *p = (unsigned char*)this;
+   uint8_t* getData() {
+      uint8_t *p = (uint8_t*)this;
       int pcount = sizeof(PDUHeader)
          + sizeof(originatingID)
          + sizeof(receivingID)
@@ -603,8 +599,8 @@ public:
       return &p[pcount];
    };
 
-   const unsigned char* getData() const {
-      const unsigned char *p = (const unsigned char*)this;
+   const uint8_t* getData() const {
+      const uint8_t *p = (const uint8_t*)this;
       int pcount = sizeof(PDUHeader)
          + sizeof(originatingID)
          + sizeof(receivingID)
@@ -616,7 +612,7 @@ public:
    FixedDatum* getFixedDatum(const unsigned int index) {
       if (index >= numFixedRecords) return 0;
 
-      unsigned char* ptr = getData();  
+      uint8_t* ptr = getData();  
       FixedDatum* datum = (FixedDatum *) ptr;
       for(unsigned int i = 0; i < index; i++) {
          datum++;
@@ -636,10 +632,10 @@ public:
    VariableDatum* getVariableDatum(const unsigned int index) {
       if (index >= numVariableRecords) return 0;
 
-      unsigned char *ptr = getData();
+      uint8_t *ptr = getData();
       if (numFixedRecords > 0) {
          FixedDatum *datum = getFixedDatum(numFixedRecords-1);
-         ptr = (unsigned char*)datum;
+         ptr = (uint8_t*)datum;
          ptr += sizeof(FixedDatum);
       }
 
@@ -696,18 +692,18 @@ public:
 
 
 //-----------------------------------------------
-// Electromagnetic Emission PDU
+// 7.6.2 -- Electromagnetic Emission PDU
 //-----------------------------------------------
-class ElectromagneticEmissionPDU {
-public:
+struct ElectromagneticEmissionPDU {
+
    // (IST-CF-03-01, May 5, 2003)
    enum { STATE_UPDATE = 0, CHANGED_DATA_UPDATE = 1 };
 
    PDUHeader            header;                 // PDU Header
-   entityIdentifierDIS  emittingEntityID;       // Entity that owns these systems
+   EntityIdentifierDIS  emittingEntityID;       // Entity that owns these systems
    EventIdentifier      eventID;                // Event ID
-   unsigned char        stateUpdateIndicator;   // State
-   unsigned char        numberOfSystems;        // Number of systems (EmissionSystem) that follow
+   uint8_t              stateUpdateIndicator;   // State
+   uint8_t              numberOfSystems;        // Number of systems (EmissionSystem) that follow
    uint16_t             padding;
 
    // Returns a pointer to the idx'th EmissionSystem structure;
@@ -718,7 +714,7 @@ public:
    EmissionSystem* getEmissionSystem(const unsigned int idx) {
       EmissionSystem* es = 0;
       if (idx < numberOfSystems) {
-         unsigned char *p = ((unsigned char *)this) + sizeof(*this);
+         uint8_t *p = ((uint8_t *)this) + sizeof(*this);
 
          // First Emission system data is just after this structure
          es = (EmissionSystem*) p;
@@ -735,7 +731,7 @@ public:
    const EmissionSystem* getEmissionSystem(const unsigned int idx) const {
       const EmissionSystem* es = 0;
       if (idx < numberOfSystems) {
-         unsigned char *p = ((unsigned char *)this) + sizeof(*this);
+         uint8_t *p = ((uint8_t *)this) + sizeof(*this);
 
          // First Emission system data is just after this structure
          es = (const EmissionSystem*) p;
@@ -789,14 +785,14 @@ public:
 //-----------------------------------------------
 // IFF/ATC/NAVAIDS PDU
 //-----------------------------------------------
-class IffAtcNavaidsPDU
+struct IffAtcNavaidsPDU
 {
-public:
+
    // Layer 1 -- basic data
    PDUHeader            header;
-   entityIdentifierDIS  emittingEntityID;
+   EntityIdentifierDIS  emittingEntityID;
    EventIdentifier      eventID;
-   vectorDIS            location;
+   VectorDIS            location;
    SystemID             systemID;
    uint8_t              sysDesig;         // IEEE P1278.1/D15
    uint8_t              sysSpecData;      // IEEE P1278.1/D15
@@ -828,15 +824,14 @@ public:
 //-----------------------------------------------
 // Transmitter PDU
 //-----------------------------------------------
-class TransmitterPDU {
-public:
+struct TransmitterPDU {
 
    PDUHeader            header;                 // PDU Header
-   entityIdentifierDIS  radioRefID;             // Entity that owns these systems
+   EntityIdentifierDIS  radioRefID;             // Entity that owns these systems
    uint16_t             radioID;                // Radio ID (unique to entity)
    RadioEntityType      radioEntityType;        // Radio entity type
-   unsigned char        txState;                // Transmit state
-   unsigned char        inputSource;            // Operator position: pilot, co-pilot, etc
+   uint8_t              txState;                // Transmit state
+   uint8_t              inputSource;            // Operator position: pilot, co-pilot, etc
    uint16_t             padding;
 
    // Antenna location on entity
@@ -855,10 +850,10 @@ public:
    ModulationType       modulationType;         // Modulation type
    uint16_t             cryptoSystem;           // Crypto system
    uint16_t             cryptoKeyID;            // Crypto key id
-   unsigned char        lengthOfModulationParameters;
-   unsigned char        padding1;
-   unsigned char        padding2;
-   unsigned char        padding3;
+   uint8_t              lengthOfModulationParameters;
+   uint8_t              padding1;
+   uint8_t              padding2;
+   uint8_t              padding3;
 
    void swapBytes(){
       header.swapBytes();
@@ -882,14 +877,14 @@ public:
       //modulationParam5 = convertUInt32(modulationParam5);
    };
 
-   unsigned char* getModulationData() {
-      unsigned char* p = (unsigned char*)this;
+   uint8_t* getModulationData() {
+      uint8_t* p = (uint8_t*)this;
       size_t offset = sizeof(TransmitterPDU);
       return &p[offset];
    };
 
-   const unsigned char* getModulationData() const {
-      const unsigned char* p = (const unsigned char*)this;
+   const uint8_t* getModulationData() const {
+      const uint8_t* p = (const uint8_t*)this;
       size_t offset = sizeof(TransmitterPDU);
       return &p[offset];
    };
@@ -928,10 +923,10 @@ public:
 //-----------------------------------------------
 // Signal PDU
 //-----------------------------------------------
-class SignalPDU {
-public:
+struct SignalPDU {
+
    PDUHeader           header;
-   entityIdentifierDIS radioRefID;
+   EntityIdentifierDIS radioRefID;
    uint16_t            radioID;
    uint16_t            encodingScheme;
    uint16_t            TDLType;
@@ -939,14 +934,14 @@ public:
    uint16_t            dataLength;
    uint16_t            samples;
 
-   unsigned char* getData() {
-      unsigned char *p = (unsigned char *)this;
+   uint8_t* getData() {
+      uint8_t *p = (uint8_t *)this;
       int pcount = sizeof(PDUHeader) + sizeof(radioRefID) + 14; 
       return &p[pcount];
    };
 
-   const unsigned char* getData() const {
-      const unsigned char *p = (const unsigned char *)this;
+   const uint8_t* getData() const {
+      const uint8_t *p = (const uint8_t *)this;
       int pcount = sizeof(PDUHeader) + sizeof(radioRefID) + 14; 
       return &p[pcount];
    };
@@ -976,7 +971,7 @@ public:
 
       unsigned int count = 0;
 
-      const unsigned char* p = getData();
+      const uint8_t* p = getData();
 
       std::cout << std::hex;
 
@@ -1004,22 +999,22 @@ public:
 //-----------------------------------
 // Action Request-R PDU
 //-----------------------------------
-class ActionRequestPDU_R {
-public:
+struct ActionRequestPDU_R {
+
    PDUHeader            header;
-   entityIdentifierDIS  originatingID;
-   entityIdentifierDIS  receivingID;
-   unsigned char        reliabilityService;
-   unsigned char        padding1;
-   unsigned char        padding2;
-   unsigned char        padding3;
+   EntityIdentifierDIS  originatingID;
+   EntityIdentifierDIS  receivingID;
+   uint8_t              reliabilityService;
+   uint8_t              padding1;
+   uint8_t              padding2;
+   uint8_t              padding3;
    uint32_t             requestID;
    uint32_t             actionID;
    uint32_t             numFixedRecords;
    uint32_t             numVariableRecords;
 
-   unsigned char* getData() {
-      unsigned char *p = (unsigned char *)this;
+   uint8_t* getData() {
+      uint8_t *p = (uint8_t *)this;
       int pcount = sizeof(PDUHeader)
          + sizeof(originatingID)
          + sizeof(receivingID)
@@ -1028,8 +1023,8 @@ public:
       return &p[pcount];
    };
 
-   const unsigned char* getData() const {
-      const unsigned char *p = (const unsigned char *)this;
+   const uint8_t* getData() const {
+      const uint8_t *p = (const uint8_t *)this;
       int pcount = sizeof(PDUHeader)
          + sizeof(originatingID)
          + sizeof(receivingID)
@@ -1065,18 +1060,18 @@ public:
 //-----------------------------------
 // Action Response PDU
 //-----------------------------------
-class ActionResponsePDU_R {
-public:
+struct ActionResponsePDU_R {
+
    PDUHeader                 header;
-   entityIdentifierDIS       originatingID;
-   entityIdentifierDIS       receivingID;
+   EntityIdentifierDIS       originatingID;
+   EntityIdentifierDIS       receivingID;
    uint32_t                  requestID;
    uint32_t                  responseStatus;
    uint32_t                  numFixedRecords;
    uint32_t                  numVariableRecords;
 
-   unsigned char* getData() {
-      unsigned char *p = (unsigned char *)this;
+   uint8_t* getData() {
+      uint8_t *p = (uint8_t *)this;
       int pcount = sizeof(PDUHeader)
          + sizeof(originatingID)
          + sizeof(receivingID)
@@ -1084,8 +1079,8 @@ public:
       return &p[pcount];
    };
 
-   const unsigned char* getData() const {
-      const unsigned char *p = (const unsigned char *)this;
+   const uint8_t* getData() const {
+      const uint8_t *p = (const uint8_t *)this;
       int pcount = sizeof(PDUHeader)
          + sizeof(originatingID)
          + sizeof(receivingID)

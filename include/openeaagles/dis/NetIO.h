@@ -20,29 +20,30 @@ namespace Dis {
    class Ntm;
    class EmissionPduHandler;
 
-   class PDUHeader;
-   class DetonationPDU;
-   class ElectromagneticEmissionPDU;
-   class EntityStatePDU;
-   class FirePDU;
-   class FundamentalOpData;
-   class SignalPDU;
-   class TransmitterPDU;
-   class DataQueryPDU;
-   class DataPDU;
-   class CommentPDU;
-   class StartPDU;
-   class StopPDU;
-   class AcknowledgePDU;
-   class ActionRequestPDU;
-   class ActionRequestPDU_R;
-   class ActionResponsePDU_R;
-
-   struct TrackJamTargets;
-   struct FundamentalParameterData;
+   struct EeFundamentalParameterData;
    struct EmitterBeamData;
    struct EmitterSystem;
    struct EmissionSystem;
+   struct FundamentalOpData;
+   struct PDUHeader;
+   struct TrackJamTargets;
+
+   struct DetonationPDU;
+   struct ElectromagneticEmissionPDU;
+   struct EntityStatePDU;
+   struct FirePDU;
+   struct SignalPDU;
+   struct TransmitterPDU;
+   struct DataQueryPDU;
+   struct DataPDU;
+   struct CommentPDU;
+   struct StartPDU;
+   struct StopPDU;
+   struct AcknowledgePDU;
+   struct ActionRequestPDU;
+   struct ActionRequestPDU_R;
+   struct ActionResponsePDU_R;
+
 
 //==============================================================================
 // Class: Dis::NetIO

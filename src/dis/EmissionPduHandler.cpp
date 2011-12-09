@@ -454,21 +454,21 @@ bool EmissionPduHandler::updateIncoming(const EmissionSystem* const es, Nib* con
          rfSys->setPRF( bd->parameterData.pulseRepetitiveFrequency );
          rfSys->setPulseWidth( bd->parameterData.pulseWidth / 1000000.0f );
 
-         if ( bd->parameterData.beamAzimuthCenter == 0 && 
-            (bd->parameterData.beamAzimuthSweep == 0 || bd->parameterData.beamAzimuthSweep >= PI)
+         if ( bd->beamData.beamAzimuthCenter == 0 && 
+            (bd->beamData.beamAzimuthSweep == 0 || bd->beamData.beamAzimuthSweep >= PI)
             ) {
                // circular scan
                antenna->setRefAzimuth( 0 );
-               antenna->setRefElevation( bd->parameterData.beamElevationCenter );
+               antenna->setRefElevation( bd->beamData.beamElevationCenter );
                antenna->setScanMode( Simulation::ScanGimbal::CIRCULAR_SCAN );
                antenna->setCmdRate( (24.0f * (LCreal)Basic::Angle::D2RCC), 0 );  // default rates
          }
          else {
             // Standard search volume parameters
-            antenna->setRefAzimuth( bd->parameterData.beamAzimuthCenter );
-            antenna->setRefElevation( bd->parameterData.beamElevationCenter );
+            antenna->setRefAzimuth( bd->beamData.beamAzimuthCenter );
+            antenna->setRefElevation( bd->beamData.beamElevationCenter );
             // note that beamElevationSweep corresponds to scanHeight; setSearchVolume is expecting el component to be scanHeight+.5*barspacing
-            antenna->setSearchVolume( bd->parameterData.beamAzimuthSweep * 2.0f, bd->parameterData.beamElevationSweep * 2.0f);
+            antenna->setSearchVolume( bd->beamData.beamAzimuthSweep * 2.0f, bd->beamData.beamElevationSweep * 2.0f);
          }
 
          // IPlayer's transmit (when they're active) but don't need to receive
@@ -661,19 +661,19 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
          bd.parameterData.pulseWidth = float( beam->getPulseWidth() ) * 1000000.0f;    // uSec
 
          if (ant != 0) {
-            bd.parameterData.beamAzimuthCenter   = float( ant->getRefAzimuth() );      // Radians
-            bd.parameterData.beamAzimuthSweep    = float( ant->getScanWidth()/2.0 );   // Radians -- half angles
-            bd.parameterData.beamElevationCenter = float( ant->getRefElevation() );    // Radians
-            bd.parameterData.beamElevationSweep  = float( ant->getScanHeight()/2.0 );  // Radians -- half angles
+            bd.beamData.beamAzimuthCenter   = float( ant->getRefAzimuth() );      // Radians
+            bd.beamData.beamAzimuthSweep    = float( ant->getScanWidth()/2.0 );   // Radians -- half angles
+            bd.beamData.beamElevationCenter = float( ant->getRefElevation() );    // Radians
+            bd.beamData.beamElevationSweep  = float( ant->getScanHeight()/2.0 );  // Radians -- half angles
          }
          else {
             // Default values
-            bd.parameterData.beamAzimuthCenter   = 0.0f;
-            bd.parameterData.beamAzimuthSweep    = 30.0f * float(Basic::Angle::D2RCC);
-            bd.parameterData.beamElevationCenter = 0.0f;
-            bd.parameterData.beamElevationSweep  = 2.0f * float(Basic::Angle::D2RCC);
+            bd.beamData.beamAzimuthCenter   = 0.0f;
+            bd.beamData.beamAzimuthSweep    = 30.0f * float(Basic::Angle::D2RCC);
+            bd.beamData.beamElevationCenter = 0.0f;
+            bd.beamData.beamElevationSweep  = 2.0f * float(Basic::Angle::D2RCC);
          }
-         bd.parameterData.beamSweepSync = 0;
+         bd.beamData.beamSweepSync = 0;
 
 #ifdef DISV7
          bd.jammingTechnique.kind = 0;
@@ -682,12 +682,12 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
          bd.jammingTechnique.specific = 0;
 #else
          // For now ... no tracks or jamming data
-         bd.jammingModeSequence    = 0;
+         bd.jammingTechnique.setJammingModeSequence(0);
 #endif
 
          if (getEmitterFunction() != ESF_JAMMING) {
             // Radar
-            if ( bd.parameterData.beamAzimuthSweep == 0 || bd.parameterData.beamAzimuthSweep >= (180.0f * Basic::Angle::D2RCC) ) {
+            if ( bd.beamData.beamAzimuthSweep == 0 || bd.beamData.beamAzimuthSweep >= (180.0f * Basic::Angle::D2RCC) ) {
                // ... full azimuth sweep?  assume searching
                bd.beamFunction = BF_SEARCH;
                es.emitterSystem.function = ESF_EW; // override emitter sys function to EW when searching
