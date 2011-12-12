@@ -71,7 +71,7 @@ void NetIO::processEntityStatePDU(const EntityStatePDU* const pdu)
             nib->setPlayerID(playerId);
             if (pdu->entityMarking.characterSet == 1) {
                char name[12];
-               lcStrcpy(name, 12, pdu->entityMarking.marking);
+               lcStrcpy(name, 12, (char*)pdu->entityMarking.marking);
                nib->setPlayerName(name);
             }
             else
@@ -286,14 +286,14 @@ void Nib::processArticulationParameters(const EntityStatePDU* const pdu)
 
       for (unsigned int i = 0; i < pdu->numberOfArticulationParameters; i++) {
 
-         const ArticulationParameter* ap = pdu->getArticulationParameter(i);
+         const VpArticulatedPart* ap = pdu->getArticulationParameter(i);
 
          // ---
          // Articulated Parts
          // Note: We're not worried about the 'change' count at this time.  We just
          // slave the IPlayer to the value in the articulated parameter.
          // ---
-         if (ap->parameterTypeDesignator == ArticulationParameter::ARTICULATED_PART) {
+         if (ap->parameterTypeDesignator == VpArticulatedPart::ARTICULATED_PART) {
 
             const unsigned int typeClass  = ap->parameterType & 0xffffffe0;
             const unsigned int typeMetric = ap->parameterType & 0x0000001f;
@@ -302,27 +302,27 @@ void Nib::processArticulationParameters(const EntityStatePDU* const pdu)
             switch (typeClass) {
 
                // Landing gear (air vehicles only)
-               case ArticulationParameter::LANDING_GEAR :
-                  if (av != 0 && typeMetric == ArticulationParameter::POSITION)
+               case VpArticulatedPart::LANDING_GEAR :
+                  if (av != 0 && typeMetric == VpArticulatedPart::POSITION)
                      av->setGearHandleSwitch(value);
                   break;
 
                   // Weapon bay door(s) (air vehicles only)
-               case ArticulationParameter::LEFT_WEAPON_BAY_DOOR :
-               case ArticulationParameter::RIGHT_WEAPON_BAY_DOOR :
-                  if (av != 0 && typeMetric == ArticulationParameter::POSITION)
+               case VpArticulatedPart::LEFT_WEAPON_BAY_DOOR :
+               case VpArticulatedPart::RIGHT_WEAPON_BAY_DOOR :
+                  if (av != 0 && typeMetric == VpArticulatedPart::POSITION)
                      av->setWeaponBayDoorSwitch(value);
                   break;
 
                   // Wing sweep (air vehicles only)
-               case ArticulationParameter::WING_SWEEP :
-                  if (av != 0 && typeMetric == ArticulationParameter::AZIMUTH)
+               case VpArticulatedPart::WING_SWEEP :
+                  if (av != 0 && typeMetric == VpArticulatedPart::AZIMUTH)
                      av->setCmdWingSweepAngle(value);
                   break;
 
                   // Primary launcher position #1 (ground vehicles only)
-               case ArticulationParameter::PRIMARY_LAUNCHER_1 :
-                  if (gv != 0 && typeMetric == ArticulationParameter::ELEVATION)
+               case VpArticulatedPart::PRIMARY_LAUNCHER_1 :
+                  if (gv != 0 && typeMetric == VpArticulatedPart::ELEVATION)
                      gv->setLauncherPosition(value);
                   break;
 
@@ -693,7 +693,7 @@ bool Nib::entityStateManager(const LCreal curExecTime)
       //pdu->numberOfArticulationParameters = 0;
 
       // Size of the PDU package
-      unsigned short length = sizeof(EntityStatePDU) + (pdu->numberOfArticulationParameters * sizeof(ArticulationParameter));
+      unsigned short length = sizeof(EntityStatePDU) + (pdu->numberOfArticulationParameters * sizeof(VpArticulatedPart));
       pdu->header.length = length;
 
       if (Basic::NetHandler::isNotNetworkByteOrder()) pdu->swapBytes();
@@ -712,7 +712,7 @@ unsigned char Nib::manageArticulationParameters(EntityStatePDU* const pdu)
 
    // First articulation parameter is just after the main PDU
    unsigned char *p = ((unsigned char *)pdu) + sizeof(*pdu);
-   ArticulationParameter* ap = (ArticulationParameter*) p;
+   VpArticulatedPart* ap = (VpArticulatedPart*) p;
 
    // ---
    // Air Vehicle articulated parts and attachments
@@ -722,10 +722,10 @@ unsigned char Nib::manageArticulationParameters(EntityStatePDU* const pdu)
       // Check wing sweep angle.
       if (getAPartWingSweepCnt() > 0) {
          // fill the articulation parameter structure
-         ap->parameterTypeDesignator = ArticulationParameter::ARTICULATED_PART;
+         ap->parameterTypeDesignator = VpArticulatedPart::ARTICULATED_PART;
          ap->changeIndicator = (unsigned char) (getAPartWingSweepCnt() & 0xff);
          ap->id = 0;
-         ap->parameterType = (ArticulationParameter::WING_SWEEP + ArticulationParameter::AZIMUTH);
+         ap->parameterType = (VpArticulatedPart::WING_SWEEP + VpArticulatedPart::AZIMUTH);
          ap->parameterValue.value[0] = (float) getAPartWingSweep();  // radians
          ap->parameterValue.value[1] = 0;
          // Update part count & pointer
@@ -736,10 +736,10 @@ unsigned char Nib::manageArticulationParameters(EntityStatePDU* const pdu)
       // Check landing gear position.
       if (getAPartGearPosCnt() > 0) {
          // fill the articulation parameter structure
-         ap->parameterTypeDesignator = ArticulationParameter::ARTICULATED_PART;
+         ap->parameterTypeDesignator = VpArticulatedPart::ARTICULATED_PART;
          ap->changeIndicator = (unsigned char) (getAPartGearPosCnt() & 0xff);
          ap->id = 0;
-         ap->parameterType = (ArticulationParameter::LANDING_GEAR + ArticulationParameter::POSITION);
+         ap->parameterType = (VpArticulatedPart::LANDING_GEAR + VpArticulatedPart::POSITION);
          ap->parameterValue.value[0] = float(getAPartPartGearPos())/100.0f;
          ap->parameterValue.value[1] = 0;
          // Update part count & pointer
@@ -751,10 +751,10 @@ unsigned char Nib::manageArticulationParameters(EntityStatePDU* const pdu)
       if (getAPartBayDoorCnt() > 0) {
 
          // Left door
-         ap->parameterTypeDesignator = ArticulationParameter::ARTICULATED_PART;
+         ap->parameterTypeDesignator = VpArticulatedPart::ARTICULATED_PART;
          ap->changeIndicator = (unsigned char) (getAPartBayDoorCnt() & 0xff);
          ap->id = 0;
-         ap->parameterType = (ArticulationParameter::LEFT_WEAPON_BAY_DOOR + ArticulationParameter::POSITION);
+         ap->parameterType = (VpArticulatedPart::LEFT_WEAPON_BAY_DOOR + VpArticulatedPart::POSITION);
          ap->parameterValue.value[0] = float(getAPartBayDoorPos())/100.0f;
          ap->parameterValue.value[1] = 0;
 
@@ -763,10 +763,10 @@ unsigned char Nib::manageArticulationParameters(EntityStatePDU* const pdu)
          ap++;
 
          // Right door
-         ap->parameterTypeDesignator = ArticulationParameter::ARTICULATED_PART;
+         ap->parameterTypeDesignator = VpArticulatedPart::ARTICULATED_PART;
          ap->changeIndicator = (unsigned char) (getAPartBayDoorCnt() & 0xff);
          ap->id = 0;
-         ap->parameterType = (ArticulationParameter::RIGHT_WEAPON_BAY_DOOR + ArticulationParameter::POSITION);
+         ap->parameterType = (VpArticulatedPart::RIGHT_WEAPON_BAY_DOOR + VpArticulatedPart::POSITION);
          ap->parameterValue.value[0] = float(getAPartBayDoorPos())/100.0f;
          ap->parameterValue.value[1] = 0;
 
@@ -786,10 +786,10 @@ unsigned char Nib::manageArticulationParameters(EntityStatePDU* const pdu)
       // Check launcher elevation angle
       if (getAPartLauncherElevationCnt() > 0) {
          // fill the articulation parameter structure
-         ap->parameterTypeDesignator = ArticulationParameter::ARTICULATED_PART;
+         ap->parameterTypeDesignator = VpArticulatedPart::ARTICULATED_PART;
          ap->changeIndicator = (unsigned char) (getAPartLauncherElevationCnt() & 0xff);
          ap->id = 0;
-         ap->parameterType = (ArticulationParameter::PRIMARY_LAUNCHER_1 + ArticulationParameter::ELEVATION);
+         ap->parameterType = (VpArticulatedPart::PRIMARY_LAUNCHER_1 + VpArticulatedPart::ELEVATION);
          ap->parameterValue.value[0] = float( getAPartLauncherElevation() );
          ap->parameterValue.value[1] = 0;
          // Update part count & pointer
@@ -820,7 +820,7 @@ unsigned char Nib::manageArticulationParameters(EntityStatePDU* const pdu)
          if (apartMslTypes[i] != 0) {
 
             // fill the articulation parameter structure
-            ap->parameterTypeDesignator = ArticulationParameter::ATTACHED_PART;
+            ap->parameterTypeDesignator = VpArticulatedPart::ATTACHED_PART;
             ap->changeIndicator = (unsigned char) (getAPartAttacheMissileChangeCnt(i+1) & 0xff);
             ap->id = 1;                   // ATTACHED to LAUNCHER (above)
             ap->parameterType = (i+1);    // Station number

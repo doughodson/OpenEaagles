@@ -629,8 +629,7 @@ inline bool Nav::convertPosVec2llE(
 {
    const double sinSlat = std::sin(Angle::D2RCC * slat);
    const double cosSlat = std::cos(Angle::D2RCC * slat);
-   convertPosVec2llE(slat, slon, sinSlat, cosSlat, pos, lat, lon, alt, em);
-   return true;
+   return convertPosVec2llE(slat, slon, sinSlat, cosSlat, pos, lat, lon, alt, em);
 }
 
 

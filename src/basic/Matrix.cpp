@@ -136,7 +136,7 @@ double Matrix::getMaxMag() const
             val = x;
          }
          idx++;
-      } 
+      }
    }
    return val;
 }
@@ -217,7 +217,7 @@ Matrix* Matrix::getInvLU() const
    for (int i = (N-1); i >= 0; i--)
    {
       for (unsigned int j = 0; j < N; j++) {
-         (*pX)(i,j) = (*pY)(i,j); 
+         (*pX)(i,j) = (*pY)(i,j);
          for (int k = (N-1); k > i; k--) {
             (*pX)(i,j) -= (*pU)(i,k) * (*pX)(k,j);
          }
@@ -247,7 +247,7 @@ double Matrix::getDeterm() const
 
    getLU(pL, pU);
 
-   // find determinate by calculating product of U's diagonal elements 
+   // find determinate by calculating product of U's diagonal elements
    double determ = 1.0;
    for (unsigned int i = 0; i < N; i++) {
       determ *= (*pU)(i,i);
@@ -301,7 +301,8 @@ void Matrix::setMatrix(const unsigned int r, const unsigned int c, const double*
 
    unsigned int idx = 0;
    while (idx < mdaSize && idx < dataSize) {
-      mda[idx++] = data[idx];
+      mda[idx] = data[idx];
+      idx++;
    }
    while (idx < mdaSize) {
       mda[idx++] = 0;
@@ -320,7 +321,8 @@ void Matrix::setMatrix(const unsigned int r, const unsigned int c, const float* 
 
    unsigned int idx = 0;
    while (idx < mdaSize && idx < dataSize) {
-      mda[idx++] = data[idx];
+      mda[idx] = data[idx];
+      idx++;
    }
    while (idx < mdaSize) {
       mda[idx++] = 0;
@@ -494,14 +496,14 @@ bool Matrix::invert()
    bool ok = mda != 0 && rows > 0 && cols > 0 && isSquare();
 
    if (ok) {
-      Matrix m(rows, cols); 
+      Matrix m(rows, cols);
       m.makeIdent();
       unsigned int origCols = cols;  // 'cols' is changed after augment()
       augment(m);
 
       for (unsigned int k = 0; k < origCols; k++) {
          pivotRow(k,k);
-         mulRow(k, 1.0/getElem(k,k)); 
+         mulRow(k, 1.0/getElem(k,k));
          for (unsigned int i=0; i<rows; i++) {
             if (i != k) {
                addRow(i, k, -getElem(i,k));
@@ -797,7 +799,7 @@ bool Matrix::remRows(const unsigned int r1, const unsigned int r2)
          unsigned int idx1 = 0;
          for (unsigned int i=0; i<rows; i++) {
             for (unsigned int j=0; j<cols; j++) {
-               if ((i<r1) && (i<r2) || (r1<i) && (r2<i)) {
+               if ( ((i<r1) && (i<r2)) || ((r1<i) && (r2<i)) ) {
                   unsigned int idx2 = cols*i + j;
                   arr[idx1] = mda[idx2];
                   idx1++;
@@ -860,7 +862,7 @@ bool Matrix::remCols(const unsigned int c1, const unsigned int c2)
          unsigned int idx1 = 0;
          for (unsigned int i=0; i<rows; i++) {
             for (unsigned int j=0; j<cols; j++) {
-               if ((j<c1) && (j<c2) || (c1<j) && (c2<j)) {
+               if ( ((j<c1) && (j<c2)) || ((c1<j) && (c2<j)) ) {
                   unsigned int idx2 = cols*i + j;
                   arr[idx1] = mda[idx2];
                   idx1++;
@@ -933,12 +935,12 @@ void Matrix::showMatrix(const unsigned int DP, const unsigned int FW) const
       if (sum <= gfw) {
          fldwth = gfw;
       } else if (sum <= FW) {
-         fldwth = FW; 
+         fldwth = FW;
       } else {
          fldwth = sum;
       }
 
-      std::cout << std::setiosflags(std::ios::fixed) 
+      std::cout << std::setiosflags(std::ios::fixed)
          << std::setprecision(decpnt);
 
       for (unsigned int i=0; i<rows; i++) {
@@ -1062,9 +1064,9 @@ bool Matrix::getEigenPower(const double maxErr, const int maxIter,
    if (!isGoodMatrix() || !isSquare()) return false;
 
    //-------------------------------------------------------
-   // initialize variables 
+   // initialize variables
    //-------------------------------------------------------
-   int Iter = 0;                          // iterator initialized to zero 
+   int Iter = 0;                          // iterator initialized to zero
    double Err = 10.0*maxErr;              // make Err > maxErr on entry
 
    Matrix* pA = new Matrix(*this);        // A is a buffer matrix for 'this' matrix
@@ -1084,17 +1086,17 @@ bool Matrix::getEigenPower(const double maxErr, const int maxIter,
    while ((Err > maxErr) && (Iter < maxIter))
    {
       //----------------------------------------------------
-      // get estimate of eigenvector 
+      // get estimate of eigenvector
       //----------------------------------------------------
       pW = Basic::multiply(*pA, *pZ);   // get new estimate (W) based on old estimate (Z)
-      Wmag = pW->getMaxMag();           // max mag value from elements of vector W 
+      Wmag = pW->getMaxMag();           // max mag value from elements of vector W
       if (Wmag == 0.0) return false;
       pW->multiply(1.0/Wmag);           // normalize eigenvector with max element of W
 
       //----------------------------------------------------
-      // get estimate of eigenvalue 
+      // get estimate of eigenvalue
       //----------------------------------------------------
-      alfa = Wmag;                   // save Wmag eigenvalue estimate 
+      alfa = Wmag;                   // save Wmag eigenvalue estimate
 
       //----------------------------------------------------
       // refine eigenvalue estimate by using Rayleigh quotient
@@ -1110,32 +1112,32 @@ bool Matrix::getEigenPower(const double maxErr, const int maxIter,
       }
 
       //----------------------------------------------------
-      // save eigenvector W estimate in vector Z to begin next loop 
+      // save eigenvector W estimate in vector Z to begin next loop
       //----------------------------------------------------
-      *pZ = *pW;                        // save eigenvector estimate for next iteration 
+      *pZ = *pW;                        // save eigenvector estimate for next iteration
 
       //----------------------------------------------------
       // calculate error of estimate: Err = ||A*Z - alfa*Z||
       //----------------------------------------------------
       pE = Basic::multiply(*pA, *pZ);
-      pW = Basic::multiply(*pZ, alfa);  // pW used here as intermediate vector 
+      pW = Basic::multiply(*pZ, alfa);  // pW used here as intermediate vector
       pE->subtract(*pW);
       Err = pE->getNorm();              // magnitude of error vector
 
       //----------------------------------------------------
-      // increment iterator for next loop 
+      // increment iterator for next loop
       //----------------------------------------------------
       Iter++;
    }
 
    //-------------------------------------------------------
-   // copy eigenvalue and eigenvector results to output 
+   // copy eigenvalue and eigenvector results to output
    //-------------------------------------------------------
    *pEigenVal = alfa;
    *pEigenVec = *pZ;
 
    //-------------------------------------------------------
-   // unref pointers 
+   // unref pointers
    //-------------------------------------------------------
    if (pW != 0) pW->unref();
    if (pZ != 0) pZ->unref();
@@ -1170,16 +1172,16 @@ bool Matrix::getCholesky(Matrix* const pL, Matrix* const pU) const
          if (i == j) {
             double x = (*pL)(i,j);
             if (x < 0.0) {
-               std::cout << "Cholesky failed. Matrix is not positive definite." << std::endl; 
+               std::cout << "Cholesky failed. Matrix is not positive definite." << std::endl;
                return false;
             }
             (*pL)(i,j) = std::sqrt(x);
          }
          else {
             double x = (*pL)(j,j);
-            double eps = 1.0e-12; 
+            double eps = 1.0e-12;
             if (std::fabs(x) < eps) {
-               // Note: excessive roundoff error for some reason - LDB 
+               // Note: excessive roundoff error for some reason - LDB
                std::cout << "Cholesky failed. Division by very small number." << std::endl;
                return false;
             }
@@ -1240,7 +1242,7 @@ bool Matrix::getLU(Matrix* const pL, Matrix* const pU) const
 
 
 //------------------------------------------------------------------------------
-// getQR 
+// getQR
 // Returns pre-ref'd pointers to the lower QR (pQ) and upper QR (pR) matrices
 // of 'this' matrix, or zero if the matrix can not be QR-ized
 //------------------------------------------------------------------------------
@@ -1266,7 +1268,7 @@ bool Matrix::getQR(Matrix* const pQ, Matrix* const pR) const
    pQI->makeIdent();
 
    //-------------------------------------------------------
-   // X and V are intermediate vectors 
+   // X and V are intermediate vectors
    //-------------------------------------------------------
    CVector* pX = new CVector(N);
    CVector* pV = new CVector(N);
@@ -1283,7 +1285,7 @@ bool Matrix::getQR(Matrix* const pQ, Matrix* const pR) const
       double g = pX->getNorm();
       (*pV) = (*pX);
       (*pV)[k] += g;
-      double s = pV->getNorm(); 
+      double s = pV->getNorm();
 
       if (s == 0.0) return false;
 
@@ -1343,7 +1345,7 @@ bool Matrix::getQR(Matrix* const pQ, Matrix* const pR) const
 
 
 //------------------------------------------------------------------------------
-// getTriDiagonal 
+// getTriDiagonal
 //------------------------------------------------------------------------------
 bool Matrix::getTriDiagonal(Matrix* const pA) const
 {
@@ -1381,20 +1383,20 @@ bool Matrix::getTriDiagonal(Matrix* const pA) const
       }
 
       //----------------------------------------------------
-      // construct row vector Y = X' 
+      // construct row vector Y = X'
       //----------------------------------------------------
       RVector* pY = new RVector(N);
       pY = pX->getTranspose();
 
       //----------------------------------------------------
-      // M = 2*X*Y = 2*X*X' 
+      // M = 2*X*Y = 2*X*X'
       //----------------------------------------------------
       Matrix* pM = new Matrix(N,N);
       pM = outerProduct(*pX, *pY);
       pM->multiply(2.0);
 
       //----------------------------------------------------
-      // H = I - M = I - 2*X*X' 
+      // H = I - M = I - 2*X*X'
       //----------------------------------------------------
       Matrix* pH = new Matrix(N,N);
       pH->makeIdent();
@@ -1407,7 +1409,7 @@ bool Matrix::getTriDiagonal(Matrix* const pA) const
       pAI = Basic::multiply(*pAI, *pH);
 
       //----------------------------------------------------
-      // unref intermediate loop pointers 
+      // unref intermediate loop pointers
       //----------------------------------------------------
       if (pX != 0) pX->unref();
       if (pY != 0) pY->unref();
@@ -1421,7 +1423,7 @@ bool Matrix::getTriDiagonal(Matrix* const pA) const
    *pA = *pAI;
 
    //----------------------------------------------------
-   // unref pointers 
+   // unref pointers
    //----------------------------------------------------
    if (pAI != 0) pAI->unref();
 

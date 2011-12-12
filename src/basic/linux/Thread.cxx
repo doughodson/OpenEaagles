@@ -105,7 +105,7 @@ bool Thread::createThread()
    // Create the thread
    // ---
    pthread_t* thread = new pthread_t;
-   int stat = pthread_create(thread, &attr, staticThreadFunc, this);
+   pthread_create(thread, &attr, staticThreadFunc, this);
 
    //if ( stat != 0 && parent->isMessageEnabled(MSG_INFO) ) {
       std::cout << "Thread(" << this << ")::createThread(): pthread_create() thread = " << thread << ", pri = " << param.sched_priority << std::endl;

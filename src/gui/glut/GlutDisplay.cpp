@@ -11,6 +11,7 @@
 #include "openeaagles/basic/PairStream.h"
 
 #include <GL/glut.h>
+//#include <GL/freeglut.h>
 
 #if !defined(WIN32)
 #include <sys/time.h>
@@ -144,7 +145,12 @@ bool GlutDisplay::onEscKey()
       if (isMessageEnabled(MSG_INFO)) {
          std::cout<<"Eaagles::Glut::GlutDisplay::onEscKey()Exit by the ESC key!"<<std::endl;
       }
+#ifdef __FREEGLUT_EXT_H__     /* freeglut only */
+      glutLeaveMainLoop();
+      return true;
+#else
       exit(0);
+#endif
    }
    return false;
 }
@@ -164,6 +170,10 @@ bool GlutDisplay::setIdleSleepTime(const unsigned int ms)
 int GlutDisplay::createWindow()
 {
    winId = -1;
+
+#ifdef __FREEGLUT_EXT_H__     /* freeglut only */
+      glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
+#endif
 
    unsigned int wmode = GLUT_DOUBLE | GLUT_RGB | GLUT_ALPHA;
    if (getClearDepth() >= 0.0f) { wmode = wmode | GLUT_DEPTH; }

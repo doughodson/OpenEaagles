@@ -69,21 +69,29 @@ IMPLEMENT_SUBCLASS(NetIO,"DisNetIO")
 //------------------------------------------------------------------------------
 // Parameters
 //------------------------------------------------------------------------------
-const LCreal HRT_BEAT_MPLIER = 2.5;                            //  Multiplier
-const LCreal HRT_BEAT_TIMER = 5;                               //  seconds 
-const LCreal DRA_POS_THRST_DFLT = 3.0;                         //  meters
-const LCreal DRA_ORIENT_THRST_DFLT = (LCreal)(3.0 * PI/180.0); //  radians
+static const LCreal HRT_BEAT_MPLIER = 2.5;                            //  Multiplier
+static const LCreal HRT_BEAT_TIMER = 5;                               //  seconds 
+static const LCreal DRA_POS_THRST_DFLT = 3.0;                         //  meters
+static const LCreal DRA_ORIENT_THRST_DFLT = (LCreal)(3.0 * PI/180.0); //  radians
 
 // DISv7 default heartbeats
-const LCreal HBT_PDU_EE = 10;                                  //  seconds 
-const LCreal HBT_PDU_IFF = 10;                                 //  seconds 
-const LCreal HBT_PDU_RECEIVER = 60;                            //  seconds 
-const LCreal HBT_PDU_TRANSMITTER = 2;                          //  seconds 
-const LCreal HBT_TIMEOUT_MPLIER = 2.4;                         //  Multiplier
+static const LCreal HBT_PDU_EE = 10;                                  //  seconds 
+static const LCreal HBT_PDU_IFF = 10;                                 //  seconds 
+static const LCreal HBT_PDU_RECEIVER = 60;                            //  seconds 
+static const LCreal HBT_PDU_TRANSMITTER = 2;                          //  seconds 
+static const LCreal HBT_TIMEOUT_MPLIER = 2.4;                         //  Multiplier
 
 // DISv7 default thresholds
-const LCreal EE_AZ_THRSH = (LCreal)(1.0 * PI/180.0);            //  radians
-const LCreal EE_EL_THRSH = (LCreal)(1.0 * PI/180.0);            //  radians
+static const LCreal EE_AZ_THRSH = (LCreal)(1.0 * PI/180.0);            //  radians
+static const LCreal EE_EL_THRSH = (LCreal)(1.0 * PI/180.0);            //  radians
+
+static const LCreal EE_ERP_THRSH = (LCreal)(1.0);                      //  dB
+static const LCreal EE_FREQ_THRSH = (LCreal)(1.0);                     //  Hz
+static const LCreal EE_FRNG_THRSH = (LCreal)(1.0);                     //  Hz
+static const LCreal EE_PRF_THRSH = (LCreal)(1.0);                     //  Hz
+static const LCreal EE_PW_THRSH = (LCreal)(1e-6);                     //  seconds
+//static const unsigned int EE_HIGH_DENSITY_THRSH = 10;                  //  no units
+
 
 //------------------------------------------------------------------------------
 // Slot table
@@ -275,162 +283,162 @@ void NetIO::netInputHander()
                // When we're interested in this exercies ... 
                switch (header->PDUType) {
 
-               case PDU_ENTITY_STATE: {
-                  //std::cout << "Entity State PDU." << std::endl;
-                  EntityStatePDU* pPdu = (EntityStatePDU *) header;
-                  if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
-                  if (getSiteID() != pPdu->entityID.simulationID.siteIdentification || 
-                     getApplicationID() != pPdu->entityID.simulationID.applicationIdentification) {
-                        processEntityStatePDU(pPdu);
+                  case PDU_ENTITY_STATE: {
+                     //std::cout << "Entity State PDU." << std::endl;
+                     EntityStatePDU* pPdu = (EntityStatePDU *) header;
+                     if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
+                     if (getSiteID() != pPdu->entityID.simulationID.siteIdentification || 
+                        getApplicationID() != pPdu->entityID.simulationID.applicationIdentification) {
+                           processEntityStatePDU(pPdu);
+                     }
                   }
-                                      }
-                                      break;
+                  break;
 
-               case PDU_FIRE: {
-                  FirePDU* pPdu = (FirePDU *) header;
-                  if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
-                  if (getSiteID() != pPdu->firingEntityID.simulationID.siteIdentification ||
-                     getApplicationID() != pPdu->firingEntityID.simulationID.applicationIdentification) {
-                        processFirePDU(pPdu);
+                  case PDU_FIRE: {
+                     FirePDU* pPdu = (FirePDU *) header;
+                     if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
+                     if (getSiteID() != pPdu->firingEntityID.simulationID.siteIdentification ||
+                        getApplicationID() != pPdu->firingEntityID.simulationID.applicationIdentification) {
+                           processFirePDU(pPdu);
+                     }
                   }
-                              }
-                              break;
+                  break;
 
-               case PDU_DETONATION: {
-                  DetonationPDU* pPdu = (DetonationPDU *) header;
-                  if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
-                  if (getSiteID() != pPdu->firingEntityID.simulationID.siteIdentification ||
-                     getApplicationID() != pPdu->firingEntityID.simulationID.applicationIdentification) {
-                        processDetonationPDU(pPdu);
+                  case PDU_DETONATION: {
+                     DetonationPDU* pPdu = (DetonationPDU *) header;
+                     if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
+                     if (getSiteID() != pPdu->firingEntityID.simulationID.siteIdentification ||
+                        getApplicationID() != pPdu->firingEntityID.simulationID.applicationIdentification) {
+                           processDetonationPDU(pPdu);
+                     }
                   }
-                                    }
-                                    break;
+                  break;
 
-               case PDU_SIGNAL: {
-                  SignalPDU* pPdu = (SignalPDU *) header;
-                  if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
-                  if (getSiteID() != pPdu->emittingEntityID.simulationID.siteIdentification ||
-                     getApplicationID() != pPdu->emittingEntityID.simulationID.applicationIdentification) {
-                        processSignalPDU(pPdu);
+                  case PDU_SIGNAL: {
+                     SignalPDU* pPdu = (SignalPDU *) header;
+                     if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
+                     if (getSiteID() != pPdu->radioRefID.simulationID.siteIdentification ||
+                        getApplicationID() != pPdu->radioRefID.simulationID.applicationIdentification) {
+                           processSignalPDU(pPdu);
+                     }
                   }
-                                }
-                                break;
+                  break;
 
-               case PDU_TRANSMITTER: {
-                  TransmitterPDU* pPdu = (TransmitterPDU *) header;
-                  if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
-                  if (getSiteID() != pPdu->emittingEntityID.simulationID.siteIdentification ||
-                     getApplicationID() != pPdu->emittingEntityID.simulationID.applicationIdentification) {
-                        processTransmitterPDU(pPdu);
+                  case PDU_TRANSMITTER: {
+                     TransmitterPDU* pPdu = (TransmitterPDU *) header;
+                     if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
+                     if (getSiteID() != pPdu->radioRefID.simulationID.siteIdentification ||
+                        getApplicationID() != pPdu->radioRefID.simulationID.applicationIdentification) {
+                           processTransmitterPDU(pPdu);
+                     }
                   }
-                                     }
-                                     break;
+                  break;
 
-               case PDU_ELECTROMAGNETIC_EMISSION: {
-                  ElectromagneticEmissionPDU* pPdu = (ElectromagneticEmissionPDU *) header;
-                  if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
-                  if (getSiteID() != pPdu->emittingEntityID.simulationID.siteIdentification ||
-                     getApplicationID() != pPdu->emittingEntityID.simulationID.applicationIdentification) {
-                        processElectromagneticEmissionPDU(pPdu);
+                  case PDU_ELECTROMAGNETIC_EMISSION: {
+                     ElectromagneticEmissionPDU* pPdu = (ElectromagneticEmissionPDU *) header;
+                     if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
+                     if (getSiteID() != pPdu->emittingEntityID.simulationID.siteIdentification ||
+                        getApplicationID() != pPdu->emittingEntityID.simulationID.applicationIdentification) {
+                           processElectromagneticEmissionPDU(pPdu);
+                     }
                   }
-                                                  }
-                                                  break;
+                  break;
 
-               case PDU_DATA_QUERY: {
-                  DataQueryPDU* pPdu = (DataQueryPDU *) header;
-                  if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
-                  if (getSiteID() != pPdu->emittingEntityID.simulationID.siteIdentification ||
-                     getApplicationID() != pPdu->emittingEntityID.simulationID.applicationIdentification) {
-                        processDataQueryPDU(pPdu);
+                  case PDU_DATA_QUERY: {
+                     DataQueryPDU* pPdu = (DataQueryPDU *) header;
+                     if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
+                     if (getSiteID() != pPdu->originatingID.simulationID.siteIdentification ||
+                        getApplicationID() != pPdu->originatingID.simulationID.applicationIdentification) {
+                           processDataQueryPDU(pPdu);
+                     }
                   }
-                                    }
-                                    break;
+                  break;
 
-               case PDU_DATA: {
-                  DataPDU* pPdu = (DataPDU *) header;
-                  if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
-                  if (getSiteID() != pPdu->emittingEntityID.simulationID.siteIdentification ||
-                     getApplicationID() != pPdu->emittingEntityID.simulationID.applicationIdentification) {
-                        processDataPDU(pPdu);
+                  case PDU_DATA: {
+                     DataPDU* pPdu = (DataPDU *) header;
+                     if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
+                     if (getSiteID() != pPdu->originatingID.simulationID.siteIdentification ||
+                        getApplicationID() != pPdu->originatingID.simulationID.applicationIdentification) {
+                           processDataPDU(pPdu);
+                     }
                   }
-                              }
-                              break;
+                  break;
 
-               case PDU_COMMENT: {
-                  CommentPDU* pPdu = (CommentPDU *) header;
-                  if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
-                  if (getSiteID() != pPdu->emittingEntityID.simulationID.siteIdentification ||
-                     getApplicationID() != pPdu->emittingEntityID.simulationID.applicationIdentification) {
-                        processCommentPDU(pPdu);
+                  case PDU_COMMENT: {
+                     CommentPDU* pPdu = (CommentPDU *) header;
+                     if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
+                     if (getSiteID() != pPdu->originatingID.simulationID.siteIdentification ||
+                        getApplicationID() != pPdu->originatingID.simulationID.applicationIdentification) {
+                           processCommentPDU(pPdu);
+                     }
                   }
-                                 }
-                                 break;
+                  break;
 
-				case PDU_START_RESUME: {
-					StartPDU* pPdu = (StartPDU*)header;
-					if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
-					if (getSiteID() != pPdu->sendingEntityID.simulationID.siteIdentification ||
-						getApplicationID() != pPdu->sendingEntityID.simulationID.applicationIdentification) {
-						processStartPDU(pPdu);
-					}
-				}
-				break;
+                  case PDU_START_RESUME: {
+                     StartPDU* pPdu = (StartPDU*)header;
+                     if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
+                     if (getSiteID() != pPdu->originatingID.simulationID.siteIdentification ||
+                        getApplicationID() != pPdu->originatingID.simulationID.applicationIdentification) {
+                           processStartPDU(pPdu);
+                     }
+                  }
+                  break;
 
-				case PDU_STOP_FREEZE: {
-					StopPDU* pPdu = (StopPDU*)header;
-					if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
-					if (getSiteID() != pPdu->sendingEntityID.simulationID.siteIdentification ||
-						getApplicationID() != pPdu->sendingEntityID.simulationID.applicationIdentification) {
-						processStopPDU(pPdu);
-					}
-				}
-				break;
+                  case PDU_STOP_FREEZE: {
+                     StopPDU* pPdu = (StopPDU*)header;
+                     if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
+                     if (getSiteID() != pPdu->originatingID.simulationID.siteIdentification ||
+                        getApplicationID() != pPdu->originatingID.simulationID.applicationIdentification) {
+                           processStopPDU(pPdu);
+                     }
+                  }
+                  break;
 
-				case PDU_ACKNOWLEDGE: {
-					AcknowledgePDU* pPdu = (AcknowledgePDU*)header;
-					if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
-					if (getSiteID() != pPdu->sendingEntityID.simulationID.siteIdentification ||
-						getApplicationID() != pPdu->sendingEntityID.simulationID.applicationIdentification) {
-						processAcknowledgePDU(pPdu);
-					}
-				}
-				break;
+                  case PDU_ACKNOWLEDGE: {
+                     AcknowledgePDU* pPdu = (AcknowledgePDU*)header;
+                     if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
+                     if (getSiteID() != pPdu->originatingID.simulationID.siteIdentification ||
+                        getApplicationID() != pPdu->originatingID.simulationID.applicationIdentification) {
+                           processAcknowledgePDU(pPdu);
+                     }
+                  }
+                  break;
 
-				case PDU_ACTION_REQUEST: {
-					ActionRequestPDU* pPdu = (ActionRequestPDU*)header;
-					if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
-					if (getSiteID() != pPdu->emittingEntityID.simulationID.siteIdentification ||
-						getApplicationID() != pPdu->emittingEntityID.simulationID.applicationIdentification) {
-						processActionRequestPDU(pPdu);
-					}
-				}
-				break; 
+                  case PDU_ACTION_REQUEST: {
+                     ActionRequestPDU* pPdu = (ActionRequestPDU*)header;
+                     if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
+                     if (getSiteID() != pPdu->originatingID.simulationID.siteIdentification ||
+                        getApplicationID() != pPdu->originatingID.simulationID.applicationIdentification) {
+                           processActionRequestPDU(pPdu);
+                     }
+                  }
+                  break; 
 
-				case PDU_ACTION_REQUEST_R: {
-					ActionRequestPDU_R* pPdu = (ActionRequestPDU_R*)header;
-					if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
-					if (getSiteID() != pPdu->emittingEntityID.simulationID.siteIdentification ||
-						getApplicationID() != pPdu->emittingEntityID.simulationID.applicationIdentification) {
-						processActionRequestPDU_R(pPdu);
-					}
-				}
-				break;
+                  case PDU_ACTION_REQUEST_R: {
+                     ActionRequestPDU_R* pPdu = (ActionRequestPDU_R*)header;
+                     if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
+                     if (getSiteID() != pPdu->originatingID.simulationID.siteIdentification ||
+                        getApplicationID() != pPdu->originatingID.simulationID.applicationIdentification) {
+                           processActionRequestPDU_R(pPdu);
+                     }
+                  }
+                  break;
 
-				case PDU_ACTION_RESPONSE_R: {
-					ActionResponsePDU_R* pPdu = (ActionResponsePDU_R*)header;
-					if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
-					if (getSiteID() != pPdu->emittingEntityID.simulationID.siteIdentification ||
-						getApplicationID() != pPdu->emittingEntityID.simulationID.applicationIdentification) {
-						processActionResponsePDU_R(pPdu);
-					}
-				}
-				break;
+                  case PDU_ACTION_RESPONSE_R: {
+                     ActionResponsePDU_R* pPdu = (ActionResponsePDU_R*)header;
+                     if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
+                     if (getSiteID() != pPdu->originatingID.simulationID.siteIdentification ||
+                        getApplicationID() != pPdu->originatingID.simulationID.applicationIdentification) {
+                           processActionResponsePDU_R(pPdu);
+                     }
+                  }
+                  break;
 
-               default: {
-                  // Note: users will need to do their own byte swapping and checks
-                  processUserPDU(header);
-                        }
-                        break;
+                  default: {
+                     // Note: users will need to do their own byte swapping and checks
+                     processUserPDU(header);
+                  }
+                  break;
 
                } // PDU switch
 
@@ -510,7 +518,7 @@ bool NetIO::processCommentPDU(const CommentPDU* const)
 //------------------------------------------------------------------------------
 // processStartPDU() callback -- 
 //------------------------------------------------------------------------------
-bool NetIO::processStartPDU(const Eaagles::Network::Dis::StartPDU* const startPdu)
+bool NetIO::processStartPDU(const Eaagles::Network::Dis::StartPDU* const)
 {
     return true;
 }
@@ -518,7 +526,7 @@ bool NetIO::processStartPDU(const Eaagles::Network::Dis::StartPDU* const startPd
 //------------------------------------------------------------------------------
 // processStopPDU() callback -- 
 //------------------------------------------------------------------------------
-bool NetIO::processStopPDU(const Eaagles::Network::Dis::StopPDU* const stopPdu)
+bool NetIO::processStopPDU(const Eaagles::Network::Dis::StopPDU* const)
 {
      return true;
 }
@@ -526,7 +534,7 @@ bool NetIO::processStopPDU(const Eaagles::Network::Dis::StopPDU* const stopPdu)
 //------------------------------------------------------------------------------
 // processAcknowledgePDU() callback -- 
 //------------------------------------------------------------------------------
-bool NetIO::processAcknowledgePDU(const Eaagles::Network::Dis::AcknowledgePDU* const ackPdu)
+bool NetIO::processAcknowledgePDU(const Eaagles::Network::Dis::AcknowledgePDU* const)
 {
     return true;
 }
@@ -534,7 +542,7 @@ bool NetIO::processAcknowledgePDU(const Eaagles::Network::Dis::AcknowledgePDU* c
 //------------------------------------------------------------------------------
 // processActionRequestPDU() callback -- 
 //------------------------------------------------------------------------------
-bool NetIO::processActionRequestPDU(const Eaagles::Network::Dis::ActionRequestPDU* const actionPdu)
+bool NetIO::processActionRequestPDU(const Eaagles::Network::Dis::ActionRequestPDU* const)
 {
     return true;
 }
@@ -542,7 +550,7 @@ bool NetIO::processActionRequestPDU(const Eaagles::Network::Dis::ActionRequestPD
 //------------------------------------------------------------------------------
 // processActionRequestPDU_R() callback -- 
 //------------------------------------------------------------------------------
-bool NetIO::processActionRequestPDU_R(const Eaagles::Network::Dis::ActionRequestPDU_R* const actionPdu)
+bool NetIO::processActionRequestPDU_R(const Eaagles::Network::Dis::ActionRequestPDU_R* const)
 {
     return true;
 }
@@ -550,7 +558,7 @@ bool NetIO::processActionRequestPDU_R(const Eaagles::Network::Dis::ActionRequest
 //------------------------------------------------------------------------------
 // processActionResponsePDU_R() callback -- 
 //------------------------------------------------------------------------------
-bool NetIO::processActionResponsePDU_R(const Eaagles::Network::Dis::ActionResponsePDU_R* const responsePdu)
+bool NetIO::processActionResponsePDU_R(const Eaagles::Network::Dis::ActionResponsePDU_R* const)
 {
     return true;
 }
@@ -1300,6 +1308,14 @@ LCreal NetIO::getHbtPduEe() const         { return HBT_PDU_EE; }
 LCreal NetIO::getHbtTimeoutMplier() const { return HBT_TIMEOUT_MPLIER; }
 LCreal NetIO::getEeAzThrsh() const        { return EE_AZ_THRSH; }
 LCreal NetIO::getEeElThrsh() const        { return EE_EL_THRSH; }
+
+LCreal NetIO::getEeErpThrsh() const       { return EE_ERP_THRSH; }
+LCreal NetIO::getEeFreqThrsh() const      { return EE_FREQ_THRSH; }
+LCreal NetIO::getEeFrngThrsh() const      { return EE_FRNG_THRSH; }
+LCreal NetIO::getEePrfThrsh() const       { return EE_PRF_THRSH; }
+LCreal NetIO::getEePwThrsh() const        { return EE_PW_THRSH; }
+
+//unsigned int NetIO::get_EE_HIGH_DENSITY_THRSH(void) const { return EE_HIGH_DENSITY_THRSH; }
 
 
 // Adds an item to the emission PDU handler table

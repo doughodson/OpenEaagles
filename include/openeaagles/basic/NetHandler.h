@@ -56,7 +56,7 @@ class String;
 //      port#           <-------     <any-port>    ! Receiving with only port defined
 //
 //      localPort#      <-------     <any-port>    ! Receiving anytime that 'localPort' is defined.
-//      
+//
 //------------------------------------------------------------------------------
 class NetHandler : public Object
 {
@@ -130,22 +130,22 @@ public:
    static bool checkByteOrder();           // Returns true if in network byte order
 
    // Convert to network byte order ('vout' is network byte order from 'vin' host network order)
-   static void toNetOrder(short* const vout, const short vin);
-   static void toNetOrder(unsigned short* const vout, const unsigned short vin);
-   static void toNetOrder(int* const vout, const int vin);
-   static void toNetOrder(unsigned int* const vout, const unsigned int vin);
-   static void toNetOrder(long* const vout, const long vin);
-   static void toNetOrder(unsigned long* const vout, const unsigned long vin);
+   static void toNetOrder(int16_t* const vout, const int16_t vin);
+   static void toNetOrder(uint16_t* const vout, const uint16_t vin);
+   static void toNetOrder(int32_t* const vout, const int32_t vin);
+   static void toNetOrder(uint32_t* const vout, const uint32_t vin);
+   static void toNetOrder(int64_t* const vout, const int64_t vin);
+   static void toNetOrder(uint64_t* const vout, const uint64_t vin);
    static void toNetOrder(float* const vout, const float vin);
    static void toNetOrder(double* const vout, const double vin);
 
    // convert from network byte order ('vout' is host byte order from 'vin' network byte order)
-   static void fromNetOrder(short* const vout, const short vin);
-   static void fromNetOrder(unsigned short* const vout, const unsigned short vin);
-   static void fromNetOrder(int* const vout, const int vin);
-   static void fromNetOrder(unsigned int* const vout, const unsigned int vin);
-   static void fromNetOrder(long* const vout, const long vin);
-   static void fromNetOrder(unsigned long* const vout, const unsigned long vin);
+   static void fromNetOrder(int16_t* const vout, const int16_t vin);
+   static void fromNetOrder(uint16_t* const vout, const uint16_t vin);
+   static void fromNetOrder(int32_t* const vout, const int32_t vin);
+   static void fromNetOrder(uint32_t* const vout, const uint32_t vin);
+   static void fromNetOrder(int64_t* const vout, const int64_t vin);
+   static void fromNetOrder(uint64_t* const vout, const uint64_t vin);
    static void fromNetOrder(float* const vout, const float vin);
    static void fromNetOrder(double* const vout, const double vin);
 
@@ -177,7 +177,7 @@ protected:
    // Sets the input buffer size
    bool setRecvBuffSize();
 
-   LcSocket  socketNum;            // Our Socket
+   LcSocket socketNum;             // Our Socket
 
 private:
    char* localIpAddr;              // Local host IP address
@@ -190,8 +190,8 @@ private:
    uint16_t fromPort1;             // Last recvData() 'from' port number
    bool sharedFlg;                 // Shared port flag
    bool initialized;               // handler has been initialized
-   unsigned int  sendBuffSizeKb;   // Send buffer size in KBs
-   unsigned int  recvBuffSizeKb;   // Receive buffer size in KBs
+   unsigned int sendBuffSizeKb;    // Send buffer size in KBs
+   unsigned int recvBuffSizeKb;    // Receive buffer size in KBs
    static bool netByteOrder;       // True if this machine is in 'network byte order'
 };
 
@@ -209,7 +209,7 @@ inline uint16_t NetHandler::getPort() const
 inline uint16_t NetHandler::getLocalPort() const
 {
    return localPort;
-} 
+}
 
 // Ignore source port #
 inline uint16_t NetHandler::getIgnoreSourcePort() const
@@ -248,43 +248,31 @@ inline uint16_t NetHandler::getLastFromPort() const
 // ---
 // Convert to network byte order
 // ---
-inline void NetHandler::toNetOrder(short* const vout, const short vin)
+inline void NetHandler::toNetOrder(int16_t* const vout, const int16_t vin)
 {
     if (isNotNetworkByteOrder()) {
         unsigned char* p = (unsigned char*) &vin;
-        unsigned char* q = ((unsigned char*) vout) + sizeof(short);
+        unsigned char* q = ((unsigned char*) vout) + sizeof(int16_t);
         *--q = *p++;
         *--q = *p++;
     }
 }
 
-inline void NetHandler::toNetOrder(unsigned short* const vout, const unsigned short vin)
+inline void NetHandler::toNetOrder(uint16_t* const vout, const uint16_t vin)
 {
     if (isNotNetworkByteOrder()) {
         unsigned char* p = (unsigned char*) &vin;
-        unsigned char* q = ((unsigned char*) vout) + sizeof(unsigned short);
+        unsigned char* q = ((unsigned char*) vout) + sizeof(uint16_t);
         *--q = *p++;
         *--q = *p++;
     }
 }
 
-inline void NetHandler::toNetOrder(int* const vout, const int vin)
+inline void NetHandler::toNetOrder(int32_t* const vout, const int32_t vin)
 {
     if (isNotNetworkByteOrder()) {
         unsigned char* p = (unsigned char*) &vin;
-        unsigned char* q = ((unsigned char*) vout) + sizeof(int);
-        *--q = *p++;
-        *--q = *p++;
-        *--q = *p++;
-        *--q = *p++;
-    }
-}
-
-inline void NetHandler::toNetOrder(unsigned int* const vout, const unsigned int vin)
-{
-    if (isNotNetworkByteOrder()) {
-        unsigned char* p = (unsigned char*) &vin;
-        unsigned char* q = ((unsigned char*) vout) + sizeof(unsigned int);
+        unsigned char* q = ((unsigned char*) vout) + sizeof(int32_t);
         *--q = *p++;
         *--q = *p++;
         *--q = *p++;
@@ -292,39 +280,47 @@ inline void NetHandler::toNetOrder(unsigned int* const vout, const unsigned int 
     }
 }
 
-inline void NetHandler::toNetOrder(long* const vout, const long vin)
+inline void NetHandler::toNetOrder(uint32_t* const vout, const uint32_t vin)
 {
     if (isNotNetworkByteOrder()) {
         unsigned char* p = (unsigned char*) &vin;
-        unsigned char* q = ((unsigned char*) vout) + sizeof(long);
+        unsigned char* q = ((unsigned char*) vout) + sizeof(uint32_t);
         *--q = *p++;
         *--q = *p++;
         *--q = *p++;
         *--q = *p++;
-        if (sizeof(long) == 8) { /* 64 bit */
-           *--q = *p++;
-           *--q = *p++;
-           *--q = *p++;
-           *--q = *p++;
-        }
     }
 }
 
-inline void NetHandler::toNetOrder(unsigned long* const vout, const unsigned long vin)
+inline void NetHandler::toNetOrder(int64_t* const vout, const int64_t vin)
 {
     if (isNotNetworkByteOrder()) {
         unsigned char* p = (unsigned char*) &vin;
-        unsigned char* q = ((unsigned char*) vout) + sizeof(unsigned long);
+        unsigned char* q = ((unsigned char*) vout) + sizeof(int64_t);
         *--q = *p++;
         *--q = *p++;
         *--q = *p++;
         *--q = *p++;
-        if (sizeof(long) == 8) { /* 64 bit */
-           *--q = *p++;
-           *--q = *p++;
-           *--q = *p++;
-           *--q = *p++;
-        }
+        *--q = *p++;
+        *--q = *p++;
+        *--q = *p++;
+        *--q = *p++;
+    }
+}
+
+inline void NetHandler::toNetOrder(uint64_t* const vout, const uint64_t vin)
+{
+    if (isNotNetworkByteOrder()) {
+        unsigned char* p = (unsigned char*) &vin;
+        unsigned char* q = ((unsigned char*) vout) + sizeof(uint64_t);
+        *--q = *p++;
+        *--q = *p++;
+        *--q = *p++;
+        *--q = *p++;
+        *--q = *p++;
+        *--q = *p++;
+        *--q = *p++;
+        *--q = *p++;
     }
 }
 
@@ -360,37 +356,37 @@ inline void NetHandler::toNetOrder(double* const vout, const double vin)
 // ---
 // convert from network byte order
 // ---
-inline void NetHandler::fromNetOrder(short* const vout, const short vin)
+inline void NetHandler::fromNetOrder(int16_t* const vout, const int16_t vin)
 {
     // Same as the 'to' function
     return toNetOrder(vout,vin);
 }
 
-inline void NetHandler::fromNetOrder(unsigned short* const vout, const unsigned short vin)
+inline void NetHandler::fromNetOrder(uint16_t* const vout, const uint16_t vin)
 {
     // Same as the 'to' function
     return toNetOrder(vout,vin);
 }
 
-inline void NetHandler::fromNetOrder(int* const vout, const int vin)
+inline void NetHandler::fromNetOrder(int32_t* const vout, const int32_t vin)
 {
     // Same as the 'to' function
     return toNetOrder(vout,vin);
 }
 
-inline void NetHandler::fromNetOrder(unsigned int* const vout, const unsigned int vin)
+inline void NetHandler::fromNetOrder(uint32_t* const vout, const uint32_t vin)
 {
     // Same as the 'to' function
     return toNetOrder(vout,vin);
 }
 
-inline void NetHandler::fromNetOrder(long* const vout, const long vin)
+inline void NetHandler::fromNetOrder(int64_t* const vout, const int64_t vin)
 {
     // Same as the 'to' function
     return toNetOrder(vout,vin);
 }
 
-inline void NetHandler::fromNetOrder(unsigned long* const vout, const unsigned long vin)
+inline void NetHandler::fromNetOrder(uint64_t* const vout, const uint64_t vin)
 {
     // Same as the 'to' function
     return toNetOrder(vout,vin);

@@ -180,13 +180,13 @@ bool Nib::weaponFireMsgFactory(const LCreal)
     // ---
     // Burst
     // ---
-    pdu.burst.munision.kind         = getEntityKind();
-    pdu.burst.munision.domain       = getEntityDomain();
-    pdu.burst.munision.country      = getEntityCountry();
-    pdu.burst.munision.category     = getEntityCategory();
-    pdu.burst.munision.subcategory  = getEntitySubcategory();
-    pdu.burst.munision.specific     = getEntitySpecific();
-    pdu.burst.munision.extra        = getEntityExtra();
+    pdu.burst.munition.kind         = getEntityKind();
+    pdu.burst.munition.domain       = getEntityDomain();
+    pdu.burst.munition.country      = getEntityCountry();
+    pdu.burst.munition.category     = getEntityCategory();
+    pdu.burst.munition.subcategory  = getEntitySubcategory();
+    pdu.burst.munition.specific     = getEntitySpecific();
+    pdu.burst.munition.extra        = getEntityExtra();
     pdu.burst.warhead = 0;
     pdu.burst.fuse = 0;;
     pdu.burst.quantity = 1;
@@ -203,7 +203,7 @@ bool Nib::weaponFireMsgFactory(const LCreal)
     //std::cout << "(" << pdu.firingEntityID.ID;
     //std::cout << "," << pdu.firingEntityID.simulationID.applicationIdentification ;
     //std::cout << "," << pdu.firingEntityID.simulationID.siteIdentification;
-    //std::cout << ")   munision:";
+    //std::cout << ")   munition:";
     //std::cout << "(" << pdu.munitionID.ID;
     //std::cout << "," << pdu.munitionID.simulationID.applicationIdentification ;
     //std::cout << "," << pdu.munitionID.simulationID.siteIdentification;
