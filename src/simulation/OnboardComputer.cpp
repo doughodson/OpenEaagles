@@ -212,6 +212,8 @@ void OnboardComputer::updateShootList(const bool step)
 
    int n = 0;
    TrackManager* tm = getTrackManagerByType(typeid(AirTrkMgr));
+   // fall back to whatever TM we have, if we don't have an AirTrkMgr
+   if (tm == 0) tm = getTrackManagerByType(typeid(TrackManager));
    if (tm != 0) n = tm->getTrackList(trackList,MAX_TRKS);
     
    if (n > 0) {
@@ -304,6 +306,8 @@ bool OnboardComputer::requestNextToShoot(const Track* const nts)
 
       int n = 0;
       TrackManager* tm = getTrackManagerByType(typeid(AirTrkMgr));
+      // fall back to whatever TM we have, if we don't have an AirTrkMgr
+      if (tm == 0) tm = getTrackManagerByType(typeid(TrackManager));
       if (tm != 0) n = tm->getTrackList(trackList,MAX_TRKS);
        
       if (n > 0) {

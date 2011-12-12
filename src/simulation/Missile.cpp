@@ -261,12 +261,36 @@ bool Missile::setSlotCmdVelocity(const Basic::Number* const msg)
    return ok;
 }
 
+
+// setTargetPlayer() -- sets a pointer to the target player
+bool Missile::setTargetPlayer(Player* const tgt, const bool pt)
+{
+   // if our tgt has changed, reset ground truth vals for weaponGuidance's fuzing logic
+   if (tgt!=0 && tgt != getTargetPlayer()) {
+      trngT = (tgt->getPosition()-getPosition()).length();
+      trdotT=0;
+   }
+   return BaseClass::setTargetPlayer(tgt, pt);
+}
+
+// setTargetTrack() -- sets a pointer to the target track
+bool Missile::setTargetTrack(Track* const trk, const bool pt)
+{
+   // if our track has changed, reset ground truth vals for weaponGuidance's fuzing logic
+   if (trk!=0 && trk != getTargetTrack()) {
+      trngT = (trk->getPosition()).length();
+      trdotT = 0;
+   }
+   return BaseClass::setTargetTrack(trk, pt);
+}
+
+
+
 //------------------------------------------------------------------------------
 // weaponGuidance() -- default guidance; using Robot Aircraft (RAC) guidance
 //------------------------------------------------------------------------------
 void Missile::weaponGuidance(const LCreal dt)
 {
-
    // ---
    // Control velocity:  During burn time, accel to max velocity,
    //  after burn time, deaccelerate to min velocity.

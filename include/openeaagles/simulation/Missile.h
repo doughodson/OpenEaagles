@@ -59,6 +59,8 @@ public:
     virtual void atReleaseInit();
     virtual void setCmdPitchD(const LCreal x) { cmdPitch = x * (LCreal) Basic::Angle::D2RCC; }
     virtual void setCmdHdgD(const LCreal x) { cmdHeading = x * (LCreal) Basic::Angle::D2RCC; }
+   virtual bool setTargetTrack(Track* const trk, const bool posTrkEnb);
+   virtual bool setTargetPlayer(Player* const tgt, const bool posTrkEnb);
 
     // Basic::Component interface
     virtual bool event(const int event, Basic::Object* const obj = 0);

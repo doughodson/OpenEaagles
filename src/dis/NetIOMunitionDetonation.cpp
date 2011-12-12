@@ -260,13 +260,13 @@ bool Nib::munitionDetonationMsgFactory(const LCreal)
     // ---
     // Burst
     // ---
-    pdu.burst.munision.kind         = getEntityKind();
-    pdu.burst.munision.domain       = getEntityDomain();
-    pdu.burst.munision.country      = getEntityCountry();
-    pdu.burst.munision.category     = getEntityCategory();
-    pdu.burst.munision.subcategory  = getEntitySubcategory();
-    pdu.burst.munision.specific     = getEntitySpecific();
-    pdu.burst.munision.extra        = getEntityExtra();
+    pdu.burst.munition.kind         = getEntityKind();
+    pdu.burst.munition.domain       = getEntityDomain();
+    pdu.burst.munition.country      = getEntityCountry();
+    pdu.burst.munition.category     = getEntityCategory();
+    pdu.burst.munition.subcategory  = getEntitySubcategory();
+    pdu.burst.munition.specific     = getEntitySpecific();
+    pdu.burst.munition.extra        = getEntityExtra();
     pdu.burst.warhead = 0;
     pdu.burst.fuse = 0;;
     pdu.burst.quantity = 1;
