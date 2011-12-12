@@ -144,8 +144,8 @@ public:
    virtual bool isMatchingRfSystemType(const EmissionSystem* const p) const;
 
    // Process an emission system from incoming PDUs
-   virtual bool updateIncoming(const EmissionSystem* const es, Nib* const nib);
-   
+   virtual bool updateIncoming(const ElectromagneticEmissionPDU* const pdu, const EmissionSystem* const es, Nib* const nib);
+
    // tell input handler to disable its sensors due to timeout
    virtual void setTimedOut();
 
@@ -219,7 +219,6 @@ inline bool EmissionPduHandler::isDefaultIncomingHandler() const     { return de
 inline bool EmissionPduHandler::isDefaultOutgoingHandler() const     { return defaultOut; }
 
 inline bool EmissionPduHandler::getTemplatesFound() const { return !noTemplatesFound; }
-//inline void EmissionPduHandler::setTimedOut()                        { }
 
 inline const EmissionSystem* EmissionPduHandler::getSavedEmissionSystemData() const  { return &emissionSystemN1; }
 

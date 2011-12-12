@@ -61,7 +61,7 @@ namespace Dis {
 //                                        !   4 => DIS PDU version 2.0 - fourth draft (revised) March 16, 1994
 //                                        !   5 => IEEE 1278.1-1995
 //                                        !   6 => IEEE 1278.1A-1998
-//                                        !   7 => IEEE 1278.1-200X
+//                                        !   7 => IEEE 1278.1 -- draft 15
 //
 //    siteID         <Basic::Number>      ! Site Identification
 //    applicationID  <Basic::Number>      ! Application Identification

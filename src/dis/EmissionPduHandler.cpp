@@ -329,11 +329,10 @@ Basic::Object* EmissionPduHandler::getSlotByIndex(const int si)
 }
 
 
-#ifdef DISV7
 //------------------------------------------------------------------------------
 // setTimedOut() -- incoming player has not sent EE PDU recently
 //------------------------------------------------------------------------------
-void EmissionPduHandler::setTimedOut(void)
+void EmissionPduHandler::setTimedOut()
 { 
    Simulation::RfSensor* rfSys = getSensor();
    if (rfSys != 0) {
@@ -342,18 +341,15 @@ void EmissionPduHandler::setTimedOut(void)
    }
    return; 
 }
-#else
-void EmissionPduHandler::setTimedOut()                        { }
-#endif
 
 //------------------------------------------------------------------------------
 // updateIncoming() -- Process an emission system from incoming PDUs
 //------------------------------------------------------------------------------
-bool EmissionPduHandler::updateIncoming(const EmissionSystem* const es, Nib* const nib)
+bool EmissionPduHandler::updateIncoming(const ElectromagneticEmissionPDU* const pdu, const EmissionSystem* const es, Nib* const nib)
 {
    Simulation::Player* player = nib->getPlayer();
    if (player == 0 || noTemplatesFound) return false;
-   
+
    // ---
    // Default sensor: process only one beam)
    // ---
@@ -472,11 +468,12 @@ bool EmissionPduHandler::updateIncoming(const EmissionSystem* const es, Nib* con
          }
 
          // IPlayer's transmit (when they're active) but don't need to receive
-#ifdef DISV7
-         rfSys->setTransmitterEnableFlag((bd->beamStatus == BS_ACTIVE));
-#else
-         rfSys->setTransmitterEnableFlag(true);
-#endif
+         if (pdu->header.protocolVersion >= NetIO::VERSION_7) {
+            rfSys->setTransmitterEnableFlag((bd->beamStatus == BS_ACTIVE));
+         }
+         else {
+            rfSys->setTransmitterEnableFlag(true);
+         }
          rfSys->setReceiverEnabledFlag(false);
       }
    }
@@ -592,20 +589,20 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
    // this really should not be necessary to limit number of PDUs, since params won't change often; if no change in param, no PDU sent.
    // possibly intended to reduce amount of processing expended for no PDUs sent?
    // otherwise, could be entirely removed.
-#ifdef DISV7
-   LCreal drTime = curExecTime - getEmPduExecTime();
-   if ( drTime < (disIO->getHbtPduEe() /10.0f) ) {
-      result = NO;
-      return NO;
-   }
-#else
-   if ( (result == UNSURE) ) {
+   if (disIO->getVersion() >= NetIO::VERSION_7) {
       LCreal drTime = curExecTime - getEmPduExecTime();
-      if ( drTime < (disIO->getMaxTimeDR(nib) /10.0f) ) {
+      if ( drTime < (disIO->getHbtPduEe() /10.0f) ) {
          result = NO;
       }
    }
-#endif
+   else {
+      if ( (result == UNSURE) ) {
+         LCreal drTime = curExecTime - getEmPduExecTime();
+         if ( drTime < (disIO->getMaxTimeDR(nib) /10.0f) ) {
+            result = NO;
+         }
+      }
+   }
 
    // -------------
    // Then -- Compare current emission system values with the last PDU
@@ -639,9 +636,12 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
          numberOfBeams = 1;
          EmitterBeamData bd;
          bd.beamIDNumber = (ib+1);
-#ifdef DISV7
-         bd.beamStatus = BS_ACTIVE;
-#endif
+
+         if (disIO->getVersion() >= NetIO::VERSION_7)
+            bd.beamStatus = BS_ACTIVE;
+         else
+            bd.beamStatus = 0;
+
          // Beam parameters
          bd.parameterData.frequency = float( beam->getFrequency() );            // Hz
          bd.parameterData.frequencyRange  = float( beam->getBandwidth() );      // Hz
@@ -675,15 +675,17 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
          }
          bd.beamData.beamSweepSync = 0;
 
-#ifdef DISV7
-         bd.jammingTechnique.kind = 0;
-         bd.jammingTechnique.category = 0;
-         bd.jammingTechnique.subcat = 0;
-         bd.jammingTechnique.specific = 0;
-#else
          // For now ... no tracks or jamming data
-         bd.jammingTechnique.setJammingModeSequence(0);
-#endif
+         if (disIO->getVersion() >= NetIO::VERSION_7) {
+            bd.jammingTechnique.kind = 0;
+            bd.jammingTechnique.category = 0;
+            bd.jammingTechnique.subcat = 0;
+            bd.jammingTechnique.specific = 0;
+         }
+         else {
+            bd.jammingTechnique.setJammingModeSequence(0);
+         }
+
 
          if (getEmitterFunction() != ESF_JAMMING) {
             // Radar
@@ -699,9 +701,9 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
          else {
             // Jammer 
             bd.beamFunction = BF_JAMMER;
-#ifdef DISV7
-            bd.jammingTechnique.kind = JT_NOISE;
-#endif
+            if (disIO->getVersion() >= NetIO::VERSION_7) {
+               bd.jammingTechnique.kind = JT_NOISE;
+            }
          }
 
          bd.beamParameterIndex = 0;
@@ -772,35 +774,40 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
          }
          bd.numberOfTargetsInTrack = numTJT;
 
-#ifdef DISV7
          // implement DISv7 parameter thresholds and other restrictions on parameters that could otherwise cause updated PDUs to be sent.
+         float tmpbeamSweepSync = 0;
+         float tmpbeamAzimuthCenter = 0;
+         float tmpbeamElevationCenter = 0;
+         if (disIO->getVersion() >= NetIO::VERSION_7) {
 
-         // change in beamSweepSync should not force new PDU
-         float tmpbeamSweepSync = bd.parameterData.beamSweepSync;
-         bd.parameterData.beamSweepSync = (*getSavedEmitterBeamData(ib)).parameterData.beamSweepSync;
+            // change in beamSweepSync should not force new PDU
+            tmpbeamSweepSync = bd.beamData.beamSweepSync;
+            bd.beamData.beamSweepSync = (*getSavedEmitterBeamData(ib)).beamData.beamSweepSync;
 
-         // d) Changes in beam geometry descriptors exceed specified thresholds. Beam geometry descriptors
-         // include beam azimuth center, beam azimuth sweep, beam elevation center and beam elevation
-         // sweep. The azimuth and elevation thresholds shall be identified by the symbolic names
-         // EE_AZ_THRSH and EE_EL_THRSH respectively. (See 4.2.8.3 for parameter details and default
-         // values.)
+            // d) Changes in beam geometry descriptors exceed specified thresholds. Beam geometry descriptors
+            // include beam azimuth center, beam azimuth sweep, beam elevation center and beam elevation
+            // sweep. The azimuth and elevation thresholds shall be identified by the symbolic names
+            // EE_AZ_THRSH and EE_EL_THRSH respectively. (See 4.2.8.3 for parameter details and default
+            // values.)
 
-         // store current values temporarily
-         float tmpbeamAzimuthCenter = bd.parameterData.beamAzimuthCenter;
-         float tmpbeamElevationCenter = bd.parameterData.beamElevationCenter;
+            // store current values temporarily
+            tmpbeamAzimuthCenter = bd.beamData.beamAzimuthCenter;
+            tmpbeamElevationCenter = bd.beamData.beamElevationCenter;
 
-         // do threshold tests - if new value is not over threshold, reset it in bd struct to old value, so that it will not affect
-         // the comparison of new bd with old emitterBeamData: ( bd != *emitterBeamData[ib] ) below
-         // (but if new bd will be sent, make sure to restore the new values that we've temporarily stored (above))
-         if (fabs( (*getSavedEmitterBeamData(ib)).parameterData.beamAzimuthCenter - bd.parameterData.beamAzimuthCenter ) <= disIO->getEeAzThrsh()) {
-            // did not exceed threshold, set current val to previous val, so it will not affect comparison
-            bd.parameterData.beamAzimuthCenter = (*getSavedEmitterBeamData(ib)).parameterData.beamAzimuthCenter;
+            // do threshold tests - if new value is not over threshold, reset it in bd struct to old value, so that it will not affect
+            // the comparison of new bd with old emitterBeamData: ( bd != *emitterBeamData[ib] ) below
+            // (but if new bd will be sent, make sure to restore the new values that we've temporarily stored (above))
+            if (fabs( (*getSavedEmitterBeamData(ib)).beamData.beamAzimuthCenter - bd.beamData.beamAzimuthCenter ) <= disIO->getEeAzThrsh()) {
+               // did not exceed threshold, set current val to previous val, so it will not affect comparison
+               bd.beamData.beamAzimuthCenter = (*getSavedEmitterBeamData(ib)).beamData.beamAzimuthCenter;
+            }
+            if (fabs( (*getSavedEmitterBeamData(ib)).beamData.beamElevationCenter - bd.beamData.beamElevationCenter ) <= disIO->getEeElThrsh()) {
+               // did not exceed threshold, set current val to previous val, so it will not affect comparison
+               bd.beamData.beamElevationCenter = (*getSavedEmitterBeamData(ib)).beamData.beamElevationCenter;
+            }
          }
-         if (fabs( (*getSavedEmitterBeamData(ib)).parameterData.beamElevationCenter - bd.parameterData.beamElevationCenter ) <= disIO->getEeElThrsh()) {
-            // did not exceed threshold, set current val to previous val, so it will not affect comparison
-            bd.parameterData.beamElevationCenter = (*getSavedEmitterBeamData(ib)).parameterData.beamElevationCenter;
-         }
-#endif
+
+
          // ---
          // Compute beam data length (in 32bit words, including the track/jam targets)
          // ---
@@ -811,12 +818,14 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
          // compare & transfer the emitter beam data
          // ---
          if ( bd != *getSavedEmitterBeamData(ib) ) {
-#ifdef DISV7
-            // there will be an update PDU, make sure it includes current values.
-            bd.parameterData.beamAzimuthCenter = tmpbeamAzimuthCenter;
-            bd.parameterData.beamElevationCenter = tmpbeamElevationCenter;
-            bd.parameterData.beamSweepSync = tmpbeamSweepSync;
-#endif
+
+            if (disIO->getVersion() >= NetIO::VERSION_7) {
+               // there will be an update PDU, make sure it includes current values.
+               bd.beamData.beamAzimuthCenter = tmpbeamAzimuthCenter;
+               bd.beamData.beamElevationCenter = tmpbeamElevationCenter;
+               bd.beamData.beamSweepSync = tmpbeamSweepSync;
+            }
+
             setSavedEmitterBeamData(ib,bd);
             result = YES;
          }
@@ -829,9 +838,10 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
          Network::Dis::EmitterBeamData bd;
          bd.beamIDNumber = (ib+1);
 
-#ifdef DISV7
-         bd.beamStatus = BS_INACTIVE;   // inactive
-#endif
+         if (disIO->getVersion() >= NetIO::VERSION_7)
+            bd.beamStatus = BS_INACTIVE;
+         else
+            bd.beamStatus = 0;
 
          bd.numberOfTargetsInTrack = 0;
 
@@ -868,27 +878,29 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
          result = YES;
       }
 
-#ifdef DISV7
-      if ( playerOk && (result == UNSURE) && nib->getPlayer()->isLocalPlayer() ) {
-         LCreal drTime = curExecTime - getEmPduExecTime();
-         if ( drTime >= disIO->getHbtPduEe() ) {
-            result = YES;
-            sc = true;
-         }
-      }
-#else
       // ---   
       // Last -- Timeout (use Max DR time) -- do this check after the data comparison
       //    to make sure all of the PDU data has been loaded
       // ---   
-      if ( (result == UNSURE) && nib->getPlayer()->isLocalPlayer()) {
-         LCreal drTime = curExecTime - getEmPduExecTime();
-         if ( drTime >= disIO->getMaxTimeDR(nib) ) {
-            result = YES;
-            sc = true;
+      if (disIO->getVersion() >= NetIO::VERSION_7) {
+         if ( playerOk && (result == UNSURE) && nib->getPlayer()->isLocalPlayer() ) {
+            LCreal drTime = curExecTime - getEmPduExecTime();
+            if ( drTime >= disIO->getHbtPduEe() ) {
+               result = YES;
+               sc = true;
+            }
          }
       }
-#endif
+      else {
+         if ( (result == UNSURE) && nib->getPlayer()->isLocalPlayer()) {
+            LCreal drTime = curExecTime - getEmPduExecTime();
+            if ( drTime >= disIO->getMaxTimeDR(nib) ) {
+               result = YES;
+               sc = true;
+            }
+         }
+      }
+
    }
 
    // ---

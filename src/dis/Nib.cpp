@@ -202,19 +202,19 @@ void Nib::updateTheIPlayer()
       nib2PlayerState();
       // ... transfer additional data in the future ....
 
-#ifdef DISV7
       // ---
       // check all emission handlers for timeout
       // ---
       NetIO* const disIO = (NetIO*)(getNetIO());
-      double curExecTime = disIO->getSimulation()->getExecTimeSec();
-      for (unsigned char i = 0; i < numEmissionSystems; i++) {
-         LCreal drTime = curExecTime - emitterSysHandler[i]->getEmPduExecTime();
-         if ( drTime >= (disIO->getHbtPduEe() * disIO->getHbtTimeoutMplier()) ) {
-            emitterSysHandler[i]->setTimedOut();
+      if (disIO->getVersion() >= NetIO::VERSION_7) {
+         double curExecTime = disIO->getSimulation()->getExecTimeSec();
+         for (unsigned char i = 0; i < numEmissionSystems; i++) {
+            LCreal drTime = curExecTime - emitterSysHandler[i]->getEmPduExecTime();
+            if ( drTime >= (disIO->getHbtPduEe() * disIO->getHbtTimeoutMplier()) ) {
+               emitterSysHandler[i]->setTimedOut();
+            }
          }
       }
-#endif
 
     }
 }
@@ -309,7 +309,7 @@ bool Nib::processElectromagneticEmissionPDU(const ElectromagneticEmissionPDU* co
          // Ok, pass the location of the EmissionSystem (and beam data) to the handler
          // ---
          if (handler != 0) {
-            ok = handler->updateIncoming(es, this);
+            ok = handler->updateIncoming(pdu, es, this);
          }
 
       } 

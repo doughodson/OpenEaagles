@@ -43,8 +43,6 @@
 
 #include <iostream>
 
-//#define DISV7
-
 namespace Eaagles {
 namespace Network {
 namespace Dis {
