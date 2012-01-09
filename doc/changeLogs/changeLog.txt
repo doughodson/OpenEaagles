@@ -13,6 +13,9 @@ Global changes:
 --------------------------------------------------------------------------------
 basic
 
+   Component class
+      1) shutdownNotification() -- Now sents a shutdown notification to the logger.
+
    NetHandler class
       1) The toNetOrder() and fromNetOrder() functions now process int16_t, uint16_t,
          int32_t, uint32_t, int64_t and uint64_t types instead of signed and unsigned
@@ -73,6 +76,7 @@ dis
    NetIO class
       ## various updates to support changes to struct.h and pdu.h
       1) PDU Type enum values now have explicit values
+      2) createNewOutputNib() -- (bug fix) now sets the player's outgoing NIB
 
    Nib class
       ## various updates to support changes to struct.h and pdu.h

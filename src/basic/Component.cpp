@@ -419,6 +419,9 @@ bool Component::shutdownNotification()
       subcomponents = 0;
    }
 
+   // And tell the logger
+   if (elog != 0) elog->event(SHUTDOWN_EVENT);
+
    shutdown = true;
    return shutdown;
 }

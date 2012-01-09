@@ -168,7 +168,7 @@ public:
                double* const mlon      // Out:  Mirror point longitude (degs)
                );
 
-   // Basic::Component interface
+   // Eaagles::Basic::Component interface functions
    virtual void reset();
     
 protected:
