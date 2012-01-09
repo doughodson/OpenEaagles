@@ -618,6 +618,9 @@ Simulation::Nib* NetIO::createNewOutputNib(Simulation::Player* const player)
          // Note: isEntityTypeValid() will return false if there
          // isn't a type mapper (Ntb) assigned to this Nib.
          nib->setOutputPlayerType(player);
+
+         // Inform the player
+         player->setOutgoingNib(nib, getNetworkID());
       }
    }
    return nib;

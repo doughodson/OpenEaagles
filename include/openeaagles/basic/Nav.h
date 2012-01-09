@@ -606,7 +606,7 @@ public:
          const double z,      // IN: ECEF Z component   (meters)
          double* const pLat,  // OUT: Geodetic latitude  (degrees)
          double* const pLon,  // OUT: Geodetic longitude (degrees)
-         double* const pAlt,     // OUT: Geodetic altitude  (meters)
+         double* const pAlt,  // OUT: Geodetic altitude  (meters)
          const EarthModel* const em=0 // IN: Pointer to an optional earth model (default: WGS-84)
       );
 
@@ -617,7 +617,7 @@ public:
          const EarthModel* const em=0 // IN: Pointer to an optional earth model (default: WGS-84)
       );
 
-   // Using arrays vectors
+   // Using array vectors
    static bool convertEcef2Geod(
          const double vec[3],    // IN: ECEF [ IX IY IZ ]
          double lla[3],          // OUT: Geodetic [ ILAT ILON IALT ]
@@ -750,6 +750,33 @@ public:
       double geocPos[3],         // OUT: Geocentric position vector [ IX IY IZ ] (meters)
       double geocVel[3],         // OUT: Geocentric velocity vector [ IX IY IZ ] (m/sec)
       double geocAcc[3]          // OUT: Geocentric acceleration vector [ IX IY IZ ] (m/sec/sec)
+   );
+
+
+//==============================================================================
+// Universal Transverse Mercator (UTM)
+//==============================================================================
+
+   // Converts Latitude, Longitude to UTM Northing and Easting
+   static bool convertLL2Utm(
+      const double lat,             // IN:  Latitude  [DEG]
+      const double lon,             // IN:  Longitude [DEG]
+      char* const  pLatZone,        // OUT: Latitude Zone
+      int*  const  pLonZone,        // OUT: Longitude Zone
+      double* const pNorthing,      // OUT: Northing [M]
+      double* const pEasting,       // OUT: Easting  [M]
+      const EarthModel* const pEM=0 // IN:  Pointer to an optional earth model (default: WGS-84)
+   );
+   
+   // Converts UTM Northing and Easting to Latitude, Longitude
+   static bool convertUtm2LL(
+      const double northing,        // IN:  Northing [M]
+      const double easting,         // IN:  Easting  [M]
+      char latZone,                 // IN:  Latitude Zone
+      int  lonZone,                 // IN:  Longitude Zone
+      double* const pLat,           // OUT: Latitude  [DEG]
+      double* const pLon,           // OUT: Longitude [DEG]
+      const EarthModel* const pEM=0 // IN:  Pointer to an optional earth model (default: WGS-84)      
    );
 
 }; // End class Nav

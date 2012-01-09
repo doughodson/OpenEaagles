@@ -434,7 +434,7 @@ bool Nav::glla2bd(
    bool ok = Nav::gll2bd(slat,slon, dlat, dlon, brg, dist, em);
 
    if (ok) {
-      *slantRng = sqrt ( (*dist) * (*dist) + deltaAlt * deltaAlt );
+      *slantRng = std::sqrt ( (*dist) * (*dist) + deltaAlt * deltaAlt );
 
       if (elev != 0 && (*slantRng) > 0) {
          *elev = Angle::R2DCC * std::asin(deltaAlt/ (*slantRng));
@@ -480,7 +480,7 @@ bool Nav::glla2bdS(
    bool ok = Nav::gll2bdS(slat,slon, dlat, dlon, brg, dist);
 
    if (ok) {
-      *slantRng = sqrt ( (*dist) * (*dist) + deltaAlt * deltaAlt );
+      *slantRng = std::sqrt ( (*dist) * (*dist) + deltaAlt * deltaAlt );
       if (elev != 0 && (*slantRng) > 0) {
          *elev = Angle::R2DCC * std::asin(deltaAlt/ (*slantRng));
       }
@@ -845,7 +845,7 @@ bool Nav::computeEulerAngles(
    if (-1.0 > stht) stht = -1.0;
    if ( 1.0 < stht) stht =  1.0;
 
-   double ctht = sqrt(1.0 - stht*stht);
+   double ctht = std::sqrt(1.0 - stht*stht);
 
 
    double sphi = 0;
@@ -1152,7 +1152,7 @@ bool Nav::getGeocCoords(
    double alt = geodPos[IALT]; /* Meters */
 
    double sinlat = std::sin(lat);
-   double temp1 = ellipseA /  sqrt(1.0 - (ellipseE2 * (sinlat * sinlat)));
+   double temp1 = ellipseA /  std::sqrt(1.0 - (ellipseE2 * (sinlat * sinlat)));
    double temp2 = temp1 * ellipseC1;
    temp1 += alt;
    temp2 += alt;                          /* equ. A-10a */
@@ -1251,7 +1251,7 @@ bool Nav::getGeodCoords(
 
    /* initial guess */
    double temp_m = ellipseAsq * zp_sq + ellipseBsq * wp_sq;
-   double temp_sq = (sqrt (temp_m) - ellipseA * ellipseB);
+   double temp_sq = (std::sqrt (temp_m) - ellipseA * ellipseB);
    double m = 0.5 * ((ellipseA * ellipseB * temp_m * (temp_sq))
       / (ellipseAsq * ellipseAsq * zp_sq + ellipseBsq *
       ellipseBsq * wp_sq));
@@ -1262,7 +1262,7 @@ bool Nav::getGeodCoords(
    double z = (1.0 / (1.0 + (2.0 * m) / ellipseBsq)) * zp;
 
    /* calculate alt */
-   double h = sqrt((xp - x) * (xp - x) + (yp - y) * (yp - y) + (zp - z) * (zp - z));
+   double h = std::sqrt((xp - x) * (xp - x) + (yp - y) * (yp - y) + (zp - z) * (zp - z));
 
    /* begin the iteration for convergence */
    double w = 0;
@@ -1294,7 +1294,7 @@ bool Nav::getGeodCoords(
 
       /* recalculate alt */
 
-      h = sqrt ((wp - w) * (wp - w) + (zp - z) * (zp - z));
+      h = std::sqrt ((wp - w) * (wp - w) + (zp - z) * (zp - z));
 
       index++;
    } while( fabs( h - h_previous ) > 0.5 );
@@ -1323,7 +1323,7 @@ bool Nav::getGeodCoords(
       }
       else              /* denominator is 0 */
       {
-         tanphi = (ellipseAsqOverB * sqrt( fabs(1.0 - w_sq / ellipseAsq))) / w;
+         tanphi = (ellipseAsqOverB * std::sqrt( fabs(1.0 - w_sq / ellipseAsq))) / w;
       }
       lat = atan( tanphi );
       if( zp < 0  && lat > 0)
@@ -1428,7 +1428,7 @@ bool Nav::getGeocAngle(
 	osg::Vec3d hpVec(0.0, 1.0, 0.0);
 
 	hpVec = mat.transform3x3(hpVec, mat);
-	double d = sqrt(hpVec.x() * hpVec.x() + hpVec.y() * hpVec.y());
+	double d = std::sqrt(hpVec.x() * hpVec.x() + hpVec.y() * hpVec.y());
 
 	yawd   = -1.0 * atan2(hpVec.x(), hpVec.y());
 	pitchd = atan2((double)hpVec.z(), d);
@@ -1541,6 +1541,460 @@ bool Nav::getWorldPosAccVel(
    geocAcc[IX] = ( p_aworld * -sin_cos + q_aworld * -sin_lon + r_aworld * -cos_cos );
    geocAcc[IY] = ( p_aworld * -sin_sin + q_aworld *  cos_lon + r_aworld * -cos_sin );
    geocAcc[IZ] = ( p_aworld *  cos_lat                       + r_aworld * -sin_lat );
+
+   return true;
+}
+
+
+//------------------------------------------------------------------------------
+// UTM support functions
+//------------------------------------------------------------------------------
+
+static char getLatZone(const double lat)
+{
+   char latZone = '*';
+
+   if      (lat >   84.0) latZone = 'Z';  // error north
+   else if (lat >=  72.0) latZone = 'X';
+   else if (lat >=  64.0) latZone = 'W';
+   else if (lat >=  56.0) latZone = 'V';
+   else if (lat >=  48.0) latZone = 'U';
+   else if (lat >=  40.0) latZone = 'T';
+   else if (lat >=  32.0) latZone = 'S';
+   else if (lat >=  24.0) latZone = 'R';
+   else if (lat >=  16.0) latZone = 'Q';
+   else if (lat >=   8.0) latZone = 'P';
+   else if (lat >=   0.0) latZone = 'N';
+   else if (lat >=  -8.0) latZone = 'M';
+   else if (lat >= -16.0) latZone = 'L';
+   else if (lat >= -24.0) latZone = 'K';
+   else if (lat >= -32.0) latZone = 'J';
+   else if (lat >= -40.0) latZone = 'H';
+   else if (lat >= -48.0) latZone = 'G';
+   else if (lat >= -56.0) latZone = 'F';
+   else if (lat >= -64.0) latZone = 'E';
+   else if (lat >= -72.0) latZone = 'D';
+   else if (lat >= -80.0) latZone = 'C';
+   else                   latZone = 'A';  // error south
+
+   return latZone;
+}
+
+static int getLonZone(const double latDeg, const double lonDeg)
+{
+   //-----------------------------------
+   // get longitude zone number
+   //-----------------------------------   
+   double lonZone = (lonDeg >= 0.0) ? 31.0 + lonDeg/6.0
+                                    : 1.0 + (lonDeg + 180.0)/6.0;
+
+   //-----------------------------------
+   // special case longitude zone number
+   //-----------------------------------   
+   if ( (latDeg >= 56.0) && (latDeg < 64.0) && (lonDeg >= 3.0) && (lonDeg < 12.0) ) {
+      lonZone = 32;
+   }
+   
+   //-----------------------------------
+   // Special zones for Svalbard
+   //-----------------------------------
+   if (latDeg >= 72.0 && latDeg < 84.0) {
+      if      ( lonDeg >= 0.0  && lonDeg <  9.0 ) lonZone = 31;
+      else if ( lonDeg >= 9.0  && lonDeg < 21.0 ) lonZone = 33;
+      else if ( lonDeg >= 21.0 && lonDeg < 33.0 ) lonZone = 35;
+      else if ( lonDeg >= 33.0 && lonDeg < 42.0 ) lonZone = 37;
+   }
+   
+   return int(lonZone);
+}
+
+static bool inNorthHemi(const char latZone)
+{
+   bool northHemi = true;
+   
+   if (latZone == 'M' ||
+       latZone == 'L' ||
+       latZone == 'K' ||
+       latZone == 'J' ||
+       latZone == 'H' ||
+       latZone == 'G' ||
+       latZone == 'F' ||
+       latZone == 'E' ||
+       latZone == 'D' ||
+       latZone == 'C') northHemi = false;
+       
+   return northHemi;
+}
+
+
+//------------------------------------------------------------------------------
+// convertLL2Utm - Converts Latitude, Longitude to UTM Northing and Easting
+//
+// Reference:  Defense Mapping Agency (DMA) Technical Manual - DMATM 8358.2
+//             "The Universal Grids: Universal Transverse Mercator (UTM) and
+//             Universal Polar Stereographic (UPS)"
+//------------------------------------------------------------------------------
+bool Nav::convertLL2Utm(
+      const double            lat,        // IN:  Latitude        [DEG]
+      const double            lon,        // IN:  Longitude       [DEG]
+      char* const             pLatZone,   // OUT: Latitude Zone
+      int*  const             pLonZone,   // OUT: Longitude Zone
+      double* const           pNorthing,  // OUT: Northing        [M]
+      double* const           pEasting,   // OUT: Easting         [M]
+      const EarthModel* const pEM)        // IN:  Pointer to an optional earth model (default: WGS-84)
+{
+   //-----------------------------------
+   // local variables
+   //-----------------------------------
+   double k1 = 0.0;
+   double k2 = 0.0;
+   double k3 = 0.0;
+   double k4 = 0.0;
+   
+   //-----------------------------------
+   // local constants
+   //-----------------------------------
+   const double A       = pEM->getA();
+   const double B       = pEM->getB();   
+   const double E2      = pEM->getE2();
+   
+   //-----------------------------------
+   // check input terms valid 
+   //-----------------------------------
+   bool latValid =  (-80.0 <= lat) && (lat <=  +84.0);
+   bool lonValid = (-180.0 <= lon) && (lon <= +180.0);
+   bool ok = latValid && lonValid;
+   if (ok) {
+      const double LATDEG  = lat;
+      const double LATRAD  = lat*Angle::D2RCC;
+      const double LONDEG  = lon;
+
+      //-----------------------------------
+      // powers of sin,cos,tan of latitude
+      //-----------------------------------
+      const double SIN1  = std::sin(LATRAD);
+      const double COS1  = std::cos(LATRAD);
+
+      const double SIN2 = SIN1*SIN1;
+      
+      const double COS2 = COS1*COS1;
+      const double COS3 = COS1*COS2;
+      const double COS4 = COS1*COS3;
+      const double COS5 = COS1*COS4;
+      const double COS6 = COS1*COS5;
+      const double COS7 = COS1*COS6;
+      const double COS8 = COS1*COS7;
+      
+      const double TAN1 = SIN1/COS1;
+      const double TAN2 = TAN1*TAN1;
+      const double TAN3 = TAN1*TAN2;
+      const double TAN4 = TAN1*TAN3;
+      const double TAN5 = TAN1*TAN4;
+      const double TAN6 = TAN1*TAN5;
+
+      //---------------
+      // term S
+      //---------------
+      const double N1 = (A - B)/(A + B);
+      const double N2 = N1*N1;
+      const double N3 = N1*N2;
+      const double N4 = N1*N3;
+      const double N5 = N1*N4;
+
+      const double Ap =               A*( 1.0 - N1 + (1.25)  *(N2 - N3) + (81.0/64.0)*(N4 - N5) );
+      const double Bp =         (1.5)*A*(  N1 - N2 + (0.875) *(N3 - N4) + (55.0/64.0)*(N5) ); 
+      const double Cp =      (0.9375)*A*(  N2 - N3 + (0.75)  *(N4 - N5) );
+      const double Dp =   (35.0/48.0)*A*(  N3 - N4 + (0.6875)*(N5) );
+      const double Ep = (315.0/512.0)*A*(  N4 - N5 );
+
+      const double SIN2LAT = std::sin(2.0*LATRAD);
+      const double SIN4LAT = std::sin(4.0*LATRAD);
+      const double SIN6LAT = std::sin(6.0*LATRAD);
+      const double SIN8LAT = std::cos(6.0*LATRAD);
+
+      const double S  = Ap*LATRAD - Bp*SIN2LAT + Cp*SIN4LAT - Dp*SIN6LAT + Ep*SIN8LAT;
+      
+      //---------------
+      // constants
+      //---------------   
+      const double EP2  = (E2 != 1.0) ? E2/(1.0 - E2) : -1.0;  // -1.0 indicates an error
+      const double EP4  = EP2*EP2;
+      const double EP6  = EP2*EP4;
+      const double EP8  = EP2*EP6;
+
+      const double K0   = 0.9996;
+      const double P    = A*(1.0 - E2)/pow((1.0 - E2*SIN2), 1.5);
+      const double Q    = P*(1.0 + EP2*COS2);
+
+      //---------------
+      // term T1
+      //---------------
+      const double T1 = S*K0;
+      
+      //---------------
+      // term T2
+      //---------------
+      const double T2 = Q*SIN1*COS1*K0/2.0;
+      
+      //---------------
+      // term T3
+      //---------------
+      k1 = Q*SIN1*COS3*K0/24.0;
+      k2 = 5.0 - TAN2 + 9.0*EP2*COS2 + 4.0*EP4*COS4;
+      const double T3 = k1*k2;
+      
+      //---------------
+      // term T4
+      //---------------
+      k1 = Q*SIN1*COS5*K0/720.0;
+      k2 = 61.0 - 58.0*TAN2 + TAN4 + 270.0*EP2*COS2 - 330.0*TAN2*EP2*COS2;
+      k3 = 445.0*EP4*COS4 + 324.0*EP6*COS6 - 680.0*TAN2*EP4*COS4;
+      k4 = 88.0*EP8*COS8 - 600.0*TAN2*EP6*COS6 - 192.0*TAN2*EP8*COS8;
+      const double T4 =  k1*(k2 + k3 + k4);
+      
+      //---------------
+      // term T5
+      //---------------
+      k1 = Q*SIN1*COS7*K0/40320.0;
+      k2 = 1385.0 - 3111.0*TAN2 + 543.0*TAN4 - TAN6;
+      const double T5 = k1*k2;
+      
+      //---------------
+      // term T6
+      //---------------
+      const double T6 = Q*COS1*K0;
+      
+      //---------------
+      // term T7
+      //---------------
+      k1 = Q*COS3*K0/6.0;
+      k2 = 1.0 - TAN2 + EP2*COS2;
+      const double T7 = k1*k2;
+      
+      //---------------
+      // term T8
+      //---------------
+      k1 = Q*COS5*K0/120.0;
+      k2 = 5.0 - 18.0*TAN2 + TAN4 + 14.0*EP2*COS2 - 58.0*TAN2*EP2*COS2;
+      k3 = 13.0*EP4*COS4 + 4.0*EP6*COS6 - 64.0*TAN2*EP4*COS4 - 24.0*TAN2*EP6*COS6;
+      const double T8 = k1*(k2 + k3);
+      
+      //---------------
+      // term T9
+      //---------------
+      k1 = Q*COS7*K0/5040.0;
+      k1 = 61.0 - 479.0*TAN2 + 179*TAN4 - TAN6;
+      const double T9 = k1*k2;
+
+      //-----------------------------------
+      // get latitude and longitude zones
+      //-----------------------------------
+      *pLatZone = getLatZone(lat);
+      *pLonZone = getLonZone(lat, lon);
+
+      const int    LONZONE = 1 + int((LONDEG + 180.0)/6.0);
+      const double LONORIG = 6.0*(LONZONE - 1) - 180.0 + 3.0;
+
+      const double dL1 = Angle::D2RCC*(LONDEG - LONORIG);
+      const double dL2 = dL1*dL1;
+      const double dL3 = dL1*dL2;
+      const double dL4 = dL1*dL3;
+      const double dL5 = dL1*dL4;
+      const double dL6 = dL1*dL5;
+      const double dL7 = dL1*dL6;
+      const double dL8 = dL1*dL7;
+
+      const double FN  = (LATDEG < 0.0) ? 1.0e7 : 0.0;
+      const double FE  = 500000.0;
+      
+      *pNorthing = FN + T1 + dL2*T2 + dL4*T3 + dL6*T4 + dL8*T5;
+      *pEasting  = FE +      dL1*T6 + dL3*T7 + dL5*T8 + dL7*T9;
+   }
+   
+   return ok;
+}
+
+
+//------------------------------------------------------------------------------
+// convertUtm2LL - Converts UTM Northing and Easting to Latitude, Longitude
+//
+// Reference:  Defense Mapping Agency (DMA) Technical Manual - DMATM 8358.2
+//             "The Universal Grids: Universal Transverse Mercator (UTM) and
+//             Universal Polar Stereographic (UPS)"
+//------------------------------------------------------------------------------
+bool Nav::convertUtm2LL(
+      const double            northing, // IN:  Northing       [M]
+      const double            easting,  // IN:  Easting        [M]
+      char                    latZone,  // IN:  Latitude Zone
+      int                     lonZone,  // IN:  Longitude Zone
+      double* const           pLat,     // OUT: Latitude       [DEG]
+      double* const           pLon,     // OUT: Longitude      [DEG]
+      const EarthModel* const pEM)      // IN:  Pointer to an optional earth model (default: WGS-84)      
+{
+   //-----------------------------------
+   // local variables
+   //-----------------------------------
+   double k1 = 0.0;
+   double k2 = 0.0;
+   double k3 = 0.0;
+   double k4 = 0.0;
+   double k5 = 0.0;
+   
+   //-----------------------------------
+   // local constants
+   //-----------------------------------
+   const double A    = pEM->getA();
+   const double B    = pEM->getB();
+   
+   const double E2   = pEM->getE2();
+   const double E4   = E2*E2;
+   const double E6   = E2*E4;
+   
+   const double EP2  = (E2 != 1.0) ? E2/(1.0 - E2) : -1.0;
+   const double EP4  = EP2*EP2;
+   const double EP6  = EP2*EP4;
+   const double EP8  = EP2*EP6;
+   
+   const double K01  = 0.9996;   // central scale factor for UTM
+   const double K02  = K01*K01;
+   const double K03  = K01*K02;
+   const double K04  = K01*K03;
+   const double K05  = K01*K04;
+   const double K06  = K01*K05;
+   const double K07  = K01*K06;
+   const double K08  = K01*K07;
+   
+   //-----------------------------------
+   // calculate the footprint latitude (FPLAT)
+   //-----------------------------------
+   k1 = inNorthHemi(latZone) ? northing : (northing - 1.0e7);
+   k2 = A*K01*(1.0 - E2/4.0 - (3.0/64.0)*E4 - (5.0/256.0)*E6);
+   
+   const double MU      = k1/k2;
+   const double SIN2MU  = std::sin(2.0*MU);
+   const double SIN4MU  = std::cos(4.0*MU);
+   const double SIN6MU  = std::sin(6.0*MU);
+   const double SIN8MU  = std::cos(8.0*MU);
+   
+   const double N1      = (A - B)/(A + B);
+   const double N2      = N1*N1;
+   const double N3      = N1*N2;
+   const double N4      = N1*N3;
+                     
+   const double J1      =      (3.0/2.0)*N1 - (27.0/32.0)*N3;
+   const double J2      =    (21.0/16.0)*N2 - (55.0/32.0)*N4;
+   const double J3      =   (151.0/96.0)*N3;
+   const double J4      = (1097.0/512.0)*N4;
+
+   const double FPLAT   = MU + J1*SIN2MU + J2*SIN4MU + J3*SIN6MU + J4*SIN8MU;
+   
+   //-----------------------------------
+   // powers of sin,cos,tan of FPLAT
+   //-----------------------------------
+   const double SIN1    = std::sin(FPLAT);
+   const double SIN2    = SIN1*SIN1;
+
+   const double COS1    = std::cos(FPLAT);   
+   const double COS2    = COS1*COS1;
+   const double COS3    = COS1*COS2;
+   const double COS4    = COS1*COS3;
+   const double COS5    = COS1*COS4;
+   const double COS6    = COS1*COS5;
+   const double COS7    = COS1*COS6;
+   const double COS8    = COS1*COS7;
+   
+   const double TAN1    = SIN1/COS1;
+   const double TAN2    = TAN1*TAN1;
+   const double TAN3    = TAN1*TAN2;
+   const double TAN4    = TAN1*TAN3;
+   const double TAN5    = TAN1*TAN4;
+   const double TAN6    = TAN1*TAN5;
+
+   const double P       = A*(1.0 - E2)/pow((1.0 - E2*SIN2), 1.5);
+   const double Q1      = P*(1.0 + EP2*COS2);
+   const double Q2      = Q1*Q1;
+   const double Q3      = Q1*Q2;
+   const double Q4      = Q1*Q3;
+   const double Q5      = Q1*Q4;
+   const double Q6      = Q1*Q5;
+   const double Q7      = Q1*Q6;
+
+   const double FE      = 500000.0;
+   const double DE1     = easting - FE;
+   const double DE2     = DE1*DE1;
+   const double DE3     = DE1*DE2;
+   const double DE4     = DE1*DE3;
+   const double DE5     = DE1*DE4;
+   const double DE6     = DE1*DE5;
+   const double DE7     = DE1*DE6;
+   const double DE8     = DE1*DE7;
+   
+   //---------------
+   // term T10
+   //---------------
+   k1 = 2.0*P*Q1*K02;
+   const double T10 = TAN1/k1;
+
+   //---------------
+   // term T11
+   //---------------
+   k1 = 5.0 + 3.0*TAN2 + EP2*COS2 - 4.0*EP4*COS4 - 9.0*TAN2*EP2*COS2;
+   k2 = 24.0*P*Q3*K04;
+   const double T11 = TAN1*k1/k2;
+
+   //---------------
+   // term T12
+   //---------------
+   k1 = 61.0 + 90.0*TAN2 + 46.0*EP2*COS2 + 45.0*TAN4 - 252.0*TAN2*EP2*COS2;
+   k2 = - 3.0*EP4*COS4 + 100.0*EP6*COS6 -66.0*TAN2*EP4*COS4;
+   k3 = - 90.0*TAN4*EP2*COS2 + 88.0*EP8*COS8 + 225.0*TAN4*EP4*COS4;
+   k4 = + 84.0*TAN2*EP6*COS6 - 192.0*TAN2*EP8*COS8;
+   k5 = 720.0*P*Q5*K06;
+   const double T12 = TAN1*(k1 + k2 + k3 + k4)/k5;
+
+   //---------------
+   // term T13
+   //---------------
+   k1 = 1385.0 + 3633.0*TAN2 + 4095.0*TAN4 + 1575.0*TAN6;
+   k2 = 40320.0*P*Q7*K08;
+   const double T13 = TAN1*k1/k2;
+
+   //---------------
+   // term T14
+   //---------------
+   k1 = Q1*COS1*K01;
+   const double T14 = 1.0/k1;
+
+   //---------------
+   // term T15
+   //---------------
+   k1 = 1.0 + 2.0*TAN2 + EP2*COS2;
+   k2 = 6.0*Q3*COS1*K03;
+   const double T15 = k1/k2;
+
+   //---------------
+   // term T16
+   //---------------
+   k1 = 5.0 + 6.0*EP2*COS2 + 28.0*TAN2 - 3.0*EP4*COS4 + 8.0*TAN2*EP2*COS2;
+   k2 = 24.0*TAN4 - 4.0*EP6*COS6 + 4.0*TAN2*EP4*COS4 + 24.0*TAN2*EP6*COS6;
+   k3 = 120.0*Q5*COS1*K05;
+   const double T16 = (k1 + k2)/k3;
+
+   //---------------
+   // term T17
+   //---------------
+   k1 = 61.0 + 662.0*TAN2 + 1320.0*TAN4 + 720.0*TAN6;
+   k2 = 5040.0*Q7*COS1*K07;
+   const double T17 = k1/k2;
+   
+
+   //-----------------------------------
+   // calculate latitude and longitude
+   //-----------------------------------
+   const double LATDEG = FPLAT*Angle::R2DCC;
+   const double LONDEG = 6.0*(lonZone - 1.0) - 180.0 + 3.0;
+   *pLat = LATDEG + Angle::R2DCC*(-DE2*T10 + DE4*T11 - DE6*T12 + DE8*T13);
+   *pLon = LONDEG + Angle::R2DCC*(+DE1*T14 - DE3*T15 + DE5*T16 - DE7*T17);
 
    return true;
 }

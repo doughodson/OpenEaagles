@@ -27,7 +27,7 @@ namespace BasicGL {
 // Example:
 //  ( Graphic
 //      color: ( ColorRotary
-//                  colors: {
+//                  breakcolors: {
 //                      (rgb 1 0 1)
 //                      (hsv 0 1 1)
 //                  }
