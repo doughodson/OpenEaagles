@@ -16,6 +16,9 @@ basic
    Component class
       1) shutdownNotification() -- Now sents a shutdown notification to the logger.
 
+   Nav class
+      1) Added UTM conversion routines
+
    NetHandler class
       1) The toNetOrder() and fromNetOrder() functions now process int16_t, uint16_t,
          int32_t, uint32_t, int64_t and uint64_t types instead of signed and unsigned
