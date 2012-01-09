@@ -70,7 +70,7 @@ public:
 
    // Beam Function (BF) codes -- (partial list) Section 8.1.4, SISO-REF-010-2005
    enum BeamFunctionCode {
-      BF_OTHER                      =  0,
+      BF_OTHER                         =  0,
       BF_SEARCH                        =  1,
       BF_HEIGHT_FINDER                 =  2,
       BF_ACQUISITION                   =  3,
@@ -91,15 +91,15 @@ public:
    };
 
    enum BeamStatusCode {
-      BS_ACTIVE                        =  0,
-      BS_INACTIVE                      =  1
+      BS_ACTIVE                        = 0,
+      BS_INACTIVE                      = 1
    };
 
    enum JammingTechniqueKind {
-      JT_OTHER                      =  0,
-      JT_NOISE                        =  1,
-      JT_DECEPTION                    =  2,
-      JT_SPECIAL                      =  3,
+      JT_OTHER                         = 0,
+      JT_NOISE                         = 1,
+      JT_DECEPTION                     = 2,
+      JT_SPECIAL                       = 3
    };
 
 public:

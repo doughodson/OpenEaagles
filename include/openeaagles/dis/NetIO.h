@@ -169,7 +169,7 @@ public:
          VERSION_1278_1,   // IEEE 1278.1-1995
          VERSION_1278_1A,  // IEEE 1278.1A-1998
          VERSION_7,        // IEEE P1278.1/D15
-         VERSION_MAX,      // Max version numbers
+         VERSION_MAX       // Max version numbers
     };
 
    // SISO-REF-010-2006; 12th May, 2006; Section 3.2 PDU Type
@@ -219,7 +219,7 @@ public:
       PDU_FAMILY_SIMULATION_MAN_REL,   // Simulation Management with Reliability
       PDU_FAMILY_LIVE_ENTITY,          // Live Entity
       PDU_FAMILY_NON_REAL_TIME,        // Non-Real Time
-      PDU_FAMILY_EXPERIMENTAL = 129,   // Experimental - Computer Generated Forces
+      PDU_FAMILY_EXPERIMENTAL = 129    // Experimental - Computer Generated Forces
    };
 
 

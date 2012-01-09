@@ -69,27 +69,27 @@ IMPLEMENT_SUBCLASS(NetIO,"DisNetIO")
 //------------------------------------------------------------------------------
 // Parameters
 //------------------------------------------------------------------------------
-static const LCreal HRT_BEAT_MPLIER = 2.5;                            //  Multiplier
-static const LCreal HRT_BEAT_TIMER = 5;                               //  seconds 
-static const LCreal DRA_POS_THRST_DFLT = 3.0;                         //  meters
+static const LCreal HRT_BEAT_MPLIER       = 2.5;                            //  Multiplier
+static const LCreal HRT_BEAT_TIMER        = 5;                               //  seconds 
+static const LCreal DRA_POS_THRST_DFLT    = 3.0;                         //  meters
 static const LCreal DRA_ORIENT_THRST_DFLT = (LCreal)(3.0 * PI/180.0); //  radians
 
 // DISv7 default heartbeats
-static const LCreal HBT_PDU_EE = 10;                                  //  seconds 
-static const LCreal HBT_PDU_IFF = 10;                                 //  seconds 
-static const LCreal HBT_PDU_RECEIVER = 60;                            //  seconds 
+static const LCreal HBT_PDU_EE          = 10;                                  //  seconds 
+static const LCreal HBT_PDU_IFF         = 10;                                 //  seconds 
+static const LCreal HBT_PDU_RECEIVER    = 60;                            //  seconds 
 static const LCreal HBT_PDU_TRANSMITTER = 2;                          //  seconds 
-static const LCreal HBT_TIMEOUT_MPLIER = 2.4;                         //  Multiplier
+static const LCreal HBT_TIMEOUT_MPLIER  = 2.4;                         //  Multiplier
 
 // DISv7 default thresholds
 static const LCreal EE_AZ_THRSH = (LCreal)(1.0 * PI/180.0);            //  radians
 static const LCreal EE_EL_THRSH = (LCreal)(1.0 * PI/180.0);            //  radians
 
-static const LCreal EE_ERP_THRSH = (LCreal)(1.0);                      //  dB
+static const LCreal EE_ERP_THRSH  = (LCreal)(1.0);                      //  dB
 static const LCreal EE_FREQ_THRSH = (LCreal)(1.0);                     //  Hz
 static const LCreal EE_FRNG_THRSH = (LCreal)(1.0);                     //  Hz
-static const LCreal EE_PRF_THRSH = (LCreal)(1.0);                     //  Hz
-static const LCreal EE_PW_THRSH = (LCreal)(1e-6);                     //  seconds
+static const LCreal EE_PRF_THRSH  = (LCreal)(1.0);                     //  Hz
+static const LCreal EE_PW_THRSH   = (LCreal)(1e-6);                     //  seconds
 //static const unsigned int EE_HIGH_DENSITY_THRSH = 10;                  //  no units
 
 
