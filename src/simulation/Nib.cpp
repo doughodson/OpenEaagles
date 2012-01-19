@@ -180,6 +180,8 @@ void Nib::deleteData()
       }
    }
    apartNumMissiles = 0;
+
+   BaseClass::deleteData();
 }
 
 //------------------------------------------------------------------------------
@@ -419,7 +421,9 @@ bool Nib::isPlayerStateUpdateRequired(const LCreal curExecTime)
    // ---
    if ( (result == UNSURE) && player->isLocalPlayer()) {
 
-      LCreal drTime = curExecTime - getTimeExec();
+      //LCreal drTime = curExecTime - getTimeExec();
+      SynchronizedState playerState = player->getSynchronizedState();
+      LCreal drTime = (LCreal)playerState.getTimeExec() - getTimeExec();
 
       // 3-a) Freeze flag has changed
       if ( (player->isFrozen() && isNotFrozen()) || (!player->isFrozen() && isFrozen()) ) {
@@ -461,7 +465,8 @@ bool Nib::isPlayerStateUpdateRequired(const LCreal curExecTime)
 
             // Check if the length of the position error (squared) is greater
             // than the max error (squared)
-            osg::Vec3d ppos = player->getGeocPosition();
+            //osg::Vec3d ppos = player->getGeocPosition();
+            osg::Vec3d ppos = playerState.getGeocPosition();
             osg::Vec3d errPos = drPos - ppos;
             if (errPos.length2() >= maxPosErr2) {
                result = YES;
@@ -475,7 +480,9 @@ bool Nib::isPlayerStateUpdateRequired(const LCreal curExecTime)
             LCreal maxAngleErr = getNetIO()->getMaxOrientationErr(this);
 
             // Compute angular error
-            osg::Vec3 errAngles = drAngles - player->getGeocEulerAngles();
+            //osg::Vec3 errAngles = drAngles - player->getGeocEulerAngles();
+            osg::Vec3 errAngles = drAngles - playerState.getGeocEulerAngles();
+
 
             // Check if any angle error is greater than the max error
             errAngles[0] = lcAbs( lcAepcDeg(errAngles[0]) );
@@ -659,19 +666,30 @@ void Nib::playerState2Nib()
       setSide( player->getSide() );
 
       // Reset our dead reckoning with the current state data from the player
+      //resetDeadReckoning(
+      //   RVW_DRM,
+      //   player->getGeocPosition(),
+      //   player->getGeocVelocity(),
+      //   player->getGeocAcceleration(),
+      //   player->getGeocEulerAngles(),
+      //   player->getGeocAngularVelocities()
+      //);
+      
       resetDeadReckoning(
          RVW_DRM,
-         player->getGeocPosition(),
-         player->getGeocVelocity(),
-         player->getGeocAcceleration(),
-         player->getGeocEulerAngles(),
-         player->getGeocAngularVelocities()
+         player->getSynchronizedState().getGeocPosition(),
+         player->getSynchronizedState().getGeocVelocity(),
+         player->getSynchronizedState().getGeocAcceleration(),
+         player->getSynchronizedState().getGeocEulerAngles(),
+         player->getSynchronizedState().getAngularVelocities()
       );
 
       // mark the current times
       Simulation* sim = getNetIO()->getSimulation();
-      setTimeExec( (LCreal) sim->getExecTimeSec() );
-      setTimeUtc( (LCreal) sim->getSysTimeOfDay() );
+      //setTimeExec( (LCreal) sim->getExecTimeSec() );
+      setTimeExec( (LCreal) player->getSynchronizedState().getTimeExec() );
+      //setTimeUtc( (LCreal) sim->getSysTimeOfDay() );
+      setTimeUtc( (LCreal) player->getSynchronizedState().getTimeUtc() );
 
       {
          //osg::Vec3d pos = player->getGeocPosition();

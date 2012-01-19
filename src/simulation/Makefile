@@ -74,6 +74,7 @@ OBJS =  \
 	$(LIB)(Steerpoint.o) \
 	$(LIB)(Stores.o) \
 	$(LIB)(StoresMgr.o) \
+	$(LIB)(SynchronizedState.o) \
 	$(LIB)(System.o) \
 	$(LIB)(TabLogger.o) \
 	$(LIB)(TargetData.o) \

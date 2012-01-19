@@ -104,6 +104,13 @@ private:
    unsigned char  disSubcategory;   // DIS subcategory code
    unsigned char  disSpecific;      // DIS specific code
    unsigned char  disExtra;         // DIS extra code
+
+   // timeOffset has 2 uses
+   // 1) In a time synchronized network, it is merely as estimation of PDU latency
+   //    Over time, it is updated so that i will eventually become the minimum observed latency
+   // 2) If time is not synchronized across the network, then it becomes the time difference + latency
+   //    This allows applications to run time relative
+   double timeOffset;
 }; 
 
 } // End Dis namespace

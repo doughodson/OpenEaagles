@@ -24,6 +24,7 @@ namespace Dis {
 // Slots:
 //     emitterName      (Number)    DIS emitter name (see DIS enums) 
 //     emitterFunction  (Number)    DIS emitter function code (see enums)
+//     beamFunction     (Number)    DIS beam function (see enums)
 //     sensor           (RfSensor)  Template sensor model
 //     antenna          (Antenna)   Template antenna model
 //     defaultIn        (Boolean)   This is the default handler for incoming PDUs
@@ -114,6 +115,9 @@ public:
    unsigned char getEmitterFunction() const;                   // Emitter function code
    virtual bool setEmitterFunction(const unsigned char num);   // Emitter function code
 
+   unsigned char getBeamFunction() const;                      // Beam function
+   virtual bool setBeamFunction(const unsigned char num);      // Beam function
+
    Simulation::RfSensor* getSensor();                          // Our R/F emitter System
    const Simulation::RfSensor* getSensor() const;              // Our R/F emitter System (const version)
    virtual bool setSensor(Simulation::RfSensor* const msg);    // Sets our R/F emitter system
@@ -155,6 +159,7 @@ public:
    // Slot functions
    virtual bool setSlotEmitterName(const Basic::Number* const msg);      // Sets our DIS Emitter Name
    virtual bool setSlotEmitterFunction(const Basic::Number* const msg);  // Sets our DIS Emitter Function
+   virtual bool setSlotBeamFunction(const Basic::Number* const msg);     // Sets our DIS Beam Function
    virtual bool setSlotSensorTemplate(Simulation::RfSensor* const msg);    // Sets our template sensor model
    virtual bool setSlotAntennaTemplate(Simulation::Antenna* const msg);    // Sets our template antenna model
    virtual bool setSlotDefaultIn(const Basic::Number* const msg);
@@ -190,6 +195,7 @@ private:
    unsigned short emitterName;      // DIS emitter number -- see DIS enums (e.g., 1805 )
    unsigned char emitterIdNumber;   // Unique ID number for each emitter system
    unsigned char emitterFunction;   // Emitter function code
+   unsigned char beamFunction;      // Beam function code
 
    SPtr<Simulation::RfSensor> sensor;              // The R/F sensor (radar, jammers, etc)
    SPtr<Simulation::RfSensor> sensorModel;         // Our template sensor model
@@ -205,6 +211,7 @@ private:
 inline unsigned char EmissionPduHandler::getEmitterIdNumber() const  { return emitterIdNumber; }
 inline unsigned short EmissionPduHandler::getEmitterName() const     { return emitterName; }
 inline unsigned char EmissionPduHandler::getEmitterFunction() const  { return emitterFunction; }
+inline unsigned char EmissionPduHandler::getBeamFunction() const     { return beamFunction; }
 
 inline Simulation::RfSensor* EmissionPduHandler::getSensor()             { return sensor; }
 inline const Simulation::RfSensor* EmissionPduHandler::getSensor() const { return sensor; }

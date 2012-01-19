@@ -236,6 +236,8 @@ void NetIO::deleteData()
 
    netInit = false;
    netInitFail = false;
+
+   BaseClass::deleteData();
 }
 
 //------------------------------------------------------------------------------
@@ -765,7 +767,7 @@ Player* NetIO::createIPlayer(Nib* const nib)
          player->setGeocEulerAngles( nib->getDrEulerAngles() );
          player->setGeocVelocity( nib->getDrVelocity() );
          player->setGeocAcceleration( nib->getDrAcceleration() );
-         player->setGeocAngularVelocities( nib->getDrAngularVelocities() );
+         player->setAngularVelocities( nib->getDrAngularVelocities() );
          player->setCrashOverride(true);
          nib->setPlayer(player);
 

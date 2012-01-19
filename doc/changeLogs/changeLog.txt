@@ -1,4 +1,46 @@
 ================================================================================
+CGB Changes since v11.11
+================================================================================
+
+--------------------------------------------------------------------------------
+basic
+
+   eventTokens.h
+     1) added REFUEL EVENT, work in progress
+
+--------------------------------------------------------------------------------
+dis
+
+    EmissionPduHandler
+     1) started to add slot for beam function.
+        as this change will break existing functionality, hold off until a
+	compatible change is made
+
+    pdu.h
+      1) added Designator PDU
+
+--------------------------------------------------------------------------------
+dis simulation
+
+
+    SynchronizedState class
+	1) added
+
+    dis/Nib.h
+    dis/NetIO.cpp
+    dis/NetIOPlatforms.cpp
+    dis/Nib.cpp
+    simulation/NetIO.cpp
+    simulation/Nib.cpp
+    simulation/Player.cpp
+	1) SynchronizedState class now used for dead reckoning
+	2) NetIO player update correct to "setAngularVelocities" from
+	"setGeocAngluarVelocities"
+	3) New Lifeform appearance states added
+	4) various BaseClass::deleteData() fixed
+--------------------------------------------------------------------------------
+
+================================================================================
 Changes since v11.11
 ================================================================================
 
