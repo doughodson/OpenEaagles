@@ -15,7 +15,7 @@
 //    7.5.11   DataPDU
 //    7.5.13   CommentPDU
 //    7.6.2    ElectromagneticEmissionPDU
-//    7.6.x    DesignatorPDU
+//    7.6.3    DesignatorPDU
 //    7.6.5.2  IffAtcNavaidsPDU
 //    7.7.2    TransmitterPDU
 //    7.7.3    SignalPDU
@@ -783,7 +783,7 @@ struct ElectromagneticEmissionPDU {
 };
 
 //-----------------------------------------------
-// 7.6.x -- Designator PDU
+// 7.6.3 -- Designator PDU
 //-----------------------------------------------
 struct DesignatorPDU {
 
