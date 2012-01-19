@@ -18,7 +18,7 @@ EMPTY_SERIALIZER(DedFile)
 // MultiGen structure: standard file header block (128 bytes)
 //------------------------------------------------------------------------------
 struct DedStdHdr {
-   unsigned long len;   // size of header block in byte
+   uint32_t len;        // size of header block in byte
    char id[4];          // file identification code "SSYS"
    char part[8];        // software part no.
    char rev[8];         // software revision no.
@@ -47,8 +47,8 @@ struct DedStdHdr {
 // MultiGen structure: Statistics record (32 bytes)
 //------------------------------------------------------------------------------
 struct DedStats {
-   unsigned long  ncell;   // no. of cell in this file
-   short minz, maxz;       // min/max z of the entire file
+   uint32_t  ncell;        // no. of cell in this file
+   int16_t minz, maxz;     // min/max z of the entire file
    char  spare[24];        // spare
 
    DedStats() {
@@ -307,8 +307,8 @@ bool DedFile::getFileHeaders( std::istream& in )
          if (ok) {
             {
                // Byte-swap
-               long lTemp = 0;
-               short sTemp = 0;
+               uint32_t lTemp = 0;
+               int16_t sTemp = 0;
                Basic::NetHandler::fromNetOrder(&lTemp, fstat->ncell);
                fstat->ncell = lTemp;
                Basic::NetHandler::fromNetOrder(&sTemp, fstat->maxz);

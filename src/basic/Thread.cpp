@@ -12,7 +12,7 @@ namespace Basic {
 // Window/Linux specific code
 //------------------------------------------------------------------------------
 #if defined(WIN32)
-  #include "windows/Thread.cxx" 
+  #include "windows/Thread.cxx"
 #else
   #include "linux/Thread.cxx"
 #endif
@@ -182,7 +182,7 @@ unsigned long ThreadSingleTask::mainThreadFunc()
    unsigned long rtn = 0;
 
    // Configure this thread
-   bool ok = configThread();
+   configThread();
 
    if ( getParent()->isMessageEnabled(MSG_INFO) ) {
       std::cout << "ThreadSingleTask(" << this << ")::mainThreadFunc(): thread handle = " << getThreadHandle() << std::endl;

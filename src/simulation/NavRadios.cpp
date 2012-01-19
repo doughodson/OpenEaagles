@@ -187,7 +187,8 @@ void TacanRadio::initData()
 
         // channels [ 17 .. 59 ]
         while (chan < 59) {
-            setChannelFrequency(chan++, (LCreal(chan) * 0.1f + 106.3f));
+            setChannelFrequency(chan, (LCreal(chan) * 0.1f + 106.3f));
+            chan++;
         }
 
         // channels [ 60 .. 69 ]
@@ -197,7 +198,8 @@ void TacanRadio::initData()
 
         // channels [ 70 .. 126 ]
         while (chan <= 126) {
-            setChannelFrequency(chan++, (LCreal(chan) * 0.1f + 107.3f) );
+            setChannelFrequency(chan, (LCreal(chan) * 0.1f + 107.3f) );
+            chan++;
         }
     }
 }

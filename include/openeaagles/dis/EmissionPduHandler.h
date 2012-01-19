@@ -15,8 +15,7 @@ namespace Network {
 namespace Dis {
 
 //------------------------------------------------------------------------------
-// Class:	EmissionPduHandler
-// Base class:	Basic::Object -> EmissionPduHandler
+// Class: EmissionPduHandler
 //
 // Description: Handles the DIS input/output from an emitter system
 //              (e.g., RfSensor class)
@@ -71,7 +70,7 @@ public:
 
    // Beam Function (BF) codes -- (partial list) Section 8.1.4, SISO-REF-010-2005
    enum BeamFunctionCode {
-      BF_OTHER                      =  0,
+      BF_OTHER                         =  0,
       BF_SEARCH                        =  1,
       BF_HEIGHT_FINDER                 =  2,
       BF_ACQUISITION                   =  3,
@@ -89,6 +88,18 @@ public:
       BF_METEOROLOGICAL                = 15,
       BF_DATA_TRANSMISSION             = 16,
       BF_NAV_DIRECTIONAL_BEACON        = 17
+   };
+
+   enum BeamStatusCode {
+      BS_ACTIVE                        = 0,
+      BS_INACTIVE                      = 1
+   };
+
+   enum JammingTechniqueKind {
+      JT_OTHER                         = 0,
+      JT_NOISE                         = 1,
+      JT_DECEPTION                     = 2,
+      JT_SPECIAL                       = 3
    };
 
 public:
@@ -133,8 +144,8 @@ public:
    virtual bool isMatchingRfSystemType(const EmissionSystem* const p) const;
 
    // Process an emission system from incoming PDUs
-   virtual bool updateIncoming(const EmissionSystem* const es, Nib* const nib);
-   
+   virtual bool updateIncoming(const ElectromagneticEmissionPDU* const pdu, const EmissionSystem* const es, Nib* const nib);
+
    // tell input handler to disable its sensors due to timeout
    virtual void setTimedOut();
 
@@ -161,6 +172,9 @@ protected:
 
     virtual unsigned short emissionSystemData2PDU(EmissionSystem* const es);
     virtual bool isUpdateRequired(const LCreal curExecTime, bool* const stateChg, Nib* const nib);
+
+    bool getTemplatesFound() const;
+    bool setTemplatesFound(const bool flg);
 
 private:
    void initData();
@@ -204,7 +218,7 @@ inline const Simulation::Antenna* EmissionPduHandler::getAntennaModel() const { 
 inline bool EmissionPduHandler::isDefaultIncomingHandler() const     { return defaultIn; }
 inline bool EmissionPduHandler::isDefaultOutgoingHandler() const     { return defaultOut; }
 
-inline void EmissionPduHandler::setTimedOut()                        { }
+inline bool EmissionPduHandler::getTemplatesFound() const { return !noTemplatesFound; }
 
 inline const EmissionSystem* EmissionPduHandler::getSavedEmissionSystemData() const  { return &emissionSystemN1; }
 
