@@ -48,6 +48,7 @@ Nib::Nib(const Simulation::NetIO::IoType ioType) : Simulation::Nib(ioType)
       emitterSysHandler[i] = 0;
    }
    emissionSystemsIndex = 0;
+   timeOffset = 0.0;
 }
 
 
@@ -123,6 +124,7 @@ void Nib::copyData(const Nib& org, const bool cc)
    }
    iffOptions = 0;
    iffLastExecTime = 0;
+   timeOffset = 0.0;
 }
 
 void Nib::deleteData()
@@ -147,6 +149,8 @@ void Nib::deleteData()
    }
    numEmissionSystems = 0;
    emissionSystemsIndex = 0;
+
+   BaseClass::deleteData();
 }
 
 //------------------------------------------------------------------------------

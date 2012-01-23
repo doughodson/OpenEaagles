@@ -211,6 +211,8 @@ void NetIO::deleteData()
     clearEmissionPduHandlers();
     netInput = 0;
     netOutput = 0;
+
+    BaseClass::deleteData();
 }
 
 //------------------------------------------------------------------------------
