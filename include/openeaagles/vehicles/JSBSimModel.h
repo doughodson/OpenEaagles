@@ -87,9 +87,12 @@ public:
     virtual bool setAltitudeHoldOn(const bool b);
     virtual bool setCommandedAltitude(const double a);
 
-private:
+protected:
+
     JSBSim::FGFDMExec* fdmex;
     JSBSim::FGPropertyManager* propMgr;
+
+private:
 
     Basic::String* rootDir;         // root directory for JSBSim models
     Basic::String* model;           // JSBSim model
