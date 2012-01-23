@@ -11,8 +11,8 @@ namespace Basic {
 // ---
 // OpenEaagles version and key
 // ---
-const char* const Object::version = "v2011_0622";  // Version number is vYYYY_MMDD (Year, Month, Day)
-unsigned int Object::magicKey = 0x20110622;        // Magic key is YYYYMMDD (Year, Month, Day)
+const char* const Object::version = "v2011_1129";  // Version number is vYYYY_MMDD (Year, Month, Day)
+unsigned int Object::magicKey = 0x20111129;        // Magic key is YYYYMMDD (Year, Month, Day)
 
 // ---
 // Table of registered classes

@@ -362,7 +362,7 @@ bool Autopilot::processModeFollowTheLead()
    if (lead == 0) getLeadPlayer();
    
    // if we got a lead player, great... if not, we break out of follow the lead mode.
-   if (lead->isActive() && lead->getDamage() < 0.5f) {
+   if (lead != 0 && lead->isActive() && lead->getDamage() < 0.5f) {
 
       // Position error gains
       static const double KX = 0.05;
