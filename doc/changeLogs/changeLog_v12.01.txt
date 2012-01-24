@@ -1,0 +1,98 @@
+================================================================================
+Changes since v11.11
+================================================================================
+
+--------------------------------------------------------------------------------
+Global changes:
+
+  -- turned on "Wall" compiler switch to display all GCC warnings
+  -- resolved a number of "sign compare" warning associated with comparing
+     "unsigned int" with "int".
+
+
+--------------------------------------------------------------------------------
+basic
+
+   Component class
+      1) shutdownNotification() -- Now sents a shutdown notification to the logger.
+
+   Nav class
+      1) Added UTM conversion routines
+
+   NetHandler class
+      1) The toNetOrder() and fromNetOrder() functions now process int16_t, uint16_t,
+         int32_t, uint32_t, int64_t and uint64_t types instead of signed and unsigned
+         short, int and long types.
+
+--------------------------------------------------------------------------------
+basicGL
+
+
+
+--------------------------------------------------------------------------------
+dis
+
+   struct.h
+      ## changed all signed and unsigned char types to int8_t and uint8_t
+      ## changed all objects from 'class' to 'struct'
+
+      1) general cleanup and modifications to support IEEE P1278.1 Draft 15.
+      2) PDUHeader struct -- added 'status' field
+      3) EntityMarking struct -- changed 'marking' from signed char to uint8_t
+      4) BurstDescriptor -- changed 'munision' field to 'munition'
+      5) Renamed 'FundamentalParameterData' structure to 'EeFundamentalParameterData'
+         and move the beam data to the new 'BeamData' structure.
+      6) Renamed 'ArticulationParameter' structure to 'VpArticulatedPart'
+
+
+   pdu.h
+      ## changed all signed and unsigned char types to int8_t and uint8_t
+      ## changed all objects from 'class' to 'struct'
+
+      1) general cleanup and modifications to support IEEE P1278.1 Draft 15.
+
+      2) Start, Stop, Acknowledge, Action Request, Data Query, Data,
+         Comment, Action Request-R and Action Response-R PDUs
+            a) changed 'sendingEntityID' to 'originatingID'
+            b) changed 'destinationEntityID' to 'receivingID'
+            c) getData() functions now return uint8_t
+            d) Moved padding field from StartPDU to StopPDU
+
+      3) Transmitter PDU
+            a) changed 'emittingEntityID' to 'radioRefID'
+            b) changed 'radioEntity' to 'radioEntityType'
+            c) getModulationData() functions now return uint8_t
+
+      4) Signal PDU
+            a) changed 'emittingEntityID' to 'radioRefID'
+            b) getData() functions now return uint8_t
+
+      5) IFF/ATC/NAVAIDS PDU
+            a) added fields 'sysDesig' and 'sysSpecData'
+
+
+   EmissionPduHandler class
+      ## various updates to support changes to struct.h and pdu.h
+      1) isUpdateRequired() -- changed the system transmitting check from
+         RfSystem::isTransmitterEnabled() to RfSystem::isTransmitting()
+
+   NetIO class
+      ## various updates to support changes to struct.h and pdu.h
+      1) PDU Type enum values now have explicit values
+      2) createNewOutputNib() -- (bug fix) now sets the player's outgoing NIB
+
+   Nib class
+      ## various updates to support changes to struct.h and pdu.h
+
+
+--------------------------------------------------------------------------------
+ioDevice
+
+
+--------------------------------------------------------------------------------
+simulation
+
+   Missile class
+       1) fuzing logic is reset if missile's target changes mid-flight
+       
+
