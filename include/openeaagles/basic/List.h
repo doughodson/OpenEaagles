@@ -10,7 +10,7 @@ namespace Eaagles {
 namespace Basic {
 
 //------------------------------------------------------------------------------
-// Class:	List
+// Class: List
 //
 // Description: General purpose list of objects.  The linked list and next-
 //              previous pointers are maintained using a List::Item structure.

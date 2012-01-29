@@ -298,20 +298,6 @@ namespace Basic {
 //          form name, object counters and full C++ class name for each class,
 //          to the 'sout' output stream.
 //
-//
-// Those who are above the law of 'const' ---
-//
-//    Whenever possible, 'const' is used to protect objects that are being
-//    passed to 'readers', which are allowed to access the data in the objects,
-//    but are not allowed to modify these objects.  To allow the readers to
-//    ref() and unref() these 'const' objects, or to protect their data
-//    accesses with semaphores, the ref() and unref() functions need to
-//    be 'const' functions and the lcLock() and lcUnlock() functions need
-//    to take a 'const' semaphore parameter.  Since we really do need these
-//    functions to modify the reference counters and to lock and unlock the
-//    semaphors, these functions all perform a 'const cast away', which allows
-//    them to modify the counters and semaphores.
-//
 //------------------------------------------------------------------------------
 class Object {
 
