@@ -188,6 +188,7 @@ void Nib::entityStatePdu2Nib(const EntityStatePDU* const pdu)
       arates[Basic::Nav::IY] = pdu->DRentityAngularVelocity.y_axis;
       arates[Basic::Nav::IZ] = pdu->DRentityAngularVelocity.z_axis;
 
+#if 0
       // (re)initialize the dead reckoning function
       resetDeadReckoning(
          pdu->deadReckoningAlgorithm,
@@ -196,6 +197,33 @@ void Nib::entityStatePdu2Nib(const EntityStatePDU* const pdu)
          geocAcc,
          geocAngles,
          arates);
+#else
+      unsigned long disTimeStamp = pdu->header.timeStamp;
+      double currentTime = getTimeExec();
+      if (disTimeStamp & 0x01) {
+          currentTime = getTimeUtc();
+      }
+      currentTime = fmod(currentTime, 3600.0);      // just get seconds after the hour
+      double timeStamp = ((double) (disTimeStamp >> 1)) * 3600.0 / ((double) 0x7fffffff);
+      double relTimeStamp = timeStamp + timeOffset;
+      double diffTime = currentTime - relTimeStamp;
+
+      if (fabs(diffTime) > 0.1) {     // If we get ahead of ourselves, or first pass
+          timeOffset = currentTime - timeStamp;
+          relTimeStamp = currentTime;
+          diffTime = 0.0;
+      }
+
+      // (re)initialize the dead reckoning function
+      resetDeadReckoning(
+         pdu->deadReckoningAlgorithm,
+         geocPos,
+         geocVel,
+         geocAcc,
+         geocAngles,
+         arates,
+         diffTime);
+#endif
    }
 
    // Frozen?
@@ -243,7 +271,7 @@ void Nib::entityStatePdu2Nib(const EntityStatePDU* const pdu)
 
    // Life form states
    {
-      unsigned int bits = ( (pdu->appearance >> 16) & 0x00000004 );        
+      unsigned int bits = ( (pdu->appearance >> 16) & 0x0000000f );        
       if (getPlayer() != 0 && getPlayer()->isMajorType(Simulation::Player::LIFE_FORM)) {
          Simulation::LifeForm* lf = dynamic_cast<Simulation::LifeForm*>(getPlayer());
          if (lf != 0) {
@@ -251,7 +279,17 @@ void Nib::entityStatePdu2Nib(const EntityStatePDU* const pdu)
             if (bits == 1) lf->setActionState(Simulation::LifeForm::UPRIGHT_STANDING);
             else if (bits == 2) lf->setActionState(Simulation::LifeForm::UPRIGHT_WALKING);
             else if (bits == 3) lf->setActionState(Simulation::LifeForm::UPRIGHT_RUNNING);
-            else if (bits == 4) lf->setActionState(Simulation::LifeForm::PARACHUTING);
+            else if (bits == 4) lf->setActionState(Simulation::LifeForm::KNEELING);
+            else if (bits == 5) lf->setActionState(Simulation::LifeForm::PRONE);
+            else if (bits == 6) lf->setActionState(Simulation::LifeForm::CRAWLING);
+            else if (bits == 8) lf->setActionState(Simulation::LifeForm::PARACHUTING);
+            else if (bits == 9) lf->setActionState(Simulation::LifeForm::JUMPING);
+            else if (bits == 10) lf->setActionState(Simulation::LifeForm::SITTING);
+            else if (bits == 11) lf->setActionState(Simulation::LifeForm::SQUATTING);
+            else if (bits == 12) lf->setActionState(Simulation::LifeForm::CROUCHING);
+            else if (bits == 13) lf->setActionState(Simulation::LifeForm::WADING);
+            else if (bits == 14) lf->setActionState(Simulation::LifeForm::SURRENDER);
+            else if (bits == 15) lf->setActionState(Simulation::LifeForm::DETAINED);
             else lf->setActionState(Simulation::LifeForm::UPRIGHT_STANDING);                    
          }
       }
@@ -648,7 +686,18 @@ bool Nib::entityStateManager(const LCreal curExecTime)
                   if (lf->getActionState() == Simulation::LifeForm::UPRIGHT_STANDING) bits = 1;       // standing
                   else if (lf->getActionState() == Simulation::LifeForm::UPRIGHT_WALKING) bits = 2;   // walking
                   else if (lf->getActionState() == Simulation::LifeForm::UPRIGHT_RUNNING) bits = 3;   // running
+                  else if (lf->getActionState() == Simulation::LifeForm::KNEELING) bits = 4;          // kneeling	
+                  else if (lf->getActionState() == Simulation::LifeForm::PRONE) bits = 5;             // prone
+                  else if (lf->getActionState() == Simulation::LifeForm::CRAWLING) bits = 6;          // crawling
+                  else if (lf->getActionState() == Simulation::LifeForm::SWIMMING) bits = 7;          // swimming
                   else if (lf->getActionState() == Simulation::LifeForm::PARACHUTING) bits = 8;       // parachuting
+                  else if (lf->getActionState() == Simulation::LifeForm::JUMPING) bits = 9;           // jumping
+                  else if (lf->getActionState() == Simulation::LifeForm::SITTING) bits = 10;          // sitting
+                  else if (lf->getActionState() == Simulation::LifeForm::SQUATTING) bits = 11;        // squatting
+                  else if (lf->getActionState() == Simulation::LifeForm::CROUCHING) bits = 12;        // crouching
+                  else if (lf->getActionState() == Simulation::LifeForm::WADING) bits = 13;           // wading
+                  else if (lf->getActionState() == Simulation::LifeForm::SURRENDER) bits = 14;        // surrender
+                  else if (lf->getActionState() == Simulation::LifeForm::DETAINED) bits = 15;         // detained
                   else bits = 1;      
                   pdu->appearance |= (bits << 16);
                }

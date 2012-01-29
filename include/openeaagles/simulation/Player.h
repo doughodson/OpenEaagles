@@ -15,6 +15,8 @@
 #include "openeaagles/basic/units/Angles.h"
 #include "openeaagles/basic/units/Distances.h"
 
+#include "openeaagles/simulation/SynchronizedState.h"
+
 namespace Eaagles {
    namespace Basic {
       class Angle;
@@ -1002,6 +1004,9 @@ public:
    virtual void updateData(const LCreal dt = 0.0);
    virtual bool event(const int event, Basic::Object* const obj = 0);
 
+   // SYNC STATE CHANGES
+   const SynchronizedState& getSynchronizedState() const;
+
 protected:
    // Vehicle Dynamics -- called by updateTC() during phase zero
    virtual void dynamics(const LCreal  dt = 0.0);
@@ -1192,6 +1197,14 @@ private:
    static const unsigned int MAX_RF_REFLECTIONS = 4;   // Max number of reflected emissions we'll send (let's keep it small)
    Basic::Component* rfReflect[MAX_RF_REFLECTIONS];    // Objects that are interested in the emissions hitting us
    LCreal  rfReflectTimer[MAX_RF_REFLECTIONS];         // Request for reflected emissions will timeout
+
+   // ---
+   // SYNC STATE CHANGES
+   // ---
+   bool                 syncState1Ready;
+   bool                 syncState2Ready;
+   SynchronizedState    syncState1;
+   SynchronizedState    syncState2;
 };
 
 // -----------------------------------------------------------------------------
