@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Object class -- (additional OS/Process uniques code is in the Object0.cpp files
+// Object class
 //------------------------------------------------------------------------------
 
 #include "openeaagles/basic/Object.h"
