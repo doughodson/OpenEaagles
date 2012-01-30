@@ -639,6 +639,11 @@ public:
    virtual double getCommandedAltitudeFt() const;  // Get commanded (HAE) altitude (feet)
 
    // ---
+   // Sync State Changes
+   // ---
+   const SynchronizedState& getSynchronizedState() const;
+
+   // ---
    // Systems
    // ---
 
@@ -1004,9 +1009,6 @@ public:
    virtual void updateData(const LCreal dt = 0.0);
    virtual bool event(const int event, Basic::Object* const obj = 0);
 
-   // SYNC STATE CHANGES
-   const SynchronizedState& getSynchronizedState() const;
-
 protected:
    // Vehicle Dynamics -- called by updateTC() during phase zero
    virtual void dynamics(const LCreal  dt = 0.0);
@@ -1199,7 +1201,7 @@ private:
    LCreal  rfReflectTimer[MAX_RF_REFLECTIONS];         // Request for reflected emissions will timeout
 
    // ---
-   // SYNC STATE CHANGES
+   // sync state changes
    // ---
    bool                 syncState1Ready;
    bool                 syncState2Ready;

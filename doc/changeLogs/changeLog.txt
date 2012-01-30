@@ -8,6 +8,10 @@ basic
    eventTokens.h
      1) added REFUEL EVENT, work in progress
 
+   LatLon class
+      1) Added better input error checking
+      2) changed 'LCreal' type variables to type 'double'
+
 --------------------------------------------------------------------------------
 dis
 

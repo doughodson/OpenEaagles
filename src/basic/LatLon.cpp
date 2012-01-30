@@ -64,7 +64,7 @@ EMPTY_DELETEDATA(LatLon)
 //------------------------------------------------------------------------------
 void LatLon::computeVal()
 {
-    val = deg + (LCreal(min) + LCreal(sec)/60.0f) / 60.0f;
+    val = deg + (double(min) + double(sec)/60.0) / 60.0;
     if (dir == SOUTH || dir == WEST) val = -val;
 }
 
@@ -74,7 +74,7 @@ void LatLon::computeVal()
 //------------------------------------------------------------------------------
 
 // Sets direction
-void LatLon::setDir(const char* d)
+bool LatLon::setDir(const char* const d)
 {
     dir = NONE;
     if (d != 0) {
@@ -88,79 +88,93 @@ void LatLon::setDir(const char* d)
         if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "LatLon::setDir: invalid lat/long direction: " << d << std::endl;
         }
-        return;
     }
+    return (dir != NONE);
 }
 
 // Sets degrees, minutes, seconds -- then calls computeVal().
-void LatLon::setDeg(const LCreal d)
+bool LatLon::setDeg(const double d)
 {
-    LCreal dd = lcAbs(d);
-    if (dir == NORTH || dir == SOUTH) {
-        // check for valid degree numbers
-        if (dd > 90.0f) {
-            if (isMessageEnabled(MSG_ERROR)) {
-                std::cerr << "LatLon::setDeg: invalid latitude: " << d << std::endl;
-            }
-            return;
-        }
-    }
-    else if (dir == EAST || dir == WEST) {
-        // check for valid degree numbers
-        if (dd > 180.0f) {
-            if (isMessageEnabled(MSG_ERROR)) {
-                std::cerr << "LatLon::setDeg: invalid longitude: " << d << std::endl;
-            }
-            return;
-        }
-    }
-    else {
-        if (isMessageEnabled(MSG_ERROR)) {
-            std::cerr << "LatLon::setDeg: invalid degrees value: " << d << std::endl;
-        }
-        return;
-    }
+   bool ok = true;
 
-    deg = int(dd);
-    LCreal m = (dd - LCreal(deg)) * 60.0f;
-    min = int(m);
-    sec = LCreal(m - LCreal(min)) * 60.0f;
-    computeVal();
+   double dd = fabs(d);
+   if (dir == NORTH || dir == SOUTH) {
+      // check for valid degree numbers
+      if (dd > 90.0) {
+         if (isMessageEnabled(MSG_ERROR)) {
+            std::cerr << "LatLon::setDeg: invalid latitude: " << d << std::endl;
+         }
+         ok = false;
+      }
+   }
+   else if (dir == EAST || dir == WEST) {
+      // check for valid degree numbers
+      if (dd > 180.0) {
+         if (isMessageEnabled(MSG_ERROR)) {
+            std::cerr << "LatLon::setDeg: invalid longitude: " << d << std::endl;
+         }
+         ok = false;
+      }
+   }
+   else {
+      if (isMessageEnabled(MSG_ERROR)) {
+         std::cerr << "LatLon::setDeg: invalid degrees value: " << d << std::endl;
+      }
+      ok = false;
+   }
+
+   if (ok) {
+      deg = int(dd);
+      double m = (dd - double(deg)) * 60.0;
+      min = int(m);
+      sec = double(m - double(min)) * 60.0;
+      computeVal();
+   }
+   return ok;
 }
 
 // Sets minutes, seconds -- then calls computeVal().
-void LatLon::setMin(const LCreal m) //
+bool LatLon::setMin(const double m) //
 {
-    LCreal mm = lcAbs(m);
-    // check for valid minute numbers
-    if (mm >= 0.0f && mm < 60.0f) {
-        min = int(mm);
-        sec = (mm - LCreal(min)) * 60.0f;
-        computeVal();
-    }
-    else {
-        if (isMessageEnabled(MSG_ERROR)) {
-            std::cerr << "LatLon::setMin: invalid minutes value: " << m << std::endl;
-        }
-    }
+   bool ok = true;
+
+   double mm = fabs(m);
+   // check for valid minute numbers
+   if (mm >= 0.0 && mm < 60.0) {
+      min = int(mm);
+      sec = (mm - double(min)) * 60.0;
+      computeVal();
+   }
+   else {
+      if (isMessageEnabled(MSG_ERROR)) {
+         std::cerr << "LatLon::setMin: invalid minutes value: " << m << std::endl;
+      }
+      ok = false;
+   }
+
+   return ok;
 }
 
 // Sets seconds -- then calls computeVal().
-void LatLon::setSec(const LCreal s)
+bool LatLon::setSec(const double s)
 {
-    LCreal ss = lcAbs(s);
-    // check for valid second numbers
-    if (ss >= 0.0f && ss < 60.0f) {
-        sec = ss;
-        computeVal();
-    }
-    else {
-        if (isMessageEnabled(MSG_ERROR)) {
-            std::cerr << "LatLon::setMin: invalid seconds value: " << s << std::endl;
-        }
-    }
-}
+   bool ok = true;
 
+   double ss = fabs(s);
+   // check for valid second numbers
+   if (ss >= 0.0 && ss < 60.0) {
+      sec = ss;
+      computeVal();
+   }
+   else {
+      if (isMessageEnabled(MSG_ERROR)) {
+         std::cerr << "LatLon::setMin: invalid seconds value: " << s << std::endl;
+      }
+      ok = false;
+   }
+
+   return ok;
+}
 
 
 //------------------------------------------------------------------------------
@@ -196,8 +210,9 @@ std::ostream& LatLon::serialize(std::ostream& sout, const int i, const bool slot
 //------------------------------------------------------------------------------
 bool LatLon::setDirection(const String* const sdobj)
 {
-   if (sdobj != 0) setDir(*sdobj);
-   return true;
+   bool ok = false;
+   if (sdobj != 0) ok = setDir(*sdobj);
+   return ok;
 }
 
 //------------------------------------------------------------------------------
@@ -205,8 +220,9 @@ bool LatLon::setDirection(const String* const sdobj)
 //------------------------------------------------------------------------------
 bool LatLon::setDegrees(const Number* const sdeobj)
 {
-    if (sdeobj != 0) setDeg(sdeobj->getReal());
-    return true;
+   bool ok = false;
+   if (sdeobj != 0) ok = setDeg(sdeobj->getReal());
+   return ok;
 }
 
 //------------------------------------------------------------------------------
@@ -214,8 +230,9 @@ bool LatLon::setDegrees(const Number* const sdeobj)
 //------------------------------------------------------------------------------
 bool LatLon::setMinutes(const Number* const smobj)
 {
-    if (smobj != 0) setMin(smobj->getReal());
-    return true;
+   bool ok = false;
+   if (smobj != 0) ok = setMin(smobj->getReal());
+   return ok;
 }
 
 //------------------------------------------------------------------------------
@@ -223,8 +240,9 @@ bool LatLon::setMinutes(const Number* const smobj)
 //------------------------------------------------------------------------------
 bool LatLon::setSeconds(const Number* const ssobj)
 {
-    if (ssobj != 0) setSec(ssobj->getReal());
-    return true;
+   bool ok = false;
+   if (ssobj != 0) ok = setSec(ssobj->getReal());
+   return ok;
 }
 
 } // End Basic namespace
