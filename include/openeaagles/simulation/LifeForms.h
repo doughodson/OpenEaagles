@@ -22,7 +22,12 @@ class LifeForm : public Player
 public:
     LifeForm();
 
-    enum { UPRIGHT_STANDING = 1, UPRIGHT_WALKING = 2, UPRIGHT_RUNNING = 3, PARACHUTING = 8 };
+    //enum { UPRIGHT_STANDING = 1, UPRIGHT_WALKING = 2, UPRIGHT_RUNNING = 3, PARACHUTING = 8 };
+    enum { UPRIGHT_STANDING = 1, UPRIGHT_WALKING = 2, UPRIGHT_RUNNING = 3, 
+           KNEELING = 4, PRONE = 5, CRAWLING = 6, SWIMMING = 7, PARACHUTING = 8, 
+           JUMPING = 9, SITTING = 10, SQUATTING = 11, CROUCHING = 12,
+           WADING = 13, SURRENDER = 14, DETAINED = 15 };
+
 
     // Player interface
     virtual unsigned int getMajorType() const;

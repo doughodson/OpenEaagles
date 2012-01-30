@@ -190,6 +190,7 @@ enum {
     IR_QUERY_RETURN       = 1320,  // IR query return message
     SAT_COMM_MSG          = 1321,  // Sat Comm message
     DE_EMISSION           = 1322,  // Directed Energy emission message
+    REFUEL_EVENT          = 1323,  // Refuel event
 
 // ---
 // HOTAS switches

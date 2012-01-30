@@ -3,29 +3,47 @@ Changes since v12.01
 ================================================================================
 
 --------------------------------------------------------------------------------
-Global changes:
-
-
-
---------------------------------------------------------------------------------
 basic
 
+   eventTokens.h
+     1) added REFUEL EVENT, work in progress
 
---------------------------------------------------------------------------------
-basicGL
+   LatLon class
+      1) Added better input error checking
+      2) changed 'LCreal' type variables to type 'double'
 
-
+   List class
+      1) Removed the find() member function;
+         use the getIndex() member function instead
 
 --------------------------------------------------------------------------------
 dis
 
+    EmissionPduHandler
+     1) started to add slot for beam function.
+        as this change will break existing functionality, hold off until a
+	compatible change is made
 
+    pdu.h
+      1) added Designator PDU
 
 --------------------------------------------------------------------------------
-ioDevice
+dis simulation
 
 
---------------------------------------------------------------------------------
-simulation
+    SynchronizedState class
+	1) added
 
+    dis/Nib.h
+    dis/NetIO.cpp
+    dis/NetIOPlatforms.cpp
+    dis/Nib.cpp
+    simulation/NetIO.cpp
+    simulation/Nib.cpp
+    simulation/Player.cpp
+	1) SynchronizedState class now used for dead reckoning
+	2) NetIO player update correct to "setAngularVelocities" from
+	"setGeocAngluarVelocities"
+	3) New Lifeform appearance states added
+	4) various BaseClass::deleteData() fixed
 

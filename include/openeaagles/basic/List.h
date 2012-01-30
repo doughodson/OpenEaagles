@@ -56,13 +56,12 @@ namespace Basic {
 //      Object* getPosition(unsigned int n)
 //          Returns a pointer to the n'th object on the list.
 //
-//      unsigned int find(Object* obj)
-//          Finds the object 'obj' in the list and returns the position
-//          index.  If the object is not found,zero is returned.
-//
 //      unsigned int getIndex(Object* obj)
 //          Finds the object 'obj' in the list and returns the position
 //          index.  If the object is not found, zero is returned.
+//
+//      unsigned int find(Object* obj)
+//          ### removed -- use getIndex() ###
 //
 //      addHead(Object* obj)
 //      addTail(Object* obj)
@@ -165,8 +164,6 @@ public:
    unsigned int getNumberList(double values[], const unsigned int max) const;
    unsigned int getNumberList(float values[], const unsigned int max) const;
    unsigned int getNumberList(int values[], const unsigned int max) const;
-
-   unsigned int find(const Object* const obj) const;
 
    unsigned int getIndex(const Object* const obj) const;
 

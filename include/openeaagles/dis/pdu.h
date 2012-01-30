@@ -15,6 +15,7 @@
 //    7.5.11   DataPDU
 //    7.5.13   CommentPDU
 //    7.6.2    ElectromagneticEmissionPDU
+//    7.6.3    DesignatorPDU
 //    7.6.5.2  IffAtcNavaidsPDU
 //    7.7.2    TransmitterPDU
 //    7.7.3    SignalPDU
@@ -780,6 +781,57 @@ struct ElectromagneticEmissionPDU {
       std::cout.flush();
    }
 };
+
+//-----------------------------------------------
+// 7.6.3 -- Designator PDU
+//-----------------------------------------------
+struct DesignatorPDU {
+
+   PDUHeader            header;                 // PDU Header
+   EntityIdentifierDIS  designatingEntityID;    // Entity that is positioning the designator
+   uint16_t             codeName;               // code name for the designation system
+   EntityIdentifierDIS  designatedEntityID;     // Entity that is currently being designated
+   uint16_t             designatorCode;
+   float                power;
+   float                wavelength;
+   VectorDIS            spotPosition;
+   WorldCoordinates     spotLocation;
+   uint8_t              deadReckoningAlgorithm;
+   uint8_t              padding[3];
+   VectorDIS            DRentityLinearAcceleration;
+
+   // Swap bytes 'to' or 'from' the network.
+   void swapBytes(){
+      // Swap our stuff first
+      header.swapBytes();
+      designatingEntityID.swapBytes();
+      codeName = convertUInt16(codeName);
+      designatedEntityID.swapBytes();
+      designatorCode = convertUInt16(designatorCode);
+      power = convertFloat(power);
+      wavelength = convertFloat(wavelength);
+      spotPosition.swapBytes();
+      spotLocation.swapBytes();
+      DRentityLinearAcceleration.swapBytes();
+   };
+
+   void dumpData() const {
+       WorldCoordinates spotLoc;
+       std::cout << "------------------------------------------------" << std::endl;
+       std::cout << "Designator PDU(" << (long)header.PDUType << ")" << std::endl;
+       std::cout << "Designating Entity:" << std::endl << designatingEntityID;
+       std::cout << "Designated Entity:" << std::endl << designatedEntityID;
+       std::cout << "Code Name      : " << codeName << std::endl;
+       std::cout << "Designator Code: " << designatorCode << std::endl;
+       std::cout << "Power          : " << power << std::endl;
+       std::cout << "Wavelength     : " << wavelength << std::endl;
+       memcpy(&spotLoc,&spotLocation,sizeof(WorldCoordinates));
+       std::cout << "Spot Location:" << std::endl << spotLoc;
+       std::cout << "Spot Position:" << std::endl << spotPosition;
+       std::cout.flush();
+   };
+};
+
 
 
 //-----------------------------------------------

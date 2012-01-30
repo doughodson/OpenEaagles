@@ -678,4 +678,13 @@ inline Player::CoordSys Player::getCoordSystemInUse() const
    return useCoordSys;
 }
 
+// Get the current synchronized state
+inline const SynchronizedState& Player::getSynchronizedState() const
+{
+   if (syncState1Ready)
+      return syncState1;
+   else
+      return syncState2;
+}
+
 #endif

@@ -36,6 +36,8 @@
 #include "openeaagles/basic/units/Times.h"
 #include "openeaagles/basic/osg/Quat"
 
+#include "openeaagles/simulation/SynchronizedState.h"
+
 namespace Eaagles {
 namespace Simulation {
 
@@ -354,6 +356,11 @@ void Player::initData()
       rfReflectTimer[i] = 0;
    }
 
+   syncState1Ready = false;
+   syncState2Ready = false;
+   syncState1.clear();
+   syncState2.clear();
+
 }
 
 //------------------------------------------------------------------------------
@@ -492,6 +499,11 @@ void Player::copyData(const Player& org, const bool cc)
       if (rfReflect[i] != 0) { rfReflect[i]->unref(); rfReflect[i] = 0; }
       rfReflectTimer[i] = 0;
    }
+
+   syncState1Ready = org.syncState1Ready;
+   syncState2Ready = org.syncState2Ready;
+   syncState1 = org.syncState1;
+   syncState2 = org.syncState2;
 }
 
 //------------------------------------------------------------------------------
@@ -610,6 +622,9 @@ void Player::reset()
    if (nib != 0) {
       nib->event(RESET_EVENT);
    }
+
+   syncState1Ready = false;
+   syncState2Ready = false;
 
    // ---
    // Reset our base class
@@ -2960,6 +2975,34 @@ void Player::dynamics(const LCreal dt)
 
       // Update our position
       positionUpdate(dt);
+      
+      if(getNib() != 0 || true) {
+         if(!syncState1Ready) {
+            syncState1.setGeocPosition(getGeocPosition());
+            syncState1.setGeocVelocity(getGeocVelocity());
+            syncState1.setGeocAcceleration(getGeocAcceleration());
+            syncState1.setGeocEulerAngles(getGeocEulerAngles());
+            syncState1.setAngularVelocities(getAngularVelocities());
+            syncState1.setTimeExec(getSimulation()->getExecTimeSec());
+            syncState1.setTimeUtc(getSimulation()->getSysTimeOfDay());
+            syncState1.setValid(true);
+            syncState1Ready = true;
+            syncState2Ready = false;
+            //std::cout << "Set syncState1" << std::endl;
+         } else {
+            syncState2.setGeocPosition(getGeocPosition());
+            syncState2.setGeocVelocity(getGeocVelocity());
+            syncState2.setGeocAcceleration(getGeocAcceleration());
+            syncState2.setGeocEulerAngles(getGeocEulerAngles());
+            syncState2.setAngularVelocities(getAngularVelocities());
+            syncState2.setTimeExec(getSimulation()->getExecTimeSec());
+            syncState2.setTimeUtc(getSimulation()->getSysTimeOfDay());
+            syncState2.setValid(true);
+            syncState2Ready = true;
+            syncState1Ready = false;
+            //std::cout << "Set syncState2" << std::endl;
+         }
+      }
 
       // ---
       // Check for ground collisions
@@ -3246,50 +3289,56 @@ void Player::deadReckonPosition(const LCreal dt)
 {
    if ( !isNetworkedPlayer() ) return;
 
-   // Dead reckon our position and orientation
-   osg::Vec3d drPos;
-   osg::Vec3d drAngles;
-   nib->updateDeadReckoning(dt, &drPos, &drAngles);
-      //std::cout << "deadReckonPosition(): geoc pos(";
-      //std::cout << drPos[0] << ", ";
-      //std::cout << drPos[1] << ", ";
-      //std::cout << drPos[2] << ") ";
-      //std::cout << std::endl;
+   if (getNib() != 0) {
+      nib->ref();
 
-   // Ground clamping enabled?
-   bool gcEnabled = tElevValid && isMajorType(GROUND_VEHICLE | SHIP | BUILDING | LIFE_FORM);
+      // Dead reckon our position and orientation
+      osg::Vec3d drPos;
+      osg::Vec3d drAngles;
+      nib->updateDeadReckoning(dt, &drPos, &drAngles);
+         //std::cout << "deadReckonPosition(): geoc pos(";
+         //std::cout << drPos[0] << ", ";
+         //std::cout << drPos[1] << ", ";
+         //std::cout << drPos[2] << ") ";
+         //std::cout << std::endl;
+   
+      // Ground clamping enabled?
+      bool gcEnabled = tElevValid && isMajorType(GROUND_VEHICLE | SHIP | BUILDING | LIFE_FORM);
+   
+      if (!gcEnabled) {
+         // Not ground clamping then set the DR position
+         setGeocPosition( drPos );
+      }
+   
+      else {
+         // Ground clamping!
+   
+         // 1) Compute the ground clamped altitude
+         double alt = tElev + tOffset;
+   
+         // 2) Compute the geodetic lat/lon position
+         const Basic::EarthModel* em = getSimulation()->getEarthModel();
+         double ecef[3] = { drPos[0], drPos[1], drPos[2] };
+         double lla[3] = { 0, 0, 0 };
+         Basic::Nav::convertEcef2Geod(ecef, lla, em);
+         double lat = lla[Basic::Nav::ILAT];
+         double lon = lla[Basic::Nav::ILON];
+   
+         // 3) Set position using these ground clamped coordinates
+         setPositionLLA(lat, lon, alt);
+      }
+   
+      // Set the DR orientation
+      setGeocEulerAngles( drAngles );
+   
+      // Linear velocity and acceleration, as well as angular velocity, are set
+      // using the initial (T=0) dead-reckoning values
+      setGeocVelocity( nib->getDrVelocity() );
+      setGeocAcceleration( nib->getDrAcceleration() );
+      setGeocAngularVelocities( nib->getDrAngularVelocities() );
 
-   if (!gcEnabled) {
-      // Not ground clamping then set the DR position
-      setGeocPosition( drPos );
+      nib->unref();
    }
-
-   else {
-      // Ground clamping!
-
-      // 1) Compute the ground clamped altitude
-      double alt = tElev + tOffset;
-
-      // 2) Compute the geodetic lat/lon position
-      const Basic::EarthModel* em = getSimulation()->getEarthModel();
-      double ecef[3] = { drPos[0], drPos[1], drPos[2] };
-      double lla[3] = { 0, 0, 0 };
-      Basic::Nav::convertEcef2Geod(ecef, lla, em);
-      double lat = lla[Basic::Nav::ILAT];
-      double lon = lla[Basic::Nav::ILON];
-
-      // 3) Set position using these ground clamped coordinates
-      setPositionLLA(lat, lon, alt);
-   }
-
-   // Set the DR orientation
-   setGeocEulerAngles( drAngles );
-
-   // Linear velocity and acceleration, as well as angular velocity, are set
-   // using the initial (T=0) dead-reckoning values
-   setGeocVelocity( nib->getDrVelocity() );
-   setGeocAcceleration( nib->getDrAcceleration() );
-   setGeocAngularVelocities( nib->getDrAngularVelocities() );
 }
 
 //------------------------------------------------------------------------------
