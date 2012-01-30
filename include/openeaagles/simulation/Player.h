@@ -15,6 +15,8 @@
 #include "openeaagles/basic/units/Angles.h"
 #include "openeaagles/basic/units/Distances.h"
 
+#include "openeaagles/simulation/SynchronizedState.h"
+
 namespace Eaagles {
    namespace Basic {
       class Angle;
@@ -637,6 +639,11 @@ public:
    virtual double getCommandedAltitudeFt() const;  // Get commanded (HAE) altitude (feet)
 
    // ---
+   // Sync State Changes
+   // ---
+   const SynchronizedState& getSynchronizedState() const;
+
+   // ---
    // Systems
    // ---
 
@@ -1192,6 +1199,14 @@ private:
    static const unsigned int MAX_RF_REFLECTIONS = 4;   // Max number of reflected emissions we'll send (let's keep it small)
    Basic::Component* rfReflect[MAX_RF_REFLECTIONS];    // Objects that are interested in the emissions hitting us
    LCreal  rfReflectTimer[MAX_RF_REFLECTIONS];         // Request for reflected emissions will timeout
+
+   // ---
+   // sync state changes
+   // ---
+   bool                 syncState1Ready;
+   bool                 syncState2Ready;
+   SynchronizedState    syncState1;
+   SynchronizedState    syncState2;
 };
 
 // -----------------------------------------------------------------------------

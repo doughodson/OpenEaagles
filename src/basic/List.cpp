@@ -109,24 +109,6 @@ void List::clear()
     num = 0;
 }
 
-//------------------------------------------------------------------------------
-// find(Object*) -- find an object on the list
-//------------------------------------------------------------------------------
-unsigned int List::find(const Object* const obj) const
-{
-    int i = 0;
-    int idx = 0;
-    const Item* d = headP;
-    for ( ; d != 0; d = d->getNext() ) {
-        i++;
-        if ( obj == d->getValue() )  {
-            idx = i;
-            break;
-        }
-    }
-    return idx;
-}
-
 
 //------------------------------------------------------------------------------
 // find(Object*) -- find an object on the list

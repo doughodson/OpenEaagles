@@ -48,7 +48,7 @@ class Number;
 //      Dir getDir()
 //      int getDeg()
 //      int getMin();
-//      LCreal getSec();
+//      double getSec();
 //          Return the direction { north, south, east, west }, degrees,
 //          minutes, and seconds components, respectively.
 //
@@ -58,13 +58,13 @@ class Number;
 //      void LatLon::setDir(const char* d)
 //          Sets Direction - N,S,E,W
 //
-//      void LatLon::setDeg(const LCreal d)
+//      void LatLon::setDeg(const double d)
 //          Sets degrees, minutes, seconds -- then calls computeVal().
 //
-//      void LatLon::setMin(const LCreal m)
+//      void LatLon::setMin(const double m)
 //          Sets minutes, seconds -- then calls computeVal().
 //
-//      void LatLon::setSec(const LCreal s)
+//      void LatLon::setSec(const double s)
 //          Sets seconds -- then calls computeVal().
 //
 //      Object* LatLon::getSlotByIndex(const int si)
@@ -87,7 +87,7 @@ public:
     Dir getDir() const                      { return dir; }
     int getDeg() const                      { return deg; }
     int getMin() const                      { return min; }
-    LCreal getSec() const                   { return sec; }
+    double getSec() const                   { return sec; }
     
     //slottable functions start here
     virtual bool setDirection(const String* const sdobj);
@@ -97,16 +97,16 @@ public:
 
 protected:
     void computeVal();
-    void setDir(const char* direction);
-    void setDeg(const LCreal degrees);
-    void setMin(const LCreal minutes);
-    void setSec(const LCreal seconds);
+    bool setDir(const char* const direction);
+    bool setDeg(const double degrees);
+    bool setMin(const double minutes);
+    bool setSec(const double seconds);
 
 private:
     Dir     dir;                // direction
     int     deg;                // degrees
     int     min;                // minutes
-    LCreal  sec;                // seconds
+    double  sec;                // seconds
 };
 
 } // End Basic namespace
