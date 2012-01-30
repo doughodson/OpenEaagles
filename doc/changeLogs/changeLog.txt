@@ -12,6 +12,10 @@ basic
       1) Added better input error checking
       2) changed 'LCreal' type variables to type 'double'
 
+   List class
+      1) Removed the find() member function;
+         use the getIndex() member function instead
+
 --------------------------------------------------------------------------------
 dis
 
