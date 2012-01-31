@@ -14,7 +14,7 @@ namespace Basic {
 //------------------------------------------------------------------------------
 // Class: Object
 //
-// Description: Our 'system' or top level base class for all OpenEaagles objects.
+// Description: Our 'system' or top level base class for all framework objects.
 //
 //       Provides a common base class for type checking and support for form names,
 //       slot tables, exceptions and reference counting.  Most of this needs
@@ -135,10 +135,10 @@ namespace Basic {
 //    by its 'form' name and will return a pointer to the new object or zero if the
 //    form name wasn't found.  These new objects have a reference count of one.  The
 //    object's form name, which is defined by a parameter to the IMPLEMENT_SUBCLASS()
-//    macro, is usually the same or simular to the class name.
+//    macro, is usually the same or similar to the class name.
 //
-//    A form function is passed to the OpenEaagles parser (see paser.y), or a user
-//    provided parser, the form function is used to construct objects using the form
+//    A form function is passed to the parser (see paser.y), or a user provided
+//    parser, the form function is used to construct objects using the form
 //    names that were parsed from the input file.
 //
 //    Typically an application will build its own application level form function,
@@ -195,9 +195,9 @@ namespace Basic {
 //    slot table, and each class constructor must include the STANDARD_CONSTRUCTOR()
 //    macro, which will set this slot table pointer.
 //
-//    Each slot table contains a pointer to its base class’ slot table, and
-//    slot names that are not found in a class’ slot table are passed up to
-//    the base class' slot table.  Therefore, slot names are inherited by
+//    Each slot table contains a pointer to its base class, slot table, and
+//    slot names that are not found in a class slot table are passed up to
+//    the base class slot table.  Therefore, slot names are inherited by
 //    derived classes and derived classes can override base class slot names.
 //
 //    Note: there are the SlotTable's index numbers and our local slot index
@@ -338,7 +338,7 @@ class Object {
       const char* const cname;         // class name from 'type_info'
       const char* const fname;         // class form name
       const SlotTable* const st;       // Pointer to the SlotTable
-	  const _Static* const bstatic;    // Pointer to the base class _Static object
+      const _Static* const bstatic;    // Pointer to the base class _Static object
       int count;                       // NCurrent of instances
       int mc;                          // Max number of instances
       int tc;                          // Total number of instances
@@ -426,13 +426,10 @@ protected:
    static unsigned int registerClass(const _Static* const a);
 
 private:
-   unsigned short enbMsgBits;      // Enabled message bits
-   unsigned short disMsgBits;      // Disabled message bits
-   mutable long semaphore;         // ref(), unref() semaphore
-   mutable int refCount;           // reference count
-   unsigned int magicLock;         // Magic Key
-   static unsigned int magicKey;   // Magic number
-   public: static const char* const version;    // OpenEaagles version
+   unsigned short enbMsgBits;       // Enabled message bits
+   unsigned short disMsgBits;       // Disabled message bits
+   mutable long semaphore;          // ref(), unref() semaphore
+   mutable unsigned int refCount;   // reference count
 
    // Table of registered classes:
    // --- pointers to the static member structure, _Static

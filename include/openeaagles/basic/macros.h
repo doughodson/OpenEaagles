@@ -1,10 +1,10 @@
 //------------------------------------------------------------------------------
-// OpenEaagles Macros
+// Framework Macros
 //
 // Object class macros:
 //
 //    DECLARE_SUBCLASS(ThisType,BaseType)
-//       Macro to declare all of the required OpenEaagles member functions and memeber
+//       Macro to declare all of the required member functions and memeber
 //       variables for the class 'ThisType', which is derived from class 'BaseType'.
 //       Defines the type 'BaseClass', which can be used by the member functions as an
 //       alias for the base class.  The copy constructor is declared by this macro, but
@@ -12,7 +12,7 @@
 //       standard constructor (i.e., no arguments; Foo()).
 //
 //    IMPLEMENT_SUBCLASS(ThisType, "formName")
-//       Macro to implement a standard set of required OpenEaagles member functions
+//       Macro to implement a standard set of required member functions
 //       and member variables for the class 'ThisType', and to set its form name to
 //       'formName'.  The user is required to implement the copyData(), deleteData()
 //       and serialize() functions, the slot table, and any constructors that the user
@@ -119,9 +119,9 @@
 //
 //------------------------------------------------------------------------------
 
-// Caution: many folks new to OpenEaagles have wanted to start by understanding the
-// internals of these macros.  Although a glorious endeavor, experience as proven
-// that it's best to treat these macros, at least initially, as 'black boxes'.
+// Caution: often many users new to the framework want to learn the internals of how these
+// macros work.  Although a glorious endeavor, experience as proven that it's best
+// to treat these macros, at least initially, as 'black boxes'.
 
 #define DECLARE_SUBCLASS(ThisType,BaseType)                                                           \
     typedef BaseType BaseClass;                                                                       \
@@ -134,14 +134,14 @@
     public: virtual bool isClassType(const std::type_info& type) const;                               \
     private: static struct _Static _static;                                                           \
     private: static const unsigned int classIndex;                                                    \
-	protected: static const _Static* getStatic();                                                     \
+    protected: static const _Static* getStatic();                                                     \
     public: static const char* getFormName();                                                         \
     public: virtual bool isFormName(const char name[]) const;                                         \
     protected: virtual bool setSlotByIndex(const int slotindex, Eaagles::Basic::Object* const obj);   \
     protected: virtual Eaagles::Basic::Object* getSlotByIndex(const int slotindex);                   \
     public: static const Eaagles::Basic::SlotTable& getSlotTable();                                   \
     protected: static const Eaagles::Basic::SlotTable slottable;                                      \
-    private: static const char* slotnames[];                                                              \
+    private: static const char* slotnames[];                                                          \
     private: static const int nslots;                                                                 \
     public: virtual std::ostream&                                                                     \
     serialize(std::ostream& sout, const int i = 0, const bool slotsOnly = false) const;               \
@@ -154,7 +154,7 @@
       registerClass(&_static), typeid(ThisType).name(), FORMNAME,                      \
         &ThisType::slottable, BaseClass::getStatic()                                   \
     );                                                                                 \
-	const ThisType::_Static* ThisType::getStatic() { return &_static; }                \
+    const ThisType::_Static* ThisType::getStatic() { return &_static; }                \
     const char* ThisType::getFormName() { return _static.fname; }                      \
     bool ThisType::isFormName(const char name[]) const	                              \
     {                                                                                  \
@@ -191,9 +191,9 @@
 #define IMPLEMENT_PARTIAL_SUBCLASS(ThisType, FORMNAME)                                 \
     ThisType::_Static ThisType::_static(                                               \
       registerClass(&_static), typeid(ThisType).name(), FORMNAME,                      \
-	    &ThisType::slottable, BaseClass::getStatic()                                   \
+        &ThisType::slottable, BaseClass::getStatic()                                   \
     );                                                                                 \
-	const ThisType::_Static* ThisType::getStatic() { return &_static; }                \
+    const ThisType::_Static* ThisType::getStatic() { return &_static; }                \
     const char* ThisType::getFormName() { return _static.fname; }                      \
     bool ThisType::isFormName(const char name[]) const	                              \
     {                                                                                  \
@@ -213,9 +213,9 @@
 #define IMPLEMENT_ABSTRACT_SUBCLASS(ThisType, FORMNAME)                                \
     ThisType::_Static ThisType::_static(                                               \
       registerClass(&_static), typeid(ThisType).name(), FORMNAME,                      \
-	    &ThisType::slottable, BaseClass::getStatic()                                   \
+        &ThisType::slottable, BaseClass::getStatic()                                   \
     );                                                                                 \
-	const ThisType::_Static* ThisType::getStatic() { return &_static; }                \
+    const ThisType::_Static* ThisType::getStatic() { return &_static; }                \
     const char* ThisType::getFormName() { return _static.fname; }                      \
     bool ThisType::isFormName(const char name[]) const	                              \
     {                                                                                  \
@@ -262,17 +262,17 @@
 
 
 
-#define EMPTY_SLOTTABLE(ThisType)                                                      \
+#define EMPTY_SLOTTABLE(ThisType)                                                          \
     const char* ThisType::slotnames[] = { "" };                                            \
-    const int ThisType::nslots = 0;                                                    \
+    const int ThisType::nslots = 0;                                                        \
     const Eaagles::Basic::SlotTable ThisType::slottable(0, 0, BaseClass::getSlotTable());  \
-    bool ThisType::setSlotByIndex(const int si, Eaagles::Basic::Object* const obj)     \
-    {                                                                                  \
-        return BaseClass::setSlotByIndex(si,obj);                                      \
-    }                                                                                  \
-    Eaagles::Basic::Object* ThisType::getSlotByIndex(const int si)                     \
-    {                                                                                  \
-        return BaseClass::getSlotByIndex(si);                                          \
+    bool ThisType::setSlotByIndex(const int si, Eaagles::Basic::Object* const obj)         \
+    {                                                                                      \
+        return BaseClass::setSlotByIndex(si,obj);                                          \
+    }                                                                                      \
+    Eaagles::Basic::Object* ThisType::getSlotByIndex(const int si)                         \
+    {                                                                                      \
+        return BaseClass::getSlotByIndex(si);                                              \
     }
 
 
@@ -331,22 +331,22 @@
 
 
 
-#define END_SLOTTABLE(ThisType)                                                        \
-    };                                                                                 \
-    const int ThisType::nslots = (sizeof(slotnames)/sizeof(char*));                        \
+#define END_SLOTTABLE(ThisType)                                                                \
+    };                                                                                         \
+    const int ThisType::nslots = (sizeof(slotnames)/sizeof(char*));                            \
     const Eaagles::Basic::SlotTable ThisType::slottable(ThisType::slotnames, ThisType::nslots, \
                                                ThisType::BaseClass::getSlotTable());
 
 
 
-#define BEGIN_SLOT_MAP(ThisType)                                                       \
+#define BEGIN_SLOT_MAP(ThisType)                                                           \
     bool ThisType::setSlotByIndex(const int slotindex, Eaagles::Basic::Object* const obj)  \
-    {                                                                                  \
-        const int _n = BaseClass::getSlotTable().n();                                  \
-        if (slotindex <= _n) {                                                         \
-            return BaseClass::setSlotByIndex(slotindex,obj);                           \
-        }                                                                              \
-        bool _ok = false;                                                              \
+    {                                                                                      \
+        const int _n = BaseClass::getSlotTable().n();                                      \
+        if (slotindex <= _n) {                                                             \
+            return BaseClass::setSlotByIndex(slotindex,obj);                               \
+        }                                                                                  \
+        bool _ok = false;                                                                  \
         int _n1 = (slotindex - _n);
 
 

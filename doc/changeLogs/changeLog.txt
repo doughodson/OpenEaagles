@@ -6,7 +6,10 @@ Changes since v12.01
 basic
 
    eventTokens.h
-     1) added REFUEL EVENT, work in progress
+      1) added REFUEL EVENT, work in progress
+
+   Object class
+      1) Removed version, magicKey and magicLock member data
 
    LatLon class
       1) Added better input error checking

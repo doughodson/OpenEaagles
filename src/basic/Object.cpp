@@ -9,12 +9,6 @@ namespace Eaagles {
 namespace Basic {
 
 // ---
-// OpenEaagles version and key
-// ---
-const char* const Object::version = "v2011_1129";  // Version number is vYYYY_MMDD (Year, Month, Day)
-unsigned int Object::magicKey = 0x20111129;        // Magic key is YYYYMMDD (Year, Month, Day)
-
-// ---
 // Table of registered classes
 //    Note: class Object is pre-registered as the first class
 // ---
@@ -47,7 +41,6 @@ Object::Object()
    STANDARD_CONSTRUCTOR()
    refCount = 1;    // (start out ref() by the creator)
    semaphore = 0;
-   magicLock = magicKey;
    enbMsgBits = (MSG_ERROR | MSG_WARNING);
    disMsgBits = 0;
 }
@@ -62,8 +55,6 @@ Object::Object(const Object& org)
 Object::~Object()
 {
    STANDARD_DESTRUCTOR()
-
-   magicLock = 0;
 }
 
 Object& Object::operator=(const Object& org)
@@ -217,7 +208,7 @@ const char* Object::slotIndex2Name(const int slotindex) const
 //------------------------------------------------------------------------------
 bool Object::isValid() const
 {
-    return (magicLock == magicKey) && (refCount > 0);
+    return (refCount > 0);
 }
 
 //------------------------------------------------------------------------------
