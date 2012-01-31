@@ -13,7 +13,7 @@ namespace Simulation {
 //------------------------------------------------------------------------------
 // Class: SynchronizedState
 //
-// Description: A snapshot of position state
+// Description: A snapshot of position state at a given time
 //
 //------------------------------------------------------------------------------
 class SynchronizedState : public Basic::Object
@@ -41,11 +41,9 @@ public:
    void setTimeExec(const double d) { timeExec = d; }
    void setTimeUtc(const double d) { timeUtc = d; }
 
-   virtual void clear();                                 // clears state data
+   virtual void clear();         // clear state data
 
 private:
-
-   void initData();
 
    osg::Vec3d  posVecECEF;       // Geocentric position vector       (meters)  (ECEF)
    osg::Vec3d  velVecECEF;       // Geocentric velocity vector       (meters/second)  (ECEF)
@@ -60,5 +58,5 @@ private:
 } // End Simulation namespace
 } // End Eaagles namespace
 
-#endif // __SynchronizedState_H__
+#endif
 

@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Class:	SynchronizedState
+// Class: SynchronizedState
 //------------------------------------------------------------------------------
 
 #include "openeaagles/simulation/SynchronizedState.h"
@@ -13,6 +13,7 @@ namespace Simulation {
 IMPLEMENT_SUBCLASS(SynchronizedState,"SynchronizedState")
 EMPTY_SLOTTABLE(SynchronizedState)
 EMPTY_SERIALIZER(SynchronizedState)
+EMPTY_DELETEDATA(SynchronizedState)
 
 //------------------------------------------------------------------------------
 // Constructor(s)
@@ -21,19 +22,7 @@ SynchronizedState::SynchronizedState()
 {
    STANDARD_CONSTRUCTOR()
 
-   initData();
-}
-
-void SynchronizedState::initData()
-{
-   posVecECEF.set(0,0,0);
-   velVecECEF.set(0,0,0);
-   accelVecECEF.set(0,0,0);
-   anglesW.set(0,0,0);
-   angVel.set(0,0,0);
-   timeExec = 0.0;
-   timeUtc = 0.0;
-   valid = false;
+   clear();
 }
 
 //------------------------------------------------------------------------------
@@ -42,11 +31,6 @@ void SynchronizedState::initData()
 void SynchronizedState::copyData(const SynchronizedState& org, const bool cc)
 {
    BaseClass::copyData(org);
-
-   // If copy constructor, initialize defaults
-   if (cc) {
-      initData();
-   }
 
    // copy data
    posVecECEF = org.posVecECEF;
@@ -60,15 +44,7 @@ void SynchronizedState::copyData(const SynchronizedState& org, const bool cc)
 }
 
 //------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
-void SynchronizedState::deleteData()
-{
-   clear();
-}
-
-//------------------------------------------------------------------------------
-// clear() -- clears the synchronized state
+// clear() -- clear state data
 //------------------------------------------------------------------------------
 void SynchronizedState::clear()
 {
