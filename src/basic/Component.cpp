@@ -752,12 +752,14 @@ void Component::processComponents(
    // ---
    if (selection != 0) {
       if (selection->isClassType(typeid(String))) {
-            String str(*((String*)selection));
-            select(&str);
+            String* str = new String(*((String*)selection));
+            select(str);
+            str->unref();
       }
       else {
-            Integer num(((Number*)selection)->getInt());
-            select(&num);
+            Integer* num = new Integer(((Number*)selection)->getInt());
+            select(num);
+            num->unref();
       }
    }
 

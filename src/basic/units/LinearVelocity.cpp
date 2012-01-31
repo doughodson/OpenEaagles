@@ -139,62 +139,64 @@ LCreal LinearVelocity::convert(Distance* newDistanceUnit, Time* newTimeUnit)
     newTimeUnit->setValue(1);
 
     //Take the internal unit and create an object of Meters to convert distances:
-    Meters internalMeters((LCreal)distance);
-        
+    Meters* internalMeters = new Meters((LCreal)distance);
+
     //Find out what units the distance is in:
     if(dynamic_cast<Feet*>(newDistanceUnit) != 0)
     {
         //New distance is in Feet:
-        Feet feet;
-        desiredDistance = feet.convert(internalMeters);
+        Feet* feet = new Feet;
+        desiredDistance = feet->convert(*internalMeters);
+        feet->unref();
     }
     else if(dynamic_cast<Meters*>(newDistanceUnit) != 0)
     {
         //New distance is in Meters:
-        Meters meters;
-        desiredDistance = meters.convert(internalMeters);
-        
+        Meters* meters = new Meters;
+        desiredDistance = meters->convert(*internalMeters);
+        meters->unref();
     }
     else if(dynamic_cast<CentiMeters*>(newDistanceUnit) != 0)
     {
         //New distance is in CentiMeters:
-        CentiMeters centimeters;
-        desiredDistance = centimeters.convert(internalMeters);
-
+        CentiMeters* centimeters = new CentiMeters;
+        desiredDistance = centimeters->convert(*internalMeters);
+        centimeters->unref();
     }
     else if(dynamic_cast<KiloMeters*>(newDistanceUnit) != 0)
     {
         //New distance is in KiloMeters:
-        KiloMeters kilometers;
-        desiredDistance = kilometers.convert(internalMeters);
-
+        KiloMeters* kilometers = new KiloMeters;
+        desiredDistance = kilometers->convert(*internalMeters);
+        kilometers->unref();
     }
     else if(dynamic_cast<Inches*>(newDistanceUnit) != 0)
     {
         //New distance is in Inches:
-        Inches inches;
-        desiredDistance = inches.convert(internalMeters);
-
+        Inches* inches = new Inches;
+        desiredDistance = inches->convert(*internalMeters);
+        inches->unref();
     }
     else if(dynamic_cast<NauticalMiles*>(newDistanceUnit) != 0)
     {
         //New distance is in NauticalMiles:
-        NauticalMiles nauticalmiles;
-        desiredDistance = nauticalmiles.convert(internalMeters);
-
+        NauticalMiles* nauticalmiles = new NauticalMiles;
+        desiredDistance = nauticalmiles->convert(*internalMeters);
+        nauticalmiles->unref();
     }
     else if(dynamic_cast<StatuteMiles*>(newDistanceUnit) != 0)
     {
         //New distance is in StatuteMiles:
-        StatuteMiles statutemiles;
-        desiredDistance = statutemiles.convert(internalMeters);
-
+        StatuteMiles* statutemiles = new StatuteMiles;
+        desiredDistance = statutemiles->convert(*internalMeters);
+        statutemiles->unref();
     }
     else
     {
         //Give Error - Not sure what type it is:
         std::cerr << "Distance Conversion Type Not Found." << std::endl;
     }
+    internalMeters->unref();
 
     //Find out what units the time input is in - do not use built in convert - very easy to do by hand:
     Seconds* q = dynamic_cast<Seconds*>(newTimeUnit);

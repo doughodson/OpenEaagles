@@ -107,14 +107,15 @@ LCreal AngularVelocity::convert(Angle* newAngleUnit, Time* newTimeUnit)
     newTimeUnit->setValue(1);
 
     //Take the internal unit and create an object of Angle to convert angles:
-    Radians internalRadians((LCreal)angle);
-    
+    Radians* internalRadians = new Radians((LCreal)angle);
+
     //Find out what units the angle is in:
     if(dynamic_cast<Degrees*>(newAngleUnit) != 0)
     {
         //New angle is in degrees:
-        Degrees degrees;
-        desiredAngle = (LCreal)degrees.convert(internalRadians);
+        Degrees* degrees = new Degrees;
+        desiredAngle = (LCreal)degrees->convert(*internalRadians);
+        degrees->unref();
     }
     else if(dynamic_cast<Radians*>(newAngleUnit) != 0)
     {
@@ -124,14 +125,16 @@ LCreal AngularVelocity::convert(Angle* newAngleUnit, Time* newTimeUnit)
     else if(dynamic_cast<Semicircles*>(newAngleUnit) != 0)
     {
         //New angle is in semicircles:
-        Semicircles semicircles;
-        desiredAngle = (LCreal)semicircles.convert(internalRadians);
+        Semicircles* semicircles = new Semicircles;
+        desiredAngle = (LCreal)semicircles->convert(*internalRadians);
+        semicircles->unref();
     }
     else
     {
         //Give Error - Not sure what type it is:
         std::cerr << "Angle Conversion Type Not Found." << std::endl;
     }
+    internalRadians->unref();
 
     //Find out what units the time input is in - do not use built in convert - very easy to do by hand:
     Seconds* q = dynamic_cast<Seconds*>(newTimeUnit);
