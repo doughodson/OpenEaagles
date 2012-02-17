@@ -31,6 +31,17 @@ basic
       1) Removed the find() member function;
          use the getIndex() member function instead
 
+   SPtr<> template
+      1) Added an option flag to constructor
+
+
+--------------------------------------------------------------------------------
+basicGL
+
+   Graphic class
+      1) Removed the Color() function; use setColor() instead
+
+
 --------------------------------------------------------------------------------
 dis
 

@@ -4,15 +4,37 @@
 //
 // Description: "Smart" pointer to an object of type T.
 //              Provides automatic ref() and unref() of the object.
+//
+// Example #1
+//
+//    Object* p = new Object();  // New object; ref cnt is one
+//
+//    SPtr<Object> sp1( p );     // ref cnt is two
+//
+//    SPtr<Object> sp2();        // 'sp2' is null
+//    sp2 = p;                   // ref cnt is three
+//
+//    SPtr<Object> sp3(sp2);     // ref cnt is four
+//
+//    p->unref();                // ref cnt is three
+//    sp3 = 0;                   // ref cnt is two
+//    sp2 = 0;                   // ref cnt is one
+//    sp1 = 0;                   // ref cnt is zero; object is deleted
+//
+//
+// Example #2
+//
+//    SPtr<Object> sp1( new Object(), false );  // new object; ref cnt stays at one
+//
 //------------------------------------------------------------------------------
 template <class T> class SPtr {
 public:
 
    // Constructors and destructor
-   SPtr(SPtr<T>& p_) : p(p_.getRefPtr()), semaphore(0)   { }
-   SPtr(T* p_) : p(p_), semaphore(0)           { if (p != 0) p->ref(); }
-   SPtr() : p(0), semaphore(0)                 { }
-   ~SPtr()                                     { if (p != 0) p->unref(); }
+   SPtr() : p(0), semaphore(0) {}
+   SPtr(T* p_, const bool refThis = true) : p(p_), semaphore(0) { if (p != 0 && refThis) p->ref(); }
+   SPtr(SPtr<T>& p_) : p(p_.getRefPtr()), semaphore(0) {}
+   ~SPtr() { if (p != 0) p->unref(); }
 
    // Operators: * -> == !=
    operator T*()                               { return p; }
