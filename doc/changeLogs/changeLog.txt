@@ -34,6 +34,14 @@ basic
    SPtr<> template
       1) Added an option flag to constructor
 
+
+--------------------------------------------------------------------------------
+basicGL
+
+   Graphic class
+      1) Removed the Color() function; use setColor() instead
+
+
 --------------------------------------------------------------------------------
 dis
 
