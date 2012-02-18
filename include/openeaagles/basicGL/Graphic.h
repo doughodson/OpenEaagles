@@ -116,9 +116,6 @@ class Material;
 //	  osg::Matrix& getMatrix()
 //		Returns the transformation matrix.
 //
-//      Color(Color* obj)
-//          Sets the color attribute.
-//
 //      lcRotate(LCreal a)
 //      lcRotate(LCreal x, LCreal y, LCreal z, LCreal a)
 //          Rotate by 'a' radians about z, or about tye x,y,z vector.
@@ -327,7 +324,6 @@ public:
    void lcTranslate(const LCreal, const LCreal, const LCreal);
    void lcScale(const LCreal);
    void lcScale(const LCreal, const LCreal);
-   void Color(Basic::Color*);
    void lcSaveMatrix();
    void lcRestoreMatrix();
    
@@ -591,11 +587,6 @@ inline void Graphic::lcTranslate(const LCreal x, const LCreal y, const LCreal z)
     tt.makeTranslate(x,y,z);
     m.preMult(tt);
     haveMatrix = true;
-}
-
-inline void Graphic::Color(Basic::Color* nc)
-{
-    color = nc;
 }
 
 } // End BasicGL namespace

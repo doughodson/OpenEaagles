@@ -31,6 +31,18 @@ basic
       1) Removed the find() member function;
          use the getIndex() member function instead
 
+   SPtr<> template
+      1) Added an option flag to constructor to avoid auto
+         referencing pointer -- see SPtr.h for documentation
+         and examples
+
+--------------------------------------------------------------------------------
+basicGL
+
+   Graphic class
+      1) Removed the Color() function; use setColor() instead
+
+
 --------------------------------------------------------------------------------
 dis
 
