@@ -30,6 +30,8 @@ basic
    List class
       1) Removed the find() member function;
          use the getIndex() member function instead
+      2) remove(Object*) -- When the object is not found in the list, it no
+         longer unref()'s the object (bug fix)
 
    SPtr<> template
       1) Added an option flag to constructor
