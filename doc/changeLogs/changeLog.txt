@@ -34,8 +34,9 @@ basic
          longer unref()'s the object (bug fix)
 
    SPtr<> template
-      1) Added an option flag to constructor
-
+      1) Added an option flag to constructor to avoid auto
+         referencing pointer -- see SPtr.h for documentation
+         and examples
 
 --------------------------------------------------------------------------------
 basicGL
