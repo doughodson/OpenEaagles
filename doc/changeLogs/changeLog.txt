@@ -38,6 +38,9 @@ basic
          referencing pointer -- see SPtr.h for documentation
          and examples
 
+   Complex number class
+      ## New class ##
+
 --------------------------------------------------------------------------------
 basicGL
 
