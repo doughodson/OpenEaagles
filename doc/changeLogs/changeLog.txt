@@ -38,6 +38,10 @@ basic
          referencing pointer -- see SPtr.h for documentation
          and examples
 
+   ThreadPeriodicTask class
+      1) mainThreadFunc() -- windows version; now passing a constant delta time
+         to each frame (linux version already used a constant delta time)
+
    Complex number class
       ## new class derived from Number ##
 

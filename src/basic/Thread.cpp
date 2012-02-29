@@ -313,7 +313,7 @@ EMPTY_SERIALIZER(ThreadPeriodicTask)
 // Constructor
 //------------------------------------------------------------------------------
 ThreadPeriodicTask::ThreadPeriodicTask(Component* const p, const LCreal pri, const LCreal rt)
-                                       : Thread(p, pri), rate(rt)
+                                       : Thread(p, pri), rate(rt), bfStats(), tcnt(0), vdtFlg(false)
 {
    STANDARD_CONSTRUCTOR()
 }
@@ -343,11 +343,32 @@ void ThreadPeriodicTask::deleteData()
 }
 
 //------------------------------------------------------------------------------
-// get functions
+// get/set functions
 //------------------------------------------------------------------------------
 LCreal ThreadPeriodicTask::getRate() const
 {
    return rate;
+}
+
+const Statistic& ThreadPeriodicTask::getBustedFrameStats() const
+{
+   return bfStats;
+}
+
+unsigned int ThreadPeriodicTask::getTotalFrameCount() const
+{
+   return tcnt;
+}
+
+bool ThreadPeriodicTask::isVariableDeltaTimeEnabled() const
+{
+   return vdtFlg;
+}
+
+bool ThreadPeriodicTask::setVariableDeltaTimeFlag(const bool enable)
+{
+   vdtFlg = enable;
+   return true;
 }
 
 } // End Basic namespace
