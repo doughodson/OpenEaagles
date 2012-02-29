@@ -83,6 +83,10 @@ dis simulation
 --------------------------------------------------------------------------------
 Simulation
 
+   Antenna class
+      1) process() function -- limited the number per frame of "in use" emissions
+         being checked if 'free'.
+
    Radar class
       1) computeSweepIndex() -- returned to original version (negative azimuth angle bug fix)
 

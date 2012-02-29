@@ -155,32 +155,30 @@ void Antenna::process(const LCreal dt)
    // ---
    // Update emission queues: from 'in-use' to 'free' 
    // ---
-   lcLock(inUseEmLock);
-      int n = inUseEmQueue.entries();
-   //std::cout << "antenna::process, inUseEmQueue before n= " << n << std::endl;
-   for (int i = 0; i < n; i++) {
-         Emission* em = inUseEmQueue.get();
-         if (em != 0) {
-            if (em->getRefCount() <= 1) {
-                  // No one else is referencing the emission, push on free stack
-                  em->clear();
-            lcLock(freeEmLock);
-                  if (freeEmStack.isNotFull()) {
-                     freeEmStack.push(em);
-                  }
-                  else {
-                     em->unref();
-                  }
-            lcUnlock(freeEmLock);
-            }
-            else {
-                  // Others are still referencing the emission, put back on in-use queue
-                  inUseEmQueue.put(em);
-            }
-         }
+   const unsigned int MAX_PER_FRAME = 40;
+
+   unsigned int n = inUseEmQueue.entries();
+   //if (n > MAX_PER_FRAME) n = MAX_PER_FRAME;
+
+   for (unsigned int i = 0; i < n; i++) {
+
+      Emission* em = inUseEmQueue.get();
+
+      if (em != 0 && em->getRefCount() > 1) {
+         // Others are still referencing the emission, put back on in-use queue
+         inUseEmQueue.put(em);
       }
-   //std::cout << "antenna::process, inUseEmQueue after n= " << inUseEmQueue.entries() << std::endl;
-   lcUnlock(inUseEmLock);
+
+      else if (em != 0 && em->getRefCount() <= 1) {
+         // No one else is referencing the emission, push to the free stack
+         em->clear();
+         lcLock(freeEmLock);
+         if (freeEmStack.isNotFull()) freeEmStack.push(em);
+         else em->unref();
+         lcUnlock(freeEmLock);
+      }
+
+   }
 }
 
 
