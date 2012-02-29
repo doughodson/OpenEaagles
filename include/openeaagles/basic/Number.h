@@ -59,7 +59,8 @@ public:
    Integer64 getInt64() const       { return Integer64(val); }
    bool getBoolean() const          { return (val != 0.0); }
 
-   virtual void setValue(const double nv);
+   virtual void setValue(const double nv)   { val = nv; }
+
    virtual bool setSlotValue(const Number* const svobj);
 
 protected:

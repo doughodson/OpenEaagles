@@ -39,7 +39,7 @@ basic
          and examples
 
    Complex number class
-      ## New class ##
+      ## new class derived from Number ##
 
 --------------------------------------------------------------------------------
 basicGL
