@@ -521,14 +521,13 @@ void Radar::ageSweeps()
 //------------------------------------------------------------------------------
 unsigned int Radar::computeSweepIndex(const LCreal az)
 {
-    // azmuith must be positive, if not, return an index of 0
-    if (az < 0) return 0;
+    LCreal s = LCreal(NUM_SWEEPS-1)/60.0;      // sweeps per display scaling
 
-    LCreal s = LCreal(NUM_SWEEPS-1)/60.0;           // sweeps per display scaling
-    LCreal az1 = az + 30.0f;                        // Offset from left side (sweep 0)
-    unsigned int n = (unsigned int)(az1*s + 0.5);   // Compute index
+    LCreal az1 = az + 30.0f;        // Offset from left side (sweep 0)
+    int n = int(az1*s + 0.5);       // Compute index
     if (n >= NUM_SWEEPS) n = NUM_SWEEPS - 1;
-    return n;
+    if (n < 0) n = 0;
+    return (unsigned int) n;
 }
 
 //------------------------------------------------------------------------------

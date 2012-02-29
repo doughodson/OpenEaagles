@@ -79,3 +79,10 @@ dis simulation
       5) various BaseClass::deleteData() fixed
       6) removed call to clear() from deleteData
 
+
+--------------------------------------------------------------------------------
+Simulation
+
+   Radar class
+      1) computeSweepIndex() -- returned to original version (negative azimuth angle bug fix)
+
