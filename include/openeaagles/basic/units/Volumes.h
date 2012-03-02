@@ -84,12 +84,14 @@ public:
     virtual LCreal toVolume() const = 0;
     virtual LCreal fromVolume(const LCreal a) const = 0;
     LCreal convert(const Volume& n) const  { return fromVolume(n.toVolume()); }
-	
+
     // Conversion routines
     static LCreal cubicMetersToFeet(const LCreal v)   { return v * CM2CFT; }
     static LCreal cubicFeetToMeters(const LCreal v)   { return v * CFT2CM; }
+
     static LCreal litersToCubicMeters(const LCreal v) { return v * L2CM; }
     static LCreal cubicMetersToLiters(const LCreal v) { return v * CM2L; }
+
     static LCreal cubicFeetToInches(const LCreal v)   { return (v * CFT2CM) * CM2CIN; }
     static LCreal cubicInchesToFeet(const LCreal v)   { return (v * CIN2CM) * CM2CFT; }
 

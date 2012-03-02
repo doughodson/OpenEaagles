@@ -444,8 +444,10 @@ bool CadrgFile::initialize(const char* dir)
         // Read the type in
         toc.read(type, 5);
 
-        if (strncmp(type, "CADRG", 5) == 0) cib = false;
-        else cib = true;
+        if (strncmp(type, "CADRG", 5) == 0)
+            cib = false;
+        else
+            cib = true;
 
         // Skip the compression ratio
         toc.seekg(5, std::ios::cur);

@@ -332,7 +332,7 @@ void Missile::weaponGuidance(const LCreal dt)
       else
          trdot = 0;
 
-      // Target total velocit
+      // Target total velocity
       LCreal totalVel = vel.length();
 
       // compute target velocity parallel to LOS,

@@ -91,7 +91,7 @@ public:
    virtual LCreal getRfNoiseFigure() const;              // Returns the receiver noise figure (no units)
 
    virtual Antenna* getAntenna();
-   virtual const Antenna* getAntenna() const;            // Poiner to the antenna model, or zero (0) if none
+   virtual const Antenna* getAntenna() const;            // Pointer to the antenna model, or zero (0) if none
    virtual bool setAntenna(Antenna* const p);            // Sets the R/F system's antenna
 
    virtual Basic::String* getAntennaName();

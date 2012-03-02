@@ -273,7 +273,7 @@ Basic::Object* simulationFormFunc(const char* formname)
     else if ( strcmp(formname, Antenna::getFormName()) == 0 ) {
         newform = new Antenna();
     }
-    if ( strcmp(formname, IrSeeker::getFormName()) == 0 ) {
+    else if ( strcmp(formname, IrSeeker::getFormName()) == 0 ) {
       newform = new IrSeeker();
     }
 

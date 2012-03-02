@@ -205,7 +205,7 @@ void Route::autoSequencer(const LCreal, const Navigation* const nav)
          // We're within range of the steerpoint, so compute our relative
          // to see if we just passed it.
          double rbrg = Basic::Angle::aepcdDeg(toSP->getTrueBrgDeg() - nav->getHeadingDeg());
-         if ( std::fabs(rbrg) >= 90.0f) {
+         if ( std::fabs(rbrg) >= 90.0) {
             // We're within range and we're going away from it, so ...
             triggerAction();
             incStpt();
@@ -665,8 +665,8 @@ bool Route::deleteAllSteerpoints()
 }
 
 //------------------------------------------------------------------------------
-// processComponets() -- process our components; make sure they are all of
-//	type Steerpoint (or derived); tell them that we are their container
+// processComponents() -- process our components; make sure they are all of
+//    type Steerpoint (or derived); tell them that we are their container
 //------------------------------------------------------------------------------
 void Route::processComponents(
       Basic::PairStream* const list,

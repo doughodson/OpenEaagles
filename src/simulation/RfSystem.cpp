@@ -179,7 +179,7 @@ void RfSystem::reset()
 void RfSystem::updateData(const LCreal dt)
 {
    // ---
-   // Process our player's of interest
+   // Process our players of interest
    // ---
    processPlayersOfInterest();
 
@@ -391,7 +391,7 @@ LCreal RfSystem::getRfNoiseFigure() const
    return rfNoiseFigure;
 }
 
-// Poiner to the antenna model, or zero (0) if none
+// Pointer to the antenna model, or zero (0) if none
 Antenna* RfSystem::getAntenna()
 {
    return antenna;
@@ -605,7 +605,7 @@ bool RfSystem::setSlotAntennaName(Basic::String* const p)
    return true;
 }
 
-// setFrequency() -- Set the Frequency (Basic::Number or Basic::Frequency)
+// setSlotFrequency() -- Set the Frequency (Basic::Number or Basic::Frequency)
 bool RfSystem::setSlotFrequency(Basic::Number* const v)
 {
     bool ok = false;
@@ -800,7 +800,7 @@ bool RfSystem::setSlotRfSignalProcessLoss(Basic::Number* const v)
             ok = setRfSignalProcessLoss(loss);
         }
         else {
-            std::cerr << "RfSystem::setSignalProcessLoss: Loss must be greater than or equal to one!" << std::endl;
+            std::cerr << "RfSystem::setRfSignalProcessLoss: Loss must be greater than or equal to one!" << std::endl;
         }
     }
     return ok;

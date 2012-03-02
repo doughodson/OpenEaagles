@@ -132,8 +132,8 @@ private:
 
 
 //------------------------------------------------------------------------------
-// Class:	ActionWeaponRelease
-// Description: ### Need description here
+// Class: ActionWeaponRelease
+// Description: Launches a weapon
 //
 // Form name: ActionWeaponRelease
 // Slots:

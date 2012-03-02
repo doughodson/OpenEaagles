@@ -93,28 +93,29 @@ class Material;
 //          is called.  if isPostDrawComponents() returns true, the subcomponents'
 //          draw() functions are called after our drawFunc() is called.
 //
-//	  cursor(int* ln, int* cp)
-//		Returns true if text cursor should be seen within this
+//      cursor(int* ln, int* cp)
+//          Returns true if text cursor should be seen within this
 //          object and the position of the cursor. 
 //
 //
-//	  Color* getColor()
+//      Color* getColor()
 //      setColor(Color* msg)
-//	  setColor(Identifier* msg)
+//      setColor(Identifier* msg)
 //          Gets/Sets the object's color attribute.  Argument types can be Color
 //          or Identifier.  The Identifier argument provides a color name that is
 //          used to lookup the Color from the color table.
-//	  setColor(Number* num)
+//      setColor(Number* num)
 //          Sets a color rotary object, based on the value passed in.. see basicGL/ColorRotary.h for
 //          how to setup a list of colors and breakpoints/
 //
 //
-////Matrix Functions
-//	  matrixIsActive()
-//		Returns true if we have an active matrix.
 //
-//	  osg::Matrix& getMatrix()
-//		Returns the transformation matrix.
+// Matrix Functions
+//  matrixIsActive()
+//    Returns true if we have an active matrix.
+//
+//  osg::Matrix& getMatrix()
+//    Returns the transformation matrix.
 //
 //      lcRotate(LCreal a)
 //      lcRotate(LCreal x, LCreal y, LCreal z, LCreal a)
@@ -278,7 +279,7 @@ public:
    unsigned int getNumberOfNormals() const { return nn; }               // Number of Normals
    bool setNormals(const osg::Vec3* const v, const unsigned int n);     // Sets the list of normal vectors
 
-   bool isVisible() const                 { return visible; }           // Checks the visibility attribut
+   bool isVisible() const                 { return visible; }           // Checks the visibility attribute.
    bool setVisibility(const bool v);                                    // Sets the visibility attribute.
 
    GLfloat getLineWidth() const           { return linewidth; }         // Gets the line width attribute.
@@ -324,6 +325,7 @@ public:
    void lcTranslate(const LCreal, const LCreal, const LCreal);
    void lcScale(const LCreal);
    void lcScale(const LCreal, const LCreal);
+
    void lcSaveMatrix();
    void lcRestoreMatrix();
    

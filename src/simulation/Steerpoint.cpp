@@ -40,7 +40,7 @@ BEGIN_SLOTTABLE(Steerpoint)
     "sca",              // 10) Safe Clearance Altitude  (Distance)
     "description",      // 11) Description              (String)
     "magvar",           // 12) Magnetic Var @ point     (Angle)
-    "next",             // 13) Next steerpoing number: by name (Identifier) or index (Number)
+    "next",             // 13) Next steerpoint number: by name (Identifier) or index (Number)
     "action",           // 14) Steerpoint action        (Action)
 END_SLOTTABLE(Steerpoint)
 

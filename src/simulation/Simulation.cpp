@@ -996,7 +996,7 @@ bool Simulation::isGamingAreaUsingEarthModel() const
    return gaUseEmFlg;
 }
 
-// Returns the refernce latitude
+// Returns the reference latitude
 double Simulation::getRefLatitude() const
 {
    return refLat;

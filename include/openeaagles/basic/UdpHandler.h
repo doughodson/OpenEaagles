@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // Class: UdpHandler
 //------------------------------------------------------------------------------
-#ifndef	__Eaagles_Basic_UdpHandler_H__
+#ifndef __Eaagles_Basic_UdpHandler_H__
 #define __Eaagles_Basic_UdpHandler_H__
 
 #include "openeaagles/basic/NetHandler.h"

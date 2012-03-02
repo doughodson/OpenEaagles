@@ -792,7 +792,7 @@ LCreal Player::getCG() const
    return 0.0;
 }
 
-// Return true if heading-hold mode is on?
+// Return true if heading-hold mode is on
 bool Player::isHeadingHoldOn() const
 {
    if (getDynamicsModel() != 0)
@@ -822,7 +822,7 @@ double Player::getCommandedHeadingR() const
    return getCommandedHeadingD() * (LCreal)Basic::Angle::D2RCC;
 }
 
-// True if velocity-hold mode is on?
+// Return true if velocity-hold mode is on
 bool Player::isVelocityHoldOn() const
 {
    if (getDynamicsModel() != 0)
@@ -852,7 +852,7 @@ double Player::getCommandedVelocityMps() const
    return getCommandedVelocityKts() * Basic::Distance::NM2M / Basic::Time::H2S;
 }
 
-// True if altitude-hold mode is on?
+// Return true if altitude-hold mode is on
 bool Player::isAltitudeHoldOn() const
 {
    if (getDynamicsModel() != 0)
@@ -861,7 +861,7 @@ bool Player::isAltitudeHoldOn() const
       return false;
 }
 
-// Get cmmanded (HAE) altitude, default (meters)
+// Get commanded (HAE) altitude, default (meters)
 double Player::getCommandedAltitude() const
 {
    if (getDynamicsModel() != 0)
@@ -870,13 +870,13 @@ double Player::getCommandedAltitude() const
       return 0;
 }
 
-// Get cmmanded (HAE) altitude (meters)
+// Get commanded (HAE) altitude (meters)
 double Player::getCommandedAltitudeM() const
 {
    return getCommandedAltitude();
 }
 
-// Get cmmanded (HAE) altitude (Feet)
+// Get commanded (HAE) altitude (feet)
 double Player::getCommandedAltitudeFt() const
 {
    return getCommandedAltitude() * Basic::Distance::M2FT;
@@ -1883,7 +1883,7 @@ bool Player::setAltitudeHoldOn(const bool b)
       return false;
 }
 
-// Sets cmmanded (HAE) altitude, default (meters)
+// Sets commanded (HAE) altitude, default (meters)
 bool Player::setCommandedAltitude(const double a)
 {
    if (getDynamicsModel() != 0)
@@ -1892,13 +1892,13 @@ bool Player::setCommandedAltitude(const double a)
       return false;
 }
 
-// Sets cmmanded (HAE) altitude (meters)
+// Sets commanded (HAE) altitude (meters)
 bool Player::setCommandedAltitudeM(const double a)
 {
    return setCommandedAltitude(a);
 }
 
-// Sets cmmanded (HAE) altitude (Feet)
+// Sets commanded (HAE) altitude (feet)
 bool Player::setCommandedAltitudeFt(const double a)
 {
    return setCommandedAltitude( a * Basic::Distance::FT2M );
@@ -2216,7 +2216,7 @@ bool Player::setRotMat(const osg::Matrixd& rr)
    // set the matrix
    rm = rr;
 
-   // Set quaternion
+   // Set quaternions
    q.set(rm);
 
    // Compute the euler angles and the sin/cos values of the angles
@@ -2231,7 +2231,7 @@ bool Player::setRotMat(const osg::Matrixd& rr)
    return true;
 }
 
-// Sets the quaternon
+// Sets the quaternion
 bool Player::setQuaternions(const osg::Quat& newQ)
 {
    // Set quaternions
@@ -2695,7 +2695,7 @@ bool Player::onWpnRelEvent(const Basic::Boolean* const sw)
       used = p->onWpnRelEvent(sw);
    }
    else {
-      // We we dont' have an SMS, we can do some TBD default handling of this event.
+      // We don't have an SMS, we can do some TBD default handling of this event.
       if (isMessageEnabled(MSG_WARNING)) {
          std::cout << "Player::onWpnRelEvent() No SMS!" << std::endl;
       }

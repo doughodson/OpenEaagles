@@ -88,7 +88,7 @@ void CadrgClut::load(CadrgFrameEntry& frame, int cib, ColorTableSizes clutSize)
 	uint ccTblTgt[MAXCCRECS];
 	// Found lookup table flag 
 	bool foundLut = false;
-    // Temporoary filename
+    // Temporary filename
     Basic::String* string = new Basic::String(frame.getDirectory());
     string->catStr(frame.getFileName());
 
@@ -223,7 +223,7 @@ void CadrgClut::load(CadrgFrameEntry& frame, int cib, ColorTableSizes clutSize)
 						// rgb is rgba, size = 4 
 						fin.read((char *) &rgb[j], sizeof(rgb[j]));
 
-						// Transparenecy exists 
+						// Transparency exists 
 						if (numColRecs[i] == 217) {
 							// White, not black 
 							rgb[numColRecs[i] - 1].red = 255;
@@ -287,7 +287,7 @@ void CadrgClut::load(CadrgFrameEntry& frame, int cib, ColorTableSizes clutSize)
 			fin.read((char *) &numColRecs[0], sizeof(numColRecs[0]));
 			swap((unsigned char *) &numColRecs[0], sizeof(numColRecs[0]));
 
-			// NumColRecs[0] can't be 216 for a cct 
+			// numColRecs[0] can't be 216 for a cct 
 			// Read, use 32 or 33 clrs 	OR read, use 16 or 17 clrs 
 			if ((((numColRecs[0] == 32) || (numColRecs[0] == 33)) && (clutSize == CLUT_32)) || (((numColRecs[0] == 16) || (numColRecs[0] == 17)) && (clutSize == CLUT_16))) foundLut = true;
 			else foundLut = false;

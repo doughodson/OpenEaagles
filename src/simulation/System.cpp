@@ -53,7 +53,7 @@ void System::copyData(const System& org, const bool)
 {
    BaseClass::copyData(org);
 
-   // Don't copy ownship, we'll need to reaquire it.
+   // Don't copy ownship, we'll need to reacquire it.
    ownship = 0;
 
    pwrSw = org.pwrSw;
@@ -247,7 +247,7 @@ bool System::setPowerSwitch(const unsigned int p)
    return true;
 }
 
-// find owr ownship
+// find our ownship
 bool System::findOwnship()
 {
    if (ownship == 0) {

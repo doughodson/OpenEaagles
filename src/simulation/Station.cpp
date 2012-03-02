@@ -616,7 +616,7 @@ void Station::processBackgroundTasks(const LCreal dt)
    // Our simulation model
    if (sim != 0) sim->updateData(dt);
 
-   // The OTW interfaces
+   // Our OTW interfaces
    if (otw != 0) {
       Basic::List::Item* item = otw ->getFirstItem();
       while (item != 0) {

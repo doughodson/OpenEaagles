@@ -375,7 +375,7 @@ unsigned int Weapon::getMajorType() const
 }
 
 //------------------------------------------------------------------------------
-// Default designator evnet handler
+// Default designator event handler
 //------------------------------------------------------------------------------
 bool Weapon::onDesignatorEvent(const Designator* const)
 {
@@ -950,7 +950,8 @@ bool Weapon::isDummy() const
 
 // Time Of Flight (seconds) since release
 LCreal Weapon::getTOF() const
-{ return tof;
+{
+   return tof;
 }
 
 // Max TOF (seconds)
