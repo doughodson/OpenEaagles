@@ -244,6 +244,7 @@ void Radar::receive(const LCreal dt)
    lcUnlock(packetLock);
 
    while (em != 0) {
+
       // exclude noise jammers (accounted for already in RfSystem::rfReceivedEmission)
       if (em->getTransmitter() == this || (em->isECM() && !em->isECMType(Emission::ECM_NOISE)) ) {
 
@@ -321,10 +322,10 @@ void Radar::receive(const LCreal dt)
       em->unref();   // this unref() undoes the ref() done by RfSystem::rfReceivedEmission
       em = 0;
 
-      if (np >= 0 && np < MAX_EMISSIONS) {
-          packets[np] = 0;
-          signals[np] = 0;
-      }
+      //if (np >= 0 && np < MAX_EMISSIONS) {
+      //    packets[np] = 0;
+      //    signals[np] = 0;
+      //}
 
       // Get another emission from the queue
       lcLock(packetLock);

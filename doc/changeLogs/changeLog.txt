@@ -88,8 +88,8 @@ dis simulation
 Simulation
 
    Antenna class
-      1) process() function -- limited the number per frame of "in use" emissions
-         being checked if 'free'.
+      1) process() function -- Added the 'recycle' slot that enables or disables the
+         reuse of Emission objects (default is to reuse).
 
    Radar class
       1) computeSweepIndex() -- returned to original version (negative azimuth angle bug fix)
