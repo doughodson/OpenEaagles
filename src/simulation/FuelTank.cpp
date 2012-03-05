@@ -59,7 +59,7 @@ void FuelTank::reset()
 //------------------------------------------------------------------------------
 // Tank capacity (lb) functioms
 //------------------------------------------------------------------------------
-LCreal FuelTank::getCapacity() const            { return capacity;        }
+LCreal FuelTank::getCapacity() const            { return capacity; }
 bool   FuelTank::setCapacity(const LCreal cap)  { capacity = cap; return true; }
 bool   FuelTank::isCapacityValid() const        { return (capacity >= 0); }
 
@@ -77,7 +77,9 @@ bool   FuelTank::isFuelWtValid() const          { return (fuelWt >= 0 && fuelWt 
 bool FuelTank::setSlotFuelWt(const Basic::Number* const msg)
 {
     if (msg == 0) return false;
-    return setFuelWt( msg->getReal() );
+    bool ok = setFuelWt( msg->getReal() );
+    if (ok) initFuelWt = getFuelWt();
+    return ok;
 }
 
 bool FuelTank::setSlotCapacity(const Basic::Number* const msg)

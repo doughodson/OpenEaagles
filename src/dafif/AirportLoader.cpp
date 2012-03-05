@@ -1577,7 +1577,7 @@ void printLongitude( char* buff, double lon )
 
    int fsec = int((dsec - double(sec)) * 100.0 );
 
-   std:;sprintf( &buff[1], "%3d%02d%02d%02d", deg, min, sec, fsec );
+   std::sprintf( &buff[1], "%3d%02d%02d%02d", deg, min, sec, fsec );
 }
 
 
