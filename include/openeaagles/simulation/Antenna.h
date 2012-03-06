@@ -26,16 +26,27 @@ class RfSystem;
 // Slots:
 //      polarization    <Basic::String>  ! Antenna Polarization  { none, vertical, horizontal, slant, RHC, LHC }
 //                                       ! (default: NONE)
+//
 //      threshold       <Basic::Power>   ! Antenna threshold  (default: 0.0)
+//
 //      gain            <Basic::Number>  ! Gain (default: 1.0)              (no units)
+//
 //      gainPattern     <Basic::Function> ! Gain pattern (Basic::Func1 or Basic::Func2) (db) 
 //                                       ! (default: 0)
+//
 //      gainPatternDeg  <Basic::Number>  ! Gain pattern is in degrees (true) or radians (false) (default: false)
 //
+//      recycle         <Basic::Boolean> ! Recycle emissions flag (default: true)
 //
-// Other defaults:
-//      maxPlayersOfInterest: 200
-//      playerOfInterestTypes: { "air" "weapon" } 
+// 
+// Note
+//    1) Other defaults:
+//          maxPlayersOfInterest: 200
+//          playerOfInterestTypes: { "air" "weapon" } 
+//
+//    2) When the Emission 'recycle' flag is enabled (default behavior), the
+//       system will try to reuse Emission objects, which removes the overhead
+//       of creating and deleting them.
 //
 //------------------------------------------------------------------------------
 class Antenna : public ScanGimbal  
@@ -76,10 +87,14 @@ public:
       return (gain * lambda * lambda)/(4.0 * PI);
    }
 
+   // Recycle emissions flag (reuse old emission structions instead of creating new ones)
+   bool isEmissionRecycleEnabled() const       { return recycle; }
+
    // Member functions
    virtual bool setPolarization(const Polarization p) { polar = p; return true; }
    virtual bool setThreshold(const double th);
    virtual bool setGain(double const g);
+   virtual bool setEmissionRecycleFlag(const bool enable);
 
    // slot functions that need public access because there is no corresponding member function
    virtual bool setSlotPolarization(Basic::String* const v);
@@ -87,6 +102,7 @@ public:
    virtual bool setSlotGain(const Basic::Number* const g);
    virtual bool setSlotGainPattern(Basic::Function* const func);
    virtual bool setSlotGainPatternDeg(const Basic::Number* const g);
+   virtual bool setSlotRecycleFlg(const Basic::Number* const);
 
    // Event handler(s)
    virtual bool onRfEmissionReturnEventAntenna(Emission* const);
@@ -133,6 +149,8 @@ private:
                                    // power is below this threshold (watts)
 
    bool        gainPatternDeg;     // Gain pattern is in degrees flag (else radians)
+
+   bool        recycle;            // Recycle emissions flag
 };
 
 } // End Simulation namespace

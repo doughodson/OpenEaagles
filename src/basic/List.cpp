@@ -162,8 +162,10 @@ bool List::remove(const Object* const obj)
         for ( ; d != 0; d = d->getNext() ) {
             if ( obj == d->getValue() )  break;
         }
-        if (d != 0) remove(d);
-        ok = true;
+        if (d != 0) {
+           remove(d);
+           ok = true;
+        } 
     }
     if (ok) obj->unref();
     return ok;

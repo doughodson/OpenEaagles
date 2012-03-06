@@ -30,11 +30,20 @@ basic
    List class
       1) Removed the find() member function;
          use the getIndex() member function instead
+      2) remove(Object*) -- When the object is not found in the list, it no
+         longer unref()'s the object (bug fix)
 
    SPtr<> template
       1) Added an option flag to constructor to avoid auto
          referencing pointer -- see SPtr.h for documentation
          and examples
+
+   ThreadPeriodicTask class
+      1) mainThreadFunc() -- windows version; now passing a constant delta time
+         to each frame (linux version already used a constant delta time)
+
+   Complex number class
+      ## new class derived from Number ##
 
 --------------------------------------------------------------------------------
 basicGL
@@ -73,4 +82,15 @@ dis simulation
       4) New Lifeform appearance states added
       5) various BaseClass::deleteData() fixed
       6) removed call to clear() from deleteData
+
+
+--------------------------------------------------------------------------------
+Simulation
+
+   Antenna class
+      1) process() function -- Added the 'recycle' slot that enables or disables the
+         reuse of Emission objects (default is to reuse).
+
+   Radar class
+      1) computeSweepIndex() -- returned to original version (negative azimuth angle bug fix)
 

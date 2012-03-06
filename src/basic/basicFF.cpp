@@ -13,6 +13,7 @@
 
 // Numbers
 #include "openeaagles/basic/Boolean.h"
+#include "openeaagles/basic/Complex.h"
 #include "openeaagles/basic/Integer.h"
 #include "openeaagles/basic/Float.h"
 #include "openeaagles/basic/Decibel.h"
@@ -70,10 +71,12 @@ Object* basicFormFunc(const char* formname)
 {
     Object* newform = 0;
 
-
     // Numbers
     if ( strcmp(formname, Number::getFormName()) == 0 ) {
         newform = new Number();
+    }
+    else if ( strcmp(formname, Complex::getFormName()) == 0 ) {
+        newform = new Complex();
     }
     else if ( strcmp(formname, Integer::getFormName()) == 0 ) {
         newform = new Integer();

@@ -231,8 +231,8 @@ bool Radio::setMaxDetectRange(const LCreal num)
 // setRadioID() -- set Radio ID
 bool Radio::setRadioId(const unsigned short num)
 {
-    radioId = num;
-    return true;
+   radioId = num;
+   return true;
 }
 
 //------------------------------------------------------------------------------
@@ -240,14 +240,14 @@ bool Radio::setRadioId(const unsigned short num)
 //------------------------------------------------------------------------------
 void Radio::receive(const LCreal dt)
 {
-    BaseClass::receive(dt);
+   BaseClass::receive(dt);
 
-    // Receiver losses
-    LCreal noise = getRfRecvNoise();
+   // Receiver losses
+   LCreal noise = getRfRecvNoise();
 
-    // ---
-    // Process Emissions
-    // ---
+   // ---
+   // Process Emissions
+   // ---
 
    Emission* em = 0;
    LCreal signal = 0;
@@ -255,7 +255,7 @@ void Radio::receive(const LCreal dt)
    // Get an emission from the queue
    lcLock(packetLock);
    if (np > 0) {
-        np--; // Decrement 'np', now the array index
+      np--; // Decrement 'np', now the array index
       em = packets[np];
       signal = signals[np];
    }
@@ -264,17 +264,17 @@ void Radio::receive(const LCreal dt)
    while (em != 0) {
 
 
-        // Signal/Noise  (Equation 2-9)
-        LCreal sn = signal / noise;
-        LCreal snDbl = 10.0f * lcLog10(sn);
-            
-        // Is S/N above receiver threshold?
-        if ( snDbl >= getRfThreshold() ) {
-            // Report this valid emission to the radio model ...
-            receivedEmissionReport(em);
-        }
+      // Signal/Noise  (Equation 2-9)
+      LCreal sn = signal / noise;
+      LCreal snDbl = 10.0f * lcLog10(sn);
 
-        em->unref();
+      // Is S/N above receiver threshold?
+      if ( snDbl >= getRfThreshold() ) {
+         // Report this valid emission to the radio model ...
+         receivedEmissionReport(em);
+      }
+
+      em->unref();
       em = 0;
 
       // Get another emission from the queue
@@ -285,7 +285,7 @@ void Radio::receive(const LCreal dt)
          signal = signals[np];
       }
       lcUnlock(packetLock);
-    }
+   }
 }
 
 //------------------------------------------------------------------------------
@@ -321,9 +321,9 @@ bool Radio::setSlotChannels(const Basic::PairStream* const msg)
    if (nc == 0 && msg != 0) {
       std::cerr << "Radio::setSlotChannels() Number of channels is not set!" << std::endl;
       return false;
-}
+   }
 
-{
+   {
       unsigned short chan = 1;
       const Basic::List::Item* item = msg->getFirstItem();
       while (chan <= nc && item != 0) {
@@ -346,42 +346,42 @@ bool Radio::setSlotChannels(const Basic::PairStream* const msg)
       }
    }
 
-    return true;
+   return true;
 }
 
 // channel: Channel the radio is set to
 bool Radio::setSlotChannel(Basic::Number* const msg)
 {
-    bool ok = false;
+   bool ok = false;
    if (msg != 0) {
       int v = msg->getInt();
       if (v >= 0 && v <= 0xFFFF) {
          ok = setChannel( (unsigned short) v );
       }
-    }
-    return ok;
+   }
+   return ok;
 }
 
 // maxDetectRange: maximum detection capability (NM)
 bool Radio::setSlotMaxDetectRange(Basic::Number* const num)
 {
-    bool ok = false;
-    if (num != 0) {
-        maxDetectRange = num->getReal();
-        ok = true;
-    }
-    return ok;
+   bool ok = false;
+   if (num != 0) {
+      maxDetectRange = num->getReal();
+      ok = true;
+   }
+   return ok;
 }
 
 // radio ID: the radio id used for DIS
 bool Radio::setSlotRadioId(Basic::Number* const num)
 {
-    bool ok = false;
-    if (num != 0) {
-        unsigned short num2 = (unsigned short)num->getInt();
-        ok = setRadioId(num2);
-    }
-    return ok;
+   bool ok = false;
+   if (num != 0) {
+      unsigned short num2 = (unsigned short)num->getInt();
+      ok = setRadioId(num2);
+   }
+   return ok;
 }
 
 //------------------------------------------------------------------------------
@@ -389,7 +389,7 @@ bool Radio::setSlotRadioId(Basic::Number* const num)
 //------------------------------------------------------------------------------
 Basic::Object* Radio::getSlotByIndex(const int si)
 {
-    return BaseClass::getSlotByIndex(si);
+   return BaseClass::getSlotByIndex(si);
 }
 
 //------------------------------------------------------------------------------
@@ -397,12 +397,12 @@ Basic::Object* Radio::getSlotByIndex(const int si)
 //------------------------------------------------------------------------------
 std::ostream& Radio::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
-    int j = 0;
-    if ( !slotsOnly ) {
-        indent(sout,i);
-        sout << "( " << getFormName() << std::endl;
-        j = 4;
-    }
+   int j = 0;
+   if ( !slotsOnly ) {
+      indent(sout,i);
+      sout << "( " << getFormName() << std::endl;
+      j = 4;
+   }
 
    indent(sout,i+j);
    sout << "numChannels: " << getNumberOfChannels() << std::endl;
@@ -432,15 +432,16 @@ std::ostream& Radio::serialize(std::ostream& sout, const int i, const bool slots
       sout << "radioID: " << radioId << std::endl;
    }
 
-    BaseClass::serialize(sout,i+j,true);
+   BaseClass::serialize(sout,i+j,true);
 
-    if ( !slotsOnly ) {
-        indent(sout,i);
-        sout << ")" << std::endl;
-    }
+   if ( !slotsOnly ) {
+      indent(sout,i);
+      sout << ")" << std::endl;
+   }
 
-    return sout;
+   return sout;
 }
+
 
 //==============================================================================
 // Class: CommRadio
