@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// classes: StoresMgr, SimpleStoresMgr
+// Classes: StoresMgr, SimpleStoresMgr
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_Simulation_StoresMgr_H__
 #define __Eaagles_Simulation_StoresMgr_H__
@@ -229,12 +229,12 @@ protected:
 private:
    void initData();
 
-   Missile* getNextMissileImp();        // First avaliable missile from our weapons list (Pre-ref()'d) (const version)
-   Sam* getNextSamImp();                // First avaliable SAM from our weapons list (Pre-ref()'d) (const version)
-   Bomb* getNextBombImp();              // First avaliable bomb from our weapons list (Pre-ref()'d) (const version)
-   Chaff* getNextChaffImp();            // First avaliable chaff bundle from our weapons list (Pre-ref()'d) (const version)
-   Flare* getNextFlareImp();            // First avaliable flare from our weapons list (Pre-ref()'d) (const version)
-   Decoy* getNextDecoyImp();            // First avaliable decoy from our weapons list (Pre-ref()'d) (const version)
+   Missile* getNextMissileImp();        // First available missile from our weapons list (Pre-ref()'d) (const version)
+   Sam* getNextSamImp();                // First available SAM from our weapons list (Pre-ref()'d) (const version)
+   Bomb* getNextBombImp();              // First available bomb from our weapons list (Pre-ref()'d) (const version)
+   Chaff* getNextChaffImp();            // First available chaff bundle from our weapons list (Pre-ref()'d) (const version)
+   Flare* getNextFlareImp();            // First available flare from our weapons list (Pre-ref()'d) (const version)
+   Decoy* getNextDecoyImp();            // First available decoy from our weapons list (Pre-ref()'d) (const version)
 
    LCreal wpnRelTimer;     // Weapon released timer
    int    curWpnID;        // Current Weapon ID

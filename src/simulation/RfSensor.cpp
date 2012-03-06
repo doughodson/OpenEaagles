@@ -545,7 +545,7 @@ bool RfSensor::setSlotBeamWidth(const Basic::Angle* const msg)
       LCreal x = (LCreal)Basic::Radians::convertStatic( *msg );
       ok = setBeamWidth( x );
       if (!ok) {
-         std::cerr << "RfSensor::setPulseWidth: Error setting beam width!" << std::endl;
+         std::cerr << "RfSensor::setBeamWidth: Error setting beam width!" << std::endl;
       }
    }
 
@@ -560,7 +560,7 @@ bool RfSensor::setSlotBeamWidth(const Basic::Number* const msg)
    if (msg != 0) {
       ok = setBeamWidth( msg->getReal() );
       if (!ok) {
-         std::cerr << "RfSensor::setPulseWidth: Error setting beam width!" << std::endl;
+         std::cerr << "RfSensor::setBeamWidth: Error setting beam width!" << std::endl;
       }
 
    }

@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Classes: Table, Table1, Table2, Table3, Table4, Table5
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basc_Tables_H__
-#define __Eaagles_Basc_Tables_H__
+#ifndef __Eaagles_Basic_Tables_H__
+#define __Eaagles_Basic_Tables_H__
 
 #include "openeaagles/basic/Object.h"
 #include "openeaagles/basic/Functions.h"
@@ -14,7 +14,7 @@ class List;
 class Number;
 
 //==============================================================================
-// Class: Table 
+// Class: Table
 //
 // Description: Abstract table class ---
 //
@@ -499,4 +499,4 @@ private:
 } // End Basic namespace
 } // End Eaagles namespace
 
-#endif  /* __Tables_H_FE7FB195_EDAB_4ce2_A2FB_3E238A8B729A__ */
+#endif  /* __Eaagles_Basic_Tables_H__ */

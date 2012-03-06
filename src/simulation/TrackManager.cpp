@@ -440,7 +440,7 @@ bool TrackManager::setSlotMaxTracks(const Basic::Number* const num)
 }
 
 //------------------------------------------------------------------------------
-// setMaxTrackAge() -- Sets the maximum age of tracks
+// setSlotMaxTrackAge() -- Sets the maximum age of tracks
 //------------------------------------------------------------------------------
 bool TrackManager::setSlotMaxTrackAge(const Basic::Number* const num)
 {

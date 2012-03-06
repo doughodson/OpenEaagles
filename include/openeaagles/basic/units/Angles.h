@@ -12,7 +12,7 @@
 // Public methods (Defined in Angle, and inherited by all derived classes):
 //
 //	    set(const double v)
-//		    Sets an Angle derived instance with an double.
+//		    Sets an Angle derived instance with a double.
 //
 //	    set(const Angle& n)
 //		    Sets, and converts if necessary, an Angle derived instance with

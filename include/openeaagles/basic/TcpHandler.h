@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // Classes: TcpHandler, TcpClient, TcpServerMulti, TcpServerSingle
 //------------------------------------------------------------------------------
-#ifndef	__Eaagles_Basic_TcpHandler_H__
+#ifndef __Eaagles_Basic_TcpHandler_H__
 #define __Eaagles_Basic_TcpHandler_H__
 
 #include "openeaagles/basic/NetHandler.h"

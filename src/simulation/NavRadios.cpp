@@ -82,7 +82,7 @@ bool NavRadio::shutdownNotification()
 double NavRadio::getLatitude() const
 {
    return latitude;
-   }
+}
 
 double NavRadio::getLongitude() const
 {
@@ -256,17 +256,17 @@ void TacanRadio::updateData(const LCreal dt)
 TacanRadio::Band TacanRadio::getBand() const
 {
    return band;
-    }
+}
 
 double TacanRadio::getRange() const
 {
     return range;
-};
+}
 
 double TacanRadio::getBearing() const
 {
     return bearing;
-};
+}
 
 //------------------------------------------------------------------------------
 // Set functions

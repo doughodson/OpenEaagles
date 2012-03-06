@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
-// Classes:	RfSignature, SigSphere, SigPlate, SigCone
+// Classes: RfSignature, SigSphere, SigPlate, SigCone
 //
-// Base class  Object -> Component -> RfSignature
+// Base class: Object -> Component -> RfSignature
 //                          RfSignature -> SigConstant
 //                          RfSignature -> SigSphere
 //                          RfSignature -> SigPlate

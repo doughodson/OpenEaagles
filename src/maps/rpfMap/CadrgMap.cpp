@@ -158,7 +158,7 @@ void CadrgMap::sortMaps(const int count)
     // Now we have created all of our CadrgFile, we need to sort them by levels!
     if (count > 0) {
         std::cout << "CadrgMap - loading map files..." << std::endl;
-        // Go through and see if we have a matching scales
+        // Go through and see if we have matching scales
         // list of possible scales
         Basic::String* scales = new Basic::String[MAX_FILES];
         int sCount = 0;
@@ -656,7 +656,7 @@ void* CadrgMap::getPixels(const int row, const int column, TexturePager* tp)
                             stack->removeHead();
                             // Tell it about the frame entry that owns it
                             x->load(frameEntry);
-                            // Now on the other side, tell our frame entry about it's child
+                            // Now on the other side, tell our frame entry about its child
                             frameEntry->setFrame(x);
                         }
                     }

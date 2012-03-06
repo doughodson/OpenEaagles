@@ -93,10 +93,13 @@ public:
     // Conversions between times
     static LCreal SecondsToMilliSeconds(const LCreal v)  { return v * S2MS; }
     static LCreal MilliSecondsToSeconds(const LCreal v)  { return v * MS2S; }
+
     static LCreal MinutesToSeconds(const LCreal v)       { return v * M2S; }
     static LCreal SecondsToMinutes(const LCreal v)       { return v * S2M; }
+
     static LCreal HoursToMinutes(const LCreal v)         { return (v * H2S) * S2M; }
     static LCreal MinutesToHours(const LCreal v)         { return (v * M2S) * S2H; }
+
     static LCreal DaysToHours(const LCreal v)            { return (v * D2S) * S2H; }
     static LCreal HoursToDays(const LCreal v)            { return (v * H2S) * S2D; }
 

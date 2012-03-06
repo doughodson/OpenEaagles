@@ -399,7 +399,7 @@ public:
       RED      = 0x02,        // Red force
       YELLOW   = 0x04,        // 3rd force
       CYAN     = 0x08,        // 4th force
-      GRAY     = 0x10,        // Neutal force
+      GRAY     = 0x10,        // Neutral force
       WHITE    = 0x20         // Commerical/Civilian
    };
 
@@ -505,7 +505,7 @@ public:
                                                    //    Where: 'Vw' is a world(ECEF) vector; 'Vi' is an inertial (NED) vector
 
    bool getPositionLL(double* const lat, double* const lon) const;                     // Player's Lat/lon (degrees)
-   bool getPositionLLA(double* const lat, double* const lon, double* const alt) const; // Player's Lat/Lon (Degrees) and altitude (meters)
+   bool getPositionLLA(double* const lat, double* const lon, double* const alt) const; // Player's Lat/Lon (degrees) and altitude (meters)
 
    double getXPosition() const;                    // North(+) or south(-) of the sim reference point (meters)
    double getYPosition() const;                    // East(+) or west(-) of the sim reference point (meters)
@@ -812,7 +812,7 @@ public:
    // Sets the rotational matrix
    virtual bool setRotMat(const osg::Matrixd&);
 
-   // Sets the quaternons
+   // Sets the quaternions
    virtual bool setQuaternions(const osg::Quat&);
 
    // ---
@@ -1173,7 +1173,7 @@ private:
    // ---
    // Outgoing network support data
    // ---
-   bool       enableNetOutput;   // Allow output to the newwork
+   bool       enableNetOutput;   // Allow output to the network
    Nib**      nibList;           // Pointer to a list of outgoing NIBs
 
    // ---

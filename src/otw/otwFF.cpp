@@ -22,7 +22,7 @@ Basic::Object* otwFormFunc(const char* formname)
     }
   
     // PC Visual Driver
-    if ( strcmp(formname, OtwPC::getFormName()) == 0 ) {
+    else if ( strcmp(formname, OtwPC::getFormName()) == 0 ) {
         newform = new OtwPC();
     }
 

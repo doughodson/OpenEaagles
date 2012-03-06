@@ -95,7 +95,7 @@ public:
    // Initialize the network (if any)
    virtual bool initNetwork();
 
-   // Clear our data buffers
+   // Clear data
    virtual void clear();
 };
 
