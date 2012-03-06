@@ -1,0 +1,96 @@
+================================================================================
+Changes since v12.01
+================================================================================
+
+--------------------------------------------------------------------------------
+basic
+
+   eventTokens.h
+      1) added REFUEL EVENT, work in progress
+
+   AngularVelocity class
+      1) Minor update to correct allocating angular objects
+         on stack when performing conversions
+
+   Object class
+      1) Removed version, magicKey and magicLock member data
+
+   Component class
+      1) Minor update to correct allocating String or Integer
+         object on stack when setting obj selection
+
+   LatLon class
+      1) Added better input error checking
+      2) changed 'LCreal' type variables to type 'double'
+
+   LinearVelocity class
+      1) Minor update to correct allocating distance objects
+         on stack when performing conversions
+
+   List class
+      1) Removed the find() member function;
+         use the getIndex() member function instead
+      2) remove(Object*) -- When the object is not found in the list, it no
+         longer unref()'s the object (bug fix)
+
+   SPtr<> template
+      1) Added an option flag to constructor to avoid auto
+         referencing pointer -- see SPtr.h for documentation
+         and examples
+
+   ThreadPeriodicTask class
+      1) mainThreadFunc() -- windows version; now passing a constant delta time
+         to each frame (linux version already used a constant delta time)
+
+   Complex number class
+      ## new class derived from Number ##
+
+--------------------------------------------------------------------------------
+basicGL
+
+   Graphic class
+      1) Removed the Color() function; use setColor() instead
+
+
+--------------------------------------------------------------------------------
+dis
+
+   EmissionPduHandler
+      1) started to add slot for beam function.
+         as this change will break existing functionality, hold off until a
+         compatible change is made
+
+   pdu.h
+      1) added Designator PDU
+
+--------------------------------------------------------------------------------
+dis simulation
+
+
+   SynchronizedState class functionality
+      1) added/modified these files:
+         dis/Nib.h
+         dis/NetIO.cpp
+         dis/NetIOPlatforms.cpp
+         dis/Nib.cpp
+         simulation/NetIO.cpp
+         simulation/Nib.cpp
+         simulation/Player.cpp
+      2) SynchronizedState class now used for dead reckoning
+      3) NetIO player update correct to "setAngularVelocities" from
+         "setGeocAngluarVelocities"
+      4) New Lifeform appearance states added
+      5) various BaseClass::deleteData() fixed
+      6) removed call to clear() from deleteData
+
+
+--------------------------------------------------------------------------------
+Simulation
+
+   Antenna class
+      1) process() function -- Added the 'recycle' slot that enables or disables the
+         reuse of Emission objects (default is to reuse).
+
+   Radar class
+      1) computeSweepIndex() -- returned to original version (negative azimuth angle bug fix)
+
