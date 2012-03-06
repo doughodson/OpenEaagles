@@ -11,6 +11,7 @@ OBJS =  \
 	$(LIB)(Cie.o) \
 	$(LIB)(Cmy.o) \
 	$(LIB)(Color.o) \
+	$(LIB)(Complex.o) \
 	$(LIB)(Component.o) \
 	$(LIB)(Decibel.o) \
 	$(LIB)(EarthModel.o) \
