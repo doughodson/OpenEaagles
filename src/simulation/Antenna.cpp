@@ -181,7 +181,10 @@ void Antenna::process(const LCreal dt)
             // No one else is referencing the emission, push to the free stack
             em->clear();
             lcLock(freeEmLock);
-            if (freeEmStack.isNotFull()) freeEmStack.push(em);
+            if (freeEmStack.isNotFull()) {
+               em->clear();
+               freeEmStack.push(em);
+            }
             else em->unref();
             lcUnlock(freeEmLock);
          }
