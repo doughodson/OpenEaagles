@@ -172,7 +172,7 @@ unsigned long ThreadPeriodicTask::mainThreadFunc()
    }
 
    // Delta time
-   double dt = 1.0/double(getRate());
+   const double dt = 1.0/double(getRate());
    int sec0 = int(dt);
    int nsec0 = int((dt - double(sec0)) * 1000000000.0);
 
@@ -202,6 +202,7 @@ unsigned long ThreadPeriodicTask::mainThreadFunc()
       // User defined tasks
       // ---
       this->userFunc( LCreal(dt) );
+      tcnt++;
 
       // ---
       // Wait for the end of frame

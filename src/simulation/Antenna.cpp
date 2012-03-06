@@ -29,6 +29,7 @@ BEGIN_SLOTTABLE(Antenna)
     "gain",                 //  3: Gain                             (no units)
     "gainPattern",          //  4: Gain pattern (Basic::Func1 or Basic::Func2) (db) 
     "gainPatternDeg",       //  5: Gain pattern in degrees flag (true: degrees, false(default): radians)
+    "recycle",              //  6: Recycle emissions flag (default: true)
 END_SLOTTABLE(Antenna)
 
 // Map slot table to handles 
@@ -38,6 +39,7 @@ BEGIN_SLOT_MAP(Antenna)
     ON_SLOT(3,  setSlotGain,              Basic::Number)
     ON_SLOT(4,  setSlotGainPattern,       Basic::Function)
     ON_SLOT(5,  setSlotGainPatternDeg,    Basic::Number)
+    ON_SLOT(6,  setSlotRecycleFlg,        Basic::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -94,6 +96,7 @@ void Antenna::initData()
    polar = NONE;
    threshold = 0.0;
    gainPatternDeg = false;  // default: radians
+   recycle = true; // recycle emissions
 }
 
 //------------------------------------------------------------------------------
@@ -114,6 +117,8 @@ void Antenna::copyData(const Antenna& org, const bool cc)
      setSlotGainPattern( (Basic::Function*) org.gainPattern->clone() );
     }
     else setSlotGainPattern(0);
+
+    recycle = org.recycle;
 }
 
 void Antenna::deleteData()
@@ -153,34 +158,36 @@ void Antenna::process(const LCreal dt)
    BaseClass::process(dt);
 
    // ---
+   // Recycle emissions ...
    // Update emission queues: from 'in-use' to 'free' 
    // ---
-   lcLock(inUseEmLock);
-      int n = inUseEmQueue.entries();
-   //std::cout << "antenna::process, inUseEmQueue before n= " << n << std::endl;
-   for (int i = 0; i < n; i++) {
+   if (recycle) {
+      unsigned int n = inUseEmQueue.entries();
+
+      for (unsigned int i = 0; i < n; i++) {
+
+         lcLock(inUseEmLock);
          Emission* em = inUseEmQueue.get();
-         if (em != 0) {
-            if (em->getRefCount() <= 1) {
-                  // No one else is referencing the emission, push on free stack
-                  em->clear();
+         lcUnlock(inUseEmLock);
+
+         if (em != 0 && em->getRefCount() > 1) {
+            // Others are still referencing the emission, put back on in-use queue
+            lcLock(inUseEmLock);
+            inUseEmQueue.put(em);
+            lcUnlock(inUseEmLock);
+         }
+
+         else if (em != 0 && em->getRefCount() <= 1) {
+            // No one else is referencing the emission, push to the free stack
+            em->clear();
             lcLock(freeEmLock);
-                  if (freeEmStack.isNotFull()) {
-                     freeEmStack.push(em);
-                  }
-                  else {
-                     em->unref();
-                  }
+            if (freeEmStack.isNotFull()) freeEmStack.push(em);
+            else em->unref();
             lcUnlock(freeEmLock);
-            }
-            else {
-                  // Others are still referencing the emission, put back on in-use queue
-                  inUseEmQueue.put(em);
-            }
          }
       }
-   //std::cout << "antenna::process, inUseEmQueue after n= " << inUseEmQueue.entries() << std::endl;
-   lcUnlock(inUseEmLock);
+   }
+
 }
 
 
@@ -299,6 +306,18 @@ bool Antenna::setSlotGainPatternDeg(const Basic::Number* const msg)
     }
     return ok;
 }
+   
+//------------------------------------------------------------------------------
+// setSlotRecycleFlg() -- sets the emission recycle flag
+//------------------------------------------------------------------------------
+bool Antenna::setSlotRecycleFlg(const Basic::Number* const msg)
+{
+    bool ok = true;
+    if (msg != 0) {
+        ok = setEmissionRecycleFlag( msg->getBoolean() );
+    }
+    return ok;
+}
 
 //------------------------------------------------------------------------------
 // setThreshold() - sets our antenna threshold
@@ -324,6 +343,15 @@ bool Antenna::setGain(double const value)
         ok = true;
     }
     return ok;
+}
+
+//------------------------------------------------------------------------------
+// setEmissionRecycleFlag: sets the recycle flag
+//------------------------------------------------------------------------------
+bool Antenna::setEmissionRecycleFlag(const bool enable)
+{
+   recycle = enable;
+   return true;
 }
 
 //------------------------------------------------------------------------------
@@ -448,9 +476,12 @@ void Antenna::rfTransmit(Emission* const xmit)
          if (erp[i] > threshold) {
 
             // Get a free emission packet
-            lcLock(freeEmLock);
-            Emission* em = freeEmStack.pop();
-            lcUnlock(freeEmLock);
+            Emission* em(0);
+            if (recycle) {
+               lcLock(freeEmLock);
+               em = freeEmStack.pop();
+               lcUnlock(freeEmLock);
+            }
 
             bool cloned = false;
             if (em == 0) {
@@ -485,33 +516,23 @@ void Antenna::rfTransmit(Emission* const xmit)
                // c) Send the emission to the target
                targets[i]->event(RF_EMISSION, em);
 
-               // d) Dispose of the emission
-               //em->unref();
-               if (em->getRefCount() <= 1) {
-                  em->clear();
-                  lcLock(freeEmLock);
-                  if (freeEmStack.isNotFull()) {
-                     // Recycle the emission packet
-                     freeEmStack.push(em);
-                  }
-                  else {
-                     // or just forget it
-                     em->unref();
-                  }
-                  lcUnlock(freeEmLock);
-               }
-               else {
+               // d) Recycle the emission
+               bool recycled = false;
+               if (recycle) {
                   lcLock(inUseEmLock);
                   if (inUseEmQueue.isNotFull()) {
                      // Store for future reference
                      inUseEmQueue.put(em);
-                  }
-                  else {
-                     // or just forget it
-                     em->unref();
+                     recycled = true;
                   }
                   lcUnlock(inUseEmLock);
                }
+
+               // or just forget it
+               else {
+                  em->unref();
+              }
+
             }
             else {
                // When we couldn't get a free emission packet
@@ -728,6 +749,9 @@ std::ostream& Antenna::serialize(std::ostream& sout, const int i, const bool slo
     else if (polar == RHC) sout << "RHC";
     else if (polar == LHC) sout << "LHC";
     sout << std::endl;
+
+    indent(sout,i+j);
+   sout << "recycle: " << (isEmissionRecycleEnabled() ? "true" : "false") << std::endl;
 
     BaseClass::serialize(sout,i+j,true);
 

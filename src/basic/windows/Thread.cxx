@@ -228,19 +228,12 @@ unsigned long ThreadPeriodicTask::mainThreadFunc()
       double refTime = 0.0;                     // Reference time
       double startTime = getComputerTime();;    // Computer's time of day (sec) run started
       double dt = 1.0/double(getRate());
-      double lastTime = 0; /* #DPG# */
 
       while (!getParent()->isShutdown()) {
 
          // ---
          // User defined tasks
          // ---
-         dt = 1.0/double(getRate()); /* #DPG# */
-         double time1 = getComputerTime(); /* #DPG# */
-         if (lastTime != 0) { /* #DPG# */
-            dt = time1 - lastTime; /* #DPG# */
-         } /* #DPG# */
-         lastTime = time1; /* #DPG# */
          this->userFunc( LCreal(dt) );
 
          // ---
@@ -262,6 +255,19 @@ unsigned long ThreadPeriodicTask::mainThreadFunc()
 
             // wait for the next frame
             if (sleepFor > 0) Sleep(sleepFor);
+
+            // Compute next delta time and update frame stats
+            dt = 1.0/double(getRate());
+            if (st < 0) {
+               double overrun = -st;
+               bfStats.sigma(overrun);
+               if (vdtFlg) {
+                  // adjust for overrun
+                  dt += overrun;
+                  refTime += overrun;
+               }
+            }
+            tcnt++;
          }
 
       }

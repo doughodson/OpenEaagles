@@ -542,7 +542,7 @@ void Station::createTimeCriticalProcess()
          if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "Station::createTimeCriticalProcess(): ERROR, failed to create the thread!" << std::endl;
          }
-            }
+      }
     }
 }
 
@@ -561,8 +561,8 @@ void Station::createNetworkProcess()
          if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "Station::createNetworkProcess(): ERROR, failed to create the thread!" << std::endl;
          }
-            }
-    }
+      }
+   }
 }
 
 //------------------------------------------------------------------------------
@@ -675,31 +675,31 @@ void Station::processNetworkOutputTasks(const LCreal dt)
 Simulation* Station::getSimulation()
 {
    return sim;
-      }
+}
 
 // Returns the simulation model (const version)
 const Simulation* Station::getSimulation() const
 {
    return sim;
-   }
+}
 
 // Returns the ownship (primary) player
 Player* Station::getOwnship()
 {
    return ownship;
-   }
+}
 
 // Returns the ownship (primary) player (const version)
 const Player* Station::getOwnship() const
 {
    return ownship;
-      }
+}
 
 // Returns the ownship's name
 const Basic::String* Station::getOwnshipName() const
 {
    return ownshipName;
-   }
+}
 
 // Get the player list; pre-ref()'d by the Simulation class
 Basic::PairStream* Station::getPlayers()
@@ -1393,8 +1393,8 @@ std::ostream& Station::serialize(std::ostream& sout, const int i, const bool slo
     //BaseClass::serialize(sout,i+j,true);
 
     if ( !slotsOnly ) {
-    	indent(sout,i);
-    	sout << ")" << std::endl;
+      indent(sout,i);
+      sout << ")" << std::endl;
     }
 
     return sout;
