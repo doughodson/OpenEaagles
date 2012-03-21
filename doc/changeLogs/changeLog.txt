@@ -17,6 +17,8 @@ dis
 --------------------------------------------------------------------------------
 simulation
 
+Navigation class
+   1) Fixed bug in calculating navigation UTC time
 
 
 

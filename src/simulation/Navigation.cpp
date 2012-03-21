@@ -265,7 +265,7 @@ void Navigation::process(const LCreal dt)
    // Update UTC
    double v = utc + dt;
    if (v >= Basic::Time::D2S) v = (v - Basic::Time::D2S);
-   setUTC(utc);
+   setUTC(v);
 
    // ---
    // Update our primary route
