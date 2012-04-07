@@ -20,7 +20,8 @@ simulation
 Navigation class
    1) Fixed bug in calculating navigation UTC time
 
-
+Route class
+   1) Fixed bug in insertSteerpoint concerning position datatype
 
 --------------------------------------------------------------------------------
 

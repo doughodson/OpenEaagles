@@ -499,7 +499,7 @@ unsigned int Route::getAllSteerpoints(SPtr<Steerpoint>* const stptList, const un
 //------------------------------------------------------------------------------
 // insertSteerpoint() -
 //------------------------------------------------------------------------------
-bool Route::insertSteerpoint(Steerpoint* const newStpt, const unsigned int pos)
+bool Route::insertSteerpoint(Steerpoint* const newStpt, const int pos)
 {
     bool ok = false;
     unsigned int num = getNumberOfSteerpoints();
@@ -545,10 +545,10 @@ bool Route::insertSteerpoint(Steerpoint* const newStpt, const unsigned int pos)
                ok = true;
             }
 
-            else if (pos > 0 && pos <= num) {
+            else if (pos > 0 && pos <= (int)num) {
 
                 // count to our position, then insert it
-                unsigned int counter = 1;
+                int counter = 1;
                 Basic::List::Item* item = tempList->getFirstItem();
                 while (counter < pos && item != 0) {
                     item = item->getNext();
