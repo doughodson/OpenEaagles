@@ -565,7 +565,7 @@ bool Route::insertSteerpoint(Steerpoint* const newStpt, const int pos)
             }
 
             // swap our current steerpoint (components) list for this new one
-            if (ok) BaseClass::processComponents(tempList,typeid(Steerpoint));
+            if (ok) Basic::Component::processComponents(tempList,typeid(Steerpoint));
 
             tempList->unref();
             tempList = 0;
@@ -576,7 +576,7 @@ bool Route::insertSteerpoint(Steerpoint* const newStpt, const int pos)
 
         // if we have no components, we need to start a new component list
         else if (pos <= 1) {
-            BaseClass::processComponents(0,typeid(Steerpoint),p);
+            Basic::Component::processComponents(0,typeid(Steerpoint),p);
             ok = true;
         }
 
@@ -608,7 +608,7 @@ bool Route::replaceAllSteerpoints(Basic::PairStream* const newSteerpointList, un
 
    if (newSteerpointList != 0) {
 
-      BaseClass::processComponents(newSteerpointList,typeid(Steerpoint));
+      Basic::Component::processComponents(newSteerpointList,typeid(Steerpoint));
 
       // Try to force a 'Direct to' the new 'stptIdx' or default to stpt #1 
       directTo((unsigned int) 0);
@@ -630,7 +630,7 @@ bool Route::deleteSteerpoint(Steerpoint* const sp)
 
    // remove the steerpoint
    Basic::PairStream* steerpoints = getComponents();
-   BaseClass::processComponents(steerpoints,typeid(Steerpoint),0,sp);
+   Basic::Component::processComponents(steerpoints,typeid(Steerpoint),0,sp);
    steerpoints->unref(); steerpoints = 0;
 
    // When we just deleted our current 'to' steerpoint,
@@ -656,7 +656,7 @@ bool Route::deleteSteerpoint(Steerpoint* const sp)
 bool Route::deleteAllSteerpoints() 
 {
    // This will create a new null(0) steerpoint (components) list
-   BaseClass::processComponents(0,typeid(Steerpoint));
+   Basic::Component::processComponents(0,typeid(Steerpoint));
 
    // No steerpoints, so we're going nowhere
    directTo((unsigned int) 0);
@@ -675,7 +675,7 @@ void Route::processComponents(
       Basic::Component* const remove
    )
 {
-   BaseClass::processComponents(list,typeid(Steerpoint),add,remove);
+   Basic::Component::processComponents(list,typeid(Steerpoint),add,remove);
 }
 
 //------------------------------------------------------------------------------
