@@ -2,8 +2,22 @@
 Changes since v12.03
 ================================================================================
 
+
+--------------------------------------------------------------------------------
+general
+
+   config.h
+      ### LCreal is being deprecated; LCreal is only defined as double. ###
+
+
 --------------------------------------------------------------------------------
 basic
+
+   Float classs
+      -- Only providing constructors for LCreal defined as double
+
+   Number classs
+      -- Only providing constructors for LCreal defined as double
 
 
 --------------------------------------------------------------------------------
@@ -12,9 +26,11 @@ basicGL
    Graphic class
       1) processComponents() -- calls Component::processComponents() instead of
       BaseClass::processComponents()
+
+      2) Only provides the 'lc' functions for LCreal defined as double
       
    SymbolLoader
-      1) various functions -- call Component::processComponents() instead of
+      -- various functions -- call Component::processComponents() instead of
       BaseClass::processComponents()
 
 --------------------------------------------------------------------------------
@@ -25,10 +41,10 @@ dis
 simulation
 
    Navigation class
-      1) Fixed bug in calculating navigation UTC time
+      -- Fixed bug in calculating navigation UTC time
 
    Player class
-      1) processComponents() -- calls Component::processComponents() instead of
+      -- processComponents() -- calls Component::processComponents() instead of
       BaseClass::processComponents()
 
    Route class
@@ -38,7 +54,7 @@ simulation
       BaseClass::processComponents()
 
    Steerpoint class
-      1) processComponents() -- calls Component::processComponents() instead of
+      -- processComponents() -- calls Component::processComponents() instead of
       BaseClass::processComponents()
 
 --------------------------------------------------------------------------------

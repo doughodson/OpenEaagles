@@ -45,13 +45,8 @@ class Float : public Number {
 
 public:
     Float()                                         { STANDARD_CONSTRUCTOR() }
-    #ifdef LCREAL_DOUBLE
-      Float(const LCreal value) : Number(value)   { STANDARD_CONSTRUCTOR() }
-      Float(const float value)  : Number(value)   { STANDARD_CONSTRUCTOR() }
-    #else
-      Float(const LCreal value) : Number(value)   { STANDARD_CONSTRUCTOR() }
-      Float(const double value) : Number(value)   { STANDARD_CONSTRUCTOR() }
-    #endif
+    Float(const LCreal value) : Number(value)       { STANDARD_CONSTRUCTOR() }
+    Float(const float value)  : Number(value)       { STANDARD_CONSTRUCTOR() }
 
     operator float() const;
     operator double() const;
