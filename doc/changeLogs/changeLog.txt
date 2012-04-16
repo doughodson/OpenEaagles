@@ -9,6 +9,13 @@ basic
 --------------------------------------------------------------------------------
 basicGL
 
+   Graphic class
+      1) processComponents() -- calls Component::processComponents() instead of
+      BaseClass::processComponents()
+      
+   SymbolLoader
+      1) various functions -- call Component::processComponents() instead of
+      BaseClass::processComponents()
 
 --------------------------------------------------------------------------------
 dis
@@ -17,11 +24,22 @@ dis
 --------------------------------------------------------------------------------
 simulation
 
-Navigation class
-   1) Fixed bug in calculating navigation UTC time
+   Navigation class
+      1) Fixed bug in calculating navigation UTC time
 
-Route class
-   1) Fixed bug in insertSteerpoint concerning position datatype
+   Player class
+      1) processComponents() -- calls Component::processComponents() instead of
+      BaseClass::processComponents()
+
+   Route class
+      1) Fixed bug in insertSteerpoint concerning position datatype
+
+      2) various functions -- call Component::processComponents() instead of
+      BaseClass::processComponents()
+
+   Steerpoint class
+      1) processComponents() -- calls Component::processComponents() instead of
+      BaseClass::processComponents()
 
 --------------------------------------------------------------------------------
 

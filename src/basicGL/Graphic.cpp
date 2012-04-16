@@ -1410,7 +1410,7 @@ void Graphic::processComponents(
       Basic::Component* const remove
    )
 {
-   BaseClass::processComponents(list,typeid(Graphic),add,remove);
+   Basic::Component::processComponents(list,typeid(Graphic),add,remove);
 }
 
 
