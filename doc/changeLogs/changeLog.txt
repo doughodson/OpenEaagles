@@ -44,8 +44,10 @@ simulation
       -- Fixed bug in calculating navigation UTC time
 
    Player class
-      -- processComponents() -- calls Component::processComponents() instead of
+      1) processComponents() -- calls Component::processComponents() instead of
       BaseClass::processComponents()
+
+      2) initData() -- Player name defaults to nul string (e.g., "")
 
    Route class
       1) Fixed bug in insertSteerpoint concerning position datatype

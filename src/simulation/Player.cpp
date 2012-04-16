@@ -247,7 +247,7 @@ void Player::initData()
    setType(&generic);
 
    id = 0;
-   //pname = "";
+   pname = "";
    side = GRAY;
 
    mode = ACTIVE;
