@@ -247,7 +247,7 @@ void Player::initData()
    setType(&generic);
 
    id = 0;
-   //pname = "";
+   pname = "";
    side = GRAY;
 
    mode = ACTIVE;
@@ -3374,7 +3374,7 @@ void Player::processComponents(
    )
 {
    // Set the 'load system pointers' flag if anything changes
-   BaseClass::processComponents(list,filter,add,remove);
+   Basic::Component::processComponents(list,filter,add,remove);
    loadSysPtrs = true;
 }
 

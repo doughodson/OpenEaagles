@@ -44,13 +44,8 @@ public:
    Number(const int value)          { val = (double) value; STANDARD_CONSTRUCTOR() }
    Number(const Integer64 value)    { val = (double) value; STANDARD_CONSTRUCTOR() }
    Number(const bool value)         { val = (value ? 1.0 : 0.0); STANDARD_CONSTRUCTOR() }
-   #ifdef LCREAL_DOUBLE
-      Number(const LCreal value)    { val = value; STANDARD_CONSTRUCTOR() }
-      Number(const float value)     { val = value; STANDARD_CONSTRUCTOR() }
-   #else
-      Number(const LCreal value)    { val = value; STANDARD_CONSTRUCTOR() }
-      Number(const double value)    { val = value; STANDARD_CONSTRUCTOR() }
-   #endif
+   Number(const LCreal value)       { val = value; STANDARD_CONSTRUCTOR() }
+   Number(const float value)        { val = value; STANDARD_CONSTRUCTOR() }
 
    LCreal getReal() const           { return (LCreal) val; }
    double getDouble() const         { return val; }

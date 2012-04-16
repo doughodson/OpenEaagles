@@ -807,7 +807,7 @@ void Steerpoint::processComponents(
       Basic::Component* const remove
    )
 {
-   BaseClass::processComponents(list,typeid(Steerpoint),add,remove);
+   Basic::Component::processComponents(list,typeid(Steerpoint),add,remove);
 }
 
 //------------------------------------------------------------------------------
