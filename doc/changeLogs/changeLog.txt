@@ -9,6 +9,8 @@ general
    config.h
       ### LCreal is being deprecated; LCreal is only defined as double. ###
 
+   add unified behavior framework library
+      -- this is an implementation of UBF framework
 
 --------------------------------------------------------------------------------
 basic
