@@ -21,6 +21,15 @@ basic
    Number classs
       -- Only providing constructors for LCreal defined as double
 
+   Rnd class
+      1) Modified the following functions: drawClosed(), drawOpen(), drawHalfOpen(),
+      drawRayleigh(), and drawHalfOpen53()
+
+      2) Added the following functions: drawExponential(), drawGeometric(), drawUniformCont(),
+      drawUniformDisc(), drawGauss(), drawBernoulli(), drawBinomial(), drawPoisson(),
+      drawGamma() and drawErlang()
+
+      3) Moved inline functions to new Rnd.inl file
 
 --------------------------------------------------------------------------------
 basicGL
