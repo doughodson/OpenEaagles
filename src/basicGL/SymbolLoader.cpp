@@ -872,8 +872,8 @@ void SymbolLoader::draw()
 
                   // But when we were not give screen coordinates,
                   // we'll need to compute them from A/C coordinates
-                  double acX = 0.0;
-                  double acY = 0.0;
+                  LCreal acX = 0.0;
+                  LCreal acY = 0.0;
 
                   // 1) when given A/C coordinates ...
                   if ( symbols[i]->isPositionAC() ) {
