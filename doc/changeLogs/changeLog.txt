@@ -66,6 +66,9 @@ simulation
       2) various functions -- call Component::processComponents() instead of
       BaseClass::processComponents()
 
+   Simulation class
+      -- Added commas to last items in slot table (bug fix)
+
    Steerpoint class
       -- processComponents() -- calls Component::processComponents() instead of
       BaseClass::processComponents()
