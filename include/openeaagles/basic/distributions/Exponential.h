@@ -7,13 +7,14 @@
 namespace Eaagles {
 namespace Basic {
 
-//
+//====================================================================
 // Exponential
 // Input parameters:
-//     lambda = continuous inverse scale parameter
-//     gamma = continuous location parameter
-//     mean = 1/lambda + gamma
+//    lambda = continuous inverse scale parameter
+//    gamma  = continuous location parameter
+//    mean   = 1/lambda + gamma
 //
+//====================================================================
 
 class Number;
 
@@ -27,12 +28,12 @@ public:
 
   double draw();
 
-  bool setLambda(const double x)                           { lambda = x; return true; }
-  double getLambda() const                                 { return lambda; }
+  bool setLambda(const double x) { lambda = x; return true; }
+  double getLambda() const { return lambda; }
   bool setSlotLambda(const Number* const);
 
-  bool setGamma(const double x)                            { gamma = x; return true; }
-  double getGamma() const                                  { return gamma; }
+  bool setGamma(const double x) { gamma = x; return true; }
+  double getGamma() const { return gamma; }
   bool setSlotGamma(const Number* const);
 
 protected:

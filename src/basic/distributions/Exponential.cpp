@@ -51,6 +51,7 @@ void Exponential::copyData(const Exponential& org, const bool cc)
 }
 
 //------------------------------------------------------------
+// draw
 //------------------------------------------------------------
 double Exponential::draw()
 {
@@ -61,6 +62,7 @@ double Exponential::draw()
 }
 
 //------------------------------------------------------------
+// setSlotLambda
 //------------------------------------------------------------
 bool Exponential::setSlotLambda(const Number* const x)
 {
@@ -70,6 +72,9 @@ bool Exponential::setSlotLambda(const Number* const x)
   return ok;
 }
 
+//------------------------------------------------------------
+// setSlotGamma
+//------------------------------------------------------------
 bool Exponential::setSlotGamma(const Number* const x)
 {
   bool ok = false;
