@@ -157,6 +157,13 @@ protected:
    double*     aar;           // Compute angle off antenna boresight (radians)
    double*     aazr;          // Compute azimuth off boresight (radians)
    double*     aelr;          // Compute elevation off boresight (radians)
+
+   // computeBoresightData() arrays
+   double* xa;
+   double* ya;
+   double* za;
+   double* ra2;
+   double* ra;
 };
 
 } // End Simulation namespace

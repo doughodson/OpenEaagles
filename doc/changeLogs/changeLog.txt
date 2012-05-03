@@ -70,5 +70,9 @@ simulation
       -- processComponents() -- calls Component::processComponents() instead of
       BaseClass::processComponents()
 
+   Tdb class
+      -- computeBoresightData() -- to decrease stack usage, the local arrays (xa,
+      ya, za, ra, and ra2) are now member varaibles and dynamically allocated by
+      resizeArrays()
 --------------------------------------------------------------------------------
 
