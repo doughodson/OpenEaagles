@@ -68,7 +68,7 @@ void AnalogGauge::drawFunc()
     glPushMatrix();
         // move us just slightly into the background, so things will overlay us
         gaugePos = getInstValue();
-        glTranslatef(0, 0, -0.1f);
+        //glTranslatef(0, 0, -0.1f);
         // if we are vertical, draw us growing up and down, else draw us growing left to right
         if (vertical) {
             if (outline) glBegin(GL_LINE_STRIP);
