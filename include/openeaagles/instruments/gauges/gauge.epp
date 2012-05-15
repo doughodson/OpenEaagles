@@ -23,6 +23,30 @@ gauge:
         )
     
     components: {
+        // here is filled in portion of the gauge.  Notice it doesn't have the "outline:" slot flag.  This is because we are drawing the inner portion of 
+        // the bar graph
+        ( AnalogGauge
+            vertical: 1
+            color: ( ColorRotary
+                        breakpoints: {
+                            0 
+                            50 
+                            90
+                        }
+                        breakcolors: {
+                            (rgb 1 0 0)
+                            (rgb 1 1 0)
+                            (rgb 0 0 1)
+                        }
+                    )
+            scalingTable: 
+                ( Table1
+                    x: [ 0 100 ]
+                data: [ 0 10 ]
+                )
+                leftBoundary: -0.24
+                rightBoundary: 0.24
+        )
         // here is the maximum line
         ( Line
             color: green
@@ -65,30 +89,6 @@ gauge:
                         (rgb 0 0 1)
                     }
                 )
-        )
-        // here is filled in portion of the gauge.  Notice it doesn't have the "outline:" slot flag.  This is because we are drawing the inner portion of 
-        // the bar graph
-        ( AnalogGauge
-            vertical: 1
-            color: ( ColorRotary
-                        breakpoints: {
-                            0 
-                            50 
-                            90
-                        }
-                        breakcolors: {
-                            (rgb 1 0 0)
-                            (rgb 1 1 0)
-                            (rgb 0 0 1)
-                        }
-                    )
-            scalingTable: 
-                ( Table1
-                    x: [ 0 100 ]
-                data: [ 0 10 ]
-                )
-                leftBoundary: -0.24
-                rightBoundary: 0.24
         )
         // this shows a gauge slider, which will go up and down with the value of the scale
         // This object is a little complex when you first look at it, but it really consists of two parts

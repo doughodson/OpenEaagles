@@ -130,7 +130,7 @@ bool ColorRotary::determineColor(const LCreal value)
     // find out where we are in the break table
     int i = 0;
     // do an endpoint check while we are at it
-    if (value > myValues[numVals-1]) breakPoint = numVals;
+    if (value >= myValues[numVals-1]) breakPoint = numVals;
     while (!ok && i < numVals) {
 		if (value >= myValues[i] && value < myValues[i +1]){
             breakPoint = (i + 1);
@@ -145,9 +145,9 @@ bool ColorRotary::determineColor(const LCreal value)
         if (pair != 0) {
             Basic::Color* listcolor = dynamic_cast<Basic::Color*>(pair->object());
             if (listcolor != 0) {
-                osg::Vec4* vec = (osg::Vec4*) listcolor->getRGBA();
-                color = *vec;
-				ok = true;
+               osg::Vec4* vec = (osg::Vec4*) listcolor->getRGBA();
+               color = *vec;
+				   ok = true;
             }
         }
     }

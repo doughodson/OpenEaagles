@@ -54,6 +54,7 @@ class Material;
 //    transform          <PairStream>   ! List of coordinate transformations (default: 0)
 //    transform          <Transform>    ! Single coorinate transformation (default: 0)
 //    vertices           <PairStream>   ! List of 3D Coordinates (World coord) (default: 0)
+//    normals            <PairStream>   ! List of 3D Vectors of normals at each vertex
 //    texCoord           <PairStream>   ! List of 2D Texture Coordinates (default: 0)
 //    noDisplayList      <Number>       ! Flag: True to disable display list
 //                                      !     (default false)
@@ -66,13 +67,20 @@ class Material;
 //    scissorY           <Number>       ! Bottom edge of the scissor box (World coord) (default: 0)
 //    scissorWidth       <Number>       ! How far over do we scissor (World coord) (default: 0)
 //    scissorHeight      <Number>       ! How far up do we scissor (World coord) (default: 0)
+//    stipple            <Number>       ! Line stippling flag - only used for line, lineloop, and circle when not filled.
+//    stippleFactor      <Number>       ! Line stipple factor, specifies a multiplier for each bit in line stipple pattern
+//    stipplePattern     <Number>       ! Line stipple pattern, specifies a 16-bit pattern for which fragments of a line to draw
+//    visible            <Number>       ! Visibility flag
+//    mask               <Number>       ! Color Masking
+//    material           <Number>       ! Sets the current material
+//    translateLight     <Number>       ! Translate our current light to a new position (BEFORE DRAWING)
 //
 // Events:
-//    SET_COLOR         (Color)        Sets color
-//    SET_COLOR         (Identifier)        Sets color by name
-//    SET_LINEWIDTH     (Number)     Sets line width
-//    SET_FLASHRATE     (Number)     Sets flash rate
-//    SET_VISIBILITY    (Number)     Sets visibility flag
+//    SET_COLOR         (Color)         ! Sets color
+//    SET_COLOR         (Identifier)    ! Sets color by name
+//    SET_LINEWIDTH     (Number)        ! Sets line width
+//    SET_FLASHRATE     (Number)        ! Sets flash rate
+//    SET_VISIBILITY    (Number)        ! Sets visibility flag
 //
 // Public methods: Base class public methods, plus ...
 //
@@ -334,11 +342,10 @@ public:
    GLuint getTexture() const                        { return texture; }
    bool setTextureName(const char* newName);
    
-   // Set the GL texture id (Make sure you create a texture before 
-   // you call this function!)   
+   // Set the GL texture id (Make sure you create a texture before you call this function!)   
    virtual bool setTexture(const GLuint newTex);
 
-   // Standard line with
+   // Standard line width
    GLfloat getStdLineWidth();
 
    // Scissor box functions
@@ -351,15 +358,20 @@ public:
    bool setScissorWidth(const LCreal newWidth);
    bool setScissorY(const LCreal newY);
    bool setScissorHeight(const LCreal newHeight);
+
+   // Line stippling functions
    bool isStippling()                              { return stipple; }
+   GLuint getStippleFactor()                        { return stippleFactor; }
+   GLushort getStipplePattern()                     { return stipplePattern; }
+   bool setStippling(const bool x);
+   bool setStippleFactor(const GLuint x);
+   bool setStipplePattern(const GLushort x);
    
    // Light functions
    bool setLightPosition(const LCreal x, const LCreal y, const LCreal z = 1, const LCreal w = 0);
    bool setLightPosition(osg::Vec4& newPos);
    osg::Vec4 getLightPos()                          { return lightPos; }
    
-   // stipple
-   bool setStippling(const bool x);
 
    // Select (pick) functions
    GLuint getSelectName() const                     { return selName; }
@@ -462,6 +474,9 @@ protected:
     virtual bool setSlotScissorWidth(const Basic::Number* const msg);
     virtual bool setSlotScissorHeight(const Basic::Number* const msg);
     virtual bool setSlotStippling(const Basic::Number* const msg);
+    virtual bool setSlotStippleFactor(const Basic::Number* const msg);
+    virtual bool setSlotStipplePattern(const Basic::Number* const msg);
+    virtual bool setSlotStipplePattern(const Basic::String* const msg);
     virtual bool setSlotVisibility(const Basic::Number* const msg);
     virtual bool setSlotTranslateLight(Basic::PairStream* const msg);
 
@@ -517,7 +532,9 @@ private:
     static LCreal fTimer;           // Flash control timer
     static GLuint autoSelName;      // our automatic select name counter
 
-    bool          stipple;          // our stipple flag (line, lineloop, circle (not filled)
+    bool          stipple;          // line stipple flag (line, lineloop, circle (not filled))
+    GLuint        stippleFactor;    // line stipple factor (multiplier for each bit in line stipple pattern)
+    GLushort      stipplePattern;   // line stipple pattern (16-bit pattern for which fragments of line to draw)
     bool          mask;             // are we masking?
     Basic::Identifier* materialName;   // our material name
     BasicGL::Material* materialObj;   // material object, if we have one.
