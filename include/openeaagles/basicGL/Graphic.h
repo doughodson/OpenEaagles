@@ -228,41 +228,6 @@ class Material;
 //		Starting value is 0x800000, so all manual select names should be
 //		lower than this, so there is no confusion in the pick() routine.
 //
-////Functions for native LCreal resolutions
-//#ifdef LCREAL_DOUBLE
-//	lcVertex2v(LCreal* v)
-//		lcVertex2v calls glVertex2dv(v)
-//
-//	lcVertex3v(LCreal* v)
-//		lcVertex3v calls glVertex3dv(v)
-//
-//	lcColor3v(LCreal* v)
-//		lcColor3v calls glColor3dv(v)
-//
-//	lcColor4v(LCreal* v)
-//		lcColor4v calls glColor4dv(v)
-//
-//	lcMultMatrix(LCreal* m)
-//		lcMultMatrix calls glMultMatrixd(m)
-//
-//#else
-//	lcVertex2v(LCreal* v)
-//		lcVertex2v calls glVertex2fv(v)
-//
-//	lcVertex3v(LCreal* v)
-//		lcVertex3v calls glVertex3fv(v)
-//
-//	lcColor3v(LCreal* v)
-//		lcColor3v calls glColor3fv(v)
-//
-//	lcColor4v(LCreal* v)
-//		lcColor4v calls glColor4fv(v)
-//
-//	lcMultMatrix(LCreal* m)
-//		lcMultMatrix calls glMultMatrixf(m)
-//#endif
-//
-//
 //Comment section last updated: 2004.10.13 by MJK
 //------------------------------------------------------------------------------
 class Graphic : public Basic::Component {
@@ -403,39 +368,22 @@ public:
          const LCreal maxY);  // Clip box max Y value
 
    // Functions for native LCreal resolutions
-   #ifdef LCREAL_DOUBLE
-      static void lcVertex2(const LCreal x, const LCreal y)                 { glVertex2d(x,y); }
-      static void lcVertex3(const LCreal x, const LCreal y, const LCreal z) { glVertex3d(x,y,z); }
-      static void lcNormal3(const LCreal x, const LCreal y, const LCreal z) { glNormal3d(x,y,z); }
-      static void lcColor3(const LCreal r, const LCreal g, const LCreal b)  { glColor3d(r,g,b); }
-      static void lcColor4(const LCreal r, const LCreal g, const LCreal b, const LCreal a)  { glColor4d(r,g,b,a); }
+   // Since LCreal is deprecated, we're only defining the double functions
+   static void lcVertex2(const LCreal x, const LCreal y)                 { glVertex2d(x,y); }
+   static void lcVertex3(const LCreal x, const LCreal y, const LCreal z) { glVertex3d(x,y,z); }
+   static void lcNormal3(const LCreal x, const LCreal y, const LCreal z) { glNormal3d(x,y,z); }
+   static void lcColor3(const LCreal r, const LCreal g, const LCreal b)  { glColor3d(r,g,b); }
+   static void lcColor4(const LCreal r, const LCreal g, const LCreal b, const LCreal a)  { glColor4d(r,g,b,a); }
 
-      static void lcVertex2v(const LCreal* v)      { glVertex2dv(v); }
-      static void lcVertex3v(const LCreal* v)      { glVertex3dv(v); }
-      static void lcNormal3v(const LCreal* v)      { glNormal3dv(v); }
-      static void lcColor3v(const LCreal* v)       { glColor3dv(v); }
-      static void lcColor4v(const LCreal* v)       { glColor4dv(v); }
-      static void lcMultMatrix(const LCreal* m)    { glMultMatrixd(m); }
-      static void lcTexCoord2v(const LCreal* v)    { glTexCoord2dv(v); }
-      static void lcTexCoord3v(const LCreal* v)    { glTexCoord3dv(v); }
-      static void lcTexCoord4v(const LCreal* v)    { glTexCoord4dv(v); }
-   #else
-      static void lcVertex2(const LCreal x, const LCreal y)                 { glVertex2f(x,y); }
-      static void lcVertex3(const LCreal x, const LCreal y, const LCreal z) { glVertex3f(x,y,z); }
-      static void lcNormal3(const LCreal x, const LCreal y, const LCreal z) { glNormal3f(x,y,z); }
-      static void lcColor3(const LCreal r, const LCreal g, const LCreal b)  { glColor3f(r,g,b); }
-      static void lcColor4(const LCreal r, const LCreal g, const LCreal b, const LCreal a)  { glColor4f(r,g,b,a); }
- 
-      static void lcVertex2v(const LCreal* v)      { glVertex2fv(v); }
-      static void lcVertex3v(const LCreal* v)      { glVertex3fv(v); }
-      static void lcNormal3v(const LCreal* v)      { glNormal3fv(v); }
-      static void lcColor3v(const LCreal* v)       { glColor3fv(v); }
-      static void lcColor4v(const LCreal* v)       { glColor4fv(v); }
-      static void lcMultMatrix(const LCreal* m)    { glMultMatrixf(m); }
-      static void lcTexCoord2v(const LCreal* v)    { glTexCoord2fv(v); }
-      static void lcTexCoord3v(const LCreal* v)    { glTexCoord3fv(v); }
-      static void lcTexCoord4v(const LCreal* v)    { glTexCoord4fv(v); }
-   #endif
+   static void lcVertex2v(const LCreal* v)      { glVertex2dv(v); }
+   static void lcVertex3v(const LCreal* v)      { glVertex3dv(v); }
+   static void lcNormal3v(const LCreal* v)      { glNormal3dv(v); }
+   static void lcColor3v(const LCreal* v)       { glColor3dv(v); }
+   static void lcColor4v(const LCreal* v)       { glColor4dv(v); }
+   static void lcMultMatrix(const LCreal* m)    { glMultMatrixd(m); }
+   static void lcTexCoord2v(const LCreal* v)    { glTexCoord2dv(v); }
+   static void lcTexCoord3v(const LCreal* v)    { glTexCoord3dv(v); }
+   static void lcTexCoord4v(const LCreal* v)    { glTexCoord4dv(v); }
 
 
    // Component interface

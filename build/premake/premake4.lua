@@ -91,6 +91,7 @@ solution "oe"
    -- libraries
    --
 
+   -- basic library
    project "basic"
       files {
          "../../include/openeaagles/basic/**.h",
@@ -109,6 +110,7 @@ solution "oe"
          -- base filename for compiled binary target
          targetname "oeBasic_d"
 
+   -- basic OpenGL library
    project "basicGL"
       files {
          "../../include/openeaagles/basicGL/**.h",
@@ -123,6 +125,7 @@ solution "oe"
          -- base filename for compiled binary target
          targetname "oeBasicGL_d"
 
+   -- GLUT OpenGL interface library
    project "gui-glut"
       files {
          "../../include/openeaagles/gui/glut/**.h",
@@ -135,6 +138,7 @@ solution "oe"
          -- base filename for compiled binary target
          targetname "oeGlut_d"
 
+   -- DAFIF airport loader library
    project "dafif"
       files {
          "../../include/openeaagles/dafif/**.h",
@@ -147,6 +151,7 @@ solution "oe"
          -- base filename for compiled binary target
          targetname "oeDafif_d"
 
+   -- IEEE DIS interface library
    project "dis"
       files {
          "../../include/openeaagles/dis/**.h",
@@ -159,6 +164,7 @@ solution "oe"
          -- base filename for compiled binary target
          targetname "oeDis_d"
 
+   -- graphical instruments library
    project "instruments"
       files {
          "../../include/openeaagles/instruments/**.h",
@@ -172,6 +178,7 @@ solution "oe"
          -- base filename for compiled binary target
          targetname "oeInstruments_d"
 
+   -- i/o device library
    project "ioDevice"
       files {
          "../../include/openeaagles/ioDevice/**.h",
@@ -189,6 +196,7 @@ solution "oe"
          -- base filename for compiled binary target
          targetname "oeIoDevice_d"
 
+   -- linear systems library
    project "linearSys"
       files {
          "../../include/openeaagles/linearSys/**.h",
@@ -201,6 +209,7 @@ solution "oe"
          -- base filename for compiled binary target
          targetname "oeLinearSys_d"
 
+   -- maps library
    project "maps"
       files {
          "../../include/openeaagles/maps/**.h",
@@ -213,6 +222,7 @@ solution "oe"
          -- base filename for compiled binary target
          targetname "oeMaps_d"
 
+   -- otw library
    project "otw"
       files {
          "../../include/openeaagles/otw/**.h",
@@ -230,6 +240,7 @@ solution "oe"
          -- base filename for compiled binary target
          targetname "oeOtw_d"
 
+   -- sensors library
    project "sensors"
       files {
          "../../include/openeaagles/sensors/**.h",
@@ -242,6 +253,7 @@ solution "oe"
          -- base filename for compiled binary target
          targetname "oeSensors_d"
 
+   -- simulation library
    project "simulation"
       files {
          "../../include/openeaagles/simulation/**.h",
@@ -255,6 +267,7 @@ solution "oe"
          -- base filename for compiled binary target
          targetname "oeSimulation_d"
 
+   -- terrain library
    project "terrain"
       files {
          "../../include/openeaagles/terrain/**.h",
@@ -267,6 +280,20 @@ solution "oe"
          -- base filename for compiled binary target
          targetname "oeTerrain_d"
 
+   -- ubf library
+   project "ubf"
+      files {
+         "../../include/openeaagles/ubf/**.h",
+         "../../src/ubf/**.cpp"
+      }
+      configuration { "Release" }
+         -- base filename for compiled binary target
+         targetname "oeUbf"
+      configuration { "Debug" }
+         -- base filename for compiled binary target
+         targetname "oeUbf_d"
+
+   -- vehicles library
    project "vehicles"
       files {
          "../../include/openeaagles/vehicles/**.h",

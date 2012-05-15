@@ -109,10 +109,10 @@ BEGIN_SLOTTABLE(Simulation)
    "numTcThreads",   // 14) Number of T/C threads to use with the player list
    "numBgThreads",   // 15) Number of background threads to use with the player list
 
-   "gamingAreaRange" // 16) Max valid range of the simulation's gaming area or zero for unlimited
+   "gamingAreaRange", // 16) Max valid range of the simulation's gaming area or zero for unlimited
                      //     (default: zero -- unlimited range)
 
-   "earthModel"      // 17) Earth model for geodetic lat/lon (default is WGS-84)
+   "earthModel",      // 17) Earth model for geodetic lat/lon (default is WGS-84)
 
    "gamingAreaUseEarthModel" // 18) If true, use the 'earthModel' or its WGS-84 default for flat
                      //    earth projections between geodetic lat/lon and the gaming

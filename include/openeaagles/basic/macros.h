@@ -4,7 +4,7 @@
 // Object class macros:
 //
 //    DECLARE_SUBCLASS(ThisType,BaseType)
-//       Macro to declare all of the required member functions and memeber
+//       Macro to declare all of the required member functions and member
 //       variables for the class 'ThisType', which is derived from class 'BaseType'.
 //       Defines the type 'BaseClass', which can be used by the member functions as an
 //       alias for the base class.  The copy constructor is declared by this macro, but

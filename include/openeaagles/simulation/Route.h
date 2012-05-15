@@ -102,7 +102,7 @@ public:
    //    b) if 'pos' is 0 (default) or equal to one plus getNumberOfSteerpoints()
    //       then it's added to the end of the list
    //    c) otherwise 'pos' must be between 1 .. getNumberOfSteerpoints()
-   virtual bool insertSteerpoint(Steerpoint* const sp, const unsigned int pos = 0);
+   virtual bool insertSteerpoint(Steerpoint* const sp, const int pos = 0);
 
    // delete a steerpoint
    virtual bool deleteSteerpoint(Steerpoint* const sp); 

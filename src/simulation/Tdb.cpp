@@ -78,6 +78,12 @@ void Tdb::initData()
    aar = 0;
    aazr = 0;
    aelr = 0;
+
+   xa = 0;
+   ya = 0;
+   za = 0;
+   ra2 = 0;
+   ra = 0;
 }
 
 //------------------------------------------------------------------------------
@@ -164,8 +170,15 @@ bool Tdb::resizeArrays(const unsigned int newSize)
          if (aar != 0)      { delete[] aar;      aar = 0; }
          if (aazr != 0)     { delete[] aazr;     aazr = 0; }
          if (aelr != 0)     { delete[] aelr;     aelr = 0; }
+
          if (targets != 0)  { delete[] targets;  targets = 0; }
          maxTargets = 0;
+
+         if (xa != 0)  { delete[] xa;  xa = 0; }
+         if (ya != 0)  { delete[] ya;  ya = 0; }
+         if (za != 0)  { delete[] za;  za = 0; }
+         if (ra2 != 0)  { delete[] ra2;  ra2 = 0; }
+         if (ra != 0)  { delete[] ra;  ra = 0; }
 
          // Allocate new memory
          if (newSize > 0) {
@@ -182,6 +195,11 @@ bool Tdb::resizeArrays(const unsigned int newSize)
                targets[i] = 0;
             }
             maxTargets = newSize;
+            xa = new double[newSize];
+            ya = new double[newSize];
+            za = new double[newSize];
+            ra2 = new double[newSize];
+            ra = new double[newSize];
          }
 
       }
@@ -526,11 +544,6 @@ unsigned int Tdb::computeBoresightData()
    // ---
    // Get gimbal coordinate component arrays and x-y range squared
    // ---
-   double xa[Gimbal::MAX_PLAYERS];
-   double ya[Gimbal::MAX_PLAYERS];
-   double za[Gimbal::MAX_PLAYERS];
-   double ra2[Gimbal::MAX_PLAYERS];
-   double ra[Gimbal::MAX_PLAYERS];
    for (unsigned int i = 0; i < numTgts; i++) {
          xa[i] = losG[i].x();
          ya[i] = losG[i].y();

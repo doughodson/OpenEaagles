@@ -2,13 +2,53 @@
 Changes since v12.03
 ================================================================================
 
+
+--------------------------------------------------------------------------------
+general
+
+   config.h
+      ### LCreal is being deprecated; LCreal is only defined as double. ###
+
+   added unified behavior framework library
+      -- this is an implementation of UBF framework as defined
+         in the paper "Unified Behavior Framework for Reactive Robot Control"
+         authors: Brian G. Woolley and Gilbert L. Peterson
+         published: Journal of Intelligent and Robotic Systems, vol 55,
+                    no 2, pp 155-176, 2009
+
 --------------------------------------------------------------------------------
 basic
+
+   Float classs
+      -- Only providing constructors for LCreal defined as double
+
+   Number classs
+      -- Only providing constructors for LCreal defined as double
+
+   Rng class
+      1) Modified the following functions: drawClosed(), drawOpen(), drawHalfOpen(),
+      drawRayleigh(), and drawHalfOpen53()
+
+      2) Added the following functions: drawExponential(), drawGeometric(), drawUniformCont(),
+      drawUniformDisc(), drawGauss(), drawBernoulli(), drawBinomial(), drawPoisson(),
+      drawGamma() and drawErlang()
+
+      3) Moved inline functions to new Rng.inl file
+
 
 
 --------------------------------------------------------------------------------
 basicGL
 
+   Graphic class
+      1) processComponents() -- calls Component::processComponents() instead of
+      BaseClass::processComponents()
+
+      2) Only provides the 'lc' functions for LCreal defined as double
+      
+   SymbolLoader
+      -- various functions -- call Component::processComponents() instead of
+      BaseClass::processComponents()
 
 --------------------------------------------------------------------------------
 dis
@@ -17,10 +57,32 @@ dis
 --------------------------------------------------------------------------------
 simulation
 
-Navigation class
-   1) Fixed bug in calculating navigation UTC time
+   Navigation class
+      -- Fixed bug in calculating navigation UTC time
 
+   Player class
+      1) processComponents() -- calls Component::processComponents() instead of
+      BaseClass::processComponents()
 
+      2) initData() -- Player name defaults to nul string (e.g., "")
 
+   Route class
+      1) Fixed bug in insertSteerpoint concerning position datatype
+
+      2) various functions -- call Component::processComponents() instead of
+      BaseClass::processComponents()
+
+   Simulation class
+      -- Added commas to last items in slot table (bug fix)
+
+   Steerpoint class
+      -- processComponents() -- calls Component::processComponents() instead of
+      BaseClass::processComponents()
+
+   Tdb class
+      -- computeBoresightData() -- to decrease stack usage, the local arrays (xa,
+      ya, za, ra, and ra2) are now member varaibles and dynamically allocated by
+      resizeArrays()
 --------------------------------------------------------------------------------
+
 
