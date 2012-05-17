@@ -456,9 +456,10 @@ bool lcStrcpy(char* const strDest, const size_t sizeOfDest, const char* const st
 // characters and null terminated.
 bool lcStrncpy(char* const strDest, const size_t sizeOfDest, const char* const strSource, const size_t count);
 
-// String cat function: Appends a string from 'strSource' to the end of 'strDest'.  The new
-// destination string is null terminated.  If the source string is too large for the
-// destination, then the source string is truncated at (sizeOfDest-1) characters and null terminated.
+// String cat function: Appends the 'strSource' string to the end of the 'strDest'
+// string.  The 'strSource' string will be truncated if the 'strDest' string is
+// too small.  Returns false if 'strDest' is a null pointer, or is not null-terminated,
+// or if 'strSource' is a null pointer
 bool lcStrcat(char* const strDest, const size_t sizeOfDest, const char* const strSource);
 
 // Compare two strings ignoring case --
