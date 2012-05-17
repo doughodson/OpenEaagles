@@ -35,7 +35,9 @@ basic
 
       3) Moved inline functions to new Rng.inl file
 
-
+   support.cpp
+      -- lcStrcat() modified to return false if a non-terminated string is passed
+      in the destination buffer; destination buffer is not modified (bug fix)
 
 --------------------------------------------------------------------------------
 basicGL
