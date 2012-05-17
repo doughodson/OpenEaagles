@@ -646,9 +646,10 @@ bool lcStrncpy(char* const strDest, const size_t sizeInBytes, const char* const 
 }
 
 //------------
-// String cat function: Appends a string from 'strSource' to the end of 'strDest'.  The new
-// destination string is null terminated.  If the source string is too large for the
-// destination, then the source string is truncated at (sizeOfDest-1) characters and null terminated.
+// String cat function: Appends the 'strSource' string to the end of the 'strDest'
+// string.  The 'strSource' string will be truncated if the 'strDest' string is
+// too small.  Returns false if 'strDest' is a null pointer, or is not null-terminated,
+// or if 'strSource' is a null pointer
 //------------
 bool lcStrcat(char* const strDest, const size_t sizeInBytes, const char* const strSource)
 {
@@ -660,25 +661,25 @@ bool lcStrcat(char* const strDest, const size_t sizeInBytes, const char* const s
    char* q = strDest;
    const char* p = strSource;
 
-   // Max characters to the destination buffer (including the original string)
+   // Max characters to the destination buffer
    const size_t maxToCopy = sizeInBytes - 1;
 
    // Forward to the end of the current destination string
    size_t idx = 0;
-   //while (idx++ < maxToCopy && *q++ != '\0') {}
    while (*q++ != '\0' && idx++ < maxToCopy) {}
 
-   // Back space for the original string's null character
-   if (idx < maxToCopy) {
+   // if we have a terminated string ...
+   bool ok = (idx <= maxToCopy);
+   if (ok) {
+      // Back space for the original string's null character
       --q;
-      //--idx;
+
+      // Everything looks good, copy... 
+      while (idx++ < maxToCopy && (*q++ = *p++) != '\0') {}
+      *q = '\0'; // null terminate
    }
 
-   // Everything looks good, copy... 
-   while (idx++ < maxToCopy && (*q++ = *p++) != '\0') {}
-   *q = '\0'; // null terminate
-
-   return true;   // Good result 
+   return ok;
 }
 
 //------------

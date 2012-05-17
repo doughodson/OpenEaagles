@@ -35,17 +35,24 @@ basic
 
       3) Moved inline functions to new Rng.inl file
 
-
+   support.cpp
+      -- lcStrcat() modified to return false if a non-terminated string is passed
+      in the destination buffer; destination buffer is not modified (bug fix)
 
 --------------------------------------------------------------------------------
 basicGL
+
+   AnalogGauge class
+      -- updated drawing code
 
    Graphic class
       1) processComponents() -- calls Component::processComponents() instead of
       BaseClass::processComponents()
 
       2) Only provides the 'lc' functions for LCreal defined as double
-      
+
+      3) Added line stipple feature
+
    SymbolLoader
       -- various functions -- call Component::processComponents() instead of
       BaseClass::processComponents()
