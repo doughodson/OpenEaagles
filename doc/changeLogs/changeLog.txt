@@ -36,8 +36,15 @@ basic
       3) Moved inline functions to new Rng.inl file
 
    support.cpp
-      -- lcStrcat() modified to return false if a non-terminated string is passed
-      in the destination buffer; destination buffer is not modified (bug fix)
+      1) lcStrcat() modified to return false if a non-terminated string is passed
+      in the destination buffer; destination buffer is not modified.
+
+      2) lcString() modified to no longer put a zero at one byte beyond the end
+      of the destination buffer when the destination buffer is either full or
+      non-terminated. (bug fix).
+
+      3) Added new functions, lcStrcpyFull(), lcStrncpyFull() and lcStrcatFull(),
+      that fail (return false) if the destination buffer is too small.
 
 --------------------------------------------------------------------------------
 basicGL
