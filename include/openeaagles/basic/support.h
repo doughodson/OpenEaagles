@@ -445,22 +445,42 @@ void multArrayConst(const float* const src, const float c, LCreal* const dst, co
 // Converts the integer number, 'num', to an ascii string.
 void lcInteger2Str(const int num, char* const str, int width);
 
-// String copy function: Copies a string from 'strSource' to 'strDest'.  The destination
-// string is null terminated.  If the source string is too large for the destination, then
-// the source string is truncated at (sizeOfDest-1) characters and null terminated.
+// String copy function: Copies a string from the source, 'strSource', to the
+// destination buffer, 'strDest'.  The destination string is null terminated.
+// The 'strSource' string will be truncated if the 'strDest' string is too small. 
 bool lcStrcpy(char* const strDest, const size_t sizeOfDest, const char* const strSource);
 
-// String N copy function: Copies up to 'count' characters from 'strSource' to 'strDest'.
-// The destination string is null terminated.  If the 'count' characters from the source
-// string is too large for the destination, then the source string is truncated at (sizeOfDest-1)
-// characters and null terminated.
+// String N copy function: Copies up to 'count' characters from the source string,
+// 'strSource', to the destination buffer, 'strDest'.  The new destination string
+// is null terminated.  The 'strSource' string will be truncated if the 'strDest'
+// string is too small. 
 bool lcStrncpy(char* const strDest, const size_t sizeOfDest, const char* const strSource, const size_t count);
 
 // String cat function: Appends the 'strSource' string to the end of the 'strDest'
-// string.  The 'strSource' string will be truncated if the 'strDest' string is
-// too small.  Returns false if 'strDest' is a null pointer, or is not null-terminated,
-// or if 'strSource' is a null pointer
+// string.  The new destination string is null terminated.  The 'strSource' string
+// will be truncated if the 'strDest' string is too small.  If 'strDest' is a null
+// pointer, or is not null-terminated, or if 'strSource' is a null pointer then false
+// is returned and the destination buffer is unchanged.
 bool lcStrcat(char* const strDest, const size_t sizeOfDest, const char* const strSource);
+
+// Full string copy function: Copies a string from the source, 'strSource', to the
+// destination buffer, 'strDest'.  The new destination string is null terminated.
+// If the destination buffer is too small then false is returned and the destination buffer
+// is unchanged.
+bool lcStrcpyFull(char* const strDest, const size_t sizeOfDest, const char* const strSource);
+
+// Full string N copy function: Copies up to 'count' characters from the source string,
+// 'strSource', to the destination buffer, 'strDest'.  The new destination string is null
+// terminated.   If the destination buffer is too small then false is returned and the
+// destination buffer is unchanged.
+bool lcStrncpyFull(char* const strDest, const size_t sizeOfDest, const char* const strSource, const size_t count);
+
+// Full string cat function: Appends the source string, 'strSource', to the end of the
+// destination string, 'strDest'.  The new destination string is null terminated.  If
+// the destination buffer is too small, or if 'strDest' is a null pointer, or is not
+// null-terminated, or if 'strSource' is a null pointer then false is returned and the
+// destination buffer is unchanged.
+bool lcStrcatFull(char* const strDest, const size_t sizeOfDest, const char* const strSource);
 
 // Compare two strings ignoring case --
 // Returns an integer less than, equal to or greater than zero if 's1' is less
