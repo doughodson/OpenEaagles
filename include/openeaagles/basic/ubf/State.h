@@ -12,8 +12,9 @@ namespace Basic {
 //
 // Class: State
 //
-// Description: Simple base class that supports derived state functionality;
-//    newUbf version does nothing, but supports state/component infrastructure -
+// Description:
+//    Simple base class that supports derived state functionality;
+//    the object does "nothing," but supports state/component infrastructure -
 //    forwards the updateState and updateGlobalState calls to all state components
 //
 class State : public Basic::Component

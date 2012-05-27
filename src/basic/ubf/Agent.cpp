@@ -1,6 +1,7 @@
-//
+//------------------------------------------------------------------------------
 // Agent
-//
+//------------------------------------------------------------------------------
+
 #include "openeaagles/basic/ubf/Agent.h"
 #include "openeaagles/basic/ubf/Action.h"
 #include "openeaagles/basic/ubf/Behavior.h"
@@ -16,10 +17,12 @@
 namespace Eaagles {
 namespace Basic {
 
-//==============================================================================
-// Class: NewUbf::Agent
-// Description: A UbfAgent that manages a component (the "actor") with a behavior (either a player, or a player's component)
-//==============================================================================
+//
+// Class: Agent
+//
+// Description: A UbfAgent that manages a component (the "actor") with a behavior
+//              (either a player, or a player's component)
+//
 
 IMPLEMENT_SUBCLASS(Agent, "Agent")
 EMPTY_SERIALIZER(Agent)
@@ -44,12 +47,12 @@ END_SLOT_MAP()
 Agent::Agent()
 {
    STANDARD_CONSTRUCTOR()
-   actorPlayerName   = 0;
-   actorComponentName   = 0;
+   actorPlayerName = 0;
+   actorComponentName = 0;
    myActor = 0;
-   behavior     = 0;
-   state     = 0;
-   myStation     = 0;
+   behavior = 0;
+   state = 0;
+   myStation = 0;
 }
 
 //------------------------------------------------------------------------------

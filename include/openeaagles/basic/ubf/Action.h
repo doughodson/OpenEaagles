@@ -14,9 +14,9 @@ namespace Basic {
 //
 // Class: Action
 //
-// Description: 
-//    Action is responsible for its own execution - agent does not need to
-//    know anything
+// Description:
+//    Abstract base class for all Actions. They are responsible for
+//    their own execution.
 //
 class Action : public Basic::Object
 {

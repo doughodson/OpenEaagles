@@ -15,8 +15,7 @@ class Action;
 //
 // Class: Behavior
 //
-// Description: Abstract base class for behaviors
-//    newUbf adds slot-initialized default vote to original UBF version
+// Description: Abstract base class for all behaviors
 //
 class Behavior : public Basic::Component
 {
@@ -28,8 +27,8 @@ public:
    virtual Action* genAction(const State* const state, const LCreal dt) = 0;
 
 protected:
-   virtual void setVote(const unsigned int invote);
-   unsigned int getVote() const            { return vote; }
+   virtual void setVote(const unsigned int x);
+   unsigned int getVote() const;
 
 protected:
    bool setSlotVote(const Basic::Number* const num);
@@ -37,7 +36,9 @@ protected:
 private:
    unsigned int vote;
 };
-inline void Behavior::setVote(const unsigned int invote) { vote = invote; }
+
+inline void Behavior::setVote(const unsigned int x)    { vote = x; }
+inline unsigned int Behavior::getVote() const          { return vote; }
 
 
 } // End Basic namespace
