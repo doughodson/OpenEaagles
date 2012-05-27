@@ -10,10 +10,6 @@
 #include "openeaagles/basic/Pair.h"
 #include "openeaagles/basic/String.h"
 
-//#include "openeaagles/simulation/Player.h"
-//#include "openeaagles/simulation/Simulation.h"
-//#include "openeaagles/simulation/Station.h"
-
 namespace Eaagles {
 namespace Basic {
 
@@ -30,16 +26,12 @@ EMPTY_COPYDATA(Agent)
 
 // slot table for this class type
 BEGIN_SLOTTABLE(Agent)
-   //"actorPlayerName",                 //  1) The agent's actor - playerName
-   //"actorComponentName",              //  1) The agent's actor - componentName
    "state",                      //  1) The agent's state object
    "behavior"                    //  2) behavior
 END_SLOTTABLE(Agent)
 
 //  mapping of slots to handles
 BEGIN_SLOT_MAP(Agent)
-   //ON_SLOT(1, setSlotActorPlayerName, Basic::String )
-   //ON_SLOT(2, setSlotActorComponentName, Basic::String )
    ON_SLOT(1, setSlotState, State)
    ON_SLOT(2, setSlotBehavior, Behavior)
 END_SLOT_MAP()
@@ -47,12 +39,9 @@ END_SLOT_MAP()
 Agent::Agent()
 {
    STANDARD_CONSTRUCTOR()
-   //actorPlayerName = 0;
-   //actorComponentName = 0;
    myActor = 0;
    behavior = 0;
    state = 0;
-   //myStation = 0;
 }
 
 //------------------------------------------------------------------------------
@@ -65,8 +54,6 @@ void Agent::deleteData()
    // unref state
    if ( state!=0 )    { state->unref(); state = 0; }
 
-   //actorPlayerName->unref();
-   //actorComponentName->unref();
    myActor = 0;
 }
 
@@ -137,87 +124,20 @@ void Agent::setState(State* const x)
    p->unref();
 }
 
-//Simulation::Station* Agent::getStation()
-//{
-//   if ( myStation==0 ) {
-//      Simulation::Station* s = dynamic_cast<Simulation::Station*>(findContainerByType(typeid(Simulation::Station)));
-//      if (s != 0) {
-//         myStation = s;
-//      }
-//   }
-//   return myStation;
-//}
-//
-//Simulation::Simulation* Agent::getSimulation()
-//{
-//   Simulation::Simulation* sim = 0;
-//   Simulation::Station* s = getStation();
-//   if (s != 0) {
-//      sim = s->getSimulation();
-//   }
-//   return sim;
-//}
-
 Basic::Component* Agent::getActor()
 {
    if (myActor==0) {
-      //if ( actorPlayerName == 0 && actorComponentName == 0) {
          // our actor is our container
          if (container() != 0) {
             myActor = container();
          }
-      //}
-      //else {
-      //   Simulation::Simulation* sim = getSimulation();
-      //   if ( sim!=0 ) {
-      //      Basic::Component* player = sim->findPlayerByName(actorPlayerName->getString());
-      //      if (actorComponentName == 0) {
-      //         // no player component specified, so the player is the actor
-      //         myActor = player;
-      //      }
-      //      else if (player!=0) {
-      //         Basic::Pair* pair = player->findByName(actorComponentName->getString());
-      //         if (pair != 0) {
-      //            myActor = dynamic_cast<Basic::Component*>( pair->object() );
-      //         }
-      //      }
-      //   }
-      //}
    }
    return myActor;
 }
 
-//void Agent::setActorPlayerByName(const char* x)
-//{
-//   actorPlayerName = new Basic::String(x);
-//}
-//void Agent::setActorComponentByName(const char* x)
-//{
-//   actorComponentName = new Basic::String(x);
-//}
 //------------------------------------------------------------------------------
 // set slot functions
 //------------------------------------------------------------------------------
-
-//bool Agent::setSlotActorPlayerName(const Basic::String* const x)
-//{
-//   bool ok = false;
-//   if ( x!=0 ) {
-//      setActorPlayerByName(x->getString());
-//      ok = true;
-//   }
-//   return ok;
-//}
-//
-//bool Agent::setSlotActorComponentName(const Basic::String* const x)
-//{
-//   bool ok = false;
-//   if ( x!=0 ) {
-//      setActorComponentByName(x->getString());
-//      ok = true;
-//   }
-//   return ok;
-//}
 
 // Sets the state object for this agent
 bool Agent::setSlotState(State* const state)
@@ -251,7 +171,7 @@ Basic::Object* Agent::getSlotByIndex(const int si)
 
 
 //==============================================================================
-// Class: NewUbf::AgentTC
+// Class: AgentTC
 // Description: An Agent that manages a component (the "actor") with a behavior, using TC thread to perform its activity (instead of BG thread)
 //==============================================================================
 
