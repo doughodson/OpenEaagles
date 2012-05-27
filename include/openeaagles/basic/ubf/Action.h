@@ -23,13 +23,18 @@ class Action : public Basic::Object
    DECLARE_SUBCLASS(Action, Basic::Object)
 public:
    Action();
-   void setVote(const unsigned int x)      { vote = x; return; }
-   unsigned int getVote() const            { return vote; }
+
+   void setVote(const unsigned int x);
+   unsigned int getVote() const;
+
    virtual bool execute(Basic::Component* actor)=0;
 
 private:
    unsigned int vote;
 };
+
+inline void Action::setVote(const unsigned int x)      { vote = x; return; }
+inline unsigned int Action::getVote() const            { return vote; }
 
 } // End Basic namespace
 } // End Eaagles namespace
