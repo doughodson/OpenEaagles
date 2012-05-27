@@ -280,19 +280,6 @@ solution "oe"
          -- base filename for compiled binary target
          targetname "oeTerrain_d"
 
-   -- ubf library
-   project "ubf"
-      files {
-         "../../include/openeaagles/ubf/**.h",
-         "../../src/ubf/**.cpp"
-      }
-      configuration { "Release" }
-         -- base filename for compiled binary target
-         targetname "oeUbf"
-      configuration { "Debug" }
-         -- base filename for compiled binary target
-         targetname "oeUbf_d"
-
    -- vehicles library
    project "vehicles"
       files {
