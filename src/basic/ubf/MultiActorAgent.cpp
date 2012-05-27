@@ -1,8 +1,8 @@
 
-#include "MultiActorAgent.h"
-#include "UbfAction.h"
-#include "UbfBehavior.h"
-#include "UbfState.h"
+#include "openeaagles/basic/ubf/MultiActorAgent.h"
+#include "openeaagles/basic/ubf/Action.h"
+#include "openeaagles/basic/ubf/Behavior.h"
+#include "openeaagles/basic/ubf/State.h"
 
 #include "openeaagles/basic/Pair.h"
 #include "openeaagles/basic/PairStream.h"
@@ -14,10 +14,9 @@
 
 namespace Eaagles {
 namespace Basic {
-namespace Ubf {
 
 //==============================================================================
-// Class: Ubf::MultiActorAgent
+// Class: MultiActorAgent
 // Description: A UbfAgent that can manage one or a list of actors, each with own behavior
 // The only reason to use this class is if there is state shared between multiple agents.
 // This class assumes that state has two elements - shared state for all actors, and local state for each actor
@@ -36,8 +35,8 @@ END_SLOTTABLE(MultiActorAgent)
 
 //  mapping of slots to handles
 BEGIN_SLOT_MAP(MultiActorAgent)
-   ON_SLOT(1,  setSlotState,   UbfState)
-   ON_SLOT(2,  setSlotAgentList,   Basic::PairStream)
+   ON_SLOT(1,  setSlotState, State)
+   ON_SLOT(2,  setSlotAgentList, Basic::PairStream)
 END_SLOT_MAP()
 
 MultiActorAgent::MultiActorAgent()
@@ -101,16 +100,16 @@ void MultiActorAgent::controller(const LCreal dt)
          if (agentList[i].actor!=0) {
             
             setActor(agentList[i].actor);
-            UbfBehavior* behavior = agentList[i].behavior;
+            Behavior* behavior = agentList[i].behavior;
 
             // update ubf state
             getState()->updateState(agentList[i].actor);
 
             // generate an action
-            UbfAction* action = behavior->genAction(getState(), dt);
+            Action* action = behavior->genAction(getState(), dt);
             if (action) {	// allow possibility of no action returned
                action->execute(getActor());
-		         action->unref();
+               action->unref();
             }
          }
       }
@@ -119,7 +118,7 @@ void MultiActorAgent::controller(const LCreal dt)
 }
 
 
-void MultiActorAgent::setState(UbfState* const x)
+void MultiActorAgent::setState(State* const x)
 {
    if (x==0)
       return;
@@ -168,7 +167,7 @@ bool MultiActorAgent::clearAgentList()
 }
 
 // Adds an item to the input entity type table
-bool MultiActorAgent::addAgent(Basic::String* name, UbfBehavior* const b)
+bool MultiActorAgent::addAgent(Basic::String* name, Behavior* const b)
 {
    bool ok = false;
    if (nAgents < MAX_AGENTS) {
@@ -187,7 +186,7 @@ bool MultiActorAgent::addAgent(Basic::String* name, UbfBehavior* const b)
 //------------------------------------------------------------------------------
 
 // Sets the state object for this agent
-bool MultiActorAgent::setSlotState(UbfState* const state)
+bool MultiActorAgent::setSlotState(State* const state)
 {
    bool ok = false;
    if (state != 0) {
@@ -210,7 +209,7 @@ bool MultiActorAgent::setSlotAgentList(Basic::PairStream* const msg)
        while (item != 0) {
           Basic::Pair* pair = (Basic::Pair*) (item->getValue());
           //std::cerr << "MultiActorAgent::setSlotagentList: slot: " << *pair->slot() << std::endl;
-          UbfBehavior* b = dynamic_cast<UbfBehavior*>( pair->object() );
+          Behavior* b = dynamic_cast<Behavior*>( pair->object() );
           if (b != 0) {
              // We have an  object, so put it in the table
              addAgent(pair->slot(), b);
@@ -230,7 +229,7 @@ Basic::Object* MultiActorAgent::getSlotByIndex(const int si)
    return BaseClass::getSlotByIndex(si);
 }
 
-
-} // End Ubf namespace
 } // End Basic namespace
 } // End Eaagles namespace
+
+

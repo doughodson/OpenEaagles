@@ -8,6 +8,7 @@ OBJS =  \
 	$(LIB)(Agent.o) \
 	$(LIB)(Arbiter.o) \
 	$(LIB)(Behavior.o) \
+	$(LIB)(MultiActorAgent.o) \
 	$(LIB)(State.o)
 
 all: ${OBJS}
