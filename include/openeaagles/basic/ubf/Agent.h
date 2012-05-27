@@ -8,7 +8,7 @@
 
 namespace Eaagles {
 
-namespace Simulation { class Simulation; class Station;  }
+//namespace Simulation { class Simulation; class Station;  }
 
 namespace Basic {
 
@@ -45,26 +45,26 @@ protected:
    State* getState() const                { return state; }
 
    Basic::Component*       getActor();
-   Simulation::Station*     getStation();
-   Simulation::Simulation*  getSimulation();
+   //Simulation::Station*     getStation();
+   //Simulation::Simulation*  getSimulation();
 
    // sets which component ("actor") the agent is for
-   void setActorPlayerByName(const char*);
-   void setActorComponentByName(const char*);
+   //void setActorPlayerByName(const char*);
+   //void setActorComponentByName(const char*);
 
    // slot functions
    virtual bool setSlotBehavior(Behavior* const);
    // slot to set agent's actor (component to be controlled)
-   bool setSlotActorPlayerName(const Basic::String* const);
-   bool setSlotActorComponentName(const Basic::String* const);
+   //bool setSlotActorPlayerName(const Basic::String* const);
+   //bool setSlotActorComponentName(const Basic::String* const);
    bool setSlotState(State* const state);
 
 private:
    Behavior* behavior;
    State* state;
-   const Basic::String*    actorPlayerName;
-   const Basic::String*    actorComponentName;
-   Simulation::Station*    myStation;
+   //const Basic::String*    actorPlayerName;
+   //const Basic::String*    actorComponentName;
+   //Simulation::Station*    myStation;
    Basic::Component* myActor;
 };
 
