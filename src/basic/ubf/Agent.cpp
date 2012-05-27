@@ -1,10 +1,10 @@
 //
 // Agent
 //
-#include "UbfAgent.h"
-#include "UbfAction.h"
-#include "UbfBehavior.h"
-#include "UbfState.h"
+#include "openeaagles/basic/ubf/Agent.h"
+#include "openeaagles/basic/ubf/Action.h"
+#include "openeaagles/basic/ubf/Behavior.h"
+#include "openeaagles/basic/ubf/State.h"
 
 #include "openeaagles/basic/Pair.h"
 #include "openeaagles/basic/String.h"
@@ -15,34 +15,33 @@
 
 namespace Eaagles {
 namespace Basic {
-namespace Ubf {
 
 //==============================================================================
-// Class: NewUbf::UbfAgent
+// Class: NewUbf::Agent
 // Description: A UbfAgent that manages a component (the "actor") with a behavior (either a player, or a player's component)
 //==============================================================================
 
-IMPLEMENT_SUBCLASS(UbfAgent, "UbfAgent")
-EMPTY_SERIALIZER(UbfAgent)
-EMPTY_COPYDATA(UbfAgent)
+IMPLEMENT_SUBCLASS(Agent, "Agent")
+EMPTY_SERIALIZER(Agent)
+EMPTY_COPYDATA(Agent)
 
 // slot table for this class type
-BEGIN_SLOTTABLE(UbfAgent)
+BEGIN_SLOTTABLE(Agent)
    "actorPlayerName",                 //  1) The agent's actor - playerName
    "actorComponentName",              //  1) The agent's actor - componentName
    "state",                      //  2) The agent's state object
    "behavior"                    //  3) behavior
-END_SLOTTABLE(UbfAgent)
+END_SLOTTABLE(Agent)
 
 //  mapping of slots to handles
-BEGIN_SLOT_MAP(UbfAgent)
+BEGIN_SLOT_MAP(Agent)
    ON_SLOT(1, setSlotActorPlayerName, Basic::String )
    ON_SLOT(2, setSlotActorComponentName, Basic::String )
-   ON_SLOT(3, setSlotState,   UbfState)
-   ON_SLOT(4, setSlotBehavior, UbfBehavior)
+   ON_SLOT(3, setSlotState, State)
+   ON_SLOT(4, setSlotBehavior, Behavior)
 END_SLOT_MAP()
 
-UbfAgent::UbfAgent()
+Agent::Agent()
 {
    STANDARD_CONSTRUCTOR()
    actorPlayerName   = 0;
@@ -56,7 +55,7 @@ UbfAgent::UbfAgent()
 //------------------------------------------------------------------------------
 // deleteData() -- delete member data
 //------------------------------------------------------------------------------
-void UbfAgent::deleteData()
+void Agent::deleteData()
 {
    // unref arbiter
    if ( behavior!=0 ) { behavior->unref(); behavior = 0; }
@@ -68,7 +67,7 @@ void UbfAgent::deleteData()
    myActor = 0;
 }
 
-void UbfAgent::reset()
+void Agent::reset()
 {
    // behavior is not a full component - it knows that agent is its container, but agent doesn't know that it has behavior components
    if (behavior != 0) {
@@ -85,14 +84,14 @@ void UbfAgent::reset()
 //------------------------------------------------------------------------------
 // updateData()
 //------------------------------------------------------------------------------
-void UbfAgent::updateData(const LCreal dt)
+void Agent::updateData(const LCreal dt)
 {
    // update base class stuff first
    BaseClass::updateData(dt);
    controller(dt);
 }
 
-void UbfAgent::controller(const LCreal dt)
+void Agent::controller(const LCreal dt)
 {
    Basic::Component* actor = getActor();
    if ( (actor!=0) && (getState()!=0) && (getBehavior()!=0) ) {
@@ -101,7 +100,7 @@ void UbfAgent::controller(const LCreal dt)
       getState()->updateState(actor);
 
       // generate an action, but allow possibility of no action returned
-      UbfAction* action = getBehavior()->genAction(state, dt);
+      Action* action = getBehavior()->genAction(state, dt);
       if (action) {
          action->execute(actor);
          action->unref();
@@ -110,7 +109,7 @@ void UbfAgent::controller(const LCreal dt)
 }
 
 
-void UbfAgent::setBehavior(UbfBehavior* const x)
+void Agent::setBehavior(Behavior* const x)
 {
    if (x==0)
       return;
@@ -121,7 +120,7 @@ void UbfAgent::setBehavior(UbfBehavior* const x)
    behavior->container(this);
 }
 
-void UbfAgent::setState(UbfState* const x)
+void Agent::setState(State* const x)
 {
    if (x==0)
       return;
@@ -135,7 +134,7 @@ void UbfAgent::setState(UbfState* const x)
    p->unref();
 }
 
-Simulation::Station* UbfAgent::getStation()
+Simulation::Station* Agent::getStation()
 {
    if ( myStation==0 ) {
       Simulation::Station* s = dynamic_cast<Simulation::Station*>(findContainerByType(typeid(Simulation::Station)));
@@ -146,7 +145,7 @@ Simulation::Station* UbfAgent::getStation()
    return myStation;
 }
 
-Simulation::Simulation* UbfAgent::getSimulation()
+Simulation::Simulation* Agent::getSimulation()
 {
    Simulation::Simulation* sim = 0;
    Simulation::Station* s = getStation();
@@ -156,7 +155,7 @@ Simulation::Simulation* UbfAgent::getSimulation()
    return sim;
 }
 
-Basic::Component* UbfAgent::getActor()
+Basic::Component* Agent::getActor()
 {
    if (myActor==0) {
       if ( actorPlayerName == 0 && actorComponentName == 0) {
@@ -185,11 +184,11 @@ Basic::Component* UbfAgent::getActor()
    return myActor;
 }
 
-void UbfAgent::setActorPlayerByName(const char* x)
+void Agent::setActorPlayerByName(const char* x)
 {
    actorPlayerName = new Basic::String(x);
 }
-void UbfAgent::setActorComponentByName(const char* x)
+void Agent::setActorComponentByName(const char* x)
 {
    actorComponentName = new Basic::String(x);
 }
@@ -197,7 +196,7 @@ void UbfAgent::setActorComponentByName(const char* x)
 // set slot functions
 //------------------------------------------------------------------------------
 
-bool UbfAgent::setSlotActorPlayerName(const Basic::String* const x)
+bool Agent::setSlotActorPlayerName(const Basic::String* const x)
 {
    bool ok = false;
    if ( x!=0 ) {
@@ -207,7 +206,7 @@ bool UbfAgent::setSlotActorPlayerName(const Basic::String* const x)
    return ok;
 }
 
-bool UbfAgent::setSlotActorComponentName(const Basic::String* const x)
+bool Agent::setSlotActorComponentName(const Basic::String* const x)
 {
    bool ok = false;
    if ( x!=0 ) {
@@ -218,7 +217,7 @@ bool UbfAgent::setSlotActorComponentName(const Basic::String* const x)
 }
 
 // Sets the state object for this agent
-bool UbfAgent::setSlotState(UbfState* const state)
+bool Agent::setSlotState(State* const state)
 {
    bool ok = false;
    if (state != 0) {
@@ -228,7 +227,7 @@ bool UbfAgent::setSlotState(UbfState* const state)
    return ok;
 }
 
-bool UbfAgent::setSlotBehavior(UbfBehavior* const x)
+bool Agent::setSlotBehavior(Behavior* const x)
 {
    bool ok = false;
    if ( x!=0 ) {
@@ -241,7 +240,7 @@ bool UbfAgent::setSlotBehavior(UbfBehavior* const x)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Basic::Object* UbfAgent::getSlotByIndex(const int si)
+Basic::Object* Agent::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }
@@ -279,6 +278,6 @@ void AgentTC::updateData(const LCreal dt)
 {
 }
 
-} // End Ubf namespace
 } // End Basic namespace
 } // End Eaagles namespace
+
