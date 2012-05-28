@@ -1,16 +1,19 @@
 //------------------------------------------------------------------------------
 // Class: MultiActorAgent
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_MultiActorAgent_H__
-#define __Eaagles_Basic_MultiActorAgent_H__
+#ifndef __Eaagles_Simulation_MultiActorAgent_H__
+#define __Eaagles_Simulation_MultiActorAgent_H__
 
 #include "openeaagles/basic/Component.h"
 
 namespace Eaagles {
-   namespace Basic { class Behavior; class State; class Action; }
 
-namespace Simulation { 
-   class Simulation; class Station;
+namespace Basic { class Behavior; class State; class Action; }
+
+namespace Simulation {
+
+class Simulation;
+class Station;
 
 //
 // Class: MultiActorAgent
@@ -70,7 +73,7 @@ private:
 inline void MultiActorAgent::setActor(Basic::Component* c) { actor=c; }
 
 
-} // End Basic namespace
+} // End Simulation namespace
 } // End Eaagles namespace
 
 #endif

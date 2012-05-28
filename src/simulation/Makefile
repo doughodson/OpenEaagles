@@ -42,6 +42,7 @@ OBJS =  \
 	$(LIB)(LifeForms.o) \
 	$(LIB)(Message.o) \
 	$(LIB)(Missile.o) \
+	$(LIB)(MultiActorAgent.o) \
 	$(LIB)(Navigation.o) \
 	$(LIB)(NavRadios.o) \
 	$(LIB)(NetIO.o) \

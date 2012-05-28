@@ -1,5 +1,9 @@
+//------------------------------------------------------------------------------
+// Class: MultiActorAgent
+//------------------------------------------------------------------------------
 
-#include "openeaagles/basic/ubf/MultiActorAgent.h"
+#include "openeaagles/simulation/MultiActorAgent.h"
+
 #include "openeaagles/basic/ubf/Action.h"
 #include "openeaagles/basic/ubf/Behavior.h"
 #include "openeaagles/basic/ubf/State.h"
@@ -15,13 +19,15 @@
 namespace Eaagles {
 namespace Simulation {
 
-//==============================================================================
-// Class: MultiActorAgent
-// Description: A UbfAgent that can manage one or a list of actors, each with own behavior
-// The only reason to use this class is if there is state shared between multiple agents.
-// This class assumes that state has two elements - shared state for all actors, and local state for each actor
 //
-//==============================================================================
+// Class: MultiActorAgent
+//
+// Description: An Agent that can manage one or a list of actors, each with own behavior
+// The only reason to use this class is if there is state shared between multiple agents.
+// This class assumes that state has two elements - shared state for all actors, and
+// local state for each actor
+//
+//
 
 IMPLEMENT_ABSTRACT_SUBCLASS(MultiActorAgent, "MultiActorAgent")
 EMPTY_SERIALIZER(MultiActorAgent)
@@ -229,7 +235,7 @@ Basic::Object* MultiActorAgent::getSlotByIndex(const int si)
    return BaseClass::getSlotByIndex(si);
 }
 
-} // End Basic namespace
+} // End Simulation namespace
 } // End Eaagles namespace
 
 
