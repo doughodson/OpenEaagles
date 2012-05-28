@@ -13,7 +13,7 @@
 #include "openeaagles/simulation/Station.h"
 
 namespace Eaagles {
-namespace Basic {
+namespace Simulation {
 
 //==============================================================================
 // Class: MultiActorAgent
@@ -35,7 +35,7 @@ END_SLOTTABLE(MultiActorAgent)
 
 //  mapping of slots to handles
 BEGIN_SLOT_MAP(MultiActorAgent)
-   ON_SLOT(1,  setSlotState, State)
+   ON_SLOT(1,  setSlotState, Basic::State)
    ON_SLOT(2,  setSlotAgentList, Basic::PairStream)
 END_SLOT_MAP()
 
@@ -60,7 +60,7 @@ void MultiActorAgent::deleteData()
 
 void MultiActorAgent::reset()
 {
-   Simulation::Simulation* sim = getSimulation();
+   Simulation* sim = getSimulation();
    if (sim != 0) {
       // convert component names to component ptrs, for all behaviors in the list
       for (unsigned int i=0; i<nAgents; i++) {
@@ -100,13 +100,13 @@ void MultiActorAgent::controller(const LCreal dt)
          if (agentList[i].actor!=0) {
             
             setActor(agentList[i].actor);
-            Behavior* behavior = agentList[i].behavior;
+            Basic::Behavior* behavior = agentList[i].behavior;
 
             // update ubf state
             getState()->updateState(agentList[i].actor);
 
             // generate an action
-            Action* action = behavior->genAction(getState(), dt);
+            Basic::Action* action = behavior->genAction(getState(), dt);
             if (action) {	// allow possibility of no action returned
                action->execute(getActor());
                action->unref();
@@ -118,7 +118,7 @@ void MultiActorAgent::controller(const LCreal dt)
 }
 
 
-void MultiActorAgent::setState(State* const x)
+void MultiActorAgent::setState(Basic::State* const x)
 {
    if (x==0)
       return;
@@ -132,10 +132,10 @@ void MultiActorAgent::setState(State* const x)
    p->unref();
 }
 
-Simulation::Station* MultiActorAgent::getStation()
+Station* MultiActorAgent::getStation()
 {
    if ( myStation==0 ) {
-      Simulation::Station* s = dynamic_cast<Simulation::Station*>(findContainerByType(typeid(Simulation::Station)));
+      Station* s = dynamic_cast<Station*>(findContainerByType(typeid(Station)));
       if (s != 0) {
          myStation = s;
       }
@@ -143,10 +143,10 @@ Simulation::Station* MultiActorAgent::getStation()
    return myStation;
 }
 //
-Simulation::Simulation* MultiActorAgent::getSimulation()
+Simulation* MultiActorAgent::getSimulation()
 {
-   Simulation::Simulation* sim = 0;
-   Simulation::Station* s = getStation();
+   Simulation* sim = 0;
+   Station* s = getStation();
    if (s != 0) {
       sim = s->getSimulation();
    }
@@ -167,7 +167,7 @@ bool MultiActorAgent::clearAgentList()
 }
 
 // Adds an item to the input entity type table
-bool MultiActorAgent::addAgent(Basic::String* name, Behavior* const b)
+bool MultiActorAgent::addAgent(Basic::String* name, Basic::Behavior* const b)
 {
    bool ok = false;
    if (nAgents < MAX_AGENTS) {
@@ -186,7 +186,7 @@ bool MultiActorAgent::addAgent(Basic::String* name, Behavior* const b)
 //------------------------------------------------------------------------------
 
 // Sets the state object for this agent
-bool MultiActorAgent::setSlotState(State* const state)
+bool MultiActorAgent::setSlotState(Basic::State* const state)
 {
    bool ok = false;
    if (state != 0) {
@@ -209,7 +209,7 @@ bool MultiActorAgent::setSlotAgentList(Basic::PairStream* const msg)
        while (item != 0) {
           Basic::Pair* pair = (Basic::Pair*) (item->getValue());
           //std::cerr << "MultiActorAgent::setSlotagentList: slot: " << *pair->slot() << std::endl;
-          Behavior* b = dynamic_cast<Behavior*>( pair->object() );
+          Basic::Behavior* b = dynamic_cast<Basic::Behavior*>( pair->object() );
           if (b != 0) {
              // We have an  object, so put it in the table
              addAgent(pair->slot(), b);
