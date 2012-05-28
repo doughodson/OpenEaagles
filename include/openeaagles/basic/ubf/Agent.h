@@ -41,7 +41,7 @@ protected:
    void setState(State* const);
    State* getState() const                { return state; }
 
-   Basic::Component*       getActor();
+   virtual Basic::Component*       getActor();
 
    // slot functions
    virtual bool setSlotBehavior(Behavior* const);
