@@ -43,7 +43,7 @@ protected:
 
    virtual void initActor();
 
-   Basic::Component* getActor() const;
+   Basic::Component* getActor();
    void setActor(Basic::Component* const myActor);
 
    // slot functions
@@ -53,10 +53,10 @@ protected:
 private:
    Behavior* behavior;
    State* state;
-   Basic::Component* myActor;
+   SPtr<Basic::Component> myActor;
 };
 inline void Agent::setActor(Basic::Component* const actor)      { myActor = actor; return; }
-inline Basic::Component* Agent::getActor() const            { return myActor; }
+inline Basic::Component* Agent::getActor()           { return myActor; }
 
 
 //
