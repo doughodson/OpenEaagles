@@ -8,7 +8,7 @@
 
 namespace Eaagles {
 
-namespace Basic { class Behavior; class State; class Action; }
+namespace Basic { class Behavior; class State; }
 
 namespace Simulation {
 
@@ -75,6 +75,32 @@ inline void MultiActorAgent::setActor(Basic::Component* c) { actor=c; }
 
 } // End Simulation namespace
 } // End Eaagles namespace
+
+
+// A MultiActorAgent can be configured as shown below: (assuming the existence of the "abc" state and behavior classes)
+//( Station
+//   components: {
+//      agent: ( MultiActorAgent
+//         state: ( abcState )
+//         agentList: {
+//				// use slotname to specify the player name (the "actor") to which to connect the agent/behavior
+//				p1: ( abcBehavior1 )
+//				p2: ( abcBehavior2 )
+//         }
+//		)
+//   } // components
+//
+//	simulation: ( Simulation
+//    
+//      players: {
+//		
+//			p1: ()
+//			
+//			p2: ()
+//			
+//		} // players
+//	) // simulation
+//) // Station
 
 #endif
 

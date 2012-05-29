@@ -4,13 +4,9 @@
 #ifndef __Eaagles_Simulation_SimAgent_H__
 #define __Eaagles_Simulation_SimAgent_H__
 
-//#include "openeaagles/basic/Component.h"
 #include "openeaagles/basic/ubf/Agent.h"
 
 namespace Eaagles {
-
-//namespace Basic { class Behavior; class State; class Action; }
-
 namespace Simulation { 
 	class Simulation; class Station;
 //
@@ -51,6 +47,28 @@ private:
    Station*    myStation;
 };
 
+
+// A SimAgent can be configured as shown below:  (assuming the existence of the "abc" state and behavior classes)
+//( Station
+//
+//   components: {
+//      simpleSimAgent: ( SimAgent
+//         actorPlayerName: p01
+//         state: ( abcState )
+//         behavior: ( abcBehavior1 )
+//      )
+//   } // components
+//
+//	simulation: ( Simulation
+//    
+//		players: {
+//		
+//			p01: ()
+//			
+//			p02: ()
+//		} // players
+//	) // simulation
+//) // Station
 
 } // End Simulation namespace
 } // End Eaagles namespace

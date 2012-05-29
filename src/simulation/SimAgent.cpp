@@ -51,10 +51,14 @@ SimAgent::SimAgent()
 //------------------------------------------------------------------------------
 void SimAgent::deleteData()
 {
-   if (actorPlayerName!=0)
+   if (actorPlayerName!=0) {
       actorPlayerName->unref();
-   if (actorComponentName!=0)
+      actorPlayerName=0;
+   }
+   if (actorComponentName!=0) {
       actorComponentName->unref();
+      actorComponentName=0;
+   }
 }
 
 Station* SimAgent::getStation()
