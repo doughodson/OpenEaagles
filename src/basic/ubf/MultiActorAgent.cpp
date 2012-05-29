@@ -17,7 +17,7 @@ namespace Simulation {
 
 //==============================================================================
 // Class: MultiActorAgent
-// Description: A UbfAgent that can manage one or a list of actors, each with own behavior
+// Description: An Ubf Agent that can manage one or a list of actors, each with own behavior
 // The only reason to use this class is if there is state shared between multiple agents.
 // This class assumes that state has two elements - shared state for all actors, and local state for each actor
 //

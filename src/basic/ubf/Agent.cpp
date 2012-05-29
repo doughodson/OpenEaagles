@@ -16,7 +16,7 @@ namespace Basic {
 //
 // Class: Agent
 //
-// Description: A UbfAgent that manages a component (the "actor") with a behavior
+// Description: An Agent that manages a component (the "actor") with a behavior
 //              (either a player, or a player's component)
 //
 

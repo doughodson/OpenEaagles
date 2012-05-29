@@ -106,7 +106,7 @@ Action* Arbiter::genComplexAction(const Basic::List* const actionSet)
    }
 
    if (maxVote > 0 && isMessageEnabled(MSG_DEBUG))
-      std::cout << "UbfArbiter: chose action with vote= " << maxVote << std::endl;
+      std::cout << "Arbiter: chose action with vote= " << maxVote << std::endl;
 
    // if a vote value has been set for arbiter in input, should it override? as in:
    //if (getVote() > 0)
