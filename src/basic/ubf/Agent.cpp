@@ -16,7 +16,7 @@ namespace Basic {
 //
 // Class: Agent
 //
-// Description: A UbfAgent that manages a component (the "actor") with a behavior
+// Description: An Agent that manages a component (the "actor") with a behavior
 //              (either a player, or a player's component)
 //
 
@@ -66,6 +66,7 @@ void Agent::reset()
    }
    
    myActor=0;
+   initActor();
 
    // although state is not explicitly initialized as component, the set state
    // method sets up the component relationship since state is a component, it
@@ -85,7 +86,7 @@ void Agent::updateData(const LCreal dt)
 
 void Agent::controller(const LCreal dt)
 {
-   Basic::Component* actor = getMyActor();
+   Basic::Component* actor = getActor();
 
    if ( (actor!=0) && (getState()!=0) && (getBehavior()!=0) ) {
       
@@ -127,7 +128,8 @@ void Agent::setState(State* const x)
    p->unref();
 }
 
-Basic::Component* Agent::getMyActor()
+// finds our actor during reset() processing
+void Agent::initActor()
 {
    if (getActor()==0) {
       // our actor is our container
@@ -135,7 +137,6 @@ Basic::Component* Agent::getMyActor()
          setActor(container());
       }
    }
-   return getActor();
 }
 
 //------------------------------------------------------------------------------

@@ -7,7 +7,6 @@
 namespace Eaagles {
 namespace Basic {
 
-//IMPLEMENT_SUBCLASS(UbfState, "UbfState")
 IMPLEMENT_ABSTRACT_SUBCLASS(State, "State")
 EMPTY_SLOTTABLE(State)
 EMPTY_CONSTRUCTOR(State)
