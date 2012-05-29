@@ -52,6 +52,10 @@
 #include "openeaagles/simulation/ScanGimbal.h"
 #include "openeaagles/simulation/Ships.h"
 #include "openeaagles/simulation/Signatures.h"
+
+#include "openeaagles/simulation/SimAgent.h"
+#include "openeaagles/simulation/MultiActorAgent.h"
+
 #include "openeaagles/simulation/Simulation.h"
 #include "openeaagles/simulation/SpaceDynamicsModel.h"
 #include "openeaagles/simulation/SpaceVehicle.h"
@@ -393,6 +397,15 @@ Basic::Object* simulationFormFunc(const char* formname)
    else if ( strcmp(formname, AirAngleOnlyTrkMgr::getFormName()) == 0 ) {
       newform = new AirAngleOnlyTrkMgr();
    }
+
+    // UBF Agents
+    else if ( strcmp(formname, SimAgent::getFormName()) == 0 ) {
+        newform = new SimAgent();
+    }
+    else if ( strcmp(formname, MultiActorAgent::getFormName()) == 0 ) {
+        newform = new MultiActorAgent();
+    }
+
 
    else if ( strcmp(formname, TabLogger::getFormName()) == 0 ) {
       newform = new TabLogger();
