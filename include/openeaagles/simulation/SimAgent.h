@@ -4,16 +4,15 @@
 #ifndef __Eaagles_Simulation_SimAgent_H__
 #define __Eaagles_Simulation_SimAgent_H__
 
-#include "openeaagles/basic/Component.h"
+//#include "openeaagles/basic/Component.h"
 #include "openeaagles/basic/ubf/Agent.h"
 
 namespace Eaagles {
 
-namespace Basic { class Behavior; class State; class Action; }
+//namespace Basic { class Behavior; class State; class Action; }
 
 namespace Simulation { 
 	class Simulation; class Station;
-
 //
 // Class: UbfAgent
 //
