@@ -1754,6 +1754,7 @@ struct EmitterBeamData {
    // Constructor(s)
    EmitterBeamData() :
       beamDataLength(0), beamIDNumber(0), beamParameterIndex(0), parameterData(),
+      beamData(),
       beamFunction(0), numberOfTargetsInTrack(0), highDensityTracks(0), beamStatus(0),
       jammingTechnique() { }
 
@@ -1763,6 +1764,7 @@ struct EmitterBeamData {
       beamIDNumber = _v.beamIDNumber;
       beamParameterIndex = _v.beamParameterIndex;
       parameterData = _v.parameterData;
+      beamData = _v.beamData;
       beamFunction = _v.beamFunction;
       numberOfTargetsInTrack = _v.numberOfTargetsInTrack;
       highDensityTracks = _v.highDensityTracks;
@@ -1797,6 +1799,7 @@ struct EmitterBeamData {
          beamIDNumber == s2.beamIDNumber && 
          beamParameterIndex == s2.beamParameterIndex && 
          parameterData == s2.parameterData && 
+         beamData == s2.beamData &&
          beamFunction == s2.beamFunction && 
          numberOfTargetsInTrack == s2.numberOfTargetsInTrack && 
          highDensityTracks == s2.highDensityTracks && 
@@ -1812,6 +1815,7 @@ struct EmitterBeamData {
       // Swap our stuff first
       beamParameterIndex  = convertUInt16(beamParameterIndex);
       parameterData.swapBytes();
+      beamData.swapBytes();
       jammingTechnique.swapBytes();
 
       // Then swap the "targets in track" data
@@ -1827,6 +1831,7 @@ struct EmitterBeamData {
          << "  beamIDNumber:           " << (long)v.beamIDNumber << std::endl
          << "  beamParameterIndex:     " << (long)v.beamParameterIndex << std::endl
          << "Parameter Data:           " << std::endl << v.parameterData << std::endl
+         << "  beamData:               " << std::endl << v.beamData << std::endl
          << "  beamFunction:           " << (long)v.beamFunction << std::endl
          << "  numberOfTargetsInTrack: " << (long)v.numberOfTargetsInTrack << std::endl
          << "  highDensityTracks:      " << (long)v.highDensityTracks << std::endl
