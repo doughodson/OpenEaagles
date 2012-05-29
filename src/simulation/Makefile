@@ -65,6 +65,7 @@ OBJS =  \
 	$(LIB)(SensorMsg.o) \
 	$(LIB)(Ships.o) \
 	$(LIB)(Signatures.o) \
+	$(LIB)(SimAgent.o) \
 	$(LIB)(SimLogger.o) \
 	$(LIB)(Simulation.o) \
 	$(LIB)(simulationFF.o) \
