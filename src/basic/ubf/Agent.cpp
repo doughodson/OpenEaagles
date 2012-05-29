@@ -65,6 +65,7 @@ void Agent::reset()
    }
    
    myActor=0;
+   initActor();
 
    // although state is not explicitly initialized as component, the set state method sets up the component relationship
    // since state is a component, it will get the reset() this way (via the component i/f)
@@ -83,7 +84,7 @@ void Agent::updateData(const LCreal dt)
 
 void Agent::controller(const LCreal dt)
 {
-   Basic::Component* actor = getMyActor();
+   Basic::Component* actor = getActor();
 
    if ( (actor!=0) && (getState()!=0) && (getBehavior()!=0) ) {
       
@@ -125,7 +126,8 @@ void Agent::setState(State* const x)
    p->unref();
 }
 
-Basic::Component* Agent::getMyActor()
+// finds our actor during reset() processing
+void Agent::initActor()
 {
    if (getActor()==0) {
       // our actor is our container
@@ -133,7 +135,6 @@ Basic::Component* Agent::getMyActor()
          setActor(container());
       }
    }
-   return getActor();
 }
 
 //------------------------------------------------------------------------------

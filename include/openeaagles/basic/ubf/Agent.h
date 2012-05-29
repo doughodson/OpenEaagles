@@ -41,7 +41,7 @@ protected:
    void setState(State* const);
    State* getState() const                { return state; }
 
-   virtual Basic::Component* getMyActor();
+   virtual void initActor();
 
    Basic::Component* getActor() const;
    void setActor(Basic::Component* const myActor);
