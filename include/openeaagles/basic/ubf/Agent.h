@@ -41,7 +41,10 @@ protected:
    void setState(State* const);
    State* getState() const                { return state; }
 
-   virtual Basic::Component*       getActor();
+   virtual Basic::Component* getMyActor();
+
+   Basic::Component* getActor() const;
+   void setActor(Basic::Component* const myActor);
 
    // slot functions
    virtual bool setSlotBehavior(Behavior* const);
@@ -52,6 +55,9 @@ private:
    State* state;
    Basic::Component* myActor;
 };
+inline void Agent::setActor(Basic::Component* const actor)      { myActor = actor; return; }
+inline Basic::Component* Agent::getActor() const            { return myActor; }
+
 
 //
 // Class: Agent

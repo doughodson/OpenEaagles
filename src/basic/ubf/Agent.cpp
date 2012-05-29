@@ -83,7 +83,8 @@ void Agent::updateData(const LCreal dt)
 
 void Agent::controller(const LCreal dt)
 {
-   Basic::Component* actor = getActor();
+   Basic::Component* actor = getMyActor();
+
    if ( (actor!=0) && (getState()!=0) && (getBehavior()!=0) ) {
       
       // update ubf state
@@ -124,15 +125,15 @@ void Agent::setState(State* const x)
    p->unref();
 }
 
-Basic::Component* Agent::getActor()
+Basic::Component* Agent::getMyActor()
 {
-   if (myActor==0) {
-         // our actor is our container
-         if (container() != 0) {
-            myActor = container();
-         }
+   if (getActor()==0) {
+      // our actor is our container
+      if (container() != 0) {
+         setActor(container());
+      }
    }
-   return myActor;
+   return getActor();
 }
 
 //------------------------------------------------------------------------------
