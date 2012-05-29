@@ -41,7 +41,10 @@ protected:
    void setState(State* const);
    State* getState() const                { return state; }
 
-   virtual Basic::Component*       getActor();
+   virtual Basic::Component* getMyActor();
+
+   Basic::Component* getActor() const;
+   void setActor(Basic::Component* const myActor);
 
    // slot functions
    virtual bool setSlotBehavior(Behavior* const);
@@ -53,6 +56,10 @@ private:
    Basic::Component* myActor;
 };
 
+inline void Agent::setActor(Basic::Component* const actor)     { myActor = actor; return; }
+inline Basic::Component* Agent::getActor() const                { return myActor; }
+
+
 //
 // Class: Agent
 //
@@ -60,6 +67,7 @@ private:
 //
 // Description: Generic agent class to control a component - the agent's "actor"
 // - a derived agent class that performs its actions in the TC thread
+//
 class AgentTC : public Agent
 {
    DECLARE_SUBCLASS(AgentTC, Agent)

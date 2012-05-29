@@ -59,15 +59,17 @@ void Agent::deleteData()
 
 void Agent::reset()
 {
-   // behavior is not a full component - it knows that agent is its container, but agent doesn't know that it has behavior components
+   // behavior is not a full component - it knows that agent is its container,
+   // but agentdoesn't know that it has behavior components
    if (behavior != 0) {
       behavior->reset();
    }
    
    myActor=0;
 
-   // although state is not explicitly initialized as component, the set state method sets up the component relationship
-   // since state is a component, it will get the reset() this way (via the component i/f)
+   // although state is not explicitly initialized as component, the set state
+   // method sets up the component relationship since state is a component, it
+   // will get the reset() this way (via the component i/f)
    BaseClass::reset();
 }
 
@@ -83,7 +85,8 @@ void Agent::updateData(const LCreal dt)
 
 void Agent::controller(const LCreal dt)
 {
-   Basic::Component* actor = getActor();
+   Basic::Component* actor = getMyActor();
+
    if ( (actor!=0) && (getState()!=0) && (getBehavior()!=0) ) {
       
       // update ubf state
@@ -124,15 +127,15 @@ void Agent::setState(State* const x)
    p->unref();
 }
 
-Basic::Component* Agent::getActor()
+Basic::Component* Agent::getMyActor()
 {
-   if (myActor==0) {
-         // our actor is our container
-         if (container() != 0) {
-            myActor = container();
-         }
+   if (getActor()==0) {
+      // our actor is our container
+      if (container() != 0) {
+         setActor(container());
+      }
    }
-   return myActor;
+   return getActor();
 }
 
 //------------------------------------------------------------------------------
@@ -172,7 +175,8 @@ Basic::Object* Agent::getSlotByIndex(const int si)
 
 //==============================================================================
 // Class: AgentTC
-// Description: An Agent that manages a component (the "actor") with a behavior, using TC thread to perform its activity (instead of BG thread)
+// Description: An Agent that manages a component (the "actor") with a behavior,
+//              using TC thread to perform its activity (instead of BG thread)
 //==============================================================================
 
 IMPLEMENT_SUBCLASS(AgentTC, "AgentTC")
@@ -189,8 +193,9 @@ void AgentTC::updateTC(const LCreal dt)
 {
    // update base class stuff first
    BaseClass::updateTC(dt);
-   // since we are a station component, at this point we are always finished with the sim's update TC, which means we have just finished phase 3
-   // and are soon to start the new phase 0
+   // since we are a station component, at this point we are always finished with
+   // the sim's update TC, which means we have just finished phase 3 and are soon
+   // to start the new phase 0
    controller(dt);
 }
 
