@@ -71,7 +71,7 @@ dis
       -- Processing of member data "beamData" was completely omitted.
          This was causing NaN in Windows when EmitterBeamData object were
 	 copied.
-	 Interesing since it appears at first glance that the defualt
+	 Interesing since it appears at first glance that the default
 	 behaviour would have set "beamData" to all 0's.
 	 Maybe it is just the missing "swapBytes" call.
 	 "beamdata" now processed like all other member data in this class
