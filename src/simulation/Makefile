@@ -42,6 +42,7 @@ OBJS =  \
 	$(LIB)(LifeForms.o) \
 	$(LIB)(Message.o) \
 	$(LIB)(Missile.o) \
+	$(LIB)(MultiActorAgent.o) \
 	$(LIB)(Navigation.o) \
 	$(LIB)(NavRadios.o) \
 	$(LIB)(NetIO.o) \
@@ -64,6 +65,7 @@ OBJS =  \
 	$(LIB)(SensorMsg.o) \
 	$(LIB)(Ships.o) \
 	$(LIB)(Signatures.o) \
+	$(LIB)(SimAgent.o) \
 	$(LIB)(SimLogger.o) \
 	$(LIB)(Simulation.o) \
 	$(LIB)(simulationFF.o) \

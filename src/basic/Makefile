@@ -63,7 +63,7 @@ OBJS =  \
 	$(LIB)(Vectors.o) \
 	$(LIB)(Yiq.o)
 
-SUBDIRS = osg units distributions
+SUBDIRS = osg units distributions ubf
 
 all: subdirs ${OBJS}
 

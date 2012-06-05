@@ -24,7 +24,6 @@ PROJECTS += ioDevice
 PROJECTS += linearSys 
 PROJECTS += simulation sensors terrain
 PROJECTS += dis vehicles maps
-PROJECTS += ubf
 
 #
 # GUI Interface libraries

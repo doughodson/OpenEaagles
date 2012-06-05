@@ -64,6 +64,11 @@
 #include "openeaagles/basic/Rand.h"
 #include "openeaagles/basic/ThreadPool.h"
 
+// Ubf
+#include "openeaagles/basic/ubf/Agent.h"
+#include "openeaagles/basic/ubf/Arbiter.h"
+
+
 namespace Eaagles {
 namespace Basic {
 
@@ -445,6 +450,14 @@ Object* basicFormFunc(const char* formname)
     // Thread pool
     else if ( strcmp(formname, ThreadPool::getFormName()) == 0 ) {
        newform = new ThreadPool();
+    }
+
+    // Ubf
+    else if ( strcmp(formname, Agent::getFormName()) == 0 ) {
+        newform = new Agent();
+    }
+    else if ( strcmp(formname, Arbiter::getFormName()) == 0 ) {
+        newform = new Arbiter();
     }
 
     return newform;
