@@ -22,6 +22,10 @@ basic
    Float classs
       -- Only providing constructors for LCreal defined as double
 
+   Nav class
+      -- convertPosVec2llE(): removed the meters to nautical mile conversion from
+      the semi-major axis; should be in meters (bug fix)
+
    Number classs
       -- Only providing constructors for LCreal defined as double
 

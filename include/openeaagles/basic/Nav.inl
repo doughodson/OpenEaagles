@@ -592,7 +592,7 @@ inline bool Nav::convertPosVec2llE(
    const EarthModel* pModel = em;
    if (pModel == 0) { pModel = &EarthModel::wgs84; }
 
-   const double a  = Distance::M2NM * pModel->getA();   // semi-major axis
+   const double a  = pModel->getA();   // semi-major axis
    const double e2 = pModel->getE2();  // eccentricity squared
 
    // Define Local Constants
@@ -604,14 +604,20 @@ inline bool Nav::convertPosVec2llE(
    double north = pos.x();
    double east = pos.y();
    double down = pos.z();
-   if (lat != 0) *lat = slat + Angle::R2DCC * (north / rm);
-   if (lon != 0) {
-      if (cosSlat != 0)
-         *lon = Angle::aepcdDeg( slon + Angle::R2DCC * (east / rn) / cosSlat );
-      else
-         *lon = slon;
+   if (lat != 0) {
+      *lat = slat + Angle::R2DCC * (north / rm);
    }
-   if (alt != 0) *alt = -down;
+   if (lon != 0) {
+      if (cosSlat != 0) {
+         *lon = Angle::aepcdDeg( slon + Angle::R2DCC * (east / rn) / cosSlat );
+      }
+      else {
+         *lon = slon;
+    }
+   }
+   if (alt != 0) {
+      *alt = -down;
+   }
 
    return true;
 }
@@ -752,7 +758,7 @@ inline bool Nav::convertLL2PosVecS(
    bool ok = false;
    if (pos != 0) {
       double x = ( Angle::aepcdDeg(lat - slat) * 60.0 * Distance::NM2M );
-      double y = ( Angle::aepcdDeg(lon - slon) * (60.0 * cosSlat) * Distance::NM2M );
+      double y = ( Angle::aepcdDeg(lon - slon) * 60.0 * Distance::NM2M * cosSlat );
       double z = ( -alt );
       pos->set(x, y, z);
       ok = true;
