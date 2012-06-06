@@ -106,6 +106,7 @@ class Tdb;
 //
 //    useWorldCoordinates  (Number)          Using player of interest's world (ECEF) coordinate system (default: false)
 //    useOwnHeadingOnly    <Number>          Whether only the ownship heading is used by the target data block (default: true)
+//    earthRadius          (Distance)        Earth radius or zero to use ownship's earth radius (default: 0 -- use ownship's earth radius)
 //
 //
 // Events:
@@ -221,6 +222,7 @@ public:  // Public section
    bool isTerrainOccultingEnabled() const  { return terrainOcculting; }     // Terrain occulting enabled flag
    bool isUsingWorldCoordinates() const    { return useWorld; }             // Returns true if using player of interest's world coordinates
    bool isUsingHeadingOnly() const         { return ownHeadingOnly; }       // Returns true if using players heading only
+   double getEarthRadius() const;                                           // Returns earth radius (meters)
    virtual bool fromPlayerOfInterest(const Emission* const em);             // Returns true if this emission is from a player of interest
 
    virtual bool setMaxRange2PlayersOfInterest(const double meters);        // Max range to players of interest or zero for all (meters)
@@ -322,6 +324,9 @@ public:  // Public section
    // Use only the ownship player's heading to when transforming between body and local NED
    virtual bool setSlotUseOwnHeadingOnly(const Basic::Number* const msg);  
 
+   // Earth radius used by Tdb for earth masking
+   virtual bool setSlotEarthRadius(const Basic::Distance* const msg);  
+
    static void limitVec(osg::Vec2d& vec, const osg::Vec2d& lim);
    static void limitVec(osg::Vec3d& vec, const osg::Vec3d& lim);
    static void limitVec(osg::Vec2d& vec, const osg::Vec2d& ll, const osg::Vec2d& ul);
@@ -381,6 +386,7 @@ private:
    bool     terrainOcculting; // Target terrain occulting enabled flag
    bool     useWorld;         // Using player of interest's world coordinates
    bool     ownHeadingOnly;   // Whether only the ownship heading is used by the target data block
+   double   earthRadius;      // Earth radius or zero to use ownship's earth radius (meters)
 
    SPtr<Tdb> tdb;             // Current Target Data Block
 

@@ -72,7 +72,8 @@ BEGIN_SLOTTABLE(Gimbal)
     "maxAngle2PlayersOfInterest",   // 32: Max angle of gimbal boresight to players of interest or zero for all (default: 0)
     "localPlayersOfInterestOnly",   // 33: Sets the local only players of interest flag (default: false)
     "useWorldCoordinates",          // 34: Using player of interest's world (ECEF) coordinate system
-    "ownHeadingOnly"                // 35: Whether only the ownship heading is used by the target data block
+    "ownHeadingOnly",               // 35: Whether only the ownship heading is used by the target data block
+    "earthRadius",                  // 36: Earth radius or zero to use ownship's earth radius (default: 0 -- use ownship's earth radius)
 END_SLOTTABLE(Gimbal)
 
 // Map slot table to handles 
@@ -124,6 +125,7 @@ BEGIN_SLOT_MAP(Gimbal)
 
     ON_SLOT(34, setSlotUseWorldCoordinates, Basic::Number)   // Using player of interest's world (ECEF) coordinate system
     ON_SLOT(35,setSlotUseOwnHeadingOnly,Basic::Number)
+    ON_SLOT(36,setSlotEarthRadius,Basic::Distance)       // Earth radius 
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -179,6 +181,7 @@ void Gimbal::initData()
    ownHeadingOnly = true;
    playerTypes = 0xFFFF;   // all types
    maxPlayers = 200;
+   earthRadius = 0.0;
 
    tdb = 0;
 }
@@ -216,6 +219,7 @@ void Gimbal::copyData(const Gimbal& org, const bool cc)
    ownHeadingOnly = org.ownHeadingOnly;
    playerTypes = org.playerTypes;
    maxPlayers = org.maxPlayers;
+   earthRadius = org.earthRadius;
 
    tdb = 0;
 }
@@ -300,6 +304,24 @@ bool Gimbal::fromPlayerOfInterest(const Emission* const em)
       }
    }
    return ok;
+}
+
+//------------------------------------------------------------------------------
+// Returns earth radius (meters)
+//------------------------------------------------------------------------------
+double Gimbal::getEarthRadius() const
+{
+   double erad = earthRadius;
+
+   if (erad <= 0.0) {
+      erad = Basic::Nav::ERAD60 * Basic::Distance::NM2M;
+      const Player* own = getOwnship();
+      if (own != 0) {
+         erad = own->getEarthRadius();
+      }
+   }
+
+   return erad;
 }
 
 //------------------------------------------------------------------------------
@@ -572,6 +594,7 @@ bool Gimbal::setOwnHeadingOnly(const bool flg)
    ownHeadingOnly = flg;
    return true;
 }
+
 
 //------------------------------------------------------------------------------
 // setPosition() - sets the initial azimuth and elevation position
@@ -1226,6 +1249,18 @@ bool Gimbal::setSlotUseOwnHeadingOnly(const Basic::Number* const msg)
    }
    return ok;
 }
+
+   // Earth radius used by Tdb for earth masking
+bool Gimbal::setSlotEarthRadius(const Basic::Distance* const msg)
+{
+    bool ok = false;
+    if (msg != 0) {
+        earthRadius = Basic::Meters::convertStatic(*msg);
+        ok = true;
+    }
+    return ok;
+}
+
 
 //------------------------------------------------------------------------------
 // updateMatrix() -- update the A/C coord to gimbal's coord matrix

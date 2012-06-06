@@ -242,6 +242,8 @@ unsigned int Tdb::processPlayers(Basic::PairStream* const players)
    const bool localOnly = gimbal->isLocalPlayersOfInterestOnly();
    const bool useWorld = gimbal->isUsingWorldCoordinates();
    const bool ownHdgOnly = gimbal->isUsingHeadingOnly();
+   const double earthRadius = gimbal->getEarthRadius();
+
 
    // ---
    // Get the matrices
@@ -294,22 +296,19 @@ unsigned int Tdb::processPlayers(Basic::PairStream* const players)
    double hDist = 1000000.0 * Basic::Distance::NM2M;  // Distance to horizon (m) (default: really far away)
    double hTanAng = 0;                                // Tangent of the angle to horizon (positive down)
    if (usingEcefFlg) {
-      // earth radius in meters
-      double er = Basic::Nav::ERAD60 * Basic::Distance::NM2M;
-
       // distance from the center of the earth
-      double distEC = osAlt + er;
+      double distEC = osAlt + earthRadius;
       double distEC2 = distEC * distEC;  // squared
 
       // earth radius squared
-      double er2 = er * er;
+      double er2 = earthRadius * earthRadius;
 
       // distance to horizon squared
       double dh2 = distEC2 - er2;
 
       // the distance and the tangent of the angle to the horizon
       hDist = sqrt(dh2);
-      hTanAng = ( hDist / er ); // positive angles are below level (down)
+      hTanAng = ( hDist / earthRadius ); // positive angles are below level (down)
    }
 
    // Are we a space vehicle?
