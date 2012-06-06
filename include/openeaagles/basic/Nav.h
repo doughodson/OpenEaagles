@@ -75,7 +75,7 @@ public:
          const double dlat,         // IN: Destination latitude (degs)
          const double dlon,         // IN: Destination longitude (degs)
          double* const brg,         // OUT: True bearing (degs)
-         double* const dist,        // OUT: distance (ground range) (nm)
+         double* const dist,           // OUT: Distance (ground range) (nm)
          const EarthModel* const em=0 // IN: Pointer to an optional earth model (default: WGS-84)
       );
 
@@ -108,11 +108,11 @@ public:
          const double dlat,         // IN: Destination latitude (degs)
          const double dlon,         // IN: Destination longitude (degs)
          double* const brg,         // OUT: True bearing (degs)
-         double* const dist         // OUT: distance (ground range) (nm)
+         double* const dist         // OUT: Distance (ground range) (nm)
       );
 
    //------------------------------------------------------------------------------
-   // Legacy flat-earth projection; use fbd2llS() 
+   // Legacy flat-earth projection; same as fbd2llS() 
    //------------------------------------------------------------------------------
    static bool fbd2ll(
          const double slat,         // IN: Starting (reference) latitude (degs)
@@ -124,7 +124,7 @@ public:
       );
 
    //------------------------------------------------------------------------------
-   // Legacy flat-earth projection; use fll2bdS() 
+   // Legacy flat-earth projection; same as fll2bdS() 
    //------------------------------------------------------------------------------
    static bool fll2bd(
          const double slat,         // IN: Starting (reference) latitude (degs)
@@ -132,7 +132,7 @@ public:
          const double dlat,         // IN: Destination latitude (degs)
          const double dlon,         // IN: Destination longitude (degs)
          double* const brg,         // OUT: True bearing (degs)
-         double* const dist         // OUT: distance (ground range) (nm)
+         double* const dist         // OUT: Distance (ground range) (nm)
       );
 
 
@@ -142,19 +142,19 @@ public:
 
    // Using body angles
    static bool aer2xyz(
-         osg::Vec3d* const pos,     // OUT: position vector array (NED, player centered)  [meters]
+         osg::Vec3d* const pos,     // OUT: Position vector array (NED, player centered)  [meters]
          const osg::Matrixd& rm,    // IN:  NED to body rotational matrix (see computeRotationalMatrix())
-         const double az,           // IN:  azimuth (body)  (radians)
-         const double el,           // IN:  elevation (body)  (positive up)   (radians)
-         const double rng           // IN:  range [meters]
+         const double az,           // IN:  Azimuth (body)  (radians)
+         const double el,           // IN:  Elevation (body, positive up, radians)
+         const double rng           // IN:  Range [meters]
       );
 
    // Using NED angles
    static bool aer2xyz(
-         osg::Vec3d* const pos,     // OUT: position vector array (NED, player centered)  [meters]
-         const double az,           // IN:  azimuth (NED)  (radians)
-         const double el,           // IN:  elevation (NED)  (positive up)   (radians)
-         const double rng           // IN:  range [meters]
+         osg::Vec3d* const pos,     // OUT: Position vector array (NED, player centered)  [meters]
+         const double az,           // IN:  Azimuth (NED, radians)
+         const double el,           // IN:  Elevation (NED, positive up, radians)
+         const double rng           // IN:  Range [meters]
       );
 
    //------------------------------------------------------------------------------
@@ -250,7 +250,7 @@ public:
          const double dlat,         // IN: Destination latitude (degs)
          const double dlon,         // IN: Destination longitude (degs)
          double* const brg,         // OUT: True bearing (degs)
-         double* const dist,        // OUT: distance (ground range) (nm)
+         double* const dist,           // OUT: Distance (ground range) (nm)
          const EarthModel* const em=0 // IN: Pointer to an optional earth model (default: WGS-84)
       );
 
@@ -264,7 +264,7 @@ public:
          const double dlat,         // IN: Destination latitude (degs)
          const double dlon,         // IN: Destination longitude (degs)
          double* const brg,         // OUT: True bearing (degs)
-         double* const dist         // OUT: distance (ground range) (nm)
+         double* const dist  // OUT: Distance (ground range) (nm)
       );
 
    //------------------------------------------------------------------------------
@@ -300,8 +300,8 @@ public:
          const double dlon,         // IN: Destination longitude (degs)
          const double dalt,         // IN: Destination altitude (meters)
          double* const brg,         // OUT: True bearing (degs)
-         double* const slantRng,    // OUT: slant range (nm)
-         double* const dist,        // OUT: distance (ground range) (nm)
+         double* const slantRng,    // OUT: Slant range (nm)
+         double* const dist,        // OUT: Distance (ground range) (nm)
          double* const elev = 0     // OUT: (optional) elevation angle (degs)
       );
 
@@ -342,7 +342,7 @@ public:
          const double dlat,         // IN: Destination latitude (degs)
          const double dlon,         // IN: Destination longitude (degs)
          double* const brg,         // OUT: True initial bearing (degs)
-         double* const dist,        // OUT: geodesic distance (nm)
+         double* const dist,           // OUT: Geodesic distance (nm)
          double* const brg2=0,      // OUT: Optional: true final bearing (degs)
          const EarthModel* const em=0 // IN: Pointer to an optional earth model (default: WGS-84)
       );
@@ -396,9 +396,9 @@ public:
 
    // Version using radians
    static bool computeRotationalMatrix(
-         const double phi,          // IN: roll angle (radians)
-         const double theta,        // IN: pitch angle (radians)
-         const double psi,          // IN: yaw angle (radians)
+         const double phi,          // IN:  Roll angle (radians)
+         const double theta,        // IN:  Pitch angle (radians)
+         const double psi,          // IN:  Yaw angle (radians)
          osg::Matrixd* const rm,    // OUT: Rotational matrix
          osg::Vec2d* const scPhi=0, // OUT: Sin/Cos of phi (Optional)
          osg::Vec2d* const scTht=0, // OUT: Sin/Cos of theta (Optional)
@@ -407,9 +407,9 @@ public:
 
    // Version using degrees
    static bool computeRotationalMatrixDeg(
-         const double phiD,         // IN: roll angle (degrees)
-         const double thetaD,       // IN: pitch angle (degrees)
-         const double psiD,         // IN: yaw angle (degrees)
+         const double phiD,         // IN:  Roll angle (degrees)
+         const double thetaD,       // IN:  Pitch angle (degrees)
+         const double psiD,         // IN:  Yaw angle (degrees)
          osg::Matrixd* const rm,    // OUT: Rotational matrix
          osg::Vec2d* const scPhi=0, // OUT: Sin/Cos of phi (Optional)
          osg::Vec2d* const scTht=0, // OUT: Sin/Cos of theta (Optional)
@@ -418,7 +418,7 @@ public:
 
    // Vec3 version
    static bool computeRotationalMatrix(
-         const osg::Vec3d& angles,  // IN: euler angles [ phi theta psi ] (radians)
+         const osg::Vec3d& angles,  // IN:  Euler angles [ phi theta psi ] (radians)
          osg::Matrixd* const m,     // OUT: Matrix
          osg::Vec2d* const scPhi=0, // OUT: Sin/Cos of phi (Optional)
          osg::Vec2d* const scTht=0, // OUT: Sin/Cos of theta (Optional)
@@ -427,7 +427,7 @@ public:
 
    // Vec3 version using degrees
    static bool computeRotationalMatrixDeg(
-         const osg::Vec3d& angles,  // IN: euler angles [ phi theta psi ] (degrees)
+         const osg::Vec3d& angles,  // IN:  Euler angles [ phi theta psi ] (degrees)
          osg::Matrixd* const m,     // OUT: Matrix
          osg::Vec2d* const scPhi=0, // OUT: Sin/Cos of phi (Optional)
          osg::Vec2d* const scTht=0, // OUT: Sin/Cos of theta (Optional)
@@ -445,7 +445,7 @@ public:
    // Version using radians
    static bool computeEulerAngles(
          const osg::Matrixd& rm,    // IN: Rotational matrix
-         osg::Vec3d* const angles,  // OUT: euler angles (radians)
+         osg::Vec3d* const angles,  // OUT: Euler angles (radians)
          osg::Vec2d* const scPhi=0, // OUT: Sin/Cos of phi (Optional)
          osg::Vec2d* const scTht=0, // OUT: Sin/Cos of theta (Optional)
          osg::Vec2d* const scPsi=0  // OUT: Sin/Cos of psi (Optional)
@@ -454,7 +454,7 @@ public:
    // Version using degrees
    static bool computeEulerAnglesDeg(
          const osg::Matrixd& rm,    // IN: Rotational matrix
-         osg::Vec3d* const anglesD, // OUT: euler angles (degrees)
+         osg::Vec3d* const anglesD, // OUT: Euler angles (degrees)
          osg::Vec2d* const scPhi=0, // OUT: Sin/Cos of phi (Optional)
          osg::Vec2d* const scTht=0, // OUT: Sin/Cos of theta (Optional)
          osg::Vec2d* const scPsi=0  // OUT: Sin/Cos of psi (Optional)

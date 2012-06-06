@@ -504,6 +504,8 @@ public:
                                                    //       Vw  = Vi * M
                                                    //    Where: 'Vw' is a world(ECEF) vector; 'Vi' is an inertial (NED) vector
 
+   double getEarthRadius() const;                  // Earth radius at player's location (meters)
+
    bool getPositionLL(double* const lat, double* const lon) const;                     // Player's Lat/lon (degrees)
    bool getPositionLLA(double* const lat, double* const lon, double* const alt) const; // Player's Lat/Lon (degrees) and altitude (meters)
 

@@ -908,6 +908,28 @@ const Nib* Player::getLocalNib(const unsigned int netId) const
    return p;
 }
 
+// Earth radius (meters)
+double Player::getEarthRadius() const
+{
+   double erad = Basic::Nav::ERAD60 * Basic::Distance::NM2M;  // (default)
+
+   const Simulation* sim = getSimulation();
+   if (sim != 0) {
+      const Basic::EarthModel* pModel = sim->getEarthModel();
+      if (pModel == 0) pModel = &Basic::EarthModel::wgs84;
+
+      const double b  = pModel->getB();   // semi-major axis
+      const double e2 = pModel->getE2();  // eccentricity squared
+
+      const double slat = getLatitude();
+      const double cosSlat = std::cos(Basic::Angle::D2RCC * slat);
+
+      erad = b/sqrt(1.0 - e2*cosSlat*cosSlat); 
+   }
+
+   return erad;
+}
+
 //------------------------------------------------------------------------------
 // Controlling simulation access functions
 //------------------------------------------------------------------------------
