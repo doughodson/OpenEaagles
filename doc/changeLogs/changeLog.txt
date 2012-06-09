@@ -50,6 +50,10 @@ basic
       3) Added new functions, lcStrcpyFull(), lcStrncpyFull() and lcStrcatFull(),
       that fail (return false) if the destination buffer is too small.
 
+   windows/support0.h
+      -- replaced #include <float.h> reference to C++ style #include <cfloat>
+         for MINGW compiler
+
 --------------------------------------------------------------------------------
 basicGL
 

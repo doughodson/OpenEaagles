@@ -27,8 +27,8 @@
 
 // MinGW
 #if defined(__MINGW32__)
-  // defines FLT_MIN
-  #include <float.h>
+  // defines FLT_MIN and DBL_MAX
+  #include <cfloat>
 #endif
 
 namespace Eaagles {
