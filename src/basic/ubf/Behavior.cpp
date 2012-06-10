@@ -8,8 +8,9 @@
 
 namespace Eaagles {
 namespace Basic {
+namespace Ubf {
 
-IMPLEMENT_ABSTRACT_SUBCLASS(Behavior, "Behavior")
+IMPLEMENT_ABSTRACT_SUBCLASS(Behavior, "UbfBehavior")
 EMPTY_DELETEDATA(Behavior)
 EMPTY_COPYDATA(Behavior)
 EMPTY_SERIALIZER(Behavior)
@@ -50,6 +51,7 @@ Basic::Object* Behavior::getSlotByIndex(const int si)
    return BaseClass::getSlotByIndex(si);
 }
 
+} // End Ubf namespace
 } // End Basic namespace
 } // End Eaagles namespace
 

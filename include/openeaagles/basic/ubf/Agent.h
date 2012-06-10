@@ -1,19 +1,20 @@
 //------------------------------------------------------------------------------
 // Class: Agent
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_Agent_H__
-#define __Eaagles_Basic_Agent_H__
+#ifndef __Eaagles_Basic_Ubf_Agent_H__
+#define __Eaagles_Basic_Ubf_Agent_H__
 
 #include "openeaagles/basic/Component.h"
 
 namespace Eaagles {
 namespace Basic {
+namespace Ubf {
 
 class Behavior;
 class State;
 class Action;
 
-//
+//------------------------------------------------------------------------------
 // Class: Agent
 //
 // Description: Generic agent class to control a component in the simulation - the agent's "actor"
@@ -21,6 +22,11 @@ class Action;
 //    newUbf actions know how to execute themselves, so agent does not need to know anything about action class.
 //    newUbf agent's state is initialized by slot, so agent does not need to know anything about state class.
 //
+// Form name: UbfAgent
+// Slots:
+//    state       <State>     ! The agent's state object
+//    behavior    <Behavior>  ! behavior
+//------------------------------------------------------------------------------
 class Agent : public Basic::Component
 {
    DECLARE_SUBCLASS(Agent, Basic::Component)
@@ -60,14 +66,14 @@ inline void Agent::setActor(Basic::Component* const actor)      { myActor = acto
 inline Basic::Component* Agent::getActor()           { return myActor; }
 
 
-//
+//------------------------------------------------------------------------------
 // Class: Agent
-//
-// Base class: Basic::Component -> Agent
 //
 // Description: Generic agent class to control a component - the agent's "actor"
 // - a derived agent class that performs its actions in the TC thread
 //
+// Form name: UbfAgentTC
+//------------------------------------------------------------------------------
 class AgentTC : public Agent
 {
    DECLARE_SUBCLASS(AgentTC, Agent)
@@ -78,6 +84,7 @@ public:
    virtual void updateData(const LCreal dt = 0.0f);
 };
 
+} // End Ubf namespace
 } // End Basic namespace
 } // End Eaagles namespace
 

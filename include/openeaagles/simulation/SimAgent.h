@@ -9,7 +9,8 @@
 namespace Eaagles {
 namespace Simulation { 
 	class Simulation; class Station;
-//
+
+//------------------------------------------------------------------------------
 // Class: SimAgent
 //
 // Description: Generic agent class to control a component in the simulation - the agent's "actor"
@@ -17,9 +18,14 @@ namespace Simulation {
 //    newUbf actions know how to execute themselves, so agent does not need to know anything about action class.
 //    newUbf agent's state is initialized by slot, so agent does not need to know anything about state class.
 //
-class SimAgent : public Basic::Agent
+// Form name: SimAgent
+// Slots:
+//    actorPlayerName      <String>    ! The agent's actor - playerName
+//    actorComponentName   <String>    ! The agent's actor - componentName
+//------------------------------------------------------------------------------
+class SimAgent : public Basic::Ubf::Agent
 {
-   DECLARE_SUBCLASS(SimAgent, Basic::Agent)
+   DECLARE_SUBCLASS(SimAgent, Basic::Ubf::Agent)
 public:
    SimAgent();
 
