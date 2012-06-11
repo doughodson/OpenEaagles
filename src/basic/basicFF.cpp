@@ -453,11 +453,11 @@ Object* basicFormFunc(const char* formname)
     }
 
     // Ubf
-    else if ( strcmp(formname, Agent::getFormName()) == 0 ) {
-        newform = new Agent();
+    else if ( strcmp(formname, Ubf::Agent::getFormName()) == 0 ) {
+        newform = new Ubf::Agent();
     }
-    else if ( strcmp(formname, Arbiter::getFormName()) == 0 ) {
-        newform = new Arbiter();
+    else if ( strcmp(formname, Ubf::Arbiter::getFormName()) == 0 ) {
+        newform = new Ubf::Arbiter();
     }
 
     return newform;

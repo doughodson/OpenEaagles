@@ -1,22 +1,28 @@
 //------------------------------------------------------------------------------
 // Class: Behavior
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_Behavior_H__
-#define __Eaagles_Basic_Behavior_H__
+#ifndef __Eaagles_Basic_Ubf_Behavior_H__
+#define __Eaagles_Basic_Ubf_Behavior_H__
 
 #include "openeaagles/basic/Component.h"
 
 namespace Eaagles {
 namespace Basic {
+namespace Ubf {
 
 class State;
 class Action;
 
-//
+//------------------------------------------------------------------------------
 // Class: Behavior
 //
 // Description: Abstract base class for all behaviors
 //
+// Form name: UbfBehavior
+// Slots:
+//    vote     <Number>    ! default vote/weight value for actions generated
+//                         ! by this behavior
+//------------------------------------------------------------------------------
 class Behavior : public Basic::Component
 {
    DECLARE_SUBCLASS(Behavior, Basic::Component)
@@ -41,6 +47,7 @@ inline void Behavior::setVote(const unsigned int x)    { vote = x; }
 inline unsigned int Behavior::getVote() const          { return vote; }
 
 
+} // End Ubf namespace
 } // End Basic namespace
 } // End Eaagles namespace
 

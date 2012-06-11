@@ -7,21 +7,27 @@
 #include "openeaagles/basic/Component.h"
 
 namespace Eaagles {
-
-namespace Basic { class Behavior; class State; }
+   namespace Basic { 
+      namespace Ubf { class Behavior; class State; }
+   }
 
 namespace Simulation {
 
 class Simulation;
 class Station;
 
-//
+//------------------------------------------------------------------------------
 // Class: MultiActorAgent
 //
 // Description: Generic agent class to control a list of actors, each specified with their own behavior
 //    the only reason to use this class is if there is state shared between multiple actors
 //    (if there is not shared state, just use a list of standard Agent instances)
 //
+// Form name: MultiActorAgent
+// Slots:
+//    state       <State>           ! state 
+//    agentList   <PairStream>      ! behavior pairstream
+//------------------------------------------------------------------------------
 class MultiActorAgent : public Basic::Component
 {
    DECLARE_SUBCLASS(MultiActorAgent, Basic::Component)
@@ -37,8 +43,8 @@ protected:
    // generic controller
    virtual void controller(const LCreal dt = 0.0f);
 
-   void setState(Basic::State* const);
-   Basic::State* getState() const                { return state; }
+   void setState(Basic::Ubf::State* const);
+   Basic::Ubf::State* getState() const                { return state; }
 
    void setActor(Basic::Component* c);
    Basic::Component*      getActor() { return actor;}
@@ -49,21 +55,21 @@ protected:
    struct AgentItem
    {
       SPtr<Basic::String> actorName;
-      SPtr<Basic::Behavior> behavior;
+      SPtr<Basic::Ubf::Behavior> behavior;
       SPtr<Basic::Component> actor;
    };
 
    static const unsigned int MAX_AGENTS = 10;
    bool clearAgentList();
-   bool addAgent( Basic::String* name, Basic::Behavior* const b);
+   bool addAgent( Basic::String* name, Basic::Ubf::Behavior* const b);
 
    // slot functions
-   bool setSlotState(Basic::State* const state);
+   bool setSlotState(Basic::Ubf::State* const state);
    bool setSlotAgentList(Basic::PairStream* const msg);
 
 private:
    Basic::Component* actor;
-   Basic::State* state;
+   Basic::Ubf::State* state;
    Station*     myStation;
 
    // agent/behavior list

@@ -12,6 +12,7 @@
 
 namespace Eaagles {
 namespace Basic {
+namespace Ubf {
 
 //
 // Class: Agent
@@ -20,7 +21,7 @@ namespace Basic {
 //              (either a player, or a player's component)
 //
 
-IMPLEMENT_SUBCLASS(Agent, "Agent")
+IMPLEMENT_SUBCLASS(Agent, "UbfAgent")
 EMPTY_SERIALIZER(Agent)
 EMPTY_COPYDATA(Agent)
 
@@ -180,7 +181,7 @@ Basic::Object* Agent::getSlotByIndex(const int si)
 //              using TC thread to perform its activity (instead of BG thread)
 //==============================================================================
 
-IMPLEMENT_SUBCLASS(AgentTC, "AgentTC")
+IMPLEMENT_SUBCLASS(AgentTC, "UbfAgentTC")
 EMPTY_SLOTTABLE(AgentTC)
 EMPTY_CONSTRUCTOR(AgentTC)
 EMPTY_SERIALIZER(AgentTC)
@@ -207,6 +208,7 @@ void AgentTC::updateData(const LCreal dt)
 {
 }
 
+} // End Ubf namespace
 } // End Basic namespace
 } // End Eaagles namespace
 

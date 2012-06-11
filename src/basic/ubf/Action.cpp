@@ -6,8 +6,9 @@
 
 namespace Eaagles {
 namespace Basic {
+namespace Ubf {
 
-IMPLEMENT_ABSTRACT_SUBCLASS(Action, "Action")
+IMPLEMENT_ABSTRACT_SUBCLASS(Action, "UbfAction")
 EMPTY_SLOTTABLE(Action)
 EMPTY_DELETEDATA(Action)
 EMPTY_SERIALIZER(Action)
@@ -24,6 +25,7 @@ void Action::copyData(const Action& org, const bool cc)
    vote = org.vote;
 }
 
+} // End Ubf namespace
 } // End Basic namespace
 } // End Eaagles namespace
 

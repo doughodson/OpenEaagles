@@ -10,10 +10,11 @@
 
 namespace Eaagles {
 namespace Basic {
+namespace Ubf {
 
 // this version allows null action to be returned; this code handles that
 // also sets container for contained behaviors
-IMPLEMENT_SUBCLASS(Arbiter, "Arbiter")
+IMPLEMENT_SUBCLASS(Arbiter, "UbfArbiter")
 EMPTY_COPYDATA(Arbiter)
 EMPTY_SERIALIZER(Arbiter)
 
@@ -172,6 +173,7 @@ Basic::Object* Arbiter::getSlotByIndex(const int si)
    return BaseClass::getSlotByIndex(si);
 }
 
+} // End Ubf namespace
 } // End Basic namespace
 } // End Eaagles namespace
 

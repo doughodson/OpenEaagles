@@ -6,8 +6,9 @@
 
 namespace Eaagles {
 namespace Basic {
+namespace Ubf {
 
-IMPLEMENT_ABSTRACT_SUBCLASS(State, "State")
+IMPLEMENT_ABSTRACT_SUBCLASS(State, "UbfState")
 EMPTY_SLOTTABLE(State)
 EMPTY_CONSTRUCTOR(State)
 EMPTY_DELETEDATA(State)
@@ -88,6 +89,7 @@ const State* State::getUbfStateByType(const std::type_info& type) const
 }
 
 
+} // End Ubf namespace
 } // End Basic namespace
 } // End Eaagles namespace
 
