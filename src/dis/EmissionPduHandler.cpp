@@ -591,7 +591,7 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
    // otherwise, could be entirely removed.
    if (disIO->getVersion() >= NetIO::VERSION_7) {
       LCreal drTime = curExecTime - getEmPduExecTime();
-      if ( drTime < (disIO->getHbtPduEe() /10.0f) ) {
+      if ( drTime < (disIO->getHbtPduEe() /20.0f) ) {
          result = NO;
       }
    }
