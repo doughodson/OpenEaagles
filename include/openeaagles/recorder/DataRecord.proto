@@ -26,7 +26,7 @@ package Eaagles.Recorder.Pb;
 message DataRecord {
    required Time time   = 1;  // Sample time
 
-   required uint32 id   = 2;  // Recorder Event ID (see "openeaagles/simulation/recorderTokens.h")
+   required uint32 id   = 2;  // Recorder Event ID (see "openeaagles/simulation/dataRecorderTokens.h")
 
    // Recorder and simulation messages
    optional FileIdMsg                  file_id_msg                   = 11;
