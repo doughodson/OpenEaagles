@@ -2,6 +2,7 @@
 
 #include "openeaagles/simulation/Weapon.h"
 
+#include "openeaagles/simulation/DataRecorder.h"
 #include "openeaagles/simulation/Designator.h"
 #include "openeaagles/simulation/DynamicsModels.h"
 #include "openeaagles/simulation/Guns.h"
@@ -493,6 +494,12 @@ bool Weapon::collisionNotification(Player* const other)
    checkDetonationEffect();
 
    // Log the event
+   BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_WEAPON_DETONATION )
+      SAMPLE_3_OBJECTS( this, getLaunchVehicle(), getTargetPlayer() )
+      SAMPLE_2_VALUES( DETONATE_ENTITY_IMPACT, getDetonationRange() )
+   END_RECORD_DATA_SAMPLE()
+
+   // TabLogger is deprecated
    if (getAnyEventLogger() != 0) {
       TabLogger::TabLogEvent* evt = new TabLogger::LogWeaponActivity(2, getLaunchVehicle(), this, getTargetPlayer(), DETONATE_ENTITY_IMPACT, getDetonationRange());  // type 2 for "detonate"
       getAnyEventLogger()->log(evt);
@@ -528,6 +535,12 @@ bool Weapon::crashNotification()
    // ---
    // Log the event
    // ---
+   BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_WEAPON_DETONATION )
+      SAMPLE_3_OBJECTS( this, getLaunchVehicle(), getTargetPlayer() )
+      SAMPLE_2_VALUES( DETONATE_GROUND_IMPACT, getDetonationRange() )
+   END_RECORD_DATA_SAMPLE()
+
+   // TabLogger is deprecated
    if (getAnyEventLogger() != 0) {
       TabLogger::TabLogEvent* evt = new TabLogger::LogWeaponActivity(2, getLaunchVehicle(), this, getTargetPlayer(), DETONATE_GROUND_IMPACT, getDetonationRange());  // type 2 for "detonate"
       getAnyEventLogger()->log(evt);
@@ -676,6 +689,14 @@ Weapon* Weapon::release()
                sim->addNewPlayer(pname,flyout);
             }
 
+           if (isMessageEnabled(MSG_DATA)) {
+              BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_WEAPON_RELEASED )
+                 SAMPLE_3_OBJECTS( 0, getLaunchVehicle(), 0 )
+                 SAMPLE_2_VALUES( 0, 0.0 )
+              END_RECORD_DATA_SAMPLE()
+           }
+
+           // TabLogger is deprecated
             if (isMessageEnabled(MSG_DATA) && getAnyEventLogger() != 0) {
                // type 1 for "launch", last two fields effectively null
                TabLogger::TabLogEvent* evt = new TabLogger::LogWeaponActivity(1, getLaunchVehicle(), 0, 0, 0, 0.0);
@@ -690,6 +711,13 @@ Weapon* Weapon::release()
          // We have a hung store
             setHung(true);
 
+           if (isMessageEnabled(MSG_DATA)) {
+              BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_WEAPON_HUNG )
+                 SAMPLE_2_OBJECTS( this, getLaunchVehicle() )
+              END_RECORD_DATA_SAMPLE()
+           }
+
+           // TabLogger is deprecated
          if (isMessageEnabled(MSG_DATA) && getAnyEventLogger() != 0) {
             // type 4 for "hung store"
             TabLogger::TabLogEvent* evt = new TabLogger::LogWeaponActivity(4, getLaunchVehicle(), this, 0, 0, 0.0);
@@ -755,6 +783,15 @@ void Weapon::updateTOF(const LCreal dt)
       if (getTOF() >= getMaxTOF()) {
          setMode(DETONATED);
          setDetonationResults( DETONATE_DETONATION );
+
+         if (isMessageEnabled(MSG_DATA)) {
+            BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_WEAPON_DETONATION )
+               SAMPLE_3_OBJECTS( this, getLaunchVehicle(), getTargetPlayer() )
+               SAMPLE_2_VALUES( DETONATE_DETONATION, 0.0 )
+            END_RECORD_DATA_SAMPLE()
+         }
+
+         // TabLogger is deprecated
          if (getAnyEventLogger() != 0) {
             TabLogger::TabLogEvent* evt = new TabLogger::LogWeaponActivity(2, getLaunchVehicle(), this, getTargetPlayer(), DETONATE_DETONATION);  // type 2 for "detonate"
             getAnyEventLogger()->log(evt);

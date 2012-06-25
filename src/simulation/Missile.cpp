@@ -1,6 +1,7 @@
 
 #include "openeaagles/simulation/Missile.h"
 
+#include "openeaagles/simulation/DataRecorder.h"
 #include "openeaagles/simulation/Simulation.h"
 #include "openeaagles/simulation/Track.h"
 #include "openeaagles/simulation/TrackManager.h"
@@ -444,6 +445,13 @@ void Missile::weaponGuidance(const LCreal dt)
                if (isMessageEnabled(MSG_INFO)) {
                   std::cout << "DETONATE_ENTITY_IMPACT rng = " << detRange << std::endl;
                }
+
+               BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_WEAPON_DETONATION )
+                  SAMPLE_3_OBJECTS( getLaunchVehicle(), this, getTargetPlayer() )
+                  SAMPLE_2_VALUES( DETONATE_ENTITY_IMPACT, detRange )
+               END_RECORD_DATA_SAMPLE()
+
+               // TabLogger is deprecated
                if (getAnyEventLogger() != 0) {
                   TabLogger::TabLogEvent* evt = new TabLogger::LogWeaponActivity(2, getLaunchVehicle(), this, getTargetPlayer(), DETONATE_ENTITY_IMPACT, detRange); // type 2 for "detonate"
                   getAnyEventLogger()->log(evt);
@@ -467,6 +475,13 @@ void Missile::weaponGuidance(const LCreal dt)
             if (isMessageEnabled(MSG_INFO)) {
                std::cout << "DETONATE_OTHER rng = " << detRange << std::endl;
             }
+
+            BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_WEAPON_DETONATION )
+               SAMPLE_3_OBJECTS( getLaunchVehicle(), this, getTargetPlayer() )
+               SAMPLE_2_VALUES( DETONATE_DETONATION, detRange )
+            END_RECORD_DATA_SAMPLE()
+
+            // TabLogger is deprecated
             if (getAnyEventLogger() != 0) {
                TabLogger::TabLogEvent* evt = new TabLogger::LogWeaponActivity(2, getLaunchVehicle(), this, getTargetPlayer(), DETONATE_DETONATION, getDetonationRange()); // type 2 for "detonate"
                getAnyEventLogger()->log(evt);

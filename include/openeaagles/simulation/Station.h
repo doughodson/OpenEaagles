@@ -14,11 +14,11 @@ namespace Eaagles {
       class Time;
    }
 namespace Simulation {
-
-class Simulation;
-class Player;
-class Otw;
-class NetIO;
+   class DataRecorder;
+   class Simulation;
+   class Player;
+   class Otw;
+   class NetIO;
  
 //------------------------------------------------------------------------------
 // Class:  Station
@@ -58,6 +58,8 @@ class NetIO;
 //                                        !  (some simulations may need this -- let it run a few initial frames then reset)
 //
 //    enableUpdateTimers <Basic::Boolean> ! Enable calling Basic::Timers::updateTimers() from updateTC() (default: false)
+//
+//    dataRecorder      <DataRecorder>    ! Our Data Recorder
 //
 //
 // Ownship player:
@@ -174,6 +176,10 @@ public:
    Basic::PairStream* getIoHandlers();                   // I/O handlers
    const Basic::PairStream* getIoHandlers() const;       // I/O handlers (const version)
 
+   DataRecorder* getDataRecorder();                      // Returns the data recorder
+   const DataRecorder* getDataRecorder() const;          // Returns the data recorder (const version)
+   virtual bool setDataRecorder(DataRecorder* const p);  // Sets the data recorder
+
    // Is Timer::updateTimers() being called from our updateTC()
    bool isUpdateTimersEnabled() const;
    virtual bool setUpdateTimersEnable(const bool enb);
@@ -274,6 +280,7 @@ private:
    Player* ownship;                    // Ownship (primary) player
    const Basic::String* ownshipName;   // Name of our ownship player
    bool tmrUpdateEnbl;                 // Enable Basic::Timers::updateTimers() call from updateTC()
+   DataRecorder* dataRecorder;         // Data Recorder
 
    LCreal tcRate;                      // Time-critical thread Rate (hz)
    LCreal tcPri;                       // Priority of the time-critical thread (0->lowest, 1->highest)

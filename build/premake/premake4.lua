@@ -241,6 +241,22 @@ solution "oe"
          -- base filename for compiled binary target
          targetname "oeOtw_d"
 
+   project "recorder"
+      files {
+         "../../include/openeaagles/recorder/**.h",
+         "../../include/openeaagles/recorder/*.inl",
+         "../../include/openeaagles/recorder/**.proto",
+         "../../src/recorder/**.cpp",
+         "../../src/recorder/**.cc"
+      }
+      includedirs { OEIncPath.."/openeaagles/recorder" }
+      configuration { "Release" }
+         -- base filename for compiled binary target
+         targetname "oeRecorder"
+      configuration { "Debug" }
+         -- base filename for compiled binary target
+         targetname "oeRecorder_d"
+
    -- sensors library
    project "sensors"
       files {

@@ -17,6 +17,7 @@ OBJS =  \
 	$(LIB)(Buildings.o) \
 	$(LIB)(Bullseye.o) \
 	$(LIB)(Datalink.o) \
+	$(LIB)(DataRecorder.o) \
 	$(LIB)(Designator.o) \
 	$(LIB)(DynamicsModels.o) \
 	$(LIB)(Effects.o) \

@@ -16,6 +16,7 @@ include makedefs
 # dis          : -
 # vehicles     : JSBSim
 # maps         :                             : contains RPF and VPF maps
+# recorder     : protocol buffers            : Data recorder tools
 #
 PROJECTS = basic
 PROJECTS += basicGL instruments
@@ -24,6 +25,7 @@ PROJECTS += ioDevice
 PROJECTS += linearSys 
 PROJECTS += simulation sensors terrain
 PROJECTS += dis vehicles maps
+PROJECTS += recorder
 
 #
 # GUI Interface libraries

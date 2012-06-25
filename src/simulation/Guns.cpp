@@ -4,6 +4,7 @@
 #include "openeaagles/simulation/AirVehicle.h"
 #include "openeaagles/simulation/Player.h"
 #include "openeaagles/simulation/Simulation.h"
+#include "openeaagles/simulation/DataRecorder.h"
 #include "openeaagles/simulation/TabLogger.h"
 #include "openeaagles/simulation/Track.h"
 #include "openeaagles/basic/List.h"
@@ -561,6 +562,15 @@ void Gun::burstFrame()
 
       // Log this event
       Player* ownship = (Player*)( findContainerByType(typeid(Player)) );
+
+      if (ownship != 0) {
+         BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_GUN_FIRED )
+            SAMPLE_1_OBJECT( ownship )
+            SAMPLE_1_VALUE( rcount )
+         END_RECORD_DATA_SAMPLE()
+      }
+
+      // TabLogger is deprecated
       if (ownship != 0 && getAnyEventLogger() != 0) {
          TabLogger::TabLogEvent* evt = new TabLogger::LogGunActivity(1, ownship, ibullets); // type 1 == gun fired
          getAnyEventLogger()->log(evt);

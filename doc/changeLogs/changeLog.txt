@@ -72,20 +72,30 @@ basicGL
       -- various functions -- call Component::processComponents() instead of
       BaseClass::processComponents()
 
+
 --------------------------------------------------------------------------------
 dis
 
    EmitterBeamData
-      -- Processing of member data "beamData" was completely omitted.
-         This was causing NaN in Windows when EmitterBeamData object were
-	 copied.
-	 Interesing since it appears at first glance that the default
-	 behaviour would have set "beamData" to all 0's.
-	 Maybe it is just the missing "swapBytes" call.
-	 "beamdata" now processed like all other member data in this class
+      -- Processing of member data "beamData" was completely omitted.  This was
+         causing NaN in Windows when EmitterBeamData object were copied.
+         Interesing since it appears at first glance that the default behaviour
+         would have set "beamData" to all 0's  Maybe it is just the missing
+         "swapBytes" call.  "beamdata" now processed like all other member
+         data in this class
+
+
+--------------------------------------------------------------------------------
+Recorder
+   ### New Data Recorder project ###
+   ### Using Google Protocol Buffers to serialize the data for binary files
+       or network data streams ###
+
 
 --------------------------------------------------------------------------------
 simulation
+
+   dataRecorderTokens.h -- new file -- Data recorder sample event tokens.
 
    Gimbal class
       1) Added the new 'earthRadius' slot and function 'getEarthRadius(), which
@@ -103,6 +113,8 @@ simulation
       3) added getEarthRadius() that returns the earth radius at the location
       of the player.
 
+      4) added recorder data SAMPLES
+
    Route class
       1) Fixed bug in insertSteerpoint concerning position datatype
 
@@ -115,6 +127,13 @@ simulation
    Steerpoint class
       -- processComponents() -- calls Component::processComponents() instead of
       BaseClass::processComponents()
+
+   Simulation class
+      1) added recorder data SAMPLES
+      2) getDataRecorder() -- new function
+
+   Station class
+      1) Added a new 'dataRecorder' slot and getDataRecorder() function
 
    Tdb class
       1) computeBoresightData() -- to decrease stack usage, the local arrays (xa,

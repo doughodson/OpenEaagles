@@ -12,6 +12,9 @@
 #include "openeaagles/basic/PairStream.h"
 #include "openeaagles/basic/units/Times.h"
 
+#include "openeaagles/simulation/DataRecorder.h"
+#include "openeaagles/simulation/Simulation.h"
+
 namespace Eaagles {
 namespace Simulation {
 
@@ -481,6 +484,14 @@ void AirAngleOnlyTrkMgr::processTrackList(const LCreal dt)
             tracks[i]->setElevation((pTel * oneMinusAlpha) + ((tel + uElevation[i]) * alpha));
             tracks[i]->setElevationRate((pTelRate * oneMinusBeta) + ((uElevation[i] / age[i]) * beta ));
             tracks[i]->setElevationAcceleration((tracks[i]->getElevationRate() - telRate) / age[i]);
+            if (getLogTrackUpdates()) {
+               // Object 1: player, Object 2: Track Data
+               BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_TRACK_DATA )
+                  SAMPLE_2_OBJECTS( ownship, tracks[i] )
+               END_RECORD_DATA_SAMPLE()
+            }
+
+            // TabLogger is deprecated
             if (getLogTrackUpdates()  &&  (getAnyEventLogger() != 0)) {
                 TabLogger::TabLogEvent* evt = new TabLogger::LogPassiveTrack(2, this,tracks[i]); // type 2 for "update"
                 getAnyEventLogger()->log(evt);
@@ -524,6 +535,14 @@ void AirAngleOnlyTrkMgr::processTrackList(const LCreal dt)
             //if (isMessageEnabled(MSG_INFO)) {
             //   std::cout << "Removed Aged AIR track[it] = [" << it << "] id = " << trk->getTrackID() << std::endl;
             //}
+
+             // Object 1: player, Object 2: Track Data
+            Player* ownship = getOwnship();
+            BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_TRACK_REMOVED )
+               SAMPLE_2_OBJECTS( ownship, this )
+            END_RECORD_DATA_SAMPLE()
+
+            // TabLogger is deprecated
             if (getAnyEventLogger() != 0) {
                 TabLogger::TabLogEvent* evt = new TabLogger::LogPassiveTrack(3, this,trk); // type 3 for "remove"
                 getAnyEventLogger()->log(evt);
@@ -572,6 +591,12 @@ void AirAngleOnlyTrkMgr::processTrackList(const LCreal dt)
                 std::cout << "New AIR track[it] = [" << nTrks << "] id = " << newTrk->getTrackID() << std::endl;
             }
 
+            // Object 1: player, Object 2: Track Data
+            BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_NEW_TRACK )
+               SAMPLE_2_OBJECTS( ownship, this )
+            END_RECORD_DATA_SAMPLE()
+
+            // TabLogger is deprecated
             if (getAnyEventLogger() != 0) {
                 TabLogger::TabLogEvent* evt = new TabLogger::LogPassiveTrack(1, this,newTrk); // type 1 for "new"
                 getAnyEventLogger()->log(evt);
@@ -675,6 +700,13 @@ void AirAngleOnlyTrkMgrPT::removeAgedTracks()
             //if (isMessageEnabled(MSG_INFO)) {
             //   std::cout << "Removed Aged AIR track[it] = [" << it << "] id = " << trk->getTrackID() << std::endl;
             //}
+            // Object 1: player, Object 2: Track Data
+           Player* ownship = getOwnship();
+           BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_TRACK_REMOVED )
+              SAMPLE_2_OBJECTS( ownship, this )
+           END_RECORD_DATA_SAMPLE()
+
+            // TabLogger is deprecated
             if (getAnyEventLogger() != 0) {
                 TabLogger::TabLogEvent* evt = new TabLogger::LogPassiveTrack(3, this,trk); // type 3 for "remove"
                 getAnyEventLogger()->log(evt);
@@ -1030,6 +1062,12 @@ void AirAngleOnlyTrkMgrPT::processTrackList(const LCreal dt)
                 std::cout << "New AIR track[it] = [" << nTrks << "] id = " << newTrk->getTrackID() << std::endl;
             }
 
+             // Object 1: player, Object 2: Track Data
+            BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_NEW_TRACK )
+               SAMPLE_2_OBJECTS( ownship, this )
+            END_RECORD_DATA_SAMPLE()
+
+            // TabLogger is deprecated
             if (getAnyEventLogger() != 0) {
                 TabLogger::TabLogEvent* evt = new TabLogger::LogPassiveTrack(1, this,newTrk); // type 1 for "new"
                 getAnyEventLogger()->log(evt);
