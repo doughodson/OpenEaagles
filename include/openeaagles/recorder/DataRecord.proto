@@ -1,0 +1,416 @@
+// -----------------------------------------------------------------------------
+// Protocol Buffer message descriptions for the data recorder.
+// 
+// --- message 'DataRecord' is the primary recorder message ---
+// 
+// -----------------------------------------------------------------------------
+
+package Eaagles.Recorder.Pb;
+
+// =============================================================================
+// Common data record used by all data messages being recorded.
+//
+//    Since the protocol buffer parser needs to know the type of message to parse,
+//    we'll always serialize and parse this type of message.
+//
+//    Use the recorder event 'id' and the hasXxxx() functions to determine the
+//    data that is available.
+//
+//    See "openeaagles/simulation/recorderTokens.h" for the recorder event IDs.
+//
+//    Applications specific data recorders and readers will use the extensions
+//    to add their own unique data messages, and add their own recorder event
+//    IDs.
+// =============================================================================
+
+message DataRecord {
+   required Time time   = 1;  // Sample time
+
+   required uint32 id   = 2;  // Recorder Event ID (see "openeaagles/simulation/recorderTokens.h")
+
+   // Recorder and simulation messages
+   optional FileIdMsg                  file_id_msg                   = 11;
+   optional UnknownIdMsg               unknown_id_msg                = 13;
+   optional MarkerMsg                  marker_msg                    = 14;
+   optional InputDeviceMsg             input_device_msg              = 15;
+
+   // Player messages
+   optional NewPlayerEventMsg          new_player_event_msg          = 31;
+   optional PlayerRemovedEventMsg      player_removed_event_msg      = 32;
+   optional PlayerDataMsg              player_data_msg               = 33;
+   optional PlayerDamagedEventMsg      player_damaged_event_msg      = 34;
+   optional PlayerCollisionEventMsg    player_collision_event_msg    = 35;
+   optional PlayerCrashEventMsg        player_crash_event_msg        = 36;
+   optional PlayerKilledEventMsg       player_killed_event_msg       = 37;
+
+   // Weapon messages
+   optional WeaponReleaseEventMsg      weapon_release_event_msg      = 51;
+   optional WeaponHungEventMsg         weapon_hung_event_msg         = 52;
+   optional WeaponDetonationEventMsg   weapon_detonation_event_msg   = 53;
+   optional GunFiredEventMsg           gun_fired_event_msg           = 54;
+
+   // Track messsages
+   optional NewTrackEventMsg           new_track_event_msg           = 71;
+   optional TrackRemovedEventMsg       track_removed_event_msg       = 72;
+   optional TrackDataMsg               track_data_msg                = 73;
+
+   extensions 500 to 999;     // Reserved
+   extensions 1000 to 9999;   // User messages
+}
+
+
+// =============================================================================
+// Data messages
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+// File identifier message
+// -- Usually the first data record in the file
+// -----------------------------------------------------------------------------
+message FileIdMsg {
+   optional string event_name       = 1;     // Event (i.e., test, study, demo, exersize) name
+   optional string application      = 2;     // Application name (e.g., "mainSimExec")
+   optional uint32 case_num         = 3;     // Case id number (i.e., conditions) 
+   optional uint32 mission_num      = 4;     // Unique mission, sortie, scenario id number
+   optional uint32 subject_num      = 5;     // Subject id number
+   optional uint32 run_num          = 6;     // Run or trial number
+   optional uint32 day              = 7;     // Day of the month (1 .. 31)
+   optional uint32 month            = 8;     // Month (1 .. 12)
+   optional uint32 year             = 9;     // Year (e.g., 2010 or 10)
+
+   extensions 50 to 99;     // Reserved fields
+   extensions 100 to 999;   // User fields
+}
+
+// -----------------------------------------------------------------------------
+// Unknown or unhandled recorder ID message
+// -----------------------------------------------------------------------------
+message UnknownIdMsg {
+   required uint32 id               = 1;     // Unknown or unhandled ID
+}
+
+// -----------------------------------------------------------------------------
+// Marker message
+// -----------------------------------------------------------------------------
+message MarkerMsg {
+   optional uint32 id               = 1;     // Marker ID
+   optional uint32 source_id        = 2;     // Marker Source
+
+   extensions 50 to 99;     // Reserved fields
+   extensions 100 to 999;   // User fields
+}
+
+// -----------------------------------------------------------------------------
+// Input Device message
+// -----------------------------------------------------------------------------
+message InputDeviceMsg {
+   required uint32 id               = 1;     // Input ID
+   optional uint32 source_id        = 2;     // Input source ID
+   optional float value             = 3;     // Input value
+
+   extensions 50 to 99;     // Reserved fields
+   extensions 100 to 999;   // User fields
+}
+
+// -----------------------------------------------------------------------------
+// New player event message
+// -----------------------------------------------------------------------------
+message NewPlayerEventMsg {
+   required PlayerId    id          = 1;
+   required PlayerState state       = 2;
+   
+   extensions 50 to 99;     // Reserved fields
+   extensions 100 to 999;   // User fields
+}
+
+
+// -----------------------------------------------------------------------------
+// Remove player event message
+// -----------------------------------------------------------------------------
+message PlayerRemovedEventMsg {
+   required PlayerId    id          = 1;
+   optional PlayerState state       = 2;
+   
+   extensions 50 to 99;     // Reserved fields
+   extensions 100 to 999;   // User fields
+}
+
+
+// -----------------------------------------------------------------------------
+// Player data message; usually recorded at a fixed rate
+// -----------------------------------------------------------------------------
+message PlayerDataMsg {
+   required PlayerId    id          = 1;
+   required PlayerState state       = 2;
+
+   optional double      alpha       = 3;  // angle of attack (degrees)
+   optional double      beta        = 4;  // side slip (degrees)
+   optional double      cas         = 5;  // calibrated airspeed (knots)
+   
+   extensions 50 to 99;     // Reserved fields
+   extensions 100 to 999;   // User fields
+}
+
+
+// -----------------------------------------------------------------------------
+// Player damaged event message
+// -----------------------------------------------------------------------------
+message PlayerDamagedEventMsg {
+   required PlayerId    id          = 1;
+   optional PlayerState state       = 2;
+   
+   extensions 50 to 99;     // Reserved fields
+   extensions 100 to 999;   // User messages
+}
+
+
+// -----------------------------------------------------------------------------
+// Player collision event message
+// -----------------------------------------------------------------------------
+message PlayerCollisionEventMsg {
+   required PlayerId    id          = 1;
+   optional PlayerState state       = 2;
+
+   optional PlayerId other_player_id = 3;
+   
+   extensions 50 to 99;     // Reserved fields
+   extensions 100 to 999;   // User messages
+}
+
+
+// -----------------------------------------------------------------------------
+// Player crash event message
+// -----------------------------------------------------------------------------
+message PlayerCrashEventMsg {
+   required PlayerId    id          = 1;
+   optional PlayerState state       = 2;
+   
+   extensions 50 to 99;     // Reserved fields
+   extensions 100 to 999;   // User messages
+}
+
+
+// -----------------------------------------------------------------------------
+// Player killed event message
+// -----------------------------------------------------------------------------
+message PlayerKilledEventMsg {
+   required PlayerId    id          = 1;
+   optional PlayerState state       = 2;
+
+   optional PlayerId    shooter_id  = 3;
+   
+   extensions 50 to 99;     // Reserved fields
+   extensions 100 to 999;   // User messages
+}
+
+
+// -----------------------------------------------------------------------------
+// Weapon Release event message
+// -----------------------------------------------------------------------------
+message WeaponReleaseEventMsg {
+   required PlayerId    wpn_id      = 1;
+   optional PlayerState wpn_state   = 2;
+
+   optional PlayerId    shooter_id  = 3;
+   optional PlayerId    tgt_id      = 4;
+   
+   extensions 50 to 99;     // Reserved fields
+   extensions 100 to 999;   // User messages
+}
+
+
+// -----------------------------------------------------------------------------
+// Weapon Hung event message
+// -----------------------------------------------------------------------------
+message WeaponHungEventMsg {
+   required PlayerId    wpn_id      = 1;
+   optional PlayerState wpn_state   = 2;
+
+   optional PlayerId    shooter_id  = 3;
+   optional PlayerId    tgt_id      = 4;
+   
+   extensions 50 to 99;     // Reserved fields
+   extensions 100 to 999;   // User messages
+}
+
+
+// -----------------------------------------------------------------------------
+// Weapon Detonation event message
+// -----------------------------------------------------------------------------
+message WeaponDetonationEventMsg {
+
+   enum DetonationType {
+      // from DIS
+      DETONATE_OTHER                       = 0;
+      DETONATE_ENTITY_IMPACT               = 1;
+      DETONATE_ENTITY_PROXIMATE_DETONATION = 2;
+      DETONATE_GROUND_IMPACT               = 3;
+      DETONATE_GROUND_PROXIMATE_DETONATION = 4;
+      DETONATE_DETONATION                  = 5;
+      DETONATE_NONE                        = 6;
+   };
+
+   required PlayerId    wpn_id       = 1;
+   optional PlayerState wpn_state    = 2;
+
+   optional PlayerId    shooter_id   = 3;
+   optional PlayerId    tgt_id       = 4;
+   optional DetonationType  det_type = 5;    // Detonation type
+   optional double      miss_dist    = 6;    // Range to target at detonation (meters)
+   
+   extensions 50 to 99;     // Reserved fields
+   extensions 100 to 999;   // User messages
+}
+
+
+// -----------------------------------------------------------------------------
+// Gun Fired event message
+// -----------------------------------------------------------------------------
+message GunFiredEventMsg {
+   required PlayerId   shooter_id   = 1;
+   optional uint32      rounds      = 2;  // rounds fired in burst
+   
+   extensions 50 to 99;     // Reserved fields
+   extensions 100 to 999;   // User messages
+}
+
+
+// -----------------------------------------------------------------------------
+// New Track event message
+// -----------------------------------------------------------------------------
+message NewTrackEventMsg {
+   required PlayerId     player_id        = 1;
+   required string       track_id         = 2;
+
+   optional TrackData    track_data       = 3;
+   optional PlayerState  player_state     = 4;
+   optional PlayerId     trk_player_id    = 5;
+   optional PlayerState  trk_player_state = 6;
+   optional EmissionData emission_data    = 7;
+   
+   extensions 50 to 99;     // Reserved fields
+   extensions 100 to 999;   // User messages
+}
+
+
+// -----------------------------------------------------------------------------
+// Track removed event message
+// -----------------------------------------------------------------------------
+message TrackRemovedEventMsg {
+   required PlayerId    player_id      = 1;
+   required string      track_id       = 2;
+   
+   extensions 50 to 99;     // Reserved fields
+   extensions 100 to 999;   // User messages
+}
+
+
+// -----------------------------------------------------------------------------
+// Track data message; usually recorded at a fixed rate or when the track
+// data has changed.
+// -----------------------------------------------------------------------------
+message TrackDataMsg {
+   required PlayerId    player_id         = 1;
+   required string      track_id          = 2;
+
+   optional TrackData   track_data        = 3;
+   optional PlayerState player_state      = 4;
+   optional PlayerId    trk_player_id     = 5;
+   optional PlayerState trk_player_state  = 6;
+   optional EmissionData emission_data    = 7;
+   
+   extensions 50 to 99;     // Reserved fields
+   extensions 100 to 999;   // User messages
+}
+
+// =============================================================================
+// Common data structures
+// =============================================================================
+
+// vector (2D, 3D or 4D)
+message Vector {
+   required double x = 1;
+   required double y = 2;
+   optional double z = 3;
+   optional double w = 4;
+}
+
+// Time
+message Time {
+   required double sim_time      = 1;   // Simulated time (seconds)
+   optional double exec_time     = 2;   // Sim Exec time (seconds)
+   optional double utc_time      = 3;   // UTC time (seconds)
+   
+   extensions 50 to 99;     // Reserved fields
+   extensions 100 to 999;   // User messages
+}
+
+// Player ID
+message PlayerId {
+   required uint32 id            = 1;   // Player ID
+   optional string name          = 2;   // Player name
+   optional string fed_name      = 3;   // network federate name
+   optional uint32 side          = 4;   // Player side
+   
+   extensions 50 to 99;     // Reserved fields
+   extensions 100 to 999;   // User messages
+}
+
+// Player state
+message PlayerState {
+   required Vector pos           = 1;   // Position ECEF  (meters)
+   required Vector angles        = 2;   // Euler angles (body/ECEF) (radians)
+   optional Vector vel           = 3;   // Velocity vector ECEF (meters/second)
+   optional double damage        = 4;   // no damage(0.0) to destroyed (1.0)
+   
+   extensions 50 to 99;     // Reserved fields
+   extensions 100 to 999;   // User messages
+}
+
+message TrackData {
+   optional uint32 type          = 1;  // track type (see Track.h)
+   optional double quality       = 2;  // Quality
+   optional double true_az       = 3;  // True azimuth (radians)
+   optional double rel_az        = 4;  // Relative azimuth (radians)
+   optional double elevation     = 5;  // Elevation (radians)
+   optional double range         = 6;  // Range (meters)
+   optional double latitude      = 7;  // Latitude (degs)
+   optional double longitude     = 8;  // Longitude (degs)
+   optional double altitude      = 9;  // altitude (meters)
+   optional Vector position      = 10; // position; relative to ownship (meters, NED)
+   optional Vector velocity      = 11; // Velocity; relative to ownship (m/s)
+   optional double avg_signal    = 12; // signal (dB)
+   optional uint32 sl_index      = 13; // Shoot list index
+   optional bool   wpn_rel       = 14; // Weapon released on this track
+   
+   extensions 50 to 99;     // Reserved fields
+   extensions 100 to 999;   // User messages
+}
+
+// Emission Data
+message EmissionData {
+
+   enum Polarization {
+      NONE        = 0;
+      VERTICAL    = 1;
+      HORIZONTAL  = 2;
+      SLANT       = 3;
+      RHC         = 4;
+      LHC         = 5;
+   };
+
+   optional double frequency         = 1;  // (hz)
+   optional double wave_length       = 2;  // (meters)
+   optional double pulse_width       = 3;  // (sec)
+   optional double bandwidth         = 4;  // (hz)
+   optional double prf               = 5;  // (hz)
+   optional double power             = 6;  // (watts)
+   optional Polarization polarization = 7;
+   optional double azimuth_aoi       = 8;  // (radians)
+   optional double elevation_aoi     = 9;  // (radians)
+   
+   extensions 50 to 99;     // Reserved fields
+   extensions 100 to 999;   // User messages
+}
+
+

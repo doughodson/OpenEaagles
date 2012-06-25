@@ -1,6 +1,7 @@
 
 #include "openeaagles/simulation/Simulation.h"
 
+#include "openeaagles/simulation/DataRecorder.h"
 #include "openeaagles/simulation/IrAtmosphere.h"
 #include "openeaagles/simulation/NetIO.h"
 #include "openeaagles/simulation/Nib.h"
@@ -148,6 +149,7 @@ BEGIN_SLOT_MAP(Simulation)
     ON_SLOT(17, setSlotEarthModel,      Basic::String)
 
     ON_SLOT(18, setSlotGamingAreaEarthModel, Basic::Number)
+
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -194,6 +196,7 @@ void Simulation::initData()
    waypoints = 0;
    terrain = 0;
    irAtmosphere = 0;
+   station = 0;
 
    em = 0;
 
@@ -253,6 +256,9 @@ void Simulation::copyData(const Simulation& org, const bool cc)
 {
    BaseClass::copyData(org);
    if (cc) initData();
+
+   // Find our own Station
+   station = 0;
 
    // Unref our old stuff (if any)
    if (origPlayers != 0) { origPlayers = 0; }
@@ -382,6 +388,8 @@ void Simulation::deleteData()
    }
    numBgThreads = 0;
    bgThreadsFailed = false;
+
+   station = 0;
 }
 
 //------------------------------------------------------------------------------
@@ -521,7 +529,7 @@ void Simulation::reset()
    // ---
    if (irAtmosphere != 0) irAtmosphere->reset();
 
-   if ( !loggedHeadings ) {
+   if ( !loggedHeadings ) {  // EventLogger Deprecated
       if (getAnyEventLogger() != 0) {
          {
             TabLogger::TabLogEvent* evt = new TabLogger::LogPlayerData(0, 0); // code 0 for "header" msg
@@ -923,6 +931,7 @@ void Simulation::updateData(const LCreal dt)
        // Load Waypoints
        waypoints->load();
     }
+
 }
 
 //------------------------------------------------------------------------------
@@ -1136,6 +1145,41 @@ Dafif::NavaidLoader* Simulation::getNavaids()
 Dafif::WaypointLoader* Simulation::getWaypoints()
 {
    return waypoints;
+}
+
+// Returns the data recorder
+DataRecorder* Simulation::getDataRecorder()
+{
+   DataRecorder* p = 0;
+   Station* sta = getStation();
+   if (sta != 0) p = sta->getDataRecorder();
+   return p;
+}
+
+// Our Station
+Station* Simulation::getStation()
+{
+   if (station == 0) {
+      station = (Station*) findContainerByType(typeid(Station));
+      if (station == 0 && isMessageEnabled(MSG_ERROR)) {
+         std::cerr << "Simulation::getStation(): ERROR, unable to locate the Station class!" << std::endl;
+      }
+   }
+   return station;
+}
+
+// Our Station (const version)
+const Station* Simulation::getStation() const
+{
+   if (station != 0) {
+      return station;
+   }
+   else {
+      // Yes this is a "const cast-away", but its the non-const version
+      // that initially finds our Station class.
+      Station* s = ((Simulation*) this)->getStation();
+      return (const Station*) s;
+   }
 }
 
 //------------------------------------------------------------------------------
@@ -1355,7 +1399,12 @@ void Simulation::updatePlayerList()
             // Deleting this player: remove us as its container
             // and don't add to the new player list
                 p->container(0);
-                if (getAnyEventLogger() != 0) {
+
+                BEGIN_RECORD_DATA_SAMPLE( getDataRecorder(), REID_PLAYER_REMOVED )
+                   SAMPLE_1_OBJECT( p )
+                END_RECORD_DATA_SAMPLE()
+
+                if (getAnyEventLogger() != 0) {  // EventLogger Deprecated
                      TabLogger::TabLogEvent* evt = new TabLogger::LogPlayerData(3, p); // code 3 for "remove" msg
                      getAnyEventLogger()->log(evt);
                      evt->unref();
@@ -1370,7 +1419,12 @@ void Simulation::updatePlayerList()
       while (newPlayer != 0) {
             // get the player
             Player* ip = (Player*)( newPlayer->object() );
-            if (getAnyEventLogger() != 0) {
+
+            BEGIN_RECORD_DATA_SAMPLE( getDataRecorder(), REID_NEW_PLAYER )
+               SAMPLE_1_OBJECT( ip )
+            END_RECORD_DATA_SAMPLE()
+
+            if (getAnyEventLogger() != 0) {  // EventLogger Deprecated
                 TabLogger::TabLogEvent* evt = new TabLogger::LogPlayerData(1, ip); // code 1 for "new" msg
                 getAnyEventLogger()->log(evt);
                 evt->unref();
