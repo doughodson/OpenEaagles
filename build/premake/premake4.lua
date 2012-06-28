@@ -249,7 +249,6 @@ solution "oe"
          "../../src/recorder/**.cpp",
          "../../src/recorder/**.cc"
       }
-      includedirs { OEIncPath.."/openeaagles/recorder" }
       configuration { "Release" }
          -- base filename for compiled binary target
          targetname "oeRecorder"
