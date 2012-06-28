@@ -18,6 +18,7 @@ rem
 rem create solution/workspace files
 rem
 %Premake% codeblocks
+%Premake% codelite
 %Premake% vs2008
 %Premake% vs2010
 
