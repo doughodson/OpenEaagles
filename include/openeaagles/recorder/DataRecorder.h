@@ -26,6 +26,32 @@ namespace Recorder {
 //
 // Notes:
 //    1) negative time values are used when time is unknown.
+//
+//------------------------------------------------------------------------------
+// Recorder events handled ---
+//
+//    REID_MARKER             ! v[0] => id;  v[1] => source id;
+//    REID_DI_EVENT           ! v[0] => id;  v[1] => source id;  v[2] => value
+//    REID_AI_EVENT           ! v[0] => id;  v[1] => source id;  v[2] => value
+//
+//    REID_NEW_PLAYER         ! obj[0] => (new player)
+//    REID_PLAYER_REMOVED     ! obj[0] => (player)
+//    REID_PLAYER_DATA        ! obj[0] => (player)
+//    REID_PLAYER_DAMAGED     ! obj[0] => (player); obj[1] => (weapon)
+//    REID_PLAYER_COLLISION   ! obj[0] => (player); obj[1] => (other player)
+//    REID_PLAYER_CRASH       ! obj[0] => (player)
+//    REID_PLAYER_KILLED      ! obj[0] => (player); obj[1] => (weapon)
+//
+//    REID_WEAPON_RELEASED    ! obj[0] => (weapon); obj[1] => (shooter); obj[2] => (tgt)
+//    REID_WEAPON_HUNG        ! obj[0] => (weapon); obj[1] => (shooter);
+//    REID_WEAPON_DETONATION  ! obj[0] => (weapon); obj[1] => (shooter); obj[2] => (tgt);
+//                            !   v[0] => detonation type id; v[1] => miss distance
+//    REID_GUN_FIRED          ! obj[0] => (shooter); v[0] => rounds
+//
+//    REID_NEW_TRACK          ! obj[0] => (player); obj[1] => (track)
+//    REID_TRACK_REMOVED      ! obj[0] => (player); obj[1] => (track)
+//    REID_TRACK_DATA         ! obj[0] => (player); obj[1] => (track)
+//
 //------------------------------------------------------------------------------
 class DataRecorder : public Simulation::DataRecorder {
    DECLARE_SUBCLASS(DataRecorder, Simulation::DataRecorder)
@@ -79,6 +105,9 @@ protected:
    void setFirstPass(const bool f);
 
    // Recorder data event handlers
+   virtual bool recordMarker(const Basic::Object* objs[4], const double values[4]);
+   virtual bool recordAI(const Basic::Object* objs[4], const double values[4]);
+   virtual bool recordDI(const Basic::Object* objs[4], const double values[4]);
    virtual bool recordNewPlayer(const Basic::Object* objs[4], const double values[4]);
    virtual bool recordPlayerRemoved(const Basic::Object* objs[4], const double values[4]);
    virtual bool recordPlayerData(const Basic::Object* objs[4], const double values[4]);
