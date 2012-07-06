@@ -24,13 +24,13 @@
 #define REID_RESET_EVENT          3    // Simulation reset event message
 
 // Simulation message
-#define REID_MARKER              21    // Data marker message
-#define REID_DI_EVENT            22    // Discrete input (switch, etc.) event message
-#define REID_AI_EVENT            23    // Analog input (joystick, etc.) event message
+#define REID_MARKER              21    // Data marker message; V1 => id; V2 => source ID
+#define REID_DI_EVENT            22    // Discrete input (switch, etc.) event message; V1 => id; V2 => source ID; V3 => value
+#define REID_AI_EVENT            23    // Analog input (joystick, etc.) event message; V1 => id; V2 => source ID; V3 => value
 
 // Player data messages
 #define REID_NEW_PLAYER          41    // New Player message; P1 => (new player)
-#define REID_PLAYER_REMOVED      42    // Player removed message; P1 => (new player)
+#define REID_PLAYER_REMOVED      42    // Player removed message; P1 => (player)
 #define REID_PLAYER_DATA         43    // Record player data message; P1 => (player)
 #define REID_PLAYER_DAMAGED      44    // Player damaged by detonation; P1 => (player); P2 => (weapon)
 #define REID_PLAYER_COLLISION    45    // Player collision message; P1 => (player); P2 => (other player)
