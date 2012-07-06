@@ -59,6 +59,10 @@ END_SLOT_MAP()
 // DataRecorder dispatch table
 //------------------------------------------------------------------------------
 BEGIN_RECORDER_HANDLER_TABLE(DataRecorder)
+   ON_RECORDER_EVENT_ID( REID_MARKER,            recordMarker )
+   ON_RECORDER_EVENT_ID( REID_DI_EVENT,          recordAI )
+   ON_RECORDER_EVENT_ID( REID_AI_EVENT,          recordDI )
+
    ON_RECORDER_EVENT_ID( REID_NEW_PLAYER,        recordNewPlayer )
    ON_RECORDER_EVENT_ID( REID_PLAYER_REMOVED,    recordPlayerRemoved )
    ON_RECORDER_EVENT_ID( REID_PLAYER_DATA,       recordPlayerData )
@@ -201,6 +205,87 @@ bool DataRecorder::shutdownNotification()
    }
 
    return BaseClass::shutdownNotification();
+}
+
+
+//------------------------------------------------------------------------------
+// Marker event handler
+//    value[0] => marker ID
+//    value[1] => marker source ID
+//------------------------------------------------------------------------------
+bool DataRecorder::recordMarker(const Basic::Object* objs[4], const double values[4])
+{
+   const Simulation::Player* player = dynamic_cast<const Simulation::Player*>( objs[0] );
+   Pb::DataRecord* msg = new Pb::DataRecord();
+   
+   // DataRecord header
+   timeStamp(msg);
+   msg->set_id( REID_MARKER );
+
+   // new Marker message
+   Pb::MarkerMsg* markerMsg = msg->mutable_marker_msg();
+   markerMsg->set_id( (unsigned int) Eaagles::nintd(values[0]) );
+   markerMsg->set_source_id( (unsigned int) Eaagles::nintd(values[1]) );
+
+   // Send the message for processing
+   sendDataRecord(msg);
+
+   return true;
+}
+
+//------------------------------------------------------------------------------
+// Analog Input (AI) event handler
+//    value[0] => input ID
+//    value[1] => input source ID
+//    value[2] => value
+//------------------------------------------------------------------------------
+bool DataRecorder::recordAI(const Basic::Object* objs[4], const double values[4])
+{
+   const Simulation::Player* player = dynamic_cast<const Simulation::Player*>( objs[0] );
+   Pb::DataRecord* msg = new Pb::DataRecord();
+   
+   // DataRecord header
+   timeStamp(msg);
+   msg->set_id( REID_AI_EVENT );
+
+   // new Marker message
+   Pb::InputDeviceMsg* aiMsg = msg->mutable_input_device_msg();
+   aiMsg->set_id( (unsigned int) Eaagles::nintd(values[0]) );
+   aiMsg->set_source_id( (unsigned int) Eaagles::nintd(values[1]) );
+   aiMsg->set_value( float(values[2]) );
+
+   // Send the message for processing
+   sendDataRecord(msg);
+
+   return true;
+}
+
+
+//------------------------------------------------------------------------------
+// Descrete Input (DI) event handler
+//    value[0] => input ID
+//    value[1] => input source ID
+//    value[2] => value
+//------------------------------------------------------------------------------
+bool DataRecorder::recordDI(const Basic::Object* objs[4], const double values[4])
+{
+   const Simulation::Player* player = dynamic_cast<const Simulation::Player*>( objs[0] );
+   Pb::DataRecord* msg = new Pb::DataRecord();
+   
+   // DataRecord header
+   timeStamp(msg);
+   msg->set_id( REID_DI_EVENT );
+
+   // new Marker message
+   Pb::InputDeviceMsg* diMsg = msg->mutable_input_device_msg();
+   diMsg->set_id( (unsigned int) Eaagles::nintd(values[0]) );
+   diMsg->set_source_id( (unsigned int) Eaagles::nintd(values[1]) );
+   diMsg->set_value( float(values[2]) );
+
+   // Send the message for processing
+   sendDataRecord(msg);
+
+   return true;
 }
 
 
@@ -447,7 +532,7 @@ bool DataRecorder::recordWeaponHung(const Basic::Object* objs[4], const double v
 //    objs[1] => the shooter
 //    objs[2] => the target
 //    values[0] => detonation type
-//    values[1] => missile distance
+//    values[1] => miss distance
 //------------------------------------------------------------------------------
 bool DataRecorder::recordWeaponDetonation(const Basic::Object* objs[4], const double values[4])
 {
