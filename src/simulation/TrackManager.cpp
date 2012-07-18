@@ -12,6 +12,9 @@
 #include "openeaagles/basic/PairStream.h"
 #include "openeaagles/basic/units/Times.h"
 
+#include "openeaagles/simulation/DataRecorder.h"
+#include "openeaagles/simulation/Simulation.h"
+
 namespace Eaagles {
 namespace Simulation {
 
@@ -840,6 +843,15 @@ void AirTrkMgr::processTrackList(const LCreal dt)
          tracks[i]->setPosition(     (tpos*A[0][0] + tvel*A[0][1] + tacc*A[0][2]) + (u[i]*b0) );
          tracks[i]->setVelocity(     (tpos*A[1][0] + tvel*A[1][1] + tacc*A[1][2]) + (u[i]*b1) );
          tracks[i]->setAcceleration( (tpos*A[2][0] + tvel*A[2][1] + tacc*A[2][2]) + (u[i]*b2) );
+
+         // Object 1: player, Object 2: Track Data
+         if (getLogTrackUpdates()) {
+            BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_TRACK_DATA )
+               SAMPLE_2_OBJECTS( ownship, tracks[i] )
+            END_RECORD_DATA_SAMPLE()
+         }
+
+         // TabLogger is deprecated
          if (getLogTrackUpdates()  &&  (getAnyEventLogger() != 0)) {
             TabLogger::TabLogEvent* evt = new TabLogger::LogActiveTrack(2, this,tracks[i]); // type 2 for "update"
             getAnyEventLogger()->log(evt);
@@ -865,6 +877,13 @@ void AirTrkMgr::processTrackList(const LCreal dt)
       RfTrack* const trk = (RfTrack*) tracks[it];  // we produce only RfTracks
       if (trk->getTrackAge() >= getMaxTrackAge()) {
          if (getAnyEventLogger() != 0) {
+
+            // Object 1: player, Object 2: Track Data
+            BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_TRACK_DATA )
+               SAMPLE_2_OBJECTS( ownship, tracks[it] )
+            END_RECORD_DATA_SAMPLE()
+
+            // TabLogger is deprecated
             TabLogger::TabLogEvent* evt = new TabLogger::LogActiveTrack(3, this,trk); // type 3 for "remove"
             getAnyEventLogger()->log(evt);
             evt->unref();
@@ -909,6 +928,11 @@ void AirTrkMgr::processTrackList(const LCreal dt)
             std::cout << "New AIR track[it] = [" << nTrks << "] id = " << newTrk->getTrackID() << std::endl;
          }
          if (getAnyEventLogger() != 0) {
+            BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_TRACK_DATA )
+               SAMPLE_2_OBJECTS( ownship, tracks[i] )
+            END_RECORD_DATA_SAMPLE()
+
+            // TabLogger is deprecated
             TabLogger::TabLogEvent* evt = new TabLogger::LogActiveTrack(1, this,newTrk); // type 1 for "new"
             getAnyEventLogger()->log(evt);
             evt->unref();
@@ -1226,6 +1250,14 @@ void GmtiTrkMgr::processTrackList(const LCreal dt)
          tracks[i]->setPosition(     (tpos*A[0][0] + tvel*A[0][1] + tacc*A[0][2]) + (u[i]*b0) );
          tracks[i]->setVelocity(     (tpos*A[1][0] + tvel*A[1][1] + tacc*A[1][2]) + (u[i]*b1) );
          tracks[i]->setAcceleration( (tpos*A[2][0] + tvel*A[2][1] + tacc*A[2][2]) + (u[i]*b2) );
+         if (getLogTrackUpdates()) {
+            // Object 1: player, Object 2: Track Data
+            BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_TRACK_DATA )
+               SAMPLE_2_OBJECTS( ownship, tracks[i] )
+            END_RECORD_DATA_SAMPLE()
+         }
+
+         // TabLogger is deprecated
          if (getLogTrackUpdates()  &&  (getAnyEventLogger() != 0)) {
             TabLogger::TabLogEvent* evt = new TabLogger::LogActiveTrack(2, this,tracks[i]); // type 2 for "update"
             getAnyEventLogger()->log(evt);
@@ -1252,6 +1284,13 @@ void GmtiTrkMgr::processTrackList(const LCreal dt)
          if (isMessageEnabled(MSG_INFO)) {
             std::cout << "Removed Aged GND track[it] = [" << it << "] id = " << tracks[it]->getTrackID() << std::endl;
          }
+
+         // Object 1: player, Object 2: Track Data
+         BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_TRACK_REMOVED )
+            SAMPLE_2_OBJECTS( ownship, tracks[it] )
+         END_RECORD_DATA_SAMPLE()
+
+         // TabLogger is deprecated
          if (getAnyEventLogger() != 0) {
             TabLogger::TabLogEvent* evt = new TabLogger::LogActiveTrack(3, this,tracks[it]); // type 3 for "remove"
             getAnyEventLogger()->log(evt);
@@ -1290,6 +1329,12 @@ void GmtiTrkMgr::processTrackList(const LCreal dt)
          if (isMessageEnabled(MSG_INFO)) {
             std::cout << "New GND track[it] = [" << nTrks << "] id = " << newTrk->getTrackID() << std::endl;
          }
+         // Object 1: player, Object 2: Track Data
+         BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_NEW_TRACK )
+            SAMPLE_2_OBJECTS( ownship, newTrk )
+         END_RECORD_DATA_SAMPLE()
+
+         // TabLogger is deprecated
          if (getAnyEventLogger() != 0) {
             TabLogger::TabLogEvent* evt = new TabLogger::LogActiveTrack(1, this,newTrk); // type 1 for "new"
             getAnyEventLogger()->log(evt);
@@ -1481,6 +1526,14 @@ void RwrTrkMgr::processTrackList(const LCreal dt)
          tracks[i]->setPosition(     (tpos*A[0][0] + tvel*A[0][1] + tacc*A[0][2]) + (u[i]*b0) );
          tracks[i]->setVelocity(     (tpos*A[1][0] + tvel*A[1][1] + tacc*A[1][2]) + (u[i]*b1) );
          tracks[i]->setAcceleration( (tpos*A[2][0] + tvel*A[2][1] + tacc*A[2][2]) + (u[i]*b2) );
+
+         if (getLogTrackUpdates()) {
+            BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_TRACK_DATA )
+               SAMPLE_2_OBJECTS( ownship, tracks[i] )
+            END_RECORD_DATA_SAMPLE()
+         }
+
+         // TabLogger is deprecated
          if (getLogTrackUpdates()  &&  (getAnyEventLogger() != 0)) {
             TabLogger::TabLogEvent* evt = new TabLogger::LogPassiveTrack(2, this,tracks[i]); // type 2 for "update"
             getAnyEventLogger()->log(evt);
@@ -1507,6 +1560,12 @@ void RwrTrkMgr::processTrackList(const LCreal dt)
          if (isMessageEnabled(MSG_INFO)) {
             std::cout << "Removed Aged RWR track[it] = [" << it << "] id = " << tracks[it]->getTrackID() << std::endl;
          }
+
+         BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_TRACK_REMOVED )
+            SAMPLE_2_OBJECTS( ownship, tracks[it] )
+         END_RECORD_DATA_SAMPLE()
+
+         // TabLogger is deprecated
          if (getAnyEventLogger() != 0) {
             TabLogger::TabLogEvent* evt = new TabLogger::LogPassiveTrack(3, this, tracks[it]); // type 3 for "removed"
             getAnyEventLogger()->log(evt);
@@ -1545,6 +1604,12 @@ void RwrTrkMgr::processTrackList(const LCreal dt)
          if (isMessageEnabled(MSG_INFO)) {
             std::cout << "New RWR track[it] = [" << nTrks << "] id = " << newTrk->getTrackID() << std::endl;
          }
+
+         BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_NEW_TRACK )
+            SAMPLE_2_OBJECTS( ownship, newTrk )
+         END_RECORD_DATA_SAMPLE()
+
+         // TabLogger is deprecated
          if (getAnyEventLogger() != 0) {
             TabLogger::TabLogEvent* evt = new TabLogger::LogPassiveTrack(1,this,newTrk); // type 1 for "new"
             getAnyEventLogger()->log(evt);
