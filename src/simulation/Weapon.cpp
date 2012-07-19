@@ -691,7 +691,7 @@ Weapon* Weapon::release()
 
            if (isMessageEnabled(MSG_DATA)) {
               BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_WEAPON_RELEASED )
-                 SAMPLE_3_OBJECTS( 0, getLaunchVehicle(), 0 )
+                 SAMPLE_3_OBJECTS( this, getLaunchVehicle(), 0 )  // weapon, shooter, target
                  SAMPLE_2_VALUES( 0, 0.0 )
               END_RECORD_DATA_SAMPLE()
            }

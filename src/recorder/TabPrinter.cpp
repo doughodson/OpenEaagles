@@ -56,6 +56,9 @@ void TabPrinter::initData()
    option = NO_HDR;
    lastMessage = REID_UNHANDLED_ID_TOKEN;
    divider = "\t";
+   simReset = true;
+   setMsgHeaders(true);
+
 }
 
 //------------------------------------------------------------------------------
@@ -79,6 +82,32 @@ void TabPrinter::deleteData()
 
 }
 
+//------------------------------------------------------------------------------
+// setMsgHeaders() -- Set message header print flags
+//------------------------------------------------------------------------------
+void TabPrinter::setMsgHeaders(const bool f)
+{
+   fileIdHdr = f;
+   playerNewHdr = f;
+   playerRemovedHdr = f;
+   playerDataHdr = f;
+   playerDamagedHdr = f;
+   playerCollisionHdr = f;
+   playerCrashHdr = f;
+   playerKilledHdr = f;
+   weaponReleaseHdr = f;
+   weaponHungHdr = f;
+   weaponDetonateHdr = f;
+   gunFiredHdr = f;
+   trackNewHdr = f;
+   trackRemovedHdr = f;
+   trackDataHdr = f;
+
+   playerHeader = f;
+   weaponHeader = f;
+   trackHeader = f;
+
+}
 
 //------------------------------------------------------------------------------
 // slot functions
@@ -124,7 +153,8 @@ bool TabPrinter::setSlotDivider(const Basic::String* const msg)
    bool ok = false;
    if (msg != 0) {
       ok = true;
-      const char* divider = msg->getCopyString();
+      divider = msg->getCopyString();
+  //    const char* divider = msg->getCopyString();
    }
 
    return ok;
@@ -158,6 +188,13 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
    unsigned int messageId = dataRecord->id();
    // See if we print the header or not:
    printHeader = false;
+   if (simReset) {
+      lastMessage = REID_UNHANDLED_ID_TOKEN;
+      simReset = false;
+      printHeader = true;
+      setMsgHeaders(true);
+
+   }
    if (option == NO_HDR) {
       printHeader = false;
    }
@@ -180,9 +217,8 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
 
       case REID_FILE_ID : {
          if (dataRecord->has_file_id_msg()) {
-            static bool firstTime = true;
-            if ((option == NEW_MSG) && (firstTime)) printHeader = true;
-            firstTime = false;
+            if ((option == NEW_MSG) && (fileIdHdr)) printHeader = true;
+            fileIdHdr = false;
             const Pb::FileIdMsg* msg = &dataRecord->file_id_msg();
             printFileIdMsg(timeMsg, msg);
          }
@@ -192,9 +228,8 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
       // events:
       case REID_NEW_PLAYER : {
          if (dataRecord->has_new_player_event_msg()) {
-            static bool firstTime = true;
-            if ((option == NEW_MSG) && (firstTime)) printHeader = true;
-            firstTime = false;
+            if ((option == NEW_MSG) && (playerHeader)) printHeader = true;
+            playerHeader = false;
             const Pb::NewPlayerEventMsg* msg = &dataRecord->new_player_event_msg();
             printNewPlayerEventMsg(timeMsg, msg);
          }
@@ -203,9 +238,8 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
 
       case REID_PLAYER_REMOVED : {
          if (dataRecord->has_player_removed_event_msg()) {
-            static bool firstTime = true;
-            if ((option == NEW_MSG) && (firstTime)) printHeader = true;
-            firstTime = false;
+            if ((option == NEW_MSG) && (playerHeader)) printHeader = true;
+            playerHeader = false;
             const Pb::PlayerRemovedEventMsg* msg = &dataRecord->player_removed_event_msg();
             printPlayerRemovedEventMsg(timeMsg, msg);
          }
@@ -214,9 +248,8 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
 
       case REID_PLAYER_DATA : {
          if (dataRecord->has_player_data_msg()) {
-            static bool firstTime = true;
-            if ((option == NEW_MSG) && (firstTime)) printHeader = true;
-            firstTime = false;
+            if ((option == NEW_MSG) && (playerHeader)) printHeader = true;
+            playerHeader = false;
             const Pb::PlayerDataMsg* msg = &dataRecord->player_data_msg();
             printPlayerDataMsg(timeMsg, msg);
          }
@@ -224,9 +257,8 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
       }
      case REID_PLAYER_DAMAGED : {
         if (dataRecord->has_player_damaged_event_msg()) {
-            static bool firstTime = true;
-            if ((option == NEW_MSG) && (firstTime)) printHeader = true;
-            firstTime = false;
+            if ((option == NEW_MSG) && (playerHeader)) printHeader = true;
+            playerHeader = false;
             const Pb::PlayerDamagedEventMsg* msg = &dataRecord->player_damaged_event_msg();
             printPlayerDamagedEventMsg(timeMsg, msg);
          }
@@ -234,9 +266,8 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
       }
       case REID_PLAYER_COLLISION : {
          if (dataRecord->has_player_collision_event_msg()) {
-            static bool firstTime = true;
-            if ((option == NEW_MSG) && (firstTime)) printHeader = true;
-            firstTime = false;
+            if ((option == NEW_MSG) && (playerHeader)) printHeader = true;
+            playerHeader = false;
             const Pb::PlayerCollisionEventMsg* msg = &dataRecord->player_collision_event_msg();
             printPlayerCollisionEventMsg(timeMsg, msg);
          }
@@ -244,9 +275,8 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
       }
       case REID_PLAYER_CRASH : {
          if (dataRecord->has_player_crash_event_msg()) {
-            static bool firstTime = true;
-            if ((option == NEW_MSG) && (firstTime)) printHeader = true;
-            firstTime = false;
+            if ((option == NEW_MSG) && (playerHeader)) printHeader = true;
+            playerHeader = false;
             const Pb::PlayerCrashEventMsg* msg = &dataRecord->player_crash_event_msg();
             printPlayerCrashEventMsg(timeMsg, msg);
          }
@@ -254,9 +284,8 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
       }
       case REID_PLAYER_KILLED : {
          if (dataRecord->has_player_killed_event_msg()) {
-            static bool firstTime = true;
-            if ((option == NEW_MSG) && (firstTime)) printHeader = true;
-            firstTime = false;
+            if ((option == NEW_MSG) && (playerHeader)) printHeader = true;
+            playerHeader = false;
             const Pb::PlayerKilledEventMsg* msg = &dataRecord->player_killed_event_msg();
             printPlayerKilledEventMsg(timeMsg, msg);
          }
@@ -264,9 +293,8 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
       }
       case REID_WEAPON_RELEASED : {
          if (dataRecord->has_weapon_release_event_msg()) {
-            static bool firstTime = true;
-            if ((option == NEW_MSG) && (firstTime)) printHeader = true;
-            firstTime = false;
+            if ((option == NEW_MSG) && (weaponHeader)) printHeader = true;
+            weaponHeader = false;
             const Pb::WeaponReleaseEventMsg* msg = &dataRecord->weapon_release_event_msg();
             printWeaponReleaseEventMsg(timeMsg, msg);
          }
@@ -274,9 +302,8 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
       }
       case REID_WEAPON_HUNG : {
          if (dataRecord->has_weapon_hung_event_msg()) {
-            static bool firstTime = true;
-            if ((option == NEW_MSG) && (firstTime)) printHeader = true;
-            firstTime = false;
+            if ((option == NEW_MSG) && (weaponHeader)) printHeader = true;
+            weaponHeader = false;
             const Pb::WeaponHungEventMsg* msg = &dataRecord->weapon_hung_event_msg();
             printWeaponHungEventMsg(timeMsg, msg);
          }
@@ -284,9 +311,8 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
       }
       case REID_WEAPON_DETONATION : {
          if (dataRecord->has_weapon_detonation_event_msg()) {
-            static bool firstTime = true;
-            if ((option == NEW_MSG) && (firstTime)) printHeader = true;
-            firstTime = false;
+            if ((option == NEW_MSG) && (weaponHeader)) printHeader = true;
+            weaponHeader = false;
             const Pb::WeaponDetonationEventMsg* msg = &dataRecord->weapon_detonation_event_msg();
             printWeaponDetonationEventMsg(timeMsg, msg);
          }
@@ -294,9 +320,8 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
       }
       case REID_GUN_FIRED : {
          if (dataRecord->has_gun_fired_event_msg()) {
-            static bool firstTime = true;
-            if ((option == NEW_MSG) && (firstTime)) printHeader = true;
-            firstTime = false;
+            if ((option == NEW_MSG) && (gunFiredHdr)) printHeader = true;
+            gunFiredHdr = false;
             const Pb::GunFiredEventMsg* msg = &dataRecord->gun_fired_event_msg();
             printGunFiredEventMsg(timeMsg, msg);
          }
@@ -304,9 +329,8 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
       }
       case REID_NEW_TRACK : {
          if (dataRecord->has_new_track_event_msg()) {
-            static bool firstTime = true;
-            if ((option == NEW_MSG) && (firstTime)) printHeader = true;
-            firstTime = false;
+            if ((option == NEW_MSG) && (trackHeader)) printHeader = true;
+            trackHeader = false;
             const Pb::NewTrackEventMsg* msg = &dataRecord->new_track_event_msg();
             printNewTrackEventMsg(timeMsg, msg);
          }
@@ -314,9 +338,8 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
       }
       case REID_TRACK_REMOVED : {
          if (dataRecord->has_track_removed_event_msg()) {
-            static bool firstTime = true;
-            if ((option == NEW_MSG) && (firstTime)) printHeader = true;
-            firstTime = false;
+            if ((option == NEW_MSG) && (trackHeader)) printHeader = true;
+            trackHeader = false;
             const Pb::TrackRemovedEventMsg* msg = &dataRecord->track_removed_event_msg();
             printTrackRemovedEventMsg(timeMsg, msg);
          }
@@ -324,9 +347,8 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
       }
       case REID_TRACK_DATA : {
          if (dataRecord->has_track_data_msg()) {
-            static bool firstTime = true;
-            if ((option == NEW_MSG) && (firstTime)) printHeader = true;
-            firstTime = false;
+            if ((option == NEW_MSG) && (trackHeader)) printHeader = true;
+            trackHeader = false;
             const Pb::TrackDataMsg* msg = &dataRecord->track_data_msg();
             printTrackDataMsg(timeMsg, msg);
          }
@@ -354,13 +376,13 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
          sout << "RESET " << divider;
          printTimeMsg(sout, timeMsg);
          printToOutput( sout.str().c_str() );
+
+         // indicate reset so we print message headings
+         simReset = true;
          break;
       }
       default: {
-         // not a valid message.  Record the ID we got:
-//         std::stringstream sout;
-//         sout << "UNKNOWN ID " << messageId << divider;
-//         printToOutput( sout.str().c_str() );
+         // not an Eaagles message.
          break;
       }
    }
@@ -782,13 +804,7 @@ void TabPrinter::printWeaponReleaseEventMsg(const Pb::Time* const timeMsg, const
    std::stringstream sout;
 
    if (printHeader) {
-      sout << "WEAPON" << divider << "HEADER" << divider;
-      printTimeMsgHdr(sout);
-      printPlayerIdMsgHdr(sout);     // weapon
-      printPlayerStateMsgHdr(sout);
-      printPlayerIdMsgHdr(sout);     // shooter
-      printPlayerIdMsgHdr(sout);     // target
-
+      printWeaponMsgHdr(sout);
       printToOutput( sout.str().c_str() );
       sout.str("");
    }
@@ -839,13 +855,7 @@ void TabPrinter::printWeaponHungEventMsg(const Pb::Time* const timeMsg, const Pb
    std::stringstream sout;
 
    if (printHeader) {
-      sout << "WEAPON" << divider<< "HEADER" << divider;
-      printTimeMsgHdr(sout);
-      printPlayerIdMsgHdr(sout);  // wpn
-      printPlayerStateMsgHdr(sout);  // wpn
-      printPlayerIdMsgHdr(sout);  // shooter
-      printPlayerIdMsgHdr(sout);  // tgt
-
+      printWeaponMsgHdr(sout);
       printToOutput( sout.str().c_str() );
       sout.str("");
    }
@@ -897,15 +907,7 @@ void TabPrinter::printWeaponDetonationEventMsg(const Pb::Time* const timeMsg, co
 
 
    if (printHeader) {
-      sout << "WEAPON" << divider<< "HEADER" << divider;
-      printTimeMsgHdr(sout);
-      printPlayerIdMsgHdr(sout);   // wpn
-      printPlayerStateMsgHdr(sout);
-      printPlayerIdMsgHdr(sout);  // shooter
-      printPlayerIdMsgHdr(sout);  // target
-      sout << "detonation type" << divider;
-      sout << "missile Distance" << divider;
-
+      printWeaponMsgHdr(sout);
       printToOutput( sout.str().c_str() );
       sout.str("");
    }
@@ -1012,21 +1014,7 @@ void TabPrinter::printNewTrackEventMsg(const Pb::Time* const timeMsg, const Pb::
    std::stringstream sout;
 
    if (printHeader) {
-      sout << "TRACK" << divider << "HEADER" << divider;
-      printTimeMsgHdr(sout);
-
-      sout << "Player: " ;
-      printPlayerIdMsgHdr(sout); // player ID header
-      printPlayerStateMsgHdr(sout);  // player state
-
-      sout << "Target: " ;
-      printPlayerIdMsgHdr(sout); // player ID header
-      printPlayerStateMsgHdr(sout);  // player stat
-
-      sout << "Track:" << divider;
-      printTrackDataHdr(sout);  // common track data
-
-      printEmissionDataMsgHdr(sout);  // emission data
+      printTrackMsgHdr(sout);
 
       printToOutput( sout.str().c_str() );
       sout.str("");
@@ -1038,16 +1026,17 @@ void TabPrinter::printNewTrackEventMsg(const Pb::Time* const timeMsg, const Pb::
     {
       if (msg != 0) {
          // print values
+         // Track ID
+         if (msg->has_track_id()) {
+            sout << msg->track_id() << divider;
+         }
+         else sout << divider;
+
          // player ID
          if (msg->has_player_id()) {
             printPlayerIdMsg(sout, &msg->player_id());
          }
          else printPlayerIdSpacer(sout);
-
-         if (msg->has_track_id()) {
-            sout << msg->track_id() << divider;
-         }
-         else sout << divider;
 
          // common track data
          if (msg->has_track_data()) {
@@ -1059,30 +1048,30 @@ void TabPrinter::printNewTrackEventMsg(const Pb::Time* const timeMsg, const Pb::
          if (msg->has_player_state()) {
             printPlayerStateMsg(sout, &msg->player_state());
          }
-         else printPlayerStateMsgHdr(sout);
+         else printPlayerDataSpacer(sout);
 
          // track player ID
          if (msg->has_trk_player_id()) {
             printPlayerIdMsg(sout, &msg->trk_player_id());
          }
-         else printPlayerIdMsgHdr(sout);
+         else printPlayerIdSpacer(sout);
 
          // track player state
          if (msg->has_trk_player_state()) {
             printPlayerStateMsg(sout, &msg->trk_player_state());
          }
-         else printPlayerStateMsgHdr(sout);
+         else printPlayerDataSpacer(sout);
 
          // emission data
          if (msg->has_emission_data()) {
             printEmissionDataMsg(sout, &msg->emission_data());
          }
-         else printEmissionDataMsgHdr(sout);
+         else printEmissionDataSpacer(sout);
       }
       else {
          // bad pointer; print spacers
-         printPlayerIdSpacer(sout); // player ID header
          sout <<  divider;    // Track ID
+         printPlayerIdSpacer(sout); // player ID header
          printTrackDataSpacer(sout);  // common track data
          printPlayerDataSpacer(sout);  // player state
          printPlayerIdSpacer(sout); // player ID header, track
@@ -1102,20 +1091,7 @@ void TabPrinter::printTrackRemovedEventMsg(const Pb::Time* const timeMsg, const 
    std::stringstream sout;
 
    if (printHeader) {
-      sout << "TRACK" << divider << "HEADER" << divider;
-      printTimeMsgHdr(sout);
-
-      sout << "Player: " ;
-      printPlayerIdMsgHdr(sout); // player ID header
-      printPlayerStateMsgHdr(sout);  // player state
-
-      sout << "Target: " ;
-      printPlayerIdMsgHdr(sout); // player ID header
-      printPlayerStateMsgHdr(sout);  // player stat
-
-      sout << "Track:" << divider;
-      printTrackDataHdr(sout);  // common track data
-
+      printTrackMsgHdr(sout);
       printToOutput( sout.str().c_str() );
       sout.str("");
    }
@@ -1124,20 +1100,22 @@ void TabPrinter::printTrackRemovedEventMsg(const Pb::Time* const timeMsg, const 
 
    printTimeMsg(sout, timeMsg);
    if (msg != 0) {
+      // Track ID
+         if (msg->has_track_id()) {
+            sout << msg->track_id() << divider;
+         }
+         else sout << divider;
+
       if (msg->has_player_id()) {
          printPlayerIdMsg(sout, &msg->player_id());
       }
       else printPlayerIdSpacer(sout);
 
-      if (msg->has_track_id()) {
-         sout << msg->track_id() << divider;
-      }
-      else sout << divider;
    }
    else {
       // bad pointer; print spacers
-      printPlayerIdSpacer(sout); // player ID header
       sout <<  divider;    // Track ID
+      printPlayerIdSpacer(sout); // player ID header
       printTrackDataSpacer(sout);  // common track data
       printPlayerDataSpacer(sout);  // player state
       printPlayerIdSpacer(sout); // player ID header, track
@@ -1156,19 +1134,7 @@ void TabPrinter::printTrackDataMsg(const Pb::Time* const timeMsg, const Pb::Trac
    std::stringstream sout;
 
    if (printHeader) {
-      sout << "TRACK" << divider << "HEADER" << divider;
-      printTimeMsgHdr(sout);
-
-      sout << "Player: " ;
-      printPlayerIdMsgHdr(sout); // player ID header
-      printPlayerStateMsgHdr(sout);  // player state
-
-      sout << "Target: " ;
-      printPlayerIdMsgHdr(sout); // player ID header
-      printPlayerStateMsgHdr(sout);  // player stat
-
-      sout << "Track:" << divider;
-      printTrackDataHdr(sout);  // common track data
+      printTrackMsgHdr(sout);
 
       printToOutput( sout.str().c_str() );
       sout.str("");
@@ -1179,16 +1145,17 @@ void TabPrinter::printTrackDataMsg(const Pb::Time* const timeMsg, const Pb::Trac
    {
       if (msg != 0) {
          // print values
+         // Track ID
+         if (msg->has_track_id()) {
+            sout << msg->track_id() << divider;
+         }
+         else sout << divider;
+
          // player ID
          if (msg->has_player_id()) {
             printPlayerIdMsg(sout, &msg->player_id());
          }
          else printPlayerIdSpacer(sout);
-
-         if (msg->has_track_id()) {
-            sout << msg->track_id() << divider;
-         }
-         else sout << divider;
 
          // common track data
          if (msg->has_track_data()) {
@@ -1200,30 +1167,30 @@ void TabPrinter::printTrackDataMsg(const Pb::Time* const timeMsg, const Pb::Trac
          if (msg->has_player_state()) {
             printPlayerStateMsg(sout, &msg->player_state());
          }
-         else printPlayerStateMsgHdr(sout);
+         else printPlayerDataSpacer(sout);
 
          // track player ID
          if (msg->has_trk_player_id()) {
             printPlayerIdMsg(sout, &msg->trk_player_id());
          }
-         else printPlayerIdMsgHdr(sout);
+         else printPlayerIdSpacer(sout);
 
          // track player state
          if (msg->has_trk_player_state()) {
             printPlayerStateMsg(sout, &msg->trk_player_state());
          }
-         else printPlayerStateMsgHdr(sout);
+         else printPlayerDataSpacer(sout);
 
          // emission data
          if (msg->has_emission_data()) {
             printEmissionDataMsg(sout, &msg->emission_data());
          }
-         else printEmissionDataMsgHdr(sout);
+         else printEmissionDataSpacer(sout);
       }
       else {
          // print spacers
-         printPlayerIdSpacer(sout); // player ID header
          sout <<  divider;    // Track ID
+         printPlayerIdSpacer(sout); // player ID header
          printTrackDataSpacer(sout);  // common track data
          printPlayerDataSpacer(sout);  // player state
          printPlayerIdSpacer(sout); // player ID header, track
@@ -1234,6 +1201,36 @@ void TabPrinter::printTrackDataMsg(const Pb::Time* const timeMsg, const Pb::Trac
 
    printToOutput( sout.str().c_str() );
 }
+
+//------------------------------------------------------------------------------
+// printTrackMsgHdr
+//------------------------------------------------------------------------------
+void TabPrinter::printTrackMsgHdr(std::ostream& sout)
+{
+
+      sout << "TRACK" << divider << "HEADER" << divider;
+      printTimeMsgHdr(sout);
+
+      sout << "TRACK ID" << divider;
+
+      sout << "Player: " ;
+      printPlayerIdMsgHdr(sout); // player ID header
+
+      printTrackDataHdr(sout);  // common track data
+
+      printPlayerStateMsgHdr(sout);  // player state
+
+      sout << "Trk Player: " ;
+      printPlayerIdMsgHdr(sout); // player ID header
+      printPlayerStateMsgHdr(sout);  // player stat
+
+ //     sout << "Track:" << divider;
+      
+
+      printEmissionDataMsgHdr(sout);  // emission data
+
+}
+
 
 //------------------------------------------------------------------------------
 // printTimeMsg
@@ -1303,9 +1300,16 @@ void TabPrinter::printPlayerIdMsg(std::ostream& sout, const Pb::PlayerId* const 
             sout << msg->name() << "           " << divider;
          }
          else sout << " " << "           " << divider;
+
+         if (msg->has_side()) {
+            // player side
+            sout << msg->side() << "           " << divider;
+      }
+         else sout << " " << "           " << divider;
+
       }
    }
-   else sout << divider << divider << divider;
+   else sout << divider << divider << divider << divider;
 
 }
 
@@ -1318,6 +1322,7 @@ void TabPrinter::printPlayerIdMsgHdr(std::ostream& sout)
    sout << "player ID"               << divider;
    sout << "federate name"           << divider;
    sout << "network ID"              << divider;  // player name
+   sout << "player side"             << divider;  // player side
 }
 
 //------------------------------------------------------------------------------
@@ -1328,6 +1333,7 @@ void TabPrinter::printPlayerIdSpacer(std::ostream& sout)
     sout << divider;    // player ID
     sout << divider;    // player name
     sout << divider;    // federated name
+    sout << divider;    // player side
 }
 
 //------------------------------------------------------------------------------
@@ -1454,6 +1460,23 @@ void TabPrinter::printPlayerDataSpacer(std::ostream& sout)
 }
 
 //------------------------------------------------------------------------------
+// printWeaponMsgHdr
+//------------------------------------------------------------------------------
+void TabPrinter::printWeaponMsgHdr(std::ostream& sout)
+{
+   // print weapon message header:
+   sout << "WEAPON" << divider << "HEADER" << divider;
+   printTimeMsgHdr(sout);
+   printPlayerIdMsgHdr(sout);     // weapon
+   printPlayerStateMsgHdr(sout);
+   printPlayerIdMsgHdr(sout);     // shooter
+   printPlayerIdMsgHdr(sout);     // target
+   // Applies to Detonation only
+   sout << "detonation type" << divider;
+   sout << "missile Distance" << divider;
+}
+
+//------------------------------------------------------------------------------
 // printCommonTrackDataMsg
 //------------------------------------------------------------------------------
 void TabPrinter::printCommonTrackDataMsg(std::ostream& sout, const Pb::TrackData* const msg)
@@ -1472,17 +1495,20 @@ void TabPrinter::printCommonTrackDataMsg(std::ostream& sout, const Pb::TrackData
       else sout << divider;
 
       if (msg->has_true_az()) {
-         sout << msg->true_az() << divider;
+         sout << msg->true_az() * Basic::Angle::R2DCC << divider;
+     //    sout << msg->true_az() << divider;  // convert to degrees?
       }
       else sout << divider;
 
       if (msg->has_rel_az()) {
-         sout << msg->rel_az() << divider;
+         sout << msg->rel_az() * Basic::Angle::R2DCC << divider;
+   //      sout << msg->rel_az() << divider;   // convert to degrees?
       }
       else sout << divider;
 
       if (msg->has_elevation()) {
-         sout << msg->elevation() << divider;
+         sout << msg->elevation() * Basic::Angle::R2DCC << divider;
+   //      sout << msg->elevation() << divider;  // convert to degrees?
       }
       else sout << divider;
 
@@ -1562,8 +1588,14 @@ void TabPrinter::printTrackDataHdr(std::ostream& sout)
    sout << "latitude" << divider;
    sout << "longitude" << divider;
    sout << "altitude" << divider;
-   sout << "position" << divider << divider << divider;
-   sout << "velocity" << divider << divider << divider;
+   sout << "position x" << divider;
+   sout << "position y" << divider;
+   sout << "position z" << divider;
+   sout << "velocity x" << divider;
+   sout << "velocity y" << divider;
+   sout << "velocity z" << divider;
+//   sout << "position" << divider << divider << divider;
+//   sout << "velocity" << divider << divider << divider;
    sout << "avg signal" << divider;
    sout << "shoot list index" << divider;
    sout << "weapon rel" << divider;
@@ -1655,7 +1687,7 @@ void TabPrinter::printEmissionDataMsgHdr(std::ostream& sout)
    sout << "power" << divider;
    sout << "polarization" << divider;
    sout << "azimuth AOI" << divider;
-   sout << "elevation AOI:" << divider;
+   sout << "elevation AOI " << divider;
 }
 
 //------------------------------------------------------------------------------
