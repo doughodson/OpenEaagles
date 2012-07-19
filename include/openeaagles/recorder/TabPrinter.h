@@ -41,6 +41,7 @@ public:
 
    // set message header options
    void setMsgHdrOptions(MsgHdrOptions msg);
+   bool isSimReset() const;                          // True if reset msg recorded
 
    // set divider string
    bool setSlotDivider(const Basic::String* const msg);
@@ -81,6 +82,8 @@ protected:
    virtual void printPlayerStateMsgHdr(std::ostream& sout);
    virtual void printTrackDataHdr(std::ostream& sout);
    virtual void printEmissionDataMsgHdr(std::ostream& sout);
+   virtual void printWeaponMsgHdr(std::ostream& sout);
+   virtual void printTrackMsgHdr(std::ostream& sout);
 
    virtual void printEmissionDataSpacer(std::ostream& sout);
    virtual void printPlayerIdSpacer(std::ostream& sout);
@@ -94,15 +97,44 @@ protected:
    // OutputHandler class private functions
    virtual void processRecordImp(const DataRecordHandle* const handle);
 
+   virtual void setMsgHeaders(const bool f);
 private:
    void initData();
 
    // print options
    bool printHeader;
+   bool simReset;
+
+   // individual headers
+   bool fileIdHdr;
+   bool playerNewHdr;
+   bool playerRemovedHdr;
+   bool playerDataHdr;
+   bool playerDamagedHdr;
+   bool playerCollisionHdr;
+   bool playerCrashHdr;
+   bool playerKilledHdr;
+   bool weaponReleaseHdr;
+   bool weaponHungHdr;
+   bool weaponDetonateHdr;
+   bool gunFiredHdr;
+   bool trackNewHdr;
+   bool trackRemovedHdr;
+   bool trackDataHdr;
+
+   // Group headers
+   bool playerHeader;
+   bool weaponHeader;
+   bool trackHeader;
+
    MsgHdrOptions option;    // options for printing field names
    unsigned int lastMessage; // previous message printed
    const char* divider;      // divider between message fields
 };
+
+
+// inline functions
+inline bool TabPrinter::isSimReset() const { return simReset; }
 
 } // End Recorder namespace
 } // End Eaagles namespace

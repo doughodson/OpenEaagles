@@ -101,7 +101,7 @@ protected:
    virtual void genEmissionData( Pb::EmissionData* const emMsg, const Simulation::Emission* const emData);
    virtual void sendDataRecord(Pb::DataRecord* const msg);       // Send the DataRecord to our output handler
    virtual void timeStamp(Pb::DataRecord* const msg);            // Time stamp the DataRecord
-
+   virtual std::string genTrackId(const Simulation::Track* const track);
    void setFirstPass(const bool f);
 
    // Recorder data event handlers

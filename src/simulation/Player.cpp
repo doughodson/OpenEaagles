@@ -690,6 +690,7 @@ void Player::updateTC(const LCreal dt0)
                      SAMPLE_1_OBJECT( this )
                   END_RECORD_DATA_SAMPLE()
 
+                  // TabLogger is deprecated
                   if (getAnyEventLogger() != 0) {
                      TabLogger::TabLogEvent* evt = new TabLogger::LogPlayerData(2, this); // type 2: update
                      getAnyEventLogger()->log(evt);
@@ -2633,6 +2634,7 @@ bool Player::killedNotification(Player* const p)
       SAMPLE_2_OBJECTS( this, p )
    END_RECORD_DATA_SAMPLE()
 
+   // TabLogger is deprecated
    if (getAnyEventLogger() != 0) {  // EventLogger Deprecated
       TabLogger::TabLogEvent* evt = new TabLogger::LogPlayerData(7, this, p); // type 7: kill
       getAnyEventLogger()->log(evt);
@@ -2677,6 +2679,7 @@ bool Player::collisionNotification(Player* const p)
       SAMPLE_2_OBJECTS( this, p )
    END_RECORD_DATA_SAMPLE()
 
+   // TabLogger is deprecated
    if (getAnyEventLogger() != 0) {  // EventLogger Deprecated
       TabLogger::TabLogEvent* evt = new TabLogger::LogPlayerData(5, this, p); // type 5: collision
       getAnyEventLogger()->log(evt);
@@ -2721,6 +2724,7 @@ bool Player::crashNotification()
       SAMPLE_1_OBJECT( this )
    END_RECORD_DATA_SAMPLE()
 
+   // TabLogger is deprecated
    if (getAnyEventLogger() != 0) {  // EventLogger Deprecated
       TabLogger::TabLogEvent* evt = new TabLogger::LogPlayerData(6, this); // type 6: crash
       getAnyEventLogger()->log(evt);

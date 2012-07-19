@@ -1404,6 +1404,7 @@ void Simulation::updatePlayerList()
                    SAMPLE_1_OBJECT( p )
                 END_RECORD_DATA_SAMPLE()
 
+                // TabLogger is deprecated
                 if (getAnyEventLogger() != 0) {  // EventLogger Deprecated
                      TabLogger::TabLogEvent* evt = new TabLogger::LogPlayerData(3, p); // code 3 for "remove" msg
                      getAnyEventLogger()->log(evt);
@@ -1424,6 +1425,7 @@ void Simulation::updatePlayerList()
                SAMPLE_1_OBJECT( ip )
             END_RECORD_DATA_SAMPLE()
 
+            // TabLogger is deprecated
             if (getAnyEventLogger() != 0) {  // EventLogger Deprecated
                 TabLogger::TabLogEvent* evt = new TabLogger::LogPlayerData(1, ip); // code 1 for "new" msg
                 getAnyEventLogger()->log(evt);
