@@ -65,15 +65,15 @@ BEGIN_SLOTTABLE(Gimbal)
     "commandRateRoll",        // 27: Commanded roll rate              (Basic::Angle/sec) (sets RATE_SERVO)
 
     "terrainOcculting",             // 28: Enable terrain occulting of tye players of interest (default: false)
-    "playerOfInterestTypes",        // 29: Player of interest types (default: 0 )
+    "checkHorizon",                 // 29:  Enable horizon masking check (default: true)
+    "playerOfInterestTypes",        // 30: Player of interest types (default: 0 )
                                     //     types: { "air" "ground" "weapon" "ship" "building" "lifeform" "space" }
-    "maxPlayersOfInterest",         // 30: Max number of players of interest (default: 0)
-    "maxRange2PlayersOfInterest",   // 31: Max range to players of interest or zero for all (default: 0)
-    "maxAngle2PlayersOfInterest",   // 32: Max angle of gimbal boresight to players of interest or zero for all (default: 0)
-    "localPlayersOfInterestOnly",   // 33: Sets the local only players of interest flag (default: false)
-    "useWorldCoordinates",          // 34: Using player of interest's world (ECEF) coordinate system
-    "ownHeadingOnly",               // 35: Whether only the ownship heading is used by the target data block
-    "earthRadius",                  // 36: Earth radius or zero to use ownship's earth radius (default: 0 -- use ownship's earth radius)
+    "maxPlayersOfInterest",         // 31: Max number of players of interest (default: 0)
+    "maxRange2PlayersOfInterest",   // 32: Max range to players of interest or zero for all (default: 0)
+    "maxAngle2PlayersOfInterest",   // 33: Max angle of gimbal boresight to players of interest or zero for all (default: 0)
+    "localPlayersOfInterestOnly",   // 34: Sets the local only players of interest flag (default: false)
+    "useWorldCoordinates",          // 35: Using player of interest's world (ECEF) coordinate system
+    "ownHeadingOnly",               // 36: Whether only the ownship heading is used by the target data block
 END_SLOTTABLE(Gimbal)
 
 // Map slot table to handles 
@@ -116,16 +116,16 @@ BEGIN_SLOT_MAP(Gimbal)
     ON_SLOT(27, setSlotCmdRateRoll, Basic::Angle)        // Commanded roll rate (sets RATE_SERVO)
 
     ON_SLOT(28, setSlotTerrainOcculting, Basic::Number)  // Enable terrain occulting (default: false)
-    ON_SLOT(29, setSlotPlayerTypes, Basic::PairStream)   // Player of interest types (default: 0 )
+    ON_SLOT(29, setSlotCheckHorizon, Basic::Number)      // Enable horizon masking check (default: true)
+    ON_SLOT(30, setSlotPlayerTypes, Basic::PairStream)   // Player of interest types (default: 0 )
                                                          //    types: { "air" "ground" "weapon" "ship" "building" "lifeform" }
-    ON_SLOT(30, setSlotMaxPlayers, Basic::Number)        // Max number of players of interest (default: 0)
-    ON_SLOT(31, setSlotMaxRange2PlayersOfInterest, Basic::Distance) // Max range to players of interest or zero for all (default: 0)
-    ON_SLOT(32, setSlotMaxAngle2PlayersOfInterest, Basic::Angle)    // Max angle of gimbal boresight to players of interest or zero for all (default: 0)
-    ON_SLOT(33, setSlotLocalPlayersOfInterestOnly, Basic::Number)   // Sets the local only players of interest flag (default: false)
+    ON_SLOT(31, setSlotMaxPlayers, Basic::Number)        // Max number of players of interest (default: 0)
+    ON_SLOT(32, setSlotMaxRange2PlayersOfInterest, Basic::Distance) // Max range to players of interest or zero for all (default: 0)
+    ON_SLOT(33, setSlotMaxAngle2PlayersOfInterest, Basic::Angle)    // Max angle of gimbal boresight to players of interest or zero for all (default: 0)
+    ON_SLOT(34, setSlotLocalPlayersOfInterestOnly, Basic::Number)   // Sets the local only players of interest flag (default: false)
 
-    ON_SLOT(34, setSlotUseWorldCoordinates, Basic::Number)   // Using player of interest's world (ECEF) coordinate system
-    ON_SLOT(35,setSlotUseOwnHeadingOnly,Basic::Number)
-    ON_SLOT(36,setSlotEarthRadius,Basic::Distance)       // Earth radius 
+    ON_SLOT(35, setSlotUseWorldCoordinates, Basic::Number)   // Using player of interest's world (ECEF) coordinate system
+    ON_SLOT(36,setSlotUseOwnHeadingOnly,Basic::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -176,12 +176,12 @@ void Gimbal::initData()
    maxRngPlayers = 0;
    maxAnglePlayers = 0;
    terrainOcculting = false;
+   checkHorizon = true;
    localOnly = false;
    useWorld = false;
    ownHeadingOnly = true;
    playerTypes = 0xFFFF;   // all types
    maxPlayers = 200;
-   earthRadius = 0.0;
 
    tdb = 0;
 }
@@ -215,11 +215,11 @@ void Gimbal::copyData(const Gimbal& org, const bool cc)
    maxAnglePlayers = org.maxAnglePlayers;
    localOnly = org.localOnly;
    terrainOcculting = org.terrainOcculting;
+   checkHorizon = org.checkHorizon;
    useWorld = org.useWorld;
    ownHeadingOnly = org.ownHeadingOnly;
    playerTypes = org.playerTypes;
    maxPlayers = org.maxPlayers;
-   earthRadius = org.earthRadius;
 
    tdb = 0;
 }
@@ -311,14 +311,10 @@ bool Gimbal::fromPlayerOfInterest(const Emission* const em)
 //------------------------------------------------------------------------------
 double Gimbal::getEarthRadius() const
 {
-   double erad = earthRadius;
-
-   if (erad <= 0.0) {
-      erad = Basic::Nav::ERAD60 * Basic::Distance::NM2M;
-      const Player* own = getOwnship();
-      if (own != 0) {
-         erad = own->getEarthRadius();
-      }
+   double erad = Basic::Nav::ERAD60 * Basic::Distance::NM2M;
+   const Player* own = getOwnship();
+   if (own != 0) {
+      erad = own->getEarthRadius();
    }
 
    return erad;
@@ -578,6 +574,13 @@ bool Gimbal::setLocalPlayersOfInterestOnly(const bool flg)
 bool Gimbal::setTerrainOccultingEnabled(const bool flg)
 {
    terrainOcculting = flg;
+   return true;
+}
+
+// Sets the horizon check enabled flag
+bool Gimbal::setHorizonCheckEnabled(const bool flg)
+{
+   checkHorizon = flg;
    return true;
 }
 
@@ -1148,6 +1151,16 @@ bool Gimbal::setSlotTerrainOcculting(const Basic::Number* const msg)
    return ok;
 }
 
+// Enable horizon masking check (default: true)
+bool Gimbal::setSlotCheckHorizon(const Basic::Number* const msg)
+{
+   bool ok = false;
+   if (msg != 0) {
+      ok = setHorizonCheckEnabled(msg->getBoolean());
+   }
+   return ok;
+}
+
 // Player of interest types (default: 0 )
 bool Gimbal::setSlotPlayerTypes(const Basic::PairStream* const msg)
 {
@@ -1248,17 +1261,6 @@ bool Gimbal::setSlotUseOwnHeadingOnly(const Basic::Number* const msg)
       ok = setOwnHeadingOnly(msg->getBoolean());
    }
    return ok;
-}
-
-   // Earth radius used by Tdb for earth masking
-bool Gimbal::setSlotEarthRadius(const Basic::Distance* const msg)
-{
-    bool ok = false;
-    if (msg != 0) {
-        earthRadius = Basic::Meters::convertStatic(*msg);
-        ok = true;
-    }
-    return ok;
 }
 
 
