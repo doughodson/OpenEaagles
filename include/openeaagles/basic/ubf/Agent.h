@@ -18,9 +18,14 @@ class Action;
 // Class: Agent
 //
 // Description: Generic agent class to control a component in the simulation - the agent's "actor"
-//    newUbf version allows component behaviors to return null actions.
-//    newUbf actions know how to execute themselves, so agent does not need to know anything about action class.
-//    newUbf agent's state is initialized by slot, so agent does not need to know anything about state class.
+//
+// Notes:
+// 1) Use 'Agent' to update the behavior framework via updateData() and use
+//    'AgentTC' to update the behavior framework using updateTC().
+//
+// 2) The updateData() and updateTC() calls are only processed by this Agent
+//    class and are not passed to the rest of the behavior framework.
+//
 //
 // Form name: UbfAgent
 // Slots:
@@ -34,6 +39,7 @@ public:
    Agent();
 
    // Basic::Component Interface
+   virtual void updateTC(const LCreal dt = 0.0f);
    virtual void updateData(const LCreal dt = 0.0f);
    virtual void reset();
 
@@ -41,11 +47,11 @@ protected:
    // generic controller
    virtual void controller(const LCreal dt = 0.0f);
 
-   void setBehavior(Behavior* const);
    Behavior* getBehavior() const          { return behavior; }
+   void setBehavior(Behavior* const);
 
-   void setState(State* const);
    State* getState() const                { return state; }
+   void setState(State* const);
 
    virtual void initActor();
 

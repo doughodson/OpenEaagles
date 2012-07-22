@@ -13,10 +13,7 @@ namespace Ubf {
 //------------------------------------------------------------------------------
 // Class: State
 //
-// Description:
-//    Simple base class that supports derived state functionality;
-//    the object does "nothing," but supports state/component infrastructure -
-//    forwards the updateState and updateGlobalState calls to all state components
+// Description: The actor's state vector, as seen by the Behaviors.
 //
 // Form name: UbfState
 //------------------------------------------------------------------------------
@@ -25,6 +22,7 @@ class State : public Basic::Component
    DECLARE_SUBCLASS(State, Basic::Component)
 public:
    State();
+
    virtual void updateGlobalState(void);
    virtual void updateState(const Basic::Component* const actor);
 

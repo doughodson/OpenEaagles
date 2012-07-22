@@ -13,6 +13,10 @@ EMPTY_SLOTTABLE(Action)
 EMPTY_DELETEDATA(Action)
 EMPTY_SERIALIZER(Action)
 
+//------------------------------------------------------------------------------
+// Class support functions
+//------------------------------------------------------------------------------
+
 Action::Action()
 {
    STANDARD_CONSTRUCTOR()

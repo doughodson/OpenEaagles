@@ -12,13 +12,13 @@ namespace Eaagles {
 namespace Basic {
 namespace Ubf {
 
-// this version allows null action to be returned; this code handles that
-// also sets container for contained behaviors
 IMPLEMENT_SUBCLASS(Arbiter, "UbfArbiter")
 EMPTY_COPYDATA(Arbiter)
 EMPTY_SERIALIZER(Arbiter)
 
+//------------------------------------------------------------------------------
 // slot table for this class type
+//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Arbiter)
    "behaviors"                    //  1) behaviors
 END_SLOTTABLE(Arbiter)
@@ -28,15 +28,16 @@ BEGIN_SLOT_MAP(Arbiter)
    ON_SLOT(1, setSlotBehaviors, Basic::PairStream)
 END_SLOT_MAP()
 
+
+//------------------------------------------------------------------------------
+// Class support functions
+//------------------------------------------------------------------------------
 Arbiter::Arbiter()
 {
    STANDARD_CONSTRUCTOR()
    behaviors = new Basic::List();
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void Arbiter::deleteData()
 {
    // unref behaviors
@@ -80,28 +81,29 @@ Action* Arbiter::genAction(const State* const state, const LCreal dt)
 }
 
 
-// implements generic priority arbiting scheme - selects component action with highest vote
-//
-Action* Arbiter::genComplexAction(const Basic::List* const actionSet)
+//------------------------------------------------------------------------------
+// Default: select the action with the highest vote
+//------------------------------------------------------------------------------
+Action* Arbiter::genComplexAction(Basic::List* const actionSet)
 {
    Action* complexAction = 0;
    unsigned int maxVote = 0;
 
    // process entire action set
-   const Basic::List::Item* item = actionSet->getFirstItem();
+   Basic::List::Item* item = actionSet->getFirstItem();
    while (item != 0) {
 
-      const Action* action = dynamic_cast<const Action*>(item->getValue());
-      
+      // Is this action's vote higher than the previous?
+      Action* action = dynamic_cast<Action*>(item->getValue());
       if (maxVote==0 || action->getVote() > maxVote) {
-         // unref previous high vote getter
-         if (complexAction != 0)
-            complexAction->unref();
 
-         complexAction = dynamic_cast<Action*>(action->clone());
-
+         // Yes ...
+         if (complexAction != 0) complexAction->unref();
+         complexAction = action;
+         complexAction->ref();
          maxVote = action->getVote();
       }
+
       // next action
       item = item->getNext();
    }
@@ -109,9 +111,10 @@ Action* Arbiter::genComplexAction(const Basic::List* const actionSet)
    if (maxVote > 0 && isMessageEnabled(MSG_DEBUG))
       std::cout << "Arbiter: chose action with vote= " << maxVote << std::endl;
 
-   // if a vote value has been set for arbiter in input, should it override? as in:
-   //if (getVote() > 0)
-   //   complexAction->setVote(getVote());
+   // Use our vote value; if it's been set
+   if (getVote() > 0 && complexAction != 0) {
+      complexAction->setVote(getVote());
+   }
 
    // complexAction will have the vote value of whichever component action was selected
    return complexAction;
@@ -128,8 +131,9 @@ void Arbiter::addBehavior(Behavior* const x)
    x->container(this);
 }
 
+
 //------------------------------------------------------------------------------
-// set slot functions
+// Slot functions
 //------------------------------------------------------------------------------
 
 bool Arbiter::setSlotBehaviors(Basic::PairStream* const x)
