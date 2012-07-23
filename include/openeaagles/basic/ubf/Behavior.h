@@ -15,8 +15,8 @@ class Action;
 
 //------------------------------------------------------------------------------
 // Class: Behavior
-//
-// Description: Abstract base class for all behaviors
+// Description: Abstract base class for all behaviors.  Generates an optional
+//              action based on our current state.
 //
 // Form name: UbfBehavior
 // Slots:
@@ -30,13 +30,13 @@ class Behavior : public Basic::Component
 public:
    Behavior();
 
+   // Returns a pre-ref'd Action (or zero if no action is generated)
    virtual Action* genAction(const State* const state, const LCreal dt) = 0;
 
 protected:
-   virtual void setVote(const unsigned int x);
    unsigned int getVote() const;
+   virtual void setVote(const unsigned int x);
 
-protected:
    bool setSlotVote(const Basic::Number* const num);
 
 private:
@@ -52,4 +52,3 @@ inline unsigned int Behavior::getVote() const          { return vote; }
 } // End Eaagles namespace
 
 #endif
-

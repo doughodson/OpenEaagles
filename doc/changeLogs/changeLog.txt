@@ -98,8 +98,7 @@ simulation
    dataRecorderTokens.h -- new file -- Data recorder sample event tokens.
 
    Gimbal class
-      1) Added the new 'earthRadius' slot and function 'getEarthRadius(), which
-      define the radius used for earth masking of the line of sight to the target.
+      1) Added the 'checkHorizon' slot to enable or disable Tdb horizon masking
 
    Navigation class
       -- Fixed bug in calculating navigation UTC time
@@ -141,6 +140,8 @@ simulation
       resizeArrays()
 
       2) processPlayers() -- modified to use its Gimbal's earth radius
+
+      3) Added flag to enable/disable horizon masking check
 
 --------------------------------------------------------------------------------
 

@@ -243,6 +243,7 @@ unsigned int Tdb::processPlayers(Basic::PairStream* const players)
    const bool useWorld = gimbal->isUsingWorldCoordinates();
    const bool ownHdgOnly = gimbal->isUsingHeadingOnly();
    const double earthRadius = gimbal->getEarthRadius();
+   const bool checkHorizon = gimbal->isHorizonCheckEnabled();
 
 
    // ---
@@ -369,7 +370,7 @@ unsigned int Tdb::processPlayers(Basic::PairStream* const players)
 
             // Horizon check
             bool aboveHorizon = true;
-            if (usingEcefFlg) {
+            if (usingEcefFlg && checkHorizon) {
                // We can see targets that are above the horizon or
                // targets that are on or above the earth and are closer
                // than the horizon

@@ -28,9 +28,10 @@ class Action : public Basic::Object
 public:
    Action();
 
-   void setVote(const unsigned int x);
    unsigned int getVote() const;
+   void setVote(const unsigned int x);
 
+   // Execute the behavior
    virtual bool execute(Basic::Component* actor)=0;
 
 private:
