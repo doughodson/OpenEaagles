@@ -25,7 +25,9 @@ IMPLEMENT_SUBCLASS(Agent, "UbfAgent")
 EMPTY_SERIALIZER(Agent)
 EMPTY_COPYDATA(Agent)
 
+//------------------------------------------------------------------------------
 // slot table for this class type
+//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Agent)
    "state",                      //  1) The agent's state object
    "behavior"                    //  2) behavior
@@ -37,6 +39,10 @@ BEGIN_SLOT_MAP(Agent)
    ON_SLOT(2, setSlotBehavior, Behavior)
 END_SLOT_MAP()
 
+
+//------------------------------------------------------------------------------
+// Class support functions
+//------------------------------------------------------------------------------
 Agent::Agent()
 {
    STANDARD_CONSTRUCTOR()
@@ -45,25 +51,25 @@ Agent::Agent()
    state = 0;
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void Agent::deleteData()
 {
-   // unref arbiter
    if ( behavior!=0 ) { behavior->unref(); behavior = 0; }
-   // unref state
    if ( state!=0 )    { state->unref(); state = 0; }
 
    myActor = 0;
 }
 
+//------------------------------------------------------------------------------
+// Reset the system
+//------------------------------------------------------------------------------
 void Agent::reset()
 {
-   // behavior is not a full component - it knows that agent is its container,
-   // but agentdoesn't know that it has behavior components
+   // Reset our behavior and state objects
    if (behavior != 0) {
       behavior->reset();
+   }
+   if (state != 0) {
+      state->reset();
    }
    
    myActor=0;
@@ -75,16 +81,27 @@ void Agent::reset()
    BaseClass::reset();
 }
 
+
+//------------------------------------------------------------------------------
+// updateTC() -
+//------------------------------------------------------------------------------
+void Agent::updateTC(const LCreal dt)
+{
+}
+
+
 //------------------------------------------------------------------------------
 // updateData()
 //------------------------------------------------------------------------------
 void Agent::updateData(const LCreal dt)
 {
-   // update base class stuff first
-   BaseClass::updateData(dt);
    controller(dt);
 }
 
+
+//------------------------------------------------------------------------------
+// updateData()
+//------------------------------------------------------------------------------
 void Agent::controller(const LCreal dt)
 {
    Basic::Component* actor = getActor();
@@ -104,6 +121,9 @@ void Agent::controller(const LCreal dt)
 }
 
 
+//------------------------------------------------------------------------------
+// Set our behavior model
+//------------------------------------------------------------------------------
 void Agent::setBehavior(Behavior* const x)
 {
    if (x==0)
@@ -115,6 +135,10 @@ void Agent::setBehavior(Behavior* const x)
    behavior->container(this);
 }
 
+
+//------------------------------------------------------------------------------
+// Set our state model
+//------------------------------------------------------------------------------
 void Agent::setState(State* const x)
 {
    if (x==0)
@@ -129,7 +153,10 @@ void Agent::setState(State* const x)
    p->unref();
 }
 
+
+//------------------------------------------------------------------------------
 // finds our actor during reset() processing
+//------------------------------------------------------------------------------
 void Agent::initActor()
 {
    if (getActor()==0) {
@@ -139,6 +166,7 @@ void Agent::initActor()
       }
    }
 }
+
 
 //------------------------------------------------------------------------------
 // set slot functions
@@ -174,7 +202,6 @@ Basic::Object* Agent::getSlotByIndex(const int si)
 }
 
 
-
 //==============================================================================
 // Class: AgentTC
 // Description: An Agent that manages a component (the "actor") with a behavior,
@@ -189,20 +216,15 @@ EMPTY_COPYDATA(AgentTC)
 EMPTY_DELETEDATA(AgentTC)
 
 //------------------------------------------------------------------------------
-// updateTC() - implement agent's controller logic in TC thread
+// updateTC() - Calls the controller
 //------------------------------------------------------------------------------
 void AgentTC::updateTC(const LCreal dt)
 {
-   // update base class stuff first
-   BaseClass::updateTC(dt);
-   // since we are a station component, at this point we are always finished with
-   // the sim's update TC, which means we have just finished phase 3 and are soon
-   // to start the new phase 0
    controller(dt);
 }
 
 //------------------------------------------------------------------------------
-// updateData() - avoid baseclass agent's controller logic in BG thread
+// updateData() - 
 //------------------------------------------------------------------------------
 void AgentTC::updateData(const LCreal dt)
 {
