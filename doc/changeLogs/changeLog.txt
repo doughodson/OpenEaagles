@@ -39,6 +39,9 @@ basic
 
       3) Moved inline functions to new Rng.inl file
 
+   Rand class (and subclasses)
+      -- removed class as it duplicates the more mature Rng class
+
    support.cpp
       1) lcStrcat() modified to return false if a non-terminated string is passed
       in the destination buffer; destination buffer is not modified.
