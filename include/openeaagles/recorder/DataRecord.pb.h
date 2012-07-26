@@ -2808,6 +2808,24 @@ class PlayerId : public ::google::protobuf::Message {
   inline ::google::protobuf::uint32 side() const;
   inline void set_side(::google::protobuf::uint32 value);
   
+  // optional uint32 major_type = 5;
+  inline bool has_major_type() const;
+  inline void clear_major_type();
+  static const int kMajorTypeFieldNumber = 5;
+  inline ::google::protobuf::uint32 major_type() const;
+  inline void set_major_type(::google::protobuf::uint32 value);
+  
+  // optional string ac_type = 6;
+  inline bool has_ac_type() const;
+  inline void clear_ac_type();
+  static const int kAcTypeFieldNumber = 6;
+  inline const ::std::string& ac_type() const;
+  inline void set_ac_type(const ::std::string& value);
+  inline void set_ac_type(const char* value);
+  inline void set_ac_type(const char* value, size_t size);
+  inline ::std::string* mutable_ac_type();
+  inline ::std::string* release_ac_type();
+  
   GOOGLE_PROTOBUF_EXTENSION_ACCESSORS(PlayerId)
   // @@protoc_insertion_point(class_scope:Eaagles.Recorder.Pb.PlayerId)
  private:
@@ -2819,6 +2837,10 @@ class PlayerId : public ::google::protobuf::Message {
   inline void clear_has_fed_name();
   inline void set_has_side();
   inline void clear_has_side();
+  inline void set_has_major_type();
+  inline void clear_has_major_type();
+  inline void set_has_ac_type();
+  inline void clear_has_ac_type();
   
   ::google::protobuf::internal::ExtensionSet _extensions_;
   
@@ -2828,9 +2850,11 @@ class PlayerId : public ::google::protobuf::Message {
   ::google::protobuf::uint32 id_;
   ::google::protobuf::uint32 side_;
   ::std::string* fed_name_;
+  ::std::string* ac_type_;
+  ::google::protobuf::uint32 major_type_;
   
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(6 + 31) / 32];
   
   friend void  protobuf_AddDesc_openeaagles_2frecorder_2fDataRecord_2eproto();
   friend void protobuf_AssignDesc_openeaagles_2frecorder_2fDataRecord_2eproto();
@@ -6270,6 +6294,86 @@ inline ::google::protobuf::uint32 PlayerId::side() const {
 inline void PlayerId::set_side(::google::protobuf::uint32 value) {
   set_has_side();
   side_ = value;
+}
+
+// optional uint32 major_type = 5;
+inline bool PlayerId::has_major_type() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void PlayerId::set_has_major_type() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void PlayerId::clear_has_major_type() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void PlayerId::clear_major_type() {
+  major_type_ = 0u;
+  clear_has_major_type();
+}
+inline ::google::protobuf::uint32 PlayerId::major_type() const {
+  return major_type_;
+}
+inline void PlayerId::set_major_type(::google::protobuf::uint32 value) {
+  set_has_major_type();
+  major_type_ = value;
+}
+
+// optional string ac_type = 6;
+inline bool PlayerId::has_ac_type() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
+}
+inline void PlayerId::set_has_ac_type() {
+  _has_bits_[0] |= 0x00000020u;
+}
+inline void PlayerId::clear_has_ac_type() {
+  _has_bits_[0] &= ~0x00000020u;
+}
+inline void PlayerId::clear_ac_type() {
+  if (ac_type_ != &::google::protobuf::internal::kEmptyString) {
+    ac_type_->clear();
+  }
+  clear_has_ac_type();
+}
+inline const ::std::string& PlayerId::ac_type() const {
+  return *ac_type_;
+}
+inline void PlayerId::set_ac_type(const ::std::string& value) {
+  set_has_ac_type();
+  if (ac_type_ == &::google::protobuf::internal::kEmptyString) {
+    ac_type_ = new ::std::string;
+  }
+  ac_type_->assign(value);
+}
+inline void PlayerId::set_ac_type(const char* value) {
+  set_has_ac_type();
+  if (ac_type_ == &::google::protobuf::internal::kEmptyString) {
+    ac_type_ = new ::std::string;
+  }
+  ac_type_->assign(value);
+}
+inline void PlayerId::set_ac_type(const char* value, size_t size) {
+  set_has_ac_type();
+  if (ac_type_ == &::google::protobuf::internal::kEmptyString) {
+    ac_type_ = new ::std::string;
+  }
+  ac_type_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* PlayerId::mutable_ac_type() {
+  set_has_ac_type();
+  if (ac_type_ == &::google::protobuf::internal::kEmptyString) {
+    ac_type_ = new ::std::string;
+  }
+  return ac_type_;
+}
+inline ::std::string* PlayerId::release_ac_type() {
+  clear_has_ac_type();
+  if (ac_type_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = ac_type_;
+    ac_type_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
 }
 
 // -------------------------------------------------------------------

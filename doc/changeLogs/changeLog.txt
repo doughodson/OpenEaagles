@@ -16,6 +16,9 @@ general
          published: Journal of Intelligent and Robotic Systems, vol 55,
                     no 2, pp 155-176, 2009
 
+   changed the default location for the Linux OE 3rd party packages; headers and
+   libraries ('setenv' and 'makedefs')
+
 --------------------------------------------------------------------------------
 basic
 
