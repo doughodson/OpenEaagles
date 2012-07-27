@@ -853,7 +853,11 @@ std::ostream& Steerpoint::serialize(std::ostream& sout, const int i, const bool 
 
     // altitude (meters)
     indent(sout, i+j);
-    sout << "altitude: " << initCmdAlt << std::endl;
+    sout << "altitude: " << cmdAlt << std::endl;
+
+    // airspeed (KTS)
+    indent(sout, i+j);
+    sout << "airspeed: " << cmdAirspeed << std::endl;
 
     // planned time of arrival (second)
     if (pta != 0) {
