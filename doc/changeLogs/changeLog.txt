@@ -10,6 +10,9 @@ general
 --------------------------------------------------------------------------------
 basic
 
+   Statistic class
+      1) Removed empty file in src/basic named Statistic.h - not needed
+
 
 --------------------------------------------------------------------------------
 basicGL
