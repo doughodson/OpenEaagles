@@ -973,6 +973,7 @@ public:
    virtual bool setSlotInitEulerAngles(const Basic::List* const msg);
 
    virtual bool setSlotInitVelocity(const Basic::Number* const msg);
+   virtual bool setSlotInitVelocityKts(const Basic::Number* const msg);
 
    virtual bool setSlotID(const Basic::Number* const msg);
    virtual bool setSlotSide(Basic::String* const msg);

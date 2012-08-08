@@ -54,8 +54,8 @@ JSBSIM_INC_DIR = $(OE_3RD_PARTY_ROOT)/include/JSBSim
 # ---
 # Optimize?
 # ---
-#OPTIMIZE = -g
-OPTIMIZE = -O3
+OPTIMIZE = -g
+#OPTIMIZE = -O3
 
 # ---
 # Modify standard flags

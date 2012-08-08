@@ -840,6 +840,8 @@ std::ostream& Steerpoint::serialize(std::ostream& sout, const int i, const bool 
     else if (stptType == TGT) sout << "stptType: tgt" << std::endl;
 
     // latitude (dd.dddd)
+    sout.precision(15);
+
     indent(sout, i+j);
     sout << "latitude: " << latitude << std::endl;
 
@@ -847,13 +849,20 @@ std::ostream& Steerpoint::serialize(std::ostream& sout, const int i, const bool 
     indent(sout, i+j);
     sout << "longitude: " << longitude << std::endl;
 
+    // now back to normal precision
+    sout.precision(4);
+
     // elevation (meters)
     indent(sout, i+j);
     sout << "elevation: " << initElev << std::endl;
 
     // altitude (meters)
     indent(sout, i+j);
-    sout << "altitude: " << initCmdAlt << std::endl;
+    sout << "altitude: " << cmdAlt << std::endl;
+
+    // airspeed (KTS)
+    indent(sout, i+j);
+    sout << "airspeed: " << cmdAirspeed << std::endl;
 
     // planned time of arrival (second)
     if (pta != 0) {

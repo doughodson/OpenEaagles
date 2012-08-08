@@ -69,39 +69,40 @@ BEGIN_SLOTTABLE(Player)
 
    // Player's initial velocity
    "initVelocity",      // 12) Initial Velocity: meters/sec
+   "initVelocityKts",   // 13) Initial Velocity: knots
 
    // Player's type, id and and other parameters
-   "type",              // 13) Type of player vehicle ("F-16A", "Tank", "SA-6", etc.)
-   "id",                // 14) Player id   [ 1 .. 65535 ]
-   "side",              // 15) Which side? { BLUE, RED, YELLOW, CYAN, GRAY, WHITE }
-   "mode",              // 16) Initial player mode ( INACTIVE, ACTIVE, DEAD )
+   "type",              // 14) Type of player vehicle ("F-16A", "Tank", "SA-6", etc.)
+   "id",                // 15) Player id   [ 1 .. 65535 ]
+   "side",              // 16) Which side? { BLUE, RED, YELLOW, CYAN, GRAY, WHITE }
+   "mode",              // 17) Initial player mode ( INACTIVE, ACTIVE, DEAD )
 
-   "signature",         // 17) Player's RCS signature
-   "irSignature",       // 18) Player's IR Signature
-   "camouflageType",    // 19) User defined camouflage type (positive integer or zero for none)
+   "signature",         // 18) Player's RCS signature
+   "irSignature",       // 19) Player's IR Signature
+   "camouflageType",    // 20) User defined camouflage type (positive integer or zero for none)
 
-   "terrainElevReq",    // 20) Terrain elevation update requested
-   "interpolateTerrain", // 21) Interpolate our terrain1 data
-   "terrainOffset",     // 22) Ground clamp offset from terrain to player's CG (Basic::Distance)
+   "terrainElevReq",    // 21) Terrain elevation update requested
+   "interpolateTerrain",// 22) Interpolate our terrain1 data
+   "terrainOffset",     // 23) Ground clamp offset from terrain to player's CG (Basic::Distance)
 
-   "positionFreeze",    // 23) Position freeze
-   "altitudeFreeze",    // 24) Altitude freeze
-   "attitudeFreeze",    // 25) Attitude freeze
-   "fuelFreeze",        // 26) Fuel freeze
-   "crashOverride",     // 27) Crash Override (i.e., ignore collision and crash events)
-   "killOverride",      // 28) Kill/Damage Override -- player can not be killed or damaged(by a weapon)
-   "killRemoval",       // 29) If true destroyed players are set to KILLED and are eventually removed (default: false)
-   "enableNetOutput",   // 30) Enable the network output!
+   "positionFreeze",    // 24) Position freeze
+   "altitudeFreeze",    // 25) Altitude freeze
+   "attitudeFreeze",    // 26) Attitude freeze
+   "fuelFreeze",        // 27) Fuel freeze
+   "crashOverride",     // 28) Crash Override (i.e., ignore collision and crash events)
+   "killOverride",      // 29) Kill/Damage Override -- player can not be killed or damaged(by a weapon)
+   "killRemoval",       // 30) If true destroyed players are set to KILLED and are eventually removed (default: false)
+   "enableNetOutput",   // 31) Enable the network output!
 
-   "dataLogTime",       // 31) Data logging time -- time between player data samples
+   "dataLogTime",       // 32) Data logging time -- time between player data samples
 
    // Player's test angular velocities
-   "testRollRate",      // 32) Test roll rate (units per second)
-   "testPitchRate",     // 33) Test pitch rate (units per second)
-   "testYawRate",       // 34) Test heading rate (units per second)
-   "testBodyAxis",      // 35) Test rates are in body coordinates else euler rates (default: false)
+   "testRollRate",      // 33) Test roll rate (units per second)
+   "testPitchRate",     // 34) Test pitch rate (units per second)
+   "testYawRate",       // 35) Test heading rate (units per second)
+   "testBodyAxis",      // 36) Test rates are in body coordinates else euler rates (default: false)
 
-   "useCoordSys"        // 36) Coord system to use for position updating { WORLD, GEOD, LOCAL }
+   "useCoordSys"        // 37) Coord system to use for position updating { WORLD, GEOD, LOCAL }
 END_SLOTTABLE(Player)
 
 // Map slot table to handles
@@ -139,36 +140,37 @@ BEGIN_SLOT_MAP(Player)
 
    ON_SLOT(11, setSlotInitEulerAngles, Basic::List)
    ON_SLOT(12, setSlotInitVelocity, Basic::Number)
+   ON_SLOT(13, setSlotInitVelocityKts, Basic::Number)
 
-   ON_SLOT(13, setType, Basic::String)
-   ON_SLOT(14, setSlotID, Basic::Number)
-   ON_SLOT(15, setSlotSide, Basic::String)
-   ON_SLOT(16, setSlotInitMode, Basic::String)
+   ON_SLOT(14, setType, Basic::String)
+   ON_SLOT(15, setSlotID, Basic::Number)
+   ON_SLOT(16, setSlotSide, Basic::String)
+   ON_SLOT(17, setSlotInitMode, Basic::String)
 
-   ON_SLOT(17, setSlotSignature, RfSignature)
-   ON_SLOT(18, setSlotIrSignature, IrSignature)
-   ON_SLOT(19, setSlotCamouflageType, Basic::Number)
+   ON_SLOT(18, setSlotSignature, RfSignature)
+   ON_SLOT(19, setSlotIrSignature, IrSignature)
+   ON_SLOT(20, setSlotCamouflageType, Basic::Number)
 
-   ON_SLOT(20, setSlotTerrainElevReq, Basic::Number)
-   ON_SLOT(21, setSlotInterpolateTerrain, Basic::Number)
-   ON_SLOT(22, setSlotTerrainOffset, Basic::Distance)
+   ON_SLOT(21, setSlotTerrainElevReq, Basic::Number)
+   ON_SLOT(22, setSlotInterpolateTerrain, Basic::Number)
+   ON_SLOT(23, setSlotTerrainOffset, Basic::Distance)
 
-   ON_SLOT(23, setSlotPositionFreeze, Basic::Number)
-   ON_SLOT(24, setSlotAltitudeFreeze, Basic::Number)
-   ON_SLOT(25, setSlotAttitudeFreeze, Basic::Number)
-   ON_SLOT(26, setSlotFuelFreeze, Basic::Number)
-   ON_SLOT(27, setSlotCrashOverride, Basic::Number)
-   ON_SLOT(28, setSlotKillOverride, Basic::Number)
-   ON_SLOT(29, setSlotKillRemoval, Basic::Number)
-   ON_SLOT(30, setSlotEnableNetOutput, Basic::Number)
-   ON_SLOT(31, setSlotDataLogTime, Basic::Time)
+   ON_SLOT(24, setSlotPositionFreeze, Basic::Number)
+   ON_SLOT(25, setSlotAltitudeFreeze, Basic::Number)
+   ON_SLOT(26, setSlotAttitudeFreeze, Basic::Number)
+   ON_SLOT(27, setSlotFuelFreeze, Basic::Number)
+   ON_SLOT(28, setSlotCrashOverride, Basic::Number)
+   ON_SLOT(29, setSlotKillOverride, Basic::Number)
+   ON_SLOT(30, setSlotKillRemoval, Basic::Number)
+   ON_SLOT(31, setSlotEnableNetOutput, Basic::Number)
+   ON_SLOT(32, setSlotDataLogTime, Basic::Time)
 
-   ON_SLOT(32, setSlotTestRollRate, Basic::Angle)
-   ON_SLOT(33, setSlotTestPitchRate, Basic::Angle)
-   ON_SLOT(34, setSlotTestYawRate, Basic::Angle)
-   ON_SLOT(35, setSlotTestBodyAxis, Basic::Number)
+   ON_SLOT(33, setSlotTestRollRate, Basic::Angle)
+   ON_SLOT(34, setSlotTestPitchRate, Basic::Angle)
+   ON_SLOT(35, setSlotTestYawRate, Basic::Angle)
+   ON_SLOT(36, setSlotTestBodyAxis, Basic::Number)
 
-   ON_SLOT(36, setSlotUseCoordSys, Basic::String)
+   ON_SLOT(37, setSlotUseCoordSys, Basic::String)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -4084,6 +4086,18 @@ bool Player::setSlotInitVelocity(const Basic::Number* const msg)
    }
    return ok;
 }
+
+// initVelocityKts: Initial Velocity: knots (NM/hour)
+bool Player::setSlotInitVelocityKts(const Basic::Number* const msg)
+{
+   bool ok = false;
+   if (msg != 0) {
+      initVp = (msg->getReal() * Eaagles::Basic::Distance::NM2M) / 3600.0f;
+      ok = true;
+   }
+   return ok;
+}
+
 
 // id: Player id  [ 1 .. 65535 ]
 bool Player::setSlotID(const Basic::Number* const num)
