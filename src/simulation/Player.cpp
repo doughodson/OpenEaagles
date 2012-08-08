@@ -5,6 +5,7 @@
 #include "openeaagles/simulation/Player.h"
 
 #include "openeaagles/simulation/Datalink.h"
+#include "openeaagles/simulation/DataRecorder.h"
 #include "openeaagles/simulation/DynamicsModels.h"
 #include "openeaagles/simulation/Emission.h"
 #include "openeaagles/simulation/Gimbal.h"
@@ -684,11 +685,18 @@ void Player::updateTC(const LCreal dt0)
                dataLogTimer -= dt4;
                if (dataLogTimer <= 0.0f) {
                   // At timeout, log the player's data and ...
+
+                  BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_PLAYER_DATA )
+                     SAMPLE_1_OBJECT( this )
+                  END_RECORD_DATA_SAMPLE()
+
+                  // TabLogger is deprecated
                   if (getAnyEventLogger() != 0) {
                      TabLogger::TabLogEvent* evt = new TabLogger::LogPlayerData(2, this); // type 2: update
                      getAnyEventLogger()->log(evt);
                      evt->unref();
                   }
+
                   // reset the timer.
                   dataLogTimer = dataLogTime;
                }
@@ -906,6 +914,28 @@ const Nib* Player::getLocalNib(const unsigned int netId) const
       p = nibList[netId-1];
    }
    return p;
+}
+
+// Earth radius (meters)
+double Player::getEarthRadius() const
+{
+   double erad = Basic::Nav::ERAD60 * Basic::Distance::NM2M;  // (default)
+
+   const Simulation* sim = getSimulation();
+   if (sim != 0) {
+      const Basic::EarthModel* pModel = sim->getEarthModel();
+      if (pModel == 0) pModel = &Basic::EarthModel::wgs84;
+
+      const double b  = pModel->getB();   // semi-major axis
+      const double e2 = pModel->getE2();  // eccentricity squared
+
+      const double slat = getLatitude();
+      const double cosSlat = std::cos(Basic::Angle::D2RCC * slat);
+
+      erad = b/sqrt(1.0 - e2*cosSlat*cosSlat); 
+   }
+
+   return erad;
 }
 
 //------------------------------------------------------------------------------
@@ -2548,7 +2578,12 @@ void Player::processDetonation(const LCreal detRange, Weapon* const wpn)
    }
 
    // record EVERYTHING that had the potential to cause damage, even if killOverride
-   if (getAnyEventLogger() != 0) {
+
+   BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_PLAYER_DAMAGED )
+      SAMPLE_2_OBJECTS( this, wpn )
+   END_RECORD_DATA_SAMPLE()
+
+   if (getAnyEventLogger() != 0) {  // EventLogger Deprecated
       TabLogger::TabLogEvent* evt = new TabLogger::LogPlayerData(4, this, wpn); // type 4: damage state
       getAnyEventLogger()->log(evt);
       evt->unref();
@@ -2595,7 +2630,12 @@ bool Player::killedNotification(Player* const p)
    }
 
    // record kill, even if killOverride
-   if (getAnyEventLogger() != 0) {
+   BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_PLAYER_KILLED )
+      SAMPLE_2_OBJECTS( this, p )
+   END_RECORD_DATA_SAMPLE()
+
+   // TabLogger is deprecated
+   if (getAnyEventLogger() != 0) {  // EventLogger Deprecated
       TabLogger::TabLogEvent* evt = new TabLogger::LogPlayerData(7, this, p); // type 7: kill
       getAnyEventLogger()->log(evt);
       evt->unref();
@@ -2634,7 +2674,13 @@ bool Player::collisionNotification(Player* const p)
    }
 
    // record EVERYTHING that had the potential to cause damage, even if crashOverride
-   if (getAnyEventLogger() != 0) {
+
+   BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_PLAYER_COLLISION )
+      SAMPLE_2_OBJECTS( this, p )
+   END_RECORD_DATA_SAMPLE()
+
+   // TabLogger is deprecated
+   if (getAnyEventLogger() != 0) {  // EventLogger Deprecated
       TabLogger::TabLogEvent* evt = new TabLogger::LogPlayerData(5, this, p); // type 5: collision
       getAnyEventLogger()->log(evt);
       evt->unref();
@@ -2673,7 +2719,13 @@ bool Player::crashNotification()
    }
 
    // record EVERYTHING that had the potential to cause damage, even if crashOverride
-   if (getAnyEventLogger() != 0) {
+
+   BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_PLAYER_CRASH )
+      SAMPLE_1_OBJECT( this )
+   END_RECORD_DATA_SAMPLE()
+
+   // TabLogger is deprecated
+   if (getAnyEventLogger() != 0) {  // EventLogger Deprecated
       TabLogger::TabLogEvent* evt = new TabLogger::LogPlayerData(6, this); // type 6: crash
       getAnyEventLogger()->log(evt);
       evt->unref();

@@ -98,6 +98,7 @@ solution "oe"
          "../../include/openeaagles/basic/**.inl",
          "../../include/openeaagles/basic/**.epp",
          "../../include/openeaagles/basic/osg/*",
+         "../../include/openeaagles/basic/ubf/*",
          "../../src/basic/**.cpp"
       }
       excludes {
@@ -240,6 +241,21 @@ solution "oe"
          -- base filename for compiled binary target
          targetname "oeOtw_d"
 
+   project "recorder"
+      files {
+         "../../include/openeaagles/recorder/**.h",
+         "../../include/openeaagles/recorder/*.inl",
+         "../../include/openeaagles/recorder/**.proto",
+         "../../src/recorder/**.cpp",
+         "../../src/recorder/**.cc"
+      }
+      configuration { "Release" }
+         -- base filename for compiled binary target
+         targetname "oeRecorder"
+      configuration { "Debug" }
+         -- base filename for compiled binary target
+         targetname "oeRecorder_d"
+
    -- sensors library
    project "sensors"
       files {
@@ -279,19 +295,6 @@ solution "oe"
       configuration { "Debug" }
          -- base filename for compiled binary target
          targetname "oeTerrain_d"
-
-   -- ubf library
-   project "ubf"
-      files {
-         "../../include/openeaagles/ubf/**.h",
-         "../../src/ubf/**.cpp"
-      }
-      configuration { "Release" }
-         -- base filename for compiled binary target
-         targetname "oeUbf"
-      configuration { "Debug" }
-         -- base filename for compiled binary target
-         targetname "oeUbf_d"
 
    -- vehicles library
    project "vehicles"

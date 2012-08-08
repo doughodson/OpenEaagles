@@ -17,6 +17,7 @@ OBJS =  \
 	$(LIB)(Buildings.o) \
 	$(LIB)(Bullseye.o) \
 	$(LIB)(Datalink.o) \
+	$(LIB)(DataRecorder.o) \
 	$(LIB)(Designator.o) \
 	$(LIB)(DynamicsModels.o) \
 	$(LIB)(Effects.o) \
@@ -42,6 +43,7 @@ OBJS =  \
 	$(LIB)(LifeForms.o) \
 	$(LIB)(Message.o) \
 	$(LIB)(Missile.o) \
+	$(LIB)(MultiActorAgent.o) \
 	$(LIB)(Navigation.o) \
 	$(LIB)(NavRadios.o) \
 	$(LIB)(NetIO.o) \
@@ -64,6 +66,7 @@ OBJS =  \
 	$(LIB)(SensorMsg.o) \
 	$(LIB)(Ships.o) \
 	$(LIB)(Signatures.o) \
+	$(LIB)(SimAgent.o) \
 	$(LIB)(SimLogger.o) \
 	$(LIB)(Simulation.o) \
 	$(LIB)(simulationFF.o) \

@@ -43,7 +43,6 @@ OBJS =  \
 	$(LIB)(Pair.o) \
 	$(LIB)(PairStream.o) \
 	$(LIB)(Parser.o) \
-	$(LIB)(Rand.o) \
 	$(LIB)(Rgba.o) \
 	$(LIB)(Rgb.o) \
 	$(LIB)(Rng.o) \
@@ -63,7 +62,7 @@ OBJS =  \
 	$(LIB)(Vectors.o) \
 	$(LIB)(Yiq.o)
 
-SUBDIRS = osg units distributions
+SUBDIRS = osg units distributions ubf
 
 all: subdirs ${OBJS}
 

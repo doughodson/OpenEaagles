@@ -11,11 +11,12 @@ namespace Eaagles {
    namespace Dafif { class AirportLoader; class NavaidLoader; class WaypointLoader; }
 
 namespace Simulation {
+   class DataRecorder;
    class IrAtmosphere;
-
-class Player;
+   class Player;
    class SimBgThread;
    class SimTcThread;
+   class Station;
 
 //------------------------------------------------------------------------------
 // Class: Simulation
@@ -282,7 +283,12 @@ public:
     Dafif::AirportLoader* getAirports();           // Returns the airport loader
     Dafif::NavaidLoader* getNavaids();             // Returns the NAVAID loader
     Dafif::WaypointLoader* getWaypoints();         // Returns the waypoint loader
-        
+
+    DataRecorder* getDataRecorder();               // Returns the data recorder
+
+    Station* getStation();                                // Returns our Station
+    const Station* getStation() const;                    // Returns our Station (const version)
+
     Player* findPlayer(const short id, const int netID = 0);   // Find a player by player (and network) ID
     const Player* findPlayer(const short id, const int netID = 0) const; // Find a player by player (and network) ID (const version)
         
@@ -417,6 +423,7 @@ private:
    Dafif::AirportLoader*  airports;   // Airport loader
    Dafif::NavaidLoader*   navaids;    // NAVAID loader
    Dafif::WaypointLoader* waypoints;  // Waypoint loader
+   Station*               station;    // The Station that owns us (not ref()'d)
 
    // Time critical thread pool
    static const unsigned short MAX_TC_THREADS = 32;

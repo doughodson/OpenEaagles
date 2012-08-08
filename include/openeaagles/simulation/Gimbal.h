@@ -94,7 +94,8 @@ class Tdb;
 //    commandRateElevation (Angle)   Commanded elevation rate  (Angle/sec) (sets RATE_SERVO)
 //    commandRateRoll      (Angle)   Commanded roll rate        (Angle/sec) (sets RATE_SERVO)
 //
-//    terrainOcculting     (Number)  Enable terrain occulting of tye players of interest (default: false)
+//    terrainOcculting     (boolean) Enable terrain occulting of tye players of interest (default: false)
+//    checkHorizon         (boolean) Enable horizon masking check (default: true)
 // 
 //    playerOfInterestTypes (PairStream)   List of layer of interest types (default: all types )
 //                                         Valid types: { "air" "ground" "weapon" "ship" "building" "lifeform" "space" }
@@ -219,8 +220,10 @@ public:  // Public section
    unsigned int getMaxPlayersOfInterest() const  { return maxPlayers; }     // Max number of players of interest (i.e., size of the arrays)
    bool isLocalPlayersOfInterestOnly() const { return localOnly; }          // Local only players of interest flag
    bool isTerrainOccultingEnabled() const  { return terrainOcculting; }     // Terrain occulting enabled flag
+   bool isHorizonCheckEnabled() const      { return checkHorizon; }         // Horizon masking enable flag
    bool isUsingWorldCoordinates() const    { return useWorld; }             // Returns true if using player of interest's world coordinates
    bool isUsingHeadingOnly() const         { return ownHeadingOnly; }       // Returns true if using players heading only
+   double getEarthRadius() const;                                           // Returns earth radius (meters)
    virtual bool fromPlayerOfInterest(const Emission* const em);             // Returns true if this emission is from a player of interest
 
    virtual bool setMaxRange2PlayersOfInterest(const double meters);        // Max range to players of interest or zero for all (meters)
@@ -229,6 +232,7 @@ public:  // Public section
    virtual bool setMaxPlayersOfInterest(const unsigned int n);             // Max number of players of interest (i.e., size of the arrays)
    virtual bool setLocalPlayersOfInterestOnly(const bool flg);             // Sets the local only players of interest flag
    virtual bool setTerrainOccultingEnabled(const bool flg);                // Sets the terrain occulting enabled flag
+   virtual bool setHorizonCheckEnabled(const bool flg);                    // Sets the horizon check enabled flag
    virtual bool setUseWorld(const bool flg);                               // Sets the using world coordinates flag
    virtual bool setOwnHeadingOnly(const bool flg);                         // Use only the ownship player's heading to when transforming between body and local NED
 
@@ -303,6 +307,7 @@ public:  // Public section
    virtual bool setSlotCmdRateRoll(const Basic::Angle* const msg);       // Commanded roll rate (sets RATE_SERVO)
 
    virtual bool setSlotTerrainOcculting(const Basic::Number* const msg); // Enable target terrain occulting (default: false)
+   virtual bool setSlotCheckHorizon(const Basic::Number* const msg);     // Enable horizon masking check (default: true)
 
    virtual bool setSlotPlayerTypes(const Basic::PairStream* const msg);  // Player of interest types (default: 0 )
    virtual bool setSlotMaxPlayers(const Basic::Number* const msg);       // Max number of players of interest (default: 0)
@@ -379,11 +384,11 @@ private:
    unsigned int maxPlayers;   // Max number of players of interest (i.e., size of the arrays)
    bool     localOnly;        // Local players of interest only 
    bool     terrainOcculting; // Target terrain occulting enabled flag
+   bool     checkHorizon;     // Horizon masking check enabled flag
    bool     useWorld;         // Using player of interest's world coordinates
    bool     ownHeadingOnly;   // Whether only the ownship heading is used by the target data block
 
    SPtr<Tdb> tdb;             // Current Target Data Block
-
 };
 
 } // End Simulation namespace

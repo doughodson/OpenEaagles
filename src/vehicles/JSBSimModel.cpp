@@ -40,7 +40,6 @@
 #include <JSBSim/models/propulsion/FGTank.h>
 
 
-
 namespace Eaagles {
 namespace Vehicle {
 
@@ -134,7 +133,7 @@ void JSBSimModel::deleteData()
     if(fdmex != 0) {
         delete fdmex;
         fdmex = 0;
-	}
+    }
     if(propMgr != 0) {
         delete propMgr;
         propMgr = 0;
@@ -206,7 +205,7 @@ LCreal JSBSimModel::getFuelWt() const
 
     LCreal fuelWt = 0.0;
     for (unsigned int i = 0; i < Propulsion->GetNumTanks(); i++) {
-	JSBSim::FGTank* tank = Propulsion->GetTank(i);
+        JSBSim::FGTank* tank = Propulsion->GetTank(i);
         fuelWt += (LCreal)tank->GetContents();
     }
     return fuelWt;
@@ -220,7 +219,7 @@ LCreal JSBSimModel::getFuelWtMax() const
 
     LCreal maxFuelWt = 0.0;
     for (unsigned int i = 0; i < Propulsion->GetNumTanks(); i++) {
-	JSBSim::FGTank* tank = Propulsion->GetTank(i);
+        JSBSim::FGTank* tank = Propulsion->GetTank(i);
         maxFuelWt += (LCreal)(tank->GetContents() / tank->GetPctFull() * 100.0);
     }
     return maxFuelWt;
@@ -254,15 +253,15 @@ int JSBSimModel::getEngThrust(LCreal* const fn, const int max) const
     if (Propulsion == 0) return 0;
 
     if (fn == 0 || max <= 0) {
-	return 0;
+        return 0;
     }
     int num = getNumberOfEngines();
     if (max < num) {
-	num = max;
+        num = max;
     }
     for (int i = 0; i < num; i++) {
-	JSBSim::FGThruster* thruster = Propulsion->GetEngine(i)->GetThruster();
-	fn[i] = (LCreal)thruster->GetThrust();
+        JSBSim::FGThruster* thruster = Propulsion->GetEngine(i)->GetThruster();
+        fn[i] = (LCreal)thruster->GetThrust();
     }
     return num;
 }
@@ -274,43 +273,45 @@ int JSBSimModel::getEngRPM(LCreal* const rpm, const int max) const
     if (Propulsion == 0) return 0;
 
     if (rpm == 0 || max <= 0) {
-	return 0;
+        return 0;
     }
     int num = getNumberOfEngines();
     if (max < num) {
-	num = max;
+        num = max;
     }
     for (int i = 0; i < num; i++) {
-	JSBSim::FGEngine* eng = Propulsion->GetEngine(i);
-	switch (eng->GetType()) {
-	case JSBSim::FGEngine::etPiston:
+        JSBSim::FGEngine* eng = Propulsion->GetEngine(i);
+        switch (eng->GetType()) {
+        case JSBSim::FGEngine::etPiston:
             {
-	        JSBSim::FGPiston* eng1 = (JSBSim::FGPiston *) eng;
-	        rpm[i] = (LCreal)eng1->getRPM();
+            JSBSim::FGPiston* eng1 = (JSBSim::FGPiston *) eng;
+            rpm[i] = (LCreal)eng1->getRPM();
             }
             break;
-	case JSBSim::FGEngine::etElectric:
-	    {
-		JSBSim::FGElectric* eng1 = (JSBSim::FGElectric *) eng;
-		rpm[i] = (LCreal)eng1->getRPM();
-	    }
-	    break;
-	case JSBSim::FGEngine::etTurbine:
-	    {
-		JSBSim::FGTurbine* eng1 = (JSBSim::FGTurbine *) eng;
-		rpm[i] = (LCreal)eng1->GetN2();
-	    }
-	    break;
-	case JSBSim::FGEngine::etTurboprop:
-	    {
-		JSBSim::FGTurboProp* eng1 = (JSBSim::FGTurboProp *) eng;
-		rpm[i] = (LCreal)eng1->GetN1();
-	    }
-	    break;
-	case JSBSim::FGEngine::etRocket:
-	    rpm[i] = 0.0;
-	    break;
-	}
+        case JSBSim::FGEngine::etElectric:
+            {
+            JSBSim::FGElectric* eng1 = (JSBSim::FGElectric *) eng;
+            rpm[i] = (LCreal)eng1->getRPM();
+            }
+            break;
+        case JSBSim::FGEngine::etTurbine:
+            {
+            JSBSim::FGTurbine* eng1 = (JSBSim::FGTurbine *) eng;
+            rpm[i] = (LCreal)eng1->GetN2();
+            }
+            break;
+        case JSBSim::FGEngine::etTurboprop:
+            {
+            JSBSim::FGTurboProp* eng1 = (JSBSim::FGTurboProp *) eng;
+            rpm[i] = (LCreal)eng1->GetN1();
+            }
+            break;
+        case JSBSim::FGEngine::etRocket:
+            rpm[i] = 0.0;
+            break;
+        default:
+            break;
+        }
     }
     return num;
 }
@@ -323,15 +324,15 @@ int JSBSimModel::getEngFuelFlow(LCreal* const ff, const int max) const
 
     // Return fuel flow rate lbs/hour
     if (ff == 0 || max <= 0) {
-	return 0;
+        return 0;
     }
     int num = getNumberOfEngines();
     if (max < num) {
-	num = max;
+        num = max;
     }
     for (int i = 0; i < num; i++) {
-	JSBSim::FGEngine* eng = Propulsion->GetEngine(i);
-	ff[i] = (LCreal)eng->getFuelFlow_pph();
+        JSBSim::FGEngine* eng = Propulsion->GetEngine(i);
+        ff[i] = (LCreal)eng->getFuelFlow_pph();
     }
     return num;
 }
@@ -344,38 +345,40 @@ int JSBSimModel::getEngOilPressure(LCreal* const oil, const int max) const
 
     // return Engine Oil Pressure
     if (oil == 0 || max <= 0) {
-	    return 0;
+        return 0;
     }
     int num = getNumberOfEngines();
     if (max < num) {
-	    num = max;
+        num = max;
     }
     for (int i = 0; i < num; i++) {
-	JSBSim::FGEngine* eng = Propulsion->GetEngine(i);
-	switch (eng->GetType()) {
-	case JSBSim::FGEngine::etPiston:
-	    {
-		JSBSim::FGPiston* eng1 = (JSBSim::FGPiston *) eng;
-		oil[i] = (LCreal)eng1->getOilPressure_psi();
-	    }
-	    break;
-	case JSBSim::FGEngine::etTurbine:
-	    {
-		JSBSim::FGTurbine* eng1 = (JSBSim::FGTurbine *) eng;
-		oil[i] = (LCreal)eng1->getOilPressure_psi();
-	    }
-	    break;
-	case JSBSim::FGEngine::etTurboprop:
-	    {
-		JSBSim::FGTurboProp* eng1 = (JSBSim::FGTurboProp *) eng;
-		oil[i] = (LCreal)eng1->getOilPressure_psi();
-	    }
-	    break;
-	case JSBSim::FGEngine::etRocket:
-	case JSBSim::FGEngine::etElectric:
-	    oil[i] = 0.0;
-	    break;
-	}
+        JSBSim::FGEngine* eng = Propulsion->GetEngine(i);
+        switch (eng->GetType()) {
+        case JSBSim::FGEngine::etPiston:
+            {
+            JSBSim::FGPiston* eng1 = (JSBSim::FGPiston *) eng;
+            oil[i] = (LCreal)eng1->getOilPressure_psi();
+            }
+            break;
+        case JSBSim::FGEngine::etTurbine:
+            {
+            JSBSim::FGTurbine* eng1 = (JSBSim::FGTurbine *) eng;
+            oil[i] = (LCreal)eng1->getOilPressure_psi();
+            }
+            break;
+        case JSBSim::FGEngine::etTurboprop:
+            {
+            JSBSim::FGTurboProp* eng1 = (JSBSim::FGTurboProp *) eng;
+            oil[i] = (LCreal)eng1->getOilPressure_psi();
+            }
+            break;
+        case JSBSim::FGEngine::etRocket:
+        case JSBSim::FGEngine::etElectric:
+            oil[i] = 0.0;
+            break;
+        default:
+            break;
+        }
     }
     return num;
 }
@@ -397,21 +400,21 @@ int JSBSimModel::getEngPLA(LCreal* const pla, const int max) const
     JSBSim::FGPropulsion* Propulsion = fdmex->GetPropulsion();
     if (Propulsion == 0) return 0;
 
-// return throttle PLA (percent)
+    // return throttle PLA (percent)
     if (pla == 0 || max <= 0) {
-	return 0;
+        return 0;
     }
     int num = getNumberOfEngines();
     if (max < num) {
-	num = max;
+        num = max;
     }
     for (int i = 0; i < num; i++) {
-	JSBSim::FGEngine* eng = Propulsion->GetEngine(i);
-	double t = eng->GetThrottle();
-	double tmin = eng->GetThrottleMin();
-	double tmax = eng->GetThrottleMax();
-	double throttle = (t - tmin) / (tmax - tmin) * 100.0;
-	pla[i] = (LCreal)throttle;
+        JSBSim::FGEngine* eng = Propulsion->GetEngine(i);
+        double t = eng->GetThrottle();
+        double tmin = eng->GetThrottleMin();
+        double tmax = eng->GetThrottleMax();
+        double throttle = (t - tmin) / (tmax - tmin) * 100.0;
+        pla[i] = (LCreal)throttle;
     }
     return num;
 }
@@ -422,35 +425,37 @@ int JSBSimModel::getEngNozzle(LCreal* const pla, const int max) const
     JSBSim::FGPropulsion* Propulsion = fdmex->GetPropulsion();
     if (Propulsion == 0) return 0;
 
-// return nozzle position (percentage)
+    // return nozzle position (percentage)
     if (pla == 0 || max <= 0) {
-	return 0;
+        return 0;
     }
     int num = getNumberOfEngines();
     if (max < num) {
-	num = max;
+        num = max;
     }
     for (int i = 0; i < num; i++) {
-	JSBSim::FGEngine* eng = Propulsion->GetEngine(i);
-	switch (eng->GetType()) {
-	case JSBSim::FGEngine::etTurbine:
-	    {
-		JSBSim::FGTurbine* eng1 = (JSBSim::FGTurbine *) eng;
-		pla[i] = (LCreal)(eng1->GetNozzle() * 100.0);
-	    }
-	    break;
-	case JSBSim::FGEngine::etTurboprop:
-	    {
-		JSBSim::FGTurboProp* eng1 = (JSBSim::FGTurboProp *) eng;
-		pla[i] = (LCreal)(eng1->GetNozzle() * 100.0);
-	    }
-	    break;
-	case JSBSim::FGEngine::etPiston:
-	case JSBSim::FGEngine::etRocket:
-	case JSBSim::FGEngine::etElectric:
-	    pla[i] = 0.0;
-	    break;
-	}
+        JSBSim::FGEngine* eng = Propulsion->GetEngine(i);
+        switch (eng->GetType()) {
+        case JSBSim::FGEngine::etTurbine:
+            {
+            JSBSim::FGTurbine* eng1 = (JSBSim::FGTurbine *) eng;
+            pla[i] = (LCreal)(eng1->GetNozzle() * 100.0);
+            }
+            break;
+        case JSBSim::FGEngine::etTurboprop:
+            {
+            JSBSim::FGTurboProp* eng1 = (JSBSim::FGTurboProp *) eng;
+            pla[i] = (LCreal)(eng1->GetNozzle() * 100.0);
+            }
+            break;
+        case JSBSim::FGEngine::etPiston:
+        case JSBSim::FGEngine::etRocket:
+        case JSBSim::FGEngine::etElectric:
+            pla[i] = 0.0;
+            break;
+        default:
+            break;
+        }
     }
     return num;
 }
@@ -501,18 +506,18 @@ int JSBSimModel::setThrottles(const LCreal* const positions, const int num)
     if (FCS == 0) return 0;
 
     if (positions == 0 || num <= 0) {
-	return 0;
+        return 0;
     }
     int n = getNumberOfEngines();
     if (num < n) {
-	n = num;
+        n = num;
     }
     for (int i = 0; i < n; i++) {
-	double pos = positions[i] * 0.5; // CGB * 100.0;
-	if (pos > 1.0) {
-	    pos = 1.0;
-	}
-	FCS->SetThrottleCmd(i, pos);
+        double pos = positions[i] * 0.5; // CGB * 100.0;
+        if (pos > 1.0) {
+            pos = 1.0;
+        }
+        FCS->SetThrottleCmd(i, pos);
     }
     return n;
 }
@@ -573,10 +578,10 @@ bool JSBSimModel::isWeightOnWheels() const
     int Ngear = GroundReactions->GetNumGearUnits();
     bool wow = false;
     for (int i = 0; i < Ngear; i++) {
-	JSBSim::FGLGear* gear = GroundReactions->GetGearUnit(i);
-	if (gear->GetWOW()) {
-	    wow = true;
-	}
+        JSBSim::FGLGear* gear = GroundReactions->GetGearUnit(i);
+        if (gear->GetWOW()) {
+            wow = true;
+        }
     }
     return wow;
 }
@@ -618,10 +623,10 @@ void JSBSimModel::setSpeedBrakesSwitch(const LCreal sw)
     if (FCS == 0) return;
 
     if (sw > 0.0) {
-	FCS->SetDsbCmd(100.0);
+        FCS->SetDsbCmd(100.0);
     }
     else if (sw < 0.0) {
-	FCS->SetDsbCmd(0.0);
+        FCS->SetDsbCmd(0.0);
     }
 }
 
@@ -660,17 +665,17 @@ void JSBSimModel::dynamics(const LCreal dt)
 
     pitchTrimPos += pitchTrimRate * pitchTrimSw * dt;
     if (pitchTrimPos > 1.0) {
-	    pitchTrimPos = 1.0;
+        pitchTrimPos = 1.0;
     } else if (pitchTrimPos < -1.0) {
-	    pitchTrimPos = -1.0;
+        pitchTrimPos = -1.0;
     }
     FCS->SetPitchTrimCmd(pitchTrimPos);
 
     rollTrimPos += rollTrimRate * rollTrimSw * dt;
     if (rollTrimPos > 1.0) {
-	    rollTrimPos = 1.0;
+        rollTrimPos = 1.0;
     } else if (rollTrimPos < -1.0) {
-	    rollTrimPos = -1.0;
+        rollTrimPos = -1.0;
     }
     FCS->SetRollTrimCmd(rollTrimPos);
 
@@ -705,7 +710,7 @@ void JSBSimModel::dynamics(const LCreal dt)
     //    (Note: Player::dynamics() computes the new position)
     // ---
     p->setAltitude(Basic::Distance::FT2M * Propagate->GetAltitudeASL(), true);
-	 p->setVelocity((LCreal)(Basic::Distance::FT2M * Propagate->GetVel(JSBSim::FGJSBBase::eNorth)), (LCreal)(Basic::Distance::FT2M * Propagate->GetVel(JSBSim::FGJSBBase::eEast)), (LCreal)(Basic::Distance::FT2M * Propagate->GetVel(JSBSim::FGJSBBase::eDown)));
+    p->setVelocity((LCreal)(Basic::Distance::FT2M * Propagate->GetVel(JSBSim::FGJSBBase::eNorth)), (LCreal)(Basic::Distance::FT2M * Propagate->GetVel(JSBSim::FGJSBBase::eEast)), (LCreal)(Basic::Distance::FT2M * Propagate->GetVel(JSBSim::FGJSBBase::eDown)));
     p->setVelocityBody((LCreal)(Basic::Distance::FT2M * Propagate->GetUVW(1)), (LCreal)(Basic::Distance::FT2M * Propagate->GetUVW(2)), (LCreal)(Basic::Distance::FT2M * Propagate->GetUVW(3)));
 //    LCreal accX = Basic::Distance::FT2M * Propagate->GetUVWdot(1);
 //    LCreal accY = Basic::Distance::FT2M * Propagate->GetUVWdot(2);
@@ -804,18 +809,18 @@ void JSBSimModel::reset()
 
     // Must also have the JSBSim object
     if (fdmex == 0) {
-	// must have a JSBSim property manager
-	if (propMgr == 0) {
-	    propMgr = new JSBSim::FGPropertyManager();
-	}
-	fdmex = new JSBSim::FGFDMExec(propMgr);
+        // must have a JSBSim property manager
+        if (propMgr == 0) {
+            propMgr = new JSBSim::FGPropertyManager();
+        }
+        fdmex = new JSBSim::FGFDMExec(propMgr);
 
-	std::string RootDir(rootDir->getString());
-	fdmex->SetAircraftPath(RootDir + "aircraft");
-	fdmex->SetEnginePath(RootDir + "engine");
-   fdmex->SetSystemsPath(RootDir + "systems"); // JSBSim-1.0 or after only
+        std::string RootDir(rootDir->getString());
+        fdmex->SetAircraftPath(RootDir + "aircraft");
+        fdmex->SetEnginePath(RootDir + "engine");
+        fdmex->SetSystemsPath(RootDir + "systems"); // JSBSim-1.0 or after only
 
-	    fdmex->LoadModel(model->getString());
+        fdmex->LoadModel(model->getString());
         JSBSim::FGPropertyManager* propMgr = fdmex->GetPropertyManager();
         if (propMgr != 0) {
             hasHeadingHold = propMgr->HasNode("ap/heading_hold") && propMgr->HasNode("ap/heading_setpoint");
@@ -866,7 +871,7 @@ void JSBSimModel::reset()
     JSBSim::FGFCS* FCS = fdmex->GetFCS();
     if (Propulsion != 0 && FCS != 0) {
         Propulsion->SetMagnetos(3);
-	for (unsigned int i=0; i < Propulsion->GetNumEngines(); i++) {
+        for (unsigned int i=0; i < Propulsion->GetNumEngines(); i++) {
             FCS->SetMixtureCmd(i, 1.0);
             FCS->SetThrottleCmd(i, 1.0);
             FCS->SetPropAdvanceCmd(i, 1.0);
@@ -877,13 +882,12 @@ void JSBSimModel::reset()
             eng->SetRunning(true);
             JSBSim::FGThruster* thruster = eng->GetThruster();
             thruster->SetRPM(1000.0);
-	}
-   Propulsion->InitRunning(-1);     // -1 refers to "All Engines"
-   Propulsion->GetSteadyState();
+        }
+        Propulsion->SetFuelFreeze(p->isFuelFrozen());
+        Propulsion->InitRunning(-1);     // -1 refers to "All Engines"
+        Propulsion->GetSteadyState();
    }
-
    fdmex->RunIC();
-
 }
 
 //------------------------------------------------------------------------------
@@ -1004,7 +1008,6 @@ bool JSBSimModel::setCommandedAltitude(const double a)
     commandedAltitudeFt = a * Basic::Distance::M2FT;
     return hasAltitudeHold;
 }
-
 
 } // End Vehicle namespace
 } // End Eaagles namespace

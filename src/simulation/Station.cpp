@@ -1,6 +1,7 @@
 
 #include "openeaagles/simulation/Station.h"
 
+#include "openeaagles/simulation/DataRecorder.h"
 #include "openeaagles/simulation/NetIO.h"
 #include "openeaagles/simulation/Otw.h"
 #include "openeaagles/simulation/Player.h"
@@ -82,7 +83,8 @@ BEGIN_SLOTTABLE(Station)
    "bgRate",            // 11:  Background thread rate (Hz) (default: 0.0 -- no thread)
    "bgPriority",        // 12:  Background thread priority
    "startupResetTimer", // 13: Startup (initial) RESET event timer value (Basic::Time) (default: no reset event)
-   "enableUpdateTimers" // 14: Enable calling Basic::Timers::updateTimers() from updateTC() (default: false)
+   "enableUpdateTimers",// 14: Enable calling Basic::Timers::updateTimers() from updateTC() (default: false)
+   "dataRecorder",      // 15) Our Data Recorder
 END_SLOTTABLE(Station)
 
 //------------------------------------------------------------------------------
@@ -113,6 +115,8 @@ BEGIN_SLOT_MAP(Station)
 
    ON_SLOT(13,  setSlotStartupResetTime,  Basic::Time)
    ON_SLOT(14,  setSlotEnableUpdateTimers, Basic::Number)
+
+    ON_SLOT(15, setDataRecorder,          DataRecorder)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -137,6 +141,7 @@ void Station::initData()
    ioHandlers = 0;
    ownshipName = 0;
    ownship = 0;
+   dataRecorder = 0;
 
    tcRate = 50;      // default time-critical thread rate
    tcPri = DEFAULT_TC_THREAD_PRI;
@@ -210,6 +215,13 @@ void Station::copyData(const Station& org, const bool cc)
       setSlotIoHandler((Basic::PairStream*)0);
    }
 
+   {  // clone the data recorder
+      DataRecorder* copy = 0;
+      if (org.dataRecorder != 0) copy = (DataRecorder*) org.dataRecorder->clone();
+      setDataRecorder(copy);
+      if (copy != 0) copy->unref();
+   }
+
    tcRate = org.tcRate;
    tcPri = org.tcPri;
    fastForwardRate = org.fastForwardRate;
@@ -263,6 +275,7 @@ void Station::deleteData()
    setSlotIoHandler((Basic::PairStream*)0);
    setSlotSimulation(0);
    setSlotStartupResetTime(0);
+   setDataRecorder(0);
 }
 
 //------------------------------------------------------------------------------
@@ -321,6 +334,11 @@ void Station::reset()
          item = item->getNext();
       }
    }
+
+   // ---
+   // Reset the data recorder
+   // ---
+   if (dataRecorder != 0) dataRecorder->event(RESET_EVENT);
 
    BaseClass::reset();
 }
@@ -401,29 +419,34 @@ void Station::updateTC(const LCreal dt)
 //------------------------------------------------------------------------------
 void Station::updateData(const LCreal dt)
 {
-    // Create a background thread (if needed)
+   // Create a background thread (if needed)
    if (getBackgroundRate() > 0 && !doWeHaveTheBgThread()) {
-        createBackgroundProcess();
-    }
+      createBackgroundProcess();
+   }
 
-    // Our simulation model and OTW interfaces (if no seperate thread)
+   // Our simulation model and OTW interfaces (if no seperate thread)
    if (getBackgroundRate() == 0 && !doWeHaveTheBgThread()) {
-       processBackgroundTasks(dt);
-    }
+      processBackgroundTasks(dt);
+   }
 
    // Create a network thread (if needed)
    if (getNetworkRate() > 0 && networks != 0 && !doWeHaveTheNetThread()) {
       createNetworkProcess();
    }
 
-    // Our interoperability networks (if no seperate thread)
+   // Our interoperability networks (if no seperate thread)
    if (getNetworkRate() == 0 && networks != 0 && !doWeHaveTheNetThread()) {
-       processNetworkInputTasks(dt);
-       processNetworkOutputTasks(dt);
-    }
+      processNetworkInputTasks(dt);
+      processNetworkOutputTasks(dt);
+   }
 
-    // Update base class data
-    BaseClass::updateData(dt);
+   // ---
+   // Background processing of the data recorders
+   // ---
+   if (dataRecorder != 0) dataRecorder->processRecords();
+
+   // Update base class data
+   BaseClass::updateData(dt);
 }
 
 //------------------------------------------------------------------------------
@@ -490,6 +513,9 @@ bool Station::shutdownNotification()
 
    // remove the reset timer
    setSlotStartupResetTime(0);
+
+   // Shutdown the data recorder
+   if (dataRecorder != 0) dataRecorder->event(SHUTDOWN_EVENT);
 
    return shutdown;
 }
@@ -749,6 +775,18 @@ const Basic::PairStream* Station::getIoHandlers() const
    return ioHandlers;
 }
 
+// Returns the data recorder
+DataRecorder* Station::getDataRecorder()
+{
+   return dataRecorder;
+}
+
+// Returns the data recorder (const version)
+const DataRecorder* Station::getDataRecorder() const
+{
+   return dataRecorder;
+}
+
 // Time-critical thread rate (Hz)
 LCreal Station::getTimeCriticalRate() const
 {
@@ -952,6 +990,17 @@ bool Station::setOwnshipPlayer(Player* const newOS)
         pl = 0;
     }
     return set;
+}
+
+//------------------------------------------------------------------------------
+// Sets the data recorder
+//------------------------------------------------------------------------------
+bool Station::setDataRecorder(DataRecorder* const p)
+{
+   if (dataRecorder != 0) { dataRecorder->container(0); dataRecorder->unref(); }
+   dataRecorder = p;
+   if (dataRecorder != 0) { dataRecorder->container(this); dataRecorder->ref(); }
+   return true;
 }
 
 

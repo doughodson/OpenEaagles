@@ -592,18 +592,18 @@ void lcInteger2Str(const int num, char* const str, int width)
 }
 
 //------------
-// String copy function: Copies a string from 'strSource' to 'strDest'.  The destination
-// string is null terminated.  If the source string is too large for the destination, then
-// the source string is truncated at (sizeOfDest-1) characters and null terminated.
+// String copy function: Copies a string from the source, 'strSource', to the
+// destination buffer, 'strDest'.  The destination string is null terminated.
+// The 'strSource' string will be truncated if the 'strDest' string is too small. 
 //------------
-bool lcStrcpy(char* const strDest, const size_t sizeInBytes, const char* const strSource)
+bool lcStrcpy(char* const strDest, const size_t sizeOfDest, const char* const strSource)
 {
-   if ((strDest == 0) || (strSource == 0) || sizeInBytes == 0) { // NULL ptr's or zero dest size
+   if ((strDest == 0) || (strSource == 0) || sizeOfDest == 0) { // NULL ptr's or zero dest size
       return false;
    }
 
    // Max characters to copy
-   const size_t maxToCopy = sizeInBytes - 1;
+   const size_t maxToCopy = sizeOfDest - 1;
 
    // Set our working pointers
    char* q = strDest;
@@ -618,19 +618,19 @@ bool lcStrcpy(char* const strDest, const size_t sizeInBytes, const char* const s
 }
 
 //------------
-// String N copy function: Copies up to 'count' characters from 'strSource' to 'strDest'.
-// The destination string is null terminated.  If the 'count' characters from the source
-// string is too large for the destination, then the source string is truncated at (sizeOfDest-1)
-// characters and null terminated.
+// String N copy function: Copies up to 'count' characters from the source string,
+// 'strSource', to the destination buffer, 'strDest'.  The new destination string
+// is null terminated.  The 'strSource' string will be truncated if the 'strDest'
+// string is too small. 
 //------------
-bool lcStrncpy(char* const strDest, const size_t sizeInBytes, const char* const strSource, const size_t count)
+bool lcStrncpy(char* const strDest, const size_t sizeOfDest, const char* const strSource, const size_t count)
 {
-   if ((strDest == 0) || (strSource == 0) || sizeInBytes == 0) { // NULL ptr's or zero dest size
+   if ((strDest == 0) || (strSource == 0) || sizeOfDest == 0) { // NULL ptr's or zero dest size
       return false;
    }
 
    // Max characters to copy
-   size_t maxToCopy = sizeInBytes - 1;
+   size_t maxToCopy = sizeOfDest - 1;
    if (count < maxToCopy) maxToCopy = count;
 
    // Set our working pointers
@@ -646,13 +646,15 @@ bool lcStrncpy(char* const strDest, const size_t sizeInBytes, const char* const 
 }
 
 //------------
-// String cat function: Appends a string from 'strSource' to the end of 'strDest'.  The new
-// destination string is null terminated.  If the source string is too large for the
-// destination, then the source string is truncated at (sizeOfDest-1) characters and null terminated.
+// String cat function: Appends the 'strSource' string to the end of the 'strDest'
+// string.  The new destination string is null terminated.  The 'strSource' string
+// will be truncated if the 'strDest' string is too small.  If 'strDest' is a null
+// pointer, or is not null-terminated, or if 'strSource' is a null pointer then false
+// is returned and the destination buffer is unchanged.
 //------------
-bool lcStrcat(char* const strDest, const size_t sizeInBytes, const char* const strSource)
+bool lcStrcat(char* const strDest, const size_t sizeOfDest, const char* const strSource)
 {
-   if ((strDest == 0) || (strSource == 0) || sizeInBytes == 0) { // NULL ptr's or zero dest size
+   if ((strDest == 0) || (strSource == 0) || sizeOfDest == 0) { // NULL ptr's or zero dest size
       return false;
    }
 
@@ -660,25 +662,129 @@ bool lcStrcat(char* const strDest, const size_t sizeInBytes, const char* const s
    char* q = strDest;
    const char* p = strSource;
 
-   // Max characters to the destination buffer (including the original string)
-   const size_t maxToCopy = sizeInBytes - 1;
+   // Max characters to the destination buffer
+   const size_t maxToCopy = sizeOfDest - 1;
 
    // Forward to the end of the current destination string
    size_t idx = 0;
-   //while (idx++ < maxToCopy && *q++ != '\0') {}
    while (*q++ != '\0' && idx++ < maxToCopy) {}
 
-   // Back space for the original string's null character
-   if (idx < maxToCopy) {
+   // if we have a terminated string ...
+   bool ok = (idx <= maxToCopy);
+   if (ok) {
+      // Back space for the original string's null character
       --q;
-      //--idx;
+
+      // Everything looks good, copy... 
+      while (idx++ < maxToCopy && (*q++ = *p++) != '\0') {}
+      *q = '\0'; // null terminate
    }
 
+   return ok;
+}
+
+//------------
+// Full string copy function: Copies a string from the source, 'strSource', to the
+// destination buffer, 'strDest'.  The new destination string is null terminated.
+// If the destination buffer is too small then false is returned and the destination buffer
+// is unchanged.
+//------------
+bool lcStrcpyFull(char* const strDest, const size_t sizeOfDest, const char* const strSource)
+{
+   if ((strDest == 0) || (strSource == 0) || sizeOfDest == 0) { // NULL ptr's or zero dest size
+      return false;
+   }
+
+   // do we have space for the full string plus termination?
+   const size_t srcSize = strlen(strSource);
+   if (sizeOfDest < (srcSize+1)) return false;
+
+   // Max characters to copy
+   const size_t maxToCopy = sizeOfDest - 1;
+
+   // Set our working pointers
+   char* q = strDest;
+   const char* p = strSource;
+
    // Everything looks good, copy... 
+   size_t idx = 0;
    while (idx++ < maxToCopy && (*q++ = *p++) != '\0') {}
    *q = '\0'; // null terminate
 
    return true;   // Good result 
+}
+
+//------------
+// Full string N copy function: Copies up to 'count' characters from the source string,
+// 'strSource', to the destination buffer, 'strDest'.  The new destination string is null
+// terminated.   If the destination buffer is too small then false is returned and the
+// destination buffer is unchanged.
+//------------
+bool lcStrncpyFull(char* const strDest, const size_t sizeOfDest, const char* const strSource, const size_t count)
+{
+   if ((strDest == 0) || (strSource == 0) || sizeOfDest == 0) { // NULL ptr's or zero dest size
+      return false;
+   }
+
+   // do we have space for the full character count plus termination?
+   if (sizeOfDest < (count+1)) return false;
+
+   // Max characters to copy
+   size_t maxToCopy = sizeOfDest - 1;
+   if (count < maxToCopy) maxToCopy = count;
+
+   // Set our working pointers
+   char* q = strDest;
+   const char* p = strSource;
+
+   // Everything looks good, copy... 
+   size_t idx = 0;
+   while (idx++ < maxToCopy && (*q++ = *p++) != '\0') {}
+   *q = '\0'; // null terminate
+
+   return true;   // Good result 
+}
+
+//------------
+// Full string cat function: Appends the source string, 'strSource', to the end of the
+// destination string, 'strDest'.  The new destination string is null terminated.  If
+// the destination buffer is too small, or if 'strDest' is a null pointer, or is not
+// null-terminated, or if 'strSource' is a null pointer then false is returned and the
+// destination buffer is unchanged.
+//------------
+bool lcStrcatFull(char* const strDest, const size_t sizeOfDest, const char* const strSource)
+{
+   if ((strDest == 0) || (strSource == 0) || sizeOfDest == 0) { // NULL ptr's or zero dest size
+      return false;
+   }
+
+   // Set our working pointers
+   char* q = strDest;
+   const char* p = strSource;
+
+   // Max characters to the destination buffer
+   const size_t maxToCopy = sizeOfDest - 1;
+
+   // Forward to the end of the current destination string
+   size_t idx = 0;
+   while (*q++ != '\0' && idx++ < maxToCopy) {}
+
+   // do we have space for the full string plus termination?
+   const size_t srcSize = strlen(strSource);
+
+   // if we have room for both strings ...
+   bool ok = ((idx+srcSize) <= maxToCopy);
+   if (ok) {
+
+      // Back space for the original string's null character
+      --q;
+
+      // Everything looks good, copy... 
+      while (idx++ < maxToCopy && (*q++ = *p++) != '\0') {}
+      *q = '\0'; // null terminate
+   }
+
+   return ok;
 }
 
 //------------

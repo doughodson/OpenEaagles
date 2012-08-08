@@ -61,8 +61,12 @@
 #include "openeaagles/basic/EarthModel.h"
 #include "openeaagles/basic/IoData.h"
 #include "openeaagles/basic/IoHandler.h"
-#include "openeaagles/basic/Rand.h"
 #include "openeaagles/basic/ThreadPool.h"
+
+// Ubf
+#include "openeaagles/basic/ubf/Agent.h"
+#include "openeaagles/basic/ubf/Arbiter.h"
+
 
 namespace Eaagles {
 namespace Basic {
@@ -418,17 +422,6 @@ Object* basicFormFunc(const char* formname)
         newform = new Uniform();
     }
 
-    // Alternative random number generator and distributions
-    else if ( strcmp(formname, UniformRand::getFormName()) == 0 ) {
-        newform = new UniformRand();
-    }
-    else if ( strcmp(formname, NormalRand::getFormName()) == 0 ) {
-        newform = new NormalRand();
-    }
-    else if ( strcmp(formname, ExponentialRand::getFormName()) == 0 ) {
-        newform = new ExponentialRand();
-    }
-
     // General I/O Devices
     else if ( strcmp(formname, IoHandler::getFormName()) == 0 ) {
         newform = new IoHandler();
@@ -447,8 +440,17 @@ Object* basicFormFunc(const char* formname)
        newform = new ThreadPool();
     }
 
+    // Ubf
+    else if ( strcmp(formname, Ubf::Agent::getFormName()) == 0 ) {
+        newform = new Ubf::Agent();
+    }
+    else if ( strcmp(formname, Ubf::Arbiter::getFormName()) == 0 ) {
+        newform = new Ubf::Arbiter();
+    }
+
     return newform;
 }
 
 } // End Basic namespace
 } // End Eaagles namespace
+
