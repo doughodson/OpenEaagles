@@ -24,7 +24,7 @@ void Message::initData()
    timeStamp = 0;
    lifeSpan = 5;    // seconds
    ack = ACK;
-   senderName = 0;
+   senderName = new Basic::String();
    destNames = 0;
 }
 
@@ -66,31 +66,24 @@ void Message::copyData(const Message& org, const bool cc)
 //-------------------------------------------------------------------------
 // set sender information
 //-------------------------------------------------------------------------
-void Message::setSenderName(Basic::String* sName)
+void Message::setSenderName(const Basic::String* const sName)
 {
    if(sName != 0) {
-      if(senderName != 0) {
-         senderName->unref();
-      }
-      senderName = sName;
-      senderName->ref();
+      *senderName = *sName;
    }
 }
 
 void Message::setSenderName(const char* const sName)
 {
    if(sName != 0) {
-      if (senderName != 0)
-         senderName->setStr(sName);
-      else
-         senderName = new Basic::String(sName);
+      *senderName = sName;
    }
 }
 
 //-------------------------------------------------------------------------
 // add / remove / clear destination methods
 //-------------------------------------------------------------------------
-bool Message::addDestName(Basic::String* name)
+bool Message::addDestName(Basic::String* const name)
 {
    bool ret = false;
    if(name != 0) {
@@ -102,7 +95,17 @@ bool Message::addDestName(Basic::String* name)
    return ret;
 }
 
-void Message::removeDestName(Basic::String* name)
+bool Message::addDestName(const char* const name)
+{
+   bool ret = false;
+   if (name != 0) {
+      Basic::String* p = new Basic::String(name);
+      ret = addDestName(p);
+   }
+   return ret;
+}
+
+void Message::removeDestName(Basic::String* const name)
 {
    if (destNames != 0) {
       destNames->remove(name);
