@@ -77,13 +77,15 @@ unsigned int AirVehicle::getMajorType() const
 //------------------------------------------------------------------------------
 void AirVehicle::reset()
 {
-   // reset the gear switch
-   setGearHandleSwitch(initGearPos);
-   if (initGearPos > 0) gearPos = 100.0;
-   else gearPos = 0.0;
-
    // reset our base class
    BaseClass::reset();
+
+   if (isLocalPlayer()) {
+      // reset the gear switch
+      setGearHandleSwitch(initGearPos);
+      if (initGearPos > 0) gearPos = 100.0;
+      else gearPos = 0.0;
+   }
 }
 
 //------------------------------------------------------------------------------
