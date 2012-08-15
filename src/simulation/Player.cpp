@@ -566,68 +566,63 @@ void Player::reset()
    updateSystemPointers();
    loadSysPtrs = false;
 
-   // ---
-   // Reset Position
-   // ---
+   if (isLocalPlayer()) {
 
-   if (initPosFlg) {
-      setPosition(initPosVec[INORTH], initPosVec[IEAST], -initAlt);
-      if (useCoordSys == CS_NONE) useCoordSys = CS_LOCAL;
+      // ---
+      // Reset Position
+      // ---
+
+      if (initPosFlg) {
+         setPosition(initPosVec[INORTH], initPosVec[IEAST], -initAlt);
+         if (useCoordSys == CS_NONE) useCoordSys = CS_LOCAL;
+      }
+      else if (initLatLonFlg) {
+         setPositionLLA(initLat, initLon, initAlt);
+         if (useCoordSys == CS_NONE) useCoordSys = CS_GEOD;
+      }
+      else if (initGeoPosFlg) {
+         setGeocPosition(initGeoPosVec);
+         if (useCoordSys == CS_NONE) useCoordSys = CS_WORLD;
+      }
+      else {
+         setPosition(0,0,-initAlt,false);
+         if (useCoordSys == CS_NONE) useCoordSys = CS_LOCAL;
+      }
+
+      useCoordSysN1 = CS_NONE;
+
+      // ---
+      // Reset euler angles and rates
+      // ---
+      setEulerAngles(initAngles);
+      setAngularVelocities(testAngRates);
+      velVecN1.set(0,0,0);
+
+      // ---
+      // Reset velocities
+      // ---
+      setVelocityBody(initVp, 0.0, 0.0);
+      setAccelerationBody(0.0, 0.0, 0.0);
+
+      // ---
+      // Reset misc
+      // ---
+      setMode(initMode);
+      setDamage(0.0f);
+      setSmoke(0.0f);
+      setFlames(0.0f);
+      justKilled = false;
+      killedBy = 0;
+
+      altSlaved = false;
+      posSlaved = false;
+
+      tElev    = 0.0f;
+      tElevValid = false;
+
+      syncState1Ready = false;
+      syncState2Ready = false;
    }
-   else if (initLatLonFlg) {
-      setPositionLLA(initLat, initLon, initAlt);
-      if (useCoordSys == CS_NONE) useCoordSys = CS_GEOD;
-   }
-   else if (initGeoPosFlg) {
-      setGeocPosition(initGeoPosVec);
-      if (useCoordSys == CS_NONE) useCoordSys = CS_WORLD;
-   }
-   else {
-      setPosition(0,0,-initAlt,false);
-      if (useCoordSys == CS_NONE) useCoordSys = CS_LOCAL;
-   }
-
-   useCoordSysN1 = CS_NONE;
-
-   // ---
-   // Reset euler angles and rates
-   // ---
-   setEulerAngles(initAngles);
-   setAngularVelocities(testAngRates);
-   velVecN1.set(0,0,0);
-
-   // ---
-   // Reset velocities
-   // ---
-   setVelocityBody(initVp, 0.0, 0.0);
-   setAccelerationBody(0.0, 0.0, 0.0);
-
-   // ---
-   // Reset misc
-   // ---
-   setMode(initMode);
-   setDamage(0.0f);
-   setSmoke(0.0f);
-   setFlames(0.0f);
-   justKilled = false;
-   killedBy = 0;
-
-   altSlaved = false;
-   posSlaved = false;
-
-   tElev    = 0.0f;
-   tElevValid = false;
-
-
-   // ---
-   // Reset our NIB
-   // ---
-   if (nib != 0) {
-      nib->event(RESET_EVENT);
-   }
-
-   syncState1Ready = false;
-   syncState2Ready = false;
 
    // ---
    // Reset our base class

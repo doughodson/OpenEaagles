@@ -34,6 +34,10 @@ recorder
 --------------------------------------------------------------------------------
 simulation
 
+   General
+      1) Updated AirVehicle, GroundVehicle, LifeForms and Player so that networked
+         players "reset" properly. 
+
    Player class
       1) Added "initVelocityKts" so that initial velocity can be specified
          in knots
