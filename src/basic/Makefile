@@ -43,7 +43,6 @@ OBJS =  \
 	$(LIB)(Pair.o) \
 	$(LIB)(PairStream.o) \
 	$(LIB)(Parser.o) \
-	$(LIB)(Rand.o) \
 	$(LIB)(Rgba.o) \
 	$(LIB)(Rgb.o) \
 	$(LIB)(Rng.o) \

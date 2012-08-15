@@ -365,7 +365,9 @@ message PlayerId {
    required uint32 id            = 1;   // Player ID
    optional string name          = 2;   // Player name
    optional string fed_name      = 3;   // network federate name
-   optional uint32 side          = 4;   // Player side
+   optional uint32 side          = 4;   // Player side; (default: not collected)
+   optional uint32 major_type    = 5;   // AIR, GROUND, etc; (default: not collected)
+   optional string ac_type       = 6;   // the player's type string from getType(); (default: not collected)
    
    extensions 50 to 99;     // Reserved fields
    extensions 100 to 999;   // User messages

@@ -1,148 +1,38 @@
 ================================================================================
-Changes since v12.03
+Changes since v12.07
 ================================================================================
 
 
 --------------------------------------------------------------------------------
 general
 
-   config.h
-      ### LCreal is being deprecated; LCreal is only defined as double. ###
-
-   added unified behavior framework library
-      -- this is an implementation of UBF framework as defined
-         in the paper "Unified Behavior Framework for Reactive Robot Control"
-         authors: Brian G. Woolley and Gilbert L. Peterson
-         published: Journal of Intelligent and Robotic Systems, vol 55,
-                    no 2, pp 155-176, 2009
 
 --------------------------------------------------------------------------------
 basic
 
-   Float classs
-      -- Only providing constructors for LCreal defined as double
-
-   Nav class
-      -- convertPosVec2llE(): removed the meters to nautical mile conversion from
-      the semi-major axis; should be in meters (bug fix)
-
-   Number classs
-      -- Only providing constructors for LCreal defined as double
-
-   Rng class
-      1) Modified the following functions: drawClosed(), drawOpen(), drawHalfOpen(),
-      drawRayleigh(), and drawHalfOpen53()
-
-      2) Added the following functions: drawExponential(), drawGeometric(), drawUniformCont(),
-      drawUniformDisc(), drawGauss(), drawBernoulli(), drawBinomial(), drawPoisson(),
-      drawGamma() and drawErlang()
-
-      3) Moved inline functions to new Rng.inl file
-
-   support.cpp
-      1) lcStrcat() modified to return false if a non-terminated string is passed
-      in the destination buffer; destination buffer is not modified.
-
-      2) lcString() modified to no longer put a zero at one byte beyond the end
-      of the destination buffer when the destination buffer is either full or
-      non-terminated. (bug fix).
-
-      3) Added new functions, lcStrcpyFull(), lcStrncpyFull() and lcStrcatFull(),
-      that fail (return false) if the destination buffer is too small.
-
-   windows/support0.h
-      -- replaced #include <float.h> reference to C++ style #include <cfloat>
-         for MINGW compiler
 
 --------------------------------------------------------------------------------
 basicGL
-
-   AnalogGauge class
-      -- updated drawing code
-
-   Graphic class
-      1) processComponents() -- calls Component::processComponents() instead of
-      BaseClass::processComponents()
-
-      2) Only provides the 'lc' functions for LCreal defined as double
-
-      3) Added line stipple feature
-
-   SymbolLoader
-      -- various functions -- call Component::processComponents() instead of
-      BaseClass::processComponents()
 
 
 --------------------------------------------------------------------------------
 dis
 
-   EmitterBeamData
-      -- Processing of member data "beamData" was completely omitted.  This was
-         causing NaN in Windows when EmitterBeamData object were copied.
-         Interesting since it appears at first glance that the default behaviour
-         would have set "beamData" to all 0's  Maybe it is just the missing
-         "swapBytes" call.  "beamdata" now processed like all other member
-         data in this class
-
 
 --------------------------------------------------------------------------------
-Recorder
-   ### New Data Recorder project ###
-   ### Using Google Protocol Buffers to serialize the data for binary files
-       or network data streams ###
+recorder
 
 
 --------------------------------------------------------------------------------
 simulation
 
-   dataRecorderTokens.h -- new file -- Data recorder sample event tokens.
-
-   Gimbal class
-      1) Added the 'checkHorizon' slot to enable or disable Tdb horizon masking
-
-   Navigation class
-      -- Fixed bug in calculating navigation UTC time
-
-   Player class
-      1) processComponents() -- calls Component::processComponents() instead of
-      BaseClass::processComponents()
-
-      2) initData() -- Player name defaults to nul string (e.g., "")
-
-      3) added getEarthRadius() that returns the earth radius at the location
-      of the player.
-
-      4) added recorder data SAMPLES
-
-   Route class
-      1) Fixed bug in insertSteerpoint concerning position datatype
-
-      2) various functions -- call Component::processComponents() instead of
-      BaseClass::processComponents()
-
-   Simulation class
-      -- Added commas to last items in slot table (bug fix)
-
-   Steerpoint class
-      -- processComponents() -- calls Component::processComponents() instead of
-      BaseClass::processComponents()
-
-   Simulation class
-      1) added recorder data SAMPLES
-      2) getDataRecorder() -- new function
-
-   Station class
-      1) Added a new 'dataRecorder' slot and getDataRecorder() function
-
-   Tdb class
-      1) computeBoresightData() -- to decrease stack usage, the local arrays (xa,
-      ya, za, ra, and ra2) are now member varaibles and dynamically allocated by
-      resizeArrays()
-
-      2) processPlayers() -- modified to use its Gimbal's earth radius
-
-      3) Added flag to enable/disable horizon masking check
 
 --------------------------------------------------------------------------------
+vehicle
+
+
+--------------------------------------------------------------------------------
+
+
 
 

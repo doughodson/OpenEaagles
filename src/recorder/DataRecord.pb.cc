@@ -495,11 +495,13 @@ void protobuf_AssignDesc_openeaagles_2frecorder_2fDataRecord_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(Time));
   PlayerId_descriptor_ = file->message_type(21);
-  static const int PlayerId_offsets_[4] = {
+  static const int PlayerId_offsets_[6] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PlayerId, id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PlayerId, name_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PlayerId, fed_name_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PlayerId, side_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PlayerId, major_type_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PlayerId, ac_type_),
   };
   PlayerId_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -831,30 +833,31 @@ void protobuf_AddDesc_openeaagles_2frecorder_2fDataRecord_2eproto() {
     "tor\022\t\n\001x\030\001 \002(\001\022\t\n\001y\030\002 \002(\001\022\t\n\001z\030\003 \001(\001\022\t\n\001"
     "w\030\004 \001(\001\"J\n\004Time\022\020\n\010sim_time\030\001 \002(\001\022\021\n\texe"
     "c_time\030\002 \001(\001\022\020\n\010utc_time\030\003 \001(\001*\004\0102\020d*\005\010d"
-    "\020\350\007\"Q\n\010PlayerId\022\n\n\002id\030\001 \002(\r\022\014\n\004name\030\002 \001("
-    "\t\022\020\n\010fed_name\030\003 \001(\t\022\014\n\004side\030\004 \001(\r*\004\0102\020d*"
-    "\005\010d\020\350\007\"\253\001\n\013PlayerState\022(\n\003pos\030\001 \002(\0132\033.Ea"
-    "agles.Recorder.Pb.Vector\022+\n\006angles\030\002 \002(\013"
-    "2\033.Eaagles.Recorder.Pb.Vector\022(\n\003vel\030\003 \001"
-    "(\0132\033.Eaagles.Recorder.Pb.Vector\022\016\n\006damag"
-    "e\030\004 \001(\001*\004\0102\020d*\005\010d\020\350\007\"\306\002\n\tTrackData\022\014\n\004ty"
-    "pe\030\001 \001(\r\022\017\n\007quality\030\002 \001(\001\022\017\n\007true_az\030\003 \001"
-    "(\001\022\016\n\006rel_az\030\004 \001(\001\022\021\n\televation\030\005 \001(\001\022\r\n"
-    "\005range\030\006 \001(\001\022\020\n\010latitude\030\007 \001(\001\022\021\n\tlongit"
-    "ude\030\010 \001(\001\022\020\n\010altitude\030\t \001(\001\022-\n\010position\030"
-    "\n \001(\0132\033.Eaagles.Recorder.Pb.Vector\022-\n\010ve"
-    "locity\030\013 \001(\0132\033.Eaagles.Recorder.Pb.Vecto"
-    "r\022\022\n\navg_signal\030\014 \001(\001\022\020\n\010sl_index\030\r \001(\r\022"
-    "\017\n\007wpn_rel\030\016 \001(\010*\004\0102\020d*\005\010d\020\350\007\"\316\002\n\014Emissi"
-    "onData\022\021\n\tfrequency\030\001 \001(\001\022\023\n\013wave_length"
-    "\030\002 \001(\001\022\023\n\013pulse_width\030\003 \001(\001\022\021\n\tbandwidth"
-    "\030\004 \001(\001\022\013\n\003prf\030\005 \001(\001\022\r\n\005power\030\006 \001(\001\022D\n\014po"
-    "larization\030\007 \001(\0162..Eaagles.Recorder.Pb.E"
-    "missionData.Polarization\022\023\n\013azimuth_aoi\030"
-    "\010 \001(\001\022\025\n\relevation_aoi\030\t \001(\001\"S\n\014Polariza"
-    "tion\022\010\n\004NONE\020\000\022\014\n\010VERTICAL\020\001\022\016\n\nHORIZONT"
-    "AL\020\002\022\t\n\005SLANT\020\003\022\007\n\003RHC\020\004\022\007\n\003LHC\020\005*\004\0102\020d*"
-    "\005\010d\020\350\007", 5846);
+    "\020\350\007\"v\n\010PlayerId\022\n\n\002id\030\001 \002(\r\022\014\n\004name\030\002 \001("
+    "\t\022\020\n\010fed_name\030\003 \001(\t\022\014\n\004side\030\004 \001(\r\022\022\n\nmaj"
+    "or_type\030\005 \001(\r\022\017\n\007ac_type\030\006 \001(\t*\004\0102\020d*\005\010d"
+    "\020\350\007\"\253\001\n\013PlayerState\022(\n\003pos\030\001 \002(\0132\033.Eaagl"
+    "es.Recorder.Pb.Vector\022+\n\006angles\030\002 \002(\0132\033."
+    "Eaagles.Recorder.Pb.Vector\022(\n\003vel\030\003 \001(\0132"
+    "\033.Eaagles.Recorder.Pb.Vector\022\016\n\006damage\030\004"
+    " \001(\001*\004\0102\020d*\005\010d\020\350\007\"\306\002\n\tTrackData\022\014\n\004type\030"
+    "\001 \001(\r\022\017\n\007quality\030\002 \001(\001\022\017\n\007true_az\030\003 \001(\001\022"
+    "\016\n\006rel_az\030\004 \001(\001\022\021\n\televation\030\005 \001(\001\022\r\n\005ra"
+    "nge\030\006 \001(\001\022\020\n\010latitude\030\007 \001(\001\022\021\n\tlongitude"
+    "\030\010 \001(\001\022\020\n\010altitude\030\t \001(\001\022-\n\010position\030\n \001"
+    "(\0132\033.Eaagles.Recorder.Pb.Vector\022-\n\010veloc"
+    "ity\030\013 \001(\0132\033.Eaagles.Recorder.Pb.Vector\022\022"
+    "\n\navg_signal\030\014 \001(\001\022\020\n\010sl_index\030\r \001(\r\022\017\n\007"
+    "wpn_rel\030\016 \001(\010*\004\0102\020d*\005\010d\020\350\007\"\316\002\n\014EmissionD"
+    "ata\022\021\n\tfrequency\030\001 \001(\001\022\023\n\013wave_length\030\002 "
+    "\001(\001\022\023\n\013pulse_width\030\003 \001(\001\022\021\n\tbandwidth\030\004 "
+    "\001(\001\022\013\n\003prf\030\005 \001(\001\022\r\n\005power\030\006 \001(\001\022D\n\014polar"
+    "ization\030\007 \001(\0162..Eaagles.Recorder.Pb.Emis"
+    "sionData.Polarization\022\023\n\013azimuth_aoi\030\010 \001"
+    "(\001\022\025\n\relevation_aoi\030\t \001(\001\"S\n\014Polarizatio"
+    "n\022\010\n\004NONE\020\000\022\014\n\010VERTICAL\020\001\022\016\n\nHORIZONTAL\020"
+    "\002\022\t\n\005SLANT\020\003\022\007\n\003RHC\020\004\022\007\n\003LHC\020\005*\004\0102\020d*\005\010d"
+    "\020\350\007", 5883);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "openeaagles/recorder/DataRecord.proto", &protobuf_RegisterTypes);
   DataRecord::default_instance_ = new DataRecord();
@@ -9307,6 +9310,8 @@ const int PlayerId::kIdFieldNumber;
 const int PlayerId::kNameFieldNumber;
 const int PlayerId::kFedNameFieldNumber;
 const int PlayerId::kSideFieldNumber;
+const int PlayerId::kMajorTypeFieldNumber;
+const int PlayerId::kAcTypeFieldNumber;
 #endif  // !_MSC_VER
 
 PlayerId::PlayerId()
@@ -9329,6 +9334,8 @@ void PlayerId::SharedCtor() {
   name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   fed_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   side_ = 0u;
+  major_type_ = 0u;
+  ac_type_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -9342,6 +9349,9 @@ void PlayerId::SharedDtor() {
   }
   if (fed_name_ != &::google::protobuf::internal::kEmptyString) {
     delete fed_name_;
+  }
+  if (ac_type_ != &::google::protobuf::internal::kEmptyString) {
+    delete ac_type_;
   }
   if (this != default_instance_) {
   }
@@ -9382,6 +9392,12 @@ void PlayerId::Clear() {
       }
     }
     side_ = 0u;
+    major_type_ = 0u;
+    if (has_ac_type()) {
+      if (ac_type_ != &::google::protobuf::internal::kEmptyString) {
+        ac_type_->clear();
+      }
+    }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -9454,6 +9470,39 @@ bool PlayerId::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
+        if (input->ExpectTag(40)) goto parse_major_type;
+        break;
+      }
+      
+      // optional uint32 major_type = 5;
+      case 5: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_major_type:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &major_type_)));
+          set_has_major_type();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(50)) goto parse_ac_type;
+        break;
+      }
+      
+      // optional string ac_type = 6;
+      case 6: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_ac_type:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_ac_type()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->ac_type().data(), this->ac_type().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
+        } else {
+          goto handle_uninterpreted;
+        }
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -9510,6 +9559,20 @@ void PlayerId::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(4, this->side(), output);
   }
   
+  // optional uint32 major_type = 5;
+  if (has_major_type()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(5, this->major_type(), output);
+  }
+  
+  // optional string ac_type = 6;
+  if (has_ac_type()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->ac_type().data(), this->ac_type().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      6, this->ac_type(), output);
+  }
+  
   // Extension range [50, 100)
   _extensions_.SerializeWithCachedSizes(
       50, 100, output);
@@ -9554,6 +9617,21 @@ void PlayerId::SerializeWithCachedSizes(
   // optional uint32 side = 4;
   if (has_side()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(4, this->side(), target);
+  }
+  
+  // optional uint32 major_type = 5;
+  if (has_major_type()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(5, this->major_type(), target);
+  }
+  
+  // optional string ac_type = 6;
+  if (has_ac_type()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->ac_type().data(), this->ac_type().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        6, this->ac_type(), target);
   }
   
   // Extension range [50, 100)
@@ -9603,6 +9681,20 @@ int PlayerId::ByteSize() const {
           this->side());
     }
     
+    // optional uint32 major_type = 5;
+    if (has_major_type()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::UInt32Size(
+          this->major_type());
+    }
+    
+    // optional string ac_type = 6;
+    if (has_ac_type()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->ac_type());
+    }
+    
   }
   total_size += _extensions_.ByteSize();
   
@@ -9644,6 +9736,12 @@ void PlayerId::MergeFrom(const PlayerId& from) {
     if (from.has_side()) {
       set_side(from.side());
     }
+    if (from.has_major_type()) {
+      set_major_type(from.major_type());
+    }
+    if (from.has_ac_type()) {
+      set_ac_type(from.ac_type());
+    }
   }
   _extensions_.MergeFrom(from._extensions_);
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -9674,6 +9772,8 @@ void PlayerId::Swap(PlayerId* other) {
     std::swap(name_, other->name_);
     std::swap(fed_name_, other->fed_name_);
     std::swap(side_, other->side_);
+    std::swap(major_type_, other->major_type_);
+    std::swap(ac_type_, other->ac_type_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

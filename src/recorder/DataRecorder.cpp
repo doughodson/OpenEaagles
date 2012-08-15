@@ -793,23 +793,20 @@ void DataRecorder::genPlayerId( Pb::PlayerId* const id, const Simulation::Player
       // Check for valid player pointer
       if (player != 0) {
 
-      // Player Id
-      id->set_id( player->getID() );
+         // Player Id
+         id->set_id( player->getID() );
 
-      // Player name
-      const Basic::String* name = player->getName();
-      if (name != 0) id->set_name( *name );
+         // Player name
+         const Basic::String* name = player->getName();
+         if (name != 0) id->set_name( *name );
 
-      // Networked player federation name
-      if ( player->isNetworkedPlayer() ) {
-         const Simulation::Nib* nib = player->getNib();
-         const Basic::String* fedName = nib->getFederateName();
-         if (fedName != 0) id->set_fed_name( *fedName );
+         // Networked player federation name
+         if ( player->isNetworkedPlayer() ) {
+            const Simulation::Nib* nib = player->getNib();
+            const Basic::String* fedName = nib->getFederateName();
+            if (fedName != 0) id->set_fed_name( *fedName );
+         }
       }
-
-      // Player side
-      id->set_side(player->getSide());
-   }
       else {
          // We don't have a player, set default values
          id->set_id(0);
