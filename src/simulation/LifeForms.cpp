@@ -75,16 +75,18 @@ bool LifeForm::setActionState(const int x)
 
 void LifeForm::reset()
 {
-    // do our resetting first 
-    actionState = UPRIGHT_STANDING;
-    lookAngle = 0;
-    tgtAquired = false;
-    if (tgtPlayer != 0) tgtPlayer->unref();
-    tgtPlayer = 0;
-    lockMode = SEARCHING;
-    weaponSel = LF_GUN;
-    
-    BaseClass::reset();
+   // do our resetting first 
+   if (isLocalPlayer()) {
+      actionState = UPRIGHT_STANDING;
+      lookAngle = 0;
+      tgtAquired = false;
+      lockMode = SEARCHING;
+      weaponSel = LF_GUN;
+   }
+   if (tgtPlayer != 0) tgtPlayer->unref();
+   tgtPlayer = 0;
+
+   BaseClass::reset();
 }
 
 void LifeForm::fire()
