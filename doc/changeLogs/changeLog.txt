@@ -56,6 +56,11 @@ simulation
    General
       1) Updated AirVehicle, GroundVehicle, LifeForms and Player so that networked
          players "reset" properly. 
+         
+   Message class
+      1) General cleanup of the code
+         -- added 'const', as needed
+         -- getSenderName() and getDestNames() now return 'const' pointers
 
    Player class
       1) Added "initVelocityKts" so that initial velocity can be specified
