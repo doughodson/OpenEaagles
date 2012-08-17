@@ -80,8 +80,8 @@ public:
    virtual void reset();
 
 protected:
-   static const unsigned int MAX_TRKS = 200;         // Max tracks
-   static const unsigned int MAX_REPORTS = 200;      // Max number of reports
+   static const unsigned int MAX_TRKS = EAAGLES_CONFIG_MAX_TRACKS;         // Max tracks
+   static const unsigned int MAX_REPORTS = EAAGLES_CONFIG_MAX_REPORTS;     // Max number of reports
 
    unsigned int getNewTrackID()                             { return nextTrkId++; }
 

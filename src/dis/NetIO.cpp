@@ -442,7 +442,7 @@ void NetIO::netInputHander()
 
                } // PDU switch
 
-            } // if correct exersize
+            } // if correct exercise
          }  // Inputs enabled
 
       }  // processing PDUs
@@ -1872,7 +1872,7 @@ void NetIO::testInputEntityTypes(const unsigned int n)
                std::cout << "; Match!!";
             }
             else {
-               std::cout << "; NO mach!!";
+               std::cout << "; NO match!!";
             }
          }
 
@@ -1943,7 +1943,7 @@ void NetIO::testOutputEntityTypes(const unsigned int n)
                std::cout << "; Match!!";
             }
             else {
-               std::cout << "; NO mach!!";
+               std::cout << "; NO match!!";
             }
          }
          std::cout << std::endl;

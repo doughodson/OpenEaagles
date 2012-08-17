@@ -35,7 +35,7 @@ EMPTY_SERIALIZER(DataRecorder)
 //------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(DataRecorder)
    "outputHandler",     // 1)  Output handler
-   "eventName",         // 2) Event (i.e., test, study, demo, exersize) name
+   "eventName",         // 2) Event (i.e., test, study, demo, exercise) name
    "application",       // 3) Application name (e.g., "mainSimExec")
    "caseNum",           // 4) Case id number (i.e., conditions)
    "missionNum",        // 5) Unique mission, sortie, scenario id number

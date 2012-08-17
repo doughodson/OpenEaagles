@@ -144,9 +144,17 @@ void Timer::updateTimers(const double dt)
 // -----------------------------------------------------------------
 void Timer::addToTimerList(Timer* timer)
 {
+   bool ok = false;
    lcLock( semaphore );
-   if (nTimers < MAX_TIMERS) timers[nTimers++] = timer;
+   if (nTimers < MAX_TIMERS) {
+      timers[nTimers++] = timer;
+      ok = true;
+   }
    lcUnlock( semaphore );
+
+   if (!ok) {
+      std::cerr << "Timer::addToTimerList() ERROR failed to add a new timer to static timer list" << std::endl;
+   }
 }
 
 

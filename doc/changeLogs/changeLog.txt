@@ -6,13 +6,32 @@ Changes since v12.07
 --------------------------------------------------------------------------------
 general
 
+   openeaagles/config.h
+      1) default OpenEaagles parameters now can be redefined by compiler
+      command line options
+
+      2) Defined additional parameters for ...
+         -- EAAGLES_CONFIG_MAX_CLASSES for Basic::Object::MAX_CLASSES 
+         -- EAAGLES_CONFIG_MAX_PLAYERS_OF_INTEREST for imulation::Gimbal::MAX_PLAYERS 
+         -- EAAGLES_CONFIG_RF_MAX_EMISSIONS for imulation::RfSystem::MAX_EMISSIONS
+         -- EAAGLES_CONFIG_MAX_TRACKS for imulation::TrackManager::MAX_TRKS
+         -- EAAGLES_CONFIG_MAX_REPORTS for imulation::Radar::MAX_REPORTS and imulation::TrackManager::MAX_REPORTS
+         -- EAAGLES_CONFIG_MAX_NETIO_ENTITIES for Simulation::NetIO::MAX_OBJECTS
+         -- EAAGLES_CONFIG_MAX_NETIO_ENTITY_TYPES for Simulation::NetIO::MAX_ENTITY_TYPES
+         -- EAAGLES_CONFIG_MAX_NETIO_NEW_OUTGOING for Simulation::NetIO::MAX_NEW_OUTGOING
 
 --------------------------------------------------------------------------------
 basic
 
+   Object class
+      1) registerClass() now returns the correct index (bug fix)
+
    Statistic class
       1) Removed empty file in src/basic named Statistic.h - not needed
 
+   Timer class
+      1) addToTimerList() -- prints an error message if unable to add a
+         new timer to the list.
 
 --------------------------------------------------------------------------------
 basicGL
@@ -37,6 +56,11 @@ simulation
    General
       1) Updated AirVehicle, GroundVehicle, LifeForms and Player so that networked
          players "reset" properly. 
+         
+   Message class
+      1) General cleanup of the code
+         -- added 'const', as needed
+         -- getSenderName() and getDestNames() now return 'const' pointers
 
    Player class
       1) Added "initVelocityKts" so that initial velocity can be specified
@@ -51,7 +75,4 @@ vehicle
 
 
 --------------------------------------------------------------------------------
-
-
-
 

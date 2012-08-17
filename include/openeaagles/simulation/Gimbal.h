@@ -146,7 +146,7 @@ public:
     };
 
    // Max number of players of interest
-    enum { MAX_PLAYERS = 4000 };
+    enum { MAX_PLAYERS = EAAGLES_CONFIG_MAX_PLAYERS_OF_INTEREST };
 
 public:  // Public section
    Gimbal();

@@ -141,7 +141,8 @@ public:
    virtual void reset();
 
 protected:
-   static const unsigned int MAX_EMISSIONS = 800;       // Max size of emission queues (per frame)
+   // Max size of emission queues (per frame)
+   static const unsigned int MAX_EMISSIONS = EAAGLES_CONFIG_RF_MAX_EMISSIONS;
 
    // Compute receiver thermal noise
    virtual bool computeReceiverNoise();
