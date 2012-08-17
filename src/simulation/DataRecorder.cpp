@@ -80,7 +80,7 @@ const Station* DataRecorder::getStation() const
       return sta;
    }
    else {
-      // Yes this is a "const cast-away", but its the non-const version
+      // Yes this is a "const cast-away", but it is the non-const version
       // that initially finds our Station class.
       DataRecorder* p = (DataRecorder*) this;
       Station* s = p->getStation();
