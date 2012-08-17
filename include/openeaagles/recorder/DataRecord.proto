@@ -31,7 +31,7 @@ package Eaagles.Recorder.Pb;
 //    Use the recorder event 'id' and the hasXxxx() functions to determine the
 //    data that is available.
 //
-//    See "openeaagles/simulation/recorderTokens.h" for the recorder event IDs.
+//    See "openeaagles/simulation/dataRecorderTokens.h" for the recorder event IDs.
 //
 //    Applications specific data recorders and readers will use the extensions
 //    to add their own unique data messages, and add their own recorder event
@@ -83,7 +83,7 @@ message DataRecord {
 // -- Usually the first data record in the file
 // -----------------------------------------------------------------------------
 message FileIdMsg {
-   optional string event_name       = 1;     // Event (i.e., test, study, demo, exersize) name
+   optional string event_name       = 1;     // Event (i.e., test, study, demo, exercise) name
    optional string application      = 2;     // Application name (e.g., "mainSimExec")
    optional uint32 case_num         = 3;     // Case id number (i.e., conditions) 
    optional uint32 mission_num      = 4;     // Unique mission, sortie, scenario id number
