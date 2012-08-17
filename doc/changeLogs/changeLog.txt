@@ -23,6 +23,9 @@ general
 --------------------------------------------------------------------------------
 basic
 
+   Object class
+      1) registerClass() now returns the correct index (bug fix)
+
    Statistic class
       1) Removed empty file in src/basic named Statistic.h - not needed
 

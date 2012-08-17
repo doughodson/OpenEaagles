@@ -280,7 +280,8 @@ void Object::writeClassList(std::ostream& sout)
    sout << "Number of classes: " << numClasses << std::endl;
    for (unsigned int i = 0; i < numClasses; i++) {
       sout
-         << classes[i]->fname
+         << classes[i]->classIndex
+         << ": " << classes[i]->fname
          << "(" << classes[i]->count
          << "/" << classes[i]->mc
          << "/" << classes[i]->tc
@@ -295,7 +296,11 @@ void Object::writeClassList(std::ostream& sout)
 unsigned int Object::registerClass(const _Static* const p)
 {
    unsigned int idx = 0;
-   if (numClasses < MAX_CLASSES) classes[numClasses++] = p;
+   if (numClasses < MAX_CLASSES) {
+      classes[numClasses] = p;
+      idx = numClasses;
+      numClasses++;
+   }
    return idx;
 }
 
