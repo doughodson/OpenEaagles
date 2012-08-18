@@ -207,58 +207,58 @@ void OtwPC::sendPcData()
     
         dsFlightModelData fmd;
 
-  fmd.m_x_cg = 0;
-  fmd.m_y_cg = 0;
-  fmd.m_z_cg = 0;          // altitude
+        fmd.m_x_cg = 0;
+        fmd.m_y_cg = 0;
+        fmd.m_z_cg = 0;          // altitude
 
-  const osg::Vec3 pos = av->getPosition();
-  fmd.m_pilot_eye_x = pos[0] * Basic::Distance::M2FT;
-  fmd.m_pilot_eye_y = pos[1] * Basic::Distance::M2FT;
-  fmd.m_pilot_eye_z = -pos[2] * Basic::Distance::M2FT;   // altitude
+        const osg::Vec3 pos = av->getPosition();
+        fmd.m_pilot_eye_x = pos[0] * Basic::Distance::M2FT;
+        fmd.m_pilot_eye_y = pos[1] * Basic::Distance::M2FT;
+        fmd.m_pilot_eye_z = -pos[2] * Basic::Distance::M2FT;   // altitude
 
-  fmd.m_alphad = av->getAngleOfAttackD();
-  fmd.m_betad = av->getSideSlipD();
-  fmd.m_mach = av->getMach();
-  fmd.m_runalt = 0.0;
+        fmd.m_alphad = av->getAngleOfAttackD();
+        fmd.m_betad = av->getSideSlipD();
+        fmd.m_mach = av->getMach();
+        fmd.m_runalt = 0.0;
 
-  fmd.m_theta = (float_4) av->getPitchD();
-  fmd.m_phi   = (float_4) av->getRollD();
-  fmd.m_psi   = (float_4) av->getHeadingD();
-  fmd.m_airspeed = (float_4) av->getTotalVelocityKts();
+        fmd.m_theta = (float_4) av->getPitchD();
+        fmd.m_phi   = (float_4) av->getRollD();
+        fmd.m_psi   = (float_4) av->getHeadingD();
+        fmd.m_airspeed = (float_4) av->getTotalVelocityKts();
 
-  fmd.m_heading = (float_4) av->getHeadingD();
+        fmd.m_heading = (float_4) av->getHeadingD();
 
-  fmd.m_dlg = 0;           // landing gear position 90 is down (scaled to 0-1)
-  fmd.m_dsb = (float_4) (av->getSpeedBrakePosition()/100.0f);   // speed break 60 is out (scaled to 0-1)
-  fmd.m_nz = (float_4) av->getGload();
+        fmd.m_dlg = 0;           // landing gear position 90 is down (scaled to 0-1)
+        fmd.m_dsb = (float_4) (av->getSpeedBrakePosition()/100.0f);   // speed break 60 is out (scaled to 0-1)
+        fmd.m_nz = (float_4) av->getGload();
 
-  fmd.m_aetrc = 0;         // Commanded throttle position
-  fmd.m_afterburner = 0;   // logical, true in in A/B
+        fmd.m_aetrc = 0;         // Commanded throttle position
+        fmd.m_afterburner = 0;   // logical, true in in A/B
 
-  fmd.m_target_id = 0;
+        fmd.m_target_id = 0;
 
-  fmd.m_id_self = 0;       // make use of a hole
-  fmd.m_flags = 0;
+        fmd.m_id_self = 0;       // make use of a hole
+        fmd.m_flags = 0;
 
-  fmd.m_target_x = 0;
-  fmd.m_target_y = 0;
-  fmd.m_target_z = 0;
+        fmd.m_target_x = 0;
+        fmd.m_target_y = 0;
+        fmd.m_target_z = 0;
 
-  fmd.m_target_theta = 0;
-  fmd.m_target_phi = 0;
-  fmd.m_target_psi = 0;
+        fmd.m_target_theta = 0;
+        fmd.m_target_phi = 0;
+        fmd.m_target_psi = 0;
 
-  fmd.m_target_uearth = 0;
-  fmd.m_target_vearth = 0;
-  fmd.m_target_wearth = 0;
-  fmd.m_target_vcas = 0;
+        fmd.m_target_uearth = 0;
+        fmd.m_target_vearth = 0;
+        fmd.m_target_wearth = 0;
+        fmd.m_target_vcas = 0;
 
-  if (netOutput != 0) {
-           bool result = 0;
-           result = netOutput->sendData( (char*) &fmd, sizeof(fmd) );
+        if (netOutput != 0) {
+           netOutput->sendData( (char*) &fmd, sizeof(fmd) );
         }
     }
 }
 
 } // End Otw namespace
 } // End Eaagles namespace
+
