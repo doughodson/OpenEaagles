@@ -67,20 +67,20 @@ void CadrgFrame::load(CadrgFrameEntry* entry)
     LookupTable lut[4];
     // Image structure
     Image image;
-	//char filename[80];
-	ushort indices[6][6];
-	int rowBytes = 0;
+    //char filename[80];
+    ushort indices[6][6];
+    int rowBytes = 0;
 
-	// All subframes present indicator 
-	bool allSubframes = false;
-	// Lookup offset table offset 
-	uint lookupOffTblOff = 0;
-	// Lookup table offset record length 
-	ushort lookupTblOffRecLen = 0;
-	// Subframe mask table offset 
-	uint subframeMskTblOff = 0;
-	// Subframe offset (mask section) 
-	uint subframeOff[6][6];
+    // All subframes present indicator 
+    bool allSubframes = false;
+    // Lookup offset table offset 
+    uint lookupOffTblOff = 0;
+    // Lookup table offset record length 
+    ushort lookupTblOffRecLen = 0;
+    // Subframe mask table offset 
+    uint subframeMskTblOff = 0;
+    // Subframe offset (mask section) 
+    uint subframeOff[6][6];
     // Temp table to transfer Lookup Table to 
     unsigned char table[4][4096][4];
 
