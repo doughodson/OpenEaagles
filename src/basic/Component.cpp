@@ -2,9 +2,6 @@
 // Component
 //******************************************************************************
 
-#include <limits.h>
-#include <float.h>
-
 #include "openeaagles/basic/Component.h"
 
 #include "openeaagles/basic/Boolean.h"
