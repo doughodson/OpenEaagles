@@ -1,9 +1,9 @@
 //------------------------------------------------------------------------------
-// Classes:	AsciiText, NumericReadout, TimeReadout, HexReadout,
-//		LatitudeReadout, LongitudeReadout, DirectionReadout, Rotary, Rotary2,
-//	        Cursor
+// Classes: AsciiText, NumericReadout, TimeReadout, HexReadout,
+//          LatitudeReadout, LongitudeReadout, DirectionReadout, Rotary, Rotary2,
+//          Cursor
 //------------------------------------------------------------------------------
-#ifndef	__Eaagles_BasicGL_Readouts_H__
+#ifndef __Eaagles_BasicGL_Readouts_H__
 #define __Eaagles_BasicGL_Readouts_H__
 
 #include "Field.h"
@@ -17,7 +17,7 @@ namespace BasicGL {
 
 
 //------------------------------------------------------------------------------
-// Class:	AsciiText
+// Class: AsciiText
 // Base class: Object > Graphic > Field > AsciiText
 //
 // Form name: text
@@ -26,33 +26,33 @@ namespace BasicGL {
 //    text   <List>       ! Text List
 //
 // Public Member Functions:
-//	bool isValidInputPosition(int tc)
-//		Returns true if tc is a valid input position.
+//      bool isValidInputPosition(int tc)
+//      Returns true if tc is a valid input position.
 //
-//	bool setTextString(String* stsobj)
-//		Returns true if the text string was set to stsobj.
+//      bool setTextString(String* stsobj)
+//      Returns true if the text string was set to stsobj.
 //
-//	bool setTextList(List* stlobj)
-//		Returns true if the text list was set to stlobj.
+//      bool setTextList(List* stlobj)
+//      Returns true if the text list was set to stlobj.
 //
 //------------------------------------------------------------------------------
 class AsciiText : public Field {
-    DECLARE_SUBCLASS(AsciiText,Field)
+    DECLARE_SUBCLASS(AsciiText, Field)
 
 public:
    AsciiText();
-   
+
    virtual char filterInputEvent(const int event, const int tc);
    virtual bool isValidInputPosition(const int tc);
    virtual bool setTextString(const Basic::String* const stsobj);
    virtual bool setTextList(const Basic::List* const stlobj);
-   
+
    // Component interface
    virtual bool event(const int key, Basic::Object* const obj = 0);
 };
 
 //------------------------------------------------------------------------------
-// Class:	Cursor
+// Class: Cursor
 //
 // Form name: Cursor
 //
@@ -67,7 +67,7 @@ public:
 
 
 //------------------------------------------------------------------------------
-// Class:	NumericReadout
+// Class: NumericReadout
 //
 // Form name: NumericReadout
 //
@@ -88,35 +88,35 @@ public:
 //
 // Example formats: 
 //
-//    ######	// Integer
-//    +#####	// Integer w/plus sign
-//    00000#	// Integer w/leading zeros
-//    +0000#	// Integer w/plus sign & leading zeros
-//    ###.## 	// Float w/2 right of decimal point
-//    +##.## 	// Float w/plus sign, 2 right of decimal point
-//    00#.## 	// Float w/2 right of decimal point & leading zeros
-//    +0#.## 	// Float w/plus sign, 2 right of decimal point, & leading zeros
+//    ######    // Integer
+//    +#####    // Integer w/plus sign
+//    00000#    // Integer w/leading zeros
+//    +0000#    // Integer w/plus sign & leading zeros
+//    ###.##    // Float w/2 right of decimal point
+//    +##.##    // Float w/plus sign, 2 right of decimal point
+//    00#.##    // Float w/2 right of decimal point & leading zeros
+//    +0#.##    // Float w/plus sign, 2 right of decimal point, & leading zeros
 //
 // Public Member Functions:
-//	int getInt()
-//		Returns num as an int.
+//  int getInt()
+//      Returns num as an int.
 //
-//	double getFloat()
-//		Returns num. (native)
+//  double getFloat()
+//      Returns num. (native)
 //
-//	setValue(int v)
-//	setValue(double v)
-//		Sets num to v as an double (in both cases) then redisplays the value.
+//  setValue(int v)
+//  setValue(double v)
+//      Sets num to v as an double (in both cases) then redisplays the value.
 //
-//	setMaxValue(int v)
-//	setMaxValue(double v)
-//		Sets maxNum to v as an double (in both cases) then redisplays the value.
+//  setMaxValue(int v)
+//  setMaxValue(double v)
+//      Sets maxNum to v as an double (in both cases) then redisplays the value.
 //
-//	double getInputValue()
-//		Gets the input value.
+//  double getInputValue()
+//      Gets the input value.
 //
-//	bool isInputValueValid()
-//		Checks the input value and returns true if it is valid.
+//  bool isInputValueValid()
+//      Checks the input value and returns true if it is valid.
 //
 //------------------------------------------------------------------------------
 class NumericReadout : public Field {
@@ -192,15 +192,15 @@ private:
 
 
 //------------------------------------------------------------------------------
-// Class:	HexReadout
+// Class: HexReadout
 // Base class: Object > Graphic > Field > NumericReadout > HexReadout
 //
 // Form name: HexReadout
 //
 // Example formats: 
 //
-//    ######	// Hex number
-//    00000#	// Hex number w/leading zeros
+//    ######    // Hex number
+//    00000#    // Hex number w/leading zeros
 //
 //------------------------------------------------------------------------------
 class HexReadout : public NumericReadout {
@@ -218,15 +218,15 @@ protected:
 
 
 //------------------------------------------------------------------------------
-// Class:	OctalReadout
+// Class: OctalReadout
 // Base class: Object > Graphic > Field > NumericReadout > OctalReadout
 //
 // Form name: OctalReadout
 //
 // Example formats: 
 //
-//    ######	// Octal number
-//    00000#	// Octal number w/leading zeros
+//    ######    // Octal number
+//    00000#    // Octal number w/leading zeros
 //
 //------------------------------------------------------------------------------
 class OctalReadout : public NumericReadout {
@@ -244,21 +244,21 @@ protected:
 
 
 //------------------------------------------------------------------------------
-// Class:	TimeReadout
-// Base class:	Object > Graphic > Field > NumericReadout > TimeReadout
+// Class: TimeReadout
+// Base class: Object > Graphic > Field > NumericReadout > TimeReadout
 //
 // Form name: TimeReadout
 //
 // Example formats: 
 //
-//    HH:MM:SS 		// Hours, minutes and seconds
-//    0H:MM:SS.S	// Hours (w/leading zero), minutes and seconds decimal
-//   +HH:MM		// Hours (w/sign) and minutes
-//    HHMM.M		// Hours (w/sign) and minutes decimal
-//   +0HMM:SS.S		// Hours (w/signed and leading zero), minutes
-//			//   and seconds decimal
-//    MMSS.S		// Minutes and seconds decimal
-//    SSSS		// Seconds
+//    HH:MM:SS      // Hours, minutes and seconds
+//    0H:MM:SS.S    // Hours (w/leading zero), minutes and seconds decimal
+//   +HH:MM     // Hours (w/sign) and minutes
+//    HHMM.M        // Hours (w/sign) and minutes decimal
+//   +0HMM:SS.S     // Hours (w/signed and leading zero), minutes
+//          //   and seconds decimal
+//    MMSS.S        // Minutes and seconds decimal
+//    SSSS      // Seconds
 //
 // Notes: The seconds and third numbers always have leading zeros.  The first
 // number requires a zero, '0', to have leading zeros.
@@ -281,7 +281,7 @@ protected:
 
 
 //------------------------------------------------------------------------------
-// Class:	DirectionReadout
+// Class: DirectionReadout
 // Base class: Object > Graphic > Field > NumericReadout > DirectionReadout
 //
 // Form name: DirectionReadout
@@ -304,7 +304,7 @@ protected:
 
 
 //------------------------------------------------------------------------------
-// Class:	LatitudeReadout
+// Class: LatitudeReadout
 // Base class: Object > Graphic > Field > NumericReadout > DirectionReadout > LatitudeReadout
 //
 // Form name: LatitudeReadout
@@ -321,8 +321,8 @@ protected:
 
 
 //------------------------------------------------------------------------------
-// Class:	LongitudeReadout
-// Base class:	Object > Graphic > Field > NumericReadout > DirectionReadout > LongitudeReadout
+// Class: LongitudeReadout
+// Base class:  Object > Graphic > Field > NumericReadout > DirectionReadout > LongitudeReadout
 //
 // Form name: LongitudeReadout
 //
@@ -338,7 +338,7 @@ protected:
 
 
 //------------------------------------------------------------------------------
-// Class:	Rotary
+// Class: Rotary
 // Base class: Object > Graphic > Field > Rotary
 //
 // Description: Rotary text
@@ -358,13 +358,13 @@ public:
    virtual bool event(const int key, Object* const obj = 0);
 
 private:
-    bool preDrawSelectList; // this flag tells us our components need to be pre-drawn (to avoid flicker)
-
+    // this flag tells us our components need to be pre-drawn (to avoid flicker)
+    bool preDrawSelectList;
 };
 
 
 //------------------------------------------------------------------------------
-// Class:	Rotary2
+// Class: Rotary2
 // Base class: Object > Graphic > Field > Rotary > Rotary2
 //
 // Description: Binary rotary

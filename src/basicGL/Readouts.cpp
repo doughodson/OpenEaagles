@@ -356,12 +356,12 @@ void Rotary::draw()
 
 bool AsciiText::isValidInputPosition(const int)
 {
-   return true;		// AsciiText fields do not have template characters
+   return true;     // AsciiText fields do not have template characters
 }
 
 char AsciiText::filterInputEvent(const int event, const int)
 {
-    return char(event);	// All characters are valid for AsciiText fields
+    return char(event); // All characters are valid for AsciiText fields
 }
 
 char NumericReadout::filterInputEvent(const int event, const int tc)
@@ -620,13 +620,13 @@ double TimeReadout::getInputValue() const
          else value -= sec;
       }
       break;
-      case mm : {	// Minutes only
+      case mm : {   // Minutes only
          float min = 0.0;
          sscanf(cbuf, format1, &min);
          value = min*60.0f;
       }
       break;
-      case ss : {	// Seconds only
+      case ss : {   // Seconds only
          float sec = 0.0;
          sscanf(cbuf, format1, &sec);
          value = sec;
@@ -649,7 +649,7 @@ double DirectionReadout::getInputValue() const
    if (cbuf[0] == minusChar) cbuf[0] = '-';
 
    switch (tmode) {
-      case ddmmss : {	// Degrees, Minutes, and seconds
+      case ddmmss : {   // Degrees, Minutes, and seconds
          double degs = 0.0;
          double min = 0.0;
          double sec = 0.0;
@@ -659,7 +659,7 @@ double DirectionReadout::getInputValue() const
          else value = degs - min/60.0f;
       }
       break;
-      case ddmm : {	// Degrees and minutes
+      case ddmm : { // Degrees and minutes
          double degs = 0.0;
          double min = 0.0;
          sscanf(cbuf, "%lf@%lf", &degs, &min);
@@ -667,7 +667,7 @@ double DirectionReadout::getInputValue() const
          else value = degs - min/60.0f;
       }
       break;
-      case dd : {	// Degrees only
+      case dd : {   // Degrees only
          sscanf(cbuf, "%lf", &value);
       }
       break;
@@ -827,7 +827,7 @@ void TimeReadout::makeText()
         neg = true;
     }
     switch (tmode) {
-        case hhmmss : {	// Hours, Minutes, and seconds
+        case hhmmss : { // Hours, Minutes, and seconds
             double minutes = seconds/60.0f;
             int ihrs = int(minutes/60.0f);
             double min = minutes - double(ihrs*60);
@@ -843,7 +843,7 @@ void TimeReadout::makeText()
             }
         }
         break;
-        case hhmm : {	// Hours and minutes
+        case hhmm : {   // Hours and minutes
             double minutes = seconds/60.0f;
             int  ihrs = int(minutes/60.0f);
             double min = minutes - double(ihrs*60);
@@ -857,13 +857,13 @@ void TimeReadout::makeText()
             }
         }
         break;
-        case hh : {	// Hours only
+        case hh : { // Hours only
             double hrs = getFloat()/3600.0f;
             if (neg) hrs = -hrs;
             std::sprintf(cbuf, format, hrs);
         }
         break;
-        case mmss : {	// Minutes and seconds
+        case mmss : {   // Minutes and seconds
             int  imin = int(seconds/60.0f);
             double sec = seconds - double(imin*60);
             std::sprintf(cbuf, format, imin, sec);
@@ -876,13 +876,13 @@ void TimeReadout::makeText()
             }
         }
         break;
-        case mm : {	// Minutes only
+        case mm : { // Minutes only
             double min = seconds/60.0f;
             if (neg) min = -min;
             std::sprintf(cbuf, format, min);
         }
         break;
-        case ss : {	// Seconds only
+        case ss : { // Seconds only
             if (neg) seconds = -seconds;
             std::sprintf(cbuf, format, seconds);
         }
@@ -899,7 +899,7 @@ void DirectionReadout::makeText()
         neg = true;
     }
     switch (tmode) {
-        case ddmmss : {	// Degrees, Minutes, and seconds
+        case ddmmss : { // Degrees, Minutes, and seconds
             int     ideg = int(degrees);
             double min = (degrees - double(ideg))*60.0f;
             int     imin = int(min);
@@ -908,14 +908,14 @@ void DirectionReadout::makeText()
             std::sprintf(cbuf, format, ideg, imin, sec);
         }
         break;
-        case ddmm : {	// Degrees and minutes
+        case ddmm : {   // Degrees and minutes
             int     ideg = int(degrees);
             double  min  = (degrees - double(ideg))*60.0f;
             if (neg) ideg = -ideg;
             std::sprintf(cbuf, format, ideg, min);
         }
         break;
-        case dd : {	// Degrees only
+        case dd : { // Degrees only
             if (neg) degrees = -degrees;
             std::sprintf(cbuf, format, degrees);
         }
@@ -1180,8 +1180,8 @@ bool NumericReadout::setSlotFloatToBeDisplayed(const Basic::Float* const sftbdob
         ok = true;
     }
     else {
-	       if (isMessageEnabled(MSG_ERROR)) {
-	    std::cerr << "NumericReadout::setFloatToBeDisplayed: \"value\" must be a number!" << std::endl;
+           if (isMessageEnabled(MSG_ERROR)) {
+        std::cerr << "NumericReadout::setFloatToBeDisplayed: \"value\" must be a number!" << std::endl;
           }
         ok = false;
     }
