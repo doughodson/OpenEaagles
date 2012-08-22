@@ -146,8 +146,17 @@ NetIO::NetIO() : netInput(0), netOutput(0)
 {
    STANDARD_CONSTRUCTOR()
 
+   initData();
+}
+
+void NetIO::initData()
+{
    // DIS parameters
    setVersion(VERSION_1278_1A);
+
+   siteID = 1;
+   appID = 1;
+   exerciseID = 1;
 
    // First the defaults
    setMaxTimeDR(HRT_BEAT_TIMER, 255, 255);                   //  (seconds)
@@ -169,13 +178,13 @@ NetIO::NetIO() : netInput(0), netOutput(0)
 void NetIO::copyData(const NetIO& org, const bool cc)
 {
    BaseClass::copyData(org);
-   
-   if (cc) {
-      for (unsigned int i = 0; i < MAX_EMISSION_HANDLERS; i++) {
-         emissionHandlers[i] = 0;
-      }    
-      nEmissionHandlers = 0;
-   }
+   if (cc) initData();
+
+   version = org.version;
+
+   siteID = org.siteID;
+   appID = org.appID;
+   exerciseID = org.exerciseID;
 
    clearEmissionPduHandlers();
    for (unsigned int i = 0; i < org.nEmissionHandlers; i++) {
@@ -184,8 +193,6 @@ void NetIO::copyData(const NetIO& org, const bool cc)
       addEmissionPduHandler(tmp);
       tmp->unref();
    }
-
-   version = org.version;
     
    for (unsigned char i = 0; i < NUM_ENTITY_KINDS; i++) {
       for (unsigned char j = 0; j < MAX_ENTITY_DOMAINS; j++) {

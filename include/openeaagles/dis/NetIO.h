@@ -63,9 +63,9 @@ namespace Dis {
 //                                        !   6 => IEEE 1278.1A-1998
 //                                        !   7 => IEEE 1278.1 -- draft 15
 //
-//    siteID         <Basic::Number>      ! Site Identification
-//    applicationID  <Basic::Number>      ! Application Identification
-//    exerciseID     <Basic::Number>      ! Exercise Identification
+//    siteID         <Basic::Number>      ! Site Identification (default: 1)
+//    applicationID  <Basic::Number>      ! Application Identification (default: 1)
+//    exerciseID     <Basic::Number>      ! Exercise Identification (default: 1)
 //
 //    maxTimeDR   <Basic::Time>           ! Max DR time (default: 5 seconds)
 //                <Basic::PairStream>     ! List of max DR times by kinds and domains (see note #4)
@@ -373,6 +373,7 @@ protected:
    virtual void testInputEntityTypes(const unsigned int);    // Test quick lookup of incoming entity types
 
 private:
+    void initData();
 
     SPtr<Basic::NetHandler>   netInput;          // Input network handler
     SPtr<Basic::NetHandler>   netOutput;         // Output network handler

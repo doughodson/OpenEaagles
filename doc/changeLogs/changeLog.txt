@@ -40,6 +40,10 @@ basicGL
 --------------------------------------------------------------------------------
 dis
 
+   NetIO class
+      1) Add the initialization of member variables 'siteId', 'appID' and
+      'exerciseID' (bug fix); and added the initData() function.
+
 --------------------------------------------------------------------------------
 otw
 
