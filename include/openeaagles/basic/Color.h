@@ -14,10 +14,10 @@ namespace Basic {
 class Number;
 
 //------------------------------------------------------------------------------
-// Class:  Color
-// Base class:  Object-> Color
+// Class: Color
+// Base class: Object-> Color
 //
-// Description:  General Purpose Color class; used with RGB and HSV classes
+// Description: General Purpose Color class; used with RGB and HSV classes
 //
 // Form name: Color
 //
@@ -52,13 +52,13 @@ class Number;
 //      { RED, GREEN, BLUE, ALPHA }
 //          Used to index the Red, Green and Blue (RGB) color vectors      
 //------------------------------------------------------------------------------
-class Color : public Object {
+class Color : public Object
+{
     DECLARE_SUBCLASS(Color,Object)
 
 public:
     // Components of RGB color
     enum { RED, GREEN, BLUE, ALPHA };
-
 
 public:
     Color();

@@ -136,7 +136,7 @@ bool ColorRotary::determineColor(const LCreal value)
     // do an endpoint check while we are at it
     if (value >= myValues[numVals-1]) breakPoint = numVals;
     while (!ok && i < numVals) {
-        if (value >= myValues[i] && value < myValues[i +1]){
+        if (value >= myValues[i] && value < myValues[i+1]){
             breakPoint = (i + 1);
             ok = true;
         } 
