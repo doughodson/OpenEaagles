@@ -7,14 +7,16 @@
 #include "openeaagles/basic/Color.h"
 
 namespace Eaagles {
-	namespace Basic { class PairStream; }
+
+namespace Basic { class PairStream; }
+
 namespace BasicGL {
 
 
 //------------------------------------------------------------------------------
-// Class:  ColorRotary
+// Class: ColorRotary
 //
-// Base class:  Object -> Color -> ColorRotary
+// Base class: Object -> Color -> ColorRotary
 //
 // Description: Takes a list of colors and breakpoints, and changes colors based
 // on the value given to it in comparison with the breakpoints
@@ -49,24 +51,25 @@ namespace BasicGL {
 //       Set our slot values via a pairstream
 //
 //------------------------------------------------------------------------------
-class ColorRotary : public Basic::Color {
-	DECLARE_SUBCLASS(ColorRotary,Basic::Color)
+class ColorRotary : public Basic::Color
+{
+    DECLARE_SUBCLASS(ColorRotary,Basic::Color)
 
 public:
     ColorRotary();
-    
+
     // called to determine a color based on a given value
     virtual bool determineColor(const LCreal value);
 
 protected:
-	bool setSlotColors(Basic::PairStream* const newStream);    
-	bool setSlotValues(const Basic::PairStream* const newStream);
-    
+    bool setSlotColors(Basic::PairStream* const newStream);    
+    bool setSlotValues(const Basic::PairStream* const newStream);
+
 private:
     static const int MAX_VALUES = 50;
-	Basic::PairStream* myColors;             // our colors (rgba value)
-    LCreal        myValues[MAX_VALUES]; // our values 
-    int           numVals;              // number of values
+    Basic::PairStream* myColors;             // our colors (rgba value)
+    LCreal myValues[MAX_VALUES];             // our values 
+    int numVals;                             // number of values
 };
 
 } // End BasicGL namespace
