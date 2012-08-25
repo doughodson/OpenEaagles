@@ -66,10 +66,10 @@ protected:
     bool setSlotValues(const Basic::PairStream* const newStream);
 
 private:
-    static const int MAX_VALUES = 50;
-    Basic::PairStream* myColors;             // our colors (rgba value)
-    LCreal myValues[MAX_VALUES];             // our values 
-    int numVals;                             // number of values
+    static const unsigned int MAX_VALUES = 50;
+    Basic::PairStream* myColors;              // our colors (rgba value)
+    LCreal myValues[MAX_VALUES];              // our values 
+    unsigned int numVals;                    // number of values
 };
 
 } // End BasicGL namespace

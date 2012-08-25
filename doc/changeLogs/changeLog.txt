@@ -36,6 +36,8 @@ basic
 --------------------------------------------------------------------------------
 basicGL
 
+   ColorRotary class
+      1) General cleanup - initialized some data previously uninitialized
 
 --------------------------------------------------------------------------------
 dis

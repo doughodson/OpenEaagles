@@ -34,15 +34,19 @@ END_SLOT_MAP()
 
 ColorRotary::ColorRotary()
 {
-   STANDARD_CONSTRUCTOR()
-   // default gives us no colors, but just makes us black
-   color[Color::RED] = 0;
-   color[Color::GREEN] = 0;
-   color[Color::BLUE] = 0;
-   color[Color::ALPHA] = getDefaultAlpha();
-   
-   myColors = 0;
-   numVals = 0;
+    STANDARD_CONSTRUCTOR()
+    // default gives us no colors, but just makes us black
+    color[Color::RED] = 0;
+    color[Color::GREEN] = 0;
+    color[Color::BLUE] = 0;
+    color[Color::ALPHA] = getDefaultAlpha();
+
+    // inits
+    myColors = 0;
+    numVals = 0;
+    for (unsigned int i=0; i<MAX_VALUES; i++) {
+        myValues[i] = 0;
+    }
 }
 
 
@@ -57,7 +61,7 @@ void ColorRotary::copyData(const ColorRotary& org, const bool cc)
     }    
     
     if (org.numVals > 0) {
-        for (int i = 0; i < org.numVals; i++) {
+        for (unsigned int i = 0; i < org.numVals; i++) {
             myValues[i] = org.myValues[i];
         }   
     }
@@ -77,11 +81,11 @@ void ColorRotary::deleteData()
     myColors = 0;
 }
 
+//------------------------------------------------------------------------------
 // SLOT FUNCTIONS
+//------------------------------------------------------------------------------
 
-
-// SET FUNCTIONS
-// set our slot colors via a pairstream
+// set our slot colors via a PairStream
 bool ColorRotary::setSlotColors(Basic::PairStream* const newStream)
 {
     bool ok = false;
@@ -92,6 +96,7 @@ bool ColorRotary::setSlotColors(Basic::PairStream* const newStream)
     }
     return ok;
 }
+
 // set our slot values via a pairstream
 bool ColorRotary::setSlotValues(const Basic::PairStream* const newStream)
 {
@@ -127,7 +132,7 @@ bool ColorRotary::determineColor(const LCreal value)
     int breakPoint = 0;
     
     // find out where we are in the break table
-    int i = 0;
+    unsigned int i = 0;
     // do an endpoint check while we are at it
     if (value >= myValues[numVals-1]) breakPoint = numVals;
     while (!ok && i < numVals) {
