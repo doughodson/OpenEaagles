@@ -44,6 +44,10 @@ dis
       1) Add the initialization of member variables 'siteId', 'appID' and
       'exerciseID' (bug fix); and added the initData() function.
 
+   NetIOMunitionDetonation, NetIOPlatforms and NetIOWeaponFire
+      1) Set a few uninitialized fields within PDUs
+
+
 --------------------------------------------------------------------------------
 otw
 

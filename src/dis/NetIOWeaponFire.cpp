@@ -108,7 +108,9 @@ bool Nib::weaponFireMsgFactory(const LCreal)
     pdu.header.protocolFamily = NetIO::PDU_FAMILY_WARFARE;
     pdu.header.timeStamp = disIO->timeStamp();
     pdu.header.length = sizeof(FirePDU);
-    
+    pdu.header.status = 0;
+    pdu.header.padding = 0;
+
     // ---
     // Set the PDU data with the firing (launcher) player's id
     // ---
