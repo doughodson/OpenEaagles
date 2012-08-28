@@ -20,6 +20,9 @@ general
          -- EAAGLES_CONFIG_MAX_NETIO_ENTITY_TYPES for Simulation::NetIO::MAX_ENTITY_TYPES
          -- EAAGLES_CONFIG_MAX_NETIO_NEW_OUTGOING for Simulation::NetIO::MAX_NEW_OUTGOING
 
+      3) Default max interval timers, EAAGLES_CONFIG_MAX_INTERVAL_TIMERS, changed
+         from 40 to 500.
+
 --------------------------------------------------------------------------------
 basic
 
@@ -49,6 +52,12 @@ dis
    NetIOMunitionDetonation, NetIOPlatforms and NetIOWeaponFire
       1) Set a few uninitialized fields within PDUs
 
+
+--------------------------------------------------------------------------------
+gui-glut
+
+   GlutDisplay class
+      1) printSelectBuffer() -- restructured code for better readability.
 
 --------------------------------------------------------------------------------
 otw

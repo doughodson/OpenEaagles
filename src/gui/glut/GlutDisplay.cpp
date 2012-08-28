@@ -603,9 +603,14 @@ void GlutDisplay::printSelectBuffer(const GLint hits, const GLuint sbuff[])
    int hitCnt = 0;
    std::cout << std::hex << "hits: " << hits << std::endl;
    while (hitCnt < hits) {
-      int n = sbuff[idx++];
-      std::cout << "Hit: " << n << " ( " << sbuff[idx++] << "," << sbuff[idx++] << ") Name stack = { ";
-      for (int i = 0; i < n; i++) std::cout << sbuff[idx++] << " ";
+      unsigned int n = sbuff[idx++];
+      std::cout << "Hit: " << n;
+      std::cout << " ( " << sbuff[idx++];
+      std::cout << ", " << sbuff[idx++];
+      std::cout << ") Name stack = { ";
+      for (unsigned int i = 0; i < n; i++) {
+         std::cout << sbuff[idx++] << " ";
+      }
       std::cout << "}" << std::endl;
       hitCnt++;
    }
