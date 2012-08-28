@@ -17,7 +17,7 @@
 
 // Max number of interval timers (see Timers.h)
 #ifndef EAAGLES_CONFIG_MAX_INTERVAL_TIMERS
-#define EAAGLES_CONFIG_MAX_INTERVAL_TIMERS      40
+#define EAAGLES_CONFIG_MAX_INTERVAL_TIMERS      500
 #endif
 
 // Max number of "player's of interest" (see Gimbal.h)
