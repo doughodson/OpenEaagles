@@ -240,6 +240,7 @@ void Gimbal::reset()
    pos = initPos;
    cmdRate = initCmdRate;
    cmdPos = initCmdPos;
+   updateMatrix();
    BaseClass::reset();
 }
 
@@ -452,16 +453,6 @@ void Gimbal::servoController(const double dt)
       pos = newPos;
 
    }
-
-   //if (getOwnship() != 0) {
-   //   if (getOwnship()->isNetworkedPlayer()) {
-
-          //if (isMessageEnabled(MSG_DEBUG)) {
-   //      std::cout << "Iplayer: gimbal: az = " << pos[0]*Basic::Angle::R2DCC << ", el = " << pos[1]*Basic::Angle::R2DCC << std::endl;
-   //   }
-
-   //   }
-   //}
 
    // update matrix (a parent gimbal may have changed)
    updateMatrix();

@@ -77,6 +77,9 @@ simulation
       1) Updated AirVehicle, GroundVehicle, LifeForms and Player so that networked
          players "reset" properly. 
 
+   Gimbal class
+      1) reset() now calls updateMatrix()
+
    Message class
       1) General cleanup of the code
          -- added 'const', as needed
@@ -89,6 +92,10 @@ simulation
    Steerpoint class
       1) Updated serialize() method so that more steerpoint information is
          save when serialized
+
+   Tdb class
+      1) When computing the tangent to the horizon (i.e., the horizon check),
+      now includes the vertical offset of the gimbal from the ownship.
 
 --------------------------------------------------------------------------------
 vehicle
