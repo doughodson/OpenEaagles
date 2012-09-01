@@ -69,6 +69,8 @@ otw
 --------------------------------------------------------------------------------
 recorder
 
+   TabPrinter class
+      1) printFileIdMsg() -- (bug fix) Now printing day() instead of has_day()
 
 --------------------------------------------------------------------------------
 simulation
