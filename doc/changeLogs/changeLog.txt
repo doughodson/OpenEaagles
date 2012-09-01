@@ -85,6 +85,10 @@ simulation
          -- added 'const', as needed
          -- getSenderName() and getDestNames() now return 'const' pointers
 
+   Navigation class
+      1) setSlotRoute() and setSlotBullseye() -- removed the redundant ref() and
+      unref() since a SPtr<> is being used
+
    Player class
       1) Added "initVelocityKts" so that initial velocity can be specified
          in knots
