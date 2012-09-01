@@ -102,6 +102,8 @@ void TabPrinter::setMsgHeaders(const bool f)
    trackNewHdr = f;
    trackRemovedHdr = f;
    trackDataHdr = f;
+   markerHdr = f;
+   inputDeviceHdr = f;
 
    playerHeader = f;
    weaponHeader = f;
@@ -355,26 +357,47 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
       }
       case REID_UNHANDLED_ID_TOKEN: {
          // unknown event with valid ID and time fields.
-         std::stringstream sout;
-         sout << "UNHANDLED EVENT " << divider;
-         printTimeMsg(sout, timeMsg);
-         printToOutput( sout.str().c_str() );
+         printUnhandledIdToken(timeMsg);
+         break;
+      }
+      case REID_MARKER: {
+         // Marker msg with ID, source, and time fields.
+         if (dataRecord->has_marker_msg()) {
+            if ((option == NEW_MSG) && (markerHdr)) printHeader = true;
+            markerHdr = false;
+            const Pb::MarkerMsg* msg = &dataRecord->marker_msg();
+            printMarkerMsg(timeMsg, msg);
+         }
+         break;
+      }
+      case REID_AI_EVENT: {
+         // Analog Input device msg with ID, source, value, and time fields.
+         if (dataRecord->has_input_device_msg()) {
+            if ((option == NEW_MSG) && (inputDeviceHdr)) printHeader = true;
+            inputDeviceHdr = false;
+            const Pb::InputDeviceMsg* msg = &dataRecord->input_device_msg();
+            printInputDeviceMsg(timeMsg, msg, messageId);
+         }
+         break;
+      }
+      case REID_DI_EVENT: {
+         // Discrete Input device msg with ID, source, value, and time fields.
+         if (dataRecord->has_input_device_msg()) {
+            if ((option == NEW_MSG) && (inputDeviceHdr)) printHeader = true;
+            inputDeviceHdr = false;
+            const Pb::InputDeviceMsg* msg = &dataRecord->input_device_msg();
+            printInputDeviceMsg(timeMsg, msg, messageId);
+         }
          break;
       }
       case REID_END_OF_DATA: {
-         // Last record message (must have valid time)
-         std::stringstream sout;
-         sout << "LAST RECORD " << divider;
-         printTimeMsg(sout, timeMsg);
-         printToOutput( sout.str().c_str() );
+         // Last record message
+         printEndOfData(timeMsg);
          break;
       }
       case REID_RESET_EVENT: {
          // Reset
-         std::stringstream sout;
-         sout << "RESET " << divider;
-         printTimeMsg(sout, timeMsg);
-         printToOutput( sout.str().c_str() );
+         printResetEvent(timeMsg);
 
          // indicate reset so we print message headings
          simReset = true;
@@ -451,7 +474,7 @@ void TabPrinter::printFileIdMsg(const Pb::Time* const timeMsg, const Pb::FileIdM
       else sout << divider;
 
       if (msg->has_day()) {
-         sout << msg->has_day() << divider;
+         sout << msg->day() << divider;
       }
       else sout << divider;
 
@@ -1697,6 +1720,164 @@ void TabPrinter::printEmissionDataSpacer(std::ostream& sout)
    sout << divider;       //elevation AOI
 }
 
+
+//------------------------------------------------------------------------------
+// printMarkerMsg
+//------------------------------------------------------------------------------
+void TabPrinter::printMarkerMsg(const Pb::Time* const timeMsg, const Pb::MarkerMsg* const msg)
+{
+   std::stringstream sout;
+
+   if (printHeader) {
+      sout << "MARKER" << divider << "MESSAGE" << divider << "HEADER" << divider;
+      printTimeMsgHdr(sout);  // time header
+      sout << "ID    " << divider << "SOURCE ID" << divider;
+
+      printToOutput( sout.str().c_str() );
+      sout.str("");
+   }
+
+   sout << "MARKER" << divider << "MESSAGE" << divider << "DATA" << divider;
+
+   printTimeMsg(sout, timeMsg);
+   if (msg != 0) {
+      if (msg->has_id()) {
+         sout << msg->id() << divider;
+      }
+      else sout << divider;
+
+      if (msg->has_source_id()) {
+         sout << msg->source_id() << divider;
+      }
+      else sout << divider;
+
+   }
+   else {
+      // bad pointer; print spacers
+      sout <<  divider;    // ID
+      sout <<  divider;    // SOURCE ID
+   }
+
+   printToOutput( sout.str().c_str() );
+}
+
+
+//------------------------------------------------------------------------------
+// printInputDeviceMsg
+//------------------------------------------------------------------------------
+void TabPrinter::printInputDeviceMsg(const Pb::Time* const timeMsg, const Pb::InputDeviceMsg* const msg, const unsigned int msgId)
+{
+   std::stringstream sout;
+   std::string inputType = "";
+
+   if (msgId == REID_AI_EVENT) inputType = "ANALOG ";
+   else inputType = "DISCRETE";
+
+
+   if (printHeader) {
+      sout << "INPUT" << divider << "DEVICE" << divider << "HEADER" << divider;
+      printTimeMsgHdr(sout);  // time header
+      sout << "TYPE" << divider << "ID    " << divider << "SOURCE ID" << divider << "VALUE" << divider;
+
+      printToOutput( sout.str().c_str() );
+      sout.str("");
+   }
+
+   sout << "INPUT"  << divider << "DEVICE" << divider << "DATA" << divider;
+
+   printTimeMsg(sout, timeMsg);
+   if (msg != 0) {
+      sout << inputType << divider;  // analog or discrete
+      if (msg->has_id()) {
+         sout << msg->id() << divider;
+      }
+      else sout << divider;
+
+      if (msg->has_source_id()) {
+         sout << msg->source_id() << divider;
+      }
+      else sout << divider;
+
+      if (msg->has_value()) {
+         sout << msg->value() << divider;
+      }
+      else sout << divider;
+
+   }
+   else {
+      // bad pointer; print spacers
+      sout << divider;     // TYPE
+      sout <<  divider;    // ID
+      sout <<  divider;    // SOURCE ID
+      sout <<  divider;    // VALUE
+   }
+
+   printToOutput( sout.str().c_str() );
+}
+
+
+//------------------------------------------------------------------------------
+// printEndOfData
+//------------------------------------------------------------------------------
+void TabPrinter::printEndOfData(const Pb::Time* const timeMsg)
+{
+   std::stringstream sout;
+
+   if (printHeader) {
+      sout << "LAST " << divider << "MESSAGE" << divider << "HEADER" << divider;
+      printTimeMsgHdr(sout);  // time header
+      printToOutput( sout.str().c_str() );
+      sout.str("");
+   }
+
+   sout << "LAST " << divider << "MESSAGE" << divider << "DATA" << divider;
+
+   printTimeMsg(sout, timeMsg);
+
+   printToOutput( sout.str().c_str() );
+}
+
+//------------------------------------------------------------------------------
+// printUnhandledIdToken
+//------------------------------------------------------------------------------
+void TabPrinter::printUnhandledIdToken(const Pb::Time* const timeMsg)
+{
+   std::stringstream sout;
+
+   if (printHeader) {
+      sout << "UNHANDLED " << divider << "TOKEN" << divider << "HEADER" << divider;
+      printTimeMsgHdr(sout);  // time header
+      printToOutput( sout.str().c_str() );
+      sout.str("");
+   }
+
+   sout << "UNHANDLED " << divider << "TOKEN" << divider << "DATA" << divider;
+
+   printTimeMsg(sout, timeMsg);
+
+   printToOutput( sout.str().c_str() );
+}
+
+//------------------------------------------------------------------------------
+// printResetEvent
+//------------------------------------------------------------------------------
+void TabPrinter::printResetEvent(const Pb::Time* const timeMsg)
+{
+   std::stringstream sout;
+
+   if (printHeader) {
+      sout << "RESET " << divider << "EVENT" << divider << "HEADER" << divider;
+      printTimeMsgHdr(sout);  // time header
+      printToOutput( sout.str().c_str() );
+      sout.str("");
+   }
+
+   sout << "RESET " << divider << "EVENT" << divider << "DATA" << divider;
+
+   printTimeMsg(sout, timeMsg);
+
+   printToOutput( sout.str().c_str() );
+}
 
 //------------------------------------------------------------------------------
 // printExecTimeMsg() -- print the time string for EXEC time

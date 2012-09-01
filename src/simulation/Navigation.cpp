@@ -821,11 +821,9 @@ bool Navigation::setSlotRoute(Route* const msg)
 {
    if (priRoute != 0) {
       priRoute->container(0);
-      priRoute->unref();
    }
    priRoute = msg;
    if (priRoute != 0) {
-      priRoute->ref();
       priRoute->container(this);
    }
    return true;
@@ -924,11 +922,9 @@ bool Navigation::setSlotBullseye(Bullseye* const msg)
 {
    if (bull != 0) {
       bull->container(0);
-      bull->unref();
    }
    bull = msg;
    if (bull != 0) {
-      bull->ref();
       bull->container(this);
    }
    return true;

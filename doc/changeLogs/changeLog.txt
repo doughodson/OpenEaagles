@@ -69,6 +69,8 @@ otw
 --------------------------------------------------------------------------------
 recorder
 
+   TabPrinter class
+      1) printFileIdMsg() -- (bug fix) Now printing day() instead of has_day()
 
 --------------------------------------------------------------------------------
 simulation
@@ -84,6 +86,10 @@ simulation
       1) General cleanup of the code
          -- added 'const', as needed
          -- getSenderName() and getDestNames() now return 'const' pointers
+
+   Navigation class
+      1) setSlotRoute() and setSlotBullseye() -- removed the redundant ref() and
+      unref() since a SPtr<> is being used
 
    Player class
       1) Added "initVelocityKts" so that initial velocity can be specified
