@@ -14,6 +14,9 @@ basic
 --------------------------------------------------------------------------------
 basicGL
 
+   Display class
+      1) Fixed a bug associated with readFrameBuffer() returning a
+         boolean false, when it should return 0.
 
 --------------------------------------------------------------------------------
 dis
