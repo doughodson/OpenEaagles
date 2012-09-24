@@ -69,9 +69,9 @@ BEGIN_SLOTTABLE(NetIO)
 
    "maxTimeDR",            // 10: Max DR time
    "maxPositionError",     // 11: Max DR position error
-   "maxOrientationError",  // 12: Max DR anglular error
+   "maxOrientationError",  // 12: Max DR angular error
    "maxAge",               // 13: Max age (without update) of networked players
-   "maxEntityRange",       // 14: Max enity range of networked players
+   "maxEntityRange",       // 14: Max entity range of networked players
 END_SLOTTABLE(NetIO)
 
 // Map slot table to handles

@@ -32,10 +32,10 @@ BEGIN_SLOTTABLE(Gimbal)
 
     "location",               //  2: Relative location vector         (meters) [ x y z ]
 
-    "initPosition",           //  3: Initial positon vector           (radians) [ az el roll ]
-    "initPosAzimuth",         //  4: Initial azimuth positon          (Basic::Angle)
-    "initPosElevation",       //  5: Initial elevation positon        (Basic::Angle)
-    "initPosRoll",            //  6: Initial roll positon             (Basic::Angle)
+    "initPosition",           //  3: Initial position vector          (radians) [ az el roll ]
+    "initPosAzimuth",         //  4: Initial azimuth position         (Basic::Angle)
+    "initPosElevation",       //  5: Initial elevation position       (Basic::Angle)
+    "initPosRoll",            //  6: Initial roll position            (Basic::Angle)
 
     "azimuthLimits",          //  7: Azimuth limit vector             (radians) [ left right ] [ range: -pi to pi; else unlimited ]
     "azimuthLimitLeft",       //  8: Left azimuth limit               (Basic::Angle) [ range: -pi to pi; else unlimited ]
@@ -55,7 +55,7 @@ BEGIN_SLOTTABLE(Gimbal)
     "maxRateRoll",            // 19: Max "mechanical" roll rate       (Basic::Angle/sec)
 
     "commandPosition",        // 20: Commanded position vector        (radians) [ az el roll ] (sets POSITION_SERVO)
-    "commandPosAzimuth",      // 21: Commanded azimtuh position       (Basic::Angle) (sets POSITION_SERVO)
+    "commandPosAzimuth",      // 21: Commanded azimuth position       (Basic::Angle) (sets POSITION_SERVO)
     "commandPosElevation",    // 22: Commanded elevation position     (Basic::Angle) (sets POSITION_SERVO)
     "commandPosRoll",         // 23: Commanded roll position          (Basic::Angle) (sets POSITION_SERVO)
 
@@ -83,10 +83,10 @@ BEGIN_SLOT_MAP(Gimbal)
 
     ON_SLOT(2, setSlotLocation, Basic::List)             // Relative location vector (meters) [ x y z ]
 
-    ON_SLOT(3, setSlotPosition, Basic::List)             // Initial positon vector (radians) [ az el roll ]
-    ON_SLOT(4, setSlotPosAzimuth, Basic::Angle)          // Initial azimuth positon
-    ON_SLOT(5, setSlotPosElevation, Basic::Angle)        // Initial elevation positon
-    ON_SLOT(6, setSlotPosRoll, Basic::Angle)             // Initial roll positon 
+    ON_SLOT(3, setSlotPosition, Basic::List)             // Initial position vector (radians) [ az el roll ]
+    ON_SLOT(4, setSlotPosAzimuth, Basic::Angle)          // Initial azimuth position
+    ON_SLOT(5, setSlotPosElevation, Basic::Angle)        // Initial elevation position
+    ON_SLOT(6, setSlotPosRoll, Basic::Angle)             // Initial roll position
 
     ON_SLOT(7, setSlotAzimuthLimits, Basic::List)        // Azimuth limit vector (radians) [ left right ]
     ON_SLOT(8, setSlotAzimuthLimitLeft, Basic::Angle)    // Left azimuth limit
@@ -106,7 +106,7 @@ BEGIN_SLOT_MAP(Gimbal)
     ON_SLOT(19, setSlotMaxRateRoll, Basic::Angle)        // Max "mechanical" roll rate (Basic::Angle/sec)
 
     ON_SLOT(20, setSlotCmdPos, Basic::List)              // Commanded position vector  [ az el roll ] (sets POSITION_SERVO)
-    ON_SLOT(21, setSlotCmdPosAzimuth, Basic::Angle)      // Commanded azimtuh position  (sets POSITION_SERVO)
+    ON_SLOT(21, setSlotCmdPosAzimuth, Basic::Angle)      // Commanded azimuth position  (sets POSITION_SERVO)
     ON_SLOT(22, setSlotCmdPosElevation, Basic::Angle)    // Commanded elevation position (sets POSITION_SERVO)
     ON_SLOT(23, setSlotCmdPosRoll, Basic::Angle)         // Commanded roll position  (sets POSITION_SERVO)
 

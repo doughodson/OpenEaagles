@@ -49,7 +49,7 @@ BEGIN_SLOTTABLE(Weapon)
     "hang",             //  4: Will be a hung store
     "hung",             //  5: Hung store
     "maxTOF",           //  6: max time of flight        (sec)
-    "tsg",              //  7: time to start quidance    (sec - tof)
+    "tsg",              //  7: time to start guidance    (sec - tof)
     "maxBurstRng",      //  8: max burst rng             (meters)
     "lethalRange",      //  9: lethal range              (meters)
     "sobt",             // 10: start-of-burn time        (sec - tof)

@@ -31,11 +31,11 @@ BEGIN_SLOTTABLE(RfSystem)
    "lossXmit",             //  8: RF: Transmit loss                 (dB or no units; def: 1.0) 
    "lossRecv",             //  9: RF: Receive loss                  (dB or no units; def: 1.0)
    "lossSignalProcess",    // 10: RF: Signal Processing loss        (dB or no units; def: 1.0)
-   "disableEmissions",     // 11: Disable sending emisison packets flag (default: false)
+   "disableEmissions",     // 11: Disable sending emission packets flag (default: false)
    "bandwidthNoise",       // 12: Bandwidth Noise (Hz; def: 'bandwidth') (Basic::Number or Basic::Frequency)
 END_SLOTTABLE(RfSystem)
 
-//  Map slot table 
+//  Map slot table
 BEGIN_SLOT_MAP(RfSystem)
     ON_SLOT(1,  setSlotAntennaName,  Basic::String)
     ON_SLOT(2,  setSlotFrequency,    Basic::Number)

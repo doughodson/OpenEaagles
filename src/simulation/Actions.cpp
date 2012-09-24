@@ -294,7 +294,7 @@ void ActionImagingSar::process(const LCreal dt)
       if ( !getSarSystem()->isImagingInProgress()) {
          // Imaging is NOT in progress, so it must have completed ...
          if (isMessageEnabled(MSG_INFO)) {
-         std::cout << "Procesing SAR -- completed!" << std::endl;
+         std::cout << "Processing SAR -- completed!" << std::endl;
          }
          setCompleted(true);
       }
