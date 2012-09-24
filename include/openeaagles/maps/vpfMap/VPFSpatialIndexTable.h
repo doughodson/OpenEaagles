@@ -1,6 +1,6 @@
 // --------------------------------------------------------------
 // Class: VPFSpatialIndexTable
-// Descr: Spacial index file which contains the minimum bounding 
+// Description: Spatial index file which contains the minimum bounding 
 // rectangle (mbr) information about each primitive.  This allows
 // for quick referencing of primitives by area
 // 

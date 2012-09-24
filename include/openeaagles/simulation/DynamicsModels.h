@@ -19,7 +19,7 @@ namespace Simulation {
 //    1) updateTC() and updateData() are called by Component::upateTC() and
 //    Component::updateData() as part of the player's component list.
 //
-//    2) To be properly syncronized within a frame, the root of our dynamics
+//    2) To be properly synchronized within a frame, the root of our dynamics
 //       model should be in our dynamics() function, which will called from
 //       the Player class dynamics() function.
 //

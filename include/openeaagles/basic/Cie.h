@@ -31,7 +31,7 @@ class List;
 // Public methods: Base class public methods, plus ...
 //
 //     Cie(const MonitorMetrics* m, const LCreal l, const LCreal x, const LCreal y);
-//         Special constuctor to initialize the CIE color with the given values.
+//         Special constructor to initialize the CIE color with the given values.
 //
 //     LCreal luminance()
 //     LCreal x()

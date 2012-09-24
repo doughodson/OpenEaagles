@@ -10,7 +10,7 @@ namespace Eaagles {
 namespace Dafif {
 
 //------------------------------------------------------------------------------
-// Class:	Navaid
+// Class: Navaid
 // Description: Access to the DAFIF NAVAID database.
 //------------------------------------------------------------------------------
 class Navaid : public Record {

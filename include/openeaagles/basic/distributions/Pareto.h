@@ -10,7 +10,7 @@ namespace Basic {
 //
 // Pareto
 // Input parameters:
-//     alpha = order, this controls how sharp the dropoff is
+//     alpha = order, this controls how sharp the drop-off is
 //     beta = min value
 //
 

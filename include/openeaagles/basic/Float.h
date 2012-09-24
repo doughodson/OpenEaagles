@@ -21,18 +21,18 @@ namespace Basic {
 // Public methods: Base class public methods, plus ...
 //
 //      Float(const LCreal value)
-//          Special constuctor that initializes the object to 'value'
+//          Special constructor that initializes the object to 'value'
 //
 //      Conversion operators: float() and double()
 //          Are C++ equivalents.
 //
 //      Assignment operators: = +=  -=  *=  /=
 //          Are C++ equivalents.
-//          Divison by zero returns a zero, and sends an error message.
+//          Division by zero returns a zero, and sends an error message.
 //
 //      Binary operators: +  -  *  /
 //          Are C++ equivalents.
-//          Divison by zero returns a zero, and sends an error message.
+//          Division by zero returns a zero, and sends an error message.
 //
 //      Comparison operators: ==  !=  <  <=  >  >=
 //          Are C++ equivalents.

@@ -13,7 +13,7 @@ namespace LinearSystem {
 // Class: Limit11
 // Base class:  Object -> ScalerFunc -> LimitFunc -> Limit11
 //
-// Description: Limits between -1 and 1, enclusive
+// Description: Limits between -1 and 1, inclusive
 //
 //------------------------------------------------------------------------------
 class Limit11 : public LimitFunc {

@@ -30,7 +30,7 @@ class Tdb;
 //
 //    2) By convention, R/F and IR systems are responsible for filtering their
 //    own players of interest.  This gimbal class has its own variation of the
-//    processPlayersOfInterest() funtion that filters field of view and player
+//    processPlayersOfInterest() function that filters field of view and player
 //    type.  However, it is still the responsibility of the the systems to use
 //    or not use our member function.
 //
@@ -41,7 +41,7 @@ class Tdb;
 //
 //    4) The matrix (see below) is a composite of this gimbal's angles and
 //    all of our container gimbals' angles.  Therefore, this matrix transforms
-//    vectors to(from) our player's body coordinate and not to(from) our conainer
+//    vectors to(from) our player's body coordinate and not to(from) our container
 //    gimbal's coordinate system.
 //
 //          Usage:
@@ -63,9 +63,9 @@ class Tdb;
 //    location             (List)    Relative location vector (meters) [ x y z ] (default: 0,0,0)
 //
 //    initPosition         (List)    Initial position vector (radians) [ az el roll ] (default: 0,0,0)
-//    initPosAzimuth       (Angle)   Initial azimuth positon (default: 0)
-//    initPosElevation     (Angle)   Initial elevation positon (default: 0)
-//    initPosRoll          (Angle)   Initial roll positon (default: 0)
+//    initPosAzimuth       (Angle)   Initial azimuth position (default: 0)
+//    initPosElevation     (Angle)   Initial elevation position (default: 0)
+//    initPosRoll          (Angle)   Initial roll position (default: 0)
 //
 //    azimuthLimits        (List)    Lower & upper azimuth limits (radians) [ left right ][ range: -pi to pi; else unlimited ]
 //    azimuthLimitLeft     (Angle)   Left azimuth limit[ range: -pi to pi; else unlimited ]
@@ -85,7 +85,7 @@ class Tdb;
 //    maxRateRoll          (Angle)   Max "mechanical" roll rate       (Angle/sec) (default: D2RCC * 120.0)
 //
 //    commandPosition      (List)    Commanded position vector (radians) [ az el roll ] (sets POSITION_SERVO)
-//    commandPosAzimuth    (Angle)   Commanded azimtuh position    (sets POSITION_SERVO) (default: 0)
+//    commandPosAzimuth    (Angle)   Commanded azimuth position    (sets POSITION_SERVO) (default: 0)
 //    commandPosElevation  (Angle)   Commanded elevation position  (sets POSITION_SERVO) (default: 0)
 //    commandPosRoll       (Angle)   Commanded roll position       (sets POSITION_SERVO) (default: 0)
 //
@@ -138,7 +138,7 @@ public:
        POSITION_SERVO   // Position servo
     };
 
-    // Position/velocy vector indexes
+    // Position/velocity vector indexes
     enum {
        AZ_IDX,    // Azimuth index
        ELEV_IDX,  // Elevation index
@@ -274,10 +274,10 @@ public:  // Public section
    virtual bool setSlotType(const Basic::String* const msg);             // Physical gimbal type: "mechanical" or "electronic"
    virtual bool setSlotLocation(const Basic::List* const msg);           // Relative location vector (meters) [ x y z ]
 
-   virtual bool setSlotPosition(const Basic::List* const msg);           // Initial positon vector (radians) [ az el roll ]
-   virtual bool setSlotPosAzimuth(const Basic::Angle* const msg);        // Initial azimuth positon
-   virtual bool setSlotPosElevation(const Basic::Angle* const msg);      // Initial elevation positon
-   virtual bool setSlotPosRoll(const Basic::Angle* const msg);           // Initial roll positon 
+   virtual bool setSlotPosition(const Basic::List* const msg);           // Initial position vector (radians) [ az el roll ]
+   virtual bool setSlotPosAzimuth(const Basic::Angle* const msg);        // Initial azimuth position
+   virtual bool setSlotPosElevation(const Basic::Angle* const msg);      // Initial elevation position
+   virtual bool setSlotPosRoll(const Basic::Angle* const msg);           // Initial roll position 
 
    virtual bool setSlotAzimuthLimits(const Basic::List* const msg);      // Azimuth limit vector (radians) [ left right ]
    virtual bool setSlotAzimuthLimitLeft(const Basic::Angle* const msg);  // Left azimuth limit
@@ -297,7 +297,7 @@ public:  // Public section
    virtual bool setSlotMaxRateRoll(const Basic::Angle* const msg);       // Max "mechanical" roll rate (Basic::Angle/sec)
 
    virtual bool setSlotCmdPos(const Basic::List* const msg);             // Commanded position vector  [ az el roll ] (sets POSITION_SERVO)
-   virtual bool setSlotCmdPosAzimuth(const Basic::Angle* const msg);     // Commanded azimtuh position  (sets POSITION_SERVO)
+   virtual bool setSlotCmdPosAzimuth(const Basic::Angle* const msg);     // Commanded azimuth position  (sets POSITION_SERVO)
    virtual bool setSlotCmdPosElevation(const Basic::Angle* const msg);   // Commanded elevation position (sets POSITION_SERVO)
    virtual bool setSlotCmdPosRoll(const Basic::Angle* const msg);        // Commanded roll position  (sets POSITION_SERVO)
 

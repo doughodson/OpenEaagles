@@ -2,7 +2,7 @@
 // Class: Instrument
 // Base class: BasicGL::Graphic -> Instrument
 // 
-// Description: Baseclass for all instruments, this class will receive a value
+// Description: Base class for all instruments, this class will receive a value
 // via an UPDATE_INSTRUMENTS command, and from there will determine (if we have a
 // scaling table) what our scaled table is.  It will then determine if we have a
 // color rotary, and if we do, it will send the value to it to update itself...

@@ -33,12 +33,12 @@ namespace BasicGL {
 //    const osg::Vec4* getPlaneCoeff() const
 //       Returns the plane equation coefficients for the plane
 //       containing this polygon.  Calling calcPlaneCoeff() will
-//       compute these coefficents for this polygon
+//       compute these coefficients for this polygon
 //
 //    bool arePlaneCoeffValid() const 
 //       Returns true if the plane equation coefficients for this
 //       polygon are valid.  Calling calcPlaneCoeff() will compute
-//       these coefficents for this polygon.
+//       these coefficients for this polygon.
 //
 //    bool calcPlaneCoeff()
 //       Computes the plane equation coefficients for this polygon.
@@ -46,8 +46,8 @@ namespace BasicGL {
 //
 //    LCreal calcZ(const osg::Vec2& p) const
 //       Computes the Z value for a point, 'p', on this polygon.
-//       The plane equation coefficents must be valid (see arePlaneCoeffValid()).
-//       Calling calcPlaneCoeff() will compute these coefficents for this polygon
+//       The plane equation coefficients must be valid (see arePlaneCoeffValid()).
+//       Calling calcPlaneCoeff() will compute these coefficients for this polygon
 //
 //
 // Static, public methods:
@@ -57,7 +57,7 @@ namespace BasicGL {
 //       the three vectices, v.  Returns true if 'norm' is valid.
 //
 //    bool calcPlaneCoeff(osg::Vec4& coeff, const osg::Vec3 v[3])
-//       Computes the plane equation coefficents for the plane defined by
+//       Computes the plane equation coefficients for the plane defined by
 //       the three vectices, v.  Returns true if 'coeff' is valid.
 //
 //    LCreal calcZ(const osg::Vec2& p, const osg::Vec4& coeff)

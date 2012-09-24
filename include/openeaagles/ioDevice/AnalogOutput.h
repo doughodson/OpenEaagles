@@ -34,7 +34,7 @@ namespace IoDevice {
 //      value        <Number>    Initial value [ -1.0 ... 1.0 ] (default: 0)
 //      offset       <Number>    Offset value (default: 0.0)
 //      gain         <Number>    Gain value   (default: 1.0)
-//      table        <Table1>    Shapping function table (default: none)
+//      table        <Table1>    Shaping function table (default: none)
 //
 //------------------------------------------------------------------------------
 class AnalogOutput : public Basic::IoAdapter {

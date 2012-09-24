@@ -292,7 +292,7 @@ const int Gun::DEFAULT_BURST_RATE = 10;            // Default burst rate
 BEGIN_SLOTTABLE(Gun)
     "bulletType",       //  1: Type of bullet (have have bullets to work)
     "rounds",           //  2: Number of rounds
-    "unlimted",         //  3: Unlimited rounds flag
+    "unlimited",         //  3: Unlimited rounds flag
     "rate",             //  4: Rate of fire (rounds per minute)
     "burstRate",        //  5: Rate to generate small bursts of bullets
 

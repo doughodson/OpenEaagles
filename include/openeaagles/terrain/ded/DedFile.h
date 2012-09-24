@@ -15,7 +15,7 @@ struct DedCellHdr;
 
 //------------------------------------------------------------------------------
 // Class: DedFile
-// Description: Manages MultiGen, Inc.'s Digitial Elevation Data (DED) file.
+// Description: Manages MultiGen, Inc.'s Digital Elevation Data (DED) file.
 // See FORMAT.DED for the original MultiGen documentation.
 //
 // - CAUTION: We can look at the other Cell Headers, but the only data
@@ -49,7 +49,7 @@ private:
    virtual bool loadData();   // Load the data file
 };
 
-} // End Terrain namspace
+} // End Terrain namespace
 } // End Eaagles namespace
 
 #endif

@@ -39,12 +39,12 @@ namespace Basic {
 //
 //    2) The 'ioData' slot sets both the input and output handler pointers
 //       to one combined I/O data buffer; or you can set just an input or
-//       output data buffer; or set seperate input/output data buffers, using
+//       output data buffer; or set separate input/output data buffers, using
 //       the 'inputData' and 'outputData' slots.
 //
 //    3) As an option, use createDataThread() to create a thread that will
 //       call the I/O process functions for the devices; in which case, the
-//       inputDevices() and outputDevices() are overriden.  This thread will
+//       inputDevices() and outputDevices() are overridden.  This thread will
 //       terminate when a SHUTDOWN_EVENT is sent to this object.
 //      
 // 

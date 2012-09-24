@@ -68,7 +68,7 @@ const double TWO_PI = PI + PI;
 
 // ---
 // Standard constants ----
-//  Source: National Institude of Science & Technology (NIST) web site
+//  Source: National Institute of Science & Technology (NIST) web site
 //    Speed of light:       299,792,458 m/s
 //    Boltzmann constant:   1.3806503E-23 (Joules/Kelvin)
 //                          0.0000024E-23 (uncertainty)

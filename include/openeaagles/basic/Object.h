@@ -144,8 +144,8 @@ namespace Basic {
 //    Typically an application will build its own application level form function,
 //    which in turn will call the various form functions for the model libraries and
 //    OpenEaagles libraries that the application requires.  By ordering these form
-//    functions, the application level form function can seach a library containing
-//    a few more specifc models prior to searching a library of many generic models,
+//    functions, the application level form function can search a library containing
+//    a few more specific models prior to searching a library of many generic models,
 //    and if a more specific model exist for a given form name then it is used,
 //    otherwise the library of generic models is searched and its model, if found,
 //    is used.
@@ -205,7 +205,7 @@ namespace Basic {
 //    slot of the first base class that contains a slot table is slot number one.
 //    Whereas BEGIN_SLOT_MAP() remaps these to local slot numbers, which are
 //    relative to our class (i.e. a local slot one), and these local number are
-//    used by the ON_SLOT() marcro.
+//    used by the ON_SLOT() macro.
 //
 //
 // Object Serializer:
@@ -289,9 +289,9 @@ namespace Basic {
 //
 //    The STANDARD_CONSTRUCTOR() and STANDARD_DESTRUCTOR() macros increment and
 //    decrement, respectively, a counter located in each class _Static structure.
-//    This provides a count of the current number of instanciated object for the
+//    This provides a count of the current number of instantiated object for the
 //    class.  The maximum number of this count, as well as the total number of
-//    instanciated objects, is also maintained.
+//    instantiated objects, is also maintained.
 //
 //       writeClassList(std::ostream& sout)
 //          Writes the table of known OpenEaagles classes, which includes the

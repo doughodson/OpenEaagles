@@ -24,7 +24,7 @@ namespace Basic {
 // Public methods:
 //
 //    Number(const LCreal value)
-//       Special constuctor that initializes the number to 'value'
+//       Special constructor that initializes the number to 'value'
 //
 //    LCreal getReal()
 //    double getDouble()

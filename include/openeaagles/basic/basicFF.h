@@ -5,7 +5,7 @@
 //    by its 'form' name and will return a pre-ref() pointer to the new
 //    object or zero if the form name wasn't found. 
 //
-//    (see Object.h, parser.y, and varous OpenEaagles examples)
+//    (see Object.h, parser.y, and various OpenEaagles examples)
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_Basic_FormFunc_H__
 #define __Eaagles_Basic_FormFunc_H__

@@ -13,7 +13,7 @@
 //
 //    Non-key events --
 //       Event values (MAX_KEY_EVENT+1) to (USER_EVENTS-1) reserved for the OpenEaagles toolkit
-//       Event values above USER_EVENT are avaiable for user events
+//       Event values above USER_EVENT are available for user events
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_Basic_Event_Tokens_H__
 #define __Eaagles_Basic_Event_Tokens_H__

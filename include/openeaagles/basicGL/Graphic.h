@@ -52,9 +52,9 @@ class Material;
 //    linewidth          <Number>       ! Linewidth (default: 0.0f)
 //    flashRate          <Number>       ! Flash rate (default: 0.0f)
 //    transform          <PairStream>   ! List of coordinate transformations (default: 0)
-//    transform          <Transform>    ! Single coorinate transformation (default: 0)
+//    transform          <Transform>    ! Single coordinate transformation (default: 0)
 //    vertices           <PairStream>   ! List of 3D Coordinates (World coord) (default: 0)
-//    normals            <PairStream>   ! List of 3D Vectors of normals at each vertex
+//    normals            <PairStream>   ! List of 3D Vectors of normal's at each vertex
 //    texCoord           <PairStream>   ! List of 2D Texture Coordinates (default: 0)
 //    noDisplayList      <Number>       ! Flag: True to disable display list
 //                                      !     (default false)
@@ -127,7 +127,7 @@ class Material;
 //
 //      lcRotate(LCreal a)
 //      lcRotate(LCreal x, LCreal y, LCreal z, LCreal a)
-//          Rotate by 'a' radians about z, or about tye x,y,z vector.
+//          Rotate by 'a' radians about z, or about the x,y,z vector.
 //
 //      lcTranslate(LCreal x, LCreal y)
 //      lcTranslate(LCreal x, LCreal y, LCreal z)

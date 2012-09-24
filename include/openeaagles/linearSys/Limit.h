@@ -13,12 +13,12 @@ namespace LinearSystem {
 // Class: Limit
 // Base class:  Basic::Object -> ScalerFunc -> LimitFunc -> Limit
 //
-// Description: Limits function: limits X to the upper and lower boundries.
+// Description: Limits function: limits X to the upper and lower boundaries.
 //
 // Form name: Limit
 // Slots:
-//    lower  <Number>   Lower boundry (default: -1) (must be less than the upper)
-//    upper  <Number>   Upper boundry (default:  1) (must be greater than the lower)
+//    lower  <Number>   Lower boundary (default: -1) (must be less than the upper)
+//    upper  <Number>   Upper boundary (default:  1) (must be greater than the lower)
 //
 //------------------------------------------------------------------------------
 class Limit : public LimitFunc {

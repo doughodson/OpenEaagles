@@ -400,7 +400,7 @@ public:
       YELLOW   = 0x04,        // 3rd force
       CYAN     = 0x08,        // 4th force
       GRAY     = 0x10,        // Neutral force
-      WHITE    = 0x20         // Commerical/Civilian
+      WHITE    = 0x20         // Commercial/Civilian
    };
 
    // Coordinate system to use (or being used) for updating player position

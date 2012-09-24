@@ -25,7 +25,7 @@ namespace Basic {
 // Public methods: Base class public methods, plus ...
 //
 //      Rgba(const LCreal r, const LCreal g, const LCreal b, const LCreal a)
-//          Special constuctor what initializes the object to r, g, b and a
+//          Special constructor what initializes the object to r, g, b and a
 //
 //------------------------------------------------------------------------------
 class Rgba : public Rgb {

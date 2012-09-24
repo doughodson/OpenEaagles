@@ -26,7 +26,7 @@ namespace BasicGL {
 //          c) range
 //          d) centered and north-up flags
 //          c) Center and de-centered outer radii
-//          d) De-centered displayment
+//          d) De-centered displacement
 //
 //    2) The reference point is usually the ownship player, but may be any point.
 //

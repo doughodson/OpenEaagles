@@ -8,7 +8,7 @@
 //       variables for the class 'ThisType', which is derived from class 'BaseType'.
 //       Defines the type 'BaseClass', which can be used by the member functions as an
 //       alias for the base class.  The copy constructor is declared by this macro, but
-//       the user is requried to declare any additional constructors including the
+//       the user is required to declare any additional constructors including the
 //       standard constructor (i.e., no arguments; Foo()).
 //
 //    IMPLEMENT_SUBCLASS(ThisType, "formName")
@@ -29,7 +29,7 @@
 //       this yourself).
 //
 //    STANDARD_CONSTRUCTOR()
-//       Common construcor tasks.  This macro required in every constructor.
+//       Common constructor tasks.  This macro required in every constructor.
 //
 //    STANDARD_DESTRUCTOR()
 //       Common destructor tasks.  This macro required in every destructor.

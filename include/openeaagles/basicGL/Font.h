@@ -122,7 +122,7 @@ namespace BasicGL {
 //
 // Exceptions:
 //      ExpInvalidFont:
-//          Thrown by methode outputText() when the font map is not valid and
+//          Thrown by method outputText() when the font map is not valid and
 //          couldn't be loaded.
 //
 //

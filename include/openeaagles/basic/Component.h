@@ -175,7 +175,7 @@ class String;
 //    Components can send an event token, along with an optional Object based argument,
 //    to any other component.  Events are passed by calling the receiving component's
 //    event() function.  Event() can be called from an updateTC() routines, so the
-//    event tokens must be processed quickly, simular to interrupt handlers.
+//    event tokens must be processed quickly, similar to interrupt handlers.
 //
 //    Standard event tokens are defined in the file, eventTokens.h, which is included
 //    by this Component class and are therefore within the Eaagles::Basic::Component
@@ -204,7 +204,7 @@ class String;
 //
 //          END_EVENT_HANDLER()
 //
-//    The event handlers are usually 'virtual' functions that can be overriden and
+//    The event handlers are usually 'virtual' functions that can be overridden and
 //    handled by a derived class.
 //
 //    The event handlers will take either a single argument, which matches the type
@@ -247,7 +247,7 @@ class String;
 //          getEventLogger() returns the data logger assigned to this component.
 //
 //       Logger* getAnyEventLogger()
-//          getAnyEventLogger() will start at this component and searchs up
+//          getAnyEventLogger() will start at this component and search's up
 //          the component tree until a logger is found.
 //
 //       In either case, zero is returned if no logger is found.

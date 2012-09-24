@@ -46,7 +46,7 @@ namespace IoDevice {
 //      deadband     <Number>    Deadband: [ 0 .. 1 ] (default: 0.0)
 //      offset       <Number>    Offset value (default: 0.0)
 //      gain         <Number>    Gain value   (default: 1.0)
-//      table        <Table1>    Shapping function table (default: none)
+//      table        <Table1>    Shaping function table (default: none)
 //
 //------------------------------------------------------------------------------
 class AnalogInput : public Basic::IoAdapter {

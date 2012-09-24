@@ -27,7 +27,7 @@ public:
       double      longitude;     // Longitude                        (degs)
       double      elevation;     // Elevation                        (m)
       LCreal      freq;          // Frequency                        (Hz)
-      LCreal      power;         // Effective Radiaged Power (erp)   (Watts)
+      LCreal      power;         // Effective Radiated Power (ERP)   (Watts)
       unsigned short code;       // LASER code
       unsigned short padding;       // LASER code
    };

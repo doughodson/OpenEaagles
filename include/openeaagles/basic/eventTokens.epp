@@ -154,7 +154,7 @@
 #define  EID_FREEZE_EVENT_ALL       1303  /* Passes requested freeze state as LcBoolean */
 #define  EID_KILL_EVENT             1304  /* Passes 'killed by' player */
 #define  EID_CRASH_EVENT            1305  /* Passes 'collided with' player or zero if terrain */
-#define  EID_JETTISON_EVENT         1306  /* Jettision external store event */
+#define  EID_JETTISON_EVENT         1306  /* Jettison external store event */
 #define  EID_RF_EMISSION            1307  /* RF emission event */
 #define  EID_RF_EMISSION_RETURN     1308  /* RF emission return event */
 #define  EID_DESIGNATOR_EVENT       1309  /* Passes Designator message */
@@ -174,7 +174,7 @@
 
 #define  EID_IR_QUERY               1319  /* IR query message */
 #define  EID_IR_QUERY_RETURN        1320  /* IR query return message */
-#define  EID_SAT_COMM_MSG           1321  /* Sat Comm message */
+#define  EID_SAT_COMM_MSG           1321  /* SatCom message */
 #define  EID_DE_EMISSION            1322  /* Directed Energy emission message */
 
 // ---

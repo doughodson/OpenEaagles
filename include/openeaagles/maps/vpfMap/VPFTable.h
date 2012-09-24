@@ -1,6 +1,6 @@
 // --------------------------------------------------------------
 // Class: VpfTable
-// Descr: Default vector product format table
+// Description: Default vector product format table
 // 
 // --------------------------------------------------------------
 #ifndef	__Eaagles_Maps_Vpf_VPFTable_H__

@@ -24,7 +24,7 @@ namespace Simulation {
 // Slots:
 //    bulletType  <Bullet>   ! Type of bullet (have to have bullets to work) (default: 0)
 //    rounds      <Number>   ! Number of rounds (default: 510)
-//    unlimted    <Number>   ! Unlimited rounds flag (default: false)
+//    unlimited    <Number>   ! Unlimited rounds flag (default: false)
 //    rate        <Number>   ! Rate of fire (rounds per minute) (default: 6600)
 //    burstRate   <Number>   ! Rate to generate small bursts of bullets (default: 10)
 //

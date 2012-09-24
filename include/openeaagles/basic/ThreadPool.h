@@ -95,7 +95,7 @@ public:
    // provided to the thread pool one way or the other, it will run but do nothing.
    void setManager(ThreadPoolManager* mgr);
 
-   // Initializes the thread pool. The initialze() function in the ThreadPoolManager
+   // Initializes the thread pool. The initialize() function in the ThreadPoolManager
    // may return a callback object that will be provided to other callbacks during
    // subsequent phases.
    void initialize(Component* const parent);

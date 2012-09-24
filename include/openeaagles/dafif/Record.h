@@ -25,10 +25,10 @@
 //       Returns true if 'code' is equal to the Format Code field.
 //
 //    char transactionCode() const
-//       Returns the character contained in the Tranaction Code field.
+//       Returns the character contained in the Transaction Code field.
 //
 //    int isTransactionCode(char c) const
-//       Returns true if 'code' is equal to the Tranaction Code field.
+//       Returns true if 'code' is equal to the Transaction Code field.
 //
 //    icaoCode(char code[]) const
 //       Returns the value of the ICAO field in 'code'.

@@ -35,7 +35,7 @@ namespace BasicGL {
 //    2) The real-time thread, updateTC(), is not passed to our base class
 //    or our component symbols.
 //
-//    3) Based on the MapPage, the map attributes of multible symbol loaders
+//    3) Based on the MapPage, the map attributes of multiple symbol loaders
 //    can be controlled by one container MapPage.
 //
 //    4) The symbol templates, which are used to draw the various types of

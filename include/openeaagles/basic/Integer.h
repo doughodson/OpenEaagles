@@ -22,18 +22,18 @@ namespace Basic {
 // Public methods: Base class public methods, plus ...
 //
 //      Integer(const int value)
-//          Special constuctor that initializes the object to 'value'
+//          Special constructor that initializes the object to 'value'
 //
 //      Conversion operator: int()
 //          Is C++ equivalent.
 //
 //      Assignment operators: =  +=  -=  *=  /=  %=
 //          Are C++ equivalents.
-//          Divison or Modulus by zero returns a zero, and sends an error message.
+//          Division or Modulus by zero returns a zero, and sends an error message.
 //
 //      Binary operators: +  -  *  /  %
 //          Are C++ equivalents.
-//          Divison or Modulus by zero returns a zero, and sends an error message.
+//          Division or Modulus by zero returns a zero, and sends an error message.
 //
 //      Comparison operators: ==  !=  <  <=  >  >=
 //          Are C++ equivalents.

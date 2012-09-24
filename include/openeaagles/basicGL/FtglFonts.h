@@ -47,8 +47,8 @@ namespace BasicGL {
 // all other slots are optional
 //
 // The fontWidth and fontHeight will SCALE the individual width and height, however
-// faceSize will SET the actual font width and height symetrically (ie.. X by X instead
-// of X by Y).  You can both set the fontWidth and Heigth and faceSize, and that
+// faceSize will SET the actual font width and height symmetrically (ie.. X by X instead
+// of X by Y).  You can both set the fontWidth and Height and faceSize, and that
 // will scale and then draw a font of certain facesize. 
 //
 //Comment sections last updated: 2004.10.14 by MJK 

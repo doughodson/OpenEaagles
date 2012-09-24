@@ -39,7 +39,7 @@ class Material;
 //
 // 3) On clear depth() - by default, this value is set to -1, which will 
 //    DISABLE the GL_DEPTH_TEST.  This in turn will cause all drawing to use the
-//    painter's alogrithm.  However, if you enable GL_DEPTH_TEST, the algorithm is
+//    painter's algorithm.  However, if you enable GL_DEPTH_TEST, the algorithm is
 //    not adhered to, so the drawing order will appear "reversed".  So, if you are planning
 //    on using the Z buffer to adjust graphical depth, be aware that you may need
 //    to adjust your graphical positions according to the buffer, and not the order in 

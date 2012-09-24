@@ -22,7 +22,7 @@ namespace Instruments {
 // Public member functions:
 //      setLeftBoundary() - where to draw the left side of the gauge
 //      setRightBoundary() - where to draw the right side of the gauge
-//      setIsOutlined() - if true, the guage isn't filled
+//      setIsOutlined() - if true, the gauge isn't filled
 //      setIsVertical() - if true, the gauge slides up and down
 //------------------------------------------------------------------------------
 class AnalogGauge : public Instrument {

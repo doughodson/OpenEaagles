@@ -83,7 +83,7 @@
 // latLonToTileRowColumn() - Takes in a given lat/lon, and based on that, finds 
 // the closest tile in the map file to that lat/lon.  It also sets our for origin 
 // row (in (float) pixels) so we know the exact location of the lat/lon, calculating 
-// pixel offset later.  This also sets our intial origin row and origin column.
+// pixel offset later.  This also sets our initial origin row and origin column.
 // 
 //      void CadrgMap::latLonToTileRowColumn(const double lat, const double lon, float &originRow, 
 //                                           float &originCol, int &tileRow, int &tileCol, float &pixelRow, 

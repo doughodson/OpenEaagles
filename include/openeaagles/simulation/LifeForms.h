@@ -43,7 +43,7 @@ public:
     virtual void look(const LCreal up, const LCreal sdws);
     virtual bool setLookAngle(const LCreal x) { lookAngle = x; return true; }
 
-    // overriden functions
+    // overridden functions
     virtual bool setVelocity(const LCreal ue, const LCreal ve, const LCreal we);
     
     LCreal getLookAngle() const { return lookAngle; }

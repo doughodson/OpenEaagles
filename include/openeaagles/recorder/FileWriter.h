@@ -22,7 +22,7 @@ namespace Recorder {
 //
 // Note:
 //    1) The data file consists of a sequence of serialized data records
-//    that are preceeded by 4 bytes that provided the size of each data record
+//    that are preceded by 4 bytes that provided the size of each data record
 //    in bytes.  The 4 bytes are stored as an ascii string with leading spaces
 //    (e.g., " 123")
 //
