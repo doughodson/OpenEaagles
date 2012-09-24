@@ -3,7 +3,7 @@
 //    Base function:                      Function
 //    Polynomial function:                Polynomial
 //    Generic multi-variable functions:   Func1, Func2, Func3, Func4 and Func5
-//    Funtion storage:                    FStorage
+//    Function storage:                   FStorage
 //------------------------------------------------------------------------------
 
 #include "openeaagles/basic/Functions.h"

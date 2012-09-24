@@ -69,28 +69,28 @@ IMPLEMENT_SUBCLASS(NetIO,"DisNetIO")
 //------------------------------------------------------------------------------
 // Parameters
 //------------------------------------------------------------------------------
-static const LCreal HRT_BEAT_MPLIER       = 2.5;                            //  Multiplier
-static const LCreal HRT_BEAT_TIMER        = 5;                               //  seconds 
-static const LCreal DRA_POS_THRST_DFLT    = 3.0;                         //  meters
+static const LCreal HRT_BEAT_MPLIER       = 2.5;                      //  Multiplier
+static const LCreal HRT_BEAT_TIMER        = 5;                        //  seconds 
+static const LCreal DRA_POS_THRST_DFLT    = 3.0;                      //  meters
 static const LCreal DRA_ORIENT_THRST_DFLT = (LCreal)(3.0 * PI/180.0); //  radians
 
 // DISv7 default heartbeats
-static const LCreal HBT_PDU_EE          = 10;                                  //  seconds 
-static const LCreal HBT_PDU_IFF         = 10;                                 //  seconds 
-static const LCreal HBT_PDU_RECEIVER    = 60;                            //  seconds 
+static const LCreal HBT_PDU_EE          = 10;                         //  seconds 
+static const LCreal HBT_PDU_IFF         = 10;                         //  seconds 
+static const LCreal HBT_PDU_RECEIVER    = 60;                         //  seconds 
 static const LCreal HBT_PDU_TRANSMITTER = 2;                          //  seconds 
-static const LCreal HBT_TIMEOUT_MPLIER  = 2.4;                         //  Multiplier
+static const LCreal HBT_TIMEOUT_MPLIER  = 2.4;                        //  Multiplier
 
 // DISv7 default thresholds
-static const LCreal EE_AZ_THRSH = (LCreal)(1.0 * PI/180.0);            //  radians
-static const LCreal EE_EL_THRSH = (LCreal)(1.0 * PI/180.0);            //  radians
+static const LCreal EE_AZ_THRSH = (LCreal)(1.0 * PI/180.0);           //  radians
+static const LCreal EE_EL_THRSH = (LCreal)(1.0 * PI/180.0);           //  radians
 
-static const LCreal EE_ERP_THRSH  = (LCreal)(1.0);                      //  dB
-static const LCreal EE_FREQ_THRSH = (LCreal)(1.0);                     //  Hz
-static const LCreal EE_FRNG_THRSH = (LCreal)(1.0);                     //  Hz
-static const LCreal EE_PRF_THRSH  = (LCreal)(1.0);                     //  Hz
-static const LCreal EE_PW_THRSH   = (LCreal)(1e-6);                     //  seconds
-//static const unsigned int EE_HIGH_DENSITY_THRSH = 10;                  //  no units
+static const LCreal EE_ERP_THRSH  = (LCreal)(1.0);                    //  dB
+static const LCreal EE_FREQ_THRSH = (LCreal)(1.0);                    //  Hz
+static const LCreal EE_FRNG_THRSH = (LCreal)(1.0);                    //  Hz
+static const LCreal EE_PRF_THRSH  = (LCreal)(1.0);                    //  Hz
+static const LCreal EE_PW_THRSH   = (LCreal)(1e-6);                   //  seconds
+//static const unsigned int EE_HIGH_DENSITY_THRSH = 10;               //  no units
 
 
 //------------------------------------------------------------------------------
@@ -100,11 +100,11 @@ BEGIN_SLOTTABLE(NetIO)
    "netInput",             //  1) Network input handler
    "netOutput",            //  2) Network output handler
    "version",              //  3) DIS version number [ 0 .. 6 ] (IST-CF-03-01, May 5, 2003)
-   "maxTimeDR",            //  4: Max DR time                            (Basic::Time)
-   "maxPositionError",     //  5: Max DR position error                  (Basic::Distance)
-   "maxOrientationError",  //  6: Max DR anglular error                 (Basic::Angle)
+   "maxTimeDR",            //  4: Max DR time                          (Basic::Time)
+   "maxPositionError",     //  5: Max DR position error                (Basic::Distance)
+   "maxOrientationError",  //  6: Max DR angular error                 (Basic::Angle)
    "maxAge",               //  7: Max age (without update) of networked players (Basic::Time)
-   "maxEntityRange",       //  8: Max enity range of networked players (Basic::Distance)
+   "maxEntityRange",       //  8: Max entity range of networked players (Basic::Distance)
    "emissionPduHandlers",  //  9: List of Electromagnetic-Emission PDU handlers (EmissionPduHandler)
    "siteID",               // 10: Site Identification    
    "applicationID",        // 11: Application Identification
@@ -287,7 +287,7 @@ void NetIO::netInputHander()
             // doing an initial byte swap of the header.
 
             if (getExerciseID() == 0 || (getExerciseID() == header->exerciseIdentifier)) {
-               // When we're interested in this exercies ... 
+               // When we're interested in this exercise ... 
                switch (header->PDUType) {
 
                   case PDU_ENTITY_STATE: {
@@ -1189,7 +1189,7 @@ bool NetIO::setMaxPositionErr(const LCreal v, const unsigned char kind, const un
    return true;
 }
 
-// setMaxOrientationErr() -- Sets max orientatio error (radians)
+// setMaxOrientationErr() -- Sets max orientation error (radians)
 bool NetIO::setMaxOrientationErr(const LCreal v, const unsigned char kind, const unsigned char domain)
 {
    // default loop limits (just in case we're doing all)
@@ -1467,7 +1467,7 @@ bool NetIO::setSlotMaxEntityRange(const Basic::PairStream* const msg)
                unsigned char domain = 255;
                bool isNum = slot2KD(slotname, &kind, &domain);
                if (isNum) {
-                  // Everythings valid, so let setMaxEntityRange() handle it
+                  // Everything is valid, so let setMaxEntityRange() handle it
                   ok = setMaxEntityRange(pp, kind, domain);
                }
                else {
@@ -1510,7 +1510,7 @@ bool NetIO::setSlotMaxTimeDR(const Basic::PairStream* const msg)
                unsigned char domain = 255;
                bool isNum = slot2KD(slotname, &kind, &domain);
                if (isNum) {
-                  // Everythings valid, so let setMaxTimeDR() handle it
+                  // Everything is valid, so let setMaxTimeDR() handle it
                   ok = setMaxTimeDR(pp, kind, domain);
                }
                else {
@@ -1555,7 +1555,7 @@ bool NetIO::setSlotMaxPositionErr(const Basic::PairStream* const msg)
                unsigned char domain = 255;
                bool isNum = slot2KD(slotname, &kind, &domain);
                if (isNum) {
-                  // Everythings valid, so let setMaxPositionErr() handle it
+                  // Everything is valid, so let setMaxPositionErr() handle it
                   ok = setMaxPositionErr(pp, kind, domain);
                }
                else {
@@ -1598,7 +1598,7 @@ bool NetIO::setSlotMaxOrientationErr(const Basic::PairStream* const msg)
                unsigned char domain = 255;
                bool isNum = slot2KD(slotname, &kind, &domain);
                if (isNum) {
-                  // Everythings valid, so let setMaxOrientationErr() handle it
+                  // Everything is valid, so let setMaxOrientationErr() handle it
                   ok = setMaxOrientationErr(pp, kind, domain);
                }
                else {
@@ -1642,7 +1642,7 @@ bool NetIO::setSlotMaxAge(const Basic::PairStream* const msg)
                unsigned char domain = 255;
                bool isNum = slot2KD(slotname, &kind, &domain);
                if (isNum) {
-                  // Everythings valid, so let setMaxAge() handle it
+                  // Everything is valid, so let setMaxAge() handle it
                   ok = setMaxAge(pp, kind, domain);
                }
                else {

@@ -133,7 +133,7 @@ bool Nib::weaponFireMsgFactory(const LCreal)
       if (tPlayer != 0) {
          pdu.targetEntityID.ID = tPlayer->getID();
          if (tPlayer->isLocalPlayer()) {
-            // Local player, use our site/app/exerc IDs
+            // Local player, use our site/app/exercise IDs
             pdu.targetEntityID.simulationID.siteIdentification = disIO->getSiteID();
             pdu.targetEntityID.simulationID.applicationIdentification = disIO->getApplicationID();
             tOk = true;
@@ -164,7 +164,7 @@ bool Nib::weaponFireMsgFactory(const LCreal)
     pdu.eventID.eventNumber = mPlayer->getReleaseEventID();
 
     // ---
-    // Location & Velociy
+    // Location & Velocity
     // ---
 
     // World Coordinates

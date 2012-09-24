@@ -319,7 +319,7 @@ void GlutDisplay::select()
 }
 
 //-----------------------------------------------------------------------------
-// hide our glut window (set ourself to the current window first)
+// hide our glut window (set our self to the current window first)
 //-----------------------------------------------------------------------------
 void GlutDisplay::hide()
 {
@@ -406,7 +406,7 @@ void GlutDisplay::reshapeSubWindow()
          GLsizei mainWinWidth = 0, mainWinHeight = 0;
          pMainWin->getViewport(&mainWinX, &mainWinY, &mainWinWidth, &mainWinHeight);
 
-         // we have our new vieport width and height
+         // we have our new viewport width and height
          // multiply it by our ratio and reset our width and height
          int newX = int(swPosition.x() * double(mainWinWidth) + 0.5);
          int newY = int(swPosition.y() * double(mainWinHeight) + 0.5);
@@ -569,7 +569,7 @@ BasicGL::Graphic* GlutDisplay::findSelected(const GLint hits, const GLuint sbuff
 
       // Or look for the furthest
       else if (item < 0) {
-         // (find the larget zmax)
+         // (find the largest zmax)
          GLuint h = hitList[0];
          GLuint zmax = zmaxList[0];
          for (unsigned int i = 1; i < hitCnt; i++) {

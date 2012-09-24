@@ -244,7 +244,7 @@ bool Nib::munitionDetonationMsgFactory(const LCreal)
     pdu.eventID.eventNumber = mPlayer->getReleaseEventID();
 
     // ---
-    // Location & Velociy
+    // Location & Velocity
     // ---
 
     // World Coordinates

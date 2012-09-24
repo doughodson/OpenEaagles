@@ -526,7 +526,7 @@ bool Nib::entityStateManager(const LCreal curExecTime)
       // VectorDIS            DRentityLinearAcceleration;
       // AngularVelocityVectorDIS DRentityAngularVelocity;
       // EntityMarking        entityMarking;
-      // uint32_t             capabilites;
+      // uint32_t             capabilities;
       // =========================================================
       //
 
@@ -667,7 +667,7 @@ bool Nib::entityStateManager(const LCreal curExecTime)
 
                // Land based camouflage bits
                if (player->isMajorType(Simulation::Player::GROUND_VEHICLE)) {
-                  // Subtract one to match DIS comouflage bits.
+                  // Subtract one to match DIS camouflage bits.
                   // Our camouflage type for DIS is the camouflage appearance bits
                   // plus one because our camouflage type of zero is no camouflage.
                   bits--;

@@ -174,7 +174,7 @@ bool EmissionPduHandler::setAntennaModel(Simulation::Antenna* const msg)
    return true;
 }
 
-// PDU exect time (last send)
+// PDU exec time (last send)
 void EmissionPduHandler::setEmPduExecTime(const LCreal v)
 {
     emPduExecTime = v;

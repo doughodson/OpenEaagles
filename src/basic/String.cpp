@@ -1,5 +1,6 @@
 #include "openeaagles/basic/String.h"
-#include <stdlib.h>
+
+#include <cstdlib>
 
 namespace Eaagles {
 namespace Basic {

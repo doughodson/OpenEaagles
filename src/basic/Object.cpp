@@ -3,7 +3,8 @@
 //------------------------------------------------------------------------------
 
 #include "openeaagles/basic/Object.h"
-#include <ctype.h>
+
+#include <cctype>
 
 namespace Eaagles {
 namespace Basic {
