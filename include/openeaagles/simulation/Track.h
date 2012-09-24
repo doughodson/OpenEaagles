@@ -219,7 +219,7 @@ protected:
    int         id;             // Track id;
    short       type;           // Track type: the bit-wise OR of various type bits (see enum above)
    IffCode     iffCode;        // Friend or Foe (see above)
-   TrackClass  trackClass;     // Track Clase (see above) [RF or IR]
+   TrackClass  trackClass;     // Track class (see above) [RF or IR]
    LCreal      age;            // Track age                               (sec)
    LCreal      quality;        // Quality of Track; normalized: high(1.0) to low(0.0)
 

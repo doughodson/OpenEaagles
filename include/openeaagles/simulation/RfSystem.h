@@ -60,7 +60,7 @@ namespace Simulation {
 //    lossSignalProcess  <Basic::Number>        ! Signal Processing loss        (no units; def: 1.0)
 //                       <Basic::Decibel>       ! Signal Processing loss        (dB)
 //
-//    disableEmissions   <Number)               ! Disable sending emisison packets flag (default: false)
+//    disableEmissions   <Number)               ! Disable sending emission packets flag (default: false)
 //
 //------------------------------------------------------------------------------
 class RfSystem : public System  

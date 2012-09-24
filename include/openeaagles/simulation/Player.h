@@ -103,7 +103,7 @@ class Track;
 //
 //
 //    ! ---
-//    ! Player's initial euler angles
+//    ! Player's initial Euler angles
 //    ! ---
 //    initRoll       <Basic::Angle>       ! Initial roll angle (default: 0)
 //    initRoll       <Basic::Number>      ! Initial roll angle (radians)
@@ -114,7 +114,7 @@ class Track;
 //    initHeading    <Basic::Angle>       ! Initial heading angle (default: 0)
 //    initHeading    <Basic::Number>      ! Initial heading angle (radians)
 //
-//    initEuler      <Basic::List>        ! Initial euler Angles: radians [ roll pitch yaw ]
+//    initEuler      <Basic::List>        ! Initial Euler Angles: radians [ roll pitch yaw ]
 //
 //    ! ---
 //    ! Player's initial velocity
@@ -153,13 +153,13 @@ class Track;
 //
 //    ! ---
 //    ! Angular test rates:
-//    !     If non-zero the euler angles are updated using the body angular rates.
+//    !     If non-zero the Euler angles are updated using the body angular rates.
 //    !     For use only without a dynamics model.
 //    ! ---
 //    testRollRate   <Basic::Angle>       ! Test roll rate (body) (units per second) (default: 0)
 //    testPitchRate  <Basic::Angle>       ! Test pitch rate (body) (units per second) (default: 0)
 //    testYawRate    <Basic::Angle>       ! Test heading rate (body) (units per second) (default: 0)
-//    testBodyAxis   <Basic::Boolean>     ! Test rates are in the body axis else they're euler rates (default: false)
+//    testBodyAxis   <Basic::Boolean>     ! Test rates are in the body axis else they're Euler rates (default: false)
 //
 //
 // --------------------
@@ -203,7 +203,7 @@ class Track;
 //
 //    e) Body coordinates: nose(x+), right wing(y+), and down(z+);  the orientation
 //       of the player's body coordinates to the player's local tangent plane is
-//       defined by the euler angles (see below).  Use Player::getRotMat() to transform
+//       defined by the Euler angles (see below).  Use Player::getRotMat() to transform
 //       vectors between the player's inertial coordinates and body coordinates.
 //
 //
@@ -237,7 +237,7 @@ class Track;
 //    Inertial (player's local tangent plane) <==> body
 //
 //    a) Represented in three formats
-//       1) As euler angles; Phi (roll), theta (pitch) and psi (yaw; true heading)
+//       1) As Euler angles; Phi (roll), theta (pitch) and psi (yaw; true heading)
 //       2) As a rotational matrix
 //       3) As a quaternion
 //
@@ -277,14 +277,14 @@ class Track;
 //
 //       The slots 'testRollRate', 'testPitchRate' and 'testYawRate' are used to
 //       define test angular rates.  If the slot 'testBodyAxis' is true then
-//       these are body rates otherwise they're euler rates.
+//       these are body rates otherwise they're Euler rates.
 //
-//       When any one of these test rates are non-zero then the player's euler
+//       When any one of these test rates are non-zero then the player's Euler
 //       angles are updated by this Player class.  Since the player's dynamics
-//       model is normally responsible for updating the euler angles, these
+//       model is normally responsible for updating the Euler angles, these
 //       test rates should be used only on player's without a dynamics model
 //       (e.g., a player that is part of a test-rig).  With each update of the
-//       euler angles, the player's total velocity along the body X axis is
+//       Euler angles, the player's total velocity along the body X axis is
 //       reset to 'initVelocity'.
 //
 //
@@ -294,7 +294,7 @@ class Track;
 //    the player's position unless the position is frozen or is slaved to the
 //    dynamics model (i.e., the dynamics model is computing the position).
 //    The positionUpdate() functions is also responsible for updating the
-//    euler angles if the 'angular test rates' are not zero.
+//    Euler angles if the 'angular test rates' are not zero.
 //
 //    The position is updated using either the player's world coordinates, geodetic
 //    coordinates or gaming area position vector.  Which coordinate system used
@@ -411,7 +411,7 @@ public:
       CS_WORLD    // World (ECEF) coordinates
    };
 
-   enum { IROLL, IPITCH, IYAW };  //euler angles
+   enum { IROLL, IPITCH, IYAW };  //Euler angles
    enum { INORTH, IEAST, IDOWN }; //position vector
 
 public:
@@ -451,23 +451,23 @@ public:
    bool isNotMode(const Mode tst) const;           // True if player is not currently this mode
    bool isDead() const;                            // True if player's mode is dead (Killed, Crashed, Detonated, etc....)
 
-   double getRoll() const;                         // Roll euler angle (radians) by default
-   double getRollR() const;                        // Roll euler angle (radians)
-   double getRollD() const;                        // Roll euler angle (degrees)
-   double getSinRoll() const;                      // Sin of the euler roll angle
-   double getCosRoll() const;                      // Cos of the  euler roll angle
+   double getRoll() const;                         // Roll Euler angle (radians) by default
+   double getRollR() const;                        // Roll Euler angle (radians)
+   double getRollD() const;                        // Roll Euler angle (degrees)
+   double getSinRoll() const;                      // Sin of the Euler roll angle
+   double getCosRoll() const;                      // Cos of the  Euler roll angle
 
-   double getPitch() const;                        // Pitch euler angle (radians) by default
-   double getPitchR() const;                       // Pitch euler angle (radians)
-   double getPitchD() const;                       // Pitch euler angle (degrees)
-   double getSinPitch() const;                     // Sin of the pitch euler angle
-   double getCosPitch() const;                     // Cos of the  pitch euler angle
+   double getPitch() const;                        // Pitch Euler angle (radians) by default
+   double getPitchR() const;                       // Pitch Euler angle (radians)
+   double getPitchD() const;                       // Pitch Euler angle (degrees)
+   double getSinPitch() const;                     // Sin of the pitch Euler angle
+   double getCosPitch() const;                     // Cos of the  pitch Euler angle
 
-   double getHeading() const;                      // Yaw euler angle (radians) by default
-   double getHeadingR() const;                     // Yaw euler angle (radians)
-   double getHeadingD() const;                     // Yaw euler angle (degrees)
-   double getSinHeading() const;                   // Sin of the yaw euler angle
-   double getCosHeading() const;                   // Cos of the  yaw euler angle
+   double getHeading() const;                      // Yaw Euler angle (radians) by default
+   double getHeadingR() const;                     // Yaw Euler angle (radians)
+   double getHeadingD() const;                     // Yaw Euler angle (degrees)
+   double getSinHeading() const;                   // Sin of the yaw Euler angle
+   double getCosHeading() const;                   // Cos of the  yaw Euler angle
 
    const osg::Vec3d& getEulerAngles() const;       // Euler angles (radians); geodetic (body/NED)
    const osg::Quat& getQuaternions() const;        // Rotational Quaternions
@@ -486,7 +486,7 @@ public:
                                                    //       Vw  = Vb * M
                                                    //    Where: 'Vb' is a body vector; 'Vw' is a world (ECEF) vector
 
-   const osg::Vec3d& getGeocEulerAngles() const;   // Geocentric (body/ECEF) euler angles
+   const osg::Vec3d& getGeocEulerAngles() const;   // Geocentric (body/ECEF) Euler angles
 
    const osg::Vec3d& getAngularVelocities() const;       // Body angular rates (radians/second)
    const osg::Vec3d& getGeocAngularVelocities() const;   // Geocentric angular rates (radians/second)
@@ -582,7 +582,7 @@ public:
 
    double getInitAltitude() const;                 // Initial altitude HAE (meters)
 
-   const osg::Vec3d& getInitAngles() const;        // Initial euler angles (radians)
+   const osg::Vec3d& getInitAngles() const;        // Initial Euler angles (radians)
 
    // ---
    // Control parameters
@@ -796,19 +796,19 @@ public:
    // ---
    // Set the player's orientation angles (roll, pitch and yaw)
    //
-   // 1) Setting the orientation in any one of the formats (i.e., euler angles,
-   //    geocentric euler angles, rotational matrix or quaternions) will set the
+   // 1) Setting the orientation in any one of the formats (i.e., Euler angles,
+   //    geocentric Euler angles, rotational matrix or quaternions) will set the
    //    orientation in all other formats.
    //
    // 2) Set the orientation after setting the player's position to ensure
    //    the world transformation matrix is correct.
    // ---
 
-   // Sets euler angles (body/NED): (radians) [ roll pitch yaw ]
+   // Sets Euler angles (body/NED): (radians) [ roll pitch yaw ]
    virtual bool setEulerAngles(const double r, const double p, const double y);
    virtual bool setEulerAngles(const osg::Vec3d& newAngles);
 
-   // Sets geocentric (body/ECEF) euler angles: (radians) [ roll pitch yaw ]
+   // Sets geocentric (body/ECEF) Euler angles: (radians) [ roll pitch yaw ]
    virtual bool setGeocEulerAngles(const osg::Vec3d& newAngles);
 
    // Sets the rotational matrix
@@ -1088,12 +1088,12 @@ private:
    LCreal      gndSpd;           // Ground Speed                     (meters/second)
    LCreal      gndTrk;           // Ground Track                     (radians)
 
-   osg::Vec3d  angles;           // Geodetic (body/NED) euler angles (radians) [ roll pitch yaw ] AKA [ phi theta psi ]
+   osg::Vec3d  angles;           // Geodetic (body/NED) Euler angles (radians) [ roll pitch yaw ] AKA [ phi theta psi ]
    osg::Vec2d  scPhi;            // Sin/Cos of roll (phi)
    osg::Vec2d  scTheta;          // Sin/Cos of pitch (theta)
    osg::Vec2d  scPsi;            // Sin/Cos of yaw (psi)
 
-   osg::Vec3d  anglesW;          // World (body/ECEF) euler angles (radians)
+   osg::Vec3d  anglesW;          // World (body/ECEF) Euler angles (radians)
    osg::Vec2d  scPhiW;           // Sin/Cos of world phi
    osg::Vec2d  scThetaW;         // Sin/Cos of world theta
    osg::Vec2d  scPsiW;           // Sin/Cos of world psi
@@ -1154,12 +1154,12 @@ private:
    double      initLon;          // Initial longitude (degrees)
    bool        initLatLonFlg;    // Initial lat/lon valid
 
-   double      initAlt;          // Initial altitde (HAE)
+   double      initAlt;          // Initial altitude (HAE)
    LCreal      initVp;           // Initial Total Velocity
    Mode        initMode;         // Initial mode
    osg::Vec3d  initAngles;       // Initial (Euler) angles (radians)
-   osg::Vec3d  testAngRates;     // Test anguler rates (radians/sec)
-   bool        testBodyAxis;     // Test anguler rates are in the body axis else they're euler rates
+   osg::Vec3d  testAngRates;     // Test angular rates (radians/sec)
+   bool        testBodyAxis;     // Test angular rates are in the body axis else they're Euler rates
 
    // ---
    // Data collection timer

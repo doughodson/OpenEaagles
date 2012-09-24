@@ -69,7 +69,7 @@ namespace Simulation {
 //
 //       bool resetScan()
 //          Resets the current scan mode.
-//          Return 'true' if successfull
+//          Return 'true' if successful
 //
 //       getScanVolume(double* width, double* height)
 //       double getScanWidth()
@@ -117,7 +117,7 @@ namespace Simulation {
 //      bool setSearchVolume(double width, double height, int reqBars)
 //          Sets a search volume and starts a horizontal bar scan.
 //          The scan width, height and number of bars are set by this function,
-//          so don't set the scan widht, height and bar functions.
+//          so don't set the scan width, height and bar functions.
 //          If 'reqBars' is zero or not provided, then the number of bars is
 //          computed based on default parameters.
 //

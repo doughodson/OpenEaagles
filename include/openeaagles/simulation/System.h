@@ -32,7 +32,7 @@ class Simulation;
 // Notes:
 //
 //    1) Time critical phase Callbacks -- The following virtual member functions
-//       are to be overriden by derived systems, as needed.  Each function is
+//       are to be overridden by derived systems, as needed.  Each function is
 //       called one per frame during the corresponding phase.
 //
 //      virtual void dynamics(const LCreal dt);    // Phase 0
@@ -62,7 +62,7 @@ class System : public Basic::Component
    DECLARE_SUBCLASS(System,Basic::Component)
 
 public:
-   // Power switch enumerations (can be expaned by derived classes)
+   // Power switch enumerations (can be expanded by derived classes)
    enum {
       PWR_OFF,
       PWR_STBY,

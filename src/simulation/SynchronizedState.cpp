@@ -86,7 +86,7 @@ bool SynchronizedState::setGeocAcceleration(const osg::Vec3& newAccelEcef)
 }
 
 //------------------------------------------------------------------------------
-// Geocentric euler angles (radians)
+// Geocentric Euler angles (radians)
 //------------------------------------------------------------------------------
 bool SynchronizedState::setGeocEulerAngles(const osg::Vec3d& newAngles)
 {

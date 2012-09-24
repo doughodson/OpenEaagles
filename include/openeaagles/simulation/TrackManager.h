@@ -85,15 +85,15 @@ protected:
 
    unsigned int getNewTrackID()                             { return nextTrkId++; }
 
-   virtual void processTrackList(const LCreal dt) =0;                  // Derived class unique
+   virtual void processTrackList(const LCreal dt) =0;                   // Derived class unique
 
-   virtual Emission* getReport(LCreal* const sn);                      // Get the next 'new' report from the queue
-   virtual bool setSlotMaxTracks(const Basic::Number* const num);    // Sets the maximum numberof track files
-   virtual bool setSlotMaxTrackAge(const Basic::Number* const num);  // Sets the maximum age of tracks
-   virtual bool setSlotFirstTrackId(const Basic::Number* const num); // Sets the first (starting) track id number
-   virtual bool setSlotAlpha(const Basic::Number* const num);        // Sets alpha
-   virtual bool setSlotBeta(const Basic::Number* const num);         // Sets beta
-   virtual bool setSlotGamma(const Basic::Number* const num);        // Sets gamma
+   virtual Emission* getReport(LCreal* const sn);                       // Get the next 'new' report from the queue
+   virtual bool setSlotMaxTracks(const Basic::Number* const num);       // Sets the maximum number of track files
+   virtual bool setSlotMaxTrackAge(const Basic::Number* const num);     // Sets the maximum age of tracks
+   virtual bool setSlotFirstTrackId(const Basic::Number* const num);    // Sets the first (starting) track id number
+   virtual bool setSlotAlpha(const Basic::Number* const num);           // Sets alpha
+   virtual bool setSlotBeta(const Basic::Number* const num);            // Sets beta
+   virtual bool setSlotGamma(const Basic::Number* const num);           // Sets gamma
    virtual bool setSlotLogTrackUpdates(const Basic::Number* const num); // Sets logTrackUpdates
 
    // Track List

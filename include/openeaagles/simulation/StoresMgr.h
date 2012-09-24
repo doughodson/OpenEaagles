@@ -30,7 +30,7 @@ class Weapon;
 //
 // Description: Base class for stores management systems.  Manages the player's
 //              external stores, to include both weapons and external equipment.
-//              A player may be airborne, landbased, waterbased or spacebased.
+//              A player may be airborne, land-based, water-based or space-based.
 //
 // Form name: BaseStoresMgr
 //

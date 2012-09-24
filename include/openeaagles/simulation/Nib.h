@@ -95,13 +95,13 @@ public:
    // DR's position vector @ T0 (meters) (ECEF)
    const osg::Vec3d& getDrPosition() const            { return drP0; }
 
-   // DR's velocity vector @ T0 (m/sec)  (ECEF or Body based on the DR algoritm)
+   // DR's velocity vector @ T0 (m/sec)  (ECEF or Body based on the DR algorithm)
    const osg::Vec3d& getDrVelocity() const            { return drV0; }
 
-   // DR's acceleration vector @ T0 ((m/sec)/sec) (ECEF or Body based on the DR algoritm)
+   // DR's acceleration vector @ T0 ((m/sec)/sec) (ECEF or Body based on the DR algorithm)
    const osg::Vec3d& getDrAcceleration() const        { return drA0; }
 
-   // DR's euler angles @ T0 (rad) [ phi theta psi ] (Body/ECEF)
+   // DR's Euler angles @ T0 (rad) [ phi theta psi ] (Body/ECEF)
    const osg::Vec3d& getDrEulerAngles() const         { return drRPY0; }
 
    // DR's angular rates @ T0 (rad/sec)  [ phi theta psi ] (Body/ECEF)
