@@ -107,7 +107,7 @@ const LCreal INIT_LONGITUDE_VALUE    = 0.0f;
 // Max/min functions
 // ---
 
-// maximim value of v1 or v2
+// maximum value of v1 or v2
 inline LCreal lcMax(const LCreal v1, const LCreal v2)
 {
     return (v1 >= v2) ? v1 : v2;
@@ -420,7 +420,7 @@ void lcAcosArray(const LCreal* const anglesRad, LCreal* const acosines, const in
 void acosArray(const double* const anglesRad, double* const acosines, const unsigned int n);
 void acosArray(const float*  const anglesRad, float*  const acosines, const unsigned int n);
 
-// Computes the arc-tangants for two, 'n' element arrays (yValues and xValues)
+// Computes the arc-tangents for two, 'n' element arrays (yValues and xValues)
 void lcAtan2Array(const LCreal* const yValues, const LCreal* const xValues, LCreal* const atans, const int n);
 void atan2Array(const double* const yValues, const double* const xValues, double* const atans, const unsigned int n);
 void atan2Array(const float*  const yValues, const float*  const xValues, float*  const atans, const unsigned int n);
@@ -435,7 +435,7 @@ void lcPow10Array(const LCreal* const src, LCreal* const dst, const int n);
 void pow10Array(const double* const src, double* const dst, const unsigned int n);
 void pow10Array(const float*  const src, float*  const dst, const unsigned int n);
 
-// Mutiply an array of reals with a constant
+// Multiply an array of reals with a constant
 void lcMultArrayConst(const LCreal* const src, const LCreal c, LCreal* const dst, const int n);
 void multArrayConst(const double* const src, const double c, double* const dst, const unsigned int n);
 void multArrayConst(const float* const src, const float c, LCreal* const dst, const unsigned int n);

@@ -175,9 +175,9 @@ inline int operator*(const Integer& n1, const int n2)
 
 
 //------------------------------------------------------------------------------
-// Divison operators:  / and /=
+// Division operators:  / and /=
 //
-// Divison by zero returns a zero, and sends and error message.
+// Division by zero returns a zero, and sends and error message.
 //------------------------------------------------------------------------------
 inline void Integer::operator/=(const Integer& n)
 {

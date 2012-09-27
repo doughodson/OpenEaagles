@@ -341,7 +341,7 @@ public:
    // ---
    // Sends the 'event' token with an optional argument 'obj' to this component.
    // Returns true if the 'event' has received and processed this component.
-   // Typically implmented using the event macros (see above).
+   // Typically implemented using the event macros (see above).
    // ---
    virtual bool event(const int event, Object* const obj = 0);
 
@@ -409,7 +409,7 @@ protected:
 
    virtual bool setSelectionName(const Object* const s); // Name (or number) of component to select
    virtual bool select(const String* const name);        // Select component by name
-   virtual bool select(const Number* const num);         // Select componet by number
+   virtual bool select(const Number* const num);         // Select component by number
 
    // processComponents() -- process our new components list; 
    //   -- Add the components from the input list, 'list', to a new list

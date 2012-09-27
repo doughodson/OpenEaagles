@@ -337,13 +337,13 @@ public:
    //
    //------------------------------------------------------------------------------
    static bool vll2bd(
-         const double slat,         // IN: Starting (reference) latitude (degs)
-         const double slon,         // IN: Starting (reference) longitude (degs)
-         const double dlat,         // IN: Destination latitude (degs)
-         const double dlon,         // IN: Destination longitude (degs)
-         double* const brg,         // OUT: True initial bearing (degs)
-         double* const dist,           // OUT: Geodesic distance (nm)
-         double* const brg2=0,      // OUT: Optional: true final bearing (degs)
+         const double slat,           // IN: Starting (reference) latitude (degs)
+         const double slon,           // IN: Starting (reference) longitude (degs)
+         const double dlat,           // IN: Destination latitude (degs)
+         const double dlon,           // IN: Destination longitude (degs)
+         double* const brg,           // OUT: True initial bearing (degs)
+         double* const dist,          // OUT: Geodesic distance (nm)
+         double* const brg2=0,        // OUT: Optional: true final bearing (degs)
          const EarthModel* const em=0 // IN: Pointer to an optional earth model (default: WGS-84)
       );
 
@@ -380,7 +380,7 @@ public:
 
    //------------------------------------------------------------------------------
    // Compute Rotational transformation Matrix (computeRotationalMatrix),
-   // with optional sin/cos values) from euler angles
+   // with optional sin/cos values) from Euler angles
    //
    //    Reference system <==> Rotating system
    //
@@ -628,26 +628,26 @@ public:
    // Convert Geodetic (LLA coordinates) to ECEF (XYZ coordinates)
    //----------------------------------------------------------
    static bool convertGeod2Ecef(
-         const double lat,    // IN: Geodetic latitude  (degrees)
-         const double lon,    // IN: Geodetic longitude (degrees)
-         const double alt,    // IN: Geodetic altitude  (meters)
-         double* const pX,    // OUT: ECEF X component   (meters)   
-         double* const pY,    // OUT: ECEF Y component   (meters)
-         double* const pZ,       // OUT: ECEF Z component   (meters)
+         const double lat,            // IN: Geodetic latitude  (degrees)
+         const double lon,            // IN: Geodetic longitude (degrees)
+         const double alt,            // IN: Geodetic altitude  (meters)
+         double* const pX,            // OUT: ECEF X component   (meters)   
+         double* const pY,            // OUT: ECEF Y component   (meters)
+         double* const pZ,            // OUT: ECEF Z component   (meters)
          const EarthModel* const em=0 // IN: Pointer to an optional earth model (default: WGS-84)
       );
 
    // Using osg::Vec3d vectors
    static bool convertGeod2Ecef(
-         const osg::Vec3d& lla,  // IN: Geodetic [ ILAT ILON IALT ]
-         osg::Vec3d* const ecef,  // OUT: ECEF [ IX IY IZ ]
+         const osg::Vec3d& lla,       // IN: Geodetic [ ILAT ILON IALT ]
+         osg::Vec3d* const ecef,      // OUT: ECEF [ IX IY IZ ]
          const EarthModel* const em=0 // IN: Pointer to an optional earth model (default: WGS-84)
       );
 
    // Using array vectors
    static bool convertGeod2Ecef(
-         const double lla[3],    // IN: Geodetic [ ILAT ILON IALT ]
-         double ecef[3],         // OUT: ECEF [ IX IY IZ ]
+         const double lla[3],         // IN: Geodetic [ ILAT ILON IALT ]
+         double ecef[3],              // OUT: ECEF [ IX IY IZ ]
          const EarthModel* const em=0 // IN: Pointer to an optional earth model (default: WGS-84)
       );
 
@@ -658,7 +658,7 @@ public:
 //==============================================================================
 
    //----------------------------------------------------------
-   // Convert geodetic euler angles (body/NED) to geocentric euler angles (body/ECEF)
+   // Convert geodetic Euler angles (body/NED) to geocentric Euler angles (body/ECEF)
    //----------------------------------------------------------
 
    static bool convertGeodAngles2EcefAngles(

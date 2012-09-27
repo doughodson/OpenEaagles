@@ -43,7 +43,7 @@ public:
 
 
    //--------------------------------------------------------------------------
-   // Comparision Functions
+   // Comparison Functions
    //--------------------------------------------------------------------------
    bool operator==(const Complex& z) const;
    bool operator!=(const Complex& z) const;

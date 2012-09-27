@@ -106,7 +106,7 @@ protected:
 //
 //     MonitorMetrics(const Table1* redLuminance, const Table1* greenLuminance, const Table1* blueLuminance, 
 //					    const osg::Matrix& phosphorCoordinates, const osg::Vec3& whiteRGB, const osg::Vec3& whiteCIE);
-//         Special constuctor to initialize the object with the given values.
+//         Special constructor to initialize the object with the given values.
 //
 //     cie2rgb(osg::Vec4& rgba, const osg::Vec3& cie)
 //         Convert a CIE color into an RGB value for this monitor.
@@ -133,7 +133,7 @@ private:
     // transform matrix from CIE to RGB for this monitor
     osg::Matrix transform;
 
-    // RGB luminances vs RGB level on this monitor
+    // RGB luminance vs RGB level on this monitor
     SPtr<const Table1> redLuminance;
     SPtr<const Table1> greenLuminance;
     SPtr<const Table1> blueLuminance;

@@ -157,7 +157,7 @@ inline LCreal operator-(const Float& n1, const LCreal n2)
 
 
 //------------------------------------------------------------------------------
-// Multiplicaion operators:  * and *=
+// Multiplication operators:  * and *=
 //------------------------------------------------------------------------------
 inline void Float::operator*=(const Float& n)
 {

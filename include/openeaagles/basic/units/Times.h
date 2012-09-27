@@ -65,7 +65,7 @@ namespace Basic {
 // ----------------------------------------------------------------------------
 // Since all units are converted to or from KiloWatts, only those constants
 // will be defined.
-//////////////////////////////////////////////////////
+// ----------------------------------------------------------------------------
 
 
 //------------------------------------------------------------------------------
@@ -103,7 +103,7 @@ public:
     static LCreal DaysToHours(const LCreal v)            { return (v * D2S) * S2H; }
     static LCreal HoursToDays(const LCreal v)            { return (v * H2S) * S2D; }
 
-    // Convert integer hours, minutes and seconds to time in secounds
+    // Convert integer hours, minutes and seconds to time in seconds
     static LCreal putHHMMSS(const int hh, const int mm, const int ss);
 
     // Convert time in seconds to integer hours, minutes and seconds
@@ -156,7 +156,7 @@ inline void Time::getHHMMSS(const LCreal sec, int* const hh, int* const mm, LCre
     *ss  = rem;
 }
 
-// putHHMMSS -- convert integer hours, minutes and seconds to time in secounds
+// putHHMMSS -- convert integer hours, minutes and seconds to time in seconds
 inline LCreal Time::putHHMMSS(const int hh, const int mm, const int ss)
 {
     return LCreal((3600.0f * hh) + (60.0f * mm) + ss);

@@ -182,7 +182,7 @@ public:
 
    //-----------------------------------------------------------------
    // drawRayleigh - Rayleigh Probability Distribution Function
-   // generates double floating point numbers in the half openinterval 
+   // generates double floating point numbers in the half open interval 
    // [0, infinity)
    // mean = alpha*sqrt(PI/2); variance = (alpha^2)*(2 - PI/2)
    //-----------------------------------------------------------------

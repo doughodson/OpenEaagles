@@ -100,7 +100,7 @@ public:
    // Set our socket (or the optional 's' socket) for unblocked (no wait) I/O
    virtual bool setNoWait(const LcSocket s = NET_INVALID_SOCKET);
 
-   // Send 'size' bytes from packet; returns true if successfull
+   // Send 'size' bytes from packet; returns true if successful
    virtual bool sendData(const char* const packet, const int size);
 
    // Receives a maximum of 'maxSize' bytes into 'packet.  Returns
