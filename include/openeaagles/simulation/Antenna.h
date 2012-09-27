@@ -87,7 +87,7 @@ public:
       return (gain * lambda * lambda)/(4.0 * PI);
    }
 
-   // Recycle emissions flag (reuse old emission structions instead of creating new ones)
+   // Recycle emissions flag (reuse old emission structure instead of creating new ones)
    bool isEmissionRecycleEnabled() const       { return recycle; }
 
    // Member functions

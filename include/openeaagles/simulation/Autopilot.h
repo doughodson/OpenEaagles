@@ -20,7 +20,7 @@ namespace Simulation {
 //    navMode                    <Number>    ! Nav (route follow) mode flag (default: true)
 //
 //    holdAltitude               <Distance>  ! Hold altitude (Distance) [default: player's altitude]
-//    altitudeHoldMode           <Number>    ! Altitude holde mode flag [ default: true ]
+//    altitudeHoldMode           <Number>    ! Altitude hold mode flag [ default: true ]
 //
 //    holdVelocityKts            <Number>    ! Hold velocity (Kts) (Number) [default: player's velocity]
 //    velocityHoldMode           <Number>    ! Velocity hold mode flag [ default: true ]
@@ -174,7 +174,7 @@ public:
 protected:
    // Slot functions
    bool setSlotNavMode(const Basic::Number* const msg);                       // Nav (route follow) mode flag
-   bool setSlotHoldAltitude(const Basic::Distance* const msg);                // Hold altiude
+   bool setSlotHoldAltitude(const Basic::Distance* const msg);                // Hold altitude
    bool setSlotAltitudeHoldMode(const Basic::Number* const msg);              // Altitude hold mode flag
    bool setSlotHoldVelocityKts(const Basic::Number* const msg);               // Hold velocity (kts)
    bool setSlotVelocityHoldMode(const Basic::Number* const msg);              // Velocity hold mode flag
@@ -235,9 +235,9 @@ private:
    bool     loiterModeOn;     // Loiter mode flag
 
    // Loiter mode data
-   double   loiterAnchorLat;  // Loiter orbit pattern anchor point lattiude  (degs)
+   double   loiterAnchorLat;  // Loiter orbit pattern anchor point latitude  (degs)
    double   loiterAnchorLon;  // Loiter orbit pattern anchor point longitude (degs)
-   double   loiterMirrorLat;  // Loiter orbit pattern mirror point lattidue  (degs)
+   double   loiterMirrorLat;  // Loiter orbit pattern mirror point latitude  (degs)
    double   loiterMirrorLon;  // Loiter orbit pattern mirror point longitude (degs)
    unsigned int loiterState;  // Loiter state machine
    double   loiterLength;     // Loiter pattern length (nm)
@@ -256,4 +256,3 @@ private:
 } // End Eaagles namespace
 
 #endif
-
