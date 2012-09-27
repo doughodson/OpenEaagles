@@ -253,12 +253,12 @@ protected:
 //
 //    HH:MM:SS      // Hours, minutes and seconds
 //    0H:MM:SS.S    // Hours (w/leading zero), minutes and seconds decimal
-//   +HH:MM     // Hours (w/sign) and minutes
+//   +HH:MM         // Hours (w/sign) and minutes
 //    HHMM.M        // Hours (w/sign) and minutes decimal
 //   +0HMM:SS.S     // Hours (w/signed and leading zero), minutes
-//          //   and seconds decimal
+//                  //   and seconds decimal
 //    MMSS.S        // Minutes and seconds decimal
-//    SSSS      // Seconds
+//    SSSS          // Seconds
 //
 // Notes: The seconds and third numbers always have leading zeros.  The first
 // number requires a zero, '0', to have leading zeros.

@@ -232,13 +232,13 @@ public:
    Basic::Degrees* getHdgAngleObj() const;   // Basic::Angle object that holds the heading value
    Graphic* getHdgGraphics() const;          // Graphic object named 'hdg' to handle heading rotation
 
-   void setVisible(const bool x);            // set our visiiblity       
+   void setVisible(const bool x);            // set our visibility       
    void setLatLonFlag(const bool flg);       // Sets the lat/lon flag (if true we're using lat/lon, else XY) 
    void setACCoordFlag(const bool flg);      // Sets the aircraft nose/wing flag (when using this instead of earth coordinates from aircraft)
    void setScreenFlag(const bool flg);       // set the manual screen position override flag
    void setType(const int t);                // Sets the user defined type (must match templates)
    void setId(const char* const v);          // Sets the ID string
-   void setValue(Basic::Object* const v);    // Sets the user defined value, which is set to the grahical component
+   void setValue(Basic::Object* const v);    // Sets the user defined value, which is set to the graphical component
 
    void setXPosition(const double v);        // Sets the X position ( latitude or NM north/south )
    void setYPosition(const double v);        // Sets the Y position { longitude or NM east/west )

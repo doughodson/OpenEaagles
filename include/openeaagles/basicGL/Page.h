@@ -99,7 +99,7 @@ public:
    Page();
 
    const char* subpageName() const              { return cpName; }
-   Page* subpage() const                      { return cp; }
+   Page* subpage() const                        { return cp; }
 
    bool isPostDrawSubpage() const               { return postDraw1; }
    
@@ -159,19 +159,19 @@ protected:
 private:
    bool processSubpages();
 
-   Page*       cp;                   // Current Subpage
-   Basic::Identifier cpName;              // Current Subpage Name
-   Page*       np;                   // New subpage (requesting a page change)
+   Page*       cp;                     // Current Subpage
+   Basic::Identifier cpName;           // Current Subpage Name
+   Page*       np;                     // New subpage (requesting a page change)
 
-   Basic::PairStream* subpages;      // Subpages
-   Basic::PairStream* pageChgEvents; // Page change events
+   Basic::PairStream* subpages;        // Subpages
+   Basic::PairStream* pageChgEvents;   // Page change events
 
    bool  postDraw1;                    // Post draw component (child) graphic
    bool  focusSlavedToSubpage;         // Input event focus should follow subpage changes
 
    // Passed by calling page
-   SPtr<Basic::Object> pageArg;      // Paging argument
-   const Page* caller;               // Calling page
+   SPtr<Basic::Object> pageArg;        // Paging argument
+   const Page* caller;                 // Calling page
 
    // Subpage Stack
    static const int SUBPAGE_STACK_SIZE = 50;

@@ -182,7 +182,7 @@ private:
    double range;               // range scale of the system (NM)
    bool northUp;               // flag to determine north up
 
-   // (we keep these seperate because we need both of them)
+   // (we keep these separate because we need both of them)
    double outerRadius;         // radius of the outer circle's ring (screen units)
    double outerRadiusDC;       // radius if we are de-centered (screen units)
 

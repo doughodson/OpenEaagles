@@ -1070,7 +1070,7 @@ struct ActionRequestPDU_R {
       int pcount = sizeof(PDUHeader)
          + sizeof(originatingID)
          + sizeof(receivingID)
-         + 1 + 3 //reliabilityservice and padding
+         + 1 + 3 //reliabilityService and padding
          + 16;   //requestid, actionid, numfixedrecords, numvariablerecords
       return &p[pcount];
    };
@@ -1080,7 +1080,7 @@ struct ActionRequestPDU_R {
       int pcount = sizeof(PDUHeader)
          + sizeof(originatingID)
          + sizeof(receivingID)
-         + 1 + 3 //reliabilityservice and padding
+         + 1 + 3 //reliabilityService and padding
          + 16;   //requestid, actionid, numfixedrecords, numvariablerecords
       return &p[pcount];
    };

@@ -399,7 +399,7 @@ private:
    // Table of pointers to emission PDU handlers; EmissionPduHandler objects
    const EmissionPduHandler* emissionHandlers[MAX_EMISSION_HANDLERS];
 
-   // Number of iemission PDU handlers in the table, 'emissionHandlers'
+   // Number of emission PDU handlers in the table, 'emissionHandlers'
    unsigned int   nEmissionHandlers;
 };
 

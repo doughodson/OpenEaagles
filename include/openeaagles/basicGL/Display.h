@@ -282,14 +282,14 @@ public:
    // Sets the current font) based on the font mode flags.
    void selectFont(const bool reversed, const bool underlined, Font* newFont = 0);
 
-   Font* getCurrentFont();                      // Returns a pont to the current font
+   Font* getCurrentFont();                      // Returns a pointer to the current font
    void setFont(Font* newFont);                 // Sets the current font.
 
    const Basic::Color* getNormColor() const;          // Returns the normal text color
    void setNormColor(const Basic::Color* const nc);   // Sets the normal text color
 
    const Basic::Color* getHighlightColor() const;        // Returns the highlighted text color
-   void setHighlightColor(const Basic::Color* const nc); // Sets the highlighted text colr
+   void setHighlightColor(const Basic::Color* const nc); // Sets the highlighted text color
 
    void drawLeftBracket(const int ln, const int cp);  // Draws the left bracket at ln, cp
    void drawRightBracket(const int ln, const int cp); // Draws the right bracket at ln, cp

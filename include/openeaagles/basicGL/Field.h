@@ -287,9 +287,9 @@ protected:
    virtual bool setSlotFont(const Basic::String* const font);
    virtual bool setSlotStartCharPos(const Basic::Number* const x);
 
-   Basic::String origStr;      // Orig text saved by setText
-   Basic::String inputExample; // Input Templete String
-   Basic::String str;          // Text stored in field
+   Basic::String origStr;        // Original text saved by setText
+   Basic::String inputExample;   // Input Template String
+   Basic::String str;            // Text stored in field
    Mode     mode;                // Current mode
    int      icp;                 // Input character pointer
    int      inpDspMode;          // Auto switches to this display mode during input mode
@@ -305,9 +305,9 @@ private:
    unsigned int startCP;            // our starting character position that we "write" from
 
    int      dmode;                  // Display mode flags
-   Basic::String::Justify jmode;  // Justification mode
+   Basic::String::Justify jmode;    // Justification mode
    bool     inheritColor;           // Inherit color instead of using a default color
-   Basic::String* fontName;       // name of the font we want our display to use (if overriden)
+   Basic::String* fontName;         // name of the font we want our display to use (if overridden)
 };
 
 } // End BasicGL namespace
