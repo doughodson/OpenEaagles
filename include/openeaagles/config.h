@@ -8,7 +8,7 @@
 #define __Eaagles_Config_H__
 
 // Max number of interval timers (see Timers.h)
-#define EAAGLES_CONFIG_MAX_INTERVAL_TIMERS      40
+#define EAAGLES_CONFIG_MAX_INTERVAL_TIMERS      400
 
 
 //------------------------------------------------------------------------------
