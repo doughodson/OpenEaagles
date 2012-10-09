@@ -1,7 +1,6 @@
 //------------------------------------------------------------------------------
 // Class: Message
 //----------------------------------------------------------------------------------
-
 #ifndef __Eaagles_Simulation_Message_H__
 #define __Eaagles_Simulation_Message_H__
 
@@ -34,7 +33,7 @@ public:
    double getLifeSpan() const;      // length of time in seconds which this message is valid
    AckCodes getAckCode() const;     // the ack code for this message
 
-   //set functions
+   // set functions
    virtual void setSenderName(const Eaagles::Basic::String* const sName);
    virtual void setSenderName(const char* const sName);
    virtual void setTimeStamp(const double ts);

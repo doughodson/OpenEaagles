@@ -32,7 +32,7 @@ EMPTY_SERIALIZER(OctalReadout)
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(TimeReadout,"TimeReadout")
 EMPTY_SERIALIZER(TimeReadout)
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(DirectionReadout,"DirectionReadout")
+IMPLEMENT_SUBCLASS(DirectionReadout,"DirectionReadout")
 EMPTY_SERIALIZER(DirectionReadout)
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(LatitudeReadout,"LatitudeReadout")
@@ -74,6 +74,11 @@ BEGIN_SLOTTABLE(NumericReadout)
     "blankIfZero",      // 11: Display blanks if value is zero
 END_SLOTTABLE(NumericReadout)
 
+// DirectionReadout --
+BEGIN_SLOTTABLE(DirectionReadout)
+    "preConvertSymbols",            //  1: Pre convert the @ symbol to a degree symbol before drawing
+END_SLOTTABLE(DirectionReadout)
+
 
 //------------------------------------------------------------------------------
 //  Map slot table to handles for AsciiText
@@ -103,6 +108,13 @@ BEGIN_SLOT_MAP(NumericReadout)
     ON_SLOT(11,setSlotBlankZero,Basic::Number)
 END_SLOT_MAP()
 
+
+//------------------------------------------------------------------------------
+//  Map slot table to handles for DirectionReadout
+//------------------------------------------------------------------------------
+BEGIN_SLOT_MAP(DirectionReadout)
+    ON_SLOT(1,setSlotPreConvertSymbols, Basic::Number)
+END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
 // Macro event handlers for AsciiText events
@@ -195,6 +207,8 @@ DirectionReadout::DirectionReadout()
    STANDARD_CONSTRUCTOR()
    lcStrcpy(format,FORMAT_LENGTH,"%+07.2f");
    tmode = dd;
+   // default to pre converting the symbols (most font sets have special character slots)
+   preConvertSymbols = true;
 }
 
 LatitudeReadout::LatitudeReadout()
@@ -279,6 +293,7 @@ void DirectionReadout::copyData(const DirectionReadout& org, const bool)
 {
    BaseClass::copyData(org);
    tmode = org.tmode;
+   preConvertSymbols = org.preConvertSymbols;
 }
 
 EMPTY_COPYDATA(LatitudeReadout)
@@ -921,6 +936,14 @@ void DirectionReadout::makeText()
         }
         break;
     }
+    // now convert the symbols if we are supposed so
+    if (preConvertSymbols) {
+       // then turn any '@' characters to degree symbols.
+       size_t len = strlen(cbuf);
+       for (unsigned int i = 0; i < len; i++) {
+          if (cbuf[i] == '@') cbuf[i] = '°';
+       }
+    }
 }
 
 void LatitudeReadout::makeText()
@@ -928,11 +951,13 @@ void LatitudeReadout::makeText()
    // Let our base class do its thing
    BaseClass::makeText();
 
-   // then turn any '@' characters to degree symbols.
-   size_t len = strlen(cbuf);
+   if (preConvertSymbols) {
+      // then turn any '@' characters to degree symbols.
+      size_t len = strlen(cbuf);
 
-   for (unsigned int i = 0; i < len; i++) {
-      if (cbuf[i] == '@') cbuf[i] = '°';
+      for (unsigned int i = 0; i < len; i++) {
+         if (cbuf[i] == '@') cbuf[i] = '°';
+      }
    }
 }
 
@@ -941,11 +966,13 @@ void LongitudeReadout::makeText()
    // Let our base class do its thing
    BaseClass::makeText();
 
-   // then turn any '@' characters to degree symbols.
-   size_t len = strlen(cbuf);
+   if (preConvertSymbols) {
+      // then turn any '@' characters to degree symbols.
+      size_t len = strlen(cbuf);
 
-   for (unsigned int i = 0; i < len; i++) {
-      if (cbuf[i] == '@') cbuf[i] = '°';
+      for (unsigned int i = 0; i < len; i++) {
+         if (cbuf[i] == '@') cbuf[i] = '°';
+      }
    }
 }
 
@@ -1024,6 +1051,10 @@ Basic::Object* NumericReadout::getSlotByIndex(const int si)
     return BaseClass::getSlotByIndex(si);
 }
 
+Basic::Object* DirectionReadout::getSlotByIndex(const int si)
+{
+    return BaseClass::getSlotByIndex(si);
+}
 
 //------------------------------------------------------------------------------
 // serialize() -- print functions
@@ -1411,6 +1442,19 @@ bool NumericReadout::setSlotOverflowChar(const Basic::String* const socobj)
         std::cerr << "NumericReadout::setOverflowChar \"overflowChar\" must be a character!" << std::endl;
           }
         ok = false;
+    }
+    return ok;
+}
+
+//------------------------------------------------------------------------------
+//  setSlotPreConvertSymbols() -- convert @ symbols to degree symbol beforehand
+//------------------------------------------------------------------------------
+bool DirectionReadout::setSlotPreConvertSymbols(const Basic::Number* const x)
+{
+    bool ok = false;
+    if (x != 0) {
+      ok = true;
+      preConvertSymbols = x->getBoolean();
     }
     return ok;
 }

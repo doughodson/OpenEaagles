@@ -285,7 +285,17 @@ protected:
 // Base class: Object > Graphic > Field > NumericReadout > DirectionReadout
 //
 // Form name: DirectionReadout
-//
+// Description:  This class is a default direction readout.
+// Example formats: 
+// 		
+// 	DDD@		// Degrees
+// 	DD@MM		// Degrees, minutes
+// 	DD@MMSS		// Degrees, minutes, seconds		
+// 
+// Notes: The @ symbol by default is left in the format, and the font is reponsible
+// for mapping it to a ° symbol.  This is left this way for font sets that don't have
+// special characters.  However, there is a slot "setSlotPreConvertSymbols" which will manually
+// convert the @ symbols to ° symbols before drawing.  
 //------------------------------------------------------------------------------
 class DirectionReadout : public NumericReadout {
    DECLARE_SUBCLASS(DirectionReadout,NumericReadout)
@@ -296,10 +306,15 @@ public:
    virtual char filterInputEvent(const int event, const int tc);
    virtual double getInputValue() const;
 
-protected:
+protected:		
+   // slot to map @ symbol to degree symbol
+   bool setSlotPreConvertSymbols(const Basic::Number* const x);
+   
+  
    virtual void makeText();
    virtual void reformat(const char* const example);
    DirMode tmode;
+   bool preConvertSymbols;		// convert symbols beforhand
 };
 
 
