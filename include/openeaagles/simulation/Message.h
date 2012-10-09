@@ -1,9 +1,5 @@
 //------------------------------------------------------------------------------
-<<<<<<< HEAD
 // Class: Message
-=======
-// Class:	Message
->>>>>>> gitHubDoug/master
 //----------------------------------------------------------------------------------
 #ifndef __Eaagles_Simulation_Message_H__
 #define __Eaagles_Simulation_Message_H__
