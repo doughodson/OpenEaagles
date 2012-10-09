@@ -2520,7 +2520,7 @@ void CigiClNetwork::endMessage()
 int CigiClNetwork::getOutgoingBufferSize()
 {
    int sendSize = 0;
-   unsigned char* sendBuff = msgOut->GetMsg(sendSize);
+   msgOut->GetMsg(sendSize);
    return sendSize;
 }
 
@@ -2587,7 +2587,6 @@ void CigiClNetwork::mainLoop()
    // Receive and processs CIGI packets from the visual system
    // ---
    if (netInput != 0 && netOutput != 0) {
-      bool ok = true;
       while ( !getOtwCigi()->isShutdown() ) {
 
          msgIn->AdvanceCrntBuffer();
@@ -2600,7 +2599,6 @@ void CigiClNetwork::mainLoop()
          }
          else {
             msgIn->SetCrntMsgSize(0);
-            ok = false; // something was wrong
          }
       }
    }
