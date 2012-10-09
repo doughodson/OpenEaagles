@@ -20,7 +20,7 @@ class Datalink;
 //    class (see Player.h).
 //
 //    For many Radio models, the maximum detection range, which is set using the
-//    'maxDetectRange' slot, along with the frequency are sufficent to determine
+//    'maxDetectRange' slot, along with the frequency are sufficient to determine
 //    if the radio is "tuned and in range".  For more complex models, the radio's
 //    R/F parameters, its antennas and its capability to transmit and received
 //    emission packets are located in the base RfSystem class.
@@ -39,7 +39,7 @@ class Datalink;
 //          This function changes both the channel number and tunes the radio
 //          to the frequency assigned to the channel.  If the channel number
 //          is zero the radio is tuned to the frequency of the current channel
-//          (i.e., switching from manual tunded to channel tuned).
+//          (i.e., switching from manual tuned to channel tuned).
 //
 //          The radio frequency was set manually using the base class function
 //          RfSystem::setFrequency()).

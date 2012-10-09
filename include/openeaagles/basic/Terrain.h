@@ -67,7 +67,7 @@ public:
       ) const = 0;
 
    // Locates an elevation value (meters) for a given reference point and returns
-   // it in 'elev'.  Function returns true if successfull, otherwise 'elev' is unchanged.
+   // it in 'elev'.  Function returns true if successful, otherwise 'elev' is unchanged.
    virtual bool getElevation(
          LCreal* const elev,           // The elevation value (meters)
          const double lat,             // Reference latitude (degs)
@@ -81,7 +81,7 @@ public:
          const double refLon,          // Ref longitude (degs)
          const LCreal refAlt,          // Ref altitude (meters)
          const double tgtLat,          // Target latitude (degs)
-         const double tgtLon,          // Target longitde (degs)
+         const double tgtLon,          // Target longitude (degs)
          const LCreal tgtAlt           // Target altitude (meters)
       ) const;
 
@@ -121,7 +121,7 @@ public:
 
    // Vertical Beam Width and Shadow Check --
    // Sets an array of mask flags; the flags are set true if the point
-   // is masked (in shadow or out of beam) as seen from the refereance
+   // is masked (in shadow or out of beam) as seen from the reference
    // altitude over the first point.  Returns true if successful
    static bool vbwShadowChecker(
          bool* const maskFlags,         // The array of mask flags
@@ -201,7 +201,7 @@ private:
 };
 
 
-} // End Basic namspace
+} // End Basic namespace
 } // End Eaagles namespace
 
 #endif

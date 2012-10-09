@@ -28,7 +28,7 @@ BEGIN_SLOTTABLE(Radio)
    "channels",          // 2: Our channels (list of Basic::Frequency objects)
    "channel",           // 3: Channel number [ 1 .. numChanels ]
    "maxDetectRange",    // 4: maximum detection capability (NM) (def: 120NM)
-   "radioID",           // 5: radioID used by dis
+   "radioID",           // 5: radioID used by DIS
 END_SLOTTABLE(Radio)
 
 //  Map slot table 

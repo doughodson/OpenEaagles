@@ -95,7 +95,7 @@ protected:
     virtual bool bindSocket();      // Bind socket to address
 
 private:
-    char* multicastGroup;           // Multicase Group Name
+    char* multicastGroup;           // Multicast Group Name
     int   ttl;                      // Time-to-live value
     bool  loopback;                 // Loop back flag
     bool  initialized;              // handler has been initialized

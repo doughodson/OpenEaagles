@@ -189,6 +189,8 @@ bool Nib::munitionDetonationMsgFactory(const LCreal)
     pdu.header.length = sizeof(DetonationPDU);
     pdu.header.exerciseIdentifier = disIO->getExerciseID();
     pdu.header.timeStamp = disIO->timeStamp();
+    pdu.header.status = 0;
+    pdu.header.padding = 0;
 
     // ---
     // Set the PDU data with the firing (launcher) player's id
@@ -242,7 +244,7 @@ bool Nib::munitionDetonationMsgFactory(const LCreal)
     pdu.eventID.eventNumber = mPlayer->getReleaseEventID();
 
     // ---
-    // Location & Velociy
+    // Location & Velocity
     // ---
 
     // World Coordinates

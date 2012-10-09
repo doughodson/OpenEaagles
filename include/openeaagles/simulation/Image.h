@@ -46,7 +46,7 @@ public:
     const unsigned char* getOrigImageData() const { return origData; }  // Original Image data
     unsigned int getOrigImageSize() const   { return origSize; }        // Original Image size (bytes)
     bool isOriginalImageDataValid() const   { return (origData != 0); } // True if original image data is valid
-    bool isOrigImageDataCompressed() const  { return origCompressed; }  // True if oriignal image data is compressed
+    bool isOrigImageDataCompressed() const  { return origCompressed; }  // True if original image data is compressed
 
     // Set image functions
     virtual bool testImage(const unsigned w, const unsigned h);

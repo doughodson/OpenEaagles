@@ -1,6 +1,6 @@
 // -------------------------------------------------------------------------------
 // Class: VMAP0RefCoverageDirectory
-// Description: VMAP level 0 coverage directorie(s), which contain
+// Description: VMAP level 0 coverage directory(ies), which contain
 // - fcs (feature class schema)
 // - libref.lft 
 // - libref.tft

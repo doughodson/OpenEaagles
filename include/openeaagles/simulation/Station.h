@@ -83,7 +83,7 @@ namespace Simulation {
 //       the virtual functions createTimeCriticalProcess(), createNetworkProcess()
 //       and createBackgroundProcess(), respectively.  Users can derive from Station Class 
 //       and create their own threads (e.g., to sync any of the threads with an
-//       external interupt).
+//       external interrupt).
 //
 //    2) Thread priorities are from zero (lowest) to one (highest).
 //       (see basic/Thread.h)
@@ -111,7 +111,7 @@ namespace Simulation {
 //       updateData() functions.  However, ...
 //
 //       a: If the background thread rate, 'bgRate', is set greater than zero,
-//          then our updateData() will create a seperate thread to call the
+//          then our updateData() will create a separate thread to call the
 //          simulation and otw models' updateData() functions, otherwise
 //       they're called from our updateData().
 //
@@ -121,7 +121,7 @@ namespace Simulation {
 //          functions, respectively.
 //
 //          If the network thread rate, 'netRate', is set greater than zero,
-//          then our updateData() will create a seperate thread to call the
+//          then our updateData() will create a separate thread to call the
 //          interoperability network functions, otherwise they're called from
 //          our updateData().
 //

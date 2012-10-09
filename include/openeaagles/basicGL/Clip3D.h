@@ -75,7 +75,7 @@ public:
       const unsigned int index,     // Coordinate index: X -> 0; Y -> 1; and Z -> 2
       const LCreal k,               // Value of the clipping plane
       const bool clipUpperPlane);   // if clipping against an upper plane, 
-                                    //  else agaiust a lower plane
+                                    //  else against a lower plane
 
 private:
    LCreal x0, x1;     // left and right

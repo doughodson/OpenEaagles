@@ -16,10 +16,10 @@ namespace Eaagles {
 namespace BasicGL {
 
 //------------------------------------------------------------------------------
-// Class:   Field
+// Class: Field
 // Base class:  Object > Graphic > Field
 //
-// Description:	Abstract Field class (not in the formFunc())
+// Description: Abstract Field class (not in the formFunc())
 //
 // Form name: Field
 // Slots:
@@ -40,135 +40,135 @@ namespace BasicGL {
 //
 // Public member functions:
 //
-//	operator char*() { return str; }
-//		Conversion function to allow str to be returned as a char*.
+//  operator char*() { return str; }
+//      Conversion function to allow str to be returned as a char*.
 //
-//	int line(int ll)
-//		Sets the line number.
+//  int line(int ll)
+//      Sets the line number.
 //
-//	int line()
-//		Sets the line number.
+//  int line()
+//      Sets the line number.
 //
-//	int column(int cc)
-//		Sets the column number.
+//  int column(int cc)
+//      Sets the column number.
 //
-//	int column()
-//		Sets the column number.
+//  int column()
+//      Sets the column number.
 //
-//	size_t width()
-//		Returns the field width.
+//  size_t width()
+//      Returns the field width.
 //
-//	size_t width(size_t t)
-//		Sets and returns the field width to size t.
+//  size_t width(size_t t)
+//      Sets and returns the field width to size t.
 //
-//	Mode getMode()
-//		Returns the mode of the field.
+//  Mode getMode()
+//      Returns the mode of the field.
 //
-//	Mode setMode(Mode newMode);
-//		Sets the mode to newMode.
+//  Mode setMode(Mode newMode);
+//      Sets the mode to newMode.
 //
-//	isHighLighted()
-//		Returns true if field is highlighted.
+//  isHighLighted()
+//      Returns true if field is highlighted.
 //
-//	isUnderlined()
-//		Returns true if field is underlined.
+//  isUnderlined()
+//      Returns true if field is underlined.
 //
-//	isReversed()
-//		Returns true if field is reversed.
+//  isReversed()
+//      Returns true if field is reversed.
 //
-//	isSpecial()
-//		Returns true if field is special.
+//  isSpecial()
+//      Returns true if field is special.
 //
-//	isVertical()
-//		Returns true if field is vertical.
+//  isVertical()
+//      Returns true if field is vertical.
 //
-//	areBracketsOn()
-//		Returns true if brackets are on.
+//  areBracketsOn()
+//      Returns true if brackets are on.
 //
-//	isDisplayMode(int t)
-//		Returns true if display mode == t.
+//  isDisplayMode(int t)
+//      Returns true if display mode == t.
 //
-//	setDisplayMode(int t)
-//		Adds display mode t to the current display mode. (combination, not addition)
+//  setDisplayMode(int t)
+//      Adds display mode t to the current display mode. (combination, not addition)
 //
-//	clearDisplayMode(int t)
-//		Removes display mode t from the current display mode.
+//  clearDisplayMode(int t)
+//      Removes display mode t from the current display mode.
 //
-//	clearAllDisplayModes()
-//		Removes all special display modes.
+//  clearAllDisplayModes()
+//      Removes all special display modes.
 //
-//	String::Justify justification()
-//		Returns the current justification mode.
+//  String::Justify justification()
+//      Returns the current justification mode.
 //
-//	String::Justify justification(String::Justify t)
-//		Sets justification mode to t.
+//  String::Justify justification(String::Justify t)
+//      Sets justification mode to t.
 //
-//	setPosition(List* spobj)
-//		Sets the Position to [Line Column] specified by spobj.
+//  setPosition(List* spobj)
+//      Sets the Position to [Line Column] specified by spobj.
 //
-//	withinField(int ln, int cp)
-//		Returns true if location specified is within the current field.
+//  withinField(int ln, int cp)
+//      Returns true if location specified is within the current field.
 //
-//	setText(char newString[])
-//		Sets the field's text string.
+//  setText(char newString[])
+//      Sets the field's text string.
 //
-//	int setExample(char* example)
-//		Sets the input example to example, and returns the length of example.
+//  int setExample(char* example)
+//      Sets the input example to example, and returns the length of example.
 //
-//	char getChar()
-//		Gets the character if in input mode.
+//  char getChar()
+//      Gets the character if in input mode.
 //
-//	setChar(char c)
-//		Sets the character to c if in input mode.
+//  setChar(char c)
+//      Sets the character to c if in input mode.
 //  
-//	backSpace(int ns = 1)
-//		Backs up one space if in input mode.
+//  backSpace(int ns = 1)
+//      Backs up one space if in input mode.
 //
-//	advanceSpace(int ns = 1)
-//		Advance one space if in input mode.
+//  advanceSpace(int ns = 1)
+//      Advance one space if in input mode.
 //
-//	onForwardSpace()
-//		Calls advanceSpace() and returns true.
+//  onForwardSpace()
+//      Calls advanceSpace() and returns true.
 //
-//	onBackSpace()
-//		Calls backSpace() and returns true.
+//  onBackSpace()
+//      Calls backSpace() and returns true.
 //
-//	char filterInputEvent(int event, int tc)
-//		Filters input event 'event' using template character 'tc'.
+//  char filterInputEvent(int event, int tc)
+//      Filters input event 'event' using template character 'tc'.
 //
-//	isValidInputPosition(int tc)
-//		Makes sure the current input position is valid.
+//  isValidInputPosition(int tc)
+//      Makes sure the current input position is valid.
 //
-//	double getInputValue()
-//		Returns 0.0. /* This will need revision once the function does something */
+//  double getInputValue()
+//      Returns 0.0. /* This will need revision once the function does something */
 //
-//	isInputValueValid()
-//		Returns true. /* This will need revision once the function does something */
+//  isInputValueValid()
+//      Returns true. /* This will need revision once the function does something */
 //
-//	int getInputCharacterPosition()
-//		Returns the current input character position.
+//  int getInputCharacterPosition()
+//      Returns the current input character position.
 //
-//	isLinked()
-//		Returns true if linked.
+//  isLinked()
+//      Returns true if linked.
 //
-//	setLinked(bool f)
-//		Sets linked to f.
+//  setLinked(bool f)
+//      Sets linked to f.
 // 
-//	isInheritColor()
-//		Returns true if inheritColor is on.
+//  isInheritColor()
+//      Returns true if inheritColor is on.
 //
-//	setInheritColor(bool i)
-//		Sets the inheritColor to i, then returns true.
+//  setInheritColor(bool i)
+//      Sets the inheritColor to i, then returns true.
 //
-//	cursor(int* ln, int* cp)
-//		Returns true if text cursor should be seen within this
-//	      object and the position of the cursor. 
+//  cursor(int* ln, int* cp)
+//      Returns true if text cursor should be seen within this
+//        object and the position of the cursor. 
 // 
-//	onSetLine(Number* oslobj)
-//		Sets the line number and returns true.
+//  onSetLine(Number* oslobj)
+//      Sets the line number and returns true.
 //
-//	onSetColumn(Number* oscobj)
-//		Sets the column number and returns true.
+//  onSetColumn(Number* oscobj)
+//      Sets the column number and returns true.
 //
 //
 //Comment section last modified: 2004.10.13 by MJK
@@ -287,9 +287,9 @@ protected:
    virtual bool setSlotFont(const Basic::String* const font);
    virtual bool setSlotStartCharPos(const Basic::Number* const x);
 
-   Basic::String origStr;      // Orig text saved by setText
-   Basic::String inputExample; // Input Templete String
-   Basic::String str;          // Text stored in field
+   Basic::String origStr;        // Original text saved by setText
+   Basic::String inputExample;   // Input Template String
+   Basic::String str;            // Text stored in field
    Mode     mode;                // Current mode
    int      icp;                 // Input character pointer
    int      inpDspMode;          // Auto switches to this display mode during input mode
@@ -305,9 +305,9 @@ private:
    unsigned int startCP;            // our starting character position that we "write" from
 
    int      dmode;                  // Display mode flags
-   Basic::String::Justify jmode;  // Justification mode
+   Basic::String::Justify jmode;    // Justification mode
    bool     inheritColor;           // Inherit color instead of using a default color
-   Basic::String* fontName;       // name of the font we want our display to use (if overriden)
+   Basic::String* fontName;         // name of the font we want our display to use (if overridden)
 };
 
 } // End BasicGL namespace

@@ -487,7 +487,12 @@ bool Nib::entityStateManager(const LCreal curExecTime)
 
    if (isPlayerStateUpdateRequired(curExecTime)) {
 
-      // Send a entity state PDU ...
+      //
+      // Send an entity state PDU
+      //   1) create buffer
+      //   2) set state information
+      //   3) send data
+      //
 
       // Get our NetIO and the main simulation
       NetIO* disIO = (NetIO*)(getNetIO());
@@ -498,23 +503,51 @@ bool Nib::entityStateManager(const LCreal curExecTime)
       playerState2Nib();
 
       // ---
-      // Standard header stuff
+      // Create buffer and cast it as an entity state PDU
       // ---
       char pduBuffer[NetIO::MAX_PDU_SIZE];
       EntityStatePDU* pdu = (EntityStatePDU*) &pduBuffer[0];
 
+      //
+      // Entity state PDU structure
+      // =========================================================
+      // PDUHeader            header;
+      // EntityIdentifierDIS  entityID;
+      // uint8_t              forceID;
+      // uint8_t              numberOfArticulationParameters;
+      // EntityType           entityType;
+      // EntityType           alternativeType;
+      // VectorDIS            entityLinearVelocity;
+      // WorldCoordinates     entityLocation;
+      // EulerAngles          entityOrientation;
+      // uint32_t             appearance;
+      // uint8_t              deadReckoningAlgorithm;
+      // uint8_t              otherParameters[15];
+      // VectorDIS            DRentityLinearAcceleration;
+      // AngularVelocityVectorDIS DRentityAngularVelocity;
+      // EntityMarking        entityMarking;
+      // uint32_t             capabilities;
+      // =========================================================
+      //
+
+      // ---
+      // Standard header (PDUHeader)
+      // ---
       pdu->header.protocolVersion = disIO->getVersion();
       pdu->header.exerciseIdentifier = disIO->getExerciseID();
       pdu->header.PDUType = NetIO::PDU_ENTITY_STATE;
       pdu->header.protocolFamily = NetIO::PDU_FAMILY_ENTITY_INFO;
-
+      //
       if (disIO->getTimeline() == Simulation::NetIO::UTC)
          pdu->header.timeStamp = disIO->makeTimeStamp( getTimeUtc(), true );
       else
          pdu->header.timeStamp = disIO->makeTimeStamp( getTimeExec(), false );
+      //
+      pdu->header.status = 0;
+      pdu->header.padding = 0;
 
       // ---
-      // Entity ID
+      // Entity ID (EntityIdentifierID)
       // ---
       pdu->entityID.simulationID.siteIdentification = getSiteID();
       pdu->entityID.simulationID.applicationIdentification = getApplicationID();
@@ -541,7 +574,7 @@ bool Nib::entityStateManager(const LCreal curExecTime)
       }
 
       // ---
-      // Entity Type and Info
+      // Entity type (EntityType)
       // ---
       pdu->entityType.kind                 = getEntityKind();
       pdu->entityType.domain               = getEntityDomain();
@@ -550,6 +583,9 @@ bool Nib::entityStateManager(const LCreal curExecTime)
       pdu->entityType.subcategory          = getEntitySubcategory();
       pdu->entityType.specific             = getEntitySpecific();
       pdu->entityType.extra                = getEntityExtra();
+      // ---
+      // Alternative type (EntityType)
+      // ---
       pdu->alternativeType.kind            = getEntityKind();
       pdu->alternativeType.domain          = getEntityDomain();
       pdu->alternativeType.country         = getEntityCountry();
@@ -557,72 +593,43 @@ bool Nib::entityStateManager(const LCreal curExecTime)
       pdu->alternativeType.subcategory     = getEntitySubcategory();
       pdu->alternativeType.specific        = getEntitySpecific();
       pdu->alternativeType.extra           = getEntityExtra();
-      pdu->deadReckoningAlgorithm          = (unsigned char) getDeadReckoning();
-      pdu->capabilites                     = 0x0;
-
-      {
-         const char* const pName = getPlayerName();
-         size_t nameLen = strlen(pName);
-         for (unsigned int i = 0; i < EntityMarking::BUFF_SIZE; i++) {
-            if (i < nameLen) {
-               pdu->entityMarking.marking[i] = pName[i];
-            }
-            else {
-               pdu->entityMarking.marking[i] = '\0';
-            }
-         }
-         pdu->entityMarking.characterSet = 1;
-      }
 
       // ---
       // Player position and orientation state data data
       // 1) All data is geocentric (ECEF)
       // 2) The playerState2Nib() function, which was called above, captures
       //    the state data and passed the state data to the dead reckoning
-      //    system, and we're using this DR caputred data.
+      //    system, and we're using this DR captured data.
       // ---
       {
-         // Entity Location
+         // ---
+         // Entity linear velocity (VectorDIS)
+         // ---
+         osg::Vec3d geocVel = getDrVelocity();
+         pdu->entityLinearVelocity.component[0] = (float)geocVel[0];
+         pdu->entityLinearVelocity.component[1] = (float)geocVel[1];
+         pdu->entityLinearVelocity.component[2] = (float)geocVel[2];
+
+         // ---
+         // Entity location (WorldCoordinates)
+         // ---
          osg::Vec3d geocPos = getDrPosition();
          pdu->entityLocation.X_coord = geocPos[Basic::Nav::IX];
          pdu->entityLocation.Y_coord = geocPos[Basic::Nav::IY];
          pdu->entityLocation.Z_coord = geocPos[Basic::Nav::IZ];
 
-         // Linear Velocity
-         osg::Vec3d geocVel = getDrVelocity();
-         pdu->entityLinearVelocity.component[0] = (float)geocVel[0];
-         pdu->entityLinearVelocity.component[1] = (float)geocVel[1];
-         pdu->entityLinearVelocity.component[2] = (float)geocVel[2];
-         //pdu->entityLinearVelocity.component[0] = 0;
-         //pdu->entityLinearVelocity.component[1] = 0;
-         //pdu->entityLinearVelocity.component[2] = 0;
-
-         // Linear Acceleration
-         osg::Vec3d geocAcc = getDrAcceleration();
-         pdu->DRentityLinearAcceleration.component[0] = (float)geocAcc[0];
-         pdu->DRentityLinearAcceleration.component[1] = (float)geocAcc[1];
-         pdu->DRentityLinearAcceleration.component[2] = (float)geocAcc[2];
-         //pdu->DRentityLinearAcceleration.component[0] = 0;
-         //pdu->DRentityLinearAcceleration.component[1] = 0;
-         //pdu->DRentityLinearAcceleration.component[2] = 0;
-
-         // Orientation
+         // ---
+         // Entity orientation (EulerAngles)
+         // ---
          osg::Vec3d geocAngles = getDrEulerAngles();
          pdu->entityOrientation.phi   = (float)geocAngles[Basic::Nav::IPHI];
          pdu->entityOrientation.theta = (float)geocAngles[Basic::Nav::ITHETA];
          pdu->entityOrientation.psi   = (float)geocAngles[Basic::Nav::IPSI];
-
-         // Angular velocities
-         osg::Vec3d geocAngVel = getDrAngularVelocities();
-         pdu->DRentityAngularVelocity.x_axis = (float)geocAngVel[Basic::Nav::IX];
-         pdu->DRentityAngularVelocity.y_axis = (float)geocAngVel[Basic::Nav::IY];
-         pdu->DRentityAngularVelocity.z_axis = (float)geocAngVel[Basic::Nav::IZ];
       }
 
       // ---
-      // appearance bits generic to all domains (except munitions)
+      // Appearance bits generic to all domains (except munitions)
       // ---
-
       {
          pdu->appearance = 0x0;
 
@@ -660,7 +667,7 @@ bool Nib::entityStateManager(const LCreal curExecTime)
 
                // Land based camouflage bits
                if (player->isMajorType(Simulation::Player::GROUND_VEHICLE)) {
-                  // Subtract one to match DIS comouflage bits.
+                  // Subtract one to match DIS camouflage bits.
                   // Our camouflage type for DIS is the camouflage appearance bits
                   // plus one because our camouflage type of zero is no camouflage.
                   bits--;
@@ -736,10 +743,64 @@ bool Nib::entityStateManager(const LCreal curExecTime)
       }
 
       // ---
+      // Dead reckoning algorithm
+      // ---
+      pdu->deadReckoningAlgorithm = (unsigned char) getDeadReckoning();
+
+      // ---
+      // Other parameters
+      // ---
+      for (unsigned int i=0; i<15; i++) {
+          pdu->otherParameters[i] = 0;
+      }
+
+      // ---
+      // Dead reckoning information
+      // ---
+      {
+         // ---
+         // Dead reckoning linear acceleration (VectorDIS)
+         // ---
+         osg::Vec3d geocAcc = getDrAcceleration();
+         pdu->DRentityLinearAcceleration.component[0] = (float)geocAcc[0];
+         pdu->DRentityLinearAcceleration.component[1] = (float)geocAcc[1];
+         pdu->DRentityLinearAcceleration.component[2] = (float)geocAcc[2];
+
+         // ---
+         // Dead reckoning angular velocity (AngularVelocityVectorDIS)
+         // ---
+         osg::Vec3d geocAngVel = getDrAngularVelocities();
+         pdu->DRentityAngularVelocity.x_axis = (float)geocAngVel[Basic::Nav::IX];
+         pdu->DRentityAngularVelocity.y_axis = (float)geocAngVel[Basic::Nav::IY];
+         pdu->DRentityAngularVelocity.z_axis = (float)geocAngVel[Basic::Nav::IZ];
+      }
+
+      // ---
+      // Entity marking (EntityMarking)
+      // ---
+      {
+         const char* const pName = getPlayerName();
+         size_t nameLen = strlen(pName);
+         for (unsigned int i = 0; i < EntityMarking::BUFF_SIZE; i++) {
+            if (i < nameLen) {
+               pdu->entityMarking.marking[i] = pName[i];
+            }
+            else {
+               pdu->entityMarking.marking[i] = '\0';
+            }
+         }
+         pdu->entityMarking.characterSet = 1;
+      }
+
+      // ---
+      // Capabilities
+      // ---
+      pdu->capabilites = 0x0;
+
+      // ---
       // Articulation parameters
       // ---
       pdu->numberOfArticulationParameters = manageArticulationParameters(pdu);
-      //pdu->numberOfArticulationParameters = 0;
 
       // Size of the PDU package
       unsigned short length = sizeof(EntityStatePDU) + (pdu->numberOfArticulationParameters * sizeof(VpArticulatedPart));

@@ -60,7 +60,7 @@ namespace Simulation {
 //    lossSignalProcess  <Basic::Number>        ! Signal Processing loss        (no units; def: 1.0)
 //                       <Basic::Decibel>       ! Signal Processing loss        (dB)
 //
-//    disableEmissions   <Number)               ! Disable sending emisison packets flag (default: false)
+//    disableEmissions   <Number)               ! Disable sending emission packets flag (default: false)
 //
 //------------------------------------------------------------------------------
 class RfSystem : public System  
@@ -141,7 +141,8 @@ public:
    virtual void reset();
 
 protected:
-   static const unsigned int MAX_EMISSIONS = 800;       // Max size of emission queues (per frame)
+   // Max size of emission queues (per frame)
+   static const unsigned int MAX_EMISSIONS = EAAGLES_CONFIG_RF_MAX_EMISSIONS;
 
    // Compute receiver thermal noise
    virtual bool computeReceiverNoise();

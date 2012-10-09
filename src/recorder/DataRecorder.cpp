@@ -35,7 +35,7 @@ EMPTY_SERIALIZER(DataRecorder)
 //------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(DataRecorder)
    "outputHandler",     // 1)  Output handler
-   "eventName",         // 2) Event (i.e., test, study, demo, exersize) name
+   "eventName",         // 2) Event (i.e., test, study, demo, exercise) name
    "application",       // 3) Application name (e.g., "mainSimExec")
    "caseNum",           // 4) Case id number (i.e., conditions)
    "missionNum",        // 5) Unique mission, sortie, scenario id number
@@ -254,7 +254,7 @@ bool DataRecorder::recordAI(const Basic::Object* objs[4], const double values[4]
    timeStamp(msg);
    msg->set_id( REID_AI_EVENT );
 
-   // new Marker message
+   // new Input Device message
    Pb::InputDeviceMsg* aiMsg = msg->mutable_input_device_msg();
    aiMsg->set_id( (unsigned int) Eaagles::nintd(values[0]) );
    aiMsg->set_source_id( (unsigned int) Eaagles::nintd(values[1]) );
@@ -268,7 +268,7 @@ bool DataRecorder::recordAI(const Basic::Object* objs[4], const double values[4]
 
 
 //------------------------------------------------------------------------------
-// Descrete Input (DI) event handler
+// Discrete Input (DI) event handler
 //    value[0] => input ID
 //    value[1] => input source ID
 //    value[2] => value
@@ -282,7 +282,7 @@ bool DataRecorder::recordDI(const Basic::Object* objs[4], const double values[4]
    timeStamp(msg);
    msg->set_id( REID_DI_EVENT );
 
-   // new Marker message
+   // new Input Device message
    Pb::InputDeviceMsg* diMsg = msg->mutable_input_device_msg();
    diMsg->set_id( (unsigned int) Eaagles::nintd(values[0]) );
    diMsg->set_source_id( (unsigned int) Eaagles::nintd(values[1]) );

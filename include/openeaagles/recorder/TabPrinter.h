@@ -18,7 +18,7 @@ namespace Recorder {
       class PlayerKilledEventMsg; class WeaponReleaseEventMsg; class WeaponHungEventMsg;
       class WeaponDetonationEventMsg; class GunFiredEventMsg; class NewTrackEventMsg;
       class TrackRemovedEventMsg; class TrackDataMsg; class PlayerId; class PlayerState;
-      class TrackData; class EmissionData;
+      class TrackData; class EmissionData; class MarkerMsg; class InputDeviceMsg;
    }
 
 //------------------------------------------------------------------------------
@@ -68,6 +68,14 @@ protected:
    virtual void printNewTrackEventMsg(const Pb::Time* const timeMsg, const Pb::NewTrackEventMsg* const msg);
    virtual void printTrackRemovedEventMsg(const Pb::Time* const timeMsg, const Pb::TrackRemovedEventMsg* const msg);
    virtual void printTrackDataMsg(const Pb::Time* const timeMsg, const Pb::TrackDataMsg* const msg);
+   virtual void printMarkerMsg(const Pb::Time* const timeMsg, const Pb::MarkerMsg* const msg);
+   virtual void printInputDeviceMsg(const Pb::Time* const timeMsg, const Pb::InputDeviceMsg* const msg, const  unsigned int msgId);
+
+
+   // Events without messages
+   virtual void printUnhandledIdToken(const Pb::Time* const timeMsg);
+   virtual void printEndOfData(const Pb::Time* const timeMsg);
+   virtual void printResetEvent(const Pb::Time* const timeMsg);
 
    // Common Data Messages
    virtual void printTimeMsg(std::ostream& sout, const Pb::Time* const timeMsg);
@@ -121,6 +129,8 @@ private:
    bool trackNewHdr;
    bool trackRemovedHdr;
    bool trackDataHdr;
+   bool markerHdr;
+   bool inputDeviceHdr;
 
    // Group headers
    bool playerHeader;

@@ -108,7 +108,9 @@ bool Nib::weaponFireMsgFactory(const LCreal)
     pdu.header.protocolFamily = NetIO::PDU_FAMILY_WARFARE;
     pdu.header.timeStamp = disIO->timeStamp();
     pdu.header.length = sizeof(FirePDU);
-    
+    pdu.header.status = 0;
+    pdu.header.padding = 0;
+
     // ---
     // Set the PDU data with the firing (launcher) player's id
     // ---
@@ -131,7 +133,7 @@ bool Nib::weaponFireMsgFactory(const LCreal)
       if (tPlayer != 0) {
          pdu.targetEntityID.ID = tPlayer->getID();
          if (tPlayer->isLocalPlayer()) {
-            // Local player, use our site/app/exerc IDs
+            // Local player, use our site/app/exercise IDs
             pdu.targetEntityID.simulationID.siteIdentification = disIO->getSiteID();
             pdu.targetEntityID.simulationID.applicationIdentification = disIO->getApplicationID();
             tOk = true;
@@ -162,7 +164,7 @@ bool Nib::weaponFireMsgFactory(const LCreal)
     pdu.eventID.eventNumber = mPlayer->getReleaseEventID();
 
     // ---
-    // Location & Velociy
+    // Location & Velocity
     // ---
 
     // World Coordinates

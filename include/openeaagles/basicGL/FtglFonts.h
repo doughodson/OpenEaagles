@@ -22,7 +22,7 @@ namespace BasicGL {
 // Class:  FtglFonts, FtglBitmapFont, FtglExtrdFont, FtglOutlineFont, FtglPixmapFont, FtglPolygonFont, FtglTextureFont
 // Base class:  Object -> Font -> FtglFonts -> (all other fonts are derived from FtglFonts)
 // 
-// Descripton: all the Freetype font classes 
+// Description: all the Freetype font classes 
 //---------------------------------------------------------------------------------
 // Class: FtglFonts
 // Description:  Abstract font class for the Freetype2 fonts.  This uses freetype 2 
@@ -47,8 +47,8 @@ namespace BasicGL {
 // all other slots are optional
 //
 // The fontWidth and fontHeight will SCALE the individual width and height, however
-// faceSize will SET the actual font width and height symetrically (ie.. X by X instead
-// of X by Y).  You can both set the fontWidth and Heigth and faceSize, and that
+// faceSize will SET the actual font width and height symmetrically (ie.. X by X instead
+// of X by Y).  You can both set the fontWidth and Height and faceSize, and that
 // will scale and then draw a font of certain facesize. 
 //
 //Comment sections last updated: 2004.10.14 by MJK 
@@ -70,7 +70,7 @@ private:
     int fSize;      // face size 
 };
 
-#endif      /* __FtglFont_H_F426AAF5_F157_49bf_9AB6_2883CE48E1E5 */
+#endif
 
 
 
@@ -105,7 +105,7 @@ public:
     virtual void loadFont();
 };
 
-#endif      /* __FtglBitmapFont_96B63687_1D77_4bad_B038_12C99B145F08 */
+#endif
 
 
 #ifndef __FtglExtrdFont_CCD52653_E5A8_4811_8BD4_C397A6B46F0B

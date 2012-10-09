@@ -479,7 +479,7 @@ void AircraftIrSignature::getPlumeSignatures(const IrQueryMsg* const msg, const 
 
                 // FAB - overlapRatio could be implemented for each table like this -
                 // but only one piece needed if it is desired that bins not all be the same for all tables.
-                // also have to fix loop on i in heatsignature
+                // also have to fix loop on i in heat signature
 
                 // the overlap ratio is calculated to correct this number if the sensor band only 
                 // partially covers this bin.
@@ -643,7 +643,7 @@ LCreal* AircraftIrSignature::getHeatSignature(IrQueryMsg* msg)
                 //std::cout << "For wavelength " << currentWavelength << " Hot Parts: " << hotPartsSigs[i * 3 + 2] << std::endl;
                 //}
 
-                // assume plume bins & hotparts bins are same as airframe bins, so we 
+                // assume plume bins & hot parts bins are same as airframe bins, so we 
                 // can re-use the same overlap ratios and fractions. If not, 
                 // they will have to be separately calculated. 
                 baseHeatSignatureInBand += plumeSigs[i*3 + 2]; 

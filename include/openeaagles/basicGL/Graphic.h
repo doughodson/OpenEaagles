@@ -52,9 +52,9 @@ class Material;
 //    linewidth          <Number>       ! Linewidth (default: 0.0f)
 //    flashRate          <Number>       ! Flash rate (default: 0.0f)
 //    transform          <PairStream>   ! List of coordinate transformations (default: 0)
-//    transform          <Transform>    ! Single coorinate transformation (default: 0)
+//    transform          <Transform>    ! Single coordinate transformation (default: 0)
 //    vertices           <PairStream>   ! List of 3D Coordinates (World coord) (default: 0)
-//    normals            <PairStream>   ! List of 3D Vectors of normals at each vertex
+//    normals            <PairStream>   ! List of 3D Vectors of normal's at each vertex
 //    texCoord           <PairStream>   ! List of 2D Texture Coordinates (default: 0)
 //    noDisplayList      <Number>       ! Flag: True to disable display list
 //                                      !     (default false)
@@ -127,7 +127,7 @@ class Material;
 //
 //      lcRotate(LCreal a)
 //      lcRotate(LCreal x, LCreal y, LCreal z, LCreal a)
-//          Rotate by 'a' radians about z, or about tye x,y,z vector.
+//          Rotate by 'a' radians about z, or about the x,y,z vector.
 //
 //      lcTranslate(LCreal x, LCreal y)
 //      lcTranslate(LCreal x, LCreal y, LCreal z)
@@ -160,73 +160,73 @@ class Material;
 //          timer, flashOn() returns true if flashing objects are visible.
 //
 ////Display List Functions
-//	  Gluint getDisplayList()
-//		Returns the display list (dlist)
+//    Gluint getDisplayList()
+//      Returns the display list (dlist)
 //
-//	  isDisplayListEnabled()
-//		Returns true if display list is enabled.
+//    isDisplayListEnabled()
+//      Returns true if display list is enabled.
 //
-//	  isDisplayListDisabled()
-//		Returns true if display list is disabled.
+//    isDisplayListDisabled()
+//      Returns true if display list is disabled.
 //
-//	  setDisplayList(GLuint v)
-//		Sets the display list to v and returns true.
+//    setDisplayList(GLuint v)
+//      Sets the display list to v and returns true.
 //
-//	  setDisableDisplayList(bool flg)
-//		Disables display list if flg is true and returns true.
+//    setDisableDisplayList(bool flg)
+//      Disables display list if flg is true and returns true.
 //
 ////Texture functions
-//	  hasTexture()
-//		Returns true if a texture is present.
+//    hasTexture()
+//      Returns true if a texture is present.
 //
-//	  GLuint getTexture()
-//		Returns the texture.
+//    GLuint getTexture()
+//      Returns the texture.
 //
-//	  GLfloat getStdLineWidth()
-//		Returns the standard line width.
+//    GLfloat getStdLineWidth()
+//      Returns the standard line width.
 //
 ////Scissor Box Functions
-//	  haveScissorBoxHave()
-//		Returns true if the scissor box has a height and width both greater than 0
+//    haveScissorBoxHave()
+//      Returns true if the scissor box has a height and width both greater than 0
 //
-//	  LCreal getScissorX()
-//		Returns scissor x value.
+//    LCreal getScissorX()
+//      Returns scissor x value.
 //
-//	  LCreal getScissorWidth()
-//		Returns scissor width.
+//    LCreal getScissorWidth()
+//      Returns scissor width.
 //
-//	  LCreal getScissorY()
-//		Returns scissor y value.
+//    LCreal getScissorY()
+//      Returns scissor y value.
 //
-//	  LCreal getScissorHeight()
-//		Returns scissor height.
+//    LCreal getScissorHeight()
+//      Returns scissor height.
 //
-//	  setScissorx(LCreal newX)
-//		Sets the new scissor x value and returns true.
+//    setScissorx(LCreal newX)
+//      Sets the new scissor x value and returns true.
 //
-//	  setScissorWidth(LCreal newWidth)
-//		Sets the scissor width to newWidth and returns true.
+//    setScissorWidth(LCreal newWidth)
+//      Sets the scissor width to newWidth and returns true.
 //
-//	  setScissorx(LCreal newY)
-//		Sets the new scissor y value and returns true.
+//    setScissorx(LCreal newY)
+//      Sets the new scissor y value and returns true.
 //
-//	  setScissorHeight(LCreal newHeight)
-//		Sets the scissor height to newHeight and returns true.
+//    setScissorHeight(LCreal newHeight)
+//      Sets the scissor height to newHeight and returns true.
 //
 ////Select (Pick) functions
 //      GLuint getSelectName()
 //      setSelectName(GLuint v)
 //          Gets/Sets the SELECT name (see glPushName()) and (set) returns true.
 //
-//	  Pair* findBySelectName(GLuint name)
-//		Finds (and returns) a component by its GL Select (pick) name.
-//		(Children first, then grandchildren.)
+//    Pair* findBySelectName(GLuint name)
+//      Finds (and returns) a component by its GL Select (pick) name.
+//      (Children first, then grandchildren.)
 //
-//	  GLuint getNewSelectName()
-//		Gets a new select name.
-//	    NOTE: Select name incrementer (for automatic select name generation)
-//		Starting value is 0x800000, so all manual select names should be
-//		lower than this, so there is no confusion in the pick() routine.
+//    GLuint getNewSelectName()
+//      Gets a new select name.
+//      NOTE: Select name incrementer (for automatic select name generation)
+//      Starting value is 0x800000, so all manual select names should be
+//      lower than this, so there is no confusion in the pick() routine.
 //
 //Comment section last updated: 2004.10.13 by MJK
 //------------------------------------------------------------------------------

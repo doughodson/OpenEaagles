@@ -160,7 +160,7 @@ public:
     static const unsigned int MAX_NETWORD_ID = 2;
 
     //  Max number of new, outgoing players published per frame
-    static const unsigned int MAX_NEW_OUTGOING = 150;
+    static const unsigned int MAX_NEW_OUTGOING = EAAGLES_CONFIG_MAX_NETIO_NEW_OUTGOING;
 
 public:
    NetIO();
@@ -300,7 +300,7 @@ public:
 
 protected:
    // Maximum number of active objects
-   static const int MAX_OBJECTS = 5000;
+   static const int MAX_OBJECTS = EAAGLES_CONFIG_MAX_NETIO_ENTITIES;
 
    // Create NIB unique to protocol (pure functions!)
    virtual Nib* nibFactory(const NetIO::IoType ioType)=0;
@@ -469,7 +469,7 @@ private: // Nib related private
    static int compareKey2Nib(const void* key, const void* nib);
 
 private:  // Ntm related private
-   static const unsigned int MAX_ENTITY_TYPES = 5000;
+   static const unsigned int MAX_ENTITY_TYPES = EAAGLES_CONFIG_MAX_NETIO_ENTITY_TYPES;
 
    NtmInputNode* inputNtmTree;   // Input NTM quick lookup tree
    NtmOutputNode* outputNtmTree; // Output NTM quick lookuptree

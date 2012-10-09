@@ -499,4 +499,4 @@ private:
 } // End Basic namespace
 } // End Eaagles namespace
 
-#endif  /* __Eaagles_Basic_Tables_H__ */
+#endif

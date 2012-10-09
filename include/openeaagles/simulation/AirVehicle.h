@@ -158,7 +158,7 @@ protected:
 private:
    LCreal initGearPos;     // initial gear position
    LCreal gearPos;         // Percent Gear position (0 -> up; 100 -> down)
-   LCreal wpnBayDoorPos;   // Precent Weapon bay door position (0 -> closed; 100 -> open)
+   LCreal wpnBayDoorPos;   // Percent Weapon bay door position (0 -> closed; 100 -> open)
    LCreal wingSweep;       // Wing sweep angle (radians; zero for no wing sweep)
 };
 

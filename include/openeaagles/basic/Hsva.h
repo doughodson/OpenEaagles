@@ -23,7 +23,7 @@ namespace Basic {
 // Public methods: Base class public methods, plus ...
 //
 //      Hsva(LCreal h, LCreal s, LCreal v, LCreal a)
-//          Special constuctor that initializes the object to h, s, v and a
+//          Special constructor that initializes the object to h, s, v and a
 //
 //      getHSVA(osg::Vec4 hsv)
 //          Returns the HSVA components in a vector.

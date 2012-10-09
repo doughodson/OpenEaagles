@@ -9,14 +9,14 @@
 //    ThreadPeriodicTask   -- Periodic task thread; multiple calls to the user's
 //                            function at a fixed rate
 //
-//    ThreadSyncTask       -- Syncronized task thread; multiple calls to the
+//    ThreadSyncTask       -- Synchronized task thread; multiple calls to the
 //                            user's function with start/complete signals
 //
 //
 //    ### All of these classes are abstract. ###
 //
 // Examples of how to use the ThreadSingleTask, ThreadPeriodicTask and
-// ThreadSyncTask thread clases that are used can be found in the "otw/OtwCigiCl.cpp",
+// ThreadSyncTask thread classes that are used can be found in the "otw/OtwCigiCl.cpp",
 // "simulation/Station.cpp" and "simulation/Simulation.cpp" files, respectively.
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_Basic_Thread_H__

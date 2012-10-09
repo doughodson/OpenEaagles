@@ -19,7 +19,7 @@ namespace Recorder {
 // Notes:
 //    1) Default is to print to the standard output
 //    2) If a filename is given then ...
-//       a) the file is created and the output is writen to that file
+//       a) the file is created and the output is written to that file
 //       b) if the file already exists, a new file is still created
 //          with a version number appended to the file name.
 //

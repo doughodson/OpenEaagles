@@ -119,91 +119,91 @@ inline bool Player::isDead() const
    return isKilled() || isCrashed() || isDetonated();
 }
 
-// Roll euler angle (Rad)
+// Roll Euler angle (Rad)
 inline double Player::getRoll() const
 {
    return angles[IROLL];
 }
 
-// Roll euler angle (Rad)
+// Roll Euler angle (Rad)
 inline double Player::getRollR() const
 {
    return angles[IROLL];
 }
 
-// Roll euler angle (degs)
+// Roll Euler angle (degs)
 inline double Player::getRollD() const
 {
    return (Basic::Angle::R2DCC * angles[IROLL]);
 }
 
-// Sin of the euler roll angle
+// Sin of the Euler roll angle
 inline double Player::getSinRoll() const
 {
    return scPhi[0];
 }
 
-// Cos of the  euler roll angle
+// Cos of the  Euler roll angle
 inline double Player::getCosRoll() const
 {
    return scPhi[1];
 }
 
-// Pitch euler angle (Rad)
+// Pitch Euler angle (Rad)
 inline double Player::getPitch() const
 {
    return angles[IPITCH];
 }
 
-// Pitch euler angle (Rad)
+// Pitch Euler angle (Rad)
 inline double Player::getPitchR() const
 {
    return angles[IPITCH];
 }
 
-// Pitch euler angle (degs)
+// Pitch Euler angle (degs)
 inline double Player::getPitchD() const
 {
    return (Basic::Angle::R2DCC * angles[IPITCH]);
 }
 
-// Sin of the pitch euler angle
+// Sin of the pitch Euler angle
 inline double Player::getSinPitch() const
 {
    return scTheta[0];
 }
 
-// Cos of the  pitch euler angle
+// Cos of the  pitch Euler angle
 inline double Player::getCosPitch() const
 {
    return scTheta[1];
 }
 
-// Yaw euler angle (Rad)
+// Yaw Euler angle (Rad)
 inline double Player::getHeading() const
 {
    return angles[IYAW];
 }
 
-// Yaw euler angle (Rad)
+// Yaw Euler angle (Rad)
 inline double Player::getHeadingR() const
 {
    return angles[IYAW];
 }
 
-// Yaw euler angle (degs)
+// Yaw Euler angle (degs)
 inline double Player::getHeadingD() const
 {
    return (Basic::Angle::R2DCC * angles[IYAW]);
 }
 
-// Sin of the yaw euler angle
+// Sin of the yaw Euler angle
 inline double Player::getSinHeading() const
 {
    return scPsi[0];
 }
 
-// Cos of the  yaw euler angle
+// Cos of the  yaw Euler angle
 inline double Player::getCosHeading() const
 {
    return scPsi[1];
@@ -215,7 +215,7 @@ inline const osg::Vec3d& Player::getEulerAngles() const
    return angles;
 }
 
-// Geocentric euler angles (rad)
+// Geocentric Euler angles (rad)
 inline const osg::Vec3d& Player::getGeocEulerAngles() const
 {
    return anglesW;
@@ -498,7 +498,7 @@ inline double Player::getInitAltitude() const
    return initAlt;
 }
 
-// Initial euler angles (radians)
+// Initial Euler angles (radians)
 inline const osg::Vec3d& Player::getInitAngles() const
 {
    return initAngles;

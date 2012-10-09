@@ -25,7 +25,7 @@ BEGIN_SLOTTABLE(AnalogInput)
     "deadband",   // 4: Deadband: [ 0 .. 1 ] (default: 0.0)
     "offset",     // 5) Offset value (default: 0.0)
     "gain",       // 6) Gain value   (default: 1.0)
-    "table"       // 7) Shapping function table (default: none)
+    "table"       // 7) Shaping function table (default: none)
 END_SLOTTABLE(AnalogInput)
 
 //  Map slot table to handles

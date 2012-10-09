@@ -254,7 +254,7 @@ void MapDrawer::drawFunc()
     glGetDoublev(GL_CURRENT_COLOR, &ocolor[0]);
     
     GLdouble dLeft = 0, dRight = 0, dBottom = 0, dTop = 0, dNear = 0, dFar = 0;
-    double lat = 0, lon = 0;
+    //double lat = 0, lon = 0;
 
     // Determine our rotation, if needed.
     if (getDisplay() != 0) getDisplay()->getOrtho(dLeft, dRight, dBottom, dTop, dNear, dFar);
@@ -368,7 +368,7 @@ void MapDrawer::drawMap(const int zone, const int idx)
             // Not centered, move the whole map down the displacement value.
             if (!getCentered()) {
                 LCreal dis = getOuterRadius();
-                LCreal scale = getScale();
+                //LCreal scale = getScale();
                 LCreal myScale = vpHL / dis;
                 glTranslatef(0, GLfloat(getDisplacement() * myScale), 0);
             }

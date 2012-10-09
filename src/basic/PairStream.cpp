@@ -1,6 +1,7 @@
 #include "openeaagles/basic/PairStream.h"
 #include "openeaagles/basic/Pair.h"
-#include <stdlib.h>
+
+#include <cstdlib>
 
 namespace Eaagles {
 namespace Basic {

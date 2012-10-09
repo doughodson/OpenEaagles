@@ -195,7 +195,7 @@ bool Nib::isIffUpdateRequired(const LCreal curExecTime, const Simulation::Iff* c
          opData.param4 = (opData.param4 | MODE_ON);
       }
 
-      // Prameter 5 - Mode C
+      // Parameter 5 - Mode C
       opData.param5 = 0;
       LCreal alt100 = (LCreal) ((getPlayer()->getAltitudeFt() + 50.0) / 100.0);
       if (alt100 < 0) { alt100 = -alt100; opData.param5 = MODE_C_ALT_NEG; }

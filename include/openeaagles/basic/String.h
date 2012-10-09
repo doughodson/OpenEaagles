@@ -210,7 +210,7 @@ inline void String::setChar(const unsigned int index, const char c)
 }
 
 //------------------------------------------------------------------------------
-// getString() -- returns a const ponter of the string
+// getString() -- returns a const pointer of the string
 //------------------------------------------------------------------------------
 inline const char* String::getString() const
 {

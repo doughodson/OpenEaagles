@@ -93,20 +93,22 @@ void GroundVehicle::reset()
 {
    BaseClass::reset();
 
-   if (initLnchrPos == UP) {
-      cmdLnchrPos = UP;
-      lnchrAngle = lnchrUpAngle;
-      lnchrRate = 0;
-   }
-   else if (initLnchrPos == DOWN) {
-      cmdLnchrPos = DOWN;
-      lnchrAngle = lnchrDownAngle;
-      lnchrRate = 0;
-   }
-   else {
-      cmdLnchrPos = NONE;
-      lnchrAngle = 0;
-      lnchrRate = 0;
+   if (isLocalPlayer()) {
+      if (initLnchrPos == UP) {
+         cmdLnchrPos = UP;
+         lnchrAngle = lnchrUpAngle;
+         lnchrRate = 0;
+      }
+      else if (initLnchrPos == DOWN) {
+         cmdLnchrPos = DOWN;
+         lnchrAngle = lnchrDownAngle;
+         lnchrRate = 0;
+      }
+      else {
+         cmdLnchrPos = NONE;
+         lnchrAngle = 0;
+         lnchrRate = 0;
+      }
    }
 }
 

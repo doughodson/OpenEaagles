@@ -139,7 +139,7 @@ namespace Simulation {
 //    Each frame is broken into 4 phases, which are numbered 0 to 3, and are used
 //    to process dynamics, transmit sensor queries (e.g., emissions), receive sensor
 //    queries, and information or control processing, respectively.  These phases
-//    allow for the syncronized flow of data between players within a given frame.
+//    allow for the synchronized flow of data between players within a given frame.
 //    The player list is traversed for each phase, therefore the player list is
 //    traversed 4 times the core frame rate (e.g., 50 Hz frame rate is 200Hz phase
 //    rate).

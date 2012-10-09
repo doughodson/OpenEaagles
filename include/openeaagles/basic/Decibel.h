@@ -23,7 +23,7 @@ namespace Basic {
 // Public methods: Base class public methods, plus ...
 //
 //      Decibel(const LCreal value)
-//          Special constuctor that initializes the object to 'value' dB.
+//          Special constructor that initializes the object to 'value' dB.
 //
 //      LCreal getNumber()
 //          Convert the value from Decibels into the original units.

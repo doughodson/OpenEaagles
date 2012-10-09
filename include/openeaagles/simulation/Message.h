@@ -1,5 +1,9 @@
 //------------------------------------------------------------------------------
+<<<<<<< HEAD
 // Class: Message
+=======
+// Class:	Message
+>>>>>>> gitHubDoug/master
 //----------------------------------------------------------------------------------
 #ifndef __Eaagles_Simulation_Message_H__
 #define __Eaagles_Simulation_Message_H__
@@ -13,7 +17,7 @@ namespace Simulation {
 
 //------------------------------------------------------------------------------
 // Class: Message
-// Description: 'Generic' Eaagles Message. Used as a base class for other generic messages
+// Description: 'Generic' Message. Used as a base class for other generic messages
 //----------------------------------------------------------------------------------
 class Message : public Eaagles::Basic::Object
 {

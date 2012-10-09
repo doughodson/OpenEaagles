@@ -1,7 +1,7 @@
 // ------------------------------------------------------------------------------
 // Class: TextureTable
 //
-// Description: Table to hold our texel information for texture viewing.  This is
+// Description: Table to hold our texture information for viewing.  This is
 // called upon for data by the TexturePager, which is driven by the MapDrawer, which
 // is driven by the CadrgMap
 

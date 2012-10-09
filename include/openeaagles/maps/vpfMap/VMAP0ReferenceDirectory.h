@@ -1,6 +1,6 @@
 // -------------------------------------------------------------------------------
 // Class: VMAP0ReferenceDirectory
-// Description: VMAP Level 0 rference library, contains tables
+// Description: VMAP Level 0 reference library, contains tables
 // - cat
 // - lat
 // - grt
@@ -31,7 +31,7 @@ public:
 
     virtual void loadTables();
 
-    // Defined coverages for VMAP level 0 refernce directories
+    // Defined coverages for VMAP level 0 reference directories
     enum { CVG_DBREF = 0, CVG_LIBREF, CVG_PLACENAM, CVG_POLBND, MAX_COVERAGES };
 
     // Get functions

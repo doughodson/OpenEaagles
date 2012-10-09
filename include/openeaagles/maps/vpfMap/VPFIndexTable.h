@@ -1,6 +1,6 @@
 // ------------------------------------------------------------
 // Class: VPFIndexTable
-// Descr: Associated Index table with all tables which have
+// Description: Associated Index table with all tables which have
 // variable length text or coordinate strings
 // ------------------------------------------------------------
 #ifndef	__Eaagles_Maps_Vpf_VPFIndexTable_H__

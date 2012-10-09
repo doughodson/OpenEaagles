@@ -11,7 +11,7 @@ namespace Instruments {
 
 //------------------------------------------------------------------------------
 // Class:  IrisGLCompat
-// Description:  IrisGL compatability
+// Description:  IrisGL compatibility
 //
 //------------------------------------------------------------------------------
 class IrisGLCompat : public Basic::Object {

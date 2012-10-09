@@ -1,8 +1,6 @@
-//******************************************************************************
-// Graphic
-//******************************************************************************
-#include <limits.h>
-#include <float.h>
+//------------------------------------------------------------------------------
+// Class: Graphic
+//------------------------------------------------------------------------------
 #include "openeaagles/basicGL/Graphic.h"
 #include "openeaagles/basicGL/Display.h"
 #include "openeaagles/basicGL/ColorRotary.h"
@@ -31,7 +29,7 @@ BEGIN_SLOTTABLE(Graphic)
     "color",                //  1: color
     "linewidth",            //  2: linewidth
     "flashRate",            //  3: Flash rate (Hz)
-    "transform",            //  4: Coorinate transformations
+    "transform",            //  4: Coordinate transformations
     "vertices",             //  5: Vertices (2D vectors)            (World coord)
     "normals",              //  6: Normals (3D vectors)
     "texCoord",             //  7: Texture Coordinates (2D vectors)

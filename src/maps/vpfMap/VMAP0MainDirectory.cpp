@@ -61,8 +61,11 @@ void VMAP0MainDirectory::loadTables()
             VPFRecord* record = table->getRecord(index);
             while (record != 0) {
                 string->empty();
-                //std::cout << "LAT INFO = " << record->getData(1) << ", " << record->getData(2) << ", " << record->getData(3) << \
-                //    ", " << record->getData(4) << ", " << record->getData(5) << ", " << record->getData(6) << std::endl;
+                //std::cout << "LAT INFO = " << record->getData(1)
+                //          << ", " << record->getData(2) << ", "
+                //          << record->getData(3) << ", " << record->getData(4)
+                //          << ", " << record->getData(5) << ", "
+                //          << record->getData(6) << std::endl;
                 // column 2 is the column we need
                 char* x = (char*)record->getData(2);
                 size_t size = strlen(x);

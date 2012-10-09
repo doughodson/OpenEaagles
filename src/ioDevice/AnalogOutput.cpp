@@ -24,7 +24,7 @@ BEGIN_SLOTTABLE(AnalogOutput)
     "value",      // 3) Initial value [ -1.0 ... 1.0 ] (default: 0)
     "offset",     // 4) Offset value (default: 0.0)
     "gain",       // 5) Gain value   (default: 1.0)
-    "table"       // 6) Shapping function table (default: none)
+    "table"       // 6) Shaping function table (default: none)
 END_SLOTTABLE(AnalogOutput)
 
 //  Map slot table to handles

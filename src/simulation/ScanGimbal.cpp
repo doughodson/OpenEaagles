@@ -24,7 +24,7 @@ BEGIN_SLOTTABLE(ScanGimbal)
     "leftToRightScan",      //  2: True to scan from left to right (else right to left) (Default: true) (up to down or down to up)
     "scanWidth",            //  3: Width of the scan (for search volume, or if specified manually)
     "searchVolume",         //  4: Scan width & height; sets HORIZONTAL_BAR_SCAN mode (radians)
-    "reference",            //  5: Reference angles (center of seach volume)
+    "reference",            //  5: Reference angles (center of search volume)
     "barSpacing",           //  6: Scan bar width spacing 
     "numBars",              //  7: Sets the number of bars
     "revolutionsPerSec",    //  8: Revolutions per second for conical and circular scans (spiral scan too)

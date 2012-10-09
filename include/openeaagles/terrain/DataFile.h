@@ -44,7 +44,7 @@ public:
    // Returns true if the latitude is valid
    bool computeLatitude(double* const lat, const unsigned int irow) const;
 
-   // Computesthe longitude (degs) for a given column index.
+   // Computes the longitude (degs) for a given column index.
    // Returns true if the longitude is valid
    bool computeLongitude(double* const lon, const unsigned int icol) const;
 
@@ -74,7 +74,7 @@ public:
       ) const;
 
    // Locates an elevation value (meters) for a given reference point and returns
-   // it in 'elev'.  Function returns true if successfull, otherwise 'elev' is unchanged.
+   // it in 'elev'.  Function returns true if successful, otherwise 'elev' is unchanged.
    virtual bool getElevation(
          LCreal* const elev,           // The elevation value (meters)
          const double lat,             // Reference latitude (degs)

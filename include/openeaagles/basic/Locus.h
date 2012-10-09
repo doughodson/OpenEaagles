@@ -75,7 +75,7 @@ private:
 };
 
 
-} // End Basic namspace
+} // End Basic namespace
 } // End Eaagles namespace
 
 #endif

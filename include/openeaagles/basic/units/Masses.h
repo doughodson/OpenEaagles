@@ -25,7 +25,7 @@
 //		    the units of another Mass derived instance.
 //
 //	    Conversion routines:
-//		    static LCreal gramsToKiloGrams(const LCreal v)  { return v * .001f; }
+//	      static LCreal gramsToKiloGrams(const LCreal v)  { return v * .001f; }
 //        static LCreal gramsToSlugs(const LCreal v)      { return v * .00006852f }
 //        static LCreal kiloGramsToGrams(const LCreal v)  { return v * 1000f }
 //        static LCreal kiloGramsToSlugs(const LCreal v)  { return v * 0.06854f}

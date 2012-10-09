@@ -6,19 +6,20 @@ namespace BasicGL {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Rotators, "Rotators")
 EMPTY_SERIALIZER(Rotators)
+EMPTY_DELETEDATA(Rotators)
 
 // -----------------------------------------------------------------------------
 // Event Handler (s)
 // -----------------------------------------------------------------------------
 BEGIN_EVENT_HANDLER(Rotators)
-    ON_EVENT_OBJ(UPDATE_VALUE, onXRotate, Basic::Angle)     
-    ON_EVENT_OBJ(UPDATE_VALUE, onXRotate, Basic::Number)
+    ON_EVENT_OBJ(UPDATE_VALUE,  onXRotate,    Basic::Angle)     
+    ON_EVENT_OBJ(UPDATE_VALUE,  onXRotate,    Basic::Number)
     ON_EVENT_OBJ(UPDATE_VALUE2, onXRotateDeg, Basic::Number)
-    ON_EVENT_OBJ(UPDATE_VALUE3, onYRotate, Basic::Angle)
-    ON_EVENT_OBJ(UPDATE_VALUE3, onYRotate, Basic::Number)
+    ON_EVENT_OBJ(UPDATE_VALUE3, onYRotate,    Basic::Angle)
+    ON_EVENT_OBJ(UPDATE_VALUE3, onYRotate,    Basic::Number)
     ON_EVENT_OBJ(UPDATE_VALUE4, onYRotateDeg, Basic::Number)
-    ON_EVENT_OBJ(UPDATE_VALUE5, onZRotate, Basic::Angle)
-    ON_EVENT_OBJ(UPDATE_VALUE5, onZRotate, Basic::Number)
+    ON_EVENT_OBJ(UPDATE_VALUE5, onZRotate,    Basic::Angle)
+    ON_EVENT_OBJ(UPDATE_VALUE5, onZRotate,    Basic::Number)
     ON_EVENT_OBJ(UPDATE_VALUE6, onZRotateDeg, Basic::Number)
 END_EVENT_HANDLER()
 
@@ -28,7 +29,7 @@ END_EVENT_HANDLER()
 Rotators::Rotators()
 {
     STANDARD_CONSTRUCTOR()
-    
+
     xRot = -1;
     yRot = -1;
     zRot = -1;
@@ -40,17 +41,10 @@ Rotators::Rotators()
 void Rotators::copyData(const Rotators& org, const bool)
 {
     BaseClass::copyData(org);
-   
+
     xRot = org.xRot;
     yRot = org.yRot;
     zRot = org.zRot;
-}
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
-void Rotators::deleteData()
-{
 }
 
 //------------------------------------------------------------------------------
@@ -210,8 +204,6 @@ bool Rotators::onZRotateDeg(const Basic::Number* const rotation)
     if (rotation != 0) return setZRotationDeg( rotation->getReal() );
     return false;
 }
-
-
 
 //------------------------------------------------------------------------------
 // drawFunc() -- draws the object(s)

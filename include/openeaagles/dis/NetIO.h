@@ -63,9 +63,9 @@ namespace Dis {
 //                                        !   6 => IEEE 1278.1A-1998
 //                                        !   7 => IEEE 1278.1 -- draft 15
 //
-//    siteID         <Basic::Number>      ! Site Identification
-//    applicationID  <Basic::Number>      ! Application Identification
-//    exerciseID     <Basic::Number>      ! Exercise Identification
+//    siteID         <Basic::Number>      ! Site Identification (default: 1)
+//    applicationID  <Basic::Number>      ! Application Identification (default: 1)
+//    exerciseID     <Basic::Number>      ! Exercise Identification (default: 1)
 //
 //    maxTimeDR   <Basic::Time>           ! Max DR time (default: 5 seconds)
 //                <Basic::PairStream>     ! List of max DR times by kinds and domains (see note #4)
@@ -73,8 +73,8 @@ namespace Dis {
 //    maxPositionError <Basic::Distance>  ! Max DR position error (default: 3 meters)
 //                   <Basic::PairStream> ! List of max DR position errors by kinds and domains (see note #4)
 //
-//    maxOrientationError <Basic::Angle>  ! Max DR anglular error (default: 3 degrees)
-//                    <Basic::PairStream> ! List of max DR anglular errors by kinds and domains (see note #4)
+//    maxOrientationError <Basic::Angle>  ! Max DR angular error (default: 3 degrees)
+//                    <Basic::PairStream> ! List of max DR angular errors by kinds and domains (see note #4)
 //
 //    maxAge         <Basic::Time>        ! Max age (without update) (default: 12.5 seconds)
 //                   <Basic::PairStream>  ! List of max ages (without update) by kinds and domains (see note #4)
@@ -108,7 +108,7 @@ namespace Dis {
 //             K5 will set the parameter for all domains of kinds #5
 //             K1D11 will set the parameter for kind #1, domain #11
 //
-//    5) Setting the 'maxEntityRange' slot to zero(0) for an entity kind/demain
+//    5) Setting the 'maxEntityRange' slot to zero(0) for an entity kind/domain
 //       will filter out all entities of that kind/domain type.
 //
 //    6) For outgoing emission PDUs, the list of EmissionPduHandlers are matched
@@ -373,6 +373,7 @@ protected:
    virtual void testInputEntityTypes(const unsigned int);    // Test quick lookup of incoming entity types
 
 private:
+    void initData();
 
     SPtr<Basic::NetHandler>   netInput;          // Input network handler
     SPtr<Basic::NetHandler>   netOutput;         // Output network handler
@@ -398,7 +399,7 @@ private:
    // Table of pointers to emission PDU handlers; EmissionPduHandler objects
    const EmissionPduHandler* emissionHandlers[MAX_EMISSION_HANDLERS];
 
-   // Number of iemission PDU handlers in the table, 'emissionHandlers'
+   // Number of emission PDU handlers in the table, 'emissionHandlers'
    unsigned int   nEmissionHandlers;
 };
 

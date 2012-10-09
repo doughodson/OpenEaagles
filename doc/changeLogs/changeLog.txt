@@ -1,31 +1,35 @@
 ================================================================================
-Changes since v12.07
+Changes since v12.09
 ================================================================================
 
 
 --------------------------------------------------------------------------------
 general
 
+-- across the board spelling fixes
 
 --------------------------------------------------------------------------------
 basic
-
-   Statistic class
-      1) Removed empty file in src/basic named Statistic.h - not needed
 
 
 --------------------------------------------------------------------------------
 basicGL
 
+   Display class
+      1) Fixed a bug associated with readFrameBuffer() returning a
+         boolean false, when it should return 0.
 
 --------------------------------------------------------------------------------
 dis
 
+
+--------------------------------------------------------------------------------
+gui-glut
+
+
 --------------------------------------------------------------------------------
 otw
 
-   OtwCigiCl class
-      1) Removed unused variables to eliminate warnings
 
 --------------------------------------------------------------------------------
 recorder
@@ -34,20 +38,10 @@ recorder
 --------------------------------------------------------------------------------
 simulation
 
-   Player class
-      1) Added "initVelocityKts" so that initial velocity can be specified
-         in knots
-
-   Steerpoint class
-      1) Updated serialize() method so that more steerpoint information is
-         save when serialized
 
 --------------------------------------------------------------------------------
 vehicle
 
 
 --------------------------------------------------------------------------------
-
-
-
 

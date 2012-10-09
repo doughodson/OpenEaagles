@@ -27,7 +27,7 @@
 //
 //
 //	    Conversion routines:
-//		    static LCreal newtonsToKiloNewtons(const LCreal v)     { return v * 0.001; }
+//        static LCreal newtonsToKiloNewtons(const LCreal v)     { return v * 0.001; }
 //        static LCreal newtonsToPoundForces(const LCreal v)     { return v * 0.2248; }
 //        static LCreal newtonsToPoundals(const LCreal v)        { return v * 7.233; }
 //        static LCreal kiloNewtonsToNewtons(const LCreal v)     { return v * 1000; }

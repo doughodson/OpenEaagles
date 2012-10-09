@@ -9,8 +9,9 @@
 namespace Eaagles {
 namespace Basic {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Color,"Color")
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Color, "Color")
 EMPTY_SERIALIZER(Color)
+EMPTY_DELETEDATA(Color)
 
 LCreal Color::defaultAlpha = 1.0f;
 
@@ -33,13 +34,6 @@ void Color::copyData(const Color& org, const bool)
 {
    BaseClass::copyData(org);
    color = org.color; 
-}
-
-//------------------------------------------------------------------------------
-//deleteData() -- delete member data
-//------------------------------------------------------------------------------
-void Color::deleteData()
-{
 }
 
 //------------------------------------------------------------------------------
@@ -123,8 +117,6 @@ bool Color::setAlpha(const LCreal value)
     return ok;
 }
 
-
-
 //------------------------------------------------------------------------------
 // Comparison operators: == and !=
 //------------------------------------------------------------------------------
@@ -137,7 +129,6 @@ bool operator!=(const Color& c1, const Color& c2)
 {
     return (c1.getRGBA() != c2.getRGBA());
 }
-
 
 //------------------------------------------------------------------------------
 // getDefaultAlpha() -- returns the default alpha value
@@ -157,4 +148,3 @@ void Color::setDefaultAlpha(const LCreal alpha)
 
 } // End Basic namespace
 } // End Eaagles namespace
-

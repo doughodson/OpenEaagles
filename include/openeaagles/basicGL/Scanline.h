@@ -50,7 +50,7 @@ protected:
       void getNorm(osg::Vec3& lnorm, const LCreal x) const;
 
       LCreal      x0;               // X value at start
-      osg::Vec3   n0;               // Inital Norm
+      osg::Vec3   n0;               // Initial Norm
       osg::Vec3   nslope;           // Norm slope
       bool        aptEdge2;         // reached second edge
       SPtr<Polygon> polygon;      // Clipped (working) polygon

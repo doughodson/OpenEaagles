@@ -41,7 +41,7 @@ namespace Basic {
 // Public methods: Base class public methods, plus ...
 //
 //      Hsv(const LCreal h, const LCreal s, const LCreal v)
-//          Special constuctor that initializes the object to h, s,  and v
+//          Special constructor that initializes the object to h, s,  and v
 //
 //      LCreal hue()
 //      LCreal saturation()

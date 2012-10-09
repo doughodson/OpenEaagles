@@ -3,7 +3,8 @@
 #include "openeaagles/basic/Float.h"
 #include "openeaagles/basic/Integer.h"
 #include "openeaagles/basic/Pair.h"
-#include <stdlib.h>
+
+#include <cstdlib>
 
 namespace Eaagles {
 namespace Basic {

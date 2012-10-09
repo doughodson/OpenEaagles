@@ -15,7 +15,7 @@ namespace LinearSystem {
 // Base class:  Basic::Object -> ScalerFunc-> DiffEquation -> SecondOrderTf -> Sz2
 //
 // Description: Models a second order continuous transfer function in the discrete
-//              z-domain using a difference equation with Tustin coeffients.
+//              z-domain using a difference equation with Tustin coefficients.
 //
 // Transfer function:
 //       N1*s*s + N2*s + N3
@@ -24,23 +24,23 @@ namespace LinearSystem {
 //
 // Form name: Sz2
 // Slots:
-//    N1    <Number>     Coefficent N1 (default: 0)
-//    n1    <Number>     Coefficent N1 (default: 0)
+//    N1    <Number>     Coefficient N1 (default: 0)
+//    n1    <Number>     Coefficient N1 (default: 0)
 //
-//    N2    <Number>     Coefficent N2 (default: 0)
-//    n2    <Number>     Coefficent N2 (default: 0)
+//    N2    <Number>     Coefficient N2 (default: 0)
+//    n2    <Number>     Coefficient N2 (default: 0)
 //
-//    N3    <Number>     Coefficent N3 (default: 0)
-//    n3    <Number>     Coefficent N3 (default: 0)
+//    N3    <Number>     Coefficient N3 (default: 0)
+//    n3    <Number>     Coefficient N3 (default: 0)
 //
-//    D1    <Number>     Coefficent D1 (default: 0)
-//    d1    <Number>     Coefficent D1 (default: 0)
+//    D1    <Number>     Coefficient D1 (default: 0)
+//    d1    <Number>     Coefficient D1 (default: 0)
 //
-//    D2    <Number>     Coefficent D2 (default: 0)
-//    d1    <Number>     Coefficent D2 (default: 0)
+//    D2    <Number>     Coefficient D2 (default: 0)
+//    d1    <Number>     Coefficient D2 (default: 0)
 //
-//    D3    <Number>     Coefficent D3 (default: 0)
-//    d3    <Number>     Coefficent D3 (default: 0)
+//    D3    <Number>     Coefficient D3 (default: 0)
+//    d3    <Number>     Coefficient D3 (default: 0)
 //
 //------------------------------------------------------------------------------
 class Sz2 : public SecondOrderTf {

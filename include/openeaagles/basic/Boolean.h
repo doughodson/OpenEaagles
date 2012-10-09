@@ -21,7 +21,7 @@ namespace Basic {
 // Public methods: Base class public methods, plus ...
 //
 //      Boolean(const bool flag)
-//          Special constuctor that initializes the boolean to 'flag'
+//          Special constructor that initializes the boolean to 'flag'
 //
 //      bool()
 //          Returns value as 'bool' type

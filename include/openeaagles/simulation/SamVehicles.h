@@ -16,7 +16,7 @@ namespace Simulation {
 
 //==============================================================================
 // Class SamVehicle
-// Description: Sam vehichle (TEL, TELAR, etc)
+// Description: Sam vehicle (TEL, TELAR, etc)
 //
 // Form name: SamVehicle
 // Slots:

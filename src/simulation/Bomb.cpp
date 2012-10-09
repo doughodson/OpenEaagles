@@ -311,7 +311,7 @@ void Bomb::weaponDynamics(const LCreal dt)
    // and the controls from guidance, if any
    if (guidanceValid) {
       LCreal h = g * 2.0f;
-      osg::Vec3 ab0(0, 0, 0); // body accererations
+      osg::Vec3 ab0(0, 0, 0); // body accelerations
 
       ab0[1] = h * cmdStrAz;  // body Y accel (m/s/s)
       if (ab0[1] >  h) ab0[1] = h;
@@ -327,12 +327,12 @@ void Bomb::weaponDynamics(const LCreal dt)
    }
 
    // ---
-   // Compute new velocity vectory (earth)
+   // Compute new velocity vector (earth)
    // ---
    osg::Vec3 ve1 = getVelocity() + (ae1 * dt);
 
    // ---
-   // Compute euler angles
+   // Compute Euler angles
    // ---
    LCreal vg = sqrt(ve1[INORTH]*ve1[INORTH] + ve1[IEAST]*ve1[IEAST]);
    LCreal newPsi   = lcAtan2(ve1[IEAST],ve1[INORTH]);
@@ -340,7 +340,7 @@ void Bomb::weaponDynamics(const LCreal dt)
 
 
    // ---
-   // Set the new values: euler angles first then velocities
+   // Set the new values: Euler angles first then velocities
    // ---
    setEulerAngles(0.0, newTheta, newPsi);
    setVelocity(ve1);

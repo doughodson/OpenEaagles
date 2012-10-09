@@ -61,11 +61,11 @@ BEGIN_SLOTTABLE(Player)
    // Player's initial geocentric position
    "initGeocentric",    //  7) Initial geocentric position vector [ x y z ] (meters)
 
-   // Player's initial euler angles
+   // Player's initial Euler angles
    "initRoll",          //  8) Initial roll:    (radians, Basic::Angle) (or use initEuler)
    "initPitch",         //  9) Initial pitch:   (radians, Basic::Angle) (or use initEuler)
    "initHeading",       // 10) Initial heading: (radians, Basic::Angle) (or use initEuler)
-   "initEuler",         // 11) Initial euler Angles: radians [ roll pitch yaw ] (or use below)
+   "initEuler",         // 11) Initial Euler Angles: radians [ roll pitch yaw ] (or use below)
 
    // Player's initial velocity
    "initVelocity",      // 12) Initial Velocity: meters/sec
@@ -100,7 +100,7 @@ BEGIN_SLOTTABLE(Player)
    "testRollRate",      // 33) Test roll rate (units per second)
    "testPitchRate",     // 34) Test pitch rate (units per second)
    "testYawRate",       // 35) Test heading rate (units per second)
-   "testBodyAxis",      // 36) Test rates are in body coordinates else euler rates (default: false)
+   "testBodyAxis",      // 36) Test rates are in body coordinates else Euler rates (default: false)
 
    "useCoordSys"        // 37) Coord system to use for position updating { WORLD, GEOD, LOCAL }
 END_SLOTTABLE(Player)
@@ -566,68 +566,63 @@ void Player::reset()
    updateSystemPointers();
    loadSysPtrs = false;
 
-   // ---
-   // Reset Position
-   // ---
+   if (isLocalPlayer()) {
 
-   if (initPosFlg) {
-      setPosition(initPosVec[INORTH], initPosVec[IEAST], -initAlt);
-      if (useCoordSys == CS_NONE) useCoordSys = CS_LOCAL;
+      // ---
+      // Reset Position
+      // ---
+
+      if (initPosFlg) {
+         setPosition(initPosVec[INORTH], initPosVec[IEAST], -initAlt);
+         if (useCoordSys == CS_NONE) useCoordSys = CS_LOCAL;
+      }
+      else if (initLatLonFlg) {
+         setPositionLLA(initLat, initLon, initAlt);
+         if (useCoordSys == CS_NONE) useCoordSys = CS_GEOD;
+      }
+      else if (initGeoPosFlg) {
+         setGeocPosition(initGeoPosVec);
+         if (useCoordSys == CS_NONE) useCoordSys = CS_WORLD;
+      }
+      else {
+         setPosition(0,0,-initAlt,false);
+         if (useCoordSys == CS_NONE) useCoordSys = CS_LOCAL;
+      }
+
+      useCoordSysN1 = CS_NONE;
+
+      // ---
+      // Reset Euler angles and rates
+      // ---
+      setEulerAngles(initAngles);
+      setAngularVelocities(testAngRates);
+      velVecN1.set(0,0,0);
+
+      // ---
+      // Reset velocities
+      // ---
+      setVelocityBody(initVp, 0.0, 0.0);
+      setAccelerationBody(0.0, 0.0, 0.0);
+
+      // ---
+      // Reset misc
+      // ---
+      setMode(initMode);
+      setDamage(0.0f);
+      setSmoke(0.0f);
+      setFlames(0.0f);
+      justKilled = false;
+      killedBy = 0;
+
+      altSlaved = false;
+      posSlaved = false;
+
+      tElev    = 0.0f;
+      tElevValid = false;
+
+      syncState1Ready = false;
+      syncState2Ready = false;
    }
-   else if (initLatLonFlg) {
-      setPositionLLA(initLat, initLon, initAlt);
-      if (useCoordSys == CS_NONE) useCoordSys = CS_GEOD;
-   }
-   else if (initGeoPosFlg) {
-      setGeocPosition(initGeoPosVec);
-      if (useCoordSys == CS_NONE) useCoordSys = CS_WORLD;
-   }
-   else {
-      setPosition(0,0,-initAlt,false);
-      if (useCoordSys == CS_NONE) useCoordSys = CS_LOCAL;
-   }
-
-   useCoordSysN1 = CS_NONE;
-
-   // ---
-   // Reset euler angles and rates
-   // ---
-   setEulerAngles(initAngles);
-   setAngularVelocities(testAngRates);
-   velVecN1.set(0,0,0);
-
-   // ---
-   // Reset velocities
-   // ---
-   setVelocityBody(initVp, 0.0, 0.0);
-   setAccelerationBody(0.0, 0.0, 0.0);
-
-   // ---
-   // Reset misc
-   // ---
-   setMode(initMode);
-   setDamage(0.0f);
-   setSmoke(0.0f);
-   setFlames(0.0f);
-   justKilled = false;
-   killedBy = 0;
-
-   altSlaved = false;
-   posSlaved = false;
-
-   tElev    = 0.0f;
-   tElevValid = false;
-
-
-   // ---
-   // Reset our NIB
-   // ---
-   if (nib != 0) {
-      nib->event(RESET_EVENT);
-   }
-
-   syncState1Ready = false;
-   syncState2Ready = false;
 
    // ---
    // Reset our base class
@@ -2190,7 +2185,7 @@ bool Player::setGeocPosition(const osg::Vec3d& pos, const bool slaved)
 }
 
 
-// Sets euler angles: (rad) [ roll pitch yaw ]
+// Sets Euler angles: (rad) [ roll pitch yaw ]
 bool Player::setEulerAngles(const double r, const double p, const double y)
 {
    // Set angles
@@ -2211,13 +2206,13 @@ bool Player::setEulerAngles(const double r, const double p, const double y)
    return true;
 }
 
-// Sets euler angle vector: (rad) [ roll pitch yaw ]
+// Sets Euler angle vector: (rad) [ roll pitch yaw ]
 bool Player::setEulerAngles(const osg::Vec3d& newAngles)
 {
    return setEulerAngles(newAngles.x(), newAngles.y(), newAngles.z());
 }
 
-// Sets geocentric (body/ECEF) euler angles: (radians) [ roll pitch yaw ]
+// Sets geocentric (body/ECEF) Euler angles: (radians) [ roll pitch yaw ]
 bool Player::setGeocEulerAngles(const osg::Vec3d& newAngles)
 {
    // Set the geocentric angles
@@ -2251,7 +2246,7 @@ bool Player::setRotMat(const osg::Matrixd& rr)
    // Set quaternions
    q.set(rm);
 
-   // Compute the euler angles and the sin/cos values of the angles
+   // Compute the Euler angles and the sin/cos values of the angles
    Basic::Nav::computeEulerAngles(rm, &angles, &scPhi, &scTheta, &scPsi);
 
    // compute body/ECEF directional cosines
@@ -2272,7 +2267,7 @@ bool Player::setQuaternions(const osg::Quat& newQ)
    // Set the rotational matrix
    rm.makeRotate(q);
 
-   // Compute the euler angles and the sin/cos values of the angles
+   // Compute the Euler angles and the sin/cos values of the angles
    Basic::Nav::computeEulerAngles(rm, &angles, &scPhi, &scTheta, &scPsi);
 
    // compute body/ECEF directional cosines
@@ -3281,7 +3276,7 @@ void Player::positionUpdate(const LCreal dt)
    }
 
    // ---
-   // Test only: update the euler angles if we have non-zero test anguler rates
+   // Test only: update the Euler angles if we have non-zero test anguler rates
    // ---
    if (testAngRates.length2() > 0 && !attFrz) {
 
@@ -3999,7 +3994,7 @@ bool Player::setSlotInitHeading(const Basic::Number* const msg)
 }
 
 
-// initEuler: Initial euler Angles: radians [ roll pitch yaw ]
+// initEuler: Initial Euler Angles: radians [ roll pitch yaw ]
 bool Player::setSlotInitEulerAngles(const Basic::List* const numList)
 {
    bool ok = false;
@@ -4064,7 +4059,7 @@ bool Player::setSlotTestYawRate(const Basic::Angle* const msg)
    return ok;
 }
 
-// testBodyAxis: Test rates are in the body axis else they're euler rates (default: false)
+// testBodyAxis: Test rates are in the body axis else they're Euler rates (default: false)
 bool Player::setSlotTestBodyAxis(const Basic::Number* const msg)
 {
    bool ok = false;

@@ -26,7 +26,7 @@ BEGIN_SLOTTABLE(Field)
     "vertical",         // 7) vertical field flag (text displayed vertically)
     "brackets",         // 8) Bracket flag
     "linked",           // 9) Linked flag (auto step to next input field)
-    "inheritColor",     //10) Inherit color of our containters (instead of using default color)
+    "inheritColor",     //10) Inherit color of our container (instead of using default color)
     "font",             //11) Type of font to use before drawing
     "startCharPos",     //12) Our starting character position (we may want to skip!)
 END_SLOTTABLE(Field)

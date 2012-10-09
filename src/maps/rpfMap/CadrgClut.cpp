@@ -144,15 +144,15 @@ void CadrgClut::load(CadrgFrameEntry& frame, int cib, ColorTableSizes clutSize)
 	loc[1].componentId = LOC_COLORMAP_SUBSECTION;
 	loc[2].componentId = LOC_COLOR_CONVERTER_SUBSECTION;
 	// Parse our locations, just like the file.
-    parseLocations(fin, loc, 3);
+        parseLocations(fin, loc, 3);
 
-    // If we don't get a valid index, return
+        // If we don't get a valid index, return
 	if (loc[0].physicalIdx == ~0)	{
         std::cout << "CadrgClut::load() : Can't find the color/gray section subheader (ID=134) location!" << std::endl;
 		return;
 	}
 
-    // Go find the color table
+        // Go find the color table
 	fin.seekg(loc[0].physicalIdx, std::ios::beg);
 
 	// Read section subheader 

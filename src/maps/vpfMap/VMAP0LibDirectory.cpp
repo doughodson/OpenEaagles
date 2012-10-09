@@ -120,19 +120,21 @@ void VMAP0LibDirectory::loadTables()
     //    ok = table->loadTableFromFile(string->getString(), VPFDirectory::LINEAGE);
     //}
 
-    // now we have all our data type and values loaded from the rference directory, we must descend into our coverage directories
+    // now we have all our data type and values loaded from the reference directory,
+    // we must descend into our coverage directories
     // read our coverage attribute table to determine the names of our coverages
     if (cvgOk) {
         table = 0;
         // our file is good, read through and open our directories
         table = getTable(VPFDirectory::CAT);
         //VPFDataType* t = 0;
-        size_t size = 0;
-        size_t count = 0;
-        for (int i = 0; i < table->getNumberOfRows() && i < MAX_COVERAGES; i++) {
-            count = 0;
-            size = 0;
-            // our value for the library comes in as an 8 character name with trailing spaces, so we need to truncate it to a * character 
+//        size_t size = 0;
+//        size_t count = 0;
+//        for (int i = 0; i < table->getNumberOfRows() && i < MAX_COVERAGES; i++) {
+//            count = 0;
+//            size = 0;
+            // our value for the library comes in as an 8 character name with
+            // trailing spaces, so we need to truncate it to a * character 
             // text value with no trailing spaces to put it into our pathname
             //t = table->getTableValue(i+1, 2);
             //t = 0;
@@ -150,7 +152,7 @@ void VMAP0LibDirectory::loadTables()
             //    coverages[numCoverages]->setSlotPath(string);
             //    numCoverages++;
             //}
-        }
+//        }
     }
 }
 

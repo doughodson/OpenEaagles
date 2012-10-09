@@ -17,7 +17,7 @@ IMPLEMENT_SUBCLASS(IoDevice,"IoDevice")
 
 // slot table for this class type
 BEGIN_SLOTTABLE(IoDevice)
-   "adapters",    // 1)  List of IoAdapter objects (default: none)
+   "adapters",    // 1) List of IoAdapter objects (default: none)
    "devices",     // 2) List of IoDevice objects; i.e., sub-devices (default: none)
 END_SLOTTABLE(IoDevice)
 

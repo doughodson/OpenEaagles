@@ -163,7 +163,7 @@ public:
 // Descriptions: Switch between subcomponent signatures based on ownship camouflage type
 // Form name: SigSwitch
 // Note:
-//  1) First pair (1:) is comouflage type 0, the second (2:) is camouflage type 1, etc.
+//  1) First pair (1:) is camouflage type 0, the second (2:) is camouflage type 1, etc.
 //------------------------------------------------------------------------------
 class SigSwitch : public RfSignature  
 {
@@ -186,7 +186,7 @@ public:
 //    table      <Basic::Table2>   ! Table of RCS by target Az/El angles (default: 0)
 //
 //    swapOrder  <Basic::Number>   ! True if elevation is the table's first independent (default: false)
-//                     ! variable and azumuth is the second.
+//                     ! variable and azimuth is the second.
 //
 //    inDegrees  <Basic::Number>   ! True if the table's independent variables az and
 //                                 ! el are in degrees instead of the default radians (default: false)
@@ -201,7 +201,7 @@ public:
 //       -- and the RCS is the dependent variable (meters squared)
 //
 //  2) If 'swapOrder' is set true then elevation is the table's first independent
-//     variable and azumuth is the second.
+//     variable and azimuth is the second.
 //
 //  3) If 'inDegrees' is set true then the table's independent variables az and
 //     el are in degrees instead of the default radians

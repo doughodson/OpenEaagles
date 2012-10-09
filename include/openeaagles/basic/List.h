@@ -87,7 +87,7 @@ namespace Basic {
 //      Item* getFirstItem()
 //      Item* getLastItem()
 //          Return pointers to the first/last List::Item.  The List::Item
-//          member fuctions below are used to traverse the list.
+//          member functions below are used to traverse the list.
 //
 //      addHead(Item* newItem)
 //      addTail(Item* newItem)

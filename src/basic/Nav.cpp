@@ -288,7 +288,7 @@ bool Nav::gll2bd(
    }
 
    // ---
-   // *** Transform destination lat/lon into the equivilent spherical lat/lon
+   // *** Transform destination lat/lon into the equivalent spherical lat/lon
    // ---
 
    // Ellipsoidal correction factor
@@ -835,7 +835,7 @@ bool Nav::computeRotationalMatrix(
 //------------------------------------------------------------------------------
 bool Nav::computeEulerAngles(
       const osg::Matrixd& rm,    // IN: Rotational matrix
-      osg::Vec3d* const angles,  // OUT: euler angles (radians)
+      osg::Vec3d* const angles,  // OUT: Euler angles (radians)
       osg::Vec2d* const scPhi,   // OUT: Sin/Cos of phi (Optional)
       osg::Vec2d* const scTht,   // OUT: Sin/Cos of theta (Optional)
       osg::Vec2d* const scPsi    // OUT: Sin/Cos of psi (Optional)

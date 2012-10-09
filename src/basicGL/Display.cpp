@@ -2009,11 +2009,11 @@ Image* Display::readFrameBuffer(const unsigned int x, const unsigned int y, cons
    // check input parameters
    if ((width < 1) || (height < 1) || (width > MAX_IMAGE_WIDTH) || (height > MAX_IMAGE_HEIGHT)) {
       std::cout << "Display::readGlBuffer(): Invalid screenshot dimensions" << std::endl;
-      return false;
+      return 0;
    }
    if ( (x<0) || (y < 0)) {
       std::cout << "Display::readGlBuffer(): Invalid screenshot location" << std::endl;
-      return false;
+      return 0;
    }
 
    // align width to 4-byte boundary:

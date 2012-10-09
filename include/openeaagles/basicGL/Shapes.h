@@ -77,7 +77,7 @@ private:
 // Slots:
 //  outerRadius   <Number>    ! Outer radius of our circle (default: 1.1 )
 //
-// Draws a nice dougnut type circle, based on inner and outer radius
+// Draws a nice doughnut type circle, based on inner and outer radius
 //------------------------------------------------------------------------------
 class OcclusionCircle : public Circle {
 

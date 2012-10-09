@@ -18,7 +18,7 @@ namespace Simulation {
 //    Component::updateData() as part of the player's component list.
 //
 //    2) computer model dynamics in DyanmicsModel::dynamics(), which is called
-//    from Player::dynamics() to be syncronized.
+//    from Player::dynamics() to be synchronized.
 //
 // Form name: SpaceDynamicsModel
 //==============================================================================

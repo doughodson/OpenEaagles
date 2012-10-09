@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Class:     Bullseye
+// Class: Bullseye
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_Simulation_Bullseye_H__
 #define __Eaagles_Simulation_Bullseye_H__

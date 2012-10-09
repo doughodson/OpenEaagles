@@ -74,7 +74,7 @@ namespace Simulation {
 //       (LAUNCHED)           (PRE_RELEASE)        2) release() is called; the flyout weapon
 //                                                 is created and added to player list
 //
-//       (LAUNCHED)           (ACTIVE)             3) At the end of the next time-critcal frame --
+//       (LAUNCHED)           (ACTIVE)             3) At the end of the next time-critical frame --
 //                                                 the flyout has gone active
 //
 //       (LAUNCHED)           (DETONATED)          4) After the flyout weapon has detonated
@@ -99,7 +99,7 @@ namespace Simulation {
 //                                                 hold' flag is cleared, which will allow it
 //                                                 to go active
 //
-//       (LAUNCHED/false)     (ACTIVE/false)       4) At the end of the next Time/Critcal frame --
+//       (LAUNCHED/false)     (ACTIVE/false)       4) At the end of the next Time/Critical frame --
 //                                                 the flyout has gone active
 //
 //       (LAUNCHED/false)    (DETONATED/false)     5) After the flyout weapon has detonated
@@ -389,7 +389,7 @@ private:
     // ---
     LCreal      tof;            // Current time of flight   (sec)   (tod)
     LCreal      maxTOF;         // max time of flight       (sec)
-    LCreal      tsg;            // time to start quidance   (sec)
+    LCreal      tsg;            // time to start guidance   (sec)
     LCreal      maxBurstRng;    // max burst range -- most entities are damaged within this range. (meters)
     LCreal      lethalRange;    // lethal range -- most entities are killed within this range.     (meters)
     LCreal      sobt;           // start-of-burn time       (sec)

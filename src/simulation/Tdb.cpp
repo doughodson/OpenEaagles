@@ -297,8 +297,12 @@ unsigned int Tdb::processPlayers(Basic::PairStream* const players)
    double hDist = 1000000.0 * Basic::Distance::NM2M;  // Distance to horizon (m) (default: really far away)
    double hTanAng = 0;                                // Tangent of the angle to horizon (positive down)
    if (usingEcefFlg) {
+      // Our vertical offset from our ownship is the inverse of the 'z'
+      // translation component from our gimbal to NED matrix.
+      double vertOffset = -rm(3,2);    // Z trnaslation (but positive up)
+
       // distance from the center of the earth
-      double distEC = osAlt + earthRadius;
+      double distEC = vertOffset + osAlt + earthRadius;
       double distEC2 = distEC * distEC;  // squared
 
       // earth radius squared

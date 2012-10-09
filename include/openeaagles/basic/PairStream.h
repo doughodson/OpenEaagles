@@ -53,7 +53,7 @@ class Pair;
 //     void put(Pair* pair1) 
 //
 //   Removes 'pair' from this list and true is returned.  If 'pair' 'obj' is not found
-//   then false is returned.  (Note: The Pair is unref() and therfore possible to delete)
+//   then false is returned.  (Note: The Pair is unref() and therefore possible to delete)
 //     bool remove(Pair* pair1) 
 //
 //------------------------------------------------------------------------------
@@ -105,7 +105,7 @@ public:
    }
 
    // Removes 'pair' from this list and true is returned.  If 'pair' 'obj' is not found
-   // then false is returned.  (Note: The Pair is unref() and therfore possible to delete)
+   // then false is returned.  (Note: The Pair is unref() and therefore possible to delete)
    bool remove(Pair* pair1) {
       return List::remove((Object*)pair1);
    }

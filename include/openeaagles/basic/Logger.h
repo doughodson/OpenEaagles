@@ -17,7 +17,7 @@ namespace Basic {
 //
 // Form name: Logger
 // Slots:
-//     file       <String>     ! Log file name (default: empty sring)
+//     file       <String>     ! Log file name (default: empty string)
 //     path       <String>     ! Path to log directory (optional). (default: empty string)
 //     topLine    <String>     ! Optional top (first) line of file. (default: 0)
 //

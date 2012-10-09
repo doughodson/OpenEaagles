@@ -726,7 +726,7 @@ void Nib::nib2PlayerState()
       player->setFlames( getFlames() );
       player->setCamouflageType( getCamouflageType() );
 
-      // IPlayer's position and euler angles are set by the player
+      // IPlayer's position and Euler angles are set by the player
       // during its dynamics phase and using our DR functions.
    }
 }

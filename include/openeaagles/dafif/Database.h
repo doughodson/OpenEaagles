@@ -15,7 +15,7 @@
 //      records.  One a single thread (single user) application, this is not
 //      a problem.  However, on a multi-thread (multi-user) application, the
 //      in-use member functions should be used to protect the data during a
-//      data query and retrievel operation.
+//      data query and retrieval operation.
 //      Example --
 //           if (requestDbInUse()) {
 //               // We have exclusive use of the database ...

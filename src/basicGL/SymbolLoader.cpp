@@ -22,7 +22,7 @@ EMPTY_SERIALIZER(SymbolLoader)
 BEGIN_SLOTTABLE(SymbolLoader)
    "templates",         // 1) List of templates to use for navaids
    "showOnlyInRange",   // 2) only show symbols within map range
-   "interconnect",      // 3) Interfconnect the symbols   
+   "interconnect",      // 3) Interconnect the symbols   
 END_SLOTTABLE(SymbolLoader)
 
 // Map slot table to handles 

@@ -62,7 +62,7 @@ namespace Basic {
 // http://www.calculator.org/properties/volume.prop - Flow Simulation Calculator
 // http://www.gcsaa.org/resource/supertools/volume_form.asp - Golf Course Superintendents Association of America
 // http://www-cta.ornl.gov/cta/data/tedb22/Edition22_AppendixB.pdf - Transportation Energy Data Book: Edition 22 - 2002
-//////////////////////////////////////////////////////////////////////////
+// ----------------------------------------------------------------------------
 
 //------------------------------------------------------------------------------
 // Class:  Volume  
