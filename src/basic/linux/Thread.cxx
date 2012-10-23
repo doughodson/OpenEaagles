@@ -30,6 +30,8 @@ void* Thread::staticThreadFunc(void* lpParam)
    parent->unref();
    thread->unref();
 
+   killed = true;
+
    return (void*) rtn;
 }
 
