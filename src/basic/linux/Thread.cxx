@@ -26,11 +26,10 @@ void* Thread::staticThreadFunc(void* lpParam)
    // The main thread function, which is a Thread class memeber function,
    // will handle the rest.
    unsigned long rtn = thread->mainThreadFunc();
+   thread->setTerminated();
 
    parent->unref();
    thread->unref();
-
-   killed = true;
 
    return (void*) rtn;
 }
