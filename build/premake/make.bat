@@ -1,12 +1,13 @@
 rem
 rem set premake location
 rem
-@SET Premake=..\..\..\OpenEaagles3rdParty\bin\premake4.exe
+@SET Premake=..\..\..\OpenEaagles3rdParty\bin\premake_v4.4.beta4.exe
+rem @SET Premake=..\..\..\OpenEaagles3rdParty\bin\premake_v4.4.dev.exe
 rem
 rem delete old solution/workspace files
 rem
-rmdir /S /Q ..\codeblocks
-rmdir /S /Q ..\codelite
+rem rmdir /S /Q ..\codeblocks
+rem rmdir /S /Q ..\codelite
 rmdir /S /Q ..\vs2008
 rmdir /S /Q ..\vs2010
 rem
@@ -18,8 +19,8 @@ rmdir /S /Q ..\..\lib\vs2010
 rem
 rem create solution/workspace files
 rem
-%Premake% codeblocks
-%Premake% codelite
+rem %Premake% codeblocks
+rem %Premake% codelite
 %Premake% vs2008
 %Premake% vs2010
 
