@@ -42,6 +42,9 @@ gui-glut
 --------------------------------------------------------------------------------
 otw
 
+   CigiClNetworkSignalProcessing class
+      1) OnHotResp() -- added support for the CigiHatHotXRespV3_2 class.
+
 
 --------------------------------------------------------------------------------
 recorder
