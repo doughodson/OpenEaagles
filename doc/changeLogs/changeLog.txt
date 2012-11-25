@@ -50,6 +50,11 @@ recorder
 --------------------------------------------------------------------------------
 simulation
 
+   Navigation class
+      1) Added an initial route, which is set with the 'route' slot (setSlotRoute()),
+      and is used by reset() to reset the route to it's initial input value.
+      2) Added setRoute(), which like setSlotRoute(), will set the current route,
+      but it does not set the initial route used by reset().
 
 --------------------------------------------------------------------------------
 vehicle
