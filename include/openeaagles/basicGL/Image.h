@@ -4,11 +4,6 @@
 #ifndef __Eaagles_BasicGL_Image_H__
 #define __Eaagles_BasicGL_Image_H__
 
-#if !defined(WIN32)
-struct BITMAPFILEHEADER;
-struct BITMAPINFOHEADER;
-#endif
-
 #include "openeaagles/basic/Object.h"
 #include <GL/gl.h>
 
@@ -16,6 +11,7 @@ namespace Eaagles {
    namespace Basic { class Number; }
 
 namespace BasicGL {
+   struct BITMAPINFOHEADER_X;
 
 //------------------------------------------------------------------------------
 // Class: Image
@@ -71,8 +67,8 @@ public:
 
 private:
    void initData();
-   GLubyte* readRgbValuesBMP(FILE* const fp, const unsigned int offset, const BITMAPINFOHEADER* const bmfi) const;
-   GLubyte* readColorValuesBMP(FILE* const fp, const unsigned int offset, const BITMAPINFOHEADER* const bmfi) const;
+   GLubyte* readRgbValuesBMP(FILE* const fp, const unsigned int offset, const BITMAPINFOHEADER_X* const bmfi) const;
+   GLubyte* readColorValuesBMP(FILE* const fp, const unsigned int offset, const BITMAPINFOHEADER_X* const bmfi) const;
 
    unsigned int width;           // width in pixels
    unsigned int height;          // height in pixels
