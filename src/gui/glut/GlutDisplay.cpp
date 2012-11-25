@@ -426,6 +426,7 @@ void GlutDisplay::reshapeSubWindow()
          glutPositionWindow(newX, newY);
          glutReshapeWindow(newWidth, newHeight);
          reshapeIt(newWidth, newHeight);
+         glutPostWindowRedisplay( winId );
       }
    }
 }

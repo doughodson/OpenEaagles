@@ -35,6 +35,9 @@ dis
 --------------------------------------------------------------------------------
 gui-glut
 
+   GlutDisplay class
+      1) reshapeSubWindow() -- added a glutPostWindowRedisplay() call since the
+      glutReshapeWindow() didn't always take on Linux.
 
 --------------------------------------------------------------------------------
 otw
