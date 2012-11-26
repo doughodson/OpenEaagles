@@ -59,9 +59,19 @@ simulation
       used to find the OnboardComputer.  The execute() fucntion will find the
       OnboardComputer and 'trigger' the action.
 
+   Antenna class
+      1) onRfEmissionEvent() -- created and ref()'d a local copy of the RfSystem
+      pointer.  .  Without this change, the Antenna can remove the ‘sys’ pointer
+      in the middle of this method when a shutdown event occurs.
+
+      2) onRfEmissionReturnEventAntenna() -- created and ref()'d a local copy of
+      the RfSystem pointer.  .  Without this change, the Antenna can remove the
+      ‘sys’ pointer in the middle of this method when a shutdown event occurs.
+
    Navigation class
       1) Added an initial route, which is set with the 'route' slot (setSlotRoute()),
       and is used by reset() to reset the route to it's initial input value.
+
       2) Added setRoute(), which like setSlotRoute(), will set the current route,
       but it does not set the initial route used by reset().
 
