@@ -138,7 +138,7 @@ void Thread::closeThread()
 //-----------------------------------------------------------------------------
 bool Thread::terminate()
 {
-   if (theThread != 0) {
+   if (theThread != 0 && !killed) {
       if ( getParent()->isMessageEnabled(MSG_INFO) ) {
          std::cout << "Thread(" << this << ")::terminate(): handle = " << theThread << std::endl;
       }
