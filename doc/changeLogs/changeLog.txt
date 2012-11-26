@@ -28,8 +28,12 @@ basicGL
    Image class
       1) Updated to read BMP files on Big-endian systems
 
+
 --------------------------------------------------------------------------------
 dis
+
+   EmitterBeamData struct
+      1) add the check for 'beamStatus', which was missing from the compare '==' operator.
 
 
 --------------------------------------------------------------------------------
@@ -38,6 +42,7 @@ gui-glut
    GlutDisplay class
       1) reshapeSubWindow() -- added a glutPostWindowRedisplay() call since the
       glutReshapeWindow() didn't always take on Linux.
+
 
 --------------------------------------------------------------------------------
 otw
