@@ -53,6 +53,12 @@ recorder
 --------------------------------------------------------------------------------
 simulation
 
+   Action class
+      1) Is now derived from basic's UBF Action class.  The execute() function
+      'actor' argument must be the OnboardComputer or the ownship, which can be
+      used to find the OnboardComputer.  The execute() fucntion will find the
+      OnboardComputer and 'trigger' the action.
+
    Navigation class
       1) Added an initial route, which is set with the 'route' slot (setSlotRoute()),
       and is used by reset() to reset the route to it's initial input value.

@@ -108,6 +108,7 @@ bool Action::setManager(OnboardComputer* const mgr)
    return true;
 }
 
+
 //------------------------------------------------------------------------------
 // Starts this action
 //------------------------------------------------------------------------------
@@ -133,6 +134,36 @@ bool Action::cancel()
 //------------------------------------------------------------------------------
 void Action::process(const LCreal)
 {
+}
+
+//------------------------------------------------------------------------------
+// Execute as an UBF action
+// -- Use the 'actor' to find our OBC and 'trigger' this action.
+//------------------------------------------------------------------------------
+bool Action::execute(Basic::Component* actor)
+{
+   bool ok = false;
+   if (actor != 0) {
+
+      // Was the actor our OBC?
+      OnboardComputer* obc = dynamic_cast<OnboardComputer*>( actor );
+
+      // If not, was it our ownship ...
+      //   and can we get our OBC from our ownship
+      if (obc == 0) {
+         Player* own = dynamic_cast<Player*>( actor );
+         if (own != 0) {
+            obc = own->getOnboardComputer();
+         }
+      }
+
+      // If we could find our OBC from the actor then trigger this action
+      if (obc != 0) {
+         ok = trigger(obc);
+      }
+
+   }
+   return ok;
 }
 
 //------------------------------------------------------------------------------

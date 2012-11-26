@@ -4,7 +4,7 @@
 #ifndef __Eaagles_Simulation_Action_H__
 #define __Eaagles_Simulation_Action_H__
 
-#include "openeaagles/basic/Component.h"
+#include "openeaagles/basic/ubf/Action.h"
 
 namespace Eaagles {
 
@@ -33,10 +33,15 @@ class Steerpoint;
 //  4) Any action that will take time to complete must have a manager
 //     passed via trigger().
 //
+//  5) Derived from an UBF action (see "openeaagles/basic/ubf/Action.h").
+//  The execute() function's 'actor' must be our OnboardComputer or our
+//  ownship, which can be  used to find our OnboardComputer.  The execute()
+//  fucntion will find the OnboardComputer and 'trigger()' the action.
+//
 //------------------------------------------------------------------------------
-class Action : public Basic::Component 
+class Action : public Basic::Ubf::Action 
 {
-    DECLARE_SUBCLASS(Action,Basic::Component)
+    DECLARE_SUBCLASS(Action,Basic::Ubf::Action)
 
 public:
    Action();
@@ -51,6 +56,9 @@ public:
 
    int getRefId() const    { return refId; }          // Message Ref ID
    virtual void setRefId(const int id);               // Sets the message ref ID
+
+   // Basic::Ubf::Action interface function(s)
+   virtual bool execute(Basic::Component* actor);
 
 protected:
    OnboardComputer* getManager()   { return manager; } // Our manager
