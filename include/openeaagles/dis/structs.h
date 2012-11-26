@@ -1803,6 +1803,7 @@ struct EmitterBeamData {
          beamFunction == s2.beamFunction && 
          numberOfTargetsInTrack == s2.numberOfTargetsInTrack && 
          highDensityTracks == s2.highDensityTracks && 
+         beamStatus == s2.beamStatus &&
          jammingTechnique == s2.jammingTechnique
          );
    }

@@ -736,7 +736,7 @@ Weapon* Weapon::release()
 void Weapon::atReleaseInit()
 {
    // Set the release event
-   if (eventID != 0) {
+   if (eventID == 0) {
       eventID = getSimulation()->getNewWeaponEventID();
    }
 

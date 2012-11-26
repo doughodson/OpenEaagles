@@ -58,14 +58,15 @@ END_SLOT_MAP()
 //------------------------------------------------------------------------------
 Navigation::Navigation() : rm()
 {
-    STANDARD_CONSTRUCTOR()
-    
-      initData();
+   STANDARD_CONSTRUCTOR()
+
+   initData();
 }
 
 void Navigation::initData()
 {
    priRoute = 0;
+   initRoute = 0;
    bull = 0;
 
    latitude = 0;
@@ -115,63 +116,70 @@ void Navigation::initData()
 //------------------------------------------------------------------------------
 void Navigation::copyData(const Navigation& org, const bool cc)
 {
-    BaseClass::copyData(org);
+   BaseClass::copyData(org);
    if (cc) initData();
-    
-    if (org.priRoute != 0) {
-        Route* p = 0;
-        p = (Route*) org.priRoute->clone();
-        priRoute = p;
-        p->container(this);
-    }
-    else priRoute = 0;
 
-    if (org.bull != 0) {
-        Bullseye* b = 0;
-        b = (Bullseye*) org.bull->clone();
-        bull = b;
-        b->container(this);
-    }
-    else bull = 0;
+   if (org.priRoute != 0) {
+      Route* p = (Route*) org.priRoute->clone();
+      priRoute = p;
+      p->container(this);
+      p->unref();  // SPtr<> has it
+   }
+   else priRoute = 0;
 
-    latitude = org.latitude;
-    longitude = org.longitude;
-    altitude = org.altitude;
-    posValid = org.posValid;
-    heading = org.heading;
-    pitch = org.pitch;
-    roll = org.roll;
-    attValid = org.attValid;
-    velVec = org.velVec;
-    accelVec = org.accelVec;
-    rm = org.rm;
-    gs = org.gs;
-    tas = org.tas;
-    tk = org.tk;
-    velValid = org.velValid;
-    magvar = org.magvar;
-    mhdg = org.mhdg;   
-    magVarValid = org.magVarValid;
+   if (org.initRoute != 0) {
+      Route* p = (Route*) org.initRoute->clone();
+      initRoute = p;
+      p->unref();  // SPtr<> has it
+   }
+   else initRoute = 0;
+
+   if (org.bull != 0) {
+      Bullseye* b = (Bullseye*) org.bull->clone();
+      bull = b;
+      b->container(this);
+      b->unref();  // SPtr<> has it
+   }
+   else bull = 0;
+
+   latitude = org.latitude;
+   longitude = org.longitude;
+   altitude = org.altitude;
+   posValid = org.posValid;
+   heading = org.heading;
+   pitch = org.pitch;
+   roll = org.roll;
+   attValid = org.attValid;
+   velVec = org.velVec;
+   accelVec = org.accelVec;
+   rm = org.rm;
+   gs = org.gs;
+   tas = org.tas;
+   tk = org.tk;
+   velValid = org.velValid;
+   magvar = org.magvar;
+   mhdg = org.mhdg;   
+   magVarValid = org.magVarValid;
    windDirD = org.windDirD;
    windSpdKts = org.windSpdKts;  
    windsValid = org.windsValid;
-    navStrValid = org.navStrValid;
-    tbrg = org.tbrg;
-    mbrg = org.mbrg;
-    dst = org.dst;
-    ttg = org.ttg;
-    tcrs = org.tcrs;
-    mcrs = org.mcrs;
-    xte = org.xte;
-    eta = org.eta; 
-    utc = org.utc;
-    initUTC = org.initUTC;
-    utcValid = org.utcValid;
-    refLat = org.refLat;
-    refLon = org.refLon;
+   navStrValid = org.navStrValid;
+   tbrg = org.tbrg;
+   mbrg = org.mbrg;
+   dst = org.dst;
+   ttg = org.ttg;
+   tcrs = org.tcrs;
+   mcrs = org.mcrs;
+   xte = org.xte;
+   eta = org.eta; 
+   utc = org.utc;
+   initUTC = org.initUTC;
+   utcValid = org.utcValid;
+   refLat = org.refLat;
+   refLon = org.refLon;
 
-    // Copy Feba
-    setFeba(org.feba, org.nFeba);
+   // Copy Feba
+   setFeba(org.feba, org.nFeba);
 }
 
 //------------------------------------------------------------------------------
@@ -180,6 +188,7 @@ void Navigation::copyData(const Navigation& org, const bool cc)
 void Navigation::deleteData()
 {
     priRoute = 0;
+    initRoute = 0;
     bull = 0;
 
     // Delete the FEBA
@@ -191,24 +200,35 @@ void Navigation::deleteData()
 //------------------------------------------------------------------------------
 void Navigation::reset()
 {
-    BaseClass::reset();
+   BaseClass::reset();
 
-    // And not nothin' valid
-    posValid = false;
-    attValid = false;
-    velValid = false;
-    magVarValid = false;
-    navStrValid = false;
-    
-    // Except UTC
-    utc = initUTC;
-    utcValid = true;
+   // And not nothin' valid
+   posValid = false;
+   attValid = false;
+   velValid = false;
+   magVarValid = false;
+   navStrValid = false;
 
-    // Reset the route
-    if (priRoute != 0) priRoute->event(RESET_EVENT);
+   // Except UTC
+   utc = initUTC;
+   utcValid = true;
 
-    // Reset our bullseye
-    if (bull != 0) bull->event(RESET_EVENT);
+   // Reset the route to the initial route and reset
+   if (priRoute != 0) {
+      priRoute->container(0);
+      priRoute = 0;
+   }
+   if (initRoute != 0) {
+      priRoute = (Route*) initRoute->clone();
+      priRoute->unref();  // SPtr<> has it
+   }
+   if (priRoute != 0) {
+      priRoute->container(this);
+      priRoute->event(RESET_EVENT);
+   }
+
+   // Reset our bullseye
+   if (bull != 0) bull->event(RESET_EVENT);
 
    // Set the reference center of our gaming area
    const Simulation* sim = getSimulation();
@@ -815,14 +835,33 @@ bool Navigation::setFeba(osg::Vec2* const points, const int n)
 }
 
 //------------------------------------------------------------------------------
+// setRoute() - sets a new route on the fly
+//------------------------------------------------------------------------------
+bool Navigation::setRoute(Route* const msg)
+{
+   // we are a new route, but our last new route wasn't the original route
+   if (priRoute != 0) priRoute->container(0);
+   priRoute = msg;
+   if (priRoute != 0) priRoute->container(this);
+   return true;
+}
+
+
+//------------------------------------------------------------------------------
 // Set slot functions
 //------------------------------------------------------------------------------
-bool Navigation::setSlotRoute(Route* const msg)
+bool Navigation::setSlotRoute(const Route* const msg)
 {
+   initRoute = msg;
+
    if (priRoute != 0) {
       priRoute->container(0);
+      priRoute = 0;
    }
-   priRoute = msg;
+   if (initRoute != 0) {
+      priRoute = (Route*) initRoute->clone();
+      priRoute->unref();  // SPtr<> has it
+   }
    if (priRoute != 0) {
       priRoute->container(this);
    }
