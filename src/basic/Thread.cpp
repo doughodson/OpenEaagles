@@ -59,7 +59,9 @@ void Thread::copyData(const Thread& org, const bool)
 //------------------------------------------------------------------------------
 void Thread::deleteData()
 {
-   terminate();
+   if (!isTerminated()) {
+      terminate();
+   }
    closeThread();
 }
 
@@ -132,6 +134,12 @@ bool Thread::setStackSize(const size_t size)
 {
    stackSize = size;
    return true;
+}
+
+// Set the terminated flag
+void Thread::setTerminated()
+{
+   killed = true;
 }
 
 //==============================================================================

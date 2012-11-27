@@ -413,6 +413,12 @@ void Simulation::reset()
          Basic::List::Item* item = origPlayerList->getFirstItem();
          while (item != 0) {
             Basic::Pair* pair = (Basic::Pair*) item->getValue();
+            Player* ip = (Player*) (pair->object());
+
+            // reinstated the container pointer and player name
+            ip->container(this);
+            ip->setName(*pair->slot());
+
             // Insert the player into the new list in sorted order
             insertPlayerSort(pair, newList);
             item = item->getNext();
@@ -431,6 +437,11 @@ void Simulation::reset()
             Basic::Pair* pair = (Basic::Pair*) item->getValue();
             Player* ip = (Player*)( pair->object() );
             if (ip->isNetworkedPlayer()) {
+
+               // reinstated the container pointer and player name
+               ip->container(this);
+               ip->setName(*pair->slot());
+      
                // Insert the IPlayer into the new list in sorted order
                insertPlayerSort(pair, newList);
             }

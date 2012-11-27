@@ -30,6 +30,7 @@ DWORD WINAPI Thread::staticThreadFunc(LPVOID lpParam)
    // The main thread function, which is a Thread class memeber function,
    // will handle the rest.
    DWORD rtn = thread->mainThreadFunc();
+   thread->setTerminated();
 
    parent->unref();
    thread->unref();
@@ -184,7 +185,7 @@ void Thread::closeThread()
 //-----------------------------------------------------------------------------
 bool Thread::terminate()
 {
-   if (theThread != 0) {
+   if (theThread != 0 && !killed) {
       if ( parent->isMessageEnabled(MSG_INFO) ) {
          std::cout << "Thread(" << this << ")::terminate(): handle = " << theThread << std::endl;
       }

@@ -11,23 +11,26 @@
 # pragma warning(disable: 4996)
 #endif
 
+namespace Eaagles {
+namespace BasicGL {
+
 //------------------------------------------------------------------------------
 // Define the BITMAP File for non-Windows systems
 //------------------------------------------------------------------------------
-#if !defined(WIN32)
+//#if !defined(WIN32)
 
-struct BITMAPINFOHEADER{
-    unsigned int  biSize;
-    int           biWidth;
-    int           biHeight;
-    unsigned short biPlanes;
-    unsigned short biBitCount;
-    unsigned int  biCompression;
-    unsigned int  biSizeImage;
-    int           biXPelsPerMeter;
-    int           biYPelsPerMeter;
-    unsigned int  biClrUsed;
-    unsigned int  biClrImportant;
+struct BITMAPINFOHEADER_X {
+   uint32_t biSize;
+   int32_t  biWidth;
+   int32_t  biHeight;
+   uint16_t biPlanes;
+   uint16_t biBitCount;
+   uint32_t biCompression;
+   uint32_t biSizeImage;
+   int32_t  biXPelsPerMeter;
+   int32_t  biYPelsPerMeter;
+   uint32_t biClrUsed;
+   uint32_t biClrImportant;
 };
 
 #define BI_RGB        0L
@@ -36,11 +39,75 @@ struct BITMAPINFOHEADER{
 #define BI_BITFIELDS  3L
 #define BI_JPEG       4L
 #define BI_PNG        5L
+//
+//#endif
 
-#endif
+// Byte swap check 
+// -- returns true if this computer's byte order is big endian.
+static bool checkSwap()
+{
+  uint16_t w16 = 1;
+  uint8_t* p8 = (uint8_t*) &w16;
+  return (*p8 == 0);  // msb is zero; big endian
+}
 
-namespace Eaagles {
-namespace BasicGL {
+// Swap signed 32 bit word
+static int32_t convertInt32(const int32_t v)
+{
+   union Udata {
+      int32_t i32;
+      int8_t   byte[4];
+   };
+
+   Udata value0;
+   value0.i32 = v;
+
+   Udata value1;
+   value1.byte[3] = value0.byte[0];
+   value1.byte[2] = value0.byte[1];
+   value1.byte[1] = value0.byte[2];
+   value1.byte[0] = value0.byte[3];
+
+   return value1.i32;
+}
+
+// Swap unsigned 32 bit word
+static uint32_t convertUInt32(const uint32_t v)
+{
+   union Udata {
+      uint32_t ui32;
+      int8_t   byte[4];
+   };
+
+   Udata value0;
+   value0.ui32 = v;
+
+   Udata value1;
+   value1.byte[3] = value0.byte[0];
+   value1.byte[2] = value0.byte[1];
+   value1.byte[1] = value0.byte[2];
+   value1.byte[0] = value0.byte[3];
+
+   return value1.ui32;
+}
+
+// Swap 16 bit word
+static uint16_t convertUInt16(const uint16_t v)
+{
+   union Udata {
+      uint16_t ui16;
+      int8_t   byte[2];
+   };
+
+   Udata value0;
+   value0.ui16 = v;
+
+   Udata value1;
+   value1.byte[1] = value0.byte[0];
+   value1.byte[0] = value0.byte[1];
+
+   return value1.ui16;
+}
 
 //==============================================================================
 // Class: Image
@@ -215,24 +282,35 @@ bool Image::readFileBMP(const char* const filename, const char* const path)
       return false;
    }
 
+   // Big or little ending?  Swap if we're a big endian arch
+   bool swap = checkSwap();
+
    // Read the bitmap file header (BITMAPFILEHEADER)
-   unsigned short bfType(0);
-   unsigned int  bfSize(0);
-   unsigned short bfReserved1(0);
-   unsigned short bfReserved2(0);
-   unsigned int  bfOffBits(0);
+   char bfType[2];
+   uint32_t  bfSize(0);
+   uint16_t bfReserved1(0);
+   uint16_t bfReserved2(0);
+   uint32_t  bfOffBits(0);
 
    //unsigned int bitmapFileHdrSize =
    //   sizeof(bfType) + sizeof(bfSize) + sizeof(bfReserved1) + sizeof(bfReserved2) + sizeof(bfOffBits);
 
    size_t nItemsRead;
-   nItemsRead = fread(&bfType, sizeof(bfType), 1, fp);
-   nItemsRead = fread(&bfSize, sizeof(bfSize), 1, fp);
-   nItemsRead = fread(&bfReserved1, sizeof(bfReserved1), 1, fp);
-   nItemsRead = fread(&bfReserved2, sizeof(bfReserved2), 1, fp);
-   nItemsRead = fread(&bfOffBits, sizeof(bfOffBits), 1, fp);
+   nItemsRead = fread(&bfType, sizeof(char), 2, fp);
 
-   if (bfType != 0x4D42) {
+   nItemsRead = fread(&bfSize, sizeof(bfSize), 1, fp);
+   if (swap) bfSize = convertUInt32(bfSize);
+
+   nItemsRead = fread(&bfReserved1, sizeof(bfReserved1), 1, fp);
+   if (swap) bfReserved1 = convertUInt16(bfReserved1);
+
+   nItemsRead = fread(&bfReserved2, sizeof(bfReserved2), 1, fp);
+   if (swap) bfReserved2 = convertUInt16(bfReserved2);
+
+   nItemsRead = fread(&bfOffBits, sizeof(bfOffBits), 1, fp);
+   if (swap) bfOffBits = convertUInt32(bfOffBits);
+
+   if (bfType[0] == 'B' && bfType[0] == 'M') {
       // Not a bitmap file
       if (isMessageEnabled(MSG_ERROR)) {
          std::cerr << "Image::readFileBMP(1): invalid bitmap file: " << bitmapFile << std::endl;
@@ -241,10 +319,24 @@ bool Image::readFileBMP(const char* const filename, const char* const path)
    }
 
    // Read the bitmap file info
-   BITMAPINFOHEADER bmfi;
-   nItemsRead = fread(&bmfi, sizeof(BITMAPINFOHEADER), 1, fp);
+   BITMAPINFOHEADER_X bmfi;
+   nItemsRead = fread(&bmfi, sizeof(BITMAPINFOHEADER_X), 1, fp);
 
-   if (bmfi.biSize != sizeof(BITMAPINFOHEADER) || bmfi.biPlanes != 1) {
+   if (swap) {
+      bmfi.biSize = convertUInt32(bmfi.biSize);
+      bmfi.biWidth = convertInt32(bmfi.biWidth);
+      bmfi.biHeight = convertInt32(bmfi.biHeight);
+      bmfi.biPlanes = convertUInt16(bmfi.biPlanes);
+      bmfi.biBitCount = convertUInt16(bmfi.biBitCount);
+      bmfi.biCompression = convertUInt32(bmfi.biCompression);
+      bmfi.biSizeImage = convertUInt32(bmfi.biSizeImage);
+      bmfi.biXPelsPerMeter = convertInt32(bmfi.biXPelsPerMeter);
+      bmfi.biYPelsPerMeter = convertInt32(bmfi.biYPelsPerMeter);
+      bmfi.biClrUsed = convertUInt32(bmfi.biClrUsed);
+      bmfi.biClrImportant = convertUInt32(bmfi.biClrImportant);
+   }
+
+   if (bmfi.biSize != sizeof(BITMAPINFOHEADER_X) || bmfi.biPlanes != 1) {
       // Not a bitmap file
       if (isMessageEnabled(MSG_ERROR)) {
          std::cerr << "Image::readFileBMP(2): invalid bitmap file: " << bitmapFile << std::endl;
@@ -350,7 +442,7 @@ bool Image::writeFileBMP(const char* const filename, const char* const path)
    size_t widthBytes = getWidth() * getNumComponents();
 
    // Offset to bitmap data
-   unsigned int offset = bitmapFileHdrSize + sizeof(BITMAPINFOHEADER);
+   unsigned int offset = bitmapFileHdrSize + sizeof(BITMAPINFOHEADER_X);
 
    // Image size
    unsigned int isize = getHeight() * (unsigned int) widthBytes;
@@ -385,8 +477,8 @@ bool Image::writeFileBMP(const char* const filename, const char* const path)
    // ---
    // Write the bitmap file info
    // ---
-   BITMAPINFOHEADER bmfi;
-   bmfi.biSize = sizeof(BITMAPINFOHEADER);
+   BITMAPINFOHEADER_X bmfi;
+   bmfi.biSize = sizeof(BITMAPINFOHEADER_X);
    bmfi.biWidth = getWidth();
    bmfi.biHeight = getHeight();
    bmfi.biPlanes = 1;
@@ -425,7 +517,7 @@ bool Image::writeFileBMP(const char* const filename, const char* const path)
 //------------------------------------------------------------------------------
 // readRgbValues() -- read the color components from the file & return the bit map
 //------------------------------------------------------------------------------
-GLubyte* Image::readRgbValuesBMP(FILE* const fp, const unsigned int offset, const BITMAPINFOHEADER* const bmfi) const
+GLubyte* Image::readRgbValuesBMP(FILE* const fp, const unsigned int offset, const BITMAPINFOHEADER_X* const bmfi) const
 {
     // Alloate the texture memory bits
     unsigned int bmSize = getWidth() * getHeight() * getNumComponents();
@@ -458,7 +550,7 @@ GLubyte* Image::readRgbValuesBMP(FILE* const fp, const unsigned int offset, cons
 //------------------------------------------------------------------------------
 // readColorValues() -- read the color table & color index values; returns the bit map
 //------------------------------------------------------------------------------
-GLubyte* Image::readColorValuesBMP(FILE* const fp, const unsigned int offset, const BITMAPINFOHEADER* const bmfi) const
+GLubyte* Image::readColorValuesBMP(FILE* const fp, const unsigned int offset, const BITMAPINFOHEADER_X* const bmfi) const
 {
     // Alloate the texture memory bits
     unsigned int bmSize = getWidth() * getHeight() * getNumComponents();

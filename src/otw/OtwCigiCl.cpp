@@ -52,6 +52,7 @@
 #include "cigicl/CigiHatHotReqV3.h"
 #include "cigicl/CigiSOFV3.h"
 #include "cigicl/CigiHatHotRespV3.h"
+#include "cigicl/CigiHatHotXRespV3_2.h"
 #include "cigicl/CigiLosRespV3.h"
 #include "cigicl/CigiCollDetSegRespV3.h"
 #include "cigicl/CigiCollDetVolRespV3.h"
@@ -2216,15 +2217,30 @@ void CigiClNetworkSignalProcessing::OnCollDetVolResp(CigiBasePacket* packet)
 void CigiClNetworkSignalProcessing::OnHotResp(CigiBasePacket* packet)
 {
    if (p != 0){
-      CigiHotRespV2* m = dynamic_cast<CigiHotRespV2*> (packet);
-      if (m)
-      {
+      std::cout << "p class type: " << typeid(*packet).name() << std::endl;
+      CigiHotRespV2* m2 = dynamic_cast<CigiHotRespV2*> (packet);
+      CigiHatHotRespV3* m3 = dynamic_cast<CigiHatHotRespV3*> (packet);
+      CigiHatHotXRespV3_2* mx3_2 = dynamic_cast<CigiHatHotXRespV3_2*> (packet);
+
+      if (m2 != 0) {
          CigiHatHotRespV3 resp;
-         resp.SetHatHotID(m->GetHatHotID());
-         resp.SetHot(m->GetHot());
-         resp.SetValid(m->GetValid());
+         resp.SetHatHotID(m2->GetHatHotID());
+         resp.SetHot(m2->GetHot());
+         resp.SetValid(m2->GetValid());
          p->hatHotResp( &resp );
       }
+
+      else if (m3 != 0) {
+         p->hatHotResp( m3 );
+      }
+      else if (mx3_2 != 0) {
+         CigiHatHotRespV3 resp;
+         resp.SetHatHotID(mx3_2->GetHatHotID());
+         resp.SetHot(mx3_2->GetHot());
+         resp.SetValid(mx3_2->GetValid());
+         p->hatHotResp( &resp );
+      }
+
    }
 }
 
