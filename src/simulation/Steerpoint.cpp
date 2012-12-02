@@ -395,6 +395,7 @@ bool Steerpoint::setSlotSteerpointType(const Basic::Identifier* const msg)
         else if (*msg == "FIX"   || *msg == "fix")   setSteerpointType(FIX);
         else if (*msg == "OAP"   || *msg == "oap")   setSteerpointType(OAP);
         else if (*msg == "TGT"   || *msg == "tgt")   setSteerpointType(TGT);
+        else if (*msg == "IP"    || *msg == "ip")    setSteerpointType(IP);
         else {
             std::cerr << "xxx(): invalid steerpoint type: " << *msg << std::endl;
             std::cerr << " -- valid types are { DEST, MARK, FIX, OAP, TGT }" << std::endl;
