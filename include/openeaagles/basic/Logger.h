@@ -78,7 +78,7 @@ public:
 protected:
     virtual bool openFile();
 
-    void setOpen(const bool val)        { open = val; }
+    void setOpen(const bool val)        { opened = val; }
     void setFailed(const bool val)      { failed = val; }
 
     std::ofstream*   lout;       // Output stream
