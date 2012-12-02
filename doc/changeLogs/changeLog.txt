@@ -15,6 +15,12 @@ basic
    linux/lock.h
       1) By default, now using  __sync_lock_test_and_set() and __sync_lock_release()
 
+   Logger class
+      1) Added new public functions getFilename(), getPathname() and getTopLine(), and
+      moved the set slot function from protected to public
+      2) Added new protected functions setOpen() and setFailed()
+      3) Moved the output stream to protected.
+
    Thread classes
       1) Fixed double thread termination.
 
