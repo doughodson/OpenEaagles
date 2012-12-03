@@ -1300,6 +1300,14 @@ bool Weapon::setWeaponID(const int n)
    return true;
 }
 
+// Sets the release event ID
+bool Weapon::setReleaseEventID(const unsigned short n)
+{
+   eventID = n;
+   return true;
+}
+
+
 // Sets our launcher and station number
 bool Weapon::setLauncher(Stores* const l, const unsigned int s)
 {

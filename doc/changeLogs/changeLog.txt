@@ -15,6 +15,12 @@ basic
    linux/lock.h
       1) By default, now using  __sync_lock_test_and_set() and __sync_lock_release()
 
+   Logger class
+      1) Added new public functions getFilename(), getPathname() and getTopLine(), and
+      moved the set slot function from protected to public
+      2) Added new protected functions setOpen() and setFailed()
+      3) Moved the output stream to protected.
+
    Thread classes
       1) Fixed double thread termination.
 
@@ -80,13 +86,27 @@ simulation
       2) Added setRoute(), which like setSlotRoute(), will set the current route,
       but it does not set the initial route used by reset().
 
+   Route class
+      1) insertSteerpoint() -- added an unref() after the steerpoint has been
+      inserted into the route, and modified where the original steerpoint list
+      is unref()'d (both possible memory leaks)
+
+      2) insertSteerpoint() -- added a ref() to a steerpoint being inserted
+      into the middle of the route (bug fix)
+
    Simulation class
       1) reset() -- while generating the new player list, now reinstating the container
       pointer and player name.
 
+
+   Steerpoint class
+      1) setSlotSteerpointType() -- added check for "IP" enum.
+
    Weapon class
-      atReleaseInit() -- changed eventID check from not-equal-zero to equal-zero,
+      1) atReleaseInit() -- changed eventID check from not-equal-zero to equal-zero,
       which prevents a possible double increment of the weapon event ID.
+
+      2) Added new setReleaseEventID() function
 
 
 --------------------------------------------------------------------------------
