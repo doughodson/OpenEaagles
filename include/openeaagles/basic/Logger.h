@@ -57,28 +57,36 @@ public:
 public:
     Logger();
 
-    bool isOpen()       { return opened; }
-    bool isFailed()     { return failed; }
-    
+    bool isOpen() const                { return opened; }
+    bool isFailed() const              { return failed; }
+
+    const String* getFilename() const  { return filename; }
+    const String* getPathname() const  { return pathname; }
+    const String* getTopLine() const   { return topLine; }
+
+    virtual bool setSlotFilename(const String* const msg);
+    virtual bool setSlotPathName(const String* const msg);
+    virtual bool setSlotTopLine(const String* const msg);
+
     virtual void log(const char* const msg);
     virtual void log(LogEvent* const event);
 
     // Component interface
     virtual void updateTC(const LCreal dt = 0.0f);
     virtual void updateData(const LCreal dt = 0.0);
-    
+
 protected:
-    virtual bool setSlotFilename(const String* const msg);
-    virtual bool setSlotPathName(const String* const msg);
-    virtual bool setSlotTopLine(const String* const msg);
-    
     virtual bool openFile();
 
-private:
+    void setOpen(const bool val)        { opened = val; }
+    void setFailed(const bool val)      { failed = val; }
+
     std::ofstream*   lout;       // Output stream
-    String*        filename;   // Log file name
-    String*        pathname;   // Path to log file directory
-    const String*  topLine;    // Optional top (first) line of output
+
+private:
+    String*        filename;     // Log file name
+    String*        pathname;     // Path to log file directory
+    const String*  topLine;      // Optional top (first) line of output
     bool             opened;     // File opened
     bool             failed;     // Open or write failed
 };

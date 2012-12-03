@@ -540,7 +540,7 @@ bool Route::insertSteerpoint(Steerpoint* const newStpt, const int pos)
                ok = true;
             }
 
-            else if (pos == 0 || pos == (num+1)) {
+            else if (pos == 0 || pos > num) {
                tempList->addTail(p);
                ok = true;
             }
@@ -559,6 +559,7 @@ bool Route::insertSteerpoint(Steerpoint* const newStpt, const int pos)
                 if (item != 0) {
                     Basic::List::Item* newItem = new Basic::List::Item;
                     newItem->value = p;
+                    p->ref();
                     // insert 'newItem' just before 'item'
                     ok = tempList->insert(newItem, item);
                 }
@@ -570,16 +571,21 @@ bool Route::insertSteerpoint(Steerpoint* const newStpt, const int pos)
             tempList->unref();
             tempList = 0;
 
-            steerpoints->unref();
-            steerpoints = 0;
         }
 
         // if we have no components, we need to start a new component list
-        else if (pos <= 1) {
+        else {
             Basic::Component::processComponents(0,typeid(Steerpoint),p);
             ok = true;
         }
 
+        // Unref the original steerpoint list
+        if (steerpoints != 0) {
+            steerpoints->unref();
+            steerpoints = 0;
+        }
+
+        p->unref();  // Our component list has it now.
     }
 
     // ---
