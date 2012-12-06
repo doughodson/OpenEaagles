@@ -72,12 +72,12 @@ simulation
 
    Antenna class
       1) onRfEmissionEvent() -- created and ref()'d a local copy of the RfSystem
-      pointer.  Without this change, the Antenna can remove the ‘sys’ pointer
+      pointer.  Without this change, the Antenna can remove the 'sys' pointer
       in the middle of this method when a shutdown event occurs.
 
       2) onRfEmissionReturnEventAntenna() -- created and ref()'d a local copy of
       the RfSystem pointer.  .  Without this change, the Antenna can remove the
-      ‘sys’ pointer in the middle of this method when a shutdown event occurs.
+      'sys' pointer in the middle of this method when a shutdown event occurs.
 
    Navigation class
       1) Added an initial route, which is set with the 'route' slot (setSlotRoute()),
