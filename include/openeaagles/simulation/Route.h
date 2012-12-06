@@ -97,9 +97,9 @@ public:
    virtual unsigned int getAllSteerpoints(SPtr<Steerpoint>* const stptList, const unsigned int max); // All
    virtual unsigned int getNumberOfSteerpoints() const;   // return the number of steerpoint (components) in our route
 
-   // adds a steerpoint to 'pos' position in our list;
+   // insert a steerpoint at 'pos' position in our list;
    //    a) if 'pos' is less than 0 then its added to the start of the list
-   //    b) if 'pos' is 0 (default) or equal to one plus getNumberOfSteerpoints()
+   //    b) if 'pos' is 0 (default) or greater than getNumberOfSteerpoints()
    //       then it's added to the end of the list
    //    c) otherwise 'pos' must be between 1 .. getNumberOfSteerpoints()
    virtual bool insertSteerpoint(Steerpoint* const sp, const int pos = 0);

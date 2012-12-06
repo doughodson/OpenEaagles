@@ -331,14 +331,17 @@ bool Route::directTo(const Steerpoint* const stpt)
             stptIdx = steerpoints->getIndex(sp);
             ok = true;
         }
-        steerpoints->unref();
-        steerpoints = 0;
     }
 
     else if (stpt == 0) {
       to = 0;
       stptIdx = 0;
       ok = true;
+    }
+
+    if (steerpoints != 0) {
+       steerpoints->unref();
+       steerpoints = 0;
     }
 
     return ok;
@@ -356,14 +359,17 @@ bool Route::directTo(const char* const name)
             stptIdx = steerpoints->getIndex(sp);
             ok = true;
         }
-        steerpoints->unref();
-        steerpoints = 0;
     }
 
     else if (name == 0) {
       to = 0;
       stptIdx = 0;
       ok = true;
+    }
+
+    if (steerpoints != 0) {
+       steerpoints->unref();
+       steerpoints = 0;
     }
 
     return ok;
@@ -408,9 +414,13 @@ const Basic::Pair* Route::findSteerpointImp(const Steerpoint* const stpt) const
             if (stpt == p) sp = pair;
             item = item->getNext();
         }
-        steerpoints->unref();
-        steerpoints = 0;
     }
+
+    if (steerpoints != 0) {
+       steerpoints->unref();
+       steerpoints = 0;
+    }
+
     return sp;
 }
 
@@ -420,9 +430,13 @@ const Basic::Pair* Route::findSteerpointImp(const char* const name) const
     const Basic::PairStream* steerpoints = getComponents();
     if (steerpoints != 0 && name != 0) {
         sp = steerpoints->findByName(name);
-        steerpoints->unref();
-        steerpoints = 0;
     }
+
+    if (steerpoints != 0) {
+       steerpoints->unref();
+       steerpoints = 0;
+    }
+
     return sp;
 }
 
@@ -467,9 +481,13 @@ unsigned int Route::getSteerpoints(SPtr<Steerpoint>* const stptList, const unsig
             }
             item = item->getNext();
         }
-        steerpoints->unref();
-        steerpoints = 0;
     }
+
+    if (steerpoints != 0) {
+       steerpoints->unref();
+       steerpoints = 0;
+    }
+
     return i;
 }
 
@@ -490,9 +508,13 @@ unsigned int Route::getAllSteerpoints(SPtr<Steerpoint>* const stptList, const un
             }
             item = item->getNext();
         }
-        steerpoints->unref();
-        steerpoints = 0;
     }
+
+    if (steerpoints != 0) {
+       steerpoints->unref();
+       steerpoints = 0;
+    }
+
     return i;
 }
 
@@ -566,7 +588,9 @@ bool Route::insertSteerpoint(Steerpoint* const newStpt, const int pos)
             }
 
             // swap our current steerpoint (components) list for this new one
-            if (ok) Basic::Component::processComponents(tempList,typeid(Steerpoint));
+            if (ok) {
+               Basic::Component::processComponents(tempList,typeid(Steerpoint));
+            }
 
             tempList->unref();
             tempList = 0;
@@ -589,7 +613,8 @@ bool Route::insertSteerpoint(Steerpoint* const newStpt, const int pos)
     }
 
     // ---
-    // if we were going nowhere, force a direct-to 
+    // Call directTo() to reset the steerpoint index, or if we were going nowhere
+    // then go direct-to steerpoint one.  
     // ---
     if (ok) {
        if (to != 0) {
@@ -637,7 +662,10 @@ bool Route::deleteSteerpoint(Steerpoint* const sp)
    // remove the steerpoint
    Basic::PairStream* steerpoints = getComponents();
    Basic::Component::processComponents(steerpoints,typeid(Steerpoint),0,sp);
-   steerpoints->unref(); steerpoints = 0;
+   if (steerpoints != 0) {
+      steerpoints->unref();
+      steerpoints = 0;
+   }
 
    // When we just deleted our current 'to' steerpoint,
    // force a new 'direct to' using stptIdx
