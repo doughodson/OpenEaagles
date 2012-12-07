@@ -94,7 +94,10 @@ simulation
       2) insertSteerpoint() -- added a ref() to a steerpoint being inserted
       into the middle of the route (bug fix)
 
-      3) In various functions, modified where the steerpoint list is unref()
+      3) insertSteerpoint() -- any steerpoint with its 'pos' greater than the size
+      of the list is now added to the end of the list.
+
+      4) In various functions, modified where the steerpoint list is unref()
 
    Simulation class
       1) reset() -- while generating the new player list, now reinstating the container
