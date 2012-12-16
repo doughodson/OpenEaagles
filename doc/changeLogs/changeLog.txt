@@ -113,6 +113,8 @@ simulation
 
       2) Added new setReleaseEventID() function
 
+      3) release() and updateTOF() -- removed the MSG_DATA checks from the data
+      recorder samples
 
 --------------------------------------------------------------------------------
 vehicle
