@@ -441,7 +441,7 @@ public:
    // State data
    // ---
 
-   Mode getMode() const;                           // Current mode ( INACTIVE, ACTIVE, DETONATED ... }
+   Mode getMode() const;                           // Current mode ( INACTIVE, ACTIVE, DETONATED ... )
    bool isActive() const;                          // True if player's mode is active
    bool isKilled() const;                          // True if player's mode is killed
    bool isCrashed() const;                         // True if player's mode is crashed
