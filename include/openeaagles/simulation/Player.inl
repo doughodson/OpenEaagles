@@ -65,7 +65,7 @@ inline bool Player::isMajorType(const unsigned int tst) const
    return ((tst & getMajorType()) != 0);
 }
 
-// Current mode ( INACTIVE, ACTIVE, DETONATED ... }
+// Current mode ( INACTIVE, ACTIVE, DETONATED ... )
 inline Player::Mode Player::getMode() const
 {
    return mode;
