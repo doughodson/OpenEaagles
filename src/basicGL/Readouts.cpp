@@ -715,8 +715,6 @@ void Cursor::updateData(const LCreal dt)
 //------------------------------------------------------------------------------
 void NumericReadout::redisplay()
 {
-
-
    // Check if we are displaying blank for zero
    if ((num == 0) && blankZero) {
       size_t i;
@@ -756,7 +754,7 @@ void NumericReadout::redisplay()
    size_t len = strlen(cbuf);
 
    // When we have a replacement char for the sign character
-   if (plusChar != '\0' || minusChar != '\0') {
+   if (plusChar != '\0' || minusChar != '\0' || postSign) {
 
       // Find the sign character (if any)
       size_t i = 0;
@@ -892,62 +890,45 @@ void TimeReadout::makeText()
 
 void DirectionReadout::makeText()
 {
-    bool neg = false;
-    double degrees = getFloat();
-    if (degrees < 0.0) {
-        degrees = -degrees; 
-        neg = true;
-    }
-    switch (tmode) {
-        case ddmmss : { // Degrees, Minutes, and seconds
-            int     ideg = int(degrees);
-            double min = (degrees - double(ideg))*60.0f;
-            int     imin = int(min);
-            double sec = (min - double(imin))*60.0f;
-            if (neg) ideg = -ideg;
-            std::sprintf(cbuf, format, ideg, imin, sec);
-        }
-        break;
-        case ddmm : {   // Degrees and minutes
-            int     ideg = int(degrees);
-            double  min  = (degrees - double(ideg))*60.0f;
-            if (neg) ideg = -ideg;
-            std::sprintf(cbuf, format, ideg, min);
-        }
-        break;
-        case dd : { // Degrees only
-            if (neg) degrees = -degrees;
-            std::sprintf(cbuf, format, degrees);
-        }
-        break;
-    }
-}
-
-void LatitudeReadout::makeText()
-{
-   // Let our base class do its thing
-   BaseClass::makeText();
+   bool neg = false;
+   double degrees = getFloat();
+   if (degrees < 0.0) {
+      degrees = -degrees; 
+      neg = true;
+   }
+   switch (tmode) {
+      case ddmmss : { // Degrees, Minutes, and seconds
+         int     ideg = int(degrees);
+         double min = (degrees - double(ideg))*60.0f;
+         int     imin = int(min);
+         double sec = (min - double(imin))*60.0f;
+         if (neg) ideg = -ideg;
+         std::sprintf(cbuf, format, ideg, imin, sec);
+      }
+      break;
+      case ddmm : {   // Degrees and minutes
+         int     ideg = int(degrees);
+         double  min  = (degrees - double(ideg))*60.0f;
+         if (neg) ideg = -ideg;
+         std::sprintf(cbuf, format, ideg, min);
+      }
+      break;
+      case dd : { // Degrees only
+         if (neg) degrees = -degrees;
+         std::sprintf(cbuf, format, degrees);
+      }
+      break;
+   }
 
    // then turn any '@' characters to degree symbols.
-   size_t len = strlen(cbuf);
-
-   for (unsigned int i = 0; i < len; i++) {
-      if (cbuf[i] == '@') cbuf[i] = '°';
+   {
+      size_t len = strlen(cbuf);
+      for (unsigned int i = 0; i < len; i++) {
+         if (cbuf[i] == '@') cbuf[i] = char(0xB0);
+      }
    }
 }
 
-void LongitudeReadout::makeText()
-{
-   // Let our base class do its thing
-   BaseClass::makeText();
-
-   // then turn any '@' characters to degree symbols.
-   size_t len = strlen(cbuf);
-
-   for (unsigned int i = 0; i < len; i++) {
-      if (cbuf[i] == '@') cbuf[i] = '°';
-   }
-}
 
 //------------------------------------------------------------------------------
 // reformat() -- convert the numerical value into an ascii character string
@@ -1126,47 +1107,48 @@ std::ostream& NumericReadout::serialize(std::ostream& sout, const int i, const b
 //------------------------------------------------------------------------------
 bool AsciiText::setTextString(const Basic::String* const stsobj)
 {
-    bool ok = true;
-    if (stsobj != 0) {
-        if (width() == 0) width(stsobj->len());
-        setText(*stsobj);
-    }
-    else {
-          if (isMessageEnabled(MSG_ERROR)) {
-        std::cerr << "AsciiText::setTextString: \"text\" must be a string or a list of (ASCII) numbers!" << std::endl;
-          }
-        ok = false;
-    }
-    return ok;
+   bool ok = true;
+   if (stsobj != 0) {
+      if (width() == 0) width(stsobj->len());
+      setText(*stsobj);
+   }
+   else {
+      if (isMessageEnabled(MSG_ERROR)) {
+         std::cerr << "AsciiText::setTextString: \"text\" must be a string or a list of (ASCII) numbers!" << std::endl;
+      }
+      ok = false;
+   }
+   return ok;
 }
 
 //------------------------------------------------------------------------------
-// setTextString() -- takes in a Basic::String and sets it
+// setTextList() -- takes in alist of ascii numbers
 //------------------------------------------------------------------------------
 bool AsciiText::setTextList(const Basic::List* const stlobj)
 {
-    bool ok = true;
-    if (stlobj != 0) {
-        float values[256];
-        int n = stlobj->getNumberList(values, 256);
-        if (n > 0) {
-            char cbuf[258];
-            int j;
-            for (j = 0; j < n; j++) {
-                cbuf[j] = char(values[j]);
-            }
-        cbuf[j] = '\0';
-        setText(cbuf);
-        ok = true;
-        }
-        else {
-              if (isMessageEnabled(MSG_ERROR)) {
+   bool ok = true;
+   if (stlobj != 0) {
+      float values[256];
+      int n = stlobj->getNumberList(values, 256);
+      if (n > 0) {
+         char cbuf[258];
+         int j;
+         for (j = 0; j < n; j++) {
+            cbuf[j] = char(values[j]);
+         }
+         cbuf[j] = '\0';
+         if (width() == 0) width(j);
+         setText(cbuf);
+         ok = true;
+      }
+      else {
+         if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "AsciiText::setTextList: \"text\" must be a string or a list of (ASCII) numbers!" << std::endl;
-              }
-        ok = false;
-        }
-    }
-    return ok;
+         }
+         ok = false;
+      }
+   }
+   return ok;
 }
 
 //------------------------------------------------------------------------------

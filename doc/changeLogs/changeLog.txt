@@ -27,6 +27,13 @@ basic
 --------------------------------------------------------------------------------
 basicGL
 
+   BitmapFont class
+      1) Added the degree symbol character (0XB0)
+      2) Misc cleanup
+
+   DirectionReadout class
+      1) makeText() - now changes '@' to the degree character (0xB0)
+
    Display class
       1) Fixed a bug associated with readFrameBuffer() returning a
          boolean false, when it should return 0.
@@ -41,7 +48,14 @@ basicGL
    Image class
       1) Updated to read BMP files on Big-endian systems
 
+   NumericReadout class
+      1) redisplay() -- added check for the 'postSign' flag (bug fix -- wasn't
+      always moving the sign character from the prefix to the suffix position)
 
+   StrokeFont class
+      1) Added the degree symbol character (0XB0)
+      2) Misc cleanup and documentation
+   
 --------------------------------------------------------------------------------
 dis
 
