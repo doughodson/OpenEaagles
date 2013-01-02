@@ -52,6 +52,9 @@ basicGL
       1) redisplay() -- added check for the 'postSign' flag (bug fix -- wasn't
       always moving the sign character from the prefix to the suffix position)
 
+   Readout.cpp file
+      Rearranged file by class
+
    StrokeFont class
       1) Added the degree symbol character (0XB0)
       2) Misc cleanup and documentation
