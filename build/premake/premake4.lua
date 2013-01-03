@@ -56,6 +56,9 @@ solution "oe"
    -- common include directories (all configurations/all projects)
    includedirs { OEIncPath, OE3rdPartyIncPath }
 
+   -- target suffix (all configurations/all projects)
+   targetprefix "oe"
+
    --
    -- Build (solution) configuration options:
    --     Release        (Runtime library is Multi-threaded DLL)
@@ -77,6 +80,7 @@ solution "oe"
 
    -- common debug configuration flags and symbols
    configuration { "Debug" }
+      targetsuffix "_d"
       flags { "Symbols" }
       if (_ACTION == "vs2008") or (_ACTION == "vs2010") then
          -- enable compilier intrinsics
@@ -104,12 +108,7 @@ solution "oe"
       excludes {
          "../../src/basic/osg/Matrix_implementation.cpp"
       }
-      configuration { "Release" }
-         -- base filename for compiled binary target
-         targetname "oeBasic"
-      configuration { "Debug" }
-         -- base filename for compiled binary target
-         targetname "oeBasic_d"
+      targetname "Basic"
 
    -- basic OpenGL library
    project "basicGL"
@@ -119,12 +118,7 @@ solution "oe"
       }
       includedirs { OE3rdPartyIncPath.."/freetype2" }
       defines { "FTGL_LIBRARY_STATIC" }
-      configuration { "Release" }
-         -- base filename for compiled binary target
-         targetname "oeBasicGL"
-      configuration { "Debug" }
-         -- base filename for compiled binary target
-         targetname "oeBasicGL_d"
+      targetname "BasicGL"
 
    -- GLUT OpenGL interface library
    project "gui-glut"
@@ -132,12 +126,7 @@ solution "oe"
          "../../include/openeaagles/gui/glut/**.h",
          "../../src/gui/glut/**.cpp"
       }
-      configuration { "Release" }
-         -- base filename for compiled binary target
-         targetname "oeGlut"
-      configuration { "Debug" }
-         -- base filename for compiled binary target
-         targetname "oeGlut_d"
+      targetname "Glut"
 
    -- DAFIF airport loader library
    project "dafif"
@@ -145,12 +134,7 @@ solution "oe"
          "../../include/openeaagles/dafif/**.h",
          "../../src/dafif/**.cpp"
       }
-      configuration { "Release" }
-         -- base filename for compiled binary target
-         targetname "oeDafif"
-      configuration { "Debug" }
-         -- base filename for compiled binary target
-         targetname "oeDafif_d"
+      targetname "Dafif"
 
    -- IEEE DIS interface library
    project "dis"
@@ -158,12 +142,7 @@ solution "oe"
          "../../include/openeaagles/dis/**.h",
          "../../src/dis/**.cpp"
       }
-      configuration { "Release" }
-         -- base filename for compiled binary target
-         targetname "oeDis"
-      configuration { "Debug" }
-         -- base filename for compiled binary target
-         targetname "oeDis_d"
+      targetname "Dis"
 
    -- graphical instruments library
    project "instruments"
@@ -172,12 +151,7 @@ solution "oe"
          "../../include/openeaagles/instruments/**.epp",
          "../../src/instruments/**.cpp"
       }
-      configuration { "Release" }
-         -- base filename for compiled binary target
-         targetname "oeInstruments"
-      configuration { "Debug" }
-         -- base filename for compiled binary target
-         targetname "oeInstruments_d"
+      targetname "Instruments"
 
    -- i/o device library
    project "ioDevice"
@@ -190,12 +164,7 @@ solution "oe"
       else
          excludes { "../../src/ioDevice/linux/*"   }
       end
-      configuration { "Release" }
-         -- base filename for compiled binary target
-         targetname "oeIoDevice"
-      configuration { "Debug" }
-         -- base filename for compiled binary target
-         targetname "oeIoDevice_d"
+      targetname "IoDevice"
 
    -- linear systems library
    project "linearSys"
@@ -203,12 +172,7 @@ solution "oe"
          "../../include/openeaagles/linearSys/**.h",
          "../../src/linearSys/**.cpp"
       }
-      configuration { "Release" }
-         -- base filename for compiled binary target
-         targetname "oeLinearSys"
-      configuration { "Debug" }
-         -- base filename for compiled binary target
-         targetname "oeLinearSys_d"
+      targetname "LinearSys"
 
    -- maps library
    project "maps"
@@ -216,12 +180,7 @@ solution "oe"
          "../../include/openeaagles/maps/**.h",
          "../../src/maps/**.cpp"
       }
-      configuration { "Release" }
-         -- base filename for compiled binary target
-         targetname "oeMaps"
-      configuration { "Debug" }
-         -- base filename for compiled binary target
-         targetname "oeMaps_d"
+      targetname "Maps"
 
    -- otw library
    project "otw"
@@ -234,12 +193,7 @@ solution "oe"
          "../../include/openeaagles/otw/OtwCigiClV2.h",
          "../../src/otw/OtwCigiClV2.cpp"
       }
-      configuration { "Release" }
-         -- base filename for compiled binary target
-         targetname "oeOtw"
-      configuration { "Debug" }
-         -- base filename for compiled binary target
-         targetname "oeOtw_d"
+      targetname "Otw"
 
    project "recorder"
       files {
@@ -249,12 +203,7 @@ solution "oe"
          "../../src/recorder/**.cpp",
          "../../src/recorder/**.cc"
       }
-      configuration { "Release" }
-         -- base filename for compiled binary target
-         targetname "oeRecorder"
-      configuration { "Debug" }
-         -- base filename for compiled binary target
-         targetname "oeRecorder_d"
+      targetname "Recorder"
 
    -- sensors library
    project "sensors"
@@ -262,12 +211,7 @@ solution "oe"
          "../../include/openeaagles/sensors/**.h",
          "../../src/sensors/**.cpp"
       }
-      configuration { "Release" }
-         -- base filename for compiled binary target
-         targetname "oeSensors"
-      configuration { "Debug" }
-         -- base filename for compiled binary target
-         targetname "oeSensors_d"
+      targetname "Sensors"
 
    -- simulation library
    project "simulation"
@@ -276,12 +220,7 @@ solution "oe"
          "../../include/openeaagles/simulation/*.inl",
          "../../src/simulation/**.cpp"
       }
-      configuration { "Release" }
-         -- base filename for compiled binary target
-         targetname "oeSimulation"
-      configuration { "Debug" }
-         -- base filename for compiled binary target
-         targetname "oeSimulation_d"
+      targetname "Simulation"
 
    -- terrain library
    project "terrain"
@@ -289,12 +228,7 @@ solution "oe"
          "../../include/openeaagles/terrain/**.h",
          "../../src/terrain/**.cpp"
       }
-      configuration { "Release" }
-         -- base filename for compiled binary target
-         targetname "oeTerrain"
-      configuration { "Debug" }
-         -- base filename for compiled binary target
-         targetname "oeTerrain_d"
+      targetname "Terrain"
 
    -- vehicles library
    project "vehicles"
@@ -303,10 +237,5 @@ solution "oe"
          "../../src/vehicles/**.cpp"
       }
       includedirs { OE3rdPartyIncPath.."/JSBSim" }
-      configuration { "Release" }
-         -- base filename for compiled binary target
-         targetname "oeVehicles"
-      configuration { "Debug" }
-         -- base filename for compiled binary target
-         targetname "oeVehicles_d"
+      targetname "Vehicles"
 
