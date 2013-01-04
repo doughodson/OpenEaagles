@@ -86,7 +86,7 @@ class Material;
 //
 //      Display* getDisplay()
 //          Returns a pointer to our Display container.  All Graphics MUST
-//          have an Display as a parent or (great) grand parent container.
+//          have a Display as a parent or (great) grand parent container.
 //
 //      draw()
 //          Draw the graphic object, and all its components, with the defined
@@ -114,7 +114,7 @@ class Material;
 //          used to lookup the Color from the color table.
 //      setColor(Number* num)
 //          Sets a color rotary object, based on the value passed in.. see basicGL/ColorRotary.h for
-//          how to setup a list of colors and breakpoints/
+//          how to setup a list of colors and breakpoints.
 //
 //
 //

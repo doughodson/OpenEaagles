@@ -782,7 +782,7 @@ bool Nav::vll2bd(
 //==============================================================================
 
 //------------------------------------------------------------------------------
-// Compute a rotational matrix from euler angles
+// Compute a rotational matrix from Euler angles
 //------------------------------------------------------------------------------
 bool Nav::computeRotationalMatrix(
       const double phi,          // IN: roll angle (radians)
@@ -1344,8 +1344,8 @@ bool Nav::getGeodCoords(
 //------------------------------------------------------------------------------
 bool Nav::getGeodAngle(
       const double geodPos[2],      // IN: Geodetic position [ ILAT ILON ] [ degs degs ]
-      const double geocAngle[3],    // IN: Geocentric euler angles (radians) [ IPHI ITHETA IPSI ]
-      double geodAngle[3]           // OUT: Geodetic euler angles (radians) [ IPHI ITHETA IPSI ]
+      const double geocAngle[3],    // IN: Geocentric Euler angles (radians) [ IPHI ITHETA IPSI ]
+      double geodAngle[3]           // OUT: Geodetic Euler angles (radians) [ IPHI ITHETA IPSI ]
    )
 {
    double phi    = geodPos[ILAT] * Angle::D2RCC; // Latitude
@@ -1406,8 +1406,8 @@ bool Nav::getGeodAngle(
 //------------------------------------------------------------------------------
 bool Nav::getGeocAngle(
       const double geodPos[2],      // IN: Geodetic position [ ILAT ILON ] [ degs degs ]
-      const double geodAngle[3],    // IN: Geodetic euler angles (radians) [ IPHI ITHETA IPSI ]
-      double geocAngle[3]           // OUT: Geocentric euler angles (radians) [ IPHI ITHETA IPSI ]
+      const double geodAngle[3],    // IN: Geodetic Euler angles (radians) [ IPHI ITHETA IPSI ]
+      double geocAngle[3]           // OUT: Geocentric Euler angles (radians) [ IPHI ITHETA IPSI ]
    )
 {
 	osg::Matrixd mat;

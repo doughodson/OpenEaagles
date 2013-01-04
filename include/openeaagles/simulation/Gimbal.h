@@ -94,7 +94,7 @@ class Tdb;
 //    commandRateElevation (Angle)   Commanded elevation rate  (Angle/sec) (sets RATE_SERVO)
 //    commandRateRoll      (Angle)   Commanded roll rate        (Angle/sec) (sets RATE_SERVO)
 //
-//    terrainOcculting     (boolean) Enable terrain occulting of tye players of interest (default: false)
+//    terrainOcculting     (boolean) Enable terrain occulting of the players of interest (default: false)
 //    checkHorizon         (boolean) Enable horizon masking check (default: true)
 // 
 //    playerOfInterestTypes (PairStream)   List of layer of interest types (default: all types )

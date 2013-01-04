@@ -2786,7 +2786,7 @@ bool Player::onTgtStepEvent()
 
 
 //------------------------------------------------------------------------------
-// onRfEmissionEventPlayer() -- process RF Emisison events
+// onRfEmissionEventPlayer() -- process RF Emission events
 //
 // 1) compute the Line-Of-Sight (LOS) vectors back to the transmitter
 //
@@ -2868,7 +2868,7 @@ bool Player::onRfEmissionEventPlayer(Emission* const em)
 }
 
 //------------------------------------------------------------------------------
-// onRfReflectedEmissionEventPlayer() -- process reflected R/F Emisison events
+// onRfReflectedEmissionEventPlayer() -- process reflected R/F Emission events
 //
 //------------------------------------------------------------------------------
 bool Player::onRfReflectedEmissionEventPlayer(Emission* const)

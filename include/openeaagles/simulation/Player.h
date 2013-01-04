@@ -114,7 +114,7 @@ class Track;
 //    initHeading    <Basic::Angle>       ! Initial heading angle (default: 0)
 //    initHeading    <Basic::Number>      ! Initial heading angle (radians)
 //
-//    initEuler      <Basic::List>        ! Initial Euler Angles: radians [ roll pitch yaw ]
+//    initEuler      <Basic::List>        ! Initial Euler angles: radians [ roll pitch yaw ]
 //
 //    ! ---
 //    ! Player's initial velocity
@@ -768,7 +768,7 @@ public:
    //    these set position functions.
    //
    // 3) By default the optional 'slaved' parameter is FALSE, which enables this
-   //    Player class to update the position.  If set the true then the position
+   //    Player class to update the position.  If set to true then the position
    //    is 'slaved' to the callers parameters and not updated by this class.
    // ---
 
