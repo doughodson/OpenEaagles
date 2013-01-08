@@ -83,7 +83,7 @@ public:
    // Effective Radiated Power (ERP) (watts)
    LCreal getPower() const { return power; }
 
-   // Sets the effective Radiaged Power (ERP) (watts)
+   // Sets the Effective Radiated Power (ERP) (watts)
    void setPower(const LCreal f) { power = f; }
 
    // (one way) Range loss (no units)

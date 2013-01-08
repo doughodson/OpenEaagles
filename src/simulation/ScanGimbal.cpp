@@ -780,7 +780,7 @@ bool ScanGimbal::setSearchVolume(const double width, const double height, const 
 }
 
 //------------------------------------------------------------------------------
-// setRefPosition:  Set reference angles (center of seach volume)
+// setRefPosition:  Set reference angles (center of the search volume)
 //------------------------------------------------------------------------------
 bool ScanGimbal::setRefPosition(const double refAz,  const double refEl)
 {
@@ -1072,7 +1072,7 @@ std::ostream& ScanGimbal::serialize(std::ostream& sout, const int i, const bool 
     sout << scanWidth << " " << scanHeight;
     sout << " ]" << std::endl;
 
-    // reference:  Reference angles (center of seach volume)
+    // reference:  Reference angles (center of the search volume)
     indent(sout,i+j);
     sout << "reference: [ ";
     sout << getRefAzimuth() << " " << getRefElevation();

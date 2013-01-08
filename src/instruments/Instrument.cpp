@@ -68,10 +68,10 @@ void Instrument::copyData(const Instrument& org, const bool cc)
 //------------------------------------------------------------------------------
 void Instrument::deleteData()
 {
-    if (myTable != 0) {
-        myTable->unref();
-   myTable = 0;
-}
+   if (myTable != 0) {
+      myTable->unref();
+      myTable = 0;
+   }
 }
 
 // SLOT functions

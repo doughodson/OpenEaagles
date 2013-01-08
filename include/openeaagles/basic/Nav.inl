@@ -394,7 +394,7 @@ inline bool Nav::convertGeod2Ecef(
 
 
 //------------------------------------------------------------------------------
-// Rotational transformation matrix (and optional sin/cos values) from euler angles
+// Rotational transformation matrix (and optional sin/cos values) from Euler angles
 //    Reference system <==> Rotating system
 //------------------------------------------------------------------------------
 
@@ -418,7 +418,7 @@ inline bool Nav::computeRotationalMatrixDeg(
 
 // computeRotationalMatrix() using arrays vectors
 inline bool Nav::computeRotationalMatrix(
-            const osg::Vec3d& angles,  // IN: euler angles [ phi theta psi ] (radians)
+            const osg::Vec3d& angles,  // IN: Euler angles [ phi theta psi ] (radians)
             osg::Matrixd* const m,     // OUT: Matrix
             osg::Vec2d* const scPhi,   // OUT: Sin/Cos of phi (Optional)
             osg::Vec2d* const scTht,   // OUT: Sin/Cos of theta (Optional)
@@ -434,7 +434,7 @@ inline bool Nav::computeRotationalMatrix(
 
 // computeRotationalMatrix() using degrees and arrays vectors
 inline bool Nav::computeRotationalMatrixDeg(
-            const osg::Vec3d& angles,  // IN: euler angles [ phi theta psi ] (degrees)
+            const osg::Vec3d& angles,  // IN: Euler angles [ phi theta psi ] (degrees)
             osg::Matrixd* const m,     // OUT: Matrix
             osg::Vec2d* const scPhi,   // OUT: Sin/Cos of phi (Optional)
             osg::Vec2d* const scTht,   // OUT: Sin/Cos of theta (Optional)
@@ -451,7 +451,7 @@ inline bool Nav::computeRotationalMatrixDeg(
 // computeEulerAnglesDeg() using degrees
 inline bool Nav::computeEulerAnglesDeg(
             const osg::Matrixd& rm,    // IN: Rotational matrix
-            osg::Vec3d* const anglesD, // OUT: euler angles (degrees)
+            osg::Vec3d* const anglesD, // OUT: Euler angles (degrees)
             osg::Vec2d* const scPhi, // OUT: Sin/Cos of phi (Optional)
             osg::Vec2d* const scTht, // OUT: Sin/Cos of theta (Optional)
             osg::Vec2d* const scPsi  // OUT: Sin/Cos of psi (Optional)
@@ -518,7 +518,7 @@ inline bool Nav::convertGeodAngles2EcefAngles(
 
 
 //----------------------------------------------------------
-// Convert geocentric euler angles (body/ECEF) to geodetic euler angles (body/NED)
+// Convert geocentric Euler angles (body/ECEF) to geodetic Euler angles (body/NED)
 //----------------------------------------------------------
 
 // convertEcefAngles2GeodAngles()

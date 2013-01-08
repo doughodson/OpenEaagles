@@ -74,7 +74,7 @@
 //
 //    BEGIN_EVENT_HANDLER(ThisType) and END_EVENT_HANDLER() 
 //       These macros, along with the ON_EVENT() and ON_ANYKEY() macros
-//       below, implement a event dispatch table, which is actually the
+//       below, implement an event dispatch table, which is actually the
 //       event() function for class 'ThisType'.
 //
 //       Typically "on event" functions are used to process the events.  The

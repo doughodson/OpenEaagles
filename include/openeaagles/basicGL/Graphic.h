@@ -68,8 +68,8 @@ class Material;
 //    scissorWidth       <Number>       ! How far over do we scissor (World coord) (default: 0)
 //    scissorHeight      <Number>       ! How far up do we scissor (World coord) (default: 0)
 //    stipple            <Number>       ! Line stippling flag - only used for line, lineloop, and circle when not filled.
-//    stippleFactor      <Number>       ! Line stipple factor, specifies a multiplier for each bit in line stipple pattern
-//    stipplePattern     <Number>       ! Line stipple pattern, specifies a 16-bit pattern for which fragments of a line to draw
+//    stippleFactor      <Number>       ! Line stipple factor, specifies a multiplier for each bit in line stipple pattern (default: 1)
+//    stipplePattern     <Number>       ! Specifies a 16 bit Line stipple pattern; range 0x0000 (0) .. 0xFFFF (65535) (default: 0xFFFF)
 //    visible            <Number>       ! Visibility flag
 //    mask               <Number>       ! Color Masking
 //    material           <Number>       ! Sets the current material
@@ -86,7 +86,7 @@ class Material;
 //
 //      Display* getDisplay()
 //          Returns a pointer to our Display container.  All Graphics MUST
-//          have an Display as a parent or (great) grand parent container.
+//          have a Display as a parent or (great) grand parent container.
 //
 //      draw()
 //          Draw the graphic object, and all its components, with the defined
@@ -114,7 +114,7 @@ class Material;
 //          used to lookup the Color from the color table.
 //      setColor(Number* num)
 //          Sets a color rotary object, based on the value passed in.. see basicGL/ColorRotary.h for
-//          how to setup a list of colors and breakpoints/
+//          how to setup a list of colors and breakpoints.
 //
 //
 //
@@ -424,7 +424,6 @@ protected:
     virtual bool setSlotStippling(const Basic::Number* const msg);
     virtual bool setSlotStippleFactor(const Basic::Number* const msg);
     virtual bool setSlotStipplePattern(const Basic::Number* const msg);
-    virtual bool setSlotStipplePattern(const Basic::String* const msg);
     virtual bool setSlotVisibility(const Basic::Number* const msg);
     virtual bool setSlotTranslateLight(Basic::PairStream* const msg);
 

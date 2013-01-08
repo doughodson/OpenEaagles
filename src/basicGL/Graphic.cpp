@@ -43,7 +43,7 @@ BEGIN_SLOTTABLE(Graphic)
     "scissorHeight",        // 15: How far up do we scissor         (World coord)
     "stipple",              // 16: Line stippling flag - only used for line, lineloop, and circle when not filled.  It is put up here because of it's commonality
     "stippleFactor",        // 17: Line stipple factor, specifies a multiplier for each bit in line stipple pattern
-    "stipplePattern",       // 18: Line stipple pattern, specifies a 16-bit pattern for which fragments of a line to draw
+    "stipplePattern",       // 18: Specifies a 16 bit Line stipple pattern; range 0x0000 (0) .. 0xFFFF (65535)
     "visible",              // 19: Visibility flag
     "mask",                 // 20: Color Masking
     "material",             // 21: Sets the current material
@@ -74,7 +74,6 @@ BEGIN_SLOT_MAP(Graphic)
     ON_SLOT(16, setSlotStippling, Basic::Number)
     ON_SLOT(17, setSlotStippleFactor, Basic::Number)
     ON_SLOT(18, setSlotStipplePattern, Basic::Number)
-    ON_SLOT(18, setSlotStipplePattern, Basic::String)
     ON_SLOT(19, setSlotVisibility, Basic::Number)
     ON_SLOT(20, setSlotMask, Basic::Number)
     ON_SLOT(21, setMaterial, Basic::Identifier)
@@ -158,8 +157,8 @@ Graphic::Graphic()
     postDraw = false;
 
     stipple = false;
-    stippleFactor = 0;
-    stipplePattern = 0;
+    stippleFactor = 1;
+    stipplePattern = 0xFFFF;
 
     mask = false;
     materialName = 0;
@@ -1206,33 +1205,15 @@ bool Graphic::setSlotStippleFactor(const Basic::Number* const msg)
 bool Graphic::setSlotStipplePattern(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) ok = setStipplePattern((GLushort)msg->getInt());
-   return ok;
-}
-
-// setSlotStipplePattern() - sets our stipple pattern with a hexadecimal string representation
-bool Graphic::setSlotStipplePattern(const Basic::String* const msg)
-{
-   bool ok = false;
    if (msg != 0) {
-      char temp[7];     // 6 characters plus the null
-      Eaagles::lcStrncpy(temp, 7, msg->getString(), 7);
-      // now search.. the first 2 characters should be 0x"
-      if (temp[0] == '0' && temp[1] == 'x') {
-         // for the next few, take the ascii equivalent and convert it to int
-         char val[6];
-         for (int i = 0; i < 5; i++) val[i] = temp[i+2];
-         val[5] = '\n';
-         unsigned int final = 0;
-         char* p;
-         final = strtol(val, &p, 16);
-         if (*p == 0) {
-            setStipplePattern(GLushort(final));
-            ok = true;
-         }
+      int v = msg->getInt();
+      if (v >= 0 && v <= 0xffff) {
+         ok = setStipplePattern( (GLushort) v );
+      }
+      else {
+         std::cerr << "Graphic::setSlotStipplePattern() - invalid value: " << v << "; must be a 16 bit value; range 0x0000 (0) to 0xFFFF (65535)" << std::endl;
       }
    }
-   if (!ok) std::cerr << "Graphic::setSlotStipplePattern() - format does not fit '0x0000' pattern!" << std::endl;
    return ok;
 }
 

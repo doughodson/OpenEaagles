@@ -18,7 +18,6 @@ namespace BasicGL {
 
 //------------------------------------------------------------------------------
 // Class: AsciiText
-// Base class: Object > Graphic > Field > AsciiText
 //
 // Form name: text
 // Slots:
@@ -193,7 +192,6 @@ private:
 
 //------------------------------------------------------------------------------
 // Class: HexReadout
-// Base class: Object > Graphic > Field > NumericReadout > HexReadout
 //
 // Form name: HexReadout
 //
@@ -219,7 +217,6 @@ protected:
 
 //------------------------------------------------------------------------------
 // Class: OctalReadout
-// Base class: Object > Graphic > Field > NumericReadout > OctalReadout
 //
 // Form name: OctalReadout
 //
@@ -245,7 +242,6 @@ protected:
 
 //------------------------------------------------------------------------------
 // Class: TimeReadout
-// Base class: Object > Graphic > Field > NumericReadout > TimeReadout
 //
 // Form name: TimeReadout
 //
@@ -282,9 +278,38 @@ protected:
 
 //------------------------------------------------------------------------------
 // Class: DirectionReadout
-// Base class: Object > Graphic > Field > NumericReadout > DirectionReadout
 //
 // Form name: DirectionReadout
+//
+// Notes:
+//    1) The 'D' character is used to define the degrees field (required)
+//
+//    2) The 'M' character is used to define the minutes field (optional, but
+//    required when seconds are displayed)
+//
+//    3) The 'S' character is used to define the seconds field (optional)
+//
+//    4) The "at symbol" (@) is replaced with a degree symbol (ASCII 0xB0)
+//
+//    5) The prefix or suffix '+' and '-' characters can be replaced using the
+//    'plusChar' and 'minusChar' slots (e.g., to change the '+' to 'E' and
+//    the '-' to 'W')
+//
+// Example formats
+//
+//    DD.D@          // Degrees
+//    0DD.D@         // Degrees with leading zeros
+//    +DD.D@         // Degrees with '+' on positive values
+//    DD.D@+         // Degrees with the '+' or '-' character as a suffix
+//
+//    DD@MM          // Degrees and minutes
+//    DD@MM.M        // Degrees and minutes
+//
+//    DD@MM'SS       // Degrees, minutes and seconds
+//    DD@MM'SS.S     // Degrees, minutes and seconds
+//
+//    +0DD@MM'SS.S   // Degrees, minutes and seconds with '+' on positive values
+//    0DD@MM'SS.S+   //  ... and with the '+' or '-' character as a suffix
 //
 //------------------------------------------------------------------------------
 class DirectionReadout : public NumericReadout {
@@ -305,9 +330,25 @@ protected:
 
 //------------------------------------------------------------------------------
 // Class: LatitudeReadout
-// Base class: Object > Graphic > Field > NumericReadout > DirectionReadout > LatitudeReadout
 //
 // Form name: LatitudeReadout
+//
+// Notes:
+//    1) see the 'DirectionReadout' notes
+//    2) The '+ char is replaced with 'N', and the '-' char is replaced with 'S'
+//
+// Example formats: 
+//
+//    0D.D@          // Degrees
+//
+//    0D@MM          // Degrees and minutes
+//    0D@MM.MM       // Degrees and minutes
+//
+//    0D@MM'SS       // Degrees, minutes and seconds
+//    0D@MM'SS.SSS   // Degrees, minutes and seconds
+//
+//    +0D@MM'SS.S    // Degrees, minutes and seconds with '+' on positive values
+//    0D@MM'SS.S+    //  ... and with the '+' or '-' character as a suffix
 //
 //------------------------------------------------------------------------------
 class LatitudeReadout : public DirectionReadout {
@@ -316,7 +357,7 @@ public:
     LatitudeReadout();
     virtual char filterInputEvent(const int event, const int tc);
 protected:
-   virtual void makeText();
+   //virtual void makeText();
 };
 
 
@@ -326,6 +367,24 @@ protected:
 //
 // Form name: LongitudeReadout
 //
+// Notes:
+//    1) see the 'DirectionReadout' notes
+//    2) The '+ char is replaced with 'E', and the '-' char is replaced with 'W'
+//
+// Example formats: 
+//
+//    0DD@            // Degrees
+//    0DD.D@          // Degrees
+//
+//    0DD@MM          // Degrees and minutes
+//    0DD@MM.MM       // Degrees and minutes
+//
+//    0DD@MM'SS       // Degrees, minutes and seconds
+//    0DD@MM'SS.SSS   // Degrees, minutes and seconds
+//
+//    +0DD@MM'SS.S    // Degrees, minutes and seconds with '+' on positive values
+//    0DD@MM'SS.S+    //  ... and with the '+' or '-' character as a suffix
+//
 //------------------------------------------------------------------------------
 class LongitudeReadout : public DirectionReadout {
     DECLARE_SUBCLASS(LongitudeReadout,DirectionReadout)
@@ -333,7 +392,7 @@ public:
     LongitudeReadout();
     virtual char filterInputEvent(const int event, const int tc);
 protected:
-   virtual void makeText();
+   //virtual void makeText();
 };
 
 
