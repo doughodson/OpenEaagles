@@ -1,0 +1,148 @@
+================================================================================
+Changes since v12.09
+================================================================================
+
+
+--------------------------------------------------------------------------------
+general
+
+-- across the board spelling fixes
+-- On linux, now compiles Position Independent Code (PIC) by default (see src/makedefs)
+
+--------------------------------------------------------------------------------
+basic
+
+   linux/lock.h
+      1) By default, now using  __sync_lock_test_and_set() and __sync_lock_release()
+
+   Logger class
+      1) Added new public functions getFilename(), getPathname() and getTopLine(), and
+      moved the set slot function from protected to public
+      2) Added new protected functions setOpen() and setFailed()
+      3) Moved the output stream to protected.
+
+   Thread classes
+      1) Fixed double thread termination.
+
+--------------------------------------------------------------------------------
+basicGL
+
+   BitmapFont class
+      1) Added the degree symbol character (0XB0)
+      2) Misc cleanup
+
+   DirectionReadout class
+      1) makeText() - now changes '@' to the degree character (0xB0)
+
+   Display class
+      1) Fixed a bug associated with readFrameBuffer() returning a
+         boolean false, when it should return 0.
+
+   Graphic class
+      1) removed the setSlotStipplePattern(String) slot function, which required a hex
+      string value.  Use the setSlotStipplePattern(Number) slot function.
+      2) setSlotStipplePattern(Number) -- added a 16 bit value check
+      3) changed default for slot 'stippleFactor' from zero to one
+      4) changed default for slot 'stipplePattern' from 0x0000 to 0xFFFF
+
+   Image class
+      1) Updated to read BMP files on Big-endian systems
+
+   NumericReadout class
+      1) redisplay() -- added check for the 'postSign' flag (bug fix -- wasn't
+      always moving the sign character from the prefix to the suffix position)
+
+   Readout.cpp file
+      Rearranged file by class
+
+   StrokeFont class
+      1) Added the degree symbol character (0XB0)
+      2) Misc cleanup and documentation
+   
+--------------------------------------------------------------------------------
+dis
+
+   EmitterBeamData struct
+      1) add the check for 'beamStatus', which was missing from the compare '==' operator.
+
+
+--------------------------------------------------------------------------------
+gui-glut
+
+   GlutDisplay class
+      1) reshapeSubWindow() -- added a glutPostWindowRedisplay() call since the
+      glutReshapeWindow() didn't always take on Linux.
+
+
+--------------------------------------------------------------------------------
+otw
+
+   CigiClNetworkSignalProcessing class
+      1) OnHotResp() -- added support for the CigiHatHotXRespV3_2 class.
+
+
+--------------------------------------------------------------------------------
+recorder
+
+
+--------------------------------------------------------------------------------
+simulation
+
+   Action class
+      1) Is now derived from basic's UBF Action class.  The execute() function
+      'actor' argument must be the OnboardComputer or the ownship, which can be
+      used to find the OnboardComputer.  The execute() fucntion will find the
+      OnboardComputer and 'trigger' the action.
+
+   Antenna class
+      1) onRfEmissionEvent() -- created and ref()'d a local copy of the RfSystem
+      pointer.  Without this change, the Antenna can remove the 'sys' pointer
+      in the middle of this method when a shutdown event occurs.
+
+      2) onRfEmissionReturnEventAntenna() -- created and ref()'d a local copy of
+      the RfSystem pointer.  .  Without this change, the Antenna can remove the
+      'sys' pointer in the middle of this method when a shutdown event occurs.
+
+   Navigation class
+      1) Added an initial route, which is set with the 'route' slot (setSlotRoute()),
+      and is used by reset() to reset the route to it's initial input value.
+
+      2) Added setRoute(), which like setSlotRoute(), will set the current route,
+      but it does not set the initial route used by reset().
+
+   Route class
+      1) insertSteerpoint() -- added an unref() after the steerpoint has been
+      inserted into the route, and modified where the original steerpoint list
+      is unref()'d (both possible memory leaks)
+
+      2) insertSteerpoint() -- added a ref() to a steerpoint being inserted
+      into the middle of the route (bug fix)
+
+      3) insertSteerpoint() -- any steerpoint with its 'pos' greater than the size
+      of the list is now added to the end of the list.
+
+      4) In various functions, modified where the steerpoint list is unref()
+
+   Simulation class
+      1) reset() -- while generating the new player list, now reinstating the container
+      pointer and player name.
+
+
+   Steerpoint class
+      1) setSlotSteerpointType() -- added check for "IP" enum.
+
+   Weapon class
+      1) atReleaseInit() -- changed eventID check from not-equal-zero to equal-zero,
+      which prevents a possible double increment of the weapon event ID.
+
+      2) Added new setReleaseEventID() function
+
+      3) release() and updateTOF() -- removed the MSG_DATA checks from the data
+      recorder samples
+
+--------------------------------------------------------------------------------
+vehicle
+
+
+--------------------------------------------------------------------------------
+
