@@ -60,7 +60,7 @@ Radar& Radar::operator=(const Radar& org)
     return *this;
 }
 
-Basic::Object* Radar::clone() const
+Radar* Radar::clone() const
 {
     return new Radar(*this);
 }

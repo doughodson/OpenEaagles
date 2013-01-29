@@ -85,7 +85,7 @@ Table& Table::operator=(const Table& org)
     return *this;
 }
 
-Object* Table::clone() const
+Table* Table::clone() const
 {
     return 0;
 }

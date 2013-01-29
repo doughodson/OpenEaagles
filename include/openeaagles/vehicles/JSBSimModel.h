@@ -60,10 +60,10 @@ public:
     virtual void setRudderPedalInput(const LCreal pedal);
 
     const Basic::String* getRootDir() const { return rootDir; }	// JSBSim root directory
-    virtual bool setRootDir(Basic::String* const dir);			// 
+    virtual bool setRootDir(const Basic::String* const dir);
 
-    const Basic::String* getModel() const { return model; }	// JSBSim model
-    virtual bool setModel(Basic::String* const msl);			// 
+    const Basic::String* getModel() const { return model; }	   // JSBSim model
+    virtual bool setModel(const Basic::String* const msl);
 
     // DynamicsModel interface
     virtual void dynamics(const LCreal  dt = 0.0);
@@ -93,9 +93,10 @@ protected:
     JSBSim::FGPropertyManager* propMgr;
 
 private:
+    void initData();
 
-    Basic::String* rootDir;         // root directory for JSBSim models
-    Basic::String* model;           // JSBSim model
+    const Basic::String* rootDir;   // root directory for JSBSim models
+    const Basic::String* model;     // JSBSim model
 
     LCreal	pitchTrimPos;		// +/- 1.0
     LCreal	pitchTrimRate;		// maxVal(1.0) per sec

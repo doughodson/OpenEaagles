@@ -120,7 +120,7 @@ void Navigation::copyData(const Navigation& org, const bool cc)
    if (cc) initData();
 
    if (org.priRoute != 0) {
-      Route* p = (Route*) org.priRoute->clone();
+      Route* p = org.priRoute->clone();
       priRoute = p;
       p->container(this);
       p->unref();  // SPtr<> has it
@@ -128,14 +128,14 @@ void Navigation::copyData(const Navigation& org, const bool cc)
    else priRoute = 0;
 
    if (org.initRoute != 0) {
-      Route* p = (Route*) org.initRoute->clone();
+      Route* p = org.initRoute->clone();
       initRoute = p;
       p->unref();  // SPtr<> has it
    }
    else initRoute = 0;
 
    if (org.bull != 0) {
-      Bullseye* b = (Bullseye*) org.bull->clone();
+      Bullseye* b = org.bull->clone();
       bull = b;
       b->container(this);
       b->unref();  // SPtr<> has it
@@ -219,7 +219,7 @@ void Navigation::reset()
       priRoute = 0;
    }
    if (initRoute != 0) {
-      priRoute = (Route*) initRoute->clone();
+      priRoute = initRoute->clone();
       priRoute->unref();  // SPtr<> has it
    }
    if (priRoute != 0) {
@@ -859,7 +859,7 @@ bool Navigation::setSlotRoute(const Route* const msg)
       priRoute = 0;
    }
    if (initRoute != 0) {
-      priRoute = (Route*) initRoute->clone();
+      priRoute = initRoute->clone();
       priRoute->unref();  // SPtr<> has it
    }
    if (priRoute != 0) {

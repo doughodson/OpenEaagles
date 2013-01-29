@@ -82,7 +82,7 @@ Antenna& Antenna::operator=(const Antenna& org)
     return *this;
 }
 
-Basic::Object* Antenna::clone() const
+Antenna* Antenna::clone() const
 {
     return new Antenna(*this);
 }
@@ -114,9 +114,13 @@ void Antenna::copyData(const Antenna& org, const bool cc)
     gainPatternDeg = org.gainPatternDeg;
 
     if (org.gainPattern != 0) {
-     setSlotGainPattern( (Basic::Function*) org.gainPattern->clone() );
+       Basic::Function* copy = org.gainPattern->clone();
+       setSlotGainPattern( copy );
+       copy->unref();
     }
-    else setSlotGainPattern(0);
+    else {
+       setSlotGainPattern(0);
+    }
 
     recycle = org.recycle;
 }
@@ -486,7 +490,7 @@ void Antenna::rfTransmit(Emission* const xmit)
             bool cloned = false;
             if (em == 0) {
                // Otherwise, clone a new one 
-               em = (Emission*) xmit->clone();
+               em = xmit->clone();
                cloned = true;
             }
 

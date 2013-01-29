@@ -179,7 +179,7 @@ Simulation& Simulation::operator=(const Simulation& org)
     return *this;
 }
 
-Basic::Object* Simulation::clone() const
+Simulation* Simulation::clone() const
 {
    return new Simulation(*this);
 }
@@ -261,17 +261,19 @@ void Simulation::copyData(const Simulation& org, const bool cc)
    station = 0;
 
    // Unref our old stuff (if any)
-   if (origPlayers != 0) { origPlayers = 0; }
-   if (players != 0)     { players = 0; }
 
    // Copy original players -- DPG need proper method to copy orignal player list
+   if (origPlayers != 0) { origPlayers = 0; }
    if (org.origPlayers != 0) {
-      origPlayers = dynamic_cast<Basic::PairStream*> (org.origPlayers->clone());
+      origPlayers = org.origPlayers->clone();
+      origPlayers->unref();  // SPtr<> has it
    }
 
    // Copy active players
+   if (players != 0)     { players = 0; }
    if (org.players != 0) {
-      players = dynamic_cast<Basic::PairStream*> (org.players->clone());
+      players = org.players->clone();
+      players->unref();  // SPtr<> has it
    }
 
    const Dafif::AirportLoader* apLoader = org.airports;
@@ -283,15 +285,23 @@ void Simulation::copyData(const Simulation& org, const bool cc)
    const Dafif::WaypointLoader* wpLoader = org.waypoints;
    setWaypoints( (Dafif::WaypointLoader*) wpLoader );
 
-   if (org.terrain != 0)
-      setSlotTerrain( (Basic::Terrain*) org.terrain->clone() );
-   else
-      setSlotTerrain( 0 );
+   if (org.terrain != 0) {
+      Basic::Terrain* copy = org.terrain->clone();
+      setSlotTerrain( copy );
+      copy->unref();
+   }
+   else {
+      setSlotTerrain(0);
+   }
 
-   if (org.irAtmosphere != 0)
-      setSlotIrAtmosphere( (IrAtmosphere*) org.irAtmosphere->clone() );
-   else
-      setSlotIrAtmosphere( 0 );
+   if (org.irAtmosphere != 0) {
+      IrAtmosphere* copy = org.irAtmosphere->clone();
+      setSlotIrAtmosphere( copy );
+      copy->unref();
+   }
+   else {
+      setSlotIrAtmosphere(0);
+   }
 
    setEarthModel( org.em );
 
@@ -1655,7 +1665,7 @@ bool Simulation::setEarthModel(const Basic::EarthModel* const msg)
    }
 
    if (msg != 0) {
-      em = (const Basic::EarthModel*) msg->clone();
+      em = msg->clone();
    }
 
    return true;

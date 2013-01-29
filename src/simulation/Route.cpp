@@ -86,9 +86,12 @@ void Route::copyData(const Route& org, const bool cc)
 
     to = 0; // find it using 'initToStptName' or 'initToStptIdx'
     
-    Basic::String* n = 0;
-    if (org.initToStptName != 0) n = (Basic::String*) org.initToStptName->clone();
-    initToStptName = n;
+    {
+       Basic::String* n = 0;
+       if (org.initToStptName != 0) n = org.initToStptName->clone();
+       initToStptName = n;
+       if (n != 0) n->unref();  // SPtr<> has it
+    }
 
     initToStptIdx = org.initToStptIdx;
     stptIdx = org.stptIdx;

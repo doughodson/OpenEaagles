@@ -161,19 +161,28 @@ void Steerpoint::copyData(const Steerpoint& org, const bool cc)
 
     next = 0; // find it using 'initNextStptName' or 'initNexStptIdx'
     
-    Basic::String* n = 0;
-    if (org.initNextStptName != 0) n = (Basic::String*) org.initNextStptName->clone();
-    initNextStptName = n;
+    {
+       Basic::String* n = 0;
+       if (org.initNextStptName != 0) n = org.initNextStptName->clone();
+       initNextStptName = n;
+       if (n != 0) n->unref();
+    }
 
     initNextStptIdx = org.initNextStptIdx;
 
-    Basic::String* s = 0;
-    if (org.description != 0) s = (Basic::String*) org.description->clone();
-    description = s;
+    {
+       Basic::String* s = 0;
+       if (org.description != 0) s = org.description->clone();
+       description = s;
+       if (s != 0) s->unref();
+    }
 
-    Action* aa = 0;
-    if (org.action != 0) aa = (Action*) org.action->clone();
-    action = aa;
+    {
+       Action* aa = 0;
+       if (org.action != 0) aa = org.action->clone();
+       action = aa;
+       if (aa != 0) aa->unref();
+    }
     
     latitude = org.latitude; 
     longitude = org.longitude;

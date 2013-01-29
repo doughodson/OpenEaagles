@@ -98,7 +98,7 @@ FtglFonts& FtglFonts::operator=(const FtglFonts& org)
     if (this != &org) copyData(org,false);
     return *this;
 }
-Basic::Object* FtglFonts::clone() const
+FtglFonts* FtglFonts::clone() const
 {
     return 0;
 }

@@ -36,7 +36,7 @@
         if (this != &org) copyData(org,false);                                  \
         return *this;                                                           \
     }                                                                           \
-    Basic::Object* TabLogger::ThisType::clone() const                           \
+    TabLogger::ThisType* TabLogger::ThisType::clone() const                     \
     {                                                                           \
         return new TabLogger::ThisType(*this);                                  \
     }
@@ -79,7 +79,7 @@ TabLogger& TabLogger::operator=(const TabLogger& org)
 }
 
 // Clone
-Basic::Object* TabLogger::clone() const
+TabLogger* TabLogger::clone() const
 {
     return new TabLogger(*this);
 }
@@ -180,7 +180,7 @@ TabLogger::TabLogEvent& TabLogger::TabLogEvent::operator=(const TabLogEvent& org
     return *this;
 }
 
-Basic::Object* TabLogger::TabLogEvent::clone() const
+TabLogger::TabLogEvent* TabLogger::TabLogEvent::clone() const
 {
     return 0;
 }

@@ -52,7 +52,7 @@ void CadrgFile::copyData(const CadrgFile& org, const bool cc)
             entries[i]->unref();
             entries[i] = 0;
         }
-        if (org.entries[i] != 0) entries[i] = (CadrgTocEntry*)org.entries[i]->clone();
+        if (org.entries[i] != 0) entries[i] = org.entries[i]->clone();
     }
     cib = org.cib;
     if (originalDir != 0) {

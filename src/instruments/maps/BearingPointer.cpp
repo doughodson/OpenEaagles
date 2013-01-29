@@ -233,7 +233,7 @@ bool BearingPointer::setSlotHeadGraphic(const BasicGL::Graphic* const newH)
         head = 0;
     }
     if (newH != 0) {
-        head = (BasicGL::Graphic*) newH->clone();
+        head = newH->clone();
         ok = true;
     }
     return ok;
@@ -249,7 +249,7 @@ bool BearingPointer::setSlotTailGraphic(const BasicGL::Graphic* const newT)
         tail = 0;
     }
     if (newT != 0) {
-        tail = (BasicGL::Graphic*) newT->clone();
+        tail = newT->clone();
         ok = true;
     }
     return ok;

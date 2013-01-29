@@ -189,7 +189,7 @@ void OtwCigiCl::copyData(const OtwCigiCl& org, const bool cc)
 
    cigi = 0;
    if (org.cigi != 0) {
-      cigi = (CigiCl*) org.cigi->clone();
+      cigi = org.cigi->clone();
    }
    cigiInitialized = false;
    cigiInitFailed = false;

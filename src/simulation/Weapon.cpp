@@ -570,7 +570,7 @@ Weapon* Weapon::prerelease()
 
       // Next we'll clone ourself --
       //  -- this will be the actual weapon player what will do the fly-out.
-      flyout = (Weapon*) this->clone();
+      flyout = this->clone();
 
       flyout->container( sim );
       flyout->reset();
@@ -659,7 +659,7 @@ Weapon* Weapon::release()
 
                // Next we'll clone ourself --
                //  -- this will be the actual weapon player what will do the fly-out.
-               flyout = (Weapon*) this->clone();
+               flyout = this->clone();
 
                flyout->container( sim );
                flyout->reset();

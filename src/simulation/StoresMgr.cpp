@@ -1022,7 +1022,7 @@ bool SimpleStoresMgr::onWpnRelEvent(const Basic::Boolean* const sw)
 
                   if (tm != 0) {
                      // Give a copy of the track to the weapon's track manager
-                     Track* newTrk = (Track*) trk->clone();
+                     Track* newTrk = trk->clone();
                      tm->clearTracksAndQueues();
                      tm->addTrack(newTrk);
                      flyout->setTargetTrack(newTrk,true);

@@ -98,14 +98,14 @@ void EmissionPduHandler::copyData(const EmissionPduHandler& org, const bool cc)
 
    setSensorModel(0);
    if (org.getSensorModel() != 0) {
-      Simulation::RfSensor* tmp = (Simulation::RfSensor*) org.getSensorModel()->clone();
+      Simulation::RfSensor* tmp = org.getSensorModel()->clone();
       setSensorModel(tmp);
       tmp->unref();
    }
 
    setAntennaModel(0);
    if (org.getAntennaModel() != 0) {
-      Simulation::Antenna* tmp = (Simulation::Antenna*) org.getAntennaModel()->clone();
+      Simulation::Antenna* tmp = org.getAntennaModel()->clone();
       setAntennaModel(tmp);
       tmp->unref();
    }

@@ -67,7 +67,7 @@ void SymbolLoader::copyData(const SymbolLoader& org, const bool cc)
    {
       Basic::PairStream* copy = 0;
       if (org.templates != 0) {
-         copy = (Basic::PairStream*) org.templates->clone();
+         copy = org.templates->clone();
       }
       setSlotTemplates(copy);
       if (copy != 0) copy->unref();
@@ -227,7 +227,7 @@ int SymbolLoader::addSymbol(const int nType, const char* const id, int specName)
 
                   // Clone the graphic template and set it as the
                   // symbol's graphical component.
-                  Basic::Pair* newPair = (Basic::Pair*) tpair->clone();
+                  Basic::Pair* newPair = tpair->clone();
                   BasicGL::Graphic* newGraph = (BasicGL::Graphic*)(newPair->object());
 
                   // Set the new graphical component's select name
@@ -288,7 +288,7 @@ bool SymbolLoader::setSymbolType(const int idx, const int nType)
                   BasicGL::Graphic* oldG = (BasicGL::Graphic*) (oldPair->object());
 
                   // Clone the new graphical component from the template
-                  Basic::Pair* newPair = (Basic::Pair*)tpair->clone();
+                  Basic::Pair* newPair = tpair->clone();
 
                   // Set the new graphical component's select name using the old's
                   BasicGL::Graphic* newGraph = (BasicGL::Graphic*) newPair->object();
@@ -1120,7 +1120,7 @@ void SlSymbol::copyData(const SlSymbol& org, const bool cc)
 
    {
       Basic::Pair* copy = 0;
-      if (org.pntr != 0) copy = (Basic::Pair*) org.pntr->clone();
+      if (org.pntr != 0) copy = org.pntr->clone();
       setSymbolPair(copy);
       if (copy != 0) copy->unref();
    }
