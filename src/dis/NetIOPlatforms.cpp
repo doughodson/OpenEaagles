@@ -431,11 +431,11 @@ void Nib::processArticulationParameters(const EntityStatePDU* const pdu)
                            );
                         if (ntm != 0) {
                            const Simulation::Player* tp = ntm->getTemplatePlayer();
-                           if (tp != 0 && tp->isMajorType(Simulation::Player::WEAPON)) {
+                           if (tp != 0 && tp->isClassType(typeid(Simulation::Weapon)) ) {
                               // We've found the weapon that matches the entity type,
                               // so clone it and add it to the SMS with the correct
                               // station number
-                              wpn = (Simulation::Weapon*) tp->clone();
+                              wpn = (Simulation::Weapon*) tp->clone();  // clone and cast to a Weapon
                               char cbuf[20];
                               std::sprintf(cbuf,"%i",sta);
                               Basic::Pair* pair = new Basic::Pair(cbuf, wpn);

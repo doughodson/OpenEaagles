@@ -66,16 +66,16 @@ void CadrgMap::copyData(const CadrgMap& org, const bool cc)
     }
     for (int i = 0; i < MAX_FILES; i++) {
         if (cadrgFiles[i] != 0) cadrgFiles[i]->unref();
-        cadrgFiles[i] = (CadrgFile*)org.cadrgFiles[i]->clone();
+        cadrgFiles[i] = org.cadrgFiles[i]->clone();
     }   
     for (int i = 0; i < MAX_FILES; i++) {
         if (mergedCadrgFiles[i] != 0) mergedCadrgFiles[i]->unref();
-        mergedCadrgFiles[i] = (CadrgFile*)org.mergedCadrgFiles[i]->clone();
+        mergedCadrgFiles[i] = org.mergedCadrgFiles[i]->clone();
     }   
 
     if (org.curCadrgFile!= 0) {
         if (curCadrgFile != 0) curCadrgFile->unref();
-        curCadrgFile = (CadrgFile*)org.curCadrgFile->clone();
+        curCadrgFile = org.curCadrgFile->clone();
     }
 
     if (org.stack != 0) {

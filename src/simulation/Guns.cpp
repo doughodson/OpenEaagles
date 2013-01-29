@@ -359,7 +359,7 @@ void Gun::copyData(const Gun& org, const bool cc)
    }
 
    if (org.getBulletType() != 0) {
-      Bullet* b = (Bullet*) (org.getBulletType()->clone());
+      Bullet* b = org.getBulletType()->clone();
       setBulletType( b );
       b->unref();
    }

@@ -12,7 +12,7 @@ inline const Basic::String* Player::getType() const
 }
 
 // True if the player's name matches
-inline bool Player::isName(const Basic::String* const tst) const
+inline bool Player::isName(const Basic::Identifier* const tst) const
 {
    return (*tst == pname);
 }
@@ -24,7 +24,7 @@ inline bool Player::isName(const char* const tst) const
 }
 
 // The player's name
-inline const Basic::String* Player::getName() const
+inline const Basic::Identifier* Player::getName() const
 {
    return &pname;
 }

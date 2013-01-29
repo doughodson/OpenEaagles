@@ -55,7 +55,7 @@ END_SLOTTABLE(Graphic)
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(Graphic)
     ON_SLOT( 1, setColor, Basic::Color)        
-    ON_SLOT( 1, setColor, Basic::String)
+    ON_SLOT( 1, setColor, Basic::Identifier)
     ON_SLOT( 2, setSlotLineWidth, Basic::Number)
     ON_SLOT( 3, setSlotFlashRate, Basic::Number)
     ON_SLOT( 4, setSlotTransformList,   Basic::PairStream)
@@ -86,7 +86,7 @@ END_SLOT_MAP()
 //------------------------------------------------------------------------------
 BEGIN_EVENT_HANDLER(Graphic)
     ON_EVENT_OBJ(SET_COLOR,setColor,Basic::Color)   // Color given as a Basic::Color object (ie.. rgb)
-    ON_EVENT_OBJ(SET_COLOR,setColor,Basic::String)  // Color given as a string (ie.. "red")
+    ON_EVENT_OBJ(SET_COLOR,setColor,Basic::Identifier)  // Color given as a string (ie.. "red")
     ON_EVENT_OBJ(SET_COLOR,setColor,Basic::Number)  // Color given as a value (for a color rotary.. ie.. 4 is the fourth color in the rotary list)
     ON_EVENT_OBJ(SET_MATERIAL,setMaterial,Basic::Identifier )
     ON_EVENT_OBJ(SET_MATERIAL,setMaterial,BasicGL::Material)
@@ -103,6 +103,11 @@ Graphic::Graphic()
 {
     STANDARD_CONSTRUCTOR()
 
+    initData();
+}
+
+void Graphic::initData()
+{
     // Our Display
     displayPtr = 0;
 
@@ -174,23 +179,7 @@ Graphic::Graphic()
 void Graphic::copyData(const Graphic& org, const bool cc)
 {
     BaseClass::copyData(org);
-
-    // If called by the copy constructor, init these pointers ...
-    if (cc) {
-        displayPtr = 0;
-        color = 0;
-        colorName = 0;
-        texName = 0;
-        transforms = 0;
-        vertices = 0;
-        nv = 0;
-        texCoord = 0;
-        ntc = 0;
-        norms = 0;
-        nn = 0;
-        materialName = 0;
-        materialObj = 0;
-    }
+    if (cc) initData();
 
     // Just reset our display (function getDisplay() should set it)
     displayPtr = 0;
@@ -221,7 +210,7 @@ void Graphic::copyData(const Graphic& org, const bool cc)
 
     // Copy transform and matrix information
     if (transforms != 0)     { transforms->unref(); transforms = 0; }
-    if (org.transforms != 0) { transforms = (Basic::PairStream*) org.transforms->clone(); }
+    if (org.transforms != 0) { transforms = org.transforms->clone(); }
     haveMatrix  = org.haveMatrix;
     haveMatrix1 = org.haveMatrix1;
     m  = org.m;
@@ -740,7 +729,7 @@ bool Graphic::setColor(const Basic::Color* cobj)
 
     if (cobj != 0) {
         // When we're being passed a color ...
-        color = (Basic::Color*) cobj->clone();
+        color = cobj->clone();
     }
     
     return true;
@@ -749,7 +738,7 @@ bool Graphic::setColor(const Basic::Color* cobj)
 //------------------------------------------------------------------------------
 // setColor() -- set this object's color (using an Basic::Identifier)
 //------------------------------------------------------------------------------
-bool Graphic::setColor(const Basic::String* cnobj)
+bool Graphic::setColor(const Basic::Identifier* cnobj)
 {
     // Unref old colors
     if (color != 0) { color->unref(); color = 0; }
@@ -757,7 +746,7 @@ bool Graphic::setColor(const Basic::String* cnobj)
 
     if (cnobj != 0) {
        // When we're being passed a name of a color from the color table ...
-            colorName = (Basic::Identifier*) cnobj->clone();
+            colorName = cnobj->clone();
     }
     return true;
 }
@@ -1401,7 +1390,7 @@ bool Graphic::setMaterial(const Basic::Identifier* const msg)
 
     if (msg != 0) {
         // When we're being passed a name of a material from the material table...
-        materialName = (Basic::Identifier*) msg->clone();
+        materialName = msg->clone();
     }
     return true;
 }
@@ -1417,7 +1406,7 @@ bool Graphic::setMaterial(const BasicGL::Material* const msg)
 
     if (msg != 0) {
         // When we're being passed a material ...
-        materialObj = (BasicGL::Material*) msg->clone();
+        materialObj = msg->clone();
     }
     
     return true;

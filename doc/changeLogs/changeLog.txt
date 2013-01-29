@@ -14,6 +14,9 @@ basic
 --------------------------------------------------------------------------------
 basicGL
 
+   Graphic Class
+      1) The data type has been changed from String to Identifier for setColor(),
+      getColorName(), the 'color' slot and the SET_COLOR event.
    
 --------------------------------------------------------------------------------
 dis
@@ -34,6 +37,9 @@ recorder
 --------------------------------------------------------------------------------
 simulation
 
+   Player Class
+      1) The data type has been changed from String to Identifier for isName(),
+      getName() and setName().
 
 --------------------------------------------------------------------------------
 vehicle

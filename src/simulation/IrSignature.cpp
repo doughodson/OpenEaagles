@@ -68,7 +68,7 @@ void IrSignature::copyData(const IrSignature& org, const bool cc)
 {
    BaseClass::copyData(org);
 
-   if(cc){
+   if (cc) {
       waveBandTable = 0;
       numWaveBands = 0;
       baseHeatSignature = 0;
@@ -82,11 +82,21 @@ void IrSignature::copyData(const IrSignature& org, const bool cc)
    effectiveArea     = org.effectiveArea;
 
    if (org.waveBandTable != 0) {
-     setSlotWaveBandSizes( (Basic::Table1*) org.waveBandTable->clone() );
+      Basic::Table1* copy = org.waveBandTable->clone();
+      setSlotWaveBandSizes( copy );
+      copy->unref();
+   }
+   else {
+      setSlotWaveBandSizes(0);
    }
 
    if (org.irShapeSignature != 0) {
-     setSlotIrShapeSignature( (IrShape*) org.irShapeSignature->clone() );
+      IrShape* copy = org.irShapeSignature->clone();
+      setSlotIrShapeSignature( copy );
+      copy->unref();
+   }
+   else {
+      setSlotIrShapeSignature(0);
    }
 }
 
@@ -117,33 +127,33 @@ Basic::Object* IrSignature::getSlotByIndex(const int si)
 //------------------------------------------------------------------------------
 bool IrSignature::setSlotWaveBandSizes(const Basic::Table1* const tbl)
 {
-   bool ok = false;
-   if (tbl != 0) {
-      if (waveBandTable != 0){
-          waveBandTable->unref();
-      }
-      tbl->ref();
-      waveBandTable = tbl;
-      numWaveBands = tbl->getNumXPoints();
-      ok = true;
+   if (waveBandTable != 0) {
+      waveBandTable->unref();
+      waveBandTable = 0;
+      numWaveBands = 0;
    }
-   return ok;
+   if (tbl != 0) {
+      waveBandTable = tbl;
+      tbl->ref();
+      numWaveBands = tbl->getNumXPoints();
+   }
+   return true;
 }
 
 //------------------------------------------------------------------------------
 // setSlotIrShapeSignature() --  set IR shape of the signature
 //------------------------------------------------------------------------------
-bool IrSignature::setSlotIrShapeSignature(IrShape* const s) {
-   bool ok = false;
+bool IrSignature::setSlotIrShapeSignature(IrShape* const s)
+{
+   if (irShapeSignature != 0) {
+      irShapeSignature->unref();
+      irShapeSignature = 0;
+   }
    if (s != 0) {
-      if (irShapeSignature != 0) {
-         irShapeSignature->unref();
-      }
       irShapeSignature = s;
       irShapeSignature->ref();
-      ok = true;
    }
-   return ok;
+   return true;
 }
 
 //------------------------------------------------------------------------------

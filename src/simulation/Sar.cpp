@@ -88,7 +88,7 @@ void Sar::copyData(const Sar& org, const bool cc)
       imgList = 0;
    }
    if (org.imgList != 0) {
-      imgList = static_cast<Basic::PairStream*>( org.imgList->clone() );
+      imgList = org.imgList->clone();
    }
 }
 

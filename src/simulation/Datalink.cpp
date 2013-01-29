@@ -87,7 +87,7 @@ void Datalink::copyData(const Datalink& org, const bool cc)
    {
       const Basic::String* p = 0;
       if (org.radioName != 0) {
-         p = (Basic::String*) org.radioName->clone();
+         p = org.radioName->clone();
       }
       setRadioName( p );
       setRadio(0);
@@ -96,7 +96,7 @@ void Datalink::copyData(const Datalink& org, const bool cc)
    {
       const Basic::String* p = 0;
       if (org.tmName != 0) {
-         p = (Basic::String*) org.tmName->clone();
+         p = org.tmName->clone();
       }
       setTrackManagerName( p );
       setTrackManager(0);

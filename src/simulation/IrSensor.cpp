@@ -94,7 +94,8 @@ IrSensor::IrSensor(const IrSensor& org) : storedMessagesQueue(MAX_EMISSIONS), st
     STANDARD_CONSTRUCTOR()
     copyData(org,true);
 }
-Basic::Object* IrSensor::clone() const
+
+IrSensor* IrSensor::clone() const
 {
     return new IrSensor(*this);
 }
@@ -125,7 +126,9 @@ void IrSensor::copyData(const IrSensor& org, const bool cc)
    maximumRange = org.maximumRange;
 
    if (org.tmName != 0) {
-      setTrackManagerName((Basic::String*) org.tmName->clone());
+      Basic::String* copy = org.tmName->clone();
+      setTrackManagerName( copy );
+      copy->unref();
    }
    else {
       setTrackManagerName(0);

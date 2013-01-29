@@ -103,7 +103,7 @@ bool ColorRotary::setSlotValues(const Basic::PairStream* const newStream)
     bool ok = false;
     numVals = 0;
     if (newStream != 0) {
-        Basic::PairStream* a = (Basic::PairStream*) newStream->clone();
+        Basic::PairStream* a = newStream->clone();
         Basic::List::Item* item = a->getFirstItem();
         while (item != 0) {
             Basic::Pair* pair = (Basic::Pair*) item->getValue();

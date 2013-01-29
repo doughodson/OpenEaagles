@@ -196,14 +196,14 @@ void NetIO::copyData(const NetIO& org, const bool cc)
 
    clearInputEntityTypes();
    for (unsigned int i = 0; i < org.nInputEntityTypes; i++) {
-      Ntm* cp = (Ntm*) org.inputEntityTypes[i]->clone();
+      Ntm* cp = org.inputEntityTypes[i]->clone();
       addInputEntityType( cp );
       cp->unref();
    }
 
     clearOutputEntityTypes();
     for (unsigned int i = 0; i < org.nOutputEntityTypes; i++) {
-      Ntm* cp = (Ntm*) org.outputEntityTypes[i]->clone();
+      Ntm* cp = org.outputEntityTypes[i]->clone();
       addOutputEntityType( cp );
       cp->unref();
     }
@@ -745,7 +745,7 @@ Player* NetIO::createIPlayer(Nib* const nib)
       if (typeMapper != 0) {
          const Player* templatePlayer = typeMapper->getTemplatePlayer();
          if (templatePlayer != 0) {
-            player = (Player*) templatePlayer->clone();
+            player = templatePlayer->clone();
          }
       }
 
@@ -1469,7 +1469,7 @@ NetIO::NtmInputNode& NetIO::NtmInputNode::operator=(const NetIO::NtmInputNode& o
    return *this;
 }
 
-Basic::Object* NetIO::NtmInputNode::clone() const
+NetIO::NtmInputNode* NetIO::NtmInputNode::clone() const
 {
    return 0;
 }
@@ -1503,7 +1503,7 @@ NetIO::NtmOutputNode& NetIO::NtmOutputNode::operator=(const NetIO::NtmOutputNode
    return *this;
 }
 
-Basic::Object* NetIO::NtmOutputNode::clone() const
+NetIO::NtmOutputNode* NetIO::NtmOutputNode::clone() const
 {
    return 0;
 }
@@ -1597,7 +1597,7 @@ void NtmOutputNodeStd::copyData(const NtmOutputNodeStd& org, const bool cc)
       tp = 0;
    }
    if (org.tp != 0) {
-      tp = (Player*) org.tp->clone();
+      tp = org.tp->clone();
    }
 
    if (ntmList != 0) {
@@ -1605,7 +1605,7 @@ void NtmOutputNodeStd::copyData(const NtmOutputNodeStd& org, const bool cc)
       ntmList = 0;
    }
    if (org.ntmList != 0) {
-      ntmList = (Basic::List*) org.ntmList->clone();
+      ntmList = org.ntmList->clone();
    }
 
    if (subnodeList != 0) {
@@ -1613,7 +1613,7 @@ void NtmOutputNodeStd::copyData(const NtmOutputNodeStd& org, const bool cc)
       subnodeList = 0;
    }
    if (org.subnodeList != 0) {
-      subnodeList = (Basic::List*) org.subnodeList->clone();
+      subnodeList = org.subnodeList->clone();
    }
 
 }

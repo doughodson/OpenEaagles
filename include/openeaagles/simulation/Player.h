@@ -429,9 +429,9 @@ public:
    bool isID(const unsigned short tst) const;      // True if player's ID matches
    unsigned short getID() const;                   // The player's ID
 
-   bool isName(const Basic::String* const tst) const; // True if the player's name matches
-   bool isName(const char* const tst) const;       // True if the player's name matches
-   const Basic::String* getName() const;           // The player's name
+   bool isName(const Basic::Identifier* const tst) const; // True if the player's name matches
+   bool isName(const char* const tst) const;              // True if the player's name matches
+   const Basic::Identifier* getName() const;              // The player's name
 
    Side getSide() const;                           // The 'side' that the player is on.
    bool isSide(const unsigned int tst) const;      // True if player is with one of these (bit-wise or'd) sides
@@ -713,7 +713,7 @@ public:
    // ---
 
    virtual bool setType(Basic::String* const newTypeString);   // Sets the player's type string
-   virtual void setName(const Basic::String& newName);         // Sets the player's name (Basic::String version)
+   virtual void setName(const Basic::Identifier& newName);     // Sets the player's name (Basic::String version)
    virtual void setName(const char* const newName);            // Sets the player's name (char* version)
    virtual void setID(const unsigned short newId);             // Sets the player's ID
    virtual void setSide(const Side newSide);                   // Sets the player's side enum
@@ -1059,7 +1059,7 @@ private:
    // ---
    SPtr<Basic::String>  type;    // Type of vehicle
    unsigned short id;            // Player ID
-   Basic::String  pname;         // Player's Name
+   Basic::Identifier  pname;     // Player's Name
    Side           side;          // Which side (see above)
 
    // ---

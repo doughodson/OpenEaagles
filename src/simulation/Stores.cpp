@@ -621,7 +621,7 @@ bool Stores::setSlotStores(const Basic::PairStream* const msg)
 
             if ( isWpn || isEE ) {
                // Clone the weapon pair and set us as its container
-               Basic::Pair* cpair = (Basic::Pair*) pair->clone();
+               Basic::Pair* cpair = pair->clone();
                Component* cp = (Component*) cpair->object();
                cp->container(this);
 

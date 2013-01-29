@@ -69,7 +69,7 @@ Nib& Nib::operator=(const Nib& org)
     return *this;
 }
 
-Basic::Object* Nib::clone() const
+Nib* Nib::clone() const
 {
     return new Nib(*this);
 }
@@ -288,7 +288,7 @@ bool Nib::processElectromagneticEmissionPDU(const ElectromagneticEmissionPDU* co
             NetIO* const disIO = (NetIO*)(getNetIO());
             const EmissionPduHandler* tmp = disIO->findEmissionPduHandler(es);
             if (tmp != 0) {
-               handler = (EmissionPduHandler*) tmp->clone();
+               handler = tmp->clone();
             }
 
             if (handler != 0) {
@@ -346,7 +346,7 @@ bool Nib::emitterBeamsManager(const LCreal curExecTime)
             NetIO* const disIO = (NetIO*)(getNetIO());
             const EmissionPduHandler* tmp = disIO->findEmissionPduHandler(rs);
             if (tmp != 0) {
-               handler = (EmissionPduHandler*) tmp->clone();
+               handler = tmp->clone();
             }
 
             // Handler wasn't found? Then just create a simple, default emission handler
@@ -388,7 +388,7 @@ bool Nib::emitterBeamsManager(const LCreal curExecTime)
                      NetIO* const disIO = (NetIO*)(getNetIO());
                      const EmissionPduHandler* tmp = disIO->findEmissionPduHandler(jam);
                      if (tmp != 0) {
-                        handler = (EmissionPduHandler*) tmp->clone();
+                        handler = tmp->clone();
                      }
 
                      // Handler wasn't found? Then just create a simple, default handler
@@ -421,7 +421,7 @@ bool Nib::emitterBeamsManager(const LCreal curExecTime)
                NetIO* const disIO = (NetIO*)(getNetIO());
                const EmissionPduHandler* tmp = disIO->findEmissionPduHandler(js);
                if (tmp != 0) {
-                  handler = (EmissionPduHandler*) tmp->clone();
+                  handler = tmp->clone();
                }
 
                // Handler wasn't found? Then just create a simple, default jammer handler

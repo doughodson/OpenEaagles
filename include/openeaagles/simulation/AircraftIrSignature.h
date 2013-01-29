@@ -92,6 +92,7 @@ protected:
    virtual LCreal getPLA(const AirVehicle* const airModel); 
 
 private:
+   void initData();
   
    const Basic::Table4* airframeSignatureTable; // mapping of 
             // signature  x is the velocity (in mach #) and y is altitude (in sim prevailing units --

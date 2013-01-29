@@ -48,19 +48,20 @@ void Message::copyData(const Message& org, const bool cc)
    timeStamp = org.timeStamp;
    lifeSpan = org.lifeSpan;
    ack = org.ack;
+
    if (senderName != 0) {
       senderName->unref();
       senderName = 0;
    }
    if (org.senderName != 0)
-      senderName = (Basic::String*)org.senderName->clone();
+      senderName = org.senderName->clone();
 
    if (destNames != 0) {
       destNames->unref();
       destNames = 0;
    }
    if (org.destNames != 0)
-      destNames = (Basic::List*)org.destNames->clone();
+      destNames = org.destNames->clone();
 }
 
 //-------------------------------------------------------------------------
