@@ -261,9 +261,9 @@ public:
    // Color functions
    Basic::Color* getColor()                      { return color; }
    const Basic::Color* getColor() const          { return color; }
-   const Basic::Identifier* getColorName() const      { return colorName; }
+   const Basic::Identifier* getColorName() const     { return colorName; }
    virtual bool setColor(const Basic::Color* const msg);
-   virtual bool setColor(const Basic::String* const msg);
+   virtual bool setColor(const Basic::Identifier* const msg);
    virtual bool setColor(const Basic::Number* const msg);
 
    // material functions
@@ -325,7 +325,7 @@ public:
    bool setScissorHeight(const LCreal newHeight);
 
    // Line stippling functions
-   bool isStippling()                              { return stipple; }
+   bool isStippling()                               { return stipple; }
    GLuint getStippleFactor()                        { return stippleFactor; }
    GLushort getStipplePattern()                     { return stipplePattern; }
    bool setStippling(const bool x);
@@ -436,6 +436,7 @@ protected:
        );
 
 private:
+    void          initData();
     void          setupMatrix();
     void          setupMaterial();
     
@@ -454,8 +455,8 @@ private:
     GLuint        selName;          // Select name
     LCreal        fRate;            // Flash rate
 
-    Basic::Color*  color;         // Color
-    Basic::Identifier*  colorName;     // Color name (if from color table)
+    Basic::Color*  color;           // Color
+    Basic::Identifier*  colorName;  // Color name (if from color table)
 
     osg::Vec3*       vertices;      // Vertices
     unsigned int     nv;            // Number of vertices

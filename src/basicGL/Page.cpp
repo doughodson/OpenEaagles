@@ -73,7 +73,7 @@ void Page::copyData(const Page& org, const bool cc)
     // Copy subpages
     if (!cc && subpages != 0) { subpages->unref(); }
     if (org.subpages != 0) {
-        subpages = (Basic::PairStream*) org.subpages->clone();
+        subpages = org.subpages->clone();
         processSubpages();
     }
     else subpages = 0;
@@ -81,7 +81,7 @@ void Page::copyData(const Page& org, const bool cc)
     // Copy events
     if (!cc && pageChgEvents != 0) { pageChgEvents->unref(); }
     if (org.pageChgEvents != 0) {
-        pageChgEvents = (Basic::PairStream*) org.pageChgEvents->clone();
+        pageChgEvents = org.pageChgEvents->clone();
     }
     else pageChgEvents = 0;
         

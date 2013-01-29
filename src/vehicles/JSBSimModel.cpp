@@ -68,6 +68,11 @@ JSBSimModel::JSBSimModel()
 {
     STANDARD_CONSTRUCTOR()
 
+    initData();
+}
+
+void JSBSimModel::initData()
+{
     rootDir = 0;
     model = 0;
     fdmex = 0;
@@ -92,22 +97,17 @@ JSBSimModel::JSBSimModel()
 //------------------------------------------------------------------------------
 // copyData() -- copy (delete) member data
 //------------------------------------------------------------------------------
-void JSBSimModel::copyData(const JSBSimModel& org, const bool)
+void JSBSimModel::copyData(const JSBSimModel& org, const bool cc)
 {
     BaseClass::copyData(org);
+    if (cc) initData();
 
     fdmex = 0;
     propMgr = 0;
-    rootDir = 0;
-    model = 0;
-    if (org.rootDir != 0) {
-        rootDir = (Basic::String *) org.rootDir->clone();
-        rootDir->ref();
-    }
-    if (org.model != 0) {
-        model = (Basic::String *) org.model->clone();
-        model->ref();
-    }
+
+    setRootDir( org.rootDir );
+    setModel( org.model );
+
     pitchTrimPos = org.pitchTrimPos;
     pitchTrimRate = org.pitchTrimRate;
     pitchTrimSw = org.pitchTrimSw;
@@ -895,27 +895,29 @@ void JSBSimModel::reset()
 //------------------------------------------------------------------------------
 
 // Sets root directory for JSBSim models
-bool JSBSimModel::setRootDir(Basic::String* const dir)
+bool JSBSimModel::setRootDir(const Basic::String* const dir)
 {
-    if (dir == 0) {
-        return false;
+    if (rootDir != 0) {
+       rootDir->unref();
+       rootDir = 0;
     }
-    bool ok = true;
-    rootDir = (Basic::String *) dir->clone();
-    rootDir->ref();
-    return ok;
+    if (dir != 0) {
+       rootDir = dir->clone();
+    }
+    return true;
 }
 
 // Sets JSBSim model
-bool JSBSimModel::setModel(Basic::String* const mdl)
+bool JSBSimModel::setModel(const Basic::String* const mdl)
 {
-    if (mdl == 0) {
-        return false;
+    if (model != 0) {
+       model->unref();
+       model = 0;
     }
-    bool ok = true;
-    model = (Basic::String *) mdl->clone();
-    model->ref();
-    return ok;
+    if (mdl != 0) {
+       model = mdl->clone();
+    }
+    return true;
 }
 
 //------------------------------------------------------------------------------

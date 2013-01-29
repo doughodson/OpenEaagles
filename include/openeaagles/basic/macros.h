@@ -127,7 +127,7 @@
     typedef BaseType BaseClass;                                                                       \
     public: ThisType(const ThisType& org);                                                            \
     public: virtual ~ThisType();                                                                      \
-    public: virtual Eaagles::Basic::Object* clone() const;                                            \
+    public: virtual ThisType* clone() const;                                                          \
     public: ThisType& operator=(const ThisType& org);                                                 \
     protected: void copyData(const ThisType& org, const bool cc = false);                             \
     protected: void deleteData();                                                                     \
@@ -171,7 +171,7 @@
     ThisType::~ThisType() {                                                            \
       STANDARD_DESTRUCTOR()                                                            \
     }                                                                                  \
-    Eaagles::Basic::Object* ThisType::clone() const                                    \
+    ThisType* ThisType::clone() const                                                  \
     {                                                                                  \
         return new ThisType(*this);                                                    \
     }                                                                                  \
@@ -232,7 +232,7 @@
     ThisType::~ThisType() {                                                            \
         STANDARD_DESTRUCTOR()                                                          \
     }                                                                                  \
-    Eaagles::Basic::Object* ThisType::clone() const                                    \
+    ThisType* ThisType::clone() const                                                  \
     {                                                                                  \
         return 0;                                                                      \
     }                                                                                  \

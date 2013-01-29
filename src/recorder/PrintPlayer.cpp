@@ -61,7 +61,7 @@ void PrintPlayer::copyData(const PrintPlayer& org, const bool cc)
 
    { // clone player name
       const Basic::String* clone = 0;
-      if (org.name != 0) clone = (const Basic::String*) org.name->clone();
+      if (org.name != 0) clone = org.name->clone();
       setName(clone);
       if (clone != 0) clone->unref();
    }

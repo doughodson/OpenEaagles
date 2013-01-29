@@ -63,7 +63,7 @@ void SolenoidSwitch::copyData(const SolenoidSwitch& org, const bool)
    if (org.timer != 0) {
        if (timer != 0) {
            timer->unref();
-           timer = (Basic::UpTimer*)org.timer->clone();
+           timer = org.timer->clone();
        }
    }    
     for (int i = 0; i < NUM_BUTTONS; i++) {

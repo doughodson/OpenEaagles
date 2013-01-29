@@ -80,7 +80,7 @@ void AnalogInput::copyData(const AnalogInput& org, const bool cc)
    {
       const Basic::Table1* copy = 0;
       if (org.table != 0) {
-         copy = (Basic::Table1*) org.table->clone();
+         copy = org.table->clone();
       }
       setTable(copy);
       if (copy != 0) copy->unref();

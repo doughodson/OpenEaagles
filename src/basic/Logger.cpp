@@ -341,7 +341,7 @@ Logger::LogEvent& Logger::LogEvent::operator=(const LogEvent& org)
 }
 
 // Clone
-Object* Logger::LogEvent::clone() const
+Logger::LogEvent* Logger::LogEvent::clone() const
 {
     return 0;
 }

@@ -83,6 +83,12 @@ END_SLOT_MAP()
 AircraftIrSignature::AircraftIrSignature()
 {
     STANDARD_CONSTRUCTOR()
+
+    initData();
+}
+
+void AircraftIrSignature::initData()
+{
     airframeSignatureTable = 0; 
     airframeWavebandFactorTable = 0; 
     plumeSignatureTable = 0; 
@@ -99,40 +105,61 @@ AircraftIrSignature::AircraftIrSignature()
 //------------------------------------------------------------------------------
 void AircraftIrSignature::copyData(const AircraftIrSignature& org, const bool cc)
 {
-    if(cc){
-        airframeSignatureTable = 0; 
-        airframeWavebandFactorTable = 0; 
-        plumeSignatureTable = 0; 
-        plumeWavebandFactorTable = 0; 
-        hotPartsSignatureTable = 0; 
-        hotPartsWavebandFactorTable = 0; 
-        airframeSig = 0; 
-        plumeSigs = 0;
-        hotPartsSigs = 0;
-    }
+    BaseClass::copyData(org);
+    if (cc) initData();
 
     if (org.airframeSignatureTable != 0) {
-        setSlotAirframeSignatureTable( (Basic::Table4*) org.airframeSignatureTable->clone() );
+        Basic::Table4* copy = org.airframeSignatureTable->clone();
+        setSlotAirframeSignatureTable( copy );
+        copy->unref();
+    }
+    else {
+        setSlotAirframeSignatureTable(0);
     }
 
     if (org.airframeWavebandFactorTable != 0) {
-        setSlotAirframeWavebandFactorTable( (Basic::Table2*) org.airframeWavebandFactorTable->clone() );
+        Basic::Table2* copy = org.airframeWavebandFactorTable->clone();
+        setSlotAirframeWavebandFactorTable( copy );
+        copy->unref();
+    }
+    else {
+        setSlotAirframeWavebandFactorTable(0);
     }
 
     if (org.plumeSignatureTable != 0) {
-        setSlotPlumeSignatureTable( (Basic::Table5*) org.plumeSignatureTable->clone() );
+        Basic::Table5* copy = org.plumeSignatureTable->clone();
+        setSlotPlumeSignatureTable( copy );
+        copy->unref();
+    }
+    else {
+        setSlotPlumeSignatureTable(0);
     }
 
     if (org.plumeWavebandFactorTable != 0) {
-        setSlotPlumeWavebandFactorTable( (Basic::Table2*) org.plumeWavebandFactorTable->clone() );
+        Basic::Table2* copy = org.plumeWavebandFactorTable->clone();
+        setSlotPlumeWavebandFactorTable( copy );
+        copy->unref();
+    }
+    else {
+        setSlotPlumeWavebandFactorTable(0);
     }
 
     if (org.hotPartsSignatureTable != 0) {
-        setSlotHotPartsSignatureTable( (Basic::Table5*) org.hotPartsSignatureTable->clone() );
+        Basic::Table5* copy = org.hotPartsSignatureTable->clone();
+        setSlotHotPartsSignatureTable( copy );
+        copy->unref();
+    }
+    else {
+        setSlotHotPartsSignatureTable(0);
     }
 
     if (org.hotPartsWavebandFactorTable != 0) {
-        setSlotHotPartsWavebandFactorTable( (Basic::Table2*) org.hotPartsWavebandFactorTable->clone() );
+        Basic::Table2* copy = org.hotPartsWavebandFactorTable->clone();
+        setSlotHotPartsWavebandFactorTable( copy );
+        copy->unref();
+    }
+    else {
+        setSlotHotPartsWavebandFactorTable(0);
     }
 
     BaseClass::copyData(org);
@@ -229,16 +256,14 @@ Basic::Object* AircraftIrSignature::getSlotByIndex(const int si)
 //------------------------------------------------------------------------------
 bool AircraftIrSignature::setSlotAirframeSignatureTable(const Basic::Table4* const tbl)
 {
-    bool ok = false;
-    if (tbl != 0) {
-        if (airframeSignatureTable != 0){
-            airframeSignatureTable->unref();
-        }
-        tbl->ref();
-        airframeSignatureTable = tbl;
-        ok = true;
-    }
-    return ok;
+   if (airframeSignatureTable != 0) {
+      airframeSignatureTable->unref();
+   }
+   airframeSignatureTable = tbl;
+   if (airframeSignatureTable != 0) {
+      airframeSignatureTable->ref();
+   }
+   return true;
 }
 
 //------------------------------------------------------------------------------
@@ -246,16 +271,14 @@ bool AircraftIrSignature::setSlotAirframeSignatureTable(const Basic::Table4* con
 //------------------------------------------------------------------------------
 bool AircraftIrSignature::setSlotPlumeSignatureTable(const Basic::Table5* const tbl)
 {
-    bool ok = false;
-    if (tbl != 0) {
-        if (plumeSignatureTable != 0){
-            plumeSignatureTable->unref();
-        }
-        tbl->ref();
-        plumeSignatureTable = tbl;
-        ok = true;
-    }
-    return ok;
+   if (plumeSignatureTable != 0) {
+      plumeSignatureTable->unref();
+   }
+   plumeSignatureTable = tbl;
+   if (plumeSignatureTable != 0) {
+      plumeSignatureTable->ref();
+   }
+   return true;
 }
 
 //------------------------------------------------------------------------------
@@ -263,16 +286,14 @@ bool AircraftIrSignature::setSlotPlumeSignatureTable(const Basic::Table5* const 
 //------------------------------------------------------------------------------
 bool AircraftIrSignature::setSlotAirframeWavebandFactorTable(const Basic::Table2* const tbl)
 {
-    bool ok = false;
-    if (tbl != 0) {
-        if (airframeWavebandFactorTable != 0){
-            airframeWavebandFactorTable->unref();
-        }
-        tbl->ref();
-        airframeWavebandFactorTable = tbl;
-        ok = true;
-    }
-    return ok;
+   if (airframeWavebandFactorTable != 0) {
+      airframeWavebandFactorTable->unref();
+   }
+   airframeWavebandFactorTable = tbl;
+   if (airframeWavebandFactorTable != 0) {
+      airframeWavebandFactorTable->ref();
+   }
+   return true;
 }
 
 //------------------------------------------------------------------------------
@@ -280,16 +301,14 @@ bool AircraftIrSignature::setSlotAirframeWavebandFactorTable(const Basic::Table2
 //------------------------------------------------------------------------------
 bool AircraftIrSignature::setSlotPlumeWavebandFactorTable(const Basic::Table2* const tbl)
 {
-    bool ok = false;
-    if (tbl != 0) {
-        if (plumeWavebandFactorTable != 0){
-            plumeWavebandFactorTable->unref();
-        }
-        tbl->ref();
-        plumeWavebandFactorTable = tbl;
-        ok = true;
-    }
-    return ok;
+   if (plumeWavebandFactorTable != 0) {
+      plumeWavebandFactorTable->unref();
+   }
+   plumeWavebandFactorTable = tbl;
+   if (plumeWavebandFactorTable != 0) {
+      plumeWavebandFactorTable->ref();
+   }
+   return true;
 }
 
 //------------------------------------------------------------------------------
@@ -297,16 +316,14 @@ bool AircraftIrSignature::setSlotPlumeWavebandFactorTable(const Basic::Table2* c
 //------------------------------------------------------------------------------
 bool AircraftIrSignature::setSlotHotPartsSignatureTable(const Basic::Table5* const tbl)
 {
-    bool ok = false;
-    if (tbl != 0) {
-        if (hotPartsSignatureTable != 0){
-            hotPartsSignatureTable->unref();
-        }
-        tbl->ref();
-        hotPartsSignatureTable = tbl;
-        ok = true;
-    }
-    return ok;
+   if (hotPartsSignatureTable != 0) {
+      hotPartsSignatureTable->unref();
+   }
+   hotPartsSignatureTable = tbl;
+   if (hotPartsSignatureTable != 0) {
+      hotPartsSignatureTable->ref();
+   }
+   return true;
 }
 
 //------------------------------------------------------------------------------
@@ -314,16 +331,14 @@ bool AircraftIrSignature::setSlotHotPartsSignatureTable(const Basic::Table5* con
 //------------------------------------------------------------------------------
 bool AircraftIrSignature::setSlotHotPartsWavebandFactorTable(const Basic::Table2* const tbl)
 {
-    bool ok = false;
-    if (tbl != 0) {
-        if (hotPartsWavebandFactorTable != 0){
-            hotPartsWavebandFactorTable->unref();
-        }
-        tbl->ref();
-        hotPartsWavebandFactorTable = tbl;
-        ok = true;
-    }
-    return ok;
+   if (hotPartsWavebandFactorTable != 0) {
+      hotPartsWavebandFactorTable->unref();
+   }
+   hotPartsWavebandFactorTable = tbl;
+   if (hotPartsWavebandFactorTable != 0) {
+      hotPartsWavebandFactorTable->ref();
+   }
+   return true;
 }
 
 //------------------------------------------------------------------------------

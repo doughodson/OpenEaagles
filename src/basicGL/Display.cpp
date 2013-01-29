@@ -204,21 +204,21 @@ void Display::copyData(const Display& org, const bool cc)
 
    if (subdisplays != 0) { subdisplays->unref(); }
    if (org.subdisplays != 0) {
-      subdisplays = (Basic::PairStream*) org.subdisplays->clone();
+      subdisplays = org.subdisplays->clone();
       processSubdisplays();
    }
    else subdisplays = 0;
 
    if (textures != 0) { textures->unref(); }
    if (org.textures != 0) {
-      textures = (Basic::PairStream*) org.textures->clone();
+      textures = org.textures->clone();
       processTextures();
    }
    else textures = 0;
 
    if (materials != 0) materials->unref();
    if (org.materials != 0) {
-      materials = (Basic::PairStream*) org.materials->clone();
+      materials = org.materials->clone();
       processMaterials();
    }
 

@@ -74,7 +74,7 @@ TrackManager& TrackManager::operator=(const TrackManager& org)
    return *this;
 }
 
-Basic::Object* TrackManager::clone() const
+TrackManager* TrackManager::clone() const
 {
    return 0;
 }

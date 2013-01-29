@@ -43,7 +43,7 @@ Rwr& Rwr::operator=(const Rwr& org)
     return *this;
 }
 
-Basic::Object* Rwr::clone() const
+Rwr* Rwr::clone() const
 {
     return new Rwr(*this);
 }

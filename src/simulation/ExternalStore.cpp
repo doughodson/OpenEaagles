@@ -55,7 +55,7 @@ void ExternalStore::copyData(const ExternalStore& org, const bool cc)
 
    {
       const Basic::String* p = 0;
-      if (org.type != 0) p = (const Basic::String*) org.type->clone();
+      if (org.type != 0) p = org.type->clone();
       setSlotType( p );
       if (p != 0) p->unref();
    }

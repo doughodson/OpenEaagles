@@ -55,7 +55,7 @@ Tdb& Tdb::operator=(const Tdb& org)
     return *this;
 }
 
-Basic::Object* Tdb::clone() const
+Tdb* Tdb::clone() const
 {
     return new Tdb(*this);
 }

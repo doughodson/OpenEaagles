@@ -177,7 +177,7 @@ void Station::copyData(const Station& org, const bool cc)
 
    // Set the simulation exec
    if (org.sim != 0) {
-      Simulation* copy = (Simulation*) org.sim->clone();
+      Simulation* copy = org.sim->clone();
       setSlotSimulation( copy );
       copy->unref();
    }
@@ -187,7 +187,7 @@ void Station::copyData(const Station& org, const bool cc)
 
    // Copy the OTW handlers
    if (org.otw != 0) {
-      Basic::PairStream* copy = (Basic::PairStream*) org.otw->clone();
+      Basic::PairStream* copy = org.otw->clone();
       setSlotOutTheWindow( copy );
       copy->unref();
    }
@@ -197,7 +197,7 @@ void Station::copyData(const Station& org, const bool cc)
 
    // Copy the networks
    if (org.networks != 0) {
-      Basic::PairStream* copy = (Basic::PairStream*) org.networks->clone();
+      Basic::PairStream* copy = org.networks->clone();
       setSlotNetworks( copy );
       copy->unref();
    }
@@ -207,7 +207,7 @@ void Station::copyData(const Station& org, const bool cc)
 
    // Copy the I/O handlers
    if (org.ioHandlers != 0) {
-      Basic::PairStream* copy = (Basic::PairStream*) org.ioHandlers->clone();
+      Basic::PairStream* copy = org.ioHandlers->clone();
       setSlotIoHandler( copy );
       copy->unref();
    }
@@ -217,7 +217,7 @@ void Station::copyData(const Station& org, const bool cc)
 
    {  // clone the data recorder
       DataRecorder* copy = 0;
-      if (org.dataRecorder != 0) copy = (DataRecorder*) org.dataRecorder->clone();
+      if (org.dataRecorder != 0) copy = org.dataRecorder->clone();
       setDataRecorder(copy);
       if (copy != 0) copy->unref();
    }
@@ -235,7 +235,7 @@ void Station::copyData(const Station& org, const bool cc)
    tmrUpdateEnbl = org.tmrUpdateEnbl;
 
    if (org.startupResetTimer0!= 0) {
-      Basic::Time* copy = (Basic::Time*) org.startupResetTimer0->clone();
+      Basic::Time* copy = org.startupResetTimer0->clone();
       setSlotStartupResetTime( copy );
       copy->unref();
    }
@@ -251,7 +251,7 @@ void Station::copyData(const Station& org, const bool cc)
 
    // Copy own ownship name
    if (org.ownshipName != 0) {
-      ownshipName = dynamic_cast<Basic::String*> (org.ownshipName->clone() );
+      ownshipName = org.ownshipName->clone();
    }
 
    // Attach our ownship

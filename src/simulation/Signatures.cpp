@@ -572,7 +572,7 @@ SigAzEl::SigAzEl(const Basic::Table2* const tbl0)
 
    tbl = 0;
    if (tbl0 != 0) {
-      tbl = (Basic::Table2*) tbl0->clone();
+      tbl = tbl0->clone();
    }
    swapOrderFlg = false;
    degFlg = false;
@@ -591,7 +591,7 @@ void SigAzEl::copyData(const SigAzEl& org, const bool cc)
 
    if (tbl != 0) { tbl->unref(); tbl = 0; }
    if (org.tbl != 0) {
-      tbl = (Basic::Table2*) org.tbl->clone();
+      tbl = org.tbl->clone();
    }
 
    swapOrderFlg = org.swapOrderFlg;

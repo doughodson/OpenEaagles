@@ -73,7 +73,7 @@ IrSeeker& IrSeeker::operator=(const IrSeeker& org)
    return *this;
 }
 
-Basic::Object* IrSeeker::clone() const
+IrSeeker* IrSeeker::clone() const
 {
    return new IrSeeker(*this);
 }
