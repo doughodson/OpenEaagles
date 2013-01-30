@@ -82,7 +82,7 @@ Antenna& Antenna::operator=(const Antenna& org)
     return *this;
 }
 
-Basic::Object* Antenna::clone() const
+Antenna* Antenna::clone() const
 {
     return new Antenna(*this);
 }
@@ -114,9 +114,13 @@ void Antenna::copyData(const Antenna& org, const bool cc)
     gainPatternDeg = org.gainPatternDeg;
 
     if (org.gainPattern != 0) {
-     setSlotGainPattern( (Basic::Function*) org.gainPattern->clone() );
+       Basic::Function* copy = org.gainPattern->clone();
+       setSlotGainPattern( copy );
+       copy->unref();
     }
-    else setSlotGainPattern(0);
+    else {
+       setSlotGainPattern(0);
+    }
 
     recycle = org.recycle;
 }
@@ -486,7 +490,7 @@ void Antenna::rfTransmit(Emission* const xmit)
             bool cloned = false;
             if (em == 0) {
                // Otherwise, clone a new one 
-               em = (Emission*) xmit->clone();
+               em = xmit->clone();
                cloned = true;
             }
 
@@ -593,7 +597,9 @@ bool Antenna::onRfEmissionEvent(Emission* const em)
    if (fromPlayerOfInterest(em)) {
 
       Player* ownship = getOwnship();
-      if (ownship != 0 && sys != 0) {
+      RfSystem* sys1 = getSystem();
+      if (ownship != 0 && sys1 != 0) {
+         sys1->ref();
 
          // Line-Of-Sight (LOS) vectors back to the transmitter.
          osg::Vec3d xlos = em->getTgtLosVec();
@@ -668,7 +674,9 @@ bool Antenna::onRfEmissionEvent(Emission* const em)
          double pGain = getPolarizationGain(em->getPolarization());
          double raGain = aea * pGain;
 
-         sys->rfReceivedEmission(em, this, LCreal(raGain));
+         sys1->rfReceivedEmission(em, this, LCreal(raGain));
+
+         sys1->unref();
       }
 
    }
@@ -683,13 +691,18 @@ bool Antenna::onRfEmissionReturnEventAntenna(Emission* const em)
 {
     bool used = false;
     // Pass all returned emissions to our sensor
-    if (sys != 0) {
+    RfSystem* sys1 = getSystem();
+    if (sys1 != 0) {
+        sys1->ref();
+
         // Compute antenna effective area
         double aea = getEffectiveArea(em->getGain(), em->getWavelength());
         // Same antenna -- polarization match -- polarization gain is 1.0
         // So just use Antenna effective area
-        sys->rfReceivedEmission(em, this, LCreal(aea));
+        sys1->rfReceivedEmission(em, this, LCreal(aea));
         used = true;
+
+        sys1->unref();
     }
     return used;
 }

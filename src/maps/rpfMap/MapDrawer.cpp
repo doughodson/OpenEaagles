@@ -80,7 +80,7 @@ void MapDrawer::copyData(const MapDrawer& org, const bool cc)
     
     if (org.myMap != 0) {
         if (myMap != 0) myMap->unref();
-        myMap = (CadrgMap*)org.myMap->clone();
+        myMap = org.myMap->clone();
         myMap->ref();
     }
 
@@ -90,7 +90,7 @@ void MapDrawer::copyData(const MapDrawer& org, const bool cc)
             pagers[i] = 0;
         }
         if (org.pagers[i] != 0) {
-            pagers[i] = (TexturePager*)org.pagers[i]->clone();
+            pagers[i] = org.pagers[i]->clone();
             pagers[i]->ref();
         }
         scalingNorth[i] = org.scalingNorth[i];

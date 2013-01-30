@@ -55,8 +55,14 @@ void Instrument::copyData(const Instrument& org, const bool cc)
     
     if (cc) myTable = 0;
 
-    if (org.myTable != 0) setSlotScalingTable( (const Basic::Table1*) org.myTable->clone() );
-    else setSlotScalingTable(0);
+    if (org.myTable != 0) {
+        Basic::Table1* copy = org.myTable->clone();
+        setSlotScalingTable( copy );
+        copy->unref();
+    }
+    else {
+        setSlotScalingTable(0);
+    }
 
     instVal = org.instVal;
     allowPassing = org.allowPassing;
@@ -68,10 +74,10 @@ void Instrument::copyData(const Instrument& org, const bool cc)
 //------------------------------------------------------------------------------
 void Instrument::deleteData()
 {
-    if (myTable != 0) {
-        myTable->unref();
-   myTable = 0;
-}
+   if (myTable != 0) {
+      myTable->unref();
+      myTable = 0;
+   }
 }
 
 // SLOT functions

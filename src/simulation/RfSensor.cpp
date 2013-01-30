@@ -105,13 +105,14 @@ void RfSensor::copyData(const RfSensor& org, const bool cc)
     // Copy subpages
     if (modes != 0) { modes->unref(); }
     if (org.modes != 0) {
-        modes = (Basic::PairStream*) org.modes->clone();
+        modes = org.modes->clone();
         processModes();
     }
-    else modes = 0;
 
     if (org.tmName != 0) {
-       setTrackManagerName((Basic::String*) org.tmName->clone());
+       Basic::String* clone = org.tmName->clone();
+       setTrackManagerName(clone);
+       clone->unref();
     }
     else {
       setTrackManagerName(0);

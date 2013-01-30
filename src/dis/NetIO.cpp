@@ -188,8 +188,7 @@ void NetIO::copyData(const NetIO& org, const bool cc)
 
    clearEmissionPduHandlers();
    for (unsigned int i = 0; i < org.nEmissionHandlers; i++) {
-      const EmissionPduHandler* const tmp = 
-         (const EmissionPduHandler*) org.emissionHandlers[i]->clone();
+      const EmissionPduHandler* const tmp = org.emissionHandlers[i]->clone();
       addEmissionPduHandler(tmp);
       tmp->unref();
    }
@@ -1910,7 +1909,7 @@ void NetIO::testOutputEntityTypes(const unsigned int n)
          if (origNtm != 0) {
 
             const Simulation::Player* origP = origNtm->getTemplatePlayer();
-            Simulation::Player* origP1 = (Simulation::Player*) origP->clone();
+            Simulation::Player* origP1 = origP->clone();
 
             std::cout << "; form: " << origP->getFormName();
             SPtr<Basic::String> origType( (Basic::String*) origP->getType() );
@@ -2007,7 +2006,7 @@ void NtmInputNode::copyData(const NtmInputNode& org, const bool cc)
       ourNtm = 0;
    }
    if (org.ourNtm != 0) {
-      ourNtm = (Ntm*) org.ourNtm->clone();
+      ourNtm = org.ourNtm->clone();
    }
 
    if (subnodeList != 0) {
@@ -2015,7 +2014,7 @@ void NtmInputNode::copyData(const NtmInputNode& org, const bool cc)
       subnodeList = 0;
    }
    if (org.subnodeList != 0) {
-      subnodeList = (Basic::List*) org.subnodeList->clone();
+      subnodeList = org.subnodeList->clone();
    }
 }
 

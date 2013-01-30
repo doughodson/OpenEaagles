@@ -353,7 +353,7 @@ bool Scanline::addPolygon(const Polygon* const polygon)
 
 
    // Create a working copy of the polygon
-   Polygon* tmpPolygon = (Polygon*) polygon->clone();
+   Polygon* tmpPolygon = polygon->clone();
 
    // ---
    // Transform the vertices and normals
@@ -646,7 +646,7 @@ Scanline::PolyData& Scanline::PolyData::operator=(const Scanline::PolyData& org)
    return *this;
 }
 
-Basic::Object* Scanline::PolyData::clone() const
+Scanline::PolyData* Scanline::PolyData::clone() const
 {
    return new Scanline::PolyData(*this);
 }
@@ -806,7 +806,7 @@ Scanline::Edge& Scanline::Edge::operator=(const Scanline::Edge& org)
    return *this;
 }
 
-Basic::Object* Scanline::Edge::clone() const
+Scanline::Edge* Scanline::Edge::clone() const
 {
    return new Scanline::Edge(*this);
 }

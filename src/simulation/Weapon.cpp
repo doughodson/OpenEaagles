@@ -570,7 +570,7 @@ Weapon* Weapon::prerelease()
 
       // Next we'll clone ourself --
       //  -- this will be the actual weapon player what will do the fly-out.
-      flyout = (Weapon*) this->clone();
+      flyout = this->clone();
 
       flyout->container( sim );
       flyout->reset();
@@ -628,7 +628,7 @@ Weapon* Weapon::release()
 
          // and we have a launching player and a simulation ...
          Player* lplayer = getLaunchVehicle();
-            Simulation* sim = (Simulation*)( findContainerByType(typeid(Simulation)) );
+         Simulation* sim = (Simulation*)( findContainerByType(typeid(Simulation)) );
          if ( lplayer != 0 && sim != 0) {
 
             // then release the weapon!
@@ -648,9 +648,9 @@ Weapon* Weapon::release()
                initWpn->setMode(Player::LAUNCHED);
                initWpn->setReleased(true);
                initWpn->setReleaseHold(false);
-            
-           }
-           else {
+
+            }
+            else {
                // When we haven't already created a flyout then this is
                // a direct release ...
 
@@ -659,7 +659,7 @@ Weapon* Weapon::release()
 
                // Next we'll clone ourself --
                //  -- this will be the actual weapon player what will do the fly-out.
-               flyout = (Weapon*) this->clone();
+               flyout = this->clone();
 
                flyout->container( sim );
                flyout->reset();
@@ -679,8 +679,8 @@ Weapon* Weapon::release()
                // Set our mode flags to fully released.
                setFlyoutWeapon(flyout);
                setInitialWeapon(this);
-            setMode(Player::LAUNCHED);
-            setReleased(true);
+               setMode(Player::LAUNCHED);
+               setReleased(true);
                setReleaseHold(false);
 
                // add it to the flyout weapont to the player list
@@ -689,14 +689,12 @@ Weapon* Weapon::release()
                sim->addNewPlayer(pname,flyout);
             }
 
-           if (isMessageEnabled(MSG_DATA)) {
-              BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_WEAPON_RELEASED )
-                 SAMPLE_3_OBJECTS( this, getLaunchVehicle(), 0 )  // weapon, shooter, target
-                 SAMPLE_2_VALUES( 0, 0.0 )
-              END_RECORD_DATA_SAMPLE()
-           }
+            BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_WEAPON_RELEASED )
+               SAMPLE_3_OBJECTS( this, getLaunchVehicle(), 0 )  // weapon, shooter, target
+               SAMPLE_2_VALUES( 0, 0.0 )
+            END_RECORD_DATA_SAMPLE()
 
-           // TabLogger is deprecated
+            // TabLogger is deprecated
             if (isMessageEnabled(MSG_DATA) && getAnyEventLogger() != 0) {
                // type 1 for "launch", last two fields effectively null
                TabLogger::TabLogEvent* evt = new TabLogger::LogWeaponActivity(1, getLaunchVehicle(), 0, 0, 0, 0.0);
@@ -706,25 +704,23 @@ Weapon* Weapon::release()
 
          }
 
-        }
-        else {
+      }
+      else {
          // We have a hung store
-            setHung(true);
+         setHung(true);
 
-           if (isMessageEnabled(MSG_DATA)) {
-              BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_WEAPON_HUNG )
-                 SAMPLE_2_OBJECTS( this, getLaunchVehicle() )
-              END_RECORD_DATA_SAMPLE()
-           }
+         BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_WEAPON_HUNG )
+            SAMPLE_2_OBJECTS( this, getLaunchVehicle() )
+            END_RECORD_DATA_SAMPLE()
 
-           // TabLogger is deprecated
-         if (isMessageEnabled(MSG_DATA) && getAnyEventLogger() != 0) {
-            // type 4 for "hung store"
-            TabLogger::TabLogEvent* evt = new TabLogger::LogWeaponActivity(4, getLaunchVehicle(), this, 0, 0, 0.0);
-            getAnyEventLogger()->log(evt);
-            evt->unref();
-        }
-    }
+            // TabLogger is deprecated
+            if (isMessageEnabled(MSG_DATA) && getAnyEventLogger() != 0) {
+               // type 4 for "hung store"
+               TabLogger::TabLogEvent* evt = new TabLogger::LogWeaponActivity(4, getLaunchVehicle(), this, 0, 0, 0.0);
+               getAnyEventLogger()->log(evt);
+               evt->unref();
+            }
+      }
    }
 
    return flyout;
@@ -736,7 +732,7 @@ Weapon* Weapon::release()
 void Weapon::atReleaseInit()
 {
    // Set the release event
-   if (eventID != 0) {
+   if (eventID == 0) {
       eventID = getSimulation()->getNewWeaponEventID();
    }
 
@@ -784,12 +780,10 @@ void Weapon::updateTOF(const LCreal dt)
          setMode(DETONATED);
          setDetonationResults( DETONATE_DETONATION );
 
-         if (isMessageEnabled(MSG_DATA)) {
-            BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_WEAPON_DETONATION )
-               SAMPLE_3_OBJECTS( this, getLaunchVehicle(), getTargetPlayer() )
-               SAMPLE_2_VALUES( DETONATE_DETONATION, 0.0 )
-            END_RECORD_DATA_SAMPLE()
-         }
+         BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_WEAPON_DETONATION )
+            SAMPLE_3_OBJECTS( this, getLaunchVehicle(), getTargetPlayer() )
+            SAMPLE_2_VALUES( DETONATE_DETONATION, 0.0 )
+         END_RECORD_DATA_SAMPLE()
 
          // TabLogger is deprecated
          if (getAnyEventLogger() != 0) {
@@ -1299,6 +1293,14 @@ bool Weapon::setWeaponID(const int n)
    weaponID = n;
    return true;
 }
+
+// Sets the release event ID
+bool Weapon::setReleaseEventID(const unsigned short n)
+{
+   eventID = n;
+   return true;
+}
+
 
 // Sets our launcher and station number
 bool Weapon::setLauncher(Stores* const l, const unsigned int s)

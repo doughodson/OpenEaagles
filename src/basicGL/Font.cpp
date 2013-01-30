@@ -88,7 +88,7 @@ Font& Font::operator=(const Font& org)
     return *this;
 }
 
-Basic::Object* Font::clone() const
+Font* Font::clone() const
 {
     return 0;
 }

@@ -121,7 +121,7 @@ void DataRecorder::copyData(const DataRecorder& org, const bool cc)
 
    {  // clone the original's output handler
       OutputHandler* copy = 0;
-      if (org.outputHandler != 0) copy = (OutputHandler*) org.outputHandler->clone();
+      if (org.outputHandler != 0) copy = org.outputHandler->clone();
       setOutputHandler(copy);
       if (copy != 0) copy->unref();
    }

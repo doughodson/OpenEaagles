@@ -680,7 +680,7 @@ public:
       );
 
    //----------------------------------------------------------
-   // Convert geocentric euler angles (body/ECEF) to geodetic euler angles (body/NED)
+   // Convert geocentric Euler angles (body/ECEF) to geodetic Euler angles (body/NED)
    //----------------------------------------------------------
    static bool convertEcefAngles2GeodAngles(
          const osg::Matrixd& wm, // IN: World matrix
@@ -721,15 +721,15 @@ public:
    // Converts geocentric angles to geodetic angles (From SubrDis)
    static bool getGeodAngle(
       const double geodPos[2],      // IN: Geodetic position [ ILAT ILON ] [ degs degs ]
-      const double geocAngle[3],    // IN: Geocentric euler angles (radians) [ IPHI ITHETA IPSI ]
-      double geodAngle[3]           // OUT: Geodetic euler angles (radians) [ IPHI ITHETA IPSI ]
+      const double geocAngle[3],    // IN: Geocentric Euler angles (radians) [ IPHI ITHETA IPSI ]
+      double geodAngle[3]           // OUT: Geodetic Euler angles (radians) [ IPHI ITHETA IPSI ]
    );
 
    // Converts geodetic angles to geocentric angles (From SubrDis)
    static bool getGeocAngle(
       const double geodPos[2],      // IN: Geodetic position [ ILAT ILON ] [ degs degs ]
-      const double geodAngle[3],    // IN: Geodetic euler angles (radians) [ IPHI ITHETA IPSI ]
-      double geocAngle[3]           // OUT: Geocentric euler angles (radians) [ IPHI ITHETA IPSI ]
+      const double geodAngle[3],    // IN: Geodetic Euler angles (radians) [ IPHI ITHETA IPSI ]
+      double geocAngle[3]           // OUT: Geocentric Euler angles (radians) [ IPHI ITHETA IPSI ]
    );
 
    // Converts World (Geocentric) to Simulation (Geodetic) (From SubrDis)

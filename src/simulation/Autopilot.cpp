@@ -856,7 +856,7 @@ bool Autopilot::setLeadPlayer(const Player* const p)
       lead->ref();
       leadHdg = (LCreal) lead->getHeadingR();
       // grab our lead name
-      if (lead->getName() != 0) leadName = (Basic::Identifier*)lead->getName()->clone();
+      if (lead->getName() != 0) leadName = lead->getName()->clone();
    }
 
    return true;

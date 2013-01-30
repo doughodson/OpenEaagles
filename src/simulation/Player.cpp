@@ -441,11 +441,23 @@ void Player::copyData(const Player& org, const bool cc)
    interpTrrn = org.interpTrrn;
    tOffset = org.tOffset;
 
-   if (org.signature != 0) setSlotSignature( dynamic_cast<RfSignature*>( org.signature->clone() ) );
-   else setSlotSignature(0);
+   if (org.signature != 0) {
+      RfSignature* copy = org.signature->clone();
+      setSlotSignature( copy );
+      copy->unref();
+   }
+   else {
+      setSlotSignature(0);
+   }
 
-   if (org.irSignature != 0) setSlotIrSignature( dynamic_cast<IrSignature*>( org.irSignature->clone() ) );
-   else setSlotIrSignature(0);
+   if (org.irSignature != 0) {
+      IrSignature* copy = org.irSignature->clone();
+      setSlotIrSignature( copy );
+      copy->unref();
+   }
+   else {
+      setSlotIrSignature(0);
+   }
 
    camouflage = org.camouflage;
    damage = org.damage;
@@ -1719,7 +1731,7 @@ bool Player::setType(Basic::String* const msg)
 }
 
 // Set the player's name
-void Player::setName(const Basic::String& n)
+void Player::setName(const Basic::Identifier& n)
 {
    pname = n;
 }
@@ -2786,7 +2798,7 @@ bool Player::onTgtStepEvent()
 
 
 //------------------------------------------------------------------------------
-// onRfEmissionEventPlayer() -- process RF Emisison events
+// onRfEmissionEventPlayer() -- process RF Emission events
 //
 // 1) compute the Line-Of-Sight (LOS) vectors back to the transmitter
 //
@@ -2868,7 +2880,7 @@ bool Player::onRfEmissionEventPlayer(Emission* const em)
 }
 
 //------------------------------------------------------------------------------
-// onRfReflectedEmissionEventPlayer() -- process reflected R/F Emisison events
+// onRfReflectedEmissionEventPlayer() -- process reflected R/F Emission events
 //
 //------------------------------------------------------------------------------
 bool Player::onRfReflectedEmissionEventPlayer(Emission* const)

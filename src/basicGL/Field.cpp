@@ -809,7 +809,7 @@ bool Field::setSlotFont(const Basic::String* const font)
     if (fontName != 0) fontName->unref();
     fontName = 0;
     if (font != 0) {
-        fontName = (Basic::String*)font->clone();
+        fontName = font->clone();
         ok = true;
     }
     

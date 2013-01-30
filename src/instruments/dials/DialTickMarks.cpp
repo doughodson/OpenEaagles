@@ -129,7 +129,7 @@ bool DialTickMarks::setTickGraphic(const BasicGL::Graphic* const newGraphic)
     }
 
     if (newGraphic != 0) {
-        myGraphic = (BasicGL::Graphic*) newGraphic->clone();
+        myGraphic = newGraphic->clone();
         myGraphic->container(this);
         ok = true;
     }

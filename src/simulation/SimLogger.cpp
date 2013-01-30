@@ -30,19 +30,19 @@
     EMPTY_SLOTTABLE(SimLogger::ThisType)                                        \
     SimLogger::ThisType::ThisType(const ThisType& org)                          \
     {                                                                           \
-        STANDARD_CONSTRUCTOR()                                                    \
+        STANDARD_CONSTRUCTOR()                                                  \
         copyData(org,true);                                                     \
     }                                                                           \
     SimLogger::ThisType::~ThisType()                                            \
     {                                                                           \
-       STANDARD_DESTRUCTOR()                                                      \
+       STANDARD_DESTRUCTOR()                                                    \
     }                                                                           \
     SimLogger::ThisType& SimLogger::ThisType::operator=(const ThisType& org)    \
     {                                                                           \
         if (this != &org) copyData(org,false);                                  \
         return *this;                                                           \
     }                                                                           \
-    Basic::Object* SimLogger::ThisType::clone() const                           \
+    SimLogger::ThisType* SimLogger::ThisType::clone() const                     \
     {                                                                           \
         return new SimLogger::ThisType(*this);                                  \
     }
@@ -111,7 +111,7 @@ SimLogger& SimLogger::operator=(const SimLogger& org)
 }
 
 // Clone
-Basic::Object* SimLogger::clone() const
+SimLogger* SimLogger::clone() const
 {
     return new SimLogger(*this);
 }
@@ -386,7 +386,7 @@ SimLogger::SimLogEvent& SimLogger::SimLogEvent::operator=(const SimLogEvent& org
     return *this;
 }
 
-Basic::Object* SimLogger::SimLogEvent::clone() const
+SimLogger::SimLogEvent* SimLogger::SimLogEvent::clone() const
 {
     return 0;
 }

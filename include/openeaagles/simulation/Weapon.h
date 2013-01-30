@@ -247,6 +247,7 @@ public:
    virtual bool setLethalRange(const LCreal v);             // Sets the lethal range (meters)
    virtual bool setMaxGimbalAngle(const LCreal v);          // Sets the max gimbal angle( radians)
    virtual bool setWeaponID(const int n);                   // Sets the weapon's type ID number 
+   virtual bool setReleaseEventID(const unsigned short n);  // Sets the release event ID
 
    // Check local players for the effects of the detonation
    virtual void checkDetonationEffect();

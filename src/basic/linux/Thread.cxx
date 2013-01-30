@@ -26,6 +26,7 @@ void* Thread::staticThreadFunc(void* lpParam)
    // The main thread function, which is a Thread class memeber function,
    // will handle the rest.
    unsigned long rtn = thread->mainThreadFunc();
+   thread->setTerminated();
 
    // SLS
    //parent->unref();
@@ -138,7 +139,7 @@ void Thread::closeThread()
 //-----------------------------------------------------------------------------
 bool Thread::terminate()
 {
-   if (theThread != 0) {
+   if (theThread != 0 && !killed) {
       if ( getParent()->isMessageEnabled(MSG_INFO) ) {
          std::cout << "Thread(" << this << ")::terminate(): handle = " << theThread << std::endl;
       }

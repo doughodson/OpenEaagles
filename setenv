@@ -14,6 +14,7 @@ export OE_ROOT
 # OpenEaagles 3rd party (e.g. cigi, JSBSim) root
 # ---
 OE_3RD_PARTY_ROOT=$PWD/../OpenEaagles3rdParty
+#OE_3RD_PARTY_ROOT=/usr/local
 export OE_3RD_PARTY_ROOT
 
 # ---

@@ -65,7 +65,7 @@ AngleOnlyTrackManager& AngleOnlyTrackManager::operator=(const AngleOnlyTrackMana
     return *this;
 }
 
-Basic::Object* AngleOnlyTrackManager::clone() const
+AngleOnlyTrackManager* AngleOnlyTrackManager::clone() const
 {
     return 0;
 }

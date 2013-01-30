@@ -114,7 +114,7 @@ class Track;
 //    initHeading    <Basic::Angle>       ! Initial heading angle (default: 0)
 //    initHeading    <Basic::Number>      ! Initial heading angle (radians)
 //
-//    initEuler      <Basic::List>        ! Initial Euler Angles: radians [ roll pitch yaw ]
+//    initEuler      <Basic::List>        ! Initial Euler angles: radians [ roll pitch yaw ]
 //
 //    ! ---
 //    ! Player's initial velocity
@@ -429,9 +429,9 @@ public:
    bool isID(const unsigned short tst) const;      // True if player's ID matches
    unsigned short getID() const;                   // The player's ID
 
-   bool isName(const Basic::String* const tst) const; // True if the player's name matches
-   bool isName(const char* const tst) const;       // True if the player's name matches
-   const Basic::String* getName() const;           // The player's name
+   bool isName(const Basic::Identifier* const tst) const; // True if the player's name matches
+   bool isName(const char* const tst) const;              // True if the player's name matches
+   const Basic::Identifier* getName() const;              // The player's name
 
    Side getSide() const;                           // The 'side' that the player is on.
    bool isSide(const unsigned int tst) const;      // True if player is with one of these (bit-wise or'd) sides
@@ -441,7 +441,7 @@ public:
    // State data
    // ---
 
-   Mode getMode() const;                           // Current mode ( INACTIVE, ACTIVE, DETONATED ... }
+   Mode getMode() const;                           // Current mode ( INACTIVE, ACTIVE, DETONATED ... )
    bool isActive() const;                          // True if player's mode is active
    bool isKilled() const;                          // True if player's mode is killed
    bool isCrashed() const;                         // True if player's mode is crashed
@@ -713,7 +713,7 @@ public:
    // ---
 
    virtual bool setType(Basic::String* const newTypeString);   // Sets the player's type string
-   virtual void setName(const Basic::String& newName);         // Sets the player's name (Basic::String version)
+   virtual void setName(const Basic::Identifier& newName);     // Sets the player's name (Basic::String version)
    virtual void setName(const char* const newName);            // Sets the player's name (char* version)
    virtual void setID(const unsigned short newId);             // Sets the player's ID
    virtual void setSide(const Side newSide);                   // Sets the player's side enum
@@ -768,7 +768,7 @@ public:
    //    these set position functions.
    //
    // 3) By default the optional 'slaved' parameter is FALSE, which enables this
-   //    Player class to update the position.  If set the true then the position
+   //    Player class to update the position.  If set to true then the position
    //    is 'slaved' to the callers parameters and not updated by this class.
    // ---
 
@@ -1059,7 +1059,7 @@ private:
    // ---
    SPtr<Basic::String>  type;    // Type of vehicle
    unsigned short id;            // Player ID
-   Basic::String  pname;         // Player's Name
+   Basic::Identifier  pname;     // Player's Name
    Side           side;          // Which side (see above)
 
    // ---

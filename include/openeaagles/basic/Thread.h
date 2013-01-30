@@ -118,6 +118,8 @@ protected: // Functions
    Component* getParent();
    const void* getThreadHandle() const;
 
+   virtual void setTerminated(); // Indicate that the thread has terminated natually
+
    virtual bool configThread(); // called by the child thread
 
 private: // Functions

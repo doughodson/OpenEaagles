@@ -123,8 +123,11 @@ public:
     virtual int getFeba(osg::Vec2* const points, const int max) const;
     virtual bool setFeba(osg::Vec2* const points, const int n);
 
+    // set/change the current route; does not change the initial route used by reset() 
+    virtual bool setRoute(Route* const msg);
+
     // Slot functions
-    virtual bool setSlotRoute(Route* const msg);
+    virtual bool setSlotRoute(const Route* const msg);  // and the initial route used by reset()
     virtual bool setSlotUtc(const Basic::Time* const msg);
     virtual bool setSlotFeba(const Basic::PairStream* const msg); 
     virtual bool setSlotBullseye(Bullseye* const msg);
@@ -134,7 +137,6 @@ public:
     virtual void reset();
 
 protected:
-
    // Set positional data
    bool setPosition(const double latDeg, const double lonDeg, const double altM); // (sets data valid)
    bool setPosition(const bool dataValidFlg);
@@ -187,8 +189,9 @@ protected:
 private:
    void initData();
 
-   SPtr<Route> priRoute;       // Primary route
-   SPtr<Bullseye> bull;        // our bullseye (just one for now)
+   SPtr<const Route> initRoute; // initial route (for reset purposes)
+   SPtr<Route> priRoute;        // Primary route
+   SPtr<Bullseye> bull;         // our bullseye (just one for now)
 
    // Positional data
    double      latitude;       // System Latitude          (degs)

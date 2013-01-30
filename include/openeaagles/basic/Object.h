@@ -17,7 +17,7 @@ namespace Basic {
 // Description: Our 'system' or top level base class for all framework objects.
 //
 //       Provides a common base class for type checking and support for form names,
-//       slot tables, exceptions and reference counting.  Most of this needs
+//       slot tables, exceptions and reference counting.  Most of this needs to
 //       be implemented by each derived class, and the macros in 'macros.h' provide
 //       an easy way to do this.
 //
@@ -137,7 +137,7 @@ namespace Basic {
 //    object's form name, which is defined by a parameter to the IMPLEMENT_SUBCLASS()
 //    macro, is usually the same or similar to the class name.
 //
-//    A form function is passed to the parser (see paser.y), or a user provided
+//    A form function is passed to the parser (see parser.y), or a user provided
 //    parser, the form function is used to construct objects using the form
 //    names that were parsed from the input file.
 //
@@ -195,9 +195,9 @@ namespace Basic {
 //    slot table, and each class constructor must include the STANDARD_CONSTRUCTOR()
 //    macro, which will set this slot table pointer.
 //
-//    Each slot table contains a pointer to its base class, slot table, and
+//    Each slot table contains a pointer to its base class' slot table, and
 //    slot names that are not found in a class slot table are passed up to
-//    the base class slot table.  Therefore, slot names are inherited by
+//    the base class' slot table.  Therefore, slot names are inherited by
 //    derived classes and derived classes can override base class slot names.
 //
 //    Note: there are the SlotTable's index numbers and our local slot index

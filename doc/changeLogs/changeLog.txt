@@ -1,12 +1,11 @@
 ================================================================================
-Changes since v12.09
+Changes since v13.01
 ================================================================================
 
 
 --------------------------------------------------------------------------------
 general
 
--- across the board spelling fixes
 
 --------------------------------------------------------------------------------
 basic
@@ -15,10 +14,10 @@ basic
 --------------------------------------------------------------------------------
 basicGL
 
-   Display class
-      1) Fixed a bug associated with readFrameBuffer() returning a
-         boolean false, when it should return 0.
-
+   Graphic Class
+      1) The data type has been changed from String to Identifier for setColor(),
+      getColorName(), the 'color' slot and the SET_COLOR event.
+   
 --------------------------------------------------------------------------------
 dis
 
@@ -38,6 +37,9 @@ recorder
 --------------------------------------------------------------------------------
 simulation
 
+   Player Class
+      1) The data type has been changed from String to Identifier for isName(),
+      getName() and setName().
 
 --------------------------------------------------------------------------------
 vehicle

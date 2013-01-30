@@ -18,8 +18,8 @@ IMPLEMENT_SUBCLASS(BitmapFont,"BitmapFont")
 EMPTY_DELETEDATA(BitmapFont)
 
 // Default font size
-const int defaultFontWidth = 10;
-const int defaultFontHeight = 15;
+const unsigned int defaultFontWidth = 10;
+const unsigned int defaultFontHeight = 15;
 
 //------------------------------------------------------------------------------
 // Slot table for this form type
@@ -283,7 +283,7 @@ static const char* defaultMap[] =
    "equalsign.fon",     // '='
    "rightcaret.fon",    // '>'
    "questionmark.fon",  // '?'
-   "ampersand.fon",     // '@'
+   "atsign.fon",        // '@'
    "u_a.fon",           // 'A'
    "u_b.fon",           // 'B'
    "u_c.fon",           // 'C'
@@ -347,6 +347,134 @@ static const char* defaultMap[] =
    "rightcurly.fon",    // '}'
    "tilda.fon",         // '~'
    0,                   // del
+   0,                   // 0x80
+   0,                   // 0x81
+   0,                   // 0x82
+   0,                   // 0x83
+   0,                   // 0x84
+   0,                   // 0x85
+   0,                   // 0x86
+   0,                   // 0x87
+   0,                   // 0x88
+   0,                   // 0x89
+   0,                   // 0x8A
+   0,                   // 0x8B
+   0,                   // 0x8C
+   0,                   // 0x8D
+   0,                   // 0x8E
+   0,                   // 0x8F
+   0,                   // 0x90
+   0,                   // 0x91
+   0,                   // 0x92
+   0,                   // 0x93
+   0,                   // 0x94
+   0,                   // 0x95
+   0,                   // 0x96
+   0,                   // 0x97
+   0,                   // 0x98
+   0,                   // 0x99
+   0,                   // 0x9A
+   0,                   // 0x9B
+   0,                   // 0x9C
+   0,                   // 0x9D
+   0,                   // 0x9E
+   0,                   // 0x9F
+   0,                   // 0xA0
+   0,                   // 0xA1
+   0,                   // 0xA2
+   0,                   // 0xA3
+   0,                   // 0xA4
+   0,                   // 0xA5
+   0,                   // 0xA6
+   0,                   // 0xA7
+   0,                   // 0xA8
+   0,                   // 0xA9
+   0,                   // 0xAA
+   0,                   // 0xAB
+   0,                   // 0xAC
+   0,                   // 0xAD
+   0,                   // 0xAE
+   0,                   // 0xAF
+   "degreesymbol.fon",  // 0xB0
+   0,                   // 0xB1
+   0,                   // 0xB2
+   0,                   // 0xB3
+   0,                   // 0xB4
+   0,                   // 0xB5
+   0,                   // 0xB6
+   0,                   // 0xB7
+   0,                   // 0xB8
+   0,                   // 0xB9
+   0,                   // 0xBA
+   0,                   // 0xBB
+   0,                   // 0xBC
+   0,                   // 0xBD
+   0,                   // 0xBE
+   0,                   // 0xBF
+   0,                   // 0xC0
+   0,                   // 0xC1
+   0,                   // 0xC2
+   0,                   // 0xC3
+   0,                   // 0xC4
+   0,                   // 0xC5
+   0,                   // 0xC6
+   0,                   // 0xC7
+   0,                   // 0xC8
+   0,                   // 0xC9
+   0,                   // 0xCA
+   0,                   // 0xCB
+   0,                   // 0xCC
+   0,                   // 0xCD
+   0,                   // 0xCE
+   0,                   // 0xCF
+   0,                   // 0xD0
+   0,                   // 0xD1
+   0,                   // 0xD2
+   0,                   // 0xD3
+   0,                   // 0xD4
+   0,                   // 0xD5
+   0,                   // 0xD6
+   0,                   // 0xD7
+   0,                   // 0xD8
+   0,                   // 0xD9
+   0,                   // 0xDA
+   0,                   // 0xDB
+   0,                   // 0xDC
+   0,                   // 0xDD
+   0,                   // 0xDE
+   0,                   // 0xDF
+   0,                   // 0xE0
+   0,                   // 0xE1
+   0,                   // 0xE2
+   0,                   // 0xE3
+   0,                   // 0xE4
+   0,                   // 0xE5
+   0,                   // 0xE6
+   0,                   // 0xE7
+   0,                   // 0xE8
+   0,                   // 0xE9
+   0,                   // 0xEA
+   0,                   // 0xEB
+   0,                   // 0xEC
+   0,                   // 0xED
+   0,                   // 0xEE
+   0,                   // 0xEF
+   0,                   // 0xF0
+   0,                   // 0xF1
+   0,                   // 0xF2
+   0,                   // 0xF3
+   0,                   // 0xF4
+   0,                   // 0xF5
+   0,                   // 0xF6
+   0,                   // 0xF7
+   0,                   // 0xF8
+   0,                   // 0xF9
+   0,                   // 0xFA
+   0,                   // 0xFB
+   0,                   // 0xFC
+   0,                   // 0xFD
+   0,                   // 0xFE
+   0                    // 0xFF
 };
 
 const unsigned int BitmapFont::defaultNumFonts = sizeof(defaultMap) / sizeof(const char*);
