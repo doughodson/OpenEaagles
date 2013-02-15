@@ -3,10 +3,6 @@ The .cfg files are configuration files for doxygen.
 
 They haven't been updated in quite a while... probably out of date.
 
-Will be cleaned up on in next release.
-
-
-
 
 -------------------------------------------------------
 

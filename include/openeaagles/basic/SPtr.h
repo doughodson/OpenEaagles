@@ -36,9 +36,10 @@ public:
    SPtr(SPtr<T>& p_) : p(p_.getRefPtr()), semaphore(0) {}
    ~SPtr() { if (p != 0) p->unref(); }
 
-   // Operators: * -> == !=
+   // Conversion operator to return raw pointer (T*)
    operator T*()                               { return p; }
    operator const T*() const                   { return p; }
+   // Operators: -> == !=
    bool operator==(const T* t) const           { return (p == t); }
    bool operator!=(const T* t) const           { return (p != t); }
    T* operator->()                             { return p; }
