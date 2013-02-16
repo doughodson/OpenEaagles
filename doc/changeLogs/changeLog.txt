@@ -6,6 +6,9 @@ Changes since v13.01
 --------------------------------------------------------------------------------
 general
 
+-- Object clone() method now returns proper return type (i.e., ThisType*) as
+   opposed to Eaagles::Basic::Object*.  This change reduces the number of typecasts
+   that need to be done in copy constructors and assignment operators.
 
 --------------------------------------------------------------------------------
 basic
