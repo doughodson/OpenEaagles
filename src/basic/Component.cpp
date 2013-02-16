@@ -895,17 +895,18 @@ bool Component::setSlotComponent(PairStream* const multiple)
    return true;
 }
 
-
 // setSlotComponent() -- Sets a single component
 bool Component::setSlotComponent(Component* const single)      
 {
    // When a only one component ... make it a PairStream
-   PairStream* tmp = new PairStream();
-   tmp->put( new Pair("1", single) );
+   PairStream* pairStream = new PairStream();
+   Pair* pair = new Pair("1", single);
+   pairStream->put( pair );
+   pair->unref();
 
    // Process the new components list and swap
-   processComponents(tmp, typeid(Component));
-   tmp->unref();
+   processComponents(pairStream, typeid(Component));
+   pairStream->unref();
 
    return true;
 }

@@ -10,6 +10,11 @@ general
 --------------------------------------------------------------------------------
 basic
 
+   Component Class
+      1) Fixed memory leak in setSlotComponent();
+
+   Nav Class
+      1) Fixed memory leaks in aer2xyzArray() methods
 
 --------------------------------------------------------------------------------
 basicGL
@@ -40,6 +45,10 @@ simulation
    Player Class
       1) The data type has been changed from String to Identifier for isName(),
       getName() and setName().
+
+   Station Class
+      1) Fixed memory leak in setSlotOutTheWindow();
+
 
 --------------------------------------------------------------------------------
 vehicle

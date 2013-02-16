@@ -1027,7 +1027,9 @@ bool Station::setSlotSimulation(Simulation* const p)
 bool Station::setSlotOutTheWindow(Otw* const p)
 {
     Basic::PairStream* list = new Basic::PairStream();
-    list->put( new Basic::Pair("1",p) );
+    Basic::Pair* pair = new Basic::Pair("1",p);
+    list->put( pair );
+    pair->unref();
     bool ok = setSlotOutTheWindow(list);
     list->unref();
     return ok;

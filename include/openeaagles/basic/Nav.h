@@ -594,7 +594,7 @@ public:
 // Coordinate conversion functions
 //    Earth centered, earth fixed (ECEF) coordinates <==> Geodetic coordinates
 //
-// Currently hardcoded to WGS84 geodetic coordinates
+// Currently hard coded to WGS84 geodetic coordinates
 //==============================================================================
 
    //----------------------------------------------------------

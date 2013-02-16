@@ -79,6 +79,11 @@ bool Nav::aer2xyzArray(
    // Rotate from player to earth coordinates (NED, player centered)
    preMultVec3Array(pos0,rm,pos,n);
 
+   delete [] saz;
+   delete [] caz;
+   delete [] sel;
+   delete [] cel;
+
    return true;
 }
 
@@ -112,6 +117,11 @@ bool Nav::aer2xyzArray(
       double e = r * saz[i];          // East
       pos[i].set(n,e,d);
    }
+
+   delete [] saz;
+   delete [] caz;
+   delete [] sel;
+   delete [] cel;
 
    return true;
 }
