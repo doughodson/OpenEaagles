@@ -26,10 +26,17 @@ OEIncPath         = "../../include"
 OE3rdPartyIncPath = OE_3RD_PARTY_ROOT.."/include"
 
 --
--- determine target directory for compiled libraries
+-- determine target directories for project/solution files and 
+-- compiled libraries
 --
+locationPath  = "../" .. _ACTION
 if (_ACTION == "vs2008") or (_ACTION == "vs2010") then
   targetDirPath = "../../lib/".._ACTION
+end
+-- check to see if we are generating vs2012 files
+if (_ACTION == "vs2010") and (_ARGS[1] == "vs2012") then
+   locationPath  = "../vs2012"
+   targetDirPath = "../../lib/vs2012"
 end
 if (_ACTION == "codelite") or (_ACTION == "codeblocks") then
   targetDirPath = "../../lib/mingw"
@@ -42,7 +49,7 @@ print ("Target directory path: "..targetDirPath)
 solution "oe"
 
    -- destination directory for generated solution/project files
-   location ("../" .. _ACTION)
+   location (locationPath)
 
    -- destination directory for compiled binary target
    targetdir (targetDirPath)
