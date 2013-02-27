@@ -234,7 +234,7 @@ inline unsigned int Rng::drawPoisson(const double alpha)
 // (0, infinity)
 // mean = alpha/beta; variance = alpha/(beta^2) 
 //-----------------------------------------------------------------
-inline double Rng::drawGamma(const double alpha, const double beta)
+inline double Rng::drawGamma(const double /*alpha*/, const double /*beta*/)
 {
 
    return 0.0;
