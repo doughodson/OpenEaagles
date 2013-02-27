@@ -28,8 +28,9 @@ void* Thread::staticThreadFunc(void* lpParam)
    unsigned long rtn = thread->mainThreadFunc();
    thread->setTerminated();
 
-   parent->unref();
-   thread->unref();
+   // SLS
+   //parent->unref();
+   //thread->unref();
 
    return (void*) rtn;
 }
