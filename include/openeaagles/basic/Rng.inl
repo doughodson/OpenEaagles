@@ -148,7 +148,7 @@ inline double Rng::drawGauss(const double mu, const double sigma)
    double r = 0.0;
    double g = 0.0;
 
-   std::cout << "z = " << z << std::endl;
+//   std::cout << "z = " << z << std::endl;
 
    if (z == 0.0) {
       do {
