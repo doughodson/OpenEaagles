@@ -1880,7 +1880,7 @@ bool Player::setCommandedHeading(const double h)
    return setCommandedHeadingD( h * Basic::Angle::R2DCC );
 }
 
-// Sets commanded (true) hheading (true: degs)
+// Sets commanded (true) heading (true: degs)
 bool Player::setCommandedHeadingD(const double h)
 {
    if (getDynamicsModel() != 0)
@@ -1889,7 +1889,7 @@ bool Player::setCommandedHeadingD(const double h)
       return false;
 }
 
-// Sets the commanded (true) hheading (radians)
+// Sets the commanded (true) heading (radians)
 bool Player::setCommandedHeadingR(const double h)
 {
    return setCommandedHeadingD( h * Basic::Angle::R2DCC );

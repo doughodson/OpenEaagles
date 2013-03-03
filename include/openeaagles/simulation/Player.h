@@ -323,16 +323,16 @@ class Track;
 //    1) Player's top level system models are all defined using the player's
 //       'components' slot.  Examples:
 //
-//          datalink: ( Datalink ... )             // Datalink model
-//          dynamicsModel: ( DynamicsModel ... }   // Dynamics model
-//          gimbals: ( Gimbal ... )                // Gimbal, antenna and/or seeker model
-//          nav:   ( Navigation ... )              // Navigation model
-//          obc:   ( OnboardComputer ... )         // Onboard computer model
-//          pilot: ( Pilot ... )                   // Pilot model
-//          radios:  ( Radio ... )                 // Radio model
-//          sensors: ( RfSensor ... )              // R/F Sensor model
-//          irSystems: (IrSystem ...)              // IR system model
-//          sms:   ( StoresMgr ... )               // Stores management model
+//          datalink:      ( Datalink ...        )  // Datalink model
+//          dynamicsModel: ( DynamicsModel ...   )  // Dynamics model
+//          gimbals:       ( Gimbal ...          )  // Gimbal, antenna and/or seeker model
+//          nav:           ( Navigation ...      )  // Navigation model
+//          obc:           ( OnboardComputer ... )  // Onboard computer model
+//          pilot:         ( Pilot ...           )  // Pilot model
+//          radios:        ( Radio ...           )  // Radio model
+//          sensors:       ( RfSensor ...        )  // R/F Sensor model
+//          irSystems:     ( IrSystem ...        )  // IR system model
+//          sms:           ( StoresMgr ...       )  // Stores management model
 //
 //          Where 'datalink' is the name give to the top level datalink object,
 //          'dynamicsMode' is the name give to the dynamics model, etc.
@@ -1022,7 +1022,8 @@ protected:
    // Dead-reckoning (networked I-players only)
    void deadReckonPosition(const LCreal dt);
 
-   // Update the player's internal systems pointers (e.g., after new system components have been added)
+   // Update the player's internal systems pointers
+   // (e.g., after new system components have been added)
    virtual void updateSystemPointers();
 
    // Update terrain elevation at our location
@@ -1132,14 +1133,14 @@ private:
    // ---
    // Appearance
    // ---
-   SPtr<RfSignature> signature;  // Player's RCS signature
+   SPtr<RfSignature> signature;   // Player's RCS signature
    SPtr<IrSignature> irSignature; // Player's IR signature
-   unsigned int camouflage;      // Camouflage type (0 is none)
-   LCreal      damage;           // Damage state from no damage(0.0) to destroyed (1.0)
-   LCreal      smoking;          // Smoke state from no smoke (0.0) to maximum (1.0)
-   LCreal      flames;           // Flames state from no flames (0.0) to maximum (1.0)
-   bool        justKilled;       // Just killed flag
-   unsigned short killedBy;      // Killed by player ID
+   unsigned int camouflage;       // Camouflage type (0 is none)
+   LCreal      damage;            // Damage state from no damage(0.0) to destroyed (1.0)
+   LCreal      smoking;           // Smoke state from no smoke (0.0) to maximum (1.0)
+   LCreal      flames;            // Flames state from no flames (0.0) to maximum (1.0)
+   bool        justKilled;        // Just killed flag
+   unsigned short killedBy;       // Killed by player ID
 
    // ---
    // Initialization, Controls, Freeze and Reset
