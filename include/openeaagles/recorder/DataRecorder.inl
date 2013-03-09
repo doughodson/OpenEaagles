@@ -30,18 +30,16 @@ bool ThisType::recordDataImp(                                  \
 {                                                              \
    bool _recorded = false;
 
-
+#define ON_RECORDER_EVENT_ID(token,recorderDataFunc)           \
+   (!_recorded && token == _id) {                              \
+      _recorded = recorderDataFunc(_obj, _val);                \
+   }                                                           \
+   else if
 
 #define END_RECORDER_HANDLER_TABLE()                                       \
-   if (!_recorded) _recorded = BaseClass::recordDataImp(_id, _obj, _val);  \
+   (!_recorded) _recorded = BaseClass::recordDataImp(_id, _obj, _val);     \
    return _recorded;                                                       \
 }
 
-
-#define ON_RECORDER_EVENT_ID(token,recorderDataFunc)            \
-   if (!_recorded && token == _id) {                           \
-      _recorded = recorderDataFunc(_obj, _val);        \
-   }
-
-
 #endif
+
