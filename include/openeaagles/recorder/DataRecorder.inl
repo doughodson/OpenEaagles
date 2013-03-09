@@ -28,7 +28,8 @@ bool ThisType::recordDataImp(                                  \
       const Eaagles::Basic::Object* _obj[4],                   \
       const double _val[4] )                                   \
 {                                                              \
-   bool _recorded = false;
+   bool _recorded = false;                                     \
+   if
 
 #define ON_RECORDER_EVENT_ID(token,recorderDataFunc)           \
    (!_recorded && token == _id) {                              \
