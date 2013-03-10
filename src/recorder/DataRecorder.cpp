@@ -66,8 +66,8 @@ END_SLOT_MAP()
 //------------------------------------------------------------------------------
 BEGIN_RECORDER_HANDLER_TABLE(DataRecorder)
    ON_RECORDER_EVENT_ID( REID_MARKER,            recordMarker )
-   ON_RECORDER_EVENT_ID( REID_DI_EVENT,          recordAI )
-   ON_RECORDER_EVENT_ID( REID_AI_EVENT,          recordDI )
+   ON_RECORDER_EVENT_ID( REID_DI_EVENT,          recordDI )
+   ON_RECORDER_EVENT_ID( REID_AI_EVENT,          recordAI )
 
    ON_RECORDER_EVENT_ID( REID_NEW_PLAYER,        recordNewPlayer )
    ON_RECORDER_EVENT_ID( REID_PLAYER_REMOVED,    recordPlayerRemoved )
@@ -1189,6 +1189,7 @@ bool DataRecorder::setSlotMonth(Basic::Number* const msg)
 bool DataRecorder::setSlotYear(Basic::Number* const msg)
 {
    bool ok = false;
+
    if (msg != 0) {
       ok = true;
       year = msg->getInt();
