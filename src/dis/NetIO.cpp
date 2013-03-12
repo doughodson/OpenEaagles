@@ -261,14 +261,9 @@ bool NetIO::initNetwork()
 //------------------------------------------------------------------------------
 void NetIO::netInputHander()
 {
-   // Packets
-   static const unsigned int MAX_PDUs = 500;
-   unsigned int packet[MAX_PDUs][MAX_PDU_SIZE/4];
-
-   unsigned int j0 = 0;
-
    // Read PDUs
-   while ( (j0 < MAX_PDUs) && (recvData((char*)&packet[j0], MAX_PDU_SIZE) > 0) ) {
+   unsigned int j0 = 0;
+   while ( (j0 < MAX_PDUs) && (recvData((char*)&inputBuffer[j0], MAX_PDU_SIZE) > 0) ) {
       j0++;
    }
 
@@ -277,7 +272,7 @@ void NetIO::netInputHander()
       // Process incoming PDUs
       unsigned int j1 = 0;
       while (j1 < j0) {
-         PDUHeader* header = (PDUHeader*) &packet[j1++][0];
+         PDUHeader* header = (PDUHeader*) &inputBuffer[j1++][0];
 
          if (isInputEnabled()) {
 
@@ -455,7 +450,7 @@ void NetIO::netInputHander()
 
       // Read more PDUs
       j0 = 0;
-      while ( (j0 < MAX_PDUs) && (recvData((char*)&packet[j0], MAX_PDU_SIZE) > 0) ) {
+      while ( (j0 < MAX_PDUs) && (recvData((char*)&inputBuffer[j0], MAX_PDU_SIZE) > 0) ) {
          j0++;
       }
    }

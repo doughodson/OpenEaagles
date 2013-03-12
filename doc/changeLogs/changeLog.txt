@@ -29,6 +29,10 @@ basicGL
 --------------------------------------------------------------------------------
 dis
 
+   NetIO Class
+      1) netInputHander() -- changed the large input buffer, 'packet', from a local
+      variable to a member variable and renamed it to 'inputBuffer'; i.e., no longer
+      on the stack.
 
 --------------------------------------------------------------------------------
 gui-glut
@@ -37,6 +41,9 @@ gui-glut
 --------------------------------------------------------------------------------
 otw
 
+   OtwCigiCl Class
+      1) setBuildingData() -- added missing creation of the damage control
+      structure (bug fix)
 
 --------------------------------------------------------------------------------
 recorder
