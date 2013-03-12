@@ -654,6 +654,7 @@ bool OtwCigiCl::setBuildingData(OtwModelCigiCl* const m, const unsigned short en
 
    // Damage control, ...
    if (m->damageCC[iw] == 0) {
+      m->damageCC[iw] = new CigiCompCtrlV3();
       m->damageCC[iw]->SetCompClassV3(CigiCompCtrlV3::EntityV3);
       m->damageCC[iw]->SetInstanceID(entity);
       m->damageCC[iw]->SetCompID(6); // Object State
