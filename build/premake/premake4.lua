@@ -65,6 +65,9 @@ solution "oe"
 
    -- target suffix (all configurations/all projects)
    targetprefix "oe"
+   if (_ACTION == "codelite") or (_ACTION == "codeblocks") then
+      targetprefix "liboe"
+   end
 
    --
    -- Build (solution) configuration options:
