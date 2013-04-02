@@ -57,7 +57,6 @@ BEGIN_SLOT_MAP(DataRecorder)
    ON_SLOT( 8, setSlotDay,         Basic::Number)
    ON_SLOT( 9, setSlotMonth,       Basic::Number)
    ON_SLOT( 10, setSlotYear,       Basic::Number)
-
 END_SLOT_MAP()
 
 
@@ -66,8 +65,8 @@ END_SLOT_MAP()
 //------------------------------------------------------------------------------
 BEGIN_RECORDER_HANDLER_TABLE(DataRecorder)
    ON_RECORDER_EVENT_ID( REID_MARKER,            recordMarker )
-   ON_RECORDER_EVENT_ID( REID_DI_EVENT,          recordAI )
-   ON_RECORDER_EVENT_ID( REID_AI_EVENT,          recordDI )
+   ON_RECORDER_EVENT_ID( REID_DI_EVENT,          recordDI )
+   ON_RECORDER_EVENT_ID( REID_AI_EVENT,          recordAI )
 
    ON_RECORDER_EVENT_ID( REID_NEW_PLAYER,        recordNewPlayer )
    ON_RECORDER_EVENT_ID( REID_PLAYER_REMOVED,    recordPlayerRemoved )
@@ -221,7 +220,6 @@ bool DataRecorder::shutdownNotification()
 //------------------------------------------------------------------------------
 bool DataRecorder::recordMarker(const Basic::Object* objs[4], const double values[4])
 {
-   const Simulation::Player* player = dynamic_cast<const Simulation::Player*>( objs[0] );
    Pb::DataRecord* msg = new Pb::DataRecord();
    
    // DataRecord header
@@ -247,7 +245,6 @@ bool DataRecorder::recordMarker(const Basic::Object* objs[4], const double value
 //------------------------------------------------------------------------------
 bool DataRecorder::recordAI(const Basic::Object* objs[4], const double values[4])
 {
-   const Simulation::Player* player = dynamic_cast<const Simulation::Player*>( objs[0] );
    Pb::DataRecord* msg = new Pb::DataRecord();
    
    // DataRecord header
@@ -275,7 +272,6 @@ bool DataRecorder::recordAI(const Basic::Object* objs[4], const double values[4]
 //------------------------------------------------------------------------------
 bool DataRecorder::recordDI(const Basic::Object* objs[4], const double values[4])
 {
-   const Simulation::Player* player = dynamic_cast<const Simulation::Player*>( objs[0] );
    Pb::DataRecord* msg = new Pb::DataRecord();
    
    // DataRecord header
@@ -302,6 +298,8 @@ bool DataRecorder::recordDI(const Basic::Object* objs[4], const double values[4]
 bool DataRecorder::recordNewPlayer(const Basic::Object* objs[4], const double values[4])
 {
    const Simulation::Player* player = dynamic_cast<const Simulation::Player*>( objs[0] );
+   if (player == 0) return false;
+
    Pb::DataRecord* msg = new Pb::DataRecord();
    
    // DataRecord header
@@ -327,6 +325,8 @@ bool DataRecorder::recordNewPlayer(const Basic::Object* objs[4], const double va
 bool DataRecorder::recordPlayerRemoved(const Basic::Object* objs[4], const double values[4])
 {
    const Simulation::Player* player = dynamic_cast<const Simulation::Player*>( objs[0] );
+   if (player == 0) return false;
+
    Pb::DataRecord* msg = new Pb::DataRecord();
    
    // DataRecord header
@@ -352,6 +352,8 @@ bool DataRecorder::recordPlayerRemoved(const Basic::Object* objs[4], const doubl
 bool DataRecorder::recordPlayerData(const Basic::Object* objs[4], const double values[4])
 {
    const Simulation::Player* player = dynamic_cast<const Simulation::Player*>( objs[0] );
+   if (player == 0) return false;
+
    Pb::DataRecord* msg = new Pb::DataRecord();
 
    // DataRecord header
@@ -384,6 +386,8 @@ bool DataRecorder::recordPlayerData(const Basic::Object* objs[4], const double v
 bool DataRecorder::recordPlayerDamaged(const Basic::Object* objs[4], const double values[4])
 {
    const Simulation::Player* player = dynamic_cast<const Simulation::Player*>( objs[0] );
+   if (player == 0) return false;
+
    Pb::DataRecord* msg = new Pb::DataRecord();
    
    // DataRecord header
@@ -409,7 +413,8 @@ bool DataRecorder::recordPlayerDamaged(const Basic::Object* objs[4], const doubl
 bool DataRecorder::recordPlayerCollision(const Basic::Object* objs[4], const double values[4])
 {
    const Simulation::Player* player = dynamic_cast<const Simulation::Player*>( objs[0] );
-   const Simulation::Player* otherPlayer = dynamic_cast<const Simulation::Player*>( objs[1] );
+   if (player == 0) return false;
+
    Pb::DataRecord* msg = new Pb::DataRecord();
    
    // DataRecord header
@@ -421,7 +426,11 @@ bool DataRecorder::recordPlayerCollision(const Basic::Object* objs[4], const dou
 
    genPlayerId( playerCollisionMsg->mutable_id(), player );
    genPlayerState( playerCollisionMsg->mutable_state(), player );
-   genPlayerId( playerCollisionMsg->mutable_other_player_id(), otherPlayer );
+
+   const Simulation::Player* otherPlayer = dynamic_cast<const Simulation::Player*>( objs[1] );
+   if (otherPlayer != 0) {
+      genPlayerId( playerCollisionMsg->mutable_other_player_id(), otherPlayer );
+   }
 
    // Send the message for processing
    sendDataRecord(msg);
@@ -436,6 +445,8 @@ bool DataRecorder::recordPlayerCollision(const Basic::Object* objs[4], const dou
 bool DataRecorder::recordPlayerCrash(const Basic::Object* objs[4], const double values[4])
 {
    const Simulation::Player* player = dynamic_cast<const Simulation::Player*>( objs[0] );
+   if (player == 0) return false;
+
    Pb::DataRecord* msg = new Pb::DataRecord();
    
    // DataRecord header
@@ -460,6 +471,8 @@ bool DataRecorder::recordPlayerCrash(const Basic::Object* objs[4], const double 
 bool DataRecorder::recordPlayerKilled(const Basic::Object* objs[4], const double values[4])
 {
    const Simulation::Player* player = dynamic_cast<const Simulation::Player*>( objs[0] );
+   if (player == 0) return false;
+
    Pb::DataRecord* msg = new Pb::DataRecord();
    
    // DataRecord header
@@ -486,8 +499,8 @@ bool DataRecorder::recordPlayerKilled(const Basic::Object* objs[4], const double
 bool DataRecorder::recordWeaponReleased(const Basic::Object* objs[4], const double values[4])
 {
    const Simulation::Player* wpn = dynamic_cast<const Simulation::Player*>( objs[0] );
-   const Simulation::Player* shooter = dynamic_cast<const Simulation::Player*>( objs[1] );
-   const Simulation::Player* tgt = dynamic_cast<const Simulation::Player*>( objs[2] );
+   if (wpn == 0) return false;
+
    Pb::DataRecord* msg = new Pb::DataRecord();
 
    // DataRecord header
@@ -499,8 +512,16 @@ bool DataRecorder::recordWeaponReleased(const Basic::Object* objs[4], const doub
 
    genPlayerId( wpnRelMsg->mutable_wpn_id(), wpn );
    genPlayerState( wpnRelMsg->mutable_wpn_state(), wpn );
-   genPlayerId( wpnRelMsg->mutable_shooter_id(), shooter );
-   genPlayerId( wpnRelMsg->mutable_tgt_id(), tgt );
+
+   const Simulation::Player* shooter = dynamic_cast<const Simulation::Player*>( objs[1] );
+   if (shooter != 0) {
+      genPlayerId( wpnRelMsg->mutable_shooter_id(), shooter );
+   }
+
+   const Simulation::Player* tgt = dynamic_cast<const Simulation::Player*>( objs[2] );
+   if (tgt != 0) {
+      genPlayerId( wpnRelMsg->mutable_tgt_id(), tgt );
+   }
 
    // Send the message for processing
    sendDataRecord(msg);
@@ -517,8 +538,8 @@ bool DataRecorder::recordWeaponReleased(const Basic::Object* objs[4], const doub
 bool DataRecorder::recordWeaponHung(const Basic::Object* objs[4], const double values[4])
 {
    const Simulation::Player* wpn = dynamic_cast<const Simulation::Player*>( objs[0] );
-   const Simulation::Player* shooter = dynamic_cast<const Simulation::Player*>( objs[1] );
-   const Simulation::Player* tgt = dynamic_cast<const Simulation::Player*>( objs[2] );
+   if (wpn == 0) return false;
+
    Pb::DataRecord* msg = new Pb::DataRecord();
 
    // DataRecord header
@@ -530,8 +551,16 @@ bool DataRecorder::recordWeaponHung(const Basic::Object* objs[4], const double v
 
    genPlayerId( wpnHungMsg->mutable_wpn_id(), wpn );
    genPlayerState( wpnHungMsg->mutable_wpn_state(), wpn );
-   genPlayerId( wpnHungMsg->mutable_shooter_id(), shooter );
-   genPlayerId( wpnHungMsg->mutable_tgt_id(), tgt );
+
+   const Simulation::Player* shooter = dynamic_cast<const Simulation::Player*>( objs[1] );
+   if (shooter != 0) {
+      genPlayerId( wpnHungMsg->mutable_shooter_id(), shooter );
+   }
+
+   const Simulation::Player* tgt = dynamic_cast<const Simulation::Player*>( objs[2] );
+   if (tgt != 0) {
+      genPlayerId( wpnHungMsg->mutable_tgt_id(), tgt );
+   }
 
    // Send the message for processing
    sendDataRecord(msg);
@@ -549,10 +578,11 @@ bool DataRecorder::recordWeaponHung(const Basic::Object* objs[4], const double v
 bool DataRecorder::recordWeaponDetonation(const Basic::Object* objs[4], const double values[4])
 {
    const Simulation::Player* wpn = dynamic_cast<const Simulation::Player*>( objs[0] );
-   const Simulation::Player* shooter = dynamic_cast<const Simulation::Player*>( objs[1] );
-   const Simulation::Player* tgt = dynamic_cast<const Simulation::Player*>( objs[2] );
+   if (wpn == 0) return false;
+
    const unsigned int detType =  (unsigned int) values[0];
    const double missDist = values[1];
+
    Pb::DataRecord* msg = new Pb::DataRecord();
 
    // DataRecord header
@@ -564,8 +594,16 @@ bool DataRecorder::recordWeaponDetonation(const Basic::Object* objs[4], const do
 
    genPlayerId( wpnDetMsg->mutable_wpn_id(), wpn );
    genPlayerState( wpnDetMsg->mutable_wpn_state(), wpn );
-   genPlayerId( wpnDetMsg->mutable_shooter_id(), shooter );
-   genPlayerId( wpnDetMsg->mutable_tgt_id(), tgt );
+
+   const Simulation::Player* shooter = dynamic_cast<const Simulation::Player*>( objs[1] );
+   if (shooter != 0) {
+      genPlayerId( wpnDetMsg->mutable_shooter_id(), shooter );
+   }
+
+   const Simulation::Player* tgt = dynamic_cast<const Simulation::Player*>( objs[2] );
+   if (tgt != 0) {
+      genPlayerId( wpnDetMsg->mutable_tgt_id(), tgt );
+   }
 
    // Get detonation type
    switch (detType) {
@@ -619,6 +657,8 @@ bool DataRecorder::recordWeaponDetonation(const Basic::Object* objs[4], const do
 bool DataRecorder::recordGunFired(const Basic::Object* objs[4], const double values[4])
 {
    const Simulation::Player* shooter = dynamic_cast<const Simulation::Player*>( objs[0] );
+   if (shooter == 0) return false;
+
    const unsigned int rounds = (unsigned int) values[0];
    Pb::DataRecord* msg = new Pb::DataRecord();
 
@@ -647,6 +687,7 @@ bool DataRecorder::recordNewTrack(const Basic::Object* objs[4], const double val
    // objects
    const Simulation::Player* player = dynamic_cast<const Simulation::Player*>( objs[0] );
    const Simulation::Track* newTrack = dynamic_cast<const Simulation::Track*>( objs[1] );
+   if (player == 0 || newTrack == 0) return false;
 
    // message
    Pb::DataRecord* msg = new Pb::DataRecord();
@@ -668,23 +709,20 @@ bool DataRecorder::recordNewTrack(const Basic::Object* objs[4], const double val
    // track data
    genTrackData(newTrackMsg->mutable_track_data(), newTrack);
 
+   // Track player
+   const Simulation::Player* trkPlayer = newTrack->getTarget();
+   if (trkPlayer != 0) {
+      genPlayerId( newTrackMsg->mutable_trk_player_id(), trkPlayer);
+      genPlayerState( newTrackMsg->mutable_trk_player_state(), trkPlayer );
+   }
+
    // Emission Data
    const Simulation::RfTrack* const rfTrk = dynamic_cast<const Simulation::RfTrack*>(newTrack);
    if (rfTrk != 0) {
 
       const Simulation::Emission* emissionData = rfTrk->getLastEmission();
-      genEmissionData( newTrackMsg->mutable_emission_data(), emissionData);
-
       if (emissionData != 0) {
-         const Simulation::Player* trkPlayer = emissionData->getOwnship();
-
-         // Track ID and state 
-         genPlayerId( newTrackMsg->mutable_trk_player_id(), trkPlayer);
-         genPlayerState( newTrackMsg->mutable_trk_player_state(), trkPlayer );
-
-         // Altitude
-         if (trkPlayer != 0) newTrackMsg->mutable_track_data()->set_altitude(trkPlayer->getAltitude());
-         else newTrackMsg->mutable_track_data()->set_altitude(0);
+         genEmissionData( newTrackMsg->mutable_emission_data(), emissionData);
       }
 
    }
@@ -705,6 +743,7 @@ bool DataRecorder::recordTrackRemoved(const Basic::Object* objs[4], const double
    // objects
    const Simulation::Player* player = dynamic_cast<const Simulation::Player*>( objs[0] );
    const Simulation::Track* track = dynamic_cast<const Simulation::Track*>( objs[1] );
+   if (player == 0 || track == 0) return false;
 
    // message
    Pb::DataRecord* msg = new Pb::DataRecord();
@@ -724,7 +763,6 @@ bool DataRecorder::recordTrackRemoved(const Basic::Object* objs[4], const double
    // Send the message for processing
    sendDataRecord(msg);
 
-
    return true;
 }
 
@@ -738,6 +776,7 @@ bool DataRecorder::recordTrackData(const Basic::Object* objs[4], const double va
    // objects
    const Simulation::Player* player = dynamic_cast<const Simulation::Player*>( objs[0] );
    const Simulation::Track* trackData = dynamic_cast<const Simulation::Track*>( objs[1] );
+   if (player == 0 || trackData == 0) return false;
 
    // message
    Pb::DataRecord* msg = new Pb::DataRecord();
@@ -759,21 +798,19 @@ bool DataRecorder::recordTrackData(const Basic::Object* objs[4], const double va
    // track data
    genTrackData(trackDataMsg->mutable_track_data(), trackData);
 
+   // track player
+   const Simulation::Player* trkPlayer = trackData->getTarget();
+   if (trkPlayer != 0) {
+      genPlayerId( trackDataMsg->mutable_trk_player_id(), trkPlayer);
+      genPlayerState( trackDataMsg->mutable_trk_player_state(), trkPlayer );
+   }
+
    // Emission Data
    const Simulation::RfTrack* const rfTrk = dynamic_cast<const Simulation::RfTrack*>(trackData);
    if (rfTrk != 0) {
       const Simulation::Emission* emissionData = rfTrk->getLastEmission();
-      genEmissionData( trackDataMsg->mutable_emission_data(), emissionData);
-
       if (emissionData != 0) {
-         const Simulation::Player* trkPlayer = emissionData->getOwnship();
-
-         // Track ID and state 
-         genPlayerId( trackDataMsg->mutable_trk_player_id(), trkPlayer);
-         genPlayerState( trackDataMsg->mutable_trk_player_state(), trkPlayer );
-
-         // Altitude
-         trackDataMsg->mutable_track_data()->set_altitude(trkPlayer->getAltitude());
+         genEmissionData( trackDataMsg->mutable_emission_data(), emissionData);
       }
    }
 
@@ -810,7 +847,6 @@ void DataRecorder::genPlayerId( Pb::PlayerId* const id, const Simulation::Player
       else {
          // We don't have a player, set default values
          id->set_id(0);
-         id->set_name("");
       }
    }
 }
@@ -820,49 +856,37 @@ void DataRecorder::genPlayerId( Pb::PlayerId* const id, const Simulation::Player
 //------------------------------------------------------------------------------
 void DataRecorder::genPlayerState( Pb::PlayerState* const state, const Simulation::Player* const player )
 {
-
    if (state != 0) {
       if (player != 0) {
 
-      // position
-      osg::Vec3d pos = player->getGeocPosition();
-      state->mutable_pos()->set_x(pos[0]);
-      state->mutable_pos()->set_y(pos[1]);
-      state->mutable_pos()->set_z(pos[2]);
+         // position
+         osg::Vec3d pos = player->getGeocPosition();
+         state->mutable_pos()->set_x(pos[0]);
+         state->mutable_pos()->set_y(pos[1]);
+         state->mutable_pos()->set_z(pos[2]);
 
-      // angles
-      osg::Vec3d angles = player->getGeocEulerAngles();
-      state->mutable_angles()->set_x(angles[0]);
-      state->mutable_angles()->set_y(angles[1]);
-      state->mutable_angles()->set_z(angles[2]);
+         // angles
+         osg::Vec3d angles = player->getGeocEulerAngles();
+         state->mutable_angles()->set_x(angles[0]);
+         state->mutable_angles()->set_y(angles[1]);
+         state->mutable_angles()->set_z(angles[2]);
 
-      // velocity
-      osg::Vec3d vel = player->getGeocVelocity();
-      state->mutable_vel()->set_x(vel[0]);
-      state->mutable_vel()->set_y(vel[1]);
-      state->mutable_vel()->set_z(vel[2]);
+         // velocity
+         osg::Vec3d vel = player->getGeocVelocity();
+         state->mutable_vel()->set_x(vel[0]);
+         state->mutable_vel()->set_y(vel[1]);
+         state->mutable_vel()->set_z(vel[2]);
 
-      // Damage
-      state->set_damage(player->getDamage());
+         // Damage
+         state->set_damage(player->getDamage());
       }
       else {
-         // No player, set default values in message
          state->mutable_pos()->set_x(0);
          state->mutable_pos()->set_y(0);
          state->mutable_pos()->set_z(0);
-
-         // angles
          state->mutable_angles()->set_x(0);
          state->mutable_angles()->set_y(0);
          state->mutable_angles()->set_z(0);
-
-         // velocity
-         state->mutable_vel()->set_x(0);
-         state->mutable_vel()->set_y(0);
-         state->mutable_vel()->set_z(0);
-
-         // Damage
-         state->set_damage(0);
       }
    }
 }
@@ -894,63 +918,41 @@ void DataRecorder::genTrackData( Pb::TrackData* const trkMsg, const Simulation::
    if (trkMsg != 0) {
       if (track != 0) {
          // set message data from track
-      trkMsg->set_type(track->getType());
-      trkMsg->set_quality(track->getQuality());
-      trkMsg->set_true_az(track->getTrueAzimuthR());
-      trkMsg->set_rel_az(track->getRelAzimuthR());
-      trkMsg->set_elevation(track->getElevationR());
-      trkMsg->set_range(track->getRange());
+         trkMsg->set_type(track->getType());
+         trkMsg->set_quality(track->getQuality());
+         trkMsg->set_true_az(track->getTrueAzimuthR());
+         trkMsg->set_rel_az(track->getRelAzimuthR());
+         trkMsg->set_elevation(track->getElevationR());
+         trkMsg->set_range(track->getRange());
 
-      // lat/lon:
-      double lat;
-      double lon;
-      track->getLatLonPosition(&lat, &lon);
+         // lat/lon:
+         double lat;
+         double lon;
+         track->getLatLonPosition(&lat, &lon);
 
-      trkMsg->set_latitude(lat);
-      trkMsg->set_longitude(lon);
+         trkMsg->set_latitude(lat);
+         trkMsg->set_longitude(lon);
 
-      // Position: getPosition returns osg::Vec3
-      osg::Vec3 pos = track->getPosition();
-      trkMsg->mutable_position()->set_x(pos[0]);
-      trkMsg->mutable_position()->set_y(pos[1]);
-      trkMsg->mutable_position()->set_z(pos[2]);
+         // Position: getPosition returns osg::Vec3
+         osg::Vec3 pos = track->getPosition();
+         trkMsg->mutable_position()->set_x(pos[0]);
+         trkMsg->mutable_position()->set_y(pos[1]);
+         trkMsg->mutable_position()->set_z(pos[2]);
 
-      // Velocity: getVelocity returns osg::Vec3
-      osg::Vec3 vel = track->getVelocity();
-      trkMsg->mutable_velocity()->set_x(vel[0]);
-      trkMsg->mutable_velocity()->set_y(vel[1]);
-      trkMsg->mutable_velocity()->set_z(vel[2]);
+         // Velocity: getVelocity returns osg::Vec3
+         osg::Vec3 vel = track->getVelocity();
+         trkMsg->mutable_velocity()->set_x(vel[0]);
+         trkMsg->mutable_velocity()->set_y(vel[1]);
+         trkMsg->mutable_velocity()->set_z(vel[2]);
 
-      // Avg signal for RF/IR track:
-      const Simulation::RfTrack* const rfTrk = dynamic_cast<const Simulation::RfTrack*>(track);
-      if (rfTrk != 0) {
-         trkMsg->set_avg_signal(rfTrk->getAvgSignal());
-      }
+         // Avg signal for RF/IR track:
+         const Simulation::RfTrack* const rfTrk = dynamic_cast<const Simulation::RfTrack*>(track);
+         if (rfTrk != 0) {
+            trkMsg->set_avg_signal(rfTrk->getAvgSignal());
+         }
 
-      trkMsg->set_sl_index(track->getShootListIndex());
-      trkMsg->set_wpn_rel(track->isWeaponReleased());
-   }
-      else {
-         // no track, just set default data
-         trkMsg->set_type(0);
-         trkMsg->set_quality(0);
-         trkMsg->set_true_az(0);
-         trkMsg->set_rel_az(0);
-         trkMsg->set_elevation(0);
-         trkMsg->set_range(0);
-         trkMsg->set_latitude(0);
-         trkMsg->set_longitude(0);
-         trkMsg->mutable_position()->set_x(0);
-         trkMsg->mutable_position()->set_y(0);
-         trkMsg->mutable_position()->set_z(0);
-
-         trkMsg->mutable_velocity()->set_x(0);
-         trkMsg->mutable_velocity()->set_y(0);
-         trkMsg->mutable_velocity()->set_z(0);
-         trkMsg->set_avg_signal(0);
-
-         trkMsg->set_sl_index(0);
-         trkMsg->set_wpn_rel(0);
+         trkMsg->set_sl_index(track->getShootListIndex());
+         trkMsg->set_wpn_rel(track->isWeaponReleased());
       }
    }
 }
@@ -963,58 +965,62 @@ void DataRecorder::genEmissionData( Pb::EmissionData* const emMsg, const Simulat
    if (emMsg != 0) {
       if (emData != 0) {
          // set message data from emission data
-      emMsg->set_frequency(emData->getFrequency());
-      emMsg->set_wave_length(emData->getWavelength());
-      emMsg->set_pulse_width(emData->getPulseWidth());
-      emMsg->set_bandwidth(emData->getBandwidth());
-      emMsg->set_prf(emData->getPRF());
-      emMsg->set_power(emData->getPower());
-      emMsg->set_azimuth_aoi(emData->getAzimuthAoi());
-      emMsg->set_elevation_aoi(emData->getElevationAoi());
+         emMsg->set_frequency(emData->getFrequency());
+         emMsg->set_wave_length(emData->getWavelength());
+         emMsg->set_pulse_width(emData->getPulseWidth());
+         emMsg->set_bandwidth(emData->getBandwidth());
+         emMsg->set_prf(emData->getPRF());
+         emMsg->set_power(emData->getPower());
+         emMsg->set_azimuth_aoi(emData->getAzimuthAoi());
+         emMsg->set_elevation_aoi(emData->getElevationAoi());
 
-      // polarization
-      Simulation::Antenna::Polarization polarization = emData->getPolarization();
-      switch (polarization) {
-         case Simulation::Antenna::NONE: {
-            emMsg->set_polarization(Pb::EmissionData_Polarization_NONE);
-            break;
+         // transmitting player ID
+         {
+            const Simulation::Player* p = emData->getOwnship();
+            if (p != 0) {
+               genPlayerId( emMsg->mutable_origin_id(), p );
+            }
          }
-         case Simulation::Antenna::VERTICAL: {
-            emMsg->set_polarization(Pb::EmissionData_Polarization_VERTICAL);
-            break;
+
+         // target player ID
+         {
+            const Simulation::Player* p = emData->getTarget();
+            if (p != 0) {
+               genPlayerId( emMsg->mutable_target_id(), p );
+            }
          }
-         case Simulation::Antenna::HORIZONTAL: {
-            emMsg->set_polarization(Pb::EmissionData_Polarization_HORIZONTAL);
-            break;
+
+         // polarization
+         Simulation::Antenna::Polarization polarization = emData->getPolarization();
+         switch (polarization) {
+            case Simulation::Antenna::NONE: {
+               emMsg->set_polarization(Pb::EmissionData_Polarization_NONE);
+               break;
+            }
+            case Simulation::Antenna::VERTICAL: {
+               emMsg->set_polarization(Pb::EmissionData_Polarization_VERTICAL);
+               break;
+            }
+            case Simulation::Antenna::HORIZONTAL: {
+               emMsg->set_polarization(Pb::EmissionData_Polarization_HORIZONTAL);
+               break;
+            }
+            case Simulation::Antenna::SLANT: {
+               emMsg->set_polarization(Pb::EmissionData_Polarization_SLANT);
+               break;
+            }
+            case Simulation::Antenna::RHC: {
+               emMsg->set_polarization(Pb::EmissionData_Polarization_RHC);
+               break;
+            }
+            case Simulation::Antenna::LHC: {
+               emMsg->set_polarization(Pb::EmissionData_Polarization_LHC);
+               break;
+            }
+            default: {
+               break;
+            }
          }
-         case Simulation::Antenna::SLANT: {
-            emMsg->set_polarization(Pb::EmissionData_Polarization_SLANT);
-            break;
-         }
-         case Simulation::Antenna::RHC: {
-            emMsg->set_polarization(Pb::EmissionData_Polarization_RHC);
-            break;
-         }
-         case Simulation::Antenna::LHC: {
-            emMsg->set_polarization(Pb::EmissionData_Polarization_LHC);
-            break;
-         }
-         default: {
-            break;
-         }
-         }
-      }
-      else {
-         // set default message values
-         emMsg->set_polarization(Pb::EmissionData_Polarization_NONE);
-         emMsg->set_frequency(0);
-         emMsg->set_wave_length(0);
-         emMsg->set_pulse_width(0);
-         emMsg->set_bandwidth(0);
-         emMsg->set_prf(0);
-         emMsg->set_power(0);
-         emMsg->set_azimuth_aoi(0);
-         emMsg->set_elevation_aoi(0);
       }
    }
 }
