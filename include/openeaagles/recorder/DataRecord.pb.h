@@ -3345,6 +3345,22 @@ class EmissionData : public ::google::protobuf::Message {
   inline double elevation_aoi() const;
   inline void set_elevation_aoi(double value);
   
+  // optional .Eaagles.Recorder.Pb.PlayerId origin_id = 10;
+  inline bool has_origin_id() const;
+  inline void clear_origin_id();
+  static const int kOriginIdFieldNumber = 10;
+  inline const ::Eaagles::Recorder::Pb::PlayerId& origin_id() const;
+  inline ::Eaagles::Recorder::Pb::PlayerId* mutable_origin_id();
+  inline ::Eaagles::Recorder::Pb::PlayerId* release_origin_id();
+  
+  // optional .Eaagles.Recorder.Pb.PlayerId target_id = 11;
+  inline bool has_target_id() const;
+  inline void clear_target_id();
+  static const int kTargetIdFieldNumber = 11;
+  inline const ::Eaagles::Recorder::Pb::PlayerId& target_id() const;
+  inline ::Eaagles::Recorder::Pb::PlayerId* mutable_target_id();
+  inline ::Eaagles::Recorder::Pb::PlayerId* release_target_id();
+  
   GOOGLE_PROTOBUF_EXTENSION_ACCESSORS(EmissionData)
   // @@protoc_insertion_point(class_scope:Eaagles.Recorder.Pb.EmissionData)
  private:
@@ -3366,6 +3382,10 @@ class EmissionData : public ::google::protobuf::Message {
   inline void clear_has_azimuth_aoi();
   inline void set_has_elevation_aoi();
   inline void clear_has_elevation_aoi();
+  inline void set_has_origin_id();
+  inline void clear_has_origin_id();
+  inline void set_has_target_id();
+  inline void clear_has_target_id();
   
   ::google::protobuf::internal::ExtensionSet _extensions_;
   
@@ -3379,10 +3399,12 @@ class EmissionData : public ::google::protobuf::Message {
   double power_;
   double azimuth_aoi_;
   double elevation_aoi_;
+  ::Eaagles::Recorder::Pb::PlayerId* origin_id_;
+  ::Eaagles::Recorder::Pb::PlayerId* target_id_;
   int polarization_;
   
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(9 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(11 + 31) / 32];
   
   friend void  protobuf_AddDesc_openeaagles_2frecorder_2fDataRecord_2eproto();
   friend void protobuf_AssignDesc_openeaagles_2frecorder_2fDataRecord_2eproto();
@@ -7016,6 +7038,64 @@ inline double EmissionData::elevation_aoi() const {
 inline void EmissionData::set_elevation_aoi(double value) {
   set_has_elevation_aoi();
   elevation_aoi_ = value;
+}
+
+// optional .Eaagles.Recorder.Pb.PlayerId origin_id = 10;
+inline bool EmissionData::has_origin_id() const {
+  return (_has_bits_[0] & 0x00000200u) != 0;
+}
+inline void EmissionData::set_has_origin_id() {
+  _has_bits_[0] |= 0x00000200u;
+}
+inline void EmissionData::clear_has_origin_id() {
+  _has_bits_[0] &= ~0x00000200u;
+}
+inline void EmissionData::clear_origin_id() {
+  if (origin_id_ != NULL) origin_id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+  clear_has_origin_id();
+}
+inline const ::Eaagles::Recorder::Pb::PlayerId& EmissionData::origin_id() const {
+  return origin_id_ != NULL ? *origin_id_ : *default_instance_->origin_id_;
+}
+inline ::Eaagles::Recorder::Pb::PlayerId* EmissionData::mutable_origin_id() {
+  set_has_origin_id();
+  if (origin_id_ == NULL) origin_id_ = new ::Eaagles::Recorder::Pb::PlayerId;
+  return origin_id_;
+}
+inline ::Eaagles::Recorder::Pb::PlayerId* EmissionData::release_origin_id() {
+  clear_has_origin_id();
+  ::Eaagles::Recorder::Pb::PlayerId* temp = origin_id_;
+  origin_id_ = NULL;
+  return temp;
+}
+
+// optional .Eaagles.Recorder.Pb.PlayerId target_id = 11;
+inline bool EmissionData::has_target_id() const {
+  return (_has_bits_[0] & 0x00000400u) != 0;
+}
+inline void EmissionData::set_has_target_id() {
+  _has_bits_[0] |= 0x00000400u;
+}
+inline void EmissionData::clear_has_target_id() {
+  _has_bits_[0] &= ~0x00000400u;
+}
+inline void EmissionData::clear_target_id() {
+  if (target_id_ != NULL) target_id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+  clear_has_target_id();
+}
+inline const ::Eaagles::Recorder::Pb::PlayerId& EmissionData::target_id() const {
+  return target_id_ != NULL ? *target_id_ : *default_instance_->target_id_;
+}
+inline ::Eaagles::Recorder::Pb::PlayerId* EmissionData::mutable_target_id() {
+  set_has_target_id();
+  if (target_id_ == NULL) target_id_ = new ::Eaagles::Recorder::Pb::PlayerId;
+  return target_id_;
+}
+inline ::Eaagles::Recorder::Pb::PlayerId* EmissionData::release_target_id() {
+  clear_has_target_id();
+  ::Eaagles::Recorder::Pb::PlayerId* temp = target_id_;
+  target_id_ = NULL;
+  return temp;
 }
 
 

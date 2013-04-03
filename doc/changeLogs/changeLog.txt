@@ -48,6 +48,20 @@ otw
 --------------------------------------------------------------------------------
 recorder
 
+   DataRecord.proto
+      1) added the transmitting (origin) player ID and the target player ID
+      to the EmissionData message.
+
+   DataRecorder class
+      1) (bug fix) Corrected the mapping for the DI and AI handlers
+
+      2) (bug fix) The player ID of the origin of the emission was improperly
+      assigned to the track ID.
+         a) Corrected the track player IDs
+         b) Now setting the origin and target player IDs in the EmissionData
+            message.
+
+      3) Added several zero pointer guards
 
 --------------------------------------------------------------------------------
 simulation
