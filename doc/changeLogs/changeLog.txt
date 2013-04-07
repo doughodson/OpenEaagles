@@ -19,6 +19,9 @@ basic
    Nav Class
       1) Fixed memory leaks in aer2xyzArray() methods
 
+   SPtr<>
+      1) added a new set() function with an initial reference enable flag
+
 --------------------------------------------------------------------------------
 basicGL
 
