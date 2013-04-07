@@ -71,7 +71,7 @@
 #line 24 "Parser.y"
 
 
-// disable all deprecation warnings for now, until we fix
+// Disable all deprecation warnings for now.  Until we fix them,
 // they are quite annoying to see over and over again...
 #if(_MSC_VER>=1400)   // VC8+
 # pragma warning(disable: 4996)

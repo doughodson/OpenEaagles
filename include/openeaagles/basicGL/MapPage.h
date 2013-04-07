@@ -20,7 +20,7 @@ namespace BasicGL {
 //
 //  Notes:
 //    1) If a MapPage is a subcomponent of another MapPage then the subcomponent
-//       MapPage will get the follow attributes from the container MapPage.
+//       MapPage will get the following attributes from the container MapPage.
 //          a) reference point
 //          b) heading (rotation) angle
 //          c) range

@@ -59,7 +59,7 @@ namespace Simulation {
 //
 //    Each NetIO object in the simulation has an unique, user defined network ID,
 //    which is set using the 'networkID' slot.  The NetIO objects are also
-//    identified by their federaton and federate names, which are based on HLA.
+//    identified by their federation and federate names, which are based on HLA.
 //    (see "dis/NetIO.h" for functions that will map the DIS exercise number to
 //    a federation name, and the DIS site and application numbers to the federate
 //    name)

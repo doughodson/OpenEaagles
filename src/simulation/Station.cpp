@@ -424,7 +424,7 @@ void Station::updateData(const LCreal dt)
       createBackgroundProcess();
    }
 
-   // Our simulation model and OTW interfaces (if no seperate thread)
+   // Our simulation model and OTW interfaces (if no separate thread)
    if (getBackgroundRate() == 0 && !doWeHaveTheBgThread()) {
       processBackgroundTasks(dt);
    }
@@ -434,7 +434,7 @@ void Station::updateData(const LCreal dt)
       createNetworkProcess();
    }
 
-   // Our interoperability networks (if no seperate thread)
+   // Our interoperability networks (if no separate thread)
    if (getNetworkRate() == 0 && networks != 0 && !doWeHaveTheNetThread()) {
       processNetworkInputTasks(dt);
       processNetworkOutputTasks(dt);

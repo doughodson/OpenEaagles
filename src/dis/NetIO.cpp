@@ -670,7 +670,7 @@ void NetIO::processElectromagneticEmissionPDU(const ElectromagneticEmissionPDU* 
 }
 
 //------------------------------------------------------------------------------
-// recvData() -- recieve data packet
+// recvData() -- receive data packet
 //------------------------------------------------------------------------------
 int NetIO::recvData(char* const packet, const int maxSize)
 {

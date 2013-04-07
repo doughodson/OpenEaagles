@@ -27,7 +27,7 @@ namespace BasicGL {
 //
 // Note: Since we convert statically to radians any time we pass an Angle as 
 // an event argument, there is no need to have an event function that converts
-// an Angle to degrees.  You can pass an Degrees as an even argument using
+// an Angle to degrees.  You can pass a 'Degrees' object as an event argument using
 // UPDATE_VALUE, and it will automatically convert to radians.  That is why there
 // is no onXRotateDeg with an Angle argument.
 //------------------------------------------------------------------------------
