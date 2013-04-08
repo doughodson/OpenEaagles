@@ -282,7 +282,7 @@ class Track;
 //       When any one of these test rates are non-zero then the player's Euler
 //       angles are updated by this Player class.  Since the player's dynamics
 //       model is normally responsible for updating the Euler angles, these
-//       test rates should be used only on player's without a dynamics model
+//       test rates should be used only on players without a dynamics model
 //       (e.g., a player that is part of a test-rig).  With each update of the
 //       Euler angles, the player's total velocity along the body X axis is
 //       reset to 'initVelocity'.
@@ -335,7 +335,7 @@ class Track;
 //          sms:           ( StoresMgr ...       )  // Stores management model
 //
 //          Where 'datalink' is the name give to the top level datalink object,
-//          'dynamicsMode' is the name give to the dynamics model, etc.
+//          'dynamicsModel' is the name give to the dynamics model, etc.
 //
 //    2) There is one top level model for each major system.  Additional system
 //       models are subcomponents to the top level model of the same type.
@@ -712,7 +712,7 @@ public:
    // Set functions
    // ---
 
-   virtual bool setType(Basic::String* const newTypeString);   // Sets the player's type string
+   virtual bool setType(const Basic::String* const newTypeString); // Sets the player's type string
    virtual void setName(const Basic::Identifier& newName);     // Sets the player's name (Basic::String version)
    virtual void setName(const char* const newName);            // Sets the player's name (char* version)
    virtual void setID(const unsigned short newId);             // Sets the player's ID
@@ -821,7 +821,7 @@ public:
    // Set the player's angular velocities:
    //    body and geocentric (ecef) coordinate systems
    //
-   // 1) Setting the angular rate in eithercoordinate system will set the
+   // 1) Setting the angular rate in either coordinate system will set the
    //    rates in both coordinate systems ( body and ecef ).
    //
    // 2) The player's position and rotation (see above) must be set prior to

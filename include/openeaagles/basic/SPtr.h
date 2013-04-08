@@ -26,6 +26,12 @@
 //
 //    SPtr<Object> sp1( new Object(), false );  // new object; ref cnt stays at one
 //
+//
+// Example #3
+//
+//    SPtr<Object> sp1();              // 'sp1' is null
+//    sp1.set( new Object(), false );  // new object; ref cnt stays at one
+//
 //------------------------------------------------------------------------------
 template <class T> class SPtr {
 public:
@@ -77,6 +83,15 @@ public:
       operator=(p_.p);
       p_.unlock();
       return *this;
+   }
+
+   // set() -- set the pointer with an optional reference
+   void set(T* const p_, const bool refThis = true) {
+      lock();
+      if (p != 0) p->unref();
+      p = p_;
+      if (p != 0 && refThis) p->ref();
+      unlock();
    }
 
 private:
