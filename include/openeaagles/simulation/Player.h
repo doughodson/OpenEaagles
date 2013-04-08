@@ -712,7 +712,7 @@ public:
    // Set functions
    // ---
 
-   virtual bool setType(Basic::String* const newTypeString);   // Sets the player's type string
+   virtual bool setType(const Basic::String* const newTypeString); // Sets the player's type string
    virtual void setName(const Basic::Identifier& newName);     // Sets the player's name (Basic::String version)
    virtual void setName(const char* const newName);            // Sets the player's name (char* version)
    virtual void setID(const unsigned short newId);             // Sets the player's ID

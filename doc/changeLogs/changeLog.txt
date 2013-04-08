@@ -10,6 +10,8 @@ general
    opposed to Eaagles::Basic::Object*.  This change reduces the number of typecasts
    that need to be done in copy constructors and assignment operators.
 
+-- Changes to the comments in various files
+
 --------------------------------------------------------------------------------
 basic
 
@@ -72,6 +74,10 @@ simulation
    Player Class
       1) The data type has been changed from String to Identifier for isName(),
       getName() and setName().
+
+      2) setType() now makes a copy of the argument instead of just setting
+      a pointer to the original
+
 
    Station Class
       1) Fixed memory leak in setSlotOutTheWindow();
