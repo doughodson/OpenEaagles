@@ -7,7 +7,7 @@
 #include "openeaagles/basic/units/Angles.h"
 #include "openeaagles/basic/units/Distances.h"
 
-// disable all deprecation warnings for now, until we fix
+// Disable all deprecation warnings for now.  Until we fix them,
 // they are quite annoying to see over and over again...
 #if(_MSC_VER>=1400)   // VC8+
 # pragma warning(disable: 4996)
@@ -212,7 +212,7 @@ int SymbolLoader::addSymbol(const int nType, const char* const id, int specName)
 
       // Find the graphic template for this type symbol, and make
       // sure that the template is a BasicGL::Graphic, since it
-      // will be use as the symbol's graphical component.
+      // will be used as the symbol's graphical component.
       Basic::Pair* tpair = templates->getPosition(nType);
       if (tpair != 0) {
          BasicGL::Graphic* tg = dynamic_cast<BasicGL::Graphic*>(tpair->object());    

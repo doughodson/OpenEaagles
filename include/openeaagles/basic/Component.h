@@ -98,7 +98,7 @@ class String;
 //    Using a PairStream (see PairStream.h), a component can contain a list of
 //    named components, and can be contained in a container's component list,
 //    therefore creating a component tree.  All functions return zero if the
-//    container or component is not found.  The components are initial set
+//    container or component is not found.  The components are initially set
 //    using the 'components' slot, and the list can be modified with the
 //    addComponent() and processComponents() functions.
 //
@@ -213,7 +213,7 @@ class String;
 //    or 'false' if the event was not processed.
 //
 //    Events that are not processed are passed up to the 'BaseClass' class until reaching
-//    this Component class.  'Key' events, see eventTokens.h, that are not processed by
+//    this Component class.  'Key' events (see eventTokens.h) that are not processed by
 //    this Component class are passed up to the container object.
 //
 //
@@ -233,7 +233,7 @@ class String;
 //    will create the proper type Object to pass to the event() function.
 //    The SendData structure is used to save the previous argument value.
 //    With all subsequent send()'s, the previous argument value is compared to
-//    the current argument value, and the event() is only sent if the values
+//    the current argument value, and the event() is sent only if the values
 //    have changed.
 //
 //
@@ -247,7 +247,7 @@ class String;
 //          getEventLogger() returns the data logger assigned to this component.
 //
 //       Logger* getAnyEventLogger()
-//          getAnyEventLogger() will start at this component and search's up
+//          getAnyEventLogger() will start at this component and searches up
 //          the component tree until a logger is found.
 //
 //       In either case, zero is returned if no logger is found.
@@ -258,7 +258,7 @@ class String;
 //    The Object class' isMessageEnabled() function has been extended to search
 //    up the component tree for explicitly enabled or disabled messages.  Using
 //    the 'enableMessageType' and 'disableMessageType' slots, or the functions
-//    below, a container component can effect all of its child components
+//    below, a container component can affect all of its child component's
 //    messages, unless a child explicitly enables or disables their own message
 //    bits.
 //
@@ -270,7 +270,7 @@ class String;
 //      bool enableMessageTypes(const unsigned short msgTypeBits)
 //      bool disableMessageTypes(const unsigned short msgTypeBits)
 //          Since isMessageEnabled() is also checking our container's message
-//          bits then setting our bits it will therefore effect our components
+//          bits then setting our bits it will therefore affect our components
 //          that haven't explicitly enabled or disabled their messages.
 //------------------------------------------------------------------------------
 class Component : public Object {
