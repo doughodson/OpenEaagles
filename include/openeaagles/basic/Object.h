@@ -35,7 +35,7 @@ namespace Basic {
 //
 // Constructors and general class functions:
 //
-//    Each derived class must provide a standard construct that requires no
+//    Each derived class must provide a standard constructor that requires no
 //    parameters, Foo().  This is required by the class factories (i.e., the
 //    form functions) to constructor instances of derived classes.
 //
@@ -60,7 +60,7 @@ namespace Basic {
 //          (e.g., copying the data, subcomponents, etc.).  Old, unused member
 //          components need to be disposed of, as required.  The base class'
 //          copyData() should be called BEFORE we copy any of our data.  The
-//          copy-constructor flag, 'cc', is true if we're being called by our
+//          copy constructor flag, 'cc', is true if we're being called by our
 //          copy constructor, which indicates that all of our member data and
 //          pointers are still undefined.  This flag should NOT be passed to
 //          our base class's copyData().
@@ -289,7 +289,7 @@ namespace Basic {
 //
 //    The STANDARD_CONSTRUCTOR() and STANDARD_DESTRUCTOR() macros increment and
 //    decrement, respectively, a counter located in each class _Static structure.
-//    This provides a count of the current number of instantiated object for the
+//    This provides a count of the current number of instantiated objects for the
 //    class.  The maximum number of this count, as well as the total number of
 //    instantiated objects, is also maintained.
 //

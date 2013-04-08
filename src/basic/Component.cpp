@@ -14,7 +14,7 @@
 #include "openeaagles/basic/Statistic.h"
 #include "openeaagles/basic/String.h"
 
-// disable all deprecation warnings for now, until we fix
+// Disable all deprecation warnings for now.  Until we fix them,
 // they are quite annoying to see over and over again...
 
 #if(_MSC_VER>=1400)   // VC8+

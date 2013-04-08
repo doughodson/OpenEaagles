@@ -1723,11 +1723,16 @@ Basic::Pair* Player::getIrSystemByType(const std::type_info& type)
 //------------------------------------------------------------------------------
 
 // Sets player's type string ("F-16A", "Tank", "SA-6", etc)
-bool Player::setType(Basic::String* const msg)
+bool Player::setType(const Basic::String* const msg)
 {
-   bool ok = true;
-   type = msg;
-   return ok;
+   if (msg != 0) {
+      Basic::String* p = msg->clone();
+      type.set(p, false);
+   }
+   else {
+      type = 0;
+   }
+   return true;
 }
 
 // Set the player's name
