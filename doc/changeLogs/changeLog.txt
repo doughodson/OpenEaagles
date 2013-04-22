@@ -71,6 +71,10 @@ recorder
 --------------------------------------------------------------------------------
 simulation
 
+   Navigation class
+      1) Move most of the navigation calculations from the background thread
+      function, updateData(), to the foreground thread functions, process().
+      
    Player Class
       1) The data type has been changed from String to Identifier for isName(),
       getName() and setName().
