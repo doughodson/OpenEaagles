@@ -690,7 +690,7 @@ Weapon* Weapon::release()
             }
 
             BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_WEAPON_RELEASED )
-               SAMPLE_3_OBJECTS( this, getLaunchVehicle(), 0 )  // weapon, shooter, target
+               SAMPLE_3_OBJECTS( flyout, getLaunchVehicle(), 0 )  // weapon, shooter, target
                SAMPLE_2_VALUES( 0, 0.0 )
             END_RECORD_DATA_SAMPLE()
 

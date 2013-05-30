@@ -71,6 +71,10 @@ recorder
 --------------------------------------------------------------------------------
 simulation
 
+   Missile class
+      1) (bug fixes) For the  REID_WEAPON_DETONATION data samples, corrected the
+      order of the weapon and launching aircraft pointers.
+
    Navigation class
       1) Move most of the navigation calculations from the background thread
       function, updateData(), to the foreground thread functions, process().
@@ -85,6 +89,11 @@ simulation
 
    Station Class
       1) Fixed memory leak in setSlotOutTheWindow();
+
+
+   Weapon class
+      1) (bug fix) release() -- changed the pointer to the correct flyout weapon
+      for the REID_WEAPON_RELEASED data sample
 
 
 --------------------------------------------------------------------------------
