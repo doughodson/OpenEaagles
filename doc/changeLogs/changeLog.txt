@@ -12,6 +12,8 @@ general
 
 -- Changes to the comments in various files
 
+-- Added a Makefile in the OE root directory
+
 --------------------------------------------------------------------------------
 basic
 
