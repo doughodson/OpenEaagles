@@ -242,37 +242,11 @@ void Navigation::reset()
 // updateData() -- update Non-time critical stuff here
 //------------------------------------------------------------------------------
 void Navigation::updateData(const LCreal dt)
-{    
-    // ---
-    // Update our position, attitude and velocities
-    // ---
-    if (getOwnship() != 0) {
-        velValid = updateSysVelocity();
-        posValid = updateSysPosition();
-        attValid = updateSysAttitude();
-        magVarValid = updateMagVar();
-    }
-    else {
-        posValid = false;
-        attValid = false;
-        velValid = false;
-        magVarValid = false;
-    }
-    
-    // ---
-    // Update the BaseClass and our primary route
-    // ---
-    BaseClass::updateData(dt);
-    if (priRoute != 0) priRoute->updateData(dt);
-
-    // Update our bullseye
-    if (bull != 0) bull->compute(this);
-
-    // ---
-    // Update our navigational steering data
-    // ---
-    updateNavSteering();
-    
+{     
+   // ---
+   // Update the BaseClass and our primary route
+   // ---
+   if (priRoute != 0) priRoute->updateData(dt);
 }
 
 //------------------------------------------------------------------------------
@@ -281,6 +255,22 @@ void Navigation::updateData(const LCreal dt)
 void Navigation::process(const LCreal dt)
 {
    BaseClass::process(dt);
+
+   // ---
+   // Update our position, attitude and velocities
+   // ---
+   if (getOwnship() != 0) {
+      velValid = updateSysVelocity();
+      posValid = updateSysPosition();
+      attValid = updateSysAttitude();
+      magVarValid = updateMagVar();
+   }
+   else {
+      posValid = false;
+      attValid = false;
+      velValid = false;
+      magVarValid = false;
+   }
 
    // Update UTC
    double v = utc + dt;
@@ -291,6 +281,14 @@ void Navigation::process(const LCreal dt)
    // Update our primary route
    // ---
    if (priRoute != 0) priRoute->tcFrame(dt);
+
+   // Update our bullseye
+   if (bull != 0) bull->compute(this);
+
+   // ---
+   // Update our navigational steering data
+   // ---
+   updateNavSteering();
 }
 
 
