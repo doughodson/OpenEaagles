@@ -86,6 +86,7 @@ bool PushButton::setSlotStartState(const Basic::Number* const newFunction)
       initState = newFunction->getBoolean();
       // set our current state initially
       currentState = initState;
+      ok = true;
    }
    return ok;
 }
