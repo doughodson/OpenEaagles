@@ -469,7 +469,7 @@ bool IlsRadio::findILSGlideslopeByFreq(LCreal freq)
             //p->printRecord(std::cout);
             //Get Glideslope data here:
             if((!glideSlopeValid)&&(p->isIlsType(Dafif::Ils::GLIDESLOPE))){
-               //Glideslope should not effect the bearing data from the localizer
+               //Glideslope should not affect the bearing data from the localizer
                currentMagVar = p->magVariance();
                float ilsGS(0), acGS(0), delGS(0);
                p->getGlideSlopeData(getLatitude(),getLongitude(),getAltitude(),&ilsGS,&acGS,&delGS);

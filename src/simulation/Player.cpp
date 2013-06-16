@@ -1723,11 +1723,16 @@ Basic::Pair* Player::getIrSystemByType(const std::type_info& type)
 //------------------------------------------------------------------------------
 
 // Sets player's type string ("F-16A", "Tank", "SA-6", etc)
-bool Player::setType(Basic::String* const msg)
+bool Player::setType(const Basic::String* const msg)
 {
-   bool ok = true;
-   type = msg;
-   return ok;
+   if (msg != 0) {
+      Basic::String* p = msg->clone();
+      type.set(p, false);
+   }
+   else {
+      type = 0;
+   }
+   return true;
 }
 
 // Set the player's name
@@ -1880,7 +1885,7 @@ bool Player::setCommandedHeading(const double h)
    return setCommandedHeadingD( h * Basic::Angle::R2DCC );
 }
 
-// Sets commanded (true) hheading (true: degs)
+// Sets commanded (true) heading (true: degs)
 bool Player::setCommandedHeadingD(const double h)
 {
    if (getDynamicsModel() != 0)
@@ -1889,7 +1894,7 @@ bool Player::setCommandedHeadingD(const double h)
       return false;
 }
 
-// Sets the commanded (true) hheading (radians)
+// Sets the commanded (true) heading (radians)
 bool Player::setCommandedHeadingR(const double h)
 {
    return setCommandedHeadingD( h * Basic::Angle::R2DCC );

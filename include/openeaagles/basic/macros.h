@@ -78,7 +78,7 @@
 //       event() function for class 'ThisType'.
 //
 //       Typically "on event" functions are used to process the events.  The
-//       "on event" function will return a true if the event is process or
+//       "on event" function will return a true if the event is processed or
 //       false if not.  Events that are not mapped or processed are passed
 //       to the base class; up to and including the Component class, and 'Key'
 //       events (see eventTokens.h) that are not mapped or processed by the

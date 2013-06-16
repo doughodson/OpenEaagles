@@ -282,7 +282,7 @@ class Track;
 //       When any one of these test rates are non-zero then the player's Euler
 //       angles are updated by this Player class.  Since the player's dynamics
 //       model is normally responsible for updating the Euler angles, these
-//       test rates should be used only on player's without a dynamics model
+//       test rates should be used only on players without a dynamics model
 //       (e.g., a player that is part of a test-rig).  With each update of the
 //       Euler angles, the player's total velocity along the body X axis is
 //       reset to 'initVelocity'.
@@ -323,19 +323,19 @@ class Track;
 //    1) Player's top level system models are all defined using the player's
 //       'components' slot.  Examples:
 //
-//          datalink: ( Datalink ... )             // Datalink model
-//          dynamicsModel: ( DynamicsModel ... }   // Dynamics model
-//          gimbals: ( Gimbal ... )                // Gimbal, antenna and/or seeker model
-//          nav:   ( Navigation ... )              // Navigation model
-//          obc:   ( OnboardComputer ... )         // Onboard computer model
-//          pilot: ( Pilot ... )                   // Pilot model
-//          radios:  ( Radio ... )                 // Radio model
-//          sensors: ( RfSensor ... )              // R/F Sensor model
-//          irSystems: (IrSystem ...)              // IR system model
-//          sms:   ( StoresMgr ... )               // Stores management model
+//          datalink:      ( Datalink ...        )  // Datalink model
+//          dynamicsModel: ( DynamicsModel ...   )  // Dynamics model
+//          gimbals:       ( Gimbal ...          )  // Gimbal, antenna and/or seeker model
+//          nav:           ( Navigation ...      )  // Navigation model
+//          obc:           ( OnboardComputer ... )  // Onboard computer model
+//          pilot:         ( Pilot ...           )  // Pilot model
+//          radios:        ( Radio ...           )  // Radio model
+//          sensors:       ( RfSensor ...        )  // R/F Sensor model
+//          irSystems:     ( IrSystem ...        )  // IR system model
+//          sms:           ( StoresMgr ...       )  // Stores management model
 //
 //          Where 'datalink' is the name give to the top level datalink object,
-//          'dynamicsMode' is the name give to the dynamics model, etc.
+//          'dynamicsModel' is the name give to the dynamics model, etc.
 //
 //    2) There is one top level model for each major system.  Additional system
 //       models are subcomponents to the top level model of the same type.
@@ -712,7 +712,7 @@ public:
    // Set functions
    // ---
 
-   virtual bool setType(Basic::String* const newTypeString);   // Sets the player's type string
+   virtual bool setType(const Basic::String* const newTypeString); // Sets the player's type string
    virtual void setName(const Basic::Identifier& newName);     // Sets the player's name (Basic::String version)
    virtual void setName(const char* const newName);            // Sets the player's name (char* version)
    virtual void setID(const unsigned short newId);             // Sets the player's ID
@@ -821,7 +821,7 @@ public:
    // Set the player's angular velocities:
    //    body and geocentric (ecef) coordinate systems
    //
-   // 1) Setting the angular rate in eithercoordinate system will set the
+   // 1) Setting the angular rate in either coordinate system will set the
    //    rates in both coordinate systems ( body and ecef ).
    //
    // 2) The player's position and rotation (see above) must be set prior to
@@ -1022,7 +1022,8 @@ protected:
    // Dead-reckoning (networked I-players only)
    void deadReckonPosition(const LCreal dt);
 
-   // Update the player's internal systems pointers (e.g., after new system components have been added)
+   // Update the player's internal systems pointers
+   // (e.g., after new system components have been added)
    virtual void updateSystemPointers();
 
    // Update terrain elevation at our location
@@ -1132,14 +1133,14 @@ private:
    // ---
    // Appearance
    // ---
-   SPtr<RfSignature> signature;  // Player's RCS signature
+   SPtr<RfSignature> signature;   // Player's RCS signature
    SPtr<IrSignature> irSignature; // Player's IR signature
-   unsigned int camouflage;      // Camouflage type (0 is none)
-   LCreal      damage;           // Damage state from no damage(0.0) to destroyed (1.0)
-   LCreal      smoking;          // Smoke state from no smoke (0.0) to maximum (1.0)
-   LCreal      flames;           // Flames state from no flames (0.0) to maximum (1.0)
-   bool        justKilled;       // Just killed flag
-   unsigned short killedBy;      // Killed by player ID
+   unsigned int camouflage;       // Camouflage type (0 is none)
+   LCreal      damage;            // Damage state from no damage(0.0) to destroyed (1.0)
+   LCreal      smoking;           // Smoke state from no smoke (0.0) to maximum (1.0)
+   LCreal      flames;            // Flames state from no flames (0.0) to maximum (1.0)
+   bool        justKilled;        // Just killed flag
+   unsigned short killedBy;       // Killed by player ID
 
    // ---
    // Initialization, Controls, Freeze and Reset

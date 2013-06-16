@@ -425,6 +425,8 @@ message EmissionData {
    optional Polarization polarization = 7;
    optional double azimuth_aoi       = 8;  // (radians)
    optional double elevation_aoi     = 9;  // (radians)
+   optional PlayerId origin_id       = 10; // ID of transmitting player
+   optional PlayerId target_id       = 11; // ID of target player
    
    extensions 50 to 99;     // Reserved fields
    extensions 100 to 999;   // User messages

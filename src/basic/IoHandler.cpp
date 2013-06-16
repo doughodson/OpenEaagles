@@ -99,7 +99,7 @@ void IoHandler::copyData(const IoHandler& org, const bool cc)
       copy->unref();
    }
    else {
-      // Seperate input/output buffers
+      // Separate input/output buffers
       if (org.inData != 0) {
          IoData* copy = (IoData*) org.inData->clone();
          setSlotInputData(copy);

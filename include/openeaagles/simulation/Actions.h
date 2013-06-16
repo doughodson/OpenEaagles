@@ -36,7 +36,7 @@ class Steerpoint;
 //  5) Derived from an UBF action (see "openeaagles/basic/ubf/Action.h").
 //  The execute() function's 'actor' must be our OnboardComputer or our
 //  ownship, which can be  used to find our OnboardComputer.  The execute()
-//  fucntion will find the OnboardComputer and 'trigger()' the action.
+//  function will find the OnboardComputer and 'trigger()' the action.
 //
 //------------------------------------------------------------------------------
 class Action : public Basic::Ubf::Action 

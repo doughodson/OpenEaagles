@@ -879,7 +879,7 @@ void AirTrkMgr::processTrackList(const LCreal dt)
          if (getAnyEventLogger() != 0) {
 
             // Object 1: player, Object 2: Track Data
-            BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_TRACK_DATA )
+            BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_TRACK_REMOVED )
                SAMPLE_2_OBJECTS( ownship, tracks[it] )
             END_RECORD_DATA_SAMPLE()
 
@@ -928,7 +928,7 @@ void AirTrkMgr::processTrackList(const LCreal dt)
             std::cout << "New AIR track[it] = [" << nTrks << "] id = " << newTrk->getTrackID() << std::endl;
          }
          if (getAnyEventLogger() != 0) {
-            BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_TRACK_DATA )
+            BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_NEW_TRACK )
                SAMPLE_2_OBJECTS( ownship, tracks[i] )
             END_RECORD_DATA_SAMPLE()
 

@@ -561,7 +561,7 @@ void protobuf_AssignDesc_openeaagles_2frecorder_2fDataRecord_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(TrackData));
   EmissionData_descriptor_ = file->message_type(24);
-  static const int EmissionData_offsets_[9] = {
+  static const int EmissionData_offsets_[11] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EmissionData, frequency_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EmissionData, wave_length_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EmissionData, pulse_width_),
@@ -571,6 +571,8 @@ void protobuf_AssignDesc_openeaagles_2frecorder_2fDataRecord_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EmissionData, polarization_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EmissionData, azimuth_aoi_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EmissionData, elevation_aoi_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EmissionData, origin_id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EmissionData, target_id_),
   };
   EmissionData_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -848,16 +850,18 @@ void protobuf_AddDesc_openeaagles_2frecorder_2fDataRecord_2eproto() {
     "(\0132\033.Eaagles.Recorder.Pb.Vector\022-\n\010veloc"
     "ity\030\013 \001(\0132\033.Eaagles.Recorder.Pb.Vector\022\022"
     "\n\navg_signal\030\014 \001(\001\022\020\n\010sl_index\030\r \001(\r\022\017\n\007"
-    "wpn_rel\030\016 \001(\010*\004\0102\020d*\005\010d\020\350\007\"\316\002\n\014EmissionD"
+    "wpn_rel\030\016 \001(\010*\004\0102\020d*\005\010d\020\350\007\"\262\003\n\014EmissionD"
     "ata\022\021\n\tfrequency\030\001 \001(\001\022\023\n\013wave_length\030\002 "
     "\001(\001\022\023\n\013pulse_width\030\003 \001(\001\022\021\n\tbandwidth\030\004 "
     "\001(\001\022\013\n\003prf\030\005 \001(\001\022\r\n\005power\030\006 \001(\001\022D\n\014polar"
     "ization\030\007 \001(\0162..Eaagles.Recorder.Pb.Emis"
     "sionData.Polarization\022\023\n\013azimuth_aoi\030\010 \001"
-    "(\001\022\025\n\relevation_aoi\030\t \001(\001\"S\n\014Polarizatio"
-    "n\022\010\n\004NONE\020\000\022\014\n\010VERTICAL\020\001\022\016\n\nHORIZONTAL\020"
-    "\002\022\t\n\005SLANT\020\003\022\007\n\003RHC\020\004\022\007\n\003LHC\020\005*\004\0102\020d*\005\010d"
-    "\020\350\007", 5883);
+    "(\001\022\025\n\relevation_aoi\030\t \001(\001\0220\n\torigin_id\030\n"
+    " \001(\0132\035.Eaagles.Recorder.Pb.PlayerId\0220\n\tt"
+    "arget_id\030\013 \001(\0132\035.Eaagles.Recorder.Pb.Pla"
+    "yerId\"S\n\014Polarization\022\010\n\004NONE\020\000\022\014\n\010VERTI"
+    "CAL\020\001\022\016\n\nHORIZONTAL\020\002\022\t\n\005SLANT\020\003\022\007\n\003RHC\020"
+    "\004\022\007\n\003LHC\020\005*\004\0102\020d*\005\010d\020\350\007", 5983);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "openeaagles/recorder/DataRecord.proto", &protobuf_RegisterTypes);
   DataRecord::default_instance_ = new DataRecord();
@@ -10966,6 +10970,8 @@ const int EmissionData::kPowerFieldNumber;
 const int EmissionData::kPolarizationFieldNumber;
 const int EmissionData::kAzimuthAoiFieldNumber;
 const int EmissionData::kElevationAoiFieldNumber;
+const int EmissionData::kOriginIdFieldNumber;
+const int EmissionData::kTargetIdFieldNumber;
 #endif  // !_MSC_VER
 
 EmissionData::EmissionData()
@@ -10974,6 +10980,8 @@ EmissionData::EmissionData()
 }
 
 void EmissionData::InitAsDefaultInstance() {
+  origin_id_ = const_cast< ::Eaagles::Recorder::Pb::PlayerId*>(&::Eaagles::Recorder::Pb::PlayerId::default_instance());
+  target_id_ = const_cast< ::Eaagles::Recorder::Pb::PlayerId*>(&::Eaagles::Recorder::Pb::PlayerId::default_instance());
 }
 
 EmissionData::EmissionData(const EmissionData& from)
@@ -10993,6 +11001,8 @@ void EmissionData::SharedCtor() {
   polarization_ = 0;
   azimuth_aoi_ = 0;
   elevation_aoi_ = 0;
+  origin_id_ = NULL;
+  target_id_ = NULL;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -11002,6 +11012,8 @@ EmissionData::~EmissionData() {
 
 void EmissionData::SharedDtor() {
   if (this != default_instance_) {
+    delete origin_id_;
+    delete target_id_;
   }
 }
 
@@ -11039,6 +11051,12 @@ void EmissionData::Clear() {
   }
   if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
     elevation_aoi_ = 0;
+    if (has_origin_id()) {
+      if (origin_id_ != NULL) origin_id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+    }
+    if (has_target_id()) {
+      if (target_id_ != NULL) target_id_->::Eaagles::Recorder::Pb::PlayerId::Clear();
+    }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -11194,6 +11212,34 @@ bool EmissionData::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
+        if (input->ExpectTag(82)) goto parse_origin_id;
+        break;
+      }
+      
+      // optional .Eaagles.Recorder.Pb.PlayerId origin_id = 10;
+      case 10: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_origin_id:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_origin_id()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(90)) goto parse_target_id;
+        break;
+      }
+      
+      // optional .Eaagles.Recorder.Pb.PlayerId target_id = 11;
+      case 11: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_target_id:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_target_id()));
+        } else {
+          goto handle_uninterpreted;
+        }
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -11268,6 +11314,18 @@ void EmissionData::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteDouble(9, this->elevation_aoi(), output);
   }
   
+  // optional .Eaagles.Recorder.Pb.PlayerId origin_id = 10;
+  if (has_origin_id()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      10, this->origin_id(), output);
+  }
+  
+  // optional .Eaagles.Recorder.Pb.PlayerId target_id = 11;
+  if (has_target_id()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      11, this->target_id(), output);
+  }
+  
   // Extension range [50, 100)
   _extensions_.SerializeWithCachedSizes(
       50, 100, output);
@@ -11328,6 +11386,20 @@ void EmissionData::SerializeWithCachedSizes(
   // optional double elevation_aoi = 9;
   if (has_elevation_aoi()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(9, this->elevation_aoi(), target);
+  }
+  
+  // optional .Eaagles.Recorder.Pb.PlayerId origin_id = 10;
+  if (has_origin_id()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        10, this->origin_id(), target);
+  }
+  
+  // optional .Eaagles.Recorder.Pb.PlayerId target_id = 11;
+  if (has_target_id()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        11, this->target_id(), target);
   }
   
   // Extension range [50, 100)
@@ -11397,6 +11469,20 @@ int EmissionData::ByteSize() const {
       total_size += 1 + 8;
     }
     
+    // optional .Eaagles.Recorder.Pb.PlayerId origin_id = 10;
+    if (has_origin_id()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->origin_id());
+    }
+    
+    // optional .Eaagles.Recorder.Pb.PlayerId target_id = 11;
+    if (has_target_id()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->target_id());
+    }
+    
   }
   total_size += _extensions_.ByteSize();
   
@@ -11455,6 +11541,12 @@ void EmissionData::MergeFrom(const EmissionData& from) {
     if (from.has_elevation_aoi()) {
       set_elevation_aoi(from.elevation_aoi());
     }
+    if (from.has_origin_id()) {
+      mutable_origin_id()->::Eaagles::Recorder::Pb::PlayerId::MergeFrom(from.origin_id());
+    }
+    if (from.has_target_id()) {
+      mutable_target_id()->::Eaagles::Recorder::Pb::PlayerId::MergeFrom(from.target_id());
+    }
   }
   _extensions_.MergeFrom(from._extensions_);
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -11474,6 +11566,12 @@ void EmissionData::CopyFrom(const EmissionData& from) {
 
 bool EmissionData::IsInitialized() const {
   
+  if (has_origin_id()) {
+    if (!this->origin_id().IsInitialized()) return false;
+  }
+  if (has_target_id()) {
+    if (!this->target_id().IsInitialized()) return false;
+  }
   
   if (!_extensions_.IsInitialized()) return false;  return true;
 }
@@ -11489,6 +11587,8 @@ void EmissionData::Swap(EmissionData* other) {
     std::swap(polarization_, other->polarization_);
     std::swap(azimuth_aoi_, other->azimuth_aoi_);
     std::swap(elevation_aoi_, other->elevation_aoi_);
+    std::swap(origin_id_, other->origin_id_);
+    std::swap(target_id_, other->target_id_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

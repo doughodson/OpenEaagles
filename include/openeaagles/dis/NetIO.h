@@ -384,6 +384,9 @@ private:
    unsigned short    appID;            // Application ID
    unsigned char     exerciseID;       // Exercise ID
 
+   static const unsigned int MAX_PDUs = 500;            // Max PDUs in input buffer
+   unsigned int inputBuffer[MAX_PDUs][MAX_PDU_SIZE/4];  // Input buffer
+
    // Distance filter by entity kind/domain
    LCreal  maxEntityRange[NUM_ENTITY_KINDS][MAX_ENTITY_DOMAINS];     // Max range from ownship           (meters)
    LCreal  maxEntityRange2[NUM_ENTITY_KINDS][MAX_ENTITY_DOMAINS];   // Max range squared from ownship   (meters^2)

@@ -24,7 +24,7 @@ public:
 
   Pareto();
 
-  double draw();
+  virtual double draw();
 
   bool setAlpha(const double x)                      { alpha = x; return true; }
   double getAlpha() const                            { return alpha; }

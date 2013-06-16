@@ -1,7 +1,7 @@
 
 #define CIGI_LITTLE_ENDIAN
 
-// disable all deprecation warnings for now, until we fix
+// Disable all deprecation warnings for now.  Until we fix them,
 // they are quite annoying to see over and over again...
 #if(_MSC_VER>=1400)   // VC8+
 # pragma warning(disable: 4996)
@@ -654,6 +654,7 @@ bool OtwCigiCl::setBuildingData(OtwModelCigiCl* const m, const unsigned short en
 
    // Damage control, ...
    if (m->damageCC[iw] == 0) {
+      m->damageCC[iw] = new CigiCompCtrlV3();
       m->damageCC[iw]->SetCompClassV3(CigiCompCtrlV3::EntityV3);
       m->damageCC[iw]->SetInstanceID(entity);
       m->damageCC[iw]->SetCompID(6); // Object State

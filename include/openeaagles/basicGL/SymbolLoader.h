@@ -16,7 +16,7 @@ namespace BasicGL {
 //
 //    Symbols are described by their type codes. The loader will clone the
 //    appropriate graphics, based on the symbol's type code, from a list of
-//    graphical template that are set using the 'templates' slot.
+//    graphical templates that are set using the 'templates' slot.
 //
 //    As symbol index is returned to the user when symbols are added.  This
 //    index is used by the user code to manipulate and/or remove the symbol.
@@ -25,7 +25,7 @@ namespace BasicGL {
 //    each symbol.  The user can access the SlSymbol object for any active
 //    symbol using the getSymbol() function with the symbol's index.
 //
-//    The symbol location (eg, lat/lon, NED, player or screen) are transformed
+//    The symbol location (e.g., lat/lon, NED, player or screen) are transformed
 //    to screen coordinates using the MapPage base class.
 //              
 //
@@ -36,7 +36,7 @@ namespace BasicGL {
 //    or our component symbols.
 //
 //    3) Based on the MapPage, the map attributes of multiple symbol loaders
-//    can be controlled by one container MapPage.
+//    can be controlled by one MapPage container.
 //
 //    4) The symbol templates, which are used to draw the various types of
 //    symbols, may contain any number of graphical subcomponents, which can
