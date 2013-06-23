@@ -1817,7 +1817,7 @@ bool Display::setSlotDisplayOrientation(const Basic::String* const msg)
 }
 
 //------------------------------------------------------------------------------
-// processSubdisplays() -- process our subpages; make sure they are all of
+// processSubdisplays() -- process our subdisplays; make sure they are all of
 //	type Display (or derived from it)and tell them that we are their
 //	container.
 //------------------------------------------------------------------------------
@@ -1825,20 +1825,16 @@ bool Display::processSubdisplays()
 {
    bool ok = true;
    if (subdisplays != 0) {
-      // Make sure we have only Pages and tell all of the pages
-      // that we are their container.
       const Basic::List::Item* item = subdisplays->getFirstItem();
       while (ok && item != 0) {
          Basic::Pair* p = (Basic::Pair*) item->getValue();
          item = item->getNext();
          Display* g = dynamic_cast<Display*>(p->object());
          if (g != 0) {
-            // It MUST be of type Page
             g->container(this);
             g->setSubdisplayFlag(true);
          }
          else {
-            // Delete components that are not of Page type
             if (isMessageEnabled(MSG_ERROR)) {
                std::cerr << "Display::processSubdisplays(): " << *p->slot() << " is not a Display!" << std::endl;
             }
