@@ -501,7 +501,7 @@ void Display::clear()
 //------------------------------------------------------------------------------
 // swapbuffers() --
 //------------------------------------------------------------------------------
-void Display::swapbuffers()
+void Display::swapBuffers()
 {
 }
 
@@ -619,7 +619,7 @@ void Display::drawIt()
    }
 
    // Swap buffer
-   if (okToSwap) swapbuffers();
+   if (okToSwap) swapBuffers();
 }
 
 //-----------------------------------------------------------------------------
