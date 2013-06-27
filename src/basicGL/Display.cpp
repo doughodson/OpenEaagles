@@ -591,7 +591,8 @@ void Display::drawIt()
 {
    select();
 
-   glViewport(0,0,vpWidth,vpHeight);
+   // SLS - not needed as all derived classes handle viewports
+   //glViewport(0,0,vpWidth,vpHeight);
    glMatrixMode(GL_PROJECTION);
    glLoadIdentity();
    glOrtho(oLeft, oRight, oBottom, oTop, oNear, oFar);
