@@ -17,6 +17,7 @@
 #include <JSBSim/models/FGAircraft.h>
 #include <JSBSim/models/FGFCS.h>
 #include <JSBSim/models/FGPropagate.h>
+#include <JSBSim/models/FGAccelerations.h>
 #include <JSBSim/models/FGAuxiliary.h>
 #include <JSBSim/models/FGPropulsion.h>
 #include <JSBSim/models/FGGroundReactions.h>
@@ -146,10 +147,10 @@ void JSBSimModel::deleteData()
 LCreal JSBSimModel::getGload() const
 {
     if (fdmex == 0) return 0.0;
-    JSBSim::FGAircraft* Aircraft = fdmex->GetAircraft();
-    if (Aircraft == 0) return 0.0;
+    JSBSim::FGAuxiliary* Auxiliary = fdmex->GetAuxiliary();
+    if (Auxiliary == 0) return 0.0;
 
-    return (LCreal)Aircraft->GetNlf();
+    return (LCreal)Auxiliary->GetNlf();
 }
 
 LCreal JSBSimModel::getMach() const
@@ -399,6 +400,8 @@ int JSBSimModel::getEngPLA(LCreal* const pla, const int max) const
     if (fdmex == 0) return 0;
     JSBSim::FGPropulsion* Propulsion = fdmex->GetPropulsion();
     if (Propulsion == 0) return 0;
+    JSBSim::FGFCS* FCS = fdmex->GetFCS();
+    if (FCS == 0) return 0;
 
     // return throttle PLA (percent)
     if (pla == 0 || max <= 0) {
@@ -410,7 +413,7 @@ int JSBSimModel::getEngPLA(LCreal* const pla, const int max) const
     }
     for (int i = 0; i < num; i++) {
         JSBSim::FGEngine* eng = Propulsion->GetEngine(i);
-        double t = eng->GetThrottle();
+        double t = FCS->GetThrottlePos(i);
         double tmin = eng->GetThrottleMin();
         double tmax = eng->GetThrottleMax();
         double throttle = (t - tmin) / (tmax - tmin) * 100.0;
@@ -662,6 +665,8 @@ void JSBSimModel::dynamics(const LCreal dt)
     if (Propagate == 0) return;
     JSBSim::FGFCS* FCS = fdmex->GetFCS();
     if (FCS == 0) return;
+    JSBSim::FGAccelerations* Accelerations = fdmex->GetAccelerations();
+    if (Accelerations == 0) return;
 
     pitchTrimPos += pitchTrimRate * pitchTrimSw * dt;
     if (pitchTrimPos > 1.0) {
@@ -716,7 +721,7 @@ void JSBSimModel::dynamics(const LCreal dt)
 //    LCreal accY = Basic::Distance::FT2M * Propagate->GetUVWdot(2);
 //    LCreal accZ = Basic::Distance::FT2M * Propagate->GetUVWdot(3);
     const JSBSim::FGMatrix33& Tb2l = Propagate->GetTb2l();
-    const JSBSim::FGColumnVector3& vUVWdot = Propagate->GetUVWdot();
+    const JSBSim::FGColumnVector3& vUVWdot = Accelerations->GetUVWdot();
 
     p->setEulerAngles((LCreal)(Propagate->GetEuler(JSBSim::FGJSBBase::ePhi)), (LCreal)(Propagate->GetEuler(JSBSim::FGJSBBase::eTht)), (LCreal)(Propagate->GetEuler(JSBSim::FGJSBBase::ePsi)));
     p->setAngularVelocities((LCreal)(Propagate->GetPQR(JSBSim::FGJSBBase::eP)), (LCreal)(Propagate->GetPQR(JSBSim::FGJSBBase::eQ)), (LCreal)(Propagate->GetPQR(JSBSim::FGJSBBase::eR)));
@@ -767,17 +772,20 @@ void JSBSimModel::dynamics(const LCreal dt)
     // CGB Set Autopilot Properties directly for now
     JSBSim::FGPropertyManager* propMgr = fdmex->GetPropertyManager();
     if (propMgr != 0) {
-        if (hasHeadingHold) {
-            propMgr->SetBool("ap/heading_hold", isHeadingHoldOn());
-            propMgr->SetDouble("ap/heading_setpoint", getCommandedHeadingD());
-        }
-        if (hasVelocityHold) {
-            propMgr->SetBool("ap/airspeed_hold", isVelocityHoldOn());
-            propMgr->SetDouble("ap/airspeed_setpoint", getCommandedVelocityKts());
-        }
-        if (hasAltitudeHold) {
-            propMgr->SetBool("ap/altitude_hold", isAltitudeHoldOn());
-            propMgr->SetDouble("ap/altitude_setpoint", (getCommandedAltitude() * Basic::Distance::M2FT) );
+        JSBSim::FGPropertyNode* propNode = propMgr->GetNode();
+        if (propNode != 0) {
+            if (hasHeadingHold) {
+                propNode->SetBool("ap/heading_hold", isHeadingHoldOn());
+                propNode->SetDouble("ap/heading_setpoint", getCommandedHeadingD());
+            }
+            if (hasVelocityHold) {
+                propNode->SetBool("ap/airspeed_hold", isVelocityHoldOn());
+                propNode->SetDouble("ap/airspeed_setpoint", getCommandedVelocityKts());
+            }
+            if (hasAltitudeHold) {
+                propNode->SetBool("ap/altitude_hold", isAltitudeHoldOn());
+                propNode->SetDouble("ap/altitude_setpoint", (getCommandedAltitude() * Basic::Distance::M2FT) );
+            }
         }
     }
 

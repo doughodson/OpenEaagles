@@ -25,6 +25,12 @@
   #include <intrin.h>
 #endif
 
+// VS2012 has a bug with some intrinsics
+// For now, we will not use a few of them
+#if(_MSC_VER>=1700)   // VC11+
+#pragma function(sqrt)
+#endif
+
 // MinGW
 #if defined(__MINGW32__)
   // defines FLT_MIN and DBL_MAX

@@ -1195,6 +1195,7 @@ bool DataRecorder::setSlotMonth(Basic::Number* const msg)
 bool DataRecorder::setSlotYear(Basic::Number* const msg)
 {
    bool ok = false;
+
    if (msg != 0) {
       ok = true;
       year = msg->getInt();

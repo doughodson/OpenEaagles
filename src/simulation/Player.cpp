@@ -3091,7 +3091,7 @@ void Player::dynamics(const LCreal dt)
 //------------------------------------------------------------------------------
 // Default update player position function (local players only)
 //
-// If the player can be ground clampped (ground vehicles) or if either the
+// If the player can be ground clamped (ground vehicles) or if either the
 // position freeze or the altitude freeze is set then we'll integrate and
 // set our position using our geodetic coordinates and our NED velocity vector.
 // Otherwise we'll integrate and set our position using ECEF coordinates and our
