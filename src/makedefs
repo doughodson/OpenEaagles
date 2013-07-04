@@ -54,12 +54,11 @@ JSBSIM_INC_DIR = $(OE_3RD_PARTY_ROOT)/include/JSBSim
 # ---
 # Optimize?
 # ---
-OPTIMIZE = -g
-#OPTIMIZE = -O3
+CPPFLAGS += -g -O2
 
 # ---
 # Modify standard flags
 # ---
 CPPFLAGS += -fPIC
-CPPFLAGS += -I$(OE_ROOT)/include -I$(OE_3RD_PARTY_ROOT)/include $(OPTIMIZE) -pthread
+CPPFLAGS += -I$(OE_ROOT)/include -I$(OE_3RD_PARTY_ROOT)/include -pthread
 CPPFLAGS += -Wno-long-long -Wall
