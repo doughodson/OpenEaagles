@@ -20,8 +20,6 @@ rmdir /S /Q ..\..\lib\vs2012
 rem
 rem create new solution/workspace files
 rem
-rem %Premake% codeblocks
-%Premake% codelite
 %Premake% vs2008
 %Premake% vs2010
 %Premake% vs2012
