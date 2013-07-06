@@ -302,9 +302,9 @@ int GlutDisplay::createSubWindow(const int mainId)
 }
 
 //------------------------------------------------------------------------------
-// swapbuffers() --
+// swapBuffers() --
 //------------------------------------------------------------------------------
-void GlutDisplay::swapbuffers()
+void GlutDisplay::swapBuffers()
 {
    glutSwapBuffers();
 }
