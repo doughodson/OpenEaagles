@@ -29,10 +29,17 @@ basic
 --------------------------------------------------------------------------------
 basicGL
 
+   Display Class
+      1) renamed 'swapbuffers()' to 'swapBuffers()'
+
    Graphic Class
       1) The data type has been changed from String to Identifier for setColor(),
       getColorName(), the 'color' slot and the SET_COLOR event.
-   
+
+   Page Class
+      1) Added explict reference to Basic::Object in both newSubpage()
+         methods
+
 --------------------------------------------------------------------------------
 dis
 
@@ -44,6 +51,9 @@ dis
 --------------------------------------------------------------------------------
 gui-glut
 
+   GlutDisplay Class
+      1) renamed 'swapbuffers()' to 'swapBuffers()' to be compatible
+         with basicGL Display class
 
 --------------------------------------------------------------------------------
 otw
