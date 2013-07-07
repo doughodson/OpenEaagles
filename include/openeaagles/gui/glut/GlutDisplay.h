@@ -105,7 +105,7 @@ public:
    virtual void select();                       // Selects this display.
    virtual void hide();
    virtual void show();
-   virtual void swapbuffers();
+   virtual void swapBuffers();
    virtual void reshapeIt(int w, int h);
    virtual void mouseEvent(const int button, const int state, const int x, const int y);
 

@@ -110,8 +110,8 @@ public:
    void setFocusSlavedToSubpage(const bool f)   { focusSlavedToSubpage = f; }
 
    // Call new sub-page
-   bool newSubpage(Page* const newPage, Page* theCaller, Object* theArg = 0);
-   bool newSubpage(const char* const name, Page* theCaller, Object* theArg = 0);
+   bool newSubpage(Page* const newPage, Page* theCaller, Basic::Object* theArg = 0);
+   bool newSubpage(const char* const name, Page* theCaller, Basic::Object* theArg = 0);
 
    // event handler functions
    virtual bool onEntry();
@@ -132,15 +132,15 @@ public:
    virtual Basic::Pair* findBySelectName(const GLuint name);
 
    // Component interface
-   virtual bool event(const int event, Object* const obj = 0);
+   virtual bool event(const int event, Basic::Object* const obj = 0);
    virtual void updateTC(const LCreal dt = 0.0f);
    virtual void updateData(const LCreal dt = 0.0f);
    virtual void reset();
 
 protected:
    // Return our paging arguments
-   Object* getArgument()                      { return pageArg; }
-   const Page* getCaller()                    { return caller; }
+   Basic::Object* getArgument()              { return pageArg; }
+   const Page* getCaller()                   { return caller; }
 
    // Return our subpages
    Basic::PairStream* subPages()              { return subpages; }
@@ -148,12 +148,12 @@ protected:
    // Manage our (sub)page stack
    bool clearSubpageStack();
    bool pushSubpage(const char* const name, Page* theCaller, Basic::Object* theArg = 0);
-   bool popSubpage(Page* theCaller, Object* theArg = 0);
+   bool popSubpage(Page* theCaller, Basic::Object* theArg = 0);
 
    // Call/push/pop major pages (our container's pages, which we are a member of)
-   bool newPage(Page* const newPage, Page* theCaller, Object* theArg = 0);
-   bool newPage(const char* const name, Page* theCaller, Object* theArg = 0);
-   bool pushPage(const char* const name, Page* theCaller, Object* theArg = 0);
+   bool newPage(Page* const newPage, Page* theCaller, Basic::Object* theArg = 0);
+   bool newPage(const char* const name, Page* theCaller, Basic::Object* theArg = 0);
+   bool pushPage(const char* const name, Page* theCaller, Basic::Object* theArg = 0);
    bool popPage(Page* theCaller, Basic::Object* theArg = 0);
 
 private:

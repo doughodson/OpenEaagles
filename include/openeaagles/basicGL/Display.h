@@ -113,7 +113,7 @@ public:
    void setDisplayOrientation(const Orientation o); // Sets the display orientation
 
    virtual void clear();                        // Clear the display buffer (and depth buffer if 'clearDepth' is set)
-   virtual void swapbuffers();                  // Swaps the front and back buffers (Window system specific)
+   virtual void swapBuffers();                  // Swaps the front and back buffers (Window system specific)
    virtual void show();                         // show our display (Window system specific)
    virtual void hide();                         // hide our display (Window system specific)
 
