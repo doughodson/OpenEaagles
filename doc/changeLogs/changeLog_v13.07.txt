@@ -1,0 +1,116 @@
+================================================================================
+Changes since v13.01
+================================================================================
+
+
+--------------------------------------------------------------------------------
+general
+
+-- Object clone() method now returns proper return type (i.e., ThisType*) as
+   opposed to Eaagles::Basic::Object*.  This change reduces the number of typecasts
+   that need to be done in copy constructors and assignment operators.
+
+-- Changes to the comments in various files
+
+-- Added a Makefile in the OE root directory
+
+--------------------------------------------------------------------------------
+basic
+
+   Component Class
+      1) Fixed memory leak in setSlotComponent();
+
+   Nav Class
+      1) Fixed memory leaks in aer2xyzArray() methods
+
+   SPtr<>
+      1) added a new set() function with an initial reference enable flag
+
+--------------------------------------------------------------------------------
+basicGL
+
+   Display Class
+      1) renamed 'swapbuffers()' to 'swapBuffers()'
+
+   Graphic Class
+      1) The data type has been changed from String to Identifier for setColor(),
+      getColorName(), the 'color' slot and the SET_COLOR event.
+
+   Page Class
+      1) Added explict reference to Basic::Object in both newSubpage()
+         methods
+
+--------------------------------------------------------------------------------
+dis
+
+   NetIO Class
+      1) netInputHander() -- changed the large input buffer, 'packet', from a local
+      variable to a member variable and renamed it to 'inputBuffer'; i.e., no longer
+      on the stack.
+
+--------------------------------------------------------------------------------
+gui-glut
+
+   GlutDisplay Class
+      1) renamed 'swapbuffers()' to 'swapBuffers()' to be compatible
+         with basicGL Display class
+
+--------------------------------------------------------------------------------
+otw
+
+   OtwCigiCl Class
+      1) setBuildingData() -- added missing creation of the damage control
+      structure (bug fix)
+
+--------------------------------------------------------------------------------
+recorder
+
+   DataRecord.proto
+      1) added the transmitting (origin) player ID and the target player ID
+      to the EmissionData message.
+
+   DataRecorder class
+      1) (bug fix) Corrected the mapping for the DI and AI handlers
+
+      2) (bug fix) The player ID of the origin of the emission was improperly
+      assigned to the track ID.
+         a) Corrected the track player IDs
+         b) Now setting the origin and target player IDs in the EmissionData
+            message.
+
+      3) Added several zero pointer guards
+
+--------------------------------------------------------------------------------
+simulation
+
+   Missile class
+      1) (bug fixes) For the  REID_WEAPON_DETONATION data samples, corrected the
+      order of the weapon and launching aircraft pointers.
+
+   Navigation class
+      1) Move most of the navigation calculations from the background thread
+      function, updateData(), to the foreground thread functions, process().
+      
+   Player Class
+      1) The data type has been changed from String to Identifier for isName(),
+      getName() and setName().
+
+      2) setType() now makes a copy of the argument instead of just setting
+      a pointer to the original
+
+
+   Station Class
+      1) Fixed memory leak in setSlotOutTheWindow();
+
+
+   Weapon class
+      1) (bug fix) release() -- changed the pointer to the correct flyout weapon
+      for the REID_WEAPON_RELEASED data sample
+
+
+--------------------------------------------------------------------------------
+vehicle
+
+
+--------------------------------------------------------------------------------
+
