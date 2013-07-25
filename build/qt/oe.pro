@@ -3,7 +3,6 @@
 TEMPLATE      = subdirs
 SUBDIRS       = basic       \
                 basicGL     \
-                basicGL2.0  \
                 dafif       \
                 dis         \
                 gui         \   # This is a subdirectory
