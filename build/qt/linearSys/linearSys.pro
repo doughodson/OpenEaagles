@@ -1,25 +1,7 @@
 # OpenEaagles linearSys library profile
 
 # Define the Visual studio compiler version we wish to use (Windows only)
-MSVC_VER = vs2010
-
-# Root directory
-OE_ROOT=$$PWD/../../../
-# OpenEaagles3rdParty Root
-OE_3RD_PARTY_ROOT=$$PWD/../../../../OpenEaagles3rdParty
-
-# Static library configuration
-TEMPLATE = lib
-CONFIG += static
-
-# Store our objects in a temporary location
-OBJECTS_DIR = ./tmp/obj
-MOC_DIR = ./tmp/moc
-RCC_DIR = ./tmp/rcc
-
-# destination and working directories
-win32: DESTDIR = $${OE_ROOT}/lib/$${MSVC_VER}/
-else:unix:!macx:!symbian: DESTDIR = $${OE_ROOT}/lib/linux
+include(../config.pri)
 
 # Target names
 win32:CONFIG(release, debug|release): TARGET = oeLinearSys
