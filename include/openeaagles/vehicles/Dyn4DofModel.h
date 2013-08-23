@@ -49,14 +49,12 @@ public: // public interface
    bool fly2LL(const double latDeg, const double lonDeg);
 
    bool flyLoiter();
-   bool flyEntry();
+   bool flyEntry(double aLat, double aLon);
 
    //-----------------------------------
    // get functions
    //-----------------------------------
    double getCmdVel()     const  { return cmdVel; }
-   double getCmdAlt()     const  { return cmdAlt; }
-   double getCmdHdg()     const  { return cmdHdg; }
    double getAnchorLat()  const  { return anchorLat; }
    double getAnchorLon()  const  { return anchorLon; }
    double getInboundCrs() const  { return inboundCrs; }
@@ -70,8 +68,6 @@ public: // public interface
    // set functions
    //-----------------------------------
    void setCmdVel(const double vel)       { cmdVel     = vel; }
-   void setCmdAlt(const double alt)       { cmdAlt     = alt; }
-   void setCmdHdg(const double hdg)       { cmdHdg     = hdg; }
    void setInboundCourse(double ibCrsDeg) { inboundCrs = ibCrsDeg; }
    void setAnchorLat(const double latDeg) { anchorLat  = latDeg; }
    void setAnchorLon(const double lonDeg) { anchorLon  = lonDeg; }
@@ -86,6 +82,11 @@ public: // public interface
 
    // Component interface
    //virtual void reset();
+
+   // DynamicsModel interface
+   virtual bool setCommandedHeadingD(const double h);
+   virtual bool setCommandedAltitude(const double a);
+   virtual bool setCommandedVelocityKts(const double a);
 
 private:
    void initData();
@@ -153,8 +154,6 @@ private:
 
    // Commanded parameters
    double   cmdVel;
-   double   cmdAlt;
-   double   cmdHdg;
 };
 
 } 

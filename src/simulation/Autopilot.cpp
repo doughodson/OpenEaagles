@@ -5,6 +5,7 @@
 #include "openeaagles/simulation/Steerpoint.h"
 #include "openeaagles/simulation/Player.h"
 #include "openeaagles/simulation/Simulation.h"
+#include "openeaagles/vehicles/Dyn4DofModel.h"
 #include "openeaagles/basic/Identifier.h"
 #include "openeaagles/basic/LatLon.h"
 #include "openeaagles/basic/List.h"
@@ -299,51 +300,62 @@ bool Autopilot::processModeLoiter()
       double navLat = nav->getLatitude();
       double navLon = nav->getLongitude();
 
-      if (loiterState == 0 && nav->isPositionDataValid()) {
-         // Just entered the loiter orbit pattern ...
-         // 1) record our current position as the anchor point
-         // 2) computer the mirror point
-         loiterAnchorLat = navLat;
-         loiterAnchorLon = navLon;
-         loiterCourse = nav->getHeadingDeg();
-         computerOrbitHoldingPatternMirrorWaypoint(
-            loiterAnchorLat, loiterAnchorLon,            // Anchor point
-            loiterCourse,                                // In-bound course
-            getLoiterPatternLengthNM(),                  // Min length (nm)
-            nav->getTrueAirspeedKts(),                   // Speed (kts)
-            isLoiterPatternCounterClockwise(),           // Counter-Clockwise pattern flag
-            &loiterMirrorLat, &loiterMirrorLon           // Mirror point
-         );
-         loiterState = 2;     // Start heading toward the mirror point
-      }
-
-      if (loiterState > 0) {
-         // Select destination lat/lon
-         double destLat = loiterAnchorLat;
-         double destLon = loiterAnchorLon;
-         if (loiterState == 2) {
-            destLat = loiterMirrorLat;
-            destLon = loiterMirrorLon;
-         }
-
-         // Compute bearing and distance to the destination
-         double brg = 0;
-         double dist = 0;
-         Basic::Nav::gll2bd(navLat, navLon, destLat, destLon, &brg, &dist);
-
-         // Check for passing destination (less than 2 NM and destination is behind us)
-         // (if so then swap anchor/mirror as destination)
-         if ( (brg > 90.0 || brg < -90.0) && dist < 2.0) {
-            // Swap and don't change the current commanded heading
-            if (loiterState != 2) loiterState = 2;
-            else loiterState = 1;
-         }
-         else {
-            // Command heading to the current distination
-            setCommandedHeadingD( LCreal( brg ) );
+      // SLS - the Dyn4DofModel handles loiter flying on it's own, so the autopilot will check to see if
+      // we are using this dynamics model, and adjust accordingly.  If not, we calculate the values ourself.
+      Vehicle::Dyn4DofModel* mod = dynamic_cast<Vehicle::Dyn4DofModel*>(getOwnship()->getDynamicsModel());
+      if (mod != 0) {
+         if (nav->isPositionDataValid()) {
+            // calling this will update the entry, right into the loiter.  Only the 
+            // initial call will set the anchor lat/lon
+            mod->flyEntry(navLat, navLon);
          }
       }
+      else {
+         if (loiterState == 0 && nav->isPositionDataValid()) {
+            // Just entered the loiter orbit pattern ...
+            // 1) record our current position as the anchor point
+            // 2) computer the mirror point
+            loiterAnchorLat = navLat;
+            loiterAnchorLon = navLon;
+            loiterCourse = nav->getHeadingDeg();
+            computerOrbitHoldingPatternMirrorWaypoint(
+               loiterAnchorLat, loiterAnchorLon,            // Anchor point
+               loiterCourse,                                // In-bound course
+               getLoiterPatternLengthNM(),                  // Min length (nm)
+               nav->getTrueAirspeedKts(),                   // Speed (kts)
+               isLoiterPatternCounterClockwise(),           // Counter-Clockwise pattern flag
+               &loiterMirrorLat, &loiterMirrorLon           // Mirror point
+            );
+            loiterState = 2;     // Start heading toward the mirror point
+         }
 
+         if (loiterState > 0) {
+            // Select destination lat/lon
+            double destLat = loiterAnchorLat;
+            double destLon = loiterAnchorLon;
+            if (loiterState == 2) {
+               destLat = loiterMirrorLat;
+               destLon = loiterMirrorLon;
+            }
+
+            // Compute bearing and distance to the destination
+            double brg = 0;
+            double dist = 0;
+            Basic::Nav::gll2bd(navLat, navLon, destLat, destLon, &brg, &dist);
+
+            // Check for passing destination (less than 2 NM and destination is behind us)
+            // (if so then swap anchor/mirror as destination)
+            if ( (brg > 90.0 || brg < -90.0) && dist < 2.0) {
+               // Swap and don't change the current commanded heading
+               if (loiterState != 2) loiterState = 2;
+               else loiterState = 1;
+            }
+            else {
+               // Command heading to the current distination
+               setCommandedHeadingD( LCreal( brg ) );
+            }
+         }
+      }
       ok = true;
    }
 

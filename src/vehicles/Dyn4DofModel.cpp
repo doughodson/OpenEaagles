@@ -4,7 +4,6 @@
 #include "openeaagles/vehicles/Dyn4DofModel.h"
 
 #include "openeaagles/simulation/Player.h"
-#include "openeaagles/simulation/Autopilot.h"
 #include "openeaagles/simulation/AirVehicle.h"
 
 #include "openeaagles/basic/Nav.h"
@@ -116,8 +115,6 @@ void Dyn4DofModel::initData()
 
    // Commanded parameters
    cmdVel   = 0.0;
-   cmdAlt   = 0.0;
-   cmdHdg   = 0.0;
 }
 
 //----------------------------------------------------------
@@ -189,8 +186,6 @@ void Dyn4DofModel::copyData(const Dyn4DofModel& org, const bool cc)
 
    // Commanded parameters
    cmdVel   = org.cmdVel;
-   cmdAlt   = org.cmdAlt;
-   cmdHdg   = org.cmdHdg;
 }
 
 
@@ -199,26 +194,21 @@ void Dyn4DofModel::copyData(const Dyn4DofModel& org, const bool cc)
 //----------------------------------------------------------
 void Dyn4DofModel::dynamics(const LCreal dt)
 {
-    update4DofModel(dt);  //LDB - new version
+    update4DofModel(dt);  
     dT = dt;
-
-    //BaseClass::dynamics(dt);
 }
 
 //----------------------------------------------------------
 // updateTestRAC -- update robot aircraft equations of motion
 //----------------------------------------------------------
 void Dyn4DofModel::update4DofModel(const LCreal dt)
-{
-   // LARRY - put code here!
-   
+{   
    //-------------------------------------------------------
    // get data pointers 
    //-------------------------------------------------------
    Simulation::Player* pPlr = static_cast<Simulation::Player*>( findContainerByType(typeid(Simulation::Player)) );
-   Simulation::Autopilot* pA = (Simulation::Autopilot*) pPlr->getPilot();
    
-   if (pPlr != 0 && pA != 0) {
+   if (pPlr != 0) {
 
       //==============================================================
       // ROTATIONAL EOM
@@ -334,19 +324,19 @@ void Dyn4DofModel::update4DofModel(const LCreal dt)
       //cmdAlt = pPlr->getCommandedAltitudeFt();
       //cmdHdg = pPlr->getCommandedHeadingD();
 
-      cmdVel = 200.0;
-      cmdAlt = 9000.0;
-      cmdHdg = 330.0;
-      
-      flyVel(cmdVel);
-      flyALT(cmdAlt);
+      //cmdVel = 200.0;
+      //cmdAlt = 9000.0;
+      //cmdHdg = 330.0;
+      //
+      //flyVel(cmdVel);
+      //flyALT(cmdAlt);
       //flyHDG(cmdHdg);
 
       //flyPsi(45.0);
       //(45.0);
       //flyPsi(45.0);
 
-      flyEntry();
+      //flyEntry();
 
       //setTurnDir(LEFT);
       //flyLoiter();
@@ -841,7 +831,7 @@ bool Dyn4DofModel::flyLoiter()
 }
 
 //==============================================================================
-bool Dyn4DofModel::flyEntry()
+bool Dyn4DofModel::flyEntry(double aLat, double aLon)
 {
    //-------------------------------------------------------
    // get data pointers 
@@ -884,6 +874,8 @@ bool Dyn4DofModel::flyEntry()
          {
             std::cout << "PREENTRY" << std::endl;
             if (entryPhase == 0) {
+               anchorLat = aLat;
+               anchorLon = aLon;
                ok = fly2LL(anchorLat, anchorLon);
                if (distNM < 0.1) {
                   entryPhase = 1;
@@ -1036,7 +1028,24 @@ bool Dyn4DofModel::calcMirrorLatLon()
    return ok;
 }
 
+// Dynamics model interface
+bool Dyn4DofModel::setCommandedHeadingD(const double h)    
+{ 
+   flyHDG(h);
+   return true; 
+}
+// Dynamics model interface
+bool Dyn4DofModel::setCommandedAltitude(const double h)    
+{ 
+   flyALT(h);
+   return true; 
+}
+bool Dyn4DofModel::setCommandedVelocityKts(const double a)
+{
+   flyVel(a);
+   return true;
+}
 
-//==============================================================================
-} // End RacModelTest namespace
-} // End Eaagles namespace
+
+} 
+} 
