@@ -22,9 +22,9 @@ namespace Simulation {
 
    // constants for calculations
    const double Autopilot::STD_RATE_TURN_DPS = 3.0f;       // 3.0 degrees per second
-   const double Autopilot::STD_MAX_BANK_ANGLE = 30.0f;     // 30.0 degrees 
+   const double Autopilot::STD_MAX_BANK_ANGLE = 30.0f;     // 30.0 degrees of roll
    const double Autopilot::STD_MAX_CLIMB_RATE = 2000.0f * (Basic::Distance::FT2M) / (Basic::Time::M2S);
-
+   const double Autopilot::STD_MAX_PITCH_ANGLE = 10.0f;    // 10.0 degrees of pitch
 
 // =============================================================================
 // class: Autopilot
@@ -51,8 +51,9 @@ BEGIN_SLOTTABLE(Autopilot)
    "followTheLeadMode",          // 15)"Follow the lead" mode flag               (Number)
    "maxRateOfTurnDps",           // 16) Maximum rate of turn                     (Number) - degrees per second
    "maxBankAngle",               // 17) Maximum bank angle                       (Number) - degrees
-   "maxClimbRateFpm",           // 18) Maximum climb / dive rate                 (Number) - feet per minute
-   "maxClimbRateMps",           // 19) Maximum climb / dive rate                 (Number) - meters per second (no conversion required)
+   "maxClimbRateFpm",            // 18) Maximum climb / dive rate                (Number) - feet per minute
+   "maxClimbRateMps",            // 19) Maximum climb / dive rate                (Number) - meters per second (no conversion required)
+   "maxPitchAngle",              // 20) Maximum pitch angle                      (Number) - degrees
 END_SLOTTABLE(Autopilot)
 
 //  Map slot names to handlers
@@ -80,6 +81,7 @@ BEGIN_SLOT_MAP(Autopilot)
     ON_SLOT(17, setSlotMaxBankAngle,               Basic::Number)
     ON_SLOT(18, setSlotMaxClimbRateFpm,            Basic::Number)
     ON_SLOT(19, setSlotMaxClimbRateMps,            Basic::Number)
+    ON_SLOT(20, setSlotMaxPitchAngle,              Basic::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -136,6 +138,7 @@ Autopilot::Autopilot()
    maxTurnRateDps = STD_RATE_TURN_DPS;
    maxBankAngleDegs = STD_MAX_BANK_ANGLE;
    maxClimbRateMps = STD_MAX_CLIMB_RATE;
+   maxPitchAngleDegs = STD_MAX_PITCH_ANGLE;
 }
 
 //------------------------------------------------------------------------------
@@ -194,6 +197,7 @@ void Autopilot::copyData(const Autopilot& org, const bool cc)
    maxTurnRateDps = org.maxTurnRateDps;
    maxBankAngleDegs = org.maxBankAngleDegs;
    maxClimbRateMps = org.maxClimbRateMps;
+   maxPitchAngleDegs = org.maxPitchAngleDegs;
 }
 
 //------------------------------------------------------------------------------
@@ -821,7 +825,7 @@ bool Autopilot::altitudeController()
       DynamicsModel* md = pv->getDynamicsModel();
       if (md != 0) {
          if ( isAltitudeHoldOn() || isNavModeOn() ) {
-            md->setCommandedAltitude(getCommandedAltitudeFt() * Basic::Distance::FT2M,  maxClimbRateMps);
+            md->setCommandedAltitude(getCommandedAltitudeFt() * Basic::Distance::FT2M,  maxClimbRateMps, maxPitchAngleDegs);
             md->setAltitudeHoldOn( true );
          } else {
             md->setAltitudeHoldOn( false );
@@ -1442,14 +1446,21 @@ bool Autopilot::setSlotMaxBankAngle(const Basic::Number* const msg)
 bool Autopilot::setSlotMaxClimbRateFpm(const Basic::Number* const msg)
 {
    bool ok = (msg != 0);
-   if (ok) this->setMaxClimbRateMps((msg->getDouble() * Basic::Distance::FT2M / Basic::Time::M2S));
+   if (ok) setMaxClimbRateMps((msg->getDouble() * Basic::Distance::FT2M / Basic::Time::M2S));
    return ok;
 }
 // Set slot: Maximum climb / dive rate - limits how fast the pilot can dive/climb
 bool Autopilot::setSlotMaxClimbRateMps(const Basic::Number* const msg)
 {
    bool ok = (msg != 0);
-   if (ok) this->setMaxClimbRateMps(msg->getDouble());
+   if (ok) setMaxClimbRateMps(msg->getDouble());
+   return ok;
+}
+// Set slot: Maximum pitch angle - limits how much pitch the pilot can climb/dive to
+bool Autopilot::setSlotMaxPitchAngle(const Basic::Number* const msg)
+{
+   bool ok = (msg != 0);
+   if (ok) setMaxPitchAngleDeg(msg->getDouble());
    return ok;
 }
 

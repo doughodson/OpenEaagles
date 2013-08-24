@@ -1090,7 +1090,7 @@ bool Dyn4DofModel::setCommandedHeadingD(const double h, const double hDps, const
    return ok;
 }
 // Dynamics model interface - all input values in meters
-bool Dyn4DofModel::setCommandedAltitude(const double a, const double aMps)    
+bool Dyn4DofModel::setCommandedAltitude(const double a, const double aMps, const double maxPitch)    
 { 
    //-------------------------------------------------------
    // get data pointers 
@@ -1134,7 +1134,7 @@ bool Dyn4DofModel::setCommandedAltitude(const double a, const double aMps)
       // assign result to altitude control
       //-------------------------------------------------------
       double thtCmdDeg = (altDotMps / u) * Basic::Angle::R2DCC;
-      ok = flyTht(thtCmdDeg);
+      ok = flyTht(thtCmdDeg, maxPitch);
    }
 
    return ok;

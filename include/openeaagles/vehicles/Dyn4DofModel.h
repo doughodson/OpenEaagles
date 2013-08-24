@@ -35,14 +35,17 @@ public: // public interface
    //-----------------------------------
    // fly functions
    //-----------------------------------
+   // max bank defaults to 10
    bool flyPhi(const double phiCmdDeg, const double phiDotCmdDps=10.0);
+   // max pitch defaults to 10
    bool flyTht(const double thtCmdDeg, const double thtDotCmdDps=10.0);
+   // max roll rate at 3.0 degs per second
    bool flyPsi(const double psiCmdDeg, const double psiDotCmdDps=3.0);
    bool flyVel(const double velCmdKts, const double velDotCmdNps=5.0);
 
    //bool flyTAS(const double tasCmdKts) { return flyVel(tasCmdKts); }
    bool flyTGS(const double tgsCmdKts) { return flyVel(tgsCmdKts); }
-   bool flyALT(const double altCmdFt, const double altDotCmdFpm=2000.0);
+   //bool flyALT(const double altCmdFt, const double altDotCmdFpm=2000.0);
    //bool flySRT(const TurnDir td=RIGHT);
    //bool flyHDG(const double hdgCmdDeg, const double hdgDotCmdDps=STD_RATE_TURN_DPS);
    bool flyCRS(const double latDeg, const double lonDeg, const double crsCmdDeg);
@@ -86,7 +89,7 @@ public: // public interface
    // DynamicsModel interface
    //virtual bool setCommandedHeadingD(const double h, const double hdgDotCmdDps=DynamicsModel::STD_RATE_TURN_DPS);
    virtual bool setCommandedHeadingD(const double h, const double hDps = 0, const double maxBank = 0);
-   virtual bool setCommandedAltitude(const double a, const double aMps = 0);
+   virtual bool setCommandedAltitude(const double a, const double aMps = 0, const double maxPitch = 0);
    virtual bool setCommandedVelocityKts(const double a);
 
 private:
