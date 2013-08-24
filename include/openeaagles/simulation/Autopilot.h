@@ -74,6 +74,7 @@ public:
    // Standard limiting definition
    static const double STD_RATE_TURN_DPS;      // default to 3.0 degrees per second
    static const double STD_MAX_BANK_ANGLE;     // default to 30 degrees bank max
+   static const double STD_MAX_CLIMB_RATE;     // defaul to 2000 fpm, or apprx 10.16 mps
 
    virtual bool isHeadingHoldOn() const { return hdgHoldOn; }        // True if heading hold mode
    virtual double getCommandedHeadingD() const { return cmdHdg; }    // Returns the hold heading (degs)
@@ -183,6 +184,8 @@ public:
    virtual bool setMaxTurnRateDps(const double x);
    // maximum bank angle (degrees)
    virtual bool setMaxBankAngleDeg(const double x);
+   // maximum climb/dive rate
+   virtual bool setMaxClimbRateMps(const double x);
    
    // Eaagles::Basic::Component interface methods
    virtual void reset();
@@ -210,7 +213,8 @@ protected:
    bool setSlotFollowTheLeadMode(const Basic::Number* const msg);             // "Follow the lead" mode flag
    bool setSlotMaxRateOfTurnDps(const Basic::Number* const msg);              // Maximum turn rate - degrees per second
    bool setSlotMaxBankAngle(const Basic::Number* const msg);                  // Maximum bank angle - degrees
-
+   bool setSlotMaxClimbRateMps(const Basic::Number* const msg);               // Max climb/dive rate - meters per second
+   bool setSlotMaxClimbRateFpm(const Basic::Number* const msg);               // Max climb/dive rate - feet per minute
 
    virtual bool modeManager();
    virtual bool headingController();
@@ -277,12 +281,7 @@ private:
    // Pilot limits
    double maxTurnRateDps;           // maximum turn rate
    double maxBankAngleDegs;         // maximum bank angle
-
-   // LEE - move this to aerodynamics
-   static const double AOG_FPS2;
-   static const double AOG_MPS2;
-
-
+   double maxClimbRateMps;          // maximum climb/dive rate (meters per second)
 
    // Follow that lead mode data
    osg::Vec3d leadOffset;     // Offsets from lead player (meters) Default -1NM and 2NM and 2000ft
@@ -295,6 +294,7 @@ private:
 
 inline bool Autopilot::setMaxTurnRateDps(const double x)    { maxTurnRateDps = x; return true; }
 inline bool Autopilot::setMaxBankAngleDeg(const double x)   { maxBankAngleDegs = x; return true; }
+inline bool Autopilot::setMaxClimbRateMps(const double x)   { maxClimbRateMps = x; return true; }
 
 } // End Simulation namespace
 } // End Eaagles namespace

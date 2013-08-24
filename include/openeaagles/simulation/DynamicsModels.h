@@ -58,7 +58,9 @@ public:
     virtual bool isAltitudeHoldOn() const;
     virtual double getCommandedAltitude() const;
     virtual bool setAltitudeHoldOn(const bool b);
-    virtual bool setCommandedAltitude(const double a);
+    // commanded altitude now takes a second parameter, aMpm - which stands for meters per second.  This limits
+    // the speed in which the pilot climbs or dives
+    virtual bool setCommandedAltitude(const double a, const double aMps = 0);
 
     virtual LCreal getFuelWt() const;                   // lbs
     virtual LCreal getFuelWtMax() const;                // lbs

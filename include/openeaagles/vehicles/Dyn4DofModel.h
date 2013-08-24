@@ -19,8 +19,8 @@ class Dyn4DofModel : public Simulation::AerodynamicsModel
 private:
    static const double HALF_PI;
    static const double EPSILON;
-   static const double AOG_FPS2;
-   static const double AOG_MPS2;
+   //static const double AOG_FPS2;
+   //static const double AOG_MPS2;
    //static const double STD_RATE_TURN_DPS;
    //static const double MAX_BANK_DEG;
 
@@ -86,7 +86,7 @@ public: // public interface
    // DynamicsModel interface
    //virtual bool setCommandedHeadingD(const double h, const double hdgDotCmdDps=DynamicsModel::STD_RATE_TURN_DPS);
    virtual bool setCommandedHeadingD(const double h, const double hDps = 0, const double maxBank = 0);
-   virtual bool setCommandedAltitude(const double a);
+   virtual bool setCommandedAltitude(const double a, const double aMps = 0);
    virtual bool setCommandedVelocityKts(const double a);
 
 private:

@@ -20,13 +20,10 @@
 namespace Eaagles {
 namespace Simulation {
 
+   // constants for calculations
    const double Autopilot::STD_RATE_TURN_DPS = 3.0f;       // 3.0 degrees per second
    const double Autopilot::STD_MAX_BANK_ANGLE = 30.0f;     // 30.0 degrees 
-
-// LEE - MOVE THIS 
-   const double Autopilot::AOG_FPS2            = Eaagles::ETHG;
-   const double Autopilot::AOG_MPS2            = AOG_FPS2 * 0.3048;
-
+   const double Autopilot::STD_MAX_CLIMB_RATE = 2000.0f * (Basic::Distance::FT2M) / (Basic::Time::M2S);
 
 
 // =============================================================================
@@ -54,6 +51,8 @@ BEGIN_SLOTTABLE(Autopilot)
    "followTheLeadMode",          // 15)"Follow the lead" mode flag               (Number)
    "maxRateOfTurnDps",           // 16) Maximum rate of turn                     (Number) - degrees per second
    "maxBankAngle",               // 17) Maximum bank angle                       (Number) - degrees
+   "maxClimbRateFpm",           // 18) Maximum climb / dive rate                 (Number) - feet per minute
+   "maxClimbRateMps",           // 19) Maximum climb / dive rate                 (Number) - meters per second (no conversion required)
 END_SLOTTABLE(Autopilot)
 
 //  Map slot names to handlers
@@ -79,6 +78,8 @@ BEGIN_SLOT_MAP(Autopilot)
     ON_SLOT(15, setSlotFollowTheLeadMode,          Basic::Number)
     ON_SLOT(16, setSlotMaxRateOfTurnDps,           Basic::Number)
     ON_SLOT(17, setSlotMaxBankAngle,               Basic::Number)
+    ON_SLOT(18, setSlotMaxClimbRateFpm,            Basic::Number)
+    ON_SLOT(19, setSlotMaxClimbRateMps,            Basic::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -134,6 +135,7 @@ Autopilot::Autopilot()
    followLeadModeOn = false;
    maxTurnRateDps = STD_RATE_TURN_DPS;
    maxBankAngleDegs = STD_MAX_BANK_ANGLE;
+   maxClimbRateMps = STD_MAX_CLIMB_RATE;
 }
 
 //------------------------------------------------------------------------------
@@ -191,6 +193,7 @@ void Autopilot::copyData(const Autopilot& org, const bool cc)
    leadHdg = org.leadHdg;
    maxTurnRateDps = org.maxTurnRateDps;
    maxBankAngleDegs = org.maxBankAngleDegs;
+   maxClimbRateMps = org.maxClimbRateMps;
 }
 
 //------------------------------------------------------------------------------
@@ -425,7 +428,7 @@ bool Autopilot::flyLoiterEntry()
 
       // Player only data
       double velMps    = pPlr->getTotalVelocity();
-      double rocMtr    = velMps * velMps / AOG_MPS2 / std::tan(MAX_BANK_RAD);
+      double rocMtr    = velMps * velMps / Eaagles::ETHGM / std::tan(MAX_BANK_RAD);
       double rocNM     = rocMtr * Basic::Distance::M2NM;
       double obCrsDeg  = Basic::Angle::aepcdDeg(loiterInboundCourse + 180.0);
 
@@ -814,12 +817,16 @@ bool Autopilot::altitudeController()
 
    Player* pv = getOwnship();
    if (pv != 0) {
-      if ( isAltitudeHoldOn() || isNavModeOn() ) {
-         pv->setCommandedAltitude( getCommandedAltitudeFt() * Basic::Distance::FT2M );
-         pv->setAltitudeHoldOn( true );
-      } else {
-         pv->setAltitudeHoldOn( false );
-         pv->setControlStickPitchInput( getControlStickPitchInput() );
+      // skip the middle man
+      DynamicsModel* md = pv->getDynamicsModel();
+      if (md != 0) {
+         if ( isAltitudeHoldOn() || isNavModeOn() ) {
+            md->setCommandedAltitude(getCommandedAltitudeFt() * Basic::Distance::FT2M,  maxClimbRateMps);
+            md->setAltitudeHoldOn( true );
+         } else {
+            md->setAltitudeHoldOn( false );
+            md->setControlStickPitchInput( getControlStickPitchInput() );
+         }
       }
    }
    return true;
@@ -1429,6 +1436,20 @@ bool Autopilot::setSlotMaxBankAngle(const Basic::Number* const msg)
 {
    bool ok = (msg != 0);
    if (ok) ok = setMaxBankAngleDeg(msg->getDouble());
+   return ok;
+}
+// Set slot: Maximum climb / dive rate - limits how fast the pilot can dive/climb
+bool Autopilot::setSlotMaxClimbRateFpm(const Basic::Number* const msg)
+{
+   bool ok = (msg != 0);
+   if (ok) this->setMaxClimbRateMps((msg->getDouble() * Basic::Distance::FT2M / Basic::Time::M2S));
+   return ok;
+}
+// Set slot: Maximum climb / dive rate - limits how fast the pilot can dive/climb
+bool Autopilot::setSlotMaxClimbRateMps(const Basic::Number* const msg)
+{
+   bool ok = (msg != 0);
+   if (ok) this->setMaxClimbRateMps(msg->getDouble());
    return ok;
 }
 

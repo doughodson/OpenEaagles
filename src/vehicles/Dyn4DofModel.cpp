@@ -34,8 +34,8 @@ EMPTY_DELETEDATA(Dyn4DofModel)
 //----------------------------------------------------------
 const double Dyn4DofModel::HALF_PI             = PI / 2.0;
 const double Dyn4DofModel::EPSILON             = 1.0E-10;
-const double Dyn4DofModel::AOG_FPS2            = Eaagles::ETHG;
-const double Dyn4DofModel::AOG_MPS2            = AOG_FPS2 * 0.3048;
+//const double Dyn4DofModel::Eaagles::ETHG            = Eaagles::ETHG;
+//const double Dyn4DofModel::Eaagles::ETHGM            = Eaagles::ETHG * 0.3048;
 //const double Dyn4DofModel::STD_RATE_TURN_DPS   = 3.0;
 //const double Dyn4DofModel::MAX_BANK_DEG        = 30.0;
 
@@ -534,56 +534,56 @@ bool Dyn4DofModel::flyVel(const double velCmdKts, const double velDotCmdNps)
 }
 
 //==============================================================================
-bool Dyn4DofModel::flyALT(const double altCmdFt, const double altDotCmdFpm)
-{
-   //-------------------------------------------------------
-   // get data pointers 
-   //-------------------------------------------------------
-   Simulation::Player* pPlr = static_cast<Simulation::Player*>( findContainerByType(typeid(Simulation::Player)) );
+//bool Dyn4DofModel::flyALT(const double altCmdFt, const double altDotCmdFpm)
+//{
+   ////-------------------------------------------------------
+   //// get data pointers 
+   ////-------------------------------------------------------
+   //Simulation::Player* pPlr = static_cast<Simulation::Player*>( findContainerByType(typeid(Simulation::Player)) );
 
-   bool ok = (pPlr != 0);
-   if (ok) {
-   
-      //-------------------------------------------------------
-      // define local constants 
-      //-------------------------------------------------------
-      const double ALTDOT_FPM     = altDotCmdFpm;
-      const double ALTDOT_MPS     = ALTDOT_FPM * (Basic::Distance::FT2M / Basic::Time::M2S);
-      const double ALTDOT_BRK_MPS = ALTDOT_MPS;
-      const double ALTERR_BRK_FT  = 100.0;
-      const double ALTERR_BRK_MTR = ALTERR_BRK_FT * Basic::Distance::FT2M;
-      const double TAU            = 4.0;  // time constant [sec]
+   //bool ok = (pPlr != 0);
+   //if (ok) {
+   //
+   //   //-------------------------------------------------------
+   //   // define local constants 
+   //   //-------------------------------------------------------
+   //   const double ALTDOT_FPM     = altDotCmdFpm;
+   //   const double ALTDOT_MPS     = ALTDOT_FPM * (Basic::Distance::FT2M / Basic::Time::M2S);
+   //   const double ALTDOT_BRK_MPS = ALTDOT_MPS;
+   //   const double ALTERR_BRK_FT  = 100.0;
+   //   const double ALTERR_BRK_MTR = ALTERR_BRK_FT * Basic::Distance::FT2M;
+   //   const double TAU            = 4.0;  // time constant [sec]
 
-      //-------------------------------------------------------
-      // get current alt error (mtr)
-      //-------------------------------------------------------
-      double altFt     = pPlr->getAltitudeFt();
-      double altErrFt  = altCmdFt - altFt;
-      double altErrMtr = altErrFt * Basic::Distance::FT2M;
+   //   //-------------------------------------------------------
+   //   // get current alt error (mtr)
+   //   //-------------------------------------------------------
+   //   double altFt     = pPlr->getAltitudeFt();
+   //   double altErrFt  = altCmdFt - altFt;
+   //   double altErrMtr = altErrFt * Basic::Distance::FT2M;
 
-      //-------------------------------------------------------
-      // get alt error break point (mtr)
-      //-------------------------------------------------------   
-      double altDotCmdMps = altDotCmdFpm * Basic::Distance::FT2M / Basic::Time::M2S;
-      double altErrBrkMtr = altDotCmdMps * TAU;
+   //   //-------------------------------------------------------
+   //   // get alt error break point (mtr)
+   //   //-------------------------------------------------------   
+   //   double altDotCmdMps = altDotCmdFpm * Basic::Distance::FT2M / Basic::Time::M2S;
+   //   double altErrBrkMtr = altDotCmdMps * TAU;
 
-      //-------------------------------------------------------
-      // get commanded altDot (mps) 
-      //-------------------------------------------------------
-      double altDotMps = sign(altErrMtr) * altDotCmdMps;
-      if (std::abs(altErrMtr) < altErrBrkMtr) {
-         altDotMps = altErrMtr * (altDotCmdMps / altErrBrkMtr);
-      }
+   //   //-------------------------------------------------------
+   //   // get commanded altDot (mps) 
+   //   //-------------------------------------------------------
+   //   double altDotMps = sign(altErrMtr) * altDotCmdMps;
+   //   if (std::abs(altErrMtr) < altErrBrkMtr) {
+   //      altDotMps = altErrMtr * (altDotCmdMps / altErrBrkMtr);
+   //   }
 
-      //-------------------------------------------------------
-      // assign result to altitude control
-      //-------------------------------------------------------
-      double thtCmdDeg = (altDotMps / u) * Basic::Angle::R2DCC;
-      ok = flyTht(thtCmdDeg);
-   }
+   //   //-------------------------------------------------------
+   //   // assign result to altitude control
+   //   //-------------------------------------------------------
+   //   double thtCmdDeg = (altDotMps / u) * Basic::Angle::R2DCC;
+   //   ok = flyTht(thtCmdDeg);
+   //}
 
-   return ok;
-}
+   //return ok;
+//}
 
 //==============================================================================
 //bool Dyn4DofModel::flySRT(const TurnDir td)
@@ -606,12 +606,12 @@ bool Dyn4DofModel::flyALT(const double altCmdFt, const double altDotCmdFpm)
 //      // get current data
 //      //----------------------------------------------------
 //      double velMps    = pPlr->getTotalVelocity();   
-//      double phiCmdRad = std::atan2(velMps*SRT_RPS, AOG_MPS2);
+//      double phiCmdRad = std::atan2(velMps*SRT_RPS, Eaagles::ETHGM);
 //      if (phiCmdRad > MAX_BANK_RAD) {
 //         phiCmdRad = MAX_BANK_RAD;
 //      }
 //
-//      double psiDotCmdRps = AOG_MPS2 * std::tan(phiCmdRad) / velMps;
+//      double psiDotCmdRps = Eaagles::ETHGM * std::tan(phiCmdRad) / velMps;
 //
 //      if (td == LEFT) {
 //         phiCmdRad    = -phiCmdRad;
@@ -659,7 +659,7 @@ bool Dyn4DofModel::flyALT(const double altCmdFt, const double altDotCmdFpm)
 //      //-------------------------------------------------------
 //      // get absolute heading rate of change (hdgDotAbsDps) 
 //      //-------------------------------------------------------
-//      double hdgDotMaxAbsRps = AOG_MPS2 * std::tan(MAX_BANK_RAD) / velMps;
+//      double hdgDotMaxAbsRps = Eaagles::ETHGM * std::tan(MAX_BANK_RAD) / velMps;
 //      double hdgDotMaxAbsDps = hdgDotMaxAbsRps * Basic::Angle::R2DCC;
 //
 //      double hdgDotAbsDps = hdgDotCmdDps;
@@ -682,7 +682,7 @@ bool Dyn4DofModel::flyALT(const double altCmdFt, const double altDotCmdFpm)
 //      //-------------------------------------------------------
 //      // define bank angle as a function of turn rate
 //      //-------------------------------------------------------
-//      double phiCmdDeg = std::atan2(psiDot * velMps, AOG_MPS2) * Basic::Angle::R2DCC;
+//      double phiCmdDeg = std::atan2(psiDot * velMps, Eaagles::ETHGM) * Basic::Angle::R2DCC;
 //      ok = flyPhi(phiCmdDeg);
 //   }
 //
@@ -723,7 +723,7 @@ bool Dyn4DofModel::flyCRS(const double latDeg, const double lonDeg, const double
    //   double posErrDeg = Basic::Angle::aepcdDeg(brgDeg - crsDeg);
    //   double posErrRad = posErrDeg * Basic::Angle::D2RCC;
 
-   //   double rocMtr    = velMps * velMps / AOG_MPS2 / std::tan(MAX_BANK_RAD);
+   //   double rocMtr    = velMps * velMps / Eaagles::ETHGM / std::tan(MAX_BANK_RAD);
    //   double rocNM     = rocMtr * Basic::Distance::M2NM;
 
    //   double xtRngNM   = std::fabs(distNM * std::sin(posErrRad));
@@ -854,7 +854,7 @@ bool Dyn4DofModel::flyCRS(const double latDeg, const double lonDeg, const double
    //   //----------------------------------------------------
    //   double velMps    = pPlr->getTotalVelocity();
    //   double hdgDeg    = pPlr->getHeadingD();
-   //   double rocMtr    = velMps * velMps / AOG_MPS2 / std::tan(MAX_BANK_RAD);
+   //   double rocMtr    = velMps * velMps / Eaagles::ETHGM / std::tan(MAX_BANK_RAD);
    //   double rocNM     = rocMtr * Basic::Distance::M2NM;
    //   double obCrsDeg  = Basic::Angle::aepcdDeg(inboundCrs + 180.0);
 
@@ -1007,10 +1007,10 @@ bool Dyn4DofModel::flyCRS(const double latDeg, const double lonDeg, const double
    //   double osLatDeg  = pPlr->getLatitude();
    //   double osLonDeg  = pPlr->getLongitude();
    //   double velMps    = pPlr->getTotalVelocity();
-   //   double phiCmdRad = std::atan2(velMps * SRT_RPS, AOG_MPS2);
+   //   double phiCmdRad = std::atan2(velMps * SRT_RPS, Eaagles::ETHGM);
    //   if (phiCmdRad > MAX_BANK_RAD) { phiCmdRad = MAX_BANK_RAD; }
 
-   //   double rocMtr    = velMps * velMps / (AOG_MPS2 * std::tan(phiCmdRad));
+   //   double rocMtr    = velMps * velMps / (Eaagles::ETHGM * std::tan(phiCmdRad));
    //   double rocNM     = rocMtr * Basic::Distance::M2NM;
    //   double xtDistNM  = 2.0 * rocNM;
    //   double obTimeSec = 2.0 * Basic::Time::M2S;
@@ -1061,7 +1061,7 @@ bool Dyn4DofModel::setCommandedHeadingD(const double h, const double hDps, const
       //-------------------------------------------------------
       // get absolute heading rate of change (hdgDotAbsDps) 
       //-------------------------------------------------------
-      double hdgDotMaxAbsRps = AOG_MPS2 * std::tan(MAX_BANK_RAD) / velMps;
+      double hdgDotMaxAbsRps = Eaagles::ETHGM * std::tan(MAX_BANK_RAD) / velMps;
       double hdgDotMaxAbsDps = hdgDotMaxAbsRps * Basic::Angle::R2DCC;
 
       double hdgDotAbsDps = hDps;
@@ -1083,17 +1083,61 @@ bool Dyn4DofModel::setCommandedHeadingD(const double h, const double hDps, const
       //-------------------------------------------------------
       // define bank angle as a function of turn rate
       //-------------------------------------------------------
-      double phiCmdDeg = std::atan2(psiDot * velMps, AOG_MPS2) * Basic::Angle::R2DCC;
+      double phiCmdDeg = std::atan2(psiDot * velMps, Eaagles::ETHGM) * Basic::Angle::R2DCC;
       ok = flyPhi(phiCmdDeg);
    }
 
    return ok;
 }
-// Dynamics model interface
-bool Dyn4DofModel::setCommandedAltitude(const double h)    
+// Dynamics model interface - all input values in meters
+bool Dyn4DofModel::setCommandedAltitude(const double a, const double aMps)    
 { 
-   flyALT(h);
-   return true; 
+   //-------------------------------------------------------
+   // get data pointers 
+   //-------------------------------------------------------
+   Simulation::Player* pPlr = static_cast<Simulation::Player*>( findContainerByType(typeid(Simulation::Player)) );
+
+   bool ok = (pPlr != 0);
+   if (ok) {
+   
+      //-------------------------------------------------------
+      // define local constants 
+      //-------------------------------------------------------
+      const double ALTDOT_MPS     = aMps;
+      const double ALTDOT_BRK_MPS = ALTDOT_MPS;
+      const double ALTERR_BRK_MTR = 100 * Basic::Distance::FT2M;
+      const double TAU            = 4.0;  // time constant [sec]
+
+      //-------------------------------------------------------
+      // get current alt error (mtr)
+      //-------------------------------------------------------
+      double altMtr     = pPlr->getAltitude();
+      double altErrMtr = a - altMtr;
+      //double altErrFt  = altCmdFt - altFt;
+      //double altErrMtr = altErrFt * Basic::Distance::FT2M;
+
+      //-------------------------------------------------------
+      // get alt error break point (mtr)
+      //-------------------------------------------------------   
+      //double altDotCmdMps = aMps * Basic::Distance::FT2M / Basic::Time::M2S;
+      double altErrBrkMtr = aMps * TAU;
+
+      //-------------------------------------------------------
+      // get commanded altDot (mps) 
+      //-------------------------------------------------------
+      double altDotMps = sign(altErrMtr) * aMps;
+      if (std::abs(altErrMtr) < altErrBrkMtr) {
+         altDotMps = altErrMtr * (aMps / altErrBrkMtr);
+      }
+
+      //-------------------------------------------------------
+      // assign result to altitude control
+      //-------------------------------------------------------
+      double thtCmdDeg = (altDotMps / u) * Basic::Angle::R2DCC;
+      ok = flyTht(thtCmdDeg);
+   }
+
+   return ok;
 }
 bool Dyn4DofModel::setCommandedVelocityKts(const double a)
 {

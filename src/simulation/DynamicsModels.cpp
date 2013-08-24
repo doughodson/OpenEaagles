@@ -145,7 +145,7 @@ bool DynamicsModel::setAltitudeHoldOn(const bool)
 }
 
 // setCommandedAltitude() --   Sets commanded altitude (meters)
-bool DynamicsModel::setCommandedAltitude(const double)
+bool DynamicsModel::setCommandedAltitude(const double, const double)
 {
    return false;
 }
