@@ -36,8 +36,8 @@ const double Dyn4DofModel::HALF_PI             = PI / 2.0;
 const double Dyn4DofModel::EPSILON             = 1.0E-10;
 const double Dyn4DofModel::AOG_FPS2            = Eaagles::ETHG;
 const double Dyn4DofModel::AOG_MPS2            = AOG_FPS2 * 0.3048;
-const double Dyn4DofModel::STD_RATE_TURN_DPS   = 3.0;
-const double Dyn4DofModel::MAX_BANK_DEG        = 30.0;
+//const double Dyn4DofModel::STD_RATE_TURN_DPS   = 3.0;
+//const double Dyn4DofModel::MAX_BANK_DEG        = 30.0;
 
 //----------------------------------------------------------
 // Constructor(s)
@@ -54,15 +54,15 @@ Dyn4DofModel::Dyn4DofModel()
 void Dyn4DofModel::initData()
 {
    // Loiter variables
-   turnDir    = RIGHT;
-   entryMode  = PREENTRY;
-   entryPhase = 0;
-   isInbound  = false;
-   inboundCrs = 0.0;
-   anchorLat  = 0.1;
-   anchorLon  = 0.1;
-   mirrorLat  = 0.0;
-   mirrorLon  = 0.0;
+   //turnDir    = RIGHT;
+   //entryMode  = PREENTRY;
+   //entryPhase = 0;
+   //isInbound  = false;
+   //inboundCrs = 0.0;
+   //anchorLat  = 0.1;
+   //anchorLon  = 0.1;
+   //mirrorLat  = 0.0;
+   //mirrorLon  = 0.0;
    acftSpeed  = 0.0;
 
    // Body angular vel, acc components
@@ -126,15 +126,15 @@ void Dyn4DofModel::copyData(const Dyn4DofModel& org, const bool cc)
    if (cc) initData();
 
    // Loiter variables
-   turnDir    = org.turnDir;
-   entryMode  = org.entryMode;
-   entryPhase = org.entryPhase;
-   isInbound  = org.isInbound;
-   inboundCrs = org.inboundCrs;
-   anchorLat  = org.anchorLat;
-   anchorLon  = org.anchorLon;
-   mirrorLat  = org.mirrorLat;
-   mirrorLon  = org.mirrorLon;
+   //turnDir    = org.turnDir;
+   //entryMode  = org.entryMode;
+   //entryPhase = org.entryPhase;
+   //isInbound  = org.isInbound;
+   //inboundCrs = org.inboundCrs;
+   //anchorLat  = org.anchorLat;
+   //anchorLon  = org.anchorLon;
+   //mirrorLat  = org.mirrorLat;
+   //mirrorLon  = org.mirrorLon;
    acftSpeed  = org.acftSpeed;
 
    // Body angular vel, acc components
@@ -586,53 +586,455 @@ bool Dyn4DofModel::flyALT(const double altCmdFt, const double altDotCmdFpm)
 }
 
 //==============================================================================
-bool Dyn4DofModel::flySRT(const TurnDir td)
+//bool Dyn4DofModel::flySRT(const TurnDir td)
+//{
+//   //-------------------------------------------------------
+//   // get data pointers 
+//   //-------------------------------------------------------
+//   Simulation::Player* pPlr = static_cast<Simulation::Player*>( findContainerByType(typeid(Simulation::Player)) );
+//
+//   bool ok = (pPlr != 0);
+//   if (ok) {
+//   
+//      //----------------------------------------------------
+//      // define local constants 
+//      //----------------------------------------------------
+//      const double MAX_BANK_RAD  = MAX_BANK_DEG * Basic::Angle::D2RCC;
+//      const double SRT_RPS       = STD_RATE_TURN_DPS * Basic::Angle::D2RCC;
+//
+//      //----------------------------------------------------
+//      // get current data
+//      //----------------------------------------------------
+//      double velMps    = pPlr->getTotalVelocity();   
+//      double phiCmdRad = std::atan2(velMps*SRT_RPS, AOG_MPS2);
+//      if (phiCmdRad > MAX_BANK_RAD) {
+//         phiCmdRad = MAX_BANK_RAD;
+//      }
+//
+//      double psiDotCmdRps = AOG_MPS2 * std::tan(phiCmdRad) / velMps;
+//
+//      if (td == LEFT) {
+//         phiCmdRad    = -phiCmdRad;
+//         psiDotCmdRps = -psiDotCmdRps;
+//      }
+//
+//      //-------------------------------------------------------
+//      // assign result to altitude control
+//      //-------------------------------------------------------
+//      double phiCmdDeg = phiCmdRad * Basic::Angle::R2DCC;
+//      ok = flyPhi(phiCmdDeg);
+//      
+//      psiDot = psiDotCmdRps;
+//   }
+//   
+//   return ok;
+//}
+
+////==============================================================================
+//bool Dyn4DofModel::flyHDG(const double hdgCmdDeg, const double hdgDotCmdDps)
+//{
+//   //-------------------------------------------------------
+//   // get data pointers 
+//   //-------------------------------------------------------
+//   Simulation::Player* pPlr = static_cast<Simulation::Player*>( findContainerByType(typeid(Simulation::Player)) );
+//
+//   bool ok = (pPlr != 0);
+//   if (ok) {
+//   
+//      //----------------------------------------------------
+//      // define local constants 
+//      //----------------------------------------------------
+//      const double MAX_BANK_RAD = MAX_BANK_DEG * Basic::Angle::D2RCC;
+//      //const double TAU = 2.0;  // time constant [sec]
+//      const double TAU = 1.0;  // time constant [sec]
+//
+//      //-------------------------------------------------------
+//      // get current data
+//      //-------------------------------------------------------   
+//      double velMps        = pPlr->getTotalVelocity();
+//      double hdgDeg        = pPlr->getHeadingD();
+//      double hdgErrDeg     = Basic::Angle::aepcdDeg(hdgCmdDeg - hdgDeg);
+//      double hdgErrAbsDeg  = std::fabs(hdgErrDeg);
+//
+//      //-------------------------------------------------------
+//      // get absolute heading rate of change (hdgDotAbsDps) 
+//      //-------------------------------------------------------
+//      double hdgDotMaxAbsRps = AOG_MPS2 * std::tan(MAX_BANK_RAD) / velMps;
+//      double hdgDotMaxAbsDps = hdgDotMaxAbsRps * Basic::Angle::R2DCC;
+//
+//      double hdgDotAbsDps = hdgDotCmdDps;
+//      if (hdgDotAbsDps > hdgDotMaxAbsDps) {
+//         hdgDotAbsDps = hdgDotMaxAbsDps;
+//      }
+//
+//      double hdgErrBrkAbsDeg = TAU * hdgDotAbsDps;
+//      if (hdgErrAbsDeg < hdgErrBrkAbsDeg) {
+//         hdgDotAbsDps = hdgErrAbsDeg / TAU;
+//      }
+//
+//      //-------------------------------------------------------
+//      // define direction of heading rate of change (hsdDotDps)
+//      //-------------------------------------------------------
+//      double hdgDotDps = sign(hdgErrDeg) * hdgDotAbsDps;
+//      psiDot = hdgDotDps * Basic::Angle::D2RCC;
+//      //flyPsi(hdgCmdDeg, hdgDotDps);
+//
+//      //-------------------------------------------------------
+//      // define bank angle as a function of turn rate
+//      //-------------------------------------------------------
+//      double phiCmdDeg = std::atan2(psiDot * velMps, AOG_MPS2) * Basic::Angle::R2DCC;
+//      ok = flyPhi(phiCmdDeg);
+//   }
+//
+//   return ok;
+//}
+
+//==============================================================================
+bool Dyn4DofModel::flyCRS(const double latDeg, const double lonDeg, const double crsDeg)
 {
-   //-------------------------------------------------------
-   // get data pointers 
-   //-------------------------------------------------------
-   Simulation::Player* pPlr = static_cast<Simulation::Player*>( findContainerByType(typeid(Simulation::Player)) );
+   ////-------------------------------------------------------
+   //// get data pointers 
+   ////-------------------------------------------------------
+   //Simulation::Player* pPlr = static_cast<Simulation::Player*>( findContainerByType(typeid(Simulation::Player)) );
 
-   bool ok = (pPlr != 0);
-   if (ok) {
-   
-      //----------------------------------------------------
-      // define local constants 
-      //----------------------------------------------------
-      const double MAX_BANK_RAD  = MAX_BANK_DEG * Basic::Angle::D2RCC;
-      const double SRT_RPS       = STD_RATE_TURN_DPS * Basic::Angle::D2RCC;
+   //bool ok = (pPlr != 0);
+   //if (ok) {
+   //
+   //   //----------------------------------------------------
+   //   // define local constants 
+   //   //----------------------------------------------------
+   //   const double MAX_BANK_RAD = MAX_BANK_DEG * Basic::Angle::D2RCC;
+   //   const double OFFSET_MTR   = 20.0;
 
-      //----------------------------------------------------
-      // get current data
-      //----------------------------------------------------
-      double velMps    = pPlr->getTotalVelocity();   
-      double phiCmdRad = std::atan2(velMps*SRT_RPS, AOG_MPS2);
-      if (phiCmdRad > MAX_BANK_RAD) {
-         phiCmdRad = MAX_BANK_RAD;
-      }
+   //   //----------------------------------------------------
+   //   // get current data
+   //   //----------------------------------------------------
+   //   double velMps = pPlr->getTotalVelocity();
+   //   double hdgDeg = pPlr->getHeadingD();
+   //   double osLat  = pPlr->getLatitude();
+   //   double osLon  = pPlr->getLongitude();
+   //   double brgDeg = 0.0;
+   //   double distNM = 0.0;
+   //   Basic::Nav::fll2bd(osLat, osLon, latDeg, lonDeg, &brgDeg, &distNM);
 
-      double psiDotCmdRps = AOG_MPS2 * std::tan(phiCmdRad) / velMps;
+   //   //-------------------------------------------------------
+   //   // get current gama error (deg)
+   //   //-------------------------------------------------------   
+   //   double posErrDeg = Basic::Angle::aepcdDeg(brgDeg - crsDeg);
+   //   double posErrRad = posErrDeg * Basic::Angle::D2RCC;
 
-      if (td == LEFT) {
-         phiCmdRad    = -phiCmdRad;
-         psiDotCmdRps = -psiDotCmdRps;
-      }
+   //   double rocMtr    = velMps * velMps / AOG_MPS2 / std::tan(MAX_BANK_RAD);
+   //   double rocNM     = rocMtr * Basic::Distance::M2NM;
 
-      //-------------------------------------------------------
-      // assign result to altitude control
-      //-------------------------------------------------------
-      double phiCmdDeg = phiCmdRad * Basic::Angle::R2DCC;
-      ok = flyPhi(phiCmdDeg);
-      
-      psiDot = psiDotCmdRps;
-   }
-   
-   return ok;
+   //   double xtRngNM   = std::fabs(distNM * std::sin(posErrRad));
+   //   double xtRngMtr  = xtRngNM * Basic::Distance::NM2M;
+   //   double xtRngRoc  = xtRngMtr / rocMtr;
+
+   //   double hdgCmdDeg = hdgDeg;
+   //   if (xtRngRoc >= 1.2) {
+   //      hdgCmdDeg = sign(posErrDeg) * 90.0 + crsDeg;
+   //   }
+   //   else {
+   //      double x = 1.0 - xtRngRoc;
+   //      if (x >  1.0) x =  1.0;
+   //      if (x < -1.0) x = -1.0;
+   //      double alfaDeg = std::acos(x) * Basic::Angle::R2DCC;
+
+   //      double y = (rocMtr - OFFSET_MTR) / rocMtr;
+   //      double betaDeg = std::acos(y) * Basic::Angle::R2DCC;
+
+   //      double gamaDeg = sign(posErrDeg) * (alfaDeg - betaDeg);
+   //      hdgCmdDeg = Basic::Angle::aepcdDeg(gamaDeg + crsDeg);
+   //   }
+
+   //   //-------------------------------------------------------
+   //   // fly to heading necessary to follow commanded course
+   //   //-------------------------------------------------------
+   //   ok = flyHDG(hdgCmdDeg);
+   //}
+
+   //return ok;
+   return true;
 }
 
 //==============================================================================
-bool Dyn4DofModel::flyHDG(const double hdgCmdDeg, const double hdgDotCmdDps)
-{
+//bool Dyn4DofModel::fly2LL(const double latDeg, const double lonDeg)
+//{
+//   //-------------------------------------------------------
+//   // get data pointers 
+//   //-------------------------------------------------------
+//   Simulation::Player* pPlr = static_cast<Simulation::Player*>( findContainerByType(typeid(Simulation::Player)) );
+//
+//   bool ok = (pPlr != 0);
+//   if (ok) {
+//   
+//      //----------------------------------------------------
+//      // get current data
+//      //----------------------------------------------------
+//      double osLatDeg  = pPlr->getLatitude();
+//      double osLonDeg  = pPlr->getLongitude();
+//      double brgDeg = 0.0;
+//      double rngMtr = 0.0;
+//      Basic::Nav::gll2bd(osLatDeg, osLonDeg, latDeg, lonDeg, &brgDeg,&rngMtr);
+//
+//      //-------------------------------------------------------
+//      // fly to heading necessary to intercept lat/lon
+//      //-------------------------------------------------------
+//      ok = flyHDG(brgDeg);
+//   }
+//
+//   return ok;
+//}
+
+//==============================================================================
+//bool Dyn4DofModel::flyLoiter()
+//{
+   ////-------------------------------------------------------
+   //// get data pointers 
+   ////-------------------------------------------------------
+   //Simulation::Player* pPlr = static_cast<Simulation::Player*>( findContainerByType(typeid(Simulation::Player)) );
+
+   //bool ok = (pPlr != 0);
+   //if (ok) {
+   //
+   //   // get current data
+   //   double osLatDeg = pPlr->getLatitude();
+   //   double osLonDeg = pPlr->getLongitude();
+   //   double obCrs    = Basic::Angle::aepcdDeg(inboundCrs + 180.0);
+   //   calcMirrorLatLon();
+
+   //   double brgDeg = 0.0;
+   //   double distNM = 0.0;
+   //   if (isInbound) {
+   //      ok = Basic::Nav::fll2bd(osLatDeg, osLonDeg, anchorLat, anchorLon, &brgDeg, &distNM);
+   //   }
+   //   else {
+   //      ok = Basic::Nav::fll2bd(osLatDeg, osLonDeg, mirrorLat, mirrorLon, &brgDeg, &distNM);
+   //   }
+
+   //   // get position error to determine inbound or outbound
+   //   double posErrDeg = 0.0;
+   //   if (isInbound) {
+   //      std::cout << "Inbound" << std::endl;
+   //      ok = flyCRS(anchorLat, anchorLon, inboundCrs);
+   //      posErrDeg = Basic::Angle::aepcdDeg(brgDeg - inboundCrs);
+   //      if (std::fabs(posErrDeg) > 90.0) { isInbound = false; }
+   //   }
+   //   else {
+   //      std::cout << "Outbound" << std::endl;
+   //      ok = flyCRS(mirrorLat, mirrorLon, obCrs);
+   //      posErrDeg = Basic::Angle::aepcdDeg(brgDeg - obCrs);
+   //      if (std::fabs(posErrDeg) > 90.0) { isInbound = true; }
+   //   }
+   //}
+
+   //return ok;
+//   return true;
+//}
+
+//==============================================================================
+//bool Dyn4DofModel::flyEntry(double aLat, double aLon)
+//{
+   ////-------------------------------------------------------
+   //// get data pointers 
+   ////-------------------------------------------------------
+   //Simulation::Player* pPlr = static_cast<Simulation::Player*>( findContainerByType(typeid(Simulation::Player)) );
+
+   //bool ok = (pPlr != 0);
+   //if (ok) {
+   //
+   //   //----------------------------------------------------
+   //   // define local constants 
+   //   //----------------------------------------------------
+   //   const double MAX_BANK_RAD = MAX_BANK_DEG * Basic::Angle::D2RCC;
+   //   const double OFFSET_MTR   = 20.0;
+
+   //   //----------------------------------------------------
+   //   // get current data
+   //   //----------------------------------------------------
+   //   double velMps    = pPlr->getTotalVelocity();
+   //   double hdgDeg    = pPlr->getHeadingD();
+   //   double rocMtr    = velMps * velMps / AOG_MPS2 / std::tan(MAX_BANK_RAD);
+   //   double rocNM     = rocMtr * Basic::Distance::M2NM;
+   //   double obCrsDeg  = Basic::Angle::aepcdDeg(inboundCrs + 180.0);
+
+   //   double osLatDeg  = pPlr->getLatitude();
+   //   double osLonDeg  = pPlr->getLongitude();
+
+   //   double brgDeg    = 0.0;
+   //   double distNM    = 0.0;
+   //   Basic::Nav::fll2bd(osLatDeg, osLonDeg, anchorLat, anchorLon, &brgDeg, &distNM);
+
+   //   double hdgErrDeg = Basic::Angle::aepcdDeg(hdgDeg - inboundCrs);
+   //   double posErrDeg = Basic::Angle::aepcdDeg(brgDeg - inboundCrs);
+   //   double distCmdNM = 0;
+   //   double hdgCmdDeg = 0;
+
+   //   switch (entryMode) {
+   //      //-----------------------------------------------------------
+   //      case PREENTRY:
+   //      {
+   //         std::cout << "PREENTRY" << std::endl;
+   //         if (entryPhase == 0) {
+   //            anchorLat = aLat;
+   //            anchorLon = aLon;
+   //            ok = fly2LL(anchorLat, anchorLon);
+   //            if (distNM < 0.1) {
+   //               entryPhase = 1;
+   //               if (turnDir == RIGHT) {
+   //                  if      (hdgErrDeg < -70.0)  { entryMode = PARALLEL; }
+   //                  else if (hdgErrDeg < 110.0)  { entryMode = DIRECT; }
+   //                  else                         { entryMode = TEARDROP; }
+   //               }
+   //               else {
+   //                  if      (hdgErrDeg < -110.0) { entryMode = TEARDROP; }
+   //                  else if (hdgErrDeg <  70.0)  { entryMode = DIRECT; }
+   //                  else                         { entryMode = PARALLEL; }
+   //               }
+   //            }
+   //         }
+   //      }
+   //      break;  // end case PREENTRY
+
+   //      //-----------------------------------------------------------
+   //      case DIRECT:
+   //      {
+   //         std::cout << "DIRECT" << std::endl;
+   //         if (entryPhase == 1) {
+   //            ok = flySRT(turnDir);
+   //            if (std::fabs(hdgErrDeg) > 90.0) {
+   //               entryMode = LOITER;
+   //               entryPhase = 0;
+   //            }
+   //         }
+   //      }
+   //      break;  // end case DIRECT
+
+   //      //-----------------------------------------------------------
+   //      case PARALLEL:
+   //      {
+   //         std::cout << "PARALLEL" << std::endl;
+   //         if (entryPhase == 1) {
+   //            ok = flyHDG(obCrsDeg);
+   //            //distCmdNM = velMps * 60.0 * Basic::Distance::M2NM;  // 1 min = 60 sec
+   //            distCmdNM = 4.0 * rocNM;  // 1/tan(15 deg) = 0.268 = 3.732 ~= 4.0
+   //            if (distNM > distCmdNM) { entryPhase = 2; }
+   //         }
+   //         else if (entryPhase == 2) {
+   //            if (turnDir == RIGHT) { ok = flySRT(LEFT); }
+   //            else                  { ok = flySRT(RIGHT); }
+   //            if (std::fabs(hdgErrDeg) < 90.0) { 
+   //               entryPhase = 3;
+   //            }
+   //         }
+   //         else if (entryPhase == 3) {
+   //            ok = flyCRS(anchorLat, anchorLon, inboundCrs);
+   //            if (distNM < 0.1) {
+   //               entryMode = LOITER;
+   //               entryPhase = 0;
+   //            }
+   //         }
+   //      }
+   //      break;  // end case PARALLEL
+
+   //      //-----------------------------------------------------------
+   //      case TEARDROP:
+   //      {
+   //         std::cout << "TEARDROP" << std::endl;
+   //         if (entryPhase == 1) {
+   //            if (turnDir == RIGHT) { hdgCmdDeg = Basic::Angle::aepcdDeg(obCrsDeg - 30.0); }
+   //            else                  { hdgCmdDeg = Basic::Angle::aepcdDeg(obCrsDeg + 30.0); }
+   //            flyHDG(hdgCmdDeg);
+   //            //distCmdNM = velMps * 60.0 * Basic::Distance::M2NM;  // 1 min = 60 sec
+   //            distCmdNM = 4.0 * rocNM;  // 1/tan(15 deg) = 0.268 = 3.732 ~= 4.0
+   //            if (distNM > distCmdNM) { entryPhase = 2; }
+   //         }
+   //         else if (entryPhase == 2) {
+   //            flySRT(turnDir); 
+   //            if (std::fabs(hdgErrDeg) < 90.0) {
+   //               entryPhase = 3;
+   //            }
+   //         }
+   //         else if (entryPhase == 3) {
+   //            flyCRS(anchorLat, anchorLon, inboundCrs);
+   //            if (distNM < 0.1) {
+   //               entryMode = LOITER;
+   //               entryPhase = 0;
+   //            }
+   //         }
+   //      }
+   //      break;  // end case TEARDROP
+
+   //      //-----------------------------------------------------------
+   //      case LOITER:
+   //      {
+   //         std::cout << "LOITER" << std::endl;
+   //         flyLoiter();
+   //      }
+   //      break;  // end case LOITER
+
+   //      //-----------------------------------------------------------
+   //      default:
+   //         break;
+   //   }  // end switch
+   //}
+
+   //return ok;
+//   return true;
+//}
+
+
+//==============================================================================
+//bool Dyn4DofModel::calcMirrorLatLon()
+//{
+   ////-------------------------------------------------------
+   //// get data pointers 
+   ////-------------------------------------------------------
+   //Simulation::Player* pPlr = static_cast<Simulation::Player*>( findContainerByType(typeid(Simulation::Player)) );
+
+   //bool ok = (pPlr != 0);
+   //if (ok) {
+   //
+   //   //----------------------------------------------------
+   //   // define local constants
+   //   //----------------------------------------------------
+   //   const double MAX_BANK_RAD  = MAX_BANK_DEG * Basic::Angle::D2RCC;
+   //   const double SRT_RPS       = STD_RATE_TURN_DPS * Basic::Angle::D2RCC;
+
+   //   //----------------------------------------------------
+   //   // get current data
+   //   //----------------------------------------------------
+   //   double osLatDeg  = pPlr->getLatitude();
+   //   double osLonDeg  = pPlr->getLongitude();
+   //   double velMps    = pPlr->getTotalVelocity();
+   //   double phiCmdRad = std::atan2(velMps * SRT_RPS, AOG_MPS2);
+   //   if (phiCmdRad > MAX_BANK_RAD) { phiCmdRad = MAX_BANK_RAD; }
+
+   //   double rocMtr    = velMps * velMps / (AOG_MPS2 * std::tan(phiCmdRad));
+   //   double rocNM     = rocMtr * Basic::Distance::M2NM;
+   //   double xtDistNM  = 2.0 * rocNM;
+   //   double obTimeSec = 2.0 * Basic::Time::M2S;
+   //   double obDistNM  = velMps * obTimeSec * Basic::Distance::M2NM;
+   //   double altFt     = pPlr->getAltitudeFt();
+   //   if (altFt > 14000.0) { obDistNM *= 1.5; }
+
+   //   double distNM    = std::sqrt(xtDistNM*xtDistNM + obDistNM*obDistNM);
+   //   double obCrsDeg  = Basic::Angle::aepcdDeg(inboundCrs + 180.0);
+   //   double brgDeg    = std::atan2(xtDistNM, obDistNM) * Basic::Angle::R2DCC;
+
+   //   if (turnDir == RIGHT) { brgDeg = Basic::Angle::aepcdDeg(obCrsDeg - brgDeg); }
+   //   else                  { brgDeg = Basic::Angle::aepcdDeg(obCrsDeg + brgDeg); }
+   //   
+   //   ok = Basic::Nav::fbd2ll(anchorLat, anchorLon, brgDeg, distNM, &mirrorLat, &mirrorLon);
+   //}
+
+   //return ok;
+//   return true;
+//}
+
+// Dynamics model interface
+bool Dyn4DofModel::setCommandedHeadingD(const double h, const double hDps, const double maxBank)
+{ 
    //-------------------------------------------------------
    // get data pointers 
    //-------------------------------------------------------
@@ -644,7 +1046,7 @@ bool Dyn4DofModel::flyHDG(const double hdgCmdDeg, const double hdgDotCmdDps)
       //----------------------------------------------------
       // define local constants 
       //----------------------------------------------------
-      const double MAX_BANK_RAD = MAX_BANK_DEG * Basic::Angle::D2RCC;
+      const double MAX_BANK_RAD = maxBank * Basic::Angle::D2RCC;
       //const double TAU = 2.0;  // time constant [sec]
       const double TAU = 1.0;  // time constant [sec]
 
@@ -653,7 +1055,7 @@ bool Dyn4DofModel::flyHDG(const double hdgCmdDeg, const double hdgDotCmdDps)
       //-------------------------------------------------------   
       double velMps        = pPlr->getTotalVelocity();
       double hdgDeg        = pPlr->getHeadingD();
-      double hdgErrDeg     = Basic::Angle::aepcdDeg(hdgCmdDeg - hdgDeg);
+      double hdgErrDeg     = Basic::Angle::aepcdDeg(h - hdgDeg);
       double hdgErrAbsDeg  = std::fabs(hdgErrDeg);
 
       //-------------------------------------------------------
@@ -662,7 +1064,7 @@ bool Dyn4DofModel::flyHDG(const double hdgCmdDeg, const double hdgDotCmdDps)
       double hdgDotMaxAbsRps = AOG_MPS2 * std::tan(MAX_BANK_RAD) / velMps;
       double hdgDotMaxAbsDps = hdgDotMaxAbsRps * Basic::Angle::R2DCC;
 
-      double hdgDotAbsDps = hdgDotCmdDps;
+      double hdgDotAbsDps = hDps;
       if (hdgDotAbsDps > hdgDotMaxAbsDps) {
          hdgDotAbsDps = hdgDotMaxAbsDps;
       }
@@ -677,7 +1079,6 @@ bool Dyn4DofModel::flyHDG(const double hdgCmdDeg, const double hdgDotCmdDps)
       //-------------------------------------------------------
       double hdgDotDps = sign(hdgErrDeg) * hdgDotAbsDps;
       psiDot = hdgDotDps * Basic::Angle::D2RCC;
-      //flyPsi(hdgCmdDeg, hdgDotDps);
 
       //-------------------------------------------------------
       // define bank angle as a function of turn rate
@@ -687,352 +1088,6 @@ bool Dyn4DofModel::flyHDG(const double hdgCmdDeg, const double hdgDotCmdDps)
    }
 
    return ok;
-}
-
-//==============================================================================
-bool Dyn4DofModel::flyCRS(const double latDeg, const double lonDeg, const double crsDeg)
-{
-   //-------------------------------------------------------
-   // get data pointers 
-   //-------------------------------------------------------
-   Simulation::Player* pPlr = static_cast<Simulation::Player*>( findContainerByType(typeid(Simulation::Player)) );
-
-   bool ok = (pPlr != 0);
-   if (ok) {
-   
-      //----------------------------------------------------
-      // define local constants 
-      //----------------------------------------------------
-      const double MAX_BANK_RAD = MAX_BANK_DEG * Basic::Angle::D2RCC;
-      const double OFFSET_MTR   = 20.0;
-
-      //----------------------------------------------------
-      // get current data
-      //----------------------------------------------------
-      double velMps = pPlr->getTotalVelocity();
-      double hdgDeg = pPlr->getHeadingD();
-      double osLat  = pPlr->getLatitude();
-      double osLon  = pPlr->getLongitude();
-      double brgDeg = 0.0;
-      double distNM = 0.0;
-      Basic::Nav::fll2bd(osLat, osLon, latDeg, lonDeg, &brgDeg, &distNM);
-
-      //-------------------------------------------------------
-      // get current gama error (deg)
-      //-------------------------------------------------------   
-      double posErrDeg = Basic::Angle::aepcdDeg(brgDeg - crsDeg);
-      double posErrRad = posErrDeg * Basic::Angle::D2RCC;
-
-      double rocMtr    = velMps * velMps / AOG_MPS2 / std::tan(MAX_BANK_RAD);
-      double rocNM     = rocMtr * Basic::Distance::M2NM;
-
-      double xtRngNM   = std::fabs(distNM * std::sin(posErrRad));
-      double xtRngMtr  = xtRngNM * Basic::Distance::NM2M;
-      double xtRngRoc  = xtRngMtr / rocMtr;
-
-      double hdgCmdDeg = hdgDeg;
-      if (xtRngRoc >= 1.2) {
-         hdgCmdDeg = sign(posErrDeg) * 90.0 + crsDeg;
-      }
-      else {
-         double x = 1.0 - xtRngRoc;
-         if (x >  1.0) x =  1.0;
-         if (x < -1.0) x = -1.0;
-         double alfaDeg = std::acos(x) * Basic::Angle::R2DCC;
-
-         double y = (rocMtr - OFFSET_MTR) / rocMtr;
-         double betaDeg = std::acos(y) * Basic::Angle::R2DCC;
-
-         double gamaDeg = sign(posErrDeg) * (alfaDeg - betaDeg);
-         hdgCmdDeg = Basic::Angle::aepcdDeg(gamaDeg + crsDeg);
-      }
-
-      //-------------------------------------------------------
-      // fly to heading necessary to follow commanded course
-      //-------------------------------------------------------
-      ok = flyHDG(hdgCmdDeg);
-   }
-
-   return ok;
-}
-
-//==============================================================================
-bool Dyn4DofModel::fly2LL(const double latDeg, const double lonDeg)
-{
-   //-------------------------------------------------------
-   // get data pointers 
-   //-------------------------------------------------------
-   Simulation::Player* pPlr = static_cast<Simulation::Player*>( findContainerByType(typeid(Simulation::Player)) );
-
-   bool ok = (pPlr != 0);
-   if (ok) {
-   
-      //----------------------------------------------------
-      // get current data
-      //----------------------------------------------------
-      double osLatDeg  = pPlr->getLatitude();
-      double osLonDeg  = pPlr->getLongitude();
-      double brgDeg = 0.0;
-      double rngMtr = 0.0;
-      Basic::Nav::gll2bd(osLatDeg, osLonDeg, latDeg, lonDeg, &brgDeg,&rngMtr);
-
-      //-------------------------------------------------------
-      // fly to heading necessary to intercept lat/lon
-      //-------------------------------------------------------
-      ok = flyHDG(brgDeg);
-   }
-
-   return ok;
-}
-
-//==============================================================================
-bool Dyn4DofModel::flyLoiter()
-{
-   //-------------------------------------------------------
-   // get data pointers 
-   //-------------------------------------------------------
-   Simulation::Player* pPlr = static_cast<Simulation::Player*>( findContainerByType(typeid(Simulation::Player)) );
-
-   bool ok = (pPlr != 0);
-   if (ok) {
-   
-      // get current data
-      double osLatDeg = pPlr->getLatitude();
-      double osLonDeg = pPlr->getLongitude();
-      double obCrs    = Basic::Angle::aepcdDeg(inboundCrs + 180.0);
-      calcMirrorLatLon();
-
-      double brgDeg = 0.0;
-      double distNM = 0.0;
-      if (isInbound) {
-         ok = Basic::Nav::fll2bd(osLatDeg, osLonDeg, anchorLat, anchorLon, &brgDeg, &distNM);
-      }
-      else {
-         ok = Basic::Nav::fll2bd(osLatDeg, osLonDeg, mirrorLat, mirrorLon, &brgDeg, &distNM);
-      }
-
-      // get position error to determine inbound or outbound
-      double posErrDeg = 0.0;
-      if (isInbound) {
-         std::cout << "Inbound" << std::endl;
-         ok = flyCRS(anchorLat, anchorLon, inboundCrs);
-         posErrDeg = Basic::Angle::aepcdDeg(brgDeg - inboundCrs);
-         if (std::fabs(posErrDeg) > 90.0) { isInbound = false; }
-      }
-      else {
-         std::cout << "Outbound" << std::endl;
-         ok = flyCRS(mirrorLat, mirrorLon, obCrs);
-         posErrDeg = Basic::Angle::aepcdDeg(brgDeg - obCrs);
-         if (std::fabs(posErrDeg) > 90.0) { isInbound = true; }
-      }
-   }
-
-   return ok;
-}
-
-//==============================================================================
-bool Dyn4DofModel::flyEntry(double aLat, double aLon)
-{
-   //-------------------------------------------------------
-   // get data pointers 
-   //-------------------------------------------------------
-   Simulation::Player* pPlr = static_cast<Simulation::Player*>( findContainerByType(typeid(Simulation::Player)) );
-
-   bool ok = (pPlr != 0);
-   if (ok) {
-   
-      //----------------------------------------------------
-      // define local constants 
-      //----------------------------------------------------
-      const double MAX_BANK_RAD = MAX_BANK_DEG * Basic::Angle::D2RCC;
-      const double OFFSET_MTR   = 20.0;
-
-      //----------------------------------------------------
-      // get current data
-      //----------------------------------------------------
-      double velMps    = pPlr->getTotalVelocity();
-      double hdgDeg    = pPlr->getHeadingD();
-      double rocMtr    = velMps * velMps / AOG_MPS2 / std::tan(MAX_BANK_RAD);
-      double rocNM     = rocMtr * Basic::Distance::M2NM;
-      double obCrsDeg  = Basic::Angle::aepcdDeg(inboundCrs + 180.0);
-
-      double osLatDeg  = pPlr->getLatitude();
-      double osLonDeg  = pPlr->getLongitude();
-
-      double brgDeg    = 0.0;
-      double distNM    = 0.0;
-      Basic::Nav::fll2bd(osLatDeg, osLonDeg, anchorLat, anchorLon, &brgDeg, &distNM);
-
-      double hdgErrDeg = Basic::Angle::aepcdDeg(hdgDeg - inboundCrs);
-      double posErrDeg = Basic::Angle::aepcdDeg(brgDeg - inboundCrs);
-      double distCmdNM = 0;
-      double hdgCmdDeg = 0;
-
-      switch (entryMode) {
-         //-----------------------------------------------------------
-         case PREENTRY:
-         {
-            std::cout << "PREENTRY" << std::endl;
-            if (entryPhase == 0) {
-               anchorLat = aLat;
-               anchorLon = aLon;
-               ok = fly2LL(anchorLat, anchorLon);
-               if (distNM < 0.1) {
-                  entryPhase = 1;
-                  if (turnDir == RIGHT) {
-                     if      (hdgErrDeg < -70.0)  { entryMode = PARALLEL; }
-                     else if (hdgErrDeg < 110.0)  { entryMode = DIRECT; }
-                     else                         { entryMode = TEARDROP; }
-                  }
-                  else {
-                     if      (hdgErrDeg < -110.0) { entryMode = TEARDROP; }
-                     else if (hdgErrDeg <  70.0)  { entryMode = DIRECT; }
-                     else                         { entryMode = PARALLEL; }
-                  }
-               }
-            }
-         }
-         break;  // end case PREENTRY
-
-         //-----------------------------------------------------------
-         case DIRECT:
-         {
-            std::cout << "DIRECT" << std::endl;
-            if (entryPhase == 1) {
-               ok = flySRT(turnDir);
-               if (std::fabs(hdgErrDeg) > 90.0) {
-                  entryMode = LOITER;
-                  entryPhase = 0;
-               }
-            }
-         }
-         break;  // end case DIRECT
-
-         //-----------------------------------------------------------
-         case PARALLEL:
-         {
-            std::cout << "PARALLEL" << std::endl;
-            if (entryPhase == 1) {
-               ok = flyHDG(obCrsDeg);
-               //distCmdNM = velMps * 60.0 * Basic::Distance::M2NM;  // 1 min = 60 sec
-               distCmdNM = 4.0 * rocNM;  // 1/tan(15 deg) = 0.268 = 3.732 ~= 4.0
-               if (distNM > distCmdNM) { entryPhase = 2; }
-            }
-            else if (entryPhase == 2) {
-               if (turnDir == RIGHT) { ok = flySRT(LEFT); }
-               else                  { ok = flySRT(RIGHT); }
-               if (std::fabs(hdgErrDeg) < 90.0) { 
-                  entryPhase = 3;
-               }
-            }
-            else if (entryPhase == 3) {
-               ok = flyCRS(anchorLat, anchorLon, inboundCrs);
-               if (distNM < 0.1) {
-                  entryMode = LOITER;
-                  entryPhase = 0;
-               }
-            }
-         }
-         break;  // end case PARALLEL
-
-         //-----------------------------------------------------------
-         case TEARDROP:
-         {
-            std::cout << "TEARDROP" << std::endl;
-            if (entryPhase == 1) {
-               if (turnDir == RIGHT) { hdgCmdDeg = Basic::Angle::aepcdDeg(obCrsDeg - 30.0); }
-               else                  { hdgCmdDeg = Basic::Angle::aepcdDeg(obCrsDeg + 30.0); }
-               flyHDG(hdgCmdDeg);
-               //distCmdNM = velMps * 60.0 * Basic::Distance::M2NM;  // 1 min = 60 sec
-               distCmdNM = 4.0 * rocNM;  // 1/tan(15 deg) = 0.268 = 3.732 ~= 4.0
-               if (distNM > distCmdNM) { entryPhase = 2; }
-            }
-            else if (entryPhase == 2) {
-               flySRT(turnDir); 
-               if (std::fabs(hdgErrDeg) < 90.0) {
-                  entryPhase = 3;
-               }
-            }
-            else if (entryPhase == 3) {
-               flyCRS(anchorLat, anchorLon, inboundCrs);
-               if (distNM < 0.1) {
-                  entryMode = LOITER;
-                  entryPhase = 0;
-               }
-            }
-         }
-         break;  // end case TEARDROP
-
-         //-----------------------------------------------------------
-         case LOITER:
-         {
-            std::cout << "LOITER" << std::endl;
-            flyLoiter();
-         }
-         break;  // end case LOITER
-
-         //-----------------------------------------------------------
-         default:
-            break;
-      }  // end switch
-   }
-
-   return ok;
-}
-
-
-//==============================================================================
-bool Dyn4DofModel::calcMirrorLatLon()
-{
-   //-------------------------------------------------------
-   // get data pointers 
-   //-------------------------------------------------------
-   Simulation::Player* pPlr = static_cast<Simulation::Player*>( findContainerByType(typeid(Simulation::Player)) );
-
-   bool ok = (pPlr != 0);
-   if (ok) {
-   
-      //----------------------------------------------------
-      // define local constants
-      //----------------------------------------------------
-      const double MAX_BANK_RAD  = MAX_BANK_DEG * Basic::Angle::D2RCC;
-      const double SRT_RPS       = STD_RATE_TURN_DPS * Basic::Angle::D2RCC;
-
-      //----------------------------------------------------
-      // get current data
-      //----------------------------------------------------
-      double osLatDeg  = pPlr->getLatitude();
-      double osLonDeg  = pPlr->getLongitude();
-      double velMps    = pPlr->getTotalVelocity();
-      double phiCmdRad = std::atan2(velMps * SRT_RPS, AOG_MPS2);
-      if (phiCmdRad > MAX_BANK_RAD) { phiCmdRad = MAX_BANK_RAD; }
-
-      double rocMtr    = velMps * velMps / (AOG_MPS2 * std::tan(phiCmdRad));
-      double rocNM     = rocMtr * Basic::Distance::M2NM;
-      double xtDistNM  = 2.0 * rocNM;
-      double obTimeSec = 2.0 * Basic::Time::M2S;
-      double obDistNM  = velMps * obTimeSec * Basic::Distance::M2NM;
-      double altFt     = pPlr->getAltitudeFt();
-      if (altFt > 14000.0) { obDistNM *= 1.5; }
-
-      double distNM    = std::sqrt(xtDistNM*xtDistNM + obDistNM*obDistNM);
-      double obCrsDeg  = Basic::Angle::aepcdDeg(inboundCrs + 180.0);
-      double brgDeg    = std::atan2(xtDistNM, obDistNM) * Basic::Angle::R2DCC;
-
-      if (turnDir == RIGHT) { brgDeg = Basic::Angle::aepcdDeg(obCrsDeg - brgDeg); }
-      else                  { brgDeg = Basic::Angle::aepcdDeg(obCrsDeg + brgDeg); }
-      
-      ok = Basic::Nav::fbd2ll(anchorLat, anchorLon, brgDeg, distNM, &mirrorLat, &mirrorLon);
-   }
-
-   return ok;
-}
-
-// Dynamics model interface
-bool Dyn4DofModel::setCommandedHeadingD(const double h)    
-{ 
-   flyHDG(h);
-   return true; 
 }
 // Dynamics model interface
 bool Dyn4DofModel::setCommandedAltitude(const double h)    

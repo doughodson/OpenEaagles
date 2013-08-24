@@ -101,7 +101,7 @@ bool DynamicsModel::setHeadingHoldOn(const bool)
 }
 
 // setCommandedHeadingD() --   Sets commanded heading (true: degs)
-bool DynamicsModel::setCommandedHeadingD(const double)
+bool DynamicsModel::setCommandedHeadingD(const double, const double, const double)
 {
    return false;
 }

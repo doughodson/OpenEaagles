@@ -57,6 +57,11 @@ namespace Simulation {
 //      while requestLoiter() will turn on loiter mode with a given anchor point and course.
 //      setLointer(false) will turn off loiter mode in both cases.
 //
+//   4) Limiting the autopilot inputs using maxBankAngleDegs and maxTurnRateDps will work if the dynamics model can support the limits
+//      as well.  If not, the dynamics model will limit the bank angle and turn rate, and these inputs will have no effect.  For example,
+//      if the user limits the bank angle to 90 degrees, but the dynamics model only support 40, the bank angle will be limited to 40.
+//      These autopilot limits are set as "pilot" limits, not "aircraft" limits.
+//
 //------------------------------------------------------------------------------
 class Autopilot : public Pilot
 {
@@ -64,6 +69,11 @@ class Autopilot : public Pilot
 
 public:
    Autopilot();
+
+
+   // Standard limiting definition
+   static const double STD_RATE_TURN_DPS;      // default to 3.0 degrees per second
+   static const double STD_MAX_BANK_ANGLE;     // default to 30 degrees bank max
 
    virtual bool isHeadingHoldOn() const { return hdgHoldOn; }        // True if heading hold mode
    virtual double getCommandedHeadingD() const { return cmdHdg; }    // Returns the hold heading (degs)
@@ -127,6 +137,7 @@ public:
    virtual bool setPitchSasMode(const bool f);
    virtual bool setYawSasMode(const bool f);
 
+
    // Roll Control Input 
    //      Normalized inputs
    //      roll:  -1.0 -> max left;  0.0 -> center;  1.0 -> max right
@@ -156,18 +167,23 @@ public:
    //          returns the actual number of throttle positions
    virtual int setThrottles(const LCreal* const positions, const unsigned int num);
 
-   // Compute the mirror waypoint for a orbit holding pattern
-   bool computerOrbitHoldingPatternMirrorWaypoint(
-               const double alat,      // In:   Anchor point latitude (degs)
-               const double alon,      // In:   Anchor' point longitude (degs)
-               const double crs,       // In:   In-bound course (degs)
-               const double length,    // In:   Pattern length (nm)
-               const double speed,     // In:   True airspeed speed (kts)
-               const bool ccwFlg,      // In:   True if counter-clockwise orbit (else clockwise orbit)
-               double* const mlat,     // Out:  Mirror point latitude (degs)
-               double* const mlon      // Out:  Mirror point longitude (degs)
-               );
+   //// Compute the mirror waypoint for a orbit holding pattern
+   //bool computerOrbitHoldingPatternMirrorWaypoint(
+   //            const double alat,      // In:   Anchor point latitude (degs)
+   //            const double alon,      // In:   Anchor' point longitude (degs)
+   //            const double crs,       // In:   In-bound course (degs)
+   //            const double length,    // In:   Pattern length (nm)
+   //            const double speed,     // In:   True airspeed speed (kts)
+   //            const bool ccwFlg,      // In:   True if counter-clockwise orbit (else clockwise orbit)
+   //            double* const mlat,     // Out:  Mirror point latitude (degs)
+   //            double* const mlon      // Out:  Mirror point longitude (degs)
+   //            );
 
+   // max turn rate (degrees per second)
+   virtual bool setMaxTurnRateDps(const double x);
+   // maximum bank angle (degrees)
+   virtual bool setMaxBankAngleDeg(const double x);
+   
    // Eaagles::Basic::Component interface methods
    virtual void reset();
     
@@ -192,6 +208,8 @@ protected:
    bool setSlotLeadFollowingDeltaAltitude(const Basic::Number* const msg);    // Desired delta altitude (meters) above(+) the lead
    bool setSlotLeadPlayerName(const Basic::Identifier* const msg);            // Name of the player we are following
    bool setSlotFollowTheLeadMode(const Basic::Number* const msg);             // "Follow the lead" mode flag
+   bool setSlotMaxRateOfTurnDps(const Basic::Number* const msg);              // Maximum turn rate - degrees per second
+   bool setSlotMaxBankAngle(const Basic::Number* const msg);                  // Maximum bank angle - degrees
 
 
    virtual bool modeManager();
@@ -235,14 +253,36 @@ private:
    bool     loiterModeOn;     // Loiter mode flag
 
    // Loiter mode data
-   double   loiterAnchorLat;  // Loiter orbit pattern anchor point latitude  (degs)
-   double   loiterAnchorLon;  // Loiter orbit pattern anchor point longitude (degs)
-   double   loiterMirrorLat;  // Loiter orbit pattern mirror point latitude  (degs)
-   double   loiterMirrorLon;  // Loiter orbit pattern mirror point longitude (degs)
-   unsigned int loiterState;  // Loiter state machine
-   double   loiterLength;     // Loiter pattern length (nm)
-   bool     loiterCcwFlag;    // Loiter pattern counter-clockwise flag 
-   double   loiterCourse;     // Loiter course we started the loiter pattern on (degs)
+   // Entry modes for loiter
+   enum EntryMode { 
+      PREENTRY, 
+      SIMPLE, 
+      DIRECT, 
+      PARALLEL, 
+      TEARDROP, 
+      LOITER
+   };  
+   bool flyLoiterEntry();           // flies our entry pattern into the loiter
+   bool flyLoiter();                // flies the loiter pattern
+   double   loiterAnchorLat;        // Loiter orbit pattern anchor point latitude  (degs)
+   double   loiterAnchorLon;        // Loiter orbit pattern anchor point longitude (degs)
+   double   loiterMirrorLat;        // Loiter orbit pattern mirror point latitude  (degs)
+   double   loiterMirrorLon;        // Loiter orbit pattern mirror point longitude (degs)
+   double   loiterLength;           // Loiter pattern length (nm)
+   bool     loiterCcwFlag;          // Loiter pattern counter-clockwise flag 
+   double   loiterInboundCourse;    // Loiter course we started the loiter pattern on (degs)
+   EntryMode  loiterEntryMode;      // Entry mode into the loiter
+   unsigned int loiterEntryPhase;   // Phase of the entry mode 
+
+   // Pilot limits
+   double maxTurnRateDps;           // maximum turn rate
+   double maxBankAngleDegs;         // maximum bank angle
+
+   // LEE - move this to aerodynamics
+   static const double AOG_FPS2;
+   static const double AOG_MPS2;
+
+
 
    // Follow that lead mode data
    osg::Vec3d leadOffset;     // Offsets from lead player (meters) Default -1NM and 2NM and 2000ft
@@ -250,7 +290,11 @@ private:
    const Basic::Identifier* leadName;   // Name of our lead player
    double leadHdg;            // lead's heading (rad)
    bool   followLeadModeOn;   // Follow the lead mode flag
+
 };
+
+inline bool Autopilot::setMaxTurnRateDps(const double x)    { maxTurnRateDps = x; return true; }
+inline bool Autopilot::setMaxBankAngleDeg(const double x)   { maxBankAngleDegs = x; return true; }
 
 } // End Simulation namespace
 } // End Eaagles namespace

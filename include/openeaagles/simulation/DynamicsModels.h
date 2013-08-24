@@ -46,7 +46,9 @@ public:
     virtual bool isHeadingHoldOn() const;
     virtual double getCommandedHeadingD() const;
     virtual bool setHeadingHoldOn(const bool b);
-    virtual bool setCommandedHeadingD(const double h);
+    // commanded heading now takes the degrees per second rate of heading change and maximum bank angle as
+    // parameters.  It's up to the dynamics model derived class to utilize these for calculating heading
+    virtual bool setCommandedHeadingD(const double h, const double hDps = 0, const double maxBank = 0);
 
     virtual bool isVelocityHoldOn() const;
     virtual double getCommandedVelocityKts() const;

@@ -1,11 +1,11 @@
 
 #include "openeaagles/simulation/Autopilot.h"
+#include "openeaagles/simulation/DynamicsModels.h"
 #include "openeaagles/simulation/Navigation.h"
 #include "openeaagles/simulation/Route.h"
 #include "openeaagles/simulation/Steerpoint.h"
 #include "openeaagles/simulation/Player.h"
 #include "openeaagles/simulation/Simulation.h"
-#include "openeaagles/vehicles/Dyn4DofModel.h"
 #include "openeaagles/basic/Identifier.h"
 #include "openeaagles/basic/LatLon.h"
 #include "openeaagles/basic/List.h"
@@ -19,6 +19,15 @@
 
 namespace Eaagles {
 namespace Simulation {
+
+   const double Autopilot::STD_RATE_TURN_DPS = 3.0f;       // 3.0 degrees per second
+   const double Autopilot::STD_MAX_BANK_ANGLE = 30.0f;     // 30.0 degrees 
+
+// LEE - MOVE THIS 
+   const double Autopilot::AOG_FPS2            = Eaagles::ETHG;
+   const double Autopilot::AOG_MPS2            = AOG_FPS2 * 0.3048;
+
+
 
 // =============================================================================
 // class: Autopilot
@@ -43,6 +52,8 @@ BEGIN_SLOTTABLE(Autopilot)
    "leadFollowingDeltaAltitude", // 13) Desired delta altitude above(+) the lead (Distance or meters)
    "leadPlayerName",             // 14) Name of our lead player                  (Identifier)
    "followTheLeadMode",          // 15)"Follow the lead" mode flag               (Number)
+   "maxRateOfTurnDps",           // 16) Maximum rate of turn                     (Number) - degrees per second
+   "maxBankAngle",               // 17) Maximum bank angle                       (Number) - degrees
 END_SLOTTABLE(Autopilot)
 
 //  Map slot names to handlers
@@ -66,6 +77,8 @@ BEGIN_SLOT_MAP(Autopilot)
     ON_SLOT(13, setSlotLeadFollowingDeltaAltitude, Basic::Number)
     ON_SLOT(14, setSlotLeadPlayerName,             Basic::Identifier)
     ON_SLOT(15, setSlotFollowTheLeadMode,          Basic::Number)
+    ON_SLOT(16, setSlotMaxRateOfTurnDps,           Basic::Number)
+    ON_SLOT(17, setSlotMaxBankAngle,               Basic::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -104,10 +117,12 @@ Autopilot::Autopilot()
    loiterAnchorLon = 0;
    loiterMirrorLat = 0;
    loiterMirrorLon = 0;
-   loiterState     = 0;
+   //loiterState     = 0;
    loiterLength    = 10.0f;
-   loiterCourse    = 0;
+   loiterInboundCourse    = 0;
    loiterCcwFlag   = false;
+   loiterEntryMode  = PREENTRY;
+   loiterEntryPhase = 0;
 
    setLeadFollowingDistanceTrail( Basic::Distance::NM2M );             // Default: 1 NM trail
    setLeadFollowingDistanceRight( Basic::Distance::NM2M );             // Default: 1 NM right
@@ -117,6 +132,8 @@ Autopilot::Autopilot()
    leadName = 0;
    leadHdg = 0.0f;
    followLeadModeOn = false;
+   maxTurnRateDps = STD_RATE_TURN_DPS;
+   maxBankAngleDegs = STD_MAX_BANK_ANGLE;
 }
 
 //------------------------------------------------------------------------------
@@ -160,16 +177,20 @@ void Autopilot::copyData(const Autopilot& org, const bool cc)
    loiterAnchorLon = org.loiterAnchorLon;
    loiterMirrorLat = org.loiterMirrorLat;
    loiterMirrorLon = org.loiterMirrorLon;
-   loiterState = org.loiterState;
+   //loiterState = org.loiterState;
    loiterLength = org.loiterLength;
    loiterCcwFlag = org.loiterCcwFlag;
-   loiterCourse = org.loiterCourse;
+   loiterInboundCourse = org.loiterInboundCourse;
+   loiterEntryMode  = org.loiterEntryMode;
+   loiterEntryPhase = org.loiterEntryPhase;
 
    leadOffset = org.leadOffset;
    setLeadPlayer( org.lead );
    setSlotLeadPlayerName( org.leadName );
    followLeadModeOn =  org.followLeadModeOn;
    leadHdg = org.leadHdg;
+   maxTurnRateDps = org.maxTurnRateDps;
+   maxBankAngleDegs = org.maxBankAngleDegs;
 }
 
 //------------------------------------------------------------------------------
@@ -222,7 +243,10 @@ bool Autopilot::modeManager()
    //  prerequesite are still met.
    // ---
    setNavMode( isNavModeOn() );
-   if (!isLoiterModeOn()) loiterState = 0;
+   if (!isLoiterModeOn()) {
+      //loiterState = 0;
+      loiterEntryMode = PREENTRY;
+   }
 
    // ---
    // Follow our leader mode
@@ -294,73 +318,266 @@ bool Autopilot::processModeLoiter()
 {
    bool ok = false;
 
-   const Navigation* nav = getOwnship()->getNavigation();
-   if (nav != 0) {
-      // own position
-      double navLat = nav->getLatitude();
-      double navLon = nav->getLongitude();
+   // fly entry
+   if (loiterEntryMode != LOITER) flyLoiterEntry();
+   else flyLoiter();
 
-      // SLS - the Dyn4DofModel handles loiter flying on it's own, so the autopilot will check to see if
-      // we are using this dynamics model, and adjust accordingly.  If not, we calculate the values ourself.
-      Vehicle::Dyn4DofModel* mod = dynamic_cast<Vehicle::Dyn4DofModel*>(getOwnship()->getDynamicsModel());
-      if (mod != 0) {
+   //const Navigation* nav = getOwnship()->getNavigation();
+   //if (nav != 0) {
+   //   // own position
+   //   double navLat = nav->getLatitude();
+   //   double navLon = nav->getLongitude();
+
+   //   if (loiterState == 0 && nav->isPositionDataValid()) {
+   //      // Just entered the loiter orbit pattern ...
+   //      // 1) record our current position as the anchor point
+   //      // 2) computer the mirror point
+   //      loiterAnchorLat = navLat;
+   //      loiterAnchorLon = navLon;
+   //      loiterInboundCourse = nav->getHeadingDeg();
+   //      computerOrbitHoldingPatternMirrorWaypoint(
+   //         loiterAnchorLat, loiterAnchorLon,            // Anchor point
+   //         loiterInboundCourse,                                // In-bound course
+   //         getLoiterPatternLengthNM(),                  // Min length (nm)
+   //         nav->getTrueAirspeedKts(),                   // Speed (kts)
+   //         isLoiterPatternCounterClockwise(),           // Counter-Clockwise pattern flag
+   //         &loiterMirrorLat, &loiterMirrorLon           // Mirror point
+   //      );
+   //      loiterState = 2;     // Start heading toward the mirror point
+   //   }
+
+   //   if (loiterState > 0) {
+   //      // Select destination lat/lon
+   //      double destLat = loiterAnchorLat;
+   //      double destLon = loiterAnchorLon;
+   //      if (loiterState == 2) {
+   //         destLat = loiterMirrorLat;
+   //         destLon = loiterMirrorLon;
+   //      }
+
+   //      // Compute bearing and distance to the destination
+   //      double brg = 0;
+   //      double dist = 0;
+   //      Basic::Nav::gll2bd(navLat, navLon, destLat, destLon, &brg, &dist);
+
+   //      // Check for passing destination (less than 2 NM and destination is behind us)
+   //      // (if so then swap anchor/mirror as destination)
+   //      if ( (brg > 90.0 || brg < -90.0) && dist < 2.0) {
+   //         // Swap and don't change the current commanded heading
+   //         if (loiterState != 2) loiterState = 2;
+   //         else loiterState = 1;
+   //      }
+   //      else {
+   //         // Command heading to the current distination
+   //         setCommandedHeadingD( LCreal( brg ) );
+   //      }
+   //   }
+   //   ok = true;
+   //}
+
+   //if (!ok) setLoiterMode( false );
+   return ok;
+}
+
+bool Autopilot::flyLoiterEntry()
+{
+   //-------------------------------------------------------
+   // get data pointers 
+   //-------------------------------------------------------
+   Player* pPlr = getOwnship();
+   bool ok = (pPlr != 0);
+   if (ok) {
+
+      Navigation* nav = pPlr->getNavigation();
+      bool haveNav = (nav != 0);
+
+      
+
+      //----------------------------------------------------
+      // define local constants 
+      //----------------------------------------------------
+      const double MAX_BANK_RAD = maxBankAngleDegs * Basic::Angle::D2RCC;
+      const double OFFSET_MTR   = 20.0;
+
+      //----------------------------------------------------
+      // get current data - try to get it from the navigation, otherwise from
+      // the actual player
+      //----------------------------------------------------
+      double hdgDeg = 0, osLatDeg = 0, osLonDeg = 0;
+      if (haveNav) {
+         hdgDeg = nav->getHeadingDeg();
+         // make sure the nav data is valid
          if (nav->isPositionDataValid()) {
-            // calling this will update the entry, right into the loiter.  Only the 
-            // initial call will set the anchor lat/lon
-            mod->flyEntry(navLat, navLon);
+            osLatDeg = nav->getLatitude();
+            osLonDeg = nav->getLongitude();
+         }
+         else {
+            osLatDeg = pPlr->getLatitude();
+            osLonDeg = pPlr->getLongitude();
          }
       }
       else {
-         if (loiterState == 0 && nav->isPositionDataValid()) {
-            // Just entered the loiter orbit pattern ...
-            // 1) record our current position as the anchor point
-            // 2) computer the mirror point
-            loiterAnchorLat = navLat;
-            loiterAnchorLon = navLon;
-            loiterCourse = nav->getHeadingDeg();
-            computerOrbitHoldingPatternMirrorWaypoint(
-               loiterAnchorLat, loiterAnchorLon,            // Anchor point
-               loiterCourse,                                // In-bound course
-               getLoiterPatternLengthNM(),                  // Min length (nm)
-               nav->getTrueAirspeedKts(),                   // Speed (kts)
-               isLoiterPatternCounterClockwise(),           // Counter-Clockwise pattern flag
-               &loiterMirrorLat, &loiterMirrorLon           // Mirror point
-            );
-            loiterState = 2;     // Start heading toward the mirror point
-         }
-
-         if (loiterState > 0) {
-            // Select destination lat/lon
-            double destLat = loiterAnchorLat;
-            double destLon = loiterAnchorLon;
-            if (loiterState == 2) {
-               destLat = loiterMirrorLat;
-               destLon = loiterMirrorLon;
-            }
-
-            // Compute bearing and distance to the destination
-            double brg = 0;
-            double dist = 0;
-            Basic::Nav::gll2bd(navLat, navLon, destLat, destLon, &brg, &dist);
-
-            // Check for passing destination (less than 2 NM and destination is behind us)
-            // (if so then swap anchor/mirror as destination)
-            if ( (brg > 90.0 || brg < -90.0) && dist < 2.0) {
-               // Swap and don't change the current commanded heading
-               if (loiterState != 2) loiterState = 2;
-               else loiterState = 1;
-            }
-            else {
-               // Command heading to the current distination
-               setCommandedHeadingD( LCreal( brg ) );
-            }
-         }
+         hdgDeg = pPlr->getHeadingD();
+         osLatDeg  = pPlr->getLatitude();
+         osLonDeg  = pPlr->getLongitude();
       }
-      ok = true;
+
+
+      // Player only data
+      double velMps    = pPlr->getTotalVelocity();
+      double rocMtr    = velMps * velMps / AOG_MPS2 / std::tan(MAX_BANK_RAD);
+      double rocNM     = rocMtr * Basic::Distance::M2NM;
+      double obCrsDeg  = Basic::Angle::aepcdDeg(loiterInboundCourse + 180.0);
+
+      // this is for flying to the loiter first, go back to that
+      double brgDeg    = 0.0;
+      double distNM    = 0.0;
+      Basic::Nav::fll2bd(osLatDeg, osLonDeg, loiterAnchorLat, loiterAnchorLon, &brgDeg, &distNM);
+
+      double hdgErrDeg = Basic::Angle::aepcdDeg(hdgDeg - loiterInboundCourse);
+      double posErrDeg = Basic::Angle::aepcdDeg(brgDeg - loiterInboundCourse);
+      double distCmdNM = 0;
+      double hdgCmdDeg = 0;
+
+      switch (loiterEntryMode) {
+         //-----------------------------------------------------------
+         case PREENTRY:
+         {
+            std::cout << "PREENTRY" << std::endl;
+            if (loiterEntryPhase == 0) {
+               // just started loitering, let's setup our anchor and inbound course
+               if (haveNav) {
+                  loiterInboundCourse = nav->getHeadingDeg();
+                  // make sure the nav data is valid
+                  if (nav->isPositionDataValid()) {
+                     loiterAnchorLat = nav->getLatitude();
+                     loiterAnchorLon = nav->getLongitude();
+                  }
+                  else {
+                     loiterAnchorLat = pPlr->getLatitude();
+                     loiterAnchorLon = pPlr->getLongitude();
+                  }
+               }
+               else {
+                  loiterInboundCourse = pPlr->getHeadingD();
+                  loiterAnchorLat = pPlr->getLatitude();
+                  loiterAnchorLon = pPlr->getLongitude();
+               }        
+
+               // assume direct entry for now
+               loiterEntryMode = DIRECT;
+
+               // SLS - for flying to loiter - implement later
+               //loiterAnchorLat = aLat;
+               //loiterAnchorLon = aLon;
+               //ok = fly2LL(anchorLat, anchorLon);
+               //if (distNM < 0.1) {
+               //   loiterEntryPhase = 1;
+               //   if (turnDir == RIGHT) {
+               //      if      (hdgErrDeg < -70.0)  { entryMode = PARALLEL; }
+               //      else if (hdgErrDeg < 110.0)  { entryMode = DIRECT; }
+               //      else                         { entryMode = TEARDROP; }
+               //   }
+               //   else {
+               //      if      (hdgErrDeg < -110.0) { entryMode = TEARDROP; }
+               //      else if (hdgErrDeg <  70.0)  { entryMode = DIRECT; }
+               //      else                         { entryMode = PARALLEL; }
+               //   }
+               //}
+            }
+         }
+         break;  // end case PREENTRY
+
+         //-----------------------------------------------------------
+         case DIRECT:
+         {
+            //std::cout << "DIRECT" << std::endl;
+            //if (loiterEntryPhase == 1) {
+            //   // fly our standard rate of turn to the next point
+            //   ok = flySRT(turnDir);
+            //   if (std::fabs(hdgErrDeg) > 90.0) {
+            //      loiterEntryMode = LOITER;
+            //      loiterEntryPhase = 0;
+            //   }
+            //}
+         }
+         break;  // end case DIRECT
+
+         ////-----------------------------------------------------------
+         //case PARALLEL:
+         //{
+         //   std::cout << "PARALLEL" << std::endl;
+         //   if (loiterEntryPhase == 1) {
+         //      ok = flyHDG(obCrsDeg);
+         //      //distCmdNM = velMps * 60.0 * Basic::Distance::M2NM;  // 1 min = 60 sec
+         //      distCmdNM = 4.0 * rocNM;  // 1/tan(15 deg) = 0.268 = 3.732 ~= 4.0
+         //      if (distNM > distCmdNM) { loiterEntryPhase = 2; }
+         //   }
+         //   else if (loiterEntryPhase == 2) {
+         //      if (turnDir == RIGHT) { ok = flySRT(LEFT); }
+         //      else                  { ok = flySRT(RIGHT); }
+         //      if (std::fabs(hdgErrDeg) < 90.0) { 
+         //         loiterEntryPhase = 3;
+         //      }
+         //   }
+         //   else if (loiterEntryPhase == 3) {
+         //      ok = flyCRS(anchorLat, anchorLon, loiterInboundCourse);
+         //      if (distNM < 0.1) {
+         //         loiterEntryMode = LOITER;
+         //         loiterEntryPhase = 0;
+         //      }
+         //   }
+         //}
+         //break;  // end case PARALLEL
+
+         //-----------------------------------------------------------
+         //case TEARDROP:
+         //{
+         //   std::cout << "TEARDROP" << std::endl;
+         //   if (loiterEntryPhase == 1) {
+         //      if (turnDir == RIGHT) { hdgCmdDeg = Basic::Angle::aepcdDeg(obCrsDeg - 30.0); }
+         //      else                  { hdgCmdDeg = Basic::Angle::aepcdDeg(obCrsDeg + 30.0); }
+         //      flyHDG(hdgCmdDeg);
+         //      //distCmdNM = velMps * 60.0 * Basic::Distance::M2NM;  // 1 min = 60 sec
+         //      distCmdNM = 4.0 * rocNM;  // 1/tan(15 deg) = 0.268 = 3.732 ~= 4.0
+         //      if (distNM > distCmdNM) { loiterEntryPhase = 2; }
+         //   }
+         //   else if (loiterEntryPhase == 2) {
+         //      flySRT(turnDir); 
+         //      if (std::fabs(hdgErrDeg) < 90.0) {
+         //         loiterEntryPhase = 3;
+         //      }
+         //   }
+         //   else if (loiterEntryPhase == 3) {
+         //      flyCRS(anchorLat, anchorLon, loiterInboundCourse);
+         //      if (distNM < 0.1) {
+         //         entryMode = LOITER;
+         //         loiterEntryPhase = 0;
+         //      }
+         //   }
+         //}
+         //break;  // end case TEARDROP
+
+         ////-----------------------------------------------------------
+         //case LOITER:
+         //{
+         //   std::cout << "LOITER" << std::endl;
+         //   flyLoiter();
+         //}
+         //break;  // end case LOITER
+
+         //-----------------------------------------------------------
+         default:
+            break;
+      }  // end switch
    }
 
-   if (!ok) setLoiterMode( false );
    return ok;
+}
+
+bool Autopilot::flyLoiter()
+{
+   return true;
 }
 
 //------------------------------------------------------------------------------
@@ -485,79 +702,79 @@ bool Autopilot::processModeFollowTheLead()
 //     ccwFlg        --
 //     rlat, rlon    -- Result: mirror point latitude & longitude (degs)
 //------------------------------------------------------------------------------
-bool Autopilot::computerOrbitHoldingPatternMirrorWaypoint(
-            const double alat,      // In:   Anchor point latitude (degs)
-            const double alon,      // In:   Anchor' point longitude (degs)
-            const double crs,       // In:   In-bound 'true' course (degs)
-            const double length,    // In:   Pattern length (nm)
-            const double speed,     // In:   True airspeed speed (kts)
-            const bool ccwFlg,      // In:   True if counter-clockwise orbit (else clockwise orbit)
-            double* const mlat,     // Out:  Mirror point latitude (degs)
-            double* const mlon      // Out:  Mirror point longitude (degs)
-            )
-{
-   bool ok = false;
-   if (mlat != 0 && mlon != 0) {
-
-      // Turn radius (ft)
-      //double radius  = 0.053833866 * speed * speed;
-
-      // Offset (width) of the orbit pattern (ft)
-      //double orbitOffsetFt  = 2.0 * radius;
-      
-      const double AOG = 32.174;  // Acceleration of gravity, 32.174 feet/sec/sec
-      const double SRT = 3.0;     // Standard rate turn, 3 degrees/sec (also, 180 deg/min)
-      
-      double airSpeedFps   = speed * Basic::Distance::NM2FT / Basic::Time::H2S;  // airspeed  [feet/sec]
-      double turnRateRps   = SRT * Basic::Angle::D2RCC;                          // standard rate turn  [radians/sec]
-      double tanBankAngle  = airSpeedFps * turnRateRps / AOG;                    // standard rate turn tan(bank angle)  [no units]
-      double radiusFT      = airSpeedFps * airSpeedFps / AOG / tanBankAngle;     // standard rate turn radius  [feet]
-      //double bankAngleDeg  = std::atan(tanBankAngle) * Basic::Angle::R2DCC;      // standard rate turn bank angle  [degrees]
-      double orbitOffsetFt = 2.0 * radiusFT;
-
-      // ---
-      // Pattern length (ft)
-      //  -- must be at least 1 nm greater than the offset
-
-      double orbitLengthFt = length * Basic::Distance::NM2FT;
-      const double lengthLowerLimit = orbitOffsetFt + Basic::Distance::NM2FT;
-      if (orbitLengthFt < lengthLowerLimit) {
-         orbitLengthFt = lengthLowerLimit;
-      }
-
-      // ---
-      // Bearing to mirror point (degs)
-      // ---
-      double relBrgDeg = atan2(orbitOffsetFt, -orbitLengthFt) * Basic::Angle::R2DCC;
-      double trueBrgDeg = 0;
-      if (ccwFlg) {
-         // Counter-clockwise (left) turn
-         trueBrgDeg = Basic::Angle::aepcdDeg( crs - relBrgDeg );
-      }
-      else {
-         // Clockwise (right) turn
-         trueBrgDeg = Basic::Angle::aepcdDeg( crs + relBrgDeg );
-      }
-
-      
-      // ---
-      // Distance to mirror point (nm)
-      // ---
-      double distFt = sqrt( orbitLengthFt*orbitLengthFt + orbitOffsetFt*orbitOffsetFt );
-      double distNM = distFt * Basic::Distance::FT2NM;
-
-      // ---
-      // Calculate mirror point
-      // ---
-      double lat2, lon2;
-      Basic::Nav::gbd2ll(alat, alon, trueBrgDeg, distNM, &lat2, &lon2);
-      *mlat = lat2;
-      *mlon = lon2;
-
-      ok = true;
-   }
-   return ok;
-}
+//bool Autopilot::computerOrbitHoldingPatternMirrorWaypoint(
+//            const double alat,      // In:   Anchor point latitude (degs)
+//            const double alon,      // In:   Anchor' point longitude (degs)
+//            const double crs,       // In:   In-bound 'true' course (degs)
+//            const double length,    // In:   Pattern length (nm)
+//            const double speed,     // In:   True airspeed speed (kts)
+//            const bool ccwFlg,      // In:   True if counter-clockwise orbit (else clockwise orbit)
+//            double* const mlat,     // Out:  Mirror point latitude (degs)
+//            double* const mlon      // Out:  Mirror point longitude (degs)
+//            )
+//{
+//   bool ok = false;
+//   if (mlat != 0 && mlon != 0) {
+//
+//      // Turn radius (ft)
+//      //double radius  = 0.053833866 * speed * speed;
+//
+//      // Offset (width) of the orbit pattern (ft)
+//      //double orbitOffsetFt  = 2.0 * radius;
+//      
+//      const double AOG = 32.174;  // Acceleration of gravity, 32.174 feet/sec/sec
+//      const double SRT = 3.0;     // Standard rate turn, 3 degrees/sec (also, 180 deg/min)
+//      
+//      double airSpeedFps   = speed * Basic::Distance::NM2FT / Basic::Time::H2S;  // airspeed  [feet/sec]
+//      double turnRateRps   = SRT * Basic::Angle::D2RCC;                          // standard rate turn  [radians/sec]
+//      double tanBankAngle  = airSpeedFps * turnRateRps / AOG;                    // standard rate turn tan(bank angle)  [no units]
+//      double radiusFT      = airSpeedFps * airSpeedFps / AOG / tanBankAngle;     // standard rate turn radius  [feet]
+//      //double bankAngleDeg  = std::atan(tanBankAngle) * Basic::Angle::R2DCC;      // standard rate turn bank angle  [degrees]
+//      double orbitOffsetFt = 2.0 * radiusFT;
+//
+//      // ---
+//      // Pattern length (ft)
+//      //  -- must be at least 1 nm greater than the offset
+//
+//      double orbitLengthFt = length * Basic::Distance::NM2FT;
+//      const double lengthLowerLimit = orbitOffsetFt + Basic::Distance::NM2FT;
+//      if (orbitLengthFt < lengthLowerLimit) {
+//         orbitLengthFt = lengthLowerLimit;
+//      }
+//
+//      // ---
+//      // Bearing to mirror point (degs)
+//      // ---
+//      double relBrgDeg = atan2(orbitOffsetFt, -orbitLengthFt) * Basic::Angle::R2DCC;
+//      double trueBrgDeg = 0;
+//      if (ccwFlg) {
+//         // Counter-clockwise (left) turn
+//         trueBrgDeg = Basic::Angle::aepcdDeg( crs - relBrgDeg );
+//      }
+//      else {
+//         // Clockwise (right) turn
+//         trueBrgDeg = Basic::Angle::aepcdDeg( crs + relBrgDeg );
+//      }
+//
+//      
+//      // ---
+//      // Distance to mirror point (nm)
+//      // ---
+//      double distFt = sqrt( orbitLengthFt*orbitLengthFt + orbitOffsetFt*orbitOffsetFt );
+//      double distNM = distFt * Basic::Distance::FT2NM;
+//
+//      // ---
+//      // Calculate mirror point
+//      // ---
+//      double lat2, lon2;
+//      Basic::Nav::gbd2ll(alat, alon, trueBrgDeg, distNM, &lat2, &lon2);
+//      *mlat = lat2;
+//      *mlon = lon2;
+//
+//      ok = true;
+//   }
+//   return ok;
+//}
 
 
 //------------------------------------------------------------------------------
@@ -570,14 +787,19 @@ bool Autopilot::headingController()
 
    Player* pv = getOwnship();
    if (pv != 0) {
-      if ( isHeadingHoldOn() || isNavModeOn() ) {
-         int ihdg10 = int( getCommandedHeadingD() * 10.0f );
-         LCreal hdg = LCreal( ihdg10 ) / 10.0f;
-         pv->setCommandedHeadingD( hdg );
-         pv->setHeadingHoldOn( true );
-      } else {
-         pv->setHeadingHoldOn( false );
-         pv->setControlStickRollInput( getControlStickRollInput() );
+      DynamicsModel* md = pv->getDynamicsModel();
+      if (md != 0) {
+         // why mess with the player?  All it does is send it to the dynamics model anyways!  Skip the middle man!
+         if ( isHeadingHoldOn() || isNavModeOn() ) {
+            int ihdg10 = int( getCommandedHeadingD() * 10.0f );
+            LCreal hdg = LCreal( ihdg10 ) / 10.0f;
+
+            md->setCommandedHeadingD(hdg, maxTurnRateDps, maxBankAngleDegs);
+            md->setHeadingHoldOn( true );
+         } else {
+            md->setHeadingHoldOn( false );
+            md->setControlStickRollInput( getControlStickRollInput() );
+         }
       }
    }
    return true;
@@ -772,25 +994,25 @@ bool Autopilot::requestLoiter(const double anchorLat, const double anchorLon, co
 {
    bool ok = false;
 
-   const Navigation* nav = getOwnship()->getNavigation();
-   if (nav != 0) {
-      loiterCourse = course;
-      ok = setLoiterMode(true);
-      if (ok) {
-         loiterAnchorLat = anchorLat;
-         loiterAnchorLon = anchorLon;
-         computerOrbitHoldingPatternMirrorWaypoint(
-            anchorLat, anchorLon,               // Anchor point
-            course,                             // In-bound course
-            getLoiterPatternLengthNM(),         // Min length (nm)
-            nav->getTrueAirspeedKts(),          // Speed (kts)
-            isLoiterPatternCounterClockwise(),  // Counter-Clockwise pattern flag
-            &loiterMirrorLat, &loiterMirrorLon  // Mirror point
-         );
+   //const Navigation* nav = getOwnship()->getNavigation();
+   //if (nav != 0) {
+   //   loiterInboundCourse = course;
+   //   ok = setLoiterMode(true);
+   //   if (ok) {
+   //      loiterAnchorLat = anchorLat;
+   //      loiterAnchorLon = anchorLon;
+   //      computerOrbitHoldingPatternMirrorWaypoint(
+   //         anchorLat, anchorLon,               // Anchor point
+   //         course,                             // In-bound course
+   //         getLoiterPatternLengthNM(),         // Min length (nm)
+   //         nav->getTrueAirspeedKts(),          // Speed (kts)
+   //         isLoiterPatternCounterClockwise(),  // Counter-Clockwise pattern flag
+   //         &loiterMirrorLat, &loiterMirrorLon  // Mirror point
+   //      );
 
-         loiterState = 1;  // start heading toward the anchor point
-      }
-   }
+   //      loiterState = 1;  // start heading toward the anchor point
+   //   }
+   //}
 
    return ok;
 }
@@ -808,7 +1030,7 @@ bool Autopilot::getLoiterPointAnchors(double* const anLat, double* const anLon, 
 // gets the loiter inbound course
 double Autopilot::getLoiterCourse()
 {
-    return loiterCourse;
+    return loiterInboundCourse;
 }
 
 // Sets the loiter pattern length (nm)
@@ -1192,6 +1414,22 @@ bool Autopilot::setSlotFollowTheLeadMode(const Basic::Number* const msg)
         }
     }
     return ok;
+}
+
+// Set slot: Maximum turn rate - limits how fast (or slow) the pilot turns
+bool Autopilot::setSlotMaxRateOfTurnDps(const Basic::Number* const msg)
+{
+   bool ok = (msg != 0);
+   if (ok) ok = setMaxTurnRateDps(msg->getDouble());
+   return ok;
+}
+
+// Set slot: Maximum bank angle - limits how far the pilot can bank
+bool Autopilot::setSlotMaxBankAngle(const Basic::Number* const msg)
+{
+   bool ok = (msg != 0);
+   if (ok) ok = setMaxBankAngleDeg(msg->getDouble());
+   return ok;
 }
 
 
