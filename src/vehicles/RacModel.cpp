@@ -154,7 +154,7 @@ bool RacModel::setHeadingHoldOn(const bool)
 }
 
 // setCommandedHeadingD() --   Sets commanded heading (true: degs)
-bool RacModel::setCommandedHeadingD(const double degs)
+bool RacModel::setCommandedHeadingD(const double degs, const double, const double)
 {
    cmdHeading = degs;
    return true;
@@ -201,7 +201,7 @@ bool RacModel::setAltitudeHoldOn(const bool)
 }
 
 // setCommandedAltitude() --   Sets commanded altitude (meters)
-bool RacModel::setCommandedAltitude(const double m)
+bool RacModel::setCommandedAltitude(const double m, const double, const double)
 {
    cmdAltitude = m;
    return false;

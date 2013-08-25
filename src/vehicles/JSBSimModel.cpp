@@ -957,7 +957,7 @@ bool JSBSimModel::setHeadingHoldOn(const bool b)
     return hasHeadingHold;
 }
 
-bool JSBSimModel::setCommandedHeadingD(const double h)
+bool JSBSimModel::setCommandedHeadingD(const double h, const double, const double)
 {
     commandedHeadingDeg = h;
     return hasHeadingHold;
@@ -1013,7 +1013,7 @@ bool JSBSimModel::setAltitudeHoldOn(const bool b)
     return hasAltitudeHold;
 }
 
-bool JSBSimModel::setCommandedAltitude(const double a)
+bool JSBSimModel::setCommandedAltitude(const double a, const double, const double)
 {
     commandedAltitudeFt = a * Basic::Distance::M2FT;
     return hasAltitudeHold;

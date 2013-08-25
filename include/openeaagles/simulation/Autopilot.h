@@ -7,7 +7,7 @@
 #include "openeaagles/simulation/Pilot.h"
 
 namespace Eaagles {
-   namespace Basic { class Angle; class Distance; class Identifier; class Number; }
+   namespace Basic { class Angle; class Distance; class Identifier; class Number; class Time; }
 
 namespace Simulation {
 
@@ -31,6 +31,7 @@ namespace Simulation {
 //    loiterMode                 <Number>    ! Loiter mode flag (default: false)
 //    loiterPatternLength        <Distance>  ! Loiter pattern length (default: 10.0f)
 //    loiterPatternLength        <Number>    ! Loiter pattern length (nautical miles)
+//    loiterPatternTime          <Time>      ! Loiter pattern length (seconds on inbound / outbound course)
 //    loiterPatternCcwFlag       <Number>    ! Loiter pattern counter-clockwise flag (default: false, clockwise)
 //
 //    leadFollowingDistanceTrail <Distance>  ! Desired distance behind(+) the lead (Default: 1 NM trail)
@@ -107,6 +108,9 @@ public:
 
    // Returns true if the Loiter pattern is counter-clockwise
    virtual bool isLoiterPatternCounterClockwise() const { return loiterCcwFlag; }
+
+   virtual bool isLoiterTimeBased() const { return loiterTimeBased; }
+   virtual double getLoiterTime() const   { return loiterTime; }
 
    // Sets the loiter pattern length (nm)
    virtual bool setLoiterPatternLengthNM(const double nm);
@@ -205,6 +209,7 @@ protected:
    bool setSlotLoiterMode(const Basic::Number* const msg);                    // Loiter mode flag
    bool setSlotLoiterPatternLength(const Basic::Distance* const msg);         // Loiter orbit pattern length
    bool setSlotLoiterPatternLength(const Basic::Number* const msg);           // Loiter orbit pattern length (NM)
+   bool setSlotLoiterPatternTime(const Basic::Time* const msg);               // Loiter orbit pattern length (seconds)
    bool setSlotLoiterPatternCcwFlag(const Basic::Number* const msg);          // Loiter orbit pattern counter-clockwise flag
    bool setSlotLeadFollowingDistanceTrail(const Basic::Distance* const msg);  // Desired distance behind(+) the lead
    bool setSlotLeadFollowingDistanceTrail(const Basic::Number* const msg);    // Desired distance (meters) behind(+) the lead
@@ -288,6 +293,8 @@ private:
    EntryMode  loiterEntryMode;      // Entry mode into the loiter
    unsigned int loiterEntryPhase;   // Phase of the entry mode 
    bool isInbound;                  // are we on the inbound loiter
+   double loiterTime;               // loiter time (seconds)
+   bool loiterTimeBased;          // is our loiter based on time instead of length?
 
    // Pilot limits
    double maxTurnRateDps;           // maximum turn rate

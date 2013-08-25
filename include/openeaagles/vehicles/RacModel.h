@@ -46,7 +46,7 @@ public: // public interface
     virtual bool isHeadingHoldOn() const;
     virtual double getCommandedHeadingD() const;
     virtual bool setHeadingHoldOn(const bool b);
-    virtual bool setCommandedHeadingD(const double h);
+    virtual bool setCommandedHeadingD(const double h, const double hDps = 0, const double maxBank = 0);
     virtual bool isVelocityHoldOn() const;
     virtual double getCommandedVelocityKts() const;
     virtual bool setVelocityHoldOn(const bool b);
@@ -54,7 +54,7 @@ public: // public interface
     virtual bool isAltitudeHoldOn() const;
     virtual double getCommandedAltitude() const;
     virtual bool setAltitudeHoldOn(const bool b);
-    virtual bool setCommandedAltitude(const double a);
+    virtual bool setCommandedAltitude(const double a, const double aMps = 0, const double maxPitch = 0);
     virtual void dynamics(const LCreal dt);             // One pass model update; called from Player::dynamics()
 
     // Component interface

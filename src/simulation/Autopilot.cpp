@@ -42,7 +42,7 @@ BEGIN_SLOTTABLE(Autopilot)
    "holdHeading",                //  6) Hold heading (default: player's heading) (Angle)
    "headingHoldMode",            //  7) Heading hold mode flag
    "loiterMode",                 //  8) Loiter mode flag (default: false)
-   "loiterPatternLength",        //  9) Loiter pattern length (default: 10NM)    (Distance or nautical miles)
+   "loiterPatternLength",        //  9) Loiter pattern length (default: 10NM)    (Distance or nautical miles )
    "loiterPatternCcwFlag",       // 10) Loiter pattern counter-clockwise flag    (default: clockwise)
    "leadFollowingDistanceTrail", // 11) Desired distance behind(+) the lead      (Distance or meters)
    "leadFollowingDistanceRight", // 12) Desired distance right(+) of the lead    (Distance or meters)
@@ -54,6 +54,7 @@ BEGIN_SLOTTABLE(Autopilot)
    "maxClimbRateFpm",            // 18) Maximum climb / dive rate                (Number) - feet per minute
    "maxClimbRateMps",            // 19) Maximum climb / dive rate                (Number) - meters per second (no conversion required)
    "maxPitchAngle",              // 20) Maximum pitch angle                      (Number) - degrees
+   "loiterPatternTime",          // 21) Loiter pattern length                    (Time)
 END_SLOTTABLE(Autopilot)
 
 //  Map slot names to handlers
@@ -82,6 +83,7 @@ BEGIN_SLOT_MAP(Autopilot)
     ON_SLOT(18, setSlotMaxClimbRateFpm,            Basic::Number)
     ON_SLOT(19, setSlotMaxClimbRateMps,            Basic::Number)
     ON_SLOT(20, setSlotMaxPitchAngle,              Basic::Number)
+    ON_SLOT(21, setSlotLoiterPatternTime,          Basic::Time)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -127,6 +129,8 @@ Autopilot::Autopilot()
    loiterEntryMode  = PREENTRY;
    loiterEntryPhase = 0;
    isInbound = false;
+   loiterTime = 0;
+   loiterTimeBased = false;
 
    setLeadFollowingDistanceTrail( Basic::Distance::NM2M );             // Default: 1 NM trail
    setLeadFollowingDistanceRight( Basic::Distance::NM2M );             // Default: 1 NM right
@@ -190,6 +194,8 @@ void Autopilot::copyData(const Autopilot& org, const bool cc)
    loiterEntryMode  = org.loiterEntryMode;
    loiterEntryPhase = org.loiterEntryPhase;
    isInbound = org.isInbound;
+   loiterTime = org.loiterTime;
+   loiterTimeBased = org.loiterTimeBased;
 
    leadOffset = org.leadOffset;
    setLeadPlayer( org.lead );
@@ -255,6 +261,7 @@ bool Autopilot::modeManager()
    if (!isLoiterModeOn()) {
       //loiterState = 0;
       loiterEntryMode = PREENTRY;
+      loiterEntryPhase = 0;
    }
 
    // ---
@@ -325,67 +332,11 @@ bool Autopilot::processModeNavigation()
 //------------------------------------------------------------------------------
 bool Autopilot::processModeLoiter()
 {
-   bool ok = false;
-
    // fly entry
    if (loiterEntryMode != LOITER) flyLoiterEntry();
    else flyLoiter();
 
-   //const Navigation* nav = getOwnship()->getNavigation();
-   //if (nav != 0) {
-   //   // own position
-   //   double navLat = nav->getLatitude();
-   //   double navLon = nav->getLongitude();
-
-   //   if (loiterState == 0 && nav->isPositionDataValid()) {
-   //      // Just entered the loiter orbit pattern ...
-   //      // 1) record our current position as the anchor point
-   //      // 2) computer the mirror point
-   //      loiterAnchorLat = navLat;
-   //      loiterAnchorLon = navLon;
-   //      loiterInboundCourse = nav->getHeadingDeg();
-   //      computerOrbitHoldingPatternMirrorWaypoint(
-   //         loiterAnchorLat, loiterAnchorLon,            // Anchor point
-   //         loiterInboundCourse,                                // In-bound course
-   //         getLoiterPatternLengthNM(),                  // Min length (nm)
-   //         nav->getTrueAirspeedKts(),                   // Speed (kts)
-   //         isLoiterPatternCounterClockwise(),           // Counter-Clockwise pattern flag
-   //         &loiterMirrorLat, &loiterMirrorLon           // Mirror point
-   //      );
-   //      loiterState = 2;     // Start heading toward the mirror point
-   //   }
-
-   //   if (loiterState > 0) {
-   //      // Select destination lat/lon
-   //      double destLat = loiterAnchorLat;
-   //      double destLon = loiterAnchorLon;
-   //      if (loiterState == 2) {
-   //         destLat = loiterMirrorLat;
-   //         destLon = loiterMirrorLon;
-   //      }
-
-   //      // Compute bearing and distance to the destination
-   //      double brg = 0;
-   //      double dist = 0;
-   //      Basic::Nav::gll2bd(navLat, navLon, destLat, destLon, &brg, &dist);
-
-   //      // Check for passing destination (less than 2 NM and destination is behind us)
-   //      // (if so then swap anchor/mirror as destination)
-   //      if ( (brg > 90.0 || brg < -90.0) && dist < 2.0) {
-   //         // Swap and don't change the current commanded heading
-   //         if (loiterState != 2) loiterState = 2;
-   //         else loiterState = 1;
-   //      }
-   //      else {
-   //         // Command heading to the current distination
-   //         setCommandedHeadingD( LCreal( brg ) );
-   //      }
-   //   }
-   //   ok = true;
-   //}
-
-   //if (!ok) setLoiterMode( false );
-   return ok;
+   return true;
 }
 
 bool Autopilot::flyLoiterEntry()
@@ -476,22 +427,20 @@ bool Autopilot::flyLoiterEntry()
                loiterEntryMode = DIRECT;
 
                // SLS - for flying to loiter - implement later
-               //loiterAnchorLat = aLat;
-               //loiterAnchorLon = aLon;
                //ok = fly2LL(anchorLat, anchorLon);
-               //if (distNM < 0.1) {
-               //   loiterEntryPhase = 1;
-               //   if (turnDir == RIGHT) {
-               //      if      (hdgErrDeg < -70.0)  { entryMode = PARALLEL; }
-               //      else if (hdgErrDeg < 110.0)  { entryMode = DIRECT; }
-               //      else                         { entryMode = TEARDROP; }
-               //   }
-               //   else {
-               //      if      (hdgErrDeg < -110.0) { entryMode = TEARDROP; }
-               //      else if (hdgErrDeg <  70.0)  { entryMode = DIRECT; }
-               //      else                         { entryMode = PARALLEL; }
-               //   }
-               //}
+               if (distNM < 0.1) {
+                  loiterEntryPhase = 1;
+                  if (!loiterCcwFlag) {
+                     if      (hdgErrDeg < -70.0)  { loiterEntryMode = PARALLEL; }
+                     else if (hdgErrDeg < 110.0)  { loiterEntryMode = DIRECT; }
+                     else                         { loiterEntryMode = TEARDROP; }
+                  }
+                  else {
+                     if      (hdgErrDeg < -110.0) { loiterEntryMode = TEARDROP; }
+                     else if (hdgErrDeg <  70.0)  { loiterEntryMode = DIRECT; }
+                     else                         { loiterEntryMode = PARALLEL; }
+                  }
+               }
             }
          }
          break;  // end case PREENTRY
@@ -499,7 +448,7 @@ bool Autopilot::flyLoiterEntry()
          //-----------------------------------------------------------
          case DIRECT:
          {
-            //std::cout << "DIRECT" << std::endl;
+            std::cout << "DIRECT" << std::endl;
             if (loiterEntryPhase == 1) {
                // fly our standard rate of turn to the next point
                ok = flySRT();
@@ -512,60 +461,58 @@ bool Autopilot::flyLoiterEntry()
          }
          break;  // end case DIRECT
 
-         ////-----------------------------------------------------------
-         //case PARALLEL:
-         //{
-         //   std::cout << "PARALLEL" << std::endl;
-         //   if (loiterEntryPhase == 1) {
-         //      ok = flyHDG(obCrsDeg);
-         //      //distCmdNM = velMps * 60.0 * Basic::Distance::M2NM;  // 1 min = 60 sec
-         //      distCmdNM = 4.0 * rocNM;  // 1/tan(15 deg) = 0.268 = 3.732 ~= 4.0
-         //      if (distNM > distCmdNM) { loiterEntryPhase = 2; }
-         //   }
-         //   else if (loiterEntryPhase == 2) {
-         //      if (turnDir == RIGHT) { ok = flySRT(LEFT); }
-         //      else                  { ok = flySRT(RIGHT); }
-         //      if (std::fabs(hdgErrDeg) < 90.0) { 
-         //         loiterEntryPhase = 3;
-         //      }
-         //   }
-         //   else if (loiterEntryPhase == 3) {
-         //      ok = flyCRS(anchorLat, anchorLon, loiterInboundCourse);
-         //      if (distNM < 0.1) {
-         //         loiterEntryMode = LOITER;
-         //         loiterEntryPhase = 0;
-         //      }
-         //   }
-         //}
-         //break;  // end case PARALLEL
-
          //-----------------------------------------------------------
-         //case TEARDROP:
-         //{
-         //   std::cout << "TEARDROP" << std::endl;
-         //   if (loiterEntryPhase == 1) {
-         //      if (turnDir == RIGHT) { hdgCmdDeg = Basic::Angle::aepcdDeg(obCrsDeg - 30.0); }
-         //      else                  { hdgCmdDeg = Basic::Angle::aepcdDeg(obCrsDeg + 30.0); }
-         //      flyHDG(hdgCmdDeg);
-         //      //distCmdNM = velMps * 60.0 * Basic::Distance::M2NM;  // 1 min = 60 sec
-         //      distCmdNM = 4.0 * rocNM;  // 1/tan(15 deg) = 0.268 = 3.732 ~= 4.0
-         //      if (distNM > distCmdNM) { loiterEntryPhase = 2; }
-         //   }
-         //   else if (loiterEntryPhase == 2) {
-         //      flySRT(turnDir); 
-         //      if (std::fabs(hdgErrDeg) < 90.0) {
-         //         loiterEntryPhase = 3;
-         //      }
-         //   }
-         //   else if (loiterEntryPhase == 3) {
-         //      flyCRS(anchorLat, anchorLon, loiterInboundCourse);
-         //      if (distNM < 0.1) {
-         //         entryMode = LOITER;
-         //         loiterEntryPhase = 0;
-         //      }
-         //   }
-         //}
-         //break;  // end case TEARDROP
+         case PARALLEL:
+         {
+            std::cout << "PARALLEL" << std::endl;
+            if (loiterEntryPhase == 1) {
+               setCommandedHeadingD(obCrsDeg);
+               //distCmdNM = velMps * 60.0 * Basic::Distance::M2NM;  // 1 min = 60 sec
+               distCmdNM = 4.0 * rocNM;  // 1/tan(15 deg) = 0.268 = 3.732 ~= 4.0
+               if (distNM > distCmdNM) loiterEntryPhase = 2; 
+            }
+            else if (loiterEntryPhase == 2) {
+               flySRT();
+               if (std::fabs(hdgErrDeg) < 90.0) { 
+                  loiterEntryPhase = 3;
+               }
+            }
+            else if (loiterEntryPhase == 3) {
+               ok = flyCRS(loiterAnchorLat, loiterAnchorLon, loiterInboundCourse);
+               if (distNM < 0.1) {
+                  loiterEntryMode = LOITER;
+                  loiterEntryPhase = 0;
+               }
+            }
+         }
+         break;  // end case PARALLEL
+
+         case TEARDROP:
+         {
+            std::cout << "TEARDROP" << std::endl;
+            if (loiterEntryPhase == 1) {
+               if (!loiterCcwFlag)  { hdgCmdDeg = Basic::Angle::aepcdDeg(obCrsDeg - 30.0); }
+               else                 { hdgCmdDeg = Basic::Angle::aepcdDeg(obCrsDeg + 30.0); }
+               setCommandedHeadingD(hdgCmdDeg);
+               //distCmdNM = velMps * 60.0 * Basic::Distance::M2NM;  // 1 min = 60 sec
+               distCmdNM = 4.0 * rocNM;  // 1/tan(15 deg) = 0.268 = 3.732 ~= 4.0
+               if (distNM > distCmdNM) { loiterEntryPhase = 2; }
+            }
+            else if (loiterEntryPhase == 2) {
+               flySRT();
+               if (std::fabs(hdgErrDeg) < 90.0) {
+                  loiterEntryPhase = 3;
+               }
+            }
+            else if (loiterEntryPhase == 3) {
+               flyCRS(loiterAnchorLat, loiterAnchorLon, loiterInboundCourse);
+               if (distNM < 0.1) {
+                  loiterEntryMode = LOITER;
+                  loiterEntryPhase = 0;
+               }
+            }
+         }
+         break;  // end case TEARDROP
 
          //-----------------------------------------------------------
          case LOITER:
@@ -652,22 +599,33 @@ bool Autopilot::calcMirrorLatLon()
       double phiCmdRad = std::atan2(velMps * SRT_RPS, Eaagles::ETHGM);
       if (phiCmdRad > MAX_BANK_RAD) { phiCmdRad = MAX_BANK_RAD; }
 
+      // radius of the center (nautical miles)
       double rocMtr    = velMps * velMps / (Eaagles::ETHGM * std::tan(phiCmdRad));
       double rocNM     = rocMtr * Basic::Distance::M2NM;
       double xtDistNM  = 2.0 * rocNM;
+
+      // do our outbound distance based on time or length
+      // default to 2 minutes
       double obTimeSec = 2.0 * Basic::Time::M2S;
-      double obDistNM  = velMps * obTimeSec * Basic::Distance::M2NM;
-      double altFt     = pPlr->getAltitudeFt();
-      if (altFt > 14000.0) { obDistNM *= 1.5; }
+      double obDistNM = 0;
+      if (loiterTimeBased) {
+         obTimeSec = loiterTime;
+         obDistNM  = velMps * obTimeSec * Basic::Distance::M2NM;
+      }
+      else obDistNM = loiterLength;
+      
+      // SLS - ask Larry about this
+      //double altFt     = pPlr->getAltitudeFt();
+      //if (altFt > 14000.0) { obDistNM *= 1.5; }
 
       double distNM    = std::sqrt(xtDistNM*xtDistNM + obDistNM*obDistNM);
       double obCrsDeg  = Basic::Angle::aepcdDeg(loiterInboundCourse + 180.0);
       double brgDeg    = std::atan2(xtDistNM, obDistNM) * Basic::Angle::R2DCC;
 
       // turning clockwise
-      if (!loiterCcwFlag) { brgDeg = Basic::Angle::aepcdDeg(obCrsDeg - brgDeg); }
-      else { brgDeg = Basic::Angle::aepcdDeg(obCrsDeg + brgDeg); }
-      
+      if (!loiterCcwFlag) brgDeg = Basic::Angle::aepcdDeg(obCrsDeg - brgDeg); 
+      else brgDeg = Basic::Angle::aepcdDeg(obCrsDeg + brgDeg); 
+
       ok = Basic::Nav::fbd2ll(loiterAnchorLat, loiterAnchorLon, brgDeg, distNM, &loiterMirrorLat, &loiterMirrorLon);
    }
 
@@ -749,6 +707,7 @@ bool Autopilot::flyCRS(const double latDeg, const double lonDeg, const double cr
 // ---
 bool Autopilot::flySRT()
 {
+   setCommandedVelocityKts(210.0f);
    //-------------------------------------------------------
    // get data pointers 
    //-------------------------------------------------------
@@ -1178,7 +1137,7 @@ bool Autopilot::setLoiterMode(const bool flag)
    loiterModeOn = flag && isRollSasOn() && isPitchSasOn();
 
    // If loiter mode was just turned on ...
-   // then make sure all hold mode gets turned off
+   // then make sure all hold mode gets turned on
    if (loiterModeOn && !loiterModeOn1) {
       setHeadingHoldMode(true);
       setAltitudeHoldMode(true);
@@ -1525,6 +1484,19 @@ bool Autopilot::setSlotLoiterPatternLength(const Basic::Number* const msg)
     }
     return ok;
 }
+
+// Set slot: Loiter orbit pattern length - TIME BASED
+bool Autopilot::setSlotLoiterPatternTime(const Basic::Time* const msg)
+{
+    bool ok = false;
+    if (msg != 0) {
+       loiterTime = Basic::Seconds::convertStatic(*msg);
+       loiterTimeBased = true;
+       ok = true;
+    }
+    return ok;
+}
+
 
 // Set slot: Loiter orbit pattern counter-clockwise flag
 bool Autopilot::setSlotLoiterPatternCcwFlag(const Basic::Number* const msg)
