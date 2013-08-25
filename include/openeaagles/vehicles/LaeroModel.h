@@ -1,20 +1,20 @@
 //------------------------------------------------------------------------------
-// Class: Simulation::Aeordynamiceodel -> Dyn4DofModel
+// Class: Simulation::Aeordynamiceodel -> LaeroModel
 // Description:
 //    Small, simple, reconfigurable 4 degree of freedom aerodynamic model.  
 //    Special thanks to Larry Buckner for making this happen!
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Vehicle_Dyn4DofModel_H__
-#define __Eaagles_Vehicle_Dyn4DofModel_H__
+#ifndef __Eaagles_Vehicle_LaeroModel_H__
+#define __Eaagles_Vehicle_LaeroModel_H__
 
 #include "openeaagles/simulation/DynamicsModels.h"
 
 namespace Eaagles {
 namespace Vehicle {
 
-class Dyn4DofModel : public Simulation::AerodynamicsModel
+class LaeroModel : public Simulation::AerodynamicsModel
 {
-   DECLARE_SUBCLASS(Dyn4DofModel, Simulation::AerodynamicsModel )
+   DECLARE_SUBCLASS(LaeroModel, Simulation::AerodynamicsModel )
 
 private:
    static const double HALF_PI;
@@ -24,11 +24,11 @@ private:
    //static const double STD_RATE_TURN_DPS;
    //static const double MAX_BANK_DEG;
 
-   enum TurnDir { LEFT=0, RIGHT };
+   //enum TurnDir { LEFT=0, RIGHT };
    //enum EntryMode { PREENTRY=0, SIMPLE, DIRECT, PARALLEL, TEARDROP, LOITER };  // external or member variables 
 
 public: // public interface
-   Dyn4DofModel();
+   LaeroModel();
 
    //EntryMode getLoiterMode();
 
@@ -48,7 +48,7 @@ public: // public interface
    //bool flyALT(const double altCmdFt, const double altDotCmdFpm=2000.0);
    //bool flySRT(const TurnDir td=RIGHT);
    //bool flyHDG(const double hdgCmdDeg, const double hdgDotCmdDps=STD_RATE_TURN_DPS);
-   bool flyCRS(const double latDeg, const double lonDeg, const double crsCmdDeg);
+   //bool flyCRS(const double latDeg, const double lonDeg, const double crsCmdDeg);
    //bool fly2LL(const double latDeg, const double lonDeg);
 
    //bool flyLoiter();

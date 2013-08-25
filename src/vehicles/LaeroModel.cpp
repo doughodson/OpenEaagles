@@ -1,7 +1,7 @@
 //==============================================================================
-// File: Dyn4DofModel.cpp
+// File: LaeroModel.cpp
 //==============================================================================
-#include "openeaagles/vehicles/Dyn4DofModel.h"
+#include "openeaagles/vehicles/LaeroModel.h"
 
 #include "openeaagles/simulation/Player.h"
 #include "openeaagles/simulation/AirVehicle.h"
@@ -25,24 +25,24 @@
 namespace Eaagles {
 namespace Vehicle {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Dyn4DofModel,"Dyn4DofModel")
-EMPTY_SERIALIZER(Dyn4DofModel)
-EMPTY_DELETEDATA(Dyn4DofModel)
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(LaeroModel,"LaeroModel")
+EMPTY_SERIALIZER(LaeroModel)
+EMPTY_DELETEDATA(LaeroModel)
 
 //----------------------------------------------------------
 // define conversion constants 
 //----------------------------------------------------------
-const double Dyn4DofModel::HALF_PI             = PI / 2.0;
-const double Dyn4DofModel::EPSILON             = 1.0E-10;
-//const double Dyn4DofModel::Eaagles::ETHG            = Eaagles::ETHG;
-//const double Dyn4DofModel::Eaagles::ETHGM            = Eaagles::ETHG * 0.3048;
-//const double Dyn4DofModel::STD_RATE_TURN_DPS   = 3.0;
-//const double Dyn4DofModel::MAX_BANK_DEG        = 30.0;
+const double LaeroModel::HALF_PI             = PI / 2.0;
+const double LaeroModel::EPSILON             = 1.0E-10;
+//const double LaeroModel::Eaagles::ETHG            = Eaagles::ETHG;
+//const double LaeroModel::Eaagles::ETHGM            = Eaagles::ETHG * 0.3048;
+//const double LaeroModel::STD_RATE_TURN_DPS   = 3.0;
+//const double LaeroModel::MAX_BANK_DEG        = 30.0;
 
 //----------------------------------------------------------
 // Constructor(s)
 //----------------------------------------------------------
-Dyn4DofModel::Dyn4DofModel()
+LaeroModel::LaeroModel()
 {
    STANDARD_CONSTRUCTOR()
    initData();
@@ -51,7 +51,7 @@ Dyn4DofModel::Dyn4DofModel()
 //----------------------------------------------------------
 // initData() -- initialize member data
 //----------------------------------------------------------
-void Dyn4DofModel::initData()
+void LaeroModel::initData()
 {
    // Loiter variables
    //turnDir    = RIGHT;
@@ -120,7 +120,7 @@ void Dyn4DofModel::initData()
 //----------------------------------------------------------
 // copyData(), deleteData() -- copy (delete) member data
 //----------------------------------------------------------
-void Dyn4DofModel::copyData(const Dyn4DofModel& org, const bool cc)
+void LaeroModel::copyData(const LaeroModel& org, const bool cc)
 {
    BaseClass::copyData(org);
    if (cc) initData();
@@ -192,7 +192,7 @@ void Dyn4DofModel::copyData(const Dyn4DofModel& org, const bool cc)
 //----------------------------------------------------------
 // updateTC() -- update time critical stuff here
 //----------------------------------------------------------
-void Dyn4DofModel::dynamics(const LCreal dt)
+void LaeroModel::dynamics(const LCreal dt)
 {
     update4DofModel(dt);  
     dT = dt;
@@ -201,7 +201,7 @@ void Dyn4DofModel::dynamics(const LCreal dt)
 //----------------------------------------------------------
 // updateTestRAC -- update robot aircraft equations of motion
 //----------------------------------------------------------
-void Dyn4DofModel::update4DofModel(const LCreal dt)
+void LaeroModel::update4DofModel(const LCreal dt)
 {   
    //-------------------------------------------------------
    // get data pointers 
@@ -349,7 +349,7 @@ void Dyn4DofModel::update4DofModel(const LCreal dt)
 // FUNCTIONS
 //==============================================================================
 
-bool Dyn4DofModel::flyPhi(const double phiCmdDeg, const double phiDotCmdDps)
+bool LaeroModel::flyPhi(const double phiCmdDeg, const double phiDotCmdDps)
 {
    //-------------------------------------------------------
    // get data pointers 
@@ -394,7 +394,7 @@ bool Dyn4DofModel::flyPhi(const double phiCmdDeg, const double phiDotCmdDps)
 }
 
 //==============================================================================
-bool Dyn4DofModel::flyTht(const double thtCmdDeg, const double thtDotCmdDps)
+bool LaeroModel::flyTht(const double thtCmdDeg, const double thtDotCmdDps)
 {
    //-------------------------------------------------------
    // get data pointers 
@@ -439,7 +439,7 @@ bool Dyn4DofModel::flyTht(const double thtCmdDeg, const double thtDotCmdDps)
 }
 
 //==============================================================================
-bool Dyn4DofModel::flyPsi(const double psiCmdDeg, const double psiDotCmdDps)
+bool LaeroModel::flyPsi(const double psiCmdDeg, const double psiDotCmdDps)
 {
    //-------------------------------------------------------
    // get data pointers 
@@ -484,7 +484,7 @@ bool Dyn4DofModel::flyPsi(const double psiCmdDeg, const double psiDotCmdDps)
 }
 
 //==============================================================================
-bool Dyn4DofModel::flyVel(const double velCmdKts, const double velDotCmdNps)
+bool LaeroModel::flyVel(const double velCmdKts, const double velDotCmdNps)
 {
    //-------------------------------------------------------
    // get data pointers 
@@ -534,7 +534,7 @@ bool Dyn4DofModel::flyVel(const double velCmdKts, const double velDotCmdNps)
 }
 
 //==============================================================================
-//bool Dyn4DofModel::flyALT(const double altCmdFt, const double altDotCmdFpm)
+//bool LaeroModel::flyALT(const double altCmdFt, const double altDotCmdFpm)
 //{
    ////-------------------------------------------------------
    //// get data pointers 
@@ -586,7 +586,7 @@ bool Dyn4DofModel::flyVel(const double velCmdKts, const double velDotCmdNps)
 //}
 
 //==============================================================================
-//bool Dyn4DofModel::flySRT(const TurnDir td)
+//bool LaeroModel::flySRT(const TurnDir td)
 //{
 //   //-------------------------------------------------------
 //   // get data pointers 
@@ -631,7 +631,7 @@ bool Dyn4DofModel::flyVel(const double velCmdKts, const double velDotCmdNps)
 //}
 
 ////==============================================================================
-//bool Dyn4DofModel::flyHDG(const double hdgCmdDeg, const double hdgDotCmdDps)
+//bool LaeroModel::flyHDG(const double hdgCmdDeg, const double hdgDotCmdDps)
 //{
 //   //-------------------------------------------------------
 //   // get data pointers 
@@ -690,8 +690,8 @@ bool Dyn4DofModel::flyVel(const double velCmdKts, const double velDotCmdNps)
 //}
 
 //==============================================================================
-bool Dyn4DofModel::flyCRS(const double latDeg, const double lonDeg, const double crsDeg)
-{
+//bool LaeroModel::flyCRS(const double latDeg, const double lonDeg, const double crsDeg)
+//{
    ////-------------------------------------------------------
    //// get data pointers 
    ////-------------------------------------------------------
@@ -754,11 +754,11 @@ bool Dyn4DofModel::flyCRS(const double latDeg, const double lonDeg, const double
    //}
 
    //return ok;
-   return true;
-}
+//   return true;
+//}
 
 //==============================================================================
-//bool Dyn4DofModel::fly2LL(const double latDeg, const double lonDeg)
+//bool LaeroModel::fly2LL(const double latDeg, const double lonDeg)
 //{
 //   //-------------------------------------------------------
 //   // get data pointers 
@@ -787,7 +787,7 @@ bool Dyn4DofModel::flyCRS(const double latDeg, const double lonDeg, const double
 //}
 
 //==============================================================================
-//bool Dyn4DofModel::flyLoiter()
+//bool LaeroModel::flyLoiter()
 //{
    ////-------------------------------------------------------
    //// get data pointers 
@@ -833,7 +833,7 @@ bool Dyn4DofModel::flyCRS(const double latDeg, const double lonDeg, const double
 //}
 
 //==============================================================================
-//bool Dyn4DofModel::flyEntry(double aLat, double aLon)
+//bool LaeroModel::flyEntry(double aLat, double aLon)
 //{
    ////-------------------------------------------------------
    //// get data pointers 
@@ -985,7 +985,7 @@ bool Dyn4DofModel::flyCRS(const double latDeg, const double lonDeg, const double
 
 
 //==============================================================================
-//bool Dyn4DofModel::calcMirrorLatLon()
+//bool LaeroModel::calcMirrorLatLon()
 //{
    ////-------------------------------------------------------
    //// get data pointers 
@@ -1033,7 +1033,7 @@ bool Dyn4DofModel::flyCRS(const double latDeg, const double lonDeg, const double
 //}
 
 // Dynamics model interface
-bool Dyn4DofModel::setCommandedHeadingD(const double h, const double hDps, const double maxBank)
+bool LaeroModel::setCommandedHeadingD(const double h, const double hDps, const double maxBank)
 { 
    //-------------------------------------------------------
    // get data pointers 
@@ -1075,7 +1075,7 @@ bool Dyn4DofModel::setCommandedHeadingD(const double h, const double hDps, const
       }
 
       //-------------------------------------------------------
-      // define direction of heading rate of change (hsdDotDps)
+      // define direction of heading rate of change (hdgDotDps)
       //-------------------------------------------------------
       double hdgDotDps = sign(hdgErrDeg) * hdgDotAbsDps;
       psiDot = hdgDotDps * Basic::Angle::D2RCC;
@@ -1090,7 +1090,7 @@ bool Dyn4DofModel::setCommandedHeadingD(const double h, const double hDps, const
    return ok;
 }
 // Dynamics model interface - all input values in meters
-bool Dyn4DofModel::setCommandedAltitude(const double a, const double aMps, const double maxPitch)    
+bool LaeroModel::setCommandedAltitude(const double a, const double aMps, const double maxPitch)    
 { 
    //-------------------------------------------------------
    // get data pointers 
@@ -1103,9 +1103,6 @@ bool Dyn4DofModel::setCommandedAltitude(const double a, const double aMps, const
       //-------------------------------------------------------
       // define local constants 
       //-------------------------------------------------------
-      const double ALTDOT_MPS     = aMps;
-      const double ALTDOT_BRK_MPS = ALTDOT_MPS;
-      const double ALTERR_BRK_MTR = 100 * Basic::Distance::FT2M;
       const double TAU            = 4.0;  // time constant [sec]
 
       //-------------------------------------------------------
@@ -1113,33 +1110,33 @@ bool Dyn4DofModel::setCommandedAltitude(const double a, const double aMps, const
       //-------------------------------------------------------
       double altMtr     = pPlr->getAltitude();
       double altErrMtr = a - altMtr;
-      //double altErrFt  = altCmdFt - altFt;
-      //double altErrMtr = altErrFt * Basic::Distance::FT2M;
 
       //-------------------------------------------------------
       // get alt error break point (mtr)
       //-------------------------------------------------------   
-      //double altDotCmdMps = aMps * Basic::Distance::FT2M / Basic::Time::M2S;
-      double altErrBrkMtr = aMps * TAU;
+      double altDotCmdMps = aMps;
+      double altErrBrkMtr = altDotCmdMps * TAU;
 
       //-------------------------------------------------------
       // get commanded altDot (mps) 
       //-------------------------------------------------------
-      double altDotMps = sign(altErrMtr) * aMps;
+      double altDotMps = sign(altErrMtr) * altDotCmdMps;
       if (std::abs(altErrMtr) < altErrBrkMtr) {
-         altDotMps = altErrMtr * (aMps / altErrBrkMtr);
+         altDotMps = altErrMtr * (altDotCmdMps / altErrBrkMtr);
       }
 
       //-------------------------------------------------------
       // assign result to altitude control
       //-------------------------------------------------------
       double thtCmdDeg = (altDotMps / u) * Basic::Angle::R2DCC;
-      ok = flyTht(thtCmdDeg, maxPitch);
+      // SLS - TO DO: Limit commanded pitch to max pitch angle as well.
+      ok = flyTht(thtCmdDeg);
    }
 
    return ok;
 }
-bool Dyn4DofModel::setCommandedVelocityKts(const double a)
+// SLS - TO DO: Limit velocity rate of acceleration
+bool LaeroModel::setCommandedVelocityKts(const double a)
 {
    flyVel(a);
    return true;

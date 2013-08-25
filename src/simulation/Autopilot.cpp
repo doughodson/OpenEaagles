@@ -126,6 +126,7 @@ Autopilot::Autopilot()
    loiterCcwFlag   = false;
    loiterEntryMode  = PREENTRY;
    loiterEntryPhase = 0;
+   isInbound = false;
 
    setLeadFollowingDistanceTrail( Basic::Distance::NM2M );             // Default: 1 NM trail
    setLeadFollowingDistanceRight( Basic::Distance::NM2M );             // Default: 1 NM right
@@ -188,6 +189,7 @@ void Autopilot::copyData(const Autopilot& org, const bool cc)
    loiterInboundCourse = org.loiterInboundCourse;
    loiterEntryMode  = org.loiterEntryMode;
    loiterEntryPhase = org.loiterEntryPhase;
+   isInbound = org.isInbound;
 
    leadOffset = org.leadOffset;
    setLeadPlayer( org.lead );
@@ -398,8 +400,6 @@ bool Autopilot::flyLoiterEntry()
       Navigation* nav = pPlr->getNavigation();
       bool haveNav = (nav != 0);
 
-      
-
       //----------------------------------------------------
       // define local constants 
       //----------------------------------------------------
@@ -472,6 +472,7 @@ bool Autopilot::flyLoiterEntry()
                }        
 
                // assume direct entry for now
+               loiterEntryPhase = 1;
                loiterEntryMode = DIRECT;
 
                // SLS - for flying to loiter - implement later
@@ -499,14 +500,15 @@ bool Autopilot::flyLoiterEntry()
          case DIRECT:
          {
             //std::cout << "DIRECT" << std::endl;
-            //if (loiterEntryPhase == 1) {
-            //   // fly our standard rate of turn to the next point
-            //   ok = flySRT(turnDir);
-            //   if (std::fabs(hdgErrDeg) > 90.0) {
-            //      loiterEntryMode = LOITER;
-            //      loiterEntryPhase = 0;
-            //   }
-            //}
+            if (loiterEntryPhase == 1) {
+               // fly our standard rate of turn to the next point
+               ok = flySRT();
+               calcMirrorLatLon();
+               if (std::fabs(hdgErrDeg) > 90.0) {
+                  loiterEntryMode = LOITER;
+                  loiterEntryPhase = 0;
+               }
+            }
          }
          break;  // end case DIRECT
 
@@ -565,13 +567,13 @@ bool Autopilot::flyLoiterEntry()
          //}
          //break;  // end case TEARDROP
 
-         ////-----------------------------------------------------------
-         //case LOITER:
-         //{
-         //   std::cout << "LOITER" << std::endl;
-         //   flyLoiter();
-         //}
-         //break;  // end case LOITER
+         //-----------------------------------------------------------
+         case LOITER:
+         {
+            //std::cout << "LOITER" << std::endl;
+            flyLoiter();
+         }
+         break;  // end case LOITER
 
          //-----------------------------------------------------------
          default:
@@ -584,8 +586,204 @@ bool Autopilot::flyLoiterEntry()
 
 bool Autopilot::flyLoiter()
 {
+   //-------------------------------------------------------
+   // get data pointers 
+   //-------------------------------------------------------
+   Player* pPlr = getOwnship();
+
+   bool ok = (pPlr != 0);
+   if (ok) {
+   
+      // get current data
+      double osLatDeg = pPlr->getLatitude();
+      double osLonDeg = pPlr->getLongitude();
+      double obCrs    = Basic::Angle::aepcdDeg(loiterInboundCourse + 180.0);
+      calcMirrorLatLon();
+
+      double brgDeg = 0.0;
+      double distNM = 0.0;
+      if (isInbound) {
+         ok = Basic::Nav::fll2bd(osLatDeg, osLonDeg, loiterAnchorLat, loiterAnchorLon, &brgDeg, &distNM);
+      }
+      else {
+         ok = Basic::Nav::fll2bd(osLatDeg, osLonDeg, loiterMirrorLat, loiterMirrorLon, &brgDeg, &distNM);
+      }
+
+      // get position error to determine inbound or outbound
+      double posErrDeg = 0.0;
+      if (isInbound) {
+         ok = flyCRS(loiterAnchorLat, loiterAnchorLon, loiterInboundCourse);
+         posErrDeg = Basic::Angle::aepcdDeg(brgDeg - loiterInboundCourse);
+         if (std::fabs(posErrDeg) > 90.0) { isInbound = false; }
+      }
+      else {
+         std::cout << "Outbound" << std::endl;
+         ok = flyCRS(loiterMirrorLat, loiterMirrorLon, obCrs);
+         posErrDeg = Basic::Angle::aepcdDeg(brgDeg - obCrs);
+         if (std::fabs(posErrDeg) > 90.0) { isInbound = true; }
+      }
+   }
    return true;
 }
+
+// ---
+// calcMirrorLatLon() - from our loiter anchor, this will calculate the mirror lat/lon position
+// ---
+bool Autopilot::calcMirrorLatLon()
+{
+   //-------------------------------------------------------
+   // get data pointers 
+   //-------------------------------------------------------
+   Player* pPlr = getOwnship();
+
+   bool ok = (pPlr != 0);
+   if (ok) {
+   
+      //----------------------------------------------------
+      // define local constants
+      //----------------------------------------------------
+      const double MAX_BANK_RAD  = maxBankAngleDegs * Basic::Angle::D2RCC;
+      const double SRT_RPS       = STD_RATE_TURN_DPS * Basic::Angle::D2RCC;
+
+      //----------------------------------------------------
+      // get current data
+      //----------------------------------------------------
+      double velMps    = pPlr->getTotalVelocity();
+      double phiCmdRad = std::atan2(velMps * SRT_RPS, Eaagles::ETHGM);
+      if (phiCmdRad > MAX_BANK_RAD) { phiCmdRad = MAX_BANK_RAD; }
+
+      double rocMtr    = velMps * velMps / (Eaagles::ETHGM * std::tan(phiCmdRad));
+      double rocNM     = rocMtr * Basic::Distance::M2NM;
+      double xtDistNM  = 2.0 * rocNM;
+      double obTimeSec = 2.0 * Basic::Time::M2S;
+      double obDistNM  = velMps * obTimeSec * Basic::Distance::M2NM;
+      double altFt     = pPlr->getAltitudeFt();
+      if (altFt > 14000.0) { obDistNM *= 1.5; }
+
+      double distNM    = std::sqrt(xtDistNM*xtDistNM + obDistNM*obDistNM);
+      double obCrsDeg  = Basic::Angle::aepcdDeg(loiterInboundCourse + 180.0);
+      double brgDeg    = std::atan2(xtDistNM, obDistNM) * Basic::Angle::R2DCC;
+
+      // turning clockwise
+      if (!loiterCcwFlag) { brgDeg = Basic::Angle::aepcdDeg(obCrsDeg - brgDeg); }
+      else { brgDeg = Basic::Angle::aepcdDeg(obCrsDeg + brgDeg); }
+      
+      ok = Basic::Nav::fbd2ll(loiterAnchorLat, loiterAnchorLon, brgDeg, distNM, &loiterMirrorLat, &loiterMirrorLon);
+   }
+
+   return ok;
+}
+
+// ---
+// flyCRS() - flies to a given lat/lon using the inbound course
+// ---
+bool Autopilot::flyCRS(const double latDeg, const double lonDeg, const double crsDeg)
+{
+   //-------------------------------------------------------
+   // get data pointers 
+   //-------------------------------------------------------
+   Player* pPlr = getOwnship();
+
+   bool ok = (pPlr != 0);
+   if (ok) {
+   
+      //----------------------------------------------------
+      // define local constants 
+      //----------------------------------------------------
+      const double MAX_BANK_RAD = maxBankAngleDegs * Basic::Angle::D2RCC;
+      const double OFFSET_MTR   = 20.0;
+
+      //----------------------------------------------------
+      // get current data
+      //----------------------------------------------------
+      double velMps = pPlr->getTotalVelocity();
+      double hdgDeg = pPlr->getHeadingD();
+      double osLat  = pPlr->getLatitude();
+      double osLon  = pPlr->getLongitude();
+      double brgDeg = 0.0;
+      double distNM = 0.0;
+      Basic::Nav::fll2bd(osLat, osLon, latDeg, lonDeg, &brgDeg, &distNM);
+
+      //-------------------------------------------------------
+      // get current gama error (deg)
+      //-------------------------------------------------------   
+      double posErrDeg = Basic::Angle::aepcdDeg(brgDeg - crsDeg);
+      double posErrRad = posErrDeg * Basic::Angle::D2RCC;
+
+      double rocMtr    = velMps * velMps / Eaagles::ETHGM / std::tan(MAX_BANK_RAD);
+      double rocNM     = rocMtr * Basic::Distance::M2NM;
+
+      double xtRngNM   = std::fabs(distNM * std::sin(posErrRad));
+      double xtRngMtr  = xtRngNM * Basic::Distance::NM2M;
+      double xtRngRoc  = xtRngMtr / rocMtr;
+
+      double hdgCmdDeg = hdgDeg;
+      if (xtRngRoc >= 1.2) {
+         hdgCmdDeg = sign(posErrDeg) * 90.0 + crsDeg;
+      }
+      else {
+         double x = 1.0 - xtRngRoc;
+         if (x >  1.0) x =  1.0;
+         if (x < -1.0) x = -1.0;
+         double alfaDeg = std::acos(x) * Basic::Angle::R2DCC;
+
+         double y = (rocMtr - OFFSET_MTR) / rocMtr;
+         double betaDeg = std::acos(y) * Basic::Angle::R2DCC;
+
+         double gamaDeg = sign(posErrDeg) * (alfaDeg - betaDeg);
+         hdgCmdDeg = Basic::Angle::aepcdDeg(gamaDeg + crsDeg);
+      }
+
+      //-------------------------------------------------------
+      // fly to heading necessary to follow commanded course
+      //-------------------------------------------------------
+      ok = setCommandedHeadingD(hdgCmdDeg);
+   }
+
+   return ok;
+}
+
+
+// ---
+// flySRT() - the pilot will try to fly the given heading using a standard rate of turn
+// ---
+bool Autopilot::flySRT()
+{
+   //-------------------------------------------------------
+   // get data pointers 
+   //-------------------------------------------------------
+   Player* pPlr = getOwnship();
+
+   bool ok = (pPlr != 0);
+   if (ok) {
+   
+      //----------------------------------------------------
+      // define local constants 
+      //----------------------------------------------------
+      const double SRT_RPS       = STD_RATE_TURN_DPS * Basic::Angle::D2RCC;
+
+      //----------------------------------------------------
+      // get current data
+      //----------------------------------------------------
+      double velMps    = pPlr->getTotalVelocity();   
+      double phiCmdRad = std::atan2(velMps*SRT_RPS, Eaagles::ETHGM);
+      double psiDotCmdRps = Eaagles::ETHGM * std::tan(phiCmdRad) / velMps;
+
+      // turn left
+      if (loiterCcwFlag) {
+         phiCmdRad    = -phiCmdRad;
+         psiDotCmdRps = -psiDotCmdRps;
+      }
+
+      double hdg = pPlr->getHeadingD();
+      // set our commanded heading as our current heading + the heading to get a standard rate of turn
+      double phiCmdDeg = phiCmdRad * Basic::Angle::R2DCC;
+      setCommandedHeadingD(hdg + phiCmdDeg);
+   }
+   
+   return ok;
+}
+
 
 //------------------------------------------------------------------------------
 // processModeFollowTheLead() -- Process for the "follow the lead" mode

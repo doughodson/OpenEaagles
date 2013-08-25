@@ -6,7 +6,7 @@
 
 #include "openeaagles/vehicles/JSBSimModel.h"
 #include "openeaagles/vehicles/RacModel.h"
-#include "openeaagles/vehicles/Dyn4DofModel.h"
+#include "openeaagles/vehicles/LaeroModel.h"
 
 namespace Eaagles {
 namespace Vehicle {
@@ -24,8 +24,8 @@ Basic::Object* vehiclesFormFunc(const char* formname)
         newform = new JSBSimModel();
     }
     // Dynamic 4 degree of freedom model
-    else if ( strcmp(formname, Dyn4DofModel::getFormName()) == 0 ) {
-        newform = new Dyn4DofModel();
+    else if ( strcmp(formname, LaeroModel::getFormName()) == 0 ) {
+        newform = new LaeroModel();
     }
     return newform;
 }

@@ -233,6 +233,13 @@ protected:
    virtual void process(const LCreal dt);     // Phase 3
 
 private:
+   bool flySRT();                   // flies a standard rate of turn
+   bool flyLoiterEntry();           // flies our entry pattern into the loiter
+   bool flyLoiter();                // flies the loiter pattern
+   bool calcMirrorLatLon();
+   // fly to a given point unsing the course
+   bool flyCRS(const double latDeg, const double lonDeg, const double crsCmdDeg);
+   
    // Input controls
    LCreal   stickRollPos;     // Stick roll position:  -1.0 -> max left;    0.0 -> center;  1.0 -> max right
    LCreal   stickPitchPos;    // Stick pitch position: -1.0 -> max forward; 0.0 -> center;  1.0 -> max back
@@ -270,8 +277,7 @@ private:
       TEARDROP, 
       LOITER
    };  
-   bool flyLoiterEntry();           // flies our entry pattern into the loiter
-   bool flyLoiter();                // flies the loiter pattern
+
    double   loiterAnchorLat;        // Loiter orbit pattern anchor point latitude  (degs)
    double   loiterAnchorLon;        // Loiter orbit pattern anchor point longitude (degs)
    double   loiterMirrorLat;        // Loiter orbit pattern mirror point latitude  (degs)
@@ -281,6 +287,7 @@ private:
    double   loiterInboundCourse;    // Loiter course we started the loiter pattern on (degs)
    EntryMode  loiterEntryMode;      // Entry mode into the loiter
    unsigned int loiterEntryPhase;   // Phase of the entry mode 
+   bool isInbound;                  // are we on the inbound loiter
 
    // Pilot limits
    double maxTurnRateDps;           // maximum turn rate
