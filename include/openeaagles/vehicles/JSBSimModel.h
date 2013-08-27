@@ -80,7 +80,7 @@ public:
     virtual bool isVelocityHoldOn() const;
     virtual double getCommandedVelocityKts() const;
     virtual bool setVelocityHoldOn(const bool b);
-    virtual bool setCommandedVelocityKts(const double a);
+    virtual bool setCommandedVelocityKts(const double v, const double vNps = 0);
                                                                                 
     virtual bool isAltitudeHoldOn() const;
     virtual double getCommandedAltitude() const;

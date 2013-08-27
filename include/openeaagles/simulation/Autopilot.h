@@ -77,6 +77,7 @@ public:
    static const double STD_MAX_BANK_ANGLE;     // default to +-30 degrees bank max
    static const double STD_MAX_CLIMB_RATE;     // defaul to 2000 fpm, or apprx 10.16 mps
    static const double STD_MAX_PITCH_ANGLE;    // default to +-10 degrees pitch max
+   static const double STD_MAX_ACCEL_NPS;      // default to 5.0
 
    virtual bool isHeadingHoldOn() const { return hdgHoldOn; }        // True if heading hold mode
    virtual double getCommandedHeadingD() const { return cmdHdg; }    // Returns the hold heading (degs)
@@ -127,6 +128,13 @@ public:
    virtual bool isFollowTheLeadModeOn() const           { return followLeadModeOn; }  // "Follow the lead" mode flag
    virtual const Basic::Identifier* getLeadPlayerName() { return leadName; }
    virtual const Player* getLeadPlayer();                            // Our lead player
+
+   // get pilot limits
+   double getMaxTurnRate() const;
+   double getMaxBankAngle() const;
+   double getMaxClimbRate() const;
+   double getMaxPitchAngle() const;
+   double getMaxVelAcc() const;
 
    virtual bool setLeadFollowingDistanceTrail(const double trail);   // Desired distance (meters) behind(+) the lead
    virtual bool setLeadFollowingDistanceRight(const double right);   // Desired distance (meters) right(+) of the lead
@@ -193,6 +201,8 @@ public:
    virtual bool setMaxClimbRateMps(const double x);
    // maximum pitch angle
    virtual bool setMaxPitchAngleDeg(const double x);
+   // maximum velocity acceleration
+   virtual bool setMaxVelAccNps(const double x);
    
    // Eaagles::Basic::Component interface methods
    virtual void reset();
@@ -224,6 +234,7 @@ protected:
    bool setSlotMaxClimbRateMps(const Basic::Number* const msg);               // Max climb/dive rate - meters per second
    bool setSlotMaxClimbRateFpm(const Basic::Number* const msg);               // Max climb/dive rate - feet per minute
    bool setSlotMaxPitchAngle(const Basic::Number* const msg);                 // Max pitch angle - degrees
+   bool setSlotMaxVelAccNps(const Basic::Number* const msg);                  // Maximum velocity acceleration (Nps)
 
    virtual bool modeManager();
    virtual bool headingController();
@@ -301,6 +312,7 @@ private:
    double maxBankAngleDegs;         // maximum bank angle
    double maxClimbRateMps;          // maximum climb/dive rate (meters per second)
    double maxPitchAngleDegs;        // maximum pitch angle
+   double maxVelAccNps;             // maximum velocity acceleration
 
    // Follow that lead mode data
    osg::Vec3d leadOffset;     // Offsets from lead player (meters) Default -1NM and 2NM and 2000ft
@@ -315,6 +327,12 @@ inline bool Autopilot::setMaxTurnRateDps(const double x)    { maxTurnRateDps = x
 inline bool Autopilot::setMaxBankAngleDeg(const double x)   { maxBankAngleDegs = x; return true; }
 inline bool Autopilot::setMaxClimbRateMps(const double x)   { maxClimbRateMps = x; return true; }
 inline bool Autopilot::setMaxPitchAngleDeg(const double x)  { maxPitchAngleDegs = x; return true; }
+inline bool Autopilot::setMaxVelAccNps(const double x)      { maxVelAccNps = x; return true; }
+inline double Autopilot::getMaxTurnRate() const             { return maxTurnRateDps; }
+inline double Autopilot::getMaxBankAngle() const            { return maxBankAngleDegs; }
+inline double Autopilot::getMaxClimbRate() const            { return maxClimbRateMps; }
+inline double Autopilot::getMaxPitchAngle() const           { return maxPitchAngleDegs; }
+inline double Autopilot::getMaxVelAcc() const               { return maxVelAccNps; }
 
 } // End Simulation namespace
 } // End Eaagles namespace

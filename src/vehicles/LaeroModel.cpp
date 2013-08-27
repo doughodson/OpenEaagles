@@ -96,9 +96,6 @@ void LaeroModel::initData()
    uDot1    = 0.0;
    vDot1    = 0.0;
    wDot1    = 0.0;
-
-   // Commanded parameters
-   cmdVel   = 0.0;
 }
 
 //----------------------------------------------------------
@@ -155,9 +152,6 @@ void LaeroModel::copyData(const LaeroModel& org, const bool cc)
    uDot1    = org.uDot1;
    vDot1    = org.vDot1;
    wDot1    = org.wDot1;
-
-   // Commanded parameters
-   cmdVel   = org.cmdVel;
 }
 
 
@@ -429,55 +423,55 @@ bool LaeroModel::flyPsi(const double psiCmdDeg, const double psiDotCmdDps)
    return ok;
 }
 
-//==============================================================================
-bool LaeroModel::flyVel(const double velCmdKts, const double velDotCmdNps)
-{
-   //-------------------------------------------------------
-   // get data pointers 
-   //-------------------------------------------------------
-   Simulation::Player* pPlr = static_cast<Simulation::Player*>( findContainerByType(typeid(Simulation::Player)) );
-   bool ok = (pPlr != 0);
-   if (ok) {
-
-      //-------------------------------------------------------
-      // define local constants 
-      //-------------------------------------------------------
-      const double KTS2MPS = Basic::Distance::NM2M / Basic::Time::H2S;
-
-      //-------------------------------------------------------
-      // convert argument units (deg -> rad)
-      //-------------------------------------------------------   
-      double velCmdMps     = velCmdKts * KTS2MPS;
-      double velDotCmdMps2 = velDotCmdNps * KTS2MPS;
-
-      //-------------------------------------------------------
-      // current vel error (rad)
-      //-------------------------------------------------------   
-      double velMps    = pPlr->getTotalVelocityKts() * KTS2MPS;
-      double velErrMps = velCmdMps - velMps;
-
-      //-------------------------------------------------------
-      // vel error break point (rad)
-      //-------------------------------------------------------   
-      const double TAU = 1.0;  // time constant [sec]
-      double velErrBrkMps = velDotCmdMps2 * TAU;
-
-      //-------------------------------------------------------
-      // control signal for commanded vel (rps)
-      //-------------------------------------------------------
-      double velDotMps2 = sign(velErrMps) * velDotCmdMps2;
-      if (std::abs(velErrMps) < velErrBrkMps) {
-         velDotMps2 = (velErrMps / velErrBrkMps) * velDotCmdMps2;
-      }
-
-      //-------------------------------------------------------
-      // assign result to velocity control
-      //-------------------------------------------------------
-      uDot = velDotMps2;
-   }
-
-   return ok;
-}
+////==============================================================================
+//bool LaeroModel::flyVel(const double velCmdKts, const double velDotCmdNps)
+//{
+//   //-------------------------------------------------------
+//   // get data pointers 
+//   //-------------------------------------------------------
+//   Simulation::Player* pPlr = static_cast<Simulation::Player*>( findContainerByType(typeid(Simulation::Player)) );
+//   bool ok = (pPlr != 0);
+//   if (ok) {
+//
+//      //-------------------------------------------------------
+//      // define local constants 
+//      //-------------------------------------------------------
+//      const double KTS2MPS = Basic::Distance::NM2M / Basic::Time::H2S;
+//
+//      //-------------------------------------------------------
+//      // convert argument units (deg -> rad)
+//      //-------------------------------------------------------   
+//      double velCmdMps     = velCmdKts * KTS2MPS;
+//      double velDotCmdMps2 = velDotCmdNps * KTS2MPS;
+//
+//      //-------------------------------------------------------
+//      // current vel error (rad)
+//      //-------------------------------------------------------   
+//      double velMps    = pPlr->getTotalVelocityKts() * KTS2MPS;
+//      double velErrMps = velCmdMps - velMps;
+//
+//      //-------------------------------------------------------
+//      // vel error break point (rad)
+//      //-------------------------------------------------------   
+//      const double TAU = 1.0;  // time constant [sec]
+//      double velErrBrkMps = velDotCmdMps2 * TAU;
+//
+//      //-------------------------------------------------------
+//      // control signal for commanded vel (rps)
+//      //-------------------------------------------------------
+//      double velDotMps2 = sign(velErrMps) * velDotCmdMps2;
+//      if (std::abs(velErrMps) < velErrBrkMps) {
+//         velDotMps2 = (velErrMps / velErrBrkMps) * velDotCmdMps2;
+//      }
+//
+//      //-------------------------------------------------------
+//      // assign result to velocity control
+//      //-------------------------------------------------------
+//      uDot = velDotMps2;
+//   }
+//
+//   return ok;
+//}
 
 //==============================================================================
 //bool LaeroModel::fly2LL(const double latDeg, const double lonDeg)
@@ -612,10 +606,53 @@ bool LaeroModel::setCommandedAltitude(const double a, const double aMps, const d
 
    return ok;
 }
-// SLS - TO DO: Limit velocity rate of acceleration
-bool LaeroModel::setCommandedVelocityKts(const double a)
+// setCommandedVelocityKts() - also can limit velocity rate of acceleration
+bool LaeroModel::setCommandedVelocityKts(const double v, const double vNps)
 {
-   flyVel(a);
+   //-------------------------------------------------------
+   // get data pointers 
+   //-------------------------------------------------------
+   Simulation::Player* pPlr = static_cast<Simulation::Player*>( findContainerByType(typeid(Simulation::Player)) );
+   bool ok = (pPlr != 0);
+   if (ok) {
+
+      //-------------------------------------------------------
+      // define local constants 
+      //-------------------------------------------------------
+      const double KTS2MPS = Basic::Distance::NM2M / Basic::Time::H2S;
+
+      //-------------------------------------------------------
+      // convert argument units (deg -> rad)
+      //-------------------------------------------------------   
+      double velCmdMps     = v * KTS2MPS;
+      double velDotCmdMps2 = vNps * KTS2MPS;
+
+      //-------------------------------------------------------
+      // current vel error (rad)
+      //-------------------------------------------------------   
+      double velMps    = pPlr->getTotalVelocityKts() * KTS2MPS;
+      double velErrMps = velCmdMps - velMps;
+
+      //-------------------------------------------------------
+      // vel error break point (rad)
+      //-------------------------------------------------------   
+      const double TAU = 1.0;  // time constant [sec]
+      double velErrBrkMps = velDotCmdMps2 * TAU;
+
+      //-------------------------------------------------------
+      // control signal for commanded vel (rps)
+      //-------------------------------------------------------
+      double velDotMps2 = sign(velErrMps) * velDotCmdMps2;
+      if (std::abs(velErrMps) < velErrBrkMps) {
+         velDotMps2 = (velErrMps / velErrBrkMps) * velDotCmdMps2;
+      }
+
+      //-------------------------------------------------------
+      // assign result to velocity control
+      //-------------------------------------------------------
+      uDot = velDotMps2;
+   }
+
    return true;
 }
 

@@ -123,7 +123,7 @@ bool DynamicsModel::setVelocityHoldOn(const bool)
 }
 
 // setCommandedVelocityKts() --   Sets commanded velocity (kts)
-bool DynamicsModel::setCommandedVelocityKts(const double)
+bool DynamicsModel::setCommandedVelocityKts(const double, const double)
 {
    return false;
 }

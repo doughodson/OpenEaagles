@@ -985,9 +985,9 @@ bool JSBSimModel::setVelocityHoldOn(const bool b)
     return hasVelocityHold;
 }
 
-bool JSBSimModel::setCommandedVelocityKts(const double a)
+bool JSBSimModel::setCommandedVelocityKts(const double v, const double vNps)
 {
-    commandedVelocityKts = a;
+    commandedVelocityKts = v;
     return hasVelocityHold;
 }
 

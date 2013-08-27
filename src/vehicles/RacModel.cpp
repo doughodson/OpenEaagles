@@ -178,9 +178,9 @@ bool RacModel::setVelocityHoldOn(const bool)
 }
 
 // setCommandedVelocityKts() --   Sets commanded velocity (kts)
-bool RacModel::setCommandedVelocityKts(const double kts)
+bool RacModel::setCommandedVelocityKts(const double v, const double vNps)
 {
-   cmdVelocity = kts;
+   cmdVelocity = v;
    return true;
 }
 
