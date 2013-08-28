@@ -14,8 +14,7 @@ else:unix:!macx:!symbian: TARGET = oeBasicGL
 INCLUDEPATH += \
    $${OE_ROOT}/include                      \
    $${OE_3RD_PARTY_ROOT}/include            \
-   $${OE_3RD_PARTY_ROOT}/include/freetype2
-
+   $${FREETYPE2_INC_DIR}/include/freetype2
 # Header files
 HEADERS += \
    $${OE_ROOT}/include/openeaagles/basicGL/*.h                    

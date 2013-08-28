@@ -10,6 +10,10 @@ OE_ROOT=$$PWD/../../
 # OpenEaagles3rdParty Root
 OE_3RD_PARTY_ROOT=$$PWD/../../../OpenEaagles3rdParty
 
+# freetype is in different places for linux vs windows
+win32: FREETYPE2_INC_DIR = $${OE_3RD_PARTY_ROOT}
+else:unix:!macx:!symbian: FREETYPE2_INC_DIR = /usr/
+
 # destination and working directories
 win32: DESTDIR = $${OE_ROOT}/lib/$${MSVC_VER}/
 else:unix:!macx:!symbian: DESTDIR = $${OE_ROOT}/lib/linux
