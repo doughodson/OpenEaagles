@@ -10,6 +10,7 @@ SUBDIRS =
 OBJS =  \
 	$(LIB)(vehiclesFF.o) \
 	$(LIB)(JSBSimModel.o) \
+	$(LIB)(LaeroModel.o)  \
 	$(LIB)(RacModel.o)
 
 all: ${OBJS}

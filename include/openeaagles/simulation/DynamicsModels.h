@@ -46,17 +46,23 @@ public:
     virtual bool isHeadingHoldOn() const;
     virtual double getCommandedHeadingD() const;
     virtual bool setHeadingHoldOn(const bool b);
-    virtual bool setCommandedHeadingD(const double h);
+    // commanded heading now takes the degrees per second rate of heading change and maximum bank angle as
+    // parameters.  It's up to the dynamics model derived class to utilize these for calculating heading
+    virtual bool setCommandedHeadingD(const double h, const double hDps = 0, const double maxBank = 0);
 
     virtual bool isVelocityHoldOn() const;
     virtual double getCommandedVelocityKts() const;
     virtual bool setVelocityHoldOn(const bool b);
-    virtual bool setCommandedVelocityKts(const double a);
+    // commanded velocity now take a acceleration limiter, which will determine how fast the model
+    // gets to the actual commanded velocity
+    virtual bool setCommandedVelocityKts(const double v, const double vNps = 0);
                                                                                 
     virtual bool isAltitudeHoldOn() const;
     virtual double getCommandedAltitude() const;
     virtual bool setAltitudeHoldOn(const bool b);
-    virtual bool setCommandedAltitude(const double a);
+    // commanded altitude now takes a second parameter, aMpm - which stands for meters per second.  This limits
+    // the speed in which the pilot climbs or dives, and how far they can climb or dive
+    virtual bool setCommandedAltitude(const double a, const double aMps = 0, const double maxPitch = 0);
 
     virtual LCreal getFuelWt() const;                   // lbs
     virtual LCreal getFuelWtMax() const;                // lbs
