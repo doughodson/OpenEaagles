@@ -11,7 +11,7 @@ namespace Eaagles {
 namespace Network {
 namespace Hla {
 
-class HlaIO;
+class NetIO;
 
 //------------------------------------------------------------------------------
 // Class:	Hla::Ambassador
@@ -25,7 +25,7 @@ class HlaIO;
 //
 // Public member functions:
 //
-//      HlaIO* getHlaIO()
+//      Hla::NetIO* getNetIO()
 //          Returns a pointer to the HLA Network I/O class that is controlling
 //          this ambassador.
 //
@@ -33,13 +33,13 @@ class HlaIO;
 class Ambassador : public RTI::FederateAmbassador {
 
 public:
-   Ambassador(HlaIO* nio);
+   Ambassador(NetIO* nio);
    virtual ~Ambassador() throw(RTI::FederateInternalError);
     
-   HlaIO* getHlaIO()               { return hlaIo; }
+   NetIO* getNetIO()               { return hlaIo; }
 
 private:
-   HlaIO*         hlaIo;         // Our controlling hlaIo
+   NetIO*         hlaIo;         // Our controlling NeIO
 
 // ---
 // -- Standard FederateAmbassador interface --
