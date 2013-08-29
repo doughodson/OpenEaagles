@@ -1,5 +1,5 @@
 
-#include "eaagles/hla/rprFom/RprFom.h"
+#include "openeaagles/hla/rprFom/RprFom.h"
  
 namespace Eaagles {
 namespace Network {
@@ -15,11 +15,7 @@ EMPTY_SLOTTABLE(BaseEntity)
 EMPTY_SERIALIZER(BaseEntity)
 
 BaseEntity::BaseEntity() :
-         accelerationVector(), angularVelocityVector(),
-         deadReckoningAlgorithm(DRM_RVW), entityType(),
-         federateID(), isFrozen(RTI::RTI_FALSE), 
-         orientation(), position(),
-         velocityVector()
+   entityType(), entityIdentifier(), spatial(), relativeSpatial()
 {
 }
 
@@ -30,6 +26,7 @@ void BaseEntity::copyData(const BaseEntity& org, const bool)
 
 EMPTY_DELETEDATA(BaseEntity)
 
+
 //==============================================================================
 // PhysicalEntity Structure (S)
 //==============================================================================
@@ -38,14 +35,19 @@ IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(PhysicalEntity,"PhysicalEntity")
 EMPTY_SERIALIZER(PhysicalEntity)
 
 PhysicalEntity::PhysicalEntity() :
+         BaseEntity(), acousticSignatureIndex(0),
+         alternateEntityType(), camouflageType(UNIFORM_PAINT_SCHEME),
          damageState(NO_DAMAGE), engineSmokeOn(RTI::RTI_FALSE),
-         flamesPresent(RTI::RTI_FALSE), hasFuelSupplyCap(RTI::RTI_FALSE),
-         hasRecoveryCap(RTI::RTI_FALSE), hasRepairCap(RTI::RTI_FALSE),
-         hatchState(HATCH_STATE_NOT_APPLICABLE), immobilized(RTI::RTI_FALSE),
-         lifeformState(LIFEFORM_STATE_NOT_APPLICABLE), lightsState(LIGHT_STATE_OTHER),
-         marking(), powerPlantOn(RTI::RTI_FALSE),
-         rampDeployed(RTI::RTI_FALSE),smokePlumePresent(RTI::RTI_FALSE),
-         tentDeployed(RTI::RTI_FALSE)
+         firePowerDisabled(RTI::RTI_FALSE), flamesPresent(RTI::RTI_FALSE),
+         forceIdentifier(OTHER), hasAmmunitionSupplyCap(RTI::RTI_FALSE),
+         hasFuelSupplyCap(RTI::RTI_FALSE), hasRecoveryCap(RTI::RTI_FALSE),
+         hasRepairCap(RTI::RTI_FALSE), immobilized(RTI::RTI_FALSE),
+         infraredSignatureIndex(0), isConcealed(RTI::RTI_FALSE),
+         marking(), liveEntityMeasuredSpeed(0),
+         powerPlantOn(RTI::RTI_FALSE), propulsionSystemsData(),
+         radarCrossSectionSignatureIndex(0), smokePlumePresent(RTI::RTI_FALSE),
+         tentDeployed(RTI::RTI_FALSE), trailingEffectsCode(NO_TRAIL),
+         vectoringNozzleSystemData()
 {
 }
 
@@ -55,194 +57,192 @@ void PhysicalEntity::copyData(const PhysicalEntity& org, const bool)
 }
 
 EMPTY_DELETEDATA(PhysicalEntity)
-
-//==============================================================================
-// MilitaryEntity Structure (S)
-//==============================================================================
-
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(MilitaryEntity,"MilitaryEntity")
-EMPTY_SERIALIZER(MilitaryEntity)
-
-MilitaryEntity::MilitaryEntity() :
-      alternateEntityType(), camouflageType(RTI::RTI_FALSE),
-      isConcealed(RTI::RTI_FALSE), firePowerDisabled(RTI::RTI_FALSE),
-      forceID(FORCE_ID_OTHER)
-{
-}
-
-void MilitaryEntity::copyData(const MilitaryEntity& org, const bool)
-{
-    BaseClass::copyData(org);
-}
-
-EMPTY_DELETEDATA(MilitaryEntity)
     
 
+
 //==============================================================================
-// Soldier Structure (PS)
+// Lifeform Structure (S)
 //==============================================================================
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Soldier,"Soldier")
-EMPTY_SERIALIZER(Soldier)
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Lifeform,"Lifeform")
+EMPTY_SERIALIZER(Lifeform)
 
-Soldier::Soldier() :
-         primaryWeaponState(NO_WEAPON), secondaryWeaponState(NO_WEAPON)
+Lifeform::Lifeform()
 {
 }
 
-void Soldier::copyData(const Soldier& org, const bool)
-{
-    BaseClass::copyData(org);
-}
-
-EMPTY_DELETEDATA(Soldier)
-
-
-//==============================================================================
-// MunitionEntity Structure (PS)
-//==============================================================================
-
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(MunitionEntity,"MunitionEntity")
-EMPTY_SERIALIZER(MunitionEntity)
-
-MunitionEntity::MunitionEntity() :
-         launcherFlashPresent(RTI::RTI_FALSE)
-{
-}
-
-void MunitionEntity::copyData(const MunitionEntity& org, const bool)
+void Lifeform::copyData(const Lifeform& org, const bool)
 {
     BaseClass::copyData(org);
 }
 
-EMPTY_DELETEDATA(MunitionEntity)
-
+EMPTY_DELETEDATA(Lifeform)
 
 //==============================================================================
-// MilitaryPlatformEntity Structure (PS)
+// Human Structure (PS)
 //==============================================================================
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(MilitaryPlatformEntity,"MilitaryPlatformEntity")
-EMPTY_SERIALIZER(MilitaryPlatformEntity)
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Human,"Human")
+EMPTY_SERIALIZER(Human)
 
-MilitaryPlatformEntity::MilitaryPlatformEntity() :
-      afterburnerOn(RTI::RTI_FALSE), hasAmmunitionSupplyCap(RTI::RTI_FALSE),
-      launcherRaised(RTI::RTI_FALSE)
+Human::Human()
 {
 }
 
-void MilitaryPlatformEntity::copyData(const MilitaryPlatformEntity& org, const bool)
+void Human::copyData(const Human& org, const bool)
 {
     BaseClass::copyData(org);
 }
 
-EMPTY_DELETEDATA(MilitaryPlatformEntity)
+EMPTY_DELETEDATA(Human)
 
 
 //==============================================================================
-// MilitaryMultiDomainPlatform Structure (PS)
+// NonHuman Structure (PS)
 //==============================================================================
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(MilitaryMultiDomainPlatform,"MilitaryMultiDomainPlatform")
-EMPTY_SERIALIZER(MilitaryMultiDomainPlatform)
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(NonHuman,"NonHuman")
+EMPTY_SERIALIZER(NonHuman)
 
-MilitaryMultiDomainPlatform::MilitaryMultiDomainPlatform()
+NonHuman::NonHuman()
 {
 }
 
-EMPTY_COPYDATA(MilitaryMultiDomainPlatform)
-EMPTY_DELETEDATA(MilitaryMultiDomainPlatform)
+void NonHuman::copyData(const NonHuman& org, const bool)
+{
+    BaseClass::copyData(org);
+}
+
+EMPTY_DELETEDATA(NonHuman)
+
+
+//==============================================================================
+// Munition Structure (PS)
+//==============================================================================
+
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Munition,"Munition")
+EMPTY_SERIALIZER(Munition)
+
+Munition::Munition() :  PhysicalEntity(), 
+                launcherFlashPresent(RTI::RTI_FALSE)
+{
+}
+
+void Munition::copyData(const Munition& org, const bool)
+{
+    BaseClass::copyData(org);
+}
+
+EMPTY_DELETEDATA(Munition)
+
+//==============================================================================
+// Platform Structure (S)
+//==============================================================================
+
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Platform,"Platform")
+EMPTY_SERIALIZER(Platform)
+
+Platform::Platform() :  PhysicalEntity(), 
+                afterburnerOn(RTI::RTI_FALSE), antiCollisionLightsOn(RTI::RTI_FALSE), blackOutBrakeLightsOn(RTI::RTI_FALSE),
+                blackOutLightsOn(RTI::RTI_FALSE), brakeLightsOn(RTI::RTI_FALSE), formationLightsOn(RTI::RTI_FALSE), 
+                hatchState(HATCH_STATE_NOT_APPLICABLE), headLightsOn(RTI::RTI_FALSE), interiorLightsOn(RTI::RTI_FALSE),
+                landingLightsOn(RTI::RTI_FALSE), launcherRaised(RTI::RTI_FALSE), navigationLightsOn(RTI::RTI_FALSE),
+                rampDeployed(RTI::RTI_FALSE), runningLightsOn(RTI::RTI_FALSE), spotLightsOn(RTI::RTI_FALSE),
+                tailLightsOn(RTI::RTI_FALSE)
+{
+}
+
+void Platform::copyData(const Platform& org, const bool)
+{
+    BaseClass::copyData(org);
+}
+
+EMPTY_DELETEDATA(Platform)
+
+//==============================================================================
+// Aircraft Structure (PS)
+//==============================================================================
+
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Aircraft,"Aircraft")
+EMPTY_SERIALIZER(Aircraft)
+
+Aircraft::Aircraft() :  Platform() {}
+
+EMPTY_COPYDATA(Aircraft)
+EMPTY_DELETEDATA(Aircraft)
   
 //==============================================================================
-// MilitarySubmersiblePlatform Structure (PS)
+// AmphibiousVehicle Structure (PS)
 //==============================================================================
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(MilitarySubmersiblePlatform,"MilitarySubmersiblePlatform")
-EMPTY_SERIALIZER(MilitarySubmersiblePlatform)
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(AmphibiousVehicle,"AmphibiousVehicle")
+EMPTY_SERIALIZER(AmphibiousVehicle)
 
-MilitarySubmersiblePlatform::MilitarySubmersiblePlatform()
-{
-}
+AmphibiousVehicle::AmphibiousVehicle() :  Platform() {}
 
-EMPTY_COPYDATA(MilitarySubmersiblePlatform)
-EMPTY_DELETEDATA(MilitarySubmersiblePlatform)
+EMPTY_COPYDATA(AmphibiousVehicle)
+EMPTY_DELETEDATA(AmphibiousVehicle)
   
-
 //==============================================================================
-// MilitarySeaSurfacePlatform Structure (PS)
-//==============================================================================
-
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(MilitarySeaSurfacePlatform,"MilitarySeaSurfacePlatform")
-EMPTY_SERIALIZER(MilitarySeaSurfacePlatform)
-
-MilitarySeaSurfacePlatform::MilitarySeaSurfacePlatform()
-{
-}
-
-EMPTY_COPYDATA(MilitarySeaSurfacePlatform)
-EMPTY_DELETEDATA(MilitarySeaSurfacePlatform)
-
-
-//==============================================================================
-// MilitarySpacePlatform Structure (PS)
+// GroundVehicle Structure (S)
 //==============================================================================
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(MilitarySpacePlatform,"MilitarySpacePlatform")
-EMPTY_SERIALIZER(MilitarySpacePlatform)
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(GroundVehicle,"GroundVehicle")
+EMPTY_SERIALIZER(GroundVehicle)
 
-MilitarySpacePlatform::MilitarySpacePlatform()
-{
-}
+GroundVehicle::GroundVehicle() :  Platform() {}
 
-EMPTY_COPYDATA(MilitarySpacePlatform)
-EMPTY_DELETEDATA(MilitarySpacePlatform)
-
-
-//==============================================================================
-// MilitaryLandPlatform Structure (PS)
-//==============================================================================
-
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(MilitaryLandPlatform,"MilitaryLandPlatform")
-EMPTY_SERIALIZER(MilitaryLandPlatform)
-
-MilitaryLandPlatform::MilitaryLandPlatform()
-{
-}
-
-EMPTY_COPYDATA(MilitaryLandPlatform)
-EMPTY_DELETEDATA(MilitaryLandPlatform)
-
-
-//==============================================================================
-// MilitaryAmphibiousPlatform Structure (PS)
-//==============================================================================
-
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(MilitaryAmphibiousPlatform,"MilitaryAmphibiousPlatform")
-EMPTY_SERIALIZER(MilitaryAmphibiousPlatform)
-
-MilitaryAmphibiousPlatform::MilitaryAmphibiousPlatform()
-{
-}
-
-EMPTY_COPYDATA(MilitaryAmphibiousPlatform)
-EMPTY_DELETEDATA(MilitaryAmphibiousPlatform)
-
-
-//==============================================================================
-// MilitaryAirLandPlatform Structure (PS)
-//==============================================================================
-
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(MilitaryAirLandPlatform,"MilitaryAirLandPlatform")
-EMPTY_SERIALIZER(MilitaryAirLandPlatform)
-
-MilitaryAirLandPlatform::MilitaryAirLandPlatform()
-{
-}
-
-EMPTY_COPYDATA(MilitaryAirLandPlatform)
-EMPTY_DELETEDATA(MilitaryAirLandPlatform)
- 
+EMPTY_COPYDATA(GroundVehicle)
+EMPTY_DELETEDATA(GroundVehicle)
   
+//==============================================================================
+// MultiDomainPlatform Structure (PS)
+//==============================================================================
+
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(MultiDomainPlatform,"MultiDomainPlatform")
+EMPTY_SERIALIZER(MultiDomainPlatform)
+
+MultiDomainPlatform::MultiDomainPlatform() :  Platform() {}
+
+EMPTY_COPYDATA(MultiDomainPlatform)
+EMPTY_DELETEDATA(MultiDomainPlatform)
+  
+//==============================================================================
+// Spacecraft Structure (PS)
+//==============================================================================
+
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Spacecraft,"Spacecraft")
+EMPTY_SERIALIZER(Spacecraft)
+
+Spacecraft::Spacecraft() :  Platform() {}
+
+EMPTY_COPYDATA(Spacecraft)
+EMPTY_DELETEDATA(Spacecraft)
+  
+//==============================================================================
+// SubmersibleVessel Structure (PS)
+//==============================================================================
+
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(SubmersibleVessel,"SubmersibleVessel")
+EMPTY_SERIALIZER(SubmersibleVessel)
+
+SubmersibleVessel::SubmersibleVessel() :  Platform() {}
+
+EMPTY_COPYDATA(SubmersibleVessel)
+EMPTY_DELETEDATA(SubmersibleVessel)
+
+//==============================================================================
+// SurfaceVessel Structure (PS)
+//==============================================================================
+
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(SurfaceVessel,"SurfaceVessel")
+EMPTY_SERIALIZER(SurfaceVessel)
+
+SurfaceVessel::SurfaceVessel() :  Platform() {}
+
+EMPTY_COPYDATA(SurfaceVessel)
+EMPTY_DELETEDATA(SurfaceVessel)
+
 } // End RprFom namespace
 } // End Hla namespace
 } // End Network namespace

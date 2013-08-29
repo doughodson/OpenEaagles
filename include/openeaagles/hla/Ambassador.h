@@ -1,8 +1,9 @@
 //------------------------------------------------------------------------------
-// Class:	Hla::Ambassador
+// Class: Ambassador
 //------------------------------------------------------------------------------
-#ifndef __Hla_Ambassador_H_B8FDDD29_2276_4fee_BE81_EEE8BF866F31__
-#define __Hla_Ambassador_H_B8FDDD29_2276_4fee_BE81_EEE8BF866F31__
+
+#ifndef __Eaagles_Network_Hla_Ambassador_H__
+#define __Eaagles_Network_Hla_Ambassador_H__
 
 #include <RTI.hh>
 #include <fedtime.hh>
@@ -11,10 +12,10 @@ namespace Eaagles {
 namespace Network {
 namespace Hla {
 
-class HlaIO;
+class NetIO;
 
 //------------------------------------------------------------------------------
-// Class:	Hla::Ambassador
+// Class: Ambassador
 // Base class:	RTI::FederateAmbassador -> Hla::Ambassador
 //
 // Description:	Basic ambassador to the Federation.  Our federate unqiue
@@ -22,24 +23,23 @@ class HlaIO;
 //              parameter passing are in <federateAmbServices.hh>, which
 //              is included in <RTI.hh>)
 //
-//
 // Public member functions:
 //
-//      HlaIO* getHlaIO()
+//      Hla::NetIO* getNetIO()
 //          Returns a pointer to the HLA Network I/O class that is controlling
 //          this ambassador.
 //
 //------------------------------------------------------------------------------
-class Ambassador : public RTI::FederateAmbassador {
-
+class Ambassador : public RTI::FederateAmbassador
+{
 public:
-   Ambassador(HlaIO* nio);
+   Ambassador(NetIO* nio);
    virtual ~Ambassador() throw(RTI::FederateInternalError);
     
-   HlaIO* getHlaIO()               { return hlaIo; }
+   NetIO* getNetIO()               { return hlaIo; }
 
 private:
-   HlaIO*         hlaIo;         // Our controlling hlaIo
+   NetIO*         hlaIo;         // Our controlling NeIO
 
 // ---
 // -- Standard FederateAmbassador interface --
@@ -418,4 +418,5 @@ public:
 } // End Network namespace
 } // End Eaagles namespace
 
-#endif  /* __Hla_Ambassador_H_B8FDDD29_2276_4fee_BE81_EEE8BF866F31__ */
+#endif
+

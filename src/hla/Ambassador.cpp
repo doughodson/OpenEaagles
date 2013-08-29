@@ -1,6 +1,13 @@
-#include "eaagles/hla/Ambassador.h"
-#include "eaagles/hla/HlaIO.h"
-#include "eaagles/hla/Nib.h"
+//------------------------------------------------------------------------------
+// Class: Ambassador
+//------------------------------------------------------------------------------
+
+#include "openeaagles/hla/Ambassador.h"
+#include "openeaagles/hla/NetIO.h"
+#include "openeaagles/hla/Nib.h"
+
+// turn off the "unreferenced formal parameter" warning.
+#pragma warning(disable:4100)
 
 using namespace std;
 
@@ -11,7 +18,7 @@ namespace Hla {
 //------------------------------------------------------------------------------
 // Constructor
 //------------------------------------------------------------------------------
-Ambassador::Ambassador(HlaIO* n)
+Ambassador::Ambassador(NetIO* n)
 {
    hlaIo = n;
 }
@@ -33,7 +40,7 @@ throw (
    RTI::FederateInternalError)
 {
    //std::cout << "Ambassador::startRegistrationForObjectClass(): " ;
-   HlaIO* netIO = getHlaIO();
+   NetIO* netIO = getNetIO();
    int classIndex = netIO->findObjectClassIndex(theClass);
    if (classIndex != 0 && netIO->isObjectClassPublished(classIndex)) {
       // It's an object class that we publish, so we can start to
@@ -54,7 +61,7 @@ throw (
    RTI::FederateInternalError)
 {
    //std::cout << "Ambassador::stopRegistrationForObjectClass(): ";
-   HlaIO* netIO = getHlaIO();
+   NetIO* netIO = getNetIO();
    int classIndex = netIO->findObjectClassIndex(theClass);
    if (classIndex != 0 ) {
       //std::cout << classIndex;
@@ -77,8 +84,8 @@ throw (
    //std::cout << "Ambassador:turnUpdatesOnForObjectInstance(): theObject = " << theObject;
 
    // Find the output object
-   Simulation:HlaIO* netIO = getHlaIO();
-   Nib* nib = (Nib*)(netIO->findNibByObjectHandle(theObject, HlaIO::OUTPUT_NIB));
+   NetIO* netIO = getNetIO();
+   Nib* nib = (Nib*)(netIO->findNibByObjectHandle(theObject, NetIO::OUTPUT_NIB));
 
    if (nib != 0) nib->turnUpdatesOn(theAttributes);
    //else std::cout << " NOT FOUND";
@@ -99,8 +106,8 @@ throw (
    //std::cout << "Ambassador:turnUpdatesOffForObjectInstance(): ";
 
    // Find the output object
-   HlaIO* netIO = getHlaIO();
-   Nib* nib = (Nib*)(netIO->findNibByObjectHandle(theObject, HlaIO::OUTPUT_NIB));
+   NetIO* netIO = getNetIO();
+   Nib* nib = (Nib*)(netIO->findNibByObjectHandle(theObject, NetIO::OUTPUT_NIB));
 
    if (nib != 0) nib->turnUpdatesOff(theAttributes);
    //std::cout << std::endl;
@@ -120,8 +127,8 @@ throw (
 {
    //std::cout << "Ambassador:provideAttributeValueUpdate(): ";
    // Find the output object
-   HlaIO* netIO = getHlaIO();
-   Nib* nib = (Nib*)( netIO->findNibByObjectHandle(theObject, HlaIO::OUTPUT_NIB) );
+   NetIO* netIO = getNetIO();
+   Nib* nib = (Nib*)( netIO->findNibByObjectHandle(theObject, NetIO::OUTPUT_NIB) );
 
    if (nib != 0) nib->provideAttributeValueUpdate(theAttrs);
    //std::cout << std::endl;
@@ -140,13 +147,13 @@ throw (
    RTI::FederateInternalError)
 {
    std::cout << "Ambassador::discoverObjectInstance(): " << theObjectName << ", handle = " << theObject << std::endl; 
-   HlaIO* netIO = getHlaIO();
+   NetIO* netIO = getNetIO();
    int classIndex = netIO->findObjectClassIndex(theObjectClass);
    if (classIndex != 0 && netIO->isObjectClassSubscribed(classIndex)) {
       // It's an object class that we've subscribed to ...
 
-      // just act as an interface to HlaIO, which will handle this.
-      getHlaIO()->discoverObjectInstance(theObject, theObjectClass, theObjectName);
+      // just act as an interface to NetIO, which will handle this.
+      getNetIO()->discoverObjectInstance(theObject, theObjectClass, theObjectName);
    }
 }
 
@@ -176,10 +183,10 @@ throw (
    std::cout << "Ambassador::removeObjectInstance(): remove object = " << theObject << ", theTag=" << theTag << std::endl;
 
    // find the input object
-   HlaIO* netIO = getHlaIO();
-   Nib* nib = netIO->findNibByObjectHandle(theObject, HlaIO::INPUT_NIB);
+   NetIO* netIO = getNetIO();
+   Nib* nib = netIO->findNibByObjectHandle(theObject, NetIO::INPUT_NIB);
    if (nib != 0) {
-      // set NIB delete request (Simulation::NetworkIO::cleanupInputList() should handle this)
+      // set NIB delete request (Simulation::NetIO::cleanupInputList() should handle this)
       nib->setMode(Simulation::Player::DELETE_REQUEST);
    }
 }
@@ -215,8 +222,8 @@ throw (
 {
    //std::cout << "Ambassador::reflectAttributeValues(): object = " << theObject << ", theTag=" << theTag << std::endl;
    // find the input object
-   HlaIO* netIO = getHlaIO();
-   Nib* nib = (Nib*)( netIO->findNibByObjectHandle(theObject, HlaIO::INPUT_NIB) );
+   NetIO* netIO = getNetIO();
+   Nib* nib = (Nib*)( netIO->findNibByObjectHandle(theObject, NetIO::INPUT_NIB) );
    if (nib != 0) nib->reflectAttributeValues(theAttrs);
 }
 
@@ -230,7 +237,7 @@ void Ambassador::turnInteractionsOn (
      RTI::FederateInternalError)
 {
    std::cout << "Ambassador::turnInteractionsOn(): " ;
-   HlaIO* netIO = getHlaIO();
+   NetIO* netIO = getNetIO();
    int idx = netIO->findInteractionClassIndex(theInteraction);
    if (idx != 0 && netIO->isInteractionClassPublished(idx)) {
       // It's an interaction that we publish, so we can start
@@ -251,7 +258,7 @@ void Ambassador::turnInteractionsOff (
      RTI::FederateInternalError)
 {
    std::cout << "Ambassador::turnInteractionsOff(): " ;
-   HlaIO* netIO = getHlaIO();
+   NetIO* netIO = getNetIO();
    int idx = netIO->findInteractionClassIndex(theInteraction);
    if (idx != 0) {
       std::cout << idx; 
@@ -289,13 +296,13 @@ throw (
    RTI::FederateInternalError)
 {
    std::cout << "Ambassador::receiveInteraction(): " << theInteraction << std::endl; 
-   HlaIO* netIO = getHlaIO();
+   NetIO* netIO = getNetIO();
    int idx = netIO->findInteractionClassIndex(theInteraction);
    if (idx != 0 && netIO->isInteractionClassSubscribed(idx)) {
       // It's an interaction that we subscribe to, so ...
 
-      // just act as an interface to HlaIO, which will handle this.
-      getHlaIO()->receiveInteraction(theInteraction, theParameters);
+      // just act as an interface to NetIO, which will handle this.
+      getNetIO()->receiveInteraction(theInteraction, theParameters);
    }
 }
 
@@ -623,7 +630,6 @@ throw (
 //  cout << "### timeAdvanceGrant callback Time: " << hlaIo->getFederationTime() << endl;
 }
 
-
 void
 Ambassador::requestRetraction (
    RTI::EventRetractionHandle theHandle)
@@ -637,3 +643,4 @@ throw (
 } // End Hla namespace
 } // End Network namespace
 } // End Eaagles namespace
+

@@ -1,10 +1,19 @@
+//------------------------------------------------------------------------------
+// Class: Nib
+//------------------------------------------------------------------------------
 
-#include "eaagles/hla/Nib.h"
-#include "eaagles/hla/HlaIO.h"
-#include "eaagles/hla/Ambassador.h"
-#include "eaagles/basic/String.h"
-#include "eaagles/basic/Number.h"
-#include "eaagles/basic/Pair.h"
+#include "openeaagles/hla/Nib.h"
+#include "openeaagles/hla/NetIO.h"
+#include "openeaagles/hla/Ambassador.h"
+#include "openeaagles/basic/String.h"
+#include "openeaagles/basic/Number.h"
+#include "openeaagles/basic/Pair.h"
+
+// disable all deprecation warnings for now, until we fix
+// they are quite annoying to see over and over again...
+#if(_MSC_VER>=1400)   // VC8+
+# pragma warning(disable: 4996)
+#endif
 
 namespace Eaagles {
 namespace Network {
@@ -13,12 +22,13 @@ namespace Hla {
 //==============================================================================
 // Class: Nib
 //==============================================================================
-IMPLEMENT_PARTIAL_SUBCLASS(Nib,"HlaNib")
+IMPLEMENT_PARTIAL_SUBCLASS(Nib, "HlaNib")
 EMPTY_SLOTTABLE(Nib)
 EMPTY_SERIALIZER(Nib)
 
-Nib::Nib(const Simulation::NetworkIO::IoType ioType) : Simulation::Nib(ioType), oname()
+Nib::Nib(const Simulation::NetIO::IoType ioType) : Simulation::Nib(ioType), oname()
 {
+   SET_SLOTTABLE
    handle = 0;
    objectClassIndex = 0;
    setTimeoutEnabled(true);
@@ -28,8 +38,8 @@ Nib::Nib(const Simulation::NetworkIO::IoType ioType) : Simulation::Nib(ioType), 
 
 Nib::Nib(const Nib& org) : Simulation::Nib(org.getIoType())
 { 
-    SET_SLOTTABLE
-    copyData(org,true);
+   SET_SLOTTABLE
+   copyData(org,true);
 }
 
 Nib::~Nib()
@@ -39,14 +49,14 @@ Nib::~Nib()
 
 Nib& Nib::operator=(const Nib& org)
 {
-    deleteData();
-    copyData(org,false);
-    return *this;
+   deleteData();
+   copyData(org,false);
+   return *this;
 }
 
 Basic::Object* Nib::clone() const
 {
-    return new Nib(*this);
+   return new Nib(*this);
 }
 
 void Nib::copyData(const Nib& org, const bool)
@@ -56,7 +66,7 @@ void Nib::copyData(const Nib& org, const bool)
    handle = org.handle;
    objectClassIndex = org.objectClassIndex;
 
-   for (int i = 0; i < HlaIO::MAX_ATTRIBUTES; i++) {
+   for (unsigned int i = 0; i < NetIO::MAX_ATTRIBUTES; i++) {
       updateEnabled[i] = org.updateEnabled[i];
       updateRequired[i] = org.updateRequired[i];
    }
@@ -64,7 +74,6 @@ void Nib::copyData(const Nib& org, const bool)
 
 void Nib::deleteData()
 {
-   BaseClass::deleteData();
 }
 
 //------------------------------------------------------------------------------
@@ -75,7 +84,7 @@ void Nib::setObjectHandle(RTI::ObjectHandle h)
    handle = h;
 }
 
-void Nib::setClassIndex(const int idx)
+void Nib::setClassIndex(const unsigned int idx)
 {
    objectClassIndex = idx;
 }
@@ -107,21 +116,21 @@ void Nib::reflectAttributeValues(const RTI::AttributeHandleValuePairSet&)
 //------------------------------------------------------------------------------
 // HLA attribute update required flags
 //------------------------------------------------------------------------------
-void Nib::setAttributeUpdateRequiredFlag(const int attribIndex, const bool flg)
+void Nib::setAttributeUpdateRequiredFlag(const unsigned int attribIndex, const bool flg)
 {
-   if (attribIndex >= 1 && attribIndex <= HlaIO::MAX_ATTRIBUTES) updateRequired[attribIndex-1] = flg;
+   if (attribIndex >= 1 && attribIndex <= NetIO::MAX_ATTRIBUTES) updateRequired[attribIndex-1] = flg;
 }
 
 void Nib::setAllAttributeUpdateRequiredFlags()
 {
-   for (int i = 1; i <= HlaIO::MAX_ATTRIBUTES; i++) {
+   for (unsigned int i = 1; i <= NetIO::MAX_ATTRIBUTES; i++) {
       setAttributeUpdateRequiredFlag(i,true);
    }
 }
 
 void Nib::clearAllAttributeUpdateRequiredFlags()
 {
-   for (int i = 1; i <= HlaIO::MAX_ATTRIBUTES; i++) {
+   for (unsigned int i = 1; i <= NetIO::MAX_ATTRIBUTES; i++) {
       setAttributeUpdateRequiredFlag(i,false);
    }
 }
@@ -129,14 +138,14 @@ void Nib::clearAllAttributeUpdateRequiredFlags()
 //------------------------------------------------------------------------------
 // HLA attribute update enabled flags
 //------------------------------------------------------------------------------
-void Nib::setAttributeUpdateEnabledFlag(const int attribIndex, const bool flg)
+void Nib::setAttributeUpdateEnabledFlag(const unsigned int attribIndex, const bool flg)
 {
-   if (attribIndex >= 1 && attribIndex <= HlaIO::MAX_ATTRIBUTES) updateEnabled[attribIndex-1] = flg;
+   if (attribIndex >= 1 && attribIndex <= NetIO::MAX_ATTRIBUTES) updateEnabled[attribIndex-1] = flg;
 }
 
 void Nib::clearAllAttributeUpdateEnabledFlags()
 {
-   for (int i = 1; i <= HlaIO::MAX_ATTRIBUTES; i++) {
+   for (unsigned int i = 1; i <= NetIO::MAX_ATTRIBUTES; i++) {
       setAttributeUpdateEnabledFlag(i,false);
    }
 }
@@ -157,13 +166,13 @@ bool Nib::isPlayerStateUpdateRequired(const LCreal curExecTime)
 //------------------------------------------------------------------------------
 void Nib::turnUpdatesOn(const RTI::AttributeHandleSet& theAttributes)
 {
-   HlaIO* hlaIO = (HlaIO*)(getNetworkIO());
+   NetIO* hlaIO = (NetIO*)(getNetIO());
    if (hlaIO != 0) {
       //std::cout << getObjectName();
       //std::cout << " ON ( ";
       for (RTI::ULong i = 0; i < theAttributes.size(); i++) {
          RTI::AttributeHandle theHandle =  theAttributes.getHandle(i);
-         int theIndex = hlaIO->findAttributeIndex(theHandle);
+         unsigned int theIndex = hlaIO->findAttributeIndex(theHandle);
          //std::cout << "[" << theHandle << ":";
          if (theIndex != 0) {
             //std::cout << theIndex;
@@ -182,13 +191,13 @@ void Nib::turnUpdatesOn(const RTI::AttributeHandleSet& theAttributes)
 //------------------------------------------------------------------------------
 void Nib::turnUpdatesOff(const RTI::AttributeHandleSet& theAttributes)
 {
-   HlaIO* hlaIO = (HlaIO*)(getNetworkIO());
+   NetIO* hlaIO = (NetIO*)(getNetIO());
    if (hlaIO != 0) {
       //std::cout << getObjectName();
       //std::cout << " OFF ( ";
       for (RTI::ULong i = 0; i < theAttributes.size(); i++) {
          RTI::AttributeHandle theHandle =  theAttributes.getHandle(i);
-         int theIndex = hlaIO->findAttributeIndex(theHandle);
+         unsigned int theIndex = hlaIO->findAttributeIndex(theHandle);
          //std::cout << "[" << theHandle << ":";
          if (theIndex != 0) {
             //std::cout << theIndex;
@@ -206,13 +215,13 @@ void Nib::turnUpdatesOff(const RTI::AttributeHandleSet& theAttributes)
 //------------------------------------------------------------------------------
 void Nib::provideAttributeValueUpdate(const RTI::AttributeHandleSet& theAttributes)
 {
-   HlaIO* hlaIO = (HlaIO*)(getNetworkIO());
+   NetIO* hlaIO = (NetIO*)(getNetIO());
    if (hlaIO != 0) {
       //std::cout << getObjectName();
       //std::cout << " Update ( ";
       for (RTI::ULong i = 0; i < theAttributes.size(); i++) {
          RTI::AttributeHandle theHandle =  theAttributes.getHandle(i);
-         int theIndex = hlaIO->findAttributeIndex(theHandle);
+         unsigned int theIndex = hlaIO->findAttributeIndex(theHandle);
          //std::cout << "[" << theHandle << ":";
          if (theIndex != 0) {
             //std::cout << theIndex;
@@ -227,3 +236,4 @@ void Nib::provideAttributeValueUpdate(const RTI::AttributeHandleSet& theAttribut
 } // End Hla namespace
 } // End Network namespace
 } // End Eaagles namespace
+
