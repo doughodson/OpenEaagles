@@ -4,8 +4,8 @@
 // Real-time Platform Reference FOM (RPR-FOM) Data Structures
 // RPR-FOM Version: 2.0 Draft 17
 //------------------------------------------------------------------------------
-#ifndef __Nib_H_28E899C1_758A_4073_810B_BF0969FB8C9B__
-#define __Nib_H_28E899C1_758A_4073_810B_BF0969FB8C9B__
+#ifndef __Eaagles_Network_Hla_RprFom_Nib_H__
+#define __Eaagles_Network_Hla_RprFom_Nib_H__
 
 #include "openeaagles/hla/Nib.h"
 
@@ -19,7 +19,6 @@ namespace RprFom {
 
 //==============================================================================
 // Class:       Nib
-// GUID: {28E899C1-758A-4073-810B-BF0969FB8C9B}
 //==============================================================================
 class DLLEXP Nib : public Hla::Nib
 {
@@ -111,4 +110,4 @@ private:
 } // End Network namespace
 } // End Eaagles namespace
 
-#endif // __Nib_H_B47879A1_CED4_42e5_9E65_CF07CF92310F__
+#endif

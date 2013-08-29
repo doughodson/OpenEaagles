@@ -6,8 +6,8 @@
 // Real-time Platform Reference FOM (RPR-FOM) Data Structures
 // RPR-FOM Version: 2.0 Draft 17
 //------------------------------------------------------------------------------
-#ifndef __NetIO_H_D18424CB_4EA3_4c1c_9BE7_DD24B6433B04__
-#define __NetIO_H_D18424CB_4EA3_4c1c_9BE7_DD24B6433B04__
+#ifndef __Eaagles_Network_Hla_RprFom_NetIO_H__
+#define __Eaagles_Network_Hla_RprFom_NetIO_H__
 
 #include "openeaagles/hla/NetIO.h"
 
@@ -26,7 +26,6 @@ namespace RprFom {
 //==============================================================================
 // Class: Hla::RprFom::NetIO
 // Form Name: RprFomNetIO
-// GUID: {D18424CB-4EA3-4c1c-9BE7-DD24B6433B04}
 //==============================================================================
 class DLLEXP NetIO : public Hla::NetIO  
 {
@@ -203,4 +202,4 @@ protected:
 } // End Network namespace
 } // End Eaagles namespace
 
-#endif // __NetIO_H_AD1D1AE8_768A_4d72_AF4C_90F4A4DFB6AF__
+#endif

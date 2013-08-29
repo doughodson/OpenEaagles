@@ -1,4 +1,6 @@
-
+//------------------------------------------------------------------------------
+// disFormFunc() -- parser form function for the DIS network
+//------------------------------------------------------------------------------
 #include "openeaagles/dis/disFF.h"
 #include "openeaagles/dis/NetIO.h"
 #include "openeaagles/dis/Ntm.h"

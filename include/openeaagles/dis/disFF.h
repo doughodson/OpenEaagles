@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// formFunc() -- parser form function for the DIS network
+// disFormFunc() -- parser form function for the DIS network
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_Network_Dis_FormFunc_H__
 #define __Eaagles_Network_Dis_FormFunc_H__

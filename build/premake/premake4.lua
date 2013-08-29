@@ -150,6 +150,14 @@ solution "oe"
       }
       targetname "Dis"
 
+   -- IEEE HLA interface library
+   project "hla"
+      files {
+         "../../include/openeaagles/hla/*.h",
+         "../../src/hla/*.cpp"
+      }
+      targetname "Hla"
+
    -- graphical instruments library
    project "instruments"
       files {
