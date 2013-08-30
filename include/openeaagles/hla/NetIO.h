@@ -31,9 +31,12 @@ class Nib;
 //==============================================================================
 class NetIO : public Simulation::NetIO
 {
-   DECLARE_SUBCLASS(NetIO,Simulation::NetIO)
+   DECLARE_SUBCLASS(NetIO, Simulation::NetIO)
 
 public:
+
+   NetIO();
+
    // Max active HLA object classes
    // Note: the class handle indexes range from 1 to MAX_CLASSES
    static const unsigned int MAX_CLASSES = 30;
@@ -51,7 +54,6 @@ public:
    static const unsigned int MAX_PARAMETERS = 100;
 
 public:
-    NetIO();
     
     // HLA Object Class handles
     //    Note: ndex range [ 1 ... MAX_CLASSES ]

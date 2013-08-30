@@ -27,6 +27,13 @@ OEIncPath         = "../../include"
 OE3rdPartyIncPath = OE_3RD_PARTY_ROOT.."/include"
 
 --
+-- directory location for HLA include and library paths
+--
+HLA_ROOT = "../../../CERTI_v3.4.0"
+HLAIncPath = HLA_ROOT.."/include"
+HLALibPath = HLA_ROOT.."/lib"
+
+--
 -- determine target directories for project/solution files and 
 -- compiled libraries
 --
@@ -156,6 +163,8 @@ solution "oe"
          "../../include/openeaagles/hla/*.h",
          "../../src/hla/*.cpp"
       }
+      includedirs { HLAIncPath }
+      defines { "RTI_USES_STD_FSTREAM" }
       targetname "Hla"
 
    -- graphical instruments library

@@ -28,7 +28,7 @@ EMPTY_SERIALIZER(Nib)
 
 Nib::Nib(const Simulation::NetIO::IoType ioType) : Simulation::Nib(ioType), oname()
 {
-   SET_SLOTTABLE
+   STANDARD_CONSTRUCTOR()
    handle = 0;
    objectClassIndex = 0;
    setTimeoutEnabled(true);
@@ -38,13 +38,13 @@ Nib::Nib(const Simulation::NetIO::IoType ioType) : Simulation::Nib(ioType), onam
 
 Nib::Nib(const Nib& org) : Simulation::Nib(org.getIoType())
 { 
-   SET_SLOTTABLE
+   STANDARD_CONSTRUCTOR()
    copyData(org,true);
 }
 
 Nib::~Nib()
 {
-   deleteData();
+   STANDARD_DESTRUCTOR()
 }
 
 Nib& Nib::operator=(const Nib& org)
@@ -54,7 +54,7 @@ Nib& Nib::operator=(const Nib& org)
    return *this;
 }
 
-Basic::Object* Nib::clone() const
+Nib* Nib::clone() const
 {
    return new Nib(*this);
 }

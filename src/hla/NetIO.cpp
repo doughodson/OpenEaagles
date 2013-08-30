@@ -45,7 +45,7 @@ END_SLOT_MAP()
 //------------------------------------------------------------------------------
 NetIO::NetIO() : rtiAmb()
 {
-   SET_SLOTTABLE
+   STANDARD_CONSTRUCTOR()
 
    clearAllObjectClassHandles();
    clearAllObjectAttributeHandles();
@@ -70,13 +70,13 @@ NetIO::NetIO() : rtiAmb()
 
 NetIO::NetIO(const NetIO& org) : rtiAmb()
 { 
-   SET_SLOTTABLE
+   STANDARD_CONSTRUCTOR()
    copyData(org,true);
 }
 
 NetIO::~NetIO()
 {
-   deleteData();
+   STANDARD_DESTRUCTOR()
 }
 
 NetIO& NetIO::operator=(const NetIO& org)
@@ -86,7 +86,7 @@ NetIO& NetIO::operator=(const NetIO& org)
    return *this;
 }
 
-Basic::Object* NetIO::clone() const
+NetIO* NetIO::clone() const
 {
    return 0;
 }

@@ -6,6 +6,7 @@
 
 #include "openeaagles/simulation/Nib.h"
 #include "openeaagles/hla/NetIO.h"
+
 #include <RTI.hh>
 #include <fedtime.hh>
 
