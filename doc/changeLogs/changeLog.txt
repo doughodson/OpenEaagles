@@ -6,6 +6,10 @@ Changes since v13.07
 --------------------------------------------------------------------------------
 general
 
+-- added new aero model called LaeroModel to framework. As a result several
+   supporting classes (such as AutoPilot) have been updated to reflect new
+   capabilities
+
 --------------------------------------------------------------------------------
 basic
 
