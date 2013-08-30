@@ -19,4 +19,5 @@ HEADERS += \
 
 # Source files
 SOURCES += \
-   $${OE_ROOT}/src/recorder/*.cpp
+   $${OE_ROOT}/src/recorder/*.cpp \
+   $${OE_ROOT}/src/recorder/*.pb.cc
