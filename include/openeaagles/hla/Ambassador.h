@@ -39,7 +39,7 @@ public:
    NetIO* getNetIO()               { return hlaIo; }
 
 private:
-   NetIO*         hlaIo;         // Our controlling NeIO
+   NetIO* hlaIo;         // Our controlling NetIO
 
 // ---
 // -- Standard FederateAmbassador interface --
@@ -158,8 +158,8 @@ public:
 
    // 6.3
    virtual void discoverObjectInstance (
-           RTI::ObjectHandle          theObject,      // supplied C1
-           RTI::ObjectClassHandle     theObjectClass, // supplied C1
+           RTI::ObjectHandle          theObject,       // supplied C1
+           RTI::ObjectClassHandle     theObjectClass,  // supplied C1
      const char *                theObjectName)  // supplied C4
    throw (
      RTI::CouldNotDiscover,
