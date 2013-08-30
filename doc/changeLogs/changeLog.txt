@@ -33,10 +33,28 @@ recorder
 --------------------------------------------------------------------------------
 simulation
 
+   AutoPilot class
+      1) added several new slots that define default pilot flight actions or 
+         characteristics, such as the maximum rate of turn, bank angle, max
+         climb, etc.  These are pilot characteristics in defining how a plane
+         is flown -- not physical performance characteristics associated with
+         the vehicle itself.
+
+   DynamicsModels class
+      1) set commanded heading, velocity, and altitude now take additional
+         parameters to define change rates.
 
 --------------------------------------------------------------------------------
 vehicle
 
+   JSBSimModel class
+      1) interface updated to account for changes in base DynamicsModels class
+
+   RacModel class
+      1) interface updated to account for changes in base DynamicsModels class
+
+   LaeroModel class
+      1) added new simple, lightweight aero model
 
 --------------------------------------------------------------------------------
 

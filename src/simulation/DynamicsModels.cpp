@@ -101,7 +101,7 @@ bool DynamicsModel::setHeadingHoldOn(const bool)
 }
 
 // setCommandedHeadingD() --   Sets commanded heading (true: degs)
-bool DynamicsModel::setCommandedHeadingD(const double)
+bool DynamicsModel::setCommandedHeadingD(const double, const double, const double)
 {
    return false;
 }
@@ -123,7 +123,7 @@ bool DynamicsModel::setVelocityHoldOn(const bool)
 }
 
 // setCommandedVelocityKts() --   Sets commanded velocity (kts)
-bool DynamicsModel::setCommandedVelocityKts(const double)
+bool DynamicsModel::setCommandedVelocityKts(const double, const double)
 {
    return false;
 }
@@ -145,7 +145,7 @@ bool DynamicsModel::setAltitudeHoldOn(const bool)
 }
 
 // setCommandedAltitude() --   Sets commanded altitude (meters)
-bool DynamicsModel::setCommandedAltitude(const double)
+bool DynamicsModel::setCommandedAltitude(const double, const double, const double)
 {
    return false;
 }

@@ -80,6 +80,7 @@ const double BOLTZMANN = 1.3806503e-23f;
 //  [This is an estimated average.
 //  [One actual "G" is a function of latitude, longitude, and other exotic parameters.]
 const LCreal ETHG = 32.16f;
+const double ETHGM = ETHG * 0.3048f;    // meters
 
 // Convert Barometric Pressure (Inches Mercury to/from Millibars)
 // This is an estimate.

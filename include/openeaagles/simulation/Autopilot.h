@@ -7,7 +7,7 @@
 #include "openeaagles/simulation/Pilot.h"
 
 namespace Eaagles {
-   namespace Basic { class Angle; class Distance; class Identifier; class Number; }
+   namespace Basic { class Angle; class Distance; class Identifier; class Number; class Time; }
 
 namespace Simulation {
 
@@ -17,33 +17,41 @@ namespace Simulation {
 // Form name: Autopilot
 //
 // Slots:
-//    navMode                    <Number>    ! Nav (route follow) mode flag (default: true)
+//    navMode                    <Number>     ! Nav (route follow) mode flag (default: true)
 //
-//    holdAltitude               <Distance>  ! Hold altitude (Distance) [default: player's altitude]
-//    altitudeHoldMode           <Number>    ! Altitude hold mode flag [ default: true ]
+//    holdAltitude               <Distance>   ! Hold altitude (Distance) [default: player's altitude]
+//    altitudeHoldMode           <Number>     ! Altitude hold mode flag [ default: true ]
 //
-//    holdVelocityKts            <Number>    ! Hold velocity (Kts) (Number) [default: player's velocity]
-//    velocityHoldMode           <Number>    ! Velocity hold mode flag [ default: true ]
+//    holdVelocityKts            <Number>     ! Hold velocity (Kts) (Number) [default: player's velocity]
+//    velocityHoldMode           <Number>     ! Velocity hold mode flag [ default: true ]
 //
-//    holdHeading                <Distance>  ! Hold heading (Angle) [default: player's heading]
-//    headingHoldMode            <Number>    ! Heading hold mode flag [ default: true ]
+//    holdHeading                <Distance>   ! Hold heading (Angle) [default: player's heading]
+//    headingHoldMode            <Number>     ! Heading hold mode flag [ default: true ]
 //
-//    loiterMode                 <Number>    ! Loiter mode flag (default: false)
-//    loiterPatternLength        <Distance>  ! Loiter pattern length (default: 10.0f)
-//    loiterPatternLength        <Number>    ! Loiter pattern length (nautical miles)
-//    loiterPatternCcwFlag       <Number>    ! Loiter pattern counter-clockwise flag (default: false, clockwise)
+//    loiterMode                 <Number>     ! Loiter mode flag (default: false)
+//    loiterPatternLength        <Distance>   ! Loiter pattern length (default: 10.0f)
+//    loiterPatternLength        <Number>     ! Loiter pattern length (nautical miles)
+//    loiterPatternTime          <Time>       ! Loiter pattern time (seconds on inbound / outbound course)
+//    loiterPatternCcwFlag       <Number>     ! Loiter pattern counter-clockwise flag (default: false, clockwise)
 //
-//    leadFollowingDistanceTrail <Distance>  ! Desired distance behind(+) the lead (Default: 1 NM trail)
-//    leadFollowingDistanceTrail <Number>    ! Desired distance behind(+) the lead (meters)
+//    leadFollowingDistanceTrail <Distance>   ! Desired distance behind(+) the lead (Default: 1 NM trail)
+//    leadFollowingDistanceTrail <Number>     ! Desired distance behind(+) the lead (meters)
 //
-//    leadFollowingDistanceRight <Distance>  ! Desired distance right(+) of the lead (Default: 1 NM right)
-//    leadFollowingDistanceRight <Number>    ! Desired distance right(+) of the lead (meters)
+//    leadFollowingDistanceRight <Distance>   ! Desired distance right(+) of the lead (Default: 1 NM right)
+//    leadFollowingDistanceRight <Number>     ! Desired distance right(+) of the lead (meters)
 //
-//    leadFollowingDeltaAltitude <Distance>  ! Desired delta altitude above(+) the lead (Default: 2000ft below)
-//    leadFollowingDeltaAltitude <Number>    ! Desired delta altitude above(+) the lead (meters)
+//    leadFollowingDeltaAltitude <Distance>   ! Desired delta altitude above(+) the lead (Default: 2000ft below)
+//    leadFollowingDeltaAltitude <Number>     ! Desired delta altitude above(+) the lead (meters)
 //
 //    leadPlayerName             <Identifier> ! Name of our lead player (default: 0)
 //    followTheLeadMode          <Number>     ! "Follow the lead" mode flag (must be set after 'leadPlayer') (default: false)
+//
+//    maxRateOfTurnDps           <Number>     ! Maximum rate of turn (degrees per second)
+//    maxBankAngle               <Number>     ! Maximum bank angle (degrees)
+//    maxClimbRateFpm            <Number>     ! Maximum climb / dive rate (feet per minute)
+//    maxClimbRateMps            <Number>     ! Maximum climb / dive rate (meters per second)
+//    maxPitchAngle              <Number>     ! Maximum pitch angle (degrees)
+//    maxAcceleration            <Number>     ! Maximum velocity acceleration (NPS)
 //
 // Notes:
 //   1) Default is Nav (route follow) mode, which forces heading, altitude and
@@ -57,6 +65,13 @@ namespace Simulation {
 //      while requestLoiter() will turn on loiter mode with a given anchor point and course.
 //      setLointer(false) will turn off loiter mode in both cases.
 //
+//   4) Limiting the autopilot inputs using maxBankAngleDegs and maxTurnRateDps will work if
+//      the dynamics model can support the limits as well.  If not, the dynamics model will
+//      limit the bank angle and turn rate, and these inputs will have no effect.  For example,
+//      if the user limits the bank angle to 90 degrees, but the dynamics model only support 40,
+//      the bank angle will be limited to 40. These autopilot limits are set as "pilot" limits,
+//      not "aircraft" limits.
+//
 //------------------------------------------------------------------------------
 class Autopilot : public Pilot
 {
@@ -64,6 +79,13 @@ class Autopilot : public Pilot
 
 public:
    Autopilot();
+
+   // Default limits for pilot inputs
+   static const double STD_RATE_TURN_DPS;      // default to 3.0 degrees per second
+   static const double STD_MAX_BANK_ANGLE;     // default to +-30 degrees bank max
+   static const double STD_MAX_CLIMB_RATE;     // defaul to 2000 fpm, or apprx 10.16 mps
+   static const double STD_MAX_PITCH_ANGLE;    // default to +-10 degrees pitch max
+   static const double STD_MAX_ACCEL_NPS;      // default to 5.0
 
    virtual bool isHeadingHoldOn() const { return hdgHoldOn; }        // True if heading hold mode
    virtual double getCommandedHeadingD() const { return cmdHdg; }    // Returns the hold heading (degs)
@@ -96,6 +118,9 @@ public:
    // Returns true if the Loiter pattern is counter-clockwise
    virtual bool isLoiterPatternCounterClockwise() const { return loiterCcwFlag; }
 
+   virtual bool isLoiterTimeBased() const { return loiterTimeBased; }
+   virtual double getLoiterTime() const   { return loiterTime; }
+
    // Sets the loiter pattern length (nm)
    virtual bool setLoiterPatternLengthNM(const double nm);
 
@@ -112,6 +137,13 @@ public:
    virtual const Basic::Identifier* getLeadPlayerName() { return leadName; }
    virtual const Player* getLeadPlayer();                            // Our lead player
 
+   // get pilot limits
+   double getMaxTurnRate() const;
+   double getMaxBankAngle() const;
+   double getMaxClimbRate() const;
+   double getMaxPitchAngle() const;
+   double getMaxVelAcc() const;
+
    virtual bool setLeadFollowingDistanceTrail(const double trail);   // Desired distance (meters) behind(+) the lead
    virtual bool setLeadFollowingDistanceRight(const double right);   // Desired distance (meters) right(+) of the lead
    virtual bool setLeadFollowingDeltaAltitude(const double above);   // Desired delta altitude (meters) above(+) the lead
@@ -126,6 +158,7 @@ public:
    virtual bool setRollSasMode(const bool f);
    virtual bool setPitchSasMode(const bool f);
    virtual bool setYawSasMode(const bool f);
+
 
    // Roll Control Input 
    //      Normalized inputs
@@ -156,18 +189,29 @@ public:
    //          returns the actual number of throttle positions
    virtual int setThrottles(const LCreal* const positions, const unsigned int num);
 
-   // Compute the mirror waypoint for a orbit holding pattern
-   bool computerOrbitHoldingPatternMirrorWaypoint(
-               const double alat,      // In:   Anchor point latitude (degs)
-               const double alon,      // In:   Anchor' point longitude (degs)
-               const double crs,       // In:   In-bound course (degs)
-               const double length,    // In:   Pattern length (nm)
-               const double speed,     // In:   True airspeed speed (kts)
-               const bool ccwFlg,      // In:   True if counter-clockwise orbit (else clockwise orbit)
-               double* const mlat,     // Out:  Mirror point latitude (degs)
-               double* const mlon      // Out:  Mirror point longitude (degs)
-               );
+   //// Compute the mirror waypoint for a orbit holding pattern
+   //bool computerOrbitHoldingPatternMirrorWaypoint(
+   //            const double alat,      // In:   Anchor point latitude (degs)
+   //            const double alon,      // In:   Anchor' point longitude (degs)
+   //            const double crs,       // In:   In-bound course (degs)
+   //            const double length,    // In:   Pattern length (nm)
+   //            const double speed,     // In:   True airspeed speed (kts)
+   //            const bool ccwFlg,      // In:   True if counter-clockwise orbit (else clockwise orbit)
+   //            double* const mlat,     // Out:  Mirror point latitude (degs)
+   //            double* const mlon      // Out:  Mirror point longitude (degs)
+   //            );
 
+   // max turn rate (degrees per second)
+   virtual bool setMaxTurnRateDps(const double x);
+   // maximum bank angle (degrees)
+   virtual bool setMaxBankAngleDeg(const double x);
+   // maximum climb/dive rate
+   virtual bool setMaxClimbRateMps(const double x);
+   // maximum pitch angle
+   virtual bool setMaxPitchAngleDeg(const double x);
+   // maximum velocity acceleration
+   virtual bool setMaxVelAccNps(const double x);
+   
    // Eaagles::Basic::Component interface methods
    virtual void reset();
     
@@ -183,6 +227,7 @@ protected:
    bool setSlotLoiterMode(const Basic::Number* const msg);                    // Loiter mode flag
    bool setSlotLoiterPatternLength(const Basic::Distance* const msg);         // Loiter orbit pattern length
    bool setSlotLoiterPatternLength(const Basic::Number* const msg);           // Loiter orbit pattern length (NM)
+   bool setSlotLoiterPatternTime(const Basic::Time* const msg);               // Loiter orbit pattern length (seconds)
    bool setSlotLoiterPatternCcwFlag(const Basic::Number* const msg);          // Loiter orbit pattern counter-clockwise flag
    bool setSlotLeadFollowingDistanceTrail(const Basic::Distance* const msg);  // Desired distance behind(+) the lead
    bool setSlotLeadFollowingDistanceTrail(const Basic::Number* const msg);    // Desired distance (meters) behind(+) the lead
@@ -192,7 +237,12 @@ protected:
    bool setSlotLeadFollowingDeltaAltitude(const Basic::Number* const msg);    // Desired delta altitude (meters) above(+) the lead
    bool setSlotLeadPlayerName(const Basic::Identifier* const msg);            // Name of the player we are following
    bool setSlotFollowTheLeadMode(const Basic::Number* const msg);             // "Follow the lead" mode flag
-
+   bool setSlotMaxRateOfTurnDps(const Basic::Number* const msg);              // Maximum turn rate - degrees per second
+   bool setSlotMaxBankAngle(const Basic::Number* const msg);                  // Maximum bank angle - degrees
+   bool setSlotMaxClimbRateMps(const Basic::Number* const msg);               // Max climb/dive rate - meters per second
+   bool setSlotMaxClimbRateFpm(const Basic::Number* const msg);               // Max climb/dive rate - feet per minute
+   bool setSlotMaxPitchAngle(const Basic::Number* const msg);                 // Max pitch angle - degrees
+   bool setSlotMaxVelAccNps(const Basic::Number* const msg);                  // Maximum velocity acceleration (Nps)
 
    virtual bool modeManager();
    virtual bool headingController();
@@ -207,6 +257,13 @@ protected:
    virtual void process(const LCreal dt);     // Phase 3
 
 private:
+   bool flySRT();                   // flies a standard rate of turn
+   bool flyLoiterEntry();           // flies our entry pattern into the loiter
+   bool flyLoiter();                // flies the loiter pattern
+   bool calcMirrorLatLon();
+   // fly to a given point unsing the course
+   bool flyCRS(const double latDeg, const double lonDeg, const double crsCmdDeg);
+   
    // Input controls
    LCreal   stickRollPos;     // Stick roll position:  -1.0 -> max left;    0.0 -> center;  1.0 -> max right
    LCreal   stickPitchPos;    // Stick pitch position: -1.0 -> max forward; 0.0 -> center;  1.0 -> max back
@@ -235,14 +292,35 @@ private:
    bool     loiterModeOn;     // Loiter mode flag
 
    // Loiter mode data
-   double   loiterAnchorLat;  // Loiter orbit pattern anchor point latitude  (degs)
-   double   loiterAnchorLon;  // Loiter orbit pattern anchor point longitude (degs)
-   double   loiterMirrorLat;  // Loiter orbit pattern mirror point latitude  (degs)
-   double   loiterMirrorLon;  // Loiter orbit pattern mirror point longitude (degs)
-   unsigned int loiterState;  // Loiter state machine
-   double   loiterLength;     // Loiter pattern length (nm)
-   bool     loiterCcwFlag;    // Loiter pattern counter-clockwise flag 
-   double   loiterCourse;     // Loiter course we started the loiter pattern on (degs)
+   // Entry modes for loiter
+   enum EntryMode { 
+      PREENTRY, 
+      SIMPLE, 
+      DIRECT, 
+      PARALLEL, 
+      TEARDROP, 
+      LOITER
+   };  
+
+   double   loiterAnchorLat;        // Loiter orbit pattern anchor point latitude  (degs)
+   double   loiterAnchorLon;        // Loiter orbit pattern anchor point longitude (degs)
+   double   loiterMirrorLat;        // Loiter orbit pattern mirror point latitude  (degs)
+   double   loiterMirrorLon;        // Loiter orbit pattern mirror point longitude (degs)
+   double   loiterLength;           // Loiter pattern length (nm)
+   bool     loiterCcwFlag;          // Loiter pattern counter-clockwise flag 
+   double   loiterInboundCourse;    // Loiter course we started the loiter pattern on (degs)
+   EntryMode  loiterEntryMode;      // Entry mode into the loiter
+   unsigned int loiterEntryPhase;   // Phase of the entry mode 
+   bool isInbound;                  // are we on the inbound loiter
+   double loiterTime;               // loiter time (seconds)
+   bool loiterTimeBased;          // is our loiter based on time instead of length?
+
+   // Pilot limits
+   double maxTurnRateDps;           // maximum turn rate
+   double maxBankAngleDegs;         // maximum bank angle
+   double maxClimbRateMps;          // maximum climb/dive rate (meters per second)
+   double maxPitchAngleDegs;        // maximum pitch angle
+   double maxVelAccNps;             // maximum velocity acceleration
 
    // Follow that lead mode data
    osg::Vec3d leadOffset;     // Offsets from lead player (meters) Default -1NM and 2NM and 2000ft
@@ -250,7 +328,19 @@ private:
    const Basic::Identifier* leadName;   // Name of our lead player
    double leadHdg;            // lead's heading (rad)
    bool   followLeadModeOn;   // Follow the lead mode flag
+
 };
+
+inline bool Autopilot::setMaxTurnRateDps(const double x)    { maxTurnRateDps = x; return true; }
+inline bool Autopilot::setMaxBankAngleDeg(const double x)   { maxBankAngleDegs = x; return true; }
+inline bool Autopilot::setMaxClimbRateMps(const double x)   { maxClimbRateMps = x; return true; }
+inline bool Autopilot::setMaxPitchAngleDeg(const double x)  { maxPitchAngleDegs = x; return true; }
+inline bool Autopilot::setMaxVelAccNps(const double x)      { maxVelAccNps = x; return true; }
+inline double Autopilot::getMaxTurnRate() const             { return maxTurnRateDps; }
+inline double Autopilot::getMaxBankAngle() const            { return maxBankAngleDegs; }
+inline double Autopilot::getMaxClimbRate() const            { return maxClimbRateMps; }
+inline double Autopilot::getMaxPitchAngle() const           { return maxPitchAngleDegs; }
+inline double Autopilot::getMaxVelAcc() const               { return maxVelAccNps; }
 
 } // End Simulation namespace
 } // End Eaagles namespace
