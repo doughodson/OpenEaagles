@@ -18,6 +18,8 @@ else:unix:!macx:!symbian: FREETYPE2_INC_DIR = /usr/
 win32: DESTDIR = $${OE_ROOT}/lib/$${MSVC_VER}/
 else:unix:!macx:!symbian: DESTDIR = $${OE_ROOT}/lib/linux
 
+DEFINES += _CRT_SECURE_NO_WARNINGS
+
 # Store our objects in a temporary location
 OBJECTS_DIR = ./tmp/obj
 MOC_DIR = ./tmp/moc
