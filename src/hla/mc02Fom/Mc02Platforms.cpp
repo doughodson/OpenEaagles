@@ -1,12 +1,12 @@
-#include "eaagles/hla/mc02Fom/Mc02FomIO.h"
-#include "eaagles/hla/mc02Fom/Mc02Fom.h"
-#include "eaagles/hla/mc02Fom/Mc02FomNib.h"
-#include "eaagles/hla/Ambassador.h"
+#include "openeaagles/hla/mc02Fom/Mc02FomIO.h"
+#include "openeaagles/hla/mc02Fom/Mc02Fom.h"
+#include "openeaagles/hla/mc02Fom/Mc02FomNib.h"
+#include "openeaagles/hla/Ambassador.h"
 
-#include "eaagles/simulation/Player.h"
-#include "eaagles/simulation/Simulation.h"
-#include "eaagles/basic/Nav.h"
-#include "eaagles/basic/NetHandler.h"
+#include "openeaagles/simulation/Player.h"
+#include "openeaagles/simulation/Simulation.h"
+#include "openeaagles/basic/Nav.h"
+#include "openeaagles/basic/NetHandler.h"
 
 //==============================================================================
 // Class: HlaIO

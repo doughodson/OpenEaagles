@@ -9,7 +9,7 @@
 
 namespace Mc02 { class BaseEntity; class EmitterBeam; }
 
-#include "eaagles/hla/Nib.h"
+#include "openeaagles/hla/Nib.h"
 
 namespace Eaagles {
 namespace Network {
@@ -22,7 +22,7 @@ namespace Mc02Fom {
 // Base class:  ... -> Simulation::Nib -> Hla::Nib -> Hla::Mc02Fom::EmitterBeamNib
 // GUID: {15004ECB-4961-42c1-8C35-712A84FE44DB}
 //==============================================================================
-class DLLEXP EmitterBeamNib : public Hla::Nib
+class EmitterBeamNib : public Hla::Nib
 {
     DECLARE_SUBCLASS(EmitterBeamNib,Hla::Nib)
     

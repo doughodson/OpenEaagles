@@ -7,7 +7,7 @@
 #ifndef __Mc02FomIO_H_AD1D1AE8_768A_4d72_AF4C_90F4A4DFB6AF__
 #define __Mc02FomIO_H_AD1D1AE8_768A_4d72_AF4C_90F4A4DFB6AF__
 
-#include "eaagles/hla/HlaIO.h"
+#include "openeaagles/hla/HlaIO.h"
 
 namespace Eaagles {
    namespace Simulation { class Player; }
@@ -25,7 +25,7 @@ namespace Mc02Fom {
 // Class:       Mc02FomIO
 // Base class:	... -> Simulation::NetworkIO -> HlaIO -> Mc02FomIO
 //==============================================================================
-class DLLEXP Mc02FomIO : public HlaIO  
+class Mc02FomIO : public HlaIO  
 {
     DECLARE_SUBCLASS(Mc02FomIO,HlaIO)
 

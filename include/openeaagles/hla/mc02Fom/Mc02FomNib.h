@@ -7,7 +7,7 @@
 #ifndef __Mc02FomNib_H_B47879A1_CED4_42e5_9E65_CF07CF92310F__
 #define __Mc02FomNib_H_B47879A1_CED4_42e5_9E65_CF07CF92310F__
 
-#include "eaagles/hla/Nib.h"
+#include "openeaagles/hla/Nib.h"
 
 namespace Eaagles {
    namespace Simulation { class Player; }
@@ -22,7 +22,7 @@ namespace Mc02Fom {
 // Base class:  ... -> Simulation::Nib -> Hla::Nib -> Hla::Mc02Fom::Nib
 // GUID: {B47879A1-CED4-42e5-9E65-CF07CF92310F}
 //==============================================================================
-class DLLEXP Nib : public Hla::Nib
+class Nib : public Hla::Nib
 {
    DECLARE_SUBCLASS(Nib,Hla::Nib)
     

@@ -2,25 +2,25 @@
 // Class: Mc02Fom::Nib
 //==============================================================================
 
-#include "eaagles/hla/mc02Fom/Mc02FomNib.h"
+#include "openeaagles/hla/mc02Fom/Mc02FomNib.h"
 
-#include "eaagles/hla/mc02Fom/Mc02FomIO.h"
-#include "eaagles/hla/mc02Fom/Mc02Fom.h"
+#include "openeaagles/hla/mc02Fom/Mc02FomIO.h"
+#include "openeaagles/hla/mc02Fom/Mc02Fom.h"
 
-#include "eaagles/hla/Ambassador.h"
-#include "eaagles/dis/NibDisIo.h"
-#include "eaagles/simulation/AirVehicle.h"
-#include "eaagles/simulation/Missile.h"
-#include "eaagles/simulation/Player.h"
-#include "eaagles/simulation/Simulation.h"
-#include "eaagles/simulation/Signatures.h"
-#include "eaagles/simulation/Weapon.h"
-#include "eaagles/basic/Pair.h"
-#include "eaagles/basic/PairStream.h"
-#include "eaagles/basic/String.h"
-#include "eaagles/basic/Nav.h"
-#include "eaagles/basic/NetHandler.h"
-#include "eaagles/basic/Number.h"
+#include "openeaagles/hla/Ambassador.h"
+#include "openeaagles/dis/NibDisIo.h"
+#include "openeaagles/simulation/AirVehicle.h"
+#include "openeaagles/simulation/Missile.h"
+#include "openeaagles/simulation/Player.h"
+#include "openeaagles/simulation/Simulation.h"
+#include "openeaagles/simulation/Signatures.h"
+#include "openeaagles/simulation/Weapon.h"
+#include "openeaagles/basic/Pair.h"
+#include "openeaagles/basic/PairStream.h"
+#include "openeaagles/basic/String.h"
+#include "openeaagles/basic/Nav.h"
+#include "openeaagles/basic/NetHandler.h"
+#include "openeaagles/basic/Number.h"
 
 namespace Eaagles {
 namespace Network {

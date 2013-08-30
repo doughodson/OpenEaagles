@@ -8,7 +8,7 @@
 #define __Hla_Mc02Fom_H__
 
 #include <RTI.hh>
-#include "eaagles/basic/Object.h"
+#include "openeaagles/basic/Object.h"
  
 namespace Eaagles {
 namespace Network {
@@ -430,7 +430,8 @@ struct MarkingStruct {
 // (See section 6.1 of the GRIM)"
 // ---
 
-class BaseEntity : public Basic::Object {
+class BaseEntity : public Basic::Object
+{
     DECLARE_SUBCLASS(BaseEntity,Basic::Object)
 public:
     BaseEntity();
