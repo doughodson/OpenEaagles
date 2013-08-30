@@ -50,12 +50,11 @@ BEGIN_EVENT_HANDLER(Antenna)
 END_EVENT_HANDLER()
 
 //------------------------------------------------------------------------------
-// Constructor(s)
+// constructor(s)
 //------------------------------------------------------------------------------
 Antenna::Antenna() : freeEmStack(MAX_EMISSIONS), freeEmLock(0),
                      inUseEmQueue(MAX_EMISSIONS), inUseEmLock(0),
-                     gainPattern(0),
-                     sys(0)
+                     sys(0), gainPattern(0)
 {
    STANDARD_CONSTRUCTOR()
 
@@ -64,8 +63,7 @@ Antenna::Antenna() : freeEmStack(MAX_EMISSIONS), freeEmLock(0),
 
 Antenna::Antenna(const Antenna& org) : freeEmStack(MAX_EMISSIONS), freeEmLock(0),
                                        inUseEmQueue(MAX_EMISSIONS), inUseEmLock(0),
-                                       gainPattern(0),
-                                       sys(0)
+                                       sys(0), gainPattern(0)
 { 
     STANDARD_CONSTRUCTOR()
     copyData(org,true);

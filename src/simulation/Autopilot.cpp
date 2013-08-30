@@ -361,7 +361,7 @@ bool Autopilot::flyLoiterEntry()
       // define local constants 
       //----------------------------------------------------
       const double MAX_BANK_RAD = maxBankAngleDegs * Basic::Angle::D2RCC;
-      const double OFFSET_MTR   = 20.0;
+//      const double OFFSET_MTR   = 20.0;
 
       //----------------------------------------------------
       // get current data - try to get it from the navigation, otherwise from
@@ -399,7 +399,7 @@ bool Autopilot::flyLoiterEntry()
       Basic::Nav::fll2bd(osLatDeg, osLonDeg, loiterAnchorLat, loiterAnchorLon, &brgDeg, &distNM);
 
       double hdgErrDeg = Basic::Angle::aepcdDeg(hdgDeg - loiterInboundCourse);
-      double posErrDeg = Basic::Angle::aepcdDeg(brgDeg - loiterInboundCourse);
+//      double posErrDeg = Basic::Angle::aepcdDeg(brgDeg - loiterInboundCourse);
       double distCmdNM = 0;
       double hdgCmdDeg = 0;
 
@@ -644,6 +644,7 @@ bool Autopilot::calcMirrorLatLon()
 bool Autopilot::flyCRS(const double latDeg, const double lonDeg, const double crsDeg)
 {
    //-------------------------------------------------------
+
    // get data pointers 
    //-------------------------------------------------------
    Player* pPlr = getOwnship();
