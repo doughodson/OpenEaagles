@@ -161,7 +161,9 @@ solution "oe"
    project "hla"
       files {
          "../../include/openeaagles/hla/*.h",
-         "../../src/hla/*.cpp"
+         "../../include/openeaagles/hla/rprFom/*.h",
+         "../../src/hla/*.cpp",
+         "../../src/hla/rprFom/*.cpp"
       }
       includedirs { HLAIncPath }
       defines { "RTI_USES_STD_FSTREAM" }

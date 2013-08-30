@@ -2,7 +2,7 @@
 // hlaFormFunc() -- parser form function for HLA networks
 //------------------------------------------------------------------------------
 
-#include "eaagles/hla/hlaFF.h"
+#include "openeaagles/hla/hlaFF.h"
 
 //#include "mc02_fom/Mc02FomIO.h"
 //#include "rpr_fomRprFomIO.h"

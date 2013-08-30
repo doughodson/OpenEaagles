@@ -20,9 +20,9 @@ namespace RprFom {
 //==============================================================================
 // Class:       Nib
 //==============================================================================
-class DLLEXP Nib : public Hla::Nib
+class Nib : public Hla::Nib
 {
-   DECLARE_SUBCLASS(Nib,Hla::Nib)
+   DECLARE_SUBCLASS(Nib, Hla::Nib)
     
 public:
    static const unsigned int MAX_EMITTER_BEAMS = 6;

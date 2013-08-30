@@ -27,7 +27,7 @@ namespace RprFom {
 // Class: Hla::RprFom::NetIO
 // Form Name: RprFomNetIO
 //==============================================================================
-class DLLEXP NetIO : public Hla::NetIO  
+class NetIO : public Hla::NetIO  
 {
     DECLARE_SUBCLASS(NetIO,Hla::NetIO)
 
