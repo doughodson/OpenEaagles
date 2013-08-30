@@ -160,12 +160,8 @@ solution "oe"
    -- IEEE HLA interface library
    project "hla"
       files {
-         "../../include/openeaagles/hla/*.h",
-         "../../src/hla/*.cpp",
-         "../../include/openeaagles/hla/rprFom/*.h",
-         "../../src/hla/rprFom/*.cpp",
---         "../../include/openeaagles/hla/mc02Fom/*.h",
---         "../../src/hla/mc02Fom/*.cpp",
+         "../../include/openeaagles/hla/**.h",
+         "../../src/hla/**.cpp"
       }
       includedirs { HLAIncPath }
       defines { "RTI_USES_STD_FSTREAM" }

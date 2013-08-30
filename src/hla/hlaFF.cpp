@@ -4,9 +4,7 @@
 
 #include "openeaagles/hla/hlaFF.h"
 
-//#include "mc02_fom/Mc02FomIO.h"
 //#include "rpr_fomRprFomIO.h"
-//#include "eaagles/hla/mc02_fom/Mc02Fom.h"
 
 namespace Eaagles {
 namespace Network {
