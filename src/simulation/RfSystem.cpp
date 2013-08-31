@@ -54,7 +54,7 @@ END_SLOT_MAP()
 //------------------------------------------------------------------------------
 // Constructors, destructor, copy operator and clone()
 //------------------------------------------------------------------------------
-RfSystem::RfSystem() : antenna(0), antennaName(0), packetLock(0)
+RfSystem::RfSystem() : packetLock(0), antenna(0), antennaName(0)
 {
    STANDARD_CONSTRUCTOR()
 

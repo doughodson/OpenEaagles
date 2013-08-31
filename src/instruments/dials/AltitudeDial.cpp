@@ -104,3 +104,4 @@ bool AltitudeDial::figureRotation(const LCreal thisAlt)
 
 }  // end Instruments namespace
 }  // end Eaagles namespace
+

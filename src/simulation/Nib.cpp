@@ -683,7 +683,7 @@ void Nib::playerState2Nib()
       );
 
       // mark the current times
-      Simulation* sim = getNetIO()->getSimulation();
+      //Simulation* sim = getNetIO()->getSimulation();
       //setTimeExec( (LCreal) sim->getExecTimeSec() );
       setTimeExec( (LCreal) player->getSynchronizedState().getTimeExec() );
       //setTimeUtc( (LCreal) sim->getSysTimeOfDay() );

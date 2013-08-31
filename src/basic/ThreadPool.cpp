@@ -39,7 +39,7 @@ EMPTY_COPYDATA(ThreadPoolThread)
 EMPTY_SERIALIZER(ThreadPoolThread)
 
 ThreadPoolThread::ThreadPoolThread(Component* const parent, ThreadPool*const pool, ThreadPoolManager*const mgr, const LCreal priority, Object* const obj)
-   : threadPool(pool), manager(mgr), persistentObj(obj), ThreadSyncTask(parent, priority)
+   : ThreadSyncTask(parent, priority), threadPool(pool), manager(mgr), persistentObj(obj)
 {
    STANDARD_CONSTRUCTOR()
 }

@@ -263,6 +263,7 @@ static const char* defaultMap[] =
    "rightparen.fon",    // ')'
    "star.fon",          // '*'
    "plussign.fon",      // '+'
+
    "comma.fon",         // ','
    "minussign.fon",     // '-'
    "period.fon",        // '.'
@@ -540,12 +541,12 @@ GLubyte* BitmapFont::loadTypeFace(const GLint index, const GLenum reverse)
 
    // used to store the num of input items successfully matched and assigned
    // by fscanf function
-   int nItemsMatched;
+   int nItemsMatched(0);
 
    // Calculate the size of the font
-   unsigned int width1;
+   unsigned int width1(0);
    nItemsMatched = fscanf(fp, "%u\n", &width1);
-   unsigned int height1;
+   unsigned int height1(0);
    nItemsMatched = fscanf(fp, "%u\n", &height1);
 
    unsigned int numBytesWide = int(ceil(double(width1) / 8.0));

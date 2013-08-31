@@ -319,7 +319,7 @@ typedef char YY_CHAR;
 
 #define yytext_ptr yytext
 
-#include "../basic/FlexLexer.h"
+#include <FlexLexer.h>
 
 int yyFlexLexer::yywrap() { return 1; }
 int yyFlexLexer::yylex()
@@ -1721,7 +1721,7 @@ static yyconst yy_state_type yy_NUL_trans[77] =
 // Lexical generator for the format specifiers
 //
 
-// Disable all deprecation warnings for now.  Until we fix them,
+// disable all deprecation warnings for now, until we fix
 // they are quite annoying to see over and over again...
 #if(_MSC_VER>=1400)   // VC8+
 # pragma warning(disable: 4996)
@@ -2991,7 +2991,7 @@ int Reformat::processInteger(const char* text, const int len)
    //    sign, leading zeros, and leading numbers.
    int fw = s + lz + ln;
 
-   // Create the std::sprintf() format string
+   // Create the sprintf() format string
    int j = 0;
 
    format[j++] = '%';				// Start with %
@@ -3082,19 +3082,19 @@ int Reformat::processFloat(const char* text, const int len)
    //    trailing numbers.
    int fw = s + lz + ln + 1 + nr;
 
-   // Create the std::sprintf() format string
+   // Create the sprintf() format string
    int j = 0;
 
-   format[j++] = '%';				// Start with %
+   format[j++] = '%';                           // Start with %
 
    if (s)
-      format[j++] = '+';			// Add a '+' if signed
+      format[j++] = '+';                        // Add a '+' if signed
 
    if (lz > 0)
-      format[j++] = '0';			// Add a '0' if leading zeros
+      format[j++] = '0';                        // Add a '0' if leading zeros
 
-   j += std::sprintf(&format[j], "%d", fw);		// Add total field size
-   j += std::sprintf(&format[j], ".%d", nr);		// Add trailing numbers
+   j += std::sprintf(&format[j], "%d", fw);     // Add total field size
+   j += std::sprintf(&format[j], ".%d", nr);    // Add trailing numbers
 
    format[j++] = 'f';				// Add the data type
 

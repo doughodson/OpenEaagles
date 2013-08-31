@@ -66,7 +66,7 @@ END_EVENT_HANDLER()
 //------------------------------------------------------------------------------
 // Constructors, destructor, copy operator and clone()
 //------------------------------------------------------------------------------
-RfSensor::RfSensor() : modes(0), ranges(0), trackManager(0), masterModePtr(0)
+RfSensor::RfSensor() : modes(0), ranges(0), masterModePtr(0), trackManager(0)
 {
     STANDARD_CONSTRUCTOR()
 
