@@ -25,7 +25,7 @@ class Reformat : public rfFlexLexer
 public:
    enum DataType { invalid, number, octal, hex, time, dir };
 
-   Reformat() : dataType(invalid), rfFlexLexer(), postSign(false) { }
+   Reformat() : rfFlexLexer(), dataType(invalid), postSign(false) { }
    virtual ~Reformat() { }
 
    const char* getFormat() const { return dataType != invalid ? format : 0; }

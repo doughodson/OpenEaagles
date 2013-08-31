@@ -145,8 +145,8 @@ private:
    Object* unthreadedObj;
 };
 
-
 } // End Basic namespace
 } // End Eaagles namespace
 
 #endif
+

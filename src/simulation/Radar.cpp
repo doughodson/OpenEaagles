@@ -31,7 +31,7 @@ END_SLOT_MAP()
 // Constructors, destructor, copy operator & clone()
 //------------------------------------------------------------------------------
 Radar::Radar() :
-      rptSnQueue(MAX_EMISSIONS), rptQueue(MAX_EMISSIONS), myLock(0)
+      myLock(0), rptQueue(MAX_EMISSIONS), rptSnQueue(MAX_EMISSIONS)
 {
    STANDARD_CONSTRUCTOR()
 
@@ -43,7 +43,7 @@ Radar::Radar() :
 }
 
 Radar::Radar(const Radar& org) :
-      rptSnQueue(MAX_EMISSIONS), rptQueue(MAX_EMISSIONS), myLock(0)
+      myLock(0), rptQueue(MAX_EMISSIONS), rptSnQueue(MAX_EMISSIONS) 
 {
     STANDARD_CONSTRUCTOR()
     copyData(org,true);

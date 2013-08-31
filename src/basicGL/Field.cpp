@@ -82,7 +82,7 @@ END_EVENT_HANDLER()
 //------------------------------------------------------------------------------
 // Constructor(s)
 //------------------------------------------------------------------------------
-Field::Field() : str(), origStr(), inputExample()
+Field::Field() : origStr(), inputExample(), str()
 {
     STANDARD_CONSTRUCTOR()
     ln = 0;
@@ -328,7 +328,6 @@ int Field::setExample(const char* const example)
     return int(inputExample.len());
 }
 
-
 void Field::advanceSpace(const int ns)
 {
     if (mode != input) return;
@@ -340,9 +339,7 @@ void Field::advanceSpace(const int ns)
         event(INPUT_RIGHT_EDGE);
     }
 }
-                                                                        
-                                         
-                                      
+
 void Field::backSpace(const int ns)
 {
    if (mode != input) return;

@@ -676,7 +676,7 @@ bool Autopilot::flyCRS(const double latDeg, const double lonDeg, const double cr
       double posErrRad = posErrDeg * Basic::Angle::D2RCC;
 
       double rocMtr    = velMps * velMps / Eaagles::ETHGM / std::tan(MAX_BANK_RAD);
-      double rocNM     = rocMtr * Basic::Distance::M2NM;
+      //double rocNM     = rocMtr * Basic::Distance::M2NM;
 
       double xtRngNM   = std::fabs(distNM * std::sin(posErrRad));
       double xtRngMtr  = xtRngNM * Basic::Distance::NM2M;

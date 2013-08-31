@@ -54,7 +54,7 @@ Table::Table() : valid(false), extFlg(false)
 }
 
 Table::Table(const LCreal* dtbl, const unsigned int dsize) 
-   : dtable(0), nd(0), valid(false), extFlg(false)
+   : valid(false), dtable(0), nd(0), extFlg(false)
 {
     STANDARD_CONSTRUCTOR()
     if (dtbl != 0 && dsize > 0) {   /* Copy the data table */

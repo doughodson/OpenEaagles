@@ -49,7 +49,7 @@ END_SLOT_MAP()
 // Constructors, destructor, copy operator and clone()
 //------------------------------------------------------------------------------
 TrackManager::TrackManager() :
-      emQueue(MAX_TRKS), snQueue(MAX_TRKS), queueLock(0), trkListLock(0)
+      trkListLock(0), emQueue(MAX_TRKS), snQueue(MAX_TRKS), queueLock(0)
 {
    STANDARD_CONSTRUCTOR()
 
@@ -57,7 +57,7 @@ TrackManager::TrackManager() :
 }
 
 TrackManager::TrackManager(const TrackManager& org) :
-   emQueue(MAX_TRKS), snQueue(MAX_TRKS), queueLock(0), trkListLock(0)
+   trkListLock(0), emQueue(MAX_TRKS), snQueue(MAX_TRKS), queueLock(0)
 {
    STANDARD_CONSTRUCTOR()
       copyData(org,true);
