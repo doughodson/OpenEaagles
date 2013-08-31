@@ -14,8 +14,18 @@ codelite/
 *.ilk
 *.pdb
 
+#
+# Qt not needed directories (created upon build)
+#
+tmp/
+build/qt/*Makefile*
+build/qt/*/*Makefile*
+build/qt/*/*/*Makefile*
+*.pro.user
+
 # executables
 *.exe
+
 # except for premake tool
 !premake4.exe
 

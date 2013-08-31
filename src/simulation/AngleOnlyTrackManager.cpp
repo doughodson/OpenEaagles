@@ -882,8 +882,8 @@ void AirAngleOnlyTrkMgrPT::processTrackList(const LCreal dt)
         for (unsigned int it = 0; it < nTrks; it++) {
             osg::Vec3 uPosition;
             osg::Vec3 uVelocity;
-            LCreal uAzimuth;
-            LCreal uElevation;
+            LCreal uAzimuth(0.0);
+            LCreal uElevation(0.0);
             //LCreal age = tracks[it]->getTrackAge();
             bool haveU = false;
 
