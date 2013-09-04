@@ -1,3 +1,7 @@
+//------------------------------------------------------------------------------
+// Class: NetIO
+//------------------------------------------------------------------------------
+
 #include "openeaagles/hla/rprFom/NetIO.h"
 #include "openeaagles/hla/rprFom/RprFom.h"
 #include "openeaagles/hla/rprFom/Nib.h"
@@ -8,9 +12,6 @@
 #include "openeaagles/basic/Nav.h"
 #include "openeaagles/basic/NetHandler.h"
 
-//==============================================================================
-// Class: NetIO
-//==============================================================================
 namespace Eaagles {
 namespace Network {
 namespace Hla {

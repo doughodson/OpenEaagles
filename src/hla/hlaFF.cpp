@@ -17,7 +17,7 @@ Basic::Object* hlaFormFunc(const char* const formname)
     //if ( strcmp(formname, getFormName()) == 0 ) {
     //    newform = new Mc02FomIO();
     //}
-    //else if ( strcmp(formname, RprFomIO::getFormName()) == 0 ) {
+    //if ( strcmp(formname, RprFomIO::getFormName()) == 0 ) {
     //    newform = new RprFomIO;
     //}
 

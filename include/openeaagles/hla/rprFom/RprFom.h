@@ -2,8 +2,8 @@
 // Real-time Platform Reference FOM (RPR-FOM) Data Structures
 // RPR-FOM Version: 2.0 Draft 17
 //------------------------------------------------------------------------------
-#ifndef __Hla_RprFom_H__
-#define __Hla_RprFom_H__
+#ifndef __Eaagles_Network_Hla_RprFom_H__
+#define __Eaagles_Network_Hla_RprFom_H__
 
 #include <RTI.hh>
 #include "openeaagles/basic/Object.h"
@@ -1113,4 +1113,4 @@ struct MunitionDetonation {
 } // End Network namespace
 } // End Eaagles namespace
 
-#endif /* __Hla_RprFom_H__ */
+#endif

@@ -1,3 +1,7 @@
+//------------------------------------------------------------------------------
+// Class: NetIO
+//------------------------------------------------------------------------------
+
 #include "openeaagles/hla/rprFom/NetIO.h"
 #include "openeaagles/hla/rprFom/Nib.h"
 #include "openeaagles/hla/rprFom/RprFom.h"
@@ -19,24 +23,20 @@
 #include "openeaagles/basic/NetHandler.h"
 #include "openeaagles/basic/Number.h"
 
-//==============================================================================
-// Class: NetIO
-//==============================================================================
 namespace Eaagles {
 namespace Network {
 namespace Hla {
 namespace RprFom {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(NetIO,"RprFomNetIO")
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(NetIO, "RprFomNetIO")
 EMPTY_SERIALIZER(NetIO)
-
 
 //------------------------------------------------------------------------------
 // Constructors, destructor, copy operator and clone()
 //------------------------------------------------------------------------------
 NetIO::NetIO()
 {
-    SET_SLOTTABLE
+   STANDARD_CONSTRUCTOR()
 }
 
 //------------------------------------------------------------------------------
