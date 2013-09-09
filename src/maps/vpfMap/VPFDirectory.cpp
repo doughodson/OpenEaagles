@@ -19,14 +19,12 @@ BEGIN_SLOTTABLE(VPFDirectory)
     "path",                 // Path to the vpf database directory
 END_SLOTTABLE(VPFDirectory)
 
-
 //------------------------------------------------------------------------------
-//  Map slot table to handles 
+//  Map slot table to handles
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(VPFDirectory)
     ON_SLOT(1, setSlotPath, Basic::String)
 END_SLOT_MAP()
-
 
 VPFDirectory::VPFDirectory()
 {
@@ -61,7 +59,7 @@ void VPFDirectory::createTable(const int x)
 }
 
 //------------------------------------------------------------------------------
-//  setSlotPath() - sets the path to database directory directory 
+//  setSlotPath() - sets the path to database directory directory
 //------------------------------------------------------------------------------
 bool VPFDirectory::setSlotPath(const Basic::String* const sfpobj)
 {
@@ -90,7 +88,7 @@ void VPFDirectory::loadTables()
 }
 
 //------------------------------------------------------------------------------
-// getSlotByIndex() 
+// getSlotByIndex()
 //------------------------------------------------------------------------------
 Basic::Object* VPFDirectory::getSlotByIndex(const int si)
 {
@@ -98,6 +96,6 @@ Basic::Object* VPFDirectory::getSlotByIndex(const int si)
 }
 
 } // end Vpf namespace
-} // end Maps namespace 
+} // end Maps namespace
 } // end Eaagles namespace
 

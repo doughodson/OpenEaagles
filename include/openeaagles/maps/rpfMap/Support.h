@@ -3,19 +3,19 @@
 //
 // This contains a lot of enumerated types that allow the CadrgFile to seek to 
 // the right portion of the .Toc and other files, all which contain RPF data.
-
+//
 // Subroutines:
 // swap() - Simple static function to swap bytes.
 //      void swap(unsigned char *ptr, int count)
-
+//
 // stringToLowercase() - Takes in a string, and makes it lowercase.
 //      char* stringToLowercase(char* str)
-
+//
 // parseLocations() - At this point we are at the end of the header section 
 // and now we need to start reading the location data. - this function 
 // takes in a file, and finds the proper locations for our component types.
 //      void parseLocations(std::ifstream& fin, Location* locs, int count)
-
+//
 //------------------------------------------------------------------------------
 
 #ifndef __Eaagles_Maps_Rpf_Support_H__
@@ -40,7 +40,6 @@ enum NitfHdrLengths {
     NITF_HDR_NONE = 0, NITF_HDR_SHORT = 413,
     NITF_HDR_LONG = 426
 };
-
 
 #if 0
     static const int LOC_BOUNDARIES     = 3;
@@ -152,4 +151,3 @@ void parseLocations(std::ifstream& fin, Location* locs, int count);
 } // End Eaagles namespace
 
 #endif
-

@@ -28,7 +28,7 @@ public:
     static const int MAX_COORDS = 500;
 
     virtual void createRecord(VPFTable* x, const char* file, const int idx);
-    
+
     const char* getData(const int column);
 
     int getCoordinate(const int column, osg::Vec3 vec[], const int idx, const int max);
@@ -45,7 +45,7 @@ private:
 };
 
 } // End Vpf namespace
-} // End Maps namespace 
+} // End Maps namespace
 } // End Eaagles namespace
 
 #endif

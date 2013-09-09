@@ -71,7 +71,7 @@ void VMAP0ReferenceDirectory::loadTables()
             VPFRecord* r = table->getRecord(count);
             while (r != 0) {
                 for (int i = 1; i < table->getNumberOfColumns(); i++) {
-                    if (r != 0) {   
+                    if (r != 0) {
 #if defined DEBUG_OUTPUT
                         std::cout << "COLUMN #" << i << " = " << r->getData(i) << std::endl;
 #endif
@@ -118,7 +118,7 @@ void VMAP0ReferenceDirectory::loadTables()
                 size_t size = strlen(x);
                 size_t count = 0;
                 while (x[count] != ' ' && count < size) count++;
-                x[count] = 0;            
+                x[count] = 0;
 
 #if 1
                 //if (strcmp(x, "polbnd") == 0) {
@@ -177,7 +177,7 @@ void VMAP0ReferenceDirectory::loadTables()
                     string->catStr(x);
                     coverages[CVG_POLBND]->setSlotPath(string);
                 }
-#endif 
+#endif
                 index++;
                 record = table->getRecord(index);
             }
@@ -193,6 +193,6 @@ VMAP0RefCoverageDirectory* VMAP0ReferenceDirectory::getCoverage(const int cov)
 }
 
 } // end Vpf namespace
-} // end Maps namespace 
+} // end Maps namespace
 } // end Eaagles namespace
 

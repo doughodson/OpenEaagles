@@ -73,6 +73,6 @@ Basic::Object* vpfMapFormFunc(const char* formname)
 }
 
 } // end Vpf namespace
-} // end Maps namespace 
+} // end Maps namespace
 } // end Eaagles namespace
 

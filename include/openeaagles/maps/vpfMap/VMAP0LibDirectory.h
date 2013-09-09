@@ -2,11 +2,11 @@
 // Class: VMAP0LibDirectory
 //
 // Description: VMAP level 0 library directory which contains
-// 
+//
 // - lat (library attribute table)
 //
 // Subroutines:
-// loadTables() - 
+// loadTables() -
 //      void VMAP0LibDirectory::loadTables()
 //
 // -------------------------------------------------------------------------------
@@ -41,7 +41,7 @@ private:
 };
 
 } // End Vpf namespace
-} // End Maps namespace 
+} // End Maps namespace
 } // End Eaagles namespace
 
 #endif

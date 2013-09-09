@@ -18,9 +18,9 @@ EMPTY_SLOTTABLE(TexturePager)
 EMPTY_SERIALIZER(TexturePager)
 
 //------------------------------------------------------------------------------
-// Constructor() 
+// Constructor()
 //------------------------------------------------------------------------------
-TexturePager::TexturePager() 
+TexturePager::TexturePager()
 {
     STANDARD_CONSTRUCTOR()
     maxTableSize = 0;
@@ -34,7 +34,7 @@ TexturePager::TexturePager()
 }
 
 //------------------------------------------------------------------------------
-// copyData() 
+// copyData()
 //------------------------------------------------------------------------------
 void TexturePager::copyData(const TexturePager& org, const bool cc)
 {
@@ -69,7 +69,7 @@ void TexturePager::copyData(const TexturePager& org, const bool cc)
 }
 
 //------------------------------------------------------------------------------
-// deleteData() 
+// deleteData()
 //------------------------------------------------------------------------------
 void TexturePager::deleteData()
 {
@@ -86,7 +86,7 @@ void TexturePager::deleteData()
 //------------------------------------------------------------------------------
 void TexturePager::setSize(int tableSize)
 {
-    
+
     table.setSize(tableSize);
     maxTableSize = tableSize;
     int size = maxTableSize * maxTableSize;
@@ -121,7 +121,7 @@ void TexturePager::setMap(CadrgMap* newMap)
 // -------------------------------------------------------------------------
 void TexturePager::updateTextures(const int tRow, const int tCol)
 {
-    
+
     if (map == 0) {
         std::cerr << "TexturePager::UpdateTextures invalid map" << std::endl;
         return;
@@ -185,7 +185,7 @@ void TexturePager::freeTextures()
                         map->releaseFrame(r + row, c + col, this);
                     }
                 }
-            } 
+            }
         }
     }
 }
@@ -248,7 +248,7 @@ void TexturePager::loadNewTextures()
             for (int dir = 0; dir < 4; dir++) {
                 for (int j = 0; j < level + offset[dir]; j++) {
                     r += rowChange[dir];
-                    c += colChange[dir];    
+                    c += colChange[dir];
                     // Do we have a valid texture at this position in our table?  If we dont we are going
                     // to add one, but only if the row and column + our center row and column position fall
                     // within our valid frames.
@@ -260,7 +260,7 @@ void TexturePager::loadNewTextures()
                                 BasicGL::Texture* obj = dynamic_cast<BasicGL::Texture*>(item->getValue());
                                 if (obj != 0) {
                                     // Set our new texture object there, and remove it from our stack.
-                                    table.setTextureObject(r, c, obj); 
+                                    table.setTextureObject(r, c, obj);
                                     stack->removeHead();
                                     // Now load the frame data onto our new texture.
                                     void* pixels = map->getPixels(r + row, c + col, this);
@@ -281,7 +281,7 @@ void TexturePager::loadNewTextures()
 }
 
 //------------------------------------------------------------------------------
-// flushTextures() - Clear out the textures and put them back on the stack. 
+// flushTextures() - Clear out the textures and put them back on the stack.
 //------------------------------------------------------------------------------
 void TexturePager::flushTextures()
 {

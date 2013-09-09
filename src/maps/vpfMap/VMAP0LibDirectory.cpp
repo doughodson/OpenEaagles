@@ -12,7 +12,6 @@ namespace Vpf {
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(VMAP0LibDirectory,"VMAP0LibDirectory")
 EMPTY_SERIALIZER(VMAP0LibDirectory)
 
-
 VMAP0LibDirectory::VMAP0LibDirectory()
 {
     STANDARD_CONSTRUCTOR()
@@ -138,7 +137,7 @@ void VMAP0LibDirectory::loadTables()
 //            count = 0;
 //            size = 0;
             // our value for the library comes in as an 8 character name with
-            // trailing spaces, so we need to truncate it to a * character 
+            // trailing spaces, so we need to truncate it to a * character
             // text value with no trailing spaces to put it into our pathname
             //t = table->getTableValue(i+1, 2);
             //t = 0;
@@ -161,6 +160,6 @@ void VMAP0LibDirectory::loadTables()
 }
 
 } // end Vpf namespace
-} // end Maps namespace 
+} // end Maps namespace
 } // end Eaagles namespace
 

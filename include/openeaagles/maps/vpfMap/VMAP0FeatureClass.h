@@ -1,7 +1,7 @@
 // ------------------------------------------------------------
 // Class: VMAP0FeatureClass
 //
-// Description: Defines relationships between feature tables and 
+// Description: Defines relationships between feature tables and
 // primitives.
 // ------------------------------------------------------------
 #ifndef __Eaagles_Maps_Vpf_VMAP0FeatureClass_H__
@@ -41,11 +41,11 @@ private:
     static const int MAX_RELATIONS = 50;
     char name[150];     // Name of our feature class
     Relation* relations[MAX_RELATIONS];
-    int numRelations;    
+    int numRelations;
 };
 
 } // End Vpf namespace
-} // End Maps namespace 
+} // End Maps namespace
 } // End Eaagles namespace
 
 #endif

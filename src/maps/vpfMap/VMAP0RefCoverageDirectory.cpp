@@ -77,7 +77,7 @@ void VMAP0RefCoverageDirectory::loadTables()
             // don't give it a type, because we are keeping track of the type
             featureTables[PLACENAM_DOT_PFT]->loadTableFromFile(string->getString(), "placenam.pft");
         }
-        
+
         // ok, now our entity node primitive table
         if (featureTables[END] == 0) featureTables[END] = new VPFTable();
         if (!featureTables[END]->isLoaded()) {
@@ -91,10 +91,10 @@ void VMAP0RefCoverageDirectory::loadTables()
             // don't give it a type, because we are keeping track of the type
             spatialTables[NSI]->loadIndexTableFromFile(string->getString(), "nsi");
             // SLS test
-            // now do a quick spatial query 
+            // now do a quick spatial query
             //spatialTables[NSI]->findPrimitivesBySpatialQuery(32, -115);
         }
-        
+
 
     }
     else if (getType() == VMAP0ReferenceDirectory::CVG_POLBND) {
@@ -119,11 +119,11 @@ void VMAP0RefCoverageDirectory::loadTables()
         }
 
     }
-    
+
     string->unref();
 }
 
-int VMAP0RefCoverageDirectory::getPolBndCoordsByLatLon(const float maxLat, const float maxLon, const float minLat, const float minLon, const int idx, osg::Vec3 vec[], const int max) 
+int VMAP0RefCoverageDirectory::getPolBndCoordsByLatLon(const float maxLat, const float maxLon, const float minLat, const float minLon, const int idx, osg::Vec3 vec[], const int max)
 {
     int numCoords = 0;
     if (featureTables[EBR]->isLoaded() && featureTables[EDG]->isLoaded()) {
@@ -147,7 +147,7 @@ int VMAP0RefCoverageDirectory::getPolBndCoordsByLatLon(const float maxLat, const
                         numCoords += temp;
                     }
                 }
-            }                        
+            }
             index++;
             record = featureTables[EBR]->getRecord(index);
         }
@@ -229,7 +229,7 @@ int VMAP0RefCoverageDirectory::getPolBndCoordsByRecord(const int r, osg::Vec3 ve
     if (featureTables[EDG] != 0 && featureTables[EDG]->isLoaded()) {
         VPFRecord* rec = featureTables[EDG]->getRecord(r);
         // our boundary coordinate is column 8
-        if (rec != 0) numCoords = rec->getCoordinate(8, vec, idx, max);            
+        if (rec != 0) numCoords = rec->getCoordinate(8, vec, idx, max);
     }
     else std::cout << "NO EDGE TABLE FOUND, PATH = " << getPath() << std::endl;
     return numCoords;
@@ -246,12 +246,12 @@ void VMAP0RefCoverageDirectory::buildFeatureClasses()
         VPFRecord* record = 0;
         for (int i = 1; fcs->getRecord(i) != 0 && numFeatureClasses < MAX_FEATURE_CLASSES; i++) {
             record = fcs->getRecord(i);
-            d = (char*)record->getData(2); 
+            d = (char*)record->getData(2);
             // now count our table name and truncate it
             size_t size = strlen(d);
             size_t count = 0;
             while (d[count] != ' ' && count < size) count++;
-            d[count] = 0;            
+            d[count] = 0;
 
             exists = false;
             holder = 0;
@@ -297,6 +297,6 @@ VMAP0FeatureClass* VMAP0RefCoverageDirectory::getFeatureClassByName(const char* 
 }
 
 } // end Vpf namespace
-} // end Maps namespace 
+} // end Maps namespace
 } // end Eaagles namespace
 

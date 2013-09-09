@@ -24,7 +24,6 @@ namespace Vpf {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(VPFTable,"VPFTable")
 EMPTY_SERIALIZER(VPFTable)
-
 EMPTY_COPYDATA(VPFTable)
 
 VPFTable::VPFTable()
@@ -102,7 +101,7 @@ bool VPFTable::loadTableFromFile(const char* pathname, const char* filename, con
     if (inStream.fail()) {
         std::cout << "FAILED to open file " << pathname << filename << std::endl;
     }
-    else {         
+    else {
         ok = true;
         // start reading our file
         headerLength = 0;
@@ -131,7 +130,7 @@ bool VPFTable::loadTableFromFile(const char* pathname, const char* filename, con
         for (unsigned int i = 0; i < strlen(columnDefs); i++) {
             // end of column definition
             if (columnDefs[i] == ':') {
-                tempCol[row++][column] = 0;   
+                tempCol[row++][column] = 0;
                 numColumns++;
                 column = 0;
             }
@@ -168,8 +167,8 @@ bool VPFTable::loadTableFromFile(const char* pathname, const char* filename, con
             idx++;
             x = 0;
             // column number field
-            while (tempCol[i][idx] != ',') holder[x++] = tempCol[i][idx++]; 
-            holder[x] = '\0';                
+            while (tempCol[i][idx] != ',') holder[x++] = tempCol[i][idx++];
+            holder[x] = '\0';
             setColumnNumber(holder);
             if (strcmp(getColumnNumber(),"*") == 0) hasIdx = true;
             // skip comma
@@ -226,7 +225,7 @@ bool VPFTable::loadTableFromFile(const char* pathname, const char* filename, con
         std::cout << std::endl << std::endl;
 #endif
         inStream.close();
-        // ok, we know our record size, but we don't know how many records we have, but we will simply 
+        // ok, we know our record size, but we don't know how many records we have, but we will simply
         // get the records as we need them
     }
     return ok;
@@ -297,6 +296,6 @@ void VPFTable::determineRecordSize()
 }
 
 } // end Vpf namespace
-} // end Maps namespace 
+} // end Maps namespace
 } // end Eaagles namespace
 

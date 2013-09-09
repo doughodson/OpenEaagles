@@ -23,7 +23,7 @@ EMPTY_COPYDATA(VMAP0FeatureClass)
 VMAP0FeatureClass::VMAP0FeatureClass()
 {
     for (int i = 0; i < MAX_RELATIONS; i++) relations[i] = 0;
-    //for (int i = 0; i < MAX_FEATURE_TABLES; i++) tables[i] = 0; 
+    //for (int i = 0; i < MAX_FEATURE_TABLES; i++) tables[i] = 0;
     numRelations = 0;
 }
 
@@ -39,7 +39,7 @@ void VMAP0FeatureClass::setName(const char* x)
 }
 
 void VMAP0FeatureClass::addRelation(const char* table1, const char* table2, const char *table1key, const char *table2key)
-{   
+{
     char* tempTable1 = (char*)table1;
     char* tempTable2 = (char*)table2;
     char* tempTable1Key = (char*)table1key;
@@ -49,25 +49,25 @@ void VMAP0FeatureClass::addRelation(const char* table1, const char* table2, cons
     size_t size = strlen(tempTable1);
     size_t count = 0;
     while (tempTable1[count] != ' ' && count < size) count++;
-    tempTable1[count] = 0;            
+    tempTable1[count] = 0;
 
     size = strlen(tempTable2);
     count = 0;
     while (tempTable2[count] != ' ' && count < size) count++;
-    tempTable2[count] = 0;            
+    tempTable2[count] = 0;
 
     size = strlen(tempTable1Key);
     count = 0;
     while (tempTable1Key[count] != ' ' && count < size) count++;
-    tempTable1Key[count] = 0;            
+    tempTable1Key[count] = 0;
 
     size = strlen(tempTable2Key);
     count = 0;
     while (tempTable2Key[count] != ' ' && count < size) count++;
-    tempTable2Key[count] = 0;            
+    tempTable2Key[count] = 0;
 
     relations[numRelations] = new Relation();
-    
+
     strcpy(relations[numRelations]->table1, tempTable1);
     //std::sprintf(relations[numRelations]->table1, "%s", tempTable1);
     //lcStrcpy(relations[numRelations]->table1, sizeof(relations[numRelations]->table1), tempTable1);
@@ -90,6 +90,6 @@ void VMAP0FeatureClass::addRelation(const char* table1, const char* table2, cons
 }
 
 } // end Vpf namespace
-} // end Maps namespace 
+} // end Maps namespace
 } // end Eaagles namespace
 

@@ -86,7 +86,7 @@ void VPFSpatialIndexTable::loadIndexTableFromFile(const char* pathname, const ch
 int VPFSpatialIndexTable::findPrimitivesBySpatialQuery(const float lat, const float lon, int primIds[], const float width, const float height)
 {
     //std::cout << "LAT / LON = " << lat << " / " << lon << std::endl;
-    int primCount = 0; 
+    int primCount = 0;
     // first, check our minimum bounding rectangle just to see if we contain this lat/lon point
     if ((lon >= mbrX1 && lon <= mbrX2) && (lat >= mbrY1 && lat <= mbrY2)) {
         //std::cout << "VALID LAT / LON convert to spatial coordinates!" << std::endl;
@@ -163,7 +163,7 @@ int VPFSpatialIndexTable::findPrimitivesBySpatialQuery(const float lat, const fl
                     }
                 }
             }
-            stream.close();       
+            stream.close();
         }
     }
     return primCount;
@@ -186,6 +186,6 @@ void VPFSpatialIndexTable::convertDegsToSpatialPoint(const float lat, const floa
 
 
 } // end Vpf namespace
-} // end Maps namespace 
+} // end Maps namespace
 } // end Eaagles namespace
 

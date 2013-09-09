@@ -3,7 +3,7 @@
 //
 // Description: VMAP level 0 coverage directory(ies), which contain
 // - fcs (feature class schema)
-// - libref.lft 
+// - libref.lft
 // - libref.tft
 // - primitive tables
 // -------------------------------------------------------------------------------
@@ -42,9 +42,9 @@ public:
 
     int getPlacenameCoordsByRecord(const int r, osg::Vec3 vec[], const int idx, const int max);
     bool getPlacenameByRecord(const int r, char* x);
-    
+
     int getPlacenameCoordsByRange(const float width, const float height, const float refLat, const float refLon, osg::Vec3 vec[], const int idx, const int max);
-    
+
 
     int getPolBndCoordsByRecord(const int r, osg::Vec3 vec[], const int idx, const int max);
 
@@ -68,7 +68,7 @@ private:
 };
 
 } // End Vpf namespace
-} // End Maps namespace 
+} // End Maps namespace
 } // End Eaagles namespace
 
 #endif

@@ -5,45 +5,45 @@
 // This is the actual class that does the drawing of the map.  It cycles through
 // it's texture pagers and tells them where to reference, and how to draw.  Then
 // texture pages draws the tiles.
-
+//
 // Subroutines:
-
+//
 // setSlotMapIntensity() -
 //      bool MapDrawer::setSlotMapIntensity(const Basic::Number* const x)
-
+//
 // setSlotDrawGridMode() -
 //      bool MapDrawer::setSlotDrawGridMode(const Basic::Number* const x)
-
+//
 // setSlotShowMap() -
 //      bool MapDrawer::setSlotShowMap(const Basic::Number* const x)
-
+//
 // setGridSize() - does our initial setup.
 //      bool MapDrawer::setGridSize(const int aGridSize)
-
+//
 // setShowMap() - show our map or not?
 //      bool MapDrawer::setShowMap(const bool x)
-
+//
 // setMap() - sets our parent map.
 //      void MapDrawer::setMap(CadrgMap* map)
-
+//
 // updateZone() - update our zone in accordance with our texture pager.
 //      void MapDrawer::updateZone(int curZone, int &oldZone, const int idx)
-
+//
 // drawFunc() - Draw the map.
 //      void MapDrawer::drawFunc()
-
+//
 // determineScaling() - determine our reference scaling for each zone.
 //      void MapDrawer::determineScaling(const int idx)
-
+//
 // drawMap() - called from draw fun, it tells our specific map to draw.
 //      void MapDrawer::drawMap(const int zone, const int idx)
-
+//
 // drawTexture() - draws a tile at a specific position.
 //      void MapDrawer::drawTexture(const int row, const int column, const int idx)
-
+//
 // getSlotByIndex() 
 //      Basic::Object* MapDrawer::getSlotByIndex(const int si)
-
+//
 // -------------------------------------------------------------------------------
 
 #ifndef __Eaagles_Maps_Rpf_MapDrawer_H__

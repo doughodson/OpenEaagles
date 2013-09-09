@@ -16,7 +16,6 @@ namespace Rpf {
 # pragma warning(disable: 4996)
 #endif
 
-    
 IMPLEMENT_SUBCLASS(CadrgFrameEntry, "CadrgFrameEntry")
 EMPTY_SLOTTABLE(CadrgFrameEntry)
 EMPTY_SERIALIZER(CadrgFrameEntry)
@@ -36,7 +35,7 @@ CadrgFrameEntry::CadrgFrameEntry()
 }
 
 //--------------------------------------------------------------------------
-// copyData() 
+// copyData()
 //--------------------------------------------------------------------------
 void CadrgFrameEntry::copyData(const CadrgFrameEntry& org, const bool cc)
 {
@@ -54,7 +53,7 @@ void CadrgFrameEntry::copyData(const CadrgFrameEntry& org, const bool cc)
 }
 
 //--------------------------------------------------------------------------
-// deleteData() 
+// deleteData()
 //--------------------------------------------------------------------------
 void CadrgFrameEntry::deleteData()
 {
@@ -81,13 +80,13 @@ void CadrgFrameEntry::setPathName(const char* dir, const char* file)
 //--------------------------------------------------------------------------
 void CadrgFrameEntry::setCib(const bool x)
 {
-    cib = x; 
+    cib = x;
 }
 
 //--------------------------------------------------------------------------
 // loadClut() - Load our color lookup table, if it isn't already loaded.
 //--------------------------------------------------------------------------
-void CadrgFrameEntry::loadClut() 
+void CadrgFrameEntry::loadClut()
 {
     if (loaded) return;
 
@@ -116,5 +115,3 @@ void CadrgFrameEntry::setFrame(CadrgFrame* newFrame)
 } // End Rpf namespace
 } // End Maps namespace
 } // End Eaagles namespace
-
-

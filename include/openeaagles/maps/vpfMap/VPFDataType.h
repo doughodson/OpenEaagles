@@ -23,7 +23,7 @@ public:
 
     enum { LONG_INT, SHORT_INT, CHAR, FIXED_TEXT, VARIABLE_TEXT, FLOAT, DOUBLE, THREE_D_COORD, DATE };
 
-    // Set functions 
+    // Set functions
     virtual void setLength(const int x = -1);
     // Value sets
     virtual void setValue(char* x);
@@ -44,7 +44,7 @@ private:
 };
 
 } // End Vpf namespace
-} // End Maps namespace 
+} // End Maps namespace
 } // End Eaagles namespace
 
 #endif

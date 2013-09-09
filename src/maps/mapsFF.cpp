@@ -1,10 +1,9 @@
 //------------------------------------------------------------------------------
-// mapsFormFunc() -- calls both rpf and vpf form funcs
+// mapsFormFunc()
 //------------------------------------------------------------------------------
 
 #include "openeaagles/maps/mapsFF.h"
 
-//
 #include "openeaagles/maps/rpfMap/rpfMapFF.h"
 #include "openeaagles/maps/vpfMap/vpfMapFF.h"
 
@@ -18,6 +17,6 @@ Basic::Object* mapsFormFunc(const char* formname)
     return newform;
 }
 
-} // end Eaagles namespace
 } // end Maps namespace
+} // end Eaagles namespace
 

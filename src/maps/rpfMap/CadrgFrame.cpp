@@ -30,7 +30,7 @@ CadrgFrame::CadrgFrame()
 
 
 // -------------------------------------------------------------------------------------
-// copyData() 
+// copyData()
 // -------------------------------------------------------------------------------------
 void CadrgFrame::copyData(const CadrgFrame& org, const bool cc)
 {
@@ -44,7 +44,7 @@ void CadrgFrame::copyData(const CadrgFrame& org, const bool cc)
         frameEntry = org.frameEntry;
         frameEntry->ref();
     }
-    nitfHdrLength = org.nitfHdrLength;    
+    nitfHdrLength = org.nitfHdrLength;
 }
 
 // -------------------------------------------------------------------------------------
@@ -57,7 +57,7 @@ void CadrgFrame::deleteData()
 }
 
 // -------------------------------------------------------------------------------------
-// load() - Load a frame's data. 
+// load() - Load a frame's data.
 // -------------------------------------------------------------------------------------
 void CadrgFrame::load(CadrgFrameEntry* entry)
 {
@@ -65,7 +65,7 @@ void CadrgFrame::load(CadrgFrameEntry* entry)
     Header head;
     // Physical locations
     Location loc[6];
-    // Compression 
+    // Compression
     Compression compression;
     // Lookup table
     LookupTable lut[4];
@@ -75,17 +75,17 @@ void CadrgFrame::load(CadrgFrameEntry* entry)
     ushort indices[6][6];
     int rowBytes = 0;
 
-    // All subframes present indicator 
+    // All subframes present indicator
     bool allSubframes = false;
-    // Lookup offset table offset 
+    // Lookup offset table offset
     uint lookupOffTblOff = 0;
-    // Lookup table offset record length 
+    // Lookup table offset record length
     ushort lookupTblOffRecLen = 0;
-    // Subframe mask table offset 
+    // Subframe mask table offset
     uint subframeMskTblOff = 0;
-    // Subframe offset (mask section) 
+    // Subframe offset (mask section)
     uint subframeOff[6][6];
-    // Temp table to transfer Lookup Table to 
+    // Temp table to transfer Lookup Table to
     unsigned char table[4][4096][4];
 
     if (entry != 0) {
@@ -115,7 +115,7 @@ void CadrgFrame::load(CadrgFrameEntry* entry)
     if (string != 0) string->unref();
 
     // National Imagery Transmission Format (NITF)  header check - skipped for now (SLS),
-    // assume no NITF hdr 
+    // assume no NITF hdr
     nitfHdrLength = NITF_HDR_NONE;
 
     // Read in our header buffer
@@ -132,10 +132,10 @@ void CadrgFrame::load(CadrgFrameEntry* entry)
         int dist = int(ptr - &buf[0]);
         nitfHdrLength = dist + 11;
     }
-    // Position properly 
+    // Position properly
     fin.seekg(nitfHdrLength, std::ios::beg);
 
-    // Read header 
+    // Read header
     unsigned char byte;
     fin.read((char *) &byte, sizeof(byte));
     head.endian = (byte != 0);
@@ -151,27 +151,27 @@ void CadrgFrame::load(CadrgFrameEntry* entry)
     fin.read((char *) &head.locSecLoc, sizeof(head.locSecLoc));
     if (!head.endian) swap((unsigned char *) &head.locSecLoc, sizeof(head.locSecLoc));
 
-    // Position to start of location section: 2 choices: 
+    // Position to start of location section: 2 choices:
     fin.seekg(head.locSecLoc, std::ios::beg);
 
-    // Locate the sections we need 
+    // Locate the sections we need
     loc[0].componentId = LOC_COMPRESSION_SECTION;
     loc[1].componentId = LOC_IMAGE_DESCR_SUBHEADER;
     loc[2].componentId = LOC_COMPRESSION_LOOKUP_SUBSECTION;
     loc[3].componentId = LOC_SPATIAL_DATA_SUBSECTION;
     loc[4].componentId = LOC_IMAGE_DISPLAY_PARAM_SUBHEADER;
     loc[5].componentId = LOC_MASK_SUBSECTION;
-    
+
     // Parse our locations
     parseLocations(fin, loc, 6);
 
-    // From index to physicalIdx 
+    // From index to physicalIdx
     if (loc[0].physicalIdx == ~0 || loc[1].physicalIdx == ~0) {
         std::cout << "CadrgFrame::load() : Can't find section in frame!" << std::endl;
         return;
     }
 
-    // Read the compression tables 
+    // Read the compression tables
     fin.seekg(loc[0].physicalIdx, std::ios::beg);
     fin.read((char *) &compression, sizeof(compression));
     swap((unsigned char *) &compression.algorithm, sizeof(compression.algorithm));
@@ -184,7 +184,7 @@ void CadrgFrame::load(CadrgFrameEntry* entry)
         fin.seekg(loc[0].physicalIdx + 10, std::ios::beg);
     }
     else {
-        // DKS: Position at start of compression lookup table offset record 
+        // DKS: Position at start of compression lookup table offset record
         fin.seekg(loc[2].physicalIdx, std::ios::beg);
     }
 
@@ -194,7 +194,7 @@ void CadrgFrame::load(CadrgFrameEntry* entry)
     fin.read((char *) &lookupTblOffRecLen, sizeof(lookupTblOffRecLen));
     swap((unsigned char *) &lookupTblOffRecLen, sizeof(lookupTblOffRecLen));
 
-    // For each compression table 
+    // For each compression table
     for (int i = 0; i < 4; i++) {
         fin.read((char *) &lut[i].id, sizeof(lut[i].id));
         fin.read((char *) &lut[i].records, sizeof(lut[i].records));
@@ -202,7 +202,7 @@ void CadrgFrame::load(CadrgFrameEntry* entry)
         fin.read((char *) &lut[i].bitLength, sizeof(lut[i].bitLength));
         fin.read((char *) &lut[i].physOffset, sizeof(lut[i].physOffset));
 
-        // Used for sanity checking 
+        // Used for sanity checking
         swap((unsigned char *) &lut[i].id, sizeof(lut[i].id));
         swap((unsigned char *) &lut[i].records, sizeof(lut[i].records));
         swap((unsigned char *) &lut[i].values, sizeof(lut[i].values));
@@ -214,14 +214,14 @@ void CadrgFrame::load(CadrgFrameEntry* entry)
         }
     }
 
-    // Read compression lookup table 
+    // Read compression lookup table
     for (int i = 0; i < 4; i++) {
-        // Compression lookup subsection: loc[2] 
+        // Compression lookup subsection: loc[2]
         fin.seekg(loc[2].physicalIdx + lut[i].physOffset, std::ios::beg);
         fin.read((char *) table[i], 4096 * 4);
     }
 
-    // for i = 1 to 4 (# compression tables, 1 for each pixel row)  
+    // for i = 1 to 4 (# compression tables, 1 for each pixel row)
     for (int j = 0; j < 4096; j++) {
         for (int k = 0; k < 4; k++) {
             for (int i = 0; i < 4; i++) {
@@ -240,7 +240,7 @@ void CadrgFrame::load(CadrgFrameEntry* entry)
     fin.read((char *) &image.vertSubframes, sizeof(image.vertSubframes));
     fin.read((char *) &image.outputCols, sizeof(image.outputCols));
     fin.read((char *) &image.outputRows, sizeof(image.outputRows));
-    // NULL (FF) if no subfr mask table 
+    // NULL (FF) if no subfr mask table
     fin.read((char *) &subframeMskTblOff, sizeof(subframeMskTblOff));
 
     swap((unsigned char *) &image.spectralGroups, sizeof(image.spectralGroups));
@@ -253,7 +253,7 @@ void CadrgFrame::load(CadrgFrameEntry* entry)
     swap((unsigned char *) &image.outputRows, sizeof(image.outputRows));
     swap((unsigned char *) &subframeMskTblOff, sizeof(subframeMskTblOff));
 
-    // ERROR Check 
+    // ERROR Check
     if (subframeMskTblOff == 0) {
         std::cout << "CadrgFrame::load() : EROR in frame loading, sub frame mask table offset == 0.  Using old format frame file.  Run old-new converter?" << std::endl;
         return;
@@ -263,14 +263,14 @@ void CadrgFrame::load(CadrgFrameEntry* entry)
 
     for (int i = 0; i < 6; i++) {
         for (int j = 0; j < 6; j++) {
-            // Subframe is not masked 
+            // Subframe is not masked
             masked[i][j] = false;
         }
     }
 
-    // Read mask data 
+    // Read mask data
     if (!allSubframes) {
-        // fseek to LOC_MASK_SUBSECTION, ID=138 
+        // fseek to LOC_MASK_SUBSECTION, ID=138
         if (loc[5].physicalIdx == ~0) {
             std::cout << "CadrgFrame::load() : Can't find MASK_SUBSECTION in the frame file!" << std::endl;
             return;
@@ -280,7 +280,7 @@ void CadrgFrame::load(CadrgFrameEntry* entry)
         fin.seekg(subframeMskTblOff, std::ios::cur);
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 6; j++) {
-                // Read subframe offset 
+                // Read subframe offset
                 fin.read((char *) &subframeOff[i][j], 4);
                 swap((unsigned char *) &subframeOff[i][j], 4);
                 if (subframeOff[i][j] == 0xFFFFFFFF) masked[i][j] = true;
@@ -289,38 +289,38 @@ void CadrgFrame::load(CadrgFrameEntry* entry)
     }
 
     // must be 6 x 6 frame, or it will be masked.
-    // Determine row bytes 
+    // Determine row bytes
     rowBytes = 256 / 4 * 3 / 2;
 
-    // fseek to LOC_IMAGE_DISPLAY_PARAM_SUBHEADER, ID=137 
+    // fseek to LOC_IMAGE_DISPLAY_PARAM_SUBHEADER, ID=137
     if (loc[4].physicalIdx == ~0) {
         std::cout << "CadrgFrame::load() : Can't find IMAGE_DISPLAY_PARAM_SUBHEADER section in the frame file!" << std::endl;
         return;
     }
 
-    // Image Display Parameters Subheader 
+    // Image Display Parameters Subheader
     fin.seekg(loc[4].physicalIdx, std::ios::beg);
 
     // No image parameters needed
-    // Go to start of image spatial data subsection 
+    // Go to start of image spatial data subsection
     if (loc[3].physicalIdx == ~0) {
         std::cout << "CadrgFrame::load() : WARNING: Can't find Image spatial data subsection in FrameFile, using alternate computation!" << std::endl;
-        // Skip 14 bytes of image display parameters subheader instead  
+        // Skip 14 bytes of image display parameters subheader instead
         fin.seekg(14, std::ios::cur);
     }
     else {
-        // Position at start of image spatial data subsection 
+        // Position at start of image spatial data subsection
         fin.seekg(loc[3].physicalIdx, std::ios::beg);
     }
 
-    // Read subframes from top left, row-wise 
+    // Read subframes from top left, row-wise
     // Row
     for (int i = 0; i < 6; i++) {
         // Column
         for (int j = 0; j < 6; j++) {
             indices[i][j] = (ushort)(i * 6 + j);
             if (!masked[i][j]) {
-                // (256/4)=64.  64*64 * 12bits / 8bits = 6144 bytes 
+                // (256/4)=64.  64*64 * 12bits / 8bits = 6144 bytes
                 fin.read((char *) subFrameTable[i][j], frameSize);
             }
         }
@@ -344,8 +344,8 @@ int CadrgFrame::decompressSubframe(int x, int y, Subframe& subFrame)
     x = ty;
     y = tx;
 
-    // This should never occur since all subFrames should be present, 
-    // but if it does occur, just put up black pixels on the screen.  
+    // This should never occur since all subFrames should be present,
+    // but if it does occur, just put up black pixels on the screen.
     if (((ptr = subFrameTable[y][x]) == 0) || masked[y][x]) {
         for (int i = 0; i < 256; i ++) {
             for (int j = 0; j < 256; j ++) {
@@ -357,7 +357,7 @@ int CadrgFrame::decompressSubframe(int x, int y, Subframe& subFrame)
         for (int i = 0; i < 256; i += 4) {
             for (int j = 0; j < 256; j += 8, ptr += 3) {
                 unsigned int vals = ptr[0] << 16 | ptr[1] << 8 | ptr[2];
-                // Get first 12-bit value as index into VQ table 
+                // Get first 12-bit value as index into VQ table
                 unsigned char* imagePtr = &subFrame.image[j][i];
                 val = (vals >> 12) & 0xfff;
                 unsigned char* lutPtr = &lookupTable[val][0][0];
@@ -371,7 +371,7 @@ int CadrgFrame::decompressSubframe(int x, int y, Subframe& subFrame)
                     imagePtr += 252;
                 }
 
-                // Get second 12-bit value as index 
+                // Get second 12-bit value as index
                 imagePtr = &subFrame.image[j + 4][i];
                 val = vals & 0xfff;
                 lutPtr = &lookupTable[val][0][0];

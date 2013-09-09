@@ -50,7 +50,7 @@ void VMAP0MainDirectory::loadTables()
     bool ok = false;
     if (table != 0) ok = table->loadTableFromFile(string->getString(), "dht", VPFDirectory::DHT);
 
-    // this is the main directory, which for a level 0 map, should use 
+    // this is the main directory, which for a level 0 map, should use
     // load our library attribute table
     table = 0;
     // create our table
@@ -98,6 +98,6 @@ void VMAP0MainDirectory::loadTables()
 }
 
 } // end Vpf namespace
-} // end Maps namespace 
+} // end Maps namespace
 } // end Eaagles namespace
 

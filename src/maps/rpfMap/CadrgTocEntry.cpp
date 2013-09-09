@@ -22,7 +22,7 @@ EMPTY_SLOTTABLE(CadrgTocEntry)
 EMPTY_SERIALIZER(CadrgTocEntry)
 
 // ---------------------------------------------------------------------------------------------------
-// Constructor() 
+// Constructor()
 // ---------------------------------------------------------------------------------------------------
 CadrgTocEntry::CadrgTocEntry()
 {
@@ -47,7 +47,7 @@ CadrgTocEntry::CadrgTocEntry()
 }
 
 // ---------------------------------------------------------------------------------------------------
-// copyData() - 
+// copyData()
 // ---------------------------------------------------------------------------------------------------
 void CadrgTocEntry::copyData(const CadrgTocEntry& org, const bool)
 {
@@ -73,7 +73,7 @@ void CadrgTocEntry::copyData(const CadrgTocEntry& org, const bool)
 }
 
 // ---------------------------------------------------------------------------------------------------
-// deleteData() - 
+// deleteData()
 // ---------------------------------------------------------------------------------------------------
 void CadrgTocEntry::deleteData()
 {
@@ -130,28 +130,28 @@ void CadrgTocEntry::generateItems(void)
 // -----------------------------------------------------------------------------------------
 // setType() - Sets our entry type (ie... "CADRG").
 // -----------------------------------------------------------------------------------------
-void CadrgTocEntry::setType(const char* x, const int size) 
-{ 
+void CadrgTocEntry::setType(const char* x, const int size)
+{
     lcStrcpy(type, size, x);
-    type[size] = 0; 
+    type[size] = 0;
 }
 
 // -----------------------------------------------------------------------------------------
 // setZone() - Sets the zone this entry lies in.
 // -----------------------------------------------------------------------------------------
-void CadrgTocEntry::setZone(const char* x, const int size) 
-{ 
-    strncpy(zone, x, size); 
-    zone[size] = 0; 
+void CadrgTocEntry::setZone(const char* x, const int size)
+{
+    strncpy(zone, x, size);
+    zone[size] = 0;
 }
 
 // -----------------------------------------------------------------------------------------
 // setScale() - Sets the scale of this entry (ie... "1:500K").
 // -----------------------------------------------------------------------------------------
-void CadrgTocEntry::setScale(const char* x, const int size) 
-{ 
-    strncpy(scale, x, size); 
-    scale[size] = 0; 
+void CadrgTocEntry::setScale(const char* x, const int size)
+{
+    strncpy(scale, x, size);
+    scale[size] = 0;
 }
 
 // ---------------------------------------------------------------------------------------------------

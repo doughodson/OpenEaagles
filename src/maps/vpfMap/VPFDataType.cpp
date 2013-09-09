@@ -58,6 +58,6 @@ void VPFDataType::setLength(const int x)
 }
 
 } // end Vpf namespace
-} // end Maps namespace 
+} // end Maps namespace
 } // end Eaagles namespace
 

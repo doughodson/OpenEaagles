@@ -65,7 +65,7 @@ void CadrgFile::copyData(const CadrgFile& org, const bool cc)
     }
     if (org.originalDir != 0) {
         originalDir = org.originalDir;
-        originalDir->ref();        
+        originalDir->ref();
     }
 }
 
@@ -206,14 +206,14 @@ bool CadrgFile::checkForMap(const char* dir)
 		if (!toc.fail()) ok = true;
 	}
     else ok = true;
-    
+
     toc.close();
 
     return ok;
 }
 
 //--------------------------------------------------------------------------
-// initialize() - Checks to see we have valid data, then goes through and 
+// initialize() - Checks to see we have valid data, then goes through and
 // opens all the files that are required (from the input language), and then
 // creates Toc Entries for each one.  It then fills each Toc with it's frames.
 //--------------------------------------------------------------------------
@@ -238,22 +238,22 @@ bool CadrgFile::initialize(const char* dir)
 	// Boundary record number
     ushort          boundaryRecNum = 0;
     // Frame row number
-    ushort          frameRow = 0; 
+    ushort          frameRow = 0;
     // Frame column number
     ushort          frameCol = 0;
-	// # of frame file index records 
+	// # of frame file index records
 	uint            numFFIdxRec = 0;
-	// Offset of frame file pathname 
+	// Offset of frame file pathname
 	uint            ffPathOff = 0;
-	// Boundary record length 
+	// Boundary record length
 	ushort          bndryRecLength = 0;
-	// # frame file pathname records 
+	// # frame file pathname records
 	ushort          numPathNameRecs = 0;
-	// Frame file index record length 
+	// Frame file index record length
 	ushort          idxRecLength = 0;
-	// TOC NITF header length, if there 
+	// TOC NITF header length, if there
 	uint            nitfHdrLength = 410;
-	// Boundary rectangle table offset 
+	// Boundary rectangle table offset
 	uint            bndryRecTableOffset = 0;
 	// Frame file index table offset (not used)
 	uint            ffIdxTableOff = 0;
@@ -284,8 +284,8 @@ bool CadrgFile::initialize(const char* dir)
         #else
 		    toc.open(*string, std::ios::in);
         #endif
-        // If we still failed again, we know it's the directory that is misspelled or doesn't exist, so we print an error 
-        // and return.  
+        // If we still failed again, we know it's the directory that is misspelled or doesn't exist, so we print an error
+        // and return.
 		if (toc.fail()) {
 			std::cout << "Could not open the A.TOC or a.toc file in location " << dir << std::endl;
 			return false;
@@ -296,7 +296,7 @@ bool CadrgFile::initialize(const char* dir)
     string->unref();
 
 
-    // Let's read the header section length.    
+    // Let's read the header section length.
     // We seek right to position 31, to determine our governing spec date, which may or may not be there.  We
     // are going to see if it is there, because if it is, then we don't have an NITF message to worry about.
     toc.seekg(31, std::ios::beg);
@@ -305,18 +305,18 @@ bool CadrgFile::initialize(const char* dir)
     // Now move back to the beginning
     toc.seekg(0, std::ios::beg);
 
-    // If we dont's have a standard date of 199... then we know 
-    // that we have an National Imagery Transmission Format (NITF) message, so we should skip over the message and search 
+    // If we dont's have a standard date of 199... then we know
+    // that we have an National Imagery Transmission Format (NITF) message, so we should skip over the message and search
     // for the Raster Product Format Header (RPFHDR).
 	if (strncmp(head.govSpecdate, "199", 3) != 0)	{
         // Make a large set of characters to read from
         char buf[1024];
 	    // Read in some of the file
 	    toc.read(buf,1024);
-    
-        // Look for the RPFHDR indicator	    
+
+        // Look for the RPFHDR indicator
 	    char* ptr = strstr(buf, "RPFHDR");
-	    
+
         // Found it!
 	    if (ptr) {
             // Distance from where we found RPFHDR to the beginning of the file (sizeof the NITF message, basically)
@@ -328,12 +328,12 @@ bool CadrgFile::initialize(const char* dir)
 	    toc.seekg(nitfHdrLength, std::ios::beg);
 	}
 
-    // Ok, we are now at the header portion of the A.TOC file.    
+    // Ok, we are now at the header portion of the A.TOC file.
     // The Header file is setup like this (according to MIL-PRF-89038 6 OCTOBER 1994)
     // Name                             Type    Size (Bytes)    Position in file
     // <little/big endian indicator>    bool:    1                  1
     // <header section length>          uint:    2                  2
-    // <filename>                       ascii:  12                  4   
+    // <filename>                       ascii:  12                  4
     // <replacement/update indicator>   uint:    1                  15
     // <governing specification num>    ascii:  15                  16
     // <governing spec. date>           ascii:   8                  31
@@ -360,14 +360,14 @@ bool CadrgFile::initialize(const char* dir)
 	toc.read((char *) &head.locSecLoc, sizeof(head.locSecLoc));
 	if (!head.endian) swap((unsigned char *) &head.locSecLoc, sizeof(head.locSecLoc));
 
-	// seek to start of location section: 
+	// seek to start of location section:
 	toc.seekg(head.locSecLoc, std::ios::beg);
 
-    // We need four different sections to get all of our boundary, frame data and 
+    // We need four different sections to get all of our boundary, frame data and
     // The location section boundary rectangle sub header.
 	locations[0].componentId = LOC_BOUNDARY_SECTION_SUBHEADER;     // 148
-    // The actual boundary rectangle table 
-	locations[1].componentId = LOC_BOUNDARY_RECTANGLE_TABLE;       // 149       
+    // The actual boundary rectangle table
+	locations[1].componentId = LOC_BOUNDARY_RECTANGLE_TABLE;       // 149
     // The frame file index section subheader
 	locations[2].componentId = LOC_FRAME_FILE_INDEX_SUBHEADER;     // 150
     // The frame file index subsection, which holds the frame index table and records.
@@ -442,7 +442,7 @@ bool CadrgFile::initialize(const char* dir)
 	for (i = 0; i < numBndryRecords; i++) {
         // Create a new entry
 	    entries[i] = new CadrgTocEntry();
-	    
+
         char type[5];
         //strncpy(type, entries[i]->getType(), 5);
         // Read the type in
@@ -467,13 +467,13 @@ bool CadrgFile::initialize(const char* dir)
 
         // Skip producer (5 chars)
 		toc.seekg(5, std::ios::cur);
-        
+
         double nwLat = 0, nwLon = 0, swLat = 0, swLon = 0, neLat = 0, neLon = 0, seLat = 0, seLon = 0;
         double vertResolution = 0, horzResolution = 0;
         double vertInterval = 0, horzInterval = 0;
         int vertFrames = 0, horzFrames = 0;
 
-        // Read all of our geodetic data.    
+        // Read all of our geodetic data.
 		toc.read((char *) &nwLat, sizeof(double));
 		toc.read((char *) &nwLon, sizeof(double));
 		toc.read((char *) &swLat, sizeof(double));
@@ -520,7 +520,7 @@ bool CadrgFile::initialize(const char* dir)
         entries[i]->setHorizInterval(horzInterval);
         entries[i]->setVertFrames(vertFrames);
         entries[i]->setHorizFrames(horzFrames);
-        
+
         if (cib) entries[i]->setType(type, 3);
         else entries[i]->setType(type, 5);
         entries[i]->setScale(scale, 12);
@@ -531,7 +531,7 @@ bool CadrgFile::initialize(const char* dir)
             scale[8] = '\0';
             zone[1] = '\0';
             std::cout << "ZONE #" << zone << ", SCALE = " << scale << ", LATS = " << swLat << ", " << neLat << ", LONS = " << swLon << ", " <<  neLon << std::endl;
-        #endif        
+        #endif
         vertFrames = entries[i]->getVertFrames();
         horzFrames = entries[i]->getHorizFrames();
 
@@ -545,8 +545,8 @@ bool CadrgFile::initialize(const char* dir)
 	}
 
 
-	// Read # of frame file index records 
-	// Skip 1 byte highest security classification 
+	// Read # of frame file index records
+	// Skip 1 byte highest security classification
 	// locations[2] + 1 is the physical location of frame file index section subheader + we skip one byte
     // for the security classifiction
 	toc.seekg(locations[2].physicalIdx + 1, std::ios::beg);
@@ -589,13 +589,13 @@ bool CadrgFile::initialize(const char* dir)
             entry = entries[boundaryRecNum];
             if (entry != 0) {
                 entry->ref();
-    
+
                 // Read in the starting frame row and column of this frame
                 toc.read((char *) &frameRow, sizeof(frameRow));
                 toc.read((char *) &frameCol, sizeof(frameCol));
                 swap((unsigned char *) &frameRow, sizeof(frameRow));
                 swap((unsigned char *) &frameCol, sizeof(frameCol));
-        
+
                 // We already know how many vertical and horizontal frames we have
                 int vertFrames = entry->getVertFrames();
                 int horzFrames = entry->getHorizFrames();
@@ -608,29 +608,29 @@ bool CadrgFile::initialize(const char* dir)
 
                 // If our frame column is greater than the # of horizontal frames we have, print out error and return.
                 if (frameCol > horzFrames - 1) {
-                    std::cout << "Frame Col #" << frameCol << " is greater than the # of horizontal frames, which = " << horzFrames << std::endl;                    
+                    std::cout << "Frame Col #" << frameCol << " is greater than the # of horizontal frames, which = " << horzFrames << std::endl;
                     return false;
                 }
 
                 // Get our frames
                 CadrgFrameEntry** frames = entry->getFrames();
 
-                // Set a local frame to manipualate 
-                if (frames != 0) frame = &frames[(vertFrames - 1) - frameRow][frameCol];        
+                // Set a local frame to manipualate
+                if (frames != 0) frame = &frames[(vertFrames - 1) - frameRow][frameCol];
                 if (frame != 0 && !frame->doIExist()) {
-                    // Get our path name byte offset     
+                    // Get our path name byte offset
                     toc.read((char *) &ffPathOff, sizeof(ffPathOff));
                     swap((unsigned char *) &ffPathOff, sizeof(ffPathOff));
-            
-                    // Save file position for later 
+
+                    // Save file position for later
                     currTocPos = toc.tellg();
-            
+
                     // Go to start of pathname record, which is our LOC_FRAME_FILE_INDEX_SUBSECTION + the path offset
                     toc.seekg(locations[3].physicalIdx + ffPathOff, std::ios::beg);
-            
+
                     toc.read((char *) &ffPathLength, sizeof(ffPathLength));
                     swap((unsigned char *) &ffPathLength, sizeof(ffPathLength));
-            
+
                     // Allocate our frame file directory path, which is our path name length + 1 + string length of the directory name passed in
 
                     size_t size = ffPathLength + 1 + strlen(dir);
@@ -640,22 +640,22 @@ bool CadrgFile::initialize(const char* dir)
                         char* directory = (char *) alloca(size);
                     #endif
 
-                    // 1st part of directory name is passed as our initial parameter "projects/data/maps/gncjncn/RPF/" 
+                    // 1st part of directory name is passed as our initial parameter "projects/data/maps/gncjncn/RPF/"
                     lcStrcpy(directory, size, dir);
 
 
-                    // Read rest of directory name from Toc 
+                    // Read rest of directory name from Toc
                     // Skip 1st 2 chars, because they are the root characters (./), and are ignored since we are creating
-                    // our own directory string  
+                    // our own directory string
                     toc.read(&directory[strlen(dir)], 2);
 
                     // We read the rest, minus the first 2 characters
                     toc.read(&directory[strlen(dir)], ffPathLength - 2);
                     directory[ffPathLength - 2 + strlen(dir)] = '\0';
 
-                    // Go back to get filename tail 
+                    // Go back to get filename tail
                     toc.seekg(currTocPos, std::ios::beg);
-            
+
                     // Get the actual frame file name!
                     char frameFilename[16];
                     toc.read(frameFilename, 12);
@@ -664,7 +664,7 @@ bool CadrgFile::initialize(const char* dir)
                     // Set our final path name, and file name!
                     frame->setPathName(directory, frameFilename);
                     frame->setCib(cib);
-                }   
+                }
                 else {
                     std::cout << "Frame File #" << i << " is a duplicate!" << std::endl;
                     return false;

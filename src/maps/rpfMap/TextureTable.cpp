@@ -14,9 +14,9 @@ EMPTY_SLOTTABLE(TextureTable)
 EMPTY_SERIALIZER(TextureTable)
 
 //------------------------------------------------------------------------------
-// Constructor() 
+// Constructor()
 //------------------------------------------------------------------------------
-TextureTable::TextureTable() 
+TextureTable::TextureTable()
 {
     STANDARD_CONSTRUCTOR()
     maxTableSize = MAX_TABLE_SIZE;
@@ -34,9 +34,9 @@ TextureTable::TextureTable()
 }
 
 //------------------------------------------------------------------------------
-// copyData() 
+// copyData()
 //------------------------------------------------------------------------------
-void TextureTable::copyData(const TextureTable& org, const bool cc) 
+void TextureTable::copyData(const TextureTable& org, const bool cc)
 {
     // Copy our baseclass stuff first
     BaseClass::copyData(org);
@@ -62,7 +62,7 @@ void TextureTable::copyData(const TextureTable& org, const bool cc)
                 texes[i][j]->unref();
                 texes[i][j] = 0;
             }
-            if (org.texes[i][j] != 0) {                
+            if (org.texes[i][j] != 0) {
                 texes[i][j] = org.texes[i][j];
                 texes[i][j]->ref();
             }
@@ -72,7 +72,7 @@ void TextureTable::copyData(const TextureTable& org, const bool cc)
 }
 
 //------------------------------------------------------------------------------
-// deleteData() 
+// deleteData()
 //------------------------------------------------------------------------------
 void TextureTable::deleteData()
 {

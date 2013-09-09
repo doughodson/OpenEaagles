@@ -86,7 +86,7 @@ public:
 
 private:
     void determineRecordSize();
-    int headerLength;   
+    int headerLength;
     char byteOrder;
     char tableDesc[255];
     char narrTable[255];
@@ -106,7 +106,7 @@ private:
 };
 
 } // End Vpf namespace
-} // End Maps namespace 
+} // End Maps namespace
 } // End Eaagles namespace
 
 #endif

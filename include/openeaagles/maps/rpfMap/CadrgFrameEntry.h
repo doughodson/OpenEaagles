@@ -11,7 +11,7 @@
 //    void CadrgFrameEntry::setCib(const bool x)
 //
 // loadClut() - Load our color lookup table, if it isn't already loaded.
-//    void CadrgFrameEntry::loadClut() 
+//    void CadrgFrameEntry::loadClut()
 //
 // setFrame() - Sets the child frame
 //    void CadrgFrameEntry::setFrame(CadrgFrame* newFrame)
@@ -36,7 +36,7 @@ class CadrgFrameEntry : public Basic::Object
 public:
     CadrgFrameEntry();
 
-    // Get 
+    // Get
     bool doIExist() { return exists; }
     const char* getDirectory() { return directory; }
     const char* getFileName() { return filename; }
@@ -59,8 +59,8 @@ private:
     bool cib;           // Are we a CIB or not?
 };
 
+} // End Rpf namespace
 } // End Maps namespace
-} // End Rpf namespace 
 } // End Eaagles namespace
 
 #endif

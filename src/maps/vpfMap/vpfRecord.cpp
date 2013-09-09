@@ -43,13 +43,13 @@ void VPFRecord::deleteData()
         if (data[i] != 0) data[i]->unref();
         data[i] = 0;
     }
-    if (parent != 0) {  
+    if (parent != 0) {
         parent->unref();
         parent = 0;
     }
 }
 
-void VPFRecord::createRecord(VPFTable* x, const char* file, const int idx) 
+void VPFRecord::createRecord(VPFTable* x, const char* file, const int idx)
 {
     if (parent != 0) parent->unref();
     parent = 0;
@@ -61,7 +61,7 @@ void VPFRecord::createRecord(VPFTable* x, const char* file, const int idx)
     else filename->setStr(file);
     index = idx;
 
-    // ok, we have our table and our file, let's open it up, skip the header, 
+    // ok, we have our table and our file, let's open it up, skip the header,
     // grab the record, then load up our data, and return
     std::ifstream stream;
     stream.open(filename->getString());
@@ -130,7 +130,7 @@ void VPFRecord::createRecord(VPFTable* x, const char* file, const int idx)
                         buff[num] = 0;
                         if (!rowNull) data[i]->setValue(buff);
                         else data[i]->setValue(NULL);
-                        
+
                         data[i]->setLength(num);
                         data[i]->setType(VPFDataType::FIXED_TEXT);
                     }
@@ -150,7 +150,7 @@ void VPFRecord::createRecord(VPFTable* x, const char* file, const int idx)
                         float tempFloat = 0;
                         char buff[255];
                         stream.read((char*)&tempFloat, num*sizeof(tempFloat));
-                        //gcvt(tempFloat, 10, buff);  
+                        //gcvt(tempFloat, 10, buff);
                         std::sprintf(buff, "%f", tempFloat);
                         if (rowNull) data[i]->setValue(0);
                         else data[i]->setValue(buff);
@@ -259,7 +259,7 @@ void VPFRecord::createRecord(VPFTable* x, const char* file, const int idx)
                         stream.read((char*)&y, num*sizeof(y));
                         // convert to string
                         char tempBuff[255];
-                        std::sprintf(tempBuff, "%i", y);                        
+                        std::sprintf(tempBuff, "%i", y);
                         //itoa(y, tempBuff, 10);
                         if (rowNull) data[i]->setValue(0);
                         else data[i]->setValue(tempBuff);
@@ -283,7 +283,7 @@ void VPFRecord::createRecord(VPFTable* x, const char* file, const int idx)
                         }
                         if (!rowNull) data[i]->setValue(buff);
                         else data[i]->setValue(0);
-                        
+
                     }
                     else if (dType == 'D') {
                         // for every number of digits, we add 20 bits
@@ -468,6 +468,6 @@ const char* VPFRecord::getData(const int column)
 }
 
 } // end Vpf namespace
-} // end Maps namespace 
+} // end Maps namespace
 } // end Eaagles namespace
 
