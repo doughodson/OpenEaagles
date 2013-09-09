@@ -508,20 +508,20 @@ bool CadrgMap::setMapLevel(const char* x)
 //------------------------------------------------------------------------------
 int CadrgMap::findBestZone(const double lat, const double lon)
 {
-	int t = -1;
-    int nb = 0;
+   int t = -1;
+   int nb = 0;
     
-    if (curCadrgFile != 0) { 
-        // Number of boundaries is actually the number of zones in this file!
-        nb = curCadrgFile->getNumBoundaries();
-	    for (int i = 0; i < (nb - 1); i++) {
-		    CadrgTocEntry* toc = curCadrgFile->entry(i);
-		    if (toc != 0 && toc->isMapImage()) {
-                if (toc->isInZone(lat, lon)) return i;
-		    }
-	    }
-    }
-	return t;
+   if (curCadrgFile != 0) { 
+      // Number of boundaries is actually the number of zones in this file!
+      nb = curCadrgFile->getNumBoundaries();
+      for (int i = 0; i < nb; i++) {
+         CadrgTocEntry* toc = curCadrgFile->entry(i);
+		   if (toc != 0 && toc->isMapImage()) {
+            if (toc->isInZone(lat, lon)) return i;
+		   }
+      }
+   }
+   return t;
 }
 
 //------------------------------------------------------------------------------
@@ -641,6 +641,7 @@ void* CadrgMap::getPixels(const int row, const int column, TexturePager* tp)
                 return 0;
 	        }
             
+
 	        int frameRow = row / 6;
 	        int frameCol = column / 6;
 	        CadrgFrameEntry* frameEntry = currentToc->getFrameEntry(frameRow, frameCol);
