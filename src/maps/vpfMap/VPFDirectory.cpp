@@ -1,3 +1,7 @@
+// -------------------------------------------------------------------------------
+// Class: VPFDirectory
+// -------------------------------------------------------------------------------
+
 #include "openeaagles/maps/vpfMap/VPFDirectory.h"
 #include "openeaagles/basic/String.h"
 
@@ -93,6 +97,7 @@ Basic::Object* VPFDirectory::getSlotByIndex(const int si)
     return BaseClass::getSlotByIndex(si);
 }
 
-}; // end Vpf namespace
-}; // end Maps namespace 
-}; // end Eaagles namespace
+} // end Vpf namespace
+} // end Maps namespace 
+} // end Eaagles namespace
+

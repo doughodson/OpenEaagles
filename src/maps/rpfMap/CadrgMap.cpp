@@ -1,3 +1,7 @@
+// ---------------------------------------------------------------------------------
+// Class: CadrgMap
+// ---------------------------------------------------------------------------------
+
 #include "openeaagles/maps/rpfMap/CadrgMap.h"
 #include "openeaagles/maps/rpfMap/CadrgFile.h"
 #include "openeaagles/maps/rpfMap/CadrgFrame.h"
@@ -481,8 +485,8 @@ bool CadrgMap::setMapLevel(const char* x)
         if (mergedCadrgFiles[i] != 0) {
             int nb = mergedCadrgFiles[i]->getNumBoundaries();
             for (int j = 0; j < nb; j++) {
-		        CadrgTocEntry* toc = mergedCadrgFiles[i]->entry(j);
-		        if (toc != 0) { 
+                CadrgTocEntry* toc = mergedCadrgFiles[i]->entry(j);
+                if (toc != 0) { 
                     // If we find the right scale, and our current file isn't = to our last file, we set it.
                     if (strcmp(toc->getScale(), x) == 0) {
                         if (curCadrgFile != mergedCadrgFiles[i]) {
@@ -516,9 +520,9 @@ int CadrgMap::findBestZone(const double lat, const double lon)
       nb = curCadrgFile->getNumBoundaries();
       for (int i = 0; i < nb; i++) {
          CadrgTocEntry* toc = curCadrgFile->entry(i);
-		   if (toc != 0 && toc->isMapImage()) {
+         if (toc != 0 && toc->isMapImage()) {
             if (toc->isInZone(lat, lon)) return i;
-		   }
+         }
       }
    }
    return t;
@@ -553,21 +557,21 @@ const MapDrawer* CadrgMap::getMapImage() const
 // ------------------------------------------------------------------------
 bool CadrgMap::isValidFrame(const int row, const int column, TexturePager* tp)
 {
-    int vFrames = 0;
-    int hFrames = 0;
-    bool ok = false;
-    if (tp != 0) {
-        CadrgTocEntry* currentToc = tp->getToc();
-        if (currentToc != 0) {
-            vFrames = currentToc->getVertFrames();
-            hFrames = currentToc->getHorizFrames();
-        }
-    } 
+   int vFrames = 0;
+   int hFrames = 0;
+   bool ok = false;
+   if (tp != 0) {
+      CadrgTocEntry* currentToc = tp->getToc();
+      if (currentToc != 0) {
+         vFrames = currentToc->getVertFrames();
+         hFrames = currentToc->getHorizFrames();
+      }
+   }
 
-    // The rows and columns we specified must fall in our frames and subframes
-	if (row >= 0 && row < (vFrames * 6) && column >= 0 && column < (hFrames * 6)) ok =  true;
+   // The rows and columns we specified must fall in our frames and subframes
+   if (row >= 0 && row < (vFrames * 6) && column >= 0 && column < (hFrames * 6)) ok =  true;
 
-	return ok;
+   return ok;
 }
 
 //------------------------------------------------------------------------------
@@ -579,10 +583,10 @@ bool CadrgMap::isValidFrame(const int row, const int column, TexturePager* tp)
 //------------------------------------------------------------------------------
 void CadrgMap::latLonToTileRowColumn(const double lat, const double lon, float &originRow, float &originCol, int &tileRow, int &tileCol, float &pixelRow, float &pixelCol, TexturePager* tp)
 {
-	float row = 0, col = 0;
+    float row = 0, col = 0;
 
-	latLonToPixelRowColumn(lat, lon, row, col, tp);
-	
+    latLonToPixelRowColumn(lat, lon, row, col, tp);
+
     // 256 pixels per tile, so we can figure out which tile we are actually on.
     int ppt = 256;
 
@@ -590,14 +594,14 @@ void CadrgMap::latLonToTileRowColumn(const double lat, const double lon, float &
     // Tile row is the int result of the total row offset / pixels per tile (256)
     tileRow = int(row) / ppt;
     // The remainder is the pixel offset of that tile
-	pixelRow = row - (tileRow * ppt);
+    pixelRow = row - (tileRow * ppt);
     // Original row 
-	originRow = row;
+    originRow = row;
 
     // Same here, only columns
-	tileCol = int(col) / ppt;
-	pixelCol = col - (tileCol*ppt);
-	originCol = col;
+    tileCol = int(col) / ppt;
+    pixelCol = col - (tileCol*ppt);
+    originCol = col;
 }
 
 // ------------------------------------------------------------------------
@@ -634,20 +638,20 @@ void* CadrgMap::getPixels(const int row, const int column, TexturePager* tp)
         CadrgTocEntry* currentToc = tp->getToc();
         if (currentToc != 0) {
             bool ok = isValidFrame(row, column, tp);
-	        if (!ok) {
+            if (!ok) {
                 int vFrames = currentToc->getVertFrames();
                 int hFrames = currentToc->getHorizFrames();
-		        std::cout << "Bad row,column " << row << "," << column << "   " <<	vFrames * 6 << "," << hFrames * 6 << std::endl;
+                std::cout << "Bad row,column " << row << "," << column << "   " << vFrames * 6 << "," << hFrames * 6 << std::endl;
                 return 0;
-	        }
+            }
             
 
-	        int frameRow = row / 6;
-	        int frameCol = column / 6;
-	        CadrgFrameEntry* frameEntry = currentToc->getFrameEntry(frameRow, frameCol);
+            int frameRow = row / 6;
+            int frameCol = column / 6;
+            CadrgFrameEntry* frameEntry = currentToc->getFrameEntry(frameRow, frameCol);
             if (frameEntry != 0) {
                 frameEntry->loadClut();
-	            CadrgFrame* frame = frameEntry->getFrame();
+                CadrgFrame* frame = frameEntry->getFrame();
                 // If we don't have an entry, let's pull one from the stack
                 if (frame == 0) {
                     Basic::List::Item* item = stack->getFirstItem();
@@ -663,21 +667,21 @@ void* CadrgMap::getPixels(const int row, const int column, TexturePager* tp)
                     }
                 }
                 // Get our frame again, because it now has been loaded
-    	        frame = frameEntry->getFrame();
+                frame = frameEntry->getFrame();
                 if (frame != 0) {
                     // Setup our subframe for decompression
                     Subframe subframe;  
                     // Decompress our subframe
                     frame->decompressSubframe(row, column, subframe);
                     // Set our color based on subframe image
-	                for (int i = 0; i < 256; i++) {
-		                for (int j = 0; j < 256; j++) {
+                    for (int i = 0; i < 256; i++) {
+                        for (int j = 0; j < 256; j++) {
                             CadrgClut::Rgb rgb = frameEntry->getClut().getColor(subframe.image[j][255-i]);
                             outTile.texel[i][j].red = rgb.red;
                             outTile.texel[i][j].green = rgb.green;
                             outTile.texel[i][j].blue = rgb.blue;
-		                }
-	                }  
+                        }
+                    }  
                 }
             }
         }
@@ -698,23 +702,23 @@ void CadrgMap::releaseFrame(const int row, const int column, TexturePager* tp)
         if (currentToc != 0) {
             bool ok = isValidFrame(row, column, tp);
             if (!ok) {
-		        std::cout << "Bad row,column " << row << "," << column << "   " << currentToc->getVertFrames() * 6 << "," << currentToc->getHorizFrames() * 6 << std::endl;
-		        return;
-	        }
+                std::cout << "Bad row,column " << row << "," << column << "   " << currentToc->getVertFrames() * 6 << "," << currentToc->getHorizFrames() * 6 << std::endl;
+                return;
+            }
 
-	        int frameRow = row / 6;
-	        int frameCol = column / 6;
+            int frameRow = row / 6;
+            int frameCol = column / 6;
 
-	        CadrgFrameEntry* frameEntry = currentToc->getFrameEntry(frameRow, frameCol);
-	        if (frameEntry != 0) {
-		        CadrgFrame* frame = frameEntry->getFrame();
+            CadrgFrameEntry* frameEntry = currentToc->getFrameEntry(frameRow, frameCol);
+            if (frameEntry != 0) {
+            CadrgFrame* frame = frameEntry->getFrame();
                 if (frame != 0) {
                     stack->addHead(frame);
                     frame->unref();
                     frame = 0;
                 }
                 frameEntry->setFrame(0);
-	        }
+            }
         }
     }
 }
@@ -750,6 +754,7 @@ Basic::Object* CadrgMap::getSlotByIndex(const int si)
     return BaseClass::getSlotByIndex(si);
 }
 
-};  // End Rpf namespace
-};  // End Maps namespace
-};  // End Eaagles namespace
+} // End Rpf namespace
+} // End Maps namespace
+} // End Eaagles namespace
+

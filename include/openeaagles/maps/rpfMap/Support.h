@@ -1,6 +1,6 @@
-//------------------------------------------------------------------------------// 
-// Description: 
-// Simple support functions for the map library.
+//------------------------------------------------------------------------------
+// Support functions for the map library.
+//
 // This contains a lot of enumerated types that allow the CadrgFile to seek to 
 // the right portion of the .Toc and other files, all which contain RPF data.
 
@@ -37,8 +37,8 @@ void swap(unsigned char *ptr, int count);
 char* stringToLowercase(char* str, int flag);
 
 enum NitfHdrLengths {
-	NITF_HDR_NONE = 0, NITF_HDR_SHORT = 413,
-	NITF_HDR_LONG = 426
+    NITF_HDR_NONE = 0, NITF_HDR_SHORT = 413,
+    NITF_HDR_LONG = 426
 };
 
 
@@ -88,29 +88,29 @@ static const int LOC_COLOR_TABLE_INDEX_RECORD           = 153;
 // Header structure - contains all the information included in the TOC header (and other data files 
 // following the RPF data structure).
 struct Header {
-	bool endian;               // Little / big endian indicator
-	ushort hdrSectionLength;   // Header section length (bytes)
-	char filename[12];         // Filename
-	uchar nruInd;              // New/replacement/update indicator
-	char govSpecNum[15];       // Governing specification number
-	char govSpecdate[8];       // Governing specification date
-	char secClass;             // Security classification     
-	char secCountryCode[2];    // Security country/international code
-	char secRelease[2];        // Security release markings
-	uint locSecLoc;            // location section location (where the frame files are)
+    bool endian;               // Little / big endian indicator
+    ushort hdrSectionLength;   // Header section length (bytes)
+    char filename[12];         // Filename
+    uchar nruInd;              // New/replacement/update indicator
+    char govSpecNum[15];       // Governing specification number
+    char govSpecdate[8];       // Governing specification date
+    char secClass;             // Security classification     
+    char secCountryCode[2];    // Security country/international code
+    char secRelease[2];        // Security release markings
+    uint locSecLoc;            // location section location (where the frame files are)
 };
 
 // Location structure - Holds the length of our components (ie, the boundary table, frame table, etc..) based on the 
 // component ID (see definitions above), and also the physical location of the components' in the file.
 struct Location {
-	ushort componentId;
-	uint componentLength;
-	uint physicalIdx;
+    ushort componentId;
+    uint componentLength;
+    uint physicalIdx;
 };
 
 // Subframe structure - For decompressing the tile images (used by cadrg Frame)
 struct Subframe {
-	unsigned char image[256][256];
+    unsigned char image[256][256];
 };
 
 // Compression structure - Holds our image compression data.
@@ -147,8 +147,9 @@ struct Image {
 void parseLocations(std::ifstream& fin, Location* locs, int count);
 
 
-};  // End Rpf namespace
-};  // End Maps namespace
-};  // End Eaagles namespace	
+} // End Rpf namespace
+} // End Maps namespace
+} // End Eaagles namespace
 
 #endif
+

@@ -1,3 +1,7 @@
+//------------------------------------------------------------------------------
+// Class: CadrgFrameEntry
+//------------------------------------------------------------------------------
+
 #include "openeaagles/maps/rpfMap/CadrgFrameEntry.h"
 #include "openeaagles/maps/rpfMap/CadrgFrame.h"
 
@@ -27,8 +31,8 @@ CadrgFrameEntry::CadrgFrameEntry()
     loaded = false;
     directory = 0;
     frame = 0;
-	filename[0] = '\0';
-	cib = false;
+    filename[0] = '\0';
+    cib = false;
 }
 
 //--------------------------------------------------------------------------
@@ -64,12 +68,12 @@ void CadrgFrameEntry::deleteData()
 //--------------------------------------------------------------------------
 void CadrgFrameEntry::setPathName(const char* dir, const char* file)
 {
-	exists = true;
-	directory = new char[strlen(dir) + 1];
-	strncpy(directory, dir, strlen(dir));
-	directory[strlen(dir)] = '\0';
-	strncpy(filename, file, 15);
-	filename[15] = '\0';
+    exists = true;
+    directory = new char[strlen(dir) + 1];
+    strncpy(directory, dir, strlen(dir));
+    directory[strlen(dir)] = '\0';
+    strncpy(filename, file, 15);
+    filename[15] = '\0';
 }
 
 //--------------------------------------------------------------------------
@@ -85,11 +89,11 @@ void CadrgFrameEntry::setCib(const bool x)
 //--------------------------------------------------------------------------
 void CadrgFrameEntry::loadClut() 
 {
-	if (loaded)	return;
+    if (loaded) return;
 
-	clut.load(*this, cib);
+    clut.load(*this, cib);
 
-	loaded = 1;
+    loaded = 1;
 }
 
 //--------------------------------------------------------------------------
@@ -109,6 +113,8 @@ void CadrgFrameEntry::setFrame(CadrgFrame* newFrame)
     }
 }
 
-};  // End Rpf namespace
-};  // End Maps namespace
-};  // End Eaagles namespace
+} // End Rpf namespace
+} // End Maps namespace
+} // End Eaagles namespace
+
+

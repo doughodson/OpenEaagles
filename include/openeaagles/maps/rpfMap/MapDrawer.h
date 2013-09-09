@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------------
 // Class: MapDrawer
 //
-// Description: 
+// Description:
 // This is the actual class that does the drawing of the map.  It cycles through
 // it's texture pagers and tells them where to reference, and how to draw.  Then
 // texture pages draws the tiles.
@@ -127,8 +127,9 @@ private:
     float originCol[MAX_PAGERS];        // Pixel + texture col of the textures to draw
 };
 
-};  // End Rpf namespace
-};  // End Maps namespace
-};  // End Eaagles namespace
+} // End Rpf namespace
+} // End Maps namespace
+} // End Eaagles namespace
 
 #endif
+

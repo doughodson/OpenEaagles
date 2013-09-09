@@ -1,3 +1,7 @@
+// ------------------------------------------------------------
+// Class: VMAP0FeatureClass
+// ------------------------------------------------------------
+
 #include "openeaagles/maps/vpfMap/VMAP0FeatureClass.h"
 #include "openeaagles/basic/String.h"
 
@@ -10,7 +14,7 @@
 namespace Eaagles {
 namespace Maps {
 namespace Vpf {
-    
+
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(VMAP0FeatureClass,"VMAP0FeatureClass")
 EMPTY_SERIALIZER(VMAP0FeatureClass)
 
@@ -85,6 +89,7 @@ void VMAP0FeatureClass::addRelation(const char* table1, const char* table2, cons
     numRelations++;
 }
 
-}; // end Vpf namespace
-}; // end Maps namespace 
-}; // end Eaagles namespace
+} // end Vpf namespace
+} // end Maps namespace 
+} // end Eaagles namespace
+

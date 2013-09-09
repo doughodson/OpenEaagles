@@ -1,4 +1,7 @@
-//
+// --------------------------------------------------------------
+// Class: VPFSpatialIndexTable
+// --------------------------------------------------------------
+
 #include "openeaagles/maps/vpfMap/VPFSpatialIndexTable.h"
 #include "openeaagles/maps/vpfMap/VPFDirectory.h"
 
@@ -182,6 +185,7 @@ void VPFSpatialIndexTable::convertDegsToSpatialPoint(const float lat, const floa
 
 
 
-}; // end Vpf namespace
-}; // end Maps namespace 
-}; // end Eaagles namespace
+} // end Vpf namespace
+} // end Maps namespace 
+} // end Eaagles namespace
+

@@ -1,3 +1,7 @@
+// -------------------------------------------------------------------------------
+// Class: MapDrawer
+// -------------------------------------------------------------------------------
+
 #include "openeaagles/maps/rpfMap/MapDrawer.h"
 #include "openeaagles/maps/rpfMap/CadrgMap.h"
 #include "openeaagles/maps/rpfMap/TexturePager.h"
@@ -236,12 +240,12 @@ void MapDrawer::updateZone(int curZone, int &oldZone, const int idx)
             // Quick check for flushing tiles.
             if (curZone == -1) pagers[idx]->flushTextures();
             else if (curZone != oldZone) {
-		        pagers[idx]->flushTextures();
-		        oldZone = curZone;
-		    }
+                pagers[idx]->flushTextures();
+                oldZone = curZone;
+            }
         }
-		myMap->setZone(curZone, pagers[idx]);
-	}
+        myMap->setZone(curZone, pagers[idx]);
+    }
 }
 
 //------------------------------------------------------------------------------
@@ -319,7 +323,7 @@ void MapDrawer::drawFunc()
 
             // Set our reference zone.
             myMap->setZone(zones[CENTER_PAGER], pagers[CENTER_PAGER]);
-		}
+        }
     }   
 
     // Set our ortho and our color back to it's original state after we draw.
@@ -362,7 +366,7 @@ void MapDrawer::drawMap(const int zone, const int idx)
     if (myMap != 0 && pagers[idx] != 0 && showMap && getDisplay() != 0){
         // Update the tiles for the pager
         pagers[idx]->updateTextures(textureRow[idx], textureCol[idx]);
-        // Set up for drawing	     
+        // Set up for drawing         
         lcColor3(mapIntensity, mapIntensity, mapIntensity);
         glPushMatrix();
             // Not centered, move the whole map down the displacement value.
@@ -437,7 +441,7 @@ void MapDrawer::drawMap(const int zone, const int idx)
 void MapDrawer::drawTexture(const int row, const int column, const int idx)
 {
     if (pagers[idx] != 0 && myMap != 0 && getDisplay() != 0) {
-        TextureTable& tbl = pagers[idx]->getTable();    
+        TextureTable& tbl = pagers[idx]->getTable();
         BasicGL::Texture* newTex = dynamic_cast<BasicGL::Texture*>(tbl.getTexture(row, column));
         if (newTex != 0) {
             // Bind our texture and set up our modulation
@@ -465,7 +469,7 @@ void MapDrawer::drawTexture(const int row, const int column, const int idx)
 //------------------------------------------------------------------------------
 void MapDrawer::goDrawGrid(const int row, const int column, const int idx)
 {   
-	glPushMatrix();
+    glPushMatrix();
         glTranslatef(GLfloat(column * pixPerTile), GLfloat(-row * pixPerTile), 0.5f);
         glColor3f(1,0,0);
         glLineWidth(2.0);
@@ -475,7 +479,7 @@ void MapDrawer::goDrawGrid(const int row, const int column, const int idx)
             lcVertex2(pixPerTile * scalingEast[idx], 0.0f);
             lcVertex2(0.0f, 0.0f);
         glEnd();
-	glPopMatrix();
+    glPopMatrix();
 }
 
 //------------------------------------------------------------------------------
@@ -503,6 +507,7 @@ Basic::Object* MapDrawer::getSlotByIndex(const int si)
     return BaseClass::getSlotByIndex(si);
 }
 
-};  // End Rpf namespace
-};  // End Maps namespace
-};  // End Eaagles namespace
+} // End Rpf namespace
+} // End Maps namespace
+} // End Eaagles namespace
+

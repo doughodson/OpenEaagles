@@ -1,3 +1,7 @@
+// -------------------------------------------------------------------------------
+// Class: VMAP0ReferenceDirectory
+// -------------------------------------------------------------------------------
+
 #include "openeaagles/maps/vpfMap/VMAP0ReferenceDirectory.h"
 #include "openeaagles/maps/vpfMap/VPFIndexTable.h"
 #include "openeaagles/maps/vpfMap/VPFRecord.h"
@@ -188,6 +192,7 @@ VMAP0RefCoverageDirectory* VMAP0ReferenceDirectory::getCoverage(const int cov)
     return 0;
 }
 
-}; // end Vpf namespace
-}; // end Maps namespace 
-}; // end Eaagles namespace
+} // end Vpf namespace
+} // end Maps namespace 
+} // end Eaagles namespace
+

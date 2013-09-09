@@ -3,7 +3,7 @@
 //
 // This is a Table of Contents Boundary Rectangle Entry, which describes the
 // boundary of a given set of frames, including the scale and size of the
-// rectangle.  
+// rectangle.
 
 // Subroutines:
 // getFrameEntry() - Return the frame at the given row, column.
@@ -35,8 +35,9 @@ namespace Eaagles {
 namespace Maps {
 namespace Rpf {
 
-class CadrgTocEntry : public Basic::Object {
-    DECLARE_SUBCLASS(CadrgTocEntry, Basic::Object)	
+class CadrgTocEntry : public Basic::Object
+{
+    DECLARE_SUBCLASS(CadrgTocEntry, Basic::Object)
 
 public:
     CadrgTocEntry();
@@ -114,8 +115,9 @@ private:
     CadrgFrameEntry** frames;   // Our array of frames that make up this entry.
 };
 
-};  // End Rpf namespace
-};  // End Maps namespace
-};  // End Eaagles namespace
+} // End Rpf namespace
+} // End Maps namespace
+} // End Eaagles namespace
 
 #endif
+

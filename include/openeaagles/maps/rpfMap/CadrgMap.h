@@ -126,8 +126,10 @@ class CadrgFile;
 class TexturePager;
 class MapDrawer;
 
-class CadrgMap : public BasicGL::MapPage {
+class CadrgMap : public BasicGL::MapPage
+{
     DECLARE_SUBCLASS(CadrgMap, BasicGL::MapPage)
+
 public:
     CadrgMap();
 
@@ -139,10 +141,10 @@ public:
     };
 
     // Quick color array for holding our RGB values
-	struct ColorArray {
+    struct ColorArray {
         // [row][column] 3 components per pixel
-		RGBColor texel[256][256];
-	};
+        RGBColor texel[256][256];
+    };
 
     // Set functions - these functions must be set for it to work properly
     virtual bool setPathName(const char* aGenPathName);
@@ -171,8 +173,8 @@ public:
     const char* getLevel();
 
     // Finds a specific file by string
-    bool setMapLevel(const char* x);    
-    
+    bool setMapLevel(const char* x);
+
     MapDrawer* getMapImage();
     const MapDrawer* getMapImage() const;
     
@@ -202,8 +204,9 @@ private:
     bool initLevelLoaded;                       // Has our initial map level been loaded?
 };
 
-};  // End Rpf namespace
-};  // End Maps namespace 
-};  // End Eaagles namespace
+}  // End Rpf namespace
+}  // End Maps namespace 
+}  // End Eaagles namespace
 
 #endif
+

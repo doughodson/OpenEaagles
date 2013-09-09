@@ -1,3 +1,7 @@
+// -------------------------------------------------------------------------------
+// Class: VMAP0LibDirectory
+// -------------------------------------------------------------------------------
+
 #include "openeaagles/maps/vpfMap/VMAP0LibDirectory.h"
 #include "openeaagles/basic/String.h"
 
@@ -156,6 +160,7 @@ void VMAP0LibDirectory::loadTables()
     }
 }
 
-}; // end Vpf namespace
-}; // end Maps namespace 
-}; // end Eaagles namespace
+} // end Vpf namespace
+} // end Maps namespace 
+} // end Eaagles namespace
+

@@ -1,3 +1,7 @@
+// ------------------------------------------------------------------------------
+// Class: TexturePager
+// ------------------------------------------------------------------------------
+
 #include "openeaagles/maps/rpfMap/TexturePager.h"
 #include "openeaagles/maps/rpfMap/CadrgTocEntry.h"
 #include "openeaagles/basicGL/Texture.h"
@@ -130,13 +134,13 @@ void TexturePager::updateTextures(const int tRow, const int tCol)
     int cCol = table.centerColumnTexture();
 
     if (row != cRow || col != cCol) {
-		// Position has moved enough to cause a change in the texturess displayed
-		diffRow = row - cRow;
-		diffCol = col - cCol;
+        // Position has moved enough to cause a change in the texturess displayed
+        diffRow = row - cRow;
+        diffCol = col - cCol;
         freeTextures();
-		reuseTextures();
+        reuseTextures();
     }
-	loadNewTextures();
+    loadNewTextures();
 }
 
 //------------------------------------------------------------------------------
@@ -161,27 +165,27 @@ void TexturePager::freeTextures()
         int lb = table.getLowerBoundIndex();
         int ub = table.getUpperBoundIndex();
         // Traverse through the table from bottom left to top right
-	    for (int i = lb; i <= ub; i++) {
-		    for (int j = lb; j <= ub; j++) {
-			    int r = i - diffRow;
-			    int c = j - diffCol;
+        for (int i = lb; i <= ub; i++) {
+            for (int j = lb; j <= ub; j++) {
+                int r = i - diffRow;
+                int c = j - diffCol;
                 // Is our new row and column still in the boundary
                 bool ok = table.isInBounds(r, c);
                 // If we aren't in the boundary any more, clear us out and let
                 // the stack know we have another Object open.
-			    if (!ok) {
+                if (!ok) {
                     // Get our texture object at the no longer visible row,column
                     BasicGL::Texture* textureIndex = table.getTexture(i, j);
-				    if (textureIndex != 0) {
+                    if (textureIndex != 0) {
                         // Add the object back to the stack
                         stack->addHead(textureIndex);
                         // Tell our table to clear it's object out
-					    table.setTextureObject(i, j, 0);
+                        table.setTextureObject(i, j, 0);
                         // Tell our map to release it's frame entry's frames, so we aren't storing those unecessarily
-					    map->releaseFrame(r + row, c + col, this);
-				    }
-			    }
-		    } 
+                        map->releaseFrame(r + row, c + col, this);
+                    }
+                }
+            } 
         }
     }
 }
@@ -197,20 +201,20 @@ void TexturePager::reuseTextures()
     TextureTable table2;
     table2.setSize(maxTableSize);
     // Set our new center row and column
-	table2.setCenterRowTexture(row);
-	table2.setCenterColumnTexture(col);
+    table2.setCenterRowTexture(row);
+    table2.setCenterColumnTexture(col);
     int lb = table.getLowerBoundIndex();
     int ub = table.getUpperBoundIndex();
     for (int i = lb; i <= ub; i++) {
-		for (int j = lb; j <= ub; j++) {
-			int r = i + diffRow;
-			int c = j + diffCol;
-			if (table.isInBounds(r, c)) {
+        for (int j = lb; j <= ub; j++) {
+            int r = i + diffRow;
+            int c = j + diffCol;
+            if (table.isInBounds(r, c)) {
                 // Table is in bounds, set the new texture object
                 BasicGL::Texture* obj = table.getTexture(r, c);
-				table2.setTextureObject(i, j, obj);
-			}
-		}
+                table2.setTextureObject(i, j, obj);
+            }
+        }
     }
     // when we are done, set our table to the new table, with the reused ones still in!
     // clear our old table
@@ -230,12 +234,12 @@ void TexturePager::reuseTextures()
 // -------------------------------------------------------------------------
 void TexturePager::loadNewTextures()
 {
-	int offset[4] = { 1, 0, 0, -1 };
-	int rowChange[4] = { 0, -1, 0, 1 };
-	int colChange[4] = { -1, 0, 1, 0 };
+    int offset[4] = { 1, 0, 0, -1 };
+    int rowChange[4] = { 0, -1, 0, 1 };
+    int colChange[4] = { -1, 0, 1, 0 };
 
     // The max table size should be odd that way there is always a middle table position
-	// to process all textures in a spiral from inside to out
+    // to process all textures in a spiral from inside to out
     int maxSize = table.getMaxTableSize();
     if (maxSize % 2) {
         for (int level = 0; level < maxSize; level += 2) {
@@ -281,24 +285,25 @@ void TexturePager::loadNewTextures()
 //------------------------------------------------------------------------------
 void TexturePager::flushTextures()
 {
-	// Return textures indicies that are no longer used
+    // Return textures indicies that are no longer used
     if (map != 0) {
         int lb = table.getLowerBoundIndex();
         int ub = table.getUpperBoundIndex();
-	    for (int i = lb; i <= ub; i++) {
-		    for (int j = lb; j <= ub; j++) {
+        for (int i = lb; i <= ub; i++) {
+            for (int j = lb; j <= ub; j++) {
                 // Find all of our texture objects and release them back to the stack
                 BasicGL::Texture* textureIndex = table.getTexture(i, j);
-			    if (textureIndex != 0) {
-				    stack->addHead(textureIndex);
-				    table.setTextureObject(i, j, 0);
-				    map->releaseFrame(i + row, j + col, this);
-			    }
-		    }
+                if (textureIndex != 0) {
+                    stack->addHead(textureIndex);
+                    table.setTextureObject(i, j, 0);
+                    map->releaseFrame(i + row, j + col, this);
+                }
+            }
         }
     }
 }
 
-};  // End Rpf namespace
-};  // End Maps namespace
-};  // End Eaagles namespace
+} // End Rpf namespace
+} // End Maps namespace
+} // End Eaagles namespace
+

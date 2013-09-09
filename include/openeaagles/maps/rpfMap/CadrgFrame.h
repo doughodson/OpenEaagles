@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Class:  Basic::Object -> CadrgFrame
+// Class: CadrgFrame
 //
 // Description: One frame of a TocEntry, holds the color table information for the
 // texture. Load a frame's data and decompress it.
@@ -23,10 +23,11 @@ namespace Rpf {
 
 class CadrgFrameEntry;
 
-class CadrgFrame : public Basic::Object {
-    DECLARE_SUBCLASS(CadrgFrame, Basic::Object)	
+class CadrgFrame : public Basic::Object
+{
+    DECLARE_SUBCLASS(CadrgFrame, Basic::Object)
 
-public:	
+public:
     CadrgFrame();
 
     // Load our entry for each frame
@@ -40,11 +41,12 @@ private:
     unsigned char subFrameTable[6][6][frameSize];   // Subframe table array
     int nitfHdrLength;                              // Nitf header length
     int masked[6][6];                               // Subframe masked array
-	unsigned char lookupTable[4096][4][4];          // Lookup table
+    unsigned char lookupTable[4096][4][4];          // Lookup table
 };
 
-};  // End Rpf namespace
-};  // End Maps namespace 
-};  // End Eaagles namespace
+} // End Rpf namespace
+} // End Maps namespace 
+} // End Eaagles namespace
 
 #endif
+

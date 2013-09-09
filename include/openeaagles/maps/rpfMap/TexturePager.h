@@ -53,9 +53,10 @@ namespace Rpf {
 class CadrgMap;
 class CadrgTocEntry;
 
-class TexturePager : public Basic::Object {
+class TexturePager : public Basic::Object
+{
     DECLARE_SUBCLASS(TexturePager, Basic::Object)
-	
+
 public:
     TexturePager();
 
@@ -65,7 +66,7 @@ public:
     virtual void setToc(CadrgTocEntry* x);
 
     // Get functions
-    TextureTable& getTable() { return table; }    
+    TextureTable& getTable() { return table; }
     CadrgTocEntry* getToc()     { return toc; }
     const CadrgTocEntry* getToc() const { return toc; }
 
@@ -78,7 +79,7 @@ private:
     void reuseTextures();
     void loadNewTextures();
 
-	Basic::List* stack;
+    Basic::List* stack;
 
     TextureTable table;
     int maxTableSize;
@@ -90,8 +91,9 @@ private:
     CadrgTocEntry* toc;
 };
 
-};  // End Rpf namespace
-};  // End Maps namespace
-};  // End Eaagles namespace
+} // End Rpf namespace
+} // End Maps namespace
+} // End Eaagles namespace
 
 #endif
+

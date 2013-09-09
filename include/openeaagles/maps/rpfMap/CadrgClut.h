@@ -21,21 +21,22 @@ namespace Rpf {
 
 class CadrgFrameEntry;
 
-class CadrgClut: public Basic::Object {
-    DECLARE_SUBCLASS(CadrgClut, Basic::Object)	
+class CadrgClut: public Basic::Object
+{
+    DECLARE_SUBCLASS(CadrgClut, Basic::Object)
 
 public:
     CadrgClut();
 
     // Structure to hold our RGB values.
     struct Rgb {
-		unsigned char red;
-		unsigned char green;
-		unsigned char blue;
-		unsigned char alpha;
+        unsigned char red;
+        unsigned char green;
+        unsigned char blue;
+        unsigned char alpha;
     };
     // Color lookup table - 216, 32 or 16 colors
-	enum ColorTableSizes { CLUT_216, CLUT_32, CLUT_16 };
+    enum ColorTableSizes { CLUT_216, CLUT_32, CLUT_16 };
 
     // Load our color lookup table
     void load(CadrgFrameEntry& frame, int cib, ColorTableSizes clutSize = CLUT_216);
@@ -53,8 +54,9 @@ private:
     Rgb colorTable[255];                    // Holds our individual colors
 };
 
-};  // end Rpf namespace
-};  // end Maps namespace 
-};  // end Eaagles namespace 
+} // end Rpf namespace
+} // end Maps namespace 
+} // end Eaagles namespace 
 
 #endif
+

@@ -1,3 +1,7 @@
+// -------------------------------------------------------------------------------
+// Class: VMAP0MainDirectory
+// -------------------------------------------------------------------------------
+
 #include "openeaagles/maps/vpfMap/VMAP0MainDirectory.h"
 #include "openeaagles/maps/vpfMap/VMAP0ReferenceDirectory.h"
 #include "openeaagles/maps/vpfMap/VPFRecord.h"
@@ -10,7 +14,6 @@ namespace Vpf {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(VMAP0MainDirectory,"VMAP0MainDirectory")
 EMPTY_SERIALIZER(VMAP0MainDirectory)
-
 
 VMAP0MainDirectory::VMAP0MainDirectory()
 {
@@ -94,6 +97,7 @@ void VMAP0MainDirectory::loadTables()
     string->unref();
 }
 
-}; // end Vpf namespace
-}; // end Maps namespace 
-}; // end Eaagles namespace
+} // end Vpf namespace
+} // end Maps namespace 
+} // end Eaagles namespace
+

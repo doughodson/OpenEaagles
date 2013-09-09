@@ -1,3 +1,7 @@
+// --------------------------------------------------------------
+// Class: VpfTable
+// --------------------------------------------------------------
+
 #include "openeaagles/basic/List.h"
 #include "openeaagles/basic/Pair.h"
 
@@ -18,7 +22,6 @@ namespace Eaagles {
 namespace Maps {
 namespace Vpf {
 
-    
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(VPFTable,"VPFTable")
 EMPTY_SERIALIZER(VPFTable)
 
@@ -293,6 +296,7 @@ void VPFTable::determineRecordSize()
     //std::cout << "RECORD SIZE = " << recordSize << std::endl;
 }
 
-}; // end Vpf namespace
-}; // end Maps namespace 
-}; // end Eaagles namespace
+} // end Vpf namespace
+} // end Maps namespace 
+} // end Eaagles namespace
+

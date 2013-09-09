@@ -64,7 +64,7 @@ public:
     virtual bool setTextureObject(int row, int col, BasicGL::Texture* newObj);
 
 private:
-	static const int MAX_TABLE_SIZE = 25;	// Maximum number of data in our tables
+    static const int MAX_TABLE_SIZE = 25;    // Maximum number of data in our tables
 
     int maxTableSize;
     int centerTablePos;
@@ -76,8 +76,9 @@ private:
     BasicGL::Texture* texes[MAX_TABLE_SIZE][MAX_TABLE_SIZE];    // Holds our textures.
 };
 
-};  // End Rpf namespace
-};  // End Maps namespace
-};  // End Eaagles namespace
+} // End Rpf namespace
+} // End Maps namespace
+} // End Eaagles namespace
 
 #endif
+

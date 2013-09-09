@@ -1,5 +1,6 @@
 //------------------------------------------------------------------------------
 // Class: CadrgFrameEntry
+//
 // Description: Basic Table of Contents Frame entry that holds a frame and the
 // Color Look up table associated with that frame.
 //
@@ -28,8 +29,9 @@ namespace Rpf {
 
 class CadrgFrame;
 
-class CadrgFrameEntry : public Basic::Object {
-    DECLARE_SUBCLASS(CadrgFrameEntry, Basic::Object)	
+class CadrgFrameEntry : public Basic::Object
+{
+    DECLARE_SUBCLASS(CadrgFrameEntry, Basic::Object)
 
 public:
     CadrgFrameEntry();
@@ -57,8 +59,9 @@ private:
     bool cib;           // Are we a CIB or not?
 };
 
-};  // End Maps namespace
-};  // End Rpf namespace 
-};  // End Eaagles namespace
+} // End Maps namespace
+} // End Rpf namespace 
+} // End Eaagles namespace
 
 #endif
+

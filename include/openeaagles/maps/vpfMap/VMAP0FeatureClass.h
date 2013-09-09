@@ -4,7 +4,7 @@
 // Description: Defines relationships between feature tables and 
 // primitives.
 // ------------------------------------------------------------
-#ifndef	__Eaagles_Maps_Vpf_VMAP0FeatureClass_H__
+#ifndef __Eaagles_Maps_Vpf_VMAP0FeatureClass_H__
 #define __Eaagles_Maps_Vpf_VMAP0FeatureClass_H__
 
 #include "openeaagles/basic/Object.h"
@@ -15,7 +15,8 @@ namespace Vpf {
 
 class VPFTable;
 
-class VMAP0FeatureClass : public Basic::Object {
+class VMAP0FeatureClass : public Basic::Object
+{
     DECLARE_SUBCLASS(VMAP0FeatureClass, Basic::Object)
 
 public:
@@ -43,8 +44,9 @@ private:
     int numRelations;    
 };
 
-}; // End Vpf namespace
-}; // End Maps namespace 
-}; // End Eaagles namespace
+} // End Vpf namespace
+} // End Maps namespace 
+} // End Eaagles namespace
 
 #endif
+

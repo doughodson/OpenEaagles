@@ -1,5 +1,6 @@
 //------------------------------------------------------------------------------
 // Class: CadrgFile
+//
 // Description: 
 // This is the data file that is created by CadrgMap when the CADRG files are '
 // initially loaded.  These files contain all the TocEntries that are created,
@@ -50,8 +51,10 @@ namespace Rpf {
 
 class CadrgTocEntry;
 
-class CadrgFile : public Basic::Object {
-    DECLARE_SUBCLASS(CadrgFile, Basic::Object)	
+class CadrgFile : public Basic::Object
+{
+    DECLARE_SUBCLASS(CadrgFile, Basic::Object)
+
 public:
     CadrgFile();
 
@@ -85,8 +88,9 @@ private:
     Basic::String* originalDir;                 // directory of the file we are associated with
 };
 
-};  // End Rpf namespace
-};  // End Maps namespace
-};  // End Eaagles namespace
+}  // End Rpf namespace
+}  // End Maps namespace
+}  // End Eaagles namespace
 
 #endif
+

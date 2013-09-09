@@ -1,3 +1,7 @@
+// ------------------------------------------------------------
+// Class: VPFIndexTable
+// ------------------------------------------------------------
+
 #include "openeaagles/maps/vpfMap/VPFIndexTable.h"
 #include "openeaagles/maps/vpfMap/VPFDirectory.h"
 #include "openeaagles/basic/String.h"
@@ -87,6 +91,7 @@ void VPFIndexTable::loadIndexTableFromFile(const char* pathname, const char* fil
 
 
 
-}; // end Vpf namespace
-}; // end Maps namespace 
-}; // end Eaagles namespace
+} // end Vpf namespace
+} // end Maps namespace 
+} // end Eaagles namespace
+

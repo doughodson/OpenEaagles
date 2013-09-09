@@ -1,3 +1,7 @@
+// -------------------------------------------------------------------------------
+// Class: VMAP0RefCoverageDirectory
+// -------------------------------------------------------------------------------
+
 #include "openeaagles/maps/vpfMap/VMAP0RefCoverageDirectory.h"
 #include "openeaagles/maps/vpfMap/VMAP0ReferenceDirectory.h"
 #include "openeaagles/maps/vpfMap/VPFTable.h"
@@ -292,6 +296,7 @@ VMAP0FeatureClass* VMAP0RefCoverageDirectory::getFeatureClassByName(const char* 
     return 0;
 }
 
-}; // end Vpf namespace
-}; // end Maps namespace 
-}; // end Eaagles namespace
+} // end Vpf namespace
+} // end Maps namespace 
+} // end Eaagles namespace
+

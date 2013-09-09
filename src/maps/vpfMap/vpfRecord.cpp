@@ -1,3 +1,7 @@
+// -------------------------------------------------------------------------------
+// Class: VPFRecord
+// -------------------------------------------------------------------------------
+
 #include "openeaagles/maps/vpfMap/VPFRecord.h"
 #include "openeaagles/maps/vpfMap/VPFIndexTable.h"
 #include "openeaagles/basic/String.h"
@@ -453,7 +457,6 @@ int VPFRecord::getCoordinate(const int column, osg::Vec3 vec[], const int idx, c
     return numCoords;
 }
 
-
 // this just returns the character string that was parsed from the file
 const char* VPFRecord::getData(const int column)
 {
@@ -464,6 +467,7 @@ const char* VPFRecord::getData(const int column)
     else return 0;
 }
 
-}; // end Vpf namespace
-}; // end Maps namespace 
-}; // end Eaagles namespace
+} // end Vpf namespace
+} // end Maps namespace 
+} // end Eaagles namespace
+

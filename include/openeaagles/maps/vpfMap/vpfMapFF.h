@@ -11,8 +11,9 @@ namespace Maps {
 namespace Vpf {
     extern Basic::Object* vpfMapFormFunc(const char* formname);
 
-}; // End Vpf namespace
-}; // End Maps namespace 
-}; // End Eaagles namespace
+} // End Vpf namespace
+} // End Maps namespace 
+} // End Eaagles namespace
 
 #endif
+

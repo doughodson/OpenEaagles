@@ -15,7 +15,6 @@
 #include "openeaagles/maps/vpfMap/VPFSpatialIndexTable.h"
 #include "openeaagles/maps/vpfMap/VPFTable.h"
 
-
 namespace Eaagles {
 namespace Maps {
 namespace Vpf {
@@ -73,6 +72,7 @@ Basic::Object* vpfMapFormFunc(const char* formname)
     return newform;
 }
 
-}; // end Vpf namespace
-}; // end Maps namespace 
-}; // end Eaagles namespace
+} // end Vpf namespace
+} // end Maps namespace 
+} // end Eaagles namespace
+

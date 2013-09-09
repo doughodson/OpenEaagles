@@ -1,3 +1,7 @@
+//------------------------------------------------------------------------------
+// Class: CadrgFile
+//------------------------------------------------------------------------------
+
 #include "openeaagles/maps/rpfMap/CadrgFile.h"
 #include "openeaagles/maps/rpfMap/CadrgTocEntry.h"
 #include "openeaagles/basic/String.h"
@@ -693,6 +697,7 @@ const char* CadrgFile::getDirectory()
 }
 
 
-};  // End Rpf namespace
-};  // End Maps namespace
-};  // End Eaagles namespace
+} // End Rpf namespace
+} // End Maps namespace
+} // End Eaagles namespace
+
