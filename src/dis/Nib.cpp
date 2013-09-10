@@ -1,3 +1,6 @@
+//------------------------------------------------------------------------------
+// Class: Dis::Nib
+//------------------------------------------------------------------------------
 
 #include "openeaagles/dis/Nib.h"
 #include "openeaagles/dis/Ntm.h"
@@ -15,9 +18,6 @@ namespace Eaagles {
 namespace Network {
 namespace Dis {
 
-//==============================================================================
-// Class: Nib
-//==============================================================================
 IMPLEMENT_PARTIAL_SUBCLASS(Nib,"DisNib")
 EMPTY_SLOTTABLE(Nib)
 EMPTY_SERIALIZER(Nib)
@@ -53,7 +53,7 @@ Nib::Nib(const Simulation::NetIO::IoType ioType) : Simulation::Nib(ioType)
 
 
 Nib::Nib(const Nib& org) : Simulation::Nib(org.getIoType())
-{ 
+{
     STANDARD_CONSTRUCTOR()
     copyData(org,true);
 }
@@ -239,7 +239,7 @@ bool Nib::setEntityType(
    bool ok = (k < NetIO::NUM_ENTITY_KINDS) || (d < NetIO::MAX_ENTITY_DOMAINS);
 
    if (ok) {
-      disKind = k;    
+      disKind = k;
       disDomain = d;
       disCountry = cc;
       disCategory = c;
@@ -252,7 +252,7 @@ bool Nib::setEntityType(
 }
 
 //------------------------------------------------------------------------------
-// (Input) processElectromagneticEmissionPDU() -- 
+// (Input) processElectromagneticEmissionPDU()
 //------------------------------------------------------------------------------
 bool Nib::processElectromagneticEmissionPDU(const ElectromagneticEmissionPDU* const pdu)
 {
@@ -277,7 +277,7 @@ bool Nib::processElectromagneticEmissionPDU(const ElectromagneticEmissionPDU* co
                handler = emitterSysHandler[i];
             }
          }
-         
+
          // ---
          // Create a handler if one doesn't already exist
          // ---
@@ -299,14 +299,14 @@ bool Nib::processElectromagneticEmissionPDU(const ElectromagneticEmissionPDU* co
                numEmissionSystems++;
             }
             else {
-               // Handler wasn't found? 
+               // Handler wasn't found?
                std::cerr << "Dis::Nib::processElectromagneticEmissionPDU() warning: ";
                std::cerr << "EmissionPduHandler not found for emitterName: " << es->emitterSystem.emitterName;
                std::cerr << std::endl;
             }
 
          }
-         
+
          // ---
          // Ok, pass the location of the EmissionSystem (and beam data) to the handler
          // ---
@@ -314,19 +314,19 @@ bool Nib::processElectromagneticEmissionPDU(const ElectromagneticEmissionPDU* co
             ok = handler->updateIncoming(pdu, es, this);
          }
 
-      } 
+      }
    } // End: for all systems
 
    return ok;
 }
 
 //------------------------------------------------------------------------------
-// emitterBeamsManager() 
+// emitterBeamsManager()
 //    -- (Output) Manages the emitter beam for this NIB(Player)
 //------------------------------------------------------------------------------
 bool Nib::emitterBeamsManager(const LCreal curExecTime)
 {
-   // ---   
+   // ---
    // First, find all of our player's RfSensor systems and setup their handlers
    // ---
    if ( numEmissionSystems == 0 ) {
@@ -437,7 +437,7 @@ bool Nib::emitterBeamsManager(const LCreal curExecTime)
 
             }
 
-         } 
+         }
 
       }  // end jammer check
 

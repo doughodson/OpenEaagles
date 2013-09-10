@@ -40,7 +40,7 @@ BEGIN_SLOTTABLE(EmissionPduHandler)
    "defaultOut",        // 6) This is the default handler for outgoing PDUs
 END_SLOTTABLE(EmissionPduHandler)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(EmissionPduHandler)
     ON_SLOT(1, setSlotEmitterName,     Basic::Number )
     ON_SLOT(2, setSlotEmitterFunction, Basic::Number )
@@ -70,7 +70,7 @@ void EmissionPduHandler::initData()
    defaultOut = false;
 
    emitterIdNumber = 0;
-   emitterName = 0; 
+   emitterName = 0;
    emitterFunction = ESF_FIRE_CONTROL; // Default
 
    emPduExecTime = 0;
@@ -92,7 +92,7 @@ void EmissionPduHandler::copyData(const EmissionPduHandler& org, const bool cc)
    defaultOut = org.defaultOut;
 
    // But clear out the rest (so we can start over as a new handler)
-   emPduExecTime = 0; 
+   emPduExecTime = 0;
 
    setSensor(0);
 
@@ -300,7 +300,7 @@ bool EmissionPduHandler::setSlotDefaultOut(const Basic::Number* const msg)
 //------------------------------------------------------------------------------
 
 // Returns true if RfSensor data matches our parameters
-bool EmissionPduHandler::isMatchingRfSystemType(const Simulation::RfSensor* const p) const 
+bool EmissionPduHandler::isMatchingRfSystemType(const Simulation::RfSensor* const p) const
 {
    bool match = false;
    if (p != 0 && sensorModel != 0) {
@@ -310,7 +310,7 @@ bool EmissionPduHandler::isMatchingRfSystemType(const Simulation::RfSensor* cons
 }
 
 // True if EmissionSystem PDU data matches our parameters.
-bool EmissionPduHandler::isMatchingRfSystemType(const EmissionSystem* const p) const 
+bool EmissionPduHandler::isMatchingRfSystemType(const EmissionSystem* const p) const
 {
    bool match = false;
    if (p != 0) {
@@ -333,13 +333,13 @@ Basic::Object* EmissionPduHandler::getSlotByIndex(const int si)
 // setTimedOut() -- incoming player has not sent EE PDU recently
 //------------------------------------------------------------------------------
 void EmissionPduHandler::setTimedOut()
-{ 
+{
    Simulation::RfSensor* rfSys = getSensor();
    if (rfSys != 0) {
       rfSys->setTransmitterEnableFlag(false);
       rfSys->setReceiverEnabledFlag(false);
    }
-   return; 
+   return;
 }
 
 //------------------------------------------------------------------------------
@@ -360,7 +360,7 @@ bool EmissionPduHandler::updateIncoming(const ElectromagneticEmissionPDU* const 
       // Use our template models to create the RfSensor and Antenna
       // ---
       if (getSensor() == 0 && !noTemplatesFound) {
-            
+
          Simulation::RfSensor* rp = getSensorModel();
          Simulation::Antenna*  ap = getAntennaModel();
 
@@ -411,7 +411,7 @@ bool EmissionPduHandler::updateIncoming(const ElectromagneticEmissionPDU* const 
                sm->addComponent(pair);
                pair->unref(); // sensor manager owns it
             }
-               
+
             setSensor(rp);
          }
 
@@ -438,7 +438,7 @@ bool EmissionPduHandler::updateIncoming(const ElectromagneticEmissionPDU* const 
 
          // reset the timeout clock for this Iplayer's emissions
          setEmPduExecTime(player->getSimulation()->getExecTimeSec());
-         
+
          rfSys->setFrequency( bd->parameterData.frequency );
          rfSys->setBandwidth( bd->parameterData.frequencyRange );
 
@@ -450,7 +450,7 @@ bool EmissionPduHandler::updateIncoming(const ElectromagneticEmissionPDU* const 
          rfSys->setPRF( bd->parameterData.pulseRepetitiveFrequency );
          rfSys->setPulseWidth( bd->parameterData.pulseWidth / 1000000.0f );
 
-         if ( bd->beamData.beamAzimuthCenter == 0 && 
+         if ( bd->beamData.beamAzimuthCenter == 0 &&
             (bd->beamData.beamAzimuthSweep == 0 || bd->beamData.beamAzimuthSweep >= PI)
             ) {
                // circular scan
@@ -699,7 +699,7 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
                bd.beamFunction = BF_ACQUISITION_AND_TRACKING;
          }
          else {
-            // Jammer 
+            // Jammer
             bd.beamFunction = BF_JAMMER;
             if (disIO->getVersion() >= NetIO::VERSION_7) {
                bd.jammingTechnique.kind = JT_NOISE;
@@ -716,7 +716,7 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
          TrackJamTargets tjt[MAX_TARGETS_IN_TJ_FIELD];
          unsigned char numTJT = 0;
 
-         // Get the track list 
+         // Get the track list
          Simulation::TrackManager* tm = beam->getTrackManager();
          if (tm != 0) {
             const int max1 = MAX_TARGETS_IN_TJ_FIELD + 1; // check for one more than the max (highDensityTracks)
@@ -751,7 +751,7 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
                      tjt[numTJT].targetID.simulationID.siteIdentification = tjtSiteID;
                      tjt[numTJT].targetID.simulationID.applicationIdentification = tjtAppID;
                      tjt[numTJT].emitterID = 0;  // (DPG #### not being jammed)
-                     tjt[numTJT].beamID    = 0;  
+                     tjt[numTJT].beamID    = 0;
                      numTJT++;
                   }
                }
@@ -878,10 +878,10 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
          result = YES;
       }
 
-      // ---   
+      // ---
       // Last -- Timeout (use Max DR time) -- do this check after the data comparison
       //    to make sure all of the PDU data has been loaded
-      // ---   
+      // ---
       if (disIO->getVersion() >= NetIO::VERSION_7) {
          if ( playerOk && (result == UNSURE) && nib->getPlayer()->isLocalPlayer() ) {
             LCreal drTime = curExecTime - getEmPduExecTime();
@@ -915,7 +915,7 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
 
 //------------------------------------------------------------------------------
 // emissionSystemData2PDU()
-//  -- Outputs the sensor/antenna's data to the Emission System structure 
+//  -- Outputs the sensor/antenna's data to the Emission System structure
 //------------------------------------------------------------------------------
 unsigned short EmissionPduHandler::emissionSystemData2PDU(EmissionSystem* const es)
 {
@@ -929,7 +929,7 @@ unsigned short EmissionPduHandler::emissionSystemData2PDU(EmissionSystem* const 
 
     // total length in bytes
     unsigned short totalLength = sizeof(EmissionSystem);
-   
+
     // ---
     // Copy the emitter beam data, plus the track/jam targets
     // ---

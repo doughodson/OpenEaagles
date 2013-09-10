@@ -91,7 +91,7 @@ struct EntityStatePDU {
          ap = (const VpArticulatedPart*) p;
 
          for (unsigned int i = 0; i < idx; i++) {
-            // step down to the correct VpArticulatedPart structure 
+            // step down to the correct VpArticulatedPart structure
             p += sizeof(VpArticulatedPart);
             ap = (const VpArticulatedPart*) p;
          }
@@ -596,7 +596,7 @@ struct CommentPDU{
       int pcount = sizeof(PDUHeader)
          + sizeof(originatingID)
          + sizeof(receivingID)
-         + 8; 
+         + 8;
       return &p[pcount];
    };
 
@@ -605,7 +605,7 @@ struct CommentPDU{
       int pcount = sizeof(PDUHeader)
          + sizeof(originatingID)
          + sizeof(receivingID)
-         + 8; 
+         + 8;
       return &p[pcount];
    };
 
@@ -613,7 +613,7 @@ struct CommentPDU{
    FixedDatum* getFixedDatum(const unsigned int index) {
       if (index >= numFixedRecords) return 0;
 
-      uint8_t* ptr = getData();  
+      uint8_t* ptr = getData();
       FixedDatum* datum = (FixedDatum *) ptr;
       for(unsigned int i = 0; i < index; i++) {
          datum++;
@@ -889,12 +889,12 @@ struct TransmitterPDU {
    // Antenna location on entity
    double               antLoc_X_coord;
    double               antLoc_Y_coord;
-   double               antLoc_Z_coord; 
+   double               antLoc_Z_coord;
    float                antLoc_x_coord;
    float                antLoc_y_coord;
    float                antLoc_z_coord;
 
-   uint16_t             antennaPatternType;     // Pattern type 
+   uint16_t             antennaPatternType;     // Pattern type
    uint16_t             antennaPatternLength;   // Pattern length
    uint64_t             frequency;              // Center frequency (hz)
    float                transmitFrequencyBandwidth; //Bandwidth (hz)
@@ -988,13 +988,13 @@ struct SignalPDU {
 
    uint8_t* getData() {
       uint8_t *p = (uint8_t *)this;
-      int pcount = sizeof(PDUHeader) + sizeof(radioRefID) + 14; 
+      int pcount = sizeof(PDUHeader) + sizeof(radioRefID) + 14;
       return &p[pcount];
    };
 
    const uint8_t* getData() const {
       const uint8_t *p = (const uint8_t *)this;
-      int pcount = sizeof(PDUHeader) + sizeof(radioRefID) + 14; 
+      int pcount = sizeof(PDUHeader) + sizeof(radioRefID) + 14;
       return &p[pcount];
    };
 
@@ -1034,7 +1034,7 @@ struct SignalPDU {
          std::cout << (int)p[i] << " ";
 
          if (count >= 16) {
-            std::cout << std::endl;   
+            std::cout << std::endl;
             count = 0;
          }
          else {
@@ -1084,7 +1084,7 @@ struct ActionRequestPDU_R {
          + 16;   //requestid, actionid, numfixedrecords, numvariablerecords
       return &p[pcount];
    };
-   
+
    void swapBytes() {
       header.swapBytes();
       originatingID.swapBytes();

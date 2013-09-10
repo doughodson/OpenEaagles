@@ -19,7 +19,7 @@ namespace Network {
 namespace Dis {
 
 //------------------------------------------------------------------------------
-// processFirePDU() callback -- 
+// processFirePDU() callback --
 //------------------------------------------------------------------------------
 void NetIO::processFirePDU(const FirePDU* const pdu)
 {
@@ -27,28 +27,28 @@ void NetIO::processFirePDU(const FirePDU* const pdu)
     unsigned short fPlayerId = pdu->firingEntityID.ID;
     unsigned short fSiteId = pdu->firingEntityID.simulationID.siteIdentification;
     unsigned short fApplicationId = pdu->firingEntityID.simulationID.applicationIdentification;
-    
+
     //std::cout << "NetIO::processFirePDU() fired";
     //std::cout << "(" << pdu->firingEntityID.ID;
     //std::cout << "," << pdu->firingEntityID.simulationID.applicationIdentification ;
     //std::cout << "," << pdu->firingEntityID.simulationID.siteIdentification;
     //std::cout << ")" << std::endl;
-    
+
     // Ignore our own PDUs
     if (fSiteId == getSiteID() && fApplicationId == getApplicationID()) return;
-    
+
     //pdu->dumpData();
-    
+
     // Get the Munition Player's ID
     unsigned short mPlayerId = pdu->munitionID.ID;
     unsigned short mSiteId = pdu->munitionID.simulationID.siteIdentification;
     unsigned short mApplicationId = pdu->munitionID.simulationID.applicationIdentification;
-    
+
     // Get the Target Player's ID
     unsigned short tPlayerId = pdu->targetEntityID.ID;
     unsigned short tSiteId = pdu->targetEntityID.simulationID.siteIdentification;
     unsigned short tApplicationId = pdu->targetEntityID.simulationID.applicationIdentification;
-    
+
     // ---
     // 1) Find the target (local) player
     // ---
@@ -59,7 +59,7 @@ void NetIO::processFirePDU(const FirePDU* const pdu)
         tPlayer = getSimulation()->findPlayer(tPlayerId);
     }
     //std::cout << "Net Fire(2) tPlayer = " << tPlayer << std::endl;
-    
+
     // ---
     // 2) Find the firing player and munitions (networked) IPlayers
     // ---
@@ -89,7 +89,7 @@ bool Nib::weaponFireMsgFactory(const LCreal)
 
     // Set the NIB mode so that we don't do this again.
     setMode(Simulation::Player::ACTIVE);
-    
+
     // Our NIB's player is a weapon that just became active
     Simulation::Weapon* mPlayer = (Simulation::Weapon*)(getPlayer());
 
@@ -99,7 +99,7 @@ bool Nib::weaponFireMsgFactory(const LCreal)
     if (fPlayer == 0) return false;
 
     // ---
-    // PDU header 
+    // PDU header
     // ---
     FirePDU pdu;
     pdu.header.protocolVersion = disIO->getVersion();
@@ -117,14 +117,14 @@ bool Nib::weaponFireMsgFactory(const LCreal)
     pdu.firingEntityID.ID = fPlayer->getID();
     pdu.firingEntityID.simulationID.siteIdentification = disIO->getSiteID();
     pdu.firingEntityID.simulationID.applicationIdentification = disIO->getApplicationID();
-    
+
     // ---
     // Set the PDU data with the munition's ID
     // ---
     pdu.munitionID.ID = mPlayer->getID();
     pdu.munitionID.simulationID.siteIdentification = disIO->getSiteID();
     pdu.munitionID.simulationID.applicationIdentification = disIO->getApplicationID();
-    
+
     // ---
     // Set the PDU data with the target's ID
     // ---
@@ -155,7 +155,7 @@ bool Nib::weaponFireMsgFactory(const LCreal)
          pdu.targetEntityID.simulationID.applicationIdentification = 0;
       }
     }
-    
+
     // ---
     // Event ID
     // ---
@@ -215,7 +215,7 @@ bool Nib::weaponFireMsgFactory(const LCreal)
     ok = disIO->sendData((char*)&pdu,sizeof(pdu));
 
     return ok;
-}    
+}
 
 } // End Dis namespace
 } // End Network namespace

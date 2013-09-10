@@ -70,7 +70,7 @@ union convData
 };
 
 
-// Byte swap check 
+// Byte swap check
 // -- returns true if this computer's byte order is not big ending (network) order.
 inline bool checkSwap() {
   uint16_t s = 1;
@@ -240,7 +240,7 @@ struct EntityType {
          subcategory == a.subcategory &&
          specific < a.specific) return true;
       //(category == a.category || category == 0 || a.category == 0) &&
-      //(subcategory == a.subcategory || subcategory == 0 || a.subcategory == 0) && 
+      //(subcategory == a.subcategory || subcategory == 0 || a.subcategory == 0) &&
       //(specific < a.specific && specific != 0)) return true;
 
       if (kind == a.kind &&
@@ -251,8 +251,8 @@ struct EntityType {
          specific == a.specific &&
          extra < a.extra) return true;
       //(category == a.category || category == 0 || a.category == 0) &&
-      //(subcategory == a.subcategory || subcategory == 0 || a.subcategory == 0) && 
-      //(specific == a.specific || specific == 0 || a.specific == 0) && 
+      //(subcategory == a.subcategory || subcategory == 0 || a.subcategory == 0) &&
+      //(specific == a.specific || specific == 0 || a.specific == 0) &&
       //(extra < a.extra && extra != 0)) return true;
 
       return false;
@@ -263,8 +263,8 @@ struct EntityType {
          domain == a.domain &&
          country == a.country &&
          (category == a.category || category == 0 || a.category == 0) &&
-         (subcategory == a.subcategory || subcategory == 0 || a.subcategory == 0) && 
-         (specific == a.specific || specific == 0 || a.specific == 0) && 
+         (subcategory == a.subcategory || subcategory == 0 || a.subcategory == 0) &&
+         (specific == a.specific || specific == 0 || a.specific == 0) &&
          (extra == a.extra || extra == 0 || a.extra == 0)) return true;
 
       return false;
@@ -279,7 +279,7 @@ struct EntityType {
    };
 
    friend std::ostream& operator << ( std::ostream& s, const EntityType& v ) {
-      s  << "  KD:DN:CN:CT:SC:SP:EX" 
+      s  << "  KD:DN:CN:CT:SC:SP:EX"
          << " -  ";
 
       s.width(3);
@@ -408,8 +408,8 @@ struct VectorDIS {
    // Compare to another VectorDIS structure
    bool operator==(const VectorDIS& s2) const {
       return (
-         component[0] == s2.component[0] && 
-         component[1] == s2.component[1] && 
+         component[0] == s2.component[0] &&
+         component[1] == s2.component[1] &&
          component[2] == s2.component[2]
       );
    }
@@ -466,8 +466,8 @@ struct WorldCoordinates {
    // Compare to another WorldCoordinates structure
    bool operator==(const WorldCoordinates& s2) const {
       return (
-         X_coord == s2.X_coord && 
-         Y_coord == s2.Y_coord && 
+         X_coord == s2.X_coord &&
+         Y_coord == s2.Y_coord &&
          Z_coord == s2.Z_coord
          );
    }
@@ -601,7 +601,7 @@ struct BeamData {
    float beamAzimuthSweep;          // Azimuth sweep width, half angle (radians)
    float beamElevationCenter;       // Elevation center of sweep volume (radians)
    float beamElevationSweep;        // Elevation sweep height, half angle (radians)
-   float beamSweepSync;             // Percent of sweep completed 
+   float beamSweepSync;             // Percent of sweep completed
 
    // Constructor(s)
    BeamData() :  beamAzimuthCenter(0), beamAzimuthSweep(0), beamElevationCenter(0),
@@ -619,10 +619,10 @@ struct BeamData {
    // Compare to another BeamData structure
    bool operator==(const BeamData& s2) const {
       return (
-            beamAzimuthCenter == s2.beamAzimuthCenter && 
-            beamAzimuthSweep == s2.beamAzimuthSweep && 
-            beamElevationCenter == s2.beamElevationCenter && 
-            beamElevationSweep == s2.beamElevationSweep && 
+            beamAzimuthCenter == s2.beamAzimuthCenter &&
+            beamAzimuthSweep == s2.beamAzimuthSweep &&
+            beamElevationCenter == s2.beamElevationCenter &&
+            beamElevationSweep == s2.beamElevationSweep &&
             beamSweepSync == s2.beamSweepSync
          );
    }
@@ -698,7 +698,7 @@ struct ClockTime{
 //-----------------------------------------------
 struct DataQueryDatumSpecification{
    // Not Finished
-}; 
+};
 
 
 //-----------------------------------------------
@@ -762,7 +762,7 @@ struct EeFundamentalParameterData {
    float pulseWidth;                // Pulse Width (uSec)
 
    // Constructor(s)
-   EeFundamentalParameterData() : 
+   EeFundamentalParameterData() :
          frequency(0), frequencyRange(0), effectiveRadiatedPower(0), pulseRepetitiveFrequency(0), pulseWidth(0) { }
 
    // Assignment operator
@@ -777,10 +777,10 @@ struct EeFundamentalParameterData {
    // Compare to another EeFundamentalParameterData structure
    bool operator==(const EeFundamentalParameterData& s2) const {
       return (
-            frequency == s2.frequency && 
-            frequencyRange == s2.frequencyRange && 
-            effectiveRadiatedPower == s2.effectiveRadiatedPower && 
-            pulseRepetitiveFrequency == s2.pulseRepetitiveFrequency && 
+            frequency == s2.frequency &&
+            frequencyRange == s2.frequencyRange &&
+            effectiveRadiatedPower == s2.effectiveRadiatedPower &&
+            pulseRepetitiveFrequency == s2.pulseRepetitiveFrequency &&
             pulseWidth == s2.pulseWidth
          );
    }
@@ -842,8 +842,8 @@ struct EmitterSystem {
    // Compare to another EmitterSystem structure
    bool operator==(const EmitterSystem& s2) const {
       return (
-         emitterName == s2.emitterName && 
-         function == s2.function && 
+         emitterName == s2.emitterName &&
+         function == s2.function &&
          emitterIdentificationNumber == s2.emitterIdentificationNumber
          );
    }
@@ -893,7 +893,7 @@ struct EntityIdentifierDIS {
    // Assignment operator
    void operator=(const EntityIdentifierDIS& a) {
       simulationID = a.simulationID;
-      ID = a.ID;           
+      ID = a.ID;
    }
 
    void swapBytes() {
@@ -1040,7 +1040,7 @@ struct EventIdentifier {
 
    friend std::ostream& operator << ( std::ostream& s, const EventIdentifier& v ) {
       s  << "  Event Identifier:" << std::endl
-         << v.simulationID 
+         << v.simulationID
          << "  eventNumber:     " << (int)v.eventNumber << std::endl;
 
       return s;
@@ -1117,27 +1117,27 @@ struct FundamentalOpData {
          << "  Modifier:           " << (int)v.modifier << std::endl;
 
       s.width(2);
-      s.fill('0'); 
+      s.fill('0');
       s << "    Parameter 1:    " << std::hex << (int)v.param1 << std::endl;
 
       s.width(2);
-      s.fill('0'); 
+      s.fill('0');
       s << "    Parameter 2:    " << std::hex << (int)v.param2 << std::endl;
 
       s.width(2);
-      s.fill('0'); 
+      s.fill('0');
       s << "    Parameter 3:    " << std::hex << (int)v.param3 << std::endl;
 
       s.width(2);
-      s.fill('0'); 
+      s.fill('0');
       s << "    Parameter 4:    " << std::hex << (int)v.param4 << std::endl;
 
       s.width(2);
-      s.fill('0'); 
+      s.fill('0');
       s << "    Parameter 5:    " << std::hex << (int)v.param5 << std::endl;
 
       s.width(2);
-      s.fill('0'); 
+      s.fill('0');
       s << "    Parameter 6:    " << std::hex << (int)v.param6 << std::endl;
 
       s << std::dec;
@@ -1211,8 +1211,8 @@ struct JammingTechnique {
    // Compare to another EmitterSystem structure
    bool operator==(const JammingTechnique& s2) const {
       return (
-         kind == s2.kind && 
-         category == s2.category && 
+         kind == s2.kind &&
+         category == s2.category &&
          subcat == s2.subcat &&
          specific == s2.specific
          );
@@ -1258,7 +1258,7 @@ struct ModulationType {
    uint16_t spreadSpectrum;         // Spread Spectrum
    uint16_t majorModulationType;    // Major Modulation type
    uint16_t detail;                 // Detail
-   uint16_t system;                 // system 
+   uint16_t system;                 // system
 
    // Constructor(s)
    ModulationType() : spreadSpectrum(0), majorModulationType(0), detail(0), system(0) {}
@@ -1274,9 +1274,9 @@ struct ModulationType {
    // Compare to another ModulationType structure
    bool operator==(const ModulationType& s2) const {
       return (
-         spreadSpectrum == s2.spreadSpectrum && 
-         majorModulationType == s2.majorModulationType && 
-         detail == s2.detail && 
+         spreadSpectrum == s2.spreadSpectrum &&
+         majorModulationType == s2.majorModulationType &&
+         detail == s2.detail &&
          system == s2.system
          );
    }
@@ -1384,11 +1384,11 @@ struct RadioEntityType {
    // Compare to another RadioEntityType structure
    bool operator==(const RadioEntityType& s2) const {
       return (
-         kind == s2.kind && 
-         domain == s2.domain && 
-         country == s2.country && 
-         category == s2.category && 
-         nomenclatureVersion == s2.nomenclatureVersion && 
+         kind == s2.kind &&
+         domain == s2.domain &&
+         country == s2.country &&
+         category == s2.category &&
+         nomenclatureVersion == s2.nomenclatureVersion &&
          nomenclature == s2.nomenclature
          );
    }
@@ -1516,12 +1516,12 @@ struct SystemID {
          << "  System Name:    " << v.systemName << std::endl;
 
       s.width(2);
-      s.fill('0'); 
+      s.fill('0');
       s << "  System Mode:    " << std::hex << (int)v.systemMode << std::endl;
 
       s.width(2);
-      s.fill('0'); 
-      s << "  Change/Options: " << (int)v.options << std::dec << std::endl; 
+      s.fill('0');
+      s << "  Change/Options: " << (int)v.options << std::dec << std::endl;
 
       return s;
    };
@@ -1560,9 +1560,9 @@ struct TrackJamTargets {
    bool operator==(const TrackJamTargets& s2) const
    {
       return (
-         targetID == s2.targetID && 
-         emitterID == s2.emitterID && 
-         beamID == s2.beamID 
+         targetID == s2.targetID &&
+         emitterID == s2.emitterID &&
+         beamID == s2.beamID
       );
    }
 
@@ -1715,7 +1715,7 @@ struct VpArticulatedPart {
 
       if (v.parameterTypeDesignator == ATTACHED_PART)
          s << v.parameterValue.entityType << std::endl;
-      else 
+      else
          s << v.parameterValue.value[0] << std::endl;
 
       return s;
@@ -1747,7 +1747,7 @@ struct EmitterBeamData {
    BeamData           beamData;              // Beam data
    uint8_t            beamFunction;          // Beam function enum (see IST-CF-03-01, May 5, 2003, Sec 8.1.4)
    uint8_t            numberOfTargetsInTrack; // Number of track/jam targets that will follow
-   uint8_t            highDensityTracks;     // High Density Tracks flag 
+   uint8_t            highDensityTracks;     // High Density Tracks flag
    uint8_t            beamStatus;            // Beam active/inactive flag (IEEE P1278.1/D15; see 6.2.14)
    JammingTechnique   jammingTechnique;      //  (IEEE P1278.1/D15)
 
@@ -1795,14 +1795,14 @@ struct EmitterBeamData {
    // Compare to another EmitterBeamData structure
    bool operator==(const EmitterBeamData& s2) const {
       return (
-         beamDataLength == s2.beamDataLength && 
-         beamIDNumber == s2.beamIDNumber && 
-         beamParameterIndex == s2.beamParameterIndex && 
-         parameterData == s2.parameterData && 
+         beamDataLength == s2.beamDataLength &&
+         beamIDNumber == s2.beamIDNumber &&
+         beamParameterIndex == s2.beamParameterIndex &&
+         parameterData == s2.parameterData &&
          beamData == s2.beamData &&
-         beamFunction == s2.beamFunction && 
-         numberOfTargetsInTrack == s2.numberOfTargetsInTrack && 
-         highDensityTracks == s2.highDensityTracks && 
+         beamFunction == s2.beamFunction &&
+         numberOfTargetsInTrack == s2.numberOfTargetsInTrack &&
+         highDensityTracks == s2.highDensityTracks &&
          beamStatus == s2.beamStatus &&
          jammingTechnique == s2.jammingTechnique
          );
@@ -1840,11 +1840,11 @@ struct EmitterBeamData {
 
       for(int i=0; i < v.numberOfTargetsInTrack; i++)
       {
-         const TrackJamTargets* tgt = v.getTrackTarget(i); 
+         const TrackJamTargets* tgt = v.getTrackTarget(i);
          if (tgt != 0) {
             s  << "-----------------------------------------" << std::endl
                << "Target: " << i
-               << tgt  
+               << tgt
                << "-----------------------------------------" << std::endl;
          }
       }
@@ -1889,8 +1889,8 @@ struct EmissionSystem {
    bool operator==(const EmissionSystem& s2) const {
       return (
          // systemDataLength == s2.systemDataLength  // Don't compare the total length
-         numberOfBeams == s2.numberOfBeams && 
-         emitterSystem == s2.emitterSystem && 
+         numberOfBeams == s2.numberOfBeams &&
+         emitterSystem == s2.emitterSystem &&
          location == s2.location
          );
    }
@@ -1961,10 +1961,10 @@ struct EmissionSystem {
          << "Reference Location:       " << std::endl << v.location << std::endl;
 
       for (unsigned int i = 0; i < v.numberOfBeams; i++) {
-         const EmitterBeamData* bd = v.getEmitterBeamData(i); 
+         const EmitterBeamData* bd = v.getEmitterBeamData(i);
          s  << "-----------------------------------------" << std::endl
             << "Emitter Beam: " << i
-            << bd  
+            << bd
             << "-----------------------------------------" << std::endl;
       }
 
@@ -2067,8 +2067,8 @@ struct SimCoordinates {
    // Compare to another SimCoordinates structure
    bool operator==(const SimCoordinates& s2) const {
       return (
-         lat == s2.lat && 
-         lon == s2.lon && 
+         lat == s2.lat &&
+         lon == s2.lon &&
          alt == s2.alt
          );
    }
