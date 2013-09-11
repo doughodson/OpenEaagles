@@ -450,14 +450,6 @@ void Nib::entityState2Nib()
 
    if (isAttributeUpdateRequired(NetIO::SPATIAL_AI)) {
 
-      // Get the reference lat/lon
-      double refLat = 0.0;
-      double refLon = 0.0;
-      if (getNetIO()->getSimulation() != 0) {
-         refLat = getNetIO()->getSimulation()->getRefLatitude();
-         refLon = getNetIO()->getSimulation()->getRefLongitude();
-      }
-
       // NIB's base entity structures
       //SpatialStruct* spatial = &(baseEntity->spatial);
       SpatialRVStruct* spatialRvw = &(baseEntity->spatialRvw);
@@ -466,50 +458,41 @@ void Nib::entityState2Nib()
       freeze(spatialRvw->isFrozen != 0);
 
       // Get the geocentric position, velocity and acceleration
-      double geocPos[3];
+      osg::Vec3d geocPos;
       geocPos[Basic::Nav::IX] = spatialRvw->worldLocation.x;
       geocPos[Basic::Nav::IY] = spatialRvw->worldLocation.y;
       geocPos[Basic::Nav::IZ] = spatialRvw->worldLocation.z;
 
-      LCreal geocVel[3];
+      osg::Vec3d geocVel;
       geocVel[Basic::Nav::IX] = spatialRvw->velocityVector.xVelocity;
       geocVel[Basic::Nav::IY] = spatialRvw->velocityVector.yVelocity;
       geocVel[Basic::Nav::IZ] = spatialRvw->velocityVector.zVelocity;
 
-      LCreal geocAcc[3];
+      osg::Vec3d geocAcc;
       geocAcc[Basic::Nav::IX] = spatialRvw->accelerationVector.xAcceleration;
       geocAcc[Basic::Nav::IY] = spatialRvw->accelerationVector.yAcceleration;
       geocAcc[Basic::Nav::IZ] = spatialRvw->accelerationVector.zAcceleration;
 
-      // Convert geocentric coordinates to geodetic
-      osg::Vec3 vel( 0, 0, 0 );
-      osg::Vec3 accel( 0, 0, 0 );
-      Basic::Nav::getSimPosAccVel(geocPos, geocVel, geocAcc, geodPos, vel.ptr(), accel.ptr() );
-
-      // Convert geodetic to position vector
-      osg::Vec3 pos;
-      Basic::Nav::convertLL2PosVec(refLat, refLon, geodPos[Basic::Nav::ILAT], geodPos[Basic::Nav::ILON], geodPos[Basic::Nav::IALT], &pos);
-
-      // Set the position, velocity and accelerations
-      setPosition(pos);
-      setVelocity(vel);
-      setAcceleration(accel);
-      haveWorldLocationFlg = true;
-
       // Get orientation orientation and rates
-      LCreal geocAngles[3];
+      osg::Vec3d geocAngles;
       geocAngles[Basic::Nav::IPHI] = spatialRvw->orientation.phi;
       geocAngles[Basic::Nav::ITHETA] = spatialRvw->orientation.theta;
       geocAngles[Basic::Nav::IPSI] = spatialRvw->orientation.psi; 
 
-      // Convert geocentric angles to geodetic
-      osg::Vec3 angles( 0, 0, 0);
-      osg::Vec3 arates(0.0, 0.0, 0.0);
-      Basic::Nav::getGeodAngle(geodPos, geocAngles, angles.ptr());
+      osg::Vec3d arates(0.0, 0.0, 0.0);
 
-      // Set the orientation and rates
-      setEulerAngles(angles);
-      setAngularVelocities(arates);
+      // (re)initialize the dead reckoning function
+      double diffTime(0.0);
+      resetDeadReckoning(
+         RVW_DRM,
+         geocPos,
+         geocVel,
+         geocAcc,
+         geocAngles,
+         arates,
+         diffTime);
+
+      haveWorldLocationFlg = true;
       haveOrientationFlg = true;
 
       setAttributeUpdateRequiredFlag(NetIO::SPATIAL_AI,false);
@@ -683,11 +666,11 @@ void Nib::updateBasicEntity(
       // Spatial Structure
       if (isAttributeUpdateEnabled(NetIO::SPATIAL_AI)) {
 
-         osg::Vec3 pos = getPosition();
-         osg::Vec3 vel = getVelocity();
-         osg::Vec3 accel = getAcceleration();
-         osg::Vec3 angles = getEulerAngles();
-         osg::Vec3 arates = getAngularVelocities();
+         osg::Vec3d pos = getDrPosition();
+         osg::Vec3d vel = getDrVelocity();
+         osg::Vec3d accel = getDrAcceleration();
+         osg::Vec3d angles = getDrEulerAngles();
+         osg::Vec3d arates = getDrAngularVelocities();
 
          // NIB's base entity structures
          SpatialStruct* spatial = &(baseEntity->spatial);
