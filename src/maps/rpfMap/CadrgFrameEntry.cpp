@@ -1,3 +1,7 @@
+//------------------------------------------------------------------------------
+// Class: CadrgFrameEntry
+//------------------------------------------------------------------------------
+
 #include "openeaagles/maps/rpfMap/CadrgFrameEntry.h"
 #include "openeaagles/maps/rpfMap/CadrgFrame.h"
 
@@ -12,7 +16,6 @@ namespace Rpf {
 # pragma warning(disable: 4996)
 #endif
 
-    
 IMPLEMENT_SUBCLASS(CadrgFrameEntry, "CadrgFrameEntry")
 EMPTY_SLOTTABLE(CadrgFrameEntry)
 EMPTY_SERIALIZER(CadrgFrameEntry)
@@ -27,12 +30,12 @@ CadrgFrameEntry::CadrgFrameEntry()
     loaded = false;
     directory = 0;
     frame = 0;
-	filename[0] = '\0';
-	cib = false;
+    filename[0] = '\0';
+    cib = false;
 }
 
 //--------------------------------------------------------------------------
-// copyData() 
+// copyData()
 //--------------------------------------------------------------------------
 void CadrgFrameEntry::copyData(const CadrgFrameEntry& org, const bool cc)
 {
@@ -50,7 +53,7 @@ void CadrgFrameEntry::copyData(const CadrgFrameEntry& org, const bool cc)
 }
 
 //--------------------------------------------------------------------------
-// deleteData() 
+// deleteData()
 //--------------------------------------------------------------------------
 void CadrgFrameEntry::deleteData()
 {
@@ -64,12 +67,12 @@ void CadrgFrameEntry::deleteData()
 //--------------------------------------------------------------------------
 void CadrgFrameEntry::setPathName(const char* dir, const char* file)
 {
-	exists = true;
-	directory = new char[strlen(dir) + 1];
-	strncpy(directory, dir, strlen(dir));
-	directory[strlen(dir)] = '\0';
-	strncpy(filename, file, 15);
-	filename[15] = '\0';
+    exists = true;
+    directory = new char[strlen(dir) + 1];
+    strncpy(directory, dir, strlen(dir));
+    directory[strlen(dir)] = '\0';
+    strncpy(filename, file, 15);
+    filename[15] = '\0';
 }
 
 //--------------------------------------------------------------------------
@@ -77,19 +80,19 @@ void CadrgFrameEntry::setPathName(const char* dir, const char* file)
 //--------------------------------------------------------------------------
 void CadrgFrameEntry::setCib(const bool x)
 {
-    cib = x; 
+    cib = x;
 }
 
 //--------------------------------------------------------------------------
 // loadClut() - Load our color lookup table, if it isn't already loaded.
 //--------------------------------------------------------------------------
-void CadrgFrameEntry::loadClut() 
+void CadrgFrameEntry::loadClut()
 {
-	if (loaded)	return;
+    if (loaded) return;
 
-	clut.load(*this, cib);
+    clut.load(*this, cib);
 
-	loaded = 1;
+    loaded = 1;
 }
 
 //--------------------------------------------------------------------------
@@ -109,6 +112,6 @@ void CadrgFrameEntry::setFrame(CadrgFrame* newFrame)
     }
 }
 
-};  // End Rpf namespace
-};  // End Maps namespace
-};  // End Eaagles namespace
+} // End Rpf namespace
+} // End Maps namespace
+} // End Eaagles namespace

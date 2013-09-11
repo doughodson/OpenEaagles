@@ -70,15 +70,15 @@ IMPLEMENT_SUBCLASS(NetIO,"DisNetIO")
 // Parameters
 //------------------------------------------------------------------------------
 static const LCreal HRT_BEAT_MPLIER       = 2.5;                      //  Multiplier
-static const LCreal HRT_BEAT_TIMER        = 5;                        //  seconds 
+static const LCreal HRT_BEAT_TIMER        = 5;                        //  seconds
 static const LCreal DRA_POS_THRST_DFLT    = 3.0;                      //  meters
 static const LCreal DRA_ORIENT_THRST_DFLT = (LCreal)(3.0 * PI/180.0); //  radians
 
 // DISv7 default heartbeats
-static const LCreal HBT_PDU_EE          = 10;                         //  seconds 
-static const LCreal HBT_PDU_IFF         = 10;                         //  seconds 
-static const LCreal HBT_PDU_RECEIVER    = 60;                         //  seconds 
-static const LCreal HBT_PDU_TRANSMITTER = 2;                          //  seconds 
+static const LCreal HBT_PDU_EE          = 10;                         //  seconds
+static const LCreal HBT_PDU_IFF         = 10;                         //  seconds
+static const LCreal HBT_PDU_RECEIVER    = 60;                         //  seconds
+static const LCreal HBT_PDU_TRANSMITTER = 2;                          //  seconds
 static const LCreal HBT_TIMEOUT_MPLIER  = 2.4;                        //  Multiplier
 
 // DISv7 default thresholds
@@ -106,12 +106,12 @@ BEGIN_SLOTTABLE(NetIO)
    "maxAge",               //  7: Max age (without update) of networked players (Basic::Time)
    "maxEntityRange",       //  8: Max entity range of networked players (Basic::Distance)
    "emissionPduHandlers",  //  9: List of Electromagnetic-Emission PDU handlers (EmissionPduHandler)
-   "siteID",               // 10: Site Identification    
+   "siteID",               // 10: Site Identification
    "applicationID",        // 11: Application Identification
    "exerciseID",           // 12: Exercise Identification
 END_SLOTTABLE(NetIO)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(NetIO)
    ON_SLOT(1, setSlotNetInput,         Basic::NetHandler)
    ON_SLOT(2, setSlotNetOutput,        Basic::NetHandler)
@@ -164,11 +164,11 @@ void NetIO::initData()
    setMaxOrientationErr(DRA_ORIENT_THRST_DFLT, 255, 255);    //  (radians)
    setMaxAge(HRT_BEAT_MPLIER*HRT_BEAT_TIMER, 255, 255);      //  (seconds)
    setMaxEntityRange(LCreal(0), 255, 255); // no range filtering
-   
+
    // Clear emission PDU handle table
    for (unsigned int i = 0; i < MAX_EMISSION_HANDLERS; i++) {
       emissionHandlers[i] = 0;
-   }    
+   }
    nEmissionHandlers = 0;
 }
 
@@ -192,7 +192,7 @@ void NetIO::copyData(const NetIO& org, const bool cc)
       addEmissionPduHandler(tmp);
       tmp->unref();
    }
-    
+
    for (unsigned char i = 0; i < NUM_ENTITY_KINDS; i++) {
       for (unsigned char j = 0; j < MAX_ENTITY_DOMAINS; j++) {
          maxEntityRange[i][j] = org.maxEntityRange[i][j];
@@ -234,7 +234,7 @@ bool NetIO::setVersion(const unsigned char v)
 bool NetIO::initNetwork()
 {
     bool ok = true;
-    
+
     // Initialize network input handler
     if (netInput != 0) {
         if (netInput->initNetwork(true)) std::cout << "netInput Initialize OK" << std::endl;
@@ -243,7 +243,7 @@ bool NetIO::initNetwork()
         std::cerr << "NetIO::initNetwork(): failure to find the network input handler (see slot 'netInput')" << std::endl;
         ok = false;
     }
-    
+
     // Initialize network output handler
     if (netOutput != 0) {
         if (netOutput->initNetwork(true)) std::cout << "netOutput Initialize OK" << std::endl;
@@ -281,14 +281,14 @@ void NetIO::netInputHander()
             // doing an initial byte swap of the header.
 
             if (getExerciseID() == 0 || (getExerciseID() == header->exerciseIdentifier)) {
-               // When we're interested in this exercise ... 
+               // When we're interested in this exercise ...
                switch (header->PDUType) {
 
                   case PDU_ENTITY_STATE: {
                      //std::cout << "Entity State PDU." << std::endl;
                      EntityStatePDU* pPdu = (EntityStatePDU *) header;
                      if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
-                     if (getSiteID() != pPdu->entityID.simulationID.siteIdentification || 
+                     if (getSiteID() != pPdu->entityID.simulationID.siteIdentification ||
                         getApplicationID() != pPdu->entityID.simulationID.applicationIdentification) {
                            processEntityStatePDU(pPdu);
                      }
@@ -413,7 +413,7 @@ void NetIO::netInputHander()
                            processActionRequestPDU(pPdu);
                      }
                   }
-                  break; 
+                  break;
 
                   case PDU_ACTION_REQUEST_R: {
                      ActionRequestPDU_R* pPdu = (ActionRequestPDU_R*)header;
@@ -477,7 +477,7 @@ void NetIO::processInputList()
 }
 
 //------------------------------------------------------------------------------
-// processSignalPDU() callback -- 
+// processSignalPDU() callback --
 //------------------------------------------------------------------------------
 bool NetIO::processSignalPDU(const SignalPDU* const)
 {
@@ -485,7 +485,7 @@ bool NetIO::processSignalPDU(const SignalPDU* const)
 }
 
 //------------------------------------------------------------------------------
-// processTransmitterPDU() callback -- 
+// processTransmitterPDU() callback --
 //------------------------------------------------------------------------------
 bool NetIO::processTransmitterPDU(const TransmitterPDU* const)
 {
@@ -493,7 +493,7 @@ bool NetIO::processTransmitterPDU(const TransmitterPDU* const)
 }
 
 //------------------------------------------------------------------------------
-// processDataQueryPDU() callback -- 
+// processDataQueryPDU() callback --
 //------------------------------------------------------------------------------
 bool NetIO::processDataQueryPDU(const DataQueryPDU* const)
 {
@@ -501,7 +501,7 @@ bool NetIO::processDataQueryPDU(const DataQueryPDU* const)
 }
 
 //------------------------------------------------------------------------------
-// processDataPDU() callback -- 
+// processDataPDU() callback --
 //------------------------------------------------------------------------------
 bool NetIO::processDataPDU(const DataPDU* const)
 {
@@ -509,7 +509,7 @@ bool NetIO::processDataPDU(const DataPDU* const)
 }
 
 //------------------------------------------------------------------------------
-// processCommentPDU() callback -- 
+// processCommentPDU() callback --
 //------------------------------------------------------------------------------
 bool NetIO::processCommentPDU(const CommentPDU* const)
 {
@@ -517,7 +517,7 @@ bool NetIO::processCommentPDU(const CommentPDU* const)
 }
 
 //------------------------------------------------------------------------------
-// processStartPDU() callback -- 
+// processStartPDU() callback --
 //------------------------------------------------------------------------------
 bool NetIO::processStartPDU(const Eaagles::Network::Dis::StartPDU* const)
 {
@@ -525,7 +525,7 @@ bool NetIO::processStartPDU(const Eaagles::Network::Dis::StartPDU* const)
 }
 
 //------------------------------------------------------------------------------
-// processStopPDU() callback -- 
+// processStopPDU() callback --
 //------------------------------------------------------------------------------
 bool NetIO::processStopPDU(const Eaagles::Network::Dis::StopPDU* const)
 {
@@ -533,7 +533,7 @@ bool NetIO::processStopPDU(const Eaagles::Network::Dis::StopPDU* const)
 }
 
 //------------------------------------------------------------------------------
-// processAcknowledgePDU() callback -- 
+// processAcknowledgePDU() callback --
 //------------------------------------------------------------------------------
 bool NetIO::processAcknowledgePDU(const Eaagles::Network::Dis::AcknowledgePDU* const)
 {
@@ -541,7 +541,7 @@ bool NetIO::processAcknowledgePDU(const Eaagles::Network::Dis::AcknowledgePDU* c
 }
 
 //------------------------------------------------------------------------------
-// processActionRequestPDU() callback -- 
+// processActionRequestPDU() callback --
 //------------------------------------------------------------------------------
 bool NetIO::processActionRequestPDU(const Eaagles::Network::Dis::ActionRequestPDU* const)
 {
@@ -549,7 +549,7 @@ bool NetIO::processActionRequestPDU(const Eaagles::Network::Dis::ActionRequestPD
 }
 
 //------------------------------------------------------------------------------
-// processActionRequestPDU_R() callback -- 
+// processActionRequestPDU_R() callback --
 //------------------------------------------------------------------------------
 bool NetIO::processActionRequestPDU_R(const Eaagles::Network::Dis::ActionRequestPDU_R* const)
 {
@@ -557,7 +557,7 @@ bool NetIO::processActionRequestPDU_R(const Eaagles::Network::Dis::ActionRequest
 }
 
 //------------------------------------------------------------------------------
-// processActionResponsePDU_R() callback -- 
+// processActionResponsePDU_R() callback --
 //------------------------------------------------------------------------------
 bool NetIO::processActionResponsePDU_R(const Eaagles::Network::Dis::ActionResponsePDU_R* const)
 {
@@ -613,9 +613,9 @@ Simulation::Nib* NetIO::createNewOutputNib(Simulation::Player* const player)
       nib->setFederateName(fName);
       nib->setSiteID( site );
       nib->setApplicationID( app );
-      
+
       if (ok) {
-         // Maps the player type to an output entity type. 
+         // Maps the player type to an output entity type.
          // Note: isEntityTypeValid() will return false if there
          // isn't a type mapper (Ntb) assigned to this Nib.
          nib->setOutputPlayerType(player);
@@ -644,7 +644,7 @@ Nib* NetIO::findDisNib(const unsigned short playerID, const unsigned short site,
 
 
 //------------------------------------------------------------------------------
-// processElectromagneticEmissionPDU() callback -- 
+// processElectromagneticEmissionPDU() callback --
 //------------------------------------------------------------------------------
 void NetIO::processElectromagneticEmissionPDU(const ElectromagneticEmissionPDU* const pdu)
 {
@@ -654,10 +654,10 @@ void NetIO::processElectromagneticEmissionPDU(const ElectromagneticEmissionPDU* 
     unsigned short ePlayerId = pdu->emittingEntityID.ID;
     unsigned short eSiteId = pdu->emittingEntityID.simulationID.siteIdentification;
     unsigned short eApplicationId = pdu->emittingEntityID.simulationID.applicationIdentification;
-   
+
     // Ignore our own PDUs
     if (eSiteId == getSiteID() && eApplicationId == getApplicationID()) return;
-   
+
     // Or PDUs with no systems
     if (pdu->numberOfSystems == 0) return;
 
@@ -716,7 +716,7 @@ unsigned int NetIO::makeTimeStamp(const LCreal ctime, const bool absolute)
     // compute seconds in this hour
     int hours = int(ctime / 3600.0);
     LCreal secondsThisHour = (ctime - LCreal(hours*3600));
-    
+
     // 31 MSBs are for the 3600 seconds in this hour
     unsigned int ts = (unsigned int)( (secondsThisHour/3600.0) * 0x7fffffff );
     ts = (ts << 1);                    // shift to 31 MSBs
@@ -728,7 +728,7 @@ unsigned int NetIO::makeTimeStamp(const LCreal ctime, const bool absolute)
 
 //------------------------------------------------------------------------------
 // Generate a federate name from the site and application numbers:
-//  "SnnAmm" -- where nn and mm are the site and app numbers. 
+//  "SnnAmm" -- where nn and mm are the site and app numbers.
 //------------------------------------------------------------------------------
 bool NetIO::makeFederateName(char* const fedName, const unsigned int len, const unsigned short site, const unsigned short app)
 {
@@ -791,7 +791,7 @@ bool NetIO::parseFederateName(unsigned short* const site, unsigned short* const 
       unsigned short tSite = 0;
       unsigned short tApp = 0;
       unsigned int idx = 0;
-      
+
       // First check and convert site number
       ok = ( toupper(fedName[idx++]) == 'S' );
       if (ok) {
@@ -805,7 +805,7 @@ bool NetIO::parseFederateName(unsigned short* const site, unsigned short* const 
          ok = (tmp > 0) && (tmp <= 0xFFFF);
          if (ok) tSite = (unsigned short) tmp;
       }
-      
+
       // Next check and convert application number
       ok = ( toupper(fedName[idx++]) == 'A' );
       if (ok) {
@@ -878,7 +878,7 @@ bool NetIO::parseFederationName(unsigned short* const exercise, const char* cons
    if (exercise != 0 && fedName != 0) {
       unsigned short tExercise = 0;
       unsigned int idx = 0;
-      
+
       ok = ( toupper(fedName[idx++]) == 'E' );
       if (ok) {
          unsigned int tmp = 0;
@@ -1658,7 +1658,7 @@ bool NetIO::setSlotMaxAge(const Basic::Time* const msg)
 {
    return setMaxAge(msg, 255, 255);
 }
-  
+
 // Sets the list of Electromagnetic Emission PDU handlers
 bool NetIO::setSlotEmissionPduHandlers(Basic::PairStream* const msg)
 {
@@ -1686,7 +1686,7 @@ bool NetIO::setSlotEmissionPduHandlers(Basic::PairStream* const msg)
 //------------------------------------------------------------------------------
 // slot2KB() -- converts a slotname string to kind and domain numbers.
 //  Valid formats: "Kn" and "KnDnn"
-//  Where "Kn" is the entity kind number [0 .. 9], 
+//  Where "Kn" is the entity kind number [0 .. 9],
 //   and  "Dnn" is an optional entity domain number [0 .. 11]
 //  Examples: k3  K1D2  k2d5
 //  Returns true if a valid kind, with optional domain, was found
@@ -1886,7 +1886,7 @@ void NetIO::testInputEntityTypes(const unsigned int n)
 // Test quick lookup of outgoing entity types -- this routine is used to
 // test the quick lookup tree.  We do 'n' quick lookups by doing a random
 // draw of a Ntm from the main NTM list, getting and cloning the template
-// player, optionally modifying the type string, and doing a lookup. 
+// player, optionally modifying the type string, and doing a lookup.
 //------------------------------------------------------------------------------
 void NetIO::testOutputEntityTypes(const unsigned int n)
 {

@@ -1,10 +1,11 @@
 //------------------------------------------------------------------------------
 // Class: CadrgFile
-// Description: 
+//
+// Description:
 // This is the data file that is created by CadrgMap when the CADRG files are '
 // initially loaded.  These files contain all the TocEntries that are created,
 // and can be accessed by the MapDrawer to draw easily.
-
+//
 // Subroutines:
 // entry() - Returns a Toc Entry at the boundary given, if it's within
 // our boundaries.
@@ -50,14 +51,16 @@ namespace Rpf {
 
 class CadrgTocEntry;
 
-class CadrgFile : public Basic::Object {
-    DECLARE_SUBCLASS(CadrgFile, Basic::Object)	
+class CadrgFile : public Basic::Object
+{
+    DECLARE_SUBCLASS(CadrgFile, Basic::Object)
+
 public:
     CadrgFile();
 
     // Max number of Toc entries we can have.
     static const int MAX_TOC_ENTRIES = 50;
-    
+
     // Get / Set / Add / Initialize
     int getNumBoundaries() { return numBoundaries; }
 
@@ -70,7 +73,7 @@ public:
 
     // Initialize our file to create entries and such
     virtual bool initialize(const char* dir);
-   
+
     // check for map data in a certain directory
     static bool checkForMap(const char* dir);
 
@@ -85,8 +88,8 @@ private:
     Basic::String* originalDir;                 // directory of the file we are associated with
 };
 
-};  // End Rpf namespace
-};  // End Maps namespace
-};  // End Eaagles namespace
+}  // End Rpf namespace
+}  // End Maps namespace
+}  // End Eaagles namespace
 
 #endif

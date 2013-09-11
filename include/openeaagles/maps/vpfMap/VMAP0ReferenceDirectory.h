@@ -1,5 +1,6 @@
 // -------------------------------------------------------------------------------
 // Class: VMAP0ReferenceDirectory
+//
 // Description: VMAP Level 0 reference library, contains tables
 // - cat
 // - lat
@@ -9,7 +10,7 @@
 // - lineage.doc
 // and other libraries
 // -------------------------------------------------------------------------------
-#ifndef	__Eaagles_Maps_Vpf_VMAP0ReferenceDirectory_H__
+#ifndef __Eaagles_Maps_Vpf_VMAP0ReferenceDirectory_H__
 #define __Eaagles_Maps_Vpf_VMAP0ReferenceDirectory_H__
 
 #include "openeaagles/maps/vpfMap/VPFDirectory.h"
@@ -42,8 +43,9 @@ private:
     VMAP0RefCoverageDirectory* coverages[MAX_COVERAGES];
 };
 
-}; // End Vpf namespace
-}; // End Maps namespace 
-}; // End Eaagles namespace
+} // End Vpf namespace
+} // End Maps namespace
+} // End Eaagles namespace
 
 #endif
+

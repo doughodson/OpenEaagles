@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="12.1">
+  <help_text>// Uncomment the following line to change the fontsize:
+// fontsize=14
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// Welcome to UMLet!
+//
+// Double-click on UML elements to add them to the diagram, or to copy them
+// Edit elements by modifying the text in this panel
+// Hold Ctrl to select multiple elements
+// Use Ctrl+mouse to select via lasso
+//
+// Use ± or Ctrl+mouse wheel to zoom
+// Drag a whole relation at its central square icon
+//
+// Press Ctrl+C to copy the whole diagram to the system clipboard (then just paste it to, eg, Word)
+// Edit the files in the "palettes" directory to create your own element palettes
+//
+// Select "Custom Elements &gt; New..." to create new element types
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// This text will be stored with each diagram;  use it for notes.</help_text>
+  <zoom_level>9</zoom_level>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>396</x>
+      <y>333</y>
+      <w>44</w>
+      <h>98</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>27;81;27;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>63</x>
+      <y>288</y>
+      <w>729</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>--
+&lt;&lt;library&gt;&gt;
+basic
+bg=cyan
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>648</x>
+      <y>207</y>
+      <w>144</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>--
+&lt;&lt;library&gt;&gt;
+basicGL
+bg=cyan
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>63</x>
+      <y>207</y>
+      <w>306</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>--
+&lt;&lt;library&gt;&gt;
+simulation
+bg=cyan
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>63</x>
+      <y>126</y>
+      <w>54</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>--
+&lt;&lt;library&gt;&gt;
+dis
+bg=cyan
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>189</x>
+      <y>126</y>
+      <w>54</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>--
+&lt;&lt;library&gt;&gt;
+tena
+bg=cyan
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>126</x>
+      <y>126</y>
+      <w>54</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>--
+&lt;&lt;library&gt;&gt;
+hla
+bg=cyan
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>567</x>
+      <y>207</y>
+      <w>63</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>--
+&lt;&lt;library&gt;&gt;
+terrain
+bg=cyan
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>477</x>
+      <y>207</y>
+      <w>63</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>--
+&lt;&lt;library&gt;&gt;
+otw
+bg=cyan
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>315</x>
+      <y>126</y>
+      <w>54</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>--
+&lt;&lt;library&gt;&gt;
+sensors
+bg=cyan
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>720</x>
+      <y>126</y>
+      <w>72</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>--
+&lt;&lt;library&gt;&gt;
+instruments
+bg=cyan
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>639</x>
+      <y>126</y>
+      <w>72</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>--
+&lt;&lt;library&gt;&gt;
+maps
+bg=cyan
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>387</x>
+      <y>207</y>
+      <w>63</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>--
+&lt;&lt;library&gt;&gt;
+dafif
+bg=cyan
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>522</x>
+      <y>126</y>
+      <w>63</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>--
+&lt;&lt;library&gt;&gt;
+ioDevice
+bg=cyan
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>432</x>
+      <y>126</y>
+      <w>63</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>--
+&lt;&lt;library&gt;&gt;
+linearSys
+bg=cyan
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>252</x>
+      <y>126</y>
+      <w>54</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>--
+&lt;&lt;library&gt;&gt;
+vehicles
+bg=cyan
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>180</x>
+      <y>234</y>
+      <w>44</w>
+      <h>71</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+</panel_attributes>
+    <additional_attributes>27;54;27;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>396</x>
+      <y>234</y>
+      <w>44</w>
+      <h>89</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+</panel_attributes>
+    <additional_attributes>27;72;27;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>486</x>
+      <y>234</y>
+      <w>44</w>
+      <h>89</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+</panel_attributes>
+    <additional_attributes>27;72;27;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>576</x>
+      <y>234</y>
+      <w>44</w>
+      <h>89</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+</panel_attributes>
+    <additional_attributes>27;72;27;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>702</x>
+      <y>234</y>
+      <w>44</w>
+      <h>89</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+</panel_attributes>
+    <additional_attributes>27;72;27;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>729</x>
+      <y>153</y>
+      <w>44</w>
+      <h>89</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+</panel_attributes>
+    <additional_attributes>27;72;27;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>189</x>
+      <y>153</y>
+      <w>44</w>
+      <h>89</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+</panel_attributes>
+    <additional_attributes>27;72;27;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>252</x>
+      <y>153</y>
+      <w>44</w>
+      <h>89</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+</panel_attributes>
+    <additional_attributes>27;72;27;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>315</x>
+      <y>153</y>
+      <w>44</w>
+      <h>89</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+</panel_attributes>
+    <additional_attributes>27;72;27;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>63</x>
+      <y>153</y>
+      <w>44</w>
+      <h>71</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+</panel_attributes>
+    <additional_attributes>27;54;27;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>126</x>
+      <y>153</y>
+      <w>44</w>
+      <h>71</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+</panel_attributes>
+    <additional_attributes>27;54;27;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>432</x>
+      <y>153</y>
+      <w>44</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+</panel_attributes>
+    <additional_attributes>27;153;27;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>522</x>
+      <y>153</y>
+      <w>44</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+</panel_attributes>
+    <additional_attributes>27;153;27;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>648</x>
+      <y>153</y>
+      <w>44</w>
+      <h>71</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+</panel_attributes>
+    <additional_attributes>27;54;27;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>45</x>
+      <y>81</y>
+      <w>765</w>
+      <h>279</h>
+    </coordinates>
+    <panel_attributes>OpenEaagles
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>225</x>
+      <y>432</y>
+      <w>72</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>--
+&lt;&lt;library&gt;&gt;
+freetype
+bg=cyan
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>306</x>
+      <y>432</y>
+      <w>72</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>--
+&lt;&lt;library&gt;&gt;
+FTGL
+bg=cyan
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>144</x>
+      <y>432</y>
+      <w>72</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>--
+&lt;&lt;library&gt;&gt;
+OpenGL
+bg=cyan
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>468</x>
+      <y>432</y>
+      <w>72</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>--
+&lt;&lt;library&gt;&gt;
+CIGI
+bg=cyan
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>387</x>
+      <y>432</y>
+      <w>72</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>--
+&lt;&lt;library&gt;&gt;
+Glut
+bg=cyan
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>549</x>
+      <y>432</y>
+      <w>72</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>--
+&lt;&lt;library&gt;&gt;
+poRTIco
+bg=cyan
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>630</x>
+      <y>432</y>
+      <w>72</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>--
+&lt;&lt;library&gt;&gt;
+JSBSim
+bg=cyan
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>126</x>
+      <y>396</y>
+      <w>594</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>3rd Party (Open Source)
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

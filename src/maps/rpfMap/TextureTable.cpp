@@ -1,3 +1,7 @@
+// ------------------------------------------------------------------------------
+// Class: TextureTable
+// ------------------------------------------------------------------------------
+
 #include "openeaagles/maps/rpfMap/TextureTable.h"
 #include "openeaagles/basicGL/Texture.h"
 
@@ -10,9 +14,9 @@ EMPTY_SLOTTABLE(TextureTable)
 EMPTY_SERIALIZER(TextureTable)
 
 //------------------------------------------------------------------------------
-// Constructor() 
+// Constructor()
 //------------------------------------------------------------------------------
-TextureTable::TextureTable() 
+TextureTable::TextureTable()
 {
     STANDARD_CONSTRUCTOR()
     maxTableSize = MAX_TABLE_SIZE;
@@ -30,20 +34,20 @@ TextureTable::TextureTable()
 }
 
 //------------------------------------------------------------------------------
-// copyData() 
+// copyData()
 //------------------------------------------------------------------------------
-void TextureTable::copyData(const TextureTable& org, const bool cc) 
+void TextureTable::copyData(const TextureTable& org, const bool cc)
 {
     // Copy our baseclass stuff first
     BaseClass::copyData(org);
 
-	if (cc) {
-		for (int i = 0; i < maxTableSize; i++) {
-			for (int j = 0; j < maxTableSize; j++) {
-				texes[i][j] = 0;
-			}
-		}
-	}
+    if (cc) {
+        for (int i = 0; i < maxTableSize; i++) {
+            for (int j = 0; j < maxTableSize; j++) {
+                texes[i][j] = 0;
+            }
+        }
+    }
 
     maxTableSize = org.maxTableSize;
     centerTablePos = org.centerTablePos;
@@ -58,17 +62,17 @@ void TextureTable::copyData(const TextureTable& org, const bool cc)
                 texes[i][j]->unref();
                 texes[i][j] = 0;
             }
-			if (org.texes[i][j] != 0) {                
-				texes[i][j] = org.texes[i][j];
-				texes[i][j]->ref();
-			}
+            if (org.texes[i][j] != 0) {
+                texes[i][j] = org.texes[i][j];
+                texes[i][j]->ref();
+            }
 
         }
     }
 }
 
 //------------------------------------------------------------------------------
-// deleteData() 
+// deleteData()
 //------------------------------------------------------------------------------
 void TextureTable::deleteData()
 {
@@ -116,12 +120,12 @@ bool TextureTable::isInBounds(int row, int col)
 // -------------------------------------------------------------------------
 bool TextureTable::setSize(const int newSize)
 {
-	// Force our size to be less than our max size
-	if (newSize > MAX_TABLE_SIZE) {
-		size = MAX_TABLE_SIZE;
-		std::cout << "Size " << newSize << " is greater than the max size of " << MAX_TABLE_SIZE << "!  Setting to MAX_TABLE_SIZE" << std::endl;
-	}
-	else size = newSize;
+    // Force our size to be less than our max size
+    if (newSize > MAX_TABLE_SIZE) {
+        size = MAX_TABLE_SIZE;
+        std::cout << "Size " << newSize << " is greater than the max size of " << MAX_TABLE_SIZE << "!  Setting to MAX_TABLE_SIZE" << std::endl;
+    }
+    else size = newSize;
 
     // Set our new table size
     maxTableSize = size;
@@ -130,7 +134,7 @@ bool TextureTable::setSize(const int newSize)
     lowerBound = -centerTablePos;
     upperBound = centerTablePos;
 
-	// Clear out our texture objects
+    // Clear out our texture objects
     for (int i = 0; i < maxTableSize; i++) {
         for (int j = 0; j < maxTableSize; j++) {
             if (texes[i][j] != 0) texes[i][j]->unref();
@@ -170,6 +174,7 @@ BasicGL::Texture* TextureTable::getTexture(int row, int col)
     return texes[row + centerTablePos][col + centerTablePos];
 }
 
-};  // End Rpf namespace
-};  // End Maps namespace
-};  // End Eaagles namespace
+} // End Rpf namespace
+} // End Maps namespace
+} // End Eaagles namespace
+

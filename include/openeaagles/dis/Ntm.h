@@ -13,6 +13,7 @@ namespace Dis {
 
 //------------------------------------------------------------------------------
 // Class: Dis::Ntm
+//
 // Description: DIS Network Type Mapper
 //
 //    This class, which is derived from the Simulation::Ntm, maps Eaagles
@@ -23,8 +24,8 @@ namespace Dis {
 // Slots:
 //    disEntityType  <vector>   ! DIS Entity type vector:
 //                              !  [ kind domain country category subcategory specific extra ]
-//                              !  example: [ 1 2 333 4 5 6 7 ] 
-//    
+//                              !  example: [ 1 2 333 4 5 6 7 ]
+//
 //------------------------------------------------------------------------------
 class Ntm : public Simulation::Ntm
 {

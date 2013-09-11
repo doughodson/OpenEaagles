@@ -1,3 +1,7 @@
+// -------------------------------------------------------------------------------
+// Class: VPFDataType
+// -------------------------------------------------------------------------------
+
 #include "openeaagles/maps/vpfMap/VPFDataType.h"
 #include "openeaagles/basic/String.h"
 
@@ -53,6 +57,7 @@ void VPFDataType::setLength(const int x)
     length = x;
 }
 
-}; // end Vpf namespace
-}; // end Maps namespace 
-}; // end Eaagles namespace
+} // end Vpf namespace
+} // end Maps namespace
+} // end Eaagles namespace
+

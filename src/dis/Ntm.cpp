@@ -1,6 +1,6 @@
-//==============================================================================
-// Class: Ntm
-//==============================================================================
+//------------------------------------------------------------------------------
+// Class: Dis::Ntm
+//------------------------------------------------------------------------------
 
 #include "openeaagles/dis/Ntm.h"
 #include "openeaagles/dis/Nib.h"
@@ -12,9 +12,6 @@ namespace Eaagles {
 namespace Network {
 namespace Dis {
 
-//==============================================================================
-// Ntm class
-//==============================================================================
 IMPLEMENT_SUBCLASS(Ntm,"DisNtm")
 
 //------------------------------------------------------------------------------
@@ -24,7 +21,7 @@ BEGIN_SLOTTABLE(Ntm)
     "disEntityType", // 1) DIS Entity type (Basic::List -- number vector)  [ kind domain country category ... ]
 END_SLOTTABLE(Ntm)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(Ntm)
     ON_SLOT(1, setSlotDisEntityType, Basic::List)
 END_SLOT_MAP()
@@ -98,7 +95,7 @@ bool Ntm::setEntityType(
    bool ok = (k < NetIO::NUM_ENTITY_KINDS) || (d < NetIO::MAX_ENTITY_DOMAINS);
 
    if (ok) {
-      disKind = k;    
+      disKind = k;
       disDomain = d;
       disCountry = cc;
       disCategory = c;

@@ -1,3 +1,7 @@
+// ------------------------------------------------------------
+// Class: VPFIndexTable
+// ------------------------------------------------------------
+
 #include "openeaagles/maps/vpfMap/VPFIndexTable.h"
 #include "openeaagles/maps/vpfMap/VPFDirectory.h"
 #include "openeaagles/basic/String.h"
@@ -7,7 +11,7 @@
 namespace Eaagles {
 namespace Maps {
 namespace Vpf {
-    
+
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(VPFIndexTable,"VPFIndexTable")
 EMPTY_SERIALIZER(VPFIndexTable)
 
@@ -36,10 +40,10 @@ void VPFIndexTable::deleteData()
 }
 
 // get a record quickly from our index file
-void VPFIndexTable::getRecordPosition(const int idx, int& offset, int& length) 
+void VPFIndexTable::getRecordPosition(const int idx, int& offset, int& length)
 {
-    // we know our record size is exactly 2 integers, and we know the offset is our numBytes, 
-    // because numBytes is the header length in the VPFTable associated with this index table, 
+    // we know our record size is exactly 2 integers, and we know the offset is our numBytes,
+    // because numBytes is the header length in the VPFTable associated with this index table,
     if (fullPath != 0 && !fullPath->isEmpty()) {
         std::ifstream stream;
         stream.open(fullPath->getString());
@@ -87,6 +91,7 @@ void VPFIndexTable::loadIndexTableFromFile(const char* pathname, const char* fil
 
 
 
-}; // end Vpf namespace
-}; // end Maps namespace 
-}; // end Eaagles namespace
+} // end Vpf namespace
+} // end Maps namespace
+} // end Eaagles namespace
+

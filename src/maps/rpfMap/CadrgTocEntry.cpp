@@ -1,3 +1,7 @@
+//------------------------------------------------------------------------------
+// Class: CadrgTocEntry
+//------------------------------------------------------------------------------
+
 #include "openeaagles/maps/rpfMap/CadrgTocEntry.h"
 
 #include <cstdio>
@@ -18,7 +22,7 @@ EMPTY_SLOTTABLE(CadrgTocEntry)
 EMPTY_SERIALIZER(CadrgTocEntry)
 
 // ---------------------------------------------------------------------------------------------------
-// Constructor() 
+// Constructor()
 // ---------------------------------------------------------------------------------------------------
 CadrgTocEntry::CadrgTocEntry()
 {
@@ -37,13 +41,13 @@ CadrgTocEntry::CadrgTocEntry()
     horizResolution = 0;
     horizFrames = 0;
     vertFrames = 0;
-	mapImage = 0;
+    mapImage = 0;
     frames = 0;
     mapIndex = -1;
 }
 
 // ---------------------------------------------------------------------------------------------------
-// copyData() - 
+// copyData()
 // ---------------------------------------------------------------------------------------------------
 void CadrgTocEntry::copyData(const CadrgTocEntry& org, const bool)
 {
@@ -64,12 +68,12 @@ void CadrgTocEntry::copyData(const CadrgTocEntry& org, const bool)
     horizResolution = org.horizResolution;
     horizFrames = org.horizFrames;
     vertFrames = org.vertFrames;
-	mapImage = org.mapImage;
+    mapImage = org.mapImage;
     mapIndex = org.mapIndex;
 }
 
 // ---------------------------------------------------------------------------------------------------
-// deleteData() - 
+// deleteData()
 // ---------------------------------------------------------------------------------------------------
 void CadrgTocEntry::deleteData()
 {
@@ -90,9 +94,9 @@ void CadrgTocEntry::deleteData()
 // ---------------------------------------------------------------------------------------------------
 CadrgFrameEntry* CadrgTocEntry::getFrameEntry(const int v, const int h)
 {
-	CadrgFrameEntry* p = &frames[v][h];
-	if (p != 0) return p;
-	return 0;
+    CadrgFrameEntry* p = &frames[v][h];
+    if (p != 0) return p;
+    return 0;
 }
 
 // -----------------------------------------------------------------------------------------
@@ -103,22 +107,22 @@ void CadrgTocEntry::generateItems(void)
     char* tempTitle = new char[100];
 
     // Terminate our scale, if we haven't yet.
-	for (int j = 10; j > 0; j--) {
-		if (scale[j] == ' ') scale[j] = '\0';
-		else break;
-	}
+    for (int j = 10; j > 0; j--) {
+        if (scale[j] == ' ') scale[j] = '\0';
+        else break;
+    }
 
-	mapImage = 0;
+    mapImage = 0;
     // Check for overview image
     if ((strncmp(type, "OVERVIEW", 8) == 0) || (strncmp(scale, "OVERVIEW", 8) == 0)) {
         std::sprintf(tempTitle, "%s %s", type, scale);
     }
     // Image has a nwLat of ~0
-	else if (nwLat == (unsigned int) ~0) std::sprintf(title, "%s %s", type, scale);
-	else {
-		std::sprintf(tempTitle, "%s %s Zone%s: %6.3f,%6.3f / %6.3f,%6.3f", type, scale, zone, nwLat, nwLon, seLat, seLon);
-		mapImage = 1;
-	}
+    else if (nwLat == (unsigned int) ~0) std::sprintf(title, "%s %s", type, scale);
+    else {
+        std::sprintf(tempTitle, "%s %s Zone%s: %6.3f,%6.3f / %6.3f,%6.3f", type, scale, zone, nwLat, nwLon, seLat, seLon);
+        mapImage = 1;
+    }
     std::sprintf(title, "%s", tempTitle);
 }
 
@@ -126,28 +130,28 @@ void CadrgTocEntry::generateItems(void)
 // -----------------------------------------------------------------------------------------
 // setType() - Sets our entry type (ie... "CADRG").
 // -----------------------------------------------------------------------------------------
-void CadrgTocEntry::setType(const char* x, const int size) 
-{ 
+void CadrgTocEntry::setType(const char* x, const int size)
+{
     lcStrcpy(type, size, x);
-    type[size] = 0; 
+    type[size] = 0;
 }
 
 // -----------------------------------------------------------------------------------------
 // setZone() - Sets the zone this entry lies in.
 // -----------------------------------------------------------------------------------------
-void CadrgTocEntry::setZone(const char* x, const int size) 
-{ 
-    strncpy(zone, x, size); 
-    zone[size] = 0; 
+void CadrgTocEntry::setZone(const char* x, const int size)
+{
+    strncpy(zone, x, size);
+    zone[size] = 0;
 }
 
 // -----------------------------------------------------------------------------------------
 // setScale() - Sets the scale of this entry (ie... "1:500K").
 // -----------------------------------------------------------------------------------------
-void CadrgTocEntry::setScale(const char* x, const int size) 
-{ 
-    strncpy(scale, x, size); 
-    scale[size] = 0; 
+void CadrgTocEntry::setScale(const char* x, const int size)
+{
+    strncpy(scale, x, size);
+    scale[size] = 0;
 }
 
 // ---------------------------------------------------------------------------------------------------
@@ -159,6 +163,7 @@ bool CadrgTocEntry::isInZone(double lat, double lon)
     return ok;
 }
 
-};  // End Rpf namespace
-};  // End Maps namespace
-};  // End Eaagles namespace
+} // End Rpf namespace
+} // End Maps namespace
+} // End Eaagles namespace
+

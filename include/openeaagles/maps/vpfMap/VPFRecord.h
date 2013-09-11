@@ -1,9 +1,10 @@
 // -------------------------------------------------------------------------------
 // Class: VPFRecord
+//
 // Description: This is a single fixed length or variable length object that
 // will store a list of VPFDataType values for quick access.
 // -------------------------------------------------------------------------------
-#ifndef	__Eaagles_Maps_Vpf_VPFRecord_H__
+#ifndef __Eaagles_Maps_Vpf_VPFRecord_H__
 #define __Eaagles_Maps_Vpf_VPFRecord_H__
 
 #include "openeaagles/basic/Object.h"
@@ -17,7 +18,8 @@ namespace Vpf {
 
 class VPFDataType;
 
-class VPFRecord : public Basic::Object {
+class VPFRecord : public Basic::Object
+{
    DECLARE_SUBCLASS(VPFRecord,Basic::Object)
 
 public:
@@ -26,7 +28,7 @@ public:
     static const int MAX_COORDS = 500;
 
     virtual void createRecord(VPFTable* x, const char* file, const int idx);
-    
+
     const char* getData(const int column);
 
     int getCoordinate(const int column, osg::Vec3 vec[], const int idx, const int max);
@@ -42,8 +44,9 @@ private:
     int numCoords;                             // Number of coordinates we have
 };
 
-}; // End Vpf namespace
-}; // End Maps namespace 
-}; // End Eaagles namespace
+} // End Vpf namespace
+} // End Maps namespace
+} // End Eaagles namespace
 
 #endif
+

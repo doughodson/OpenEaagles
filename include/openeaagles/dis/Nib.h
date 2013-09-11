@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Classes: Dis::Nib    -- DIS Network Interface Block class
+// Class: Dis::Nib
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_Network_Dis_Nib_H__
 #define __Eaagles_Network_Dis_Nib_H__
@@ -20,7 +20,7 @@ class Ntm;
 //    the relationship between players and their corresponding DIS entities.
 //
 //==============================================================================
-class Nib : public Simulation::Nib  
+class Nib : public Simulation::Nib
 {
     DECLARE_SUBCLASS(Nib,Simulation::Nib)
 
@@ -29,13 +29,13 @@ public:
 
 public:
     Nib(const Simulation::NetIO::IoType ioType);
-    
+
    // Site & App IDs
    unsigned short getSiteID() const                { return siteID; }
    virtual void setSiteID(const unsigned short v);
    unsigned short getApplicationID() const         { return appID; }
    virtual void setApplicationID(const unsigned short v);
-   
+
     // Input support functions
     virtual void updateTheIPlayer();
     virtual void entityStatePdu2Nib(const EntityStatePDU* const pdu);
@@ -48,7 +48,7 @@ public:
     virtual bool emitterBeamsManager(const LCreal curExecTime);
     virtual bool processElectromagneticEmissionPDU(const ElectromagneticEmissionPDU* const pdu);
 
-    // Standard (DIS) entity type codes 
+    // Standard (DIS) entity type codes
    unsigned char getEntityKind() const      { return disKind; }                 // DIS kind type code (or 255 if not valid)
    unsigned char getEntityDomain() const    { return disDomain; }               // DIS domain type code
    unsigned short getEntityCountry() const  { return disCountry; }              // DIS country type code
@@ -79,7 +79,7 @@ protected:
    void processArticulationParameters(const EntityStatePDU* const pdu);
 
    // Electromagnetic Emitter handlers (protected for now)
-   unsigned char    numEmissionSystems;                           // Number of emission systems 
+   unsigned char    numEmissionSystems;                           // Number of emission systems
    unsigned char    emissionSystemsIndex;                         // Emission systems index (outgoing only)
    EmissionPduHandler* emitterSysHandler[MAX_EM_SYSTEMS];         // Handler for each emitter system
 
@@ -111,7 +111,7 @@ private:
    // 2) If time is not synchronized across the network, then it becomes the time difference + latency
    //    This allows applications to run time relative
    double timeOffset;
-}; 
+};
 
 } // End Dis namespace
 } // End Network namespace

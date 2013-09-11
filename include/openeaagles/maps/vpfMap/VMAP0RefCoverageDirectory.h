@@ -1,12 +1,13 @@
 // -------------------------------------------------------------------------------
 // Class: VMAP0RefCoverageDirectory
+//
 // Description: VMAP level 0 coverage directory(ies), which contain
 // - fcs (feature class schema)
-// - libref.lft 
+// - libref.lft
 // - libref.tft
 // - primitive tables
 // -------------------------------------------------------------------------------
-#ifndef	__Eaagles_Maps_Vpf_VMAP0RefCoverageDirectory_H__
+#ifndef __Eaagles_Maps_Vpf_VMAP0RefCoverageDirectory_H__
 #define __Eaagles_Maps_Vpf_VMAP0RefCoverageDirectory_H__
 
 #include "openeaagles/maps/vpfMap/VPFDirectory.h"
@@ -20,7 +21,8 @@ class VPFTable;
 class VPFSpatialIndexTable;
 class VMPA0FeatureClass;
 
-class VMAP0RefCoverageDirectory : public VPFDirectory {
+class VMAP0RefCoverageDirectory : public VPFDirectory
+{
    DECLARE_SUBCLASS(VMAP0RefCoverageDirectory,VPFDirectory)
 
 public:
@@ -40,9 +42,9 @@ public:
 
     int getPlacenameCoordsByRecord(const int r, osg::Vec3 vec[], const int idx, const int max);
     bool getPlacenameByRecord(const int r, char* x);
-    
+
     int getPlacenameCoordsByRange(const float width, const float height, const float refLat, const float refLon, osg::Vec3 vec[], const int idx, const int max);
-    
+
 
     int getPolBndCoordsByRecord(const int r, osg::Vec3 vec[], const int idx, const int max);
 
@@ -65,8 +67,9 @@ private:
     VPFSpatialIndexTable* spatialTables[MAX_SPATIAL_INDEX_TABLES];
 };
 
-}; // End Vpf namespace
-}; // End Maps namespace 
-}; // End Eaagles namespace
+} // End Vpf namespace
+} // End Maps namespace
+} // End Eaagles namespace
 
 #endif
+

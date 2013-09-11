@@ -1,9 +1,9 @@
 // --------------------------------------------------------------
 // Class: VpfTable
+//
 // Description: Default vector product format table
-// 
 // --------------------------------------------------------------
-#ifndef	__Eaagles_Maps_Vpf_VPFTable_H__
+#ifndef __Eaagles_Maps_Vpf_VPFTable_H__
 #define __Eaagles_Maps_Vpf_VPFTable_H__
 
 #include "openeaagles/basic/Object.h"
@@ -16,7 +16,8 @@ namespace Vpf {
 class VPFIndexTable;
 class VPFRecord;
 
-class VPFTable : public Basic::Object {
+class VPFTable : public Basic::Object
+{
    DECLARE_SUBCLASS(VPFTable,Basic::Object)
 
 public:
@@ -75,7 +76,7 @@ public:
 
     // Size of one record (if we are fixed length)
     int getRecordSize()                         { return recordSize; }
-    VPFRecord* getRecord(const int idx);             
+    VPFRecord* getRecord(const int idx);
 
     virtual bool loadTableFromFile(const char* pathname, const char* filename, const int xType = -1);
     static const int MAX_COLUMNS = 50;
@@ -85,7 +86,7 @@ public:
 
 private:
     void determineRecordSize();
-    int headerLength;   
+    int headerLength;
     char byteOrder;
     char tableDesc[255];
     char narrTable[255];
@@ -104,8 +105,9 @@ private:
     int type;                                 // Type of table we are (header table, feature table, etc...)
 };
 
-}; // End Vpf namespace
-}; // End Maps namespace 
-}; // End Eaagles namespace
+} // End Vpf namespace
+} // End Maps namespace
+} // End Eaagles namespace
 
 #endif
+

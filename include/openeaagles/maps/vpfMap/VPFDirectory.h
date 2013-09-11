@@ -1,9 +1,10 @@
 // -------------------------------------------------------------------------------
 // Class: VPFDirectory
+//
 // Description: Directory object which will understand it's VPFTables
 // Vector Product Format
 // -------------------------------------------------------------------------------
-#ifndef	__Eaagles_Maps_Vpf_VPFDirectory_H__
+#ifndef __Eaagles_Maps_Vpf_VPFDirectory_H__
 #define __Eaagles_Maps_Vpf_VPFDirectory_H__
 
 #include "openeaagles/basic/Component.h"
@@ -45,8 +46,9 @@ private:
 
 };
 
-}; // End Vpf namespace
-}; // End Maps namespace 
-}; // End Eaagles namespace
+} // End Vpf namespace
+} // End Maps namespace
+} // End Eaagles namespace
 
-#endif // __EAAGLES_MAPS_VPF_VPFDIRECTORY_H__
+#endif
+

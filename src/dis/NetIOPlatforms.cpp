@@ -37,7 +37,7 @@ static const unsigned int POWER_PLANT_BIT = 0x00400000;   // Power-plant status 
 static const unsigned int DEACTIVATE_BIT  = 0x00800000;   // State bit (0 - active; 1 - deactivated)
 
 //------------------------------------------------------------------------------
-// processEntityStatePDU() callback -- 
+// processEntityStatePDU() callback --
 //------------------------------------------------------------------------------
 void NetIO::processEntityStatePDU(const EntityStatePDU* const pdu)
 {
@@ -61,10 +61,10 @@ void NetIO::processEntityStatePDU(const EntityStatePDU* const pdu)
     // Find the Network Interface Block
     // ---
     Nib* nib = static_cast<Nib*>( findDisNib(playerId, site, app, INPUT_NIB) );
-    
-    // --- 
+
+    // ---
     // When we don't have a NIB, create one
-    // --- 
+    // ---
     if (nib == 0) {
         nib = static_cast<Nib*>( createNewInputNib() );
         if (nib != 0) {
@@ -116,16 +116,16 @@ void NetIO::processEntityStatePDU(const EntityStatePDU* const pdu)
                 // and everyone else is gray.
                 nib->setSide(Simulation::Player::GRAY);
             }
-            
+
             addNib2InputList(nib);
             nib->unref();
         }
     }
 
 
-    // --- 
+    // ---
     // When we have a NIB, transfer our packet data to it.
-    // --- 
+    // ---
     if (nib != 0) {
        nib->entityStatePdu2Nib(pdu);
     }
@@ -181,7 +181,7 @@ void Nib::entityStatePdu2Nib(const EntityStatePDU* const pdu)
       osg::Vec3d geocAngles;
       geocAngles[Basic::Nav::IPHI] = pdu->entityOrientation.phi;
       geocAngles[Basic::Nav::ITHETA] = pdu->entityOrientation.theta;
-      geocAngles[Basic::Nav::IPSI] = pdu->entityOrientation.psi; 
+      geocAngles[Basic::Nav::IPSI] = pdu->entityOrientation.psi;
 
       osg::Vec3d arates;
       arates[Basic::Nav::IX] = pdu->DRentityAngularVelocity.x_axis;
@@ -271,7 +271,7 @@ void Nib::entityStatePdu2Nib(const EntityStatePDU* const pdu)
 
    // Life form states
    {
-      unsigned int bits = ( (pdu->appearance >> 16) & 0x0000000f );        
+      unsigned int bits = ( (pdu->appearance >> 16) & 0x0000000f );
       if (getPlayer() != 0 && getPlayer()->isMajorType(Simulation::Player::LIFE_FORM)) {
          Simulation::LifeForm* lf = dynamic_cast<Simulation::LifeForm*>(getPlayer());
          if (lf != 0) {
@@ -290,7 +290,7 @@ void Nib::entityStatePdu2Nib(const EntityStatePDU* const pdu)
             else if (bits == 13) lf->setActionState(Simulation::LifeForm::WADING);
             else if (bits == 14) lf->setActionState(Simulation::LifeForm::SURRENDER);
             else if (bits == 15) lf->setActionState(Simulation::LifeForm::DETAINED);
-            else lf->setActionState(Simulation::LifeForm::UPRIGHT_STANDING);                    
+            else lf->setActionState(Simulation::LifeForm::UPRIGHT_STANDING);
          }
       }
    }
@@ -309,7 +309,7 @@ void Nib::entityStatePdu2Nib(const EntityStatePDU* const pdu)
 }
 
 //------------------------------------------------------------------------------
-// Process the articulation parameters 
+// Process the articulation parameters
 //------------------------------------------------------------------------------
 void Nib::processArticulationParameters(const EntityStatePDU* const pdu)
 {
@@ -414,7 +414,7 @@ void Nib::processArticulationParameters(const EntityStatePDU* const pdu)
                   // There's a weapon attached?
                   if (ap->parameterValue.entityType.kind != 0) {
 
-                     // Yes ... 
+                     // Yes ...
 
                      // But if we don't have the weapon yet then we'll need to look it up
                      // using our list of incoming entity types and add it to the SMS.
@@ -558,7 +558,7 @@ bool Nib::entityStateManager(const LCreal curExecTime)
       // ---
       if (getSide() == Simulation::Player::BLUE) {
          // blue's are friendly, ...
-         pdu->forceID = NetIO::FRIENDLY_FORCE;     
+         pdu->forceID = NetIO::FRIENDLY_FORCE;
       }
       else if (getSide() == Simulation::Player::RED) {
          // red's are not, ...
@@ -651,8 +651,8 @@ bool Nib::entityStateManager(const LCreal curExecTime)
          {
             unsigned int bits = 0;
             if (getDamage() > 0.9f) bits = 3;       // Destroyed or Fatality
-            else if (getDamage() > 0.5) bits = 2;   // Moderate 
-            else if (getDamage() > 0.0) bits = 1;   // Slight 
+            else if (getDamage() > 0.5) bits = 2;   // Moderate
+            else if (getDamage() > 0.0) bits = 1;   // Slight
             else bits = 0;                          // None
             pdu->appearance |= (bits << 3);
          }
@@ -671,7 +671,7 @@ bool Nib::entityStateManager(const LCreal curExecTime)
                   // Our camouflage type for DIS is the camouflage appearance bits
                   // plus one because our camouflage type of zero is no camouflage.
                   bits--;
-                  pdu->appearance |= (bits << 17); 
+                  pdu->appearance |= (bits << 17);
                }
             }
          }
@@ -686,14 +686,14 @@ bool Nib::entityStateManager(const LCreal curExecTime)
                // bits 9 - 11 unused
                // bit 12 flashlight (not implemented)
                // bits 13-15 unused
-               // bits 16 - 19 life form state 
-               // data is from the player, because NIB doesn't have actions associated with it 
+               // bits 16 - 19 life form state
+               // data is from the player, because NIB doesn't have actions associated with it
                {
                   unsigned int bits = 1;      // upright, standing still
                   if (lf->getActionState() == Simulation::LifeForm::UPRIGHT_STANDING) bits = 1;       // standing
                   else if (lf->getActionState() == Simulation::LifeForm::UPRIGHT_WALKING) bits = 2;   // walking
                   else if (lf->getActionState() == Simulation::LifeForm::UPRIGHT_RUNNING) bits = 3;   // running
-                  else if (lf->getActionState() == Simulation::LifeForm::KNEELING) bits = 4;          // kneeling	
+                  else if (lf->getActionState() == Simulation::LifeForm::KNEELING) bits = 4;          // kneeling
                   else if (lf->getActionState() == Simulation::LifeForm::PRONE) bits = 5;             // prone
                   else if (lf->getActionState() == Simulation::LifeForm::CRAWLING) bits = 6;          // crawling
                   else if (lf->getActionState() == Simulation::LifeForm::SWIMMING) bits = 7;          // swimming
@@ -705,14 +705,14 @@ bool Nib::entityStateManager(const LCreal curExecTime)
                   else if (lf->getActionState() == Simulation::LifeForm::WADING) bits = 13;           // wading
                   else if (lf->getActionState() == Simulation::LifeForm::SURRENDER) bits = 14;        // surrender
                   else if (lf->getActionState() == Simulation::LifeForm::DETAINED) bits = 15;         // detained
-                  else bits = 1;      
+                  else bits = 1;
                   pdu->appearance |= (bits << 16);
                }
                // bit 20 unused
                // bit 21 frozen status (taken care of above)
                // bits 24 - 25 weapon 1 (not implemented)
                // bits 26-27 weapon 2 (N/I)
-               // bits 28-29 
+               // bits 28-29
             }
          }
 

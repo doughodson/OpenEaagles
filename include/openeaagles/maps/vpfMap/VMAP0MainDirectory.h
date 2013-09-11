@@ -1,10 +1,11 @@
 // -------------------------------------------------------------------------------
 // Class: VMAP0MainDirectory
+//
 // Description: VMAP level 0 main directory which contains
 // - dht (database header table)
 // - lat (library attribute table)
 // -------------------------------------------------------------------------------
-#ifndef	__Eaagles_Maps_Vpf_VMAP0MainDirectory_H__
+#ifndef __Eaagles_Maps_Vpf_VMAP0MainDirectory_H__
 #define __Eaagles_Maps_Vpf_VMAP0MainDirectory_H__
 
 #include "openeaagles/maps/vpfMap/VPFDirectory.h"
@@ -19,7 +20,8 @@ class VPFTable;
 class VMAP0ReferenceDirectory;
 class VMPA0LibDirectory;
 
-class VMAP0MainDirectory : public VPFDirectory {
+class VMAP0MainDirectory : public VPFDirectory
+{
    DECLARE_SUBCLASS(VMAP0MainDirectory,VPFDirectory)
 
 public:
@@ -35,8 +37,9 @@ private:
     VMAP0LibDirectory* libDirectory;                // Library directory (just one for now)
 };
 
-}; // End Vpf namespace
-}; // End Maps namespace 
-}; // End Eaagles namespace
+} // End Vpf namespace
+} // End Maps namespace
+} // End Eaagles namespace
 
 #endif
+

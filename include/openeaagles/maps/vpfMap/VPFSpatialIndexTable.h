@@ -1,11 +1,12 @@
 // --------------------------------------------------------------
 // Class: VPFSpatialIndexTable
-// Description: Spatial index file which contains the minimum bounding 
+//
+// Description: Spatial index file which contains the minimum bounding
 // rectangle (mbr) information about each primitive.  This allows
 // for quick referencing of primitives by area
-// 
+//
 // ---------------------------------------------------------------
-#ifndef	__Eaagles_Maps_Vpf_VPFSpatialIndexTable_H__
+#ifndef __Eaagles_Maps_Vpf_VPFSpatialIndexTable_H__
 #define __Eaagles_Maps_Vpf_VPFSpatialIndexTable_H__
 
 #include "openeaagles/basic/Object.h"
@@ -15,7 +16,8 @@ namespace Eaagles {
 namespace Maps {
 namespace Vpf {
 
-class VPFSpatialIndexTable : public Basic::Object {
+class VPFSpatialIndexTable : public Basic::Object
+{
    DECLARE_SUBCLASS(VPFSpatialIndexTable,Basic::Object)
 
 public:
@@ -44,8 +46,9 @@ private:
     Basic::String* fullPath;
 };
 
-}; // End Vpf namespace
-}; // End Maps namespace 
-}; // End Eaagles namespace
+} // End Vpf namespace
+} // End Maps namespace
+} // End Eaagles namespace
 
 #endif
+

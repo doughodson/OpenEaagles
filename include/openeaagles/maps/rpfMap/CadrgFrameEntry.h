@@ -1,5 +1,6 @@
 //------------------------------------------------------------------------------
 // Class: CadrgFrameEntry
+//
 // Description: Basic Table of Contents Frame entry that holds a frame and the
 // Color Look up table associated with that frame.
 //
@@ -10,7 +11,7 @@
 //    void CadrgFrameEntry::setCib(const bool x)
 //
 // loadClut() - Load our color lookup table, if it isn't already loaded.
-//    void CadrgFrameEntry::loadClut() 
+//    void CadrgFrameEntry::loadClut()
 //
 // setFrame() - Sets the child frame
 //    void CadrgFrameEntry::setFrame(CadrgFrame* newFrame)
@@ -28,13 +29,14 @@ namespace Rpf {
 
 class CadrgFrame;
 
-class CadrgFrameEntry : public Basic::Object {
-    DECLARE_SUBCLASS(CadrgFrameEntry, Basic::Object)	
+class CadrgFrameEntry : public Basic::Object
+{
+    DECLARE_SUBCLASS(CadrgFrameEntry, Basic::Object)
 
 public:
     CadrgFrameEntry();
 
-    // Get 
+    // Get
     bool doIExist() { return exists; }
     const char* getDirectory() { return directory; }
     const char* getFileName() { return filename; }
@@ -57,8 +59,9 @@ private:
     bool cib;           // Are we a CIB or not?
 };
 
-};  // End Maps namespace
-};  // End Rpf namespace 
-};  // End Eaagles namespace
+} // End Rpf namespace
+} // End Maps namespace
+} // End Eaagles namespace
 
 #endif
+

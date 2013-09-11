@@ -1,9 +1,10 @@
 // -------------------------------------------------------------------------------
 // Class: VPFDataType
+//
 // Description: Simple object which keeps track of data type, length, and value
 // of our table.
 // -------------------------------------------------------------------------------
-#ifndef	__Eaagles_Maps_Vpf_VPFDataType_H__
+#ifndef __Eaagles_Maps_Vpf_VPFDataType_H__
 #define __Eaagles_Maps_Vpf_VPFDataType_H__
 
 #include "openeaagles/basic/Object.h"
@@ -13,7 +14,8 @@ namespace Basic { class String; }
 namespace Maps {
 namespace Vpf {
 
-class VPFDataType : public Basic::Object {
+class VPFDataType : public Basic::Object
+{
    DECLARE_SUBCLASS(VPFDataType,Basic::Object)
 
 public:
@@ -21,7 +23,7 @@ public:
 
     enum { LONG_INT, SHORT_INT, CHAR, FIXED_TEXT, VARIABLE_TEXT, FLOAT, DOUBLE, THREE_D_COORD, DATE };
 
-    // Set functions 
+    // Set functions
     virtual void setLength(const int x = -1);
     // Value sets
     virtual void setValue(char* x);
@@ -41,8 +43,9 @@ private:
     Basic::String* value;   // This will hold the value type until we need it
 };
 
-}; // End Vpf namespace
-}; // End Maps namespace 
-}; // End Eaagles namespace
+} // End Vpf namespace
+} // End Maps namespace
+} // End Eaagles namespace
 
 #endif
+

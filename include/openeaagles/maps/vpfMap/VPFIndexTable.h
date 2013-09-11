@@ -1,9 +1,10 @@
 // ------------------------------------------------------------
 // Class: VPFIndexTable
+//
 // Description: Associated Index table with all tables which have
 // variable length text or coordinate strings
 // ------------------------------------------------------------
-#ifndef	__Eaagles_Maps_Vpf_VPFIndexTable_H__
+#ifndef __Eaagles_Maps_Vpf_VPFIndexTable_H__
 #define __Eaagles_Maps_Vpf_VPFIndexTable_H__
 
 #include "openeaagles/basic/Object.h"
@@ -37,8 +38,9 @@ private:
     Basic::String* fullPath;
 };
 
-}; // End Vpf namespace
-}; // End Maps namespace 
-}; // End Eaagles namespace
+} // End Vpf namespace
+} // End Maps namespace
+} // End Eaagles namespace
 
 #endif
+

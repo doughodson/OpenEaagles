@@ -131,16 +131,16 @@ bool Nib::isIffUpdateRequired(const LCreal curExecTime, const Simulation::Iff* c
    // ---
    LCreal drTime = curExecTime - iffLastExecTime;
 
-   // ---   
+   // ---
    // 1) First time?
-   // ---   
+   // ---
    if (iffFunOpData == 0) {
       options = CHANGE_INDICATOR;   // Initial report
       iffFunOpData = new FundamentalOpData();
       result = YES;
    }
 
-   // ---   
+   // ---
    // 2) Build the fundamental operational data and compare to the past values
    // ---
    if (options == CHANGE_INDICATOR || drTime >= 2.0f) {
@@ -210,7 +210,7 @@ bool Nib::isIffUpdateRequired(const LCreal curExecTime, const Simulation::Iff* c
       opData.systemStatus = (opData.systemStatus | SYSTEM_STATUS_NO_P6);
 
       // Now check if anything changed
-      bool changed = 
+      bool changed =
          (opData.param1 != iffFunOpData->param1) ||
          (opData.param2 != iffFunOpData->param2) ||
          (opData.param3 != iffFunOpData->param3) ||
@@ -243,9 +243,9 @@ bool Nib::isIffUpdateRequired(const LCreal curExecTime, const Simulation::Iff* c
       iffFunOpData->modifier = opData.modifier;
    }
 
-   // ---   
+   // ---
    // 3) At least every 10 seconds
-   // ---   
+   // ---
    if ( (result == UNSURE)) {
       if ( drTime >= 10.0f ) {
          result = YES;

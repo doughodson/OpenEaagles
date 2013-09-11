@@ -1,3 +1,7 @@
+//------------------------------------------------------------------------------
+// rpfMapFormFunc() -- parser form function for rpf map classes
+//------------------------------------------------------------------------------
+
 #include "openeaagles/maps/rpfMap/rpfMapFF.h"
 
 // Include our moving map stuff
@@ -9,7 +13,7 @@ namespace Maps {
 namespace Rpf {
 
 Basic::Object* rpfMapFormFunc(const char* formname)
-{    
+{
    // Form generator
    Basic::Object* newform = 0;
 
@@ -21,10 +25,11 @@ Basic::Object* rpfMapFormFunc(const char* formname)
    else if ( strcmp(formname, CadrgMap::getFormName()) == 0 ) {
       newform = new CadrgMap();
    }
-    
+
    return newform;
 }
 
-};  // End Rpf namespace
-};  // End Maps namespace
-};  // End Eaagles namespace
+} // End Rpf namespace
+} // End Maps namespace
+} // End Eaagles namespace
+

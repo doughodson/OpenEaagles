@@ -20,11 +20,11 @@ namespace Network {
 namespace Dis {
 
 //------------------------------------------------------------------------------
-// processDetonationPDU() callback -- 
+// processDetonationPDU() callback --
 //------------------------------------------------------------------------------
 void NetIO::processDetonationPDU(const DetonationPDU* const pdu)
 {
-    
+
    // Get the Firing Player's ID
    unsigned short fPlayerId = pdu->firingEntityID.ID;
    unsigned short fSiteId = pdu->firingEntityID.simulationID.siteIdentification;
@@ -42,7 +42,7 @@ void NetIO::processDetonationPDU(const DetonationPDU* const pdu)
    unsigned short tPlayerId = pdu->targetEntityID.ID;
    unsigned short tSiteId = pdu->targetEntityID.simulationID.siteIdentification;
    unsigned short tApplicationId = pdu->targetEntityID.simulationID.applicationIdentification;
-    
+
    // ---
    // 1) Find the target player
    // ---
@@ -54,7 +54,7 @@ void NetIO::processDetonationPDU(const DetonationPDU* const pdu)
       }
    }
    //std::cout << "Net kill(2) tPlayer = " << tPlayer << std::endl;
-  
+
    // ---
    // 2) Find the firing player and munitions (networked) IPlayers
    // ---
@@ -74,17 +74,17 @@ void NetIO::processDetonationPDU(const DetonationPDU* const pdu)
    if (mPlayerId != 0 && mSiteId != 0 && mApplicationId != 0) {
       mNib = findDisNib(mPlayerId, mSiteId, mApplicationId, INPUT_NIB);
    }
-                
+
     //std::cout << "Net kill(3) fNib = " << fNib << ", mNib = " << mNib << std::endl;
-    
+
    // ---
-   // 3) Update the data of the munition's NIB and player 
+   // 3) Update the data of the munition's NIB and player
    // ---
    Simulation::Weapon* mPlayer = 0;
    if (mNib != 0) {
 
       // ---
-      // a) Set the munition's NIB to the location of the detonation 
+      // a) Set the munition's NIB to the location of the detonation
       // ---
 
       // Get the geocentric position, velocity and acceleration from the PDU
@@ -169,7 +169,7 @@ bool Nib::munitionDetonationMsgFactory(const LCreal)
 
     // Get our NetIO
     NetIO* disIO = (NetIO*)(getNetIO());
-    
+
     // If our NIB's player just detonated, then it must be a weapon!
     Simulation::Weapon* mPlayer = dynamic_cast<Simulation::Weapon*>(getPlayer());
     if (mPlayer == 0) return false;
@@ -180,7 +180,7 @@ bool Nib::munitionDetonationMsgFactory(const LCreal)
     if (fPlayer == 0) return false;
 
     // ---
-    // PDU header 
+    // PDU header
     // ---
     DetonationPDU pdu;
     pdu.header.protocolVersion = disIO->getVersion();
@@ -198,14 +198,14 @@ bool Nib::munitionDetonationMsgFactory(const LCreal)
     pdu.firingEntityID.ID = fPlayer->getID();
     pdu.firingEntityID.simulationID.siteIdentification = getSiteID();
     pdu.firingEntityID.simulationID.applicationIdentification = getApplicationID();
-    
+
     // ---
     // Set the PDU data with the munition's ID
     // ---
     pdu.munitionID.ID = mPlayer->getID();
     pdu.munitionID.simulationID.siteIdentification = getSiteID();
     pdu.munitionID.simulationID.applicationIdentification = getApplicationID();
-    
+
     // ---
     // Set the PDU data with the target's ID
     // ---
@@ -235,7 +235,7 @@ bool Nib::munitionDetonationMsgFactory(const LCreal)
             pdu.targetEntityID.simulationID.applicationIdentification = 0;
          }
     }
-    
+
     // ---
     // Event ID
     // ---
@@ -273,9 +273,9 @@ bool Nib::munitionDetonationMsgFactory(const LCreal)
     pdu.burst.fuse = 0;;
     pdu.burst.quantity = 1;
     pdu.burst.rate = 0;
-    
+
     // ---
-    // Location 
+    // Location
     // ---
     osg::Vec3 lpos = mPlayer->getDetonationLocation();
     pdu.locationInEntityCoordinates.component[0] = (float) lpos[0];
@@ -283,7 +283,7 @@ bool Nib::munitionDetonationMsgFactory(const LCreal)
     pdu.locationInEntityCoordinates.component[2] = (float) lpos[2];
 
     // ---
-    // Results 
+    // Results
     // ---
     pdu.detonationResult = (unsigned char)( mPlayer->getDetonationResults() );
     pdu.numberOfArticulationParameters = 0;
