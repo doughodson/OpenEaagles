@@ -249,31 +249,9 @@ bool Nib::weaponFireMsgFactory(const LCreal)
    // Location & Velociy
    // ---
    {
-      double refLat = 0.0;
-      double refLon = 0.0;
-      if (netIO->getSimulation() != 0) {
-         refLat = netIO->getSimulation()->getRefLatitude();
-         refLon = netIO->getSimulation()->getRefLongitude();
-      }
-
-      // Convert position vector to Lat/Lon/Alt
-      double alt;
-      double simCoord[3] = { 0, 0, 0 };
-      Basic::Nav::convertPosVec2LL(
-            refLat, refLon, 
-            getPosition(),
-            &simCoord[Basic::Nav::ILAT], &simCoord[Basic::Nav::ILON], &alt);
-      simCoord[Basic::Nav::IALT] = alt;
-
-      // Get the geodetic velocity and acceleration
-      osg::Vec3 vel = getVelocity();
-      LCreal geodVel[3] = { 0, 0, 0 };
-
-      // Convert to geocentric coordinates
-      double geocPos[3] = { 0, 0, 0 };
-      LCreal geocVel[3] = { 0, 0, 0 };
-      LCreal geocAcc[3] = { 0, 0, 0 };
-      Basic::Nav::getWorldPosAccVel(simCoord, vel.ptr(), geodVel, geocPos, geocVel, geocAcc);
+	  osg::Vec3d geocPos = getDrPosition();
+	  osg::Vec3d geocVel = getDrVelocity();
+	  osg::Vec3d geocAcc = getDrAcceleration();
 
       // World Coordinates
       WorldLocationStruct firingLocation;
@@ -409,8 +387,8 @@ bool Nib::weaponFireMsgFactory(const LCreal)
    // Fire Mission Index
    // ---
    {
-      unsigned long fireMissionIndex = 0;
-      unsigned long netBuffer;
+      uint32_t fireMissionIndex = 0;
+      uint32_t netBuffer;
       Basic::NetHandler::toNetOrder(&netBuffer, fireMissionIndex );
       pParams->add(
          netIO->getInteractionParameterHandle(NetIO::FIRE_MISSION_INDEX_WF_PI),
