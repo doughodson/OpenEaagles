@@ -37,7 +37,7 @@ EMPTY_SERIALIZER(Nib)
 //------------------------------------------------------------------------------
 Nib::Nib(const Simulation::NetIO::IoType ioType) : Hla::Nib(ioType) 
 {
-   SET_SLOTTABLE
+   STANDARD_CONSTRUCTOR()
 
    baseEntity = 0;
    fireEvent = 0;
@@ -63,7 +63,7 @@ Nib::Nib(const Simulation::NetIO::IoType ioType) : Hla::Nib(ioType)
 
 Nib::Nib(const Nib& org) : Hla::Nib(org.getIoType())
 { 
-    SET_SLOTTABLE
+   STANDARD_CONSTRUCTOR()
     copyData(org,true);
 }
 
@@ -79,7 +79,7 @@ Nib& Nib::operator=(const Nib& org)
     return *this;
 }
 
-Basic::Object* Nib::clone() const
+Nib* Nib::clone() const
 {
     return new Nib(*this);
 }
