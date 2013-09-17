@@ -65,6 +65,10 @@ simulation
       1) set commanded heading, velocity, and altitude now take additional
          parameters to define change rates.
 
+   Simulation class
+      1) updateData() -- corrected the delta time being passed to updateBgPlayerList()
+	     when more than one background thread is being used (bug fix)
+
 --------------------------------------------------------------------------------
 vehicle
 

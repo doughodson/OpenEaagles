@@ -919,11 +919,11 @@ void Simulation::updateData(const LCreal dt)
 
                // assign the threads from the pool
                unsigned int idx = (i+1);
-               bgThreads[i]->start(currentPlayerList, (dt0/4.0f), idx, reqBgThreads);
+               bgThreads[i]->start(currentPlayerList, dt0, idx, reqBgThreads);
             }
 
             // we're the last thread
-            updateBgPlayerList(currentPlayerList, (dt0/4.0f), reqBgThreads, reqBgThreads);
+            updateBgPlayerList(currentPlayerList, dt0, reqBgThreads, reqBgThreads);
 
             // Now wait for the other thread(s) to complete
             Basic::ThreadSyncTask::waitForAllCompleted((Basic::ThreadSyncTask**) &bgThreads[0], numBgThreads);
