@@ -37,7 +37,7 @@ basicGL
       getColorName(), the 'color' slot and the SET_COLOR event.
 
    Page Class
-      1) Added explict reference to Basic::Object in both newSubpage()
+      1) Added explicit reference to Basic::Object in both newSubpage()
          methods
 
 --------------------------------------------------------------------------------
