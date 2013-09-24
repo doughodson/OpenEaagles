@@ -22,6 +22,8 @@ namespace RprFom {
    class BaseEntity;
    class EmitterBeam;
    class Nib;
+   class Ntm;
+
 
 //==============================================================================
 // Class: Hla::RprFom::NetIO
@@ -162,8 +164,32 @@ public:
         NUM_INTERACTION_PARAMETER = 26
     };
 
+   // Standard (IST-CF-03-01, May 5, 2003) entity type "kind" codes [ 0 .. 9 ]
+   enum EntityTypeKindEnum {
+      KIND_OTHER, KIND_PLATFORM, KIND_MUNITION, KIND_LIFEFORM,
+      KIND_ENVIRONMENTAL, KIND_CULTURAL_FEATURE, KIND_SUPPLY, KIND_RADIO,
+      KIND_EXPENDABLE, KIND_SENSOR_EMITTER, NUM_ENTITY_KINDS
+   };
+
+   // Standard (IST-CF-03-01, May 5, 2003) "platform domain" codes [ 0 .. 5 ]
+   enum PlatformDomainEnum {
+      PLATFORM_DOMAIN_OTHER, PLATFORM_DOMAIN_LAND, PLATFORM_DOMAIN_AIR, PLATFORM_DOMAIN_SURFACE,
+      PLATFORM_DOMAIN_SUBSURFACE, PLATFORM_DOMAIN_SPACE, NUM_ENTITY_DOMAINS
+   };
+
 public:
     NetIO();
+
+   // Finds the Ntm by entity type codes
+   virtual const Ntm* findNtmByTypeCodes(
+         const unsigned char  kind,
+         const unsigned char  domain,
+         const unsigned short countryCode,
+         const unsigned char  category,
+         const unsigned char  subcategory = 0,
+         const unsigned char  specific = 0,
+         const unsigned char  extra = 0
+      ) const;
 
     // NetIO interface
     virtual unsigned int getNumberOfObjectClasses() const;
@@ -180,6 +206,7 @@ public:
 
     // Simulation::NetIO interface
     virtual Simulation::Nib* createNewOutputNib(Simulation::Player* const player);
+    virtual Simulation::NetIO::NtmInputNode* rootNtmInputNodeFactory() const;
     
 protected:
     virtual bool receiveWeaponFire(const RTI::ParameterHandleValuePairSet& theParameters);
