@@ -3,8 +3,7 @@ include ../makedefs
 
 LIB = $(OPENEAAGLES_LIB_DIR)/liboeDafif.a
 
-
-OBJS1 =  \
+OBJS =  \
 	$(LIB)(dafifFF.o) \
 	$(LIB)(Airport.o) \
 	$(LIB)(AirportLoader.o) \
@@ -18,7 +17,7 @@ OBJS1 =  \
 	$(LIB)(WaypointLoader.o)
 
 
-all: ${OBJS1}
+all: ${OBJS}
 
 clean:
 	-rm -f *.o

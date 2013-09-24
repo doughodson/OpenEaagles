@@ -9,9 +9,9 @@ OBJS =  \
 	$(LIB)(Stt.o) \
 	$(LIB)(Tws.o)
 
-
 all: ${OBJS} 
 
 clean:
 	-rm -f *.o
 	-rm -f $(LIB)
+

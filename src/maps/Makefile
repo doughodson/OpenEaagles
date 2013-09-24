@@ -8,7 +8,6 @@ OBJS =  \
 
 SUBDIRS = rpfMap vpfMap
 
-
 all: subdirs ${OBJS}
 
 subdirs:

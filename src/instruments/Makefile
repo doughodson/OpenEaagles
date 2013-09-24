@@ -9,7 +9,6 @@ OBJS =  \
 
 SUBDIRS = adi buttons dials landingGear maps eng gauges eadi3D 
 
-
 all: subdirs ${OBJS}
 
 subdirs:

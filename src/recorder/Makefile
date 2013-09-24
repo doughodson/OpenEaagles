@@ -3,8 +3,6 @@ include ../makedefs
 
 LIB = $(OPENEAAGLES_LIB_DIR)/liboeRecorder.a
 
-CPPFLAGS += -I$(OE_ROOT)/include/openeaagles/recorder
-
 OBJS =  \
 	$(LIB)(DataRecorder.o) \
 	$(LIB)(DataRecordHandle.o) \

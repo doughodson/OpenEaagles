@@ -3,8 +3,6 @@ include ../makedefs
 
 LIB = $(OPENEAAGLES_LIB_DIR)/liboeDis.a
 
-CPPFLAGS += -I$(EAAGLES)/include
-
 OBJS =  \
 	$(LIB)(disFF.o) \
 	$(LIB)(EmissionPduHandler.o) \

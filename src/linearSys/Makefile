@@ -3,8 +3,7 @@ include ../makedefs
 
 LIB = $(OPENEAAGLES_LIB_DIR)/liboeLinearSys.a
 
-
-OBJS1 =  \
+OBJS =  \
 	$(LIB)(DiffEquation.o) \
 	$(LIB)(FirstOrderTf.o) \
 	$(LIB)(LagFilter.o) \
@@ -20,7 +19,7 @@ OBJS1 =  \
 	$(LIB)(Sz2.o)
 
 
-all: ${OBJS1}
+all: ${OBJS}
 
 clean:
 	-rm -f *.o
