@@ -67,7 +67,7 @@ simulation
 
    Simulation class
       1) updateData() -- corrected the delta time being passed to updateBgPlayerList()
-	     when more than one background threat is being used (bug fix)
+	     when more than one background thread is being used (bug fix)
 
 --------------------------------------------------------------------------------
 vehicle
