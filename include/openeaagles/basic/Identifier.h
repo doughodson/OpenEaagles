@@ -10,20 +10,26 @@ namespace Eaagles {
 namespace Basic {
 
 //------------------------------------------------------------------------------
-// Class:   Identifier
-// Base class:  Object -> String -> Identifier
+// Class: Identifier
+// Description: A single unquoted word (usually from the input file), which
+//              can contain upper and lower case letters, numbers, special
+//              characters, but not spaces.
+//
+// Note: When setting the identifier, any spaces will be replaced
+//       with underscores.
 //
 // Form name: Identifier
-// Description: Identifier.
-//              A single unquoted word, which starts with a letter.
-//              Usually from the input file.
 //------------------------------------------------------------------------------
 class Identifier : public String {
     DECLARE_SUBCLASS(Identifier,String)
 
 public:
-    Identifier(const char* string) : String(string)  { STANDARD_CONSTRUCTOR() }
-    Identifier()                   : String()        { STANDARD_CONSTRUCTOR() }
+    Identifier(const char* string);
+    Identifier();
+
+    // Eaagles::Basic::String functions
+    virtual void setStr(const char* string);        // Sets us to a copy of 'string'
+    virtual void catStr(const char* string);        // Append a copy of 'string' to our text string
 };
 
 } // End Basic namespace
