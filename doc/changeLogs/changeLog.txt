@@ -16,9 +16,17 @@ general
    the functionality of the codebase, it merely reduces the number of emitted
    warnings (reorder warning) displayed by recent versions of gcc.
 
+-- added an OE version number to "openeaagles/config.h"
+
 --------------------------------------------------------------------------------
 basic
 
+   Identifier class
+      1) Modified to insure a single word (i.e., no spaces); any spaces are
+      replaced with underscores.
+
+   String class
+      1) Changed the manipulator (set) functions to virtual
 
 --------------------------------------------------------------------------------
 basicGL
@@ -67,7 +75,7 @@ simulation
 
    Simulation class
       1) updateData() -- corrected the delta time being passed to updateBgPlayerList()
-	     when more than one background thread is being used (bug fix)
+         when more than one background thread is being used (bug fix)
 
 --------------------------------------------------------------------------------
 vehicle

@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Class:	String
+// Class: String
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_Basic_String_H__
 #define __Eaagles_Basic_String_H__
@@ -10,10 +10,8 @@ namespace Eaagles {
 namespace Basic {
 
 //------------------------------------------------------------------------------
-// Class:	String
-// Base class:	Object -> String
-//
-// Description:	Character string class
+// Class: String
+// Description: Character string class
 //
 //      Assignment Operators:     =
 //      Concatenation Operators:  +  +=
@@ -21,55 +19,6 @@ namespace Basic {
 //      iostream Operations:      <<  >>
 //
 // Form name: String
-//
-// Public member functions:
-//
-//    char getChar(const unsigned int index) const;         
-//    Gets a specific character
-//
-//    void setChar(const unsigned int index, const char c); 
-//    Sets a specific character
-//
-//    size_t len() const;                     
-//    Returns the length of this string.
-//
-//    bool isEmpty() const;                   
-//    Returns true if this string is empty (null).
-//
-//    void empty();                           
-//    Empty (null) this string.
-//
-//    const char* getString() const;          
-//    Returns a pointer to the text string.
-//
-//    char* getCopyString() const;            
-//    Returns a copy of the text string.
-//
-//    void setStr(const char* string);        
-//    Sets us to a copy of 'string'
-//
-//    void catStr(const char* string);        
-//    Append a copy of 'string' to our text string
-//
-//    bool isNumber() const;    
-//    Returns true if this string is the ascii form of a number
-//
-//    double getNumber() const;
-//    Returns the value of this string converted to a number or zero if isNumber() is false.
-//
-//    bool isInteger() const;
-//    Returns true if this string is the ascii form of an integer number.
-//
-//   int getInteger() const;
-//   Returns the value of this string converted to an integer value or zero if isInteger() is false.
-//
-//   void setString(const String& str, const size_t w, const Justify j = NONE);
-//   Set to the first 'w' characters of 'str'.
-//   If the length of 'str' is less than 'w', than justify as 'j'.
-//
-//   bool getSubString(String& subStr, const unsigned int startIndex, const size_t numChars) const;
-//   Returns in "subStr" a "numChars" character sub-string of 'this' string that starts a "startIndex" 
-//
 //------------------------------------------------------------------------------
 class String : public Object {
     DECLARE_SUBCLASS(String,Object)
@@ -88,18 +37,17 @@ public:
     String& operator=(const char*);
     void operator+=(const char*);
 
-    char getChar(const unsigned int index) const;         // Gets a specific character
-    void setChar(const unsigned int index, const char c); // Sets a specific character
+    size_t len() const;                            // Returns the length of this string.
+    bool isEmpty() const;                          // Returns true if this string is empty (null).
 
-    size_t len() const;                     // Returns the length of this string.
-    bool isEmpty() const;                   // Returns true if this string is empty (null).
-    void empty();                           // Empty (null) this string.
+    const char* getString() const;                 // Returns a pointer to the text string.
+    char* getCopyString() const;                   // Returns a copy of the text string.
+    char getChar(const unsigned int index) const;  // Gets a specific character
 
-    const char* getString() const;          // Returns a pointer to the text string.
-    char* getCopyString() const;            // Returns a copy of the text string.
-
-    void setStr(const char* string);        // Sets us to a copy of 'string'
-    void catStr(const char* string);        // Append a copy of 'string' to our text string
+    virtual void empty();                          // Empty (null) this string.
+    virtual void setStr(const char* string);       // Sets us to a copy of 'string'
+    virtual void catStr(const char* string);       // Append a copy of 'string' to our text string
+    virtual void setChar(const unsigned int index, const char c);    // Sets a specific character
 
     // Returns true if this string is the ascii form of a number
     bool isNumber() const;
@@ -113,12 +61,12 @@ public:
     // Returns the value of this string converted to an integer value or zero if isInteger() is false.
     int getInteger() const;
 
-    // Set to the first 'w' characters of 'str'.
-    // If the length of 'str' is less than 'w', than justify as 'j'.
-    void setString(const String& str, const size_t w, const Justify j = NONE);
-
     // Returns in "subStr" a "numChars" character sub-string of 'this' string that starts a "startIndex" 
     bool getSubString(String& subStr, const unsigned int startIndex, const size_t numChars) const;
+
+    // Set to the first 'w' characters of 'str'.
+    // If the length of 'str' is less than 'w', than justify as 'j'.
+    virtual void setString(const String& str, const size_t w, const Justify j = NONE);
 
 private:
     char* str;      // the character string
@@ -149,6 +97,7 @@ inline String operator+(const String& s1, const char* s2)
     return String(s1, s2);
 }
 
+
 //------------------------------------------------------------------------------
 // conversion function -- returns a const pointer to the text string.
 //------------------------------------------------------------------------------
@@ -162,6 +111,7 @@ inline String::operator const char*() const
     return str;
 }
 
+
 //------------------------------------------------------------------------------
 // len() -- returns the length of this string.
 //------------------------------------------------------------------------------
@@ -170,21 +120,13 @@ inline size_t String::len() const
     return n;
 }
 
+
 //------------------------------------------------------------------------------
 // isEmpty() -- returns true if this is an empty string.
 //------------------------------------------------------------------------------
 inline bool String::isEmpty() const
 {
     return len() == 0;
-}
-
-//------------------------------------------------------------------------------
-// empty() -- make this an empty string
-//------------------------------------------------------------------------------
-inline void String::empty()
-{
-   if (str != 0) str[0] = 0;
-   n = 0;
 }
 
 
@@ -199,15 +141,6 @@ inline char String::getChar(const unsigned int index) const
       return '\0';
 }
 
-
-//------------------------------------------------------------------------------
-// setChar() -- returns a character from the string.
-//------------------------------------------------------------------------------
-inline void String::setChar(const unsigned int index, const char c)
-{
-   if (index <= len())
-      str[index] = c;
-}
 
 //------------------------------------------------------------------------------
 // getString() -- returns a const pointer of the string

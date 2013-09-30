@@ -3,12 +3,17 @@
 //
 // Edit as needed, or redefine using compiler command line options
 //
-// Used within C++ source code and input files
+// Used within C++ source code and EDL/EPP files
 // Important: only define C pre-processor directives in this file
 //
 // =============================================================================
 #ifndef __Eaagles_Config_H__
 #define __Eaagles_Config_H__
+
+// OpenEaagles release version number (13.07)
+#ifndef OE_VERSION
+#define OE_VERSION                              1307
+#endif
 
 // Max number of 'registered' classes (see Object.h)
 #ifndef EAAGLES_CONFIG_MAX_CLASSES
