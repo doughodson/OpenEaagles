@@ -56,7 +56,7 @@ GlfwDisplay::GlfwDisplay()
 //------------------------------------------------------------------------------
 void GlfwDisplay::initData()
 {
-	myWin = 0;
+   myWin = 0;
    // default to no version hints (which means we will get the latest OpenGL WITH the
    // compatibility loaded)
    glMajorVersion = 0;
@@ -83,7 +83,7 @@ void GlfwDisplay::copyData(const GlfwDisplay& org, const bool cc)
 //------------------------------------------------------------------------------
 void GlfwDisplay::deleteData()
 {
-	myWin = 0;
+   myWin = 0;
 }
 
 // ---
@@ -95,14 +95,6 @@ bool GlfwDisplay::isWindowShutdown() const
 	else return true;
 }
 
-//-----------------------------------------------------------------------------
-// Reset the GlfwDisplay
-//-----------------------------------------------------------------------------
-void GlfwDisplay::reset()
-{
-   BaseClass::reset();
-}
-
 // ---
 // cursorMove() - called when the mouse move callback is instantiated on this object
 // ---
@@ -111,15 +103,8 @@ void GlfwDisplay::cursorMove(const double x, const double y)
    // get the last reported mouse button from the window, to see if it is a   
    // passive or active motion
    int mouseButton = glfwGetMouseButton(myWin, GLFW_MOUSE_BUTTON_LEFT);
-   if (mouseButton == GLFW_PRESS) {
-      mouseMotionEvent((int)x, (int)y);
-      //std::cout << "MOUSE MOTION EVENT = " << x << ", " << y << std::endl;
-   }
-   else {
-      passiveMotionEvent((int)x, (int)y);
-      //std::cout << "PASSIVE MOTION EVENT = " << x << ", " << y << std::endl;
-   }
-
+   if (mouseButton == GLFW_PRESS) ((int)x, (int)y);
+   else passiveMotionEvent((int)x, (int)y);
 }
 
 //-----------------------------------------------------------------------------
@@ -149,7 +134,7 @@ int GlfwDisplay::createWindow()
       }
    }
 
-	myWin = glfwCreateWindow(vpWidth, vpHeight, getName(), NULL, NULL);
+	 myWin = glfwCreateWindow(vpWidth, vpHeight, getName(), NULL, NULL);
 
    if (myWin == 0) {
       std::cout << "GlfwDisplay::createWindow() - gflwCreateWIndow FAILED!" << std::endl;
@@ -178,8 +163,8 @@ int GlfwDisplay::createWindow()
 		   std::cerr << "ERROR: " << glewGetErrorString(glewInitResult) << std::endl;
 		   exit(EXIT_FAILURE);
 	   }
-      else {
-         if (glMajorVersion > 0) {
+     else {
+       if (glMajorVersion > 0) {
             std::cout << "INFO: OpenGL version requested = " << glMajorVersion << "." << glMinorVersion << std::endl;
          }
          std::cout << "INFO: Actual OpenGL Version: " << glGetString(GL_VERSION) << std::endl;
@@ -192,7 +177,7 @@ int GlfwDisplay::createWindow()
       GLuint myArrayID = 0;
       glGenVertexArrays(1, &myArrayID);
       setVertexArrayID(myArrayID);
-	   glBindVertexArray(myArrayID);
+	    glBindVertexArray(myArrayID);
 
       // create our shaders - this HAS to be done after our context is setup.
       Eaagles::Basic::PairStream* myShaders = getShaders();
