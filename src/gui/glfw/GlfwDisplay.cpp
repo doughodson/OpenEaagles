@@ -19,6 +19,10 @@ namespace Glfw {
 IMPLEMENT_SUBCLASS(GlfwDisplay,"GlfwDisplay")
 EMPTY_SERIALIZER(GlfwDisplay)
 
+GLFWwindow* GlfwDisplay::wins[GlfwDisplay::MAX_DISPLAYS];               // List of window structures
+GlfwDisplay* GlfwDisplay::displayList[GlfwDisplay::MAX_DISPLAYS];       // Display List
+int GlfwDisplay::numGlfwDisplays = 0;                                   // Number of  registered GlfwDisplays
+
 //------------------------------------------------------------------------------
 // Slot table for this form type
 //------------------------------------------------------------------------------
@@ -151,6 +155,17 @@ int GlfwDisplay::createWindow()
       std::cout << "GlfwDisplay::createWindow() - gflwCreateWIndow FAILED!" << std::endl;
    }
    else {
+      // set our callbacks
+      glfwSetWindowSizeCallback(myWin, reshapeCB);
+      glfwSetCursorPosCallback(myWin, cursorMoveCB);
+      glfwSetMouseButtonCallback(myWin, mouseButtonCB);
+      glfwSetKeyCallback(myWin, keyCB);
+      glfwSetWindowCloseCallback(myWin, closeEventCB);
+      glfwSetWindowFocusCallback(myWin, focusCB);
+      // Register the display
+      registerGlfwDisplay(myWin, this);
+
+      // set our position
       glfwSetWindowPos(myWin, vpX, vpY);
    
       // set our context quickly, then initialize glew
@@ -169,12 +184,9 @@ int GlfwDisplay::createWindow()
          }
          std::cout << "INFO: Actual OpenGL Version: " << glGetString(GL_VERSION) << std::endl;
          if (compatibility) std::cout << "INFO: compatibility extensions supported." << std::endl;
-
-
-
       }
 
-
+      // OpenGL 2 implementation
 #ifdef OE_SHADERS
       // generate and create our vertex array 
       GLuint myArrayID = 0;
@@ -202,6 +214,53 @@ int GlfwDisplay::createWindow()
    loadTextures();
 
    return 0;
+}
+
+
+//-----------------------------------------------------------------------------
+// registerGlfwDisplay() --
+//   register (add to list) this GlfwDisplay & GLUT window ID
+//-----------------------------------------------------------------------------
+bool GlfwDisplay::registerGlfwDisplay(GLFWwindow* win, GlfwDisplay* const display)
+{
+   bool ok = false;
+   if (numGlfwDisplays < MAX_DISPLAYS) {
+      wins[numGlfwDisplays] = win;
+      displayList[numGlfwDisplays] = display;
+      numGlfwDisplays++;
+      ok = true;
+   }
+   return ok;
+}
+
+//-----------------------------------------------------------------------------
+// unregisterGlfwDisplay() --
+//   unregister (remove from list) this GLUT window ID
+//-----------------------------------------------------------------------------
+bool GlfwDisplay::unregisterGlfwDisplay(GLFWwindow* win)
+{
+   bool ok = false;
+   for (int i = 0; !ok && i < numGlfwDisplays; i++) {
+      if (win == wins[i]) {
+         wins[i] = 0;
+         ok = true;
+      }
+   }
+   return ok;
+}
+
+//-----------------------------------------------------------------------------
+// findRegisteredGlfwDisplay() -- Find the GlfwDisplay for this GLUT window ID
+//-----------------------------------------------------------------------------
+GlfwDisplay* GlfwDisplay::findRegisteredGlfwDisplay(GLFWwindow* win)
+{
+   GlfwDisplay* found = 0;
+   for (int i = 0; found == 0 && i < numGlfwDisplays; i++) {
+      if (win == wins[i]) {
+         found = displayList[i];
+      }
+   }
+   return found;
 }
 
 //------------------------------------------------------------------------------
@@ -253,38 +312,6 @@ bool GlfwDisplay::setSlotCompatibility(const Eaagles::Basic::Number* const x)
    return ok;
 }
 
-
-//-----------------------------------------------------------------------------
-// specialEvent()
-//-----------------------------------------------------------------------------
-void GlfwDisplay::specialEvent(const int key)
-{
-   //if (key == GLUT_KEY_LEFT)           keyboardEvent(BACK_SPACE);
-   //else if (key == GLUT_KEY_RIGHT)     keyboardEvent(FORWARD_SPACE);
-   //else if (key == GLUT_KEY_UP)        keyboardEvent(UP_ARROW_KEY);
-   //else if (key == GLUT_KEY_DOWN)      keyboardEvent(DOWN_ARROW_KEY);
-   //else if (key == GLUT_KEY_PAGE_UP)   keyboardEvent(PAGE_UP_KEY);
-   //else if (key == GLUT_KEY_PAGE_DOWN) keyboardEvent(PAGE_DOWN_KEY);
-   //else if (key == GLUT_KEY_HOME)      keyboardEvent(HOME_KEY);
-   //else if (key == GLUT_KEY_END)       keyboardEvent(END_KEY);
-   //else if (key == GLUT_KEY_INSERT)    keyboardEvent(INSERT_KEY);
-   //else if (key == GLUT_KEY_F1)        keyboardEvent(F1_KEY);
-   //else if (key == GLUT_KEY_F2)        keyboardEvent(F2_KEY);
-   //else if (key == GLUT_KEY_F3)        keyboardEvent(F3_KEY);
-   //else if (key == GLUT_KEY_F4)        keyboardEvent(F4_KEY);
-   //else if (key == GLUT_KEY_F5)        keyboardEvent(F5_KEY);
-   //else if (key == GLUT_KEY_F6)        keyboardEvent(F6_KEY);
-   //else if (key == GLUT_KEY_F7)        keyboardEvent(F7_KEY);
-   //else if (key == GLUT_KEY_F8)        keyboardEvent(F8_KEY);
-   //else if (key == GLUT_KEY_F9)        keyboardEvent(F9_KEY);
-   //else if (key == GLUT_KEY_F10)       keyboardEvent(F10_KEY);
-   //else if (key == GLUT_KEY_F11)       keyboardEvent(F11_KEY);
-   //else if (key == GLUT_KEY_F12)       keyboardEvent(F12_KEY);
-   //else { /* ignore */ }
-}
-
-
-
 //-----------------------------------------------------------------------------
 // Mouse motion (with either key pressed) event handler
 //-----------------------------------------------------------------------------
@@ -303,7 +330,47 @@ void GlfwDisplay::passiveMotionEvent(const int x, const int y)
    // do another pick, just to make sure
    //setMouse(x,y);
 }
+// ---
+// CALLBACKS
+// ---
+void GlfwDisplay::reshapeCB(GLFWwindow* win, const int w, const int h)
+{
+   GlfwDisplay* myDisplay = findRegisteredGlfwDisplay(win);
+   if (myDisplay != 0) myDisplay->reshapeIt(w, h);   
+}
 
+// handles when the cursor moves... the user can check the status
+// of the mouse buttons to determine passive or active motion
+void GlfwDisplay::cursorMoveCB(GLFWwindow* win, const double x, const double y)
+{
+   GlfwDisplay* myDisplay = findRegisteredGlfwDisplay(win);
+   if (myDisplay != 0) myDisplay->cursorMove(x, y);
+}
+// mouse button callbacks - wheel is not called here
+void GlfwDisplay::mouseButtonCB(GLFWwindow* win, int button, int state, int mods)
+{
+   GlfwDisplay* myDisplay = findRegisteredGlfwDisplay(win);
+   if (myDisplay != 0) myDisplay->mouseButtonEvent(button, state, mods);
+}
+// keyboard callback, with action (GL_PRESS, RELEASE) and any modification keys
+// (CTRL, SHIFT)
+void GlfwDisplay::keyCB(GLFWwindow* win, int key, int scanCode, int action, int mods)
+{
+   GlfwDisplay* myDisplay = findRegisteredGlfwDisplay(win);
+   if (myDisplay != 0) myDisplay->keyboardEvent(key, action, mods);
+}
+// called when the given window closes.
+void GlfwDisplay::closeEventCB(GLFWwindow* win)
+{
+   GlfwDisplay* myDisplay = findRegisteredGlfwDisplay(win);
+   if (myDisplay != 0) myDisplay->closeEvent();
+}
+// called when a window gains or loses focus (GL_TRUE for gain focus)
+void GlfwDisplay::focusCB(GLFWwindow* win, int state)
+{
+   GlfwDisplay* myDisplay = findRegisteredGlfwDisplay(win);
+   if (myDisplay != 0) myDisplay->focus(state);
+}
 
 // ---
 // mouse button handler
