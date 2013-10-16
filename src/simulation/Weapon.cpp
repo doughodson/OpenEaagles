@@ -697,7 +697,7 @@ Weapon* Weapon::release()
             END_RECORD_DATA_SAMPLE()
 
             // TabLogger is deprecated
-            if (isMessageEnabled(MSG_DATA) && getAnyEventLogger() != 0) {
+            if (getAnyEventLogger() != 0) {
                // type 1 for "launch", last two fields effectively null
                TabLogger::TabLogEvent* evt = new TabLogger::LogWeaponActivity(1, getLaunchVehicle(), 0, 0, 0, 0.0);
                getAnyEventLogger()->log(evt);
@@ -716,7 +716,7 @@ Weapon* Weapon::release()
             END_RECORD_DATA_SAMPLE()
 
             // TabLogger is deprecated
-            if (isMessageEnabled(MSG_DATA) && getAnyEventLogger() != 0) {
+            if (getAnyEventLogger() != 0) {
                // type 4 for "hung store"
                TabLogger::TabLogEvent* evt = new TabLogger::LogWeaponActivity(4, getLaunchVehicle(), this, 0, 0, 0.0);
                getAnyEventLogger()->log(evt);
