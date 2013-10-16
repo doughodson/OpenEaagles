@@ -37,6 +37,7 @@ void Translator::copyData(const Translator& org, const bool)
 
     myXPos = org.myXPos;
     myYPos = org.myYPos;
+    myZPos = org.myZPos;
 }
 
 //------------------------------------------------------------------------------
