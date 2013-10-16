@@ -149,29 +149,29 @@ void RfSensor::deleteData()
 //------------------------------------------------------------------------------
 void RfSensor::reset()
 {
-   BaseClass::reset();
-    
-   // ---
-   // Do we need to find the track manager?
-   // ---
-   if (getTrackManager() == 0 && getTrackManagerName() != 0 && getOwnship() != 0) {
-      // We have a name of the track manager, but not the track manager itself
-      const char* name = *getTrackManagerName();
-      
-      // Get the named track manager from the onboard computer
-      OnboardComputer* obc = getOwnship()->getOnboardComputer();
-      if (obc != 0) {
-         setTrackManager( obc->getTrackManagerByName(name) );
-      }
-      
-      if (getTrackManager() == 0) {
-         // The assigned track manager was not found!
-         std::cerr << "RfSensor::reset() ERROR -- track manager, " << name << ", was not found!" << std::endl;
-         setTrackManagerName(0);
-      }
-   }
+    BaseClass::reset();
 
-   scanning = false;
+    // ---
+    // Do we need to find the track manager?
+    // ---
+    if (getTrackManager() == 0 && getTrackManagerName() != 0 && getOwnship() != 0) {
+        // We have a name of the track manager, but not the track manager itself
+        const char* name = *getTrackManagerName();
+
+        // Get the named track manager from the onboard computer
+        OnboardComputer* obc = getOwnship()->getOnboardComputer();
+        if (obc != 0) {
+            setTrackManager( obc->getTrackManagerByName(name) );
+        }
+
+        if (getTrackManager() == 0) {
+            // The assigned track manager was not found!
+            std::cerr << "RfSensor::reset() ERROR -- track manager, " << name << ", was not found!" << std::endl;
+            setTrackManagerName(0);
+        }
+    }
+
+    scanning = false;
     scanBar = 0; 
     if (nRanges > 0 && ranges != 0) {
         rngIdx = 1;
@@ -223,11 +223,11 @@ void RfSensor::updateData(const LCreal dt)
 
     BaseClass::updateData(dt);
 }
-    
+
 //------------------------------------------------------------------------------
 // Access (get) functions
 //------------------------------------------------------------------------------
-    
+
 // Returns the PRF (hertz)
 LCreal RfSensor::getPRF() const
 {
@@ -399,14 +399,14 @@ bool RfSensor::setRange(const LCreal v)
 //------------------------------------------------------------------------------
 bool RfSensor::setSlotModeStream (Basic::PairStream* const obj)
 {
-     if (obj != 0) {
+    if (obj != 0) {
         // When a PairStream (i.e., more than one, a list) of pages
         if (modes != 0) modes->unref();                               
         modes = obj;
         modes->ref();
-        
-     }
-     return processModes();
+
+    }
+    return processModes();
 }
 
 //------------------------------------------------------------------------------
@@ -415,10 +415,10 @@ bool RfSensor::setSlotModeStream (Basic::PairStream* const obj)
 bool RfSensor::setSlotModeSingle(RfSensor* const obj)
 {
     if (modes != 0) modes->unref();
-    
+
     modes = new Basic::PairStream();
     modes->put( new Basic::Pair("1",obj) );
-       
+
     return processModes();
 }
 
@@ -740,6 +740,59 @@ std::ostream& RfSensor::serialize(std::ostream& sout, const int i, const bool sl
         sout << "( " << getFormName() << std::endl;
         j = 4;
     }
+
+    //"trackManagerName", // Name of the requested Track Manager (Basic::String)
+    if (tmName != 0) {
+        indent(sout,i+j);
+        sout << "trackManagerName: " << tmName->getString() << std::endl;
+    }
+
+    //"modes",            // Submodes
+    if (modes != 0) {
+        indent(sout,i+j);
+        sout << "modes: {" << std::endl;
+        modes->serialize(sout,i+j+4,slotsOnly);
+        indent(sout,i+j);
+        sout << "}" << std::endl;
+    }
+
+    //"ranges",           // Sensor ranges (nm) [vector]
+    if (nRanges > 0) {
+        indent(sout,i+j);
+        sout << "ranges:    [ ";
+        for (int ii = 0; ii < nRanges; ii++) {
+            sout << ranges[ii] << " ";
+        }
+        sout << " ] " << std::endl;
+    }
+
+    //"initRangeIdx",     // initial range index [ 1 ... nRanges ]
+    indent(sout,i+j);
+    sout << "initRangeIdx: " << initRngIdx << std::endl;
+
+    //"PRF",              // Radar Pulse Repetition  (Frequency) or (Number: hertz)
+    indent(sout,i+j);
+    sout << "PRF: ( Hertz " << prf << " ) " << std::endl;
+
+    //"pulseWidth",       // Pulse Width             (Time) or (Number: Seconds)
+    indent(sout,i+j);
+    sout << "pulseWidth: ( Seconds " << pulseWidth << " ) " << std::endl;
+
+    //"beamWidth",        // Beam Width              (Angle) or (Number: Radian)
+    indent(sout,i+j);
+    sout << "beamWidth: ( Degrees " << beamWidth*Basic::Angle::R2DCC << " ) " << std::endl;
+
+    //"syncXmitWithScan", // Flag: If true, transmitter on is sync'd with the antenna scan (default: false)
+    indent(sout,i+j);
+    if (syncXmitWithScan) {
+        sout << "syncXmitWithScan: TRUE " << std::endl;
+    }
+    else {
+        sout << "syncXmitWithScan: FALSE " << std::endl;
+    }
+
+    indent(sout,i+j);
+    sout << "//--- inherits RfSystem ------ "  << std::endl;
 
     BaseClass::serialize(sout,i+j,true);
 

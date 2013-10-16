@@ -885,6 +885,9 @@ std::ostream& Field::serialize(std::ostream& sout, const int i, const bool slots
     }
     sout << std::endl;
 
+    indent(sout,i+j);
+    sout << "startCharPos: " << startCP << std::endl;
+
     if ( !slotsOnly ) {
         indent(sout,i);
         sout << ")" << std::endl;

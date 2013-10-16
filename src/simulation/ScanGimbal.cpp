@@ -1065,8 +1065,37 @@ std::ostream& ScanGimbal::serialize(std::ostream& sout, const int i, const bool 
       j = 4;
     }
 
+    // scanMode:  Sets the type of scan we desire (manual, horizontal, vertical, conical, circular, pseudorandom)
+    indent(sout,i+j);
+    if (scanMode == MANUAL_SCAN) 
+        sout << "scanMode: manual           //  scan type  (manual, horizontal, vertical, conical, circular, pseudorandom)"  << std::endl;
+    else if (scanMode == HORIZONTAL_BAR_SCAN) 
+        sout << "scanMode: horizontal       //  scan type  (manual, horizontal, vertical, conical, circular, pseudorandom)"  << std::endl;
+    else if (scanMode == VERTICAL_BAR_SCAN) 
+        sout << "scanMode: vertical         //  scan type  (manual, horizontal, vertical, conical, circular, pseudorandom)"  << std::endl;
+    else if (scanMode == CONICAL_SCAN) 
+        sout << "scanMode: conical          //  scan type  (manual, horizontal, vertical, conical, circular, pseudorandom)"  << std::endl;
+    else if (scanMode == CIRCULAR_SCAN) 
+        sout << "scanMode: circular         //  scan type  (manual, horizontal, vertical, conical, circular, pseudorandom)"  << std::endl;
+    else if (scanMode == PSEUDO_RANDOM_SCAN) 
+        sout << "scanMode: pseudorandom     //  scan type  (manual, horizontal, vertical, conical, circular, pseudorandom)"  << std::endl;
+    else if (scanMode == SPIRAL_SCAN) 
+        sout << "scanMode: spiral           //  scan type  (manual, horizontal, vertical, conical, circular, pseudorandom)"  << std::endl;
 
-    // searchVolume:  Scan width & height
+    // leftToRightScan:  True to scan from left to right (else right to left) (Default: true) (up to down or down to up)
+    indent(sout,i+j);
+    if (leftToRightScan) {
+        sout << "leftToRightScan: true        //  Right to left or left to right; up to down or down to up" << std::endl;
+    }
+    else {
+        sout << "leftToRightScan: false       //  Right to left or left to right; up to down or down to up" << std::endl;
+    }
+
+    // scanWidth:  Width of the scan (for search volume, or if specified manually)
+    indent(sout,i+j);
+    sout << "scanWidth: " << scanWidth << std::endl;
+
+    // searchVolume:  Scan width & height; sets HORIZONTAL_BAR_SCAN mode (radians)
     indent(sout,i+j);
     sout << "searchVolume: [ ";
     sout << scanWidth << " " << scanHeight;
@@ -1077,6 +1106,36 @@ std::ostream& ScanGimbal::serialize(std::ostream& sout, const int i, const bool 
     sout << "reference: [ ";
     sout << getRefAzimuth() << " " << getRefElevation();
     sout << " ]" << std::endl;
+
+    // barSpacing: Scan bar width spacing (radians)
+    indent(sout,i+j);
+    sout << "barSpacing: " << barSpacing << std::endl;
+
+    // numBars:  Sets the number of bars
+    indent(sout,i+j);
+    sout << "numBars: " << numBars << std::endl;
+
+    // revolutionsPerSec:  Revolutions per second for conical and circular scans (spiral scan too)
+    indent(sout,i+j);
+    sout << "revolutionsPerSec: " << getRevPerSec() << std::endl;
+
+    // scanRadius: Radius of the circle we are using for conical scans (radians or Basic::Angle} (spiral scan too)
+    indent(sout,i+j);
+    sout << "scanRadius: " << scanRadius << " \t\t // WARNING or INFO:This is really a beam width or half beam width, not a radius!" << std::endl;
+
+    // pseudoRandomPattern: Pseudo Random pattern vertices (2D - az and el) 
+    if (nprv > 0) {
+        indent(sout,i+j);
+        sout << "pseudoRandomPattern: { ";
+        for (unsigned int ii = 0; ii < nprv; ii++) {
+            sout << " [ " << prScanVertices[ii].x() << " " << prScanVertices[ii].y() << " ]" << std::endl;
+        }
+        sout << "} " << std::endl;
+    }
+
+    // maxRevolutions: Spiral Scan - Maximum number of revolutions 
+    indent(sout,i+j);
+    sout << "maxRevolutions: " << maxNumRevs << std::endl;
 
 
     BaseClass::serialize(sout,i+j,true);
