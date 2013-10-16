@@ -229,7 +229,9 @@ unsigned int Tdb::processPlayers(Basic::PairStream* const players)
    const Basic::Terrain* terrain = 0;
    if (gimbal->isTerrainOccultingEnabled()) {
       const Simulation* const sim = ownship->getSimulation();
-      terrain = sim->getTerrain();
+      if (sim != 0) {
+         terrain = sim->getTerrain();
+      }
    }
 
    // ---
@@ -450,7 +452,7 @@ unsigned int Tdb::computeBoresightData()
    if (gimbal == 0 || ownship == 0 || numTgts == 0) return 0;
 
    // If 'ownHdgOnly' is true (default) then only the ownship's heading angle is used,
-   // which earth stabilzies the gimbal in roll and pitch, otherwise the full
+   // which earth stabilizes the gimbal in roll and pitch, otherwise the full
    // ownship rotational matrix is used.
    const bool ownHdgOnly = gimbal->isUsingHeadingOnly();
 
