@@ -508,6 +508,9 @@ void Simulation::reset()
          t -= (cMin * 60);
          // Compute simualted second past the minute
          cSec = t;
+
+         // Set simulated uSec set to 0; using pc microseconds is meainingless and introduces randomness where none is desired.
+         simTvUSec = 0;
       }
    }
 
@@ -737,14 +740,12 @@ void Simulation::updateTC(const LCreal dt)
    // ---
    {
       unsigned long newPcTvUSec = pcTvUSec + (unsigned long)(dt * 1000000.0 + 0.5);
-      if (newPcTvUSec >= 1000000) {
+      // while loop is used instead of if statement in case dt > 1 sec (i.e., tcRate < 1 Hz)
+      while (newPcTvUSec >= 1000000) {
          newPcTvUSec = newPcTvUSec - 1000000;
          pcTvSec++;
-         pcTvUSec = newPcTvUSec;
       }
-      else {
-         pcTvUSec = newPcTvUSec;
-      }
+      pcTvUSec = newPcTvUSec;
       //getTime(&pcTvSec, &pcTvUSec); /* test */
 
       unsigned int cYear = 0;
@@ -778,14 +779,13 @@ void Simulation::updateTC(const LCreal dt)
       if (simTimeSlaved) deltaTime = dt;
 
       unsigned long newSimTvUSec = simTvUSec + (unsigned long)(deltaTime * 1000000.0 + 0.5);
-      if (newSimTvUSec >= 1000000) {
+      // while loop is used instead of if statement in case dt > 1 sec (i.e., tcRate < 1 Hz)
+      while (newSimTvUSec >= 1000000) {
          newSimTvUSec = newSimTvUSec - 1000000;
          simTvSec++;
-         simTvUSec = newSimTvUSec;
       }
-      else {
-         simTvUSec = newSimTvUSec;
-      }
+
+      simTvUSec = newSimTvUSec;
    }
 
    // compute the simulated time of day
