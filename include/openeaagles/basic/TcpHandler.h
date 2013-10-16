@@ -26,8 +26,10 @@ public:
    bool hasBeenTerminated()          { return connectionTerminated; }
 
    // NetHandler interface
-   virtual bool sendData(const char* const packet, const int size);
-   virtual unsigned int recvData(char* const packet, const int maxSize);
+   virtual bool sendData(const char* const packet, const int size); // Deprecated. Use sendTcpData.
+   virtual int sendTcpData(const char* const packet, const int size);
+   virtual unsigned int recvData(char* const packet, const int maxSize); // Deprecated. Use recvTcpData.
+   virtual int recvTcpData(char* const packet, const int maxSize);
    virtual bool isConnected() const;
    virtual bool closeConnection();
 

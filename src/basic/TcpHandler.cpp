@@ -177,9 +177,17 @@ bool TcpHandler::closeConnection()
     return BaseClass::closeConnection() && success;
 }
 
-// -------------------------------------------------------------
-// sendData() -- Send data to our connected TCP socket
-// -------------------------------------------------------------
+// -----------------------------------------------------------------------------
+// Function: sendData()
+// Description: Send data to our connected TCP socket. If a socket error occurs,
+//     the connection is marked as disconnected and terminated. The user is
+//     responsible for actually closing the connection.
+// Return: true: 0 through 'size' bytes are transmitted;
+//     false: network error occurred.
+//
+// ** NOTE: Deprecated. Will be removed by 01 May 2014. Use 'sendTcpData'
+//     instead.
+// -----------------------------------------------------------------------------
 bool TcpHandler::sendData(const char* const packet, const int size)
 {
    if (!isConnected() || hasBeenTerminated()) return false;
@@ -216,9 +224,62 @@ bool TcpHandler::sendData(const char* const packet, const int size)
     return true;
 }
 
-// -------------------------------------------------------------
-// recvData() -- Receive data from our connected TCP socket
-// -------------------------------------------------------------
+// -----------------------------------------------------------------------------
+// Function: sendTcpData()
+// Description: Send data to our connected TCP socket. If a socket error occurs,
+//     the connection is marked as disconnected and terminated. The user is
+//     responsible for actually closing the connection.
+// Return: 0 through 'size': number of bytes sent;
+//     -1: error value.
+//
+// ** NOTE: Use this function instead of 'sendData'.
+// -----------------------------------------------------------------------------
+int TcpHandler::sendTcpData(const char* const packet, const int size)
+{
+    if (!isConnected() || hasBeenTerminated()) return false;
+
+#if defined(WIN32)
+    if (tcpSocket == INVALID_SOCKET) return false;
+#else
+    if (tcpSocket < 0) return false;
+#endif
+
+    int result = send(tcpSocket, packet, size, 0);
+
+#if defined(WIN32)
+    if (result == SOCKET_ERROR) {
+        connected = false;
+        connectionTerminated = true;
+        int err = WSAGetLastError();
+        if (isMessageEnabled(MSG_ERROR)) {
+            std::cerr << "sendTcpData(): sendto error: " << err << " hex=0x" << std::hex << err << std::dec << std::endl;
+        }
+    }
+#else
+    if (result < 0) {
+        connected = false;
+        connectionTerminated = true;
+        perror("sendto error");
+        if (isMessageEnabled(MSG_ERROR)) {
+            std::cerr << "sendTcpData(): sendto error: result: " << result << std::endl;
+        }
+    }
+#endif
+    return result;
+}
+
+// -----------------------------------------------------------------------------
+// Function: recvData()
+// Description: Receive data from our connected TCP socket. If 'recvfrom'
+//     returns 0, the connection is marked as disconnected and terminated. If it
+//     returns -1, the error code is written to the prompt.  The user is
+//     responsible for actually closing the connection.
+// Return: 0: remote machine closed connection or if an error occurred;
+//     1 through 'maxSize': number of bytes received.
+//
+// ** NOTE: Deprecated. Will be removed by 01 May 2014. Use 'recvTcpData'
+//     instead.
+// -----------------------------------------------------------------------------
 unsigned int TcpHandler::recvData(char* const packet, const int maxSize)
 {
    if (!isConnected() || hasBeenTerminated()) return 0;
@@ -232,9 +293,79 @@ unsigned int TcpHandler::recvData(char* const packet, const int maxSize)
    // Try to receive the data
    unsigned int n = 0;
    int result = recvfrom(tcpSocket, packet, maxSize, 0, 0, 0);
-   if (result > 0) n = (unsigned int) result;
+   if (result > 0) {
+       n = (unsigned int) result;
+   }
+   else if (result == 0) {
+       connected = false;
+       connectionTerminated = true;
+   }
+
+#if defined(WIN32)
+   else if (result == SOCKET_ERROR) {
+       int err = WSAGetLastError();
+       if (isMessageEnabled(MSG_ERROR)) {
+           std::cerr << "recvData(): receivefrom error: " << err << " hex=0x" << std::hex << err << std::dec << std::endl;
+       }
+   }
+#else
+   else if (result < 0) {
+       perror("receivefrom error");
+       if (isMessageEnabled(MSG_ERROR)) {
+           std::cerr << "recvData(): receivefrom error: result: " << result << std::endl;
+       }
+   }
+#endif
 
    return n;
+}
+
+// -----------------------------------------------------------------------------
+// Function: recvTcpData()
+// Description: Receive data from our connected TCP socket. If 'recvfrom'
+//     returns 0, the connection is marked as disconnected and terminated. If it
+//     returns -1, the error code is written to the prompt.  The user is
+//     responsible for actually closing the connection.
+// Return: 0: connection closed by remote machine;
+//     1 through 'maxSize': number of bytes received;
+//     -1: error value.
+//
+// ** NOTE: Use this function instead of 'recvData'.
+// -----------------------------------------------------------------------------
+int TcpHandler::recvTcpData(char* const packet, const int maxSize)
+{
+   if (!isConnected() || hasBeenTerminated()) return 0;
+
+#if defined(WIN32)
+    if (tcpSocket == INVALID_SOCKET) return 0;
+#else
+    if (tcpSocket < 0) return 0;
+#endif
+
+   // Try to receive the data
+   int result = recvfrom(tcpSocket, packet, maxSize, 0, 0, 0);
+   if (result == 0) {
+       connected = false;
+       connectionTerminated = true;
+   }
+
+#if defined(WIN32)
+   else if (result == SOCKET_ERROR) {
+       int err = WSAGetLastError();
+       if (isMessageEnabled(MSG_ERROR)) {
+           std::cerr << "recvTcpData(): receivefrom error: " << err << " hex=0x" << std::hex << err << std::dec << std::endl;
+       }
+   }
+#else
+   else if (result < 0) {
+       perror("receivefrom error");
+       if (isMessageEnabled(MSG_ERROR)) {
+           std::cerr << "recvTcpData(): receivefrom error: result: " << result << std::endl;
+       }
+   }
+#endif
+
+   return result;
 }
 
 //==============================================================================
