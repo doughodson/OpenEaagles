@@ -127,6 +127,7 @@ void Weapon::initData()
    initialWpn = 0;
 
    tgtPos.set(0,0,0);
+   tgtVel.set(0,0,0);
    tgtPosValid = false;
    tgtPlayer = 0;
    tgtTrack = 0;
@@ -180,6 +181,7 @@ void Weapon::copyData(const Weapon& org, const bool cc)
    setLaunchVehicle(0);
 
    tgtPos = org.tgtPos;
+   tgtVel = org.tgtVel;
    tgtPosValid = org.tgtPosValid;
    posTrkEnb = org.posTrkEnb;
    maxTgtRng = org.maxTgtRng;
@@ -807,12 +809,15 @@ void Weapon::positionTracking()
         // When we have track manager -- follow the first track
         if (tgtTrack != 0) {
             setTargetPosition(tgtTrack->getPosition());
+            setTargetVelocity(tgtTrack->getVelocity());
         }
 
         else if (tgtPlayer != 0) {
             // No sensor, but we have a target player -- fake it and just follow the target
             osg::Vec3 p0 = getPosition();
+            osg::Vec3d vel = getVelocity();
             setTargetPosition(tgtPlayer->getPosition() - p0);
+            setTargetVelocity(tgtPlayer->getVelocity() - vel);
         }
         
         else {
@@ -1175,6 +1180,13 @@ bool Weapon::setTargetPosition(const osg::Vec3& newTgtPos)
     tgtPos = newTgtPos;
     setTargetPositionValid(true);
     return true;
+}
+
+// setTargetPosition() -- set target velocity
+bool Weapon::setTargetVelocity(const osg::Vec3d& newTgtVel)
+{
+   tgtVel = newTgtVel;
+   return true;
 }
 
 // Sets the target position valid flag
