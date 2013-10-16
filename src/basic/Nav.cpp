@@ -9,11 +9,11 @@ namespace Basic {
 //------------------------------------------------------------------------------
 // Navigation constants
 //------------------------------------------------------------------------------
-const double Nav::WGS84_A  = 6378137.0;                  // WGS-84 semi major axis (Meters)
-const double Nav::WGS84_B  = 6356752.314;                // WGS-84 semi minor axis (Meters)
-const double Nav::WGS84_F  = (WGS84_A-WGS84_B)/WGS84_A;  // WGS-84 flattening
-const double Nav::WGS84_E2 = WGS84_F*(2.0 - WGS84_F);    // Eccentricity Squared
-const double Nav::ERADM    = Nav::WGS84_A;               // Equatorial radius (WGS84 major axis) (Meters)
+const double Nav::WGS84_A  = EarthModel::wgs84.getA();   // WGS-84 semi major axis (Meters)
+const double Nav::WGS84_B  = EarthModel::wgs84.getB();   // WGS-84 semi minor axis (Meters)
+const double Nav::WGS84_F  = EarthModel::wgs84.getF();   // WGS-84 flattening
+const double Nav::WGS84_E2 = EarthModel::wgs84.getE2();  // Eccentricity Squared
+const double Nav::ERADM    = EarthModel::wgs84.getA();   // Equatorial radius (WGS84 major axis) (Meters)
 const double Nav::ERAD     = Nav::ERADM/1852.0;          // Equatorial radius (WGS84 major axis) (NM)
 const double Nav::ERAD60   = 3437.74677078;              // Earth Radius (NM) (1 Arc Deg = 60 NM)
 
