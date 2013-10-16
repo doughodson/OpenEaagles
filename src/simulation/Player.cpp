@@ -2049,40 +2049,47 @@ bool Player::setPosition(const double n, const double e, const bool slaved)
 // Position relative to the simulation ref point (meters)
 bool Player::setPosition(const double n, const double e, const double d, const bool slaved)
 {
-   Simulation* s = getSimulation();
-   const double maxRefRange = s->getMaxRefRange();
-   const Basic::EarthModel* em = s->getEarthModel();
-
    // Set the position vector relative to sim ref pt
    posVecNED.set(n, e, d);
 
-   // The position vector is valid if the gaming area range is umlimited (zero) or
-   // if the vector's length is less than or equal the max range.
-   posVecValid = (maxRefRange <= 0.0) || (posVecNED.length2() <= (maxRefRange*maxRefRange));
+   Simulation* s = getSimulation();
+   if (s != 0) {
+      const double maxRefRange = s->getMaxRefRange();
+      const Basic::EarthModel* em = s->getEarthModel();
 
-   // Compute & set the lat/lon/alt position
-   double refLat = s->getRefLatitude();
-   double refLon = s->getRefLongitude();
-   double cosRlat = s->getCosRefLat();
-   if (s->isGamingAreaUsingEarthModel()) {
-      double sinRlat = s->getSinRefLat();
-      Basic::Nav::convertPosVec2llE(refLat, refLon, sinRlat, cosRlat, posVecNED, &latitude, &longitude, &altitude, em);
+      // The position vector is valid if the gaming area range is umlimited (zero) or
+      // if the vector's length is less than or equal the max range.
+      posVecValid = (maxRefRange <= 0.0) || (posVecNED.length2() <= (maxRefRange*maxRefRange));
+
+      // Compute & set the lat/lon/alt position
+      double refLat = s->getRefLatitude();
+      double refLon = s->getRefLongitude();
+      double cosRlat = s->getCosRefLat();
+      if (s->isGamingAreaUsingEarthModel()) {
+         double sinRlat = s->getSinRefLat();
+         Basic::Nav::convertPosVec2llE(refLat, refLon, sinRlat, cosRlat, posVecNED, &latitude, &longitude, &altitude, em);
+      }
+      else {
+         Basic::Nav::convertPosVec2llS(refLat, refLon, cosRlat, posVecNED, &latitude, &longitude, &altitude);
+      }
+
+      // compute the world matrix
+      Basic::Nav::computeWorldMatrix(latitude, longitude, &wm);
+
+      // compute body/ECEF directional cosines
+      rmW2B = rm * wm;
+
+      // Compute & set the  geocentric position
+      double lla[3] = { latitude, longitude, altitude };
+      double ecef[3] = { 0, 0, 0 };
+      Basic::Nav::convertGeod2Ecef(lla, ecef, em);
+      posVecECEF.set( ecef[0], ecef[1], ecef[2] );
    }
    else {
-      Basic::Nav::convertPosVec2llS(refLat, refLon, cosRlat, posVecNED, &latitude, &longitude, &altitude);
+      if (isMessageEnabled(MSG_WARNING)) {
+         std::cerr << "Warning: no simulation found by Player::setPosition().  Only (x,y,z) values will be set!" << std::endl;
+      }
    }
-
-   // compute the world matrix
-   Basic::Nav::computeWorldMatrix(latitude, longitude, &wm);
-
-   // compute body/ECEF directional cosines
-   rmW2B = rm * wm;
-
-   // Compute & set the  geocentric position
-   double lla[3] = { latitude, longitude, altitude };
-   double ecef[3] = { 0, 0, 0 };
-   Basic::Nav::convertGeod2Ecef(lla, ecef, em);
-   posVecECEF.set( ecef[0], ecef[1], ecef[2] );
 
    altSlaved = slaved;
    posSlaved = slaved;
