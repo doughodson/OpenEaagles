@@ -157,6 +157,7 @@ protected:
     virtual void processTrackList(const LCreal dt);     // Process the reports into a track list
 
 private:
+    void initData();
     bool setPositionGate(const Basic::Number* const num);
     bool setRangeGate(const Basic::Number* const num);
     bool setVelocityGate(const Basic::Number* const num);
@@ -165,6 +166,11 @@ private:
     LCreal              posGate;            // Position Gate (meters)
     LCreal              rngGate;            // Range Gate (meters)
     LCreal              velGate;            // Velocity Gate (m/s)
+
+    // Used by processTrackList()
+   bool** report2TrackMatch;                 // Report/Track matched matrix
+   unsigned int* reportNumMatches;           // Number of matches for each report
+   unsigned int* trackNumMatches;            // Number of matcher for each track
 };
 
 //==============================================================================
@@ -182,6 +188,14 @@ public:
     GmtiTrkMgr();
 protected:
     virtual void processTrackList(const LCreal dt);     // Process the reports into a track list
+
+private:
+    void initData();
+
+    // Used by processTrackList()
+   bool** report2TrackMatch;                 // Report/Track matched matrix
+   unsigned int* reportNumMatches;           // Number of matches for each report
+   unsigned int* trackNumMatches;            // Number of matcher for each track
 };
 
 //------------------------------------------------------------------------------
@@ -199,6 +213,14 @@ public:
     RwrTrkMgr();
 protected:
     virtual void processTrackList(const LCreal dt);     // Process the reports into a track list
+
+private:
+    void initData();
+
+    // Used by processTrackList()
+   bool** report2TrackMatch;                 // Report/Track matched matrix
+   unsigned int* reportNumMatches;           // Number of matches for each report
+   unsigned int* trackNumMatches;            // Number of matcher for each track
 };
 
 } // End Simulation namespace

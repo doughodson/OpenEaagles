@@ -81,6 +81,9 @@ simulation
       1) added slots to set the stack size of the default time critical,
       network and background threads.
 
+   TrackManager class
+      1) converted several local member function arrays to class member arrays.
+
 --------------------------------------------------------------------------------
 vehicle
 
