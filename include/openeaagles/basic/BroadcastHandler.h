@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // Class: BroadcastHandler
 //------------------------------------------------------------------------------
-#ifndef	__Eaagles_Basic_BroadcastHandler_H__
+#ifndef __Eaagles_Basic_BroadcastHandler_H__
 #define __Eaagles_Basic_BroadcastHandler_H__
 
 #include "openeaagles/basic/NetHandler.h"
@@ -57,3 +57,4 @@ private:
 } // End Eaagles namespace
 
 #endif
+

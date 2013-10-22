@@ -2,7 +2,7 @@
 #if defined(WIN32)
     #include <sys/types.h>
     #include <winsock2.h>
-    #define	bzero(a,b)		ZeroMemory( a, b )
+    #define bzero(a,b)    ZeroMemory( a, b )
     typedef int Len;
 #else
     #include <arpa/inet.h>
@@ -29,7 +29,7 @@ namespace Basic {
 IMPLEMENT_SUBCLASS(UdpHandler,"UdpHandler")
 
 BEGIN_SLOTTABLE(UdpHandler)
-    	"ipAddress",    // 1) String containing the IP address in
+    "ipAddress",        // 1) String containing the IP address in
                         //    the Internet standard "." (dotted) notation.
 END_SLOTTABLE(UdpHandler)
 
@@ -88,7 +88,7 @@ bool UdpHandler::init()
     if (!ok) {
         return false;
     }
-        
+
     // ---
     // Find our network address
     // ---
@@ -242,3 +242,4 @@ std::ostream& UdpHandler::serialize(std::ostream& sout, const int i, const bool 
 
 } // End Basic namespace
 } // End Eaagles namespace
+

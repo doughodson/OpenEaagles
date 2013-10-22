@@ -3,7 +3,7 @@
     #include <sys/types.h>
     #include <Winsock2.h>
     #include <WS2tcpip.h>
-    #define  bzero(a,b) ZeroMemory(a,b)
+    #define  bzero(a,b)   ZeroMemory(a,b)
 #else
     #include <arpa/inet.h>
     #include <sys/fcntl.h>
@@ -434,7 +434,7 @@ std::ostream& TcpClient::serialize(std::ostream& sout, const int i, const bool s
 IMPLEMENT_SUBCLASS(TcpServerMulti,"TcpServerMulti")
 
 BEGIN_SLOTTABLE(TcpServerMulti)
-    	"backlog",    // 1) Listen socket's max backlog (default: 1)
+    "backlog",    // 1) Listen socket's max backlog (default: 1)
 END_SLOTTABLE(TcpServerMulti)
 
 // Map slot table to handles 
@@ -716,3 +716,4 @@ bool TcpServerSingle::acceptConnection()
 
 } // End Basic namespace
 } // End Eaagles namespace
+

@@ -2,8 +2,7 @@
 #if defined(WIN32)
     #include <sys/types.h>
     #include <Winsock2.h>
-    #define	bzero(a,b)		ZeroMemory( a, b )
-
+    #define bzero(a,b) ZeroMemory( a, b )
 #else
     #include <arpa/inet.h>
     #include <sys/fcntl.h>
@@ -14,7 +13,7 @@
     static const int SOCKET_ERROR = -1;
 #endif
 
-#include "openeaagles/basic/BcHandler.h"
+#include "openeaagles/basic/BroadcastHandler.h"
 
 #include "openeaagles/basic/Pair.h"
 #include "openeaagles/basic/PairStream.h"
@@ -29,7 +28,7 @@ namespace Basic {
 IMPLEMENT_SUBCLASS(BroadcastHandler,"BroadcastHandler")
 
 BEGIN_SLOTTABLE(BroadcastHandler)
-    	"networkMask",       // 1) Host Net Mask   "255.255.255.255"
+    "networkMask",       // 1) Host Net Mask   "255.255.255.255"
 END_SLOTTABLE(BroadcastHandler)
 
 // Map slot table to handles 
@@ -244,3 +243,4 @@ std::ostream& BroadcastHandler::serialize(std::ostream& sout, const int i, const
 
 } // End Basic namespace
 } // End Eaagles namespace
+

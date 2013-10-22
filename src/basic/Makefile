@@ -6,7 +6,7 @@ LIB = $(OPENEAAGLES_LIB_DIR)/liboeBasic.a
 OBJS =  \
 	$(LIB)(support.o) \
 	$(LIB)(basicFF.o) \
-	$(LIB)(BcHandler.o) \
+	$(LIB)(BroadcastHandler.o) \
 	$(LIB)(Boolean.o) \
 	$(LIB)(Cie.o) \
 	$(LIB)(Cmy.o) \
@@ -33,7 +33,7 @@ OBJS =  \
 	$(LIB)(Locus.o) \
 	$(LIB)(Logger.o) \
 	$(LIB)(Matrix.o) \
-	$(LIB)(McHandler.o) \
+	$(LIB)(MulticastHandler.o) \
 	$(LIB)(Nav.o) \
 	$(LIB)(NavDR.o) \
 	$(LIB)(NetHandler.o) \

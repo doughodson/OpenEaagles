@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // Class: NetHandler
 //------------------------------------------------------------------------------
-#ifndef	__Eaagles_Basic_NetHandler_H__
+#ifndef __Eaagles_Basic_NetHandler_H__
 #define __Eaagles_Basic_NetHandler_H__
 
 #include "openeaagles/basic/Object.h"
@@ -408,3 +408,4 @@ inline void NetHandler::fromNetOrder(double* const vout, const double vin)
 } // End Eaagles namespace
 
 #endif
+

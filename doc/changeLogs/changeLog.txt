@@ -21,9 +21,15 @@ general
 --------------------------------------------------------------------------------
 basic
 
+   BroadcastHandler class
+      1) Filename renamed from BcHandler to BroadcastHandler to match classname
+
    Identifier class
       1) Modified to insure a single word (i.e., no spaces); any spaces are
       replaced with underscores.
+
+   MulticastHandler class
+      1) Filename renamed from McHandler to MulticastHandler to match classname
 
    String class
       1) Changed the manipulator (set) functions to virtual

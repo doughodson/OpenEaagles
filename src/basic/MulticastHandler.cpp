@@ -3,7 +3,7 @@
     #include <sys/types.h>
     #include <Winsock2.h>
     #include <WS2tcpip.h>
-    #define	bzero(a,b)		ZeroMemory( a, b )
+    #define bzero(a,b)    ZeroMemory( a, b )
 #else
     #include <arpa/inet.h>
     #include <sys/fcntl.h>
@@ -14,7 +14,7 @@
     static const int SOCKET_ERROR = -1;
 #endif
 
-#include "openeaagles/basic/McHandler.h"
+#include "openeaagles/basic/MulticastHandler.h"
 #include "openeaagles/basic/Number.h"
 #include "openeaagles/basic/Pair.h"
 #include "openeaagles/basic/PairStream.h"
@@ -31,14 +31,14 @@ IMPLEMENT_SUBCLASS(MulticastHandler,"MulticastHandler")
 
 BEGIN_SLOTTABLE(MulticastHandler)
 
-    	"multicastGroup",       // 1) String containing the multicast IP address in
+    "multicastGroup",           // 1) String containing the multicast IP address in
                                 //    the Internet standard "." (dotted) notation.
                                 //    IP multicast addresses range from 224.0.0.0 
                                 //    through 239.255.255.255 (e.g., "225.0.0.251")
-                                
-        "ttl",                  // 2) Multicast Time-To-Live (TTL) value; default: 1
-        
-        "loopback",             // 3) Multicast Loopback flag; default: 1 (on)
+
+    "ttl",                      // 2) Multicast Time-To-Live (TTL) value; default: 1
+
+    "loopback",                 // 3) Multicast Loopback flag; default: 1 (on)
 
 END_SLOTTABLE(MulticastHandler)
 
@@ -349,3 +349,4 @@ std::ostream& MulticastHandler::serialize(std::ostream& sout, const int i, const
 
 } // End Basic namespace
 } // End Eaagles namespace
+

@@ -21,8 +21,8 @@
 #include "openeaagles/basic/Operators.h"
 
 // Net handlers
-#include "openeaagles/basic/BcHandler.h"
-#include "openeaagles/basic/McHandler.h"
+#include "openeaagles/basic/BroadcastHandler.h"
+#include "openeaagles/basic/MulticastHandler.h"
 #include "openeaagles/basic/UdpHandler.h"
 #include "openeaagles/basic/TcpHandler.h"
 
