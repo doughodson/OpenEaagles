@@ -104,7 +104,7 @@ bool TcpHandler::init()
 #else
     if (socketNum < 0) {
 #endif
-        perror("init(): socket error");
+        perror("TcpHandler::init(): socket error");
         success = false;
     }
 
@@ -136,7 +136,7 @@ bool TcpHandler::bindSocket()
        }
 
       if (bind(socketNum, (const struct sockaddr *) &addr, sizeof(addr)) == SOCKET_ERROR) {
-        perror("bindSocket(): bind error");
+        perror("TcpHandler::bindSocket(): bind error");
         return false;
       }
 
@@ -170,7 +170,7 @@ bool TcpHandler::closeConnection()
     if( shutdown(tcpSocket, SHUT_RDWR) < 0)
 #endif
     {
-        perror("close(): error! \n");
+        perror("TcpHandler::closeConnection(): error! \n");
         success = false;
     }
 
@@ -196,22 +196,22 @@ bool TcpHandler::sendData(const char* const packet, const int size)
     int result = send(tcpSocket, packet, size, 0);
 
 #if defined(WIN32)
-   if (result == SOCKET_ERROR) {
+    if (result == SOCKET_ERROR) {
         connected = false;
         connectionTerminated = true;
         int err = WSAGetLastError();
         if (isMessageEnabled(MSG_ERROR)) {
-           std::cerr << "sendData(): sendto error: " << err << " hex=0x" << std::hex << err << std::dec << std::endl;
+           std::cerr << "TcpHandler::sendData(): sendto error: " << err << " hex=0x" << std::hex << err << std::dec << std::endl;
         }
         return false;
     }
 #else
-   if (result < 0) {
+    if (result < 0) {
         connected = false;
         connectionTerminated = true;
-        perror("sendto error");
+        perror("TcpHandler::sendData(): sendto error msg");
         if (isMessageEnabled(MSG_ERROR)) {
-            std::cerr << "sendData(): sendto error: result: " << result << std::endl;
+            std::cerr << "TcpHandler::sendData(): sendto error result: " << result << std::endl;
         }
         return false;
     }
@@ -497,7 +497,7 @@ bool TcpServerMulti::listenForConnections()
     if( listen(socketNum, getBacklog()) < 0)
 #endif
     {
-        perror("listen(): error! \n");
+        perror("TcpHandler::listenForConnections(): error! \n");
         return false;
     }
     return true;
@@ -654,7 +654,7 @@ bool TcpServerSingle::listenForConnections()
     if( listen(socketNum, 1) < 0)
 #endif
     {
-        perror("listen(): error! \n");
+        perror("TcpServerSingle::listenForConnections(): error! \n");
         return false;
     }
     return true;

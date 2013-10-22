@@ -221,7 +221,7 @@ bool NetHandler::bindSocket()
         if( setsockopt(socketNum, SOL_SOCKET, SO_REUSEADDR, &optval, optlen) == SOCKET_ERROR)
 #endif
         {
-            perror("init(): error setsockopt(SO_REUSEADDR)\n");
+            perror("NetHandler::bindSocket(): error setsockopt(SO_REUSEADDR)\n");
             return false;
         }
     }
@@ -248,7 +248,7 @@ bool NetHandler::setSendBuffSize()
    if( setsockopt(socketNum, SOL_SOCKET, SO_SNDBUF, (void*) &optval, optlen) == SOCKET_ERROR)
 #endif
    {
-      perror("setSendBuffSize(): error setting the send buffer size\n");
+      perror("NetHandler::setSendBuffSize(): error setting the send buffer size\n");
       return false;
    }
    return true;
@@ -273,7 +273,7 @@ bool NetHandler::setRecvBuffSize()
    if( setsockopt(socketNum, SOL_SOCKET, SO_RCVBUF, (void*) &optval, optlen) == SOCKET_ERROR)
 #endif
    {
-      perror("setRecvBuffSize(): error setting the receive buffer size\n");
+      perror("NetHandler::setRecvBuffSize(): error setting the receive buffer size\n");
       return false;
    }
    return true;
@@ -348,8 +348,6 @@ bool NetHandler::checkByteOrder()
     return (n1 == n2);     // No difference? Then we already in network order!
 }
 
-
-
 // -------------------------------------------------------------
 // setBlocked() -- Sets blocked I/O mode
 // -------------------------------------------------------------
@@ -363,13 +361,13 @@ bool NetHandler::setBlocked(const LcSocket s)
 #if defined(WIN32)
     unsigned long zz = false;
     if (ioctlsocket(sock, FIONBIO, &zz ) == SOCKET_ERROR) {
-        perror("setBlocked");
+        perror("NetHandler::setBlocked()");
         return false;
     }
 #else
     const int zz = 0;
     if (ioctl(sock, FIONBIO, &zz ) == SOCKET_ERROR) {
-        perror("setBlocked");
+        perror("NetHandler::setBlocked()");
         return false;
     }
 #endif
@@ -390,13 +388,13 @@ bool NetHandler::setNoWait(const LcSocket s)
 #if defined(WIN32)
     unsigned long zz = true;
     if (ioctlsocket(sock, FIONBIO, &zz ) == SOCKET_ERROR) {
-        perror("setNoWait");
+        perror("NetHandler::setNoWait()");
         return false;
     }
 #else
     const int zz = 1;
     if (ioctl(sock, FIONBIO, &zz ) == SOCKET_ERROR) {
-        perror("setNoWait");
+        perror("NetHandler::setNoWait()");
         return false;
     }
 #endif
@@ -441,15 +439,19 @@ bool NetHandler::sendData(const char* const packet, const int size)
     Len addrlen = sizeof(addr);
     int result = sendto(socketNum, packet, size, 0, (const struct sockaddr *) &addr, addrlen);
 #if defined(WIN32)
-   if (result == SOCKET_ERROR) {
+    if (result == SOCKET_ERROR) {
         int err = WSAGetLastError();
-        std::cerr << "sendData(): sendto error: " << err << " hex=0x" << std::hex << err << std::dec << std::endl;
+        if (isMessageEnabled(MSG_ERROR)) {
+            std::cerr << "NetHandler::sendData(): sendto error: " << err << " hex=0x" << std::hex << err << std::dec << std::endl;
+        }
         return false;
     }
 #else
-   if (result == SOCKET_ERROR) {
-        perror("sendto error");
-        std::cerr << "sendData(): sendto error: result: " << result << std::endl;
+    if (result == SOCKET_ERROR) {
+        perror("NetHandler::sendData(): sendto error msg");
+        if (isMessageEnabled(MSG_ERROR)) {
+            std::cerr << "NetHandler::sendData(): sendto error result: " << result << std::endl;
+        }
         return false;
     }
 #endif

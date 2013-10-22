@@ -124,7 +124,7 @@ bool MulticastHandler::init()
 #else
     if (socketNum < 0) {
 #endif
-        perror("init(): socket error");
+        perror("MulticastHandler::init(): socket error");
         return false;
     }
 
@@ -140,7 +140,7 @@ bool MulticastHandler::init()
         if( setsockopt(socketNum, IPPROTO_IP, IP_MULTICAST_LOOP, &optval, sizeof(optval)) < 0)
 #endif
         {
-            perror("init(): error setsockopt(IP_MULTICAST_LOOP)\n");
+            perror("MulticastHandler::init(): error setsockopt(IP_MULTICAST_LOOP)\n");
             return false;
         }
     }
@@ -157,7 +157,7 @@ bool MulticastHandler::init()
         if( setsockopt(socketNum, IPPROTO_IP, IP_MULTICAST_TTL, &optval, sizeof(optval)) < 0)
 #endif
         {
-            perror("init(): error setsockopt(IP_MULTICAST_TTL)\n");
+            perror("MulticastHandler::init(): error setsockopt(IP_MULTICAST_TTL)\n");
             return false;
         }
     }
@@ -196,7 +196,7 @@ bool MulticastHandler::bindSocket()
        }
 
       if (bind(socketNum, (const struct sockaddr *) &addr, sizeof(addr)) == SOCKET_ERROR) {
-        perror("bindSocket(): bind error");
+        perror("MulticastHandler::bindSocket(): bind error");
         return false;
       }
 
@@ -244,7 +244,7 @@ bool MulticastHandler::joinTheGroup()
 #else
    if (result < 0) {
 #endif
-     perror("setsockopt mreq");
+     perror("MulticastHandler::joinTheGroup(): setsockopt mreq");
      return false;
    }
 

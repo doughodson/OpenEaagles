@@ -21,6 +21,8 @@ general
 --------------------------------------------------------------------------------
 basic
 
+-- updated error messages in several of the network handlers.
+
    BroadcastHandler class
       1) Filename renamed from BcHandler to BroadcastHandler to match classname
 

@@ -119,7 +119,7 @@ bool BroadcastHandler::init()
 
     return true;
 }
-    
+
 // -------------------------------------------------------------
 // bindSocket() -
 // -------------------------------------------------------------
@@ -179,7 +179,7 @@ bool BroadcastHandler::bindSocket()
        std::printf("bind() port = %08x\n", addr.sin_port);
 
        if (bind(socketNum, (const struct sockaddr *) &addr, sizeof(addr)) == SOCKET_ERROR) {
-         perror("bindSocket(): bind error");
+         perror("BroadcastHandler::bindSocket(): bind error");
          return false;
        }
 
