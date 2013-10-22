@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="12.1">
-  <zoom_level>10</zoom_level>
+  <zoom_level>9</zoom_level>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>80</x>
-      <y>80</y>
-      <w>680</w>
-      <h>200</h>
+      <x>153</x>
+      <y>36</y>
+      <w>639</w>
+      <h>180</h>
     </coordinates>
     <panel_attributes>NetworkHandler
 --
@@ -26,10 +26,10 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>80</x>
-      <y>350</y>
-      <w>210</w>
-      <h>90</h>
+      <x>261</x>
+      <y>243</y>
+      <w>531</w>
+      <h>81</h>
     </coordinates>
     <panel_attributes>UdpHandler
 --
@@ -43,21 +43,21 @@ the Internet standard "." (dotted) notation.
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>190</x>
-      <y>250</y>
-      <w>50</w>
-      <h>120</h>
+      <x>207</x>
+      <y>189</y>
+      <w>71</w>
+      <h>107</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>30;30;30;100</additional_attributes>
+    <additional_attributes>27;27;27;90;54;90</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>310</x>
-      <y>350</y>
-      <w>150</w>
-      <h>90</h>
+      <x>261</x>
+      <y>342</y>
+      <w>135</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>TcpHandler
 --
@@ -67,10 +67,10 @@ the Internet standard "." (dotted) notation.
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>170</x>
-      <y>530</y>
-      <w>140</w>
-      <h>90</h>
+      <x>342</x>
+      <y>450</y>
+      <w>450</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>TcpClient
 --
@@ -82,32 +82,32 @@ the Internet standard "." (dotted) notation.
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>350</x>
-      <y>250</y>
-      <w>50</w>
-      <h>120</h>
+      <x>189</x>
+      <y>189</y>
+      <w>89</w>
+      <h>197</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>30;30;30;100</additional_attributes>
+    <additional_attributes>27;27;27;180;72;180</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>210</x>
-      <y>410</y>
-      <w>150</w>
-      <h>140</h>
+      <x>279</x>
+      <y>369</y>
+      <w>80</w>
+      <h>134</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>130;30;30;120</additional_attributes>
+    <additional_attributes>27;27;27;117;63;117</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>340</x>
-      <y>530</y>
-      <w>140</w>
-      <h>90</h>
+      <x>342</x>
+      <y>612</y>
+      <w>450</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>TcpServerMulti
 --
@@ -117,21 +117,21 @@ the Internet standard "." (dotted) notation.
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>360</x>
-      <y>410</y>
-      <w>60</w>
-      <h>140</h>
+      <x>243</x>
+      <y>369</y>
+      <w>116</w>
+      <h>287</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>30;30;40;120</additional_attributes>
+    <additional_attributes>27;27;27;270;99;270</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>500</x>
-      <y>530</y>
-      <w>140</w>
-      <h>90</h>
+      <x>342</x>
+      <y>540</y>
+      <w>450</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>TcpServerSingle
 --
@@ -141,21 +141,21 @@ the Internet standard "." (dotted) notation.
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>400</x>
-      <y>410</y>
-      <w>180</w>
-      <h>140</h>
+      <x>261</x>
+      <y>369</y>
+      <w>98</w>
+      <h>215</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>30;30;160;120</additional_attributes>
+    <additional_attributes>27;27;27;198;81;198</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>480</x>
-      <y>350</y>
-      <w>130</w>
-      <h>90</h>
+      <x>261</x>
+      <y>684</y>
+      <w>531</w>
+      <h>81</h>
     </coordinates>
     <panel_attributes>BroadcastHandler
 --
@@ -166,21 +166,21 @@ the Internet standard "." (dotted) notation.
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>510</x>
-      <y>250</y>
-      <w>50</w>
-      <h>120</h>
+      <x>171</x>
+      <y>189</y>
+      <w>107</w>
+      <h>539</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>30;30;30;100</additional_attributes>
+    <additional_attributes>27;27;27;522;90;522</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>630</x>
-      <y>350</y>
-      <w>130</w>
-      <h>90</h>
+      <x>261</x>
+      <y>783</y>
+      <w>531</w>
+      <h>126</h>
     </coordinates>
     <panel_attributes>MulticastHandler
 --
@@ -198,12 +198,12 @@ the Internet standard "." (dotted) notation.
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>660</x>
-      <y>260</y>
-      <w>50</w>
-      <h>110</h>
+      <x>153</x>
+      <y>189</y>
+      <w>125</w>
+      <h>638</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>30;30;30;90</additional_attributes>
+    <additional_attributes>27;27;27;621;108;621</additional_attributes>
   </element>
 </diagram>
