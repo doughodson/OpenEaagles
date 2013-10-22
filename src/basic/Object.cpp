@@ -334,7 +334,7 @@ Object::_Static::_Static(
       const char* const cn,
       const char* const fn,
       const SlotTable* const p,
-	  const _Static* const bs
+      const _Static* const bs
    ) : classIndex(ci), cname(cn), fname(fn), st(p), bstatic(bs), count(0), mc(0), tc(0)
 {
 }
@@ -349,8 +349,9 @@ Object::_Static& Object::_Static::operator=(const _Static&)
 //------------------------------------------------------------------------------ 
 const Object::_Static* Object::getStatic() 
 { 
-	return &_static; 
+    return &_static; 
 }
 
 } // End Basic namespace
 } // End Eaagles namespace
+
