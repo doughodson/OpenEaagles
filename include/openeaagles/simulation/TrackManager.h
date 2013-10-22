@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Classes:	TrackManager, AirTrkMgr, GmtiGrkMgr, RwrGrkMgr
+// Classes: TrackManager, AirTrkMgr, GmtiGrkMgr, RwrGrkMgr
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_Simulation_TrackManager_H__
 #define __Eaagles_Simulation_TrackManager_H__
@@ -133,7 +133,6 @@ private:
 
 //==============================================================================
 // Class: AirTrkMgr
-// Base class:	Basic::Object -> Basic::Component -> TrackManager -> System -> AirTrkMgr
 //
 // Description: Track Manager for A/A modes (e.g., TWS, ACM, SST)
 // Form name: AirTrkMgr
@@ -157,6 +156,7 @@ protected:
     virtual void processTrackList(const LCreal dt);     // Process the reports into a track list
 
 private:
+    void initData();
     bool setPositionGate(const Basic::Number* const num);
     bool setRangeGate(const Basic::Number* const num);
     bool setVelocityGate(const Basic::Number* const num);
@@ -165,11 +165,15 @@ private:
     LCreal              posGate;            // Position Gate (meters)
     LCreal              rngGate;            // Range Gate (meters)
     LCreal              velGate;            // Velocity Gate (m/s)
+
+    // Used by processTrackList()
+   bool** report2TrackMatch;                 // Report/Track matched matrix
+   unsigned int* reportNumMatches;           // Number of matches for each report
+   unsigned int* trackNumMatches;            // Number of matcher for each track
 };
 
 //==============================================================================
 // Class: GmtiTrkMgr
-// Base class:	Basic::Object -> Basic::Component -> TrackManager -> System -> GmtiTrkMgr
 //
 // Description: Very simple Ground Moving Target Indication (GMTI) Track Manager
 // Form name: GmtiTrkMgr
@@ -182,11 +186,18 @@ public:
     GmtiTrkMgr();
 protected:
     virtual void processTrackList(const LCreal dt);     // Process the reports into a track list
+
+private:
+    void initData();
+
+    // Used by processTrackList()
+   bool** report2TrackMatch;                 // Report/Track matched matrix
+   unsigned int* reportNumMatches;           // Number of matches for each report
+   unsigned int* trackNumMatches;            // Number of matcher for each track
 };
 
-//------------------------------------------------------------------------------
+//==============================================================================
 // Class: RwrTrkMgr
-// Base class:	Basic::Object -> Basic::Component -> TrackManager -> System -> RwrTrkMgr
 //
 // Description: RADAR Warning Receiver (RWR) Track Manager
 // Form name: RwrTrkMgr
@@ -199,6 +210,14 @@ public:
     RwrTrkMgr();
 protected:
     virtual void processTrackList(const LCreal dt);     // Process the reports into a track list
+
+private:
+    void initData();
+
+    // Used by processTrackList()
+   bool** report2TrackMatch;                 // Report/Track matched matrix
+   unsigned int* reportNumMatches;           // Number of matches for each report
+   unsigned int* trackNumMatches;            // Number of matcher for each track
 };
 
 } // End Simulation namespace

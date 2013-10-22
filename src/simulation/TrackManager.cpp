@@ -1,3 +1,7 @@
+//------------------------------------------------------------------------------
+// Classes: TrackManager, AirTrkMgr, GmtiGrkMgr, RwrGrkMgr
+//------------------------------------------------------------------------------
+
 #include "openeaagles/simulation/TrackManager.h"
 
 #include "openeaagles/simulation/Emission.h"
@@ -19,7 +23,7 @@ namespace Eaagles {
 namespace Simulation {
 
 //==============================================================================
-// Class:	TrackManager
+// Class: TrackManager
 //==============================================================================
 IMPLEMENT_PARTIAL_SUBCLASS(TrackManager,"TrackManager")
 
@@ -60,7 +64,7 @@ TrackManager::TrackManager(const TrackManager& org) :
    trkListLock(0), emQueue(MAX_TRKS), snQueue(MAX_TRKS), queueLock(0)
 {
    STANDARD_CONSTRUCTOR()
-      copyData(org,true);
+   copyData(org,true);
 }
 
 TrackManager::~TrackManager()
@@ -621,45 +625,74 @@ std::ostream& TrackManager::serialize(std::ostream& sout, const int i, const boo
 //==============================================================================
 IMPLEMENT_SUBCLASS(AirTrkMgr,"AirTrkMgr")
 
-   // Slot table
-   BEGIN_SLOTTABLE(AirTrkMgr)
+// Slot table
+BEGIN_SLOTTABLE(AirTrkMgr)
    "positionGate",     // 1: Position Gate (meters)
    "rangeGate",        // 2: Range Gate (meters)
    "velocityGate",     // 3: Velocity Gate (m/s)
-   END_SLOTTABLE(AirTrkMgr)
+END_SLOTTABLE(AirTrkMgr)
 
-   //  Map slot table
-   BEGIN_SLOT_MAP(AirTrkMgr)
-      ON_SLOT(1, setPositionGate, Basic::Number)
-      ON_SLOT(2, setRangeGate, Basic::Number)
-      ON_SLOT(3, setVelocityGate, Basic::Number)
-   END_SLOT_MAP()
+//  Map slot table
+BEGIN_SLOT_MAP(AirTrkMgr)
+   ON_SLOT(1, setPositionGate, Basic::Number)
+   ON_SLOT(2, setRangeGate, Basic::Number)
+   ON_SLOT(3, setVelocityGate, Basic::Number)
+END_SLOT_MAP()
 
-
-   //------------------------------------------------------------------------------
-   // Constructor(s)
-   //------------------------------------------------------------------------------
-   AirTrkMgr::AirTrkMgr()
+//------------------------------------------------------------------------------
+// Constructor(s)
+//------------------------------------------------------------------------------
+AirTrkMgr::AirTrkMgr()
 {
    STANDARD_CONSTRUCTOR()
 
-      setType( Track::ONBOARD_SENSOR_BIT | Track::AIR_TRACK_BIT );
+   initData();
+}
+
+void AirTrkMgr::initData()
+{
+   setType( Track::ONBOARD_SENSOR_BIT | Track::AIR_TRACK_BIT );
 
    posGate =  2.0f * Basic::Distance::NM2M;
    rngGate =  500.0f;
    velGate =   10.0f;
+
+   reportNumMatches = new unsigned int[MAX_REPORTS];
+   trackNumMatches = new unsigned int[MAX_TRKS];
+   report2TrackMatch = new bool*[MAX_REPORTS];
+   for (unsigned int i = 0; i < MAX_REPORTS; i++) {
+      reportNumMatches[i] = 0;
+      report2TrackMatch[i] = new bool[MAX_TRKS];
+      for (unsigned int j = 0; j < MAX_TRKS; j++) {
+         report2TrackMatch[i][j] = false;
+      }
+   }
+   for (unsigned int i = 0; i < MAX_TRKS; i++) {
+      trackNumMatches[i] = 0;
+   }
 }
 
 //------------------------------------------------------------------------------
 // copyData() -- copy member data
 //------------------------------------------------------------------------------
-void AirTrkMgr::copyData(const AirTrkMgr& org, const bool)
+void AirTrkMgr::copyData(const AirTrkMgr& org, const bool cc)
 {
    BaseClass::copyData(org);
+   if (cc) initData();
 
    posGate = org.posGate;
    rngGate = org.rngGate;
    velGate = org.velGate;
+
+   for (unsigned int i = 0; i < MAX_REPORTS; i++) {
+      reportNumMatches[i] = org.reportNumMatches[i];
+      for (unsigned int j = 0; j < MAX_TRKS; j++) {
+         report2TrackMatch[i][j] = org.report2TrackMatch[i][j];
+      }
+   }
+   for (unsigned int i = 0; i < MAX_TRKS; i++) {
+      trackNumMatches[i] = org.trackNumMatches[i];
+   }
 }
 
 //------------------------------------------------------------------------------
@@ -667,6 +700,26 @@ void AirTrkMgr::copyData(const AirTrkMgr& org, const bool)
 //------------------------------------------------------------------------------
 void AirTrkMgr::deleteData()
 {
+   if (report2TrackMatch != 0) {
+      for (unsigned int i = 0; i < MAX_REPORTS; i++) {
+         if (report2TrackMatch[i] != 0) {
+            delete[] report2TrackMatch[i];
+            report2TrackMatch[i] = 0;
+         }
+      }
+      delete[] report2TrackMatch;
+      report2TrackMatch = 0;
+   }
+
+   if (reportNumMatches != 0) {
+      delete[] reportNumMatches;
+      reportNumMatches = 0;
+   }
+
+   if (trackNumMatches != 0) {
+      delete[] trackNumMatches;
+      trackNumMatches = 0;
+   }
 }
 
 //------------------------------------------------------------------------------
@@ -685,11 +738,6 @@ void AirTrkMgr::processTrackList(const LCreal dt)
 
    // Make sure we have the A and B matrix
    if (!haveMatrixA) makeMatrixA(dt);
-
-   // Report to Track matching matrix
-   int report2TrackMatch[MAX_REPORTS][MAX_TRKS];    // Report/Track matched matrix
-   int reportNumMatches[MAX_REPORTS];               // Number of matches for each report
-   int trackNumMatches[MAX_TRKS];                   // Number of matcher for each track
 
    // ---
    // 1) Apply ownship dynamics to current track positions and age the tracks by delta time
@@ -1070,25 +1118,54 @@ std::ostream& AirTrkMgr::serialize(std::ostream& sout, const int i, const bool s
 // Class:	GmtiTrkMgr
 //==============================================================================
 IMPLEMENT_SUBCLASS(GmtiTrkMgr,"GmtiTrkMgr")
-   EMPTY_SLOTTABLE(GmtiTrkMgr)
-   EMPTY_SERIALIZER(GmtiTrkMgr)
+EMPTY_SLOTTABLE(GmtiTrkMgr)
+EMPTY_SERIALIZER(GmtiTrkMgr)
 
-   //------------------------------------------------------------------------------
-   // Constructor(s)
-   //------------------------------------------------------------------------------
-   GmtiTrkMgr::GmtiTrkMgr()
+//------------------------------------------------------------------------------
+// Constructor(s)
+//------------------------------------------------------------------------------
+GmtiTrkMgr::GmtiTrkMgr()
 {
    STANDARD_CONSTRUCTOR()
+   initData();
+}
 
-      setType( Track::ONBOARD_SENSOR_BIT | Track::GND_TRACK_BIT );
+void GmtiTrkMgr::initData()
+{
+   setType( Track::ONBOARD_SENSOR_BIT | Track::GND_TRACK_BIT );
+
+   reportNumMatches = new unsigned int[MAX_REPORTS];
+   trackNumMatches = new unsigned int[MAX_TRKS];
+   report2TrackMatch = new bool*[MAX_REPORTS];
+   for (unsigned int i = 0; i < MAX_REPORTS; i++) {
+      reportNumMatches[i] = 0;
+      report2TrackMatch[i] = new bool[MAX_TRKS];
+      for (unsigned int j = 0; j < MAX_TRKS; j++) {
+         report2TrackMatch[i][j] = false;
+      }
+   }
+   for (unsigned int i = 0; i < MAX_TRKS; i++) {
+      trackNumMatches[i] = 0;
+   }
 }
 
 //------------------------------------------------------------------------------
 // copyData() -- copy member data
 //------------------------------------------------------------------------------
-void GmtiTrkMgr::copyData(const GmtiTrkMgr& org, const bool)
+void GmtiTrkMgr::copyData(const GmtiTrkMgr& org, const bool cc)
 {
    BaseClass::copyData(org);
+   if (cc) initData();
+
+   for (unsigned int i = 0; i < MAX_REPORTS; i++) {
+      reportNumMatches[i] = org.reportNumMatches[i];
+      for (unsigned int j = 0; j < MAX_TRKS; j++) {
+         report2TrackMatch[i][j] = org.report2TrackMatch[i][j];
+      }
+   }
+   for (unsigned int i = 0; i < MAX_TRKS; i++) {
+      trackNumMatches[i] = org.trackNumMatches[i];
+   }
 }
 
 //------------------------------------------------------------------------------
@@ -1096,6 +1173,26 @@ void GmtiTrkMgr::copyData(const GmtiTrkMgr& org, const bool)
 //------------------------------------------------------------------------------
 void GmtiTrkMgr::deleteData()
 {
+   if (report2TrackMatch != 0) {
+      for (unsigned int i = 0; i < MAX_REPORTS; i++) {
+         if (report2TrackMatch[i] != 0) {
+            delete[] report2TrackMatch[i];
+            report2TrackMatch[i] = 0;
+         }
+      }
+      delete[] report2TrackMatch;
+      report2TrackMatch = 0;
+   }
+
+   if (reportNumMatches != 0) {
+      delete[] reportNumMatches;
+      reportNumMatches = 0;
+   }
+
+   if (trackNumMatches != 0) {
+      delete[] trackNumMatches;
+      trackNumMatches = 0;
+   }
 }
 
 //------------------------------------------------------------------------------
@@ -1111,11 +1208,6 @@ void GmtiTrkMgr::processTrackList(const LCreal dt)
 
    // Make sure we have the A and B matrix
    if (!haveMatrixA) makeMatrixA(dt);
-
-   // Report to Track matching matrix
-   unsigned int report2TrackMatch[MAX_REPORTS][MAX_TRKS];    // Report/Track matched matrix
-   unsigned int reportNumMatches[MAX_REPORTS];               // Number of matches for each report
-   unsigned int trackNumMatches[MAX_TRKS];                   // Number of matcher for each track
 
    // ---
    // 1) Apply ownship dynamics to current track positions and age the tracks by delta time
@@ -1353,25 +1445,55 @@ void GmtiTrkMgr::processTrackList(const LCreal dt)
 // Class:	RwrTrkMgr
 //==============================================================================
 IMPLEMENT_SUBCLASS(RwrTrkMgr,"RwrTrkMgr")
-   EMPTY_SLOTTABLE(RwrTrkMgr)
-   EMPTY_SERIALIZER(RwrTrkMgr)
+EMPTY_SLOTTABLE(RwrTrkMgr)
+EMPTY_SERIALIZER(RwrTrkMgr)
 
-   //------------------------------------------------------------------------------
-   // Constructor(s)
-   //------------------------------------------------------------------------------
-   RwrTrkMgr::RwrTrkMgr()
+//------------------------------------------------------------------------------
+// Constructor(s)
+//------------------------------------------------------------------------------
+RwrTrkMgr::RwrTrkMgr()
 {
    STANDARD_CONSTRUCTOR()
 
-      setType( Track::ONBOARD_SENSOR_BIT | Track::RWR_TRACK_BIT );
+   initData();
+}
+
+void RwrTrkMgr::initData()
+{
+   setType( Track::ONBOARD_SENSOR_BIT | Track::RWR_TRACK_BIT );
+
+   reportNumMatches = new unsigned int[MAX_REPORTS];
+   trackNumMatches = new unsigned int[MAX_TRKS];
+   report2TrackMatch = new bool*[MAX_REPORTS];
+   for (unsigned int i = 0; i < MAX_REPORTS; i++) {
+      reportNumMatches[i] = 0;
+      report2TrackMatch[i] = new bool[MAX_TRKS];
+      for (unsigned int j = 0; j < MAX_TRKS; j++) {
+         report2TrackMatch[i][j] = false;
+      }
+   }
+   for (unsigned int i = 0; i < MAX_TRKS; i++) {
+      trackNumMatches[i] = 0;
+   }
 }
 
 //------------------------------------------------------------------------------
 // copyData() -- copy member data
 //------------------------------------------------------------------------------
-void RwrTrkMgr::copyData(const RwrTrkMgr& org, const bool)
+void RwrTrkMgr::copyData(const RwrTrkMgr& org, const bool cc)
 {
    BaseClass::copyData(org);
+   if (cc) initData();
+
+   for (unsigned int i = 0; i < MAX_REPORTS; i++) {
+      reportNumMatches[i] = org.reportNumMatches[i];
+      for (unsigned int j = 0; j < MAX_TRKS; j++) {
+         report2TrackMatch[i][j] = org.report2TrackMatch[i][j];
+      }
+   }
+   for (unsigned int i = 0; i < MAX_TRKS; i++) {
+      trackNumMatches[i] = org.trackNumMatches[i];
+   }
 }
 
 //------------------------------------------------------------------------------
@@ -1379,6 +1501,26 @@ void RwrTrkMgr::copyData(const RwrTrkMgr& org, const bool)
 //------------------------------------------------------------------------------
 void RwrTrkMgr::deleteData()
 {
+   if (report2TrackMatch != 0) {
+      for (unsigned int i = 0; i < MAX_REPORTS; i++) {
+         if (report2TrackMatch[i] != 0) {
+            delete[] report2TrackMatch[i];
+            report2TrackMatch[i] = 0;
+         }
+      }
+      delete[] report2TrackMatch;
+      report2TrackMatch = 0;
+   }
+
+   if (reportNumMatches != 0) {
+      delete[] reportNumMatches;
+      reportNumMatches = 0;
+   }
+
+   if (trackNumMatches != 0) {
+      delete[] trackNumMatches;
+      trackNumMatches = 0;
+   }
 }
 
 //------------------------------------------------------------------------------
@@ -1394,11 +1536,6 @@ void RwrTrkMgr::processTrackList(const LCreal dt)
 
    // Make sure we have the A and B matrix
    if (!haveMatrixA) makeMatrixA(dt);
-
-   // Report to Track matching matrix
-   int report2TrackMatch[MAX_REPORTS][MAX_TRKS];    // Report/Track matched matrix
-   int reportNumMatches[MAX_REPORTS];               // Number of matches for each report
-   int trackNumMatches[MAX_TRKS];                   // Number of matcher for each track
 
    // ---
    // 1) Apply ownship dynamics to current track positions and age the tracks by delta time

@@ -44,15 +44,19 @@ namespace Simulation {
 //
 //    tcRate            <Basic::Number>   ! Time-critical thread rate (Hz) (default: 50hz)
 //    tcPriority        <Basic::Number>   ! Time-critical thread priority  (default: DEFAULT_TC_THREAD_PRI)
+//    tcStackSize       <Basic::Number>   ! Time-critical thread stack size (default: <system default size>)
+//
 //    fastForwardRate   <Basic::Number>   ! Fast forward rate for time critical functions
 //                                        ! (i.e., the number of times updateTC() is called per frame).
 //                                        ! (default: DEFAULT_FAST_FORWARD_RATE)
 //
 //    netRate           <Basic::Number>   ! Network thread rate (Hz) (default: 0hz)
 //    netPriority       <Basic::Number>   ! Network thread priority (default: DEFAULT_NET_THREAD_PRI )
+//    netStackSize      <Basic::Number>   ! Network thread stack size (default: <system default size>)
 //
 //    bgRate            <Basic::Number>   ! Background thread rate (Hz) (default: 0 -- no thread)
 //    bgPriority        <Basic::Number>   ! Background thread priority (default: DEFAULT_BG_THREAD_PRI )
+//    bgStackSize       <Basic::Number>   ! Background thread stack size (default: <system default size>)
 //
 //    startupResetTime  <Basic::Time>     ! Startup (initial) RESET event timer value (default: no reset event)
 //                                        !  (some simulations may need this -- let it run a few initial frames then reset)
@@ -154,31 +158,31 @@ public:
 public:
    Station();
 
-   Simulation* getSimulation();                          // Simulation model
-   const Simulation* getSimulation() const;              // Simulation model (const version)
+   Simulation* getSimulation();                              // Simulation model
+   const Simulation* getSimulation() const;                  // Simulation model (const version)
 
-   Basic::PairStream* getPlayers();                      // Simulation's player list; pre-ref()'d
-   const Basic::PairStream* getPlayers() const;          // Simulation's player list; pre-ref()'d (const version)
+   Basic::PairStream* getPlayers();                          // Simulation's player list; pre-ref()'d
+   const Basic::PairStream* getPlayers() const;              // Simulation's player list; pre-ref()'d (const version)
 
-   Player* getOwnship();                                 // The ownship (primary) player
-   const Player* getOwnship() const;                     // The ownship (primary) player (const version)
+   Player* getOwnship();                                     // The ownship (primary) player
+   const Player* getOwnship() const;                         // The ownship (primary) player (const version)
 
-   const Basic::String* getOwnshipName() const;          // The ownship's name
-   virtual bool setOwnshipPlayer(Player* const newOS);   // Sets the ownship player
-   virtual bool setOwnshipByName(const char* const newOS); // Selects the ownship player by name
+   const Basic::String* getOwnshipName() const;              // The ownship's name
+   virtual bool setOwnshipPlayer(Player* const newOS);       // Sets the ownship player
+   virtual bool setOwnshipByName(const char* const newOS);   // Selects the ownship player by name
 
-   Basic::PairStream* getOutTheWindowList();             // OTW systems
-   const Basic::PairStream* getOutTheWindowList() const; // OTW systems (const version)
+   Basic::PairStream* getOutTheWindowList();                 // OTW systems
+   const Basic::PairStream* getOutTheWindowList() const;     // OTW systems (const version)
 
-   Basic::PairStream* getNetworks();                     // Interoperability network handlers
-   const Basic::PairStream* getNetworks() const;         // Interoperability network handlers (const version)
+   Basic::PairStream* getNetworks();                         // Interoperability network handlers
+   const Basic::PairStream* getNetworks() const;             // Interoperability network handlers (const version)
 
-   Basic::PairStream* getIoHandlers();                   // I/O handlers
-   const Basic::PairStream* getIoHandlers() const;       // I/O handlers (const version)
+   Basic::PairStream* getIoHandlers();                       // I/O handlers
+   const Basic::PairStream* getIoHandlers() const;           // I/O handlers (const version)
 
-   DataRecorder* getDataRecorder();                      // Returns the data recorder
-   const DataRecorder* getDataRecorder() const;          // Returns the data recorder (const version)
-   virtual bool setDataRecorder(DataRecorder* const p);  // Sets the data recorder
+   DataRecorder* getDataRecorder();                          // Returns the data recorder
+   const DataRecorder* getDataRecorder() const;              // Returns the data recorder (const version)
+   virtual bool setDataRecorder(DataRecorder* const p);      // Sets the data recorder
 
    // Is Timer::updateTimers() being called from our updateTC()
    bool isUpdateTimersEnabled() const;
@@ -197,13 +201,15 @@ public:
    // ---
    // Time-critical thread support
    // ---
-   LCreal getTimeCriticalRate() const;        // Time-critical thread rate (Hz)
-   LCreal getTimeCriticalPriority() const;    // Time-critical thread priority
+   LCreal getTimeCriticalRate() const;                       // Time-critical thread rate (Hz)
+   LCreal getTimeCriticalPriority() const;                   // Time-critical thread priority
+   unsigned int getTimeCriticalStackSize() const;            // Time-critical thread stack size
+   bool setTimeCriticalStackSize(const unsigned int bytes);  // Set Time-critical thread stack size  (bytes or zero for default)
 
    // Optionally called by the main application  to create a thread
    // that will call 'updateTC()' at 'getTimeCriticalRate()' Hz
    virtual void createTimeCriticalProcess();
-   bool doWeHaveTheTcThread() const;         // Do we have a T/C thread?
+   bool doWeHaveTheTcThread() const;                         // Do we have a T/C thread?
 
    // Fast forward rates used by processTimeCriticalTasks().
    //   (i.e., number of times Station::tcFrame() is called per frame)
@@ -213,16 +219,20 @@ public:
    // ---
    // Interoperability network(s) thread support
    // ---
-   LCreal getNetworkRate() const;      // Network thread rate (Hz)
-   LCreal getNetworkPriority() const;     // Network thread priority
-   bool doWeHaveTheNetThread() const;     // Do we have a network thread?
+   LCreal getNetworkRate() const;                            // Network thread rate (Hz)
+   LCreal getNetworkPriority() const;                        // Network thread priority
+   unsigned int getNetworkStackSize() const;                 // Network thread stack size
+   bool setNetworkStackSize(const unsigned int bytes);       // Network thread stack size (bytes or zero for default)
+   bool doWeHaveTheNetThread() const;                        // Do we have a network thread?
 
    // ---
    // Background thread support.
    // ---
-   LCreal getBackgroundRate() const;      // Background thread rate (Hz)
-   LCreal getBackgroundPriority() const;  // Background thread priority
-   bool doWeHaveTheBgThread() const;      // Do we have a background thread?
+   LCreal getBackgroundRate() const;                         // Background thread rate (Hz)
+   LCreal getBackgroundPriority() const;                     // Background thread priority
+   unsigned int getBackgroundStackSize() const;              // Background thread stack size
+   bool setBackgroundStackSize(const unsigned int bytes);    // Background thread stack size (bytes or zero for default)
+   bool doWeHaveTheBgThread() const;                         // Do we have a background thread?
 
    // ---
    // Slot functions
@@ -235,10 +245,13 @@ public:
    virtual bool setSlotNetworks(Basic::PairStream* const);
    virtual bool setSlotTimeCriticalRate(const Basic::Number* const hz);
    virtual bool setSlotTimeCriticalPri(const Basic::Number* const);
+   virtual bool setSlotTimeCriticalStackSize(const Basic::Number* const);
    virtual bool setSlotNetworkRate(const Basic::Number* const hz);
    virtual bool setSlotNetworkPri(const Basic::Number* const);
+   virtual bool setSlotNetworkStackSize(const Basic::Number* const);
    virtual bool setSlotBackgroundRate(const Basic::Number* const hz);
    virtual bool setSlotBackgroundPri(const Basic::Number* const);
+   virtual bool setSlotBackgroundStackSize(const Basic::Number* const);
    virtual bool setSlotStartupResetTime(const Basic::Time* const);
    virtual bool setSlotOwnshipName(const Basic::String* const);
    virtual bool setSlotFastForwardRate(const Basic::Number* const);
@@ -255,13 +268,13 @@ protected:
    virtual void inputDevices(const LCreal dt);    // Handle device inputs
    virtual void outputDevices(const LCreal dt);   // Handle device output
 
-   Basic::Thread* getTcThread();    // Pre-ref() pointer to the Time-critical thread
+   Basic::Thread* getTcThread();                  // Pre-ref() pointer to the Time-critical thread
    void setTcThread(Basic::Thread* h);
 
-   Basic::Thread* getNetThread();   // Pre-ref() pointer to the Network thread
+   Basic::Thread* getNetThread();                 // Pre-ref() pointer to the Network thread
    void setNetThread(Basic::Thread* h);
 
-   Basic::Thread* getBgThread();    // Pre-ref() pointer to the Background thread
+   Basic::Thread* getBgThread();                  // Pre-ref() pointer to the Background thread
    void setBgThread(Basic::Thread* h);
 
    // Basic::Component protected functions
@@ -270,32 +283,35 @@ protected:
 private:
    void initData();
 
-   virtual void createNetworkProcess(); // Creates a network thread
+   virtual void createNetworkProcess();    // Creates a network thread
    virtual void createBackgroundProcess(); // Creates a B/G thread
 
-   Simulation* sim;                    // Simulation model
-   SPtr<Basic::PairStream> otw;        // List of  Out-The-Window visual system interfaces
-   SPtr<Basic::PairStream> networks;   // List of networks
-   SPtr<Basic::PairStream> ioHandlers; // List of I/O data handlers
-   Player* ownship;                    // Ownship (primary) player
-   const Basic::String* ownshipName;   // Name of our ownship player
-   bool tmrUpdateEnbl;                 // Enable Basic::Timers::updateTimers() call from updateTC()
-   DataRecorder* dataRecorder;         // Data Recorder
+   Simulation* sim;                        // Simulation model
+   SPtr<Basic::PairStream> otw;            // List of  Out-The-Window visual system interfaces
+   SPtr<Basic::PairStream> networks;       // List of networks
+   SPtr<Basic::PairStream> ioHandlers;     // List of I/O data handlers
+   Player* ownship;                        // Ownship (primary) player
+   const Basic::String* ownshipName;       // Name of our ownship player
+   bool tmrUpdateEnbl;                     // Enable Basic::Timers::updateTimers() call from updateTC()
+   DataRecorder* dataRecorder;             // Data Recorder
 
-   LCreal tcRate;                      // Time-critical thread Rate (hz)
-   LCreal tcPri;                       // Priority of the time-critical thread (0->lowest, 1->highest)
-   SPtr<Basic::Thread> tcThread;       // The Time-critical thread
-   unsigned int fastForwardRate;       // Time-critical thread fast forward rate
+   LCreal tcRate;                          // Time-critical thread Rate (hz)
+   LCreal tcPri;                           // Priority of the time-critical thread (0->lowest, 1->highest)
+   unsigned int tcStackSize;               // Time-critical thread stack size (bytes or zero for system default size)
+   SPtr<Basic::Thread> tcThread;           // The Time-critical thread
+   unsigned int fastForwardRate;           // Time-critical thread fast forward rate
 
-   LCreal netRate;                     // Network thread Rate (hz)
-   LCreal netPri;                      // Priority of the Network thread (0->lowest, 1->highest)
-   SPtr<Basic::Thread> netThread;      // The optional network thread
+   LCreal netRate;                         // Network thread Rate (hz)
+   LCreal netPri;                          // Priority of the Network thread (0->lowest, 1->highest)
+   unsigned int netStackSize;              // Network thread stack size (bytes or zero for system default size)
+   SPtr<Basic::Thread> netThread;          // The optional network thread
 
-   LCreal bgRate;                      // Background thread Rate (hz)
-   LCreal bgPri;                       // Priority of the Background thread (0->lowest, 1->highest)
-   SPtr<Basic::Thread> bgThread;       // The optional background thread
+   LCreal bgRate;                          // Background thread Rate (hz)
+   LCreal bgPri;                           // Priority of the Background thread (0->lowest, 1->highest)
+   unsigned int bgStackSize;               // Background thread stack size (bytes or zero for system default size)
+   SPtr<Basic::Thread> bgThread;           // The optional background thread
 
-   LCreal startupResetTimer;           // Startup RESET timer (sends a RESET_EVENT after timeout)
+   LCreal startupResetTimer;               // Startup RESET timer (sends a RESET_EVENT after timeout)
    const Basic::Time* startupResetTimer0;  // Init value of the startup RESET timer
 };
 
