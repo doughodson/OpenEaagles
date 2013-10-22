@@ -1,3 +1,6 @@
+//------------------------------------------------------------------------------
+// Classes: TcpHandler, TcpClient, TcpServerMulti, TcpServerSingle
+//------------------------------------------------------------------------------
 
 #if defined(WIN32)
     #include <sys/types.h>
@@ -243,8 +246,8 @@ unsigned int TcpHandler::recvData(char* const packet, const int maxSize)
 IMPLEMENT_SUBCLASS(TcpClient,"TcpClient")
 
 BEGIN_SLOTTABLE(TcpClient)
-    	"ipAddress",    // 1) String containing the IP address in
-                        //    the Internet standard "." (dotted) notation.
+    "ipAddress",    // 1) String containing the IP address in
+                    //    the Internet standard "." (dotted) notation.
 END_SLOTTABLE(TcpClient)
 
 // Map slot table to handles 

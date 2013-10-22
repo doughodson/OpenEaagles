@@ -1,3 +1,6 @@
+//------------------------------------------------------------------------------
+// Class: MulticastHandler
+//------------------------------------------------------------------------------
 
 #if defined(WIN32)
     #include <sys/types.h>
@@ -19,7 +22,6 @@
 #include "openeaagles/basic/Pair.h"
 #include "openeaagles/basic/PairStream.h"
 #include "openeaagles/basic/String.h"
-
 
 namespace Eaagles {
 namespace Basic {

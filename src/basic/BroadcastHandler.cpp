@@ -1,3 +1,6 @@
+//------------------------------------------------------------------------------
+// Class: BroadcastHandler
+//------------------------------------------------------------------------------
 
 #if defined(WIN32)
     #include <sys/types.h>
@@ -43,7 +46,6 @@ BroadcastHandler::BroadcastHandler() : networkMask(0)
 {
     STANDARD_CONSTRUCTOR()
 }
-
 
 //------------------------------------------------------------------------------
 // copyData() -- copy member data
