@@ -77,6 +77,10 @@ simulation
       1) updateData() -- corrected the delta time being passed to updateBgPlayerList()
          when more than one background thread is being used (bug fix)
 
+   Station class
+      1) added slots to set the stack size of the default time critical,
+      network and background threads.
+
 --------------------------------------------------------------------------------
 vehicle
 

@@ -44,15 +44,19 @@ namespace Simulation {
 //
 //    tcRate            <Basic::Number>   ! Time-critical thread rate (Hz) (default: 50hz)
 //    tcPriority        <Basic::Number>   ! Time-critical thread priority  (default: DEFAULT_TC_THREAD_PRI)
+//    tcStackSize       <Basic::Number>   ! Time-critical thread stack size (default: <system default size>)
+//
 //    fastForwardRate   <Basic::Number>   ! Fast forward rate for time critical functions
 //                                        ! (i.e., the number of times updateTC() is called per frame).
 //                                        ! (default: DEFAULT_FAST_FORWARD_RATE)
 //
 //    netRate           <Basic::Number>   ! Network thread rate (Hz) (default: 0hz)
 //    netPriority       <Basic::Number>   ! Network thread priority (default: DEFAULT_NET_THREAD_PRI )
+//    netStackSize      <Basic::Number>   ! Network thread stack size (default: <system default size>)
 //
 //    bgRate            <Basic::Number>   ! Background thread rate (Hz) (default: 0 -- no thread)
 //    bgPriority        <Basic::Number>   ! Background thread priority (default: DEFAULT_BG_THREAD_PRI )
+//    bgStackSize       <Basic::Number>   ! Background thread stack size (default: <system default size>)
 //
 //    startupResetTime  <Basic::Time>     ! Startup (initial) RESET event timer value (default: no reset event)
 //                                        !  (some simulations may need this -- let it run a few initial frames then reset)
@@ -199,6 +203,8 @@ public:
    // ---
    LCreal getTimeCriticalRate() const;        // Time-critical thread rate (Hz)
    LCreal getTimeCriticalPriority() const;    // Time-critical thread priority
+   unsigned int getTimeCriticalStackSize() const; // Time-critical thread stack size
+   bool setTimeCriticalStackSize(const unsigned int kbs); // Set Time-critical thread stack size  (bytes or zero for default)
 
    // Optionally called by the main application  to create a thread
    // that will call 'updateTC()' at 'getTimeCriticalRate()' Hz
@@ -213,8 +219,10 @@ public:
    // ---
    // Interoperability network(s) thread support
    // ---
-   LCreal getNetworkRate() const;      // Network thread rate (Hz)
+   LCreal getNetworkRate() const;         // Network thread rate (Hz)
    LCreal getNetworkPriority() const;     // Network thread priority
+   unsigned int getNetworkStackSize() const; // Network thread stack size
+   bool setNetworkStackSize(const unsigned int kbs); // Network thread stack size (bytes or zero for default)
    bool doWeHaveTheNetThread() const;     // Do we have a network thread?
 
    // ---
@@ -222,6 +230,8 @@ public:
    // ---
    LCreal getBackgroundRate() const;      // Background thread rate (Hz)
    LCreal getBackgroundPriority() const;  // Background thread priority
+   unsigned int getBackgroundStackSize() const; // Background thread stack size
+   bool setBackgroundStackSize(const unsigned int kbs); // Background thread stack size (bytes or zero for default)
    bool doWeHaveTheBgThread() const;      // Do we have a background thread?
 
    // ---
@@ -235,10 +245,13 @@ public:
    virtual bool setSlotNetworks(Basic::PairStream* const);
    virtual bool setSlotTimeCriticalRate(const Basic::Number* const hz);
    virtual bool setSlotTimeCriticalPri(const Basic::Number* const);
+   virtual bool setSlotTimeCriticalStackSize(const Basic::Number* const);
    virtual bool setSlotNetworkRate(const Basic::Number* const hz);
    virtual bool setSlotNetworkPri(const Basic::Number* const);
+   virtual bool setSlotNetworkStackSize(const Basic::Number* const);
    virtual bool setSlotBackgroundRate(const Basic::Number* const hz);
    virtual bool setSlotBackgroundPri(const Basic::Number* const);
+   virtual bool setSlotBackgroundStackSize(const Basic::Number* const);
    virtual bool setSlotStartupResetTime(const Basic::Time* const);
    virtual bool setSlotOwnshipName(const Basic::String* const);
    virtual bool setSlotFastForwardRate(const Basic::Number* const);
@@ -284,15 +297,18 @@ private:
 
    LCreal tcRate;                      // Time-critical thread Rate (hz)
    LCreal tcPri;                       // Priority of the time-critical thread (0->lowest, 1->highest)
+   unsigned int tcStackSize;           // Time-critical thread stack size (bytes or zero for system default size)
    SPtr<Basic::Thread> tcThread;       // The Time-critical thread
    unsigned int fastForwardRate;       // Time-critical thread fast forward rate
 
    LCreal netRate;                     // Network thread Rate (hz)
    LCreal netPri;                      // Priority of the Network thread (0->lowest, 1->highest)
+   unsigned int netStackSize;          // Network thread stack size (bytes or zero for system default size)
    SPtr<Basic::Thread> netThread;      // The optional network thread
 
    LCreal bgRate;                      // Background thread Rate (hz)
    LCreal bgPri;                       // Priority of the Background thread (0->lowest, 1->highest)
+   unsigned int bgStackSize;           // Background thread stack size (bytes or zero for system default size)
    SPtr<Basic::Thread> bgThread;       // The optional background thread
 
    LCreal startupResetTimer;           // Startup RESET timer (sends a RESET_EVENT after timeout)

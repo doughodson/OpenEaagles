@@ -70,21 +70,24 @@ const LCreal Station::DEFAULT_NET_THREAD_PRI = 0.5f;
 // Slot table
 //------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Station)
-   "simulation",        // 1: Simulation model
-   "networks",          // 2: List of Network models
-   "otw",               // 3: Out-The-Window (OTW) visual system  [ Otw or Basic::PairStream ]
-   "ioHandler",         // 4: I/O data handler(s)  [ Basic::IoHandler or Basic::PairStream ]
-   "ownship",           // 5: Player name of our ownship (primary) player
+   "simulation",        //  1: Simulation model
+   "networks",          //  2: List of Network models
+   "otw",               //  3: Out-The-Window (OTW) visual system  [ Otw or Basic::PairStream ]
+   "ioHandler",         //  4: I/O data handler(s)  [ Basic::IoHandler or Basic::PairStream ]
+   "ownship",           //  5: Player name of our ownship (primary) player
    "tcRate",            //  6: Time-critical rate (Hz) (Basic::Number, default: 50hz)
    "tcPriority",        //  7: Time-critical thread priority (zero(0) is lowest, one(1) is highest)
-   "fastForwardRate",   //  8: Fast forward rate (i.e., number of times updateTC() is called per frame)
-   "netRate",           //  9: Network thread rate (Hz)  (Basic::Number, default: 20 hz)
-   "netPriority",       // 10: Network thread priority (zero(0) is lowest, one(1) is highest)
-   "bgRate",            // 11:  Background thread rate (Hz) (default: 0.0 -- no thread)
-   "bgPriority",        // 12:  Background thread priority
-   "startupResetTimer", // 13: Startup (initial) RESET event timer value (Basic::Time) (default: no reset event)
-   "enableUpdateTimers",// 14: Enable calling Basic::Timers::updateTimers() from updateTC() (default: false)
-   "dataRecorder",      // 15) Our Data Recorder
+   "tcStackSize",       //  8: Time-critical thread stack size (default: <system default size>)
+   "fastForwardRate",   //  9: Fast forward rate (i.e., number of times updateTC() is called per frame)
+   "netRate",           // 10: Network thread rate (Hz)  (Basic::Number, default: 20 hz)
+   "netPriority",       // 11: Network thread priority (zero(0) is lowest, one(1) is highest)
+   "netStackSize",      // 12: Network thread stack size (default: <system default size>)
+   "bgRate",            // 13: Background thread rate (Hz) (default: 0.0 -- no thread)
+   "bgPriority",        // 14: Background thread priority
+   "bgStackSize",       // 15: Background thread stack size (default: <system default size>)
+   "startupResetTimer", // 16: Startup (initial) RESET event timer value (Basic::Time) (default: no reset event)
+   "enableUpdateTimers",// 17: Enable calling Basic::Timers::updateTimers() from updateTC() (default: false)
+   "dataRecorder",      // 18) Our Data Recorder
 END_SLOTTABLE(Station)
 
 //------------------------------------------------------------------------------
@@ -105,18 +108,21 @@ BEGIN_SLOT_MAP(Station)
 
    ON_SLOT( 6,  setSlotTimeCriticalRate,  Basic::Number)
    ON_SLOT( 7,  setSlotTimeCriticalPri,   Basic::Number)
-   ON_SLOT( 8,  setSlotFastForwardRate,   Basic::Number)
+   ON_SLOT( 8,  setSlotTimeCriticalStackSize,   Basic::Number)
+   ON_SLOT( 9,  setSlotFastForwardRate,   Basic::Number)
 
-   ON_SLOT( 9,  setSlotNetworkRate,       Basic::Number)
-   ON_SLOT(10,  setSlotNetworkPri,        Basic::Number)
+   ON_SLOT(10,  setSlotNetworkRate,       Basic::Number)
+   ON_SLOT(11,  setSlotNetworkPri,        Basic::Number)
+   ON_SLOT(12,  setSlotNetworkStackSize,  Basic::Number)
 
-   ON_SLOT(11,  setSlotBackgroundRate,    Basic::Number)
-   ON_SLOT(12,  setSlotBackgroundPri,     Basic::Number)
+   ON_SLOT(13,  setSlotBackgroundRate,    Basic::Number)
+   ON_SLOT(14,  setSlotBackgroundPri,     Basic::Number)
+   ON_SLOT(15,  setSlotBackgroundStackSize, Basic::Number)
 
-   ON_SLOT(13,  setSlotStartupResetTime,  Basic::Time)
-   ON_SLOT(14,  setSlotEnableUpdateTimers, Basic::Number)
+   ON_SLOT(16,  setSlotStartupResetTime,  Basic::Time)
+   ON_SLOT(17,  setSlotEnableUpdateTimers, Basic::Number)
 
-    ON_SLOT(15, setDataRecorder,          DataRecorder)
+   ON_SLOT(18, setDataRecorder,            DataRecorder)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -145,15 +151,18 @@ void Station::initData()
 
    tcRate = 50;      // default time-critical thread rate
    tcPri = DEFAULT_TC_THREAD_PRI;
+   tcStackSize = 0;
    tcThread = 0;
    fastForwardRate = DEFAULT_FAST_FORWARD_RATE;
 
    netRate = 0;      // default network thread rate
    netPri = DEFAULT_NET_THREAD_PRI;
+   netStackSize = 0;
    netThread = 0;
 
    bgRate = 0;      // default network thread rate
    bgPri = DEFAULT_BG_THREAD_PRI;
+   bgStackSize = 0;
    bgThread = 0;
 
    tmrUpdateEnbl = false;
@@ -224,13 +233,16 @@ void Station::copyData(const Station& org, const bool cc)
 
    tcRate = org.tcRate;
    tcPri = org.tcPri;
+   tcStackSize = org.tcStackSize;
    fastForwardRate = org.fastForwardRate;
 
    netRate = org.netRate;
    netPri = org.netPri;
+   netStackSize = org.netStackSize;
 
    bgRate = org.bgRate;
    bgPri = org.bgPri;
+   bgStackSize = org.bgStackSize;
 
    tmrUpdateEnbl = org.tmrUpdateEnbl;
 
@@ -562,6 +574,8 @@ void Station::createTimeCriticalProcess()
       tcThread = new TcThread(this, getTimeCriticalPriority(), getTimeCriticalRate());
       tcThread->unref(); // 'tcThread' is a SPtr<>
 
+      if (tcStackSize > 0) tcThread->setStackSize( tcStackSize );
+
       bool ok = tcThread->create();
       if (!ok) {
          tcThread = 0;
@@ -581,6 +595,8 @@ void Station::createNetworkProcess()
       netThread = new NetThread(this, getNetworkPriority(), getNetworkRate());
       netThread->unref(); // 'netThread' is a SPtr<>
 
+      if (netStackSize > 0) netThread->setStackSize( netStackSize );
+
       bool ok = netThread->create();
       if (!ok) {
          netThread = 0;
@@ -599,6 +615,8 @@ void Station::createBackgroundProcess()
    if ( bgThread == 0 ) {
       bgThread = new BgThread(this, getBackgroundPriority(), getBackgroundRate());
       bgThread->unref(); // 'bgThread' is a SPtr<>
+
+      if (bgStackSize > 0) bgThread->setStackSize( bgStackSize );
 
       bool ok = bgThread->create();
       if (!ok) {
@@ -799,6 +817,12 @@ LCreal Station::getTimeCriticalPriority() const
    return tcPri;
 }
 
+// Time-critical thread stack size (bytes or zero for default)
+unsigned int Station::getTimeCriticalStackSize() const
+{
+   return tcStackSize;
+}
+
 // Do we have a T/C thread?
 bool Station::doWeHaveTheTcThread() const
 {
@@ -827,6 +851,12 @@ LCreal Station::getBackgroundPriority() const
    return bgPri;
 }
 
+// Background thread stack size (bytes or zero for default)
+unsigned int Station::getBackgroundStackSize() const
+{
+   return bgStackSize;
+}
+
 // Do we have a background thread?
 bool Station::doWeHaveTheBgThread() const
 {
@@ -853,6 +883,12 @@ LCreal Station::getNetworkRate() const
 LCreal Station::getNetworkPriority() const
 {
    return netPri;
+}
+
+// Network thread stack size (bytes or zero for default)
+unsigned int Station::getNetworkStackSize() const
+{
+   return netStackSize;
 }
 
 // Do we have a network thread?
@@ -885,6 +921,29 @@ bool Station::setUpdateTimersEnable(const bool enb)
    tmrUpdateEnbl = enb;
    return true;
 }
+
+
+//------------------------------------------------------------------------------
+// Set thread stack sizes
+//------------------------------------------------------------------------------
+bool Station::setTimeCriticalStackSize(const unsigned int bytes)
+{
+   tcStackSize = bytes;
+   return true;
+}
+
+bool Station::setNetworkStackSize(const unsigned int bytes)
+{
+   netStackSize = bytes;
+   return true;
+}
+
+bool Station::setBackgroundStackSize(const unsigned int bytes)
+{
+   bgStackSize = bytes;
+   return true;
+}
+
 
 //------------------------------------------------------------------------------
 // Set thread handle functions
@@ -1215,6 +1274,18 @@ bool Station::setSlotTimeCriticalPri(const Basic::Number* const num)
     return ok;
 }
 
+bool Station::setSlotTimeCriticalStackSize(const Basic::Number* const num)
+{
+    bool ok = false;
+    if (num != 0) {
+        int isize = num->getInt();
+        if (isize >= 0) {
+            ok = setTimeCriticalStackSize( (unsigned int) isize );
+        }
+    }
+    return ok;
+}
+
 
 //------------------------------------------------------------------------------
 // setSlotNetworkRate() -- Sets the network thread rate (hz)
@@ -1255,6 +1326,18 @@ bool Station::setSlotNetworkPri(const Basic::Number* const num)
     return ok;
 }
 
+bool Station::setSlotNetworkStackSize(const Basic::Number* const num)
+{
+    bool ok = false;
+    if (num != 0) {
+        int isize = num->getInt();
+        if (isize >= 0) {
+            ok = setNetworkStackSize( (unsigned int) isize );
+        }
+    }
+    return ok;
+}
+
 
 //------------------------------------------------------------------------------
 // setSlotBackgroundRate() -- Sets the background thread rate (hz)
@@ -1290,6 +1373,18 @@ bool Station::setSlotBackgroundPri(const Basic::Number* const num)
         }
         else {
             std::cerr << "Station::setSlotBackgroundPri: Priority is invalid, range: [0 .. 1]" << std::endl;
+        }
+    }
+    return ok;
+}
+
+bool Station::setSlotBackgroundStackSize(const Basic::Number* const num)
+{
+    bool ok = false;
+    if (num != 0) {
+        int isize = num->getInt();
+        if (isize >= 0) {
+            ok = setBackgroundStackSize( (unsigned int) isize );
         }
     }
     return ok;
