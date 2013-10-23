@@ -337,7 +337,7 @@ void Otw::mapPlayerList2ModelTable()
    for (unsigned int i = 0; i < getModelTableSize(); i++) {
       if ( modelTbl[i]->isNotChecked() ) {
          // Request removel;
-         // (note: the OTW system specific code now has one frame to cleanup it's own code
+         // (note: the OTW system specific code now has one frame to clean up its own code
          //  before the model is dropped from the output list next frame -- see above)
          modelTbl[i]->setState( OtwModel::OUT_OF_RANGE );
       }
@@ -566,7 +566,7 @@ bool Otw::addModelToList(OtwModel* const model, const TableType type)
          OtwModelKey key(model->getPlayerID(), model->getFederateName());
 
          if (n > 0) {
-            // Now, 'bubble down' to it's correct position
+            // Now, 'bubble down' to its correct position
             int idx = n-1;
             while (idx >= 0 && compareKey2Model(&key, &tbl[idx]) <= 0) {
                // Swap the table entries

@@ -181,7 +181,7 @@ bool Nib::networkOutputManagers(const LCreal curExecTime)
 
 //------------------------------------------------------------------------------
 // updateTheIPlayer() -- (Input support)
-//   Called by our processInputList() to it's time to update the EAAGLES's
+//   Called by our processInputList() to its time to update the EAAGLES's
 //   networked player.
 //------------------------------------------------------------------------------
 void Nib::updateTheIPlayer()

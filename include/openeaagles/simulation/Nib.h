@@ -63,7 +63,7 @@ public:
    const NetIO* getNetIO() const { return pNetIO; }  // Controlling Network I/O (const version)
    virtual bool setNetIO(NetIO* const p);  // Sets our Network I/O controller
     
-   // The player, it's name and ID
+   // The player, its name and ID
    Player* getPlayer()                             { return pPlayer; }
    unsigned short getPlayerID() const              { return playerID; }
    const char* getPlayerName() const               { return pname; }

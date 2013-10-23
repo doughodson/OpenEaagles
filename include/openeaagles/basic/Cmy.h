@@ -26,7 +26,7 @@ namespace Basic {
 // Public methods: Base class public methods, plus ...
 //
 //      Cmy(const LCreal c, const LCreal m, const LCreal y)
-//          Special constructor that initializes the object to c, m,  and y
+//          Special constructor that initializes the object to c, m, and y
 //
 //      LCreal cyan()
 //      LCreal magenta()

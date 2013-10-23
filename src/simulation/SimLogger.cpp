@@ -566,7 +566,7 @@ std::ostream& SimLogger::SimLogEvent::makePlayerIdMsg(std::ostream& sout, const 
 }
 
 //------------------------------------------------------------------------------
-// makePlayerIdMsg() -- creates the player ID message
+// makePlayerDataMsg() -- creates the player data message
 //------------------------------------------------------------------------------
 std::ostream& SimLogger::SimLogEvent::makePlayerDataMsg(
             std::ostream& sout,

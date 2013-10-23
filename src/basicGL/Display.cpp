@@ -394,7 +394,7 @@ void Display::buttonEvent(const int b)
 //------------------------------------------------------------------------------
 // mouseEvent() -- pass mouse input events to the focus
 //------------------------------------------------------------------------------
-void Display::mouseEvent(const int, const int, const int x, const int y)
+void Display::mouseEvent(const int /* button */, const int /* state */, const int x, const int y)
 {
    // keep track of our mouse state
    setMouse(x,y);
@@ -544,7 +544,7 @@ void Display::setStdLineWidth(const GLfloat lw)
 }
 
 //------------------------------------------------------------------------------
-// setStdLineWidth() --
+// setAntialiasing() --
 //------------------------------------------------------------------------------
 bool Display::setAntialiasing(const bool on)
 {

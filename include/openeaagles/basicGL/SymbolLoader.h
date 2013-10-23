@@ -115,7 +115,7 @@ public:
    virtual bool removeSymbol(const int idx);
 
    // Clears all symbols from our master symbol table
-   virtual bool clearLoader();  
+   virtual bool clearLoader();
 
    // Sets the show in-range symbols only flag
    virtual bool setShowInRangeOnly(const bool flg);
@@ -123,7 +123,7 @@ public:
    // Updates the position of a symbol using latitude and longitude (degs)
    virtual bool updateSymbolPositionLL(const int idx, const double lat, const double lon);
 
-   // Updates the position of a symbol using distances north (X) and east (Y) from 
+   // Updates the position of a symbol using distances north (X) and east (Y) from
    // the center of the MapPage reference point (see MapPage.h)
    virtual bool updateSymbolPositionXY(const int idx, const double xPos, const double yPos);
 
@@ -140,10 +140,10 @@ public:
    // Updates the symbol's value
    virtual bool updateSymbolValue(const int idx, Basic::Object* const value);
 
-   // Updates the text of the named AsciiText type subcomponent 
+   // Updates the text of the named AsciiText type subcomponent
    virtual bool updateSymbolText(const int idx, const char* name, const char newString[]);
 
-   // Updates the value of the named NumericReadout type subcomponent 
+   // Updates the value of the named NumericReadout type subcomponent
    virtual bool updateSymbolText(const int idx, const char* name, const LCreal newVal);
 
    // Sets the visibility flag for a symbol's subcomponent
@@ -164,7 +164,7 @@ public:
    // Interconnect settings
    virtual bool setInterconnect(const bool x);
    bool isInterconnected()  { return interconnect; };
-    
+
 
    // BasicGL::Graphic interface
    virtual void draw();
@@ -176,7 +176,7 @@ public:
    // Basic::Component interface
    virtual void updateTC(const LCreal dt = 0.0f);
 
-protected: 
+protected:
    bool setSlotTemplates(Basic::PairStream* myTemps);
    bool setSlotShowInRangeOnly(const Basic::Number* const x);
    bool setSlotInterconnect(const Basic::Number* const x);
@@ -189,7 +189,7 @@ private:
    void initData();
 
    Basic::PairStream* templates;    // holds our pairstream of templates
-   SlSymbol* symbols[MAX_SYMBOLS];  // holds our array of symbols                      
+   SlSymbol* symbols[MAX_SYMBOLS];  // holds our array of symbols
    bool showInRangeOnly;            // only show the symbols within our range, else draw all the symbols if false
    bool interconnect;               // Connect our symbols with a line?
 };
@@ -232,8 +232,8 @@ public:
    Basic::Degrees* getHdgAngleObj() const;   // Basic::Angle object that holds the heading value
    Graphic* getHdgGraphics() const;          // Graphic object named 'hdg' to handle heading rotation
 
-   void setVisible(const bool x);            // set our visibility       
-   void setLatLonFlag(const bool flg);       // Sets the lat/lon flag (if true we're using lat/lon, else XY) 
+   void setVisible(const bool x);            // set our visibility
+   void setLatLonFlag(const bool flg);       // Sets the lat/lon flag (if true we're using lat/lon, else XY)
    void setACCoordFlag(const bool flg);      // Sets the aircraft nose/wing flag (when using this instead of earth coordinates from aircraft)
    void setScreenFlag(const bool flg);       // set the manual screen position override flag
    void setType(const int t);                // Sets the user defined type (must match templates)
@@ -245,7 +245,7 @@ public:
    void setXScreenPos(const double v);       // Sets the X screen pos (inches)
    void setYScreenPos(const double v);       // Sets the Y screen pos (inches) (does not include displacement)
 
-   void setSymbolPair(Basic::Pair* const p); // Sets the graphical component 
+   void setSymbolPair(Basic::Pair* const p); // Sets the graphical component
    void setHeadingDeg(const LCreal h);       // Sets the (optional) heading (degrees)
    void setHdgAngleObj(Basic::Degrees* const p); // Sets the Basic::Angle object that holds the heading value
    void setHdgGraphics(Graphic* const p);    // Sets the graphic object named 'hdg' to handle heading rotation
@@ -278,7 +278,7 @@ private:
 // -------------------------------------------------------------------------------
 // Inline functions for SymbolLoader and SlSymbol
 // -------------------------------------------------------------------------------
-    
+
 inline int SymbolLoader::getMaxSymbols() const { return MAX_SYMBOLS; }
 inline bool SymbolLoader::setInterconnect(const bool flg) { interconnect = flg; return true; }
 

@@ -267,7 +267,7 @@ public:
    virtual Weapon* prerelease();
 
    // release() -- release this weapon
-   //    Returns a point to the flyout weapon player
+   //    Returns a pointer to the flyout weapon player
    virtual Weapon* release();
 
    // Event handlers

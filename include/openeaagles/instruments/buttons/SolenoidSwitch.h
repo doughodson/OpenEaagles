@@ -64,14 +64,14 @@ private:
     Basic::UpTimer* timer;      // our selection timer
     bool latched;               // our latch flag, which, without a timer, will be a logical
                                 // flag to determine when to keep the switch up or down, or
-                                // make the switch return to it's starting position
+                                // make the switch return to its starting position
 };
 
 //------------------------------------------------------------------------------
 // Class:       SolenoidButton
 // Base class:  Basic::Object -> Basic::Component -> BasicGL::Graphic -> Button -> SolenoidButton
 // Description: Custom button that understands that it belongs to a SolenoidSwitch,
-// and will let it know when it's respective button has been hit.
+// and will let it know when its respective button has been hit.
 //------------------------------------------------------------------------------
 class SolenoidButton : public Button {
     DECLARE_SUBCLASS(SolenoidButton,Button)

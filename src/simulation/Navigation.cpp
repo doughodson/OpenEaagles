@@ -39,12 +39,12 @@ BEGIN_SLOTTABLE(Navigation)
                         //    default unit is Nautical Miles; Example:
                         //    feba: {
                         //      [ 10 -10 ]  // in nautical miles
-                        //      [ ( Kilometers 20 ) ( NauticalMiles -15 ) ] 
+                        //      [ ( Kilometers 20 ) ( NauticalMiles -15 ) ]
                         //    }
     "bullseye",         // 4) Bullseye (just one for now)
 END_SLOTTABLE(Navigation)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(Navigation)
     ON_SLOT(1,setSlotRoute,Route)
     ON_SLOT(2,setSlotUtc,Basic::Time)
@@ -242,7 +242,7 @@ void Navigation::reset()
 // updateData() -- update Non-time critical stuff here
 //------------------------------------------------------------------------------
 void Navigation::updateData(const LCreal dt)
-{     
+{
    // ---
    // Update the BaseClass and our primary route
    // ---
@@ -706,35 +706,35 @@ bool Navigation::setNavSteeringValid(const bool flg)
 //------------------------------------------------------------------------------
 // Default navigation methods
 //------------------------------------------------------------------------------
-        
+
 // (default) System position (using truth data from ownship)
 bool Navigation::updateSysPosition()
 {
     bool ok = false;
     if (getOwnship() != 0) {
 
-            // -- convert ownship's position vector to lat/lon/alt
-      double lat0 = 0;
-      double lon0 = 0;
-            double alt0 = 0;
-      ok = Basic::Nav::convertPosVec2LL(refLat, refLon, getOwnship()->getPosition(), &lat0, &lon0, &alt0);
+       // -- convert ownship's position vector to lat/lon/alt
+       double lat0 = 0;
+       double lon0 = 0;
+       double alt0 = 0;
+       ok = Basic::Nav::convertPosVec2LL(refLat, refLon, getOwnship()->getPosition(), &lat0, &lon0, &alt0);
 
-      setPosition(lat0, lon0, alt0);
+       setPosition(lat0, lon0, alt0);
     }
     return ok;
 }
-             
+
 // (default) System attitude function  (using truth data from ownship)
 bool Navigation::updateSysAttitude()
 {
     bool ok = false;
     if (getOwnship() != 0) {
-      setAttitude(
+       setAttitude(
             getOwnship()->getRollD(),
             getOwnship()->getPitchD(),
             getOwnship()->getHeadingD()
-         );
-        ok = true;
+       );
+       ok = true;
     }
     return ok;
 }
@@ -750,20 +750,20 @@ bool Navigation::updateMagVar()
 // (default) Velocity data function (using truth data from ownship)
 bool Navigation::updateSysVelocity()
 {
-    bool ok = false;
-    if (getOwnship() != 0) {
+   bool ok = false;
+   if (getOwnship() != 0) {
       setVelocity( getOwnship()->getVelocity() );
       setAcceleration( getOwnship()->getAcceleration() );
       setGroundSpeedKts( getOwnship()->getGroundSpeedKts() );
       setTrueAirspeedKts( getOwnship()->getTotalVelocityKts() );
       setGroundTrackDeg( getOwnship()->getGroundTrackD() );
       setVelocityDataValid( true );
-        ok = true;
-    }
+      ok = true;
+   }
    else {
       setVelocityDataValid( false );
    }
-    return ok;
+   return ok;
 }
 
 // (default) Nav steering function (pull data from the 'to' steerpoint)
@@ -799,11 +799,11 @@ int Navigation::getFeba(osg::Vec2* const points, const int max) const
 {
     int n = 0;
     if (points != 0 && max > 0 && feba != 0 && nFeba > 0) {
-    
+
         // Number of points; limited by 'max'
         n = nFeba;
         if (n > max) n = max;
-        
+
         // Copy the FEBA points
         for (int i = 0; i < n; i++) {
             points[i] = feba[i];
@@ -880,7 +880,7 @@ bool Navigation::setSlotUtc(const Basic::Time* const msg)
 bool Navigation::setSlotFeba(const Basic::PairStream* const msg)
 {
     bool ok = true;
-   
+
     if (msg != 0) {
         // allocate space for the points
         int max = msg->entries();
@@ -898,13 +898,13 @@ bool Navigation::setSlotFeba(const Basic::PairStream* const msg)
                 if (msg2 != 0) {
                     LCreal values[2];
                     int n = 0;
-                    
+
                     { // Get the north (first) distance
                         const Basic::Number* pNum = 0;
                         const Basic::Pair* pair2 = dynamic_cast<const Basic::Pair*>(msg2->getPosition(1));
                         if (pair2 != 0) pNum = dynamic_cast<const Basic::Number*>(pair2->object());
                         else pNum = dynamic_cast<const Basic::Number*>(msg2->getPosition(1));
-                        
+
                         if (pNum != 0) {
                             const Basic::Distance* pDist = dynamic_cast<const Basic::Distance*>(pNum);
                             if (pDist != 0) {
@@ -915,13 +915,13 @@ bool Navigation::setSlotFeba(const Basic::PairStream* const msg)
                             }
                         }
                     }
-                    
+
                     { // Get the east (second) distance
                         const Basic::Number* pNum = 0;
                         const Basic::Pair* pair2 = dynamic_cast<const Basic::Pair*>(msg2->getPosition(2));
                         if (pair2 != 0) pNum = dynamic_cast<const Basic::Number*>(pair2->object());
                         else pNum = dynamic_cast<const Basic::Number*>(msg2->getPosition(2));
-                        
+
                         if (pNum != 0) {
                             const Basic::Distance* pDist = dynamic_cast<const Basic::Distance*>(pNum);
                             if (pDist != 0) {
@@ -932,27 +932,27 @@ bool Navigation::setSlotFeba(const Basic::PairStream* const msg)
                             }
                         }
                     }
-                    
+
                     if (n == 2) {
                         tmpFeba[np++].set(values[0],values[1]);
                         validFlg = true;
                     }
                 }
             }
-            
+
             if (!validFlg) {
                 std::cerr << "Navigation::setSlotFeba: Invalid FEBA coordinate!" << std::endl;
                 ok = false;
             }
             item = item->getNext();
         }
-        
+
         // If we have a valid FEBA, then save it
         if (ok) {
             setFeba(tmpFeba, np);
         }
     }
-    
+
     return ok;
 }
 bool Navigation::setSlotBullseye(Bullseye* const msg)
@@ -987,11 +987,11 @@ std::ostream& Navigation::serialize(std::ostream& sout, const int i, const bool 
     //BaseClass::serialize(sout,i+j,true);
 
     if ( !slotsOnly ) {
-    	indent(sout,i);
-    	sout << ")" << std::endl;
+        indent(sout,i);
+        sout << ")" << std::endl;
     }
 
-    return sout;    
+    return sout;
 }
 
 //------------------------------------------------------------------------------

@@ -1,6 +1,5 @@
 
 #include "openeaagles/basicGL/Readouts.h"
-
 #include "openeaagles/basicGL/Display.h"
 #include "openeaagles/basic/Float.h"
 #include "openeaagles/basic/Integer.h"

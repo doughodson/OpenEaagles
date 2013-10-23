@@ -100,9 +100,9 @@ BEGIN_SLOTTABLE(NetIO)
    "netInput",             //  1) Network input handler
    "netOutput",            //  2) Network output handler
    "version",              //  3) DIS version number [ 0 .. 6 ] (IST-CF-03-01, May 5, 2003)
-   "maxTimeDR",            //  4: Max DR time                          (Basic::Time)
-   "maxPositionError",     //  5: Max DR position error                (Basic::Distance)
-   "maxOrientationError",  //  6: Max DR angular error                 (Basic::Angle)
+   "maxTimeDR",            //  4: Max DR time                           (Basic::Time)
+   "maxPositionError",     //  5: Max DR position error                 (Basic::Distance)
+   "maxOrientationError",  //  6: Max DR angular error                  (Basic::Angle)
    "maxAge",               //  7: Max age (without update) of networked players (Basic::Time)
    "maxEntityRange",       //  8: Max entity range of networked players (Basic::Distance)
    "emissionPduHandlers",  //  9: List of Electromagnetic-Emission PDU handlers (EmissionPduHandler)

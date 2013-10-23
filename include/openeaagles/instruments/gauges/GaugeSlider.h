@@ -12,7 +12,7 @@ namespace Instruments {
 //------------------------------------------------------------------------------
 // Class:	GaugeSlider
 // 
-// Description: Translates it's graphical components vertically
+// Description: Translates its graphical components vertically
 // or horizontally along the gauge depending on the value given to it
 //------------------------------------------------------------------------------
 class GaugeSlider : public AnalogGauge {

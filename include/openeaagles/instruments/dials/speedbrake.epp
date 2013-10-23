@@ -1,7 +1,7 @@
 // Speedbrake instrument, which is actually a few instrument objects put together.
 
-// The cool thing about the instrument object is that you can send it one value and it will update all other instruments that are it's components.
-// This is accomplished by the fact that each time an instrument object is updated, it goes through it's components, finds all the instruments, and updates
+// The cool thing about the instrument object is that you can send it one value and it will update all other instruments that are its components.
+// This is accomplished by the fact that each time an instrument object is updated, it goes through its components, finds all the instruments, and updates
 // them with the new value as well.  This eliminates redundancy.  For example, the dial pointer needs the speedbrake value to determine where to rotate to, and the dial arc segment needs to know
 // the speedbrake position to determine which color to switch to (for cautions or warnings, perhaps.)  This can all be accomplished by making them components of a base instrument, which updates everybody
 // when it is updated.  The event message to update a value in instrument is UPDATE_INSTRUMENTS.  
@@ -14,7 +14,7 @@ sbrake:
 // We have named our speedbrake sbrake, which will be sent a value from our test routing (TestSpeedBrake.cpp).  
 ( Instrument
     components: {
-        // Dialpointer is an instrument that understands that when it received the UPDATE_INSTRUMENTS, it takes the value, looks up it's table for scaling, and then rotates according to that scaling.
+        // DialPointer is an instrument that understands that when it received the UPDATE_INSTRUMENTS, it takes the value, looks up its table for scaling, and then rotates according to that scaling.
         // In the example below, first we set up our color, which you can see is a color rotary.  That is another special thing about instrument, it can determine what color to be based on a specific value.
         // In this case, if we send the value 80 to the instrument, it will be the color (rgb 0 0 1), which is blue.  Instrument also tells each component that is an instrument that if you have a color
         // rotary, look up the color you are suppose to be and switch to that color.  This once again allows us to send one value to multiple instruments to be updated.  
@@ -191,4 +191,4 @@ sbrake:
             value: 40
         )         
     }
-)    
+)

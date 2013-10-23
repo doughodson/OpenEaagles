@@ -2991,7 +2991,7 @@ int Reformat::processInteger(const char* text, const int len)
    //    sign, leading zeros, and leading numbers.
    int fw = s + lz + ln;
 
-   // Create the sprintf() format string
+   // Create the std::sprintf() format string
    int j = 0;
 
    format[j++] = '%';				// Start with %
@@ -3082,7 +3082,7 @@ int Reformat::processFloat(const char* text, const int len)
    //    trailing numbers.
    int fw = s + lz + ln + 1 + nr;
 
-   // Create the sprintf() format string
+   // Create the std::sprintf() format string
    int j = 0;
 
    format[j++] = '%';                           // Start with %

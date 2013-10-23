@@ -7,7 +7,14 @@
 #include "openeaagles/basic/Object.h"
 
 namespace Eaagles {
-   namespace Basic { class Angle; class Distance; class Identifier; class Number;  class String; class Time; }
+   namespace Basic {
+       class Angle;
+       class Distance;
+       class Identifier;
+       class Number;
+       class String;
+       class Time;
+   }
 
 namespace Simulation {
 
@@ -26,16 +33,16 @@ namespace Simulation {
 //    stickType        <Identifier> ! Weapon stick option (MIDPOINT, LEADING_EDGE) (default: MIDPOINT)
 //
 //    stickDistance    <Distance>   ! Weapon stick length (default: 0)
-//    stickDistance    <Number>     ! (feet) 
+//    stickDistance    <Number>     ! (feet)
 //
 //    interval         <Time>       ! Time between weapon releases (default: 0)
 //    interval         <Number>     ! (MSec)
 //
 //    maxMissDistance  <Distance>   ! Maximum miss distance (default: 0)
-//    maxMissDistance  <Number>     ! (feet) 
-// 
+//    maxMissDistance  <Number>     ! (feet)
+//
 //    armDelay         <Time>       ! Arming delay (default: 0)
-//    armDelay         <Number>     ! (0-99.9 sec) 
+//    armDelay         <Number>     ! (0-99.9 sec)
 //
 //    angle            <Angle>      ! Impact angle (default: 0)
 //    angle            <Number>     ! (degrees)
@@ -120,7 +127,7 @@ private:
     double maxMissDist;    // ft
     double interval;       // MS
 
-    unsigned int quantity; 
+    unsigned int quantity;
     unsigned int stickType;
     bool manualAssign;
 };

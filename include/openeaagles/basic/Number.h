@@ -14,7 +14,7 @@ namespace Basic {
 // Base class:  Object -> Number
 //
 // Description:  Base class for number objects (Float, Integer, Boolean, 
-//               Decibel and LatLong), numerical operators (Add, Subtract,
+//               Decibel and LatLon), numerical operators (Add, Subtract,
 //               Multiply and Divide), and various units (see basic/units/*.h)
 //
 // Slots:

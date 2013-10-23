@@ -290,7 +290,7 @@ bool Gimbal::onRfEmissionEvent(Emission* const em)
 }
 
 //------------------------------------------------------------------------------
-// Returns true if this is a player of interset
+// Returns true if this is a player of interest
 //------------------------------------------------------------------------------
 bool Gimbal::fromPlayerOfInterest(const Emission* const em)
 {
@@ -1046,7 +1046,7 @@ bool Gimbal::setSlotCmdPos(const Basic::List* const numList)
     return ok;
 }
 
-// setSlotCmdPosAzimuth - Commanded azimtuh position  (sets POSITION_SERVO)
+// setSlotCmdPosAzimuth - Commanded azimuth position  (sets POSITION_SERVO)
 bool Gimbal::setSlotCmdPosAzimuth(const Basic::Angle* const msg)
 {
     bool ok = false;
@@ -1281,7 +1281,7 @@ void Gimbal::updateMatrix()
 }
 
 //------------------------------------------------------------------------------
-// isPositioned() -- returns true of the gimbal has reached the commande pos
+// isPositioned() -- returns true of the gimbal has reached the commanded pos
 //------------------------------------------------------------------------------
 bool Gimbal::isPositioned(const double tol0) const
 {

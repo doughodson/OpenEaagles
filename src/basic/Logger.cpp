@@ -20,9 +20,9 @@ BEGIN_SLOTTABLE(Logger)
     "topLine",      // 3) Top (first) line of file       (0ptional)   (String)
 END_SLOTTABLE(Logger)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(Logger)
-    ON_SLOT( 1, setSlotFilename, String)   
+    ON_SLOT( 1, setSlotFilename, String)
     ON_SLOT( 2, setSlotPathName, String)
     ON_SLOT( 3, setSlotTopLine,  String)
 END_SLOT_MAP()
@@ -33,12 +33,12 @@ END_SLOT_MAP()
 //==============================================================================
 
 // -----------------------------------------------------------------
-// Constructor: 
+// Constructor:
 // -----------------------------------------------------------------
 Logger::Logger()
 {
     STANDARD_CONSTRUCTOR()
-    
+
     lout = 0;
     filename = new String();
     pathname = new String();
@@ -53,7 +53,7 @@ Logger::Logger()
 void Logger::copyData(const Logger& org, const bool cc)
 {
     BaseClass::copyData(org);
-    
+
     if (cc) {
         filename = 0;
         pathname = 0;
@@ -62,13 +62,13 @@ void Logger::copyData(const Logger& org, const bool cc)
     }
     if (filename == 0) filename = new String();
     if (pathname == 0) pathname = new String();
-    
+
     *filename = *org.filename;
     *pathname = *org.pathname;
 
     setSlotTopLine(org.topLine);
 
-    opened = false;    
+    opened = false;
     failed = false;
 }
 
@@ -76,7 +76,7 @@ void Logger::deleteData()
 {
     if (filename != 0) filename->unref();
     filename = 0;
-    
+
     if (pathname != 0) pathname->unref();
     pathname = 0;
 
@@ -90,7 +90,7 @@ void Logger::deleteData()
 }
 
 //------------------------------------------------------------------------------
-// updateTC() -- 
+// updateTC() --
 //------------------------------------------------------------------------------
 void Logger::updateTC(const LCreal dt)
 {
@@ -103,7 +103,7 @@ void Logger::updateTC(const LCreal dt)
 void Logger::updateData(const LCreal dt)
 {
     BaseClass::updateData(dt);
-    
+
     // Open the log file (if we haven't tried before)
     if (!isOpen() && !isFailed()) {
         openFile();
@@ -111,7 +111,7 @@ void Logger::updateData(const LCreal dt)
 }
 
 //------------------------------------------------------------------------------
-// updateData() -- Update the log file
+// openFile() -- Open the log file
 //------------------------------------------------------------------------------
 bool Logger::openFile()
 {
@@ -200,7 +200,7 @@ bool Logger::openFile()
             else if (topLine != 0) {
                 *lout << *topLine << std::endl;
             }
-                
+
         }
 
         delete[] fullname;
@@ -252,10 +252,10 @@ bool Logger::setSlotPathName(const String* const msg)
 
 bool Logger::setSlotTopLine(const String* const msg)
 {
-   if (topLine != 0) topLine->unref();
-   topLine = msg;
-   if (topLine != 0) topLine->ref();
-   return true;
+    if (topLine != 0) topLine->unref();
+    topLine = msg;
+    if (topLine != 0) topLine->ref();
+    return true;
 }
 
 //------------------------------------------------------------------------------
@@ -322,7 +322,7 @@ Logger::LogEvent::LogEvent()
 
 // Copy Constructor
 Logger::LogEvent::LogEvent(const LogEvent& org)
-{ 
+{
     STANDARD_CONSTRUCTOR()
     copyData(org,true);
 }
@@ -330,7 +330,7 @@ Logger::LogEvent::LogEvent(const LogEvent& org)
 // Destructor
 Logger::LogEvent::~LogEvent()
 {
-   STANDARD_DESTRUCTOR()
+    STANDARD_DESTRUCTOR()
 }
 
 // Copy operator

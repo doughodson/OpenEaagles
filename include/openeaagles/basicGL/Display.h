@@ -135,10 +135,10 @@ public:
    // ---
 
    GLfloat getLinewidth() const;                // Returns the current line width
-   GLfloat setLinewidth(const GLfloat);         // Sets and returns the current line width
+   GLfloat setLinewidth(const GLfloat lw);      // Sets and returns the current line width
 
    GLfloat getStdLineWidth() const;             // Returns the standard line width
-   void setStdLineWidth(const GLfloat);         // Sets the standard and current line widths
+   void setStdLineWidth(const GLfloat lw);      // Sets the standard and current line widths
 
    const osg::Vec4& getCurrentColor() const;    // Returns the current color RGBA vector
    void setColor(const osg::Vec4& color);       // Sets the current color by an RGBA vector.

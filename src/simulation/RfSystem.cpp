@@ -150,7 +150,7 @@ void RfSystem::reset()
    // Do we need to find the antenna?
    // ---
    if (getAntenna() == 0 && getAntennaName() != 0 && getOwnship() != 0) {
-      // We have a name of the antenna, but not the antenna it's self
+      // We have a name of the antenna, but not the antenna itself
       const char* name = *getAntennaName();
       
       // Get the named antenna from the player's list of gimbals, antennas and optics
@@ -236,7 +236,7 @@ void RfSystem::rfReceivedEmission(Emission* const em, Antenna* const, LCreal raG
          //if (pulses <= 0) pulses = 1.0f;
 
          // Compute signal losses
-         //    Basically, we're simulation Hannen's S/I equation from page 356 of his notes.
+         //    Basically, we're simulating Hannen's S/I equation from page 356 of his notes.
          //    Where I is N + J. J is noise from jamming.
          //    Receiver Loss affects the total I, so we have to wait until J is added to N in Radar.
          LCreal losses = getRfSignalProcessLoss() * em->getAtmosphericAttenuationLoss() * em->getTransmitLoss();

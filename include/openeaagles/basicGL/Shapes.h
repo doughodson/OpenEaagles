@@ -61,7 +61,7 @@ protected:
     bool setSlotFilled(const Basic::Number* const x);
     bool setSlotSlices(const Basic::Number* const x);
 
-    // even functions
+    // event functions
     bool updateRadius(const Basic::Number* const x);
 
 private:

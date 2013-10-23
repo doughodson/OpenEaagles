@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------------
 // Class: VPFDirectory
 //
-// Description: Directory object which will understand it's VPFTables
+// Description: Directory object which will understand its VPFTables
 // Vector Product Format
 // -------------------------------------------------------------------------------
 #ifndef __Eaagles_Maps_Vpf_VPFDirectory_H__

@@ -3,6 +3,8 @@
 // Base class:  Object -> Number -> Time
 //              Object -> Number -> Time -> Seconds
 //              Object -> Number -> Time -> MilliSeconds
+//              Object -> Number -> Time -> MicroSeconds
+//              Object -> Number -> Time -> NanoSeconds
 //              Object -> Number -> Time -> Minutes
 //              Object -> Number -> Time -> Hours
 //              Object -> Number -> Time -> Days

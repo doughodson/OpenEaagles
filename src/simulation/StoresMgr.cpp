@@ -611,6 +611,7 @@ Missile* SimpleStoresMgr::getNextMissileImp()
    Basic::PairStream* list = getWeapons();
    if (list != 0) {
 
+      // Find the first free (inactive) missile
       Basic::List::Item* item = list->getFirstItem();
       while (item != 0 && msl == 0) {
          Basic::Pair* pair = (Basic::Pair*) item->getValue();
@@ -641,6 +642,7 @@ Sam* SimpleStoresMgr::getNextSamImp()
    Basic::PairStream* list = getWeapons();
    if (list != 0) {
 
+      // Find the first free (inactive) SAM
       Basic::List::Item* item = list->getFirstItem();
       while (item != 0 && msl == 0) {
          Basic::Pair* pair = (Basic::Pair*) item->getValue();
@@ -672,6 +674,7 @@ Bomb* SimpleStoresMgr::getNextBombImp()
    Basic::PairStream* list = getWeapons();
    if (list != 0) {
 
+      // Find the first free (inactive) bomb
       Basic::List::Item* item = list->getFirstItem();
       while (item != 0 && bomb == 0) {
          Basic::Pair* pair = (Basic::Pair*) item->getValue();
@@ -703,6 +706,7 @@ Chaff* SimpleStoresMgr::getNextChaffImp()
    Basic::PairStream* list = getWeapons();
    if (list != 0) {
 
+      // Find the first free (inactive) chaff bundle
       Basic::List::Item* item = list->getFirstItem();
       while (item != 0 && chaff == 0) {
          Basic::Pair* pair = (Basic::Pair*) item->getValue();
@@ -734,6 +738,7 @@ Flare* SimpleStoresMgr::getNextFlareImp()
    Basic::PairStream* list = getWeapons();
    if (list != 0) {
 
+      // Find the first free (inactive) flare
       Basic::List::Item* item = list->getFirstItem();
       while (item != 0 && flare == 0) {
          Basic::Pair* pair = (Basic::Pair*) item->getValue();
@@ -765,6 +770,7 @@ Decoy* SimpleStoresMgr::getNextDecoyImp()
    Basic::PairStream* list = getWeapons();
    if (list != 0) {
 
+      // Find the first free (inactive) decoy
       Basic::List::Item* item = list->getFirstItem();
       while (item != 0 && decoy == 0) {
          Basic::Pair* pair = (Basic::Pair*) item->getValue();

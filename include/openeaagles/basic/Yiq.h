@@ -30,7 +30,7 @@ namespace Basic {
 // Public methods: Base class public methods, plus ...
 //
 //      Yiq(const LCreal y, const LCreal i, const LCreal q)
-//          Special constructor that initializes the object to y, i,  and q
+//          Special constructor that initializes the object to y, i, and q
 //
 //      LCreal y()
 //      LCreal i()

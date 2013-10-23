@@ -334,8 +334,8 @@ class Track;
 //          irSystems:     ( IrSystem ...        )  // IR system model
 //          sms:           ( StoresMgr ...       )  // Stores management model
 //
-//          Where 'datalink' is the name give to the top level datalink object,
-//          'dynamicsModel' is the name give to the dynamics model, etc.
+//          Where 'datalink' is the name given to the top level datalink object,
+//          'dynamicsModel' is the name given to the dynamics model, etc.
 //
 //    2) There is one top level model for each major system.  Additional system
 //       models are subcomponents to the top level model of the same type.
@@ -603,7 +603,7 @@ public:
    bool isTerrainElevationRequired() const;        // True if terrain elevation is required from the OTW system;
                                                    // otherwise we use DTED, if available
 
-   CoordSys getCoordSystemInUse() const;           // Returns the coordinate system currently being to
+   CoordSys getCoordSystemInUse() const;           // Returns the coordinate system currently being used to
                                                    // update the player's position
 
    // ---

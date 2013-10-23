@@ -33,8 +33,8 @@ public:
    static  const unsigned int MAX_TIMERS = EAAGLES_CONFIG_MAX_INTERVAL_TIMERS;
 
 public:
-    Timer();
-   Timer(const Type direction, const double time = 0.0);
+   Timer();
+   Timer(const Type direction, const double rtime = 0.0);
 
    Type getType() const;            // Type of interval timer
    double getCurrentTime() const;   // Current value of this timer (seconds)

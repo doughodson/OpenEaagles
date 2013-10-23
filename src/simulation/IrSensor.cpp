@@ -3,14 +3,14 @@
 // Class: IrSensor
 //==============================================================================
 
-// NOTE:  This sensor is expected to act in concert with an OnboardComputer and a 
-// AngleOnlyTrackManager.  
+// NOTE:  This sensor is expected to act in concert with an OnboardComputer and a
+// AngleOnlyTrackManager.
 
-// The order of the components in the input data file is significant. If the 
-// computer is listed before the sensor, it will complete it's process() before the 
+// The order of the components in the input data file is significant. If the
+// computer is listed before the sensor, it will complete its process() before the
 // sensor does, resulting in it not receiving inputs until the next frame. If listed
-// afterward, it will complete it's process after the sensor, and will accept inputs
-// in the same frame  in which they were generated. 
+// afterward, it will complete its process after the sensor, and will accept inputs
+// in the same frame  in which they were generated.
 
 #include "openeaagles/simulation/IrAtmosphere.h"
 #include "openeaagles/simulation/IrSeeker.h"
@@ -41,13 +41,13 @@ BEGIN_SLOTTABLE(IrSensor)
    "IFOV",              // 5: Instantaneous Field of View  (steradians)
    "sensorType",        // 6: Sensor Type            (Contrast, Hot Spot)
    //"FOR",               // 7: Field of Regard
-   //"azimuthBin",        // 7: azimuthBin
-   //"elevationBin",      // 8: elevationBin 
-   "maximumRange",      // 9: Maximum Range
-   "trackManagerName", //  10: Name of the requested Track Manager (Basic::String)
+   //"azimuthBin",        // 8: azimuthBin
+   //"elevationBin",      // 9: elevationBin
+   "maximumRange",      // 7: Maximum Range
+   "trackManagerName",  // 8: Name of the requested Track Manager (Basic::String)
 END_SLOTTABLE(IrSensor)
 
-//  Map slot table 
+//  Map slot table
 BEGIN_SLOT_MAP(IrSensor)
    ON_SLOT(1,setSlotLowerWavelength,Basic::Number)
    ON_SLOT(2,setSlotUpperWavelength,Basic::Number)
@@ -69,13 +69,13 @@ IrSensor::IrSensor() : storedMessagesQueue(MAX_EMISSIONS), storedMessagesLock(0)
 {
    STANDARD_CONSTRUCTOR()
 
-   tmName = 0; 
+   tmName = 0;
    lowerWavelength = 0;
    upperWavelength = 0;
    nei = 0;
    threshold = 0;
    ifov = 0;
-   ifovTheta = 0; 
+   ifovTheta = 0;
    sensorType = HOTSPOT;
    //fieldOfRegard = 0;
    //fieldOfRegardTheta = 0;
@@ -90,7 +90,7 @@ IrSensor::~IrSensor()
 }
 
 IrSensor::IrSensor(const IrSensor& org) : storedMessagesQueue(MAX_EMISSIONS), storedMessagesLock(0)
-{ 
+{
     STANDARD_CONSTRUCTOR()
     copyData(org,true);
 }
@@ -134,7 +134,7 @@ void IrSensor::copyData(const IrSensor& org, const bool cc)
       setTrackManagerName(0);
    }
 
-   // do not copy data. 
+   // do not copy data.
    clearTracksAndQueues();
 }
 
@@ -163,13 +163,13 @@ void IrSensor::reset()
    if (getTrackManager() == 0 && getTrackManagerName() != 0 && getOwnship() != 0) {
       // We have a name of the track manager, but not the track manager itself
       const char* name = *getTrackManagerName();
-      
+
       // Get the named track manager from the onboard computer
       OnboardComputer* obc = getOwnship()->getOnboardComputer();
       if (obc != 0) {
          setTrackManager( obc->getTrackManagerByName(name) );
       }
-      
+
       if (getTrackManager() == 0) {
           // The assigned track manager was not found!
           if (isMessageEnabled(MSG_ERROR)) {
@@ -194,13 +194,13 @@ void IrSensor::updateData(const LCreal dt)
    if (getTrackManager() == 0 && getTrackManagerName() != 0 && getOwnship() != 0) {
       // We have a name of the track manager, but not the track manager itself
       const char* name = *getTrackManagerName();
-      
+
       // Get the named track manager from the onboard computer
       OnboardComputer* obc = getOwnship()->getOnboardComputer();
       if (obc != 0) {
          setTrackManager( obc->getTrackManagerByName(name) );
       }
-      
+
       if (getTrackManager() == 0) {
          // The assigned track manager was not found!
          if (isMessageEnabled(MSG_ERROR)) {
@@ -229,10 +229,10 @@ void IrSensor::transmit(const LCreal dt)
          irQuery->setInstantaneousFieldOfView(getIFOV());
          irQuery->setSendingSensor(this);
          irQuery->setNEI(getNEI());
-		 irQuery->setMaxRangeNM(getMaximumRange()* Basic::Distance::M2NM);
+         irQuery->setMaxRangeNM(getMaximumRange()* Basic::Distance::M2NM);
          seeker->irRequestSignature(irQuery);
          irQuery->unref();
-      } // If irQuery not null 
+      } // If irQuery not null
       else {
             if (isMessageEnabled(MSG_ERROR)) {
                 std::cerr << "Error: IrQueryMsg memory failure in IrSensor.cpp in IrSensor::transmit" << std::endl;
@@ -250,21 +250,22 @@ bool IrSensor::calculateIrQueryReturn(IrQueryMsg* const msg)
    LCreal totalBackground = 0.0;
 
    if (msg->getSendingSensor() != this) {
-		// this should not happen
+        // this should not happen
    }
 
    if (ownship != 0) {
-	   Simulation* sim = ownship->getSimulation();
-	   if (sim)
-		   atmos = sim->getIrAtmosphere();
+      Simulation* sim = ownship->getSimulation();
+      if (sim) {
+         atmos = sim->getIrAtmosphere();
+      }
    }
 
    if (atmos == 0) {
-	   // assume simple signature
-	   totalSignal = msg->getSignatureAtRange();
+      // assume simple signature
+      totalSignal = msg->getSignatureAtRange();
    }
    else {
-	   atmos->calculateAtmosphereContribution(msg, &totalSignal, &totalBackground);
+      atmos->calculateAtmosphereContribution(msg, &totalSignal, &totalBackground);
    }
 
    if (totalSignal > 0.0f) {
@@ -284,62 +285,62 @@ bool IrSensor::calculateIrQueryReturn(IrQueryMsg* const msg)
       // that part of the background radiation that is not blocked by the target.
       // If the target is larger than the field of view than it is all of background
       // power in the field of view. Use this as the default value.
-      
-	  // noiseBlockedByTarget is irradiance, in units of watts/m^2
+
+      // noiseBlockedByTarget is irradiance, in units of watts/m^2
 
       LCreal noiseBlockedByTarget = totalBackground * ifov;
-      
+
       // If the target is smaller than the field of view, it is the background power
       // in the effective field of view represented by the target, i.e. the
       // target area divided by the range squared.
-	  if (reflectorArea < backgroundArea) {
-		  // these two are equivalent
-		  // noiseBlockedByTarget *=  (reflectorArea/backgroundArea)
-          noiseBlockedByTarget = (totalBackground * reflectorArea) / rangeSquared;
+      if (reflectorArea < backgroundArea) {
+         // these two are equivalent
+         // noiseBlockedByTarget *=  (reflectorArea/backgroundArea)
+         noiseBlockedByTarget = (totalBackground * reflectorArea) / rangeSquared;
       }
 
-	  // attenuatedPower is irradiance, in watts/m^2
+      // attenuatedPower is irradiance, in watts/m^2
       LCreal attenuatedPower = totalSignal / rangeSquared;
 
-      // signalAboveNoise is the signal that the detector sees minus what it would see with 
+      // signalAboveNoise is the signal that the detector sees minus what it would see with
       // only the background radiation, and is just the amount of power subtracted by how much
-      // background power is being blocked. 
-	  // = (attenuatedPower + totalBackground*ifov - noiseBlockedByTarget) - totalBackground*ifov
-	  // signalAboveNoise is irradiance, in watts/m^2
+      // background power is being blocked.
+      // = (attenuatedPower + totalBackground*ifov - noiseBlockedByTarget) - totalBackground*ifov
+      // signalAboveNoise is irradiance, in watts/m^2
 
       LCreal signalAboveNoise = attenuatedPower - noiseBlockedByTarget;
 
-      // only Contrast seekers take absolute value in this equation. 
-      // Hotspot does not. 
-      
+      // only Contrast seekers take absolute value in this equation.
+      // Hotspot does not.
+
       if (signalAboveNoise < 0.0f &&
-               (msg->getSendingSensor()->getSensorType() == IrSensor::CONTRAST)) {  
+               (msg->getSendingSensor()->getSensorType() == IrSensor::CONTRAST)) {
          signalAboveNoise = -signalAboveNoise;
       }
 
       LCreal nei = msg->getNEI();
 
-      // Determine the ratio between the signal above the noise as compared to the level of 
+      // Determine the ratio between the signal above the noise as compared to the level of
       // radiation that would create a response at the same level as the sensor's internal noise.
-	  // if NEI is in watts/m^2, then SNR will be dimensionless.
-	  // if NEI is in watts/cm^2, then need to correct by 10^4.
+      // if NEI is in watts/m^2, then SNR will be dimensionless.
+      // if NEI is in watts/cm^2, then need to correct by 10^4.
 
       LCreal signalToNoiseRatio = signalAboveNoise / nei;
       LCreal backgroundNoiseRatio = noiseBlockedByTarget / nei;
       //LCreal signalToNoiseThreshold = msg->getSendingSensor()->getThreshold();
 
-	  // allow all signals to be returned; threshold test will be applied in process()
-	  {
-         IrQueryMsg* outMsg = new IrQueryMsg(); 
-         outMsg->setTarget(msg->getTarget()); 
+      // allow all signals to be returned; threshold test will be applied in process()
+      {
+         IrQueryMsg* outMsg = new IrQueryMsg();
+         outMsg->setTarget(msg->getTarget());
          outMsg->setGimbalAzimuth( LCreal(msg->getGimbal()->getAzimuth()) );
          outMsg->setGimbalElevation( LCreal(msg->getGimbal()->getElevation()) );
-         outMsg->setAzimuthAoi(msg->getAzimuthAoi()); 
-         outMsg->setElevationAoi(msg->getElevationAoi()); 
+         outMsg->setAzimuthAoi(msg->getAzimuthAoi());
+         outMsg->setElevationAoi(msg->getElevationAoi());
 
          osg::Vec3 los = msg->getLosVec();
 
-		 {
+         {
             // This is for non-ownHdgOnly-stabilized gimbal angles
             osg::Vec4 los0( los.x(), los.y(), los.z(), 0.0 );
             osg::Vec4 los_vec = ownship->getRotMat() * los0;
@@ -350,21 +351,21 @@ bool IrSensor::calculateIrQueryReturn(IrQueryMsg* const msg)
             outMsg->setRelativeElevation(el);
          }
 
-         outMsg->setLosVec(msg->getLosVec()); 
+         outMsg->setLosVec(msg->getLosVec());
          outMsg->setTgtLosVec( -msg->getLosVec() );
          outMsg->setPosVec(msg->getTarget()->getPosition());
          outMsg->setVelocityVec(msg->getTarget()->getVelocity());
          outMsg->setAccelVec(msg->getTarget()->getAcceleration());
 
-         LCreal angleAspect1 = outMsg->getPosVec().y() * 
-                                 outMsg->getVelocityVec().x() - 
-                                 outMsg->getPosVec().x() *
-                                 outMsg->getVelocityVec().y();
+         LCreal angleAspect1 = outMsg->getPosVec().y() *
+                                outMsg->getVelocityVec().x() -
+                                outMsg->getPosVec().x() *
+                                outMsg->getVelocityVec().y();
 
-         LCreal angleAspect2 = outMsg->getPosVec().x() * 
-                                 outMsg->getVelocityVec().x() + 
-                                 outMsg->getPosVec().y() * 
-                                 outMsg->getVelocityVec().y();
+         LCreal angleAspect2 = outMsg->getPosVec().x() *
+                                outMsg->getVelocityVec().x() +
+                                outMsg->getPosVec().y() *
+                                outMsg->getVelocityVec().y();
 
          outMsg->setAngleAspect(lcAtan2(-angleAspect1,angleAspect2));
 
@@ -372,22 +373,22 @@ bool IrSensor::calculateIrQueryReturn(IrQueryMsg* const msg)
          outMsg->setBackgroundNoiseRatio(backgroundNoiseRatio);
          outMsg->setSendingSensor(msg->getSendingSensor());
 
-		 // probably unnecessary - should be default val
-		 outMsg->setQueryMergeStatus(IrQueryMsg::NOT_MERGED);	// FAB
+         // probably unnecessary - should be default val
+         outMsg->setQueryMergeStatus(IrQueryMsg::NOT_MERGED); // FAB
 
          msg->getSendingSensor()->addStoredMessage(outMsg);
       }
-	  //else	// FAB - debug
-	  //{
-	  // int x = 0;
-	  // x = x +1;
-	  // }
+      //else        // FAB - debug
+      //{
+      // int x = 0;
+      // x = x +1;
+      // }
    } //totalSignal > 0
- //  else	// FAB - debug
+ //  else       // FAB - debug
  //  {
-	//   int x = 0;
-	//   x = x +1;
-	//}
+        //   int x = 0;
+        //   x = x +1;
+ //  }
 
    return true;
 }
@@ -399,24 +400,25 @@ void IrSensor::process(const LCreal dt)
 
    int numRecords = storedMessagesQueue.entries();
    if (numRecords > 0) {
-	   AngleOnlyTrackManager* tm = (AngleOnlyTrackManager*) getTrackManager();
-	   if (tm) { 
-			lcLock(storedMessagesLock);
-			numRecords = storedMessagesQueue.entries();
+      AngleOnlyTrackManager* tm = (AngleOnlyTrackManager*) getTrackManager();
+      if (tm) {
+         lcLock(storedMessagesLock);
+         numRecords = storedMessagesQueue.entries();
 
-			// Send on all messages EXCEPT those with signal below threshold and those merged
-			// into another signal. Those will simply be ignored and unreferenced.
- 
-			for (int i=0; i < numRecords; i++) {
-				IrQueryMsg* msg = storedMessagesQueue.get();
-				if (msg->getQueryMergeStatus() != IrQueryMsg::MERGED_OUT) {
-					if (msg->getSignalToNoiseRatio() > getThreshold())
-						tm->newReport(msg, msg->getSignalToNoiseRatio());
-				}
-				msg->unref();
-			}
-			lcUnlock(storedMessagesLock);
-	   }
+         // Send on all messages EXCEPT those with signal below threshold and those merged
+         // into another signal. Those will simply be ignored and unreferenced.
+
+         for (int i=0; i < numRecords; i++) {
+            IrQueryMsg* msg = storedMessagesQueue.get();
+            if (msg->getQueryMergeStatus() != IrQueryMsg::MERGED_OUT) {
+               if (msg->getSignalToNoiseRatio() > getThreshold()) {
+                  tm->newReport(msg, msg->getSignalToNoiseRatio());
+               }
+            }
+            msg->unref();
+         }
+         lcUnlock(storedMessagesLock);
+      }
    }
 
 }
@@ -435,7 +437,7 @@ bool IrSensor::setLowerWavelength(const LCreal w)
       ok = true;
    }
    return ok;
-   
+
 }
 
 // setUpperWavelength() - Sets the upper wavelength (microns; must be greater than 0)
@@ -461,7 +463,7 @@ bool IrSensor::setNEI(const LCreal n)
 }
 
 // setThreshold() - Sets the Signal to Noise Threshold
-bool IrSensor::setThreshold(const LCreal t) 
+bool IrSensor::setThreshold(const LCreal t)
 {
    bool ok = false;
    if (t >= 0) {
@@ -472,16 +474,16 @@ bool IrSensor::setThreshold(const LCreal t)
 }
 
 // setIFOV() - Sets the Instantaneous Field of View  (steradians)
-// also sets ifovTheta (radians) -- planar angle. 
+// also sets ifovTheta (radians) -- planar angle.
 // FAB - solid angle = 2 * pi * (1-cos(theta/2)) -- formula below actually returns ifovtheta/2
-//			- but all IR code that references ifovtheta actually wants ifovtheta/2 anyway
+// - but all IR code that references ifovtheta actually wants ifovtheta/2 anyway
 bool IrSensor::setIFOV(const LCreal i)
 {
    bool ok = false;
    if (i >= 0) {
       ifov = i;
       //calculate planar angle and set it as well.
-      ifovTheta =  (LCreal) acos ((1 - (ifov / (2.0 * PI)))); 
+      ifovTheta =  (LCreal) acos ((1 - (ifov / (2.0 * PI))));
       ok = true;
    }
    return ok;
@@ -497,27 +499,27 @@ bool IrSensor::setSensorType(const SensorType st)
 
 // setFieldOfRegard() - Sets the Instantaneous Field of View  (steradians)
 // FAB - solid angle = 2 * pi * (1-cos(theta/2)) -- formula below actually returns fieldOfRegardTheta/2
-//			- but all IR code that references fieldOfRegardTheta actually wants fieldOfRegardTheta/2 anyway
+// - but all IR code that references fieldOfRegardTheta actually wants fieldOfRegardTheta/2 anyway
 //bool IrSensor::setFieldOfRegard(const LCreal fov)
 //{
 //   bool ok = false;
 //   if (fov > 0) {
 //      fieldOfRegard = fov;
 //      //calculate planar angle and set it as well.
-//      fieldOfRegardTheta =  (LCreal) acos ((1 - (fieldOfRegard / (2.0 * PI)))); 
+//      fieldOfRegardTheta =  (LCreal) acos ((1 - (fieldOfRegard / (2.0 * PI))));
 //      ok = true;
 //   }
 //   return ok;
 //}
 
-//// setAzimuthBin() - Sets the lower Azimuth Bin 
+//// setAzimuthBin() - Sets the lower Azimuth Bin
 //bool IrSensor::setAzimuthBin(const LCreal w)
 //{
 //   azimuthBin = w;
 //   return true;
 //}
 //
-//// setElevationBin() - Sets the lower Elevation Bin 
+//// setElevationBin() - Sets the lower Elevation Bin
 //bool IrSensor::setElevationBin(const LCreal w)
 //{
 //   elevationBin = w;
@@ -527,7 +529,7 @@ bool IrSensor::setSensorType(const SensorType st)
 //bool IrSensor::setSlotAzimuthBin(const Basic::Number* const msg)
 //{
 //   LCreal value = 0.0f;
-// 
+//
 //   const Basic::Angle* a = dynamic_cast<const Basic::Angle*>(msg);
 //   if (a != 0) {
 //       Basic::Radians r;
@@ -551,7 +553,7 @@ bool IrSensor::setMaximumRange(const LCreal w)
 bool IrSensor::setSlotMaximumRange(const Basic::Number* const msg)
 {
    LCreal value = 0.0f;
- 
+
    const Basic::Distance* d = dynamic_cast<const Basic::Distance*>(msg);
    if (d != 0) {
        Basic::Meters m;
@@ -568,7 +570,7 @@ bool IrSensor::setSlotMaximumRange(const Basic::Number* const msg)
 //bool IrSensor::setSlotElevationBin(const Basic::Number* const msg)
 //{
 //   LCreal value = 0.0f;
-// 
+//
 //   const Basic::Angle* a = dynamic_cast<const Basic::Angle*>(msg);
 //   if (a != 0) {
 //       Basic::Radians r;
@@ -588,7 +590,7 @@ bool IrSensor::setSlotLowerWavelength(const Basic::Number* const msg)
 {
    LCreal value = 0.0f;
    bool ok = false;
- 
+
    const Basic::Distance* d = dynamic_cast<const Basic::Distance*>(msg);
    if (d != 0) {
        Basic::MicroMeters mm;
@@ -598,7 +600,7 @@ bool IrSensor::setSlotLowerWavelength(const Basic::Number* const msg)
       value = msg->getReal();
    }
    ok = setLowerWavelength(value);
-   
+
       if (!ok) {
                 if (isMessageEnabled(MSG_ERROR)) {
                     std::cerr << "IrSensor::setSlotLowerWavelength: Error setting Lower Wavelength!" << std::endl;
@@ -612,7 +614,7 @@ bool IrSensor::setSlotUpperWavelength(const Basic::Number* const msg)
 {
    bool ok = false;
    LCreal value = 0.0f;
- 
+
    const Basic::Distance* d = dynamic_cast<const Basic::Distance*>(msg);
    if (d != 0) {
        Basic::MicroMeters mm;
@@ -790,7 +792,7 @@ IrQueryMsg* IrSensor::getStoredMessage()
 }
 
 //------------------------------------------------------------------------------
-// peekStoredMessage() -- Return the ith stored object but do NOT remove it. 
+// peekStoredMessage() -- Return the ith stored object but do NOT remove it.
 //------------------------------------------------------------------------------
 IrQueryMsg* IrSensor::peekStoredMessage(unsigned int i)
 {
@@ -840,10 +842,10 @@ EMPTY_DELETEDATA(MergingIrSensor)
 // Slot table
 BEGIN_SLOTTABLE(MergingIrSensor)
    "azimuthBin",        // 1: azimuthBin
-   "elevationBin",      // 2: elevationBin 
+   "elevationBin",      // 2: elevationBin
 END_SLOTTABLE(MergingIrSensor)
 
-//  Map slot table 
+//  Map slot table
 BEGIN_SLOT_MAP(MergingIrSensor)
    ON_SLOT(1,setSlotAzimuthBin,Basic::Number)
    ON_SLOT(2,setSlotElevationBin,Basic::Number)
@@ -879,12 +881,12 @@ void MergingIrSensor::reset()
 
    // check the type of our track manager - we need to use the AirAngleOnlyTrkMgrPT
    if (getTrackManager() != 0) {
-	   const AirAngleOnlyTrkMgrPT* a = dynamic_cast<const AirAngleOnlyTrkMgrPT*>(getTrackManager());
-	   if (a==0) {
-          if (isMessageEnabled(MSG_WARNING)) {
-			  std::cerr << "MergingIrSensor::reset() : track manager is not an AirAngleOnlyTrkMgrPT" << std::endl;
-          }
-	   }
+      const AirAngleOnlyTrkMgrPT* a = dynamic_cast<const AirAngleOnlyTrkMgrPT*>(getTrackManager());
+      if (a==0) {
+         if (isMessageEnabled(MSG_WARNING)) {
+            std::cerr << "MergingIrSensor::reset() : track manager is not an AirAngleOnlyTrkMgrPT" << std::endl;
+         }
+      }
    }
 }
 
@@ -896,74 +898,74 @@ void MergingIrSensor::receive(const LCreal dt)
 }
 
 void MergingIrSensor::mergeIrReturns()
-{ 
+{
    int numRecords = storedMessagesQueue.entries();
    if (numRecords > 0) {
 
-      //int* deleteArray = new int [numRecords]; 
+      //int* deleteArray = new int [numRecords];
       //if (deleteArray == 0) {
       //   if (isMessageEnabled(MSG_ERROR)) {
-      //      std::cerr << "Error: Allocation memory failure in IrSensor::mergeIrReturns" << std::endl; 
+      //      std::cerr << "Error: Allocation memory failure in IrSensor::mergeIrReturns" << std::endl;
       //   }
       //}
-      //else { 
+      //else {
          //for (int i=0; i < numRecords; i++) {
-         //   deleteArray[i] = 0; 
+         //   deleteArray[i] = 0;
          //}
 
          lcLock(storedMessagesLock);
-         // Traverse the stored message queue using peek (). Examine every 
-         // message. Compare every stored message against every OTHER stored 
-         // message. If the two are too close together, merge the two signals 
-         // and mark the second message in the delete array.  
-         // Proceed through the loop, ignoring all messages marked "deleted" 
-         // in the delete array. 
+         // Traverse the stored message queue using peek (). Examine every
+         // message. Compare every stored message against every OTHER stored
+         // message. If the two are too close together, merge the two signals
+         // and mark the second message in the delete array.
+         // Proceed through the loop, ignoring all messages marked "deleted"
+         // in the delete array.
          numRecords = storedMessagesQueue.entries();
-		 
-		 if (isMessageEnabled(MSG_DEBUG)) {
-			std::cout << "IrSensor: numRecords returned " << numRecords << std::endl;
+
+         if (isMessageEnabled(MSG_DEBUG)) {
+            std::cout << "IrSensor: numRecords returned " << numRecords << std::endl;
          }
 
          for (int i=0; i < numRecords; i++) {
-		    //if (deleteArray[i] == 0) {  // Do not bother processing those marked 
+            //if (deleteArray[i] == 0) {  // Do not bother processing those marked
                // for deletion -- these have already been
-               // merged and must be ignored. 
+               // merged and must be ignored.
 
-               IrQueryMsg* currentMsg = storedMessagesQueue.peek0(i); 
+            IrQueryMsg* currentMsg = storedMessagesQueue.peek0(i);
 
-			// Do not bother processing those marked 
+            // Do not bother processing those marked
             // for deletion -- these have already been
-            // merged and must be ignored. 
-			if (currentMsg->getQueryMergeStatus()!= IrQueryMsg::MERGED_OUT) {
+            // merged and must be ignored.
+            if (currentMsg->getQueryMergeStatus()!= IrQueryMsg::MERGED_OUT) {
 
                for (int j = i+1; j < numRecords; j++) {
 
                   IrQueryMsg* nextMsg = storedMessagesQueue.peek0(j);
                   LCreal azimuthDelta = currentMsg->getRelativeAzimuth() - nextMsg->getRelativeAzimuth();
-                  LCreal elevationDelta = currentMsg->getRelativeElevation() 
+                  LCreal elevationDelta = currentMsg->getRelativeElevation()
                      - nextMsg->getRelativeElevation();
 
-                  if (azimuthDelta < 0) 
-                     azimuthDelta = -azimuthDelta; 
+                  if (azimuthDelta < 0)
+                     azimuthDelta = -azimuthDelta;
 
-                  if (elevationDelta < 0) 
-                     elevationDelta = -elevationDelta; 
+                  if (elevationDelta < 0)
+                     elevationDelta = -elevationDelta;
 
-                  if ((azimuthDelta < azimuthBin) && 
+                  if ((azimuthDelta < azimuthBin) &&
                      (elevationDelta < elevationBin)) { // two signals are too close together
-                    // for the sensor to distinguish between them; 
-                    // we will merge the two signals based 
-                    // on their weighted signal-to-noise. 
+                    // for the sensor to distinguish between them;
+                    // we will merge the two signals based
+                    // on their weighted signal-to-noise.
                     LCreal currentRatio = 0.0f;
                     LCreal nextRatio = 0.0f;
 
-                    // find current ratio. 
+                    // find current ratio.
                     if (isMessageEnabled(MSG_DEBUG)) {
-                     std::cout << "IrSensor: merging target " <<  nextMsg->getTarget()->getName()->getString() 
+                     std::cout << "IrSensor: merging target " <<  nextMsg->getTarget()->getName()->getString()
                        << " into target " <<currentMsg->getTarget()->getName()->getString()  << std::endl;
                     }
 
-                    if (currentMsg->getSignalToNoiseRatio() > 
+                    if (currentMsg->getSignalToNoiseRatio() >
                        currentMsg->getBackgroundNoiseRatio()) {
 
                           currentRatio = currentMsg->getSignalToNoiseRatio() +
@@ -973,59 +975,59 @@ void MergingIrSensor::mergeIrReturns()
                        if (currentMsg->getSignalToNoiseRatio() < 0) {
                           currentRatio = -currentMsg->getSignalToNoiseRatio() -
                              currentMsg->getBackgroundNoiseRatio();
-                       } else { 
+                       } else {
                           currentRatio = -currentMsg->getSignalToNoiseRatio() -
                              currentMsg->getBackgroundNoiseRatio();
-                       } // signaltonoise < 0 
+                       } // signaltonoise < 0
 
-                    } // if current signal > background 
+                    } // if current signal > background
 
-                    //now do the same thing for the next message. 
-                    if (nextMsg->getSignalToNoiseRatio() > 
+                    //now do the same thing for the next message.
+                    if (nextMsg->getSignalToNoiseRatio() >
                        nextMsg->getBackgroundNoiseRatio()) {
                           nextRatio = nextMsg->getSignalToNoiseRatio() +
-                             nextMsg->getBackgroundNoiseRatio();		
+                             nextMsg->getBackgroundNoiseRatio();
                     } else {
                        if (nextMsg->getSignalToNoiseRatio() < 0) {
                           nextRatio = -nextMsg->getSignalToNoiseRatio() -
                              nextMsg->getBackgroundNoiseRatio();
-                       } else { 
+                       } else {
                           nextRatio = -nextMsg->getSignalToNoiseRatio() -
                              nextMsg->getBackgroundNoiseRatio();
-                       } // signaltonoise < 0 
+                       } // signaltonoise < 0
 
-                    } // if next signal > background 
+                    } // if next signal > background
 
-                    // use ratios to find weights. 
-                    LCreal sumRatio = currentRatio + nextRatio; 
+                    // use ratios to find weights.
+                    LCreal sumRatio = currentRatio + nextRatio;
 
                     LCreal currentWeight = currentRatio / sumRatio;
-                    LCreal nextWeight = (LCreal) 1.0 - currentWeight; 
+                    LCreal nextWeight = (LCreal) 1.0 - currentWeight;
 
                     //combine line-of-sight vector using weights
                     currentMsg->setLosVec((currentMsg->getLosVec() * currentWeight) +
-                       (nextMsg->getLosVec() * nextWeight)	);
+                       (nextMsg->getLosVec() * nextWeight) );
 
-                    // combine position 
+                    // combine position
                     currentMsg->setPosVec((currentMsg->getPosVec() * currentWeight) +
-                       (nextMsg->getPosVec() * nextWeight)	);
+                       (nextMsg->getPosVec() * nextWeight) );
 
                     // combine velocity
                     currentMsg->setVelocityVec((currentMsg->getVelocityVec() * currentWeight) +
-                       (nextMsg->getVelocityVec() * nextWeight)	);
+                       (nextMsg->getVelocityVec() * nextWeight) );
 
-                    // combine acceleration 
+                    // combine acceleration
                     currentMsg->setAccelVec((currentMsg->getAccelVec() * currentWeight) +
-                       (nextMsg->getAccelVec() * nextWeight)	);
+                       (nextMsg->getAccelVec() * nextWeight) );
 
-                    // combine signal to noise ratios. 
+                    // combine signal to noise ratios.
                     sumRatio = sumRatio - currentMsg->getBackgroundNoiseRatio();
-                    if (sumRatio < 0) 
+                    if (sumRatio < 0)
                        sumRatio = -sumRatio;
 
                     currentMsg->setSignalToNoiseRatio(sumRatio);
 
-                    //combine Azimuth and Elevation. 
+                    //combine Azimuth and Elevation.
                     currentMsg->setAzimuthAoi((currentMsg->getAzimuthAoi() * currentWeight) +
                        nextMsg->getAzimuthAoi() * nextWeight);
 
@@ -1041,29 +1043,29 @@ void MergingIrSensor::mergeIrReturns()
                     currentMsg->setRelativeElevation((currentMsg->getRelativeElevation() * currentWeight) +
                        (nextMsg->getRelativeElevation() * nextWeight));
 
-					// signal that this report has merged targets
-					currentMsg->setQueryMergeStatus(IrQueryMsg::MERGED);
-					nextMsg->setQueryMergeStatus(IrQueryMsg::MERGED_OUT);
+                    // signal that this report has merged targets
+                    currentMsg->setQueryMergeStatus(IrQueryMsg::MERGED);
+                    nextMsg->setQueryMergeStatus(IrQueryMsg::MERGED_OUT);
 
-                    //deleteArray[j] = 1;  // now that we have merged this signal with the 
-                    // Ith signal, it must be deleted. It will not 
-                    // be passed on to the track manager. 
+                    //deleteArray[j] = 1;  // now that we have merged this signal with the
+                    // Ith signal, it must be deleted. It will not
+                    // be passed on to the track manager.
 
                     //if (isMessageEnabled(MSG_INFO)) {
                     //std::cout << "IrSensor: End Merge" << std::endl;
-					//}
+                    //}
 
-                  } // if we merge 
-               } // end for j = i + 1; 
+                  } // if we merge
+               } // end for j = i + 1;
             } // End if delete Array
-			else {	// debug - this target ws merged into another
-				int x=0;
-				x=x+1;
-			}
-         } // end for i = 0; 
+            else { // debug - this target ws merged into another
+               int x=0;
+               x=x+1;
+            }
+         } // end for i = 0;
          lcUnlock(storedMessagesLock);
          //delete[] deleteArray;
-      //} // newArray is not null. 
+      //} // newArray is not null.
    } // numRecords > 0
 }
 
@@ -1075,20 +1077,20 @@ Basic::Object* MergingIrSensor::getSlotByIndex(const int si)
     return BaseClass::getSlotByIndex(si);
 }
 
-// setAzimuthBin() - Sets the lower Azimuth Bin 
+// setAzimuthBin() - Sets the lower Azimuth Bin
 bool MergingIrSensor::setAzimuthBin(const LCreal w)
-{ 
+{
    azimuthBin = w;
    return true;
 }
 
-// setElevationBin() - Sets the lower Elevation Bin 
+// setElevationBin() - Sets the lower Elevation Bin
 bool MergingIrSensor::setElevationBin(const LCreal w)
 {
    elevationBin = w;
    return true;
 }
- 
+
 bool MergingIrSensor::setSlotAzimuthBin(const Basic::Number* const msg)
 {
    LCreal value = 0.0f;
@@ -1097,20 +1099,20 @@ bool MergingIrSensor::setSlotAzimuthBin(const Basic::Number* const msg)
    if (a != 0) {
        Basic::Radians r;
        value = (LCreal)r.convert(*a);
-				}
+   }
    else if (msg != 0) {
       value = msg->getReal();
-			}
+   }
 
    setAzimuthBin(value);
 
    return true;
-	   }
+}
 
 bool MergingIrSensor::setSlotElevationBin(const Basic::Number* const msg)
 {
    LCreal value = 0.0f;
- 
+
    const Basic::Angle* a = dynamic_cast<const Basic::Angle*>(msg);
    if (a != 0) {
        Basic::Radians r;

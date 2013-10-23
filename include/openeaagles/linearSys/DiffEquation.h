@@ -14,7 +14,7 @@ namespace LinearSystem {
 // Base class:  Object -> ScalerFunc -> DiffEquation
 //
 // Description: Base class for various Discrete z-domain Transfer Functions.  Core
-//              engine is a difference equation that has it's coefficients initialized
+//              engine is a difference equation that has its coefficients initialized
 //              by the various derived classes.
 //
 //------------------------------------------------------------------------------

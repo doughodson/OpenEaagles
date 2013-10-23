@@ -18,8 +18,8 @@ namespace Basic {
 
 // Form name: Density
 // Slots:
-//    mass    <Mass>    ! Mass (default: 1)
-//    volume  <Volume>  ! Volume (default: 1)
+//    mass    <Mass>    ! Mass   (default: 1 kg)
+//    volume  <Volume>  ! Volume (default: 1 m^3)
 //
 // getMassUnits() -- get units of this density object
 //     const Mass* Density::getMass() const

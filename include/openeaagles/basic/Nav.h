@@ -53,12 +53,12 @@ public:
    // with an optional earth model, em
    //------------------------------------------------------------------------------
    static bool fbd2llE(
-         const double slat,         // IN: Starting (reference) latitude (degs)
-         const double slon,         // IN: Starting (reference) longitude (degs)
-         const double brg,          // IN: True bearing (degs)
-         const double dist,         // IN: Distance (ground range) (nm)
-         double* const dlat,        // OUT: Destination latitude (degs)
-         double* const dlon,        // OUT:  Destination longitude (degs)
+         const double slat,           // IN: Starting (reference) latitude (degs)
+         const double slon,           // IN: Starting (reference) longitude (degs)
+         const double brg,            // IN: True bearing (degs)
+         const double dist,           // IN: Distance (ground range) (nm)
+         double* const dlat,          // OUT: Destination latitude (degs)
+         double* const dlon,          // OUT:  Destination longitude (degs)
          const EarthModel* const em=0 // IN: Pointer to an optional earth model (default: WGS-84)
       );
 
@@ -70,12 +70,12 @@ public:
    // with an optional earth model, em
    //------------------------------------------------------------------------------
    static bool fll2bdE(
-         const double slat,         // IN: Starting (reference) latitude (degs)
-         const double slon,         // IN: Starting (reference) longitude (degs)
-         const double dlat,         // IN: Destination latitude (degs)
-         const double dlon,         // IN: Destination longitude (degs)
-         double* const brg,         // OUT: True bearing (degs)
-         double* const dist,           // OUT: Distance (ground range) (nm)
+         const double slat,           // IN: Starting (reference) latitude (degs)
+         const double slon,           // IN: Starting (reference) longitude (degs)
+         const double dlat,           // IN: Destination latitude (degs)
+         const double dlon,           // IN: Destination longitude (degs)
+         double* const brg,           // OUT: True bearing (degs)
+         double* const dist,          // OUT: Distance (ground range) (nm)
          const EarthModel* const em=0 // IN: Pointer to an optional earth model (default: WGS-84)
       );
 
@@ -112,7 +112,7 @@ public:
       );
 
    //------------------------------------------------------------------------------
-   // Legacy flat-earth projection; same as fbd2llS() 
+   // Legacy flat-earth projection; same as fbd2llS()
    //------------------------------------------------------------------------------
    static bool fbd2ll(
          const double slat,         // IN: Starting (reference) latitude (degs)
@@ -124,7 +124,7 @@ public:
       );
 
    //------------------------------------------------------------------------------
-   // Legacy flat-earth projection; same as fll2bdS() 
+   // Legacy flat-earth projection; same as fll2bdS()
    //------------------------------------------------------------------------------
    static bool fll2bd(
          const double slat,         // IN: Starting (reference) latitude (degs)
@@ -143,18 +143,18 @@ public:
    // Using body angles
    static bool aer2xyz(
          osg::Vec3d* const pos,     // OUT: Position vector array (NED, player centered)  [meters]
-         const osg::Matrixd& rm,    // IN:  NED to body rotational matrix (see computeRotationalMatrix())
-         const double az,           // IN:  Azimuth (body)  (radians)
-         const double el,           // IN:  Elevation (body, positive up, radians)
-         const double rng           // IN:  Range [meters]
+         const osg::Matrixd& rm,    // IN: NED to body rotational matrix (see computeRotationalMatrix())
+         const double az,           // IN: Azimuth (body, radians)
+         const double el,           // IN: Elevation (body, positive up, radians)
+         const double rng           // IN: Range [meters]
       );
 
    // Using NED angles
    static bool aer2xyz(
          osg::Vec3d* const pos,     // OUT: Position vector array (NED, player centered)  [meters]
-         const double az,           // IN:  Azimuth (NED, radians)
-         const double el,           // IN:  Elevation (NED, positive up, radians)
-         const double rng           // IN:  Range [meters]
+         const double az,           // IN: Azimuth (NED, radians)
+         const double el,           // IN: Elevation (NED, positive up, radians)
+         const double rng           // IN: Range [meters]
       );
 
    //------------------------------------------------------------------------------
@@ -164,20 +164,20 @@ public:
    // Using body angles
    static bool aer2xyzArray(
          osg::Vec3d* const pos,     // OUT: position vector array (NED, player centered)  [meters]
-         const osg::Matrixd& rm,    // IN:  NED to body rotational matrix (see computeRotationalMatrix())
-         const double* const az,    // IN:  azimuth (body) array  (radians)
-         const double* const el,    // IN:  elevation (body) array (positive up) (radians)
-         const double* const rng,   // IN:  range array [meters]
-         const unsigned int n       // IN:  number of sets to convert
+         const osg::Matrixd& rm,    // IN: NED to body rotational matrix (see computeRotationalMatrix())
+         const double* const az,    // IN: azimuth (body) array  (radians)
+         const double* const el,    // IN: elevation (body) array (positive up) (radians)
+         const double* const rng,   // IN: range array [meters]
+         const unsigned int n       // IN: number of sets to convert
       );
 
    // Using NED angles
    static bool aer2xyzArray(
          osg::Vec3d* const pos,     // OUT: position vector array (NED, player centered)  [meters]
-         const double* const az,    // IN:  azimuth (NED) array  (radians)
-         const double* const el,    // IN:  elevation (NED) array (positive up) (radians)
-         const double* const rng,   // IN:  range array [meters]
-         const unsigned int n       // IN:  number of sets to convert
+         const double* const az,    // IN: azimuth (NED) array  (radians)
+         const double* const el,    // IN: elevation (NED) array (positive up) (radians)
+         const double* const rng,   // IN: range array [meters]
+         const unsigned int n       // IN: number of sets to convert
       );
 
    //------------------------------------------------------------------------------
@@ -187,18 +187,18 @@ public:
    // Computing NED angles
    static bool xyz2aer(
          osg::Vec3d* const aer,     // OUT: position vector  (aer)   [deg,deg,meters]
-         const double x,            // IN:  x                        [meters]
-         const double y,            // IN:  y                        [meters]
-         const double z             // IN:  z                        [meters]
+         const double x,            // IN: x                         [meters]
+         const double y,            // IN: y                         [meters]
+         const double z             // IN: z                         [meters]
       );
 
    // Computing body angles
    static bool xyz2aer(
          osg::Vec3d* const aer,     // OUT: position vector  (aer)   [deg,deg,meters]
-         const osg::Matrixd& rm,    // IN:  NED to body rotational matrix (see computeRotationalMatrix())
-         const double x,            // IN:  x                        [meters]
-         const double y,            // IN:  y                        [meters]
-         const double z             // IN:  z                        [meters]
+         const osg::Matrixd& rm,    // IN: NED to body rotational matrix (see computeRotationalMatrix())
+         const double x,            // IN: x                        [meters]
+         const double y,            // IN: y                        [meters]
+         const double z             // IN: z                        [meters]
       );
 
    //------------------------------------------------------------------------------
@@ -212,12 +212,12 @@ public:
    // Great circle method #1 -- Elliptical earth model
    // ---
    static bool gbd2ll(
-         const double slat,         // IN: Starting (reference) latitude (degs)
-         const double slon,         // IN: Starting (reference) longitude (degs)
-         const double brg,          // IN: True bearing (degs)
-         const double dist,         // IN: Distance (ground range) (nm)
-         double* const dlat,        // OUT: Destination latitude (degs)
-         double* const dlon,        // OUT: Destination longitude (degs)
+         const double slat,           // IN: Starting (reference) latitude (degs)
+         const double slon,           // IN: Starting (reference) longitude (degs)
+         const double brg,            // IN: True bearing (degs)
+         const double dist,           // IN: Distance (ground range) (nm)
+         double* const dlat,          // OUT: Destination latitude (degs)
+         double* const dlon,          // OUT: Destination longitude (degs)
          const EarthModel* const em=0 // IN: Pointer to an optional earth model (default: WGS-84)
       );
 
@@ -231,7 +231,7 @@ public:
          const double brg,          // IN: True bearing (degs)
          const double dist,         // IN: Distance (ground range) (nm)
          double* const dlat,        // OUT: Destination latitude (degs)
-         double* const dlon         // OUT:  Destination longitude (degs)
+         double* const dlon         // OUT: Destination longitude (degs)
       );
 
    //------------------------------------------------------------------------------
@@ -245,12 +245,12 @@ public:
    // Great circle method #1 -- Elliptical earth model
    // ---
    static bool gll2bd(
-         const double slat,         // IN: Starting (reference) latitude (degs)
-         const double slon,         // IN: Starting (reference) longitude (degs)
-         const double dlat,         // IN: Destination latitude (degs)
-         const double dlon,         // IN: Destination longitude (degs)
-         double* const brg,         // OUT: True bearing (degs)
-         double* const dist,           // OUT: Distance (ground range) (nm)
+         const double slat,           // IN: Starting (reference) latitude (degs)
+         const double slon,           // IN: Starting (reference) longitude (degs)
+         const double dlat,           // IN: Destination latitude (degs)
+         const double dlon,           // IN: Destination longitude (degs)
+         double* const brg,           // OUT: True bearing (degs)
+         double* const dist,          // OUT: Distance (ground range) (nm)
          const EarthModel* const em=0 // IN: Pointer to an optional earth model (default: WGS-84)
       );
 
@@ -264,7 +264,7 @@ public:
          const double dlat,         // IN: Destination latitude (degs)
          const double dlon,         // IN: Destination longitude (degs)
          double* const brg,         // OUT: True bearing (degs)
-         double* const dist  // OUT: Distance (ground range) (nm)
+         double* const dist         // OUT: Distance (ground range) (nm)
       );
 
    //------------------------------------------------------------------------------
@@ -305,7 +305,7 @@ public:
          double* const elev = 0     // OUT: (optional) elevation angle (degs)
       );
 
- 
+
    //------------------------------------------------------------------------------
    // Vincenty direct method Lat/Lon to Brg/Dist (vbd2ll)
    //
@@ -396,9 +396,9 @@ public:
 
    // Version using radians
    static bool computeRotationalMatrix(
-         const double phi,          // IN:  Roll angle (radians)
-         const double theta,        // IN:  Pitch angle (radians)
-         const double psi,          // IN:  Yaw angle (radians)
+         const double phi,          // IN: Roll angle (radians)
+         const double theta,        // IN: Pitch angle (radians)
+         const double psi,          // IN: Yaw angle (radians)
          osg::Matrixd* const rm,    // OUT: Rotational matrix
          osg::Vec2d* const scPhi=0, // OUT: Sin/Cos of phi (Optional)
          osg::Vec2d* const scTht=0, // OUT: Sin/Cos of theta (Optional)
@@ -407,9 +407,9 @@ public:
 
    // Version using degrees
    static bool computeRotationalMatrixDeg(
-         const double phiD,         // IN:  Roll angle (degrees)
-         const double thetaD,       // IN:  Pitch angle (degrees)
-         const double psiD,         // IN:  Yaw angle (degrees)
+         const double phiD,         // IN: Roll angle (degrees)
+         const double thetaD,       // IN: Pitch angle (degrees)
+         const double psiD,         // IN: Yaw angle (degrees)
          osg::Matrixd* const rm,    // OUT: Rotational matrix
          osg::Vec2d* const scPhi=0, // OUT: Sin/Cos of phi (Optional)
          osg::Vec2d* const scTht=0, // OUT: Sin/Cos of theta (Optional)
@@ -418,7 +418,7 @@ public:
 
    // Vec3 version
    static bool computeRotationalMatrix(
-         const osg::Vec3d& angles,  // IN:  Euler angles [ phi theta psi ] (radians)
+         const osg::Vec3d& angles,  // IN: Euler angles [ phi theta psi ] (radians)
          osg::Matrixd* const m,     // OUT: Matrix
          osg::Vec2d* const scPhi=0, // OUT: Sin/Cos of phi (Optional)
          osg::Vec2d* const scTht=0, // OUT: Sin/Cos of theta (Optional)
@@ -427,7 +427,7 @@ public:
 
    // Vec3 version using degrees
    static bool computeRotationalMatrixDeg(
-         const osg::Vec3d& angles,  // IN:  Euler angles [ phi theta psi ] (degrees)
+         const osg::Vec3d& angles,  // IN: Euler angles [ phi theta psi ] (degrees)
          osg::Matrixd* const m,     // OUT: Matrix
          osg::Vec2d* const scPhi=0, // OUT: Sin/Cos of phi (Optional)
          osg::Vec2d* const scTht=0, // OUT: Sin/Cos of theta (Optional)
@@ -470,29 +470,29 @@ public:
    // with an optional earth model (default: WGS-84)
    //----------------------------------------------------------
    static bool convertPosVec2llE(
-         const double slat,         // IN: Reference latitude (degs)
-         const double slon,         // IN: Reference longitude (degs)
-         const double sinSlat,      // IN: Sine of ref latitude
-         const double cosSlat,      // IN: Cosine of ref latitude
-         const osg::Vec3d& pos,     // IN: NED position vector from ref point (Meters)
-         double* const lat,         // OUT: Latitude (degs)
-         double* const lon,         // OUT: Longitude (degs)
-         double* const alt,         // OUT: Altitude (meters)
+         const double slat,           // IN: Reference latitude (degs)
+         const double slon,           // IN: Reference longitude (degs)
+         const double sinSlat,        // IN: Sine of ref latitude
+         const double cosSlat,        // IN: Cosine of ref latitude
+         const osg::Vec3d& pos,       // IN: NED position vector from ref point (Meters)
+         double* const lat,           // OUT: Latitude (degs)
+         double* const lon,           // OUT: Longitude (degs)
+         double* const alt,           // OUT: Altitude (meters)
          const EarthModel* const em=0 // IN: Pointer to an optional earth model (default: WGS-84)
       );
 
    static bool convertPosVec2llE(
-         const double slat,         // IN: Reference latitude (degs)
-         const double slon,         // IN: Reference longitude (degs)
-         const osg::Vec3d& pos,     // IN: NED position vector from ref point (Meters)
-         double* const lat,         // OUT: Latitude (degs)
-         double* const lon,         // OUT: Longitude (degs)
-         double* const alt,         // OUT: Altitude (meters)
+         const double slat,           // IN: Reference latitude (degs)
+         const double slon,           // IN: Reference longitude (degs)
+         const osg::Vec3d& pos,       // IN: NED position vector from ref point (Meters)
+         double* const lat,           // OUT: Latitude (degs)
+         double* const lon,           // OUT: Longitude (degs)
+         double* const alt,           // OUT: Altitude (meters)
          const EarthModel* const em=0 // IN: Pointer to an optional earth model (default: WGS-84)
       );
 
    //----------------------------------------------------------
-   // NED position vector to LLA using a flat earth projection 
+   // NED position vector to LLA using a flat earth projection
    // with a spherical earth radius of ERAD60
    //----------------------------------------------------------
    static bool convertPosVec2llS(
@@ -510,8 +510,8 @@ public:
    //----------------------------------------------------------
    // using double Vec3
    static bool convertPosVec2LL(
-         const double slat,         // IN: Reference latitude (degs)
-         const double slon,         // IN: Reference longitude (degs)
+         const double slat,         // IN: Reference (starting) latitude (degs)
+         const double slon,         // IN: Reference (starting) longitude (degs)
          const osg::Vec3d& pos,     // IN: NED position vector from ref point (Meters)
          double* const lat,         // OUT: Latitude (degs)
          double* const lon,         // OUT: Longitude (degs)
@@ -519,8 +519,8 @@ public:
       );
    // using float Vec3
    static bool convertPosVec2LL(
-         const double slat,         // IN: Reference latitude (degs)
-         const double slon,         // IN: Reference longitude (degs)
+         const double slat,         // IN: Reference (starting) latitude (degs)
+         const double slon,         // IN: Reference (starting) longitude (degs)
          const osg::Vec3f& pos,     // IN: NED position vector from ref point (Meters)
          double* const lat,         // OUT: Latitude (degs)
          double* const lon,         // OUT: Longitude (degs)
@@ -631,7 +631,7 @@ public:
          const double lat,            // IN: Geodetic latitude  (degrees)
          const double lon,            // IN: Geodetic longitude (degrees)
          const double alt,            // IN: Geodetic altitude  (meters)
-         double* const pX,            // OUT: ECEF X component   (meters)   
+         double* const pX,            // OUT: ECEF X component   (meters)
          double* const pY,            // OUT: ECEF Y component   (meters)
          double* const pZ,            // OUT: ECEF Z component   (meters)
          const EarthModel* const em=0 // IN: Pointer to an optional earth model (default: WGS-84)
@@ -759,24 +759,24 @@ public:
 
    // Converts Latitude, Longitude to UTM Northing and Easting
    static bool convertLL2Utm(
-      const double lat,             // IN:  Latitude  [DEG]
-      const double lon,             // IN:  Longitude [DEG]
+      const double lat,             // IN: Latitude  [DEG]
+      const double lon,             // IN: Longitude [DEG]
       char* const  pLatZone,        // OUT: Latitude Zone
       int*  const  pLonZone,        // OUT: Longitude Zone
       double* const pNorthing,      // OUT: Northing [M]
       double* const pEasting,       // OUT: Easting  [M]
-      const EarthModel* const pEM=0 // IN:  Pointer to an optional earth model (default: WGS-84)
+      const EarthModel* const pEM=0 // IN: Pointer to an optional earth model (default: WGS-84)
    );
-   
+
    // Converts UTM Northing and Easting to Latitude, Longitude
    static bool convertUtm2LL(
-      const double northing,        // IN:  Northing [M]
-      const double easting,         // IN:  Easting  [M]
-      char latZone,                 // IN:  Latitude Zone
-      int  lonZone,                 // IN:  Longitude Zone
+      const double northing,        // IN: Northing [M]
+      const double easting,         // IN: Easting  [M]
+      char latZone,                 // IN: Latitude Zone
+      int  lonZone,                 // IN: Longitude Zone
       double* const pLat,           // OUT: Latitude  [DEG]
       double* const pLon,           // OUT: Longitude [DEG]
-      const EarthModel* const pEM=0 // IN:  Pointer to an optional earth model (default: WGS-84)      
+      const EarthModel* const pEM=0 // IN: Pointer to an optional earth model (default: WGS-84)
    );
 
 }; // End class Nav

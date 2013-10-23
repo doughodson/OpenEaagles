@@ -17,8 +17,8 @@ namespace Basic {
 // Description:  Flow Rate as a component of volume and time.
 // Form name: FlowRate
 // Slots:
-//    volume     <Volume>   ! Volume (default: 1)
-//    flowTime   <Time>     ! Time (default: 1)
+//    volume     <Volume>   ! Volume (default: 1 ft^3)
+//    flowTime   <Time>     ! Time   (default: 1 second)
 //
 // getSlotByIndex() for FlowRate
 //     Object* FlowRate::getSlotByIndex(const int si)

@@ -2,8 +2,8 @@
 
 
 // this is where the UPDATE_INSTRUMENTS value should be sent
-// Analog Dial is an instrument that acts like a rotating filled in circle, which gives us a good masking effect.  It works almost exactly like DialArcSegment, only it filles in
-// to it's center, creating an overaly.  In this case, we are masking the texture to only show a small portion of the dial, based on the speed value we are given.
+// AnalogDial is an instrument that acts like a rotating filled in circle, which gives us a good masking effect.  It works almost exactly like DialArcSegment, only it fills in
+// to its center, creating an overlay.  In this case, we are masking the texture to only show a small portion of the dial, based on the speed value we are given.
 tas:    
 ( AnalogDial
     startAngle: 15

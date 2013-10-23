@@ -672,7 +672,7 @@ void Nib::playerState2Nib()
       //   player->getGeocEulerAngles(),
       //   player->getGeocAngularVelocities()
       //);
-      
+
       resetDeadReckoning(
          RVW_DRM,
          player->getSynchronizedState().getGeocPosition(),
@@ -708,7 +708,7 @@ void Nib::playerState2Nib()
 
 //------------------------------------------------------------------------------
 // nib2PlayerState() --
-//   Called by our processInputList() to it's time to update the OpenEaagles's
+//   Called by our processInputList(), updates state information from the
 //   networked player.
 //------------------------------------------------------------------------------
 void Nib::nib2PlayerState()

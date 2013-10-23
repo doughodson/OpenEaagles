@@ -98,7 +98,7 @@ private:
     double nwLat;               // Northwest latitude of entry
     double nwLon;               // Northwest longitude of entry
     double seLat;               // Southeast latitude of entry
-    double seLon;               // Southest longitude of entry
+    double seLon;               // Southeast longitude of entry
     double swLat;               // Southwest latitude of entry
     double swLon;               // Southwest longitude of entry
     double neLat;               // Northeast latitude of entry

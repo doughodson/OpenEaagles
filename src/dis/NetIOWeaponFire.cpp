@@ -141,7 +141,7 @@ bool Nib::weaponFireMsgFactory(const LCreal)
          else {
             const Nib* fNIB = dynamic_cast<const Nib*>( tPlayer->getNib() );
             if (fNIB != 0) {
-               // Networked player, use it's NIB's IDs
+               // Networked player, use its NIB's IDs
                pdu.targetEntityID.simulationID.siteIdentification = fNIB->getSiteID();
                pdu.targetEntityID.simulationID.applicationIdentification = fNIB->getApplicationID();
                tOk = true;
@@ -149,7 +149,7 @@ bool Nib::weaponFireMsgFactory(const LCreal)
          }
       }
       if (!tOk) {
-         // Networked player, use it's NIB's IDs
+         // Networked player, use its NIB's IDs
          pdu.targetEntityID.ID = 0;
          pdu.targetEntityID.simulationID.siteIdentification = 0;
          pdu.targetEntityID.simulationID.applicationIdentification = 0;

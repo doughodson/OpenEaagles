@@ -48,7 +48,7 @@ private:
     int    quantity;       // how many tick marks will we have?
     LCreal gaugeLength;    // length we are spanning our tick marks over
     bool   flip;           // our flip variable
-    BasicGL::Graphic* myGraphic; // our graphic (if we choose to use on for a tick mark)
+    BasicGL::Graphic* myGraphic; // our graphic (if we choose to use one for a tick mark)
 };
 
 }  // end of Instruments namespace

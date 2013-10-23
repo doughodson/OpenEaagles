@@ -88,8 +88,8 @@ public:
    virtual bool isWeaponDeliveryMode(const unsigned int mode) const; // Is this the delivery mode?
    virtual unsigned int getWeaponDeliveryMode() const; // Returns the delivery mode
 
-   virtual bool isGunSelected() const;                // Selects/deselects the gun
-   virtual bool isWeaponReleased() const;             // Are weapons being release?
+   virtual bool isGunSelected() const;                 // Returns true when the gun exists and is selected
+   virtual bool isWeaponReleased() const;              // Are weapons being released?
 
    virtual Weapon* getCurrentWeapon();                // The current weapon (Pre-ref()'d)
    virtual const Weapon* getCurrentWeapon() const;     // The current weapon (Pre-ref()'d) (const version)

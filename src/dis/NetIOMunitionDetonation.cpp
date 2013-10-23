@@ -114,7 +114,7 @@ void NetIO::processDetonationPDU(const DetonationPDU* const pdu)
       // Set the NIB's mode to DETONATED
       mNib->setMode(Simulation::Player::DETONATED);
 
-      // Find the munition player and set it's mode, location and target position
+      // Find the munition player and set its mode, location and target position
       mPlayer = dynamic_cast<Simulation::Weapon*>(mNib->getPlayer());
       if (mPlayer != 0) {
 
@@ -220,7 +220,7 @@ bool Nib::munitionDetonationMsgFactory(const LCreal)
                tOk = true;
             }
             else {
-               // Networked player, use it's NIB's IDs
+               // Networked player, use its NIB's IDs
                const Nib* fNIB = dynamic_cast<const Nib*>( tPlayer->getNib() );
                if (fNIB != 0) {
                   pdu.targetEntityID.simulationID.siteIdentification = fNIB->getSiteID();

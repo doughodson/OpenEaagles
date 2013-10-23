@@ -17,10 +17,10 @@ dmeRO:
 
 
 // here is the hsi graphic (just a rotator)
-// This could also be an DialPointer, because basically it just rotates it's components.  However, since we have no need
-// for color rotaries, and the dial is fairly simple, all we need is an object that will rotate it's components, which
-// is called a rotator.  When given an UPDATE_VALUE event, it simple rotates it's components to that value, in RADIANS.
-// However, if we send the UPDATE_VALUE2 event, it will rotate it's components to that value, in DEGREES.
+// This could also be an DialPointer, because basically it just rotates its components.  However, since we have no need
+// for color rotaries, and the dial is fairly simple, all we need is an object that will rotate its components, which
+// is called a rotator.  When given an UPDATE_VALUE event, it simply rotates its components to that value, in RADIANS.
+// However, if we send the UPDATE_VALUE2 event, it will rotate its components to that value, in DEGREES.
 hsi:  
 ( Rotators
     components: {

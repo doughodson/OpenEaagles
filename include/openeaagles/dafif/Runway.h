@@ -77,7 +77,7 @@ public:
 
    WhichEnd whichEnd(const char rwEndId[]) const;
 
-   // DafifRecord Interface
+   // Record Interface
    virtual void printRecord(std::ostream& sout) const;
 
 private:

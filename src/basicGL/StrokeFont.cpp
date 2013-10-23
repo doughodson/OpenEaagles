@@ -305,7 +305,7 @@ static GLdouble strokeFont[][1+MAX_STROKES*3] = {
       FONT_ADVANCE, 6, 0
    },
    {
-   10,   // back space
+      10,   // back space
       FONT_ADVANCE, 0, -9
    },
    {

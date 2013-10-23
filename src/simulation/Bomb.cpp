@@ -405,10 +405,10 @@ bool Bomb::weaponImpactPrediction(
       //   then gravity
       ae1[IDOWN] += g;
 
-      // Comute new velocity vectory (earth)
+      // Compute new velocity vectory (earth)
       vel = vel + (ae1 * dt);
 
-      // Comute new position vectory (earth)
+      // Compute new position vectory (earth)
       pos = pos + (vel * dt);
 
       time += dt;

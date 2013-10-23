@@ -326,7 +326,7 @@ void MapDrawer::drawFunc()
         }
     }
 
-    // Set our ortho and our color back to it's original state after we draw.
+    // Set our ortho and our color back to its original state after we draw.
     getDisplay()->forceOrtho(dLeft, dRight, dBottom, dTop, dNear, dFar);
     glColor4dv(ocolor);
 }

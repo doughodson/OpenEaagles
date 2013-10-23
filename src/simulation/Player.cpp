@@ -760,7 +760,7 @@ void Player::updateData(const LCreal dt)
       updateElevation();
 
       // ---
-      // Note: our subsystems in the components list (e.g., pilot, nav, sms and obc) are update
+      // Note: our subsystems in the components list (e.g., pilot, nav, sms and obc) are updated
       // by our call to BaseClass:updateData()
       // ---
       BaseClass::updateData(dt);
@@ -839,7 +839,7 @@ double Player::getCommandedHeadingR() const
    return getCommandedHeadingD() * (LCreal)Basic::Angle::D2RCC;
 }
 
-// Return true if velocity-hold mode is on
+// Returns true if velocity-hold mode is on
 bool Player::isVelocityHoldOn() const
 {
    if (getDynamicsModel() != 0)
@@ -869,7 +869,7 @@ double Player::getCommandedVelocityMps() const
    return getCommandedVelocityKts() * Basic::Distance::NM2M / Basic::Time::H2S;
 }
 
-// Return true if altitude-hold mode is on
+// Returns true if altitude-hold mode is on
 bool Player::isAltitudeHoldOn() const
 {
    if (getDynamicsModel() != 0)
@@ -2942,7 +2942,7 @@ bool Player::onReflectionsCancel(const Basic::Component* const p)
 {
    bool ok = false;        // Did we succeed?
 
-   // Find player 'p' and clear it's request
+   // Find player 'p' and clear its request
    for (unsigned int i = 0; i < MAX_RF_REFLECTIONS && !ok; i++) {
       if (rfReflect[i] == p) {
          // Clear the request
@@ -3062,7 +3062,8 @@ void Player::dynamics(const LCreal dt)
             syncState1Ready = true;
             syncState2Ready = false;
             //std::cout << "Set syncState1" << std::endl;
-         } else {
+         }
+         else {
             syncState2.setGeocPosition(getGeocPosition());
             syncState2.setGeocVelocity(getGeocVelocity());
             syncState2.setGeocAcceleration(getGeocAcceleration());
@@ -3436,8 +3437,8 @@ void Player::updateSystemPointers()
 }
 
 //------------------------------------------------------------------------------
-// processComponets() -- process our components; make sure the are all of
-//	type Steerpoint (or derived); tell them that we are their container
+// processComponents() -- process our components; make sure they are all of
+// type Steerpoint (or derived); tell them that we are their container
 //------------------------------------------------------------------------------
 void Player::processComponents(
    Basic::PairStream* const list,

@@ -283,35 +283,35 @@ int JSBSimModel::getEngRPM(LCreal* const rpm, const int max) const
     for (int i = 0; i < num; i++) {
         JSBSim::FGEngine* eng = Propulsion->GetEngine(i);
         switch (eng->GetType()) {
-        case JSBSim::FGEngine::etPiston:
+            case JSBSim::FGEngine::etPiston:
             {
-            JSBSim::FGPiston* eng1 = (JSBSim::FGPiston *) eng;
-            rpm[i] = (LCreal)eng1->getRPM();
+                JSBSim::FGPiston* eng1 = (JSBSim::FGPiston *) eng;
+                rpm[i] = (LCreal)eng1->getRPM();
             }
-            break;
-        case JSBSim::FGEngine::etElectric:
+                break;
+            case JSBSim::FGEngine::etElectric:
             {
-            JSBSim::FGElectric* eng1 = (JSBSim::FGElectric *) eng;
-            rpm[i] = (LCreal)eng1->getRPM();
+                JSBSim::FGElectric* eng1 = (JSBSim::FGElectric *) eng;
+                rpm[i] = (LCreal)eng1->getRPM();
             }
-            break;
-        case JSBSim::FGEngine::etTurbine:
+                break;
+            case JSBSim::FGEngine::etTurbine:
             {
-            JSBSim::FGTurbine* eng1 = (JSBSim::FGTurbine *) eng;
-            rpm[i] = (LCreal)eng1->GetN2();
+                JSBSim::FGTurbine* eng1 = (JSBSim::FGTurbine *) eng;
+                rpm[i] = (LCreal)eng1->GetN2();
             }
-            break;
-        case JSBSim::FGEngine::etTurboprop:
+                break;
+            case JSBSim::FGEngine::etTurboprop:
             {
-            JSBSim::FGTurboProp* eng1 = (JSBSim::FGTurboProp *) eng;
-            rpm[i] = (LCreal)eng1->GetN1();
+                JSBSim::FGTurboProp* eng1 = (JSBSim::FGTurboProp *) eng;
+                rpm[i] = (LCreal)eng1->GetN1();
             }
-            break;
-        case JSBSim::FGEngine::etRocket:
-            rpm[i] = 0.0;
-            break;
-        default:
-            break;
+                break;
+            case JSBSim::FGEngine::etRocket:
+                rpm[i] = 0.0;
+                break;
+            default:
+                break;
         }
     }
     return num;
@@ -355,30 +355,30 @@ int JSBSimModel::getEngOilPressure(LCreal* const oil, const int max) const
     for (int i = 0; i < num; i++) {
         JSBSim::FGEngine* eng = Propulsion->GetEngine(i);
         switch (eng->GetType()) {
-        case JSBSim::FGEngine::etPiston:
+            case JSBSim::FGEngine::etPiston:
             {
-            JSBSim::FGPiston* eng1 = (JSBSim::FGPiston *) eng;
-            oil[i] = (LCreal)eng1->getOilPressure_psi();
+                JSBSim::FGPiston* eng1 = (JSBSim::FGPiston *) eng;
+                oil[i] = (LCreal)eng1->getOilPressure_psi();
             }
-            break;
-        case JSBSim::FGEngine::etTurbine:
+                break;
+            case JSBSim::FGEngine::etTurbine:
             {
-            JSBSim::FGTurbine* eng1 = (JSBSim::FGTurbine *) eng;
-            oil[i] = (LCreal)eng1->getOilPressure_psi();
+                JSBSim::FGTurbine* eng1 = (JSBSim::FGTurbine *) eng;
+                oil[i] = (LCreal)eng1->getOilPressure_psi();
             }
-            break;
-        case JSBSim::FGEngine::etTurboprop:
+                break;
+            case JSBSim::FGEngine::etTurboprop:
             {
-            JSBSim::FGTurboProp* eng1 = (JSBSim::FGTurboProp *) eng;
-            oil[i] = (LCreal)eng1->getOilPressure_psi();
+                JSBSim::FGTurboProp* eng1 = (JSBSim::FGTurboProp *) eng;
+                oil[i] = (LCreal)eng1->getOilPressure_psi();
             }
-            break;
-        case JSBSim::FGEngine::etRocket:
-        case JSBSim::FGEngine::etElectric:
-            oil[i] = 0.0;
-            break;
-        default:
-            break;
+                break;
+            case JSBSim::FGEngine::etRocket:
+            case JSBSim::FGEngine::etElectric:
+                oil[i] = 0.0;
+                break;
+            default:
+                break;
         }
     }
     return num;
@@ -439,25 +439,25 @@ int JSBSimModel::getEngNozzle(LCreal* const pla, const int max) const
     for (int i = 0; i < num; i++) {
         JSBSim::FGEngine* eng = Propulsion->GetEngine(i);
         switch (eng->GetType()) {
-        case JSBSim::FGEngine::etTurbine:
+            case JSBSim::FGEngine::etTurbine:
             {
-            JSBSim::FGTurbine* eng1 = (JSBSim::FGTurbine *) eng;
-            pla[i] = (LCreal)(eng1->GetNozzle() * 100.0);
+                JSBSim::FGTurbine* eng1 = (JSBSim::FGTurbine *) eng;
+                pla[i] = (LCreal)(eng1->GetNozzle() * 100.0);
             }
-            break;
-        case JSBSim::FGEngine::etTurboprop:
+                break;
+            case JSBSim::FGEngine::etTurboprop:
             {
-            JSBSim::FGTurboProp* eng1 = (JSBSim::FGTurboProp *) eng;
-            pla[i] = (LCreal)(eng1->GetNozzle() * 100.0);
+                JSBSim::FGTurboProp* eng1 = (JSBSim::FGTurboProp *) eng;
+                pla[i] = (LCreal)(eng1->GetNozzle() * 100.0);
             }
-            break;
-        case JSBSim::FGEngine::etPiston:
-        case JSBSim::FGEngine::etRocket:
-        case JSBSim::FGEngine::etElectric:
-            pla[i] = 0.0;
-            break;
-        default:
-            break;
+                break;
+            case JSBSim::FGEngine::etPiston:
+            case JSBSim::FGEngine::etRocket:
+            case JSBSim::FGEngine::etElectric:
+                pla[i] = 0.0;
+                break;
+            default:
+                break;
         }
     }
     return num;
@@ -851,7 +851,7 @@ void JSBSimModel::reset()
 #endif
         }
     }
-    
+
 #if 0
     // CGB TBD
     reset = 0;

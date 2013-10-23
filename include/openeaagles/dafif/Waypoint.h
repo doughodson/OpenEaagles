@@ -31,7 +31,7 @@ public:
    Waypoint();
    Waypoint(const char* const s);
 
-   // DafifRecord Interface
+   // Record Interface
    virtual void printRecord(std::ostream& sout) const;
 
 private:

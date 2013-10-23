@@ -5,7 +5,7 @@
 // Description:  Used as a parent class for other dials, it will draw a background
 // that can be visible or not, depending on a flag.  It can also rotate according
 // to a scale, or it can be fixed.  This is a generic intelligent background
-// that will also pass along instrument values down to it's components.
+// that will also pass along instrument values down to its components.
 //
 // Inputs:
 //      UPDATE_INSTRUMENTS -> (from instrument), sets our rotation angle

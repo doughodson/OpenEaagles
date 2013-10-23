@@ -138,7 +138,7 @@ inline std::ostream& operator<<(std::ostream& sout, const Power& n)
 //----------------------------------------------------------------------------
 // Class:  Watts  
 // Base class:  Object -> Number -> Power -> Watts
-// Description: An instance of KiloWatts with it's value equal to 1.0 is one base
+// Description: An instance of KiloWatts with its value equal to 1.0 is one base
 // unit for power.
 //----------------------------------------------------------------------------
 class Watts : public Power

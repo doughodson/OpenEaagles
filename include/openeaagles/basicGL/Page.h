@@ -139,8 +139,8 @@ public:
 
 protected:
    // Return our paging arguments
-   Basic::Object* getArgument()              { return pageArg; }
-   const Page* getCaller()                   { return caller; }
+   Basic::Object* getArgument()               { return pageArg; }
+   const Page* getCaller()                    { return caller; }
 
    // Return our subpages
    Basic::PairStream* subPages()              { return subpages; }

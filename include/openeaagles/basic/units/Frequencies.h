@@ -105,7 +105,7 @@ inline std::ostream& operator<<(std::ostream& sout, const Frequency& n)
 // Class:  Hertz
 // Base class:  Object -> Number -> Frequency -> Hertz
 // Description:  Base unit for frequency, with a hertz being an instance of Hertz
-//               with it's value equal to 1.0.
+//               with its value equal to 1.0.
 //------------------------------------------------------------------------------
 class Hertz : public Frequency  
 {

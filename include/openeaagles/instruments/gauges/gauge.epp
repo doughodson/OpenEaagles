@@ -10,7 +10,7 @@ gauge:
     // Left boundary and right boundary are slots that tell us how big to draw our gauge width.  This can be as big or as small as you want it to be.
     leftBoundary: -0.25
     rightBoundary: 0.25
-    // We are using this analog guage as the outline for the inner bar, so we tell it to just draw the outline by setting our outlined flag.
+    // We are using this analog gauge as the outline for the inner bar, so we tell it to just draw the outline by setting our outlined flag.
     outlined: 1
     linewidth: 3
     // Our scaling table works a little different here than for a dial, because we are translating towards or away from a certain unit, instead of rotating a certain degree
@@ -73,7 +73,7 @@ gauge:
             vertical: 1
             // Amount of tick marks to draw
             quantity: 10
-            // How big is the guage?  We have to play with this value to 
+            // How big is the gauge?  We have to play with this value to
             gaugeLength: 9
             tickLength: 0.5
             color: 
@@ -92,12 +92,12 @@ gauge:
         )
         // this shows a gauge slider, which will go up and down with the value of the scale
         // This object is a little complex when you first look at it, but it really consists of two parts
-        // 1) GuaugeSlider is basically an object that will translate it's components either left or right or
+        // 1) GaugeSlider is basically an object that will translate its components either left or right or
         // up or down, depending on a given value.  This is different from analog gauge in the fact that it doesn't
         // draw anything, but instead moves to that graphically representative value.  This way we can create
         // components that can be unique and do their own thing.
-        // 2) Instrument, which is owned by guageslider, also gets the value, and uses the color rotary to determine
-        // what color it's components will be.  In this case, the components are a numeric readout giving us the numeric
+        // 2) Instrument, which is owned by GaugeSlider, also gets the value, and uses the color rotary to determine
+        // what color its components will be.  In this case, the components are a numeric readout giving us the numeric
         // value of our gauge.
         // The result of this is a graphic that moves up and down with the gauges value, and labels the actual value of 
         // the gauge in the color determined by the instrument.  This way we can change the numeric value color along with 

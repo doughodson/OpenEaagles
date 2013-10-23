@@ -1,6 +1,6 @@
 	// Landing gear is a simple instrument that has one value given to it, and that is gear position.  Based on the gear up and gear down value, 
 	// it will let you know if you are in transit, have the gear up, or have the gear down.  Also, 
-gear:   
+gear:
     ( LandingGear
         transform: { ( Translation -5 0 ) ( Scale 5 ) }
         // position of the gear when we are down
@@ -30,7 +30,7 @@ gear:
                                     )
                                     // the handle
                                     ( Polygon
-                                        color: white        
+                                        color: white
                                         vertices: {
                                             [ -0.4 -0.6 ]
                                             [ 0.4 -0.6 ]
@@ -40,17 +40,17 @@ gear:
                                     )
                                 }
                             )
-                                    
+
                             // the arm
                             ( Polygon
-                                color: ( rgb 0.3 0.3 0.3 )        
+                                color: ( rgb 0.3 0.3 0.3 )
                                 vertices: {
                                     [ -0.3 0 ]
                                     [ 0.3 0 ]
                                     [ 0.3 1 ]
                                     [ -0.3 1 ]
                                 }
-                            )                            
+                            )
                         }
                     )
                     // up and in transition
@@ -71,7 +71,7 @@ gear:
                                     )
                                     // the handle
                                     ( Polygon
-                                        color: red        
+                                        color: red
                                         vertices: {
                                             [ -0.4 -0.6 ]
                                             [ 0.4 -0.6 ]
@@ -81,17 +81,17 @@ gear:
                                     )
                                 }
                             )
-                                    
+
                             // the arm
                             ( Polygon
-                                color: ( rgb 0.3 0.3 0.3 )        
+                                color: ( rgb 0.3 0.3 0.3 )
                                 vertices: {
                                     [ -0.3 0 ]
                                     [ 0.3 0 ]
                                     [ 0.3 1 ]
                                     [ -0.3 1 ]
                                 }
-                            )                            
+                            )
                         }
                     )
                     // down and in transition
@@ -112,7 +112,7 @@ gear:
                                     )
                                     // the handle
                                     ( Polygon
-                                        color: red        
+                                        color: red
                                         vertices: {
                                             [ -0.4 -0.6 ]
                                             [ 0.4 -0.6 ]
@@ -122,17 +122,17 @@ gear:
                                     )
                                 }
                             )
-                                    
+
                             // the arm
                             ( Polygon
-                                color: ( rgb 0.3 0.3 0.3 )        
+                                color: ( rgb 0.3 0.3 0.3 )
                                 vertices: {
                                     [ -0.3 0 ]
                                     [ 0.3 0 ]
                                     [ 0.3 -1 ]
                                     [ -0.3 -1 ]
                                 }
-                            )                            
+                            )
                         }
                     )
                     // down and not in transition
@@ -153,7 +153,7 @@ gear:
                                     )
                                     // the handle
                                     ( Polygon
-                                        color: white        
+                                        color: white
                                         vertices: {
                                             [ -0.4 -0.6 ]
                                             [ 0.4 -0.6 ]
@@ -163,17 +163,17 @@ gear:
                                     )
                                 }
                             )
-                                    
+
                             // the arm
                             ( Polygon
-                                color: ( rgb 0.3 0.3 0.3 )        
-                                vertices: {                                
+                                color: ( rgb 0.3 0.3 0.3 )
+                                vertices: {
                                     [ -0.3 0 ]
                                     [ 0.3 0 ]
                                     [ 0.3 -1 ]
                                     [ -0.3 -1 ]
                                 }
-                            )                            
+                            )
                         }
                     )
                 }
@@ -205,7 +205,7 @@ gear:
                                 slices: 50
                                 filled: 1
                             )
-                            
+
                         }
                     )
                     // this is our outline, tell it to always be gray!
@@ -230,7 +230,7 @@ gear:
                         slices: 100
                         color: gray
                     )
-                }   
+                }
             )
             ( LandingLight
                 gearUpValue: 0
@@ -254,7 +254,7 @@ gear:
                                 slices: 50
                                 filled: 1
                             )
-                            
+
                         }
                     )
                     ( OcclusionCircle
@@ -263,7 +263,7 @@ gear:
                         slices: 100
                         color: gray
                     )
-                }                    
+                }
             )
             // this is the background
             ( LineLoop
@@ -287,7 +287,7 @@ gear:
                     [ 0.5 -1.7 ]
                     [ -0.5 -1.7 ]
                 }
-            )                                
+            )
         }
     ) // end of gear
     ( Graphic
@@ -322,6 +322,6 @@ gear:
                 color: white
                 transform: { ( Translation -0.05 0.3 ) ( Scale 0.2 ) }
                 text: "WHEELS"
-            )                                        
+            )
         }
-    )        
+    )

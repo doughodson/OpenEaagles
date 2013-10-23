@@ -707,28 +707,24 @@ const char* TabLogger::LogPlayerData::getDescription()
 // Capture the data
 void TabLogger::LogPlayerData::captureData()
 {
-    if (thePlayer != 0) 
-    {
+    if (thePlayer != 0) {
         alpha = -1.0;
         beta = -1.0;
         ias = -1.0;
 
-        {
-            pos = thePlayer->getPosition();
-            vel = thePlayer->getVelocity();
-            latitude = thePlayer->getLatitude();
-            longitude = thePlayer->getLongitude();
-            angles = thePlayer->getEulerAngles();
-            const Player* const p = thePlayer;
-            const AirVehicle* const av = dynamic_cast<const AirVehicle*>(p);
-            if ((av != 0) && (theType == 2) ) 
-            {
-                alpha = av->getAngleOfAttackD();
-                beta = av->getSideSlipD();
-                ias = av->getCalibratedAirspeed();
-                mach = thePlayer->getMach();
-                pLoading = av->getGload();
-            }
+        pos = thePlayer->getPosition();
+        vel = thePlayer->getVelocity();
+        latitude = thePlayer->getLatitude();
+        longitude = thePlayer->getLongitude();
+        angles = thePlayer->getEulerAngles();
+        const Player* const p = thePlayer;
+        const AirVehicle* const av = dynamic_cast<const AirVehicle*>(p);
+        if ((av != 0) && (theType == 2) ) {
+            alpha = av->getAngleOfAttackD();
+            beta = av->getSideSlipD();
+            ias = av->getCalibratedAirspeed();
+            mach = thePlayer->getMach();
+            pLoading = av->getGload();
         }
     }
 }
@@ -1073,21 +1069,15 @@ void TabLogger::LogActiveTrack::captureData()
 {
     if (thePlayer != 0) 
     {
-        {
-            pos = thePlayer->getPosition();
-            vel = thePlayer->getVelocity();
-            angles = thePlayer->getEulerAngles();
-        }
+        pos = thePlayer->getPosition();
+        vel = thePlayer->getVelocity();
+        angles = thePlayer->getEulerAngles();
     }
-    if (theEmission != 0) 
-    {
-        if (theEmission->getTarget() != 0) 
-        {
-            {
-                tgtPos = theEmission->getTarget()->getPosition();
-                tgtVel = theEmission->getTarget()->getVelocity();
-                tgtAngles = theEmission->getTarget()->getEulerAngles();
-            }
+    if (theEmission != 0) {
+        if (theEmission->getTarget() != 0) {
+            tgtPos = theEmission->getTarget()->getPosition();
+            tgtVel = theEmission->getTarget()->getVelocity();
+            tgtAngles = theEmission->getTarget()->getEulerAngles();
         }
     }
 }
@@ -1227,24 +1217,17 @@ const char* TabLogger::LogPassiveTrack::getDescription()
 // Capture the data
 void TabLogger::LogPassiveTrack::captureData()
 {
-    if (thePlayer != 0) 
-    {
-        {
-            pos = thePlayer->getPosition();
-            vel = thePlayer->getVelocity();
-            angles = thePlayer->getEulerAngles();
-        }
+    if (thePlayer != 0) {
+        pos = thePlayer->getPosition();
+        vel = thePlayer->getVelocity();
+        angles = thePlayer->getEulerAngles();
     }
-    if (theEmission != 0) 
-    {
+    if (theEmission != 0) {
         // The emission's ownship is our target!
-        if (theEmission->getOwnship() != 0) 
-        {
-            {
-                tgtPos = theEmission->getOwnship()->getPosition();
-                tgtVel = theEmission->getOwnship()->getVelocity();
-                tgtAngles = theEmission->getOwnship()->getEulerAngles();
-            }
+        if (theEmission->getOwnship() != 0) {
+            tgtPos = theEmission->getOwnship()->getPosition();
+            tgtVel = theEmission->getOwnship()->getVelocity();
+            tgtAngles = theEmission->getOwnship()->getEulerAngles();
         }
     }
 }

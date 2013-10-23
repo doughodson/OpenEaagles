@@ -129,7 +129,7 @@ void IrSystem::updateData(const LCreal dt)
    }
 
    // ---
-   // Process our player's of interest
+   // Process our players of interest
    // ---
    processPlayersOfInterest();
 

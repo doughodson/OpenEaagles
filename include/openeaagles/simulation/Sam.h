@@ -10,7 +10,7 @@ namespace Eaagles {
 namespace Simulation {
 
 //------------------------------------------------------------------------------
-// Class:	Sam
+// Class:   Sam
 // Description: Base class for Surface to Air (SAM) Missiles
 // Form name: Sam
 //------------------------------------------------------------------------------
