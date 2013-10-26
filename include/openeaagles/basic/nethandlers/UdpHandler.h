@@ -42,7 +42,7 @@ class String;
 //------------------------------------------------------------------------------
 class UdpHandler : public NetHandler
 {
-   DECLARE_SUBCLASS(UdpHandler,NetHandler)
+   DECLARE_SUBCLASS(UdpHandler, NetHandler)
 
 public:
    UdpHandler();

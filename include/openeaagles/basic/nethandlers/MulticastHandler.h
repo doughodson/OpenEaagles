@@ -66,7 +66,7 @@ class String;
 //------------------------------------------------------------------------------
 class MulticastHandler : public NetHandler
 {
-    DECLARE_SUBCLASS(MulticastHandler,NetHandler)
+    DECLARE_SUBCLASS(MulticastHandler, NetHandler)
 
 public:
     MulticastHandler();
