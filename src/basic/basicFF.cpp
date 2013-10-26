@@ -21,10 +21,10 @@
 #include "openeaagles/basic/Operators.h"
 
 // Net handlers
-#include "openeaagles/basic/BroadcastHandler.h"
-#include "openeaagles/basic/MulticastHandler.h"
-#include "openeaagles/basic/UdpHandler.h"
-#include "openeaagles/basic/TcpHandler.h"
+#include "openeaagles/basic/nethandlers/BroadcastHandler.h"
+#include "openeaagles/basic/nethandlers/MulticastHandler.h"
+#include "openeaagles/basic/nethandlers/UdpHandler.h"
+#include "openeaagles/basic/nethandlers/TcpHandler.h"
 
 // Colors
 #include "openeaagles/basic/Cie.h"

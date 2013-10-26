@@ -16,7 +16,7 @@
     static const int SOCKET_ERROR = -1;
 #endif
 
-#include "openeaagles/basic/BroadcastHandler.h"
+#include "openeaagles/basic/nethandlers/BroadcastHandler.h"
 
 #include "openeaagles/basic/Pair.h"
 #include "openeaagles/basic/PairStream.h"
