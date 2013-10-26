@@ -34,12 +34,7 @@ public:
    // window level focus events
    void focus(const int state);
 
-   // Basic::Component functions
-   virtual void reset();
-
-   //static GlfwDisplay* findGlfwDisplay(GLFWwindow* win);
-
-      // Handle passive mouse motion events
+   // Handle passive mouse motion events
    virtual void passiveMotionEvent(const int x, const int y);
 
    // Handle mouse motion events with either mouse key pressed
