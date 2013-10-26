@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // Class: MulticastHandler
 //------------------------------------------------------------------------------
-#ifndef	__Eaagles_Basic_MulticastHandler_H__
+#ifndef __Eaagles_Basic_MulticastHandler_H__
 #define __Eaagles_Basic_MulticastHandler_H__
 
 #include "openeaagles/basic/NetHandler.h"
@@ -66,7 +66,7 @@ class String;
 //------------------------------------------------------------------------------
 class MulticastHandler : public NetHandler
 {
-    DECLARE_SUBCLASS(MulticastHandler,NetHandler)
+    DECLARE_SUBCLASS(MulticastHandler, NetHandler)
 
 public:
     MulticastHandler();
@@ -105,3 +105,4 @@ private:
 } // End Eaagles namespace
 
 #endif
+

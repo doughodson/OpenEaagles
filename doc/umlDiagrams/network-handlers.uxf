@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="12.1">
+  <zoom_level>8</zoom_level>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>168</x>
+      <y>32</y>
+      <w>568</w>
+      <h>272</h>
+    </coordinates>
+    <panel_attributes>NetworkHandler
+--
+localIpAddress:
+-- String containing the local host's name or its IP
+-- address in the Internet standard "." (dotted) notation.
+-- (default: found via local host name)
+--
+localPort:
+-- (optional) Local port number
+--
+port:
+-- Number of the port we're connecting to (required)
+--
+shared:
+-- Shared (reuse) flag [default: false (not shared)]
+--
+sendBuffSizeKb:
+-- Send buffer size in KB's    (default:  32 Kb; max 1024)
+--
+recvBuffSizeKb:
+-- Receive buffer size in KB's (default: 128 Kb; max 1024)
+--
+ignoreSourcePort:
+-- Ignore message from this source port
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>264</x>
+      <y>328</y>
+      <w>472</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>UdpHandler
+--
+ipAddress:
+-- String containing the IP address in
+-- the Internet standard "." (dotted) notation.
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>216</x>
+      <y>280</y>
+      <w>64</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>24;24;24;80;48;80</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>264</x>
+      <y>416</y>
+      <w>112</w>
+      <h>208</h>
+    </coordinates>
+    <panel_attributes>TcpHandler
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>424</x>
+      <y>432</y>
+      <w>312</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>TcpClient
+--
+ipAddress:
+-- String containing the IP address in
+-- the Internet standard "." (dotted) notation.
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>200</x>
+      <y>280</y>
+      <w>80</w>
+      <h>176</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>24;24;24;160;64;160</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>352</x>
+      <y>440</y>
+      <w>88</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>24;24;72;24</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>424</x>
+      <y>576</y>
+      <w>312</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>TcpServerMulti
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>352</x>
+      <y>576</y>
+      <w>88</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>24;24;72;24</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>424</x>
+      <y>512</y>
+      <w>312</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>TcpServerSingle
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>352</x>
+      <y>512</y>
+      <w>88</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>24;24;72;24</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>264</x>
+      <y>648</y>
+      <w>472</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>BroadcastHandler
+--
+networkMask:
+-- Host Net Mask "255.255.255.255"
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>184</x>
+      <y>280</y>
+      <w>96</w>
+      <h>408</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>24;24;24;392;80;392</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>264</x>
+      <y>728</y>
+      <w>472</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>MulticastHandler
+--
+multicastGroup:
+-- String containing the multicast IP address in
+-- the Internet standard "." (dotted) notation.
+-- IP multicast addresses range from 224.0.0.0 
+-- through 239.255.255.255 (e.g., "225.0.0.251")
+--
+ttl:
+-- Multicast Time-To-Live (TTL) value; default: 1
+--
+loopback:
+-- Multicast Loopback flag; default: 1 (on)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>168</x>
+      <y>280</y>
+      <w>112</w>
+      <h>488</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>24;24;24;472;96;472</additional_attributes>
+  </element>
+</diagram>

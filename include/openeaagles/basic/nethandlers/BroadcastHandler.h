@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // Class: BroadcastHandler
 //------------------------------------------------------------------------------
-#ifndef	__Eaagles_Basic_BroadcastHandler_H__
+#ifndef __Eaagles_Basic_BroadcastHandler_H__
 #define __Eaagles_Basic_BroadcastHandler_H__
 
 #include "openeaagles/basic/NetHandler.h"
@@ -36,7 +36,7 @@ class Number;
 //------------------------------------------------------------------------------
 class BroadcastHandler : public NetHandler
 {
-    DECLARE_SUBCLASS(BroadcastHandler,NetHandler)
+    DECLARE_SUBCLASS(BroadcastHandler, NetHandler)
 
 public:
     BroadcastHandler();
@@ -57,3 +57,4 @@ private:
 } // End Eaagles namespace
 
 #endif
+

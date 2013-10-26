@@ -1,9 +1,11 @@
+//------------------------------------------------------------------------------
+// Class: BroadcastHandler
+//------------------------------------------------------------------------------
 
 #if defined(WIN32)
     #include <sys/types.h>
     #include <Winsock2.h>
-    #define	bzero(a,b)		ZeroMemory( a, b )
-
+    #define bzero(a,b) ZeroMemory( a, b )
 #else
     #include <arpa/inet.h>
     #include <sys/fcntl.h>
@@ -14,7 +16,7 @@
     static const int SOCKET_ERROR = -1;
 #endif
 
-#include "openeaagles/basic/BcHandler.h"
+#include "openeaagles/basic/nethandlers/BroadcastHandler.h"
 
 #include "openeaagles/basic/Pair.h"
 #include "openeaagles/basic/PairStream.h"
@@ -29,7 +31,7 @@ namespace Basic {
 IMPLEMENT_SUBCLASS(BroadcastHandler,"BroadcastHandler")
 
 BEGIN_SLOTTABLE(BroadcastHandler)
-    	"networkMask",       // 1) Host Net Mask   "255.255.255.255"
+    "networkMask",       // 1) Host Net Mask   "255.255.255.255"
 END_SLOTTABLE(BroadcastHandler)
 
 // Map slot table to handles 
@@ -44,7 +46,6 @@ BroadcastHandler::BroadcastHandler() : networkMask(0)
 {
     STANDARD_CONSTRUCTOR()
 }
-
 
 //------------------------------------------------------------------------------
 // copyData() -- copy member data
@@ -118,7 +119,7 @@ bool BroadcastHandler::init()
 
     return true;
 }
-    
+
 // -------------------------------------------------------------
 // bindSocket() -
 // -------------------------------------------------------------
@@ -178,7 +179,7 @@ bool BroadcastHandler::bindSocket()
        std::printf("bind() port = %08x\n", addr.sin_port);
 
        if (bind(socketNum, (const struct sockaddr *) &addr, sizeof(addr)) == SOCKET_ERROR) {
-         perror("bindSocket(): bind error");
+         perror("BroadcastHandler::bindSocket(): bind error");
          return false;
        }
 
@@ -244,3 +245,4 @@ std::ostream& BroadcastHandler::serialize(std::ostream& sout, const int i, const
 
 } // End Basic namespace
 } // End Eaagles namespace
+

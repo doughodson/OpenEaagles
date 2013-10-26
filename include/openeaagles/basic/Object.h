@@ -46,7 +46,7 @@ namespace Basic {
 //    All constructors must include the STANDARD_CONSTRUCTOR() macro.
 //
 //    All newly constructed objects start with a reference count of one.
-//    
+//
 //       Foo::Foo()
 //          Constructor; must be written for each derived class, or you can
 //          use the EMPTY_CONSTRUCTOR() macro.
@@ -76,10 +76,10 @@ namespace Basic {
 //          so data should be disposed of cleanly (e.g., test pointers for
 //          zero before unreferencing objects and setting the pointers to zero
 //          after the object has been unreferenced).
-//    
+//
 //       Foo::Foo(Foo& orig)
 //          Copy constructor provided by the macros and uses copyData().
-//    
+//
 //       Foo::~Foo()
 //          Class destructor provided by the macros and uses deleteData().
 //       
@@ -87,7 +87,7 @@ namespace Basic {
 //          Returns a copy of this object.  Provided by the macros and uses
 //          the copy constructor.
 //
-//       =
+//       "="
 //          Assignment Operator is provided by the macros and requires copyData()
 //
 //       bool isClassType(const type_info& type)
@@ -442,3 +442,4 @@ private:
 } // End Eaagles namespace
 
 #endif
+

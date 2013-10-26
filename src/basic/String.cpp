@@ -178,6 +178,7 @@ bool String::getSubString(String& subStr, const unsigned int startIndex, const s
    return true;
 }
 
+
 //------------------------------------------------------------------------------
 // setStr() -- sets this string to a copy of 'string'
 //------------------------------------------------------------------------------
@@ -199,6 +200,7 @@ void String::setStr(const char* string)
       n = 0;
    }
 }
+
 
 //------------------------------------------------------------------------------
 // catStr() -- appends a copy of 's' to the end of this string.
@@ -225,6 +227,26 @@ void String::catStr(const char* s)
    }
    lcStrcat(str,nn,s);
    n = l;
+}
+
+
+//------------------------------------------------------------------------------
+// setChar() -- Sets a specific character
+//------------------------------------------------------------------------------
+void String::setChar(const unsigned int index, const char c)
+{
+   if (index <= len())
+      str[index] = c;
+}
+
+
+//------------------------------------------------------------------------------
+// empty() -- make this an empty string
+//------------------------------------------------------------------------------
+void String::empty()
+{
+   if (str != 0) str[0] = 0;
+   n = 0;
 }
 
 

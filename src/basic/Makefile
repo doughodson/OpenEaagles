@@ -6,7 +6,6 @@ LIB = $(OPENEAAGLES_LIB_DIR)/liboeBasic.a
 OBJS =  \
 	$(LIB)(support.o) \
 	$(LIB)(basicFF.o) \
-	$(LIB)(BcHandler.o) \
 	$(LIB)(Boolean.o) \
 	$(LIB)(Cie.o) \
 	$(LIB)(Cmy.o) \
@@ -33,7 +32,6 @@ OBJS =  \
 	$(LIB)(Locus.o) \
 	$(LIB)(Logger.o) \
 	$(LIB)(Matrix.o) \
-	$(LIB)(McHandler.o) \
 	$(LIB)(Nav.o) \
 	$(LIB)(NavDR.o) \
 	$(LIB)(NetHandler.o) \
@@ -52,17 +50,15 @@ OBJS =  \
 	$(LIB)(StateMachine.o) \
 	$(LIB)(String.o) \
 	$(LIB)(Tables.o) \
-	$(LIB)(TcpHandler.o) \
 	$(LIB)(Terrain.o) \
 	$(LIB)(Thread.o) \
 	$(LIB)(ThreadPool.o) \
 	$(LIB)(Timers.o) \
 	$(LIB)(Transforms.o) \
-	$(LIB)(UdpHandler.o) \
 	$(LIB)(Vectors.o) \
 	$(LIB)(Yiq.o)
 
-SUBDIRS = osg units distributions ubf
+SUBDIRS = distributions nethandlers osg ubf units
 
 all: subdirs ${OBJS}
 

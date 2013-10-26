@@ -21,10 +21,13 @@
 #include "openeaagles/basic/Operators.h"
 
 // Net handlers
-#include "openeaagles/basic/BcHandler.h"
-#include "openeaagles/basic/McHandler.h"
-#include "openeaagles/basic/UdpHandler.h"
-#include "openeaagles/basic/TcpHandler.h"
+#include "openeaagles/basic/nethandlers/BroadcastHandler.h"
+#include "openeaagles/basic/nethandlers/MulticastHandler.h"
+#include "openeaagles/basic/nethandlers/UdpHandler.h"
+#include "openeaagles/basic/nethandlers/TcpHandler.h"
+#include "openeaagles/basic/nethandlers/TcpClient.h"
+#include "openeaagles/basic/nethandlers/TcpServerMultiple.h"
+#include "openeaagles/basic/nethandlers/TcpServerSingle.h"
 
 // Colors
 #include "openeaagles/basic/Cie.h"
@@ -401,8 +404,8 @@ Object* basicFormFunc(const char* formname)
     else if ( strcmp(formname, TcpServerSingle::getFormName()) == 0 ) {
         newform = new TcpServerSingle();
     }
-    else if ( strcmp(formname, TcpServerMulti::getFormName()) == 0 ) {
-        newform = new TcpServerMulti();
+    else if ( strcmp(formname, TcpServerMultiple::getFormName()) == 0 ) {
+        newform = new TcpServerMultiple();
     }
 
     // Random number generator and distributions

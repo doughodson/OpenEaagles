@@ -1,8 +1,11 @@
+//------------------------------------------------------------------------------
+// Class: UdpHandler
+//------------------------------------------------------------------------------
 
 #if defined(WIN32)
     #include <sys/types.h>
     #include <winsock2.h>
-    #define	bzero(a,b)		ZeroMemory( a, b )
+    #define bzero(a,b)    ZeroMemory( a, b )
     typedef int Len;
 #else
     #include <arpa/inet.h>
@@ -15,7 +18,7 @@
     typedef socklen_t Len ;
 #endif
 
-#include "openeaagles/basic/UdpHandler.h"
+#include "openeaagles/basic/nethandlers/UdpHandler.h"
 #include "openeaagles/basic/Pair.h"
 #include "openeaagles/basic/PairStream.h"
 #include "openeaagles/basic/String.h"
@@ -29,7 +32,7 @@ namespace Basic {
 IMPLEMENT_SUBCLASS(UdpHandler,"UdpHandler")
 
 BEGIN_SLOTTABLE(UdpHandler)
-    	"ipAddress",    // 1) String containing the IP address in
+    "ipAddress",        // 1) String containing the IP address in
                         //    the Internet standard "." (dotted) notation.
 END_SLOTTABLE(UdpHandler)
 
@@ -88,7 +91,7 @@ bool UdpHandler::init()
     if (!ok) {
         return false;
     }
-        
+
     // ---
     // Find our network address
     // ---
@@ -103,7 +106,7 @@ bool UdpHandler::init()
 #else
     if (socketNum < 0) {
 #endif
-        perror("initNetwork(): Socket error");
+        perror("UdpHandler::init(): Socket error");
         return false;
     }
 
@@ -134,7 +137,7 @@ bool UdpHandler::bindSocket()
        }
 
       if (bind(socketNum, (const struct sockaddr *) &addr, sizeof(addr)) == SOCKET_ERROR) {
-        perror("bindSocket(): bind error");
+        perror("UdpHandler::bindSocket(): bind error");
         return false;
       }
 
@@ -171,15 +174,19 @@ bool UdpHandler::sendDataTo(
     Len addrlen = sizeof(addr);
     int result = sendto(socketNum, packet, size, 0, (const struct sockaddr *) &addr, addrlen);
 #if defined(WIN32)
-   if (result == SOCKET_ERROR) {
+    if (result == SOCKET_ERROR) {
         int err = WSAGetLastError();
-        std::cerr << "sendData(): sendto error: " << err << " hex=0x" << std::hex << err << std::dec << std::endl;
+        if (isMessageEnabled(MSG_ERROR)) {
+            std::cerr << "UdpHandler::sendDataTo(): sendto error: " << err << " hex=0x" << std::hex << err << std::dec << std::endl;
+        }
         return false;
     }
 #else
-   if (result == SOCKET_ERROR) {
-        perror("sendto error");
-        std::cerr << "sendData(): sendto error: result: " << result << std::endl;
+    if (result == SOCKET_ERROR) {
+        perror("UdpHandler::sendDataTo(): sendto error msg");
+        if (isMessageEnabled(MSG_ERROR)) {
+            std::cerr << "UdpHandler::sendDataTo(): sendto error result: " << result << std::endl;
+        }
         return false;
     }
 #endif
@@ -242,3 +249,4 @@ std::ostream& UdpHandler::serialize(std::ostream& sout, const int i, const bool 
 
 } // End Basic namespace
 } // End Eaagles namespace
+
