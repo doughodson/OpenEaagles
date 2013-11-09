@@ -12,7 +12,6 @@ namespace BasicGL {
 
 //------------------------------------------------------------------------------
 // Class: Page
-// Base class: Object > Graphic > Page
 //
 // Description: Page format. A list of graphic objects and methods to manage
 //              them as a page, also contains subpages and a background page.
@@ -26,73 +25,74 @@ namespace BasicGL {
 //  focusSlavedToSubpage <Number>       ! Slave the focus to the subpage (default: true)
 //
 // Events
-//	1. ON_ENTRY
-//	2. ON_EXIT
-//	3. BUTTON_HIT
-//	4. ON_ANYKEY                                           
+//  1. ON_ENTRY
+//  2. ON_EXIT
+//  3. BUTTON_HIT
+//  4. ON_ANYKEY                                           
 //
 // Public member functions:
-//	char* subpageName()
-//		Returns cpName.
+//  char* subpageName()
+//    Returns cpName.
 //
-//	Page* subpage()
-//		Returns cp.
+//  Page* subpage()
+//    Returns cp.
 //
-//	bool isPostDrawSubpage()
-//		Returns postDraw1
+//  bool isPostDrawSubpage()
+//    Returns postDraw1
 //
-//	Pair* findSubpageByName(char* slotname)
-//		Returns a member from the slot name given, else 0.
+//  Pair* findSubpageByName(char* slotname)
+//    Returns a member from the slot name given, else 0.
 //
-//	Pair* findSubpageByType(std::type_info& type)
-//		Returns a member of the given type, else 0.
+//  Pair* findSubpageByType(std::type_info& type)
+//    Returns a member of the given type, else 0.
 //
-//	bool isFocusSlavedToSubpage()
-//		Returns true if the focus is slaved to a subpage.
+//  bool isFocusSlavedToSubpage()
+//    Returns true if the focus is slaved to a subpage.
 //
-//	void setFocusSlavedToSubpage(bool f)
-//		Sets focusSlavedToSubpage to f.
+//  void setFocusSlavedToSubpage(bool f)
+//    Sets focusSlavedToSubpage to f.
 //
 // macro slottable functions
-//	bool setPage(Identifier* const pobj)
-//		Sets the page to pobj and returns true if successful.
+//  bool setPage(Identifier* const pobj)
+//    Sets the page to pobj and returns true if successful.
 //
-//	bool setSubpageStream (PairStream* psobj)
-//		Sets the subpage stream to psobj and returns true if successful.
+//  bool setSubpageStream (PairStream* psobj)
+//    Sets the subpage stream to psobj and returns true if successful.
 //
-//	bool setSubpageSingle (Page* pobj)
-//		Sets the subpage single to pobj and returns true if successful.
+//  bool setSubpageSingle (Page* pobj)
+//    Sets the subpage single to pobj and returns true if successful.
 //
-//	bool setPagingEvent(PairStream* peobj)
-//		Sets the paging event to peobj and returns true if successful.
+//  bool setPagingEvent(PairStream* peobj)
+//    Sets the paging event to peobj and returns true if successful.
 //
-//	bool drawSubpageFirst(Number* spfobj)
-//		Set drawSubpageFirst (boolean) then return true if successful.
+//  bool drawSubpageFirst(Number* spfobj)
+//    Set drawSubpageFirst (boolean) then return true if successful.
 //
-//	bool setSlotFocusSlavedToSubpage(Number* spfobj)
-//		Set focusSlavedToSubpage (boolean) and return true if successful.
+//  bool setSlotFocusSlavedToSubpage(Number* spfobj)
+//    Set focusSlavedToSubpage (boolean) and return true if successful.
 //
 // macro event handler functions
-//	bool onEntry()
-//		Returns true. (Function Not Implemented.)
+//  bool onEntry()
+//    Returns true. (Function Not Implemented.)
 //
-//	bool onExit()
-//		Returns true. (Function Not Implemented.)
+//  bool onExit()
+//    Returns true. (Function Not Implemented.)
 //
-//	bool onButtonHit(String* obhobj)
-//		Handles the button hit as a page change event.
+//  bool onButtonHit(String* obhobj)
+//    Handles the button hit as a page change event.
 //
-//	bool onKeyHit(int key)
-//		Handles the keyboard hit as a page change event.
+//  bool onKeyHit(int key)
+//    Handles the keyboard hit as a page change event.
 //
 // Call new sub-page
-//	bool newSubpage(Page* newPage, Page* theCaller, Object* theArg)
-//		Changes subpages by page. Returns true if page was found.
+//  bool newSubpage(Page* newPage, Page* theCaller, Object* theArg)
+//    Changes subpages by page. Returns true if page was found.
 //
-//	bool newSubpage(char* name, Page* theCaller, Object* theArg)
-//		Changes subpages by name. Returns true if the page was found.
+//  bool newSubpage(char* name, Page* theCaller, Object* theArg)
+//    Changes subpages by name. Returns true if the page was found.
 //------------------------------------------------------------------------------
-class Page : public Graphic {
+class Page : public Graphic
+{
    DECLARE_SUBCLASS(Page,Graphic)
 
 public:
@@ -139,8 +139,8 @@ public:
 
 protected:
    // Return our paging arguments
-   Basic::Object* getArgument()              { return pageArg; }
-   const Page* getCaller()                   { return caller; }
+   Basic::Object* getArgument()               { return pageArg; }
+   const Page* getCaller()                    { return caller; }
 
    // Return our subpages
    Basic::PairStream* subPages()              { return subpages; }

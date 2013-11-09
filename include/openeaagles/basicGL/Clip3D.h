@@ -10,7 +10,6 @@
 namespace Eaagles {
 namespace BasicGL {
 
-
 //------------------------------------------------------------------------------
 // Class:   Clip3D
 // Base class: Object -> Clip3D
@@ -31,7 +30,7 @@ public:
    void setClippingBox(
          const LCreal xmin, const LCreal xmax,
          const LCreal ymin, const LCreal ymax,
-         const LCreal zmin = -FLT_MAX, const LCreal = FLT_MAX
+         const LCreal zmin = -FLT_MAX, const LCreal zmax = FLT_MAX
       );
 
    //------------------------------------------------------------------------------

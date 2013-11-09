@@ -185,7 +185,7 @@ private:
 };
 
 //------------------------------------------------------------------------------
-// inline funcitons
+// inline functions
 //------------------------------------------------------------------------------
 
 inline int GlutDisplay::getWindowId() const                 { return winId; }

@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // Class: TickMarks
 //------------------------------------------------------------------------------
-#ifndef	__Eaagles_Instruments_TickMarks_H__
+#ifndef __Eaagles_Instruments_TickMarks_H__
 #define __Eaagles_Instruments_TickMarks_H__
 
 #include "openeaagles/instruments/gauges/AnalogGauge.h"
@@ -16,7 +16,8 @@ namespace Instruments {
 // vertically, and draws them accordingly.  This is very similar to dial 
 // tick marks, only it doesn't rotate and doesn't draw around the circle.
 //------------------------------------------------------------------------------
-class TickMarks : public AnalogGauge {
+class TickMarks : public AnalogGauge
+{
     DECLARE_SUBCLASS(TickMarks,AnalogGauge)
     
 public:
@@ -48,7 +49,7 @@ private:
     int    quantity;       // how many tick marks will we have?
     LCreal gaugeLength;    // length we are spanning our tick marks over
     bool   flip;           // our flip variable
-    BasicGL::Graphic* myGraphic; // our graphic (if we choose to use on for a tick mark)
+    BasicGL::Graphic* myGraphic; // our graphic (if we choose to use one for a tick mark)
 };
 
 }  // end of Instruments namespace

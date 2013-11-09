@@ -299,7 +299,7 @@ unsigned int Tdb::processPlayers(Basic::PairStream* const players)
    if (usingEcefFlg) {
       // Our vertical offset from our ownship is the inverse of the 'z'
       // translation component from our gimbal to NED matrix.
-      double vertOffset = -rm(3,2);    // Z trnaslation (but positive up)
+      double vertOffset = -rm(3,2);    // Z translation (but positive up)
 
       // distance from the center of the earth
       double distEC = vertOffset + osAlt + earthRadius;

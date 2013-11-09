@@ -46,7 +46,7 @@ class TrackManager;
 //                         <Number>      ! Pulse width in seconds
 //
 //    beamWidth            <Angle>       ! Beam Width  (must be greater than zero) (default: D2RCC * 3.5f)
-//                         <Number>      ! Beam width in radian
+//                         <Number>      ! Beam width in radians
 //
 //    typeId               <String>      ! R/F system type id (default: '\0')
 //

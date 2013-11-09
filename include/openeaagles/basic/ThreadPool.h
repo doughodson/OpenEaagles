@@ -45,7 +45,7 @@ protected:
    virtual void execute(Object* const obj);
 
    // Same as execute(Object*) except also passes the additional current
-   // callback object provided to the ThreadPool using it's alternate
+   // callback object provided to the ThreadPool using its alternate
    // execute() method. This version should be used if the alternate
    // version that passes a current callback object is used in the
    // ThreadPool. If both version are overridden, they will both get

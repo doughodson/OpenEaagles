@@ -39,7 +39,7 @@ BEGIN_SLOTTABLE(Route)
     "wrap",             // 4) Route wrap flag (wrap back to the beginning when past the end)
 END_SLOTTABLE(Route)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(Route)
     ON_SLOT(1,setSlotTo,Basic::Identifier)
     ON_SLOT(1,setSlotTo,Basic::Number)
@@ -78,19 +78,19 @@ Route::Route()
 void Route::copyData(const Route& org, const bool cc)
 {
     BaseClass::copyData(org);
-    
+
     if (cc) {
         to = 0;
         initToStptName = 0;
     }
 
     to = 0; // find it using 'initToStptName' or 'initToStptIdx'
-    
+
     {
-       Basic::String* n = 0;
-       if (org.initToStptName != 0) n = org.initToStptName->clone();
-       initToStptName = n;
-       if (n != 0) n->unref();  // SPtr<> has it
+        Basic::String* n = 0;
+        if (org.initToStptName != 0) n = org.initToStptName->clone();
+        initToStptName = n;
+        if (n != 0) n->unref();  // SPtr<> has it
     }
 
     initToStptIdx = org.initToStptIdx;
@@ -150,7 +150,7 @@ void Route::reset()
 //------------------------------------------------------------------------------
 unsigned int Route::getNumberOfSteerpoints() const
 {
-    return getNumberOfComponents(); 
+    return getNumberOfComponents();
 }
 
 //------------------------------------------------------------------------------
@@ -223,7 +223,7 @@ void Route::autoSequencer(const LCreal, const Navigation* const nav)
 void Route::triggerAction()
 {
    // ---
-   // find and start the current 'to' steerpont action 
+   // find and start the current 'to' steerpont action
    // ---
    Player* own = (Player*) findContainerByType(typeid(Player));
    if (to != 0 && own != 0) {
@@ -463,7 +463,7 @@ unsigned int Route::getSteerpoints(SPtr<Steerpoint>* const stptList, const unsig
     unsigned int i = 0;
     Basic::PairStream* steerpoints = getComponents();
     if (stptList != 0 && max > 0 && steerpoints != 0) {
-    
+
         // Find our 'to' steerpoint
         bool found = false;
         Basic::List::Item* item = steerpoints->getFirstItem();
@@ -617,7 +617,7 @@ bool Route::insertSteerpoint(Steerpoint* const newStpt, const int pos)
 
     // ---
     // Call directTo() to reset the steerpoint index, or if we were going nowhere
-    // then go direct-to steerpoint one.  
+    // then go direct-to steerpoint one.
     // ---
     if (ok) {
        if (to != 0) {
@@ -644,7 +644,7 @@ bool Route::replaceAllSteerpoints(Basic::PairStream* const newSteerpointList, un
 
       Basic::Component::processComponents(newSteerpointList,typeid(Steerpoint));
 
-      // Try to force a 'Direct to' the new 'stptIdx' or default to stpt #1 
+      // Try to force a 'Direct to' the new 'stptIdx' or default to stpt #1
       directTo((unsigned int) 0);
       if ( !directTo(newStptIdx) ) directTo(1);
 
@@ -690,7 +690,7 @@ bool Route::deleteSteerpoint(Steerpoint* const sp)
 //------------------------------------------------------------------------------
 // deleteAllSteerpoints() - deletes all of the steerpoints
 //------------------------------------------------------------------------------
-bool Route::deleteAllSteerpoints() 
+bool Route::deleteAllSteerpoints()
 {
    // This will create a new null(0) steerpoint (components) list
    Basic::Component::processComponents(0,typeid(Steerpoint));

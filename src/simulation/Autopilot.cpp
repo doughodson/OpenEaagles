@@ -44,7 +44,7 @@ BEGIN_SLOTTABLE(Autopilot)
    "holdHeading",                //  6) Hold heading (default: player's heading) (Angle)
    "headingHoldMode",            //  7) Heading hold mode flag
    "loiterMode",                 //  8) Loiter mode flag (default: false)
-   "loiterPatternLength",        //  9) Loiter pattern length (default: 10NM)    (Distance or nautical miles )
+   "loiterPatternLength",        //  9) Loiter pattern length (default: 10NM)    (Distance or nautical miles)
    "loiterPatternCcwFlag",       // 10) Loiter pattern counter-clockwise flag    (default: clockwise)
    "leadFollowingDistanceTrail", // 11) Desired distance behind(+) the lead      (Distance or meters)
    "leadFollowingDistanceRight", // 12) Desired distance right(+) of the lead    (Distance or meters)

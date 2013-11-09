@@ -1,8 +1,10 @@
 //------------------------------------------------------------------------------
-// Classes:  Time, Seconds, MilliSeconds, Minutes, Hours, Days
+// Classes:  Time, Seconds, MilliSeconds, MicroSeconds, NanoSeconds, Minutes, Hours, Days
 // Base class:  Object -> Number -> Time
 //              Object -> Number -> Time -> Seconds
 //              Object -> Number -> Time -> MilliSeconds
+//              Object -> Number -> Time -> MicroSeconds
+//              Object -> Number -> Time -> NanoSeconds
 //              Object -> Number -> Time -> Minutes
 //              Object -> Number -> Time -> Hours
 //              Object -> Number -> Time -> Days

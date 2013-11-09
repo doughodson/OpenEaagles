@@ -41,7 +41,7 @@ BEGIN_SLOTTABLE(Graphic)
     "scissorY",             // 13: Bottom edge of the scissor box   (World coord)
     "scissorWidth",         // 14: How far over do we scissor       (World coord)
     "scissorHeight",        // 15: How far up do we scissor         (World coord)
-    "stipple",              // 16: Line stippling flag - only used for line, lineloop, and circle when not filled.  It is put up here because of it's commonality
+    "stipple",              // 16: Line stippling flag - only used for line, lineloop, and circle when not filled.  It is put up here because of its commonality
     "stippleFactor",        // 17: Line stipple factor, specifies a multiplier for each bit in line stipple pattern
     "stipplePattern",       // 18: Specifies a 16 bit Line stipple pattern; range 0x0000 (0) .. 0xFFFF (65535)
     "visible",              // 19: Visibility flag
@@ -298,7 +298,7 @@ void Graphic::deleteData()
 }
 
 //------------------------------------------------------------------------------
-// findBySelectName() -- find one of our components by it's GL Select (pick) name
+// findBySelectName() -- find one of our components by its GL Select (pick) name
 //                    (our children first then grandchildren)
 //------------------------------------------------------------------------------
 Basic::Pair* Graphic::findBySelectName(const GLuint name)
@@ -1266,7 +1266,7 @@ bool Graphic::setSlotVertices(const Basic::PairStream* const msg)
                         }
                         else {
                               if (isMessageEnabled(MSG_WARNING)) {
-                                std::cerr << "Graphic::setVertices: Cooridnates not in [ x y ] or [ x y z ] form!" << std::endl;
+                                std::cerr << "Graphic::setVertices: Coordinates not in [ x y ] or [ x y z ] form!" << std::endl;
                               }
                                 ok = false;
                         }
@@ -1318,9 +1318,9 @@ bool Graphic::setSlotNormals(const Basic::PairStream* const msg)
                         }
                         else {
                               if (isMessageEnabled(MSG_ERROR)) {
-                                std::cerr << "Graphic::setVertices: Cooridnates not in [ x y ] or [ x y z ] form!" << std::endl;
+                                std::cerr << "Graphic::setVertices: Coordinates not in [ x y ] or [ x y z ] form!" << std::endl;
                               }
-                                ok = false;
+                              ok = false;
                         }
                     }
                 }
@@ -1366,9 +1366,9 @@ bool Graphic::setSlotTexCoord(const Basic::PairStream* const msg)
                             ntc++;
                         }
                         else {
-                              if (isMessageEnabled(MSG_ERROR)) {
-                            std::cerr << "Graphic::setTexCoord: Cooridnates not in [ s t ] form!" << std::endl;
-                              }
+                            if (isMessageEnabled(MSG_ERROR)) {
+                                std::cerr << "Graphic::setTexCoord: Cooridnates not in [ s t ] form!" << std::endl;
+                            }
                             ok = false;
                         }
                     }

@@ -8,7 +8,7 @@
 //
 //    Record()
 //    Record(const char* string)
-//    Record(DafifRecord& dafif)
+//    Record(Record& dafif)
 //       Constructors: (creates a copy of 'string')
 //
 //    setRecord(const char* string)
@@ -104,7 +104,7 @@
 //       DAFIF fields.
 //
 //    protected: const Ptbl* ptbl
-//       Object's field position table.  The DafifRecord constructor sets
+//       Object's field position table.  The Record constructor sets
 //       this variable to 0.  Constructors of the derived classes must
 //       set this variable to their own <class>::ptable.
 //

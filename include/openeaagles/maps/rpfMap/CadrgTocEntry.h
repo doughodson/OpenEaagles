@@ -4,23 +4,23 @@
 // This is a Table of Contents Boundary Rectangle Entry, which describes the
 // boundary of a given set of frames, including the scale and size of the
 // rectangle.
-
+//
 // Subroutines:
 // getFrameEntry() - Return the frame at the given row, column.
 //      CadrgFrameEntry* CadrgTocEntry::getFrameEntry(const int v, const int h)
-
+//
 // generateItems() - Simply generate the name of the file we are using for our image.
 //      void CadrgTocEntry::generateItems(void)
-
+//
 // setType() - Sets our entry type (ie... "CADRG")
 //      void CadrgTocEntry::setType(const char* x, const int size) 
-
+//
 // setZone() - Sets the zone this entry lies in
 //      void CadrgTocEntry::setZone(const char* x, const int size) 
-
+//
 // setScale() - Sets the scale of this entry (ie... "1:500K")
 //      void CadrgTocEntry::setScale(const char* x, const int size) 
-
+//
 // isInZone() - Takes in a lat lon and returns true if that point falls in our entry
 //      bool CadrgTocEntry::isInZone(double lat, double lon)
 //------------------------------------------------------------------------------
@@ -98,7 +98,7 @@ private:
     double nwLat;               // Northwest latitude of entry
     double nwLon;               // Northwest longitude of entry
     double seLat;               // Southeast latitude of entry
-    double seLon;               // Southest longitude of entry
+    double seLon;               // Southeast longitude of entry
     double swLat;               // Southwest latitude of entry
     double swLon;               // Southwest longitude of entry
     double neLat;               // Northeast latitude of entry

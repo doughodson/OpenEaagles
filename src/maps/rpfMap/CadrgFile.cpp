@@ -215,7 +215,7 @@ bool CadrgFile::checkForMap(const char* dir)
 //--------------------------------------------------------------------------
 // initialize() - Checks to see we have valid data, then goes through and
 // opens all the files that are required (from the input language), and then
-// creates Toc Entries for each one.  It then fills each Toc with it's frames.
+// creates Toc Entries for each one.  It then fills each Toc with its frames.
 //--------------------------------------------------------------------------
 bool CadrgFile::initialize(const char* dir)
 {

@@ -589,8 +589,8 @@ void NetIO::updateOutputList()
       // ---
       for (unsigned int i = 0; i < nOutNibs; i++) {
          if ( !outputList[i]->isChecked() ) {
-            // Request removel;
-            // (note: the network specific code now has one frame to cleanup it's own code
+            // Request removal;
+            // (note: the network specific code now has one frame to cleanup its own code
             //  before the NIB is dropped from the output list next frame -- see above)
             outputList[i]->setMode(Player::DELETE_REQUEST);
          }
@@ -618,7 +618,7 @@ void NetIO::processOutputList()
          // While this NIB isn't being deleted ...
 
          // Check if a fire event is needed.  When a weapon type player is active,
-         // but it's NIB state is still inactive, then we say the weapon has just
+         // but its NIB state is still inactive, then we say the weapon has just
          // been fired. (delay until after the entity state PDU)
          bool fired =
             (nib->isMode(Player::INACTIVE) || nib->isMode(Player::PRE_RELEASE)) &&
@@ -636,7 +636,7 @@ void NetIO::processOutputList()
          // Send a fire message; if a fire event was needed, we delayed sending
          // until after the weapon's entity state has been sent at least once.
          if (fired) {
-            // Weapon player has just gone active and it's entity state packet has been sent.
+            // Weapon player has just gone active and its entity state packet has been sent.
             nib->weaponFireMsgFactory((LCreal)curExecTime);
          }
 
@@ -883,7 +883,7 @@ bool NetIO::addNibToList(Nib* const nib, const IoType ioType)
          NibKey key(nib->getPlayerID(), nib->getFederateName());
 
          if (n > 0) {
-            // Now, 'bubble down' to it's correct position
+            // Now, 'bubble down' to its correct position
             int idx = n-1;
             while (idx >= 0 && compareKey2Nib(&key, &tbl[idx]) <= 0) {
                // Swap the table entries
@@ -1648,7 +1648,7 @@ const Ntm* NtmOutputNodeStd::findNetworkTypeMapper(const Player* const p) const
    if ( nodeFormName == 0 || p->isFormName(nodeFormName) ) {
 
       // First, we'll search our subnodes to see if they'll find a match
-      // (i.e., if it's derivied from our node then there may be a better match)
+      // (i.e., if it's derived from our node then there may be a better match)
       const Basic::List::Item* item = subnodeList->getFirstItem();
       while (item != 0 && result == 0) {
          const NtmOutputNodeStd* subnode = (const NtmOutputNodeStd*) item->getValue();
@@ -1669,7 +1669,7 @@ const Ntm* NtmOutputNodeStd::findNetworkTypeMapper(const Player* const p) const
          const Basic::List::Item* item = ntmList->getFirstItem();
          while (item != 0 && result == 0) {
 
-            // Get the template player and it's type string with length
+            // Get the template player and its type string with length
             const Ntm* tstNtm = (const Ntm*) item->getValue();
             const Player* const tp = tstNtm->getTemplatePlayer();
             const Basic::String* const tpType = tp->getType();
@@ -1714,7 +1714,7 @@ bool NtmOutputNodeStd::add2OurLists(Ntm* const tgtNtm)
       }
 
       if (ok) {
-         // Yes -- check to see if it's really belongs to one of our subnodes.
+         // Yes -- check to see if it really belongs to one of our subnodes.
          bool found = false;
          Basic::List::Item* item = subnodeList->getFirstItem();
          while (item != 0 && !found) {

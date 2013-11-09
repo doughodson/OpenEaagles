@@ -504,7 +504,7 @@ const Pair* Component::findByName(const char* const slotname) const
 
         // Did we find it?
         if (q == 0 && slotname[0] != '.') {
-            // No, it's not one of our components and its not a hard name,
+            // No, its not one of our components and its not a hard name,
             //  so check our components' components
             const List::Item* item = subcomponents->getFirstItem();
             while (item != 0 && q == 0) {
@@ -645,7 +645,7 @@ Logger* Component::getEventLogger()
 
 //------------------------------------------------------------------------------
 // getAnyEventLogger() -- Returns a pointer to the logger assigned to this
-//  component or to one of it's containers.
+//  component or to one of its containers.
 //------------------------------------------------------------------------------
 Logger* Component::getAnyEventLogger()
 {

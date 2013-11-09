@@ -54,7 +54,7 @@ class Material;
 //    transform          <PairStream>   ! List of coordinate transformations (default: 0)
 //    transform          <Transform>    ! Single coordinate transformation (default: 0)
 //    vertices           <PairStream>   ! List of 3D Coordinates (World coord) (default: 0)
-//    normals            <PairStream>   ! List of 3D Vectors of normal's at each vertex
+//    normals            <PairStream>   ! List of 3D Vectors of normals at each vertex
 //    texCoord           <PairStream>   ! List of 2D Texture Coordinates (default: 0)
 //    noDisplayList      <Number>       ! Flag: True to disable display list
 //                                      !     (default false)
@@ -114,7 +114,7 @@ class Material;
 //          used to lookup the Color from the color table.
 //      setColor(Number* num)
 //          Sets a color rotary object, based on the value passed in.. see basicGL/ColorRotary.h for
-//          how to setup a list of colors and breakpoints.
+//          how to set up a list of colors and breakpoints.
 //
 //
 //

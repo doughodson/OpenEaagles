@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Class:	BasicGL::Graphic -> Instrument -> AltitudeDial
+// Class: AltitudeDial
 //
 // Description: A core complex altitude dial.
 // Input: The instrument altitude (UPDATE_INSTRUMENTS send command)
@@ -13,7 +13,7 @@
 //      5) thouScissors - same as hun
 //      6) tenThouScissors - same as hun and thou
 //------------------------------------------------------------------------------
-#ifndef	__Eaagles_Instruments_AltitudeDial_H__
+#ifndef __Eaagles_Instruments_AltitudeDial_H__
 #define __Eaagles_Instruments_AltitudeDial_H__
 
 #include "openeaagles/instruments/Instrument.h"
@@ -21,7 +21,8 @@
 namespace Eaagles {
 namespace Instruments {
 
-class AltitudeDial : public Instrument {
+class AltitudeDial : public Instrument
+{
     DECLARE_SUBCLASS(AltitudeDial,Instrument)
 
 public:

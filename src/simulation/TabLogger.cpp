@@ -707,12 +707,10 @@ const char* TabLogger::LogPlayerData::getDescription()
 // Capture the data
 void TabLogger::LogPlayerData::captureData()
 {
-    if (thePlayer != 0) 
-    {
+    if (thePlayer != 0) {
         alpha = -1.0;
         beta = -1.0;
         ias = -1.0;
-
         {
             pos = thePlayer->getPosition();
             vel = thePlayer->getVelocity();
@@ -721,8 +719,7 @@ void TabLogger::LogPlayerData::captureData()
             angles = thePlayer->getEulerAngles();
             const Player* const p = thePlayer;
             const AirVehicle* const av = dynamic_cast<const AirVehicle*>(p);
-            if ((av != 0) && (theType == 2) ) 
-            {
+            if ((av != 0) && (theType == 2) ) {
                 alpha = av->getAngleOfAttackD();
                 beta = av->getSideSlipD();
                 ias = av->getCalibratedAirspeed();
@@ -997,7 +994,7 @@ const char* TabLogger::LogActiveTrack::getDescription()
 {
     if (msg == 0) 
     {
-	
+
         std::stringstream sout;
         
         // Time & Event message
@@ -1071,23 +1068,16 @@ const char* TabLogger::LogActiveTrack::getDescription()
 // Capture the data
 void TabLogger::LogActiveTrack::captureData()
 {
-    if (thePlayer != 0) 
-    {
-        {
-            pos = thePlayer->getPosition();
-            vel = thePlayer->getVelocity();
-            angles = thePlayer->getEulerAngles();
-        }
+    if (thePlayer != 0) {
+        pos = thePlayer->getPosition();
+        vel = thePlayer->getVelocity();
+        angles = thePlayer->getEulerAngles();
     }
-    if (theEmission != 0) 
-    {
-        if (theEmission->getTarget() != 0) 
-        {
-            {
-                tgtPos = theEmission->getTarget()->getPosition();
-                tgtVel = theEmission->getTarget()->getVelocity();
-                tgtAngles = theEmission->getTarget()->getEulerAngles();
-            }
+    if (theEmission != 0) {
+        if (theEmission->getTarget() != 0) {
+            tgtPos = theEmission->getTarget()->getPosition();
+            tgtVel = theEmission->getTarget()->getVelocity();
+            tgtAngles = theEmission->getTarget()->getEulerAngles();
         }
     }
 }

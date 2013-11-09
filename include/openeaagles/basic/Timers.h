@@ -12,7 +12,6 @@ namespace Basic {
 class Number;
 class Time;
 
-
 //==============================================================================
 // Class: Timer
 //
@@ -33,7 +32,7 @@ public:
    static  const unsigned int MAX_TIMERS = EAAGLES_CONFIG_MAX_INTERVAL_TIMERS;
 
 public:
-    Timer();
+   Timer();
    Timer(const Type direction, const double time = 0.0);
 
    Type getType() const;            // Type of interval timer

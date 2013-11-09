@@ -397,7 +397,7 @@ bool RfSensor::setRange(const LCreal v)
 
 
 //------------------------------------------------------------------------------
-//  setSlotModeStream() -- takes a pair stream in and inits the mode list
+//  setSlotModeStream() -- takes a PairStream in and inits the mode list
 //------------------------------------------------------------------------------
 bool RfSensor::setSlotModeStream (Basic::PairStream* const obj)
 {
@@ -665,7 +665,7 @@ bool RfSensor::setSlotTrackManagerName(Basic::String* const v)
 }
 
 //------------------------------------------------------------------------------
-// processModes() -- process our mode list; make sure the are all of
+// processModes() -- process our mode list; make sure they are all of
 //  type Mode (or derived from it)and tell them that we are their
 //  master mode.
 //------------------------------------------------------------------------------

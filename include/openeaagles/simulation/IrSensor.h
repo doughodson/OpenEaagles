@@ -208,8 +208,9 @@ private:
 //------------------------------------------------------------------------------
 // Class: MergingIrSensor
 // Description: I/R Sensor Model that models limited IrSensor that can only distinguish targets
-//				if they are not within specified az & el bin. 
-//			Merges targets that are within bins in receive frame.
+//              if they are not within specified az & el bin. 
+//              Merges targets that are within bins in receive frame.
+//------------------------------------------------------------------------------
 
 class MergingIrSensor : public IrSensor
 {

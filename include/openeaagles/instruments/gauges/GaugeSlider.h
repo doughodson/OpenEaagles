@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // Class: GaugeSlider
 //------------------------------------------------------------------------------
-#ifndef	__Eaagles_Instruments_GuageSlider_H__
+#ifndef __Eaagles_Instruments_GuageSlider_H__
 #define __Eaagles_Instruments_GuageSlider_H__
 
 #include "openeaagles/instruments/gauges/AnalogGauge.h"
@@ -10,12 +10,13 @@ namespace Eaagles {
 namespace Instruments {
 
 //------------------------------------------------------------------------------
-// Class:	GaugeSlider
+// Class: GaugeSlider
 // 
-// Description: Translates it's graphical components vertically
+// Description: Translates its graphical components vertically
 // or horizontally along the gauge depending on the value given to it
 //------------------------------------------------------------------------------
-class GaugeSlider : public AnalogGauge {
+class GaugeSlider : public AnalogGauge
+{
     DECLARE_SUBCLASS(GaugeSlider,AnalogGauge)
     
 public:
@@ -25,7 +26,7 @@ public:
     virtual void draw();
                 
 private:
-    LCreal sliderPos;               // direction, in inches, to move our slider (either Y or X-axis depending on the vertical flag)
+    LCreal sliderPos;       // direction, in inches, to move our slider (either Y or X-axis depending on the vertical flag)
 };
 
 }  // end Instruments namespace

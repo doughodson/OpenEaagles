@@ -300,7 +300,7 @@ private:
       PARALLEL, 
       TEARDROP, 
       LOITER
-   };  
+   };
 
    double   loiterAnchorLat;        // Loiter orbit pattern anchor point latitude  (degs)
    double   loiterAnchorLon;        // Loiter orbit pattern anchor point longitude (degs)

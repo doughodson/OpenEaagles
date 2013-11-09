@@ -196,7 +196,7 @@ void Page::reset()
 }
 
 //------------------------------------------------------------------------------
-// findBySelectName() -- find one of our components by it's GL Select (pick) name
+// findBySelectName() -- find one of our components by its GL Select (pick) name
 //                    (our children first then grandchildren)
 //------------------------------------------------------------------------------
 Basic::Pair* Page::findBySelectName(const GLuint name)
