@@ -1,7 +1,7 @@
-// Navigation
-
+//------------------------------------------------------------------------------
+// Class: Nav
+//------------------------------------------------------------------------------
 #include "openeaagles/basic/Nav.h"
-
 
 namespace Eaagles {
 namespace Basic {
@@ -20,21 +20,18 @@ const double Nav::ERAD60   = 3437.74677078;              // Earth Radius (NM) (1
 //------------------------------------------------------------------------------
 // Local WGS84 constants used by the legacy SubrDis conversion routines
 //------------------------------------------------------------------------------
-const double ellipseA    = 6378137;                         /* semi-major axis in meters */
-const double ellipseF    = 1/298.257223563;                 /* flattening */
-const double ellipseE2   = ellipseF * (2.0 - ellipseF);     /* Eccentricity Squared */
-const double ellipseB    = ellipseA * (1.0 - ellipseF);     /* semi-minor axis in meters */
+const double ellipseA    = 6378137;                         // semi-major axis in meters
+const double ellipseF    = 1/298.257223563;                 // flattening
+const double ellipseE2   = ellipseF * (2.0 - ellipseF);     // Eccentricity Squared
+const double ellipseB    = ellipseA * (1.0 - ellipseF);     // semi-minor axis in meters
 const double ellipseAsq  = ellipseA * ellipseA;
 const double ellipseBsq  = ellipseB * ellipseB;
-
 
 //------------------------------------------------------------------------------
 // Local status codes
 //------------------------------------------------------------------------------
 enum Status { NORMAL, SPECIAL_CASE, BAD_INPUT, TOO_MANY_LOOPS, POLAR_POINT,
               IDENTICAL_POINTS, ANTIPODAL_POINTS };
-
-
 
 //==============================================================================
 // Navigation Functions
