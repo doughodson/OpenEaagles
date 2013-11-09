@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Class:	RfSensor, SensorMgr
+// Classes: RfSensor, SensorMgr
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_Simulation_RfSensor_H__
 #define __Eaagles_Simulation_RfSensor_H__
@@ -22,7 +22,7 @@ class Player;
 class TrackManager;
 
 //------------------------------------------------------------------------------
-// Class:	RfSensor
+// Class: RfSensor
 // Description: Base class for R/F Sensor Models.  Provides a common
 //              interface, and some default behavior, for R/F sensors.
 //
@@ -165,13 +165,12 @@ private:
 };
 
 //------------------------------------------------------------------------------
-// Class:	SensorMgr
-// Base class:	Basic::Object -> ... -> RfSensor -> SensorMgr
+// Class: SensorMgr
 //
 // Description: Generic class for managing a list of R/F sensors
 // Form name: SensorMgr
 //------------------------------------------------------------------------------
-class SensorMgr : public RfSensor  
+class SensorMgr : public RfSensor
 {
     DECLARE_SUBCLASS(SensorMgr,RfSensor)
 

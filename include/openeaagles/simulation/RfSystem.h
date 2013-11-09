@@ -14,7 +14,7 @@ namespace Simulation {
    class Emission;
 
 //------------------------------------------------------------------------------
-// Class:	RfSystem
+// Class: RfSystem
 //
 // Description: Generic class for all R/F type systems.  Provides a common
 //              interface, and some default behavior, for R/F systems.

@@ -56,6 +56,9 @@ basicGL
    Translator class
       1) Fixed copy constructor -- now properly copies all attributes
 
+   Field class
+      1) Updated serialize method
+
 --------------------------------------------------------------------------------
 dis
 
@@ -96,6 +99,15 @@ simulation
    DynamicsModels class
       1) set commanded heading, velocity, and altitude now take additional
          parameters to define change rates.
+
+   RfSensor class
+      1) Updated serialize method
+
+   RfSystem class
+      1) Updated serialize method
+
+   ScanGimbal class
+      1) Updated serialize method
 
    Simulation class
       1) updateData() -- corrected the delta time being passed to updateBgPlayerList()

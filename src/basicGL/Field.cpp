@@ -1,3 +1,6 @@
+//------------------------------------------------------------------------------
+// Class: Field
+//------------------------------------------------------------------------------
 #include "openeaagles/basicGL/Field.h"
 #include "openeaagles/basicGL/Display.h"
 #include "openeaagles/basicGL/Page.h"
@@ -159,7 +162,7 @@ void Field::updateData(const LCreal dt)
         if ( (mode == input) &&  (icp > 0 || !inpModeHold) ) {
             setDisplayMode( inpDspMode );
         }
-    
+
         // Auto swtich OFF input display mode?
         if ( (mode == display) || (inpModeHold && icp == 0) ) {
             // If it wasn't previously set by a setSlot() function then turn it off.
@@ -168,7 +171,7 @@ void Field::updateData(const LCreal dt)
             }
         }
     }
-    
+
     // ---
     // Update readout during input mode?
     // ---
@@ -884,6 +887,9 @@ std::ostream& Field::serialize(std::ostream& sout, const int i, const bool slots
         case Basic::String::RIGHT  : sout << "\"right\"";   break;
     }
     sout << std::endl;
+
+    indent(sout,i+j);
+    sout << "startCharPos: " << startCP << std::endl;
 
     if ( !slotsOnly ) {
         indent(sout,i);
