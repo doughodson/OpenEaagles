@@ -161,14 +161,14 @@ Basic::Object* simulationFormFunc(const char* formname)
     else if ( strcmp(formname, System::getFormName()) == 0 ) {
         newform = new System();
     }
-   else if ( strcmp(formname, AvionicsPod::getFormName()) == 0 ) {
-      newform = new AvionicsPod();
-   }
+    else if ( strcmp(formname, AvionicsPod::getFormName()) == 0 ) {
+        newform = new AvionicsPod();
+    }
 
     // Basic Pilot types
-   else if ( strcmp(formname, Pilot::getFormName()) == 0 ) {
-      newform = new Pilot();
-   }
+    else if ( strcmp(formname, Pilot::getFormName()) == 0 ) {
+        newform = new Pilot();
+    }
     else if ( strcmp(formname, Autopilot::getFormName()) == 0 ) {
         newform = new Autopilot();
     }
@@ -202,7 +202,7 @@ Basic::Object* simulationFormFunc(const char* formname)
 
     // Actions
     else if ( strcmp(formname, ActionImagingSar::getFormName()) == 0 ) {
-      newform = new ActionImagingSar();
+        newform = new ActionImagingSar();
     }
     else if ( strcmp(formname, ActionWeaponRelease::getFormName()) == 0 ) {
         newform = new ActionWeaponRelease();
@@ -214,10 +214,10 @@ Basic::Object* simulationFormFunc(const char* formname)
         newform = new ActionCamouflageType();
     }
 
-   // Bombs and Missiles
-   else if ( strcmp(formname, Bomb::getFormName()) == 0 ) {
-      newform = new Bomb();
-   }
+    // Bombs and Missiles
+    else if ( strcmp(formname, Bomb::getFormName()) == 0 ) {
+        newform = new Bomb();
+    }
     else if ( strcmp(formname, Missile::getFormName()) == 0 ) {
         newform = new Missile();
     }
@@ -242,21 +242,21 @@ Basic::Object* simulationFormFunc(const char* formname)
         newform = new Flare();
     }
 
-   // Stores, stores manager and external stores (FuelTank, Gun & Bullets (used by the Gun))
-   else if ( strcmp(formname, Stores::getFormName()) == 0 ) {
-      newform = new Stores();
+    // Stores, stores manager and external stores (FuelTank, Gun & Bullets (used by the Gun))
+    else if ( strcmp(formname, Stores::getFormName()) == 0 ) {
+        newform = new Stores();
     }
-   else if ( strcmp(formname, SimpleStoresMgr::getFormName()) == 0 ) {
-      newform = new SimpleStoresMgr();
+    else if ( strcmp(formname, SimpleStoresMgr::getFormName()) == 0 ) {
+        newform = new SimpleStoresMgr();
     }
-   else if ( strcmp(formname, FuelTank::getFormName()) == 0 ) {
-      newform = new FuelTank();
+    else if ( strcmp(formname, FuelTank::getFormName()) == 0 ) {
+        newform = new FuelTank();
     }
-   else if ( strcmp(formname, Gun::getFormName()) == 0 ) {
-      newform = new Gun();
+    else if ( strcmp(formname, Gun::getFormName()) == 0 ) {
+        newform = new Gun();
     }
-   else if ( strcmp(formname, Bullet::getFormName()) == 0 ) {
-      newform = new Bullet();
+    else if ( strcmp(formname, Bullet::getFormName()) == 0 ) {
+        newform = new Bullet();
     }
 
     // Data links
@@ -278,15 +278,15 @@ Basic::Object* simulationFormFunc(const char* formname)
         newform = new Antenna();
     }
     else if ( strcmp(formname, IrSeeker::getFormName()) == 0 ) {
-      newform = new IrSeeker();
+        newform = new IrSeeker();
     }
 
     // IR Atmospheres
     else if ( strcmp(formname, IrAtmosphere::getFormName()) == 0 ) {
-      newform = new IrAtmosphere;
+        newform = new IrAtmosphere;
     }
     else if ( strcmp(formname, IrAtmosphere1::getFormName()) == 0 ) {
-      newform = new IrAtmosphere1;
+        newform = new IrAtmosphere1;
     }
 
     // R/F Signatures
@@ -372,11 +372,11 @@ Basic::Object* simulationFormFunc(const char* formname)
     else if ( strcmp(formname, Jammer::getFormName()) == 0 ) {
         newform = new Jammer();
     }
-   else if ( strcmp(formname, IrSensor::getFormName()) == 0 ) {
-      newform = new IrSensor();
+    else if ( strcmp(formname, IrSensor::getFormName()) == 0 ) {
+        newform = new IrSensor();
     }
-   else if ( strcmp(formname, MergingIrSensor::getFormName()) == 0 ) {
-      newform = new MergingIrSensor();
+    else if ( strcmp(formname, MergingIrSensor::getFormName()) == 0 ) {
+        newform = new MergingIrSensor();
     }
 
     // Tracks
@@ -394,9 +394,9 @@ Basic::Object* simulationFormFunc(const char* formname)
     else if ( strcmp(formname, RwrTrkMgr::getFormName()) == 0 ) {
         newform = new RwrTrkMgr();
     }
-   else if ( strcmp(formname, AirAngleOnlyTrkMgr::getFormName()) == 0 ) {
-      newform = new AirAngleOnlyTrkMgr();
-   }
+    else if ( strcmp(formname, AirAngleOnlyTrkMgr::getFormName()) == 0 ) {
+        newform = new AirAngleOnlyTrkMgr();
+    }
 
     // UBF Agents
     else if ( strcmp(formname, SimAgent::getFormName()) == 0 ) {
@@ -407,12 +407,12 @@ Basic::Object* simulationFormFunc(const char* formname)
     }
 
 
-   else if ( strcmp(formname, TabLogger::getFormName()) == 0 ) {
-      newform = new TabLogger();
-   }
-   else if ( strcmp(formname, Otm::getFormName()) == 0 ) {
-      newform = new Otm();
-   }
+    else if ( strcmp(formname, TabLogger::getFormName()) == 0 ) {
+        newform = new TabLogger();
+    }
+    else if ( strcmp(formname, Otm::getFormName()) == 0 ) {
+        newform = new Otm();
+    }
 
     return newform;
 }
