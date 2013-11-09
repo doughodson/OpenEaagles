@@ -100,6 +100,10 @@ simulation
       1) set commanded heading, velocity, and altitude now take additional
          parameters to define change rates.
 
+   Radar class
+      1) Added check to ensure a track mgr is available to sent reports, before
+         doing so (fix)
+
    RfSensor class
       1) Updated serialize method
 
