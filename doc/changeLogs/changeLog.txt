@@ -53,6 +53,8 @@ basic
 --------------------------------------------------------------------------------
 basicGL
 
+   Translator class
+      1) Fixed copy constructor -- now properly copies all attributes
 
 --------------------------------------------------------------------------------
 dis
