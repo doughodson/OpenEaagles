@@ -123,6 +123,7 @@ simulation
 
    Weapon class
       1) added storage for target velocity data
+      2) updated flags to set data logging
 
 --------------------------------------------------------------------------------
 vehicle
