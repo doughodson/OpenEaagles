@@ -808,11 +808,11 @@ void AirTrkMgr::processTrackList(const LCreal dt)
       for (unsigned int ir = 0; ir < nReports; ir++) {
          if (emissions[ir]->getTarget() == tgt) {
             // We have a new report for the same target as this track ...
-            report2TrackMatch[ir][it] = 1;
+            report2TrackMatch[ir][it] = true;
             trackNumMatches[it]++;
             reportNumMatches[ir]++;
          }
-         else report2TrackMatch[ir][it] = 0;
+         else report2TrackMatch[ir][it] = false;
       }
    }
    lcUnlock(trkListLock);
@@ -836,7 +836,7 @@ void AirTrkMgr::processTrackList(const LCreal dt)
       haveU[it] = false;
       if (trackNumMatches[it] > 0) {
          for (unsigned int ir = 0; ir < nReports; ir++) {
-            if (report2TrackMatch[ir][it] > 0) {
+            if (report2TrackMatch[ir][it]) {
                RfTrack* const trk = (RfTrack*) tracks[it];  // we produce only RfTracks
 
                // Update the track's signal
@@ -1266,11 +1266,11 @@ void GmtiTrkMgr::processTrackList(const LCreal dt)
       for (unsigned int ir = 0; ir < nReports; ir++) {
          if (emissions[ir]->getTarget() == tgt) {
             // We have a new report for the same target as this track ...
-            report2TrackMatch[ir][it] = 1;
+            report2TrackMatch[ir][it] = true;
             trackNumMatches[it]++;
             reportNumMatches[ir]++;
          }
-         else report2TrackMatch[ir][it] = 0;
+         else report2TrackMatch[ir][it] = false;
       }
    }
    lcUnlock(trkListLock);
@@ -1293,7 +1293,7 @@ void GmtiTrkMgr::processTrackList(const LCreal dt)
       haveU[it] = false;
       if (trackNumMatches[it] > 0) {
          for (unsigned int ir = 0; ir < nReports; ir++) {
-            if (report2TrackMatch[ir][it] > 0) {
+            if (report2TrackMatch[ir][it]) {
 
                RfTrack* const trk = (RfTrack*) tracks[it];  // we produce only RfTracks
 
@@ -1588,11 +1588,11 @@ void RwrTrkMgr::processTrackList(const LCreal dt)
       for (unsigned int ir = 0; ir < nReports; ir++) {
          if (emissions[ir]->getOwnship() == tgt) {  // The emissions ownship is our target!
             // We have a new report for the same target as this track ...
-            report2TrackMatch[ir][it] = 1;
+            report2TrackMatch[ir][it] = true;
             trackNumMatches[it]++;
             reportNumMatches[ir]++;
          }
-         else report2TrackMatch[ir][it] = 0;
+         else report2TrackMatch[ir][it] = false;
       }
    }
    lcUnlock(trkListLock);
@@ -1616,7 +1616,7 @@ void RwrTrkMgr::processTrackList(const LCreal dt)
       haveU[it] = false;
       if (trackNumMatches[it] > 0) {
          for (unsigned int ir = 0; ir < nReports; ir++) {
-            if (report2TrackMatch[ir][it] > 0) {
+            if (report2TrackMatch[ir][it]) {
 
                // Update the track's signal
                RfTrack* const trk = (RfTrack*) tracks[it];        // we produce only RfTracks

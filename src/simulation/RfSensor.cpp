@@ -419,7 +419,10 @@ bool RfSensor::setSlotModeSingle(RfSensor* const obj)
     if (modes != 0) modes->unref();
 
     modes = new Basic::PairStream();
-    modes->put( new Basic::Pair("1",obj) );
+
+    Basic::Pair* p = new Basic::Pair("1",obj);
+    modes->put( p );
+    p->unref();
 
     return processModes();
 }
