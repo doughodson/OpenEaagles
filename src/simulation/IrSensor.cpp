@@ -9,7 +9,7 @@
 // The order of the components in the input data file is significant. If the
 // computer is listed before the sensor, it will complete its process() before the
 // sensor does, resulting in it not receiving inputs until the next frame. If listed
-// afterward, it will complete its process after the sensor, and will accept inputs
+// afterwards, it will complete its process after the sensor, and will accept inputs
 // in the same frame in which they were generated.
 
 #include "openeaagles/simulation/IrAtmosphere.h"
@@ -279,7 +279,7 @@ bool IrSensor::calculateIrQueryReturn(IrQueryMsg* const msg)
       LCreal backgroundArea =  ifov * rangeSquared;
 
       // The seeker detects by comparing the amount of signal present
-      // with the target to the amount of signal rhere would be without the target.
+      // with the target to the amount of signal there would be without the target.
       // The amount of signal with the target represents the signal power plus
       // that part of the background radiation that is not blocked by the target.
       // If the target is larger than the field of view than it is all of background
@@ -765,7 +765,7 @@ TrackManager* IrSensor::getTrackManager()
    return trackManager;
 }
 
-// Returns our current track manager (const verstion)
+// Returns our current track manager (const version)
 const TrackManager* IrSensor::getTrackManager() const
 {
    return trackManager;
@@ -1115,5 +1115,5 @@ bool MergingIrSensor::setSlotElevationBin(const Basic::Number* const msg)
    return true;
 }
 
-} // End Simulation namespace
-} // End Eaagles namespace
+}
+}
