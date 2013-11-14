@@ -34,6 +34,7 @@
 #include "openeaagles/simulation/AircraftIrSignature.h"
 #include "openeaagles/simulation/Jammer.h"
 #include "openeaagles/simulation/LifeForms.h"
+#include "openeaagles/simulation/MergingIrSensor.h"
 #include "openeaagles/simulation/Missile.h"
 #include "openeaagles/simulation/Navigation.h"
 #include "openeaagles/simulation/NavRadios.h"
