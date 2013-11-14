@@ -1,5 +1,5 @@
 //==============================================================================
-// IFF/ATC.Navaids PDUs (Portions of NetIO and Nib)
+// IFF/ATC.Navaids PDUs
 //==============================================================================
 
 #include "openeaagles/dis/NetIO.h"

@@ -62,6 +62,12 @@ basicGL
 --------------------------------------------------------------------------------
 dis
 
+#
+# renamed several source (.cpp) files to a name that better reflects what it contains.
+# for example "NetIOPlatforms.cpp" has been broken into two files "NetIO-entity-state.cpp"
+# and "Nib-entity-state.cpp" to indicate where each class implements DIS entity state
+# processing.  (No functional changes have been made - change is transparent to end user)
+#
 
 --------------------------------------------------------------------------------
 gui-glut
