@@ -1045,7 +1045,7 @@ protected:
    virtual bool setStoresMgr(Basic::Pair* const s);       // Sets our stores management model
 
    // Basic::Component interface
-   virtual void processComponents(   // Process our subcomponent list (which should be other steerpoints)
+   virtual void processComponents(   // Process our subcomponent list (which should be other steer points)
       Basic::PairStream* const list,        // Source list of components
       const std::type_info& filter,         // Type filter
       Basic::Pair* const add = 0,           // Optional pair to add
@@ -1125,7 +1125,7 @@ private:
    bool        posFrz;           // Player's position is frozen
    bool        altFrz;           // Player's altitude is frozen
    bool        attFrz;           // Player's attitude is frozen
-   bool        fuelFrz;          // Player's fuel quanity is frozen
+   bool        fuelFrz;          // Player's fuel quantity is frozen
    bool        crashOverride;    // If true, player can NOT crash
    bool        killOverride;     // If true, player can NOT be killed
    bool        killRemoval;      // If true then on kill notification the player will be set to KILLED and eventually removed

@@ -63,7 +63,7 @@ public:
    }
 
 private:
-   Data     data;          // Designator data (see above)
+   Data data;          // Designator data (see above)
 };
 
 } // End Simulation namespace

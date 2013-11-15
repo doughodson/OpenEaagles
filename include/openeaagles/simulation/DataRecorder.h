@@ -83,7 +83,8 @@ namespace Simulation {
 //
 //    
 //------------------------------------------------------------------------------
-class RecorderComponent : public Basic::Component {
+class RecorderComponent : public Basic::Component
+{
    DECLARE_SUBCLASS(RecorderComponent, Basic::Component)
 
 public:
@@ -133,7 +134,8 @@ private:
 //    3) Recorded data records are defined by their "recorder event id" tokens;
 //       (see openeaagles/simulation/recorderTokens.h)
 //------------------------------------------------------------------------------
-class DataRecorder : public RecorderComponent {
+class DataRecorder : public RecorderComponent
+{
    DECLARE_SUBCLASS(DataRecorder, RecorderComponent)
 
 public:

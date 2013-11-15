@@ -25,7 +25,7 @@ class IrQueryMsg;
 //------------------------------------------------------------------------------
 // Class:   Simulation::IrAtmosphere
 //
-// Description: Manages the atmospheric data to determine tranmissivity
+// Description: Manages the atmospheric data to determine transmissivity
 //              and background radiation for specific infrared wavelengths
 //
 // Form Name: IrAtmosphere
@@ -66,7 +66,7 @@ class IrQueryMsg;
 //
 // Notes:
 //    1) The first index of each table represents the center frequency of the bins
-//    2) Transmissivity table must use same wavebandcenters as defined for waveBandTable.
+//    2) Transmissivity table must use same waveband centers as defined for waveBandTable.
 //    3) Values in the table are coefficients of absorption (per km), so transmissivity is calculated as
 //       trans = exp (-absorption * range * .001 km/m)
 //
@@ -150,7 +150,7 @@ private:
    LCreal earthRadiance;    // Simple background radiance for targets on ground
 };
 
-} // End Simulation namspace
+} // End Simulation namespace
 } // End Eaagles namespace
 
 #endif

@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Classes:	Building
+// Classes: Building
 // Description: Generic building
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_Simulation_Building_H__

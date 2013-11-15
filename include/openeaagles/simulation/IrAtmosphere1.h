@@ -27,7 +27,7 @@ class IrQueryMsg;
 //------------------------------------------------------------------------------
 // Class: IrAtmosphere1
 //
-// Description: Class for managing the atmospheric data for determining tranmissivity
+// Description: Class for managing the atmospheric data for determining transmissivity
 //              and background radiation for infrared wavelengths
 //
 // Form Name: IrAtmosphere1
@@ -167,7 +167,7 @@ private:
    const Basic::Table4* transmissivityTable;
 };
 
-} // End Simulation namspace
+} // End Simulation namespace
 } // End Eaagles namespace
 
 #endif

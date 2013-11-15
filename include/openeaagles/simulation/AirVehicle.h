@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Classes:	AirVehicle, Aircraft, helicopter, UnmannedAirVehicle
+// Classes: AirVehicle, Aircraft, Helicopter, UnmannedAirVehicle
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_Simulation_AirVehicle_H__
 #define __Eaagles_Simulation_AirVehicle_H__
@@ -13,7 +13,7 @@ namespace Simulation {
 //==============================================================================
 // Class AirVehicle
 //
-// Base class:	Basic::Object -> Basic::Component -> Player -> AirVehicle
+// Base class: Basic::Object -> Basic::Component -> Player -> AirVehicle
 //                                           ..  -> AirVehicle -> Aircraft
 //                                           ..  -> AirVehicle -> Helicopter
 //                                           ..  -> AirVehicle -> UnmannedAirVehicle
@@ -67,7 +67,7 @@ namespace Simulation {
 //          Sets the commanded wing sweep angle (radians; zero for none)
 //
 //==============================================================================
-class AirVehicle : public Player  
+class AirVehicle : public Player
 {
     DECLARE_SUBCLASS(AirVehicle,Player)
 
