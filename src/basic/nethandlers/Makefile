@@ -4,13 +4,13 @@ include ../../makedefs
 LIB = $(OPENEAAGLES_LIB_DIR)/liboeBasic.a
 
 OBJS =  \
-	$(LIB)(BroadcastHandler.o) \
-	$(LIB)(MulticastHandler.o) \
 	$(LIB)(TcpClient.o) \
 	$(LIB)(TcpHandler.o) \
 	$(LIB)(TcpServerMultiple.o) \
 	$(LIB)(TcpServerSingle.o) \
-	$(LIB)(UdpHandler.o)
+	$(LIB)(UdpBroadcastHandler.o) \
+	$(LIB)(UdpMulticastHandler.o) \
+	$(LIB)(UdpUnicastHandler.o)
 
 all: ${OBJS}
 

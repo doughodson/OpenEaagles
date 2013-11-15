@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
-// Class: BroadcastHandler
+// Class: UdpBroadcastHandler
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_BroadcastHandler_H__
-#define __Eaagles_Basic_BroadcastHandler_H__
+#ifndef __Eaagles_Basic_UdpBroadcastHandler_H__
+#define __Eaagles_Basic_UdpBroadcastHandler_H__
 
 #include "openeaagles/basic/NetHandler.h"
 
@@ -13,18 +13,18 @@ class String;
 class Number;
 
 //------------------------------------------------------------------------------
-// Class: BroadcastHandler
-// Form name: BroadcastHandler
+// Class: UdpBroadcastHandler
 //
-// Description: Broadcast network handler.
+// Description: UDP broadcast network handler
 //
-// Form name: BroadcastHandler
+// Form name: UdpBroadcastHandler
+//
 // Slots:
-//      networkMask  <String>    ! Host Net Mask   "255.255.255.255"
+//       networkMask  <String>    ! Host Net Mask   "255.255.255.255"
 //
 // Input File Example:
 //
-//        ( BroadcastHandler
+//        ( UdpBroadcastHandler
 //           localIpAddress: "224.0.0.251"  // Local host IP address
 //           networkMask: "255.255.255.0"   // Local host Network Mask
 //           port: 2010                     // Destination port
@@ -32,22 +32,21 @@ class Number;
 //           shared: 1                      // Shared port
 //        )
 //
-//
 //------------------------------------------------------------------------------
-class BroadcastHandler : public NetHandler
+class UdpBroadcastHandler : public NetHandler
 {
-    DECLARE_SUBCLASS(BroadcastHandler, NetHandler)
+    DECLARE_SUBCLASS(UdpBroadcastHandler, NetHandler)
 
 public:
-    BroadcastHandler();
+    UdpBroadcastHandler();
 
     // Slot Functions
     virtual bool setSlotNetworkMask(const String* const msg);
 
 protected:
     // NetHandler interface
-    virtual bool init();            // Initialize this socket handler
-    virtual bool bindSocket();      // Bind socket to address
+    virtual bool init();         // Initialize this socket handler
+    virtual bool bindSocket();   // Bind socket to address
 
 private:
     char* networkMask;           // Network Mask

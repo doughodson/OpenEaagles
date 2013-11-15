@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Class: BroadcastHandler
+// Class: UdpBroadcastHandler
 //------------------------------------------------------------------------------
 
 #if defined(WIN32)
@@ -16,7 +16,7 @@
     static const int SOCKET_ERROR = -1;
 #endif
 
-#include "openeaagles/basic/nethandlers/BroadcastHandler.h"
+#include "openeaagles/basic/nethandlers/UdpBroadcastHandler.h"
 
 #include "openeaagles/basic/Pair.h"
 #include "openeaagles/basic/PairStream.h"
@@ -26,23 +26,23 @@ namespace Eaagles {
 namespace Basic {
 
 //==============================================================================
-// Class: BroadcastHandler
+// Class: UdpBroadcastHandler
 //==============================================================================
-IMPLEMENT_SUBCLASS(BroadcastHandler,"BroadcastHandler")
+IMPLEMENT_SUBCLASS(UdpBroadcastHandler, "UdpBroadcastHandler")
 
-BEGIN_SLOTTABLE(BroadcastHandler)
+BEGIN_SLOTTABLE(UdpBroadcastHandler)
     "networkMask",       // 1) Host Net Mask   "255.255.255.255"
-END_SLOTTABLE(BroadcastHandler)
+END_SLOTTABLE(UdpBroadcastHandler)
 
 // Map slot table to handles 
-BEGIN_SLOT_MAP(BroadcastHandler)
+BEGIN_SLOT_MAP(UdpBroadcastHandler)
     ON_SLOT(1,setSlotNetworkMask,String)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
 // Constructors
 //------------------------------------------------------------------------------
-BroadcastHandler::BroadcastHandler() : networkMask(0)
+UdpBroadcastHandler::UdpBroadcastHandler() : networkMask(0)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -50,7 +50,7 @@ BroadcastHandler::BroadcastHandler() : networkMask(0)
 //------------------------------------------------------------------------------
 // copyData() -- copy member data
 //------------------------------------------------------------------------------
-void BroadcastHandler::copyData(const BroadcastHandler& org, const bool cc)
+void UdpBroadcastHandler::copyData(const UdpBroadcastHandler& org, const bool cc)
 {
     BaseClass::copyData(org);
 
@@ -70,7 +70,7 @@ void BroadcastHandler::copyData(const BroadcastHandler& org, const bool cc)
 //------------------------------------------------------------------------------
 // deleteData() -- delete member data
 //------------------------------------------------------------------------------
-void BroadcastHandler::deleteData()
+void UdpBroadcastHandler::deleteData()
 {
     if (networkMask != 0) delete[] networkMask;
     networkMask = 0;
@@ -79,7 +79,7 @@ void BroadcastHandler::deleteData()
 //------------------------------------------------------------------------------
 // init() -- init the network, the socket and the network address
 //------------------------------------------------------------------------------
-bool BroadcastHandler::init()
+bool UdpBroadcastHandler::init()
 {
     // ---
     // Init the base class
@@ -123,7 +123,7 @@ bool BroadcastHandler::init()
 // -------------------------------------------------------------
 // bindSocket() -
 // -------------------------------------------------------------
-bool BroadcastHandler::bindSocket()
+bool UdpBroadcastHandler::bindSocket()
 {
     // ---
     // Our base class will bind the socket
@@ -196,7 +196,7 @@ bool BroadcastHandler::bindSocket()
 //------------------------------------------------------------------------------
 
 // networkMask: Host Net Mask   "255.255.255.255"
-bool BroadcastHandler::setSlotNetworkMask(const String* const msg)
+bool UdpBroadcastHandler::setSlotNetworkMask(const String* const msg)
 {
     bool ok = false;
     if (msg != 0) { 
@@ -209,7 +209,7 @@ bool BroadcastHandler::setSlotNetworkMask(const String* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Object* BroadcastHandler::getSlotByIndex(const int si)
+Object* UdpBroadcastHandler::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
@@ -217,7 +217,7 @@ Object* BroadcastHandler::getSlotByIndex(const int si)
 //------------------------------------------------------------------------------
 // serialize
 //------------------------------------------------------------------------------
-std::ostream& BroadcastHandler::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
+std::ostream& UdpBroadcastHandler::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;
     if ( !slotsOnly ) {

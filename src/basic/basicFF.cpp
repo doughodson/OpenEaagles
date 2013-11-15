@@ -21,13 +21,13 @@
 #include "openeaagles/basic/Operators.h"
 
 // Net handlers
-#include "openeaagles/basic/nethandlers/BroadcastHandler.h"
-#include "openeaagles/basic/nethandlers/MulticastHandler.h"
-#include "openeaagles/basic/nethandlers/UdpHandler.h"
 #include "openeaagles/basic/nethandlers/TcpHandler.h"
 #include "openeaagles/basic/nethandlers/TcpClient.h"
 #include "openeaagles/basic/nethandlers/TcpServerMultiple.h"
 #include "openeaagles/basic/nethandlers/TcpServerSingle.h"
+#include "openeaagles/basic/nethandlers/UdpBroadcastHandler.h"
+#include "openeaagles/basic/nethandlers/UdpMulticastHandler.h"
+#include "openeaagles/basic/nethandlers/UdpUnicastHandler.h"
 
 // Colors
 #include "openeaagles/basic/Cie.h"
@@ -388,16 +388,7 @@ Object* basicFormFunc(const char* formname)
         newform = new Polynomial();
     }
 
-    // Network Handlers
-    else if ( strcmp(formname, BroadcastHandler::getFormName()) == 0 ) {
-        newform = new BroadcastHandler();
-    }
-    else if ( strcmp(formname, MulticastHandler::getFormName()) == 0 ) {
-        newform = new MulticastHandler();
-    }
-    else if ( strcmp(formname, UdpHandler::getFormName()) == 0 ) {
-        newform = new UdpHandler();
-    }
+    // Network handlers
     else if ( strcmp(formname, TcpClient::getFormName()) == 0 ) {
         newform = new TcpClient();
     }
@@ -407,6 +398,26 @@ Object* basicFormFunc(const char* formname)
     else if ( strcmp(formname, TcpServerMultiple::getFormName()) == 0 ) {
         newform = new TcpServerMultiple();
     }
+    else if ( strcmp(formname, UdpBroadcastHandler::getFormName()) == 0 ) {
+        newform = new UdpBroadcastHandler();
+    }
+    else if ( strcmp(formname, UdpMulticastHandler::getFormName()) == 0 ) {
+        newform = new UdpMulticastHandler();
+    }
+    else if ( strcmp(formname, UdpUnicastHandler::getFormName()) == 0 ) {
+        newform = new UdpUnicastHandler();
+    }
+    // Network handlers (backward compatible formname names for UDP oriented communication)
+    else if ( strcmp(formname, "BroadcastHandler") == 0 ) {
+        newform = new UdpBroadcastHandler();
+    }
+    else if ( strcmp(formname, "MulticastHandler") == 0 ) {
+        newform = new UdpMulticastHandler();
+    }
+    else if ( strcmp(formname, "UdpHandler") == 0 ) {
+        newform = new UdpUnicastHandler();
+    }
+
 
     // Random number generator and distributions
     else if ( strcmp(formname, Rng::getFormName()) == 0 ) {

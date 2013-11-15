@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Class: MulticastHandler
+// Class: UdpMulticastHandler
 //------------------------------------------------------------------------------
 
 #if defined(WIN32)
@@ -17,7 +17,7 @@
     static const int SOCKET_ERROR = -1;
 #endif
 
-#include "openeaagles/basic/nethandlers/MulticastHandler.h"
+#include "openeaagles/basic/nethandlers/UdpMulticastHandler.h"
 #include "openeaagles/basic/Number.h"
 #include "openeaagles/basic/Pair.h"
 #include "openeaagles/basic/PairStream.h"
@@ -27,11 +27,11 @@ namespace Eaagles {
 namespace Basic {
 
 //==============================================================================
-// Class: MulticastHandler
+// Class: UdpMulticastHandler
 //==============================================================================
-IMPLEMENT_SUBCLASS(MulticastHandler,"MulticastHandler")
+IMPLEMENT_SUBCLASS(UdpMulticastHandler, "UdpMulticastHandler")
 
-BEGIN_SLOTTABLE(MulticastHandler)
+BEGIN_SLOTTABLE(UdpMulticastHandler)
 
     "multicastGroup",           // 1) String containing the multicast IP address in
                                 //    the Internet standard "." (dotted) notation.
@@ -42,10 +42,10 @@ BEGIN_SLOTTABLE(MulticastHandler)
 
     "loopback",                 // 3) Multicast Loopback flag; default: 1 (on)
 
-END_SLOTTABLE(MulticastHandler)
+END_SLOTTABLE(UdpMulticastHandler)
 
 // Map slot table to handles 
-BEGIN_SLOT_MAP(MulticastHandler)
+BEGIN_SLOT_MAP(UdpMulticastHandler)
     ON_SLOT(1,setSlotMulticastGroup,String)
     ON_SLOT(2,setSlotTTL,Number)
     ON_SLOT(3,setSlotLoopback,Number)
@@ -54,7 +54,7 @@ END_SLOT_MAP()
 //------------------------------------------------------------------------------
 // Constructors
 //------------------------------------------------------------------------------
-MulticastHandler::MulticastHandler() : multicastGroup(0)
+UdpMulticastHandler::UdpMulticastHandler() : multicastGroup(0)
 {
     STANDARD_CONSTRUCTOR()
     setTTL(1);
@@ -65,7 +65,7 @@ MulticastHandler::MulticastHandler() : multicastGroup(0)
 //------------------------------------------------------------------------------
 // copyData() -- copy member data
 //------------------------------------------------------------------------------
-void MulticastHandler::copyData(const MulticastHandler& org, const bool)
+void UdpMulticastHandler::copyData(const UdpMulticastHandler& org, const bool)
 {
     BaseClass::copyData(org);
 
@@ -84,7 +84,7 @@ void MulticastHandler::copyData(const MulticastHandler& org, const bool)
 //------------------------------------------------------------------------------
 // deleteData() -- delete member data
 //------------------------------------------------------------------------------
-void MulticastHandler::deleteData()
+void UdpMulticastHandler::deleteData()
 {
     if (multicastGroup != 0) delete[] multicastGroup;
     multicastGroup = 0;
@@ -93,7 +93,7 @@ void MulticastHandler::deleteData()
 //------------------------------------------------------------------------------
 // Initialize this multicast handler -- 
 //------------------------------------------------------------------------------
-bool MulticastHandler::initNetwork(const bool noWaitFlag)
+bool UdpMulticastHandler::initNetwork(const bool noWaitFlag)
 {
     bool ok = BaseClass::initNetwork(noWaitFlag);
     if (ok) {
@@ -107,7 +107,7 @@ bool MulticastHandler::initNetwork(const bool noWaitFlag)
 //------------------------------------------------------------------------------
 // init() -- init the network, the socket and the network address
 //------------------------------------------------------------------------------
-bool MulticastHandler::init()
+bool UdpMulticastHandler::init()
 {
     // ---
     // Init the base class
@@ -169,7 +169,7 @@ bool MulticastHandler::init()
 // bindSocket() -- bind the socket to an address, and configure
 // the send and receive buffers. 
 // -------------------------------------------------------------
-bool MulticastHandler::bindSocket()
+bool UdpMulticastHandler::bindSocket()
 {
     // Must have a group
     if (multicastGroup == 0) return false;
@@ -212,7 +212,7 @@ bool MulticastHandler::bindSocket()
 // -------------------------------------------------------------
 // joinTheGroup() -- Join the multicast group
 // -------------------------------------------------------------
-bool MulticastHandler::joinTheGroup()
+bool UdpMulticastHandler::joinTheGroup()
 {
 #if defined(WIN32)
    if (socketNum == INVALID_SOCKET) return false;
@@ -254,7 +254,7 @@ bool MulticastHandler::joinTheGroup()
 // -------------------------------------------------------------
 // Returns true if the network handler has been initialized
 // -------------------------------------------------------------
-bool MulticastHandler::isConnected() const
+bool UdpMulticastHandler::isConnected() const
 {
     return initialized && BaseClass::isConnected();
 }
@@ -262,7 +262,7 @@ bool MulticastHandler::isConnected() const
 // -------------------------------------------------------------
 // Close (un-initialize) this network
 // -------------------------------------------------------------
-bool MulticastHandler::closeConnection()
+bool UdpMulticastHandler::closeConnection()
 {
     initialized = false;
     BaseClass::closeConnection();
@@ -274,7 +274,7 @@ bool MulticastHandler::closeConnection()
 //------------------------------------------------------------------------------
 
 // multicastGroup: String containing the multicast IP address
-bool MulticastHandler::setSlotMulticastGroup(const String* const msg)
+bool UdpMulticastHandler::setSlotMulticastGroup(const String* const msg)
 {
     bool ok = false;
     if (msg != 0) { 
@@ -285,7 +285,7 @@ bool MulticastHandler::setSlotMulticastGroup(const String* const msg)
 }
 
 // ttl: Time-To-Live value
-bool MulticastHandler::setSlotTTL(const Number* const msg)
+bool UdpMulticastHandler::setSlotTTL(const Number* const msg)
 {
     bool ok = false;
     if (msg != 0) { 
@@ -296,7 +296,7 @@ bool MulticastHandler::setSlotTTL(const Number* const msg)
 }
 
 // loopback: Loopback flag
-bool MulticastHandler::setSlotLoopback(const Number* const msg)
+bool UdpMulticastHandler::setSlotLoopback(const Number* const msg)
 {
     bool ok = false;
     if (msg != 0) { 
@@ -309,7 +309,7 @@ bool MulticastHandler::setSlotLoopback(const Number* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Object* MulticastHandler::getSlotByIndex(const int si)
+Object* UdpMulticastHandler::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
@@ -317,7 +317,7 @@ Object* MulticastHandler::getSlotByIndex(const int si)
 //------------------------------------------------------------------------------
 // serialize
 //------------------------------------------------------------------------------
-std::ostream& MulticastHandler::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
+std::ostream& UdpMulticastHandler::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;
     if ( !slotsOnly ) {
