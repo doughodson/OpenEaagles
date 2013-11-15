@@ -271,7 +271,7 @@ void LaeroModel::update4DofModel(const LCreal dt)
       pPlr->setVelocity(velN, velE, velD);
 
       //----------------------------------------------------
-      // update acceleraton in NED system
+      // update acceleration in NED system
       //----------------------------------------------------
       //double A = uDot + w*q - v*r;
       //double B = vDot + u*r - w*p;

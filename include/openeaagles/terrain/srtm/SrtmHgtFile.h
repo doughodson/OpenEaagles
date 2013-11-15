@@ -69,7 +69,7 @@ private:
 };
 
 
-} // End Terrain namspace
+} // End Terrain namespace
 } // End Eaagles namespace
 
 #endif

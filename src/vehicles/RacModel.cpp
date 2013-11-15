@@ -297,23 +297,23 @@ void RacModel::updateRAC(const LCreal dt)
    // Using Pitch rate, integrate pitch
    double newTheta = (LCreal)pp->getPitch() + (qa + qa1) * dt / 2.0;
 
-	// Use turn rate integrate heading
-	double newPsi = (LCreal)pp->getHeading() + (ra + ra1) * dt / 2.0;
-	if(newPsi > 2.0*PI) newPsi -= 2.0*PI;
-	if(newPsi < 0.0) newPsi += 2.0*PI;
+   // Use turn rate integrate heading
+   double newPsi = (LCreal)pp->getHeading() + (ra + ra1) * dt / 2.0;
+   if(newPsi > 2.0*PI) newPsi -= 2.0*PI;
+   if(newPsi < 0.0) newPsi += 2.0*PI;
 
    // Roll angle is proportional to max turn rate - filtered
    double pa = 0.0;
    double newPhi = 0.98 * pp->getRollR() + 0.02 * (ra / ra_max * (Basic::Angle::D2RCC * 60.0));
 
-	// Find Acceleration
+   // Find Acceleration
    double cmdVelMPS = cmdVelocity * (Basic::Distance::NM2M / 3600.0);
-	double vpdot = (cmdVelMPS - pp->getTotalVelocity()) * 0.05;
-	if(vpdot > maxAccel)  vpdot = maxAccel;
-	if(vpdot < -maxAccel) vpdot = -maxAccel;
+   double vpdot = (cmdVelMPS - pp->getTotalVelocity()) * 0.05;
+   if(vpdot > maxAccel)  vpdot = maxAccel;
+   if(vpdot < -maxAccel) vpdot = -maxAccel;
 
-	// Comute new velocity (body coordinates)
-	double newVP = pp->getTotalVelocity() + vpdot * dt;
+   // Compute new velocity (body coordinates)
+   double newVP = pp->getTotalVelocity() + vpdot * dt;
 
    // Set our angular values
    pp->setEulerAngles(newPhi, newTheta, newPsi);

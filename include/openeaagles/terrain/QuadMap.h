@@ -73,7 +73,7 @@ private:
    virtual bool loadData();         // Load the data file
 };
 
-} // End Terrain namspace
+} // End Terrain namespace
 } // End Eaagles namespace
 
 #endif

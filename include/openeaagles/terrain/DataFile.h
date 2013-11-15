@@ -94,7 +94,7 @@ protected:
    virtual void clearData();
 };
 
-} // End Terrain namspace
+} // End Terrain namespace
 } // End Eaagles namespace
 
 #endif

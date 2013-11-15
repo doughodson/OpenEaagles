@@ -72,13 +72,13 @@ public: // public interface
 private:
     void updateRAC(const LCreal dt);
 
-    LCreal      vpMin;        // Minimum Velocity             (m/s)
-    LCreal      vpMaxG;       // Velocity for Max G's         (g's)
-    LCreal      gMax;         // Max G's                      (g's)
-    LCreal      maxAccel;     // Max longitudual acceleration (m/s/s)
-    double      cmdAltitude;  // Commanded Altitude           (meters)
-    double      cmdHeading;   // Commanded Heading            (degs)
-    double      cmdVelocity;  // Commanded speed              (kts)
+    LCreal      vpMin;        // Minimum Velocity              (m/s)
+    LCreal      vpMaxG;       // Velocity for Max G's          (g's)
+    LCreal      gMax;         // Max G's                       (g's)
+    LCreal      maxAccel;     // Max longitudinal acceleration (m/s/s)
+    double      cmdAltitude;  // Commanded Altitude            (meters)
+    double      cmdHeading;   // Commanded Heading             (degs)
+    double      cmdVelocity;  // Commanded speed               (kts)
 };
 
 } // End Vehicle namespace
