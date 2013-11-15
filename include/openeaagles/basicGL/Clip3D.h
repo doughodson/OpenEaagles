@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // Class: Clip3D
 //------------------------------------------------------------------------------
-#ifndef	__Eaagles_BasicGL_Clip3D_H__
+#ifndef __Eaagles_BasicGL_Clip3D_H__
 #define __Eaagles_BasicGL_Clip3D_H__
 
 #include "openeaagles/basic/Object.h"
@@ -11,7 +11,7 @@ namespace Eaagles {
 namespace BasicGL {
 
 //------------------------------------------------------------------------------
-// Class:   Clip3D
+// Class: Clip3D
 // Base class: Object -> Clip3D
 //
 // Form name: Clip3D

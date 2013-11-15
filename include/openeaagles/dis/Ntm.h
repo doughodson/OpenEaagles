@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Class: Dis::Ntm
+// Class: Ntm
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_Network_Dis_Ntm_H__
 #define __Eaagles_Network_Dis_Ntm_H__
@@ -12,7 +12,7 @@ namespace Network {
 namespace Dis {
 
 //------------------------------------------------------------------------------
-// Class: Dis::Ntm
+// Class: Ntm
 //
 // Description: DIS Network Type Mapper
 //

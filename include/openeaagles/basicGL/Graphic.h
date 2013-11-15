@@ -428,9 +428,9 @@ protected:
     virtual bool setSlotTranslateLight(Basic::PairStream* const msg);
 
     // Basic::Component interface
-    virtual void processComponents(   // Process our subcomponent list (which should be other Graphics)
+    virtual void processComponents(            // Process our subcomponent list (which should be other Graphics)
          Basic::PairStream* const list,        // Source list of components
-         const std::type_info& filter,           // Type filter
+         const std::type_info& filter,         // Type filter
          Basic::Pair* const add = 0,           // Optional pair to add
          Basic::Component* const remove = 0    // Optional subcomponent to remove
        );
@@ -440,7 +440,7 @@ private:
     void          setupMatrix();
     void          setupMaterial();
     
-    Basic::PairStream* transforms; // transformations
+    Basic::PairStream* transforms;  // transformations
     osg::Matrix   m;                // transformation matrix
     osg::Matrix   m1;               // saved 'm'
     bool          haveMatrix;       // Have a transformation matrix flag

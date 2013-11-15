@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
-// Class:   Stack
+// Class: Stack
 //------------------------------------------------------------------------------
-#ifndef	__Eaagles_Basic_Stack_H__
+#ifndef __Eaagles_Basic_Stack_H__
 #define __Eaagles_Basic_Stack_H__
 
 #include "openeaagles/basic/List.h"
@@ -10,7 +10,7 @@ namespace Eaagles {
 namespace Basic {
 
 //------------------------------------------------------------------------------
-// Class:   Stack
+// Class: Stack
 // Base class:  Object -> List -> Stack
 //
 // Description: Stacks of objects.

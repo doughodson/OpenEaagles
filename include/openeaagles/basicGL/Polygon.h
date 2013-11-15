@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // Class: Polygon
 //------------------------------------------------------------------------------
-#ifndef	__Eaagles_BasicGL_Polygon_H__
+#ifndef __Eaagles_BasicGL_Polygon_H__
 #define __Eaagles_BasicGL_Polygon_H__
 
 #include "Graphic.h"
@@ -10,7 +10,7 @@ namespace Eaagles {
 namespace BasicGL {
 
 //------------------------------------------------------------------------------
-// Class:       Polygon
+// Class: Polygon
 // Base class:  Object -> Component -> Graphic -> Polygon
 //
 // Description: General purpose polygon

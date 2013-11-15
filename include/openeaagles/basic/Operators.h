@@ -45,7 +45,7 @@ public:
     virtual void operation();
 
 protected:
-    LCreal	n2;
+    LCreal n2;
 };
 
 //------------------------------------------------------------------------------

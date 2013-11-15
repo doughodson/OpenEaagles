@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Classes:	SymbolLoader, SlSymbol
+// Classes: SymbolLoader, SlSymbol
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_BasicGL_SymbolLoader_H__
 #define __Eaagles_BasicGL_SymbolLoader_H__

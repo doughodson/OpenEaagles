@@ -19,7 +19,7 @@ namespace Basic { class Color; }
 namespace BasicGL {
 
 //----------------------------------------------------------------------------------------------------------------------------------
-// Class:  FtglFonts, FtglBitmapFont, FtglExtrdFont, FtglOutlineFont, FtglPixmapFont, FtglPolygonFont, FtglTextureFont
+// Class: FtglFonts, FtglBitmapFont, FtglExtrdFont, FtglOutlineFont, FtglPixmapFont, FtglPolygonFont, FtglTextureFont
 // Base class:  Object -> Font -> FtglFonts -> (all other fonts are derived from FtglFonts)
 // 
 // Description: all the Freetype font classes 
@@ -39,7 +39,7 @@ namespace BasicGL {
 //      - expands and retracts the font proportionally.
 //
 //  unsigned int getFaceSize()
-//	  -Gets the face size of the font.
+//  -- Gets the face size of the font.
 // 
 // All font files NEED the following info to work correctly:
 //      - path to the font  "path"  ie.. "C:WINNT\FONTS"
@@ -51,9 +51,9 @@ namespace BasicGL {
 // of X by Y).  You can both set the fontWidth and Height and faceSize, and that
 // will scale and then draw a font of certain facesize. 
 //
-//Comment sections last updated: 2004.10.14 by MJK 
 //---------------------------------------------------------------------------------
-class FtglFonts : public Font {
+class FtglFonts : public Font
+{
     DECLARE_SUBCLASS(FtglFonts,Font)
 
 public:
@@ -70,31 +70,26 @@ private:
     int fSize;      // face size 
 };
 
-#endif
-
-
-
-#ifndef __FtglBitmapFont_96B63687_1D77_4bad_B038_12C99B145F08
-#define __FtglBitmapFont_96B63687_1D77_4bad_B038_12C99B145F08
 //------------------------------------------------------------------------------
-// Class:	FtglBitmapFont
+// Class: FtglBitmapFont
 //
 // Description: Bitmap Font
 // Form name: FTGLBitmapFonts
 //
 // Public member functions:
-//	outputText(double x, double y, char* txt, int n, bool vf)
-//	outputText(double x, double y, char* txt, int n)
-//		Outputs n characters of txt at coords (x,y). Vertically if vf == true.
+//   outputText(double x, double y, char* txt, int n, bool vf)
+//   outputText(double x, double y, char* txt, int n)
+//   -- Outputs n characters of txt at coords (x,y). Vertically if vf == true.
 //
-//	outputText(char* txt, int n, bool vf)
-//	outputText(char* Txt, int n)
-//		Outputs n characters of txt at the current position. Vertically if vf == true.
+//   outputText(char* txt, int n, bool vf)
+//   outputText(char* Txt, int n)
+//   -- Outputs n characters of txt at the current position. Vertically if vf == true.
 //
-//	loadFont()
-//		Loads the font.
+//   loadFont()
+//   -- Loads the font.
 //------------------------------------------------------------------------------
-class FtglBitmapFont : public FtglFonts {
+class FtglBitmapFont : public FtglFonts
+{
     DECLARE_SUBCLASS(FtglBitmapFont,FtglFonts)
 
 public:
@@ -105,34 +100,30 @@ public:
     virtual void loadFont();
 };
 
-#endif
-
-
-#ifndef __FtglExtrdFont_CCD52653_E5A8_4811_8BD4_C397A6B46F0B
-#define __FtglExtrdFont_CCD52653_E5A8_4811_8BD4_C397A6B46F0B
 //------------------------------------------------------------------------------
-// Class:	FtglExtrdFont
+// Class: FtglExtrdFont
 // Description: Creates a Freetype Extruded Font type
 // Form name: FTGLExtrdFonts
 // Slots:
 //   depth         <Number>    ! Depth (default: 5.0f)
 //
 // public member functions:
-// 	setDepth(const Basic::Number* const newDepth) 
-//        sets the depth of the extruded font
+//   setDepth(const Basic::Number* const newDepth) 
+//   -- sets the depth of the extruded font
 //
-//	outputText(double x, double y, char* txt, int n, bool vf)
-//	outputText(double x, double y, char* txt, int n)
-//		Outputs n characters of txt at coords (x,y). Vertically if vf == true.
+//   outputText(double x, double y, char* txt, int n, bool vf)
+//   outputText(double x, double y, char* txt, int n)
+//   -- Outputs n characters of txt at coords (x,y). Vertically if vf == true.
 //
-//	outputText(char* txt, int n, bool vf)
-//	outputText(char* Txt, int n)
-//		Outputs n characters of txt at the current position. Vertically if vf == true.
+//   outputText(char* txt, int n, bool vf)
+//   outputText(char* Txt, int n)
+//   -- Outputs n characters of txt at the current position. Vertically if vf == true.
 //
-//	loadFont()
-//		Loads the font.
+//   loadFont()
+//   -- Loads the font.
 //------------------------------------------------------------------------------
-class FtglExtrdFont : public FtglFonts {
+class FtglExtrdFont : public FtglFonts
+{
     DECLARE_SUBCLASS(FtglExtrdFont,FtglFonts)
 
 public:
@@ -147,33 +138,29 @@ public:
 
 private:
     static const float DEFAULT_DEPTH;
-    float depth;        // depth of the extruded font (for 3D puposes)
+    float depth;        // depth of the extruded font (for 3D purposes)
 };
 
-#endif      /* __FtglExtrdFont_CCD52653_E5A8_4811_8BD4_C397A6B46F0B */
-
-
-#ifndef __FtglOutlineFont_906E6C23_2189_4cba_821E_DBFF19341B69
-#define __FtglOutlineFont_906E6C23_2189_4cba_821E_DBFF19341B69
 //------------------------------------------------------------------------------
-// Class:	FtglOutlineFont
+// Class:  FtglOutlineFont
 //
 // Description: Outlined Font
 // Form name: FTGLOutlineFonts
 //
 // Public member functions:
-//	outputText(double x, double y, char* txt, int n, bool vf)
-//	outputText(double x, double y, char* txt, int n)
-//		Outputs n characters of txt at coords (x,y). Vertically if vf == true.
+//   outputText(double x, double y, char* txt, int n, bool vf)
+//   outputText(double x, double y, char* txt, int n)
+//   -- Outputs n characters of txt at coords (x,y). Vertically if vf == true.
 //
-//	outputText(char* txt, int n, bool vf)
-//	outputText(char* Txt, int n)
-//		Outputs n characters of txt at the current position. Vertically if vf == true.
+//   outputText(char* txt, int n, bool vf)
+//   outputText(char* Txt, int n)
+//   -- Outputs n characters of txt at the current position. Vertically if vf == true.
 //
-//	loadFont()
-//		Loads the font.
+//   loadFont()
+//   -- Loads the font.
 //------------------------------------------------------------------------------
-class FtglOutlineFont : public FtglFonts {
+class FtglOutlineFont : public FtglFonts
+{
     DECLARE_SUBCLASS(FtglOutlineFont,FtglFonts)
 
 public:
@@ -184,31 +171,26 @@ public:
     virtual void loadFont();
 };
 
-#endif      /* __FtglOutlineFont_906E6C23_2189_4cba_821E_DBFF19341B69 */
-
-
-
-#ifndef __FtglPixmapFont_BD694E43_E34E_408b_A0BE_82A8F5C61680
-#define __FtglPixmapFont_BD694E43_E34E_408b_A0BE_82A8F5C61680
 //------------------------------------------------------------------------------
-// Class:	FtglPixmapFont
+// Class: FtglPixmapFont
 //
 // Description: Pixmapped Font
 // Form name: FTGLPixmapFonts
 //
 // Public member functions:
-//	outputText(double x, double y, char* txt, int n, bool vf)
-//	outputText(double x, double y, char* txt, int n)
-//		Outputs n characters of txt at coords (x,y). Vertically if vf == true.
+//   outputText(double x, double y, char* txt, int n, bool vf)
+//   outputText(double x, double y, char* txt, int n)
+//   -- Outputs n characters of txt at coords (x,y). Vertically if vf == true.
 //
-//	outputText(char* txt, int n, bool vf)
-//	outputText(char* Txt, int n)
-//		Outputs n characters of txt at the current position. Vertically if vf == true.
+//   outputText(char* txt, int n, bool vf)
+//   outputText(char* Txt, int n)
+//   -- Outputs n characters of txt at the current position. Vertically if vf == true.
 //
-//	loadFont()
-//		Loads the font.
+//   loadFont()
+//   -- Loads the font.
 //------------------------------------------------------------------------------
-class FtglPixmapFont : public FtglFonts {
+class FtglPixmapFont : public FtglFonts
+{
     DECLARE_SUBCLASS(FtglPixmapFont,FtglFonts)
 
 public:
@@ -219,31 +201,26 @@ public:
     virtual void loadFont();
 };
 
-#endif      /* __FtglPixmapFont_BD694E43_E34E_408b_A0BE_82A8F5C61680 */
-
-
-
-#ifndef __FtglPolygonFont_D19D09FA_6B53_44d7_AFC2_6CEFF67C9BC7
-#define __FtglPolygonFont_D19D09FA_6B53_44d7_AFC2_6CEFF67C9BC7
 //------------------------------------------------------------------------------
-// Class:	FtglPolygonFont
+// Class: FtglPolygonFont
 //
 // Description: Polygon Font
 // Form name: FTGLPolygonFonts
 //
 // Public member functions:
-//	outputText(double x, double y, char* txt, int n, bool vf)
-//	outputText(double x, double y, char* txt, int n)
-//		Outputs n characters of txt at coords (x,y). Vertically if vf == true.
+//   outputText(double x, double y, char* txt, int n, bool vf)
+//   outputText(double x, double y, char* txt, int n)
+//   -- Outputs n characters of txt at coords (x,y). Vertically if vf == true.
 //
-//	outputText(char* txt, int n, bool vf)
-//	outputText(char* Txt, int n)
-//		Outputs n characters of txt at the current position. Vertically if vf == true.
+//   outputText(char* txt, int n, bool vf)
+//   outputText(char* Txt, int n)
+//   -- Outputs n characters of txt at the current position. Vertically if vf == true.
 //
-//	loadFont()
-//		Loads the font.
+//   loadFont()
+//   -- Loads the font.
 //------------------------------------------------------------------------------
-class FtglPolygonFont : public FtglFonts {
+class FtglPolygonFont : public FtglFonts
+{
     DECLARE_SUBCLASS(FtglPolygonFont,FtglFonts)
 
 public:
@@ -254,13 +231,8 @@ public:
     virtual void loadFont();
 };
 
-#endif      /* __FtglPolygonFont_D19D09FA_6B53_44d7_AFC2_6CEFF67C9BC7 */
-
-
-#ifndef __FtglHaloFont_CF6B6560_5E86_4ef6_8E3C_A5FFECEAA227
-#define __FtglHaloFont_CF6B6560_5E86_4ef6_8E3C_A5FFECEAA227
 //------------------------------------------------------------------------------
-// Class:	FtglHaloFont
+// Class: FtglHaloFont
 //
 // Description: Polygon font that also draws a halo around the font
 // Form name: FTGLHaloFonts
@@ -280,8 +252,8 @@ public:
 // loadFont()
 //    Loads the font.
 //------------------------------------------------------------------------------
-
-class FtglHaloFont : public FtglFonts {
+class FtglHaloFont : public FtglFonts
+{
     DECLARE_SUBCLASS(FtglHaloFont,FtglFonts)
 
 public:
@@ -305,29 +277,26 @@ private:
     float linewidth;
 };
 
-#endif      /* __FtglHaloFont_CF6B6560_5E86_4ef6_8E3C_A5FFECEAA227 */
-
-#ifndef __FtglTextureFont_4789D5E6_5916_4539_89B4_636EC9DBB1F0
-#define __FtglTextureFont_4789D5E6_5916_4539_89B4_636EC9DBB1F0
 //------------------------------------------------------------------------------
-// Class:	FtglTextureFont
+// Class: FtglTextureFont
 //
 // Description: Texture Font
 // Form name: FTGLTextureFonts
 //
 // Public member functions:
-//	outputText(double x, double y, char* txt, int n, bool vf)
-//	outputText(double x, double y, char* txt, int n)
-//		Outputs n characters of txt at coords (x,y). Vertically if vf == true.
+//   outputText(double x, double y, char* txt, int n, bool vf)
+//   outputText(double x, double y, char* txt, int n)
+//   -- Outputs n characters of txt at coords (x,y). Vertically if vf == true.
 //
-//	outputText(char* txt, int n, bool vf)
-//    outputText(char* txt, int n)
-//		Outputs n characters of txt at the current position. Vertically if vf == true.
+//   outputText(char* txt, int n, bool vf)
+//   outputText(char* txt, int n)
+//   -- Outputs n characters of txt at the current position. Vertically if vf == true.
 //
-//	loadFont()
-//		Loads the font.
+//   loadFont()
+//   -- Loads the font.
 //------------------------------------------------------------------------------
-class FtglTextureFont : public FtglFonts {
+class FtglTextureFont : public FtglFonts
+{
     DECLARE_SUBCLASS(FtglTextureFont,FtglFonts)
 
 public:

@@ -15,8 +15,8 @@ class Table1;
 class List;
 
 //------------------------------------------------------------------------------
-// Class:  Cie
-// Base class:  Object -> Color -> Cie
+// Class: Cie
+// Base class: Object -> Color -> Cie
 //
 // Description:  Defines a color by Luminance, X, Y, and monitor-specific data.
 //
@@ -57,8 +57,8 @@ class Cie : public Color {
     DECLARE_SUBCLASS(Cie,Color)
 
 public:
-	// components of CIE color
-	enum { LUMINANCE, X, Y };
+    // components of CIE color
+    enum { LUMINANCE, X, Y };
 
 public:
     Cie(const MonitorMetrics* m, const LCreal l, const LCreal x, const LCreal y);
@@ -78,12 +78,12 @@ public:
 
 protected:
     osg::Vec3 cie;
-	SPtr<const MonitorMetrics> monitor;
+    SPtr<const MonitorMetrics> monitor;
 };
 
 
 //------------------------------------------------------------------------------
-// Class:  MonitorMetrics
+// Class: MonitorMetrics
 // Base class:  Object -> MonitorMetrics
 //
 // Description:  Defines the characteristics of a monitor, needed to accurately match color.
