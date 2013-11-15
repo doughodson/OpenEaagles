@@ -33,16 +33,16 @@ basic
    String class
       1) Changed the manipulator (set) functions to virtual
 
-   #
+   # ---------------------------------------------------------------------------
    # Network handler modifications
-   #
+   # ---------------------------------------------------------------------------
    # updated error messages in several of the network handlers.
    #
    # created a subdirectory called "nethandlers" that now contains:
    # TcpHandler, TcpClient, TcpServerMultiple, TcpServerSingle,
    # UdpBroadcastHandler, UdpMulticastHandler and UdpUnicastHandler.
    # (Note that UDP handlers have been renamed to better reflect transport
-   # protocol
+   # protocol)
    # 
    # all subclasses of TcpHandler are now stored in separate files, with filenames
    #  matching classnames.
