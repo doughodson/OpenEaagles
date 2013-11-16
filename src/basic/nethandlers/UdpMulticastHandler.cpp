@@ -118,13 +118,13 @@ bool UdpMulticastHandler::init()
     // ---
     // Create our socket
     // ---
-    socketNum = socket(AF_INET, SOCK_DGRAM, 0);
+    socketNum = ::socket(AF_INET, SOCK_DGRAM, 0);
 #if defined(WIN32)
     if (socketNum == INVALID_SOCKET) {
 #else
     if (socketNum < 0) {
 #endif
-        perror("UdpMulticastHandler::init(): socket error");
+        ::perror("UdpMulticastHandler::init(): socket error");
         return false;
     }
 
@@ -134,13 +134,13 @@ bool UdpMulticastHandler::init()
     {
 #if defined(WIN32)
         BOOL optval = getLoopback();
-        if( setsockopt(socketNum, IPPROTO_IP, IP_MULTICAST_LOOP, (const char*) &optval, sizeof(optval)) == SOCKET_ERROR)
+        if( ::setsockopt(socketNum, IPPROTO_IP, IP_MULTICAST_LOOP, (const char*) &optval, sizeof(optval)) == SOCKET_ERROR )
 #else
         int optval = getLoopback();
-        if( setsockopt(socketNum, IPPROTO_IP, IP_MULTICAST_LOOP, &optval, sizeof(optval)) < 0)
+        if( ::setsockopt(socketNum, IPPROTO_IP, IP_MULTICAST_LOOP, &optval, sizeof(optval)) < 0)
 #endif
         {
-            perror("UdpMulticastHandler::init(): error setsockopt(IP_MULTICAST_LOOP)\n");
+            ::perror("UdpMulticastHandler::init(): error setsockopt(IP_MULTICAST_LOOP)\n");
             return false;
         }
     }
@@ -151,13 +151,13 @@ bool UdpMulticastHandler::init()
     {
 #if defined(WIN32)
         int optval = getTTL();
-        if( setsockopt(socketNum, IPPROTO_IP, IP_MULTICAST_TTL, (const char*) &optval, sizeof(optval)) == SOCKET_ERROR)
+        if( ::setsockopt(socketNum, IPPROTO_IP, IP_MULTICAST_TTL, (const char*) &optval, sizeof(optval)) == SOCKET_ERROR )
 #else
         int optval = getTTL();
-        if( setsockopt(socketNum, IPPROTO_IP, IP_MULTICAST_TTL, &optval, sizeof(optval)) < 0)
+        if( ::setsockopt(socketNum, IPPROTO_IP, IP_MULTICAST_TTL, &optval, sizeof(optval)) < 0)
 #endif
         {
-            perror("UdpMulticastHandler::init(): error setsockopt(IP_MULTICAST_TTL)\n");
+            ::perror("UdpMulticastHandler::init(): error setsockopt(IP_MULTICAST_TTL)\n");
             return false;
         }
     }
@@ -186,17 +186,17 @@ bool UdpMulticastHandler::bindSocket()
 #if defined(WIN32)
        addr.sin_addr.s_addr = INADDR_ANY;
 #else
-       addr.sin_addr.s_addr = inet_addr(multicastGroup);
+       addr.sin_addr.s_addr = ::inet_addr(multicastGroup);
 #endif
        if (getLocalPort() != 0) {
-           addr.sin_port = htons (getLocalPort());  
+           addr.sin_port = ::htons (getLocalPort());  
        }
        else {
-           addr.sin_port = htons(getPort());
+           addr.sin_port = ::htons(getPort());
        }
 
-      if (bind(socketNum, (const struct sockaddr *) &addr, sizeof(addr)) == SOCKET_ERROR) {
-        perror("UdpMulticastHandler::bindSocket(): bind error");
+      if ( ::bind(socketNum, (const struct sockaddr *) &addr, sizeof(addr)) == SOCKET_ERROR ) {
+        ::perror("UdpMulticastHandler::bindSocket(): bind error");
         return false;
       }
 
@@ -222,7 +222,7 @@ bool UdpMulticastHandler::joinTheGroup()
     
    // Find our network address
    uint32_t mg = htonl (INADDR_NONE);
-   if (multicastGroup != 0) mg = inet_addr(multicastGroup);
+   if (multicastGroup != 0) mg = ::inet_addr(multicastGroup);
    if (mg != INADDR_NONE) {
       setNetAddr(mg);
    }
@@ -238,13 +238,13 @@ bool UdpMulticastHandler::joinTheGroup()
    struct ip_mreq mreq;
    mreq.imr_multiaddr.s_addr = getNetAddr();
    mreq.imr_interface.s_addr = iface;
-   int result = setsockopt(socketNum, IPPROTO_IP, IP_ADD_MEMBERSHIP, (const char *) &mreq, sizeof(mreq));
+   int result = ::setsockopt(socketNum, IPPROTO_IP, IP_ADD_MEMBERSHIP, (const char *) &mreq, sizeof(mreq));
 #if defined(WIN32)
    if (result == SOCKET_ERROR) {
 #else
    if (result < 0) {
 #endif
-     perror("UdpMulticastHandler::joinTheGroup(): setsockopt mreq");
+     ::perror("UdpMulticastHandler::joinTheGroup(): setsockopt mreq");
      return false;
    }
 

@@ -80,13 +80,13 @@ bool TcpServerSingle::listenForConnections()
 {
 #if defined(WIN32)
     if (socketNum == INVALID_SOCKET) return false;
-    if( listen(socketNum, 1) == SOCKET_ERROR)
+    if( ::listen(socketNum, 1) == SOCKET_ERROR )
 #else
     if (socketNum < 0) return false;
-    if( listen(socketNum, 1) < 0)
+    if( ::listen(socketNum, 1) < 0)
 #endif
     {
-        perror("TcpServerSingle::listenForConnections(): error! \n");
+        ::perror("TcpServerSingle::listenForConnections(): error! \n");
         return false;
     }
     return true;
@@ -105,7 +105,7 @@ bool TcpServerSingle::acceptConnection()
    if (isMessageEnabled(MSG_INFO)) {
        std::cout << "Waiting to accept connection on " << getPort() << " ... " << std::flush;
    }
-   tcpSocket = accept(socketNum, (struct sockaddr *) &clientAddr, &cAddrSize);
+   tcpSocket = ::accept(socketNum, (struct sockaddr *) &clientAddr, &cAddrSize);
    if(tcpSocket == INVALID_SOCKET) {
       if (isMessageEnabled(MSG_INFO)) {
           std::cout << " failed!" << std::endl;
@@ -118,7 +118,7 @@ bool TcpServerSingle::acceptConnection()
    if (isMessageEnabled(MSG_INFO)) {
        std::cout << "Waiting to accept connection on " << getPort() << " ... " << std::flush;
    }
-   tcpSocket = accept(socketNum, (struct sockaddr *) &clientAddr, &cAddrSize);
+   tcpSocket = ::accept(socketNum, (struct sockaddr *) &clientAddr, &cAddrSize);
    if(tcpSocket  < 0) {
       if (isMessageEnabled(MSG_INFO)) {
           std::cout << " failed!" << std::endl;
@@ -128,7 +128,7 @@ bool TcpServerSingle::acceptConnection()
 #endif
    if (isMessageEnabled(MSG_INFO)) {
        std::cout << "Accepted";
-       char* ip = inet_ntoa(clientAddr.sin_addr);
+       char* ip = ::inet_ntoa(clientAddr.sin_addr);
        if (ip != 0) {
            std::cout << " connection from " << ip;
        }

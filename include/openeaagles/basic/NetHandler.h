@@ -4,7 +4,7 @@
 #ifndef __Eaagles_Basic_NetHandler_H__
 #define __Eaagles_Basic_NetHandler_H__
 
-#include "openeaagles/basic/Object.h"
+#include "openeaagles/basic/Component.h"
 
 namespace Eaagles {
 namespace Basic {
@@ -58,9 +58,9 @@ class String;
 //      localPort#      <-------     <any-port>    ! Receiving anytime that 'localPort' is defined.
 //
 //------------------------------------------------------------------------------
-class NetHandler : public Object
+class NetHandler : public Component
 {
-   DECLARE_SUBCLASS(NetHandler,Object)
+   DECLARE_SUBCLASS(NetHandler, Component)
 
 public:  // Define the Windows vs Unix socket type
    #if defined(WIN32)

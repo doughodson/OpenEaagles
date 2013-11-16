@@ -100,13 +100,13 @@ bool UdpUnicastHandler::init()
     // ---
     // Create our socket
     // ---
-    socketNum = socket(AF_INET, SOCK_DGRAM, 0);
+    socketNum = ::socket(AF_INET, SOCK_DGRAM, 0);
 #if defined(WIN32)
     if (socketNum == INVALID_SOCKET) {
 #else
     if (socketNum < 0) {
 #endif
-        perror("UdpUnicastHandler::init(): Socket error");
+        ::perror("UdpUnicastHandler::init(): Socket error");
         return false;
     }
 
@@ -130,14 +130,14 @@ bool UdpUnicastHandler::bindSocket()
        addr.sin_family = AF_INET;
        addr.sin_addr.s_addr = getLocalAddr();
        if (getLocalPort() != 0) {
-           addr.sin_port = htons (getLocalPort());  
+           addr.sin_port = ::htons (getLocalPort());  
        }
        else {
-           addr.sin_port = htons(getPort());
+           addr.sin_port = ::htons(getPort());
        }
 
-      if (bind(socketNum, (const struct sockaddr *) &addr, sizeof(addr)) == SOCKET_ERROR) {
-        perror("UdpUnicastHandler::bindSocket(): bind error");
+      if ( ::bind(socketNum, (const struct sockaddr *) &addr, sizeof(addr)) == SOCKET_ERROR ) {
+        ::perror("UdpUnicastHandler::bindSocket(): bind error");
         return false;
       }
 
@@ -170,9 +170,9 @@ bool UdpUnicastHandler::sendDataTo(
     bzero(&addr, sizeof(addr));
     addr.sin_family = AF_INET;
     addr.sin_addr.s_addr = ip0;
-    addr.sin_port = htons(port0); 
+    addr.sin_port = ::htons(port0); 
     Len addrlen = sizeof(addr);
-    int result = sendto(socketNum, packet, size, 0, (const struct sockaddr *) &addr, addrlen);
+    int result = ::sendto(socketNum, packet, size, 0, (const struct sockaddr *) &addr, addrlen);
 #if defined(WIN32)
     if (result == SOCKET_ERROR) {
         int err = WSAGetLastError();
@@ -183,7 +183,7 @@ bool UdpUnicastHandler::sendDataTo(
     }
 #else
     if (result == SOCKET_ERROR) {
-        perror("UdpHandler::sendDataTo(): sendto error msg");
+        ::perror("UdpHandler::sendDataTo(): sendto error msg");
         if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "UdpUnicastHandler::sendDataTo(): sendto error result: " << result << std::endl;
         }

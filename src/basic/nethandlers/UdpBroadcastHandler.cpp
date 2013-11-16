@@ -90,13 +90,13 @@ bool UdpBroadcastHandler::init()
     // ---
     // Create our socket
     // ---
-    socketNum = socket(AF_INET, SOCK_DGRAM, 0);
+    socketNum = ::socket(AF_INET, SOCK_DGRAM, 0);
 #if defined(WIN32)
     if (socketNum == INVALID_SOCKET) {
 #else
     if (socketNum < 0) {
 #endif
-        perror("UdpBroadcastHandler::init(): socket error");
+        ::perror("UdpBroadcastHandler::init(): socket error");
         return false;
     }
 
@@ -106,13 +106,13 @@ bool UdpBroadcastHandler::init()
     {
 #if defined(WIN32)
         BOOL optval = 1;
-        if( setsockopt(socketNum, SOL_SOCKET, SO_BROADCAST, (const char*) &optval, sizeof(optval)) == SOCKET_ERROR)
+        if( ::setsockopt(socketNum, SOL_SOCKET, SO_BROADCAST, (const char*) &optval, sizeof(optval)) == SOCKET_ERROR )
 #else
         int optval = 1;
-        if( setsockopt(socketNum, SOL_SOCKET, SO_BROADCAST, &optval, sizeof(optval)) < 0)
+        if( ::setsockopt(socketNum, SOL_SOCKET, SO_BROADCAST, &optval, sizeof(optval)) < 0)
 #endif
         {
-            perror("UdpBroadcastHandler::init(): error setsockopt(SO_BROADCAST)\n");
+            ::perror("UdpBroadcastHandler::init(): error setsockopt(SO_BROADCAST)\n");
             return false;
         }
     }
@@ -139,7 +139,7 @@ bool UdpBroadcastHandler::bindSocket()
         if (networkMask != 0) {
             // User defined broadcast address
             uint32_t localNetAddr = getLocalAddr();
-            uint32_t localNetMask = inet_addr(networkMask);
+            uint32_t localNetMask = ::inet_addr(networkMask);
             if (localNetAddr != INADDR_NONE && localNetMask != INADDR_NONE) {
                uint32_t localNet = localNetAddr & localNetMask;
                ba = localNet | ~localNetMask;
@@ -170,16 +170,16 @@ bool UdpBroadcastHandler::bindSocket()
        addr.sin_addr.s_addr = getNetAddr();
 #endif
        if (getLocalPort() != 0) {
-         addr.sin_port = htons (getLocalPort());  
+         addr.sin_port = ::htons (getLocalPort());  
        }
        else {
-         addr.sin_port = htons(getPort());
+         addr.sin_port = ::htons(getPort());
        }
        std::printf("bind() addr = %08x\n", addr.sin_addr.s_addr);
        std::printf("bind() port = %08x\n", addr.sin_port);
 
        if (bind(socketNum, (const struct sockaddr *) &addr, sizeof(addr)) == SOCKET_ERROR) {
-         perror("UdpBroadcast::bindSocket(): bind error");
+         ::perror("UdpBroadcast::bindSocket(): bind error");
          return false;
        }
 

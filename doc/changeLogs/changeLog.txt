@@ -47,6 +47,14 @@ basic
    # all subclasses of TcpHandler are now stored in separate files, with filenames
    #  matching classnames.
    #
+   # NetHandler was derived from Object, it is now derived from Component to enable
+   # the selection of information and error messages via input file.
+   #
+   # the scope resolution operator "::" was added to all system calls related to
+   # network operations.  Functions appended with operator include ioctl,
+   # ioctlsocket, setsockopt, gethostname, socket, listen, accept, perror,
+   # bind, closesocket, recvform, htons, htonl, connect, sendto, inet_addr,
+   # and inet_ntoa
 
 --------------------------------------------------------------------------------
 basicGL

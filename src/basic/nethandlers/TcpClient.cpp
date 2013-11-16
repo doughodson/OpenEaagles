@@ -129,16 +129,16 @@ bool TcpClient::connectToServer()
    bzero(&addr, sizeof(addr));
    addr.sin_family = AF_INET;
    addr.sin_addr.s_addr = getNetAddr();
-   addr.sin_port = htons(getPort()); 
+   addr.sin_port = ::htons(getPort()); 
 
    if (isMessageEnabled(MSG_INFO)) {
       std::cout << "Connecting to TCP server at " << ipAddr << ":" << getPort() << " ... " << std::flush;
    }
 
 #if defined(WIN32)
-   if( connect(tcpSocket, (const struct sockaddr *) &addr, sizeof(addr)) == SOCKET_ERROR)
+   if( ::connect(tcpSocket, (const struct sockaddr *) &addr, sizeof(addr)) == SOCKET_ERROR)
 #else
-   if( connect(tcpSocket, (const struct sockaddr *) &addr, sizeof(addr)) < 0)
+   if( ::connect(tcpSocket, (const struct sockaddr *) &addr, sizeof(addr)) < 0)
 #endif
    {
       if (isMessageEnabled(MSG_INFO)) {
