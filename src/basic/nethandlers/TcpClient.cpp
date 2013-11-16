@@ -8,7 +8,7 @@
     #include <WS2tcpip.h>
     #define  bzero(a,b)   ZeroMemory(a,b)
 #else
-    #include <arpa/inet.h>
+    #include <arpa/inet.h>  // htonl, htons, ntohl, ntohs
     #include <sys/fcntl.h>
     #include <sys/ioctl.h>
     #ifdef sun
@@ -129,7 +129,7 @@ bool TcpClient::connectToServer()
    bzero(&addr, sizeof(addr));
    addr.sin_family = AF_INET;
    addr.sin_addr.s_addr = getNetAddr();
-   addr.sin_port = ::htons(getPort()); 
+   addr.sin_port = htons(getPort()); 
 
    if (isMessageEnabled(MSG_INFO)) {
       std::cout << "Connecting to TCP server at " << ipAddr << ":" << getPort() << " ... " << std::flush;

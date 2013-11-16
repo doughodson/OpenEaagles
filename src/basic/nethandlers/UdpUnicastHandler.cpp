@@ -130,10 +130,10 @@ bool UdpUnicastHandler::bindSocket()
        addr.sin_family = AF_INET;
        addr.sin_addr.s_addr = getLocalAddr();
        if (getLocalPort() != 0) {
-           addr.sin_port = ::htons (getLocalPort());  
+           addr.sin_port = htons (getLocalPort());  
        }
        else {
-           addr.sin_port = ::htons(getPort());
+           addr.sin_port = htons(getPort());
        }
 
       if ( ::bind(socketNum, (const struct sockaddr *) &addr, sizeof(addr)) == SOCKET_ERROR ) {
@@ -170,7 +170,7 @@ bool UdpUnicastHandler::sendDataTo(
     bzero(&addr, sizeof(addr));
     addr.sin_family = AF_INET;
     addr.sin_addr.s_addr = ip0;
-    addr.sin_port = ::htons(port0); 
+    addr.sin_port = htons(port0); 
     Len addrlen = sizeof(addr);
     int result = ::sendto(socketNum, packet, size, 0, (const struct sockaddr *) &addr, addrlen);
 #if defined(WIN32)

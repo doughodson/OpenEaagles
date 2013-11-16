@@ -126,7 +126,7 @@ bool TcpHandler::bindSocket()
            addr.sin_port = htons (getLocalPort());  
        }
        else {
-           addr.sin_port = ::htons(getPort());
+           addr.sin_port = htons(getPort());
        }
 
       if ( ::bind(socketNum, (const struct sockaddr *) &addr, sizeof(addr)) == SOCKET_ERROR ) {
@@ -161,7 +161,7 @@ bool TcpHandler::closeConnection()
 #if defined(WIN32)
     if( ::closesocket(tcpSocket) == SOCKET_ERROR )
 #else
-    if( shutdown(tcpSocket, SHUT_RDWR) < 0)
+    if( ::shutdown(tcpSocket, SHUT_RDWR) < 0)
 #endif
     {
         ::perror("TcpHandler::closeConnection(): error! \n");

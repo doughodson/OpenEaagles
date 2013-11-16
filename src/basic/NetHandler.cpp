@@ -300,13 +300,13 @@ void NetHandler::toNet(const void* const hostData, void* const netData, const in
 
    for (i = 0; i < nl; i++) {
       const u_long kk = *psl++;
-      u_long ll = ::htonl(kk);
+      u_long ll = htonl(kk);
       *pdl++ = ll;
    }
    for (i = 0; i < ns; i++) {
-      //*pds++ = ::htons(*pss++);
+      //*pds++ = htons(*pss++);
       const u_short kk = *pss++;
-      u_short ss = ::htons(kk);
+      u_short ss = htons(kk);
       *pds++ = ss;
    }
 }
@@ -344,7 +344,7 @@ void NetHandler::toHost(const void* const netData, void* const hostData, const i
 bool NetHandler::checkByteOrder()
 {
     unsigned short n1 = 1;
-    unsigned short n2 = ::htons(n1);
+    unsigned short n2 = htons(n1);
     return (n1 == n2);     // No difference? Then we already in network order!
 }
 
@@ -435,7 +435,7 @@ bool NetHandler::sendData(const char* const packet, const int size)
     bzero(&addr, sizeof(addr));
     addr.sin_family = AF_INET;
     addr.sin_addr.s_addr = netAddr;
-    addr.sin_port = ::htons(port);
+    addr.sin_port = htons(port);
     Len addrlen = sizeof(addr);
     int result = ::sendto(socketNum, packet, size, 0, (const struct sockaddr *) &addr, addrlen);
 #if defined(WIN32)
@@ -487,7 +487,7 @@ unsigned int NetHandler::recvData(char* const packet, const int maxSize)
 
       if (result > 0 && ignoreSourcePort != 0) {
          // Ok we have one; make sure it's not one we should ignore
-         uint16_t rport = ::ntohs(raddr.sin_port);
+         uint16_t rport = ntohs(raddr.sin_port);
          if (rport == ignoreSourcePort) {
             tryAgain = true;
          }
@@ -497,7 +497,7 @@ unsigned int NetHandler::recvData(char* const packet, const int maxSize)
       if (result > 0 && !tryAgain) {
          n = result;
          fromAddr1 = raddr.sin_addr.s_addr;
-         fromPort1 = ::ntohs(raddr.sin_port);
+         fromPort1 = ntohs(raddr.sin_port);
       }
    }
 

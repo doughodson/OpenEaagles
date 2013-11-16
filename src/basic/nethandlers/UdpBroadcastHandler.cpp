@@ -170,10 +170,10 @@ bool UdpBroadcastHandler::bindSocket()
        addr.sin_addr.s_addr = getNetAddr();
 #endif
        if (getLocalPort() != 0) {
-         addr.sin_port = ::htons (getLocalPort());  
+         addr.sin_port = htons (getLocalPort());  
        }
        else {
-         addr.sin_port = ::htons(getPort());
+         addr.sin_port = htons(getPort());
        }
        std::printf("bind() addr = %08x\n", addr.sin_addr.s_addr);
        std::printf("bind() port = %08x\n", addr.sin_port);

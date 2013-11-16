@@ -189,10 +189,10 @@ bool UdpMulticastHandler::bindSocket()
        addr.sin_addr.s_addr = ::inet_addr(multicastGroup);
 #endif
        if (getLocalPort() != 0) {
-           addr.sin_port = ::htons (getLocalPort());  
+           addr.sin_port = htons (getLocalPort());  
        }
        else {
-           addr.sin_port = ::htons(getPort());
+           addr.sin_port = htons(getPort());
        }
 
       if ( ::bind(socketNum, (const struct sockaddr *) &addr, sizeof(addr)) == SOCKET_ERROR ) {
