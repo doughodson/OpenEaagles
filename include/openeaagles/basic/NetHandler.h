@@ -42,7 +42,7 @@ class String;
 //
 //    recvBuffSizeKb    ! Receive buffer size in KB's (default: 128 Kb; max 1024)
 //
-//    ignoreSourcePort  ! Ignore message from this ports.  The is one way to prevent receiving our
+//    ignoreSourcePort  ! Ignore messages from this port. This is one way to prevent receiving our
 //                      ! own data with multicast or broadcast.
 //
 //
