@@ -106,7 +106,7 @@ bool UdpUnicastHandler::init()
 #else
     if (socketNum < 0) {
 #endif
-        perror("UdpHandler::init(): Socket error");
+        perror("UdpUnicastHandler::init(): Socket error");
         return false;
     }
 
@@ -137,7 +137,7 @@ bool UdpUnicastHandler::bindSocket()
        }
 
       if (bind(socketNum, (const struct sockaddr *) &addr, sizeof(addr)) == SOCKET_ERROR) {
-        perror("UdpHandler::bindSocket(): bind error");
+        perror("UdpUnicastHandler::bindSocket(): bind error");
         return false;
       }
 
@@ -177,7 +177,7 @@ bool UdpUnicastHandler::sendDataTo(
     if (result == SOCKET_ERROR) {
         int err = WSAGetLastError();
         if (isMessageEnabled(MSG_ERROR)) {
-            std::cerr << "UdpHandler::sendDataTo(): sendto error: " << err << " hex=0x" << std::hex << err << std::dec << std::endl;
+            std::cerr << "UdpUnicastHandler::sendDataTo(): sendto error: " << err << " hex=0x" << std::hex << err << std::dec << std::endl;
         }
         return false;
     }
@@ -185,7 +185,7 @@ bool UdpUnicastHandler::sendDataTo(
     if (result == SOCKET_ERROR) {
         perror("UdpHandler::sendDataTo(): sendto error msg");
         if (isMessageEnabled(MSG_ERROR)) {
-            std::cerr << "UdpHandler::sendDataTo(): sendto error result: " << result << std::endl;
+            std::cerr << "UdpUnicastHandler::sendDataTo(): sendto error result: " << result << std::endl;
         }
         return false;
     }

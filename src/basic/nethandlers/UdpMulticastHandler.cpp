@@ -124,7 +124,7 @@ bool UdpMulticastHandler::init()
 #else
     if (socketNum < 0) {
 #endif
-        perror("MulticastHandler::init(): socket error");
+        perror("UdpMulticastHandler::init(): socket error");
         return false;
     }
 
@@ -140,7 +140,7 @@ bool UdpMulticastHandler::init()
         if( setsockopt(socketNum, IPPROTO_IP, IP_MULTICAST_LOOP, &optval, sizeof(optval)) < 0)
 #endif
         {
-            perror("MulticastHandler::init(): error setsockopt(IP_MULTICAST_LOOP)\n");
+            perror("UdpMulticastHandler::init(): error setsockopt(IP_MULTICAST_LOOP)\n");
             return false;
         }
     }
@@ -157,7 +157,7 @@ bool UdpMulticastHandler::init()
         if( setsockopt(socketNum, IPPROTO_IP, IP_MULTICAST_TTL, &optval, sizeof(optval)) < 0)
 #endif
         {
-            perror("MulticastHandler::init(): error setsockopt(IP_MULTICAST_TTL)\n");
+            perror("UdpMulticastHandler::init(): error setsockopt(IP_MULTICAST_TTL)\n");
             return false;
         }
     }
@@ -196,7 +196,7 @@ bool UdpMulticastHandler::bindSocket()
        }
 
       if (bind(socketNum, (const struct sockaddr *) &addr, sizeof(addr)) == SOCKET_ERROR) {
-        perror("MulticastHandler::bindSocket(): bind error");
+        perror("UdpMulticastHandler::bindSocket(): bind error");
         return false;
       }
 
@@ -244,7 +244,7 @@ bool UdpMulticastHandler::joinTheGroup()
 #else
    if (result < 0) {
 #endif
-     perror("MulticastHandler::joinTheGroup(): setsockopt mreq");
+     perror("UdpMulticastHandler::joinTheGroup(): setsockopt mreq");
      return false;
    }
 

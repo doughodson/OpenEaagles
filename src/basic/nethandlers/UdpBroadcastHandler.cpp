@@ -96,7 +96,7 @@ bool UdpBroadcastHandler::init()
 #else
     if (socketNum < 0) {
 #endif
-        perror("BroadcastHandler::init(): socket error");
+        perror("UdpBroadcastHandler::init(): socket error");
         return false;
     }
 
@@ -112,7 +112,7 @@ bool UdpBroadcastHandler::init()
         if( setsockopt(socketNum, SOL_SOCKET, SO_BROADCAST, &optval, sizeof(optval)) < 0)
 #endif
         {
-            perror("BroadcastHandler::init(): error setsockopt(SO_BROADCAST)\n");
+            perror("UdpBroadcastHandler::init(): error setsockopt(SO_BROADCAST)\n");
             return false;
         }
     }
@@ -144,14 +144,14 @@ bool UdpBroadcastHandler::bindSocket()
                uint32_t localNet = localNetAddr & localNetMask;
                ba = localNet | ~localNetMask;
                if (isMessageEnabled(MSG_INFO)) {
-                  std::cout << std::hex << "Broadcast address: " << ba << std::dec << std::endl;
+                  std::cout << std::hex << "UdpBroadcast address: " << ba << std::dec << std::endl;
                }
                setNetAddr( ba ); 
                ok = true;
             }
         }
         if (!ok && isMessageEnabled(MSG_ERROR)) {
-            std::cerr << "BroadcastHandler::bindSocket() -- unable to set broadcast address!" << std::endl;
+            std::cerr << "UdpBroadcast::bindSocket() -- unable to set broadcast address!" << std::endl;
         }
     }
 
@@ -179,7 +179,7 @@ bool UdpBroadcastHandler::bindSocket()
        std::printf("bind() port = %08x\n", addr.sin_port);
 
        if (bind(socketNum, (const struct sockaddr *) &addr, sizeof(addr)) == SOCKET_ERROR) {
-         perror("BroadcastHandler::bindSocket(): bind error");
+         perror("UdpBroadcast::bindSocket(): bind error");
          return false;
        }
 
