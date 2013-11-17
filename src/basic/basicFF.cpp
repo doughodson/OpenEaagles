@@ -407,17 +407,20 @@ Object* basicFormFunc(const char* formname)
     else if ( strcmp(formname, UdpUnicastHandler::getFormName()) == 0 ) {
         newform = new UdpUnicastHandler();
     }
-    // Network handlers (backward compatible formname names for UDP oriented communication)
+    // Network handlers (backward compatible form names for UDP oriented communication)
+    // the mapping to old form names was added 16 Nov 2013 -- should be removed in the future
     else if ( strcmp(formname, "BroadcastHandler") == 0 ) {
+        std::cerr << "\nWARNING! Form name 'BroadcastHandler' has been depreciated, use 'UdpBroadcastHandler' instead.\n\n";
         newform = new UdpBroadcastHandler();
     }
     else if ( strcmp(formname, "MulticastHandler") == 0 ) {
+        std::cerr << "\nWARNING! Form name 'MulticastHandler' has been depreciated, use 'UdpMulticastHandler' instead.\n\n";
         newform = new UdpMulticastHandler();
     }
     else if ( strcmp(formname, "UdpHandler") == 0 ) {
+        std::cerr << "\nWARNING! Form name 'UdpHandler' has been depreciated, use 'UdpUnicastHandler' instead.\n\n";
         newform = new UdpUnicastHandler();
     }
-
 
     // Random number generator and distributions
     else if ( strcmp(formname, Rng::getFormName()) == 0 ) {
