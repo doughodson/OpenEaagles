@@ -621,7 +621,7 @@ std::ostream& TrackManager::serialize(std::ostream& sout, const int i, const boo
 
 
 //==============================================================================
-// Class:	AirTrkMgr
+// Class: AirTrkMgr
 //==============================================================================
 IMPLEMENT_SUBCLASS(AirTrkMgr,"AirTrkMgr")
 
@@ -1115,7 +1115,7 @@ std::ostream& AirTrkMgr::serialize(std::ostream& sout, const int i, const bool s
 
 
 //==============================================================================
-// Class:	GmtiTrkMgr
+// Class: GmtiTrkMgr
 //==============================================================================
 IMPLEMENT_SUBCLASS(GmtiTrkMgr,"GmtiTrkMgr")
 EMPTY_SLOTTABLE(GmtiTrkMgr)
@@ -1442,7 +1442,7 @@ void GmtiTrkMgr::processTrackList(const LCreal dt)
 
 
 //==============================================================================
-// Class:	RwrTrkMgr
+// Class: RwrTrkMgr
 //==============================================================================
 IMPLEMENT_SUBCLASS(RwrTrkMgr,"RwrTrkMgr")
 EMPTY_SLOTTABLE(RwrTrkMgr)

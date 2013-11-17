@@ -135,7 +135,7 @@ void OtwPC::frameSync()
         else {
             netInit = false;
             netInitFail = true;
-	}
+        }
     }
 }
 

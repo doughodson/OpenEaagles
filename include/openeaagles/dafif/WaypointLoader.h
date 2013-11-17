@@ -1,9 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: WaypointLoader
-// Base class:	Database -> WaypointLoader
+// Base class: Database -> WaypointLoader
 //
 // Description: DAFIF Waypoint file class (file3)
-//
 //
 // Public member functions:
 //

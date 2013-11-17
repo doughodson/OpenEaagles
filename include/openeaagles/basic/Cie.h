@@ -36,8 +36,8 @@ class List;
 //     LCreal luminance()
 //     LCreal x()
 //     LCreal y()
-//	       Data access routines.  Returns the CIE component.
-//	  
+//         Data access routines.  Returns the CIE component.
+//
 //     getCIE(osg::Vec3& cie)
 //         Returns the CIE components in a vector.
 //
@@ -105,7 +105,7 @@ protected:
 // Public methods: Base class public methods, plus ...
 //
 //     MonitorMetrics(const Table1* redLuminance, const Table1* greenLuminance, const Table1* blueLuminance, 
-//					    const osg::Matrix& phosphorCoordinates, const osg::Vec3& whiteRGB, const osg::Vec3& whiteCIE);
+//                    const osg::Matrix& phosphorCoordinates, const osg::Vec3& whiteRGB, const osg::Vec3& whiteCIE);
 //         Special constructor to initialize the object with the given values.
 //
 //     cie2rgb(osg::Vec4& rgba, const osg::Vec3& cie)

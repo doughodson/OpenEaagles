@@ -13,7 +13,7 @@ class Number;
 class String;
 
 //------------------------------------------------------------------------------
-// Class:	FileReader
+// Class: FileReader
 // Base class:  Object -> FileReader
 //
 // Description: Manages the reading of fixed record length files

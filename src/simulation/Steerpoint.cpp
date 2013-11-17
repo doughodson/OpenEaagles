@@ -541,7 +541,7 @@ bool Steerpoint::setSlotPTA(const Basic::Number* const msg)
 {
     bool ok = false;
     if (msg != 0) {
-		// assumes seconds
+        // assumes seconds
         setPTA( msg->getFloat() );
         ok = true;
     }
@@ -560,7 +560,7 @@ bool Steerpoint::setSlotSCA(const Basic::Number* const msg)
 {
     bool ok = false;
     if (msg != 0) {
-		// assumes feet
+        // assumes feet
         setSCA( msg->getFloat() );
         ok = true;
     }
@@ -808,7 +808,7 @@ bool Steerpoint::compute(const Navigation* const nav, const Steerpoint* const fr
     
 //------------------------------------------------------------------------------
 // processComponets() -- process our components; make sure the are all of
-//	type Steerpoint (or derived); tell them that we are their container
+// type Steerpoint (or derived); tell them that we are their container
 //------------------------------------------------------------------------------
 void Steerpoint::processComponents(
       Basic::PairStream* const list,

@@ -63,17 +63,17 @@ namespace BasicGL {
 //      setTextOrigin(const GLdouble x, const GLdouble y)
 //          Sets the upper left corner.
 //
-//	  LCreal getCharacterSpacing()
-//		Returns the character spacing.
+//      LCreal getCharacterSpacing()
+//        Returns the character spacing.
 //
-//	  setCharacterSpacing(LCreal v)
-//		Sets the character spacing to v.
+//      setCharacterSpacing(LCreal v)
+//        Sets the character spacing to v.
 //
-//	  LCreal getLineSpacing()
-//		Returns the line spacing.
+//      LCreal getLineSpacing()
+//        Returns the line spacing.
 //
-//	  setLineSpacing(LCreal v)
-//		Sets the line spacing to v.
+//      setLineSpacing(LCreal v)
+//        Sets the line spacing to v.
 //
 //      GLdouble getFontWidth()
 //          Returns the font width.
@@ -127,11 +127,11 @@ namespace BasicGL {
 //
 //
 // Protected functions:
-//	  int xferChars(char* outp, size_t outpSize, char* inp, int n)
-//		Transfers n characters of inp to outp and returns the size of outp.
+//      int xferChars(char* outp, size_t outpSize, char* inp, int n)
+//        Transfers n characters of inp to outp and returns the size of outp.
 //
-//	  ftgl(void* p)
-//		Sets the pFTGL font pointer to p.
+//      ftgl(void* p)
+//        Sets the pFTGL font pointer to p.
 //
 //Comment section last updated: 2004.10.13 by MJK
 //------------------------------------------------------------------------------

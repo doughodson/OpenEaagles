@@ -7,7 +7,7 @@
 class CigiEntityCtrlV3;
 class CigiCompCtrlV3;
 class CigiIGCtrlV3;
-class CigiLosVectReqV3;	// CGBCGB CIGI_LOS_RANGE_REQUEST* los;          // LOS request packet
+class CigiLosVectReqV3;   // CGBCGB CIGI_LOS_RANGE_REQUEST* los;          // LOS request packet
 class CigiViewCtrlV3;
 class CigiViewDefV3;
 class CigiArtPartCtrlV3;
@@ -19,7 +19,7 @@ class CigiCollDetSegRespV3;
 class CigiCollDetVolRespV3;
 class CigiSensorCtrlV3;
 class CigiSensorRespV3;
-class CigiIGMsgV3;	// CGBCGB CIGI_IG_RESPONSE_MESSAGE
+class CigiIGMsgV3;       // CGBCGB CIGI_IG_RESPONSE_MESSAGE
 class CigiHostSession;
 class CigiIncomingMsg;
 class CigiOutgoingMsg;
@@ -275,7 +275,7 @@ private:
 };
 
 //------------------------------------------------------------------------------
-// Class:	CigiCl
+// Class: CigiCl
 // Description: CIGI I/O handler
 //
 // Form name: CigiCl
@@ -342,8 +342,8 @@ private:
 };
 
 //------------------------------------------------------------------------------
-// Class:	CigiClNetwork
-// Base class:	Basic::Object -> CigiCl -> CigiClNetwork
+// Class: CigiClNetwork
+// Base class: Basic::Object -> CigiCl -> CigiClNetwork
 //
 // Description: Networked CIGI interface to the IG system
 //
@@ -406,8 +406,8 @@ private:
 };
 
 //------------------------------------------------------------------------------
-// Class:	OtwModelCigiCl
-// Base class:	Basic::Object -> OtwModel -> OtwModelCigiCl
+// Class: OtwModelCigiCl
+// Base class: Basic::Object -> OtwModel -> OtwModelCigiCl
 // Description: CIGI OTW model
 //------------------------------------------------------------------------------
 class OtwModelCigiCl : public Simulation::OtwModel

@@ -1473,8 +1473,8 @@ std::ostream& Gimbal::serialize(std::ostream& sout, const int i, const bool slot
     BaseClass::serialize(sout,i+j,true);
 
     if ( !slotsOnly ) {
-    	indent(sout,i);
-    	sout << ")" << std::endl;
+        indent(sout,i);
+        sout << ")" << std::endl;
     }
 
     return sout;

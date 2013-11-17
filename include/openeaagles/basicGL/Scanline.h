@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // Class: Scanline
 //------------------------------------------------------------------------------
-#ifndef	__Eaagles_BasicGL_Scanline_H__
+#ifndef __Eaagles_BasicGL_Scanline_H__
 #define __Eaagles_BasicGL_Scanline_H__
 
 #include "openeaagles/basic/Object.h"
@@ -14,11 +14,12 @@ class Polygon;
 
 //------------------------------------------------------------------------------
 // Class: Scanline
-// Base class:	Object -> Scanline
+// Base class: Object -> Scanline
 // Description:  (Abstract) 2D scan line engine.  
 // Form name: Scanline
 //------------------------------------------------------------------------------
-class Scanline : public Basic::Object {
+class Scanline : public Basic::Object
+{
    DECLARE_SUBCLASS(Scanline,Basic::Object)
 
 public:

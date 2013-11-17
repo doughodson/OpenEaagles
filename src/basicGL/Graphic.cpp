@@ -1445,7 +1445,7 @@ bool Graphic::setStipplePattern(const GLushort x)
     
 //------------------------------------------------------------------------------
 // processComponets() -- process our components; make sure the are all of
-//	type Graphic (or derived); tell them that we are their container
+// type Graphic (or derived); tell them that we are their container
 //------------------------------------------------------------------------------
 void Graphic::processComponents(
       Basic::PairStream* const list,

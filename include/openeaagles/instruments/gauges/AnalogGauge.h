@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // Class: AnalogGauge
 //------------------------------------------------------------------------------
-#ifndef	__Eaagles_Instruments_AnalogGuage_H__
+#ifndef __Eaagles_Instruments_AnalogGuage_H__
 #define __Eaagles_Instruments_AnalogGuage_H__
 
 #include "openeaagles/instruments/Instrument.h"
@@ -10,7 +10,7 @@ namespace Eaagles {
 namespace Instruments {
 
 //------------------------------------------------------------------------------
-// Class:	AnalogGauge
+// Class: AnalogGauge
 // Base class: BasicGL::Graphic -> Instrument -> AnalogGauge
 // 
 // Description: This will create a gauge that will
@@ -25,7 +25,8 @@ namespace Instruments {
 //      setIsOutlined() - if true, the gauge isn't filled
 //      setIsVertical() - if true, the gauge slides up and down
 //------------------------------------------------------------------------------
-class AnalogGauge : public Instrument {
+class AnalogGauge : public Instrument
+{
     DECLARE_SUBCLASS(AnalogGauge,Instrument)
     
 public:

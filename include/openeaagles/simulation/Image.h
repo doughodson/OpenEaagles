@@ -1,10 +1,10 @@
 //------------------------------------------------------------------------------
 // Class: Image
-// Base class:	Basic::Object > Image
+// Base class: Basic::Object > Image
 // Form name: SarImage
 // Description: SAR image structure
 //------------------------------------------------------------------------------
-#ifndef	__Eaagles_Simulation_Image_H__
+#ifndef __Eaagles_Simulation_Image_H__
 #define __Eaagles_Simulation_Image_H__
 
 #include "openeaagles/basic/Object.h"
@@ -12,7 +12,8 @@
 namespace Eaagles {
 namespace Simulation {
 
-class Image : public Basic::Object {
+class Image : public Basic::Object
+{
     DECLARE_SUBCLASS(Image,Basic::Object)
 
 public:

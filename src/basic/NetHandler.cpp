@@ -5,7 +5,7 @@
 #if defined(WIN32)
     #include <sys/types.h>
     #include <Winsock2.h>
-    #define	bzero(a,b)  ZeroMemory( a, b )
+    #define bzero(a,b)  ZeroMemory( a, b )
     typedef int Len;
 #else
     #include <netdb.h>

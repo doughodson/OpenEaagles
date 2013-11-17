@@ -443,14 +443,14 @@ bool Bomb::setSlotArmingOption(Basic::Identifier* const p)
 // noseFuze: Nose fuze flag
 bool Bomb::setSlotNoseFuze(Basic::Number* const p)
 {
-	setNoseFuze( p->getBoolean() );
+    setNoseFuze( p->getBoolean() );
     return true;
 }
 
 // midFuze: Middle fuze flag
 bool Bomb::setSlotMidFuze(Basic::Number* const p)
 {
-	setMidFuze( p->getBoolean() );
+    setMidFuze( p->getBoolean() );
     return true;
 }
 
@@ -547,8 +547,8 @@ std::ostream& Bomb::serialize(std::ostream& sout, const int i, const bool slotsO
     BaseClass::serialize(sout,i+j,true);
 
     if ( !slotsOnly ) {
-    	indent(sout,i);
-    	sout << ")" << std::endl;
+        indent(sout,i);
+        sout << ")" << std::endl;
     }
 
     return sout;

@@ -12,7 +12,7 @@
 //  /*
 //   * poly_clip.c: homogeneous 3-D convex polygon clipper
 //   *
-//   * Paul Heckbert	1985, Dec 1989
+//   * Paul Heckbert 1985, Dec 1989
 //   */
 //
 //------------------------------------------------------------------------------

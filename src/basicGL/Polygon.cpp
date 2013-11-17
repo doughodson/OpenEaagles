@@ -140,7 +140,6 @@ void Polygon::drawFunc()
     unsigned int nv = getNumberOfVertices();
     const osg::Vec3* vertices = getVertices();
 
-	
     if (nv >= 2) {
 
         // Draw with texture
@@ -161,16 +160,17 @@ void Polygon::drawFunc()
 
         // Draw without texture
         else {
-			// get our color gradient, because if we have one, instead of a regular color, we will
-			// override it here and set it on a per vertex level.
-			ColorGradient* colGradient = dynamic_cast<ColorGradient*>(getColor());
+            // get our color gradient, because if we have one, instead of a regular color, we will
+            // override it here and set it on a per vertex level.
+            ColorGradient* colGradient = dynamic_cast<ColorGradient*>(getColor());
             glBegin(GL_POLYGON);
             osg::Vec3* ptr = 0;
             for (unsigned int i = 0; i < nv; i++) {
-				if (colGradient != 0) {
-					Basic::Color* col = colGradient->getColorByIdx(i+1);
-					if (col != 0) glColor4f((GLfloat)col->red(), (GLfloat)col->green(), (GLfloat)col->blue(), (GLfloat)col->alpha());
-				}
+                if (colGradient != 0) {
+                    Basic::Color* col = colGradient->getColorByIdx(i+1);
+                    if (col != 0)
+                       glColor4f((GLfloat)col->red(), (GLfloat)col->green(), (GLfloat)col->blue(), (GLfloat)col->alpha());
+                }
                 // if we have a material name, we will set up like we have a material
                 if (getMaterialName() != 0) {
                     //lcVertex3v( vertices[i].ptr() );
@@ -180,12 +180,11 @@ void Polygon::drawFunc()
                         calcNormal();
                         lcNormal3(norm.x(), norm.y(), -(norm.z()));
                         lcVertex3(ptr->x(), ptr->y(), ptr->z());     
-                    }  
+                    }
                 }
                 else {
-
                     lcVertex3v(vertices[i].ptr());
-                }         
+                }
             }
             glEnd();
         }

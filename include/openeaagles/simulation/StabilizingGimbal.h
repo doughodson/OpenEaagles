@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 // Class: StabilizingGimbal
-// Base class:	Basic::Object -> Basic::Component -> System -> Gimbal -> StabilizingGimbal
+// Base class: Basic::Object -> Basic::Component -> System -> Gimbal -> StabilizingGimbal
 //
 // Description: This gimbal tries to counter the player's roll, pitch and yaw movements.
 //
@@ -16,7 +16,7 @@ namespace Eaagles {
 namespace Simulation {
 
 //------------------------------------------------------------------------------
-// Class:	StabilizingGimbal
+// Class: StabilizingGimbal
 // Description: This gimbal tries to counter the player's roll, pitch and yaw movements.
 // Form name: StabilizingGimbal
 // Slots:

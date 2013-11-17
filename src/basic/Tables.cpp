@@ -186,7 +186,7 @@ bool Table::loadVector(const List& list, LCreal** table, unsigned int* nn)
     else {
         // Something was wrong, free the table
         delete[] p;
-		throw new ExpInvalidVector();	//invalid vector - throw an exception
+        throw new ExpInvalidVector();     //invalid vector - throw an exception
     }
     return ok;
 }
@@ -1632,7 +1632,7 @@ void Table5::printData(std::ostream& sout, const LCreal* tbl, const unsigned int
 //==============================================================================
 
 //------------------------------------------------------------------------------
-// lfi - One dimensional Linear Function Interpolator	
+// lfi - One dimensional Linear Function Interpolator
 //------------------------------------------------------------------------------
 LCreal Table::lfi(
          const LCreal x,            // Independent variable #1

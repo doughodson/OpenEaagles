@@ -300,7 +300,7 @@ void Database::createIcaoList()
 
       // copy keys with a valid ICAO code to the ICAO list and sort
       for (int i = 0; i < nrl; i++) {
-         if ( strlen(rl[i]->icao) > 2 ) {	// at least three characters
+         if ( strlen(rl[i]->icao) > 2 ) {       // at least three characters
             ol[nol++] = rl[i];
          }
       }

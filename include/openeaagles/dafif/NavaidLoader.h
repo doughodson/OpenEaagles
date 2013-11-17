@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 // Class: NavaidLoader
-// Base class:	Database -> NavaidLoader
+// Base class: Database -> NavaidLoader
 //
 // Description: DAFIF NAVAID file class (file2)
 //

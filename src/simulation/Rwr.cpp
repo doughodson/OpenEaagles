@@ -232,16 +232,16 @@ std::ostream& Rwr::serialize(std::ostream& sout, const int i, const bool slotsOn
 {
     int j = 0;
     if ( !slotsOnly ) {
-    	indent(sout,i);
-    	sout << "( " << getFormName() << std::endl;
-	j = 4;
+        indent(sout,i);
+        sout << "( " << getFormName() << std::endl;
+        j = 4;
     }
 
     BaseClass::serialize(sout,i+j,true);
 
     if ( !slotsOnly ) {
-    	indent(sout,i);
-    	sout << ")" << std::endl;
+        indent(sout,i);
+        sout << ")" << std::endl;
     }
 
     return sout;

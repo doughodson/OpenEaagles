@@ -1818,8 +1818,8 @@ bool Display::setSlotDisplayOrientation(const Basic::String* const msg)
 
 //------------------------------------------------------------------------------
 // processSubdisplays() -- process our subdisplays; make sure they are all of
-//	type Display (or derived from it)and tell them that we are their
-//	container.
+// type Display (or derived from it)and tell them that we are their
+// container.
 //------------------------------------------------------------------------------
 bool Display::processSubdisplays()
 {
@@ -1847,7 +1847,7 @@ bool Display::processSubdisplays()
 
 //------------------------------------------------------------------------------
 // processTextures() -- process our textures; make sure they are all of
-//	type Texture (or derived from it)and tell them to load.
+// type Texture (or derived from it)and tell them to load.
 //------------------------------------------------------------------------------
 bool Display::processTextures()
 {

@@ -136,10 +136,10 @@ Object* Yiq::getSlotByIndex(const int si)
 //------------------------------------------------------------------------------
 void Yiq::yiq2rgb(osg::Vec4& rgb, const osg::Vec3& yiq)
 {
-	rgb[RED]   = 1.0f * yiq[Y] + 0.948262f * yiq[I] + 0.624013f * yiq[Q];
-	rgb[GREEN] = 1.0f * yiq[Y] - 0.276066f * yiq[I] - 0.639810f * yiq[Q];
-	rgb[BLUE]  = 1.0f * yiq[Y] - 1.105450f * yiq[I] + 1.729860f * yiq[Q];
-	rgb[ALPHA] = defaultAlpha;
+    rgb[RED]   = 1.0f * yiq[Y] + 0.948262f * yiq[I] + 0.624013f * yiq[Q];
+    rgb[GREEN] = 1.0f * yiq[Y] - 0.276066f * yiq[I] - 0.639810f * yiq[Q];
+    rgb[BLUE]  = 1.0f * yiq[Y] - 1.105450f * yiq[I] + 1.729860f * yiq[Q];
+    rgb[ALPHA] = defaultAlpha;
 }
 
 //------------------------------------------------------------------------------
@@ -149,9 +149,9 @@ void Yiq::yiq2rgb(osg::Vec4& rgb, const osg::Vec3& yiq)
 //------------------------------------------------------------------------------
 void Yiq::rgb2yiq(osg::Vec3& yiq, const osg::Vec4& rgb)
 {
-	yiq[Y] = 0.30f * rgb[RED] + 0.59f * rgb[GREEN] + 0.11f * rgb[BLUE];
-	yiq[I] = 0.60f * rgb[RED] - 0.28f * rgb[GREEN] - 0.32f * rgb[BLUE];
-	yiq[Q] = 0.21f * rgb[RED] - 0.52f * rgb[GREEN] + 0.31f * rgb[BLUE];
+    yiq[Y] = 0.30f * rgb[RED] + 0.59f * rgb[GREEN] + 0.11f * rgb[BLUE];
+    yiq[I] = 0.60f * rgb[RED] - 0.28f * rgb[GREEN] - 0.32f * rgb[BLUE];
+    yiq[Q] = 0.21f * rgb[RED] - 0.52f * rgb[GREEN] + 0.31f * rgb[BLUE];
 }
 
 //------------------------------------------------------------------------------

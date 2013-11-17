@@ -20,18 +20,18 @@
 //
 // Public methods (Defined in Area, and inherited by all derived classes):
 //
-//	    set(const LCreal v)
-//		    Sets an Area derived instance with an LCreal.
+//     set(const LCreal v)
+//        Sets an Area derived instance with an LCreal.
 //
-//	    set(const Area& n)
-//		    Sets, and converts if necessary, an Area derived instance with
-//		    another Area derived instance.
+//     set(const Area& n)
+//        Sets, and converts if necessary, an Area derived instance with
+//        another Area derived instance.
 //
-//	    LCreal convert(const Area& n)
-//		    Converts the value of an Area derived instance into
-//		    the units of another Area derived instance.
+//     LCreal convert(const Area& n)
+//        Converts the value of an Area derived instance into
+//        the units of another Area derived instance.
 //
-//	    Conversion routines:
+//     Conversion routines:
 //          Because there are 72 possible combinations of conversions, only the most appropriate
 //          ones will be included here.  (ie.. inches to feet).  All other conversions can be 
 //          handled using the set or convert member function of each class type (ie.. CentiMeters to Meters).
@@ -59,18 +59,18 @@
 //          LCreal squareMetersToDecibelSquareMeters(const LCreal v)
 //          LCreal decibelSquareMetersToSquareMeters(const LCreal v)
 //
-//	    Output stream operator: >>
-//		    ostream& operator<<(ostream& sout, const Area& n)
-//			 Sends "( <the Area derived instance class name and value> )"
-//			 to the output stream.
+//     Output stream operator: >>
+//        ostream& operator<<(ostream& sout, const Area& n)
+//        Sends "( <the Area derived instance class name and value> )"
+//        to the output stream.
 //
 //
 // Public methods (For classes: SquareFeet, SquareYards, SquareMeters, SquareMiles, SquareInches,
 //                  SquareCentiMeters, SquareMilliMeters, SquareKiloMeters, DecibelSquareMeters):
 //
-//	    LCreal convertStatic(const Area& n)
-//		    Static function to convert the given Area derived instance
-//		    into the units of a specific Area derived class.
+//     LCreal convertStatic(const Area& n)
+//        Static function to convert the given Area derived instance
+//        into the units of a specific Area derived class.
 //
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_Basic_Areas_H__
@@ -100,7 +100,7 @@ namespace Basic {
 // ----------------------------------------------------------------------------
 
 //------------------------------------------------------------------------------
-// Class:  Area  
+// Class:  Area
 // Base class:  Object -> Number -> Area
 // Description:  Base class for area.  Defined as a square meter which is
 //               equivalent to an instance of SquareMeters with its value equal
@@ -120,7 +120,7 @@ public:
     virtual LCreal toArea() const = 0;
     virtual LCreal fromArea(const LCreal a) const = 0;
     LCreal convert(const Area& n) { return fromArea(n.toArea()); }
-	
+
     // Conversions between Areas
     static LCreal squareFeetToInches(const LCreal v)   { return (v * SFT2SM) * SM2SIN; }
     static LCreal squareFeetToYards(const LCreal v)    { return (v * SFT2SM) * SM2SYD; }
@@ -164,7 +164,7 @@ public:
 
 
 inline std::ostream& operator<<(std::ostream& sout, const Area& n)
-	    { sout << "( " << n.getFormName() << " " << n.getReal() << " )"; return sout; }
+    { sout << "( " << n.getFormName() << " " << n.getReal() << " )"; return sout; }
 
 //------------------------------------------------------------------------------
 // Class:  SquareMeters
@@ -229,7 +229,7 @@ public:
 // Base class:  Object -> Number -> Area -> SquareYards
 // Description: Square Meters * 1.19599
 //------------------------------------------------------------------------------
-class SquareYards : public Area  
+class SquareYards : public Area
 {
     DECLARE_SUBCLASS(SquareYards, Area)
 
@@ -267,7 +267,7 @@ public:
 // Base class:  Object -> Number -> Area -> SquareCentiMeters
 // Description: Square Meters * 10000.0
 //------------------------------------------------------------------------------
-class SquareCentiMeters : public Area  
+class SquareCentiMeters : public Area
 {
     DECLARE_SUBCLASS(SquareCentiMeters, Area)
 
@@ -286,7 +286,7 @@ public:
 // Base class:  Object -> Number -> Area -> SquareMilliMeters
 // Description: Square Meters * 1000000.0
 //------------------------------------------------------------------------------
-class SquareMilliMeters : public Area  
+class SquareMilliMeters : public Area
 {
     DECLARE_SUBCLASS(SquareMilliMeters, Area)
 
@@ -305,7 +305,7 @@ public:
 // Base class:  Object -> Number -> Area -> SquareKiloMeters
 // Description: Square Meters * 0.000001
 //------------------------------------------------------------------------------
-class SquareKiloMeters : public Area  
+class SquareKiloMeters : public Area
 {
     DECLARE_SUBCLASS(SquareKiloMeters, Area)
 
@@ -324,7 +324,7 @@ public:
 // Base class:  Object -> Number -> Area -> DecibelSquareMeters
 // Description: 10 * Log(Square Meters)
 //------------------------------------------------------------------------------
-class DecibelSquareMeters : public Area  
+class DecibelSquareMeters : public Area
 {
     DECLARE_SUBCLASS(DecibelSquareMeters, Area)
 
@@ -336,7 +336,7 @@ public:
     static LCreal convertStatic(const Area& n)    { return 10.0f * lcLog10( n.toArea() ); }
     virtual LCreal toArea() const                 { return lcPow(LCreal(10.0), LCreal(val/10.0)); }
     virtual LCreal fromArea(const LCreal a) const { return 10.0f * lcLog10(a); }
-	
+
 };
 
 } // End Basic namespace

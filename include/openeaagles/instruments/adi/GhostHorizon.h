@@ -4,7 +4,7 @@
 // Description: Takes a pitch and roll in and determines when and where to draw the
 // ghost horizon graphic
 //------------------------------------------------------------------------------
-#ifndef	__Eaagles_Instruments_GhostHorizon_H__
+#ifndef __Eaagles_Instruments_GhostHorizon_H__
 #define __Eaagles_Instruments_GhostHorizon_H__
 
 #include "openeaagles/instruments/adi/Adi.h"

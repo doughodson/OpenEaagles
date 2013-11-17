@@ -2,7 +2,7 @@
 // Class:  BasicGL::Page -> Eadi3DPage
 //
 //------------------------------------------------------------------------------
-#ifndef	__Eaagles_Instruments_Eadi3DPage_H__
+#ifndef __Eaagles_Instruments_Eadi3DPage_H__
 #define __Eaagles_Instruments_Eadi3DPage_H__
 
 #include "openeaagles/basicGL/Page.h"
@@ -26,19 +26,19 @@ public:
     void setVVI(const LCreal vvi);                      // ft/min
     void setPitch(const LCreal pitch);                  // deg
     void setRoll(const LCreal roll);                    // deg
-    void setMach(const LCreal mach);		            // mach number
-    void setGLoad(const LCreal gload);		            // Gs
-    void setLandingMode(const bool landMode);	        // T = landing mode
-    void setPitchSteeringCmd(const LCreal pitchCmd);	// [-1, 1]
-    void setRollSteeringCmd(const LCreal rollCmd);	    // [-1, 1]
-    void setPitchSteeringValid(const bool psValid);	    // T = valid
-    void setRollSteeringValid(const bool rcValid);	    // T = valid
-    void setGlideslopeDev(const LCreal gsDev);	        // dots [-2, 2]
-    void setLocalizerDev(const LCreal locDev);	        // dots [-2, 2]
-    void setTurnRate(const LCreal turnRate);		    // dots [-2, 2]
-    void setSlipInd(const LCreal slipInd);		        // dots [-2, 2]
-    void setGlideslopeValid(const bool gsValid);	    // T = valid
-    void setLocalizerValid(const bool locValid);	    // T = valid
+    void setMach(const LCreal mach);                    // mach number
+    void setGLoad(const LCreal gload);                  // Gs
+    void setLandingMode(const bool landMode);           // T = landing mode
+    void setPitchSteeringCmd(const LCreal pitchCmd);    // [-1, 1]
+    void setRollSteeringCmd(const LCreal rollCmd);      // [-1, 1]
+    void setPitchSteeringValid(const bool psValid);     // T = valid
+    void setRollSteeringValid(const bool rcValid);      // T = valid
+    void setGlideslopeDev(const LCreal gsDev);          // dots [-2, 2]
+    void setLocalizerDev(const LCreal locDev);          // dots [-2, 2]
+    void setTurnRate(const LCreal turnRate);            // dots [-2, 2]
+    void setSlipInd(const LCreal slipInd);              // dots [-2, 2]
+    void setGlideslopeValid(const bool gsValid);        // T = valid
+    void setLocalizerValid(const bool locValid);        // T = valid
 
     // BasicGL::Graphic interface
     virtual void draw();

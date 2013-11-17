@@ -285,24 +285,24 @@ void Hsv::rgb2hsv(osg::Vec3& hsv, const osg::Vec3& rgb)
    LCreal s = 0;
 
    if ( cmax != 0.0 )
-	   s = cdelta / cmax;
+      s = cdelta / cmax;
    
    if ( s != 0.0 )
    {
-	   LCreal rc = (cmax - rgb[RED]) / cdelta;
-	   LCreal gc = (cmax - rgb[GREEN]) / cdelta;
-	   LCreal bc = (cmax - rgb[BLUE]) / cdelta;
+      LCreal rc = (cmax - rgb[RED]) / cdelta;
+      LCreal gc = (cmax - rgb[GREEN]) / cdelta;
+      LCreal bc = (cmax - rgb[BLUE]) / cdelta;
 
-	   if ( rgb[RED] == cmax )
-		   h = bc - gc;
-	   else if ( rgb[GREEN] == cmax )
-		   h = 2.0f + rc - bc;
-	   else if ( rgb[BLUE] == cmax )
-		   h = 4.0f + gc - rc;
+      if ( rgb[RED] == cmax )
+         h = bc - gc;
+      else if ( rgb[GREEN] == cmax )
+         h = 2.0f + rc - bc;
+      else if ( rgb[BLUE] == cmax )
+         h = 4.0f + gc - rc;
 
-	   h *= 60.0f;
-	   if ( h < 0.0 )
-		   h += 360.0f;
+      h *= 60.0f;
+      if ( h < 0.0 )
+         h += 360.0f;
    }
 
    hsv[HUE] = h;

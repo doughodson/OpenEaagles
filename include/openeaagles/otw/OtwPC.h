@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
-// Class:	OtwPC
-// Base class:	Basic::Object -> Component -> Otw -> OtwPC
+// Class: OtwPC
+// Base class: Basic::Object -> Component -> Otw -> OtwPC
 //
 // Description: PC Visual Interface
 //

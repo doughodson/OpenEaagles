@@ -1,10 +1,10 @@
 //------------------------------------------------------------------------------
-// Class:	EngPage
-// Base class:	... -> BasicGL::Page -> EngPage
+// Class: EngPage
+// Base class: ... -> BasicGL::Page -> EngPage
 //
-// Description:	Tests the secondary pfd page
+// Description: Tests the secondary pfd page
 //------------------------------------------------------------------------------
-#ifndef	__Eaagles_Instruments_EngPage_H__
+#ifndef __Eaagles_Instruments_EngPage_H__
 #define __Eaagles_Instruments_EngPage_H__
 
 #include "openeaagles/basicGL/Page.h"
@@ -12,13 +12,13 @@
 namespace Eaagles {
 namespace Instruments {
 
-class EngPage : public BasicGL::Page {
-
+class EngPage : public BasicGL::Page
+{
    DECLARE_SUBCLASS(EngPage,BasicGL::Page)
 
 public:
 
-    EngPage();    
+    EngPage();
 
     static const int NUM_ENG = 4;
 

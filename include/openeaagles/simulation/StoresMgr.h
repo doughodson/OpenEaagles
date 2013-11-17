@@ -155,7 +155,7 @@ private:
 };
 
 //------------------------------------------------------------------------------
-// Class:	SimpleStoresMgr
+// Class: SimpleStoresMgr
 // Description: Simple (example) external stores management systems
 //
 // Form name: StoresMgr

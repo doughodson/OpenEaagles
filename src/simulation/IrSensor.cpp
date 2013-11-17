@@ -373,7 +373,7 @@ bool IrSensor::calculateIrQueryReturn(IrQueryMsg* const msg)
          outMsg->setSendingSensor(msg->getSendingSensor());
 
          // probably unnecessary - should be default val
-         outMsg->setQueryMergeStatus(IrQueryMsg::NOT_MERGED);	// FAB
+         outMsg->setQueryMergeStatus(IrQueryMsg::NOT_MERGED);   // FAB
 
          msg->getSendingSensor()->addStoredMessage(outMsg);
       }

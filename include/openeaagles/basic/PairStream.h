@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // Class: PairStream
 //------------------------------------------------------------------------------
-#ifndef	__Eaagles_Basic_PairStream_H__
+#ifndef __Eaagles_Basic_PairStream_H__
 #define __Eaagles_Basic_PairStream_H__
 
 #include "openeaagles/basic/List.h"

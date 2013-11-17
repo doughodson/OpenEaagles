@@ -83,7 +83,7 @@ public:
       ) const;
 
 protected:
-   short**	columns;                // Array of data columns (values in meters)
+   short**  columns;                // Array of data columns (values in meters)
    double   latSpacing;             // Spacing between latitude points (degs)
    double   lonSpacing;             // Spacing between longitude points (degs)
    unsigned int nptlat;             // Number of points in latitude (i.e., number of elevations per column)

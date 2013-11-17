@@ -342,7 +342,6 @@ bool TargetData::setSlotVelocity(const Basic::Number* const msg)
    return ok;
 }
 
-
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
@@ -351,78 +350,77 @@ Basic::Object* TargetData::getSlotByIndex(const int si)
     return BaseClass::getSlotByIndex(si);
 }
 
-
 //------------------------------------------------------------------------------
 // serialize
 //------------------------------------------------------------------------------
 std::ostream& TargetData::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
-	int j = 0;
-	if ( !slotsOnly ) {
-		sout << "( " << getFormName() << std::endl;
-		j = 4;
-	}
+    int j = 0;
+    if ( !slotsOnly ) {
+        sout << "( " << getFormName() << std::endl;
+        j = 4;
+    }
 
-	BaseClass::serialize(sout,i+j,true);
+    BaseClass::serialize(sout,i+j,true);
 
-	indent(sout,i+j);
-	sout << "enabled: " << (isEnabled() ? "true" : "false")  << std::endl;
+    indent(sout,i+j);
+    sout << "enabled: " << (isEnabled() ? "true" : "false")  << std::endl;
 
-	indent(sout,i+j);
-	sout << "completed: " << (isCompleted() ? "true" : "false")  << std::endl;
+    indent(sout,i+j);
+    sout << "completed: " << (isCompleted() ? "true" : "false")  << std::endl;
 
-   {
-      const Basic::String* s = getWpnType();
-      if (s != 0) {
-	indent(sout,i+j);
-	      sout << "weaponType: " << s  << std::endl;
-      }
-   }
+    {
+        const Basic::String* s = getWpnType();
+        if (s != 0) {
+            indent(sout,i+j);
+            sout << "weaponType: " << s  << std::endl;
+        }
+    }
 
-	indent(sout,i+j);
-	sout << "quantity: " << getQuantity()  << std::endl;
+    indent(sout,i+j);
+    sout << "quantity: " << getQuantity()  << std::endl;
 
-	indent(sout,i+j);
-	sout << "manualAssign: " <<  (getManualAssign() ? "true" : "false")  << std::endl;
+    indent(sout,i+j);
+    sout << "manualAssign: " <<  (getManualAssign() ? "true" : "false")  << std::endl;
 
-   {
-      unsigned int st = getStickType();
-      if (st == MIDPOINT) {
-	indent(sout,i+j);
-         sout << "stickType: " << "MIDPOINT" << std::endl;
-      }
-      else if (st == LEADING_EDGE) {
-         indent(sout,i+j);
-         sout << "stickType: " << "LEADING_EDGE" << std::endl;
-      }
-   }
+    {
+        unsigned int st = getStickType();
+        if (st == MIDPOINT) {
+            indent(sout,i+j);
+            sout << "stickType: " << "MIDPOINT" << std::endl;
+        }
+        else if (st == LEADING_EDGE) {
+            indent(sout,i+j);
+            sout << "stickType: " << "LEADING_EDGE" << std::endl;
+        }
+    }
 
-	indent(sout,i+j);
-	sout << "stickDistance:  ( Feet " << getStickDistance()  << " )"  << std::endl;
+    indent(sout,i+j);
+    sout << "stickDistance:  ( Feet " << getStickDistance()  << " )"  << std::endl;
 
-	indent(sout,i+j);
-	sout << "interval: ( MilliSeconds " << getInterval()  << " )"     << std::endl;
+    indent(sout,i+j);
+    sout << "interval: ( MilliSeconds " << getInterval()  << " )"     << std::endl;
 
-	indent(sout,i+j);
-	sout << "maxMissDistance: ( Feet " << getMaxMissDistance()  << " )"  << std::endl;
+    indent(sout,i+j);
+    sout << "maxMissDistance: ( Feet " << getMaxMissDistance()  << " )"  << std::endl;
 
-	indent(sout,i+j);
-	sout << "armDelay: ( Seconds " << getArmDelay()  << " )"     << std::endl;
+    indent(sout,i+j);
+    sout << "armDelay: ( Seconds " << getArmDelay()  << " )"     << std::endl;
 
-	indent(sout,i+j);
-	sout << "angle: ( Degrees  " << getAngle()  << " )"        << std::endl;
+    indent(sout,i+j);
+    sout << "angle: ( Degrees  " << getAngle()  << " )"        << std::endl;
 
-	indent(sout,i+j);
-	sout << "azimuth: ( Degrees " << getAzimuth()  << " )"      << std::endl;
+    indent(sout,i+j);
+    sout << "azimuth: ( Degrees " << getAzimuth()  << " )"      << std::endl;
 
-	indent(sout,i+j);
-	sout << "velocity: " << getVelocity()     << std::endl;
-	
-	if ( !slotsOnly ) {
-		indent(sout,i);
-		sout << ")" << std::endl;
-	}
-	return sout;
+    indent(sout,i+j);
+    sout << "velocity: " << getVelocity()     << std::endl;
+
+    if ( !slotsOnly ) {
+        indent(sout,i);
+        sout << ")" << std::endl;
+    }
+    return sout;
 }
 
 } // End Simulation namespace

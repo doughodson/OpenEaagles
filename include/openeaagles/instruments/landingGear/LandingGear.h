@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // Class: LandingGear
 //------------------------------------------------------------------------------
-#ifndef	__Eaagles_Instruments_LandingGear_H__
+#ifndef __Eaagles_Instruments_LandingGear_H__
 #define __Eaagles_Instruments_LandingGear_H__
 
 #include "openeaagles/instruments/Instrument.h"
@@ -18,7 +18,8 @@ namespace Instruments {
 //      setGearDownValue() (units)
 //      setGearUpValue()   (units)
 //------------------------------------------------------------------------------
-class LandingGear : public Instrument {
+class LandingGear : public Instrument
+{
     DECLARE_SUBCLASS(LandingGear,Instrument)
 
 public:

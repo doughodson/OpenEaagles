@@ -25,8 +25,8 @@ const LCreal Time::M2S  =  60.0f;                  // Minutes => Seconds
 const LCreal Time::S2M  = (1.0f / 60.0f);          // Seconds => Minutes
 const LCreal Time::H2S  = 3600.0f;                 // Hours => Seconds
 const LCreal Time::S2H  = (1.0f / 3600.0f);        // Seconds => Hours
-const LCreal Time::D2M  = 1440.0f;				   // Days => Minutes
-const LCreal Time::M2D  = (1.0f / 1440.0f);         // Minutes => Days
+const LCreal Time::D2M  = 1440.0f;                 // Days => Minutes
+const LCreal Time::M2D  = (1.0f / 1440.0f);        // Minutes => Days
 const LCreal Time::D2S  = 86400.0f;                // Days => Seconds
 const LCreal Time::S2D  = (1.0f / 86400.0f);       // Seconds => Days
 
@@ -64,7 +64,7 @@ std::ostream& Time::serialize(std::ostream& sout, const int i, const bool slotsO
 {
     int j = 0;
     if (!slotsOnly) {
-    	indent(sout, i);
+        indent(sout, i);
         sout << "( " << getFormName() << std::endl;
         j = 4;
     }

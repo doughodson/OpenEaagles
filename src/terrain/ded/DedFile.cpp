@@ -335,13 +335,13 @@ bool DedFile::getFileHeaders( std::istream& in )
             for (unsigned int i = 0; i < fstat->ncell && ok; i++) {
                cells[i] = new DedCellHdr();
                in.read( (char*) cells[i], sizeof(DedCellHdr) );
-	            if (in.fail() || in.gcount() < sizeof(DedCellHdr)) {
-	               if (isMessageEnabled(MSG_ERROR)) {
-	               std::cerr << "DedFile::getFileHeaders: invalid cell headers.";
-	               std::cerr << " in.fail:" << in.fail() << " in.gcount:" << in.gcount() << " < size?:" << sizeof(DedCellHdr) << std::endl;
-                  }
+               if (in.fail() || in.gcount() < sizeof(DedCellHdr)) {
+                   if (isMessageEnabled(MSG_ERROR)) {
+                       std::cerr << "DedFile::getFileHeaders: invalid cell headers.";
+                       std::cerr << " in.fail:" << in.fail() << " in.gcount:" << in.gcount() << " < size?:" << sizeof(DedCellHdr) << std::endl;
+                   }
                   ok = false;
-	            }
+               }
 
                // Byte-swap
                if (ok) {

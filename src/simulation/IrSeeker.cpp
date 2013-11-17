@@ -379,7 +379,7 @@ unsigned int TdbIr::processPlayers(Basic::PairStream* const players)
    //if (irSensor == 0) 
       //return 0;
 
-   // FAB - limit is +/- (1/2 FORtheta + 1/2 IFOVtheta) (but both get..Theta() actually return 1/2 Theta)		   
+   // FAB - limit is +/- (1/2 FORtheta + 1/2 IFOVtheta) (but both get..Theta() actually return 1/2 Theta)
    //LCreal fieldOfRegardTheta = irSensor->getFieldOfRegardTheta() + irSensor->getIFOVTheta();
    //LCreal maxRange = irSensor->getMaximumRange();
 

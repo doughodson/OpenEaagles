@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 // Class: Runway
-// Base class:	Basic::Object -> Basic::String -> Record -> Runway
+// Base class: Basic::Object -> Basic::String -> Record -> Runway
 //
 // Description: Access to the DAFIF Airport/Runway records.
 //

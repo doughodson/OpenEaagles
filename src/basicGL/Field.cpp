@@ -418,7 +418,7 @@ bool Field::onBackSpace()
 
 //------------------------------------------------------------------------------
 // cursor() -- Returns true if text cursor should be seen within this
-//	       object and the position of the cursor. 
+//             object and the position of the cursor. 
 //------------------------------------------------------------------------------
 bool Field::cursor(int* l, int* c) const
 {
@@ -850,7 +850,7 @@ std::ostream& Field::serialize(std::ostream& sout, const int i, const bool slots
 
     if ( width() > 0) {
         indent(sout,i+j);
-        sout << "width: "	<< (unsigned int)width()	<< std::endl;
+        sout << "width: " << (unsigned int)width() << std::endl;
     }
 
     if ( isHighLighted() ) {

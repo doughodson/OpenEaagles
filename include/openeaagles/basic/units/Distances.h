@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Classes:  Distance
+// Classes: Distance
 // Base class:  Object -> Number -> Distance
 //              Object -> Number -> Distance -> Meters
 //              Object -> Number -> Distance -> CentiMeters
@@ -17,16 +17,16 @@
 //
 // Public methods (Defined in Distance, and inherited by all derived classes):
 //
-//	    set(const LCreal v)
-//		    Sets a Distance derived instance with an LCreal.
+//     set(const LCreal v)
+//        Sets a Distance derived instance with an LCreal.
 //
-//	    set(const Distance& n)
-//		    Sets, and converts if necessary, a Distance derived instance with
-//		    another Distance derived instance.
+//     set(const Distance& n)
+//        Sets, and converts if necessary, a Distance derived instance with
+//        another Distance derived instance.
 //
-//	    LCreal convert(const Distance& n)
-//		    Converts the value of a Distance derived instance into
-//		    the units of another Distance derived instance.
+//     LCreal convert(const Distance& n)
+//        Converts the value of a Distance derived instance into
+//        the units of another Distance derived instance.
 //
 //
 // Conversion routines:
@@ -70,7 +70,6 @@
 namespace Eaagles {
 namespace Basic {
 
-
 //------------------------------------------------------------------------------
 // Class:  Distance
 // Base class:  Object -> Number -> Distance
@@ -78,20 +77,20 @@ namespace Basic {
 //               equivalent to an instance of Meters with its value equal
 //               to 1.0.
 //------------------------------------------------------------------------------
-class Distance : public Number  
+class Distance : public Number
 {
     DECLARE_SUBCLASS(Distance, Number)
 
 public:
-   Distance();
-   Distance(const LCreal value);
+    Distance();
+    Distance(const LCreal value);
 
-      void set(const LCreal v)      { val = v; }
-      void set(const Distance& n) { val = fromDistance(n.toDistance()); }
+    void set(const LCreal v)      { val = v; }
+    void set(const Distance& n) { val = fromDistance(n.toDistance()); }
 
-      virtual LCreal toDistance() const = 0;
-      virtual LCreal fromDistance(const LCreal a) const = 0;  
-      LCreal convert(const Distance& n) { return fromDistance(n.toDistance()); }
+    virtual LCreal toDistance() const = 0;
+    virtual LCreal fromDistance(const LCreal a) const = 0;  
+    LCreal convert(const Distance& n) { return fromDistance(n.toDistance()); }
 
 
     // Conversions between distances
@@ -148,12 +147,12 @@ inline std::ostream& operator<<(std::ostream& sout, const Distance& n)
 
 
 //------------------------------------------------------------------------------
-// Class:  Meters
+// Class: Meters
 // Base class:  Object -> Number -> Distance -> Meters
 // Description:  An instance of Meters with its value equal to 1.0 is one
 //               base unit for distances.
 //------------------------------------------------------------------------------
-class Meters : public Distance  
+class Meters : public Distance
 {
     DECLARE_SUBCLASS(Meters, Distance)
 

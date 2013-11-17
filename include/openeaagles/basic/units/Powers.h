@@ -16,18 +16,18 @@
 //
 // Public methods (Defined in Power, and inherited by all derived classes):
 //
-//	    set(const LCreal v)
-//		    Sets a Power derived instance with an LCreal.
+//     set(const LCreal v)
+//        Sets a Power derived instance with an LCreal.
 //
-//	    set(const Power& n)
-//		    Sets, and converts if necessary, a Power derived instance with
-//		    another Power derived instance.
+//     set(const Power& n)
+//        Sets, and converts if necessary, a Power derived instance with
+//        another Power derived instance.
 //
-//	    LCreal convert(const Power& n)
-//		    Converts the value of a Power derived instance into
-//		    the units of another Power derived instance.
+//     LCreal convert(const Power& n)
+//        Converts the value of a Power derived instance into
+//        the units of another Power derived instance.
 //
-//	    Conversion routines:
+//     Conversion routines:
 //        static LCreal kiloWattsToWatts(const LCreal v)       { return v * KW2W; }
 //        static LCreal kiloWattsToHorsepower(const LCreal v)  { return (v * KW2W) * W2HP; }
 //        static LCreal kiloWattsToMilliWatts( const LCreal v) { return (v * KW2W) * W2MW; }
@@ -44,18 +44,18 @@
 //     No decibelWatts or decibelMilliWatts conversions at this time.  We can add them later
 //     if needed.                  
 //
-//	    Output stream operator: >>
-//		    ostream& operator<<(ostream& sout, const Power& n)
-//			 Sends "( <the Power derived instance class name and value> )"
-//			 to the output stream.
+//     Output stream operator: >>
+//        ostream& operator<<(ostream& sout, const Power& n)
+//        Sends "( <the Power derived instance class name and value> )"
+//        to the output stream.
 //
 //
 // Public methods (For classes:  KiloWatts, Watts, Horsepower, DecibelWatts, 
 //                 DecibelMilliWatts):
 //
-//	    LCreal convertStatic(const Power& n)
-//		    Static function to convert the given Power derived 
-//		    instance into the units of another Power derived class.
+//     LCreal convertStatic(const Power& n)
+//        Static function to convert the given Power derived 
+//        instance into the units of another Power derived class.
 //
 //----------------------------------------------------------------------------
 #ifndef __Eaagles_Basic_Powers_H__
@@ -106,7 +106,7 @@ public:
     virtual LCreal toPower() const = 0;
     virtual LCreal fromPower(const LCreal a) const = 0;
     LCreal convert(const Power& n) { return fromPower(n.toPower()); }
-	
+
     // Conversions between Powers 
     static LCreal kiloWattsToWatts(const LCreal v)       { return v * KW2W; }
     static LCreal kiloWattsToHorsepower(const LCreal v)  { return (v * KW2W) * W2HP; }
@@ -132,7 +132,7 @@ public:
 
 
 inline std::ostream& operator<<(std::ostream& sout, const Power& n)
-	    { sout << "( " << n.getFormName() << " " << n.getReal() << " )"; return sout; }
+    { sout << "( " << n.getFormName() << " " << n.getReal() << " )"; return sout; }
 
 
 //----------------------------------------------------------------------------
@@ -231,7 +231,7 @@ public:
     static LCreal convertStatic(const Power &n)     { return (LCreal)(10.0 * lcLog10(n.toPower())); }
     virtual LCreal toPower() const                  { return  lcPow(LCreal(10.0), LCreal(val/10.0)); }
     virtual LCreal fromPower(const LCreal a) const  { return 10.0f * lcLog10(a) ; }
-	    
+
 };
 
 //----------------------------------------------------------------------------
@@ -251,7 +251,7 @@ public:
     static LCreal convertStatic(const Power &n)     { return (LCreal)(10.0 * lcLog10(n.toPower() * W2MW)); }
     virtual LCreal toPower() const                  { return  MW2W * lcPow(LCreal(10.0), LCreal(val/10.0)); }
     virtual LCreal fromPower(const LCreal a) const  { return (10.0f * lcLog10(a * W2MW)); }
-	  
+
 };
 
 } // End Basic namespace

@@ -13,7 +13,7 @@ BEGIN_SLOTTABLE(ColorGradient)
 END_SLOTTABLE(ColorGradient)
 
 BEGIN_SLOT_MAP(ColorGradient)
-	ON_SLOT(1, setSlotColors, Basic::PairStream)
+    ON_SLOT(1, setSlotColors, Basic::PairStream)
 END_SLOT_MAP()
 
 ColorGradient::ColorGradient()
@@ -45,20 +45,20 @@ void ColorGradient::copyData(const ColorGradient& org, const bool cc)
 //------------------------------------------------------------------------------
 void ColorGradient::deleteData()
 {
-	if (myColors != 0) {
-		myColors->unref();
-		myColors = 0;
-	}
+    if (myColors != 0) {
+        myColors->unref();
+        myColors = 0;
+    }
 }
 
 // set our slot colors via a pairstream
 bool ColorGradient::setSlotColors(Basic::PairStream* const newStream)
 {
-	if (myColors != 0) {
-		myColors->unref();
-		myColors = 0;
-	}
-	if (newStream != 0) {
+    if (myColors != 0) {
+        myColors->unref();
+        myColors = 0;
+    }
+    if (newStream != 0) {
         myColors = newStream;
         myColors->ref();
     }
@@ -67,15 +67,15 @@ bool ColorGradient::setSlotColors(Basic::PairStream* const newStream)
 
 Basic::Color* ColorGradient::getColorByIdx(const int idx)
 {
-	Basic::Color* fCol = 0;
+    Basic::Color* fCol = 0;
 
-	if (myColors != 0) {
-		Basic::Pair* pair = myColors->getPosition(idx);
-		if (pair != 0) {
-			fCol = dynamic_cast<Basic::Color*>(pair->object());
-		}
-	}
-	return fCol;
+    if (myColors != 0) {
+        Basic::Pair* pair = myColors->getPosition(idx);
+        if (pair != 0) {
+            fCol = dynamic_cast<Basic::Color*>(pair->object());
+        }
+    }
+    return fCol;
 }
 
 //------------------------------------------------------------------------------

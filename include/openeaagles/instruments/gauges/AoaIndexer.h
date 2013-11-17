@@ -12,7 +12,7 @@
 //      green -> in limit area
 //      yellow -> under limit area
 //------------------------------------------------------------------------------
-#ifndef	__Eaagles_Instruments_AoAIndexer_H__
+#ifndef __Eaagles_Instruments_AoAIndexer_H__
 #define __Eaagles_Instruments_AoAIndexer_H__
 
 #include "openeaagles/instruments/Instrument.h"
@@ -20,8 +20,8 @@
 namespace Eaagles {
 namespace Instruments {
 
-class AoAIndexer : public Instrument {
-
+class AoAIndexer : public Instrument
+{
     DECLARE_SUBCLASS(AoAIndexer,Instrument)
 
 public:

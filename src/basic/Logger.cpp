@@ -137,7 +137,7 @@ bool Logger::openFile()
         len += filename->len(); // add the length of the file name
         len += 4;  // add characters for possible version number, "_V99"
         len += 1;  // Add one for the null(0) at the end of the string
-		const size_t NAME_LENGTH = len;
+        const size_t NAME_LENGTH = len;
 
         char* fullname = new char[NAME_LENGTH];
         fullname[0] = '\0';

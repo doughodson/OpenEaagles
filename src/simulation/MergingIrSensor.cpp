@@ -168,7 +168,7 @@ void MergingIrSensor::mergeIrReturns()
                     if (nextMsg->getSignalToNoiseRatio() > 
                        nextMsg->getBackgroundNoiseRatio()) {
                           nextRatio = nextMsg->getSignalToNoiseRatio() +
-                             nextMsg->getBackgroundNoiseRatio();		
+                             nextMsg->getBackgroundNoiseRatio();
                     } else {
                        if (nextMsg->getSignalToNoiseRatio() < 0) {
                           nextRatio = -nextMsg->getSignalToNoiseRatio() -
@@ -188,19 +188,19 @@ void MergingIrSensor::mergeIrReturns()
 
                     //combine line-of-sight vector using weights
                     currentMsg->setLosVec((currentMsg->getLosVec() * currentWeight) +
-                       (nextMsg->getLosVec() * nextWeight)	);
+                       (nextMsg->getLosVec() * nextWeight));
 
                     // combine position 
                     currentMsg->setPosVec((currentMsg->getPosVec() * currentWeight) +
-                       (nextMsg->getPosVec() * nextWeight)	);
+                       (nextMsg->getPosVec() * nextWeight));
 
                     // combine velocity
                     currentMsg->setVelocityVec((currentMsg->getVelocityVec() * currentWeight) +
-                       (nextMsg->getVelocityVec() * nextWeight)	);
+                       (nextMsg->getVelocityVec() * nextWeight));
 
                     // combine acceleration 
                     currentMsg->setAccelVec((currentMsg->getAccelVec() * currentWeight) +
-                       (nextMsg->getAccelVec() * nextWeight)	);
+                       (nextMsg->getAccelVec() * nextWeight));
 
                     // combine signal to noise ratios. 
                     sumRatio = sumRatio - currentMsg->getBackgroundNoiseRatio();

@@ -15,7 +15,7 @@ class Player;
 class Track;
 
 //------------------------------------------------------------------------------
-// Class:	Missile
+// Class: Missile
 // Description: Base class for missiles; with a simple, default missile model
 //
 // Form name: Missile

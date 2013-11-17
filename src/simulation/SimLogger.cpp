@@ -652,9 +652,9 @@ void SimLogger::NewPlayer::deleteData()
 const char* SimLogger::NewPlayer::getDescription()
 {
     if (msg == 0) {
-	
+
         std::stringstream sout;
-        
+
         // Time & Event message
         makeTimeMsg(sout);
         sout << " ADDED_PLAYER:\n";
@@ -722,9 +722,9 @@ void SimLogger::LogPlayerData::deleteData()
 const char* SimLogger::LogPlayerData::getDescription()
 {
     if (msg == 0) {
-	
+
         std::stringstream sout;
-        
+
         // Time & Event message
         makeTimeMsg(sout);
         sout << " PLAYER_DATA:\n";
@@ -804,9 +804,9 @@ void SimLogger::RemovePlayer::deleteData()
 const char* SimLogger::RemovePlayer::getDescription()
 {
     if (msg == 0) {
-	
+
         std::stringstream sout;
-        
+
         // Time & Event message
         makeTimeMsg(sout);
         sout << " REMOVED_PLAYER:\n";
@@ -872,9 +872,9 @@ void SimLogger::WeaponRelease::deleteData()
 const char* SimLogger::WeaponRelease::getDescription()
 {
     if (msg == 0) {
-	
+
         std::stringstream sout;
-        
+
         // Time & Event message
         makeTimeMsg(sout);
         sout << " WEAPON_RELEASE:";
@@ -940,9 +940,9 @@ void SimLogger::GunFired::deleteData()
 const char* SimLogger::GunFired::getDescription()
 {
     if (msg == 0) {
-	
+
         std::stringstream sout;
-        
+
         // Time & Event message
         makeTimeMsg(sout);
         sout << " GUN FIRED:";
@@ -1001,9 +1001,9 @@ void SimLogger::KillEvent::deleteData()
 const char* SimLogger::KillEvent::getDescription()
 {
     if (msg == 0) {
-	
+
         std::stringstream sout;
-        
+
         // Time & Event message
         makeTimeMsg(sout);
         sout << " KILL_EVENT:";
@@ -1074,9 +1074,9 @@ void SimLogger::DetonationEvent::deleteData()
 const char* SimLogger::DetonationEvent::getDescription()
 {
     if (msg == 0) {
-	
+
         std::stringstream sout;
-        
+
         // Time & Event message
         makeTimeMsg(sout);
         sout << " WPN_DET_EVENT:";
@@ -1166,9 +1166,9 @@ void SimLogger::NewTrack::deleteData()
 const char* SimLogger::NewTrack::getDescription()
 {
     if (msg == 0) {
-	
+
         std::stringstream sout;
-        
+
         // Time & Event message
         makeTimeMsg(sout);
         sout << " ADDED_TRACK:\n";
@@ -1276,9 +1276,9 @@ void SimLogger::UpdateTrack::deleteData()
 const char* SimLogger::UpdateTrack::getDescription()
 {
     if (msg == 0) {
-	
+
         std::stringstream sout;
-        
+
         // Time & Event message
         makeTimeMsg(sout);
         sout << " UPDATE_TRACK:\n";
@@ -1385,9 +1385,9 @@ void SimLogger::RemovedTrack::deleteData()
 const char* SimLogger::RemovedTrack::getDescription()
 {
     if (msg == 0) {
-	
+
         std::stringstream sout;
-        
+
         // Time & Event message
         makeTimeMsg(sout);
         sout << " REMOVE_TRACK:\n";
@@ -1495,9 +1495,9 @@ void SimLogger::NewRwrTrack::deleteData()
 const char* SimLogger::NewRwrTrack::getDescription()
 {
     if (msg == 0) {
-	
+
         std::stringstream sout;
-        
+
         // Time & Event message
         makeTimeMsg(sout);
         sout << " ADDED_RWR_TRACK:\n";
@@ -1608,9 +1608,9 @@ void SimLogger::UpdateRwrTrack::deleteData()
 const char* SimLogger::UpdateRwrTrack::getDescription()
 {
     if (msg == 0) {
-	
+
         std::stringstream sout;
-        
+
         // Time & Event message
         makeTimeMsg(sout);
         sout << " UPDATE_RWR_TRACK:\n";
@@ -1721,9 +1721,9 @@ void SimLogger::RemovedRwrTrack::deleteData()
 const char* SimLogger::RemovedRwrTrack::getDescription()
 {
     if (msg == 0) {
-	
+
         std::stringstream sout;
-        
+
         // Time & Event message
         makeTimeMsg(sout);
         sout << " REMOVE_RWR_TRACK:\n";

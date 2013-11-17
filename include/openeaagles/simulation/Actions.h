@@ -74,7 +74,7 @@ private:
 
 
 //------------------------------------------------------------------------------
-// Class:	ActionImagingSar
+// Class: ActionImagingSar
 // Description: SAR capture, ATR run and Image download
 // Form name: ActionImagingSar
 // Slots:

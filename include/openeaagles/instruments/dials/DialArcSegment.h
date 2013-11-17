@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
-// Class:	DialArcSegment
+// Class: DialArcSegment
 // Base class: BasicGL::Graphic -> AnalogDial -> DialArcSegment
 //
 // Description: An arc or circle that will be drawn according to the start
 // angle and sweep angle set in AnalogDial.  
 // Input:  UPDATE_INSTRUMENTS (from Instrument) 
 //------------------------------------------------------------------------------
-#ifndef	__Eaagles_Instruments_DialArcSegment_H__
+#ifndef __Eaagles_Instruments_DialArcSegment_H__
 #define __Eaagles_Instruments_DialArcSegment_H__
 
 #include "openeaagles/instruments/dials/AnalogDial.h"

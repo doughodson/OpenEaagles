@@ -144,8 +144,8 @@ void RfSystem::deleteData()
 
 void RfSystem::reset()
 {
-	BaseClass::reset();
-	
+   BaseClass::reset();
+
    // ---
    // Do we need to find the antenna?
    // ---
@@ -167,7 +167,7 @@ void RfSystem::reset()
       }
    }
     
-	// ---
+   // ---
    // Initialize players of interest
    // ---
    processPlayersOfInterest();
@@ -416,15 +416,15 @@ const Basic::String* RfSystem::getAntennaName() const
 // Returns true if the received emission is in-band
 bool RfSystem::affectsRfSystem(Emission* const em) const
 {
-	double emFreq = em->getFrequency();
-	double emBandwidth = em->getBandwidth();
-	double sysFreq = getFrequency();
-	double sysBandwidth = getBandwidth();
-	double emFreqStart = emFreq - 0.5f * emBandwidth;
-	double emFreqEnd = emFreq + 0.5f * emBandwidth;
-	double sysFreqStart = sysFreq - 0.5f * sysBandwidth;
-	double sysFreqEnd = sysFreq + 0.5f * sysBandwidth;
-	return (emFreqEnd >= sysFreqStart && emFreqStart <= sysFreqEnd);
+   double emFreq = em->getFrequency();
+   double emBandwidth = em->getBandwidth();
+   double sysFreq = getFrequency();
+   double sysBandwidth = getBandwidth();
+   double emFreqStart = emFreq - 0.5f * emBandwidth;
+   double emFreqEnd = emFreq + 0.5f * emBandwidth;
+   double sysFreqStart = sysFreq - 0.5f * sysBandwidth;
+   double sysFreqEnd = sysFreq + 0.5f * sysBandwidth;
+   return (emFreqEnd >= sysFreqStart && emFreqStart <= sysFreqEnd);
 }
 
 //------------------------------------------------------------------------------

@@ -97,12 +97,12 @@ private:
     const Basic::String* rootDir;   // root directory for JSBSim models
     const Basic::String* model;     // JSBSim model
 
-    LCreal	pitchTrimPos;		// +/- 1.0
-    LCreal	pitchTrimRate;		// maxVal(1.0) per sec
-    LCreal	pitchTrimSw;
-    LCreal	rollTrimPos;		// +/- 1.0
-    LCreal	rollTrimRate;		// maxVal(1.0) per sec
-    LCreal	rollTrimSw;
+    LCreal pitchTrimPos;    // +/- 1.0
+    LCreal pitchTrimRate;   // maxVal(1.0) per sec
+    LCreal pitchTrimSw;
+    LCreal rollTrimPos;     // +/- 1.0
+    LCreal rollTrimRate;    // maxVal(1.0) per sec
+    LCreal rollTrimSw;
 
     bool        headingHoldOn;
     bool        altitudeHoldOn;

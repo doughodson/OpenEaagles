@@ -663,8 +663,7 @@ int AirportLoader::queryByChannel(const int chan)
 // queryAirport() -- find airports within search area with minimum runway
 // length and airport type.
 //------------------------------------------------------------------------------
-int AirportLoader::queryAirport(const Airport::AirportType type, 
-				  const float minRwLen)
+int AirportLoader::queryAirport(const Airport::AirportType type, const float minRwLen)
 {
    double mr2(FLT_MAX);
    if (mrng > 0.0f) mr2 = mrng*mrng;

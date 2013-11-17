@@ -16,8 +16,8 @@ namespace Simulation {
 class Image;
 
 //------------------------------------------------------------------------------
-// Class:	Sar
-// Base class:	Basic::Object -> ... -> RfSensor -> Radar -> Sar
+// Class: Sar
+// Base class: Basic::Object -> ... -> RfSensor -> Radar -> Sar
 //
 // Description: Generic SAR
 // Form name: Sar

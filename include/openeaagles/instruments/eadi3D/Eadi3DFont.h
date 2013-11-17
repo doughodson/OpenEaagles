@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
-// Class:  Eadi3DFont
+// Class: Eadi3DFont
 //------------------------------------------------------------------------------
-#ifndef	__Eaagles_Instruments_Eadi3DFont_H__
+#ifndef __Eaagles_Instruments_Eadi3DFont_H__
 #define __Eaagles_Instruments_Eadi3DFont_H__
 
 #include "openeaagles/basicGL/Font.h"
@@ -14,7 +14,6 @@ namespace Instruments {
 //
 // Description:  Eadi3D font
 //
-//
 // public methods (member functions):
 //      (All of the classes derived from Font have the same public methods.)
 //
@@ -22,7 +21,8 @@ namespace Instruments {
 //          Produces the stroke font map.
 //
 //------------------------------------------------------------------------------
-class Eadi3DFont : public BasicGL::Font {
+class Eadi3DFont : public BasicGL::Font
+{
     DECLARE_SUBCLASS(Eadi3DFont,BasicGL::Font)
 
 public:

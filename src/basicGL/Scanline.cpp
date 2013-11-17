@@ -418,7 +418,7 @@ bool Scanline::addPolygon(const Polygon* const polygon)
 
       // Create the edges and store them in a Temporary Edge Table
       int  nTET = 0;
-      Edge* tet[100];	// temp edge table
+      Edge* tet[100];     // temp edge table
       {
          const osg::Vec3* cvect = clipPolygon->getVertices();
          const osg::Vec3* cnorms = clipPolygon->getNormals();
@@ -565,7 +565,7 @@ const Scanline::PolyData* Scanline::step(const int x)
       }
    }
 
-   return curPoly;	// return the top polygon
+   return curPoly;    // return the top polygon
 }
 
 //------------------------------------------------------------------------------

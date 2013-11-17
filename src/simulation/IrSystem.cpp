@@ -116,7 +116,7 @@ void IrSystem::updateData(const LCreal dt)
       if (p != 0) {
          setSeeker( p );
          // FAB - not needed - esp if multiple sensors on a seeker.
-		 //getSeeker()->setSystem(this);
+         //getSeeker()->setSystem(this);
       }
       
       if (getSeeker() == 0) {

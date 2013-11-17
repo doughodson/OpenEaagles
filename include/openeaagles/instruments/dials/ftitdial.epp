@@ -3,9 +3,9 @@
 // Simple dial pointer, which is the pointer that goes around the dial
 ftit:   
 ( DialPointer
-	// We have a more complex scaling table here than in speedbrake, because we have a non-linear scale.  This is because we are using a 
-	// texture, and the ftit dial is non-linear.  So we set up our table to rotate to the appropriate degree based on the temperature
-	// given
+    // We have a more complex scaling table here than in speedbrake, because we have a non-linear scale.  This is because we are using a 
+    // texture, and the ftit dial is non-linear.  So we set up our table to rotate to the appropriate degree based on the temperature
+    // given
     scalingTable: ( Table1
                     // temperatures
                     x: [ 0  700  1000  1200 ]

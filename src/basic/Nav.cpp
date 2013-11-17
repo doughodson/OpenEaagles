@@ -1417,47 +1417,47 @@ bool Nav::getGeocAngle(
       double geocAngle[3]           // OUT: Geocentric Euler angles (radians) [ IPHI ITHETA IPSI ]
    )
 {
-	osg::Matrixd mat;
-	osg::Matrixd mat2;
+    osg::Matrixd mat;
+    osg::Matrixd mat2;
 
-	mat.makeRotate(geodAngle[IROLL],   osg::Y_AXIS,
-				   geodAngle[IPITCH],  osg::X_AXIS,
-				   geodAngle[IYAW],    osg::Z_AXIS);
+    mat.makeRotate(geodAngle[IROLL],   osg::Y_AXIS,
+                   geodAngle[IPITCH],  osg::X_AXIS,
+                   geodAngle[IYAW],    osg::Z_AXIS);
 
-  	mat2.makeRotate(osg::DegreesToRadians(0.0),                   osg::Y_AXIS,
-					osg::DegreesToRadians(90.0 - geodPos[ILAT]),  osg::X_AXIS,
-					osg::DegreesToRadians(geodPos[ILON]),         osg::Z_AXIS);
+    mat2.makeRotate(osg::DegreesToRadians(0.0),                   osg::Y_AXIS,
+                    osg::DegreesToRadians(90.0 - geodPos[ILAT]),  osg::X_AXIS,
+                    osg::DegreesToRadians(geodPos[ILON]),         osg::Z_AXIS);
 
-	mat = mat * mat2;
+    mat = mat * mat2;
 
-	double yawd =0,pitchd =0,rolld =0;
+    double yawd =0,pitchd =0,rolld =0;
 
-	osg::Vec3d hpVec(0.0, 1.0, 0.0);
+    osg::Vec3d hpVec(0.0, 1.0, 0.0);
 
-	hpVec = mat.transform3x3(hpVec, mat);
-	double d = std::sqrt(hpVec.x() * hpVec.x() + hpVec.y() * hpVec.y());
+    hpVec = mat.transform3x3(hpVec, mat);
+    double d = std::sqrt(hpVec.x() * hpVec.x() + hpVec.y() * hpVec.y());
 
-	yawd   = -1.0 * atan2(hpVec.x(), hpVec.y());
-	pitchd = atan2((double)hpVec.z(), d);
+    yawd   = -1.0 * atan2(hpVec.x(), hpVec.y());
+    pitchd = atan2((double)hpVec.z(), d);
 
-	osg::Vec3d rollVec(1.0, 0.0, 0.0);
+    osg::Vec3d rollVec(1.0, 0.0, 0.0);
 
-	rollVec = mat.transform3x3(rollVec, mat);
+    rollVec = mat.transform3x3(rollVec, mat);
 
-	osg::Matrixd hpMat;
-	hpMat.makeRotate(0.0,    osg::Y_AXIS,
-				     pitchd, osg::X_AXIS,
-				     yawd,   osg::Z_AXIS);
+    osg::Matrixd hpMat;
+    hpMat.makeRotate(0.0,    osg::Y_AXIS,
+                     pitchd, osg::X_AXIS,
+                     yawd,   osg::Z_AXIS);
 
-	hpMat.invert(hpMat);
+    hpMat.invert(hpMat);
 
-	rollVec = hpMat.transform3x3(rollVec, hpMat);
-	rolld    = -1.0 * atan2(rollVec.z(), rollVec.x());
-	pitchd   = -1.0 * pitchd;
+    rollVec = hpMat.transform3x3(rollVec, hpMat);
+    rolld    = -1.0 * atan2(rollVec.z(), rollVec.x());
+    pitchd   = -1.0 * pitchd;
 
-	geocAngle[IPHI]   =  rolld;
-	geocAngle[ITHETA] =  pitchd;
-	geocAngle[IPSI]   =  yawd;
+    geocAngle[IPHI]   =  rolld;
+    geocAngle[ITHETA] =  pitchd;
+    geocAngle[IPSI]   =  yawd;
    return true;
 }
 

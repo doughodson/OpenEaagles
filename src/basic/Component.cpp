@@ -471,7 +471,7 @@ const Pair* Component::findByName(const char* const slotname) const
     if (subcomponents != 0) {
 
         const char* name = slotname;
-        if (slotname[0] == '.') name++;	// remove '.' from hard names
+        if (slotname[0] == '.') name++;      // remove '.' from hard names
 
         // Copy the name up to a possible period.
         char fname[128];
@@ -562,7 +562,7 @@ Pair* Component::findByIndex(const int slotindex)
 
 //------------------------------------------------------------------------------
 // findByType() -- find one of our components by type (our children first
-//		   then grandchildren).
+//                 then grandchildren).
 //------------------------------------------------------------------------------
 const Pair* Component::findByType(const std::type_info& type) const
 {

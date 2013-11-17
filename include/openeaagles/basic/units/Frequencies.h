@@ -16,32 +16,32 @@
 //
 // Public methods (Defined in Frequency, and inherited by all derived classes):
 //
-//	    set(const LCreal v)
-//		    Sets a Frequency derived instance with an LCreal.
+//     set(const LCreal v)
+//        Sets a Frequency derived instance with an LCreal.
 //
-//	    set(const Frequency& n)
-//		    Sets, and converts if necessary, a Frequency derived instance with
-//		    another Frequency derived instance.
+//     set(const Frequency& n)
+//        Sets, and converts if necessary, a Frequency derived instance with
+//        another Frequency derived instance.
 //
-//	    LCreal convert(const Frequency& n)
-//		    Converts the value of a Frequency derived instance into
-//		    the units of another Frequency derived instance.
+//     LCreal convert(const Frequency& n)
+//        Converts the value of a Frequency derived instance into
+//        the units of another Frequency derived instance.
 //
-//	    Conversion routines:
+//     Conversion routines:
 //        Not used here, because they are all metric conversions...
 //
-//	    Output stream operator: >>
-//		    ostream& operator<<(ostream& sout, const Frequency& n)
-//			 Sends "( <the Frequency derived instance class name and value> )"
-//			 to the output stream.
+//     Output stream operator: >>
+//        ostream& operator<<(ostream& sout, const Frequency& n)
+//        Sends "( <the Frequency derived instance class name and value> )"
+//        to the output stream.
 //
 //
 // Public methods (For classes: Hertz):
 //
-//	    LCreal convertStatic(const Frequency& n)
-//		    Static function to convert the given Frequency derived
-//		    instance into the units of a specific Frequency derived
-//		    class.
+//     LCreal convertStatic(const Frequency& n)
+//        Static function to convert the given Frequency derived
+//        instance into the units of a specific Frequency derived
+//        class.
 //
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_Basic_Frequencies_H__
@@ -84,7 +84,7 @@ public:
 
     virtual LCreal toFrequency() const = 0;
     virtual LCreal fromFrequency(const LCreal a) const = 0;
-    LCreal convert(const Frequency& n) { return fromFrequency(n.toFrequency()); }	
+    LCreal convert(const Frequency& n) { return fromFrequency(n.toFrequency()); }
 
     // Conversion constants
     static const LCreal Hz2KHz;  // Hertz -> KiloHertz
@@ -99,7 +99,7 @@ public:
 
 
 inline std::ostream& operator<<(std::ostream& sout, const Frequency& n)
-	    { sout << "( " << n.getFormName() << " " << n.getReal() << " )"; return sout; }
+    { sout << "( " << n.getFormName() << " " << n.getReal() << " )"; return sout; }
 
 //------------------------------------------------------------------------------
 // Class:  Hertz

@@ -14,7 +14,7 @@ namespace Dafif { class AirportLoader; class NavaidLoader; }
 namespace Simulation {
 
 //------------------------------------------------------------------------------
-// Class:	NavRadio
+// Class: NavRadio
 // Description: General class for all navigation radio models
 // Form name: NavRadio
 //------------------------------------------------------------------------------

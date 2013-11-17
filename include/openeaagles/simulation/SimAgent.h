@@ -8,7 +8,9 @@
 
 namespace Eaagles {
 namespace Simulation { 
-	class Simulation; class Station;
+
+class Simulation;
+class Station;
 
 //------------------------------------------------------------------------------
 // Class: SimAgent
@@ -63,15 +65,15 @@ private:
 //      )
 //   } // components
 //
-//	simulation: ( Simulation
+//   simulation: ( Simulation
 //    
-//		players: {
-//		
-//			p01: ()
-//			
-//			p02: ()
-//		} // players
-//	) // simulation
+//      players: {
+//
+//         p01: ()
+//
+//         p02: ()
+//      } // players
+//   ) // simulation
 //) // Station
 
 } // End Simulation namespace

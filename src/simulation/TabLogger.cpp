@@ -598,7 +598,7 @@ const char* TabLogger::LogPlayerData::getDescription()
 {
     if (msg == 0) 
     {
-	    std::stringstream sout;
+        std::stringstream sout;
         
         if (theType != 0)
             makeTimeMsg(sout);
@@ -764,9 +764,9 @@ const char* TabLogger::LogGunActivity::getDescription()
 {
     if (msg == 0) 
     {
-	
+
         std::stringstream sout;
-        
+
         // Time & Event message
         if (theType != 0)
             makeTimeMsg(sout);
@@ -851,9 +851,9 @@ const char* TabLogger::LogWeaponActivity::getDescription()
 {
     if (msg == 0) 
     {
-	
+
         std::stringstream sout;
-        
+
         // Time & Event message
         if (theType != 0)
             makeTimeMsg(sout);
@@ -1137,9 +1137,9 @@ const char* TabLogger::LogPassiveTrack::getDescription()
 {
     if (msg == 0) 
     {
-	
+
         std::stringstream sout;
-        
+
         // Time & Event message
         if (theType != 0)
             makeTimeMsg(sout);

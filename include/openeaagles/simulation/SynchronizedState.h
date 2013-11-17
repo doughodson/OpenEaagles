@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Class:	SynchronizedState
+// Class: SynchronizedState
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_Simulation_SynchronizedState_H__
 #define __Eaagles_Simulation_SynchronizedState_H__

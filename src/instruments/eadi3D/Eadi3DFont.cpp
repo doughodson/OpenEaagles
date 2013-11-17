@@ -701,7 +701,7 @@ static float strokeFont[][1+MAX_STROKES*3] = {
     },
 
     {
-	END_OF_LIST
+        END_OF_LIST
     }
 };
 

@@ -13,36 +13,36 @@
 //
 // Public methods (Defined in Mass, and inherited by all derived classes):
 //
-//	    set(const LCreal v)
-//		    Sets an Mass derived instance with an LCreal.
+//     set(const LCreal v)
+//        Sets an Mass derived instance with an LCreal.
 //
-//	    set(const Mass& n)
-//		    Sets, and converts if necessary, an Mass derived instance with
-//		    another Mass derived instance.
+//     set(const Mass& n)
+//        Sets, and converts if necessary, an Mass derived instance with
+//        another Mass derived instance.
 //
-//	    LCreal convert(const Mass& n)
-//		    Converts the value of an Mass derived instance into
-//		    the units of another Mass derived instance.
+//     LCreal convert(const Mass& n)
+//        Converts the value of an Mass derived instance into
+//        the units of another Mass derived instance.
 //
-//	    Conversion routines:
-//	      static LCreal gramsToKiloGrams(const LCreal v)  { return v * .001f; }
+//     Conversion routines:
+//        static LCreal gramsToKiloGrams(const LCreal v)  { return v * .001f; }
 //        static LCreal gramsToSlugs(const LCreal v)      { return v * .00006852f }
 //        static LCreal kiloGramsToGrams(const LCreal v)  { return v * 1000f }
 //        static LCreal kiloGramsToSlugs(const LCreal v)  { return v * 0.06854f}
-//        static LCreal slugsToGrams(const LCreal v)      { return v * 14590f }	
+//        static LCreal slugsToGrams(const LCreal v)      { return v * 14590f }
 //        static LCreal slugsToKiloGrams(const LCreal v)  { return v * 14.59f }
 //
-//	    Output stream operator: >>
-//		    ostream& operator<<(ostream& sout, const Mass& n)
-//			 Sends "( <the Mass derived instance class name and value> )"
-//			 to the output stream.
+//     Output stream operator: >>
+//        ostream& operator<<(ostream& sout, const Mass& n)
+//        Sends "( <the Mass derived instance class name and value> )"
+//        to the output stream.
 //
 //
 // Public methods (For classes:  Grams, KiloGrams, Slugs):
 //
-//	    LCreal convertStatic(const Mass& n)
-//		    Static function to convert the given Mass derived instance
-//		    into the units of a specific Mass derived class.
+//     LCreal convertStatic(const Mass& n)
+//        Static function to convert the given Mass derived instance
+//        into the units of a specific Mass derived class.
 //
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_Basic_Masses_H__
@@ -93,13 +93,13 @@ public:
     virtual LCreal toMass() const = 0;
     virtual LCreal fromMass(const LCreal a) const = 0;
     LCreal convert(const Mass& n) const { return fromMass(n.toMass()); } 
-	
+
     // Conversions between Masss 
     static LCreal gramsToKiloGrams(const LCreal v) { return v * G2KG; }
     static LCreal gramsToSlugs(const LCreal v)     { return (v * G2KG) * KG2SL; }
     static LCreal kiloGramsToGrams(const LCreal v) { return v * KG2G; }
     static LCreal kiloGramsToSlugs(const LCreal v) { return v * KG2SL;}
-    static LCreal slugsToGrams(const LCreal v)     { return (v * SL2KG) * KG2G; }	
+    static LCreal slugsToGrams(const LCreal v)     { return (v * SL2KG) * KG2G; }
     static LCreal slugsToKiloGrams(const LCreal v) { return v * SL2KG; }
 
     // Conversion constant
@@ -113,7 +113,7 @@ public:
 
 
 inline std::ostream& operator<<(std::ostream& sout, const Mass& n)
-	{ sout << "( " << n.getFormName() << " " << n.getReal() << " )"; return sout; }
+   { sout << "( " << n.getFormName() << " " << n.getReal() << " )"; return sout; }
 
 //------------------------------------------------------------------------------
 // Class:  KiloGrams

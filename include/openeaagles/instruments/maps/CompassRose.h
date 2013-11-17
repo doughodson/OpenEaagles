@@ -12,7 +12,7 @@
 //      UPDATE_VALUE5 -> displacement
 //      UPDATE_VALUE6 -> centered or not
 //------------------------------------------------------------------------------
-#ifndef	__Eaagles_Instruments_CompassRose_H__
+#ifndef __Eaagles_Instruments_CompassRose_H__
 #define __Eaagles_Instruments_CompassRose_H__
 
 #include "openeaagles/basicGL/Graphic.h"
@@ -21,7 +21,8 @@
 namespace Eaagles {
 namespace Instruments {
 
-class CompassRose : public BasicGL::Graphic {
+class CompassRose : public BasicGL::Graphic
+{
     DECLARE_SUBCLASS(CompassRose, BasicGL::Graphic)
         
 public:

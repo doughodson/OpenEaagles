@@ -3430,7 +3430,7 @@ void Player::updateSystemPointers()
 
 //------------------------------------------------------------------------------
 // processComponents() -- process our components; make sure the are all of
-//	type Steerpoint (or derived); tell them that we are their container
+// type Steerpoint (or derived); tell them that we are their container
 //------------------------------------------------------------------------------
 void Player::processComponents(
    Basic::PairStream* const list,

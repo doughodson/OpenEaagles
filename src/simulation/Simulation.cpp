@@ -96,13 +96,13 @@ IMPLEMENT_PARTIAL_SUBCLASS(Simulation,"Simulation")
 // slot table for this class type
 //------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Simulation)
-   "players",	      //  1) All players
+   "players",        //  1) All players
    "latitude",       //  2) Ref latitude 
    "longitude",      //  3) Ref longitude
    "simulationTime", //  4) Simulation time
-   "day",	         //  5) Initial simulated day of month [ 1 .. 31 ]
-   "month",	         //  6) Initial simulated month [ 1 .. 12 ]
-   "year",	         //  7) Initial simulated year [ 1970 .. 2100 ]
+   "day",            //  5) Initial simulated day of month [ 1 .. 31 ]
+   "month",          //  6) Initial simulated month [ 1 .. 12 ]
+   "year",           //  7) Initial simulated year [ 1970 .. 2100 ]
    "airportLoader",  //  8) Airport database
    "navaidLoader",   //  9) NAVAID database
    "waypointLoader", // 10) Waypoint database
@@ -869,10 +869,10 @@ void Simulation::updateTC(const LCreal dt)
 // with the idx'th player
 //------------------------------------------------------------------------------
 void Simulation::updateTcPlayerList(
-	Basic::PairStream* const playerList,
-	const LCreal dt,
-	const unsigned int idx,
-	const unsigned int n
+   Basic::PairStream* const playerList,
+   const LCreal dt,
+   const unsigned int idx,
+   const unsigned int n
      )
 {
    if (playerList != 0) {

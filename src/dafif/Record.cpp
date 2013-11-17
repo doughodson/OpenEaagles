@@ -457,8 +457,8 @@ float Record::dsMagHeading(const char* const p)
    char ct;
    double mh = 0.0;
    if (p != 0) {
-      mh = dsAtofn(p,3);	/* units */
-      ct = *(p+3);		/* tenths */
+      mh = dsAtofn(p,3);    // units
+      ct = *(p+3);          // tenths
       if (ct != '/') mh += (float)(ct - '0')/10.0f;
    }
    return (float) mh;

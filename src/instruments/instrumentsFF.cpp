@@ -134,7 +134,7 @@ Basic::Object* instrumentsFormFunc(const char* formname)
         newform = new Button;
     }      
     // Push Button
-	 else if (strcmp(formname, PushButton::getFormName()) == 0 ) {
+    else if (strcmp(formname, PushButton::getFormName()) == 0 ) {
         newform = new PushButton;
     }      
     // Rotary Switch

@@ -113,7 +113,7 @@ void MultiActorAgent::controller(const LCreal dt)
 
             // generate an action
             Basic::Ubf::Action* action = behavior->genAction(getState(), dt);
-            if (action) {	// allow possibility of no action returned
+            if (action) { // allow possibility of no action returned
                action->execute(getActor());
                action->unref();
             }

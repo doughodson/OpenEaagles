@@ -20,7 +20,7 @@ class Player;
 
 //------------------------------------------------------------------------------
 // Class: Track
-// Base class:	Basic::Object -> Track
+// Base class: Basic::Object -> Track
 // Form name: Track
 // Description: Generic Target Track
 //------------------------------------------------------------------------------
@@ -272,7 +272,7 @@ protected:
 
 //------------------------------------------------------------------------------
 // Class: RfTrack
-// Base class:	Basic::Object -> Track -> RfTrack
+// Base class: Basic::Object -> Track -> RfTrack
 // Form name: RfTrack
 // Description: Generic R/F Target Track (onboard sensors)
 //------------------------------------------------------------------------------

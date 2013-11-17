@@ -207,24 +207,24 @@ protected:
    // Position Table
    // ---
    struct Ptbl {
-      int key;			// Offset to key
-      int keyLength;		// Length of the key field
-      int ident;		// Offset to ident
-      int identLength;		// Length of the ident field
-      int name;			// Offset to name
-      int nameLength;		// Length of the name field
-      int type;			// Offset to type
-      int typeLength;		// Length of the type field
-      int countryCode;		// Offset to country code
-      int countryLength;	// Length of the country code field
-      int stateCode;		// State/Province Code
-      int stateLength;		// Length of State/Province code field
-      int wac;			// World Area Code
-      int wacLength;		// Length of WAC field
-      int latitude;		// Offset to latitude
-      int longitude;		// Offset to longitude
-      int elevation;		// Offset to elevation
-      int magVariance;		// Offset to mag var
+      int key;             // Offset to key
+      int keyLength;       // Length of the key field
+      int ident;           // Offset to ident
+      int identLength;     // Length of the ident field
+      int name;            // Offset to name
+      int nameLength;      // Length of the name field
+      int type;            // Offset to type
+      int typeLength;      // Length of the type field
+      int countryCode;     // Offset to country code
+      int countryLength;   // Length of the country code field
+      int stateCode;       // State/Province Code
+      int stateLength;     // Length of State/Province code field
+      int wac;             // World Area Code
+      int wacLength;       // Length of WAC field
+      int latitude;        // Offset to latitude
+      int longitude;       // Offset to longitude
+      int elevation;       // Offset to elevation
+      int magVariance;     // Offset to mag var
    };
 
    const Ptbl* ptbl;    // Position table; one for each instance

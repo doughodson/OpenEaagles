@@ -56,7 +56,7 @@ namespace Simulation {
 //
 // Public member functions:
 //
-//      getRefPosition(osg::Vec2d& a)	
+//      getRefPosition(osg::Vec2d& a)
 //          Returns the current reference position vector (radians)
 //          (i.e., the center of the scan volume).
 //
@@ -142,7 +142,7 @@ public:
 public:
     ScanGimbal();
 
-    const osg::Vec2d& getRefPosition() const    { return refAngle; }	         // Returns the current reference position vector (rad)
+    const osg::Vec2d& getRefPosition() const    { return refAngle; }             // Returns the current reference position vector (rad)
     double getRefAzimuth() const                { return refAngle[AZ_IDX]; }     // Return the current reference azimuth (rad)
     double getRefElevation() const              { return refAngle[ELEV_IDX]; }   // Return the current reference elevation (rad)
 

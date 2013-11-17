@@ -45,7 +45,7 @@ BEGIN_SLOT_MAP(Route)
     ON_SLOT(1,setSlotTo,Basic::Number)
     ON_SLOT(2,setSlotAutoSequence,Basic::Number)
     ON_SLOT(3,setSlotAutoSeqDistance,Basic::Distance)
-	ON_SLOT(3,setSlotAutoSeqDistance,Basic::Number)
+    ON_SLOT(3,setSlotAutoSeqDistance,Basic::Number)
     ON_SLOT(4,setSlotWrap,Basic::Number)
 END_SLOT_MAP()
 

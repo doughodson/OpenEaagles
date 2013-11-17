@@ -57,8 +57,8 @@ class Yiq : public Color {
     DECLARE_SUBCLASS(Yiq,Color)
 
 public:
-	// components of YIQ color
-	enum { Y, I, Q };
+    // components of YIQ color
+    enum { Y, I, Q };
 
 public:
     Yiq(const LCreal y, const LCreal i, const LCreal q);

@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Class:	DialTickMarks
+// Class: DialTickMarks
 // Base class: BasicGL::Graphic -> AnalogDial -> DialTickMarks
 // 
 // Description: Handles tick marks for an analog dial, or any other general
@@ -13,7 +13,7 @@
 //      this will override the setLength() function and will use a graphic to
 //      draw.
 //------------------------------------------------------------------------------
-#ifndef	__Eaagles_Instruments_DialTickMarks_H__
+#ifndef __Eaagles_Instruments_DialTickMarks_H__
 #define __Eaagles_Instruments_DialTickMarks_H__
 
 #include "openeaagles/instruments/dials/AnalogDial.h"
@@ -21,7 +21,8 @@
 namespace Eaagles {
 namespace Instruments {
 
-class DialTickMarks : public AnalogDial {
+class DialTickMarks : public AnalogDial
+{
     DECLARE_SUBCLASS(DialTickMarks,AnalogDial)
     
 public:

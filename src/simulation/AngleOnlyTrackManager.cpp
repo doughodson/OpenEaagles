@@ -19,7 +19,7 @@ namespace Eaagles {
 namespace Simulation {
 
 //==============================================================================
-// Class:	AngleOnlyTrackManager
+// Class: AngleOnlyTrackManager
 //==============================================================================
 IMPLEMENT_PARTIAL_SUBCLASS(AngleOnlyTrackManager,"AngleOnlyTrackManager")
 
@@ -284,7 +284,7 @@ std::ostream& AngleOnlyTrackManager::serialize(std::ostream& sout, const int i, 
 
 
 //==============================================================================
-// Class:	AirAngleOnlyTrkMgr
+// Class: AirAngleOnlyTrkMgr
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(AirAngleOnlyTrkMgr,"AirAngleOnlyTrkMgr")
 
@@ -324,7 +324,7 @@ void AirAngleOnlyTrkMgr::processTrackList(const LCreal dt)
     if (ownship == 0 || dt == 0.0) return;
 
     // Make sure we have the A and B matrix
-    //if (!haveMatrixA) makeMatrixA(dt);	// not used
+    //if (!haveMatrixA) makeMatrixA(dt);   // not used
 
     // Report to Track matching matrix
     unsigned int report2TrackMatch[MAX_REPORTS][MAX_TRKS];    // Report/Track matched matrix
@@ -636,7 +636,7 @@ std::ostream& AirAngleOnlyTrkMgr::serialize(std::ostream& sout, const int i, con
 
 
 //==============================================================================
-// Class:	AirAngleOnlyTrkMgrPT - perceived truth version of above
+// Class: AirAngleOnlyTrkMgrPT - perceived truth version of above
 //==============================================================================
 
 // this tm uses merged tracks for its attempts at managing tracks. This means it is
@@ -931,7 +931,7 @@ void AirAngleOnlyTrkMgrPT::processTrackList(const LCreal dt)
             // ---
             // 6) Smooth and predict position for the next frame
             //
-            //	X(k+1) = A X(k) + (1-A)pX(k) for az and el
+            //   X(k+1) = A X(k) + (1-A)pX(k) for az and el
             //   X(k+1) = B X(k) + (1-B)pX(k) for azrate and elrate
 
             // Save X(k)

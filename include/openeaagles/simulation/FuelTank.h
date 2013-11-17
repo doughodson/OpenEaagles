@@ -10,7 +10,7 @@ namespace Eaagles {
 namespace Simulation {
 
 //------------------------------------------------------------------------------
-// Class:	FuelTank
+// Class: FuelTank
 //
 // Description: Generic fuel tank
 //

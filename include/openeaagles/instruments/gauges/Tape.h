@@ -4,7 +4,7 @@
 // Description: Dynamic class that renders only the portion of the tape
 //              that is needed on the screen
 //------------------------------------------------------------------------------
-#ifndef	__Eaagles_Instruments_Tape_H__
+#ifndef __Eaagles_Instruments_Tape_H__
 #define __Eaagles_Instruments_Tape_H__
 
 #include "openeaagles/instruments/Instrument.h"

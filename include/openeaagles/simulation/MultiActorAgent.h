@@ -89,23 +89,23 @@ inline void MultiActorAgent::setActor(Basic::Component* c) { actor=c; }
 //      agent: ( MultiActorAgent
 //         state: ( abcState )
 //         agentList: {
-//				// use slotname to specify the player name (the "actor") to which to connect the agent/behavior
-//				p1: ( abcBehavior1 )
-//				p2: ( abcBehavior2 )
+//            // use slotname to specify the player name (the "actor") to which to connect the agent/behavior
+//            p1: ( abcBehavior1 )
+//            p2: ( abcBehavior2 )
 //         }
-//		)
+//      )
 //   } // components
 //
-//	simulation: ( Simulation
+//   simulation: ( Simulation
 //    
 //      players: {
-//		
-//			p1: ()
-//			
-//			p2: ()
-//			
-//		} // players
-//	) // simulation
+//
+//         p1: ()
+//
+//         p2: ()
+//
+//      } // players
+//   ) // simulation
 //) // Station
 
 #endif

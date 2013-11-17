@@ -180,8 +180,8 @@ std::ostream& Action::serialize(std::ostream& sout, const int i, const bool slot
     BaseClass::serialize(sout,i+j,true);
 
     if ( !slotsOnly ) {
-    	indent(sout,i);
-    	sout << ")" << std::endl;
+        indent(sout,i);
+        sout << ")" << std::endl;
     }
 
     return sout;
@@ -521,8 +521,8 @@ std::ostream& ActionImagingSar::serialize(std::ostream& sout, const int i, const
     BaseClass::serialize(sout,i+j,true);
 
     if ( !slotsOnly ) {
-    	indent(sout,i);
-    	sout << ")" << std::endl;
+        indent(sout,i);
+        sout << ")" << std::endl;
     }
 
     return sout;
@@ -720,8 +720,8 @@ std::ostream& ActionWeaponRelease::serialize(std::ostream& sout, const int i, co
     BaseClass::serialize(sout,i+j,true);
 
     if ( !slotsOnly ) {
-    	indent(sout,i);
-    	sout << ")" << std::endl;
+        indent(sout,i);
+        sout << ")" << std::endl;
     }
 
     return sout;
@@ -891,8 +891,8 @@ std::ostream& ActionDecoyRelease::serialize(std::ostream& sout, const int i, con
     BaseClass::serialize(sout,i+j,true);
 
     if ( !slotsOnly ) {
-    	indent(sout,i);
-    	sout << ")" << std::endl;
+        indent(sout,i);
+        sout << ")" << std::endl;
     }
 
     return sout;
@@ -1016,8 +1016,8 @@ std::ostream& ActionCamouflageType::serialize(std::ostream& sout, const int i, c
     BaseClass::serialize(sout,i+j,true);
 
     if ( !slotsOnly ) {
-    	indent(sout,i);
-    	sout << ")" << std::endl;
+        indent(sout,i);
+        sout << ")" << std::endl;
     }
 
     return sout;

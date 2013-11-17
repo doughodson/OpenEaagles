@@ -10,7 +10,7 @@ namespace Eaagles {
 namespace Instruments {
 
 //------------------------------------------------------------------------------
-// Class:	TickMarks
+// Class: TickMarks
 // 
 // Description: Uses tick marks in a linear fashion, either horizontally or 
 // vertically, and draws them accordingly.  This is very similar to dial 

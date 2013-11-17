@@ -70,7 +70,7 @@ private:
 #ifdef USE_TDBIR
 //------------------------------------------------------------------------------
 // Class: TdbIr
-// Base class:	Basic::Object -> Tdb -> TdbIr
+// Base class: Basic::Object -> Tdb -> TdbIr
 //
 // Description: Target(s) Data Block for an IrSeeker (see Tdb in Gimbal.h)
 //

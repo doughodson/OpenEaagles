@@ -195,7 +195,7 @@ private:
 
 
 //------------------------------------------------------------------------------
-// Class:	SlSymbol
+// Class: SlSymbol
 // Description: General symbol used by SymbolLoader
 //------------------------------------------------------------------------------
 class SlSymbol : public Basic::Object {

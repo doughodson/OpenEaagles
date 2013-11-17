@@ -59,7 +59,7 @@ std::ostream& Power::serialize(std::ostream& sout, const int i, const bool slots
 {
     int j = 0;
     if (!slotsOnly) {
-    	indent(sout, i);
+        indent(sout, i);
         sout << "( " << getFormName() << std::endl;
         j = 4;
     }

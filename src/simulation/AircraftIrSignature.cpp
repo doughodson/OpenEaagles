@@ -50,7 +50,7 @@ BEGIN_SLOTTABLE(AircraftIrSignature)
             // data - factor. We multiply the base plume signature by this 
             // factor to get the plume energy in this particular waveband.  
             // the different factors should all sum to 1.0  .  
-   "hotPartsSignatureTable", 			
+   "hotPartsSignatureTable",
             // mapping of signature in watts/steradian to 
             // x- pla 
             // y - velocity (knots)
@@ -417,7 +417,7 @@ LCreal AircraftIrSignature::getCalculatedAirframeHeatSignature(const IrQueryMsg*
 //------------------------------------------------------------------------------
 void AircraftIrSignature::getAirframeSignatures(const IrQueryMsg* const msg, const LCreal lowerBound, const LCreal upperBound)
 {
-    if (airframeWavebandFactorTable != 0 && airframeSignatureTable != 0) {				  
+    if (airframeWavebandFactorTable != 0 && airframeSignatureTable != 0) {
         // find airframe factor. 
         const LCreal* centerWavelengths = airframeWavebandFactorTable->getXData();
         const LCreal* widths = airframeWavebandFactorTable->getYData();
@@ -669,11 +669,11 @@ LCreal* AircraftIrSignature::getHeatSignature(IrQueryMsg* msg)
                 // use of reflectivity here suggests that this is solar radiation reflected from the target
                 // this now done in the atmosphere model, during query return processing
                 //if (atmos != 0)
-                //	baseHeatSignatureInBand += (reflectivity * atmos->getSolarRadiation(centerWavelengths[i], (LCreal) target->getAltitudeM()));
+                //   baseHeatSignatureInBand += (reflectivity * atmos->getSolarRadiation(centerWavelengths[i], (LCreal) target->getAltitudeM()));
 
                 airframeSig[i*3 + 2] = baseHeatSignatureInBand * overlapRatio;
             }
-        }	// for loop over waveBand
+        } // for loop over waveBand
     } // if (target != 0)
     return airframeSig;
 }
