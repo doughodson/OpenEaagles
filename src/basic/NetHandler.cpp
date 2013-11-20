@@ -50,12 +50,12 @@ END_SLOTTABLE(NetHandler)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(NetHandler)
-    ON_SLOT(1, setSlotLocalIpAddress, String)
-    ON_SLOT(2, setSlotLocalPort,    Number)
-    ON_SLOT(3, setSlotPort,         Number)
-    ON_SLOT(4, setSlotShared,       Number)
-    ON_SLOT(5, setSlotSendBuffSize, Number)
-    ON_SLOT(6, setSlotRecvBuffSize, Number)
+    ON_SLOT(1, setSlotLocalIpAddress,   String)
+    ON_SLOT(2, setSlotLocalPort,        Number)
+    ON_SLOT(3, setSlotPort,             Number)
+    ON_SLOT(4, setSlotShared,           Number)
+    ON_SLOT(5, setSlotSendBuffSize,     Number)
+    ON_SLOT(6, setSlotRecvBuffSize,     Number)
     ON_SLOT(7, setSlotIgnoreSourcePort, Number)
 END_SLOT_MAP()
 
@@ -138,22 +138,25 @@ bool NetHandler::initNetwork(const bool noWaitFlag)
         if (ok) {
             if (noWaitFlag) {
                 ok = setNoWait();
-                if (!ok) std::cerr << "initNetwork(): setNoWait() FAILED" << std::endl;
+                if (!ok) std::cerr << "NetHandler::initNetwork(): setNoWait() FAILED" << std::endl;
             }
             else {
                 ok = setBlocked();
-                if (!ok) std::cerr << "initNetwork(): setBlocked() FAILED" << std::endl;
+                if (!ok) std::cerr << "NetHandler::initNetwork(): setBlocked() FAILED" << std::endl;
             }
         }
         else {
-            std::cerr << "initNetwork(): bindSocket() FAILED" << std::endl;
+            std::cerr << "NetHandler::initNetwork(): bindSocket() FAILED" << std::endl;
         }
     }
     else {
-        std::cerr << "initNetwork(): Init() FAILED" << std::endl;
+        std::cerr << "NetHandler::initNetwork(): init() FAILED" << std::endl;
     }
 
     initialized = ok;
+    if (initialized && isMessageEnabled(MSG_DEBUG)) {
+        std::cout << "NetHandler::initNetwork() -- network initialized successfully" << std::endl;
+    }
     return ok;
 }
 
@@ -162,26 +165,28 @@ bool NetHandler::initNetwork(const bool noWaitFlag)
 //------------------------------------------------------------------------------
 bool NetHandler::init()
 {
-   bool ok = true;
+    bool ok = true;
+
 #if defined(WIN32)
-   // Init Winsock2
-   WSADATA wsaData;
-   WORD wVersionRequested = MAKEWORD( 2, 2 );
-   int err = ::WSAStartup( wVersionRequested, &wsaData );
-   if (err != 0) {
-      std::cerr << "NetHandler::init() -- WSAStartup() FAILED" << std::endl;
-   }
-   ok = (err == 0);
+    // initialize Winsock2
+    WSADATA wsaData;
+    WORD wVersionRequested = MAKEWORD( 2, 2 );
+    // initiate the use of Winsock DLL
+    int err = ::WSAStartup( wVersionRequested, &wsaData );
+    if ((err != 0) && isMessageEnabled(MSG_ERROR)) {
+        std::cerr << "NetHandler::init() -- WSAStartup() FAILED" << std::endl;
+    }
+    ok = (err == 0);
 #endif
 
-   // ---
-   // Set the local IP address
-   // ---
-   if (localIpAddr != 0) {
-      setLocalAddr(localIpAddr);
-   }
+    // ---
+    // Set the local IP address
+    // ---
+    if (localIpAddr != 0) {
+        setLocalAddr(localIpAddr);
+    }
 
-   return ok;
+    return ok;
 }
 
 // -------------------------------------------------------------
