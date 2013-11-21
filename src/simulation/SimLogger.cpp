@@ -1,3 +1,21 @@
+//------------------------------------------------------------------------------
+// Classes:
+//      SimLogger                   -- Simulation Event logger
+//      SimLogger::SimLogEvent      -- Abstract simulation log event
+//      SimLogger::NewPlayer        -- New Player event
+//      SimLogger::LogPlayerData    -- Log Player Data event
+//      SimLogger::RemovePlayer     -- Remove Player event
+//      SimLogger::WeaponRelease    -- Weapon Release
+//      SimLogger::GunFired         -- Gun was fired
+//      SimLogger::KillEvent        -- Kill
+//      SimLogger::NewTrack         -- Added new RADAR track
+//      SimLogger::UpdateTrack      -- Updated RADAR track
+//      SimLogger::RemovedTrack     -- Removed old RADAR track
+//      SimLogger::NewRwrTrack      -- Added new RWR track
+//      SimLogger::UpdateRwrTrack   -- Updated RWR track
+//      SimLogger::RemovedRwrTrack  -- Removed old RWR track
+//      SimLogger::DetonationEvent  -- Weapon Detonated
+//------------------------------------------------------------------------------
 
 #include "openeaagles/simulation/SimLogger.h"
 
@@ -46,7 +64,6 @@
     {                                                                           \
         return new SimLogger::ThisType(*this);                                  \
     }
-
 
 
 namespace Eaagles {
@@ -341,8 +358,9 @@ std::ostream& SimLogger::serialize(std::ostream& sout, const int i, const bool s
 
     return sout;
 }
+
 //==============================================================================
-// Class SimLogEvent
+// Class: SimLogEvent
 //==============================================================================
 IMPLEMENT_PARTIAL_SUBCLASS(SimLogger::SimLogEvent,"SimLogEvent")
 EMPTY_SLOTTABLE(SimLogger::SimLogEvent)
@@ -1008,19 +1026,19 @@ const char* SimLogger::KillEvent::getDescription()
         makeTimeMsg(sout);
         sout << " KILL_EVENT:";
         
-        // Print the Player ID        
+        // Print the Player ID
         if (thePlayer != 0) {
             sout << " launcher";
             makePlayerIdMsg(sout, thePlayer);
         }
         
-        // Print the WPN ID        
+        // Print the WPN ID
         if (theWeapon != 0) {
             sout << " wpn";
             makePlayerIdMsg(sout, theWeapon);
         }
         
-        // Print the TGT ID        
+        // Print the TGT ID
         if (theTarget != 0) {
             sout << " tgt";
             makePlayerIdMsg(sout, theTarget);
@@ -1081,19 +1099,19 @@ const char* SimLogger::DetonationEvent::getDescription()
         makeTimeMsg(sout);
         sout << " WPN_DET_EVENT:";
         
-        // Print the Player ID        
+        // Print the Player ID
         if (thePlayer != 0) {
             sout << " launcher";
             makePlayerIdMsg(sout, thePlayer);
         }
         
-        // Print the WPN ID        
+        // Print the WPN ID
         if (theWeapon != 0) {
             sout << " wpn";
             makePlayerIdMsg(sout, theWeapon);
         }
         
-        // Print the TGT ID        
+        // Print the TGT ID
         if (theTarget != 0) {
             sout << " tgt";
             makePlayerIdMsg(sout, theTarget);
@@ -1282,7 +1300,7 @@ const char* SimLogger::UpdateTrack::getDescription()
         // Time & Event message
         makeTimeMsg(sout);
         sout << " UPDATE_TRACK:\n";
-        
+
         // Player information
         if (thePlayer != 0) {
             sout << "\tPlayer";
@@ -1290,7 +1308,7 @@ const char* SimLogger::UpdateTrack::getDescription()
             makePlayerDataMsg(sout,pos,vel,angles);
             sout << "\n";
         }
-        
+
         // Target Information 
         if (theEmission != 0) {
             if (theEmission->getTarget() != 0) {
@@ -1305,7 +1323,7 @@ const char* SimLogger::UpdateTrack::getDescription()
         if (theTrack != 0) {
             makeTrackDataMsg(sout, theTrack);
         }
-                
+
         // Complete the description
         int len = (int)sout.str().size();
         msg = new char[len+1];
@@ -1334,6 +1352,7 @@ void SimLogger::UpdateTrack::captureData()
         }
     }
 }
+
 //==============================================================================
 // Class SimLogger::RemovedTrack
 //==============================================================================
@@ -1391,7 +1410,7 @@ const char* SimLogger::RemovedTrack::getDescription()
         // Time & Event message
         makeTimeMsg(sout);
         sout << " REMOVE_TRACK:\n";
-        
+
         // Player information
         if (thePlayer != 0) {
             sout << "\tPlayer";
@@ -1399,7 +1418,7 @@ const char* SimLogger::RemovedTrack::getDescription()
             makePlayerDataMsg(sout,pos,vel,angles);
             sout << "\n";
         }
-        
+
         // Target Information 
         if (theEmission != 0) {
             if (theEmission->getTarget() != 0) {
@@ -1409,12 +1428,12 @@ const char* SimLogger::RemovedTrack::getDescription()
                 sout << "\n";
             }
         }
-        
+
         // General track information
         if (theTrack != 0) {
             makeTrackDataMsg(sout, theTrack);
         }
-                
+
         // Complete the description
         int len = (int)sout.str().size();
         msg = new char[len+1];
@@ -1509,7 +1528,7 @@ const char* SimLogger::NewRwrTrack::getDescription()
             makePlayerDataMsg(sout,pos,vel,angles);
             sout << "\n";
         }
-        
+
         // Target Information 
         if (theEmission != 0) {
             if (theEmission->getOwnship() != 0) {
@@ -1521,12 +1540,12 @@ const char* SimLogger::NewRwrTrack::getDescription()
             // General emission information
             makeEmissionDataMsg(sout, theEmission);
         }
-        
+
         // General track information
         if (theTrack != 0) {
             makeTrackDataMsg(sout, theTrack);
         }
-                
+
         // Complete the description
         int len = (int)sout.str().size();
         msg = new char[len+1];
@@ -1622,7 +1641,7 @@ const char* SimLogger::UpdateRwrTrack::getDescription()
             makePlayerDataMsg(sout,pos,vel,angles);
             sout << "\n";
         }
-        
+
         // Target Information 
         if (theEmission != 0) {
             if (theEmission->getOwnship() != 0) {
@@ -1634,12 +1653,12 @@ const char* SimLogger::UpdateRwrTrack::getDescription()
             // General emission information
             makeEmissionDataMsg(sout, theEmission);
         }
-        
+
         // General track information
         if (theTrack != 0) {
             makeTrackDataMsg(sout, theTrack);
         }
-                
+
         // Complete the description
         int len = (int)sout.str().size();
         msg = new char[len+1];
@@ -1735,7 +1754,7 @@ const char* SimLogger::RemovedRwrTrack::getDescription()
             makePlayerDataMsg(sout,pos,vel,angles);
             sout << "\n";
         }
-        
+
         // Target Information 
         if (theEmission != 0) {
             if (theEmission->getOwnship() != 0) {
@@ -1747,12 +1766,12 @@ const char* SimLogger::RemovedRwrTrack::getDescription()
             // General emission information
             makeEmissionDataMsg(sout, theEmission);
         }
-        
+
         // General track information
         if (theTrack != 0) {
             makeTrackDataMsg(sout, theTrack);
         }
-                
+
         // Complete the description
         int len = (int)sout.str().size();
         msg = new char[len+1];

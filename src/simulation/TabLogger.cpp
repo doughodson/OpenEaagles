@@ -1,3 +1,13 @@
+//------------------------------------------------------------------------------
+// Classes:
+//      TabLogger                     -- Simulation Event logger
+//      TabLogger::TabLogEvent        -- Abstract simulation log event
+//      TabLogger::LogPlayerData      -- Log Player Data event (header, new, update, removed)
+//      TabLogger::LogWeaponActivity  -- Weapon release, detonation (or KILL, but it is not in use now.)
+//      TabLogger::LogGunActivity     -- Gun was fired
+//      TabLogger::LogActiveTrack     -- Log active (radar) track event (header, new, update, removed)
+//      TabLogger::LogPassiveTrack    -- Log passive (rwr)  track event (header, new, update, removed)
+//------------------------------------------------------------------------------
 #include "openeaagles/simulation/TabLogger.h"
 
 #include "openeaagles/simulation/Emission.h"
@@ -46,7 +56,7 @@ namespace Eaagles {
 namespace Simulation {
 
 //==============================================================================
-// Class TabLogger
+// Class: TabLogger
 //==============================================================================
 IMPLEMENT_PARTIAL_SUBCLASS(TabLogger,"TabLogger")
 
@@ -112,7 +122,6 @@ void TabLogger::updateData(const LCreal dt)
     BaseClass::updateData(dt);
 }
 
-
 //------------------------------------------------------------------------------
 // Set functions
 //------------------------------------------------------------------------------
@@ -145,7 +154,7 @@ std::ostream& TabLogger::serialize(std::ostream& sout, const int i, const bool s
 
 
 //==============================================================================
-// Class TabLogEvent
+// Class: TabLogEvent
 //==============================================================================
 IMPLEMENT_PARTIAL_SUBCLASS(TabLogger::TabLogEvent,"TabLogEvent")
 EMPTY_SLOTTABLE(TabLogger::TabLogEvent)
@@ -274,7 +283,7 @@ std::ostream& TabLogger::TabLogEvent::makePlayerIdMsg(std::ostream& sout, const 
     }
     else
         makePlayerIdSpacer(sout);
-    
+
     return sout;
 }
 
@@ -534,13 +543,12 @@ std::ostream& TabLogger::TabLogEvent::makeEmissionDataMsg(std::ostream& sout, co
     else 
         sout << "\t\t\t\t\t\t" ;   // (six spacer fields)
 
-
     return sout;
 }
 
 
 //==============================================================================
-// Class TabLogger::LogPlayerData
+// Class: TabLogger::LogPlayerData
 //==============================================================================
 TABLOGEVENT_B(LogPlayerData,"TabLogger::LogPlayerData")
 EMPTY_SERIALIZER(TabLogger::LogPlayerData)
@@ -732,7 +740,7 @@ void TabLogger::LogPlayerData::captureData()
 
 
 //==============================================================================
-// Class TabLogger::LogGunActivity
+// Class: TabLogger::LogGunActivity
 //==============================================================================
 TABLOGEVENT_B(LogGunActivity,"TabLogger::LogGunActivity")
 EMPTY_SERIALIZER(TabLogger::LogGunActivity)
@@ -811,7 +819,7 @@ void TabLogger::LogGunActivity::captureData()
 
 
 //==============================================================================
-// Class TabLogger::LogWeaponActivity
+// Class: TabLogger::LogWeaponActivity
 //==============================================================================
 TABLOGEVENT_B(LogWeaponActivity,"TabLogger::LogWeaponActivity")
 EMPTY_SERIALIZER(TabLogger::LogWeaponActivity)
@@ -916,7 +924,7 @@ const char* TabLogger::LogWeaponActivity::getDescription()
             }
 
             makeTrackDataMsg(sout, theTrack);
-        }       
+        }
 
         // Complete the description
         int len = (int)sout.str().size();
@@ -941,7 +949,7 @@ void TabLogger::LogWeaponActivity::captureData()
 
 
 //==============================================================================
-// Class TabLogger::LogActiveTrack
+// Class: TabLogger::LogActiveTrack
 //==============================================================================
 TABLOGEVENT_B(LogActiveTrack,"TabLogger::LogActiveTrack")
 EMPTY_SERIALIZER(TabLogger::LogActiveTrack)
@@ -1028,7 +1036,7 @@ const char* TabLogger::LogActiveTrack::getDescription()
             makeTrackDataHdr(sout);
         }
         else
-        {        
+        {
             // Player information
             makePlayerIdMsg(sout, thePlayer);
 
@@ -1056,7 +1064,7 @@ const char* TabLogger::LogActiveTrack::getDescription()
             // General track information
             makeTrackDataMsg(sout, theTrack);
         }
-                
+
         // Complete the description
         int len = (int)sout.str().size();
         msg = new char[len+1];
@@ -1084,7 +1092,7 @@ void TabLogger::LogActiveTrack::captureData()
 
 
 //==============================================================================
-// Class TabLogger::LogPassiveTrack
+// Class: TabLogger::LogPassiveTrack
 //==============================================================================
 TABLOGEVENT_B(LogPassiveTrack,"TabLogger::LogPassiveTrack")
 EMPTY_SERIALIZER(TabLogger::LogPassiveTrack)
@@ -1135,8 +1143,7 @@ void TabLogger::LogPassiveTrack::deleteData()
 // Get the description
 const char* TabLogger::LogPassiveTrack::getDescription()
 {
-    if (msg == 0) 
-    {
+    if (msg == 0) {
 
         std::stringstream sout;
 
@@ -1174,7 +1181,7 @@ const char* TabLogger::LogPassiveTrack::getDescription()
             makeTrackDataHdr(sout);
         }
         else
-        {        
+        {
             // Player information
             makePlayerIdMsg(sout, thePlayer);
 
@@ -1201,11 +1208,11 @@ const char* TabLogger::LogPassiveTrack::getDescription()
                 makePlayerDataSpacer(sout);
                 makeEmissionDataSpacer(sout);
             }
-            
+
             // General track information
             makeTrackDataMsg(sout, theTrack);
         }
-                
+
         // Complete the description
         int len = (int)sout.str().size();
         msg = new char[len+1];
@@ -1238,8 +1245,6 @@ void TabLogger::LogPassiveTrack::captureData()
         }
     }
 }
-
-
 
 } // End Simulation namespace
 } // End Eaagles namespace

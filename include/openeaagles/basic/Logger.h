@@ -11,7 +11,7 @@ namespace Eaagles {
 namespace Basic {
 
 //------------------------------------------------------------------------------
-// Class:   Logger
+// Class: Logger
 // Base class:  Object -> Component -> Logger
 // Description: General Message/Event Logger
 //
@@ -20,7 +20,6 @@ namespace Basic {
 //     file       <String>     ! Log file name (default: empty string)
 //     path       <String>     ! Path to log directory (optional). (default: empty string)
 //     topLine    <String>     ! Optional top (first) line of file. (default: 0)
-//
 //
 // Public member functions:
 //
@@ -38,16 +37,18 @@ namespace Basic {
 //      updateData(LCreal dt)
 //          Update background part of this component (tries to open the logfile)
 //------------------------------------------------------------------------------
-class Logger : public Component {
+class Logger : public Component
+{
     DECLARE_SUBCLASS(Logger,Component)
 
 public:
     // -------------------------------------------------
-    // Class:   LogEvent
+    // Class: LogEvent
     // Base class:  Object -> LogEvent
     // Description: Abstract class for all logger events
     // -------------------------------------------------
-    class LogEvent : public Object {
+    class LogEvent : public Object
+    {
         DECLARE_SUBCLASS(LogEvent,Object)
     public:
         LogEvent();
@@ -87,8 +88,8 @@ private:
     String*        filename;     // Log file name
     String*        pathname;     // Path to log file directory
     const String*  topLine;      // Optional top (first) line of output
-    bool             opened;     // File opened
-    bool             failed;     // Open or write failed
+    bool           opened;       // File opened
+    bool           failed;       // Open or write failed
 };
 
 } // End Basic namespace

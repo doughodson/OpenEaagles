@@ -4,7 +4,7 @@
 //      TabLogger::TabLogEvent        -- Abstract simulation log event
 //      TabLogger::LogPlayerData      -- Log Player Data event (header, new, update, removed)
 //      TabLogger::LogWeaponActivity  -- Weapon release, detonation (or KILL, but it is not in use now.)
-//      TabLogger::LogGunActivity           -- Gun was fired
+//      TabLogger::LogGunActivity     -- Gun was fired
 //      TabLogger::LogActiveTrack     -- Log active (radar) track event (header, new, update, removed)
 //      TabLogger::LogPassiveTrack    -- Log passive (rwr)  track event (header, new, update, removed)
 //------------------------------------------------------------------------------
@@ -34,7 +34,7 @@ class Simulation;
 //------------------------------------------------------------------------------
 class TabLogger : public SimLogger
 {
-    DECLARE_SUBCLASS(TabLogger,SimLogger)
+    DECLARE_SUBCLASS(TabLogger, SimLogger)
 
 public:
 
@@ -118,7 +118,7 @@ public:
     };
     
     //------------------------------------------------------------------------------
-    // Class:   TabLogger::LogGunActivity
+    // Class: TabLogger::LogGunActivity
     // Base class:  Basic::Object -> Basic::Logger::LogEvent -> SimLogEvent -> TabLogEvent -> LogGunActivity
     // Description: Log a gun fire event; Player just fired a burst of 'n' rounds
     // Form name: LogGunActivity
@@ -137,7 +137,7 @@ public:
 
 
     //------------------------------------------------------------------------------
-    // Class:   TabLogger::LogWeaponActivity
+    // Class: TabLogger::LogWeaponActivity
     // Base class:  Basic::Object -> Basic::Logger::LogEvent -> SimLogEvent -> TabLogEvent -> LogWeaponActivity
     // Description: Log a detonation event
     //    (i.e., Target, 'tgt', killed by weapon, 'wpn', released from the 'player'.
@@ -163,7 +163,7 @@ public:
 
 
     //------------------------------------------------------------------------------
-    // Class:   TabLogger::LogActiveTrack
+    // Class: TabLogger::LogActiveTrack
     // Base class:  Basic::Object -> Basic::Logger::LogEvent -> SimLogEvent -> TabLogEvent -> LogActiveTrack
     // Description: Log new, removed, or updated "active" track [not passive]
     // Form name: LogActiveTrack
@@ -191,7 +191,7 @@ public:
 
 
     //------------------------------------------------------------------------------
-    // Class:   TabLogger::LogPassiveTrack
+    // Class: TabLogger::LogPassiveTrack
     // Base class:  Basic::Object -> Basic::Logger::LogEvent -> SimLogEvent -> TabLogEvent -> LogPassiveTrack
     // Description: Log passive track event (header, new, updated, removed) [RWR]
     // Form name: LogPassiveTrack
