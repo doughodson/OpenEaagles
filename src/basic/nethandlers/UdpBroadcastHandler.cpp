@@ -144,7 +144,7 @@ bool UdpBroadcastHandler::bindSocket()
                uint32_t localNet = localNetAddr & localNetMask;
                ba = localNet | ~localNetMask;
                if (isMessageEnabled(MSG_INFO)) {
-                  std::cout << std::hex << "UdpBroadcast address: " << ba << std::dec << std::endl;
+                  std::cout << std::hex << "UdpBroadcast::bindSocket() -- address: " << ba << std::dec << std::endl;
                }
                setNetAddr( ba ); 
                ok = true;

@@ -130,15 +130,14 @@ bool Logger::openFile()
         tFailed = true;
     }
     else {
-
         //---
         // Allocate space for the full file name
         //---
-        size_t len = pathname->len();   // start with the length of the path name
-        len += 1;   // add a character for the slash
-        len += filename->len(); // add the length of the file name
-        len += 4;  // add characters for possible version number, "_V99"
-        len += 1;  // Add one for the null(0) at the end of the string
+        size_t len = pathname->len();     // start with the length of the path name
+        len += 1;                         // add a character for the slash
+        len += filename->len();           // add the length of the file name
+        len += 4;                         // add characters for possible version number, "_V99"
+        len += 1;                         // Add one for the null(0) at the end of the string
         const size_t NAME_LENGTH = len;
 
         char* fullname = new char[NAME_LENGTH];

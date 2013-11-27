@@ -60,7 +60,7 @@ public:
 
 public:
     SimLogger();
-    
+
     virtual void log(LogEvent* const event);                // Log a simulation event
 
     double getCurrentTime() const   { return time; }        // Current time (sec)
@@ -109,13 +109,13 @@ public:
     public:
         SimLogEvent();
         virtual void captureData() =0;
-        void setTime(const double t)               { time = t; }
-        void setExecTime(const double t)           { execTime = t; }
-        void setUtcTime(const double t)            { utcTime = t; }
-        void setSimTime(const double t)            { simTime = t; }
+        void setTime(const double t)               { time = t;          }
+        void setExecTime(const double t)           { execTime = t;      }
+        void setUtcTime(const double t)            { utcTime = t;       }
+        void setSimTime(const double t)            { simTime = t;       }
         void setPrintExecTime(const bool b)        { printExecTime = b; }
-        void setPrintUtcTime(const bool b)         { printUtcTime = b; }
-        void setPrintSimTime(const bool b)         { printSimTime = b; }
+        void setPrintUtcTime(const bool b)         { printUtcTime = b;  }
+        void setPrintSimTime(const bool b)         { printSimTime = b;  }
 
     protected:
         std::ostream& makeTimeMsg(std::ostream& sout);

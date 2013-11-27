@@ -60,17 +60,18 @@ namespace Simulation {
 //==============================================================================
 IMPLEMENT_PARTIAL_SUBCLASS(TabLogger,"TabLogger")
 
-EMPTY_SLOTTABLE(TabLogger)                                                      
+EMPTY_SLOTTABLE(TabLogger)
+EMPTY_DELETEDATA(TabLogger)
 
 // Constructor: 
-TabLogger::TabLogger() 
+TabLogger::TabLogger()
 {
     STANDARD_CONSTRUCTOR()
 }
 
 // Copy Constructor
-TabLogger::TabLogger(const TabLogger& org) 
-{ 
+TabLogger::TabLogger(const TabLogger& org)
+{
     STANDARD_CONSTRUCTOR()
     copyData(org,true);
 }
@@ -100,11 +101,6 @@ void TabLogger::copyData(const TabLogger& org, const bool)
     BaseClass::copyData(org);
 }
 
-// deleteData() -- delete member data
-void TabLogger::deleteData()
-{
-}
-
 //------------------------------------------------------------------------------
 // updateTC() -- Update the simulation log time
 //------------------------------------------------------------------------------
@@ -121,14 +117,6 @@ void TabLogger::updateData(const LCreal dt)
 {
     BaseClass::updateData(dt);
 }
-
-//------------------------------------------------------------------------------
-// Set functions
-//------------------------------------------------------------------------------
-
-//------------------------------------------------------------------------------
-// Slot functions
-//------------------------------------------------------------------------------
 
 //------------------------------------------------------------------------------
 // serialize
@@ -157,6 +145,7 @@ std::ostream& TabLogger::serialize(std::ostream& sout, const int i, const bool s
 // Class: TabLogEvent
 //==============================================================================
 IMPLEMENT_PARTIAL_SUBCLASS(TabLogger::TabLogEvent,"TabLogEvent")
+EMPTY_DELETEDATA(TabLogger::TabLogEvent)
 EMPTY_SLOTTABLE(TabLogger::TabLogEvent)
 EMPTY_SERIALIZER(TabLogger::TabLogEvent)
 
@@ -203,20 +192,11 @@ void TabLogger::TabLogEvent::copyData(const TabLogEvent& org, const bool)
 }
 
 //------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
-void TabLogger::TabLogEvent::deleteData()
-{
-}
-
-
-//------------------------------------------------------------------------------
 // makeTimeHdr() -- creates header line for the time string
 //------------------------------------------------------------------------------
 std::ostream& TabLogger::TabLogEvent::makeTimeHdr(std::ostream& sout)
 {
     BaseClass::makeTabTimeHdr(sout);
-
     return sout;
 }
 
@@ -226,7 +206,6 @@ std::ostream& TabLogger::TabLogEvent::makeTimeHdr(std::ostream& sout)
 std::ostream& TabLogger::TabLogEvent::makeTimeMsg(std::ostream& sout)
 {
     BaseClass::makeTabTimeMsg(sout);   
-
     return sout;
 }
 
@@ -261,12 +240,12 @@ std::ostream& TabLogger::TabLogEvent::makePlayerIdSpacer(std::ostream& sout)
 //------------------------------------------------------------------------------
 std::ostream& TabLogger::TabLogEvent::makePlayerIdMsg(std::ostream& sout, const Player* const player)
 {
-    if (player != 0) 
-    {
+    if (player != 0) {
+
         sout << player->getID()    << "\t" ;           // player ID                           (1 field)
 
-        if (player->isNetworkedPlayer())               // federate name of networked player   (1 field)
-        {                                              // and network of networked player     (1 field)
+        if (player->isNetworkedPlayer()) {             // federate name of networked player   (1 field)
+                                                       // and network of networked player     (1 field)
             const Nib* const pNib = player->getNib();
             sout << (const char*) *pNib->getFederateName() << "\t" ;
 
@@ -410,8 +389,8 @@ std::ostream& TabLogger::TabLogEvent::makePlayerDamageSpacer(std::ostream& sout)
 //------------------------------------------------------------------------------
 std::ostream& TabLogger::TabLogEvent::makePlayerDamageMsg(std::ostream& sout, const Player* const player, bool checkKillOverride)
 {
-    if (player != 0) 
-    {
+    if (player != 0) {
+
         sout << player->getDamage()    << "\t" ;            // player damage value                   (1 field)
 
         if (  (checkKillOverride && player->isKillOverride() ) ||   // kill or crash override 
@@ -459,8 +438,8 @@ std::ostream& TabLogger::TabLogEvent::makeTrackDataHdr(std::ostream& sout)
 //------------------------------------------------------------------------------
 std::ostream& TabLogger::TabLogEvent::makeTrackDataMsg(std::ostream& sout, const Track* const trk)
 {
-    if (trk != 0) 
-    {
+    if (trk != 0)  {
+
         sout << trk->getType()            << "\t" ;    // type                   (1 field)
         sout << trk->getTrackID()         << "\t" ;    // track ID               (1 field)
         sout << trk->getRange()           << "\t" ;    // range                  (1 field)
@@ -531,10 +510,10 @@ std::ostream& TabLogger::TabLogEvent::makeEmissionDataSpacer(std::ostream& sout)
 //------------------------------------------------------------------------------
 std::ostream& TabLogger::TabLogEvent::makeEmissionDataMsg(std::ostream& sout, const Emission* const em)
 {
-    if (em != 0) 
-    {
-        sout << (Basic::Angle::R2DCC * em->getAzimuthAoi())   << "\t";  // azimuth AOI    (1 field)
-        sout << (Basic::Angle::R2DCC * em->getElevationAoi()) << "\t";  // elevation AOI  (1 field)
+    if (em != 0) {
+
+        sout << (Basic::Angle::R2DCC * em->getAzimuthAoi())     << "\t";  // azimuth AOI    (1 field)
+        sout << (Basic::Angle::R2DCC * em->getElevationAoi())   << "\t";  // elevation AOI  (1 field)
         sout << (em->getFrequency())                            << "\t";  // frequency      (1 field)
         sout << (em->getWavelength())                           << "\t";  // wavelength     (1 field)
         sout << (em->getPulseWidth())                           << "\t";  // pulsewidth     (1 field)
@@ -604,8 +583,8 @@ void TabLogger::LogPlayerData::deleteData()
 // Get the description
 const char* TabLogger::LogPlayerData::getDescription()
 {
-    if (msg == 0) 
-    {
+    if (msg == 0) {
+
         std::stringstream sout;
         
         if (theType != 0)
@@ -628,8 +607,8 @@ const char* TabLogger::LogPlayerData::getDescription()
         default:   { sout << "UNKNOWN\t";     break; }  // someone called for a player.... unknown reason
         }
 
-        if (theType == 0) // header line
-        {
+        if (theType == 0) { // header line
+
             makePlayerIdHdr(sout);
             makePlayerDataHdr(sout);
             makePlayerLatLonHdr(sout);
@@ -645,63 +624,52 @@ const char* TabLogger::LogPlayerData::getDescription()
             sout << "damage source: " ;
             makePlayerIdHdr(sout);
         }
-        else if (thePlayer == 0)
-        {
+        else if (thePlayer == 0) {
             // no player data, so leave the line blank and skedaddle
             //sout << "\n";
         }
-        else
-        {
-            // Print the Player data    
+        else {
+            // Print the Player data
             makePlayerIdMsg(sout,thePlayer);
             makePlayerDataMsg(sout,pos,vel,angles);
             makePlayerLatLonMsg(sout, latitude, longitude);
 
-            if ((ias >= 0.0f) && (theType == 2))
-            {
+            if ((ias >= 0.0f) && (theType == 2)) {
                 sout << alpha << "\t" ;   // (1 field)
                 sout << beta  << "\t" ;   // (1 field)
                 sout << ias   << "\t" ;   // (1 field)
             }
-            else 
-            {
+            else {
                 sout << " \t\t\t";
             }
 
-            if (mach > 0.0) 
-            {
+            if (mach > 0.0) {
                 sout <<  mach      << "\t" ;  // (1 field)
                 sout <<  pLoading  << "\t" ;  // (1 field)
             }
-            else 
-            {
-                sout << "\t\t" ;           
+            else {
+                sout << "\t\t" ;
             }
 
             // print damage data
-            if (theType == 4)                            // detonation
-            {
+            if (theType == 4) {                               // detonation
                 // third field in makePlayerDamageMsg differentiates between checking 
                 //    killOverride (true) and crashOverride (false).
                 makePlayerDamageMsg(sout, thePlayer, true);  
                 makePlayerIdMsg(sout, theSource);
             }
-            else if ((theType == 5) || (theType == 7))   // collision or kill
-            {
+            else if ((theType == 5) || (theType == 7)) {      // collision or kill
                 makePlayerDamageMsg(sout, thePlayer, false);
                 makePlayerIdMsg(sout, theSource);
             }
-            else if (theType == 6)                       // crash (ground)
-            {
+            else if (theType == 6) {                          // crash (ground)
                 makePlayerDamageMsg(sout, thePlayer, false);
                 makePlayerIdSpacer(sout);
             }
-            else 
-            {
+            else {
                 makePlayerDamageSpacer(sout);
                 makePlayerIdSpacer(sout);
             }
-
         }
         
         // Complete the description
@@ -770,8 +738,7 @@ void TabLogger::LogGunActivity::deleteData()
 // Get the description
 const char* TabLogger::LogGunActivity::getDescription()
 {
-    if (msg == 0) 
-    {
+    if (msg == 0) {
 
         std::stringstream sout;
 
@@ -790,17 +757,14 @@ const char* TabLogger::LogGunActivity::getDescription()
         default:   { sout << "UNKNOWN\t";      break; }  // unknown weapon activity....
         }
 
-        if (theType == 0)
-        {
+        if (theType == 0) {
             sout << "launcher: ";
             makePlayerIdHdr(sout);
 
             sout << "rounds" << "\t";            // (1 field)
         }
-        else
-        {
+        else {
             makePlayerIdMsg(sout, thePlayer);
-
             sout << rounds << "\t";              // (1 field)
         }
 
@@ -825,7 +789,8 @@ TABLOGEVENT_B(LogWeaponActivity,"TabLogger::LogWeaponActivity")
 EMPTY_SERIALIZER(TabLogger::LogWeaponActivity)
 
 // Constructor
-TabLogger::LogWeaponActivity::LogWeaponActivity(const int callType, const Player* const lancher, const Player* const wpn, const Player* const tgt, const unsigned int t, const LCreal d)
+TabLogger::LogWeaponActivity::LogWeaponActivity(const int callType, const Player* const lancher, const Player* const wpn,
+                                                const Player* const tgt, const unsigned int t, const LCreal d)
 {
     STANDARD_CONSTRUCTOR()
     theType   = callType;
@@ -857,8 +822,7 @@ void TabLogger::LogWeaponActivity::deleteData()
 // Get the description
 const char* TabLogger::LogWeaponActivity::getDescription()
 {
-    if (msg == 0) 
-    {
+    if (msg == 0) {
 
         std::stringstream sout;
 
@@ -880,8 +844,8 @@ const char* TabLogger::LogWeaponActivity::getDescription()
         default:   { sout << "UNKNOWN\t";      break; }  // unknown weapon activity....
         }
 
-        if (theType == 0) // header line
-        {
+        if (theType == 0) { // header line
+
             sout << "launcher: ";
             makePlayerIdHdr(sout);
 
@@ -899,8 +863,7 @@ const char* TabLogger::LogWeaponActivity::getDescription()
             sout << "track: ";               // track stored on weapon
             makeTrackDataHdr(sout);
         }
-        else
-        {
+        else {
             // Print the (launcher) Player ID        
             makePlayerIdMsg(sout, thePlayer);
             
@@ -912,13 +875,11 @@ const char* TabLogger::LogWeaponActivity::getDescription()
 
             sout << eventID      << "\t" ;   // launch event ID           // (1 field)
 
-            if ((theType == 1) || (theType == 4))   // (type 1, launch) or (type 4, hung store) 
-            {
+            if ((theType == 1) || (theType == 4)) {  // (type 1, launch) or (type 4, hung store) 
                 sout << "\t";                // detonation type           // (1 field)
                 sout << "\t";                // miss distance             // (1 field)
             }
-            else                                    // (type 2, detonation) or (type 3, kill)
-            {
+            else {                                    // (type 2, detonation) or (type 3, kill)
                 sout << detType  << "\t";    // detonation type           // (1 field)
                 sout << missDist << "\t";    // miss distance             // (1 field)
             }
@@ -940,8 +901,7 @@ void TabLogger::LogWeaponActivity::captureData()
     const Player* const w = theWeapon;
     const Weapon* const wpn = dynamic_cast<const Weapon*>(w);
 
-    if (wpn != 0)
-    {
+    if (wpn != 0) {
         theTrack = wpn->getTargetTrack();
         eventID = wpn->getReleaseEventID();
     }
@@ -1000,11 +960,9 @@ void TabLogger::LogActiveTrack::deleteData()
 // Get the description
 const char* TabLogger::LogActiveTrack::getDescription()
 {
-    if (msg == 0) 
-    {
-
+    if (msg == 0) {
         std::stringstream sout;
-        
+
         // Time & Event message
         if (theType != 0)
             makeTimeMsg(sout);
@@ -1022,8 +980,7 @@ const char* TabLogger::LogActiveTrack::getDescription()
         default:   { sout << "UNKNOWN\t";      break; }  // someone called for a track.... unknown reason
         }
 
-        if (theType == 0) // header line
-        {
+        if (theType == 0) { // header line
             sout << "Player: " ;
             makePlayerIdHdr(sout);
             makePlayerDataHdr(sout);
@@ -1035,8 +992,7 @@ const char* TabLogger::LogActiveTrack::getDescription()
             sout << "Track: " ; 
             makeTrackDataHdr(sout);
         }
-        else
-        {
+        else {
             // Player information
             makePlayerIdMsg(sout, thePlayer);
 
@@ -1046,8 +1002,7 @@ const char* TabLogger::LogActiveTrack::getDescription()
                 makePlayerDataSpacer(sout);
             
             // Target Information 
-            if (theEmission != 0) 
-            {
+            if (theEmission != 0) {
                 makePlayerIdMsg(sout, theEmission->getTarget());
 
                 if (theEmission->getTarget() != 0) 
@@ -1055,8 +1010,7 @@ const char* TabLogger::LogActiveTrack::getDescription()
                 else
                     makePlayerDataSpacer(sout);
             }
-            else
-            {
+            else {
                 makePlayerIdSpacer(sout);
                 makePlayerDataSpacer(sout);
             }
@@ -1144,7 +1098,6 @@ void TabLogger::LogPassiveTrack::deleteData()
 const char* TabLogger::LogPassiveTrack::getDescription()
 {
     if (msg == 0) {
-
         std::stringstream sout;
 
         // Time & Event message
@@ -1164,8 +1117,8 @@ const char* TabLogger::LogPassiveTrack::getDescription()
         default:   { sout << "UNKNOWN\t";      break; }  // someone called for a track.... unknown reason
         }
         
-        if (theType == 0) // header line
-        {
+        if (theType == 0) { // header line
+
             sout << "Player: " ;
             makePlayerIdHdr(sout);
             makePlayerDataHdr(sout);
@@ -1180,8 +1133,7 @@ const char* TabLogger::LogPassiveTrack::getDescription()
             sout << "Track: " ;  // (1 field)
             makeTrackDataHdr(sout);
         }
-        else
-        {
+        else {
             // Player information
             makePlayerIdMsg(sout, thePlayer);
 
@@ -1191,8 +1143,7 @@ const char* TabLogger::LogPassiveTrack::getDescription()
                 makePlayerDataSpacer(sout);
             
             // Target Information 
-            if (theEmission != 0) 
-            {
+            if (theEmission != 0) {
                 makePlayerIdMsg(sout, theEmission->getOwnship());
 
                 if (theEmission->getOwnship() != 0) 
@@ -1202,8 +1153,7 @@ const char* TabLogger::LogPassiveTrack::getDescription()
 
                 makeEmissionDataMsg(sout, theEmission);
             }
-            else 
-            {
+            else {
                 makePlayerIdSpacer(sout);
                 makePlayerDataSpacer(sout);
                 makeEmissionDataSpacer(sout);
@@ -1224,24 +1174,17 @@ const char* TabLogger::LogPassiveTrack::getDescription()
 // Capture the data
 void TabLogger::LogPassiveTrack::captureData()
 {
-    if (thePlayer != 0) 
-    {
-        {
-            pos = thePlayer->getPosition();
-            vel = thePlayer->getVelocity();
-            angles = thePlayer->getEulerAngles();
-        }
+    if (thePlayer != 0) {
+        pos = thePlayer->getPosition();
+        vel = thePlayer->getVelocity();
+        angles = thePlayer->getEulerAngles();
     }
-    if (theEmission != 0) 
-    {
+    if (theEmission != 0) {
         // The emission's ownship is our target!
-        if (theEmission->getOwnship() != 0) 
-        {
-            {
-                tgtPos = theEmission->getOwnship()->getPosition();
-                tgtVel = theEmission->getOwnship()->getVelocity();
-                tgtAngles = theEmission->getOwnship()->getEulerAngles();
-            }
+        if (theEmission->getOwnship() != 0) {
+            tgtPos = theEmission->getOwnship()->getPosition();
+            tgtVel = theEmission->getOwnship()->getVelocity();
+            tgtAngles = theEmission->getOwnship()->getEulerAngles();
         }
     }
 }

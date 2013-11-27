@@ -1,7 +1,6 @@
 //------------------------------------------------------------------------------
 // Class: NetHandler
 //------------------------------------------------------------------------------
-
 #if defined(WIN32)
     #include <sys/types.h>
     #include <Winsock2.h>
@@ -559,7 +558,7 @@ bool NetHandler::setNetAddr(const char* const hostname)
         if (addr0 == INADDR_NONE) {
             // Didn't work, try to find the host IP address by name
             if (isMessageEnabled(MSG_DEBUG)) {
-               std::cout << "setNetAddr(): Looking up host name: " << hostname;
+               std::cout << "NetHandler::setNetAddr(): Looking up host name: " << hostname;
             }
             const hostent* const p = gethostbyname(hostname);
             if (p != 0 && p->h_length > 0) {
@@ -612,7 +611,7 @@ bool NetHandler::setLocalAddr(const char* const hostname)
         if (addr0 == INADDR_NONE) {
             // Didn't work, try to find the host IP address by name
             if (isMessageEnabled(MSG_DEBUG)) {
-                std::cout << "setLocalAddr(): Looking up host name: " << hostname;
+                std::cout << "NetHandler::setLocalAddr(): Looking up host name: " << hostname;
             }
             const hostent* p = gethostbyname(hostname);
             if (p != 0 && p->h_length > 0) {
