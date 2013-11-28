@@ -300,7 +300,7 @@ unsigned long ThreadSyncTask::mainThreadFunc()
 }
 
 //-----------------------------------------------------------------------------
-// Treminate the thread
+// Terminate the thread
 //-----------------------------------------------------------------------------
 bool ThreadSyncTask::terminate()
 {

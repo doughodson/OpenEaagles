@@ -345,7 +345,7 @@ bool Scanline::addPolygon(const Polygon* const polygon)
    unsigned int n = polygon->getNumberOfVertices();
    if (n < 3) return false;
 
-   // Also, if there're normals and/or texture coordinates, then make sure
+   // Also, if there are normals and/or texture coordinates, then make sure
    // that there's one for each vertices.
    unsigned int nn = polygon->getNumberOfNormals();
    unsigned int nt = polygon->getNumberOfTextureCoords();
@@ -459,7 +459,7 @@ bool Scanline::addPolygon(const Polygon* const polygon)
 
 
 //------------------------------------------------------------------------------
-// scan() -- one pass throught the scan pattern
+// scan() -- one pass through the scan pattern
 //------------------------------------------------------------------------------
 void Scanline::scan()
 {

@@ -121,7 +121,7 @@ void String::setString(const String& origStr, const size_t w, const Justify j)
 
    switch (j) {
 
-      // NONE or LEFT justifed
+      // NONE or LEFT justified
       case NONE :
       case LEFT :
       {
@@ -131,7 +131,7 @@ void String::setString(const String& origStr, const size_t w, const Justify j)
       }
       break;
 
-      // RIGHT justifed
+      // RIGHT justified
       case RIGHT : {
          if (d < 0) i1 = -d;
          while (i2 < d)  { dbuf[i2++] = ' '; }
@@ -139,7 +139,7 @@ void String::setString(const String& origStr, const size_t w, const Justify j)
       }
       break;
 
-      // CENTER justifed
+      // CENTER justified
       case CENTER : {
          int n1 = d/2;
          if (d < 0) { i1 = -n1; l1 += (d-n1); }

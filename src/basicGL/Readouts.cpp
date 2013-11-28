@@ -1135,7 +1135,7 @@ void TimeReadout::makeText()
          int imin = int(min);
          double sec = (min - double(imin))*60.0f;
          std::sprintf(cbuf, format, ihrs, imin, sec);
-         if (neg) { /* if it was negative, swap the the posible + sign to the - sign */
+         if (neg) { /* if it was negative, swap the possible + sign to the - sign */
             bool done = false;
             for (unsigned int i = 0; !done && i < CBUF_LENGTH; i++) {
                if (cbuf[i] == '+') { cbuf[i] = '-'; done = true; }
@@ -1150,7 +1150,7 @@ void TimeReadout::makeText()
          int  ihrs = int(minutes/60.0f);
          double min = minutes - double(ihrs*60);
          std::sprintf(cbuf, format, ihrs, min);
-         if (neg) { /* if it was negative, swap the the posible + sign to the - sign */
+         if (neg) { /* if it was negative, swap the possible + sign to the - sign */
             bool done = false;
             for (unsigned int i = 0; !done && i < CBUF_LENGTH; i++) {
                if (cbuf[i] == '+') { cbuf[i] = '-'; done = true; }
@@ -1171,7 +1171,7 @@ void TimeReadout::makeText()
          int  imin = int(seconds/60.0f);
          double sec = seconds - double(imin*60);
          std::sprintf(cbuf, format, imin, sec);
-         if (neg) { /* if it was negative, swap the the posible + sign to the - sign */
+         if (neg) { /* if it was negative, swap the possible + sign to the - sign */
             bool done = false;
             for (unsigned int i = 0; !done && i < CBUF_LENGTH; i++) {
                if (cbuf[i] == '+') { cbuf[i] = '-'; done = true; }

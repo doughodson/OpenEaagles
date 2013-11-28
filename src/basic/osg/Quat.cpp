@@ -227,7 +227,7 @@ void Quat::makeRotate_original( const Vec3d& from, const Vec3d& to )
     if ( fabs(cosangle + 1.0) < epsilon )
     {
         // vectors are close to being opposite, so will need to find a
-        // vector orthongonal to from to rotate about.
+        // vector orthogonal to from to rotate about.
         Vec3d tmp;
         if (fabs(from.x())<fabs(from.y()))
             if (fabs(from.x())<fabs(from.z())) tmp.set(1.0,0.0,0.0); // use x axis.

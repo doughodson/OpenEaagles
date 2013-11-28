@@ -228,7 +228,6 @@ class Material;
 //      Starting value is 0x800000, so all manual select names should be
 //      lower than this, so there is no confusion in the pick() routine.
 //
-//Comment section last updated: 2004.10.13 by MJK
 //------------------------------------------------------------------------------
 class Graphic : public Basic::Component {
     DECLARE_SUBCLASS(Graphic,Basic::Component)

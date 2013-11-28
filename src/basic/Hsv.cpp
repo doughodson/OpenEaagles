@@ -104,7 +104,7 @@ bool Hsv::setHue(Number* const msg)
 }
 
 //------------------------------------------------------------------------------
-// setSaturation() -- set the HSV staturation
+// setSaturation() -- set the HSV saturation
 //------------------------------------------------------------------------------
 bool Hsv::setSaturation(Number* const msg)
 {

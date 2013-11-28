@@ -1367,7 +1367,7 @@ bool Graphic::setSlotTexCoord(const Basic::PairStream* const msg)
                         }
                         else {
                             if (isMessageEnabled(MSG_ERROR)) {
-                                std::cerr << "Graphic::setTexCoord: Cooridnates not in [ s t ] form!" << std::endl;
+                                std::cerr << "Graphic::setTexCoord: Coordinates not in [ s t ] form!" << std::endl;
                             }
                             ok = false;
                         }

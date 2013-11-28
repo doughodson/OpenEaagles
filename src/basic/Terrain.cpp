@@ -235,7 +235,7 @@ bool Terrain::targetOcculting(
       const double refLon,    // Ref longitude (degs)
       const LCreal refAlt,    // Ref altitude (meters)
       const double tgtLat,    // Target latitude (degs)
-      const double tgtLon,    // Target longitde (degs)
+      const double tgtLon,    // Target longitude (degs)
       const LCreal tgtAlt     // Target altitude (meters)
    ) const
 {
@@ -348,7 +348,7 @@ bool Terrain::occultCheck(
    // angle then the target is occulted by the terrain point
    LCreal tgtTan = (tgtAlt - refAlt) / range;
 
-   // Loop throught all elevation points looking for an angle
+   // Loop through all elevation points looking for an angle
    // that's greater than our ref angle
    LCreal deltaRng = (range / (n - 1));
    LCreal currentRange = 0;
@@ -399,7 +399,7 @@ bool Terrain::occultCheck2(
          range <= 0            // the range is less than or equal to zero
          ) return occulted;
 
-   // Loop throught all elevation points looking for an angle
+   // Loop through all elevation points looking for an angle
    // that's greater than our ref angle
    double deltaRng = (range / (n - 1));
    double currentRange = 0;
@@ -463,7 +463,7 @@ bool Terrain::vbwShadowChecker(
    LCreal tanUpper = lcTan(beamUpper*(LCreal)Angle::D2RCC);
    LCreal tanLower = lcTan(beamLower*(LCreal)Angle::D2RCC);
 
-   // Loop throught all other elevation points -- keep track of the current max
+   // Loop through all other elevation points -- keep track of the current max
    // tangent value and flag as terrain masked all points with tangent
    // values less than the current.
 
@@ -685,7 +685,7 @@ bool Terrain::cLight(
 bool Terrain::getElevationColor(
       const LCreal elevation,          // Elevation
       const LCreal minz,               // Min elevation
-      const LCreal maxz,               // Max elevtion
+      const LCreal maxz,               // Max elevation
       const Hsva** colorTable, // Color table
       const unsigned int numColors,    // Number of colors
       osg::Vec3& rgb)                  // Color
@@ -736,7 +736,7 @@ bool Terrain::getElevationColor(
       LCreal lowLimit = idx * elevSteps;
       LCreal highLimit = (idx+1) * elevSteps;
 
-      // Interpolte between colors
+      // Interpolate between colors
       colorHsv.colorInterpolate(deltaElev, lowLimit, highLimit, *colorTable[idx], *colorTable[(idx+1)]);
    }
 

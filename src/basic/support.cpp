@@ -523,7 +523,7 @@ void pow10Array(const float* const src, float* const dst, const unsigned int n)
 }
 
 //------------
-// Mutiply an array of reals with a constant
+// Multiply an array of reals with a constant
 //------------
 void lcMultArrayConst(const LCreal* const src, const LCreal c, LCreal* const dst, const int n)
 {

@@ -1352,7 +1352,7 @@ Component* Component::SendData::getObject(Component* gobj, const char* const id,
 {
     // Did we already find the object?
     if (obj == 0) {
-        // No, then try to find it amoung our components ...
+        // No, then try to find it among our components ...
         Pair* p = 0;
         if (n <= 0) {
             // When n is zero (or less) just use 'id' as

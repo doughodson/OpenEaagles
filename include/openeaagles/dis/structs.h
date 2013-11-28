@@ -1263,7 +1263,7 @@ struct ModulationType {
    // Constructor(s)
    ModulationType() : spreadSpectrum(0), majorModulationType(0), detail(0), system(0) {}
 
-   // Assignmnent operator
+   // Assignment operator
    void operator=(const ModulationType& _v) {
       spreadSpectrum = _v.spreadSpectrum;
       majorModulationType = _v.majorModulationType;
@@ -1871,7 +1871,7 @@ struct EmissionSystem {
    uint8_t        systemDataLength;    // Length of this system data, in 32bit words, including the Emitter Beam Data
    uint8_t        numberOfBeams;       // Number of beams (EmitterBeamData's that follow)
    uint16_t       padding1;
-   EmitterSystem  emitterSystem;       // Descrption of the Emitter System
+   EmitterSystem  emitterSystem;       // Description of the Emitter System
    VectorDIS      location;            // Location of emitter system; entities ref system (meters)
 
    // Constructor(s)
