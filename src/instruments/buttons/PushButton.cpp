@@ -39,8 +39,8 @@ PushButton::PushButton()
 {
    STANDARD_CONSTRUCTOR()
 
-   functionType = false;				//false = momentary, true = maintained
-   currentState = false;	
+   functionType = false;     //false = momentary, true = maintained
+   currentState = false;
    mouseDown    = false;
    initState = false;
    buttonStatusSD.empty();

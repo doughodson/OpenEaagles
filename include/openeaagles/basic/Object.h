@@ -146,7 +146,7 @@ namespace Basic {
 //    OpenEaagles libraries that the application requires.  By ordering these form
 //    functions, the application level form function can search a library containing
 //    a few more specific models prior to searching a library of many generic models,
-//    and if a more specific model exist for a given form name then it is used,
+//    and if a more specific model exists for a given form name then it is used,
 //    otherwise the library of generic models is searched and its model, if found,
 //    is used.
 //

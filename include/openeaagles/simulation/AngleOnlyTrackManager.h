@@ -1,5 +1,5 @@
 //----------------------------------------------------
-// Classes: AngleOnlyTrackManager, AirAngleOnlytrkMgr
+// Classes: AngleOnlyTrackManager, AirAngleOnlyTrkMgr
 //----------------------------------------------------
 #ifndef __Eaagles_Simulation_AngleOnlyTrackManager_H__
 #define __Eaagles_Simulation_AngleOnlyTrackManager_H__
@@ -59,8 +59,8 @@ private:
 };
 
 //==============================================================================
-// Class:	AirAngleOnlyTrkMgr
-// Base class:	Basic::Object -> Basic::Component -> System -> TrackManager -> AirAngleOnlyTrkMgr
+// Class: AirAngleOnlyTrkMgr
+// Base class: Basic::Object -> Basic::Component -> System -> TrackManager -> AirAngleOnlyTrkMgr
 //
 // Description: Track Manager for A/A modes (e.g., TWS, ACM, SST)
 // Form name: AirAngleOnlyTrkMgr
@@ -78,8 +78,8 @@ protected:
 
 
 //==============================================================================
-// Class:	AirAngleOnlyTrkMgrPT
-// Base class:	Basic::Object -> Basic::Component -> System -> TrackManager -> AngleOnlyTrackManager -> AirAngleOnlyTrkMgrPT
+// Class: AirAngleOnlyTrkMgrPT
+// Base class: Basic::Object -> Basic::Component -> System -> TrackManager -> AngleOnlyTrackManager -> AirAngleOnlyTrkMgrPT
 //
 // Description: AirAngleOnlyTrkMgr that uses perceived-truth az, el, 
 // and (depending on usePerceivedPosVel) pos, vel from IR reports;
@@ -93,7 +93,7 @@ protected:
 // otherwise, uses track target position, which is a ground truth target position for one
 // of the entities in the merged track
 //==============================================================================
-class AirAngleOnlyTrkMgrPT : public AirAngleOnlyTrkMgr  
+class AirAngleOnlyTrkMgrPT : public AirAngleOnlyTrkMgr
 {
     DECLARE_SUBCLASS(AirAngleOnlyTrkMgrPT, AirAngleOnlyTrkMgr)
 public:
@@ -104,7 +104,7 @@ protected:
    virtual void updateTrackAges(const LCreal dt);
    virtual void removeAgedTracks();
 private:
-	bool usePerceivedPosVel;
+   bool usePerceivedPosVel;
 };
 
 } // End Simulation namespace

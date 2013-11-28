@@ -156,7 +156,7 @@ void Hls::hls2rgb(osg::Vec4& rgb, const osg::Vec3& hls)
     LCreal m1, m2;
 
     if (hls[LIGHTNESS] <= 0.5)
-		m2 = hls[LIGHTNESS] * (1.0f + hls[SATURATION]);
+        m2 = hls[LIGHTNESS] * (1.0f + hls[SATURATION]);
     else
         m2 = hls[SATURATION] + hls[LIGHTNESS] * (1.0f - hls[SATURATION]);
     m1 = 2.0f * hls[LIGHTNESS] - m2;
@@ -164,10 +164,10 @@ void Hls::hls2rgb(osg::Vec4& rgb, const osg::Vec3& hls)
     if (hls[SATURATION] == 0.0) {
         rgb[RED] = hls[LIGHTNESS];
         rgb[GREEN] = hls[LIGHTNESS];
-		rgb[BLUE] = hls[LIGHTNESS];
+        rgb[BLUE] = hls[LIGHTNESS];
     }
     else {
-		rgb[RED]   = value( m1, m2, hls[HUE] + 120.0f );
+        rgb[RED]   = value( m1, m2, hls[HUE] + 120.0f );
         rgb[GREEN] = value( m1, m2, hls[HUE] );
         rgb[BLUE]  = value( m1, m2, hls[HUE] - 120.0f );
     }
@@ -184,9 +184,9 @@ void Hls::rgb2hls(osg::Vec3& hls, const osg::Vec4& rgb)
     LCreal rc, gc, bc;
     LCreal maxcol, mincol, cdelta;
 
-	maxcol = lcMax( rgb[RED], lcMax(rgb[GREEN],rgb[BLUE]));
+    maxcol = lcMax( rgb[RED], lcMax(rgb[GREEN],rgb[BLUE]));
     mincol = lcMin( rgb[RED], lcMin(rgb[GREEN],rgb[BLUE]));
-	hls[LIGHTNESS] = (mincol + maxcol) / 2.0f;
+    hls[LIGHTNESS] = (mincol + maxcol) / 2.0f;
 
     if (maxcol == mincol) {
         hls[SATURATION] = 0.0f;
@@ -194,11 +194,11 @@ void Hls::rgb2hls(osg::Vec3& hls, const osg::Vec4& rgb)
     }
     else {
         cdelta = maxcol - mincol;
-		rc = ( maxcol - rgb[RED] ) / cdelta;
-		gc = ( maxcol - rgb[GREEN] ) / cdelta;
-		bc = ( maxcol - rgb[BLUE] ) / cdelta;
-		
-		if (hls[LIGHTNESS] <= 0.5)
+        rc = ( maxcol - rgb[RED] ) / cdelta;
+        gc = ( maxcol - rgb[GREEN] ) / cdelta;
+        bc = ( maxcol - rgb[BLUE] ) / cdelta;
+
+        if (hls[LIGHTNESS] <= 0.5)
             hls[SATURATION] = cdelta / (maxcol + mincol);
         else
             hls[SATURATION] = cdelta / (2.0f - cdelta);
@@ -210,7 +210,7 @@ void Hls::rgb2hls(osg::Vec3& hls, const osg::Vec4& rgb)
         else 
             hls[HUE] = 4.0f + gc - rc;
         hls[HUE] *= 60.0f;
-		if (hls[HUE] < 0.0) hls[HUE] += 360.0f;
+        if (hls[HUE] < 0.0) hls[HUE] += 360.0f;
    }
 }
 

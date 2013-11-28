@@ -20,9 +20,9 @@ public:
    enum { RECORD_LENGTH = NAVAID_RECORD_LEN };
 
    enum NavaidType { INVALID = -1, ANY = 'Z',
-   		VOR = '1', VORTAC = '2', TACAN = '3', VOR_DME = '4', NDB = '5',
-		NDB_DME = '7', DME = '9'
-		};
+        VOR = '1', VORTAC = '2', TACAN = '3', VOR_DME = '4', NDB = '5',
+        NDB_DME = '7', DME = '9'
+   };
 
 public:
    Navaid();
@@ -50,7 +50,7 @@ public:
    float range() const;             // Range field.
    float slaveVariance() const;     // Slave Variance field.
 
-   // DafifRecord class functions
+   // Record class functions
    virtual void printRecord(std::ostream& sout) const;
    virtual void printTrueBearingRange(std::ostream& sout, const double aclat, const double aclon, const double acelev) const;
 

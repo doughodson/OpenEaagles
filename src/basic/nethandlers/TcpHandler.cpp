@@ -32,6 +32,7 @@ namespace Basic {
 IMPLEMENT_SUBCLASS(TcpHandler,"TcpHandler")
 EMPTY_SLOTTABLE(TcpHandler)
 EMPTY_SERIALIZER(TcpHandler)
+EMPTY_DELETEDATA(TcpHandler)
 
 //------------------------------------------------------------------------------
 // Constructors
@@ -78,13 +79,6 @@ void TcpHandler::copyData(const TcpHandler& org, const bool)
 }
 
 //------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
-void TcpHandler::deleteData()
-{
-}
-
-//------------------------------------------------------------------------------
 // init() -- init the network, the socket and the network address
 //------------------------------------------------------------------------------
 bool TcpHandler::init()
@@ -98,13 +92,13 @@ bool TcpHandler::init()
     // ---
     // Create our stream socket
     // ---
-    socketNum = socket(AF_INET, SOCK_STREAM, 0);
+    socketNum = ::socket(AF_INET, SOCK_STREAM, 0);
 #if defined(WIN32)
     if (socketNum == INVALID_SOCKET) {
 #else
     if (socketNum < 0) {
 #endif
-        perror("TcpHandler::init(): socket error");
+        ::perror("TcpHandler::init(): socket error");
         success = false;
     }
 
@@ -135,8 +129,8 @@ bool TcpHandler::bindSocket()
            addr.sin_port = htons(getPort());
        }
 
-      if (bind(socketNum, (const struct sockaddr *) &addr, sizeof(addr)) == SOCKET_ERROR) {
-        perror("TcpHandler::bindSocket(): bind error");
+      if ( ::bind(socketNum, (const struct sockaddr *) &addr, sizeof(addr)) == SOCKET_ERROR ) {
+        ::perror("TcpHandler::bindSocket(): bind error");
         return false;
       }
 
@@ -165,12 +159,12 @@ bool TcpHandler::closeConnection()
     bool success = true;
 
 #if defined(WIN32)
-    if( closesocket(tcpSocket) == SOCKET_ERROR)
+    if( ::closesocket(tcpSocket) == SOCKET_ERROR )
 #else
-    if( shutdown(tcpSocket, SHUT_RDWR) < 0)
+    if( ::shutdown(tcpSocket, SHUT_RDWR) < 0)
 #endif
     {
-        perror("TcpHandler::closeConnection(): error! \n");
+        ::perror("TcpHandler::closeConnection(): error! \n");
         success = false;
     }
 
@@ -193,7 +187,7 @@ bool TcpHandler::sendData(const char* const packet, const int size)
     if (tcpSocket < 0) return false;
 #endif
 
-    int result = send(tcpSocket, packet, size, 0);
+    int result = ::send(tcpSocket, packet, size, 0);
 
 #if defined(WIN32)
     if (result == SOCKET_ERROR) {
@@ -209,7 +203,7 @@ bool TcpHandler::sendData(const char* const packet, const int size)
     if (result < 0) {
         connected = false;
         connectionTerminated = true;
-        perror("TcpHandler::sendData(): sendto error msg");
+        ::perror("TcpHandler::sendData(): sendto error msg");
         if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "TcpHandler::sendData(): sendto error result: " << result << std::endl;
         }
@@ -234,7 +228,7 @@ unsigned int TcpHandler::recvData(char* const packet, const int maxSize)
 
    // Try to receive the data
    unsigned int n = 0;
-   int result = recvfrom(tcpSocket, packet, maxSize, 0, 0, 0);
+   int result = ::recvfrom(tcpSocket, packet, maxSize, 0, 0, 0);
    if (result > 0) n = (unsigned int) result;
 
    return n;

@@ -179,9 +179,9 @@ void TexturePager::freeTextures()
                     if (textureIndex != 0) {
                         // Add the object back to the stack
                         stack->addHead(textureIndex);
-                        // Tell our table to clear it's object out
+                        // Tell our table to clear its object out
                         table.setTextureObject(i, j, 0);
-                        // Tell our map to release it's frame entry's frames, so we aren't storing those unecessarily
+                        // Tell our map to release its frame entry's frames, so we aren't storing those unecessarily
                         map->releaseFrame(r + row, c + col, this);
                     }
                 }

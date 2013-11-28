@@ -50,7 +50,7 @@ protected:
    virtual void updateTOF(const LCreal dt);
 
 private:
-    LCreal     dragIndex;             // Drag Index
+    LCreal dragIndex;             // Drag Index
 };
 
 //------------------------------------------------------------------------------
@@ -58,7 +58,7 @@ private:
 // Description: Generic chaff class
 // Form name: Chaff
 //------------------------------------------------------------------------------
-class Chaff : public Effects  
+class Chaff : public Effects
 {
     DECLARE_SUBCLASS(Chaff,Effects)
 
@@ -76,7 +76,7 @@ public:
 // Description: Generic flare class
 // Form name: Flare
 //------------------------------------------------------------------------------
-class Flare : public Effects  
+class Flare : public Effects
 {
     DECLARE_SUBCLASS(Flare,Effects)
 

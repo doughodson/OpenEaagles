@@ -1,42 +1,42 @@
+//
+// NOT USED
+//
 
 #ifndef __DsMagvar_H__
 #define __DsMagvar_H__
 
 #ifdef __cplusplus
 //------------------------------------------------------------------------------
-// Class:	DsMagvar
-// Base class:	<This is a base class>
+// Class: DsMagvar
+// Base class: <This is a base class>
 //
 // Description: Returns the mag variance for a given location.
 //
 //
 // Public member functions:
 //
-//	DsMagvar()
-//	DsMagvar(const char* file)
-//		Constructors; 'file' is the location of the WMM data file.
+//    DsMagvar()
+//    DsMagvar(const char* file)
+//        Constructors; 'file' is the location of the WMM data file.
 //
 //
-//	float magvar(double latitude, double longitude,
-//		     float altitude, time_t time)
-//		Returns the magnetic variance for latitude, longitude, altitude,
-//		and time.
+//    float magvar(double latitude, double longitude, float altitude, time_t time)
+//        Returns the magnetic variance for latitude, longitude, altitude,
+//        and time.
 //
 //------------------------------------------------------------------------------
 
 #include <stdlib.h>
 #include <float.h>
 #include <cmath>
-#include "openeaagles/dafifc.h"
-
+//#include "openeaagles/dafifc.h"
 
 class DsMagvar {
 public:
    DsMagvar(const char* file = "/magnavar/geomagu/wmm-95.dat");
    virtual ~DsMagvar();
 
-   virtual float magvar(const double lat, const double lon, const float alt,
-			const time_t tim);
+   virtual float magvar(const double lat, const double lon, const float alt, const time_t tim);
 
 
 private:
@@ -74,7 +74,6 @@ private:
    
    int haveData;
 };
-
 
 //------------------------------------------------------------------------------
 // Constructor

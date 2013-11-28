@@ -31,7 +31,7 @@ class Tdb;
 //    2) By convention, R/F and IR systems are responsible for filtering their
 //    own players of interest.  This gimbal class has its own variation of the
 //    processPlayersOfInterest() function that filters field of view and player
-//    type.  However, it is still the responsibility of the the systems to use
+//    type.  However, it is still the responsibility of the systems to use
 //    or not use our member function.
 //
 //    3) Gimble coordinates:
@@ -46,7 +46,7 @@ class Tdb;
 //
 //          Usage:
 //             Vg = M * Vb
-//             Vb  = Vg * M
+//             Vb = Vg * M
 //          Where:
 //             M = Rx[roll] * Ry[pitch] * Rz[yaw] * T[xyz] * M[container]
 //             Vg is a vector in gimbal coordinates
@@ -94,8 +94,8 @@ class Tdb;
 //    commandRateElevation (Angle)   Commanded elevation rate  (Angle/sec) (sets RATE_SERVO)
 //    commandRateRoll      (Angle)   Commanded roll rate        (Angle/sec) (sets RATE_SERVO)
 //
-//    terrainOcculting     (boolean) Enable terrain occulting of the players of interest (default: false)
-//    checkHorizon         (boolean) Enable horizon masking check (default: true)
+//    terrainOcculting     (Boolean) Enable terrain occulting of the players of interest (default: false)
+//    checkHorizon         (Boolean) Enable horizon masking check (default: true)
 // 
 //    playerOfInterestTypes (PairStream)   List of layer of interest types (default: all types )
 //                                         Valid types: { "air" "ground" "weapon" "ship" "building" "lifeform" "space" }
@@ -119,13 +119,13 @@ class Tdb;
 //          Symmetrical and asymmetrical limit checks
 //
 //------------------------------------------------------------------------------
-class Gimbal : public System  
+class Gimbal : public System
 {
    DECLARE_SUBCLASS(Gimbal,System)
 
 public:
 
-    // Servo type 
+    // Servo type
     enum Type {
        MECHANICAL,   // Mechanical gimbal
        ELECTRONIC    // Electronic servo (e.g., phased array)
@@ -133,7 +133,7 @@ public:
 
     // Servo Mode
     enum ServoMode {
-       FREEZE_SERVO,    // Servo is frozen 
+       FREEZE_SERVO,    // Servo is frozen
        RATE_SERVO,      // Rate servo
        POSITION_SERVO   // Position servo
     };
@@ -183,20 +183,20 @@ public:  // Public section
    double getElevationRate() const  { return rate[ELEV_IDX]; } // Returns current elevation rate (rad/sec)
    double getRollRate() const       { return rate[ROLL_IDX]; } // Returns current roll rate (rad/sec)
 
-   bool isFastSlewMode() const      { return fastSlew; }       // Returns true if the servo is the 'fast' slewing mode.
-   bool isSlowSlewMode() const      { return !fastSlew; }      // Returns true if the servo is the 'slow' slewing mode.
+   bool isFastSlewMode() const      { return fastSlew; }       // Returns true if the servo is in the 'fast' slewing mode.
+   bool isSlowSlewMode() const      { return !fastSlew; }      // Returns true if the servo is in the 'slow' slewing mode.
 
    const osg::Vec3d& getCmdPosition() const { return cmdPos; } // Returns the commanded position vector [ az el roll ] (radians)
    double getCmdAz() const          { return cmdPos[AZ_IDX]; } // Returns commanded azimuth position (rad)
    double getCmdElev() const        { return cmdPos[ELEV_IDX]; }  // Returns commanded elevation position (rad)
    double getCmdRoll() const        { return cmdPos[ROLL_IDX]; }  // Returns commanded roll position (rad)
-   
+
    const osg::Vec3d& getCmdRates() const { return cmdRate; }         // Returns the current rate vector (rad/sec)
    double getCmdAzRate() const         { return cmdRate[AZ_IDX]; }   // Returns commanded azimuth rate (rad/sec)
    double getCmdElevRate() const       { return cmdRate[ELEV_IDX]; } // Returns commanded elevation rate (rad/sec)
    double getCmdRollRate() const       { return cmdRate[ROLL_IDX]; } // Returns commanded roll rate (rad/sec)
 
-   const osg::Vec3d& getLocation() const  { return location; } // Returns the location vector of the gimbal on it's parent container  (meters)
+   const osg::Vec3d& getLocation() const  { return location; } // Returns the location vector of the gimbal on its parent container  (meters)
    const osg::Matrixd& getRotMat() const { return tm; }        // Returns the gimbal's rotational matrix
                                                                //    body (nose/right/down) <== > this.gimbal(x,y,z)
                                                                //    Usage:
@@ -262,7 +262,7 @@ public:  // Public section
    virtual bool setElevationLimits(const double lowerLim, const double upperLim);      // Sets the mechanical elevation limits (rad)
    virtual bool setRollLimits(const double lowerLim, const double upperLim);           // Sets the mechanical roll limits (rad)
 
-   virtual bool setLocation(const double x, const double y, const double z);           // Sets the location vector of the gimbal on it's parent container (meters)
+   virtual bool setLocation(const double x, const double y, const double z);           // Sets the location vector of the gimbal on its parent container (meters)
 
    virtual bool setFastSlewMode(const bool flg);                                       // Sets the servo 'fast' or 'slow' slewing mode
 
@@ -277,7 +277,7 @@ public:  // Public section
    virtual bool setSlotPosition(const Basic::List* const msg);           // Initial position vector (radians) [ az el roll ]
    virtual bool setSlotPosAzimuth(const Basic::Angle* const msg);        // Initial azimuth position
    virtual bool setSlotPosElevation(const Basic::Angle* const msg);      // Initial elevation position
-   virtual bool setSlotPosRoll(const Basic::Angle* const msg);           // Initial roll position 
+   virtual bool setSlotPosRoll(const Basic::Angle* const msg);           // Initial roll position
 
    virtual bool setSlotAzimuthLimits(const Basic::List* const msg);      // Azimuth limit vector (radians) [ left right ]
    virtual bool setSlotAzimuthLimitLeft(const Basic::Angle* const msg);  // Left azimuth limit
@@ -288,8 +288,8 @@ public:  // Public section
    virtual bool setSlotElevationUpper(const Basic::Angle* const msg);    // Upper elevation limit
 
    virtual bool setSlotRollLimits(const Basic::List* const msg);         // Roll limit vector (radians) [ lower upper ]
-   virtual bool setSlotRollLimitLower(const Basic::Angle* const msg);    // Lower roll limit 
-   virtual bool setSlotRollLimitUpper(const Basic::Angle* const msg);    // Upper roll limit 
+   virtual bool setSlotRollLimitLower(const Basic::Angle* const msg);    // Lower roll limit
+   virtual bool setSlotRollLimitUpper(const Basic::Angle* const msg);    // Upper roll limit
 
    virtual bool setSlotMaxRates(const Basic::List* const msg);           // Max "mechanical" rate vector (rad/sec) [ az el roll ]
    virtual bool setSlotMaxRateAzimuth(const Basic::Angle* const msg);    // Max "mechanical" azimuth rate (Basic::Angle/sec)
@@ -325,7 +325,7 @@ public:  // Public section
    virtual bool setSlotUseWorldCoordinates(const Basic::Number* const msg);
 
    // Use only the ownship player's heading to when transforming between body and local NED
-   virtual bool setSlotUseOwnHeadingOnly(const Basic::Number* const msg);  
+   virtual bool setSlotUseOwnHeadingOnly(const Basic::Number* const msg);
 
    static void limitVec(osg::Vec2d& vec, const osg::Vec2d& lim);
    static void limitVec(osg::Vec3d& vec, const osg::Vec3d& lim);
@@ -382,7 +382,7 @@ private:
    double    maxAnglePlayers; // Max angle of gimbal boresight for players of interest (or zero for all) (rad)
    unsigned int playerTypes;  // Player of interest type mask
    unsigned int maxPlayers;   // Max number of players of interest (i.e., size of the arrays)
-   bool     localOnly;        // Local players of interest only 
+   bool     localOnly;        // Local players of interest only
    bool     terrainOcculting; // Target terrain occulting enabled flag
    bool     checkHorizon;     // Horizon masking check enabled flag
    bool     useWorld;         // Using player of interest's world coordinates

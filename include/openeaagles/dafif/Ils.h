@@ -7,34 +7,34 @@
 //
 // Public member functions:
 //
-//	[all public members from the base classes]
+//    [all public members from the base classes]
 //
-//	Ils::IlsType ilsType() const
-//	    Returns the ils type.
+//    Ils::IlsType ilsType() const
+//        Returns the ils type.
 //
-//	int isIlsType(Ils::IlsType type) const
-//	    Returns true if 'type' is equal to the ils type.
+//    int isIlsType(Ils::IlsType type) const
+//        Returns true if 'type' is equal to the ils type.
 //
-//	float frequency() const
-//		Returns the frequency (MHz).
+//    float frequency() const
+//        Returns the frequency (MHz).
 //
-//	int channel() const
-//		Returns the channel number.
+//    int channel() const
+//        Returns the channel number.
 //
-//	float glideSlopeAngle() const
-//		Returns the value of the Glide Slope Angle field.
+//    float glideSlopeAngle() const
+//        Returns the value of the Glide Slope Angle field.
 //
-//	airportKey(char apKey[]) const
-//		Gets the record key of the airport.
+//    airportKey(char apKey[]) const
+//        Gets the record key of the airport.
 //
-//	runwayIdent(char rwId[]) const
-//		Gets the runway identifier.
+//    runwayIdent(char rwId[]) const
+//        Gets the runway identifier.
 //
-//	runwayEndIdent(char rwEndId[]) const
-//		Gets the runway end identifier.
+//    runwayEndIdent(char rwEndId[]) const
+//        Gets the runway end identifier.
 //
-//	Ils::recordLength
-//		Length of a DAFIF ILS record pair.
+//    Ils::recordLength
+//        Length of a DAFIF ILS record pair.
 //
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_Dafif_Ils_H__
@@ -45,8 +45,8 @@
 namespace Eaagles {
 namespace Dafif {
 
-class Ils : public Record {
-
+class Ils : public Record
+{
     DECLARE_SUBCLASS(Ils,Record)
 
 public:
@@ -57,10 +57,10 @@ public:
    enum { RECORD_LENGTH = ILS_RECORD_LEN };
 
    enum IlsType { INVALID = -1, ANY = 'Y',
-		  LOCATOR = 'L', DME = 'D', LOCALIZER = 'Z', GLIDESLOPE = 'G',
-		  BACKCOURSE_MARKER = 'B', INNER_MARKER = 'I', MIDDLE_MARKER = 'M',
-	 	  OUTER_MARKER = 'O', UNKNOWN = 'U'
-		  };
+          LOCATOR = 'L', DME = 'D', LOCALIZER = 'Z', GLIDESLOPE = 'G',
+          BACKCOURSE_MARKER = 'B', INNER_MARKER = 'I', MIDDLE_MARKER = 'M',
+          OUTER_MARKER = 'O', UNKNOWN = 'U'
+   };
 
    virtual IlsType ilsType() const;
    virtual int isIlsType(const IlsType type) const;
@@ -74,7 +74,6 @@ public:
    void  getGlideSlopeData(const double aclat, const double aclon, const double acelev, float* ilsGlideSlope, float* acGlideSlope, float* deltaGlideSlope) const;
    void  printGlideSlopeData(std::ostream& sout, const double aclat, const double aclon, const double acelev) const;
 
-
    // Record Interface
    virtual void printRecord(std::ostream& sout) const;
 
@@ -82,7 +81,6 @@ private:
    static const Ptbl ptable;
 
 };
-
 
 //------------------------------------------------------------------------------
 // inline member functions
@@ -124,8 +122,7 @@ inline void Ils::runwayIdent(char rwKey[]) const
 // runwayEndIdent: returns the value of the runway end identifier
 inline void Ils::runwayEndIdent(char rwEndKey[]) const
 {
-   dsGetString( rwEndKey,
-		makePointer(ILS_RW_ID_POS+AP_KEY_LEN), RW_XE_IDENT_LEN );
+   dsGetString( rwEndKey, makePointer(ILS_RW_ID_POS+AP_KEY_LEN), RW_XE_IDENT_LEN );
 }
 
 } // End Dafif namespace

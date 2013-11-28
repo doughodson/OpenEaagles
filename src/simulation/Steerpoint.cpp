@@ -541,7 +541,7 @@ bool Steerpoint::setSlotPTA(const Basic::Number* const msg)
 {
     bool ok = false;
     if (msg != 0) {
-		// assumes seconds
+        // assumes seconds
         setPTA( msg->getFloat() );
         ok = true;
     }
@@ -560,7 +560,7 @@ bool Steerpoint::setSlotSCA(const Basic::Number* const msg)
 {
     bool ok = false;
     if (msg != 0) {
-		// assumes feet
+        // assumes feet
         setSCA( msg->getFloat() );
         ok = true;
     }
@@ -698,7 +698,7 @@ bool Steerpoint::compute(const Navigation* const nav, const Steerpoint* const fr
         // Make sure we have a position vector and compute lat/lon, if needed
         // ---
         if ( !isLatLonValid() && isPosVecValid() ) {
-            // Compute our lat/long when we only have the Pos Vec
+            // Compute our lat/lon when we only have the Pos Vec
             double elev;
             Basic::Nav::convertPosVec2LL(nav->getRefLatitude(), nav->getRefLongitude(), posVec, &latitude, &longitude, &elev);
             elevation  = (LCreal) elev;
@@ -751,7 +751,7 @@ bool Steerpoint::compute(const Navigation* const nav, const Steerpoint* const fr
                 setETE( from->getETE() + getLegTime() );
             }
             else {
-                // When we don't have a 'from' steerpoint, this leg's is the same as the direct-to data
+                // When we don't have a 'from' steerpoint, this leg is the same as the direct-to data
                 setTrueCrsDeg( getTrueBrgDeg() );
                 setMagCrsDeg( getMagBrgDeg() );
                 setLegDistNM( getDistNM() );
@@ -769,7 +769,7 @@ bool Steerpoint::compute(const Navigation* const nav, const Steerpoint* const fr
             setELT( delta );
 
             // ---
-            // Compute Cross-track error (NM); negitive values are when the desired track
+            // Compute Cross-track error (NM); negative values are when the desired track
             //  to this point is left of our navigation position
             // ---
             LCreal aa = lcAepcDeg( getTrueBrgDeg() - getTrueCrsDeg() ) * (LCreal)Basic::Angle::D2RCC;
@@ -808,7 +808,7 @@ bool Steerpoint::compute(const Navigation* const nav, const Steerpoint* const fr
     
 //------------------------------------------------------------------------------
 // processComponets() -- process our components; make sure the are all of
-//	type Steerpoint (or derived); tell them that we are their container
+// type Steerpoint (or derived); tell them that we are their container
 //------------------------------------------------------------------------------
 void Steerpoint::processComponents(
       Basic::PairStream* const list,

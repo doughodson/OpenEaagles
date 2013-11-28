@@ -763,7 +763,7 @@ std::ostream& Terrain::serialize(std::ostream& sout, const int i, const bool slo
 {
     int j = 0;
     if ( !slotsOnly ) {
-    	indent(sout,i);
+      indent(sout,i);
       sout << "( " << getFormName() << std::endl;
       j = 4;
     }
@@ -779,8 +779,8 @@ std::ostream& Terrain::serialize(std::ostream& sout, const int i, const bool slo
     }
 
     if ( !slotsOnly ) {
-    	indent(sout,i);
-    	sout << ")" << std::endl;
+      indent(sout,i);
+      sout << ")" << std::endl;
     }
 
     return sout;

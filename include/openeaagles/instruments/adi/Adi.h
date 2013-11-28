@@ -1,8 +1,7 @@
 //------------------------------------------------------------------------------
 // Class: Adi
-// Base class: BasicGL::Graphic -> Instrument ->  Adi
 // 
-// Description: Adi that knows how to translate and rotate it's pitch and roll 
+// Description: Adi that knows how to translate and rotate its pitch and roll 
 // ladder according to aircraft pitch and roll.  You can either push data
 // down by using the send function (see below) or you can get a pointer and
 // use the member functions setPitch() and setRoll().
@@ -14,7 +13,7 @@
 //      UPDATE_VALUE2 = updates roll (radians)
 //      UPDATE_VALUE3 = updates max rate (degrees/second)
 //------------------------------------------------------------------------------
-#ifndef	__Eaagles_Instruments_Adi_H__
+#ifndef __Eaagles_Instruments_Adi_H__
 #define __Eaagles_Instruments_Adi_H__
 
 #include "openeaagles/instruments/Instrument.h"
@@ -25,10 +24,10 @@ namespace Instruments {
 
 class Adi : public Instrument {
     DECLARE_SUBCLASS(Adi,Instrument)
-    
+
 public:
     Adi();
-    
+
     // get functions
     LCreal getPitchInches() const       { return scaledPitch; }
     LCreal getPitch() const             { return getPreScaleInstValue(); }
@@ -53,20 +52,20 @@ protected:
     // slot functions
     virtual bool setSlotMaxRate(const Basic::Angle* const newMR);
     virtual bool setSlotMaxRate(const Basic::Number* const newMR);
-    
+
 private:
     // event function
     bool onUpdatePitchAdi(const Basic::Number* const newP);
     bool onUpdateRollDegAdi(const Basic::Number* const newR);
     bool onUpdateRollRadAdi(const Basic::Number* const newR);
     bool onUpdateMaxRateAdi(const Basic::Number* const newMR);
-    
+
     LCreal pitch;       // actual pitch (degrees)
     LCreal scaledPitch; // our pitch value (inches)
     LCreal curTheta;    // our current pitch value (degrees)
     LCreal curPhi;      // our current roll value (radians)
     LCreal roll;        // our roll value (radians)
-    LCreal maxRate;     // maximum mechanical rate at which the adi can move pitch or roll 
+    LCreal maxRate;     // maximum mechanical rate at which the adi can move pitch or roll
 };
 
 }; // end Instruments namespace

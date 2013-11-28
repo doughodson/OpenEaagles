@@ -14,24 +14,24 @@
 //
 // Public methods (Defined in Force, and inherited by all derived classes):
 //
-//	    set(const LCreal v)
-//		    Sets a Force derived instance with an LCreal.
+//     set(const LCreal v)
+//        Sets a Force derived instance with an LCreal.
 //
-//	    set(const Force& n)
-//		    Sets, and converts if necessary, a Force derived instance with
-//		    another Force derived instance.
+//     set(const Force& n)
+//        Sets, and converts if necessary, a Force derived instance with
+//        another Force derived instance.
 //
-//	    LCreal convert(const Force& n)
-//		    Converts the value of a Force derived instance into
-//		    the units of another Force derived instance.
+//     LCreal convert(const Force& n)
+//        Converts the value of a Force derived instance into
+//        the units of another Force derived instance.
 //
 //
-//	    Conversion routines:
+//     Conversion routines:
 //        static LCreal newtonsToKiloNewtons(const LCreal v)     { return v * 0.001; }
 //        static LCreal newtonsToPoundForces(const LCreal v)     { return v * 0.2248; }
 //        static LCreal newtonsToPoundals(const LCreal v)        { return v * 7.233; }
 //        static LCreal kiloNewtonsToNewtons(const LCreal v)     { return v * 1000; }
-//        static LCreal kiloNetonsToPoundForces(const LCreal v)  { return v * 224.8; }	
+//        static LCreal kiloNetonsToPoundForces(const LCreal v)  { return v * 224.8; }
 //        static LCreal kiloNewtonsToPoundals(const LCreal v)    { return v * 7233; }
 //        static LCreal poundForcesToNewtons(const LCreal v)     { return v * 4.448; }
 //        static LCreal poundForcesToKiloNewtons(const LCreal v) { return v * 0.004448; }
@@ -40,17 +40,17 @@
 //        static LCreal poundalsToKiloNewtons(const LCreal v)    { return v * 0.0001383; }
 //        static LCreal poundalsToPoundForces(const LCreal v)    { return v * 0.03108; }
 //
-//	    Output stream operator: >>
-//		    ostream& operator<<(ostream& sout, const Force& n)
-//			 Sends "( <the Force derived instance class name and value> )"
-//			 to the output stream.
+//     Output stream operator: >>
+//        ostream& operator<<(ostream& sout, const Force& n)
+//        Sends "( <the Force derived instance class name and value> )"
+//        to the output stream.
 //
 //
 // Public methods (For classes:  Newtons, KiloNewtons, PoundForce, Poundals):
 //
-//	    LCreal convertStatic(const Force& n)
-//		    static function to convert the given Force derived
-//		    instance into the units of a specific Force derived class.
+//     LCreal convertStatic(const Force& n)
+//        static function to convert the given Force derived
+//        instance into the units of a specific Force derived class.
 //
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_Basic_Forces_H__
@@ -102,7 +102,7 @@ public:
     static LCreal newtonsToPoundForces(const LCreal v)     { return v * N2PF; }
     static LCreal newtonsToPoundals(const LCreal v)        { return v * N2PD; }
     static LCreal kiloNewtonsToNewtons(const LCreal v)     { return v * KN2N; }
-    static LCreal kiloNewtonsToPoundForces(const LCreal v) { return (v * KN2N) * N2PF; }	
+    static LCreal kiloNewtonsToPoundForces(const LCreal v) { return (v * KN2N) * N2PF; }
     static LCreal kiloNewtonsToPoundals(const LCreal v)    { return (v * KN2N) * N2PD; }
     static LCreal poundForcesToNewtons(const LCreal v)     { return v * PF2N; }
     static LCreal poundForcesToKiloNewtons(const LCreal v) { return (v * PF2N) * N2KN; }
@@ -122,7 +122,7 @@ public:
 
 
 inline std::ostream& operator<<(std::ostream& sout, const Force& n)
-	   { sout << "( " << n.getFormName() << " " << n.getReal() << " )"; return sout; }
+   { sout << "( " << n.getFormName() << " " << n.getReal() << " )"; return sout; }
 
 //------------------------------------------------------------------------------
 // Class:  Newtons

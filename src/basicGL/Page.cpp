@@ -1,5 +1,5 @@
 //
-// Class:	Page
+// Class: Page
 
 #include "openeaagles/basicGL/Page.h"
 #include "openeaagles/basicGL/Display.h"
@@ -196,7 +196,7 @@ void Page::reset()
 }
 
 //------------------------------------------------------------------------------
-// findBySelectName() -- find one of our components by it's GL Select (pick) name
+// findBySelectName() -- find one of our components by its GL Select (pick) name
 //                    (our children first then grandchildren)
 //------------------------------------------------------------------------------
 Basic::Pair* Page::findBySelectName(const GLuint name)
@@ -218,7 +218,7 @@ bool Page::newSubpage(Page* const np1, Page* theCaller, Basic::Object* theArg)
 {
     bool ok = false;
     if (np1 != 0) {
-        cpName.empty();	    // Unknown name
+        cpName.empty();       // Unknown name
         np = np1;
         np->pageArg = theArg;
         np->caller  = theCaller;
@@ -237,7 +237,7 @@ bool Page::newSubpage(const char* const name, Page* theCaller, Basic::Object* th
     Basic::Pair* p = 0;
     if (subpages != 0) p = subpages->findByName(name);
     if (p != 0) {
-        cpName = name;	// It's our page
+        cpName = name;            // It's our page
         np = (Page*) p->object();
         np->pageArg = theArg;
         np->caller  = theCaller;
@@ -267,7 +267,7 @@ bool Page::pushSubpage(const char* const name, Page* theCaller, Basic::Object* t
         Basic::Pair* p = 0;
         if (subpages != 0) p = subpages->findByName(name);
         if (p != 0) {
-           cpName = name;	// It's our page
+           cpName = name;            // It's our page
            np = (Page*) p->object();
            np->pageArg = theArg;
            np->caller  = theCaller;
@@ -287,7 +287,7 @@ bool Page::popSubpage(Page* theCaller, Basic::Object* theArg)
    bool ok = false;
    if (subpageSP < SUBPAGE_STACK_SIZE) {
       //ok = newSubpage(subpageStack[subpageSP++],theCaller,theArg);
-      cpName.empty();	    // Unknown name
+      cpName.empty();               // Unknown name
       np = subpageStack[subpageSP++];
       np->pageArg = theArg;
       np->caller  = theCaller;
@@ -453,8 +453,8 @@ void Page::draw()
 
 //------------------------------------------------------------------------------
 // processSubpages() -- process our subpages; make sure they are all of
-//	type Page (or derived from it)and tell them that we are their
-//	container.
+// type Page (or derived from it)and tell them that we are their
+// container.
 //------------------------------------------------------------------------------
 bool Page::processSubpages()
 {

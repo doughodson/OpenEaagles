@@ -1,4 +1,6 @@
-
+//------------------------------------------------------------------------------
+// Class: Simulation
+//------------------------------------------------------------------------------
 #include "openeaagles/simulation/Simulation.h"
 
 #include "openeaagles/simulation/DataRecorder.h"
@@ -94,13 +96,13 @@ IMPLEMENT_PARTIAL_SUBCLASS(Simulation,"Simulation")
 // slot table for this class type
 //------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Simulation)
-   "players",	      //  1) All players
+   "players",        //  1) All players
    "latitude",       //  2) Ref latitude 
    "longitude",      //  3) Ref longitude
    "simulationTime", //  4) Simulation time
-   "day",	         //  5) Initial simulated day of month [ 1 .. 31 ]
-   "month",	         //  6) Initial simulated month [ 1 .. 12 ]
-   "year",	         //  7) Initial simulated year [ 1970 .. 2100 ]
+   "day",            //  5) Initial simulated day of month [ 1 .. 31 ]
+   "month",          //  6) Initial simulated month [ 1 .. 12 ]
+   "year",           //  7) Initial simulated year [ 1970 .. 2100 ]
    "airportLoader",  //  8) Airport database
    "navaidLoader",   //  9) NAVAID database
    "waypointLoader", // 10) Waypoint database
@@ -111,7 +113,7 @@ BEGIN_SLOTTABLE(Simulation)
    "numBgThreads",   // 15) Number of background threads to use with the player list
 
    "gamingAreaRange", // 16) Max valid range of the simulation's gaming area or zero for unlimited
-                     //     (default: zero -- unlimited range)
+                      //     (default: zero -- unlimited range)
 
    "earthModel",      // 17) Earth model for geodetic lat/lon (default is WGS-84)
 
@@ -451,7 +453,7 @@ void Simulation::reset()
                // reinstated the container pointer and player name
                ip->container(this);
                ip->setName(*pair->slot());
-      
+
                // Insert the IPlayer into the new list in sorted order
                insertPlayerSort(pair, newList);
             }
@@ -506,8 +508,11 @@ void Simulation::reset()
          // Compute simulated minute past the hour
          cMin  = t/60;
          t -= (cMin * 60);
-         // Compute simualted second past the minute
+         // Compute simulated second past the minute
          cSec = t;
+
+         // Set simulated uSec set to 0; using pc microseconds is meaningless and introduces randomness where none is desired.
+         simTvUSec = 0;
       }
    }
 
@@ -701,7 +706,7 @@ bool Simulation::shutdownNotification()
    if (terrain != 0) terrain->event(SHUTDOWN_EVENT);
 
    // ---
-   // Shutdown the thread pools
+   // Shut down the thread pools
    // ---
    if (numTcThreads > 0) {
       for (unsigned int i = 0; i < numTcThreads; i++) {
@@ -737,14 +742,12 @@ void Simulation::updateTC(const LCreal dt)
    // ---
    {
       unsigned long newPcTvUSec = pcTvUSec + (unsigned long)(dt * 1000000.0 + 0.5);
-      if (newPcTvUSec >= 1000000) {
+      // while loop is used instead of if statement in case dt > 1 sec (i.e., tcRate < 1 Hz)
+      while (newPcTvUSec >= 1000000) {
          newPcTvUSec = newPcTvUSec - 1000000;
          pcTvSec++;
-         pcTvUSec = newPcTvUSec;
       }
-      else {
-         pcTvUSec = newPcTvUSec;
-      }
+      pcTvUSec = newPcTvUSec;
       //getTime(&pcTvSec, &pcTvUSec); /* test */
 
       unsigned int cYear = 0;
@@ -778,14 +781,13 @@ void Simulation::updateTC(const LCreal dt)
       if (simTimeSlaved) deltaTime = dt;
 
       unsigned long newSimTvUSec = simTvUSec + (unsigned long)(deltaTime * 1000000.0 + 0.5);
-      if (newSimTvUSec >= 1000000) {
+      // while loop is used instead of if statement in case dt > 1 sec (i.e., tcRate < 1 Hz)
+      while (newSimTvUSec >= 1000000) {
          newSimTvUSec = newSimTvUSec - 1000000;
          simTvSec++;
-         simTvUSec = newSimTvUSec;
       }
-      else {
-         simTvUSec = newSimTvUSec;
-      }
+
+      simTvUSec = newSimTvUSec;
    }
 
    // compute the simulated time of day
@@ -815,7 +817,7 @@ void Simulation::updateTC(const LCreal dt)
    // Called once per frame -- Process 4 phases per frame
    // ---
    {
-      // This lock the current player list for this time-critical frame
+      // This locks the current player list for this time-critical frame
       SPtr<Basic::PairStream> currentPlayerList = players;
 
       for (unsigned int f = 0; f < 4; f++) {
@@ -828,7 +830,7 @@ void Simulation::updateTC(const LCreal dt)
             updateTcPlayerList(currentPlayerList, (dt0/4.0f), 1, 1);
          }
          else if (numTcThreads > 0) {
-            // multible threads
+            // multiple threads
             for (unsigned short i = 0; i < numTcThreads; i++) {
 
                // assign the threads from the pool
@@ -867,10 +869,10 @@ void Simulation::updateTC(const LCreal dt)
 // with the idx'th player
 //------------------------------------------------------------------------------
 void Simulation::updateTcPlayerList(
-	Basic::PairStream* const playerList,
-	const LCreal dt,
-	const unsigned int idx,
-	const unsigned int n
+   Basic::PairStream* const playerList,
+   const LCreal dt,
+   const unsigned int idx,
+   const unsigned int n
      )
 {
    if (playerList != 0) {

@@ -17,7 +17,6 @@ namespace BasicGL {
 
 //------------------------------------------------------------------------------
 // Class: Field
-// Base class:  Object > Graphic > Field
 //
 // Description: Abstract Field class (not in the formFunc())
 //
@@ -209,22 +208,22 @@ public:
    virtual int column(const int cc);
    virtual int column() const;
 
-   size_t width() const                 { return w; }
-   size_t width(const size_t t)         { w = t; adjust(); return w; }
+   size_t width() const                   { return w; }
+   size_t width(const size_t t)           { w = t; adjust(); return w; }
 
-   Mode getMode() const                 { return mode; }
+   Mode getMode() const                   { return mode; }
    Mode setMode(const Mode newMode);
 
-   bool isHighLighted() const           { return (dmode & highlight) != 0; }
-   bool isUnderlined() const            { return (dmode & underline) != 0; }
-   bool isReversed() const              { return (dmode & reversed) != 0; }
-   bool isSpecial() const               { return (dmode & special) != 0; }
-   bool isVertical() const              { return (dmode & vertical) != 0; }
-   bool areBracketsOn() const           { return (dmode & brackets) != 0; }
-   bool isDisplayMode(const int t) const { return (dmode & t) != 0; }
-   void setDisplayMode(const int t)     { dmode |= t; }
-   void clearDisplayMode(const int t)   { dmode &= ~t; }
-   void clearAllDisplayModes()          { dmode = 0; }
+   bool isHighLighted() const             { return (dmode & highlight) != 0; }
+   bool isUnderlined() const              { return (dmode & underline) != 0; }
+   bool isReversed() const                { return (dmode & reversed) != 0;  }
+   bool isSpecial() const                 { return (dmode & special) != 0;   }
+   bool isVertical() const                { return (dmode & vertical) != 0;  }
+   bool areBracketsOn() const             { return (dmode & brackets) != 0;  }
+   bool isDisplayMode(const int t) const  { return (dmode & t) != 0; }
+   void setDisplayMode(const int t)       { dmode |= t; }
+   void clearDisplayMode(const int t)     { dmode &= ~t; }
+   void clearAllDisplayModes()            { dmode = 0; }
 
    Basic::String::Justify justification() const;
    Basic::String::Justify justification(const Basic::String::Justify t);

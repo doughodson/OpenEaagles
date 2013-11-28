@@ -22,7 +22,7 @@ BEGIN_SLOTTABLE(AnalogInput)
     "ai",         // 1) Analog Input location (IoData's AI channel)
     "channel",    // 2) Device channel number
     "value",      // 3) Initial value [ -1.0 ... 1.0 ] (default: 0)
-    "deadband",   // 4: Deadband: [ 0 .. 1 ] (default: 0.0)
+    "deadband",   // 4) Deadband: [ 0 .. 1 ] (default: 0.0)
     "offset",     // 5) Offset value (default: 0.0)
     "gain",       // 6) Gain value   (default: 1.0)
     "table"       // 7) Shaping function table (default: none)

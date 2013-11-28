@@ -73,11 +73,11 @@ protected:
     bool setSlotShininess(const Basic::Number*const x);
     
 private:
-    osg::Vec4 ambientColor;     // holds our ambient color
-    osg::Vec4 diffuseColor;     // holds our diffuse color 
-    osg::Vec4 emissiveColor;    // holds our emissive color
-    osg::Vec4 specularColor;    // holds our specular color
-    LCreal shininess;           // hold our shininess value
+    osg::Vec4 ambientColor;     // ambient color
+    osg::Vec4 diffuseColor;     // diffuse color 
+    osg::Vec4 emissiveColor;    // emissive color
+    osg::Vec4 specularColor;    // specular color
+    LCreal shininess;           // shininess value
 };
 
 } // End BasicGL namespace

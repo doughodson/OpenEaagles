@@ -1,43 +1,43 @@
 //------------------------------------------------------------------------------
 // Class: Runway
-// Base class:	Basic::Object -> Basic::String -> Record -> Runway
+// Base class: Basic::Object -> Basic::String -> Record -> Runway
 //
 // Description: Access to the DAFIF Airport/Runway records.
 //
 //
 // Public member functions:
 //
-//	[all public members from the base classes]
+//  [all public members from the base classes]
 //
-//	double latitude(WhichEnd whichEnd)
-//	double longitude(WhichEnd whichEnd)
-//	float elevation(WhichEnd whichEnd)
-//	float slope(WhichEnd whichEnd)
-//	float magHeading(WhichEnd whichEnd)
-//	    Return the values of the latitude, longitude, elevation, slope
-//	    and magnetic heading fields for 'whichEnd' of the runway.
-//	    WhichEnd is Runway::HIGH_END or Runway::LOW_END.
+//  double latitude(WhichEnd whichEnd)
+//  double longitude(WhichEnd whichEnd)
+//  float elevation(WhichEnd whichEnd)
+//  float slope(WhichEnd whichEnd)
+//  float magHeading(WhichEnd whichEnd)
+//      Return the values of the latitude, longitude, elevation, slope
+//      and magnetic heading fields for 'whichEnd' of the runway.
+//      WhichEnd is Runway::HIGH_END or Runway::LOW_END.
 //
-//	ident(char id[], WhichEnd whichEnd) 
-//	    Returns the value of the runway's (end) identifier field in 'id'.
+//  ident(char id[], WhichEnd whichEnd) 
+//      Returns the value of the runway's (end) identifier field in 'id'.
 //
-//	int isIdent(char id[], WhichEnd whichEnd) 
-//	    Returns true if 'id' is equal to the runway's (end) id field.
+//  int isIdent(char id[], WhichEnd whichEnd) 
+//      Returns true if 'id' is equal to the runway's (end) id field.
 //
-//	int width() 
-//	    Returns the width of the runway (feet).
+//  int width() 
+//      Returns the width of the runway (feet).
 //
-//	int length() 
-//	    Returns the length of the runway (feet).
+//  int length() 
+//      Returns the length of the runway (feet).
 //
-//	void airportKey(char apKey[])
-//	    Returns the record key of the airport.
+//  void airportKey(char apKey[])
+//      Returns the record key of the airport.
 //
-//	WhichEnd whichEnd(char rwEndId[])
-//	    Returns which end of the runway matches the runway end id.
+//  WhichEnd whichEnd(char rwEndId[])
+//      Returns which end of the runway matches the runway end id.
 //
-//	Runway::recordLength
-//		Length of a DAFIF Runway record pair.
+//  Runway::recordLength
+//       Length of a DAFIF Runway record pair.
 //
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_Dafif_Runway_H__
@@ -77,7 +77,7 @@ public:
 
    WhichEnd whichEnd(const char rwEndId[]) const;
 
-   // DafifRecord Interface
+   // Record Interface
    virtual void printRecord(std::ostream& sout) const;
 
 private:

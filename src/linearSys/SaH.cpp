@@ -138,7 +138,7 @@ void SaH::initialize()
       py[0] = y0;
 
       // Compute sample time
-		stime = 1.0f/sampleRate;
+      stime = 1.0f/sampleRate;
 
       // Age of the sample data: set beyond max to force a sample at first call to g() 
       time = stime + 1.0f;

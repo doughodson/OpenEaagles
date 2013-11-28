@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
-// Class: MulticastHandler
+// Class: UdpMulticastHandler
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_MulticastHandler_H__
-#define __Eaagles_Basic_MulticastHandler_H__
+#ifndef __Eaagles_Basic_UdpMulticastHandler_H__
+#define __Eaagles_Basic_UdpMulticastHandler_H__
 
 #include "openeaagles/basic/NetHandler.h"
 
@@ -12,10 +12,11 @@ namespace Basic {
 class String;
 
 //------------------------------------------------------------------------------
-// Class: MulticastHandler
-// Form name: MulticastHandler
+// Class: UdpMulticastHandler
 //
-// Description: Multicast network handler.
+// Description: UDP multicast network handler.
+//
+// Form name: UdpMulticastHandler
 //
 // multicast:
 // "A point-to-many networking model in which a packet is sent to a specific address,
@@ -26,8 +27,6 @@ class String;
 //  that must receive it. The multicast model greatly reduces traffic and increases
 //  efficiency on such networks."
 //
-//
-// Form name: MulticastHandler
 // Slots:
 //      multicastGroup  <String>    ! String containing the multicast IP address in
 //                                  the Internet standard "." (dotted) notation.
@@ -53,7 +52,7 @@ class String;
 //
 // Input File Example:
 //
-//        ( MulticastHandler
+//        ( UdpMulticastHandler
 //           multicastGroup: "224.0.0.251"      // Multicast group
 //           port: 2010                         // Multicast port
 //           localPort: 2011                    // Port to send from
@@ -62,14 +61,13 @@ class String;
 //           loopback: 1                        // Loop back
 //        )
 //
-//
 //------------------------------------------------------------------------------
-class MulticastHandler : public NetHandler
+class UdpMulticastHandler : public NetHandler
 {
-    DECLARE_SUBCLASS(MulticastHandler, NetHandler)
+    DECLARE_SUBCLASS(UdpMulticastHandler, NetHandler)
 
 public:
-    MulticastHandler();
+    UdpMulticastHandler();
 
     int getTTL() const                      { return ttl; }
     void setTTL(const int v)                { ttl = v; }

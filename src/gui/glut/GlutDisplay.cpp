@@ -319,7 +319,7 @@ void GlutDisplay::select()
 }
 
 //-----------------------------------------------------------------------------
-// hide our glut window (set our self to the current window first)
+// hide our glut window (set ourself to the current window first)
 //-----------------------------------------------------------------------------
 void GlutDisplay::hide()
 {

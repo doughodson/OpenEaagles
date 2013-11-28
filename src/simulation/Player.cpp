@@ -760,7 +760,7 @@ void Player::updateData(const LCreal dt)
       updateElevation();
 
       // ---
-      // Note: our subsystems in the components list (e.g., pilot, nav, sms and obc) are update
+      // Note: our subsystems in the components list (e.g., pilot, nav, sms and obc) are updated
       // by our call to BaseClass:updateData()
       // ---
       BaseClass::updateData(dt);
@@ -818,13 +818,13 @@ bool Player::isHeadingHoldOn() const
       return false;
 }
 
-// Returns commanded heading, default (radians)
+// Return commanded heading, default (radians)
 double Player::getCommandedHeading() const
 {
    return getCommandedHeadingD() * (LCreal)Basic::Angle::D2RCC;
 }
 
-// Returns commanded heading (degrees)
+// Return commanded heading (degrees)
 double Player::getCommandedHeadingD() const
 {
    if (getDynamicsModel() != 0)
@@ -833,7 +833,7 @@ double Player::getCommandedHeadingD() const
       return 0;
 }
 
-// Returns commanded heading (radians)
+// Return commanded heading (radians)
 double Player::getCommandedHeadingR() const
 {
    return getCommandedHeadingD() * (LCreal)Basic::Angle::D2RCC;
@@ -2935,7 +2935,7 @@ bool Player::onReflectionsCancel(const Basic::Component* const p)
 {
    bool ok = false;        // Did we succeed?
 
-   // Find player 'p' and clear it's request
+   // Find player 'p' and clear its request
    for (unsigned int i = 0; i < MAX_RF_REFLECTIONS && !ok; i++) {
       if (rfReflect[i] == p) {
          // Clear the request
@@ -3429,8 +3429,8 @@ void Player::updateSystemPointers()
 }
 
 //------------------------------------------------------------------------------
-// processComponets() -- process our components; make sure the are all of
-//	type Steerpoint (or derived); tell them that we are their container
+// processComponents() -- process our components; make sure the are all of
+// type Steerpoint (or derived); tell them that we are their container
 //------------------------------------------------------------------------------
 void Player::processComponents(
    Basic::PairStream* const list,

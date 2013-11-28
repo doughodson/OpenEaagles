@@ -128,7 +128,7 @@ int WaypointLoader::getMaxRecords()
 //------------------------------------------------------------------------------
 // waypoint() -- get the WAYPOINT by number: 0 ... numberOfRecords()-1
 // getWaypoint() -- get a WAYPOINT record from the last query:
-//							0 ... numberFound()-1
+//                  0 ... numberFound()-1
 //------------------------------------------------------------------------------
 Waypoint* WaypointLoader::waypoint(const int n)
 {

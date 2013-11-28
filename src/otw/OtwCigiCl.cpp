@@ -657,11 +657,11 @@ bool OtwCigiCl::setBuildingData(OtwModelCigiCl* const m, const unsigned short en
       m->damageCC[iw] = new CigiCompCtrlV3();
       m->damageCC[iw]->SetCompClassV3(CigiCompCtrlV3::EntityV3);
       m->damageCC[iw]->SetInstanceID(entity);
-      m->damageCC[iw]->SetCompID(6); // Object State
-      m->damageCC[iw]->SetCompState(1);	// 0 = DEFAULT, 1 = GOOD, 2 = DAMAGED, 3 = DISTROYED
+      m->damageCC[iw]->SetCompID(6);            // Object State
+      m->damageCC[iw]->SetCompState(1);         // 0 = DEFAULT, 1 = GOOD, 2 = DAMAGED, 3 = DISTROYED
       m->damageCC[iw]->SetCompData(0.0f, 0);
       m->damageCC[iw]->SetCompData(0.0f, 1);
-      m->damageActive = true;  // true the first time to make sure the model state is good
+      m->damageActive = true;                   // true the first time to make sure the model state is good
    }
    CigiCompCtrlV3* const damage = m->damageCC[iw];
 
@@ -714,15 +714,15 @@ bool OtwCigiCl::setBuildingData(OtwModelCigiCl* const m, const unsigned short en
 
       if (p->getDamage() > 0.0) {
          if (p->isDestroyed()) {
-            damage->SetCompState(3);	// 3 = DISTROYED
+            damage->SetCompState(3);    // 3 = DISTROYED
          }
          else {
-            damage->SetCompState(2);	// 2 = DAMAGED
+            damage->SetCompState(2);    // 2 = DAMAGED
          }
          m->damageActive = true;
       }
       else {
-         damage->SetCompState(1);	// 0 = DEFAULT, 1 = GOOD, 2 = DAMAGED, 3 = DISTROYED
+         damage->SetCompState(1);       // 0 = DEFAULT, 1 = GOOD, 2 = DAMAGED, 3 = DISTROYED
       }
 
    }
@@ -756,8 +756,8 @@ bool OtwCigiCl::setGndVehicleData(OtwModelCigiCl* const m, const unsigned short 
       m->damageCC[iw] = new CigiCompCtrlV3();
       m->damageCC[iw]->SetCompClassV3(CigiCompCtrlV3::EntityV3);
       m->damageCC[iw]->SetInstanceID(entity);
-      m->damageCC[iw]->SetCompID(6); // Object State
-      m->damageCC[iw]->SetCompState(1);	// 0 = DEFAULT, 1 = GOOD, 2 = DAMAGED, 3 = DISTROYED
+      m->damageCC[iw]->SetCompID(6);       // Object State
+      m->damageCC[iw]->SetCompState(1);    // 0 = DEFAULT, 1 = GOOD, 2 = DAMAGED, 3 = DISTROYED
       m->damageCC[iw]->SetCompData(0.0f, 0);
       m->damageCC[iw]->SetCompData(0.0f, 1);
       m->damageActive = true;  // true the first time to make sure the model state is good
@@ -834,15 +834,15 @@ bool OtwCigiCl::setGndVehicleData(OtwModelCigiCl* const m, const unsigned short 
 
       if (p->getDamage() > 0.0) {
          if (p->isDestroyed()) {
-            damage->SetCompState(3);	// 3 = DISTROYED
+            damage->SetCompState(3);   // 3 = DISTROYED
          }
          else {
-            damage->SetCompState(2);	// 2 = DAMAGED
+            damage->SetCompState(2);   // 2 = DAMAGED
          }
          m->damageActive = true;
       }
       else {
-         damage->SetCompState(1);	// 0 = DEFAULT, 1 = GOOD, 2 = DAMAGED, 3 = DISTROYED
+         damage->SetCompState(1);      // 0 = DEFAULT, 1 = GOOD, 2 = DAMAGED, 3 = DISTROYED
       }
 
    }
@@ -2132,7 +2132,7 @@ bool CigiCl::initialize(OtwCigiCl* const p)
    // ---
    if (cigiInitialized) {
       session = new CigiHostSession(4, MAX_BUF_SIZE, 4, MAX_BUF_SIZE);
-      //session->SetCigiVersion(2);		// CGB only force this if necessary
+      //session->SetCigiVersion(2);     // CGB only force this if necessary
       // CGBCGB ??? session->SetSynchronous(p->isSyncMode());
    }
 

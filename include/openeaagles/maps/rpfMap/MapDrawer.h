@@ -3,7 +3,7 @@
 //
 // Description:
 // This is the actual class that does the drawing of the map.  It cycles through
-// it's texture pagers and tells them where to reference, and how to draw.  Then
+// its texture pagers and tells them where to reference, and how to draw.  Then
 // texture pages draws the tiles.
 //
 // Subroutines:

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="12.1">
-  <zoom_level>8</zoom_level>
+  <zoom_level>10</zoom_level>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>168</x>
-      <y>32</y>
-      <w>568</w>
-      <h>272</h>
+      <x>170</x>
+      <y>10</y>
+      <w>710</w>
+      <h>340</h>
     </coordinates>
     <panel_attributes>NetworkHandler
 --
@@ -39,12 +39,12 @@ ignoreSourcePort:
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>264</x>
-      <y>328</y>
-      <w>472</w>
-      <h>72</h>
+      <x>290</x>
+      <y>380</y>
+      <w>590</w>
+      <h>90</h>
     </coordinates>
-    <panel_attributes>UdpHandler
+    <panel_attributes>UdpUnicastHandler
 --
 ipAddress:
 -- String containing the IP address in
@@ -55,21 +55,21 @@ ipAddress:
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>216</x>
-      <y>280</y>
-      <w>64</w>
-      <h>96</h>
+      <x>230</x>
+      <y>320</y>
+      <w>80</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>24;24;24;80;48;80</additional_attributes>
+    <additional_attributes>30;30;30;100;60;100</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>264</x>
-      <y>416</y>
-      <w>112</w>
-      <h>208</h>
+      <x>290</x>
+      <y>820</y>
+      <w>140</w>
+      <h>260</h>
     </coordinates>
     <panel_attributes>TcpHandler
 --
@@ -79,10 +79,10 @@ ipAddress:
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>424</x>
-      <y>432</y>
-      <w>312</w>
-      <h>64</h>
+      <x>490</x>
+      <y>840</y>
+      <w>390</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>TcpClient
 --
@@ -95,32 +95,32 @@ ipAddress:
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>200</x>
-      <y>280</y>
-      <w>80</w>
-      <h>176</h>
+      <x>160</x>
+      <y>320</y>
+      <w>150</w>
+      <h>580</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>24;24;24;160;64;160</additional_attributes>
+    <additional_attributes>30;30;30;560;130;560</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>352</x>
-      <y>440</y>
-      <w>88</w>
-      <h>40</h>
+      <x>400</x>
+      <y>850</y>
+      <w>110</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>24;24;72;24</additional_attributes>
+    <additional_attributes>30;30;90;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>424</x>
-      <y>576</y>
-      <w>312</w>
-      <h>48</h>
+      <x>490</x>
+      <y>1020</y>
+      <w>390</w>
+      <h>60</h>
     </coordinates>
     <panel_attributes>TcpServerMulti
 --
@@ -130,21 +130,21 @@ ipAddress:
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>352</x>
-      <y>576</y>
-      <w>88</w>
-      <h>40</h>
+      <x>400</x>
+      <y>1020</y>
+      <w>110</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>24;24;72;24</additional_attributes>
+    <additional_attributes>30;30;90;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>424</x>
-      <y>512</y>
-      <w>312</w>
-      <h>48</h>
+      <x>490</x>
+      <y>940</y>
+      <w>390</w>
+      <h>60</h>
     </coordinates>
     <panel_attributes>TcpServerSingle
 --
@@ -154,23 +154,23 @@ ipAddress:
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>352</x>
-      <y>512</y>
-      <w>88</w>
-      <h>40</h>
+      <x>400</x>
+      <y>940</y>
+      <w>110</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>24;24;72;24</additional_attributes>
+    <additional_attributes>30;30;90;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>264</x>
-      <y>648</y>
-      <w>472</w>
-      <h>64</h>
+      <x>290</x>
+      <y>490</y>
+      <w>590</w>
+      <h>80</h>
     </coordinates>
-    <panel_attributes>BroadcastHandler
+    <panel_attributes>UdpBroadcastHandler
 --
 networkMask:
 -- Host Net Mask "255.255.255.255"
@@ -180,23 +180,23 @@ networkMask:
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>184</x>
-      <y>280</y>
-      <w>96</w>
-      <h>408</h>
+      <x>210</x>
+      <y>320</y>
+      <w>100</w>
+      <h>220</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>24;24;24;392;80;392</additional_attributes>
+    <additional_attributes>30;30;30;200;80;200</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>264</x>
-      <y>728</y>
-      <w>472</w>
-      <h>160</h>
+      <x>290</x>
+      <y>590</y>
+      <w>590</w>
+      <h>200</h>
     </coordinates>
-    <panel_attributes>MulticastHandler
+    <panel_attributes>UdpMulticastHandler
 --
 multicastGroup:
 -- String containing the multicast IP address in
@@ -215,12 +215,12 @@ loopback:
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>168</x>
-      <y>280</y>
-      <w>112</w>
-      <h>488</h>
+      <x>190</x>
+      <y>320</y>
+      <w>120</w>
+      <h>320</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>24;24;24;472;96;472</additional_attributes>
+    <additional_attributes>30;30;30;300;100;300</additional_attributes>
   </element>
 </diagram>

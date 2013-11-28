@@ -131,7 +131,7 @@
                 )
             }
         )
-	    // our side slip is also a pointer
+        // our side slip is also a pointer
         sideslip:   
         ( DialPointer
             components: {
@@ -194,9 +194,9 @@
                 
             }
         ) // end of bank angle tic marks graphic 
-				
-		// Our test routine TestMfdAdi.cpp will look up each of these graphics by name, and depending on the roll value, will make them visible or not, by
-		// sending the event message SET_VISIBILITY
+
+        // Our test routine TestMfdAdi.cpp will look up each of these graphics by name, and depending on the roll value, will make them visible or not, by
+        // sending the event message SET_VISIBILITY
         // 45 and 60 degree tic marks for a roll over 25 degrees                                               
         over25: 
         ( Graphic
@@ -237,10 +237,10 @@
                     vertices: { [ 0.0 -4.1 ] [ 0.0 -3.6 ] }
                 )   
             }
-        ) // end of over 55 graphic        
-                    
-         
-        // 135 degree tic mark for a roll over 85 degrees                                                
+        ) // end of over 55 graphic
+
+
+        // 135 degree tic mark for a roll over 85 degrees
         over85: 
         ( Graphic
             linewidth: 2
@@ -252,11 +252,11 @@
                 ( Line
                     transform: ( Rotation -2.355001884 )
                     vertices: { [ 0.0 -4.1 ] [ 0.0 -3.6 ] }
-                )           
+                )
             }
         )
     }
-)              
+)
 
 // Climb dive marker takes x, y, and roll values, and translates and rotates accordingly
 // see inputs for send in ClimbDiveMarker.h.  This is basically a mini adi, but it moves about seperately
@@ -294,7 +294,7 @@ climbdivemarker:
                     slices: 100
                 ) 
             }
-        )                    
+        )
     }
 )
 
@@ -310,7 +310,7 @@ climbdivemarker:
         // in accordance to the values it receives.  Other than that, it works exactly like the regular adi.
         mfdadi:
         ( Adi
-			// Every time you pitch over 40 or -40 degrees, the ghost horizon bar will become visible
+            // Every time you pitch over 40 or -40 degrees, the ghost horizon bar will become visible
             scalingTable: 
             ( Table1
                 x: [ -90 90 ]
@@ -320,8 +320,8 @@ climbdivemarker:
                 pitchladder:  
                 ( Graphic
                     components: {
-					    // sky background
-					    ( Polygon 
+                        // sky background
+                        ( Polygon 
                             color: ( rgb 0 0 0.5  )
                             transform: ( Translation 0 0 -1 )
                             vertices: {
@@ -331,7 +331,7 @@ climbdivemarker:
                                 [  100.0 0.0 ]
                             }
                         )
-					    // ground background
+                        // ground background
                         ( Polygon
                             color: gray
                             transform: ( Translation 0 0 -1 )
@@ -493,9 +493,9 @@ climbdivemarker:
                             flip: 1
                             tickLength: 0.3
                             color: white
-                        )               
-                                                                                                                                          
-                        -10degree:      
+                        )
+
+                        -10degree:
                         ( Graphic 
                             color: white
                             transform: ( Translation 0 -2.2 )
@@ -525,7 +525,7 @@ climbdivemarker:
                         ) // end of -10 degree graphic (small bar)
 
 
-                        -20degree:      
+                        -20degree:
                         ( Graphic
                             color: white
                             transform: ( Translation 0 -4.4 )
@@ -553,8 +553,8 @@ climbdivemarker:
                                 )
                             }
                         ) // end of -20 degree graphic (small bar)
-                            
-                        -30degree:      
+
+                        -30degree:
                         ( Graphic
                             color: white
                             transform: ( Translation 0 -6.6 )
@@ -582,7 +582,7 @@ climbdivemarker:
                                 )
                             }
                         ) // end of -30 degree graphic (small bar)
-                        
+
                         -30degreetext:   
                         ( NumericReadout
                             color: cyan
@@ -592,7 +592,7 @@ climbdivemarker:
                             format: "##"
                         )
 
-                        -40degree:      
+                        -40degree:
                         ( Graphic
                             color: white
                             transform: ( Translation 0 -8.9 )
@@ -621,9 +621,7 @@ climbdivemarker:
                             }
                         ) // end of -40 degree graphic (small bar)
 
-
-
-                        -50degree:      
+                        -50degree:
                         ( Graphic
                             color: white
                             transform: ( Translation 0 -11.1 )
@@ -652,8 +650,7 @@ climbdivemarker:
                             }
                         ) // end of -50 degree graphic (small bar)
 
-
-                        -60degree:      
+                        -60degree:
                         ( Graphic
                             color: white
                             transform: ( Translation 0 -13.3 )
@@ -690,7 +687,7 @@ climbdivemarker:
                             format: "##"
                         )
 
-                        -70degree:      
+                        -70degree:
                         ( Graphic
                             color: white
                             transform: ( Translation 0 -15.5 )
@@ -719,7 +716,7 @@ climbdivemarker:
                             }
                         ) // end of -70 degree graphic (small bar)
 
-                        -80degree:      
+                        -80degree:
                         ( Graphic
                             color: white
                             transform: ( Translation 0 -17.8 )
@@ -752,7 +749,7 @@ climbdivemarker:
                 )
             }
         ) // end of the adi
-        ghosthorizon:               
+        ghosthorizon:
         ( GhostHorizon
             linewidth: 2
             width: 50
@@ -799,6 +796,6 @@ climbdivemarker:
                 ) 
             }
         ) // end of ghost horizon instance  
-        
+
     }
 )

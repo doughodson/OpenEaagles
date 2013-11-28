@@ -4,9 +4,12 @@
 //      TabLogger::TabLogEvent        -- Abstract simulation log event
 //      TabLogger::LogPlayerData      -- Log Player Data event (header, new, update, removed)
 //      TabLogger::LogWeaponActivity  -- Weapon release, detonation (or KILL, but it is not in use now.)
-//      TabLogger::LogGunActivity           -- Gun was fired
+//      TabLogger::LogGunActivity     -- Gun was fired
 //      TabLogger::LogActiveTrack     -- Log active (radar) track event (header, new, update, removed)
 //      TabLogger::LogPassiveTrack    -- Log passive (rwr)  track event (header, new, update, removed)
+//
+// Description: Very simular to SimLogger, except ASCII output is more verbose and
+//              formatted using tab characters
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_Simulation_TabLogger_H__
 #define __Eaagles_Simulation_TabLogger_H__
@@ -26,20 +29,20 @@ class Player;
 class Emission;
 class Simulation;
 
-
 //------------------------------------------------------------------------------
 // Class:   TabLogger
 // Base class:  Basic::Object -> Basic::Component -> Basic::Logger -> SimLogger -> TabLogger
 // Description: Simulation Event & Data Logger
 // Form name: TabLogger
 //------------------------------------------------------------------------------
-class TabLogger : public SimLogger {
-    DECLARE_SUBCLASS(TabLogger,SimLogger)
+class TabLogger : public SimLogger
+{
+    DECLARE_SUBCLASS(TabLogger, SimLogger)
 
 public:
 
     TabLogger();
-   
+
     // Basic::Component interface
     virtual void updateTC(const LCreal dt = 0.0f);
     virtual void updateData(const LCreal dt = 0.0);
@@ -50,12 +53,10 @@ public:
 
     //------------------------------------------------------------------------------
     // Class:   TabLogger::TabLogEvent
-    // Base class:  Basic::Object -> Basic::Logger::LogEvent -> SimLogEvent -> TabLogEvent 
     // Form name: TabLogEvent
     // Description: Abstract class for all simulation log events
     //------------------------------------------------------------------------------
-    class TabLogEvent : public SimLogger::SimLogEvent 
-    {
+    class TabLogEvent : public SimLogger::SimLogEvent {
         DECLARE_SUBCLASS(TabLogEvent,SimLogger::SimLogEvent)
 
     public:
@@ -72,7 +73,7 @@ public:
         std::ostream& makePlayerDataSpacer(std::ostream& sout);
         std::ostream& makePlayerDataHdr(std::ostream& sout);
         std::ostream& makePlayerDataMsg(std::ostream& sout, osg::Vec3 pos0, osg::Vec3 vel0, osg::Vec3 angles0);
-           
+
         std::ostream& makePlayerLatLonSpacer(std::ostream& sout);
         std::ostream& makePlayerLatLonHdr(std::ostream& sout);
         std::ostream& makePlayerLatLonMsg(std::ostream& sout, double theLat, double theLong);
@@ -89,7 +90,7 @@ public:
         std::ostream& makeEmissionDataMsg(std::ostream& sout, const Emission* const em);
     };
 
- 
+
     //------------------------------------------------------------------------------
     // Class:   TabLogger::LogPlayerData
     // Base class:  Basic::Object -> Basic::Logger::LogEvent -> SimLogEvent -> TabLogEvent -> LogPlayerData
@@ -120,7 +121,7 @@ public:
     };
     
     //------------------------------------------------------------------------------
-    // Class:   TabLogger::LogGunActivity
+    // Class: TabLogger::LogGunActivity
     // Base class:  Basic::Object -> Basic::Logger::LogEvent -> SimLogEvent -> TabLogEvent -> LogGunActivity
     // Description: Log a gun fire event; Player just fired a burst of 'n' rounds
     // Form name: LogGunActivity
@@ -139,7 +140,7 @@ public:
 
 
     //------------------------------------------------------------------------------
-    // Class:   TabLogger::LogWeaponActivity
+    // Class: TabLogger::LogWeaponActivity
     // Base class:  Basic::Object -> Basic::Logger::LogEvent -> SimLogEvent -> TabLogEvent -> LogWeaponActivity
     // Description: Log a detonation event
     //    (i.e., Target, 'tgt', killed by weapon, 'wpn', released from the 'player'.
@@ -148,7 +149,8 @@ public:
     class LogWeaponActivity : public TabLogEvent {
         DECLARE_SUBCLASS(LogWeaponActivity,TabLogEvent)
     public:
-        LogWeaponActivity(const int theType, const Player* const player, const Player* const wpn, const Player* const tgt, const unsigned int detType, const LCreal distance = -1.0f);
+        LogWeaponActivity(const int theType, const Player* const player, const Player* const wpn,
+                          const Player* const tgt, const unsigned int detType, const LCreal distance = -1.0f);
         virtual const char* getDescription();
         virtual void captureData();
     private:
@@ -161,10 +163,10 @@ public:
         unsigned int detType;
         LCreal missDist;
     };
-    
-    
+
+
     //------------------------------------------------------------------------------
-    // Class:   TabLogger::LogActiveTrack
+    // Class: TabLogger::LogActiveTrack
     // Base class:  Basic::Object -> Basic::Logger::LogEvent -> SimLogEvent -> TabLogEvent -> LogActiveTrack
     // Description: Log new, removed, or updated "active" track [not passive]
     // Form name: LogActiveTrack
@@ -190,9 +192,9 @@ public:
         LCreal sn;              // Signal/Noise
     };
 
-    
+
     //------------------------------------------------------------------------------
-    // Class:   TabLogger::LogPassiveTrack
+    // Class: TabLogger::LogPassiveTrack
     // Base class:  Basic::Object -> Basic::Logger::LogEvent -> SimLogEvent -> TabLogEvent -> LogPassiveTrack
     // Description: Log passive track event (header, new, updated, removed) [RWR]
     // Form name: LogPassiveTrack

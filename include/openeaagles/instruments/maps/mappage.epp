@@ -1,12 +1,12 @@
 // this is our map page module, which displays waypoints, tacans, ground and air tracks, and a compass rose
 // Map page is actually not derived from an instrument, but it acts as a simple way to draw tacans, waypoints, and other nav data on a page, using
-// lat longs and such to determine screen position.  Map page also tells all of it's components which are map pages what it's reference lat and lon is, what the
+// lat longs and such to determine screen position.  Map page also tells all of its components which are map pages what its reference lat and lon is, what the
 // range is, displacement, and any other pertinent information (see MapPage.cpp, and .h).  This is very similar to instrument in the fact that it eliminates
-// redundancy.  
+// redundancy.
 // The MapPage event handler does different things depending on the event message sent to it.  See MapPage.h for an explanation of what each event does.
 mappage:
 ( MapPage
-	// This slot sets the outer circular radius of our map, in units.  It uses this to calculate nautical miles per inches and for other calculations
+    // This slot sets the outer circular radius of our map, in units.  It uses this to calculate nautical miles per inches and for other calculations
     outerRadius: 10.5
     // Some maps are based on a centered/decentered mode, in which in one mode the aircraft is the center, and in the other mode the aircraft is displaced
     // towards the bottom of the screen, for a forward looking view.  This slot tells us what our new radius should be if we go to decentered mode.
@@ -16,14 +16,14 @@ mappage:
     // Displacement is how far we translate during decentered mode.
     displacement: -7
     components: {
-		( AsciiText
-			position: [ 1 27 ]
-			text: "MAP PAGE" 
-			color: cyan
-		)    
-		// Bearing pointer is a unique pointer that is derived from Graphic and will draw it's head and tail graphic on a radius determined by our test program
-		// This is not derived from map page because it really doesn't use any conversion routines from lat lon to screen, but it does need to know how to 
-		// displace, and what radius to be at.  
+        ( AsciiText
+            position: [ 1 27 ]
+            text: "MAP PAGE" 
+            color: cyan
+        )
+        // Bearing pointer is a unique pointer that is derived from Graphic and will draw its head and tail graphic on a radius determined by our test program
+        // This is not derived from map page because it really doesn't use any conversion routines from lat lon to screen, but it does need to know how to 
+        // displace, and what radius to be at.  
         bearing:
         ( BearingPointer 
             centeredRad: 10.5
@@ -52,13 +52,13 @@ mappage:
         )
 #define NAVAIR_SYM_SCALE  4
 #define NAVAIR_TEXT_SCALE 0.5
-            
-				// This is our first example of a symbol loader.  A symbol loader is a MapPage derived object that is given a list of tracks, navaids,
-				// waypoint, etc.. that have certain traits.  Based on the type or some other trait of each symbol, you can go through a list of different items and 
-				// draw them simply from calling them from this list.  For example, if you have a list of waypoints, and some of them are also entry points, which are 
-				// drawn differently, then symbol loader would be used to determine which symbol to draw based on the type.  Once a certain type of symbol is
-				// determined, symbol loader adds it to the list of symbols it is drawing.  It can also manage the list, removing any symbols that are no longer
-				// there (IE... tracks that are killed).  
+
+                // This is our first example of a symbol loader.  A symbol loader is a MapPage derived object that is given a list of tracks, navaids,
+                // waypoint, etc.. that have certain traits.  Based on the type or some other trait of each symbol, you can go through a list of different items and 
+                // draw them simply from calling them from this list.  For example, if you have a list of waypoints, and some of them are also entry points, which are 
+                // drawn differently, then symbol loader would be used to determine which symbol to draw based on the type.  Once a certain type of symbol is
+                // determined, symbol loader adds it to the list of symbols it is drawing.  It can also manage the list, removing any symbols that are no longer
+                // there (IE... tracks that are killed).  
                 navaids:
                 ( SymbolLoader 
                     // load our templates for each graphic
@@ -80,7 +80,7 @@ mappage:
                                     
                                     symbol:
                                     ( Graphic
-										color: cyan
+                                        color: cyan
                                         transform: ( Scale NAVAIR_SYM_SCALE )
                                         components: {
                                             ( Line        
@@ -108,26 +108,26 @@ mappage:
                                     )
                                 }
                             )
-                            
+
                             // VORTAC 
                         2:  ( Graphic
                                 components: {
-                                
+
                                     name:
                                     ( AsciiText
                                         color: white
                                         transform: { ( Translation -0.4 -0.65 ) ( Scale NAVAIR_TEXT_SCALE ) }
                                         text: "XXXXX"
                                     )
-                                    
+
                                     symbol:
                                     ( Graphic
                                         transform: ( Scale NAVAIR_SYM_SCALE )
-										color: cyan
+                                        color: cyan
                                         components: {
                                             ( Line
                                                 vertices: {
-                                                    [ 0.0225 0.035 ]    
+                                                    [ 0.0225 0.035 ]
                                                     [ 0.0575 0.0575 ]
                                                     [ 0.08 0.0225 ]
                                                     [ 0.035 0 ]
@@ -139,19 +139,19 @@ mappage:
                                                     [ -0.08 0.0225 ]
                                                     [ -0.0575 0.0575 ]
                                                     [ -0.0225 0.035 ]
-                                                    [ 0.0225 0.035 ]        
+                                                    [ 0.0225 0.035 ]
                                                 }
                                             )
                                             ( Line
                                                 vertices: {
-                                                    [ 0.0225 0.035 ]        
-                                                    [ 0.035 0 ]                
+                                                    [ 0.0225 0.035 ]
+                                                    [ 0.035 0 ]
                                                 }
                                             )
                                             ( Line
                                                 vertices: {
                                                     [ 0.0225 -0.035 ]
-                                                    [ -0.0225 -0.035 ]            
+                                                    [ -0.0225 -0.035 ]
                                                 }
                                             )
                                             ( Line
@@ -159,7 +159,7 @@ mappage:
                                                     [ -0.035 0 ]
                                                     [ -0.0225 0.035 ]
                                                 }
-                                            )                                
+                                            )
                                             ( Polygon
                                                 vertices: {
                                                     [ 0.0225 0.035 ]
@@ -167,7 +167,7 @@ mappage:
                                                     [ 0.0225 -0.035 ]
                                                     [ -0.0225 -0.035 ]
                                                     [ -0.035 0 ]
-                                                    [ -0.0225 0.035 ]                                       
+                                                    [ -0.0225 0.035 ]
                                                 }
                                             )
                                             ( Polygon  
@@ -212,13 +212,13 @@ mappage:
                                     
                                     symbol:
                                     ( Graphic
-										color: cyan
+                                        color: cyan
                                         transform: ( Scale NAVAIR_SYM_SCALE )
                                         components: {
                                             ( Line
                                                 segment: 0
                                                 vertices: {
-                                                    [ 0.0225 0.035 ]    
+                                                    [ 0.0225 0.035 ]
                                                     [ 0.0575 0.0575 ]
                                                     [ 0.08 0.0225 ]
                                                     [ 0.035 0 ]
@@ -230,7 +230,7 @@ mappage:
                                                     [ -0.08 0.0225 ]
                                                     [ -0.0575 0.0575 ]
                                                     [ -0.0225 0.035 ]
-                                                    [ 0.0225 0.035 ]        
+                                                    [ 0.0225 0.035 ]
                                                 }
                                             )
                                             ( Polygon
@@ -240,7 +240,7 @@ mappage:
                                                     [ 0.0225 -0.035 ]
                                                     [ -0.0225 -0.035 ]
                                                     [ -0.035 0 ]
-                                                    [ -0.0225 0.035 ]                                       
+                                                    [ -0.0225 0.035 ]
                                                 }
                                             )
                                             ( Polygon  
@@ -270,18 +270,18 @@ mappage:
                                         }
                                     )
                                 }
-                            ) 
+                            )
                             // VORDME
                        4:   ( Graphic
                                 components: {
-                                
+
                                     name:
                                     ( AsciiText
                                         color: white
                                         transform: { ( Translation -0.4 -0.65 ) ( Scale NAVAIR_TEXT_SCALE ) }
                                         text: "XXXXX"
                                     )
-                                                                        
+
                                     symbol:
                                     ( Graphic
                                         transform: ( Scale NAVAIR_SYM_SCALE )
@@ -319,10 +319,10 @@ mappage:
                                     )
                                 }
                             )
-                            
-                    }// end of template
-                )   // end of nav aid symbol loader          
-            
+
+                    } // end of template
+                )   // end of nav aid symbol loader
+
 
 #define AIRPORT_SYM_SCALE  4
 #define AIRPORT_TEXT_SCALE 0.5
@@ -334,18 +334,18 @@ mappage:
                 ( SymbolLoader 
                     // load our templates for each graphic
                     templates: {
-                        
+
                         1:  // civil airport
                         ( Graphic
                             components: {
-                            
+
                                 name:
                                 ( AsciiText
                                     color: white
                                     transform: { ( Translation -0.3 -0.65 ) ( Scale AIRPORT_TEXT_SCALE ) }
                                     text: "XXXXX"
                                 )
-                                
+
                                 symbol:
                                 ( Graphic
                                     transform: ( Scale AIRPORT_SYM_SCALE )
@@ -367,18 +367,18 @@ mappage:
                                 )
                             }
                         )
-                        
+
                         2:  // joint (civil/military) airport
                         ( Graphic
                             components: {
-                            
+
                                 name:
                                 ( AsciiText
                                     color: white
                                     transform: { ( Translation -0.3 -0.65 ) ( Scale AIRPORT_TEXT_SCALE ) }
                                     text: "XXXXX"
                                 )
-                                
+
                                 symbol:
                                 ( Graphic
                                     transform: ( Scale AIRPORT_SYM_SCALE )
@@ -400,18 +400,18 @@ mappage:
                                 )
                             }
                         )
-                        
+
                         3:  // military airport
                         ( Graphic
                             components: {
-                            
+
                                 name:
                                 ( AsciiText
                                     color: white
                                     transform: { ( Translation -0.3 -0.65 ) ( Scale AIRPORT_TEXT_SCALE ) }
                                     text: "XXXXX"
                                 )
-                                
+
                                 symbol:
                                 ( Graphic
                                     transform: ( Scale AIRPORT_SYM_SCALE )
@@ -433,18 +433,18 @@ mappage:
                                 )
                             }
                         )
-                        
+
                         4:  // inactive airport
                         ( Graphic
                             components: {
-                            
+
                                 name:
                                 ( AsciiText
                                     color: white
                                     transform: { ( Translation -0.3 -0.65 ) ( Scale AIRPORT_TEXT_SCALE ) }
                                     text: "XXXXX"
                                 )
-                                
+
                                 symbol:
                                 ( Graphic
                                     transform: ( Scale AIRPORT_SYM_SCALE )
@@ -466,7 +466,7 @@ mappage:
                                 )
                             }
                         )
-                            
+
                     }// end of template
                 ) 
 
@@ -476,7 +476,7 @@ mappage:
                 // Air tracks ..
                 airTracks:
                 ( SymbolLoader 
-                
+
                     // load our templates for each graphic
                     templates: {
 
@@ -511,7 +511,7 @@ mappage:
                                 )
                             }
                         )
-                        
+
                         // foe track
                         2: ( Graphic
                             color: red
@@ -540,8 +540,8 @@ mappage:
                                 )
                             }
                         )
-                        
-                        
+
+
                         // neutral tracks
                         3: ( Graphic
                             color: white
@@ -572,7 +572,7 @@ mappage:
                                 )
                             }
                         )
-                       
+
                         // unknown tracks
                         4: ( Graphic
                             color: ( rgba 1.0 0.5 0.0 1.0 )
@@ -604,8 +604,8 @@ mappage:
                             }
                         )
 
-                    }// end of template
-                ) 
+                    } // end of template
+                )
         // this is the outer compass rose.  This is also a unique graphic that isn't derived from MapPage, but instead needs a centered radius and decentered radius, and also 
         // a value to deteremine how to rotate.  This may eventually be incorporated into a MapPage derived class, along with BearingPointer.  But for right now, they are treated
         // as seperate graphic objects.
@@ -616,7 +616,7 @@ mappage:
             displacement: -7
 
             color: white
-            components: {                    
+            components: {
                 // here are our tick marks
                 longticks:
                 ( DialTickMarks
@@ -636,7 +636,7 @@ mappage:
                     dialRadius: 5
                     outerRadius: 5.1
                 )
-                
+
             }
         )
     }

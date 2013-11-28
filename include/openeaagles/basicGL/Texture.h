@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // Class: Texture
 //------------------------------------------------------------------------------
-#ifndef	__Eaagles_BasicGL_Texture_H__
+#ifndef __Eaagles_BasicGL_Texture_H__
 #define __Eaagles_BasicGL_Texture_H__
 
 #include "openeaagles/basicGL/Image.h"

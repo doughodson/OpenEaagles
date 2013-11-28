@@ -1,6 +1,7 @@
-//==============================================================================
-// IFF/ATC.Navaids PDUs (Portions of NetIO and Nib)
-//==============================================================================
+//------------------------------------------------------------------------------
+// Class: Nib
+// Description: Portions of class defined to support IFF/ATC.Navaids PDUs
+//------------------------------------------------------------------------------
 
 #include "openeaagles/dis/NetIO.h"
 #include "openeaagles/dis/Nib.h"

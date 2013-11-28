@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Classes: Nib
+// Class: Nib
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_Simulation_Nib_H__
 #define __Eaagles_Simulation_Nib_H__
@@ -11,7 +11,8 @@ namespace Simulation {
    class Missile;
 
 //------------------------------------------------------------------------------
-// Class:       Nib
+// Class: Nib
+//
 // Description: Network Interface Block (Nib)
 //
 //    This class is used to manage the relationship between players and their
@@ -63,7 +64,7 @@ public:
    const NetIO* getNetIO() const { return pNetIO; }  // Controlling Network I/O (const version)
    virtual bool setNetIO(NetIO* const p);  // Sets our Network I/O controller
     
-   // The player, it's name and ID
+   // The player, its name and ID
    Player* getPlayer()                             { return pPlayer; }
    unsigned short getPlayerID() const              { return playerID; }
    const char* getPlayerName() const               { return pname; }

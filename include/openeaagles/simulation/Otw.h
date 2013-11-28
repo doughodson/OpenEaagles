@@ -24,8 +24,8 @@ class OtwModel;
 class Otm;
 
 //------------------------------------------------------------------------------
-// Class:	Otw
-// Base class:	Basic::Object -> Basic::Component -> Otw
+// Class: Otw
+// Base class: Basic::Object -> Basic::Component -> Otw
 // Description: Abstract Out-The-Window (OTW) visual system interface class
 //
 // Notes:
@@ -211,8 +211,8 @@ private:
 
 
 //------------------------------------------------------------------------------
-// Class:	OtwModel
-// Base class:	Basic::Object -> OtwModel
+// Class: OtwModel
+// Base class: Basic::Object -> OtwModel
 // Description: General class that associates an active, in-range player with the
 //              OTW system's model object or height-of-terrain request.
 //
@@ -295,8 +295,8 @@ private:
 };
 
 //------------------------------------------------------------------------------
-// Class:	Otm
-// Base class:	Basic::Object -> Otm
+// Class: Otm
+// Base class: Basic::Object -> Otm
 //
 // Description: OTW-Type-Mapper (OTM) --
 //              Maps player's form name and type string to a OTW entity type ID.

@@ -1,5 +1,7 @@
 //------------------------------------------------------------------------------
-// DiffEquation class -- Abstract Difference equation
+// Class: DiffEquation
+//
+// Description: Abstract difference equation
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_LinearSystem_DiffEquation_H__
 #define __Eaagles_LinearSystem_DiffEquation_H__
@@ -11,14 +13,14 @@ namespace LinearSystem {
 
 //------------------------------------------------------------------------------
 // Class:  DiffEquation
-// Base class:  Object -> ScalerFunc -> DiffEquation
 //
 // Description: Base class for various Discrete z-domain Transfer Functions.  Core
-//              engine is a difference equation that has it's coefficients initialized
+//              engine is a difference equation that has its coefficients initialized
 //              by the various derived classes.
 //
 //------------------------------------------------------------------------------
-class DiffEquation : public ScalerFunc {
+class DiffEquation : public ScalerFunc
+{
     DECLARE_SUBCLASS(DiffEquation,ScalerFunc)
 
 public:

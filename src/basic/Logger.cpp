@@ -1,4 +1,6 @@
-
+//------------------------------------------------------------------------------
+// Classes: Logger, Logger::LogEvent
+//------------------------------------------------------------------------------
 #include "openeaagles/basic/Logger.h"
 #include "openeaagles/basic/String.h"
 
@@ -20,25 +22,25 @@ BEGIN_SLOTTABLE(Logger)
     "topLine",      // 3) Top (first) line of file       (0ptional)   (String)
 END_SLOTTABLE(Logger)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(Logger)
-    ON_SLOT( 1, setSlotFilename, String)   
+    ON_SLOT( 1, setSlotFilename, String)
     ON_SLOT( 2, setSlotPathName, String)
     ON_SLOT( 3, setSlotTopLine,  String)
 END_SLOT_MAP()
 
 
 //==============================================================================
-// Class Logger
+// Class: Logger
 //==============================================================================
 
 // -----------------------------------------------------------------
-// Constructor: 
+// Constructor:
 // -----------------------------------------------------------------
 Logger::Logger()
 {
     STANDARD_CONSTRUCTOR()
-    
+
     lout = 0;
     filename = new String();
     pathname = new String();
@@ -53,7 +55,7 @@ Logger::Logger()
 void Logger::copyData(const Logger& org, const bool cc)
 {
     BaseClass::copyData(org);
-    
+
     if (cc) {
         filename = 0;
         pathname = 0;
@@ -68,7 +70,7 @@ void Logger::copyData(const Logger& org, const bool cc)
 
     setSlotTopLine(org.topLine);
 
-    opened = false;    
+    opened = false;
     failed = false;
 }
 
@@ -76,7 +78,7 @@ void Logger::deleteData()
 {
     if (filename != 0) filename->unref();
     filename = 0;
-    
+
     if (pathname != 0) pathname->unref();
     pathname = 0;
 
@@ -90,7 +92,7 @@ void Logger::deleteData()
 }
 
 //------------------------------------------------------------------------------
-// updateTC() -- 
+// updateTC() --
 //------------------------------------------------------------------------------
 void Logger::updateTC(const LCreal dt)
 {
@@ -103,7 +105,7 @@ void Logger::updateTC(const LCreal dt)
 void Logger::updateData(const LCreal dt)
 {
     BaseClass::updateData(dt);
-    
+
     // Open the log file (if we haven't tried before)
     if (!isOpen() && !isFailed()) {
         openFile();
@@ -111,7 +113,7 @@ void Logger::updateData(const LCreal dt)
 }
 
 //------------------------------------------------------------------------------
-// updateData() -- Update the log file
+// updateData() -- Open the log file
 //------------------------------------------------------------------------------
 bool Logger::openFile()
 {
@@ -128,16 +130,15 @@ bool Logger::openFile()
         tFailed = true;
     }
     else {
-
         //---
         // Allocate space for the full file name
         //---
-        size_t len = pathname->len();   // start with the length of the path name
-        len += 1;   // add a character for the slash
-        len += filename->len(); // add the length of the file name
-        len += 4;  // add characters for possible version number, "_V99"
-        len += 1;  // Add one for the null(0) at the end of the string
-		const size_t NAME_LENGTH = len;
+        size_t len = pathname->len();     // start with the length of the path name
+        len += 1;                         // add a character for the slash
+        len += filename->len();           // add the length of the file name
+        len += 4;                         // add characters for possible version number, "_V99"
+        len += 1;                         // Add one for the null(0) at the end of the string
+        const size_t NAME_LENGTH = len;
 
         char* fullname = new char[NAME_LENGTH];
         fullname[0] = '\0';
@@ -252,10 +253,10 @@ bool Logger::setSlotPathName(const String* const msg)
 
 bool Logger::setSlotTopLine(const String* const msg)
 {
-   if (topLine != 0) topLine->unref();
-   topLine = msg;
-   if (topLine != 0) topLine->ref();
-   return true;
+    if (topLine != 0) topLine->unref();
+    topLine = msg;
+    if (topLine != 0) topLine->ref();
+    return true;
 }
 
 //------------------------------------------------------------------------------
@@ -265,7 +266,6 @@ Object* Logger::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
-
 
 //------------------------------------------------------------------------------
 // serialize
@@ -308,7 +308,7 @@ std::ostream& Logger::serialize(std::ostream& sout, const int i, const bool slot
 }
 
 //==============================================================================
-// Class LogEvent
+// Class: LogEvent
 //==============================================================================
 IMPLEMENT_PARTIAL_SUBCLASS(Logger::LogEvent,"LogEvent")
 EMPTY_SLOTTABLE(Logger::LogEvent)
@@ -322,7 +322,7 @@ Logger::LogEvent::LogEvent()
 
 // Copy Constructor
 Logger::LogEvent::LogEvent(const LogEvent& org)
-{ 
+{
     STANDARD_CONSTRUCTOR()
     copyData(org,true);
 }
@@ -330,7 +330,7 @@ Logger::LogEvent::LogEvent(const LogEvent& org)
 // Destructor
 Logger::LogEvent::~LogEvent()
 {
-   STANDARD_DESTRUCTOR()
+    STANDARD_DESTRUCTOR()
 }
 
 // Copy operator

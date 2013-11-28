@@ -4,7 +4,7 @@
 unsigned int base = 0;
 
 #define MR2IN   0.026785714
-#define IN2MR	(1.0 / MR2IN)
+#define IN2MR   (1.0 / MR2IN)
 
 #if 0
 #define glNewList(x, y) std::printf("%d,\n", x);
@@ -22,15 +22,15 @@ float savey = 0.0;
 #define glVertex2fv(vec) \
     if (begin) { \
         std::printf("        FONT_BEGIN, %f, %f,\n", vec[0] * IN2MR, vec[1] * IN2MR); \
-	begin = false; \
-	wasbegin = true; \
+    begin = false; \
+    wasbegin = true; \
     } else { \
-	if (!wasbegin) { \
+    if (!wasbegin) { \
             std::printf("        FONT_NEXT, %f, %f,\n", savex * IN2MR, savey * IN2MR); \
-	} \
-	wasbegin = false; \
-	savex = vec[0]; \
-	savey = vec[1]; \
+    } \
+    wasbegin = false; \
+    savex = vec[0]; \
+    savey = vec[1]; \
     }
 #define glEnd() std::printf("        FONT_END, %f, %f,\n", savex * IN2MR, savey * IN2MR);
 #define glEndList() std::printf("        FONT_ADVANCE, 6.0, 0.0\n    },\n\n");
@@ -90,8 +90,6 @@ void make_FT_ZRO(unsigned int obj)
 #endif
     glEndList();
 }
-
-
 
 void make_FT_1(unsigned int obj)
 {

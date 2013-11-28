@@ -15,7 +15,7 @@ class Player;
 class Simulation;
 
 //------------------------------------------------------------------------------
-// Class:	System
+// Class: System
 //
 // Description: Base classes for all simulation systems that can be attached
 //              to a player.
@@ -106,8 +106,8 @@ protected:
 private:
    bool findOwnship();
 
-   Player* ownship;     // Our player (not ref()'d because the own player owns us).
-   unsigned int pwrSw;        // Radio's master power switch
+   Player* ownship;      // Our player (not ref()'d because the own player owns us).
+   unsigned int pwrSw;   // System's master power switch
 };
  
 } // End Simulation namespace

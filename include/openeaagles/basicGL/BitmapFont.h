@@ -24,19 +24,19 @@ namespace BasicGL {
 //
 // public methods (member functions):
 //      (All of the classes derived from Font have the same public methods.)
-//	  (See font.h for descriptions of those functions.)
+//      (See font.h for descriptions of those functions.)
 //
-//	  outputText(double x, double y, char* txt, int n, bool vf)
-//		Output n characters of txt at (x,y). Output vertically if vf == true.
+//   outputText(double x, double y, char* txt, int n, bool vf)
+//   -- Output n characters of txt at (x,y). Output vertically if vf == true.
 //
-//	  outputText(char* txt, int n, bool vf)
-//		Output n characters of txt at the current position. Output vertically if vf == true.
+//   outputText(char* txt, int n, bool vf)
+//   -- Output n characters of txt at the current position. Output vertically if vf == true.
 //
-//	  loadFont()
-//		Loads the font.
+//   loadFont()
+//   -- Loads the font.
 //
-//	  setReverse(Number* rnumber)
-//		Sets the font to reverse if rnumber != 0.
+//   setReverse(Number* rnumber)
+//   -- Sets the font to reverse if rnumber != 0.
 //
 //------------------------------------------------------------------------------
 class BitmapFont : public Font {

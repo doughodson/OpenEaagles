@@ -1,3 +1,6 @@
+//------------------------------------------------------------------------------
+// Class: Translator
+//------------------------------------------------------------------------------
 #include "openeaagles/basicGL/Translator.h"
 #include "openeaagles/basic/Number.h"
 
@@ -6,6 +9,7 @@ namespace BasicGL {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Translator, "Translator")
 EMPTY_SERIALIZER(Translator)
+EMPTY_DELETEDATA(Translator)
 
 // -----------------------------------------------------------------------------
 // Event Handler (s)
@@ -24,10 +28,10 @@ Translator::Translator()
     STANDARD_CONSTRUCTOR()
 
     myXPos = 0.0;
-    myYPos = 0.0;       
-    myZPos = 0.0;    
-}        
-                    
+    myYPos = 0.0;
+    myZPos = 0.0;
+}
+
 //------------------------------------------------------------------------------
 // copyData() -- copy member data
 //------------------------------------------------------------------------------
@@ -37,20 +41,14 @@ void Translator::copyData(const Translator& org, const bool)
 
     myXPos = org.myXPos;
     myYPos = org.myYPos;
-}
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
-void Translator::deleteData()
-{
+    myZPos = org.myZPos;
 }
 
 //------------------------------------------------------------------------------
 // draw() -- draws the object(s)
 //------------------------------------------------------------------------------
 void Translator::draw()
-{            
+{
     // we are just translating here
     glPushMatrix();
         glTranslated(double(myXPos), double(myYPos), double(myZPos));
@@ -90,17 +88,20 @@ bool Translator::onUpdateZ(const Basic::Number* const newZ)
 //------------------------------------------------------------------------------
 // functions for setting member variables 
 //------------------------------------------------------------------------------
-bool Translator::setXPos(const LCreal xPos) { 
+bool Translator::setXPos(const LCreal xPos)
+{
     myXPos = xPos;  
     return true;
 }
 
-bool Translator::setYPos(const LCreal yPos) { 
+bool Translator::setYPos(const LCreal yPos)
+{
     myYPos = yPos;
     return true;
 }
 
-bool Translator::setZPos(const LCreal zPos) { 
+bool Translator::setZPos(const LCreal zPos)
+{
     myZPos = zPos;
     return true;
 }

@@ -29,8 +29,8 @@ IrQueryMsg::IrQueryMsg()
    signatureAtRange = 0.0f;
    emissivity = 1.0f;
    projectedArea = 0.0f;
-   signalToNoiseRatio = 0.0f;			// ratio of Signal to Noise 
-   backgroundNoiseRatio = 0.0f;	
+   signalToNoiseRatio = 0.0f;     // ratio of Signal to Noise 
+   backgroundNoiseRatio = 0.0f;
    sendingSensor = 0; 
    pos.set(0,0,0);
    vel.set(0,0,0);
@@ -71,7 +71,7 @@ void IrQueryMsg::copyData(const IrQueryMsg& org, const bool cc)
    emissivity = org.emissivity;
    projectedArea = org.projectedArea;
    signalToNoiseRatio = org.signalToNoiseRatio;
-   backgroundNoiseRatio = org.backgroundNoiseRatio;	
+   backgroundNoiseRatio = org.backgroundNoiseRatio;
 
    setSendingSensor(org.sendingSensor);
    

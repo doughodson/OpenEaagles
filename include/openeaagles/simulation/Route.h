@@ -22,7 +22,7 @@ class Steerpoint;
 //------------------------------------------------------------------------------
 // Class: Route
 //
-// Description: Generic route manager -- maintains steerponts, to/from, 
+// Description: Generic route manager -- maintains steerponts, to/from,
 //              auto sequencing, steering data, and steerpoint actions.
 //
 // Note:
@@ -32,7 +32,7 @@ class Steerpoint;
 //       Also, the current action will be cancelled if switched to 'manual'
 //       sequence mode.
 //
-//    3) If an action is not ready (i.e.,, Action::isReadyToStart() is
+//    3) If an action is not ready (i.e., Action::isReadyToStart() is
 //       false) then the action will be skipped.
 //
 //
@@ -57,7 +57,7 @@ class Route : public Basic::Component
 public:
    Route();
 
-   // Get the current 'to' steerpoint    
+   // Get the current 'to' steerpoint
    virtual Steerpoint* getSteerpoint();               // The 'to' steerpoint
    virtual const Steerpoint* getSteerpoint() const;   // The 'to' steerpoint (const version)
    virtual const char* getSteerpointName() const;     // Name of the 'to' steerpoint
@@ -97,15 +97,15 @@ public:
    virtual unsigned int getAllSteerpoints(SPtr<Steerpoint>* const stptList, const unsigned int max); // All
    virtual unsigned int getNumberOfSteerpoints() const;   // return the number of steerpoint (components) in our route
 
-   // insert a steerpoint at 'pos' position in our list;
+   // Insert a steerpoint at 'pos' position in our list;
    //    a) if 'pos' is less than 0 then its added to the start of the list
    //    b) if 'pos' is 0 (default) or greater than getNumberOfSteerpoints()
    //       then it's added to the end of the list
    //    c) otherwise 'pos' must be between 1 .. getNumberOfSteerpoints()
    virtual bool insertSteerpoint(Steerpoint* const sp, const int pos = 0);
 
-   // delete a steerpoint
-   virtual bool deleteSteerpoint(Steerpoint* const sp); 
+   // Delete a steerpoint
+   virtual bool deleteSteerpoint(Steerpoint* const sp);
 
    // Replace all of our steerpoints and sets our 'to' steerpoint to 'newStptIdx'
    virtual bool replaceAllSteerpoints(Basic::PairStream* const newSteerpointList, unsigned int newStptIdx = 1);
@@ -139,7 +139,7 @@ protected:
     // Basic::Component interface
     virtual void processComponents(
          Basic::PairStream* const list,        // Source list of components
-         const std::type_info& filter,           // Type filter
+         const std::type_info& filter,         // Type filter
          Basic::Pair* const add = 0,           // Optional pair to add
          Basic::Component* const remove = 0    // Optional subcomponent to remove
        );
@@ -150,13 +150,13 @@ private:
    const Basic::Pair* findSteerpointImp(const unsigned int idx) const;
    const Steerpoint* getSteerpointImp() const;
 
-   SPtr<Basic::Pair>      to;                // "To" Steerpoint pair [ name steerpoint ]
-   SPtr<const Basic::String> initToStptName; // Name of the inital "to" steerpoint
-   unsigned int      initToStptIdx;            // Index of the initial "to" steerpoint
-   unsigned int      stptIdx;                  // Steerpoint index [ 1 ... n ] in list
-   LCreal            autoSeqDistNM;            // Distance to auto sequence               (NM)
-   bool              autoSeq;                  // Auto sequence of steerpoint
-   bool              wrap;                     // Wrap around route when inc or dec 'to' steerpoint
+   SPtr<Basic::Pair>         to;                  // "To" Steerpoint pair [ name steerpoint ]
+   SPtr<const Basic::String> initToStptName;      // Name of the inital "to" steerpoint
+   unsigned int              initToStptIdx;       // Index of the initial "to" steerpoint
+   unsigned int              stptIdx;             // Steerpoint index [ 1 ... n ] in list
+   LCreal                    autoSeqDistNM;       // Distance to auto sequence               (NM)
+   bool                      autoSeq;             // Auto sequence of steerpoint
+   bool                      wrap;                // Wrap around route when inc or dec 'to' steerpoint
 };
 
 //------------------------------------------------------------------------------

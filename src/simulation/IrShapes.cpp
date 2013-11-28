@@ -72,7 +72,7 @@ LCreal IrShape::getArea() {
    return area; 
 }
 
-LCreal IrShape::getReflectorAreaInFieldOfView(const IrQueryMsg* const msg) {	
+LCreal IrShape::getReflectorAreaInFieldOfView(const IrQueryMsg* const msg) {
     
    LCreal angleOffBoresight = msg->getAngleOffBoresight();
 

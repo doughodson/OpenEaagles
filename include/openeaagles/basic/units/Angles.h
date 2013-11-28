@@ -11,37 +11,37 @@
 //
 // Public methods (Defined in Angle, and inherited by all derived classes):
 //
-//	    set(const double v)
-//		    Sets an Angle derived instance with a double.
+//     set(const double v)
+//        Sets an Angle derived instance with a double.
 //
-//	    set(const Angle& n)
-//		    Sets, and converts if necessary, an Angle derived instance with
-//		    another Angle derived instance.
+//     set(const Angle& n)
+//        Sets, and converts if necessary, an Angle derived instance with
+//        another Angle derived instance.
 //
-//	    double convert(const Angle& n)
-//		    Converts the value of an Angle derived instance into
-//		    the units of another Angle derived instance.
+//     double convert(const Angle& n)
+//        Converts the value of an Angle derived instance into
+//        the units of another Angle derived instance.
 //
-//	    Conversion routines:
-//		    double degreesToRadians(const double v)
-//		    double degreesToSemicircles(const double v)
-//		    double radiansToDegrees(const double v)
-//		    double radiansToSemicircles(const double v)
-//		    double semicirclesToRadians(const double v)
-//		    double semicirclesToDegrees(const double v)
-//			 Return the appropriate conversion factors.
+//     Conversion routines:
+//        double degreesToRadians(const double v)
+//        double degreesToSemicircles(const double v)
+//        double radiansToDegrees(const double v)
+//        double radiansToSemicircles(const double v)
+//        double semicirclesToRadians(const double v)
+//        double semicirclesToDegrees(const double v)
+//        Return the appropriate conversion factors.
 //
-//	    Output stream operator: >>
-//		    ostream& operator<<(ostream& sout, const Angle& n)
-//			 Sends "( <the Angle derived instance class name and value> )"
-//			 to the output stream.
+//     Output stream operator: >>
+//        ostream& operator<<(ostream& sout, const Angle& n)
+//        Sends "( <the Angle derived instance class name and value> )"
+//        to the output stream.
 //
 //
 // Public methods (For classes:  Degrees, Radians, Semicircles):
 //
-//	    double convertStatic(const Angle& n)
-//		    Static function to convert the given Angle derived
-//		    instance into the units of a specific Angle derived class.
+//     double convertStatic(const Angle& n)
+//        Static function to convert the given Angle derived
+//        instance into the units of a specific Angle derived class.
 //
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_Basic_Angles_H__

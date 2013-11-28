@@ -48,7 +48,7 @@ protected:
 private:
     osg::Vec3   gyroBias;       // Gyro Bias
     osg::Vec3   accelBias;      // Acceleration Bias
-    LCreal      wander;         // Wander angle		(degs)
+    LCreal      wander;         // Wander angle (degs)
     LCreal      dBias;          // Doppler bias
     LCreal      dSFact;         // Doppler Scale Factor
 

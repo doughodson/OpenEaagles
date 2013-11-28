@@ -16,19 +16,19 @@ namespace Basic { class PairStream; }
 namespace BasicGL {
 
 class ColorGradient : public Basic::Color {
-	DECLARE_SUBCLASS(ColorGradient,Basic::Color)
+    DECLARE_SUBCLASS(ColorGradient,Basic::Color)
 
 public:
     ColorGradient();
     
-	Basic::Color* getColorByIdx(const int idx);
+    Basic::Color* getColorByIdx(const int idx);
 
 protected:
-	bool setSlotColors(Basic::PairStream* const newStream);    
+    bool setSlotColors(Basic::PairStream* const newStream);    
     
 private:
     static const int MAX_VALUES = 50;
-	Basic::PairStream* myColors;             
+    Basic::PairStream* myColors;             
 };
 
 } // End BasicGL namespace

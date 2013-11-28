@@ -221,7 +221,7 @@ void Datalink::reset()
    // Do we need to find the track manager?
    // ---
    if (getTrackManager() == 0 && getTrackManagerName() != 0) {
-        // We have a name of the track manager, but not the track manager it's self
+        // We have a name of the track manager, but not the track manager itself
         const char* name = *getTrackManagerName();
         // Get the named track manager from the onboard computer
         Player* ownship = dynamic_cast<Player*>( findContainerByType(typeid(Player)) );

@@ -41,6 +41,7 @@ OBJS =  \
 	$(LIB)(IrSystem.o) \
 	$(LIB)(Jammer.o) \
 	$(LIB)(LifeForms.o) \
+	$(LIB)(MergingIrSensor.o) \
 	$(LIB)(Message.o) \
 	$(LIB)(Missile.o) \
 	$(LIB)(MultiActorAgent.o) \

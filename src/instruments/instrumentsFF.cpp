@@ -59,7 +59,7 @@ Basic::Object* instrumentsFormFunc(const char* formname)
     // start out by checking the basicGL formFuncs
     Basic::Object* newform = 0;
     
-    // Here is the analog dial and it's components
+    // Here is the analog dial and its components
     
     // Instrument
     if ( strcmp(formname, Instrument::getFormName()) == 0 ) {
@@ -97,7 +97,7 @@ Basic::Object* instrumentsFormFunc(const char* formname)
     else if ( strcmp(formname, GMeterDial::getFormName()) == 0 ) {
         newform = new GMeterDial;
     }    
-    // Here is the analog gauge and it's pieces
+    // Here is the analog gauge and its pieces
     // AnalogGauge
     else if ( strcmp(formname, AnalogGauge::getFormName()) == 0 ) {
         newform = new AnalogGauge;
@@ -134,7 +134,7 @@ Basic::Object* instrumentsFormFunc(const char* formname)
         newform = new Button;
     }      
     // Push Button
-	 else if (strcmp(formname, PushButton::getFormName()) == 0 ) {
+    else if (strcmp(formname, PushButton::getFormName()) == 0 ) {
         newform = new PushButton;
     }      
     // Rotary Switch

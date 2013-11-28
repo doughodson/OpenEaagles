@@ -391,7 +391,7 @@ private:
     GLfloat stdLinewidth;              // Standard linewidth
 
     bool subdisplayFlg;                // We're a sub-display
-    bool antialias;                    // Antialias flag  (default off)
+    bool antialias;                    // Anti-alias flag  (default off)
     int mx, my;                        // Mouse x, y
 
     Orientation orientation;           // Display orientation

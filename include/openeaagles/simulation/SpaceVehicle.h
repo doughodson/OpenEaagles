@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Classes:	SpaceVehicle, BoosterSpaceVehicle, MannedSpaceVehicle, UnmannedSpaceVehicle
+// Classes: SpaceVehicle, BoosterSpaceVehicle, MannedSpaceVehicle, UnmannedSpaceVehicle
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_Simulation_SpaceVehicle_H__
 #define __Eaagles_Simulation_SpaceVehicle_H__
@@ -14,7 +14,7 @@ namespace Simulation {
 // Description: Generic Space Vehicles
 // Form name: SpaceVehicle
 //==============================================================================
-class SpaceVehicle : public Player  
+class SpaceVehicle : public Player
 {
    DECLARE_SUBCLASS(SpaceVehicle,Player)
 

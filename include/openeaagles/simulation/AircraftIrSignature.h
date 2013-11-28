@@ -39,7 +39,7 @@ namespace Simulation {
 //
 // Public member functions:
 //      LCreal getIrSignature(IrQueryMsg* msg)
-//          Computes the Ir Signature for the emission.
+//          Computes the IR signature for the emission.
 //------------------------------------------------------------------------------
 class AircraftIrSignature : public IrSignature
 {
@@ -64,7 +64,7 @@ protected:
 
    virtual LCreal getAirframeSignature(LCreal velocity, LCreal altitude, LCreal azimuth, LCreal elevation);
    virtual LCreal getAirframeWavebandFactor(LCreal midpoint, LCreal width); 
-   
+
    virtual LCreal getPlumeSignature(LCreal pla, LCreal velocity, LCreal altitude, LCreal azimuth, LCreal elevation); 
    virtual LCreal getPlumeWavebandFactor(LCreal midpoint, LCreal width); 
 
@@ -81,7 +81,6 @@ protected:
    virtual void getPlumeSignatures(const IrQueryMsg* const msg,
                                    const LCreal lowerBound,
                                    const LCreal upperBound);
-
 
    virtual LCreal getHotPartsRadiation(const IrQueryMsg* const msg); 
 
@@ -121,13 +120,13 @@ private:
             // y - waveband width
             // data - factor. We multiply the base plume signature by this 
             // factor to get the plume energy in this particular waveband.  
-            // the different factors should all sum to 1.0  .  
+            // the different factors should all sum to 1.0
 
    const Basic::Table5* hotPartsSignatureTable; 
-            // mapping of signature in watts/steradian to 
+            // mapping of signature in watts/steradian to
             // x- pla % from 0 - 100.
             // y - velocity (knots)
-            // z - altitude (meters) 
+            // z - altitude (meters)
             // azimuth (radians)
             // elevation (radians)
 

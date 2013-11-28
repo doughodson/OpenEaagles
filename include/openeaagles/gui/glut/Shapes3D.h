@@ -6,7 +6,7 @@
 // all use GLUT or GLU, so you have to call the basicGlutFF to serialize them
 // from the input, and you also have to link to glut or freeglut to draw them.
 //------------------------------------------------------------------------------
-#ifndef	__Eaagles_Glut_Shapes3D_H__
+#ifndef __Eaagles_Glut_Shapes3D_H__
 #define __Eaagles_Glut_Shapes3D_H__
 
 #include "openeaagles/basicGL/Shapes.h"
@@ -19,7 +19,7 @@ namespace Basic {
 namespace Glut {
 
 //------------------------------------------------------------------------------
-// Class:	Circle -> Sphere 
+// Class: Circle -> Sphere 
 // Description - draws a sphere with X slices and Y stacks
 //
 // Form name: Sphere
@@ -48,7 +48,7 @@ private:
 };
 
 //------------------------------------------------------------------------------
-// Class:	Circle -> Sphere -> Cylinder
+// Class: Circle -> Sphere -> Cylinder
 // Description - adds a top radius and height and draws a cylinder 
 //
 // Form name: Cylinder
@@ -80,7 +80,7 @@ private:
 };
 
 //------------------------------------------------------------------------------
-// Class:	Circle -> Sphere -> Cylinder -> Cone
+// Class: Circle -> Sphere -> Cylinder -> Cone
 // Description - uses everything but top radius to draw a cone
 //
 // Form name: Cone
@@ -94,7 +94,7 @@ public:
 };
 
 //------------------------------------------------------------------------------
-// Class:	Circle -> Cube
+// Class: Circle -> Cube
 // Description - Draws a simple cube.  I derived it from Circle to use the filled
 // flag only.  All other flags are ignored.
 //
@@ -122,7 +122,7 @@ private:
 };
 
 //------------------------------------------------------------------------------
-// Class:	Sphere -> Torus
+// Class: Sphere -> Torus
 // Description - Uses filled slot to determine if wireframe or not.  Uses slices
 // as number of sides, and stacks as number of rings
 //
@@ -151,7 +151,7 @@ private:
 
 
 //------------------------------------------------------------------------------
-// Class:	Circle -> Dodecahedron
+// Class: Circle -> Dodecahedron
 // Description - Draws a 12 faced figure which can be scaled
 //
 // Form name: Dodecahedron
@@ -165,7 +165,7 @@ public:
 };
 
 //------------------------------------------------------------------------------
-// Class:	Circle -> Tetrahedron
+// Class: Circle -> Tetrahedron
 // Description - Draws a 4 faced figure which can be scaled
 //
 // Form name: Tetrahedron
@@ -179,7 +179,7 @@ public:
 };
 
 //------------------------------------------------------------------------------
-// Class:	Circle -> Icosahedron
+// Class: Circle -> Icosahedron
 // Description - Draws a 20 faced figure which can be scaled
 //
 // Form name: Icosahedron
@@ -193,7 +193,7 @@ public:
 };
 
 //------------------------------------------------------------------------------
-// Class:	Circle -> Octahedron
+// Class: Circle -> Octahedron
 // Description - Draws a 8 faced figure which can be scaled
 //
 // Form name: Octahedron
@@ -207,7 +207,7 @@ public:
 };
 
 //------------------------------------------------------------------------------
-// Class:	Cube -> Teapot
+// Class: Cube -> Teapot
 // Description - Draws the Utah Teapot, with a given size
 //
 // Form name: Teapot

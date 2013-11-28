@@ -468,17 +468,17 @@ std::ostream& DtedFile::serialize(std::ostream& sout, const int i, const bool sl
 {
     int j = 0;
     if ( !slotsOnly ) {
-    	indent(sout,i);
-      sout << "( " << getFormName() << std::endl;
-      j = 4;
+        indent(sout,i);
+        sout << "( " << getFormName() << std::endl;
+        j = 4;
     }
 
     indent(sout,i+j);
     sout << "verifyChecksum:  " << verifyChecksum << std::endl;
 
     if ( !slotsOnly ) {
-    	indent(sout,i);
-    	sout << ")" << std::endl;
+        indent(sout,i);
+        sout << ")" << std::endl;
     }
 
     return sout;

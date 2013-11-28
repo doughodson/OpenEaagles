@@ -8,7 +8,7 @@
     #include <WS2tcpip.h>
     #define  bzero(a,b)   ZeroMemory(a,b)
 #else
-    #include <arpa/inet.h>
+    #include <arpa/inet.h>  // htonl, htons, ntohl, ntohs
     #include <sys/fcntl.h>
     #include <sys/ioctl.h>
     #ifdef sun
@@ -136,9 +136,9 @@ bool TcpClient::connectToServer()
    }
 
 #if defined(WIN32)
-   if( connect(tcpSocket, (const struct sockaddr *) &addr, sizeof(addr)) == SOCKET_ERROR)
+   if( ::connect(tcpSocket, (const struct sockaddr *) &addr, sizeof(addr)) == SOCKET_ERROR)
 #else
-   if( connect(tcpSocket, (const struct sockaddr *) &addr, sizeof(addr)) < 0)
+   if( ::connect(tcpSocket, (const struct sockaddr *) &addr, sizeof(addr)) < 0)
 #endif
    {
       if (isMessageEnabled(MSG_INFO)) {

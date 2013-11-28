@@ -7,7 +7,7 @@
 //
 //  Notes:
 //   1) Many of the member functions of this DAFIF database manager class and
-//      it's derived classes read files.  The time required to read these files
+//      its derived classes read files.  The time required to read these files
 //      can not be determined.  Therefore, do not access the DAFIF database
 //      classes from a time critical thread.
 //

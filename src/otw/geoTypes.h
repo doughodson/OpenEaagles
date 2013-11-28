@@ -151,14 +151,14 @@ typedef struct
 typedef struct
 {
   // A, B, and C are indexes into a POINT*D array
-	int_4 A;
-	int_4 B;
-	int_4 C;
+  int_4 A;
+  int_4 B;
+  int_4 C;
 } TRIANGLE;
 
 typedef struct
 {
-	long p1, p2;
+  long p1, p2;
 } EDGE;
 
 

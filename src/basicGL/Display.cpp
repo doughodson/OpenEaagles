@@ -394,7 +394,7 @@ void Display::buttonEvent(const int b)
 //------------------------------------------------------------------------------
 // mouseEvent() -- pass mouse input events to the focus
 //------------------------------------------------------------------------------
-void Display::mouseEvent(const int, const int, const int x, const int y)
+void Display::mouseEvent(const int /* button */, const int /* state */, const int x, const int y)
 {
    // keep track of our mouse state
    setMouse(x,y);
@@ -544,7 +544,7 @@ void Display::setStdLineWidth(const GLfloat lw)
 }
 
 //------------------------------------------------------------------------------
-// setStdLineWidth() --
+// setAntialiasing() --
 //------------------------------------------------------------------------------
 bool Display::setAntialiasing(const bool on)
 {
@@ -1818,8 +1818,8 @@ bool Display::setSlotDisplayOrientation(const Basic::String* const msg)
 
 //------------------------------------------------------------------------------
 // processSubdisplays() -- process our subdisplays; make sure they are all of
-//	type Display (or derived from it)and tell them that we are their
-//	container.
+// type Display (or derived from it)and tell them that we are their
+// container.
 //------------------------------------------------------------------------------
 bool Display::processSubdisplays()
 {
@@ -1847,7 +1847,7 @@ bool Display::processSubdisplays()
 
 //------------------------------------------------------------------------------
 // processTextures() -- process our textures; make sure they are all of
-//	type Texture (or derived from it)and tell them to load.
+// type Texture (or derived from it)and tell them to load.
 //------------------------------------------------------------------------------
 bool Display::processTextures()
 {

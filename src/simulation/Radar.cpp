@@ -1,3 +1,6 @@
+//------------------------------------------------------------------------------
+// Class: Radar
+//------------------------------------------------------------------------------
 #include "openeaagles/simulation/Radar.h"
 
 #include "openeaagles/simulation/Antenna.h"
@@ -372,7 +375,9 @@ void Radar::process(const LCreal dt)
 
       lcLock(myLock);
       for (unsigned int i = 0; i < numReports && i < MAX_REPORTS; i++) {
-         tm->newReport(reports[i], rptMaxSn[i]);
+         if (tm != 0) {
+            tm->newReport(reports[i], rptMaxSn[i]);
+         }
          reports[i]->unref();
          reports[i] = 0;
          rptMaxSn[i] = 0;

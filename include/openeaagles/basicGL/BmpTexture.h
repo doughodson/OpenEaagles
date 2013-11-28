@@ -1,19 +1,19 @@
 //------------------------------------------------------------------------------
 // Class: BmpTexture
 //------------------------------------------------------------------------------
-#ifndef	__Eaagles_BasicGL_BmpTexture_H__
+#ifndef __Eaagles_BasicGL_BmpTexture_H__
 #define __Eaagles_BasicGL_BmpTexture_H__
 
 #include "openeaagles/basicGL/Texture.h"
 #include <GL/gl.h>
 
 namespace Eaagles {
-      namespace Basic { class String; }
+    namespace Basic { class String; }
 
 namespace BasicGL {
 
 //------------------------------------------------------------------------------
-// Class:	BmpTexture
+// Class: BmpTexture
 //
 // Description: Read/Write a BMP file (use loadTexture() to read)
 //

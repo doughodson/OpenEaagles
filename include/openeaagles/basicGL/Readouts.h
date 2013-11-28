@@ -15,7 +15,6 @@ namespace Eaagles {
 namespace BasicGL {
    class Reformat;
 
-
 //------------------------------------------------------------------------------
 // Class: AsciiText
 //
@@ -337,7 +336,7 @@ protected:
 //    1) see the 'DirectionReadout' notes
 //    2) The '+ char is replaced with 'N', and the '-' char is replaced with 'S'
 //
-// Example formats: 
+// Example formats:
 //
 //    0D.D@          // Degrees
 //
@@ -371,7 +370,7 @@ protected:
 //    1) see the 'DirectionReadout' notes
 //    2) The '+ char is replaced with 'E', and the '-' char is replaced with 'W'
 //
-// Example formats: 
+// Example formats:
 //
 //    0DD@            // Degrees
 //    0DD.D@          // Degrees

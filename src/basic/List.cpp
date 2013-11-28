@@ -365,7 +365,7 @@ void List::addTail(List::Item* item)
 }
 
 //------------------------------------------------------------------------------
-// operator== 	Returns true if two lists are equal.
+// operator==    Returns true if two lists are equal.
 //------------------------------------------------------------------------------
 bool List::operator==(const List& l) const
 {
@@ -383,7 +383,7 @@ bool List::operator==(const List& l) const
 }
 
 //------------------------------------------------------------------------------
-// operator!= 	Returns true if two lists are NOT equal.
+// operator!=    Returns true if two lists are NOT equal.
 //------------------------------------------------------------------------------
 bool List::operator!=(const List& l) const
 {

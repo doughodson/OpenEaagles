@@ -613,7 +613,7 @@ inline bool Nav::convertPosVec2llE(
       }
       else {
          *lon = slon;
-    }
+      }
    }
    if (alt != 0) {
       *alt = -down;

@@ -18,7 +18,7 @@ namespace Simulation {
 //
 // Form name: AamMissile
 //------------------------------------------------------------------------------
-class Aam : public Missile  
+class Aam : public Missile
 {
     DECLARE_SUBCLASS(Aam,Missile)
 

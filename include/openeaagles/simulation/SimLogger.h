@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 // Classes:
-//      SimLogger               -- Simulation Event logger
+//      SimLogger                   -- Simulation Event logger
 //      SimLogger::SimLogEvent      -- Abstract simulation log event
 //      SimLogger::NewPlayer        -- New Player event
 //      SimLogger::LogPlayerData    -- Log Player Data event
@@ -34,7 +34,7 @@ class Track;
 class TrackManager;
 
 //------------------------------------------------------------------------------
-// Class:   SimLogger
+// Class: SimLogger
 // Base class:  Basic::Object -> Basic::Component -> Basic::Logger -> SimLogger
 // Description: Simulation Event & Data Logger
 //
@@ -45,26 +45,27 @@ class TrackManager;
 //    includeSimTime    <Basic::Number>      ! whether to record SIM time                  (default: true)
 //    includeExecTime   <Basic::Number>      ! whether to record EXEC time                 (default: true)
 //------------------------------------------------------------------------------
-class SimLogger : public Basic::Logger {
-    DECLARE_SUBCLASS(SimLogger,Basic::Logger)
+class SimLogger : public Basic::Logger
+{
+    DECLARE_SUBCLASS(SimLogger, Basic::Logger)
 
 public:
     enum TSource {   // Source of the time line
-       EXEC,   // R/T executive time
-       SIM,    // Simulated time
-       UTC     // Computer's UTC
+       EXEC,         // R/T executive time
+       SIM,          // Simulated time
+       UTC           // Computer's UTC
     };
 
     class SimLogEvent;
 
 public:
     SimLogger();
-    
+
     virtual void log(LogEvent* const event);                // Log a simulation event
 
     double getCurrentTime() const   { return time; }        // Current time (sec)
     TSource getTimeline() const     { return timeline; }    // Timeline (UTC, SIM or EXEC)
-    
+
     // Basic::Component interface
     virtual void updateTC(const LCreal dt = 0.0f);
     virtual void updateData(const LCreal dt = 0.0);
@@ -75,10 +76,10 @@ protected:
    virtual bool setIncludeSimTime(const bool b);                           // whether to record SIM time
    virtual bool setIncludeExecTime(const bool b);                          // whether to record EXEC time
 
-   virtual bool setSlotTimeline(const Basic::Identifier* const p);            // Sets the source of the time (UTC, SIM or EXEC)
-   virtual bool setSlotIncludeUtcTime(const Basic::Number* const num);   // whether to record UTC time
-   virtual bool setSlotIncludeSimTime(const Basic::Number* const num);   // whether to record SIM time
-   virtual bool setSlotIncludeExecTime(const Basic::Number* const num);  // whether to record EXEC time
+   virtual bool setSlotTimeline(const Basic::Identifier* const p);         // Sets the source of the time (UTC, SIM or EXEC)
+   virtual bool setSlotIncludeUtcTime(const Basic::Number* const num);     // whether to record UTC time
+   virtual bool setSlotIncludeSimTime(const Basic::Number* const num);     // whether to record SIM time
+   virtual bool setSlotIncludeExecTime(const Basic::Number* const num);    // whether to record EXEC time
 
 private:
     static const int MAX_QUEUE_SIZE = 1000;     // Max size of the logger event queue
@@ -99,7 +100,7 @@ public:
     //==============================================================================
 
     //------------------------------------------------------------------------------
-    // Class:   SimLogger::SimLogEvent
+    // Class: SimLogger::SimLogEvent
     // Base class:  Basic::Object -> Basic::Logger::LogEvent -> SimLogEvent
     // Description: Abstract class for all simulation log events
     //------------------------------------------------------------------------------
@@ -108,13 +109,13 @@ public:
     public:
         SimLogEvent();
         virtual void captureData() =0;
-        void setTime(const double t)               { time = t; }
-        void setExecTime(const double t)           { execTime = t; }
-        void setUtcTime(const double t)            { utcTime = t; }
-        void setSimTime(const double t)            { simTime = t; }
+        void setTime(const double t)               { time = t;          }
+        void setExecTime(const double t)           { execTime = t;      }
+        void setUtcTime(const double t)            { utcTime = t;       }
+        void setSimTime(const double t)            { simTime = t;       }
         void setPrintExecTime(const bool b)        { printExecTime = b; }
-        void setPrintUtcTime(const bool b)         { printUtcTime = b; }
-        void setPrintSimTime(const bool b)         { printSimTime = b; }
+        void setPrintUtcTime(const bool b)         { printUtcTime = b;  }
+        void setPrintSimTime(const bool b)         { printSimTime = b;  }
 
     protected:
         std::ostream& makeTimeMsg(std::ostream& sout);
@@ -138,7 +139,7 @@ public:
     };
 
     //------------------------------------------------------------------------------
-    // Class:   SimLogger::NewPlayer
+    // Class: SimLogger::NewPlayer
     // Base class:  Basic::Object -> Basic::Logger::LogEvent -> NewPlayer
     // Description: Log a new player event
     //------------------------------------------------------------------------------
@@ -154,9 +155,9 @@ public:
         osg::Vec3 vel;
         osg::Vec3 angles;
     };
- 
+
     //------------------------------------------------------------------------------
-    // Class:   SimLogger::LogPlayerData
+    // Class: SimLogger::LogPlayerData
     // Base class:  Basic::Object -> Basic::Logger::LogEvent -> LogPlayerData
     // Description: Log player's data event
     //------------------------------------------------------------------------------
@@ -177,7 +178,7 @@ public:
     };
 
     //------------------------------------------------------------------------------
-    // Class:   SimLogger::RemovePlayer
+    // Class: SimLogger::RemovePlayer
     // Base class:  Basic::Object -> Basic::Logger::LogEvent -> RemovePlayer
     // Description: Log a remove player event
     //------------------------------------------------------------------------------
@@ -193,9 +194,9 @@ public:
         osg::Vec3 vel;
         osg::Vec3 angles;
     };
-    
+
     //------------------------------------------------------------------------------
-    // Class:   SimLogger::WeaponRelease
+    // Class: SimLogger::WeaponRelease
     // Base class:  Basic::Object -> Basic::Logger::LogEvent -> WeaponRelease
     // Description: Log a weapon release (e.g., missile launch) event
     //   (i.e., the 'player' released weapon, 'wpn' at the target player, 'tgt'.
@@ -213,7 +214,7 @@ public:
     };
     
     //------------------------------------------------------------------------------
-    // Class:   SimLogger::GunFired
+    // Class: SimLogger::GunFired
     // Base class:  Basic::Object -> Basic::Logger::LogEvent -> GunFired
     // Description: Log a gun fire event; Player just fired a burst of 'n' rounds
     //------------------------------------------------------------------------------
@@ -229,7 +230,7 @@ public:
     };
 
     //------------------------------------------------------------------------------
-    // Class:   SimLogger::KillEvent
+    // Class: SimLogger::KillEvent
     // Base class:  Basic::Object -> Basic::Logger::LogEvent -> KillEvent
     // Description: Log a kill event
     //    (i.e., Target, 'tgt', killed by weapon, 'wpn', released from the 'player'.
@@ -247,7 +248,7 @@ public:
     };
 
     //------------------------------------------------------------------------------
-    // Class:   SimLogger::DetonationEvent
+    // Class: SimLogger::DetonationEvent
     // Base class:  Basic::Object -> Basic::Logger::LogEvent -> DetonationEvent
     // Description: Log a detonation event
     //    (i.e., Target, 'tgt', killed by weapon, 'wpn', released from the 'player'.
@@ -267,7 +268,7 @@ public:
     };
     
     //------------------------------------------------------------------------------
-    // Class:   SimLogger::NewTrack
+    // Class: SimLogger::NewTrack
     // Base class:  Basic::Object -> Basic::Logger::LogEvent -> NewTrack
     // Description: Log an added track event
     //------------------------------------------------------------------------------
@@ -292,7 +293,7 @@ public:
     };
     
     //------------------------------------------------------------------------------
-    // Class:   SimLogger::UpdateTrack
+    // Class: SimLogger::UpdateTrack
     // Base class:  Basic::Object -> Basic::Logger::LogEvent -> UpdateTrack
     // Description: Log a update track event
     //------------------------------------------------------------------------------
@@ -317,7 +318,7 @@ public:
     };
 
     //------------------------------------------------------------------------------
-    // Class:   SimLogger::RemovedTrack
+    // Class: SimLogger::RemovedTrack
     // Base class:  Basic::Object -> Basic::Logger::LogEvent -> RemovedTrack
     // Description: Log a removed track event
     //------------------------------------------------------------------------------
@@ -342,7 +343,7 @@ public:
     };
     
     //------------------------------------------------------------------------------
-    // Class:   SimLogger::NewRwrTrack
+    // Class: SimLogger::NewRwrTrack
     // Base class:  Basic::Object -> Basic::Logger::LogEvent -> NewRwrTrack
     // Description: Log an added RWR track event
     //------------------------------------------------------------------------------
@@ -367,7 +368,7 @@ public:
     };
     
     //------------------------------------------------------------------------------
-    // Class:   SimLogger::UpdateRwrTrack
+    // Class: SimLogger::UpdateRwrTrack
     // Base class:  Basic::Object -> Basic::Logger::LogEvent -> UpdateRwrTrack
     // Description: Log update RWR track event
     //------------------------------------------------------------------------------
@@ -392,7 +393,7 @@ public:
     };
 
     //------------------------------------------------------------------------------
-    // Class:   SimLogger::RemovedRwrTrack
+    // Class: SimLogger::RemovedRwrTrack
     // Base class:  Basic::Object -> Basic::Logger::LogEvent -> RemovedRwrTrack
     // Description: Log a removed RWR track event
     //------------------------------------------------------------------------------

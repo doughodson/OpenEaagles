@@ -262,7 +262,7 @@ VPFRecord* VPFTable::getRecord(const int idx)
             // if our record is invalid, it means we have reached the end of the record
             bool eor = records[idx-1]->isEOR();
             if (eor) {
-                // we have to delete our record, because it's was not valid
+                // we have to delete our record, because it's not valid
                 records[idx-1]->unref();
                 records[idx-1] = 0;
                 return 0;

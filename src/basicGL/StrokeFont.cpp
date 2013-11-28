@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
-// Stroke Font
-//  -- modified version of SGI's stroke font
+// Class: StrokeFont
+// Description: Modified version of SGI's stroke font
 //------------------------------------------------------------------------------
 #include "openeaagles/basicGL/StrokeFont.h"
 
@@ -305,7 +305,7 @@ static GLdouble strokeFont[][1+MAX_STROKES*3] = {
       FONT_ADVANCE, 6, 0
    },
    {
-   10,   // back space
+   10, // back space
       FONT_ADVANCE, 0, -9
    },
    {

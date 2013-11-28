@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Classes: Weapon
+// Class: Weapon
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_Simulation_Weapon_H__
 #define __Eaagles_Simulation_Weapon_H__
@@ -66,7 +66,7 @@ namespace Simulation {
 //       --- Simply releasing the weapon using release(); the 'releaseHold'
 //       flag is always false.
 //
-//        Initial weapon      Flyout weapon 
+//        Initial weapon      Flyout weapon
 //            (mode)             (mode)                   Note
 //       ------------------   ------------------   -------------------------
 //       (INACTIVE)           <doesn't exit>       1) Weapon is inactive; attached to the launch vehicle
@@ -85,7 +85,7 @@ namespace Simulation {
 //       to the simulation player list, but will not go active until release() is
 //       later called. (see 'releaseHold' flag).
 //
-//        Initial weapon      Flyout weapon 
+//        Initial weapon      Flyout weapon
 //       (mode/releaseHold)   (mode/releaseHold)              Note
 //       ------------------   ------------------   -------------------------
 //       (INACTIVE/false)     <doesn't exit>       1) Weapon is inactive; attached to the launch vehicle
@@ -117,7 +117,7 @@ namespace Simulation {
 //       getFlyoutWeapon() -- After prerelease() and/or release(), returns the flyout weapon;
 //                            Before prerelease() or release(), returns zero.
 //
-// Notes: 
+// Notes:
 //
 // 1) On reset(), the flyout weapon is set to the DELETE_REQUEST mode, which
 //    will remove it from the player list.
@@ -129,7 +129,7 @@ namespace Simulation {
 // 3) When a weapon is copied or cloned, the launcher and station are set to zero.
 //
 //==============================================================================
-class Weapon : public Player  
+class Weapon : public Player
 {
     DECLARE_SUBCLASS(Weapon,Player)
 
@@ -163,7 +163,7 @@ public:
 
    bool isCategory(const int testCategory) const;  // Returns true if the weapon is a member of the test category
    virtual int getCategory() const =0;             // Weapon's category (see category bits)
-   virtual const char* getDescription() const =0;  // Weapon's description 
+   virtual const char* getDescription() const =0;  // Weapon's description
    virtual const char* getNickname() const =0;     // Weapon's nick name (short description)
 
    Stores* getLauncher();                          // Our launcher, if any
@@ -176,7 +176,7 @@ public:
    bool isJettisonable() const;                    // True if the weapon can be jettisioned
    bool isJettisoned() const;                      // True if the weapon has been jettisioned
    bool isFailed() const;                          // True if the weapon has failed
-   bool isHung() const;                            // True if the weapon is hung 
+   bool isHung() const;                            // True if the weapon is hung
    bool getWillHang() const;                       // True if the weapon will hang on release
    bool isDummy() const;                           // True if this is a dummy weapon (someone else with fly it out)
 
@@ -208,20 +208,20 @@ public:
    Player* getTargetPlayer();                               // Our target player, if any
    const Player* getTargetPlayer() const;                   // Our target player, if any (const version)
 
-   Weapon* getFlyoutWeapon();                      // Pre-ref()'d pointer to the fly-out weapon 
+   Weapon* getFlyoutWeapon();                      // Pre-ref()'d pointer to the fly-out weapon
    const Weapon* getFlyoutWeapon() const;          // Pre-ref()'d pointer to the fly-out weapon (const version)
 
-   Weapon* getInitialWeapon();                     // Pre-ref()'d pointer to the initial weapon 
+   Weapon* getInitialWeapon();                     // Pre-ref()'d pointer to the initial weapon
    const Weapon* getInitialWeapon() const;         // Pre-ref()'d pointer to the initial weapon (const version)
 
    unsigned short getReleaseEventID() const;       // Release event ID (to help match weapon launch and detonation events)
    bool isReleaseHold() const;                     // Is weapon is holding in PRE_RELEASE mode?
 
 
-   // Sets a pointer to the launcher and our station number 
+   // Sets a pointer to the launcher and our station number
    virtual bool setLauncher(Stores* const launcher, const unsigned int station);
 
-   // Sets a pointer to the target track -- 
+   // Sets a pointer to the target track --
    // -- if 'posTrkEnb' is true, we'll follow the target track's position
    virtual bool setTargetTrack(Track* const trk, const bool posTrkEnb);
 
@@ -231,7 +231,7 @@ public:
    // Sets the target position valid flag
    virtual bool setTargetPositionValid(const bool b);
 
-   // Sets a pointer to the target player -- 
+   // Sets a pointer to the target player --
    // -- if 'posTrkEnb' is true, we'll follow the target player's position
    virtual bool setTargetPlayer(Player* const tgt, const bool posTrkEnb);
 
@@ -246,11 +246,17 @@ public:
    virtual bool setMaxBurstRng(const LCreal v);             // Sets the max burst range (meters)
    virtual bool setLethalRange(const LCreal v);             // Sets the lethal range (meters)
    virtual bool setMaxGimbalAngle(const LCreal v);          // Sets the max gimbal angle( radians)
-   virtual bool setWeaponID(const int n);                   // Sets the weapon's type ID number 
+   virtual bool setWeaponID(const int n);                   // Sets the weapon's type ID number
    virtual bool setReleaseEventID(const unsigned short n);  // Sets the release event ID
 
    // Check local players for the effects of the detonation
    virtual void checkDetonationEffect();
+
+   // Sets the target velocity (m/s) relative to ownship velocity
+   virtual bool setTargetVelocity(const osg::Vec3d& newTgtVel);
+
+   // Returns the target velocity (m/s) relative to ownship velocity
+   const osg::Vec3d& getTargetVelocity() const { return tgtVel; }
 
    // Computes and sets 'loc' to our location relative to the target player, 'tgt'
    virtual bool computeTargetLocation(osg::Vec3* const loc, const Player* const tgt);
@@ -261,7 +267,7 @@ public:
    virtual Weapon* prerelease();
 
    // release() -- release this weapon
-   //    Returns a point to the flyout weapon player
+   //    Returns a pointer to the flyout weapon player
    virtual Weapon* release();
 
    // Event handlers
@@ -302,7 +308,7 @@ public:
    virtual void updateTC(const LCreal dt = 0.0);
    virtual bool event(const int event, Basic::Object* const obj = 0);
    virtual void reset();
-    
+
 protected:
    virtual void weaponGuidance(const LCreal dt);
    virtual void weaponDynamics(const LCreal dt);
@@ -360,6 +366,7 @@ private:
     bool       tgtPosValid;      // If true, target position is valid
     SPtr<Player>  tgtPlayer;     // Target Player
     SPtr<Track>   tgtTrack;      // Target Track
+    osg::Vec3d    tgtVel;        // Target/Track Velocity (m/s) relative to ownship velocity
     SPtr<Player>  launchVehicle; // Launching/Releasing Player
     bool       posTrkEnb;        // If true, update tgtPos from the target/track
     LCreal     maxTgtRng;        // Max target range for default tgt selection      (meters)
@@ -384,7 +391,7 @@ private:
     bool        dummyFlg;        // Dummy (launch, but don't flyout or detonate)
     Detonation  results;         // Results of weapon detonation
     SPtr<const Basic::String> tstTgtNam; // Test only: target player name
-    
+
     // ---
     // Default guidance & dynamics parameters
     // ---

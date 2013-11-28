@@ -110,7 +110,7 @@ namespace Simulation {
 //          in these functions.
 //
 //    4) updateData() -- The main application will need to call updateData()
-//       directly at it's required (i.e., as needed) rate.  By default, this
+//       directly at its required (i.e., as needed) rate.  By default, this
 //       function will call the simulation exec and interoperability network
 //       updateData() functions.  However, ...
 //

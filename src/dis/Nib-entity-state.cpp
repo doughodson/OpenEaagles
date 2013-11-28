@@ -1,6 +1,7 @@
-//==============================================================================
-// Entity State PDUs (Portions of NetIO and Nib)
-//==============================================================================
+//------------------------------------------------------------------------------
+// Class: Nib
+// Description: Portions of class defined to support entity state PDUs
+//------------------------------------------------------------------------------
 
 #include "openeaagles/dis/NetIO.h"
 #include "openeaagles/dis/Nib.h"
@@ -35,102 +36,6 @@ static const unsigned int FLAMES_BIT      = 0x00008000;   // Flames appearance b
 static const unsigned int FROZEN_BIT      = 0x00200000;   // Frozen status (0 - not frozen; 1 - frozen)
 static const unsigned int POWER_PLANT_BIT = 0x00400000;   // Power-plant status bit (0 - off; 1 - on)
 static const unsigned int DEACTIVATE_BIT  = 0x00800000;   // State bit (0 - active; 1 - deactivated)
-
-//------------------------------------------------------------------------------
-// processEntityStatePDU() callback --
-//------------------------------------------------------------------------------
-void NetIO::processEntityStatePDU(const EntityStatePDU* const pdu)
-{
-    // Get PDU IDs
-    unsigned short playerId = pdu->entityID.ID;
-    unsigned short site = pdu->entityID.simulationID.siteIdentification;
-    unsigned short app = pdu->entityID.simulationID.applicationIdentification;
-
-    // ---
-    // Make sure it's not one of ours
-    // ---
-
-    // Reject PDUs with our appication and site IDs
-    if (site == getSiteID() &&  app == getApplicationID()) return;
-
-    // Search test (reject PDUs from players on our output list)
-    Simulation::Nib* testNib = findDisNib(playerId, site, app, OUTPUT_NIB);
-    if (testNib != 0) return;
-
-    // ---
-    // Find the Network Interface Block
-    // ---
-    Nib* nib = static_cast<Nib*>( findDisNib(playerId, site, app, INPUT_NIB) );
-
-    // ---
-    // When we don't have a NIB, create one
-    // ---
-    if (nib == 0) {
-        nib = static_cast<Nib*>( createNewInputNib() );
-        if (nib != 0) {
-            nib->setPlayerID(playerId);
-            if (pdu->entityMarking.characterSet == 1) {
-               char name[12];
-               lcStrcpy(name, 12, (char*)pdu->entityMarking.marking);
-               nib->setPlayerName(name);
-            }
-            else
-               nib->setPlayerName("DIS PLAYER");
-
-            // Set the site id, app id and fed name
-            {
-               nib->setSiteID(site);
-               nib->setApplicationID(app);
-               char cbuff[32];
-               makeFederateName(cbuff, 32, site, app);
-               Basic::String* fname = new Basic::String(cbuff);
-               nib->setFederateName(fname);
-               fname->unref();
-            }
-
-            nib->setDeadReckoning( Simulation::Nib::DeadReckoning( pdu->deadReckoningAlgorithm ) );
-
-            nib->setEntityType(
-               pdu->entityType.kind,
-               pdu->entityType.domain,
-               pdu->entityType.country,
-               pdu->entityType.category,
-               pdu->entityType.subcategory,
-               pdu->entityType.specific,
-               pdu->entityType.extra);
-
-            // Side: When mapping Force ID to Player Side ...
-            if (pdu->forceID == FRIENDLY_FORCE) {
-                // Friendly's are blue, ...
-                nib->setSide(Simulation::Player::BLUE);
-            }
-            else if (pdu->forceID == OPPOSING_FORCE) {
-                // opposing side is red, ...
-                nib->setSide(Simulation::Player::RED);
-            }
-            else if (pdu->forceID == NEUTRAL_FORCE) {
-                // Neutrals are white, ...
-                nib->setSide(Simulation::Player::WHITE);
-            }
-            else  {
-                // and everyone else is gray.
-                nib->setSide(Simulation::Player::GRAY);
-            }
-
-            addNib2InputList(nib);
-            nib->unref();
-        }
-    }
-
-
-    // ---
-    // When we have a NIB, transfer our packet data to it.
-    // ---
-    if (nib != 0) {
-       nib->entityStatePdu2Nib(pdu);
-    }
-}
-
 
 //------------------------------------------------------------------------------
 // entityStatePdu2Nib() -- (Input support)

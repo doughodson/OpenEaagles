@@ -6,6 +6,7 @@
 --     vs2008     (Visual Studio 2008)
 --     vs2010     (Visual Studio 2010)
 --     vs2012     (Visual Studio 2012)
+--     vs2013     (Visual Studio 2013)
 --     codeblocks (Code::Blocks)
 --     codelite   (CodeLite)
 --
@@ -31,7 +32,7 @@ OE3rdPartyIncPath = OE_3RD_PARTY_ROOT.."/include"
 -- compiled libraries
 --
 locationPath  = "../" .. _ACTION
-if (_ACTION == "vs2008") or (_ACTION == "vs2010") or (_ACTION == "vs2012") then
+if (_ACTION == "vs2008") or (_ACTION == "vs2010") or (_ACTION == "vs2012") or (_ACTION == "vs2013") then
   targetDirPath = "../../lib/".._ACTION
 end
 if (_ACTION == "codelite") or (_ACTION == "codeblocks") then
@@ -41,6 +42,11 @@ if (os.is("linux")) then
   targetDirPath = "../../lib/linux"
 end
 print ("Target directory path: "..targetDirPath)
+
+-- for now, premake does not support this action, so use 2012 instead
+if (_ACTION == "vs2013") then
+   _ACTION = "vs2012"
+end
 
 solution "oe"
 

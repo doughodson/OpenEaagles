@@ -2,7 +2,7 @@
 // Class: CadrgClut
 //
 // Description: Used by CadrgFile, this is a Color Lookup Table (Clut), which loads a
-// CadrgFrameEntry with it's proper color table
+// CadrgFrameEntry with its proper color table
 //
 // Load our color table
 //     void load(CadrgFrameEntry& frame, int cib, ColorTableSizes clutSize = CLUT_216);

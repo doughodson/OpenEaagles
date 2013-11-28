@@ -60,7 +60,7 @@ std::ostream& Volume::serialize(std::ostream& sout, const int i, const bool slot
 {
     int j = 0;
     if (!slotsOnly) {
-    	indent(sout, i);
+        indent(sout, i);
         sout << "( " << getFormName() << std::endl;
         j = 4;
     }

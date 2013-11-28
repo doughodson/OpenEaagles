@@ -54,7 +54,7 @@ class Material;
 //    transform          <PairStream>   ! List of coordinate transformations (default: 0)
 //    transform          <Transform>    ! Single coordinate transformation (default: 0)
 //    vertices           <PairStream>   ! List of 3D Coordinates (World coord) (default: 0)
-//    normals            <PairStream>   ! List of 3D Vectors of normal's at each vertex
+//    normals            <PairStream>   ! List of 3D Vectors of normals at each vertex
 //    texCoord           <PairStream>   ! List of 2D Texture Coordinates (default: 0)
 //    noDisplayList      <Number>       ! Flag: True to disable display list
 //                                      !     (default false)
@@ -114,7 +114,7 @@ class Material;
 //          used to lookup the Color from the color table.
 //      setColor(Number* num)
 //          Sets a color rotary object, based on the value passed in.. see basicGL/ColorRotary.h for
-//          how to setup a list of colors and breakpoints.
+//          how to set up a list of colors and breakpoints.
 //
 //
 //
@@ -428,9 +428,9 @@ protected:
     virtual bool setSlotTranslateLight(Basic::PairStream* const msg);
 
     // Basic::Component interface
-    virtual void processComponents(   // Process our subcomponent list (which should be other Graphics)
+    virtual void processComponents(            // Process our subcomponent list (which should be other Graphics)
          Basic::PairStream* const list,        // Source list of components
-         const std::type_info& filter,           // Type filter
+         const std::type_info& filter,         // Type filter
          Basic::Pair* const add = 0,           // Optional pair to add
          Basic::Component* const remove = 0    // Optional subcomponent to remove
        );
@@ -440,7 +440,7 @@ private:
     void          setupMatrix();
     void          setupMaterial();
     
-    Basic::PairStream* transforms; // transformations
+    Basic::PairStream* transforms;  // transformations
     osg::Matrix   m;                // transformation matrix
     osg::Matrix   m1;               // saved 'm'
     bool          haveMatrix;       // Have a transformation matrix flag

@@ -11,7 +11,7 @@ namespace Simulation {
 class Nib;
 
 //------------------------------------------------------------------------------
-// Class:	Ntm
+// Class: Ntm
 // Description: Abstract Network Type Mapper (NTM) class
 //
 //    This class is used to map Eaagles player types to the entity type codes

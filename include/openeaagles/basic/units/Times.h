@@ -1,8 +1,10 @@
 //------------------------------------------------------------------------------
-// Classes:  Time, Seconds, MilliSeconds, Minutes, Hours, Days
+// Classes:  Time, Seconds, MilliSeconds, MicroSeconds, NanoSeconds, Minutes, Hours, Days
 // Base class:  Object -> Number -> Time
 //              Object -> Number -> Time -> Seconds
 //              Object -> Number -> Time -> MilliSeconds
+//              Object -> Number -> Time -> MicroSeconds
+//              Object -> Number -> Time -> NanoSeconds
 //              Object -> Number -> Time -> Minutes
 //              Object -> Number -> Time -> Hours
 //              Object -> Number -> Time -> Days
@@ -13,39 +15,39 @@
 //
 // Public methods (Defined in Time, and inherited by all derived classes):
 //
-//	    set(const LCreal v)
-//		    Sets an Time derived instance with an LCreal.
+//     set(const LCreal v)
+//        Sets an Time derived instance with an LCreal.
 //
-//	    set(const Time& n)
-//		    Sets, and converts if necessary, a Time derived instance with
+//     set(const Time& n)
+//        Sets, and converts if necessary, a Time derived instance with
 //          another Time derived instance.
 //
-//	    LCreal convert(const Time& n)
-//		    Converts the value of an Time derived instance into
-//		    the units of another Time derived instance.
+//     LCreal convert(const Time& n)
+//        Converts the value of an Time derived instance into
+//        the units of another Time derived instance.
 //
-//	    Conversion routines:
-//		    LCreal SecondsToMilliSeconds(const LCreal v) { return v * S2MS; }
-//		    LCreal MilliSecondsToSeconds(const LCreal v) { return v * MS2S; }
-//		    LCreal MinutesToSeconds(const LCreal v)      { return v * M2S; }
-//		    LCreal SecondsToMinutes(const LCreal v)      { return v * S2M; }
-//		    LCreal HoursToMinutes(const LCreal v)        { return (v * H2S) * S2M; }
-//		    LCreal MinutesToHours(const LCreal v)        { return (v * M2S) * S2H; }
-//		    LCreal DaysToHours(const LCreal v)           { return (v * D2S) * S2H; }
-//		    LCreal HoursToDays(const LCreal v)           { return (v * H2S) * S2D; }
-//			 Return the appropriate conversion factors.
+//     Conversion routines:
+//        LCreal SecondsToMilliSeconds(const LCreal v) { return v * S2MS; }
+//        LCreal MilliSecondsToSeconds(const LCreal v) { return v * MS2S; }
+//        LCreal MinutesToSeconds(const LCreal v)      { return v * M2S; }
+//        LCreal SecondsToMinutes(const LCreal v)      { return v * S2M; }
+//        LCreal HoursToMinutes(const LCreal v)        { return (v * H2S) * S2M; }
+//        LCreal MinutesToHours(const LCreal v)        { return (v * M2S) * S2H; }
+//        LCreal DaysToHours(const LCreal v)           { return (v * D2S) * S2H; }
+//        LCreal HoursToDays(const LCreal v)           { return (v * H2S) * S2D; }
+//        Return the appropriate conversion factors.
 //
 //      Output stream operator:  >> 
-//		    ostream& operator<<(ostream& sout, const Time& n)
-//			 Sends "( <the Time derived instance class name and value> )"
-//			 to the output stream.
+//        ostream& operator<<(ostream& sout, const Time& n)
+//        Sends "( <the Time derived instance class name and value> )"
+//        to the output stream.
 //
 //
 // Public methods (For classes:  Seconds, MilliSeconds, Minutes, Hours, Days):                           
 //
-//	    LCreal convertStatic(const Time& n)
-//		    Static function to convert the given Time derived 
-//		    instance into the units of another Time derived instance.
+//     LCreal convertStatic(const Time& n)
+//        Static function to convert the given Time derived 
+//        instance into the units of another Time derived instance.
 //
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_Basic_Times_H__
@@ -87,8 +89,7 @@ public:
 
     virtual LCreal toTime() const =0;
     virtual LCreal fromTime(const LCreal a) const =0;  
-    LCreal convert(const Time& n)
-	{ return fromTime(n.toTime()); }
+    LCreal convert(const Time& n)                        { return fromTime(n.toTime()); }
 
     // Conversions between times
     static LCreal SecondsToMilliSeconds(const LCreal v)  { return v * S2MS; }
@@ -121,7 +122,7 @@ public:
     static const LCreal M2S;     // Minutes to seconds
     static const LCreal S2H;     // Seconds to hours
     static const LCreal H2S;     // Hours to seconds
-	static const LCreal M2D;     // Minutes to days
+    static const LCreal M2D;     // Minutes to days
     static const LCreal D2M;     // Days to minutes
     static const LCreal S2D;     // Seconds to days
     static const LCreal D2S;     // Days to seconds
@@ -129,7 +130,7 @@ public:
 
 
 inline std::ostream& operator<<(std::ostream& sout, const Time& n)
-	    { sout << "( " << n.getFormName() << " " << n.getReal() << " )"; return sout; }
+    { sout << "( " << n.getFormName() << " " << n.getReal() << " )"; return sout; }
 
 
 // getHHMMSS -- convert time in seconds to integer hours, minutes and seconds

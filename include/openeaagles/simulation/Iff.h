@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Class:	Iff
+// Class: Iff
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_Simulation_Iff_H__
 #define __Eaagles_Simulation_Iff_H__
@@ -10,8 +10,8 @@ namespace Eaagles {
 namespace Simulation {
 
 //------------------------------------------------------------------------------
-// Class:	Iff
-// Base class:	Basic::Object -> Basic::Component -> Iff
+// Class: Iff
+// Base class: Basic::Object -> Basic::Component -> Iff
 //
 // Description: Generic class for all IFF systems (a.k.a. the SQUAWK box)
 //

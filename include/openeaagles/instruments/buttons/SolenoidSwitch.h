@@ -1,11 +1,11 @@
 //------------------------------------------------------------------------------
-// Class:       SolenoidSwitch
-// Base class:  Basic::Object -> Basic::Component -> BasicGL::Graphic -> Button -> SolenoidSwitch
+// Class: SolenoidSwitch
+//
 // Description: This is a custom button manager, which will hold 3 buttons, and
 // will time when the user holds up or down from the center on the button, and will
 // switch at that time.  A click on the center button will simply return to the 
 // center position (no holding).  
-// You can retrieve the button position at any time, or 
+// You can retrieve the button position at any time, or
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_Instruments_SolenoidSwitch_H__
 #define __Eaagles_Instruments_SolenoidSwitch_H__
@@ -17,9 +17,10 @@ namespace Eaagles {
 namespace Basic { class UpTimer; }
 namespace Instruments {
 
-class SolenoidSwitch : public BasicGL::Graphic {
+class SolenoidSwitch : public BasicGL::Graphic
+{
     DECLARE_SUBCLASS(SolenoidSwitch,BasicGL::Graphic)
- 
+
 public:
     SolenoidSwitch();
 
@@ -68,12 +69,12 @@ private:
 };
 
 //------------------------------------------------------------------------------
-// Class:       SolenoidButton
-// Base class:  Basic::Object -> Basic::Component -> BasicGL::Graphic -> Button -> SolenoidButton
+// Class: SolenoidButton
 // Description: Custom button that understands that it belongs to a SolenoidSwitch,
-// and will let it know when it's respective button has been hit.
+// and will let it know when its respective button has been hit.
 //------------------------------------------------------------------------------
-class SolenoidButton : public Button {
+class SolenoidButton : public Button
+{
     DECLARE_SUBCLASS(SolenoidButton,Button)
 public:
     SolenoidButton();
@@ -92,7 +93,7 @@ public:
 private:
     bool noTimer;    // this flag tells this button that we don't time, we simply switch
     bool pushed;    // flag that tells us we have the mouse down on our current graphic
-    SendData pushedSD; 
+    SendData pushedSD;
 
 };
 

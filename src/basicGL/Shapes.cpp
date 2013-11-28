@@ -16,9 +16,9 @@ IMPLEMENT_SUBCLASS(Circle,"Circle")
 EMPTY_DELETEDATA(Circle)
 
 BEGIN_SLOTTABLE(Circle)
-	"radius",	// Radius of circle
-	"filled",	// True if circle is filled
-	"slices",	// Number of slices in the circle
+    "radius",    // Radius of circle
+    "filled",    // True if circle is filled
+    "slices",    // Number of slices in the circle
 END_SLOTTABLE(Circle)
 
 BEGIN_SLOT_MAP(Circle)
@@ -222,10 +222,10 @@ IMPLEMENT_SUBCLASS(Arc,"Arc")
 EMPTY_DELETEDATA(Arc)
 
 BEGIN_SLOTTABLE(Arc)
-	"startAngle",	// Start angle of arc
-	"arcLength",	// Length of arc
-	"connect",      // if true, we connect the lines (so the circle looks like a piece of pie,
-	                // instead of an open ended arc)
+    "startAngle",    // Start angle of arc
+    "arcLength",     // Length of arc
+    "connect",       // if true, we connect the lines (so the circle looks like a piece of pie,
+                     // instead of an open ended arc)
 END_SLOTTABLE(Arc)
 
 BEGIN_SLOT_MAP(Arc)
@@ -471,7 +471,7 @@ IMPLEMENT_SUBCLASS(Line,"Line")
 EMPTY_DELETEDATA(Line)
 
 BEGIN_SLOTTABLE(Line)
-	"segment",	// True if line segments
+    "segment",    // True if line segments
 END_SLOTTABLE(Line)
 
 BEGIN_SLOT_MAP(Line)
@@ -562,7 +562,7 @@ IMPLEMENT_SUBCLASS(Quad,"Quad")
 EMPTY_DELETEDATA(Quad)
 
 BEGIN_SLOTTABLE(Quad)
-	"strip",	// True if we want a quad strip
+    "strip",    // True if we want a quad strip
 END_SLOTTABLE(Quad)
 
 BEGIN_SLOT_MAP(Quad)
@@ -646,8 +646,9 @@ void Quad::drawFunc()
 
                 for (unsigned int i = 0; i < nv; i++) {
                     if (colGradient != 0) {
-	                    Basic::Color* col = colGradient->getColorByIdx(i+1);
-	                    if (col != 0) glColor4f((GLfloat)col->red(), (GLfloat)col->green(), (GLfloat)col->blue(), (GLfloat)col->alpha());
+                        Basic::Color* col = colGradient->getColorByIdx(i+1);
+                        if (col != 0)
+                            glColor4f((GLfloat)col->red(), (GLfloat)col->green(), (GLfloat)col->blue(), (GLfloat)col->alpha());
                     }
                     // now add our vertex
                     lcVertex3v( v[i].ptr() );
@@ -697,7 +698,7 @@ IMPLEMENT_SUBCLASS(Triangle,"Triangle")
 EMPTY_DELETEDATA(Triangle)
 
 BEGIN_SLOTTABLE(Triangle)
-	"fan",	// True if we want a triangle fan
+    "fan",    // True if we want a triangle fan
 END_SLOTTABLE(Triangle)
 
 BEGIN_SLOT_MAP(Triangle)
@@ -782,8 +783,9 @@ void Triangle::drawFunc()
 
                 for (unsigned int i = 0; i < nv; i++) {
                     if (colGradient != 0) {
-	                    Basic::Color* col = colGradient->getColorByIdx(i+1);
-	                    if (col != 0) glColor4f((GLfloat)col->red(), (GLfloat)col->green(), (GLfloat)col->blue(), (GLfloat)col->alpha());
+                        Basic::Color* col = colGradient->getColorByIdx(i+1);
+                        if (col != 0)
+                            glColor4f((GLfloat)col->red(), (GLfloat)col->green(), (GLfloat)col->blue(), (GLfloat)col->alpha());
                     }
                     // now add our vertex
                     lcVertex3v( v[i].ptr() );

@@ -466,7 +466,7 @@ void Eadi3DPage::globeBall(LCreal pitch, LCreal roll, LCreal pitchCmd, LCreal ro
     lcColor3v(WHITE);
     eadiObjs.irisgl.circ(0., 0., 1.625);
 
-    glPushMatrix();		/* ground pointer */
+    glPushMatrix();    /* ground pointer */
     glRotated(GLdouble(roll), 0.0, 0.0, 1.0);
     glTranslated(0.0, -1.625, 0.0);
     eadiObjs.drawObj(Eadi3DObjects::GROUND_POINTER_2);
@@ -474,32 +474,32 @@ void Eadi3DPage::globeBall(LCreal pitch, LCreal roll, LCreal pitchCmd, LCreal ro
 
 
     lcColor3v(BLACK);
-    /* lcColor3v(WHITE);		* temp */
+    /* lcColor3v(WHITE);   * temp */
     glLineWidth(4.0);
-    eadiObjs.drawObj(Eadi3DObjects::AC_REF);	/* aircraft reference symbol */
+    eadiObjs.drawObj(Eadi3DObjects::AC_REF);    /* aircraft reference symbol */
     glLineWidth(2.0);
 
     if (landMode) {
         if (psValid) {
-            LCreal x = (LCreal)(pitchCmd / 30.0 * 1.625);	/* pitch fd command */
-	    glPushMatrix();
-	    glTranslated(0.0, GLdouble(x), 0.0);
-	    glBegin(GL_LINES);
+            LCreal x = (LCreal)(pitchCmd / 30.0 * 1.625);   /* pitch fd command */
+            glPushMatrix();
+            glTranslated(0.0, GLdouble(x), 0.0);
+            glBegin(GL_LINES);
                     lcVertex2v(fdPscV1);
                     lcVertex2v(fdPscV2);
-	    glEnd();
-	    glPopMatrix();
-	}
+            glEnd();
+            glPopMatrix();
+        }
         if (rcValid) {
-            LCreal x = (LCreal)(rollCmd / 30.0 * 1.625);	/* roll fd command */
-	    glPushMatrix();
-	    glTranslated(GLdouble(x), 0.0, 0.0);
-	    glBegin(GL_LINES);
+            LCreal x = (LCreal)(rollCmd / 30.0 * 1.625);    /* roll fd command */
+            glPushMatrix();
+            glTranslated(GLdouble(x), 0.0, 0.0);
+            glBegin(GL_LINES);
                     lcVertex2v(fdBscV1);
                     lcVertex2v(fdBscV2);
-	    glEnd();
-	    glPopMatrix();
-	}
+            glEnd();
+            glPopMatrix();
+        }
     }
     glLineWidth(1.0);
 }
@@ -512,28 +512,29 @@ void Eadi3DPage::scales(LCreal gsDev, LCreal locDev, LCreal turnRate, LCreal sli
 {
 
     if (landMode) {
-	glLineWidth(2.0);
-	lcColor3v(GREEN);
+        glLineWidth(2.0);
+        lcColor3v(GREEN);
 
-	eadiObjs.drawObj(Eadi3DObjects::GLIDESLOPE);
+        eadiObjs.drawObj(Eadi3DObjects::GLIDESLOPE);
 
-	    if (gsValid) {
-	        LCreal x = (LCreal)(gsDev / 2.0);
-	    glPushMatrix();
-	    glTranslated(-2.0, GLdouble(x), 0.);
-	    eadiObjs.drawObj(Eadi3DObjects::GS_TEXT1);
-	    glPopMatrix();
+        if (gsValid) {
+            LCreal x = (LCreal)(gsDev / 2.0);
+            glPushMatrix();
+            glTranslated(-2.0, GLdouble(x), 0.);
+            eadiObjs.drawObj(Eadi3DObjects::GS_TEXT1);
+            glPopMatrix();
         }
-        else eadiObjs.drawObj(Eadi3DObjects::GS_TEXT2);
+        else
+            eadiObjs.drawObj(Eadi3DObjects::GS_TEXT2);
 
-	eadiObjs.drawObj(Eadi3DObjects::LOCALIZER);
+        eadiObjs.drawObj(Eadi3DObjects::LOCALIZER);
 
-	    if (locValid) {
-	        LCreal x = (LCreal)(locDev / 2.0);
-	    glPushMatrix();
-	    glTranslated(GLdouble(x), 2.0, 0.);
-	    eadiObjs.drawObj(Eadi3DObjects::LOC_TEXT1);
-	    glPopMatrix();
+        if (locValid) {
+            LCreal x = (LCreal)(locDev / 2.0);
+            glPushMatrix();
+            glTranslated(GLdouble(x), 2.0, 0.);
+            eadiObjs.drawObj(Eadi3DObjects::LOC_TEXT1);
+            glPopMatrix();
         }
         else eadiObjs.drawObj(Eadi3DObjects::LOC_TEXT2);
     }
@@ -577,8 +578,8 @@ void Eadi3DPage::windows(LCreal cas, LCreal alt, LCreal aoa, LCreal mach, LCreal
 
     airC[3] = (int) a;
     for (int i = 0, j = 1; (i < 3) & j; i++) {
-	    if (airC[i] == 0) airC[i] = -1;
-	    else j = 0;
+        if (airC[i] == 0) airC[i] = -1;
+        else j = 0;
     }
 
     a = alt;
@@ -597,15 +598,15 @@ void Eadi3DPage::windows(LCreal cas, LCreal alt, LCreal aoa, LCreal mach, LCreal
     a -= (LCreal) (altC[3] * 10);
     altC[4] = (int) a;
     for (int i = 0, j = 1; (i < 4) & j; i++) {
-	    if (altC[i] == 0) altC[i] = -1;
+        if (altC[i] == 0) altC[i] = -1;
         else j = 0;
     }
 
     a = (LCreal)(aoa * 10.0);
     int aoaC[4];
     if (a < 0) {
-	a = -a;
-	    aoaC[0] = Eadi3DObjects::PUNC05;
+        a = -a;
+        aoaC[0] = Eadi3DObjects::PUNC05;
     }
     else aoaC[0] = -1;
     if (a > 999.) a = 999.;
@@ -617,23 +618,23 @@ void Eadi3DPage::windows(LCreal cas, LCreal alt, LCreal aoa, LCreal mach, LCreal
 
     aoaC[3] = (int) a;
     for (int i = 1, j = 1; (i < 3) & j; i++) {
-	    if (aoaC[i] == 0) {
-	        if (aoaC[i - 1] == Eadi3DObjects::PUNC05) {
-		        aoaC[i - 1] = -1;
-		        aoaC[i] = Eadi3DObjects::PUNC05;
-	    }
+        if (aoaC[i] == 0) {
+            if (aoaC[i - 1] == Eadi3DObjects::PUNC05) {
+                aoaC[i - 1] = -1;
+                aoaC[i] = Eadi3DObjects::PUNC05;
+            }
             else aoaC[i] = -1;
-	}
+        }
         else j = 0;
     }
 
     a = (LCreal)(mach * 100.0);
     int machC[3];
     if (a < 0) {
-	a = 0.0;
+        a = 0.0;
     }
     if (a > 999.) {
-	a = 999.;
+        a = 999.;
     }
     machC[0] = (int) a / 100;
     a -= (LCreal) (machC[0] * 100);
@@ -656,8 +657,8 @@ void Eadi3DPage::windows(LCreal cas, LCreal alt, LCreal aoa, LCreal mach, LCreal
     a = vvi;
     int vviC[5];
     if (a < 0) {
-	a = -a;
-	    vviC[0] = Eadi3DObjects::PUNC05;
+        a = -a;
+        vviC[0] = Eadi3DObjects::PUNC05;
     } 
     else vviC[0] = -1;
 
@@ -675,13 +676,13 @@ void Eadi3DPage::windows(LCreal cas, LCreal alt, LCreal aoa, LCreal mach, LCreal
     vviC[4] = (int) a;
 
     for (int i = 1, j = 1; (i < 4) & j; i++) {
-	    if (vviC[i] == 0) {
-	        if (vviC[i - 1] == Eadi3DObjects::PUNC05) {
-		        vviC[i - 1] = -1;
-		        vviC[i] = Eadi3DObjects::PUNC05;
-	    }
+        if (vviC[i] == 0) {
+            if (vviC[i - 1] == Eadi3DObjects::PUNC05) {
+                vviC[i - 1] = -1;
+                vviC[i] = Eadi3DObjects::PUNC05;
+            }
             else vviC[i] = -1;
-	}
+        }
         else j = 0;
     }
 
@@ -692,7 +693,7 @@ void Eadi3DPage::windows(LCreal cas, LCreal alt, LCreal aoa, LCreal mach, LCreal
     glPushMatrix();
     glTranslated(-2.4375, 1.59375, 0.);
         if (airSpeedType != 0) {
-	        if (airSpeedType[0] == 'T') eadiObjs.drawObj(Eadi3DObjects::FONT_T);
+            if (airSpeedType[0] == 'T') eadiObjs.drawObj(Eadi3DObjects::FONT_T);
             else if (airSpeedType[0] == 'G') eadiObjs.drawObj(Eadi3DObjects::FONT_G); 
             else eadiObjs.drawObj(Eadi3DObjects::FONT_C);
     }
@@ -814,9 +815,9 @@ void Eadi3DPage::windows(LCreal cas, LCreal alt, LCreal aoa, LCreal mach, LCreal
 //------------------------------------------------------------------------------
 void Eadi3DPage::heading(LCreal hdg, LCreal hdgCmd)
 {
-    static LCreal baseLineV1[2] = {-1.6f, 2.1875f};		/* base line */
+    static LCreal baseLineV1[2] = {-1.6f, 2.1875f};   /* base line */
     static LCreal baseLineV2[2] = {1.6f, 2.1875f};
-    static LCreal refTicV1[2] = {0.0f, 2.1875f};		/* reference tic */
+    static LCreal refTicV1[2] = {0.0f, 2.1875f};      /* reference tic */
     static LCreal refTicV2[2] = {0.0f, 2.125f};
 
 
@@ -834,12 +835,12 @@ void Eadi3DPage::heading(LCreal hdg, LCreal hdgCmd)
     int ihu[4];
     int ihl[4];
     for (int j = 0; j < 4; j++) {
-	int ih = i + j - 1;
-	    if (ih <= 0) ih += 36;
-	    if (ih > 36) ih -= 36;
+        int ih = i + j - 1;
+        if (ih <= 0) ih += 36;
+        if (ih > 36) ih -= 36;
 
         ihu[j] = ih / 10;
-	    ihl[j] = ih - ihu[j] * 10;
+        ihl[j] = ih - ihu[j] * 10;
     }
 
     glPushMatrix();
@@ -854,15 +855,15 @@ void Eadi3DPage::heading(LCreal hdg, LCreal hdgCmd)
     eadiObjs.drawObj(Eadi3DObjects::HEADING_SCALE);
 
     for (i = 0, x = -1.; i < 4; i++, x++) {
-	glPushMatrix();
-	glTranslated(GLdouble(x), 2.28, 0.0);
-	glPushMatrix();
-	glTranslated(-0.137142857, 0.0, 0.0);
-                    eadiObjs.drawObj((Eadi3DObjects::EadiObj) ihu[i]);
-	glPopMatrix();
-	glTranslated(0.03, 0.0, 0.0);
-                eadiObjs.drawObj((Eadi3DObjects::EadiObj) ihl[i]);
-	glPopMatrix();
+        glPushMatrix();
+        glTranslated(GLdouble(x), 2.28, 0.0);
+        glPushMatrix();
+        glTranslated(-0.137142857, 0.0, 0.0);
+        eadiObjs.drawObj((Eadi3DObjects::EadiObj) ihu[i]);
+        glPopMatrix();
+        glTranslated(0.03, 0.0, 0.0);
+        eadiObjs.drawObj((Eadi3DObjects::EadiObj) ihl[i]);
+        glPopMatrix();
     }
 
     glPopMatrix();
@@ -900,33 +901,33 @@ void Eadi3DPage::background()
     eadiObjs.drawObj(Eadi3DObjects::TURN_RATE);
     eadiObjs.drawObj(Eadi3DObjects::SLIP_IND);
 
-    eadiObjs.irisgl.rect(-2.25f, 1.5625f, -1.55f, 1.8125f);	/* cas */
-    eadiObjs.irisgl.rect(1.55f, 1.5625f, 2.25f, 1.8125f);	/* alt */
+    eadiObjs.irisgl.rect(-2.25f, 1.5625f, -1.55f, 1.8125f);   /* cas */
+    eadiObjs.irisgl.rect(1.55f, 1.5625f, 2.25f, 1.8125f);     /* alt */
     glPushMatrix();
     glTranslated(1.3625, 1.59375, 0.0);
     eadiObjs.drawObj(Eadi3DObjects::FONT_B);
     glPopMatrix();
 
-    glPushMatrix();		/* aoa */
+    glPushMatrix();     /* aoa */
     glTranslated(-2.3000, 1.34375, 0.0);
     eadiObjs.drawObj(Eadi3DObjects::ALPHA_SYMB);
     glPopMatrix();
 
-    glPushMatrix();		/* mach */
+    glPushMatrix();    /* mach */
     glTranslated(-2.3000, 1.09375, 0.0);
     glTranslated(0.0, 0.03125, 0.0);
     glScaled(.666667, .666667, 1.0);
     eadiObjs.drawObj(Eadi3DObjects::FONT_M);
     glPopMatrix();
 
-    glPushMatrix();		/* G */
+    glPushMatrix();    /* G */
     glTranslated(-2.3000, 0.84375, 0.0);
     glTranslated(0.0, 0.03125, 0.0);
     glScaled(.666667, .666667, 1.0);
     eadiObjs.drawObj(Eadi3DObjects::FONT_G);
     glPopMatrix();
 
-    glPushMatrix();		/* vvi */
+    glPushMatrix();    /* vvi */
     glTranslated(1.3625, 1.34375, 0.0);
     eadiObjs.drawObj(Eadi3DObjects::FONT_V);
     glTranslated(0.1607, 0.0, 0.0);
@@ -1097,7 +1098,6 @@ void Eadi3DPage::setLocalizerValid(const bool locValid)
 {
     localizerDevValid = locValid;
 }
-
 
 }; // end Instruments namespace
 }; // end Eaagles namespace

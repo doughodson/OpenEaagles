@@ -334,8 +334,8 @@ class Track;
 //          irSystems:     ( IrSystem ...        )  // IR system model
 //          sms:           ( StoresMgr ...       )  // Stores management model
 //
-//          Where 'datalink' is the name give to the top level datalink object,
-//          'dynamicsModel' is the name give to the dynamics model, etc.
+//          Where 'datalink' is the name given to the top level datalink object,
+//          'dynamicsModel' is the name given to the dynamics model, etc.
 //
 //    2) There is one top level model for each major system.  Additional system
 //       models are subcomponents to the top level model of the same type.
@@ -603,7 +603,7 @@ public:
    bool isTerrainElevationRequired() const;        // True if terrain elevation is required from the OTW system;
                                                    // otherwise we use DTED, if available
 
-   CoordSys getCoordSystemInUse() const;           // Returns the coordinate system currently being to
+   CoordSys getCoordSystemInUse() const;           // Returns the coordinate system currently being used to
                                                    // update the player's position
 
    // ---
@@ -1045,7 +1045,7 @@ protected:
    virtual bool setStoresMgr(Basic::Pair* const s);       // Sets our stores management model
 
    // Basic::Component interface
-   virtual void processComponents(   // Process our subcomponent list (which should be other steerpoints)
+   virtual void processComponents(   // Process our subcomponent list (which should be other steer points)
       Basic::PairStream* const list,        // Source list of components
       const std::type_info& filter,         // Type filter
       Basic::Pair* const add = 0,           // Optional pair to add
@@ -1125,7 +1125,7 @@ private:
    bool        posFrz;           // Player's position is frozen
    bool        altFrz;           // Player's altitude is frozen
    bool        attFrz;           // Player's attitude is frozen
-   bool        fuelFrz;          // Player's fuel quanity is frozen
+   bool        fuelFrz;          // Player's fuel quantity is frozen
    bool        crashOverride;    // If true, player can NOT crash
    bool        killOverride;     // If true, player can NOT be killed
    bool        killRemoval;      // If true then on kill notification the player will be set to KILLED and eventually removed

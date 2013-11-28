@@ -14,7 +14,7 @@ namespace Simulation {
    class Emission;
 
 //------------------------------------------------------------------------------
-// Class:	RfSystem
+// Class: RfSystem
 //
 // Description: Generic class for all R/F type systems.  Provides a common
 //              interface, and some default behavior, for R/F systems.
@@ -60,7 +60,7 @@ namespace Simulation {
 //    lossSignalProcess  <Basic::Number>        ! Signal Processing loss        (no units; def: 1.0)
 //                       <Basic::Decibel>       ! Signal Processing loss        (dB)
 //
-//    disableEmissions   <Number)               ! Disable sending emission packets flag (default: false)
+//    disableEmissions   <Number>               ! Disable sending emission packets flag (default: false)
 //
 //------------------------------------------------------------------------------
 class RfSystem : public System  

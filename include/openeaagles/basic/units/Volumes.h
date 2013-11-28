@@ -12,35 +12,35 @@
 //
 // Public methods (Defined in Volume, and inherited by all derived classes):
 //
-//	    set(const LCreal v)
-//		    Sets a Volume derived instance with an LCreal.
+//     set(const LCreal v)
+//        Sets a Volume derived instance with an LCreal.
 //
-//	    set(const Volume& n)
-//		    Sets, and converts if necessary, a Volume derived 
-//		    instance with another Volume derived instance.
+//     set(const Volume& n)
+//        Sets, and converts if necessary, a Volume derived 
+//        instance with another Volume derived instance.
 //
-//	    LCreal convert(const Volume& n)
-//		    Converts the value of a Volume derived instance into
-//		    the units of another Volume derived instance.
+//     LCreal convert(const Volume& n)
+//        Converts the value of a Volume derived instance into
+//        the units of another Volume derived instance.
 //
-//	   Conversion routines:
-//		  LCreal cubicMetersToFeet(const LCreal v)   { return v * CM2CFT; }
-//		  LCreal cubicFeetToMeters(const LCreal v)   { return v * CFT2CM; }
-//		  LCreal litersToCubicMeters(const LCreal v) { return v * L2CM; }
-//		  LCreal cubicMetersToLiters(const LCreal v) { return v * CM2L; }
-//		  LCreal cubicFeetToInches(const LCreal v)   { return (v * CFT2CM) * CM2CIN; }
-//		  LCreal cubicInchesToFeet(const LCreal v)   { return (v * CIN2CM) * CM2CFT; }
+//    Conversion routines:
+//      LCreal cubicMetersToFeet(const LCreal v)   { return v * CM2CFT; }
+//      LCreal cubicFeetToMeters(const LCreal v)   { return v * CFT2CM; }
+//      LCreal litersToCubicMeters(const LCreal v) { return v * L2CM; }
+//      LCreal cubicMetersToLiters(const LCreal v) { return v * CM2L; }
+//      LCreal cubicFeetToInches(const LCreal v)   { return (v * CFT2CM) * CM2CIN; }
+//      LCreal cubicInchesToFeet(const LCreal v)   { return (v * CIN2CM) * CM2CFT; }
 //          
-//	  Output stream operator:<< 
-//		    ostream& operator<<(ostream& sout, const Volume& n)
-//			 Sends "( <the Volume derived instance class name and value> )"
-//			 to the output stream.
+//   Output stream operator:<< 
+//        ostream& operator<<(ostream& sout, const Volume& n)
+//        Sends "( <the Volume derived instance class name and value> )"
+//        to the output stream.
 //
 //
 // Public methods (For classes: CubicMeters, CubicFeet, CubicInches, Liters):
-//	LCreal convertStatic(const Volume &n)
-//		Static function to convert the given Volume derived instance
-//		into the units of a specific Volume derived class.
+//    LCreal convertStatic(const Volume &n)
+//    Static function to convert the given Volume derived instance
+//    into the units of a specific Volume derived class.
 //
 //------------------------------------------------------------------------------
 
@@ -106,7 +106,7 @@ public:
 
 
 inline std::ostream& operator<<(std::ostream& sout, const Volume& n)
-	{ sout << "( " << n.getFormName() << " " << n.getReal() << " )"; return sout; }
+    { sout << "( " << n.getFormName() << " " << n.getReal() << " )"; return sout; }
 
 
 //------------------------------------------------------------------------------

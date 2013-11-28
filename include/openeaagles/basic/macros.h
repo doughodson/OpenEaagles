@@ -156,7 +156,7 @@
     );                                                                                 \
     const ThisType::_Static* ThisType::getStatic() { return &_static; }                \
     const char* ThisType::getFormName() { return _static.fname; }                      \
-    bool ThisType::isFormName(const char name[]) const	                              \
+    bool ThisType::isFormName(const char name[]) const                                 \
     {                                                                                  \
         if (name == 0) return false;                                                   \
         if ( strcmp(_static.fname,name) == 0 )  return true;                           \
@@ -195,7 +195,7 @@
     );                                                                                 \
     const ThisType::_Static* ThisType::getStatic() { return &_static; }                \
     const char* ThisType::getFormName() { return _static.fname; }                      \
-    bool ThisType::isFormName(const char name[]) const	                              \
+    bool ThisType::isFormName(const char name[]) const                                 \
     {                                                                                  \
         if (name == 0) return false;                                                   \
         if ( strcmp(_static.fname,name) == 0 )  return true;                           \
@@ -217,7 +217,7 @@
     );                                                                                 \
     const ThisType::_Static* ThisType::getStatic() { return &_static; }                \
     const char* ThisType::getFormName() { return _static.fname; }                      \
-    bool ThisType::isFormName(const char name[]) const	                              \
+    bool ThisType::isFormName(const char name[]) const                                 \
     {                                                                                  \
         if (name == 0) return false;                                                   \
         if ( strcmp(_static.fname,name) == 0 )  return true;                           \

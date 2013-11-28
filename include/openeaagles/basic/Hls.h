@@ -26,7 +26,7 @@ namespace Basic {
 // Public methods: Base class public methods, plus ...
 //
 //      Hls(const LCreal h, const LCreal l, const LCreal s)
-//          Special constructor that initializes the object to h, l,  and s
+//          Special constructor that initializes the object to h, l, and s
 //
 //      LCreal hue()
 //      LCreal saturation()
@@ -53,8 +53,8 @@ class Hls : public Color {
     DECLARE_SUBCLASS(Hls,Color)
 
 public:
-	// components of HLS color
-	enum { HUE, LIGHTNESS, SATURATION };
+    // components of HLS color
+    enum { HUE, LIGHTNESS, SATURATION };
 
 public:
     Hls(const LCreal h, const LCreal l, const LCreal s);

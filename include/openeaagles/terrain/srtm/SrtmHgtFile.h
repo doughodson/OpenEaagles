@@ -29,10 +29,10 @@ namespace Terrain {
 // Only the elevation data is contained in the data set file.
 // The other metadata is interpreted from the file name and file size.
 // The SRTM file name are of the format...
-// 	N00W000.hgt
-// 	N00E000.hgt
-// 	S00W000.hgt
-// 	S00E000.hgt
+//     N00W000.hgt
+//     N00E000.hgt
+//     S00W000.hgt
+//     S00E000.hgt
 // where N00/S00 is the latitude of the SW corner 
 // and W000/E000 is the longitude of the SW corner
 // N/S and E/W may be upper or lower case.
@@ -69,7 +69,7 @@ private:
 };
 
 
-} // End Terrain namspace
+} // End Terrain namespace
 } // End Eaagles namespace
 
 #endif

@@ -1,16 +1,16 @@
 //------------------------------------------------------------------------------
 // Class: Waypoint
-// Base class:	Basic::Object -> Basic::String -> Record -> Waypoint
+// Base class: Basic::Object -> Basic::String -> Record -> Waypoint
 //
 // Description: Access to the DAFIF Waypoint records.
 //
 //
 // Public member functions:
 //
-//	[all public members from the base classes]
+//  [all public members from the base classes]
 //
-//	Waypoint::recordLength
-//		Length of a DAFIF Waypoint record.
+//  Waypoint::recordLength
+//    Length of a DAFIF Waypoint record.
 //
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_Dafif_Waypoint_H__
@@ -21,7 +21,8 @@
 namespace Eaagles {
 namespace Dafif {
 
-class Waypoint : public Record {
+class Waypoint : public Record
+{
     DECLARE_SUBCLASS(Waypoint,Record)
 
 public:
@@ -31,7 +32,7 @@ public:
    Waypoint();
    Waypoint(const char* const s);
 
-   // DafifRecord Interface
+   // Record Interface
    virtual void printRecord(std::ostream& sout) const;
 
 private:

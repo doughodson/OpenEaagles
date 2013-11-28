@@ -10,7 +10,7 @@ namespace Eaagles {
 namespace Simulation {
 
 //------------------------------------------------------------------------------
-// Classes:	Agm
+// Classes: Agm
 // Description: Base class for Air to Ground (A/G) missiles
 //
 //    Contains a simple aero and guidance model, which derived models can

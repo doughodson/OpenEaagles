@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Class:	FileReader
+// Class: FileReader
 //------------------------------------------------------------------------------
 
 #include <fstream>
@@ -146,7 +146,7 @@ bool FileReader::setRecordLength(const int len)
          delete[] rec;
       }
       rlen = len;
-      int tlen = rlen*4;	// allow space for 4 times the record length
+      int tlen = rlen*4;       // allow space for 4 times the record length
       rec = new char[tlen+1];
       rec[0] = '\0';
    }

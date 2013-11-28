@@ -17,7 +17,7 @@ class Track;
 class TrackManager;
 
 //------------------------------------------------------------------------------
-// Class:	OnboardComputer
+// Class: OnboardComputer
 // Description: Base class for all Onboard computer systems
 //
 //    Use to model the avionics packages, and uses the system of systems

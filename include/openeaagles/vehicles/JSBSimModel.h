@@ -1,7 +1,6 @@
 //------------------------------------------------------------------------------
-// Class:	JSBSimModel
+// Class: JSBSimModel
 // Description: JSBSim Model
-//  
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_Vehicle_JSBSimModel_H__
 #define __Eaagles_Vehicle_JSBSimModel_H__
@@ -59,10 +58,10 @@ public:
     virtual int setThrottles(const LCreal* const positions, const int num);
     virtual void setRudderPedalInput(const LCreal pedal);
 
-    const Basic::String* getRootDir() const { return rootDir; }	// JSBSim root directory
+    const Basic::String* getRootDir() const { return rootDir; }   // JSBSim root directory
     virtual bool setRootDir(const Basic::String* const dir);
 
-    const Basic::String* getModel() const { return model; }	   // JSBSim model
+    const Basic::String* getModel() const { return model; }       // JSBSim model
     virtual bool setModel(const Basic::String* const msl);
 
     // DynamicsModel interface
@@ -98,12 +97,12 @@ private:
     const Basic::String* rootDir;   // root directory for JSBSim models
     const Basic::String* model;     // JSBSim model
 
-    LCreal	pitchTrimPos;		// +/- 1.0
-    LCreal	pitchTrimRate;		// maxVal(1.0) per sec
-    LCreal	pitchTrimSw;
-    LCreal	rollTrimPos;		// +/- 1.0
-    LCreal	rollTrimRate;		// maxVal(1.0) per sec
-    LCreal	rollTrimSw;
+    LCreal pitchTrimPos;    // +/- 1.0
+    LCreal pitchTrimRate;   // maxVal(1.0) per sec
+    LCreal pitchTrimSw;
+    LCreal rollTrimPos;     // +/- 1.0
+    LCreal rollTrimRate;    // maxVal(1.0) per sec
+    LCreal rollTrimSw;
 
     bool        headingHoldOn;
     bool        altitudeHoldOn;

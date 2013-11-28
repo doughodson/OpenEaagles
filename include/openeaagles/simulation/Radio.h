@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Classes:	Radio, CommRadio
+// Classes: Radio, CommRadio
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_Simulation_Radio_H__
 #define __Eaagles_Simulation_Radio_H__
@@ -13,7 +13,7 @@ namespace Simulation {
 class Datalink;
 
 //------------------------------------------------------------------------------
-// Class:	Radio
+// Class: Radio
 // Description: Base class for all radios (Comm, Nav, IFF, etc.)
 //
 //    This class is one of the "top level" systems attached to a Player

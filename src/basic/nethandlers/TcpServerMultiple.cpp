@@ -84,13 +84,13 @@ bool TcpServerMultiple::listenForConnections()
 {
 #if defined(WIN32)
     if (socketNum == INVALID_SOCKET) return false;
-    if( listen(socketNum, getBacklog()) == SOCKET_ERROR)
+    if( ::listen(socketNum, getBacklog()) == SOCKET_ERROR)
 #else
     if (socketNum < 0) return false;
-    if( listen(socketNum, getBacklog()) < 0)
+    if( ::listen(socketNum, getBacklog()) < 0)
 #endif
     {
-        perror("TcpHandler::listenForConnections(): error! \n");
+        ::perror("TcpHandler::listenForConnections(): error! \n");
         return false;
     }
     return true;
@@ -115,7 +115,7 @@ TcpHandler* TcpServerMultiple::acceptConnection()
    if (isMessageEnabled(MSG_INFO)) {
        std::cout << "Waiting to accept connection on " << getPort() << " ... " << std::endl;
    }
-   newSocket = accept(socketNum, (struct sockaddr *) &clientAddr, &cAddrSize);
+   newSocket = ::accept(socketNum, (struct sockaddr *) &clientAddr, &cAddrSize);
    if(newSocket > 0) {
       newHandler = new TcpHandler(newSocket);
    }

@@ -192,22 +192,22 @@ bool SrtmHgtFile::determineSrtmInfo(const std::string& srtmFilename, std::stream
     std::string ext1(".hgt");
     std::string ext2(".HGT");
     if (srtmFilename.substr(7, 4) != ".hgt" && srtmFilename.substr(7, 4) != ".HGT") {
-	return false;
+        return false;
     }
 
-    // nXXwXXX.hgt	srtm1 srtm3
+    // nXXwXXX.hgt   srtm1 srtm3
     int swcLatitude = atoi(srtmFilename.substr(1, 2).c_str());
     int swcLongitude = atoi(srtmFilename.substr(4, 3).c_str());
     char ns = (char)tolower(srtmFilename[0]);
     char ew = (char)tolower(srtmFilename[3]);
     if ((ns != 'n' && ns != 's') || (ew != 'e' && ew != 'w')) {
-	return false;
+        return false;
     }
     if (ns == 's') {
-	swcLatitude = -swcLatitude;
+        swcLatitude = -swcLatitude;
     }
     if (ew == 'w') {
-	swcLongitude = -swcLongitude;
+        swcLongitude = -swcLongitude;
     }
     setLatitudeSW( swcLatitude );
     setLongitudeSW( swcLongitude );
@@ -248,7 +248,7 @@ bool SrtmHgtFile::readSrtmData(std::istream& in)
         // Read elevation values for record
         LCreal minElev0 = 99999;
         LCreal maxElev0 = 0;
-	for(unsigned int lon=0; lon<nptlong; lon++)
+        for(unsigned int lon=0; lon<nptlong; lon++)
         {
             unsigned char values[2];
             in.read((char*)values, sizeof(values));
@@ -265,10 +265,10 @@ bool SrtmHgtFile::readSrtmData(std::istream& in)
 
             // check if this is the new min or max elevation
             if (height != voidValue)
-	    {
+            {
                 if (height < minElev0) minElev0 = height;
                 if (height > maxElev0) maxElev0 = height;
-	    }
+            }
         }
         setMinElevation(minElev0);
         setMaxElevation(maxElev0);
@@ -310,14 +310,14 @@ std::ostream& SrtmHgtFile::serialize(std::ostream& sout, const int i, const bool
 {
     int j = 0;
     if ( !slotsOnly ) {
-    	indent(sout,i);
-      sout << "( " << getFormName() << std::endl;
-      j = 4;
+        indent(sout,i);
+        sout << "( " << getFormName() << std::endl;
+        j = 4;
     }
 
     if ( !slotsOnly ) {
-    	indent(sout,i);
-    	sout << ")" << std::endl;
+        indent(sout,i);
+        sout << ")" << std::endl;
     }
 
     return sout;

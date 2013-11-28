@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
-// Class: UdpHandler
+// Class: UdpUnicastHandler
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_UdpHandler_H__
-#define __Eaagles_Basic_UdpHandler_H__
+#ifndef __Eaagles_Basic_UdpUnicastHandler_H__
+#define __Eaagles_Basic_UdpUnicastHandler_H__
 
 #include "openeaagles/basic/NetHandler.h"
 
@@ -12,40 +12,40 @@ namespace Basic {
 class String;
 
 //------------------------------------------------------------------------------
-// Class: UdpHandler
+// Class: UdpUnicastHandler
 //
-// Description: UDP/IP Unicast network handler.  Sends unicast packets to the
-//             destination IP and port.
+// Description: UDP/IP unicast network handler.  Sends unicast packets to the
+//              destination IP and port.
 //
-//             The destination port can be set by the input file, or by using
-//             the setNetAddr() and setPort() functions prior to calling the
-//             sendData() function, or by the using sendDataTo() function,
-//             which changes to destination IP and port only for the one packet.
+//              The destination port can be set by the input file, or by using
+//              the setNetAddr() and setPort() functions prior to calling the
+//              sendData() function, or by the using sendDataTo() function,
+//              which changes to destination IP and port only for the one packet.
 //
-//             The local port must be defined if you're going to be changing
-//             the destination port.
-//              
+//              The local port must be defined if you're going to be changing
+//              the destination port.
 //
-// Form name: UdpHandler
+// Form name: UdpUnicastHandler
+//
 // Slots:
 //      ipAddress  <String>    ! Destination host name or IP address "111.122.133.144"
 //                             ! (default: found via local host name)
 //
 // Input File Example:
 //
-//        ( UdpHandler
+//        ( UdpUnicastHandler
 //           ipAddress: hostname    // Destination host name
 //           port: 2010             // Destination port
 //           localPort: 2011        // Local port to send from
 //        )
 //
 //------------------------------------------------------------------------------
-class UdpHandler : public NetHandler
+class UdpUnicastHandler : public NetHandler
 {
-   DECLARE_SUBCLASS(UdpHandler, NetHandler)
+   DECLARE_SUBCLASS(UdpUnicastHandler, NetHandler)
 
 public:
-   UdpHandler();
+   UdpUnicastHandler();
 
    // Sets the destination IP address (all future packets)
    bool setNetAddr(const uint32_t netAddr)      { return BaseClass::setNetAddr(netAddr); }

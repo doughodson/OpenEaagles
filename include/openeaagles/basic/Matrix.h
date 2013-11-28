@@ -239,7 +239,7 @@ protected:
    bool remRowCol(const unsigned int, const unsigned int);
 
 private:
-   void initData();        // Init data
+   void initData();        // initialize data
 
    unsigned int rows;      // number of rows
    unsigned int cols;      // number of columns

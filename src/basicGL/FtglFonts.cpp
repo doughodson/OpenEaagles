@@ -390,9 +390,9 @@ void FtglBitmapFont::loadFont()
     lcStrcat(fontPathname, FONTPATHNAME_LENGTH, filename());
     
     FTGLBitmapFont* ftglFont = new FTGLBitmapFont(fontPathname);  
-	if (ftglFont != 0 && !ftglFont->Error()) {
-	    // set the face size and return the pointer, then tell our base class that we have a loaded font
-	    ftglFont->FaceSize(getFaceSize());  
+    if (ftglFont != 0 && !ftglFont->Error()) {
+        // set the face size and return the pointer, then tell our base class that we have a loaded font
+        ftglFont->FaceSize(getFaceSize());  
         ftgl(ftglFont);
         setFontLoaded();
     }
@@ -524,9 +524,9 @@ void FtglExtrdFont::loadFont()
     lcStrcat(fontPathname, FONTPATHNAME_LENGTH, filename());
     
     FTGLExtrdFont* ftglFont = new FTGLExtrdFont(fontPathname);  
-	if (ftglFont != 0 && !ftglFont->Error()) {
-	    // set the face size and return the pointer, then tell our base class that we have a loaded font
-	    ftglFont->FaceSize(getFaceSize());  
+    if (ftglFont != 0 && !ftglFont->Error()) {
+        // set the face size and return the pointer, then tell our base class that we have a loaded font
+        ftglFont->FaceSize(getFaceSize());  
         ftgl(ftglFont);
         // we'll put this here for now
         ftglFont->Depth(10);
@@ -660,9 +660,9 @@ void FtglOutlineFont::loadFont()
     lcStrcat(fontPathname, FONTPATHNAME_LENGTH, filename());
     
     FTGLOutlineFont* ftglFont = new FTGLOutlineFont(fontPathname);  
-	if (ftglFont != 0 && !ftglFont->Error()) {
-	    // set the face size and return the pointer, then tell our base class that we have a loaded font
-	    ftglFont->FaceSize(getFaceSize());
+    if (ftglFont != 0 && !ftglFont->Error()) {
+        // set the face size and return the pointer, then tell our base class that we have a loaded font
+        ftglFont->FaceSize(getFaceSize());
         ftgl(ftglFont);
         setFontLoaded();
     }
@@ -787,9 +787,9 @@ void FtglPixmapFont::loadFont()
     lcStrcat(fontPathname, FONTPATHNAME_LENGTH, filename());
     
     FTGLPixmapFont* ftglFont = new FTGLPixmapFont(fontPathname);  
-	if (ftglFont != 0 && !ftglFont->Error()) {
-	    // set the face size and return the pointer, then tell our base class that we have a loaded font
-	    ftglFont->FaceSize(getFaceSize());  
+    if (ftglFont != 0 && !ftglFont->Error()) {
+        // set the face size and return the pointer, then tell our base class that we have a loaded font
+        ftglFont->FaceSize(getFaceSize());  
         ftgl(ftglFont);
         setFontLoaded();
     }
@@ -923,9 +923,9 @@ void FtglPolygonFont::loadFont()
     lcStrcat(fontPathname, FONTPATHNAME_LENGTH, filename());
     
     FTGLPolygonFont* ftglFont = new FTGLPolygonFont(fontPathname);  
-	if (ftglFont != 0 && !ftglFont->Error()) {
-	    // set the face size and return the pointer, then tell our base class that we have a loaded font
-	    ftglFont->FaceSize(getFaceSize());  
+    if (ftglFont != 0 && !ftglFont->Error()) {
+        // set the face size and return the pointer, then tell our base class that we have a loaded font
+        ftglFont->FaceSize(getFaceSize());  
         ftgl(ftglFont);
         setFontLoaded();
     }
@@ -1146,9 +1146,9 @@ void FtglHaloFont::loadFont()
     lcStrcat(fontPathname, FONTPATHNAME_LENGTH, filename());
     
     FTGLPolygonFont* ftglFont = new FTGLPolygonFont(fontPathname);  
-	if (ftglFont != 0 && !ftglFont->Error()) {
-	    // set the face size and return the pointer, then tell our base class that we have a loaded font
-	    ftglFont->FaceSize(getFaceSize());  
+    if (ftglFont != 0 && !ftglFont->Error()) {
+        // set the face size and return the pointer, then tell our base class that we have a loaded font
+        ftglFont->FaceSize(getFaceSize());  
         ftgl(ftglFont);
         setFontLoaded();
     }
@@ -1163,9 +1163,9 @@ void FtglHaloFont::loadFont()
 
     // now create the outline font over it
     outline = new FTGLOutlineFont(fontPathname);  
-	if (outline != 0 && !outline->Error()) {
-	    // set the face size 
-	    outline->FaceSize(getFaceSize());
+    if (outline != 0 && !outline->Error()) {
+        // set the face size 
+        outline->FaceSize(getFaceSize());
     }
     else {
           if (isMessageEnabled(MSG_ERROR)) {
@@ -1298,9 +1298,9 @@ void FtglTextureFont::loadFont()
     lcStrcat(fontPathname, FONTPATHNAME_LENGTH, filename());
     
     FTGLTextureFont* ftglFont = new FTGLTextureFont(fontPathname);  
-	if (ftglFont != 0 && !ftglFont->Error()) {
-	    // set the face size and return the pointer, then tell our base class that we have a loaded font
-	    ftglFont->FaceSize(getFaceSize());
+    if (ftglFont != 0 && !ftglFont->Error()) {
+        // set the face size and return the pointer, then tell our base class that we have a loaded font
+        ftglFont->FaceSize(getFaceSize());
         ftgl(ftglFont);
         setFontLoaded();
     }

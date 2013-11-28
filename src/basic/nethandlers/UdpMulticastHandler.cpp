@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Class: MulticastHandler
+// Class: UdpMulticastHandler
 //------------------------------------------------------------------------------
 
 #if defined(WIN32)
@@ -17,7 +17,7 @@
     static const int SOCKET_ERROR = -1;
 #endif
 
-#include "openeaagles/basic/nethandlers/MulticastHandler.h"
+#include "openeaagles/basic/nethandlers/UdpMulticastHandler.h"
 #include "openeaagles/basic/Number.h"
 #include "openeaagles/basic/Pair.h"
 #include "openeaagles/basic/PairStream.h"
@@ -27,11 +27,11 @@ namespace Eaagles {
 namespace Basic {
 
 //==============================================================================
-// Class: MulticastHandler
+// Class: UdpMulticastHandler
 //==============================================================================
-IMPLEMENT_SUBCLASS(MulticastHandler,"MulticastHandler")
+IMPLEMENT_SUBCLASS(UdpMulticastHandler, "UdpMulticastHandler")
 
-BEGIN_SLOTTABLE(MulticastHandler)
+BEGIN_SLOTTABLE(UdpMulticastHandler)
 
     "multicastGroup",           // 1) String containing the multicast IP address in
                                 //    the Internet standard "." (dotted) notation.
@@ -42,10 +42,10 @@ BEGIN_SLOTTABLE(MulticastHandler)
 
     "loopback",                 // 3) Multicast Loopback flag; default: 1 (on)
 
-END_SLOTTABLE(MulticastHandler)
+END_SLOTTABLE(UdpMulticastHandler)
 
 // Map slot table to handles 
-BEGIN_SLOT_MAP(MulticastHandler)
+BEGIN_SLOT_MAP(UdpMulticastHandler)
     ON_SLOT(1,setSlotMulticastGroup,String)
     ON_SLOT(2,setSlotTTL,Number)
     ON_SLOT(3,setSlotLoopback,Number)
@@ -54,7 +54,7 @@ END_SLOT_MAP()
 //------------------------------------------------------------------------------
 // Constructors
 //------------------------------------------------------------------------------
-MulticastHandler::MulticastHandler() : multicastGroup(0)
+UdpMulticastHandler::UdpMulticastHandler() : multicastGroup(0)
 {
     STANDARD_CONSTRUCTOR()
     setTTL(1);
@@ -65,7 +65,7 @@ MulticastHandler::MulticastHandler() : multicastGroup(0)
 //------------------------------------------------------------------------------
 // copyData() -- copy member data
 //------------------------------------------------------------------------------
-void MulticastHandler::copyData(const MulticastHandler& org, const bool)
+void UdpMulticastHandler::copyData(const UdpMulticastHandler& org, const bool)
 {
     BaseClass::copyData(org);
 
@@ -84,7 +84,7 @@ void MulticastHandler::copyData(const MulticastHandler& org, const bool)
 //------------------------------------------------------------------------------
 // deleteData() -- delete member data
 //------------------------------------------------------------------------------
-void MulticastHandler::deleteData()
+void UdpMulticastHandler::deleteData()
 {
     if (multicastGroup != 0) delete[] multicastGroup;
     multicastGroup = 0;
@@ -93,7 +93,7 @@ void MulticastHandler::deleteData()
 //------------------------------------------------------------------------------
 // Initialize this multicast handler -- 
 //------------------------------------------------------------------------------
-bool MulticastHandler::initNetwork(const bool noWaitFlag)
+bool UdpMulticastHandler::initNetwork(const bool noWaitFlag)
 {
     bool ok = BaseClass::initNetwork(noWaitFlag);
     if (ok) {
@@ -107,7 +107,7 @@ bool MulticastHandler::initNetwork(const bool noWaitFlag)
 //------------------------------------------------------------------------------
 // init() -- init the network, the socket and the network address
 //------------------------------------------------------------------------------
-bool MulticastHandler::init()
+bool UdpMulticastHandler::init()
 {
     // ---
     // Init the base class
@@ -118,13 +118,13 @@ bool MulticastHandler::init()
     // ---
     // Create our socket
     // ---
-    socketNum = socket(AF_INET, SOCK_DGRAM, 0);
+    socketNum = ::socket(AF_INET, SOCK_DGRAM, 0);
 #if defined(WIN32)
     if (socketNum == INVALID_SOCKET) {
 #else
     if (socketNum < 0) {
 #endif
-        perror("MulticastHandler::init(): socket error");
+        ::perror("UdpMulticastHandler::init(): socket error");
         return false;
     }
 
@@ -134,13 +134,13 @@ bool MulticastHandler::init()
     {
 #if defined(WIN32)
         BOOL optval = getLoopback();
-        if( setsockopt(socketNum, IPPROTO_IP, IP_MULTICAST_LOOP, (const char*) &optval, sizeof(optval)) == SOCKET_ERROR)
+        if( ::setsockopt(socketNum, IPPROTO_IP, IP_MULTICAST_LOOP, (const char*) &optval, sizeof(optval)) == SOCKET_ERROR )
 #else
         int optval = getLoopback();
-        if( setsockopt(socketNum, IPPROTO_IP, IP_MULTICAST_LOOP, &optval, sizeof(optval)) < 0)
+        if( ::setsockopt(socketNum, IPPROTO_IP, IP_MULTICAST_LOOP, &optval, sizeof(optval)) < 0)
 #endif
         {
-            perror("MulticastHandler::init(): error setsockopt(IP_MULTICAST_LOOP)\n");
+            ::perror("UdpMulticastHandler::init(): error setsockopt(IP_MULTICAST_LOOP)\n");
             return false;
         }
     }
@@ -151,13 +151,13 @@ bool MulticastHandler::init()
     {
 #if defined(WIN32)
         int optval = getTTL();
-        if( setsockopt(socketNum, IPPROTO_IP, IP_MULTICAST_TTL, (const char*) &optval, sizeof(optval)) == SOCKET_ERROR)
+        if( ::setsockopt(socketNum, IPPROTO_IP, IP_MULTICAST_TTL, (const char*) &optval, sizeof(optval)) == SOCKET_ERROR )
 #else
         int optval = getTTL();
-        if( setsockopt(socketNum, IPPROTO_IP, IP_MULTICAST_TTL, &optval, sizeof(optval)) < 0)
+        if( ::setsockopt(socketNum, IPPROTO_IP, IP_MULTICAST_TTL, &optval, sizeof(optval)) < 0)
 #endif
         {
-            perror("MulticastHandler::init(): error setsockopt(IP_MULTICAST_TTL)\n");
+            ::perror("UdpMulticastHandler::init(): error setsockopt(IP_MULTICAST_TTL)\n");
             return false;
         }
     }
@@ -169,7 +169,7 @@ bool MulticastHandler::init()
 // bindSocket() -- bind the socket to an address, and configure
 // the send and receive buffers. 
 // -------------------------------------------------------------
-bool MulticastHandler::bindSocket()
+bool UdpMulticastHandler::bindSocket()
 {
     // Must have a group
     if (multicastGroup == 0) return false;
@@ -186,7 +186,7 @@ bool MulticastHandler::bindSocket()
 #if defined(WIN32)
        addr.sin_addr.s_addr = INADDR_ANY;
 #else
-       addr.sin_addr.s_addr = inet_addr(multicastGroup);
+       addr.sin_addr.s_addr = ::inet_addr(multicastGroup);
 #endif
        if (getLocalPort() != 0) {
            addr.sin_port = htons (getLocalPort());  
@@ -195,8 +195,8 @@ bool MulticastHandler::bindSocket()
            addr.sin_port = htons(getPort());
        }
 
-      if (bind(socketNum, (const struct sockaddr *) &addr, sizeof(addr)) == SOCKET_ERROR) {
-        perror("MulticastHandler::bindSocket(): bind error");
+      if ( ::bind(socketNum, (const struct sockaddr *) &addr, sizeof(addr)) == SOCKET_ERROR ) {
+        ::perror("UdpMulticastHandler::bindSocket(): bind error");
         return false;
       }
 
@@ -212,7 +212,7 @@ bool MulticastHandler::bindSocket()
 // -------------------------------------------------------------
 // joinTheGroup() -- Join the multicast group
 // -------------------------------------------------------------
-bool MulticastHandler::joinTheGroup()
+bool UdpMulticastHandler::joinTheGroup()
 {
 #if defined(WIN32)
    if (socketNum == INVALID_SOCKET) return false;
@@ -222,7 +222,7 @@ bool MulticastHandler::joinTheGroup()
     
    // Find our network address
    uint32_t mg = htonl (INADDR_NONE);
-   if (multicastGroup != 0) mg = inet_addr(multicastGroup);
+   if (multicastGroup != 0) mg = ::inet_addr(multicastGroup);
    if (mg != INADDR_NONE) {
       setNetAddr(mg);
    }
@@ -238,13 +238,13 @@ bool MulticastHandler::joinTheGroup()
    struct ip_mreq mreq;
    mreq.imr_multiaddr.s_addr = getNetAddr();
    mreq.imr_interface.s_addr = iface;
-   int result = setsockopt(socketNum, IPPROTO_IP, IP_ADD_MEMBERSHIP, (const char *) &mreq, sizeof(mreq));
+   int result = ::setsockopt(socketNum, IPPROTO_IP, IP_ADD_MEMBERSHIP, (const char *) &mreq, sizeof(mreq));
 #if defined(WIN32)
    if (result == SOCKET_ERROR) {
 #else
    if (result < 0) {
 #endif
-     perror("MulticastHandler::joinTheGroup(): setsockopt mreq");
+     ::perror("UdpMulticastHandler::joinTheGroup(): setsockopt mreq");
      return false;
    }
 
@@ -254,7 +254,7 @@ bool MulticastHandler::joinTheGroup()
 // -------------------------------------------------------------
 // Returns true if the network handler has been initialized
 // -------------------------------------------------------------
-bool MulticastHandler::isConnected() const
+bool UdpMulticastHandler::isConnected() const
 {
     return initialized && BaseClass::isConnected();
 }
@@ -262,7 +262,7 @@ bool MulticastHandler::isConnected() const
 // -------------------------------------------------------------
 // Close (un-initialize) this network
 // -------------------------------------------------------------
-bool MulticastHandler::closeConnection()
+bool UdpMulticastHandler::closeConnection()
 {
     initialized = false;
     BaseClass::closeConnection();
@@ -274,7 +274,7 @@ bool MulticastHandler::closeConnection()
 //------------------------------------------------------------------------------
 
 // multicastGroup: String containing the multicast IP address
-bool MulticastHandler::setSlotMulticastGroup(const String* const msg)
+bool UdpMulticastHandler::setSlotMulticastGroup(const String* const msg)
 {
     bool ok = false;
     if (msg != 0) { 
@@ -285,7 +285,7 @@ bool MulticastHandler::setSlotMulticastGroup(const String* const msg)
 }
 
 // ttl: Time-To-Live value
-bool MulticastHandler::setSlotTTL(const Number* const msg)
+bool UdpMulticastHandler::setSlotTTL(const Number* const msg)
 {
     bool ok = false;
     if (msg != 0) { 
@@ -296,7 +296,7 @@ bool MulticastHandler::setSlotTTL(const Number* const msg)
 }
 
 // loopback: Loopback flag
-bool MulticastHandler::setSlotLoopback(const Number* const msg)
+bool UdpMulticastHandler::setSlotLoopback(const Number* const msg)
 {
     bool ok = false;
     if (msg != 0) { 
@@ -309,7 +309,7 @@ bool MulticastHandler::setSlotLoopback(const Number* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Object* MulticastHandler::getSlotByIndex(const int si)
+Object* UdpMulticastHandler::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
@@ -317,7 +317,7 @@ Object* MulticastHandler::getSlotByIndex(const int si)
 //------------------------------------------------------------------------------
 // serialize
 //------------------------------------------------------------------------------
-std::ostream& MulticastHandler::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
+std::ostream& UdpMulticastHandler::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;
     if ( !slotsOnly ) {

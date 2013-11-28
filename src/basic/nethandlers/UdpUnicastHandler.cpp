@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Class: UdpHandler
+// Class: UdpUnicastHandler
 //------------------------------------------------------------------------------
 
 #if defined(WIN32)
@@ -18,7 +18,7 @@
     typedef socklen_t Len ;
 #endif
 
-#include "openeaagles/basic/nethandlers/UdpHandler.h"
+#include "openeaagles/basic/nethandlers/UdpUnicastHandler.h"
 #include "openeaagles/basic/Pair.h"
 #include "openeaagles/basic/PairStream.h"
 #include "openeaagles/basic/String.h"
@@ -27,24 +27,24 @@ namespace Eaagles {
 namespace Basic {
 
 //==============================================================================
-// Class: UdpHandler
+// Class: UdpUnicastHandler
 //==============================================================================
-IMPLEMENT_SUBCLASS(UdpHandler,"UdpHandler")
+IMPLEMENT_SUBCLASS(UdpUnicastHandler, "UdpUnicastHandler")
 
-BEGIN_SLOTTABLE(UdpHandler)
+BEGIN_SLOTTABLE(UdpUnicastHandler)
     "ipAddress",        // 1) String containing the IP address in
                         //    the Internet standard "." (dotted) notation.
-END_SLOTTABLE(UdpHandler)
+END_SLOTTABLE(UdpUnicastHandler)
 
 // Map slot table to handles 
-BEGIN_SLOT_MAP(UdpHandler)
+BEGIN_SLOT_MAP(UdpUnicastHandler)
     ON_SLOT(1,setSlotIpAddress,String)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
 // Constructors
 //------------------------------------------------------------------------------
-UdpHandler::UdpHandler() : ipAddr(0)
+UdpUnicastHandler::UdpUnicastHandler() : ipAddr(0)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -52,7 +52,7 @@ UdpHandler::UdpHandler() : ipAddr(0)
 //------------------------------------------------------------------------------
 // copyData() -- copy member data
 //------------------------------------------------------------------------------
-void UdpHandler::copyData(const UdpHandler& org, const bool cc)
+void UdpUnicastHandler::copyData(const UdpUnicastHandler& org, const bool cc)
 {
     BaseClass::copyData(org);
 
@@ -73,7 +73,7 @@ void UdpHandler::copyData(const UdpHandler& org, const bool cc)
 //------------------------------------------------------------------------------
 // deleteData() -- delete member data
 //------------------------------------------------------------------------------
-void UdpHandler::deleteData()
+void UdpUnicastHandler::deleteData()
 {
     if (ipAddr != 0) delete[] ipAddr;
     ipAddr = 0;
@@ -82,7 +82,7 @@ void UdpHandler::deleteData()
 //------------------------------------------------------------------------------
 // init() -- init the network, the socket and the network address
 //------------------------------------------------------------------------------
-bool UdpHandler::init()
+bool UdpUnicastHandler::init()
 {
     // ---
     // Init the base class
@@ -100,13 +100,13 @@ bool UdpHandler::init()
     // ---
     // Create our socket
     // ---
-    socketNum = socket(AF_INET, SOCK_DGRAM, 0);
+    socketNum = ::socket(AF_INET, SOCK_DGRAM, 0);
 #if defined(WIN32)
     if (socketNum == INVALID_SOCKET) {
 #else
     if (socketNum < 0) {
 #endif
-        perror("UdpHandler::init(): Socket error");
+        ::perror("UdpUnicastHandler::init(): Socket error");
         return false;
     }
 
@@ -117,7 +117,7 @@ bool UdpHandler::init()
 // bindSocket() -- bind the socket to an address, and configure
 // the send and receive buffers. 
 // -------------------------------------------------------------
-bool UdpHandler::bindSocket()
+bool UdpUnicastHandler::bindSocket()
 {
     // ---
     // Our base class will bind the socket
@@ -136,8 +136,8 @@ bool UdpHandler::bindSocket()
            addr.sin_port = htons(getPort());
        }
 
-      if (bind(socketNum, (const struct sockaddr *) &addr, sizeof(addr)) == SOCKET_ERROR) {
-        perror("UdpHandler::bindSocket(): bind error");
+      if ( ::bind(socketNum, (const struct sockaddr *) &addr, sizeof(addr)) == SOCKET_ERROR ) {
+        ::perror("UdpUnicastHandler::bindSocket(): bind error");
         return false;
       }
 
@@ -152,7 +152,7 @@ bool UdpHandler::bindSocket()
 // -------------------------------------------------------------
 // Send data to a specific IP/Port
 // -------------------------------------------------------------
-bool UdpHandler::sendDataTo(
+bool UdpUnicastHandler::sendDataTo(
          const char* const packet,  // Data packet
          const int size,            // Size of the data packet
          const uint32_t ip0,        // Destination IP address (this packet only)
@@ -172,20 +172,20 @@ bool UdpHandler::sendDataTo(
     addr.sin_addr.s_addr = ip0;
     addr.sin_port = htons(port0); 
     Len addrlen = sizeof(addr);
-    int result = sendto(socketNum, packet, size, 0, (const struct sockaddr *) &addr, addrlen);
+    int result = ::sendto(socketNum, packet, size, 0, (const struct sockaddr *) &addr, addrlen);
 #if defined(WIN32)
     if (result == SOCKET_ERROR) {
         int err = WSAGetLastError();
         if (isMessageEnabled(MSG_ERROR)) {
-            std::cerr << "UdpHandler::sendDataTo(): sendto error: " << err << " hex=0x" << std::hex << err << std::dec << std::endl;
+            std::cerr << "UdpUnicastHandler::sendDataTo(): sendto error: " << err << " hex=0x" << std::hex << err << std::dec << std::endl;
         }
         return false;
     }
 #else
     if (result == SOCKET_ERROR) {
-        perror("UdpHandler::sendDataTo(): sendto error msg");
+        ::perror("UdpHandler::sendDataTo(): sendto error msg");
         if (isMessageEnabled(MSG_ERROR)) {
-            std::cerr << "UdpHandler::sendDataTo(): sendto error result: " << result << std::endl;
+            std::cerr << "UdpUnicastHandler::sendDataTo(): sendto error result: " << result << std::endl;
         }
         return false;
     }
@@ -199,7 +199,7 @@ bool UdpHandler::sendDataTo(
 //------------------------------------------------------------------------------
 
 // ipAddress: String containing the IP address
-bool UdpHandler::setSlotIpAddress(const String* const msg)
+bool UdpUnicastHandler::setSlotIpAddress(const String* const msg)
 {
     bool ok = false;
     if (msg != 0) { 
@@ -213,7 +213,7 @@ bool UdpHandler::setSlotIpAddress(const String* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Object* UdpHandler::getSlotByIndex(const int si)
+Object* UdpUnicastHandler::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
@@ -221,7 +221,7 @@ Object* UdpHandler::getSlotByIndex(const int si)
 //------------------------------------------------------------------------------
 // serialize
 //------------------------------------------------------------------------------
-std::ostream& UdpHandler::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
+std::ostream& UdpUnicastHandler::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;
     if ( !slotsOnly ) {

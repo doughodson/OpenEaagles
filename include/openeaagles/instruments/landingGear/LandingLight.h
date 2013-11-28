@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // Class: LandingLight
 //------------------------------------------------------------------------------
-#ifndef	__Eaagles_Instruments_LandingLight_H__
+#ifndef __Eaagles_Instruments_LandingLight_H__
 #define __Eaagles_Instruments_LandingLight_H__
 
 #include "LandingGear.h"
@@ -20,7 +20,8 @@ namespace Instruments {
 // Public member functions:
 //      setLightRadius() - sets the radius (inches) of the light
 //------------------------------------------------------------------------------
-class LandingLight : public LandingGear {
+class LandingLight : public LandingGear
+{
     DECLARE_SUBCLASS(LandingLight,LandingGear)
 
 public:

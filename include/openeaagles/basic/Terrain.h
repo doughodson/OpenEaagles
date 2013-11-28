@@ -14,7 +14,7 @@ class Hsva;
 class String;
 
 //------------------------------------------------------------------------------
-// Class:   Terrain
+// Class: Terrain
 // Base classes: Object -> Component -> Terrain
 //
 // Description: Abstract class for managing the terrain elevation databases.

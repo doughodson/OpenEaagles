@@ -1,4 +1,4 @@
-// Engine dial - a an instrument that passes the engine rpm value down to it's components, and each component does their own thing accordingly
+// Engine dial - an instrument that passes the engine rpm value down to its components, and each component does their own thing accordingly
 enginedial:
     ( Instrument
         components: {

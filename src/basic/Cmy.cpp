@@ -139,10 +139,10 @@ Object* Cmy::getSlotByIndex(const int si)
 //------------------------------------------------------------------------------
 void Cmy::cmy2rgb(osg::Vec4& rgb, const osg::Vec3& cmy)
 {
-	rgb[RED]   = 1 - cmy[CYAN];
-	rgb[GREEN] = 1 - cmy[MAGENTA];
-	rgb[BLUE]  = 1 - cmy[YELLOW];
-	rgb[ALPHA] = defaultAlpha;
+    rgb[RED]   = 1 - cmy[CYAN];
+    rgb[GREEN] = 1 - cmy[MAGENTA];
+    rgb[BLUE]  = 1 - cmy[YELLOW];
+    rgb[ALPHA] = defaultAlpha;
 }
 
 //------------------------------------------------------------------------------
@@ -153,9 +153,9 @@ void Cmy::cmy2rgb(osg::Vec4& rgb, const osg::Vec3& cmy)
 //------------------------------------------------------------------------------
 void Cmy::rgb2cmy(osg::Vec3& cmy, const osg::Vec4& rgb)
 {
-	cmy[CYAN]    = 1 - rgb[RED];
-	cmy[MAGENTA] = 1 - rgb[GREEN];
-	cmy[YELLOW]  = 1 - rgb[BLUE];
+    cmy[CYAN]    = 1 - rgb[RED];
+    cmy[MAGENTA] = 1 - rgb[GREEN];
+    cmy[YELLOW]  = 1 - rgb[BLUE];
 }
 
 //------------------------------------------------------------------------------

@@ -15,24 +15,24 @@
 //
 // Public methods (Defined in Energy, and inherited by all derived classes):
 //
-//	    set(const LCreal v)
-//		    Sets an Energy derived instance with an LCreal.
+//     set(const LCreal v)
+//        Sets an Energy derived instance with an LCreal.
 //
-//	    set(const Energy& n)
-//		    Sets, and converts if necessary, an Energy derived instance with
-//		    another Energy derived instance.
+//     set(const Energy& n)
+//        Sets, and converts if necessary, an Energy derived instance with
+//        another Energy derived instance.
 //
-//	    LCreal convert(const Energy& n)
-//		    Converts the value of an Energy derived instance into
-//		    the units of another Energy derived instance.
+//     LCreal convert(const Energy& n)
+//        Converts the value of an Energy derived instance into
+//        the units of another Energy derived instance.
 //
 //
-//	    Conversion routines:
-//		    static LCreal btusToFootPounds(const LCreal v) { return v * 777.9f; }
+//     Conversion routines:
+//        static LCreal btusToFootPounds(const LCreal v) { return v * 777.9f; }
 //        static LCreal btusToJoules(const LCreal v) { return v * 1055; }
 //        static LCreal btusToKiloWattHours(const LCreal v) { return v * 0.0002930f; }
 //        static LCreal btusToCalories(const LCreal v) { return v * 252; }
-//        static LCreal footPoundsToBTUs(const LCreal v) { return v * 0.001285f; }	
+//        static LCreal footPoundsToBTUs(const LCreal v) { return v * 0.001285f; }
 //        static LCreal footPoundsToJoules(const LCreal v)  { return v * 1.356f; }
 //        static LCreal footPoundsToKiloWattHours(const LCreal v) { return v * 0.0000006776f; }
 //        static LCreal footPoundsToCalories(const LCreal v) { return v * 0.3239f; }
@@ -49,24 +49,23 @@
 //        static LCreal caloriesToJoules(const LCreal v) { return v * 4.186f; }
 //        static LCreal caloriesToKiloWattHours(const LCreal v) { return v * 0.000001163f; }
 //
-//	    Output stream operator: >>
-//		    ostream& operator<<(ostream& sout, const Energy& n)
-//			 Sends "( <the Energy derived instance class name and value> )"
-//			 to the output stream.
+//     Output stream operator: >>
+//        ostream& operator<<(ostream& sout, const Energy& n)
+//        Sends "( <the Energy derived instance class name and value> )"
+//        to the output stream.
 //
 //
 // Public methods (For classes:  KiloWattHours, BTUs, Calories, Joules, FootPounds):
 //
-//	    LCreal convertStatic(const Energy& n)
-//		    Static function to convert the given Energy derived
-//		    instance into the units of a specific Energy derived
-//		    class.
+//     LCreal convertStatic(const Energy& n)
+//        Static function to convert the given Energy derived
+//        instance into the units of a specific Energy derived
+//        class.
 //
 //------------------------------------------------------------------------------
 
 #ifndef __Eaagles_Energies_H__
 #define __Eaagles_Energies_H__
-
 
 #include "../Number.h"
 
@@ -91,7 +90,7 @@ namespace Basic {
 //               equivalent to an instance of Joules with its value equal
 //               to 1.0.
 //------------------------------------------------------------------------------
-class Energy : public Number  
+class Energy : public Number
 {
     DECLARE_SUBCLASS(Energy, Number)
 
@@ -105,13 +104,13 @@ public:
     virtual LCreal toEnergy() const = 0;
     virtual LCreal fromEnergy(const LCreal a) const = 0;
     LCreal convert(const Energy& n){ return fromEnergy(n.toEnergy()); }
-	
+
     // Conversions between Energy 
     static LCreal btusToFootPounds(const LCreal v)          { return (v * BTU2J) * J2FP; }
     static LCreal btusToJoules(const LCreal v)              { return v * BTU2J; }
-    static LCreal btusToKiloWattHours(const LCreal v)       { return (v * BTU2J) * J2KWH; }   
+    static LCreal btusToKiloWattHours(const LCreal v)       { return (v * BTU2J) * J2KWH; }
     static LCreal btusToCalories(const LCreal v)            { return (v * BTU2J) * J2C; }
-    static LCreal footPoundsToBTUs(const LCreal v)          { return (v * FP2J) * J2BTU; }	
+    static LCreal footPoundsToBTUs(const LCreal v)          { return (v * FP2J) * J2BTU; }
     static LCreal footPoundsToJoules(const LCreal v)        { return v * FP2J; }
     static LCreal footPoundsToKiloWattHours(const LCreal v) { return (v * FP2J) * J2KWH; }
     static LCreal footPoundsToCalories(const LCreal v)      { return (v * FP2J) * J2C; }
@@ -140,7 +139,7 @@ public:
 };
 
 inline std::ostream& operator<<(std::ostream& sout, const Energy& n)
-	    { sout << "( " << n.getFormName() << " " << n.getReal() << " )"; return sout; }
+    { sout << "( " << n.getFormName() << " " << n.getReal() << " )"; return sout; }
 
 //------------------------------------------------------------------------------
 // Class:  Joules
@@ -161,7 +160,6 @@ public:
     virtual LCreal toEnergy() const                   { return (LCreal)(val); }
     virtual LCreal fromEnergy(const LCreal a) const   { return a; }
 };
-
 
 //------------------------------------------------------------------------------
 // Class:  KiloWattHours

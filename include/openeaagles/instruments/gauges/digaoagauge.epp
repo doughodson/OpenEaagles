@@ -7,7 +7,7 @@
         // determines what color to paint each portion of the gauge.
         aoagauge:
         ( AoAIndexer 
-				// these are values of the aoa that trigger each level of the digital aoa.  The drawing is done in AoAIndexer.cpp
+                // these are values of the aoa that trigger each level of the digital aoa.  The drawing is done in AoAIndexer.cpp
                 aboveMin: 14
                 aboveMax: 17
                 belowMin: 9

@@ -1,11 +1,10 @@
 //------------------------------------------------------------------------------
 // Class: NetHandler
 //------------------------------------------------------------------------------
-
 #if defined(WIN32)
     #include <sys/types.h>
     #include <Winsock2.h>
-    #define	bzero(a,b)  ZeroMemory( a, b )
+    #define bzero(a,b)  ZeroMemory( a, b )
     typedef int Len;
 #else
     #include <netdb.h>
@@ -30,7 +29,7 @@ namespace Basic {
 //==============================================================================
 // Class: NetHandler
 //==============================================================================
-IMPLEMENT_SUBCLASS(NetHandler,"NetHandler")
+IMPLEMENT_SUBCLASS(NetHandler, "NetHandler")
 
 // Byte order
 bool NetHandler::netByteOrder = checkByteOrder();
@@ -50,12 +49,12 @@ END_SLOTTABLE(NetHandler)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(NetHandler)
-    ON_SLOT(1, setSlotLocalIpAddress, String)
-    ON_SLOT(2, setSlotLocalPort,    Number)
-    ON_SLOT(3, setSlotPort,         Number)
-    ON_SLOT(4, setSlotShared,       Number)
-    ON_SLOT(5, setSlotSendBuffSize, Number)
-    ON_SLOT(6, setSlotRecvBuffSize, Number)
+    ON_SLOT(1, setSlotLocalIpAddress,   String)
+    ON_SLOT(2, setSlotLocalPort,        Number)
+    ON_SLOT(3, setSlotPort,             Number)
+    ON_SLOT(4, setSlotShared,           Number)
+    ON_SLOT(5, setSlotSendBuffSize,     Number)
+    ON_SLOT(6, setSlotRecvBuffSize,     Number)
     ON_SLOT(7, setSlotIgnoreSourcePort, Number)
 END_SLOT_MAP()
 
@@ -138,22 +137,25 @@ bool NetHandler::initNetwork(const bool noWaitFlag)
         if (ok) {
             if (noWaitFlag) {
                 ok = setNoWait();
-                if (!ok) std::cerr << "initNetwork(): setNoWait() FAILED" << std::endl;
+                if (!ok) std::cerr << "NetHandler::initNetwork(): setNoWait() FAILED" << std::endl;
             }
             else {
                 ok = setBlocked();
-                if (!ok) std::cerr << "initNetwork(): setBlocked() FAILED" << std::endl;
+                if (!ok) std::cerr << "NetHandler::initNetwork(): setBlocked() FAILED" << std::endl;
             }
         }
         else {
-            std::cerr << "initNetwork(): bindSocket() FAILED" << std::endl;
+            std::cerr << "NetHandler::initNetwork(): bindSocket() FAILED" << std::endl;
         }
     }
     else {
-        std::cerr << "initNetwork(): Init() FAILED" << std::endl;
+        std::cerr << "NetHandler::initNetwork(): init() FAILED" << std::endl;
     }
 
     initialized = ok;
+    if (initialized && isMessageEnabled(MSG_DEBUG)) {
+        std::cout << "NetHandler::initNetwork() -- network initialized successfully" << std::endl;
+    }
     return ok;
 }
 
@@ -162,26 +164,28 @@ bool NetHandler::initNetwork(const bool noWaitFlag)
 //------------------------------------------------------------------------------
 bool NetHandler::init()
 {
-   bool ok = true;
+    bool ok = true;
+
 #if defined(WIN32)
-   // Init Winsock2
-   WSADATA wsaData;
-   WORD wVersionRequested = MAKEWORD( 2, 2 );
-   int err = WSAStartup( wVersionRequested, &wsaData );
-   if (err != 0) {
-      std::cerr << "NetHandler::init() -- WSAStartup() FAILED" << std::endl;
-   }
-   ok = (err == 0);
+    // initialize Winsock2
+    WSADATA wsaData;
+    WORD wVersionRequested = MAKEWORD( 2, 2 );
+    // initiate the use of Winsock DLL
+    int err = ::WSAStartup( wVersionRequested, &wsaData );
+    if ((err != 0) && isMessageEnabled(MSG_ERROR)) {
+        std::cerr << "NetHandler::init() -- WSAStartup() FAILED" << std::endl;
+    }
+    ok = (err == 0);
 #endif
 
-   // ---
-   // Set the local IP address
-   // ---
-   if (localIpAddr != 0) {
-      setLocalAddr(localIpAddr);
-   }
+    // ---
+    // Set the local IP address
+    // ---
+    if (localIpAddr != 0) {
+        setLocalAddr(localIpAddr);
+    }
 
-   return ok;
+    return ok;
 }
 
 // -------------------------------------------------------------
@@ -201,7 +205,7 @@ bool NetHandler::bindSocket()
     // ---
     if (localAddr == INADDR_ANY) {
         char localhost[256];
-        int result = gethostname(localhost, sizeof(localhost));
+        int result = ::gethostname(localhost, sizeof(localhost));
         if (result == 0) {
             setLocalAddr(localhost);
         }
@@ -214,14 +218,14 @@ bool NetHandler::bindSocket()
 #if defined(WIN32)
         BOOL optval = getSharedFlag();
         Len optlen = sizeof(optval);
-        if( setsockopt(socketNum, SOL_SOCKET, SO_REUSEADDR, (const char*) &optval, optlen) == SOCKET_ERROR)
+        if( ::setsockopt(socketNum, SOL_SOCKET, SO_REUSEADDR, (const char*) &optval, optlen) == SOCKET_ERROR)
 #else
         int optval = getSharedFlag();
         Len optlen = sizeof(optval);
-        if( setsockopt(socketNum, SOL_SOCKET, SO_REUSEADDR, &optval, optlen) == SOCKET_ERROR)
+        if( ::setsockopt(socketNum, SOL_SOCKET, SO_REUSEADDR, &optval, optlen) == SOCKET_ERROR)
 #endif
         {
-            perror("NetHandler::bindSocket(): error setsockopt(SO_REUSEADDR)\n");
+            ::perror("NetHandler::bindSocket(): error setsockopt(SO_REUSEADDR)\n");
             return false;
         }
     }
@@ -243,12 +247,12 @@ bool NetHandler::setSendBuffSize()
    unsigned int optval = sendBuffSizeKb * 1024;
    Len optlen = sizeof(optval);
 #if defined(WIN32)
-   if( setsockopt(socketNum, SOL_SOCKET, SO_SNDBUF, (const char*) &optval, optlen) == SOCKET_ERROR)
+   if( ::setsockopt(socketNum, SOL_SOCKET, SO_SNDBUF, (const char*) &optval, optlen) == SOCKET_ERROR )
 #else
-   if( setsockopt(socketNum, SOL_SOCKET, SO_SNDBUF, (void*) &optval, optlen) == SOCKET_ERROR)
+   if( ::setsockopt(socketNum, SOL_SOCKET, SO_SNDBUF, (void*) &optval, optlen) == SOCKET_ERROR )
 #endif
    {
-      perror("NetHandler::setSendBuffSize(): error setting the send buffer size\n");
+      ::perror("NetHandler::setSendBuffSize(): error setting the send buffer size\n");
       return false;
    }
    return true;
@@ -268,12 +272,12 @@ bool NetHandler::setRecvBuffSize()
    unsigned int optval = recvBuffSizeKb * 1024;
    Len optlen = sizeof (optval);
 #if defined(WIN32)
-   if( setsockopt(socketNum, SOL_SOCKET, SO_RCVBUF, (const char*) &optval, optlen) == SOCKET_ERROR)
+   if( ::setsockopt(socketNum, SOL_SOCKET, SO_RCVBUF, (const char*) &optval, optlen) == SOCKET_ERROR )
 #else
-   if( setsockopt(socketNum, SOL_SOCKET, SO_RCVBUF, (void*) &optval, optlen) == SOCKET_ERROR)
+   if( ::setsockopt(socketNum, SOL_SOCKET, SO_RCVBUF, (void*) &optval, optlen) == SOCKET_ERROR )
 #endif
    {
-      perror("NetHandler::setRecvBuffSize(): error setting the receive buffer size\n");
+      ::perror("NetHandler::setRecvBuffSize(): error setting the receive buffer size\n");
       return false;
    }
    return true;
@@ -360,14 +364,14 @@ bool NetHandler::setBlocked(const LcSocket s)
 // Set the socket 'sock' to Blocking. Wait I/O.
 #if defined(WIN32)
     unsigned long zz = false;
-    if (ioctlsocket(sock, FIONBIO, &zz ) == SOCKET_ERROR) {
-        perror("NetHandler::setBlocked()");
+    if ( ::ioctlsocket(sock, FIONBIO, &zz ) == SOCKET_ERROR ) {
+        ::perror("NetHandler::setBlocked()");
         return false;
     }
 #else
     const int zz = 0;
-    if (ioctl(sock, FIONBIO, &zz ) == SOCKET_ERROR) {
-        perror("NetHandler::setBlocked()");
+    if ( ::ioctl(sock, FIONBIO, &zz ) == SOCKET_ERROR ) {
+        ::perror("NetHandler::setBlocked()");
         return false;
     }
 #endif
@@ -387,14 +391,14 @@ bool NetHandler::setNoWait(const LcSocket s)
 // Set the socket 'sock' to Non-Blocking. Nowait I/O.
 #if defined(WIN32)
     unsigned long zz = true;
-    if (ioctlsocket(sock, FIONBIO, &zz ) == SOCKET_ERROR) {
-        perror("NetHandler::setNoWait()");
+    if ( ::ioctlsocket(sock, FIONBIO, &zz ) == SOCKET_ERROR ) {
+        ::perror("NetHandler::setNoWait()");
         return false;
     }
 #else
     const int zz = 1;
-    if (ioctl(sock, FIONBIO, &zz ) == SOCKET_ERROR) {
-        perror("NetHandler::setNoWait()");
+    if ( ::ioctl(sock, FIONBIO, &zz ) == SOCKET_ERROR ) {
+        ::perror("NetHandler::setNoWait()");
         return false;
     }
 #endif
@@ -437,10 +441,10 @@ bool NetHandler::sendData(const char* const packet, const int size)
     addr.sin_addr.s_addr = netAddr;
     addr.sin_port = htons(port);
     Len addrlen = sizeof(addr);
-    int result = sendto(socketNum, packet, size, 0, (const struct sockaddr *) &addr, addrlen);
+    int result = ::sendto(socketNum, packet, size, 0, (const struct sockaddr *) &addr, addrlen);
 #if defined(WIN32)
     if (result == SOCKET_ERROR) {
-        int err = WSAGetLastError();
+        int err = ::WSAGetLastError();
         if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "NetHandler::sendData(): sendto error: " << err << " hex=0x" << std::hex << err << std::dec << std::endl;
         }
@@ -448,7 +452,7 @@ bool NetHandler::sendData(const char* const packet, const int size)
     }
 #else
     if (result == SOCKET_ERROR) {
-        perror("NetHandler::sendData(): sendto error msg");
+        ::perror("NetHandler::sendData(): sendto error msg");
         if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "NetHandler::sendData(): sendto error result: " << result << std::endl;
         }
@@ -483,7 +487,7 @@ unsigned int NetHandler::recvData(char* const packet, const int maxSize)
       // Try to receive the data
       struct sockaddr_in raddr;       // IP address
       Len addrlen = sizeof(raddr);
-      int result = recvfrom(socketNum, packet, maxSize, 0, (struct sockaddr *) &raddr, &addrlen);
+      int result = ::recvfrom(socketNum, packet, maxSize, 0, (struct sockaddr *) &raddr, &addrlen);
 
       if (result > 0 && ignoreSourcePort != 0) {
          // Ok we have one; make sure it's not one we should ignore
@@ -546,15 +550,15 @@ bool NetHandler::setNetAddr(const char* const hostname)
     bool ok = false;
     if (hostname != 0) {
         uint32_t addr0 = INADDR_NONE;
-        if (isdigit(hostname[0])) {
+        if (::isdigit(hostname[0])) {
             // If 'hostname' starts with a number then first try to use it as an IP address
-            addr0 = inet_addr(hostname);
+            addr0 = ::inet_addr(hostname);
             ok = (addr0 != INADDR_NONE);
         }
         if (addr0 == INADDR_NONE) {
             // Didn't work, try to find the host IP address by name
             if (isMessageEnabled(MSG_DEBUG)) {
-               std::cout << "setNetAddr(): Looking up host name: " << hostname;
+               std::cout << "NetHandler::setNetAddr(): Looking up host name: " << hostname;
             }
             const hostent* const p = gethostbyname(hostname);
             if (p != 0 && p->h_length > 0) {
@@ -564,7 +568,7 @@ bool NetHandler::setNetAddr(const char* const hostname)
                     struct in_addr in;
                     in.s_addr = *q;
                     addr0 = in.s_addr;
-                    const char* const ipAddr = inet_ntoa(in);
+                    const char* const ipAddr = ::inet_ntoa(in);
                     if (ipAddr != 0) {
                         if (isMessageEnabled(MSG_DEBUG)) {
                            std::cout << " -- IP Address: " << ipAddr << std::endl;
@@ -601,13 +605,13 @@ bool NetHandler::setLocalAddr(const char* const hostname)
         uint32_t addr0 = INADDR_NONE;
         if (isdigit(hostname[0])) {
             // If 'hostname' starts with a number then first try to use it as an IP address
-            addr0 = inet_addr(hostname);
+            addr0 = ::inet_addr(hostname);
             ok = (addr0 != INADDR_NONE);
         }
         if (addr0 == INADDR_NONE) {
             // Didn't work, try to find the host IP address by name
             if (isMessageEnabled(MSG_DEBUG)) {
-                std::cout << "setLocalAddr(): Looking up host name: " << hostname;
+                std::cout << "NetHandler::setLocalAddr(): Looking up host name: " << hostname;
             }
             const hostent* p = gethostbyname(hostname);
             if (p != 0 && p->h_length > 0) {
@@ -617,7 +621,7 @@ bool NetHandler::setLocalAddr(const char* const hostname)
                     in.s_addr = *q;
                     addr0 = in.s_addr;
 
-                    char* ipAddr = inet_ntoa(in);
+                    char* ipAddr = ::inet_ntoa(in);
                     if (ipAddr != 0) {
                         if (isMessageEnabled(MSG_DEBUG)) {
                            std::cout << " -- IP Address: " << ipAddr << std::endl;

@@ -100,7 +100,7 @@ unsigned int SlotTable::index(const char* const slotname) const
          // if we're here, we found a match
          i = j;                                    // a) start with j
          i++;                                      // b) make it one based
-         if (baseTable != 0) i += baseTable->n();	// c) add baseTable->n()
+         if (baseTable != 0) i += baseTable->n();  // c) add baseTable->n()
       }
    }
 

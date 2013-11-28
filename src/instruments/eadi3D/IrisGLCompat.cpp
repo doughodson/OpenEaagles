@@ -63,10 +63,10 @@ void IrisGLCompat::arcf(float x, float y, float r, float startAng, float endAng)
     glBegin(GL_TRIANGLE_FAN);
         glVertex2f(x, y);
         for (int i = 0; i < numPoints+1; i++) {
-	        float vy = sin(ang) * r + y;
-	        float vx = cos(ang) * r + x;
-	        glVertex2f(vx, vy);
-	        ang += delta;
+            float vy = sin(ang) * r + y;
+            float vx = cos(ang) * r + x;
+            glVertex2f(vx, vy);
+            ang += delta;
         }
     glEnd();
 }

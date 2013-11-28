@@ -2,7 +2,7 @@
 #include "openeaagles/basic/units/Angles.h"
 #include <GL/gl.h>
 
-#define MR2IN 0.026785714	// font was scaled by this 
+#define MR2IN 0.026785714      // font was scaled by this 
 
 namespace Eaagles {
 namespace Instruments {
@@ -11,7 +11,7 @@ float WHITE[3] = { 1.0, 1.0, 1.0 };
 float BLACK[3] = { 0.0, 0.0, 0.0 };
 float GREEN[3] = { 0.0, 1.0, 0.0 };
 
-IMPLEMENT_ABSTRACT_SUBCLASS(Eadi3DObjects,"Eadi3DObjects")
+IMPLEMENT_ABSTRACT_SUBCLASS(Eadi3DObjects, "Eadi3DObjects")
 EMPTY_SLOTTABLE(Eadi3DObjects)
 EMPTY_SERIALIZER(Eadi3DObjects)
 
@@ -175,50 +175,50 @@ void Eadi3DObjects::makeObjects(void)
 
     glNewList(base+BALL_FRAME, GL_COMPILE);
         glBegin(GL_LINES);
-            glVertex2f(1.625f, 0.0f);		/* 90 deg */
+            glVertex2f(1.625f, 0.0f);        /* 90 deg */
             glVertex2f(1.9375f, 0.0f);
 
-            glVertex2f(1.4073f, -0.8125f);	/* 60 deg */
+            glVertex2f(1.4073f, -0.8125f);   /* 60 deg */
             glVertex2f(1.5697f, -0.9063f);
 
-            glVertex2f(1.1490f, -1.1490f);	/* 45 deg */
+            glVertex2f(1.1490f, -1.1490f);   /* 45 deg */
             glVertex2f(1.3700f, -1.3700f);
 
-            glVertex2f(0.8125f, -1.4073f);	/* 30 deg */
+            glVertex2f(0.8125f, -1.4073f);   /* 30 deg */
             glVertex2f(0.9063f, -1.5697f);
 
-            glVertex2f(0.5558f, -1.5270f);	/* 20 deg */
+            glVertex2f(0.5558f, -1.5270f);   /* 20 deg */
             glVertex2f(0.5985f, -1.6445f);
 
-            glVertex2f(0.2823f, -1.6003f);	/* 10 deg */
+            glVertex2f(0.2823f, -1.6003f);   /* 10 deg */
             glVertex2f(0.3039f, -1.7234f);
 
-            glVertex2f(0.0f, -1.625f);		/* 0 deg */
+            glVertex2f(0.0f, -1.625f);       /* 0 deg */
             glVertex2f(0.0f, -1.75f);
 
-            glVertex2f(-0.2823f, -1.6003f);	/* -10 deg */
+            glVertex2f(-0.2823f, -1.6003f);  /* -10 deg */
             glVertex2f(-0.3039f, -1.7234f);
 
-            glVertex2f(-0.5558f, -1.5270f);	/* -20 deg */
+            glVertex2f(-0.5558f, -1.5270f);  /* -20 deg */
             glVertex2f(-0.5985f, -1.6445f);
 
-            glVertex2f(-0.8125f, -1.4073f);	/* -30 deg */
+            glVertex2f(-0.8125f, -1.4073f);  /* -30 deg */
             glVertex2f(-0.9063f, -1.5697f);
 
-            glVertex2f(-1.1490f, -1.1490f);	/* -45 deg */
+            glVertex2f(-1.1490f, -1.1490f);  /* -45 deg */
             glVertex2f(-1.3700f, -1.3700f);
 
-            glVertex2f(-1.4073f, -0.8125f);	/* -60 deg */
+            glVertex2f(-1.4073f, -0.8125f);  /* -60 deg */
             glVertex2f(-1.5697f, -0.9063f);
 
-            glVertex2f(-1.625f, 0.0f);		/* -90 deg */
+            glVertex2f(-1.625f, 0.0f);       /* -90 deg */
             glVertex2f(-1.9375f, 0.0f);
         glEnd();
     glEndList();
 
     glNewList(base+AC_REF, GL_COMPILE);
         glBegin(GL_LINE_STRIP);
-            glVertex2f(0.40625f, 0.0f);		/* aircraft reference symbol */
+            glVertex2f(0.40625f, 0.0f);      /* aircraft reference symbol */
             glVertex2f(0.25f, 0.0f);
             glVertex2f(0.125f, -0.21875f);
             glVertex2f(0.0f, 0.0f);
@@ -232,7 +232,7 @@ void Eadi3DObjects::makeObjects(void)
         glLineWidth(6.0);
         glColor3fv(GREEN);
         glBegin(GL_LINE_STRIP);
-            glVertex2f(0.40625f, 0.0f);		/* aircraft reference symbol */
+            glVertex2f(0.40625f, 0.0f);     /* aircraft reference symbol */
             glVertex2f(0.25f, 0.0f);
             glVertex2f(0.125f, -0.21875f);
             glVertex2f(0.0f, 0.0f);
@@ -243,7 +243,7 @@ void Eadi3DObjects::makeObjects(void)
         glLineWidth(2.0);
         glColor3fv(BLACK);
         glBegin(GL_LINE_STRIP);
-            glVertex2f(0.40625, 0.);		/* aircraft reference symbol */
+            glVertex2f(0.40625, 0.);        /* aircraft reference symbol */
             glVertex2f(0.25, 0.);
             glVertex2f(0.125, -0.21875);
             glVertex2f(0., 0.);
@@ -265,7 +265,7 @@ void Eadi3DObjects::makeObjects(void)
 
     glNewList(base+HEADING_SCALE, GL_COMPILE);
         glBegin(GL_LINES);
-            glVertex2f(-1.6f, 2.1875f);	/* real start */
+            glVertex2f(-1.6f, 2.1875f);    /* real start */
             glVertex2f(-1.6f, 2.25f);
             glVertex2f(-1.4f, 2.1875f);
             glVertex2f(-1.4f, 2.25f);
@@ -299,7 +299,7 @@ void Eadi3DObjects::makeObjects(void)
             glVertex2f(1.4f, 2.25f);
             glVertex2f(1.6f, 2.1875f);
             glVertex2f(1.6f, 2.25f);
-            glVertex2f(1.8f, 2.1875f);		/* extra */
+            glVertex2f(1.8f, 2.1875f);    /* extra */
             glVertex2f(1.8f, 2.25f);
             glVertex2f(2.0f, 2.1875f);
             glVertex2f(2.0f, 2.25f);
@@ -339,7 +339,7 @@ void Eadi3DObjects::makeObjects(void)
 
     glNewList(base+TURN_RATE, GL_COMPILE);
         glBegin(GL_LINES);
-            glVertex2f(-0.8125f, -2.125f);	/* turn rate */
+            glVertex2f(-0.8125f, -2.125f);   /* turn rate */
             glVertex2f(0.8125f, -2.125f);
             glVertex2f(-0.8125f, -2.125f);
             glVertex2f(-0.8125f, -2.25f);
@@ -355,7 +355,7 @@ void Eadi3DObjects::makeObjects(void)
     glEndList();
 
     glNewList(base+SLIP_IND, GL_COMPILE);
-        irisgl.rect(-0.40625f, -2.5f, 0.40625f, -2.375f);	/* slip ind */
+        irisgl.rect(-0.40625f, -2.5f, 0.40625f, -2.375f);    /* slip ind */
         glBegin(GL_LINES);
             glVertex2f(-0.203125f, -2.375f);
             glVertex2f(-0.203125f, -2.5f);
@@ -378,7 +378,7 @@ void Eadi3DObjects::makeObjects(void)
 
     glNewList(base+GLIDESLOPE, GL_COMPILE);
         glPushMatrix();
-            glTranslatef(-2.0f, 1.0f, 0.0f);	/* glideslope */
+            glTranslatef(-2.0f, 1.0f, 0.0f);             /* glideslope */
             irisgl.rect(-0.02f, -0.02f, 0.02f, 0.02f);
         glPopMatrix();
         glPushMatrix();
@@ -401,7 +401,7 @@ void Eadi3DObjects::makeObjects(void)
 
     glNewList(base+LOCALIZER, GL_COMPILE);
         glPushMatrix();
-            glTranslatef(-1.0f, 2.0f, 0.0f);	/* localizer */
+            glTranslatef(-1.0f, 2.0f, 0.0f);              /* localizer */
             irisgl.rect(-0.02f, -0.02f, 0.02f, 0.02f);
         glPopMatrix();
         glPushMatrix();
@@ -422,7 +422,7 @@ void Eadi3DObjects::makeObjects(void)
         glPopMatrix();
     glEndList();
 
-    glNewList(base+ALPHA_SYMB, GL_COMPILE);	/* greek alpha */
+    glNewList(base+ALPHA_SYMB, GL_COMPILE);             /* greek alpha */
         glPushMatrix();
             glScalef((float)MR2IN, (float)MR2IN, 1.0f);
             glBegin(GL_LINE_STRIP);
@@ -546,23 +546,23 @@ void Eadi3DObjects::makeGlobe(void)
     glNewList(base+GLOBE, GL_COMPILE);
     glPushMatrix();
         for (int i = 0; i < 6; i++) {
-	        glColor3fv(WHITE);
-	        glRotatef(30.0, 0.0, 1.0, 0.0);
-	        irisgl.arc(0.0, 0.0, radius, 0.0, 180.0);
+            glColor3fv(WHITE);
+            glRotatef(30.0, 0.0, 1.0, 0.0);
+            irisgl.arc(0.0, 0.0, radius, 0.0, 180.0);
 
-	        glColor3fv(WHITE);
-	        for (float a = -20.0; a >= -60.0; a -= 20.0) {
-	            float bAngle = a;
-	            float s = (float)sin(a * Basic::Angle::D2RCC);
-	            float c = (float)cos(a * Basic::Angle::D2RCC);
-	            drawArrow(bAngle, s, c);
-	            drawArrow(-bAngle, s, -c);
-	        }
-	        float bAngle = -80.0;
-	        float s = (float)sin(-80.0 * Basic::Angle::D2RCC);
-	        float c = (float)cos(-80.0 * Basic::Angle::D2RCC);
-	        drawArrow2(bAngle, s, c);
-	        drawArrow2(-bAngle, s, -c);
+            glColor3fv(WHITE);
+            for (float a = -20.0; a >= -60.0; a -= 20.0) {
+                float bAngle = a;
+                float s = (float)sin(a * Basic::Angle::D2RCC);
+                float c = (float)cos(a * Basic::Angle::D2RCC);
+                drawArrow(bAngle, s, c);
+                drawArrow(-bAngle, s, -c);
+            }
+            float bAngle = -80.0;
+            float s = (float)sin(-80.0 * Basic::Angle::D2RCC);
+            float c = (float)cos(-80.0 * Basic::Angle::D2RCC);
+            drawArrow2(bAngle, s, c);
+            drawArrow2(-bAngle, s, -c);
         }
         glPopMatrix();
 
@@ -586,21 +586,21 @@ void Eadi3DObjects::makeGlobe(void)
                 glLineWidth(4.0);
                 irisgl.circ(0.0, 0.0, c * radius);
                 if (a != 0.0) {
-	                glColor3fv(BLACK);
-	                /* glColor3fv(WHITE); 		* temp */
-	                glPushMatrix();
-	                    glRotatef(-90.0, 1.0, 0.0, 0.0);
+                    glColor3fv(BLACK);
+                    /* glColor3fv(WHITE);     * temp */
+                    glPushMatrix();
+                    glRotatef(-90.0, 1.0, 0.0, 0.0);
 
-	                    for (int j = 0; j < 4; j++) {
-	                        glPushMatrix();
-	                            glTranslatef(-0.15f, (float)(-0.09375 * c), (float)(c * radius + 0.09375 * s));
-	                            glRotatef(-a, 1.0, 0.0, 0.0);
-	                            glCallList(base + ((unsigned int) (fabs(a) / 10.)));
-	                            glTranslatef(0.1929f, 0.0f, 0.0f);
-	                            glCallList(base+FONT_0);
-	                        glPopMatrix();
-	                        glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
-	                    }
+                    for (int j = 0; j < 4; j++) {
+                        glPushMatrix();
+                        glTranslatef(-0.15f, (float)(-0.09375 * c), (float)(c * radius + 0.09375 * s));
+                        glRotatef(-a, 1.0, 0.0, 0.0);
+                        glCallList(base + ((unsigned int) (fabs(a) / 10.)));
+                        glTranslatef(0.1929f, 0.0f, 0.0f);
+                        glCallList(base+FONT_0);
+                        glPopMatrix();
+                        glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
+                    }
                     glPopMatrix();
                 }
                 glLineWidth(2.0);
@@ -608,7 +608,7 @@ void Eadi3DObjects::makeGlobe(void)
             else {
                 irisgl.circ(0.0, 0.0, c * radius);
             }
-	        glPopMatrix();
+            glPopMatrix();
         }
         s = (float)sin(90.0 * Basic::Angle::D2RCC);
         c = (float)cos(85.0 * Basic::Angle::D2RCC);

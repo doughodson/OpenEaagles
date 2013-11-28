@@ -367,8 +367,7 @@ void NavaidLoader::printResults(std::ostream& sout)
 //------------------------------------------------------------------------------
 // NavaidLoader::NavaidKey 
 //------------------------------------------------------------------------------
-NavaidLoader::NavaidKey::NavaidKey(const long idx, const Navaid& navaid)
-				     : Key(idx)
+NavaidLoader::NavaidKey::NavaidKey(const long idx, const Navaid& navaid): Key(idx)
 {
    size = NAVAID_RECORD_LEN;
    lat = navaid.latitude();

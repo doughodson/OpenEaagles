@@ -153,14 +153,13 @@ const float _EPSILON_FLOAT_ = 1e-7f;
 
 inline bool equal(float d1, float d2, float eps = _EPSILON_FLOAT_)
 {
-	return (fabsf(d1 - d2) <= eps);
+    return (fabsf(d1 - d2) <= eps);
 }
 
 inline bool equal(double d1, double d2, double eps = _EPSILON_DOUBLE_)
 {
-	return (fabs(d1 - d2) <= eps);
+    return (fabs(d1 - d2) <= eps);
 }
-
 
 // ---
 // sign functions

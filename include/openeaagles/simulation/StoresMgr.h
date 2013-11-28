@@ -70,33 +70,33 @@ public:
 public:
    StoresMgr();
 
-   Basic::PairStream* getWeapons();                   // List of all weapons (Pre-ref()'d)
-   const Basic::PairStream* getWeapons() const;       // List of all weapons (Pre-ref()'d) (const version)
+   Basic::PairStream* getWeapons();                    // List of all weapons (Pre-ref()'d)
+   const Basic::PairStream* getWeapons() const;        // List of all weapons (Pre-ref()'d) (const version)
 
-   Basic::PairStream* getExternalStores();            // List of all external equipment (Pre-ref()'d)
+   Basic::PairStream* getExternalStores();             // List of all external equipment (Pre-ref()'d)
    const Basic::PairStream* getExternalStores() const; // List of all external equipment (Pre-ref()'d) (const version)
 
-   Basic::PairStream* getExtFuelTanks();              // List of all external fuel tanks (Pre-ref()'d)
-   const Basic::PairStream* getExtFuelTanks() const;  // List of all external fuel tanks (Pre-ref()'d) (const version)
+   Basic::PairStream* getExtFuelTanks();               // List of all external fuel tanks (Pre-ref()'d)
+   const Basic::PairStream* getExtFuelTanks() const;   // List of all external fuel tanks (Pre-ref()'d) (const version)
 
-   Gun* getGun();                                     // The primary gun
-   const Gun* getGun() const;                         // The primary gun (const version)
+   Gun* getGun();                                      // The primary gun
+   const Gun* getGun() const;                          // The primary gun (const version)
 
-   virtual bool isMasterArm(const unsigned int mode) const; // Is this the master arm mode?
-   virtual unsigned int getMasterArm() const;         // Returns the master arm mode
+   virtual bool isMasterArm(const unsigned int mode) const;  // Is this the master arm mode?
+   virtual unsigned int getMasterArm() const;                // Returns the master arm mode
 
-   virtual bool isWeaponDeliveryMode(const unsigned int mode) const; // Is this the delivery mode?
-   virtual unsigned int getWeaponDeliveryMode() const; // Returns the delivery mode
+   virtual bool isWeaponDeliveryMode(const unsigned int mode) const;  // Is this the delivery mode?
+   virtual unsigned int getWeaponDeliveryMode() const;                // Returns the delivery mode
 
-   virtual bool isGunSelected() const;                // Selects/deselects the gun
-   virtual bool isWeaponReleased() const;             // Are weapons being release?
+   virtual bool isGunSelected() const;                 // Returns true when gun is selected
+   virtual bool isWeaponReleased() const;              // Are weapons being released?
 
-   virtual Weapon* getCurrentWeapon();                // The current weapon (Pre-ref()'d)
+   virtual Weapon* getCurrentWeapon();                 // The current weapon (Pre-ref()'d)
    virtual const Weapon* getCurrentWeapon() const;     // The current weapon (Pre-ref()'d) (const version)
 
-   virtual bool setMasterArm(const unsigned int newMode); // Sets the master arm mode
+   virtual bool setMasterArm(const unsigned int newMode);        // Sets the master arm mode
    virtual bool setWeaponDeliveryMode(const unsigned int mode);  // Sets the weapon delivery mode
-   virtual bool setGunSelected(const bool flg);       // Selects the gun
+   virtual bool setGunSelected(const bool flg);                  // Selects the gun
 
    // The following are simple weapon access functions; all return pref-ref()'d
    // pointers to a weapon or zero if no weapon is available.
@@ -155,7 +155,7 @@ private:
 };
 
 //------------------------------------------------------------------------------
-// Class:	SimpleStoresMgr
+// Class: SimpleStoresMgr
 // Description: Simple (example) external stores management systems
 //
 // Form name: StoresMgr

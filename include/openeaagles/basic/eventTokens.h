@@ -168,7 +168,7 @@ enum {
     FREEZE_EVENT_ALL      = 1303,  // Freeze all event: passes requested freeze state as Boolean
     KILL_EVENT            = 1304,  // kill event: passes optional 'killed by' player
     CRASH_EVENT           = 1305,  // crash event: passes 'collided with' player or zero if terrain
-    JETTISON_EVENT        = 1306,  // Jettision external store event
+    JETTISON_EVENT        = 1306,  // Jettison external store event
     RF_EMISSION           = 1307,  // R/F emission event
     RF_EMISSION_RETURN    = 1308,  // R/F emission return event
     DESIGNATOR_EVENT      = 1309,  // Passes Designator message

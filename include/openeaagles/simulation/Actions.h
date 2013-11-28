@@ -74,7 +74,7 @@ private:
 
 
 //------------------------------------------------------------------------------
-// Class:	ActionImagingSar
+// Class: ActionImagingSar
 // Description: SAR capture, ATR run and Image download
 // Form name: ActionImagingSar
 // Slots:
@@ -179,14 +179,14 @@ protected:
     bool setSlotStationNum(const Basic::Number* newStation);
 
 private:
-   double targetLatitude;        // Latitude (deg)
-   double targetLongitude;       // Longitude (deg)
+   double targetLatitude;        // latitude (deg)
+   double targetLongitude;       // longitude (deg)
    double targetElevation;       // elevation (meters)
-   unsigned int station;         // Station number
+   unsigned int station;         // station number
 };
 
 //------------------------------------------------------------------------------
-// Class:	ActionDecoyRelease
+// Class: ActionDecoyRelease
 // Description:  Releases a decoy 
 //
 // Form name: ActionDecoyRelease
@@ -223,7 +223,7 @@ private:
 
 
 //------------------------------------------------------------------------------
-// Class:	ActionCamouflageType
+// Class: ActionCamouflageType
 // Description: On trigger, switches our ownship's camouflage type
 //
 // Form name: ActionCamouflageType

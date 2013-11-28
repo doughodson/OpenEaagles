@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Classes:	LifeForm
+// Classes: LifeForm
 // Description: Life form models
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_Simulation_LifeForm_H__

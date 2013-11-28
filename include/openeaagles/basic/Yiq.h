@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Class:  Yiq
+// Class: Yiq
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_Basic_Yiq_H__
 #define __Eaagles_Basic_Yiq_H__
@@ -30,7 +30,7 @@ namespace Basic {
 // Public methods: Base class public methods, plus ...
 //
 //      Yiq(const LCreal y, const LCreal i, const LCreal q)
-//          Special constructor that initializes the object to y, i,  and q
+//          Special constructor that initializes the object to y, i, and q
 //
 //      LCreal y()
 //      LCreal i()
@@ -57,8 +57,8 @@ class Yiq : public Color {
     DECLARE_SUBCLASS(Yiq,Color)
 
 public:
-	// components of YIQ color
-	enum { Y, I, Q };
+    // components of YIQ color
+    enum { Y, I, Q };
 
 public:
     Yiq(const LCreal y, const LCreal i, const LCreal q);

@@ -1,6 +1,6 @@
-//==============================================================================
+//------------------------------------------------------------------------------
 // Class: RfSystem
-//==============================================================================
+//------------------------------------------------------------------------------
 #include "openeaagles/simulation/RfSystem.h"
 
 #include "openeaagles/simulation/Antenna.h"
@@ -35,7 +35,7 @@ BEGIN_SLOTTABLE(RfSystem)
    "bandwidthNoise",       // 12: Bandwidth Noise (Hz; def: 'bandwidth') (Basic::Number or Basic::Frequency)
 END_SLOTTABLE(RfSystem)
 
-//  Map slot table
+//  Map slot table 
 BEGIN_SLOT_MAP(RfSystem)
     ON_SLOT(1,  setSlotAntennaName,  Basic::String)
     ON_SLOT(2,  setSlotFrequency,    Basic::Number)
@@ -144,13 +144,13 @@ void RfSystem::deleteData()
 
 void RfSystem::reset()
 {
-	BaseClass::reset();
-	
+   BaseClass::reset();
+
    // ---
    // Do we need to find the antenna?
    // ---
    if (getAntenna() == 0 && getAntennaName() != 0 && getOwnship() != 0) {
-      // We have a name of the antenna, but not the antenna it's self
+      // We have a name of the antenna, but not the antenna itself
       const char* name = *getAntennaName();
       
       // Get the named antenna from the player's list of gimbals, antennas and optics
@@ -167,7 +167,7 @@ void RfSystem::reset()
       }
    }
     
-	// ---
+   // ---
    // Initialize players of interest
    // ---
    processPlayersOfInterest();
@@ -236,7 +236,7 @@ void RfSystem::rfReceivedEmission(Emission* const em, Antenna* const, LCreal raG
          //if (pulses <= 0) pulses = 1.0f;
 
          // Compute signal losses
-         //    Basically, we're simulation Hannen's S/I equation from page 356 of his notes.
+         //    Basically, we're simulating Hannen's S/I equation from page 356 of his notes.
          //    Where I is N + J. J is noise from jamming.
          //    Receiver Loss affects the total I, so we have to wait until J is added to N in Radar.
          LCreal losses = getRfSignalProcessLoss() * em->getAtmosphericAttenuationLoss() * em->getTransmitLoss();
@@ -416,15 +416,15 @@ const Basic::String* RfSystem::getAntennaName() const
 // Returns true if the received emission is in-band
 bool RfSystem::affectsRfSystem(Emission* const em) const
 {
-	double emFreq = em->getFrequency();
-	double emBandwidth = em->getBandwidth();
-	double sysFreq = getFrequency();
-	double sysBandwidth = getBandwidth();
-	double emFreqStart = emFreq - 0.5f * emBandwidth;
-	double emFreqEnd = emFreq + 0.5f * emBandwidth;
-	double sysFreqStart = sysFreq - 0.5f * sysBandwidth;
-	double sysFreqEnd = sysFreq + 0.5f * sysBandwidth;
-	return (emFreqEnd >= sysFreqStart && emFreqStart <= sysFreqEnd);
+   double emFreq = em->getFrequency();
+   double emBandwidth = em->getBandwidth();
+   double sysFreq = getFrequency();
+   double sysBandwidth = getBandwidth();
+   double emFreqStart = emFreq - 0.5f * emBandwidth;
+   double emFreqEnd = emFreq + 0.5f * emBandwidth;
+   double sysFreqStart = sysFreq - 0.5f * sysBandwidth;
+   double sysFreqEnd = sysFreq + 0.5f * sysBandwidth;
+   return (emFreqEnd >= sysFreqStart && emFreqStart <= sysFreqEnd);
 }
 
 //------------------------------------------------------------------------------
@@ -837,12 +837,60 @@ std::ostream& RfSystem::serialize(std::ostream& sout, const int i, const bool sl
         j = 4;
     }
 
+    //"antennaName",          //  Name of the requested Antenna  (Basic::String)
     if (antennaName != 0) {
         indent(sout,i+j);
         sout << "antenna: " << *antennaName << std::endl;
     }
 
+    //"frequency",            //  Frequency     (Hz; def: 0)        (Basic::Number or LcFrequecy)
+    indent(sout,i+j);
+    sout << "frequency: ( Hertz " << frequency << std::endl;
+
+    //"bandwidth",            //  Bandwidth     (Hz; def: 0)        (Basic::Number or LcFrequecy)
+    indent(sout,i+j);
+    sout << "bandwidth: ( Hertz " << bandwidth << std::endl;
+
+    //"powerPeak",            //  Peak Power (Watts; def: 0)
+    indent(sout,i+j);
+    sout << "powerPeak: " << powerPeak << std::endl;
+
+    //"threshold",            //  RF: Receiver threshold above noise (dB, def: 0.0)
+    indent(sout,i+j);
+    sout << "threshold: " << rfThreshold << std::endl;
+
+    //"noiseFigure",          //  RF: Noise Figure (> 1)            (no units; def: 1.0)
+    indent(sout,i+j);
+    sout << "noiseFigure: " << rfNoiseFigure << std::endl;
+
+    //"systemTemperature",    //  RF: System Temperature            (Kelvin; def: 290.0)
+    indent(sout,i+j);
+    sout << "systemTemperature: " << rfSysTemp  << std::endl;
+
+    //"lossXmit",             //  RF: Transmit loss                 (dB or no units; def: 1.0) 
+    indent(sout,i+j);
+    sout << "lossXmit: " << rfLossXmit  << std::endl;
+
+    //"lossRecv",             //  RF: Receive loss                  (dB or no units; def: 1.0)
+    indent(sout,i+j);
+    sout << "lossRecv: " << rfLossRecv << std::endl;
+
+    //"lossSignalProcess",    //  RF: Signal Processing loss        (dB or no units; def: 1.0)
+    indent(sout,i+j);
+    sout << "lossSignalProcess: " << rfLossSignalProcess << std::endl;
+
+    //"disableEmissions",     //  Disable sending emisison packets flag (default: false)
+    indent(sout,i+j);
+    if (disableEmissions) {
+        sout << "disableEmissions: true  " << std::endl;
+    }
+    else {
+        sout << "disableEmissions: false " << std::endl;
+    }
     // DPG #### Need to print slots!!!
+    indent(sout,i+j);
+    sout << "//--- inherits System ------ "  << std::endl;
+
     BaseClass::serialize(sout,i+j,true);
 
     if ( !slotsOnly ) {

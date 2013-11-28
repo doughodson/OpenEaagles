@@ -111,7 +111,7 @@ Action* Arbiter::genComplexAction(Basic::List* const actionSet)
    if (maxVote > 0 && isMessageEnabled(MSG_DEBUG))
       std::cout << "Arbiter: chose action with vote= " << maxVote << std::endl;
 
-   // Use our vote value; if it's been set
+   // Use our vote value; if its been set
    if (getVote() > 0 && complexAction != 0) {
       complexAction->setVote(getVote());
    }

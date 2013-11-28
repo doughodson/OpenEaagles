@@ -27,7 +27,8 @@ namespace Basic {
 //     f    <Number>    ! Flattening
 //
 //------------------------------------------------------------------------------
-class EarthModel : public Object {
+class EarthModel : public Object
+{
     DECLARE_SUBCLASS(EarthModel,Object)
 
 public:

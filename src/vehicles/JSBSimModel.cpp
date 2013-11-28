@@ -50,8 +50,8 @@ IMPLEMENT_SUBCLASS(JSBSimModel,"JSBSimModel")
 // Slot table
 //------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(JSBSimModel)
-    "rootDir",			//  1 root directory for JSBSim models
-    "model",			//  2 JSBSim model
+    "rootDir",      //  1 root directory for JSBSim models
+    "model",        //  2 JSBSim model
 END_SLOTTABLE(JSBSimModel)
 
 // Map slot table to handles 
@@ -542,7 +542,7 @@ void JSBSimModel::setTrimSwitchPitchInput(const LCreal pitchTrim)
 {
     pitchTrimSw = -pitchTrim;
 }
-	
+
 //------------------------------------------------------------------------------
 // setRudderPedalInput(pedal) -- Pedal inputs: normalized
 //          pedal:  -1.0 -> max left;  0.0 -> center;  1.0 -> max right
@@ -591,7 +591,7 @@ bool JSBSimModel::isWeightOnWheels() const
 
 //------------------------------------------------------------------------------
 // setGearHandleSwitch() -- Set Gear handle switch position
-//                          0 -> Handle up;  1 -> hande down
+//                          0 -> handle up;  1 -> handle down
 //------------------------------------------------------------------------------
 void JSBSimModel::setGearHandleSwitch(const LCreal sw)
 {
