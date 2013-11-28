@@ -404,7 +404,7 @@ double Navigation::getUTC() const
    return utc;
 }
 
-// Is system velociy valid?
+// Is system velocity valid?
 bool Navigation::isVelocityDataValid() const
 {
    return velValid;

@@ -513,7 +513,7 @@ LCreal SigSwitch::getRCS(const Emission* const em)
          RfSignature* sig = dynamic_cast<RfSignature*>( pair->object() );
          if (sig != 0) {
 
-            // OK -- we've found the correct RfSignature subcomponet
+            // OK -- we've found the correct RfSignature subcomponent
             // now let it do all of the work
             rcs = sig->getRCS(em);
 
@@ -538,7 +538,7 @@ EMPTY_SERIALIZER(SigAzEl)
 BEGIN_SLOTTABLE(SigAzEl)
     "table",            // 1: Table of RCS by target Az/El angles  (Basic::Table2)
     "swapOrder",        // 2: True if elevation is the table's first independent
-                        //    variable and azumuth is the second.
+                        //    variable and azimuth is the second.
     "inDegrees",        // 3: True if the table's independent variables az and
                         //    el are in degrees instead of the default radians
     "inDecibel",        // 4: True if the dependent data is in decibel meters

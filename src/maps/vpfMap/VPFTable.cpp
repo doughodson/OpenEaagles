@@ -81,7 +81,7 @@ void VPFTable::setColumnNarrTable(char* x)          { lcStrcpy(columns[cCol].nar
 
 bool VPFTable::loadTableFromFile(const char* pathname, const char* filename, const int xType)
 {
-    // this loads the basic information from the file, not all the records themself
+    // this loads the basic information from the file, not all the records them self
     if (path == 0) path = new Basic::String(pathname);
     else path->setStr(pathname);
     bool ok = false;

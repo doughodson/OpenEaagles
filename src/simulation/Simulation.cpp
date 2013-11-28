@@ -264,7 +264,7 @@ void Simulation::copyData(const Simulation& org, const bool cc)
 
    // Unref our old stuff (if any)
 
-   // Copy original players -- DPG need proper method to copy orignal player list
+   // Copy original players -- DPG need proper method to copy original player list
    if (origPlayers != 0) { origPlayers = 0; }
    if (org.origPlayers != 0) {
       origPlayers = org.origPlayers->clone();
@@ -916,7 +916,7 @@ void Simulation::updateData(const LCreal dt)
             updateBgPlayerList(currentPlayerList, dt0, 1, 1);
          }
          else if (numBgThreads > 0) {
-            // multible threads
+            // multiple threads
             for (unsigned short i = 0; i < numBgThreads; i++) {
 
                // assign the threads from the pool
@@ -1522,7 +1522,7 @@ bool Simulation::insertPlayerSort(Basic::Pair* const newPlayerPair, Basic::PairS
     Player* newPlayer = (Player*)( newPlayerPair->object() );
 
     // Search the new player list and insert into the correct position --
-    //  -- sorted by networkd ID and player ID
+    //  -- sorted by network ID and player ID
     bool inserted = false;
     Basic::List::Item* refItem = newList->getFirstItem();
     while (refItem != 0 && !inserted) {
@@ -1577,7 +1577,7 @@ bool Simulation::insertPlayerSort(Basic::Pair* const newPlayerPair, Basic::PairS
 
 
 //------------------------------------------------------------------------------
-// findPlayer() -- Find a player that matchs 'id' and 'networkID'
+// findPlayer() -- Find a player that matches 'id' and 'networkID'
 //------------------------------------------------------------------------------ 
 Player* Simulation::findPlayer(const short id, const int netID)
 {

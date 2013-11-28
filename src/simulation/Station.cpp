@@ -367,7 +367,7 @@ void Station::updateTC(const LCreal dt)
       Basic::Timer::updateTimers(dt);
    }
 
-   // The I/O handers
+   // The I/O handlers
    if (ioHandlers != 0) {
       Basic::List::Item* item = ioHandlers ->getFirstItem();
       while (item != 0) {
@@ -648,7 +648,7 @@ void Station::processBackgroundTasks(const LCreal dt)
    // Note: interoperability networks are handled by
    // processNetworkInputTasks() and processNetworkOutputTasks()
 
-   // The I/O handers
+   // The I/O handlers
    if (ioHandlers != 0) {
       Basic::List::Item* item = ioHandlers ->getFirstItem();
       while (item != 0) {

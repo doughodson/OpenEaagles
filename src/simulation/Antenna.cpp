@@ -706,7 +706,7 @@ bool Antenna::onRfEmissionReturnEventAntenna(Emission* const em)
 }
 
 //------------------------------------------------------------------------------
-// getPolarizationGain() -- Get the gain from the antenna polerization match
+// getPolarizationGain() -- Get the gain from the antenna polarization match
 //------------------------------------------------------------------------------
 double Antenna::getPolarizationGain(const Polarization p1) const
 {

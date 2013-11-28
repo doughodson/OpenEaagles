@@ -596,7 +596,7 @@ Weapon* Weapon::prerelease()
       setReleased(false);
       setReleaseHold(true);
 
-      // add it to the flyout weapont to the player list
+      // add it to the flyout weapon player list
       char pname[32];
       std::sprintf(pname,"W%05d", flyout->getID());
       sim->addNewPlayer(pname,flyout);
@@ -686,7 +686,7 @@ Weapon* Weapon::release()
                setReleased(true);
                setReleaseHold(false);
 
-               // add it to the flyout weapont to the player list
+               // add it to the flyout weapon player list
                char pname[32];
                std::sprintf(pname,"W%05d", flyout->getID());
                sim->addNewPlayer(pname,flyout);
@@ -1148,7 +1148,7 @@ const osg::Vec3& Weapon::getDetonationLocation() const
 }
 
 //------------------------------------------------------------------------------
-// Standard set routins
+// Standard set routines
 //------------------------------------------------------------------------------
 
 // setTargetPlayer() -- sets a pointer to the target player

@@ -564,7 +564,7 @@ void Missile::weaponDynamics(const LCreal dt)
    osg::Vec3 ae = aa * getRotMat();
    setAcceleration(ae);
 
-   // Comute new velocity
+   // Compute new velocity
    LCreal newVP = getTotalVelocity() + vpdot * dt;
 
    // Set acceleration vector

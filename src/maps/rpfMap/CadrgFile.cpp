@@ -305,7 +305,7 @@ bool CadrgFile::initialize(const char* dir)
     // Now move back to the beginning
     toc.seekg(0, std::ios::beg);
 
-    // If we dont's have a standard date of 199... then we know
+    // If we don't have a standard date of 199... then we know
     // that we have an National Imagery Transmission Format (NITF) message, so we should skip over the message and search
     // for the Raster Product Format Header (RPFHDR).
     if (strncmp(head.govSpecdate, "199", 3) != 0) {
@@ -546,7 +546,7 @@ bool CadrgFile::initialize(const char* dir)
     // Read # of frame file index records
     // Skip 1 byte highest security classification
     // locations[2] + 1 is the physical location of frame file index section subheader + we skip one byte
-    // for the security classifiction
+    // for the security classification
     toc.seekg(locations[2].physicalIdx + 1, std::ios::beg);
 
     // The frame file index table offset
@@ -613,7 +613,7 @@ bool CadrgFile::initialize(const char* dir)
                 // Get our frames
                 CadrgFrameEntry** frames = entry->getFrames();
 
-                // Set a local frame to manipualate
+                // Set a local frame to manipulate
                 if (frames != 0) frame = &frames[(vertFrames - 1) - frameRow][frameCol];
                 if (frame != 0 && !frame->doIExist()) {
                     // Get our path name byte offset

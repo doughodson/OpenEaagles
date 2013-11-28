@@ -38,13 +38,13 @@ const char* Effects::getNickname() const        { return "Effects"; }
 Effects::Effects()
 {
     STANDARD_CONSTRUCTOR()
-    
+
     static Basic::String generic("Effects");
     setType(&generic);
 
     setDragIndex(0.0006f);
 
-    // Default: unquided, ballistic
+    // Default: unguided, ballistic
     setMaxTOF(10.0);
     setLethalRange(50.0f);
     setMaxBurstRng(500.0f);
@@ -130,7 +130,7 @@ void Effects::weaponDynamics(const LCreal dt)
    setAcceleration(ae1);
 
    // ---
-   // Comute & set new velocity vectory (earth)
+   // Compute & set new velocity vector (earth)
    // ---
    osg::Vec3 ve1 = getVelocity() + (ae1 * dt);
    setVelocity(ve1);

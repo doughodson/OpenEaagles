@@ -86,7 +86,7 @@ BEGIN_SLOTTABLE(OtwCigiCl)
    "mslTrailModel",        // 5) Missile Trail" effect model ID 
    "smokePlumeModel",      // 6) Smoke Plume" effect model ID
    "airExplosionModel",    // 7) Air Explosion" effect model ID
-   "groundExplosionModel", // 8) GroundE xplosion" effect model ID
+   "groundExplosionModel", // 8) Ground Explosion" effect model ID
    "shipWakeModel",        // 9) Ship Wake" effect model ID
 END_SLOTTABLE(OtwCigiCl)
 
@@ -1643,7 +1643,7 @@ bool OtwCigiCl::sendCigiData()
                   //   std::cout << "model: " << model->getID() << ", pid=" << model->getPlayer()->getID() << std::endl;
                   //}
                   //}
-                  // Explostion?
+                  // Explosion?
                   if (model->explosionActive && model->explosionEC[ir] != 0) {
                      cigi->addPacketEntityCtrl(model->explosionEC[ir]);
                      model->explosionActive = false;
@@ -1867,7 +1867,7 @@ void OtwCigiCl::losResp(const CigiLosRespV3* const p)
       // We do have a pending request that hasn't timed out,
       // but is this it?
       if (p->GetLosID() == losReqId) {
-         // We've the packet that we're lookng for,
+         // We've the packet that we're looking for,
          // but is it valid (the IG found an intersection point)
          if (p->GetValid()) {
             // We have valid data
@@ -2047,7 +2047,7 @@ bool OtwCigiCl::setAirExplosionModelId(const unsigned short v)
    return true;
 }
 
-// "GroundE xplosion" effect model ID
+// "Ground Explosion" effect model ID
 bool OtwCigiCl::setGroundExplosionModelId(const unsigned short v)
 {
    cmtGroundExplosion = v;
@@ -2402,7 +2402,7 @@ bool CigiClNetwork::initialize(OtwCigiCl* const p)
       msgIn->RegisterSignalProcessor(sigProcessor);
 
       // ---
-      // Initalize the network handlers
+      // Initialize the network handlers
       // ---
       if (!networkInitialized && !networkInitFailed) {
          networkInitialized = initCigiNetwork();
@@ -2601,7 +2601,7 @@ void CigiClNetwork::addPacketLosRangeReq(CigiLosVectReqV3* const p)
 void CigiClNetwork::mainLoop()
 {    
    // ---
-   // Receive and processs CIGI packets from the visual system
+   // Receive and process CIGI packets from the visual system
    // ---
    if (netInput != 0 && netOutput != 0) {
       while ( !getOtwCigi()->isShutdown() ) {

@@ -1296,7 +1296,7 @@ bool Gimbal::isPositioned(const double tol0) const
 }
 
 //------------------------------------------------------------------------------
-// isAtLimits() -- Returns true if the gimbal is at a 'phyisical' limit
+// isAtLimits() -- Returns true if the gimbal is at a 'physical' limit
 //------------------------------------------------------------------------------
 bool Gimbal::isAtLimits() const
 {
@@ -1304,7 +1304,7 @@ bool Gimbal::isAtLimits() const
 }
 
 //------------------------------------------------------------------------------
-// limitVec(Vec,lim) -- symetrical limit of a vector
+// limitVec(Vec,lim) -- symmetrical limit of a vector
 //------------------------------------------------------------------------------
 void Gimbal::limitVec(osg::Vec2d& vec, const osg::Vec2d& lim)
 {
@@ -1333,7 +1333,7 @@ void Gimbal::limitVec(osg::Vec3d& vec, const osg::Vec3d& lim)
 }
 
 //------------------------------------------------------------------------------
-// limitVec(vec,lower,upper) -- asymetrical limit of a vector
+// limitVec(vec,lower,upper) -- asymmetrical limit of a vector
 //------------------------------------------------------------------------------
 void Gimbal::limitVec(osg::Vec2d& vec, const osg::Vec2d& ll, const osg::Vec2d& ul)
 {

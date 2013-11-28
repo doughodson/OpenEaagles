@@ -16,8 +16,8 @@ IMPLEMENT_SUBCLASS(IoData,"IoData")
 BEGIN_SLOTTABLE(IoData)
     "numAI",     // 1) Number of analog inputs (AIs)
     "numAO",     // 2) Number of analog outputs (AOs)
-    "numDI",     // 3) Number of descrete inputs (DIs)
-    "numDO",     // 4) Number of descrete outputs (DOs)
+    "numDI",     // 3) Number of discrete inputs (DIs)
+    "numDO",     // 4) Number of discrete outputs (DOs)
 END_SLOTTABLE(IoData)
 
 //  Map slot table to handles
@@ -380,7 +380,7 @@ bool IoData::setSlotNumAO(const Basic::Number* const msg)
    return ok;
 }
 
-// numDI: Number of descrete inputs (DIs)
+// numDI: Number of discrete inputs (DIs)
 bool IoData::setSlotNumDI(const Basic::Number* const msg)
 {
    // Null 'msg' is ok, but the value of 'msg' must
@@ -399,7 +399,7 @@ bool IoData::setSlotNumDI(const Basic::Number* const msg)
    return ok;
 }
 
-// numDO: Number of descrete outputs (DOs)
+// numDO: Number of discrete outputs (DOs)
 bool IoData::setSlotNumDO(const Basic::Number* const msg)
 {
    // Null 'msg' is ok, but the value of 'msg' must

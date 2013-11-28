@@ -132,7 +132,7 @@ protected:
    );
    virtual bool processUnhandledId(const unsigned int id);
 
-   // Basic::Component protected interface interface
+   // Basic::Component protected interface
    virtual bool shutdownNotification();     // We're shutting down
 
 private:

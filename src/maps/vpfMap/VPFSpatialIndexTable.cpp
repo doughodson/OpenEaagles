@@ -46,7 +46,7 @@ void VPFSpatialIndexTable::deleteData()
 void VPFSpatialIndexTable::loadIndexTableFromFile(const char* pathname, const char* filename, const int t)
 {
 #if defined DEBUG_OUTPUT
-    std::cout << "SPACIAL INDEX PATH AND FILE = " << pathname << filename << std::endl;
+    std::cout << "SPATIAL INDEX PATH AND FILE = " << pathname << filename << std::endl;
 #endif
     type = t;
     fullPath = new Basic::String(pathname);
@@ -94,7 +94,7 @@ int VPFSpatialIndexTable::findPrimitivesBySpatialQuery(const float lat, const fl
         int left = 0, right = 0, top = 0, bottom = 0;
         // flag to tell our checker to check for a space query, not just a point query
         bool spaceQuery = false;
-        // we are going to convert our latitude to spatial coordinates, but we are also going to create spacial coordinates for our width and height
+        // we are going to convert our latitude to spatial coordinates, but we are also going to create spatial coordinates for our width and height
         if (width != 0 && height != 0) {
             spaceQuery = true;
             float widthDeg = (width / 60) / 2;

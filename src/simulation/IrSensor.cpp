@@ -274,7 +274,7 @@ bool IrSensor::calculateIrQueryReturn(IrQueryMsg* const msg)
       LCreal reflectorArea = msg->getProjectedArea();
       LCreal ifov = msg->getInstantaneousFieldOfView();
 
-      // The relevant amount of background area is the field of view multipled by the range squared
+      // The relevant amount of background area is the field of view multiplied by the range squared
 
       LCreal backgroundArea =  ifov * rangeSquared;
 
@@ -711,7 +711,7 @@ bool IrSensor::setSlotSensorType(const Basic::String* const msg)
 //   return ok;
 //}
 // setSlotTrackManagerName() -- sets the name of the track manager;
-// we'll lookup the actual track mansger in reset() later
+// we'll lookup the actual track manager in reset() later
 bool IrSensor::setSlotTrackManagerName(Basic::String* const v)
 {
     return setTrackManagerName(v);

@@ -83,7 +83,7 @@ public:
    // Default limits for pilot inputs
    static const double STD_RATE_TURN_DPS;      // default to 3.0 degrees per second
    static const double STD_MAX_BANK_ANGLE;     // default to +-30 degrees bank max
-   static const double STD_MAX_CLIMB_RATE;     // defaul to 2000 fpm, or apprx 10.16 mps
+   static const double STD_MAX_CLIMB_RATE;     // default to 2000 fpm, or apprx 10.16 mps
    static const double STD_MAX_PITCH_ANGLE;    // default to +-10 degrees pitch max
    static const double STD_MAX_ACCEL_NPS;      // default to 5.0
 
@@ -261,7 +261,7 @@ private:
    bool flyLoiterEntry();           // flies our entry pattern into the loiter
    bool flyLoiter();                // flies the loiter pattern
    bool calcMirrorLatLon();
-   // fly to a given point unsing the course
+   // fly to a given point using the course
    bool flyCRS(const double latDeg, const double lonDeg, const double crsCmdDeg);
    
    // Input controls

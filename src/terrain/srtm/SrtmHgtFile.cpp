@@ -37,10 +37,10 @@
 // All elevations are in meters referenced to the WGS84/EGM96 geoid as documented at http://www.NGA.mil/GandG/wgsegm/. 
 // 
 // Byte order is Motorola ("big-endian") standard with the most significant byte first.
-// Since they aresigned integers elevations can range from -32767 to 32767 meters,
-// encompassing the range ofelevation to be found on the Earth. 
+// Since they are signed integers elevations can range from -32767 to 32767 meters,
+// encompassing the range of elevation to be found on the Earth. 
 // 
-// These data also contain occassional voids from a number of causes such as shadowing,
+// These data also contain occasional voids from a number of causes such as shadowing,
 // phase unwrapping anomalies, or other radar-specific causes. Voids are flagged with the value -32768. 
 // 
 // 4.0 Notes and Hints for SRTM Data Users 
@@ -51,7 +51,7 @@
 // Silicon Graphics workstations and Macintosh computers use the Motorola byte order. The Intel 
 // byte order, which stores the least significant byte first ("little endian"), is used on DEC Alpha 
 // systems and most PCs. Users with systems that address bytes in the Intel byte order may have to
-// "swap bytes" of the DEM data unless their application software performs the conversion duringingest. 
+// "swap bytes" of the DEM data unless their application software performs the conversion during ingest. 
 // 
 //==============================================================================
 

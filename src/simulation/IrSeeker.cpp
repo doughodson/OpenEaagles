@@ -295,7 +295,7 @@ void IrSeeker::irRequestSignature(IrQueryMsg* const irQuery)
          else {
             // When we couldn't get a free query packet
             if (isMessageEnabled(MSG_WARNING)) {
-               std::cerr << "Iw Seeker: OUT OF Query messages!" << std::endl;
+               std::cerr << "IR Seeker: OUT OF Query messages!" << std::endl;
             }
          }
       }

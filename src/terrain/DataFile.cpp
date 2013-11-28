@@ -168,7 +168,7 @@ unsigned int DataFile::getElevations(
       ) return num;
 
 
-   // Uppper limit points
+   // Upper limit points
    double maxLatPoint = double(nptlat-1);
    double maxLonPoint = double(nptlong-1);
 
@@ -261,7 +261,7 @@ unsigned int DataFile::getElevations(
 
 //------------------------------------------------------------------------------
 // Locates an elevation value (meters) for a given reference point and returns
-// it in 'elev'.  Function returns true if successfull, otherwise 'elev' is unchanged.
+// it in 'elev'.  Function returns true if successful, otherwise 'elev' is unchanged.
 //------------------------------------------------------------------------------
 bool DataFile::getElevation(
       LCreal* const elev,     // The elevation value (meters)

@@ -101,7 +101,7 @@ void VMAP0ReferenceDirectory::loadTables()
         ok = table->loadTableFromFile(string->getString(), "lineage.doc", VPFDirectory::LINEAGE);
     }
 
-    // now we have all our data type and values loaded from the rference directory, we must descend into our coverage directories
+    // now we have all our data type and values loaded from the reference directory, we must descend into our coverage directories
     // read our coverage attribute table to determine the names of our coverages
     if (cvgOk) {
         table = 0;

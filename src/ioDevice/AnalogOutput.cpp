@@ -162,7 +162,7 @@ bool AnalogOutput::setGain(const LCreal v)
    return ok;
 }
 
-// table: Shapping function table
+// table: Shaping function table
 bool AnalogOutput::setTable(const Basic::Table1* const msg)
 {
     bool ok = true;

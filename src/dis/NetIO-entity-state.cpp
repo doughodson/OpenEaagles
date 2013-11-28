@@ -45,7 +45,7 @@ void NetIO::processEntityStatePDU(const EntityStatePDU* const pdu)
     // Make sure it's not one of ours
     // ---
 
-    // Reject PDUs with our appication and site IDs
+    // Reject PDUs with our application and site IDs
     if (site == getSiteID() &&  app == getApplicationID()) return;
 
     // Search test (reject PDUs from players on our output list)

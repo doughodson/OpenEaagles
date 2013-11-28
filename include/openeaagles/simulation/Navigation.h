@@ -89,7 +89,7 @@ public:
    virtual double getUTC() const;                           // Returns UTC time (sec)
     
     // Velocity Data
-   virtual bool isVelocityDataValid() const;                // Is system velociy valid?
+   virtual bool isVelocityDataValid() const;                // Is system velocity valid?
    virtual LCreal getGroundSpeedKts() const;                // Returns ground speed (kts)
    virtual LCreal getTrueAirspeedKts() const;               // Returns true airspeed (kts)
    virtual LCreal getGroundTrackDeg() const;                // Returns true ground track (degs)
@@ -180,7 +180,7 @@ protected:
     virtual bool updateSysPosition();       // Method to compute nav system's positions
     virtual bool updateSysVelocity();       // Method to compute nav system's velocities
     virtual bool updateSysAttitude();       // Method to compute nav system's attitude angles
-    virtual bool updateMagVar();            // Method to compute nav systems's mag variagion
+    virtual bool updateMagVar();            // Method to compute nav system's mag variation
     virtual bool updateNavSteering();       // Method to compute nav steering
 
    // System class Interface -- phase() callbacks

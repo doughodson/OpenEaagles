@@ -43,7 +43,7 @@ public:
     virtual void setOrientation(const LCreal v) { orientation = v; }
     virtual void setResolution(const LCreal v)  { resolution = v; }
 
-    // Orignal SAR image data
+    // Original SAR image data
     const unsigned char* getOrigImageData() const { return origData; }  // Original Image data
     unsigned int getOrigImageSize() const   { return origSize; }        // Original Image size (bytes)
     bool isOriginalImageDataValid() const   { return (origData != 0); } // True if original image data is valid
@@ -67,7 +67,7 @@ private:
     unsigned char*  data;           // Pointer to the image data
     unsigned int    size;           // Image size in bytes
     unsigned int    width;          // Width  (pixels: must be power of two)
-    unsigned int    height;         // Deight (pixels: must be power of two)
+    unsigned int    height;         // Height (pixels: must be power of two)
     unsigned int    depth;          // Depth (bytes: 1, 2, 3 or 4) 
     bool            loaded;         // Image has been loaded
     bool            xmitEnble;      // Image should be transmitted over datalink

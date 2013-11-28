@@ -44,7 +44,7 @@ void DiffEquation::copyData(const DiffEquation& org, const bool)
 {
    BaseClass::copyData(org);
 
-   // copy data array -- drived classes must have called allocateMemory() prior
+   // copy data array -- derived classes must have called allocateMemory() prior
    // to calling this copyData() function.
    for (unsigned int i = 0; i < n; i++) {
       pa[i] = org.pa[i];

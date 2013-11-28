@@ -151,7 +151,7 @@ private:
    const Steerpoint* getSteerpointImp() const;
 
    SPtr<Basic::Pair>         to;                  // "To" Steerpoint pair [ name steerpoint ]
-   SPtr<const Basic::String> initToStptName;      // Name of the inital "to" steerpoint
+   SPtr<const Basic::String> initToStptName;      // Name of the initial "to" steerpoint
    unsigned int              initToStptIdx;       // Index of the initial "to" steerpoint
    unsigned int              stptIdx;             // Steerpoint index [ 1 ... n ] in list
    LCreal                    autoSeqDistNM;       // Distance to auto sequence               (NM)

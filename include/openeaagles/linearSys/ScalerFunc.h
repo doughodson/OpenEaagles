@@ -55,10 +55,10 @@ public:
    LCreal getY0() const          { return y0; }       // Returns Y
    unsigned int getRate() const  { return rate; } // hz
 
-   // Sets the inital X value, X(0), and all past X values, X(-1), X(-2) ,, X(-k+1)
+   // Sets the initial X value, X(0), and all past X values, X(-1), X(-2) ,, X(-k+1)
    virtual bool setX0(const LCreal v);
 
-   // Sets the inital Y value, Y(0), and all past Y values, Y(-1), Y(-2) ,, Y(-k+1)
+   // Sets the initial Y value, Y(0), and all past Y values, Y(-1), Y(-2) ,, Y(-k+1)
    virtual bool setY0(const LCreal v);
 
    // Sets the master update rate (hz)
@@ -83,7 +83,7 @@ protected:
    // Initialize this control/filter
    virtual void initialize();
 
-   unsigned int n;   // Number coefficents (order)
+   unsigned int n;   // Number coefficients (order)
    LCreal* px;       // X input array
    LCreal* py;       // Y output array
 
