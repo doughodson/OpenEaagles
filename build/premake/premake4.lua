@@ -140,6 +140,15 @@ solution "oe"
       }
       targetname "Glut"
 
+   -- GLFW OpenGL interface library
+   project "gui-glfw"
+      files {
+         "../../include/openeaagles/gui/glfw/**.h",
+         "../../src/gui/glfw/**.cpp"
+      }
+      defines { "GLEW_STATIC" }
+      targetname "Glfw"
+
    -- DAFIF airport loader library
    project "dafif"
       files {
