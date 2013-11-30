@@ -32,6 +32,7 @@ PROJECTS += recorder
 # GUI interface libraries
 #
 PROJECTS += "gui/glut"
+PROJECTS += "gui/glfw"
 
 # Out-the-Window interface classes to talk to visual systems
 # - CIGI Class Library 3.x interface
