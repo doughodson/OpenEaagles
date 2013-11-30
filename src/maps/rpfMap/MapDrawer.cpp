@@ -41,7 +41,7 @@ MapDrawer::MapDrawer()
     // Default our values
     gridSize = 0;
 
-    // Intialize our pagers, zones, and texture info
+    // Initialize our pagers, zones, and texture info
     for (int i = 0; i < MAX_PAGERS; i++) {
         pagers[i] = 0;
         zones[i] = -1;

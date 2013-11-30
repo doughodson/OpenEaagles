@@ -77,7 +77,7 @@ bool Polygon::calcNormal(osg::Vec3& n, const osg::Vec3 v[3])
 
 
 //------------------------------------------------------------------------------
-// find the coeffients of the plane equation
+// find the coefficients of the plane equation
 //------------------------------------------------------------------------------
 bool Polygon::calcPlaneCoeff(osg::Vec4& cc, const osg::Vec3 v[3])
 {
@@ -115,7 +115,7 @@ bool Polygon::calcPlaneCoeff()
 
 
 //------------------------------------------------------------------------------
-// compute the z value at point p using plane coeffients c.
+// compute the z value at point p using plane coefficients c.
 //------------------------------------------------------------------------------
 LCreal Polygon::calcZ(const osg::Vec2& p, const osg::Vec4& cc)
 {

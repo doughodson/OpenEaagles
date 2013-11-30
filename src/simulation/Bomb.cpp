@@ -244,7 +244,7 @@ void Bomb::weaponGuidance(const LCreal)
       LCreal tof = 0;
       osg::Vec3 ip;
 
-      // Preduct platform impact point
+      // Predict platform impact point
       weaponImpactPrediction(&initPos, &initVel, groundPlane, timeStep, maxTime, dragIndex, &ip, &tof);
       ip[2] = tgtPosP[2];
 
@@ -392,7 +392,7 @@ bool Bomb::weaponImpactPrediction(
    LCreal time = 0.0;
 
    // ---
-   // Simple balistic extrapolate of the weapon's position
+   // Simple ballistic extrapolate of the weapon's position
    // ---
 
    while (time < maxTime && (pos[IDOWN] < groundPlane)) {
@@ -405,10 +405,10 @@ bool Bomb::weaponImpactPrediction(
       //   then gravity
       ae1[IDOWN] += g;
 
-      // Compute new velocity vectory (earth)
+      // Compute new velocity vector (earth)
       vel = vel + (ae1 * dt);
 
-      // Comute new position vectory (earth)
+      // Compute new position vector (earth)
       pos = pos + (vel * dt);
 
       time += dt;

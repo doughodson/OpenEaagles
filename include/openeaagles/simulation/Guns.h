@@ -72,7 +72,7 @@ public:
    const Bullet* getBulletType() const             { return bullet; }
    virtual bool setBulletType(Bullet* const b);
 
-   // Gun posiiton relative to ownship player
+   // Gun position relative to ownship player
    const osg::Vec3d& getPosition() const           { return posVec; }
    const osg::Vec3d& getAngles() const             { return angles; }
    const osg::Matrixd& getRotMat() const           { return rm; }

@@ -34,7 +34,7 @@ class Tdb;
 //    type.  However, it is still the responsibility of the systems to use
 //    or not use our member function.
 //
-//    3) Gimble coordinates:
+//    3) Gimbal coordinates:
 //       X+ is along the gimbal/sensor boresight
 //       Y+ is to the right of the gimbal boresight
 //       Z+ is down

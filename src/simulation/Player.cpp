@@ -768,7 +768,7 @@ void Player::updateData(const LCreal dt)
 }
 
 //-----------------------------------------------------------------------------
-// Get funtions
+// Get functions
 //-----------------------------------------------------------------------------
 
 // getMajorType() -- Returns the player's major type
@@ -2056,7 +2056,7 @@ bool Player::setPosition(const double n, const double e, const double d, const b
    // Set the position vector relative to sim ref pt
    posVecNED.set(n, e, d);
 
-   // The position vector is valid if the gaming area range is umlimited (zero) or
+   // The position vector is valid if the gaming area range is unlimited (zero) or
    // if the vector's length is less than or equal the max range.
    posVecValid = (maxRefRange <= 0.0) || (posVecNED.length2() <= (maxRefRange*maxRefRange));
 
@@ -2138,7 +2138,7 @@ bool Player::setPositionLLA(const double lat, const double lon, const double alt
       Basic::Nav::convertLL2PosVecS(refLat, refLon, cosRlat, lat, lon, alt, &posVecNED);
    }
 
-   // The position vector is valid if the gaming area range is umlimited (zero) or
+   // The position vector is valid if the gaming area range is unlimited (zero) or
    // if the vector's length is less than or equal the max range.
    posVecValid = (maxRefRange <= 0.0) || (posVecNED.length2() <= (maxRefRange*maxRefRange));
 
@@ -2191,7 +2191,7 @@ bool Player::setGeocPosition(const osg::Vec3d& pos, const bool slaved)
       Basic::Nav::convertLL2PosVecS(refLat, refLon, cosRlat, latitude, longitude, altitude, &posVecNED);
    }
 
-   // The position vector is valid if the gaming area range is umlimited (zero) or
+   // The position vector is valid if the gaming area range is unlimited (zero) or
    // if the vector's length is less than or equal the max range.
    posVecValid = (maxRefRange <= 0.0) || (posVecNED.length2() <= (maxRefRange*maxRefRange));
 
@@ -2783,7 +2783,7 @@ bool Player::onTriggerSwEvent(const Basic::Boolean* const sw)
       used = getStoresManagement()->onTriggerSwEvent(sw);
    }
    else {
-      // We we dont' have an SMS, we can do some TBD default handling of this event.
+      // We don't have an SMS, we can do some TBD default handling of this event.
       used = true;
    }
 
@@ -3149,7 +3149,7 @@ void Player::positionUpdate(const LCreal dt)
 
          if (!afrz) {
             if (gcEnabled) {
-               // Ground clampping enabled
+               // Ground clamping enabled
                double alt = tElev + tOffset;
                newPosVecNED[IDOWN] = -alt;
             }
@@ -3167,7 +3167,7 @@ void Player::positionUpdate(const LCreal dt)
       }
 
       // ---
-      // Update using geodetic latitude, longitude and height abover terrain
+      // Update using geodetic latitude, longitude and height above terrain
       // ---
       if (useCoordSys == CS_GEOD) {
          //std::cout << "Geod: ";
@@ -3232,7 +3232,7 @@ void Player::positionUpdate(const LCreal dt)
 
          if (!afrz) {
             if (gcEnabled) {
-               // Ground clampping enabled
+               // Ground clamping enabled
                double alt = tElev + tOffset;
                newAltitude = alt;
             }
@@ -3293,7 +3293,7 @@ void Player::positionUpdate(const LCreal dt)
    }
 
    // ---
-   // Test only: update the Euler angles if we have non-zero test anguler rates
+   // Test only: update the Euler angles if we have non-zero test angular rates
    // ---
    if (testAngRates.length2() > 0 && !attFrz) {
 
@@ -3349,7 +3349,7 @@ void Player::positionUpdate(const LCreal dt)
 }
 
 //------------------------------------------------------------------------------
-// Default player dead-reckoning funciton (networked I-players only)
+// Default player dead-reckoning function (networked I-players only)
 //------------------------------------------------------------------------------
 void Player::deadReckonPosition(const LCreal dt)
 {

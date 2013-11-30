@@ -260,9 +260,9 @@ private:
 
     unsigned int numBars;        // number of bars in our scan
     double     barSpacing;       // width between bars (if applicable) (rad)
-    bool       oddNumberOfBars;  // flag used to revers sequence of bar scans
+    bool       oddNumberOfBars;  // flag used to reverse sequence of bar scans
     bool       leftToRightScan;  // flag to tell us if we scan from right to left or left to right
-    bool       reverseScan;      // Scanning the the reverse direction
+    bool       reverseScan;      // Scanning the reverse direction
     unsigned int barNum;         // Bar number that we are on
     double     conAngle;         // Conical scan angle (degrees)
     double     revPerSec;        // Revolutions per second (hz)

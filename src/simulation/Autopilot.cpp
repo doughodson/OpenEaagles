@@ -261,7 +261,7 @@ bool Autopilot::modeManager()
    // Re-latch the modes -- (just command the previous mode.)
    //  If the mode was off, it still is.
    //  If the mode was on, the 'is' functions will make sure that all
-   //  prerequesite are still met.
+   //  prerequisite are still met.
    // ---
    setNavMode( isNavModeOn() );
    if (!isLoiterModeOn()) {
@@ -949,7 +949,7 @@ bool Autopilot::processModeFollowTheLead()
 
 
 //------------------------------------------------------------------------------
-// Heading/roll contoller --
+// Heading/roll controller --
 //------------------------------------------------------------------------------
 bool Autopilot::headingController()
 {
@@ -977,7 +977,7 @@ bool Autopilot::headingController()
 }
 
 //------------------------------------------------------------------------------
-// Altitude/pitch contoller
+// Altitude/pitch controller
 //------------------------------------------------------------------------------
 bool Autopilot::altitudeController()
 {
@@ -1001,7 +1001,7 @@ bool Autopilot::altitudeController()
 }
 
 //------------------------------------------------------------------------------
-// Velocity/throttle contoller
+// Velocity/throttle controller
 //------------------------------------------------------------------------------
 bool Autopilot::velocityContoller()
 {
@@ -1100,7 +1100,7 @@ bool Autopilot::setAltitudeHoldMode(const bool flag)
 {
    bool b = flag && isPitchSasOn();
    if (b && !altHoldOn && !holdAltSet && getOwnship() != 0) {
-      // Altitude hold just came on, sample the vehilces altitude
+      // Altitude hold just came on, sample the vehicles altitude
       setCommandedAltitudeFt( (LCreal) getOwnship()->getAltitudeFt() );
    }
    altHoldOn = b;
@@ -1401,7 +1401,7 @@ bool Autopilot::setSlotNavMode(const Basic::Number* const msg)
     return ok;
 }
 
-// Hold altiude (alt hold mode)
+// Hold altitude (alt hold mode)
 bool Autopilot::setSlotHoldAltitude(const Basic::Distance* const msg)
 {
     bool ok = false;

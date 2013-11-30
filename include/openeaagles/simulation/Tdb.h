@@ -49,7 +49,7 @@ namespace Simulation {
 //       must be completed before the LOS vectors, ranges, angles, etc. are
 //       computed and used).
 //
-// Gimble coordinates:
+// Gimbal coordinates:
 //       X+ is along the gimbal/sensor boresight
 //       Y+ is to the right of the gimbal boresight
 //       Z+ is the cross product of X into Y

@@ -23,7 +23,7 @@ namespace Simulation {
 //------------------------------------------------------------------------------
 // Class:  Station
 //
-// Description:  Applications's top level container class with support for the
+// Description:  Application's top level container class with support for the
 //               simulation model, controls & displays, network interfaces
 //               and the out-the-window visual systems.  Also, contains default
 //               support for the time-critical and network threads.

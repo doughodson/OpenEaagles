@@ -51,7 +51,7 @@ public:
     // Get by lat lon bounding box
     int getPolBndCoordsByLatLon(const float maxLat, const float maxLon, const float minLat, const float minLon, const int idx, osg::Vec3 vec[], const int max);
 
-    // Here are all the spacial index table file types
+    // Here are all the spatial index table file types
     enum { NSI = 0, MAX_SPATIAL_INDEX_TABLES };
 
     int getSpatialQueryPlacenamePrimID(const int idx);

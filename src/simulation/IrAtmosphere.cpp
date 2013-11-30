@@ -157,7 +157,7 @@ bool IrAtmosphere::calculateAtmosphereContribution(IrQueryMsg* const msg, LCreal
         LCreal viewAngleToHorizon;
 
         // viewAngleToTarget is angle to target, not angle my sensor is actually pointing.
-        // we want the fov i'm actually pointing at, not a FOV centred on each target
+        // we want the fov i'm actually pointing at, not a FOV centered on each target
 
         // determine elevation angle to target, negative angles are down
         //{

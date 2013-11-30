@@ -82,7 +82,7 @@ solution "oe"
    configuration { "Release" }
       flags { "Optimize" }
       if (_ACTION == "vs2008") or (_ACTION == "vs2010") or (_ACTION == "vs2012") then
-         -- enable compilier intrinsics and favor speed over size
+         -- enable compiler intrinsics and favour speed over size
          buildoptions { "/Oi", "/Ot" }
          defines { "WIN32", "_LIB", "NDEBUG" }
       end
@@ -95,7 +95,7 @@ solution "oe"
       targetsuffix "_d"
       flags { "Symbols" }
       if (_ACTION == "vs2008") or (_ACTION == "vs2010") or (_ACTION == "vs2012") then
-         -- enable compilier intrinsics
+         -- enable compiler intrinsics
          buildoptions { "/Oi" }
          defines { "WIN32", "_LIB", "_DEBUG" }
       end
@@ -224,6 +224,7 @@ solution "oe"
          "../../src/recorder/**.cpp",
          "../../src/recorder/**.cc"
       }
+      defines { "_SCL_SECURE_NO_WARNINGS" } -- suppress protocol buffer warning
       targetname "Recorder"
 
    -- sensors library

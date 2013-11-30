@@ -147,7 +147,7 @@ protected:
    // Compute receiver thermal noise
    virtual bool computeReceiverNoise();
 
-   // The following are filled by rfReceivedEmission() and consumed (empted) by receive()
+   // The following are filled by rfReceivedEmission() and consumed (emptied) by receive()
    LCreal jamSignal;                  // Interference signal (from Jammer)
    unsigned int np;                   // Number of emission packets being passed from rfReceivedEmission() to receive()
    LCreal signals[MAX_EMISSIONS];     // signals values being passed from rfReceivedEmission() to receive() 
@@ -174,8 +174,8 @@ private:
 
    LCreal   powerPeak;           // Peak Power (default: 0) )    (Watts)
    LCreal   frequency;           // Frequency            (Hz)
-   LCreal   bandwidth;           // Receiver bandwith    (Hz)
-   LCreal   bandwidthNoise;      // [B] Receiver bandwith noise (Hz)
+   LCreal   bandwidth;           // Receiver bandwidth    (Hz)
+   LCreal   bandwidthNoise;      // [B] Receiver bandwidth noise (Hz)
    LCreal   rfNoiseFigure;       // [F] Receiver noise figure (> 1)          (no units)
    LCreal   rfSysTemp;           // [T] System Temperature                   (Kelvin)
    LCreal   rfRecvNoise;         // [N] Noise (N = F * k * T * B)            (Watts)

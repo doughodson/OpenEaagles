@@ -362,7 +362,7 @@ bool NetIO::setMaxPositionErr(const LCreal v)
    return true;
 }
 
-// Sets the max orientational error (rad)
+// Sets the max orientation error (rad)
 bool NetIO::setMaxOrientationErr(const LCreal v)
 {
    maxOrientationErr = v;
@@ -688,7 +688,7 @@ Nib* NetIO::createNewOutputNib(Player* const player)
 }
 
 //------------------------------------------------------------------------------
-// Destory the NIBs
+// Destroy the NIBs
 //------------------------------------------------------------------------------
 void NetIO::destroyInputNib(Nib* const nib)
 {

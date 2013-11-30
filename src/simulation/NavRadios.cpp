@@ -493,7 +493,7 @@ bool IlsRadio::findILSGlideslopeByFreq(LCreal freq)
 bool IlsRadio::findLocalizerByFreq(LCreal freq)
 {
    localizerValid = false;
-   ////Temp Variables...Will use to distiguish low and high end of runway...
+   ////Temp Variables...Will use to distinguish low and high end of runway...
    //LCreal magHeading1 = 0;
    //LCreal magHeading2 = 0;
    //double trueBearing1 = 0;
@@ -507,7 +507,7 @@ bool IlsRadio::findLocalizerByFreq(LCreal freq)
    //      int found = getAirportLoader()->queryRunwayByFreq(freq);
    //      //Debug Display:
    //      //std::cout << "RWY Loc Found = " << found << std::endl;
-   //      //Run through the list and find the closest at the appropreate angle:
+   //      //Run through the list and find the closest at the appropriate angle:
    //      for (int i = 0; i < found; i++) {
    //            Dafif::Runway* p = getAirportLoader()->getRunway(i);
    //            //Get the RWY orientation and bearing for both ends of the runway:

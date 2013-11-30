@@ -66,12 +66,12 @@ void VMAP0RefCoverageDirectory::loadTables()
     // ok, let's build our feature class(es) from our feature class schema
     if (fcs->isLoaded()) buildFeatureClasses();
 
-    // based on the produt specification for VMAP level 0, there are 4 reference coverage directories
+    // based on the product specification for VMAP level 0, there are 4 reference coverage directories
     // libref, dbref, polbnd, and placenam.
     if (getType() == VMAP0ReferenceDirectory::CVG_PLACENAM) {
         // for the placenam directory, there is one simple primitive table and attribute table
         // they are placenam.pft and end
-        // There is also a node spacial index (nsi) table for minimum boundary rectangle lookups
+        // There is also a node spatial index (nsi) table for minimum boundary rectangle lookups
         if (featureTables[PLACENAM_DOT_PFT] == 0) featureTables[PLACENAM_DOT_PFT] = new VPFTable();
         if (!featureTables[PLACENAM_DOT_PFT]->isLoaded()) {
             // don't give it a type, because we are keeping track of the type
@@ -110,8 +110,8 @@ void VMAP0RefCoverageDirectory::loadTables()
             // don't give it a type, because we are keeping track of the type
             featureTables[EDG]->loadTableFromFile(string->getString(), "edg");
         }
-        // now we have to open our edge bouding rectangle, because it contains information
-        // to do quick queries on our edg file
+        // now we have to open our edge bounding rectangle, because it contains information
+        // to do quick queries on our edge file
         if (featureTables[EBR] == 0) featureTables[EBR] = new VPFTable();
         if (!featureTables[EBR]->isLoaded()) {
             // don't give it a type, because we are keeping track of the type
@@ -210,7 +210,7 @@ bool VMAP0RefCoverageDirectory::getPlacenameByRecord(const int r, char* p)
     // first, make sure our table exists, and then get the record
     if (featureTables[PLACENAM_DOT_PFT] != 0 && featureTables[PLACENAM_DOT_PFT]->isLoaded()) {
         VPFRecord* rec = featureTables[PLACENAM_DOT_PFT]->getRecord(r);
-        // our placaname is column 2
+        // our placename is column 2
         if (rec != 0) {
             ok = true;
             //lcStrcpy(p, sizeof(p), rec->getData(2));

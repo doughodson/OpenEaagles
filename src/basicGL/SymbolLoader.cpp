@@ -795,7 +795,7 @@ bool SymbolLoader::updateSymbolSelectName(const int idx, const int newSN)
 
 //------------------------------------------------------------------------------
 // symbolFactory() - Creates symbols objects; derived classes can override this
-//                   to create unique, special purpuse SlSymbol objects
+//                   to create unique, special purpose SlSymbol objects
 //------------------------------------------------------------------------------
 SlSymbol* SymbolLoader::symbolFactory()
 {

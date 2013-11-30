@@ -212,7 +212,7 @@ void Sar::process(const LCreal dt)
 {
     BaseClass::process(dt);
 
-    // Imaging in porgress?
+    // Imaging in progress?
    if (timer > 0) {
 
       // ---
@@ -270,7 +270,7 @@ void Sar::process(const LCreal dt)
          else p->setResolution( 3.0f * Basic::Distance::FT2M );
          Basic::Pair* pp = new Basic::Pair("image", p);
          addImage(pp);
-         // ### TEST TEST 
+         // ### TEST
 
          // Just finished!
          ttimer = 0;

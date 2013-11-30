@@ -14,8 +14,8 @@ IMPLEMENT_SUBCLASS(Limit,"Limit")
 // slot table for this class type
 //------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Limit)
-    "lower",   //  1: Lower boundry (default: -1) (must be less than the upper)
-    "upper",   //  2: Upper boundry (default:  1) (must be greater than the lower)
+    "lower",   //  1: Lower boundary (default: -1) (must be less than the upper)
+    "upper",   //  2: Upper boundary (default:  1) (must be greater than the lower)
 END_SLOTTABLE(Limit)
 
 // Map slot table to handles 

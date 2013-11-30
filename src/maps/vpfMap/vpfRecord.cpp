@@ -75,7 +75,7 @@ void VPFRecord::createRecord(VPFTable* x, const char* file, const int idx)
         int size = parent->getRecordSize();
         if (size > 0) {
             int recordOffset = size * (idx - 1);
-            // now offest our header, plus the index * size of one records
+            // now offset our header, plus the index * size of one records
             stream.seekg(parent->getHeaderLength() + sizeof(int) + recordOffset, std::ios::beg);
             if (stream.tellg() >= mySize) {
                 //std::cout << "TELL G = " << stream.tellg() << std::endl;

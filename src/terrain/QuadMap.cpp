@@ -126,7 +126,7 @@ unsigned int QuadMap::getElevations(
 
 //------------------------------------------------------------------------------
 // Locates an elevation value (meters) for a given reference point and returns
-// it in 'elev'.  Function returns true if successfull, otherwise 'elev' is unchanged.
+// it in 'elev'.  Function returns true if successful, otherwise 'elev' is unchanged.
 //------------------------------------------------------------------------------
 bool QuadMap::getElevation(
       LCreal* const elev,     // The elevation value (meters)

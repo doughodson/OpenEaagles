@@ -55,7 +55,7 @@ public:
       }
    }
 
-   // Bendwidth (hz)
+   // Bandwidth (hz)
    LCreal getBandwidth() const { return bw; }
 
    // Sets the beam width (hz)

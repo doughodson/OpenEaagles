@@ -125,7 +125,7 @@ void MapPage::updateData(const LCreal dt)
       setNorthUp(page->getNorthUp());
       nm2Screen = page->getScale();
    }
-   // if we are the top map page, we do the calcualations ourself
+   // if we are the top map page, we do the calculations ourself
    else {
       // determine if we are centered or not, and set our displacement and radius accordingly
       if (isCentered) nm2Screen = outerRadius / range;

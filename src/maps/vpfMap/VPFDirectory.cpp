@@ -59,7 +59,7 @@ void VPFDirectory::createTable(const int x)
 }
 
 //------------------------------------------------------------------------------
-//  setSlotPath() - sets the path to database directory directory
+//  setSlotPath() - sets the path to database directory
 //------------------------------------------------------------------------------
 bool VPFDirectory::setSlotPath(const Basic::String* const sfpobj)
 {

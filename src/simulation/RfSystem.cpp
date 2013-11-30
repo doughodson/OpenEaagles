@@ -758,7 +758,7 @@ bool RfSystem::setSlotRfSysTemp(Basic::Number* const v)
     return ok;
 }
 
-// setSlotRfTransmitLoss() -- set the trasmit loss
+// setSlotRfTransmitLoss() -- set the transmit loss
 bool RfSystem::setSlotRfTransmitLoss(Basic::Number* const v)
 {
     bool ok = false;
@@ -879,7 +879,7 @@ std::ostream& RfSystem::serialize(std::ostream& sout, const int i, const bool sl
     indent(sout,i+j);
     sout << "lossSignalProcess: " << rfLossSignalProcess << std::endl;
 
-    //"disableEmissions",     //  Disable sending emisison packets flag (default: false)
+    //"disableEmissions",     //  Disable sending emission packets flag (default: false)
     indent(sout,i+j);
     if (disableEmissions) {
         sout << "disableEmissions: true  " << std::endl;

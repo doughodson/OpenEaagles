@@ -382,7 +382,7 @@ bool AirVehicle::isWeightOnWheels() const
 
 //------------------------------------------------------------------------------
 // setGearHandleSwitch() -- Set Gear handle switch position
-//                          0 -> Handle up;  1 -> hande down
+//                          0 -> handle up;  1 -> handle down
 //------------------------------------------------------------------------------
 void AirVehicle::setGearHandleSwitch(const LCreal value)
 {

@@ -134,8 +134,8 @@ namespace Simulation {
 //
 // Event IDs
 //
-//    Some network specfic outgoing event messages require an unique ID
-//    to identifiy unique events.  The following functions are used to
+//    Some network specific outgoing event messages require an unique ID
+//    to identify unique events.  The following functions are used to
 //    generate event unique IDs.
 //
 //       unsigned short getNewIffEventID()         // New IFF message event
@@ -218,7 +218,7 @@ public:
    bool didInitializationFail() const { return netInitFail; }
    virtual bool networkInitialization();
 
-   // Other eaagles components
+   // Other components
    Station* getStation() { return station; }
    const Station* getStation() const { return station; }
 
@@ -249,7 +249,7 @@ protected:
    virtual bool setTimeline(const TSource ts);              // Sets the timeline (UTC or EXEC)
    virtual bool setMaxTimeDR(const LCreal v);               // Sets the max dead-rec time; forces next update (sec)
    virtual bool setMaxPositionErr(const LCreal v);          // Sets the max positional error (meters)
-   virtual bool setMaxOrientationErr(const LCreal v);       // Sets the max orientational error (rad)
+   virtual bool setMaxOrientationErr(const LCreal v);       // Sets the max orientation error (rad)
    virtual bool setMaxAge(const LCreal v);                  // Sets the max age; for removal (sec)
    virtual bool setMaxEntityRange(const LCreal v);          // Sets the max entity range (meters)
    virtual bool setFederateName(const Basic::String* const msg);   // Sets our federate name
@@ -275,7 +275,7 @@ protected:
    virtual bool shutdownNotification();
 
 //------------------------------------------------------------------------------
-// Network Interface Block (NIB) maintainance sections
+// Network Interface Block (NIB) maintenance sections
 //------------------------------------------------------------------------------
 public:
     // NIB I/O type
@@ -351,7 +351,7 @@ protected:
 
 
 //------------------------------------------------------------------------------
-// Network Type Mapper (NTM) maintainance sections
+// Network Type Mapper (NTM) maintenance sections
 //------------------------------------------------------------------------------
 public:
 

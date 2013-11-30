@@ -134,7 +134,7 @@ void TexturePager::updateTextures(const int tRow, const int tCol)
     int cCol = table.centerColumnTexture();
 
     if (row != cRow || col != cCol) {
-        // Position has moved enough to cause a change in the texturess displayed
+        // Position has moved enough to cause a change in the textures displayed
         diffRow = row - cRow;
         diffCol = col - cCol;
         freeTextures();
@@ -285,7 +285,7 @@ void TexturePager::loadNewTextures()
 //------------------------------------------------------------------------------
 void TexturePager::flushTextures()
 {
-    // Return textures indicies that are no longer used
+    // Return textures indices that are no longer used
     if (map != 0) {
         int lb = table.getLowerBoundIndex();
         int ub = table.getUpperBoundIndex();

@@ -427,7 +427,7 @@ void Eadi3DPage::draw()
 
 
 //------------------------------------------------------------------------------
-// globeBall() - draw the globe given specific input paramaters
+// globeBall() - draw the globe given specific input parameters
 //------------------------------------------------------------------------------
 void Eadi3DPage::globeBall(LCreal pitch, LCreal roll, LCreal pitchCmd, LCreal rollCmd, bool psValid, bool rcValid, bool landMode)
 {

@@ -233,7 +233,7 @@ void Otw::processesElevations()
 //  model states are:
 //     INACTIVE     -- unused model entry
 //     ACTIVE       -- player is alive and in-range
-//     DEAD         -- player is dead or destoryed
+//     DEAD         -- player is dead or destroyed
 //     OUT_OF_RANGE -- player is alive but out of range
 //
 //  Note: this routines will set model entries to DEAD and OUT_OF_RANGE, but the
@@ -336,7 +336,7 @@ void Otw::mapPlayerList2ModelTable()
    // ---
    for (unsigned int i = 0; i < getModelTableSize(); i++) {
       if ( modelTbl[i]->isNotChecked() ) {
-         // Request removel;
+         // Request removal;
          // (note: the OTW system specific code now has one frame to cleanup its own code
          //  before the model is dropped from the output list next frame -- see above)
          modelTbl[i]->setState( OtwModel::OUT_OF_RANGE );
@@ -350,7 +350,7 @@ void Otw::mapPlayerList2ModelTable()
 //------------------------------------------------------------------------------
 void Otw::mapPlayers2ElevTable()
 {
-   // Set all entries as unciecked
+   // Set all entries as unchecked
    for (unsigned int i = 0; i < getElevationTableSize(); i++) {
       hotTbl[i]->setCheckedFlag(false);
    }

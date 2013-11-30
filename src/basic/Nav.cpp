@@ -1171,7 +1171,7 @@ bool Nav::getGeocCoords(
    double z = temp2 * sinlat;             /* equ. A-10b */
 
    /* Project the horizontal position on the two axes
-   * in the equitorial plane */
+   * in the equatorial plane */
    double x = w * std::cos(lon);          /* equ. A-11 */
 
    double y = w * std::sin(lon);          /* modified by Huat Ng, IST */

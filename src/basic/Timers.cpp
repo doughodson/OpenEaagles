@@ -199,7 +199,7 @@ bool Timer::setSlotTimerValue(const Time* const msg)
    return ok;
 }
 
-// Sets the alarn value
+// Sets the alarm value
 bool Timer::setSlotAlarmTime(const Time* const msg)
 {
    bool ok = false;

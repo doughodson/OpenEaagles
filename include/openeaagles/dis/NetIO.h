@@ -244,7 +244,7 @@ public:
    unsigned char getVersion() const               { return version; }         // Returns the current version number
    virtual bool setVersion(const unsigned char v);                            // Sets the operating version number
 
-   // Emisison PDU handler
+   // Emission PDU handler
    const EmissionPduHandler* findEmissionPduHandler(const Simulation::RfSensor* const msg);
    const EmissionPduHandler* findEmissionPduHandler(const EmissionSystem* const msg);
 

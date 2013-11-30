@@ -70,7 +70,7 @@ class CigiClNetworkSignalProcessing;
 //    shipWakeModel        (Number)       Ship Wake" effect model ID
 //
 // Note: In the async mode, the sendCigiData() function, which sends the CIGI
-// packets to the CigiCl handler, is called by our frameSync() funciton in the
+// packets to the CigiCl handler, is called by our frameSync() function in the
 // R/T thread.  In the sync mode, the sendCigiData() function is called by the
 // startOfFrame() callback (i.e., sync'd with the IG).
 //
@@ -91,30 +91,30 @@ public:
    // Is an elevation request pending?
    virtual bool isElevationRequestPending() const { return elevReqFlg; }
 
-   bool isASyncMode() const { return asyncMode; }     // True if running in CIGI async mode
-   bool isSyncMode() const { return !asyncMode; }     // True if running in CIGI sync mode
-   virtual bool setASyncMode(const bool f);           // Sets the CIGI async mode flag
+   bool isASyncMode() const { return asyncMode; }                                   // True if running in CIGI async mode
+   bool isSyncMode() const { return !asyncMode; }                                   // True if running in CIGI sync mode
+   virtual bool setASyncMode(const bool f);                                         // Sets the CIGI async mode flag
 
-   bool isOwnshipModelHidden() const { return hideOwn; }                   // True if the ownship's model is hidden
-   virtual bool setHideOwnshipModel(const bool f);                         // Sets the hide ownship flag
+   bool isOwnshipModelHidden() const { return hideOwn; }                            // True if the ownship's model is hidden
+   virtual bool setHideOwnshipModel(const bool f);                                  // Sets the hide ownship flag
 
-   unsigned short getOwnshipModelID() const { return cmtOwnship; }         // Ownship's model ID
-   virtual bool setOwnshipModelId(const unsigned short);                   // Ownship's model ID
+   unsigned short getOwnshipModelID() const { return cmtOwnship; }                  // Ownship's model ID
+   virtual bool setOwnshipModelId(const unsigned short);                            // Ownship's model ID
 
-   unsigned short getMslTrailModelID() const { return cmtMslTrail; }       // "Missile Trail" effect model ID 
-   virtual bool setMslTrailModelId(const unsigned short);                  // "Missile Trail" effect model ID 
+   unsigned short getMslTrailModelID() const { return cmtMslTrail; }                // "Missile Trail" effect model ID 
+   virtual bool setMslTrailModelId(const unsigned short);                           // "Missile Trail" effect model ID 
 
-   unsigned short getSmokePlumeModelID() const { return cmtSmokePlume; }   // "Smoke Plume" effect model ID
-   virtual bool setSmokePlumeModelId(const unsigned short);                // "Smoke Plume" effect model ID
+   unsigned short getSmokePlumeModelID() const { return cmtSmokePlume; }            // "Smoke Plume" effect model ID
+   virtual bool setSmokePlumeModelId(const unsigned short);                         // "Smoke Plume" effect model ID
 
-   unsigned short getAirExplosionModelID() const { return cmtAirExplosion; }  // "Air Explosion" effect model ID
-   virtual bool setAirExplosionModelId(const unsigned short);              // "Air Explosion" effect model ID
+   unsigned short getAirExplosionModelID() const { return cmtAirExplosion; }        // "Air Explosion" effect model ID
+   virtual bool setAirExplosionModelId(const unsigned short);                       // "Air Explosion" effect model ID
 
-   unsigned short getGroundExplosionModelID() const { return cmtGroundExplosion; }  // "GroundE xplosion" effect model ID
-   virtual bool setGroundExplosionModelId(const unsigned short);           // "GroundE xplosion" effect model ID
+   unsigned short getGroundExplosionModelID() const { return cmtGroundExplosion; }  // "Ground Explosion" effect model ID
+   virtual bool setGroundExplosionModelId(const unsigned short);                    // "Ground Explosion" effect model ID
 
-   unsigned short getShipWakeModelID() const { return cmtShipWake; }       // "Ship Wake" effect model ID
-   virtual bool setShipWakeModelId(const unsigned short);                  // "Ship Wake" effect model ID
+   unsigned short getShipWakeModelID() const { return cmtShipWake; }                // "Ship Wake" effect model ID
+   virtual bool setShipWakeModelId(const unsigned short);                           // "Ship Wake" effect model ID
 
    // IG callbacks
    virtual void startOfFrame(const CigiSOFV3* const p);
@@ -165,10 +165,10 @@ protected:
       return (buffer < NUM_BUFFERS ? ownshipEC[buffer] : 0);
    }
 
-   unsigned int getWriteBuffer() const { return iw; }      // Write buffer index
-   unsigned int getLastWriteBuffer() const { return iw0; } // Last write buffer index
-   unsigned int getReadBuffer() const { return ir; }       // Read index {returns index or NUM_BUFFERS if not valid)
-   void swapReadBuffer() { if (iw0 < NUM_BUFFERS) ir = iw0; } // Swap the read buffer
+   unsigned int getWriteBuffer() const { return iw; }          // Write buffer index
+   unsigned int getLastWriteBuffer() const { return iw0; }     // Last write buffer index
+   unsigned int getReadBuffer() const { return ir; }           // Read index {returns index or NUM_BUFFERS if not valid)
+   void swapReadBuffer() { if (iw0 < NUM_BUFFERS) ir = iw0; }  // Swap the read buffer
 
    bool isIgResetRequested() const { return resetRequest; }
    void clearIgResetRequest() { resetRequest = false; } 
@@ -224,7 +224,7 @@ protected:
    virtual bool setCommonModelData(CigiEntityCtrlV3* const ec, const unsigned short entity, const Simulation::Player* const p);
 
 private:    
-   SPtr<CigiCl> cigi;                      // CIGI handler (direct, networked, ...)
+   SPtr<CigiCl> cigi;                    // CIGI handler (direct, networked, ...)
    bool   asyncMode;                     // Running in ASYNC mode if true
    bool   hideOwn;                       // Hide ownship model flag
 
@@ -258,7 +258,7 @@ private:
    CigiIGCtrlV3*     igc;                    // IG control packet
    CigiLosVectReqV3* los;                    // LOS request packet
    CigiViewCtrlV3*   view;                   // View control packet (optional, set by derived classes)
-   CigiViewDefV3*    fov;                    // FOV defination packet (optional, set by derived classes
+   CigiViewDefV3*    fov;                    // FOV definition packet (optional, set by derived classes
    CigiSensorCtrlV3* sensor;                 // Sensor Control packet
 
    // special model IDs
@@ -266,7 +266,7 @@ private:
    unsigned short cmtMslTrail;            // "Missile Trail" effect model ID 
    unsigned short cmtSmokePlume;          // "Smoke Plume" effect model ID
    unsigned short cmtAirExplosion;        // "Air Explosion" effect model ID
-   unsigned short cmtGroundExplosion;     // "GroundE xplosion" effect model ID
+   unsigned short cmtGroundExplosion;     // "Ground Explosion" effect model ID
    unsigned short cmtShipWake;            // "Ship Wake" effect model ID
 
    // CIGI init support

@@ -8,7 +8,7 @@
 //      TabLogger::LogActiveTrack     -- Log active (radar) track event (header, new, update, removed)
 //      TabLogger::LogPassiveTrack    -- Log passive (rwr)  track event (header, new, update, removed)
 //
-// Description: Very simular to SimLogger, except ASCII output is more verbose and
+// Description: Very similar to SimLogger, except ASCII output is more verbose and
 //              formatted using tab characters
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_Simulation_TabLogger_H__

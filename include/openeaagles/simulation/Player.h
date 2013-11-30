@@ -837,7 +837,7 @@ public:
    virtual bool setGeocAngularVelocities(const osg::Vec3d& newAngVel);
 
    // ---
-   // Set the player's veloctity and acceleration vectors
+   // Set the player's velocity and acceleration vectors
    //
    // 1) Setting velocity or acceleration in any one of the coordinate system
    //    will set the vectors in all three coordinate systems ( body, ned and ecef ).

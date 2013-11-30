@@ -298,7 +298,7 @@ TrackManager* RfSensor::getTrackManager()
    return trackManager;
 }
 
-// Returns our current track manager (const verstion)
+// Returns our current track manager (const version)
 const TrackManager* RfSensor::getTrackManager() const
 {
    return trackManager;
@@ -661,7 +661,7 @@ bool RfSensor::setMasterMode(RfSensor* const m)
 //------------------------------------------------------------------------------
 
 // setSlotTrackManagerName() -- sets the name of the track manager;
-// we'll lookup the actual track mansger in reset() later
+// we'll lookup the actual track manager in reset() later
 bool RfSensor::setSlotTrackManagerName(Basic::String* const v)
 {
     return setTrackManagerName(v);

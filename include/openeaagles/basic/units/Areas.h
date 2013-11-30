@@ -95,7 +95,7 @@ namespace Basic {
 // http://quickfacts.census.gov/qfd/meta/long_101619.htm - Census Department
 // http://academic.regis.edu/mlotfy/cs422/Problem%20Document.htm - Regis University
 // http://unr.edu/homepage/kimura/tables.html - University of Nevada, Reno
-// All Decibel conversions came from the radar detection system powerpoint presentation
+// All Decibel conversions came from the radar detection system PowerPoint presentation
 // slides 47 and 48.
 // ----------------------------------------------------------------------------
 

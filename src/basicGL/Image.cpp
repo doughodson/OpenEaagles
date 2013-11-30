@@ -456,7 +456,7 @@ bool Image::writeFileBMP(const char* const filename, const char* const path)
    // Total file size (with padding)
    unsigned int tsize = sizew*4;
 
-   // Number of padding bytes at the end if the file to give a even word boundery
+   // Number of padding bytes at the end if the file to give a even word boundary
    unsigned int filePadding = tsize - size;
 
    // ---

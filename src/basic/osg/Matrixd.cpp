@@ -14,7 +14,7 @@
 #include "openeaagles/basic/osg/Matrixd"
 #include "openeaagles/basic/osg/Matrixf"
 
-// specialise Matrix_implementaiton to be Matrixd
+// specialized Matrix_implementation to be Matrixd
 #define  Matrix_implementation Matrixd
 
 namespace Eaagles {

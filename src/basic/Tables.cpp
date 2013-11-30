@@ -1777,7 +1777,7 @@ LCreal Table::lfi(
       else {
          // Start at the previous breakpoint
          y2 = *ybp;
-         if (y2 >= ny) y2 = 0;                         // safty check
+         if (y2 >= ny) y2 = 0;                         // safety check
          while (y > y_data[y2]) { y2 += delta; }       // search up
          while (y < y_data[y2-delta]) { y2 -= delta; } // search down
          *ybp = y2;
@@ -1874,7 +1874,7 @@ LCreal Table::lfi(
       else {
          // Start at the previous breakpoint
          z2 = *zbp;
-         if (z2 >= nz) z2 = 0;                         // safty check
+         if (z2 >= nz) z2 = 0;                         // safety check
          while (z > z_data[z2]) { z2 += delta; }       // search up
          while (z < z_data[z2-delta]) { z2 -= delta; } // search down
          *zbp = z2;
@@ -1978,7 +1978,7 @@ LCreal Table::lfi(
       else {
          // Start at the previous breakpoint
          w2 = *wbp;
-         if (w2 >= nw) w2 = 0;                         // safty check
+         if (w2 >= nw) w2 = 0;                         // safety check
          while (w > w_data[w2]) { w2 += delta; }       // search up
          while (w < w_data[w2-delta]) { w2 -= delta; } // search down
          *wbp = w2;
@@ -2085,7 +2085,7 @@ LCreal Table::lfi(
       else {
          // Start at the previous breakpoint
          v2 = *vbp;
-         if (v2 >= nv) v2 = 0;                         // safty check
+         if (v2 >= nv) v2 = 0;                         // safety check
          while (v > v_data[v2]) { v2 += delta; }       // search up
          while (v < v_data[v2-delta]) { v2 -= delta; } // search down
          *vbp = v2;

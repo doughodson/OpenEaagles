@@ -223,7 +223,7 @@ void Route::autoSequencer(const LCreal, const Navigation* const nav)
 void Route::triggerAction()
 {
    // ---
-   // find and start the current 'to' steerpont action
+   // find and start the current 'to' steerpoint action
    // ---
    Player* own = (Player*) findContainerByType(typeid(Player));
    if (to != 0 && own != 0) {
