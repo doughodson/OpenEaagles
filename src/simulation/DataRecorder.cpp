@@ -130,7 +130,7 @@ END_SLOTTABLE(RecorderComponent)
 
 // Map slot table to handles 
 BEGIN_SLOT_MAP(RecorderComponent)
-    ON_SLOT( 1, setSlotEnabledList, Basic::List)
+    ON_SLOT( 1, setSlotEnabledList,  Basic::List)
     ON_SLOT( 2, setSlotDisabledList, Basic::List)
 END_SLOT_MAP()
 

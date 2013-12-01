@@ -113,8 +113,6 @@ private:
 
    unsigned int* disabledList;      // List of data records disabled from being processed (default: none)
    unsigned int numDisabled;        // Number of disabled record IDs
-
-   Simulation* sim;
 };
 
 
