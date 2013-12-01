@@ -40,6 +40,7 @@ BEGIN_SLOT_MAP(TabPrinter)
 END_SLOT_MAP()
 
 EMPTY_SERIALIZER(TabPrinter)
+EMPTY_DELETEDATA(TabPrinter)
 
 //------------------------------------------------------------------------------
 // Default Constructor
@@ -53,12 +54,11 @@ TabPrinter::TabPrinter()
 void TabPrinter::initData()
 {
    printHeader = false;   // print either Header or message values
+   simReset = true;
+   setMsgHeaders(true);
    option = NO_HDR;
    lastMessage = REID_UNHANDLED_ID_TOKEN;
    divider = "\t";
-   simReset = true;
-   setMsgHeaders(true);
-
 }
 
 //------------------------------------------------------------------------------
@@ -72,14 +72,6 @@ void TabPrinter::copyData(const TabPrinter& org, const bool cc)
    printHeader = org.printHeader;
    option = org.option;
    divider = org.divider;
-}
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
-void TabPrinter::deleteData()
-{
-
 }
 
 //------------------------------------------------------------------------------
@@ -108,7 +100,6 @@ void TabPrinter::setMsgHeaders(const bool f)
    playerHeader = f;
    weaponHeader = f;
    trackHeader = f;
-
 }
 
 //------------------------------------------------------------------------------

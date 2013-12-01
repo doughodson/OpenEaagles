@@ -43,10 +43,10 @@ FileWriter::FileWriter()
 
 void FileWriter::initData()
 {
+   sout = 0;
    fullFilename = 0;
    filename = 0;
    pathname = 0;
-   sout = 0;
    fileOpened = false;
    fileFailed = false;
    eodFlag    = false;

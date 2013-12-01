@@ -31,7 +31,14 @@ namespace Recorder {
 // Description: Print selected data record message data
 //
 // Form name: PrintSelected
-// Slots: (tbd)
+// Slots:
+//   messageToken    <Basic::Number>   ! Message ID (token)
+//   fieldName       <Basic::String>   ! Full field name (e.g., Eaagles.Recorder.Pb.PlayerId.name)
+//   compareToValS   <Basic::String>   ! value to compare (string)
+//   compareToValI   <Basic::Number>   ! value to compare (num)
+//   compareToValD   <Basic::Number>   ! value to compare (dbl)
+//   condition       <Basic::String>   ! EQ, LT, or GT (ignored for bool and strings)
+//   timeOnly        <Basic::Number>   ! match time conditions only. Print ALL messages that match
 //------------------------------------------------------------------------------
 class PrintSelected : public PrintHandler {
     DECLARE_SUBCLASS(PrintSelected, PrintHandler)

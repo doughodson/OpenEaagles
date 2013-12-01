@@ -96,6 +96,10 @@ DataRecorder::DataRecorder()
 void DataRecorder::initData()
 {
    outputHandler = 0;
+   setFirstPass(true);
+
+   eventName = "";
+   application = "";
    caseNum = 0;
    missionNum = 0;
    subjectNum = 0;
@@ -103,11 +107,6 @@ void DataRecorder::initData()
    day = 0;
    month = 0;
    year = 0;
-
-   eventName = "";
-   application = "";
-
-   setFirstPass(true);
 }
 
 //------------------------------------------------------------------------------
@@ -124,7 +123,8 @@ void DataRecorder::copyData(const DataRecorder& org, const bool cc)
       setOutputHandler(copy);
       if (copy != 0) copy->unref();
    }
-
+   eventName = org.eventName;
+   application = org.application;
    caseNum = org.caseNum;
    missionNum = org.missionNum;
    subjectNum = org.subjectNum;
@@ -132,8 +132,6 @@ void DataRecorder::copyData(const DataRecorder& org, const bool cc)
    day = org.day;
    month = org.month;
    year = org.year;
-   eventName = org.eventName;
-   application = org.application;
 }
 
 //------------------------------------------------------------------------------

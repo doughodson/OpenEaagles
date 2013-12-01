@@ -80,7 +80,6 @@ void PrintSelected::initData()
    foundSelected = false;
    printHeader = false;
    timeOnly = false;
-
 }
 
 //------------------------------------------------------------------------------

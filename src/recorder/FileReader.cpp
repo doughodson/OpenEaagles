@@ -45,9 +45,9 @@ FileReader::FileReader()
 void FileReader::initData()
 {
    ibuf = new char[MAX_INPUT_BUFFER_SIZE];
+   sin = 0;
    filename = 0;
    pathname = 0;
-   sin = 0;
    fileOpened = false;
    fileFailed = false;
    firstPassFlg = true;
@@ -67,12 +67,11 @@ void FileReader::copyData(const FileReader& org, const bool cc)
       delete sin;
    }
    sin = 0;
+   setFilename(org.filename);
+   setPathName(org.pathname);
    fileOpened = false;
    fileFailed = false;
    firstPassFlg = true;
-
-   setFilename(org.filename);
-   setPathName(org.pathname);
 }
 
 //------------------------------------------------------------------------------
