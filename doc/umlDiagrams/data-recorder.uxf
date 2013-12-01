@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="12.2">
+  <zoom_level>8</zoom_level>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>488</x>
+      <y>0</y>
+      <w>160</w>
+      <h>128</h>
+    </coordinates>
+    <panel_attributes>Station
+--
+Simulation* simulation
+PairStream* networks
+Otw* otw
+IoHandler* ioHandler
+DataRecorder* dataRecorder
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>344</x>
+      <y>120</y>
+      <w>112</w>
+      <h>128</h>
+    </coordinates>
+    <panel_attributes>DataRecorder
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>680</x>
+      <y>120</y>
+      <w>112</w>
+      <h>128</h>
+    </coordinates>
+    <panel_attributes>Simulation
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>592</x>
+      <y>104</y>
+      <w>104</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>88;56;24;56;24;24</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>432</x>
+      <y>104</y>
+      <w>104</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>24;56;88;56;88;24</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>528</x>
+      <y>376</y>
+      <w>112</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>Basic::
+Component
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>200</x>
+      <y>472</y>
+      <w>768</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>Simulation::
+RecorderComponent
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>200</x>
+      <y>568</y>
+      <w>112</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>Simulation::
+DataRecorder
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>560</x>
+      <y>408</y>
+      <w>40</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>24;24;24;64</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>232</x>
+      <y>504</y>
+      <w>40</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>24;24;24;64</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>432</x>
+      <y>104</y>
+      <w>128</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>112;24;112;80;24;80</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>432</x>
+      <y>176</y>
+      <w>264</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>248;24;24;24</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>200</x>
+      <y>664</y>
+      <w>112</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>Recorder::
+DataRecorder
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>232</x>
+      <y>600</y>
+      <w>40</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>24;24;24;64</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>448</x>
+      <y>664</y>
+      <w>112</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>Recorder::
+OutputHandler
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>480</x>
+      <y>504</y>
+      <w>40</w>
+      <h>176</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>24;24;24;160</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>792</x>
+      <y>664</y>
+      <w>112</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>Recorder::
+InputHandler
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>824</x>
+      <y>504</y>
+      <w>40</w>
+      <h>176</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>24;24;24;160</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>736</x>
+      <y>760</y>
+      <w>112</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>Recorder::
+NetInput
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>768</x>
+      <y>696</y>
+      <w>64</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>48;24;24;64</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>320</x>
+      <y>760</y>
+      <w>112</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>Recorder::
+NetOutput
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>352</x>
+      <y>696</y>
+      <w>136</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>120;24;24;64</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>864</x>
+      <y>760</y>
+      <w>112</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>Recorder::
+FileReader
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>856</x>
+      <y>696</y>
+      <w>72</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>24;24;56;64</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>448</x>
+      <y>760</y>
+      <w>112</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>Recorder::
+FileWriter
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>480</x>
+      <y>696</y>
+      <w>40</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>24;24;24;64</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>568</x>
+      <y>760</y>
+      <w>112</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>Recorder::
+PrintHandler
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>512</x>
+      <y>696</y>
+      <w>120</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>24;24;104;64</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>440</x>
+      <y>856</y>
+      <w>112</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>Recorder::
+PrintPlayer
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>568</x>
+      <y>856</y>
+      <w>112</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>Recorder::
+PrintSelected
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>480</x>
+      <y>792</y>
+      <w>136</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>120;24;24;64</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>600</x>
+      <y>792</y>
+      <w>40</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>24;24;24;64</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>696</x>
+      <y>856</y>
+      <w>112</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>Recorder::
+TabPrinter
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>632</x>
+      <y>792</y>
+      <w>128</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>24;24;112;64</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>40</x>
+      <y>664</y>
+      <w>112</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>Recorder::
+DataRecorderHandle
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>40</x>
+      <y>376</y>
+      <w>112</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>Basic::
+Object
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>72</x>
+      <y>408</y>
+      <w>40</w>
+      <h>272</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>24;24;24;256</additional_attributes>
+  </element>
+</diagram>

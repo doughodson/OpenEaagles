@@ -91,7 +91,7 @@ void OutputHandler::processRecord(const DataRecordHandle* const dataRecord)
       processRecordImp(dataRecord);
 
       // Next, pass the data record to our subcomponent OutputHandlers
-      // for futher processing
+      // for further processing
       Basic::PairStream* subcomponents = getComponents();
       if (subcomponents != 0) {
          for (Basic::List::Item* item = subcomponents->getFirstItem(); item != 0; item = item->getNext()) {

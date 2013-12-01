@@ -14,7 +14,7 @@ namespace Recorder {
 
 //------------------------------------------------------------------------------
 // Class: DataRecordHandle
-// Description: Eaagles handle to a DataRecord, so we can ref count it.
+// Description: Handle to a DataRecord, so we can ref count it.
 //
 // Notes:
 // 

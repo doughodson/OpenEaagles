@@ -14,7 +14,6 @@
 namespace Eaagles {
 namespace Recorder {
 
-
 //==============================================================================
 // Class FileReader
 //==============================================================================
@@ -31,7 +30,6 @@ BEGIN_SLOT_MAP(FileReader)
     ON_SLOT( 1, setFilename, Basic::String)   
     ON_SLOT( 2, setPathName, Basic::String)
 END_SLOT_MAP()
-
 
 //------------------------------------------------------------------------------
 // Constructor
@@ -111,7 +109,7 @@ bool FileReader::isFailed() const
 //------------------------------------------------------------------------------
 bool FileReader::openFile()
 {
-   // When we're alreay open, just return
+   // When we're already open, just return
    if (isOpen()) return true;
 
    // local flags (default is success)
