@@ -1,8 +1,7 @@
 //------------------------------------------------------------------------------
-// Classes --
+// Classes:
 //    DataRecorder      -- Abstract data recorder class
 //    RecorderComponent -- Base class for all data recorder components
-//
 //
 // Macros used to sample data
 //
@@ -43,7 +42,6 @@
 //             SAMPLE_2_VALUES( someValue, anotherValue )
 //          END_RECORD_DATA_SAMPLE()
 //
-//
 //  Notes:
 //    1) If the pointer to the Data Recorder is zero (null)
 //       then no data is recorded
@@ -81,7 +79,6 @@ namespace Simulation {
 //                               ! Only valid if 'enabledList' is NOT set!
 //                               ! (default: no records are disabled)
 //
-//    
 //------------------------------------------------------------------------------
 class RecorderComponent : public Basic::Component
 {
@@ -130,7 +127,7 @@ private:
 //    Eaagles::Recorder::DataRecorder (see "openeaagles/recorder/DataRecorder.h")
 //
 //    3) Recorded data records are defined by their "recorder event id" tokens;
-//       (see openeaagles/simulation/recorderTokens.h)
+//       (see openeaagles/simulation/dataRecorderTokens.h)
 //------------------------------------------------------------------------------
 class DataRecorder : public RecorderComponent
 {
@@ -179,3 +176,4 @@ private:
 } // End Eaagles namespace
 
 #endif
+

@@ -1,3 +1,8 @@
+//------------------------------------------------------------------------------
+// Classes:
+//    DataRecorder      -- Abstract data recorder class
+//    RecorderComponent -- Base class for all data recorder components
+//------------------------------------------------------------------------------
 
 #include "openeaagles/simulation/DataRecorder.h"
 
@@ -52,13 +57,12 @@ void DataRecorder::deleteData()
    sim = 0;
 }
 
-
 //------------------------------------------------------------------------------
 // Background thread processing of the data records
 //------------------------------------------------------------------------------
 void DataRecorder::processRecords()
 {
-   /* nothing to do at this level */
+   // nothing to do at this level
 }
 
 // Our parent Station
@@ -223,7 +227,6 @@ bool RecorderComponent::setDisabledList(const unsigned int* const list, const un
 }
 
 
-
 //------------------------------------------------------------------------------
 // Slot functions
 //------------------------------------------------------------------------------
@@ -317,3 +320,4 @@ std::ostream& RecorderComponent::serialize(std::ostream& sout, const int i, cons
 
 } // End Simulation namespace
 } // End Eaagles namespace
+
