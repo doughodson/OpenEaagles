@@ -6,7 +6,7 @@ LIB = $(OPENEAAGLES_LIB_DIR)/liboeMaps.a
 OBJS =  \
 	$(LIB)(mapsFF.o) 
 
-SUBDIRS = rpfMap vpfMap
+SUBDIRS = rpfMap
 
 all: subdirs ${OBJS}
 
