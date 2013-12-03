@@ -83,6 +83,9 @@ maps
 
    # general cleanup of classes and code (removal of tabs, docs, etc)
 
+   # deleted vector product map code as it was not mature enough to warrant
+     inclusion into framework
+
    CadrgMap class
       1) fixed a bug in findBestZone() method
 
