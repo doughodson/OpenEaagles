@@ -51,6 +51,7 @@ public:
    virtual bool initNetwork(const bool noWaitFlag);
 
 protected:
+   virtual bool bindSocket();
    virtual bool setBacklog(const unsigned int value);
    virtual bool listenForConnections();
 

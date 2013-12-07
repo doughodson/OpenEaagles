@@ -39,7 +39,6 @@ public:
 protected:
    // NetHandler interface
    virtual bool init();         // Initialize this socket handler
-   virtual bool bindSocket();   // Bind socket to address
 
    bool connected;              // true if we are connected
    bool connectionTerminated;   // true if we had a connection, then lost it (or terminated it ourselves)

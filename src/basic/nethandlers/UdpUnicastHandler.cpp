@@ -2,11 +2,17 @@
 // Class: UdpUnicastHandler
 //------------------------------------------------------------------------------
 
+// M$ WinSock has slightly different return types, some different calling, and
+// is missing some of the calls that are standard in Berkely and POSIX socket
+// implementation.  These slight differences will be handled in setting basic
+// typedefs, defines, and constants that will make each convention match for
+// use later in the code.  This will save a lot of pre-processor intervention
+// and make the code that much more enjoyable to read!
 #if defined(WIN32)
     #include <sys/types.h>
     #include <winsock2.h>
     #define bzero(a,b)    ZeroMemory( a, b )
-    typedef int Len;
+    typedef int socklen_t;
 #else
     #include <arpa/inet.h>
     #include <sys/fcntl.h>
@@ -14,8 +20,8 @@
     #ifdef sun
         #include <sys/filio.h> // -- added for Solaris 10
     #endif
-    static const int SOCKET_ERROR = -1;
-    typedef socklen_t Len ;
+    static const int INVALID_SOCKET = -1; // Always -1 and errno is set
+    static const int SOCKET_ERROR   = -1;
 #endif
 
 #include "openeaagles/basic/nethandlers/UdpUnicastHandler.h"
@@ -101,11 +107,7 @@ bool UdpUnicastHandler::init()
     // Create our socket
     // ---
     socketNum = ::socket(AF_INET, SOCK_DGRAM, 0);
-#if defined(WIN32)
     if (socketNum == INVALID_SOCKET) {
-#else
-    if (socketNum < 0) {
-#endif
         ::perror("UdpUnicastHandler::init(): Socket error");
         return false;
     }
@@ -129,21 +131,17 @@ bool UdpUnicastHandler::bindSocket()
        bzero(&addr, sizeof(addr));
        addr.sin_family = AF_INET;
        addr.sin_addr.s_addr = getLocalAddr();
-       if (getLocalPort() != 0) {
-           addr.sin_port = htons (getLocalPort());  
-       }
-       else {
-           addr.sin_port = htons(getPort());
+       if (getLocalPort() != 0) addr.sin_port = htons (getLocalPort());  
+       else addr.sin_port = htons(getPort());
+
+       if (::bind(socketNum, (const struct sockaddr *) &addr, sizeof(addr)) == SOCKET_ERROR) {
+           ::perror("UdpUnicastHandler::bindSocket(): bind error");
+           return false;
        }
 
-      if ( ::bind(socketNum, (const struct sockaddr *) &addr, sizeof(addr)) == SOCKET_ERROR ) {
-        ::perror("UdpUnicastHandler::bindSocket(): bind error");
-        return false;
-      }
+       if (!setSendBuffSize()) return false;
 
-      if (!setSendBuffSize()) return false;
-   
-      if (!setRecvBuffSize()) return false;
+       if (!setRecvBuffSize()) return false;
    }
 
    return ok;
@@ -159,11 +157,7 @@ bool UdpUnicastHandler::sendDataTo(
          const uint16_t port0       // Destination port (this packet only)
       )
 {
-#if defined(WIN32)
     if (socketNum == INVALID_SOCKET) return false;
-#else
-    if (socketNum < 0) return false;
-#endif
 
     // Send the data
     struct sockaddr_in addr;        // Working address structure
@@ -171,25 +165,22 @@ bool UdpUnicastHandler::sendDataTo(
     addr.sin_family = AF_INET;
     addr.sin_addr.s_addr = ip0;
     addr.sin_port = htons(port0); 
-    Len addrlen = sizeof(addr);
+    socklen_t addrlen = sizeof(addr);
     int result = ::sendto(socketNum, packet, size, 0, (const struct sockaddr *) &addr, addrlen);
-#if defined(WIN32)
     if (result == SOCKET_ERROR) {
+#if defined(WIN32)
         int err = WSAGetLastError();
         if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "UdpUnicastHandler::sendDataTo(): sendto error: " << err << " hex=0x" << std::hex << err << std::dec << std::endl;
         }
-        return false;
-    }
 #else
-    if (result == SOCKET_ERROR) {
         ::perror("UdpHandler::sendDataTo(): sendto error msg");
         if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "UdpUnicastHandler::sendDataTo(): sendto error result: " << result << std::endl;
         }
+#endif
         return false;
     }
-#endif
     return true;
 }
 

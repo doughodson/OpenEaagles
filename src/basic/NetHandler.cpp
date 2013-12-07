@@ -1,11 +1,18 @@
 //------------------------------------------------------------------------------
 // Class: NetHandler
 //------------------------------------------------------------------------------
+
+// M$ WinSock has slightly different return types, some different calling, and
+// is missing some of the calls that are standard in Berkely and POSIX socket
+// implementation.  These slight differences will be handled in setting basic
+// typedefs, defines, and constants that will make each convention match for
+// use later in the code.  This will save a lot of pre-processor intervention
+// and make the code that much more enjoyable to read!
 #if defined(WIN32)
     #include <sys/types.h>
     #include <Winsock2.h>
     #define bzero(a,b)  ZeroMemory( a, b )
-    typedef int Len;
+    typedef int socklen_t;
 #else
     #include <netdb.h>
     #include <arpa/inet.h>
@@ -14,8 +21,8 @@
     #ifdef sun
         #include <sys/filio.h> // -- added for Solaris 10
     #endif
-    static const int SOCKET_ERROR = -1;
-    typedef socklen_t Len ;
+    static const int INVALID_SOCKET = -1; // Always -1 and errno is set
+    static const int SOCKET_ERROR   = -1;
 #endif
 
 #include "openeaagles/basic/NetHandler.h"
@@ -77,11 +84,10 @@ NetHandler::NetHandler() :
 {
    STANDARD_CONSTRUCTOR()
 
-   #if defined(WIN32)
-      socketNum = INVALID_SOCKET;
-   #else
-      socketNum = -1;
-   #endif
+   // Since INVALID_SOCKET is set to the invalid socket state above for both
+   // WIN32 and POSIX, there is no need to differentiate between them at this
+   // level or further in the source.
+   socketNum = INVALID_SOCKET;
 }
 
 
@@ -194,11 +200,7 @@ bool NetHandler::init()
 // -------------------------------------------------------------
 bool NetHandler::bindSocket()
 {
-#if defined(WIN32)
     if (socketNum == INVALID_SOCKET) return false;
-#else
-    if (socketNum < 0) return false;
-#endif
 
     // ---
     // Make sure we have a local host IP address
@@ -217,20 +219,19 @@ bool NetHandler::bindSocket()
     {
 #if defined(WIN32)
         BOOL optval = getSharedFlag();
-        Len optlen = sizeof(optval);
-        if( ::setsockopt(socketNum, SOL_SOCKET, SO_REUSEADDR, (const char*) &optval, optlen) == SOCKET_ERROR)
+        socklen_t optlen = sizeof(optval);
+        if( ::setsockopt(socketNum, SOL_SOCKET, SO_REUSEADDR, (const char*) &optval, optlen) == SOCKET_ERROR) {
 #else
         int optval = getSharedFlag();
-        Len optlen = sizeof(optval);
-        if( ::setsockopt(socketNum, SOL_SOCKET, SO_REUSEADDR, &optval, optlen) == SOCKET_ERROR)
+        socklen_t optlen = sizeof(optval);
+        if( ::setsockopt(socketNum, SOL_SOCKET, SO_REUSEADDR, &optval, optlen) == SOCKET_ERROR) {
 #endif
-        {
             ::perror("NetHandler::bindSocket(): error setsockopt(SO_REUSEADDR)\n");
             return false;
         }
     }
 
-   return true;
+    return true;
 }
 
 //------------------------------------------------------------------------------
@@ -238,20 +239,15 @@ bool NetHandler::bindSocket()
 //------------------------------------------------------------------------------
 bool NetHandler::setSendBuffSize()
 {
-#if defined(WIN32)
    if (socketNum == INVALID_SOCKET) return false;
-#else
-   if (socketNum < 0) return false;
-#endif
 
    unsigned int optval = sendBuffSizeKb * 1024;
-   Len optlen = sizeof(optval);
+   socklen_t optlen = sizeof(optval);
 #if defined(WIN32)
-   if( ::setsockopt(socketNum, SOL_SOCKET, SO_SNDBUF, (const char*) &optval, optlen) == SOCKET_ERROR )
+   if( ::setsockopt(socketNum, SOL_SOCKET, SO_SNDBUF, (const char*) &optval, optlen) == SOCKET_ERROR ) {
 #else
-   if( ::setsockopt(socketNum, SOL_SOCKET, SO_SNDBUF, (void*) &optval, optlen) == SOCKET_ERROR )
+   if( ::setsockopt(socketNum, SOL_SOCKET, SO_SNDBUF, (void*) &optval, optlen) == SOCKET_ERROR ) {
 #endif
-   {
       ::perror("NetHandler::setSendBuffSize(): error setting the send buffer size\n");
       return false;
    }
@@ -263,20 +259,15 @@ bool NetHandler::setSendBuffSize()
 //------------------------------------------------------------------------------
 bool NetHandler::setRecvBuffSize()
 {
-#if defined(WIN32)
    if (socketNum == INVALID_SOCKET) return false;
-#else
-   if (socketNum < 0) return false;
-#endif
 
    unsigned int optval = recvBuffSizeKb * 1024;
-   Len optlen = sizeof (optval);
+   socklen_t optlen = sizeof (optval);
 #if defined(WIN32)
-   if( ::setsockopt(socketNum, SOL_SOCKET, SO_RCVBUF, (const char*) &optval, optlen) == SOCKET_ERROR )
+   if( ::setsockopt(socketNum, SOL_SOCKET, SO_RCVBUF, (const char*) &optval, optlen) == SOCKET_ERROR ) {
 #else
-   if( ::setsockopt(socketNum, SOL_SOCKET, SO_RCVBUF, (void*) &optval, optlen) == SOCKET_ERROR )
+   if( ::setsockopt(socketNum, SOL_SOCKET, SO_RCVBUF, (void*) &optval, optlen) == SOCKET_ERROR ) {
 #endif
-   {
       ::perror("NetHandler::setRecvBuffSize(): error setting the receive buffer size\n");
       return false;
    }
@@ -290,8 +281,6 @@ bool NetHandler::setRecvBuffSize()
 //------------------------------------------------------------------------------
 void NetHandler::toNet(const void* const hostData, void* const netData, const int nl, const int ns)
 {
-   int i;
-
    // Compute pointers to the int word (4 byte) and short
    // short word (2 byte) areas of the source (this).
    const u_long* psl = (const u_long*) hostData;
@@ -302,12 +291,12 @@ void NetHandler::toNet(const void* const hostData, void* const netData, const in
    u_long* pdl = (u_long*) netData;
    u_short* pds = (u_short*) (pdl + nl);
 
-   for (i = 0; i < nl; i++) {
+   for (int i = 0; i < nl; i++) {
       const u_long kk = *psl++;
       u_long ll = htonl(kk);
       *pdl++ = ll;
    }
-   for (i = 0; i < ns; i++) {
+   for (int i = 0; i < ns; i++) {
       //*pds++ = htons(*pss++);
       const u_short kk = *pss++;
       u_short ss = htons(kk);
@@ -322,8 +311,6 @@ void NetHandler::toNet(const void* const hostData, void* const netData, const in
 //------------------------------------------------------------------------------
 void NetHandler::toHost(const void* const netData, void* const hostData, const int nl, const int ns)
 {
-   int i;
-
    // Compute pointers to the int word (4 byte) and short
    // short word (2 byte) areas of the source (this).
    const u_long* psl = (const u_long*) netData;
@@ -334,10 +321,10 @@ void NetHandler::toHost(const void* const netData, void* const hostData, const i
    u_long* pdl = (u_long*) hostData;
    u_short* pds = (u_short*) (pdl + nl);
 
-   for (i = 0; i < nl; i++) {
+   for (int i = 0; i < nl; i++) {
       *pdl++ = ntohl(*psl++);
    }
-   for (i = 0; i < ns; i++) {
+   for (int i = 0; i < ns; i++) {
       *pds++ = ntohs(*pss++);
    }
 }
@@ -428,11 +415,7 @@ bool NetHandler::closeConnection()
 // -------------------------------------------------------------
 bool NetHandler::sendData(const char* const packet, const int size)
 {
-#if defined(WIN32)
     if (socketNum == INVALID_SOCKET) return false;
-#else
-    if (socketNum < 0) return false;
-#endif
 
     // Send the data
     struct sockaddr_in addr;        // Working address structure
@@ -440,25 +423,22 @@ bool NetHandler::sendData(const char* const packet, const int size)
     addr.sin_family = AF_INET;
     addr.sin_addr.s_addr = netAddr;
     addr.sin_port = htons(port);
-    Len addrlen = sizeof(addr);
+    socklen_t addrlen = sizeof(addr);
     int result = ::sendto(socketNum, packet, size, 0, (const struct sockaddr *) &addr, addrlen);
-#if defined(WIN32)
     if (result == SOCKET_ERROR) {
+#if defined(WIN32)
         int err = ::WSAGetLastError();
         if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "NetHandler::sendData(): sendto error: " << err << " hex=0x" << std::hex << err << std::dec << std::endl;
         }
-        return false;
-    }
 #else
-    if (result == SOCKET_ERROR) {
         ::perror("NetHandler::sendData(): sendto error msg");
         if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "NetHandler::sendData(): sendto error result: " << result << std::endl;
         }
+#endif
         return false;
     }
-#endif
     return true;
 }
 
@@ -471,11 +451,7 @@ unsigned int NetHandler::recvData(char* const packet, const int maxSize)
 {
    unsigned int n = 0;
 
-#if defined(WIN32)
    if (socketNum == INVALID_SOCKET) return 0;
-#else
-   if (socketNum < 0) return 0;
-#endif
 
    fromAddr1 = INADDR_NONE;
    fromPort1 = 0;
@@ -486,7 +462,7 @@ unsigned int NetHandler::recvData(char* const packet, const int maxSize)
 
       // Try to receive the data
       struct sockaddr_in raddr;       // IP address
-      Len addrlen = sizeof(raddr);
+      socklen_t addrlen = sizeof(raddr);
       int result = ::recvfrom(socketNum, packet, maxSize, 0, (struct sockaddr *) &raddr, &addrlen);
 
       if (result > 0 && ignoreSourcePort != 0) {

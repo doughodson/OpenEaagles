@@ -50,6 +50,7 @@ protected:
 
     // NetHandler interface
     virtual bool init();         // Initialize this socket handler
+    virtual bool bindSocket();   // Bind socket to address
 
 private:
     char* ipAddr;                // IP Address
