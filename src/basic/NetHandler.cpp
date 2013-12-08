@@ -203,17 +203,6 @@ bool NetHandler::bindSocket()
     if (socketNum == INVALID_SOCKET) return false;
 
     // ---
-    // Make sure we have a local host IP address
-    // ---
-    if (localAddr == INADDR_ANY) {
-        char localhost[256];
-        int result = ::gethostname(localhost, sizeof(localhost));
-        if (result == 0) {
-            setLocalAddr(localhost);
-        }
-    }
-
-    // ---
     // Set the reuse socket attribute
     // ---
     {

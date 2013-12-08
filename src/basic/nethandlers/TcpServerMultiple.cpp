@@ -100,7 +100,8 @@ bool TcpServerMultiple::bindSocket()
       struct sockaddr_in addr;        // Working address structure
       bzero(&addr, sizeof(addr));
       addr.sin_family = AF_INET;
-      addr.sin_addr.s_addr = getLocalAddr();
+      addr.sin_addr.s_addr = INADDR_ANY;
+      if (getLocalAddr() != 0) addr.sin_addr.s_addr = getLocalAddr ();
       if (getLocalPort() != 0) addr.sin_port = htons (getLocalPort());  
       else addr.sin_port = htons(getPort());
 
