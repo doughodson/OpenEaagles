@@ -30,6 +30,10 @@ basic
       1) Modified to insure a single word (i.e., no spaces); any spaces are
       replaced with underscores.
 
+   Nav class
+      1) Added three digits to the value of Nav::WGS84_B, changing it from 10
+         significant digits to 13. 
+
    String class
       1) Changed the manipulator (set) functions to virtual
 
@@ -105,6 +109,10 @@ simulation
    # the same physical file called "IrSensor.h/cpp"
    #
 
+   Antenna clas
+      1) Added the 'beamWidth' slot and related functions; moved here from
+         the RfSensor class.
+
    AutoPilot class
       1) added several new slots that define default pilot flight actions or 
          characteristics, such as the maximum rate of turn, bank angle, max
@@ -127,6 +135,8 @@ simulation
    RfSensor class
       1) Updated serialize method
       2) setSlotModeSingle() -- unref()'d the new Pair (fixed a "memory drip")
+      3) Deprecated the 'beamWidth' slot and related fuctions; 'beamWidth' is
+         being moved to the Antenna class.
 
    RfSystem class
       1) Updated serialize method

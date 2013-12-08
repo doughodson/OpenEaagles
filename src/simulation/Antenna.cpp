@@ -30,6 +30,7 @@ BEGIN_SLOTTABLE(Antenna)
     "gainPattern",          //  4: Gain pattern (Basic::Func1 or Basic::Func2) (db) 
     "gainPatternDeg",       //  5: Gain pattern in degrees flag (true: degrees, false(default): radians)
     "recycle",              //  6: Recycle emissions flag (default: true)
+    "beamWidth",            //  7: Beam Width              (Angle) or (Number: Radian)
 END_SLOTTABLE(Antenna)
 
 // Map slot table to handles 
@@ -40,6 +41,8 @@ BEGIN_SLOT_MAP(Antenna)
     ON_SLOT(4,  setSlotGainPattern,       Basic::Function)
     ON_SLOT(5,  setSlotGainPatternDeg,    Basic::Number)
     ON_SLOT(6,  setSlotRecycleFlg,        Basic::Number)
+    ON_SLOT(7,  setSlotBeamWidth,         Basic::Angle)      // Check for Basic::Angle before Basic::Number
+    ON_SLOT(7,  setSlotBeamWidth,         Basic::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -95,6 +98,7 @@ void Antenna::initData()
    threshold = 0.0;
    gainPatternDeg = false;  // default: radians
    recycle = true; // recycle emissions
+   beamWidth = (Basic::Angle::D2RCC * 3.5);
 }
 
 //------------------------------------------------------------------------------
@@ -121,6 +125,7 @@ void Antenna::copyData(const Antenna& org, const bool cc)
     }
 
     recycle = org.recycle;
+    beamWidth = org.beamWidth;
 }
 
 void Antenna::deleteData()
@@ -322,6 +327,38 @@ bool Antenna::setSlotRecycleFlg(const Basic::Number* const msg)
 }
 
 //------------------------------------------------------------------------------
+// Sets beam width as an Basic::Angle
+//------------------------------------------------------------------------------
+bool Antenna::setSlotBeamWidth(const Basic::Angle* const msg)
+{
+   bool ok = false;
+   if (msg != 0) {
+      double x = Basic::Radians::convertStatic( *msg );
+      ok = setBeamWidth( x );
+      if (!ok) {
+         std::cerr << "Antenna::setSlotBeamWidth: Error setting beam width!" << std::endl;
+      }
+   }
+   return ok;
+}
+
+//------------------------------------------------------------------------------
+// Sets beam width in radians
+//------------------------------------------------------------------------------
+bool Antenna::setSlotBeamWidth(const Basic::Number* const msg)
+{
+   bool ok = false;
+   if (msg != 0) {
+      ok = setBeamWidth( msg->getDouble() );
+      if (!ok) {
+         std::cerr << "Antenna::setSlotBeamWidth: Error setting beam width!" << std::endl;
+      }
+
+   }
+   return ok;
+}
+
+//------------------------------------------------------------------------------
 // setThreshold() - sets our antenna threshold
 //------------------------------------------------------------------------------
 bool Antenna::setThreshold(const double th)
@@ -337,7 +374,7 @@ bool Antenna::setThreshold(const double th)
 //------------------------------------------------------------------------------
 // setGain: sets the gain
 //------------------------------------------------------------------------------
-bool Antenna::setGain(double const value)
+bool Antenna::setGain(const double value)
 {
     bool ok = false;
     if (value >= 0.0) {
@@ -354,6 +391,19 @@ bool Antenna::setEmissionRecycleFlag(const bool enable)
 {
    recycle = enable;
    return true;
+}
+
+//------------------------------------------------------------------------------
+// Sets the beam width (radians; must be greater than 0)
+//------------------------------------------------------------------------------
+bool Antenna::setBeamWidth(const double radians)
+{
+   bool ok = false;
+   if (radians > 0.0) {
+      beamWidth = radians;
+      ok = true;
+   }
+   return ok;
 }
 
 //------------------------------------------------------------------------------

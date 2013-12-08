@@ -35,7 +35,7 @@ BEGIN_SLOTTABLE(RfSensor)
     "initRangeIdx",     // 4: initial range index [ 1 ... nRanges ]
     "PRF",              // 5: Radar Pulse Repetition  (Frequency) or (Number: hertz)
     "pulseWidth",       // 6: Pulse Width             (Time) or (Number: Seconds)
-    "beamWidth",        // 7: Beam Width              (Angle) or (Number: Radian)
+    "beamWidth",        // 7: (Deprecated: moved to Antenna) Beam Width (Angle) or (Number: Radian)
     "typeId",           // 8: R/F Sensor type ID      (String)
     "syncXmitWithScan", // 9: Flag: If true, transmitter on is sync'd with the antenna scan (default: false)
 END_SLOTTABLE(RfSensor)
