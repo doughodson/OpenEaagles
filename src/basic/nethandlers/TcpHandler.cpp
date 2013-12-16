@@ -1,12 +1,20 @@
 //------------------------------------------------------------------------------
 // Class: TcpHandler
 //------------------------------------------------------------------------------
-
+//
+// M$ WinSock has slightly different return types, some different calling, and
+// is missing some of the calls that are standard in Berkely and POSIX socket
+// implementation.  These slight differences will be handled in setting basic
+// typedefs, defines, and constants that will make each convention match for
+// use later in the code.  This will save a lot of pre-processor intervention
+// and make the code that much more enjoyable to read!
+//
 #if defined(WIN32)
     #include <sys/types.h>
     #include <Winsock2.h>
     #include <WS2tcpip.h>
     #define  bzero(a,b)   ZeroMemory(a,b)
+    typedef int socklen_t;
 #else
     #include <arpa/inet.h>
     #include <sys/fcntl.h>
@@ -14,7 +22,8 @@
     #ifdef sun
         #include <sys/filio.h> // -- added for Solaris 10
     #endif
-    static const int SOCKET_ERROR = -1;
+    static const int INVALID_SOCKET = -1; // Always -1 and errno is set
+    static const int SOCKET_ERROR   = -1;
 #endif
 
 #include "openeaagles/basic/nethandlers/TcpHandler.h"
@@ -45,11 +54,10 @@ TcpHandler::TcpHandler()
    connectionTerminated = false;
    noWait = false;
 
-   #if defined(WIN32)
-      tcpSocket = INVALID_SOCKET;
-   #else
-      tcpSocket = -1;
-   #endif
+   // INVALID_SOCKET is defined for both WIN32 and POSIX based systems in the
+   // definitions above.  This will allow the code to be simpler unless the
+   // overall functions need to have more preprocessing.
+   tcpSocket = INVALID_SOCKET;
 }
 
 TcpHandler::TcpHandler(const LcSocket sn)
@@ -93,53 +101,12 @@ bool TcpHandler::init()
     // Create our stream socket
     // ---
     socketNum = ::socket(AF_INET, SOCK_STREAM, 0);
-#if defined(WIN32)
     if (socketNum == INVALID_SOCKET) {
-#else
-    if (socketNum < 0) {
-#endif
         ::perror("TcpHandler::init(): socket error");
         success = false;
     }
 
     return success;
-}
-
-
-// -------------------------------------------------------------
-// bindSocket() -- bind the socket to an address, and configure
-// the send and receive buffers. 
-// -------------------------------------------------------------
-bool TcpHandler::bindSocket()
-{
-    // ---
-    // Our base class will bind the socket
-    // ---
-    bool ok = BaseClass::bindSocket();
-
-    if (ok) {
-       struct sockaddr_in addr;        // Working address structure
-       bzero(&addr, sizeof(addr));
-       addr.sin_family = AF_INET;
-       addr.sin_addr.s_addr = getLocalAddr();
-       if (getLocalPort() != 0) {
-           addr.sin_port = htons (getLocalPort());  
-       }
-       else {
-           addr.sin_port = htons(getPort());
-       }
-
-      if ( ::bind(socketNum, (const struct sockaddr *) &addr, sizeof(addr)) == SOCKET_ERROR ) {
-        ::perror("TcpHandler::bindSocket(): bind error");
-        return false;
-      }
-
-      if (!setSendBuffSize()) return false;
-   
-      if (!setRecvBuffSize()) return false;
-   }
-
-   return ok;
 }
 
 
@@ -159,11 +126,10 @@ bool TcpHandler::closeConnection()
     bool success = true;
 
 #if defined(WIN32)
-    if( ::closesocket(tcpSocket) == SOCKET_ERROR )
+    if (::closesocket(tcpSocket) == SOCKET_ERROR) {
 #else
-    if( ::shutdown(tcpSocket, SHUT_RDWR) < 0)
+    if (::shutdown(tcpSocket, SHUT_RDWR) == SOCKET_ERROR) {
 #endif
-    {
         ::perror("TcpHandler::closeConnection(): error! \n");
         success = false;
     }
@@ -179,37 +145,27 @@ bool TcpHandler::closeConnection()
 // -------------------------------------------------------------
 bool TcpHandler::sendData(const char* const packet, const int size)
 {
-   if (!isConnected() || hasBeenTerminated()) return false;
+    if (!isConnected() || hasBeenTerminated()) return false;
 
-#if defined(WIN32)
     if (tcpSocket == INVALID_SOCKET) return false;
-#else
-    if (tcpSocket < 0) return false;
-#endif
 
     int result = ::send(tcpSocket, packet, size, 0);
-
-#if defined(WIN32)
     if (result == SOCKET_ERROR) {
         connected = false;
         connectionTerminated = true;
+#if defined(WIN32)
         int err = WSAGetLastError();
         if (isMessageEnabled(MSG_ERROR)) {
            std::cerr << "TcpHandler::sendData(): sendto error: " << err << " hex=0x" << std::hex << err << std::dec << std::endl;
         }
-        return false;
-    }
 #else
-    if (result < 0) {
-        connected = false;
-        connectionTerminated = true;
         ::perror("TcpHandler::sendData(): sendto error msg");
         if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "TcpHandler::sendData(): sendto error result: " << result << std::endl;
         }
+#endif
         return false;
     }
-#endif
     return true;
 }
 
@@ -218,20 +174,16 @@ bool TcpHandler::sendData(const char* const packet, const int size)
 // -------------------------------------------------------------
 unsigned int TcpHandler::recvData(char* const packet, const int maxSize)
 {
-   if (!isConnected() || hasBeenTerminated()) return 0;
+    if (!isConnected() || hasBeenTerminated()) return 0;
 
-#if defined(WIN32)
     if (tcpSocket == INVALID_SOCKET) return 0;
-#else
-    if (tcpSocket < 0) return 0;
-#endif
 
-   // Try to receive the data
-   unsigned int n = 0;
-   int result = ::recvfrom(tcpSocket, packet, maxSize, 0, 0, 0);
-   if (result > 0) n = (unsigned int) result;
+    // Try to receive the data
+    unsigned int n = 0;
+    int result = ::recvfrom(tcpSocket, packet, maxSize, 0, 0, 0);
+    if (result > 0) n = (unsigned int) result;
 
-   return n;
+    return n;
 }
 
 } // End Basic namespace

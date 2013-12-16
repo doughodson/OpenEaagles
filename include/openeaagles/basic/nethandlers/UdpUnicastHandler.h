@@ -4,7 +4,7 @@
 #ifndef __Eaagles_Basic_UdpUnicastHandler_H__
 #define __Eaagles_Basic_UdpUnicastHandler_H__
 
-#include "openeaagles/basic/NetHandler.h"
+#include "openeaagles/basic/nethandlers/PosixNetHandler.h"
 
 namespace Eaagles {
 namespace Basic {
@@ -40,9 +40,9 @@ class String;
 //        )
 //
 //------------------------------------------------------------------------------
-class UdpUnicastHandler : public NetHandler
+class UdpUnicastHandler : public PosixNetHandler
 {
-   DECLARE_SUBCLASS(UdpUnicastHandler, NetHandler)
+   DECLARE_SUBCLASS(UdpUnicastHandler, PosixNetHandler)
 
 public:
    UdpUnicastHandler();
@@ -70,6 +70,8 @@ public:
 protected:
    // NetHandler interface
    virtual bool init();            // Initialize this socket handler
+
+   // PosixNetHandler interface
    virtual bool bindSocket();      // Bind socket to address
 
 private:

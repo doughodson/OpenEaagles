@@ -4,6 +4,7 @@ include ../../makedefs
 LIB = $(OPENEAAGLES_LIB_DIR)/liboeBasic.a
 
 OBJS =  \
+	$(LIB)(PosixNetHandler.o) \
 	$(LIB)(TcpClient.o) \
 	$(LIB)(TcpHandler.o) \
 	$(LIB)(TcpServerMultiple.o) \

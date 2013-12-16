@@ -1,12 +1,20 @@
 //------------------------------------------------------------------------------
 // Class: TcpClient
 //------------------------------------------------------------------------------
-
+//
+// M$ WinSock has slightly different return types, some different calling, and
+// is missing some of the calls that are standard in Berkely and POSIX socket
+// implementation.  These slight differences will be handled in setting basic
+// typedefs, defines, and constants that will make each convention match for
+// use later in the code.  This will save a lot of pre-processor intervention
+// and make the code that much more enjoyable to read!
+//
 #if defined(WIN32)
     #include <sys/types.h>
     #include <Winsock2.h>
     #include <WS2tcpip.h>
     #define  bzero(a,b)   ZeroMemory(a,b)
+    typedef int socklen_t;
 #else
     #include <arpa/inet.h>  // htonl, htons, ntohl, ntohs
     #include <sys/fcntl.h>
@@ -14,7 +22,8 @@
     #ifdef sun
         #include <sys/filio.h> // -- added for Solaris 10
     #endif
-    static const int SOCKET_ERROR = -1;
+    static const int INVALID_SOCKET = -1; // Always -1 and errno is set
+    static const int SOCKET_ERROR   = -1;
 #endif
 
 #include "openeaagles/basic/nethandlers/TcpClient.h"
@@ -102,11 +111,32 @@ bool TcpClient::init()
 
    // Clients use the same socket number
    tcpSocket = socketNum;
-      
+
    // Find our network address
    success = setNetAddr(ipAddr);
 
    return success;
+}
+
+
+// -------------------------------------------------------------
+// bindSocket() -- bind the socket to an address, and configure
+// the send and receive buffers. 
+// -------------------------------------------------------------
+bool TcpClient::bindSocket()
+{
+   // ---
+   // Our base class will bind the socket
+   // ---
+   bool ok = BaseClass::bindSocket();
+
+   if (ok) {
+      if (!setSendBuffSize()) return false;
+   
+      if (!setRecvBuffSize()) return false;
+   }
+
+   return ok;
 }
 
 //------------------------------------------------------------------------------
@@ -119,11 +149,7 @@ bool TcpClient::connectToServer()
 
    if (ipAddr == 0) return false;
 
-#if defined(WIN32)
    if (tcpSocket == INVALID_SOCKET) return false;
-#else
-   if (tcpSocket < 0) return false;
-#endif
 
    struct sockaddr_in addr;        // Working address structure
    bzero(&addr, sizeof(addr));
@@ -135,12 +161,7 @@ bool TcpClient::connectToServer()
       std::cout << "Connecting to TCP server at " << ipAddr << ":" << getPort() << " ... " << std::flush;
    }
 
-#if defined(WIN32)
-   if( ::connect(tcpSocket, (const struct sockaddr *) &addr, sizeof(addr)) == SOCKET_ERROR)
-#else
-   if( ::connect(tcpSocket, (const struct sockaddr *) &addr, sizeof(addr)) < 0)
-#endif
-   {
+   if (::connect(tcpSocket, (const struct sockaddr *) &addr, sizeof(addr)) == SOCKET_ERROR) {
       if (isMessageEnabled(MSG_INFO)) {
           std::cout << "Failed!" << std::endl;
       }
