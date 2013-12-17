@@ -54,11 +54,11 @@ public:
    // the actual number of bytes received.
    virtual unsigned int recvData(char* const packet, const int maxSize) =0;
 
-   // Set our socket (or the optional 's' socket) for blocked (wait) I/O
-   virtual bool setBlocked(const LcSocket s = NET_INVALID_SOCKET) =0;
+   // Set our socket for blocked (wait) I/O
+   virtual bool setBlocked() =0;
 
-   // Set our socket (or the optional 's' socket) for unblocked (no wait) I/O
-   virtual bool setNoWait(const LcSocket s = NET_INVALID_SOCKET) =0;
+   // Set our socket for unblocked (no wait) I/O
+   virtual bool setNoWait() =0;
 
    // To/From NET byte swap routines
    static void toNet(const void* const hostData, void* const netData, const int nl, const int ns);

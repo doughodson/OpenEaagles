@@ -53,11 +53,6 @@ TcpHandler::TcpHandler()
    connected = false;
    connectionTerminated = false;
    noWait = false;
-
-   // INVALID_SOCKET is defined for both WIN32 and POSIX based systems in the
-   // definitions above.  This will allow the code to be simpler unless the
-   // overall functions need to have more preprocessing.
-   tcpSocket = INVALID_SOCKET;
 }
 
 TcpHandler::TcpHandler(const LcSocket sn)
@@ -68,7 +63,6 @@ TcpHandler::TcpHandler(const LcSocket sn)
    connectionTerminated = false;
    noWait = false;
    socketNum = sn;
-   tcpSocket = sn;
    setSendBuffSize();
    setRecvBuffSize();
 }
@@ -82,7 +76,6 @@ void TcpHandler::copyData(const TcpHandler& org, const bool)
 
    connected = org.connected;
    connectionTerminated = org.connectionTerminated;
-   tcpSocket = org.tcpSocket;
    noWait = org.noWait;
 }
 
@@ -126,9 +119,9 @@ bool TcpHandler::closeConnection()
     bool success = true;
 
 #if defined(WIN32)
-    if (::closesocket(tcpSocket) == SOCKET_ERROR) {
+    if (::closesocket(socketNum) == SOCKET_ERROR) {
 #else
-    if (::shutdown(tcpSocket, SHUT_RDWR) == SOCKET_ERROR) {
+    if (::shutdown(socketNum, SHUT_RDWR) == SOCKET_ERROR) {
 #endif
         ::perror("TcpHandler::closeConnection(): error! \n");
         success = false;
@@ -147,9 +140,9 @@ bool TcpHandler::sendData(const char* const packet, const int size)
 {
     if (!isConnected() || hasBeenTerminated()) return false;
 
-    if (tcpSocket == INVALID_SOCKET) return false;
+    if (socketNum == INVALID_SOCKET) return false;
 
-    int result = ::send(tcpSocket, packet, size, 0);
+    int result = ::send(socketNum, packet, size, 0);
     if (result == SOCKET_ERROR) {
         connected = false;
         connectionTerminated = true;
@@ -176,11 +169,11 @@ unsigned int TcpHandler::recvData(char* const packet, const int maxSize)
 {
     if (!isConnected() || hasBeenTerminated()) return 0;
 
-    if (tcpSocket == INVALID_SOCKET) return 0;
+    if (socketNum == INVALID_SOCKET) return 0;
 
     // Try to receive the data
     unsigned int n = 0;
-    int result = ::recvfrom(tcpSocket, packet, maxSize, 0, 0, 0);
+    int result = ::recvfrom(socketNum, packet, maxSize, 0, 0, 0);
     if (result > 0) n = (unsigned int) result;
 
     return n;

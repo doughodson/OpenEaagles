@@ -194,11 +194,11 @@ bool PosixNetHandler::bindSocket()
 #if defined(WIN32)
         BOOL optval = getSharedFlag();
         socklen_t optlen = sizeof(optval);
-        if( ::setsockopt(socketNum, SOL_SOCKET, SO_REUSEADDR, (const char*) &optval, optlen) == SOCKET_ERROR) {
+        if (::setsockopt(socketNum, SOL_SOCKET, SO_REUSEADDR, (const char*) &optval, optlen) == SOCKET_ERROR) {
 #else
         int optval = getSharedFlag();
         socklen_t optlen = sizeof(optval);
-        if( ::setsockopt(socketNum, SOL_SOCKET, SO_REUSEADDR, &optval, optlen) == SOCKET_ERROR) {
+        if (::setsockopt(socketNum, SOL_SOCKET, SO_REUSEADDR, &optval, optlen) == SOCKET_ERROR) {
 #endif
             ::perror("PosixNetHandler::bindSocket(): error setsockopt(SO_REUSEADDR)\n");
             return false;
@@ -218,9 +218,9 @@ bool PosixNetHandler::setSendBuffSize()
    unsigned int optval = sendBuffSizeKb * 1024;
    socklen_t optlen = sizeof(optval);
 #if defined(WIN32)
-   if( ::setsockopt(socketNum, SOL_SOCKET, SO_SNDBUF, (const char*) &optval, optlen) == SOCKET_ERROR ) {
+   if (::setsockopt(socketNum, SOL_SOCKET, SO_SNDBUF, (const char*) &optval, optlen) == SOCKET_ERROR) {
 #else
-   if( ::setsockopt(socketNum, SOL_SOCKET, SO_SNDBUF, (void*) &optval, optlen) == SOCKET_ERROR ) {
+   if (::setsockopt(socketNum, SOL_SOCKET, SO_SNDBUF, (void*) &optval, optlen) == SOCKET_ERROR) {
 #endif
       ::perror("PosixNetHandler::setSendBuffSize(): error setting the send buffer size\n");
       return false;
@@ -238,9 +238,9 @@ bool PosixNetHandler::setRecvBuffSize()
    unsigned int optval = recvBuffSizeKb * 1024;
    socklen_t optlen = sizeof (optval);
 #if defined(WIN32)
-   if( ::setsockopt(socketNum, SOL_SOCKET, SO_RCVBUF, (const char*) &optval, optlen) == SOCKET_ERROR ) {
+   if (::setsockopt(socketNum, SOL_SOCKET, SO_RCVBUF, (const char*) &optval, optlen) == SOCKET_ERROR) {
 #else
-   if( ::setsockopt(socketNum, SOL_SOCKET, SO_RCVBUF, (void*) &optval, optlen) == SOCKET_ERROR ) {
+   if (::setsockopt(socketNum, SOL_SOCKET, SO_RCVBUF, (void*) &optval, optlen) == SOCKET_ERROR) {
 #endif
       ::perror("PosixNetHandler::setRecvBuffSize(): error setting the receive buffer size\n");
       return false;
@@ -251,22 +251,20 @@ bool PosixNetHandler::setRecvBuffSize()
 // -------------------------------------------------------------
 // setBlocked() -- Sets blocked I/O mode
 // -------------------------------------------------------------
-bool PosixNetHandler::setBlocked(const LcSocket s)
+bool PosixNetHandler::setBlocked()
 {
-    LcSocket sock = s;
-    if (sock == NET_INVALID_SOCKET) sock = socketNum;
-    if (sock == NET_INVALID_SOCKET) return false;
+    if (socketNum == NET_INVALID_SOCKET) return false;
 
 // Set the socket 'sock' to Blocking. Wait I/O.
 #if defined(WIN32)
     unsigned long zz = false;
-    if ( ::ioctlsocket(sock, FIONBIO, &zz ) == SOCKET_ERROR ) {
+    if (::ioctlsocket(socketNum, FIONBIO, &zz) == SOCKET_ERROR) {
         ::perror("PosixNetHandler::setBlocked()");
         return false;
     }
 #else
     const int zz = 0;
-    if ( ::ioctl(sock, FIONBIO, &zz ) == SOCKET_ERROR ) {
+    if (::ioctl(socketNum, FIONBIO, &zz) == SOCKET_ERROR) {
         ::perror("PosixNetHandler::setBlocked()");
         return false;
     }
@@ -278,22 +276,20 @@ bool PosixNetHandler::setBlocked(const LcSocket s)
 // -------------------------------------------------------------
 // setNoWait() -- Sets no wait (non-blocking) I/O mode
 // -------------------------------------------------------------
-bool PosixNetHandler::setNoWait(const LcSocket s)
+bool PosixNetHandler::setNoWait()
 {
-    LcSocket sock = s;
-    if (sock == NET_INVALID_SOCKET) sock = socketNum;
-    if (sock == NET_INVALID_SOCKET) return false;
+    if (socketNum == NET_INVALID_SOCKET) return false;
 
 // Set the socket 'sock' to Non-Blocking. Nowait I/O.
 #if defined(WIN32)
     unsigned long zz = true;
-    if ( ::ioctlsocket(sock, FIONBIO, &zz ) == SOCKET_ERROR ) {
+    if (::ioctlsocket(socketNum, FIONBIO, &zz ) == SOCKET_ERROR) {
         ::perror("PosixNetHandler::setNoWait()");
         return false;
     }
 #else
     const int zz = 1;
-    if ( ::ioctl(sock, FIONBIO, &zz ) == SOCKET_ERROR ) {
+    if (::ioctl(socketNum, FIONBIO, &zz ) == SOCKET_ERROR) {
         ::perror("PosixNetHandler::setNoWait()");
         return false;
     }
@@ -630,7 +626,7 @@ Object* PosixNetHandler::getSlotByIndex(const int si)
 std::ostream& PosixNetHandler::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;
-    if ( !slotsOnly ) {
+    if (!slotsOnly) {
         indent(sout,i);
         sout << "( " << getFormName() << std::endl;
         j = 4;
@@ -657,7 +653,7 @@ std::ostream& PosixNetHandler::serialize(std::ostream& sout, const int i, const 
 
     BaseClass::serialize(sout,i+j,true);
 
-    if ( !slotsOnly ) {
+    if (!slotsOnly) {
         indent(sout,i);
         sout << ")" << std::endl;
     }

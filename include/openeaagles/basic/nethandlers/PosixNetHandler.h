@@ -92,11 +92,11 @@ public:
    // the actual number of bytes received.
    virtual unsigned int recvData(char* const packet, const int maxSize);
 
-   // Set our socket (or the optional 's' socket) for blocked (wait) I/O
-   virtual bool setBlocked(const LcSocket s = NET_INVALID_SOCKET);
+   // Set our socket for blocked (wait) I/O
+   virtual bool setBlocked();
 
-   // Set our socket (or the optional 's' socket) for unblocked (no wait) I/O
-   virtual bool setNoWait(const LcSocket s = NET_INVALID_SOCKET);
+   // Set our socket for unblocked (no wait) I/O
+   virtual bool setNoWait();
 
    // Last recvData() origin IP and port
    uint32_t getLastFromAddr() const;     // IP address of last valid recvData()
