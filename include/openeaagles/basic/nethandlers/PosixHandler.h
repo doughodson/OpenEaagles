@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
-// Class: PosixNetHandler
+// Class: PosixHandler
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_PosixNetHandler_H__
-#define __Eaagles_Basic_PosixNetHandler_H__
+#ifndef __Eaagles_Basic_PosixHandler_H__
+#define __Eaagles_Basic_PosixHandler_H__
 
 #include "openeaagles/basic/NetHandler.h"
 
@@ -13,7 +13,7 @@ class Number;
 class String;
 
 //------------------------------------------------------------------------------
-// Class: PosixNetHandler
+// Class: PosixHandler
 //
 // Description: General (connectionless) network handler: Can be used for UDP/IP,
 //              TCP/IP, Multicast and Broadcast.  Each handler manages a socket
@@ -58,12 +58,12 @@ class String;
 //      localPort#      <-------     <any-port>    ! Receiving anytime that 'localPort' is defined.
 //
 //------------------------------------------------------------------------------
-class PosixNetHandler : public NetHandler
+class PosixHandler : public NetHandler
 {
-   DECLARE_SUBCLASS(PosixNetHandler, NetHandler)
+   DECLARE_SUBCLASS(PosixHandler, NetHandler)
 
 public:
-   PosixNetHandler();
+   PosixHandler();
 
    uint16_t getPort() const;                    // Port#
    uint16_t getLocalPort() const;               // Local port #
@@ -161,47 +161,47 @@ private:
 //------------------------------------------------------------------------------
 
 // Port#
-inline uint16_t PosixNetHandler::getPort() const
+inline uint16_t PosixHandler::getPort() const
 {
    return port;
 }
 
 // Local port #
-inline uint16_t PosixNetHandler::getLocalPort() const
+inline uint16_t PosixHandler::getLocalPort() const
 {
    return localPort;
 }
 
 // Ignore source port #
-inline uint16_t PosixNetHandler::getIgnoreSourcePort() const
+inline uint16_t PosixHandler::getIgnoreSourcePort() const
 {
    return ignoreSourcePort;
 }
 
 // Gets the local host IP address
-inline uint32_t PosixNetHandler::getLocalAddr() const
+inline uint32_t PosixHandler::getLocalAddr() const
 {
    return localAddr;
 }
 
 // Gets the network (remote) host IP address
-inline uint32_t PosixNetHandler::getNetAddr() const
+inline uint32_t PosixHandler::getNetAddr() const
 {
    return netAddr;
 }
 
 // Shared flag
-inline bool PosixNetHandler::getSharedFlag() const
+inline bool PosixHandler::getSharedFlag() const
 {
    return sharedFlg;
 }
 
-inline uint32_t PosixNetHandler::getLastFromAddr() const
+inline uint32_t PosixHandler::getLastFromAddr() const
 {
    return fromAddr1;
 }
 
-inline uint16_t PosixNetHandler::getLastFromPort() const
+inline uint16_t PosixHandler::getLastFromPort() const
 {
    return fromPort1;
 }

@@ -4,7 +4,7 @@
 #ifndef __Eaagles_Basic_TcpHandler_H__
 #define __Eaagles_Basic_TcpHandler_H__
 
-#include "openeaagles/basic/nethandlers/PosixNetHandler.h"
+#include "openeaagles/basic/nethandlers/PosixHandler.h"
 
 namespace Eaagles {
 namespace Basic {
@@ -16,9 +16,9 @@ class String;
 //
 // Description: General TCP/IP support class.
 //------------------------------------------------------------------------------
-class TcpHandler : public PosixNetHandler
+class TcpHandler : public PosixHandler
 {
-   DECLARE_SUBCLASS(TcpHandler, PosixNetHandler)
+   DECLARE_SUBCLASS(TcpHandler, PosixHandler)
 
 public:
    TcpHandler();

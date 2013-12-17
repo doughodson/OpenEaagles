@@ -3,7 +3,7 @@
 //------------------------------------------------------------------------------
 //
 // M$ WinSock has slightly different return types, some different calling, and
-// is missing some of the calls that are standard in Berkely and POSIX socket
+// is missing some of the calls that are standard in Berkeley and POSIX socket
 // implementation.  These slight differences will be handled in setting basic
 // typedefs, defines, and constants that will make each convention match for
 // use later in the code.  This will save a lot of pre-processor intervention

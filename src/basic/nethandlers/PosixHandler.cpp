@@ -1,9 +1,9 @@
 //------------------------------------------------------------------------------
-// Class: PosixNetHandler
+// Class: PosixHandler
 //------------------------------------------------------------------------------
 //
 // M$ WinSock has slightly different return types, some different calling, and
-// is missing some of the calls that are standard in Berkely and POSIX socket
+// is missing some of the calls that are standard in Berkeley and POSIX socket
 // implementation.  These slight differences will be handled in setting basic
 // typedefs, defines, and constants that will make each convention match for
 // use later in the code.  This will save a lot of pre-processor intervention
@@ -26,7 +26,7 @@
     static const int SOCKET_ERROR   = -1;
 #endif
 
-#include "openeaagles/basic/nethandlers/PosixNetHandler.h"
+#include "openeaagles/basic/nethandlers/PosixHandler.h"
 #include "openeaagles/basic/Pair.h"
 #include "openeaagles/basic/PairStream.h"
 #include "openeaagles/basic/Number.h"
@@ -35,12 +35,12 @@ namespace Eaagles {
 namespace Basic {
 
 //==============================================================================
-// Class: PosixNetHandler
+// Class: PosixHandler
 //==============================================================================
-IMPLEMENT_SUBCLASS(PosixNetHandler, "PosixNetHandler")
+IMPLEMENT_SUBCLASS(PosixHandler, "PosixHandler")
 
 // Slot Table
-BEGIN_SLOTTABLE(PosixNetHandler)
+BEGIN_SLOTTABLE(PosixHandler)
     "localIpAddress",       // 1) String containing the local host's name or its IP
                             //    address in the Internet standard "." (dotted) notation.
                             //    (default: found via local host name)
@@ -50,10 +50,10 @@ BEGIN_SLOTTABLE(PosixNetHandler)
     "sendBuffSizeKb",       // 5) Send buffer size in KB's    (default:  32 Kb; max 1024)
     "recvBuffSizeKb",       // 6) Receive buffer size in KB's (default: 128 Kb; max 1024)
     "ignoreSourcePort",     // 7) Ignore message from this source port
-END_SLOTTABLE(PosixNetHandler)
+END_SLOTTABLE(PosixHandler)
 
 // Map slot table to handles
-BEGIN_SLOT_MAP(PosixNetHandler)
+BEGIN_SLOT_MAP(PosixHandler)
     ON_SLOT(1, setSlotLocalIpAddress,   String)
     ON_SLOT(2, setSlotLocalPort,        Number)
     ON_SLOT(3, setSlotPort,             Number)
@@ -66,19 +66,19 @@ END_SLOT_MAP()
 //------------------------------------------------------------------------------
 // Constructors
 //------------------------------------------------------------------------------
-PosixNetHandler::PosixNetHandler() :
-               localIpAddr(0),
-               localAddr(INADDR_ANY),
-               netAddr(INADDR_ANY),
-               fromAddr1(INADDR_NONE),
-               port(0),
-               localPort(0),
-               ignoreSourcePort(0),
-               fromPort1(0),
-               sharedFlg(false),
-               initialized(false),
-               sendBuffSizeKb(32),
-               recvBuffSizeKb(128)
+PosixHandler::PosixHandler() :
+              localIpAddr(0),
+              localAddr(INADDR_ANY),
+              netAddr(INADDR_ANY),
+              fromAddr1(INADDR_NONE),
+              port(0),
+              localPort(0),
+              ignoreSourcePort(0),
+              fromPort1(0),
+              sharedFlg(false),
+              initialized(false),
+              sendBuffSizeKb(32),
+              recvBuffSizeKb(128)
 {
    STANDARD_CONSTRUCTOR()
 
@@ -91,7 +91,7 @@ PosixNetHandler::PosixNetHandler() :
 //------------------------------------------------------------------------------
 // copyData() -- copy member data
 //------------------------------------------------------------------------------
-void PosixNetHandler::copyData(const PosixNetHandler& org, const bool cc)
+void PosixHandler::copyData(const PosixHandler& org, const bool cc)
 {
     BaseClass::copyData(org);
 
@@ -121,7 +121,7 @@ void PosixNetHandler::copyData(const PosixNetHandler& org, const bool cc)
 //------------------------------------------------------------------------------
 // deleteData() -- delete member data
 //------------------------------------------------------------------------------
-void PosixNetHandler::deleteData()
+void PosixHandler::deleteData()
 {
    if (localIpAddr != 0) delete[] localIpAddr;
    localIpAddr = 0;
@@ -130,7 +130,7 @@ void PosixNetHandler::deleteData()
 //------------------------------------------------------------------------------
 // Initialize the network handler --
 //------------------------------------------------------------------------------
-bool PosixNetHandler::initNetwork(const bool noWaitFlag)
+bool PosixHandler::initNetwork(const bool noWaitFlag)
 {
     // Initialize socket
     bool ok =  init();
@@ -140,24 +140,24 @@ bool PosixNetHandler::initNetwork(const bool noWaitFlag)
         if (ok) {
             if (noWaitFlag) {
                 ok = setNoWait();
-                if (!ok) std::cerr << "PosixNetHandler::initNetwork(): setNoWait() FAILED" << std::endl;
+                if (!ok) std::cerr << "PosixHandler::initNetwork(): setNoWait() FAILED" << std::endl;
             }
             else {
                 ok = setBlocked();
-                if (!ok) std::cerr << "PosixNetHandler::initNetwork(): setBlocked() FAILED" << std::endl;
+                if (!ok) std::cerr << "PosixHandler::initNetwork(): setBlocked() FAILED" << std::endl;
             }
         }
         else {
-            std::cerr << "PosixNetHandler::initNetwork(): bindSocket() FAILED" << std::endl;
+            std::cerr << "PosixHandler::initNetwork(): bindSocket() FAILED" << std::endl;
         }
     }
     else {
-        std::cerr << "PosixNetHandler::initNetwork(): init() FAILED" << std::endl;
+        std::cerr << "PosixHandler::initNetwork(): init() FAILED" << std::endl;
     }
 
     initialized = ok;
     if (initialized && isMessageEnabled(MSG_DEBUG)) {
-        std::cout << "PosixNetHandler::initNetwork() -- network initialized successfully" << std::endl;
+        std::cout << "PosixHandler::initNetwork() -- network initialized successfully" << std::endl;
     }
     return ok;
 }
@@ -165,7 +165,7 @@ bool PosixNetHandler::initNetwork(const bool noWaitFlag)
 //------------------------------------------------------------------------------
 // init() -- initialize the network
 //------------------------------------------------------------------------------
-bool PosixNetHandler::init()
+bool PosixHandler::init()
 {
     bool ok = BaseClass::init();
 
@@ -183,7 +183,7 @@ bool PosixNetHandler::init()
 // bindSocket() -- bind the socket to an address, and configure
 // the send and receive buffers.
 // -------------------------------------------------------------
-bool PosixNetHandler::bindSocket()
+bool PosixHandler::bindSocket()
 {
     if (socketNum == INVALID_SOCKET) return false;
 
@@ -200,7 +200,7 @@ bool PosixNetHandler::bindSocket()
         socklen_t optlen = sizeof(optval);
         if (::setsockopt(socketNum, SOL_SOCKET, SO_REUSEADDR, &optval, optlen) == SOCKET_ERROR) {
 #endif
-            ::perror("PosixNetHandler::bindSocket(): error setsockopt(SO_REUSEADDR)\n");
+            ::perror("PosixHandler::bindSocket(): error setsockopt(SO_REUSEADDR)\n");
             return false;
         }
     }
@@ -211,7 +211,7 @@ bool PosixNetHandler::bindSocket()
 //------------------------------------------------------------------------------
 // Set the output buffer size
 //------------------------------------------------------------------------------
-bool PosixNetHandler::setSendBuffSize()
+bool PosixHandler::setSendBuffSize()
 {
    if (socketNum == INVALID_SOCKET) return false;
 
@@ -222,7 +222,7 @@ bool PosixNetHandler::setSendBuffSize()
 #else
    if (::setsockopt(socketNum, SOL_SOCKET, SO_SNDBUF, (void*) &optval, optlen) == SOCKET_ERROR) {
 #endif
-      ::perror("PosixNetHandler::setSendBuffSize(): error setting the send buffer size\n");
+      ::perror("PosixHandler::setSendBuffSize(): error setting the send buffer size\n");
       return false;
    }
    return true;
@@ -231,7 +231,7 @@ bool PosixNetHandler::setSendBuffSize()
 //------------------------------------------------------------------------------
 // Sets the input buffer size
 //------------------------------------------------------------------------------
-bool PosixNetHandler::setRecvBuffSize()
+bool PosixHandler::setRecvBuffSize()
 {
    if (socketNum == INVALID_SOCKET) return false;
 
@@ -242,7 +242,7 @@ bool PosixNetHandler::setRecvBuffSize()
 #else
    if (::setsockopt(socketNum, SOL_SOCKET, SO_RCVBUF, (void*) &optval, optlen) == SOCKET_ERROR) {
 #endif
-      ::perror("PosixNetHandler::setRecvBuffSize(): error setting the receive buffer size\n");
+      ::perror("PosixHandler::setRecvBuffSize(): error setting the receive buffer size\n");
       return false;
    }
    return true;
@@ -251,7 +251,7 @@ bool PosixNetHandler::setRecvBuffSize()
 // -------------------------------------------------------------
 // setBlocked() -- Sets blocked I/O mode
 // -------------------------------------------------------------
-bool PosixNetHandler::setBlocked()
+bool PosixHandler::setBlocked()
 {
     if (socketNum == NET_INVALID_SOCKET) return false;
 
@@ -259,13 +259,13 @@ bool PosixNetHandler::setBlocked()
 #if defined(WIN32)
     unsigned long zz = false;
     if (::ioctlsocket(socketNum, FIONBIO, &zz) == SOCKET_ERROR) {
-        ::perror("PosixNetHandler::setBlocked()");
+        ::perror("PosixHandler::setBlocked()");
         return false;
     }
 #else
     const int zz = 0;
     if (::ioctl(socketNum, FIONBIO, &zz) == SOCKET_ERROR) {
-        ::perror("PosixNetHandler::setBlocked()");
+        ::perror("PosixHandler::setBlocked()");
         return false;
     }
 #endif
@@ -276,7 +276,7 @@ bool PosixNetHandler::setBlocked()
 // -------------------------------------------------------------
 // setNoWait() -- Sets no wait (non-blocking) I/O mode
 // -------------------------------------------------------------
-bool PosixNetHandler::setNoWait()
+bool PosixHandler::setNoWait()
 {
     if (socketNum == NET_INVALID_SOCKET) return false;
 
@@ -284,13 +284,13 @@ bool PosixNetHandler::setNoWait()
 #if defined(WIN32)
     unsigned long zz = true;
     if (::ioctlsocket(socketNum, FIONBIO, &zz ) == SOCKET_ERROR) {
-        ::perror("PosixNetHandler::setNoWait()");
+        ::perror("PosixHandler::setNoWait()");
         return false;
     }
 #else
     const int zz = 1;
     if (::ioctl(socketNum, FIONBIO, &zz ) == SOCKET_ERROR) {
-        ::perror("PosixNetHandler::setNoWait()");
+        ::perror("PosixHandler::setNoWait()");
         return false;
     }
 #endif
@@ -301,7 +301,7 @@ bool PosixNetHandler::setNoWait()
 // -------------------------------------------------------------
 // Returns true if the network handler has been initialized
 // -------------------------------------------------------------
-bool PosixNetHandler::isConnected() const
+bool PosixHandler::isConnected() const
 {
     return initialized;
 }
@@ -309,7 +309,7 @@ bool PosixNetHandler::isConnected() const
 // -------------------------------------------------------------
 // Close (un-initialize) this network
 // -------------------------------------------------------------
-bool PosixNetHandler::closeConnection()
+bool PosixHandler::closeConnection()
 {
     initialized = false;
     return true;
@@ -318,7 +318,7 @@ bool PosixNetHandler::closeConnection()
 // -------------------------------------------------------------
 // sendData() -- Send data
 // -------------------------------------------------------------
-bool PosixNetHandler::sendData(const char* const packet, const int size)
+bool PosixHandler::sendData(const char* const packet, const int size)
 {
     if (socketNum == INVALID_SOCKET) return false;
 
@@ -334,12 +334,12 @@ bool PosixNetHandler::sendData(const char* const packet, const int size)
 #if defined(WIN32)
         int err = ::WSAGetLastError();
         if (isMessageEnabled(MSG_ERROR)) {
-            std::cerr << "PosixNetHandler::sendData(): sendto error: " << err << " hex=0x" << std::hex << err << std::dec << std::endl;
+            std::cerr << "PosixHandler::sendData(): sendto error: " << err << " hex=0x" << std::hex << err << std::dec << std::endl;
         }
 #else
-        ::perror("PosixNetHandler::sendData(): sendto error msg");
+        ::perror("PosixHandler::sendData(): sendto error msg");
         if (isMessageEnabled(MSG_ERROR)) {
-            std::cerr << "PosixNetHandler::sendData(): sendto error result: " << result << std::endl;
+            std::cerr << "PosixHandler::sendData(): sendto error result: " << result << std::endl;
         }
 #endif
         return false;
@@ -351,7 +351,7 @@ bool PosixNetHandler::sendData(const char* const packet, const int size)
 // recvData() -- Receive data and possible ignore our own
 //               local port messages.
 // -------------------------------------------------------------
-unsigned int PosixNetHandler::recvData(char* const packet, const int maxSize)
+unsigned int PosixHandler::recvData(char* const packet, const int maxSize)
 {
    unsigned int n = 0;
 
@@ -392,27 +392,27 @@ unsigned int PosixNetHandler::recvData(char* const packet, const int maxSize)
 //------------------------------------------------------------------------------
 
 // Set the shared flag
-void PosixNetHandler::setSharedFlag(const bool b)
+void PosixHandler::setSharedFlag(const bool b)
 {
    sharedFlg = b;
 }
 
 // Set port number
-bool PosixNetHandler::setPort(const uint16_t n1)
+bool PosixHandler::setPort(const uint16_t n1)
 {
    port = n1;
    return true;
 }
 
 // Set local (source) port number
-bool PosixNetHandler::setLocalPort(const uint16_t n1)
+bool PosixHandler::setLocalPort(const uint16_t n1)
 {
    localPort = n1;
    return true;
 }
 
 // Sets the network IP address
-bool PosixNetHandler::setNetAddr(const uint32_t addr0)
+bool PosixHandler::setNetAddr(const uint32_t addr0)
 {
     bool ok = false;
     if (addr0 != INADDR_NONE) {
@@ -423,7 +423,7 @@ bool PosixNetHandler::setNetAddr(const uint32_t addr0)
 }
 
 // Sets the network IP address using hostname or the Internet standard "." (dotted) notation
-bool PosixNetHandler::setNetAddr(const char* const hostname)
+bool PosixHandler::setNetAddr(const char* const hostname)
 {
     bool ok = false;
     if (hostname != 0) {
@@ -436,7 +436,7 @@ bool PosixNetHandler::setNetAddr(const char* const hostname)
         if (addr0 == INADDR_NONE) {
             // Didn't work, try to find the host IP address by name
             if (isMessageEnabled(MSG_DEBUG)) {
-               std::cout << "PosixNetHandler::setNetAddr(): Looking up host name: " << hostname;
+               std::cout << "PosixHandler::setNetAddr(): Looking up host name: " << hostname;
             }
             const hostent* const p = gethostbyname(hostname);
             if (p != 0 && p->h_length > 0) {
@@ -465,7 +465,7 @@ bool PosixNetHandler::setNetAddr(const char* const hostname)
 }
 
 // Sets the local IP address
-bool PosixNetHandler::setLocalAddr(const uint32_t addr0)
+bool PosixHandler::setLocalAddr(const uint32_t addr0)
 {
     bool ok = false;
     if (addr0 != INADDR_NONE) {
@@ -476,7 +476,7 @@ bool PosixNetHandler::setLocalAddr(const uint32_t addr0)
 }
 
 // Sets the local IP address using hostname or the Internet standard "." (dotted) notation
-bool PosixNetHandler::setLocalAddr(const char* const hostname)
+bool PosixHandler::setLocalAddr(const char* const hostname)
 {
     bool ok = false;
     if (hostname != 0) {
@@ -489,7 +489,7 @@ bool PosixNetHandler::setLocalAddr(const char* const hostname)
         if (addr0 == INADDR_NONE) {
             // Didn't work, try to find the host IP address by name
             if (isMessageEnabled(MSG_DEBUG)) {
-                std::cout << "PosixNetHandler::setLocalAddr(): Looking up host name: " << hostname;
+                std::cout << "PosixHandler::setLocalAddr(): Looking up host name: " << hostname;
             }
             const hostent* p = gethostbyname(hostname);
             if (p != 0 && p->h_length > 0) {
@@ -522,7 +522,7 @@ bool PosixNetHandler::setLocalAddr(const char* const hostname)
 //------------------------------------------------------------------------------
 
 // localIpAddress: String containing the local IP address
-bool PosixNetHandler::setSlotLocalIpAddress(const String* const msg)
+bool PosixHandler::setSlotLocalIpAddress(const String* const msg)
 {
     bool ok = false;
     if (msg != 0) {
@@ -534,7 +534,7 @@ bool PosixNetHandler::setSlotLocalIpAddress(const String* const msg)
 }
 
 // port: Port number
-bool PosixNetHandler::setSlotPort(const Number* const msg)
+bool PosixHandler::setSlotPort(const Number* const msg)
 {
     bool ok = false;
     if (msg != 0) {
@@ -547,7 +547,7 @@ bool PosixNetHandler::setSlotPort(const Number* const msg)
 }
 
 // localPort: Local (source) port number
-bool PosixNetHandler::setSlotLocalPort(const Number* const msg)
+bool PosixHandler::setSlotLocalPort(const Number* const msg)
 {
     bool ok = false;
     if (msg != 0) {
@@ -560,7 +560,7 @@ bool PosixNetHandler::setSlotLocalPort(const Number* const msg)
 }
 
 // shared: Reuse the port
-bool PosixNetHandler::setSlotShared(const Number* const msg)
+bool PosixHandler::setSlotShared(const Number* const msg)
 {
     bool ok = false;
     if (msg != 0) {
@@ -571,7 +571,7 @@ bool PosixNetHandler::setSlotShared(const Number* const msg)
 }
 
 // sendBuffSizeKb: Send buffer size in KB's    (default:  32 Kb)
-bool PosixNetHandler::setSlotSendBuffSize(const Number* const msg)
+bool PosixHandler::setSlotSendBuffSize(const Number* const msg)
 {
     bool ok = false;
     if (msg != 0) {
@@ -585,7 +585,7 @@ bool PosixNetHandler::setSlotSendBuffSize(const Number* const msg)
 }
 
 // recvBuffSizeKb: Receive buffer size in KB's (default: 128 Kb)
-bool PosixNetHandler::setSlotRecvBuffSize(const Number* const msg)
+bool PosixHandler::setSlotRecvBuffSize(const Number* const msg)
 {
     bool ok = false;
     if (msg != 0) {
@@ -599,7 +599,7 @@ bool PosixNetHandler::setSlotRecvBuffSize(const Number* const msg)
 }
 
 // setSlotIgnoreSourcePort: Ignore message from our this source port number
-bool PosixNetHandler::setSlotIgnoreSourcePort(const Number* const msg)
+bool PosixHandler::setSlotIgnoreSourcePort(const Number* const msg)
 {
     bool ok = false;
     if (msg != 0) {
@@ -615,7 +615,7 @@ bool PosixNetHandler::setSlotIgnoreSourcePort(const Number* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Object* PosixNetHandler::getSlotByIndex(const int si)
+Object* PosixHandler::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
@@ -623,7 +623,7 @@ Object* PosixNetHandler::getSlotByIndex(const int si)
 //------------------------------------------------------------------------------
 // serialize
 //------------------------------------------------------------------------------
-std::ostream& PosixNetHandler::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
+std::ostream& PosixHandler::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;
     if (!slotsOnly) {
