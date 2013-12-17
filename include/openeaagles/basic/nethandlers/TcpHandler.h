@@ -42,7 +42,6 @@ protected:
    bool connected;              // true if we are connected
    bool connectionTerminated;   // true if we had a connection, then lost it (or terminated it ourselves)
 
-   LcSocket  tcpSocket;         // Our Connected TCP Socket
    bool  noWait;                // TCP's no wait I/O flag
 };
 

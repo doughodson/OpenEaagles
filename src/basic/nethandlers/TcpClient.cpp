@@ -109,9 +109,6 @@ bool TcpClient::init()
    bool success = BaseClass::init();
    if (!success) return false;
 
-   // Clients use the same socket number
-   tcpSocket = socketNum;
-
    // Find our network address
    success = setNetAddr(ipAddr);
 
@@ -149,7 +146,7 @@ bool TcpClient::connectToServer()
 
    if (ipAddr == 0) return false;
 
-   if (tcpSocket == INVALID_SOCKET) return false;
+   if (socketNum == INVALID_SOCKET) return false;
 
    struct sockaddr_in addr;        // Working address structure
    bzero(&addr, sizeof(addr));
@@ -161,7 +158,7 @@ bool TcpClient::connectToServer()
       std::cout << "Connecting to TCP server at " << ipAddr << ":" << getPort() << " ... " << std::flush;
    }
 
-   if (::connect(tcpSocket, (const struct sockaddr *) &addr, sizeof(addr)) == SOCKET_ERROR) {
+   if (::connect(socketNum, (const struct sockaddr *) &addr, sizeof(addr)) == SOCKET_ERROR) {
       if (isMessageEnabled(MSG_INFO)) {
           std::cout << "Failed!" << std::endl;
       }
@@ -173,12 +170,12 @@ bool TcpClient::connectToServer()
       connected = true;
    }
    if (isMessageEnabled(MSG_INFO)) {
-      std::cout << "TcpClient::connectToServer: socketNum = " << socketNum << ", tcpSocket = " << tcpSocket << std::endl;
+      std::cout << "TcpClient::connectToServer: socketNum = " << socketNum << std::endl;
    }
 
    // Set blocked or no-wait
-   if (noWait) setNoWait(tcpSocket);
-   else setBlocked(tcpSocket);
+   if (noWait) setNoWait();
+   else setBlocked();
 
    return connected;
 }

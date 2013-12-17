@@ -142,7 +142,7 @@ bool TcpServerSingle::acceptConnection()
    if (isMessageEnabled(MSG_INFO)) {
        std::cout << "Waiting to accept connection on " << getPort() << " ... " << std::flush;
    }
-   tcpSocket = ::accept(socketNum, (struct sockaddr *) &clientAddr, &cAddrSize);
+   LcSocket tcpSocket = ::accept(socketNum, (struct sockaddr *) &clientAddr, &cAddrSize);
    if (tcpSocket == INVALID_SOCKET) {
       if (isMessageEnabled(MSG_INFO)) {
           std::cout << " failed!" << std::endl;
@@ -159,15 +159,26 @@ bool TcpServerSingle::acceptConnection()
        std::cout << std::endl;
    }
 
+   // After accepting a connection we close the original opened socket and
+   // we then assign socketNum to our local tcpSocket.
+#if defined(WIN32)
+   if (::closesocket(socketNum) == SOCKET_ERROR) {
+#else
+   if (::shutdown(socketNum, SHUT_RDWR) == SOCKET_ERROR) {
+#endif
+      ::perror("TcpServerSingle::acceptConnection(): shutdown original error! \n");
+   }
+
+   socketNum = tcpSocket;
    connected = true;
    connectionTerminated = false;
 
    // Set blocked or no-wait
-   if (noWait) setNoWait(tcpSocket);
-   else setBlocked(tcpSocket);
+   if (noWait) setNoWait();
+   else setBlocked();
 
    if (isMessageEnabled(MSG_INFO)) {
-       std::cout << "TcpServerSingle::acceptConnection: socketNum = " << socketNum << ", tcpSocket = " << tcpSocket << std::endl;
+       std::cout << "TcpServerSingle::acceptConnection: new socketNum = " << socketNum << std::endl;
    }
 
    return true;
