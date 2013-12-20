@@ -40,7 +40,7 @@ public:
       return ok;
    }
 
-   // Pops an item rom the top of the stack
+   // Pops an item from the top of the stack
    T pop() {
       lcLock( semaphore );
       T ii = 0;
