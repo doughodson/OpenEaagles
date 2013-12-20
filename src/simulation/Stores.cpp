@@ -299,6 +299,7 @@ bool Stores::selectStation(const unsigned int s)
    bool ok = false;
    if (s >= 1 && s <= ns) {
       selected = s;
+      ok = true;
    }
    return ok;
 }

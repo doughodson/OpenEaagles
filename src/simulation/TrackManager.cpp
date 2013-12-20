@@ -459,7 +459,7 @@ bool TrackManager::setSlotMaxTrackAge(const Basic::Number* const num)
       age = seconds.convert(*p);
    }
    else if (num != 0) {
-      // We have only a number, assume its in seconds ...
+      // We have only a number, assume it's in seconds ...
       age = num->getReal();
    }
 
@@ -918,7 +918,7 @@ void AirTrkMgr::processTrackList(const LCreal dt)
 
    // ---
    // 7) For tracks with new observation reports, reset their age.
-   //    Remove tracks that have age beyond the limit.
+   //    Remove tracks that have aged beyond the limit.
    // ---
    lcLock(trkListLock);
    for (unsigned int it = 0; it < nTrks; /* update 'it' below */ ) {
@@ -1006,7 +1006,7 @@ bool AirTrkMgr::setPositionGate(const Basic::Number* const num)
       value = meters.convert(*p);
    }
    else if (num != 0) {
-      // We have only a number, assume its in meters ...
+      // We have only a number, assume it's in meters ...
       value = num->getReal();
    }
 
@@ -1035,7 +1035,7 @@ bool AirTrkMgr::setRangeGate(const Basic::Number* const num)
       value = meters.convert(*p);
    }
    else if (num != 0) {
-      // We have only a number, assume its in meters ...
+      // We have only a number, assume it's in meters ...
       value = num->getReal();
    }
 
@@ -1058,7 +1058,7 @@ bool AirTrkMgr::setVelocityGate(const Basic::Number* const num)
 {
    LCreal value = 0.0;
    if (num != 0) {
-      // We have only a number, assume its in meters ...
+      // We have only a number, assume it's in meters ...
       value = num->getReal();
    }
 
@@ -1368,7 +1368,7 @@ void GmtiTrkMgr::processTrackList(const LCreal dt)
 
    // ---
    // 7) For tracks with new observation reports, reset their age.
-   //    Remove tracks that have age beyond the limit.
+   //    Remove tracks that have aged beyond the limit.
    // ---
    lcLock(trkListLock);
    for (unsigned int it = 0; it < nTrks; /* update 'it' below */ ) {
@@ -1689,7 +1689,7 @@ void RwrTrkMgr::processTrackList(const LCreal dt)
 
    // ---
    // 7) For tracks with new observation reports, reset their age.
-   //    Remove tracks that have age beyond the limit.
+   //    Remove tracks that have aged beyond the limit.
    // ---
    lcLock(trkListLock);
    for (unsigned int it = 0; it < nTrks; /* update 'it' below */ ) {
