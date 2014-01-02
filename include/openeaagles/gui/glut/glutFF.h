@@ -13,7 +13,7 @@
 namespace Eaagles {
    namespace Basic { class Object; }
    namespace Glut {
-      extern Basic::Object* glutFormFunc(const char* formname);
+      extern Basic::Object* glutFormFunc(const char* name);
    }
 }
 

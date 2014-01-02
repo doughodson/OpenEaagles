@@ -3,54 +3,23 @@
 //------------------------------------------------------------------------------
 
 #include "openeaagles/gui/glut/glutFF.h"
-#include "openeaagles/gui/glut/GlutDisplay.h"
-#include "openeaagles/gui/glut/Shapes3D.h"
+#include "openeaagles/gui/glut/Factory.h"
+
+#include "openeaagles/basic/Object.h"
 
 namespace Eaagles {
 namespace Glut {
 
-Basic::Object* glutFormFunc(const char* formname)
+Basic::Object* glutFormFunc(const char* name)
 {
-    // Start out by checking the basic classes (forms)
-    Basic::Object* newform = 0;
-
-    // General graphics support
-    if ( strcmp(formname, GlutDisplay::getFormName()) == 0 ) {
-      newform = new GlutDisplay();
-    }
-    // glut shapes support
-    else if ( strcmp(formname, Sphere::getFormName()) == 0 ) {
-      newform = new Sphere();
-    }
-    else if ( strcmp(formname, Cylinder::getFormName()) == 0 ) {
-      newform = new Cylinder();
-    }
-    else if ( strcmp(formname, Cone::getFormName()) == 0 ) {
-      newform = new Cone();
-    }
-    else if ( strcmp(formname, Cube::getFormName()) == 0 ) {
-      newform = new Cube();
-    }
-    else if ( strcmp(formname, Torus::getFormName()) == 0 ) {
-      newform = new Torus();
-    }
-    else if ( strcmp(formname, Dodecahedron::getFormName()) == 0 ) {
-      newform = new Dodecahedron();
-    }
-    else if ( strcmp(formname, Tetrahedron::getFormName()) == 0 ) {
-      newform = new Tetrahedron();
-    }
-    else if ( strcmp(formname, Icosahedron::getFormName()) == 0 ) {
-      newform = new Icosahedron();
-    }
-    else if ( strcmp(formname, Octahedron::getFormName()) == 0 ) {
-      newform = new Octahedron();
-    }
-    else if ( strcmp(formname, Teapot::getFormName()) == 0 ) {
-      newform = new Teapot();
-    }
-
-   return newform;
+   static bool msgPrinted(false);
+   if (!msgPrinted) {
+      std::cout << std::endl;
+      std::cout << "WARNING!! The function Glut::glutFormFunc() is deprecated - use Glut::Factory::createObj() instead!";
+      std::cout << std::endl;
+      msgPrinted = true;
+   }
+   return Factory::createObj(name);
 }
 
 } // End Glut namespace
