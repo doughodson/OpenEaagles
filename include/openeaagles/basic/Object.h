@@ -315,6 +315,7 @@ class Object {
    public: virtual bool isClassType(const std::type_info& type) const;
    public: virtual bool isFormName(const char name[]) const;
    public: static const char* getFormName();
+   public: static const char* getFactoryName();
    public: static const char* getClassName();
    public: virtual std::ostream& serialize(std::ostream& sout, const int i = 0, const bool slotsOnly = false) const;
 

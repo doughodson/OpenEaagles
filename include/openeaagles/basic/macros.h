@@ -136,6 +136,7 @@
     private: static const unsigned int classIndex;                                                    \
     protected: static const _Static* getStatic();                                                     \
     public: static const char* getFormName();                                                         \
+    public: static const char* getFactoryName();                                                      \
     public: virtual bool isFormName(const char name[]) const;                                         \
     protected: virtual bool setSlotByIndex(const int slotindex, Eaagles::Basic::Object* const obj);   \
     protected: virtual Eaagles::Basic::Object* getSlotByIndex(const int slotindex);                   \
@@ -156,6 +157,7 @@
     );                                                                                 \
     const ThisType::_Static* ThisType::getStatic() { return &_static; }                \
     const char* ThisType::getFormName() { return _static.fname; }                      \
+    const char* ThisType::getFactoryName() { return _static.fname; }                   \
     bool ThisType::isFormName(const char name[]) const                                 \
     {                                                                                  \
         if (name == 0) return false;                                                   \
@@ -195,6 +197,7 @@
     );                                                                                 \
     const ThisType::_Static* ThisType::getStatic() { return &_static; }                \
     const char* ThisType::getFormName() { return _static.fname; }                      \
+    const char* ThisType::getFactoryName() { return _static.fname; }                   \
     bool ThisType::isFormName(const char name[]) const                                 \
     {                                                                                  \
         if (name == 0) return false;                                                   \
@@ -217,6 +220,7 @@
     );                                                                                 \
     const ThisType::_Static* ThisType::getStatic() { return &_static; }                \
     const char* ThisType::getFormName() { return _static.fname; }                      \
+    const char* ThisType::getFactoryName() { return _static.fname; }                   \
     bool ThisType::isFormName(const char name[]) const                                 \
     {                                                                                  \
         if (name == 0) return false;                                                   \
@@ -313,7 +317,7 @@
         int j = 0;                                                                     \
         if ( !slotsOnly ) {                                                            \
             indent(sout,i);                                                            \
-            sout << "( " << getFormName() << std::endl;                                \
+            sout << "( " << getFactoryName() << std::endl;                             \
             j = 4;                                                                     \
         }                                                                              \
         BaseClass::serialize(sout,i+j,true);                                           \

@@ -121,6 +121,12 @@ const char* Object::getFormName()
     return _static.fname;
 }
 
+// get factory name
+const char* Object::getFactoryName()
+{
+    return _static.fname;
+}
+
 // get class name
 const char* Object::getClassName()
 {
