@@ -1,33 +1,24 @@
 //------------------------------------------------------------------------------
 // Form function for the default 'vehicles' library
 //------------------------------------------------------------------------------
-
 #include "openeaagles/vehicles/vehiclesFF.h"
+#include "openeaagles/vehicles/Factory.h"
 
-#include "openeaagles/vehicles/JSBSimModel.h"
-#include "openeaagles/vehicles/RacModel.h"
-#include "openeaagles/vehicles/LaeroModel.h"
+#include "openeaagles/basic/Object.h"
 
 namespace Eaagles {
 namespace Vehicle {
 
-Basic::Object* vehiclesFormFunc(const char* formname)
+Basic::Object* vehiclesFormFunc(const char* name)
 {
-    Basic::Object* newform = 0;
-
-    // RAC model
-    if ( strcmp(formname, RacModel::getFormName()) == 0 ) {
-        newform = new RacModel();
-    }
-    // JSBSim model
-    else if ( strcmp(formname, JSBSimModel::getFormName()) == 0 ) {
-        newform = new JSBSimModel();
-    }
-    // Laero model
-    else if ( strcmp(formname, LaeroModel::getFormName()) == 0 ) {
-        newform = new LaeroModel();
-    }
-    return newform;
+   static bool msgPrinted(false);
+   if (!msgPrinted) {
+      std::cout << std::endl;
+      std::cout << "WARNING! The function Vehicle::vehiclesFormFunc() is deprecated - use Vehicle::Factory::createObj() instead.";
+      std::cout << std::endl;
+      msgPrinted = true;
+   }
+   return Factory::createObj(name);
 }
 
 } // End Vehicle namespace

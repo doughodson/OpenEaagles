@@ -23,6 +23,12 @@ general
    # added an OE version number to "openeaagles/config.h"
    #
 
+   #
+   # added class factories to each of the libraries (defined by Factory)
+   # (form functions are now deprecated - use appropriate Factory::createObj()
+   #  in each library instead - see examples)
+   #
+
 --------------------------------------------------------------------------------
 basic
 
