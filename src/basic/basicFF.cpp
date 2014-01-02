@@ -12,9 +12,13 @@ namespace Basic {
 
 Object* basicFormFunc(const char* name)
 {
-   std::cout << std::endl;
-   std::cout << "WARNING!! basicFormFunc() is deprecated, use Basic::Factory::createObj() instead!";
-   std::cout << std::endl;
+   static bool msgPrinted(false);
+   if (!msgPrinted) {
+      std::cout << std::endl;
+      std::cout << "WARNING!! The function Basic::basicFormFunc() is deprecated - use Basic::Factory::createObj() instead!";
+      std::cout << std::endl;
+      msgPrinted = true;
+   }
    return Factory::createObj(name);
 }
 
