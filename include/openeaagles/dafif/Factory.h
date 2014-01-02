@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // Class: Factory
 //
-// Description: Class factory for the dafif library
+// Description: Class factory
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_Dafif_Factory_H__
 #define __Eaagles_Dafif_Factory_H__

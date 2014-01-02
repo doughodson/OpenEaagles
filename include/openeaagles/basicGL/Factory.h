@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // Class: Factory
 //
-// Description: Class factory for the basicGL library
+// Description: Class factory
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_BasicGL_Factory_H__
 #define __Eaagles_BasicGL_Factory_H__

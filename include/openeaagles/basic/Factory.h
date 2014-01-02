@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // Class: Factory
 //
-// Description: Class factory for the basic library
+// Description: Class factory
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_Basic_Factory_H__
 #define __Eaagles_Basic_Factory_H__

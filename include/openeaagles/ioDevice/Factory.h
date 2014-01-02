@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // Class: Factory
 //
-// Description: Class factory for the ioDevice library
+// Description: Class factory
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_IoDevice_Factory_H__
 #define __Eaagles_IoDevice_Factory_H__

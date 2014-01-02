@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // Class: Factory
 //
-// Description: Class factory for the glut library
+// Description: Class factory
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_Glut_Factory_H__
 #define __Eaagles_Glut_Factory_H__

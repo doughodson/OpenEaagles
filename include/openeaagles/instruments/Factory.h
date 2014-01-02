@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // Class: Factory
 //
-// Description: Class factory for the instruments library
+// Description: Class factory
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_Instruments_Factory_H__
 #define __Eaagles_Instruments_Factory_H__
