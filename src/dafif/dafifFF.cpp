@@ -3,28 +3,23 @@
 //------------------------------------------------------------------------------
 
 #include "openeaagles/dafif/dafifFF.h"
-#include "openeaagles/dafif/AirportLoader.h"
-#include "openeaagles/dafif/NavaidLoader.h"
-#include "openeaagles/dafif/WaypointLoader.h"
+#include "openeaagles/dafif/Factory.h"
+
+#include "openeaagles/basic/Object.h"
 
 namespace Eaagles {
 namespace Dafif {
 
-Basic::Object* dafifFormFunc(const char* formname)
+Basic::Object* dafifFormFunc(const char* name)
 {
-    Basic::Object* newform = 0;
-
-    if ( strcmp(formname, AirportLoader::getFormName()) == 0 ) {
-        newform = new AirportLoader();
-    }
-    else if ( strcmp(formname, NavaidLoader::getFormName()) == 0 ) {
-        newform = new NavaidLoader();
-    }
-    else if ( strcmp(formname, WaypointLoader::getFormName()) == 0 ) {
-        newform = new WaypointLoader();
-    }
-
-    return newform;
+   static bool msgPrinted(false);
+   if (!msgPrinted) {
+      std::cout << std::endl;
+      std::cout << "WARNING! The function Dafif::dafifFormFunc() is deprecated - use Dafif::Factory::createObj() instead.";
+      std::cout << std::endl;
+      msgPrinted = true;
+   }
+   return Factory::createObj(name);
 }
 
 } // End Dafif namespace

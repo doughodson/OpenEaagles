@@ -15,7 +15,7 @@ Basic::Object* basicGLFormFunc(const char* name)
    static bool msgPrinted(false);
    if (!msgPrinted) {
       std::cout << std::endl;
-      std::cout << "WARNING!! The function BasicGL::basicGLFormFunc() is deprecated - use BasicGL::Factory::createObj() instead!";
+      std::cout << "WARNING! The function BasicGL::basicGLFormFunc() is deprecated - use BasicGL::Factory::createObj() instead.";
       std::cout << std::endl;
       msgPrinted = true;
    }

@@ -7,7 +7,7 @@
 namespace Eaagles {
    namespace Basic { class Object; }
    namespace Dafif {
-      extern Basic::Object* dafifFormFunc(const char* formname);
+      extern Basic::Object* dafifFormFunc(const char* name);
    }
 }
 
