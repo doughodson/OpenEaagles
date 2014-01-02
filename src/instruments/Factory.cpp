@@ -17,7 +17,7 @@
 #include "openeaagles/instruments/dials/AltitudeDial.h"
 #include "openeaagles/instruments/dials/GMeterDial.h"
 
-// Analog Gauge components 
+// Analog Gauge components
 #include "openeaagles/instruments/gauges/AnalogGauge.h"
 #include "openeaagles/instruments/gauges/GaugeSlider.h"
 #include "openeaagles/instruments/gauges/AoaIndexer.h"
@@ -28,7 +28,7 @@
 #include "openeaagles/instruments/maps/CompassRose.h"
 #include "openeaagles/instruments/maps/BearingPointer.h"
 
-// Generic Landing gear 
+// Generic Landing gear
 #include "openeaagles/instruments/landingGear/LandingGear.h"
 #include "openeaagles/instruments/landingGear/LandingLight.h"
 
@@ -113,7 +113,7 @@ Basic::Object* Factory::createObj(const char* name)
     // digital AOA gauge
     else if ( strcmp(name, AoAIndexer::getFactoryName()) == 0 ) {
         obj = new AoAIndexer;
-    }    
+    }
     // Tick Marks (horizontal and vertical)
     else if ( strcmp(name, TickMarks::getFactoryName()) == 0 ) {
         obj = new TickMarks;
@@ -153,7 +153,7 @@ Basic::Object* Factory::createObj(const char* name)
     // Hold Switch
     else if (strcmp(name, SolenoidSwitch::getFactoryName()) == 0 ) {
         obj = new SolenoidSwitch;
-    }      
+    }
     // Hold Button
     else if (strcmp(name, SolenoidButton::getFactoryName()) == 0 ) {
         obj = new SolenoidButton;
@@ -161,7 +161,7 @@ Basic::Object* Factory::createObj(const char* name)
     // Adi
     else if (strcmp(name, Adi::getFactoryName()) == 0 ) {
         obj = new Adi;
-    }      
+    }
     // Ghost Horizon
     else if (strcmp(name, GhostHorizon::getFactoryName()) == 0 ) {
         obj = new GhostHorizon;
