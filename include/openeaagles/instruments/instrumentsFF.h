@@ -7,9 +7,8 @@
 namespace Eaagles {
    namespace Basic { class Object; }
    namespace Instruments {
-      extern Basic::Object* instrumentsFormFunc(const char* formname);
+      extern Basic::Object* instrumentsFormFunc(const char* name);
    }
 }
 
 #endif
-
