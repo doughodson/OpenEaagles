@@ -13,7 +13,6 @@ OBJS = \
 	$(LIB)(MapDrawer.o) \
 	$(LIB)(TexturePager.o) \
 	$(LIB)(TextureTable.o) \
-	$(LIB)(rpfMapFF.o) \
 	$(LIB)(Support.o) 
 
 all: ${OBJS}
