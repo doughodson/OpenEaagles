@@ -7,7 +7,7 @@
 namespace Eaagles {
    namespace Basic { class Object; }
    namespace Otw {
-      extern Basic::Object* otwFormFunc(const char* formname);
+      extern Basic::Object* otwFormFunc(const char* name);
    }
 }
 

@@ -7,10 +7,10 @@ include ../makedefs
 LIB = $(OPENEAAGLES_LIB_DIR)/liboeOtw.a
 
 OBJS =  \
+	$(LIB)(Factory.o) \
 	$(LIB)(OtwCigiCl.o) \
 	$(LIB)(OtwPC.o) \
 	$(LIB)(otwFF.o)
-
 
 all: ${OBJS}
 
