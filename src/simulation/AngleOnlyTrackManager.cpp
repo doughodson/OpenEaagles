@@ -256,7 +256,7 @@ std::ostream& AngleOnlyTrackManager::serialize(std::ostream& sout, const int i, 
     int j = 0;
     if ( !slotsOnly ) {
         indent(sout,i);
-        sout << "( " << getFormName() << std::endl;
+        sout << "( " << getFactoryName() << std::endl;
         j = 4;
     }
 
@@ -619,7 +619,7 @@ std::ostream& AirAngleOnlyTrkMgr::serialize(std::ostream& sout, const int i, con
     int j = 0;
     if ( !slotsOnly ) {
         indent(sout,i);
-        sout << "( " << getFormName() << std::endl;
+        sout << "( " << getFactoryName() << std::endl;
         j = 4;
     }
 

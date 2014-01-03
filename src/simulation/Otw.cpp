@@ -1129,7 +1129,7 @@ bool Otm::isMatchingPlayerType(const Player* const p) const
    bool match = false;
    if (p != 0 && refFormName != 0) {
       // first match the form name --
-      if (p->isFormName( *refFormName ) ) {
+      if (p->isFactoryName( *refFormName ) ) {
 
          // The form names match!
 

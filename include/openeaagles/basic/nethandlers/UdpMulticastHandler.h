@@ -16,7 +16,7 @@ class String;
 //
 // Description: UDP multicast network handler.
 //
-// Form name: UdpMulticastHandler
+// Factory name: UdpMulticastHandler
 //
 // multicast:
 // "A point-to-many networking model in which a packet is sent to a specific address,

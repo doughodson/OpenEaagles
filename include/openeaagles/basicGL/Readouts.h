@@ -18,7 +18,7 @@ namespace BasicGL {
 //------------------------------------------------------------------------------
 // Class: AsciiText
 //
-// Form name: text
+// Factory name: text
 // Slots:
 //    text   <String>     ! Text String (default: " ")
 //    text   <List>       ! Text List
@@ -52,7 +52,7 @@ public:
 //------------------------------------------------------------------------------
 // Class: Cursor
 //
-// Form name: Cursor
+// Factory name: Cursor
 //
 //------------------------------------------------------------------------------
 class Cursor : public Field {
@@ -67,7 +67,7 @@ public:
 //------------------------------------------------------------------------------
 // Class: NumericReadout
 //
-// Form name: NumericReadout
+// Factory name: NumericReadout
 //
 // Slots:
 //   value           <Float>     ! Value to be displayed (default: 0.0)
@@ -192,7 +192,7 @@ private:
 //------------------------------------------------------------------------------
 // Class: HexReadout
 //
-// Form name: HexReadout
+// Factory name: HexReadout
 //
 // Example formats: 
 //
@@ -217,7 +217,7 @@ protected:
 //------------------------------------------------------------------------------
 // Class: OctalReadout
 //
-// Form name: OctalReadout
+// Factory name: OctalReadout
 //
 // Example formats: 
 //
@@ -242,7 +242,7 @@ protected:
 //------------------------------------------------------------------------------
 // Class: TimeReadout
 //
-// Form name: TimeReadout
+// Factory name: TimeReadout
 //
 // Example formats: 
 //
@@ -278,7 +278,7 @@ protected:
 //------------------------------------------------------------------------------
 // Class: DirectionReadout
 //
-// Form name: DirectionReadout
+// Factory name: DirectionReadout
 //
 // Notes:
 //    1) The 'D' character is used to define the degrees field (required)
@@ -330,7 +330,7 @@ protected:
 //------------------------------------------------------------------------------
 // Class: LatitudeReadout
 //
-// Form name: LatitudeReadout
+// Factory name: LatitudeReadout
 //
 // Notes:
 //    1) see the 'DirectionReadout' notes
@@ -364,7 +364,7 @@ protected:
 // Class: LongitudeReadout
 // Base class:  Object > Graphic > Field > NumericReadout > DirectionReadout > LongitudeReadout
 //
-// Form name: LongitudeReadout
+// Factory name: LongitudeReadout
 //
 // Notes:
 //    1) see the 'DirectionReadout' notes
@@ -401,7 +401,7 @@ protected:
 //
 // Description: Rotary text
 //
-// Form name: Rotary
+// Factory name: Rotary
 //
 //------------------------------------------------------------------------------
 class Rotary : public Field {
@@ -427,7 +427,7 @@ private:
 //
 // Description: Binary rotary
 //
-// Form name: Rotary2
+// Factory name: Rotary2
 //
 //------------------------------------------------------------------------------
 class Rotary2 : public Rotary {

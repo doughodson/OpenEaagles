@@ -14,7 +14,7 @@ namespace Recorder {
 // Class:   FileReader
 // Description: Read and parse data records from a file
 //
-// Form name: FileReader
+// Factory name: FileReader
 // Slots:
 //     filename       <String>     ! Data file name (required)
 //     pathname       <String>     ! Path to the data file's directory (optional)

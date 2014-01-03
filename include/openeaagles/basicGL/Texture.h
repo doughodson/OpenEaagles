@@ -20,7 +20,7 @@ namespace BasicGL {
 // NOTE: Currently reads only simple, uncompressed Microsoft Bitmap (BMP) files.
 //
 // NOTE: The width & height of the bitmap is truncated to powers of 2.
-// Form name: Texture
+// Factory name: Texture
 //
 // Slots:
 //    width       <Number>       ! Size of the texture map (default: 256)

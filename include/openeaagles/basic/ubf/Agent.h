@@ -27,7 +27,7 @@ class Action;
 //    class and are not passed to the rest of the behavior framework.
 //
 //
-// Form name: UbfAgent
+// Factory name: UbfAgent
 // Slots:
 //    state       <State>     ! The agent's state object
 //    behavior    <Behavior>  ! behavior
@@ -78,7 +78,7 @@ inline Basic::Component* Agent::getActor()           { return myActor; }
 // Description: Generic agent class to control a component - the agent's "actor"
 // - a derived agent class that performs its actions in the TC thread
 //
-// Form name: UbfAgentTC
+// Factory name: UbfAgentTC
 //------------------------------------------------------------------------------
 class AgentTC : public Agent
 {

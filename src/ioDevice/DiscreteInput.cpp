@@ -279,7 +279,7 @@ std::ostream& DiscreteInput::serialize(std::ostream& sout, const int i, const bo
 {
    int j = 0;
    if ( !slotsOnly ) {
-      sout << "( " << getFormName() << std::endl;
+      sout << "( " << getFactoryName() << std::endl;
       j = 4;
    }
 

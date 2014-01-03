@@ -241,7 +241,7 @@ std::ostream& Table::serialize(std::ostream& sout, const int i, const bool slots
 {
     int j = 0;
         if (!slotsOnly) {
-        sout << "( " << getFormName() << std::endl;
+        sout << "( " << getFactoryName() << std::endl;
         j = 4;
     }
 
@@ -440,7 +440,7 @@ std::ostream& Table1::serialize(std::ostream& sout, const int i, const bool slot
 {
     int j = 0;
         if (!slotsOnly) {
-        sout << "( " << getFormName() << std::endl;
+        sout << "( " << getFactoryName() << std::endl;
         j = 4;
     }
 
@@ -671,7 +671,7 @@ std::ostream& Table2::serialize(std::ostream& sout, const int i, const bool slot
 {
     int j = 0;
         if (!slotsOnly) {
-        sout << "( " << getFormName() << std::endl;
+        sout << "( " << getFactoryName() << std::endl;
         j = 4;
     }
 
@@ -939,7 +939,7 @@ std::ostream& Table3::serialize(std::ostream& sout, const int i, const bool slot
 {
     int j = 0;
         if (!slotsOnly) {
-        sout << "( " << getFormName() << std::endl;
+        sout << "( " << getFactoryName() << std::endl;
         j = 4;
     }
 
@@ -1251,7 +1251,7 @@ std::ostream& Table4::serialize(std::ostream& sout, const int i, const bool slot
 {
     int j = 0;
         if (!slotsOnly) {
-        sout << "( " << getFormName() << std::endl;
+        sout << "( " << getFactoryName() << std::endl;
         j = 4;
     }
 
@@ -1585,7 +1585,7 @@ std::ostream& Table5::serialize(std::ostream& sout, const int i, const bool slot
 {
     int j = 0;
         if (!slotsOnly) {
-        sout << "( " << getFormName() << std::endl;
+        sout << "( " << getFactoryName() << std::endl;
         j = 4;
     }
 

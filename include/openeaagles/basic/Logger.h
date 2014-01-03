@@ -15,7 +15,7 @@ namespace Basic {
 // Base class:  Object -> Component -> Logger
 // Description: General Message/Event Logger
 //
-// Form name: Logger
+// Factory name: Logger
 // Slots:
 //     file       <String>     ! Log file name (default: empty string)
 //     path       <String>     ! Path to log directory (optional). (default: empty string)

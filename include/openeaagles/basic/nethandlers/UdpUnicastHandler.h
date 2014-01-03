@@ -25,7 +25,7 @@ class String;
 //              The local port must be defined if you're going to be changing
 //              the destination port.
 //
-// Form name: UdpUnicastHandler
+// Factory name: UdpUnicastHandler
 //
 // Slots:
 //      ipAddress  <String>    ! Destination host name or IP address "111.122.133.144"

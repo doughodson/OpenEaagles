@@ -23,7 +23,7 @@ class Station;
 //    the only reason to use this class is if there is state shared between multiple actors
 //    (if there is not shared state, just use a list of standard Agent instances)
 //
-// Form name: MultiActorAgent
+// Factory name: MultiActorAgent
 // Slots:
 //    state       <State>           ! state 
 //    agentList   <PairStream>      ! behavior pairstream

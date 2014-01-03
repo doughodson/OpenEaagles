@@ -141,7 +141,7 @@ public:
 
 inline std::ostream& operator<<(std::ostream& sout, const Distance& n)
 {
-   sout << "( " << n.getFormName() << " " << n.getReal() << " )";
+   sout << "( " << n.getFactoryName() << " " << n.getReal() << " )";
    return sout;
 }
 

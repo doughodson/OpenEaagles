@@ -30,7 +30,7 @@ namespace Simulation {
 //    4) This class is one of the "top level" systems attached to a Player
 //       class (see Player.h).
 //
-// Form name: DynamicsModel
+// Factory name: DynamicsModel
 //
 //==============================================================================
 class DynamicsModel : public Basic::Component  
@@ -111,7 +111,7 @@ public:
 //
 // Description:  Aerodynamics model for air vehicles and weapons
 //
-// Form name: AerodynamicsModel
+// Factory name: AerodynamicsModel
 //==============================================================================
 class AerodynamicsModel : public DynamicsModel  
 {

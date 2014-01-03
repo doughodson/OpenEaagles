@@ -25,7 +25,7 @@ namespace Ubf {
 // Note:
 //    The default is to select the Action with the highest vote value.
 //
-// Form name: UbfArbiter
+// Factory name: UbfArbiter
 // Slots:
 //    behaviors   <PairStream>      ! List of behaviors
 //------------------------------------------------------------------------------

@@ -45,7 +45,7 @@ namespace Terrain {
 // A file name may have addition path prepended.
 // Only the last 11 characters of the file name will be parse for the SW corner.
 //
-// Form name: SrtmHgtFile
+// Factory name: SrtmHgtFile
 // Slots:
 //   N/A
 //

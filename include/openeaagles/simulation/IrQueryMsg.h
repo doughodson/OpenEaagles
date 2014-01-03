@@ -19,7 +19,7 @@ class IrSensor;
 //
 // Description: General IR query message -- Used to request an IR Signature
 //
-// Form name: IrQueryMsg
+// Factory name: IrQueryMsg
 //
 //------------------------------------------------------------------------------
 class IrQueryMsg : public SensorMsg

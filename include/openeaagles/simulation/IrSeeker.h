@@ -24,7 +24,7 @@ class IrQueryMsg;
 //
 // Description: Simple IR seeker model
 //
-// Form name: IrSeeker
+// Factory name: IrSeeker
 //
 //------------------------------------------------------------------------------
 class IrSeeker : public ScanGimbal  

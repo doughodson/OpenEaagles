@@ -21,7 +21,7 @@ namespace BasicGL {
 // Description: Takes a list of colors and breakpoints, and changes colors based
 // on the value given to it in comparison with the breakpoints
 //
-// Form name: ColorRotary
+// Factory name: ColorRotary
 // Slots:
 //      breakcolors: <PairStream>     // sets colors
 //      breakpoints: <PairStream>     // sets our breakpoints

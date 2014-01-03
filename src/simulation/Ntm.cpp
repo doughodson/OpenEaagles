@@ -79,7 +79,7 @@ std::ostream& Ntm::serialize(std::ostream& sout, const int i, const bool slotsOn
    int j = 0;
    if ( !slotsOnly ) {
       indent(sout,i);
-      sout << "( " << getFormName() << std::endl;
+      sout << "( " << getFactoryName() << std::endl;
       j = 4;
       }
 
@@ -87,7 +87,7 @@ std::ostream& Ntm::serialize(std::ostream& sout, const int i, const bool slotsOn
       indent(sout,i+j);
       //sout << "template:" << std::endl;
       //tPlayer->serialize(sout,(i+j+4));
-      sout << "template: ( " << tPlayer->getFormName();
+      sout << "template: ( " << tPlayer->getFactoryName();
       const Basic::String* tt = tPlayer->getType();
       if (tt != 0) {
          sout << " type: " << *tt;

@@ -29,7 +29,7 @@ namespace Simulation {
 //    various R/F systems to use or not use this gimbal function -- our default
 //    member function processPlayersOfInterest() does use the gimbal function. 
 //
-// Form name: RfSystem
+// Factory name: RfSystem
 // Slots:
 //    antennaName        <Basic::String>        ! Name of the requested Antenna 
 //

@@ -17,7 +17,7 @@ namespace BasicGL {
 //------------------------------------------------------------------------------
 // Class: Circle
 //
-// Form name: Circle
+// Factory name: Circle
 // Slots:
 //  radius    <Number>    ! Radius of the circle (default: 1 )
 //  filled    <Number>    ! True if circle is filled (default: false)
@@ -73,7 +73,7 @@ private:
 //------------------------------------------------------------------------------
 // Class: OcclusionCircle
 //
-// Form name: OcclusionCircle
+// Factory name: OcclusionCircle
 // Slots:
 //  outerRadius   <Number>    ! Outer radius of our circle (default: 1.1 )
 //
@@ -106,7 +106,7 @@ private:
 //------------------------------------------------------------------------------
 // Class: Arc
 //
-// Form name: Arc
+// Factory name: Arc
 // Slots:
 //  startAngle   <Number>    ! Start angle of the arc in degrees (default: 0 )
 //  arcLength    <Number>    ! length of the arc in degrees (default: 90)
@@ -155,7 +155,7 @@ private:
 //------------------------------------------------------------------------------
 // Class: OcclusionArc
 //
-// Form name: OcclusionArc
+// Factory name: OcclusionArc
 // Slots:
 //  outerRadius   <Number>    ! Outer radius of our circle (default: 1.1)
 //
@@ -187,7 +187,7 @@ private:
 //------------------------------------------------------------------------------
 // Class: Point
 //
-// Form name: Point
+// Factory name: Point
 //
 // Public member functions:
 //   virtual void drawFunc()
@@ -205,7 +205,7 @@ public:
 //------------------------------------------------------------------------------
 // Class: LineLoop
 //
-// Form name: LineLoop
+// Factory name: LineLoop
 //
 // Public member functions:
 //    virtual void drawFunc()
@@ -222,7 +222,7 @@ public:
 //------------------------------------------------------------------------------
 // Class: Line
 //
-// Form name: Line
+// Factory name: Line
 // Slots:
 //  segment   <Number>    ! True if line segments (default: false)
 //
@@ -257,7 +257,7 @@ private:
 //------------------------------------------------------------------------------
 // Class: Quad
 //
-// Form name: Quad
+// Factory name: Quad
 // Description:
 //      Simple openGL quad strip 
 //------------------------------------------------------------------------------
@@ -284,7 +284,7 @@ protected:
 //------------------------------------------------------------------------------
 // Class: Triangle
 //
-// Form name: Triangle
+// Factory name: Triangle
 // Description:
 //      Simple openGL triangle primitive (or strip, or fan)
 //------------------------------------------------------------------------------

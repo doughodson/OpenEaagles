@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // Class: Image
 // Base class: Basic::Object > Image
-// Form name: SarImage
+// Factory name: SarImage
 // Description: SAR image structure
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_Simulation_Image_H__

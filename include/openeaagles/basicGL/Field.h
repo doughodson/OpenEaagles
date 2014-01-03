@@ -20,7 +20,7 @@ namespace BasicGL {
 //
 // Description: Abstract Field class (not in the formFunc())
 //
-// Form name: Field
+// Factory name: Field
 // Slots:
 //      position       <List>   ! Starting position ( Line Column ) (default: 0)
 //      width          <Number> ! Field width (default: 0)

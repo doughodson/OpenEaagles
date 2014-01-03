@@ -36,7 +36,7 @@ class Steerpoint;
 //       false) then the action will be skipped.
 //
 //
-// Form Name: Route
+// Factory name: Route
 // Slots:
 //    to                <Basic::Number>      ! Initial "TO" steerpoint by steerpoint index number (default: 0)
 //                      <Basic::Identifier>  ! or by steerpoint name (default: 0)

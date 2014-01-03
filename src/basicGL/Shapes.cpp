@@ -107,7 +107,7 @@ std::ostream& Circle::serialize(std::ostream& sout, const int i, const bool slot
    int j = 0;
    if ( !slotsOnly ) {
       //indent(sout,i);
-      sout << "( " << getFormName() << std::endl;
+      sout << "( " << getFactoryName() << std::endl;
       j = 4;
    }
 
@@ -197,7 +197,7 @@ std::ostream& OcclusionCircle::serialize(std::ostream& sout, const int i, const 
    int j = 0;
    if ( !slotsOnly ) {
       //indent(sout,i);
-      sout << "( " << getFormName() << std::endl;
+      sout << "( " << getFactoryName() << std::endl;
       j = 4;
    }
 
@@ -307,7 +307,7 @@ std::ostream& Arc::serialize(std::ostream& sout, const int i, const bool slotsOn
    int j = 0;
    if ( !slotsOnly ) {
       //indent(sout,i);
-      sout << "( " << getFormName() << std::endl;
+      sout << "( " << getFactoryName() << std::endl;
       j = 4;
    }
 
@@ -396,7 +396,7 @@ std::ostream& OcclusionArc::serialize(std::ostream& sout, const int i, const boo
    int j = 0;
    if ( !slotsOnly ) {
       //indent(sout,i);
-      sout << "( " << getFormName() << std::endl;
+      sout << "( " << getFactoryName() << std::endl;
       j = 4;
    }
 
@@ -538,7 +538,7 @@ std::ostream& Line::serialize(std::ostream& sout, const int i, const bool slotsO
    int j = 0;
    if ( !slotsOnly ) {
       //indent(sout,i);
-      sout << "( " << getFormName() << std::endl;
+      sout << "( " << getFactoryName() << std::endl;
       j = 4;
    }
 
@@ -674,7 +674,7 @@ std::ostream& Quad::serialize(std::ostream& sout, const int i, const bool slotsO
    int j = 0;
    if ( !slotsOnly ) {
       //indent(sout,i);
-      sout << "( " << getFormName() << std::endl;
+      sout << "( " << getFactoryName() << std::endl;
       j = 4;
    }
 
@@ -810,7 +810,7 @@ std::ostream& Triangle::serialize(std::ostream& sout, const int i, const bool sl
    int j = 0;
    if ( !slotsOnly ) {
       //indent(sout,i);
-      sout << "( " << getFormName() << std::endl;
+      sout << "( " << getFactoryName() << std::endl;
       j = 4;
    }
 

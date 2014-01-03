@@ -44,7 +44,7 @@ public:
 //------------------------------------------------------------------------------
 // Class: SigConstant
 // Descriptions: Constant RCS signature
-// Form name: SigConstant
+// Factory name: SigConstant
 // Slots:
 //    rcs   <Basic::Number>  ! Constant Radar Cross Section value (default: 0.0)
 //                           !  Basic::Number(square meters) or Basic::Decibel(square meters) or Basic::Area() 
@@ -68,7 +68,7 @@ private:
 //------------------------------------------------------------------------------
 // Class: SigSphere
 // Descriptions: RfSignature of a simple sphere based on radius
-// Form name: SigSphere
+// Factory name: SigSphere
 // Slots:
 //    radius   <Basic::Number>    ! Radius of the sphere (default: 0)
 //
@@ -94,7 +94,7 @@ private:
 // Class: SigPlate
 // Descriptions: RfSignature of a simple plate based on length & width, and always
 //               normal to the transmitter.
-// Form name: SigPlate
+// Factory name: SigPlate
 // Slots:
 //    a    <Basic::Number>    ! length of the plate (default: 0.0)
 //    b    <Basic::Number>    ! width of the plate (default: 0.0)
@@ -124,7 +124,7 @@ private:
 // Class: SigDihedralCR
 // Descriptions: RfSignature of a Dihedral Corner Reflector based on edge length,
 //               and always facing the transmitter.
-// Form name: SigDihedralCR
+// Factory name: SigDihedralCR
 //------------------------------------------------------------------------------
 class SigDihedralCR : public SigPlate  
 {
@@ -144,7 +144,7 @@ private:
 // Class: SigTrihedralCR
 // Descriptions: RfSignature of a Trihedral Corner Reflector based on edge length,
 //               and always facing the transmitter.
-// Form name: SigTrihedralCR
+// Factory name: SigTrihedralCR
 //------------------------------------------------------------------------------
 class SigTrihedralCR : public SigDihedralCR  
 {
@@ -161,7 +161,7 @@ public:
 //------------------------------------------------------------------------------
 // Class: SigSwitch
 // Descriptions: Switch between subcomponent signatures based on ownship camouflage type
-// Form name: SigSwitch
+// Factory name: SigSwitch
 // Note:
 //  1) First pair (1:) is camouflage type 0, the second (2:) is camouflage type 1, etc.
 //------------------------------------------------------------------------------
@@ -180,7 +180,7 @@ public:
 // Class: SigAzEl
 // Descriptions: RfSignature by a table of RCS based on target's az/el angles
 //
-// Form name: SigAzEl
+// Factory name: SigAzEl
 // Slots:
 //
 //    table      <Basic::Table2>   ! Table of RCS by target Az/El angles (default: 0)

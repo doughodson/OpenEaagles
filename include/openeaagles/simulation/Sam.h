@@ -14,7 +14,7 @@ namespace Simulation {
 //
 // Description: Base class for Surface to Air (SAM) Missiles
 //
-// Form name: Sam
+// Factory name: Sam
 //------------------------------------------------------------------------------
 class Sam : public Missile  
 {

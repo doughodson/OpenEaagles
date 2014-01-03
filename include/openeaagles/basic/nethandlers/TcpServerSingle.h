@@ -14,7 +14,7 @@ namespace Basic {
 //
 // Description: Server side of a single TCP/IP connection.  
 //
-// Form name: TcpServer
+// Factory name: TcpServer
 //
 // Input File Example:
 //

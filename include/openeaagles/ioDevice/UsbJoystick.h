@@ -32,7 +32,7 @@ namespace IoDevice {
 //
 //
 //
-// Form Name: UsbJoystick
+// Factory name: UsbJoystick
 //
 // Slots:
 //    deviceIndex <Number>    Unit index

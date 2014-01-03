@@ -18,7 +18,7 @@ namespace Simulation {
 // Class SamVehicle
 // Description: Sam vehicle (TEL, TELAR, etc)
 //
-// Form name: SamVehicle
+// Factory name: SamVehicle
 // Slots:
 //    minLaunchRange    <Basic::Distance>   ! Min launch range (Basic::Distance)
 //                                          ! (default: DEFAULT_MIN_LAUNCH_RANGE)

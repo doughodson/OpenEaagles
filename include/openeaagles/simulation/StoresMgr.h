@@ -32,7 +32,7 @@ class Weapon;
 //              external stores, to include both weapons and external equipment.
 //              A player may be airborne, land-based, water-based or space-based.
 //
-// Form name: BaseStoresMgr
+// Factory name: BaseStoresMgr
 //
 // Events:              
 //    WPN_REL_EVENT  <Basic::Boolean>    ! Weapon release switch with position
@@ -158,7 +158,7 @@ private:
 // Class: SimpleStoresMgr
 // Description: Simple (example) external stores management systems
 //
-// Form name: StoresMgr
+// Factory name: StoresMgr
 //
 // StoresMgr Events:
 //    WPN_REL_EVENT     ! Weapon release switch (see StoresMgr)

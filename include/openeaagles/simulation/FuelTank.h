@@ -14,7 +14,7 @@ namespace Simulation {
 //
 // Description: Generic fuel tank
 //
-// Form Name: FuelTank
+// Factory name: FuelTank
 // Slots:
 //    fuelWt      <Number>  ! Fuel wt (lb) (default: -1)
 //    capacity    <Number>  ! Tank capacity (lb) (default: -1)

@@ -27,7 +27,7 @@ namespace Simulation {
 //              database, etc)
 //
 //
-// Form name: Simulation
+// Factory name: Simulation
 // Slots --
 //    players        <Basic::PairStream>     ! Local player list (Basic::PairStream of Player) (default: 0)
 //

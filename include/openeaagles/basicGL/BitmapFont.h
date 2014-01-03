@@ -18,7 +18,7 @@ namespace BasicGL {
 //
 // Description:  Class to create and load bit map fonts
 //
-// Form name: BitmapFont
+// Factory name: BitmapFont
 // Slots:
 //   reverse   <Number>    ! Reverse video (default: false)
 //

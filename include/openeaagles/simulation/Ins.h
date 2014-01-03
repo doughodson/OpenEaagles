@@ -12,7 +12,7 @@ namespace Simulation {
 //------------------------------------------------------------------------------
 // Classes: Ins
 // Description: Generic Inerial Navigation System (INS) Data
-// Form name: Ins
+// Factory name: Ins
 //------------------------------------------------------------------------------
 class Ins : public Navigation
 {

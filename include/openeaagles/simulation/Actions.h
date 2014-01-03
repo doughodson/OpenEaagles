@@ -76,7 +76,7 @@ private:
 //------------------------------------------------------------------------------
 // Class: ActionImagingSar
 // Description: SAR capture, ATR run and Image download
-// Form name: ActionImagingSar
+// Factory name: ActionImagingSar
 // Slots:
 //   sarLatitude   <LatLon>   ! Target's latitude (LatLon) (default: 0)
 //   sarLongitude  <LatLon>   ! Target's longitude (LatLon) (default: 0)
@@ -143,7 +143,7 @@ private:
 // Class: ActionWeaponRelease
 // Description: Launches a weapon
 //
-// Form name: ActionWeaponRelease
+// Factory name: ActionWeaponRelease
 // Slots:
 //   targetLatitude   <LatLon>  ! Target's latitude (LatLon) (default: 0)
 //   targetLongitude  <LatLon>  ! Target's longitude (LatLon) (default: 0)
@@ -189,7 +189,7 @@ private:
 // Class: ActionDecoyRelease
 // Description:  Releases a decoy 
 //
-// Form name: ActionDecoyRelease
+// Factory name: ActionDecoyRelease
 // Slots:
 //   numToLaunch  <Number>  ! number of decoys to launch (default: 1)
 //   interval     <Number>  ! time, in seconds, between launches (default: 0)
@@ -226,7 +226,7 @@ private:
 // Class: ActionCamouflageType
 // Description: On trigger, switches our ownship's camouflage type
 //
-// Form name: ActionCamouflageType
+// Factory name: ActionCamouflageType
 // Slots:
 //   camouflageType  <Number>  ! User-defined camouflage type (positive integer or zero for none)
 //                             ! (default: 0)

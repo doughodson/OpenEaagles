@@ -15,7 +15,7 @@ namespace Basic {
 //
 // Description:  Class for boolean numbers
 //
-// Form name: boolean
+// Factory name: boolean
 //
 //
 // Public methods: Base class public methods, plus ...

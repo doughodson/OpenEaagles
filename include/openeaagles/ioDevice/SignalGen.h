@@ -28,7 +28,7 @@ namespace IoDevice {
 //   <360           0.0      1.0       1.0       1.0
 //
 //
-// Form Name: SignalGenAI
+// Factory name: SignalGenAI
 // Slots:
 //      signal    <Identifier>   ! Signal type { SINE, COSINE, SQUARE, SAW }
 //                               !  (default: SINE )

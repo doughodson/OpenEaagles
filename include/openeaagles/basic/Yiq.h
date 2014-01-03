@@ -18,7 +18,7 @@ namespace Basic {
 // Y defines the luminance, for a black-and-white image.
 // I and Q determine the color.
 //
-// Form name: yiq
+// Factory name: yiq
 // Slots:
 //       Y  <Number>  Y component (0.0 to 1.0) (default: 0.0)
 //       I  <Number>  I component (-0.6 to 0.6) (default: 0.0)

@@ -20,7 +20,7 @@ class Image;
 // Base class: Basic::Object -> ... -> RfSensor -> Radar -> Sar
 //
 // Description: Generic SAR
-// Form name: Sar
+// Factory name: Sar
 // Slots:
 //    chipSize      <Basic::Number>      ! Chip size (pixels) (default: 0)
 //

@@ -15,7 +15,7 @@ namespace Basic {
 //
 // Description:  Defines a color by Hue, Saturation, Value and Alpha
 //
-// Form name: hsva
+// Factory name: hsva
 // Slots:
 //    alpha      <Number>  ! Set the alpha component (0.0 to 1.0) (default: 1.0)
 //

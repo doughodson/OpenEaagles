@@ -14,7 +14,7 @@ namespace Basic {
 // Classes: FlowRate
 //
 // Description:  Flow Rate as a component of volume and time.
-// Form name: FlowRate
+// Factory name: FlowRate
 // Slots:
 //    volume     <Volume>   ! Volume (default: 1 ft^3)
 //    flowTime   <Time>     ! Time (default: 1 second)

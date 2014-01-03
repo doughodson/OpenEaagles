@@ -16,7 +16,7 @@ namespace Basic {
 // Description: Contains the major axis, minor axis and flattening terms used to
 //              describe an ellipsoidal or a spherical earth model. (See Nav.h)
 //
-// Form name: EarthModel
+// Factory name: EarthModel
 // Slots:
 //     a    <Distance>  ! Semi major axis
 //     a    <Number>    ! -- in meters

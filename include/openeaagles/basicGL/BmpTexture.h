@@ -17,7 +17,7 @@ namespace BasicGL {
 //
 // Description: Read/Write a BMP file (use loadTexture() to read)
 //
-// Form name:
+// Factory name:
 // Slots:
 //    path    <String>     ! Path to the texture directory (default: 0)
 //    file    <String>     ! BmpTexture file name (default: 0)

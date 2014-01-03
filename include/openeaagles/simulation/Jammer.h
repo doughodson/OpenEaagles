@@ -11,7 +11,7 @@ namespace Simulation {
 //------------------------------------------------------------------------------
 // Class: Jammer
 // Description: Example Jammer
-// Form name: Jammer
+// Factory name: Jammer
 //
 // Default R/F sensor type ID is "JAMMER"
 //------------------------------------------------------------------------------

@@ -13,7 +13,7 @@ namespace Simulation {
 // Base class: Basic::Object -> ... -> RfSystem -> RfSensor -> Rwr
 //
 // Description: General Radar Warning Receiver (RWR) Model
-// Form name: Rwr
+// Factory name: Rwr
 //------------------------------------------------------------------------------
 class Rwr : public RfSensor  
 {

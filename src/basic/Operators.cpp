@@ -118,7 +118,7 @@ std::ostream& Add::serialize(std::ostream& sout, const int i, const bool slotsOn
 {
     int j = 0;
     if ( !slotsOnly ) {
-        sout << "( " << getFormName()  << std::endl;
+        sout << "( " << getFactoryName()  << std::endl;
         j = 4;
     }
 
@@ -140,7 +140,7 @@ std::ostream& Subtract::serialize(std::ostream& sout, const int i, const bool sl
 {
     int j = 0;
     if ( !slotsOnly ) {
-        sout << "( " << getFormName()  << std::endl;
+        sout << "( " << getFactoryName()  << std::endl;
         j = 4;
     }
 
@@ -158,7 +158,7 @@ std::ostream& Multiply::serialize(std::ostream& sout, const int i, const bool sl
 {
     int j = 0;
     if ( !slotsOnly ) {
-        sout << "( " << getFormName()  << std::endl;
+        sout << "( " << getFactoryName()  << std::endl;
         j = 4;
     }
 
@@ -176,7 +176,7 @@ std::ostream& Divide::serialize(std::ostream& sout, const int i, const bool slot
 {
     int j = 0;
     if ( !slotsOnly ) {
-        sout << "( " << getFormName()  << std::endl;
+        sout << "( " << getFactoryName()  << std::endl;
         j = 4;
     }
 

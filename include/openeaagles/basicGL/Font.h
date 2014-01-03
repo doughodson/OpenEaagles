@@ -23,7 +23,7 @@ namespace BasicGL {
 //
 // Description:  Abstract font class
 //
-// Form name: Font
+// Factory name: Font
 // Slots:
 //      fontWidth      <Number> ! Font width (default: 1)
 //      fontHeight     <Number> ! Font height (default: 1)

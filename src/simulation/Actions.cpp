@@ -173,7 +173,7 @@ std::ostream& Action::serialize(std::ostream& sout, const int i, const bool slot
     int j = 0;
     if ( !slotsOnly ) {
         indent(sout,i);
-        sout << "( " << getFormName() << std::endl;
+        sout << "( " << getFactoryName() << std::endl;
         j = 4;
     }
 
@@ -499,7 +499,7 @@ std::ostream& ActionImagingSar::serialize(std::ostream& sout, const int i, const
     int j = 0;
     if ( !slotsOnly ) {
         indent(sout,i);
-        sout << "( " << getFormName() << std::endl;
+        sout << "( " << getFactoryName() << std::endl;
         j = 4;
     }
 
@@ -704,7 +704,7 @@ std::ostream& ActionWeaponRelease::serialize(std::ostream& sout, const int i, co
     int j = 0;
     if ( !slotsOnly ) {
         indent(sout,i);
-        sout << "( " << getFormName() << std::endl;
+        sout << "( " << getFactoryName() << std::endl;
         j = 4;
     }
 
@@ -884,7 +884,7 @@ std::ostream& ActionDecoyRelease::serialize(std::ostream& sout, const int i, con
     int j = 0;
     if ( !slotsOnly ) {
         indent(sout,i);
-        sout << "( " << getFormName() << std::endl;
+        sout << "( " << getFactoryName() << std::endl;
         j = 4;
     }
     
@@ -1006,7 +1006,7 @@ std::ostream& ActionCamouflageType::serialize(std::ostream& sout, const int i, c
     int j = 0;
     if ( !slotsOnly ) {
         indent(sout,i);
-        sout << "( " << getFormName() << std::endl;
+        sout << "( " << getFactoryName() << std::endl;
         j = 4;
     }
 

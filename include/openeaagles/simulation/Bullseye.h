@@ -13,7 +13,7 @@ namespace Simulation {
 //
 // Description: Generic Bullseye, used as a reference point
 //
-// Form name: Bullseye
+// Factory name: Bullseye
 //
 //------------------------------------------------------------------------------
 class Bullseye : public Steerpoint

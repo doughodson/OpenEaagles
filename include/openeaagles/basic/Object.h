@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Class: Object   
+// Class: Object
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_Basic_Object_H__
 #define __Eaagles_Basic_Object_H__
@@ -16,7 +16,7 @@ namespace Basic {
 //
 // Description: Our 'system' or top level base class for all framework objects.
 //
-//       Provides a common base class for type checking and support for form names,
+//       Provides a common base class for type checking and support for factory names,
 //       slot tables, exceptions and reference counting.  Most of this needs to
 //       be implemented by each derived class, and the macros in 'macros.h' provide
 //       an easy way to do this.
@@ -36,7 +36,7 @@ namespace Basic {
 // Constructors and general class functions:
 //
 //    Each derived class must provide a standard constructor that requires no
-//    parameters, Foo().  This is required by the class factories (i.e., the
+//    parameters (e.g., Foo()).  This is required by the class factories (i.e., the
 //    form functions) to constructor instances of derived classes.
 //
 //    The copy constructors, assignment operators (=), virtual destructors,
@@ -113,9 +113,9 @@ namespace Basic {
 // Reference counting:
 //
 //    Reference counting is a technique of counting the number of users of an
-//    instantiated object.  It is also a method of deleting objects that are no
+//    instantiated object.  It is used to delete objects that are no
 //    longer referenced.  Two functions (ref(), unref() control the reference
-//    counting of an object.
+//    count of an object.
 //
 //    Using ref() increments the reference count, which indicates another user
 //    of the object.  When an object is created using 'new', a copy operator, copy
@@ -129,28 +129,37 @@ namespace Basic {
 //    Using getRefCount() returns the current value of the Object's reference count
 //
 //
-// Form functions and the form names:
+// Factory classes and the factory names:
 //
-//    The user written form functions are class factories that will create an object
-//    by its 'form' name and will return a pointer to the new object or zero if the
-//    form name wasn't found.  These new objects have a reference count of one.  The
-//    object's form name, which is defined by a parameter to the IMPLEMENT_SUBCLASS()
+//    The user written factory classes (e.g., Factory) or functions will create an object
+//    given its 'factory' name and will return a pointer to the new object or zero if the
+//    object wasn't found.  These new objects have a reference count of one.  The
+//    object's factory name, which is defined by a parameter to the IMPLEMENT_SUBCLASS()
 //    macro, is usually the same or similar to the class name.
 //
-//    A form function is passed to the parser (see parser.y), or a user provided
-//    parser, the form function is used to construct objects using the form
-//    names that were parsed from the input file.
+//    A static factory method or factory function is passed to the parser (see parser.y),
+//    as a helper function to build an object tree.  The factory class or function is used
+//    to construct objects using the factory names that were parsed from the input file.
 //
-//    Typically an application will build its own application level form function,
-//    which in turn will call the various form functions for the model libraries and
-//    OpenEaagles libraries that the application requires.  By ordering these form
-//    functions, the application level form function can search a library containing
+//    Typically an application will build its own application level factory,
+//    which in turn will call the various factory methods for the model libraries and
+//    OpenEaagles libraries that the application requires.  By ordering these factory
+//    calls at the application level, the factory can search a library containing
 //    a few more specific models prior to searching a library of many generic models,
-//    and if a more specific model exists for a given form name then it is used,
+//    and if a more specific model exists for a given factory name then it is used,
 //    otherwise the library of generic models is searched and its model, if found,
 //    is used.
 //
-//    Form name support functions --
+//    Factory name support functions --
+//
+//       bool isFactoryName(char* name)
+//          Returns true if this object's factory name is 'name' or if it is
+//          derived from a factory named 'name'.
+//
+//       const char* Foo::getFactoryName()
+//          Static function that returns the factory name of class Foo.
+//
+//    Depreciated form name support functions (use factory support functions instead)
 //
 //       bool isFormName(char* name)
 //          Returns true if this object's form name is 'name' or if it is
@@ -159,12 +168,12 @@ namespace Basic {
 //       const char* Foo::getFormName()
 //          Static function that returns the form name of class Foo.
 //
-//    (For examples of form functions, see basic/basicFF.cpp, basicGL/basicGLFF.cpp,
-//     simulation/simulationFF.cpp, as well as the various OpenEaagles examples)
+//    (For examples of factory classes, see basic/Factory.cpp, basicGL/Factory.cpp,
+//     simulation/Factory.cpp, as well as the various OpenEaagles examples)
 //
-//    
+//
 // Slots and the Slot table:
-//    
+//
 //    Slot tables define the names of the slots (i.e., attributes) accepted by
 //    the class of objects and maps these slot names to local slot index numbers.
 //
@@ -213,7 +222,7 @@ namespace Basic {
 //    A serializer must be written for each derived class, or use EMPTY_SERIALIZER().
 //
 //    Serializes the object to 'sout' in the standard Eaagles Description
-//    Language (EDL) format, which includes the object's form name and slots.
+//    Language (EDL) format, which includes the object's factory name and slots.
 //
 //       serialize(ostream& sout)
 //       serialize(ostream& sout, int indent)
@@ -313,9 +322,10 @@ class Object {
    protected: void deleteData();
 
    public: virtual bool isClassType(const std::type_info& type) const;
-   public: virtual bool isFormName(const char name[]) const;
-   public: static const char* getFormName();
+   public: virtual bool isFactoryName(const char name[]) const;
+   public: virtual bool isFormName(const char name[]) const;               // depreciated
    public: static const char* getFactoryName();
+   public: static const char* getFormName();                               // depreciated
    public: static const char* getClassName();
    public: virtual std::ostream& serialize(std::ostream& sout, const int i = 0, const bool slotsOnly = false) const;
 

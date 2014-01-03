@@ -15,7 +15,7 @@ namespace Recorder {
 // Description: Serialize and write the data from a protocol buffer DataRecord
 //              message to a file.
 //
-// Form name: FileWriter
+// Factory name: FileWriter
 // Slots:
 //     filename       <String>     ! Data file name
 //     pathname       <String>     ! Path to the data file's directory (optional)

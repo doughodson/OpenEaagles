@@ -38,7 +38,7 @@ class TrackManager;
 // Base class:  Basic::Object -> Basic::Component -> Basic::Logger -> SimLogger
 // Description: Simulation Event & Data Logger
 //
-// Form name: SimLogger
+// Factory name: SimLogger
 // Slots:
 //    timeline          <Basic::Identifier>  ! Source of the timeline { UTC, SIM or EXEC } (default: UTC)
 //    includeUtcTime    <Basic::Number>      ! whether to record UTC time                  (default: true)

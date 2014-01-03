@@ -12,7 +12,7 @@ namespace Terrain {
 //------------------------------------------------------------------------------
 // Class: DataFile
 // Description: Common terrain data file
-// Form name: DataFile
+// Factory name: DataFile
 //
 // Notes:
 //    1) the first elevation point [0] of all arrays is at the reference point

@@ -18,7 +18,7 @@ namespace Simulation {
 // Class: Weapon
 // Description: Abstract class for all weapon types
 //
-// Form name: Weapon
+// Factory name: Weapon
 // Slots:
 //    released      <Basic::Number>    ! Weapon has been released (default: false)
 //    failed        <Basic::Number>    ! Weapon failed (e.g., reasonableness Test) (default: false)

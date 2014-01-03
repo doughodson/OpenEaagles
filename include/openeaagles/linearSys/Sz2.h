@@ -22,7 +22,7 @@ namespace LinearSystem {
 //       ------------------
 //       D1*s*s + D2*s + D3
 //
-// Form name: Sz2
+// Factory name: Sz2
 // Slots:
 //    N1    <Number>     Coefficient N1 (default: 0)
 //    n1    <Number>     Coefficient N1 (default: 0)

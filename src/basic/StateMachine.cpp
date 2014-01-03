@@ -548,7 +548,7 @@ std::ostream& StateMachine::serialize(std::ostream& sout, const int i, const boo
 {
     int j = 0;
     if ( !slotsOnly ) {
-        sout << "( " << getFormName() << std::endl;
+        sout << "( " << getFactoryName() << std::endl;
         j = 4;
     }
 

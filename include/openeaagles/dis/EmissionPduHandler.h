@@ -20,7 +20,7 @@ namespace Dis {
 // Description: Handles the DIS input/output from an emitter system
 //              (e.g., RfSensor class)
 // 
-// Form name: EmissionPduHandler
+// Factory name: EmissionPduHandler
 // Slots:
 //     emitterName      (Number)    DIS emitter name (see DIS enums) 
 //     emitterFunction  (Number)    DIS emitter function code (see enums)

@@ -30,7 +30,7 @@ namespace Recorder {
 // Class:   PrintSelected
 // Description: Print selected data record message data
 //
-// Form name: PrintSelected
+// Factory name: PrintSelected
 // Slots:
 //   messageToken    <Basic::Number>   ! Message ID (token)
 //   fieldName       <Basic::String>   ! Full field name (e.g., Eaagles.Recorder.Pb.PlayerId.name)

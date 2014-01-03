@@ -23,7 +23,7 @@ namespace Simulation {
 // Description: General purpose target profile data that can be associated
 //              with a target steerpoint or a weapon.
 //
-// Form name: TargetData
+// Factory name: TargetData
 // Slots:
 //    enabled          <Boolean>    ! Target enabled flag (default: false)
 //    completed        <Boolean>    ! Target completed flag (default: false)

@@ -59,7 +59,7 @@ class Track;
 //
 //
 // --------------------
-// Form name: Player
+// Factory name: Player
 // Slots --
 //
 //    ! ---

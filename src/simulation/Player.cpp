@@ -4334,7 +4334,7 @@ std::ostream& Player::serialize(std::ostream& sout, const int i, const bool slot
    if ( !slotsOnly ) {
       sout << std::endl;
       indent(sout,i);
-      sout << "( " << getFormName() << std::endl;
+      sout << "( " << getFactoryName() << std::endl;
       j = 4;
    }
 

@@ -13,7 +13,7 @@ namespace Basic {
 // Class:  Add
 // Description:  Class for adding Numbers.
 //
-// Form name: "+"
+// Factory name: "+"
 // Slots:
 //    n2  <Number>  ! 2nd number (first number is from Number) (default: 0.0)
 //    n3  <Number>  ! 3rd number
@@ -52,7 +52,7 @@ protected:
 // Class:  Subtract
 // Description:  Class for subtracting Numbers.
 //
-// Form name: "-"
+// Factory name: "-"
 //
 //        ( - val n2 ) gives val minus n2.
 //
@@ -74,7 +74,7 @@ public:
 // Class:  Multiply
 // Description:  Class for multiplying Numbers.
 //
-// Form name: "*"
+// Factory name: "*"
 //
 //        ( * val n2 ) gives val multiplied by n2.
 //
@@ -96,7 +96,7 @@ public:
 // Class:  Divide
 // Description:  Class for dividing Numbers.
 //
-// Form name: "/"
+// Factory name: "/"
 //
 //        ( / val n2 ) gives val divided by n2.
 //

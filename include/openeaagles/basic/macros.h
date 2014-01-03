@@ -11,18 +11,18 @@
 //       the user is required to declare any additional constructors including the
 //       standard constructor (i.e., no arguments; Foo()).
 //
-//    IMPLEMENT_SUBCLASS(ThisType, "formName")
+//    IMPLEMENT_SUBCLASS(ThisType, "factoryName")
 //       Macro to implement a standard set of required member functions
-//       and member variables for the class 'ThisType', and to set its form name to
-//       'formName'.  The user is required to implement the copyData(), deleteData()
+//       and member variables for the class 'ThisType', and to set its factory name to
+//       'factoryName'.  The user is required to implement the copyData(), deleteData()
 //       and serialize() functions, the slot table, and any constructors that the user
 //       has declared.
 //
-//    IMPLEMENT_ABSTRACT_SUBCLASS(ThisType, "formName") 
+//    IMPLEMENT_ABSTRACT_SUBCLASS(ThisType, "factoryName") 
 //       Macro to implement an abstract class.  Same as IMPLEMENT_SUBCLASS()
 //       except that the clone function always returns a zero(0).
 //
-//    IMPLEMENT_PARTIAL_SUBCLASS(ThisType, "formName")
+//    IMPLEMENT_PARTIAL_SUBCLASS(ThisType, "factoryName")
 //       Same as IMPLEMENT_SUBCLASS() except that the copy constructor,
 //       the destructor, the copy operator and the clone function are
 //       left to the user to define (i.e., some time you just need to do
@@ -65,7 +65,7 @@
 //    EMPTY_SERIALIZER(ThisType) 
 //       Implements an empty serialize function for the class 'ThisType'
 //
-//    IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(ThisType, "formName")
+//    IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(ThisType, "factoryName")
 //       Combines the IMPLEMENT_SUBCLASS() and EMPTY_SLOTTABLE() macros
 //        for the class 'ThisType'
 //
@@ -135,8 +135,9 @@
     private: static struct _Static _static;                                                           \
     private: static const unsigned int classIndex;                                                    \
     protected: static const _Static* getStatic();                                                     \
-    public: static const char* getFormName();                                                         \
     public: static const char* getFactoryName();                                                      \
+    public: static const char* getFormName();                                                         \
+    public: virtual bool isFactoryName(const char name[]) const;                                      \
     public: virtual bool isFormName(const char name[]) const;                                         \
     protected: virtual bool setSlotByIndex(const int slotindex, Eaagles::Basic::Object* const obj);   \
     protected: virtual Eaagles::Basic::Object* getSlotByIndex(const int slotindex);                   \
@@ -150,9 +151,9 @@
 
 
 
-#define IMPLEMENT_SUBCLASS(ThisType, FORMNAME)                                         \
+#define IMPLEMENT_SUBCLASS(ThisType, FACTORYNAME)                                      \
     ThisType::_Static ThisType::_static(                                               \
-      registerClass(&_static), typeid(ThisType).name(), FORMNAME,                      \
+      registerClass(&_static), typeid(ThisType).name(), FACTORYNAME,                   \
         &ThisType::slottable, BaseClass::getStatic()                                   \
     );                                                                                 \
     const ThisType::_Static* ThisType::getStatic() { return &_static; }                \
@@ -163,6 +164,12 @@
         if (name == 0) return false;                                                   \
         if ( strcmp(_static.fname,name) == 0 )  return true;                           \
         else return ThisType::BaseClass::isFormName(name);                             \
+    }                                                                                  \
+    bool ThisType::isFactoryName(const char name[]) const                              \
+    {                                                                                  \
+        if (name == 0) return false;                                                   \
+        if ( strcmp(_static.fname,name) == 0 )  return true;                           \
+        else return ThisType::BaseClass::isFactoryName(name);                          \
     }                                                                                  \
     const Eaagles::Basic::SlotTable& ThisType::getSlotTable()  { return slottable; }   \
     bool ThisType::isClassType(const std::type_info& type) const                       \
@@ -190,9 +197,9 @@
 
 
 
-#define IMPLEMENT_PARTIAL_SUBCLASS(ThisType, FORMNAME)                                 \
+#define IMPLEMENT_PARTIAL_SUBCLASS(ThisType, FACTORYNAME)                              \
     ThisType::_Static ThisType::_static(                                               \
-      registerClass(&_static), typeid(ThisType).name(), FORMNAME,                      \
+      registerClass(&_static), typeid(ThisType).name(), FACTORYNAME,                   \
         &ThisType::slottable, BaseClass::getStatic()                                   \
     );                                                                                 \
     const ThisType::_Static* ThisType::getStatic() { return &_static; }                \
@@ -204,6 +211,12 @@
         if ( strcmp(_static.fname,name) == 0 )  return true;                           \
         else return ThisType::BaseClass::isFormName(name);                             \
     }                                                                                  \
+    bool ThisType::isFactoryName(const char name[]) const                              \
+    {                                                                                  \
+        if (name == 0) return false;                                                   \
+        if ( strcmp(_static.fname,name) == 0 )  return true;                           \
+        else return ThisType::BaseClass::isFactoryName(name);                          \
+    }                                                                                  \
     const Eaagles::Basic::SlotTable& ThisType::getSlotTable() { return slottable; }    \
     bool ThisType::isClassType(const std::type_info& type) const                       \
     {                                                                                  \
@@ -213,9 +226,9 @@
 
 
 
-#define IMPLEMENT_ABSTRACT_SUBCLASS(ThisType, FORMNAME)                                \
+#define IMPLEMENT_ABSTRACT_SUBCLASS(ThisType, FACTORYNAME)                             \
     ThisType::_Static ThisType::_static(                                               \
-      registerClass(&_static), typeid(ThisType).name(), FORMNAME,                      \
+      registerClass(&_static), typeid(ThisType).name(), FACTORYNAME,                   \
         &ThisType::slottable, BaseClass::getStatic()                                   \
     );                                                                                 \
     const ThisType::_Static* ThisType::getStatic() { return &_static; }                \
@@ -226,6 +239,12 @@
         if (name == 0) return false;                                                   \
         if ( strcmp(_static.fname,name) == 0 )  return true;                           \
         else return ThisType::BaseClass::isFormName(name);                             \
+    }                                                                                  \
+    bool ThisType::isFactoryName(const char name[]) const                              \
+    {                                                                                  \
+        if (name == 0) return false;                                                   \
+        if ( strcmp(_static.fname,name) == 0 )  return true;                           \
+        else return ThisType::BaseClass::isFactoryName(name);                          \
     }                                                                                  \
     const Eaagles::Basic::SlotTable& ThisType::getSlotTable() { return slottable; }    \
     bool ThisType::isClassType(const std::type_info& type) const                       \
@@ -281,8 +300,8 @@
 
 
 
-#define IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(ThisType,FORMNAME)                          \
-    IMPLEMENT_SUBCLASS(ThisType,FORMNAME)                                              \
+#define IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(ThisType,FACTORYNAME)                       \
+    IMPLEMENT_SUBCLASS(ThisType,FACTORYNAME)                                           \
     EMPTY_SLOTTABLE(ThisType)
 
 

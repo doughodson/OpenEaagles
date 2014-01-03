@@ -47,7 +47,7 @@ class Material;
 //
 //
 //
-// Form name: Display
+// Factory name: Display
 // Slots:
 //  name             <String>      ! Display name (default: " ")
 //  colorTable       <PairStream>  ! Color table (default: 0)

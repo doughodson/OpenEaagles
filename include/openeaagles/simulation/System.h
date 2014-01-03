@@ -20,7 +20,7 @@ class Simulation;
 // Description: Base classes for all simulation systems that can be attached
 //              to a player.
 //
-// Form name: System
+// Factory name: System
 // Slots:
 //    powerSwitch    <Basic::String>   ! Power switch position ("OFF", "STBY", "ON") (default: "ON")
 //

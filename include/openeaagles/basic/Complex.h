@@ -14,7 +14,7 @@ namespace Basic {
 // Class: Complex
 // Description:  Generic complex number class
 //
-// Form name: Complex
+// Factory name: Complex
 // Slots:
 //     imag  <Number>  ! imaginary (default: 0)
 //==============================================================================

@@ -28,7 +28,7 @@ namespace BasicGL {
 // Description:  Abstract font class for the Freetype2 fonts.  This uses freetype 2 
 // and Open GL (FTGL) to draw the fonts.
 //
-// Form name: FTGLFonts
+// Factory name: FTGLFonts
 // Slots:
 //  faceSize      <Number>    ! font face size (default: 1)
 //
@@ -74,7 +74,7 @@ private:
 // Class: FtglBitmapFont
 //
 // Description: Bitmap Font
-// Form name: FTGLBitmapFonts
+// Factory name: FTGLBitmapFonts
 //
 // Public member functions:
 //   outputText(double x, double y, char* txt, int n, bool vf)
@@ -103,7 +103,7 @@ public:
 //------------------------------------------------------------------------------
 // Class: FtglExtrdFont
 // Description: Creates a Freetype Extruded Font type
-// Form name: FTGLExtrdFonts
+// Factory name: FTGLExtrdFonts
 // Slots:
 //   depth         <Number>    ! Depth (default: 5.0f)
 //
@@ -145,7 +145,7 @@ private:
 // Class:  FtglOutlineFont
 //
 // Description: Outlined Font
-// Form name: FTGLOutlineFonts
+// Factory name: FTGLOutlineFonts
 //
 // Public member functions:
 //   outputText(double x, double y, char* txt, int n, bool vf)
@@ -175,7 +175,7 @@ public:
 // Class: FtglPixmapFont
 //
 // Description: Pixmapped Font
-// Form name: FTGLPixmapFonts
+// Factory name: FTGLPixmapFonts
 //
 // Public member functions:
 //   outputText(double x, double y, char* txt, int n, bool vf)
@@ -205,7 +205,7 @@ public:
 // Class: FtglPolygonFont
 //
 // Description: Polygon Font
-// Form name: FTGLPolygonFonts
+// Factory name: FTGLPolygonFonts
 //
 // Public member functions:
 //   outputText(double x, double y, char* txt, int n, bool vf)
@@ -235,7 +235,7 @@ public:
 // Class: FtglHaloFont
 //
 // Description: Polygon font that also draws a halo around the font
-// Form name: FTGLHaloFonts
+// Factory name: FTGLHaloFonts
 // Slots:
 //   halocolor      <Color>    ! Font halo color (default = 0)
 //   linewidth      <Number>   ! Font line width (default = 1)
@@ -281,7 +281,7 @@ private:
 // Class: FtglTextureFont
 //
 // Description: Texture Font
-// Form name: FTGLTextureFonts
+// Factory name: FTGLTextureFonts
 //
 // Public member functions:
 //   outputText(double x, double y, char* txt, int n, bool vf)

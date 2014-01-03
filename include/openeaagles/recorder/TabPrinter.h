@@ -25,7 +25,7 @@ namespace Recorder {
 // Class:   TabPrinter
 // Description: Print the data from a protocol buffer DataRecord
 //
-// Form name: TabPrinter
+// Factory name: TabPrinter
 // Slots:
 //    msgHdrOptn   ! Msg Header options (see TabPrinter.h)
 //    divider      ! Field divider (default: tab)

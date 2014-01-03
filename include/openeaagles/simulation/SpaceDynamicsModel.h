@@ -20,7 +20,7 @@ namespace Simulation {
 //    2) computer model dynamics in DynamicsModel::dynamics(), which is called
 //    from Player::dynamics() to be synchronized.
 //
-// Form name: SpaceDynamicsModel
+// Factory name: SpaceDynamicsModel
 //==============================================================================
 class SpaceDynamicsModel : public DynamicsModel  
 {

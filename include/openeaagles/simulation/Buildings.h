@@ -13,7 +13,7 @@ namespace Simulation {
 //==============================================================================
 // Class Building
 // Description: Generic building
-// Form name: Building
+// Factory name: Building
 //==============================================================================
 class Building : public Player  
 {

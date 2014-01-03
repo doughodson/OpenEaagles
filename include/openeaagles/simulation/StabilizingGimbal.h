@@ -18,7 +18,7 @@ namespace Simulation {
 //------------------------------------------------------------------------------
 // Class: StabilizingGimbal
 // Description: This gimbal tries to counter the player's roll, pitch and yaw movements.
-// Form name: StabilizingGimbal
+// Factory name: StabilizingGimbal
 // Slots:
 //    stabilizingMode  <Basic::String>    ! Sets the type of stabilization we desire  (elevation, roll, horizon)
 //                                        ! (default: HORIZON)

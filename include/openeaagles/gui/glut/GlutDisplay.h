@@ -33,7 +33,7 @@ namespace Glut {
 //    used whenever the main window is reshaped with subwindow reshaping (resizeSubwindows)
 //    enabled.  They can be changed and the subwindow reshaped using reshapeSubWindow().
 //
-// Form name: GlutDisplay
+// Factory name: GlutDisplay
 // Slots:
 //    fullScreen        (Boolean)   ! Flag to set full screen mode  -- Main windows only -- (default: false)
 //    idleSleepTime     (Number)    ! Idle callback sleep time (MS) -- Main windows only -- (default: 40)

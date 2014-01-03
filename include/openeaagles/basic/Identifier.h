@@ -18,7 +18,7 @@ namespace Basic {
 // Note: When setting the identifier, any spaces will be replaced
 //       with underscores.
 //
-// Form name: Identifier
+// Factory name: Identifier
 //------------------------------------------------------------------------------
 class Identifier : public String {
     DECLARE_SUBCLASS(Identifier,String)

@@ -13,7 +13,7 @@ namespace Terrain {
 //------------------------------------------------------------------------------
 // Class: QuadMap
 // Description: Manage up to 4 elevation files in a 2x2 pattern
-// Form name: QuadMap
+// Factory name: QuadMap
 //------------------------------------------------------------------------------
 class QuadMap : public Basic::Terrain
 {

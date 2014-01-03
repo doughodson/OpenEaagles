@@ -14,7 +14,7 @@ namespace BasicGL {
 // Base class:  Object -> Font -> StrokeFont
 //
 // Description:  (SGI's) Stroke font
-// Form name: StrokeFont
+// Factory name: StrokeFont
 //
 //
 // public methods (member functions):

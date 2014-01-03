@@ -19,7 +19,7 @@ class Number;
 //
 // Description: General Purpose Color class; used with RGB and HSV classes
 //
-// Form name: Color
+// Factory name: Color
 //
 //
 // Public methods:

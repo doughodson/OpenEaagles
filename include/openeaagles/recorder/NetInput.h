@@ -15,7 +15,7 @@ namespace Recorder {
 // Class:   NetInput
 // Description: Read and parse data records from a network stream
 //
-// Form name: NetInput
+// Factory name: NetInput
 // Slots:
 //      netHandler  <NetHandler>    Network input handler
 //      noWait      <Number>        No wait (unblocked) I/O flag (default: false -- blocked I/O)

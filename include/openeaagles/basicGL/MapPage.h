@@ -51,7 +51,7 @@ namespace BasicGL {
 //       radians, using the appropriate (setHeadingDeg, setHeadingRad) functions.  
 //       HOWEVER, when using an event call, all of it must be sent as degrees!
 //
-// Form name: MapPage
+// Factory name: MapPage
 // Slots:
 //
 //   outerRadius           <Number> ! Radius (centered) of our outer circle (units) (default: 1.0)

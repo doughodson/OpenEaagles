@@ -17,7 +17,7 @@ class Number;
 //
 // Description: UDP broadcast network handler
 //
-// Form name: UdpBroadcastHandler
+// Factory name: UdpBroadcastHandler
 //
 // Slots:
 //       networkMask  <String>    ! Host Net Mask   "255.255.255.255"

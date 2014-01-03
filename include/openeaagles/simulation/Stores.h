@@ -18,7 +18,7 @@ namespace Simulation {
 // Description: Generic external stores container class (e.g., launcher, rack,
 //              ejector, pylon, etc).
 //
-// Form Name: Stores
+// Factory name: Stores
 // Slots:
 //    numStations <Number>             ! Number of stations (less than or equal MAX_STATIONS)
 //                                     ! (default: 0)

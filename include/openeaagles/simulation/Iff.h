@@ -15,7 +15,7 @@ namespace Simulation {
 //
 // Description: Generic class for all IFF systems (a.k.a. the SQUAWK box)
 //
-// Form name: Iff
+// Factory name: Iff
 // Slots:
 //   mode1         <Number>   ! Mode 1 Code   (range: 00 to 073 octal) (default: 0)
 //                            ! -- first digit 0 to 7, second digit 0 to 3 (default: 0)

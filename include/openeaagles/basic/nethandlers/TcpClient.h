@@ -15,7 +15,7 @@ namespace Basic {
 // Description: Client side of a single TCP/IP connection.
 //
 //
-// Form name: TcpClient
+// Factory name: TcpClient
 // Slots:
 //      ipAddress  <String>    ! Destination host name or IP address "111.122.133.144"
 //                             ! (default: found via local host name)

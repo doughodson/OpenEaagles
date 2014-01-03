@@ -21,7 +21,7 @@ namespace Simulation {
 //==============================================================================
 // Class GroundVehicle
 //
-// Form name: GroundVehicle
+// Factory name: GroundVehicle
 // Slots:
 //    commandedPosition <Identifier>   ! Launcher's init commanded position [UP, DOWN, NONE] (default: NONE)
 //    launcherDownAngle <Angle>        ! Min (down) Launcher angle (default: 0.0)
@@ -91,7 +91,7 @@ private:
 
 //==============================================================================
 // Class Tank
-// Form name: Tank
+// Factory name: Tank
 //==============================================================================
 class Tank : public GroundVehicle  
 {
@@ -103,7 +103,7 @@ public:
 
 //==============================================================================
 // Class ArmoredVehicle
-// Form name: ArmoredVehicle
+// Factory name: ArmoredVehicle
 //==============================================================================
 class ArmoredVehicle : public GroundVehicle  
 {
@@ -115,7 +115,7 @@ public:
 
 //==============================================================================
 // Class WheeledVehicle
-// Form name: WheeledVehicle
+// Factory name: WheeledVehicle
 //==============================================================================
 class WheeledVehicle : public GroundVehicle  
 {
@@ -127,7 +127,7 @@ public:
 
 //==============================================================================
 // Class Artillery
-// Form name: Artillery
+// Factory name: Artillery
 //==============================================================================
 class Artillery : public GroundVehicle  
 {
@@ -140,7 +140,7 @@ public:
 
 //==============================================================================
 // Class GroundStation
-// Form name: GroundStation
+// Factory name: GroundStation
 //==============================================================================
 class GroundStation : public GroundVehicle  
 {
@@ -152,7 +152,7 @@ public:
 
 //==============================================================================
 // Class GroundStationRadar
-// Form name: GroundStationRadar
+// Factory name: GroundStationRadar
 //==============================================================================
 class GroundStationRadar : public GroundStation  
 {
@@ -164,7 +164,7 @@ public:
 
 //==============================================================================
 // Class GroundStationUav
-// Form name: GroundStationUav
+// Factory name: GroundStationUav
 //==============================================================================
 class GroundStationUav : public GroundStation  
 {

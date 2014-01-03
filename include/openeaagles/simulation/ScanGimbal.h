@@ -18,7 +18,7 @@ namespace Simulation {
 // Description: Simple Gimbal model: provides rate & position servo
 //              control, as well as 1, 2 and 4 bar scans
 //
-// Form name: ScanGimbal
+// Factory name: ScanGimbal
 // Slots:
 //    scanMode             <String>       ! Sets the type of scan we desire ...(default: MANUAL_SCAN)
 //                                        ! ... { manual, horizontal, vertical, conical, circular, pseudorandom }

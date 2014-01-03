@@ -21,7 +21,7 @@ namespace Basic {
 // Class: Matrix
 // Description:  Generic NxM matrix class
 //
-// Form name: Matrix
+// Factory name: Matrix
 //------------------------------------------------------------------------------
 class Matrix : public Object {
    DECLARE_SUBCLASS(Matrix, Object)

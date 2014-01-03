@@ -18,7 +18,7 @@ namespace LinearSystem {
 //              next sample is taken.
 //
 //
-// Form name: SaH
+// Factory name: SaH
 // Slots:
 //    rate  <Frequency>  Sample rate
 //    rate  <Number>     Sample rate Hz 

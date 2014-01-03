@@ -31,7 +31,7 @@ namespace Basic {
 //    no intensity (black)   0.0
 //
 //
-// Form name: hsv
+// Factory name: hsv
 // Slots:
 //     hue        <Number>  ! Set the hue component (0.0 to 360.0, default: 0.0)
 //     saturation <Number>  ! Set the saturation component (0.0 to 1.0, default: 0.0)

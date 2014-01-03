@@ -15,7 +15,7 @@ namespace Simulation {
 // Class: AngleOnlyTrackManager
 // Description: Abstract class for Angle Only Track Managers
 //
-// Form name: AngleOnlyTrackManager
+// Factory name: AngleOnlyTrackManager
 // Slots:
 //    azimuthBin    <Number>   ! Azimuth Bin (default: PI)
 //    elevationBin  <Number>   ! Elevation Bin (default: PI)
@@ -63,7 +63,7 @@ private:
 // Base class: Basic::Object -> Basic::Component -> System -> TrackManager -> AirAngleOnlyTrkMgr
 //
 // Description: Track Manager for A/A modes (e.g., TWS, ACM, SST)
-// Form name: AirAngleOnlyTrkMgr
+// Factory name: AirAngleOnlyTrkMgr
 //
 //==============================================================================
 class AirAngleOnlyTrkMgr : public AngleOnlyTrackManager  

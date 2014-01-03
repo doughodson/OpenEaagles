@@ -20,11 +20,11 @@ Basic::Object* Factory::createObj(const char* name)
     Basic::Object* obj = 0;
 
     // Map Drawer
-    if ( strcmp(name, Rpf::MapDrawer::getFormName()) == 0 ) {
+    if ( strcmp(name, Rpf::MapDrawer::getFactoryName()) == 0 ) {
         obj = new Rpf::MapDrawer();
     }
     // CadrgMap
-    else if ( strcmp(name, Rpf::CadrgMap::getFormName()) == 0 ) {
+    else if ( strcmp(name, Rpf::CadrgMap::getFactoryName()) == 0 ) {
         obj = new Rpf::CadrgMap();
     }
 

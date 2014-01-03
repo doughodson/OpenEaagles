@@ -18,7 +18,7 @@ namespace Simulation {
 //                                           ..  -> AirVehicle -> Helicopter
 //                                           ..  -> AirVehicle -> UnmannedAirVehicle
 //
-// Form name: AirVehicle
+// Factory name: AirVehicle
 // Slots:
 //  initGearPos     ! Initial gear position (default: up),
 //                  !   <Basic::String>: "up" or "down"
@@ -165,7 +165,7 @@ private:
 
 //==============================================================================
 // Class Aircraft
-// Form name: Aircraft
+// Factory name: Aircraft
 //==============================================================================
 class Aircraft : public AirVehicle  
 {
@@ -178,7 +178,7 @@ public:
 
 //==============================================================================
 // Class Helicopter
-// Form name: Helicopter
+// Factory name: Helicopter
 //==============================================================================
 class Helicopter : public AirVehicle  
 {
@@ -191,7 +191,7 @@ public:
 
 //==============================================================================
 // Class UnmannedAirVehicle
-// Form name: UnmannedAirVehicle
+// Factory name: UnmannedAirVehicle
 //==============================================================================
 class UnmannedAirVehicle : public AirVehicle  
 {

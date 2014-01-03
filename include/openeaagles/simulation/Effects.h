@@ -18,7 +18,7 @@ namespace Simulation {
 //    they can be jettisoned and released, or pre-released() and be become
 //    an independent player.  They can also be managed by a Stores class.
 //
-// Form name: Effects
+// Factory name: Effects
 // Slots:
 //    dragIndex   <Number>   ! drag index used by default dynamics (default: 0.0006f)
 //
@@ -56,7 +56,7 @@ private:
 //------------------------------------------------------------------------------
 // Class: Chaff
 // Description: Generic chaff class
-// Form name: Chaff
+// Factory name: Chaff
 //------------------------------------------------------------------------------
 class Chaff : public Effects
 {
@@ -74,7 +74,7 @@ public:
 //------------------------------------------------------------------------------
 // Class: Flare
 // Description: Generic flare class
-// Form name: Flare
+// Factory name: Flare
 //------------------------------------------------------------------------------
 class Flare : public Effects
 {
@@ -92,7 +92,7 @@ public:
 //------------------------------------------------------------------------------
 // Class: Decoy
 // Description: Generic decoy class
-// Form name: Decoy
+// Factory name: Decoy
 //------------------------------------------------------------------------------
 class Decoy : public Effects  
 {

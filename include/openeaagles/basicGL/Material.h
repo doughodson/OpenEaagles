@@ -21,7 +21,7 @@ namespace BasicGL {
 //   Specular color - mirror reflecting color of the material (shiny highlights)
 //   How shiny our material is (0 = dull, 128 = really shiny)
 //
-// Form name: Material
+// Factory name: Material
 // Slots
 //    ambientColor   <Pairstream>  ! List of numbers for the ambient values
 //    ambientColor   <Number>      ! Ambient color - light coming from material scattered in all directions equally

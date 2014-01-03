@@ -22,7 +22,7 @@ class RfSystem;
 //              control, as well as 1, 2 and 4 bar scans
 //
 //
-// Form name: Antenna
+// Factory name: Antenna
 // Slots:
 //      polarization    <Basic::String>  ! Antenna Polarization  { none, vertical, horizontal, slant, RHC, LHC }
 //                                       ! (default: NONE)

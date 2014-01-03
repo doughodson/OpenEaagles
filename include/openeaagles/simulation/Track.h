@@ -21,7 +21,7 @@ class Player;
 //------------------------------------------------------------------------------
 // Class: Track
 // Base class: Basic::Object -> Track
-// Form name: Track
+// Factory name: Track
 // Description: Generic Target Track
 //------------------------------------------------------------------------------
 class Track : public Basic::Object  
@@ -273,7 +273,7 @@ protected:
 //------------------------------------------------------------------------------
 // Class: RfTrack
 // Base class: Basic::Object -> Track -> RfTrack
-// Form name: RfTrack
+// Factory name: RfTrack
 // Description: Generic R/F Target Track (onboard sensors)
 //------------------------------------------------------------------------------
 class RfTrack : public Track  
@@ -307,7 +307,7 @@ protected:
 
 //------------------------------------------------------------------------------
 // Class: IrTrack
-// Form name: IrTrack
+// Factory name: IrTrack
 // Description: Generic IR Target Track (onboard sensors)
 //------------------------------------------------------------------------------
 class IrTrack : public Track  

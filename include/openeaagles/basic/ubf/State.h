@@ -15,7 +15,7 @@ namespace Ubf {
 //
 // Description: The actor's state vector, as seen by the Behaviors.
 //
-// Form name: UbfState
+// Factory name: UbfState
 //------------------------------------------------------------------------------
 class State : public Basic::Component
 {

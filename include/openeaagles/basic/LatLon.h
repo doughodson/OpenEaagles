@@ -18,7 +18,7 @@ class Number;
 //
 // Description:  Class/form for latitude or longitude numbers.
 //
-// Form name: LatLon
+// Factory name: LatLon
 // Slots:
 //    direction <String>  ! Set the direction ("North, South", "East", or "West") (default: NONE)
 //    degrees   <Number>  ! Set the degrees component. (default: 0)
