@@ -11,13 +11,13 @@ namespace Terrain {
 
 Basic::Object* terrainFormFunc(const char* name)
 {
-   static bool msgPrinted(false);
-   if (!msgPrinted) {
-      std::cout << std::endl;
-      std::cout << "WARNING! The function Terrain::terrainFormFunc() is deprecated - use Terrain::Factory::createObj() instead.";
-      std::cout << std::endl;
-      msgPrinted = true;
-   }
+   //static bool msgPrinted(false);
+   //if (!msgPrinted) {
+   //   std::cout << std::endl;
+   //   std::cout << "WARNING! The function Terrain::terrainFormFunc() is deprecated - use Terrain::Factory::createObj() instead.";
+   //   std::cout << std::endl;
+   //   msgPrinted = true;
+   //}
    return Factory::createObj(name);
 }
 

@@ -12,13 +12,13 @@ namespace IoDevice {
 
 Basic::Object* ioDeviceFormFunc(const char* name)
 {
-   static bool msgPrinted(false);
-   if (!msgPrinted) {
-      std::cout << std::endl;
-      std::cout << "WARNING! The function IoDevice::ioDeviceFormFunc() is deprecated - use IoDevice::Factory::createObj() instead.";
-      std::cout << std::endl;
-      msgPrinted = true;
-   }
+   //static bool msgPrinted(false);
+   //if (!msgPrinted) {
+   //   std::cout << std::endl;
+   //   std::cout << "WARNING! The function IoDevice::ioDeviceFormFunc() is deprecated - use IoDevice::Factory::createObj() instead.";
+   //   std::cout << std::endl;
+   //   msgPrinted = true;
+   //}
    return Factory::createObj(name);
 }
 

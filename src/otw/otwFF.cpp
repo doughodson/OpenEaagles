@@ -11,13 +11,13 @@ namespace Otw {
 
 Basic::Object* otwFormFunc(const char* name)
 {
-   static bool msgPrinted(false);
-   if (!msgPrinted) {
-      std::cout << std::endl;
-      std::cout << "WARNING! The function Otw::otwFormFunc() is deprecated - use Otw::Factory::createObj() instead.";
-      std::cout << std::endl;
-      msgPrinted = true;
-   }
+   //static bool msgPrinted(false);
+   //if (!msgPrinted) {
+   //   std::cout << std::endl;
+   //   std::cout << "WARNING! The function Otw::otwFormFunc() is deprecated - use Otw::Factory::createObj() instead.";
+   //   std::cout << std::endl;
+   //   msgPrinted = true;
+   //}
    return Factory::createObj(name);
 }
 

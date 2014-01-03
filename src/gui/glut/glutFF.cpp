@@ -12,13 +12,13 @@ namespace Glut {
 
 Basic::Object* glutFormFunc(const char* name)
 {
-   static bool msgPrinted(false);
-   if (!msgPrinted) {
-      std::cout << std::endl;
-      std::cout << "WARNING! The function Glut::glutFormFunc() is deprecated - use Glut::Factory::createObj() instead.";
-      std::cout << std::endl;
-      msgPrinted = true;
-   }
+   //static bool msgPrinted(false);
+   //if (!msgPrinted) {
+   //   std::cout << std::endl;
+   //   std::cout << "WARNING! The function Glut::glutFormFunc() is deprecated - use Glut::Factory::createObj() instead.";
+   //   std::cout << std::endl;
+   //   msgPrinted = true;
+   //}
    return Factory::createObj(name);
 }
 

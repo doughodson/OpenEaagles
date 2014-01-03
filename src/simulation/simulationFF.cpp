@@ -11,13 +11,13 @@ namespace Simulation {
 
 Basic::Object* simulationFormFunc(const char* name)
 {
-   static bool msgPrinted(false);
-   if (!msgPrinted) {
-      std::cout << std::endl;
-      std::cout << "WARNING! The function Simulation::simulationFormFunc() is deprecated - use Simulation::Factory::createObj() instead.";
-      std::cout << std::endl;
-      msgPrinted = true;
-   }
+   //static bool msgPrinted(false);
+   //if (!msgPrinted) {
+   //   std::cout << std::endl;
+   //   std::cout << "WARNING! The function Simulation::simulationFormFunc() is deprecated - use Simulation::Factory::createObj() instead.";
+   //   std::cout << std::endl;
+   //   msgPrinted = true;
+   //}
    return Factory::createObj(name);
 }
 
