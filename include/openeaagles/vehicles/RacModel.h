@@ -17,7 +17,7 @@ namespace Vehicle {
 // Description: Robot Aircraft (RAC) Air Vehicle Dynamics Model
 //                -- Very simple dynamics model
 //
-// Form name: RacModel
+// Factory name: RacModel
 // Slots:
 //    minSpeed       <Number>    ! Minimum Velocity        (kts)
 //    speedMaxG      <Number>    ! Velocity we reach max G (kts)

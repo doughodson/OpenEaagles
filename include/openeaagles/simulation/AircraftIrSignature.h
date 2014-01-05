@@ -28,7 +28,7 @@ namespace Simulation {
 // Descriptions: Base class for an aircraft IR signature
 //
 //
-// Form Name: AircraftIrSignature
+// Factory name: AircraftIrSignature
 // Slots:
 //    airframeSignatureTable          <Table4>      !
 //    airframeWavebandFactorTable     <Table2>      !

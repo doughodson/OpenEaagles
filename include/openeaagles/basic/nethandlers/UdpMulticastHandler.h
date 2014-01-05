@@ -4,7 +4,7 @@
 #ifndef __Eaagles_Basic_UdpMulticastHandler_H__
 #define __Eaagles_Basic_UdpMulticastHandler_H__
 
-#include "openeaagles/basic/NetHandler.h"
+#include "openeaagles/basic/nethandlers/PosixHandler.h"
 
 namespace Eaagles {
 namespace Basic {
@@ -16,7 +16,7 @@ class String;
 //
 // Description: UDP multicast network handler.
 //
-// Form name: UdpMulticastHandler
+// Factory name: UdpMulticastHandler
 //
 // multicast:
 // "A point-to-many networking model in which a packet is sent to a specific address,
@@ -62,9 +62,9 @@ class String;
 //        )
 //
 //------------------------------------------------------------------------------
-class UdpMulticastHandler : public NetHandler
+class UdpMulticastHandler : public PosixHandler
 {
-    DECLARE_SUBCLASS(UdpMulticastHandler, NetHandler)
+    DECLARE_SUBCLASS(UdpMulticastHandler, PosixHandler)
 
 public:
     UdpMulticastHandler();
@@ -90,6 +90,8 @@ protected:
 
     // NetHandler interface
     virtual bool init();            // Initialize this socket handler
+
+    // PosixHandler interface
     virtual bool bindSocket();      // Bind socket to address
 
 private:

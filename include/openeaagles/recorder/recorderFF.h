@@ -13,7 +13,7 @@
 namespace Eaagles {
    namespace Basic { class Object; }
    namespace Recorder {
-      extern Basic::Object* recorderFormFunc(const char* formname);
+      extern Basic::Object* recorderFormFunc(const char* name);
    }
 } 
 

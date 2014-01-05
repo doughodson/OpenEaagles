@@ -16,7 +16,7 @@ namespace Simulation {
 //------------------------------------------------------------------------------
 // Class: NavRadio
 // Description: General class for all navigation radio models
-// Form name: NavRadio
+// Factory name: NavRadio
 //------------------------------------------------------------------------------
 class NavRadio : public Radio 
 {
@@ -54,7 +54,7 @@ private:
 //------------------------------------------------------------------------------
 // Class: TacanRadio
 // Description: TACAN navigation radio model
-// Form Name: TacanRadio
+// Factory name: TacanRadio
 //------------------------------------------------------------------------------
 class TacanRadio : public NavRadio 
 {
@@ -108,7 +108,7 @@ private:
 //------------------------------------------------------------------------------
 // Class: IlsRadio
 // Description: ILS navigation radio model
-// Form name: IlsRadio
+// Factory name: IlsRadio
 //------------------------------------------------------------------------------
 class IlsRadio : public NavRadio 
 {

@@ -21,7 +21,7 @@ namespace LinearSystem {
 //       ---------
 //         s + wc
 //
-// Form name: Lag1Filter
+// Factory name: Lag1Filter
 // Slots:
 //    wc    <Frequency>  Cutoff Frequency
 //    wc    <Number>     Cutoff frequency (radian/sec)

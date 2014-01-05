@@ -18,7 +18,7 @@ class Track;
 //
 // Description: Abstract class for Track Managers
 //
-// Form name: TrackManager
+// Factory name: TrackManager
 // Slots:
 //    maxTracks       <Number>   ! Maximum number of tracks (default: MAX_TRKS)
 //
@@ -135,7 +135,7 @@ private:
 // Class: AirTrkMgr
 //
 // Description: Track Manager for A/A modes (e.g., TWS, ACM, SST)
-// Form name: AirTrkMgr
+// Factory name: AirTrkMgr
 // Slots:
 //   positionGate   <Basic::Number>  ! Position Gate (meters) (default: 2.0f * NM2M)
 //   rangeGate      <Basic::Number>  ! Range Gate (meters) (default: 500.0f)
@@ -176,7 +176,7 @@ private:
 // Class: GmtiTrkMgr
 //
 // Description: Very simple Ground Moving Target Indication (GMTI) Track Manager
-// Form name: GmtiTrkMgr
+// Factory name: GmtiTrkMgr
 //
 //==============================================================================
 class GmtiTrkMgr : public TrackManager
@@ -200,7 +200,7 @@ private:
 // Class: RwrTrkMgr
 //
 // Description: RADAR Warning Receiver (RWR) Track Manager
-// Form name: RwrTrkMgr
+// Factory name: RwrTrkMgr
 //
 //==============================================================================
 class RwrTrkMgr : public TrackManager

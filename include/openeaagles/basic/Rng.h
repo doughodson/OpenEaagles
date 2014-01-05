@@ -66,7 +66,7 @@ class Number;
 // Class:  Rng
 // Description:  Random Number Generator
 //
-// Form name: Rng
+// Factory name: Rng
 // Slots:
 //    seed      <Number>  ! seed (default: 5489UL first instance only)
 //------------------------------------------------------------------------------

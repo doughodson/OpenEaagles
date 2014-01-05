@@ -28,7 +28,7 @@ namespace Simulation {
 //    various IR systems to use or not use this gimbal function -- our default
 //    member function processPlayersOfInterest() does use the gimbal function. 
 //
-// Form name: IrSystem
+// Factory name: IrSystem
 // Slots:
 //    seekerName     <String>    Name of the requested Seeker (default: 0)
 //    disableQueries <Boolean>   Disable sending queries packets flag (default: false)

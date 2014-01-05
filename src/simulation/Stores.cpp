@@ -299,6 +299,7 @@ bool Stores::selectStation(const unsigned int s)
    bool ok = false;
    if (s >= 1 && s <= ns) {
       selected = s;
+      ok = true;
    }
    return ok;
 }
@@ -715,7 +716,7 @@ std::ostream& Stores::serialize(std::ostream& sout, const int i, const bool slot
    int j = 0;
    if ( !slotsOnly ) {
       indent(sout,i);
-      sout << "( " << getFormName() << std::endl;
+      sout << "( " << getFactoryName() << std::endl;
       j = 4;
    }
 

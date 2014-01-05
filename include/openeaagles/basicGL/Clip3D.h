@@ -14,7 +14,7 @@ namespace BasicGL {
 // Class: Clip3D
 // Base class: Object -> Clip3D
 //
-// Form name: Clip3D
+// Factory name: Clip3D
 // Description: 3D polygon clipping
 //
 //------------------------------------------------------------------------------

@@ -347,7 +347,7 @@ void Field::backSpace(const int ns)
 {
    if (mode != input) return;
    // if we are backspacing, and we are at the starting character position that was set, we stay there!
-   if (startCP > 0 && icp == startCP) {
+   if (startCP > 0 && icp == (int) startCP) {
       event(INPUT_LEFT_EDGE);
    }
    else {
@@ -837,7 +837,7 @@ std::ostream& Field::serialize(std::ostream& sout, const int i, const bool slots
 {
     int j = 0;
     if ( !slotsOnly ) {
-        sout << "( " << getFormName() << std::endl;
+        sout << "( " << getFactoryName() << std::endl;
         j = 4;
     }
 

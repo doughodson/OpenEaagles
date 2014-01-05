@@ -113,7 +113,7 @@ public:
 
 
 inline std::ostream& operator<<(std::ostream& sout, const Mass& n)
-   { sout << "( " << n.getFormName() << " " << n.getReal() << " )"; return sout; }
+   { sout << "( " << n.getFactoryName() << " " << n.getReal() << " )"; return sout; }
 
 //------------------------------------------------------------------------------
 // Class:  KiloGrams

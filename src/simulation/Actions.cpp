@@ -173,7 +173,7 @@ std::ostream& Action::serialize(std::ostream& sout, const int i, const bool slot
     int j = 0;
     if ( !slotsOnly ) {
         indent(sout,i);
-        sout << "( " << getFormName() << std::endl;
+        sout << "( " << getFactoryName() << std::endl;
         j = 4;
     }
 
@@ -272,7 +272,7 @@ bool ActionImagingSar::trigger(OnboardComputer* const mgr)
       if (ownship != 0) {
          Basic::Pair* pair = ownship->getSensorByType(typeid(Sar));
          if (isMessageEnabled(MSG_INFO)) {
-         std::cout << "Looking for SAR: pair = " << pair << std::endl;
+            std::cout << "Looking for SAR: pair = " << pair << std::endl;
          }
          if (pair != 0) {
             setSarSystem( (Sar*) pair->object() );
@@ -281,11 +281,11 @@ bool ActionImagingSar::trigger(OnboardComputer* const mgr)
 
       if (sar != 0 && ownship != 0) {
          if (isMessageEnabled(MSG_INFO)) {
-         std::cout << "Requesting an image from the SAR: refId: " << getRefId() << std::endl;
+            std::cout << "Requesting an image from the SAR: refId: " << getRefId() << std::endl;
          }
          sar->setStarePoint( getSarLatitude(), getSarLongitude(), (LCreal) getSarElevation() );
          if (isMessageEnabled(MSG_INFO)) {
-         std::cout << "And resolution: " << getResolution() << std::endl;
+            std::cout << "And resolution: " << getResolution() << std::endl;
          }
          sar->requestImage(getImageSize(), getImageSize(), getResolution() );
          ok = true;
@@ -324,7 +324,7 @@ void ActionImagingSar::process(const LCreal dt)
       if ( !getSarSystem()->isImagingInProgress()) {
          // Imaging is NOT in progress, so it must have completed ...
          if (isMessageEnabled(MSG_INFO)) {
-         std::cout << "Processing SAR -- completed!" << std::endl;
+            std::cout << "Processing SAR -- completed!" << std::endl;
          }
          setCompleted(true);
       }
@@ -499,7 +499,7 @@ std::ostream& ActionImagingSar::serialize(std::ostream& sout, const int i, const
     int j = 0;
     if ( !slotsOnly ) {
         indent(sout,i);
-        sout << "( " << getFormName() << std::endl;
+        sout << "( " << getFactoryName() << std::endl;
         j = 4;
     }
 
@@ -603,8 +603,8 @@ bool ActionWeaponRelease::trigger(OnboardComputer* const mgr)
             double refLat = sim->getRefLatitude();
             double refLon = sim->getRefLongitude();
 
-            // Computer the targets position vector
-            osg::Vec3 tgtPos;          // Target position  (m) NED
+            // Computes the target's position vector
+            osg::Vec3 tgtPos;                            // Target position  (m) NED
             Basic::Nav::convertLL2PosVec(
                refLat, refLon,                           // Ref point (at sea level)
                getTargetLatitude(), getTargetLongitude(), getTargetElevation(), 
@@ -704,7 +704,7 @@ std::ostream& ActionWeaponRelease::serialize(std::ostream& sout, const int i, co
     int j = 0;
     if ( !slotsOnly ) {
         indent(sout,i);
-        sout << "( " << getFormName() << std::endl;
+        sout << "( " << getFactoryName() << std::endl;
         j = 4;
     }
 
@@ -884,7 +884,7 @@ std::ostream& ActionDecoyRelease::serialize(std::ostream& sout, const int i, con
     int j = 0;
     if ( !slotsOnly ) {
         indent(sout,i);
-        sout << "( " << getFormName() << std::endl;
+        sout << "( " << getFactoryName() << std::endl;
         j = 4;
     }
     
@@ -1006,7 +1006,7 @@ std::ostream& ActionCamouflageType::serialize(std::ostream& sout, const int i, c
     int j = 0;
     if ( !slotsOnly ) {
         indent(sout,i);
-        sout << "( " << getFormName() << std::endl;
+        sout << "( " << getFactoryName() << std::endl;
         j = 4;
     }
 

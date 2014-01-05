@@ -101,8 +101,8 @@ LCreal FlowRate::convert(Volume* newVolume, Time* newTime)
         newTime->set(1);
         // if we are different distances or times, we convert ourself to the new value, else
         // we will set our newVolVal and TimeVal to 1, to create the same flowRate.
-        if (newVolume->getFormName() != myVolume->getFormName()) newVolVal = newVolume->convert(*myVolume);
-        if (newTime->getFormName() != myTime->getFormName()) newTimeVal = newTime->convert(*myTime);
+        if (newVolume->getFactoryName() != myVolume->getFactoryName()) newVolVal = newVolume->convert(*myVolume);
+        if (newTime->getFactoryName() != myTime->getFactoryName()) newTimeVal = newTime->convert(*myTime);
         
         // now we figure our new flowRate
         // Get our distance units first, then multiplies by a time factor
@@ -129,8 +129,8 @@ bool FlowRate::set(const LCreal newFlowRate, Volume* newVolume, Time* newTime)
         newTime->set(1);        
 
         // if we are different distances or times, we convert ourself to the new value
-        if (newVolume->getFormName() != myVolume->getFormName()) newVolVal = myVolume->convert(*newVolume);                      
-        if (newTime->getFormName() != myTime->getFormName()) newTimeVal = myTime->convert(*newTime);
+        if (newVolume->getFactoryName() != myVolume->getFactoryName()) newVolVal = myVolume->convert(*newVolume);                      
+        if (newTime->getFactoryName() != myTime->getFactoryName()) newTimeVal = myTime->convert(*newTime);
         
         // find our new velocity from the new velocity value we are given * the conversion constants
         LCreal tempFR = newFlowRate * newVolVal;
@@ -192,7 +192,7 @@ std::ostream& FlowRate::serialize(std::ostream& sout, const int i, const bool sl
 {
     int j = 0;
     if (!slotsOnly) {
-        sout << "( " << getFormName() << std::endl;
+        sout << "( " << getFactoryName() << std::endl;
         // tab here
         j = 4;
     }

@@ -4,7 +4,8 @@ include ../makedefs
 LIB = $(OPENEAAGLES_LIB_DIR)/liboeMaps.a
 
 OBJS =  \
-	$(LIB)(mapsFF.o) 
+	$(LIB)(Factory.o) \
+	$(LIB)(mapsFF.o)
 
 SUBDIRS = rpfMap
 

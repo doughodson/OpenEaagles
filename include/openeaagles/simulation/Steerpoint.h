@@ -28,7 +28,7 @@ class Action;
 // Description: Generic steerpoint; contains positional and navigational data;
 //              component list contains associated steerpoints (FIX, OAP, etc.)
 //
-// Form name: Steerpoint
+// Factory name: Steerpoint
 // Slots:
 //   stptType  <Basic::Identifier>  ! Steerpoint type; default: DEST
 //                                  ! { ROUTE, DEST, MARK, FIX, OAP, TGT }

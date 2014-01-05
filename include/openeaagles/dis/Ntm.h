@@ -20,7 +20,7 @@ namespace Dis {
 //    player types to/from DIS entity type codes.
 //
 //
-// Form name: DisNtm
+// Factory name: DisNtm
 // Slots:
 //    disEntityType  <vector>   ! DIS Entity type vector:
 //                              !  [ kind domain country category subcategory specific extra ]

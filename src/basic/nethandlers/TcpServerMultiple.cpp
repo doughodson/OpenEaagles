@@ -1,12 +1,20 @@
 //------------------------------------------------------------------------------
 // Class: TcpServerMultiple
 //------------------------------------------------------------------------------
-
+//
+// M$ WinSock has slightly different return types, some different calling, and
+// is missing some of the calls that are standard in Berkeley and POSIX socket
+// implementation.  These slight differences will be handled in setting basic
+// typedefs, defines, and constants that will make each convention match for
+// use later in the code.  This will save a lot of pre-processor intervention
+// and make the code that much more enjoyable to read!
+//
 #if defined(WIN32)
     #include <sys/types.h>
     #include <Winsock2.h>
     #include <WS2tcpip.h>
     #define  bzero(a,b)   ZeroMemory(a,b)
+    typedef int socklen_t;
 #else
     #include <arpa/inet.h>
     #include <sys/fcntl.h>
@@ -14,7 +22,8 @@
     #ifdef sun
         #include <sys/filio.h> // -- added for Solaris 10
     #endif
-    static const int SOCKET_ERROR = -1;
+    static const int INVALID_SOCKET = -1; // Always -1 and errno is set
+    static const int SOCKET_ERROR   = -1;
 #endif
 
 #include "openeaagles/basic/nethandlers/TcpServerMultiple.h"
@@ -77,19 +86,47 @@ bool TcpServerMultiple::initNetwork(const bool noWaitFlag)
     return ok;
 }
 
+// -------------------------------------------------------------
+// bindSocket() -- bind the socket to an address, and configure
+// the send and receive buffers. 
+// -------------------------------------------------------------
+bool TcpServerMultiple::bindSocket()
+{
+   // ---
+   // Our base class will bind the socket
+   // ---
+   bool ok = BaseClass::bindSocket();
+
+   if (ok) {
+      struct sockaddr_in addr;        // Working address structure
+      bzero(&addr, sizeof(addr));
+      addr.sin_family = AF_INET;
+      addr.sin_addr.s_addr = INADDR_ANY;
+      if (getLocalAddr() != 0) addr.sin_addr.s_addr = getLocalAddr ();
+      if (getLocalPort() != 0) addr.sin_port = htons (getLocalPort());  
+      else addr.sin_port = htons(getPort());
+
+      // Only in server do we bind
+      if (::bind(socketNum, (const struct sockaddr *) &addr, sizeof(addr)) == SOCKET_ERROR) {
+         ::perror("TcpHandler::bindSocket(): bind error");
+         return false;
+      }
+
+      if (!setSendBuffSize()) return false;
+   
+      if (!setRecvBuffSize()) return false;
+   }
+
+   return ok;
+}
+
 //------------------------------------------------------------------------------
 // listenForConnections() -- puts the socket into listen mode
 //------------------------------------------------------------------------------
 bool TcpServerMultiple::listenForConnections()
 {
-#if defined(WIN32)
     if (socketNum == INVALID_SOCKET) return false;
-    if( ::listen(socketNum, getBacklog()) == SOCKET_ERROR)
-#else
-    if (socketNum < 0) return false;
-    if( ::listen(socketNum, getBacklog()) < 0)
-#endif
-    {
+    if (::listen(socketNum, getBacklog()) == SOCKET_ERROR) {
         ::perror("TcpHandler::listenForConnections(): error! \n");
         return false;
     }
@@ -104,19 +141,17 @@ TcpHandler* TcpServerMultiple::acceptConnection()
    TcpHandler* newHandler = 0;
    struct sockaddr_in clientAddr;
 
-#if defined(WIN32)
-   int cAddrSize = sizeof(clientAddr);
-   LcSocket newSocket = INVALID_SOCKET;
-#else
    socklen_t cAddrSize = sizeof(clientAddr);
-   LcSocket newSocket = 0;
-#endif
+   LcSocket newSocket  = INVALID_SOCKET;
 
    if (isMessageEnabled(MSG_INFO)) {
        std::cout << "Waiting to accept connection on " << getPort() << " ... " << std::endl;
    }
    newSocket = ::accept(socketNum, (struct sockaddr *) &clientAddr, &cAddrSize);
-   if(newSocket > 0) {
+   // Since INVALID_SOCKET is defined as -1 for POSIX, ::accept will return
+   // INVALID_SOCKET as the error condition (see MSDN help and POSIX man pages
+   // for more information).
+   if (newSocket != INVALID_SOCKET) {
       newHandler = new TcpHandler(newSocket);
    }
 
@@ -143,7 +178,7 @@ bool TcpServerMultiple::setSlotBacklog(const Number* const msg)
 {
    bool ok = false;
    if (msg != 0) {
-      ok = setBacklog( msg->getInt() );
+      ok = setBacklog(msg->getInt());
    }
    return ok;
 }
@@ -163,9 +198,9 @@ Object* TcpServerMultiple::getSlotByIndex(const int si)
 std::ostream& TcpServerMultiple::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;
-    if ( !slotsOnly ) {
+    if (!slotsOnly) {
         indent(sout,i);
-        sout << "( " << getFormName() << std::endl;
+        sout << "( " << getFactoryName() << std::endl;
         j = 4;
     }
 
@@ -176,7 +211,7 @@ std::ostream& TcpServerMultiple::serialize(std::ostream& sout, const int i, cons
 
     BaseClass::serialize(sout,i+j,true);
 
-    if ( !slotsOnly ) {
+    if (!slotsOnly) {
         indent(sout,i);
         sout << ")" << std::endl;
     }

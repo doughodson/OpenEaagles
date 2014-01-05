@@ -15,7 +15,7 @@ namespace Terrain {
 //
 // Description: DTED data loader.
 //
-// Form name: DtedFile
+// Factory name: DtedFile
 // Slots:
 //
 //------------------------------------------------------------------------------

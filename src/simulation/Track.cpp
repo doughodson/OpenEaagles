@@ -298,14 +298,14 @@ bool Track::setCircularError(const LCreal err)
    return true;
 }
 
-// setVerticalError() -- sets the track's estimated altitude error, meters, 
+// setVerticalError() -- sets the track's estimated altitude error, meters
 bool Track::setVerticalError(const LCreal err)
 {
    vErr = err;
    return true;
 }
 
-// setVelocity() -- set track's velocity vector and computer ground speed & track
+// setVelocity() -- set track's velocity vector and compute ground speed & track
 bool Track::setVelocity(const osg::Vec3 v)
 {
    vel = v;

@@ -21,7 +21,7 @@ namespace IoDevice {
 //    *** Channel numbers are all one(1) based.  For example, the range of
 //    AI channels is from one to getNumAnalogInputChannels(). ***
 //
-// Form Name: IoData
+// Factory name: IoData
 // Slots:
 //    numAI    <Number>   ! Number of analog inputs (AIs)
 //    numAO    <Number>   ! Number of analog outputs (AOs)

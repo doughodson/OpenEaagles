@@ -15,7 +15,7 @@ namespace Simulation {
 //
 // Default R/F sensor type ID is "RADAR"
 //
-// Form name: Radar
+// Factory name: Radar
 // Slots:
 //    igain    <Basic::Number>     ! Integrator gain (no units; default: 1.0f)
 //             <Basic::Decibel>    ! Integrator gain (dB)

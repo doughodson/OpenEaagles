@@ -155,7 +155,7 @@ std::ostream& Density::serialize(std::ostream& sout, const int i, const bool slo
 {
     int j = 0;
     if (!slotsOnly) {
-        sout << "( " << getFormName() << std::endl;
+        sout << "( " << getFactoryName() << std::endl;
         // tab here
         j = 4;
     }

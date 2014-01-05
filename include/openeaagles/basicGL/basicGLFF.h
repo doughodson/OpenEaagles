@@ -13,7 +13,7 @@
 namespace Eaagles {
    namespace Basic { class Object; }
    namespace BasicGL {
-      extern Basic::Object* basicGLFormFunc(const char* formname);
+      extern Basic::Object* basicGLFormFunc(const char* name);
    }
 }
 

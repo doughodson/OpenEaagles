@@ -20,7 +20,7 @@ class List;
 //
 // Description:  Defines a color by Luminance, X, Y, and monitor-specific data.
 //
-// Form name: cie
+// Factory name: cie
 // Slots:
 //     luminance <Number>         ! Luminance component (0.0 to 1.0) (default: 0)
 //     x         <Number>         ! Green component     (0.0 to 1.0) (default: 0)
@@ -88,7 +88,7 @@ protected:
 //
 // Description:  Defines the characteristics of a monitor, needed to accurately match color.
 //
-// Form name: monitorMetrics
+// Factory name: monitorMetrics
 // Slots:
 //     red       <Table1>   ! Red luminance vs RGB level ( both luminance and RGB level range from 0..1 )
 //                          ! (Default: redLumTbl)

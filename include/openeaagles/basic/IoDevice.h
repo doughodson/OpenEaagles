@@ -40,7 +40,7 @@ namespace Basic {
 //       should be passed to the I/O adapters.
 //
 // 
-// Form name: IoDevice
+// Factory name: IoDevice
 // Slots:
 //    adapters <PairStream>   ! List of IoAdapter objects (default: none)
 //    devices  <PairStream>   ! List of IoDevice objects; i.e., sub-devices (default: none)

@@ -6,6 +6,7 @@ LIB = $(OPENEAAGLES_LIB_DIR)/liboeRecorder.a
 OBJS =  \
 	$(LIB)(DataRecorder.o) \
 	$(LIB)(DataRecordHandle.o) \
+	$(LIB)(Factory.o) \
 	$(LIB)(FileReader.o) \
 	$(LIB)(FileWriter.o) \
 	$(LIB)(InputHandler.o) \

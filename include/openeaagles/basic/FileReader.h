@@ -18,7 +18,7 @@ class String;
 //
 // Description: Manages the reading of fixed record length files
 //
-// Form name: FileReader
+// Factory name: FileReader
 // Slots:
 //     pathname     <String>      ! Path to the file (default: null string)
 //     filename     <String>      ! File name (appended to pathname) (default: null string)

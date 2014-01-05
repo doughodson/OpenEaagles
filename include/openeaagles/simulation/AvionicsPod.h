@@ -13,7 +13,7 @@ namespace Simulation {
 // Class: AvionicsPod
 // Description: Generic avionics pod
 //
-// Form name: AvionicsPod
+// Factory name: AvionicsPod
 //------------------------------------------------------------------------------
 class AvionicsPod : public ExternalStore
 {

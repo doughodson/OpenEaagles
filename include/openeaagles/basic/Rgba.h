@@ -15,7 +15,7 @@ namespace Basic {
 //
 // Description:  Defines a color by Red, Green, Blue and Alpha
 //
-// Form name: rgba
+// Factory name: rgba
 // Slots:
 //    alpha <Number>  ! Alpha component (0.0 to 1.0) (default: 1.0)
 //

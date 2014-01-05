@@ -30,7 +30,7 @@ class TrackManager;
 //    This class is one of the "top level" systems attached to a Player
 //    class (see Player.h).
 //
-// Form name: OnboardComputer
+// Factory name: OnboardComputer
 //------------------------------------------------------------------------------
 class OnboardComputer : public System  
 {

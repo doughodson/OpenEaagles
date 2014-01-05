@@ -57,7 +57,7 @@ class CigiClNetworkSignalProcessing;
 //
 // Description: Boeing's Common Image Generator Interface (CIGI)
 //
-// Form name: OtwCigiCl
+// Factory name: OtwCigiCl
 // Slots:
 //    cigi                 (CigiCl)       CIGI interface context
 //    async                (Number)       True (non-zero) to run in CIGI async mode (default: false - CIGI sync)
@@ -278,7 +278,7 @@ private:
 // Class: CigiCl
 // Description: CIGI I/O handler
 //
-// Form name: CigiCl
+// Factory name: CigiCl
 //------------------------------------------------------------------------------
 class CigiCl : public Basic::Component
 {
@@ -347,7 +347,7 @@ private:
 //
 // Description: Networked CIGI interface to the IG system
 //
-// Form name: CigiClNetwork
+// Factory name: CigiClNetwork
 // Slots:
 //    netInput       (NetHandler)   Network input handler
 //    netOutput      (NetHandler)   Network output handler

@@ -9,12 +9,13 @@ OBJS =  \
 	$(LIB)(AnalogOutput.o) \
 	$(LIB)(DiscreteInput.o) \
 	$(LIB)(DiscreteOutput.o) \
+	$(LIB)(Factory.o) \
 	$(LIB)(IoData.o) \
 	$(LIB)(ioDeviceFF.o) \
 	$(LIB)(SignalGen.o) \
 	$(LIB)(UsbJoystick.o)
 
-# specific io devices to be included in compile
+# specific IO devices to be included in compile
 ifdef JOYSTICKDEVICE
 OBJS += $(LIB)(linux/UsbJoystickImp.o)
 endif

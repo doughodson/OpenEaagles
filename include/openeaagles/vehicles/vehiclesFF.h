@@ -7,7 +7,7 @@
 namespace Eaagles {
    namespace Basic { class Object; }
    namespace Vehicle {
-      extern Basic::Object* vehiclesFormFunc(const char* formname);
+      extern Basic::Object* vehiclesFormFunc(const char* name);
    }
 }
 

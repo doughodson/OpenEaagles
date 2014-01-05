@@ -24,7 +24,7 @@ class Bullseye;
 //    This class is one of the "top level" systems attached to a Player
 //    class (see Player.h).
 //
-// Form name: Navigation
+// Factory name: Navigation
 // Slots:
 //    route    <Route>              ! Primary route (default: 0)
 //

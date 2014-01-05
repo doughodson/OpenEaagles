@@ -21,7 +21,7 @@ namespace Basic {
 // Class: RVector
 // Description: General purpose row vector
 //
-// Form name: RVector
+// Factory name: RVector
 //------------------------------------------------------------------------------
 class RVector : private Matrix {
    DECLARE_SUBCLASS(RVector, Matrix)
@@ -228,7 +228,7 @@ inline RVector* getRowVector(const Matrix& A, const unsigned int r)
 // Class: CVector
 // Description: General purpose column vector
 //
-// Form name: CVector
+// Factory name: CVector
 //------------------------------------------------------------------------------
 class CVector : private Matrix {
    DECLARE_SUBCLASS(CVector, Matrix)

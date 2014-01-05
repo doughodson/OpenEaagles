@@ -14,6 +14,7 @@ OBJS =  \
 	$(LIB)(Component.o) \
 	$(LIB)(Decibel.o) \
 	$(LIB)(EarthModel.o) \
+	$(LIB)(Factory.o) \
 	$(LIB)(FileReader.o) \
 	$(LIB)(Float.o) \
 	$(LIB)(Functions.o) \

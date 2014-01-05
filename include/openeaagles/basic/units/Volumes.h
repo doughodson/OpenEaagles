@@ -106,7 +106,7 @@ public:
 
 
 inline std::ostream& operator<<(std::ostream& sout, const Volume& n)
-    { sout << "( " << n.getFormName() << " " << n.getReal() << " )"; return sout; }
+    { sout << "( " << n.getFactoryName() << " " << n.getReal() << " )"; return sout; }
 
 
 //------------------------------------------------------------------------------

@@ -18,7 +18,7 @@ namespace Simulation {
 //
 //    Contains a list of "players of interest" (i.e., targets) used by the gimbal,
 //    and the associated geometry data, as seen by the gimbal.
-// Form name: Gimbal_Tdb
+// Factory name: Gimbal_Tdb
 // 
 // Tasks: 
 // 

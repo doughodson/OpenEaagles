@@ -15,7 +15,7 @@ namespace Basic {
 //
 // Description:  Class for float numbers.
 //
-// Form name: float
+// Factory name: float
 //
 //
 // Public methods: Base class public methods, plus ...

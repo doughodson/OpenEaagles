@@ -5,6 +5,7 @@ LIB = $(OPENEAAGLES_LIB_DIR)/liboeTerrain.a
 
 OBJS =  \
 	$(LIB)(DataFile.o) \
+	$(LIB)(Factory.o) \
 	$(LIB)(QuadMap.o) \
 	$(LIB)(terrainFF.o)
 

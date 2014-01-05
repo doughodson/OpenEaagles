@@ -28,7 +28,7 @@ namespace Simulation {
 //               and the out-the-window visual systems.  Also, contains default
 //               support for the time-critical and network threads.
 //
-// Form name: Station
+// Factory name: Station
 // Slots --
 //    simulation        <Simulation>      ! Simulation model (default: 0)
 //

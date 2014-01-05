@@ -1,11 +1,19 @@
 //------------------------------------------------------------------------------
 // Class: UdpBroadcastHandler
 //------------------------------------------------------------------------------
-
+//
+// M$ WinSock has slightly different return types, some different calling, and
+// is missing some of the calls that are standard in Berkeley and POSIX socket
+// implementation.  These slight differences will be handled in setting basic
+// typedefs, defines, and constants that will make each convention match for
+// use later in the code.  This will save a lot of pre-processor intervention
+// and make the code that much more enjoyable to read!
+//
 #if defined(WIN32)
     #include <sys/types.h>
     #include <Winsock2.h>
     #define bzero(a,b) ZeroMemory( a, b )
+    typedef int socklen_t;
 #else
     #include <arpa/inet.h>
     #include <sys/fcntl.h>
@@ -13,7 +21,8 @@
     #ifdef sun
         #include <sys/filio.h> // -- added for Solaris 10
     #endif
-    static const int SOCKET_ERROR = -1;
+    static const int INVALID_SOCKET = -1; // Always -1 and errno is set
+    static const int SOCKET_ERROR   = -1;
 #endif
 
 #include "openeaagles/basic/nethandlers/UdpBroadcastHandler.h"
@@ -91,11 +100,7 @@ bool UdpBroadcastHandler::init()
     // Create our socket
     // ---
     socketNum = ::socket(AF_INET, SOCK_DGRAM, 0);
-#if defined(WIN32)
     if (socketNum == INVALID_SOCKET) {
-#else
-    if (socketNum < 0) {
-#endif
         ::perror("UdpBroadcastHandler::init(): socket error");
         return false;
     }
@@ -106,12 +111,11 @@ bool UdpBroadcastHandler::init()
     {
 #if defined(WIN32)
         BOOL optval = 1;
-        if( ::setsockopt(socketNum, SOL_SOCKET, SO_BROADCAST, (const char*) &optval, sizeof(optval)) == SOCKET_ERROR )
+        if (::setsockopt(socketNum, SOL_SOCKET, SO_BROADCAST, (const char*) &optval, sizeof(optval)) == SOCKET_ERROR) {
 #else
         int optval = 1;
-        if( ::setsockopt(socketNum, SOL_SOCKET, SO_BROADCAST, &optval, sizeof(optval)) < 0)
+        if (::setsockopt(socketNum, SOL_SOCKET, SO_BROADCAST, &optval, sizeof(optval)) == SOCKET_ERROR) {
 #endif
-        {
             ::perror("UdpBroadcastHandler::init(): error setsockopt(SO_BROADCAST)\n");
             return false;
         }
@@ -169,18 +173,12 @@ bool UdpBroadcastHandler::bindSocket()
 #else
        addr.sin_addr.s_addr = getNetAddr();
 #endif
-       if (getLocalPort() != 0) {
-         addr.sin_port = htons (getLocalPort());  
-       }
-       else {
-         addr.sin_port = htons(getPort());
-       }
-       std::printf("bind() addr = %08x\n", addr.sin_addr.s_addr);
-       std::printf("bind() port = %08x\n", addr.sin_port);
+       if (getLocalPort() != 0) addr.sin_port = htons (getLocalPort());  
+       else addr.sin_port = htons(getPort());
 
        if (bind(socketNum, (const struct sockaddr *) &addr, sizeof(addr)) == SOCKET_ERROR) {
-         ::perror("UdpBroadcast::bindSocket(): bind error");
-         return false;
+          ::perror("UdpBroadcast::bindSocket(): bind error");
+          return false;
        }
 
        if (!setSendBuffSize()) return false;
@@ -222,7 +220,7 @@ std::ostream& UdpBroadcastHandler::serialize(std::ostream& sout, const int i, co
     int j = 0;
     if ( !slotsOnly ) {
         indent(sout,i);
-        sout << "( " << getFormName() << std::endl;
+        sout << "( " << getFactoryName() << std::endl;
         j = 4;
     }
 

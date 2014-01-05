@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Classes: IrSignature
+// Class: IrSignature
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_Simulation_IrSignature_H__
 #define __Eaagles_Simulation_IrSignature_H__
@@ -18,11 +18,11 @@ namespace Simulation {
    class IrShape;
 
 //------------------------------------------------------------------------------
-// Classes: IrSignature
+// Class: IrSignature
 //
 // Descriptions: Base class for IR signatures
 //
-// Form Name: IrSignature
+// Factory name: IrSignature
 // Slots:
 //    binSizes            <Table1>      ! The size of the wavelength bins used in the tables
 //    irShapeSignature    <IrShape>     ! Shape of radiation source
@@ -61,8 +61,7 @@ namespace Simulation {
 //   )
 //
 //------------------------------------------------------------------------------
-
-class IrSignature : public Basic::Component  
+class IrSignature : public Basic::Component
 {
     DECLARE_SUBCLASS(IrSignature, Basic::Component)
 

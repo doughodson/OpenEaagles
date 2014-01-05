@@ -20,7 +20,7 @@ class Station;
 //    newUbf actions know how to execute themselves, so agent does not need to know anything about action class.
 //    newUbf agent's state is initialized by slot, so agent does not need to know anything about state class.
 //
-// Form name: SimAgent
+// Factory name: SimAgent
 // Slots:
 //    actorPlayerName      <String>    ! The agent's actor - playerName
 //    actorComponentName   <String>    ! The agent's actor - componentName

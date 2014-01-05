@@ -18,7 +18,7 @@ namespace Simulation {
 //
 //    This class is one of the "top level" systems attached to a Player
 //    class (see Player.h).
-// Form name: Pilot
+// Factory name: Pilot
 //------------------------------------------------------------------------------
 class Pilot : public System
 {

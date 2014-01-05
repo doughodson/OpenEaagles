@@ -33,7 +33,7 @@ class Time;
 //
 //              Will convert input units to meters/second.
 //
-// Form name: LinearVelocity
+// Factory name: LinearVelocity
 // Slots:
 //    distance  <distance>  ! distance
 //    time      <time>      ! time

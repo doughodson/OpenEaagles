@@ -16,7 +16,7 @@ namespace BasicGL {
 // Description:  This is a basic graphic object which will translate any graphic
 // given to it according to X and Y positioning.  Z is default to 0.0.
 //
-// Form name: Translator
+// Factory name: Translator
 // Inputs:
 //      UPDATE_VALUE  -> moves x
 //      UPDATE_VALUE2 -> moves y

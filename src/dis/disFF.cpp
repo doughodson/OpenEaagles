@@ -1,28 +1,23 @@
 
 #include "openeaagles/dis/disFF.h"
-#include "openeaagles/dis/NetIO.h"
-#include "openeaagles/dis/Ntm.h"
-#include "openeaagles/dis/EmissionPduHandler.h"
+#include "openeaagles/dis/Factory.h"
+
+#include "openeaagles/basic/Object.h"
 
 namespace Eaagles {
 namespace Network {
 namespace Dis {
 
-Basic::Object* disFormFunc(const char* formname)
+Basic::Object* disFormFunc(const char* name)
 {
-    Basic::Object* newform = 0;
-
-    if ( strcmp(formname, Dis::NetIO::getFormName()) == 0 ) {
-        newform = new Dis::NetIO();
-    }
-    else if ( strcmp(formname, Ntm::getFormName()) == 0 ) {
-        newform = new Ntm();
-    }
-    else if ( strcmp(formname, EmissionPduHandler::getFormName()) == 0 ) {
-        newform = new EmissionPduHandler();
-    }
-
-    return newform;
+   //static bool msgPrinted(false);
+   //if (!msgPrinted) {
+   //   std::cout << std::endl;
+   //   std::cout << "WARNING! The function Network::Dis::disFormFunc() is deprecated - use Network::Dis::Factory::createObj() instead.";
+   //   std::cout << std::endl;
+   //   msgPrinted = true;
+   //}
+   return Factory::createObj(name);
 }
 
 } // End Dis namespace

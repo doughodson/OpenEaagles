@@ -18,7 +18,7 @@ class Action;
 // Description: Abstract base class for all behaviors.  Generates an optional
 //              action based on our current state.
 //
-// Form name: UbfBehavior
+// Factory name: UbfBehavior
 // Slots:
 //    vote     <Number>    ! default vote/weight value for actions generated
 //                         ! by this behavior

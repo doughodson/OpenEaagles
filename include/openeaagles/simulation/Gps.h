@@ -12,7 +12,7 @@ namespace Simulation {
 //------------------------------------------------------------------------------
 // Classes:     Gps
 // Description: Generic Global Positioning System (GPS) Data
-// Form name: Gps
+// Factory name: Gps
 //------------------------------------------------------------------------------
 class Gps : public Navigation
 {

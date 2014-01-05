@@ -18,7 +18,7 @@ class Pair;
 // Description: A PairStream is a list of Pair objects. Pair objects consist of 
 //              an object and the name of the object.
 //
-// Form name: PairStream
+// Factory name: PairStream
 //
 // Public methods:
 //

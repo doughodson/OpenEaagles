@@ -17,7 +17,7 @@ namespace Simulation {
 // Class: Datalink
 // Description: Base class for all datalink models
 //
-// Form name: Datalink
+// Factory name: Datalink
 // Slots:
 //    radioId           <Number>     ! Radio ID (see note #1) (default: 0)
 //    maxRange          <Distance>   ! Max range of the datalink (w/o a radio model) (see note #2)

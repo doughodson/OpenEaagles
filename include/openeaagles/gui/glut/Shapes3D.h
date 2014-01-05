@@ -22,7 +22,7 @@ namespace Glut {
 // Class: Circle -> Sphere 
 // Description - draws a sphere with X slices and Y stacks
 //
-// Form name: Sphere
+// Factory name: Sphere
 // Slots:
 //    stacks   <Number>    ! Number of stacks on the circle (default: 10)
 //
@@ -51,7 +51,7 @@ private:
 // Class: Circle -> Sphere -> Cylinder
 // Description - adds a top radius and height and draws a cylinder 
 //
-// Form name: Cylinder
+// Factory name: Cylinder
 // Slots:
 //    topRadius  <Number>  ! Radius at the top of the cylinder (default: 1)
 //    height     <Number>  ! Height of the cylinder (default: 1)
@@ -83,7 +83,7 @@ private:
 // Class: Circle -> Sphere -> Cylinder -> Cone
 // Description - uses everything but top radius to draw a cone
 //
-// Form name: Cone
+// Factory name: Cone
 //
 //------------------------------------------------------------------------------
 class Cone : public Cylinder {
@@ -98,7 +98,7 @@ public:
 // Description - Draws a simple cube.  I derived it from Circle to use the filled
 // flag only.  All other flags are ignored.
 //
-// Form name: Cube
+// Factory name: Cube
 // Slots:
 //    size    <Number>    ! Size you want the cube to be (default: 1)
 //
@@ -126,7 +126,7 @@ private:
 // Description - Uses filled slot to determine if wireframe or not.  Uses slices
 // as number of sides, and stacks as number of rings
 //
-// Form name: Torus
+// Factory name: Torus
 // Slots:
 //   outerRadius    <Number>          ! Radius of the outer ring (default: 2)
 //
@@ -154,7 +154,7 @@ private:
 // Class: Circle -> Dodecahedron
 // Description - Draws a 12 faced figure which can be scaled
 //
-// Form name: Dodecahedron
+// Factory name: Dodecahedron
 //
 //------------------------------------------------------------------------------
 class Dodecahedron : public BasicGL::Circle {
@@ -168,7 +168,7 @@ public:
 // Class: Circle -> Tetrahedron
 // Description - Draws a 4 faced figure which can be scaled
 //
-// Form name: Tetrahedron
+// Factory name: Tetrahedron
 //
 //------------------------------------------------------------------------------
 class Tetrahedron : public BasicGL::Circle {
@@ -182,7 +182,7 @@ public:
 // Class: Circle -> Icosahedron
 // Description - Draws a 20 faced figure which can be scaled
 //
-// Form name: Icosahedron
+// Factory name: Icosahedron
 //
 //------------------------------------------------------------------------------
 class Icosahedron : public BasicGL::Circle {
@@ -196,7 +196,7 @@ public:
 // Class: Circle -> Octahedron
 // Description - Draws a 8 faced figure which can be scaled
 //
-// Form name: Octahedron
+// Factory name: Octahedron
 //
 //------------------------------------------------------------------------------
 class Octahedron : public BasicGL::Circle {
@@ -210,7 +210,7 @@ public:
 // Class: Cube -> Teapot
 // Description - Draws the Utah Teapot, with a given size
 //
-// Form name: Teapot
+// Factory name: Teapot
 //
 //------------------------------------------------------------------------------
 class Teapot : public Cube {

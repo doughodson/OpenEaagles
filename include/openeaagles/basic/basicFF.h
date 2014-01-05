@@ -13,7 +13,7 @@
 namespace Eaagles {
    namespace Basic {
       class Object;
-      extern Object* basicFormFunc(const char* formname);
+      extern Object* basicFormFunc(const char* name);
    }
 }
 

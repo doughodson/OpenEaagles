@@ -1,12 +1,20 @@
 //------------------------------------------------------------------------------
 // Class: UdpMulticastHandler
 //------------------------------------------------------------------------------
-
+//
+// M$ WinSock has slightly different return types, some different calling, and
+// is missing some of the calls that are standard in Berkeley and POSIX socket
+// implementation.  These slight differences will be handled in setting basic
+// typedefs, defines, and constants that will make each convention match for
+// use later in the code.  This will save a lot of pre-processor intervention
+// and make the code that much more enjoyable to read!
+//
 #if defined(WIN32)
     #include <sys/types.h>
     #include <Winsock2.h>
     #include <WS2tcpip.h>
     #define bzero(a,b)    ZeroMemory( a, b )
+    typedef int socklen_t;
 #else
     #include <arpa/inet.h>
     #include <sys/fcntl.h>
@@ -14,7 +22,8 @@
     #ifdef sun
         #include <sys/filio.h> // -- added for Solaris 10
     #endif
-    static const int SOCKET_ERROR = -1;
+    static const int INVALID_SOCKET = -1; // Always -1 and errno is set
+    static const int SOCKET_ERROR   = -1;
 #endif
 
 #include "openeaagles/basic/nethandlers/UdpMulticastHandler.h"
@@ -119,11 +128,7 @@ bool UdpMulticastHandler::init()
     // Create our socket
     // ---
     socketNum = ::socket(AF_INET, SOCK_DGRAM, 0);
-#if defined(WIN32)
     if (socketNum == INVALID_SOCKET) {
-#else
-    if (socketNum < 0) {
-#endif
         ::perror("UdpMulticastHandler::init(): socket error");
         return false;
     }
@@ -134,12 +139,11 @@ bool UdpMulticastHandler::init()
     {
 #if defined(WIN32)
         BOOL optval = getLoopback();
-        if( ::setsockopt(socketNum, IPPROTO_IP, IP_MULTICAST_LOOP, (const char*) &optval, sizeof(optval)) == SOCKET_ERROR )
+        if (::setsockopt(socketNum, IPPROTO_IP, IP_MULTICAST_LOOP, (const char*) &optval, sizeof(optval)) == SOCKET_ERROR) {
 #else
         int optval = getLoopback();
-        if( ::setsockopt(socketNum, IPPROTO_IP, IP_MULTICAST_LOOP, &optval, sizeof(optval)) < 0)
+        if (::setsockopt(socketNum, IPPROTO_IP, IP_MULTICAST_LOOP, &optval, sizeof(optval)) == SOCKET_ERROR) {
 #endif
-        {
             ::perror("UdpMulticastHandler::init(): error setsockopt(IP_MULTICAST_LOOP)\n");
             return false;
         }
@@ -151,12 +155,11 @@ bool UdpMulticastHandler::init()
     {
 #if defined(WIN32)
         int optval = getTTL();
-        if( ::setsockopt(socketNum, IPPROTO_IP, IP_MULTICAST_TTL, (const char*) &optval, sizeof(optval)) == SOCKET_ERROR )
+        if (::setsockopt(socketNum, IPPROTO_IP, IP_MULTICAST_TTL, (const char*) &optval, sizeof(optval)) == SOCKET_ERROR) {
 #else
         int optval = getTTL();
-        if( ::setsockopt(socketNum, IPPROTO_IP, IP_MULTICAST_TTL, &optval, sizeof(optval)) < 0)
+        if (::setsockopt(socketNum, IPPROTO_IP, IP_MULTICAST_TTL, &optval, sizeof(optval)) == SOCKET_ERROR) {
 #endif
-        {
             ::perror("UdpMulticastHandler::init(): error setsockopt(IP_MULTICAST_TTL)\n");
             return false;
         }
@@ -188,21 +191,17 @@ bool UdpMulticastHandler::bindSocket()
 #else
        addr.sin_addr.s_addr = ::inet_addr(multicastGroup);
 #endif
-       if (getLocalPort() != 0) {
-           addr.sin_port = htons (getLocalPort());  
-       }
-       else {
-           addr.sin_port = htons(getPort());
+       if (getLocalPort() != 0) addr.sin_port = htons (getLocalPort());  
+       else addr.sin_port = htons(getPort());
+
+       if (::bind(socketNum, (const struct sockaddr *) &addr, sizeof(addr)) == SOCKET_ERROR) {
+           ::perror("UdpMulticastHandler::bindSocket(): bind error");
+           return false;
        }
 
-      if ( ::bind(socketNum, (const struct sockaddr *) &addr, sizeof(addr)) == SOCKET_ERROR ) {
-        ::perror("UdpMulticastHandler::bindSocket(): bind error");
-        return false;
-      }
-
-      if (!setSendBuffSize()) return false;
+       if (!setSendBuffSize()) return false;
    
-      if (!setRecvBuffSize()) return false;
+       if (!setRecvBuffSize()) return false;
    }
 
    return ok;
@@ -214,12 +213,8 @@ bool UdpMulticastHandler::bindSocket()
 // -------------------------------------------------------------
 bool UdpMulticastHandler::joinTheGroup()
 {
-#if defined(WIN32)
    if (socketNum == INVALID_SOCKET) return false;
-#else
-   if (socketNum < 0) return false;
-#endif
-    
+
    // Find our network address
    uint32_t mg = htonl (INADDR_NONE);
    if (multicastGroup != 0) mg = ::inet_addr(multicastGroup);
@@ -239,13 +234,9 @@ bool UdpMulticastHandler::joinTheGroup()
    mreq.imr_multiaddr.s_addr = getNetAddr();
    mreq.imr_interface.s_addr = iface;
    int result = ::setsockopt(socketNum, IPPROTO_IP, IP_ADD_MEMBERSHIP, (const char *) &mreq, sizeof(mreq));
-#if defined(WIN32)
    if (result == SOCKET_ERROR) {
-#else
-   if (result < 0) {
-#endif
-     ::perror("UdpMulticastHandler::joinTheGroup(): setsockopt mreq");
-     return false;
+      ::perror("UdpMulticastHandler::joinTheGroup(): setsockopt mreq");
+      return false;
    }
 
    return true;
@@ -320,9 +311,9 @@ Object* UdpMulticastHandler::getSlotByIndex(const int si)
 std::ostream& UdpMulticastHandler::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;
-    if ( !slotsOnly ) {
+    if (!slotsOnly) {
         indent(sout,i);
-        sout << "( " << getFormName() << std::endl;
+        sout << "( " << getFactoryName() << std::endl;
         j = 4;
     }
 
@@ -341,7 +332,7 @@ std::ostream& UdpMulticastHandler::serialize(std::ostream& sout, const int i, co
 
     BaseClass::serialize(sout,i+j,true);
 
-    if ( !slotsOnly ) {
+    if (!slotsOnly) {
         indent(sout,i);
         sout << ")" << std::endl;
     }

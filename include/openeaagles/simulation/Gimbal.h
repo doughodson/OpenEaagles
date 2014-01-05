@@ -55,7 +55,7 @@ class Tdb;
 //
 //
 //
-// Form name: Gimbal
+// Factory name: Gimbal
 // Slots:
 //
 //    type                 (String)  Physical gimbal type: "mechanical" or "electronic" (default: ELECTRONIC)

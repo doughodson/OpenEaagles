@@ -25,7 +25,7 @@ class String;
 //              and for passing event messages.  Any component can be a container
 //              for a list of components.
 //
-// Form name: Component
+// Factory name: Component
 // Slots:
 //    components           <Component>  ! Single child component (default: 0)
 //                         <PairStream> ! List of child components.

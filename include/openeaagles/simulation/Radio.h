@@ -45,7 +45,7 @@ class Datalink;
 //          RfSystem::setFrequency()).
 //
 //
-// Form name: Radio
+// Factory name: Radio
 // Slots:
 //    numChannels    <Basic::Number>      ! Number of channels (less than or equal MAX_CHANNELS) (default: 0)
 //
@@ -150,7 +150,7 @@ private:
 // Class: CommRadio
 // Description: Generic class for all communication radio models
 //
-// Form name: CommRadio
+// Factory name: CommRadio
 //------------------------------------------------------------------------------
 class CommRadio : public Radio  
 {

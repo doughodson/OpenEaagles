@@ -20,7 +20,7 @@ namespace Ubf {
 //    Abstract base class for all Actions. They are responsible for
 //    their own execution.
 //
-// Form name: UbfAction
+// Factory name: UbfAction
 //------------------------------------------------------------------------------
 class Action : public Basic::Object
 {

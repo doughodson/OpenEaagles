@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="12.1">
-  <zoom_level>10</zoom_level>
+<diagram program="umlet" version="12.2">
+  <zoom_level>8</zoom_level>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>170</x>
-      <y>10</y>
-      <w>710</w>
-      <h>340</h>
+      <x>208</x>
+      <y>160</y>
+      <w>464</w>
+      <h>272</h>
     </coordinates>
-    <panel_attributes>NetworkHandler
+    <panel_attributes>PosixHandler
 --
 localIpAddress:
 -- String containing the local host's name or its IP
@@ -39,10 +39,10 @@ ignoreSourcePort:
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>290</x>
-      <y>380</y>
-      <w>590</w>
-      <h>90</h>
+      <x>304</x>
+      <y>456</y>
+      <w>368</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>UdpUnicastHandler
 --
@@ -55,21 +55,21 @@ ipAddress:
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>230</x>
-      <y>320</y>
-      <w>80</w>
-      <h>120</h>
+      <x>256</x>
+      <y>408</y>
+      <w>64</w>
+      <h>96</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>30;30;30;100;60;100</additional_attributes>
+    <additional_attributes>24;24;24;80;48;80</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>290</x>
-      <y>820</y>
-      <w>140</w>
-      <h>260</h>
+      <x>304</x>
+      <y>808</y>
+      <w>88</w>
+      <h>208</h>
     </coordinates>
     <panel_attributes>TcpHandler
 --
@@ -79,10 +79,10 @@ ipAddress:
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>490</x>
-      <y>840</y>
-      <w>390</w>
-      <h>80</h>
+      <x>432</x>
+      <y>824</y>
+      <w>240</w>
+      <h>64</h>
     </coordinates>
     <panel_attributes>TcpClient
 --
@@ -95,32 +95,32 @@ ipAddress:
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>160</x>
-      <y>320</y>
-      <w>150</w>
-      <h>580</h>
+      <x>200</x>
+      <y>408</y>
+      <w>120</w>
+      <h>464</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>30;30;30;560;130;560</additional_attributes>
+    <additional_attributes>24;24;24;448;104;448</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>400</x>
-      <y>850</y>
-      <w>110</w>
-      <h>50</h>
+      <x>368</x>
+      <y>832</y>
+      <w>80</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>30;30;90;30</additional_attributes>
+    <additional_attributes>24;24;64;24</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>490</x>
-      <y>1020</y>
-      <w>390</w>
-      <h>60</h>
+      <x>432</x>
+      <y>968</y>
+      <w>240</w>
+      <h>48</h>
     </coordinates>
     <panel_attributes>TcpServerMulti
 --
@@ -128,23 +128,12 @@ ipAddress:
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>400</x>
-      <y>1020</y>
-      <w>110</w>
-      <h>50</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>30;30;90;30</additional_attributes>
-  </element>
-  <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>490</x>
-      <y>940</y>
-      <w>390</w>
-      <h>60</h>
+      <x>432</x>
+      <y>904</y>
+      <w>240</w>
+      <h>48</h>
     </coordinates>
     <panel_attributes>TcpServerSingle
 --
@@ -152,23 +141,12 @@ ipAddress:
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>400</x>
-      <y>940</y>
-      <w>110</w>
-      <h>50</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>30;30;90;30</additional_attributes>
-  </element>
-  <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>290</x>
-      <y>490</y>
-      <w>590</w>
-      <h>80</h>
+      <x>304</x>
+      <y>544</y>
+      <w>368</w>
+      <h>64</h>
     </coordinates>
     <panel_attributes>UdpBroadcastHandler
 --
@@ -180,21 +158,21 @@ networkMask:
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>210</x>
-      <y>320</y>
-      <w>100</w>
-      <h>220</h>
+      <x>240</x>
+      <y>408</y>
+      <w>80</w>
+      <h>176</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>30;30;30;200;80;200</additional_attributes>
+    <additional_attributes>24;24;24;160;64;160</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>290</x>
-      <y>590</y>
-      <w>590</w>
-      <h>200</h>
+      <x>304</x>
+      <y>624</y>
+      <w>368</w>
+      <h>160</h>
     </coordinates>
     <panel_attributes>UdpMulticastHandler
 --
@@ -215,12 +193,357 @@ loopback:
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>190</x>
-      <y>320</y>
-      <w>120</w>
-      <h>320</h>
+      <x>224</x>
+      <y>408</y>
+      <w>96</w>
+      <h>256</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>30;30;30;300;100;300</additional_attributes>
+    <additional_attributes>24;24;24;240;80;240</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>408</x>
+      <y>56</y>
+      <w>480</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>NetHandler
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>464</x>
+      <y>96</y>
+      <w>40</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>24;24;24;64</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>368</x>
+      <y>904</y>
+      <w>80</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>24;24;64;24</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>368</x>
+      <y>968</y>
+      <w>80</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>24;24;64;24</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>704</x>
+      <y>160</y>
+      <w>400</w>
+      <h>376</h>
+    </coordinates>
+    <panel_attributes>ZeroMQHandler
+--
+context:
+-- String containing the parent context's name
+--
+socketType:
+-- String containing the socket type
+--
+connect:
+-- String containing the endpoint
+--
+accept:
+-- String containing the endpoint
+--
+noWait:
+-- Boolean containing the desired no-wait flag
+--
+linger:
+-- Integer containing the linger period (ms)
+--
+subscribe:
+-- String containing the message filter
+--
+backLog:
+-- Integer containing the connection queue size
+--
+identity:
+-- String containing the identity
+--
+sendBufSizeKb:
+-- Integer containing the send buffer size in KB's
+--
+recvBufSizeKb:
+-- Integer containing the receive buffer size in KB's</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>784</x>
+      <y>96</y>
+      <w>40</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>24;24;24;64</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.custom.Text</type>
+    <coordinates>
+      <x>784</x>
+      <y>552</y>
+      <w>256</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>ZeroMQ handler is experimental at the moment
+and can be found as a shared library with
+examples.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>176</x>
+      <y>1304</y>
+      <w>376</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>PosixHandler
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>240</x>
+      <y>1432</y>
+      <w>168</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>UdpUnicastHandler
+--
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>304</x>
+      <y>1344</y>
+      <w>40</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>24;24;24;88</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>56</x>
+      <y>1432</y>
+      <w>168</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>TcpHandler
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>168</x>
+      <y>1560</y>
+      <w>112</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>TcpClient
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>120</x>
+      <y>1344</y>
+      <w>128</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>112;24;24;88</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>160</x>
+      <y>1472</y>
+      <w>80</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>24;24;64;88</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>80</x>
+      <y>1672</y>
+      <w>120</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>TcpServerMulti
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>0</x>
+      <y>1560</y>
+      <w>120</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>TcpServerSingle
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>344</x>
+      <y>1560</y>
+      <w>168</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>UdpBroadcastHandler
+--
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>400</x>
+      <y>1344</y>
+      <w>40</w>
+      <h>232</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>24;24;24;216</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>440</x>
+      <y>1432</y>
+      <w>168</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>UdpMulticastHandler
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>496</x>
+      <y>1344</y>
+      <w>40</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>24;24;24;88</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>424</x>
+      <y>1184</y>
+      <w>280</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>NetHandler
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>488</x>
+      <y>1224</y>
+      <w>40</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>24;24;24;80</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>32</x>
+      <y>1472</y>
+      <w>72</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>56;24;24;88</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>112</x>
+      <y>1472</y>
+      <w>40</w>
+      <h>216</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>24;24;24;200</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>592</x>
+      <y>1304</y>
+      <w>264</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>ZeroMQHandler
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>600</x>
+      <y>1224</y>
+      <w>40</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>24;24;24;80</additional_attributes>
   </element>
 </diagram>

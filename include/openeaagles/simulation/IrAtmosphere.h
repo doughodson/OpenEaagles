@@ -28,7 +28,7 @@ class IrQueryMsg;
 // Description: Manages the atmospheric data to determine transmissivity
 //              and background radiation for specific infrared wavelengths
 //
-// Form Name: IrAtmosphere
+// Factory name: IrAtmosphere
 // Slots:
 //    waveBands                  <Table1>      ! A list The size of the wavelength bins used in the tables
 //    transmissivityTable        <Table1>      ! The table containing transmissivity data

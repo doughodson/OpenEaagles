@@ -15,7 +15,7 @@ namespace Basic {
 //
 // Description:  Density as a function of mass and volume.
 
-// Form name: Density
+// Factory name: Density
 // Slots:
 //    mass    <Mass>    ! Mass (default: 1 kg)
 //    volume  <Volume>  ! Volume (default: 1 m^3)
@@ -74,7 +74,7 @@ inline std::ostream& operator<<(std::ostream& sout, const Density& n)
     const Mass* m = n.getMass();
     const Volume* v = n.getVolume();
 
-    sout << "( " << n.getFormName() << " " << n.getReal();
+    sout << "( " << n.getFactoryName() << " " << n.getReal();
     if ( m != 0 ) sout << " " << *m;
     if ( v != 0 ) sout << " " << *v;
     sout << " )";

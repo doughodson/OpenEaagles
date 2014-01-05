@@ -30,7 +30,7 @@ namespace Recorder {
 //    of subcomponent OutputHandlers.  The prcessRecord() function for each
 //    subcomponent OutputHandler is called from our processRecord() function.
 //
-// Form name: OutputHandler
+// Factory name: OutputHandler
 //
 // Overriding the Component class slot:
 //    components     ! Must contain only 'OutputHandler' type objects

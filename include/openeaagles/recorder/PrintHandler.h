@@ -23,7 +23,7 @@ namespace Recorder {
 //       b) if the file already exists, a new file is still created
 //          with a version number appended to the file name.
 //
-// Form name: PrintHandler
+// Factory name: PrintHandler
 // Slots:
 //    filename    <String>    ! Data file name (default: use std out)
 //    pathname    <String>    ! Path to the data file directory (optional)

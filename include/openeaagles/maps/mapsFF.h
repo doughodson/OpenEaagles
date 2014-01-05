@@ -7,7 +7,7 @@
 namespace Eaagles {
    namespace Basic { class Object; }
    namespace Maps {
-      extern Basic::Object* mapsFormFunc(const char* formname);
+      extern Basic::Object* mapsFormFunc(const char* name);
    }
 }
 

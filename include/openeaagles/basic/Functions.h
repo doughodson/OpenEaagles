@@ -54,7 +54,7 @@ private:
 //==============================================================================
 // Class: Func1 
 // Description: Generic 1-Dimensional function; f(iv1)
-// Form name: Func1
+// Factory name: Func1
 //==============================================================================
 class Func1 : public Function {
     DECLARE_SUBCLASS(Func1, Function)
@@ -70,7 +70,7 @@ public:
 //==============================================================================
 // Class: Func2 
 // Description: Generic 2-Dimensional function; f(iv1, iv2)
-// Form name: Func2
+// Factory name: Func2
 //==============================================================================
 class Func2 : public Function {
     DECLARE_SUBCLASS(Func2, Function)
@@ -86,7 +86,7 @@ public:
 //==============================================================================
 // Class: Func3 
 // Description: Generic 3-Dimensional function; f(iv1, iv2, iv3)
-// Form name: Func3
+// Factory name: Func3
 //==============================================================================
 class Func3 : public Function {
    DECLARE_SUBCLASS(Func3, Function)
@@ -102,7 +102,7 @@ public:
 //==============================================================================
 // Class: Func4
 // Description: Generic 4-Dimensional function; f(iv1, iv2, iv3, iv4)
-// Form name: Func4
+// Factory name: Func4
 //==============================================================================
 class Func4 : public Function {
    DECLARE_SUBCLASS(Func4, Function)
@@ -118,7 +118,7 @@ public:
 //==============================================================================
 // Class: Func5
 // Description: Generic 5-Dimensional function; f(iv1, iv2, iv3, iv4, iv5)
-// Form names: Func5
+// Factory names: Func5
 //==============================================================================
 class Func5 : public Function {
    DECLARE_SUBCLASS(Func5, Function)
@@ -136,7 +136,7 @@ public:
 // Description: Polynomial function
 //                f(x) = a0 + a1*x + a2*x^2 + ... + aN*x^N
 //
-// Form names: Polynomial
+// Factory names: Polynomial
 // Slots:
 //    coefficients   <Basic::List>  ! Constant coefficients vector: [ a0 a1 a2 ... aN ]
 //

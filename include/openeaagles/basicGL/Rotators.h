@@ -16,7 +16,7 @@ namespace BasicGL {
 // Description: A simple graphic that rotates, and can accept either degrees
 // or radians, about 3 axes.
 //
-// Form name: Rotators
+// Factory name: Rotators
 //  Events messages:
 //      UPDATE_VALUE - rotates around the X axis - radians (Angle or Number)     
 //      UPDATE_VALUE2 - rotates around the X axis - degrees (Number only)

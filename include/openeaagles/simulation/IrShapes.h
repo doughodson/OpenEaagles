@@ -15,17 +15,9 @@ namespace Simulation {
 class IrQueryMsg;
 
 //------------------------------------------------------------------------------
-// Classes: IrShape
-//
-// Base class: Basic::Object -> IrShape
-//
-// Descriptions: Base class for Infrared Shape. 
-// Form name:IrShape
-//
-// Public member functions:
-//      LCreal getArea()
-//          Returns the effective area as a number in square meters.
-//
+// Class: IrShape
+// Description: Base class for infrared shape
+// Factory name: IrShape
 //------------------------------------------------------------------------------
 class IrShape : public Basic::Object
 {
@@ -33,7 +25,7 @@ class IrShape : public Basic::Object
 public:
    IrShape();
 
-   virtual LCreal getArea();
+   virtual LCreal getArea();            // returns the effective area as a number in square meters
    virtual LCreal getReflectorAreaInFieldOfView(const IrQueryMsg* const msg);
    virtual bool setSlotIrShapeArea(const Basic::Number* const s);
 private:
@@ -41,9 +33,9 @@ private:
 };
 
 //------------------------------------------------------------------------------
-// Classes: IrSphere
+// Class: IrSphere
 //
-// Form name: IrSphere
+// Factory name: IrSphere
 // Slots:
 //   radius    <Number>   ! Radius of sphere (default is 10)
 //------------------------------------------------------------------------------
@@ -51,25 +43,24 @@ class IrSphere : public IrShape
 {
    DECLARE_SUBCLASS(IrSphere,IrShape)
 
-public: 
+public:
 
    IrSphere();
 
    virtual LCreal getArea();
-   LCreal getRadius() {return radius;}
+   LCreal getRadius()          { return radius; }
 
    virtual bool setSlotIrSphereRadius(const Basic::Number* const s);
 
-private: 
+private:
 
-   LCreal radius; 
+   LCreal radius;
 };
 
-
 //------------------------------------------------------------------------------
-// Classes: IrBox
+// Class: IrBox
 //
-// Form name: IrBox
+// Factory name: IrBox
 // Slots:
 //   x        < Number>         ! x dimension  (default is 10)
 //   y        < Number>         ! y dimension
@@ -79,20 +70,20 @@ class IrBox : public IrShape
 {
    DECLARE_SUBCLASS(IrBox,IrShape)
 
-public: 
+public:
 
    IrBox();
 
    virtual LCreal getArea();
-   virtual LCreal getReflectorAreaInFieldOfView(const IrQueryMsg* const msg); 
+   virtual LCreal getReflectorAreaInFieldOfView(const IrQueryMsg* const msg);
 
    virtual bool setSlotIrBoxX(const Basic::Number* const s);
    virtual bool setSlotIrBoxY(const Basic::Number* const s);
    virtual bool setSlotIrBoxZ(const Basic::Number* const s);
 
-private: 
+private:
 
-   LCreal x,y,z; 
+   LCreal x,y,z;
 };
 
 } // End Simulation namespace

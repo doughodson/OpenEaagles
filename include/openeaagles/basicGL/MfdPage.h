@@ -18,7 +18,7 @@ namespace BasicGL {
 // the respective function, and derived classes may override the function and 
 // do specific actions.
 //
-// Form name: MfdPage
+// Factory name: MfdPage
 // -------------------------------------------------------------------------------
 class MfdPage : public BasicGL::Page
 {

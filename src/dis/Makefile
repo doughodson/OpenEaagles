@@ -6,6 +6,7 @@ LIB = $(OPENEAAGLES_LIB_DIR)/liboeDis.a
 OBJS =  \
 	$(LIB)(disFF.o) \
 	$(LIB)(EmissionPduHandler.o) \
+	$(LIB)(Factory.o) \
 	$(LIB)(NetIO.o) \
 	$(LIB)(NetIO-entity-state.o) \
 	$(LIB)(NetIO-munition-detonation.o) \

@@ -1795,7 +1795,7 @@ std::ostream& NetIO::serialize(std::ostream& sout, const int i, const bool slots
     int j = 0;
     if ( !slotsOnly ) {
         indent(sout,i);
-        sout << "( " << getFormName() << std::endl;
+        sout << "( " << getFactoryName() << std::endl;
         j = 4;
     }
 
@@ -1865,7 +1865,7 @@ void NetIO::testInputEntityTypes(const unsigned int n)
             std::cout << "; foundNtm= " << foundNtm;
             if (foundNtm != 0) {
                const Simulation::Player* foundP = origNtm->getTemplatePlayer();
-               std::cout << "; form: " << foundP->getFormName();
+               std::cout << "; form: " << foundP->getFactoryName();
                SPtr<Basic::String> foundType( (Basic::String*) foundP->getType() );
                if (foundType != 0) std::cout << "; type: " << *foundType;
             }
@@ -1906,7 +1906,7 @@ void NetIO::testOutputEntityTypes(const unsigned int n)
             const Simulation::Player* origP = origNtm->getTemplatePlayer();
             Simulation::Player* origP1 = origP->clone();
 
-            std::cout << "; form: " << origP->getFormName();
+            std::cout << "; form: " << origP->getFactoryName();
             SPtr<Basic::String> origType( (Basic::String*) origP->getType() );
             if (origType != 0) {
 

@@ -33,7 +33,7 @@ class Simulation;
 // Class:   TabLogger
 // Base class:  Basic::Object -> Basic::Component -> Basic::Logger -> SimLogger -> TabLogger
 // Description: Simulation Event & Data Logger
-// Form name: TabLogger
+// Factory name: TabLogger
 //------------------------------------------------------------------------------
 class TabLogger : public SimLogger
 {
@@ -53,7 +53,7 @@ public:
 
     //------------------------------------------------------------------------------
     // Class:   TabLogger::TabLogEvent
-    // Form name: TabLogEvent
+    // Factory name: TabLogEvent
     // Description: Abstract class for all simulation log events
     //------------------------------------------------------------------------------
     class TabLogEvent : public SimLogger::SimLogEvent {
@@ -95,7 +95,7 @@ public:
     // Class:   TabLogger::LogPlayerData
     // Base class:  Basic::Object -> Basic::Logger::LogEvent -> SimLogEvent -> TabLogEvent -> LogPlayerData
     // Description: Log player's data event
-    // Form name: LogPlayerData
+    // Factory name: LogPlayerData
     //------------------------------------------------------------------------------
     class LogPlayerData : public TabLogEvent {
         DECLARE_SUBCLASS(LogPlayerData,TabLogEvent)
@@ -124,7 +124,7 @@ public:
     // Class: TabLogger::LogGunActivity
     // Base class:  Basic::Object -> Basic::Logger::LogEvent -> SimLogEvent -> TabLogEvent -> LogGunActivity
     // Description: Log a gun fire event; Player just fired a burst of 'n' rounds
-    // Form name: LogGunActivity
+    // Factory name: LogGunActivity
     //------------------------------------------------------------------------------
     class LogGunActivity : public TabLogEvent {
         DECLARE_SUBCLASS(LogGunActivity,TabLogEvent)
@@ -144,7 +144,7 @@ public:
     // Base class:  Basic::Object -> Basic::Logger::LogEvent -> SimLogEvent -> TabLogEvent -> LogWeaponActivity
     // Description: Log a detonation event
     //    (i.e., Target, 'tgt', killed by weapon, 'wpn', released from the 'player'.
-    // Form name: LogWeaponActivity
+    // Factory name: LogWeaponActivity
     //------------------------------------------------------------------------------
     class LogWeaponActivity : public TabLogEvent {
         DECLARE_SUBCLASS(LogWeaponActivity,TabLogEvent)
@@ -169,7 +169,7 @@ public:
     // Class: TabLogger::LogActiveTrack
     // Base class:  Basic::Object -> Basic::Logger::LogEvent -> SimLogEvent -> TabLogEvent -> LogActiveTrack
     // Description: Log new, removed, or updated "active" track [not passive]
-    // Form name: LogActiveTrack
+    // Factory name: LogActiveTrack
     //------------------------------------------------------------------------------
     class LogActiveTrack : public TabLogEvent {
         DECLARE_SUBCLASS(LogActiveTrack,TabLogEvent)
@@ -197,7 +197,7 @@ public:
     // Class: TabLogger::LogPassiveTrack
     // Base class:  Basic::Object -> Basic::Logger::LogEvent -> SimLogEvent -> TabLogEvent -> LogPassiveTrack
     // Description: Log passive track event (header, new, updated, removed) [RWR]
-    // Form name: LogPassiveTrack
+    // Factory name: LogPassiveTrack
     //------------------------------------------------------------------------------
     class LogPassiveTrack : public TabLogEvent {
         DECLARE_SUBCLASS(LogPassiveTrack,TabLogEvent)

@@ -15,7 +15,7 @@ namespace Recorder {
 // Class:   NetOutput
 // Description: Serialize and write a DataRecord to a network
 //
-// Form name: NetOutput
+// Factory name: NetOutput
 // Slots:
 //      netHandler  <NetHandler>    Network output handler
 //      noWait      <Number>        No wait (unblocked) I/O flag (default: false -- blocked I/O)

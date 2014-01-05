@@ -2,16 +2,23 @@
 // mapsFormFunc()
 //------------------------------------------------------------------------------
 #include "openeaagles/maps/mapsFF.h"
+#include "openeaagles/maps/Factory.h"
 
-#include "openeaagles/maps/rpfMap/rpfMapFF.h"
+#include "openeaagles/basic/Object.h"
 
 namespace Eaagles {
 namespace Maps {
 
-Basic::Object* mapsFormFunc(const char* formname)
+Basic::Object* mapsFormFunc(const char* name)
 {
-    Basic::Object* newform = Rpf::rpfMapFormFunc(formname);
-    return newform;
+   //static bool msgPrinted(false);
+   //if (!msgPrinted) {
+   //   std::cout << std::endl;
+   //   std::cout << "WARNING! The function Maps::mapsFormFunc() is deprecated - use Maps::Factory::createObj() instead.";
+   //   std::cout << std::endl;
+   //   msgPrinted = true;
+   //}
+   return Factory::createObj(name);
 }
 
 } // end Maps namespace

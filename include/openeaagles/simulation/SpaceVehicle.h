@@ -12,7 +12,7 @@ namespace Simulation {
 //==============================================================================
 // Class SpaceVehicle
 // Description: Generic Space Vehicles
-// Form name: SpaceVehicle
+// Factory name: SpaceVehicle
 //==============================================================================
 class SpaceVehicle : public Player
 {
@@ -57,7 +57,7 @@ public:
 
 //==============================================================================
 // Class BoosterSpaceVehicle
-// Form name: BoosterSpaceVehicle
+// Factory name: BoosterSpaceVehicle
 //==============================================================================
 class BoosterSpaceVehicle : public SpaceVehicle  
 {
@@ -70,7 +70,7 @@ public:
 
 //==============================================================================
 // Class MannedSpaceVehicle
-// Form name: MannedSpaceVehicle
+// Factory name: MannedSpaceVehicle
 //==============================================================================
 class MannedSpaceVehicle : public SpaceVehicle  
 {
@@ -83,7 +83,7 @@ public:
 
 //==============================================================================
 // Class UnmannedSpaceVehicle
-// Form name: UnmannedSpaceVehicle
+// Factory name: UnmannedSpaceVehicle
 //==============================================================================
 class UnmannedSpaceVehicle : public SpaceVehicle  
 {

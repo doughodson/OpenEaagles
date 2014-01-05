@@ -18,7 +18,7 @@ namespace Simulation {
 //              include bomb racks, missile launchers, fuel tanks, avionics pods,
 //              and gun pods.
 //
-// Form name: ExternalStore
+// Factory name: ExternalStore
 // Slots:
 //    type         <Basic::String>  ! Type string (default: 0)
 //    jettisonable <Boolean>        ! Store can be jettisoned (default: true )

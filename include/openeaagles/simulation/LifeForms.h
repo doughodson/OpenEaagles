@@ -13,7 +13,7 @@ namespace Simulation {
 //==============================================================================
 // Class LifeForm
 // Description: Generic life form
-// Form name: LifeForm
+// Factory name: LifeForm
 //==============================================================================
 class LifeForm : public Player  
 {

@@ -573,7 +573,7 @@ std::ostream& Page::serialize(std::ostream& sout, const int i, const bool slotsO
     int j = 0;
     if ( !slotsOnly ) {
         //indent(sout,i);
-        sout << "( " << getFormName() << std::endl;
+        sout << "( " << getFactoryName() << std::endl;
         j = 4;
     }
 

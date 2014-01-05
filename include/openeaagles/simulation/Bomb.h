@@ -18,7 +18,7 @@ namespace Simulation {
 //    Contains a simple ballistics and guidance model, which derived models can
 //    override at will.
 //
-// Form name: Bomb
+// Factory name: Bomb
 // Slots:
 //    arming         <Identifier>  ! Bomb arming option (default: NONE)
 //    noseFuze       <Number>      ! Nose fuze flag (default: false)

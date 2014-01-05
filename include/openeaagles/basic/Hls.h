@@ -16,7 +16,7 @@ namespace Basic {
 // Description:  Defines a color by Hue, Saturation and Lightness.
 //
 //
-// Form name: hls
+// Factory name: hls
 // Slots:
 //     hue         <Number>  ! hue component (0.0 to 360.0, default: 0.0)
 //     saturation  <Number>  ! saturation component (0.0 to 1.0, default: 0.0)

@@ -14,7 +14,7 @@ namespace Basic {
 //
 // Description: Server side of a single TCP/IP connection.  
 //
-// Form name: TcpServer
+// Factory name: TcpServer
 //
 // Input File Example:
 //
@@ -36,6 +36,7 @@ public:
    virtual bool initNetwork(const bool noWaitFlag);
 
 protected:
+   virtual bool bindSocket();
    virtual bool listenForConnections();
    virtual bool acceptConnection();
 };

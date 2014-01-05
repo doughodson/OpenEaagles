@@ -15,7 +15,7 @@ namespace LinearSystem {
 //
 // Description: Limits function: limits X to the upper and lower boundaries.
 //
-// Form name: Limit
+// Factory name: Limit
 // Slots:
 //    lower  <Number>   Lower boundary (default: -1) (must be less than the upper)
 //    upper  <Number>   Upper boundary (default:  1) (must be greater than the lower)

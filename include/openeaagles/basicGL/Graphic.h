@@ -45,7 +45,7 @@ class Material;
 //              transformation matrix, color, linewidth, etc.
 //              NOTE: Graphic objects REQUIRE a Display class to function.
 //
-// Form name: Graphic
+// Factory name: Graphic
 // Slots:
 //    color              <Color>        ! Color (default: 0)
 //    color              <Identifier>   ! Color by name (default: 0)

@@ -19,7 +19,7 @@ namespace Basic {
 //               added to the statistic.  Use sigma() to add points and clear()
 //               to restart (or clear) the statistic.
 //
-// Form name: Statistic
+// Factory name: Statistic
 //
 // Public member functions:
 //

@@ -18,7 +18,7 @@ namespace Basic {
 //      Comparison Operators:     <  <=  ==  >=  >  != 
 //      iostream Operations:      <<  >>
 //
-// Form name: String
+// Factory name: String
 //------------------------------------------------------------------------------
 class String : public Object {
     DECLARE_SUBCLASS(String,Object)

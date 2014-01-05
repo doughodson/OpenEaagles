@@ -4,7 +4,7 @@
 #ifndef __Eaagles_Basic_UdpUnicastHandler_H__
 #define __Eaagles_Basic_UdpUnicastHandler_H__
 
-#include "openeaagles/basic/NetHandler.h"
+#include "openeaagles/basic/nethandlers/PosixHandler.h"
 
 namespace Eaagles {
 namespace Basic {
@@ -25,7 +25,7 @@ class String;
 //              The local port must be defined if you're going to be changing
 //              the destination port.
 //
-// Form name: UdpUnicastHandler
+// Factory name: UdpUnicastHandler
 //
 // Slots:
 //      ipAddress  <String>    ! Destination host name or IP address "111.122.133.144"
@@ -40,9 +40,9 @@ class String;
 //        )
 //
 //------------------------------------------------------------------------------
-class UdpUnicastHandler : public NetHandler
+class UdpUnicastHandler : public PosixHandler
 {
-   DECLARE_SUBCLASS(UdpUnicastHandler, NetHandler)
+   DECLARE_SUBCLASS(UdpUnicastHandler, PosixHandler)
 
 public:
    UdpUnicastHandler();
@@ -70,6 +70,8 @@ public:
 protected:
    // NetHandler interface
    virtual bool init();            // Initialize this socket handler
+
+   // PosixHandler interface
    virtual bool bindSocket();      // Bind socket to address
 
 private:

@@ -16,7 +16,7 @@ class Polygon;
 // Class: Scanline
 // Base class: Object -> Scanline
 // Description:  (Abstract) 2D scan line engine.  
-// Form name: Scanline
+// Factory name: Scanline
 //------------------------------------------------------------------------------
 class Scanline : public Basic::Object
 {

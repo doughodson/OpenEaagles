@@ -130,7 +130,7 @@ public:
 
 
 inline std::ostream& operator<<(std::ostream& sout, const Time& n)
-    { sout << "( " << n.getFormName() << " " << n.getReal() << " )"; return sout; }
+    { sout << "( " << n.getFactoryName() << " " << n.getReal() << " )"; return sout; }
 
 
 // getHHMMSS -- convert time in seconds to integer hours, minutes and seconds

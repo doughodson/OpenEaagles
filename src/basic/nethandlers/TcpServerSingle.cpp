@@ -1,12 +1,20 @@
 //------------------------------------------------------------------------------
 // Class: TcpServerSingle
 //------------------------------------------------------------------------------
-
+//
+// M$ WinSock has slightly different return types, some different calling, and
+// is missing some of the calls that are standard in Berkeley and POSIX socket
+// implementation.  These slight differences will be handled in setting basic
+// typedefs, defines, and constants that will make each convention match for
+// use later in the code.  This will save a lot of pre-processor intervention
+// and make the code that much more enjoyable to read!
+//
 #if defined(WIN32)
     #include <sys/types.h>
     #include <Winsock2.h>
     #include <WS2tcpip.h>
     #define  bzero(a,b)   ZeroMemory(a,b)
+    typedef int socklen_t;
 #else
     #include <arpa/inet.h>
     #include <sys/fcntl.h>
@@ -14,7 +22,8 @@
     #ifdef sun
         #include <sys/filio.h> // -- added for Solaris 10
     #endif
-    static const int SOCKET_ERROR = -1;
+    static const int INVALID_SOCKET = -1; // Always -1 and errno is set
+    static const int SOCKET_ERROR   = -1;
 #endif
 
 #include "openeaagles/basic/nethandlers/TcpServerSingle.h"
@@ -73,19 +82,47 @@ bool TcpServerSingle::initNetwork(const bool noWaitFlag)
     return ok;
 }
 
+// -------------------------------------------------------------
+// bindSocket() -- bind the socket to an address, and configure
+// the send and receive buffers. 
+// -------------------------------------------------------------
+bool TcpServerSingle::bindSocket()
+{
+   // ---
+   // Our base class will bind the socket
+   // ---
+   bool ok = BaseClass::bindSocket();
+
+   if (ok) {
+      struct sockaddr_in addr;        // Working address structure
+      bzero(&addr, sizeof(addr));
+      addr.sin_family = AF_INET;
+      addr.sin_addr.s_addr = INADDR_ANY;
+      if (getLocalAddr() != 0) addr.sin_addr.s_addr = getLocalAddr ();
+      if (getLocalPort() != 0) addr.sin_port = htons (getLocalPort());  
+      else addr.sin_port = htons(getPort());
+
+      // Only in server do we bind
+      if (::bind(socketNum, (const struct sockaddr *) &addr, sizeof(addr)) == SOCKET_ERROR ) {
+         ::perror("TcpHandler::bindSocket(): bind error");
+         return false;
+      }
+
+      if (!setSendBuffSize()) return false;
+   
+      if (!setRecvBuffSize()) return false;
+   }
+
+   return ok;
+}
+
 //------------------------------------------------------------------------------
 // listenForConnections() -- puts the socket into listen mode
 //------------------------------------------------------------------------------
 bool TcpServerSingle::listenForConnections()
 {
-#if defined(WIN32)
     if (socketNum == INVALID_SOCKET) return false;
-    if( ::listen(socketNum, 1) == SOCKET_ERROR )
-#else
-    if (socketNum < 0) return false;
-    if( ::listen(socketNum, 1) < 0)
-#endif
-    {
+    if (::listen(socketNum, 1) == SOCKET_ERROR) {
         ::perror("TcpServerSingle::listenForConnections(): error! \n");
         return false;
     }
@@ -99,33 +136,20 @@ bool TcpServerSingle::acceptConnection()
 {
    struct sockaddr_in clientAddr;
 
-#if defined(WIN32)
    if (socketNum == INVALID_SOCKET) return 0;
-   int cAddrSize = sizeof(clientAddr);
-   if (isMessageEnabled(MSG_INFO)) {
-       std::cout << "Waiting to accept connection on " << getPort() << " ... " << std::flush;
-   }
-   tcpSocket = ::accept(socketNum, (struct sockaddr *) &clientAddr, &cAddrSize);
-   if(tcpSocket == INVALID_SOCKET) {
-      if (isMessageEnabled(MSG_INFO)) {
-          std::cout << " failed!" << std::endl;
-      }
-      return false;
-   }
-#else
-   if (socketNum < 0) return 0;
+
    socklen_t cAddrSize = sizeof(clientAddr);
    if (isMessageEnabled(MSG_INFO)) {
        std::cout << "Waiting to accept connection on " << getPort() << " ... " << std::flush;
    }
-   tcpSocket = ::accept(socketNum, (struct sockaddr *) &clientAddr, &cAddrSize);
-   if(tcpSocket  < 0) {
+   LcSocket tcpSocket = ::accept(socketNum, (struct sockaddr *) &clientAddr, &cAddrSize);
+   if (tcpSocket == INVALID_SOCKET) {
       if (isMessageEnabled(MSG_INFO)) {
           std::cout << " failed!" << std::endl;
       }
       return false;
    }
-#endif
+
    if (isMessageEnabled(MSG_INFO)) {
        std::cout << "Accepted";
        char* ip = ::inet_ntoa(clientAddr.sin_addr);
@@ -135,15 +159,26 @@ bool TcpServerSingle::acceptConnection()
        std::cout << std::endl;
    }
 
+   // After accepting a connection we close the original opened socket and
+   // we then assign socketNum to our local tcpSocket.
+#if defined(WIN32)
+   if (::closesocket(socketNum) == SOCKET_ERROR) {
+#else
+   if (::shutdown(socketNum, SHUT_RDWR) == SOCKET_ERROR) {
+#endif
+      ::perror("TcpServerSingle::acceptConnection(): shutdown original error! \n");
+   }
+
+   socketNum = tcpSocket;
    connected = true;
    connectionTerminated = false;
 
    // Set blocked or no-wait
-   if (noWait) setNoWait(tcpSocket);
-   else setBlocked(tcpSocket);
+   if (noWait) setNoWait();
+   else setBlocked();
 
    if (isMessageEnabled(MSG_INFO)) {
-       std::cout << "TcpServerSingle::acceptConnection: socketNum = " << socketNum << ", tcpSocket = " << tcpSocket << std::endl;
+       std::cout << "TcpServerSingle::acceptConnection: new socketNum = " << socketNum << std::endl;
    }
 
    return true;

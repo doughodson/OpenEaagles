@@ -764,7 +764,7 @@ std::ostream& Terrain::serialize(std::ostream& sout, const int i, const bool slo
     int j = 0;
     if ( !slotsOnly ) {
       indent(sout,i);
-      sout << "( " << getFormName() << std::endl;
+      sout << "( " << getFactoryName() << std::endl;
       j = 4;
     }
 

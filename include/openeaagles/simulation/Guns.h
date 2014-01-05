@@ -20,7 +20,7 @@ namespace Simulation {
 //    independent player, and it is updated by the background and time-critical
 //    threads.
 //
-// Form name: Gun
+// Factory name: Gun
 // Slots:
 //    bulletType  <Bullet>   ! Type of bullet (have to have bullets to work) (default: 0)
 //    rounds      <Number>   ! Number of rounds (default: 510)
@@ -134,7 +134,7 @@ private:
 //    Provides a description of the bullet.  It is used to create the "flyout"
 //    weapon player.  During flyout, the bullets are grouped into bursts.
 //
-// Form name: Bullet
+// Factory name: Bullet
 //==============================================================================
 class Bullet : public Weapon  
 {

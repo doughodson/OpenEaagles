@@ -357,7 +357,7 @@ std::ostream& TargetData::serialize(std::ostream& sout, const int i, const bool 
 {
     int j = 0;
     if ( !slotsOnly ) {
-        sout << "( " << getFormName() << std::endl;
+        sout << "( " << getFactoryName() << std::endl;
         j = 4;
     }
 

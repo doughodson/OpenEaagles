@@ -26,7 +26,7 @@ class TrackManager;
 // Description: Base class for R/F Sensor Models.  Provides a common
 //              interface, and some default behavior, for R/F sensors.
 //
-// Form name: RfSensor
+// Factory name: RfSensor
 // Slots:
 //    trackManagerName     <String>      ! Name of the requested Track Manager (default: 0)
 //
@@ -168,7 +168,7 @@ private:
 // Class: SensorMgr
 //
 // Description: Generic class for managing a list of R/F sensors
-// Form name: SensorMgr
+// Factory name: SensorMgr
 //------------------------------------------------------------------------------
 class SensorMgr : public RfSensor
 {

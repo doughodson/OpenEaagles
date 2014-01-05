@@ -20,7 +20,7 @@ namespace Recorder {
 // Class: DataRecorder
 // Description: OpenEaagles data recorder; receives and processes data samples
 //
-// Form name: DataRecorder
+// Factory name: DataRecorder
 // Slots:
 //    outputHandler     <OutputHandler>      ! Output handler (default: none)
 //

@@ -41,7 +41,7 @@ class Otm;
 //       east(y) and down(z) from the reference point.
 //
 //
-// Form name: Otw
+// Factory name: Otw
 // Slots:
 //    maxRange       <Distance>     ! Max range of visual system (default: 20000.0f)
 //    maxRange       <Number>       ! Max range of visual system (meters)
@@ -222,7 +222,7 @@ private:
 //
 //    2) The age counters are used by the OTW unique handlers (derived from
 //       the Otw class).
-// Form name: OtwModel
+// Factory name: OtwModel
 //------------------------------------------------------------------------------
 class OtwModel : public Basic::Object
 {
@@ -302,7 +302,7 @@ private:
 //              Maps player's form name and type string to a OTW entity type ID.
 //
 //
-// Form name: Otm
+// Factory name: Otm
 // Slots:
 //     formName      <Identifier>  ! Reference form name (default: 0)
 //     typeName      <String>      ! Reference type name (default: 0)
@@ -326,9 +326,9 @@ private:
 //       (see #2 & #5 below -- we get matches with the base classes and
 //        the more general type names)
 //
-//    2) Form names will also match base class form names
+//    2) Factory names will also match base class form names
 //
-//    3) Form names are compared first and then the type names are compared
+//    3) Factory names are compared first and then the type names are compared
 //
 //    4) It's considered a match if the form names match and no type name as given.
 //

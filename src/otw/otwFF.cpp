@@ -1,32 +1,24 @@
 //------------------------------------------------------------------------------
 // Form function for the Out-The-Window, 'otw', library
 //------------------------------------------------------------------------------
+#include "openeaagles/otw/otwFF.h"
+#include "openeaagles/otw/Factory.h"
 
-#include "openeaagles/otw/OtwCigiCl.h"
-#include "openeaagles/otw/OtwPC.h"
-#include "openeaagles/basic/String.h"
+#include "openeaagles/basic/Object.h"
 
 namespace Eaagles {
 namespace Otw {
 
-Basic::Object* otwFormFunc(const char* formname)
+Basic::Object* otwFormFunc(const char* name)
 {
-    Basic::Object* newform = 0;
-
-    // Common Image Generation Interface (CIGI)
-    if ( strcmp(formname, OtwCigiCl::getFormName()) == 0 ) {
-        newform = new OtwCigiCl();
-    }
-    else if ( strcmp(formname, CigiClNetwork::getFormName()) == 0 ) {
-        newform = new CigiClNetwork();
-    }
-
-    // PC Visual Driver
-    else if ( strcmp(formname, OtwPC::getFormName()) == 0 ) {
-        newform = new OtwPC();
-    }
-
-    return newform;
+   //static bool msgPrinted(false);
+   //if (!msgPrinted) {
+   //   std::cout << std::endl;
+   //   std::cout << "WARNING! The function Otw::otwFormFunc() is deprecated - use Otw::Factory::createObj() instead.";
+   //   std::cout << std::endl;
+   //   msgPrinted = true;
+   //}
+   return Factory::createObj(name);
 }
 
 } // End Otw namespace

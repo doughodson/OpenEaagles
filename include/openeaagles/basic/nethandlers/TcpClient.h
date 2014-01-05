@@ -15,7 +15,7 @@ namespace Basic {
 // Description: Client side of a single TCP/IP connection.
 //
 //
-// Form name: TcpClient
+// Factory name: TcpClient
 // Slots:
 //      ipAddress  <String>    ! Destination host name or IP address "111.122.133.144"
 //                             ! (default: found via local host name)
@@ -50,6 +50,9 @@ protected:
 
     // NetHandler interface
     virtual bool init();         // Initialize this socket handler
+
+    // PosixHandler interface
+    virtual bool bindSocket();   // Bind socket to address
 
 private:
     char* ipAddr;                // IP Address

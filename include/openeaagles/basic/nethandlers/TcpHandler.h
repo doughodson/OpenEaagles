@@ -4,7 +4,7 @@
 #ifndef __Eaagles_Basic_TcpHandler_H__
 #define __Eaagles_Basic_TcpHandler_H__
 
-#include "openeaagles/basic/NetHandler.h"
+#include "openeaagles/basic/nethandlers/PosixHandler.h"
 
 namespace Eaagles {
 namespace Basic {
@@ -16,9 +16,9 @@ class String;
 //
 // Description: General TCP/IP support class.
 //------------------------------------------------------------------------------
-class TcpHandler : public NetHandler
+class TcpHandler : public PosixHandler
 {
-   DECLARE_SUBCLASS(TcpHandler, NetHandler)
+   DECLARE_SUBCLASS(TcpHandler, PosixHandler)
 
 public:
    TcpHandler();
@@ -37,14 +37,11 @@ public:
    TcpHandler(const LcSocket socketNum);
 
 protected:
-   // NetHandler interface
    virtual bool init();         // Initialize this socket handler
-   virtual bool bindSocket();   // Bind socket to address
 
    bool connected;              // true if we are connected
    bool connectionTerminated;   // true if we had a connection, then lost it (or terminated it ourselves)
 
-   LcSocket  tcpSocket;         // Our Connected TCP Socket
    bool  noWait;                // TCP's no wait I/O flag
 };
 

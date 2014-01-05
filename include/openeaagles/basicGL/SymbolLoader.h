@@ -67,7 +67,7 @@ namespace BasicGL {
 //    (if so desired), and the symbol loader will draw lines between the symbols (this
 //    is an easy way to draw routes).
 //
-// Form name: SymbolLoader
+// Factory name: SymbolLoader
 // Slots:
 //     templates         <PairStream>   ! List of templates to use for symbols
 //     showOnlyInRange   <Number>       ! only show symbols within range (default: true)

@@ -16,7 +16,7 @@ class Number;
 //------------------------------------------------------------------------------
 // Class: Transform
 // Base class:  Object -> Transform
-// Form name:Transform
+// Factory name:Transform
 // Slots:
 //  x    <Number>    ! x transform (default: identity)
 //  x    <Angle>    ! x transform (default: identity)
@@ -79,7 +79,7 @@ protected:
 //    Two Parameters: Translate X by a factor of "x" and Y by a factor of "y".
 //    Three Parameters: Translate X, Y and Z by factors of "x", "y" and "z" respectively.
 //
-// Form names: Translation :
+// Factory names: Translation :
 //    1. x  (Number)  x translation.
 //    2. y  (Number)  y translation.
 //    3. z  (Number)  z translation (optional).

@@ -13,7 +13,7 @@ namespace Simulation {
 //==============================================================================
 // Class Ship
 // Description: Generic ship model
-// Form name: Ship
+// Factory name: Ship
 //==============================================================================
 class Ship : public Player  
 {

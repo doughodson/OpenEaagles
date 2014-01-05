@@ -30,7 +30,7 @@ class IrQueryMsg;
 // Description: Class for managing the atmospheric data for determining transmissivity
 //              and background radiation for infrared wavelengths
 //
-// Form Name: IrAtmosphere1
+// Factory name: IrAtmosphere1
 // Slots:
 //    solarRadiationTable        <Table2>       The table containing solar radiation tables
 //    backgroundRadiationTable   <Table3>       The background radiation table

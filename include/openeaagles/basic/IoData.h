@@ -34,7 +34,7 @@ namespace Basic {
 //    4) All functions return true if successful.
 //
 //
-// Form name: GenericIoData
+// Factory name: GenericIoData
 //
 //------------------------------------------------------------------------------
 class IoData : public Object {

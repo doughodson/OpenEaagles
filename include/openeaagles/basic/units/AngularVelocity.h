@@ -23,7 +23,7 @@ class Time;
 //                    Time: Milliseconds, Minutes, Hours, Days
 //                Will convert input units to radians/second from any angle/time unit.
 //
-// Form name: AngularVelocity
+// Factory name: AngularVelocity
 // Slots:
 //    angle  <Angle>  ! angle (default: 1)
 //    time   <Time>   ! time (default: 1)

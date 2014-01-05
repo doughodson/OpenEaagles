@@ -16,7 +16,7 @@ namespace Basic {
 // Description:  Defines a color by Cyan, Magenta, and Yellow.
 //
 //
-// Form name: cmy
+// Factory name: cmy
 // Slots:
 //    cyan     <Number>  ! Cyan component (0.0 to 1.0) (default: 0)
 //    magenta  <Number>  ! Magenta component (0.0 to 1.0) (default: 0)

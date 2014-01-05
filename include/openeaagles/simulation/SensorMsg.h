@@ -16,7 +16,7 @@ namespace Simulation {
 // Description: Generic sensor message class; used to pass requests data
 //              between sensors (i.e., antennas, IR seekers) and players.
 //
-// Form name: SensorMsg
+// Factory name: SensorMsg
 //------------------------------------------------------------------------------
 class SensorMsg : public Basic::Object  
 {

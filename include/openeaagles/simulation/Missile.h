@@ -18,7 +18,7 @@ class Track;
 // Class: Missile
 // Description: Base class for missiles; with a simple, default missile model
 //
-// Form name: Missile
+// Factory name: Missile
 // Slots:
 //   minSpeed     <Number>  ! Minimum Velocity (m/s)  (default: 0.0)
 //   maxSpeed     <Number>  ! Maximum Velocity (m/s)  (default: 800.0)

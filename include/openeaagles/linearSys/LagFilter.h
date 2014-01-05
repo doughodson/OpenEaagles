@@ -25,7 +25,7 @@ namespace LinearSystem {
 //
 // Note: tau must be greater than zero.
 //
-// Form name: LagFilter
+// Factory name: LagFilter
 // Slots:
 //    tau    <Time>     Filer time constant
 //    tau    <Number>   Filer time constant (sec)

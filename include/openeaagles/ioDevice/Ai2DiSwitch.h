@@ -30,7 +30,7 @@ namespace IoDevice {
 //     >= level      true       false
 //
 //
-// Form Name: Ai2DiSwitch
+// Factory name: Ai2DiSwitch
 // Slots:
 //      di           <Number>    Discrete Input location (IoData's DI channel)
 //      channel      <Number>    Device's AI channel number

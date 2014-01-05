@@ -48,7 +48,7 @@ namespace Basic {
 //       terminate when a SHUTDOWN_EVENT is sent to this object.
 //      
 // 
-// Form name: IoHandler
+// Factory name: IoHandler
 // Slots:
 //    ioData      <IoData>       ! Combined input/output data (default: none)
 //    inputData   <IoData>       ! Individual input data (default: none)

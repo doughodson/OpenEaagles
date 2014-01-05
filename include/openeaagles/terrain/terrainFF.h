@@ -7,7 +7,7 @@
 namespace Eaagles {
    namespace Basic { class Object; }
    namespace Terrain {
-      extern Basic::Object* terrainFormFunc(const char* formname);
+      extern Basic::Object* terrainFormFunc(const char* name);
    }
 }
 

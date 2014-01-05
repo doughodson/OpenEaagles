@@ -17,7 +17,7 @@ namespace Basic {
 //              which will return a new instance of a TcpHandler when a connection
 //              is made, or zero is return if no connection was made.
 //
-// Form name: TcpServerMultiple
+// Factory name: TcpServerMultiple
 // Slots:
 //      backlog   <Number>    ! Listen socket's max backlog (default: 1)
 //
@@ -51,6 +51,7 @@ public:
    virtual bool initNetwork(const bool noWaitFlag);
 
 protected:
+   virtual bool bindSocket();
    virtual bool setBacklog(const unsigned int value);
    virtual bool listenForConnections();
 

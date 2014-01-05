@@ -33,7 +33,7 @@ namespace Simulation {
 //    is common data used by most interoperability network entities.  Additional
 //    entity data is added by the network specific classes derived from Nib.
 //
-// Form name: Nib
+// Factory name: Nib
 //
 //------------------------------------------------------------------------------
 class Nib : public Basic::Component

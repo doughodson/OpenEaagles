@@ -16,7 +16,7 @@ namespace Simulation {
 //
 // Description: Generic RF Emission class -- Used to pass RF emission data
 //              between antennas and players.
-// Form name: Emission
+// Factory name: Emission
 //------------------------------------------------------------------------------
 class Emission : public SensorMsg
 {

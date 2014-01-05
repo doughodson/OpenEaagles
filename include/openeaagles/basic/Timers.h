@@ -127,7 +127,7 @@ inline bool Timer::freeze() const               { return frz; }
 // Class: UpTimer
 // Description: General purpose UP timer; time counts in the positive direction.
 //
-// Form name: UpTimer
+// Factory name: UpTimer
 //==============================================================================
 class UpTimer : public Timer {
     DECLARE_SUBCLASS(UpTimer,Timer)
@@ -140,7 +140,7 @@ public:
 // Class: DownTimer
 // Description: General purpose DOWN timer; time counts in the negative direction.
 //
-// Form name: DownTimer
+// Factory name: DownTimer
 //==============================================================================
 class DownTimer : public Timer {
     DECLARE_SUBCLASS(DownTimer,Timer)

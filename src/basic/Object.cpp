@@ -77,11 +77,19 @@ bool Object::isClassType(const std::type_info& type) const
     else return false;
 }
 
-// Check class name
+// Check factory name
+bool Object::isFactoryName(const char name[]) const
+{
+    if (name == 0) return false;
+    if ( strcmp(_static.fname, name) == 0 )  return true;
+    else return false;
+}
+
+// Check form name
 bool Object::isFormName(const char name[]) const
 {
     if (name == 0) return false;
-    if ( strcmp(_static.fname,name) == 0 )  return true;
+    if ( strcmp(_static.fname, name) == 0 )  return true;
     else return false;
 }
 
@@ -117,6 +125,12 @@ Object* Object::getSlotByIndex(const int)
 
 // get form name
 const char* Object::getFormName()
+{
+    return _static.fname;
+}
+
+// get factory name
+const char* Object::getFactoryName()
 {
     return _static.fname;
 }

@@ -25,7 +25,7 @@ namespace Recorder {
 // Class:   PrintPlayer
 // Description: Print player data
 //
-// Form name: PrintPlayer
+// Factory name: PrintPlayer
 // Slots: 
 //   playerName  <Basic::String>  ! Player name 
 //------------------------------------------------------------------------------

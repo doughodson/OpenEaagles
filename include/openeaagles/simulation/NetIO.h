@@ -25,7 +25,7 @@ namespace Simulation {
 //    Defines the basic framework for interoperability networks (e.g., DIS, HLA,
 //    TENA, etc).  Derived classes will manage the network specific protocols.
 //
-// Form name: NetIO
+// Factory name: NetIO
 // Slots:
 //    networkID            (Basic::Number)      ! Network ID number: [ 1 .. MAX_NETWORD_ID ] (default: 1)
 //    federationName       (Basic::String)      ! Federation name (default: 0)

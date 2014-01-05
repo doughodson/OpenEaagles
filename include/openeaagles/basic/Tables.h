@@ -240,7 +240,7 @@ private:
 //
 // Description: 1D LFI data table
 //
-// Form name: Table1
+// Factory name: Table1
 // Slots:
 //    x    <List>  Independent variable #1 (iv1) points.
 //==============================================================================
@@ -288,7 +288,7 @@ private:
 //
 // Description: 2D LFI data table
 //
-// Form name: Table2
+// Factory name: Table2
 // Slots:
 //    y    <List>  Independent variable #2 (iv2) points.
 //
@@ -339,7 +339,7 @@ private:
 //
 // Description: 3D LFI data table
 //
-// Form name: Table3
+// Factory name: Table3
 // Slots:
 //    z    <List>  Independent variable #3 (iv3) points.
 //
@@ -392,7 +392,7 @@ private:
 //
 // Description: 4D LFI data table
 //
-// Form name: Table4
+// Factory name: Table4
 // Slots:
 //    w    <List>  Independent variable #4 (iv4) points.
 //
@@ -446,7 +446,7 @@ private:
 //
 // Description: 5D LFI data table
 //
-// Form name: Table5
+// Factory name: Table5
 // Slots:
 //    v    <List>  Independent variable #5 (iv5) points.
 //

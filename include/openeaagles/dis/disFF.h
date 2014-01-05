@@ -8,7 +8,7 @@ namespace Eaagles {
     namespace Basic { class Object; }
     namespace Network {
         namespace Dis {
-            extern Basic::Object* disFormFunc(const char* formname);
+            extern Basic::Object* disFormFunc(const char* name);
         }
     }
 }

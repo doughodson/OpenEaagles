@@ -16,7 +16,7 @@ namespace Simulation {
 //    Contains a simple aero and guidance model, which derived models can
 //    override at will.
 //
-// Form name: AgmMissile
+// Factory name: AgmMissile
 //------------------------------------------------------------------------------
 class Agm : public Missile  
 {

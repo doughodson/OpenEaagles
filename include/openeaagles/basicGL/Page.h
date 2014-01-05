@@ -15,7 +15,7 @@ namespace BasicGL {
 //
 // Description: Page format. A list of graphic objects and methods to manage
 //              them as a page, also contains subpages and a background page.
-// Form name: Page
+// Factory name: Page
 //
 // Slots:
 //  page                 <Identifier>   ! Initial subpage (default: 0)

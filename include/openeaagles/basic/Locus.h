@@ -12,7 +12,7 @@ namespace Basic {
 //------------------------------------------------------------------------------
 // Class: Locus
 // Base class: Object -> Locus
-// Form name: Locus
+// Factory name: Locus
 //
 // Description: A line of evenly spaced data points in a specific direction and
 //              range from a reference point.  Or according to Webster, "Set of

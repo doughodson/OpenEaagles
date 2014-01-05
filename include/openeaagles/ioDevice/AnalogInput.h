@@ -38,7 +38,7 @@ namespace IoDevice {
 //
 //          V3 = f(V2)
 //
-// Form Name: AnalogInput
+// Factory name: AnalogInput
 // Slots:
 //      ai           <Number>    Analog Input location (IoData's AI channel)
 //      channel      <Number>    Device channel number

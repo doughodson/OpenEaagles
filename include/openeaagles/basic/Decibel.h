@@ -17,7 +17,7 @@ namespace Basic {
 //               Provides methods for handling and operating with decibels.
 //               All member functions handle the number in decibels.
 //
-// Form name: dB
+// Factory name: dB
 //             
 //
 // Public methods: Base class public methods, plus ...

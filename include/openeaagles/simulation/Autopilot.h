@@ -14,7 +14,7 @@ namespace Simulation {
 //------------------------------------------------------------------------------
 // Class: Autopilot
 //
-// Form name: Autopilot
+// Factory name: Autopilot
 //
 // Slots:
 //    navMode                    <Number>     ! Nav (route follow) mode flag (default: true)

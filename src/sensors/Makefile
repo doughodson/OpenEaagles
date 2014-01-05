@@ -4,6 +4,7 @@ include ../makedefs
 LIB = $(OPENEAAGLES_LIB_DIR)/liboeSensors.a
 
 OBJS =  \
+	$(LIB)(Factory.o) \
 	$(LIB)(Gmti.o) \
 	$(LIB)(sensorsFF.o) \
 	$(LIB)(Stt.o) \

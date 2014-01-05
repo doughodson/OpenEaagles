@@ -15,7 +15,7 @@ namespace BasicGL {
 //
 // Description: General purpose polygon
 //
-// Form name: Polygon
+// Factory name: Polygon
 // Public methods: Base class public methods, plus ...
 //
 //    const osg::Vec3* getNormal() const

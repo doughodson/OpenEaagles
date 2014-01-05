@@ -335,7 +335,7 @@ std::ostream& Sphere::serialize(std::ostream& sout, const int i, const bool slot
    int j = 0;
    if ( !slotsOnly ) {
       //indent(sout,i);
-      sout << "( " << getFormName() << std::endl;
+      sout << "( " << getFactoryName() << std::endl;
       j = 4;
    }
 
@@ -356,7 +356,7 @@ std::ostream& Cylinder::serialize(std::ostream& sout, const int i, const bool sl
    int j = 0;
    if ( !slotsOnly ) {
       //indent(sout,i);
-      sout << "( " << getFormName() << std::endl;
+      sout << "( " << getFactoryName() << std::endl;
       j = 4;
    }
 
@@ -380,7 +380,7 @@ std::ostream& Cube::serialize(std::ostream& sout, const int i, const bool slotsO
    int j = 0;
    if ( !slotsOnly ) {
       //indent(sout,i);
-      sout << "( " << getFormName() << std::endl;
+      sout << "( " << getFactoryName() << std::endl;
       j = 4;
    }
 
@@ -401,7 +401,7 @@ std::ostream& Torus::serialize(std::ostream& sout, const int i, const bool slots
    int j = 0;
    if ( !slotsOnly ) {
       //indent(sout,i);
-      sout << "( " << getFormName() << std::endl;
+      sout << "( " << getFactoryName() << std::endl;
       j = 4;
    }
 
