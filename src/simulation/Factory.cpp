@@ -16,6 +16,7 @@
 #include "openeaagles/simulation/Bomb.h"
 #include "openeaagles/simulation/Buildings.h"
 #include "openeaagles/simulation/Bullseye.h"
+#include "openeaagles/simulation/CollisionDetect.h"
 #include "openeaagles/simulation/Datalink.h"
 #include "openeaagles/simulation/Effects.h"
 #include "openeaagles/simulation/ExternalStore.h"
@@ -409,6 +410,11 @@ Basic::Object* Factory::createObj(const char* name)
     }
     else if ( strcmp(name, MultiActorAgent::getFactoryName()) == 0 ) {
         obj = new MultiActorAgent();
+    }
+
+    // Collision detection component
+    else if ( strcmp(name, CollisionDetect::getFactoryName()) == 0 ) {
+        obj = new CollisionDetect();
     }
 
     else if ( strcmp(name, TabLogger::getFactoryName()) == 0 ) {

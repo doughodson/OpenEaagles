@@ -130,6 +130,10 @@ simulation
       1) initialized a few previously uninitialized variables -- the initialization
          didn't matter, but we like to adhere to coding stds.
 
+   CollisionDetect class
+      1) New collision detection component -- when added as a component to a player,
+         it will look for collisions with other players in the simulation player list.
+
    DynamicsModels class
       1) set commanded heading, velocity, and altitude now take additional
          parameters to define change rates.
