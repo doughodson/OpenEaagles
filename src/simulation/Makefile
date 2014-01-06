@@ -16,6 +16,7 @@ OBJS =  \
 	$(LIB)(Bomb.o) \
 	$(LIB)(Buildings.o) \
 	$(LIB)(Bullseye.o) \
+	$(LIB)(CollisionDetect.o) \
 	$(LIB)(Datalink.o) \
 	$(LIB)(DataRecorder.o) \
 	$(LIB)(Designator.o) \

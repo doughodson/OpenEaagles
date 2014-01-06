@@ -180,7 +180,7 @@ void CollisionDetect::updateData(const LCreal dt)
    // World (ECEF) to local (NED)
    osg::Matrixd wm = ownship->getWorldMat();
 
-   // Local (NED) to body coord
+   // Local (NED) to body coordinates
    osg::Matrixd rm = ownship->getRotMat(); 
 
    // We will be using world (ECEF) coordinates when the 'useWorld'
