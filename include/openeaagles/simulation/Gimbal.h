@@ -97,12 +97,12 @@ class Tdb;
 //    terrainOcculting     (Boolean) Enable terrain occulting of the players of interest (default: false)
 //    checkHorizon         (Boolean) Enable horizon masking check (default: true)
 // 
-//    playerOfInterestTypes (PairStream)   List of layer of interest types (default: all types )
+//    playerOfInterestTypes (PairStream)   List of player of interest types (default: all types )
 //                                         Valid types: { "air" "ground" "weapon" "ship" "building" "lifeform" "space" }
 //
 //    maxPlayersOfInterest  (Number)         Max number of players of interest (default: 200)
-//    maxRange2PlayersOfInterest (Distance)  Max range to players of interest or zero for all (default: 0)
-//    maxAngle2PlayersOfInterest (Angle)     Max angle of gimbal boresight to players of interest or zero for all (default: 0)
+//    maxRange2PlayersOfInterest (Distance)  Max range to players of interest, or zero for all (default: 0)
+//    maxAngle2PlayersOfInterest (Angle)     Max angle off the gimbal boresight to players of interest, or zero for all (default: 0)
 //    localPlayersOfInterestOnly (Number)    Sets the local only players of interest flag (default: false)
 //
 //    useWorldCoordinates  (Number)          Using player of interest's world (ECEF) coordinate system (default: false)

@@ -34,9 +34,12 @@ class RfSystem;
 //      gainPattern     <Basic::Function> ! Gain pattern (Basic::Func1 or Basic::Func2) (db) 
 //                                       ! (default: 0)
 //
-//      gainPatternDeg  <Basic::Number>  ! Gain pattern is in degrees (true) or radians (false) (default: false)
+//      gainPatternDeg  <Basic::Boolean> ! Gain pattern is in degrees (true) or radians (false) (default: false)
 //
 //      recycle         <Basic::Boolean> ! Recycle emissions flag (default: true)
+//
+//      beamWidth       <Basic::Angle>   ! Beam Width  (must be greater than zero) (default: 3.5 degrees)
+//                      <Basic::Number>  ! Beam width in radians
 //
 // 
 // Note
@@ -90,11 +93,15 @@ public:
    // Recycle emissions flag (reuse old emission structure instead of creating new ones)
    bool isEmissionRecycleEnabled() const       { return recycle; }
 
+   // Beam width (radians)
+   double getBeamWidth() const                 { return beamWidth; }
+
    // Member functions
    virtual bool setPolarization(const Polarization p) { polar = p; return true; }
    virtual bool setThreshold(const double th);
-   virtual bool setGain(double const g);
+   virtual bool setGain(const double g);
    virtual bool setEmissionRecycleFlag(const bool enable);
+   virtual bool setBeamWidth(const double radians);
 
    // slot functions that need public access because there is no corresponding member function
    virtual bool setSlotPolarization(Basic::String* const v);
@@ -103,6 +110,8 @@ public:
    virtual bool setSlotGainPattern(Basic::Function* const func);
    virtual bool setSlotGainPatternDeg(const Basic::Number* const g);
    virtual bool setSlotRecycleFlg(const Basic::Number* const);
+   virtual bool setSlotBeamWidth(const Basic::Angle* const msg);
+   virtual bool setSlotBeamWidth(const Basic::Number* const msg);
 
    // Event handler(s)
    virtual bool onRfEmissionReturnEventAntenna(Emission* const);
@@ -147,6 +156,8 @@ private:
 
    double      threshold;          // Antenna threshold; don't send emission if
                                    // power is below this threshold (watts)
+
+   double      beamWidth;          // Beamwidth                    (radians)
 
    bool        gainPatternDeg;     // Gain pattern is in degrees flag (else radians)
 

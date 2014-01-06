@@ -45,8 +45,8 @@ class TrackManager;
 // ### NES: Initial value not greater than 0)
 //                         <Number>      ! Pulse width in seconds
 //
-//    beamWidth            <Angle>       ! Beam Width  (must be greater than zero) (default: D2RCC * 3.5f)
-//                         <Number>      ! Beam width in radians
+//    beamWidth            <Angle>       ! (Deprecated: moved to Antenna) Beam Width  (must be greater than zero) (default: D2RCC * 3.5f)
+//                         <Number>      ! (Deprecated: moved to Antenna) Beam width in radians
 //
 //    typeId               <String>      ! R/F system type id (default: '\0')
 //
@@ -76,8 +76,8 @@ public:
     virtual LCreal getPulseWidth() const;                // Returns the pulse width (seconds)
     virtual bool setPulseWidth(const LCreal v);          // Sets the pulse width (seconds; must be greater than 0)
 
-    virtual LCreal getBeamWidth() const;                 // Returns the beam width (radians; must be greater than 0)
-    virtual bool setBeamWidth(const LCreal v);           // Sets the beam width (radians)
+    virtual LCreal getBeamWidth() const;                 // (Deprecated: moved to Antenna) Returns the beam width (radians; must be greater than 0)
+    virtual bool setBeamWidth(const LCreal v);           // (Deprecated: moved to Antenna) Sets the beam width (radians)
 
     virtual const char* getTypeId() const;               // Returns the type ID
     virtual bool setTypeId(const char* const str);       // Sets the type ID
