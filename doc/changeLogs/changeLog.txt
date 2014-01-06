@@ -24,9 +24,21 @@ general
    #
 
    #
-   # added class factories to each of the libraries (defined by Factory)
-   # (form functions are now deprecated - use appropriate Factory::createObj()
-   #  in each library instead - see examples)
+   # added a 'Factory' class to each library that defines one method called 'createObj()'
+   # which creates an object from the library given a factory name.
+   #
+   # Note: this capability effectively replaces (i.e., updates) the form function and
+   # form name features of the framework with current factory pattern terminology.
+   #
+   # these are equivalent:
+   # -- getFactoryName() replaces getFormName()
+   # -- isFactoryName() replaces isFormName()
+   # -- Basic::Factory::createObj() replaces Basic::basicFormFunc()
+   # -- BasicGL::Factory::createObj() replaces BasicGL::basicGLFormFunc()
+   # -- etc.
+   #
+   # (getFormName, isFormName and associated form functions are now considered deprecated -
+   #  use equivalent replacements instead.)
    #
 
 --------------------------------------------------------------------------------
