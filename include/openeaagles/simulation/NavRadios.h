@@ -45,8 +45,8 @@ private:
    SPtr<Dafif::AirportLoader> apdb; // Pointer to Airport loader     
    SPtr<Dafif::NavaidLoader> nvdb;  // Pointer to Navaid loader     
 
-   double      latitude;            // Ownship Latitude
-   double      longitude;           // Ownship Longitude
+   double latitude;                 // Ownship Latitude
+   double longitude;                // Ownship Longitude
    double altitude;                 // Ownship altitude HAE (ft)
 
 };

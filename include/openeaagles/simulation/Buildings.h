@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Classes: Building
+// Class: Building
 // Description: Generic building
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_Simulation_Building_H__
@@ -11,7 +11,7 @@ namespace Eaagles {
 namespace Simulation {
 
 //==============================================================================
-// Class Building
+// Class: Building
 // Description: Generic building
 // Factory name: Building
 //==============================================================================

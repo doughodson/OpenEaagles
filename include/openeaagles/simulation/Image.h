@@ -1,6 +1,5 @@
 //------------------------------------------------------------------------------
 // Class: Image
-// Base class: Basic::Object > Image
 // Factory name: SarImage
 // Description: SAR image structure
 //------------------------------------------------------------------------------
