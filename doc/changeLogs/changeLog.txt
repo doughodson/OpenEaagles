@@ -154,6 +154,9 @@ simulation
       1) set commanded heading, velocity, and altitude now take additional
          parameters to define change rates.
 
+   Gimbal class
+      1) The 'useWorldCoordinates' slot now defaults to TRUE
+
    Radar class
       1) Added check to ensure a track mgr is available to sent reports, before
          doing so (fix)
