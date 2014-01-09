@@ -924,13 +924,13 @@ void AirTrkMgr::processTrackList(const LCreal dt)
    for (unsigned int it = 0; it < nTrks; /* update 'it' below */ ) {
       RfTrack* const trk = (RfTrack*) tracks[it];  // we produce only RfTracks
       if (trk->getTrackAge() >= getMaxTrackAge()) {
+
+         // Object 1: player, Object 2: Track Data
+         BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_TRACK_REMOVED )
+            SAMPLE_2_OBJECTS( ownship, tracks[it] )
+         END_RECORD_DATA_SAMPLE()
+
          if (getAnyEventLogger() != 0) {
-
-            // Object 1: player, Object 2: Track Data
-            BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_TRACK_REMOVED )
-               SAMPLE_2_OBJECTS( ownship, tracks[it] )
-            END_RECORD_DATA_SAMPLE()
-
             // TabLogger is deprecated
             TabLogger::TabLogEvent* evt = new TabLogger::LogActiveTrack(3, this,trk); // type 3 for "remove"
             getAnyEventLogger()->log(evt);
@@ -972,14 +972,16 @@ void AirTrkMgr::processTrackList(const LCreal dt)
          newTrk->ownshipDynamics(osGndTrk, osVel, osAccel, 0.0f);
          newTrk->setRangeRate(newRdot[i]);
          newTrk->setSignal(newSignal[i],emissions[i]);
+
          if (isMessageEnabled(MSG_INFO)) {
             std::cout << "New AIR track[it] = [" << nTrks << "] id = " << newTrk->getTrackID() << std::endl;
          }
-         if (getAnyEventLogger() != 0) {
-            BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_NEW_TRACK )
-               SAMPLE_2_OBJECTS( ownship, tracks[i] )
-            END_RECORD_DATA_SAMPLE()
 
+         BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_NEW_TRACK )
+            SAMPLE_2_OBJECTS( ownship, tracks[i] )
+         END_RECORD_DATA_SAMPLE()
+
+         if (getAnyEventLogger() != 0) {
             // TabLogger is deprecated
             TabLogger::TabLogEvent* evt = new TabLogger::LogActiveTrack(1, this,newTrk); // type 1 for "new"
             getAnyEventLogger()->log(evt);
@@ -1342,6 +1344,7 @@ void GmtiTrkMgr::processTrackList(const LCreal dt)
          tracks[i]->setPosition(     (tpos*A[0][0] + tvel*A[0][1] + tacc*A[0][2]) + (u[i]*b0) );
          tracks[i]->setVelocity(     (tpos*A[1][0] + tvel*A[1][1] + tacc*A[1][2]) + (u[i]*b1) );
          tracks[i]->setAcceleration( (tpos*A[2][0] + tvel*A[2][1] + tacc*A[2][2]) + (u[i]*b2) );
+
          if (getLogTrackUpdates()) {
             // Object 1: player, Object 2: Track Data
             BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_TRACK_DATA )
@@ -1418,9 +1421,11 @@ void GmtiTrkMgr::processTrackList(const LCreal dt)
          newTrk->ownshipDynamics(osGndTrk, osVel, osAccel, 0.0f);
          newTrk->setRangeRate(newRdot[i]);
          newTrk->setSignal(newSignal[i],emissions[i]);
+
          if (isMessageEnabled(MSG_INFO)) {
             std::cout << "New GND track[it] = [" << nTrks << "] id = " << newTrk->getTrackID() << std::endl;
          }
+
          // Object 1: player, Object 2: Track Data
          BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_NEW_TRACK )
             SAMPLE_2_OBJECTS( ownship, newTrk )
@@ -1738,6 +1743,7 @@ void RwrTrkMgr::processTrackList(const LCreal dt)
          newTrk->ownshipDynamics(osGndTrk, osVel, osAccel, 0.0f);
          newTrk->setRangeRate(newRdot[i]);
          newTrk->setSignal(newSignal[i],emissions[i]);
+
          if (isMessageEnabled(MSG_INFO)) {
             std::cout << "New RWR track[it] = [" << nTrks << "] id = " << newTrk->getTrackID() << std::endl;
          }

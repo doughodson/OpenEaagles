@@ -35,18 +35,20 @@
 #define REID_PLAYER_DAMAGED      44    // Player damaged by detonation; P1 => (player); P2 => (weapon)
 #define REID_PLAYER_COLLISION    45    // Player collision message; P1 => (player); P2 => (other player)
 #define REID_PLAYER_CRASH        46    // Player crash message; P1 => (player)
-#define REID_PLAYER_KILLED       47    // Player killed message; P1 => (player); P2 => (weapon)
+#define REID_PLAYER_KILLED       47    // Player killed message; P1 => (player); P2 => (shooter)
 
 // Weapon data messages
-#define REID_WEAPON_RELEASED     61    // Weapon Released message
-#define REID_WEAPON_HUNG         62    // Weapon Hung (hung store) message
-#define REID_WEAPON_DETONATION   63    // Weapon Detonation message
-#define REID_GUN_FIRED           64    // Gun Fired message
+#define REID_WEAPON_RELEASED     61    // Weapon Released message; P1 => (weapon); P2 => (shooter); P3 => (tgt)
+#define REID_WEAPON_HUNG         62    // Weapon Hung (hung store) message; P1 => (weapon); P2 => (shooter); P3 => (tgt)
+#define REID_WEAPON_DETONATION   63    // Weapon Detonation message; P1 => (weapon); P2 => (shooter); P3 => (tgt)
+                                       //                            V1 => detonation type id; V2 => miss distance
+
+#define REID_GUN_FIRED           64    // Gun Fired message; P1 => (shooter); v[0] => rounds
 
 // Track data messages
-#define REID_NEW_TRACK           81    // New Track message
-#define REID_TRACK_REMOVED       82    // Track Removed message
-#define REID_TRACK_DATA          83    // Record Track Data message
+#define REID_NEW_TRACK           81    // New Track message; P1 => (player); P2 => (track)
+#define REID_TRACK_REMOVED       82    // Track Removed message; P1 => (player); P2 => (track)
+#define REID_TRACK_DATA          83    // Record Track Data message; P1 => (player); P2 => (track)
 
 // Reserved messages
 #define REID_FIRST_RESERVED      500   // First reserved ID token

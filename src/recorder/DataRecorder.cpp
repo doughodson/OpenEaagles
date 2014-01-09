@@ -465,6 +465,7 @@ bool DataRecorder::recordPlayerCrash(const Basic::Object* objs[4], const double 
 //------------------------------------------------------------------------------
 // Player killed event handler
 //    objs[0] => the player killed
+//    objs[1] => the shooter player
 //------------------------------------------------------------------------------
 bool DataRecorder::recordPlayerKilled(const Basic::Object* objs[4], const double values[4])
 {
@@ -482,6 +483,11 @@ bool DataRecorder::recordPlayerKilled(const Basic::Object* objs[4], const double
 
    genPlayerId( playerKilledMsg->mutable_id(), player );
    genPlayerState( playerKilledMsg->mutable_state(), player );
+
+   const Simulation::Player* shooter = dynamic_cast<const Simulation::Player*>( objs[1] );
+   if (shooter != 0) {
+      genPlayerId( playerKilledMsg->mutable_shooter_id(), shooter );
+   }
 
    // Send the message for processing
    sendDataRecord(msg);
@@ -531,7 +537,7 @@ bool DataRecorder::recordWeaponReleased(const Basic::Object* objs[4], const doub
 // Weapon Hung event handler
 //    objs[0] => the weapon
 //    objs[1] => the shooter
-//    objs[2] => the target  // probably not needed
+//    objs[2] => the target
 //------------------------------------------------------------------------------
 bool DataRecorder::recordWeaponHung(const Basic::Object* objs[4], const double values[4])
 {

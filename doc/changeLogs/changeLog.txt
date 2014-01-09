@@ -118,6 +118,9 @@ otw
 --------------------------------------------------------------------------------
 recorder
 
+   DataRecorder class
+      1) recordPlayerKilled() now save the shooter player ID
+
 
 --------------------------------------------------------------------------------
 simulation
@@ -127,7 +130,7 @@ simulation
    # the same physical file called "IrSensor.h/cpp"
    #
 
-   Antenna clas
+   Antenna class
       1) Added the 'beamWidth' slot and related functions; moved here from
          the RfSensor class.
 
@@ -141,6 +144,7 @@ simulation
    AngleOnlyTrackManager class
       1) initialized a few previously uninitialized variables -- the initialization
          didn't matter, but we like to adhere to coding stds.
+      2) Passing track pointer instead of this pointer to data recorder (fix)
 
    CollisionDetect class
       1) New collision detection component -- when added as a component to a player,
@@ -178,6 +182,7 @@ simulation
    TrackManager class
       1) converted several local member function arrays to class member arrays.
       2) Corrected the usage of the boolean matrixes 'report2TrackMatch' from int to bool
+      3) Data recording of new and removed tracks no longer checks for a event logger (fix)
 
    Weapon class
       1) added storage for target velocity data

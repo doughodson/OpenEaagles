@@ -40,11 +40,11 @@ namespace Recorder {
 //    REID_PLAYER_DAMAGED     ! obj[0] => (player); obj[1] => (weapon)
 //    REID_PLAYER_COLLISION   ! obj[0] => (player); obj[1] => (other player)
 //    REID_PLAYER_CRASH       ! obj[0] => (player)
-//    REID_PLAYER_KILLED      ! obj[0] => (player); obj[1] => (weapon)
+//    REID_PLAYER_KILLED      ! obj[0] => (player); obj[1] => (shooter)
 //
 //    REID_WEAPON_RELEASED    ! obj[0] => (weapon); obj[1] => (shooter); obj[2] => (tgt)
-//    REID_WEAPON_HUNG        ! obj[0] => (weapon); obj[1] => (shooter);
-//    REID_WEAPON_DETONATION  ! obj[0] => (weapon); obj[1] => (shooter); obj[2] => (tgt);
+//    REID_WEAPON_HUNG        ! obj[0] => (weapon); obj[1] => (shooter); obj[2] => (tgt)
+//    REID_WEAPON_DETONATION  ! obj[0] => (weapon); obj[1] => (shooter); obj[2] => (tgt)
 //                            !   v[0] => detonation type id; v[1] => miss distance
 //    REID_GUN_FIRED          ! obj[0] => (shooter); v[0] => rounds
 //
