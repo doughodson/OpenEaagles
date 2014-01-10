@@ -12,7 +12,7 @@
 
 // OpenEaagles release version number (13.07)
 #ifndef OE_VERSION
-#define OE_VERSION                              1307
+#define OE_VERSION                              1401
 #endif
 
 // Max number of 'registered' classes (see Object.h)
