@@ -713,7 +713,7 @@ Weapon* Weapon::release()
          setHung(true);
 
          BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_WEAPON_HUNG )
-            SAMPLE_2_OBJECTS( this, getLaunchVehicle(), 0 )
+            SAMPLE_3_OBJECTS( this, getLaunchVehicle(), 0 )
          END_RECORD_DATA_SAMPLE()
 
             // TabLogger is deprecated
