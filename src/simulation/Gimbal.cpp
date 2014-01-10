@@ -178,7 +178,7 @@ void Gimbal::initData()
    terrainOcculting = false;
    checkHorizon = true;
    localOnly = false;
-   useWorld = false;
+   useWorld = true;
    ownHeadingOnly = true;
    playerTypes = 0xFFFF;   // all types
    maxPlayers = 200;
