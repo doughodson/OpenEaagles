@@ -105,7 +105,7 @@ class Tdb;
 //    maxAngle2PlayersOfInterest (Angle)     Max angle off the gimbal boresight to players of interest, or zero for all (default: 0)
 //    localPlayersOfInterestOnly (Number)    Sets the local only players of interest flag (default: false)
 //
-//    useWorldCoordinates  (Number)          Using player of interest's world (ECEF) coordinate system (default: false)
+//    useWorldCoordinates  (Number)          Using player of interest's world (ECEF) coordinate system (default: true)
 //    useOwnHeadingOnly    <Number>          Whether only the ownship heading is used by the target data block (default: true)
 //
 //

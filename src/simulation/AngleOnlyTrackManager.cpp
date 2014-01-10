@@ -484,6 +484,7 @@ void AirAngleOnlyTrkMgr::processTrackList(const LCreal dt)
             tracks[i]->setElevation((pTel * oneMinusAlpha) + ((tel + uElevation[i]) * alpha));
             tracks[i]->setElevationRate((pTelRate * oneMinusBeta) + ((uElevation[i] / age[i]) * beta ));
             tracks[i]->setElevationAcceleration((tracks[i]->getElevationRate() - telRate) / age[i]);
+
             if (getLogTrackUpdates()) {
                // Object 1: player, Object 2: Track Data
                BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_TRACK_DATA )
@@ -539,7 +540,7 @@ void AirAngleOnlyTrkMgr::processTrackList(const LCreal dt)
              // Object 1: player, Object 2: Track Data
             Player* ownship = getOwnship();
             BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_TRACK_REMOVED )
-               SAMPLE_2_OBJECTS( ownship, this )
+               SAMPLE_2_OBJECTS( ownship, trk )
             END_RECORD_DATA_SAMPLE()
 
             // TabLogger is deprecated
@@ -548,6 +549,7 @@ void AirAngleOnlyTrkMgr::processTrackList(const LCreal dt)
                 getAnyEventLogger()->log(evt);
                 evt->unref();
             }
+
             // Track has timed out -- delete the track and ...
             if (isMessageEnabled(MSG_INFO)) {
                 std::cout << "Removed Aged AIR track: player: " << trk->getLastQuery()->getTarget();
@@ -587,13 +589,14 @@ void AirAngleOnlyTrkMgr::processTrackList(const LCreal dt)
             newTrk->setPredictedAzimuth(queryMessages[i]->getRelativeAzimuth());
             newTrk->setPredictedElevation(queryMessages[i]->getRelativeElevation());
             newTrk->setSignal(newSignal[i],queryMessages[i]);
+
             if (isMessageEnabled(MSG_INFO)) {
                 std::cout << "New AIR track[it] = [" << nTrks << "] id = " << newTrk->getTrackID() << std::endl;
             }
 
             // Object 1: player, Object 2: Track Data
             BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_NEW_TRACK )
-               SAMPLE_2_OBJECTS( ownship, this )
+               SAMPLE_2_OBJECTS( ownship, newTrk )
             END_RECORD_DATA_SAMPLE()
 
             // TabLogger is deprecated
@@ -703,7 +706,7 @@ void AirAngleOnlyTrkMgrPT::removeAgedTracks()
             // Object 1: player, Object 2: Track Data
            Player* ownship = getOwnship();
            BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_TRACK_REMOVED )
-              SAMPLE_2_OBJECTS( ownship, this )
+              SAMPLE_2_OBJECTS( ownship, trk )
            END_RECORD_DATA_SAMPLE()
 
             // TabLogger is deprecated
@@ -1064,7 +1067,7 @@ void AirAngleOnlyTrkMgrPT::processTrackList(const LCreal dt)
 
              // Object 1: player, Object 2: Track Data
             BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_NEW_TRACK )
-               SAMPLE_2_OBJECTS( ownship, this )
+               SAMPLE_2_OBJECTS( ownship, newTrk )
             END_RECORD_DATA_SAMPLE()
 
             // TabLogger is deprecated
