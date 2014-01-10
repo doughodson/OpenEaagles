@@ -114,11 +114,11 @@ solution "oe"
          "../../include/openeaagles/basic/**.inl",
          "../../include/openeaagles/basic/**.epp",
          "../../include/openeaagles/basic/osg/*",
-         "../../include/openeaagles/basic/ubf/*",
          "../../src/basic/**.cpp"
       }
       excludes {
-         "../../src/basic/osg/Matrix_implementation.cpp"
+         "../../src/basic/osg/Matrix_implementation.cpp",
+         "../../src/basic/linux/**.*"
       }
       targetname "Basic"
 

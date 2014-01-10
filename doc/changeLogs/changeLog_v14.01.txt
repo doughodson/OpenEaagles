@@ -78,6 +78,10 @@ basic
    # bind, closesocket, recvform, connect, sendto, inet_addr,
    # and inet_ntoa
 
+   Thread class
+      1) Changed datatypes for GetProcessAffinityMask from DWORD to DWORD_PTR
+         to fix 64-bit compiling issues (Windows only)
+
 --------------------------------------------------------------------------------
 basicGL
 

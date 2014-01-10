@@ -46,8 +46,8 @@ unsigned short Thread::getNumProcessors()
 {
    unsigned short num = 0;
 
-   DWORD mask = 0;
-   DWORD sysMask = 0;
+   DWORD_PTR mask = 0;
+   DWORD_PTR sysMask = 0;
    HANDLE hProcess = GetCurrentProcess();
    BOOL rtn = GetProcessAffinityMask(hProcess, &mask, &sysMask);
    if (rtn != 0) {
