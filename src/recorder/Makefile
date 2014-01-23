@@ -1,7 +1,12 @@
 #
 include ../makedefs
 
-LIB = $(OPENEAAGLES_LIB_DIR)/liboeRecorder.a
+ifdef OPENEAAGLES_SHARED_LIBS
+    LIB = $(OPENEAAGLES_BIN_DIR)/liboeRecorder.so
+    CPPFLAGS += -shared 
+else
+    LIB = $(OPENEAAGLES_LIB_DIR)/liboeRecorder.a
+endif
 
 OBJS =  \
 	$(LIB)(DataRecorder.o) \

@@ -1,7 +1,12 @@
 
 include ../makedefs
 
-LIB = $(OPENEAAGLES_LIB_DIR)/liboeIoDevice.a
+ifdef OPENEAAGLES_SHARED_LIBS
+    LIB = $(OPENEAAGLES_BIN_DIR)/liboeIoDevice.so
+    CPPFLAGS += -shared 
+else
+    LIB = $(OPENEAAGLES_LIB_DIR)/liboeIoDevice.a
+endif
 
 OBJS =  \
 	$(LIB)(Ai2DiSwitch.o) \

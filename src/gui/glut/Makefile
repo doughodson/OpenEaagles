@@ -1,7 +1,12 @@
 #
 include ../../makedefs
 
-LIB = $(OPENEAAGLES_LIB_DIR)/liboeGlut.a
+ifdef OPENEAAGLES_SHARED_LIBS
+    LIB = $(OPENEAAGLES_BIN_DIR)/liboeGlut.so
+    CPPFLAGS += -shared 
+else
+    LIB = $(OPENEAAGLES_LIB_DIR)/liboeGlut.a
+endif
 
 OBJS =  \
 	$(LIB)(Factory.o) \

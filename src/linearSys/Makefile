@@ -1,7 +1,12 @@
 #
 include ../makedefs
 
-LIB = $(OPENEAAGLES_LIB_DIR)/liboeLinearSys.a
+ifdef OPENEAAGLES_SHARED_LIBS
+    LIB = $(OPENEAAGLES_BIN_DIR)/liboeLinearSys.so
+    CPPFLAGS += -shared 
+else
+    LIB = $(OPENEAAGLES_LIB_DIR)/liboeLinearSys.a
+endif
 
 OBJS =  \
 	$(LIB)(DiffEquation.o) \

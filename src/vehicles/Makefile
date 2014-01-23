@@ -1,7 +1,12 @@
 #
 include ../makedefs
 
-LIB = $(OPENEAAGLES_LIB_DIR)/liboeVehicles.a
+ifdef OPENEAAGLES_SHARED_LIBS
+    LIB = $(OPENEAAGLES_BIN_DIR)/liboeVehicles.so
+    CPPFLAGS += -shared 
+else
+    LIB = $(OPENEAAGLES_LIB_DIR)/liboeVehicles.a
+endif
 
 CPPFLAGS += -I$(JSBSIM_INC_DIR)
 
