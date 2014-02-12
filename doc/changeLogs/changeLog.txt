@@ -16,6 +16,10 @@ basic
 --------------------------------------------------------------------------------
 basicGL
 
+   Image.cpp
+      1) readFileBMP() -- Corrected the first check that rejects files that are not
+         bitmap files (bug fix); the second check still caught the invalid files.
+
 
 --------------------------------------------------------------------------------
 dis
