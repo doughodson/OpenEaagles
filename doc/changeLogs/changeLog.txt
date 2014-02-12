@@ -5,6 +5,9 @@ Changes since v14.01
 --------------------------------------------------------------------------------
 general
 
+   1) Move the declaration of LCreal from 'openeaagles/config.h' to
+      'openeaagles/basic/support.h', since 'config.h should only have
+      contain C pre-processor directives.
 
 --------------------------------------------------------------------------------
 basic

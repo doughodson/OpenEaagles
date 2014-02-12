@@ -12,6 +12,40 @@
 // ---
 #include "openeaagles/config.h"
 
+
+// ---
+// Define LCreal as double only
+//    Because of the 64 bit systems, the LCreal will be removed in a future
+//    release.  For now it's defined only as double; but you can manual
+//    change it to float, if required.
+// ---
+namespace Eaagles {
+
+#define LCREAL_DOUBLE
+typedef double LCreal;
+
+// To avoid warnings, define math functions to use with LCreal.
+// Since LCreal is deprecated and set only to double, we're defining only
+// the double functions.  Manual modify to float functions, if required.
+#define lcSqrt      ::sqrt
+#define lcSin       ::sin
+#define lcCos       ::cos
+#define lcTan       ::tan
+#define lcAtan      ::atan
+#define lcAtan2     ::atan2
+#define lcAcos      ::acos
+#define lcAbs       ::fabs
+#define lcFmod      ::fmod
+#define lcPow       ::pow
+#define lcExp       ::exp
+#define lcLog       ::log
+#define lcLog10     ::log10
+#define lcAepcDeg   Basic::Angle::aepcdDeg   // needs basic/units/Angles.h
+#define lcAepcRad   Basic::Angle::aepcdRad   // needs basic/units/Angles.h
+
+}
+
+
 // ---
 // Common header files
 // ---
