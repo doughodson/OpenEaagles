@@ -5,6 +5,9 @@ Changes since v14.01
 --------------------------------------------------------------------------------
 general
 
+   1) Move the declaration of LCreal from 'openeaagles/config.h' to
+      'openeaagles/basic/support.h', since 'config.h should only have
+      contain C pre-processor directives.
 
 --------------------------------------------------------------------------------
 basic
@@ -12,6 +15,10 @@ basic
 
 --------------------------------------------------------------------------------
 basicGL
+
+   Image.cpp
+      1) readFileBMP() -- Corrected the first check that rejects files that are not
+         bitmap files (bug fix); the second check still caught the invalid files.
 
 
 --------------------------------------------------------------------------------
