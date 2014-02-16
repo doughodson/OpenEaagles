@@ -310,7 +310,7 @@ bool Image::readFileBMP(const char* const filename, const char* const path)
    nItemsRead = fread(&bfOffBits, sizeof(bfOffBits), 1, fp);
    if (swap) bfOffBits = convertUInt32(bfOffBits);
 
-   if (bfType[0] == 'B' && bfType[0] == 'M') {
+   if (bfType[0] != 'B' || bfType[1] != 'M') {
       // Not a bitmap file
       if (isMessageEnabled(MSG_ERROR)) {
          std::cerr << "Image::readFileBMP(1): invalid bitmap file: " << bitmapFile << std::endl;
