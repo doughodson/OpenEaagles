@@ -128,7 +128,7 @@ Image::Image(
       const unsigned int w,   // Width of the image
       const unsigned int h,   // Height of the image
       const unsigned int nc,  // Number of components
-      const GLenum f,         // format: GL_RGB, GL_BGRA_EXT, etc
+      const GLenum f,         // format: GL_RGB, GL_BGRA_EXT, etc.
       const GLubyte* const image // image pixels (will be copied)
    )
 {
@@ -438,7 +438,7 @@ bool Image::writeFileBMP(const char* const filename, const char* const path)
    unsigned int bitmapFileHdrSize =
       sizeof(bfType) + sizeof(bfSize) + sizeof(bfReserved1) + sizeof(bfReserved2) + sizeof(bfOffBits);
 
-   // Number of bytes per row of pizels
+   // Number of bytes per row of pixels
    size_t widthBytes = getWidth() * getNumComponents();
 
    // Offset to bitmap data
@@ -519,7 +519,7 @@ bool Image::writeFileBMP(const char* const filename, const char* const path)
 //------------------------------------------------------------------------------
 GLubyte* Image::readRgbValuesBMP(FILE* const fp, const unsigned int offset, const BITMAPINFOHEADER_X* const bmfi) const
 {
-    // Alloate the texture memory bits
+    // Allocate the texture memory bits
     unsigned int bmSize = getWidth() * getHeight() * getNumComponents();
     GLubyte* bmap = new GLubyte[bmSize];
 
@@ -552,7 +552,7 @@ GLubyte* Image::readRgbValuesBMP(FILE* const fp, const unsigned int offset, cons
 //------------------------------------------------------------------------------
 GLubyte* Image::readColorValuesBMP(FILE* const fp, const unsigned int offset, const BITMAPINFOHEADER_X* const bmfi) const
 {
-    // Alloate the texture memory bits
+    // Allocate the texture memory bits
     unsigned int bmSize = getWidth() * getHeight() * getNumComponents();
     GLubyte* bmap = new GLubyte[bmSize];
 
@@ -593,7 +593,7 @@ GLubyte* Image::readColorValuesBMP(FILE* const fp, const unsigned int offset, co
 
 #if 0
 //------------------------------------------------------------------------------
-// Write a targa(TGA) format file
+// Write a Targa (TGA) format file
 // ### not working yet ###
 //------------------------------------------------------------------------------
 bool Image::writeFileTGA(const char* const filename)
