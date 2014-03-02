@@ -33,7 +33,7 @@ END_SLOTTABLE(StabilizingGimbal)
 
 // Map slot table to handles 
 BEGIN_SLOT_MAP(StabilizingGimbal)
-    ON_SLOT(4,setSlotStabilizingMode,Basic::String);
+    ON_SLOT(1,setSlotStabilizingMode,Basic::String);
 END_SLOT_MAP()
 
 
