@@ -22,9 +22,16 @@ ifndef OE_3RD_PARTY_ROOT
 endif
 
 # ---
-# library directories
+# library\bin directories
 # ---
 OPENEAAGLES_LIB_DIR = $(OE_ROOT)/lib/linux
+OPENEAAGLES_BIN_DIR = $(OE_ROOT)/bin/
+
+# ---
+# Set to 1 if you wish OpenEaagles to be built 
+# as shared (vs static) libraries
+# ---
+OPENEAAGLES_SHARED_LIBS = 1
 
 # ---
 # Uncomment if using FTGL version 2.1.2 or earlier
@@ -62,3 +69,4 @@ CPPFLAGS += -g -O2
 CPPFLAGS += -fPIC
 CPPFLAGS += -I$(OE_ROOT)/include -I$(OE_3RD_PARTY_ROOT)/include -pthread
 CPPFLAGS += -Wno-long-long -Wall
+

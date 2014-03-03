@@ -1,7 +1,12 @@
 # Maps Rpf directory makefile
 include ../../makedefs
 
-LIB = $(OPENEAAGLES_LIB_DIR)/liboeMaps.a
+ifdef OPENEAAGLES_SHARED_LIBS
+    LIB = $(OPENEAAGLES_BIN_DIR)/liboeMaps.so
+    CPPFLAGS += -shared 
+else
+    LIB = $(OPENEAAGLES_LIB_DIR)/liboeMaps.a
+endif
 
 OBJS = \
 	$(LIB)(CadrgClut.o) \
