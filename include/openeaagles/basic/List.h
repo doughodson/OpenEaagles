@@ -125,7 +125,8 @@ namespace Basic {
 //      }
 //
 //------------------------------------------------------------------------------
-class List : public Object {
+class List : public Object
+{
    DECLARE_SUBCLASS(List,Object)
 
 public:
@@ -205,3 +206,4 @@ private:
 } // End Eaagles namespace
 
 #endif
+

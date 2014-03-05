@@ -4,7 +4,7 @@
 #ifndef __Eaagles_Basic_SlotTable_H__
 #define __Eaagles_Basic_SlotTable_H__
 
-#include "openeaagles/basic/support.h"
+#include <iostream>
 
 namespace Eaagles {
 namespace Basic {
@@ -26,8 +26,8 @@ namespace Basic {
 // END_SLOTTABLE (see macros.h).
 //
 //------------------------------------------------------------------------------
-class SlotTable {
-
+class SlotTable
+{
 public:
    SlotTable(const char* slotnames[], const unsigned int nslots, const SlotTable& baseTable);
    SlotTable(const char* slotnames[], const unsigned int nslots);
@@ -58,3 +58,4 @@ private:
 } // End Eaagles namespace
 
 #endif
+

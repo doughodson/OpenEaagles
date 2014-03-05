@@ -1,5 +1,6 @@
-#include "openeaagles/basic/SlotTable.h"
 
+#include "openeaagles/basic/SlotTable.h"
+#include <cstring>
 
 namespace Eaagles {
 namespace Basic {
@@ -94,7 +95,7 @@ unsigned int SlotTable::index(const char* const slotname) const
       // search our table
       unsigned int j;
       for (j = 0; j < nslots1; j++) {
-         if (strcmp(slotname,slots1[j]) == 0) break;
+         if (std::strcmp(slotname, slots1[j]) == 0) break;
       }
       if (j < nslots1) {
          // if we're here, we found a match
@@ -130,3 +131,4 @@ std::ostream& SlotTable::serialize(std::ostream& sout, const int, const bool) co
 
 } // End Basic namespace
 } // End Eaagles namespace
+

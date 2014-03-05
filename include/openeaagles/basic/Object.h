@@ -308,8 +308,8 @@ namespace Basic {
 //          to the 'sout' output stream.
 //
 //------------------------------------------------------------------------------
-class Object {
-
+class Object
+{
    // -------------------------------------------------------------------------
    // Standard object stuff --
    //    derived classes will use the macro DECLARE_SUBCLASS(); see macros.h
