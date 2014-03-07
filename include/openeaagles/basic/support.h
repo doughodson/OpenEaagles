@@ -56,6 +56,8 @@ typedef double LCreal;
 #include <iostream>
 #include <sys/types.h>
 #include <cmath>
+//#include <cstdio>
+//#include <cstdlib>
 
 // ---
 // Include OS/Processor unique stuff
@@ -186,7 +188,7 @@ inline bool equal(float d1, float d2, float eps = _EPSILON_FLOAT_)
 
 inline bool equal(double d1, double d2, double eps = _EPSILON_DOUBLE_)
 {
-    return (fabs(d1 - d2) <= eps);
+    return (std::fabs(d1 - d2) <= eps);
 }
 
 // ---
