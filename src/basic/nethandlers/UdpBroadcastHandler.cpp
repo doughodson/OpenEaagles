@@ -31,6 +31,8 @@
 #include "openeaagles/basic/PairStream.h"
 #include "openeaagles/basic/String.h"
 
+#include <cstdio>
+
 namespace Eaagles {
 namespace Basic {
 
@@ -101,7 +103,7 @@ bool UdpBroadcastHandler::init()
     // ---
     socketNum = ::socket(AF_INET, SOCK_DGRAM, 0);
     if (socketNum == INVALID_SOCKET) {
-        ::perror("UdpBroadcastHandler::init(): socket error");
+        std::perror("UdpBroadcastHandler::init(): socket error");
         return false;
     }
 
@@ -116,7 +118,7 @@ bool UdpBroadcastHandler::init()
         int optval = 1;
         if (::setsockopt(socketNum, SOL_SOCKET, SO_BROADCAST, &optval, sizeof(optval)) == SOCKET_ERROR) {
 #endif
-            ::perror("UdpBroadcastHandler::init(): error setsockopt(SO_BROADCAST)\n");
+            std::perror("UdpBroadcastHandler::init(): error setsockopt(SO_BROADCAST)\n");
             return false;
         }
     }
@@ -177,7 +179,7 @@ bool UdpBroadcastHandler::bindSocket()
        else addr.sin_port = htons(getPort());
 
        if (bind(socketNum, (const struct sockaddr *) &addr, sizeof(addr)) == SOCKET_ERROR) {
-          ::perror("UdpBroadcast::bindSocket(): bind error");
+          std::perror("UdpBroadcast::bindSocket(): bind error");
           return false;
        }
 

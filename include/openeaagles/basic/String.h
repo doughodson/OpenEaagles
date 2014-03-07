@@ -5,6 +5,7 @@
 #define __Eaagles_Basic_String_H__
 
 #include "openeaagles/basic/Object.h"
+#include <cstdlib>
 
 namespace Eaagles {
 namespace Basic {
@@ -196,7 +197,7 @@ inline bool String::isNumber() const
 //------------------------------------------------------------------------------
 inline int String::getInteger() const
 {
-    if (isInteger()) return atoi(str);
+    if (isInteger()) return std::atoi(str);
     else return 0;
 }
 
@@ -206,7 +207,7 @@ inline int String::getInteger() const
 //------------------------------------------------------------------------------
 inline double String::getNumber() const
 {
-    if (isNumber()) return  atof(str);
+    if (isNumber()) return  std::atof(str);
     else return 0.0;
 }
 

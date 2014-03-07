@@ -57,7 +57,10 @@
 
 #include "openeaagles/terrain/srtm/SrtmHgtFile.h"
 #include "openeaagles/basic/Number.h"
+
+#include <string>
 #include <fstream>
+#include <cstdlib>
 
 namespace Eaagles {
 namespace Terrain {
@@ -196,8 +199,8 @@ bool SrtmHgtFile::determineSrtmInfo(const std::string& srtmFilename, std::stream
     }
 
     // nXXwXXX.hgt   srtm1 srtm3
-    int swcLatitude = atoi(srtmFilename.substr(1, 2).c_str());
-    int swcLongitude = atoi(srtmFilename.substr(4, 3).c_str());
+    int swcLatitude = std::atoi(srtmFilename.substr(1, 2).c_str());
+    int swcLongitude = std::atoi(srtmFilename.substr(4, 3).c_str());
     char ns = (char)tolower(srtmFilename[0]);
     char ew = (char)tolower(srtmFilename[3]);
     if ((ns != 'n' && ns != 's') || (ew != 'e' && ew != 'w')) {

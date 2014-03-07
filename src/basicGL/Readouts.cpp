@@ -7,6 +7,7 @@
 #include "openeaagles/basic/PairStream.h"
 #include "openeaagles/basic/Pair.h"
 #include "Reformat.h"
+#include <cstdlib>
 
 // Disable all deprecation warnings for now.  Until we fix them,
 // they are quite annoying to see over and over again...
@@ -376,7 +377,7 @@ double NumericReadout::getInputValue() const
       }
    }
 
-   return atof(cbuf);
+   return std::atof(cbuf);
 }
 
 //------------------------------------------------------------------------------

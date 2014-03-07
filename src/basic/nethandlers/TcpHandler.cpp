@@ -32,6 +32,8 @@
 #include "openeaagles/basic/PairStream.h"
 #include "openeaagles/basic/String.h"
 
+#include <cstdio>
+
 namespace Eaagles {
 namespace Basic {
 
@@ -95,7 +97,7 @@ bool TcpHandler::init()
     // ---
     socketNum = ::socket(AF_INET, SOCK_STREAM, 0);
     if (socketNum == INVALID_SOCKET) {
-        ::perror("TcpHandler::init(): socket error");
+        std::perror("TcpHandler::init(): socket error");
         success = false;
     }
 
@@ -123,7 +125,7 @@ bool TcpHandler::closeConnection()
 #else
     if (::shutdown(socketNum, SHUT_RDWR) == SOCKET_ERROR) {
 #endif
-        ::perror("TcpHandler::closeConnection(): error! \n");
+        std::perror("TcpHandler::closeConnection(): error! \n");
         success = false;
     }
 
@@ -152,7 +154,7 @@ bool TcpHandler::sendData(const char* const packet, const int size)
            std::cerr << "TcpHandler::sendData(): sendto error: " << err << " hex=0x" << std::hex << err << std::dec << std::endl;
         }
 #else
-        ::perror("TcpHandler::sendData(): sendto error msg");
+        std::perror("TcpHandler::sendData(): sendto error msg");
         if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "TcpHandler::sendData(): sendto error result: " << result << std::endl;
         }

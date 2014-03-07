@@ -19,6 +19,8 @@
 #include "openeaagles/basic/units/Distances.h"
 #include "openeaagles/basic/units/Times.h"
 
+#include <cstdlib>
+
 namespace Eaagles {
 namespace Network {
 namespace Dis {
@@ -1711,7 +1713,7 @@ bool NetIO::slot2KD(const char* const slotname, unsigned char* const kind, unsig
                   if ( !isdigit(slotname[i]) ) isNum = false;
                }
                if (isNum) {
-                  int d = atoi(&slotname[3]);
+                  int d = std::atoi(&slotname[3]);
                   if (d >= 0 && d < MAX_ENTITY_DOMAINS) {
                      // At this point we have both kind and domain numbers
                      *kind = k;

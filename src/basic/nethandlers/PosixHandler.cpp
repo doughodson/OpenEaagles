@@ -31,6 +31,8 @@
 #include "openeaagles/basic/PairStream.h"
 #include "openeaagles/basic/Number.h"
 
+#include <cstdio>
+
 namespace Eaagles {
 namespace Basic {
 
@@ -200,7 +202,7 @@ bool PosixHandler::bindSocket()
         socklen_t optlen = sizeof(optval);
         if (::setsockopt(socketNum, SOL_SOCKET, SO_REUSEADDR, &optval, optlen) == SOCKET_ERROR) {
 #endif
-            ::perror("PosixHandler::bindSocket(): error setsockopt(SO_REUSEADDR)\n");
+            std::perror("PosixHandler::bindSocket(): error setsockopt(SO_REUSEADDR)\n");
             return false;
         }
     }
@@ -222,7 +224,7 @@ bool PosixHandler::setSendBuffSize()
 #else
    if (::setsockopt(socketNum, SOL_SOCKET, SO_SNDBUF, (void*) &optval, optlen) == SOCKET_ERROR) {
 #endif
-      ::perror("PosixHandler::setSendBuffSize(): error setting the send buffer size\n");
+      std::perror("PosixHandler::setSendBuffSize(): error setting the send buffer size\n");
       return false;
    }
    return true;
@@ -242,7 +244,7 @@ bool PosixHandler::setRecvBuffSize()
 #else
    if (::setsockopt(socketNum, SOL_SOCKET, SO_RCVBUF, (void*) &optval, optlen) == SOCKET_ERROR) {
 #endif
-      ::perror("PosixHandler::setRecvBuffSize(): error setting the receive buffer size\n");
+      std::perror("PosixHandler::setRecvBuffSize(): error setting the receive buffer size\n");
       return false;
    }
    return true;
@@ -259,13 +261,13 @@ bool PosixHandler::setBlocked()
 #if defined(WIN32)
     unsigned long zz = false;
     if (::ioctlsocket(socketNum, FIONBIO, &zz) == SOCKET_ERROR) {
-        ::perror("PosixHandler::setBlocked()");
+        std::perror("PosixHandler::setBlocked()");
         return false;
     }
 #else
     const int zz = 0;
     if (::ioctl(socketNum, FIONBIO, &zz) == SOCKET_ERROR) {
-        ::perror("PosixHandler::setBlocked()");
+        std::perror("PosixHandler::setBlocked()");
         return false;
     }
 #endif
@@ -284,13 +286,13 @@ bool PosixHandler::setNoWait()
 #if defined(WIN32)
     unsigned long zz = true;
     if (::ioctlsocket(socketNum, FIONBIO, &zz ) == SOCKET_ERROR) {
-        ::perror("PosixHandler::setNoWait()");
+        std::perror("PosixHandler::setNoWait()");
         return false;
     }
 #else
     const int zz = 1;
     if (::ioctl(socketNum, FIONBIO, &zz ) == SOCKET_ERROR) {
-        ::perror("PosixHandler::setNoWait()");
+        std::perror("PosixHandler::setNoWait()");
         return false;
     }
 #endif
@@ -337,7 +339,7 @@ bool PosixHandler::sendData(const char* const packet, const int size)
             std::cerr << "PosixHandler::sendData(): sendto error: " << err << " hex=0x" << std::hex << err << std::dec << std::endl;
         }
 #else
-        ::perror("PosixHandler::sendData(): sendto error msg");
+        std::perror("PosixHandler::sendData(): sendto error msg");
         if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "PosixHandler::sendData(): sendto error result: " << result << std::endl;
         }

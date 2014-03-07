@@ -4,6 +4,7 @@
 #include "openeaagles/recorder/DataRecordHandle.h"
 #include "openeaagles/basic/String.h"
 #include <fstream>
+#include <cstdlib>
 
 // Disable all deprecation warnings for now.  Until we fix them,
 // they are quite annoying to see over and over again...
@@ -244,7 +245,7 @@ const DataRecordHandle* FileReader::readRecordImp()
       // Ok then get the size of the message from the buffer
       else {
          nbuff[4] = '\0';
-         n = atoi(nbuff);
+         n = std::atoi(nbuff);
       }
 
 

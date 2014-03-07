@@ -12,7 +12,6 @@
 // ---
 #include "openeaagles/config.h"
 
-
 // ---
 // Define LCreal as double only
 //    Because of the 64 bit systems, the LCreal will be removed in a future
@@ -27,24 +26,23 @@ typedef double LCreal;
 // To avoid warnings, define math functions to use with LCreal.
 // Since LCreal is deprecated and set only to double, we're defining only
 // the double functions.  Manual modify to float functions, if required.
-#define lcSqrt      ::sqrt
-#define lcSin       ::sin
-#define lcCos       ::cos
-#define lcTan       ::tan
-#define lcAtan      ::atan
-#define lcAtan2     ::atan2
-#define lcAcos      ::acos
-#define lcAbs       ::fabs
-#define lcFmod      ::fmod
-#define lcPow       ::pow
-#define lcExp       ::exp
-#define lcLog       ::log
-#define lcLog10     ::log10
+#define lcSqrt      std::sqrt
+#define lcSin       std::sin
+#define lcCos       std::cos
+#define lcTan       std::tan
+#define lcAtan      std::atan
+#define lcAtan2     std::atan2
+#define lcAcos      std::acos
+#define lcAbs       std::fabs
+#define lcFmod      std::fmod
+#define lcPow       std::pow
+#define lcExp       std::exp
+#define lcLog       std::log
+#define lcLog10     std::log10
 #define lcAepcDeg   Basic::Angle::aepcdDeg   // needs basic/units/Angles.h
 #define lcAepcRad   Basic::Angle::aepcdRad   // needs basic/units/Angles.h
 
 }
-
 
 // ---
 // Common header files
@@ -56,12 +54,10 @@ typedef double LCreal;
 #include "openeaagles/basic/osg/Matrix"
 #include <typeinfo>
 #include <iostream>
-#include <string>
 #include <sys/types.h>
 #include <cmath>
-#include <cstdio>
-#include <cstdlib>
-
+//#include <cstdio>
+//#include <cstdlib>
 
 // ---
 // Include OS/Processor unique stuff

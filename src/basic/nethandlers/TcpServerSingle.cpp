@@ -33,6 +33,8 @@
 #include "openeaagles/basic/PairStream.h"
 #include "openeaagles/basic/String.h"
 
+#include <cstdio>
+
 namespace Eaagles {
 namespace Basic {
 
@@ -104,7 +106,7 @@ bool TcpServerSingle::bindSocket()
 
       // Only in server do we bind
       if (::bind(socketNum, (const struct sockaddr *) &addr, sizeof(addr)) == SOCKET_ERROR ) {
-         ::perror("TcpHandler::bindSocket(): bind error");
+         std::perror("TcpHandler::bindSocket(): bind error");
          return false;
       }
 
@@ -123,7 +125,7 @@ bool TcpServerSingle::listenForConnections()
 {
     if (socketNum == INVALID_SOCKET) return false;
     if (::listen(socketNum, 1) == SOCKET_ERROR) {
-        ::perror("TcpServerSingle::listenForConnections(): error! \n");
+        std::perror("TcpServerSingle::listenForConnections(): error! \n");
         return false;
     }
     return true;
@@ -166,7 +168,7 @@ bool TcpServerSingle::acceptConnection()
 #else
    if (::shutdown(socketNum, SHUT_RDWR) == SOCKET_ERROR) {
 #endif
-      ::perror("TcpServerSingle::acceptConnection(): shutdown original error! \n");
+      std::perror("TcpServerSingle::acceptConnection(): shutdown original error! \n");
    }
 
    socketNum = tcpSocket;

@@ -5,6 +5,7 @@
 #include "openeaagles/basic/Object.h"
 
 #include <cctype>
+#include <cstdlib>
 
 namespace Eaagles {
 namespace Basic {
@@ -171,7 +172,7 @@ int Object::slotName2Index(const char* const slotname) const
    // b) convert 'slotname' to a slot index
    if (isNum) {
       // when the slotname is just a number (e.g., "12")
-      int j = atoi(slotname);
+      int j = std::atoi(slotname);
       if (j > 0 && j <= n) slotindex = j;
    }
    else {

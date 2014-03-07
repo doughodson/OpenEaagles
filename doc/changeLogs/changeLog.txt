@@ -12,6 +12,9 @@ general
 --------------------------------------------------------------------------------
 basic
 
+   support.h
+      1) Adding more explicit "std" namespace qualifiers and reducing the number
+         of includes (e.g., cstdio, cstdlib, string)
 
 --------------------------------------------------------------------------------
 basicGL

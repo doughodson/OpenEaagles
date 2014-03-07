@@ -29,6 +29,7 @@
 #include "openeaagles/basic/Pair.h"
 #include "openeaagles/basic/PairStream.h"
 #include "openeaagles/basic/String.h"
+#include <cstdio>
 
 namespace Eaagles {
 namespace Basic {
@@ -109,7 +110,7 @@ bool UdpUnicastHandler::init()
     // ---
     socketNum = ::socket(AF_INET, SOCK_DGRAM, 0);
     if (socketNum == INVALID_SOCKET) {
-        ::perror("UdpUnicastHandler::init(): Socket error");
+        std::perror("UdpUnicastHandler::init(): Socket error");
         return false;
     }
 
@@ -136,7 +137,7 @@ bool UdpUnicastHandler::bindSocket()
        else addr.sin_port = htons(getPort());
 
        if (::bind(socketNum, (const struct sockaddr *) &addr, sizeof(addr)) == SOCKET_ERROR) {
-           ::perror("UdpUnicastHandler::bindSocket(): bind error");
+           std::perror("UdpUnicastHandler::bindSocket(): bind error");
            return false;
        }
 
@@ -175,7 +176,7 @@ bool UdpUnicastHandler::sendDataTo(
             std::cerr << "UdpUnicastHandler::sendDataTo(): sendto error: " << err << " hex=0x" << std::hex << err << std::dec << std::endl;
         }
 #else
-        ::perror("UdpHandler::sendDataTo(): sendto error msg");
+        std::perror("UdpHandler::sendDataTo(): sendto error msg");
         if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "UdpUnicastHandler::sendDataTo(): sendto error result: " << result << std::endl;
         }

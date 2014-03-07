@@ -31,6 +31,7 @@
 #include "openeaagles/basic/Pair.h"
 #include "openeaagles/basic/PairStream.h"
 #include "openeaagles/basic/String.h"
+#include <cstdio>
 
 namespace Eaagles {
 namespace Basic {
@@ -129,7 +130,7 @@ bool UdpMulticastHandler::init()
     // ---
     socketNum = ::socket(AF_INET, SOCK_DGRAM, 0);
     if (socketNum == INVALID_SOCKET) {
-        ::perror("UdpMulticastHandler::init(): socket error");
+        std::perror("UdpMulticastHandler::init(): socket error");
         return false;
     }
 
@@ -144,7 +145,7 @@ bool UdpMulticastHandler::init()
         int optval = getLoopback();
         if (::setsockopt(socketNum, IPPROTO_IP, IP_MULTICAST_LOOP, &optval, sizeof(optval)) == SOCKET_ERROR) {
 #endif
-            ::perror("UdpMulticastHandler::init(): error setsockopt(IP_MULTICAST_LOOP)\n");
+            std::perror("UdpMulticastHandler::init(): error setsockopt(IP_MULTICAST_LOOP)\n");
             return false;
         }
     }
@@ -160,7 +161,7 @@ bool UdpMulticastHandler::init()
         int optval = getTTL();
         if (::setsockopt(socketNum, IPPROTO_IP, IP_MULTICAST_TTL, &optval, sizeof(optval)) == SOCKET_ERROR) {
 #endif
-            ::perror("UdpMulticastHandler::init(): error setsockopt(IP_MULTICAST_TTL)\n");
+            std::perror("UdpMulticastHandler::init(): error setsockopt(IP_MULTICAST_TTL)\n");
             return false;
         }
     }
@@ -195,7 +196,7 @@ bool UdpMulticastHandler::bindSocket()
        else addr.sin_port = htons(getPort());
 
        if (::bind(socketNum, (const struct sockaddr *) &addr, sizeof(addr)) == SOCKET_ERROR) {
-           ::perror("UdpMulticastHandler::bindSocket(): bind error");
+           std::perror("UdpMulticastHandler::bindSocket(): bind error");
            return false;
        }
 
@@ -235,7 +236,7 @@ bool UdpMulticastHandler::joinTheGroup()
    mreq.imr_interface.s_addr = iface;
    int result = ::setsockopt(socketNum, IPPROTO_IP, IP_ADD_MEMBERSHIP, (const char *) &mreq, sizeof(mreq));
    if (result == SOCKET_ERROR) {
-      ::perror("UdpMulticastHandler::joinTheGroup(): setsockopt mreq");
+      std::perror("UdpMulticastHandler::joinTheGroup(): setsockopt mreq");
       return false;
    }
 
