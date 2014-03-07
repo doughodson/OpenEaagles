@@ -57,6 +57,8 @@
 #include "cigicl/CigiIncomingMsg.h"
 #include "cigicl/CigiOutgoingMsg.h"
 
+#include <cstdio>
+
 namespace Eaagles {
 namespace Otw {
 
@@ -483,6 +485,7 @@ int OtwCigiClV2::updateModels()
 
                   // Get the player
                   const Simulation::Player* player = model->getPlayer();
+
 
 
                   // Set the model data and ...
@@ -1314,6 +1317,7 @@ bool OtwCigiClV2::setSpaceVehicleData(OtwModelCigiClV2* const m, const unsigned 
             const Simulation::Otm* otm = m->getTypeMapper();
             if (otm != 0) tt = otm->getTypeId();
             if (tt > 0xffff) tt = 0;   // unsigned short only
+
 	    ec->SetEntityType(static_cast<unsigned short>(tt));
             
             // Set entity control data

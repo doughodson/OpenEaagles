@@ -21,6 +21,8 @@
 #include "openeaagles/basic/Pair.h"
 #include "openeaagles/basic/PairStream.h"
 
+#include <cstdio>
+
 // Disable all deprecation warnings for now.  Until we fix them,
 // they are quite annoying to see over and over again...
 #if(_MSC_VER>=1400)   // VC8+

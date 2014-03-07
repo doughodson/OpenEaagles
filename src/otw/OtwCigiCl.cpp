@@ -65,6 +65,8 @@
 #include "cigicl/CigiHotRespV2.h"
 #include "cigicl/CigiSensorCtrlV3.h"
 
+#include <cstdio>
+
 namespace Eaagles {
 namespace Otw {
 

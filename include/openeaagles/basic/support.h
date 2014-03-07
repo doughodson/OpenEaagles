@@ -56,8 +56,6 @@ typedef double LCreal;
 #include <iostream>
 #include <sys/types.h>
 #include <cmath>
-//#include <cstdio>
-//#include <cstdlib>
 
 // ---
 // Include OS/Processor unique stuff

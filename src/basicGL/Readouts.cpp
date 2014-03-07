@@ -7,6 +7,8 @@
 #include "openeaagles/basic/PairStream.h"
 #include "openeaagles/basic/Pair.h"
 #include "Reformat.h"
+
+#include <cstdio>
 #include <cstdlib>
 
 // Disable all deprecation warnings for now.  Until we fix them,

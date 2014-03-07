@@ -5,15 +5,14 @@
 
 #include <errno.h>
 
-//#include <stdio.h>
+#include <iostream>
+#include <cstdio>
+
 #include <malloc.h>
 #include <fcntl.h>
-#include <iostream>
 #include <unistd.h>
-#include <string.h>
 
 #include <linux/joystick.h>
-
 
 #include "./UsbJoystickImp.h"
 
@@ -23,6 +22,7 @@ namespace IoDevice {
 IMPLEMENT_SUBCLASS(UsbJoystickImp,"UsbJoystick")
 EMPTY_SLOTTABLE(UsbJoystickImp)
 EMPTY_SERIALIZER(UsbJoystickImp)
+EMPTY_DELETEDATA(UsbJoystickImp)
 
 //------------------------------------------------------------------------------
 // Constructor(s)
@@ -51,13 +51,6 @@ void UsbJoystickImp::copyData(const UsbJoystickImp& org, const bool)
    BaseClass::copyData(org);
 
    initData();
-}
-
-//------------------------------------------------------------------------------
-//deleteData() -- delete member data
-//------------------------------------------------------------------------------
-void UsbJoystickImp::deleteData()
-{
 }
 
 //------------------------------------------------------------------------------
@@ -95,7 +88,7 @@ void UsbJoystickImp::reset()
       }
 
       // try opening device
-      stream = ::open(deviceName, O_RDONLY | O_NONBLOCK );
+      stream = open(deviceName, O_RDONLY | O_NONBLOCK );
       if ((stream == -1) && isMessageEnabled(MSG_ERROR)) {
          std::cerr << "UsbJoystick::reset(): Error opening device at : " << deviceName << std::endl;
       }
@@ -150,7 +143,7 @@ void UsbJoystickImp::processInputs(const Eaagles::LCreal dt, Basic::IoData* cons
    js_event js; // joystick event structure
 
    // Loop reading joystick events .. 
-   while(true) {
+   while (true) {
 
       // read the next joystick event (if any)
       int status = read(stream, &js, sizeof(js));
@@ -159,7 +152,7 @@ void UsbJoystickImp::processInputs(const Eaagles::LCreal dt, Basic::IoData* cons
       if (status != sizeof(js)) break;
 
       // decode the event
-      switch( js.type & ~JS_EVENT_INIT ) {
+      switch ( js.type & ~JS_EVENT_INIT ) {
 
          // button event
          case JS_EVENT_BUTTON:
@@ -188,3 +181,4 @@ void UsbJoystickImp::processInputs(const Eaagles::LCreal dt, Basic::IoData* cons
 
 } // IoDevice namespace
 } // end Eaagles namespace
+

@@ -15,6 +15,8 @@
 #include "openeaagles/basic/Identifier.h"
 #include "openeaagles/basic/PairStream.h"
 
+#include <cstdio>
+
 #include <GL/glu.h>
 
 // if OpenGL extension is not defined by glu.h, try loading glext.h

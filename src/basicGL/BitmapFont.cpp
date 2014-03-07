@@ -4,6 +4,8 @@
 #include "openeaagles/basicGL/BitmapFont.h"
 #include "openeaagles/basic/String.h"
 #include "openeaagles/basic/Number.h"
+#include <cstdio>
+#include <cmath>
 
 // Disable all deprecation warnings for now.  Until we fix them,
 // they are quite annoying to see over and over again...
@@ -532,7 +534,7 @@ GLubyte* BitmapFont::loadTypeFace(const GLint index, const GLenum reverse)
 
    // Open the font file
    FILE* fp = 0;
-   if( (fp = fopen(fontPathname, "r")) ==0 ) {
+   if( (fp = std::fopen(fontPathname, "r")) ==0 ) {
       if (isMessageEnabled(MSG_ERROR)) {
          std::cerr << "BitmapFont::loadTypeFace: unable to open font file: " << fontPathname << std::endl;
       }
@@ -545,11 +547,11 @@ GLubyte* BitmapFont::loadTypeFace(const GLint index, const GLenum reverse)
 
    // Calculate the size of the font
    unsigned int width1(0);
-   nItemsMatched = fscanf(fp, "%u\n", &width1);
+   nItemsMatched = std::fscanf(fp, "%u\n", &width1);
    unsigned int height1(0);
-   nItemsMatched = fscanf(fp, "%u\n", &height1);
+   nItemsMatched = std::fscanf(fp, "%u\n", &height1);
 
-   unsigned int numBytesWide = int(ceil(double(width1) / 8.0));
+   unsigned int numBytesWide = int(std::ceil(double(width1) / 8.0));
    unsigned int numFileBytes = numBytesWide * height1;
    unsigned int numFontBytes = numBytesWide * getBitmapHeight();
 

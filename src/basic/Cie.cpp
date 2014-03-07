@@ -6,6 +6,7 @@
 #include "openeaagles/basic/Float.h"
 #include "openeaagles/basic/List.h"
 #include "openeaagles/basic/Tables.h"
+#include <cstdio>
 
 namespace Eaagles {
 namespace Basic {
