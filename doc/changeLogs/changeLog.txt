@@ -45,6 +45,9 @@ recorder
 
 --------------------------------------------------------------------------------
 simulation
+ 
+   Autopilot class
+      1) Removed old debug print statements
 
    StabilizingGimbal.cpp
       1) fixed slottable entry (bug fix)
