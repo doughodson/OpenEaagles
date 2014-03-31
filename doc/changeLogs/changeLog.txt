@@ -27,6 +27,9 @@ basicGL
 --------------------------------------------------------------------------------
 dis
 
+   NetIO class
+      1) processElectromagneticEmissionPDU() -- changed to only attempt to process
+      the PDU if there were handlers provided.
 
 --------------------------------------------------------------------------------
 gui-glut

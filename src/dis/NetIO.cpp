@@ -663,6 +663,9 @@ void NetIO::processElectromagneticEmissionPDU(const ElectromagneticEmissionPDU* 
     // Or PDUs with no systems
     if (pdu->numberOfSystems == 0) return;
 
+    // Or if we have no emission handlers
+    if (nEmissionHandlers == 0) return;
+
     // Find the NIB and IPlayer for the emitting player (they must exist or we're too early)
     Nib* eNib = findDisNib(ePlayerId, eSiteId, eApplicationId, INPUT_NIB);
     if (eNib == 0) return;
