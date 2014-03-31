@@ -38,6 +38,9 @@ maps
 --------------------------------------------------------------------------------
 otw
 
+   CigiClNetworkSignalProcessing class
+      1) OnHotResp() -- added support for a CigiHatHotRespV3_2 type argument
+
 
 --------------------------------------------------------------------------------
 recorder
