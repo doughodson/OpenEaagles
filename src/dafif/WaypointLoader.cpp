@@ -1,5 +1,6 @@
 #include "openeaagles/dafif/WaypointLoader.h"
 #include "openeaagles/basic/FileReader.h"
+#include <cstring>
 
 namespace Eaagles {
 namespace Dafif {
@@ -211,7 +212,7 @@ int WaypointLoader::kl_cmp(const void* p1, const void* p2)
    WaypointKey* k2 = *((WaypointKey**) p2);
 
    // compare the keys
-   int result = strcmp(k1->key, k2->key);
+   int result = std::strcmp(k1->key, k2->key);
 
    return result;
 }
@@ -227,7 +228,7 @@ int WaypointLoader::il_cmp(const void* p1, const void* p2)
 
    // if equal then check the country codes (only if k1 has one)
    if (result == 0 && k1->countryCode[0] != '\0') {
-      result = strcmp(k1->countryCode,k2->countryCode);
+      result = std::strcmp(k1->countryCode,k2->countryCode);
    }
    return result;
 }

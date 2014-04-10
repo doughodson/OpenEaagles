@@ -10,6 +10,8 @@
 #include "openeaagles/dafif/NavaidLoader.h"
 #include "openeaagles/dafif/WaypointLoader.h"
 
+#include <cstring>
+
 namespace Eaagles {
 namespace Dafif {
 
@@ -20,13 +22,13 @@ Basic::Object* Factory::createObj(const char* name)
 {
     Basic::Object* obj = 0;
 
-    if ( strcmp(name, AirportLoader::getFactoryName()) == 0 ) {
+    if ( std::strcmp(name, AirportLoader::getFactoryName()) == 0 ) {
         obj = new AirportLoader();
     }
-    else if ( strcmp(name, NavaidLoader::getFactoryName()) == 0 ) {
+    else if ( std::strcmp(name, NavaidLoader::getFactoryName()) == 0 ) {
         obj = new NavaidLoader();
     }
-    else if ( strcmp(name, WaypointLoader::getFactoryName()) == 0 ) {
+    else if ( std::strcmp(name, WaypointLoader::getFactoryName()) == 0 ) {
         obj = new WaypointLoader();
     }
 

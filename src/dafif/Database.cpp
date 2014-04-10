@@ -7,6 +7,8 @@
 #include "openeaagles/basic/units/Angles.h"
 #include "openeaagles/basic/units/Distances.h"
 
+#include <cstring>
+
 namespace Eaagles {
 namespace Dafif {
 
@@ -485,7 +487,7 @@ int Database::ol_cmp(const void* p1, const void* p2)
    Key* k1 = *((Key**) p1);
    Key* k2 = *((Key**) p2);
 
-   return strcmp(k1->icao,k2->icao);
+   return std::strcmp(k1->icao,k2->icao);
 }
 
 

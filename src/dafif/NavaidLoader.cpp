@@ -1,5 +1,6 @@
 #include "openeaagles/dafif/NavaidLoader.h"
 #include "openeaagles/basic/FileReader.h"
+#include <cstring>
 
 namespace Eaagles {
 namespace Dafif {
@@ -267,7 +268,7 @@ int NavaidLoader::kl_cmp(const void* p1, const void* p2)
    NavaidKey* k2 = *((NavaidKey**) p2);
 
    // compare the keys
-   int result = strcmp(k1->key, k2->key);
+   int result = std::strcmp(k1->key, k2->key);
    return result;
 }
 
@@ -279,13 +280,13 @@ int NavaidLoader::il_cmp(const void* p1, const void* p2)
    NavaidKey* k2 = *((NavaidKey**) p2);
 
    // compare the id's
-   int result = strcmp(k1->ident, k2->ident);
+   int result = std::strcmp(k1->ident, k2->ident);
 
    // if equal then check the country codes (only if k1 has one)
    if (result == 0 && k1->countryCode[0] != '\0') {
 
       // compare country codes
-      result = strcmp(k1->countryCode,k2->countryCode);
+      result = std::strcmp(k1->countryCode,k2->countryCode);
 
    }
    return result;

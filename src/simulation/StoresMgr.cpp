@@ -18,6 +18,7 @@
 #include "openeaagles/basic/Boolean.h"
 #include "openeaagles/basic/Pair.h"
 #include "openeaagles/basic/PairStream.h"
+#include <cstring>
 
 // Disable all deprecation warnings for now.  Until we fix them,
 // they are quite annoying to see over and over again...
@@ -529,7 +530,7 @@ void SimpleStoresMgr::updateData(const LCreal dt)
                const Basic::Pair* pair = (Basic::Pair*) item->getValue();
                if (pair != 0) {
                   const Weapon* s = dynamic_cast<const Weapon*>( pair->object() );
-                  if ( s != 0 && s->isMode(Player::INACTIVE) && strcmp(s->getFactoryName(), wpn->getFactoryName()) == 0 ) {
+                  if ( s != 0 && s->isMode(Player::INACTIVE) && std::strcmp(s->getFactoryName(), wpn->getFactoryName()) == 0 ) {
                      count++;
                   }
                }

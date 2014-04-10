@@ -29,7 +29,7 @@
 #include "openeaagles/basic/osg/Vec4"
 #include "openeaagles/basic/Statistic.h"
 #include "openeaagles/basic/Terrain.h"
-
+#include <cstring>
 
 namespace Eaagles {
 namespace Simulation {
@@ -1540,7 +1540,7 @@ bool Simulation::insertPlayerSort(Basic::Pair* const newPlayerPair, Basic::PairS
                const Nib* rNib = refPlayer->getNib();
 
                // Compare federate names
-               int result = strcmp(*nNib->getFederateName(), *rNib->getFederateName());
+               int result = std::strcmp(*nNib->getFederateName(), *rNib->getFederateName());
                if (result == 0) {
                   // Same federate name; compare player IDs
                   if (nNib->getPlayerID() > rNib->getPlayerID()) result = +1; 

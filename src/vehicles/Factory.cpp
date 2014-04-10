@@ -9,6 +9,8 @@
 #include "openeaagles/vehicles/RacModel.h"
 #include "openeaagles/vehicles/LaeroModel.h"
 
+#include <cstring>
+
 namespace Eaagles {
 namespace Vehicle {
 
@@ -20,15 +22,15 @@ Basic::Object* Factory::createObj(const char* name)
     Basic::Object* obj = 0;
 
     // RAC model
-    if ( strcmp(name, RacModel::getFactoryName()) == 0 ) {
+    if ( std::strcmp(name, RacModel::getFactoryName()) == 0 ) {
         obj = new RacModel();
     }
     // JSBSim model
-    else if ( strcmp(name, JSBSimModel::getFactoryName()) == 0 ) {
+    else if ( std::strcmp(name, JSBSimModel::getFactoryName()) == 0 ) {
         obj = new JSBSimModel();
     }
     // Laero model
-    else if ( strcmp(name, LaeroModel::getFactoryName()) == 0 ) {
+    else if ( std::strcmp(name, LaeroModel::getFactoryName()) == 0 ) {
         obj = new LaeroModel();
     }
 

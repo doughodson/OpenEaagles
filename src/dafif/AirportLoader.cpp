@@ -2,6 +2,8 @@
 #include "openeaagles/dafif/AirportLoader.h"
 #include "openeaagles/basic/FileReader.h"
 
+#include <cstring>
+
 namespace Eaagles {
 namespace Dafif {
 
@@ -1186,7 +1188,7 @@ int AirportLoader::kl_cmp(const void* p1, const void* p2)
    AirportKey* k2 = *((AirportKey**) p2);
 
    // compare the keys
-   int result = strcmp(k1->key, k2->key);
+   int result = std::strcmp(k1->key, k2->key);
 
    return result;
 }

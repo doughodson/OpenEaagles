@@ -162,13 +162,13 @@
     bool ThisType::isFormName(const char name[]) const                                 \
     {                                                                                  \
         if (name == 0) return false;                                                   \
-        if ( strcmp(_static.fname,name) == 0 )  return true;                           \
+        if ( std::strcmp(_static.fname,name) == 0 )  return true;                      \
         else return ThisType::BaseClass::isFormName(name);                             \
     }                                                                                  \
     bool ThisType::isFactoryName(const char name[]) const                              \
     {                                                                                  \
         if (name == 0) return false;                                                   \
-        if ( strcmp(_static.fname,name) == 0 )  return true;                           \
+        if ( std::strcmp(_static.fname,name) == 0 )  return true;                      \
         else return ThisType::BaseClass::isFactoryName(name);                          \
     }                                                                                  \
     const Eaagles::Basic::SlotTable& ThisType::getSlotTable()  { return slottable; }   \
@@ -208,13 +208,13 @@
     bool ThisType::isFormName(const char name[]) const                                 \
     {                                                                                  \
         if (name == 0) return false;                                                   \
-        if ( strcmp(_static.fname,name) == 0 )  return true;                           \
+        if ( std::strcmp(_static.fname,name) == 0 )  return true;                      \
         else return ThisType::BaseClass::isFormName(name);                             \
     }                                                                                  \
     bool ThisType::isFactoryName(const char name[]) const                              \
     {                                                                                  \
         if (name == 0) return false;                                                   \
-        if ( strcmp(_static.fname,name) == 0 )  return true;                           \
+        if ( std::strcmp(_static.fname,name) == 0 )  return true;                      \
         else return ThisType::BaseClass::isFactoryName(name);                          \
     }                                                                                  \
     const Eaagles::Basic::SlotTable& ThisType::getSlotTable() { return slottable; }    \
@@ -237,13 +237,13 @@
     bool ThisType::isFormName(const char name[]) const                                 \
     {                                                                                  \
         if (name == 0) return false;                                                   \
-        if ( strcmp(_static.fname,name) == 0 )  return true;                           \
+        if ( std::strcmp(_static.fname,name) == 0 )  return true;                      \
         else return ThisType::BaseClass::isFormName(name);                             \
     }                                                                                  \
     bool ThisType::isFactoryName(const char name[]) const                              \
     {                                                                                  \
         if (name == 0) return false;                                                   \
-        if ( strcmp(_static.fname,name) == 0 )  return true;                           \
+        if ( std::strcmp(_static.fname,name) == 0 )  return true;                      \
         else return ThisType::BaseClass::isFactoryName(name);                          \
     }                                                                                  \
     const Eaagles::Basic::SlotTable& ThisType::getSlotTable() { return slottable; }    \

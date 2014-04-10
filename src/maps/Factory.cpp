@@ -9,6 +9,8 @@
 #include "openeaagles/maps/rpfMap/MapDrawer.h"
 #include "openeaagles/maps/rpfMap/CadrgMap.h"
 
+#include <cstring>
+
 namespace Eaagles {
 namespace Maps {
 
@@ -20,11 +22,11 @@ Basic::Object* Factory::createObj(const char* name)
     Basic::Object* obj = 0;
 
     // Map Drawer
-    if ( strcmp(name, Rpf::MapDrawer::getFactoryName()) == 0 ) {
+    if ( std::strcmp(name, Rpf::MapDrawer::getFactoryName()) == 0 ) {
         obj = new Rpf::MapDrawer();
     }
     // CadrgMap
-    else if ( strcmp(name, Rpf::CadrgMap::getFactoryName()) == 0 ) {
+    else if ( std::strcmp(name, Rpf::CadrgMap::getFactoryName()) == 0 ) {
         obj = new Rpf::CadrgMap();
     }
 

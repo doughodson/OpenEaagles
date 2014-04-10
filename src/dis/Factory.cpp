@@ -10,6 +10,8 @@
 #include "openeaagles/dis/Ntm.h"
 #include "openeaagles/dis/EmissionPduHandler.h"
 
+#include <cstring>
+
 namespace Eaagles {
 namespace Network {
 namespace Dis {
@@ -21,13 +23,13 @@ Basic::Object* Factory::createObj(const char* name)
 {
     Basic::Object* obj = 0;
 
-    if ( strcmp(name, Dis::NetIO::getFactoryName()) == 0 ) {
+    if ( std::strcmp(name, Dis::NetIO::getFactoryName()) == 0 ) {
         obj = new Dis::NetIO();
     }
-    else if ( strcmp(name, Ntm::getFactoryName()) == 0 ) {
+    else if ( std::strcmp(name, Ntm::getFactoryName()) == 0 ) {
         obj = new Ntm();
     }
-    else if ( strcmp(name, EmissionPduHandler::getFactoryName()) == 0 ) {
+    else if ( std::strcmp(name, EmissionPduHandler::getFactoryName()) == 0 ) {
         obj = new EmissionPduHandler();
     }
 

@@ -56,6 +56,7 @@ typedef double LCreal;
 #include <iostream>
 #include <sys/types.h>
 #include <cmath>
+#include <cstring> // macros use std::strcmp
 //#include <cstdio>
 //#include <cstdlib>
 

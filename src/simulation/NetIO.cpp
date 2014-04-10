@@ -28,6 +28,7 @@
 #include "openeaagles/basic/units/Angles.h"
 #include "openeaagles/basic/units/Distances.h"
 #include "openeaagles/basic/units/Times.h"
+#include <cstring>
 
 #if !defined(WIN32)
 #include <arpa/inet.h>
@@ -959,7 +960,7 @@ int NetIO::compareKey2Nib(const void* key, const void* nib)
 
    if (result == 0) {
       // If they're the same, compare the federate names
-      result = strcmp(*pKey->fName, *pNib->getFederateName());
+      result = std::strcmp(*pKey->fName, *pNib->getFederateName());
    }
 
    return result;

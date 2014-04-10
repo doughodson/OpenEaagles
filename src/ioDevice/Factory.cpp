@@ -14,6 +14,8 @@
 #include "openeaagles/ioDevice/IoData.h"
 #include "openeaagles/ioDevice/SignalGen.h"
 
+#include <cstring>
+
 #if defined(WIN32)
    #include "./windows/UsbJoystickImp.h"
 #else
@@ -31,36 +33,36 @@ Basic::Object* Factory::createObj(const char* name)
     Basic::Object* obj = 0;
 
     // Data buffers
-    if ( strcmp(name, IoData::getFactoryName()) == 0 ) {
+    if ( std::strcmp(name, IoData::getFactoryName()) == 0 ) {
         obj = new IoData();
     }
 
     // Data Handlers
-    else if ( strcmp(name, DiscreteInput::getFactoryName()) == 0 ) {
+    else if ( std::strcmp(name, DiscreteInput::getFactoryName()) == 0 ) {
         obj = new DiscreteInput();
     }
-    else if ( strcmp(name, DiscreteOutput::getFactoryName()) == 0 ) {
+    else if ( std::strcmp(name, DiscreteOutput::getFactoryName()) == 0 ) {
         obj = new DiscreteOutput();
     }
-    else if ( strcmp(name, AnalogInput::getFactoryName()) == 0 ) {
+    else if ( std::strcmp(name, AnalogInput::getFactoryName()) == 0 ) {
         obj = new AnalogInput();
     }
-    else if ( strcmp(name, AnalogOutput::getFactoryName()) == 0 ) {
+    else if ( std::strcmp(name, AnalogOutput::getFactoryName()) == 0 ) {
         obj = new AnalogOutput();
     }
 
     // Signal converters and generators
-    else if ( strcmp(name, Ai2DiSwitch::getFactoryName()) == 0 ) {
+    else if ( std::strcmp(name, Ai2DiSwitch::getFactoryName()) == 0 ) {
         obj = new Ai2DiSwitch();
     }
-    else if ( strcmp(name, SignalGen::getFactoryName()) == 0 ) {
+    else if ( std::strcmp(name, SignalGen::getFactoryName()) == 0 ) {
         obj = new SignalGen();
     }
 
     // ---
     // Device handler implementations (Linux and/or Windows)
     // ---
-    else if ( strcmp(name, UsbJoystickImp::getFactoryName()) == 0 ) {
+    else if ( std::strcmp(name, UsbJoystickImp::getFactoryName()) == 0 ) {
         obj = new UsbJoystickImp();
     }
 

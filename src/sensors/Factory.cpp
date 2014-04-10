@@ -9,6 +9,8 @@
 #include "openeaagles/sensors/Tws.h"
 #include "openeaagles/sensors/Stt.h"
 
+#include <cstring>
+
 namespace Eaagles {
 namespace Sensor {
 
@@ -20,13 +22,13 @@ Basic::Object* Factory::createObj(const char* name)
     Basic::Object* obj = 0;
 
     // Sensors
-    if ( strcmp(name, Gmti::getFactoryName()) == 0 ) {
+    if ( std::strcmp(name, Gmti::getFactoryName()) == 0 ) {
         obj = new Gmti();
     }
-    else if ( strcmp(name, Stt::getFactoryName()) == 0 ) {
+    else if ( std::strcmp(name, Stt::getFactoryName()) == 0 ) {
         obj = new Stt();
     }
-    else if ( strcmp(name, Tws::getFactoryName()) == 0 ) {
+    else if ( std::strcmp(name, Tws::getFactoryName()) == 0 ) {
         obj = new Tws();
     }
 

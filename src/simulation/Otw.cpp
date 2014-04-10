@@ -12,6 +12,7 @@
 #include "openeaagles/basic/osg/Vec4"
 #include "openeaagles/basic/osg/Vec3"
 #include "openeaagles/basic/units/Distances.h"
+#include <cstring>
 
 namespace Eaagles {
 namespace Simulation {
@@ -735,7 +736,7 @@ int Otw::compareKey2Model(const void* key, const void* model)
       else if (pKeyFedName != 0 && pModelFedName == 0) result = +1;
 
       else if (pKeyFedName == 0 && pModelFedName != 0) {
-         result = strcmp(*pKeyFedName, *pModelFedName);
+         result = std::strcmp(*pKeyFedName, *pModelFedName);
       }
    }
 

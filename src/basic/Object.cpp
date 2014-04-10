@@ -6,6 +6,7 @@
 
 #include <cctype>
 #include <cstdlib>
+#include <cstring>
 
 namespace Eaagles {
 namespace Basic {
@@ -82,7 +83,7 @@ bool Object::isClassType(const std::type_info& type) const
 bool Object::isFactoryName(const char name[]) const
 {
     if (name == 0) return false;
-    if ( strcmp(_static.fname, name) == 0 )  return true;
+    if ( std::strcmp(_static.fname, name) == 0 )  return true;
     else return false;
 }
 
@@ -90,7 +91,7 @@ bool Object::isFactoryName(const char name[]) const
 bool Object::isFormName(const char name[]) const
 {
     if (name == 0) return false;
-    if ( strcmp(_static.fname, name) == 0 )  return true;
+    if ( std::strcmp(_static.fname, name) == 0 )  return true;
     else return false;
 }
 

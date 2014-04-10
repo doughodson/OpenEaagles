@@ -8,6 +8,8 @@
 #include "openeaagles/otw/OtwCigiCl.h"
 #include "openeaagles/otw/OtwPC.h"
 
+#include <cstring>
+
 namespace Eaagles {
 namespace Otw {
 
@@ -19,15 +21,15 @@ Basic::Object* Factory::createObj(const char* name)
     Basic::Object* obj = 0;
 
     // Common Image Generation Interface (CIGI)
-    if ( strcmp(name, OtwCigiCl::getFactoryName()) == 0 ) {
+    if ( std::strcmp(name, OtwCigiCl::getFactoryName()) == 0 ) {
         obj = new OtwCigiCl();
     }
-    else if ( strcmp(name, CigiClNetwork::getFactoryName()) == 0 ) {
+    else if ( std::strcmp(name, CigiClNetwork::getFactoryName()) == 0 ) {
         obj = new CigiClNetwork();
     }
 
     // PC Visual Driver
-    else if ( strcmp(name, OtwPC::getFactoryName()) == 0 ) {
+    else if ( std::strcmp(name, OtwPC::getFactoryName()) == 0 ) {
         obj = new OtwPC();
     }
 
