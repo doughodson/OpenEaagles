@@ -4,6 +4,8 @@
 #include "openeaagles/basic/String.h"
 #include "openeaagles/basic/Color.h"
 
+#include <cstdlib>
+
 #ifdef FTGL_2_1_2
 #include <FTGL/FTFace.h>
 #include <FTGL/FTFont.h>
@@ -402,7 +404,7 @@ void FtglBitmapFont::loadFont()
         std::cerr << fontPathname << "\"";
         std::cerr << std::endl;
           }
-        exit(1);
+        std::exit(1);
     }
 }
 
@@ -538,7 +540,7 @@ void FtglExtrdFont::loadFont()
         std::cerr << fontPathname << "\"";
         std::cerr << std::endl;
           }
-        exit(1);
+         std::exit(1);
     }
 }
 
@@ -672,7 +674,7 @@ void FtglOutlineFont::loadFont()
         std::cerr << fontPathname << "\"";
         std::cerr << std::endl;
           }
-        exit(1);
+         std::exit(1);
     }
 }
 
@@ -799,7 +801,7 @@ void FtglPixmapFont::loadFont()
         std::cerr << fontPathname << "\"";
         std::cerr << std::endl;
           }
-        exit(1);
+         std::exit(1);
     }
 }
 
@@ -935,7 +937,7 @@ void FtglPolygonFont::loadFont()
         std::cerr << fontPathname << "\"";
         std::cerr << std::endl;
           }
-        exit(1);
+         std::exit(1);
     }
 }
 
@@ -1158,7 +1160,7 @@ void FtglHaloFont::loadFont()
         std::cerr << fontPathname << "\"";
         std::cerr << std::endl;
           }
-        exit(1);
+         std::exit(1);
     }
 
     // now create the outline font over it
@@ -1173,7 +1175,7 @@ void FtglHaloFont::loadFont()
         std::cerr << fontPathname << "\"";
         std::cerr << std::endl;
           }
-        exit(1);
+         std::exit(1);
     }
 
 }
@@ -1310,7 +1312,7 @@ void FtglTextureFont::loadFont()
         std::cerr << fontPathname << "\"";
         std::cerr << std::endl;
           }
-        exit(1);
+         std::exit(1);
     }
 }
 

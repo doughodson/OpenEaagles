@@ -1,6 +1,7 @@
 #include "openeaagles/dafif/WaypointLoader.h"
 #include "openeaagles/basic/FileReader.h"
 #include <cstring>
+#include <cstdlib>
 
 namespace Eaagles {
 namespace Dafif {
@@ -87,7 +88,7 @@ bool WaypointLoader::load(const char* country)
             std::cerr << "WaypointLoader: key table too small; ";
             std::cerr << "increase WAYPOINT_MAX_RECORDS" << std::endl;
             }
-            exit(EXIT_FAILURE);
+             std::exit(EXIT_FAILURE);
          }
 
          rl[nrl] = new WaypointKey( db->getRecordNumber(), waypoint );

@@ -3,6 +3,7 @@
 #include "openeaagles/basic/FileReader.h"
 
 #include <cstring>
+#include <cstdlib>
 
 namespace Eaagles {
 namespace Dafif {
@@ -91,7 +92,7 @@ bool AirportLoader::load(const char* country)
             std::cerr << "AirportLoader: key table too small; ";
             std::cerr << "increase AIRPORT_MAX_RECORDS" << std::endl;
              }
-            exit(EXIT_FAILURE);
+             std::exit(EXIT_FAILURE);
          }
 
          // The airport is in the correct country!
@@ -141,7 +142,7 @@ bool AirportLoader::load(const char* country)
          std::cerr << "AirportLoader::load: missing second record";
          std::cerr << " of a runway description!" << std::endl;
           }
-          exit(EXIT_FAILURE);
+           std::exit(EXIT_FAILURE);
       }
 
       // Have the second record!
@@ -206,7 +207,7 @@ bool AirportLoader::load(const char* country)
          std::cerr << "AirportLoader::load: missing second record";
          std::cerr << " of an ils description!" << std::endl;
           }
-          exit(EXIT_FAILURE);
+           std::exit(EXIT_FAILURE);
       }
 
       // Have the second record!

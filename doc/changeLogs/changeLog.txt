@@ -9,9 +9,9 @@ general
       'openeaagles/basic/support.h', since 'config.h' should only
       contain C pre-processor directives.
 
-   2) Added std:: namespace qualifier to all string compare functions (strcmp)
-      This has no effect on API interface, but does make explicit where strcmp function
-      is defined (in <cstring> for C++)
+   2) Added std:: namespace qualifier to all string compare (strcmp) and exit calls
+      This has no effect on API interface, but does make explicit where these functions
+      are defined (for C++)
 
 --------------------------------------------------------------------------------
 basic
