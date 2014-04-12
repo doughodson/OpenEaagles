@@ -294,7 +294,7 @@ Object* List::removeTail()
 // insert(Item*) -- insert a new item before 'refItem'.  If 'refItem' is
 //                  null(0), the new item is added to the tail of the list.
 //------------------------------------------------------------------------------
-bool List::insert(Item* newItem, Item* refItem)
+bool List::insert(List::Item* newItem, List::Item* refItem)
 {
     bool ok = true;
     if (refItem != 0) {
