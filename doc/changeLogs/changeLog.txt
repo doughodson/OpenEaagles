@@ -16,6 +16,9 @@ basic
       1) Adding more explicit "std" namespace qualifiers and reducing the number
          of includes (e.g., cstdio, cstdlib, string)
 
+   TcpHandler class
+      1) recvData() was modified to check for closed connection or errors.
+
 --------------------------------------------------------------------------------
 basicGL
 

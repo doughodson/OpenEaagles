@@ -169,16 +169,38 @@ bool TcpHandler::sendData(const char* const packet, const int size)
 // -------------------------------------------------------------
 unsigned int TcpHandler::recvData(char* const packet, const int maxSize)
 {
-    if (!isConnected() || hasBeenTerminated()) return 0;
+   if (!isConnected() || hasBeenTerminated()) return 0;
+   if (socketNum == INVALID_SOCKET) return 0;
 
-    if (socketNum == INVALID_SOCKET) return 0;
+   unsigned int n = 0; // default return value (no data)
 
-    // Try to receive the data
-    unsigned int n = 0;
-    int result = ::recvfrom(socketNum, packet, maxSize, 0, 0, 0);
-    if (result > 0) n = (unsigned int) result;
+   // Try to receive the data
+   int result = ::recv(socketNum, packet, maxSize, 0);
 
-    return n;
+   // Did we received any data?
+   if (result > 0) {
+      // We've received data -- all is well.
+      n = (unsigned int) result;
+   }
+
+   // Did we receive a zero?
+   else if (result == 0) {
+      // Received a zero -- connection closed by other side
+      closeConnection();
+   }
+
+   // Do we have an error code?
+   else if (result < 0) {
+      // For error conditions, check for non-blocking and adjust result
+      // to indicate there is no error
+      if (errno != EAGAIN && errno != EWOULDBLOCK) {
+         // Error condition! Close the conntection
+         perror("TcpHandler::recvData(): ");
+         closeConnection();
+      }
+   }
+
+   return n;
 }
 
 } // End Basic namespace
