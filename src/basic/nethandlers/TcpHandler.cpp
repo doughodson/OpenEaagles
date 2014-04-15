@@ -19,6 +19,7 @@
     #include <arpa/inet.h>
     #include <sys/fcntl.h>
     #include <sys/ioctl.h>
+    #include <errno.h>
     #ifdef sun
         #include <sys/filio.h> // -- added for Solaris 10
     #endif
