@@ -407,7 +407,6 @@ bool Autopilot::flyLoiterEntry()
          //-----------------------------------------------------------
          case PREENTRY:
          {
-            std::cout << "PREENTRY" << std::endl;
             if (loiterEntryPhase == 0) {
                // just started loitering, let's setup our anchor and inbound course
                if (haveNav) {
@@ -454,7 +453,6 @@ bool Autopilot::flyLoiterEntry()
          //-----------------------------------------------------------
          case DIRECT:
          {
-            std::cout << "DIRECT" << std::endl;
             if (loiterEntryPhase == 1) {
                // fly our standard rate of turn to the next point
                ok = flySRT();
@@ -470,7 +468,6 @@ bool Autopilot::flyLoiterEntry()
          //-----------------------------------------------------------
          case PARALLEL:
          {
-            std::cout << "PARALLEL" << std::endl;
             if (loiterEntryPhase == 1) {
                setCommandedHeadingD(obCrsDeg);
                //distCmdNM = velMps * 60.0 * Basic::Distance::M2NM;  // 1 min = 60 sec
@@ -495,7 +492,6 @@ bool Autopilot::flyLoiterEntry()
 
          case TEARDROP:
          {
-            std::cout << "TEARDROP" << std::endl;
             if (loiterEntryPhase == 1) {
                if (!loiterCcwFlag)  { hdgCmdDeg = Basic::Angle::aepcdDeg(obCrsDeg - 30.0); }
                else                 { hdgCmdDeg = Basic::Angle::aepcdDeg(obCrsDeg + 30.0); }
@@ -523,7 +519,6 @@ bool Autopilot::flyLoiterEntry()
          //-----------------------------------------------------------
          case LOITER:
          {
-            //std::cout << "LOITER" << std::endl;
             flyLoiter();
          }
          break;  // end case LOITER
@@ -570,7 +565,6 @@ bool Autopilot::flyLoiter()
          if (std::fabs(posErrDeg) > 90.0) { isInbound = false; }
       }
       else {
-         std::cout << "Outbound" << std::endl;
          ok = flyCRS(loiterMirrorLat, loiterMirrorLon, obCrs);
          posErrDeg = Basic::Angle::aepcdDeg(brgDeg - obCrs);
          if (std::fabs(posErrDeg) > 90.0) { isInbound = true; }

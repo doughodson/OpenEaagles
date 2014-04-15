@@ -20,6 +20,9 @@ basic
       1) Adding more explicit "std" namespace qualifiers and reducing the number
          of includes (e.g., cstdio, cstdlib, string)
 
+   TcpHandler class
+      1) recvData() was modified to check for closed connection or errors.
+
 --------------------------------------------------------------------------------
 basicGL
 
@@ -31,6 +34,9 @@ basicGL
 --------------------------------------------------------------------------------
 dis
 
+   NetIO class
+      1) processElectromagneticEmissionPDU() -- changed to only attempt to process
+      the PDU if there were handlers provided.
 
 --------------------------------------------------------------------------------
 gui-glut
@@ -42,6 +48,9 @@ maps
 --------------------------------------------------------------------------------
 otw
 
+   CigiClNetworkSignalProcessing class
+      1) OnHotResp() -- added support for a CigiHatHotRespV3_2 type argument
+
 
 --------------------------------------------------------------------------------
 recorder
@@ -49,6 +58,9 @@ recorder
 
 --------------------------------------------------------------------------------
 simulation
+ 
+   Autopilot class
+      1) Removed old debug print statements
 
    StabilizingGimbal.cpp
       1) fixed slottable entry (bug fix)
