@@ -735,7 +735,7 @@ int Otw::compareKey2Model(const void* key, const void* model)
 
       else if (pKeyFedName != 0 && pModelFedName == 0) result = +1;
 
-      else if (pKeyFedName == 0 && pModelFedName != 0) {
+      else if (pKeyFedName != 0 && pModelFedName != 0) {
          result = std::strcmp(*pKeyFedName, *pModelFedName);
       }
    }

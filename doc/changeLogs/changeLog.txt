@@ -62,6 +62,9 @@ simulation
    Autopilot class
       1) Removed old debug print statements
 
+   Otw class
+      1) compareKey2Model() -- Corrected null pointer check on pKeyFedName (bug fix)
+
    StabilizingGimbal.cpp
       1) fixed slottable entry (bug fix)
 
