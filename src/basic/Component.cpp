@@ -18,7 +18,7 @@
 // they are quite annoying to see over and over again...
 
 #if(_MSC_VER>=1400)   // VC8+
-# pragma warning(disable: 4996)
+ #pragma warning(disable: 4996)
 #endif
 
 namespace Eaagles {

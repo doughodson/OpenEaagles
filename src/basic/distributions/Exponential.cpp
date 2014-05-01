@@ -56,8 +56,8 @@ void Exponential::copyData(const Exponential& org, const bool cc)
 double Exponential::draw()
 {
   // draw a random value in the open interval (0,1)
-  double x = drawOpen();
-  double z = (-1/lambda) * std::log(x);
+  const double x = drawOpen();
+  const double z = (-1/lambda) * std::log(x);
   return gamma + z;
 }
 

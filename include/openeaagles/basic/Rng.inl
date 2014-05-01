@@ -62,7 +62,7 @@ inline double Rng::drawExponential(const double lambda)
 {
    double e = 0.0;
    if (lambda != 0.0) {
-      double u = drawOpen();
+      const double u = drawOpen();
       e = -std::log(u) / lambda;  // u != 0
    }
    return e;
@@ -77,11 +77,11 @@ inline double Rng::drawExponential(const double lambda)
 inline unsigned int Rng::drawGeometric(const double p)
 {
    unsigned int g = 0;
-   bool ok = ( (0.0 < p) && (p < 1.0) );
+   const bool ok = ( (0.0 < p) && (p < 1.0) );
    if (ok) {
-      double u = drawOpen();
-      double num = std::log(u);        // log(0) undefined => u in (0,1)
-      double den = std::log(1.0 - p);  // log(0) undefined => p in (0,1)
+      const double u = drawOpen();
+      const double num = std::log(u);        // log(0) undefined => u in (0,1)
+      const double den = std::log(1.0 - p);  // log(0) undefined => p in (0,1)
       g = (unsigned int) (num/den); 
    }
    return g;
@@ -110,7 +110,7 @@ inline double Rng::drawUniformCont(const double a, const double b)
 inline int Rng::drawUniformDisc(const int i, const int j)
 {
    int k = 0;
-   bool ok = (i <= j);
+   const bool ok = (i <= j);
    if (ok) {
       k = int( (j - i + 1.0)*drawClosed() ) + i;
    }
@@ -127,7 +127,7 @@ inline double Rng::drawRayleigh(const double alpha)
 {
    double r = 0.0;
    if (alpha > 0.0) {
-      double u = drawOpen();
+      const double u = drawOpen();
       r = alpha * std::sqrt(-2.0 * std::log(u));  // u in (0,1)
    }
    return r;
@@ -236,7 +236,6 @@ inline unsigned int Rng::drawPoisson(const double alpha)
 //-----------------------------------------------------------------
 inline double Rng::drawGamma(const double alpha, const double beta)
 {
-
    return 0.0;
 }
 
@@ -252,7 +251,7 @@ inline double Rng::drawErlang(const unsigned int m, const double a)
    for (unsigned int i = 0; i < m; i++) {
       w *= drawOpen();
    }
-   double e = -(a/m)*std::log(w);
+   const double e = -(a/m)*std::log(w);
    return e;
 }
 

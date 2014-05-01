@@ -2091,7 +2091,7 @@ const Ntm* NtmInputNode::findNtmByTypeCodes(
          if (level < EXTRA_LVL) {
             const Basic::List::Item* item = subnodeList->getFirstItem();
             while (item != 0 && result == 0) {
-               const NtmInputNode* subnode = (const NtmInputNode*) item->getValue();
+               const NtmInputNode* subnode = static_cast<const NtmInputNode*>(item->getValue());
                result = subnode->findNtmByTypeCodes(kind, domain, countryCode, category, subcategory, specific, extra);
                item = item->getNext();
             }
@@ -2214,7 +2214,9 @@ bool NtmInputNode::add2OurLists(Simulation::Ntm* const ntm)
             bool alreadyExists = false;
             const Basic::List::Item* item = subnodeList->getFirstItem();
             while (item != 0 && !alreadyExists) {
-               NtmInputNode* subnode = (NtmInputNode*) item->getValue();
+               //NtmInputNode* subnode = (NtmInputNode*) item->getValue();
+               const NtmInputNode* csubnode = static_cast<const NtmInputNode*>(item->getValue());
+               NtmInputNode* subnode = const_cast<NtmInputNode*>(csubnode);
                alreadyExists = (nextLevelCode == subnode->code);
                item = item->getNext();
             }
@@ -2244,7 +2246,9 @@ bool NtmInputNode::add2OurLists(Simulation::Ntm* const ntm)
          if (!ok && !err && level < SPECIFIC_LVL) {
             const Basic::List::Item* item = subnodeList->getFirstItem();
             while (item != 0 && !ok) {
-               NtmInputNode* subnode = (NtmInputNode*) item->getValue();
+               //NtmInputNode* subnode = (NtmInputNode*) item->getValue();
+               const NtmInputNode* csubnode = static_cast<const NtmInputNode*>(item->getValue());
+               NtmInputNode* subnode = const_cast<NtmInputNode*>(csubnode);
                if (nextLevelCode == subnode->code) {
                   ok = subnode->add2OurLists(disNtm);
                }
@@ -2287,7 +2291,7 @@ void NtmInputNode::print(std::ostream& sout, const int icnt) const
    {
       const Basic::List::Item* item = subnodeList->getFirstItem();
       while (item != 0) {
-         const NtmInputNode* subnode = (const NtmInputNode*) item->getValue();
+         const NtmInputNode* subnode = static_cast<const NtmInputNode*>(item->getValue());
          subnode->print(sout,icnt+4);
          item = item->getNext();
       }
