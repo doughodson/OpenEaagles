@@ -13,6 +13,10 @@ general
       This has no effect on API interface, but does make explicit where these functions
       are defined (for C++)
 
+   3) Moving away from using C-style casts to more proper C++ casts throughout
+      framework and examples.  No functional changes to API and no bugs found/resolved
+      as a result of this activity.  We are simply adopting a better coding practice by
+      making type casts more explicit in terms of what is functionally being done.
 --------------------------------------------------------------------------------
 basic
 
