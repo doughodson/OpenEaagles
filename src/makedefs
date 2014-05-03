@@ -62,3 +62,6 @@ CPPFLAGS += -g -O2
 CPPFLAGS += -fPIC
 CPPFLAGS += -I$(OE_ROOT)/include -I$(OE_3RD_PARTY_ROOT)/include -pthread
 CPPFLAGS += -Wno-long-long -Wall
+# warn of old c-style casts, so they can be replaced
+#CPPFLAGS += -Wold-style-cast
+
