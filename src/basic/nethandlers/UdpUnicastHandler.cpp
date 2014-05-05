@@ -136,7 +136,7 @@ bool UdpUnicastHandler::bindSocket()
        if (getLocalPort() != 0) addr.sin_port = htons (getLocalPort());  
        else addr.sin_port = htons(getPort());
 
-       if (::bind(socketNum, (const struct sockaddr *) &addr, sizeof(addr)) == SOCKET_ERROR) {
+       if (::bind(socketNum, reinterpret_cast<const struct sockaddr*>(&addr), sizeof(addr)) == SOCKET_ERROR) {
            std::perror("UdpUnicastHandler::bindSocket(): bind error");
            return false;
        }
@@ -168,7 +168,7 @@ bool UdpUnicastHandler::sendDataTo(
     addr.sin_addr.s_addr = ip0;
     addr.sin_port = htons(port0); 
     socklen_t addrlen = sizeof(addr);
-    int result = ::sendto(socketNum, packet, size, 0, (const struct sockaddr *) &addr, addrlen);
+    int result = ::sendto(socketNum, packet, size, 0, reinterpret_cast<const struct sockaddr*>(&addr), addrlen);
     if (result == SOCKET_ERROR) {
 #if defined(WIN32)
         int err = WSAGetLastError();
