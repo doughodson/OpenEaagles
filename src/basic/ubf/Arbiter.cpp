@@ -56,7 +56,7 @@ Action* Arbiter::genAction(const State* const state, const LCreal dt)
    Basic::List::Item* item = behaviors->getFirstItem();
    while (item != 0) {
       // get a behavior
-      Behavior* behavior = (Behavior*) item->getValue();
+      Behavior* behavior = static_cast<Behavior*>(item->getValue());
       // generate action, we have reference
       Action* action = behavior->genAction(state, dt);
       if (action != 0) {
@@ -144,7 +144,7 @@ bool Arbiter::setSlotBehaviors(Basic::PairStream* const x)
    {
       Basic::List::Item* item = x->getFirstItem();
       while (item != 0 && ok) {
-         Basic::Pair* pair = (Basic::Pair*) item->getValue();
+         Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
          item = item->getNext();
          Behavior* b = dynamic_cast<Behavior*>( pair->object() );
          if (b == 0) {
@@ -159,9 +159,9 @@ bool Arbiter::setSlotBehaviors(Basic::PairStream* const x)
    if (ok) {
       Basic::List::Item* item = x->getFirstItem();
       while (item != 0) {
-         Basic::Pair* pair = (Basic::Pair*) item->getValue();
+         Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
          item = item->getNext();
-         Behavior* b = (Behavior*)( pair->object() );
+         Behavior* b = static_cast<Behavior*>(pair->object());
          addBehavior(b);
       }
    }
