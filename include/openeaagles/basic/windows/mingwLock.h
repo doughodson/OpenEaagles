@@ -1,19 +1,19 @@
 // ---
 // Simple semaphore spinlock and unlock functions: 
-//    lcLock(long& s)      -- gets the semaphore w/spinlock wait
-//    lcUnlock(long& s)    -- frees the semaphore
+//    lcLock(long int& s)      -- gets the semaphore w/spinlock wait
+//    lcUnlock(long int& s)    -- frees the semaphore
 //
 //    where 's' is the semaphore that must be initialized to zero.
 //
 // MinGW version
 // ---
 
-inline void lcLock(long& semaphore)
+inline void lcLock(long int& semaphore)
 {
 
 #if 0
 
-   int* sem = (int*) &semaphore;
+   long int* sem = static_cast<long int*>(&semaphore);
    while (__sync_lock_test_and_set(sem, 1));
 
 #else
@@ -41,11 +41,11 @@ inline void lcLock(long& semaphore)
 
 }
 
-inline void lcUnlock(long& semaphore)
+inline void lcUnlock(long int& semaphore)
 {
 #if 0
 
-   int* sem = (int*) &semaphore;
+   long int* sem = static_cast<long int*>(&semaphore);
    __sync_lock_release(sem);
 
 #else
