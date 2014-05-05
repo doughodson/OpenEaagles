@@ -60,8 +60,11 @@ CPPFLAGS += -g -O2
 # Modify standard flags
 # ---
 CPPFLAGS += -fPIC
-CPPFLAGS += -I$(OE_ROOT)/include -I$(OE_3RD_PARTY_ROOT)/include -pthread
-CPPFLAGS += -Wno-long-long -Wall
+CPPFLAGS += -I$(OE_ROOT)/include -I$(OE_3RD_PARTY_ROOT)/include
+#CPPFLAGS += -isystem$(OE_ROOT)/include -isystem$(OE_3RD_PARTY_ROOT)/include
+CPPFLAGS += -pthread
+CPPFLAGS += -Wno-long-long
+CPPFLAGS += -Wall
 # warn of old c-style casts, so they can be replaced
 #CPPFLAGS += -Wold-style-cast
 
