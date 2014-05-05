@@ -13,7 +13,7 @@ inline void lcLock(long& semaphore)
 
 #if 1
 
-   int* sem = (int*) &semaphore;
+   long int* sem = static_cast<long int*>(&semaphore);
    while (__sync_lock_test_and_set(sem, 1));
 
 #else
@@ -45,7 +45,7 @@ inline void lcUnlock(long& semaphore)
 {
 #if 1
 
-   int* sem = (int*) &semaphore;
+   long int* sem = static_cast<long int*>(&semaphore);
    __sync_lock_release(sem);
 
 #else

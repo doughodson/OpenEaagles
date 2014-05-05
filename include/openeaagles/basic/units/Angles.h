@@ -193,7 +193,7 @@ public:
     Degrees(const Angle& value);
 
     static double convertStatic(const Angle& n)     { return n.toAngle() * SC2D; }
-    virtual double toAngle() const                  { return (double)(val * D2SC); }
+    virtual double toAngle() const                  { return static_cast<double>(val * D2SC); }
     virtual double fromAngle(const double a) const  { return a * SC2D; }
 };
 
@@ -213,7 +213,7 @@ public:
     Radians(const Angle& value);
 
     static double convertStatic(const Angle& n)     { return n.toAngle() * SC2R; }
-    virtual double toAngle() const                  { return (double)(val * R2SC); }
+    virtual double toAngle() const                  { return static_cast<double>(val * R2SC); }
     virtual double fromAngle(const double a) const  { return a * SC2R; }
 };
 
@@ -234,7 +234,7 @@ public:
     Semicircles(const Angle& value);
 
     static double convertStatic(const Angle& n)     { return n.toAngle(); }
-    virtual double toAngle() const                  { return (double)(val); }
+    virtual double toAngle() const                  { return static_cast<double>(val); }
     virtual double fromAngle(const double a) const  { return a; }
 };
 

@@ -162,7 +162,7 @@ public:
     Meters(const Distance& value);
 
     static LCreal convertStatic(const Distance& n)       { return n.toDistance(); }
-    virtual LCreal toDistance() const                    { return (LCreal)(val); }
+    virtual LCreal toDistance() const                    { return static_cast<LCreal>(val); }
     virtual LCreal fromDistance(const LCreal a) const    { return a; }
 };
 
@@ -182,7 +182,7 @@ public:
     CentiMeters(const Distance& value);
 
     static LCreal convertStatic(const Distance& n)       { return n.toDistance() * M2CM; }
-    virtual LCreal toDistance() const                    { return (LCreal)(val * CM2M); }
+    virtual LCreal toDistance() const                    { return static_cast<LCreal>(val * CM2M); }
     virtual LCreal fromDistance(const LCreal a) const    { return a * M2CM; }
 };
 
@@ -203,7 +203,7 @@ public:
     MicroMeters(const Distance& value);
 
     static LCreal convertStatic(const Distance& n)      { return n.toDistance() * M2UM; }
-    virtual LCreal toDistance() const                   { return (LCreal)(val * UM2M); }
+    virtual LCreal toDistance() const                   { return static_cast<LCreal>(val * UM2M); }
     virtual LCreal fromDistance(const LCreal a) const   { return a * M2UM; }
 };
 
@@ -222,7 +222,7 @@ public:
     Microns(const Distance& value);
 
     static LCreal convertStatic(const Distance& n)      { return n.toDistance() * M2UM; }
-    virtual LCreal toDistance() const                   { return (LCreal)(val * UM2M); }
+    virtual LCreal toDistance() const                   { return static_cast<LCreal>(val * UM2M); }
     virtual LCreal fromDistance(const LCreal a) const   { return a * M2UM; }
 };
 //------------------------------------------------------------------------------
@@ -240,7 +240,7 @@ public:
     KiloMeters(const Distance& value);
 
     static LCreal convertStatic(const Distance& n)     { return n.toDistance() * M2KM; }
-    virtual LCreal toDistance() const                  { return (LCreal)(val * KM2M); }
+    virtual LCreal toDistance() const                  { return static_cast<LCreal>(val * KM2M); }
     virtual LCreal fromDistance(const LCreal a) const  { return a * M2KM; }
 };
 
@@ -260,7 +260,7 @@ public:
     Inches(const Distance& value);
 
     static LCreal convertStatic(const Distance& n)     { return n.toDistance() * M2IN; }
-    virtual LCreal toDistance() const                  { return (LCreal)(val * IN2M); }
+    virtual LCreal toDistance() const                  { return static_cast<LCreal>(val * IN2M); }
     virtual LCreal fromDistance(const LCreal a) const  { return a * M2IN; }
 };
 
@@ -280,7 +280,7 @@ public:
     Feet(const Distance& value);
 
     static LCreal convertStatic(const Distance& n)     { return n.toDistance() * M2FT; }
-    virtual LCreal toDistance() const                  { return (LCreal)(val * FT2M); }
+    virtual LCreal toDistance() const                  { return static_cast<LCreal>(val * FT2M); }
     virtual LCreal fromDistance(const LCreal a) const  { return a * M2FT; }
 };
 
@@ -300,7 +300,7 @@ public:
     NauticalMiles(const Distance& value);
 
     static LCreal convertStatic(const Distance& n)    { return n.toDistance() * M2NM; }
-    virtual LCreal toDistance() const                 { return (LCreal)(val * NM2M); }
+    virtual LCreal toDistance() const                 { return static_cast<LCreal>(val * NM2M); }
     virtual LCreal fromDistance(const LCreal a) const { return a * M2NM; }
 };
 
@@ -320,7 +320,7 @@ public:
     StatuteMiles(const Distance& value);
 
     static LCreal convertStatic(const Distance& n)    { return n.toDistance() * M2SM; }
-    virtual LCreal toDistance() const                 { return (LCreal)(val * SM2M); }
+    virtual LCreal toDistance() const                 { return static_cast<LCreal>(val * SM2M); }
     virtual LCreal fromDistance(const LCreal a) const { return a * M2SM; }
 };
 

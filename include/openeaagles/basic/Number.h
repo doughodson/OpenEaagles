@@ -40,17 +40,17 @@ class Number : public Object {
 
 public:
    Number()                         { val = 0.0;   STANDARD_CONSTRUCTOR() }
-   Number(const int value)          { val = (double) value; STANDARD_CONSTRUCTOR() }
-   Number(const Integer64 value)    { val = (double) value; STANDARD_CONSTRUCTOR() }
+   Number(const int value)          { val = static_cast<double>(value); STANDARD_CONSTRUCTOR() }
+   Number(const Integer64 value)    { val = static_cast<double>(value); STANDARD_CONSTRUCTOR() }
    Number(const bool value)         { val = (value ? 1.0 : 0.0); STANDARD_CONSTRUCTOR() }
    Number(const LCreal value)       { val = value; STANDARD_CONSTRUCTOR() }
    Number(const float value)        { val = value; STANDARD_CONSTRUCTOR() }
 
-   LCreal getReal() const           { return (LCreal) val; }
+   LCreal getReal() const           { return static_cast<LCreal>(val); }
    double getDouble() const         { return val; }
-   float getFloat() const           { return float(val); }
-   int getInt() const               { return int(val); }
-   Integer64 getInt64() const       { return Integer64(val); }
+   float getFloat() const           { return static_cast<float>(val); }
+   int getInt() const               { return static_cast<int>(val); }
+   Integer64 getInt64() const       { return static_cast<Integer64>(val); }
    bool getBoolean() const          { return (val != 0.0); }
 
    virtual void setValue(const double nv)   { val = nv; }
