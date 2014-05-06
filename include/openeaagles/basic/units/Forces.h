@@ -141,7 +141,7 @@ public:
 
     static LCreal convertStatic(const Force& n)       { return n.toForce(); }
     //this goes to another force
-    virtual LCreal toForce() const                    { return (LCreal)(val); }  
+    virtual LCreal toForce() const                    { return static_cast<LCreal>(val); }  
     //this is coming from another force
     virtual LCreal fromForce(const LCreal a) const    { return a; }
 };
@@ -162,7 +162,7 @@ public:
     KiloNewtons(const Force& value);
 
     static LCreal convertStatic(const Force& n)       { return n.toForce() * N2KN; }
-    virtual LCreal toForce() const                    { return (LCreal)(val * KN2N); }
+    virtual LCreal toForce() const                    { return static_cast<LCreal>(val * KN2N); }
     virtual LCreal fromForce(const LCreal a) const    { return a * N2KN; }
 };
 
@@ -182,7 +182,7 @@ public:
     PoundForces(const Force& value);
 
     static LCreal convertStatic(const Force& n)       { return n.toForce() * N2PF; }
-    virtual LCreal toForce() const                    { return (LCreal)(val * PF2N); }
+    virtual LCreal toForce() const                    { return static_cast<LCreal>(val * PF2N); }
     virtual LCreal fromForce(const LCreal a) const    { return a * N2PF; }
 };
 
@@ -202,7 +202,7 @@ public:
     Poundals(const Force& value);
 
     static LCreal convertStatic(const Force& n)       { return n.toForce() * N2PD; }
-    virtual LCreal toForce() const                    { return (LCreal)(val * PD2N); }
+    virtual LCreal toForce() const                    { return static_cast<LCreal>(val * PD2N); }
     virtual LCreal fromForce(const LCreal a) const    { return a * N2PD; }
 };
 

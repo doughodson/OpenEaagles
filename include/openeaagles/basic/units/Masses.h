@@ -132,7 +132,7 @@ public:
 
     static LCreal convertStatic(const Mass &n)      { return n.toMass(); }
     //this goes to another mass (kilograms)
-    virtual LCreal toMass() const                   { return (LCreal)(val); }  
+    virtual LCreal toMass() const                   { return static_cast<LCreal>(val); }  
     //this is coming from another mass (kilograms)
     virtual LCreal fromMass(const LCreal a) const   { return a; }
 };
@@ -153,7 +153,7 @@ public:
     Grams(const Mass& value);
 
     static LCreal convertStatic(const Mass &n)      { return n.toMass() * KG2G; }
-    virtual LCreal toMass() const                   { return (LCreal)(val * G2KG); }
+    virtual LCreal toMass() const                   { return static_cast<LCreal>(val * G2KG); }
     virtual LCreal fromMass(const LCreal a) const   { return a * KG2G; }
 };
 
@@ -173,7 +173,7 @@ public:
     Slugs(const Mass& value);
 
     static LCreal convertStatic(const Mass &n)      { return n.toMass() * KG2SL; }
-    virtual LCreal toMass() const                   { return (LCreal)(val * SL2KG); }
+    virtual LCreal toMass() const                   { return static_cast<LCreal>(val * SL2KG); }
     virtual LCreal fromMass(const LCreal a) const   { return a * KG2SL; }
 };
 

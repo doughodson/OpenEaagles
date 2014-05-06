@@ -203,13 +203,13 @@ std::ostream& FlowRate::serialize(std::ostream& sout, const int i, const bool sl
     if (myVolume != 0) {
         indent(sout, i+j);
         sout << "volume: ";
-        Volume* mv = (Volume*) myVolume;
+        Volume* mv = static_cast<Volume*>(myVolume);
         mv->serialize(sout, i+j);
     }
     if (myTime != 0) {
         indent(sout, i+j);
         sout << "time: ";
-        Time* mt = (Time*) myTime;
+        Time* mt = static_cast<Time*>(myTime);
         mt->serialize(sout, i+j);
     }
     

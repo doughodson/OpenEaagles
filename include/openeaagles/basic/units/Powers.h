@@ -151,7 +151,7 @@ public:
     Watts(const Power& org);
 
     static LCreal convertStatic(const Power &n)     { return n.toPower(); }
-    virtual LCreal toPower() const                  { return (LCreal)(val); }
+    virtual LCreal toPower() const                  { return static_cast<LCreal>(val); }
     virtual LCreal fromPower(const LCreal a) const  { return a; }
 };
 
@@ -170,7 +170,7 @@ public:
     MilliWatts(const Power& org);
 
     static LCreal convertStatic(const Power &n)     { return n.toPower() * W2MW; }
-    virtual LCreal toPower() const                  { return (LCreal)(val * MW2W); }
+    virtual LCreal toPower() const                  { return static_cast<LCreal>(val * MW2W); }
     virtual LCreal fromPower(const LCreal a) const  { return a * W2MW; }
 };
 
@@ -190,7 +190,7 @@ public:
 
     static LCreal convertStatic(const Power &n)     { return n.toPower() * W2KW; }
     //this goes to another power
-    virtual LCreal toPower() const                  { return (LCreal)(val * KW2W); }
+    virtual LCreal toPower() const                  { return static_cast<LCreal>(val * KW2W); }
     //this is coming from another power
     virtual LCreal fromPower(const LCreal a) const  { return a * W2KW; }
 };
@@ -210,7 +210,7 @@ public:
     Horsepower(const Power& org);
 
     static LCreal convertStatic(const Power &n)     { return n.toPower() * W2HP; }
-    virtual LCreal toPower() const                  { return (LCreal)(val * HP2W); }
+    virtual LCreal toPower() const                  { return static_cast<LCreal>(val * HP2W); }
     virtual LCreal fromPower(const LCreal a) const  { return a * W2HP; }
 };
 
@@ -228,8 +228,8 @@ public:
     DecibelWatts(const LCreal value);
     DecibelWatts(const Power& org);
 
-    static LCreal convertStatic(const Power &n)     { return (LCreal)(10.0 * lcLog10(n.toPower())); }
-    virtual LCreal toPower() const                  { return  lcPow(LCreal(10.0), LCreal(val/10.0)); }
+    static LCreal convertStatic(const Power &n)     { return static_cast<LCreal>(10.0 * lcLog10(n.toPower())); }
+    virtual LCreal toPower() const                  { return  lcPow(static_cast<LCreal>(10.0), static_cast<LCreal>(val/10.0)); }
     virtual LCreal fromPower(const LCreal a) const  { return 10.0f * lcLog10(a) ; }
 
 };
@@ -248,8 +248,8 @@ public:
     DecibelMilliWatts(const LCreal value);
     DecibelMilliWatts(const Power& org);
 
-    static LCreal convertStatic(const Power &n)     { return (LCreal)(10.0 * lcLog10(n.toPower() * W2MW)); }
-    virtual LCreal toPower() const                  { return  MW2W * lcPow(LCreal(10.0), LCreal(val/10.0)); }
+    static LCreal convertStatic(const Power &n)     { return static_cast<LCreal>(10.0 * lcLog10(n.toPower() * W2MW)); }
+    virtual LCreal toPower() const                  { return  MW2W * lcPow(static_cast<LCreal>(10.0), static_cast<LCreal>(val/10.0)); }
     virtual LCreal fromPower(const LCreal a) const  { return (10.0f * lcLog10(a * W2MW)); }
 
 };

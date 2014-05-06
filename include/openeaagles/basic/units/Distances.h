@@ -89,7 +89,7 @@ public:
     void set(const Distance& n) { val = fromDistance(n.toDistance()); }
 
     virtual LCreal toDistance() const = 0;
-    virtual LCreal fromDistance(const LCreal a) const = 0;  
+    virtual LCreal fromDistance(const LCreal) const = 0;  
     LCreal convert(const Distance& n) { return fromDistance(n.toDistance()); }
 
 

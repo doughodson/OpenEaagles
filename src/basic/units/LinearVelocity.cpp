@@ -119,7 +119,7 @@ void LinearVelocity::deleteData()
 //---------------------------------------------------------------------
 LCreal LinearVelocity::getMetersPerSecond() const
 {
-    return (LCreal)(val); 
+    return static_cast<LCreal>(val); 
 };
 
 //---------------------------------------------------------------------
@@ -139,7 +139,7 @@ LCreal LinearVelocity::convert(Distance* newDistanceUnit, Time* newTimeUnit)
     newTimeUnit->setValue(1);
 
     //Take the internal unit and create an object of Meters to convert distances:
-    Meters* internalMeters = new Meters((LCreal)distance);
+    Meters* internalMeters = new Meters(static_cast<LCreal>(distance));
 
     //Find out what units the distance is in:
     if(dynamic_cast<Feet*>(newDistanceUnit) != 0)
