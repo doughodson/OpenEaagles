@@ -10,15 +10,15 @@ namespace Basic {
 //------------------------------------------------------------------------------
 SlotTable::SlotTable(const char* s[], const unsigned int ns, const SlotTable& base)
 {
-   baseTable = (SlotTable*) &base;
-   slots1 = (char**) s;
+   baseTable = const_cast<SlotTable*>(&base);
+   slots1 = const_cast<char**>(s);
    nslots1 = ns;
 }
 
 SlotTable::SlotTable(const char* s[], const unsigned int ns)
 {
-   baseTable = (SlotTable*) 0;
-   slots1 = (char**) s;
+   baseTable = static_cast<SlotTable*>(0);
+   slots1 = const_cast<char**>(s);
    nslots1 = ns;
 }
 
@@ -73,7 +73,7 @@ const char* SlotTable::name(const unsigned int slotindex) const
 
    // if not in baseTable, check our table
    if (name == 0) {
-      int i = (int) slotindex;                  // a) start with slotindex
+      int i = static_cast<int>(slotindex);      // a) start with slotindex
       if (baseTable != 0) i -= baseTable->n();  // b) subt baseTable->n()
       --i;                                      // c) make it zero based
       if (i >= 0) name = slots1[i];             // d) get the name
