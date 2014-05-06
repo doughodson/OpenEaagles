@@ -220,9 +220,9 @@ bool PosixHandler::setSendBuffSize()
    const unsigned int optval = sendBuffSizeKb * 1024;
    socklen_t optlen = sizeof(optval);
 #if defined(WIN32)
-   if (::setsockopt(socketNum, SOL_SOCKET, SO_SNDBUF, static_cast<const char*>(&optval), optlen) == SOCKET_ERROR) {
+   if (::setsockopt(socketNum, SOL_SOCKET, SO_SNDBUF, reinterpret_cast<const char*>(&optval), optlen) == SOCKET_ERROR) {
 #else
-   if (::setsockopt(socketNum, SOL_SOCKET, SO_SNDBUF, static_cast<const void*>(&optval), optlen) == SOCKET_ERROR) {
+   if (::setsockopt(socketNum, SOL_SOCKET, SO_SNDBUF, reinterpret_cast<const void*>(&optval), optlen) == SOCKET_ERROR) {
 #endif
       std::perror("PosixHandler::setSendBuffSize(): error setting the send buffer size\n");
       return false;
@@ -240,9 +240,9 @@ bool PosixHandler::setRecvBuffSize()
    const unsigned int optval = recvBuffSizeKb * 1024;
    socklen_t optlen = sizeof (optval);
 #if defined(WIN32)
-   if (::setsockopt(socketNum, SOL_SOCKET, SO_RCVBUF, static_cast<const char*>(&optval), optlen) == SOCKET_ERROR) {
+   if (::setsockopt(socketNum, SOL_SOCKET, SO_RCVBUF, reinterpret_cast<const char*>(&optval), optlen) == SOCKET_ERROR) {
 #else
-   if (::setsockopt(socketNum, SOL_SOCKET, SO_RCVBUF, static_cast<const void*>(&optval), optlen) == SOCKET_ERROR) {
+   if (::setsockopt(socketNum, SOL_SOCKET, SO_RCVBUF, reinterpret_cast<const void*>(&optval), optlen) == SOCKET_ERROR) {
 #endif
       std::perror("PosixHandler::setRecvBuffSize(): error setting the receive buffer size\n");
       return false;
