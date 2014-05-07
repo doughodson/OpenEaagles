@@ -114,7 +114,9 @@ solution "oe"
          "../../include/openeaagles/basic/**.inl",
          "../../include/openeaagles/basic/**.epp",
          "../../include/openeaagles/basic/osg/*",
-         "../../src/basic/**.cpp"
+         "../../src/basic/**.cpp",
+         "../../src/basic/windows/Thread.cxx",
+         "../../src/basic/windows/vsSupport.cxx"
       }
       excludes {
          "../../src/basic/osg/Matrix_implementation.cpp",
