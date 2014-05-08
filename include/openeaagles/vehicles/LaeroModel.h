@@ -25,6 +25,8 @@ public:
    virtual bool setCommandedAltitude(const double a, const double aMps = 0, const double maxPitch = 0);
    virtual bool setCommandedVelocityKts(const double v, const double vNps = 0);
 
+   virtual void reset();
+
 protected:
    //-----------------------------------
    // flight interface

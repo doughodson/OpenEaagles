@@ -498,6 +498,12 @@ inline double Player::getInitAltitude() const
    return initAlt;
 }
 
+// Initial total velocity
+inline LCreal Player::getInitVelocity() const
+{
+   return initVp;
+}
+
 // Initial Euler angles (radians)
 inline const osg::Vec3d& Player::getInitAngles() const
 {
