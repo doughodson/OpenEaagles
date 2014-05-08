@@ -109,7 +109,7 @@ bool TcpServerMultiple::bindSocket()
       else addr.sin_port = htons(getPort());
 
       // Only in server do we bind
-      if (::bind(socketNum, (const struct sockaddr *) &addr, sizeof(addr)) == SOCKET_ERROR) {
+      if (::bind(socketNum, reinterpret_cast<const struct sockaddr*>(&addr), sizeof(addr)) == SOCKET_ERROR) {
          std::perror("TcpHandler::bindSocket(): bind error");
          return false;
       }
@@ -149,7 +149,7 @@ TcpHandler* TcpServerMultiple::acceptConnection()
    if (isMessageEnabled(MSG_INFO)) {
        std::cout << "Waiting to accept connection on " << getPort() << " ... " << std::endl;
    }
-   newSocket = ::accept(socketNum, (struct sockaddr *) &clientAddr, &cAddrSize);
+   newSocket = ::accept(socketNum, reinterpret_cast<struct sockaddr*>(&clientAddr), &cAddrSize);
    // Since INVALID_SOCKET is defined as -1 for POSIX, ::accept will return
    // INVALID_SOCKET as the error condition (see MSDN help and POSIX man pages
    // for more information).

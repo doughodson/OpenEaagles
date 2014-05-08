@@ -139,9 +139,9 @@ inline void Time::getHHMMSS(const LCreal sec, int* const hh, int* const mm, int*
     LCreal rem = sec;
 
     *hh  = int(rem / 3600.0f);
-    rem -= LCreal(*hh) * 3600.0f;
+    rem -= static_cast<LCreal>(*hh) * 3600.0f;
     *mm  = int(rem / 60.0f);
-    rem -= LCreal(*mm) * 60.0f;
+    rem -= static_cast<LCreal>(*mm) * 60.0f;
     *ss  = nint(rem);
 }
 
@@ -151,16 +151,16 @@ inline void Time::getHHMMSS(const LCreal sec, int* const hh, int* const mm, LCre
     LCreal rem = sec;
 
     *hh  = int(rem / 3600.0f);
-    rem -= LCreal(*hh) * 3600.0f;
+    rem -= static_cast<LCreal>(*hh) * 3600.0f;
     *mm  = int(rem / 60.0f);
-    rem -= LCreal(*mm) * 60.0f;
+    rem -= static_cast<LCreal>(*mm) * 60.0f;
     *ss  = rem;
 }
 
 // putHHMMSS -- convert integer hours, minutes and seconds to time in seconds
 inline LCreal Time::putHHMMSS(const int hh, const int mm, const int ss)
 {
-    return LCreal((3600.0f * hh) + (60.0f * mm) + ss);
+    return static_cast<LCreal>((3600.0f * hh) + (60.0f * mm) + ss);
 }
 
 //------------------------------------------------------------------------------
@@ -177,7 +177,7 @@ public:
     Seconds(const Time& org);
 
     static LCreal convertStatic(const Time &n)     { return n.toTime(); }
-    virtual LCreal toTime() const                  { return (LCreal)(val); }
+    virtual LCreal toTime() const                  { return static_cast<LCreal>(val); }
     virtual LCreal fromTime(const LCreal a) const  { return a; }
 };
 
@@ -197,7 +197,7 @@ public:
     MilliSeconds(const Time& org);
 
     static LCreal convertStatic(const Time &n)     { return n.toTime() * S2MS; }
-    virtual LCreal toTime() const                  { return (LCreal)(val * MS2S); }
+    virtual LCreal toTime() const                  { return static_cast<LCreal>(val * MS2S); }
     virtual LCreal fromTime(const LCreal a) const  { return a * S2MS; }
 };
 
@@ -217,7 +217,7 @@ public:
     MicroSeconds(const Time& org);
 
     static LCreal convertStatic(const Time &n)     { return n.toTime() * S2US; }
-    virtual LCreal toTime() const                  { return (LCreal)(val * US2S); }
+    virtual LCreal toTime() const                  { return static_cast<LCreal>(val * US2S); }
     virtual LCreal fromTime(const LCreal a) const  { return a * S2US; }
 };
 
@@ -237,7 +237,7 @@ public:
     NanoSeconds(const Time& org);
 
     static LCreal convertStatic(const Time &n)     { return n.toTime() * S2NS; }
-    virtual LCreal toTime() const                  { return (LCreal)(val * NS2S); }
+    virtual LCreal toTime() const                  { return static_cast<LCreal>(val * NS2S); }
     virtual LCreal fromTime(const LCreal a) const  { return a * S2NS; }
 };
 
@@ -257,7 +257,7 @@ public:
     Minutes(const Time& org);
 
     static LCreal convertStatic(const Time &n)     { return n.toTime() * S2M; }
-    virtual LCreal toTime() const                  { return (LCreal)(val * M2S); }
+    virtual LCreal toTime() const                  { return static_cast<LCreal>(val * M2S); }
     virtual LCreal fromTime(const LCreal a) const  { return a * S2M; }
 };
 
@@ -277,7 +277,7 @@ public:
     Hours(const Time& org);
 
     static LCreal convertStatic(const Time &n)     { return n.toTime() * S2H; }
-    virtual LCreal toTime() const                  { return (LCreal)(val * H2S); }
+    virtual LCreal toTime() const                  { return static_cast<LCreal>(val * H2S); }
     virtual LCreal fromTime(const LCreal a) const  { return a * S2H; }
 };
 
@@ -297,7 +297,7 @@ public:
     Days(const Time& org);
 
     static LCreal convertStatic(const Time &n)    { return n.toTime() * S2D; }
-    virtual LCreal toTime() const                 { return (LCreal)(val * D2S); }
+    virtual LCreal toTime() const                 { return static_cast<LCreal>(val * D2S); }
     virtual LCreal fromTime(const LCreal a) const { return a * S2D; }
 };
 

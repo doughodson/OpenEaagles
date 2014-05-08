@@ -116,24 +116,24 @@ double RVector::getMinMag() const
 void RVector::showVector(const unsigned int DECPNT,
                          const unsigned int FLDWTH) const
 {
-   ((const Matrix*)this)->showMatrix(DECPNT, FLDWTH);
+   static_cast<const Matrix*>(this)->showMatrix(DECPNT, FLDWTH);
    //std::cout << std::endl;
 }
 
 std::ostream& operator<<(std::ostream& sout, const RVector& V)
 {
-   sout << *((const Matrix*)&V) << std::endl;
+   sout << *(static_cast<const Matrix*>(&V)) << std::endl;
    return sout;
 }
 
 bool RVector::setDecPoint(const unsigned int DP)
 {
-   return ((Matrix*)this)->setDecPoint(DP);
+   return static_cast<Matrix*>(this)->setDecPoint(DP);
 }
 
 bool RVector::setFldWidth(const unsigned int FW)
 {
-   return ((Matrix*)this)->setFldWidth(FW);
+   return static_cast<Matrix*>(this)->setFldWidth(FW);
 }
 
 
@@ -246,24 +246,24 @@ double CVector::getMinMag() const
 void CVector::showVector(const unsigned int DECPNT,
                          const unsigned int FLDWTH) const
 {
-   ((const Matrix*)this)->showMatrix(DECPNT, FLDWTH);
+   static_cast<const Matrix*>(this)->showMatrix(DECPNT, FLDWTH);
    //std::cout << std::endl;
 }
 
 std::ostream& operator<<(std::ostream& sout, const CVector& V)
 {
-   sout << *((const Matrix*)&V) << std::endl;
+   sout << *static_cast<const Matrix*>(&V) << std::endl;
    return sout;
 }
 
 bool CVector::setDecPoint(const unsigned int DP)
 {
-   return ((Matrix*)this)->setDecPoint(DP);
+   return static_cast<Matrix*>(this)->setDecPoint(DP);
 }
 
 bool CVector::setFldWidth(const unsigned int FW)
 {
-   return ((Matrix*)this)->setFldWidth(FW);
+   return static_cast<Matrix*>(this)->setFldWidth(FW);
 }
 
 

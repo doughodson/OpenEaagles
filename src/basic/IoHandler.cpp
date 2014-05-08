@@ -94,19 +94,19 @@ void IoHandler::copyData(const IoHandler& org, const bool cc)
    // ---
    if (org.inData != 0 && org.inData == org.outData) {
       // Common input/output buffer
-      IoData* copy = (IoData*) org.inData->clone();
+      IoData* copy = static_cast<IoData*>(org.inData->clone());
       setSlotIoData(copy);
       copy->unref();
    }
    else {
       // Separate input/output buffers
       if (org.inData != 0) {
-         IoData* copy = (IoData*) org.inData->clone();
+         IoData* copy = static_cast<IoData*>(org.inData->clone());
          setSlotInputData(copy);
          copy->unref();
       }
       if (org.outData != 0) {
-         IoData* copy = (IoData*) org.outData->clone();
+         IoData* copy = static_cast<IoData*>(org.outData->clone());
          setSlotOutputData(copy);
          copy->unref();
       }
@@ -116,7 +116,7 @@ void IoHandler::copyData(const IoHandler& org, const bool cc)
    // copy the list of I/O devices
    // ---
    if (org.devices !=0) {
-      PairStream* copy = (PairStream*) org.devices->clone();
+      PairStream* copy = static_cast<PairStream*>(org.devices->clone());
       setSlotDevices(copy);
       copy->unref();
    }
@@ -171,8 +171,8 @@ void IoHandler::reset()
    if (devices != 0) {
       List::Item* item = devices->getFirstItem();
       while (item != 0) {
-         Pair* const pair = (Pair*) item->getValue();
-         IoDevice* const p = (IoDevice*) pair->object();
+         Pair* const pair = static_cast<Pair* const>(item->getValue());
+         IoDevice* const p = static_cast<IoDevice* const>(pair->object());
          p->reset();
          item = item->getNext();
       }
@@ -196,8 +196,8 @@ bool IoHandler::shutdownNotification()
    if (devices != 0) {
       List::Item* item = devices->getFirstItem();
       while (item != 0) {
-         Pair* const pair = (Pair*) item->getValue();
-         IoDevice* const p = (IoDevice*) pair->object();
+         Pair* const pair = static_cast<Pair* const>(item->getValue());
+         IoDevice* const p = static_cast<IoDevice* const>(pair->object());
          p->event(SHUTDOWN_EVENT);
          item = item->getNext();
       }
@@ -263,9 +263,9 @@ void IoHandler::inputDevicesImp(const LCreal dt)
    if (devices != 0) {
       List::Item* item = devices->getFirstItem();
       while (item != 0) {
-         Pair* const pair = (Pair*) item->getValue();
-         IoDevice* const p = (IoDevice*) pair->object();
-         p->processInputs(dt,inData);
+         Pair* const pair = static_cast<Pair* const>(item->getValue());
+         IoDevice* const p = static_cast<IoDevice* const>(pair->object());
+         p->processInputs(dt, inData);
          item = item->getNext();
       }
    }
@@ -286,9 +286,9 @@ void IoHandler::outputDevicesImp(const LCreal dt)
    if (devices != 0) {
       List::Item* item = devices->getFirstItem();
       while (item != 0) {
-         Pair* const pair = (Pair*) item->getValue();
-         IoDevice* const p = (IoDevice*) pair->object();
-         p->processOutputs(dt,outData);
+         Pair* const pair = static_cast<Pair* const>(item->getValue());
+         IoDevice* const p = static_cast<IoDevice* const>(pair->object());
+         p->processOutputs(dt, outData);
          item = item->getNext();
       }
    }
@@ -345,10 +345,10 @@ bool IoHandler::setSlotDevices(PairStream* const list)
       List::Item* item = list->getFirstItem();
       while (item != 0) {
          cnt++;
-         Pair* const pair = (Pair*) item->getValue();
+         Pair* const pair = static_cast<Pair* const>(item->getValue());
          ok = pair->object()->isClassType(typeid(IoDevice));
          if (ok) {
-            ((IoDevice*) pair->object())->container(this);
+            static_cast<IoDevice*>(pair->object())->container(this);
          }
          else {
             std::cerr << "IoHandler::setSlotDevices(): Item number " << cnt;
@@ -478,9 +478,9 @@ IoThread::IoThread(Component* const parent, const LCreal priority, const LCreal 
 
 unsigned long IoThread::userFunc(const LCreal dt)
 {
-   IoHandler* ioHandler = (IoHandler*) getParent();
-   ioHandler->inputDevicesImp( LCreal(dt) );
-   ioHandler->outputDevicesImp( LCreal(dt) );
+   IoHandler* ioHandler = static_cast<IoHandler*>(getParent());
+   ioHandler->inputDevicesImp( static_cast<LCreal>(dt) );
+   ioHandler->outputDevicesImp( static_cast<LCreal>(dt) );
    return 0;
 }
 

@@ -1652,7 +1652,7 @@ const Ntm* NtmOutputNodeStd::findNetworkTypeMapper(const Player* const p) const
       // (i.e., if it's derived from our node then there may be a better match)
       const Basic::List::Item* item = subnodeList->getFirstItem();
       while (item != 0 && result == 0) {
-         const NtmOutputNodeStd* subnode = (const NtmOutputNodeStd*) item->getValue();
+         const NtmOutputNodeStd* subnode = static_cast<const NtmOutputNodeStd*>(item->getValue());
          result = subnode->findNetworkTypeMapper(p);
          item = item->getNext();
       }
@@ -1719,7 +1719,7 @@ bool NtmOutputNodeStd::add2OurLists(Ntm* const tgtNtm)
          bool found = false;
          Basic::List::Item* item = subnodeList->getFirstItem();
          while (item != 0 && !found) {
-            NtmOutputNodeStd* subnode = (NtmOutputNodeStd*) item->getValue();
+            NtmOutputNodeStd* subnode = static_cast<NtmOutputNodeStd*>(item->getValue());
             found = subnode->add2OurLists(tgtNtm);
             item = item->getNext();
          }
@@ -1764,7 +1764,7 @@ bool NtmOutputNodeStd::checkAndAddNtm(Ntm* const tgtNtm)
          // Case #2A : check if any of our subnodes is really a subnode of the new node.
          Basic::List::Item* item = subnodeList->getFirstItem();
          while (item != 0) {
-            NtmOutputNodeStd* subnode = (NtmOutputNodeStd*) item->getValue();
+            NtmOutputNodeStd* subnode = static_cast<NtmOutputNodeStd*>(item->getValue());
             item = item->getNext();
 
             if ( subnode->tp->isFactoryName( tpfn ) ) {
@@ -1872,7 +1872,7 @@ void NtmOutputNodeStd::print(std::ostream& sout, const int icnt) const
    {
       const Basic::List::Item* item = subnodeList->getFirstItem();
       while (item != 0) {
-         const NtmOutputNodeStd* subnode = (const NtmOutputNodeStd*) item->getValue();
+         const NtmOutputNodeStd* subnode = static_cast<const NtmOutputNodeStd*>(item->getValue());
          subnode->print(sout,icnt+4);
          item = item->getNext();
       }

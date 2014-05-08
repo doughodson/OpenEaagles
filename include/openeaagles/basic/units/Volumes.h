@@ -125,7 +125,7 @@ public:
     CubicMeters(const Volume& value);
 
     static LCreal convertStatic(const Volume &n)    { return n.toVolume(); }
-    virtual LCreal toVolume() const                 { return (LCreal)(val); }
+    virtual LCreal toVolume() const                 { return static_cast<LCreal>(val); }
     virtual LCreal fromVolume(const LCreal a) const { return a; }
 };
 
@@ -145,7 +145,7 @@ public:
     CubicFeet(const Volume& value);
 
     static LCreal convertStatic(const Volume &n)    { return n.toVolume() * CM2CFT; }
-    virtual LCreal toVolume() const                 { return (LCreal)(val * CFT2CM); }
+    virtual LCreal toVolume() const                 { return static_cast<LCreal>(val * CFT2CM); }
     virtual LCreal fromVolume(const LCreal a) const { return a * CM2CFT; }
 };
 
@@ -165,7 +165,7 @@ public:
     CubicInches(const Volume& value);
 
     static LCreal convertStatic(const Volume &n)    { return n.toVolume() * CM2CIN; }
-    virtual LCreal toVolume() const                 { return (LCreal)(val * CIN2CM); }
+    virtual LCreal toVolume() const                 { return static_cast<LCreal>(val * CIN2CM); }
     virtual LCreal fromVolume(const LCreal a) const { return a * CM2CIN; }
 };
 
@@ -185,7 +185,7 @@ public:
     Liters(const Volume& value);
 
     static LCreal convertStatic(const Volume &n)    { return n.toVolume() * CM2L; }
-    virtual LCreal toVolume() const                 { return (LCreal)(val * L2CM); }
+    virtual LCreal toVolume() const                 { return static_cast<LCreal>(val * L2CM); }
     virtual LCreal fromVolume(const LCreal a) const { return a * CM2L; }
 };
 

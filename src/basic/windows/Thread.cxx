@@ -20,7 +20,7 @@ static const unsigned int MAX_CPUS = 32;
 //-----------------------------------------------------------------------------
 DWORD WINAPI Thread::staticThreadFunc(LPVOID lpParam) 
 {
-   Thread* thread = (Thread*) lpParam;
+   Thread* thread = static_cast<Thread*>(lpParam);
    Component* parent = thread->getParent();
 
    // Make sure that our Thread class and its parent are not going to go a way.
@@ -226,16 +226,16 @@ unsigned long ThreadPeriodicTask::mainThreadFunc()
 
    // All of the real work is done by ...
    if (ok) {
-      double refTime = 0.0;                     // Reference time
-      double startTime = getComputerTime();;    // Computer's time of day (sec) run started
-      double dt = 1.0/double(getRate());
+      double refTime = 0.0;                                  // Reference time
+      const double startTime = getComputerTime();;           // Computer's time of day (sec) run started
+      double dt = 1.0/static_cast<double>(getRate());
 
       while (!getParent()->isShutdown()) {
 
          // ---
          // User defined tasks
          // ---
-         this->userFunc( LCreal(dt) );
+         this->userFunc( static_cast<LCreal>(dt) );
 
          // ---
          // Wait for the start of the next frame
@@ -245,22 +245,22 @@ unsigned long ThreadPeriodicTask::mainThreadFunc()
             refTime = (refTime + dt);
 
             // Current computer time
-            double time = getComputerTime();
+            const double time = getComputerTime();
 
             // Actual run time
-            double t0 = (time - startTime);
+            const double t0 = (time - startTime);
 
             // How long should we sleep for
-            double st = refTime - t0;
-            int sleepFor = int(st*1000.0);
+            const double st = refTime - t0;
+            const int sleepFor = static_cast<int>(st*1000.0);
 
             // wait for the next frame
             if (sleepFor > 0) Sleep(sleepFor);
 
             // Compute next delta time and update frame stats
-            dt = 1.0/double(getRate());
+            dt = 1.0/static_cast<double>(getRate());
             if (st < 0) {
-               double overrun = -st;
+               const double overrun = -st;
                bfStats.sigma(overrun);
                if (vdtFlg) {
                   // adjust for overrun
@@ -270,7 +270,6 @@ unsigned long ThreadPeriodicTask::mainThreadFunc()
             }
             tcnt++;
          }
-
       }
    }
 
@@ -317,7 +316,7 @@ void ThreadSyncTask::closeSignals()
 //-----------------------------------------------------------------------------
 void ThreadSyncTask::signalStart()
 {
-   ReleaseSemaphore((HANDLE)startSig,1,NULL);
+   ReleaseSemaphore(static_cast<HANDLE>(startSig),1,NULL);
 }
 
 //-----------------------------------------------------------------------------
@@ -325,7 +324,7 @@ void ThreadSyncTask::signalStart()
 //-----------------------------------------------------------------------------
 void ThreadSyncTask::waitForStart()
 {
-   WaitForSingleObject((HANDLE)startSig, INFINITE);
+   WaitForSingleObject(static_cast<HANDLE>(startSig), INFINITE);
 }
 
 //-----------------------------------------------------------------------------
@@ -333,7 +332,7 @@ void ThreadSyncTask::waitForStart()
 //-----------------------------------------------------------------------------
 void ThreadSyncTask::signalCompleted()
 {
-   ReleaseSemaphore((HANDLE)completedSig,1,NULL);
+   ReleaseSemaphore(static_cast<HANDLE>(completedSig), 1, NULL);
 }
 
 //-----------------------------------------------------------------------------
@@ -341,7 +340,7 @@ void ThreadSyncTask::signalCompleted()
 //-----------------------------------------------------------------------------
 void ThreadSyncTask::waitForCompleted()
 {
-   WaitForSingleObject((HANDLE)completedSig, INFINITE);
+   WaitForSingleObject(static_cast<HANDLE>(completedSig), INFINITE);
 }
 
 //-----------------------------------------------------------------------------
@@ -354,7 +353,7 @@ void ThreadSyncTask::waitForAllCompleted(ThreadSyncTask** threads, const unsigne
       DWORD count = 0;
       for (unsigned int i = 0; i < num; i++) {
          if (threads[i] != 0) {
-            handles[count++] = (HANDLE) threads[i]->completedSig;
+            handles[count++] = static_cast<HANDLE>(threads[i]->completedSig);
          }
       }
 
@@ -376,7 +375,7 @@ int ThreadSyncTask::waitForAnyCompleted(ThreadSyncTask** threads, const unsigned
       DWORD count = 0;
       for (unsigned int i = 0; i < num; i++) {
          if (threads[i] != 0) {
-            handles[count] = (HANDLE) threads[i]->completedSig;
+            handles[count] = static_cast<HANDLE>(threads[i]->completedSig);
             indexes[count++] = i;
          }
       }

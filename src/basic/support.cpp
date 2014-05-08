@@ -70,7 +70,7 @@ bool convertSec2Ntp(
    // Microseconds to fractional second
    if (ntpSecF != 0) {
       double fsec = double(uSec) / 1000000.0;
-      *ntpSecF = (unsigned long) ((fsec * P32) + 0.5);
+      *ntpSecF = static_cast<unsigned long>((fsec * P32) + 0.5);
    }
    return true;
 }
@@ -94,7 +94,7 @@ bool convertNtp2Sec(
    // fractional second to microseconds
    if (uSec != 0) {
       double fsec = double(ntpSecF) / P32;
-      *uSec = (unsigned long) ((fsec * 1000000.0) + 0.5);
+      *uSec = static_cast<unsigned long>((fsec * 1000000.0) + 0.5);
    }
    return true;
 }
@@ -799,8 +799,8 @@ int lcStrcasecmp(const char* const s1, const char* const s2)
    const char* p1 = s1;
    const char* p2 = s2;
    while (*p1 != '\0' && *p2 != '\0') {
-      int c1 = tolower((int)*p1++);
-      int c2 = tolower((int)*p2++);
+      int c1 = tolower(static_cast<int>(*p1++));
+      int c2 = tolower(static_cast<int>(*p2++));
       if (c1 < c2) return -1;
       if (c1 > c2) return  1;
    }
@@ -823,8 +823,8 @@ int lcStrncasecmp(const char* const s1, const char* const s2, const size_t n)
    const char* p2 = s2;
    size_t icnt = 0;
    while (*p1 != '\0' && *p2 != '\0' && icnt++ < n) {
-      int c1 = tolower((int)*p1++);
-      int c2 = tolower((int)*p2++);
+      int c1 = tolower(static_cast<int>(*p1++));
+      int c2 = tolower(static_cast<int>(*p2++));
       if (c1 < c2) return -1;
       if (c1 > c2) return  1;
    }

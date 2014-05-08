@@ -250,7 +250,7 @@ bool Transform::setComputematrix1(const Angle* const sc1obj)
     bool ok = true;
     if (nv == 0 && isClassType(typeid(Rotation))) {
         Radians rad;
-        v[nv++] = (LCreal)rad.convert( *sc1obj );
+        v[nv++] = static_cast<LCreal>(rad.convert(*sc1obj));
         computeMatrix();
     }
     else {
@@ -285,7 +285,7 @@ bool Transform::setComputematrix2(const Angle* const sc2obj)
     bool ok = true;
     if (nv == 0 && isClassType(typeid(Rotation))) {
         Radians rad;
-        v[nv++] = (LCreal)rad.convert( *sc2obj );
+        v[nv++] = static_cast<LCreal>(rad.convert(*sc2obj));
         computeMatrix();
     }
     else {
@@ -320,7 +320,7 @@ bool Transform::setComputematrix3(const Angle* const sc3obj)
     bool ok = true;
     if (nv == 0 && isClassType(typeid(Rotation))) {
         Radians rad;
-        v[nv++] = (LCreal)rad.convert( *sc3obj );
+        v[nv++] = static_cast<LCreal>(rad.convert(*sc3obj));
         computeMatrix();
     }
     else {
@@ -355,7 +355,7 @@ bool Transform::setComputematrix4(const Angle* const sc4obj)
     bool ok = true;
     if (nv == 0 && isClassType(typeid(Rotation))) {
         Radians rad;
-        v[nv++] = (LCreal)rad.convert( *sc4obj );
+        v[nv++] = static_cast<LCreal>(rad.convert(*sc4obj));
         computeMatrix();
     }
     else {

@@ -117,7 +117,7 @@ public:
     Hertz(const Frequency& value);
 
     static LCreal convertStatic(const Frequency &n)     { return n.toFrequency(); }
-    virtual LCreal toFrequency() const                  { return (LCreal)(val); }
+    virtual LCreal toFrequency() const                  { return static_cast<LCreal>(val); }
     virtual LCreal fromFrequency(const LCreal a) const  { return a; }
 };
 
@@ -137,7 +137,7 @@ public:
 
 private:
     static LCreal convertStatic(const Frequency &n)     { return n.toFrequency() * Hz2KHz; }
-    virtual LCreal toFrequency() const                  { return (LCreal)(val * KHz2Hz); }
+    virtual LCreal toFrequency() const                  { return static_cast<LCreal>(val * KHz2Hz); }
     virtual LCreal fromFrequency(const LCreal a) const  { return a * Hz2KHz; }
 };
 
@@ -157,7 +157,7 @@ public:
     MegaHertz(const Frequency& value);
 
     static LCreal convertStatic(const Frequency &n)     { return n.toFrequency() * Hz2MHz; }
-    virtual LCreal toFrequency() const                  { return (LCreal)(val * MHz2Hz); }
+    virtual LCreal toFrequency() const                  { return static_cast<LCreal>(val * MHz2Hz); }
     virtual LCreal fromFrequency(const LCreal a) const  { return a * Hz2MHz; }
 };
 
@@ -177,7 +177,7 @@ public:
     GigaHertz(const Frequency& value);
 
     static LCreal convertStatic(const Frequency &n)     { return n.toFrequency() * Hz2GHz; }
-    virtual LCreal toFrequency() const                  { return (LCreal)(val * GHz2Hz); }
+    virtual LCreal toFrequency() const                  { return static_cast<LCreal>(val * GHz2Hz); }
     virtual LCreal fromFrequency(const LCreal a) const  { return a * Hz2GHz; }
 };
 
@@ -197,7 +197,7 @@ public:
     TeraHertz(const Frequency& value);
 
     static LCreal convertStatic(const Frequency &n)     { return n.toFrequency() * Hz2THz; }
-    virtual LCreal toFrequency() const                  { return (LCreal)(val * THz2Hz); }
+    virtual LCreal toFrequency() const                  { return static_cast<LCreal>(val * THz2Hz); }
     virtual LCreal fromFrequency(const LCreal a) const  { return a * Hz2THz; }
 };
 

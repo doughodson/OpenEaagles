@@ -105,7 +105,7 @@ bool TcpServerSingle::bindSocket()
       else addr.sin_port = htons(getPort());
 
       // Only in server do we bind
-      if (::bind(socketNum, (const struct sockaddr *) &addr, sizeof(addr)) == SOCKET_ERROR ) {
+      if (::bind(socketNum, reinterpret_cast<const struct sockaddr*>(&addr), sizeof(addr)) == SOCKET_ERROR ) {
          std::perror("TcpHandler::bindSocket(): bind error");
          return false;
       }
@@ -144,7 +144,7 @@ bool TcpServerSingle::acceptConnection()
    if (isMessageEnabled(MSG_INFO)) {
        std::cout << "Waiting to accept connection on " << getPort() << " ... " << std::flush;
    }
-   LcSocket tcpSocket = ::accept(socketNum, (struct sockaddr *) &clientAddr, &cAddrSize);
+   LcSocket tcpSocket = ::accept(socketNum, reinterpret_cast<struct sockaddr*>(&clientAddr), &cAddrSize);
    if (tcpSocket == INVALID_SOCKET) {
       if (isMessageEnabled(MSG_INFO)) {
           std::cout << " failed!" << std::endl;

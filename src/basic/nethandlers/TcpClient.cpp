@@ -158,7 +158,7 @@ bool TcpClient::connectToServer()
       std::cout << "Connecting to TCP server at " << ipAddr << ":" << getPort() << " ... " << std::flush;
    }
 
-   if (::connect(socketNum, (const struct sockaddr *) &addr, sizeof(addr)) == SOCKET_ERROR) {
+   if (::connect(socketNum, reinterpret_cast<const struct sockaddr*>(&addr), sizeof(addr)) == SOCKET_ERROR) {
       if (isMessageEnabled(MSG_INFO)) {
           std::cout << "Failed!" << std::endl;
       }

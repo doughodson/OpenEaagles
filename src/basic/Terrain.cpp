@@ -64,14 +64,14 @@ void Terrain::copyData(const Terrain& org, const bool cc)
    clearData();
 
    if (org.path != 0) {
-      setPathname( (String*) org.path->clone() );
+      setPathname( static_cast<String*>(org.path->clone()) );
    }
    else {
       setPathname( 0 );
    }
 
    if (org.file != 0) {
-      setFilename( (String*) org.file->clone() );
+      setFilename( static_cast<String*>(org.file->clone()) );
    }
    else {
       setFilename( 0 );
@@ -140,7 +140,7 @@ const char* Terrain::getPathname() const
    }
    else {
       // See if we have a contain "Terrain" object that has a path set
-      const Terrain* q = (const Terrain*) findContainerByType(typeid(Terrain));
+      const Terrain* q = static_cast<const Terrain*>(findContainerByType(typeid(Terrain)));
       if (q != 0) p = q->getPathname();
    }
    return p;
@@ -252,7 +252,7 @@ bool Terrain::targetOcculting(
    double dist = (distNM * Distance::NM2M);
 
    // Number of points (default: 100M data)
-   unsigned int numPts = (unsigned int) ((dist / 100.0f) + 0.5f);
+   unsigned int numPts = static_cast<unsigned int>((dist / 100.0f) + 0.5f);
    if (numPts > MAX_POINTS) numPts = MAX_POINTS;
 
    // Get the elevations and check for target occulting
@@ -266,11 +266,13 @@ bool Terrain::targetOcculting(
       for (unsigned int i = 0; i < numPts; i++) { validFlags[i] = false; }
 
       // Get the elevations 
-      unsigned int num = getElevations(elevations, validFlags, numPts, refLat, refLon, (LCreal)brgDeg, (LCreal)dist, false);
+      unsigned int num = getElevations(elevations, validFlags, numPts, refLat, refLon,
+                                       static_cast<LCreal>(brgDeg), static_cast<LCreal>(dist), false);
 
       // And check occulting
       if (num > 0) {
-         occulted = occultCheck(elevations, validFlags, numPts, (LCreal)dist, refAlt, tgtAlt);
+         occulted = occultCheck(elevations, validFlags, numPts, static_cast<LCreal>(dist),
+                                refAlt, tgtAlt);
       }
    }
 
@@ -297,7 +299,7 @@ bool Terrain::targetOcculting2(
    bool occulted = false;
 
    // Number of points (default: 100M data)
-   unsigned int numPts = (unsigned int) ((dist / 100.0f) + 0.5f);
+   unsigned int numPts = static_cast<unsigned int>((dist / 100.0f) + 0.5f);
    if (numPts > MAX_POINTS) numPts = MAX_POINTS;
 
    // Get the elevations and check for target occulting
@@ -311,7 +313,8 @@ bool Terrain::targetOcculting2(
       for (unsigned int i = 0; i < numPts; i++) { validFlags[i] = false; }
 
       // Get the elevations 
-      unsigned int num = getElevations(elevations, validFlags, numPts, refLat, refLon, (LCreal)truBrg, (LCreal)dist, false);
+      unsigned int num = getElevations(elevations, validFlags, numPts, refLat, refLon,
+                                       static_cast<LCreal>(truBrg), static_cast<LCreal>(dist), false);
 
       // And check occulting
       if (num > 0) {
@@ -460,8 +463,8 @@ bool Terrain::vbwShadowChecker(
    if (beamLower < -89.9999f) beamLower = -89.9999f;
 
    // tangents of the upper and lower edges of the beam 
-   LCreal tanUpper = lcTan(beamUpper*(LCreal)Angle::D2RCC);
-   LCreal tanLower = lcTan(beamLower*(LCreal)Angle::D2RCC);
+   LCreal tanUpper = lcTan(beamUpper * static_cast<LCreal>(Angle::D2RCC));
+   LCreal tanLower = lcTan(beamLower * static_cast<LCreal>(Angle::D2RCC));
 
    // Loop through all other elevation points -- keep track of the current max
    // tangent value and flag as terrain masked all points with tangent
@@ -727,7 +730,7 @@ bool Terrain::getElevationColor(
       LCreal deltaElev = elevation - minz;
 
       // Lower color table index
-      unsigned int idx = (unsigned int)(deltaElev/elevSteps);
+      unsigned int idx = static_cast<unsigned int>(deltaElev/elevSteps);
       if (idx > (numColors - 2)) {
          idx = numColors - 2;
       }

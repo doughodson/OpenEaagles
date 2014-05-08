@@ -69,7 +69,7 @@ private:
 };
 
 inline void Agent::setActor(Basic::Component* const actor)      { myActor = actor; return; }
-inline Basic::Component* Agent::getActor()           { return myActor; }
+inline Basic::Component* Agent::getActor()                      { return myActor; }
 
 
 //------------------------------------------------------------------------------

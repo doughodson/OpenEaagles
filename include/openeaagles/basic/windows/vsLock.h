@@ -1,20 +1,20 @@
 // ---
 // Simple semaphore spinlock and unlock functions: 
-//    lcLock(long& s)      -- locks the semaphore w/spinlock wait
-//    lcUnlock(long& s)    -- frees the semaphore
+//    lcLock(long int& s)      -- locks the semaphore w/spinlock wait
+//    lcUnlock(long int& s)    -- frees the semaphore
 //
 //    where 's' is the semaphore that must be initialized to zero.
 //
 // Visual Studio version
 // ---
 
-inline void lcLock(long& semaphore)
+inline void lcLock(long int& semaphore)
 {
    // Try to lock the semaphore (i.e., set it to one), but make
    // sure that it was free (i.e., previously set to zero).
    // Otherwise wait (spin) until it is free.
 #if 1
-   while (_InterlockedCompareExchange((long*)&semaphore, 1, 0) == 1) { _mm_pause(); }
+   while (_InterlockedCompareExchange(static_cast<long int*>(&semaphore), 1, 0) == 1) { _mm_pause(); }
 #else
    _asm {
       push eax
@@ -37,11 +37,11 @@ inline void lcLock(long& semaphore)
 #endif
 }
 
-inline void lcUnlock(long& semaphore)
+inline void lcUnlock(long int& semaphore)
 {
    // free the semaphore (i.e., just set it to zero)
 #if 1
-   _InterlockedExchange((long*)&semaphore, 0);
+   _InterlockedExchange(static_cast<long int*>(&semaphore), 0);
 #else
    _asm {
       push eax
