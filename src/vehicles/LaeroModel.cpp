@@ -66,7 +66,7 @@ void LaeroModel::initData()
    psiDot   = 0.0;
 
    // Body linear vel, acc components
-   u        = 200.0 * Basic::Distance::NM2M / Basic::Time::H2S;
+   u        = 0.0;
    v        = 0.0;
    w        = 0.0;
    uDot     = 0.0;
@@ -162,6 +162,21 @@ void LaeroModel::dynamics(const LCreal dt)
 {
     update4DofModel(dt);  
     dT = dt;
+}
+
+//----------------------------------------------------------
+// reset() -- sets up our initial flying values
+//----------------------------------------------------------
+void LaeroModel::reset()
+{
+   // update our initial velocity
+   //u        = 200.0 * Basic::Distance::NM2M / Basic::Time::H2S;
+   Simulation::Player* pPlr = static_cast<Simulation::Player*>( findContainerByType(typeid(Simulation::Player)) );
+   if (pPlr != 0) {
+      LCreal initVel = pPlr->getInitVelocity();
+      u = initVel * Basic::Distance::NM2M / Basic::Time::H2S;
+   }
+
 }
 
 //----------------------------------------------------------

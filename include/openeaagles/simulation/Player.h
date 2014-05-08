@@ -576,6 +576,7 @@ public:
    double getInitLatitude() const;                 // Player's initial latitude (degrees)
    double getInitLongitude() const;                // Player's initial longitude (degrees)
    bool isInitLatLonValid() const;
+   LCreal getInitVelocity() const;                 // Player's initial total velocity
 
    const osg::Vec2d& getInitPosition() const;      // Initial position vector; north and east of sim reference point (meters)
    bool isInitPositionValid() const;
