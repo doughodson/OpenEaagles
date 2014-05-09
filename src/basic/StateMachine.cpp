@@ -112,8 +112,8 @@ void StateMachine::reset()
    if (stMachList != 0) {
       List::Item* item = stMachList->getFirstItem();
       while (item != 0) {
-         Pair* p = (Pair*) item->getValue();
-         Component* q = (Component*) p->object();
+         Pair* p = static_cast<Pair*>(item->getValue());
+         Component* q = static_cast<Component*>(p->object());
          q->reset();
          item = item->getNext();
       }
@@ -456,7 +456,7 @@ bool StateMachine::setStMach(const char* const name, const StateTableCode code)
          if (name != 0) {
             Pair* p = findStMachByName(name);
             if (p != 0) {
-               stMach = (StateMachine*) p->object();
+               stMach = static_cast<StateMachine*>(p->object());
                stMachName = p->slot();
                ok = true;
             }
@@ -493,8 +493,8 @@ bool StateMachine::setSlotStateMachines(const PairStream* const msg)
    if (stMachList != 0) {
       List::Item* item = stMachList->getFirstItem();
       while (item != 0) {
-         Pair* p = (Pair*) item->getValue();
-         Component* q = (Component*) p->object();
+         Pair* p = static_cast<Pair*>(item->getValue());
+         Component* q = static_cast<Component*>(p->object());
          q->container(0);
          item = item->getNext();
       }
@@ -509,12 +509,12 @@ bool StateMachine::setSlotStateMachines(const PairStream* const msg)
       // clone the object and add it to the new list.
       const List::Item* item = msg->getFirstItem();
       while (item != 0) {
-         const Pair* p = (Pair*) item->getValue();
+         const Pair* p = static_cast<const Pair*>(item->getValue());
          const StateMachine* q = dynamic_cast<const StateMachine*>(p->object());
 
          if (q != 0) {
-            Pair* cp = (Pair*) p->clone();
-            StateMachine* cq = (StateMachine*) cp->object();
+            Pair* cp = static_cast<Pair*>(p->clone());
+            StateMachine* cq = static_cast<StateMachine*>(cp->object());
             cq->container(this);
             newList->put(cp);
          }

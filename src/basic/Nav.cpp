@@ -879,7 +879,7 @@ bool Nav::computeEulerAngles(
    // Set output values
    // ---
    if (angles != 0) {
-      angles->set( atan2(sphi,cphi), atan2(stht,ctht), atan2(spsi,cpsi) );
+      angles->set( std::atan2(sphi,cphi), std::atan2(stht,ctht), std::atan2(spsi,cpsi) );
    }
    if (scPhi != 0) scPhi->set( sphi, cphi  );
    if (scTht != 0) scTht->set( stht, ctht  );
@@ -1005,11 +1005,11 @@ bool Nav::convertEcef2Geod(
    //---------------------------------------------
    switch (status) {
       case NORMAL: {
-   // begin iteration loop
+         // begin iteration loop
 
-   // Calculate Outputs
+         // Calculate Outputs
          *pLat = Angle::R2DCC * phi;
-   *pLon = Angle::R2DCC * std::atan2(y, x);
+         *pLon = Angle::R2DCC * std::atan2(y, x);
          *pAlt = newH;
          break;
       } // NORMAL
@@ -1437,8 +1437,8 @@ bool Nav::getGeocAngle(
     hpVec = mat.transform3x3(hpVec, mat);
     double d = std::sqrt(hpVec.x() * hpVec.x() + hpVec.y() * hpVec.y());
 
-    yawd   = -1.0 * atan2(hpVec.x(), hpVec.y());
-    pitchd = atan2((double)hpVec.z(), d);
+    yawd   = -1.0 * std::atan2(hpVec.x(), hpVec.y());
+    pitchd = std::atan2(static_cast<double>(hpVec.z()), d);
 
     osg::Vec3d rollVec(1.0, 0.0, 0.0);
 
@@ -1452,7 +1452,7 @@ bool Nav::getGeocAngle(
     hpMat.invert(hpMat);
 
     rollVec = hpMat.transform3x3(rollVec, hpMat);
-    rolld    = -1.0 * atan2(rollVec.z(), rollVec.x());
+    rolld    = -1.0 * std::atan2(rollVec.z(), rollVec.x());
     pitchd   = -1.0 * pitchd;
 
     geocAngle[IPHI]   =  rolld;

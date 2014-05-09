@@ -217,12 +217,12 @@ bool PosixHandler::setSendBuffSize()
 {
    if (socketNum == INVALID_SOCKET) return false;
 
-   unsigned int optval = sendBuffSizeKb * 1024;
+   const unsigned int optval = sendBuffSizeKb * 1024;
    socklen_t optlen = sizeof(optval);
 #if defined(WIN32)
-   if (::setsockopt(socketNum, SOL_SOCKET, SO_SNDBUF, (const char*) &optval, optlen) == SOCKET_ERROR) {
+   if (::setsockopt(socketNum, SOL_SOCKET, SO_SNDBUF, reinterpret_cast<const char*>(&optval), optlen) == SOCKET_ERROR) {
 #else
-   if (::setsockopt(socketNum, SOL_SOCKET, SO_SNDBUF, (void*) &optval, optlen) == SOCKET_ERROR) {
+   if (::setsockopt(socketNum, SOL_SOCKET, SO_SNDBUF, reinterpret_cast<const void*>(&optval), optlen) == SOCKET_ERROR) {
 #endif
       std::perror("PosixHandler::setSendBuffSize(): error setting the send buffer size\n");
       return false;
@@ -237,12 +237,12 @@ bool PosixHandler::setRecvBuffSize()
 {
    if (socketNum == INVALID_SOCKET) return false;
 
-   unsigned int optval = recvBuffSizeKb * 1024;
+   const unsigned int optval = recvBuffSizeKb * 1024;
    socklen_t optlen = sizeof (optval);
 #if defined(WIN32)
-   if (::setsockopt(socketNum, SOL_SOCKET, SO_RCVBUF, (const char*) &optval, optlen) == SOCKET_ERROR) {
+   if (::setsockopt(socketNum, SOL_SOCKET, SO_RCVBUF, reinterpret_cast<const char*>(&optval), optlen) == SOCKET_ERROR) {
 #else
-   if (::setsockopt(socketNum, SOL_SOCKET, SO_RCVBUF, (void*) &optval, optlen) == SOCKET_ERROR) {
+   if (::setsockopt(socketNum, SOL_SOCKET, SO_RCVBUF, reinterpret_cast<const void*>(&optval), optlen) == SOCKET_ERROR) {
 #endif
       std::perror("PosixHandler::setRecvBuffSize(): error setting the receive buffer size\n");
       return false;
@@ -331,7 +331,7 @@ bool PosixHandler::sendData(const char* const packet, const int size)
     addr.sin_addr.s_addr = netAddr;
     addr.sin_port = htons(port);
     socklen_t addrlen = sizeof(addr);
-    int result = ::sendto(socketNum, packet, size, 0, (const struct sockaddr *) &addr, addrlen);
+    int result = ::sendto(socketNum, packet, size, 0, reinterpret_cast<const struct sockaddr*>(&addr), addrlen);
     if (result == SOCKET_ERROR) {
 #if defined(WIN32)
         int err = ::WSAGetLastError();
@@ -369,7 +369,7 @@ unsigned int PosixHandler::recvData(char* const packet, const int maxSize)
       // Try to receive the data
       struct sockaddr_in raddr;       // IP address
       socklen_t addrlen = sizeof(raddr);
-      int result = ::recvfrom(socketNum, packet, maxSize, 0, (struct sockaddr *) &raddr, &addrlen);
+      int result = ::recvfrom(socketNum, packet, maxSize, 0, reinterpret_cast<struct sockaddr*>(&raddr), &addrlen);
 
       if (result > 0 && ignoreSourcePort != 0) {
          // Ok we have one; make sure it's not one we should ignore
@@ -542,7 +542,7 @@ bool PosixHandler::setSlotPort(const Number* const msg)
     if (msg != 0) {
         int ii = msg->getInt();
         if (ii >= 0x0 && ii <= 0xffff) {
-            ok = setPort( (uint16_t) ii );
+            ok = setPort( static_cast<uint16_t>(ii) );
         }
     }
     return ok;
@@ -555,7 +555,7 @@ bool PosixHandler::setSlotLocalPort(const Number* const msg)
     if (msg != 0) {
         int ii = msg->getInt();
         if (ii >= 0x0 && ii <= 0xffff) {
-            ok = setLocalPort( (uint16_t) ii );
+            ok = setLocalPort( static_cast<uint16_t>(ii) );
         }
     }
     return ok;

@@ -16,7 +16,7 @@ static const unsigned int MAX_CPUS = 32;
 //-----------------------------------------------------------------------------
 void* Thread::staticThreadFunc(void* lpParam)
 {
-   Thread* thread = (Thread*) lpParam;
+   Thread* thread = static_cast<Thread*>(lpParam);
    Component* parent = thread->getParent();
 
    // Make sure that our Thread class and its parent are not going to go a way.
@@ -31,7 +31,7 @@ void* Thread::staticThreadFunc(void* lpParam)
    parent->unref();
    thread->unref();
 
-   return (void*) rtn;
+   return reinterpret_cast<void*>(rtn);
 }
 
 //-----------------------------------------------------------------------------
@@ -143,7 +143,7 @@ bool Thread::terminate()
          std::cout << "Thread(" << this << ")::terminate(): handle = " << theThread << std::endl;
       }
 
-      pthread_t* thread = (pthread_t*) theThread;
+      pthread_t* thread = static_cast<pthread_t*>(theThread);
       pthread_kill(*thread, SIGKILL);
       theThread = 0;
       killed = true;
@@ -260,13 +260,13 @@ bool ThreadSyncTask::createSignals()
 void ThreadSyncTask::closeSignals()
 {
    {
-      pthread_mutex_t* mutex = (pthread_mutex_t*) startSig;
+      pthread_mutex_t* mutex = static_cast<pthread_mutex_t*>(startSig);
       startSig = 0;
       pthread_mutex_destroy(mutex);
    }
 
    {
-      pthread_mutex_t* mutex = (pthread_mutex_t*) completedSig;
+      pthread_mutex_t* mutex = static_cast<pthread_mutex_t*>(completedSig);
       completedSig = 0;
       pthread_mutex_destroy(mutex);
    }
@@ -277,7 +277,7 @@ void ThreadSyncTask::closeSignals()
 //-----------------------------------------------------------------------------
 void ThreadSyncTask::signalStart()
 {
-   pthread_mutex_t* mutex = (pthread_mutex_t*) startSig;
+   pthread_mutex_t* mutex = static_cast<pthread_mutex_t*>(startSig);
    pthread_mutex_unlock(mutex);
 }
 
@@ -286,7 +286,7 @@ void ThreadSyncTask::signalStart()
 //-----------------------------------------------------------------------------
 void ThreadSyncTask::waitForStart()
 {
-   pthread_mutex_t* mutex = (pthread_mutex_t*) startSig;
+   pthread_mutex_t* mutex = static_cast<pthread_mutex_t*>(startSig);
    pthread_mutex_lock(mutex);
 }
 
@@ -295,7 +295,7 @@ void ThreadSyncTask::waitForStart()
 //-----------------------------------------------------------------------------
 void ThreadSyncTask::signalCompleted()
 {
-   pthread_mutex_t* mutex = (pthread_mutex_t*) completedSig;
+   pthread_mutex_t* mutex = static_cast<pthread_mutex_t*>(completedSig);
    pthread_mutex_unlock(mutex);
 }
 
@@ -304,7 +304,7 @@ void ThreadSyncTask::signalCompleted()
 //-----------------------------------------------------------------------------
 void ThreadSyncTask::waitForCompleted()
 {
-   pthread_mutex_t* mutex = (pthread_mutex_t*) completedSig;
+   pthread_mutex_t* mutex = static_cast<pthread_mutex_t*>(completedSig);
    pthread_mutex_lock(mutex);
 }
 
@@ -340,8 +340,8 @@ int ThreadSyncTask::waitForAnyCompleted(ThreadSyncTask** threads, const unsigned
          while(true) {
             for (i = 0; i < num; i++) {
                if (threads[i] != 0) {
-                  pthread_mutex_t* mutex = (pthread_mutex_t*) threads[i]->completedSig;
-                  if(pthread_mutex_trylock(mutex) == 0) {
+                  pthread_mutex_t* mutex = static_cast<pthread_mutex_t*>(threads[i]->completedSig);
+                  if (pthread_mutex_trylock(mutex) == 0) {
                      return i;
                   }
                }

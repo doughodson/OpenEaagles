@@ -56,7 +56,7 @@ void Function::copyData(const Function& org, const bool cc)
    {
       const Table* copy = 0;
       if (org.table != 0) {
-         copy = (const Table*) org.table->clone();
+         copy = static_cast<const Table*>(org.table->clone());
       }
       setSlotLfiTable(copy);
       if (copy != 0) copy->unref();
@@ -144,10 +144,10 @@ double Func1::f(const double iv1, FStorage* const s) const
 
    // No derived class handled this ...
 
-   const Table1* p = (const Table1*) getTable();
+   const Table1* p = static_cast<const Table1*>(getTable());
    if (p != 0) {
       // But we do have an optional table that'll handle it.
-      value = p->lfi( LCreal(iv1),s);
+      value = p->lfi(static_cast<LCreal>(iv1),s);
    }
 
    return value;
@@ -184,10 +184,10 @@ double Func2::f(const double iv1, const double iv2, FStorage* const s) const
 
    // No derived class handled this ...
 
-   const Table2* p = (const Table2*) getTable();
+   const Table2* p = static_cast<const Table2*>(getTable());
    if (p != 0) {
       // But we do have an optional table that'll handle it.
-      value = p->lfi(LCreal(iv1), LCreal(iv2), s);
+      value = p->lfi(static_cast<LCreal>(iv1), static_cast<LCreal>(iv2), s);
    }
 
    return value;
@@ -224,10 +224,10 @@ double Func3::f(const double iv1, const double iv2, const double iv3, FStorage* 
 
    // No derived class handled this ...
 
-   const Table3* p = (const Table3*) getTable();
+   const Table3* p = static_cast<const Table3*>(getTable());
    if (p != 0) {
       // But we do have an optional table that'll handle it.
-      value = p->lfi(LCreal(iv1), LCreal(iv2), LCreal(iv3), s);
+      value = p->lfi(static_cast<LCreal>(iv1), static_cast<LCreal>(iv2), static_cast<LCreal>(iv3), s);
    }
 
    return value;
@@ -264,10 +264,11 @@ double Func4::f(const double iv1, const double iv2, const double iv3, const doub
 
    // No derived class handled this ...
 
-   const Table4* p = (const Table4*) getTable();
+   const Table4* p = static_cast<const Table4*>(getTable());
    if (p != 0) {
       // But we do have an optional table that'll handle it.
-      value = p->lfi(LCreal(iv1), LCreal(iv2), LCreal(iv3), LCreal(iv4), s);
+      value = p->lfi(static_cast<LCreal>(iv1), static_cast<LCreal>(iv2),
+                     static_cast<LCreal>(iv3), static_cast<LCreal>(iv4), s);
    }
 
    return value;
@@ -304,10 +305,11 @@ double Func5::f(const double iv1, const double iv2, const double iv3, const doub
 
    // No derived class handled this ...
 
-   const Table5* p = (const Table5*) getTable();
+   const Table5* p = static_cast<const Table5*>(getTable());
    if (p != 0) {
       // But we do have an optional table that'll handle it.
-      value = p->lfi(LCreal(iv1), LCreal(iv2), LCreal(iv3), LCreal(iv4), LCreal(iv5) ,s);
+      value = p->lfi(static_cast<LCreal>(iv1), static_cast<LCreal>(iv2), static_cast<LCreal>(iv3),
+                     static_cast<LCreal>(iv4), static_cast<LCreal>(iv5) ,s);
    }
 
    return value;
@@ -434,7 +436,7 @@ bool Polynomial::setSlotCoefficients(const List* const msg)
       if ( entries <= MAX_COEFF ) {
          double  aa[MAX_COEFF];   // Constant coefficients vector
          int mm = msg->getNumberList(aa, MAX_COEFF);
-         ok = setCoefficients( aa, (unsigned short) mm );
+         ok = setCoefficients( aa, static_cast<unsigned short>(mm) );
       }
 
       else if (isMessageEnabled(MSG_ERROR)) {

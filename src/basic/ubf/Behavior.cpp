@@ -48,7 +48,7 @@ bool Behavior::setSlotVote(const Basic::Number* const num)
    bool ok = false;
    int vote = num->getInt();
    if (vote > 0 && vote <= 65535) {
-      setVote( (unsigned int) vote  );
+      setVote(static_cast<unsigned int>(vote));
       ok = true;
    }
    return ok;

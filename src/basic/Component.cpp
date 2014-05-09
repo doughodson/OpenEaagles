@@ -118,9 +118,9 @@ void Component::copyData(const Component& org, const bool cc)
 
    // Copy event logger
    const Logger* p = org.elog;
-   elog = (Logger*) p;
+   elog = const_cast<Logger*>(p);
    if (org.elog0 != 0)
-      elog0 = (Logger*) org.elog0->clone();
+      elog0 = static_cast<Logger*>(org.elog0->clone());
    else
       elog0 = 0;
 
@@ -131,7 +131,7 @@ void Component::copyData(const Component& org, const bool cc)
    // Copy child components
    const PairStream* oc = org.components.getRefPtr();
    if (oc != 0) {
-      PairStream* tmp = (PairStream*) oc->clone();
+      PairStream* tmp = static_cast<PairStream*>(oc->clone());
       oc->unref();
       processComponents(tmp, typeid(Component));
       tmp->unref();
@@ -143,7 +143,7 @@ void Component::copyData(const Component& org, const bool cc)
    if (timingStats != 0) timingStats->unref();
    timingStats = 0;
    if (org.timingStats != 0) {
-      timingStats = (Statistic*) org.timingStats->clone();
+      timingStats = static_cast<Statistic*>(org.timingStats->clone());
    }
    pts = org.pts;
 
@@ -219,8 +219,8 @@ void Component::reset()
             // When we should reset them all
             List::Item* item = subcomponents->getFirstItem();
             while (item != 0) {
-                Pair* pair = (Pair*)(item->getValue());
-                Component* obj = (Component*)( pair->object() );
+                Pair* pair = static_cast<Pair*>(item->getValue());
+                Component* obj = static_cast<Component*>(pair->object());
                 if (obj != 0) obj->reset();
                 item = item->getNext();
             }
@@ -310,8 +310,8 @@ void Component::updateTC(const LCreal dt)
             // When we should update them all
             List::Item* item = subcomponents->getFirstItem();
             while (item != 0) {
-                Pair* pair = (Pair*)(item->getValue());
-                Component* obj = (Component*)( pair->object() );
+                Pair* pair = static_cast<Pair*>(item->getValue());
+                Component* obj = static_cast<Component*>( pair->object() );
                 if (obj != 0) obj->tcFrame(dt);
                 item = item->getNext();
             }
@@ -343,8 +343,8 @@ void Component::updateData(const LCreal dt)
             // When we should update them all
             List::Item* item = subcomponents->getFirstItem();
             while (item != 0) {
-                Pair* pair = (Pair*)(item->getValue());
-                Component* obj = (Component*)( pair->object() );
+                Pair* pair = static_cast<Pair*>(item->getValue());
+                Component* obj = static_cast<Component*>(pair->object());
                 if (obj != 0) obj->updateData(dt);
                 item = item->getNext();
             }
@@ -407,8 +407,8 @@ bool Component::shutdownNotification()
    if (subcomponents != 0) {
       List::Item* item = subcomponents->getFirstItem();
       while (item != 0) {
-         Pair* pair = (Pair*)(item->getValue());
-         Component* p = (Component*) pair->object();
+         Pair* pair = static_cast<Pair*>(item->getValue());
+         Component* p = static_cast<Component*>(pair->object());
          p->event(SHUTDOWN_EVENT);
          item = item->getNext();
       }
@@ -492,7 +492,7 @@ const Pair* Component::findByName(const char* const slotname) const
             // Found it?
             if (q1 != 0) {
                 // Check its components for 'yyy'
-                const Component* gobj = (const Component*) q1->object();
+                const Component* gobj = static_cast<const Component*>(q1->object());
                 q = gobj->findByName(&name[i]);
             }
 
@@ -508,8 +508,8 @@ const Pair* Component::findByName(const char* const slotname) const
             //  so check our components' components
             const List::Item* item = subcomponents->getFirstItem();
             while (item != 0 && q == 0) {
-                const Pair* p = (const Pair*) item->getValue();
-                const Component* obj = (const Component*) p->object();
+                const Pair* p = static_cast<const Pair*>(item->getValue());
+                const Component* obj = static_cast<const Component*>(p->object());
                 q = obj->findByName(slotname);
                 item = item->getNext();
             }
@@ -525,7 +525,7 @@ Pair* Component::findByName(const char* const slotname)
 {
    const Component* cThis = this;
    const Pair* p = cThis->findByName(slotname);
-   return (Pair*) p;
+   return const_cast<Pair*>(p);
 }
 
 
@@ -572,8 +572,8 @@ const Pair* Component::findByType(const std::type_info& type) const
         q = subcomponents->findByType(type);
         const List::Item* item = subcomponents->getFirstItem();
         while (item != 0 && q == 0) {
-            const Pair* p = (const Pair*) item->getValue();
-            const Component* obj = (const Component*) p->object();
+            const Pair* p = static_cast<const Pair*>(item->getValue());
+            const Component* obj = static_cast<const Component*>(p->object());
             q = obj->findByType(type);
             item = item->getNext();
         }
@@ -587,7 +587,7 @@ Pair* Component::findByType(const std::type_info& type)
 {
    const Component* cThis = this;
    const Pair* p = cThis->findByType(type);
-   return (Pair*) p;
+   return const_cast<Pair*>(p);
 }
 
 
@@ -614,13 +614,13 @@ const Identifier* Component::findNameOfComponent(const Component* const p) const
 
             const List::Item* item = subcomponents->getFirstItem();
             while (item != 0 && name == 0) {
-                const Pair* pair = (const Pair*) item->getValue();
-                const Component* child = (const Component*) pair->object();
+                const Pair* pair = static_cast<const Pair*>(item->getValue());
+                const Component* child = static_cast<const Component*>(pair->object());
                 const Identifier* name0 = child->findNameOfComponent(p);
                 if (name0 != 0) {
                     // Found it, so prefix it with our child's name and 
                     // return the full name.
-                    Identifier* fullname = (Identifier*) pair->slot()->clone();
+                    Identifier* fullname = static_cast<Identifier*>(pair->slot()->clone());
                     *fullname += ".";
                     *fullname += name0->getString();
                     name = fullname;
@@ -713,7 +713,7 @@ void Component::processComponents(
       // Add the (filtered) components to the new list and set their container
       List::Item* item = list->getFirstItem();
       while (item != 0) {
-         Pair* pair = (Pair*) item->getValue();
+         Pair* pair = static_cast<Pair*>(item->getValue());
          Component* cp = dynamic_cast<Component*>( pair->object() );
          if ( cp != 0 && cp != remove && (skipFilter || cp->isClassType(filter)) ) {
             newList->put(pair);
@@ -749,12 +749,12 @@ void Component::processComponents(
    // ---
    if (selection != 0) {
       if (selection->isClassType(typeid(String))) {
-            String* str = new String(*((String*)selection));
+            String* str = new String(*(static_cast<String*>(selection)));
             select(str);
             str->unref();
       }
       else {
-            Integer* num = new Integer(((Number*)selection)->getInt());
+            Integer* num = new Integer((static_cast<Number*>(selection))->getInt());
             select(num);
             num->unref();
       }
@@ -789,7 +789,7 @@ bool Component::select(const String* const name)
     if (name != 0) {
         setSelectionName(name);
         Pair* p = findByName(*name);
-        if (p != 0) selected = (Component*) p->object();
+        if (p != 0) selected = static_cast<Component*>(p->object());
         else {
             std::cerr << "Component::select: name not found!"  << std::endl; 
             ok = false;
@@ -807,7 +807,7 @@ bool Component::select(const Number* const num)
         setSelectionName(num);
         Pair* p = findByIndex(num->getInt());
         if (p != 0) {
-           selected = (Component*) p->object();
+           selected = static_cast<Component*>(p->object());
         }
         else {
            std::cerr << "Component::select: index out of range; num = " << num->getInt() << std::endl;
@@ -947,7 +947,7 @@ bool Component::setSlotEnableMsgType(const Number* const msg)
 {
    bool ok = false;
    if (msg != 0) {
-      ok = enableMessageTypes( (unsigned short) msg->getInt() );
+      ok = enableMessageTypes( static_cast<unsigned short>(msg->getInt()) );
    }
    return ok;
 }
@@ -981,7 +981,7 @@ bool Component::setSlotDisableMsgType(const Number* const msg)
 {
    bool ok = false;
    if (msg != 0) {
-      ok = disableMessageTypes( (unsigned short) msg->getInt() );
+      ok = disableMessageTypes( static_cast<unsigned short>(msg->getInt()) );
    }
    return ok;
 }
@@ -997,7 +997,7 @@ bool Component::send(const char* const id, const int event)
     bool val = false;
     Pair* p = findByName(id);
     if (p != 0) {
-        Component* g = (Component*) p->object();
+        Component* g = static_cast<Component*>(p->object());
         val = g->event(event);
     }
     return val;
@@ -1020,7 +1020,7 @@ bool Component::send(const char* const id, const int event, const int value, Sen
 bool Component::send(const char* const id, const int event, const float value, SendData& sd)
 {
    bool val = false;
-   Object* vv = sd.getValue((LCreal)value);
+   Object* vv = sd.getValue(static_cast<LCreal>(value));
    if (vv != 0) {
       Component* g = sd.getObject(this,id);
       if (g != 0) val = g->event(event,vv);
@@ -1032,7 +1032,7 @@ bool Component::send(const char* const id, const int event, const float value, S
 bool Component::send(const char* const id, const int event, const double value, SendData& sd)
 {
    bool val = false;
-   Object* vv = sd.getValue((LCreal)value);
+   Object* vv = sd.getValue(static_cast<LCreal>(value));
    if (vv != 0) {
       Component* g = sd.getObject(this,id);
       if (g != 0) val = g->event(event,vv);
@@ -1372,7 +1372,7 @@ Component* Component::SendData::getObject(Component* gobj, const char* const id,
             std::sprintf(name,id,n);
             p = gobj->findByName(name);
         }
-        if (p != 0) obj = (Component*) p->object();
+        if (p != 0) obj = static_cast<Component*>(p->object());
     }
     return obj;
 }
