@@ -363,9 +363,9 @@ void ThreadPool::copyData(const ThreadPool& org, const bool cc)
    if(cc)
       initData();
 
-   //Copy the manager, number of threads, and priority
-   if(org.manager != 0)
-      setManager((ThreadPoolManager*)org.manager->clone());
+   // Copy the manager, number of threads, and priority
+   if (org.manager != 0)
+      setManager( static_cast<ThreadPoolManager*>(org.manager->clone()) );
    else
       setManager(0);
    numThreads = org.numThreads;
@@ -387,8 +387,8 @@ bool ThreadPool::setSlotNumThreads(const Number* const msg)
    bool ok = false;
    if (msg != 0) {
       int num = msg->getInt();
-      if (num >= 0 && num <= (int)MAX_THREADS) {
-         numThreads = (unsigned int)num;
+      if (num >= 0 && num <= static_cast<int>(MAX_THREADS)) {
+         numThreads = static_cast<unsigned int>(num);
          ok = true;
       }
       else {

@@ -47,7 +47,7 @@ void Decibel::setValueDB(const LCreal v)
 void Decibel::setValue(const double v)
 {
    BaseClass::setValue(v);
-   db = lcLog10((LCreal)v) * 10.0f;
+   db = lcLog10(static_cast<LCreal>(v)) * 10.0f;
 }
 
 //------------------------------------------------------------------------------

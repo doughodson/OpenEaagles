@@ -64,7 +64,7 @@ void IoDevice::copyData(const IoDevice& org, const bool cc)
    // copy the list of I/O adapters
    // ---
    if (org.adapters !=0) {
-      PairStream* copy = (PairStream*) org.adapters->clone();
+      PairStream* copy = static_cast<PairStream*>(org.adapters->clone());
       setSlotAdapters(copy);
       copy->unref();
    }
@@ -73,7 +73,7 @@ void IoDevice::copyData(const IoDevice& org, const bool cc)
    // copy the list of I/O devices
    // ---
    if (org.devices !=0) {
-      PairStream* copy = (PairStream*) org.devices->clone();
+      PairStream* copy = static_cast<PairStream*>(org.devices->clone());
       setSlotDevices(copy);
       copy->unref();
    }
@@ -99,8 +99,8 @@ void IoDevice::reset()
    if (adapters != 0) {
       List::Item* item = adapters->getFirstItem();
       while (item != 0) {
-         Pair* const pair = (Pair*) item->getValue();
-         IoAdapter* const p = (IoAdapter*) pair->object();
+         Pair* const pair = static_cast<Pair*>(item->getValue());
+         IoAdapter* const p = static_cast<IoAdapter*>(pair->object());
          p->reset();
          item = item->getNext();
       }
@@ -110,8 +110,8 @@ void IoDevice::reset()
    if (devices != 0) {
       List::Item* item = devices->getFirstItem();
       while (item != 0) {
-         Pair* const pair = (Pair*) item->getValue();
-         IoDevice* const p = (IoDevice*) pair->object();
+         Pair* const pair = static_cast<Pair*>(item->getValue());
+         IoDevice* const p = static_cast<IoDevice*>(pair->object());
          p->reset();
          item = item->getNext();
       }
@@ -127,8 +127,8 @@ bool IoDevice::shutdownNotification()
    if (adapters != 0) {
       List::Item* item = adapters->getFirstItem();
       while (item != 0) {
-         Pair* const pair = (Pair*) item->getValue();
-         IoAdapter* const p = (IoAdapter*) pair->object();
+         Pair* const pair = static_cast<Pair*>(item->getValue());
+         IoAdapter* const p = static_cast<IoAdapter*>(pair->object());
          p->event(SHUTDOWN_EVENT);
          item = item->getNext();
       }
@@ -138,8 +138,8 @@ bool IoDevice::shutdownNotification()
    if (devices != 0) {
       List::Item* item = devices->getFirstItem();
       while (item != 0) {
-         Pair* const pair = (Pair*) item->getValue();
-         IoDevice* const p = (IoDevice*) pair->object();
+         Pair* const pair = static_cast<Pair*>(item->getValue());
+         IoDevice* const p = static_cast<IoDevice*>(pair->object());
          p->event(SHUTDOWN_EVENT);
          item = item->getNext();
       }
@@ -162,9 +162,9 @@ void IoDevice::processInputs(const LCreal dt, IoData* const inData)
 
       List::Item* item = adapters->getFirstItem();
       while (item != 0) {
-         Pair* const pair = (Pair*) item->getValue();
-         IoAdapter* const p = (IoAdapter*) pair->object();
-         p->processInputs(dt,this,inData);
+         Pair* const pair = static_cast<Pair*>(item->getValue());
+         IoAdapter* const p = static_cast<IoAdapter*>(pair->object());
+         p->processInputs(dt, this, inData);
          item = item->getNext();
       }
    }
@@ -173,9 +173,9 @@ void IoDevice::processInputs(const LCreal dt, IoData* const inData)
    if (devices != 0) {
       List::Item* item = devices->getFirstItem();
       while (item != 0) {
-         Pair* const pair = (Pair*) item->getValue();
-         IoDevice* const p = (IoDevice*) pair->object();
-         p->processInputs(dt,inData);
+         Pair* const pair = static_cast<Pair*>(item->getValue());
+         IoDevice* const p = static_cast<IoDevice*>(pair->object());
+         p->processInputs(dt, inData);
          item = item->getNext();
       }
    }
@@ -194,9 +194,9 @@ void IoDevice::processOutputs(const LCreal dt, const IoData* const outData)
    if (devices != 0) {
       List::Item* item = devices->getFirstItem();
       while (item != 0) {
-         Pair* const pair = (Pair*) item->getValue();
-         IoDevice* const p = (IoDevice*) pair->object();
-         p->processOutputs(dt,outData);
+         Pair* const pair = static_cast<Pair*>(item->getValue());
+         IoDevice* const p = static_cast<IoDevice*>(pair->object());
+         p->processOutputs(dt, outData);
          item = item->getNext();
       }
    }
@@ -207,9 +207,9 @@ void IoDevice::processOutputs(const LCreal dt, const IoData* const outData)
       if (outData != 0) {
          List::Item* item = adapters->getFirstItem();
          while (item != 0) {
-            Pair* const pair = (Pair*) item->getValue();
-            IoAdapter* const p = (IoAdapter*) pair->object();
-            p->processOutputs(dt,outData,this);
+            Pair* const pair = static_cast<Pair*>(item->getValue());
+            IoAdapter* const p = static_cast<IoAdapter*>(pair->object());
+            p->processOutputs(dt, outData, this);
             item = item->getNext();
          }
       }
@@ -296,10 +296,10 @@ bool IoDevice::setSlotAdapters(PairStream* const list)
       List::Item* item = list->getFirstItem();
       while (item != 0) {
          cnt++;
-         Pair* const pair = (Pair*) item->getValue();
+         Pair* const pair = static_cast<Pair*>(item->getValue());
          ok = pair->object()->isClassType(typeid(IoAdapter));
          if (ok) {
-            ((IoAdapter*) pair->object())->container(this);
+            static_cast<IoAdapter*>(pair->object())->container(this);
          }
          else {
             std::cerr << "IoDevice::setSlotAdapters(): Item number " << cnt;
@@ -325,10 +325,10 @@ bool IoDevice::setSlotDevices(PairStream* const list)
       List::Item* item = list->getFirstItem();
       while (item != 0) {
          cnt++;
-         Pair* const pair = (Pair*) item->getValue();
+         Pair* const pair = static_cast<Pair*>(item->getValue());
          ok = pair->object()->isClassType(typeid(IoDevice));
          if (ok) {
-            ((IoDevice*) pair->object())->container(this);
+            static_cast<IoDevice*>(pair->object())->container(this);
          }
          else {
             std::cerr << "IoDevice::setSlotDevices(): Item number " << cnt;

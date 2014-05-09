@@ -47,7 +47,7 @@ void Pair::copyData(const Pair& pair1, const bool cc)
     if (obj != 0) obj->unref();
 
     // Copy slotname (already ref() by constructor in clone())
-    if (pair1.slotname != 0) slotname = (Identifier*) pair1.slotname->clone();
+    if (pair1.slotname != 0) slotname = static_cast<Identifier*>(pair1.slotname->clone());
     else slotname = 0;
 
     // Copy the object (already ref() by constructor in clone())

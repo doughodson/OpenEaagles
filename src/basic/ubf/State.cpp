@@ -32,8 +32,8 @@ void State::updateGlobalState(void)
          // When we should update them all
          Basic::List::Item* item = subcomponents->getFirstItem();
          while (item != 0) {
-            Basic::Pair* pair = (Basic::Pair*)(item->getValue());
-            Basic::Component* obj = (Basic::Component*)( pair->object() );
+            Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+            Basic::Component* obj = static_cast<Basic::Component*>(pair->object());
             State* state = dynamic_cast<State*>(obj);
             if (state != 0)
                state->updateGlobalState();
@@ -62,8 +62,8 @@ void State::updateState(const Basic::Component* const actor)
          // When we should update them all
          Basic::List::Item* item = subcomponents->getFirstItem();
          while (item != 0) {
-            Basic::Pair* pair = (Basic::Pair*)(item->getValue());
-            Basic::Component* obj = (Basic::Component*)( pair->object() );
+            Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+            Basic::Component* obj = static_cast<Basic::Component*>(pair->object());
             State* state = dynamic_cast<State*>(obj);
             if (state != 0)
                state->updateState(actor);

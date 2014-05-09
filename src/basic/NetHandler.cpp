@@ -95,12 +95,12 @@ void NetHandler::toNet(const void* const hostData, void* const netData, const in
 {
    // Compute pointers to the int word (4 byte) and short
    // short word (2 byte) areas of the source (this).
-   const u_long* psl = (const u_long*) hostData;
+   const u_long* psl  = static_cast<const u_long*>(hostData);
    const u_short* pss = (const u_short*) (psl + nl);
 
    // Compute pointers to the int word (4 byte) and short
    // short word (2 byte) areas of the destination (netData).
-   u_long* pdl = (u_long*) netData;
+   u_long* pdl = static_cast<u_long*>(netData);
    u_short* pds = (u_short*) (pdl + nl);
 
    for (int i = 0; i < nl; i++) {
@@ -125,12 +125,12 @@ void NetHandler::toHost(const void* const netData, void* const hostData, const i
 {
    // Compute pointers to the int word (4 byte) and short
    // short word (2 byte) areas of the source (this).
-   const u_long* psl = (const u_long*) netData;
+   const u_long* psl = static_cast<const u_long*>(netData);
    const u_short* pss = (const u_short*) (psl + nl);
 
    // Compute pointers to the int word (4 byte) and short
    // short word (2 byte) areas of the destination (hostData).
-   u_long* pdl = (u_long*) hostData;
+   u_long* pdl = static_cast<u_long*>(hostData);
    u_short* pds = (u_short*) (pdl + nl);
 
    for (int i = 0; i < nl; i++) {

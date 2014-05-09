@@ -82,7 +82,7 @@ inline unsigned int Rng::drawGeometric(const double p)
       const double u = drawOpen();
       const double num = std::log(u);        // log(0) undefined => u in (0,1)
       const double den = std::log(1.0 - p);  // log(0) undefined => p in (0,1)
-      g = (unsigned int) (num/den); 
+      g = static_cast<unsigned int>(num/den); 
    }
    return g;
 }
@@ -197,7 +197,7 @@ inline unsigned int Rng::drawBernoulli(const double p)
 inline double Rng::drawBinomial(const int n, const double p)
 {
    int i = 0;
-   double q = std::pow(1.0 - p, (double) n);
+   double q = std::pow(1.0 - p, static_cast<double>(n));
    double f = q;
    double u = drawOpen();
    while (f <= u) {

@@ -178,7 +178,7 @@ bool UdpBroadcastHandler::bindSocket()
        if (getLocalPort() != 0) addr.sin_port = htons (getLocalPort());  
        else addr.sin_port = htons(getPort());
 
-       if (bind(socketNum, (const struct sockaddr *) &addr, sizeof(addr)) == SOCKET_ERROR) {
+       if (bind(socketNum, reinterpret_cast<const struct sockaddr*>(&addr), sizeof(addr)) == SOCKET_ERROR) {
           std::perror("UdpBroadcast::bindSocket(): bind error");
           return false;
        }
