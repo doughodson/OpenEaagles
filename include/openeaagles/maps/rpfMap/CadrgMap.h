@@ -10,26 +10,27 @@
 // MapDrawer class to actually draw the maps themselves, and it does this automatically.
 // An example input file would look like this:
 // ( Display
-//      page:
-//      ( CadrgMap
-//          refLat: 40          // Map page derived slots
-//          refLon: -117
-//          range: 60
-//          mapLevel: "1:5M"    // This tells us the CADRG map level to draw
-//          pathNames: {
-//              // Where our gncjnc map data A.toc file is
-//              "C:/projects/data/maps/gncjnc/RPF/"
-//              "C:/some other directory/maps/somemaplevel/RPF"
-//              // You can use as many directories as you like
-//              // it will be sorted by this class.
-//          }
-//          components: {
-//              // Our CadrgMap will find this drawer if it is a component, and will
-//              // use it to draw the maps!
-//              ( MapDrawer )
-//          }
-//      )   // end of CadrgMap
-//  )   // end of display
+//    page: map
+//    page:
+//       map: ( CadrgMap
+//              refLat: 40          // Map page derived slots
+//              refLon: -117
+//              range: 60
+//              mapLevel: "1:5M"    // This tells us the CADRG map level to draw
+//              pathNames: {
+//                  // Where our gncjnc map data A.toc file is
+//                  "C:/projects/data/maps/gncjnc/RPF/"
+//                  "C:/some other directory/maps/somemaplevel/RPF"
+//                  // You can use as many directories as you like
+//                  // it will be sorted by this class.
+//              }
+//              components: {
+//                  // Our CadrgMap will find this drawer if it is a component, and will
+//                  // use it to draw the maps!
+//                  ( MapDrawer )
+//              }
+//            )   // end of CadrgMap
+// ) // end of display
 //
 // Subroutines:
 // getNumberOfCadrgFiles() - Return total number of all files
