@@ -5,12 +5,12 @@
 #define __Eaagles_Basic_PairStream_H__
 
 #include "openeaagles/basic/List.h"
+#include "Pair.h"
 
 namespace Eaagles {
 namespace Basic {
 
 class Identifier;
-class Pair;
 
 //------------------------------------------------------------------------------
 // Class: PairStream
@@ -83,12 +83,12 @@ public:
 
    // Returns the n'th pair
    Pair* getPosition(const unsigned int n)    {
-      return (Pair*) List::getPosition(n);
+      return static_cast<Pair*>(List::getPosition(n));
    }
 
    // Returns the n'th pair (const version)
    const Pair* getPosition(const unsigned int n) const {
-      return (const Pair*) List::getPosition(n);
+      return static_cast<const Pair*>(List::getPosition(n));
    }
 
    // Returns a pointer to the pair at the head of this stream and the pair IS REMOVED
@@ -96,18 +96,18 @@ public:
    // to the caller (i.e., this routine does not unref() the pair and the caller should
    // not ref() the pair).
    Pair* get() {
-      return (Pair*) List::get();
+      return static_cast<Pair*>(List::get());
    }
 
    // Put 'pair' at the tail of the stream.  The Pair is referenced, ref(), by this routine.
    void put(Pair* pair1) {
-      List::put((Object*)pair1);
+      List::put(static_cast<Object*>(pair1));
    }
 
    // Removes 'pair' from this list and true is returned.  If 'pair' 'obj' is not found
    // then false is returned.  (Note: The Pair is unref() and therefore possible to delete)
    bool remove(Pair* pair1) {
-      return List::remove((Object*)pair1);
+      return List::remove(static_cast<Object*>(pair1));
    }
 
 };
