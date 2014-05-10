@@ -406,7 +406,7 @@
 
 #define ON_EVENT_OBJ(token,onEvent,ObjType)                                            \
     if (!_used && token == _event && dynamic_cast<ObjType*>(_obj) != 0) {              \
-        _used = onEvent((ObjType*)_obj);                                               \
+        _used = onEvent(static_cast<ObjType*>(_obj));                                  \
     }
 
 
@@ -420,7 +420,7 @@
 
 #define ON_ANYKEY_OBJ(onEvent,ObjType)                                                 \
     if (!_used && _event <= MAX_KEY_EVENT && dynamic_cast<ObjType*>(_obj) != 0) {      \
-        _used = onEvent(_event,((ObjType*)_obj));                                      \
+        _used = onEvent(_event,(static_cast<ObjType*>(_obj)));                         \
     }
 
 
