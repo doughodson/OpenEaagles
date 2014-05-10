@@ -68,7 +68,7 @@ void Ils::getGlideSlopeData(const double aclat, const double aclon, const double
    double bearing, range, grdrange, lookangle;
    Basic::Nav::glla2bd(aclat, aclon, acelev, latitude(), longitude(), elevation(), &bearing, &grdrange, &range, &lookangle);
    *ilsGlideSlope = glideSlopeAngle();
-   *acGlideSlope = (float) -lookangle;
+   *acGlideSlope = static_cast<float>(-lookangle);
    *deltaGlideSlope = *ilsGlideSlope - *acGlideSlope;
 }
 

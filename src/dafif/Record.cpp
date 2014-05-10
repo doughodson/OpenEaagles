@@ -267,7 +267,7 @@ const char* Record::makePointer(const size_t n) const
 //------------------------------------------------------------------------------
 int Record::dsFreq2chan(const float f)
 {
-   long freq = (long)(f*10000.0f);
+   long freq = static_cast<long>(f*10000.0f);
    int c = 0;
 
    if (freq < 1123000)
@@ -301,7 +301,7 @@ float Record::dsChan2freq(const int chan, const char type)
    if (type == 'Y')
       freq += 500;
 
-   return ((float)freq)/10000.0f;
+   return static_cast<float>(freq)/10000.0f;
 }
 
 
@@ -431,7 +431,7 @@ float Record::dsMagVariance(const char* const p)
       double v = d + (m + f / 10.0f) / 60.0f;
       mv = ( (*p == 'E') ? v : -v );
    }
-   return (float) mv;
+   return static_cast<float>(mv);
 }
 
 //------------------------------------------------------------------------------
@@ -446,7 +446,7 @@ float Record::dsSlaveVariance(const char* const p)
          sv = ( (*p == 'E') ? v : -v );
       }
    }
-   return (float) sv;
+   return static_cast<float>(sv);
 }
 
 //------------------------------------------------------------------------------
@@ -459,9 +459,9 @@ float Record::dsMagHeading(const char* const p)
    if (p != 0) {
       mh = dsAtofn(p,3);    // units
       ct = *(p+3);          // tenths
-      if (ct != '/') mh += (float)(ct - '0')/10.0f;
+      if (ct != '/') mh += static_cast<float>(ct - '0')/10.0f;
    }
-   return (float) mh;
+   return static_cast<float>(mh);
 }
 
 //------------------------------------------------------------------------------
@@ -472,8 +472,10 @@ float Record::dsElevation(const char* const p)
    if (p == 0) return 0.0f;
    if (*p == '\0') return 0.0f;
 
-   if (*p == '-') return (float) -dsAtofn(p+1, 4);
-   else return (float) dsAtofn(p, 5);
+   if (*p == '-')
+      return static_cast<float>(-dsAtofn(p+1, 4));
+   else
+      return static_cast<float>(dsAtofn(p, 5));
 }
 
 //------------------------------------------------------------------------------
@@ -497,9 +499,9 @@ float Record::dsElevation1(const char* const p)
    if (ct != ' ') et = ct - '0';
 
    if (*p == '-')
-      return (float) -(e + et/10.0);
+      return static_cast<float>(-(e + et/10.0));
    else 
-      return (float)  (e + et/10.0);
+      return static_cast<float>(e + et/10.0);
 }
 
 
@@ -519,7 +521,7 @@ float Record::dsFrequency(const char* const p)
       }
    }
 
-   return ((float)freq)/1000000.0f;
+   return static_cast<float>(freq)/1000000.0f;
 }
 
 
