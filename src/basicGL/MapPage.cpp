@@ -112,7 +112,7 @@ void MapPage::copyData(const MapPage& org, const bool cc)
 void MapPage::updateData(const LCreal dt)
 {
    // find our nearest map page above us and get the data from it!
-   MapPage* page = (MapPage*)(findContainerByType(typeid(MapPage)));
+   MapPage* page = static_cast<MapPage*>(findContainerByType(typeid(MapPage)));
    if (page != 0) {
       setHeadingDeg(page->getHeadingDeg());
       setDisplacement(page->getDisplacement());
@@ -366,8 +366,8 @@ bool MapPage::latLon2Earth(const double lat, const double lon, LCreal* const ear
 {
    bool ok = false;
    if (earthX != 0 && earthY != 0) {
-      *earthX = (LCreal) ((lat - referenceLat) * 60.0);
-      *earthY = (LCreal) ((lon - referenceLon) * 60.0 * cosineLatReference);
+      *earthX = static_cast<LCreal>((lat - referenceLat) * 60.0);
+      *earthY = static_cast<LCreal>((lon - referenceLon) * 60.0 * cosineLatReference);
       ok = true;
    }     
 

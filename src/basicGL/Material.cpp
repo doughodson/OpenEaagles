@@ -81,7 +81,7 @@ bool Material::setSlotAmbientColor(const Basic::PairStream* const x)
         int count = 0;
         LCreal temp[4] = { 1,1,1,1 };
         while (item != 0 && count < 4) {
-            Basic::Pair* pair = (Basic::Pair*)item->getValue();
+            Basic::Pair* pair = const_cast<Basic::Pair*>(static_cast<const Basic::Pair*>(item->getValue()));
             if (pair != 0) {
                 Basic::Number* num = dynamic_cast<Basic::Number*>(pair->object());
                 if (num != 0) temp[count++] = num->getFloat();
@@ -121,7 +121,7 @@ bool Material::setSlotDiffuseColor(const Basic::PairStream* const x)
         int count = 0;
         LCreal temp[4] = { 1,1,1,1 };
         while (item != 0 && count < 4) {
-            Basic::Pair* pair = (Basic::Pair*)item->getValue();
+            Basic::Pair* pair = const_cast<Basic::Pair*>(static_cast<const Basic::Pair*>(item->getValue()));
             if (pair != 0) {
                 Basic::Number* num = dynamic_cast<Basic::Number*>(pair->object());
                 if (num != 0) temp[count++] = num->getFloat();
@@ -161,7 +161,7 @@ bool Material::setSlotEmissiveColor(const Basic::PairStream* const x)
         int count = 0;
         LCreal temp[4] = { 1,1,1,1 };
         while (item != 0 && count < 4) {
-            Basic::Pair* pair = (Basic::Pair*)item->getValue();
+            Basic::Pair* pair = const_cast<Basic::Pair*>(static_cast<const Basic::Pair*>(item->getValue()));
             if (pair != 0) {
                 Basic::Number* num = dynamic_cast<Basic::Number*>(pair->object());
                 if (num != 0) temp[count++] = num->getFloat();
@@ -201,7 +201,7 @@ bool Material::setSlotSpecularColor(const Basic::PairStream* const x)
         int count = 0;
         LCreal temp[4] = { 1,1,1,1 };
         while (item != 0 && count < 4) {
-            Basic::Pair* pair = (Basic::Pair*)item->getValue();
+            Basic::Pair* pair = const_cast<Basic::Pair*>(static_cast<const Basic::Pair*>(item->getValue()));
             if (pair != 0) {
                 Basic::Number* num = dynamic_cast<Basic::Number*>(pair->object());
                 if (num != 0) temp[count++] = num->getFloat();

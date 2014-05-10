@@ -169,13 +169,14 @@ void Polygon::drawFunc()
                 if (colGradient != 0) {
                     Basic::Color* col = colGradient->getColorByIdx(i+1);
                     if (col != 0)
-                       glColor4f((GLfloat)col->red(), (GLfloat)col->green(), (GLfloat)col->blue(), (GLfloat)col->alpha());
+                       glColor4f(static_cast<GLfloat>(col->red()), static_cast<GLfloat>(col->green()),
+                                 static_cast<GLfloat>(col->blue()), static_cast<GLfloat>(col->alpha()));
                 }
                 // if we have a material name, we will set up like we have a material
                 if (getMaterialName() != 0) {
                     //lcVertex3v( vertices[i].ptr() );
-                    ptr = (osg::Vec3*)vertices[i].ptr();
-                    
+                    ptr = const_cast<osg::Vec3*>(reinterpret_cast<const osg::Vec3*>(vertices[i].ptr()));
+
                     if (ptr != 0) {
                         calcNormal();
                         lcNormal3(norm.x(), norm.y(), -(norm.z()));
@@ -194,3 +195,4 @@ void Polygon::drawFunc()
 
 } // End BasicGL namespace
 } // End Eaagles namespace
+

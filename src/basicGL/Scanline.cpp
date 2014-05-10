@@ -119,7 +119,7 @@ void Scanline::setMatrix()
    mat.makeIdentity();
 
    // translate origin from center to lower left corner
-   rr.makeTranslate((LCreal(ix-1)/2.0f), (LCreal(iy-1)/2.0f), 0.0f);
+   rr.makeTranslate((static_cast<LCreal>(ix-1)/2.0f), (static_cast<LCreal>(iy-1)/2.0f), 0.0f);
    mat.preMult(rr);
 
    // rotate 
@@ -127,8 +127,8 @@ void Scanline::setMatrix()
    mat.preMult(rr);
 
    // scale world area size to window size
-   LCreal scaleX = LCreal(ix-1)/sx;
-   LCreal scaleY = LCreal(iy-1)/sy;
+   LCreal scaleX = static_cast<LCreal>(ix-1)/sx;
+   LCreal scaleY = static_cast<LCreal>(iy-1)/sy;
    rr.makeScale(scaleX, scaleY, 1.0f);
    mat.preMult(rr);
 
@@ -198,7 +198,7 @@ void Scanline::setArea(
    cy = yCenter;
    sx = xSize;
    sy = ySize;
-   angle = zRotDeg * (LCreal)Basic::Angle::D2RCC;
+   angle = zRotDeg * static_cast<LCreal>(Basic::Angle::D2RCC);
    setMatrix();
 }
 
@@ -210,7 +210,7 @@ void Scanline::setSize(const unsigned int x, const unsigned int y)
    ix = x;
    iy = y;
    setMatrix();
-   clipper->setClippingBox(0.0f,LCreal(ix-1),0.0f,LCreal(iy-1));
+   clipper->setClippingBox(0.0f, static_cast<LCreal>(ix-1), 0.0f, static_cast<LCreal>(iy-1));
 }
 
 //------------------------------------------------------------------------------
@@ -261,11 +261,11 @@ unsigned int Scanline::reduceVert(Polygon* const polygon)
    if (polygon == 0) return 0;
 
    unsigned int n1 = polygon->getNumberOfVertices();
-   osg::Vec3* tvect  = (osg::Vec3*) polygon->getVertices();       // Warning: const cast away
+   osg::Vec3* tvect  = const_cast<osg::Vec3*>(static_cast<const osg::Vec3*>(polygon->getVertices()));
    if (tvect == 0) return 0;
 
-   osg::Vec3* tnorms = (osg::Vec3*) polygon->getNormals();        // Warning: const cast away
-   osg::Vec2* tcoord = (osg::Vec2*) polygon->getTextureCoord();   // Warning: const cast away
+   osg::Vec3* tnorms = const_cast<osg::Vec3*>(static_cast<const osg::Vec3*>(polygon->getNormals()));
+   osg::Vec2* tcoord = const_cast<osg::Vec2*>(static_cast<const osg::Vec2*>(polygon->getTextureCoord()));
 
    bool reduced = true;
    while (reduced && n1 > 2) {
@@ -488,7 +488,7 @@ void Scanline::scanline(const int y)
    // reset some values
    curPoly = 0;
    curX = 0.0f;
-   curY = LCreal(y);
+   curY = static_cast<LCreal>(y);
    refAET = 0;
    nAPT = 0;
 
@@ -510,7 +510,7 @@ void Scanline::scanline(const int y)
    // Update x positions and normals of edges in the AET
    for (unsigned int i = 0; i < nAET; i++) {
       LCreal dist = curY - aet[i]->lv[1];
-      aet[i]->x = LCreal(aet[i]->lv[0]) + aet[i]->slope*dist;
+      aet[i]->x = static_cast<LCreal>(aet[i]->lv[0]) + aet[i]->slope*dist;
       aet[i]->cn = aet[i]->lvn + aet[i]->nslope * dist;
    }
 
@@ -525,7 +525,7 @@ void Scanline::scanline(const int y)
 const Scanline::PolyData* Scanline::step(const int x)
 {
    curPoly = 0; 
-   curX = LCreal(x);
+   curX = static_cast<LCreal>(x);
 
    // Hit an edge?  Update the active polygon table.
    while (refAET < nAET && curX >= aet[refAET]->x) {
@@ -667,7 +667,7 @@ void Scanline::PolyData::copyData(const Scanline::PolyData& org, const bool)
    polygon = 0;
    if (org.polygon != 0) {
       const Polygon* p = org.polygon;
-      polygon = (Polygon*) p;
+      polygon = const_cast<Polygon*>(static_cast<const Polygon*>(p));
    }
 
    orig = 0;
@@ -830,7 +830,7 @@ void Scanline::Edge::copyData(const Scanline::Edge& org, const bool)
    pointLock = org.pointLock;
 
    const PolyData* pp = org.polygon;
-   polygon = (PolyData*) pp;
+   polygon = const_cast<PolyData*>(static_cast<const PolyData*>(pp));
 
 }
 

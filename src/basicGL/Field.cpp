@@ -270,7 +270,7 @@ Field::Mode Field::setMode(const Field::Mode nmode)
 
         // Change the input focus to our container page (Page)
         if (getDisplay()->focus() == this) {
-            Page* page = (Page*) findContainerByType(typeid(Page));
+            Page* page = static_cast<Page*>(findContainerByType(typeid(Page)));
             if (page != 0)
                 getDisplay()->focus(page);
             else
@@ -347,7 +347,7 @@ void Field::backSpace(const int ns)
 {
    if (mode != input) return;
    // if we are backspacing, and we are at the starting character position that was set, we stay there!
-   if (startCP > 0 && icp == (int) startCP) {
+   if (startCP > 0 && icp == static_cast<int>(startCP)) {
       event(INPUT_LEFT_EDGE);
    }
    else {
@@ -611,7 +611,7 @@ bool Field::setSlotHighlight(const Basic::Number* const shobj)
 
             const Basic::List::Item* item = subcomponents->getFirstItem();
             while (item != 0) {
-                Basic::Pair* p = (Basic::Pair*) item->getValue();
+                Basic::Pair* p = const_cast<Basic::Pair*>(static_cast<const Basic::Pair*>(item->getValue()));
                 Field* child = dynamic_cast<Field*>(p->object());
                 if (child != 0) child->setSlotHighlight(shobj); //changed from obj
                 item = item->getNext();
@@ -647,7 +647,7 @@ bool Field::setSlotUnderline(const Basic::Number* const suobj)
 
             const Basic::List::Item* item = subcomponents->getFirstItem();
             while (item != 0) {
-                Basic::Pair* p = (Basic::Pair*) item->getValue();
+                Basic::Pair* p = const_cast<Basic::Pair*>(static_cast<const Basic::Pair*>(item->getValue()));
                 Field* child = dynamic_cast<Field*>(p->object());
                 if (child != 0) child->setSlotUnderline(suobj);
                 item = item->getNext();
@@ -684,7 +684,7 @@ bool Field::setSlotReversed(const Basic::Number* const srobj)
 
             const Basic::List::Item* item = subcomponents->getFirstItem();
             while (item != 0) {
-                Basic::Pair* p = (Basic::Pair*) item->getValue();
+                Basic::Pair* p = const_cast<Basic::Pair*>(static_cast<const Basic::Pair*>(item->getValue()));
                 Field* child = dynamic_cast<Field*>(p->object());
                 if (child != 0) child->setSlotReversed(srobj);
                 item = item->getNext();
@@ -790,7 +790,7 @@ bool Field::setSlotJustification(const Basic::String* const sjobj)
 
             const Basic::List::Item* item = subcomponents->getFirstItem();
             while (item != 0) {
-                Basic::Pair* p = (Basic::Pair*) item->getValue();
+                Basic::Pair* p = const_cast<Basic::Pair*>(static_cast<const Basic::Pair*>(item->getValue()));
                 Field* child = dynamic_cast<Field*>(p->object());
                 if (child != 0) child->setSlotJustification(sjobj);
                 item = item->getNext();
@@ -822,7 +822,7 @@ bool Field::setSlotStartCharPos(const Basic::Number* const msg) {
         int ii = msg->getInt();
         if (ii > 0) {
            // come in as 1 based, convert to 0 based
-           startCP = (unsigned int) (ii - 1);
+           startCP = static_cast<unsigned int>(ii - 1);
            ok = true;
         }
     }
@@ -850,7 +850,7 @@ std::ostream& Field::serialize(std::ostream& sout, const int i, const bool slots
 
     if ( width() > 0) {
         indent(sout,i+j);
-        sout << "width: " << (unsigned int)width() << std::endl;
+        sout << "width: " << static_cast<unsigned int>(width()) << std::endl;
     }
 
     if ( isHighLighted() ) {

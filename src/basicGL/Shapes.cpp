@@ -648,7 +648,10 @@ void Quad::drawFunc()
                     if (colGradient != 0) {
                         Basic::Color* col = colGradient->getColorByIdx(i+1);
                         if (col != 0)
-                            glColor4f((GLfloat)col->red(), (GLfloat)col->green(), (GLfloat)col->blue(), (GLfloat)col->alpha());
+                            glColor4f(static_cast<GLfloat>(col->red()),
+                                      static_cast<GLfloat>(col->green()),
+                                      static_cast<GLfloat>(col->blue()),
+                                      static_cast<GLfloat>(col->alpha()));
                     }
                     // now add our vertex
                     lcVertex3v( v[i].ptr() );
@@ -785,7 +788,10 @@ void Triangle::drawFunc()
                     if (colGradient != 0) {
                         Basic::Color* col = colGradient->getColorByIdx(i+1);
                         if (col != 0)
-                            glColor4f((GLfloat)col->red(), (GLfloat)col->green(), (GLfloat)col->blue(), (GLfloat)col->alpha());
+                            glColor4f(static_cast<GLfloat>(col->red()),
+                                      static_cast<GLfloat>(col->green()),
+                                      static_cast<GLfloat>(col->blue()),
+                                      static_cast<GLfloat>(col->alpha()));
                     }
                     // now add our vertex
                     lcVertex3v( v[i].ptr() );

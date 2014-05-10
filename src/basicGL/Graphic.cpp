@@ -223,7 +223,7 @@ void Graphic::copyData(const Graphic& org, const bool cc)
     // Texture
     texture = 0;
     const Basic::Identifier* tname = org.texName;
-    texName = (Basic::Identifier*) tname;
+    texName = const_cast<Basic::Identifier*>(static_cast<const Basic::Identifier*>(tname));
     
     // Scissor data
     scissorX = org.scissorX;
@@ -308,14 +308,14 @@ Basic::Pair* Graphic::findBySelectName(const GLuint name)
     if (subcomponents != 0) {
         const Basic::List::Item* item = subcomponents->getFirstItem();
         while (item != 0 && q == 0) {
-            Basic::Pair* p = (Basic::Pair*) item->getValue();
+            Basic::Pair* p = const_cast<Basic::Pair*>(static_cast<const Basic::Pair*>(item->getValue()));
             Graphic* gobj = dynamic_cast<Graphic*>(p->object());
             if (gobj != 0 && gobj->getSelectName() == name) q = p;
             item = item->getNext();
         }
         item = subcomponents->getFirstItem();
         while (item != 0 && q == 0) {
-            Basic::Pair* p = (Basic::Pair*) item->getValue();
+            Basic::Pair* p = const_cast<Basic::Pair*>(static_cast<const Basic::Pair*>(item->getValue()));
             Graphic* gobj = dynamic_cast<Graphic*>(p->object());
             if (gobj != 0) q = gobj->findBySelectName(name);
             item = item->getNext();
@@ -365,7 +365,7 @@ Display* Graphic::getDisplay()
     if (displayPtr == 0) {
         if ( isClassType(typeid(Display))) {
             // When we're a Display
-            displayPtr = (Display*)( this );
+            displayPtr = static_cast<Display*>(this);
         }
         else {
             // Otherwise, check our (grand) parent container
@@ -450,7 +450,7 @@ void Graphic::setupMaterial()
         glMaterialfv(GL_FRONT, GL_SPECULAR, temp);
 
         // now shininess
-        GLfloat tempShine = (GLfloat)tempMat->getShininess();
+        GLfloat tempShine = static_cast<GLfloat>(tempMat->getShininess());
         glMaterialf(GL_FRONT, GL_SHININESS, tempShine);
     }
 }
@@ -572,7 +572,7 @@ void Graphic::draw()
             // When we should draw them all
             Basic::List::Item* item = subcomponents->getFirstItem();
             while (item != 0) {
-                Basic::Pair* pair = (Basic::Pair*)(item->getValue());
+                Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
                 Graphic* obj = dynamic_cast<Graphic*>( pair->object() );
                 if (obj != 0) obj->draw();
                 item = item->getNext();
@@ -707,7 +707,7 @@ void Graphic::setupMatrix()
     if (transforms != 0) {
         const Basic::List::Item* item = transforms->getFirstItem();
         while (item != 0) {
-            Basic::Pair* p = (Basic::Pair*) item->getValue();
+            Basic::Pair* p = const_cast<Basic::Pair*>(static_cast<const Basic::Pair*>(item->getValue()));
             Basic::Transform* t = dynamic_cast<Basic::Transform*>(p->object());
             if (t != 0) {
                 m.preMult( *t );
@@ -780,7 +780,7 @@ bool Graphic::onSetTextureId(const Basic::Number* const msg)
    if (msg != 0) {
       int v = msg->getInt();
       if (v >= 0) {
-         ok = setTexture((GLuint) v);
+         ok = setTexture(static_cast<GLuint>(v));
       }
    }
    return ok;
@@ -1022,7 +1022,7 @@ bool Graphic::setSlotTransformList(Basic::PairStream* list)
         transforms->ref();
         Basic::List::Item* item = transforms->getFirstItem();
         while (item != 0) {
-            Basic::Pair* pair = (Basic::Pair*)(item->getValue());
+            Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
             Basic::Transform* ip = dynamic_cast<Basic::Transform*>( pair->object() );
             if (ip == 0) {
                 // It's not a Basic::Transform!!! 
@@ -1059,7 +1059,7 @@ bool Graphic::setSlotTranslateLight(Basic::PairStream* const msg)
         Basic::List::Item* item = msg->getFirstItem();
         int count = 0;
         while (item != 0 && count < 4) {
-            Basic::Pair* pair = (Basic::Pair*)item->getValue();
+            Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
             if (pair != 0) {
                 Basic::Number* num = dynamic_cast<Basic::Number*>(pair->object());
                 if (num != 0) {
@@ -1127,7 +1127,7 @@ bool Graphic::setSlotSelectName(const Basic::Number* const snobj)
     bool ok = (snobj != 0);
     if (ok) {
          int name = snobj->getInt();
-         ok = setSelectName( (GLuint) name );
+         ok = setSelectName(static_cast<GLuint>(name));
     }
     return ok;
 }
@@ -1185,7 +1185,7 @@ bool Graphic::setSlotStippleFactor(const Basic::Number* const msg)
 {
    bool ok = false;
    if (msg != 0) {
-       ok = setStippleFactor((GLuint)msg->getInt());
+       ok = setStippleFactor(static_cast<GLuint>(msg->getInt()));
    }
    return ok;
 }
@@ -1197,7 +1197,7 @@ bool Graphic::setSlotStipplePattern(const Basic::Number* const msg)
    if (msg != 0) {
       int v = msg->getInt();
       if (v >= 0 && v <= 0xffff) {
-         ok = setStipplePattern( (GLushort) v );
+         ok = setStipplePattern(static_cast<GLushort>(v));
       }
       else {
          std::cerr << "Graphic::setSlotStipplePattern() - invalid value: " << v << "; must be a 16 bit value; range 0x0000 (0) to 0xFFFF (65535)" << std::endl;
@@ -1484,12 +1484,12 @@ std::ostream& Graphic::serialize(std::ostream& sout, const int i, const bool slo
         sout << "color: ";
         if (colorName != 0) {
             // When we have the name of a color from the color table
-            Basic::Identifier* cn = (Basic::Identifier*) colorName;
+            Basic::Identifier* cn = static_cast<Basic::Identifier*>(colorName);
             cn->serialize(sout,i+j);
         }
         else {
             // When we have the color
-            Basic::Color* cc = (Basic::Color*) color;
+            Basic::Color* cc = static_cast<Basic::Color*>(color);
             cc->serialize(sout,i+j);
         }
         sout << std::endl;
@@ -1576,7 +1576,7 @@ std::ostream& Graphic::serialize(std::ostream& sout, const int i, const bool slo
     }
 
     if (getSelectName() > 0) {
-        int name = (int) getSelectName();
+        int name = static_cast<int>(getSelectName());
         indent(sout,i+j);
         sout << "selectName: " << name << std::endl;
     }
