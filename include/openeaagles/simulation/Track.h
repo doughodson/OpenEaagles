@@ -105,12 +105,12 @@ public:
    // Azimuth angle, ownship->track, true north
    LCreal getTrueAzimuth() const                   { return taz; }
    LCreal getTrueAzimuthR() const                  { return taz; }
-   LCreal getTrueAzimuthD() const                  { return (LCreal)(Basic::Angle::R2DCC * taz); }
+   LCreal getTrueAzimuthD() const                  { return static_cast<LCreal>(Basic::Angle::R2DCC * taz); }
 
    // Azimuth angle, ownship->track, relative to ownship
    LCreal getRelAzimuth() const                    { return raz[0]; }
    LCreal getRelAzimuthR() const                   { return raz[0]; }
-   LCreal getRelAzimuthD() const                   { return (LCreal)(Basic::Angle::R2DCC * raz[0]); }
+   LCreal getRelAzimuthD() const                   { return static_cast<LCreal>(Basic::Angle::R2DCC * raz[0]); }
    void setRelAzimuth(LCreal az)                   { raz[0] = az; }
 
    // Azimuth angle rate, ownship->track, relative to ownship
@@ -124,7 +124,7 @@ public:
    // Elevation angle, ownship->track, relative to ownship
    LCreal getElevation() const                     { return rel[0]; }
    LCreal getElevationR() const                    { return rel[0]; }
-   LCreal getElevationD() const                    { return (LCreal)(Basic::Angle::R2DCC * rel[0]); }
+   LCreal getElevationD() const                    { return static_cast<LCreal>(Basic::Angle::R2DCC * rel[0]); }
 
    void setElevation(LCreal el)                    {rel[0] = el; }
 
@@ -139,7 +139,7 @@ public:
    // Azimuth angle, ownship->track, relative to ownship
    LCreal getPredictedAzimuth() const              { return predictedRaz[0]; }
    LCreal getPredictedAzimuthR() const             { return predictedRaz[0]; }
-   LCreal getPredictedAzimuthD() const             { return (LCreal)(Basic::Angle::R2DCC * predictedRaz[0]); }
+   LCreal getPredictedAzimuthD() const             { return static_cast<LCreal>(Basic::Angle::R2DCC * predictedRaz[0]); }
 
    void setPredictedAzimuth(LCreal az)             { predictedRaz[0] = az; }
 
@@ -150,7 +150,7 @@ public:
    // Elevation angle, ownship->track, relative to ownship
    LCreal getPredictedElevation() const            { return predictedRel[0]; }
    LCreal getPredictedElevationR() const           { return predictedRel[0]; }
-   LCreal getPredictedElevationD() const           { return (LCreal)(Basic::Angle::R2DCC * predictedRel[0]); }
+   LCreal getPredictedElevationD() const           { return static_cast<LCreal>(Basic::Angle::R2DCC * predictedRel[0]); }
 
    void setPredictedElevation(LCreal el)           {predictedRel[0] = el; }
 
@@ -160,23 +160,23 @@ public:
 
    // Track's estimated ground speed (m/s)
    LCreal getGroundSpeed() const                   { return gndSpd; }
-   LCreal getGroundSpeedFPS() const                { return getGroundSpeed() * (LCreal)Basic::Distance::M2FT; }
-   LCreal getGroundSpeedKts() const                { return getGroundSpeed() * (LCreal)Basic::Distance::M2NM * 3600.0f; }
+   LCreal getGroundSpeedFPS() const                { return getGroundSpeed() * static_cast<LCreal>(Basic::Distance::M2FT); }
+   LCreal getGroundSpeedKts() const                { return getGroundSpeed() * static_cast<LCreal>(Basic::Distance::M2NM * 3600.0f); }
 
    // Ground track angle, true north
    LCreal getGroundTrack() const                   { return gndTrk; }
    LCreal getGroundTrackR() const                  { return gndTrk; }
-   LCreal getGroundTrackD() const                  { return (LCreal)(Basic::Angle::R2DCC * gndTrk); }
+   LCreal getGroundTrackD() const                  { return static_cast<LCreal>(Basic::Angle::R2DCC * gndTrk); }
 
    // Ground track angle, relative to ownship
    LCreal getRelGroundTrack() const                { return relGndTrk; }
    LCreal getRelGroundTrackR() const               { return relGndTrk; }
-   LCreal getRelGroundTrackD() const               { return (LCreal)(Basic::Angle::R2DCC * relGndTrk); }
+   LCreal getRelGroundTrackD() const               { return static_cast<LCreal>(Basic::Angle::R2DCC * relGndTrk); }
 
    // Track->ownship aspect angle
    LCreal getAspectAngle() const                   { return aa; }
    LCreal getAspectAngleR() const                  { return aa; }
-   LCreal getAspectAngleD() const                  { return (LCreal)(Basic::Angle::R2DCC * aa); }
+   LCreal getAspectAngleD() const                  { return static_cast<LCreal>(Basic::Angle::R2DCC * aa); }
 
    // Track velocity vector
    const osg::Vec3& getVelocity() const            { return vel; }
@@ -318,15 +318,15 @@ public:
    IrTrack();
     
    // Signal strength and last emission for onboard IR sensor tracks
-   LCreal getAvgSignal() const                     { return avgSig; }
-   LCreal getMaxSignal() const                     { return maxSig; }
-   int getNumSignals() const                       { return nSig; }
-   const IrQueryMsg* getLastQuery() const               { return lastQuery; }
+   LCreal getAvgSignal() const                                             { return avgSig; }
+   LCreal getMaxSignal() const                                             { return maxSig; }
+   int getNumSignals() const                                               { return nSig; }
+   const IrQueryMsg* getLastQuery() const                                  { return lastQuery; }
    virtual bool setSignal(const LCreal snDbl, const IrQueryMsg* const q);
    virtual bool setPosition(const osg::Vec3& p);
 
    // Missile warning (from an RWR)
-   bool isMissileWarning() const                   { return mslWarn; }
+   bool isMissileWarning() const                                           { return mslWarn; }
    virtual bool setMissileWarning(const bool b);
 
    // Track inteIrace
@@ -344,3 +344,4 @@ protected:
 } // End Eaagles namespace
 
 #endif
+
