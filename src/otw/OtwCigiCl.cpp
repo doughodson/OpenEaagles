@@ -437,7 +437,7 @@ bool OtwCigiCl::updateOwnshipModel()
 
          if (player != 0 && animation != 0) {
             // get our ownship models id and our model
-            Simulation::LifeForm* lf = (Simulation::LifeForm*)player;
+            Simulation::LifeForm* lf = const_cast<Simulation::LifeForm*>(static_cast<const Simulation::LifeForm*>(player));
             if (lf != 0) {
                if (lf->getDamage() < 1) {
                   // Choose Animation state
@@ -477,7 +477,7 @@ int OtwCigiCl::updateModels()
 
       // For all active models in the table ...
       for (unsigned short i = 0; i < getModelTableSize(); i++) {
-         SPtr<OtwModelCigiCl> model( (OtwModelCigiCl*) table[i] );
+         SPtr<OtwModelCigiCl> model( static_cast<OtwModelCigiCl*>(table[i]) );
          if (model != 0) {
 
             if (model->getState() != Simulation::OtwModel::INACTIVE) {
@@ -494,22 +494,22 @@ int OtwCigiCl::updateModels()
 
                // Set the model data and ...
                if (player->isMajorType(Simulation::Player::AIR_VEHICLE)) {
-                  setAirVehicleData(model, entity, (const Simulation::AirVehicle*) player);
+                  setAirVehicleData(model, entity, static_cast<const Simulation::AirVehicle*>(player));
                }
                else if (player->isMajorType(Simulation::Player::GROUND_VEHICLE)) {
-                  setGndVehicleData(model, entity, (const Simulation::GroundVehicle*) player);
+                  setGndVehicleData(model, entity, static_cast<const Simulation::GroundVehicle*>(player));
                }
                else if (player->isMajorType(Simulation::Player::SHIP)) {
-                  setShipData(model, entity, (const Simulation::Ship*) player);
+                  setShipData(model, entity, static_cast<const Simulation::Ship*>(player));
                }
                else if (player->isMajorType(Simulation::Player::SPACE_VEHICLE)) {
-                  setSpaceVehicleData(model, entity, (const Simulation::SpaceVehicle*) player);
+                  setSpaceVehicleData(model, entity, static_cast<const Simulation::SpaceVehicle*>(player));
                }
                else if (player->isMajorType(Simulation::Player::LIFE_FORM)) {
-                  setLifeFormData(model, entity, (const Simulation::LifeForm*) player);
+                  setLifeFormData(model, entity, static_cast<const Simulation::LifeForm*>(player));
                }
                else if (player->isMajorType(Simulation::Player::BUILDING)) {
-                  setBuildingData(model, entity, (const Simulation::Building*) player);
+                  setBuildingData(model, entity, static_cast<const Simulation::Building*>(player));
                }
                else if (player->isMajorType(Simulation::Player::WEAPON)) {
                   const Simulation::Effects* effect      = dynamic_cast<const Simulation::Effects*>(model->getPlayer());
@@ -546,9 +546,9 @@ bool OtwCigiCl::setCommonModelData(CigiEntityCtrlV3* const ec, const unsigned sh
       //ec->parent_id = -1;
 
       // Set angles
-      ec->SetRoll((float)p->getRollD());
-      ec->SetPitch((float)p->getPitchD());
-      float hdg = (float) p->getHeadingD();
+      ec->SetRoll(static_cast<float>(p->getRollD()));
+      ec->SetPitch(static_cast<float>(p->getPitchD()));
+      float hdg = static_cast<float>(p->getHeadingD());
       if (hdg < 0.0) hdg += 360.0f;
       if (hdg >= 360.0f) hdg = 0.0;
       ec->SetYaw(hdg,false);
@@ -687,6 +687,7 @@ bool OtwCigiCl::setBuildingData(OtwModelCigiCl* const m, const unsigned short en
       m->parentActive = ok;
 
       // Load the smoke entity control
+
       if (p->getSmoke() > 0.1f) {
          // Set entity id, parent and state
          smoke->SetEntityID(entity+3); // Smoke is at main entity id plus one
@@ -863,7 +864,7 @@ bool OtwCigiCl::setGndVehicleData(OtwModelCigiCl* const m, const unsigned short 
          if (stores != 0) {
             const Basic::List::Item* item = stores->getFirstItem();
             while (item != 0 && apartNumMissiles == 0) {
-               const Basic::Pair* pair = (Basic::Pair*) item->getValue();
+               const Basic::Pair* pair = static_cast<const Basic::Pair*>(item->getValue());
                if (pair != 0) {
                   const Simulation::Missile* msl = dynamic_cast<const Simulation::Missile*>( pair->object() );
                   if (msl != 0) apartNumMissiles++;
@@ -1071,7 +1072,7 @@ bool OtwCigiCl::setLifeFormData(OtwModelCigiCl* const m, const unsigned short en
       }
       m->parentActive = ok;
 
-      Simulation::LifeForm* lf = (Simulation::LifeForm*)p;
+      Simulation::LifeForm* lf = const_cast<Simulation::LifeForm*>(static_cast<const Simulation::LifeForm*>(p));
 
       if (lf->getDamage() <= 0.9f) {
          // Choose Animation state
@@ -1499,7 +1500,7 @@ bool OtwCigiCl::setSlotOwnshipModel(const Basic::Number* const msg)
    if (msg != 0) {
       int v = msg->getInt();
       if (v >= 0 && v <= 0xFFFF) {
-         ok = setOwnshipModelId((unsigned short) v);
+         ok = setOwnshipModelId(static_cast<unsigned short>(v));
       }
    }
    return ok;
@@ -1511,7 +1512,7 @@ bool OtwCigiCl::setSlotMslTrailModel(const Basic::Number* const msg)
    if (msg != 0) {
       int v = msg->getInt();
       if (v >= 0 && v <= 0xFFFF) {
-         ok = setMslTrailModelId((unsigned short) v);
+         ok = setMslTrailModelId(static_cast<unsigned short>(v));
       }
    }
    return ok;
@@ -1523,7 +1524,7 @@ bool OtwCigiCl::setSlotSmokePlumeModel(const Basic::Number* const msg)
    if (msg != 0) {
       int v = msg->getInt();
       if (v >= 0 && v <= 0xFFFF) {
-         ok = setSmokePlumeModelId((unsigned short) v);
+         ok = setSmokePlumeModelId(static_cast<unsigned short>(v));
       }
    }
    return ok;
@@ -1535,7 +1536,7 @@ bool OtwCigiCl::setSlotAirExplosionModel(const Basic::Number* const msg)
    if (msg != 0) {
       int v = msg->getInt();
       if (v >= 0 && v <= 0xFFFF) {
-         ok = setAirExplosionModelId((unsigned short) v);
+         ok = setAirExplosionModelId(static_cast<unsigned short>(v));
       }
    }
    return ok;
@@ -1547,7 +1548,7 @@ bool OtwCigiCl::setSlotGroundExplosionModel(const Basic::Number* const msg)
    if (msg != 0) {
       int v = msg->getInt();
       if (v >= 0 && v <= 0xFFFF) {
-         ok = setGroundExplosionModelId((unsigned short) v);
+         ok = setGroundExplosionModelId(static_cast<unsigned short>(v));
       }
    }
    return ok;
@@ -1559,7 +1560,7 @@ bool OtwCigiCl::setSlotShipWakeModel(const Basic::Number* const msg)
    if (msg != 0) {
       int v = msg->getInt();
       if (v >= 0 && v <= 0xFFFF) {
-         ok = setShipWakeModelId((unsigned short) v);
+         ok = setShipWakeModelId(static_cast<unsigned short>(v));
       }
    }
    return ok;
@@ -1628,7 +1629,7 @@ bool OtwCigiCl::sendCigiData()
          int sendSize = cigi->getOutgoingBufferSize();
          int maxAge = getModelTableSize();
          for (unsigned short i = 0; i < getModelTableSize() && sendSize < (MAX_BUF_SIZE - padding); i++) {
-            SPtr<OtwModelCigiCl> model( (OtwModelCigiCl*) table[i] );
+            SPtr<OtwModelCigiCl> model( static_cast<OtwModelCigiCl*>(table[i]) );
             if (model != 0) {
 
                // For all active models in the table ...
@@ -1875,7 +1876,7 @@ void OtwCigiCl::losResp(const CigiLosRespV3* const p)
             losRespLat = p->GetLatitude();
             losRespLon = p->GetLongitude();
             losRespAlt = p->GetAltitude();
-            losRespRange = (LCreal) p->GetRange();
+            losRespRange = static_cast<LCreal>(p->GetRange());
          }
          else {
             // Don't have a valid point
@@ -1957,7 +1958,7 @@ void OtwCigiCl::hatHotResp(const CigiHatHotRespV3* const p)
          if (model->isHotActive() && model->getPlayer() != 0) {
             // When the player and elevation table are still valid, store
             // the terrain elevation (meters)
-            model->getPlayer()->setTerrainElevation((LCreal)p->GetHot());
+            model->getPlayer()->setTerrainElevation(static_cast<LCreal>(p->GetHot()));
 
             //if (isMessageEnabled(MSG_DEBUG)) {
             //   std::cout << "hotResp: alt = --, pid = " << model->getPlayer()->getID() << std::endl;
@@ -2520,7 +2521,7 @@ void CigiClNetwork::endMessage()
 
    int sendSize = 0;
    unsigned char* sendBuff = msgOut->GetMsg(sendSize);
-   netOutput->sendData( (char*) sendBuff, sendSize );
+   netOutput->sendData( reinterpret_cast<char*>(sendBuff), sendSize );
 
    msgOut->UnlockMsg();
 #else
@@ -2613,7 +2614,7 @@ void CigiClNetwork::mainLoop()
 
          msgIn->AdvanceCrntBuffer();
          unsigned char* rcvbuff = msgIn->GetMsgBuffer();
-         int recvCnt = netInput->recvData((char*) rcvbuff, MAX_BUF_SIZE);
+         int recvCnt = netInput->recvData(reinterpret_cast<char*>(rcvbuff), MAX_BUF_SIZE);
 
          if (recvCnt > 0) {
             msgIn->SetCrntMsgSize(recvCnt);

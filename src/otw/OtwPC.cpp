@@ -221,16 +221,16 @@ void OtwPC::sendPcData()
         fmd.m_mach = av->getMach();
         fmd.m_runalt = 0.0;
 
-        fmd.m_theta = (float_4) av->getPitchD();
-        fmd.m_phi   = (float_4) av->getRollD();
-        fmd.m_psi   = (float_4) av->getHeadingD();
-        fmd.m_airspeed = (float_4) av->getTotalVelocityKts();
+        fmd.m_theta    = static_cast<float_4>(av->getPitchD());
+        fmd.m_phi      = static_cast<float_4>(av->getRollD());
+        fmd.m_psi      = static_cast<float_4>(av->getHeadingD());
+        fmd.m_airspeed = static_cast<float_4>(av->getTotalVelocityKts());
 
-        fmd.m_heading = (float_4) av->getHeadingD();
+        fmd.m_heading = static_cast<float_4>(av->getHeadingD());
 
         fmd.m_dlg = 0;           // landing gear position 90 is down (scaled to 0-1)
-        fmd.m_dsb = (float_4) (av->getSpeedBrakePosition()/100.0f);   // speed break 60 is out (scaled to 0-1)
-        fmd.m_nz = (float_4) av->getGload();
+        fmd.m_dsb = static_cast<float_4>(av->getSpeedBrakePosition()/100.0f);   // speed break 60 is out (scaled to 0-1)
+        fmd.m_nz  = static_cast<float_4>(av->getGload());
 
         fmd.m_aetrc = 0;         // Commanded throttle position
         fmd.m_afterburner = 0;   // logical, true in in A/B
@@ -254,7 +254,7 @@ void OtwPC::sendPcData()
         fmd.m_target_vcas = 0;
 
         if (netOutput != 0) {
-           netOutput->sendData( (char*) &fmd, sizeof(fmd) );
+           netOutput->sendData( reinterpret_cast<char*>(&fmd), sizeof(fmd) );
         }
     }
 }
