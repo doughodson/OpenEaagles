@@ -264,11 +264,11 @@ int GlutDisplay::createSubWindow(const int mainId)
          GLsizei mainWinWidth = 0, mainWinHeight = 0;
          pMainWin->getViewport(&mainWinX, &mainWinY, &mainWinWidth, &mainWinHeight);
 
-         double widthRatio = (double)vpWidth / (double)mainWinWidth;
-         double heightRatio = (double)vpHeight/ (double)mainWinHeight;
+         double widthRatio  = static_cast<double>(vpWidth)  / static_cast<double>(mainWinWidth);
+         double heightRatio = static_cast<double>(vpHeight) / static_cast<double>(mainWinHeight);
 
-         double xRatio = (double)vpX / (double)mainWinWidth;
-         double yRatio = (double)vpY / (double)mainWinHeight;    
+         double xRatio = static_cast<double>(vpX) / static_cast<double>(mainWinWidth);
+         double yRatio = static_cast<double>(vpY) / static_cast<double>(mainWinHeight);    
 
          swPosition.set(xRatio, yRatio);
          swSize.set(widthRatio, heightRatio);
@@ -364,7 +364,7 @@ void GlutDisplay::reshapeIt(int w, int h)
          // go through and put our new numbers in
          Basic::List::Item* item = subDisplays()->getFirstItem();
          while (item != 0) {
-            Basic::Pair* pair = (Basic::Pair*)item->getValue();
+            Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
             if (pair != 0) {
                GlutDisplay* gd = dynamic_cast<GlutDisplay*>(pair->object());
                if (gd != 0) gd->reshapeSubWindow();
@@ -552,7 +552,7 @@ BasicGL::Graphic* GlutDisplay::findSelected(const GLint hits, const GLuint sbuff
    if (hitCnt > 0) {
 
       // Select this item (if it exists)
-      if (item > 0 && item <= (int) hitCnt) {
+      if (item > 0 && item <= static_cast<int>(hitCnt)) {
          id = hitList[item-1];
       }
 
@@ -592,7 +592,7 @@ BasicGL::Graphic* GlutDisplay::findSelected(const GLint hits, const GLuint sbuff
    if (id > 0) {
       Basic::Pair* pair = findBySelectName(id);
       if (pair != 0) {
-         sel = (Graphic*) (pair->object());
+         sel = static_cast<Graphic*>(pair->object());
       }
    }
 
@@ -802,7 +802,7 @@ void GlutDisplay::idleCB()
    for (int i = 0; i < numGlutDisplays; i++) {
       if (idList[i] >= 0) {
          glutSetWindow(idList[i]);
-         displayList[i]->updateData( (LCreal) dt);
+         displayList[i]->updateData( static_cast<LCreal>(dt) );
          if (displayList[i]->isMainDisplay()) {
             sleepFor = displayList[i]->getIdleSleepTime();
          }
