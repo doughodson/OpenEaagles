@@ -166,7 +166,7 @@ bool SaH::setSlotSampleRate(const Basic::Frequency* const msg)
    if (msg != 0) {
       int v = int( Basic::Hertz::convertStatic( *msg ) + 0.5f );
       if (v > 0) {
-         setSampleRate( (unsigned int) v );
+         setSampleRate( static_cast<unsigned int>(v) );
          ok = true;
       }
    }
@@ -179,7 +179,7 @@ bool SaH::setSlotSampleRate(const Basic::Number* const msg)
    if (msg != 0) {
       int v = msg->getInt();
       if (v > 0) {
-         setSampleRate( (unsigned int) v );
+         setSampleRate( static_cast<unsigned int>(v) );
          ok = true;
       }
    }

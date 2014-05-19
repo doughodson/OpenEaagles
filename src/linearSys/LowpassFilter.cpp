@@ -70,7 +70,7 @@ bool LowpassFilter::setSlotWc(const Basic::Frequency* const msg)
    bool ok = false;
    if (msg != 0) {
       LCreal hz = Basic::Hertz::convertStatic(*msg);
-      LCreal rps = (LCreal)( hz * 2.0 * PI);
+      LCreal rps = static_cast<LCreal>( hz * 2.0 * PI);
       if (rps > 0) {
          setWc( rps );
          ok = true;
