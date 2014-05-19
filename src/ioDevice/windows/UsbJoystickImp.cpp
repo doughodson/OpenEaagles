@@ -90,16 +90,16 @@ void UsbJoystickImp::reset()
          numAI = 8;
 
          // Set channel max/min values
-         setMaxMin( 0, LCreal(jsCaps.wXmax), LCreal(jsCaps.wXmin) );
-         setMaxMin( 1, LCreal(jsCaps.wYmax), LCreal(jsCaps.wYmin) );
-         setMaxMin( 2, LCreal(jsCaps.wZmax), LCreal(jsCaps.wZmin) );
-         setMaxMin( 3, LCreal(jsCaps.wRmax), LCreal(jsCaps.wRmin) );
-         setMaxMin( 4, LCreal(jsCaps.wUmax), LCreal(jsCaps.wUmin) );
-         setMaxMin( 5, LCreal(jsCaps.wVmax), LCreal(jsCaps.wVmin) );
+         setMaxMin( 0, static_cast<LCreal>(jsCaps.wXmax), static_cast<LCreal>(jsCaps.wXmin) );
+         setMaxMin( 1, static_cast<LCreal>(jsCaps.wYmax), static_cast<LCreal>(jsCaps.wYmin) );
+         setMaxMin( 2, static_cast<LCreal>(jsCaps.wZmax), static_cast<LCreal>(jsCaps.wZmin) );
+         setMaxMin( 3, static_cast<LCreal>(jsCaps.wRmax), static_cast<LCreal>(jsCaps.wRmin) );
+         setMaxMin( 4, static_cast<LCreal>(jsCaps.wUmax), static_cast<LCreal>(jsCaps.wUmin) );
+         setMaxMin( 5, static_cast<LCreal>(jsCaps.wVmax), static_cast<LCreal>(jsCaps.wVmin) );
 
          // number of bits
          {
-            unsigned short tmp = (unsigned short) jsCaps.wNumButtons;
+            unsigned short tmp = static_cast<unsigned short>(jsCaps.wNumButtons);
             if (tmp > MAX_DI) tmp = MAX_DI;
             numDI = tmp;
          }
@@ -122,12 +122,12 @@ void UsbJoystickImp::processInputs(const Eaagles::LCreal dt, Basic::IoData* cons
    if (status == JOYERR_NOERROR) {
 
       // First 6 channels are X, Y, Z, R, U, V, and they need to be scaled.
-      setInputScaled(0, LCreal(js.dwXpos));
-      setInputScaled(1, LCreal(js.dwYpos));
-      setInputScaled(2, LCreal(js.dwZpos));
-      setInputScaled(3, LCreal(js.dwRpos));
-      setInputScaled(4, LCreal(js.dwUpos));
-      setInputScaled(5, LCreal(js.dwVpos));
+      setInputScaled(0, static_cast<LCreal>(js.dwXpos));
+      setInputScaled(1, static_cast<LCreal>(js.dwYpos));
+      setInputScaled(2, static_cast<LCreal>(js.dwZpos));
+      setInputScaled(3, static_cast<LCreal>(js.dwRpos));
+      setInputScaled(4, static_cast<LCreal>(js.dwUpos));
+      setInputScaled(5, static_cast<LCreal>(js.dwVpos));
 
       // Last two channels are set using the POV angle
       {
