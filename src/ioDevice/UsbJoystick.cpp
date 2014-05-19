@@ -136,7 +136,7 @@ bool UsbJoystick::setDeviceIndex(const int v)
 {
    bool ok = false;
    if (v >= 0 && v <= 31) {
-      deviceIndex = (unsigned int) v;
+      deviceIndex = static_cast<unsigned int>(v);
       ok = true;
    }
    return ok;
@@ -191,3 +191,4 @@ std::ostream& UsbJoystick::serialize(std::ostream& sout, const int i, const bool
 
 } // IoDevice namespace
 } // end Eaagles namespace
+

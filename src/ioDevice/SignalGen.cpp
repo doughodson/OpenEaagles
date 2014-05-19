@@ -218,7 +218,7 @@ LCreal SignalGen::calc(const LCreal dt)
    if (value > 1.0) value = 1.0;
    else if (value < -1.0) value = -1.0;
 
-   return (LCreal) value;
+   return static_cast<LCreal>(value);
 }
 
 //------------------------------------------------------------------------------
@@ -260,7 +260,7 @@ bool SignalGen::setSlotPhase(const Basic::Angle* const msg)
 {
    bool ok = false;
    if (msg != 0) {
-      ok = setPhase( (LCreal) Basic::Radians::convertStatic(*msg) );
+      ok = setPhase( static_cast<LCreal>(Basic::Radians::convertStatic(*msg)) );
    }
    return ok;
 }
@@ -272,7 +272,7 @@ bool SignalGen::setSlotLocation(const Basic::Number* const msg)
    if (msg != 0) {
       int v = msg->getInt();
       if (v >= 0) {
-         ok = setLocation( (unsigned int) v );
+         ok = setLocation( static_cast<unsigned int>(v) );
       }
    }
    return ok;
@@ -285,7 +285,7 @@ bool SignalGen::setSlotChannel(const Basic::Number* const msg)
    if (msg != 0) {
       int v = msg->getInt();
       if (v >= 0) {
-         ok = setChannel( (unsigned int) v );
+         ok = setChannel( static_cast<unsigned int>(v) );
       }
    }
    return ok;

@@ -353,7 +353,7 @@ bool IoData::setSlotNumAI(const Basic::Number* const msg)
 
    if (msg != 0) {
       int v = msg->getInt();
-      if (v >= 0) num = (unsigned int) v;
+      if (v >= 0) num = static_cast<unsigned int>(v);
       else ok = false;
    }
 
@@ -372,7 +372,7 @@ bool IoData::setSlotNumAO(const Basic::Number* const msg)
 
    if (msg != 0) {
       int v = msg->getInt();
-      if (v >= 0) num = (unsigned int) v;
+      if (v >= 0) num = static_cast<unsigned int>(v);
       else ok = false;
    }
 
@@ -391,7 +391,7 @@ bool IoData::setSlotNumDI(const Basic::Number* const msg)
 
    if (msg != 0) {
       int v = msg->getInt();
-      if (v >= 0) num = (unsigned int) v;
+      if (v >= 0) num = static_cast<unsigned int>(v);
       else ok = false;
    }
 
@@ -410,7 +410,7 @@ bool IoData::setSlotNumDO(const Basic::Number* const msg)
 
    if (msg != 0) {
       int v = msg->getInt();
-      if (v >= 0) num = (unsigned int) v;
+      if (v >= 0) num = static_cast<unsigned int>(v);
       else ok = false;
    }
 

@@ -230,7 +230,7 @@ bool AnalogOutput::setSlotLocation(const Basic::Number* const msg)
    if (msg != 0) {
       int v = msg->getInt();
       if (v >= 0) {
-         ok = setLocation( (unsigned int) v );
+         ok = setLocation( static_cast<unsigned int>(v) );
       }
    }
    return ok;
@@ -243,7 +243,7 @@ bool AnalogOutput::setSlotChannel(const Basic::Number* const msg)
    if (msg != 0) {
       int v = msg->getInt();
       if (v >= 0) {
-         ok = setChannel( (unsigned int) v );
+         ok = setChannel( static_cast<unsigned int>(v) );
       }
    }
    return ok;
