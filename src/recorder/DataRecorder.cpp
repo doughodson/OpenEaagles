@@ -228,8 +228,8 @@ bool DataRecorder::recordMarker(const Basic::Object* objs[4], const double value
 
    // new Marker message
    Pb::MarkerMsg* markerMsg = msg->mutable_marker_msg();
-   markerMsg->set_id( (unsigned int) Eaagles::nintd(values[0]) );
-   markerMsg->set_source_id( (unsigned int) Eaagles::nintd(values[1]) );
+   markerMsg->set_id( static_cast<unsigned int>(Eaagles::nintd(values[0])) );
+   markerMsg->set_source_id( static_cast<unsigned int>(Eaagles::nintd(values[1])) );
 
    // Send the message for processing
    sendDataRecord(msg);
@@ -253,9 +253,9 @@ bool DataRecorder::recordAI(const Basic::Object* objs[4], const double values[4]
 
    // new Input Device message
    Pb::InputDeviceMsg* aiMsg = msg->mutable_input_device_msg();
-   aiMsg->set_id( (unsigned int) Eaagles::nintd(values[0]) );
-   aiMsg->set_source_id( (unsigned int) Eaagles::nintd(values[1]) );
-   aiMsg->set_value( float(values[2]) );
+   aiMsg->set_id( static_cast<unsigned int>(Eaagles::nintd(values[0])) );
+   aiMsg->set_source_id( static_cast<unsigned int>(Eaagles::nintd(values[1])) );
+   aiMsg->set_value( static_cast<float>(values[2]) );
 
    // Send the message for processing
    sendDataRecord(msg);
@@ -280,9 +280,9 @@ bool DataRecorder::recordDI(const Basic::Object* objs[4], const double values[4]
 
    // new Input Device message
    Pb::InputDeviceMsg* diMsg = msg->mutable_input_device_msg();
-   diMsg->set_id( (unsigned int) Eaagles::nintd(values[0]) );
-   diMsg->set_source_id( (unsigned int) Eaagles::nintd(values[1]) );
-   diMsg->set_value( float(values[2]) );
+   diMsg->set_id( static_cast<unsigned int>(Eaagles::nintd(values[0])) );
+   diMsg->set_source_id( static_cast<unsigned int>(Eaagles::nintd(values[1])) );
+   diMsg->set_value( static_cast<float>(values[2]) );
 
    // Send the message for processing
    sendDataRecord(msg);
@@ -586,7 +586,7 @@ bool DataRecorder::recordWeaponDetonation(const Basic::Object* objs[4], const do
    const Simulation::Player* wpn = dynamic_cast<const Simulation::Player*>( objs[0] );
    if (wpn == 0) return false;
 
-   const unsigned int detType =  (unsigned int) values[0];
+   const unsigned int detType =  static_cast<unsigned int>(values[0]);
    const double missDist = values[1];
 
    Pb::DataRecord* msg = new Pb::DataRecord();
@@ -665,7 +665,7 @@ bool DataRecorder::recordGunFired(const Basic::Object* objs[4], const double val
    const Simulation::Player* shooter = dynamic_cast<const Simulation::Player*>( objs[0] );
    if (shooter == 0) return false;
 
-   const unsigned int rounds = (unsigned int) values[0];
+   const unsigned int rounds = static_cast<unsigned int>(values[0]);
    Pb::DataRecord* msg = new Pb::DataRecord();
 
    // DataRecord header

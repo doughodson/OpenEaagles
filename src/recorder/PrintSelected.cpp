@@ -224,7 +224,7 @@ void PrintSelected::processRecordImp(const DataRecordHandle* const handle)
    // using reflection:
    // save to: const google::protobuf::Message* recMsg
    recMsg = dataRecord;
-   const google::protobuf::Message& root = *recMsg;
+   //const google::protobuf::Message& root = *recMsg;
    const google::protobuf::Descriptor* descriptor = recMsg->GetDescriptor();
    const google::protobuf::Reflection* reflection = recMsg->GetReflection();
 
@@ -538,14 +538,14 @@ void PrintSelected::processMessage(const google::protobuf::Message* const msg)
                else if (cppType == google::protobuf::FieldDescriptor::CPPTYPE_UINT32) {
                   unsigned int num = reflection->GetUInt32(root, fieldDescriptor);
                   if (((condition == EQ) && (num == getCompareToNum())) ||
-                     ((condition == GT) && ((int) num > getCompareToNum())) ||
-                     ((condition == LT) && ((int) num < getCompareToNum()))) {
+                     ((condition == GT) && (static_cast<int>(num) > getCompareToNum())) ||
+                     ((condition == LT) && (static_cast<int>(num) < getCompareToNum()))) {
                       // Found it!
                      foundSelected = true;
                   }
                }
                else if (cppType == google::protobuf::FieldDescriptor::CPPTYPE_FLOAT) {
-                  double num = (double) reflection->GetFloat(root, fieldDescriptor);
+                  double num = static_cast<double>(reflection->GetFloat(root, fieldDescriptor));
                   if ( ((condition == EQ) && equal(num, getCompareToDbl())) ||
                      ((condition == GT) && (num > getCompareToDbl())) ||
                      ((condition == LT) && (num < getCompareToDbl()))) {

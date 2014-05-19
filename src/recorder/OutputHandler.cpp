@@ -66,8 +66,8 @@ bool OutputHandler::shutdownNotification()
    Basic::PairStream* subcomponents = getComponents();
    if (subcomponents != 0) {
       for (Basic::List::Item* item = subcomponents->getFirstItem(); item != 0; item = item->getNext()) {
-         Basic::Pair* pair = (Basic::Pair*)(item->getValue());
-         OutputHandler* sc = (OutputHandler*) pair->object();
+         Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+         OutputHandler* sc = static_cast<OutputHandler*>(pair->object());
          sc->event(SHUTDOWN_EVENT);
       }
       subcomponents->unref();
@@ -96,8 +96,8 @@ void OutputHandler::processRecord(const DataRecordHandle* const dataRecord)
       if (subcomponents != 0) {
          for (Basic::List::Item* item = subcomponents->getFirstItem(); item != 0; item = item->getNext()) {
 
-            Basic::Pair* pair = (Basic::Pair*)(item->getValue());
-            OutputHandler* sc = (OutputHandler*) pair->object();
+            Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+            OutputHandler* sc = static_cast<OutputHandler*>(pair->object());
 
             sc->processRecord(dataRecord);
 
@@ -117,7 +117,8 @@ void OutputHandler::addToQueue(const DataRecordHandle* const dataRecord)
 {
    if (dataRecord != 0) {
       lcLock( semaphore );
-      queue.put( (DataRecordHandle*) dataRecord);  // const cast away to put into the queue
+      // const cast away to put into the queue
+      queue.put( const_cast<DataRecordHandle*>(static_cast<const DataRecordHandle*>(dataRecord)) );
       lcUnlock( semaphore );
    }
 }
@@ -130,7 +131,7 @@ void OutputHandler::processQueue()
 {
    // Get the first record from the queue
    lcLock( semaphore );
-   const DataRecordHandle* dataRecord = (const DataRecordHandle*) queue.get();
+   const DataRecordHandle* dataRecord = static_cast<const DataRecordHandle*>(queue.get());
    lcUnlock( semaphore );
 
    // While we have records ...
@@ -141,7 +142,7 @@ void OutputHandler::processQueue()
 
       // and get the next one from the queue
       lcLock( semaphore );
-      dataRecord = (const DataRecordHandle*) queue.get();
+      dataRecord = static_cast<const DataRecordHandle*>(queue.get());
       lcUnlock( semaphore );
    }
 }
