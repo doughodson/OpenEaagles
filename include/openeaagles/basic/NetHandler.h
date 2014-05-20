@@ -107,8 +107,8 @@ private:
 inline void NetHandler::toNetOrder(int16_t* const vout, const int16_t vin)
 {
     if (isNotNetworkByteOrder()) {
-        unsigned char* p = (unsigned char*) &vin;
-        unsigned char* q = ((unsigned char*) vout) + sizeof(int16_t);
+        unsigned char* p = const_cast<unsigned char*>(reinterpret_cast<const unsigned char*>(&vin));
+        unsigned char* q = const_cast<unsigned char*>(reinterpret_cast<const unsigned char*>(vout)) + sizeof(int16_t);
         *--q = *p++;
         *--q = *p++;
     }
@@ -117,8 +117,8 @@ inline void NetHandler::toNetOrder(int16_t* const vout, const int16_t vin)
 inline void NetHandler::toNetOrder(uint16_t* const vout, const uint16_t vin)
 {
     if (isNotNetworkByteOrder()) {
-        unsigned char* p = (unsigned char*) &vin;
-        unsigned char* q = ((unsigned char*) vout) + sizeof(uint16_t);
+        unsigned char* p = const_cast<unsigned char*>(reinterpret_cast<const unsigned char*>(&vin));
+        unsigned char* q = const_cast<unsigned char*>(reinterpret_cast<const unsigned char*>(vout)) + sizeof(uint16_t);
         *--q = *p++;
         *--q = *p++;
     }
@@ -127,8 +127,8 @@ inline void NetHandler::toNetOrder(uint16_t* const vout, const uint16_t vin)
 inline void NetHandler::toNetOrder(int32_t* const vout, const int32_t vin)
 {
     if (isNotNetworkByteOrder()) {
-        unsigned char* p = (unsigned char*) &vin;
-        unsigned char* q = ((unsigned char*) vout) + sizeof(int32_t);
+        unsigned char* p = const_cast<unsigned char*>(reinterpret_cast<const unsigned char*>(&vin));
+        unsigned char* q = const_cast<unsigned char*>(reinterpret_cast<const unsigned char*>(vout)) + sizeof(int32_t);
         *--q = *p++;
         *--q = *p++;
         *--q = *p++;
@@ -139,8 +139,8 @@ inline void NetHandler::toNetOrder(int32_t* const vout, const int32_t vin)
 inline void NetHandler::toNetOrder(uint32_t* const vout, const uint32_t vin)
 {
     if (isNotNetworkByteOrder()) {
-        unsigned char* p = (unsigned char*) &vin;
-        unsigned char* q = ((unsigned char*) vout) + sizeof(uint32_t);
+        unsigned char* p = const_cast<unsigned char*>(reinterpret_cast<const unsigned char*>(&vin));
+        unsigned char* q = const_cast<unsigned char*>(reinterpret_cast<const unsigned char*>(vout)) + sizeof(uint32_t);
         *--q = *p++;
         *--q = *p++;
         *--q = *p++;
@@ -151,8 +151,8 @@ inline void NetHandler::toNetOrder(uint32_t* const vout, const uint32_t vin)
 inline void NetHandler::toNetOrder(int64_t* const vout, const int64_t vin)
 {
     if (isNotNetworkByteOrder()) {
-        unsigned char* p = (unsigned char*) &vin;
-        unsigned char* q = ((unsigned char*) vout) + sizeof(int64_t);
+        unsigned char* p = const_cast<unsigned char*>(reinterpret_cast<const unsigned char*>(&vin));
+        unsigned char* q = const_cast<unsigned char*>(reinterpret_cast<const unsigned char*>(vout)) + sizeof(int64_t);
         *--q = *p++;
         *--q = *p++;
         *--q = *p++;
@@ -167,8 +167,8 @@ inline void NetHandler::toNetOrder(int64_t* const vout, const int64_t vin)
 inline void NetHandler::toNetOrder(uint64_t* const vout, const uint64_t vin)
 {
     if (isNotNetworkByteOrder()) {
-        unsigned char* p = (unsigned char*) &vin;
-        unsigned char* q = ((unsigned char*) vout) + sizeof(uint64_t);
+        unsigned char* p = const_cast<unsigned char*>(reinterpret_cast<const unsigned char*>(&vin));
+        unsigned char* q = const_cast<unsigned char*>(reinterpret_cast<const unsigned char*>(vout)) + sizeof(uint64_t);
         *--q = *p++;
         *--q = *p++;
         *--q = *p++;
@@ -183,8 +183,8 @@ inline void NetHandler::toNetOrder(uint64_t* const vout, const uint64_t vin)
 inline void NetHandler::toNetOrder(float* const vout, const float vin)
 {
     if (isNotNetworkByteOrder()) {
-        unsigned char* p = (unsigned char*) &vin;
-        unsigned char* q = ((unsigned char*) vout) + sizeof(float);
+        unsigned char* p = const_cast<unsigned char*>(reinterpret_cast<const unsigned char*>(&vin));
+        unsigned char* q = const_cast<unsigned char*>(reinterpret_cast<const unsigned char*>(vout)) + sizeof(float);
         *--q = *p++;
         *--q = *p++;
         *--q = *p++;
@@ -195,8 +195,8 @@ inline void NetHandler::toNetOrder(float* const vout, const float vin)
 inline void NetHandler::toNetOrder(double* const vout, const double vin)
 {
     if (isNotNetworkByteOrder()) {
-        unsigned char* p = (unsigned char*) &vin;
-        unsigned char* q = ((unsigned char*) vout) + sizeof(double);
+        unsigned char* p = const_cast<unsigned char*>(reinterpret_cast<const unsigned char*>(&vin));
+        unsigned char* q = const_cast<unsigned char*>(reinterpret_cast<const unsigned char*>(vout)) + sizeof(double);
         *--q = *p++;
         *--q = *p++;
         *--q = *p++;
