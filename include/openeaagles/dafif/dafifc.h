@@ -9,15 +9,15 @@ namespace Dafif {
 
 // Convert MHz to KHz and HHz/
 #define MHZ2KHZ(mhz) (mhz*1000.0f)
-#define MHZ2HHZ(mhz) ((int)(mhz*10000.0f+0.5f))
+#define MHZ2HHZ(mhz) (static_cast<int>(mhz*10000.0f+0.5f))
 
 // Convert KHz to MHz and HHz
 #define KHZ2MHZ(khz) (khz/1000.0f)
-#define KHZ2HHZ(khz) ((int)(khz*10.0f+0.5f))
+#define KHZ2HHZ(khz) (static_cast<int>(khz*10.0f+0.5f))
 
 // Convert HHz to MHz and KHz
-#define HHZ2MHZ(hhz) ((float)hhz/10000.0f)
-#define HHZ2KHZ(hhz) ((float)hhz/10.0f)
+#define HHZ2MHZ(hhz) (static_cast<float>(hhz/10000.0f))
+#define HHZ2KHZ(hhz) (static_cast<float>(hhz/10.0f))
 
 // Compare frequencies at HHz level
 #define CMP_FREQ(mhz1,mhz2) (MHZ2HHZ(mhz1)==MHZ2HHZ(mhz2))

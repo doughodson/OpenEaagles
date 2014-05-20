@@ -101,7 +101,7 @@ inline int Ils::channel() const
 
 inline float Ils::glideSlopeAngle() const
 {
-   return (float) (dsAtofn( makePointer(ILS_GSA_POS), ILS_GSA_LEN) / 100.0);
+   return static_cast<float>(dsAtofn( makePointer(ILS_GSA_POS), ILS_GSA_LEN) / 100.0);
 }
 
 

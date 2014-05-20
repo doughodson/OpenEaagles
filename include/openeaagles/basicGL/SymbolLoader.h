@@ -8,7 +8,8 @@
 
 namespace Eaagles {
 namespace BasicGL {
-   class SlSymbol;
+
+class SlSymbol;
 
 //------------------------------------------------------------------------------
 // Class: SymbolLoader
@@ -244,10 +245,10 @@ public:
    void setXScreenPos(const double v);       // Sets the X screen pos (inches)
    void setYScreenPos(const double v);       // Sets the Y screen pos (inches) (does not include displacement)
 
-   void setSymbolPair(Basic::Pair* const p); // Sets the graphical component
-   void setHeadingDeg(const LCreal h);       // Sets the (optional) heading (degrees)
+   void setSymbolPair(Basic::Pair* const p);     // Sets the graphical component
+   void setHeadingDeg(const LCreal h);           // Sets the (optional) heading (degrees)
    void setHdgAngleObj(Basic::Degrees* const p); // Sets the Basic::Angle object that holds the heading value
-   void setHdgGraphics(Graphic* const p);    // Sets the graphic object named 'hdg' to handle heading rotation
+   void setHdgGraphics(Graphic* const p);        // Sets the graphic object named 'hdg' to handle heading rotation
 
 private:
    void initData();
@@ -301,38 +302,38 @@ inline const SlSymbol* SymbolLoader::getSymbol(const int idx) const
    return p;
 }
 
-inline bool SlSymbol::isVisible() const               {  return visibility; }
-inline bool SlSymbol::isHeadingValid() const          {  return hdgValid; }
-inline bool SlSymbol::isPositionLL() const            {  return llFlg; }
-inline bool SlSymbol::isPositionAC() const            {  return acFlg; }
-inline bool SlSymbol::isPositionXY() const            {  return !llFlg || !scrnFlg; }
-inline bool SlSymbol::isPositionScreen() const        {  return scrnFlg; }
+inline bool SlSymbol::isVisible() const                  { return visibility; }
+inline bool SlSymbol::isHeadingValid() const             { return hdgValid; }
+inline bool SlSymbol::isPositionLL() const               { return llFlg; }
+inline bool SlSymbol::isPositionAC() const               { return acFlg; }
+inline bool SlSymbol::isPositionXY() const               { return !llFlg || !scrnFlg; }
+inline bool SlSymbol::isPositionScreen() const           { return scrnFlg; }
 
-inline int SlSymbol::getType() const                  { return type; }
-inline const char* SlSymbol::getId() const            { return id; }
-inline Basic::Object* SlSymbol::getValue() const      { return value; }
-inline Basic::Pair* SlSymbol::getSymbolPair() const   { return pntr; }
+inline int SlSymbol::getType() const                     { return type; }
+inline const char* SlSymbol::getId() const               { return id; }
+inline Basic::Object* SlSymbol::getValue() const         { return value; }
+inline Basic::Pair* SlSymbol::getSymbolPair() const      { return pntr; }
 
-inline double SlSymbol::getXPosition() const          { return xPos; }
-inline double SlSymbol::getYPosition() const          { return yPos; }
+inline double SlSymbol::getXPosition() const             { return xPos; }
+inline double SlSymbol::getYPosition() const             { return yPos; }
 
-inline double SlSymbol::getScreenXPos() const         { return xScreenPos; }
-inline double SlSymbol::getScreenYPos() const         { return yScreenPos; }
+inline double SlSymbol::getScreenXPos() const            { return xScreenPos; }
+inline double SlSymbol::getScreenYPos() const            { return yScreenPos; }
 
-inline LCreal SlSymbol::getHeadingDeg() const         { return hdg; }
-inline LCreal SlSymbol::getHeadingRad() const         { return (LCreal)(hdg * Basic::Angle::D2RCC); }
-inline Basic::Degrees* SlSymbol::getHdgAngleObj() const { return hdgAng; }
-inline Graphic* SlSymbol::getHdgGraphics() const       { return phdg; }
+inline LCreal SlSymbol::getHeadingDeg() const            { return hdg; }
+inline LCreal SlSymbol::getHeadingRad() const            { return static_cast<LCreal>(hdg * Basic::Angle::D2RCC); }
+inline Basic::Degrees* SlSymbol::getHdgAngleObj() const  { return hdgAng; }
+inline Graphic* SlSymbol::getHdgGraphics() const         { return phdg; }
 
-inline void SlSymbol::setXPosition(const double v)    { xPos = v; }
-inline void SlSymbol::setYPosition(const double v)    { yPos = v; }
-inline void SlSymbol::setXScreenPos(const double v)   { xScreenPos = v; }
-inline void SlSymbol::setYScreenPos(const double v)   { yScreenPos = v; }
-inline void SlSymbol::setVisible(const bool x)        { visibility = x; }
-inline void SlSymbol::setType(const int t)            { type = t; }
-inline void SlSymbol::setLatLonFlag(const bool flg)   { llFlg = flg; }
-inline void SlSymbol::setACCoordFlag(const bool flg)  { acFlg = flg; }
-inline void SlSymbol::setScreenFlag(const bool flg)   { scrnFlg = flg; }
+inline void SlSymbol::setXPosition(const double v)       { xPos = v; }
+inline void SlSymbol::setYPosition(const double v)       { yPos = v; }
+inline void SlSymbol::setXScreenPos(const double v)      { xScreenPos = v; }
+inline void SlSymbol::setYScreenPos(const double v)      { yScreenPos = v; }
+inline void SlSymbol::setVisible(const bool x)           { visibility = x; }
+inline void SlSymbol::setType(const int t)               { type = t; }
+inline void SlSymbol::setLatLonFlag(const bool flg)      { llFlg = flg; }
+inline void SlSymbol::setACCoordFlag(const bool flg)     { acFlg = flg; }
+inline void SlSymbol::setScreenFlag(const bool flg)      { scrnFlg = flg; }
 
 }  // end of BasicGL namespace
 }  // end of Eaagles namespace

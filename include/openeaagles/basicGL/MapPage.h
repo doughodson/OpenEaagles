@@ -7,6 +7,8 @@
 #include "openeaagles/basicGL/MfdPage.h"
 #include "openeaagles/basic/units/Angles.h"
 
+#include <cmath>
+
 namespace Eaagles {
 namespace BasicGL {
 
@@ -198,22 +200,22 @@ inline double MapPage::getReferenceLatDeg() const  { return referenceLat; }
 inline double MapPage::getReferenceLonDeg() const  { return referenceLon; }
 inline double MapPage::getReferenceLatRad() const  { return referenceLat * Basic::Angle::D2RCC; }
 inline double MapPage::getReferenceLonRad() const  { return referenceLon * Basic::Angle::D2RCC; }
-inline LCreal MapPage::getCosRefLat() const        { return (LCreal) cosineLatReference; }
-inline LCreal MapPage::getHeadingDeg() const       { return (LCreal) heading; }
-inline LCreal MapPage::getHeadingRad() const       { return (LCreal)(heading * Basic::Angle::D2RCC); }
-inline LCreal MapPage::getOuterRadius() const      { return (LCreal) outerRadius; }
-inline LCreal MapPage::getCurrentRadius() const    { return (LCreal) ( isCentered ? outerRadius : outerRadiusDC);  }
-inline LCreal MapPage::getOuterRadiusDC() const    { return (LCreal) outerRadiusDC; }
-inline LCreal MapPage::getRange() const            { return (LCreal) range; }
-inline LCreal MapPage::getScale() const            { return (LCreal) nm2Screen; }
-inline LCreal MapPage::getDisplacement() const     { return (LCreal) displacement; }
+inline LCreal MapPage::getCosRefLat() const        { return static_cast<LCreal>(cosineLatReference); }
+inline LCreal MapPage::getHeadingDeg() const       { return static_cast<LCreal>(heading); }
+inline LCreal MapPage::getHeadingRad() const       { return static_cast<LCreal>(heading * Basic::Angle::D2RCC); }
+inline LCreal MapPage::getOuterRadius() const      { return static_cast<LCreal>(outerRadius); }
+inline LCreal MapPage::getCurrentRadius() const    { return static_cast<LCreal>(isCentered ? outerRadius : outerRadiusDC);  }
+inline LCreal MapPage::getOuterRadiusDC() const    { return static_cast<LCreal>(outerRadiusDC); }
+inline LCreal MapPage::getRange() const            { return static_cast<LCreal>(range); }
+inline LCreal MapPage::getScale() const            { return static_cast<LCreal>(nm2Screen); }
+inline LCreal MapPage::getDisplacement() const     { return static_cast<LCreal>(displacement); }
 inline bool   MapPage::getCentered() const         { return isCentered; }
 inline bool   MapPage::getNorthUp() const          { return northUp; }
 
 inline bool MapPage::setReferenceLatDeg(const double newLat)
 {
    referenceLat = newLat;
-   cosineLatReference = (LCreal)cos((Basic::Angle::D2RCC*referenceLat));
+   cosineLatReference = static_cast<LCreal>(std::cos((Basic::Angle::D2RCC*referenceLat)));
    return true;
 }
 
@@ -225,7 +227,7 @@ inline bool MapPage::setReferenceLonDeg(const double newLon)
 
 inline bool MapPage::setReferenceLatRad(const double newLat)
 {
-   cosineLatReference = (LCreal)cos(newLat);
+   cosineLatReference = static_cast<LCreal>(std::cos(newLat));
    referenceLat = newLat * Basic::Angle::R2DCC;
    return true;
 }
@@ -238,20 +240,20 @@ inline bool MapPage::setReferenceLonRad(const double newLon)
 
 inline bool MapPage::setHeadingDeg(const LCreal newHeading)
 {
-   LCreal hdgRad = (LCreal) Basic::Angle::D2RCC * newHeading;
+   LCreal hdgRad = static_cast<LCreal>(Basic::Angle::D2RCC * newHeading);
    heading = newHeading;  
-   headingSin = (LCreal)sin(hdgRad);
-   headingCos = (LCreal)cos(hdgRad);
+   headingSin = static_cast<LCreal>(std::sin(hdgRad));
+   headingCos = static_cast<LCreal>(std::cos(hdgRad));
    return true;
 }
 
 inline bool MapPage::setHeadingRad(const LCreal newHeading)
 {
-   heading = newHeading * (LCreal)Basic::Angle::R2DCC;
+   heading = newHeading * static_cast<LCreal>(Basic::Angle::R2DCC);
    LCreal temp = newHeading;
    if (northUp) temp = 0;
-   headingSin = (LCreal)sin(temp);
-   headingCos = (LCreal)cos(temp);
+   headingSin = static_cast<LCreal>(std::sin(temp));
+   headingCos = static_cast<LCreal>(std::cos(temp));
    return true;
 }
 

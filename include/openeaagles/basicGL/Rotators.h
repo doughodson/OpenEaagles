@@ -38,11 +38,11 @@ public:
 
     // Get functions
     LCreal getXRotation()    const  { return xRot; }
-    LCreal getXRotationDeg() const  { return xRot * (LCreal)Basic::Angle::R2DCC; }  
+    LCreal getXRotationDeg() const  { return xRot * static_cast<LCreal>(Basic::Angle::R2DCC); }  
     LCreal getYRotation()    const  { return yRot; }
-    LCreal getYRotationDeg() const  { return yRot * (LCreal)Basic::Angle::R2DCC; }  
+    LCreal getYRotationDeg() const  { return yRot * static_cast<LCreal>(Basic::Angle::R2DCC); }  
     LCreal getZRotation()    const  { return zRot; }
-    LCreal getZRotationDeg() const  { return zRot * (LCreal)Basic::Angle::R2DCC; }  
+    LCreal getZRotationDeg() const  { return zRot * static_cast<LCreal>(Basic::Angle::R2DCC); }  
     // get all angles
     void getRotationAngles(LCreal& x, LCreal& y, LCreal& z);
 
