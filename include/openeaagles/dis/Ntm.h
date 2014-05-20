@@ -34,13 +34,13 @@ class Ntm : public Simulation::Ntm
 public:
    Ntm();
 
-   unsigned char getEntityKind() const      { return disKind; }                 // DIS kind type code (or 255 if not valid)
-   unsigned char getEntityDomain() const    { return disDomain; }               // DIS domain type code
-   unsigned short getEntityCountry() const  { return disCountry; }              // DIS country type code
-   unsigned char getEntityCategory() const  { return disCategory; }             // DIS category type code
+   unsigned char getEntityKind() const         { return disKind; }              // DIS kind type code (or 255 if not valid)
+   unsigned char getEntityDomain() const       { return disDomain; }            // DIS domain type code
+   unsigned short getEntityCountry() const     { return disCountry; }           // DIS country type code
+   unsigned char getEntityCategory() const     { return disCategory; }          // DIS category type code
    unsigned char getEntitySubcategory() const  { return disSubcategory; }       // DIS subcategory type code
-   unsigned char getEntitySpecific() const  { return disSpecific; }             // DIS specific type code
-   unsigned char getEntityExtra() const     { return disExtra; }                // DIS extra type code
+   unsigned char getEntitySpecific() const     { return disSpecific; }          // DIS specific type code
+   unsigned char getEntityExtra() const        { return disExtra; }             // DIS extra type code
 
    // Sets the player's entity type codes
    virtual bool setEntityType(

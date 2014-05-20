@@ -121,7 +121,7 @@ bool Ntm::setSlotDisEntityType(const Basic::List* const msg)
          ok = true;  // First, assume they're valid
          unsigned char k = 0;    // Kind
          if (values[0] >= 0x0 && values[0] <= 0xff) {
-            k = (unsigned char) values[0];
+            k = static_cast<unsigned char>(values[0]);
          }
          else {
             std::cerr << "Ntm::setSlotDisEntityType: Invalid kind: [ 0 .. 255 ]" << std::endl;
@@ -130,7 +130,7 @@ bool Ntm::setSlotDisEntityType(const Basic::List* const msg)
 
          unsigned char d = 0;    // Domain
          if (values[1] >= 0x0 && values[1] <= 0xff) {
-            d = (unsigned char) values[1];
+            d = static_cast<unsigned char>(values[1]);
          }
          else {
             std::cerr << "Ntm::setSlotDisEntityType: Invalid domain: [ 0 .. 255 ]" << std::endl;
@@ -139,7 +139,7 @@ bool Ntm::setSlotDisEntityType(const Basic::List* const msg)
 
          unsigned short cc = 0;  // Country code
          if (values[2] >= 0x0 && values[2] <= 0xffff) {
-            cc = (unsigned char) values[2];
+            cc = static_cast<unsigned char>(values[2]);
          }
          else {
             std::cerr << "Ntm::setSlotDisEntityType: Invalid country: [ 0 .. 65535 ]" << std::endl;
@@ -148,7 +148,7 @@ bool Ntm::setSlotDisEntityType(const Basic::List* const msg)
 
          unsigned char c = 0;    // Category
          if (values[3] >= 0x0 && values[3] <= 0xff) {
-            c = (unsigned char) values[3];
+            c = static_cast<unsigned char>(values[3]);
          }
          else {
             std::cerr << "Ntm::setSlotDisEntityType: Invalid category: [ 0 .. 255 ]" << std::endl;
@@ -161,7 +161,7 @@ bool Ntm::setSlotDisEntityType(const Basic::List* const msg)
          unsigned char ex = 0;   // Extra
          if (n >= 5) {
             if (values[4] >= 0x0 && values[4] <= 0xff) {
-               sc = (unsigned char) values[4];
+               sc = static_cast<unsigned char>(values[4]);
             }
             else {
                std::cerr << "Ntm::setSlotDisEntityType: Invalid subcategory: [ 0 .. 255 ]" << std::endl;
@@ -170,7 +170,7 @@ bool Ntm::setSlotDisEntityType(const Basic::List* const msg)
          }
          if (n >= 6) {
             if (values[5] >= 0x0 && values[5] <= 0xff) {
-               sp = (unsigned char) values[5];
+               sp = static_cast<unsigned char>(values[5]);
             }
             else {
                std::cerr << "Ntm::setSlotDisEntityType: Invalid specific: [ 0 .. 255 ]" << std::endl;
@@ -179,7 +179,7 @@ bool Ntm::setSlotDisEntityType(const Basic::List* const msg)
          }
          if (n >= 7) {
             if (values[6] >= 0x0 && values[6] <= 0xff) {
-               ex = (unsigned char) values[6];
+               ex = static_cast<unsigned char>(values[6]);
             }
             else {
                std::cerr << "Ntm::setSlotDisEntityType: Invalid extra: [ 0 .. 255 ]" << std::endl;

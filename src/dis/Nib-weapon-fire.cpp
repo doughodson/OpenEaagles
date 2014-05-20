@@ -28,14 +28,14 @@ bool Nib::weaponFireMsgFactory(const LCreal)
     //std::cout << "NetIO::weaponFireMsgFactory() HERE!!" << std::endl;
 
     // Get our NetIO
-    NetIO* disIO = (NetIO*)(getNetIO());
+    NetIO* disIO = static_cast<NetIO*>(getNetIO());
     //Simulation* sim = disIO->getSimulation();
 
     // Set the NIB mode so that we don't do this again.
     setMode(Simulation::Player::ACTIVE);
 
     // Our NIB's player is a weapon that just became active
-    Simulation::Weapon* mPlayer = (Simulation::Weapon*)(getPlayer());
+    Simulation::Weapon* mPlayer = static_cast<Simulation::Weapon*>(getPlayer());
 
     // Ok, we have the weapon, now get the firing and target players
     Simulation::Player* tPlayer = mPlayer->getTargetPlayer();
@@ -119,9 +119,9 @@ bool Nib::weaponFireMsgFactory(const LCreal)
 
     // Velocity
     osg::Vec3d geocVel = mPlayer->getGeocVelocity();
-    pdu.velocity.component[0] = (float)geocVel[Basic::Nav::IX];
-    pdu.velocity.component[1] = (float)geocVel[Basic::Nav::IY];
-    pdu.velocity.component[2] = (float)geocVel[Basic::Nav::IZ];
+    pdu.velocity.component[0] = static_cast<float>(geocVel[Basic::Nav::IX]);
+    pdu.velocity.component[1] = static_cast<float>(geocVel[Basic::Nav::IY]);
+    pdu.velocity.component[2] = static_cast<float>(geocVel[Basic::Nav::IZ]);
 
     // ---
     // Burst
@@ -156,7 +156,7 @@ bool Nib::weaponFireMsgFactory(const LCreal)
     //std::cout << ")" << std::endl;
 
     if (Basic::NetHandler::isNotNetworkByteOrder()) pdu.swapBytes();
-    ok = disIO->sendData((char*)&pdu,sizeof(pdu));
+    ok = disIO->sendData(reinterpret_cast<char*>(&pdu),sizeof(pdu));
 
     return ok;
 }
