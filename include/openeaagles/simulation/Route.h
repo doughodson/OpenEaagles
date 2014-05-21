@@ -165,7 +165,7 @@ private:
 
 inline Steerpoint* Route::getSteerpoint()
 {
-   return (Steerpoint*) getSteerpointImp();
+   return const_cast<Steerpoint*>(static_cast<const Steerpoint*>(getSteerpointImp()));
 }
 
 inline const Steerpoint* Route::getSteerpoint() const
@@ -195,17 +195,17 @@ inline double Route::getAutoSeqDistance() const
 
 inline Basic::Pair* Route::findSteerpoint(const Steerpoint* const sp)
 {
-   return (Basic::Pair*) findSteerpointImp(sp);
+   return const_cast<Basic::Pair*>(static_cast<const Basic::Pair*>(findSteerpointImp(sp)));
 }
 
 inline Basic::Pair* Route::findSteerpoint(const char* const name)
 {
-   return (Basic::Pair*) findSteerpointImp(name);
+   return const_cast<Basic::Pair*>(static_cast<const Basic::Pair*>(findSteerpointImp(name)));
 }
 
 inline Basic::Pair* Route::findSteerpoint(const unsigned int idx)
 {
-   return (Basic::Pair*) findSteerpointImp(idx);
+   return const_cast<Basic::Pair*>(static_cast<const Basic::Pair*>(findSteerpointImp(idx)));
 }
 
 inline const Basic::Pair* Route::findSteerpoint(const Steerpoint* const sp) const

@@ -238,7 +238,7 @@ LCreal AerodynamicsModel::getAngleOfAttackR() const
 
 LCreal AerodynamicsModel::getAngleOfAttackD() const
 { 
-   return ( (LCreal)Basic::Angle::R2DCC * getAngleOfAttack() );
+   return ( static_cast<LCreal>(Basic::Angle::R2DCC) * getAngleOfAttack() );
 }
 
 LCreal AerodynamicsModel::getFlightPathR() const
@@ -248,7 +248,7 @@ LCreal AerodynamicsModel::getFlightPathR() const
 
 LCreal AerodynamicsModel::getFlightPathD() const
 { 
-   return ( (LCreal)Basic::Angle::R2DCC * getFlightPath() );
+   return ( static_cast<LCreal>(Basic::Angle::R2DCC) * getFlightPath() );
 }
 
 LCreal AerodynamicsModel::getSideSlipR() const
@@ -258,7 +258,7 @@ LCreal AerodynamicsModel::getSideSlipR() const
 
 LCreal AerodynamicsModel::getSideSlipD() const
 { 
-   return ( (LCreal)Basic::Angle::R2DCC * getSideSlip() );
+   return ( static_cast<LCreal>(Basic::Angle::R2DCC) * getSideSlip() );
 }
 
 //------------------------------------------------------------------------------

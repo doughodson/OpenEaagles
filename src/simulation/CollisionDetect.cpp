@@ -216,8 +216,8 @@ void CollisionDetect::updateData(const LCreal dt)
       while ( item != 0 && !finished ) {
 
          // Get the pointer to the target player
-         Basic::Pair* pair = (Basic::Pair*)(item->getValue());
-         Player* target = (Player*)(pair->object());
+         Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+         Player* target = static_cast<Player*>(pair->object());
 
          // Did we complete the local only players?
          finished = localOnly && target->isNetworkedPlayer();
@@ -567,7 +567,7 @@ bool CollisionDetect::setSlotMaxPlayers(const Basic::Number* const msg)
    if (msg != 0) {
       int n = msg->getInt();
       if (n >= 0) {
-         ok = setMaxPlayers( (unsigned int) n );
+         ok = setMaxPlayers( static_cast<unsigned int>(n) );
       }
    }
    return ok;
@@ -580,7 +580,7 @@ bool CollisionDetect::setSlotPlayerTypes(const Basic::PairStream* const msg)
       unsigned int mask = 0;
       const Basic::List::Item* item = msg->getFirstItem();
       while (item != 0) {
-         const Basic::Pair* pair = (const Basic::Pair*) item->getValue();
+         const Basic::Pair* pair = static_cast<const Basic::Pair*>(item->getValue());
          const Basic::String* type = dynamic_cast<const Basic::String*>( pair->object() );
          if (type != 0) {
             if ( lcStrcasecmp(*type,"air") == 0 ) { 

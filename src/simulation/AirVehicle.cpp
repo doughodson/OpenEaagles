@@ -93,17 +93,17 @@ void AirVehicle::reset()
 //------------------------------------------------------------------------------
 LCreal AirVehicle::getAngleOfAttackD() const
 {
-   return ( (LCreal)Basic::Angle::R2DCC * getAngleOfAttack() );
+   return ( static_cast<LCreal>(Basic::Angle::R2DCC) * getAngleOfAttack() );
 }
 
 LCreal AirVehicle::getFlightPathD() const
 {
-   return ( (LCreal)Basic::Angle::R2DCC * getFlightPath() );
+   return ( static_cast<LCreal>(Basic::Angle::R2DCC) * getFlightPath() );
 }
 
 LCreal AirVehicle::getSideSlipD() const
 {
-   return ( (LCreal)Basic::Angle::R2DCC * getSideSlip() );
+   return ( static_cast<LCreal>(Basic::Angle::R2DCC) * getSideSlip() );
 }
 
 AerodynamicsModel* AirVehicle::getAerodynamicsModel()
@@ -597,7 +597,7 @@ bool AirVehicle::isRadarAltValid() const
 
 LCreal AirVehicle::getRadarAltitude() const
 {
-    return (LCreal) getAltitudeAglFt();
+    return static_cast<LCreal>(getAltitudeAglFt());
 }
 
 

@@ -278,7 +278,7 @@ bool Gimbal::onRfEmissionEvent(Emission* const em)
       Basic::PairStream* subcomponents = getComponents();
       if (subcomponents != 0) {
          for (Basic::List::Item* item = subcomponents->getFirstItem(); item != 0; item = item->getNext()) {
-            Basic::Pair* pair = (Basic::Pair*)(item->getValue());
+            Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
             Gimbal* sc = dynamic_cast<Gimbal*>( pair->object() );
             if (sc != 0 && sc->getPowerSwitch() != System::PWR_OFF) sc->onRfEmissionEvent(em);
          }
@@ -1160,7 +1160,7 @@ bool Gimbal::setSlotPlayerTypes(const Basic::PairStream* const msg)
       unsigned int mask = 0;
       const Basic::List::Item* item = msg->getFirstItem();
       while (item != 0) {
-         const Basic::Pair* pair = (const Basic::Pair*) item->getValue();
+         const Basic::Pair* pair = static_cast<const Basic::Pair*>(item->getValue());
          const Basic::String* type = dynamic_cast<const Basic::String*>( pair->object() );
          if (type != 0) {
             if ( lcStrcasecmp(*type,"air") == 0 ) { 
