@@ -57,7 +57,7 @@ void IrSystem::copyData(const IrSystem& org, const bool cc)
 
    // No seeker yet
    setSeeker(0);
-   Basic::String* p = (Basic::String*) org.getSeekerName();
+   Basic::String* p = const_cast<Basic::String*>(static_cast<const Basic::String*>(org.getSeekerName()));
    setSlotSeekerName( p );
 }
 

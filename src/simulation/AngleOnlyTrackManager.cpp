@@ -44,8 +44,8 @@ AngleOnlyTrackManager::AngleOnlyTrackManager() : queryQueue(MAX_TRKS)
 
     oneMinusAlpha = 0.0;
     oneMinusBeta = 1.0;
-    azimuthBin = (LCreal) PI;
-    elevationBin = (LCreal) PI;
+    azimuthBin = static_cast<LCreal>(PI);
+    elevationBin = static_cast<LCreal>(PI);
 }
 
 AngleOnlyTrackManager::AngleOnlyTrackManager(const AngleOnlyTrackManager& org) : queryQueue(MAX_TRKS)
@@ -180,7 +180,7 @@ bool AngleOnlyTrackManager::setSlotAzimuthBin(const Basic::Number* const msg)
     const Basic::Angle* a = dynamic_cast<const Basic::Angle*>(msg);
     if (a != 0) {
         Basic::Radians r;
-        value = (LCreal)r.convert(*a);
+        value = static_cast<LCreal>(r.convert(*a));
     }
     else if (msg != 0) {
         value = msg->getReal();
@@ -201,7 +201,7 @@ bool AngleOnlyTrackManager::setSlotElevationBin(const Basic::Number* const msg)
     const Basic::Angle* a = dynamic_cast<const Basic::Angle*>(msg);
     if (a != 0) {
         Basic::Radians r;
-        value = (LCreal)r.convert(*a);
+        value = static_cast<LCreal>(r.convert(*a));
     }
     else if (msg != 0) {
         value = msg->getReal();
@@ -359,7 +359,7 @@ void AirAngleOnlyTrkMgr::processTrackList(const LCreal dt)
 
         bool dummy = false;
         if (tgt->isMajorType(Player::WEAPON)) {
-            dummy = ((const Weapon*) tgt)->isDummy();
+            dummy = (static_cast<const Weapon*>(tgt))->isDummy();
         }
 
         if ( tgt->isMajorType(Player::AIR_VEHICLE) ||
@@ -393,7 +393,7 @@ void AirAngleOnlyTrkMgr::processTrackList(const LCreal dt)
     lcLock(trkListLock);
     for (unsigned int it = 0; it < nTrks; it++) {
         trackNumMatches[it] = 0;
-        const IrTrack* const trk = (const IrTrack*) tracks[it];  // we produce only IrTracks
+        const IrTrack* const trk = static_cast<const IrTrack*>(tracks[it]);  // we produce only IrTracks
 
         for (unsigned int ir = 0; ir < nReports; ir++) {
             // use ground truth to match new reports to existing tracks
@@ -428,7 +428,7 @@ void AirAngleOnlyTrkMgr::processTrackList(const LCreal dt)
         if (trackNumMatches[it] > 0) {
             for (unsigned int ir = 0; ir < nReports; ir++) {
                 if (report2TrackMatch[ir][it] > 0) {
-                    IrTrack* const trk = (IrTrack*) tracks[it];  // we produce only IrTracks
+                    IrTrack* const trk = static_cast<IrTrack*>(tracks[it]);  // we produce only IrTracks
 
                     // Update the track's signal
                     trk->setSignal(newSignal[ir],queryMessages[ir]);
@@ -531,7 +531,7 @@ void AirAngleOnlyTrkMgr::processTrackList(const LCreal dt)
     // ---
     lcLock(trkListLock);
     for (unsigned int it = 0; it < nTrks; /* update 'it' below */ ) {
-        IrTrack* const trk = (IrTrack*) tracks[it];  // we produce only IrTracks
+        IrTrack* const trk = static_cast<IrTrack*>(tracks[it]);  // we produce only IrTracks
         if (trk->getTrackAge() >= getMaxTrackAge()) {
             //if (isMessageEnabled(MSG_INFO)) {
             //   std::cout << "Removed Aged AIR track[it] = [" << it << "] id = " << trk->getTrackID() << std::endl;
@@ -698,7 +698,7 @@ void AirAngleOnlyTrkMgrPT::removeAgedTracks()
 {
     lcLock(trkListLock);
     for (unsigned int it = 0; it < nTrks; /* update 'it' below */ ) {
-        IrTrack* const trk = (IrTrack*) tracks[it];  // we produce only IrTracks
+        IrTrack* const trk = static_cast<IrTrack*>(tracks[it]);  // we produce only IrTracks
         if (trk->getTrackAge() >= getMaxTrackAge()) {
             //if (isMessageEnabled(MSG_INFO)) {
             //   std::cout << "Removed Aged AIR track[it] = [" << it << "] id = " << trk->getTrackID() << std::endl;
@@ -766,7 +766,7 @@ void AirAngleOnlyTrkMgrPT::processTrackList(const LCreal dt)
 
         bool dummy = false;
         if (tgt->isMajorType(Player::WEAPON)) {
-            dummy = ((const Weapon*) tgt)->isDummy();
+            dummy = (static_cast<const Weapon*>(tgt))->isDummy();
         }
 
         if ( tgt->isMajorType(Player::AIR_VEHICLE) ||
@@ -803,7 +803,7 @@ void AirAngleOnlyTrkMgrPT::processTrackList(const LCreal dt)
             lcLock(trkListLock);
             for (unsigned int it = 0; it < nTrks; it++) {
                 trackNumMatches[it] = 0;
-                const IrTrack* const trk = (const IrTrack*) tracks[it];  // we produce only IrTracks
+                const IrTrack* const trk = static_cast<const IrTrack*>(tracks[it]);  // we produce only IrTracks
                 for (unsigned int ir = 0; ir < nReports; ir++) {
                     LCreal azDiff = queryMessages[ir]->getRelativeAzimuth() - trk->getPredictedAzimuth();
                     if (azDiff < 0.0f) azDiff = 0.0f - azDiff;
@@ -896,7 +896,7 @@ void AirAngleOnlyTrkMgrPT::processTrackList(const LCreal dt)
             if (trackNumMatches[it] > 0) {
                 for (unsigned int ir = 0; ir < nReports; ir++) {
                     if (report2TrackMatch[ir][it] > 0) {
-                        IrTrack* const irTrk = (IrTrack*) tracks[it];  // we produce only IrTracks
+                        IrTrack* const irTrk = static_cast<IrTrack*>(tracks[it]);  // we produce only IrTracks
 
                         // Update the track's signal
                         irTrk->setSignal(queryMessages[ir]->getSignalToNoiseRatio(), queryMessages[ir]);

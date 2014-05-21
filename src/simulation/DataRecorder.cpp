@@ -69,7 +69,7 @@ void DataRecorder::processRecords()
 Station* DataRecorder::getStation()
 {
    if (sta == 0) {
-      sta = (Station*) findContainerByType(typeid(Station));
+      sta = static_cast<Station*>(findContainerByType(typeid(Station)));
       if (sta == 0 && isMessageEnabled(MSG_ERROR)) {
          std::cerr << "DataRecorder::getStation(): ERROR, unable to locate the Station class!" << std::endl;
       }
@@ -86,9 +86,9 @@ const Station* DataRecorder::getStation() const
    else {
       // Yes this is a "const cast-away", but it is the non-const version
       // that initially finds our Station class.
-      DataRecorder* p = (DataRecorder*) this;
-      Station* s = p->getStation();
-      return (const Station*) s;
+      const DataRecorder* p = static_cast<const DataRecorder*>(this);
+      const Station* s = p->getStation();
+      return s;
    }
 }
 
@@ -110,9 +110,9 @@ const Simulation* DataRecorder::getSimulation() const
    else {
       // Yes this is a "const cast-away", but its the non-const version
       // that initially finds our Simulation class.
-      DataRecorder* p = (DataRecorder*) this;
-      Simulation* s = p->getSimulation();
-      return (const Simulation*) s;
+      const DataRecorder* p = static_cast<const DataRecorder*>(this);
+      const Simulation* s = p->getSimulation();
+      return s;
    }
 }
 

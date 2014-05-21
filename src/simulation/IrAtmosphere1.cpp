@@ -132,7 +132,7 @@ bool IrAtmosphere1::calculateAtmosphereContribution(IrQueryMsg* const msg, LCrea
    // FAB - this should be angle of gimbal, not angle to target. (see base class)
    // Determine the angle above the horizon to be used for background radiation lookup
    LCreal range2D = msg->getRange();
-   LCreal tanPhi = (LCreal)( (target->getAltitudeM() - ownship->getAltitudeM())/ range2D );
+   LCreal tanPhi = static_cast<LCreal>( (target->getAltitudeM() - ownship->getAltitudeM())/ range2D );
    LCreal tanPhiPrime = tanPhi - ( range2D / 12756776.0f ); // Twice earth radius
    
    // appears that negative angles are down in this calculation
@@ -172,7 +172,7 @@ bool IrAtmosphere1::calculateAtmosphereContribution(IrQueryMsg* const msg, LCrea
       LCreal backgroundRadianceInBand = overlapRatio * getBackgroundRadiation(
                                                 lowerBandBound,   
                                                 upperBandBound,
-                                                (LCreal) ownship->getAltitudeM(),
+                                                static_cast<LCreal>(ownship->getAltitudeM()),
                                                 viewingAngle);
       if (sigArray == 0) {
          // signature is a simple number
@@ -189,7 +189,8 @@ bool IrAtmosphere1::calculateAtmosphereContribution(IrQueryMsg* const msg, LCrea
       }
       
       // add in reflected solar radiation
-      LCreal solarRadiationInBin = ((1.0f - msg->getEmissivity()) * getSolarRadiation(centerWavelengths[i], (LCreal) target->getAltitudeM()));
+      LCreal solarRadiationInBin = ((1.0f - msg->getEmissivity()) * getSolarRadiation(centerWavelengths[i],
+                                    static_cast<LCreal>(target->getAltitudeM())));
       radiantIntensityInBin += (solarRadiationInBin * overlapRatio);
       
       // Lookup the transmissivity in the wave band given the altitudes of sensor
@@ -197,8 +198,8 @@ bool IrAtmosphere1::calculateAtmosphereContribution(IrQueryMsg* const msg, LCrea
       LCreal transmissivity = getTransmissivity(
                                                 lowerBandBound,
                                                 upperBandBound,
-                                                (LCreal) ownship->getAltitudeM(),
-                                                (LCreal) target->getAltitudeM(),
+                                                static_cast<LCreal>(ownship->getAltitudeM()),
+                                                static_cast<LCreal>(target->getAltitudeM()),
                                                 range2D);
 
       *totalSignal += radiantIntensityInBin * transmissivity;

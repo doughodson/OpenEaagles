@@ -233,8 +233,8 @@ void Autopilot::reset()
         // If heading, altitude or velocity hold modes are set and their
         // hold values were not set by a slot function, then use the player's
         // current values.
-        if (hdgHoldOn && !holdHdgSet) cmdHdg = (LCreal) pv->getHeadingD();
-        if (altHoldOn && !holdAltSet) cmdAlt = (LCreal) pv->getAltitudeFt();
+        if (hdgHoldOn && !holdHdgSet) cmdHdg = static_cast<LCreal>(pv->getHeadingD());
+        if (altHoldOn && !holdAltSet) cmdAlt = static_cast<LCreal>(pv->getAltitudeFt());
         if (spdHoldOn && !holdSpdSet) cmdSpd = pv->getTotalVelocityKts();
     }
 }
@@ -1095,7 +1095,7 @@ bool Autopilot::setAltitudeHoldMode(const bool flag)
    bool b = flag && isPitchSasOn();
    if (b && !altHoldOn && !holdAltSet && getOwnship() != 0) {
       // Altitude hold just came on, sample the vehicles altitude
-      setCommandedAltitudeFt( (LCreal) getOwnship()->getAltitudeFt() );
+      setCommandedAltitudeFt( static_cast<LCreal>(getOwnship()->getAltitudeFt()) );
    }
    altHoldOn = b;
    return true;
@@ -1124,9 +1124,9 @@ bool Autopilot::setNavMode(const bool flag)
    if ( !navModeOn && navModeOn1 ) {
       Player* pv = getOwnship();
       if (pv != 0) {
-        LCreal hdg = (LCreal) pv->getHeadingD();
+        LCreal hdg = static_cast<LCreal>(pv->getHeadingD());
         setCommandedHeadingD(hdg);
-        setCommandedAltitudeFt( (LCreal) pv->getAltitudeFt() );
+        setCommandedAltitudeFt( static_cast<LCreal>(pv->getAltitudeFt()) );
         setCommandedVelocityKts( pv->getTotalVelocityKts() );
       }
    }
@@ -1154,7 +1154,7 @@ bool Autopilot::setLoiterMode(const bool flag)
    if ( !loiterModeOn && loiterModeOn1 ) {
       Player* pv = getOwnship();
       if (pv != 0) {
-         LCreal hdg = (LCreal) pv->getHeadingD();
+         LCreal hdg = static_cast<LCreal>(pv->getHeadingD());
          setCommandedHeadingD(hdg);
       }
    }
@@ -1261,7 +1261,7 @@ bool Autopilot::setLeadPlayer(const Player* const p)
 
    if (lead != 0) {
       lead->ref();
-      leadHdg = (LCreal) lead->getHeadingR();
+      leadHdg = static_cast<LCreal>(lead->getHeadingR());
       // grab our lead name
       if (lead->getName() != 0) leadName = lead->getName()->clone();
    }
@@ -1443,7 +1443,7 @@ bool Autopilot::setSlotHoldHeading(const Basic::Angle* const msg)
 {
     bool ok = false;
     if (msg != 0) {
-       ok = setCommandedHeadingD( (LCreal)Basic::Degrees::convertStatic( *msg ) );
+       ok = setCommandedHeadingD( static_cast<LCreal>(Basic::Degrees::convertStatic( *msg )) );
        holdHdgSet = ok;
     }
     return ok;
