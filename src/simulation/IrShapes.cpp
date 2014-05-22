@@ -143,7 +143,6 @@ bool IrSphere::setSlotIrSphereRadius(const Eaagles::Basic::Number *const s) {
 
 LCreal IrSphere::getArea() { 
    //return (LCreal) (radius * radius * 4.0 * PI);
-   // SAIC's correction
    //Calculates the projected area of a sphere (projected area is a flat circle)
    return static_cast<LCreal>(radius * radius * PI);
 }
