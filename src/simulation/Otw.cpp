@@ -283,7 +283,7 @@ void Otw::mapPlayerList2ModelTable()
 
          // Get a pointer to the player, 'p'
          Basic::Pair* pair = dynamic_cast<Basic::Pair*>(item->getValue());
-         Player* p = (Player*) pair->object();
+         Player* p = static_cast<Player*>(pair->object());
 
          bool dummy = false;
          const Weapon* wpn = dynamic_cast<const Weapon*>( p );
@@ -367,7 +367,7 @@ void Otw::mapPlayers2ElevTable()
 
          // Get a pointer to the player, 'p'
          Basic::Pair* pair = dynamic_cast<Basic::Pair*>(item->getValue());
-         Player* p = (Player*) pair->object();
+         Player* p = static_cast<Player*>(pair->object());
 
          // Check if this player is alive and within range.
          if ( p->isActive() && p->isTerrainElevationRequired() ) {
@@ -678,12 +678,12 @@ OtwModel* Otw::findModel(const unsigned short playerID, const Basic::String* con
    OtwModel* found = 0;
    if (type == HOT_TABLE) {
       OtwModel** k =
-         (OtwModel**) bsearch(&key, hotTbl, nHots, sizeof(OtwModel*), compareKey2Model);
+         static_cast<OtwModel**>(bsearch(&key, hotTbl, nHots, sizeof(OtwModel*), compareKey2Model));
       if (k != 0) found = *k;
    }
    else {
       OtwModel** k =
-         (OtwModel**) bsearch(&key, modelTbl, nModels, sizeof(OtwModel*), compareKey2Model);
+         static_cast<OtwModel**>(bsearch(&key, modelTbl, nModels, sizeof(OtwModel*), compareKey2Model));
       if (k != 0) found = *k;
    }
    return found;
@@ -714,7 +714,7 @@ int Otw::compareKey2Model(const void* key, const void* model)
 {
 
    // The Key
-   const OtwModelKey* pKey = (const OtwModelKey*) key;
+   const OtwModelKey* pKey = static_cast<const OtwModelKey*>(key);
 
    // The NIB
    const OtwModel* pModel = *((const OtwModel**) model);
@@ -870,7 +870,7 @@ bool Otw::setSlotOtwModelTypes(const Basic::PairStream* const msg)
        // into the table.
        const Basic::List::Item* item = msg->getFirstItem();
        while (item != 0 && nOtwModelTypes < MAX_MODELS_TYPES) {
-          const Basic::Pair* pair = (const Basic::Pair*) (item->getValue());
+          const Basic::Pair* pair = static_cast<const Basic::Pair*>(item->getValue());
           const Otm* otwType = dynamic_cast<const Otm*>( pair->object() );
           if (otwType != 0) {
              // We have an Otm object, so put it in the table

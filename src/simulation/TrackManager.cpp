@@ -260,7 +260,7 @@ bool TrackManager::setMaxTrackAge(const double s)
 {
    bool ok = false;
    if (s > 0) {
-      maxTrackAge = (LCreal) s;
+      maxTrackAge = static_cast<LCreal>(s);
       ok = true;
    }
    return ok;
@@ -435,8 +435,8 @@ bool TrackManager::setSlotMaxTracks(const Basic::Number* const num)
    bool ok = false;
    if (num != 0) {
       int max = num->getInt();
-      if (max > 0 && max <= (int)MAX_TRKS) {
-         maxTrks = (unsigned int) max;
+      if (max > 0 && max <= static_cast<int>(MAX_TRKS)) {
+         maxTrks = static_cast<unsigned int>(max);
          ok = true;
       }
       else {
@@ -484,7 +484,7 @@ bool TrackManager::setSlotFirstTrackId(const Basic::Number* const num)
    if (num != 0) {
       int first = num->getInt();
       if (first >= 0) {
-         firstTrkId = (unsigned int) first;
+         firstTrkId = static_cast<unsigned int>(first);
          nextTrkId = firstTrkId;
          ok = true;
       }
@@ -771,7 +771,7 @@ void AirTrkMgr::processTrackList(const LCreal dt)
 
       bool dummy = false;
       if (tgt->isMajorType(Player::WEAPON)) {
-         dummy = ((const Weapon*) tgt)->isDummy();
+         dummy = (static_cast<const Weapon*>(tgt))->isDummy();
       }
 
       if ( tgt->isMajorType(Player::AIR_VEHICLE) ||
@@ -803,7 +803,7 @@ void AirTrkMgr::processTrackList(const LCreal dt)
    lcLock(trkListLock);
    for (unsigned int it = 0; it < nTrks; it++) {
       trackNumMatches[it] = 0;
-      const RfTrack* const trk = (const RfTrack*) tracks[it];  // we produce only RfTracks
+      const RfTrack* const trk = static_cast<const RfTrack*>(tracks[it]);  // we produce only RfTracks
       const Player* const tgt = trk->getLastEmission()->getTarget();
       for (unsigned int ir = 0; ir < nReports; ir++) {
          if (emissions[ir]->getTarget() == tgt) {
@@ -837,7 +837,7 @@ void AirTrkMgr::processTrackList(const LCreal dt)
       if (trackNumMatches[it] > 0) {
          for (unsigned int ir = 0; ir < nReports; ir++) {
             if (report2TrackMatch[ir][it]) {
-               RfTrack* const trk = (RfTrack*) tracks[it];  // we produce only RfTracks
+               RfTrack* const trk = static_cast<RfTrack*>(tracks[it]);  // we produce only RfTracks
 
                // Update the track's signal
                trk->setSignal(newSignal[ir],emissions[ir]);
@@ -922,7 +922,7 @@ void AirTrkMgr::processTrackList(const LCreal dt)
    // ---
    lcLock(trkListLock);
    for (unsigned int it = 0; it < nTrks; /* update 'it' below */ ) {
-      RfTrack* const trk = (RfTrack*) tracks[it];  // we produce only RfTracks
+      RfTrack* const trk = static_cast<RfTrack*>(tracks[it]);  // we produce only RfTracks
       if (trk->getTrackAge() >= getMaxTrackAge()) {
 
          // Object 1: player, Object 2: Track Data
@@ -1263,7 +1263,7 @@ void GmtiTrkMgr::processTrackList(const LCreal dt)
    lcLock(trkListLock);
    for (unsigned int it = 0; it < nTrks; it++) {
       trackNumMatches[it] = 0;
-      const RfTrack* const trk = (const RfTrack*) tracks[it];  // we produce only RfTracks
+      const RfTrack* const trk = static_cast<const RfTrack*>(tracks[it]);  // we produce only RfTracks
       const Player* const tgt = trk->getLastEmission()->getTarget();
       for (unsigned int ir = 0; ir < nReports; ir++) {
          if (emissions[ir]->getTarget() == tgt) {
@@ -1297,7 +1297,7 @@ void GmtiTrkMgr::processTrackList(const LCreal dt)
          for (unsigned int ir = 0; ir < nReports; ir++) {
             if (report2TrackMatch[ir][it]) {
 
-               RfTrack* const trk = (RfTrack*) tracks[it];  // we produce only RfTracks
+               RfTrack* const trk = static_cast<RfTrack*>(tracks[it]);  // we produce only RfTracks
 
                // Update the track's signal
                trk->setSignal(newSignal[ir],emissions[ir]);
@@ -1588,7 +1588,7 @@ void RwrTrkMgr::processTrackList(const LCreal dt)
    lcLock(trkListLock);
    for (unsigned int it = 0; it < nTrks; it++) {
       trackNumMatches[it] = 0;
-      const RfTrack* const trk = (const RfTrack*) tracks[it];        // we produce only RfTracks
+      const RfTrack* const trk = static_cast<const RfTrack*>(tracks[it]);        // we produce only RfTracks
       const Player* const tgt = trk->getLastEmission()->getOwnship(); // The emissions ownship is our target!
       for (unsigned int ir = 0; ir < nReports; ir++) {
          if (emissions[ir]->getOwnship() == tgt) {  // The emissions ownship is our target!
@@ -1624,7 +1624,7 @@ void RwrTrkMgr::processTrackList(const LCreal dt)
             if (report2TrackMatch[ir][it]) {
 
                // Update the track's signal
-               RfTrack* const trk = (RfTrack*) tracks[it];        // we produce only RfTracks
+               RfTrack* const trk = static_cast<RfTrack*>(tracks[it]);        // we produce only RfTracks
                trk->setSignal(newSignal[ir],emissions[ir]);
 
                // Create a track input vector

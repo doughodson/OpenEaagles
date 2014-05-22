@@ -163,7 +163,7 @@ void Weapon::initData()
    setLethalRange(50.0f);
    setSOBT(9999.0f);
    setEOBT(0.0f);
-   setMaxGimbalAngle(30.0f * (LCreal)Basic::Angle::D2RCC);
+   setMaxGimbalAngle(30.0f * static_cast<LCreal>(Basic::Angle::D2RCC));
 }
 
 //------------------------------------------------------------------------------
@@ -259,7 +259,7 @@ void Weapon::reset()
 
    // launch vehicle
    if (flyout != this) {
-      setLaunchVehicle( (Player*) findContainerByType( typeid(Player) ) );
+      setLaunchVehicle( static_cast<Player*>(findContainerByType( typeid(Player) )) );
    }
 
    // Test player?
@@ -459,8 +459,8 @@ void Weapon::checkDetonationEffect()
       // Process the detonation for all local, in-range players
       bool finished = false;
       while (item != 0 && !finished) {
-         Basic::Pair* pair = (Basic::Pair*) item->getValue();
-         Player* p = (Player*) pair->object(); 
+         Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+         Player* p = static_cast<Player*>(pair->object()); 
          finished = p->isNetworkedPlayer();  // local only
          if (!finished && (p != this) ) {
             osg::Vec3 dpos = p->getPosition() - getPosition();
@@ -563,7 +563,7 @@ Weapon* Weapon::prerelease()
 
    // If we're not already (pre)released or jettisoned,
    //   and we'll need a launching player and a simulation
-   Simulation* sim = (Simulation*)( findContainerByType(typeid(Simulation)) );
+   Simulation* sim = static_cast<Simulation*>( findContainerByType(typeid(Simulation)) );
    Player* lplayer = getLaunchVehicle();
    if (!isReleased() && !isJettisoned() && flyout == 0 && lplayer != 0 && sim != 0) {
 
@@ -631,7 +631,7 @@ Weapon* Weapon::release()
 
          // and we have a launching player and a simulation ...
          Player* lplayer = getLaunchVehicle();
-         Simulation* sim = (Simulation*)( findContainerByType(typeid(Simulation)) );
+         Simulation* sim = static_cast<Simulation*>( findContainerByType(typeid(Simulation)) );
          if ( lplayer != 0 && sim != 0) {
 
             // then release the weapon!
@@ -1527,7 +1527,7 @@ bool Weapon::setSlotEOBT(const Basic::Number* const p)
 // maxBurstRng: max burst rng    (meters)
 bool Weapon::setSlotMaxGimbal(const Basic::Angle* const p)
 {
-    setMaxGimbalAngle( (LCreal)Basic::Radians::convertStatic(*p) );
+    setMaxGimbalAngle( static_cast<LCreal>(Basic::Radians::convertStatic(*p)) );
     return true;
 }
 

@@ -97,7 +97,7 @@ void Nib::copyData(const Nib& org, const bool cc)
    ioType = org.ioType;
 
    const Player* p = org.pPlayer;
-   setPlayer( (Player*) p );
+   setPlayer( const_cast<Player*>(p) );
    setNetIO(0);
    setTypeMapper(org.ntm);
 
@@ -421,7 +421,7 @@ bool Nib::isPlayerStateUpdateRequired(const LCreal curExecTime)
 
       //LCreal drTime = curExecTime - getTimeExec();
       SynchronizedState playerState = player->getSynchronizedState();
-      LCreal drTime = (LCreal)playerState.getTimeExec() - getTimeExec();
+      LCreal drTime = static_cast<LCreal>(playerState.getTimeExec()) - getTimeExec();
 
       // 3-a) Freeze flag has changed
       if ( (player->isFrozen() && isNotFrozen()) || (!player->isFrozen() && isFrozen()) ) {
@@ -500,7 +500,7 @@ bool Nib::isPlayerStateUpdateRequired(const LCreal curExecTime)
    // ---
    if ( player->isMajorType(Player::AIR_VEHICLE) ) {
 
-      const AirVehicle* av = (const AirVehicle*) player;
+      const AirVehicle* av = static_cast<const AirVehicle*>(player);
 
       // (4-a) Check wing sweep angle.  We only send out wing sweep as
       // an part if the position is greater than zero or if we've previously been
@@ -554,7 +554,7 @@ bool Nib::isPlayerStateUpdateRequired(const LCreal curExecTime)
    // ---
    if ( player->isMajorType(Player::GROUND_VEHICLE) ) {
 
-      const GroundVehicle* gv = (const GroundVehicle*) player;
+      const GroundVehicle* gv = static_cast<const GroundVehicle*>(player);
 
       // (5-a) Send launcher elevation angle and for an attached missile
       //       (on SamVehicles and Artillery only)
@@ -572,7 +572,7 @@ bool Nib::isPlayerStateUpdateRequired(const LCreal curExecTime)
                if (stores != 0) {
                   const Basic::List::Item* item = stores->getFirstItem();
                   while (item != 0 && apartNumMissiles < MAX_AMSL) {
-                     const Basic::Pair* pair = (Basic::Pair*) item->getValue();
+                     const Basic::Pair* pair = static_cast<const Basic::Pair*>(item->getValue());
                      if (pair != 0) {
                         const Missile* msl = dynamic_cast<const Missile*>( pair->object() );
                         if (msl != 0) {
@@ -685,9 +685,9 @@ void Nib::playerState2Nib()
       // mark the current times
       //Simulation* sim = getNetIO()->getSimulation();
       //setTimeExec( (LCreal) sim->getExecTimeSec() );
-      setTimeExec( (LCreal) player->getSynchronizedState().getTimeExec() );
-      //setTimeUtc( (LCreal) sim->getSysTimeOfDay() );
-      setTimeUtc( (LCreal) player->getSynchronizedState().getTimeUtc() );
+      setTimeExec( static_cast<LCreal>(player->getSynchronizedState().getTimeExec()) );
+      //setTimeUtc( static_cast<LCreal>(sim->getSysTimeOfDay()) );
+      setTimeUtc( static_cast<LCreal>(player->getSynchronizedState().getTimeUtc()) );
 
       {
          //osg::Vec3d pos = player->getGeocPosition();

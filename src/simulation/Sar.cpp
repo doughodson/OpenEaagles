@@ -241,8 +241,8 @@ void Sar::process(const LCreal dt)
          xyz2AzEl(posB, &tgt_az, &tgt_el);
 
          // Command to that position
-         LCreal az = tgt_az * (LCreal)Basic::Angle::D2RCC;
-         LCreal el = tgt_el * (LCreal)Basic::Angle::D2RCC;
+         LCreal az = tgt_az * static_cast<LCreal>(Basic::Angle::D2RCC);
+         LCreal el = tgt_el * static_cast<LCreal>(Basic::Angle::D2RCC);
 
          ant->setRefAzimuth(az);
          ant->setRefElevation(el);
@@ -323,12 +323,12 @@ void Sar::xyz2AzEl(const LCreal x, const LCreal y, const LCreal z, LCreal* const
 {
    // Compute azimuth (degs)
    if (az != 0) {
-      *az = lcAtan2(y, x) * (LCreal)Basic::Angle::R2DCC;
+      *az = lcAtan2(y, x) * static_cast<LCreal>(Basic::Angle::R2DCC);
    }
 
    if (el != 0) {
       LCreal r = lcSqrt(x * x + y * y);
-      *el = lcAtan2(-z, r) * (LCreal)Basic::Angle::R2DCC;
+      *el = lcAtan2(-z, r) * static_cast<LCreal>(Basic::Angle::R2DCC);
    }
 }
 

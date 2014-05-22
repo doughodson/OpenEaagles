@@ -24,6 +24,7 @@
 #include "openeaagles/basic/units/Distances.h"
 #include "openeaagles/basic/units/Angles.h"
 
+#include <cmath>
 
 namespace Eaagles {
 namespace Simulation {
@@ -399,7 +400,7 @@ void IrSensor::process(const LCreal dt)
 
    int numRecords = storedMessagesQueue.entries();
    if (numRecords > 0) {
-      AngleOnlyTrackManager* tm = (AngleOnlyTrackManager*) getTrackManager();
+      AngleOnlyTrackManager* tm = static_cast<AngleOnlyTrackManager*>(getTrackManager());
       if (tm) { 
          lcLock(storedMessagesLock);
          numRecords = storedMessagesQueue.entries();
@@ -480,7 +481,7 @@ bool IrSensor::setIFOV(const LCreal i)
    if (i >= 0) {
       ifov = i;
       //calculate planar angle and set it as well.
-      ifovTheta =  (LCreal) acos ((1 - (ifov / (2.0 * PI)))); 
+      ifovTheta =  static_cast<LCreal>(std::acos ((1 - (ifov / (2.0 * PI))))); 
       ok = true;
    }
    return ok;
@@ -554,7 +555,7 @@ bool IrSensor::setSlotMaximumRange(const Basic::Number* const msg)
    const Basic::Distance* d = dynamic_cast<const Basic::Distance*>(msg);
    if (d != 0) {
        Basic::Meters m;
-       value = (LCreal)m.convert(*d);
+       value = static_cast<LCreal>(m.convert(*d));
    }
    else if (msg != 0) {
       value = msg->getReal();
@@ -591,7 +592,7 @@ bool IrSensor::setSlotLowerWavelength(const Basic::Number* const msg)
    const Basic::Distance* d = dynamic_cast<const Basic::Distance*>(msg);
    if (d != 0) {
        Basic::MicroMeters mm;
-       value = (LCreal)mm.convert(*d);
+       value = static_cast<LCreal>(mm.convert(*d));
    }
    else if (msg != 0) {
       value = msg->getReal();
@@ -615,7 +616,7 @@ bool IrSensor::setSlotUpperWavelength(const Basic::Number* const msg)
    const Basic::Distance* d = dynamic_cast<const Basic::Distance*>(msg);
    if (d != 0) {
        Basic::MicroMeters mm;
-       value = (LCreal)mm.convert(*d);
+       value = static_cast<LCreal>(mm.convert(*d));
    }
    else if (msg != 0) {
       value = msg->getReal();

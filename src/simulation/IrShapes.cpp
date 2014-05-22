@@ -59,7 +59,7 @@ bool IrShape::setSlotIrShapeArea(const Eaagles::Basic::Number *const num)
    const Basic::Area* a = dynamic_cast<const Basic::Area*>(num);
    if (a != 0) {
       Basic::SquareMeters sm;
-      value = (LCreal)sm.convert(*a);
+      value = static_cast<LCreal>(sm.convert(*a));
    }
    else if (num != 0) {
       value = num->getReal();
@@ -132,7 +132,7 @@ bool IrSphere::setSlotIrSphereRadius(const Eaagles::Basic::Number *const s) {
    const Basic::Distance* d = dynamic_cast<const Basic::Distance*>(s);
    if (d != 0) {
       Basic::Meters m;
-      value = (LCreal)m.convert(*d);
+      value = static_cast<LCreal>(m.convert(*d));
    }
    else if (s != 0) {
       value = s->getReal();
@@ -145,7 +145,7 @@ LCreal IrSphere::getArea() {
    //return (LCreal) (radius * radius * 4.0 * PI);
    // SAIC's correction
    //Calculates the projected area of a sphere (projected area is a flat circle)
-   return (LCreal) (radius * radius * PI);
+   return static_cast<LCreal>(radius * radius * PI);
 }
 
 
@@ -205,7 +205,7 @@ bool IrBox::setSlotIrBoxX(const Eaagles::Basic::Number *const s)
    const Basic::Distance* d = dynamic_cast<const Basic::Distance*>(s);
    if (d != 0) {
       Basic::Meters m;
-      value = (LCreal)m.convert(*d);
+      value = static_cast<LCreal>(m.convert(*d));
    }
    else if (s != 0) {
       value = s->getReal();
@@ -221,7 +221,7 @@ bool IrBox::setSlotIrBoxY(const Eaagles::Basic::Number *const s) {
    const Basic::Distance* d = dynamic_cast<const Basic::Distance*>(s);
    if (d != 0) {
       Basic::Meters m;
-      value = (LCreal)m.convert(*d);
+      value = static_cast<LCreal>(m.convert(*d));
    }
    else if (s != 0) {
        value = s->getReal();
@@ -237,7 +237,7 @@ bool IrBox::setSlotIrBoxZ(const Eaagles::Basic::Number *const s) {
    const Basic::Distance* d = dynamic_cast<const Basic::Distance*>(s);
    if (d != 0) {
       Basic::Meters m;
-      value = (LCreal)m.convert(*d);
+      value = static_cast<LCreal>(m.convert(*d));
    }
    else if (s != 0) {
        value = s->getReal();
@@ -247,7 +247,7 @@ bool IrBox::setSlotIrBoxZ(const Eaagles::Basic::Number *const s) {
 }
 
 LCreal IrBox::getArea() { 
-   return (LCreal) ((x*y * 2) + (2*x*z) + (2*y*z)); 
+   return static_cast<LCreal>((x*y * 2) + (2*x*z) + (2*y*z)); 
 }
 
 LCreal IrBox::getReflectorAreaInFieldOfView(const IrQueryMsg* const msg) {

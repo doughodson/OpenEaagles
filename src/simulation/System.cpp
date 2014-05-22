@@ -178,8 +178,8 @@ bool System::killedNotification(Player* const p)
    Basic::PairStream* subcomponents = getComponents();
    if(subcomponents != 0) {
       for (Basic::List::Item* item = subcomponents->getFirstItem(); item != 0; item = item->getNext()) {
-         Basic::Pair* pair = (Basic::Pair*)(item->getValue());
-         Basic::Component* sc = (Basic::Component*) pair->object();
+         Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+         Basic::Component* sc = static_cast<Basic::Component*>(pair->object());
          sc->event(KILL_EVENT, p);
       }
       subcomponents->unref();
@@ -230,9 +230,9 @@ const Player* System::getOwnship() const
    else {
       // Yes this is a "const cast-away", but its the non-const version
       // that initially finds our ownship Player class.
-      System* sys = (System*) this;
-      Player* own = sys->getOwnship();
-      return (const Player*) own;
+      const System* sys = static_cast<const System*>(this);
+      const Player* own = sys->getOwnship();
+      return own;
    }
 }
 
@@ -251,7 +251,7 @@ bool System::setPowerSwitch(const unsigned int p)
 bool System::findOwnship()
 {
    if (ownship == 0) {
-      ownship = (Player*) findContainerByType( typeid(Player) );
+      ownship = static_cast<Player*>(findContainerByType( typeid(Player) ));
    }
 
    return (ownship != 0);
