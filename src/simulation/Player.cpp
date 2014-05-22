@@ -375,7 +375,7 @@ void Player::copyData(const Player& org, const bool cc)
    if (cc) initData();
 
    const Basic::String* tt = org.type;
-   setType( (Basic::String*)tt );
+   setType( const_cast<Basic::String*>(static_cast<const Basic::String*>(tt)) );
 
    id = org.id;
 
@@ -821,7 +821,7 @@ bool Player::isHeadingHoldOn() const
 // Return commanded heading, default (radians)
 double Player::getCommandedHeading() const
 {
-   return getCommandedHeadingD() * (LCreal)Basic::Angle::D2RCC;
+   return getCommandedHeadingD() * static_cast<LCreal>(Basic::Angle::D2RCC);
 }
 
 // Return commanded heading (degrees)
@@ -836,7 +836,7 @@ double Player::getCommandedHeadingD() const
 // Return commanded heading (radians)
 double Player::getCommandedHeadingR() const
 {
-   return getCommandedHeadingD() * (LCreal)Basic::Angle::D2RCC;
+   return getCommandedHeadingD() * static_cast<LCreal>(Basic::Angle::D2RCC);
 }
 
 // Return true if velocity-hold mode is on
@@ -955,7 +955,7 @@ double Player::getEarthRadius() const
 Simulation* Player::getSimulation()
 {
    if (sim == 0) {
-      sim = (Simulation*) findContainerByType(typeid(Simulation));
+      sim = static_cast<Simulation*>(findContainerByType(typeid(Simulation)));
       if (sim == 0 && isMessageEnabled(MSG_ERROR)) {
          std::cerr << "Player::getSimulation(): ERROR, unable to locate the Simulation class!" << std::endl;
       }
@@ -972,9 +972,9 @@ const Simulation* Player::getSimulation() const
    else {
       // Yes this is a "const cast-away", but its the non-const version
       // that initially finds our Simulation class.
-      Player* p = (Player*) this;
-      Simulation* s = p->getSimulation();
-      return (const Simulation*) s;
+      const Player* p = static_cast<const Player*>(this);
+      const Simulation* s = p->getSimulation();
+      return s;
    }
 }
 
@@ -985,13 +985,13 @@ const Simulation* Player::getSimulation() const
 // Player's dynamics model
 DynamicsModel* Player::getDynamicsModel()
 {
-   return (dyn != 0) ? ((DynamicsModel*) dyn->object()) : 0;
+   return (dyn != 0) ? (static_cast<DynamicsModel*>(dyn->object())) : 0;
 }
 
 // Player's dynamics model (const version)
 const DynamicsModel* Player::getDynamicsModel() const
 {
-   return (dyn != 0) ? ((DynamicsModel*) dyn->object()) : 0;
+   return (dyn != 0) ? (static_cast<DynamicsModel*>(dyn->object())) : 0;
 }
 
 // Name of the Player's dynamics model
@@ -1007,13 +1007,13 @@ const Basic::Identifier* Player::getDynamicsModelName() const
 // Player's pilot model
 Pilot* Player::getPilot()
 {
-   return (pilot != 0) ? ((Pilot*) pilot->object()) : 0;
+   return (pilot != 0) ? (static_cast<Pilot*>(pilot->object())) : 0;
 }
 
 // Player's pilot model (const version)
 const Pilot* Player::getPilot() const
 {
-   return (pilot != 0) ? ((Pilot*) pilot->object()) : 0;
+   return (pilot != 0) ? (static_cast<Pilot*>(pilot->object())) : 0;
 }
 
 // Name of the player's pilot model
@@ -1094,13 +1094,13 @@ Basic::Pair* Player::getPilotByType(const std::type_info& type)
 // Player's stores (weapons, fuel) manager model
 StoresMgr* Player::getStoresManagement()
 {
-   return (sms != 0) ? ((StoresMgr*) sms->object()) : 0;
+   return (sms != 0) ? (static_cast<StoresMgr*>(sms->object())) : 0;
 }
 
 // Player's stores (weapons, fuel) manager model (const version)
 const StoresMgr* Player::getStoresManagement() const
 {
-   return (sms != 0) ? ((StoresMgr*) sms->object()) : 0;
+   return (sms != 0) ? (static_cast<StoresMgr*>(sms->object())) : 0;
 }
 
 // Name of the player's stores (weapons, fuel) manager model
@@ -1116,13 +1116,13 @@ const Basic::Identifier* Player::getStoresManagementName() const
 // Player's top level Datalink model
 Datalink* Player::getDatalink()
 {
-   return (datalink != 0) ? ((Datalink*) datalink->object()) : 0;
+   return (datalink != 0) ? (static_cast<Datalink*>(datalink->object())) : 0;
 }
 
 // Player's top level Datalink (const version)
 const Datalink* Player::getDatalink() const
 {
-   return (datalink != 0) ? ((Datalink*) datalink->object()) : 0;
+   return (datalink != 0) ? (static_cast<Datalink*>(datalink->object())) : 0;
 }
 
 // Name of the player's top level Datalink model
@@ -1209,7 +1209,7 @@ Gimbal* Player::getGimbal()
 // Player's top level Gimbal (const version)
 const Gimbal* Player::getGimbal() const
 {
-   return (gimbal != 0) ? ((Gimbal*) gimbal->object()) : 0;
+   return (gimbal != 0) ? (static_cast<Gimbal*>(gimbal->object())) : 0;
 }
 
 // Name of the player's top level Gimbal model
@@ -1290,13 +1290,13 @@ Basic::Pair* Player::getGimbalByType(const std::type_info& type)
 // Player's top level Navigation model
 Navigation* Player::getNavigation()
 {
-   return (nav != 0) ? ((Navigation*) nav->object()) : 0;
+   return (nav != 0) ? (static_cast<Navigation*>(nav->object())) : 0;
 }
 
 // Player's top level Navigation (const version)
 const Navigation* Player::getNavigation() const
 {
-   return (nav != 0) ? ((Navigation*) nav->object()) : 0;
+   return (nav != 0) ? (static_cast<Navigation*>(nav->object())) : 0;
 }
 
 // Name of the player's top level Navigation model
@@ -1377,13 +1377,13 @@ Basic::Pair* Player::getNavigationByType(const std::type_info& type)
 // Player's top level OnboardComputer model
 OnboardComputer* Player::getOnboardComputer()
 {
-   return (obc != 0) ? ((OnboardComputer*) obc->object()) : 0;
+   return (obc != 0) ? (static_cast<OnboardComputer*>(obc->object())) : 0;
 }
 
 // Player's top level OnboardComputer (const version)
 const OnboardComputer* Player::getOnboardComputer() const
 {
-   return (obc != 0) ? ((OnboardComputer*) obc->object()) : 0;
+   return (obc != 0) ? (static_cast<OnboardComputer*>(obc->object())) : 0;
 }
 
 // Name of the player's top level OnboardComputer model
@@ -1464,13 +1464,13 @@ Basic::Pair* Player::getOnboardComputerByType(const std::type_info& type)
 // Player's top level Radio model
 Radio* Player::getRadio()
 {
-   return (radio != 0) ? ((Radio*) radio->object()) : 0;
+   return (radio != 0) ? (static_cast<Radio*>(radio->object())) : 0;
 }
 
 // Player's top level Radio (const version)
 const Radio* Player::getRadio() const
 {
-   return (radio != 0) ? ((Radio*) radio->object()) : 0;
+   return (radio != 0) ? (static_cast<Radio*>(radio->object())) : 0;
 }
 
 // Name of the player's top level Radio model
@@ -1551,13 +1551,13 @@ Basic::Pair* Player::getRadioByType(const std::type_info& type)
 // Player's top level R/F sensor model
 RfSensor* Player::getSensor()
 {
-   return (sensor != 0) ? ((RfSensor*) sensor->object()) : 0;
+   return (sensor != 0) ? (static_cast<RfSensor*>(sensor->object())) : 0;
 }
 
 // Name of the player's top level R/F sensor model
 const RfSensor* Player::getSensor() const
 {
-   return (sensor != 0) ? ((RfSensor*) sensor->object()) : 0;
+   return (sensor != 0) ? (static_cast<RfSensor*>(sensor->object())) : 0;
 }
 
 // Name of the player's top level R/F sensor model
@@ -1638,13 +1638,13 @@ Basic::Pair* Player::getSensorByType(const std::type_info& type)
 // Player's top level IR sensor model
 IrSystem* Player::getIrSystem()
 {
-   return (irSystem != 0) ? ((IrSystem*) irSystem->object()) : 0;
+   return (irSystem != 0) ? (static_cast<IrSystem*>(irSystem->object())) : 0;
 }
 
 // Name of the player's top level IR sensor model
 const IrSystem* Player::getIrSystem() const
 {
-   return (irSystem != 0) ? ((IrSystem*) irSystem->object()) : 0;
+   return (irSystem != 0) ? (static_cast<IrSystem*>(irSystem->object())) : 0;
 }
 
 // Name of the player's top level IR sensor model
@@ -2381,9 +2381,9 @@ bool Player::setVelocityBody(const LCreal ua, const LCreal va, const LCreal wa)
    velVecECEF = velVecNED * wm;   // compute geocentric velocity vector
 
    // Compute other velocities
-   LCreal ue = (LCreal) velVecNED[INORTH];
-   LCreal ve = (LCreal) velVecNED[IEAST];
-   LCreal we = (LCreal) velVecNED[IDOWN];
+   LCreal ue = static_cast<LCreal>(velVecNED[INORTH]);
+   LCreal ve = static_cast<LCreal>(velVecNED[IEAST]);
+   LCreal we = static_cast<LCreal>(velVecNED[IDOWN]);
    vp = lcSqrt(ue*ue + ve*ve + we*we); // Total
    gndSpd = lcSqrt(ue*ue + ve*ve);     // Ground speed
    gndTrk = lcAtan2(ve,ue);            // Ground track
@@ -2420,9 +2420,9 @@ bool Player::setGeocVelocity(const LCreal vx, const LCreal vy, const LCreal vz)
    velVecBody = rm * velVecNED;
 
    // Compute other velocities
-   LCreal ue = (LCreal) velVecNED[INORTH];
-   LCreal ve = (LCreal) velVecNED[IEAST];
-   LCreal we = (LCreal) velVecNED[IDOWN];
+   LCreal ue = static_cast<LCreal>(velVecNED[INORTH]);
+   LCreal ve = static_cast<LCreal>(velVecNED[IEAST]);
+   LCreal we = static_cast<LCreal>(velVecNED[IDOWN]);
    vp = lcSqrt(ue*ue + ve*ve + we*we); // Total
    gndSpd = lcSqrt(ue*ue + ve*ve);     // Ground speed
    gndTrk = lcAtan2(ve,ue);            // Ground track
@@ -2618,8 +2618,8 @@ bool Player::killedNotification(Player* const p)
          Basic::PairStream* subcomponents = getComponents();
          if (subcomponents != 0) {
             for (Basic::List::Item* item = subcomponents->getFirstItem(); item != 0; item = item->getNext()) {
-               Basic::Pair* pair = (Basic::Pair*)(item->getValue());
-               Basic::Component* sc = (Basic::Component*) pair->object();
+               Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+               Basic::Component* sc = static_cast<Basic::Component*>(pair->object());
                sc->event(KILL_EVENT, p);
             }
             subcomponents->unref();
@@ -2671,8 +2671,8 @@ bool Player::collisionNotification(Player* const p)
          Basic::PairStream* subcomponents = getComponents();
          if (subcomponents != 0) {
             for (Basic::List::Item* item = subcomponents->getFirstItem(); item != 0; item = item->getNext()) {
-               Basic::Pair* pair = (Basic::Pair*)(item->getValue());
-               Basic::Component* sc = (Basic::Component*) pair->object();
+               Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+               Basic::Component* sc = static_cast<Basic::Component*>(pair->object());
                sc->event(KILL_EVENT, p);
             }
             subcomponents->unref();
@@ -2717,8 +2717,8 @@ bool Player::crashNotification()
          Basic::PairStream* subcomponents = getComponents();
          if (subcomponents != 0) {
             for (Basic::List::Item* item = subcomponents->getFirstItem(); item != 0; item = item->getNext()) {
-               Basic::Pair* pair = (Basic::Pair*)(item->getValue());
-               Basic::Component* sc = (Basic::Component*) pair->object();
+               Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+               Basic::Component* sc = static_cast<Basic::Component*>(pair->object());
                sc->event(KILL_EVENT);
             }
             subcomponents->unref();
@@ -3800,7 +3800,7 @@ bool Player::setSlotInitLat(const Basic::Angle* const msg)
 {
    bool ok = false;
    if (msg != 0) {
-      double val = (LCreal) Basic::Degrees::convertStatic(*msg);
+      double val = static_cast<LCreal>(Basic::Degrees::convertStatic(*msg));
       if (val >= -90.0 && val <= 90.0) {
          ok = setInitLat( val );
       }
@@ -3848,7 +3848,7 @@ bool Player::setSlotInitLon(const Basic::Angle* const msg)
 {
    bool ok = false;
    if (msg != 0) {
-      double val = (LCreal) Basic::Degrees::convertStatic(*msg);
+      double val = static_cast<LCreal>(Basic::Degrees::convertStatic(*msg));
       if (val >= -180.0 && val <= 180.0) {
          ok = setInitLon( val );
       }
@@ -4117,7 +4117,7 @@ bool Player::setSlotID(const Basic::Number* const num)
    bool ok = false;
    int newID = num->getInt();
    if (newID > 0 && newID <= 65535) {
-      setID( (unsigned short) newID  );
+      setID( static_cast<unsigned short>(newID)  );
       ok = true;
    }
    else {
