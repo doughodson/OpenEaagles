@@ -306,7 +306,7 @@ bool Radio::setSlotNumChannels(Basic::Number* const msg)
    if (msg != 0) {
       int v = msg->getInt();
       if (v >= 0 && v <= 0xFFFF) {
-         ok = setNumberOfChannels( (unsigned short) v );
+         ok = setNumberOfChannels( static_cast<unsigned short>(v) );
       }
    }
    return ok;
@@ -328,8 +328,8 @@ bool Radio::setSlotChannels(const Basic::PairStream* const msg)
       const Basic::List::Item* item = msg->getFirstItem();
       while (chan <= nc && item != 0) {
 
-         const Basic::Pair* pair = (Basic::Pair*)(item->getValue());
-         const Basic::Frequency* p = (const Basic::Frequency*) pair->object();
+         const Basic::Pair* pair = static_cast<const Basic::Pair*>(item->getValue());
+         const Basic::Frequency* p = static_cast<const Basic::Frequency*>(pair->object());
          if (p != 0) {
             LCreal freq = Basic::Hertz::convertStatic( *p );
             bool ok = setChannelFrequency(chan, freq);
@@ -356,7 +356,7 @@ bool Radio::setSlotChannel(Basic::Number* const msg)
    if (msg != 0) {
       int v = msg->getInt();
       if (v >= 0 && v <= 0xFFFF) {
-         ok = setChannel( (unsigned short) v );
+         ok = setChannel( static_cast<unsigned short>(v) );
       }
    }
    return ok;
@@ -378,7 +378,7 @@ bool Radio::setSlotRadioId(Basic::Number* const num)
 {
    bool ok = false;
    if (num != 0) {
-      unsigned short num2 = (unsigned short)num->getInt();
+      unsigned short num2 = static_cast<unsigned short>(num->getInt());
       ok = setRadioId(num2);
    }
    return ok;

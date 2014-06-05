@@ -326,8 +326,8 @@ unsigned int Tdb::processPlayers(Basic::PairStream* const players)
    for (Basic::List::Item* item = players->getFirstItem(); item != 0 && numTgts < maxTargets && !finished; item = item->getNext()) {
 
       // Get the pointer to the target player
-      Basic::Pair* pair = (Basic::Pair*)(item->getValue());
-      Player* target = (Player*)(pair->object());
+      Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+      Player* target = static_cast<Player*>(pair->object());
 
       // Did we complete the local only players?
       finished = localOnly && target->isNetworkedPlayer();
@@ -415,7 +415,8 @@ unsigned int Tdb::processPlayers(Basic::PairStream* const players)
                      }
                      else {
                         // Occulting check between two standard player
-                        occulted = terrain->targetOcculting(osLat, osLon, (LCreal) osAlt, tgtLat, tgtLon, (LCreal) tgtAlt);
+                        occulted = terrain->targetOcculting(osLat, osLon, static_cast<LCreal>(osAlt),
+                                                            tgtLat, tgtLon, static_cast<LCreal>(tgtAlt));
                      }
                   }
 

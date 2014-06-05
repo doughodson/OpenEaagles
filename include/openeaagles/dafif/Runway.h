@@ -144,9 +144,9 @@ inline float Runway::elevation(const WhichEnd whichEnd) const
 inline float Runway::slope(const WhichEnd whichEnd) const
 {
    if (whichEnd == LOW_END)
-      return (float) dsAtoln( makePointer(RW_LE_SLOPE_POS), RW_XE_SLOPE_LEN );
+      return static_cast<float>(dsAtoln( makePointer(RW_LE_SLOPE_POS), RW_XE_SLOPE_LEN ));
    else
-      return (float) dsAtoln( makePointer(RW_HE_SLOPE_POS), RW_XE_SLOPE_LEN );
+      return static_cast<float>(dsAtoln( makePointer(RW_HE_SLOPE_POS), RW_XE_SLOPE_LEN ));
 }
 
 

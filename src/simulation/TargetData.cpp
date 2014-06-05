@@ -171,19 +171,17 @@ bool TargetData::setSlotWpnType(const Basic::String* const msg)
     return setWpnType(msg);
 }
 
-
 bool TargetData::setSlotQuantity(const Basic::Number* const msg)
 {
    bool ok = false;
    if (msg != 0) {
       int v = msg->getInt();
       if (v >= 0) {
-         ok = setQuantity((unsigned int) msg->getInt());
+         ok = setQuantity(static_cast<unsigned int>(msg->getInt()));
       }
    }
    return ok;
 }
-
 
 bool TargetData::setSlotManualAssign(const Basic::Number* const msg)
 {
@@ -193,7 +191,6 @@ bool TargetData::setSlotManualAssign(const Basic::Number* const msg)
    }
    return ok;
 }
-
 
 bool TargetData::setSlotStickType(const Basic::Identifier* const msg)
 {
@@ -211,8 +208,7 @@ bool TargetData::setSlotStickType(const Basic::Identifier* const msg)
       }
    }
    return ok;
-    }
-
+}
 
 bool TargetData::setSlotStickDistance(const Basic::Distance* const msg)
 {
@@ -231,7 +227,6 @@ bool TargetData::setSlotStickDistance(const Basic::Number* const msg)
    }
    return ok;
 }
-
 
 bool TargetData::setSlotInterval(const Basic::Time* const msg)
 {
@@ -262,7 +257,6 @@ bool TargetData::setSlotMaxMissDistance(const Basic::Distance* const msg)
    return ok;
 }
 
-
 bool TargetData::setSlotMaxMissDistance(const Basic::Number* const msg)
 {
    bool ok = false;
@@ -272,7 +266,6 @@ bool TargetData::setSlotMaxMissDistance(const Basic::Number* const msg)
    return ok;
 }
 
-
 bool TargetData::setSlotArmDelay(const Basic::Time* const msg)
 {
    bool ok = false;
@@ -281,7 +274,6 @@ bool TargetData::setSlotArmDelay(const Basic::Time* const msg)
    }
    return ok;
 }
-
 
 bool TargetData::setSlotArmDelay(const Basic::Number* const msg)
 {

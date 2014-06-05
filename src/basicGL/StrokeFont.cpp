@@ -1260,9 +1260,9 @@ static GLdouble strokeFont[][1+MAX_STROKES*3] = {
 GLenum StrokeFont::createStrokeFont(GLuint fontBase)
 {
    for (GLint i = 0; strokeFont[i][0] != END_OF_LIST; i++) {
-      glNewList(fontBase+(unsigned int)strokeFont[i][0], GL_COMPILE);
+      glNewList(fontBase+static_cast<unsigned int>(strokeFont[i][0]), GL_COMPILE);
       for (GLint j = 1; strokeFont[i][j]; j += 3) {
-         unsigned int mode = (unsigned int) strokeFont[i][j];
+         unsigned int mode = static_cast<unsigned int>(strokeFont[i][j]);
          if (mode == FONT_BEGIN) {
             glBegin(GL_LINE_STRIP);
             glVertex2d(double(strokeFont[i][j+1]-XOFFSET)*XSCALE,

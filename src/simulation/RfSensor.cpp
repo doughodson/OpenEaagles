@@ -81,7 +81,7 @@ RfSensor::RfSensor() : modes(0), ranges(0), masterModePtr(0), trackManager(0)
     initRngIdx = 1;
     prf = 0.0;
     pulseWidth = 0.0;
-    beamWidth = ((LCreal)Basic::Angle::D2RCC * 3.5f);
+    beamWidth = (static_cast<LCreal>(Basic::Angle::D2RCC) * 3.5f);
     syncXmitWithScan = false;
     
     typeId[0] = '\0';
@@ -548,7 +548,7 @@ bool RfSensor::setSlotBeamWidth(const Basic::Angle* const msg)
    bool ok = false;
 
    if (msg != 0) {
-      LCreal x = (LCreal)Basic::Radians::convertStatic( *msg );
+      LCreal x = static_cast<LCreal>(Basic::Radians::convertStatic( *msg ));
       ok = setBeamWidth( x );
       if (!ok) {
          std::cerr << "RfSensor::setBeamWidth: Error setting beam width!" << std::endl;
@@ -680,7 +680,7 @@ bool RfSensor::processModes()
         // that we are their master mode.
         const Basic::List::Item* item = modes->getFirstItem();
         while (item != 0) {
-            Basic::Pair* p = (Basic::Pair*) item->getValue();
+            Basic::Pair* p = const_cast<Basic::Pair*>(static_cast<const Basic::Pair*>(item->getValue()));
             item = item->getNext();
             RfSensor* m = dynamic_cast<RfSensor*>(p->object());
             if (m != 0) {

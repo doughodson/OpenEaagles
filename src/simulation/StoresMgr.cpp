@@ -120,8 +120,8 @@ bool StoresMgr::shutdownNotification()
    if (list != 0) {
       Basic::List::Item* item = list->getFirstItem();
       while (item != 0) {
-         Basic::Pair* pair = (Basic::Pair*)(item->getValue());
-         Basic::Component* p = (Basic::Component*)( pair->object() );
+         Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+         Basic::Component* p = static_cast<Basic::Component*>(pair->object());
          p->event(SHUTDOWN_EVENT);
          item = item->getNext();
       }
@@ -356,18 +356,18 @@ void StoresMgr::searchAndAdd(Basic::PairStream* const mainList, const std::type_
       const Basic::List::Item* item = mainList->getFirstItem();
       while (item != 0) {
 
-         Basic::Pair* pair = (Basic::Pair*)(item->getValue());
-         Basic::Component* p = (Basic::Component*)( pair->object() );
+         const Basic::Pair* pair = static_cast<const Basic::Pair*>(item->getValue());
+         const Basic::Component* p = static_cast<const Basic::Component*>(pair->object());
 
          // Check the type and add to the list
          bool isType = p->isClassType(type);
-         if (isType) sublist->put(pair);
+         if (isType) sublist->put(const_cast<Basic::Pair*>(pair));
 
          // If this is a Stores object then check its stores for 'type' objects as well
-         Stores* sp = dynamic_cast<Stores*>(p);
+         const Stores* sp = dynamic_cast<const Stores*>(p);
          if ( sp != 0 ) {
-            Basic::PairStream* pstores = sp->getStores();
-            searchAndAdd(pstores, type, sublist);
+            const Basic::PairStream* pstores = sp->getStores();
+            searchAndAdd(const_cast<Basic::PairStream*>(pstores), type, sublist);
             pstores->unref();
          }
 
@@ -425,9 +425,9 @@ bool StoresMgr::setSlotStores(const Basic::PairStream* const msg)
       // Find the primary gun; i.e., the first gun found on our stores
       Basic::List::Item* item = stores->getFirstItem();
       while (item != 0 && gunPtr == 0) {
-         Basic::Pair* pair = (Basic::Pair*)(item->getValue());
+         Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
 
-         Gun* p = dynamic_cast<Gun*>( pair->object() );
+         Gun* p = dynamic_cast<Gun*>(pair->object());
          if (p != 0) gunPtr = p;
 
          item = item->getNext();
@@ -516,7 +516,7 @@ void SimpleStoresMgr::updateData(const LCreal dt)
    // Get the current weapon data
    // ---
    {
-      Weapon* wpn = (Weapon*) getCurrentWeapon();
+      Weapon* wpn = static_cast<Weapon*>(getCurrentWeapon());
       if (wpn != 0) {
          // Weapon ID
          curWpnID = wpn->getWeaponID();
@@ -527,7 +527,7 @@ void SimpleStoresMgr::updateData(const LCreal dt)
          if (list != 0) {
             const Basic::List::Item* item = list->getFirstItem();
             while (item != 0) {
-               const Basic::Pair* pair = (Basic::Pair*) item->getValue();
+               const Basic::Pair* pair = static_cast<const Basic::Pair*>(item->getValue());
                if (pair != 0) {
                   const Weapon* s = dynamic_cast<const Weapon*>( pair->object() );
                   if ( s != 0 && s->isMode(Player::INACTIVE) && std::strcmp(s->getFactoryName(), wpn->getFactoryName()) == 0 ) {
@@ -602,8 +602,15 @@ bool SimpleStoresMgr::isWeaponReleased() const
 // ---
 // Default function to get the next free missile in our stores (Pre-ref()'d)
 // ---
-Missile* SimpleStoresMgr::getNextMissile()               { return getNextMissileImp(); }
-const Missile* SimpleStoresMgr::getNextMissile() const   { return ((SimpleStoresMgr*)this)->getNextMissileImp(); }
+Missile* SimpleStoresMgr::getNextMissile()
+{
+   return getNextMissileImp();
+}
+
+const Missile* SimpleStoresMgr::getNextMissile() const
+{
+   return (const_cast<SimpleStoresMgr*>(static_cast<const SimpleStoresMgr*>(this)))->getNextMissileImp();
+}
 
 Missile* SimpleStoresMgr::getNextMissileImp()
 {
@@ -615,11 +622,11 @@ Missile* SimpleStoresMgr::getNextMissileImp()
       // find the first free (inactive) missile
       Basic::List::Item* item = list->getFirstItem();
       while (item != 0 && msl == 0) {
-         Basic::Pair* pair = (Basic::Pair*) item->getValue();
-         Missile* p = dynamic_cast<Missile*>( pair->object() );
+         Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+         Missile* p = dynamic_cast<Missile*>(pair->object());
          if (p != 0) {
             if (p->isInactive() || p->isReleaseHold()) {
-               msl = (Missile*) p->getPointer();
+               msl = static_cast<Missile*>(p->getPointer());
             }
          }
          item = item->getNext();
@@ -633,8 +640,15 @@ Missile* SimpleStoresMgr::getNextMissileImp()
 // ---
 // Default function to get the next free SAM in our stores (Pre-ref()'d)
 // ---
-Sam* SimpleStoresMgr::getNextSam()              { return getNextSamImp(); }
-const Sam* SimpleStoresMgr::getNextSam() const  { return ((SimpleStoresMgr*)this)->getNextSamImp(); }
+Sam* SimpleStoresMgr::getNextSam()
+{
+   return getNextSamImp();
+}
+
+const Sam* SimpleStoresMgr::getNextSam() const
+{
+   return (const_cast<SimpleStoresMgr*>(static_cast<const SimpleStoresMgr*>(this)))->getNextSamImp();
+}
 
 Sam* SimpleStoresMgr::getNextSamImp()
 {
@@ -646,11 +660,11 @@ Sam* SimpleStoresMgr::getNextSamImp()
       // find the first free (inactive) SAM
       Basic::List::Item* item = list->getFirstItem();
       while (item != 0 && msl == 0) {
-         Basic::Pair* pair = (Basic::Pair*) item->getValue();
-         Sam* p = dynamic_cast<Sam*>( pair->object() );
+         Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+         Sam* p = dynamic_cast<Sam*>(pair->object());
          if (p != 0) {
             if (p->isInactive() || p->isReleaseHold()) {
-               msl = (Sam*) p->getPointer();
+               msl = static_cast<Sam*>(p->getPointer());
             }
          }
          item = item->getNext();
@@ -665,8 +679,15 @@ Sam* SimpleStoresMgr::getNextSamImp()
 // ---
 // Default function to get the next free bomb in our stores (Pre-ref()'d)
 // ---
-Bomb* SimpleStoresMgr::getNextBomb()               { return getNextBombImp(); }
-const Bomb* SimpleStoresMgr::getNextBomb() const   { return ((SimpleStoresMgr*)this)->getNextBombImp(); }
+Bomb* SimpleStoresMgr::getNextBomb()
+{
+   return getNextBombImp();
+}
+
+const Bomb* SimpleStoresMgr::getNextBomb() const
+{
+   return (const_cast<SimpleStoresMgr*>(static_cast<const SimpleStoresMgr*>(this)))->getNextBombImp();
+}
 
 Bomb* SimpleStoresMgr::getNextBombImp()
 {
@@ -678,11 +699,11 @@ Bomb* SimpleStoresMgr::getNextBombImp()
       // find the first free (inactive) bomb
       Basic::List::Item* item = list->getFirstItem();
       while (item != 0 && bomb == 0) {
-         Basic::Pair* pair = (Basic::Pair*) item->getValue();
-         Bomb* p = dynamic_cast<Bomb*>( pair->object() );
+         Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+         Bomb* p = dynamic_cast<Bomb*>(pair->object());
          if (p != 0) {
             if (p->isInactive() || p->isReleaseHold()) {
-               bomb = (Bomb*) p->getPointer();
+               bomb = static_cast<Bomb*>(p->getPointer());
             }
          }
          item = item->getNext();
@@ -697,8 +718,15 @@ Bomb* SimpleStoresMgr::getNextBombImp()
 // ---
 // Default function to get the next free chaff bundle in our stores (Pre-ref()'d)
 // ---
-Chaff* SimpleStoresMgr::getNextChaff()                { return getNextChaffImp(); }
-const Chaff* SimpleStoresMgr::getNextChaff() const    { return ((SimpleStoresMgr*)this)->getNextChaffImp(); }
+Chaff* SimpleStoresMgr::getNextChaff()
+{
+   return getNextChaffImp();
+}
+
+const Chaff* SimpleStoresMgr::getNextChaff() const
+{
+   return (const_cast<SimpleStoresMgr*>(static_cast<const SimpleStoresMgr*>(this)))->getNextChaffImp();
+}
 
 Chaff* SimpleStoresMgr::getNextChaffImp()
 {
@@ -710,11 +738,11 @@ Chaff* SimpleStoresMgr::getNextChaffImp()
       // find the first free (inactive) chaff bundle
       Basic::List::Item* item = list->getFirstItem();
       while (item != 0 && chaff == 0) {
-         Basic::Pair* pair = (Basic::Pair*) item->getValue();
-         Chaff* p = dynamic_cast<Chaff*>( pair->object() );
+         Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+         Chaff* p = dynamic_cast<Chaff*>(pair->object());
          if (p != 0) {
             if (p->isInactive() || p->isReleaseHold()) {
-               chaff = (Chaff*) p->getPointer();
+               chaff = static_cast<Chaff*>(p->getPointer());
             }
          }
          item = item->getNext();
@@ -729,8 +757,15 @@ Chaff* SimpleStoresMgr::getNextChaffImp()
 // ---
 // Default function to get the next free flare in our stores (Pre-ref()'d)
 // ---
-Flare* SimpleStoresMgr::getNextFlare()                { return getNextFlareImp(); }
-const Flare* SimpleStoresMgr::getNextFlare() const    { return ((SimpleStoresMgr*)this)->getNextFlareImp(); }
+Flare* SimpleStoresMgr::getNextFlare()
+{
+   return getNextFlareImp();
+}
+
+const Flare* SimpleStoresMgr::getNextFlare() const
+{
+   return (const_cast<SimpleStoresMgr*>(static_cast<const SimpleStoresMgr*>(this)))->getNextFlareImp();
+}
 
 Flare* SimpleStoresMgr::getNextFlareImp()
 {
@@ -742,11 +777,11 @@ Flare* SimpleStoresMgr::getNextFlareImp()
       // find the first free (inactive) flare
       Basic::List::Item* item = list->getFirstItem();
       while (item != 0 && flare == 0) {
-         Basic::Pair* pair = (Basic::Pair*) item->getValue();
-         Flare* p = dynamic_cast<Flare*>( pair->object() );
+         Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+         Flare* p = dynamic_cast<Flare*>(pair->object());
          if (p != 0) {
             if (p->isInactive() || p->isReleaseHold()) {
-               flare = (Flare*) p->getPointer();
+               flare = static_cast<Flare*>(p->getPointer());
             }
          }
          item = item->getNext();
@@ -761,8 +796,15 @@ Flare* SimpleStoresMgr::getNextFlareImp()
 // ---
 // Default function to get the next decoy from our stores (Pre-ref()'d)
 // ---
-Decoy* SimpleStoresMgr::getNextDecoy()             { return getNextDecoyImp(); }
-const Decoy* SimpleStoresMgr::getNextDecoy() const { return ((SimpleStoresMgr*)this)->getNextDecoyImp(); }
+Decoy* SimpleStoresMgr::getNextDecoy()
+{
+   return getNextDecoyImp();
+}
+
+const Decoy* SimpleStoresMgr::getNextDecoy() const
+{
+   return (const_cast<SimpleStoresMgr*>(static_cast<const SimpleStoresMgr*>(this)))->getNextDecoyImp();
+}
 
 Decoy* SimpleStoresMgr::getNextDecoyImp()
 {
@@ -774,11 +816,11 @@ Decoy* SimpleStoresMgr::getNextDecoyImp()
       // find the first free (inactive) decoy
       Basic::List::Item* item = list->getFirstItem();
       while (item != 0 && decoy == 0) {
-         Basic::Pair* pair = (Basic::Pair*) item->getValue();
+         Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
          Decoy* p = dynamic_cast<Decoy*>( pair->object() );
          if (p != 0) {
             if (p->isInactive() || p->isReleaseHold()) {
-               decoy = (Decoy*) p->getPointer();
+               decoy = static_cast<Decoy*>(p->getPointer());
             }
          }
          item = item->getNext();
@@ -802,8 +844,8 @@ Missile* SimpleStoresMgr::getSpecificMissile(const Basic::String* const missileT
          // Find the first free (inactive) missile of type weaponType
          Basic::List::Item* item = list->getFirstItem();
          while (item != 0 && msl == 0) {
-            Basic::Pair* pair = (Basic::Pair*)(item->getValue());
-            Missile* p = dynamic_cast<Missile*>( pair->object() );
+            Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+            Missile* p = dynamic_cast<Missile*>(pair->object());
             if (p != 0 && p->isInactive()) {
                // Ok, we have a missile, but is it the type we want?
                if (*p->getType() == *missileType) {
@@ -833,8 +875,8 @@ Bomb* SimpleStoresMgr::getSpecificBomb(const Basic::String* const bombType)
          // Find the first free (inactive) bomb
          Basic::List::Item* item = list->getFirstItem();
          while (item != 0 && bomb == 0) {
-            Basic::Pair* pair = (Basic::Pair*)(item->getValue());
-            Bomb* p = dynamic_cast<Bomb*>( pair->object() );
+            Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+            Bomb* p = dynamic_cast<Bomb*>(pair->object());
             if (p != 0 && p->isInactive()) {
                // Ok, we have a bomb, but is it the type we want?
                if (*p->getType() == *bombType) {
@@ -864,8 +906,8 @@ Weapon* SimpleStoresMgr::getSpecificWeapon(const std::type_info& type)
          // Find the first free (inactive) bomb
          Basic::List::Item* item = list->getFirstItem();
          while (item != 0 && wpn == 0) {
-            Basic::Pair* pair = (Basic::Pair*)(item->getValue());
-            Weapon* p = dynamic_cast<Weapon*>( pair->object() );
+            Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+            Weapon* p = dynamic_cast<Weapon*>(pair->object());
             if (p != 0 && p->isInactive() && p->isClassType(type)) {
                p->ref();
                wpn = p;

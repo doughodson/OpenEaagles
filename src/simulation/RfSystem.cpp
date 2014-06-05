@@ -98,10 +98,10 @@ void RfSystem::copyData(const RfSystem& org, const bool cc)
 {
    BaseClass::copyData(org);
    if (cc) initData();
-   
+
    // No antenna yet
    setAntenna(0);
-   Basic::String* p = (Basic::String*) org.getAntennaName();
+   Basic::String* p = const_cast<Basic::String*>(static_cast<const Basic::String*>(org.getAntennaName()));
    setSlotAntennaName( p );
 
    xmitEnable = org.xmitEnable;
@@ -311,7 +311,8 @@ bool RfSystem::isTransmitting() const
 // Returns true if the input frequency is within the frequency band of the R/F system
 bool RfSystem::isFrequencyInBand(LCreal hz) const
 {
-    if ((frequency - bandwidth/(LCreal)2.0) <= hz && (frequency + bandwidth/(LCreal)2.0) >= hz) {
+    if ((frequency - bandwidth/static_cast<LCreal>(2.0)) <= hz
+         && (frequency + bandwidth/static_cast<LCreal>(2.0)) >= hz) {
         return true;
     }
     return false;

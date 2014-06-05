@@ -56,7 +56,7 @@ void Uniform::copyData(const Uniform& org, const bool cc)
 double Uniform::draw()
 {
   // uniform distribution over [min,max)
-  double u = drawHalfOpen();
+  const double u = drawHalfOpen();
   return min * (1 - u) + max * u;
 }
 

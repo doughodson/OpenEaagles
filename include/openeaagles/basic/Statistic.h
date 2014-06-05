@@ -171,7 +171,7 @@ inline double Statistic::variance() const
    if (numer < 0.0) {
      numer = 0.0;
    }
-   double denom = (double)n * (double)n1;
+   double denom = static_cast<double>(n) * static_cast<double>(n1);
    if (denom != 0.0) {
       var = (numer / denom);
    }
@@ -198,7 +198,7 @@ inline double Statistic::rms() const
 inline double Statistic::ci(const double Z) const
 {
   if (n != 0) {
-    return (Z*stdDev()) / std::sqrt((double)n);
+    return (Z*stdDev()) / std::sqrt(static_cast<double>(n));
   }
   return 0.0;
 }

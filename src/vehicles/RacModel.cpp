@@ -123,7 +123,7 @@ LCreal RacModel::getFlightPath() const
 {
    const Simulation::Player* pp = static_cast<const Simulation::Player*>( findContainerByType(typeid(Simulation::Player)) );
    if (pp == 0) return 0;
-   return (LCreal) pp->getPitchR();
+   return static_cast<LCreal>(pp->getPitchR());
 }
 
 LCreal RacModel::getCalibratedAirspeed() const
@@ -221,9 +221,9 @@ void RacModel::updateRAC(const LCreal dt)
 
    // Set default commanded values
    if (cmdAltitude < -9000.0)
-       cmdAltitude = (LCreal)pp->getAltitudeM();
+       cmdAltitude = static_cast<LCreal>(pp->getAltitudeM());
    if (cmdHeading < -9000.0)
-       cmdHeading = (LCreal) pp->getHeadingD();
+       cmdHeading = static_cast<LCreal>(pp->getHeadingD());
    if (cmdVelocity < -9000.0)
        cmdVelocity = pp->getTotalVelocityKts();
   
@@ -295,10 +295,10 @@ void RacModel::updateRAC(const LCreal dt)
    }
 
    // Using Pitch rate, integrate pitch
-   double newTheta = (LCreal)pp->getPitch() + (qa + qa1) * dt / 2.0;
+   double newTheta = static_cast<LCreal>(pp->getPitch() + (qa + qa1) * dt / 2.0);
 
    // Use turn rate integrate heading
-   double newPsi = (LCreal)pp->getHeading() + (ra + ra1) * dt / 2.0;
+   double newPsi = static_cast<LCreal>(pp->getHeading() + (ra + ra1) * dt / 2.0);
    if(newPsi > 2.0*PI) newPsi -= 2.0*PI;
    if(newPsi < 0.0) newPsi += 2.0*PI;
 

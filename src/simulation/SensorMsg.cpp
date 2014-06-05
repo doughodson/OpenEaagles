@@ -64,19 +64,19 @@ void SensorMsg::copyData(const SensorMsg& org, const bool cc)
     aoi = org.aoi;
     losO2T = org.losO2T;
     losT2O = org.losT2O;
-    
+
     const Player* oo = org.ownship;
-    setOwnship( (Player*)oo );
-    
+    setOwnship( const_cast<Player*>(static_cast<const Player*>(oo)) );
+
     const Gimbal* aa = org.gimbal;
-    setGimbal( (Gimbal*)aa );
-        
+    setGimbal( const_cast<Gimbal*>(static_cast<const Gimbal*>(aa)) );
+
     const Player* pp = org.target;
-    setTarget( (Player*)pp );
-    
+    setTarget( const_cast<Player*>(static_cast<const Player*>(pp)) );
+
     const Basic::Object* msg = org.dataMsg;
-    setDataMessage( (Basic::Object*)msg );
-    
+    setDataMessage( const_cast<Basic::Object*>(static_cast<const Basic::Object*>(msg)) );
+
     returnReq = org.returnReq;
     localOnly = org.localOnly;
 }

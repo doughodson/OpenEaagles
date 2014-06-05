@@ -58,16 +58,16 @@ void Lognormal::copyData(const Lognormal& org, const bool cc)
 //------------------------------------------------------------
 double Lognormal::draw()
 {
-  double u, v, r2, normal, z;
+  double u(0.0), r2(0.0);
   do {
       // choose x,y in uniform square (-1,-1) to (+1,+1)
       u = -1 + 2 * drawHalfOpen();
-      v = -1 + 2 * drawHalfOpen();
+      const double v = -1 + 2 * drawHalfOpen();
       // see if it is in the unit circle
       r2 = u * u + v * v;
   } while (r2 > 1.0 || r2 == 0);
-  normal = u * std::sqrt(-2.0 * std::log(r2) / r2);
-  z =  std::exp(sigma * normal + mu);
+  const double normal = u * std::sqrt(-2.0 * std::log(r2) / r2);
+  double z =  std::exp(sigma * normal + mu);
   // shift for location
   z += gamma;
   return z;

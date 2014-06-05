@@ -33,6 +33,9 @@
 //    sp1.set( new Object(), false );  // new object; ref cnt stays at one
 //
 //------------------------------------------------------------------------------
+#ifndef __Eaagles_Basic_Template_SPtr_H__
+#define __Eaagles_Basic_Template_SPtr_H__
+
 template <class T> class SPtr {
 public:
 
@@ -108,3 +111,6 @@ private:
    T*  p;          // The pointer
    mutable long semaphore;  // spin-lock semaphore
 };
+
+#endif
+

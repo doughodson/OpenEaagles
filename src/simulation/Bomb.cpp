@@ -234,7 +234,7 @@ void Bomb::weaponGuidance(const LCreal)
       // ---
 
       // Inputs
-      osg::Vec3 initPos(0.0, 0.0, (LCreal) -getAltitude());
+      osg::Vec3 initPos(0.0, 0.0, static_cast<LCreal>(-getAltitude()));
       osg::Vec3 initVel = vel;
       LCreal groundPlane = tgtPos[2];
       LCreal timeStep = 0.1f;

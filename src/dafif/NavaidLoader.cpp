@@ -108,7 +108,7 @@ bool NavaidLoader::load(const char* country)
    // copy keys with a frequency > 0 to the frequency list and sort
    nfl = 0;
    for (int i = 0; i < nrl; i++) {
-      fl[nfl] = (NavaidKey*) rl[i];
+      fl[nfl] = static_cast<NavaidKey*>(rl[i]);
       if ( fl[nfl]->freq > 0.0f ) nfl++;
    }
    qsort(fl,nfl,sizeof(NavaidKey*),fl_cmp);
@@ -117,7 +117,7 @@ bool NavaidLoader::load(const char* country)
    // copy keys with a channel number != 0 to the channel list and sort
    ncl = 0;
    for (int i = 0; i < nrl; i++) {
-      cl[ncl] = (NavaidKey*) rl[i];
+      cl[ncl] = static_cast<NavaidKey*>(rl[i]);
       if ( cl[ncl]->channel != 0 ) ncl++;
    }
    qsort(cl,ncl,sizeof(NavaidKey*),cl_cmp);
@@ -208,7 +208,7 @@ int NavaidLoader::queryByFreq(const float freq)
    // Search for the NAVAID record(s)
    NavaidKey key(freq);
    Key* pkey = &key;
-   return Database::mQuery(&pkey, (Key**)fl, nfl, fl_cmp);
+   return Database::mQuery(&pkey, reinterpret_cast<Key**>(fl), nfl, fl_cmp);
 }
 
 
@@ -222,7 +222,7 @@ int NavaidLoader::queryByChannel(const long chan, const char band)
    if (band == 'Y') chan1 = -chan1;
    NavaidKey key(chan1);
    Key* pkey = &key;
-   return Database::mQuery(&pkey, (Key**)cl, ncl, cl_cmp);
+   return Database::mQuery(&pkey, reinterpret_cast<Key**>(cl), ncl, cl_cmp);
 }
 
 
@@ -239,7 +239,7 @@ int NavaidLoader::queryByType(const Navaid::NavaidType t)
    // than mrng**2 and type 't'
    nql = 0;
    for (int i = 0; i < nrl; i++) {
-      NavaidKey* k = (NavaidKey*) rl[i];
+      NavaidKey* k = static_cast<NavaidKey*>(rl[i]);
       if (t == k->type || t == Navaid::ANY) {
          k->rng2 = range2(k->lat,k->lon);
          if (k->rng2 < mr2) {
@@ -265,8 +265,8 @@ int NavaidLoader::queryByType(const Navaid::NavaidType t)
 // kl_cmp() -- key list compare function
 int NavaidLoader::kl_cmp(const void* p1, const void* p2)
 {
-   NavaidKey* k1 = *((NavaidKey**) p1);
-   NavaidKey* k2 = *((NavaidKey**) p2);
+   const NavaidKey* k1 = *(static_cast<const NavaidKey**>(const_cast<void*>(p1)));
+   const NavaidKey* k2 = *(static_cast<const NavaidKey**>(const_cast<void*>(p2)));
 
    // compare the keys
    int result = std::strcmp(k1->key, k2->key);
@@ -277,8 +277,8 @@ int NavaidLoader::kl_cmp(const void* p1, const void* p2)
 // il_cmp() -- identifier list compare function
 int NavaidLoader::il_cmp(const void* p1, const void* p2)
 {
-   NavaidKey* k1 = *((NavaidKey**) p1);
-   NavaidKey* k2 = *((NavaidKey**) p2);
+   const NavaidKey* k1 = *(static_cast<const NavaidKey**>(const_cast<void*>(p1)));
+   const NavaidKey* k2 = *(static_cast<const NavaidKey**>(const_cast<void*>(p2)));
 
    // compare the id's
    int result = std::strcmp(k1->ident, k2->ident);
@@ -296,8 +296,8 @@ int NavaidLoader::il_cmp(const void* p1, const void* p2)
 // fl_cmp() -- frequency list compare function
 int NavaidLoader::fl_cmp(const void* p1, const void* p2)
 {
-   NavaidKey* k1 = *((NavaidKey**) p1);
-   NavaidKey* k2 = *((NavaidKey**) p2);
+   const NavaidKey* k1 = *(static_cast<const NavaidKey**>(const_cast<void*>(p1)));
+   const NavaidKey* k2 = *(static_cast<const NavaidKey**>(const_cast<void*>(p2)));
 
    int result = 0;
 
@@ -314,8 +314,8 @@ int NavaidLoader::fl_cmp(const void* p1, const void* p2)
 // cl_cmp() -- channel list compare function
 int NavaidLoader::cl_cmp(const void* p1, const void* p2)
 {
-   NavaidKey* k1 = *((NavaidKey**) p1);
-   NavaidKey* k2 = *((NavaidKey**) p2);
+   const NavaidKey* k1 = *(static_cast<const NavaidKey**>(const_cast<void*>(p1)));
+   const NavaidKey* k2 = *(static_cast<const NavaidKey**>(const_cast<void*>(p2)));
 
    int result = 0;
 

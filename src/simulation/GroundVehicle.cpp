@@ -16,9 +16,9 @@ namespace Simulation {
 IMPLEMENT_SUBCLASS(GroundVehicle,"GroundVehicle")
 EMPTY_SERIALIZER(GroundVehicle)
 
-static const LCreal DEFAULT_LAUNCHER_UP_ANGLE = (LCreal)(PI/2.0); // Default max launcher angle (rad)
-static const LCreal DEFAULT_LAUNCHER_DOWN_ANGLE = 0.0;            // Default min launcher angle (rad)
-static const LCreal DEFAULT_LAUNCHER_MOVE_TIME  = 10.0f;          // Default max launcher movement time (sec)
+static const LCreal DEFAULT_LAUNCHER_UP_ANGLE = static_cast<LCreal>(PI/2.0); // Default max launcher angle (rad)
+static const LCreal DEFAULT_LAUNCHER_DOWN_ANGLE = 0.0;                       // Default min launcher angle (rad)
+static const LCreal DEFAULT_LAUNCHER_MOVE_TIME  = 10.0f;                     // Default max launcher movement time (sec)
 
 //------------------------------------------------------------------------------
 // Slot table
@@ -235,7 +235,7 @@ bool GroundVehicle::setSlotLauncherDownAngle(const Basic::Angle* const msg)
 {
    bool ok = false;
    if (msg != 0) {
-      lnchrDownAngle = (LCreal)Basic::Radians::convertStatic( *msg );
+      lnchrDownAngle = static_cast<LCreal>(Basic::Radians::convertStatic( *msg ));
       ok = true;
    }
    return ok;
@@ -246,7 +246,7 @@ bool GroundVehicle::setSlotLauncherUpAngle(const Basic::Angle* const msg)
 {
    bool ok = false;
    if (msg != 0) {
-      lnchrUpAngle = (LCreal)Basic::Radians::convertStatic( *msg );
+      lnchrUpAngle = static_cast<LCreal>(Basic::Radians::convertStatic( *msg ));
       ok = true;
    }
    return ok;

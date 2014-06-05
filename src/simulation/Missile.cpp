@@ -125,8 +125,8 @@ void Missile::atReleaseInit()
 
    if (getDynamicsModel() == 0) {
       // set initial commands
-      cmdPitch = (LCreal) getPitch();
-      cmdHeading = (LCreal) getHeading();
+      cmdPitch = static_cast<LCreal>(getPitch());
+      cmdHeading = static_cast<LCreal>(getHeading());
       cmdVelocity = vpMax;
 
       if (getTargetTrack() != 0) {
@@ -161,13 +161,13 @@ bool Missile::calculateVectors(const Player* const tgt, const Track* const trk, 
       //vel = trk->getVelocity();
       const Player* tgt0 = trk->getTarget();
       osg::Vec3 p0 = getPosition();
-      if (los != 0) *los = tgt0->getPosition() -  p0;
+      if (los != 0) *los = tgt0->getPosition() - p0;
       if (vel != 0) *vel = tgt0->getVelocity();
       if (posx != 0) *posx = tgt0->getPosition();
    }
    else if (tgt != 0) {
       osg::Vec3 p0 = getPosition();
-      if (los != 0) *los = tgt->getPosition() -  p0;
+      if (los != 0) *los = tgt->getPosition() - p0;
       if (vel != 0) *vel = tgt->getVelocity();
       if (posx != 0) *posx = tgt->getPosition();
    }
@@ -529,26 +529,26 @@ void Missile::weaponDynamics(const LCreal dt)
    // ---
    // Find pitch rate and update pitch
    // ---
-   LCreal qa = lcAepcRad(cmdPitch - (LCreal) getPitchR());
+   LCreal qa = lcAepcRad(cmdPitch - static_cast<LCreal>(getPitchR()));
    if(qa > qa_max) qa = qa_max;
    if(qa < qa_min) qa = qa_min;
 
    // Using Pitch rate, integrate pitch
-   LCreal newTheta = (LCreal) (getPitch() + (qa + qa1) * dt / 2.0);
+   LCreal newTheta = static_cast<LCreal>(getPitch() + (qa + qa1) * dt / 2.0);
 
    // Find turn rate
-   LCreal ra = lcAepcRad(cmdHeading - (LCreal) getHeadingR());
+   LCreal ra = lcAepcRad(cmdHeading - static_cast<LCreal>(getHeadingR()));
    if(ra > ra_max) ra = ra_max;
    if(ra < -ra_max) ra = -ra_max;
 
    // Use turn rate integrate heading
-   LCreal newPsi = (LCreal) (getHeading() + (ra + ra1) * dt / 2.0);
-   if(newPsi > 2.0f*PI) newPsi -= (LCreal)(2.0*PI);
-   if(newPsi < 0.0f) newPsi += (LCreal)(2.0*PI);
+   LCreal newPsi = static_cast<LCreal>(getHeading() + (ra + ra1) * dt / 2.0);
+   if(newPsi > 2.0f*PI) newPsi -= static_cast<LCreal>(2.0*PI);
+   if(newPsi < 0.0f) newPsi += static_cast<LCreal>(2.0*PI);
 
    // Roll angle proportional to max turn rate - filtered
    LCreal pa = 0.0;
-   LCreal newPhi = (LCreal) ( 0.98 * getRollR() + 0.02 * ((ra / ra_max) * (Basic::Angle::D2RCC * 60.0)) );
+   LCreal newPhi = static_cast<LCreal>( 0.98 * getRollR() + 0.02 * ((ra / ra_max) * (Basic::Angle::D2RCC * 60.0)) );
 
    // Sent angular values
    setEulerAngles(newPhi, newTheta, newPsi);

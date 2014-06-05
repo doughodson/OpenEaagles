@@ -74,7 +74,7 @@ union convData
 // -- returns true if this computer's byte order is not big ending (network) order.
 inline bool checkSwap() {
   uint16_t s = 1;
-  uint8_t* c = (uint8_t*) &s;
+  uint8_t* c = reinterpret_cast<uint8_t*>(&s);
   return (*c != 0);
 }
 
@@ -284,25 +284,25 @@ struct EntityType {
 
       s.width(3);
       s.fill('0');
-      s << (int)v.kind << ":";
+      s << static_cast<int>(v.kind) << ":";
       s.width(3);
       s.fill('0');
-      s << (int)v.domain << ":";
+      s << static_cast<int>(v.domain) << ":";
       s.width(4);
       s.fill('0');
-      s << (int)v.country << ":";
+      s << static_cast<int>(v.country) << ":";
       s.width(3);
       s.fill('0');
-      s << (int)v.category << ":";
+      s << static_cast<int>(v.category) << ":";
       s.width(3);
       s.fill('0');
-      s << (int)v.subcategory << ":";
+      s << static_cast<int>(v.subcategory) << ":";
       s.width(3);
       s.fill('0');
-      s << (int)v.specific << ":";
+      s << static_cast<int>(v.specific) << ":";
       s.width(3);
       s.fill('0');
-      s << (int)v.extra;
+      s << static_cast<int>(v.extra);
 
       return s;
    };
@@ -368,8 +368,8 @@ struct SimulationAddressDIS{
    }
 
    friend std::ostream& operator << ( std::ostream& s, const SimulationAddressDIS& v ) {
-      s  << "  siteIdentification:        " << (int)v.siteIdentification << std::endl
-         << "  applicationIdentification: " << (int)v.applicationIdentification << std::endl;
+      s  << "  siteIdentification:        " << static_cast<int>(v.siteIdentification) << std::endl
+         << "  applicationIdentification: " << static_cast<int>(v.applicationIdentification) << std::endl;
 
       return s;
    }
@@ -478,15 +478,15 @@ struct WorldCoordinates {
 
    // Swap bytes to or from the network
    void swapBytes() {
-      X_coord = convertDouble((double)X_coord);
-      Y_coord = convertDouble((double)Y_coord);
-      Z_coord = convertDouble((double)Z_coord);
+      X_coord = convertDouble(static_cast<double>(X_coord));
+      Y_coord = convertDouble(static_cast<double>(Y_coord));
+      Z_coord = convertDouble(static_cast<double>(Z_coord));
    }
 
    friend std::ostream& operator << ( std::ostream& s, const WorldCoordinates& v ) {
-      s  << "  X_coord:       " << (double)v.X_coord << std::endl
-         << "  Y_coord:       " << (double)v.Y_coord << std::endl
-         << "  Z_coord:       " << (double)v.Z_coord << std::endl;
+      s  << "  X_coord:       " << static_cast<double>(v.X_coord) << std::endl
+         << "  Y_coord:       " << static_cast<double>(v.Y_coord) << std::endl
+         << "  Z_coord:       " << static_cast<double>(v.Z_coord) << std::endl;
 
       return s;
    };
@@ -519,9 +519,9 @@ struct AngularVelocityVectorDIS {
    };
 
    friend std::ostream& operator << ( std::ostream& s, const AngularVelocityVectorDIS& v ) {
-      s  << "  x_axis:      " << (int)v.x_axis << std::endl
-         << "  y_axis:      " << (int)v.y_axis << std::endl
-         << "  z_axis:      " << (int)v.z_axis << std::endl;
+      s  << "  x_axis:      " << static_cast<int>(v.x_axis) << std::endl
+         << "  y_axis:      " << static_cast<int>(v.y_axis) << std::endl
+         << "  z_axis:      " << static_cast<int>(v.z_axis) << std::endl;
 
       return s;
    };
@@ -571,7 +571,7 @@ struct AntennaPattern {
          << "  phi:                   " << v.phi << std::endl
          << "  azimuthBeamWidth:      " << v.azimuthBeamWidth << std::endl
          << "  elevationBeamWidth:    " << v.elevationBeamWidth << std::endl
-         << "  referenceSystem:       " << (int)v.referenceSystem << std::endl
+         << "  referenceSystem:       " << static_cast<int>(v.referenceSystem) << std::endl
          << "  ez:                    " << v.ez << std::endl
          << "  ex:                    " << v.ex << std::endl
          << "  phase:                 " << v.phase << std::endl;
@@ -731,10 +731,10 @@ struct BurstDescriptor {
    friend std::ostream& operator << ( std::ostream& s, const BurstDescriptor& v ) {
       s  << "  Munition ID:"
          << v.munition << std::endl
-         << "  warhead:      " << (int)v.warhead << std::endl
-         << "  fuse:         " << (int)v.fuse << std::endl
-         << "  quantity:     " << (int)v.quantity << std::endl
-         << "  rate:         " << (int)v.rate << std::endl;
+         << "  warhead:      " << static_cast<int>(v.warhead)  << std::endl
+         << "  fuse:         " << static_cast<int>(v.fuse)     << std::endl
+         << "  quantity:     " << static_cast<int>(v.quantity) << std::endl
+         << "  rate:         " << static_cast<int>(v.rate)     << std::endl;
 
       return s;
    };
@@ -859,9 +859,9 @@ struct EmitterSystem {
 
    // Friendly print functions
    friend std::ostream& operator << ( std::ostream& s, const EmitterSystem& v ) {
-      s  << "emitterName:                 " << (int)v.emitterName << std::endl
-         << "function:                    " << (int)v.function << std::endl
-         << "emitterIdentificationNumber: " << (int)v.emitterIdentificationNumber << std::endl;
+      s  << "emitterName:                 " << static_cast<int>(v.emitterName)                 << std::endl
+         << "function:                    " << static_cast<int>(v.function)                    << std::endl
+         << "emitterIdentificationNumber: " << static_cast<int>(v.emitterIdentificationNumber) << std::endl;
 
       return s;
    }
@@ -928,7 +928,7 @@ struct EntityIdentifierDIS {
    friend std::ostream& operator << ( std::ostream& s, const EntityIdentifierDIS& v ) {
       s  << "Sim ID:" << std::endl
          << v.simulationID
-         << "  entityID:                  " << (int)v.ID << std::endl;
+         << "  entityID:                  " << static_cast<int>(v.ID) << std::endl;
 
       return s;
    }
@@ -954,7 +954,7 @@ struct EntityMarking {
    uint8_t marking[BUFF_SIZE];   // Entity marking buffer
 
    friend std::ostream& operator << ( std::ostream& s, const EntityMarking& v ) {
-      s  << "  Character Set:   " << (int)v.characterSet << std::endl
+      s  << "  Character Set:   " << static_cast<int>(v.characterSet) << std::endl
          << "  Markings:        " << v.marking << std::endl;
 
       return s;
@@ -1041,7 +1041,7 @@ struct EventIdentifier {
    friend std::ostream& operator << ( std::ostream& s, const EventIdentifier& v ) {
       s  << "  Event Identifier:" << std::endl
          << v.simulationID
-         << "  eventNumber:     " << (int)v.eventNumber << std::endl;
+         << "  eventNumber:     " << static_cast<int>(v.eventNumber) << std::endl;
 
       return s;
    };
@@ -1111,34 +1111,34 @@ struct FundamentalOpData {
    };
 
    friend std::ostream& operator << ( std::ostream &s, const FundamentalOpData &v ) {
-      s  << "  System Status:      " << (int)v.systemStatus << std::endl
-         << "  Alternate Param4:   " << (int)v.alternateParam4 << std::endl
-         << "  Information Layers: " << (int)v.informationLayers << std::endl
-         << "  Modifier:           " << (int)v.modifier << std::endl;
+      s  << "  System Status:      " << static_cast<int>(v.systemStatus)      << std::endl
+         << "  Alternate Param4:   " << static_cast<int>(v.alternateParam4)   << std::endl
+         << "  Information Layers: " << static_cast<int>(v.informationLayers) << std::endl
+         << "  Modifier:           " << static_cast<int>(v.modifier)          << std::endl;
 
       s.width(2);
       s.fill('0');
-      s << "    Parameter 1:    " << std::hex << (int)v.param1 << std::endl;
+      s << "    Parameter 1:    " << std::hex << static_cast<int>(v.param1) << std::endl;
 
       s.width(2);
       s.fill('0');
-      s << "    Parameter 2:    " << std::hex << (int)v.param2 << std::endl;
+      s << "    Parameter 2:    " << std::hex << static_cast<int>(v.param2) << std::endl;
 
       s.width(2);
       s.fill('0');
-      s << "    Parameter 3:    " << std::hex << (int)v.param3 << std::endl;
+      s << "    Parameter 3:    " << std::hex << static_cast<int>(v.param3) << std::endl;
 
       s.width(2);
       s.fill('0');
-      s << "    Parameter 4:    " << std::hex << (int)v.param4 << std::endl;
+      s << "    Parameter 4:    " << std::hex << static_cast<int>(v.param4) << std::endl;
 
       s.width(2);
       s.fill('0');
-      s << "    Parameter 5:    " << std::hex << (int)v.param5 << std::endl;
+      s << "    Parameter 5:    " << std::hex << static_cast<int>(v.param5) << std::endl;
 
       s.width(2);
       s.fill('0');
-      s << "    Parameter 6:    " << std::hex << (int)v.param6 << std::endl;
+      s << "    Parameter 6:    " << std::hex << static_cast<int>(v.param6) << std::endl;
 
       s << std::dec;
       return s;
@@ -1230,10 +1230,10 @@ struct JammingTechnique {
 
    // Friendly print functions
    friend std::ostream& operator << ( std::ostream& s, const JammingTechnique& v ) {
-      s  << "kind:                 " << (long)v.kind << std::endl
-         << "category:                    " << (long)v.category << std::endl
-         << "subcat: " << (long)v.subcat << std::endl
-         << "specific: " << (long)v.specific << std::endl;
+      s  << "kind:                 "        << static_cast<long>(v.kind)     << std::endl
+         << "category:                    " << static_cast<long>(v.category) << std::endl
+         << "subcat: "                      << static_cast<long>(v.subcat)   << std::endl
+         << "specific: "                    << static_cast<long>(v.specific) << std::endl;
 
       return s;
    }
@@ -1404,12 +1404,12 @@ struct RadioEntityType {
    };
 
    friend std::ostream& operator << ( std::ostream& s, const RadioEntityType& v ) {
-      s  << "  kind:                " << (int)v.kind << std::endl
-         << "  domain:              " << (int)v.domain << std::endl
-         << "  country:             " << (int)v.country << std::endl
-         << "  category:            " << (int)v.category << std::endl
-         << "  nomenclatureVersion: " << (int)v.nomenclatureVersion << std::endl
-         << "  nomenclature:        " << (int)v.nomenclature << std::endl;
+      s  << "  kind:                " << static_cast<int>(v.kind)                << std::endl
+         << "  domain:              " << static_cast<int>(v.domain)              << std::endl
+         << "  country:             " << static_cast<int>(v.country)             << std::endl
+         << "  category:            " << static_cast<int>(v.category)            << std::endl
+         << "  nomenclatureVersion: " << static_cast<int>(v.nomenclatureVersion) << std::endl
+         << "  nomenclature:        " << static_cast<int>(v.nomenclature)        << std::endl;
 
       return s;
    };
@@ -1517,11 +1517,11 @@ struct SystemID {
 
       s.width(2);
       s.fill('0');
-      s << "  System Mode:    " << std::hex << (int)v.systemMode << std::endl;
+      s << "  System Mode:    " << std::hex << static_cast<int>(v.systemMode) << std::endl;
 
       s.width(2);
       s.fill('0');
-      s << "  Change/Options: " << (int)v.options << std::dec << std::endl;
+      s << "  Change/Options: " << static_cast<int>(v.options) << std::dec << std::endl;
 
       return s;
    };
@@ -1578,8 +1578,8 @@ struct TrackJamTargets {
    // Friendly print function
    friend std::ostream& operator << ( std::ostream& s, const TrackJamTargets& v ) {
       s  << "Target ID:       " << std::endl << v.targetID
-         << "  emitterID:     " << (int)v.emitterID << std::endl
-         << "  beamID:        " << (int)v.beamID << std::endl;
+         << "  emitterID:     " << static_cast<int>(v.emitterID) << std::endl
+         << "  beamID:        " << static_cast<int>(v.beamID)    << std::endl;
 
       return s;
    }
@@ -1615,11 +1615,11 @@ struct VariableDatum {
    };
 
    // Temp connection to data, better way...
-   uint8_t* getData(){ return ((uint8_t*)&variableDatumLength)+sizeof(long); };
+   uint8_t* getData(){ return reinterpret_cast<uint8_t*>(&variableDatumLength) + sizeof(long); };
 
    friend std::ostream& operator << ( std::ostream& s, const VariableDatum&  v) {
-      s  << "  variableDatumID:       " << (int)v.variableDatumID << std::endl
-         << "  variableDatumLength:   " << (int)v.variableDatumLength << std::endl;
+      s  << "  variableDatumID:       " << static_cast<int>(v.variableDatumID) << std::endl
+         << "  variableDatumLength:   " << static_cast<int>(v.variableDatumLength) << std::endl;
 
       return s;
    };
@@ -1708,10 +1708,10 @@ struct VpArticulatedPart {
    };
 
    friend std::ostream& operator << ( std::ostream& s, const VpArticulatedPart& v ) {
-      s  << "  parameterTypeDesignator: " << (int)v.parameterTypeDesignator << std::endl
-         << "  changeIndicator:         " << (int)v.changeIndicator << std::endl
-         << "  id:                      " << (int)v.id << std::endl
-         << "  parameterType:           " << (int)v.parameterType << std::endl;
+      s  << "  parameterTypeDesignator: " << static_cast<int>(v.parameterTypeDesignator) << std::endl
+         << "  changeIndicator:         " << static_cast<int>(v.changeIndicator)         << std::endl
+         << "  id:                      " << static_cast<int>(v.id)                      << std::endl
+         << "  parameterType:           " << static_cast<int>(v.parameterType)           << std::endl;
 
       if (v.parameterTypeDesignator == ATTACHED_PART)
          s << v.parameterValue.entityType << std::endl;
@@ -1778,15 +1778,15 @@ struct EmitterBeamData {
    TrackJamTargets* getTrackTarget(const int idx) {
       TrackJamTargets* tjt = 0;
       if (idx < numberOfTargetsInTrack) {
-         uint8_t* p = ((uint8_t*)this) + sizeof(*this) + (sizeof(TrackJamTargets) * idx);
-         tjt = (TrackJamTargets*) p;
+         uint8_t* p = reinterpret_cast<uint8_t*>(this) + sizeof(*this) + (sizeof(TrackJamTargets) * idx);
+         tjt = reinterpret_cast<TrackJamTargets*>(p);
       }
       return tjt;
    }
    const TrackJamTargets* getTrackTarget(const int idx) const {
       const TrackJamTargets* tjt = 0;
       if (idx < numberOfTargetsInTrack) {
-         uint8_t* p = ((uint8_t*)this) + sizeof(*this) + (sizeof(TrackJamTargets) * idx);
+         uint8_t* p = const_cast<uint8_t*>(reinterpret_cast<const uint8_t*>(this)) + sizeof(*this) + (sizeof(TrackJamTargets) * idx);
          tjt = (const TrackJamTargets*) p;
       }
       return tjt;
@@ -1828,15 +1828,15 @@ struct EmitterBeamData {
 
    // Friendly print function
    friend std::ostream& operator << ( std::ostream& s, const EmitterBeamData& v ) {
-      s  << "  beamDataLength:         " << (long)v.beamDataLength << std::endl
-         << "  beamIDNumber:           " << (long)v.beamIDNumber << std::endl
-         << "  beamParameterIndex:     " << (long)v.beamParameterIndex << std::endl
-         << "Parameter Data:           " << std::endl << v.parameterData << std::endl
-         << "  beamData:               " << std::endl << v.beamData << std::endl
-         << "  beamFunction:           " << (long)v.beamFunction << std::endl
-         << "  numberOfTargetsInTrack: " << (long)v.numberOfTargetsInTrack << std::endl
-         << "  highDensityTracks:      " << (long)v.highDensityTracks << std::endl
-         << "  jammingTechnique:       " << v.jammingTechnique << std::endl;
+      s  << "  beamDataLength:         " << static_cast<long>(v.beamDataLength)         << std::endl
+         << "  beamIDNumber:           " << static_cast<long>(v.beamIDNumber)           << std::endl
+         << "  beamParameterIndex:     " << static_cast<long>(v.beamParameterIndex)     << std::endl
+         << "Parameter Data:           " << std::endl << v.parameterData                << std::endl
+         << "  beamData:               " << std::endl << v.beamData                     << std::endl
+         << "  beamFunction:           " << static_cast<long>(v.beamFunction)           << std::endl
+         << "  numberOfTargetsInTrack: " << static_cast<long>(v.numberOfTargetsInTrack) << std::endl
+         << "  highDensityTracks:      " << static_cast<long>(v.highDensityTracks)      << std::endl
+         << "  jammingTechnique:       " << v.jammingTechnique                          << std::endl;
 
       for(int i=0; i < v.numberOfTargetsInTrack; i++)
       {
@@ -1920,15 +1920,15 @@ struct EmissionSystem {
    EmitterBeamData* getEmitterBeamData(const int idx) {
       EmitterBeamData* bd = 0;
       if (idx < numberOfBeams) {
-         uint8_t *p = ((uint8_t*)this) + sizeof(*this);
+         uint8_t *p = (reinterpret_cast<uint8_t*>(this)) + sizeof(*this);
 
          // First Emitter beam data is just after this structure
-         bd = (EmitterBeamData*) p;
+         bd = reinterpret_cast<EmitterBeamData*>(p);
 
          for (int i = 0; i < idx; i++) {
             // step down to the correct beam data using 'beamDataLength'
             p += (bd->beamDataLength * 4);
-            bd = (EmitterBeamData*) p;
+            bd = reinterpret_cast<EmitterBeamData*>(p);
          }
 
       }
@@ -1938,15 +1938,15 @@ struct EmissionSystem {
    const EmitterBeamData* getEmitterBeamData(const int idx) const {
       const EmitterBeamData* bd = 0;
       if (idx < numberOfBeams) {
-         uint8_t *p = ((uint8_t*)this) + sizeof(*this);
+         uint8_t *p = const_cast<uint8_t*>(reinterpret_cast<const uint8_t*>(this)) + sizeof(*this);
 
          // First Emitter beam data is just after this structure
-         bd = (const EmitterBeamData*) p;
+         bd = reinterpret_cast<const EmitterBeamData*>(p);
 
          for (int i = 0; i < idx; i++) {
             // step down to the correct beam data using 'beamDataLength'
             p += (bd->beamDataLength * 4);
-            bd = (const EmitterBeamData*) p;
+            bd = reinterpret_cast<const EmitterBeamData*>(p);
          }
 
       }
@@ -1955,10 +1955,10 @@ struct EmissionSystem {
 
    // Friendly print function
    friend std::ostream& operator << ( std::ostream& s, const EmissionSystem& v ) {
-      s  << "  systemDataLength:       " << (int)v.systemDataLength << std::endl
-         << "  numberOfBeams:          " << (int)v.numberOfBeams << std::endl
-         << "Emitter System:           " << std::endl << v.emitterSystem << std::endl
-         << "Reference Location:       " << std::endl << v.location << std::endl;
+      s  << "  systemDataLength:       " << static_cast<int>(v.systemDataLength) << std::endl
+         << "  numberOfBeams:          " << static_cast<int>(v.numberOfBeams)    << std::endl
+         << "Emitter System:           " << std::endl << v.emitterSystem         << std::endl
+         << "Reference Location:       " << std::endl << v.location              << std::endl;
 
       for (unsigned int i = 0; i < v.numberOfBeams; i++) {
          const EmitterBeamData* bd = v.getEmitterBeamData(i);

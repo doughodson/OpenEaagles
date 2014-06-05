@@ -13,6 +13,20 @@ general
       This has no effect on API interface, but does make explicit where these functions
       are defined (for C++)
 
+   3) Moving away from using C-style casts to more proper C++ casts throughout
+      framework and examples.  No functional changes to the API or bugs have been found
+      or resolved as a result of this activity.  We are simply adopting a better coding
+      practice by making type casts more explicit in terms of the kind of cast being
+      performed.
+
+   4) Adding 'const' in more places within functions and methods where an intermediate
+      value is calculated to support other calculations.  These variables are often created
+      and used as a matter of convenience and never intended to be altered again after
+      initial calculation.  This coding style promotes better visibility as to the
+      purpose of variable, and provides more information so the compiler can make better
+      optimizations because it knows the value will never change after initial assignment.
+      No functional changes to the API or bugs have been found or resolved as a result of
+      this activity - again, this effort is a result of adopting better coding practices.
 --------------------------------------------------------------------------------
 basic
 
@@ -65,12 +79,20 @@ simulation
    Otw class
       1) compareKey2Model() -- Corrected null pointer check on pKeyFedName (bug fix)
 
+   Player class
+      1) Added accessor to get initial velocity setting - this allows dynamics models
+         to quiz Player as to what initial velocity setting is on reset().
+
    StabilizingGimbal.cpp
       1) fixed slottable entry (bug fix)
 
 --------------------------------------------------------------------------------
 vehicle
 
+   Laero class
+      1) Added reset method to initialize initial velocity using Player setting. This
+         is effectively a bug fix as Player "initVelocity" was being ignored before
+         (bug fix)
 
 --------------------------------------------------------------------------------
 

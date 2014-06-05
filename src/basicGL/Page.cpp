@@ -145,7 +145,7 @@ void Page::updateData(const LCreal dt)
       Basic::Pair* p = 0;
       if (subpages != 0) p = subpages->findByName(cpName);
       if (p != 0) {
-         np = (Page*) p->object();
+         np = static_cast<Page*>(p->object());
          np->caller  = 0;
          np->pageArg = 0;
       }
@@ -187,8 +187,8 @@ void Page::reset()
         // Reset all of our sub-pages
         Basic::List::Item* item = subpages->getFirstItem();
         while (item != 0) {
-            Basic::Pair* pair = (Basic::Pair*)(item->getValue());
-            Component* obj = (Component*)( pair->object() );
+            Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+            Component* obj = static_cast<Component*>(pair->object());
             if (obj != 0) obj->reset();
             item = item->getNext();
         }
@@ -238,7 +238,7 @@ bool Page::newSubpage(const char* const name, Page* theCaller, Basic::Object* th
     if (subpages != 0) p = subpages->findByName(name);
     if (p != 0) {
         cpName = name;            // It's our page
-        np = (Page*) p->object();
+        np = static_cast<Page*>(p->object());
         np->pageArg = theArg;
         np->caller  = theCaller;
         clearSubpageStack();
@@ -268,7 +268,7 @@ bool Page::pushSubpage(const char* const name, Page* theCaller, Basic::Object* t
         if (subpages != 0) p = subpages->findByName(name);
         if (p != 0) {
            cpName = name;            // It's our page
-           np = (Page*) p->object();
+           np = static_cast<Page*>(p->object());
            np->pageArg = theArg;
            np->caller  = theCaller;
            ok = true;
@@ -464,7 +464,7 @@ bool Page::processSubpages()
         // that we are their container.
         const Basic::List::Item* item = subpages->getFirstItem();
         while (ok && item != 0) {
-            Basic::Pair* p = (Basic::Pair*) item->getValue();
+            Basic::Pair* p = const_cast<Basic::Pair*>(static_cast<const Basic::Pair*>(item->getValue()));
             item = item->getNext();
             Page* g = dynamic_cast<Page*>(p->object());
             if (g != 0) {

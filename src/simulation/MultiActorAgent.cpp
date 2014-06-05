@@ -213,7 +213,7 @@ bool MultiActorAgent::setSlotAgentList(Basic::PairStream* const msg)
        // Now scan the pair stream and put all Ntm objects into the table.
        Basic::List::Item* item = msg->getFirstItem();
        while (item != 0) {
-          Basic::Pair* pair = (Basic::Pair*) (item->getValue());
+          Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
           //std::cerr << "MultiActorAgent::setSlotagentList: slot: " << *pair->slot() << std::endl;
           Basic::Ubf::Behavior* b = dynamic_cast<Basic::Ubf::Behavior*>( pair->object() );
           if (b != 0) {

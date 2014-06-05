@@ -126,7 +126,7 @@ Polygon* Clip3D::clip(const Polygon& inPoly) const
    // ---
    // Clone the original polygon 
    // ---
-   Polygon* outPoly = (Polygon*) inPoly.clone();
+   Polygon* outPoly = static_cast<Polygon*>(inPoly.clone());
 
    // ---
    // check if all vertices are "inside" all of the six planes

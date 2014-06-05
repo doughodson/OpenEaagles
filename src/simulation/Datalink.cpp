@@ -352,8 +352,8 @@ bool Datalink::sendMessage(Basic::Object* const msg)
             Basic::List::Item* playerItem = players->getFirstItem();
             while (playerItem != 0) {
 
-               Basic::Pair* playerPair = (Basic::Pair*)(playerItem->getValue());
-               Player* player = (Player*)(playerPair->object());
+               Basic::Pair* playerPair = static_cast<Basic::Pair*>(playerItem->getValue());
+               Player* player = static_cast<Player*>(playerPair->object());
 
                if (player->isLocalPlayer()) {
                   // Send to active, local players only (and not to ourself)
@@ -488,8 +488,8 @@ bool Datalink::onDatalinkMessageEvent(Basic::Object* const msg)
    Basic::PairStream* subcomponents = getComponents();
    if (subcomponents != 0) {
       for (Basic::List::Item* item = subcomponents->getFirstItem(); item != 0; item = item->getNext()) {
-         Basic::Pair* pair = (Basic::Pair*)(item->getValue());
-         Basic::Component* sc = (Basic::Component*) pair->object();
+         Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+         Basic::Component* sc = static_cast<Basic::Component*>(pair->object());
          sc->event(DATALINK_MESSAGE, msg);
       }
       subcomponents->unref();
@@ -508,7 +508,7 @@ bool Datalink::setSlotRadioId(const Basic::Number* const msg)
    if (msg != 0) {
       int v = msg->getInt();
       if (v >= 0 && v <= 0xffff) {
-         radioId = (unsigned short) v;
+         radioId = static_cast<unsigned short>(v);
          useRadioIdFlg = true;
          ok = true;
       }

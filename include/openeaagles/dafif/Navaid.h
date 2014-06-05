@@ -101,7 +101,7 @@ inline float Navaid::power() const
    double w = dsAtofn(p, NA_POWER_LEN);
 
    if (w != 0.0)
-      return (float) w;
+      return static_cast<float>(w);
 
    if (*p == 'U')
       return 2000.0f;
@@ -117,7 +117,7 @@ inline float Navaid::range() const
    if (*p != 'U') {
       rng = dsAtofn(p, NA_RANGE_LEN);
    }
-   return (float) rng;
+   return static_cast<float>(rng);
 }
 
 // radioClass: returns the value of the radio class field

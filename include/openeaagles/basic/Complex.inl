@@ -356,7 +356,7 @@ inline double Complex::getMag() const
 
 inline double Complex::getArg() const
 {
-    return std::atan2(getImag(), (double) getReal());
+    return std::atan2(getImag(), static_cast<double>(getReal()));
 }
 
 inline bool Complex::setReal(const double r)
@@ -411,7 +411,7 @@ inline Complex Complex::zLog() const
    Complex t(*this);
    if (t != Complex(0.0)) {
       double re = std::log(getReal()*getReal() + getImag()*getImag()) / 2.0;
-      double im = std::atan2(getImag(), (double) getReal());
+      double im = std::atan2(getImag(), static_cast<double>(getReal()));
       t.setReal(re);
       t.setImag(im);
    }

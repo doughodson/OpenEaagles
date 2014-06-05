@@ -550,8 +550,8 @@ void NetIO::updateOutputList()
          while (playerItem != 0 && !finished) {
 
             // Get player list items
-            Basic::Pair* playerPair = (Basic::Pair*)(playerItem->getValue());
-            Player* player = (Player*)(playerPair->object());
+            Basic::Pair* playerPair = static_cast<Basic::Pair*>(playerItem->getValue());
+            Player* player = static_cast<Player*>(playerPair->object());
 
             if (player->isLocalPlayer() || (isRelayEnabled() && player->getNetworkID() != getNetworkID()) )  {
                if ( player->isActive() && player->isNetOutputEnabled()) {
@@ -628,21 +628,21 @@ void NetIO::processOutputList()
 
          // Send a detonation message
          if (nib->getPlayer()->isMode(Player::DETONATED) && !nib->wasDetonationMessageSent()) {
-            nib->munitionDetonationMsgFactory((LCreal)curExecTime);
+            nib->munitionDetonationMsgFactory(static_cast<LCreal>(curExecTime));
          }
 
          // Manager entity state updates (do this after detonation check because it updates the NIB's mode)
-         nib->entityStateManager((LCreal)curExecTime);
+         nib->entityStateManager(static_cast<LCreal>(curExecTime));
 
          // Send a fire message; if a fire event was needed, we delayed sending
          // until after the weapon's entity state has been sent at least once.
          if (fired) {
             // Weapon player has just gone active and its entity state packet has been sent.
-            nib->weaponFireMsgFactory((LCreal)curExecTime);
+            nib->weaponFireMsgFactory(static_cast<LCreal>(curExecTime));
          }
 
          // Manage all systems that require network functionality (IFF, Radios, Emitters, etc)
-         nib->networkOutputManagers((LCreal)curExecTime);
+         nib->networkOutputManagers(static_cast<LCreal>(curExecTime));
 
       }
    }
@@ -832,12 +832,12 @@ Nib* NetIO::findNib(const unsigned short playerID, const Basic::String* const fe
    Nib* found = 0;
    if (ioType == INPUT_NIB) {
       Nib** k =
-         (Nib**) bsearch(&key, inputList, nInNibs, sizeof(Nib*), compareKey2Nib);
+         static_cast<Nib**>(bsearch(&key, inputList, nInNibs, sizeof(Nib*), compareKey2Nib));
       if (k != 0) found = *k;
    }
    else {
       Nib** k =
-         (Nib**) bsearch(&key, outputList, nOutNibs, sizeof(Nib*), compareKey2Nib);
+         static_cast<Nib**>(bsearch(&key, outputList, nOutNibs, sizeof(Nib*), compareKey2Nib));
       if (k != 0) found = *k;
    }
    return found;
@@ -946,7 +946,7 @@ int NetIO::compareKey2Nib(const void* key, const void* nib)
 {
 
    // The Key
-   const NibKey* pKey = (const NibKey*) key;
+   const NibKey* pKey = static_cast<const NibKey*>(key);
 
    // The NIB
    const Nib* pNib = *((const Nib**) nib);
@@ -1134,8 +1134,8 @@ bool NetIO::setSlotNetworkID(const Basic::Number* const num)
     bool ok = false;
     if (num != 0) {
         int v = num->getInt();
-        if (v >= 1 && v <= (int)MAX_NETWORD_ID) {
-            ok = setNetworkID((unsigned short)(v));
+        if (v >= 1 && v <= static_cast<int>(MAX_NETWORD_ID)) {
+            ok = setNetworkID(static_cast<unsigned short>(v));
         }
         else {
             std::cerr << "NetIO::setSlotNetworkID(): invalid number(" << v << "); ";
@@ -1218,7 +1218,7 @@ bool NetIO::setSlotInputEntityTypes(Basic::PairStream* const msg)
        // Now scan the pair stream and put all Ntm objects into the table.
        Basic::List::Item* item = msg->getFirstItem();
        while (item != 0) {
-          Basic::Pair* pair = (Basic::Pair*) (item->getValue());
+          Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
           Ntm* ntm = dynamic_cast<Ntm*>( pair->object() );
           if (ntm != 0) {
              // We have an Ntm object, so put it in the table
@@ -1249,7 +1249,7 @@ bool NetIO::setSlotOutputEntityTypes(Basic::PairStream* const msg)
        // Now scan the pair stream and put all Ntm objects into the table.
        Basic::List::Item* item = msg->getFirstItem();
        while (item != 0) {
-          Basic::Pair* pair = (Basic::Pair*) (item->getValue());
+          Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
           Ntm* ntm = dynamic_cast<Ntm*>( pair->object() );
           if (ntm != 0) {
             // We have an Ntm object, so put it in the table
@@ -1295,7 +1295,7 @@ bool NetIO::setSlotMaxOrientationErr(const Basic::Angle* const msg)
 {
    bool ok = false;
    if (msg != 0) {
-      LCreal err = (LCreal) Basic::Radians::convertStatic( *msg );
+      LCreal err = static_cast<LCreal>(Basic::Radians::convertStatic( *msg ));
       ok = setMaxOrientationErr( err );
    }
    return ok;
@@ -1652,7 +1652,7 @@ const Ntm* NtmOutputNodeStd::findNetworkTypeMapper(const Player* const p) const
       // (i.e., if it's derived from our node then there may be a better match)
       const Basic::List::Item* item = subnodeList->getFirstItem();
       while (item != 0 && result == 0) {
-         const NtmOutputNodeStd* subnode = (const NtmOutputNodeStd*) item->getValue();
+         const NtmOutputNodeStd* subnode = static_cast<const NtmOutputNodeStd*>(item->getValue());
          result = subnode->findNetworkTypeMapper(p);
          item = item->getNext();
       }
@@ -1671,7 +1671,7 @@ const Ntm* NtmOutputNodeStd::findNetworkTypeMapper(const Player* const p) const
          while (item != 0 && result == 0) {
 
             // Get the template player and its type string with length
-            const Ntm* tstNtm = (const Ntm*) item->getValue();
+            const Ntm* tstNtm = static_cast<const Ntm*>(item->getValue());
             const Player* const tp = tstNtm->getTemplatePlayer();
             const Basic::String* const tpType = tp->getType();
             const size_t tpTypeLen = tpType->len();
@@ -1719,7 +1719,7 @@ bool NtmOutputNodeStd::add2OurLists(Ntm* const tgtNtm)
          bool found = false;
          Basic::List::Item* item = subnodeList->getFirstItem();
          while (item != 0 && !found) {
-            NtmOutputNodeStd* subnode = (NtmOutputNodeStd*) item->getValue();
+            NtmOutputNodeStd* subnode = static_cast<NtmOutputNodeStd*>(item->getValue());
             found = subnode->add2OurLists(tgtNtm);
             item = item->getNext();
          }
@@ -1764,7 +1764,7 @@ bool NtmOutputNodeStd::checkAndAddNtm(Ntm* const tgtNtm)
          // Case #2A : check if any of our subnodes is really a subnode of the new node.
          Basic::List::Item* item = subnodeList->getFirstItem();
          while (item != 0) {
-            NtmOutputNodeStd* subnode = (NtmOutputNodeStd*) item->getValue();
+            NtmOutputNodeStd* subnode = static_cast<NtmOutputNodeStd*>(item->getValue());
             item = item->getNext();
 
             if ( subnode->tp->isFactoryName( tpfn ) ) {
@@ -1807,7 +1807,7 @@ bool NtmOutputNodeStd::addNtmSorted(Ntm* const newNtm)
       while (refItem != 0 && !inserted && !err) {
 
          // Get the ref player's string from the 'ref' Ntm.
-         const Ntm* refNtm =  (const Ntm*) refItem->getValue();
+         const Ntm* refNtm =  static_cast<const Ntm*>(refItem->getValue());
          const Player* refP = refNtm->getTemplatePlayer();
          const Basic::String* refTypeStr = refP->getType();
          const size_t refTypeLen = refTypeStr->len();
@@ -1862,7 +1862,7 @@ void NtmOutputNodeStd::print(std::ostream& sout, const int icnt) const
    {
       const Basic::List::Item* item = ntmList->getFirstItem();
       while (item != 0) {
-         const Ntm* ntm = (const Ntm*) item->getValue();
+         const Ntm* ntm = static_cast<const Ntm*>(item->getValue());
          ntm->serialize(sout, icnt+4);
          item = item->getNext();
       }
@@ -1872,7 +1872,7 @@ void NtmOutputNodeStd::print(std::ostream& sout, const int icnt) const
    {
       const Basic::List::Item* item = subnodeList->getFirstItem();
       while (item != 0) {
-         const NtmOutputNodeStd* subnode = (const NtmOutputNodeStd*) item->getValue();
+         const NtmOutputNodeStd* subnode = static_cast<const NtmOutputNodeStd*>(item->getValue());
          subnode->print(sout,icnt+4);
          item = item->getNext();
       }

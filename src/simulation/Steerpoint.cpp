@@ -581,7 +581,7 @@ bool Steerpoint::setSlotMagVar(const Basic::Angle* const msg)
 {
     bool ok = false;
     if (msg != 0) {
-        initMagVar = (LCreal)Basic::Degrees::convertStatic(*msg);
+        initMagVar = static_cast<LCreal>(Basic::Degrees::convertStatic(*msg));
         haveInitMagVar = true;
         ok = true;
     }
@@ -691,7 +691,7 @@ bool Steerpoint::compute(const Navigation* const nav, const Steerpoint* const fr
             magvar = initMagVar;
         }
         else {
-            magvar = (LCreal) nav->getMagVarDeg();
+            magvar = static_cast<LCreal>(nav->getMagVarDeg());
         }
 
         // ---
@@ -701,7 +701,7 @@ bool Steerpoint::compute(const Navigation* const nav, const Steerpoint* const fr
             // Compute our lat/lon when we only have the Pos Vec
             double elev;
             Basic::Nav::convertPosVec2LL(nav->getRefLatitude(), nav->getRefLongitude(), posVec, &latitude, &longitude, &elev);
-            elevation  = (LCreal) elev;
+            elevation  = static_cast<LCreal>(elev);
             needLL = false;
         }
         if ( isLatLonValid() && !isPosVecValid() ) {
@@ -763,7 +763,7 @@ bool Steerpoint::compute(const Navigation* const nav, const Steerpoint* const fr
             // ---
             // Compute Est Time of Arrival and the PTA Early/Late time        
             // ---
-            setETA( (LCreal) (getETE() + nav->getUTC()) );
+            setETA( static_cast<LCreal>(getETE() + nav->getUTC()) );
             LCreal delta = getPTA() - getETA();
             if (delta >= Basic::Time::D2S) delta -= Basic::Time::D2S;
             setELT( delta );
@@ -772,7 +772,7 @@ bool Steerpoint::compute(const Navigation* const nav, const Steerpoint* const fr
             // Compute Cross-track error (NM); negative values are when the desired track
             //  to this point is left of our navigation position
             // ---
-            LCreal aa = lcAepcDeg( getTrueBrgDeg() - getTrueCrsDeg() ) * (LCreal)Basic::Angle::D2RCC;
+            LCreal aa = lcAepcDeg( getTrueBrgDeg() - getTrueCrsDeg() ) * static_cast<LCreal>(Basic::Angle::D2RCC);
             setCrossTrackErrNM( getDistNM() * lcSin(aa) );
 
             // ---
@@ -782,8 +782,8 @@ bool Steerpoint::compute(const Navigation* const nav, const Steerpoint* const fr
             if (steerpoints != 0) {
                 Basic::List::Item* item = steerpoints->getFirstItem();
                 while (item != 0) {
-                    Basic::Pair* pair = (Basic::Pair*)(item->getValue());
-                    Steerpoint* p = (Steerpoint*)( pair->object() );
+                    Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+                    Steerpoint* p = static_cast<Steerpoint*>(pair->object());
                     p->compute(nav);
                     item = item->getNext();
                 }

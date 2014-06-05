@@ -78,21 +78,21 @@ void JSBSimModel::initData()
     model = 0;
     fdmex = 0;
     propMgr = 0;
-    pitchTrimPos  = (LCreal)0.0;
-    pitchTrimRate = (LCreal)0.1;
-    pitchTrimSw   = (LCreal)0.0;
-    rollTrimPos   = (LCreal)0.0;
-    rollTrimRate  = (LCreal)0.1;
-    rollTrimSw    = (LCreal)0.0;
-    headingHoldOn = false;
-    altitudeHoldOn = false;
-    velocityHoldOn = false;
-    commandedHeadingDeg = 0.0;
-    commandedAltitudeFt = 0.0;
+    pitchTrimPos         = static_cast<LCreal>(0.0);
+    pitchTrimRate        = static_cast<LCreal>(0.1);
+    pitchTrimSw          = static_cast<LCreal>(0.0);
+    rollTrimPos          = static_cast<LCreal>(0.0);
+    rollTrimRate         = static_cast<LCreal>(0.1);
+    rollTrimSw           = static_cast<LCreal>(0.0);
+    headingHoldOn        = false;
+    altitudeHoldOn       = false;
+    velocityHoldOn       = false;
+    commandedHeadingDeg  = 0.0;
+    commandedAltitudeFt  = 0.0;
     commandedVelocityKts = 0.0;
-    hasHeadingHold = false;
-    hasVelocityHold = false;
-    hasAltitudeHold = false;
+    hasHeadingHold       = false;
+    hasVelocityHold      = false;
+    hasAltitudeHold      = false;
 }
 
 //------------------------------------------------------------------------------
@@ -131,11 +131,11 @@ void JSBSimModel::copyData(const JSBSimModel& org, const bool cc)
 //------------------------------------------------------------------------------
 void JSBSimModel::deleteData()
 {
-    if(fdmex != 0) {
+    if (fdmex != 0) {
         delete fdmex;
         fdmex = 0;
     }
-    if(propMgr != 0) {
+    if (propMgr != 0) {
         delete propMgr;
         propMgr = 0;
     }
@@ -150,7 +150,7 @@ LCreal JSBSimModel::getGload() const
     JSBSim::FGAuxiliary* Auxiliary = fdmex->GetAuxiliary();
     if (Auxiliary == 0) return 0.0;
 
-    return (LCreal)Auxiliary->GetNlf();
+    return static_cast<LCreal>(Auxiliary->GetNlf());
 }
 
 LCreal JSBSimModel::getMach() const
@@ -159,7 +159,7 @@ LCreal JSBSimModel::getMach() const
     JSBSim::FGAuxiliary* Auxiliary = fdmex->GetAuxiliary();
     if (Auxiliary == 0) return 0.0;
 
-    return (LCreal)Auxiliary->GetMach();
+    return static_cast<LCreal>(Auxiliary->GetMach());
 }
 
 LCreal JSBSimModel::getAngleOfAttack() const
@@ -168,7 +168,7 @@ LCreal JSBSimModel::getAngleOfAttack() const
     JSBSim::FGAuxiliary* Auxiliary = fdmex->GetAuxiliary();
     if (Auxiliary == 0) return 0.0;
 
-    return (LCreal)(Auxiliary->Getalpha());
+    return static_cast<LCreal>(Auxiliary->Getalpha());
 }
 
 LCreal JSBSimModel::getSideSlip() const
@@ -177,7 +177,7 @@ LCreal JSBSimModel::getSideSlip() const
     JSBSim::FGAuxiliary* Auxiliary = fdmex->GetAuxiliary();
     if (Auxiliary == 0) return 0.0;
 
-    return (LCreal)(Auxiliary->Getbeta());
+    return static_cast<LCreal>(Auxiliary->Getbeta());
 }
 
 LCreal JSBSimModel::getFlightPath() const
@@ -186,7 +186,7 @@ LCreal JSBSimModel::getFlightPath() const
     JSBSim::FGAuxiliary* Auxiliary = fdmex->GetAuxiliary();
     if (Auxiliary == 0) return 0.0;
 
-    return (LCreal)(Auxiliary->GetGamma());
+    return static_cast<LCreal>(Auxiliary->GetGamma());
 }
 
 LCreal JSBSimModel::getGrossWeight() const
@@ -195,7 +195,7 @@ LCreal JSBSimModel::getGrossWeight() const
     JSBSim::FGMassBalance* MassBalance = fdmex->GetMassBalance();
     if (MassBalance == 0) return 0.0;
 
-    return (LCreal)MassBalance->GetWeight();
+    return static_cast<LCreal>(MassBalance->GetWeight());
 }
 
 LCreal JSBSimModel::getFuelWt() const
@@ -207,7 +207,7 @@ LCreal JSBSimModel::getFuelWt() const
     LCreal fuelWt = 0.0;
     for (unsigned int i = 0; i < Propulsion->GetNumTanks(); i++) {
         JSBSim::FGTank* tank = Propulsion->GetTank(i);
-        fuelWt += (LCreal)tank->GetContents();
+        fuelWt += static_cast<LCreal>(tank->GetContents());
     }
     return fuelWt;
 }
@@ -221,7 +221,7 @@ LCreal JSBSimModel::getFuelWtMax() const
     LCreal maxFuelWt = 0.0;
     for (unsigned int i = 0; i < Propulsion->GetNumTanks(); i++) {
         JSBSim::FGTank* tank = Propulsion->GetTank(i);
-        maxFuelWt += (LCreal)(tank->GetContents() / tank->GetPctFull() * 100.0);
+        maxFuelWt += static_cast<LCreal>(tank->GetContents() / tank->GetPctFull() * 100.0);
     }
     return maxFuelWt;
 }
@@ -232,7 +232,7 @@ LCreal JSBSimModel::getCalibratedAirspeed() const
     JSBSim::FGAuxiliary* Auxiliary = fdmex->GetAuxiliary();
     if (Auxiliary == 0) return 0.0;
 
-    return (LCreal)Auxiliary->GetVcalibratedKTS();
+    return static_cast<LCreal>(Auxiliary->GetVcalibratedKTS());
 }
 
 //------------------------------------------------------------------------------
@@ -262,7 +262,7 @@ int JSBSimModel::getEngThrust(LCreal* const fn, const int max) const
     }
     for (int i = 0; i < num; i++) {
         JSBSim::FGThruster* thruster = Propulsion->GetEngine(i)->GetThruster();
-        fn[i] = (LCreal)thruster->GetThrust();
+        fn[i] = static_cast<LCreal>(thruster->GetThrust());
     }
     return num;
 }
@@ -285,26 +285,26 @@ int JSBSimModel::getEngRPM(LCreal* const rpm, const int max) const
         switch (eng->GetType()) {
         case JSBSim::FGEngine::etPiston:
             {
-            JSBSim::FGPiston* eng1 = (JSBSim::FGPiston *) eng;
-            rpm[i] = (LCreal)eng1->getRPM();
+            JSBSim::FGPiston* eng1 = static_cast<JSBSim::FGPiston*>(eng);
+            rpm[i] = static_cast<LCreal>(eng1->getRPM());
             }
             break;
         case JSBSim::FGEngine::etElectric:
             {
-            JSBSim::FGElectric* eng1 = (JSBSim::FGElectric *) eng;
-            rpm[i] = (LCreal)eng1->getRPM();
+            JSBSim::FGElectric* eng1 = static_cast<JSBSim::FGElectric*>(eng);
+            rpm[i] = static_cast<LCreal>(eng1->getRPM());
             }
             break;
         case JSBSim::FGEngine::etTurbine:
             {
-            JSBSim::FGTurbine* eng1 = (JSBSim::FGTurbine *) eng;
-            rpm[i] = (LCreal)eng1->GetN2();
+            JSBSim::FGTurbine* eng1 = static_cast<JSBSim::FGTurbine*>(eng);
+            rpm[i] = static_cast<LCreal>(eng1->GetN2());
             }
             break;
         case JSBSim::FGEngine::etTurboprop:
             {
-            JSBSim::FGTurboProp* eng1 = (JSBSim::FGTurboProp *) eng;
-            rpm[i] = (LCreal)eng1->GetN1();
+            JSBSim::FGTurboProp* eng1 = static_cast<JSBSim::FGTurboProp*>(eng);
+            rpm[i] = static_cast<LCreal>(eng1->GetN1());
             }
             break;
         case JSBSim::FGEngine::etRocket:
@@ -333,7 +333,7 @@ int JSBSimModel::getEngFuelFlow(LCreal* const ff, const int max) const
     }
     for (int i = 0; i < num; i++) {
         JSBSim::FGEngine* eng = Propulsion->GetEngine(i);
-        ff[i] = (LCreal)eng->getFuelFlow_pph();
+        ff[i] = static_cast<LCreal>(eng->getFuelFlow_pph());
     }
     return num;
 }
@@ -357,20 +357,20 @@ int JSBSimModel::getEngOilPressure(LCreal* const oil, const int max) const
         switch (eng->GetType()) {
         case JSBSim::FGEngine::etPiston:
             {
-            JSBSim::FGPiston* eng1 = (JSBSim::FGPiston *) eng;
-            oil[i] = (LCreal)eng1->getOilPressure_psi();
+            JSBSim::FGPiston* eng1 = static_cast<JSBSim::FGPiston*>(eng);
+            oil[i] = static_cast<LCreal>(eng1->getOilPressure_psi());
             }
             break;
         case JSBSim::FGEngine::etTurbine:
             {
-            JSBSim::FGTurbine* eng1 = (JSBSim::FGTurbine *) eng;
-            oil[i] = (LCreal)eng1->getOilPressure_psi();
+            JSBSim::FGTurbine* eng1 = static_cast<JSBSim::FGTurbine*>(eng);
+            oil[i] = static_cast<LCreal>(eng1->getOilPressure_psi());
             }
             break;
         case JSBSim::FGEngine::etTurboprop:
             {
-            JSBSim::FGTurboProp* eng1 = (JSBSim::FGTurboProp *) eng;
-            oil[i] = (LCreal)eng1->getOilPressure_psi();
+            JSBSim::FGTurboProp* eng1 = static_cast<JSBSim::FGTurboProp*>(eng);
+            oil[i] = static_cast<LCreal>(eng1->getOilPressure_psi());
             }
             break;
         case JSBSim::FGEngine::etRocket:
@@ -417,7 +417,7 @@ int JSBSimModel::getEngPLA(LCreal* const pla, const int max) const
         double tmin = eng->GetThrottleMin();
         double tmax = eng->GetThrottleMax();
         double throttle = (t - tmin) / (tmax - tmin) * 100.0;
-        pla[i] = (LCreal)throttle;
+        pla[i] = static_cast<LCreal>(throttle);
     }
     return num;
 }
@@ -441,14 +441,14 @@ int JSBSimModel::getEngNozzle(LCreal* const pla, const int max) const
         switch (eng->GetType()) {
         case JSBSim::FGEngine::etTurbine:
             {
-            JSBSim::FGTurbine* eng1 = (JSBSim::FGTurbine *) eng;
-            pla[i] = (LCreal)(eng1->GetNozzle() * 100.0);
+            JSBSim::FGTurbine* eng1 = static_cast<JSBSim::FGTurbine*>(eng);
+            pla[i] = static_cast<LCreal>(eng1->GetNozzle() * 100.0);
             }
             break;
         case JSBSim::FGEngine::etTurboprop:
             {
-            JSBSim::FGTurboProp* eng1 = (JSBSim::FGTurboProp *) eng;
-            pla[i] = (LCreal)(eng1->GetNozzle() * 100.0);
+            JSBSim::FGTurboProp* eng1 = static_cast<JSBSim::FGTurboProp*>(eng);
+            pla[i] = static_cast<LCreal>(eng1->GetNozzle() * 100.0);
             }
             break;
         case JSBSim::FGEngine::etPiston:
@@ -566,7 +566,7 @@ LCreal JSBSimModel::getLandingGearPosition() const
     JSBSim::FGFCS* FCS = fdmex->GetFCS();
     if (FCS == 0) return 0;
 
-    return (LCreal)(FCS->GetGearPos() * 100.0);
+    return static_cast<LCreal>(FCS->GetGearPos() * 100.0);
 }
 
 //------------------------------------------------------------------------------
@@ -612,7 +612,7 @@ LCreal JSBSimModel::getSpeedBrakePosition() const
     JSBSim::FGFCS* FCS = fdmex->GetFCS();
     if (FCS == 0) return 0;
 
-    return (LCreal)(FCS->GetDsbPos(JSBSim::ofNorm) * 100.0);
+    return static_cast<LCreal>(FCS->GetDsbPos(JSBSim::ofNorm) * 100.0);
 }
 
 //------------------------------------------------------------------------------
@@ -715,19 +715,29 @@ void JSBSimModel::dynamics(const LCreal dt)
     //    (Note: Player::dynamics() computes the new position)
     // ---
     p->setAltitude(Basic::Distance::FT2M * Propagate->GetAltitudeASL(), true);
-    p->setVelocity((LCreal)(Basic::Distance::FT2M * Propagate->GetVel(JSBSim::FGJSBBase::eNorth)), (LCreal)(Basic::Distance::FT2M * Propagate->GetVel(JSBSim::FGJSBBase::eEast)), (LCreal)(Basic::Distance::FT2M * Propagate->GetVel(JSBSim::FGJSBBase::eDown)));
-    p->setVelocityBody((LCreal)(Basic::Distance::FT2M * Propagate->GetUVW(1)), (LCreal)(Basic::Distance::FT2M * Propagate->GetUVW(2)), (LCreal)(Basic::Distance::FT2M * Propagate->GetUVW(3)));
+    p->setVelocity(static_cast<LCreal>(Basic::Distance::FT2M * Propagate->GetVel(JSBSim::FGJSBBase::eNorth)),
+                   static_cast<LCreal>(Basic::Distance::FT2M * Propagate->GetVel(JSBSim::FGJSBBase::eEast)),
+                   static_cast<LCreal>(Basic::Distance::FT2M * Propagate->GetVel(JSBSim::FGJSBBase::eDown)));
+    p->setVelocityBody(static_cast<LCreal>(Basic::Distance::FT2M * Propagate->GetUVW(1)),
+                       static_cast<LCreal>(Basic::Distance::FT2M * Propagate->GetUVW(2)),
+                       static_cast<LCreal>(Basic::Distance::FT2M * Propagate->GetUVW(3)));
 //    LCreal accX = Basic::Distance::FT2M * Propagate->GetUVWdot(1);
 //    LCreal accY = Basic::Distance::FT2M * Propagate->GetUVWdot(2);
 //    LCreal accZ = Basic::Distance::FT2M * Propagate->GetUVWdot(3);
     const JSBSim::FGMatrix33& Tb2l = Propagate->GetTb2l();
     const JSBSim::FGColumnVector3& vUVWdot = Accelerations->GetUVWdot();
 
-    p->setEulerAngles((LCreal)(Propagate->GetEuler(JSBSim::FGJSBBase::ePhi)), (LCreal)(Propagate->GetEuler(JSBSim::FGJSBBase::eTht)), (LCreal)(Propagate->GetEuler(JSBSim::FGJSBBase::ePsi)));
-    p->setAngularVelocities((LCreal)(Propagate->GetPQR(JSBSim::FGJSBBase::eP)), (LCreal)(Propagate->GetPQR(JSBSim::FGJSBBase::eQ)), (LCreal)(Propagate->GetPQR(JSBSim::FGJSBBase::eR)));
+    p->setEulerAngles(static_cast<LCreal>(Propagate->GetEuler(JSBSim::FGJSBBase::ePhi)),
+                      static_cast<LCreal>(Propagate->GetEuler(JSBSim::FGJSBBase::eTht)),
+                      static_cast<LCreal>(Propagate->GetEuler(JSBSim::FGJSBBase::ePsi)));
+    p->setAngularVelocities(static_cast<LCreal>(Propagate->GetPQR(JSBSim::FGJSBBase::eP)),
+                            static_cast<LCreal>(Propagate->GetPQR(JSBSim::FGJSBBase::eQ)),
+                            static_cast<LCreal>(Propagate->GetPQR(JSBSim::FGJSBBase::eR)));
 
     JSBSim::FGColumnVector3 vVeldot = Tb2l * vUVWdot;
-    p->setAcceleration((LCreal)(Basic::Distance::FT2M * vVeldot(1)), (LCreal)(Basic::Distance::FT2M * vVeldot(2)), (LCreal)(Basic::Distance::FT2M * vVeldot(3)));
+    p->setAcceleration(static_cast<LCreal>(Basic::Distance::FT2M * vVeldot(1)),
+                       static_cast<LCreal>(Basic::Distance::FT2M * vVeldot(2)),
+                       static_cast<LCreal>(Basic::Distance::FT2M * vVeldot(3)));
 
     //std::printf("(%6.1f, %6.1f, %6.1f)   vel=%8.1f   alt=%8.1f alt2=%8.1f\n", acData->phi, acData->theta, acData->psi, acData->vp, acData->hp, (M2FT*getAltitude()) );
     //std::printf("f=%6.1f p=%6.1f, qa=%6.1f, a=%6.1f, g=%6.1f\n", hotasIO->pitchForce, acData->theta, acData->qa, acData->alpha, acData->gamma );
@@ -801,12 +811,12 @@ void JSBSimModel::reset()
 {
     BaseClass::reset();
 
-    pitchTrimPos  = (LCreal)0.0;
-    pitchTrimRate = (LCreal)0.1;
-    pitchTrimSw   = (LCreal)0.0;
-    rollTrimPos   = (LCreal)0.0;
-    rollTrimRate  = (LCreal)0.1;
-    rollTrimSw    = (LCreal)0.0;
+    pitchTrimPos  = static_cast<LCreal>(0.0);
+    pitchTrimRate = static_cast<LCreal>(0.1);
+    pitchTrimSw   = static_cast<LCreal>(0.0);
+    rollTrimPos   = static_cast<LCreal>(0.0);
+    rollTrimRate  = static_cast<LCreal>(0.1);
+    rollTrimSw    = static_cast<LCreal>(0.0);
 
     // Get our Player (must have one!)
     Simulation::Player* p = static_cast<Simulation::Player*>( findContainerByType(typeid(Simulation::Player)) );
@@ -1021,3 +1031,4 @@ bool JSBSimModel::setCommandedAltitude(const double a, const double, const doubl
 
 } // End Vehicle namespace
 } // End Eaagles namespace
+

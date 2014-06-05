@@ -173,8 +173,8 @@ int Font::xferChars(char* const outp, const size_t BUF_SIZE, const char* const i
    // as required, and to ensure that the string is terminated.
    if (pLUT != 0) {
       for (unsigned int i = 0; i < n; i++) {
-          unsigned char idx = (unsigned char)(inp[i]);
-          outp[i] = (idx < LUT_SIZE ? char(pLUT[idx]) : inp[i]);
+          unsigned char idx = static_cast<unsigned char>(inp[i]);
+          outp[i] = (idx < LUT_SIZE ? static_cast<char>(pLUT[idx]) : inp[i]);
       }
    }
    else {

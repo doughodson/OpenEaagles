@@ -71,27 +71,27 @@ IMPLEMENT_SUBCLASS(NetIO,"DisNetIO")
 //------------------------------------------------------------------------------
 // Parameters
 //------------------------------------------------------------------------------
-static const LCreal HRT_BEAT_MPLIER       = 2.5;                      //  Multiplier
-static const LCreal HRT_BEAT_TIMER        = 5;                        //  seconds
-static const LCreal DRA_POS_THRST_DFLT    = 3.0;                      //  meters
-static const LCreal DRA_ORIENT_THRST_DFLT = (LCreal)(3.0 * PI/180.0); //  radians
+static const LCreal HRT_BEAT_MPLIER       = 2.5;                                 //  Multiplier
+static const LCreal HRT_BEAT_TIMER        = 5;                                   //  seconds
+static const LCreal DRA_POS_THRST_DFLT    = 3.0;                                 //  meters
+static const LCreal DRA_ORIENT_THRST_DFLT = static_cast<LCreal>(3.0 * PI/180.0); //  radians
 
 // DISv7 default heartbeats
-static const LCreal HBT_PDU_EE          = 10;                         //  seconds
-static const LCreal HBT_PDU_IFF         = 10;                         //  seconds
-static const LCreal HBT_PDU_RECEIVER    = 60;                         //  seconds
-static const LCreal HBT_PDU_TRANSMITTER = 2;                          //  seconds
-static const LCreal HBT_TIMEOUT_MPLIER  = 2.4;                        //  Multiplier
+static const LCreal HBT_PDU_EE          = 10;                           //  seconds
+static const LCreal HBT_PDU_IFF         = 10;                           //  seconds
+static const LCreal HBT_PDU_RECEIVER    = 60;                           //  seconds
+static const LCreal HBT_PDU_TRANSMITTER = 2;                            //  seconds
+static const LCreal HBT_TIMEOUT_MPLIER  = 2.4;                          //  Multiplier
 
 // DISv7 default thresholds
-static const LCreal EE_AZ_THRSH = (LCreal)(1.0 * PI/180.0);           //  radians
-static const LCreal EE_EL_THRSH = (LCreal)(1.0 * PI/180.0);           //  radians
+static const LCreal EE_AZ_THRSH = static_cast<LCreal>(1.0 * PI/180.0);  //  radians
+static const LCreal EE_EL_THRSH = static_cast<LCreal>(1.0 * PI/180.0);  //  radians
 
-static const LCreal EE_ERP_THRSH  = (LCreal)(1.0);                    //  dB
-static const LCreal EE_FREQ_THRSH = (LCreal)(1.0);                    //  Hz
-static const LCreal EE_FRNG_THRSH = (LCreal)(1.0);                    //  Hz
-static const LCreal EE_PRF_THRSH  = (LCreal)(1.0);                    //  Hz
-static const LCreal EE_PW_THRSH   = (LCreal)(1e-6);                   //  seconds
+static const LCreal EE_ERP_THRSH  = static_cast<LCreal>(1.0);           //  dB
+static const LCreal EE_FREQ_THRSH = static_cast<LCreal>(1.0);           //  Hz
+static const LCreal EE_FRNG_THRSH = static_cast<LCreal>(1.0);           //  Hz
+static const LCreal EE_PRF_THRSH  = static_cast<LCreal>(1.0);           //  Hz
+static const LCreal EE_PW_THRSH   = static_cast<LCreal>(1e-6);          //  seconds
 //static const unsigned int EE_HIGH_DENSITY_THRSH = 10;               //  no units
 
 
@@ -265,7 +265,7 @@ void NetIO::netInputHander()
 {
    // Read PDUs
    unsigned int j0 = 0;
-   while ( (j0 < MAX_PDUs) && (recvData((char*)&inputBuffer[j0], MAX_PDU_SIZE) > 0) ) {
+   while ( (j0 < MAX_PDUs) && (recvData(reinterpret_cast<char*>(&inputBuffer[j0]), MAX_PDU_SIZE) > 0) ) {
       j0++;
    }
 
@@ -274,7 +274,7 @@ void NetIO::netInputHander()
       // Process incoming PDUs
       unsigned int j1 = 0;
       while (j1 < j0) {
-         PDUHeader* header = (PDUHeader*) &inputBuffer[j1++][0];
+         PDUHeader* header = reinterpret_cast<PDUHeader*>(&inputBuffer[j1++][0]);
 
          if (isInputEnabled()) {
 
@@ -288,7 +288,7 @@ void NetIO::netInputHander()
 
                   case PDU_ENTITY_STATE: {
                      //std::cout << "Entity State PDU." << std::endl;
-                     EntityStatePDU* pPdu = (EntityStatePDU *) header;
+                     EntityStatePDU* pPdu = reinterpret_cast<EntityStatePDU*>(header);
                      if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
                      if (getSiteID() != pPdu->entityID.simulationID.siteIdentification ||
                         getApplicationID() != pPdu->entityID.simulationID.applicationIdentification) {
@@ -298,7 +298,7 @@ void NetIO::netInputHander()
                   break;
 
                   case PDU_FIRE: {
-                     FirePDU* pPdu = (FirePDU *) header;
+                     FirePDU* pPdu = reinterpret_cast<FirePDU*>(header);
                      if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
                      if (getSiteID() != pPdu->firingEntityID.simulationID.siteIdentification ||
                         getApplicationID() != pPdu->firingEntityID.simulationID.applicationIdentification) {
@@ -308,7 +308,7 @@ void NetIO::netInputHander()
                   break;
 
                   case PDU_DETONATION: {
-                     DetonationPDU* pPdu = (DetonationPDU *) header;
+                     DetonationPDU* pPdu = reinterpret_cast<DetonationPDU*>(header);
                      if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
                      if (getSiteID() != pPdu->firingEntityID.simulationID.siteIdentification ||
                         getApplicationID() != pPdu->firingEntityID.simulationID.applicationIdentification) {
@@ -318,7 +318,7 @@ void NetIO::netInputHander()
                   break;
 
                   case PDU_SIGNAL: {
-                     SignalPDU* pPdu = (SignalPDU *) header;
+                     SignalPDU* pPdu = reinterpret_cast<SignalPDU*>(header);
                      if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
                      if (getSiteID() != pPdu->radioRefID.simulationID.siteIdentification ||
                         getApplicationID() != pPdu->radioRefID.simulationID.applicationIdentification) {
@@ -328,7 +328,7 @@ void NetIO::netInputHander()
                   break;
 
                   case PDU_TRANSMITTER: {
-                     TransmitterPDU* pPdu = (TransmitterPDU *) header;
+                     TransmitterPDU* pPdu = reinterpret_cast<TransmitterPDU*>(header);
                      if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
                      if (getSiteID() != pPdu->radioRefID.simulationID.siteIdentification ||
                         getApplicationID() != pPdu->radioRefID.simulationID.applicationIdentification) {
@@ -338,7 +338,7 @@ void NetIO::netInputHander()
                   break;
 
                   case PDU_ELECTROMAGNETIC_EMISSION: {
-                     ElectromagneticEmissionPDU* pPdu = (ElectromagneticEmissionPDU *) header;
+                     ElectromagneticEmissionPDU* pPdu = reinterpret_cast<ElectromagneticEmissionPDU*>(header);
                      if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
                      if (getSiteID() != pPdu->emittingEntityID.simulationID.siteIdentification ||
                         getApplicationID() != pPdu->emittingEntityID.simulationID.applicationIdentification) {
@@ -348,7 +348,7 @@ void NetIO::netInputHander()
                   break;
 
                   case PDU_DATA_QUERY: {
-                     DataQueryPDU* pPdu = (DataQueryPDU *) header;
+                     DataQueryPDU* pPdu = reinterpret_cast<DataQueryPDU*>(header);
                      if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
                      if (getSiteID() != pPdu->originatingID.simulationID.siteIdentification ||
                         getApplicationID() != pPdu->originatingID.simulationID.applicationIdentification) {
@@ -358,7 +358,7 @@ void NetIO::netInputHander()
                   break;
 
                   case PDU_DATA: {
-                     DataPDU* pPdu = (DataPDU *) header;
+                     DataPDU* pPdu = reinterpret_cast<DataPDU*>(header);
                      if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
                      if (getSiteID() != pPdu->originatingID.simulationID.siteIdentification ||
                         getApplicationID() != pPdu->originatingID.simulationID.applicationIdentification) {
@@ -368,7 +368,7 @@ void NetIO::netInputHander()
                   break;
 
                   case PDU_COMMENT: {
-                     CommentPDU* pPdu = (CommentPDU *) header;
+                     CommentPDU* pPdu = reinterpret_cast<CommentPDU*>(header);
                      if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
                      if (getSiteID() != pPdu->originatingID.simulationID.siteIdentification ||
                         getApplicationID() != pPdu->originatingID.simulationID.applicationIdentification) {
@@ -378,7 +378,7 @@ void NetIO::netInputHander()
                   break;
 
                   case PDU_START_RESUME: {
-                     StartPDU* pPdu = (StartPDU*)header;
+                     StartPDU* pPdu = reinterpret_cast<StartPDU*>(header);
                      if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
                      if (getSiteID() != pPdu->originatingID.simulationID.siteIdentification ||
                         getApplicationID() != pPdu->originatingID.simulationID.applicationIdentification) {
@@ -388,7 +388,7 @@ void NetIO::netInputHander()
                   break;
 
                   case PDU_STOP_FREEZE: {
-                     StopPDU* pPdu = (StopPDU*)header;
+                     StopPDU* pPdu = reinterpret_cast<StopPDU*>(header);
                      if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
                      if (getSiteID() != pPdu->originatingID.simulationID.siteIdentification ||
                         getApplicationID() != pPdu->originatingID.simulationID.applicationIdentification) {
@@ -398,7 +398,7 @@ void NetIO::netInputHander()
                   break;
 
                   case PDU_ACKNOWLEDGE: {
-                     AcknowledgePDU* pPdu = (AcknowledgePDU*)header;
+                     AcknowledgePDU* pPdu = reinterpret_cast<AcknowledgePDU*>(header);
                      if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
                      if (getSiteID() != pPdu->originatingID.simulationID.siteIdentification ||
                         getApplicationID() != pPdu->originatingID.simulationID.applicationIdentification) {
@@ -408,7 +408,7 @@ void NetIO::netInputHander()
                   break;
 
                   case PDU_ACTION_REQUEST: {
-                     ActionRequestPDU* pPdu = (ActionRequestPDU*)header;
+                     ActionRequestPDU* pPdu = reinterpret_cast<ActionRequestPDU*>(header);
                      if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
                      if (getSiteID() != pPdu->originatingID.simulationID.siteIdentification ||
                         getApplicationID() != pPdu->originatingID.simulationID.applicationIdentification) {
@@ -418,7 +418,7 @@ void NetIO::netInputHander()
                   break;
 
                   case PDU_ACTION_REQUEST_R: {
-                     ActionRequestPDU_R* pPdu = (ActionRequestPDU_R*)header;
+                     ActionRequestPDU_R* pPdu = reinterpret_cast<ActionRequestPDU_R*>(header);
                      if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
                      if (getSiteID() != pPdu->originatingID.simulationID.siteIdentification ||
                         getApplicationID() != pPdu->originatingID.simulationID.applicationIdentification) {
@@ -428,7 +428,7 @@ void NetIO::netInputHander()
                   break;
 
                   case PDU_ACTION_RESPONSE_R: {
-                     ActionResponsePDU_R* pPdu = (ActionResponsePDU_R*)header;
+                     ActionResponsePDU_R* pPdu = reinterpret_cast<ActionResponsePDU_R*>(header);
                      if (Basic::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
                      if (getSiteID() != pPdu->originatingID.simulationID.siteIdentification ||
                         getApplicationID() != pPdu->originatingID.simulationID.applicationIdentification) {
@@ -452,7 +452,7 @@ void NetIO::netInputHander()
 
       // Read more PDUs
       j0 = 0;
-      while ( (j0 < MAX_PDUs) && (recvData((char*)&inputBuffer[j0], MAX_PDU_SIZE) > 0) ) {
+      while ( (j0 < MAX_PDUs) && (recvData(reinterpret_cast<char*>(&inputBuffer[j0]), MAX_PDU_SIZE) > 0) ) {
          j0++;
       }
    }
@@ -465,7 +465,7 @@ void NetIO::netInputHander()
 void NetIO::processInputList()
 {
    for (unsigned int idx = 0; idx < getInputListSize(); idx++) {
-      Nib* nib = (Nib*)(getInputNib(idx));
+      Nib* nib = static_cast<Nib*>(getInputNib(idx));
       if (nib != 0) nib->updateTheIPlayer();
    }
 
@@ -589,7 +589,7 @@ Simulation::Nib* NetIO::nibFactory(const Simulation::NetIO::IoType ioType)
 
 Simulation::Nib* NetIO::createNewOutputNib(Simulation::Player* const player)
 {
-   Nib* nib = (Nib*) nibFactory(OUTPUT_NIB);
+   Nib* nib = static_cast<Nib*>(nibFactory(OUTPUT_NIB));
    if (nib != 0) {
       nib->setNetIO(this);
       nib->setPlayer(player);
@@ -705,10 +705,10 @@ unsigned int NetIO::timeStamp()
 {
    unsigned int ts = 0;
    if (getTimeline() == UTC) {
-      ts = makeTimeStamp( (LCreal) getSimulation()->getSysTimeOfDay(), true );
+      ts = makeTimeStamp( static_cast<LCreal>(getSimulation()->getSysTimeOfDay()), true );
    }
    else {
-      ts = makeTimeStamp( (LCreal) getSimulation()->getExecTimeSec(), false );
+      ts = makeTimeStamp( static_cast<LCreal>(getSimulation()->getExecTimeSec()), false );
    }
    return ts;
 }
@@ -723,7 +723,7 @@ unsigned int NetIO::makeTimeStamp(const LCreal ctime, const bool absolute)
     LCreal secondsThisHour = (ctime - LCreal(hours*3600));
 
     // 31 MSBs are for the 3600 seconds in this hour
-    unsigned int ts = (unsigned int)( (secondsThisHour/3600.0) * 0x7fffffff );
+    unsigned int ts = static_cast<unsigned int>((secondsThisHour/3600.0) * 0x7fffffff);
     ts = (ts << 1);                    // shift to 31 MSBs
     if (absolute) ts = (ts | 0x01);    // Sets LSB if using absolute time
 
@@ -808,7 +808,7 @@ bool NetIO::parseFederateName(unsigned short* const site, unsigned short* const 
             cnt++;
          }
          ok = (tmp > 0) && (tmp <= 0xFFFF);
-         if (ok) tSite = (unsigned short) tmp;
+         if (ok) tSite = static_cast<unsigned short>(tmp);
       }
 
       // Next check and convert application number
@@ -822,7 +822,7 @@ bool NetIO::parseFederateName(unsigned short* const site, unsigned short* const 
             cnt++;
          }
          ok = (tmp > 0) && (tmp <= 0xFFFF);
-         if (ok) tApp = (unsigned short) tmp;
+         if (ok) tApp = static_cast<unsigned short>(tmp);
       }
 
       // If all is well, send the values back to the user.
@@ -894,7 +894,7 @@ bool NetIO::parseFederationName(unsigned short* const exercise, const char* cons
             cnt++;
          }
          ok = (tmp > 0) && (tmp <= 0xFFFF);
-         if (ok) tExercise = (unsigned short) tmp;
+         if (ok) tExercise = static_cast<unsigned short>(tmp);
       }
 
       // If all is well, send the value back to the user.
@@ -1294,7 +1294,7 @@ bool NetIO::setMaxOrientationErr(const Basic::Angle* const p, const unsigned cha
     bool ok = false;
     if (p != 0) {
         Basic::Radians ref;
-        LCreal radians = (LCreal)ref.convert(*p);
+        LCreal radians = static_cast<LCreal>(ref.convert(*p));
         ok = setMaxOrientationErr(radians, kind, domain);
     }
     return ok;
@@ -1455,7 +1455,7 @@ bool NetIO::setSlotMaxEntityRange(const Basic::PairStream* const msg)
       while (item != 0) {
 
             // get the slot and object from the pair
-            const Basic::Pair* p = (Basic::Pair*) item->getValue();
+            const Basic::Pair* p = static_cast<const Basic::Pair*>(item->getValue());
             const char* const slotname = *p->slot();
             const Basic::Distance* pp = dynamic_cast<const Basic::Distance*>( p->object() );
 
@@ -1498,7 +1498,7 @@ bool NetIO::setSlotMaxTimeDR(const Basic::PairStream* const msg)
       while (item != 0) {
 
             // get the slot and object from the pair
-            const Basic::Pair* p = (Basic::Pair*) item->getValue();
+            const Basic::Pair* p = static_cast<const Basic::Pair*>(item->getValue());
             const char* const slotname = *p->slot();
             const Basic::Time* pp = dynamic_cast<const Basic::Time*>( p->object() );
 
@@ -1543,7 +1543,7 @@ bool NetIO::setSlotMaxPositionErr(const Basic::PairStream* const msg)
       while (item != 0) {
 
             // get the slot and object from the pair
-            const Basic::Pair* p = (Basic::Pair*) item->getValue();
+            const Basic::Pair* p = static_cast<const Basic::Pair*>(item->getValue());
             const char* const slotname = *p->slot();
             const Basic::Distance* pp = dynamic_cast<const Basic::Distance*>( p->object() );
 
@@ -1586,7 +1586,7 @@ bool NetIO::setSlotMaxOrientationErr(const Basic::PairStream* const msg)
       while (item != 0) {
 
             // get the slot and object from the pair
-            const Basic::Pair* p = (Basic::Pair*) item->getValue();
+            const Basic::Pair* p = static_cast<const Basic::Pair*>(item->getValue());
             const char* const slotname = *p->slot();
             const Basic::Angle* pp = dynamic_cast<const Basic::Angle*>( p->object() );
 
@@ -1630,7 +1630,7 @@ bool NetIO::setSlotMaxAge(const Basic::PairStream* const msg)
       while (item != 0) {
 
             // get the slot and object from the pair
-            const Basic::Pair* p = (Basic::Pair*) item->getValue();
+            const Basic::Pair* p = static_cast<const Basic::Pair*>(item->getValue());
             const char* const slotname = *p->slot();
             const Basic::Time* pp = dynamic_cast<const Basic::Time*>( p->object() );
 
@@ -1675,7 +1675,7 @@ bool NetIO::setSlotEmissionPduHandlers(Basic::PairStream* const msg)
        // Now scan the pair stream and put all Ntm objects into the table.
        Basic::List::Item* item = msg->getFirstItem();
        while (item != 0 && nEmissionHandlers < MAX_EMISSION_HANDLERS) {
-          Basic::Pair* pair = (Basic::Pair*) (item->getValue());
+          Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
           EmissionPduHandler* handler = dynamic_cast<EmissionPduHandler*>( pair->object() );
           if (handler != 0) {
              // We have an Ntm object, so put it in the table
@@ -1705,7 +1705,7 @@ bool NetIO::slot2KD(const char* const slotname, unsigned char* const kind, unsig
       bool haveTheD = (len > 2 && (slotname[2] == 'D' || slotname[2] == 'd') );
       if (haveTheK && isdigit(slotname[1]) && (len == 2 || haveTheD)) {
          // Ok, we have a single digit (kind)
-         unsigned char k = (unsigned char) (slotname[1] - '0');
+         unsigned char k = static_cast<unsigned char>(slotname[1] - '0');
          if (k < NUM_ENTITY_KINDS) {
             // We have a valid kind value!
             if (haveTheD) {
@@ -1720,7 +1720,7 @@ bool NetIO::slot2KD(const char* const slotname, unsigned char* const kind, unsig
                   if (d >= 0 && d < MAX_ENTITY_DOMAINS) {
                      // At this point we have both kind and domain numbers
                      *kind = k;
-                     *domain = (unsigned char) d;
+                     *domain = static_cast<unsigned char>(d);
                      ok = true;
                   }
                }
@@ -1743,7 +1743,7 @@ bool NetIO::setSlotSiteID(const Basic::Number* const num)
     if (num != 0) {
         int v = num->getInt();
         if (v >= 0 && v <= 65535) {
-            ok = setSiteID((unsigned short)(v));
+            ok = setSiteID(static_cast<unsigned short>(v));
         }
         else {
             std::cerr << "NetIO::setSlotSiteID(): invalid number(" << v << "); valid range:[0 ... 65535]" << std::endl;
@@ -1759,7 +1759,7 @@ bool NetIO::setSlotApplicationID(const Basic::Number* const num)
     if (num != 0) {
         int v = num->getInt();
         if (v >= 0 && v <= 65535) {
-            ok = setApplicationID((unsigned short)(v));
+            ok = setApplicationID(static_cast<unsigned short>(v));
         }
         else {
             std::cerr << "NetIO::setSlotApplicationID(): invalid number(" << v << "); valid range:[0 ... 65535]" << std::endl;
@@ -1775,7 +1775,7 @@ bool NetIO::setSlotExerciseID(const Basic::Number* const num)
     if (num != 0) {
         int v = num->getInt();
         if (v >= 0 && v <= 255) {
-            ok = setExerciseID((unsigned char)(v));
+            ok = setExerciseID(static_cast<unsigned char>(v));
         }
         else {
             std::cerr << "NetIO::setSlotExerciseID(): invalid number(" << v << "); valid range:[0 ... 255]" << std::endl;
@@ -1841,7 +1841,7 @@ void NetIO::testInputEntityTypes(const unsigned int n)
          int r = rand();
          LCreal nr = (LCreal(r) / LCreal(RAND_MAX));
          int idx = nint(nr * (maxTypes - 1));
-         const Ntm* origNtm = (Ntm*) getInputEntityType(idx);
+         const Ntm* origNtm = static_cast<const Ntm*>(getInputEntityType(idx));
          std::cout << "i= " << i;
          std::cout << "; idx= " << idx;
          std::cout << "; origNtm= " << origNtm;
@@ -1902,7 +1902,7 @@ void NetIO::testOutputEntityTypes(const unsigned int n)
          int r = rand();
          LCreal nr = (LCreal(r) / LCreal(RAND_MAX));
          int idx = nint(nr * (maxTypes - 1));
-         const Ntm* origNtm = (Ntm*) getOutputEntityTypes(idx);
+         const Ntm* origNtm = static_cast<const Ntm*>(getOutputEntityTypes(idx));
          std::cout << "i= " << i;
          std::cout << "; idx= " << idx;
          std::cout << "; origNtm= " << origNtm;
@@ -1928,11 +1928,11 @@ void NetIO::testOutputEntityTypes(const unsigned int n)
                Basic::String* newType = new Basic::String(cbuff);
                origP1->setType(newType);
 
-               Basic::String* origType1 = (Basic::String*) origP1->getType();
+               Basic::String* origType1 = const_cast<Basic::String*>(static_cast<const Basic::String*>(origP1->getType()));
                std::cout << "; type1: " << *origType1;
             }
 
-            const Ntm* foundNtm = (const Ntm*) root->findNetworkTypeMapper(origP1);
+            const Ntm* foundNtm = static_cast<const Ntm*>(root->findNetworkTypeMapper(origP1));
             std::cout << "; foundNtm= " << foundNtm;
             if (foundNtm != 0) {
                std::cout << "; [ ";
@@ -2091,7 +2091,7 @@ const Ntm* NtmInputNode::findNtmByTypeCodes(
          if (level < EXTRA_LVL) {
             const Basic::List::Item* item = subnodeList->getFirstItem();
             while (item != 0 && result == 0) {
-               const NtmInputNode* subnode = (const NtmInputNode*) item->getValue();
+               const NtmInputNode* subnode = static_cast<const NtmInputNode*>(item->getValue());
                result = subnode->findNtmByTypeCodes(kind, domain, countryCode, category, subcategory, specific, extra);
                item = item->getNext();
             }
@@ -2214,7 +2214,9 @@ bool NtmInputNode::add2OurLists(Simulation::Ntm* const ntm)
             bool alreadyExists = false;
             const Basic::List::Item* item = subnodeList->getFirstItem();
             while (item != 0 && !alreadyExists) {
-               NtmInputNode* subnode = (NtmInputNode*) item->getValue();
+               //NtmInputNode* subnode = (NtmInputNode*) item->getValue();
+               const NtmInputNode* csubnode = static_cast<const NtmInputNode*>(item->getValue());
+               NtmInputNode* subnode = const_cast<NtmInputNode*>(csubnode);
                alreadyExists = (nextLevelCode == subnode->code);
                item = item->getNext();
             }
@@ -2244,7 +2246,9 @@ bool NtmInputNode::add2OurLists(Simulation::Ntm* const ntm)
          if (!ok && !err && level < SPECIFIC_LVL) {
             const Basic::List::Item* item = subnodeList->getFirstItem();
             while (item != 0 && !ok) {
-               NtmInputNode* subnode = (NtmInputNode*) item->getValue();
+               //NtmInputNode* subnode = (NtmInputNode*) item->getValue();
+               const NtmInputNode* csubnode = static_cast<const NtmInputNode*>(item->getValue());
+               NtmInputNode* subnode = const_cast<NtmInputNode*>(csubnode);
                if (nextLevelCode == subnode->code) {
                   ok = subnode->add2OurLists(disNtm);
                }
@@ -2287,7 +2291,7 @@ void NtmInputNode::print(std::ostream& sout, const int icnt) const
    {
       const Basic::List::Item* item = subnodeList->getFirstItem();
       while (item != 0) {
-         const NtmInputNode* subnode = (const NtmInputNode*) item->getValue();
+         const NtmInputNode* subnode = static_cast<const NtmInputNode*>(item->getValue());
          subnode->print(sout,icnt+4);
          item = item->getNext();
       }

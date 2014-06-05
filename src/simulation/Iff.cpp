@@ -247,35 +247,35 @@ bool Iff::setSlotEnableModeC(const Basic::Number* const msg)
 bool Iff::setSlotMode1(const Basic::Number* const msg)
 {
     bool ok = false;
-    if (msg != 0) ok = setMode1((unsigned short)msg->getInt());
+    if (msg != 0) ok = setMode1(static_cast<unsigned short>(msg->getInt()));
     if (ok) icMode1 = mode1;
     return ok;
 }
 bool Iff::setSlotMode2(const Basic::Number* const msg)
 {
     bool ok = false;
-    if (msg != 0) ok = setMode2((unsigned short)msg->getInt());
+    if (msg != 0) ok = setMode2(static_cast<unsigned short>(msg->getInt()));
     if (ok) icMode2 = mode2;
     return ok;
 }
 bool Iff::setSlotMode3a(const Basic::Number* const msg)
 {
     bool ok = false;
-    if (msg != 0) ok = setMode3a((unsigned short)msg->getInt());
+    if (msg != 0) ok = setMode3a(static_cast<unsigned short>(msg->getInt()));
     if (ok) icMode3a = mode3a;
     return ok;
 }
 bool Iff::setSlotMode4a(const Basic::Number* const msg)
 {
     bool ok = false;
-    if (msg != 0) ok = setMode4A((unsigned short)msg->getInt());
+    if (msg != 0) ok = setMode4A(static_cast<unsigned short>(msg->getInt()));
     icMode4a = mode4a;
     return ok;
 }
 bool Iff::setSlotMode4b(const Basic::Number* const msg)
 {
     bool ok = false;
-    if (msg != 0) ok = setMode4B((unsigned short)msg->getInt());
+    if (msg != 0) ok = setMode4B(static_cast<unsigned short>(msg->getInt()));
     icMode4b = mode4b;
     return ok;
 }

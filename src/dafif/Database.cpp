@@ -285,7 +285,7 @@ void Database::stripSpaces(char buff[], const int n)
 //------------------------------------------------------------------------------
 void Database::fillSpaces(char buff[], const int n)
 {
-   for (int i = (int)strlen(buff); i < n; buff[i++] = ' ');
+   for (int i = static_cast<int>(strlen(buff)); i < n; buff[i++] = ' ');
    buff[n] = '\0';
 }
 
@@ -346,7 +346,7 @@ int Database::sQuery(Key** key, Key** base,
    nql = 0;
    // search the record list for matches and sort by range
    if (n != 0) {
-      Key** k = (Key**) bsearch(key, base, n, sizeof(Key*), cmp);
+      Key** k = static_cast<Key**>(bsearch(key, base, n, sizeof(Key*), cmp));
       if (k != 0) {
          ql[0] = *k;
          nql = 1;
@@ -365,7 +365,7 @@ int Database::mQuery(Key** key, Key** base,
 
    // search the record list for matches and sort by range
    if (n != 0) {
-      Key** k = (Key**) bsearch(key, base, n, sizeof(Key*), cmp);
+      Key** k = static_cast<Key**>(bsearch(key, base, n, sizeof(Key*), cmp));
       if (k != 0) {
          expandResults(key,k,cmp,base,n);
       }
@@ -388,7 +388,7 @@ int Database::queryByIcao(const char* code)
 {
    Key key(code);
    Key* pkey = &key;
-   return mQuery(&pkey, (Key**)ol, nol, ol_cmp);
+   return mQuery(&pkey, static_cast<Key**>(ol), nol, ol_cmp);
 }
 
 
@@ -472,8 +472,8 @@ int Database::rangeSort()
 //------------------------------------------------------------------------------
 int Database::rlqs(const void* p1, const void* p2)
 {
-   Key* k1 = *((Key**) p1);
-   Key* k2 = *((Key**) p2);
+   const Key* k1 = *(static_cast<const Key**>(const_cast<void*>(p1)));
+   const Key* k2 = *(static_cast<const Key**>(const_cast<void*>(p2)));
 
    int result = 0;
    if (k1->rng2 < k2->rng2)      result = -1;
@@ -484,8 +484,8 @@ int Database::rlqs(const void* p1, const void* p2)
 
 int Database::ol_cmp(const void* p1, const void* p2)
 {
-   Key* k1 = *((Key**) p1);
-   Key* k2 = *((Key**) p2);
+   Key* k1 = *(static_cast<Key**>(const_cast<void*>(p1)));
+   Key* k2 = *(static_cast<Key**>(const_cast<void*>(p2)));
 
    return std::strcmp(k1->icao,k2->icao);
 }

@@ -203,14 +203,13 @@ int WaypointLoader::queryByKey(const char* waypointkey)
    return Database::sQuery(&pkey, rl, nrl, kl_cmp);
 }
 
-
 //------------------------------------------------------------------------------
 // qsort and bsearch callbacks
 //------------------------------------------------------------------------------
 int WaypointLoader::kl_cmp(const void* p1, const void* p2)
 {
-   WaypointKey* k1 = *((WaypointKey**) p1);
-   WaypointKey* k2 = *((WaypointKey**) p2);
+   const WaypointKey* k1 = *(static_cast<const WaypointKey**>(const_cast<void*>(p1)));
+   const WaypointKey* k2 = *(static_cast<const WaypointKey**>(const_cast<void*>(p2)));
 
    // compare the keys
    int result = std::strcmp(k1->key, k2->key);
@@ -218,11 +217,10 @@ int WaypointLoader::kl_cmp(const void* p1, const void* p2)
    return result;
 }
 
-
 int WaypointLoader::il_cmp(const void* p1, const void* p2)
 {
-   WaypointKey* k1 = *((WaypointKey**) p1);
-   WaypointKey* k2 = *((WaypointKey**) p2);
+   const WaypointKey* k1 = *(static_cast<const WaypointKey**>(const_cast<void*>(p1)));
+   const WaypointKey* k2 = *(static_cast<const WaypointKey**>(const_cast<void*>(p2)));
 
    // compare the ids 
    int result = strcmp(k1->ident, k2->ident);

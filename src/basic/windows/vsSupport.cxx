@@ -26,7 +26,7 @@ void lcSleep(const unsigned int msec)
 //------------
 double getComputerTime()
 {
-   return double(timeGetTime())/1000.0;
+   return static_cast<double>(timeGetTime())/1000.0;
 }
 
 //------------

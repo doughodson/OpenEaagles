@@ -149,32 +149,29 @@ bool LifeForm::setVelocity(const LCreal ue, const LCreal ve, const LCreal we)
 void LifeForm::move(const LCreal fwd, const LCreal sdws)
 {
     if (getDamage() < 1) {
-    osg::Vec3 old = getEulerAngles();
-    LCreal hdg = old.z();
-    
-        
-    LCreal tempFwd = fwd, tempSdws = sdws;
-    
-    // our deadband (if we are barely moving, just stop)
+        osg::Vec3 old = getEulerAngles();
+        LCreal hdg = old.z();
+
+        LCreal tempFwd = fwd, tempSdws = sdws;
+
+        // our deadband (if we are barely moving, just stop)
         if (lcAbs(tempFwd) < 0.9f) tempFwd = 0;
         if (lcAbs(tempSdws) < 0.9f) tempSdws = 0;
-    double xVel = tempFwd * (lcCos(hdg));
-    double yVel = tempFwd * (lcSin(hdg));
-    
-    // now calculate our sideways velocity
-    double xxVel = tempSdws * (lcCos((hdg + (90 * (LCreal)Basic::Angle::D2RCC))));
-    double yyVel = tempSdws * (lcSin((hdg + (90 * (LCreal)Basic::Angle::D2RCC))));
-    
-    
-    // now add the vectors
-    double newXVel = xVel + xxVel;
-    double newYVel = yVel + yyVel;
-    
-    
-    LCreal zVel = 0;
-    setVelocity((LCreal)newXVel, (LCreal)newYVel, zVel);    
-}
-    else setVelocity(0, 0, 0);    
+        double xVel = tempFwd * (lcCos(hdg));
+        double yVel = tempFwd * (lcSin(hdg));
+
+        // now calculate our sideways velocity
+        double xxVel = tempSdws * (lcCos((hdg + (90 * static_cast<LCreal>(Basic::Angle::D2RCC)))));
+        double yyVel = tempSdws * (lcSin((hdg + (90 * static_cast<LCreal>(Basic::Angle::D2RCC)))));
+
+        // now add the vectors
+        double newXVel = xVel + xxVel;
+        double newYVel = yVel + yyVel;
+
+        LCreal zVel = 0;
+        setVelocity(static_cast<LCreal>(newXVel), static_cast<LCreal>(newYVel), zVel);
+    }
+    else setVelocity(0, 0, 0);
 }
 
 void LifeForm::look(const LCreal up, const LCreal sdws)
@@ -182,25 +179,25 @@ void LifeForm::look(const LCreal up, const LCreal sdws)
     if (getDamage() < 1) {
         if (lockMode != LOCKED) {
             lockMode = SEARCHING;
-    // our up and sideways come in as -5 to 5, which is a rate to adjust heading
-    osg::Vec3 old = getEulerAngles();
-    LCreal hdg = old.z();
-    LCreal ptc = lookAngle;
-    LCreal tempSdws = sdws;
-    LCreal tempUp = up;
-    if (lcAbs(tempSdws) < 0.00005f) tempSdws = 0;
-    if (lcAbs(tempUp) < 0.05f) tempUp = 0;    
-    hdg += tempSdws;
-    hdg = lcAepcRad(hdg);
-    // we don't change our pitch when we look up and down, we only change our look angle, so we have to keep
-    // that separate.  WE do, however, change our heading based on where we are looking, so that is correct
-    ptc += tempUp;
-    if (ptc > 90) ptc = 90;
-    else if (ptc < -90) ptc = -90;
-    //std::cout << "HEADING = " << hdg << std::endl;
-    setLookAngle(ptc);
-    osg::Vec3 eul(0, 0, hdg);
-    setEulerAngles(eul);
+            // our up and sideways come in as -5 to 5, which is a rate to adjust heading
+            osg::Vec3 old = getEulerAngles();
+            LCreal hdg = old.z();
+            LCreal ptc = lookAngle;
+            LCreal tempSdws = sdws;
+            LCreal tempUp = up;
+            if (lcAbs(tempSdws) < 0.00005f) tempSdws = 0;
+            if (lcAbs(tempUp) < 0.05f) tempUp = 0;    
+            hdg += tempSdws;
+            hdg = lcAepcRad(hdg);
+            // we don't change our pitch when we look up and down, we only change our look angle, so we have to keep
+            // that separate.  WE do, however, change our heading based on where we are looking, so that is correct
+            ptc += tempUp;
+            if (ptc > 90) ptc = 90;
+            else if (ptc < -90) ptc = -90;
+            //std::cout << "HEADING = " << hdg << std::endl;
+            setLookAngle(ptc);
+            osg::Vec3 eul(0, 0, hdg);
+            setEulerAngles(eul);
             // now based on this we need to know if we have a target in our crosshairs...
             tgtAquired = false;
             if (tgtPlayer != 0) tgtPlayer->unref();
@@ -209,17 +206,17 @@ void LifeForm::look(const LCreal up, const LCreal sdws)
             osg::Vec3 tgtPos;
             osg::Vec3 vecPos;
             LCreal az = 0, el = 0, range = 0, diffAz = 0, diffEl = 0;
-            LCreal maxAz = (0.7f * (LCreal)Basic::Angle::D2RCC);
-            LCreal maxEl = (0.7f * (LCreal)Basic::Angle::D2RCC);
+            LCreal maxAz = (0.7f * static_cast<LCreal>(Basic::Angle::D2RCC));
+            LCreal maxEl = (0.7f * static_cast<LCreal>(Basic::Angle::D2RCC));
             //LCreal maxRange = 1500.0f; // long range right now
-            LCreal la = lookAngle * (LCreal)Basic::Angle::D2RCC;
+            LCreal la = lookAngle * static_cast<LCreal>(Basic::Angle::D2RCC);
             Simulation* sim = getSimulation();
             if (sim != 0) {
                 Basic::PairStream* players = sim->getPlayers();
                 if (players != 0) {
                     Basic::List::Item* item = players->getFirstItem();
                     while (item != 0 && !tgtAquired) {
-                        Basic::Pair* pair = (Basic::Pair*)item->getValue();
+                        Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
                         if (pair != 0) {
                             Player* player = dynamic_cast<Player*>(pair->object());
                             if (player != 0 && player != this && !player->isMajorType(WEAPON) && !player->isDestroyed()) {
@@ -231,7 +228,7 @@ void LifeForm::look(const LCreal up, const LCreal sdws)
                                 range = sqrt(range);
                                 // now get our elevation
                                 el = lcAtan2(-vecPos.z(), range);
-                                diffAz = lcAbs(lcAepcRad(az - (LCreal) getHeadingR()));
+                                diffAz = lcAbs(lcAepcRad(az - static_cast<LCreal>(getHeadingR())));
                                 diffEl = lcAbs(lcAepcRad(la - el));
                                 if ((diffAz <= maxAz) && (diffEl <= maxEl)) {
                                     lockMode = TGT_IN_SIGHT;
@@ -262,7 +259,7 @@ void LifeForm::look(const LCreal up, const LCreal sdws)
                 // now get our elevation
                 LCreal el = lcAtan2(-vecPos.z(), range);
                 // now force that on us
-                setLookAngle(el * (LCreal)Basic::Angle::R2DCC);
+                setLookAngle(el * static_cast<LCreal>(Basic::Angle::R2DCC));
                 setEulerAngles(0, 0, az);
             }
         }

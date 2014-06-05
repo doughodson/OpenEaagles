@@ -65,13 +65,12 @@ void Emission::copyData(const Emission& org, const bool cc)
     lossAtmos = org.lossAtmos;
     lossXmit = org.lossXmit;
     rcs = org.rcs;
-    
+
     const RfSystem* mm = org.transmitter;
-    setTransmitter( (RfSystem*)mm );
-    
+    setTransmitter( const_cast<RfSystem*>(static_cast<const RfSystem*>(mm)) );
+
     ecmFlag = org.ecmFlag;
 }
-
 
 //------------------------------------------------------------------------------
 // deleteData() -- delete member data
@@ -80,7 +79,6 @@ void Emission::deleteData()
 {
    clear();
 }
-
 
 //------------------------------------------------------------------------------
 // clear() -- clears out the emissions
@@ -98,7 +96,7 @@ void Emission::setRange(const LCreal r)
 {
    BaseClass::setRange(r);
 
-   if (r > 1.0) lossRng = (LCreal) (1.0/(4.0 * PI * r * r));
+   if (r > 1.0) lossRng = static_cast<LCreal>(1.0/(4.0 * PI * r * r));
    else lossRng = 1.0;
 }
 

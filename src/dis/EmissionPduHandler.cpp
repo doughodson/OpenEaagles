@@ -457,7 +457,7 @@ bool EmissionPduHandler::updateIncoming(const ElectromagneticEmissionPDU* const 
                antenna->setRefAzimuth( 0 );
                antenna->setRefElevation( bd->beamData.beamElevationCenter );
                antenna->setScanMode( Simulation::ScanGimbal::CIRCULAR_SCAN );
-               antenna->setCmdRate( (24.0f * (LCreal)Basic::Angle::D2RCC), 0 );  // default rates
+               antenna->setCmdRate( (24.0f * static_cast<LCreal>(Basic::Angle::D2RCC)), 0 );  // default rates
          }
          else {
             // Standard search volume parameters
@@ -500,12 +500,12 @@ bool EmissionPduHandler::updateOutgoing(const LCreal curExecTime, Nib* const nib
 
    bool stateChg = false;
    if (nib != 0) {
-      NetIO* const disIO = (NetIO*)(nib->getNetIO());
+      NetIO* const disIO = static_cast<NetIO*>(nib->getNetIO());
       if (disIO != 0 && isUpdateRequired(curExecTime, &stateChg, nib)) {
 
          // Out going Electromagnetic Emission PDU is just a buffer to be filled
          unsigned int packet[NetIO::MAX_PDU_SIZE / 4];
-         ElectromagneticEmissionPDU* pdu = (ElectromagneticEmissionPDU*) &packet[0];
+         ElectromagneticEmissionPDU* pdu = reinterpret_cast<ElectromagneticEmissionPDU*>(&packet[0]);
 
          // Standard header stuff
          pdu->header.protocolVersion = disIO->getVersion();
@@ -537,8 +537,8 @@ bool EmissionPduHandler::updateOutgoing(const LCreal curExecTime, Nib* const nib
          pdu->numberOfSystems = 1;
 
          // Pointer to emission system
-         unsigned char* p = ((unsigned char*)pdu) + sizeof(ElectromagneticEmissionPDU);
-         EmissionSystem* es = (EmissionSystem*) p;
+         unsigned char* p = (reinterpret_cast<unsigned char*>(pdu)) + sizeof(ElectromagneticEmissionPDU);
+         EmissionSystem* es = reinterpret_cast<EmissionSystem*>(p);
 
          // ---
          // Add the emission system to the end of the PDU and send it
@@ -549,13 +549,13 @@ bool EmissionPduHandler::updateOutgoing(const LCreal curExecTime, Nib* const nib
             // Update our total length and number of systems
             pdu->header.length = result + pdu->header.length;
             p += result;
-            es = (EmissionSystem*) p;
+            es = reinterpret_cast<EmissionSystem*>(p);
 
             //pdu->dumpData();
 
             int length = pdu->header.length;
             if (Basic::NetHandler::isNotNetworkByteOrder()) pdu->swapBytes();
-            pduSent = disIO->sendData((char*)pdu, length);
+            pduSent = disIO->sendData(reinterpret_cast<char*>(pdu), length);
 
             setEmPduExecTime(curExecTime);
          }
@@ -577,7 +577,7 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
 
    // Early out if we don't have everything we need!
    if (nib == 0) return NO;
-   NetIO* const disIO = (NetIO*)(nib->getNetIO());
+   NetIO* const disIO = static_cast<NetIO*>(nib->getNetIO());
    if (disIO == 0) return NO;
    Simulation::RfSensor* beam = getSensor();
    if (beam == 0) return NO;
@@ -643,35 +643,35 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
             bd.beamStatus = 0;
 
          // Beam parameters
-         bd.parameterData.frequency = float( beam->getFrequency() );            // Hz
-         bd.parameterData.frequencyRange  = float( beam->getBandwidth() );      // Hz
+         bd.parameterData.frequency = static_cast<float>(beam->getFrequency());            // Hz
+         bd.parameterData.frequencyRange  = static_cast<float>(beam->getBandwidth());      // Hz
 
          // Compute effected radiated power (watts)
          LCreal power = beam->getPeakPower();
          LCreal loss = beam->getRfTransmitLoss();
-         if (ant != 0) power = (power * (LCreal)ant->getGain());
+         if (ant != 0) power = (power * static_cast<LCreal>(ant->getGain()));
          if (loss >= 1.0f) power = (power / loss);
 
          // Effected radiated power -- dBm (dB milliwatts)
          Basic::Decibel db;
          db.setValue( power * 1000.0f );
-         bd.parameterData.effectiveRadiatedPower = float( db.getValueDB() );
+         bd.parameterData.effectiveRadiatedPower = static_cast<float>(db.getValueDB());
 
-         bd.parameterData.pulseRepetitiveFrequency = float( beam->getPRF() );          // Hz (Average)
-         bd.parameterData.pulseWidth = float( beam->getPulseWidth() ) * 1000000.0f;    // uSec
+         bd.parameterData.pulseRepetitiveFrequency = static_cast<float>(beam->getPRF());          // Hz (Average)
+         bd.parameterData.pulseWidth = static_cast<float>(beam->getPulseWidth()) * 1000000.0f;    // uSec
 
          if (ant != 0) {
-            bd.beamData.beamAzimuthCenter   = float( ant->getRefAzimuth() );      // Radians
-            bd.beamData.beamAzimuthSweep    = float( ant->getScanWidth()/2.0 );   // Radians -- half angles
-            bd.beamData.beamElevationCenter = float( ant->getRefElevation() );    // Radians
-            bd.beamData.beamElevationSweep  = float( ant->getScanHeight()/2.0 );  // Radians -- half angles
+            bd.beamData.beamAzimuthCenter   = static_cast<float>(ant->getRefAzimuth());      // Radians
+            bd.beamData.beamAzimuthSweep    = static_cast<float>(ant->getScanWidth()/2.0);   // Radians -- half angles
+            bd.beamData.beamElevationCenter = static_cast<float>(ant->getRefElevation());    // Radians
+            bd.beamData.beamElevationSweep  = static_cast<float>(ant->getScanHeight()/2.0);  // Radians -- half angles
          }
          else {
             // Default values
             bd.beamData.beamAzimuthCenter   = 0.0f;
-            bd.beamData.beamAzimuthSweep    = 30.0f * float(Basic::Angle::D2RCC);
+            bd.beamData.beamAzimuthSweep    = 30.0f * static_cast<float>(Basic::Angle::D2RCC);
             bd.beamData.beamElevationCenter = 0.0f;
-            bd.beamData.beamElevationSweep  = 2.0f * float(Basic::Angle::D2RCC);
+            bd.beamData.beamElevationSweep  = 2.0f * static_cast<float>(Basic::Angle::D2RCC);
          }
          bd.beamData.beamSweepSync = 0;
 
@@ -935,12 +935,12 @@ unsigned short EmissionPduHandler::emissionSystemData2PDU(EmissionSystem* const 
     // ---
 
     // The EmitterBeamData structures follow the EmissionSystem structure
-    unsigned char* p = ((unsigned char*) es) + sizeof(EmissionSystem);
+    unsigned char* p = reinterpret_cast<unsigned char*>(es) + sizeof(EmissionSystem);
 
     for (unsigned int ib = 0; ib < es->numberOfBeams && ib < MAX_EM_BEAMS; ib++) {
 
       // Copy emitter beam data
-      EmitterBeamData* eb = (EmitterBeamData*) p;
+      EmitterBeamData* eb = reinterpret_cast<EmitterBeamData*>(p);
       *eb = *getSavedEmitterBeamData(ib);
       p += sizeof(EmitterBeamData);
 
@@ -949,7 +949,7 @@ unsigned short EmissionPduHandler::emissionSystemData2PDU(EmissionSystem* const 
       for (int it = 0; it < n && it < MAX_TARGETS_IN_TJ_FIELD; it++) {
 
          // Copy the Track/Jam target data
-         TrackJamTargets* tjt = (TrackJamTargets*) p;
+         TrackJamTargets* tjt = reinterpret_cast<TrackJamTargets*>(p);
          *tjt = *getSavedTrackJamTargetData(ib,it);
          p += sizeof(TrackJamTargets);
       }
@@ -961,7 +961,7 @@ unsigned short EmissionPduHandler::emissionSystemData2PDU(EmissionSystem* const 
     // Emission system data length is the size of the EmissionSystem structure
     // plus the emitter beam structures, which includes their track/jam targets.
     // ---
-    es->systemDataLength = (unsigned char)( totalLength/4 );   // in 32 bit words
+    es->systemDataLength = static_cast<unsigned char>(totalLength/4);   // in 32 bit words
 
     return totalLength;    // Returning the length of the Emission system data in bytes
 }

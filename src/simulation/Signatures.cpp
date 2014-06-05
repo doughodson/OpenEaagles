@@ -298,7 +298,7 @@ LCreal SigPlate::getRCS(const Emission* const em)
             rcs = (4.0 * PI * area * area) / (lambda * lambda); 
         }
     }
-    return (LCreal) rcs;
+    return static_cast<LCreal>(rcs);
 }
 
 //------------------------------------------------------------------------------
@@ -406,7 +406,7 @@ LCreal SigDihedralCR::getRCS(const Emission* const em)
             rcs = (8.0 * PI * a*a*a*a) / (lambda*lambda); 
         }
     }
-    return (LCreal) rcs;
+    return static_cast<LCreal>(rcs);
 }
 
 
@@ -458,7 +458,7 @@ LCreal SigTrihedralCR::getRCS(const Emission* const em)
             rcs = (12.0 * PI * a*a*a*a) / (lambda*lambda); 
         }
     }
-    return (LCreal) rcs;
+    return static_cast<LCreal>(rcs);
 }
 
 //==============================================================================
@@ -500,7 +500,7 @@ LCreal SigSwitch::getRCS(const Emission* const em)
    LCreal rcs = 0.0;
 
    // Find our ownship player ...
-   const Player* ownship = (const Player*) findContainerByType(typeid(Player));
+   const Player* ownship = static_cast<const Player*>(findContainerByType(typeid(Player)));
    if (ownship != 0) {
 
       // get our ownship's camouflage type
@@ -627,8 +627,8 @@ LCreal SigAzEl::getRCS(const Emission* const em)
 
       // If the table's independent variables are in degrees ..
       if (isInDegrees()) {
-         iv1 *= (LCreal)Basic::Angle::R2DCC;
-         iv2 *= (LCreal)Basic::Angle::R2DCC;
+         iv1 *= static_cast<LCreal>(Basic::Angle::R2DCC);
+         iv2 *= static_cast<LCreal>(Basic::Angle::R2DCC);
       }
 
       rcs = tbl->lfi(iv1,iv2);

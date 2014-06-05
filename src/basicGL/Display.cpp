@@ -322,8 +322,8 @@ void Display::reset()
       // Reset all of our sub-displays
       Basic::List::Item* item = subdisplays->getFirstItem();
       while (item != 0) {
-         Basic::Pair* pair = (Basic::Pair*)(item->getValue());
-         Component* obj = (Component*)( pair->object() );
+         Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+         Component* obj = static_cast<Component*>(pair->object());
          if (obj != 0) obj->reset();
          item = item->getNext();
       }
@@ -420,7 +420,7 @@ void Display::setMouse(const int x, const int y, Display* const subdisplay)
         if (focus() != 0 && focus() != subdisplay) {
             // if our previous focus was a display, exit it properly
             if (focus()->isClassType(typeid(Display))) {
-                BasicGL::Display* dis = (BasicGL::Display*)focus();
+                BasicGL::Display* dis = static_cast<BasicGL::Display*>(focus());
                 dis->onMouseExit();
             }
       focus(subdisplay);
@@ -432,7 +432,7 @@ void Display::setMouse(const int x, const int y, Display* const subdisplay)
         // if we aren't a subdisplay, but we are a display, we
         // still need to call our entry and exit routines
         if (focus() != 0 && focus()->isClassType(typeid(Display))) {
-            BasicGL::Display* dis = (BasicGL::Display*)focus();
+            BasicGL::Display* dis = static_cast<BasicGL::Display*>(focus());
             dis->onMouseExit();
         }
 
@@ -451,7 +451,7 @@ void Display::setMouse(const int x, const int y, Display* const subdisplay)
    my = ly;
 
    // Send these coordinates to our parent display
-   Display* parentDisplay = (Display*) findContainerByType(typeid(Display));
+   Display* parentDisplay = static_cast<Display*>(findContainerByType(typeid(Display)));
    if (parentDisplay != 0) {
       parentDisplay->setMouse(lx,ly,this);
    }
@@ -774,34 +774,34 @@ void Display::setScissor(const GLdouble scissorLeft, const GLdouble scissorRight
    glEnable(GL_SCISSOR_TEST);
    if (getDisplayOrientation() == CCW90) {
       // 90 degrees Counter-clockwise rotation
-      GLint x = (GLint) winx1;
-      GLint y = (GLint) winy0;
-      GLsizei width = (GLsizei) (winx0 -  winx1);
-      GLsizei height = (GLsizei) (winy1 - winy0);
+      GLint x = static_cast<GLint>(winx1);
+      GLint y = static_cast<GLint>(winy0);
+      GLsizei width = static_cast<GLsizei>(winx0 -  winx1);
+      GLsizei height = static_cast<GLsizei>(winy1 - winy0);
       glScissor(x, y, width, height);
    }
    else if (getDisplayOrientation() == CW90) {
       // 90 degrees Counter-clockwise rotation
-      GLint x = (GLint) winx0;
-      GLint y = (GLint) winy1;
-      GLsizei width = (GLsizei) (winx1 -  winx0);
-      GLsizei height = (GLsizei) (winy0 - winy1);
+      GLint x = static_cast<GLint>(winx0);
+      GLint y = static_cast<GLint>(winy1);
+      GLsizei width = static_cast<GLsizei>(winx1 -  winx0);
+      GLsizei height = static_cast<GLsizei>(winy0 - winy1);
       glScissor(x, y, width, height);
    }
    else if (getDisplayOrientation() == INVERTED) {
       // Normal
-      GLint x = (GLint) winx1;
-      GLint y = (GLint) winy1;
-      GLsizei width = (GLsizei) (winx0 -  winx1);
-      GLsizei height = (GLsizei) (winy0 - winy1);
+      GLint x = static_cast<GLint>(winx1);
+      GLint y = static_cast<GLint>(winy1);
+      GLsizei width = static_cast<GLsizei>(winx0 -  winx1);
+      GLsizei height = static_cast<GLsizei>(winy0 - winy1);
       glScissor(x, y, width, height);
    }
    else {
       // Normal
-      GLint x = (GLint) winx0;
-      GLint y = (GLint) winy0;
-      GLsizei width = (GLsizei) (winx1 -  winx0);
-      GLsizei height = (GLsizei) (winy1 - winy0);
+      GLint x = static_cast<GLint>(winx0);
+      GLint y = static_cast<GLint>(winy0);
+      GLsizei width = static_cast<GLsizei>(winx1 -  winx0);
+      GLsizei height = static_cast<GLsizei>(winy1 - winy0);
       glScissor(x, y, width, height);
    }
 }
@@ -878,7 +878,7 @@ Material* Display::getMaterial(const Basic::Identifier* name)
       const Basic::Pair* pair = materials->findByName( *name );
       if (pair != 0) {
          const Material* mat = dynamic_cast<const Material*>( pair->object() );
-         if (mat != 0) temp = (Material*)mat;
+         if (mat != 0) temp = const_cast<Material*>(static_cast<const Material*>(mat));
       }
    }
    if (temp == 0 && isMessageEnabled(MSG_ERROR)) {
@@ -945,7 +945,7 @@ Font* Display::getFont(const char* const fontName)
    Font* ft = 0;
    if (fontList != 0) {
       Basic::Pair* p = fontList->findByName(fontName);
-      if (p != 0) ft = (Font*) p->object();
+      if (p != 0) ft = static_cast<Font*>(p->object());
    }
    return ft;
 }
@@ -955,7 +955,7 @@ const Font* Display::getFont(const char* const fontName) const
    const Font* ft = 0;
    if (fontList != 0) {
       const Basic::Pair* p = fontList->findByName(fontName);
-      if (p != 0) ft = (const Font*) p->object();
+      if (p != 0) ft = static_cast<const Font*>(p->object());
    }
    return ft;
 }
@@ -978,7 +978,7 @@ Font* Display::getFont(const int index)
    Font* ft = 0;
    if (fontList != 0) {
       Basic::Pair* p = fontList->getPosition(index+1);
-      if (p != 0) ft = (Font*) p->object();
+      if (p != 0) ft = static_cast<Font*>(p->object());
    }
    return ft;
 }
@@ -989,7 +989,7 @@ const Font* Display::getFont(const int index) const
    const Font* ft = 0;
    if (fontList != 0) {
       const Basic::Pair* p = fontList->getPosition(index+1);
-      if (p != 0) ft = (const Font*) p->object();
+      if (p != 0) ft = static_cast<const Font*>(p->object());
    }
    return ft;
 }
@@ -1033,7 +1033,8 @@ Font* Display::getNormalFont()
       if (normalFont == 0) {
          // Not found!
          if (isMessageEnabled(MSG_ERROR)) {
-            std::cerr << "Display::getNormalFont(): font name '" << (const char*) *normalFontName << "' not found!" << std::endl;
+            std::cerr << "Display::getNormalFont(): font name '" << static_cast<const char*>(*normalFontName)
+                      << "' not found!" << std::endl;
          }
          normalFontName->unref();
          normalFontName = 0;
@@ -1070,7 +1071,7 @@ bool Display::setNormalFont(const char* const fontName)
    }
    else {
       if (normalFontName != 0) { normalFontName->unref(); normalFontName = 0; }
-      setNormalFont((Font*)0);
+      setNormalFont(static_cast<Font*>(0));
    }
    return true;
 }
@@ -1087,7 +1088,7 @@ bool Display::setNormalFont(const Basic::Identifier* const fontName)
    }
    else {
       if (normalFontName != 0) { normalFontName->unref(); normalFontName = 0; }
-      setNormalFont((Font*)0);
+      setNormalFont(static_cast<Font*>(0));
    }
    return true;
 }
@@ -1102,7 +1103,7 @@ void Display::outputTextLC(const int ln, const int cp, const char* sp, const int
    if (currentFont == 0 || n <= 0) return;
    osg::Vec4 ocolor = getCurrentColor();
 
-   Display* that = (Display*)this;
+   Display* that = const_cast<Display*>(this);
    // If manual reverse text, draw a background polygon
    // Computer posiiton
    GLdouble x = 0.0;
@@ -1214,7 +1215,7 @@ void Display::outputText(const char* sp, const int n, const bool vf) const
 {
    if (currentFont == 0 || n <= 0) return;
 
-   Display* that = (Display*)this;
+   Display* that = const_cast<Display*>(this);
    osg::Vec4 ocolor = getCurrentColor();
    // If manual reverse text, draw a background polygon
    if (reversedFlg) {
@@ -1232,7 +1233,7 @@ void Display::outputText(const char* sp, const int n, const bool vf) const
          startY -= (lSpace * 0.5);
 
          glPushMatrix();
-         glTranslatef((GLfloat)startX, -(GLfloat)startY, 0);
+         glTranslatef(static_cast<GLfloat>(startX), -static_cast<GLfloat>(startY), 0);
 
          // now add a buffer for around the edges
          GLdouble deltaX = startX + (cSpace * 0.1);
@@ -1369,7 +1370,7 @@ Basic::Color* Display::getColor(const char* const colorName)
    Basic::Color* cc = 0;
    if (colorTable != 0) {
       Basic::Pair* p = colorTable->findByName(colorName);
-      if (p != 0) cc = (Basic::Color*) p->object();
+      if (p != 0) cc = static_cast<Basic::Color*>(p->object());
    }
    return cc;
 }
@@ -1380,7 +1381,7 @@ Basic::Color* Display::getColor(const int index)
    Basic::Color* cc = 0;
    if (colorTable != 0) {
       Basic::Pair* p = colorTable->getPosition(index+1);
-      if (p != 0) cc = (Basic::Color*) p->object();
+      if (p != 0) cc = static_cast<Basic::Color*>(p->object());
    }
    return cc;
 }
@@ -1829,7 +1830,7 @@ bool Display::processSubdisplays()
    if (subdisplays != 0) {
       const Basic::List::Item* item = subdisplays->getFirstItem();
       while (ok && item != 0) {
-         Basic::Pair* p = (Basic::Pair*) item->getValue();
+         Basic::Pair* p = const_cast<Basic::Pair*>(static_cast<const Basic::Pair*>(item->getValue()));
          item = item->getNext();
          Display* g = dynamic_cast<Display*>(p->object());
          if (g != 0) {
@@ -1857,7 +1858,7 @@ bool Display::processTextures()
    if (textures != 0) {
       const Basic::List::Item* item = textures->getFirstItem();
       while (ok && item != 0) {
-         Basic::Pair* p = (Basic::Pair*) item->getValue();
+         Basic::Pair* p = const_cast<Basic::Pair*>(static_cast<const Basic::Pair*>(item->getValue()));
          item = item->getNext();
          Texture* g = dynamic_cast<Texture*>(p->object());
          if (g == 0) {
@@ -1882,7 +1883,7 @@ bool Display::processMaterials()
    if (materials != 0) {
       const Basic::List::Item* item = materials->getFirstItem();
       while (ok && item != 0) {
-         Basic::Pair* p = (Basic::Pair*) item->getValue();
+         Basic::Pair* p = const_cast<Basic::Pair*>(static_cast<const Basic::Pair*>(item->getValue()));
          item = item->getNext();
          Material* g = dynamic_cast<Material*>(p->object());
          if (g == 0) {
@@ -1967,9 +1968,9 @@ void Display::loadTextures()
    if (textures != 0) {
       const Basic::List::Item* item = textures->getFirstItem();
       while (item != 0) {
-         Basic::Pair* p = (Basic::Pair*) item->getValue();
+         Basic::Pair* p = const_cast<Basic::Pair*>(static_cast<const Basic::Pair*>(item->getValue()));
          item = item->getNext();
-         Texture* g = (Texture*)(p->object());
+         Texture* g = static_cast<Texture*>(p->object());
          g->loadTexture();
       }
    }
@@ -1985,8 +1986,8 @@ Image* Display::readFrameBuffer(unsigned int* const w, unsigned int* const h)
    GLsizei vpWidth = 0;
    GLsizei vpHeight = 0;
    getViewportSize(&vpWidth, &vpHeight);
-   unsigned int width = (unsigned int) vpWidth;
-   unsigned int height = (unsigned int) vpHeight;
+   unsigned int width = static_cast<unsigned int>(vpWidth);
+   unsigned int height = static_cast<unsigned int>(vpHeight);
 
    Image* image = readFrameBuffer(0, 0, width, height);
 

@@ -123,7 +123,7 @@ void Stores::updateTC(const LCreal dt)
       if (list != 0) {
          Basic::List::Item* item = list->getFirstItem();
          while (item != 0) {
-            Basic::Pair* pair = (Basic::Pair*)(item->getValue());
+            Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
             ExternalStore* p = dynamic_cast<ExternalStore*>( pair->object() );
             if (p != 0) p->updateTC(dt);
             item = item->getNext();
@@ -148,7 +148,7 @@ void Stores::updateData(const LCreal dt)
       if (list != 0) {
          Basic::List::Item* item = list->getFirstItem();
          while (item != 0) {
-            Basic::Pair* pair = (Basic::Pair*)(item->getValue());
+            Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
             ExternalStore* p = dynamic_cast<ExternalStore*>( pair->object() );
             if (p != 0) p->updateData(dt);
             item = item->getNext();
@@ -391,8 +391,8 @@ bool Stores::jettisonAll()
    if (list != 0) {
       Basic::List::Item* item = list->getFirstItem();
       while (item != 0) {
-         Basic::Pair* pair = (Basic::Pair*)(item->getValue());
-         Basic::Component* p = (Basic::Component*)( pair->object() );
+         Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+         Basic::Component* p = static_cast<Basic::Component*>( pair->object() );
          p->event(JETTISON_EVENT);
          item = item->getNext();
       }
@@ -468,8 +468,8 @@ void Stores::resetStores(Basic::PairStream* const list)
    if (list != 0) {
       Basic::List::Item* item = list->getFirstItem();
       while (item != 0) {
-         Basic::Pair* pair = (Basic::Pair*)(item->getValue());
-         Basic::Component* p = (Basic::Component*)( pair->object() );
+         Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+         Basic::Component* p = static_cast<Basic::Component*>( pair->object() );
          p->event(RESET_EVENT);
          item = item->getNext();
       }
@@ -493,7 +493,7 @@ bool Stores::onJettisonEvent(Weapon* const wpn)
          bool found = false;
          Basic::List::Item* item = list->getFirstItem();
          while (item != 0 && !found) {
-            Basic::Pair* pair = (Basic::Pair*)(item->getValue());
+            Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
             found = (wpn == pair->object());  // is it a match?
             item = item->getNext();
          }
@@ -523,7 +523,7 @@ bool Stores::onJettisonEvent(ExternalStore* const sys)
          bool found = false;
          Basic::List::Item* item = list->getFirstItem();
          while (item != 0 && !found) {
-            Basic::Pair* pair = (Basic::Pair*)(item->getValue());
+            Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
             found = (sys == pair->object());  // is it a match?
             item = item->getNext();
          }
@@ -551,7 +551,7 @@ bool Stores::setSlotNumStations(Basic::Number* const msg)
    if (msg != 0) {
       int v = msg->getInt();
       if (v >= 1 && v <= MAX_STATIONS) {
-         ok = setNumberOfStations( (unsigned int) v );
+         ok = setNumberOfStations( static_cast<unsigned int>(v) );
       }
       else {
          std::cerr << "Stores::setSlotnumStations() invalid number of stations: " << v;
@@ -603,8 +603,8 @@ bool Stores::setSlotStores(const Basic::PairStream* const msg)
    const Basic::List::Item* item = msg->getFirstItem();
    while (item != 0) {
 
-      const Basic::Pair* pair = (Basic::Pair*)(item->getValue());
-      const Basic::Component* p = (const Basic::Component*) pair->object();
+      const Basic::Pair* pair = static_cast<const Basic::Pair*>(item->getValue());
+      const Basic::Component* p = static_cast<const Basic::Component*>(pair->object());
       if (p != 0) {
 
          // get the station number from the stores' slot name
@@ -614,7 +614,7 @@ bool Stores::setSlotStores(const Basic::PairStream* const msg)
             stationNumber = stationName->getInteger();
          }
 
-         if (stationNumber > 0 && stationNumber <= (int) ns) {
+         if (stationNumber > 0 && stationNumber <= static_cast<int>(ns)) {
 
             // check the type of component
             bool isWpn = p->isClassType(typeid(Weapon));
@@ -623,14 +623,14 @@ bool Stores::setSlotStores(const Basic::PairStream* const msg)
             if ( isWpn || isEE ) {
                // Clone the weapon pair and set us as its container
                Basic::Pair* cpair = pair->clone();
-               Component* cp = (Component*) cpair->object();
+               Component* cp = static_cast<Component*>(cpair->object());
                cp->container(this);
 
                if ( isWpn ) {
                   // Weapon types ...
 
                   // Assign the weapon to the station
-                  Weapon* cwpn = (Weapon*)( cpair->object() );
+                  Weapon* cwpn = static_cast<Weapon*>( cpair->object() );
                   assignWeaponToStation(stationNumber, cwpn);
 
                }
@@ -639,7 +639,7 @@ bool Stores::setSlotStores(const Basic::PairStream* const msg)
                   // External stores types ...
 
                   // Assign the external store to the station
-                  ExternalStore* cwpn = (ExternalStore*)( cpair->object() );
+                  ExternalStore* cwpn = static_cast<ExternalStore*>( cpair->object() );
                   assignExtStoreToStation(stationNumber, cwpn);
                }
 
@@ -686,8 +686,8 @@ bool Stores::setSlotSelected(Basic::Number* const msg)
    bool ok = false;
    if (msg != 0) {
       int v = msg->getInt();
-      if (v >= 1 && v <= (int)ns) {
-         ok = selectStation( (unsigned int) v );
+      if (v >= 1 && v <= static_cast<int>(ns)) {
+         ok = selectStation( static_cast<unsigned int>(v) );
       }
       else if (ns == 0) {
          std::cerr << "Stores::setSlotStation() Number of stations is not set!" << std::endl;

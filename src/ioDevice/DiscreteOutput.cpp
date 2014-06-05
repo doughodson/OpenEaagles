@@ -203,7 +203,7 @@ bool DiscreteOutput::setSlotLocation(const Basic::Number* const msg)
    if (msg != 0) {
       int v = msg->getInt();
       if (v >= 0) {
-         ok = setLocation( (unsigned int) v );
+         ok = setLocation( static_cast<unsigned int>(v) );
       }
    }
    return ok;
@@ -216,7 +216,7 @@ bool DiscreteOutput::setSlotPort(const Basic::Number* const msg)
    if (msg != 0) {
       int v = msg->getInt();
       if (v >= 0) {
-         ok = setPort( (unsigned int) v );
+         ok = setPort( static_cast<unsigned int>(v) );
       }
    }
    return ok;
@@ -229,7 +229,7 @@ bool DiscreteOutput::setSlotChannel(const Basic::Number* const msg)
    if (msg != 0) {
       int v = msg->getInt();
       if (v >= 0) {
-         ok = setChannel( (unsigned int) v );
+         ok = setChannel( static_cast<unsigned int>(v) );
       }
    }
    return ok;

@@ -247,7 +247,7 @@ std::ostream& TabLogger::TabLogEvent::makePlayerIdMsg(std::ostream& sout, const 
         if (player->isNetworkedPlayer()) {             // federate name of networked player   (1 field)
                                                        // and network of networked player     (1 field)
             const Nib* const pNib = player->getNib();
-            sout << (const char*) *pNib->getFederateName() << "\t" ;
+            sout << static_cast<const char*>(*pNib->getFederateName()) << "\t" ;
 
             const NetIO* const pNet = pNib->getNetIO();
 
@@ -673,7 +673,7 @@ const char* TabLogger::LogPlayerData::getDescription()
         }
         
         // Complete the description
-        int len = (int)sout.str().size();
+        int len = static_cast<int>(sout.str().size());
         msg = new char[len+1];
         lcStrncpy(msg, (len+1), sout.str().c_str(), len);
     }
@@ -769,7 +769,7 @@ const char* TabLogger::LogGunActivity::getDescription()
         }
 
         // Complete the description
-        int len = (int)sout.str().size();
+        int len = static_cast<int>(sout.str().size());
         msg = new char[len+1];
         lcStrncpy(msg, (len+1), sout.str().c_str(), len);
     }
@@ -888,7 +888,7 @@ const char* TabLogger::LogWeaponActivity::getDescription()
         }
 
         // Complete the description
-        int len = (int)sout.str().size();
+        int len = static_cast<int>(sout.str().size());
         msg = new char[len+1];
         lcStrncpy(msg, (len+1), sout.str().c_str(), len);
     }
@@ -1020,7 +1020,7 @@ const char* TabLogger::LogActiveTrack::getDescription()
         }
 
         // Complete the description
-        int len = (int)sout.str().size();
+        int len = static_cast<int>(sout.str().size());
         msg = new char[len+1];
         lcStrncpy(msg, (len+1), sout.str().c_str(), len);
     }
@@ -1164,7 +1164,7 @@ const char* TabLogger::LogPassiveTrack::getDescription()
         }
 
         // Complete the description
-        int len = (int)sout.str().size();
+        int len = static_cast<int>(sout.str().size());
         msg = new char[len+1];
         lcStrncpy(msg, (len+1), sout.str().c_str(), len);
     }

@@ -47,7 +47,7 @@ struct BITMAPINFOHEADER_X {
 static bool checkSwap()
 {
   uint16_t w16 = 1;
-  uint8_t* p8 = (uint8_t*) &w16;
+  uint8_t* p8 = reinterpret_cast<uint8_t*>(&w16);
   return (*p8 == 0);  // msb is zero; big endian
 }
 
@@ -445,7 +445,7 @@ bool Image::writeFileBMP(const char* const filename, const char* const path)
    unsigned int offset = bitmapFileHdrSize + sizeof(BITMAPINFOHEADER_X);
 
    // Image size
-   unsigned int isize = getHeight() * (unsigned int) widthBytes;
+   unsigned int isize = getHeight() * static_cast<unsigned int>(widthBytes);
 
    // File size (active bytes)
    unsigned int size = isize + offset;
@@ -468,11 +468,11 @@ bool Image::writeFileBMP(const char* const filename, const char* const path)
    bfReserved2 = 0;
    bfOffBits = offset;
 
-   fout->write( (char*) &bfType, sizeof(bfType));
-   fout->write( (char*) &bfSize, sizeof(bfSize));
-   fout->write( (char*) &bfReserved1, sizeof(bfReserved1));
-   fout->write( (char*) &bfReserved2, sizeof(bfReserved2));
-   fout->write( (char*) &bfOffBits, sizeof(bfOffBits));
+   fout->write(reinterpret_cast<char*>(&bfType),      sizeof(bfType));
+   fout->write(reinterpret_cast<char*>(&bfSize),      sizeof(bfSize));
+   fout->write(reinterpret_cast<char*>(&bfReserved1), sizeof(bfReserved1));
+   fout->write(reinterpret_cast<char*>(&bfReserved2), sizeof(bfReserved2));
+   fout->write(reinterpret_cast<char*>(&bfOffBits),   sizeof(bfOffBits));
 
    // ---
    // Write the bitmap file info
@@ -489,7 +489,7 @@ bool Image::writeFileBMP(const char* const filename, const char* const path)
    bmfi.biYPelsPerMeter = getYResolutionPPM();
    bmfi.biClrUsed = 0;
    bmfi.biClrImportant = 0;
-   fout->write( (char*) &bmfi, sizeof(bmfi));
+   fout->write(reinterpret_cast<char*>(&bmfi), sizeof(bmfi));
 
    // ---
    // Write the pixel bit map
@@ -498,11 +498,11 @@ bool Image::writeFileBMP(const char* const filename, const char* const path)
       const GLubyte* bmap = getPixels();
       for (unsigned int i = 0; i < getHeight(); i++) {
          const GLubyte* p = bmap + (i * widthBytes);
-         fout->write( (char* ) p, width* PIXEL_SIZE);
+         fout->write(reinterpret_cast<const char*>(p), width* PIXEL_SIZE);
       }
       if (filePadding > 0) {
          unsigned int padding = 0;
-         fout->write( (char* ) &padding, filePadding);
+         fout->write(reinterpret_cast<char*>(&padding), filePadding);
       }
    }
 
@@ -560,10 +560,10 @@ GLubyte* Image::readColorValuesBMP(FILE* const fp, const unsigned int offset, co
     size_t ctSize = 256;
     if (bmfi->biClrUsed > 0) ctSize = bmfi->biClrUsed;
     GLubyte* colorTable = new GLubyte[ctSize*4];
-    size_t nItemsRead = fread(colorTable, 4, ctSize, fp);
+    size_t nItemRead = fread(colorTable, 4, ctSize, fp);
 
     // Position to start of colors
-   fseek(fp, offset, SEEK_SET);
+    fseek(fp, offset, SEEK_SET);
 
     // Read the bitmap
     unsigned int nbytes = (((bmfi->biWidth + 3) / 4 ) * 4); // round up to 4 byte boundary

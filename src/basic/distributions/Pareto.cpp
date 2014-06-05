@@ -55,8 +55,8 @@ void Pareto::copyData(const Pareto& org, const bool cc)
 double Pareto::draw()
 {
   // draw a random value in the open interval (0,1)
-  double x = drawOpen();
-  double z = std::pow (x, -1.0 / alpha);
+  const double x = drawOpen();
+  const double z = std::pow (x, -1.0 / alpha);
   return beta * z;
 }
 

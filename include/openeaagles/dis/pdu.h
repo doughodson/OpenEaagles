@@ -66,15 +66,15 @@ struct EntityStatePDU {
    {
       VpArticulatedPart* ap = 0;
       if (idx < numberOfArticulationParameters) {
-         uint8_t *p = ((uint8_t *)this) + sizeof(*this);
+         uint8_t *p = reinterpret_cast<uint8_t *>(this) + sizeof(*this);
 
          // First Emission system data is just after this structure
-         ap = (VpArticulatedPart*) p;
+         ap = reinterpret_cast<VpArticulatedPart*>(p);
 
          for (unsigned int i = 0; i < idx; i++) {
             // step down to the correct emission system data using 'systemDataLength'
             p += sizeof(VpArticulatedPart);
-            ap = (VpArticulatedPart*) p;
+            ap = reinterpret_cast<VpArticulatedPart*>(p);
          }
 
       }
@@ -87,13 +87,13 @@ struct EntityStatePDU {
       if (idx < numberOfArticulationParameters) {
 
          // First articulation parameter is just after this structure
-         const uint8_t *p = ((uint8_t *)this) + sizeof(*this);
-         ap = (const VpArticulatedPart*) p;
+         const uint8_t *p = reinterpret_cast<const uint8_t*>(this) + sizeof(*this);
+         ap = reinterpret_cast<const VpArticulatedPart*>(p);
 
          for (unsigned int i = 0; i < idx; i++) {
             // step down to the correct VpArticulatedPart structure
             p += sizeof(VpArticulatedPart);
-            ap = (const VpArticulatedPart*) p;
+            ap = reinterpret_cast<const VpArticulatedPart*>(p);
          }
 
       }
@@ -123,11 +123,11 @@ struct EntityStatePDU {
 
    void dumpData() const {
       std::cout << "------------------------------------------------" << std::endl;
-      std::cout << "Entity State PDU(" << (int)header.PDUType << ")" << std::endl;
-      std::cout << "Time Stamp (" << (int)header.timeStamp << ")" << std::endl;
+      std::cout << "Entity State PDU(" << static_cast<int>(header.PDUType) << ")" << std::endl;
+      std::cout << "Time Stamp (" << static_cast<int>(header.timeStamp) << ")" << std::endl;
       std::cout << entityID << std::endl;
-      std::cout << "ForceID (" << (int)forceID << ")" << std::endl;
-      std::cout << "Num Articulation Params (" << (int)numberOfArticulationParameters << ")" << std::endl;
+      std::cout << "ForceID (" << static_cast<int>(forceID) << ")" << std::endl;
+      std::cout << "Num Articulation Params (" << static_cast<int>(numberOfArticulationParameters) << ")" << std::endl;
       std::cout << "Entity Type:" << std::endl;
       std::cout << entityType << std::endl;
       std::cout << "Entity Alternate Type:" << std::endl;
@@ -142,13 +142,13 @@ struct EntityStatePDU {
       std::cout << entityOrientation;
       std::cout << "  Appearance (" << std::hex << appearance << ")" << std::endl;
       std::cout << std::dec;
-      std::cout << "  DR Algor   (" << (int)deadReckoningAlgorithm << ")" << std::endl;
+      std::cout << "  DR Algor   (" << static_cast<int>(deadReckoningAlgorithm) << ")" << std::endl;
       std::cout << "  DR Params  ( ";
       std::cout << std::hex;
       for(unsigned int i = 0; i < 15; i++) {
          std::cout.width(2);
          std::cout.fill('0');
-         std::cout << (int)otherParameters[i] << " ";
+         std::cout << static_cast<int>(otherParameters[i]) << " ";
       }
       std::cout.width(0);
       std::cout << std::dec << ")" << std::endl;;
@@ -230,13 +230,13 @@ struct FirePDU {
    void dumpData() const {
       WorldCoordinates loc;
       std::cout << "------------------------------------------------" << std::endl;
-      std::cout << "Fire PDU(" << (int)header.PDUType << ")" << std::endl;
+      std::cout << "Fire PDU(" << static_cast<int>(header.PDUType) << ")" << std::endl;
       std::cout << "Firing   Entity:" << std::endl << firingEntityID;
       std::cout << "Target   Entity:" << std::endl << targetEntityID;
       std::cout << "Munition Entity:" << std::endl << munitionID;
       std::cout << "Event ID:" << std::endl << eventID;
       std::cout << "fireMissionIndex (" << fireMissionIndex << ")" << std::endl;
-      memcpy(&loc,&location,sizeof(WorldCoordinates));
+      memcpy(&loc,&location, sizeof(WorldCoordinates));
       std::cout << "Location:" << std::endl << loc;
       std::cout << "Burst Descriptor:" << std::endl << burst;
       std::cout << "Velocity vectorDISy:" << std::endl << velocity;
@@ -279,7 +279,7 @@ struct DetonationPDU {
    void dumpData() const {
       WorldCoordinates loc;
       std::cout << "------------------------------------------------" << std::endl;
-      std::cout << "Detonation PDU(" << (int)header.PDUType << ")" << std::endl;
+      std::cout << "Detonation PDU(" << static_cast<int>(header.PDUType) << ")" << std::endl;
       std::cout << "Firing   Entity:" << std::endl << firingEntityID;
       std::cout << "Target   Entity:" << std::endl << targetEntityID;
       std::cout << "Munition Entity:" << std::endl << munitionID;
@@ -289,8 +289,8 @@ struct DetonationPDU {
       std::cout << "Location:" << std::endl << loc;
       std::cout << "Burst Descriptor:" << std::endl << burst;
       std::cout << "Location In Entity Coords:" << std::endl << locationInEntityCoordinates;
-      std::cout << "Detonation Result (" << (int)detonationResult << ")" << std::endl;
-      std::cout << "Num Of Atriculation Params (" << (int)numberOfArticulationParameters << ")" << std::endl;
+      std::cout << "Detonation Result (" << static_cast<int>(detonationResult) << ")" << std::endl;
+      std::cout << "Num Of Atriculation Params (" << static_cast<int>(numberOfArticulationParameters) << ")" << std::endl;
       std::cout.flush();
    };
 };
@@ -319,7 +319,7 @@ struct StartPDU{
 
    void dumpData() const {
       std::cout << "------------------------------------------------" << std::endl;
-      std::cout << "Start PDU(" << (long)header.PDUType << ")" << std::endl;
+      std::cout << "Start PDU(" << static_cast<long>(header.PDUType) << ")" << std::endl;
       std::cout << "Sending     Entity:" << std::endl << originatingID;
       std::cout << "Destination Entity:" << std::endl << receivingID;
       std::cout << "Real World Time:" << std::endl << realWorldTime;
@@ -354,12 +354,12 @@ struct StopPDU{
 
    void dumpData() const {
       std::cout << "------------------------------------------------" << std::endl;
-      std::cout << "Start PDU(" << (long)header.PDUType << ")" << std::endl;
+      std::cout << "Start PDU(" << static_cast<long>(header.PDUType) << ")" << std::endl;
       std::cout << "Sending     Entity:" << std::endl << originatingID;
       std::cout << "Destination Entity:" << std::endl << receivingID;
       std::cout << "Real World Time:" << std::endl << realWorldTime;
-      std::cout << "Reason: (" << std::endl << (long)reason << ")" << std::endl;
-      std::cout << "Frozen Behavior (: " << (long)frozenBehavior << ")" << std::endl;
+      std::cout << "Reason: (" << std::endl << static_cast<long>(reason) << ")" << std::endl;
+      std::cout << "Frozen Behavior (: " << static_cast<long>(frozenBehavior) << ")" << std::endl;
       std::cout << "Request ID: "  << requestID << std::endl;
       std::cout.flush();
    };
@@ -380,7 +380,7 @@ struct AcknowledgePDU{
 
    void dumpData() const {
       std::cout << "------------------------------------------------" << std::endl;
-      std::cout << "Start PDU(" << (long)header.PDUType << ")" << std::endl;
+      std::cout << "Start PDU(" << static_cast<long>(header.PDUType) << ")" << std::endl;
       std::cout << "Sending     Entity:" << std::endl << originatingID;
       std::cout << "Destination Entity:" << std::endl << receivingID;
       std::cout << "Acknowledge Flag:" << std::endl << acknowledgeFlag;
@@ -414,7 +414,7 @@ struct ActionRequestPDU {
    uint32_t             numVariableRecords;
 
    uint8_t* getData() {
-      uint8_t *p = (uint8_t *)this;
+      uint8_t *p = reinterpret_cast<uint8_t*>(this);
       int pcount = sizeof(PDUHeader)
          + sizeof(originatingID)
          + sizeof(receivingID)
@@ -426,7 +426,7 @@ struct ActionRequestPDU {
    };
 
    const uint8_t* getData() const {
-      const uint8_t *p = (const uint8_t *)this;
+      const uint8_t *p = reinterpret_cast<const uint8_t*>(this);
       int pcount = sizeof(PDUHeader)
          + sizeof(originatingID)
          + sizeof(receivingID)
@@ -449,7 +449,7 @@ struct ActionRequestPDU {
 
    void dumpData() const {
       std::cout << "------------------------------------------------" << std::endl;
-      std::cout << "Data Query PDU(" << (int)header.PDUType << ")" << std::endl;
+      std::cout << "Data Query PDU(" << static_cast<int>(header.PDUType) << ")" << std::endl;
       std::cout << "Emitting Entity:" << std::endl << originatingID;
       std::cout << "Destination Entity:" << std::endl << receivingID;
       std::cout << "Request ID: " << std::endl << requestID;
@@ -475,7 +475,7 @@ struct DataQueryPDU{
 
    // Returns a pointer to the start of the fixed/variable records
    uint8_t* getData() {
-      uint8_t *p = (uint8_t *)this;
+      uint8_t *p = reinterpret_cast<uint8_t*>(this);
       int pcount = sizeof(PDUHeader)
          + sizeof(originatingID)
          + sizeof(receivingID)
@@ -488,7 +488,7 @@ struct DataQueryPDU{
 
    // Returns a const pointer to the start of the fixed/variable records
    const uint8_t* getData() const {
-      const uint8_t *p = (const uint8_t *)this;
+      const uint8_t *p = reinterpret_cast<const uint8_t*>(this);
       int pcount = sizeof(PDUHeader)
          + sizeof(originatingID)
          + sizeof(receivingID)
@@ -511,7 +511,7 @@ struct DataQueryPDU{
 
    void dumpData() const {
       std::cout << "------------------------------------------------" << std::endl;
-      std::cout << "Data Query PDU(" << (int)header.PDUType << ")" << std::endl;
+      std::cout << "Data Query PDU(" << static_cast<int>(header.PDUType) << ")" << std::endl;
       std::cout << "Emitting Entity:" << std::endl << originatingID;
       std::cout << "Destination Entity:" << std::endl << receivingID;
       std::cout << "Request ID: " << std::endl << requestID;
@@ -536,7 +536,7 @@ struct DataPDU{
    uint32_t               numVariableRecords;
 
    uint8_t* getData() {
-      uint8_t *p = (uint8_t *)this;
+      uint8_t *p = reinterpret_cast<uint8_t*>(this);
       int pcount = sizeof(PDUHeader)
          + sizeof(originatingID)
          + sizeof(receivingID)
@@ -547,7 +547,7 @@ struct DataPDU{
       return &p[pcount];
    };
    const uint8_t* getData() const {
-      const uint8_t *p = (const uint8_t *)this;
+      const uint8_t *p = reinterpret_cast<const uint8_t*>(this);
       int pcount = sizeof(PDUHeader)
          + sizeof(originatingID)
          + sizeof(receivingID)
@@ -569,7 +569,7 @@ struct DataPDU{
 
    void dumpData() const {
       std::cout << "------------------------------------------------" << std::endl;
-      std::cout << "Data Query PDU(" << (int)header.PDUType << ")" << std::endl;
+      std::cout << "Data Query PDU(" << static_cast<int>(header.PDUType) << ")" << std::endl;
       std::cout << "Emitting Entity:" << std::endl << originatingID;
       std::cout << "Destination Entity:" << std::endl << receivingID;
       std::cout << "Request ID: " << std::endl << requestID;
@@ -592,7 +592,7 @@ struct CommentPDU{
    uint32_t               numVariableRecords;
 
    uint8_t* getData() {
-      uint8_t *p = (uint8_t*)this;
+      uint8_t *p = reinterpret_cast<uint8_t*>(this);
       int pcount = sizeof(PDUHeader)
          + sizeof(originatingID)
          + sizeof(receivingID)
@@ -601,7 +601,7 @@ struct CommentPDU{
    };
 
    const uint8_t* getData() const {
-      const uint8_t *p = (const uint8_t*)this;
+      const uint8_t *p = reinterpret_cast<const uint8_t*>(this);
       int pcount = sizeof(PDUHeader)
          + sizeof(originatingID)
          + sizeof(receivingID)
@@ -614,7 +614,7 @@ struct CommentPDU{
       if (index >= numFixedRecords) return 0;
 
       uint8_t* ptr = getData();
-      FixedDatum* datum = (FixedDatum *) ptr;
+      FixedDatum* datum = reinterpret_cast<FixedDatum*>(ptr);
       for(unsigned int i = 0; i < index; i++) {
          datum++;
       }
@@ -636,14 +636,14 @@ struct CommentPDU{
       uint8_t *ptr = getData();
       if (numFixedRecords > 0) {
          FixedDatum *datum = getFixedDatum(numFixedRecords-1);
-         ptr = (uint8_t*)datum;
+         ptr = reinterpret_cast<uint8_t*>(datum);
          ptr += sizeof(FixedDatum);
       }
 
       VariableDatum *vdatum = (VariableDatum *)ptr;
       for(unsigned int i = 0;i < index;i++) {
          ptr += vdatum->getSize();
-         vdatum = (VariableDatum *)ptr;
+         vdatum = reinterpret_cast<VariableDatum*>(ptr);
       }
 
       return vdatum;
@@ -683,7 +683,7 @@ struct CommentPDU{
 
    void dumpData() const {
       std::cout << "------------------------------------------------" << std::endl;
-      std::cout << "Data Query PDU(" << (int)header.PDUType << ")" << std::endl;
+      std::cout << "Data Query PDU(" << static_cast<int>(header.PDUType) << ")" << std::endl;
       std::cout << "Emitting Entity:" << std::endl << originatingID;
       std::cout << "Destination Entity:" << std::endl << receivingID;
       std::cout << "Number of fixed records: " << std::endl << numFixedRecords;
@@ -715,15 +715,15 @@ struct ElectromagneticEmissionPDU {
    EmissionSystem* getEmissionSystem(const unsigned int idx) {
       EmissionSystem* es = 0;
       if (idx < numberOfSystems) {
-         uint8_t *p = ((uint8_t *)this) + sizeof(*this);
+         uint8_t *p = reinterpret_cast<uint8_t*>(this) + sizeof(*this);
 
          // First Emission system data is just after this structure
-         es = (EmissionSystem*) p;
+         es = reinterpret_cast<EmissionSystem*>(p);
 
          for (unsigned int i = 0; i < idx; i++) {
             // step down to the correct emission system data using 'systemDataLength'
             p += (es->systemDataLength * 4);
-            es = (EmissionSystem*) p;
+            es = reinterpret_cast<EmissionSystem*>(p);
          }
 
       }
@@ -732,15 +732,15 @@ struct ElectromagneticEmissionPDU {
    const EmissionSystem* getEmissionSystem(const unsigned int idx) const {
       const EmissionSystem* es = 0;
       if (idx < numberOfSystems) {
-         uint8_t *p = ((uint8_t *)this) + sizeof(*this);
+         uint8_t *p = const_cast<uint8_t*>(reinterpret_cast<const uint8_t*>(this)) + sizeof(*this);
 
          // First Emission system data is just after this structure
-         es = (const EmissionSystem*) p;
+         es = reinterpret_cast<const EmissionSystem*>(p);
 
          for (unsigned int i = 0; i < idx; i++) {
             // step down to the correct emission system data using 'systemDataLength'
             p += (es->systemDataLength * 4);
-            es = (const EmissionSystem*) p;
+            es = reinterpret_cast<const EmissionSystem*>(p);
          }
 
       }
@@ -764,12 +764,12 @@ struct ElectromagneticEmissionPDU {
    // Dump the PDU's data to the standard output device, std::cout.
    void dumpData() const {
       std::cout << "------------------------------------------------" << std::endl;
-      std::cout << "Electromagnetic PDU(" << (int)header.PDUType << ")" << std::endl;
+      std::cout << "Electromagnetic PDU(" << static_cast<int>(header.PDUType) << ")" << std::endl;
       std::cout << "Header:" << std::endl << header;
       std::cout << "Emitting Entity:" << std::endl << emittingEntityID;
       std::cout << "Event ID:" << std::endl << eventID;
-      std::cout << "State Update Indicator: " << (int)stateUpdateIndicator << std::endl;
-      std::cout << "Num Of Systems:         " << (int)numberOfSystems << std::endl;
+      std::cout << "State Update Indicator: " << static_cast<int>(stateUpdateIndicator) << std::endl;
+      std::cout << "Num Of Systems:         " << static_cast<int>(numberOfSystems) << std::endl;
 
       for(unsigned int i = 0; i < numberOfSystems; i++){
          std::cout << "*****************************************" << std::endl;
@@ -818,14 +818,14 @@ struct DesignatorPDU {
    void dumpData() const {
        WorldCoordinates spotLoc;
        std::cout << "------------------------------------------------" << std::endl;
-       std::cout << "Designator PDU(" << (long)header.PDUType << ")" << std::endl;
+       std::cout << "Designator PDU(" << static_cast<long>(header.PDUType) << ")" << std::endl;
        std::cout << "Designating Entity:" << std::endl << designatingEntityID;
        std::cout << "Designated Entity:" << std::endl << designatedEntityID;
        std::cout << "Code Name      : " << codeName << std::endl;
        std::cout << "Designator Code: " << designatorCode << std::endl;
        std::cout << "Power          : " << power << std::endl;
        std::cout << "Wavelength     : " << wavelength << std::endl;
-       memcpy(&spotLoc,&spotLocation,sizeof(WorldCoordinates));
+       memcpy(&spotLoc,&spotLocation, sizeof(WorldCoordinates));
        std::cout << "Spot Location:" << std::endl << spotLoc;
        std::cout << "Spot Position:" << std::endl << spotPosition;
        std::cout.flush();
@@ -861,7 +861,7 @@ struct IffAtcNavaidsPDU
 
    void dumpData() const {
       std::cout << "------------------------------------------------" << std::endl;
-      std::cout << "IFF/ATC/NAVAIDS PDU(" << (int)header.PDUType << ")" << std::endl;
+      std::cout << "IFF/ATC/NAVAIDS PDU(" << static_cast<int>(header.PDUType) << ")" << std::endl;
       std::cout << "Header:" << std::endl << header;
       std::cout << "Emitting Entity:" << std::endl << emittingEntityID;
       std::cout << "Event ID:" << std::endl << eventID;
@@ -930,13 +930,13 @@ struct TransmitterPDU {
    };
 
    uint8_t* getModulationData() {
-      uint8_t* p = (uint8_t*)this;
+      uint8_t* p = reinterpret_cast<uint8_t*>(this);
       size_t offset = sizeof(TransmitterPDU);
       return &p[offset];
    };
 
    const uint8_t* getModulationData() const {
-      const uint8_t* p = (const uint8_t*)this;
+      const uint8_t* p = reinterpret_cast<const uint8_t*>(this);
       size_t offset = sizeof(TransmitterPDU);
       return &p[offset];
    };
@@ -949,14 +949,14 @@ struct TransmitterPDU {
       std::cout << "\tSiteID: " << radioRefID.simulationID.siteIdentification << std::endl;
       std::cout << "Radio ID: " << radioID << std::endl;
       std::cout << "RadioEntity:" << radioEntityType << std::endl;
-      std::cout << "Transmission State: " << (int)txState << std::endl;
-      std::cout << "Input Source: " << (int)inputSource << std::endl;
-      std::cout << "antLoc_X_coord: " << (int)antLoc_X_coord << std::endl;
-      std::cout << "antLoc_Y_coord: " << (int)antLoc_Y_coord << std::endl;
-      std::cout << "antLoc_Z_coord: " << (int)antLoc_Z_coord << std::endl;
-      std::cout << "antLoc_x_coord: " << (int)antLoc_x_coord << std::endl;
-      std::cout << "antLoc_y_coord: " << (int)antLoc_y_coord << std::endl;
-      std::cout << "antLoc_z_coord: " << (int)antLoc_z_coord << std::endl;
+      std::cout << "Transmission State: " << static_cast<int>(txState) << std::endl;
+      std::cout << "Input Source: "   << static_cast<int>(inputSource) << std::endl;
+      std::cout << "antLoc_X_coord: " << static_cast<int>(antLoc_X_coord) << std::endl;
+      std::cout << "antLoc_Y_coord: " << static_cast<int>(antLoc_Y_coord) << std::endl;
+      std::cout << "antLoc_Z_coord: " << static_cast<int>(antLoc_Z_coord) << std::endl;
+      std::cout << "antLoc_x_coord: " << static_cast<int>(antLoc_x_coord) << std::endl;
+      std::cout << "antLoc_y_coord: " << static_cast<int>(antLoc_y_coord) << std::endl;
+      std::cout << "antLoc_z_coord: " << static_cast<int>(antLoc_z_coord) << std::endl;
       std::cout << "Antenna Pattern Type: " << antennaPatternType << std::endl;
       std::cout << "Antenna Pattern Length: " << antennaPatternLength << std::endl;
       std::cout << "Frequency: " << frequency << std::endl;
@@ -987,13 +987,13 @@ struct SignalPDU {
    uint16_t            samples;
 
    uint8_t* getData() {
-      uint8_t *p = (uint8_t *)this;
+      uint8_t *p = reinterpret_cast<uint8_t*>(this);
       int pcount = sizeof(PDUHeader) + sizeof(radioRefID) + 14;
       return &p[pcount];
    };
 
    const uint8_t* getData() const {
-      const uint8_t *p = (const uint8_t *)this;
+      const uint8_t *p = reinterpret_cast<const uint8_t*>(this);
       int pcount = sizeof(PDUHeader) + sizeof(radioRefID) + 14;
       return &p[pcount];
    };
@@ -1011,7 +1011,7 @@ struct SignalPDU {
 
    void dumpData() const {
       std::cout << "------------------------------------------------" << std::endl;
-      std::cout << "Signal PDU(" << (int)header.PDUType << ")" << std::endl;
+      std::cout << "Signal PDU(" << static_cast<int>(header.PDUType) << ")" << std::endl;
       std::cout << "Emitting Entity:" << std::endl << radioRefID;
       std::cout << "Radio ID: ( " << radioID << " )" << std::endl;
       std::cout << "encodingScheme: ( " << std::hex << encodingScheme << std::dec << " )" << std::endl;
@@ -1031,7 +1031,7 @@ struct SignalPDU {
 
          std::cout.width(2);
          std::cout.fill('0');
-         std::cout << (int)p[i] << " ";
+         std::cout << static_cast<int>(p[i]) << " ";
 
          if (count >= 16) {
             std::cout << std::endl;
@@ -1066,7 +1066,7 @@ struct ActionRequestPDU_R {
    uint32_t             numVariableRecords;
 
    uint8_t* getData() {
-      uint8_t *p = (uint8_t *)this;
+      uint8_t *p = reinterpret_cast<uint8_t*>(this);
       int pcount = sizeof(PDUHeader)
          + sizeof(originatingID)
          + sizeof(receivingID)
@@ -1076,7 +1076,7 @@ struct ActionRequestPDU_R {
    };
 
    const uint8_t* getData() const {
-      const uint8_t *p = (const uint8_t *)this;
+      const uint8_t *p = reinterpret_cast<const uint8_t*>(this);
       int pcount = sizeof(PDUHeader)
          + sizeof(originatingID)
          + sizeof(receivingID)
@@ -1097,7 +1097,7 @@ struct ActionRequestPDU_R {
 
    void dumpData() const {
       std::cout << "------------------------------------------------" << std::endl;
-      std::cout << "Data Query PDU(" << (int)header.PDUType << ")" << std::endl;
+      std::cout << "Data Query PDU(" << static_cast<int>(header.PDUType) << ")" << std::endl;
       std::cout << "Emitting Entity:" << std::endl << originatingID;
       std::cout << "Destination Entity:" << std::endl << receivingID;
       std::cout << "Reliability Service: " << std::endl << reliabilityService;
@@ -1123,7 +1123,7 @@ struct ActionResponsePDU_R {
    uint32_t                  numVariableRecords;
 
    uint8_t* getData() {
-      uint8_t *p = (uint8_t *)this;
+      uint8_t *p = reinterpret_cast<uint8_t*>(this);
       int pcount = sizeof(PDUHeader)
          + sizeof(originatingID)
          + sizeof(receivingID)
@@ -1132,7 +1132,7 @@ struct ActionResponsePDU_R {
    };
 
    const uint8_t* getData() const {
-      const uint8_t *p = (const uint8_t *)this;
+      const uint8_t *p = reinterpret_cast<const uint8_t*>(this);
       int pcount = sizeof(PDUHeader)
          + sizeof(originatingID)
          + sizeof(receivingID)
@@ -1152,7 +1152,7 @@ struct ActionResponsePDU_R {
 
    void dumpData() const {
       std::cout << "------------------------------------------------" << std::endl;
-      std::cout << "Data Query PDU(" << (int)header.PDUType << ")" << std::endl;
+      std::cout << "Data Query PDU(" << static_cast<int>(header.PDUType) << ")" << std::endl;
       std::cout << "Emitting Entity:" << std::endl << originatingID;
       std::cout << "Destination Entity:" << std::endl << receivingID;
       std::cout << "Request ID: " << std::endl << requestID;

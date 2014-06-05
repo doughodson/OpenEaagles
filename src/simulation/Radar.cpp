@@ -533,7 +533,7 @@ unsigned int Radar::computeSweepIndex(const LCreal az)
    int n = int(az1*s + 0.5);       // Compute index
    if (n >= NUM_SWEEPS) n = NUM_SWEEPS - 1;
    if (n < 0) n = 0;
-   return (unsigned int) n;
+   return static_cast<unsigned int>(n);
 }
 
 //------------------------------------------------------------------------------
@@ -547,7 +547,7 @@ unsigned int Radar::computeRangeIndex(const LCreal rng)
    //LCreal maxRng = 40000.0;
    LCreal maxRng = getRange() * Basic::Distance::NM2M;
    LCreal rng1 = (rng/ maxRng );
-   unsigned int n = (unsigned int)(rng1 * LCreal(PTRS_PER_SWEEP) + 0.5);
+   unsigned int n = static_cast<unsigned int>(rng1 * LCreal(PTRS_PER_SWEEP) + 0.5);
    if (n >= PTRS_PER_SWEEP) n = PTRS_PER_SWEEP - 1;
    return n;
 }

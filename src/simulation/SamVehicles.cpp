@@ -90,7 +90,7 @@ void SamVehicle::updateData(const LCreal dt)
       if (stores != 0) {
          const Basic::List::Item* item = stores->getFirstItem();
          while (item != 0) {
-            const Basic::Pair* pair = (Basic::Pair*) item->getValue();
+            const Basic::Pair* pair = static_cast<const Basic::Pair*>(item->getValue());
             if (pair != 0) {
                const Sam* sam = dynamic_cast<const Sam*>( pair->object() );
                if (sam != 0) {

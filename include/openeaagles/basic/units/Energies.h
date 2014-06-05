@@ -157,7 +157,7 @@ public:
     Joules(const Energy& value);
 
     static LCreal convertStatic(const Energy& n)      { return n.toEnergy(); }
-    virtual LCreal toEnergy() const                   { return (LCreal)(val); }
+    virtual LCreal toEnergy() const                   { return static_cast<LCreal>(val); }
     virtual LCreal fromEnergy(const LCreal a) const   { return a; }
 };
 
@@ -177,7 +177,7 @@ public:
 
     static LCreal convertStatic(const Energy& n)    { return n.toEnergy() * J2KWH; }
     //this goes to another energy (KWH)
-    virtual LCreal toEnergy() const                 { return (LCreal)(val * KWH2J); }  
+    virtual LCreal toEnergy() const                 { return static_cast<LCreal>(val * KWH2J); }  
     //this is coming from another energy (KWH)
     virtual LCreal fromEnergy(const LCreal a) const { return a * J2KWH; }
 };
@@ -198,7 +198,7 @@ public:
     BTUs(const Energy& value);
 
     static LCreal convertStatic(const Energy& n)    { return n.toEnergy() * J2BTU; }
-    virtual LCreal toEnergy() const                 { return (LCreal)(val * BTU2J); }
+    virtual LCreal toEnergy() const                 { return static_cast<LCreal>(val * BTU2J); }
     virtual LCreal fromEnergy(const LCreal a) const { return a * J2BTU; }
 };
 
@@ -218,7 +218,7 @@ public:
     Calories(const Energy& value);
 
     static LCreal convertStatic(const Energy& n)      { return n.toEnergy() * J2C; }
-    virtual LCreal toEnergy() const                   { return (LCreal)(val * C2J); }
+    virtual LCreal toEnergy() const                   { return static_cast<LCreal>(val * C2J); }
     virtual LCreal fromEnergy(const LCreal a) const   { return a * J2C; }
 };
 
@@ -238,7 +238,7 @@ public:
     FootPounds(const Energy& value);
 
     static LCreal convertStatic(const Energy& n)     { return n.toEnergy() * J2FP; }
-    virtual LCreal toEnergy() const                  { return (LCreal)(val * FP2J); }
+    virtual LCreal toEnergy() const                  { return static_cast<LCreal>(val * FP2J); }
     virtual LCreal fromEnergy(const LCreal a) const  { return a * J2FP; }
 };
 

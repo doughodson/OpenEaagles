@@ -459,7 +459,7 @@ bool IlsRadio::findILSGlideslopeByFreq(LCreal freq)
          //Set the active area:
          getAirportLoader()->setArea(getLatitude(), getLongitude(), getMaxDetectRange());
          //See what the results are:
-         int found = getAirportLoader()->queryIlsByFreq((float)freq);
+         int found = getAirportLoader()->queryIlsByFreq(static_cast<float>(freq));
 
          //Sort through the results and check the type - assume the closest ones are correct
          //"found" list is already sorted from closest to farthest away:

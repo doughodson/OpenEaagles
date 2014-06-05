@@ -242,7 +242,7 @@ bool Bullet::checkForTargetHit()
             if (players != 0) {
                 Basic::List::Item* item = players->getFirstItem();
                 while (item != 0) {
-                    Basic::Pair* pair = (Basic::Pair*)item->getValue();
+                    Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
                     if (pair != 0) {
                         Player* player = dynamic_cast<Player*>(pair->object());
                         if (player != 0 && player != ownship && player->isMajorType(LIFE_FORM) && !player->isDestroyed()) {
@@ -561,7 +561,7 @@ void Gun::burstFrame()
       rcount -= ibullets;
 
       // Log this event
-      Player* ownship = (Player*)( findContainerByType(typeid(Player)) );
+      Player* ownship = static_cast<Player*>( findContainerByType(typeid(Player)) );
 
       if (ownship != 0) {
          BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_GUN_FIRED )
@@ -580,7 +580,7 @@ void Gun::burstFrame()
       // When we have a bullet model ... we're going to create a bullet (weapon)
       // player to flyout the rounds.
       Bullet* wpn = getBulletType();
-      Simulation* sim = (Simulation*)( findContainerByType(typeid(Simulation)) );
+      Simulation* sim = static_cast<Simulation*>( findContainerByType(typeid(Simulation)) );
       if (wpn != 0 && ownship != 0 && sim != 0) {
 
          // Compute the bullet burst's initial position and velocity
@@ -588,11 +588,11 @@ void Gun::burstFrame()
          osg::Vec3 ivel = computeInitBulletVelocity();
 
          // Get the bullet player being used to fly-out the bullets
-         Bullet* flyout = (Bullet*)( wpn->getFlyoutWeapon() );
+         Bullet* flyout = static_cast<Bullet*>( wpn->getFlyoutWeapon() );
          if (flyout == 0) {
             // If we don't have the flyout bullet (i.e., weapon and player) ... create it
             wpn->setLaunchVehicle(ownship);
-            flyout = (Bullet*)( wpn->release() );
+            flyout = static_cast<Bullet*>( wpn->release() );
          }
 
             // The flyout bullet (player) will handle this burst of bullets.

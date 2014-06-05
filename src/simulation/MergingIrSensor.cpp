@@ -184,7 +184,7 @@ void MergingIrSensor::mergeIrReturns()
                     LCreal sumRatio = currentRatio + nextRatio; 
 
                     LCreal currentWeight = currentRatio / sumRatio;
-                    LCreal nextWeight = (LCreal) 1.0 - currentWeight; 
+                    LCreal nextWeight = static_cast<LCreal>(1.0) - currentWeight; 
 
                     //combine line-of-sight vector using weights
                     currentMsg->setLosVec((currentMsg->getLosVec() * currentWeight) +
@@ -280,7 +280,7 @@ bool MergingIrSensor::setSlotAzimuthBin(const Basic::Number* const msg)
    const Basic::Angle* a = dynamic_cast<const Basic::Angle*>(msg);
    if (a != 0) {
        Basic::Radians r;
-       value = (LCreal)r.convert(*a);
+       value = static_cast<LCreal>(r.convert(*a));
    }
    else if (msg != 0) {
       value = msg->getReal();
@@ -296,7 +296,7 @@ bool MergingIrSensor::setSlotElevationBin(const Basic::Number* const msg)
    const Basic::Angle* a = dynamic_cast<const Basic::Angle*>(msg);
    if (a != 0) {
        Basic::Radians r;
-       value = (LCreal)r.convert(*a);
+       value = static_cast<LCreal>(r.convert(*a));
    }
    else if (msg != 0) {
       value = msg->getReal();

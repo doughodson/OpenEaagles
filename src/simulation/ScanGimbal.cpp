@@ -803,7 +803,7 @@ bool ScanGimbal::setBarSpacing(const double newSpacing)
 //------------------------------------------------------------------------------
 bool ScanGimbal::setNumBars(const double newNumBars)
 {
-    numBars = (int)newNumBars;
+    numBars = static_cast<int>(newNumBars);
 
     // Odd or even?
     if ((numBars % 2) != 0)

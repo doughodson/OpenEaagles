@@ -345,7 +345,7 @@ inline double Player::getAltitudeFt() const
 // Altitude AGL (meters) 
 inline double Player::getAltitudeAgl() const
 {
-   return altitude - (double)tElev;
+   return altitude - static_cast<double>(tElev);
 }
 
 // Altitude AGL (meters)
@@ -411,7 +411,7 @@ inline LCreal Player::getGroundTrackR() const
 // Player's ground track (degs)
 inline LCreal Player::getGroundTrackD() const
 {
-   return (LCreal)(Basic::Angle::R2DCC * gndTrk);
+   return static_cast<LCreal>(Basic::Angle::R2DCC * gndTrk);
 }
 
 // Velocity vector; NED (m/s)
@@ -496,6 +496,12 @@ inline bool Player::isInitPositionValid() const
 inline double Player::getInitAltitude() const
 {
    return initAlt;
+}
+
+// Initial total velocity
+inline LCreal Player::getInitVelocity() const
+{
+   return initVp;
 }
 
 // Initial Euler angles (radians)

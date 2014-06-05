@@ -203,7 +203,7 @@ void Station::copyData(const Station& org, const bool cc)
       copy->unref();
    }
    else {
-      setSlotOutTheWindow((Basic::PairStream*)0);
+      setSlotOutTheWindow(static_cast<Basic::PairStream*>(0));
    }
 
    // Copy the networks
@@ -213,7 +213,7 @@ void Station::copyData(const Station& org, const bool cc)
       copy->unref();
    }
    else {
-      setSlotNetworks((Basic::PairStream*)0);
+      setSlotNetworks(static_cast<Basic::PairStream*>(0));
    }
 
    // Copy the I/O handlers
@@ -223,7 +223,7 @@ void Station::copyData(const Station& org, const bool cc)
       copy->unref();
    }
    else {
-      setSlotIoHandler((Basic::PairStream*)0);
+      setSlotIoHandler(static_cast<Basic::PairStream*>(0));
    }
 
    {  // clone the data recorder
@@ -284,9 +284,9 @@ void Station::deleteData()
 
    // Clear our pointers
    setOwnshipPlayer(0);
-   setSlotOutTheWindow((Basic::PairStream*)0);
+   setSlotOutTheWindow(static_cast<Basic::PairStream*>(0));
    setSlotNetworks(0);
-   setSlotIoHandler((Basic::PairStream*)0);
+   setSlotIoHandler(static_cast<Basic::PairStream*>(0));
    setSlotSimulation(0);
    setSlotStartupResetTime(0);
    setDataRecorder(0);
@@ -320,8 +320,8 @@ void Station::reset()
    if (ioHandlers != 0) {
       Basic::List::Item* item = ioHandlers ->getFirstItem();
       while (item != 0) {
-         Basic::Pair* pair = (Basic::Pair*)(item->getValue());
-         Basic::IoHandler* p = (Basic::IoHandler*)( pair->object() );
+         Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+         Basic::IoHandler* p = static_cast<Basic::IoHandler*>(pair->object());
          p->event(RESET_EVENT);
          item = item->getNext();
       }
@@ -331,8 +331,8 @@ void Station::reset()
    if (otw != 0) {
       Basic::List::Item* item = otw ->getFirstItem();
       while (item != 0) {
-         Basic::Pair* pair = (Basic::Pair*)(item->getValue());
-         Otw* p = (Otw*)( pair->object() );
+         Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+         Otw* p = static_cast<Otw*>(pair->object());
          p->event(RESET_EVENT);
          item = item->getNext();
       }
@@ -342,8 +342,8 @@ void Station::reset()
    if (networks != 0) {
       Basic::List::Item* item = networks ->getFirstItem();
       while (item != 0) {
-         Basic::Pair* pair = (Basic::Pair*)(item->getValue());
-         NetIO* p = (NetIO*)( pair->object() );
+         Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+         NetIO* p = static_cast<NetIO*>(pair->object());
          p->event(RESET_EVENT);
          item = item->getNext();
       }
@@ -371,8 +371,8 @@ void Station::updateTC(const LCreal dt)
    if (ioHandlers != 0) {
       Basic::List::Item* item = ioHandlers ->getFirstItem();
       while (item != 0) {
-         Basic::Pair* pair = (Basic::Pair*)(item->getValue());
-         Basic::IoHandler* p = (Basic::IoHandler*)( pair->object() );
+         Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+         Basic::IoHandler* p = static_cast<Basic::IoHandler*>(pair->object());
          p->tcFrame(dt);
          item = item->getNext();
       }
@@ -393,8 +393,8 @@ void Station::updateTC(const LCreal dt)
       Basic::List::Item* item = otw->getFirstItem();
       while (item != 0) {
 
-         Basic::Pair* pair = (Basic::Pair*)(item->getValue());
-         Otw* p = (Otw*)( pair->object() );
+         Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+         Otw* p = static_cast<Otw*>(pair->object());
 
          // Set ownship & player list
          p->setOwnship(ownship);
@@ -472,7 +472,7 @@ bool Station::shutdownNotification()
    if (networks != 0) {
       Basic::List::Item* item = networks->getFirstItem();
       while (item != 0) {
-         Basic::Pair* pair = (Basic::Pair*)(item->getValue());
+         Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
          Basic::Component* p = dynamic_cast<Basic::Component*>(pair->object());
          p->event(SHUTDOWN_EVENT);
          item = item->getNext();
@@ -483,13 +483,13 @@ bool Station::shutdownNotification()
    if (ioHandlers != 0) {
       Basic::List::Item* item = ioHandlers->getFirstItem();
       while (item != 0) {
-         Basic::Pair* pair = (Basic::Pair*)(item->getValue());
+         Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
          Basic::Component* p = dynamic_cast<Basic::Component*>(pair->object());
          p->event(SHUTDOWN_EVENT);
          item = item->getNext();
       }
    }
-   setSlotIoHandler((Basic::PairStream*)0);
+   setSlotIoHandler(static_cast<Basic::PairStream*>(0));
 
    // Tell our simulation to shut down
    Simulation* s = getSimulation();
@@ -502,13 +502,13 @@ bool Station::shutdownNotification()
    if (otw != 0) {
       Basic::List::Item* item = otw ->getFirstItem();
       while (item != 0) {
-         Basic::Pair* pair = (Basic::Pair*)(item->getValue());
+         Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
          Basic::Component* p = dynamic_cast<Basic::Component*>(pair->object());
          p->event(SHUTDOWN_EVENT);
          item = item->getNext();
       }
    }
-   setSlotOutTheWindow((Basic::PairStream*)0);
+   setSlotOutTheWindow(static_cast<Basic::PairStream*>(0));
 
    // Zero (unref) our thread objects (of any).  The thread's functions have ref()'d
    // these objects, so they won't be deleted until the threads terminate, which they
@@ -543,8 +543,8 @@ void Station::inputDevices(const LCreal dt)
    if (ioHandlers != 0) {
      Basic::List::Item* item = ioHandlers ->getFirstItem();
      while (item != 0) {
-        Basic::Pair* pair = (Basic::Pair*)(item->getValue());
-        Basic::IoHandler* p = (Basic::IoHandler*)( pair->object() );
+        Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+        Basic::IoHandler* p = static_cast<Basic::IoHandler*>(pair->object());
         p->inputDevices(dt);
         item = item->getNext();
      }
@@ -559,8 +559,8 @@ void Station::outputDevices(const LCreal dt)
    if (ioHandlers != 0) {
      Basic::List::Item* item = ioHandlers ->getFirstItem();
      while (item != 0) {
-        Basic::Pair* pair = (Basic::Pair*)(item->getValue());
-        Basic::IoHandler* p = (Basic::IoHandler*)( pair->object() );
+        Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+        Basic::IoHandler* p = static_cast<Basic::IoHandler*>(pair->object());
         p->outputDevices(dt);
         item = item->getNext();
      }
@@ -652,8 +652,8 @@ void Station::processBackgroundTasks(const LCreal dt)
    if (ioHandlers != 0) {
       Basic::List::Item* item = ioHandlers ->getFirstItem();
       while (item != 0) {
-         Basic::Pair* pair = (Basic::Pair*)(item->getValue());
-         Basic::IoHandler* p = (Basic::IoHandler*)( pair->object() );
+         Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+         Basic::IoHandler* p = static_cast<Basic::IoHandler*>(pair->object());
          p->updateData(dt);
          item = item->getNext();
       }
@@ -666,8 +666,8 @@ void Station::processBackgroundTasks(const LCreal dt)
    if (otw != 0) {
       Basic::List::Item* item = otw ->getFirstItem();
       while (item != 0) {
-         Basic::Pair* pair = (Basic::Pair*)(item->getValue());
-         Otw* p = (Otw*)( pair->object() );
+         Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+         Otw* p = static_cast<Otw*>(pair->object());
          p->updateData(dt);
          item = item->getNext();
       }
@@ -684,8 +684,8 @@ void Station::processNetworkInputTasks(const LCreal dt)
    if (networks != 0) {
       Basic::List::Item* item = networks->getFirstItem();
       while (item != 0) {
-         Basic::Pair* pair = (Basic::Pair*)(item->getValue());
-         NetIO* p = (NetIO*)( pair->object() );
+         Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+         NetIO* p = static_cast<NetIO*>(pair->object());
 
          p->inputFrame( dt );
 
@@ -703,8 +703,8 @@ void Station::processNetworkOutputTasks(const LCreal dt)
    if (networks != 0) {
       Basic::List::Item* item = networks->getFirstItem();
       while (item != 0) {
-         Basic::Pair* pair = (Basic::Pair*)(item->getValue());
-         NetIO* p = (NetIO*)( pair->object() );
+         Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+         NetIO* p = static_cast<NetIO*>(pair->object());
 
          p->outputFrame( dt );
 
@@ -981,7 +981,7 @@ bool Station::setOwnshipByName(const char* const newOS)
    if (newOS != 0 && pl != 0) {
       Basic::Pair* p = pl->findByName(newOS);
       if (p != 0) {
-         Player* newOwnship = (Player*) p->object();
+         Player* newOwnship = static_cast<Player*>(p->object());
          if (newOwnship != ownship) {
             // Ok, we found the new ownship and it IS a different 
             // player then the previous ownship ...
@@ -1103,8 +1103,8 @@ bool Station::setSlotOutTheWindow(Basic::PairStream* const list)
    // Make sure the new list only has OTW type objects
    if (list != 0) {
       for (Basic::List::Item* item = list->getFirstItem(); item != 0; item = item->getNext()) {
-            Basic::Pair* pair = (Basic::Pair*)(item->getValue());
-            Otw* p = dynamic_cast<Otw*>( pair->object() );
+            Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+            Otw* p = dynamic_cast<Otw*>(pair->object());
             if (p != 0) {
             if (newList == 0) {
                newList = new Basic::PairStream();
@@ -1127,8 +1127,8 @@ bool Station::setSlotOutTheWindow(Basic::PairStream* const list)
 
       // we are no longer the container for these old OTW interfaces
       for (Basic::List::Item* item = oldList->getFirstItem(); item != 0; item = item->getNext()) {
-         Basic::Pair* pair = (Basic::Pair*)(item->getValue());
-         Component* p = (Component*)( pair->object() );
+         Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+         Component* p = static_cast<Component*>(pair->object());
          p->container(0);
       }
    }
@@ -1157,8 +1157,8 @@ bool Station::setSlotIoHandler(Basic::PairStream* const list)
     if (ioHandlers != 0) {
         // we are no longer the container for these handlers
         for (Basic::List::Item* item = ioHandlers->getFirstItem(); item != 0; item = item->getNext()) {
-            Basic::Pair* pair = (Basic::Pair*)(item->getValue());
-            Basic::Component* p = (Basic::Component*)( pair->object() );
+            Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+            Basic::Component* p = static_cast<Basic::Component*>(pair->object());
             p->container(0);
         }
         ioHandlers = 0;
@@ -1170,8 +1170,8 @@ bool Station::setSlotIoHandler(Basic::PairStream* const list)
     // Make sure the new list is setup correctly
     if (ioHandlers != 0) {
         for (Basic::List::Item* item = ioHandlers->getFirstItem(); item != 0; item = item->getNext()) {
-            Basic::Pair* pair = (Basic::Pair*)(item->getValue());
-            Basic::IoHandler* p = dynamic_cast<Basic::IoHandler*>( pair->object() );
+            Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+            Basic::IoHandler* p = dynamic_cast<Basic::IoHandler*>(pair->object());
             if (p != 0) {
                 // We are its container
                 p->container(this);
@@ -1208,8 +1208,8 @@ bool Station::setSlotNetworks(Basic::PairStream* const a)
     if (networks != 0) {
         // we are no longer the container for these networks
         for (Basic::List::Item* item = networks->getFirstItem(); item != 0; item = item->getNext()) {
-            Basic::Pair* pair = (Basic::Pair*)(item->getValue());
-            NetIO* p = (NetIO*)( pair->object() );
+            Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+            NetIO* p = static_cast<NetIO*>(pair->object());
             p->container(0);
         }
     }
@@ -1220,8 +1220,8 @@ bool Station::setSlotNetworks(Basic::PairStream* const a)
     // Make sure the new network list is setup correctly
     if (networks != 0) {
         for (Basic::List::Item* item = networks->getFirstItem(); item != 0; item = item->getNext()) {
-            Basic::Pair* pair = (Basic::Pair*)(item->getValue());
-            NetIO* p = dynamic_cast<NetIO*>( pair->object() );
+            Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+            NetIO* p = dynamic_cast<NetIO*>(pair->object());
             if (p != 0) {
                 // We are this network's container
                 p->container(this);
@@ -1282,7 +1282,7 @@ bool Station::setSlotTimeCriticalStackSize(const Basic::Number* const num)
     if (num != 0) {
         int isize = num->getInt();
         if (isize >= 0) {
-            ok = setTimeCriticalStackSize( (unsigned int) isize );
+            ok = setTimeCriticalStackSize(static_cast<unsigned int>(isize));
         }
     }
     return ok;
@@ -1334,7 +1334,7 @@ bool Station::setSlotNetworkStackSize(const Basic::Number* const num)
     if (num != 0) {
         int isize = num->getInt();
         if (isize >= 0) {
-            ok = setNetworkStackSize( (unsigned int) isize );
+            ok = setNetworkStackSize(static_cast<unsigned int>(isize));
         }
     }
     return ok;
@@ -1386,7 +1386,7 @@ bool Station::setSlotBackgroundStackSize(const Basic::Number* const num)
     if (num != 0) {
         int isize = num->getInt();
         if (isize >= 0) {
-            ok = setBackgroundStackSize( (unsigned int) isize );
+            ok = setBackgroundStackSize(static_cast<unsigned int>(isize));
         }
     }
     return ok;
@@ -1565,7 +1565,7 @@ TcThread::TcThread(Basic::Component* const parent, const LCreal priority, const 
 
 unsigned long TcThread::userFunc(const LCreal dt)
 {
-   Station* station = (Station*) getParent();
+   Station* station = static_cast<Station*>(getParent());
    station->processTimeCriticalTasks(dt);
    return 0;
 }
@@ -1587,7 +1587,7 @@ NetThread::NetThread(Basic::Component* const parent, const LCreal priority, cons
 
 unsigned long NetThread::userFunc(const LCreal dt)
 {
-   Station* station = (Station*) getParent();
+   Station* station = static_cast<Station*>(getParent());
    station->processNetworkInputTasks(dt);
    station->processNetworkOutputTasks(dt);
    return 0;
@@ -1610,7 +1610,7 @@ BgThread::BgThread(Basic::Component* const parent, const LCreal priority, const 
 
 unsigned long BgThread::userFunc(const LCreal dt)
 {
-   Station* station = (Station*) getParent();
+   Station* station = static_cast<Station*>(getParent());
    station->processBackgroundTasks(dt);
    return 0;
 }

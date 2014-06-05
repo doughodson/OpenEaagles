@@ -268,14 +268,14 @@ bool ActionImagingSar::trigger(OnboardComputer* const mgr)
    if (mgr != 0) {
 
       // Find our ownship player & SAR system
-      Player* ownship = (Player*) mgr->findContainerByType(typeid(Player));
+      Player* ownship = static_cast<Player*>(mgr->findContainerByType(typeid(Player)));
       if (ownship != 0) {
          Basic::Pair* pair = ownship->getSensorByType(typeid(Sar));
          if (isMessageEnabled(MSG_INFO)) {
             std::cout << "Looking for SAR: pair = " << pair << std::endl;
          }
          if (pair != 0) {
-            setSarSystem( (Sar*) pair->object() );
+            setSarSystem( static_cast<Sar*>(pair->object()) );
          }
       }
 
@@ -283,7 +283,7 @@ bool ActionImagingSar::trigger(OnboardComputer* const mgr)
          if (isMessageEnabled(MSG_INFO)) {
             std::cout << "Requesting an image from the SAR: refId: " << getRefId() << std::endl;
          }
-         sar->setStarePoint( getSarLatitude(), getSarLongitude(), (LCreal) getSarElevation() );
+         sar->setStarePoint( getSarLatitude(), getSarLongitude(), static_cast<LCreal>(getSarElevation()) );
          if (isMessageEnabled(MSG_INFO)) {
             std::cout << "And resolution: " << getResolution() << std::endl;
          }
@@ -478,7 +478,7 @@ LCreal ActionImagingSar::computeOrientation(const Steerpoint* const wp)
       double dlon = getSarLongitude();
       double brg, distNM;
       Basic::Nav::gll2bd(slat, slon, dlat, dlon, &brg, &distNM);
-      orientation = (LCreal) -brg;
+      orientation = static_cast<LCreal>(-brg);
    }
    return orientation;
 }
@@ -592,7 +592,7 @@ bool ActionWeaponRelease::trigger(OnboardComputer* const mgr)
    bool ok = false;
 
    if (mgr != 0) {
-      Player* own = (Player*) mgr->findContainerByType(typeid(Player));
+      Player* own = static_cast<Player*>(mgr->findContainerByType(typeid(Player)));
       if (own != 0) {
 
          StoresMgr* sms = own->getStoresManagement();
@@ -607,11 +607,11 @@ bool ActionWeaponRelease::trigger(OnboardComputer* const mgr)
             osg::Vec3 tgtPos;                            // Target position  (m) NED
             Basic::Nav::convertLL2PosVec(
                refLat, refLon,                           // Ref point (at sea level)
-               getTargetLatitude(), getTargetLongitude(), getTargetElevation(), 
+               getTargetLatitude(), getTargetLongitude(), getTargetElevation(),
                &tgtPos); // x,y,z  NED
 
             if (isMessageEnabled(MSG_INFO)) {
-            std::cout << "ActionWeaponRelease::trigger() Release weapon at [ " << tgtPos[0] << ", } " << tgtPos[1] << " ]" << std::endl;
+               std::cout << "ActionWeaponRelease::trigger() Release weapon at [ " << tgtPos[0] << ", } " << tgtPos[1] << " ]" << std::endl;
             }
 
             // Release the weapon and set the target
@@ -782,7 +782,7 @@ bool ActionDecoyRelease::trigger(OnboardComputer* const mgr)
    bool ok = false;
 
    if (mgr != 0) {
-      Player* own = (Player*) mgr->findContainerByType(typeid(Player));
+      Player* own = static_cast<Player*>(mgr->findContainerByType(typeid(Player)));
       if (own != 0) {
          StoresMgr* sms = own->getStoresManagement();
          if (sms != 0) {
@@ -826,7 +826,7 @@ void ActionDecoyRelease::process(const LCreal)
     // keep counting until we have our "interval" of seconds
     OnboardComputer* mgr = getManager();
     if (mgr != 0) {
-        Player* own = (Player*) mgr->findContainerByType(typeid(Player));
+        Player* own = static_cast<Player*>(mgr->findContainerByType(typeid(Player)));
         if (own != 0) {
             tod = own->getSimulation()->getSimTimeOfDay();
             if (interval < (tod - startTOD)) {
@@ -952,7 +952,7 @@ bool ActionCamouflageType::trigger(OnboardComputer* const mgr)
    bool ok = false;
 
    if (mgr != 0) {
-      Player* own = (Player*) mgr->findContainerByType(typeid(Player));
+      Player* own = static_cast<Player*>(mgr->findContainerByType(typeid(Player)));
       if (own != 0) {
 
          // Set our ownship's camouflage type

@@ -105,7 +105,7 @@ void UsbJoystickImp::reset()
          {
             unsigned char numOfAxes(0);
             ioctl(stream, JSIOCGAXES, &numOfAxes);
-            unsigned short tmp = (unsigned short) numOfAxes;
+            unsigned short tmp = static_cast<unsigned short>(numOfAxes);
             if (tmp > MAX_AI)
                 tmp = MAX_AI;
             numAI = tmp;
@@ -114,7 +114,7 @@ void UsbJoystickImp::reset()
          {
             unsigned char numOfBtns(0);
             ioctl(stream, JSIOCGBUTTONS, &numOfBtns);
-            unsigned short tmp = (unsigned short) numOfBtns;
+            unsigned short tmp = static_cast<unsigned short>(numOfBtns);
             if (tmp > MAX_DI)
                 tmp = MAX_DI;
             numDI = tmp;
@@ -159,7 +159,7 @@ void UsbJoystickImp::processInputs(const Eaagles::LCreal dt, Basic::IoData* cons
             {
             int n = js.number;
             if (n < numDI)
-                inBits[n] = (bool)js.value;
+                inBits[n] = static_cast<bool>(js.value);
             }
          break;
 

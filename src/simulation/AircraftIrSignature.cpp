@@ -395,11 +395,11 @@ LCreal AircraftIrSignature::getHotPartsWavebandFactor(LCreal midpoint, LCreal wi
 LCreal AircraftIrSignature::getCalculatedAirframeHeatSignature(const IrQueryMsg* const msg) {
 
     LCreal irPower = 0;
-    AirVehicle* targetAircraft = dynamic_cast<AirVehicle*>((Player*)msg->getTarget());
-    if(targetAircraft != 0){
+    const AirVehicle* targetAircraft = dynamic_cast<const AirVehicle*>(static_cast<const Player*>(msg->getTarget()));
+    if(targetAircraft != 0) {
         // this will need checks to ensure targetAircraft is , in fact, 
         // an airvehicle and not something else. 
-        LCreal targetAlt = (LCreal) targetAircraft->getAltitudeM();
+        LCreal targetAlt = static_cast<LCreal>(targetAircraft->getAltitudeM());
         LCreal targetVel = targetAircraft->getMach();  
         LCreal targetAzimuth = msg->getAzimuthAoi();
         LCreal targetElevation = msg->getElevationAoi(); 
@@ -423,7 +423,7 @@ void AircraftIrSignature::getAirframeSignatures(const IrQueryMsg* const msg, con
         const LCreal* widths = airframeWavebandFactorTable->getYData();
         LCreal irPower = getCalculatedAirframeHeatSignature(msg);
 
-        for (unsigned int i = 0; i < (unsigned int) airframeWavebandFactorTable->getNumXPoints(); i++) {
+        for (unsigned int i = 0; i < static_cast<unsigned int>(airframeWavebandFactorTable->getNumXPoints()); i++) {
             LCreal centerWavelength = centerWavelengths[i];
             LCreal lowerWavelength = centerWavelength - (widths[i] / 2.0f);
             LCreal upperWavelength = lowerWavelength + widths[i];
@@ -453,10 +453,10 @@ LCreal AircraftIrSignature::getPlumeRadiation(const IrQueryMsg* const msg)
     const Player* targetAircraft = msg->getTarget();
     if (targetAircraft != 0) {
         if (targetAircraft->isClassType(typeid(AirVehicle))) {
-            currentPla = getPLA((const AirVehicle*) targetAircraft); 
+            currentPla = getPLA(static_cast<const AirVehicle*>(targetAircraft)); 
         }
 
-        LCreal targetAlt = (LCreal) targetAircraft->getAltitudeM();
+        LCreal targetAlt = static_cast<LCreal>(targetAircraft->getAltitudeM());
         LCreal targetVel = targetAircraft->getMach(); 
         LCreal targetAzimuth = msg->getAzimuthAoi();
         LCreal targetElevation = msg->getElevationAoi(); 
@@ -478,7 +478,7 @@ void AircraftIrSignature::getPlumeSignatures(const IrQueryMsg* const msg, const 
         const LCreal* centerWavelengths = plumeWavebandFactorTable->getXData();
         const LCreal* widths = plumeWavebandFactorTable->getYData();
         LCreal irPower = getPlumeRadiation(msg);
-        for (unsigned int i = 0; i < (unsigned int) plumeWavebandFactorTable->getNumXPoints(); i++) {
+        for (unsigned int i = 0; i < static_cast<unsigned int>(plumeWavebandFactorTable->getNumXPoints()); i++) {
             LCreal centerWavelength = centerWavelengths[i];
             LCreal lowerWavelength = centerWavelength - (widths[i] / 2.0f);
             LCreal upperWavelength = lowerWavelength + widths[i];
@@ -560,11 +560,11 @@ LCreal AircraftIrSignature::getHotPartsRadiation(const IrQueryMsg* const msg)
     const Player* targetAircraft = msg->getTarget();
     if (targetAircraft != 0) {
         if (targetAircraft->isClassType(typeid(AirVehicle))) {
-            currentPla = getPLA((const AirVehicle*) targetAircraft);
+            currentPla = getPLA(static_cast<const AirVehicle*>(targetAircraft));
         }
     }
 
-    LCreal targetAlt = (LCreal) targetAircraft->getAltitudeM();
+    LCreal targetAlt = static_cast<LCreal>(targetAircraft->getAltitudeM());
     LCreal targetVel = targetAircraft->getMach();
     LCreal targetAzimuth = msg->getAzimuthAoi();
     LCreal targetElevation = msg->getElevationAoi();
@@ -583,7 +583,7 @@ void AircraftIrSignature::getHotPartsSignatures(const IrQueryMsg* const msg, con
         const LCreal* centerWavelengths = hotPartsWavebandFactorTable->getXData();
         const LCreal* widths = hotPartsWavebandFactorTable->getYData();
         LCreal irPower = getHotPartsRadiation(msg);
-        for (unsigned int i = 0; i < (unsigned int) hotPartsWavebandFactorTable->getNumXPoints(); i++) {
+        for (unsigned int i = 0; i < static_cast<unsigned int>(hotPartsWavebandFactorTable->getNumXPoints()); i++) {
             LCreal centerWavelength = centerWavelengths[i];
             LCreal lowerWavelength = centerWavelength - (widths[i] / 2.0f);
             LCreal upperWavelength = lowerWavelength + widths[i];

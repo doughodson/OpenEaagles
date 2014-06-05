@@ -204,7 +204,7 @@ bool IrSignature::setSlotEffectiveArea(Eaagles::Basic::Number *const num)
    const Basic::Area* a = dynamic_cast<const Basic::Area*>(num);
    if (a != 0) {
       Basic::SquareMeters sm;
-      value = (LCreal)sm.convert(*a);
+      value = static_cast<LCreal>(sm.convert(*a));
    } else if (num != 0) {
       value = num->getReal();
    }

@@ -181,7 +181,7 @@ unsigned int TcpHandler::recvData(char* const packet, const int maxSize)
    // Did we received any data?
    if (result > 0) {
       // We've received data -- all is well.
-      n = (unsigned int) result;
+      n = static_cast<unsigned int>(result);
    }
 
    // Did we receive a zero?

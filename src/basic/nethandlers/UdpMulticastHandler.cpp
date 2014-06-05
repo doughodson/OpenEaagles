@@ -195,7 +195,7 @@ bool UdpMulticastHandler::bindSocket()
        if (getLocalPort() != 0) addr.sin_port = htons (getLocalPort());  
        else addr.sin_port = htons(getPort());
 
-       if (::bind(socketNum, (const struct sockaddr *) &addr, sizeof(addr)) == SOCKET_ERROR) {
+       if (::bind(socketNum, reinterpret_cast<const struct sockaddr*>(&addr), sizeof(addr)) == SOCKET_ERROR) {
            std::perror("UdpMulticastHandler::bindSocket(): bind error");
            return false;
        }
@@ -234,7 +234,7 @@ bool UdpMulticastHandler::joinTheGroup()
    struct ip_mreq mreq;
    mreq.imr_multiaddr.s_addr = getNetAddr();
    mreq.imr_interface.s_addr = iface;
-   int result = ::setsockopt(socketNum, IPPROTO_IP, IP_ADD_MEMBERSHIP, (const char *) &mreq, sizeof(mreq));
+   int result = ::setsockopt(socketNum, IPPROTO_IP, IP_ADD_MEMBERSHIP, reinterpret_cast<const char*>(&mreq), sizeof(mreq));
    if (result == SOCKET_ERROR) {
       std::perror("UdpMulticastHandler::joinTheGroup(): setsockopt mreq");
       return false;

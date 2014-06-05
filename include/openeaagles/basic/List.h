@@ -168,7 +168,7 @@ public:
 
    unsigned int getIndex(const Object* const obj) const;
 
-   Object* getPosition(const unsigned int n)              { return (Object*) getPosition1(n); }
+   Object* getPosition(const unsigned int n)              { return const_cast<Object*>(getPosition1(n)); }
    const Object* getPosition(const unsigned int n) const  { return getPosition1(n); }
 
    void addHead(Object* const obj);
