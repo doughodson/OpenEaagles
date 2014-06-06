@@ -717,7 +717,8 @@ int Otw::compareKey2Model(const void* key, const void* model)
    const OtwModelKey* pKey = static_cast<const OtwModelKey*>(key);
 
    // The NIB
-   const OtwModel* pModel = *((const OtwModel**) model);
+   const OtwModel* const* pp = static_cast<const OtwModel* const*>(model);
+   const OtwModel* pModel = *pp;
 
    // Default to equal
    int result = 0;

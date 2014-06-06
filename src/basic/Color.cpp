@@ -41,7 +41,9 @@ void Color::copyData(const Color& org, const bool)
 //------------------------------------------------------------------------------
 Color::operator const osg::Vec3*() const
 {
-    return (osg::Vec3*) &color;
+    // Note: Color is a Vec4, which is just a four element array [ r g b a ], and
+    // we're reinterpreting it as a Vec3, which is a three element array [ r g b ].
+    return reinterpret_cast<const osg::Vec3*>( &color );
 }
 
 Color::operator const osg::Vec4*() const
@@ -76,7 +78,9 @@ LCreal Color::alpha() const
 // Get the address of the color vector array(3)
 const osg::Vec3* Color::getRGB() const
 {
-    return (osg::Vec3*) &color;
+    // Note: Color is a Vec4, which is just a four element array [ r g b a ], and
+    // we're reinterpreting it as a Vec3, which is a three element array [ r g b ].
+    return reinterpret_cast<const osg::Vec3*>( &color );
 }
 
 // Get the address of the color vector array(4)

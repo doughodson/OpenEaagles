@@ -1716,7 +1716,7 @@ bool OtwCigiCl::sendCigiData()
    // ---
    if (!isElevationRequestPending()) {
       // Do we have a elevation request entries?
-      OtwModelCigiCl** const table = (OtwModelCigiCl**) getElevationTable();
+      OtwModelCigiCl** const table = reinterpret_cast<OtwModelCigiCl**>( getElevationTable() );
       if (table != 0 && getElevationTableSize() > 0) {
          int maxAge = getElevationTableSize() * 4;
 
@@ -1949,7 +1949,7 @@ void OtwCigiCl::hatHotResp(const CigiHatHotRespV3* const p)
       //std::cout << "hotResp: id = " << id << std::endl;
       //}
 
-      OtwModelCigiCl** const table = (OtwModelCigiCl**) getElevationTable();
+      OtwModelCigiCl** const table = reinterpret_cast<OtwModelCigiCl**>( getElevationTable() );
       SPtr<OtwModelCigiCl> model(0);
       for (unsigned int i = 0; i < getElevationTableSize() && model == 0; i++) {
          if (table[i]->getID() == id) model = table[i];

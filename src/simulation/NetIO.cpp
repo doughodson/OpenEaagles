@@ -949,7 +949,8 @@ int NetIO::compareKey2Nib(const void* key, const void* nib)
    const NibKey* pKey = static_cast<const NibKey*>(key);
 
    // The NIB
-   const Nib* pNib = *((const Nib**) nib);
+   const Nib* const* pp = static_cast<const Nib* const*>(nib);
+   const Nib* pNib = *pp;
 
    // Default to equal
    int result = 0;

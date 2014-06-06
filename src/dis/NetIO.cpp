@@ -1871,7 +1871,7 @@ void NetIO::testInputEntityTypes(const unsigned int n)
             if (foundNtm != 0) {
                const Simulation::Player* foundP = origNtm->getTemplatePlayer();
                std::cout << "; form: " << foundP->getFactoryName();
-               SPtr<Basic::String> foundType( (Basic::String*) foundP->getType() );
+               SPtr<const Basic::String> foundType( static_cast<const Basic::String*>( foundP->getType() ) );
                if (foundType != 0) std::cout << "; type: " << *foundType;
             }
             if (origNtm == foundNtm) {
