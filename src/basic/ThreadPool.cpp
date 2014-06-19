@@ -265,7 +265,8 @@ void ThreadPool::execute(Object* cur)
    if(availableThread == 0)
    {
       //Wait for one to become available
-      if(ThreadSyncTask::waitForAnyCompleted((ThreadSyncTask**)&allThreads[0], actualThreads) == -1)
+      ThreadSyncTask** pp = reinterpret_cast<ThreadSyncTask**>( &allThreads[0] );
+      if (ThreadSyncTask::waitForAnyCompleted(pp, actualThreads) == -1)
       {
          //Error
          if (isMessageEnabled(MSG_ERROR)) {

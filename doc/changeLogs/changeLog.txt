@@ -76,6 +76,9 @@ simulation
    Autopilot class
       1) Removed old debug print statements
 
+   Otw class
+      1) compareKey2Model() -- Corrected null pointer check on pKeyFedName (bug fix)
+
    Player class
       1) Added accessor to get initial velocity setting - this allows dynamics models
          to quiz Player as to what initial velocity setting is on reset().

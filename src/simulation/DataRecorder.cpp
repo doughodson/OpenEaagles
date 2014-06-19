@@ -232,20 +232,33 @@ bool RecorderComponent::setDisabledList(const unsigned int* const list, const un
 //------------------------------------------------------------------------------
 bool RecorderComponent::setSlotEnabledList(const Basic::List* const list)
 {
-   unsigned int n = list->entries();
+   unsigned int n2 = 0;
+   unsigned int* p2 = 0;
 
    // Items in the list ...
+   unsigned int n = list->entries();
    if (n > 0) {
       // get the numbers from the list and set them as the filter list
-      unsigned int* p = new unsigned int[n];
-      unsigned int n2 = list->getNumberList((int*)p, n);
-      setEnabledList(p, n2);
-      delete[] p;
+      int* p1 = new int[n];
+      unsigned int n1 = list->getNumberList(p1, n);
+      if (n1 > 0) {
+         // Make sure they're positive
+         p2 = new unsigned int[n1];
+         for (unsigned int i = 0; i < n1; i++) {
+            if (p1[i] >= 0) {
+               p2[n2++] = static_cast<unsigned int>(p1[i]);
+            }
+         }
+      }
+      delete[] p1;
+      p1 = 0;
    }
 
-   // Empty list -- 
-   else {
-      setEnabledList(0,0);
+   // Set the list -- 
+   setEnabledList(p2, n2);
+   if (p2 != 0) {
+      delete[] p2;
+      p2 = 0;
    }
 
    return true;
@@ -253,20 +266,33 @@ bool RecorderComponent::setSlotEnabledList(const Basic::List* const list)
 
 bool RecorderComponent::setSlotDisabledList(const Basic::List* const list)
 {
-   unsigned int n = list->entries();
+   unsigned int n2 = 0;
+   unsigned int* p2 = 0;
 
    // Items in the list ...
+   unsigned int n = list->entries();
    if (n > 0) {
       // get the numbers from the list and set them as the filter list
-      unsigned int* p = new unsigned int[n];
-      unsigned int n2 = list->getNumberList((int*)p, n);
-      setDisabledList(p, n2);
-      delete[] p;
+      int* p1 = new int[n];
+      unsigned int n1 = list->getNumberList(p1, n);
+      if (n1 > 0) {
+         // Make sure they're positive
+         p2 = new unsigned int[n1];
+         for (unsigned int i = 0; i < n1; i++) {
+            if (p1[i] >= 0) {
+               p2[n2++] = static_cast<unsigned int>(p1[i]);
+            }
+         }
+      }
+      delete[] p1;
+      p1 = 0;
    }
 
-   // Empty list -- 
-   else {
-      setDisabledList(0,0);
+   // Set the list -- 
+   setDisabledList(p2, n2);
+   if (p2 != 0) {
+      delete[] p2;
+      p2 = 0;
    }
 
    return true;

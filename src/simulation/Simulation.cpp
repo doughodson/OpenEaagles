@@ -842,7 +842,8 @@ void Simulation::updateTC(const LCreal dt)
             updateTcPlayerList(currentPlayerList, (dt0/4.0f), reqTcThreads, reqTcThreads);
 
             // Now wait for the other thread(s) to complete
-            Basic::ThreadSyncTask::waitForAllCompleted((Basic::ThreadSyncTask**)&tcThreads[0], numTcThreads);
+            Basic::ThreadSyncTask** pp = reinterpret_cast<Basic::ThreadSyncTask**>(&tcThreads[0]);
+            Basic::ThreadSyncTask::waitForAllCompleted(pp, numTcThreads);
 
          }
          else if (isMessageEnabled(MSG_ERROR)) {
@@ -928,7 +929,8 @@ void Simulation::updateData(const LCreal dt)
             updateBgPlayerList(currentPlayerList, dt0, reqBgThreads, reqBgThreads);
 
             // Now wait for the other thread(s) to complete
-            Basic::ThreadSyncTask::waitForAllCompleted((Basic::ThreadSyncTask**) &bgThreads[0], numBgThreads);
+            Basic::ThreadSyncTask** pp = reinterpret_cast<Basic::ThreadSyncTask**>(&bgThreads[0]);
+            Basic::ThreadSyncTask::waitForAllCompleted(pp, numBgThreads);
 
          }
          else if (isMessageEnabled(MSG_ERROR)) {

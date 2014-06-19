@@ -443,7 +443,8 @@ bool PosixHandler::setNetAddr(const char* const hostname)
             const hostent* const p = gethostbyname(hostname);
             if (p != 0 && p->h_length > 0) {
 
-                const unsigned int* const q = (unsigned int*) (p->h_addr_list[0]);
+                // 'q' points to the four byte address (in network order) as a single unsigned integer
+                const unsigned int* const q = reinterpret_cast<const unsigned int*>(p->h_addr_list[0]);
                 if (q != 0) {
                     struct in_addr in;
                     in.s_addr = *q;
@@ -495,7 +496,8 @@ bool PosixHandler::setLocalAddr(const char* const hostname)
             }
             const hostent* p = gethostbyname(hostname);
             if (p != 0 && p->h_length > 0) {
-                const unsigned int* const q = (unsigned int*) (p->h_addr_list[0]);
+                // 'q' points to the four byte address (in network order) as a single unsigned integer
+                const unsigned int* const q = reinterpret_cast<const unsigned int*>(p->h_addr_list[0]);
                 if (q != 0) {
                     struct in_addr in;
                     in.s_addr = *q;
