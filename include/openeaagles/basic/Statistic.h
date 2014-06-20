@@ -136,7 +136,7 @@ inline void Statistic::sigma(const float* const values, const unsigned int size)
 {
    if (values != 0 && size > 0) {
       for (unsigned int i = 0; i < size; i++) {
-         sigma( double(values[i]) );
+         sigma( static_cast<double>(values[i]) );
       }
    }
 }
@@ -145,7 +145,7 @@ inline void Statistic::sigma(const float* const values, const unsigned int size)
 inline double Statistic::mean() const
 {
    if (n != 0)
-      return (sum / double(n));
+      return (sum / static_cast<double>(n));
    else
       return 0.0;
 }
@@ -154,7 +154,7 @@ inline double Statistic::mean() const
 inline double Statistic::absMean() const
 {
    if (n != 0)
-      return (absSum / double(n));
+      return (absSum / static_cast<double>(n));
    else
       return 0.0;
 }
@@ -189,7 +189,7 @@ inline double Statistic::rms() const
 {
    double rmsValue = 0;
    if (n != 0.0) {
-      rmsValue = std::sqrt( sumSq/double(n) );
+      rmsValue = std::sqrt( sumSq / static_cast<double>(n) );
    }
    return rmsValue;
 }
