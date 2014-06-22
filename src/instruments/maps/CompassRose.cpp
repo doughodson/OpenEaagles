@@ -107,7 +107,7 @@ bool CompassRose::setSlotDisplacement(const Basic::Number* const newD)
 //------------------------------------------------------------------------------
 bool CompassRose::setRotationDeg(const LCreal newR)
 {
-    rot = newR * (LCreal) Basic::Angle::D2RCC;
+    rot = newR * static_cast<LCreal>(Basic::Angle::D2RCC);
     return true;
 }
 

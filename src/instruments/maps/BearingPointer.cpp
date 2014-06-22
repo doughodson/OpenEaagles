@@ -91,7 +91,7 @@ bool BearingPointer::onUpdateRadBearingPointer(const Basic::Angle* const msg)
 {
     bool ok = false;
     if (msg != 0) {
-        setBearingRad( (LCreal) Basic::Radians::convertStatic( *msg ) );
+        setBearingRad( static_cast<LCreal>(Basic::Radians::convertStatic( *msg )) );
         ok = true;
     }
     return ok;
@@ -129,7 +129,7 @@ bool BearingPointer::onUpdateDegBearingPointer(const Basic::Number* const msg)
 //------------------------------------------------------------------------------
 bool BearingPointer::setBearingDeg(const LCreal newB)
 {
-    bearing = newB * (LCreal) Basic::Angle::D2RCC;
+    bearing = newB * static_cast<LCreal>(Basic::Angle::D2RCC);
     return true;
 }
 
@@ -212,7 +212,7 @@ void BearingPointer::updateData(const LCreal dt)
     
     // if we are over the max, rotate the other way
     LCreal dd0 = dbrg * dt;
-    LCreal maxdd0 = (90.0f * (LCreal) Basic::Angle::D2RCC) * dt;      // Limit to 90 degs/sec
+    LCreal maxdd0 = (90.0f * static_cast<LCreal>(Basic::Angle::D2RCC)) * dt;      // Limit to 90 degs/sec
     if (dd0 < -maxdd0) dd0 = -maxdd0;
     if (dd0 > maxdd0) dd0 = maxdd0;
     bearing += dd0;

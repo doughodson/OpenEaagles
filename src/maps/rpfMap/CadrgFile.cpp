@@ -572,13 +572,13 @@ bool CadrgFile::initialize(const char* dir)
     CadrgFrameEntry* frame = 0;
 
     // Read through all of our frame files.
-    for (i = 0; i < (int)numFFIdxRec; i++) {
+    for (i = 0; i < static_cast<int>(numFFIdxRec); i++) {
 
         // Locations[3] is frame file index table subsection * the record we are on.
         toc.seekg(locations[3].physicalIdx + idxRecLength * i, std::ios::beg);
 
-        toc.read((char *) &boundaryRecNum, sizeof(boundaryRecNum));
-        swap((unsigned char *) &boundaryRecNum, sizeof(boundaryRecNum));
+        toc.read(reinterpret_cast<char*>(&boundaryRecNum), sizeof(boundaryRecNum));
+        swap(reinterpret_cast<unsigned char*>(&boundaryRecNum), sizeof(boundaryRecNum));
 
 
         // If we are outside of our boundaries, print an error!

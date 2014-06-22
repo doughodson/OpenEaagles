@@ -160,11 +160,11 @@ void Knob::drawFunc()
         // ok, we have all of our data, send it to be converted to window coordinates
         // we are starting at our matrix position, so our object coordinates are all 0
         gluProject(0, 0, 0, modelMatrix, projMatrix, viewport, &winx0, &winy0, &winz0);
-        startX = (int)winx0; 
+        startX = static_cast<int>(winx0); 
         
         // we have our viewport, so make sure we subract our y from that to get an X,Y from top , left corner instead 
         // of bottom left corner
-        startY = (int)((GLdouble)viewport[3] - winy0);
+        startY = static_cast<int>(static_cast<GLdouble>(viewport[3]) - winy0);
         findStartTimer = 0;
     }
 }
@@ -213,10 +213,10 @@ void Knob::computeRotation()
         if (myDisplay->getDisplayOrientation() == BasicGL::Display::CCW90) angle = atan2f((float)posMoveX, (float)(posMoveY));
         else angle = atan2f((float)posMoveY, (float)-(posMoveX));
 
-        angle *= (LCreal) Basic::Angle::R2DCC; 
+        angle *= static_cast<LCreal>(Basic::Angle::R2DCC); 
 
         if (start) {
-            startAngle = (LCreal) degsRotation;
+            startAngle = static_cast<LCreal>(degsRotation);
             running = 0;
         }
         start = false;
@@ -255,7 +255,7 @@ void Knob::computeRotation()
             LCreal x = running + startAngle;
             if (x > maxX) x = maxX;
             if (x < minX) x = minX;
-            degsRotation = (int)x;
+            degsRotation = static_cast<int>(x);
             value = table->lfi(x);
             if (endless) {
                 LCreal minVal = 0, maxVal = 0;
@@ -266,11 +266,11 @@ void Knob::computeRotation()
                     degsRotation = 0;
                     startAngle = 0;
                 }
-            }                                   
+            }
         }
         else {
             value = running + startAngle;
-            degsRotation = (int)value;
+            degsRotation = static_cast<int>(value);
             // if we are endless, we have to do some more stuff
             if (endless) {
                 // first off, we are just using angle, we don't care about
@@ -299,8 +299,8 @@ void Knob::draw()
 {
     // rotate our knob!
     lcSaveMatrix();
-    if (endless) lcRotate(angle * (LCreal)Basic::Angle::D2RCC);
-    else lcRotate(-degsRotation * (LCreal)Basic::Angle::D2RCC);
+    if (endless) lcRotate(angle * static_cast<LCreal>(Basic::Angle::D2RCC));
+    else lcRotate(-degsRotation * static_cast<LCreal>(Basic::Angle::D2RCC));
     Graphic::draw();
     lcRestoreMatrix();
 }

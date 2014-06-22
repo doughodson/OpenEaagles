@@ -49,32 +49,32 @@ void AltitudeDial::updateData(const LCreal dt)
     LCreal alt = getInstValue();
     
     // send that data to the tape gauge
-    LCreal altTens = ((alt/100) - (int)(alt/100)) * 10;
-    LCreal altHundreds = ((alt/1000) - (int)(alt/1000)) * 10;
+    LCreal altTens = ((alt/100) - static_cast<int>(alt/100)) * 10;
+    LCreal altHundreds = ((alt/1000) - static_cast<int>(alt/1000)) * 10;
     // now figure out our ONE thousands!
     LCreal altOneThousands =  alt / 1000;
     // figure alt TEN thousands!
     LCreal altTenThousands = alt / 10000;
-    if (altOneThousands >= 10) altOneThousands = altOneThousands - (int)altTenThousands * 10;
+    if (altOneThousands >= 10) altOneThousands = altOneThousands - static_cast<int>(altTenThousands) * 10;
     // now figure the rest of the number
 //    int altRest = int(alt/99.9999);
     
-    if (altTens < 9) altHundreds = (LCreal)((int)altHundreds);
+    if (altTens < 9) altHundreds = static_cast<LCreal>(static_cast<int>(altHundreds));
     else {
-        LCreal x = altTens - (int) altTens;
-        altHundreds = (int)altHundreds + x;
+        LCreal x = altTens - static_cast<int>(altTens);
+        altHundreds = static_cast<int>(altHundreds) + x;
     } 
-    if (altHundreds < 9) altOneThousands = (LCreal)((int)altOneThousands);
+    if (altHundreds < 9) altOneThousands = static_cast<LCreal>(static_cast<int>(altOneThousands));
     else {
         // scale our hundreds value to lock with the tens
-        LCreal x = altHundreds - (int)altHundreds;
-        altOneThousands = (int)altOneThousands + x;
+        LCreal x = altHundreds - static_cast<int>(altHundreds);
+        altOneThousands = static_cast<int>(altOneThousands) + x;
     }
-    if (altOneThousands < 9) altTenThousands = (LCreal)((int)altTenThousands);
+    if (altOneThousands < 9) altTenThousands = static_cast<LCreal>(static_cast<int>(altTenThousands));
     else {
         // scale our hundreds value to lock with the tens
-        LCreal x = altOneThousands - (int)altOneThousands;
-        altTenThousands = (int)altTenThousands + x;
+        LCreal x = altOneThousands - static_cast<int>(altOneThousands);
+        altTenThousands = static_cast<int>(altTenThousands) + x;
     }
     
     // send our data to our components
@@ -96,8 +96,8 @@ bool AltitudeDial::figureRotation(const LCreal thisAlt)
     LCreal tenThousands = 0;
     
     tenThousands = thisAlt/10000;
-    thousands = (thisAlt/1000) - (int(thisAlt/10000)* 10);
-    hundreds = ((thisAlt - (int(thisAlt/1000) * 1000)) / 100);
+    thousands = (thisAlt/1000) - (static_cast<int>(thisAlt/10000)* 10);
+    hundreds = ((thisAlt - (static_cast<int>(thisAlt/1000) * 1000)) / 100);
 
     return true;
 }

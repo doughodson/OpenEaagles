@@ -397,8 +397,8 @@ bool DedFile::getFileHeaders( std::istream& in )
                   setLongitudeNE( cells[0]->longstart );
                   setLongitudeSW( cells[0]->longend );
                }
-               nptlat = (unsigned int)( cells[0]->nptlat  );
-               nptlong = (unsigned int)( cells[0]->nptlong );
+               nptlat = static_cast<unsigned int>( cells[0]->nptlat  );
+               nptlong = static_cast<unsigned int>( cells[0]->nptlong );
                latSpacing = cells[0]->deltalat  / NUM_SECS_PER_DEG_10;
                lonSpacing = cells[0]->deltalong / NUM_SECS_PER_DEG_10;
             }
@@ -542,12 +542,12 @@ void DedFile::dump(std::ostream& sout) const
       sout << " npt   = " << cells[0]->nptlat   << ", " << cells[0]->nptlong    << std::endl;
       sout << " d_ft  = " << cells[0]->deltax   << ", " << cells[0]->deltay     << std::endl;
 
-      for (unsigned int ix = 0; ix < (unsigned int)cells[0]->nptlong; ix++) {
+      for (unsigned int ix = 0; ix < static_cast<unsigned int>(cells[0]->nptlong); ix++) {
          sout << std::endl;
          sout << "ix = " << ix << std::endl << " ";
          unsigned int i = 0;
          const short* colm = columns[ix];
-         for (unsigned int iy = 0; iy < (unsigned int)cells[0]->nptlat; iy++) {
+         for (unsigned int iy = 0; iy < static_cast<unsigned int>(cells[0]->nptlat); iy++) {
             sout << " " << std::setw(6) << colm[iy];
             i++;
             if (i >= 10) {

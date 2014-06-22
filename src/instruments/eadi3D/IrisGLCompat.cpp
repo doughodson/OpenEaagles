@@ -37,14 +37,14 @@ EMPTY_DELETEDATA(IrisGLCompat)
 //------------------------------------------------------------------------------
 void IrisGLCompat::arc(float x, float y, float r, float startAng, float endAng)
 {
-    float ang = (float)(startAng * Basic::Angle::D2RCC);
-    float fraction = (float)((endAng - startAng) / 360.0);
-    int numPoints = (int) (((float) MAX_POINTS) * fraction);
-    float delta = (float)((2.0 * PI * fraction) / (float) numPoints);
+    float ang = static_cast<float>(startAng * Basic::Angle::D2RCC);
+    float fraction = static_cast<float>((endAng - startAng) / 360.0);
+    int numPoints = static_cast<int>((static_cast<float>(MAX_POINTS)) * fraction);
+    float delta = static_cast<float>((2.0 * PI * fraction) / static_cast<float>(numPoints));
     glBegin(GL_LINE_STRIP);
         for (int i = 0; i < numPoints+1; i++) {
-            float vy = (float)(sin(ang) * r + y);
-            float vx = (float)(cos(ang) * r + x);
+            float vy = static_cast<float>(sin(ang) * r + y);
+            float vx = static_cast<float>(cos(ang) * r + x);
             glVertex2f(vx, vy);
             ang += delta;
         }
@@ -56,10 +56,10 @@ void IrisGLCompat::arc(float x, float y, float r, float startAng, float endAng)
 //------------------------------------------------------------------------------
 void IrisGLCompat::arcf(float x, float y, float r, float startAng, float endAng)
 {
-    float ang = (float)(startAng * Basic::Angle::D2RCC);
-    float fraction = (float)((endAng - startAng) / 360.0);
-    int numPoints = (int) (((float) MAX_POINTS) * fraction);
-    float delta = (float)((2.0 * PI * fraction) / (float) numPoints);
+    float ang = static_cast<float>(startAng * Basic::Angle::D2RCC);
+    float fraction = static_cast<float>((endAng - startAng) / 360.0);
+    int numPoints = static_cast<int>((static_cast<float>(MAX_POINTS)) * fraction);
+    float delta = static_cast<float>((2.0 * PI * fraction) / static_cast<float>(numPoints));
     glBegin(GL_TRIANGLE_FAN);
         glVertex2f(x, y);
         for (int i = 0; i < numPoints+1; i++) {
@@ -77,7 +77,7 @@ void IrisGLCompat::arcf(float x, float y, float r, float startAng, float endAng)
 void IrisGLCompat::circ(float x, float y, float r)
 {
     float ang = 0.0;
-    float delta = (float)((2.0 * PI) / (float) MAX_POINTS);
+    float delta = static_cast<float>((2.0 * PI) / static_cast<float>(MAX_POINTS));
     glBegin(GL_LINE_LOOP);
         for (int i = 0; i < MAX_POINTS; i++) {
             float vy = sin(ang) * r + y;
@@ -94,7 +94,7 @@ void IrisGLCompat::circ(float x, float y, float r)
 void IrisGLCompat::circf(float x, float y, float r)
 {
     float ang = 0.0;
-    float delta = (float)((2.0 * PI) / (float) MAX_POINTS);
+    float delta = static_cast<float>((2.0 * PI) / static_cast<float>(MAX_POINTS));
     glBegin(GL_POLYGON);
         for (int i = 0; i < MAX_POINTS; i++) {
             float vy = sin(ang) * r + y;
@@ -111,7 +111,7 @@ void IrisGLCompat::circf(float x, float y, float r)
 void IrisGLCompat::washerf(float x, float y, float r1, float r2)
 {
     float ang = 0.0;
-    float delta = (float)((2.0 * PI) / (float) MAX_POINTS);
+    float delta = static_cast<float>((2.0 * PI) / static_cast<float>(MAX_POINTS));
     glBegin(GL_TRIANGLE_STRIP);
         for (int i = 0; i < MAX_POINTS+1; i++) {
             float s= sin(ang);

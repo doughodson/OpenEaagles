@@ -212,7 +212,7 @@ void Tape::updateData(const LCreal dt)
 
         // no max and min, we show everything!
         // now determine our thousands values
-        tempVal = ((LCreal)val / 1000);
+        tempVal = (static_cast<LCreal>(val) / 1000);
         //if (tempVal < 1 && !showNegative) numberValsThousVis[i] = 0;
         //else numberValsThousVis[i] = 0;
         numberValsThousVis[i] = vis;

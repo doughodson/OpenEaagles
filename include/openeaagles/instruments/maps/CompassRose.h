@@ -37,7 +37,7 @@ public:
     virtual bool setCentered(const bool newC);
     
     // Get function
-    LCreal getRotationDeg() const      { return rot * (LCreal) Basic::Angle::R2DCC; }
+    LCreal getRotationDeg() const      { return rot * static_cast<LCreal>(Basic::Angle::R2DCC); }
     LCreal getRotationRad() const      { return rot; }
     LCreal getCenteredRadius() const   { return cenRadius; }
     LCreal getDeCenteredRadius() const { return decRadius; }

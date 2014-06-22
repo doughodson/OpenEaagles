@@ -2085,9 +2085,9 @@ struct SimCoordinates {
    }
 
    friend std::ostream& operator << ( std::ostream& s, const SimCoordinates& v ) {
-      s  << "  lat:       " << (double)v.lat << std::endl
-         << "  lon:       " << (double)v.lon << std::endl
-         << "  alt:       " << (double)v.alt << std::endl;
+      s  << "  lat:       " << static_cast<double>(v.lat) << std::endl
+         << "  lon:       " << static_cast<double>(v.lon) << std::endl
+         << "  alt:       " << static_cast<double>(v.alt) << std::endl;
 
       return s;
    }

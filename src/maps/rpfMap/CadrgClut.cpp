@@ -215,7 +215,7 @@ void CadrgClut::load(CadrgFrameEntry& frame, int cib, ColorTableSizes clutSize)
                 fin.seekg(loc[1].physicalIdx + colorTblOff[i], std::ios::beg);
 
                 // 216 or 217
-                for (int j = 0; j < (int)numColRecs[i]; j++) {
+                for (int j = 0; j < static_cast<int>(numColRecs[i]); j++) {
                     // Image base reads mono byte value
                     if (cib) {
                         // Read mono byte value
@@ -315,7 +315,7 @@ void CadrgClut::load(CadrgFrameEntry& frame, int cib, ColorTableSizes clutSize)
                 fin.seekg(loc[1].physicalIdx + colorTblOff[0], std::ios::beg);
 
                 // Read the color/gray records:  32 or 33, or 16 or 17 color tables
-                for (int j = 0; j < (int)numColRecs[0]; j++) {
+                for (int j = 0; j < static_cast<int>(numColRecs[0]); j++) {
                     // rgb is rgba, size = 4
                     fin.read((char *) &rgb[j], sizeof(rgb[j]));
 

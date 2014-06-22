@@ -73,7 +73,6 @@ void DataFile::copyData(const DataFile& org, const bool cc)
 
 }
 
-
 //------------------------------------------------------------------------------
 // deleteData() -- delete this object's data
 //------------------------------------------------------------------------------
@@ -169,8 +168,8 @@ unsigned int DataFile::getElevations(
 
 
    // Upper limit points
-   double maxLatPoint = double(nptlat-1);
-   double maxLonPoint = double(nptlong-1);
+   double maxLatPoint = static_cast<double>(nptlat-1);
+   double maxLonPoint = static_cast<double>(nptlong-1);
 
    // Starting points
    double pointsLat = (lat - getLatitudeSW()) / latSpacing;
@@ -205,20 +204,20 @@ unsigned int DataFile::getElevations(
                // Yes ---
 
                // South-west corner post is [icol][irow]
-               unsigned int irow = (unsigned int) pointsLat;
-               unsigned int icol = (unsigned int) pointsLon;
+               unsigned int irow = static_cast<unsigned int>(pointsLat);
+               unsigned int icol = static_cast<unsigned int>(pointsLon);
                if (irow > (nptlat-2)) irow = (nptlat-2);
                if (icol > (nptlong-2)) icol = (nptlong-2);
 
                // delta from s-w corner post
-               LCreal deltaLat = (LCreal)(pointsLat - double(irow));
-               LCreal deltaLon = (LCreal)(pointsLon - double(icol));
+               LCreal deltaLat = static_cast<LCreal>(pointsLat - static_cast<double>(irow));
+               LCreal deltaLon = static_cast<LCreal>(pointsLon - static_cast<double>(icol));
 
                // Get the elevations at each corner
-               LCreal elevSW = (LCreal) columns[icol][irow];
-               LCreal elevNW = (LCreal) columns[icol][irow+1];
-               LCreal elevSE = (LCreal) columns[icol+1][irow];
-               LCreal elevNE = (LCreal) columns[icol+1][irow+1];
+               LCreal elevSW = static_cast<LCreal>(columns[icol][irow]);
+               LCreal elevNW = static_cast<LCreal>(columns[icol][irow+1]);
+               LCreal elevSE = static_cast<LCreal>(columns[icol+1][irow]);
+               LCreal elevNE = static_cast<LCreal>(columns[icol+1][irow+1]);
 
                // Interpolate the west point
                LCreal westPoint = elevSW + (elevNW - elevSW) * deltaLat;
@@ -234,13 +233,13 @@ unsigned int DataFile::getElevations(
                // No -- just use the nearest post
 
                // Nearest post
-               unsigned int irow = (unsigned int) (pointsLat + 0.5);
-               unsigned int icol = (unsigned int) (pointsLon + 0.5);
+               unsigned int irow = static_cast<unsigned int>(pointsLat + 0.5);
+               unsigned int icol = static_cast<unsigned int>(pointsLon + 0.5);
                if (irow >= nptlat) irow = (nptlat-1);
                if (icol >= nptlong) icol = (nptlong-1);
 
                // Get the elevation post at the current indices.
-               value = (LCreal) columns[icol][irow];
+               value = static_cast<LCreal>(columns[icol][irow]);
             }
 
             // Pass the elevation value and valid flag to the user's arrays
@@ -298,20 +297,20 @@ bool DataFile::getElevation(
       // Yes ---
 
       // South-west corner post is [icol][irow]
-      unsigned int irow = (unsigned int) pointsLat;
-      unsigned int icol = (unsigned int) pointsLon;
+      unsigned int irow = static_cast<unsigned int>(pointsLat);
+      unsigned int icol = static_cast<unsigned int>(pointsLon);
       if (irow > (nptlat-2)) irow = (nptlat-2);
       if (icol > (nptlong-2)) icol = (nptlong-2);
 
       // delta from s-w corner post
-      LCreal deltaLat = (LCreal)(pointsLat - double(irow));
-      LCreal deltaLon = (LCreal)(pointsLon - double(icol));
+      LCreal deltaLat = static_cast<LCreal>(pointsLat - static_cast<double>(irow));
+      LCreal deltaLon = static_cast<LCreal>(pointsLon - static_cast<double>(icol));
 
       // Get the elevations at each corner
-      LCreal elevSW = (LCreal) columns[icol][irow];
-      LCreal elevNW = (LCreal) columns[icol][irow+1];
-      LCreal elevSE = (LCreal) columns[icol+1][irow];
-      LCreal elevNE = (LCreal) columns[icol+1][irow+1];
+      LCreal elevSW = static_cast<LCreal>(columns[icol][irow]);
+      LCreal elevNW = static_cast<LCreal>(columns[icol][irow+1]);
+      LCreal elevSE = static_cast<LCreal>(columns[icol+1][irow]);
+      LCreal elevNE = static_cast<LCreal>(columns[icol+1][irow+1]);
 
       // Interpolate the west point
       LCreal westPoint = elevSW + (elevNW - elevSW) * deltaLat;
@@ -327,13 +326,13 @@ bool DataFile::getElevation(
       // No -- just use the nearest post
 
       // Nearest post
-      unsigned int irow = (unsigned int) (pointsLat + 0.5f);
-      unsigned int icol = (unsigned int) (pointsLon + 0.5f);
+      unsigned int irow = static_cast<unsigned int>(pointsLat + 0.5f);
+      unsigned int icol = static_cast<unsigned int>(pointsLon + 0.5f);
       if (irow >= nptlat) irow = (nptlat-1);
       if (icol >= nptlong) icol = (nptlong-1);
 
       // Get the elevation post at the current indices.
-      value = (LCreal) columns[icol][irow];
+      value = static_cast<LCreal>(columns[icol][irow]);
    }
 
    // ---
@@ -361,7 +360,7 @@ bool DataFile::computerRowIndex(unsigned int* const irow, const double lat) cons
    double points = (lat - getLatitudeSW()) / latSpacing;
    if (points < 0) points = 0; 
 
-   unsigned int idx = (unsigned int)(points + 0.5);
+   unsigned int idx = static_cast<unsigned int>(points + 0.5);
    if (idx >= nptlat) idx = (nptlat-1);
 
    *irow = idx;
@@ -385,7 +384,7 @@ bool DataFile::computeColumnIndex(unsigned int* const icol, const double lon) co
    double points = (lon - getLongitudeSW()) / lonSpacing;
    if (points < 0) points = 0;
 
-   unsigned int idx = (unsigned int) (points + 0.5);
+   unsigned int idx = static_cast<unsigned int>(points + 0.5);
    if (idx >= nptlong) idx = (nptlong-1);
 
    *icol = idx;
@@ -404,7 +403,7 @@ bool DataFile::computeLatitude(double* const lat, const unsigned int irow) const
          !isDataLoaded()      // the data isn't loaded
       ) return false;
 
-   *lat = getLatitudeSW() + double(irow) * latSpacing;
+   *lat = getLatitudeSW() + static_cast<double>(irow) * latSpacing;
    return true;
 }
 
@@ -420,7 +419,7 @@ bool DataFile::computeLongitude(double* const lon, const unsigned int icol) cons
          !isDataLoaded()      // the data isn't loaded
       ) return false;
 
-   *lon = getLongitudeSW() + double(icol) * lonSpacing;
+   *lon = getLongitudeSW() + static_cast<double>(icol) * lonSpacing;
    return true;
 }
 

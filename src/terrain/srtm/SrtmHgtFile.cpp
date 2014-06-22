@@ -141,7 +141,7 @@ bool SrtmHgtFile::loadData()
     in.seekg(0, std::ios::end);
     std::streamoff byteSize = in.tellg();
     in.seekg(0, std::ios::beg);
-    int nameSize = (int)srtmFilename.size();
+    int nameSize = static_cast<int>(srtmFilename.size());
     if (nameSize < 11 || !determineSrtmInfo(srtmFilename.substr(nameSize - 11, 11), byteSize))
     {
         clearData();

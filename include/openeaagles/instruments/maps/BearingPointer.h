@@ -30,7 +30,7 @@ public:
     
     // get function    
     LCreal getBearingRad() const { return bearing; } // radians
-    LCreal getBearingDeg() const { return bearing * (LCreal) Basic::Angle::R2DCC; }    // degrees  
+    LCreal getBearingDeg() const { return bearing * static_cast<LCreal>(Basic::Angle::R2DCC); }    // degrees
     BasicGL::Graphic* getHeadGraphic() const { return head; }
     BasicGL::Graphic* getTailGraphic() const { return tail; }
     

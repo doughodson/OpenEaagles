@@ -274,13 +274,13 @@ void MapDrawer::drawFunc()
             // Take the distance in nautical miles, and then convert to degrees
             LCreal quickRange = getRange();
             LCreal disDegN = quickRange / 60.0f;
-            LCreal disDegE = (LCreal)(quickRange / (60.0 * getCosRefLat()));
+            LCreal disDegE = static_cast<LCreal>(quickRange / (60.0 * getCosRefLat()));
             // Get the space (in latitude degrees) between each pixel
             CadrgTocEntry* te = pagers[CENTER_PAGER]->getToc();
             LCreal n = 1, e = 1;
             if (te != 0) {
-                n = (LCreal)te->getVertInterval();
-                e = (LCreal)te->getHorizInterval();
+                n = static_cast<LCreal>(te->getVertInterval());
+                e = static_cast<LCreal>(te->getHorizInterval());
             }
 
             // OK, so we know how far we want to look out (disDeg, and how far it is per pixel, so we can find
@@ -290,7 +290,7 @@ void MapDrawer::drawFunc()
 
             // Scale our viewport by the ratio of our map page to our actual ortho, to make our background map fit into our range circle
             LCreal rad = getOuterRadius();
-            LCreal radRatio = (LCreal)(dTop / rad);
+            LCreal radRatio = static_cast<LCreal>(dTop / rad);
             vpHL *= radRatio;
             vpWL *= radRatio;
 
@@ -387,8 +387,8 @@ void MapDrawer::drawMap(const int zone, const int idx)
             if (!nu) {
                 GLfloat hdg = (GLfloat) getHeadingDeg();
                 glRotatef(hdg, 0.0f, 0.0f, 1.0f);
-                sinAng = (LCreal)lcSin(hdg * (LCreal)Basic::Angle::D2RCC);
-                cosAng = (LCreal)lcCos(hdg * (LCreal)Basic::Angle::D2RCC);
+                sinAng = static_cast<LCreal>(lcSin(hdg * static_cast<LCreal>(Basic::Angle::D2RCC)));
+                cosAng = static_cast<LCreal>(lcCos(hdg * static_cast<LCreal>(Basic::Angle::D2RCC)));
             }
 
             // Translate down the pixels first
@@ -449,10 +449,10 @@ void MapDrawer::drawTexture(const int row, const int column, const int idx)
             glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 
 
-            LCreal transX = (LCreal) column * pixPerTile * scalingEast[idx];
-            LCreal transY = (LCreal) -row * pixPerTile * scalingNorth[idx];
+            LCreal transX = static_cast<LCreal>(column * pixPerTile * scalingEast[idx]);
+            LCreal transY = static_cast<LCreal>(-row * pixPerTile * scalingNorth[idx]);
             glPushMatrix();
-                glTranslatef(GLfloat(transX), GLfloat(transY), 0.0f);
+                glTranslatef(static_cast<GLfloat>(transX), static_cast<GLfloat>(transY), 0.0f);
                 glBegin(GL_POLYGON);
                     glTexCoord2f(0.0f, 0.0f); lcVertex2(0.0f, -pixPerTile * scalingNorth[idx]);
                     glTexCoord2f(1.0f, 0.0f); lcVertex2(pixPerTile * scalingEast[idx], -pixPerTile * scalingNorth[idx]);

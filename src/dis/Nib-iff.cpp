@@ -198,9 +198,9 @@ bool Nib::isIffUpdateRequired(const LCreal curExecTime, const Simulation::Iff* c
 
       // Parameter 5 - Mode C
       opData.param5 = 0;
-      LCreal alt100 = (LCreal) ((getPlayer()->getAltitudeFt() + 50.0) / 100.0);
+      LCreal alt100 = static_cast<LCreal>((getPlayer()->getAltitudeFt() + 50.0) / 100.0);
       if (alt100 < 0) { alt100 = -alt100; opData.param5 = MODE_C_ALT_NEG; }
-      unsigned short ialt = (unsigned short) alt100;
+      unsigned short ialt = static_cast<unsigned short>(alt100);
       opData.param5 = (opData.param5 | (ialt << 1));  // alt shifted left one bit
       if (iffSystem->isEnabledModeC()) {
          opData.param5 = (opData.param5 | MODE_ON);

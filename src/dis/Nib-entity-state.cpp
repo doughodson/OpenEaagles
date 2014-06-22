@@ -22,6 +22,7 @@
 #include "openeaagles/basic/PairStream.h"
 
 #include <cstdio>
+#include <cmath>
 
 // Disable all deprecation warnings for now.  Until we fix them,
 // they are quite annoying to see over and over again...
@@ -49,8 +50,8 @@ void Nib::entityStatePdu2Nib(const EntityStatePDU* const pdu)
    Simulation::Simulation* sim = disIO->getSimulation();
 
    // Mark the current time
-   setTimeExec( (LCreal) sim->getExecTimeSec() );
-   setTimeUtc( (LCreal) sim->getSysTimeOfDay() );
+   setTimeExec( static_cast<LCreal>(sim->getExecTimeSec()) );
+   setTimeUtc( static_cast<LCreal>(sim->getSysTimeOfDay()) );
 
    // Player's ID, site and application codes
    setPlayerID( pdu->entityID.ID );
@@ -111,11 +112,11 @@ void Nib::entityStatePdu2Nib(const EntityStatePDU* const pdu)
           currentTime = getTimeUtc();
       }
       currentTime = fmod(currentTime, 3600.0);      // just get seconds after the hour
-      double timeStamp = ((double) (disTimeStamp >> 1)) * 3600.0 / ((double) 0x7fffffff);
+      double timeStamp = (static_cast<double>(disTimeStamp >> 1)) * 3600.0 / (static_cast<double>(0x7fffffff));
       double relTimeStamp = timeStamp + timeOffset;
       double diffTime = currentTime - relTimeStamp;
 
-      if (fabs(diffTime) > 0.1) {     // If we get ahead of ourselves, or first pass
+      if (std::fabs(diffTime) > 0.1) {     // If we get ahead of ourselves, or first pass
           timeOffset = currentTime - timeStamp;
           relTimeStamp = currentTime;
           diffTime = 0.0;
@@ -309,7 +310,7 @@ void Nib::processArticulationParameters(const EntityStatePDU* const pdu)
                         unsigned int s = 0;
                         Basic::Pair* pair = (Basic::Pair*) item->getValue();
                         const Basic::Identifier* slot = pair->slot();
-                        if (slot->isNumber()) s = (unsigned int) slot->getNumber();
+                        if (slot->isNumber()) s = static_cast<unsigned int>(slot->getNumber());
                         if (s == sta) {
                            wpn = (Simulation::Weapon*) pair->object();  // Found it
                         }

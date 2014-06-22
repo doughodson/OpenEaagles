@@ -31,7 +31,7 @@ public:
     // get functions
     LCreal getPitchInches() const       { return scaledPitch; }
     LCreal getPitch() const             { return getPreScaleInstValue(); }
-    LCreal getRollDeg() const           { return curPhi * (LCreal) Basic::Angle::R2DCC; }
+    LCreal getRollDeg() const           { return curPhi * static_cast<LCreal>(Basic::Angle::R2DCC); }
     LCreal getRollRad() const           { return curPhi; }
     LCreal getMaxRate() const           { return maxRate; }
 

@@ -12,8 +12,8 @@ EMPTY_SERIALIZER(Eadi3DFont)
 #define YSCALE (1.0/6.0)
 
 // Default font sizes
-const LCreal defaultFontWidth = (LCreal)(6.0f * XSCALE);
-const LCreal defaultFontHeight = (LCreal)(7.0f * YSCALE);
+const LCreal defaultFontWidth = static_cast<LCreal>(6.0f * XSCALE);
+const LCreal defaultFontHeight = static_cast<LCreal>(7.0f * YSCALE);
 
 //------------------------------------------------------------------------------
 // Constructor(s)
@@ -712,7 +712,7 @@ static float strokeFont[][1+MAX_STROKES*3] = {
 GLenum Eadi3DFont::createEadi3DFont(GLuint fontBase)
 {
     for (GLint i = 0; strokeFont[i][0] != END_OF_LIST; i++) {
-        glNewList(fontBase+(unsigned int)strokeFont[i][0], GL_COMPILE);
+        glNewList(fontBase+static_cast<unsigned int>(strokeFont[i][0]), GL_COMPILE);
         for (GLint j = 1; strokeFont[i][j]; j += 3) {
             GLint mode = (GLint) strokeFont[i][j];
             if (mode == FONT_BEGIN) {

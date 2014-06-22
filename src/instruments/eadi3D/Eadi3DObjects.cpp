@@ -553,14 +553,14 @@ void Eadi3DObjects::makeGlobe(void)
             glColor3fv(WHITE);
             for (float a = -20.0; a >= -60.0; a -= 20.0) {
                 float bAngle = a;
-                float s = (float)sin(a * Basic::Angle::D2RCC);
-                float c = (float)cos(a * Basic::Angle::D2RCC);
+                float s = static_cast<float>(sin(a * Basic::Angle::D2RCC));
+                float c = static_cast<float>(cos(a * Basic::Angle::D2RCC));
                 drawArrow(bAngle, s, c);
                 drawArrow(-bAngle, s, -c);
             }
             float bAngle = -80.0;
-            float s = (float)sin(-80.0 * Basic::Angle::D2RCC);
-            float c = (float)cos(-80.0 * Basic::Angle::D2RCC);
+            float s = static_cast<float>(sin(-80.0 * Basic::Angle::D2RCC));
+            float c = static_cast<float>(cos(-80.0 * Basic::Angle::D2RCC));
             drawArrow2(bAngle, s, c);
             drawArrow2(-bAngle, s, -c);
         }
@@ -569,16 +569,16 @@ void Eadi3DObjects::makeGlobe(void)
         glColor3fv(WHITE);
         glPushMatrix();
             glRotatef(90.0f, 1.0f, 0.0f, 0.0f);
-            float s = (float)sin(-90.0 * Basic::Angle::D2RCC);
-            float c = (float)cos(-85.0 * Basic::Angle::D2RCC);
+            float s = static_cast<float>(sin(-90.0 * Basic::Angle::D2RCC));
+            float c = static_cast<float>(cos(-85.0 * Basic::Angle::D2RCC));
             glPushMatrix();
         glTranslatef(0.0f, 0.0f, -s * radius);
         irisgl.circf(0.0f, 0.0f, c * radius);
         glPopMatrix();
         glLineWidth(2.0);
         for (float a = -80.0; a <= 80.0; a += 10.0) {
-            s = (float)sin(a * Basic::Angle::D2RCC);
-            c = (float)cos(a * Basic::Angle::D2RCC);
+            s = static_cast<float>(sin(a * Basic::Angle::D2RCC));
+            c = static_cast<float>(cos(a * Basic::Angle::D2RCC));
             glPushMatrix();
             glTranslatef(0.0, 0.0, -s * radius);
             glColor3fv(WHITE);
@@ -593,9 +593,9 @@ void Eadi3DObjects::makeGlobe(void)
 
                     for (int j = 0; j < 4; j++) {
                         glPushMatrix();
-                        glTranslatef(-0.15f, (float)(-0.09375 * c), (float)(c * radius + 0.09375 * s));
+                        glTranslatef(-0.15f, static_cast<float>(-0.09375 * c), static_cast<float>(c * radius + 0.09375 * s));
                         glRotatef(-a, 1.0, 0.0, 0.0);
-                        glCallList(base + ((unsigned int) (fabs(a) / 10.)));
+                        glCallList(base + ( static_cast<unsigned int>(fabs(a) / 10.)));
                         glTranslatef(0.1929f, 0.0f, 0.0f);
                         glCallList(base+FONT_0);
                         glPopMatrix();
@@ -610,8 +610,8 @@ void Eadi3DObjects::makeGlobe(void)
             }
             glPopMatrix();
         }
-        s = (float)sin(90.0 * Basic::Angle::D2RCC);
-        c = (float)cos(85.0 * Basic::Angle::D2RCC);
+        s = static_cast<float>(sin(90.0 * Basic::Angle::D2RCC));
+        c = static_cast<float>(cos(85.0 * Basic::Angle::D2RCC));
         glPushMatrix();
             glTranslatef(0., 0., -s * radius);
             irisgl.circf(0.0, 0.0, c * radius);

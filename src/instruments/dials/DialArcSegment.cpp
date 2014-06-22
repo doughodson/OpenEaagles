@@ -124,8 +124,8 @@ void DialArcSegment::drawFunc()
     GLint curSlices = getSlices();
     // our slice amount should go up as we get more of a sweep, if not, it will 
     // look funny.  Pretty much one slice per degree sweep
-    LCreal y = lcAbs((LCreal)sweepAngle);
-    curSlices = curSlices + GLint(y * 0.05f);    
+    LCreal y = lcAbs(static_cast<LCreal>(sweepAngle));
+    curSlices = curSlices + static_cast<GLint>(y * 0.05f);    
 
     // draw our arc
     glPushMatrix();

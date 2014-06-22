@@ -108,7 +108,7 @@ void Adi::updateData(const LCreal dt)
 bool Adi::setSlotMaxRate(const Basic::Angle* const newMR)
 {
     bool ok = false;
-    if (newMR != 0) ok = setMaxRate( (LCreal) Basic::Degrees::convertStatic(*newMR) );
+    if (newMR != 0) ok = setMaxRate( static_cast<LCreal>(Basic::Degrees::convertStatic(*newMR)) );
     return ok;
 }
 //------------------------------------------------------------------------------
@@ -165,7 +165,7 @@ bool Adi::onUpdateMaxRateAdi(const Basic::Number* const newMR)
 //------------------------------------------------------------------------------
 bool Adi::setRollDeg(const LCreal newR) 
 {
-    roll = newR * (LCreal) Basic::Angle::D2RCC;
+    roll = newR * static_cast<LCreal>(Basic::Angle::D2RCC);
     return true;
 }
 //------------------------------------------------------------------------------
