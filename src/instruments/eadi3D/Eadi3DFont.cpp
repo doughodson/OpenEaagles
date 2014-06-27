@@ -64,7 +64,7 @@ void Eadi3DFont::outputText(const double x, const double y, const char* txt, con
     // output the text
     glPushMatrix();
     glTranslated(x,y,0.0);
-    glScalef(GLfloat(getFontWidth()), GLfloat(getFontHeight()), 1.0f);
+    glScalef(static_cast<GLfloat>(getFontWidth()), static_cast<GLfloat>(getFontHeight()), 1.0f);
     if (vf) {
         // Vertical text
         char cc[2];
@@ -110,7 +110,7 @@ void Eadi3DFont::outputText(const char* txt, const int n, const bool vf, const b
 
     // output and scale the text
     glPushMatrix();
-    glScalef(GLfloat(getFontWidth()), GLfloat(getFontHeight()), 1.0f);
+    glScalef(static_cast<GLfloat>(getFontWidth()), static_cast<GLfloat>(getFontHeight()), 1.0f);
     if (vf) {
         // Vertical text
         char cc[2];

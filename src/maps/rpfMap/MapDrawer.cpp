@@ -374,7 +374,7 @@ void MapDrawer::drawMap(const int zone, const int idx)
                 LCreal dis = getOuterRadius();
                 //LCreal scale = getScale();
                 LCreal myScale = vpHL / dis;
-                glTranslatef(0, GLfloat(getDisplacement() * myScale), 0);
+                glTranslatef(0, static_cast<GLfloat>(getDisplacement() * myScale), 0);
             }
             glTranslatef(0, 0, -0.1f);
             sinAng = 0.0f;
@@ -470,7 +470,7 @@ void MapDrawer::drawTexture(const int row, const int column, const int idx)
 void MapDrawer::goDrawGrid(const int row, const int column, const int idx)
 {
     glPushMatrix();
-        glTranslatef(GLfloat(column * pixPerTile), GLfloat(-row * pixPerTile), 0.5f);
+        glTranslatef(static_cast<GLfloat>(column * pixPerTile), static_cast<GLfloat>(-row * pixPerTile), 0.5f);
         glColor3f(1,0,0);
         glLineWidth(2.0);
         glBegin(GL_LINE_LOOP);

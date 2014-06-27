@@ -80,7 +80,7 @@ void GMeterDial::drawFunc()
     // actual G's
     glPushMatrix();
         glColor3f(1.0f, 1.0f, 1.0f);
-        glRotatef(GLfloat(rotation), 0.0f, 0.0f, 1.0f);
+        glRotatef(static_cast<GLfloat>(rotation), 0.0f, 0.0f, 1.0f);
         glBegin(GL_POLYGON);
             glVertex2f(0.0f, -0.05f);
             glVertex2f(0.0f, 0.05f);
@@ -90,7 +90,7 @@ void GMeterDial::drawFunc()
     // Max G's
     glPushMatrix();
         glColor3f(0.9f, 0.9f, 0.9f);
-        glRotatef(GLfloat(maxG), 0.0f, 0.0f, 1.0f);
+        glRotatef(static_cast<GLfloat>(maxG), 0.0f, 0.0f, 1.0f);
         glBegin(GL_POLYGON);
             glVertex2f(0.0f, -0.05f);
             glVertex2f(0.0f, 0.05f);
@@ -100,7 +100,7 @@ void GMeterDial::drawFunc()
     // Min G's 
     glPushMatrix();
         glColor3f(0.8f, 0.8f, 0.8f);
-        glRotatef(GLfloat(minG), 0.0f, 0.0f, 1.0f);
+        glRotatef(static_cast<GLfloat>(minG), 0.0f, 0.0f, 1.0f);
         glBegin(GL_POLYGON);
             glVertex2f(0.0f, -0.05f);
             glVertex2f(0.0f, 0.05f);

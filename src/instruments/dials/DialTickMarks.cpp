@@ -73,10 +73,10 @@ void DialTickMarks::drawFunc()
     
     glPushMatrix();
         // rotate to our start angle
-        glRotatef(GLfloat(-startAngle), 0, 0, 1);
+        glRotatef(static_cast<GLfloat>(-startAngle), 0, 0, 1);
         for (int i = 0; i < quantity + 1; i++) {  
             // if we have a graphic, draw that, else we draw a line
-            if (myGraphic == 0) {      
+            if (myGraphic == 0) {
                 glBegin(GL_LINES);
                     lcVertex2(0, tRadius);
                     lcVertex2(0, tRadius - length);
@@ -88,7 +88,7 @@ void DialTickMarks::drawFunc()
                     myGraphic->draw();
                 myGraphic->lcRestoreMatrix();
             }
-            glRotatef(GLfloat(-rotation), 0, 0, 1);
+            glRotatef(static_cast<GLfloat>(-rotation), 0, 0, 1);
         }
     glPopMatrix();
     

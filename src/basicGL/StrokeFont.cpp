@@ -75,7 +75,7 @@ void StrokeFont::outputText(const double x, const double y, const char* txt, con
     glGetFloatv(GL_LINE_WIDTH, &lw);
     glLineWidth(2.0f);
     glTranslated(x,y,0.0);
-    glScalef(GLfloat(getFontWidth()), GLfloat(getFontHeight()), 1.0f);
+    glScalef(static_cast<GLfloat>(getFontWidth()), static_cast<GLfloat>(getFontHeight()), 1.0f);
     if (vf) {
         // Vertical text
         char cc[2];
@@ -122,7 +122,7 @@ void StrokeFont::outputText(const char* txt, const int n, const bool vf, const b
     GLfloat lw = 0;
     glGetFloatv(GL_LINE_WIDTH, &lw);
     glLineWidth(2.0f);
-    glScalef(GLfloat(getFontWidth()), GLfloat(getFontHeight()), 1.0f);
+    glScalef(static_cast<GLfloat>(getFontWidth()), static_cast<GLfloat>(getFontHeight()), 1.0f);
     if (vf) {
         // Vertical text
         char cc[2];

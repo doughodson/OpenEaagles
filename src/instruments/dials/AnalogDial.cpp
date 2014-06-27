@@ -80,14 +80,14 @@ void AnalogDial::drawFunc()
     glPushMatrix();
         // move us just slightly into the background, so things will overlay us
         glTranslatef(0, 0, -0.1f);
-        if (isMobile) glRotatef( GLfloat(-positionAngle), 0, 0, 1);
+        if (isMobile) glRotatef( static_cast<GLfloat>(-positionAngle), 0, 0, 1);
         // draw our background
         GLUquadricObj *qobj = gluNewQuadric();
         gluQuadricDrawStyle(qobj, GLU_FILL);
         // if we are a semi-circle, we ignore our start and sweep angles, and draw a semicircle
         gluPartialDisk(qobj, 0.0,  radius, slices, 1, originAngle, sweepAngle);
-        gluDeleteQuadric(qobj);    
-    glPopMatrix();    
+        gluDeleteQuadric(qobj);
+    glPopMatrix();
         
     glColor4fv(ocolor);
 }

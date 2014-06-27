@@ -156,7 +156,7 @@ void BitmapFont::loadFont()
         GLubyte* bitmap = loadTypeFace(i, reverse);
         if (bitmap == 0) continue;
 
-        GLfloat xmove = GLfloat(getBitmapWidth());
+        GLfloat xmove = static_cast<GLfloat>(getBitmapWidth());
         GLfloat ymove = 0.0;
 
         glNewList(getBase()+i, GL_COMPILE);

@@ -422,31 +422,32 @@ void Graphic::setupMaterial()
 
         // set our ambient color
         osg::Vec4 amb = tempMat->getAmbientColor();
-        GLfloat temp[4] = { GLfloat(amb.x()), GLfloat(amb.y()), GLfloat(amb.z()), GLfloat(amb.w()) };
+        GLfloat temp[4] = { static_cast<GLfloat>(amb.x()), static_cast<GLfloat>(amb.y()),
+                            static_cast<GLfloat>(amb.z()), static_cast<GLfloat>(amb.w()) };
         glMaterialfv(GL_FRONT, GL_AMBIENT, temp);
 
         osg::Vec4 dif = tempMat->getDiffuseColor();
         // now set the diffuse color
-        temp[0] = GLfloat(dif.x());
-        temp[1] = GLfloat(dif.y());
-        temp[2] = GLfloat(dif.z());
-        temp[3] = GLfloat(dif.w());
+        temp[0] = static_cast<GLfloat>(dif.x());
+        temp[1] = static_cast<GLfloat>(dif.y());
+        temp[2] = static_cast<GLfloat>(dif.z());
+        temp[3] = static_cast<GLfloat>(dif.w());
         glMaterialfv(GL_FRONT, GL_DIFFUSE, temp);
 
         // now emissive
         osg::Vec4 emis = tempMat->getEmissiveColor();
-        temp[0] = GLfloat(emis.x());
-        temp[1] = GLfloat(emis.y());
-        temp[2] = GLfloat(emis.z());
-        temp[3] = GLfloat(emis.w());
+        temp[0] = static_cast<GLfloat>(emis.x());
+        temp[1] = static_cast<GLfloat>(emis.y());
+        temp[2] = static_cast<GLfloat>(emis.z());
+        temp[3] = static_cast<GLfloat>(emis.w());
         glMaterialfv(GL_FRONT, GL_EMISSION, temp);
 
         // now specular
         osg::Vec4 spec = tempMat->getSpecularColor();
-        temp[0] = GLfloat(spec.x());
-        temp[1] = GLfloat(spec.y());
-        temp[2] = GLfloat(spec.z());
-        temp[3] = GLfloat(spec.w());
+        temp[0] = static_cast<GLfloat>(spec.x());
+        temp[1] = static_cast<GLfloat>(spec.y());
+        temp[2] = static_cast<GLfloat>(spec.z());
+        temp[3] = static_cast<GLfloat>(spec.w());
         glMaterialfv(GL_FRONT, GL_SPECULAR, temp);
 
         // now shininess
@@ -495,7 +496,8 @@ void Graphic::draw()
     bool haveMaterial = false;
     GLfloat oldPos[4];
     if (lightMoved) {
-        GLfloat temp[4] = { GLfloat(lightPos.x()), GLfloat(lightPos.y()), GLfloat(lightPos.z()), GLfloat(lightPos.w()) };
+        GLfloat temp[4] = { static_cast<GLfloat>(lightPos.x()), static_cast<GLfloat>(lightPos.y()),
+                            static_cast<GLfloat>(lightPos.z()), static_cast<GLfloat>(lightPos.w()) };
         // get our old position first
         glGetLightfv(GL_LIGHT0, GL_POSITION, oldPos);
         glLightfv(GL_LIGHT0, GL_POSITION, temp);
