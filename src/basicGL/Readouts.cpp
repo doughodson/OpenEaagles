@@ -1474,10 +1474,6 @@ EMPTY_COPYDATA(Rotary)
 EMPTY_DELETEDATA(Rotary)
 EMPTY_SERIALIZER(Rotary)
 
-// Event handler for Rotary events
-BEGIN_EVENT_HANDLER(Rotary)
-END_EVENT_HANDLER()
-
 //------------------------------------------------------------------------------
 // Class support functions
 //------------------------------------------------------------------------------

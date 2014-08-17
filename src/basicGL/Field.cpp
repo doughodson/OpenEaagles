@@ -602,8 +602,8 @@ bool Field::setSlotHighlight(const Basic::Number* const shobj)
             setDisplayMode(highlight1);
         }
         else {
-            setDisplayMode(highlight);
-            setDisplayMode(highlight1);
+            clearDisplayMode(highlight);
+            clearDisplayMode(highlight1);
         }
 
         Basic::PairStream* subcomponents = getComponents();

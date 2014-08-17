@@ -412,9 +412,6 @@ public:
    // BasicGL::Graphic interface
    virtual void draw();
 
-   // Basic::Component interface
-   virtual bool event(const int key, Object* const obj = 0);
-
 private:
     // this flag tells us our components need to be pre-drawn (to avoid flicker)
     bool preDrawSelectList;

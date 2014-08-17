@@ -37,7 +37,10 @@ END_SLOT_MAP()
 Tape::Tape()
 {
     STANDARD_CONSTRUCTOR()
+
     transTapeGraphicSD.empty();
+    transTapeGraphicVSD.empty();
+
     for (int i = 0; i < MAX_NUMBERS; i++) {
         numberValsHunds[i] = 0;
         numberValsHundsVis[i] = 1;
@@ -66,11 +69,27 @@ void Tape::copyData(const Tape& org, const bool)
     // Copy our baseclass stuff first
     BaseClass::copyData(org);
 
+    transTapeGraphicSD.empty();
+    transTapeGraphicVSD.empty();
+
+    for (int i = 0; i < MAX_NUMBERS; i++) {
+        numberValsHunds[i] = org.numberValsHunds[i];
+        numberValsHundsVis[i] = org.numberValsHundsVis[i];
+        numberValsThous[i] = org.numberValsThous[i];
+        numberValsThousVis[i] = org.numberValsThousVis[i];
+        numberValsHundsSD[i].empty();
+        numberValsHundsVisSD[i].empty();
+        numberValsThousSD[i].empty();
+        numberValsThousVisSD[i].empty();
+    }
+
     range = org.range;
     height = org.height;
     increment = org.increment;
-    transTapeGraphicSD.empty();
     vertical = org.vertical;
+    maxNum = org.maxNum;
+    minNum = org.minNum;
+    convert = org.convert;
 }
 
 //------------------------------------------------------------------------------

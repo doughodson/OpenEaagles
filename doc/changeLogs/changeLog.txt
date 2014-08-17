@@ -34,6 +34,13 @@ basic
       1) Adding more explicit "std" namespace qualifiers and reducing the number
          of includes (e.g., cstdio, cstdlib, string)
 
+   Field class
+      1) setSlotHighlight() -- (bug fix) when clearing the highlight mode, now calling
+         the proper clearDisplayMode() function
+
+   Rotary class
+      1) Removed the unused event() handler.
+
    TcpHandler class
       1) recvData() was modified to check for closed connection or errors.
 
@@ -54,6 +61,14 @@ dis
 
 --------------------------------------------------------------------------------
 gui-glut
+
+
+--------------------------------------------------------------------------------
+Instruments
+
+   Tape class
+      1) copyData() now properly copies all of the class member variables.
+
 
 --------------------------------------------------------------------------------
 maps
