@@ -76,6 +76,15 @@ void Bullet::deleteData()
 }
 
 //------------------------------------------------------------------------------
+// shutdownNotification()
+//------------------------------------------------------------------------------
+bool Bullet::shutdownNotification()
+{
+   setHitPlayer(0);
+   return BaseClass::shutdownNotification();
+}
+
+//------------------------------------------------------------------------------
 // reset() -- Reset parameters
 //------------------------------------------------------------------------------
 void Bullet::reset()
@@ -385,6 +394,18 @@ void Gun::copyData(const Gun& org, const bool cc)
 
 void Gun::deleteData()
 {
+   setBulletType(0);
+}
+
+bool Gun::shutdownNotification()
+{
+   if (bullet != 0) {
+      bullet->event(SHUTDOWN_EVENT);
+      bullet->unref();
+      bullet = 0;
+   }
+
+   return BaseClass::shutdownNotification();
 }
 
 //------------------------------------------------------------------------------

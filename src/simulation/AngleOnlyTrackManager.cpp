@@ -92,6 +92,15 @@ void AngleOnlyTrackManager::deleteData()
 }
 
 //------------------------------------------------------------------------------
+// shutdownNotification()
+//------------------------------------------------------------------------------
+bool AngleOnlyTrackManager::shutdownNotification()
+{
+   clearTracksAndQueues();
+   return BaseClass::shutdownNotification();
+}
+
+//------------------------------------------------------------------------------
 // clearTracksAndQueues() -- Clear all tracks and queues
 //------------------------------------------------------------------------------
 void AngleOnlyTrackManager::clearTracksAndQueues()

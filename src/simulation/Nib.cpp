@@ -189,8 +189,20 @@ bool Nib::shutdownNotification()
 {
     setPlayer(0);
     setNetIO(0);
+    setTypeMapper(0);
 
-    return BaseClass::shutdownNotification();
+    // Clear attached missiles
+   for (unsigned int i = 0; i < MAX_AMSL; i++) {
+      if (apartMsl[i] != 0) {
+         apartMsl[i]->unref();
+         apartMsl[i] = 0;
+         apartMslCnt[i] = 0;
+         apartMslAttached[i] = false;
+      }
+   }
+   apartNumMissiles = 0;
+
+   return BaseClass::shutdownNotification();
 }
 
 //------------------------------------------------------------------------------

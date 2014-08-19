@@ -27,6 +27,9 @@ general
       optimizations because it knows the value will never change after initial assignment.
       No functional changes to the API or bugs have been found or resolved as a result of
       this activity - again, this effort is a result of adopting better coding practices.
+
+   5) Added the shutdownNotification() function to more of the simulation classes.
+
 --------------------------------------------------------------------------------
 basic
 
@@ -51,6 +54,9 @@ dis
    NetIO class
       1) processElectromagneticEmissionPDU() -- changed to only attempt to process
       the PDU if there were handlers provided.
+
+   Nib class
+      1) Added the shutdownNotification() function.
 
 --------------------------------------------------------------------------------
 gui-glut

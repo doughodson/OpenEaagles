@@ -558,6 +558,25 @@ void Player::deleteData()
 }
 
 //------------------------------------------------------------------------------
+// shutdownNotification()
+//------------------------------------------------------------------------------
+bool Player::shutdownNotification()
+{
+   if (nib != 0) nib->event(SHUTDOWN_EVENT);
+   if (nibList != 0) {
+      for (unsigned int i = 0; i < NetIO::MAX_NETWORD_ID; i++) {
+         if (nibList[i] != 0) nibList[i]->event(SHUTDOWN_EVENT);
+      }
+   }
+
+   for (unsigned int i = 0; i < MAX_RF_REFLECTIONS; i++) {
+      if (rfReflect[i] != 0) { rfReflect[i]->unref(); rfReflect[i] = 0; }
+   }
+
+   return BaseClass::shutdownNotification();
+}
+
+//------------------------------------------------------------------------------
 // isFrozen() -- checks both player's freeze flag and the simulation's freeze flag
 //------------------------------------------------------------------------------
 bool Player::isFrozen() const

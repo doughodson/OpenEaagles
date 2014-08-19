@@ -72,6 +72,16 @@ void Rwr::deleteData()
    for (Emission* em = rptQueue.get(); em != 0; em = rptQueue.get()) { em->unref(); }
 }
 
+//------------------------------------------------------------------------------
+// shutdownNotification()
+//------------------------------------------------------------------------------
+bool Rwr::shutdownNotification()
+{
+   // Clear out the queues
+   for (Emission* em = rptQueue.get(); em != 0; em = rptQueue.get()) { em->unref(); }
+   return BaseClass::shutdownNotification();
+}
+
 
 //------------------------------------------------------------------------------
 // receive() -- process received emissions

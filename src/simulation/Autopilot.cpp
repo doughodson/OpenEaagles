@@ -219,6 +219,16 @@ void Autopilot::copyData(const Autopilot& org, const bool cc)
 //------------------------------------------------------------------------------
 void Autopilot::deleteData()
 {
+   setLeadPlayer(0);
+}
+
+//------------------------------------------------------------------------------
+// shutdownNotification()
+//------------------------------------------------------------------------------
+bool Autopilot::shutdownNotification()
+{
+   setLeadPlayer(0);
+   return BaseClass::shutdownNotification();
 }
 
 //------------------------------------------------------------------------------

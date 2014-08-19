@@ -152,6 +152,30 @@ void Nib::deleteData()
 }
 
 //------------------------------------------------------------------------------
+// shutdownNotification() -- We're shutting down
+//------------------------------------------------------------------------------
+bool Nib::shutdownNotification()
+{
+   for (unsigned int i = 0; i < MAX_AMSL; i++) {
+      if (apartMslTypes[i] != 0) {
+         apartMslTypes[i]->unref();
+         apartMslTypes[i] = 0;
+      }
+   }
+
+   for (unsigned int i = 0; i < MAX_EM_SYSTEMS; i++) {
+      if (emitterSysHandler[i] != 0) {
+         emitterSysHandler[i]->unref();
+         emitterSysHandler[i] = 0;
+      }
+   }
+   numEmissionSystems = 0;
+   emissionSystemsIndex = 0;
+
+   return BaseClass::shutdownNotification();
+}
+
+//------------------------------------------------------------------------------
 // set functions
 //------------------------------------------------------------------------------
 

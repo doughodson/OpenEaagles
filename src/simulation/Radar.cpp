@@ -120,6 +120,16 @@ void Radar::deleteData()
 }
 
 //------------------------------------------------------------------------------
+// shutdownNotification()
+//------------------------------------------------------------------------------
+bool Radar::shutdownNotification()
+{
+   clearTracksAndQueues();
+
+   return BaseClass::shutdownNotification();
+}
+
+//------------------------------------------------------------------------------
 // clearTracksAndQueues() -- clear out tracks and queues
 //------------------------------------------------------------------------------
 void Radar::clearTracksAndQueues()

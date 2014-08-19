@@ -166,6 +166,9 @@ protected:
    virtual void transmit(const LCreal dt);
    virtual void process(const LCreal dt);
 
+   // Basic::Component protected interface
+   virtual bool shutdownNotification();
+
    virtual IrQueryMsg* getStoredMessage();
    virtual IrQueryMsg* peekStoredMessage(unsigned int i);
 

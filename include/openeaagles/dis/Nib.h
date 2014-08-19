@@ -78,6 +78,9 @@ protected:
    unsigned char manageArticulationParameters(EntityStatePDU* const pdu);
    void processArticulationParameters(const EntityStatePDU* const pdu);
 
+   // Basic::Component protected interface
+   virtual bool shutdownNotification();
+
    // Electromagnetic Emitter handlers (protected for now)
    unsigned char    numEmissionSystems;                           // Number of emission systems
    unsigned char    emissionSystemsIndex;                         // Emission systems index (outgoing only)

@@ -79,6 +79,9 @@ protected:
    virtual void receive(const LCreal dt);
    virtual void process(const LCreal dt);
 
+   // Basic::Component protected interface
+   virtual bool shutdownNotification();
+
 protected: // (#temporary#) allow subclasses to access and use report queue
 
    // Semaphore to protect 'rptQueue', 'rptSnQueue', 'reports' and 'rptMaxSn'

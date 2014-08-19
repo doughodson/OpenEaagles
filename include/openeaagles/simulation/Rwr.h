@@ -48,6 +48,9 @@ protected:
    virtual void receive(const LCreal dt);
    virtual void process(const LCreal dt);
 
+   // Basic::Component protected interface
+   virtual bool shutdownNotification();
+
    void xferRays()
    {
       for (int i = 0; i < NUM_RAYS; i++) {

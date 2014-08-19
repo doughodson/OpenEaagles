@@ -256,6 +256,9 @@ protected:
    // System class Interface -- phase() callbacks
    virtual void process(const LCreal dt);     // Phase 3
 
+   // Basic::Component protected interface
+   virtual bool shutdownNotification();
+
 private:
    bool flySRT();                   // flies a standard rate of turn
    bool flyLoiterEntry();           // flies our entry pattern into the loiter
