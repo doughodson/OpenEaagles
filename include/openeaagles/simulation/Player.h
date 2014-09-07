@@ -1031,6 +1031,7 @@ protected:
    virtual void updateElevation();
 
    // Basic::Component Interface
+   virtual bool shutdownNotification();
    virtual void printTimingStats();
 
    // These systems, from our subcomponent list, can only be set by reset()

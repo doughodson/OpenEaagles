@@ -72,6 +72,9 @@ protected:
    // System class Interface -- phase() callbacks
    virtual void process(const LCreal dt);     // Phase 3
 
+   // Basic::Component protected interface
+   virtual bool shutdownNotification();
+
 private:
    SPtr<Action>   action;           // Current steerpoint action
    Track*         nextToShoot;      // Next to shoot track

@@ -161,6 +161,9 @@ protected:
    // Callbacks by phase -- to be used by the derived classes, as needed
    virtual void process(const LCreal dt);     // Phase 3
 
+   // Basic::Component protected interface
+   virtual bool shutdownNotification();
+
 private:   
    void initData();
 

@@ -45,6 +45,8 @@ protected:
    virtual bool setSlotAlpha(const Basic::Number* const num);        // Sets alpha
    virtual bool setSlotBeta(const Basic::Number* const num);         // Sets beta
 
+   // Basic::Component protected interface
+   virtual bool shutdownNotification();
 
    // Prediction parameters
    LCreal              azimuthBin;         // Azimuth Bin

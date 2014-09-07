@@ -151,6 +151,16 @@ void IrSensor::deleteData()
 }
 
 //------------------------------------------------------------------------------
+// shutdownNotification()
+//------------------------------------------------------------------------------
+bool IrSensor::shutdownNotification()
+{
+   setTrackManager(0);
+   clearTracksAndQueues();
+   return BaseClass::shutdownNotification();
+}
+
+//------------------------------------------------------------------------------
 // reset() -- Reset parameters
 //------------------------------------------------------------------------------
 void IrSensor::reset()

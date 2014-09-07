@@ -144,6 +144,27 @@ void RfSensor::deleteData()
     setTrackManager(0);
     setMasterMode(0);
     setTrackManagerName(0);
+
+    if (modes != 0) {
+       modes->unref();
+       modes = 0;
+    }
+}
+
+//------------------------------------------------------------------------------
+// shutdownNotification()
+//------------------------------------------------------------------------------
+bool RfSensor::shutdownNotification()
+{
+   setTrackManager(0);
+   setMasterMode(0);
+
+   if (modes != 0) {
+       modes->unref();
+       modes = 0;
+    }
+
+   return BaseClass::shutdownNotification();
 }
 
 //------------------------------------------------------------------------------

@@ -142,6 +142,27 @@ void RfSystem::deleteData()
    np = 0;
 }
 
+//------------------------------------------------------------------------------
+// shutdownNotification()
+//------------------------------------------------------------------------------
+bool RfSystem::shutdownNotification()
+{
+   setAntenna(0);
+
+   for (unsigned int i = 0; i < np && i < MAX_EMISSIONS; i++) {
+      if (packets[i] != 0) {
+         packets[i]->unref();
+         packets[i] = 0;
+      }
+   }
+   np = 0;
+
+   return BaseClass::shutdownNotification();
+}
+
+//------------------------------------------------------------------------------
+// reset()
+//------------------------------------------------------------------------------
 void RfSystem::reset()
 {
    BaseClass::reset();

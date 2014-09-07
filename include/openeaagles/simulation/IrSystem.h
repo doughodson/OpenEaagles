@@ -66,6 +66,9 @@ protected:
    // This function will create a filtered list of players that IR systems will interact with.
    virtual void processPlayersOfInterest();
 
+   // Basic::Component protected interface
+   virtual bool shutdownNotification();
+
 private:
    IrSeeker*  seeker;               // Our seeker
    Basic::String* seekerName;       // Name of our seeker

@@ -96,6 +96,9 @@ protected:
    // System class protected functions
    virtual void dynamics(const LCreal dt);    // Phase 0 -> ages queues
 
+   // Basic::Component protected functions
+   virtual bool shutdownNotification();
+
 private:
    void initData();
 

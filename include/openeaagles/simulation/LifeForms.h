@@ -60,6 +60,10 @@ public:
     virtual void setWeapon(const int x) { weaponSel = x; }
     int getWeaponSelMode() const { return weaponSel; }
     virtual void reset();
+
+protected:
+   // Basic::Component protected interface
+   virtual bool shutdownNotification();
     
 private:
     int actionState;    // the action we are doing (for DIS enumerations)

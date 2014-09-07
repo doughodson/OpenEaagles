@@ -57,6 +57,9 @@ protected:
    // System class Interface -- phase() callbacks
    virtual void process(const LCreal dt);     // Phase 3
 
+   // Basic::Component protected interface
+   virtual bool shutdownNotification();
+
    QStack<IrQueryMsg*> freeQueryStack;  // stack of free queries of target IR signatures
    mutable long        freeQueryLock;   // Semaphore to protect 'freeQueryStack'
 

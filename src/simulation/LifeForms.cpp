@@ -59,6 +59,16 @@ void LifeForm::deleteData()
     tgtPlayer = 0;
 }
 
+//------------------------------------------------------------------------------
+// shutdownNotification()
+//------------------------------------------------------------------------------
+bool LifeForm::shutdownNotification()
+{
+   if (tgtPlayer != 0) tgtPlayer->unref();
+   tgtPlayer = 0;
+   return BaseClass::shutdownNotification();
+}
+
 //-----------------------------------------------------------------------------
 // getMajorType() -- Returns the player's major type
 //-----------------------------------------------------------------------------

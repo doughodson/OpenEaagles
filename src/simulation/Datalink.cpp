@@ -115,6 +115,20 @@ void Datalink::deleteData()
    setRadio(0);
    setRadioName(0);
    setTrackManager(0);
+   setTrackManagerName(0);
+}
+
+//------------------------------------------------------------------------------
+// shutdownNotification() -- We're shutting down
+//------------------------------------------------------------------------------
+bool Datalink::shutdownNotification()
+{
+   clearQueues();
+   setRadio(0);
+   setTrackManager(0);
+   setTrackManagerName(0);
+
+   return BaseClass::shutdownNotification();
 }
 
 //------------------------------------------------------------------------------

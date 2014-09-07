@@ -137,6 +137,9 @@ protected:
     virtual bool onTgtDesignateEvent();                        // Target Designate (SCAN_START) event handler
     virtual bool onReturnToSearchEvent();                      // Return to search (SCAN_END) event handler
 
+   // Basic::Component protected interface
+   virtual bool shutdownNotification();
+
 private:
     bool processModes();
 

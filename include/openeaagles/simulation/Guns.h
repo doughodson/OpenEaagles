@@ -107,6 +107,9 @@ protected:
    // System class functions
    virtual void process(const LCreal dt);     // Phase 3
 
+   // Basic::Component protected interface
+   virtual bool shutdownNotification();
+
 private:
    Bullet*  bullet;           // Type of bullet
    LCreal   shortBurstTimer;  // Single short burst timer (when firing a single burst) (sec)
@@ -178,6 +181,9 @@ protected:
    // Weapon interface
    virtual void weaponDynamics(const LCreal dt);
    virtual void updateTOF(const LCreal dt);
+
+   // Basic::Component protected interface
+   virtual bool shutdownNotification();
 
    struct Burst {
       enum Status { ACTIVE, HIT, MISS };

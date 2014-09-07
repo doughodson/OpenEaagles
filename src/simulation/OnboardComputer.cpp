@@ -53,6 +53,16 @@ void OnboardComputer::deleteData()
 }
 
 //------------------------------------------------------------------------------
+// shutdownNotification()
+//------------------------------------------------------------------------------
+bool OnboardComputer::shutdownNotification()
+{
+   setNextToShoot(0);
+   action = 0;
+   return BaseClass::shutdownNotification();
+}
+
+//------------------------------------------------------------------------------
 // reset() -- Reset parameters
 //------------------------------------------------------------------------------
 void OnboardComputer::reset()
