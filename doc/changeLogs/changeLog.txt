@@ -19,7 +19,7 @@ general
       practice by making type casts more explicit in terms of the kind of cast being
       performed.
 
-   4) Adding 'const' in more places within functions and methods where an intermediate
+   4) Added 'const' in more places within functions and methods where an intermediate
       value is calculated to support other calculations.  These variables are often created
       and used as a matter of convenience and never intended to be altered again after
       initial calculation.  This coding style promotes better visibility as to the
@@ -31,8 +31,15 @@ general
 basic
 
    support.h
-      1) Adding more explicit "std" namespace qualifiers and reducing the number
+      1) Added explicit "std" namespace qualifiers and reducing the number
          of includes (e.g., cstdio, cstdlib, string)
+
+   Field class
+      1) setSlotHighlight() -- when clearing the highlight mode, now calling
+         the proper clearDisplayMode() function (bug fix)
+
+   Rotary class
+      1) Removed the unused event() handler.
 
    TcpHandler class
       1) recvData() was modified to check for closed connection or errors.
@@ -44,7 +51,6 @@ basicGL
       1) readFileBMP() -- Corrected the checks to properly reject files that are not
          bitmap files (bug fix) or other invalid files.
 
-
 --------------------------------------------------------------------------------
 dis
 
@@ -55,6 +61,13 @@ dis
 --------------------------------------------------------------------------------
 gui-glut
 
+
+--------------------------------------------------------------------------------
+Instruments
+
+   Tape class
+      1) copyData() now properly copies all of the class member variables.
+
 --------------------------------------------------------------------------------
 maps
 
@@ -64,7 +77,6 @@ otw
 
    CigiClNetworkSignalProcessing class
       1) OnHotResp() -- added support for a CigiHatHotRespV3_2 type argument
-
 
 --------------------------------------------------------------------------------
 recorder
