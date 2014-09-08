@@ -130,8 +130,13 @@ void EmissionPduHandler::copyData(const EmissionPduHandler& org, const bool cc)
 //------------------------------------------------------------------------------
 void EmissionPduHandler::deleteData()
 {
+   if (sensor != 0) { sensor->event(Eaagles::Basic::Component::SHUTDOWN_EVENT); }
    setSensor(0);
+
+   if (sensorModel != 0) { sensorModel->event(Eaagles::Basic::Component::SHUTDOWN_EVENT); }
    setSensorModel(0);
+
+   if (antennaModel != 0) { antennaModel->event(Eaagles::Basic::Component::SHUTDOWN_EVENT); }
    setAntennaModel(0);
 }
 

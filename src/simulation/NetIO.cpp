@@ -1627,6 +1627,11 @@ void NtmOutputNodeStd::deleteData()
       nodeFactoryName = 0;
    }
 
+   if (tp != 0) {
+      tp->unref();
+      tp = 0;
+   }
+
    if (ntmList != 0) {
       ntmList->unref();
       ntmList = 0;
@@ -1778,6 +1783,7 @@ bool NtmOutputNodeStd::checkAndAddNtm(Ntm* const tgtNtm)
 
          // add the new node to our subnode list
          subnodeList->put(newNode);
+         newNode->unref();
          ok = true;
       }
    }
@@ -1792,6 +1798,7 @@ bool NtmOutputNodeStd::addNtmSorted(Ntm* const newNtm)
 {
    bool ok = false;
    if (newNtm != 0) {
+      newNtm->ref();
 
       // Create a new List::Item to contain this Ntm
       Basic::List::Item* newItem = new Basic::List::Item();

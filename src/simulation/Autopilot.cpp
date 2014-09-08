@@ -1034,24 +1034,24 @@ bool Autopilot::velocityContoller()
 // Attempt to get our lead player
 const Player* Autopilot::getLeadPlayer()
 {
-    if (lead == 0 && leadName != 0) {
-        // we have no lead player, but we have a lead name, let's try to get this player
-        // find the player in the simulation
-        const Simulation* const sim = getSimulation();
-        if (sim != 0) {
-            const Basic::PairStream* players = sim->getPlayers();
-            if (players != 0) {
-                const Basic::Pair* pair = players->findByName(*leadName);
-                if (pair != 0) {
-                    setLeadPlayer( static_cast<const Player*>( pair->object() ) );
-                }
+   if (lead == 0 && leadName != 0) {
+      // we have no lead player, but we have a lead name, let's try to get this player
+      // find the player in the simulation
+      const Simulation* const sim = getSimulation();
+      if (sim != 0) {
+         const Basic::PairStream* players = sim->getPlayers();
+         if (players != 0) {
+            const Basic::Pair* pair = players->findByName(*leadName);
+            if (pair != 0) {
+               setLeadPlayer( static_cast<const Player*>( pair->object() ) );
             }
             players->unref();
             players = 0;
-        }
-    }
+         }
+      }
+   }
 
-    return lead;
+   return lead;
 }
 
 //------------------------------------------------------------------------------
@@ -1282,49 +1282,49 @@ bool Autopilot::setLeadPlayer(const Player* const p)
 // set the lead player dynamically by name
 bool Autopilot::setLeadPlayerName(const Basic::Identifier* const msg)
 {
-    // find the player in the simulation
-    const Simulation* const sim = getSimulation();
-    bool found = false;
-    if (sim != 0) {
-        const Basic::PairStream* players = sim->getPlayers();
-        if (players != 0) {
-            const Basic::Pair* pair = players->findByName(*msg);
-            if (pair != 0) {
-                setLeadPlayer( static_cast<const Player*>( pair->object() ) );
-                found = true;
-            }
-        }
-        players->unref();
-        players = 0;
-    }
-    // if we didn't find the player, remove the lead name and player
-    if (!found) setLeadPlayer(0);
+   // find the player in the simulation
+   const Simulation* const sim = getSimulation();
+   bool found = false;
+   if (sim != 0) {
+      const Basic::PairStream* players = sim->getPlayers();
+      if (players != 0) {
+         const Basic::Pair* pair = players->findByName(*msg);
+         if (pair != 0) {
+            setLeadPlayer( static_cast<const Player*>( pair->object() ) );
+            found = true;
+         }
+         players->unref();
+         players = 0;
+      }
+   }
+   // if we didn't find the player, remove the lead name and player
+   if (!found) setLeadPlayer(0);
 
-    return true;
+   return true;
 }
 
 // set the lead player dynamically by name using char*
 bool Autopilot::setLeadPlayerName(const char* x)
 {
-    // find the player in the simulation
-    const Simulation* const sim = getSimulation();
-    bool found = false;
-    if (sim != 0) {
-        const Basic::PairStream* players = sim->getPlayers();
-        if (players != 0) {
-            const Basic::Pair* pair = players->findByName(x);
-            if (pair != 0) {
-                setLeadPlayer( static_cast<const Player*>( pair->object() ) );
-                found = true;
-            }
-        }
-        players->unref();
-        players = 0;
-    }
-    // if we didn't find the player, remove the lead name and player
-    if (!found) setLeadPlayer(0);
+   // find the player in the simulation
+   const Simulation* const sim = getSimulation();
+   bool found = false;
+   if (sim != 0) {
+      const Basic::PairStream* players = sim->getPlayers();
+      if (players != 0) {
+         const Basic::Pair* pair = players->findByName(x);
+         if (pair != 0) {
+            setLeadPlayer( static_cast<const Player*>( pair->object() ) );
+            found = true;
+         }
+         players->unref();
+         players = 0;
+      }
+   }
+   // if we didn't find the player, remove the lead name and player
+   if (!found) setLeadPlayer(0);
 
-    return true;
+   return true;
 }
 
 // "Follow the lead" mode flag
