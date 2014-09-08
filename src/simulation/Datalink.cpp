@@ -486,7 +486,7 @@ void Datalink::clearQueues()
    msg = outQueue->get();
    while (msg != 0) {
       msg->unref();
-      msg = inQueue->get();
+      msg = outQueue->get();
    }
 }
 

@@ -110,6 +110,7 @@ void RfSensor::copyData(const RfSensor& org, const bool cc)
         modes = org.modes->clone();
         processModes();
     }
+    else modes = 0;
 
     if (org.tmName != 0) {
        Basic::String* clone = org.tmName->clone();

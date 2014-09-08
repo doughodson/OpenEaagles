@@ -258,7 +258,7 @@ void Weapon::reset()
    setTargetPlayer(0,false);
 
    // launch vehicle
-   if (flyout != this) {
+   if ( ( getLaunchVehicle() == 0 ) && ( flyout != this ) ) {
       setLaunchVehicle( static_cast<Player*>(findContainerByType( typeid(Player) )) );
    }
 
@@ -483,24 +483,28 @@ void Weapon::checkDetonationEffect()
 //------------------------------------------------------------------------------
 bool Weapon::collisionNotification(Player* const other)
 {
-   bool ok = killedNotification(other);
+   bool ok = false;
 
-   // We've detonated!
-   setMode(DETONATED);
-   setDetonationResults(DETONATE_ENTITY_IMPACT);
+   if (!isCrashOverride() && isLocalPlayer()) {
+      ok = killedNotification(other);
 
-   // Compute detonation location relative to the other ship
-   setTargetPlayer(other,false);
-   setLocationOfDetonation();
+      // We've detonated!
+      setMode(DETONATED);
+      setDetonationResults(DETONATE_ENTITY_IMPACT);
 
-   // Ground detonation -- anyone here to see it?
-   checkDetonationEffect();
+      // Compute detonation location relative to the other ship
+      setTargetPlayer(other,false);
+      setLocationOfDetonation();
 
-   // Log the event
-   BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_WEAPON_DETONATION )
-      SAMPLE_3_OBJECTS( this, getLaunchVehicle(), getTargetPlayer() )
-      SAMPLE_2_VALUES( DETONATE_ENTITY_IMPACT, getDetonationRange() )
-   END_RECORD_DATA_SAMPLE()
+      // Ground detonation -- anyone here to see it?
+      checkDetonationEffect();
+
+      // Log the event
+      BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_WEAPON_DETONATION )
+         SAMPLE_3_OBJECTS( this, getLaunchVehicle(), getTargetPlayer() )
+         SAMPLE_2_VALUES( DETONATE_ENTITY_IMPACT, getDetonationRange() )
+      END_RECORD_DATA_SAMPLE()
+   }
 
    // TabLogger is deprecated
    if (getAnyEventLogger() != 0) {
@@ -519,29 +523,33 @@ bool Weapon::crashNotification()
    // ---
    // We've detonated because we've hit the ground
    // ---
-   bool ok = killedNotification();
-   setDetonationResults(DETONATE_GROUND_IMPACT);
-   setMode(DETONATED);
+   bool ok = false;
+   if (!isCrashOverride() && isLocalPlayer()) {
 
-   // ---
-   // Compute location of detonation relative to target
-   // ---
-   if (getTargetPlayer() != 0) {
-      setLocationOfDetonation();
+      ok = killedNotification();
+      setDetonationResults(DETONATE_GROUND_IMPACT);
+      setMode(DETONATED);
+
+      // ---
+      // Compute location of detonation relative to target
+      // ---
+      if (getTargetPlayer() != 0) {
+         setLocationOfDetonation();
+      }
+
+      // ---
+      // Ground detonation -- anyone here to see it?
+      // ---
+      checkDetonationEffect();
+
+      // ---
+      // Log the event
+      // ---
+      BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_WEAPON_DETONATION )
+         SAMPLE_3_OBJECTS( this, getLaunchVehicle(), getTargetPlayer() )
+         SAMPLE_2_VALUES( DETONATE_GROUND_IMPACT, getDetonationRange() )
+      END_RECORD_DATA_SAMPLE()
    }
-
-   // ---
-   // Ground detonation -- anyone here to see it?
-   // ---
-   checkDetonationEffect();
-
-   // ---
-   // Log the event
-   // ---
-   BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_WEAPON_DETONATION )
-      SAMPLE_3_OBJECTS( this, getLaunchVehicle(), getTargetPlayer() )
-      SAMPLE_2_VALUES( DETONATE_GROUND_IMPACT, getDetonationRange() )
-   END_RECORD_DATA_SAMPLE()
 
    // TabLogger is deprecated
    if (getAnyEventLogger() != 0) {
@@ -651,7 +659,7 @@ Weapon* Weapon::release()
                initWpn->setMode(Player::LAUNCHED);
                initWpn->setReleased(true);
                initWpn->setReleaseHold(false);
-
+               initWpn->unref();
             }
             else {
                // When we haven't already created a flyout then this is

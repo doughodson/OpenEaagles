@@ -426,6 +426,9 @@ bool Nib::isPlayerStateUpdateRequired(const LCreal curExecTime)
    // ---
    if ( (result == UNSURE) && isNotMode( player->getMode()) ) result = YES;
 
+   // 2-a) NIB is being deleted, send one more update to deactivate the entity
+   if ( (result == UNSURE) && isMode( Player::DELETE_REQUEST ) ) result = YES;
+
    // ---
    // 3) When we're a local player, check for one of the following ...
    // ---

@@ -468,79 +468,6 @@ void Simulation::reset()
    players = newList;
 
    // ---
-   // Reset simulated time (if not slaved to UTC)
-   // ---
-
-   // Start with the current computer system date and time as seconds
-   // since midnight, January 1, 1970 (UTC)
-   getTime(&pcTvSec, &pcTvUSec);
-
-   // Decompose into year, month, etc
-   unsigned int cYear = 0;
-   unsigned int cMonth = 0;
-   unsigned int cDay = 0;
-   unsigned int cHour = 0;
-   unsigned int cMin = 0;
-   unsigned int cSec = 0;
-   convertSec2Ymdhms(pcTvSec, &cYear, &cMonth, &cDay, &cHour, &cMin, &cSec);
-      //std::printf("RESET PC Times: y=%d; m=%d; d=%d; h=%d; m=%d; s=%d\n", cYear, cMonth, cDay, cHour, cMin, cSec);
-      //std::printf("RESET PC sec = %d, uSec=%d\n", pcTvSec, pcTvUSec);
-
-   // Computer time of day (seconds since midnight)
-   pcTime = ( cHour * 3600.0 + cMin * 60.0 + cSec );
-
-   // Simulated uSec same as the computer systems
-   simTvUSec = pcTvUSec;
-
-   simTimeSlaved = (simTime0 < 0) && (simDay0 == 0) && (simMonth0 == 0) && (simYear0 == 0);
-   if (!simTimeSlaved) {
-      // Replace year, month or date, as required
-      if (simYear0 > 0) cYear = simYear0;
-      if (simMonth0 > 0) cMonth = simMonth0;
-      if (simDay0 > 0) cDay = simDay0;
-
-      // Replace the time of day, as required
-      if (simTime0 >= 0) {
-         unsigned int t = simTime0;
-         // Compute simulated hour of the date
-         cHour = (t / 3600);
-         t -= (cHour * 3600);
-         // Compute simulated minute past the hour
-         cMin  = t/60;
-         t -= (cMin * 60);
-         // Compute simulated second past the minute
-         cSec = t;
-
-         // Set simulated uSec set to 0; using pc microseconds is meaningless and introduces randomness where none is desired.
-         simTvUSec = 0;
-      }
-   }
-
-   // Recompute simulated whole seconds since midnight, January 1, 1970
-   convertYmdhms2Sec(cYear, cMonth, cDay, cHour, cMin, cSec, &simTvSec);
-      //std::printf("RESET sim Times: y=%d; m=%d; d=%d; h=%d; m=%d; s=%d\n", cYear, cMonth, cDay, cHour, cMin, cSec);
-      //std::printf("RESET SIM sec = %d, uSec=%d\n", simTvSec, simTvUSec);
-
-   // simulated time of day (seconds since midnight)
-   simTime = ( cHour * 3600.0 + cMin * 60.0 + cSec );
-
-   // ---
-   // Now reset the new player list
-   // ---
-   if (players != 0) {
-      SPtr<Basic::PairStream> pl = players;
-      Basic::List::Item* item = pl->getFirstItem();
-      while (item != 0) {
-         Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
-         if (pair != 0) {
-            Player* ip = static_cast<Player*>(pair->object());
-            if (ip != 0) ip->event(RESET_EVENT);
-         }
-         item = item->getNext();
-      }
-   }
-
-   // ---
    // First time resetting the terrain database will load the data
    // ---
    if (terrain != 0) {
@@ -652,6 +579,83 @@ void Simulation::reset()
       // and we don't want to try again.
       bgThreadsFailed = (reqBgThreads > 1 && numBgThreads == 0);
 
+   }
+
+   // ---
+   // Reset simulated time (if not slaved to UTC)
+   // ---
+
+   // Start with the current computer system date and time as seconds
+   // since midnight, January 1, 1970 (UTC)
+   getTime(&pcTvSec, &pcTvUSec);
+
+   // Decompose into year, month, etc
+   unsigned int cYear = 0;
+   unsigned int cMonth = 0;
+   unsigned int cDay = 0;
+   unsigned int cHour = 0;
+   unsigned int cMin = 0;
+   unsigned int cSec = 0;
+   convertSec2Ymdhms(pcTvSec, &cYear, &cMonth, &cDay, &cHour, &cMin, &cSec);
+      //std::printf("RESET PC Times: y=%d; m=%d; d=%d; h=%d; m=%d; s=%d\n", cYear, cMonth, cDay, cHour, cMin, cSec);
+      //std::printf("RESET PC sec = %d, uSec=%d\n", pcTvSec, pcTvUSec);
+
+   // Computer time of day (seconds since midnight)
+   pcTime = ( cHour * 3600.0 + cMin * 60.0 + cSec );
+
+   // Simulated uSec same as the computer systems
+   simTvUSec = pcTvUSec;
+
+   simTimeSlaved = (simTime0 < 0) && (simDay0 == 0) && (simMonth0 == 0) && (simYear0 == 0);
+   if (!simTimeSlaved) {
+      // Replace year, month or date, as required
+      if (simYear0 > 0) cYear = simYear0;
+      if (simMonth0 > 0) cMonth = simMonth0;
+      if (simDay0 > 0) cDay = simDay0;
+
+      // Replace the time of day, as required
+      if (simTime0 >= 0) {
+         unsigned int t = simTime0;
+         // Compute simulated hour of the date
+         cHour = (t / 3600);
+         t -= (cHour * 3600);
+         // Compute simulated minute past the hour
+         cMin  = t/60;
+         t -= (cMin * 60);
+         // Compute simulated second past the minute
+         cSec = t;
+
+         // Set simulated uSec set to 0; using pc microseconds is meaningless and introduces randomness where none is desired.
+         simTvUSec = 0;
+      }
+
+      // Recompute simulated whole seconds since midnight, January 1, 1970
+      convertYmdhms2Sec(cYear, cMonth, cDay, cHour, cMin, cSec, &simTvSec);
+      //std::printf("RESET sim Times: y=%d; m=%d; d=%d; h=%d; m=%d; s=%d\n", cYear, cMonth, cDay, cHour, cMin, cSec);
+      //std::printf("RESET SIM sec = %d, uSec=%d\n", simTvSec, simTvUSec);
+
+      // simulated time of day (seconds since midnight)
+      simTime = ( cHour * 3600.0 + cMin * 60.0 + cSec );
+   }
+   else {
+      simTvSec = pcTvSec;
+      simTime = pcTime;
+   }
+
+   // ---
+   // Now reset the new player list
+   // ---
+   if (players != 0) {
+      SPtr<Basic::PairStream> pl = players;
+      Basic::List::Item* item = pl->getFirstItem();
+      while (item != 0) {
+         Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+         if (pair != 0) {
+            Player* ip = static_cast<Player*>(pair->object());
+            if (ip != 0) ip->event(RESET_EVENT);
+         }
+         item = item->getNext();
+      }
    }
 
    BaseClass::reset();
@@ -1138,6 +1142,11 @@ unsigned short Simulation::getNewReleasedWeaponID()
 
 // Returns the terrain elevation database
 const Basic::Terrain* Simulation::getTerrain() const
+{
+   return terrain;
+}
+
+Basic::Terrain* Simulation::getTerrain()
 {
    return terrain;
 }
@@ -1802,7 +1811,7 @@ bool Simulation::setSlotSimulationTime(const Basic::Time* const msg)
 {
     bool ok = false;
     if (msg != 0) {
-       long t = static_cast<long>(Basic::Seconds::convertStatic(*msg) + 0.5);
+       long t = static_cast<long>( osg::round(Basic::Seconds::convertStatic(*msg)) );
        if (t >= -1 && t < (60*60*24)) {
           ok = setInitialSimulationTime(t);
        }

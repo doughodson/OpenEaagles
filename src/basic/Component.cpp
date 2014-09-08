@@ -167,6 +167,11 @@ void Component::deleteData()
 
     // Delete list of components
     components = 0;
+
+    if (timingStats != 0) {
+       timingStats->unref();
+       timingStats = 0;
+    }
 }
 
 //------------------------------------------------------------------------------

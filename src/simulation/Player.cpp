@@ -3488,7 +3488,7 @@ void Player::updateElevation()
 {
    // Only if isTerrainElevationRequired() is false, otherwise the terrain
    // elevation is from the OTW system.
-   Simulation* s = getSimulation();
+   const Simulation* s = getSimulation();
    if (s != 0 && !isTerrainElevationRequired()) {
       const Basic::Terrain* terrain = s->getTerrain();
       if (terrain != 0) {

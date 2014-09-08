@@ -328,6 +328,8 @@ protected:
     virtual void updatePlayerList();                  // Update the current player list
     bool setSlotPlayers(Basic::PairStream* const msg); 
 
+    Basic::Terrain* getTerrain();                     // Returns the terrain elevation database
+
     virtual bool setEarthModel(const Basic::EarthModel* const msg); // Sets our earth model
     virtual bool setGamingAreaUseEarthModel(const bool flg);
 

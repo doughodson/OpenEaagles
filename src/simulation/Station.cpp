@@ -978,16 +978,19 @@ bool Station::setOwnshipByName(const char* const newOS)
    if (sim != 0) pl = sim->getPlayers();
 
    // Look for this ownship in our list of players
-   if (newOS != 0 && pl != 0) {
-      Basic::Pair* p = pl->findByName(newOS);
-      if (p != 0) {
-         Player* newOwnship = static_cast<Player*>(p->object());
-         if (newOwnship != ownship) {
-            // Ok, we found the new ownship and it IS a different 
-            // player then the previous ownship ...
-            setOwnshipPlayer( newOwnship );
-            set = true;
+   if (pl != 0) {
+      if (newOS != 0) {
+         Basic::Pair* p = pl->findByName(newOS);
+         if (p != 0) {
+            Player* newOwnship = static_cast<Player*>(p->object());
+            if (newOwnship != ownship) {
+               // Ok, we found the new ownship and it IS a different 
+               // player then the previous ownship ...
+               setOwnshipPlayer( newOwnship );
+               set = true;
+            }
          }
+
       }
 
       // Cleanup
