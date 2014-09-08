@@ -1790,7 +1790,7 @@ bool Nav::convertLL2Utm(
       // term T9
       //---------------
       k1 = Q*COS7*K0/5040.0;
-      k1 = 61.0 - 479.0*TAN2 + 179*TAN4 - TAN6;
+      k2 = 61.0 - 479.0*TAN2 + 179*TAN4 - TAN6;
       const double T9 = k1*k2;
 
       //-----------------------------------

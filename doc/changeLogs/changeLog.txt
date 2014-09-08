@@ -41,6 +41,9 @@ basic
       1) setSlotHighlight() -- when clearing the highlight mode, now calling
          the proper clearDisplayMode() function (bug fix)
 
+   Nav class
+      1) convertLL2Utm() -- On term T9, changed second k1 to k2 (bug fix)
+
    Rotary class
       1) Removed the unused event() handler.
 
