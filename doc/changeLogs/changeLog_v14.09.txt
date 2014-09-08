@@ -1,0 +1,148 @@
+================================================================================
+Changes since v14.01
+================================================================================
+
+--------------------------------------------------------------------------------
+general
+
+   1) Moved the declaration of LCreal from 'openeaagles/config.h' to
+      'openeaagles/basic/support.h', since 'config.h' should only
+      contain C pre-processor directives.
+
+   2) Added std:: namespace qualifier to all string compare (strcmp) and exit calls
+      This has no effect on API interface, but does make explicit where these functions
+      are defined (for C++)
+
+   3) Moving away from using C-style casts to more proper C++ casts throughout
+      framework and examples.  No functional changes to the API or bugs have been found
+      or resolved as a result of this activity.  We are simply adopting a better coding
+      practice by making type casts more explicit in terms of the kind of cast being
+      performed.
+
+   4) Added 'const' in more places within functions and methods where an intermediate
+      value is calculated to support other calculations.  These variables are often created
+      and used as a matter of convenience and never intended to be altered again after
+      initial calculation.  This coding style promotes better visibility as to the
+      purpose of variable, and provides more information so the compiler can make better
+      optimizations because it knows the value will never change after initial assignment.
+      No functional changes to the API or bugs have been found or resolved as a result of
+      this activity - again, this effort is a result of adopting better coding practices.
+
+   5) Added shutdownNotification() function to several simulation classes.
+
+--------------------------------------------------------------------------------
+basic
+
+   support.h
+      1) Added explicit "std" namespace qualifiers and reducing the number
+         of includes (e.g., cstdio, cstdlib, string)
+
+   Field class
+      1) setSlotHighlight() -- when clearing the highlight mode, now calling
+         the proper clearDisplayMode() function (bug fix)
+
+   Nav class
+      1) convertLL2Utm() -- On term T9, changed second k1 to k2 (bug fix)
+
+   Rotary class
+      1) Removed the unused event() handler.
+
+   Components class
+      1) deleteData() -- added unref() for timingStats (bug fix)
+
+   TcpHandler class
+      1) recvData() was modified to check for closed connection or errors.
+
+--------------------------------------------------------------------------------
+basicGL
+
+   Image.cpp
+      1) readFileBMP() -- Corrected the checks to properly reject files that are not
+         bitmap files (bug fix) or other invalid files.
+
+--------------------------------------------------------------------------------
+dis
+
+   NetIO class
+      1) processElectromagneticEmissionPDU() -- changed to only attempt to process
+      the PDU if there were handlers provided.
+
+   Nib class
+      1) Added shutdownNotification() function.
+
+   EmissionPduHandler class
+      1) deleteData() -- now sending SHUTDOWN_EVENT events to the sensor,
+      sensorModel, and antennaModel before removing them.
+
+--------------------------------------------------------------------------------
+gui-glut
+
+
+--------------------------------------------------------------------------------
+Instruments
+
+   Tape class
+      1) copyData() now properly copies all of the class member variables.
+
+--------------------------------------------------------------------------------
+maps
+
+
+--------------------------------------------------------------------------------
+otw
+
+   CigiClNetworkSignalProcessing class
+      1) OnHotResp() -- added support for a CigiHatHotRespV3_2 type argument
+
+--------------------------------------------------------------------------------
+recorder
+
+
+--------------------------------------------------------------------------------
+simulation
+ 
+   Autopilot class
+      1) Removed old debug print statements
+      2) getLeadPlayer() -- moved if statement ending bracket (bug fix)
+
+   Datalink class
+      1) clearQueues() -- bug fix when clearing the out queue
+
+   NetIo class
+      1) checkAndAddNtm() -- add unref() for newNode
+      2) addNtmSorted(( -- add ref() for newNtm
+      3) deleteData() -- removing 'tp'
+
+   Otw class
+      1) compareKey2Model() -- Corrected null pointer check on pKeyFedName (bug fix)
+
+   Player class
+      1) Added accessor to get initial velocity setting - this allows dynamics models
+         to quiz Player as to what initial velocity setting is on reset().
+
+   Simulation class
+      1) reset() -- moved where simulation time is reset to the end of the function.
+      2) Added a protected, non-const version of getTerrain()
+
+   Station class
+      1) setOwnshipByName() -- modified to properly unref() the player list when finished
+
+   StabilizingGimbal class
+      1) fixed slottable entry (bug fix)
+
+   Weapon class
+      1) release() -- now properly unref()'ing the 'initWpn' pointer
+      2) reset() -- now checks if the launch vehicle pointer is zero before setting it
+      3) crashNotification() and collisionNotification() both now check for local
+         players and crash override off.
+
+--------------------------------------------------------------------------------
+vehicle
+
+   Laero class
+      1) Added reset method to initialize initial velocity using Player setting. This
+         is effectively a bug fix as Player "initVelocity" was being ignored before
+         (bug fix)
+
+--------------------------------------------------------------------------------
+
