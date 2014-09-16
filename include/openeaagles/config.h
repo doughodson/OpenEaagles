@@ -10,9 +10,9 @@
 #ifndef __Eaagles_Config_H__
 #define __Eaagles_Config_H__
 
-// OpenEaagles release version number (13.07)
+// OpenEaagles release version number (14.09)
 #ifndef OE_VERSION
-#define OE_VERSION                              1401
+#define OE_VERSION                              1409
 #endif
 
 // Max number of 'registered' classes (see Object.h)
