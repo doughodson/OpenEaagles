@@ -1,5 +1,5 @@
 
-#include "openeaagles/vehicles/RacModel.h"
+#include "openeaagles/dynamics/RacModel.h"
 
 #include "openeaagles/simulation/Player.h"
 #include "openeaagles/basic/String.h"
@@ -11,9 +11,9 @@
 #include "openeaagles/basic/osg/Quat"
 
 namespace Eaagles {
-namespace Vehicle {
+namespace Dynamics {
 
-IMPLEMENT_SUBCLASS(RacModel,"RacModel")
+IMPLEMENT_SUBCLASS(RacModel, "RacModel")
 
 //------------------------------------------------------------------------------
 // Slot table
@@ -77,7 +77,6 @@ void RacModel::copyData(const RacModel& org, const bool)
 
 EMPTY_DELETEDATA(RacModel)
 
-
 //------------------------------------------------------------------------------
 // reset() -- 
 //------------------------------------------------------------------------------
@@ -94,7 +93,6 @@ void RacModel::dynamics(const LCreal dt)
     updateRAC(dt);
     BaseClass::dynamics(dt);
 }
-
 
 //------------------------------------------------------------------------------
 // Get Vehicle data
@@ -133,7 +131,6 @@ LCreal RacModel::getCalibratedAirspeed() const
    return pp->getTotalVelocityKts();
 }
 
-
 //------------------------------------------------------------------------------
 // Autopilot controls
 //------------------------------------------------------------------------------
@@ -159,7 +156,6 @@ bool RacModel::setCommandedHeadingD(const double degs, const double, const doubl
    cmdHeading = degs;
    return true;
 }
-
 
 bool RacModel::isVelocityHoldOn() const
 {
@@ -246,7 +242,6 @@ void RacModel::updateRAC(const LCreal dt)
    if (vt > 0) {
       cmdPitch = asin( cmdAltRate/vt );
    }
-
 
    // ---
    // Compute Max G
@@ -340,6 +335,7 @@ bool RacModel::setSlotMinSpeed(const Basic::Number* const msg)
     }
     return ok;
 }
+
 bool RacModel::setSlotSpeedMaxG(const Basic::Number* const msg)
 {
     bool ok = false;
@@ -349,6 +345,7 @@ bool RacModel::setSlotSpeedMaxG(const Basic::Number* const msg)
     }
     return ok;
 }
+
 bool RacModel::setSlotMaxG(const Basic::Number* const msg)
 {
     bool ok = false;
@@ -358,6 +355,7 @@ bool RacModel::setSlotMaxG(const Basic::Number* const msg)
     }
     return ok;
 }
+
 bool RacModel::setSlotMaxAccel(const Basic::Number* const msg)
 {
     bool ok = false;
@@ -367,6 +365,7 @@ bool RacModel::setSlotMaxAccel(const Basic::Number* const msg)
     }
     return ok;
 }
+
 bool RacModel::setSlotCmdAltitude(const Basic::Distance* const msg)
 {
     bool ok = false;
@@ -377,6 +376,7 @@ bool RacModel::setSlotCmdAltitude(const Basic::Distance* const msg)
     }
     return ok;
 }
+
 bool RacModel::setSlotCmdHeading(const Basic::Angle* const msg)
 {
     bool ok = false;
@@ -387,6 +387,7 @@ bool RacModel::setSlotCmdHeading(const Basic::Angle* const msg)
     }
     return ok;
 }
+
 bool RacModel::setSlotCmdVelocity(const Basic::Number* const msg)
 {
     bool ok = false;
@@ -405,7 +406,6 @@ Basic::Object* RacModel::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
-
 
 //------------------------------------------------------------------------------
 // serialize
@@ -441,5 +441,5 @@ std::ostream& RacModel::serialize(std::ostream& sout, const int i, const bool sl
     return sout;
 }
 
-} // End Vehicle namespace
+} // End Dynamics namespace
 } // End Eaagles namespace

@@ -1,15 +1,15 @@
 //------------------------------------------------------------------------------
 // Class: RacModel
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Vehicle_RacModel_H__
-#define __Eaagles_Vehicle_RacModel_H__
+#ifndef __Eaagles_Dynamics_RacModel_H__
+#define __Eaagles_Dynamics_RacModel_H__
 
 #include "openeaagles/simulation/DynamicsModels.h"
 
 namespace Eaagles {
    namespace Basic { class Angle; class Distance; class Number; }
 
-namespace Vehicle {
+namespace Dynamics {
 
 //------------------------------------------------------------------------------
 // Class: RacModel
@@ -81,7 +81,7 @@ private:
     double      cmdVelocity;  // Commanded speed               (kts)
 };
 
-} // End Vehicle namespace
+} // End Dynamics namespace
 } // End Eaagles namespace
 
 #endif

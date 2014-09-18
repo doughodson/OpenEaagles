@@ -4,13 +4,13 @@
 //    A small, simple, reconfigurable 4 degree of freedom aerodynamic model
 //    written by Larry Buckner
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Vehicle_LaeroModel_H__
-#define __Eaagles_Vehicle_LaeroModel_H__
+#ifndef __Eaagles_Dynamics_LaeroModel_H__
+#define __Eaagles_Dynamics_LaeroModel_H__
 
 #include "openeaagles/simulation/DynamicsModels.h"
 
 namespace Eaagles {
-namespace Vehicle {
+namespace Dynamics {
 
 class LaeroModel : public Simulation::AerodynamicsModel
 {

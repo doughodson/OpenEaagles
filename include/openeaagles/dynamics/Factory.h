@@ -3,14 +3,14 @@
 //
 // Description: Class factory
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Vehicle_Factory_H__
-#define __Eaagles_Vehicle_Factory_H__
+#ifndef __Eaagles_Dynamics_Factory_H__
+#define __Eaagles_Dynamics_Factory_H__
 
 namespace Eaagles {
 
 namespace Basic { class Object; }
 
-namespace Vehicle {
+namespace Dynamics {
 
 class Factory
 {
@@ -21,7 +21,7 @@ protected:
    Factory();   // prevent object creation
 };
 
-}  // end namespace Vehicle
+}  // end namespace Dynamics
 }  // end namespace Eaagles
 
 #endif

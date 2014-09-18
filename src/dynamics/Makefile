@@ -1,7 +1,7 @@
 #
 include ../makedefs
 
-LIB = $(OPENEAAGLES_LIB_DIR)/liboeVehicles.a
+LIB = $(OPENEAAGLES_LIB_DIR)/liboeDynamics.a
 
 CPPFLAGS += -I$(JSBSIM_INC_DIR)
 
@@ -12,7 +12,7 @@ OBJS =  \
 	$(LIB)(JSBSimModel.o) \
 	$(LIB)(LaeroModel.o)  \
 	$(LIB)(RacModel.o) \
-	$(LIB)(vehiclesFF.o)
+	$(LIB)(dynamicsFF.o)
 
 all: ${OBJS}
 

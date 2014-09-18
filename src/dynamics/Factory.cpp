@@ -1,18 +1,18 @@
 //------------------------------------------------------------------------------
 // Class: Factory
 //------------------------------------------------------------------------------
-#include "openeaagles/vehicles/Factory.h"
+#include "openeaagles/dynamics/Factory.h"
 
 #include "openeaagles/basic/Object.h"
 
-#include "openeaagles/vehicles/JSBSimModel.h"
-#include "openeaagles/vehicles/RacModel.h"
-#include "openeaagles/vehicles/LaeroModel.h"
+#include "openeaagles/dynamics/JSBSimModel.h"
+#include "openeaagles/dynamics/RacModel.h"
+#include "openeaagles/dynamics/LaeroModel.h"
 
 #include <cstring>
 
 namespace Eaagles {
-namespace Vehicle {
+namespace Dynamics {
 
 Factory::Factory()
 {}
@@ -37,5 +37,5 @@ Basic::Object* Factory::createObj(const char* name)
     return obj;
 }
 
-}  // end namespace Vehicle
+}  // end namespace Dynamics
 }  // end namespace Eaagles

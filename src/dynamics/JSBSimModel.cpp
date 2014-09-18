@@ -1,5 +1,5 @@
 
-#include "openeaagles/vehicles/JSBSimModel.h"
+#include "openeaagles/dynamics/JSBSimModel.h"
 #include "openeaagles/basic/Number.h"
 #include "openeaagles/basic/Tables.h"
 #include "openeaagles/basic/units/Angles.h"
@@ -42,7 +42,7 @@
 
 
 namespace Eaagles {
-namespace Vehicle {
+namespace Dynamics {
 
 IMPLEMENT_SUBCLASS(JSBSimModel,"JSBSimModel")
 
@@ -1029,6 +1029,6 @@ bool JSBSimModel::setCommandedAltitude(const double a, const double, const doubl
     return hasAltitudeHold;
 }
 
-} // End Vehicle namespace
+} // End Dynamics namespace
 } // End Eaagles namespace
 

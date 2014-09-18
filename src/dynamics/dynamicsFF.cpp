@@ -1,20 +1,20 @@
 //------------------------------------------------------------------------------
-// Form function for the default 'vehicles' library
+// Form function for the default 'dynamics' library
 //------------------------------------------------------------------------------
-#include "openeaagles/vehicles/vehiclesFF.h"
-#include "openeaagles/vehicles/Factory.h"
+#include "openeaagles/dynamics/dynamicsFF.h"
+#include "openeaagles/dynamics/Factory.h"
 
 #include "openeaagles/basic/Object.h"
 
 namespace Eaagles {
-namespace Vehicle {
+namespace Dynamics {
 
-Basic::Object* vehiclesFormFunc(const char* name)
+Basic::Object* dynamicsFormFunc(const char* name)
 {
    //static bool msgPrinted(false);
    //if (!msgPrinted) {
    //   std::cout << std::endl;
-   //   std::cout << "WARNING! The function Vehicle::vehiclesFormFunc() is deprecated - use Vehicle::Factory::createObj() instead.";
+   //   std::cout << "WARNING! The function Dynamics::dynamicsFormFunc() is deprecated - use Dynamics::Factory::createObj() instead.";
    //   std::cout << std::endl;
    //   msgPrinted = true;
    //}

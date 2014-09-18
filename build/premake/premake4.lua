@@ -156,6 +156,15 @@ solution "oe"
       }
       targetname "Dis"
 
+   -- dynamics library
+   project "dynamics"
+      files {
+         "../../include/openeaagles/dynamics/**.h",
+         "../../src/dynamics/**.cpp"
+      }
+      includedirs { OE3rdPartyIncPath.."/JSBSim" }
+      targetname "Dynamics"
+
    -- graphical instruments library
    project "instruments"
       files {
@@ -243,12 +252,4 @@ solution "oe"
       }
       targetname "Terrain"
 
-   -- vehicles library
-   project "vehicles"
-      files {
-         "../../include/openeaagles/vehicles/**.h",
-         "../../src/vehicles/**.cpp"
-      }
-      includedirs { OE3rdPartyIncPath.."/JSBSim" }
-      targetname "Vehicles"
 

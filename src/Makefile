@@ -4,20 +4,21 @@ include makedefs
 # Library      : Requires
 # ------------------------------------------------------------------------
 # basic        : -
-# basicGL      : freeglut, FTGL, freetype packages
+# basicGL      : freeglut, FTGL, freetype
 # dafif        : -
+# dis          : -
+# dynamics     : JSBSim
+# gui          :
 # hla          : HLA RTI
+# instruments  : -
 # ioDevice     : -
 # linearSys    : -
-# instruments  : -
-# simulation   : -
-# sensors      : -
-# terrain      : -
-# otw          : CIGICL 3.x
-# dis          : -
-# vehicles     : JSBSim
 # maps         : -
+# otw          : CIGICL 3.x
 # recorder     : Google protocol buffers
+# sensors      : -
+# simulation   : -
+# terrain      : -
 #
 PROJECTS = basic
 PROJECTS += basicGL instruments
@@ -25,7 +26,7 @@ PROJECTS += dafif
 PROJECTS += ioDevice
 PROJECTS += linearSys 
 PROJECTS += simulation sensors terrain
-PROJECTS += dis vehicles maps
+PROJECTS += dis dynamics maps
 PROJECTS += recorder
 
 #
@@ -35,7 +36,7 @@ PROJECTS += "gui/glut"
 
 # Out-the-Window interface classes to talk to visual systems
 # - CIGI Class Library 3.x interface
-# - download and install cigicl from Sourceforge
+# - download and install cigicl
 PROJECTS += otw
 
 #
