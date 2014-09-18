@@ -1,0 +1,5 @@
+
+bison is used to create the openeaagles parser.
+
+Check their website to understand current license terms.
+They have changed between different versions.

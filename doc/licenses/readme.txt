@@ -1,4 +1,7 @@
 
+OpenEaagles uses both bison (to generate parser) and math library from OpenSceneGraph.
+
+----------------------------------- 
 Based on OpenSceneGraph-3.0.1
 
 OpenEaagles is using just the osg math library (math, vec2, vec3, vec4, matrix and quat)
