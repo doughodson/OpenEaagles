@@ -46,9 +46,9 @@
 #include "openeaagles/basic/List.h"
 #include "Lexical.h"
 
-static Eaagles::Basic::Object*  result;       // Result of all our work
-static Eaagles::Basic::Lexical* lex;          // Lex generator
-static Eaagles::Basic::ParserFormFunc formFunc; // Form fuction 
+static Eaagles::Basic::Object*  result;          // Result of all our work
+static Eaagles::Basic::Lexical* lex;             // Lex generator
+static Eaagles::Basic::ParserFormFunc formFunc;  // Form function 
 static int errCount;            // Error count
 
 //------------------------------------------------------------------------------
@@ -147,7 +147,7 @@ static Eaagles::Basic::Object* gufParse(const char* formname, Eaagles::Basic::Pa
 
 
 //--------------------------------------------------------------------------
-// The grammer rules ---
+// The grammar rules ---
 //--------------------------------------------------------------------------
 %%
 file    : form                      { result = $1; }
@@ -215,7 +215,7 @@ namespace Basic {
 
 //------------------------------------------------------------------------------
 // parse() -- Returns an Object that was constructed from
-//      parsing th input file.  Func is the name of the form
+//      parsing the input file.  Func is the name of the form
 //      constructor function.  
 //------------------------------------------------------------------------------
 

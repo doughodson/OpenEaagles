@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 // Class: Nav
-// inline functions
+// Description: inline functions
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_Basic_Nav_Inline__
 #define __Eaagles_Basic_Nav_Inline__
