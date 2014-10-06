@@ -20,7 +20,7 @@ OBJS =  \
 	$(LIB)(Datalink.o) \
 	$(LIB)(DataRecorder.o) \
 	$(LIB)(Designator.o) \
-	$(LIB)(DynamicsModels.o) \
+	$(LIB)(DynamicsModel.o) \
 	$(LIB)(Effects.o) \
 	$(LIB)(Emission.o) \
 	$(LIB)(ExternalStore.o) \
@@ -87,6 +87,8 @@ OBJS =  \
 	$(LIB)(Track.o) \
 	$(LIB)(TrackManager.o) \
 	$(LIB)(Weapon.o)
+
+SUBDIRS = dynamics
 
 all: ${OBJS}
 
