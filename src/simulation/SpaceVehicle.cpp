@@ -1,5 +1,5 @@
 #include "openeaagles/simulation/SpaceVehicle.h"
-#include "openeaagles/simulation/SpaceDynamicsModel.h"
+#include "openeaagles/simulation/dynamics/SpaceDynamicsModel.h"
 
 #include "openeaagles/basic/units/Distances.h"
 

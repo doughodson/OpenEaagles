@@ -4,7 +4,7 @@
 #ifndef __Eaagles_Dynamics_RacModel_H__
 #define __Eaagles_Dynamics_RacModel_H__
 
-#include "openeaagles/simulation/DynamicsModels.h"
+#include "openeaagles/simulation/dynamics/AerodynamicsModel.h"
 
 namespace Eaagles {
    namespace Basic { class Angle; class Distance; class Number; }

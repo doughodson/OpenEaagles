@@ -1,6 +1,6 @@
 
 #include "openeaagles/simulation/Autopilot.h"
-#include "openeaagles/simulation/DynamicsModels.h"
+#include "openeaagles/simulation/DynamicsModel.h"
 #include "openeaagles/simulation/Navigation.h"
 #include "openeaagles/simulation/Route.h"
 #include "openeaagles/simulation/Steerpoint.h"

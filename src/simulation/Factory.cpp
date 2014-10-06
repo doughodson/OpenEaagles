@@ -60,7 +60,7 @@
 #include "openeaagles/simulation/MultiActorAgent.h"
 
 #include "openeaagles/simulation/Simulation.h"
-#include "openeaagles/simulation/SpaceDynamicsModel.h"
+#include "openeaagles/simulation/dynamics/SpaceDynamicsModel.h"
 #include "openeaagles/simulation/SpaceVehicle.h"
 #include "openeaagles/simulation/StabilizingGimbal.h"
 #include "openeaagles/simulation/Station.h"

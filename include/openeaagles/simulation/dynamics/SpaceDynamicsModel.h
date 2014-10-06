@@ -4,7 +4,7 @@
 #ifndef __Eaagles_Simulation_SpaceDynamicsModel_H__
 #define __Eaagles_Simulation_SpaceDynamicsModel_H__
 
-#include "openeaagles/simulation/DynamicsModels.h"
+#include "openeaagles/simulation/DynamicsModel.h"
 
 namespace Eaagles {
 namespace Simulation {
@@ -24,7 +24,7 @@ namespace Simulation {
 //==============================================================================
 class SpaceDynamicsModel : public DynamicsModel  
 {
-   DECLARE_SUBCLASS(SpaceDynamicsModel,DynamicsModel)
+   DECLARE_SUBCLASS(SpaceDynamicsModel, DynamicsModel)
 
 public:
    SpaceDynamicsModel();

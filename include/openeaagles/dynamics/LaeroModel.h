@@ -7,7 +7,7 @@
 #ifndef __Eaagles_Dynamics_LaeroModel_H__
 #define __Eaagles_Dynamics_LaeroModel_H__
 
-#include "openeaagles/simulation/DynamicsModels.h"
+#include "openeaagles/simulation/dynamics/AerodynamicsModel.h"
 
 namespace Eaagles {
 namespace Dynamics {

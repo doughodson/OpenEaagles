@@ -1,6 +1,6 @@
 #include "openeaagles/simulation/AirVehicle.h"
 
-#include "openeaagles/simulation/DynamicsModels.h"
+#include "openeaagles/simulation/dynamics/AerodynamicsModel.h"
 #include "openeaagles/basic/List.h"
 #include "openeaagles/basic/osg/Matrix"
 #include "openeaagles/basic/units/Angles.h"

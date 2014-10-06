@@ -6,7 +6,7 @@
 
 #include "openeaagles/simulation/Datalink.h"
 #include "openeaagles/simulation/DataRecorder.h"
-#include "openeaagles/simulation/DynamicsModels.h"
+#include "openeaagles/simulation/DynamicsModel.h"
 #include "openeaagles/simulation/Emission.h"
 #include "openeaagles/simulation/Gimbal.h"
 #include "openeaagles/simulation/IrQueryMsg.h"

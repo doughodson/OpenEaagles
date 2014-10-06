@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="12.1">
+<diagram program="umlet" version="13.0">
   <zoom_level>10</zoom_level>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>380</x>
-      <y>150</y>
+      <x>340</x>
+      <y>120</y>
       <w>160</w>
       <h>140</h>
     </coordinates>
@@ -19,8 +19,8 @@ unref()
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>210</x>
-      <y>390</y>
+      <x>170</x>
+      <y>360</y>
       <w>160</w>
       <h>200</h>
     </coordinates>
@@ -34,8 +34,8 @@ updateData()
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>400</x>
-      <y>390</y>
+      <x>360</x>
+      <y>360</y>
       <w>130</w>
       <h>120</h>
     </coordinates>
@@ -48,8 +48,8 @@ updateData()
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>560</x>
-      <y>390</y>
+      <x>520</x>
+      <y>360</y>
       <w>130</w>
       <h>120</h>
     </coordinates>
@@ -62,8 +62,8 @@ updateData()
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>560</x>
-      <y>560</y>
+      <x>520</x>
+      <y>530</y>
       <w>130</w>
       <h>120</h>
     </coordinates>
@@ -76,8 +76,8 @@ updateData()
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>590</x>
-      <y>480</y>
+      <x>550</x>
+      <y>450</y>
       <w>50</w>
       <h>100</h>
     </coordinates>
@@ -87,8 +87,8 @@ updateData()
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>270</x>
-      <y>260</y>
+      <x>230</x>
+      <y>230</y>
       <w>170</w>
       <h>150</h>
     </coordinates>
@@ -98,8 +98,8 @@ updateData()
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>430</x>
-      <y>260</y>
+      <x>390</x>
+      <y>230</y>
       <w>50</w>
       <h>150</h>
     </coordinates>
@@ -109,8 +109,8 @@ updateData()
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>470</x>
-      <y>260</y>
+      <x>430</x>
+      <y>230</y>
       <w>170</w>
       <h>150</h>
     </coordinates>
@@ -120,8 +120,8 @@ updateData()
   <element>
     <type>com.umlet.element.custom.Text</type>
     <coordinates>
-      <x>410</x>
-      <y>420</y>
+      <x>370</x>
+      <y>390</y>
       <w>100</w>
       <h>50</h>
     </coordinates>
@@ -132,8 +132,8 @@ updateData()
   <element>
     <type>com.umlet.element.custom.Text</type>
     <coordinates>
-      <x>570</x>
-      <y>420</y>
+      <x>530</x>
+      <y>390</y>
       <w>100</w>
       <h>70</h>
     </coordinates>
@@ -145,8 +145,8 @@ of Objects</panel_attributes>
   <element>
     <type>com.umlet.element.custom.Text</type>
     <coordinates>
-      <x>570</x>
-      <y>590</y>
+      <x>530</x>
+      <y>560</y>
       <w>100</w>
       <h>70</h>
     </coordinates>
@@ -158,8 +158,8 @@ of Pairs</panel_attributes>
   <element>
     <type>com.umlet.element.custom.Text</type>
     <coordinates>
-      <x>220</x>
-      <y>450</y>
+      <x>180</x>
+      <y>420</y>
       <w>140</w>
       <h>130</h>
     </coordinates>
@@ -175,8 +175,8 @@ subcomponents)</panel_attributes>
   <element>
     <type>com.umlet.element.custom.Text</type>
     <coordinates>
-      <x>390</x>
-      <y>220</y>
+      <x>350</x>
+      <y>190</y>
       <w>130</w>
       <h>50</h>
     </coordinates>

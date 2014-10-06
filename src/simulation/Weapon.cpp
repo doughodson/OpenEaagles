@@ -5,7 +5,7 @@
 
 #include "openeaagles/simulation/DataRecorder.h"
 #include "openeaagles/simulation/Designator.h"
-#include "openeaagles/simulation/DynamicsModels.h"
+#include "openeaagles/simulation/DynamicsModel.h"
 #include "openeaagles/simulation/Guns.h"
 #include "openeaagles/simulation/Player.h"
 #include "openeaagles/simulation/Stores.h"

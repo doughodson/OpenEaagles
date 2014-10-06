@@ -46,7 +46,14 @@ recorder
 
 --------------------------------------------------------------------------------
 simulation
- 
+
+   - DynamicsModels.h used to include class definitions for both 'DynamicsModel' and 'AerodynamicsModel'.
+     'AerodynamicsModel' class has been separated and defined in file 'AerodynamicsModel.h'
+     As a result, the file 'DynamicsModels.h' has been renamed to proper 'DynamicsModel.h' as it now
+     only defines the 'DynamicsModel' class.
+
+   - Aerodynamics.h and SpaceDynamics.h now both reside in the simulation/dynamics directory.
+
 
 --------------------------------------------------------------------------------
 terrain

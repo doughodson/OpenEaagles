@@ -1,13 +1,10 @@
-//==============================================================================
-// class SpaceDynamicsModel
-//==============================================================================
 
-#include "openeaagles/simulation/SpaceDynamicsModel.h"
+#include "openeaagles/simulation/dynamics/SpaceDynamicsModel.h"
 
 namespace Eaagles {
 namespace Simulation {
 
-IMPLEMENT_SUBCLASS(SpaceDynamicsModel,"SpaceDynamicsModel")
+IMPLEMENT_SUBCLASS(SpaceDynamicsModel, "SpaceDynamicsModel")
 EMPTY_SLOTTABLE(SpaceDynamicsModel)
 EMPTY_SERIALIZER(SpaceDynamicsModel)
 EMPTY_COPYDATA(SpaceDynamicsModel)

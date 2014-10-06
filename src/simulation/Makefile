@@ -73,7 +73,6 @@ OBJS =  \
 	$(LIB)(SimLogger.o) \
 	$(LIB)(Simulation.o) \
 	$(LIB)(simulationFF.o) \
-	$(LIB)(SpaceDynamicsModel.o) \
 	$(LIB)(SpaceVehicle.o) \
 	$(LIB)(StabilizingGimbal.o) \
 	$(LIB)(Station.o) \
@@ -91,6 +90,18 @@ OBJS =  \
 
 all: ${OBJS}
 
+all: subdirs ${OBJS}
+
+subdirs:
+	for subdir in $(SUBDIRS); do \
+	  echo making $@ in $$subdir; \
+	  (cd $$subdir && $(MAKE)) || exit 1; \
+	done
+
 clean:
 	-rm -f *.o
+	for subdir in $(SUBDIRS); do \
+	    echo making $@ in $$subdir; \
+	    (cd $$subdir && $(MAKE) $@) || exit 1; \
+	done
 	-rm -f $(LIB)

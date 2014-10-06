@@ -5,7 +5,7 @@
 #ifndef __Eaagles_Dynamics_JSBSimModel_H__
 #define __Eaagles_Dynamics_JSBSimModel_H__
 
-#include "openeaagles/simulation/DynamicsModels.h"
+#include "openeaagles/simulation/dynamics/AerodynamicsModel.h"
 #include "openeaagles/basic/String.h"
 
 namespace JSBSim {
