@@ -186,6 +186,12 @@ class ThreadPeriodicTask : public Thread {
 public:
    ThreadPeriodicTask(Component* const parent, const LCreal priority, const LCreal rate);
 
+   // Create/start the child thread
+   virtual bool create();
+
+   // Terminate the child thread
+   virtual bool terminate();
+
    LCreal getRate() const;                         // Update rate (must be greater than zero)
    unsigned int getTotalFrameCount() const;        // Total frame count
 
@@ -214,6 +220,7 @@ private:
    Statistic bfStats;   // Busted (overrun) frame statistics (windows only)
    unsigned int tcnt;   // total frame count
    bool vdtFlg;         // Variable delta time flag
+   bool shutdownThread;
 };
 
 //------------------------------------------------------------------------------
