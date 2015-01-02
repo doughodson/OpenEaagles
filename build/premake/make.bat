@@ -25,4 +25,4 @@ rem
 %Premake% vs2008
 %Premake% vs2010
 %Premake% vs2012
-rem %Premake% vs2013
+%Premake% vs2013

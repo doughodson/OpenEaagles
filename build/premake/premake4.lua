@@ -44,9 +44,9 @@ end
 print ("Target directory path: "..targetDirPath)
 
 -- for now, premake does not support this action, so use 2012 instead
-if (_ACTION == "vs2013") then
-   _ACTION = "vs2012"
-end
+--if (_ACTION == "vs2013") then
+--   _ACTION = "vs2012"
+--end
 
 solution "oe"
 
@@ -81,7 +81,7 @@ solution "oe"
    -- common release configuration flags and symbols
    configuration { "Release" }
       flags { "Optimize" }
-      if (_ACTION == "vs2008") or (_ACTION == "vs2010") or (_ACTION == "vs2012") then
+      if (_ACTION == "vs2008") or (_ACTION == "vs2010") or (_ACTION == "vs2012") or (_ACTION == "vs2013") then
          -- enable compiler intrinsics and favour speed over size
          buildoptions { "/Oi", "/Ot" }
          defines { "WIN32", "_LIB", "NDEBUG" }
@@ -94,7 +94,7 @@ solution "oe"
    configuration { "Debug" }
       targetsuffix "_d"
       flags { "Symbols" }
-      if (_ACTION == "vs2008") or (_ACTION == "vs2010") or (_ACTION == "vs2012") then
+      if (_ACTION == "vs2008") or (_ACTION == "vs2010") or (_ACTION == "vs2012") or (_ACTION == "vs2013") then
          -- enable compiler intrinsics
          buildoptions { "/Oi" }
          defines { "WIN32", "_LIB", "_DEBUG" }
