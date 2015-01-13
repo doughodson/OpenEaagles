@@ -19,7 +19,7 @@ OBJS =  \
 	$(LIB)(recorderFF.o) \
 	$(LIB)(TabPrinter.o)
 
-SUBDIRS = generated-code
+SUBDIRS = protobuf
 
 all: subdirs ${OBJS}
 

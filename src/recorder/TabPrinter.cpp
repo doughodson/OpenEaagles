@@ -1,6 +1,6 @@
 
 #include "openeaagles/recorder/TabPrinter.h"
-#include "openeaagles/recorder/generated-code/DataRecord.pb.h"
+#include "openeaagles/recorder/protobuf/DataRecord.pb.h"
 #include "openeaagles/recorder/DataRecordHandle.h"
 
 //#include "openeaagles/simulation/recorderTokens.h"

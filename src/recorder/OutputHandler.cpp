@@ -1,7 +1,7 @@
 
 #include "openeaagles/recorder/OutputHandler.h"
 #include "openeaagles/recorder/DataRecordHandle.h"
-#include "openeaagles/recorder/generated-code/DataRecord.pb.h"
+#include "openeaagles/recorder/protobuf/DataRecord.pb.h"
 
 #include "openeaagles/basic/Pair.h"
 #include "openeaagles/basic/PairStream.h"

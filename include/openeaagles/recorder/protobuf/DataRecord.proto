@@ -1,25 +1,21 @@
 // -----------------------------------------------------------------------------
 // Protocol Buffer message descriptions for the data recorder.
-// 
+//
 // Notes:
 //    1) message 'DataRecord' is the primary recorder message
 //
-//    2) From within this directory, execute this command
-//          protoc.exe DataRecord.proto --cpp_out=generated-code   // Windows
-//          - or -
-//          protoc DataRecord.proto --cpp_out=generated-code       // Linux
+//    2) Execute this command to generate protobuf files
 //
-//    3) The DataRecord.pb.h and DataRecord.pb.cc files were
-//       generated using 'protoc' version 2.6.1;
+//       Windows:
+//          protoc.exe -I%OE_ROOT%\include --cpp_out=%OE_ROOT%\include %OE_ROOT%\include\openeaagles\recorder\protobuf\DataRecord.proto
 //
-//    3) Move the DataRecord.pb.cc file to $OE_ROOT/src/recorder/generated-code
+//       Linux:
+//          protoc -I$OE_ROOT/include --cpp_out=$OE_ROOT/include $OE_ROOT/include/openeaagles/recorder/protobuf/DataRecord.proto
 //
-//    4) Change the #include at the beginning of DataRecord.pb.cc from:
-//       #include "DataRecord.pb.h"
-//       - to -
-//       #include "openeaagles/recorder/generated-code/DataRecord.pb.h"
+//    3) Move the generated DataRecord.pb.cc file to $OE_ROOT/src/recorder/protobuf directory
 //
-// 
+//    -- The DataRecord.pb.h and DataRecord.pb.cc files were generated using 'protoc' version 2.6.1
+//
 // -----------------------------------------------------------------------------
 
 package Eaagles.Recorder.Pb;
@@ -74,7 +70,6 @@ message DataRecord {
    extensions 500 to 999;     // Reserved
    extensions 1000 to 9999;   // User messages
 }
-
 
 // =============================================================================
 // Data messages
