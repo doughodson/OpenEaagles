@@ -1,6 +1,6 @@
 
 #include "openeaagles/recorder/NetOutput.h"
-#include "openeaagles/recorder/DataRecord.pb.h"
+#include "openeaagles/recorder/generated-code/DataRecord.pb.h"
 #include "openeaagles/recorder/DataRecordHandle.h"
 #include "openeaagles/basic/NetHandler.h"
 #include "openeaagles/basic/Number.h"

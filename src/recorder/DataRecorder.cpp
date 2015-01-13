@@ -6,7 +6,7 @@
 
 #include "openeaagles/recorder/OutputHandler.h"
 #include "openeaagles/recorder/DataRecordHandle.h"
-#include "openeaagles/recorder/DataRecord.pb.h"
+#include "openeaagles/recorder/generated-code/DataRecord.pb.h"
 
 #include "openeaagles/simulation/Antenna.h"
 #include "openeaagles/simulation/Weapon.h"

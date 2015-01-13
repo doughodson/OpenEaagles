@@ -17,10 +17,17 @@ OBJS =  \
 	$(LIB)(PrintPlayer.o) \
 	$(LIB)(PrintSelected.o) \
 	$(LIB)(recorderFF.o) \
-	$(LIB)(TabPrinter.o) \
-	$(LIB)(DataRecord.pb.o)
+	$(LIB)(TabPrinter.o)
 
-all: ${OBJS}
+SUBDIRS = generated-code
+
+all: subdirs ${OBJS}
+
+subdirs:
+	for subdir in $(SUBDIRS); do \
+	  echo making $@ in $$subdir; \
+	  (cd $$subdir && $(MAKE)) || exit 1; \
+	done
 
 clean:
 	-rm -f *.o
