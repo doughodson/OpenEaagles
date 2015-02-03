@@ -1650,6 +1650,10 @@ bool Nav::convertLL2Utm(
       double* const           pEasting,   // OUT: Easting         [M]
       const EarthModel* const pEM)        // IN:  Pointer to an optional earth model (default: WGS-84)
 {
+   // Initialize earth model parameters
+   const EarthModel* pModel = pEM;
+   if (pModel == 0) { pModel = &EarthModel::wgs84; }
+
    //-----------------------------------
    // local variables
    //-----------------------------------
@@ -1661,9 +1665,9 @@ bool Nav::convertLL2Utm(
    //-----------------------------------
    // local constants
    //-----------------------------------
-   const double A       = pEM->getA();
-   const double B       = pEM->getB();   
-   const double E2      = pEM->getE2();
+   const double A       = pModel->getA();
+   const double B       = pModel->getB();   
+   const double E2      = pModel->getE2();
    
    //-----------------------------------
    // check input terms valid 
@@ -1838,6 +1842,10 @@ bool Nav::convertUtm2LL(
       double* const           pLon,     // OUT: Longitude      [DEG]
       const EarthModel* const pEM)      // IN:  Pointer to an optional earth model (default: WGS-84)      
 {
+   // Initialize earth model parameters
+   const EarthModel* pModel = pEM;
+   if (pModel == 0) { pModel = &EarthModel::wgs84; }
+
    //-----------------------------------
    // local variables
    //-----------------------------------
@@ -1850,10 +1858,10 @@ bool Nav::convertUtm2LL(
    //-----------------------------------
    // local constants
    //-----------------------------------
-   const double A    = pEM->getA();
-   const double B    = pEM->getB();
+   const double A    = pModel->getA();
+   const double B    = pModel->getB();
    
-   const double E2   = pEM->getE2();
+   const double E2   = pModel->getE2();
    const double E4   = E2*E2;
    const double E6   = E2*E4;
    
@@ -2004,6 +2012,27 @@ bool Nav::convertUtm2LL(
    *pLon = LONDEG + Angle::R2DCC*(+DE1*T14 - DE3*T15 + DE5*T16 - DE7*T17);
 
    return true;
+}
+
+// Converts Latitude, Longitude to MGRS grid coordinate
+bool Nav::convertLL2Mgrs(
+   const double lat,            // IN:  Latitude  [DEG]
+   const double lon,            // IN:  Longitude [DEG]
+   char* const mgrsCoord,       // OUT: MGRS grid coordinate (0 terminated)
+   const int   maxSize,         // IN:  Size of the MGRS buffer
+   const EarthModel* const pEM) // IN:  Pointer to an optional earth model (default: WGS-84)
+{
+   return false;
+}
+
+// Converts MGRS grid coordinate to Latitude, Longitude
+bool Nav::convertMgrs2LL(
+   const char* const mgrsCoord, // IN:  MGRS grid coordinate (0 terminated)
+   double* const pLat,          // OUT: Latitude  [DEG]
+   double* const pLon,          // OUT: Longitude [DEG]
+   const EarthModel* const pEM) // IN:  Pointer to an optional earth model (default: WGS-84)
+{
+   return false;
 }
 
 }  // End Basic namespace

@@ -778,6 +778,23 @@ public:
       const EarthModel* const pEM=0 // IN:  Pointer to an optional earth model (default: WGS-84)      
    );
 
+   // Converts Latitude, Longitude to MGRS grid coordinate
+   static bool convertLL2Mgrs(
+      const double lat,             // IN:  Latitude  [DEG]
+      const double lon,             // IN:  Longitude [DEG]
+      char* const mgrsCoord,        // OUT: MGRS grid coordinate (0 terminated)
+      const int   maxSize,          // IN:  Size of the MGRS buffer
+      const EarthModel* const pEM=0 // IN:  Pointer to an optional earth model (default: WGS-84)
+   );
+
+   // Converts MGRS grid coordinate to Latitude, Longitude
+   static bool convertMgrs2LL(
+      const char* const mgrsCoord,  // IN:  MGRS grid coordinate (0 terminated)
+      double* const pLat,           // OUT: Latitude  [DEG]
+      double* const pLon,           // OUT: Longitude [DEG]
+      const EarthModel* const pEM=0 // IN:  Pointer to an optional earth model (default: WGS-84)      
+   );
+
 }; // End class Nav
 
 // inline functions
