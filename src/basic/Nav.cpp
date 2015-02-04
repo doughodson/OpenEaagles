@@ -2047,7 +2047,7 @@ bool Nav::convertLL2Mgrs(
 
    if (error != MGRS_NO_ERROR) return false;
 
-   // Convert the geodetic coordinate to an UTM coordinate for use in the
+   // Convert the geodetic coordinate to the UTM coordinate for use in the
    // MGRS conversion.
    char   latZone;
    int    lonZone;
@@ -2092,14 +2092,29 @@ bool Nav::convertMgrs2LL(
    else if (pModel == &EarthModel::clark1880) emCode = CLARKE_1880;
    else if (pModel == &EarthModel::bessel1841) emCode = BESSEL_1841;
 
-   // Set the MGRS parameters based on the earth model
+   // Set the MGRS parameters based on the earth model.  This routine is
+   // from NASA and I have left it intact by including it privately into
+   // this source module.
    long error = Set_MGRS_Parameters(pModel->getA(), pModel->getF(), (char*) emCode);
 
    if (error != MGRS_NO_ERROR) return false;
 
-   //return convertUtm2LL(northing, easting, latZone, lonZone, pLat, pLon);
+   char   latZone;
+   int    lonZone;
+   double n;
+   double e;
 
-   return false;
+   // Convert the UTM coordinates to a MGRS string.  This routine is from
+   // NASA and I have left it intact by including it privately into this
+   // source module.
+   error = Convert_MGRS_To_UTM((char*) mgrsCoord, (long*) &lonZone, &latZone, &e, &n);
+
+   std::cout << "latzone=" << latZone << ",lonzone=" << lonZone << std::endl;
+
+   if (error != MGRS_NO_ERROR) return false;
+
+   // Convert the UTM coordinate into the geodetic coordinate
+   return convertUtm2LL(n, e, latZone, lonZone, pLat, pLon);
 }
 
 }  // End Basic namespace
