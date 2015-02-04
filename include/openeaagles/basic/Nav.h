@@ -782,6 +782,7 @@ public:
    static bool convertLL2Mgrs(
       const double lat,             // IN:  Latitude  [DEG]
       const double lon,             // IN:  Longitude [DEG]
+      const int precision,          // IN:  Coordinate precision
       char* const mgrsCoord,        // OUT: MGRS grid coordinate (0 terminated)
       const int   maxSize,          // IN:  Size of the MGRS buffer
       const EarthModel* const pEM=0 // IN:  Pointer to an optional earth model (default: WGS-84)
