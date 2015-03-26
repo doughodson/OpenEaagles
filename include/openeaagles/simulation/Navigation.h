@@ -177,15 +177,15 @@ protected:
    bool setETA(const LCreal);
    bool setNavSteeringValid(const bool dataValidFlg); 
 
-    // Navigation methods ...
-    virtual bool updateSysPosition();       // Method to compute nav system's positions
-    virtual bool updateSysVelocity();       // Method to compute nav system's velocities
-    virtual bool updateSysAttitude();       // Method to compute nav system's attitude angles
-    virtual bool updateMagVar();            // Method to compute nav system's mag variation
-    virtual bool updateNavSteering();       // Method to compute nav steering
+   // Navigation methods
+   virtual bool updateSysPosition();       // Method to compute nav system's positions
+   virtual bool updateSysVelocity();       // Method to compute nav system's velocities
+   virtual bool updateSysAttitude();       // Method to compute nav system's attitude angles
+   virtual bool updateMagVar();            // Method to compute nav system's mag variation
+   virtual bool updateNavSteering();       // Method to compute nav steering
 
    // System class Interface -- phase() callbacks
-   virtual void process(const LCreal dt);     // Phase 3
+   void process(const LCreal dt) override;     // Phase 3
     
 private:
    void initData();

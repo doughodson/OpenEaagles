@@ -38,15 +38,15 @@ public:
     }
 
     // System Interface -- Event handler(s)
-    virtual bool killedNotification(Player* const killedBy = 0);
+    bool killedNotification(Player* const killedBy = 0) override;
 
 protected:
    static const int MAX_EMISSIONS = 1000;
    static const int NUM_RAYS = 360;
 
    // System Interface -- phase callbacks
-   virtual void receive(const LCreal dt);
-   virtual void process(const LCreal dt);
+   void receive(const LCreal dt) override;
+   void process(const LCreal dt) override;
 
    // Basic::Component protected interface
    bool shutdownNotification() override;

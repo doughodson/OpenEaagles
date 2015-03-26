@@ -55,7 +55,7 @@ public: // public interface
     virtual double getCommandedAltitude() const;
     virtual bool setAltitudeHoldOn(const bool b);
     virtual bool setCommandedAltitude(const double a, const double aMps = 0, const double maxPitch = 0);
-    virtual void dynamics(const LCreal dt);             // One pass model update; called from Player::dynamics()
+    void dynamics(const LCreal dt) override;             // One pass model update; called from Player::dynamics()
 
     void reset() override;
 

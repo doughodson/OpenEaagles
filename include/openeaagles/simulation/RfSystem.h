@@ -159,7 +159,7 @@ protected:
    virtual void processPlayersOfInterest();
 
    // Callbacks by phase -- to be used by the derived classes, as needed
-   virtual void process(const LCreal dt);     // Phase 3
+   void process(const LCreal dt) override;     // Phase 3
 
    // Basic::Component protected interface
    bool shutdownNotification() override;

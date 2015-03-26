@@ -118,9 +118,9 @@ inline std::ostream& operator<<(std::ostream& sout, const Angle& n)
 // aepcfDeg -- angle end point check (float-degrees)
 inline float Angle::aepcfDeg(float x)
 {
-   float y;
+   float y(0.0);
    if (x < -180.0f || x > 180.0f) {
-      y = std::fmodf(x, 360.0f);
+      y = fmodf(x, 360.0f);
       if (y >  180.0f) y -= 360.0f;
       if (y < -180.0f) y += 360.0f;
       return(y);
@@ -134,7 +134,7 @@ inline float Angle::aepcfDeg(float x)
 // aepcdDeg -- angle end point check (float-degrees)
 inline double Angle::aepcdDeg(double x)
 {
-   double y;
+   double y(0.0);
    if (x < -180.0 || x > 180.0) {
       y = std::fmod(x, 360.0);
       if (y >  180.0) y -= 360.0;
@@ -151,9 +151,9 @@ inline double Angle::aepcdDeg(double x)
 // aepcfRad -- angle end point check (float-radians)
 inline float Angle::aepcfRad(float x)
 {
-   float y;
+   float y(0.0);
    if (x < -static_cast<float>(PI) || x > static_cast<float>(PI)) {
-      y = std::fmodf(x, (2.0f * static_cast<float>(PI)));
+      y = fmodf(x, (2.0f * static_cast<float>(PI)));
       if (y >  static_cast<float>(PI)) y -= (2.0f * static_cast<float>(PI));
       if (y < -static_cast<float>(PI)) y += (2.0f * static_cast<float>(PI));
       return(y);
@@ -167,7 +167,7 @@ inline float Angle::aepcfRad(float x)
 // aepcdRad -- angle end point check (double-radians)
 inline double Angle::aepcdRad(double x)
 {
-   double y;
+   double y(0.0);
    if (x < -PI || x > PI) {
       y = std::fmod(x, (2.0 * PI));
       if (y >  PI) y -= (2.0 * PI);

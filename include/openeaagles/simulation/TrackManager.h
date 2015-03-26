@@ -74,7 +74,7 @@ public:
    virtual void newReport(Emission* em, LCreal snDbl);
 
    // System Interface -- Event handler(s)
-   virtual bool killedNotification(Player* const killedBy = 0);
+   bool killedNotification(Player* const killedBy = 0) override;
 
    // Component Interface
    void reset() override;
@@ -118,7 +118,7 @@ protected:
    mutable long        queueLock;          // Semaphore to protect both emQueue and snQueue
 
    // System class Interface -- phase() callbacks
-   virtual void process(const LCreal dt);     // Phase 3
+   void process(const LCreal dt) override;     // Phase 3
 
    // Basic::Component protected interface
    bool shutdownNotification() override;

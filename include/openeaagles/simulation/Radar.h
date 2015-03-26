@@ -65,7 +65,7 @@ public:
    virtual bool setSlotIGain(Basic::Number* const msg);
 
    // System Interface -- Event handler(s)
-   virtual bool killedNotification(Player* const killedBy = 0);
+   bool killedNotification(Player* const killedBy = 0) override;
 
    // Basic::Component interface
    void updateData(const LCreal dt = 0.0) override;
