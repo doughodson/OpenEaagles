@@ -34,7 +34,6 @@ public:
 private:
     bool figureRotation(const LCreal thisAlt);
     
-    float altitude;                         // our actual altitude
     SendData dialAltSD;                     // sending our altitude to our dial pointer
     SendData altHundredsSD;                 // our hundreds altitude
     SendData altOneThousandsSD;             // our one thousands altitude

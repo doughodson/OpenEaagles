@@ -68,7 +68,6 @@ private:
     unsigned int    width;          // Width  (pixels: must be power of two)
     unsigned int    height;         // Height (pixels: must be power of two)
     unsigned int    depth;          // Depth (bytes: 1, 2, 3 or 4) 
-    bool            loaded;         // Image has been loaded
     bool            xmitEnble;      // Image should be transmitted over datalink
 
     // Original image data

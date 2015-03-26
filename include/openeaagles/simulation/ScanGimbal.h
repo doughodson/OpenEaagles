@@ -267,7 +267,6 @@ private:
     double     conAngle;         // Conical scan angle (degrees)
     double     revPerSec;        // Revolutions per second (hz)
     double     scanRadius;       // Radius of the conical or circular scan (rad)
-    bool       oneRev;           // Tells us we have done one circular or conical revolution
     double     myLastAngle;      // Angle (radians) of our last position in a rate servo
     double     numRevs;          // Spiral Scan - current number of revolutions
     double     maxNumRevs;       // Spiral Scan - maximum number of revolutions
