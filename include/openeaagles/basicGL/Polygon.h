@@ -65,7 +65,8 @@ namespace BasicGL {
 //       is defined by the plane equation coefficients, 'coeff'.
 //
 //------------------------------------------------------------------------------
-class Polygon : public Graphic {
+class Polygon : public Graphic
+{
     DECLARE_SUBCLASS(Polygon,Graphic)
 
 public:
@@ -93,7 +94,7 @@ public:
    void setLayer(const unsigned int newLayer);
 
    // Graphic Interface
-   virtual void drawFunc(); 
+   void drawFunc() override; 
 
 private:
    osg::Vec4      coeff;      // Coefficients of the plane equation

@@ -1,16 +1,16 @@
-//------------------------------------------------------------------------------
-// Class: AnalogInput
-//------------------------------------------------------------------------------
+
 #ifndef __Eaagles_IoDevice_AnalogInput_H__
 #define __Eaagles_IoDevice_AnalogInput_H__
 
 #include "openeaagles/basic/IoAdapter.h"
 
 namespace Eaagles {
-   namespace Basic { class Number; class Table1; }
+
+namespace Basic { class Number; class Table1; }
 
 namespace IoDevice {
-   class IoDevice;
+
+class IoDevice;
 
 //------------------------------------------------------------------------------
 // Class:  AnalogInput
@@ -72,7 +72,7 @@ public:
    bool setGain(const LCreal);
    bool setTable(const Basic::Table1* const);
 
-   // Basic::IoAdapter functions
+   // Basic::IoAdapter interface
    void processInputs(const LCreal dt, const Basic::IoDevice* const device, Basic::IoData* const inData) override;
    void processOutputs(const LCreal dt, const Basic::IoData* const outData, Basic::IoDevice* const device) override;
 

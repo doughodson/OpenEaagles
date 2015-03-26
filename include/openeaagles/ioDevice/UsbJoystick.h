@@ -1,13 +1,12 @@
-//------------------------------------------------------------------------------
-// Class: UsbJoystick
-//------------------------------------------------------------------------------
+
 #ifndef __Eaagles_IoDevice_UsbJoystick_H__
 #define __Eaagles_IoDevice_UsbJoystick_H__
 
 #include "openeaagles/basic/IoDevice.h"
 
 namespace Eaagles {
-   namespace Basic { class Number; }
+
+namespace Basic { class Number; }
 
 namespace IoDevice {
 
@@ -40,7 +39,7 @@ namespace IoDevice {
 //------------------------------------------------------------------------------
 class UsbJoystick : public Basic::IoDevice
 {
-    DECLARE_SUBCLASS(UsbJoystick,Basic::IoDevice)
+    DECLARE_SUBCLASS(UsbJoystick, Basic::IoDevice)
 
 public:
    UsbJoystick();

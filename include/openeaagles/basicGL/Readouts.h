@@ -412,7 +412,7 @@ class Rotary : public Field {
 public:
    Rotary();
    // BasicGL::Graphic interface
-   virtual void draw();
+   void draw() override;
 
 private:
     // this flag tells us our components need to be pre-drawn (to avoid flicker)

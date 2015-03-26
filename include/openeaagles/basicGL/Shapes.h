@@ -37,11 +37,12 @@ namespace BasicGL {
 //      Sets slices to ssobj and returns true if successful.
 //
 //------------------------------------------------------------------------------
-class Circle : public Graphic {
+class Circle : public Graphic
+{
     DECLARE_SUBCLASS(Circle,Graphic)
 public:
     Circle();
-    virtual void drawFunc(); 
+    void drawFunc() override; 
     
     // set functions
     virtual bool setRadius(const LCreal x)   { radius = x; return true; }
@@ -79,8 +80,8 @@ private:
 //
 // Draws a nice doughnut type circle, based on inner and outer radius
 //------------------------------------------------------------------------------
-class OcclusionCircle : public Circle {
-
+class OcclusionCircle : public Circle
+{
     DECLARE_SUBCLASS(OcclusionCircle,Circle)
 
 public:
@@ -125,11 +126,13 @@ private:
 //      Sets isConnected (boolean) and returns true if successful.
 //
 //------------------------------------------------------------------------------
-class Arc : public Circle {
+class Arc : public Circle
+{
     DECLARE_SUBCLASS(Arc,Circle)
 public:
     Arc();
-    virtual void drawFunc(); 
+
+    void drawFunc() override; 
     
     // set functions
     virtual bool setStartAngle(const LCreal x) { startAngle = x; return true; }
@@ -161,14 +164,15 @@ private:
 //
 // Just like OcclusionCircle, only draws from a start angle to a finish angle
 //------------------------------------------------------------------------------
-class OcclusionArc : public Arc {
+class OcclusionArc : public Arc
+{
     DECLARE_SUBCLASS(OcclusionArc,Arc)
 
 public:
     OcclusionArc();
 
     // BasicGL::Graphic interface
-    virtual void drawFunc();
+    void drawFunc() override;
     
     // Set functions
     bool setOuterRadius(const LCreal x)  { outerRadius = x; return true; }    
@@ -190,15 +194,16 @@ private:
 // Factory name: Point
 //
 // Public member functions:
-//   virtual void drawFunc()
+//   void drawFunc() override
 //   Draws a point for each vertex
 //
 //------------------------------------------------------------------------------
-class Point : public Graphic {
+class Point : public Graphic
+{
     DECLARE_SUBCLASS(Point,Graphic)
 public:
     Point();
-    virtual void drawFunc(); 
+    void drawFunc() override; 
 };
 
 
@@ -208,15 +213,16 @@ public:
 // Factory name: LineLoop
 //
 // Public member functions:
-//    virtual void drawFunc()
+//    void drawFunc() override
 //    Draws a line based on a set of vertices
 //
 //------------------------------------------------------------------------------
-class LineLoop : public Graphic {
+class LineLoop : public Graphic
+{
     DECLARE_SUBCLASS(LineLoop,Graphic)
 public:
     LineLoop();
-    virtual void drawFunc(); 
+    void drawFunc() override;
 };
 
 //------------------------------------------------------------------------------
@@ -235,11 +241,13 @@ public:
 //      Returns number of segments.
 //
 //------------------------------------------------------------------------------
-class Line : public Graphic {
+class Line : public Graphic
+{
     DECLARE_SUBCLASS(Line,Graphic)
 public:
     Line();
-    virtual void drawFunc(); 
+
+    void drawFunc() override;
 
     // set 
     bool setSegments(const bool x)  { segment = x; return true; }
@@ -261,7 +269,8 @@ private:
 // Description:
 //      Simple openGL quad strip 
 //------------------------------------------------------------------------------
-class Quad : public Graphic {
+class Quad : public Graphic
+{
     DECLARE_SUBCLASS(Quad,Graphic)
 public:
     Quad();
@@ -273,7 +282,7 @@ public:
     bool isStrip()                  { return strip; }
 
     // BasicGL::Graphic interface
-    virtual void drawFunc(); 
+    void drawFunc() override;
 
 protected:
     bool setSlotStrip(const Basic::Number* const x);
@@ -288,7 +297,8 @@ protected:
 // Description:
 //      Simple openGL triangle primitive (or strip, or fan)
 //------------------------------------------------------------------------------
-class Triangle : public Quad {
+class Triangle : public Quad
+{
     DECLARE_SUBCLASS(Triangle,Quad)
 public:
     Triangle();
@@ -300,7 +310,7 @@ public:
     bool isFan()                  { return fan; }
 
     // BasicGL::Graphic interface
-    virtual void drawFunc(); 
+    void drawFunc() override; 
 
 protected:
     bool setSlotFan(const Basic::Number* const x);

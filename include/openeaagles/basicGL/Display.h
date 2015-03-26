@@ -1,6 +1,4 @@
-//------------------------------------------------------------------------------
-// Class: Display
-//------------------------------------------------------------------------------
+
 #ifndef __Eaagles_BasicGL_Display_H__
 #define __Eaagles_BasicGL_Display_H__
 
@@ -88,7 +86,8 @@ class Material;
 //          (the display screen pointer is not set).
 //
 //----------------------------------------------------------------------------
-class Display : public Page {
+class Display : public Page
+{
     DECLARE_SUBCLASS(Display,Page)
 
 public:
@@ -128,7 +127,6 @@ public:
 
    virtual void loadTextures();                 // Load the texture table
    const Basic::PairStream* getTextures() const; // Returns a ptr to the list of textures
-
 
    // ---
    // Global (display) graphic parameters

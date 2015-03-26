@@ -75,7 +75,7 @@ namespace Simulation {
 //------------------------------------------------------------------------------
 class Autopilot : public Pilot
 {
-   DECLARE_SUBCLASS(Autopilot,Pilot)
+   DECLARE_SUBCLASS(Autopilot, Pilot)
 
 public:
    Autopilot();

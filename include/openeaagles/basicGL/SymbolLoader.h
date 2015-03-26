@@ -167,11 +167,8 @@ public:
    bool isInterconnected()  { return interconnect; };
 
    // BasicGL::Graphic interface
-   virtual void draw();
-
-   // BasicGL::Graphic interface
-   // interface for drawing interconnect
-   virtual void drawFunc();
+   void draw() override;
+   void drawFunc() override;
 
    void updateTC(const LCreal dt = 0.0) override;
 

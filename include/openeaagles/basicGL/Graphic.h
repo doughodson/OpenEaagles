@@ -1,6 +1,4 @@
-//------------------------------------------------------------------------------
-// Class: Graphic
-//------------------------------------------------------------------------------
+
 #ifndef __Eaagles_BasicGL_Graphic_H__
 #define __Eaagles_BasicGL_Graphic_H__
 
@@ -229,7 +227,8 @@ class Material;
 //      lower than this, so there is no confusion in the pick() routine.
 //
 //------------------------------------------------------------------------------
-class Graphic : public Basic::Component {
+class Graphic : public Basic::Component
+{
     DECLARE_SUBCLASS(Graphic,Basic::Component)
 
 public:

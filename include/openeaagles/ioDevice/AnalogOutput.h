@@ -1,13 +1,12 @@
-//------------------------------------------------------------------------------
-// Class: AnalogOutput
-//------------------------------------------------------------------------------
+
 #ifndef __Eaagles_IoDevice_AnalogOutput_H__
 #define __Eaagles_IoDevice_AnalogOutput_H__
 
 #include "openeaagles/basic/IoAdapter.h"
 
 namespace Eaagles {
-   namespace Basic { class Number; class Table1; }
+
+namespace Basic { class Number; class Table1; }
 
 namespace IoDevice {
 
@@ -39,7 +38,7 @@ namespace IoDevice {
 //------------------------------------------------------------------------------
 class AnalogOutput : public Basic::IoAdapter
 {
-   DECLARE_SUBCLASS(AnalogOutput,Basic::IoAdapter)
+   DECLARE_SUBCLASS(AnalogOutput, Basic::IoAdapter)
 
 public:
    AnalogOutput();
@@ -58,7 +57,7 @@ public:
    bool setGain(const LCreal);
    bool setTable(const Basic::Table1* const);
 
-   // Basic::IoAdapter functions
+   // Basic::IoAdapter interface
    void processInputs(const LCreal dt, const Basic::IoDevice* const device, Basic::IoData* const inData) override;
    void processOutputs(const LCreal dt, const Basic::IoData* const outData, Basic::IoDevice* const device) override;
 
@@ -73,7 +72,7 @@ protected:
 private:
    void initData();
 
-   bool  devEnb;           // Device enabled
+   bool  devEnb;              // Device enabled
    unsigned int location;     // IoData analog output channel number
    unsigned int channel;      // Analog channel number
    LCreal       value;        // Initial value

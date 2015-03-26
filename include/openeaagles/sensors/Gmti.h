@@ -9,7 +9,9 @@
 #include "openeaagles/simulation/Radar.h"
 
 namespace Eaagles {
-   namespace Basic { class List; }
+
+namespace Basic { class List; }
+
 namespace Sensor {
 
 class Gmti : public Simulation::Radar  
@@ -19,7 +21,7 @@ class Gmti : public Simulation::Radar
 public:
     Gmti();
 
-    const osg::Vec3& getPoi() const                    { return poiVec; }
+    const osg::Vec3& getPoi() const                                { return poiVec; }
     void setPoi(const LCreal x, const LCreal y, const LCreal z);
     void setPoi(const osg::Vec3& newPos);
 
@@ -30,7 +32,7 @@ protected:
     void dynamics(const LCreal dt) override;
 
 private:
-    osg::Vec3   poiVec;         // Point Of Interest vector  (m) [ x, y, z ] NED
+    osg::Vec3 poiVec;    // Point Of Interest vector  (m) [ x, y, z ] NED
 };
 
 } // End Sensor namespace

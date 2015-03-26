@@ -18,7 +18,7 @@ namespace Simulation {
 //==============================================================================
 class AerodynamicsModel : public DynamicsModel  
 {
-    DECLARE_SUBCLASS(AerodynamicsModel,DynamicsModel)
+    DECLARE_SUBCLASS(AerodynamicsModel, DynamicsModel)
 
 public:
     AerodynamicsModel();

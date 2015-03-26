@@ -1,16 +1,16 @@
-//------------------------------------------------------------------------------
-// Class: DiscreteOutput
-//------------------------------------------------------------------------------
+
 #ifndef __Eaagles_IoDevice_DiscreteOutput_H__
 #define __Eaagles_IoDevice_DiscreteOutput_H__
 
 #include "openeaagles/basic/IoAdapter.h"
 
 namespace Eaagles {
-   namespace Basic { class NetHandler; class Number; }
+
+namespace Basic { class NetHandler; class Number; }
 
 namespace IoDevice {
-   class IoDevice;
+
+class IoDevice;
 
 //------------------------------------------------------------------------------
 // Class:  DiscreteOutput
@@ -31,7 +31,7 @@ namespace IoDevice {
 //------------------------------------------------------------------------------
 class DiscreteOutput : public Basic::IoAdapter
 {
-   DECLARE_SUBCLASS(DiscreteOutput,Basic::IoAdapter)
+   DECLARE_SUBCLASS(DiscreteOutput, Basic::IoAdapter)
 
 public:
    DiscreteOutput();
@@ -50,7 +50,7 @@ public:
    bool setInvertFlag(const bool);
    bool setNumber(const int);
 
-   // Basic::IoAdapter functions
+   // Basic::IoAdapter interface
    void processInputs(const LCreal dt, const Basic::IoDevice* const device, Basic::IoData* const inData) override;
    void processOutputs(const LCreal dt, const Basic::IoData* const outData, Basic::IoDevice* const device) override;
 

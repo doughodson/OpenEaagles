@@ -35,7 +35,7 @@ namespace Simulation {
 //==============================================================================
 class DynamicsModel : public Basic::Component  
 {
-    DECLARE_SUBCLASS(DynamicsModel,Basic::Component)
+    DECLARE_SUBCLASS(DynamicsModel, Basic::Component)
 
 public:
     DynamicsModel();

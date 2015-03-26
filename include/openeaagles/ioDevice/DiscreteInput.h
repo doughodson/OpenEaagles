@@ -1,6 +1,4 @@
-//------------------------------------------------------------------------------
-// Class: DiscreteInput
-//------------------------------------------------------------------------------
+
 #ifndef __Eaagles_IoDevice_DiscreteInput_H__
 #define __Eaagles_IoDevice_DiscreteInput_H__
 
@@ -31,7 +29,7 @@ namespace IoDevice {
 //------------------------------------------------------------------------------
 class DiscreteInput : public Basic::IoAdapter
 {
-   DECLARE_SUBCLASS(DiscreteInput,Basic::IoAdapter)
+   DECLARE_SUBCLASS(DiscreteInput, Basic::IoAdapter)
 
 public:
    DiscreteInput();
@@ -50,7 +48,7 @@ public:
    bool setInvertFlag(const bool);
    bool setNumber(const int);
 
-   // Basic::IoAdapter functions
+   // Basic::IoAdapter interface
    void processInputs(const LCreal dt, const Basic::IoDevice* const device, Basic::IoData* const inData) override;
    void processOutputs(const LCreal dt, const Basic::IoData* const outData, Basic::IoDevice* const device) override;
 

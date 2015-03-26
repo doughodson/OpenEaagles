@@ -1,17 +1,17 @@
-//------------------------------------------------------------------------------
-// Class: SignalGen
-//------------------------------------------------------------------------------
+
 #ifndef __Eaagles_IoDevice_SignalGen_H__
 #define __Eaagles_IoDevice_SignalGen_H__
 
 #include "openeaagles/basic/IoAdapter.h"
 
 namespace Eaagles {
-   namespace Basic { class Angle; class Frequency; class String; }
+
+namespace Basic { class Angle; class Frequency; class String; }
 
 namespace IoDevice {
-   class IoDevice;
-   class IoData;
+
+class IoDevice;
+class IoData;
 
 //------------------------------------------------------------------------------
 // Class:  SignalGen
@@ -45,7 +45,7 @@ namespace IoDevice {
 //------------------------------------------------------------------------------
 class SignalGen : public Basic::IoAdapter
 {
-   DECLARE_SUBCLASS(SignalGen,Basic::IoAdapter)
+   DECLARE_SUBCLASS(SignalGen, Basic::IoAdapter)
 
 public:
    enum Signal { SINE, COSINE, SQUARE, SAW };

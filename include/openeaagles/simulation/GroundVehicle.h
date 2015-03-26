@@ -44,12 +44,12 @@ public:
 public:
     GroundVehicle();
 
-    virtual LCreal getGrossWeight() const;              // wt: lbs
+    LCreal getGrossWeight() const override;             // wt: lbs
     virtual LCreal getFuelWt() const;                   // wt: lbs
     virtual LCreal getFuelWtMax() const;                // wt: lbs
 
-    virtual LCreal getLauncherPosition() const;        // Launcher elevation angle (rad)
-    virtual LCreal getLauncherRate() const;            // Launcher rate (rad/sec)
+    virtual LCreal getLauncherPosition() const;         // Launcher elevation angle (rad)
+    virtual LCreal getLauncherRate() const;             // Launcher rate (rad/sec)
     virtual LauncherCommand getLauncherCommand() const; // Returns the launcher's command position (UP/DOWN) or NONE if not commanded
 
 

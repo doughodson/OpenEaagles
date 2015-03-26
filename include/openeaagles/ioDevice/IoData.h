@@ -1,13 +1,12 @@
-//------------------------------------------------------------------------------
-// Class: IoData
-//------------------------------------------------------------------------------
+
 #ifndef __Eaagles_IoDevice_IoData_H__
 #define __Eaagles_IoDevice_IoData_H__
 
 #include "openeaagles/basic/IoData.h"
 
 namespace Eaagles {
-   namespace Basic { class Number; }
+
+namespace Basic { class Number; }
 
 namespace IoDevice {
 

@@ -1,7 +1,6 @@
 //------------------------------------------------------------------------------
 // Class: Tws
 // Description: Simple, Track-While-Scan Mode Radar
-//
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_Sensor_Tws_H__
 #define __Eaagles_Sensor_Tws_H__

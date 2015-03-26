@@ -1,13 +1,12 @@
-//------------------------------------------------------------------------------
-// Class: RacModel
-//------------------------------------------------------------------------------
+
 #ifndef __Eaagles_Dynamics_RacModel_H__
 #define __Eaagles_Dynamics_RacModel_H__
 
 #include "openeaagles/simulation/dynamics/AerodynamicsModel.h"
 
 namespace Eaagles {
-   namespace Basic { class Angle; class Distance; class Number; }
+
+namespace Basic { class Angle; class Distance; class Number; }
 
 namespace Dynamics {
 
@@ -29,32 +28,32 @@ namespace Dynamics {
 //------------------------------------------------------------------------------
 class RacModel : public Simulation::AerodynamicsModel
 {
-    DECLARE_SUBCLASS(RacModel,Simulation::AerodynamicsModel)
+    DECLARE_SUBCLASS(RacModel, Simulation::AerodynamicsModel)
 
 public: // public interface
     RacModel();
 
     // AerodynamicsModel interface
-    virtual LCreal getGload() const;                    // G's (+up, one at level)
-    virtual LCreal getMach() const;                     // mach number
-    virtual LCreal getAngleOfAttack() const;            // radians
-    virtual LCreal getSideSlip() const;                 // radians
-    virtual LCreal getFlightPath() const;               // radians
-    virtual LCreal getCalibratedAirspeed() const;       // Kts
+    LCreal getGload() const override;                   // G's (+up, one at level)
+    LCreal getMach() const override;                    // mach number
+    LCreal getAngleOfAttack() const override;           // radians
+    LCreal getSideSlip() const override;                // radians
+    LCreal getFlightPath() const override;              // radians
+    LCreal getCalibratedAirspeed() const override;      // Kts
 
     // DynamicsModel interface
-    virtual bool isHeadingHoldOn() const;
-    virtual double getCommandedHeadingD() const;
-    virtual bool setHeadingHoldOn(const bool b);
-    virtual bool setCommandedHeadingD(const double h, const double hDps = 0, const double maxBank = 0);
-    virtual bool isVelocityHoldOn() const;
-    virtual double getCommandedVelocityKts() const;
-    virtual bool setVelocityHoldOn(const bool b);
-    virtual bool setCommandedVelocityKts(const double v, const double vNps = 0);
-    virtual bool isAltitudeHoldOn() const;
-    virtual double getCommandedAltitude() const;
-    virtual bool setAltitudeHoldOn(const bool b);
-    virtual bool setCommandedAltitude(const double a, const double aMps = 0, const double maxPitch = 0);
+    bool isHeadingHoldOn() const override;
+    double getCommandedHeadingD() const override;
+    bool setHeadingHoldOn(const bool b) override;
+    bool setCommandedHeadingD(const double h, const double hDps = 0, const double maxBank = 0) override;
+    bool isVelocityHoldOn() const override;
+    double getCommandedVelocityKts() const override;
+    bool setVelocityHoldOn(const bool b) override;
+    bool setCommandedVelocityKts(const double v, const double vNps = 0) override;
+    bool isAltitudeHoldOn() const override;
+    double getCommandedAltitude() const override;
+    bool setAltitudeHoldOn(const bool b) override;
+    bool setCommandedAltitude(const double a, const double aMps = 0, const double maxPitch = 0) override;
     void dynamics(const LCreal dt) override;             // One pass model update; called from Player::dynamics()
 
     void reset() override;

@@ -1,16 +1,16 @@
-//------------------------------------------------------------------------------
-// Class: Ai2DiSwitch
-//------------------------------------------------------------------------------
+
 #ifndef __Eaagles_IoDevice_Ai2DiSwitch_H__
 #define __Eaagles_IoDevice_Ai2DiSwitch_H__
 
 #include "openeaagles/basic/IoAdapter.h"
 
 namespace Eaagles {
-   namespace Basic { class Number; }
+
+namespace Basic { class Number; }
 
 namespace IoDevice {
-   class IoDevice;
+
+class IoDevice;
 
 //------------------------------------------------------------------------------
 // Class:  Ai2DiSwitch
@@ -40,7 +40,7 @@ namespace IoDevice {
 //------------------------------------------------------------------------------
 class Ai2DiSwitch : public Basic::IoAdapter
 {
-   DECLARE_SUBCLASS(Ai2DiSwitch,Basic::IoAdapter)
+   DECLARE_SUBCLASS(Ai2DiSwitch, Basic::IoAdapter)
 
 public:
    Ai2DiSwitch();
@@ -55,7 +55,7 @@ public:
    bool setLevel(const LCreal);
    bool setInvertFlag(const bool);
 
-   // Basic::IoAdapter functions
+   // Basic::IoAdapter interface
    void processInputs(const LCreal dt, const Basic::IoDevice* const device, Basic::IoData* const inData) override;
    void processOutputs(const LCreal dt, const Basic::IoData* const outData, Basic::IoDevice* const device) override;
 

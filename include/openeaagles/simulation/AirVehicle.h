@@ -76,14 +76,14 @@ public:
     
     // Vehicle data
     virtual LCreal getGload() const;                    // Gs (+up, one at level)
-    virtual LCreal getMach() const;                     // mach number
+    LCreal getMach() const override;                    // mach number
     virtual LCreal getAngleOfAttack() const;            // radians
     virtual LCreal getSideSlip() const;                 // radians
     virtual LCreal getFlightPath() const;               // radians
     virtual LCreal getCalibratedAirspeed() const;       // Kts
     virtual LCreal getFuelWt() const;                   // wt: lbs
     virtual LCreal getFuelWtMax() const;                // wt: lbs
-    virtual LCreal getGrossWeight() const;              // wt: lbs
+    LCreal getGrossWeight() const override;             // wt: lbs
     virtual LCreal getSpeedBrakePosition() const;       // %
     virtual LCreal getLandingGearPosition() const;      // % (0% up; 100% down)
     virtual LCreal getWeaponBayDoorPosition() const;    // % (0% closed; 100% open)

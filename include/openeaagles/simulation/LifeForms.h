@@ -30,7 +30,7 @@ public:
 
 
     // Player interface
-    virtual unsigned int getMajorType() const;
+    unsigned int getMajorType() const override;
     // sets our actions (right now we can stand, walk, or run)
     virtual bool setActionState(const int x);
     

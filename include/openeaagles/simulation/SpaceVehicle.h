@@ -50,8 +50,8 @@ public:
    virtual bool setTranslateZInput(const LCreal transz);
 
    // Player class interface
-   virtual LCreal getGrossWeight() const; 
-   virtual unsigned int getMajorType() const;
+   LCreal getGrossWeight() const override; 
+   unsigned int getMajorType() const override;
 };
 
 

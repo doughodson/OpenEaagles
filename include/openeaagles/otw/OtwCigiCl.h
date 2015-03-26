@@ -77,7 +77,7 @@ class CigiClNetworkSignalProcessing;
 //------------------------------------------------------------------------------
 class OtwCigiCl : public Simulation::Otw
 {
-   DECLARE_SUBCLASS(OtwCigiCl,Simulation::Otw)
+   DECLARE_SUBCLASS(OtwCigiCl, Simulation::Otw)
 
 public:
    static const unsigned int NUM_BUFFERS = 2;
@@ -154,10 +154,10 @@ protected:
 
    // Access functions
    CigiIGCtrlV3* getIgControlPacket()                   { return igc; }
-   CigiLosVectReqV3* getLosRangeRequestPacket()      { return los; }
+   CigiLosVectReqV3* getLosRangeRequestPacket()         { return los; }
    CigiViewCtrlV3* getViewControlPacket()               { return view; }
-   CigiSensorCtrlV3* getSensorControlPacket()        { return sensor; }
-   CigiViewDefV3* getViewDefinitionPacket()         { return fov; }
+   CigiSensorCtrlV3* getSensorControlPacket()           { return sensor; }
+   CigiViewDefV3* getViewDefinitionPacket()             { return fov; }
    CigiCompCtrlV3* getOwnshipComponentControlPacket(const unsigned int buffer) {
       return (buffer < NUM_BUFFERS ? ownshipCC[buffer] : 0);
    }
@@ -282,7 +282,7 @@ private:
 //------------------------------------------------------------------------------
 class CigiCl : public Basic::Component
 {
-   DECLARE_SUBCLASS(CigiCl,Basic::Component)
+   DECLARE_SUBCLASS(CigiCl, Basic::Component)
 
 public:
    CigiCl();
@@ -354,7 +354,7 @@ private:
 //------------------------------------------------------------------------------
 class CigiClNetwork : public CigiCl
 {
-   DECLARE_SUBCLASS(CigiClNetwork,CigiCl)
+   DECLARE_SUBCLASS(CigiClNetwork, CigiCl)
 
 public:
    CigiClNetwork();

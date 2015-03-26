@@ -300,9 +300,9 @@ public:
    virtual bool setSlotTestTgtName(const Basic::String* const p);
 
    // Player interface
-   virtual unsigned int getMajorType() const;
-   virtual bool collisionNotification(Player* const p);
-   virtual bool crashNotification();
+   unsigned int getMajorType() const override;
+   bool collisionNotification(Player* const p) override;
+   bool crashNotification() override;
 
    // Basic::Component interface
    void updateTC(const LCreal dt = 0.0) override;
