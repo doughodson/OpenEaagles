@@ -356,7 +356,7 @@ public:
    virtual bool isOkToSwap() const;
    virtual void setOkToSwap(const bool x);
 
-   void updateTC(const LCreal dt = 0.0f) override;
+   void updateTC(const LCreal dt = 0.0) override;
    void reset() override;
 
 protected:

@@ -272,7 +272,7 @@ protected:
    virtual bool setSlotMaxEntityRange(const Basic::Distance* const msg);       // Sets the max entity range(s)
 
    // Basic::Component protected interface
-   virtual bool shutdownNotification();
+   bool shutdownNotification() override;
 
 //------------------------------------------------------------------------------
 // Network Interface Block (NIB) maintenance sections

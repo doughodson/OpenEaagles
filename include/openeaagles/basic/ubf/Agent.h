@@ -35,16 +35,17 @@ class Action;
 class Agent : public Basic::Component
 {
    DECLARE_SUBCLASS(Agent, Basic::Component)
+
 public:
    Agent();
 
-   void updateTC(const LCreal dt = 0.0f) override;
-   void updateData(const LCreal dt = 0.0f) override;
+   void updateTC(const LCreal dt = 0.0) override;
+   void updateData(const LCreal dt = 0.0) override;
    void reset() override;
 
 protected:
    // generic controller
-   virtual void controller(const LCreal dt = 0.0f);
+   virtual void controller(const LCreal dt = 0.0);
 
    Behavior* getBehavior() const          { return behavior; }
    void setBehavior(Behavior* const);
@@ -82,11 +83,13 @@ inline Basic::Component* Agent::getActor()                      { return myActor
 class AgentTC : public Agent
 {
    DECLARE_SUBCLASS(AgentTC, Agent)
+
 public:
    AgentTC();
+
    // Basic::Component Interface
-   virtual void updateTC(const LCreal dt = 0.0f);
-   virtual void updateData(const LCreal dt = 0.0f);
+   void updateTC(const LCreal dt = 0.0) override;
+   void updateData(const LCreal dt = 0.0) override;
 };
 
 } // End Ubf namespace

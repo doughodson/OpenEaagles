@@ -45,11 +45,11 @@ public:
     LCreal getDisplacement() const     { return displacement; }
     
     // BasicGL::Graphic interface
-    virtual void draw();
+    void draw() override;
         
     // Basic::Component interface
-    virtual void updateData(const LCreal dt = 0.000000);
-    virtual bool event(const int event, Basic::Object* const obj = 0);
+    void updateData(const LCreal dt = 0.0) override;
+    bool event(const int event, Basic::Object* const obj = 0) override;
     
 protected:
     // slot functions

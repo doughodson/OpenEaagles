@@ -77,7 +77,7 @@ public:
    virtual void processOutputs(const LCreal dt, const IoData* const outData);
 
    // Component interface
-   virtual void reset();
+   void reset() override;
 
 protected:
    PairStream* getDeviceList();
@@ -88,7 +88,7 @@ protected:
    virtual bool setSlotDevices(PairStream* const list);
 
    // Basic::Component protected functions
-   virtual bool shutdownNotification();
+   bool shutdownNotification() override;
 
 private:
    void initData();

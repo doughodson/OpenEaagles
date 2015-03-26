@@ -42,11 +42,11 @@ public:
     virtual bool setMaxRate(const LCreal newMR);
 
     // BasicGL::Graphic interface
-    virtual void draw();
+    void draw() override;
     
     // Basic::Component interface
-    virtual bool event(const int event, Basic::Object* const obj = 0);
-    virtual void updateData(const LCreal dt = 0);
+    bool event(const int event, Basic::Object* const obj = 0) override;
+    void updateData(const LCreal dt = 0) override;
 
 protected:
     // slot functions

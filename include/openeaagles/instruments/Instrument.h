@@ -39,8 +39,8 @@ public:
     virtual bool setInstVal(const LCreal newPos);
     
     // Basic::Component interface
-    virtual bool event(const int event, Basic::Object* const obj = 0);  
-    virtual void updateData(const LCreal dt = 0.000000);
+    bool event(const int event, Basic::Object* const obj = 0) override;  
+    void updateData(const LCreal dt = 0.0) override;
 
 protected:
     // slot functions

@@ -143,8 +143,8 @@ public:
    virtual void pixelsToLatLon(const int x, const int y, double &lat, double &lon);
 
    // Basic::Component interface
-   virtual void updateData(const LCreal dt = 0.0);  
-   virtual bool event(const int event, Basic::Object* const obj = 0);
+   void updateData(const LCreal dt = 0.0) override;  
+   bool event(const int event, Basic::Object* const obj = 0) override;
 
 protected:
    // slot functions

@@ -67,7 +67,7 @@ public:
     TSource getTimeline() const     { return timeline; }    // Timeline (UTC, SIM or EXEC)
 
     // Basic::Component interface
-    void updateTC(const LCreal dt = 0.0f) override;
+    void updateTC(const LCreal dt = 0.0) override;
     void updateData(const LCreal dt = 0.0) override;
 
 protected:

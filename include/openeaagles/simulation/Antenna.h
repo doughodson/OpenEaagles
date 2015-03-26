@@ -131,10 +131,10 @@ protected:
    void clearQueues();
 
    // System class Interface -- phase() callbacks
-   virtual void process(const LCreal dt);     // Phase 3
+   void process(const LCreal dt) override;     // Phase 3
 
    // Basic::Component protected interface
-   virtual bool shutdownNotification();
+   bool shutdownNotification() override;
 
    QStack<Emission*> freeEmStack;  // Free emission stack
    mutable long      freeEmLock;   // Semaphore to protect 'freeEmStack'

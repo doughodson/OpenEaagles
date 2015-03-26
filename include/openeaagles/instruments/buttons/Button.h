@@ -31,7 +31,7 @@ public:
     virtual bool onCancel();
 
     // Basic::Component interface
-    virtual bool event(const int event, Basic::Object* const obj = 0);
+    bool event(const int event, Basic::Object* const obj = 0) override;
     
 protected: 
     // Sets the Event ID to newEvent.

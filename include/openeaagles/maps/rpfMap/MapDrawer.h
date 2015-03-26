@@ -82,7 +82,7 @@ public:
     void drawFunc() override;
     
     // Basic::Component interface
-    void updateData(const LCreal dt = 0.000000) override;
+    void updateData(const LCreal dt = 0.0) override;
                   
 protected:
     bool setSlotMapIntensity(const Basic::Number* const x);

@@ -38,10 +38,10 @@ public:
     bool setZPos(const LCreal zPos);                    // Sets the Z position (world coord)
 
     // Graphic interface
-    virtual void draw();
+    void draw() override;
 
     // Component interface
-    virtual bool event(const int event, Object* const obj = 0);  
+    bool event(const int event, Object* const obj = 0) override;  
 
 private:
     // event functions

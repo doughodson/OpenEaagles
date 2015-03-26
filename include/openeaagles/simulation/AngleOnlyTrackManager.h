@@ -45,7 +45,7 @@ protected:
    virtual bool setSlotBeta(const Basic::Number* const num);         // Sets beta
 
    // Basic::Component protected interface
-   virtual bool shutdownNotification();
+   bool shutdownNotification() override;
 
    // Prediction parameters
    LCreal              azimuthBin;         // Azimuth Bin

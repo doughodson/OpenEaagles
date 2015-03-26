@@ -94,10 +94,10 @@ protected:
    virtual bool setSlotMaxRange(const Basic::Distance* const num);
 
    // System class protected functions
-   virtual void dynamics(const LCreal dt);    // Phase 0 -> ages queues
+   void dynamics(const LCreal dt) override;    // Phase 0 -> ages queues
 
    // Basic::Component protected functions
-   virtual bool shutdownNotification();
+   bool shutdownNotification() override;
 
 private:
    void initData();

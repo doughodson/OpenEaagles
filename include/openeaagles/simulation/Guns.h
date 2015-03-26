@@ -179,11 +179,11 @@ protected:
    void setHitPlayer(Player* p);
 
    // Weapon interface
-   virtual void weaponDynamics(const LCreal dt);
-   virtual void updateTOF(const LCreal dt);
+   void weaponDynamics(const LCreal dt) override;
+   void updateTOF(const LCreal dt) override;
 
    // Basic::Component protected interface
-   virtual bool shutdownNotification();
+   bool shutdownNotification() override;
 
    struct Burst {
       enum Status { ACTIVE, HIT, MISS };

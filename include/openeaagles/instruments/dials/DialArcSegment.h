@@ -26,10 +26,10 @@ public:
     virtual bool setFilled(const bool x);
 
     // BasicGL::Graphic interface
-    virtual void drawFunc();
+    void drawFunc() override;
 
     // Basic::Component interface
-    virtual void updateData(const LCreal dt = 0.0000000);
+    void updateData(const LCreal dt = 0.0) override;
     
 protected:
     bool setSlotIsDynamic(const Basic::Number* const newD);

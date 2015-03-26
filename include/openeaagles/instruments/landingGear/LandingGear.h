@@ -38,10 +38,10 @@ public:
     bool getHaveRotary() const      { return haveRotary; }
     
     // BasicGL::Graphic interface
-    virtual void drawFunc(); 
+    void drawFunc() override; 
     
     // Basic::Component interface
-    virtual void updateData(const LCreal dt = 0.0f);
+    void updateData(const LCreal dt = 0.0) override;
     
 protected:
     // slot functions

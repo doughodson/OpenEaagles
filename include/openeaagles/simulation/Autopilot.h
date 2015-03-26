@@ -254,10 +254,10 @@ protected:
    virtual bool processModeFollowTheLead();
 
    // System class Interface -- phase() callbacks
-   virtual void process(const LCreal dt);     // Phase 3
+   void process(const LCreal dt) override;     // Phase 3
 
    // Basic::Component protected interface
-   virtual bool shutdownNotification();
+   bool shutdownNotification() override;
 
 private:
    bool flySRT();                   // flies a standard rate of turn

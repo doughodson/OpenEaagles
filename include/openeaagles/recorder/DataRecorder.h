@@ -124,7 +124,6 @@ protected:
    virtual bool recordTrackRemoved(const Basic::Object* objs[4], const double values[4]);
    virtual bool recordTrackData(const Basic::Object* objs[4], const double values[4]);
 
-
    // Simulation::DataRecorder class protected interface functions
    virtual bool recordDataImp(
       const unsigned int id,              // Recorder event Id
@@ -134,7 +133,7 @@ protected:
    virtual bool processUnhandledId(const unsigned int id);
 
    // Basic::Component protected interface
-   virtual bool shutdownNotification();     // We're shutting down
+   bool shutdownNotification() override;
 
 private:
    void initData();

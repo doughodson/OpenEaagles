@@ -35,7 +35,7 @@ public:
     LCreal getEngFF(const int engNum) const { return ff[engNum]; } 
 
     // Basic::Component Interface
-    virtual void updateData(const LCreal dt = 0.0);
+    void updateData(const LCreal dt = 0.0) override;
 
 private:
 

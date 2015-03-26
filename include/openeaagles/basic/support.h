@@ -157,22 +157,22 @@ inline int nint(const LCreal x)
     // int(-0.5f) equals 0 or -1, and int(-1000.5f) equals -1000 or -1001,
     // depending on platform.  So, make a negative valued 'x' positive,
     // add 0.5f, then negate the truncated int() cast.
-    if (x < 0.0f) return (-(int((-x) + 0.5f)));
+    if (x < 0.0) return (-(static_cast<int>((-x) + 0.5f)));
     else return int(x + 0.5f);
 }
 
 // nint -- nearest integer
 inline int nintf(const float x)
 {
-    if (x < 0.0f) return (-(int((-x) + 0.5f)));
-    else return int(x + 0.5f);
+    if (x < 0.0f) return (-(static_cast<int>((-x) + 0.5f)));
+    else return static_cast<int>(x + 0.5f);
 }
 
 // nint -- nearest integer
 inline int nintd(const double x)
 {
-    if (x < 0.0) return (-(int((-x) + 0.5)));
-    else return int(x + 0.5);
+    if (x < 0.0) return (-(static_cast<int>((-x) + 0.5)));
+    else return static_cast<int>(x + 0.5);
 }
 
 // ---

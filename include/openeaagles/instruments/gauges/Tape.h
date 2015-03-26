@@ -12,15 +12,15 @@
 namespace Eaagles {
 namespace Instruments {
 
-class Tape : public Instrument {
-
+class Tape : public Instrument
+{
     DECLARE_SUBCLASS(Tape, Instrument)
     
 public:
 
     Tape();
 
-    virtual void updateData(const LCreal dt = 0.0000000);
+    void updateData(const LCreal dt = 0.0) override;
 
     virtual bool setRange(const int x)                  { range = x; return true; }
     virtual bool setHeight(const Eaagles::LCreal x)     { height = x; return true; }

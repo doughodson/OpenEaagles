@@ -261,8 +261,8 @@ public:
    // ---
    // Basic::Component functions
    // ---
-   void updateTC(const LCreal dt = 0.0f) override;
-   void updateData(const LCreal dt = 0.0f) override;
+   void updateTC(const LCreal dt = 0.0) override;
+   void updateData(const LCreal dt = 0.0) override;
    void reset() override;
 
 protected:

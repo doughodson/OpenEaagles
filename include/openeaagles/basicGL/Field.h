@@ -265,11 +265,11 @@ public:
    int getCharacterPos() const                   { return icp; } 
 
    // Graphic interface
-   virtual void drawFunc(); 
+   void drawFunc() override; 
 
    // Component interface
-   virtual bool event(const int event, Object* const obj = 0);
-   virtual void updateData(const LCreal dt = 0.0);
+   bool event(const int event, Object* const obj = 0) override;
+   void updateData(const LCreal dt = 0.0) override;
 
 
 protected:

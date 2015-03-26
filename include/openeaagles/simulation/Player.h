@@ -1031,8 +1031,8 @@ protected:
    virtual void updateElevation();
 
    // Basic::Component Interface
-   virtual bool shutdownNotification();
-   virtual void printTimingStats();
+   bool shutdownNotification() override;
+   void printTimingStats() override;
 
    // These systems, from our subcomponent list, can only be set by reset()
    virtual bool setDynamicsModel(Basic::Pair* const sys); // Sets our dynamics model

@@ -66,7 +66,7 @@ protected:
    virtual void processRecordImp(const DataRecordHandle* const handle);
 
    // Basic::Component protected interface functions
-   virtual bool shutdownNotification();     // We're shutting down
+   bool shutdownNotification() override;
 
 private:
    void initData();

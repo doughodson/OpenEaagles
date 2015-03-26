@@ -36,12 +36,12 @@ public:
    MultiActorAgent();
 
    // Basic::Component Interface
-   void updateData(const LCreal dt = 0.0f) override;
+   void updateData(const LCreal dt = 0.0) override;
    void reset() override;
 
 protected:
    // generic controller
-   virtual void controller(const LCreal dt = 0.0f);
+   virtual void controller(const LCreal dt = 0.0);
 
    void setState(Basic::Ubf::State* const);
    Basic::Ubf::State* getState() const                { return state; }

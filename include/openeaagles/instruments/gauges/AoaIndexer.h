@@ -46,10 +46,10 @@ public:
     int    getState() const         { return aoaState; }
     
     // BasicGL::Graphic interface
-    virtual void drawFunc();
+    void drawFunc() override;
     
     // Basic::Component interface
-    virtual void updateData(const LCreal dt = 0);
+    void updateData(const LCreal dt = 0) override;
     
 protected:
 

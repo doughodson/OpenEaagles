@@ -305,8 +305,8 @@ public:
     virtual bool setWaypoints(Dafif::WaypointLoader* const p); // Sets the waypoint loader
     
     // Basic::Component Interface
-    void updateTC(const LCreal dt = 0.0f) override;
-    void updateData(const LCreal dt = 0.0f) override;
+    void updateTC(const LCreal dt = 0.0) override;
+    void updateData(const LCreal dt = 0.0) override;
     void reset() override;
 
 public:

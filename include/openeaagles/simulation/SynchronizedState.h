@@ -1,6 +1,4 @@
-//------------------------------------------------------------------------------
-// Class: SynchronizedState
-//------------------------------------------------------------------------------
+
 #ifndef __Eaagles_Simulation_SynchronizedState_H__
 #define __Eaagles_Simulation_SynchronizedState_H__
 
@@ -23,14 +21,14 @@ class SynchronizedState : public Basic::Object
 public:
    SynchronizedState();
 
-   const osg::Vec3d& getGeocPosition() const { return posVecECEF; }           // Geocentric (ECEF) position vector [ x y z ] (meters)
-   const osg::Vec3d& getGeocVelocity() const { return velVecECEF; }           // Geocentric (ECEF) velocity vector [ x y z ] (meters/second)
-   const osg::Vec3d& getGeocAcceleration() const { return accelVecECEF; }     // Geocentric (ECEF) acceleration vector [ x y z ] ((meters/second)/second)
-   const osg::Vec3d& getGeocEulerAngles() const { return anglesW; }           // Geocentric (body/ECEF) Euler angles
-   const osg::Vec3d& getAngularVelocities() const { return angVel; }          // Body angular rates (radians/second)
-   double getTimeExec() const { return timeExec; }                            // Sim exec time of state data (seconds)
-   double getTimeUtc() const { return timeUtc; }                              // Sim time of day for the state data (seconds)
-   bool isValid() const override { return valid; }
+   const osg::Vec3d& getGeocPosition() const      { return posVecECEF; }    // Geocentric (ECEF) position vector [ x y z ] (meters)
+   const osg::Vec3d& getGeocVelocity() const      { return velVecECEF; }    // Geocentric (ECEF) velocity vector [ x y z ] (meters/second)
+   const osg::Vec3d& getGeocAcceleration() const  { return accelVecECEF; }  // Geocentric (ECEF) acceleration vector [ x y z ] ((meters/second)/second)
+   const osg::Vec3d& getGeocEulerAngles() const   { return anglesW; }       // Geocentric (body/ECEF) Euler angles
+   const osg::Vec3d& getAngularVelocities() const { return angVel; }        // Body angular rates (radians/second)
+   double getTimeExec() const                     { return timeExec; }      // Sim exec time of state data (seconds)
+   double getTimeUtc() const                      { return timeUtc; }       // Sim time of day for the state data (seconds)
+   bool isValid() const override                  { return valid; }
 
    virtual bool setGeocPosition(const osg::Vec3d& gcPos);
    virtual bool setGeocVelocity(const osg::Vec3& newVelEcef);

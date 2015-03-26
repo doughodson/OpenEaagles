@@ -177,7 +177,7 @@ public:
       osg::Vec3& rgb);                  // Color
 
    // Component interface
-   virtual void reset();
+   void reset() override;
 
 protected:
    virtual void clearData();                       // Clear the data arrays

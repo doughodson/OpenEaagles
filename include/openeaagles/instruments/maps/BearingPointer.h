@@ -39,12 +39,12 @@ public:
     bool setBearingDeg(const LCreal newB);             // degrees
     
     // BasicGL::Graphic interface
-    virtual void drawFunc();
-    virtual void draw();
+    void drawFunc() override;
+    void draw() override;
     
     // Basic::Component interface
-    virtual void updateData(const LCreal dt = 0);
-    virtual bool event(const int key, Basic::Object* const obj = 0);
+    void updateData(const LCreal dt = 0) override;
+    bool event(const int key, Basic::Object* const obj = 0) override;
 
 protected:
     // slot functions

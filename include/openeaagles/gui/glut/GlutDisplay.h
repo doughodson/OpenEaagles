@@ -101,7 +101,7 @@ public:
    bool setSlotAccumBuff(const Basic::Number* const msg);
    bool setSlotStencilBuff(const Basic::Number* const msg);
 
-   // BasicGL::Display functions
+   // BasicGL::Display interface
    virtual void select();                       // Selects this display.
    virtual void hide();
    virtual void show();
@@ -109,9 +109,9 @@ public:
    virtual void reshapeIt(int w, int h);
    virtual void mouseEvent(const int button, const int state, const int x, const int y);
 
-   // Basic::Component functions
-   virtual void reset();
-   virtual bool event(const int event, Basic::Object* const obj = 0);
+   // Basic::Component interface
+   void reset() override;
+   bool event(const int event, Basic::Object* const obj = 0) override;
 
 protected:
    // Creates a subwindow and returns the window ID (or -1 if failed)

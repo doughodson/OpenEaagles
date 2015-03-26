@@ -194,7 +194,7 @@ public:
       );
 
    // Object class functions
-   virtual bool isValid() const;
+   bool isValid() const override;
 
 public: // Exceptions
 
@@ -271,7 +271,7 @@ public:
    virtual unsigned int tableSize() const;
 
    // Object class functions
-   virtual bool isValid() const;
+   bool isValid() const override;
 
 protected:
    virtual bool loadData(const List& list, LCreal* const table);
@@ -322,7 +322,7 @@ public:
    virtual unsigned int tableSize() const;
 
    // Object class functions
-   virtual bool isValid() const;
+   bool isValid() const override;
 
 protected:
    virtual bool loadData(const List& list, LCreal* const table);
@@ -375,7 +375,7 @@ public:
    virtual unsigned int tableSize() const;
 
    // Object interface
-   virtual bool isValid() const;
+   bool isValid() const override;
 
 protected:
    virtual bool loadData(const List& list, LCreal* const table);
@@ -430,7 +430,7 @@ public:
    virtual unsigned int tableSize() const;
 
    // Object interface
-   virtual bool isValid() const;
+   bool isValid() const override;
 
 protected:
    virtual bool loadData(const List& list, LCreal* const table);
@@ -485,7 +485,7 @@ public:
    virtual unsigned int tableSize() const;
 
    // Object interface
-   virtual bool isValid() const;
+   bool isValid() const override;
 
 protected:
    virtual bool loadData(const List& list, LCreal* const table);

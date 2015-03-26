@@ -22,10 +22,10 @@ public:
     virtual bool setHeight(const LCreal x)          { height = x; return true; }
 
     // BasicGL::Graphic interface
-    virtual void drawFunc();
+    void drawFunc() override;
     
     // Basic::Component interface
-    virtual void updateData(const LCreal dt = 0.0f);
+    void updateData(const LCreal dt = 0.0) override;
 
 protected:
     bool setSlotSkyColor(const Basic::Color* const cobj);   

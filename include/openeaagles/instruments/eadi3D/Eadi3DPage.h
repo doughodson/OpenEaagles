@@ -41,10 +41,10 @@ public:
     void setLocalizerValid(const bool locValid);        // T = valid
 
     // BasicGL::Graphic interface
-    virtual void draw();
+    void draw() override;
 
     // Basic::Component interface
-    virtual bool event(const int event, Basic::Object* const obj = 0);
+    bool event(const int event, Basic::Object* const obj = 0) override;
 
 private:
     // event functions

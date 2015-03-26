@@ -386,7 +386,7 @@ public:
 
 
    // Component interface
-   virtual bool event(const int event, Object* const obj = 0);
+   bool event(const int event, Object* const obj = 0) override;
 
 public: // Exceptions
     class ExpInvalidDisplayPtr : public Object::Exception {

@@ -34,10 +34,10 @@ public:
     virtual bool setLightRadius(const LCreal newLR);
     
     // Basic::Component interface
-    virtual void updateData(const LCreal dt = 0.0000000f);
+    void updateData(const LCreal dt = 0.0) override;
     
     // BasicGL::Graphic override
-    virtual void drawFunc();
+    void drawFunc() override;
 
 protected:
     // slot functions

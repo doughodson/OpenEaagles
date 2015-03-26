@@ -66,7 +66,7 @@ protected:
          Basic::Pair* const add = 0,           // Optional pair to add
          Basic::Component* const remove = 0    // Optional subcomponent to remove
       );
-   virtual bool shutdownNotification();     // We're shutting down
+   bool shutdownNotification() override;
 
 private:
    void initData();

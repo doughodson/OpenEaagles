@@ -29,7 +29,7 @@ public:
     AltitudeDial();
     
     // Basic::Component interface
-    virtual void updateData(const LCreal dt = 0);
+    void updateData(const LCreal dt = 0) override;
 
 private:
     bool figureRotation(const LCreal thisAlt);

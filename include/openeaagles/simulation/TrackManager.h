@@ -121,7 +121,7 @@ protected:
    virtual void process(const LCreal dt);     // Phase 3
 
    // Basic::Component protected interface
-   virtual bool shutdownNotification();
+   bool shutdownNotification() override;
 
 private:
    void initData();

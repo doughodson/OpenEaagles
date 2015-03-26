@@ -79,7 +79,7 @@ protected:
    void processArticulationParameters(const EntityStatePDU* const pdu);
 
    // Basic::Component protected interface
-   virtual bool shutdownNotification();
+   bool shutdownNotification() override;
 
    // Electromagnetic Emitter handlers (protected for now)
    unsigned char    numEmissionSystems;                           // Number of emission systems

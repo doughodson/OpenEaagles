@@ -132,8 +132,8 @@ public:
    virtual Basic::Pair* findBySelectName(const GLuint name);
 
    bool event(const int event, Basic::Object* const obj = 0) override;
-   void updateTC(const LCreal dt = 0.0f) override;
-   void updateData(const LCreal dt = 0.0f) override;
+   void updateTC(const LCreal dt = 0.0) override;
+   void updateData(const LCreal dt = 0.0) override;
    void reset() override;
 
 protected:

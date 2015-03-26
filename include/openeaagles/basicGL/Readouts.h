@@ -46,7 +46,7 @@ public:
    virtual bool setTextList(const Basic::List* const stlobj);
 
    // Component interface
-   virtual bool event(const int key, Basic::Object* const obj = 0);
+   bool event(const int key, Basic::Object* const obj = 0) override;
 };
 
 //------------------------------------------------------------------------------
@@ -55,12 +55,13 @@ public:
 // Factory name: Cursor
 //
 //------------------------------------------------------------------------------
-class Cursor : public Field {
-    DECLARE_SUBCLASS(Cursor,Field)
+class Cursor : public Field
+{
+    DECLARE_SUBCLASS(Cursor, Field)
 
 public:
    Cursor();
-   virtual void updateData(const LCreal dt = 0.0f);
+   void updateData(const LCreal dt = 0.0) override;
 };
 
 
@@ -117,7 +118,8 @@ public:
 //      Checks the input value and returns true if it is valid.
 //
 //------------------------------------------------------------------------------
-class NumericReadout : public Field {
+class NumericReadout : public Field
+{
    DECLARE_SUBCLASS(NumericReadout,Field)
 
 public:
@@ -143,8 +145,8 @@ public:
    virtual bool onUpdateValue(const Basic::Number* const ouvobj);
    
    // Component interface
-   virtual bool event(const int key, Basic::Object* const obj = 0);
-   virtual void updateData(const LCreal dt = 0.0);
+   bool event(const int key, Basic::Object* const obj = 0) override;
+   void updateData(const LCreal dt = 0.0) override;
 
 protected:
    virtual bool setSlotFloatToBeDisplayed(const Basic::Float* const msg);
@@ -432,7 +434,7 @@ class Rotary2 : public Rotary {
 
 public:
    Rotary2();
-   virtual bool event(const int key, Basic::Object* const obj = 0);
+   bool event(const int key, Basic::Object* const obj = 0) override;
    //macro function for event handler
    virtual bool onSelect(const Basic::Number* const osobj);
 };

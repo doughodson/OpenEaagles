@@ -27,10 +27,10 @@ public:
     virtual bool setCurrentState(const int x);
 
     // Button interface
-    virtual bool onSingleClick();
+    bool onSingleClick() override;
     
     // Basic::Component interface
-    virtual void updateData(const LCreal dt = 0.000000);    
+    void updateData(const LCreal dt = 0.0) override;    
     
 protected:
     bool setSlotNumSelections(const Basic::Number* const msg);

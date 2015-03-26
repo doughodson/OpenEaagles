@@ -46,8 +46,8 @@ public:
     Basic::UpTimer* getTimer() { return timer; }
 
     // Component interface
-    virtual void updateData(const LCreal dt = 0.000000);
-    virtual bool event(const int event, Basic::Object* const obj = 0);
+    void updateData(const LCreal dt = 0.0) override;
+    bool event(const int event, Basic::Object* const obj = 0) override;
 
 protected:
     // event function
@@ -87,12 +87,12 @@ public:
     virtual bool onPicked(const Basic::Number* const x);
 
     // Component interface
-    virtual bool event(const int event, Basic::Object* const obj = 0);
-    virtual void updateData(const LCreal dt = 0.000000);
+    bool event(const int event, Basic::Object* const obj = 0) override;
+    void updateData(const LCreal dt = 0.0) override;
 
 private:
     bool noTimer;    // this flag tells this button that we don't time, we simply switch
-    bool pushed;    // flag that tells us we have the mouse down on our current graphic
+    bool pushed;     // flag that tells us we have the mouse down on our current graphic
     SendData pushedSD;
 
 };

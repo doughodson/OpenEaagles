@@ -72,7 +72,7 @@ public:
     virtual void log(const char* const msg);
     virtual void log(LogEvent* const event);
 
-    void updateTC(const LCreal dt = 0.0f) override;
+    void updateTC(const LCreal dt = 0.0) override;
     void updateData(const LCreal dt = 0.0) override;
 
 protected:

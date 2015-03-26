@@ -43,8 +43,8 @@ public:
     virtual void draw();
 
     // Basic::Component interface
-    virtual void updateData(const LCreal dt = 0.0000000);
-    virtual bool event(const int event, Basic::Object* const obj = 0);
+    void updateData(const LCreal dt = 0.0) override;
+    bool event(const int event, Basic::Object* const obj = 0) override;
 
 protected: 
     // Sets the Event ID to newEvent.

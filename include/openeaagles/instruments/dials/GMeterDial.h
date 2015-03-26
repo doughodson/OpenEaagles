@@ -22,11 +22,11 @@ public:
     GMeterDial();
     
     // BasicGL::Graphic interface
-    virtual void drawFunc(); 
+    void drawFunc() override; 
     
     // Basic::Component interface
-    virtual void updateData(const LCreal dt = 0.000000f);
-    virtual void reset();
+    void updateData(const LCreal dt = 0.0) override;
+    void reset() override;
     
 private:
     LCreal rotation;    // our rotation angle (of the gauge arrow)

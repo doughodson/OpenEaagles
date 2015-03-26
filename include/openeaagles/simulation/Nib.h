@@ -226,7 +226,7 @@ protected:
    double updateDrTime(const double dt)               { return (drTime += dt); }
 
    // Basic::Component protected interface
-   virtual bool shutdownNotification();
+   bool shutdownNotification() override;
 
 private:
    // compute the rotational matrix R0

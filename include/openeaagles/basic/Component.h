@@ -273,8 +273,9 @@ class String;
 //          bits then setting our bits it will therefore affect our components
 //          that haven't explicitly enabled or disabled their messages.
 //------------------------------------------------------------------------------
-class Component : public Object {
-   DECLARE_SUBCLASS(Component,Object)
+class Component : public Object
+{
+   DECLARE_SUBCLASS(Component, Object)
 
 public:
    // Standard Event Tokens
@@ -326,9 +327,9 @@ public:
 
    virtual const Identifier* findNameOfComponent(const Component* const p) const;
 
-   virtual void updateTC(const LCreal dt = 0.0f);
-   virtual void updateData(const LCreal dt = 0.0f);
-   void tcFrame(const LCreal dt = 0.0f);
+   virtual void updateTC(const LCreal dt = 0.0);
+   virtual void updateData(const LCreal dt = 0.0);
+   void tcFrame(const LCreal dt = 0.0);
 
    virtual bool isFrozen() const;
    virtual bool isNotFrozen() const;

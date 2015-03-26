@@ -57,10 +57,10 @@ public:
     bool setRotationsDeg(const LCreal x, const LCreal y = 0, const LCreal z = 0);
 
     // Graphic interface
-    virtual void draw();
+    void draw() override;
 
     // Component interface
-    virtual bool event(const int event, Basic::Object* const obj = 0);  
+    bool event(const int event, Basic::Object* const obj = 0) override;  
 
 private:
     // Event callbacks

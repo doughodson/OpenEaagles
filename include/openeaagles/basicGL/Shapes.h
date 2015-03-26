@@ -53,8 +53,8 @@ public:
     bool isFilled()         { return filled; }
     int getSlices()         { return slices; }
 
-    // Component override
-    virtual bool event(const int event, Basic::Object* const obj = 0);
+    // Component interface
+    bool event(const int event, Basic::Object* const obj = 0) override;
     
 protected:
     bool setSlotRadius(const Basic::Number* const x);

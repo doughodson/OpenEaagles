@@ -220,7 +220,7 @@ public:
    virtual Decoy* releaseOneDecoy();
 
    // Component Interface
-   void updateData(const LCreal dt = 0.0f) override;
+   void updateData(const LCreal dt = 0.0) override;
 
 protected:
    // System class interface; phase() callbacks

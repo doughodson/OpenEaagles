@@ -23,7 +23,8 @@ class Time;
 //    active      <Boolean>   ! Sets timer active (running) flag (default: false)
 //
 //==============================================================================
-class Timer : public Object {
+class Timer : public Object
+{
     DECLARE_SUBCLASS(Timer,Object)
 
 public:

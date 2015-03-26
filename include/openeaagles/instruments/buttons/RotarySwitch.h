@@ -12,7 +12,8 @@
 namespace Eaagles {
 namespace Instruments {
 
-class RotarySwitch : public Button {
+class RotarySwitch : public Button
+{
     DECLARE_SUBCLASS(RotarySwitch,Button)
 
 public:
@@ -22,10 +23,10 @@ public:
    int getCurrentPosition() const { return currentPosition; }; 
 
    // Button class interface
-   virtual bool onSingleClick();
+   bool onSingleClick() override;
 
    // Basic::Component class interface
-   virtual void updateData(const LCreal dt = 0.00000f);
+   void updateData(const LCreal dt = 0.0) override;
     
 protected: 
     bool setSlotAngles(const Basic::PairStream* const stream);

@@ -85,7 +85,7 @@ public:
    LCreal getRate() const;                // Thread rate (hz)
 
    // Component class functions
-   virtual void reset();
+   void reset() override;
 
 protected:
    bool areNetworksEnabled() const { return netInitialized; }
@@ -101,7 +101,7 @@ protected:
    virtual bool setSlotPriority(const Number* const num);
 
    // Basic::Component protected functions
-   virtual bool shutdownNotification();
+   bool shutdownNotification() override;
 
 private:
    void initData();

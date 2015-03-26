@@ -11,7 +11,8 @@
 namespace Eaagles {
 namespace Instruments {
 
-class PushButton : public Button {
+class PushButton : public Button
+{
     DECLARE_SUBCLASS(PushButton,Button)
  
 public:
@@ -26,7 +27,6 @@ public:
    // sets the pushbutton type ie momentary = false or maintained = true
    virtual bool setFunction(const bool x);
    
-
    // The left mouse button has been depressed
    virtual bool onMouseDown();
 
@@ -35,8 +35,8 @@ public:
    virtual bool onCancel();
 
    // Basic::Component class interface
-   virtual void updateData(const LCreal dt = 0.000000);
-   virtual bool event(const int event, Basic::Object* const obj = 0);
+   void updateData(const LCreal dt = 0.0) override;
+   bool event(const int event, Basic::Object* const obj = 0) override;
     
 protected: 
    // sets the pushbutton type to momentary = false or maintained = true

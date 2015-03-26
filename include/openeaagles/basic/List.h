@@ -190,7 +190,7 @@ public:
    Object* remove(Item* oldItem);
 
    // Object interface
-   virtual bool isValid() const;
+   bool isValid() const override;
 
 private:
    const Object* getPosition1(const unsigned int n) const;

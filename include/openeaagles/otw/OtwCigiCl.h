@@ -143,7 +143,7 @@ public:
    virtual bool setSlotShipWakeModel(const Basic::Number* const msg);
 
    // Component interface
-   void updateData(const LCreal dt = 0.0f) override;
+   void updateData(const LCreal dt = 0.0) override;
    void reset() override;
 
 protected:
