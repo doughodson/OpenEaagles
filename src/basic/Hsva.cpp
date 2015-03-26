@@ -58,24 +58,16 @@ bool Hsva::colorInterpolate(
       const Hsva& maxColor   // Minimum HSV color
  )
 {
-   bool ok = false;
-   if (&minColor != 0 && &maxColor != 0) {
-
-      LCreal p = (value - minValue) / (maxValue - minValue );
-
-      osg::Vec4 deltaColor = maxColor.hsv - minColor.hsv;
-
-      deltaColor[Basic::Hsv::HUE] = lcAepcDeg(deltaColor[Basic::Hsv::HUE]);
-
-      osg::Vec4 newColor = minColor.hsv + deltaColor * p;
-
-      newColor[Basic::Hsv::HUE] = lcAepcDeg(newColor[Basic::Hsv::HUE]);
-      if (newColor[Basic::Hsv::HUE] < 0) newColor[Basic::Hsv::HUE] += 360.0f;
-
-      setHSVA(newColor);
-      ok = true;
+   LCreal p = (value - minValue) / (maxValue - minValue );
+   osg::Vec4 deltaColor = maxColor.hsv - minColor.hsv;
+   deltaColor[Basic::Hsv::HUE] = lcAepcDeg(deltaColor[Basic::Hsv::HUE]);
+   osg::Vec4 newColor = minColor.hsv + deltaColor * p;
+   newColor[Basic::Hsv::HUE] = lcAepcDeg(newColor[Basic::Hsv::HUE]);
+   if (newColor[Basic::Hsv::HUE] < 0) {
+      newColor[Basic::Hsv::HUE] += 360.0f;
    }
-   return ok;
+   setHSVA(newColor);
+   return true;
 }
 
 //------------------------------------------------------------------------------

@@ -86,9 +86,6 @@ void Clip3D::setClippingBox(
 //------------------------------------------------------------------------------
 Polygon* Clip3D::clip(const Polygon& inPoly) const
 {
-   // quick out
-   if (&inPoly == 0) return 0;
-
    // ---
    // Get the vertices and make sure we have at least two
    // ---

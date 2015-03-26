@@ -627,7 +627,6 @@ bool Terrain::cLight(
    // Early out checks
    if (  ldata == 0 ||         // The lighting data array wasn't provided, or
          elevData == 0 ||      // the elevation array wasn't provided, or
-         &lv == 0 ||           // the Lighting vector wasn't provided, or
          n < 3 ||              // there are too few points, or
          range <= 0            // the range is less than or equal to zero
          ) return false;
@@ -695,11 +694,9 @@ bool Terrain::getElevationColor(
 {
 
    // early out test
-   if ( &rgb == 0    ||    // No place to return the color, or
-        colorTable == 0 || // no color table, or
+   if ( colorTable == 0 || // no color table, or
         numColors < 1      // no colors, or
          ) return false;
-
 
    // HSV color
    Hsva colorHsv;

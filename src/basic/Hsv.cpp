@@ -147,26 +147,18 @@ bool Hsv::setAlpha(Number* const msg)
 //------------------------------------------------------------------------------
 bool Hsv::setHSV(const osg::Vec3& vec)
 {
-   bool ok = false;
-   if (&vec != 0) {
-      hsv[0] = vec[0];
-      hsv[1] = vec[1];
-      hsv[2] = vec[2];
-      hsv2rgb(color,hsv);
-      ok = true;
-   }
-   return ok;
+   hsv[0] = vec[0];
+   hsv[1] = vec[1];
+   hsv[2] = vec[2];
+   hsv2rgb(color,hsv);
+   return true;
 }
 
 bool Hsv::setHSVA(const osg::Vec4& vec)
 {
-   bool ok = false;
-   if (&vec != 0) {
-      hsv = vec;
-      hsv2rgb(color,hsv);
-      ok = true;
-   }
-   return ok;
+   hsv = vec;
+   hsv2rgb(color,hsv);
+   return true;
 }
 
 //------------------------------------------------------------------------------

@@ -1264,13 +1264,9 @@ bool Weapon::setDetonationResults(const Detonation dr)
 // Sets the detonation location in target player's coord (meters)
 bool Weapon::setDetonationLocation(const osg::Vec3& loc)
 {
-   bool ok = false;
-   if (&loc != 0) {
-      tgtDetLoc = loc;
-      detonationRange = loc.length();
-      ok = true;
-   }
-   return ok;
+   tgtDetLoc = loc;
+   detonationRange = loc.length();
+   return true;
 }
 
 // setMaxGimbalAngle() -- Set max gimbal angle (radians)

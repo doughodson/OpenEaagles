@@ -898,26 +898,20 @@ Bomb* SimpleStoresMgr::getSpecificBomb(const Basic::String* const bombType)
 Weapon* SimpleStoresMgr::getSpecificWeapon(const std::type_info& type)
 {
    Weapon* wpn = 0;
-   if (&type != 0) {
-
-      Basic::PairStream* list = getWeapons();
-      if (list != 0) {
-
-         // Find the first free (inactive) bomb
-         Basic::List::Item* item = list->getFirstItem();
-         while (item != 0 && wpn == 0) {
-            Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
-            Weapon* p = dynamic_cast<Weapon*>(pair->object());
-            if (p != 0 && p->isInactive() && p->isClassType(type)) {
-               p->ref();
-               wpn = p;
-            }
-            item = item->getNext();
+   Basic::PairStream* list = getWeapons();
+   if (list != 0) {
+      // Find the first free (inactive) bomb
+      Basic::List::Item* item = list->getFirstItem();
+      while (item != 0 && wpn == 0) {
+         Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+         Weapon* p = dynamic_cast<Weapon*>(pair->object());
+         if (p != 0 && p->isInactive() && p->isClassType(type)) {
+            p->ref();
+            wpn = p;
          }
-
-         list->unref();
+         item = item->getNext();
       }
-
+      list->unref();
    }
    return wpn;
 }

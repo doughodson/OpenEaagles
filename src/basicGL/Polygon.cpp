@@ -120,9 +120,7 @@ bool Polygon::calcPlaneCoeff()
 LCreal Polygon::calcZ(const osg::Vec2& p, const osg::Vec4& cc)
 {
    LCreal zz = 0.0;
-   if (&p != 0 && &cc != 0) {
-      zz = (-cc._v[D] - (cc._v[A] * p.x()) - (cc._v[B] * p.y()) )/cc._v[C];
-   }
+   zz = (-cc._v[D] - (cc._v[A] * p.x()) - (cc._v[B] * p.y()) )/cc._v[C];
    return zz;
 }
 
