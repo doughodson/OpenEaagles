@@ -30,7 +30,7 @@ public:
    const osg::Vec3d& getAngularVelocities() const { return angVel; }          // Body angular rates (radians/second)
    double getTimeExec() const { return timeExec; }                            // Sim exec time of state data (seconds)
    double getTimeUtc() const { return timeUtc; }                              // Sim time of day for the state data (seconds)
-   bool isValid() const { return valid; }
+   bool isValid() const override { return valid; }
 
    virtual bool setGeocPosition(const osg::Vec3d& gcPos);
    virtual bool setGeocVelocity(const osg::Vec3& newVelEcef);

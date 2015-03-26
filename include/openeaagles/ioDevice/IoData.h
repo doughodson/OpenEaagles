@@ -29,7 +29,8 @@ namespace IoDevice {
 //    numDO    <Number>   ! Number of discrete outputs (DOs)
 //
 //------------------------------------------------------------------------------
-class IoData : public Basic::IoData {
+class IoData : public Basic::IoData
+{
    DECLARE_SUBCLASS(IoData,Basic::IoData)
 
 public:
@@ -41,19 +42,19 @@ public:
    bool setNumDO(const unsigned int num);
 
    // Basic::IoData interface functions
-   virtual unsigned int getNumAnalogInputChannels() const;
-   virtual unsigned int getNumAnalogOutputChannels() const;
-   virtual unsigned int getNumDiscreteInputChannels() const;
-   virtual unsigned int getNumDiscreteOutputChannels() const;
-   virtual bool getAnalogInput(const unsigned int channel, LCreal* const value) const;
-   virtual bool getAnalogOutput(const unsigned int channel, LCreal* const value) const;
-   virtual bool getDiscreteInput(const unsigned int channel, bool* const value) const;
-   virtual bool getDiscreteOutput(const unsigned int channel, bool* const value) const;
-   virtual bool setAnalogInput(const unsigned int channel, const LCreal value);
-   virtual bool setAnalogOutput(const unsigned int channel, const LCreal value);
-   virtual bool setDiscreteInput(const unsigned int channel, const bool value);
-   virtual bool setDiscreteOutput(const unsigned int channel, const bool value);
-   virtual void clear();
+   unsigned int getNumAnalogInputChannels() const override;
+   unsigned int getNumAnalogOutputChannels() const override;
+   unsigned int getNumDiscreteInputChannels() const override;
+   unsigned int getNumDiscreteOutputChannels() const override;
+   bool getAnalogInput(const unsigned int channel, LCreal* const value) const override;
+   bool getAnalogOutput(const unsigned int channel, LCreal* const value) const override;
+   bool getDiscreteInput(const unsigned int channel, bool* const value) const override;
+   bool getDiscreteOutput(const unsigned int channel, bool* const value) const override;
+   bool setAnalogInput(const unsigned int channel, const LCreal value) override;
+   bool setAnalogOutput(const unsigned int channel, const LCreal value) override;
+   bool setDiscreteInput(const unsigned int channel, const bool value) override;
+   bool setDiscreteOutput(const unsigned int channel, const bool value) override;
+   void clear();
 
 protected:
    bool setSlotNumAI(const Basic::Number* const msg);

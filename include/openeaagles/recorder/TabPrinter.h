@@ -30,7 +30,8 @@ namespace Recorder {
 //    msgHdrOptn   ! Msg Header options (see TabPrinter.h)
 //    divider      ! Field divider (default: tab)
 //------------------------------------------------------------------------------
-class TabPrinter : public PrintHandler {
+class TabPrinter : public PrintHandler
+{
     DECLARE_SUBCLASS(TabPrinter, PrintHandler)
 
 public:

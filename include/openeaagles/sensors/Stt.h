@@ -20,7 +20,7 @@ public:
 
 protected:
     // System class -- phase callbacks
-    virtual void dynamics(const LCreal dt);
+    void dynamics(const LCreal dt) override;
 };
 
 } // End Sensor namespace

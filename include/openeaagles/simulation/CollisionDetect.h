@@ -49,7 +49,7 @@ namespace Simulation {
 //------------------------------------------------------------------------------
 class CollisionDetect : public System
 {
-   DECLARE_SUBCLASS(CollisionDetect,System)
+   DECLARE_SUBCLASS(CollisionDetect, System)
 
 public:
    CollisionDetect();
@@ -78,7 +78,7 @@ public:
    virtual bool setSendCrashEventsEnabled(const bool flg);
 
    // Basic::Component interface
-   virtual void updateData(const LCreal dt = 0.0);
+   void updateData(const LCreal dt = 0.0) override;
 
 protected:
    virtual bool resizePoiList(const unsigned int newSize);
@@ -98,7 +98,7 @@ protected:
    virtual bool setSlotSendCrashEvents(const Basic::Number* const msg);
 
    // System time critical phase callbacks -- 
-   virtual void process(const LCreal dt);     // Phase 3
+   void process(const LCreal dt) override;     // Phase 3
 
 protected:
    struct PlayerOfInterest {

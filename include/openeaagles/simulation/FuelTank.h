@@ -38,7 +38,7 @@ public:
    virtual bool isFuelWtValid() const;
 
    // Component Interface
-   virtual void reset();
+   void reset() override;
 
 protected:
    virtual bool setSlotFuelWt(const Basic::Number* const msg);

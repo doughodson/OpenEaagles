@@ -25,7 +25,8 @@ namespace Recorder {
 //    in bytes.  The 4 bytes are stored as an ascii string with leading spaces
 //    (e.g., " 123")
 //------------------------------------------------------------------------------
-class FileReader : public InputHandler {
+class FileReader : public InputHandler
+{
     DECLARE_SUBCLASS(FileReader, InputHandler)
 
 public:

@@ -131,7 +131,7 @@ protected:
    virtual bool setSlotRadioId(Basic::Number* const num);
 
    // System class -- phase callbacks
-   virtual void receive(const LCreal dt);
+   void receive(const LCreal dt) override;
 
 private:
    void initData();

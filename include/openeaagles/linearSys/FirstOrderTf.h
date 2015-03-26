@@ -42,7 +42,7 @@ public:
    virtual bool setD2(const LCreal v);
 
    // ScalerFunc class interface
-   virtual bool isValid() const;
+   bool isValid() const override;
 
 protected:
    // ScalerFunc class protected interface

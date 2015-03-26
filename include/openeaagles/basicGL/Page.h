@@ -131,11 +131,10 @@ public:
    virtual void draw();
    virtual Basic::Pair* findBySelectName(const GLuint name);
 
-   // Component interface
-   virtual bool event(const int event, Basic::Object* const obj = 0);
-   virtual void updateTC(const LCreal dt = 0.0f);
-   virtual void updateData(const LCreal dt = 0.0f);
-   virtual void reset();
+   bool event(const int event, Basic::Object* const obj = 0) override;
+   void updateTC(const LCreal dt = 0.0f) override;
+   void updateData(const LCreal dt = 0.0f) override;
+   void reset() override;
 
 protected:
    // Return our paging arguments

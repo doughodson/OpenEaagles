@@ -23,7 +23,8 @@ namespace LinearSystem {
 //       D1*s*s + D2*s + D3
 //
 //------------------------------------------------------------------------------
-class SecondOrderTf : public DiffEquation {
+class SecondOrderTf : public DiffEquation
+{
     DECLARE_SUBCLASS(SecondOrderTf,DiffEquation)
 
 public:
@@ -49,7 +50,7 @@ public:
    virtual bool setD3(const LCreal v);
 
    // ScalerFunc class interface
-   virtual bool isValid() const;
+   bool isValid() const override;
 
 protected:
    // ScalerFunc class protected interface

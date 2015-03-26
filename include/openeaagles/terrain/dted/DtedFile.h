@@ -40,7 +40,7 @@ private:
     bool readDtedData(std::istream& in);
 
    // Terrain::Database private interface
-   virtual bool loadData();   // Load the data file
+   bool loadData() override;   // Load the data file
 
    bool verifyChecksum;    // verify the file checksum flag
 };

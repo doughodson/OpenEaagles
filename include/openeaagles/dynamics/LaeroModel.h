@@ -20,12 +20,12 @@ public:
    LaeroModel();
 
    // DynamicsModels interface
-   virtual void dynamics(const LCreal dt);  // One pass model update; called from Player::dynamics()
-   virtual bool setCommandedHeadingD(const double h, const double hDps = 0, const double maxBank = 0);
-   virtual bool setCommandedAltitude(const double a, const double aMps = 0, const double maxPitch = 0);
-   virtual bool setCommandedVelocityKts(const double v, const double vNps = 0);
+   void dynamics(const LCreal dt) override;  // One pass model update; called from Player::dynamics()
+   bool setCommandedHeadingD(const double h, const double hDps = 0, const double maxBank = 0) override;
+   bool setCommandedAltitude(const double a, const double aMps = 0, const double maxPitch = 0) override;
+   bool setCommandedVelocityKts(const double v, const double vNps = 0) override;
 
-   virtual void reset();
+   void reset() override;
 
 protected:
    //-----------------------------------

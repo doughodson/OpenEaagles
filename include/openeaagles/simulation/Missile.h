@@ -59,12 +59,12 @@ public:
     virtual void atReleaseInit();
     virtual void setCmdPitchD(const LCreal x)  { cmdPitch   = x * static_cast<LCreal>(Basic::Angle::D2RCC); }
     virtual void setCmdHdgD(const LCreal x)    { cmdHeading = x * static_cast<LCreal>(Basic::Angle::D2RCC); }
-   virtual bool setTargetTrack(Track* const trk, const bool posTrkEnb);
-   virtual bool setTargetPlayer(Player* const tgt, const bool posTrkEnb);
+    virtual bool setTargetTrack(Track* const trk, const bool posTrkEnb);
+    virtual bool setTargetPlayer(Player* const tgt, const bool posTrkEnb);
 
     // Basic::Component interface
-    virtual bool event(const int event, Basic::Object* const obj = 0);
-    virtual void reset();    
+    bool event(const int event, Basic::Object* const obj = 0) override;
+    void reset() override;    
 
 protected:
    virtual bool setSlotVpMin(const Basic::Number* const msg);
@@ -77,8 +77,8 @@ protected:
    virtual bool setSlotCmdVelocity(const Basic::Number* const msg);
 
    // Weapon interface
-   virtual void weaponGuidance(const LCreal dt);
-   virtual void weaponDynamics(const LCreal dt);
+   void weaponGuidance(const LCreal dt) override;
+   void weaponDynamics(const LCreal dt) override;
 
 private:
     virtual bool calculateVectors(const Player* const tgt, const Track* const trk, osg::Vec3* const los, osg::Vec3* const vel, osg::Vec3* const posx) const;

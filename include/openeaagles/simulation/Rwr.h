@@ -49,7 +49,7 @@ protected:
    virtual void process(const LCreal dt);
 
    // Basic::Component protected interface
-   virtual bool shutdownNotification();
+   bool shutdownNotification() override;
 
    void xferRays()
    {

@@ -36,7 +36,8 @@ namespace Recorder {
 //    Calling openFile() or sending any additional data messages will open
 //    a new file with a new version number.
 //------------------------------------------------------------------------------
-class FileWriter : public OutputHandler {
+class FileWriter : public OutputHandler
+{
     DECLARE_SUBCLASS(FileWriter, OutputHandler)
 
 public:

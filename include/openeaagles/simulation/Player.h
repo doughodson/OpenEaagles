@@ -1007,11 +1007,11 @@ public:
    // ---
    // Basic::Component interface
    // ---
-   virtual bool isFrozen() const;
-   virtual void reset();
-   virtual void updateTC(const LCreal dt = 0.0);
-   virtual void updateData(const LCreal dt = 0.0);
-   virtual bool event(const int event, Basic::Object* const obj = 0);
+   bool isFrozen() const override;
+   void reset() override;
+   void updateTC(const LCreal dt = 0.0) override;
+   void updateData(const LCreal dt = 0.0) override;
+   bool event(const int event, Basic::Object* const obj = 0) override;
 
 protected:
    // Vehicle Dynamics -- called by updateTC() during phase zero

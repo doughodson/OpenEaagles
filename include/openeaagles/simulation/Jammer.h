@@ -24,7 +24,7 @@ public:
 
 protected:
     // System Interface -- phase callbacks
-    virtual void transmit(const LCreal dt);
+    void transmit(const LCreal dt) override;
 };
 
 } // End Simulation namespace

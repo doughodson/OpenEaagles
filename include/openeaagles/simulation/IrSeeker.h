@@ -48,17 +48,17 @@ public:
 #endif
 
    // Component Interface
-   virtual bool event(const int event, Basic::Object* const obj = 0);
-   virtual void reset();
+   bool event(const int event, Basic::Object* const obj = 0) override;
+   void reset() override;
 
 protected:
    void clearQueues();
 
    // System class Interface -- phase() callbacks
-   virtual void process(const LCreal dt);     // Phase 3
+   void process(const LCreal dt) override;     // Phase 3
 
    // Basic::Component protected interface
-   virtual bool shutdownNotification();
+   bool shutdownNotification() override;
 
    QStack<IrQueryMsg*> freeQueryStack;  // stack of free queries of target IR signatures
    mutable long        freeQueryLock;   // Semaphore to protect 'freeQueryStack'

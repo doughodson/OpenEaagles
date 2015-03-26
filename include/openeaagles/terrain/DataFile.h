@@ -21,7 +21,7 @@ namespace Terrain {
 //------------------------------------------------------------------------------
 class DataFile : public Basic::Terrain
 {
-   DECLARE_SUBCLASS(DataFile,Basic::Terrain)
+   DECLARE_SUBCLASS(DataFile, Basic::Terrain)
 
 public:
    DataFile();
@@ -91,7 +91,7 @@ protected:
    short    voidValue;              // Value representing a void (missing) data point
 
    // Basic::Terrain protected interface
-   virtual void clearData();
+   void clearData() override;
 };
 
 } // End Terrain namespace

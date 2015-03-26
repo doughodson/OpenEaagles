@@ -55,13 +55,13 @@ public:
       ) const;
 
    // Basic::Component interface
-   virtual void reset();
+   void reset() override;
 
 protected:
    virtual void findDataFiles();           // Initializes the channel array
 
    // Basic::Terrain protected interface
-   virtual void clearData();
+   void clearData() override;
 
 private:
    static const unsigned int MAX_DATA_FILES = 4;    // Only 4 files (as in Quad!)
@@ -70,7 +70,7 @@ private:
    unsigned int numDataFiles;                       // Number of data files
 
    // Basic::Terrain private interface
-   virtual bool loadData();         // Load the data file
+   bool loadData() override;         // Load the data file
 };
 
 } // End Terrain namespace

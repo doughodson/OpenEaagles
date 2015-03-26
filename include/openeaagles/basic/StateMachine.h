@@ -211,11 +211,10 @@ public:
    unsigned short getState() const     { return state; }
    unsigned short getSubstate() const  { return substate; }
 
-   // Component class functions
-   virtual void updateData(const LCreal dt = 0.0);
-   virtual void updateTC(const LCreal dt = 0.0);
-   virtual bool event(const int event, Object* const obj = 0);
-   virtual void reset();
+   void updateData(const LCreal dt = 0.0) override;
+   void updateTC(const LCreal dt = 0.0) override;
+   bool event(const int event, Object* const obj = 0) override;
+   void reset() override;
 
 protected:
    enum Mode { HOLD_STATE, NEW_STATE, RTN_STATE };

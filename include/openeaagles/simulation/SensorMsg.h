@@ -31,13 +31,11 @@ public:
    const osg::Vec3d& getLosVec() const          { return losO2T; }
    void setLosVec(const osg::Vec3d& v)          { losO2T = v; }
 
-
    // ---   
    // Normalized target to ownship LOS vector (target's NED)
    // ---   
    const osg::Vec3d& getTgtLosVec() const       { return losT2O; }
    void setTgtLosVec(const osg::Vec3d& v)       { losT2O = v; }
-
 
    // ---
    // Angles to target in gimbal coordinates
@@ -50,7 +48,6 @@ public:
    // Elevation (radians)
    LCreal getGimbalElevation() const            { return gel; }
    void setGimbalElevation(const LCreal a)      { gel = a; } 
-
 
    // ---
    // Ranges
@@ -68,7 +65,6 @@ public:
    // Sets the max range (NM)
    void setMaxRangeNM(const LCreal r)           { maxRng = r; }
 
-
    // ---
    // Range rates (projected along the LOS vector)
    // ---
@@ -84,7 +80,6 @@ public:
 
    // Sets the target range rate (positive for increasing range) (m/s)
    void setRangeRate(const LCreal v)            { rngRate = v; }
-
 
    // ---
    // Target's Angle Of Incidence (AOI); computed by the target
@@ -110,7 +105,6 @@ public:
    void setAoiVector(const osg::Vec3d& v)       { aoi = v; }
    void setAoiVector(const osg::Vec4d& v)       { aoi.set(v.x(),v.y(),v.z()); }
 
-
    // ---
    // Modes and flags
    // ---
@@ -127,7 +121,6 @@ public:
 
    // Sets the return request flag
    void setReturnRequest(const bool b)          { returnReq = b; }
-
 
    // ---
    // Pointers

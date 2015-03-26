@@ -38,7 +38,8 @@ namespace IoDevice {
 //    deviceIndex <Number>    Unit index
 //
 //------------------------------------------------------------------------------
-class UsbJoystick : public Basic::IoDevice {
+class UsbJoystick : public Basic::IoDevice
+{
     DECLARE_SUBCLASS(UsbJoystick,Basic::IoDevice)
 
 public:
@@ -48,11 +49,11 @@ public:
    virtual bool setDeviceIndex(const int value);
 
    // IoDevice interface
-   virtual unsigned short getNumDiscreteInputChannels() const;
-   virtual unsigned short getNumDiscreteInputPorts() const;
-   virtual bool getDiscreteInput(bool* const value, const unsigned int channel, const unsigned int port) const;
-   virtual unsigned short getNumAnalogInputs() const;
-   virtual bool getAnalogInput(LCreal* const value, const unsigned int channel) const;
+   unsigned short getNumDiscreteInputChannels() const override;
+   unsigned short getNumDiscreteInputPorts() const override;
+   bool getDiscreteInput(bool* const value, const unsigned int channel, const unsigned int port) const override;
+   unsigned short getNumAnalogInputs() const override;
+   bool getAnalogInput(LCreal* const value, const unsigned int channel) const override;
 
 protected:
 

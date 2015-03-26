@@ -182,7 +182,8 @@ public:
     int getMaxTableSize()   { return maxTableSize; }
 
     // Component interface
-    virtual void updateData(const LCreal dt = 0.00000);
+    void updateData(const LCreal dt = 0.00000) override;
+
     virtual void sortMaps(const int count);             // simple function to sort our maps.
 
 protected:

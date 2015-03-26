@@ -24,39 +24,40 @@ namespace Dynamics {
 class JSBSimModel : public Simulation::AerodynamicsModel
 {
     DECLARE_SUBCLASS(JSBSimModel,Simulation::AerodynamicsModel)
+
 public:
     JSBSimModel();
 
     // Vehicle interface
-    virtual LCreal getGload() const;
-    virtual LCreal getMach() const;
-    virtual LCreal getAngleOfAttack() const;
-    virtual LCreal getSideSlip() const;
-    virtual LCreal getFlightPath() const;
-    virtual LCreal getCalibratedAirspeed() const; 
-    virtual LCreal getGrossWeight() const;
-    virtual LCreal getFuelWt() const;
-    virtual LCreal getFuelWtMax() const;
-    virtual LCreal getSpeedBrakePosition() const;
-    virtual LCreal getLandingGearPosition() const;
-    virtual bool   isWeightOnWheels() const;
-    virtual int getNumberOfEngines() const;
-    virtual int getEngThrust(LCreal* const fn, const int max) const;
-    virtual int getEngRPM(LCreal* const rpm, const int max) const;
-    virtual int getEngFuelFlow(LCreal* const ff, const int max) const;
-    virtual int getEngOilPressure(LCreal* const oil, const int max) const;    // Pressure: psi
-    virtual int getEngInletTemp(LCreal* const tmp, const int max) const;      // Temp: C
-    virtual int getEngNozzle(LCreal* const noz, const int max) const;         // Nozzle Pos: %
-    virtual int getEngPLA(LCreal* const pla, const int max) const;
-    virtual void setControlStickRollInput(const LCreal roll);
-    virtual void setControlStickPitchInput(const LCreal pitch);
-    virtual void setTrimSwitchRollInput(const LCreal rollTrim);
-    virtual void setTrimSwitchPitchInput(const LCreal pitchTrim);
-    virtual void setGearHandleSwitch(const LCreal sw);
-    virtual void setSpeedBrakesSwitch(const LCreal sw);
-    virtual void setBrakes(const LCreal left, const LCreal right);
-    virtual int setThrottles(const LCreal* const positions, const int num);
-    virtual void setRudderPedalInput(const LCreal pedal);
+    LCreal getGload() const override;
+    LCreal getMach() const override;
+    LCreal getAngleOfAttack() const override;
+    LCreal getSideSlip() const override;
+    LCreal getFlightPath() const override;
+    LCreal getCalibratedAirspeed() const override; 
+    LCreal getGrossWeight() const override;
+    LCreal getFuelWt() const override;
+    LCreal getFuelWtMax() const override;
+    LCreal getSpeedBrakePosition() const override;
+    LCreal getLandingGearPosition() const override;
+    bool isWeightOnWheels() const override;
+    int getNumberOfEngines() const override;
+    int getEngThrust(LCreal* const fn, const int max) const override;
+    int getEngRPM(LCreal* const rpm, const int max) const override;
+    int getEngFuelFlow(LCreal* const ff, const int max) const override;
+    int getEngOilPressure(LCreal* const oil, const int max) const override;    // Pressure: psi
+    int getEngInletTemp(LCreal* const tmp, const int max) const override;      // Temp: C
+    int getEngNozzle(LCreal* const noz, const int max) const override;         // Nozzle Pos: %
+    int getEngPLA(LCreal* const pla, const int max) const override;
+    void setControlStickRollInput(const LCreal roll) override;
+    void setControlStickPitchInput(const LCreal pitch) override;
+    void setTrimSwitchRollInput(const LCreal rollTrim) override;
+    void setTrimSwitchPitchInput(const LCreal pitchTrim) override;
+    void setGearHandleSwitch(const LCreal sw) override;
+    void setSpeedBrakesSwitch(const LCreal sw) override;
+    void setBrakes(const LCreal left, const LCreal right) override;
+    int setThrottles(const LCreal* const positions, const int num) override;
+    void setRudderPedalInput(const LCreal pedal) override;
 
     const Basic::String* getRootDir() const { return rootDir; }   // JSBSim root directory
     virtual bool setRootDir(const Basic::String* const dir);
@@ -64,27 +65,26 @@ public:
     const Basic::String* getModel() const { return model; }       // JSBSim model
     virtual bool setModel(const Basic::String* const msl);
 
-    // DynamicsModel interface
-    virtual void dynamics(const LCreal  dt = 0.0);
-
     // Component interface
-    virtual void reset();
+    void reset() override;
 
     // DynamicsModel interface
-    virtual bool isHeadingHoldOn() const;
-    virtual double getCommandedHeadingD() const;
-    virtual bool setHeadingHoldOn(const bool b);
-    virtual bool setCommandedHeadingD(const double h, const double hDps = 0, const double maxBank = 0);
+    void dynamics(const LCreal  dt = 0.0) override;
 
-    virtual bool isVelocityHoldOn() const;
-    virtual double getCommandedVelocityKts() const;
-    virtual bool setVelocityHoldOn(const bool b);
-    virtual bool setCommandedVelocityKts(const double v, const double vNps = 0);
+    bool isHeadingHoldOn() const override;
+    double getCommandedHeadingD() const override;
+    bool setHeadingHoldOn(const bool b) override;
+    bool setCommandedHeadingD(const double h, const double hDps = 0, const double maxBank = 0) override;
+
+    bool isVelocityHoldOn() const override;
+    double getCommandedVelocityKts() const override;
+    bool setVelocityHoldOn(const bool b) override;
+    bool setCommandedVelocityKts(const double v, const double vNps = 0) override;
                                                                                 
-    virtual bool isAltitudeHoldOn() const;
-    virtual double getCommandedAltitude() const;
-    virtual bool setAltitudeHoldOn(const bool b);
-    virtual bool setCommandedAltitude(const double a, const double aMps = 0, const double maxPitch = 0);
+    bool isAltitudeHoldOn() const override;
+    double getCommandedAltitude() const override;
+    bool setAltitudeHoldOn(const bool b) override;
+    bool setCommandedAltitude(const double a, const double aMps = 0, const double maxPitch = 0) override;
 
 protected:
 

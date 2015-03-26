@@ -87,7 +87,7 @@ public:
    virtual bool setSlotEnableModeC(const Basic::Number* const msg);
 
    // Basic::Component interface
-   virtual void reset();
+   void reset() override;
 
 private:
 

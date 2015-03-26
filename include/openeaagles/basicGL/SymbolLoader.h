@@ -173,8 +173,7 @@ public:
    // interface for drawing interconnect
    virtual void drawFunc();
 
-   // Basic::Component interface
-   virtual void updateTC(const LCreal dt = 0.0f);
+   void updateTC(const LCreal dt = 0.0f) override;
 
 protected:
    bool setSlotTemplates(Basic::PairStream* myTemps);

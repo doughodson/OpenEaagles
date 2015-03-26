@@ -233,7 +233,7 @@ public:
    virtual Player* createIPlayer(Nib* const nib);
 
    // Basic::Component interface
-   virtual void reset();
+   void reset() override;
 
 protected:
    // Derived class callbacks

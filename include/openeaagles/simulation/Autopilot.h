@@ -213,7 +213,7 @@ public:
    virtual bool setMaxVelAccNps(const double x);
    
    // Eaagles::Basic::Component interface methods
-   virtual void reset();
+   void reset() override;
     
 protected:
    // Slot functions

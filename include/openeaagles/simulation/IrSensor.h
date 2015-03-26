@@ -158,23 +158,22 @@ public:
    virtual bool calculateIrQueryReturn(IrQueryMsg* const irQuery);
 
    // Component Interface
-   virtual void updateData(const LCreal dt = 0.0);
-   virtual void reset();
+   void updateData(const LCreal dt = 0.0) override;
+   void reset() override;
  
 protected:
    // System class -- phase callbacks
-   virtual void transmit(const LCreal dt);
-   virtual void process(const LCreal dt);
+   void transmit(const LCreal dt) override;
+   void process(const LCreal dt) override;
 
    // Basic::Component protected interface
-   virtual bool shutdownNotification();
+   bool shutdownNotification() override;
 
    virtual IrQueryMsg* getStoredMessage();
    virtual IrQueryMsg* peekStoredMessage(unsigned int i);
 
    QQueue<IrQueryMsg*>  storedMessagesQueue;
    mutable long storedMessagesLock;          // Semaphore to protect 'storedMessagesQueue'
-
 
 private:
    static const int MAX_EMISSIONS = 10000;   // Max size of emission queues and arrays

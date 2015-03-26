@@ -20,7 +20,8 @@ namespace Recorder {
 //      netHandler  <NetHandler>    Network input handler
 //      noWait      <Number>        No wait (unblocked) I/O flag (default: false -- blocked I/O)
 //------------------------------------------------------------------------------
-class NetInput : public InputHandler {
+class NetInput : public InputHandler
+{
     DECLARE_SUBCLASS(NetInput, InputHandler)
 
 public:

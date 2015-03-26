@@ -30,8 +30,8 @@ public:
    virtual bool setUpperLimit(const LCreal v);
 
    // ScalerFunc class interface
-   virtual LCreal g(const LCreal x);
-   virtual bool isValid() const;
+   LCreal g(const LCreal x) override;
+   bool isValid() const override;
 
 protected:
    // ScalerFunc class protected interface

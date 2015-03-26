@@ -28,7 +28,8 @@ namespace Recorder {
 //    filename    <String>    ! Data file name (default: use std out)
 //    pathname    <String>    ! Path to the data file directory (optional)
 //------------------------------------------------------------------------------
-class PrintHandler : public OutputHandler {
+class PrintHandler : public OutputHandler
+{
     DECLARE_SUBCLASS(PrintHandler, OutputHandler)
 
 public:

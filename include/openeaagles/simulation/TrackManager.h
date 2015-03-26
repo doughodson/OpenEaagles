@@ -77,7 +77,7 @@ public:
    virtual bool killedNotification(Player* const killedBy = 0);
 
    // Component Interface
-   virtual void reset();
+   void reset() override;
 
 protected:
    static const unsigned int MAX_TRKS = EAAGLES_CONFIG_MAX_TRACKS;         // Max tracks

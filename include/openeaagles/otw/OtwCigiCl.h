@@ -143,8 +143,8 @@ public:
    virtual bool setSlotShipWakeModel(const Basic::Number* const msg);
 
    // Component interface
-   virtual void updateData(const LCreal dt = 0.0f);
-   virtual void reset();
+   void updateData(const LCreal dt = 0.0f) override;
+   void reset() override;
 
 protected:
    enum LIFE_FORM_STATE { DEAD = 0, STANDING = 1, WALK = 2, RUN = 3 };

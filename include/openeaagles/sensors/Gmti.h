@@ -27,7 +27,7 @@ protected:
     bool setSlotPoi(Basic::List* const numList);                // Set Point of Interest
 
     // System class -- phase callbacks
-    virtual void dynamics(const LCreal dt);
+    void dynamics(const LCreal dt) override;
 
 private:
     osg::Vec3   poiVec;         // Point Of Interest vector  (m) [ x, y, z ] NED

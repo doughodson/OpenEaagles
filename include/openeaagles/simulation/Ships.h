@@ -17,13 +17,13 @@ namespace Simulation {
 //==============================================================================
 class Ship : public Player  
 {
-    DECLARE_SUBCLASS(Ship,Player)
+    DECLARE_SUBCLASS(Ship, Player)
 
 public:
     Ship();
 
     // Player interface
-    virtual unsigned int getMajorType() const;
+    unsigned int getMajorType() const override;
 };
 
 } // End Simulation namespace

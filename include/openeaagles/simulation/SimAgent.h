@@ -50,7 +50,7 @@ protected:
 private:
    const Basic::String*    actorPlayerName;
    const Basic::String*    actorComponentName;
-   Station*    myStation;
+   Station* myStation;
 };
 
 

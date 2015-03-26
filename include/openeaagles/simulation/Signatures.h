@@ -35,7 +35,7 @@ class Emission;
 //------------------------------------------------------------------------------
 class RfSignature : public Basic::Component  
 {
-    DECLARE_SUBCLASS(RfSignature,Basic::Component)
+    DECLARE_SUBCLASS(RfSignature, Basic::Component)
 public:
     RfSignature();
     virtual LCreal getRCS(const Emission* const em)=0;
@@ -60,7 +60,7 @@ public:
     virtual bool setRCS(const Basic::Number* const num);
 
     // RfSignature interface
-    virtual LCreal getRCS(const Emission* const em);
+    LCreal getRCS(const Emission* const em) override;
 private:
     LCreal rcs;         // Constant RCS value
 };
@@ -80,11 +80,11 @@ public:
     SigSphere();
     SigSphere(const LCreal r);
     virtual bool setRadiusFromSlot(Basic::Number* const num);
-    LCreal computeRcs(const LCreal r)                          { return float(PI * r * r); }
+    LCreal computeRcs(const LCreal r)                          { return static_cast<float>(PI * r * r); }
     void setRadius(const LCreal r)                             { radius = r; rcs = computeRcs(radius); }
 
     // RfSignature interface
-    virtual LCreal getRCS(const Emission* const em);
+    LCreal getRCS(const Emission* const em) override;
 private:
     LCreal radius;      // Sphere radius
     LCreal rcs;         // RCS of sphere
@@ -114,7 +114,7 @@ public:
     virtual bool setB(Basic::Number* const num);
 
     // RfSignature interface
-    virtual LCreal getRCS(const Emission* const em);
+    LCreal getRCS(const Emission* const em) override;
 private:
     LCreal a;       // Length dimension
     LCreal b;       // Width dimension
@@ -134,7 +134,7 @@ public:
     SigDihedralCR(const LCreal a);
 
     // RfSignature interface
-    virtual LCreal getRCS(const Emission* const em);
+    LCreal getRCS(const Emission* const em) override;
 private:
     LCreal length;      // Length dimension
 };
@@ -154,7 +154,7 @@ public:
     SigTrihedralCR(const LCreal a);
 
     // RfSignature interface
-    virtual LCreal getRCS(const Emission* const em);
+    LCreal getRCS(const Emission* const em) override;
 };
 
 
@@ -172,7 +172,7 @@ public:
    SigSwitch();
 
    // RfSignature interface
-   virtual LCreal getRCS(const Emission* const em);
+   LCreal getRCS(const Emission* const em) override;
 };
 
 
@@ -234,14 +234,13 @@ public:
    virtual bool setSlotDecibel(const Basic::Number* const msg);
 
    // RfSignature interface
-   virtual LCreal getRCS(const Emission* const em);
+   LCreal getRCS(const Emission* const em) override;
 protected:
    const Basic::Table2* tbl;      // The table
    bool swapOrderFlg;               // Swap independent data order from az/el to el/az
    bool degFlg;                     // independent data in degrees 
    bool dbFlg;                      // dependent data in decibels 
 };
-
 
 } // End Simulation namespace
 } // End Eaagles namespace

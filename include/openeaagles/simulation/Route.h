@@ -52,7 +52,7 @@ class Steerpoint;
 //------------------------------------------------------------------------------
 class Route : public Basic::Component
 {
-   DECLARE_SUBCLASS(Route,Basic::Component)
+   DECLARE_SUBCLASS(Route, Basic::Component)
 
 public:
    Route();
@@ -117,9 +117,9 @@ public:
    virtual void triggerAction();
 
    // Basic::Component interface
-   virtual void updateData(const LCreal dt = 0.0);
-   virtual bool event(const int event, Basic::Object* const obj = 0);
-   virtual void reset();
+   void updateData(const LCreal dt = 0.0) override;
+   bool event(const int event, Basic::Object* const obj = 0) override;
+   void reset() override;
 
 protected:
     // Compute nav steering data for each steerpoint.

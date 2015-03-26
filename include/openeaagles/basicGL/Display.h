@@ -356,10 +356,8 @@ public:
    virtual bool isOkToSwap() const;
    virtual void setOkToSwap(const bool x);
 
-   // Basic::Component interface
-   virtual void updateTC(const LCreal dt = 0.0f);
-   virtual void reset();
-
+   void updateTC(const LCreal dt = 0.0f) override;
+   void reset() override;
 
 protected:
    // Configures the display's GL modes

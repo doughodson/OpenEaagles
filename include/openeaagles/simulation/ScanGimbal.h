@@ -206,8 +206,8 @@ public:
     virtual bool setSlotMaxRevs(const Basic::Number* const newMaxRevs);
    
     // Component Interface
-    virtual bool event(const int event, Basic::Object* const obj = 0);
-    virtual void reset();
+    bool event(const int event, Basic::Object* const obj = 0) override;
+    void reset() override;
 
 protected:
    virtual void scanController(const double dt);
@@ -244,7 +244,7 @@ protected:
    bool setBarNumber(const unsigned int n)            { if (n <= numBars) { barNum = n; return true; } else return false; } 
 
    // System Interface -- Callbacks by phase
-   virtual void dynamics(const LCreal dt);    // Phase 0
+   void dynamics(const LCreal dt) override;    // Phase 0
 
 private:
     osg::Vec2d  scanPos;         // Position in scan pattern     (rad)

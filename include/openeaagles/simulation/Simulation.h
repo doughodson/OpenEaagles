@@ -305,9 +305,9 @@ public:
     virtual bool setWaypoints(Dafif::WaypointLoader* const p); // Sets the waypoint loader
     
     // Basic::Component Interface
-    virtual void updateTC(const LCreal dt = 0.0f);
-    virtual void updateData(const LCreal dt = 0.0f);
-    virtual void reset();
+    void updateTC(const LCreal dt = 0.0f) override;
+    void updateData(const LCreal dt = 0.0f) override;
+    void reset() override;
 
 public:
     void updateTcPlayerList(
@@ -346,8 +346,8 @@ protected:
     virtual void setWeaponEventID(unsigned short id); // Sets the weapon ID event counter
 
     // Basic::Component protected interface
-    virtual void printTimingStats();
-    virtual bool shutdownNotification();
+    void printTimingStats() override;
+    bool shutdownNotification() override;
 
 private:
    void initData();

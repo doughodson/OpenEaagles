@@ -41,7 +41,8 @@ namespace LinearSystem {
 //    y0    <Number>     Initial (previous) output value: Y(0) (default: 0)
 //
 //------------------------------------------------------------------------------
-class ScalerFunc : public Basic::Object {
+class ScalerFunc : public Basic::Object
+{
     DECLARE_SUBCLASS(ScalerFunc,Basic::Object)
 
 public:

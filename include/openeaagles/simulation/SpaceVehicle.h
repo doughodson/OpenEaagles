@@ -94,7 +94,7 @@ public:
 
 protected:
    // Vehicle Dynamics -- called by updateTC() during phase zero
-   virtual void dynamics(const LCreal  dt = 0.0);
+   void dynamics(const LCreal  dt = 0.0) override;
 };
 
 } // End Simulation namespace

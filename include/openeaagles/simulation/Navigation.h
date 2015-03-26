@@ -8,7 +8,8 @@
 #include "openeaagles/basic/osg/Vec2"
 
 namespace Eaagles {
-   namespace Basic { class Time; }
+
+namespace Basic { class Time; }
 
 namespace Simulation {
 class Player;
@@ -133,8 +134,8 @@ public:
     virtual bool setSlotBullseye(Bullseye* const msg);
 
     // Basic::Component interface
-    virtual void updateData(const LCreal dt = 0.0);
-    virtual void reset();
+    void updateData(const LCreal dt = 0.0) override;
+    void reset() override;
 
 protected:
    // Set positional data

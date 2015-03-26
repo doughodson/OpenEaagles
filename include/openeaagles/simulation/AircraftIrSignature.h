@@ -49,7 +49,7 @@ public:
    AircraftIrSignature();
 
    // IrSig class interface
-   virtual bool getIrSignature(IrQueryMsg* const em);
+   bool getIrSignature(IrQueryMsg* const em) override;
 
    // slot operations 
    virtual bool setSlotAirframeSignatureTable(const Basic::Table4* const tbl);

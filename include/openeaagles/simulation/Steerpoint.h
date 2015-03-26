@@ -171,7 +171,7 @@ public:
    virtual void clearNavData();
 
    // Basic::Component interface
-   virtual void reset();
+   void reset() override;
 
 protected:
 

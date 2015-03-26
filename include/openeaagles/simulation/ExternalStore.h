@@ -50,8 +50,8 @@ public:
    virtual bool onJettisonEvent();
 
    // Basic::Component interface
-   virtual bool event(const int event, Basic::Object* const obj = 0);
-   virtual void reset();
+   bool event(const int event, Basic::Object* const obj = 0) override;
+   void reset() override;
 
 protected:
    bool setJettisonable(const bool f);    // Sets the jettison enable flag

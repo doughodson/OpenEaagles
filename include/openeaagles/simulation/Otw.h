@@ -101,8 +101,8 @@ public:
     virtual bool setSlotOtwModelTypes(const Basic::PairStream* const msg); // Sets the list of OTW model type IDs (Otm objects)
 
     // Basic::Component interface
-    virtual void updateTC(const LCreal dt = 0.0f);
-    virtual void reset();
+    void updateTC(const LCreal dt = 0.0f) override;
+    void reset() override;
 
 protected:
     virtual void setOwnship0(Player* const newOwnship);     // Sets our ownship player

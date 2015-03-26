@@ -66,17 +66,17 @@ public:
     virtual bool setSlotLauncherMoveTime(const Basic::Time* const msg);
 
     // Player interface
-    virtual unsigned int getMajorType() const;
+    unsigned int getMajorType() const override;
 
     // Component Interface
-    virtual void reset();
+    void reset() override;
 
 protected:
    // Launcher dynamics -- moves launcher to its commanded position
    virtual void launcherDynamics(const LCreal dt); 
 
    // Player class (protected) interface
-   virtual void dynamics(const LCreal  dt = 0.0);
+   void dynamics(const LCreal  dt = 0.0) override;
 
 private:
    LCreal            lnchrAngle;       // Current launcher angle  (rad)

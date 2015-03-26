@@ -117,15 +117,15 @@ public:
    virtual bool onRfEmissionReturnEventAntenna(Emission* const);
 
    // ScanGimbal Interface -- Event handler(s)
-   virtual bool onStartScanEvent(Basic::Integer* const bar);
-   virtual bool onEndScanEvent(Basic::Integer* const bar);
+   bool onStartScanEvent(Basic::Integer* const bar) override;
+   bool onEndScanEvent(Basic::Integer* const bar) override;
 
    // Gimbal Interface -- Event handler(s)
-   virtual bool onRfEmissionEvent(Emission* const);
+   bool onRfEmissionEvent(Emission* const) override;
 
    // Component Interface
-   virtual bool event(const int event, Basic::Object* const obj = 0);
-   virtual void reset();
+   bool event(const int event, Basic::Object* const obj = 0) override;
+   void reset() override;
 
 protected:
    void clearQueues();

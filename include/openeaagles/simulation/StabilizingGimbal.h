@@ -49,7 +49,7 @@ protected:
    virtual void elevationStabilizingController(const LCreal dt = 0.0);
 
    // System Interface -- Callbacks by phase
-   virtual void dynamics(const LCreal dt);    // Phase 0
+   void dynamics(const LCreal dt) override;    // Phase 0
 
 private:
    StabilizingMode  stabilizingMode; // Gimbal stabilization mode

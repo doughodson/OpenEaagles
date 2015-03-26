@@ -52,7 +52,7 @@ public:
         DECLARE_SUBCLASS(LogEvent,Object)
     public:
         LogEvent();
-        virtual const char* getDescription() =0;
+        virtual const char* getDescription() = 0;
     };
 
 public:
@@ -72,9 +72,8 @@ public:
     virtual void log(const char* const msg);
     virtual void log(LogEvent* const event);
 
-    // Component interface
-    virtual void updateTC(const LCreal dt = 0.0f);
-    virtual void updateData(const LCreal dt = 0.0);
+    void updateTC(const LCreal dt = 0.0f) override;
+    void updateData(const LCreal dt = 0.0) override;
 
 protected:
     virtual bool openFile();

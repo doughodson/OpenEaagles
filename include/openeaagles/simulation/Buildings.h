@@ -23,7 +23,7 @@ public:
     Building();
 
     // Player interface
-    virtual unsigned int getMajorType() const;
+    unsigned int getMajorType() const override;
 };
 
 } // End Simulation namespace

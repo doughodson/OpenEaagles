@@ -49,7 +49,8 @@ namespace IoDevice {
 //      table        <Table1>    Shaping function table (default: none)
 //
 //------------------------------------------------------------------------------
-class AnalogInput : public Basic::IoAdapter {
+class AnalogInput : public Basic::IoAdapter
+{
    DECLARE_SUBCLASS(AnalogInput,Basic::IoAdapter)
 
 public:
@@ -72,8 +73,8 @@ public:
    bool setTable(const Basic::Table1* const);
 
    // Basic::IoAdapter functions
-   virtual void processInputs(const LCreal dt, const Basic::IoDevice* const device, Basic::IoData* const inData);
-   virtual void processOutputs(const LCreal dt, const Basic::IoData* const outData, Basic::IoDevice* const device);
+   void processInputs(const LCreal dt, const Basic::IoDevice* const device, Basic::IoData* const inData) override;
+   void processOutputs(const LCreal dt, const Basic::IoData* const outData, Basic::IoDevice* const device) override;
 
 protected:
    virtual LCreal convert(const LCreal vin, const LCreal dt);

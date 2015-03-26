@@ -268,7 +268,7 @@ public:  // Public section
 
 
    // Event handler(s)
-   virtual bool onRfEmissionEvent(Emission* const);                 // Handles R/F emission events
+   virtual bool onRfEmissionEvent(Emission* const);                      // Handles R/F emission events
 
    // Slot functions
    virtual bool setSlotType(const Basic::String* const msg);             // Physical gimbal type: "mechanical" or "electronic"
@@ -333,8 +333,8 @@ public:  // Public section
    static void limitVec(osg::Vec3d& vec, const osg::Vec3d& ll, const osg::Vec3d& ul);
 
    // Component Interface
-   virtual bool event(const int event, Basic::Object* const obj = 0);
-   virtual void reset();
+   bool event(const int event, Basic::Object* const obj = 0) override;
+   void reset() override;
 
 protected:
    virtual void servoController(const double dt = 0.0);

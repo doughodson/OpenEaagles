@@ -20,7 +20,7 @@ namespace Simulation {
 //------------------------------------------------------------------------------
 class NavRadio : public Radio 
 {
-    DECLARE_SUBCLASS(NavRadio,Radio)
+    DECLARE_SUBCLASS(NavRadio, Radio)
 
 public:
    NavRadio();
@@ -37,7 +37,7 @@ protected:
    virtual bool setPosition();
 
    // Basic::Component class protected functions
-   virtual bool shutdownNotification();
+   bool shutdownNotification() override;
 
 private:
    void initData();
@@ -82,7 +82,7 @@ public:
    double getBearing() const;     // Bearing (degrees)
 
    // Component Interface
-   virtual void updateData(const LCreal dt = 0.0);
+   void updateData(const LCreal dt = 0.0) override;
 
 protected:
    // Get Range and Bearing - Input pointers for your outputs
@@ -129,7 +129,7 @@ public:
     LCreal getLocalizerDifferenceDots();
 
     // Component Interface
-    virtual void updateData(const LCreal dt = 0.0);
+    void updateData(const LCreal dt = 0.0) override;
 
 protected:
     //Always find the glideslope first!!!!

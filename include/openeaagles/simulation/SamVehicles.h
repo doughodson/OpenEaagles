@@ -50,7 +50,7 @@ public:
    virtual bool setSlotMaxLaunchRange(const Basic::Distance* const msg);
 
    // Component Interface
-   virtual void updateData(const LCreal dt = 0.0f);
+   void updateData(const LCreal dt = 0.0f) override;
 
 private:
    LCreal            maxMslRng;        // Max Launch Range        (meters)

@@ -57,8 +57,8 @@ public:
    virtual bool setSlotDisableQueries(Basic::Number* const msg);
   
    // Component Interface
-   virtual void updateData(const LCreal dt = 0.0);
-   virtual void reset();
+   void updateData(const LCreal dt = 0.0) override;
+   void reset() override;
 
 protected:
 
@@ -67,7 +67,7 @@ protected:
    virtual void processPlayersOfInterest();
 
    // Basic::Component protected interface
-   virtual bool shutdownNotification();
+   bool shutdownNotification() override;
 
 private:
    IrSeeker*  seeker;               // Our seeker

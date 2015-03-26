@@ -29,7 +29,8 @@ namespace Recorder {
 // Slots: 
 //   playerName  <Basic::String>  ! Player name 
 //------------------------------------------------------------------------------
-class PrintPlayer : public PrintHandler {
+class PrintPlayer : public PrintHandler
+{
     DECLARE_SUBCLASS(PrintPlayer, PrintHandler)
 
 public:

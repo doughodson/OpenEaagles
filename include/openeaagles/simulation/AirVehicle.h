@@ -143,10 +143,10 @@ public:
     virtual void setCmdWingSweepAngle(const LCreal rad);
 
     // Player interface
-    virtual unsigned int getMajorType() const;
+    unsigned int getMajorType() const override;
 
     // Basic::Component interface
-    virtual void reset();
+    void reset() override;
 
 protected:
    AerodynamicsModel* getAerodynamicsModel();

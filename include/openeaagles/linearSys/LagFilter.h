@@ -32,7 +32,8 @@ namespace LinearSystem {
 //
 //
 //------------------------------------------------------------------------------
-class LagFilter : public FirstOrderTf {
+class LagFilter : public FirstOrderTf
+{
     DECLARE_SUBCLASS(LagFilter,FirstOrderTf)
 
 public:

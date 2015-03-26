@@ -24,7 +24,7 @@ class IrSensor;
 //------------------------------------------------------------------------------
 class IrQueryMsg : public SensorMsg
 {
-    DECLARE_SUBCLASS(IrQueryMsg,SensorMsg)
+    DECLARE_SUBCLASS(IrQueryMsg, SensorMsg)
 
 public:
    IrQueryMsg();

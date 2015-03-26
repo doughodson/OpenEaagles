@@ -21,7 +21,7 @@ class OtwPC : public Simulation::Otw
 public:
     OtwPC();
 
-    virtual void reset();                // Send frame sync (if any)
+    void reset() override;                // Send frame sync (if any)
 
 protected:
     // Otw Interface

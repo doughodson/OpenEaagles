@@ -37,7 +37,8 @@ public:
    virtual LCreal getElevationBin() const {return elevationBin; };     // Returns min azimuth distance
    virtual bool setElevationBin(const LCreal elevationBin);            // Sets min Azimuth Distance
 
-   virtual void reset();
+   void reset() override;
+
 protected:
    virtual void mergeIrReturns();
 

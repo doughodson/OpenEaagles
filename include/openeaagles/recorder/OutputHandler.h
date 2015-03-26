@@ -36,7 +36,8 @@ namespace Recorder {
 //    components     ! Must contain only 'OutputHandler' type objects
 //
 //------------------------------------------------------------------------------
-class OutputHandler : public Simulation::RecorderComponent {
+class OutputHandler : public Simulation::RecorderComponent
+{
    DECLARE_SUBCLASS(OutputHandler, Simulation::RecorderComponent)
 
 public:

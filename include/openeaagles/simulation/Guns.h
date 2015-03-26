@@ -94,7 +94,7 @@ public:
    virtual bool setSlotYaw(const Basic::Number* const num);        // Gun heading angle to ownship
 
    // Component class functions
-   virtual void reset();
+   void reset() override;
 
 protected:
    virtual LCreal computeBulletRatePerSecond();
@@ -105,10 +105,10 @@ protected:
    virtual osg::Vec3d computeInitBulletVelocity();
 
    // System class functions
-   virtual void process(const LCreal dt);     // Phase 3
+   void process(const LCreal dt) override;     // Phase 3
 
    // Basic::Component protected interface
-   virtual bool shutdownNotification();
+   bool shutdownNotification() override;
 
 private:
    Bullet*  bullet;           // Type of bullet
@@ -162,12 +162,12 @@ public:
    );
 
    // Weapon interface
-   virtual const char* getDescription() const;
-   virtual const char* getNickname() const;
-   virtual int getCategory() const;
+   const char* getDescription() const override;
+   const char* getNickname() const override;
+   int getCategory() const override;
 
    // Component Interface
-   virtual void reset();
+   void reset() override;
 
 protected:
    virtual void resetBurstTrajectories();

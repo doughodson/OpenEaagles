@@ -128,17 +128,17 @@ public:
    virtual bool onWpnReload();
 
    // Component Interface
-   virtual bool event(const int event, Basic::Object* const obj = 0);
+   bool event(const int event, Basic::Object* const obj = 0) override;
 
 protected:
    // Stores class interface; protected slot functions
    virtual bool setSlotStores(const Basic::PairStream* const msg); // (clones the 'msg' list)
 
    // System class interface; phase() callbacks
-   virtual void process(const LCreal dt);     // Phase 3
+   void process(const LCreal dt) override;     // Phase 3
 
    // Basic::Component class interface; protected functions
-   virtual bool shutdownNotification();
+   bool shutdownNotification() override;
 
 private:
    void initData();
@@ -220,11 +220,11 @@ public:
    virtual Decoy* releaseOneDecoy();
 
    // Component Interface
-   virtual void updateData(const LCreal dt = 0.0f);
+   void updateData(const LCreal dt = 0.0f) override;
 
 protected:
    // System class interface; phase() callbacks
-   virtual void process(const LCreal dt);     // Phase 3
+   void process(const LCreal dt) override;     // Phase 3
 
 private:
    void initData();

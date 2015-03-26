@@ -60,8 +60,8 @@ public:
    virtual int getShootList(SPtr<const Track>* const tlist, const int max) const;
 
    // Basic::Component interface
-   virtual void reset();
-   virtual void updateData(const LCreal dt = 0.0);
+   void reset() override;
+   void updateData(const LCreal dt = 0.0) override;
 
 protected:
    virtual void setNextToShoot(Track* const p);
@@ -70,10 +70,10 @@ protected:
    virtual void actionManager(const LCreal dt);
 
    // System class Interface -- phase() callbacks
-   virtual void process(const LCreal dt);     // Phase 3
+   void process(const LCreal dt) override;     // Phase 3
 
    // Basic::Component protected interface
-   virtual bool shutdownNotification();
+   bool shutdownNotification() override;
 
 private:
    SPtr<Action>   action;           // Current steerpoint action

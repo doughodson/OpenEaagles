@@ -68,19 +68,19 @@ public:
    virtual bool killedNotification(Player* const killedBy = 0);
 
    // Basic::Component interface
-   virtual void updateData(const LCreal dt = 0.0);
-   virtual void reset();
+   void updateData(const LCreal dt = 0.0) override;
+   void reset() override;
 
 protected:
    virtual bool onEndScanEvent(const Basic::Integer* const bar);
 
    // System class -- phase callbacks
-   virtual void transmit(const LCreal dt);
-   virtual void receive(const LCreal dt);
-   virtual void process(const LCreal dt);
+   void transmit(const LCreal dt) override;
+   void receive(const LCreal dt) override;
+   void process(const LCreal dt) override;
 
    // Basic::Component protected interface
-   virtual bool shutdownNotification();
+   bool shutdownNotification() override;
 
 protected: // (#temporary#) allow subclasses to access and use report queue
 

@@ -36,8 +36,8 @@ public:
    MultiActorAgent();
 
    // Basic::Component Interface
-   virtual void updateData(const LCreal dt = 0.0f);
-   virtual void reset();
+   void updateData(const LCreal dt = 0.0f) override;
+   void reset() override;
 
 protected:
    // generic controller

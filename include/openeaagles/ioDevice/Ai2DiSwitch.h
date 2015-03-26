@@ -38,7 +38,8 @@ namespace IoDevice {
 //      inverted     <Boolean>   Inverted bit flag (default: false)
 //
 //------------------------------------------------------------------------------
-class Ai2DiSwitch : public Basic::IoAdapter {
+class Ai2DiSwitch : public Basic::IoAdapter
+{
    DECLARE_SUBCLASS(Ai2DiSwitch,Basic::IoAdapter)
 
 public:
@@ -55,8 +56,8 @@ public:
    bool setInvertFlag(const bool);
 
    // Basic::IoAdapter functions
-   virtual void processInputs(const LCreal dt, const Basic::IoDevice* const device, Basic::IoData* const inData);
-   virtual void processOutputs(const LCreal dt, const Basic::IoData* const outData, Basic::IoDevice* const device);
+   void processInputs(const LCreal dt, const Basic::IoDevice* const device, Basic::IoData* const inData) override;
+   void processOutputs(const LCreal dt, const Basic::IoData* const outData, Basic::IoDevice* const device) override;
 
 protected:
    // Slot functions

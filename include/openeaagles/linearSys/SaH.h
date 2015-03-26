@@ -24,7 +24,8 @@ namespace LinearSystem {
 //    rate  <Number>     Sample rate Hz 
 //
 //------------------------------------------------------------------------------
-class SaH : public ScalerFunc {
+class SaH : public ScalerFunc
+{
     DECLARE_SUBCLASS(SaH,ScalerFunc)
 
 public:
@@ -44,8 +45,8 @@ public:
    virtual bool setSlotSampleRate(const Basic::Number* const msg);
 
    // ScalerFunc class interface
-   virtual LCreal g(const LCreal x);
-   virtual bool isValid() const;
+   LCreal g(const LCreal x) override;
+   bool isValid() const override;
 
 protected:
    // ScalerFunc class protected interface

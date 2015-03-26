@@ -33,7 +33,6 @@ public:
    virtual void clearTracksAndQueues();                // Clear all tracks and queues
    virtual bool addTrack(Track* const t);              // Add a track
 
-
 protected:
 
    virtual void processTrackList(const LCreal dt) =0;                  // Derived class unique

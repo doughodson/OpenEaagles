@@ -87,7 +87,7 @@ protected:
     virtual bool setResolution(const LCreal res);   // SAR resolution (meters)
 
     // System class -- phase callbacks
-    virtual void process(const LCreal dt);
+    void process(const LCreal dt) override;
 
     LCreal timer;                   // SAR timer
 

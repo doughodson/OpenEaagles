@@ -57,8 +57,8 @@ public:
    int getRefId() const    { return refId; }          // Message Ref ID
    virtual void setRefId(const int id);               // Sets the message ref ID
 
-   // Basic::Ubf::Action interface function(s)
-   virtual bool execute(Basic::Component* actor);
+   // Basic::Ubf::Action interface
+   bool execute(Basic::Component* actor) override;
 
 protected:
    OnboardComputer* getManager()   { return manager; } // Our manager

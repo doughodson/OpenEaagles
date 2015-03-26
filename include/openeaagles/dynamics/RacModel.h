@@ -57,8 +57,7 @@ public: // public interface
     virtual bool setCommandedAltitude(const double a, const double aMps = 0, const double maxPitch = 0);
     virtual void dynamics(const LCreal dt);             // One pass model update; called from Player::dynamics()
 
-    // Component interface
-    virtual void reset();
+    void reset() override;
 
     // Slot methods
     virtual bool setSlotMinSpeed(const Basic::Number* const msg);

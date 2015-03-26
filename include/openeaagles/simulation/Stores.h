@@ -174,10 +174,10 @@ public:
    virtual bool onJettisonEvent(ExternalStore* const msg);
 
    // Component Interface
-   virtual void updateTC(const LCreal dt = 0.0f);
-   virtual void updateData(const LCreal dt = 0.0f);
-   virtual bool event(const int event, Basic::Object* const obj = 0);
-   virtual void reset();
+   void updateTC(const LCreal dt = 0.0f) override;
+   void updateData(const LCreal dt = 0.0f) override;
+   bool event(const int event, Basic::Object* const obj = 0) override;
+   void reset() override;
 
 protected:
    // Sets the number of stations on this launcher
@@ -201,7 +201,7 @@ protected:
    virtual bool setSlotSelected(Basic::Number* const msg);         // Selected station
 
    // System class Interface -- phase() callbacks
-   virtual void process(const LCreal dt);     // Phase 3
+   void process(const LCreal dt) override;     // Phase 3
 
 private:
    void initData();

@@ -43,7 +43,8 @@ namespace LinearSystem {
 //    d3    <Number>     Coefficient D3 (default: 0)
 //
 //------------------------------------------------------------------------------
-class Sz2 : public SecondOrderTf {
+class Sz2 : public SecondOrderTf
+{
     DECLARE_SUBCLASS(Sz2,SecondOrderTf)
 
 public:

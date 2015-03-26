@@ -44,8 +44,8 @@ public:
     TabLogger();
 
     // Basic::Component interface
-    virtual void updateTC(const LCreal dt = 0.0f);
-    virtual void updateData(const LCreal dt = 0.0);
+    void updateTC(const LCreal dt = 0.0f) override;
+    void updateData(const LCreal dt = 0.0) override;
 
     //==============================================================================
     // ######### Simulation Log Event Classes #########

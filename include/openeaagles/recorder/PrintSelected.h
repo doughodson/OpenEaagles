@@ -40,7 +40,8 @@ namespace Recorder {
 //   condition       <Basic::String>   ! EQ, LT, or GT (ignored for bool and strings)
 //   timeOnly        <Basic::Number>   ! match time conditions only. Print ALL messages that match
 //------------------------------------------------------------------------------
-class PrintSelected : public PrintHandler {
+class PrintSelected : public PrintHandler
+{
     DECLARE_SUBCLASS(PrintSelected, PrintHandler)
 
 public:

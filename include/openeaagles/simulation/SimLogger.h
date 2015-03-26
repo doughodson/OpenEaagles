@@ -67,8 +67,8 @@ public:
     TSource getTimeline() const     { return timeline; }    // Timeline (UTC, SIM or EXEC)
 
     // Basic::Component interface
-    virtual void updateTC(const LCreal dt = 0.0f);
-    virtual void updateData(const LCreal dt = 0.0);
+    void updateTC(const LCreal dt = 0.0f) override;
+    void updateData(const LCreal dt = 0.0) override;
 
 protected:
    virtual bool setTimeline(const TSource ts);                             // Sets the logger's timeline (UTC, SIM or EXEC)

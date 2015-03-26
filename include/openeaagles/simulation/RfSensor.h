@@ -121,12 +121,12 @@ public:
     virtual bool setSlotSyncXmitWithScan(const Basic::Number* const msg); // Sets sync transmitter with antenna scan flag
 
     // RfSystem interface
-    virtual bool isTransmitting() const;
+    bool isTransmitting() const override;
 
     // Component Interface
-    virtual bool event(const int event, Basic::Object* const obj = 0);
-    virtual void updateData(const LCreal dt = 0.0);
-    virtual void reset();
+    bool event(const int event, Basic::Object* const obj = 0) override;
+    void updateData(const LCreal dt = 0.0) override;
+    void reset() override;
 
 protected:
     virtual Basic::PairStream* getModes();                          // Returns the list of submodes
@@ -138,7 +138,7 @@ protected:
     virtual bool onReturnToSearchEvent();                      // Return to search (SCAN_END) event handler
 
    // Basic::Component protected interface
-   virtual bool shutdownNotification();
+   bool shutdownNotification() override;
 
 private:
     bool processModes();

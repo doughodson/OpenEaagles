@@ -146,7 +146,8 @@ namespace Simulation {
 //    to this object.
 //       
 //------------------------------------------------------------------------------
-class Station : public Basic::Component {
+class Station : public Basic::Component
+{
    DECLARE_SUBCLASS(Station,Basic::Component)
 
 public:
@@ -260,9 +261,9 @@ public:
    // ---
    // Basic::Component functions
    // ---
-   virtual void updateTC(const LCreal dt = 0.0f);
-   virtual void updateData(const LCreal dt = 0.0f);
-   virtual void reset();
+   void updateTC(const LCreal dt = 0.0f) override;
+   void updateData(const LCreal dt = 0.0f) override;
+   void reset() override;
 
 protected:
    virtual void inputDevices(const LCreal dt);    // Handle device inputs
@@ -278,7 +279,7 @@ protected:
    void setBgThread(Basic::Thread* h);
 
    // Basic::Component protected functions
-   virtual bool shutdownNotification();
+   bool shutdownNotification() override;
 
 private:
    void initData();

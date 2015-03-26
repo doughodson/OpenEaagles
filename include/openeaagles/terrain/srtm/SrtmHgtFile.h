@@ -65,7 +65,7 @@ private:
     bool determineSrtmInfo(const std::string& srtmFilename, std::streamoff size);
 
    // Terrain::Database private interface
-   virtual bool loadData();   // Load the data file
+   bool loadData() override;   // Load the data file
 };
 
 

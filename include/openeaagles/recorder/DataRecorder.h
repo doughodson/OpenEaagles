@@ -53,7 +53,8 @@ namespace Recorder {
 //    REID_TRACK_DATA         ! obj[0] => (player); obj[1] => (track)
 //
 //------------------------------------------------------------------------------
-class DataRecorder : public Simulation::DataRecorder {
+class DataRecorder : public Simulation::DataRecorder
+{
    DECLARE_SUBCLASS(DataRecorder, Simulation::DataRecorder)
 
 public:
@@ -70,10 +71,10 @@ public:
    unsigned int getYear() const           { return year; }
 
    // Simulation::DataRecorder class interface functions
-   virtual void processRecords();
+   void processRecords() override;
 
    // Basic::Component class interface functions
-   virtual void reset();
+   void reset() override;
 
 protected:
    // Get functions

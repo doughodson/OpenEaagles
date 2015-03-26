@@ -29,7 +29,8 @@ namespace IoDevice {
 // Note: If 'num' is less than zero then the DOs are stored in reverse
 //       order (i.e., 'do' location is decremented).
 //------------------------------------------------------------------------------
-class DiscreteOutput : public Basic::IoAdapter {
+class DiscreteOutput : public Basic::IoAdapter
+{
    DECLARE_SUBCLASS(DiscreteOutput,Basic::IoAdapter)
 
 public:
@@ -50,8 +51,8 @@ public:
    bool setNumber(const int);
 
    // Basic::IoAdapter functions
-   virtual void processInputs(const LCreal dt, const Basic::IoDevice* const device, Basic::IoData* const inData);
-   virtual void processOutputs(const LCreal dt, const Basic::IoData* const outData, Basic::IoDevice* const device);
+   void processInputs(const LCreal dt, const Basic::IoDevice* const device, Basic::IoData* const inData) override;
+   void processOutputs(const LCreal dt, const Basic::IoData* const outData, Basic::IoDevice* const device) override;
 
 protected:
    // Slot functions

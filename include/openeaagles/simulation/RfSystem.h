@@ -137,8 +137,8 @@ public:
    virtual bool setSlotDisableEmissions(Basic::Number* const msg);
 
    // Component Interface
-   virtual void updateData(const LCreal dt = 0.0);
-   virtual void reset();
+   void updateData(const LCreal dt = 0.0) override;
+   void reset() override;
 
 protected:
    // Max size of emission queues (per frame)
@@ -162,7 +162,7 @@ protected:
    virtual void process(const LCreal dt);     // Phase 3
 
    // Basic::Component protected interface
-   virtual bool shutdownNotification();
+   bool shutdownNotification() override;
 
 private:   
    void initData();

@@ -43,7 +43,8 @@ namespace IoDevice {
 //      channel   <Number>       ! Output device channel number (AO signal generator only)
 //
 //------------------------------------------------------------------------------
-class SignalGen : public Basic::IoAdapter {
+class SignalGen : public Basic::IoAdapter
+{
    DECLARE_SUBCLASS(SignalGen,Basic::IoAdapter)
 
 public:
@@ -69,11 +70,11 @@ public:
    bool setChannel(const unsigned int);
 
    // Basic::IoAdapter functions
-   virtual void processInputs(const LCreal dt, const Basic::IoDevice* const device, Basic::IoData* const inData);
-   virtual void processOutputs(const LCreal dt, const Basic::IoData* const outData, Basic::IoDevice* const device);
+   void processInputs(const LCreal dt, const Basic::IoDevice* const device, Basic::IoData* const inData) override;
+   void processOutputs(const LCreal dt, const Basic::IoData* const outData, Basic::IoDevice* const device) override;
 
    // Basic::Component interface
-   virtual void reset();
+   void reset() override;
 
 protected:
    // AnalogOutput interface

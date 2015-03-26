@@ -79,10 +79,10 @@ public:
     virtual void updateZone(int zone, int& selected, const int idx);
             
     // BasicGL::Graphic interface
-    virtual void drawFunc();
+    void drawFunc() override;
     
     // Basic::Component interface
-    virtual void updateData(const LCreal dt = 0.000000);
+    void updateData(const LCreal dt = 0.000000) override;
                   
 protected:
     bool setSlotMapIntensity(const Basic::Number* const x);

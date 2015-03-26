@@ -81,8 +81,8 @@ public:
    virtual bool onDatalinkMessageEvent(Basic::Object* const);
 
    // Component Interface
-   virtual bool event(const int event, Basic::Object* const obj = 0);
-   virtual void reset();
+   bool event(const int event, Basic::Object* const obj = 0) override;
+   void reset() override;
 
 protected:
    virtual bool queueIncomingMessage(Basic::Object* const msg);  // Queue up an incoming message

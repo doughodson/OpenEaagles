@@ -26,9 +26,9 @@ public:
     Aam();
     
     // Weapon interface
-    virtual const char* getDescription() const;  // Returns "AIM"
-    virtual const char* getNickname() const;     // Returns "GenericAam"
-    virtual int getCategory() const;             // Returns MISSILE or GUIDED
+    const char* getDescription() const override;  // Returns "AIM"
+    const char* getNickname() const override;     // Returns "GenericAam"
+    int getCategory() const override;             // Returns MISSILE or GUIDED
 };
 
 } // End Simulation namespace

@@ -28,7 +28,8 @@ namespace LinearSystem {
 //
 //
 //------------------------------------------------------------------------------
-class LowpassFilter : public FirstOrderTf {
+class LowpassFilter : public FirstOrderTf
+{
     DECLARE_SUBCLASS(LowpassFilter,FirstOrderTf)
 
 public:

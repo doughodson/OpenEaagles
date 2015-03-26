@@ -46,7 +46,7 @@ private:
    DedStats* fstat;        // Statistics header
 
    // Terrain::Database private interface
-   virtual bool loadData();   // Load the data file
+   bool loadData() override;   // Load the data file
 };
 
 } // End Terrain namespace

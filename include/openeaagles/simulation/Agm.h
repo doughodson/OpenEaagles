@@ -20,15 +20,15 @@ namespace Simulation {
 //------------------------------------------------------------------------------
 class Agm : public Missile  
 {
-    DECLARE_SUBCLASS(Agm,Missile)
+    DECLARE_SUBCLASS(Agm, Missile)
 
 public:
     Agm();
     
     // Weapon interface
-    virtual const char* getDescription() const;  // returns "AGM"
-    virtual const char* getNickname() const;     // returns "GenericAgm"
-    virtual int getCategory() const;             // returns MISSILE | GUIDED
+    const char* getDescription() const override;  // returns "AGM"
+    const char* getNickname() const override;     // returns "GenericAgm"
+    int getCategory() const override;             // returns MISSILE | GUIDED
 
 private:
     // Missile interface

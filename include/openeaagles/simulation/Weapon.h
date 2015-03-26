@@ -131,7 +131,7 @@ namespace Simulation {
 //==============================================================================
 class Weapon : public Player
 {
-    DECLARE_SUBCLASS(Weapon,Player)
+    DECLARE_SUBCLASS(Weapon, Player)
 
 public:
     // Weapon Categories (bits) These bits can be bitwise OR'd together
@@ -305,9 +305,9 @@ public:
    virtual bool crashNotification();
 
    // Basic::Component interface
-   virtual void updateTC(const LCreal dt = 0.0);
-   virtual bool event(const int event, Basic::Object* const obj = 0);
-   virtual void reset();
+   void updateTC(const LCreal dt = 0.0) override;
+   bool event(const int event, Basic::Object* const obj = 0) override;
+   void reset() override;
 
 protected:
    virtual void weaponGuidance(const LCreal dt);
@@ -345,10 +345,10 @@ protected:
    bool setLocationOfDetonation();
 
    // Player (protected) interface
-   virtual void dynamics(const LCreal  dt = 0.0);
+   void dynamics(const LCreal  dt = 0.0) override;
 
    // Basic::Component protected functions
-   virtual bool shutdownNotification();
+   bool shutdownNotification() override;
 
 private:
     void initData();
