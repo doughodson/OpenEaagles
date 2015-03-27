@@ -497,12 +497,7 @@ void PrintSelected::processMessage(const google::protobuf::Message* const msg)
          if (cppType == google::protobuf::FieldDescriptor::CPPTYPE_MESSAGE) {
             // Get sub message
             const google::protobuf::Message& sub_message = reflection->GetMessage(root, fieldDescriptor);
-
-            // If sub message exists, process it
-            if (&sub_message != NULL) {
-               // call this until no more messages
-               processMessage(&sub_message);
-            }
+            processMessage(&sub_message);
          }
          else {
             // field is not a message. Check File name for match
@@ -621,13 +616,7 @@ void PrintSelected::printMessage(std::ostream& soutFields, std::ostream& soutVal
 
             // do the same again for this message, etc.
             const google::protobuf::Message& sub_message = reflection->GetMessage(root, fieldDescriptor);
-
-            // Are there sub-messages?
-            if (&sub_message != NULL) {
-
-               // call this until no more messages
-               printMessage(soutFields, soutVals, &sub_message);
-            }
+            printMessage(soutFields, soutVals, &sub_message);
          }
          else {
             // not a message: Print the field

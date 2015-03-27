@@ -706,8 +706,9 @@ void Component::processComponents(
    // Our dynamic_cast (see below) already filters on the Component class
    // ---
    bool skipFilter = false;
-   if (&filter == 0) skipFilter = true;
-   else if (filter == typeid(Component)) skipFilter = true;
+   if (filter == typeid(Component)) {
+      skipFilter = true;
+   }
 
    // ---
    // Create a new list, copy (filter) the component pairs and set their container pointers
