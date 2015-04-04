@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // Class: Adi
-// 
-// Description: Adi that knows how to translate and rotate its pitch and roll 
+//
+// Description: Adi that knows how to translate and rotate its pitch and roll
 // ladder according to aircraft pitch and roll.  You can either push data
 // down by using the send function (see below) or you can get a pointer and
 // use the member functions setPitch() and setRoll().
@@ -41,10 +41,8 @@ public:
     virtual bool setPitch(const LCreal newP);
     virtual bool setMaxRate(const LCreal newMR);
 
-    // BasicGL::Graphic interface
     void draw() override;
-    
-    // Basic::Component interface
+
     bool event(const int event, Basic::Object* const obj = 0) override;
     void updateData(const LCreal dt = 0) override;
 

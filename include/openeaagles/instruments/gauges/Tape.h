@@ -15,9 +15,8 @@ namespace Instruments {
 class Tape : public Instrument
 {
     DECLARE_SUBCLASS(Tape, Instrument)
-    
-public:
 
+public:
     Tape();
 
     void updateData(const LCreal dt = 0.0) override;

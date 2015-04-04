@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // Class:       RotarySwitch
 // Base class:  Basic::Object -> Basic::Component -> BasicGL::Graphic -> Button -> RotarySwitch
-// Description: Generic multi-position selector switch that knows when it is left or right 
+// Description: Generic multi-position selector switch that knows when it is left or right
 //                mouse clicked and moves to next or previous switch position.
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_Instruments_RotarySwitch_H__
@@ -20,19 +20,17 @@ public:
    RotarySwitch();
 
    // Get current switch position
-   int getCurrentPosition() const { return currentPosition; }; 
+   int getCurrentPosition() const { return currentPosition; };
 
-   // Button class interface
    bool onSingleClick() override;
 
-   // Basic::Component class interface
    void updateData(const LCreal dt = 0.0) override;
-    
-protected: 
+
+protected:
     bool setSlotAngles(const Basic::PairStream* const stream);
     bool setSlotStartPosition(const Basic::Number* const x);
 
-private:  
+private:
     static const int MAX_ANGLES = 500;
 
     int currentPosition;    //current switch position

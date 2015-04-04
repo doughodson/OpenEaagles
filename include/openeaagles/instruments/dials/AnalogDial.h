@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 // Class: AnalogDial
-// 
+//
 // Description:  Used as a parent class for other dials, it will draw a background
 // that can be visible or not, depending on a flag.  It can also rotate according
 // to a scale, or it can be fixed.  This is a generic intelligent background
@@ -21,10 +21,10 @@ namespace Instruments {
 class AnalogDial : public Instrument
 {
     DECLARE_SUBCLASS(AnalogDial,Instrument)
-    
+
 public:
     AnalogDial();
-    
+
     // set functions
     virtual bool setOriginAngle(const LCreal na);
     virtual bool setSweepAngle(const LCreal newSweepAngle);
@@ -39,13 +39,11 @@ public:
     LCreal getRadius() const        { return radius; }
     int getSlices() const           { return slices; }
 
-    // BasicGL::Graphic interface
     void drawFunc() override;
 
-    // Basic::Component interface
     bool event(const int event, Basic::Object* const obj = 0) override;
 
-protected: 
+protected:
     // slot functions
     bool setSlotOriginAngle(const Basic::Number* const newAngle);
     bool setSlotMobile(const Basic::Number* const newM);

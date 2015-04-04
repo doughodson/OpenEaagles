@@ -21,14 +21,12 @@ public:
     virtual bool setWidth(const LCreal x)           { width = x; return true; }
     virtual bool setHeight(const LCreal x)          { height = x; return true; }
 
-    // BasicGL::Graphic interface
     void drawFunc() override;
-    
-    // Basic::Component interface
+
     void updateData(const LCreal dt = 0.0) override;
 
 protected:
-    bool setSlotSkyColor(const Basic::Color* const cobj);   
+    bool setSlotSkyColor(const Basic::Color* const cobj);
     bool setSlotSkyColor(const Basic::String* const cname);
     bool setSlotGroundColor(const Basic::String* const cname);
     bool setSlotGroundColor(const Basic::Color* const cobj);

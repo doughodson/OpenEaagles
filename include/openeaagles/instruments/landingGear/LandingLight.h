@@ -14,7 +14,7 @@ namespace Instruments {
 // Class: LandingLight
 //
 // Description: Generic landing gear lights, which use the same principle as
-// the landing gear, only they don't show a transitional phase, just off 
+// the landing gear, only they don't show a transitional phase, just off
 // or on.
 //
 // Public member functions:
@@ -26,23 +26,21 @@ class LandingLight : public LandingGear
 
 public:
     LandingLight();
-        
+
     // get functions
     LCreal getLightRadius() const { return lRadius; }
-    
+
     // set functions
     virtual bool setLightRadius(const LCreal newLR);
-    
-    // Basic::Component interface
+
     void updateData(const LCreal dt = 0.0) override;
-    
-    // BasicGL::Graphic override
+
     void drawFunc() override;
 
 protected:
     // slot functions
     bool setSlotLightRadius(const Basic::Number* const newLR);
-    
+
 private:
     LCreal lRadius;     // our light radius
     LCreal gearCurrent; // our gear current value

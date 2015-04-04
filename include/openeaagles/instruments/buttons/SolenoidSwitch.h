@@ -3,8 +3,8 @@
 //
 // Description: This is a custom button manager, which will hold 3 buttons, and
 // will time when the user holds up or down from the center on the button, and will
-// switch at that time.  A click on the center button will simply return to the 
-// center position (no holding).  
+// switch at that time.  A click on the center button will simply return to the
+// center position (no holding).
 // You can retrieve the button position at any time, or
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_Instruments_SolenoidSwitch_H__
@@ -34,7 +34,7 @@ public:
     void setOkToLatch(bool x)   { latched = x; }
     bool okToLatch() const      { return latched; }
 
-    // hit when our buttons are pressed and we are trying to "latch" the switch in place 
+    // hit when our buttons are pressed and we are trying to "latch" the switch in place
     // (either by timer or logic)
     void latch(const int buttonId);
     // button is release, switch will determine if latch will "stick"
@@ -45,7 +45,6 @@ public:
     int getSwitchPosition()   { return currButtonId; }
     Basic::UpTimer* getTimer() { return timer; }
 
-    // Component interface
     void updateData(const LCreal dt = 0.0) override;
     bool event(const int event, Basic::Object* const obj = 0) override;
 
@@ -79,14 +78,12 @@ class SolenoidButton : public Button
 public:
     SolenoidButton();
 
-    // button override
-    virtual bool onSingleClick();
+    bool onSingleClick() override;
 
     // The left mouse button has been depressed
     virtual bool onMouseDown();
     virtual bool onPicked(const Basic::Number* const x);
 
-    // Component interface
     bool event(const int event, Basic::Object* const obj = 0) override;
     void updateData(const LCreal dt = 0.0) override;
 

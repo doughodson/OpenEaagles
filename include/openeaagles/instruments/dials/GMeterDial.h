@@ -3,7 +3,7 @@
 //
 // Description: G meter, which simply keeps track of min and max and actual G's
 //
-// Inputs: 
+// Inputs:
 //      UPDATE_INSTRUMENTS (from instruments) -> g's
 //      RESET_EVENT -> resets min and max g's
 //------------------------------------------------------------------------------
@@ -20,19 +20,17 @@ class GMeterDial : public AnalogDial {
 
 public:
     GMeterDial();
-    
-    // BasicGL::Graphic interface
-    void drawFunc() override; 
-    
-    // Basic::Component interface
+
+    void drawFunc() override;
+
     void updateData(const LCreal dt = 0.0) override;
     void reset() override;
-    
+
 private:
     LCreal rotation;    // our rotation angle (of the gauge arrow)
     LCreal maxG;        // max g value
     LCreal minG;        // min g value
-    
+
     SendData gsSD;      // actual gs
     SendData minGSD;    // min gs
     SendData maxGSD;    // max gs

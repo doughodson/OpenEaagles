@@ -4,10 +4,10 @@
 // Description: Generic AOA gauge that, given limits, will indicate over, under,
 // and in-range aoa values.
 //
-// Inputs: 
+// Inputs:
 //      UPDATE_INSTRUMENTS token = actual aoa
 //      All the rest are slots (red min, max, yellow min, max, and green min, max)
-//      with: 
+//      with:
 //      red -> over limit area
 //      green -> in limit area
 //      yellow -> under limit area
@@ -35,7 +35,7 @@ public:
     virtual bool setAoaYellowMax(const LCreal b);
     virtual bool setAoaGreenMin(const LCreal a);
     virtual bool setAoaGreenMax(const LCreal b);
-    
+
     // get functions
     LCreal getAoaRedMin() const     { return aoaRedMin; }
     LCreal getAoaRedMax() const     { return aoaRedMax; }
@@ -44,13 +44,11 @@ public:
     LCreal getAoaGreenMin() const   { return aoaGreenMin; }
     LCreal getAoaGreenMax() const   { return aoaGreenMax; }
     int    getState() const         { return aoaState; }
-    
-    // BasicGL::Graphic interface
+
     void drawFunc() override;
-    
-    // Basic::Component interface
+
     void updateData(const LCreal dt = 0) override;
-    
+
 protected:
 
     // slot functions
@@ -60,7 +58,7 @@ protected:
     virtual bool setSlotAoaYellowMax(const Basic::Number* const newYMax);
     virtual bool setSlotAoaGreenMax(const Basic::Number* const newGMax);
     virtual bool setSlotAoaGreenMin(const Basic::Number* const newGMin);
-    
+
 private:
 
 //  --  -> aoaMax
@@ -75,11 +73,11 @@ private:
     LCreal aoaYellowMax;    // max value of where the yellow portion of our aoa lights up
     LCreal aoaGreenMin;     // min value of where the green portion of our aoa lights up
     LCreal aoaGreenMax;     // max value of where the green portion of our aoa lights up
-    
+
     GLuint displayList;     // our display list name
     bool isDlist;           // do we have a display list?
-    int    aoaState;        // shows which state we are in  
-    SendData selectSD;      // which graphics are we selecting? (If we are using a rotary)  
+    int    aoaState;        // shows which state we are in
+    SendData selectSD;      // which graphics are we selecting? (If we are using a rotary)
 };
 
 }  // end Instruments namespace

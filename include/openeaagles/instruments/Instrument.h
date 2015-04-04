@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // Class: Instrument
 // Base class: BasicGL::Graphic -> Instrument
-// 
+//
 // Description: Base class for all instruments, this class will receive a value
 // via an UPDATE_INSTRUMENTS command, and from there will determine (if we have a
 // scaling table) what our scaled table is.  It will then determine if we have a
@@ -24,22 +24,21 @@ namespace Instruments {
 
 class Instrument : public BasicGL::Graphic {
     DECLARE_SUBCLASS(Instrument,BasicGL::Graphic)
-    
+
 public:
     Instrument();
 
     // get functions
-    const Basic::Table1* getScalingTable() const { return myTable; } 
-    LCreal  getInstValue() const          { return instVal; } 
+    const Basic::Table1* getScalingTable() const { return myTable; }
+    LCreal  getInstValue() const          { return instVal; }
     LCreal  getPreScaleInstValue() const  { return preScaleInstVal; }
     bool isPassingAllowed() const         { return allowPassing; }
 
     // set functions
-    virtual bool setAllowValPass(const bool newVP); 
+    virtual bool setAllowValPass(const bool newVP);
     virtual bool setInstVal(const LCreal newPos);
-    
-    // Basic::Component interface
-    bool event(const int event, Basic::Object* const obj = 0) override;  
+
+    bool event(const int event, Basic::Object* const obj = 0) override;
     void updateData(const LCreal dt = 0.0) override;
 
 protected:
@@ -47,10 +46,10 @@ protected:
     bool setSlotScalingTable(const Basic::Table1* const newTable);
     bool setSlotInstVal(const Basic::Number* const newVal);
     bool setSlotAllowValPass(const Basic::Number* const newAVP);
-    
+
     // event functions
     bool onUpdateInstVal(const Basic::Number* const newPos);
-    
+
 private:
     // member variables
     const Basic::Table1* myTable; // holds our scaling data

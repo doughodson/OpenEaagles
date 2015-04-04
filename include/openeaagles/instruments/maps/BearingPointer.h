@@ -2,11 +2,11 @@
 // Class: BearingPointer
 // Base Class: Basic::Object -> BasicGL::Graphic -> CompassRose -> BearingPointer
 //
-// Description: This is a bearing pointer, which works in conjunction with 
+// Description: This is a bearing pointer, which works in conjunction with
 // a compass rose to determine bearing, however, it is independent of CompassRose,
 // and can be used as a stand-alone item.  You can also add a head and tail
 // graphic to the pointer, to customize it.  It defaults to a standard 0.5 inch
-// wide bearing pointer with a line for a tail.  
+// wide bearing pointer with a line for a tail.
 //
 // Inputs:
 //      UPDATE_VALUE 1 - 6 (from Compass rose) -> handles centered, radius, and such
@@ -24,25 +24,23 @@ namespace Instruments {
 class BearingPointer : public CompassRose
 {
     DECLARE_SUBCLASS(BearingPointer, CompassRose)
-        
+
 public:
     BearingPointer();
-    
-    // get function    
+
+    // get function
     LCreal getBearingRad() const { return bearing; } // radians
     LCreal getBearingDeg() const { return bearing * static_cast<LCreal>(Basic::Angle::R2DCC); }    // degrees
     BasicGL::Graphic* getHeadGraphic() const { return head; }
     BasicGL::Graphic* getTailGraphic() const { return tail; }
-    
+
     // Set functions
     bool setBearingRad(const LCreal newB);             // radians
     bool setBearingDeg(const LCreal newB);             // degrees
-    
-    // BasicGL::Graphic interface
+
     void drawFunc() override;
     void draw() override;
-    
-    // Basic::Component interface
+
     void updateData(const LCreal dt = 0) override;
     bool event(const int key, Basic::Object* const obj = 0) override;
 
@@ -56,7 +54,7 @@ private:
     bool onUpdateRadBearingPointer(const Basic::Angle* const msg);
     bool onUpdateRadBearingPointer(const Basic::Number* const msg);
     bool onUpdateDegBearingPointer(const Basic::Number* const msg);
-    
+
     LCreal bearing;     // used for bearing pointer, or if anyone else needs it for calculations (radians)
     LCreal myRotation;  // how much we are going to rotate the compass
     LCreal myRadius;    // our radius (comes from dial radius)

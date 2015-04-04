@@ -16,9 +16,8 @@ class Eadi3DPage : public BasicGL::Page{
    DECLARE_SUBCLASS(Eadi3DPage,BasicGL::Page)
 
 public:
-
     Eadi3DPage();
-    
+
     void setAltitude(const LCreal alt);                 // feet
     void setAirspeed(const LCreal spd);                 // knots
     void setHeading(const LCreal hdg);                  // deg
@@ -40,10 +39,8 @@ public:
     void setGlideslopeValid(const bool gsValid);        // T = valid
     void setLocalizerValid(const bool locValid);        // T = valid
 
-    // BasicGL::Graphic interface
     void draw() override;
 
-    // Basic::Component interface
     bool event(const int event, Basic::Object* const obj = 0) override;
 
 private:

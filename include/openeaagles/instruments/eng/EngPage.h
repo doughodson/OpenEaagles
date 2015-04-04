@@ -17,7 +17,6 @@ class EngPage : public BasicGL::Page
    DECLARE_SUBCLASS(EngPage,BasicGL::Page)
 
 public:
-
     EngPage();
 
     static const int NUM_ENG = 4;
@@ -32,30 +31,29 @@ public:
     LCreal getEngN1(const int engNum) const { return n1[engNum]; }
     LCreal getEngN2(const int engNum) const { return n2[engNum]; }
     LCreal getEngTit(const int engNum) const { return tit[engNum]; }
-    LCreal getEngFF(const int engNum) const { return ff[engNum]; } 
+    LCreal getEngFF(const int engNum) const { return ff[engNum]; }
 
-    // Basic::Component Interface
     void updateData(const LCreal dt = 0.0) override;
 
 private:
 
-    // engine n1 
+    // engine n1
     LCreal   n1[NUM_ENG];          // %RPM
     SendData n1SD[NUM_ENG];
     SendData n1ROSD[NUM_ENG];
-    SendData n1BoxSD[NUM_ENG];   
+    SendData n1BoxSD[NUM_ENG];
 
-    // engine n2 
+    // engine n2
     LCreal   n2[NUM_ENG];          // %RPM
     SendData n2SD[NUM_ENG];
     SendData n2ROSD[NUM_ENG];
-    SendData n2BoxSD[NUM_ENG];   
+    SendData n2BoxSD[NUM_ENG];
 
     // engine tit
     LCreal   tit[NUM_ENG];         // Degs C
     SendData titSD[NUM_ENG];
     SendData titROSD[NUM_ENG];
-    SendData titBoxSD[NUM_ENG];   
+    SendData titBoxSD[NUM_ENG];
 
     // engin1 fuel flow
     LCreal ff[NUM_ENG];             // lbs/hrs

@@ -14,36 +14,34 @@ namespace Instruments {
 class PushButton : public Button
 {
     DECLARE_SUBCLASS(PushButton,Button)
- 
+
 public:
     PushButton();
 
    // gets the pushbutton type ie momentary = false or maintained = true
    bool getFunction() const     { return functionType; };
-   
+
    // gets the current state of the pushbutton ie off = false or on = true
-   bool getCurrentState() const { return currentState; }; 
+   bool getCurrentState() const { return currentState; };
 
    // sets the pushbutton type ie momentary = false or maintained = true
    virtual bool setFunction(const bool x);
-   
+
    // The left mouse button has been depressed
    virtual bool onMouseDown();
 
-   // Button class interface
-   virtual bool onSingleClick();
-   virtual bool onCancel();
+   bool onSingleClick() override;
+   bool onCancel() override;
 
-   // Basic::Component class interface
    void updateData(const LCreal dt = 0.0) override;
    bool event(const int event, Basic::Object* const obj = 0) override;
-    
-protected: 
+
+protected:
    // sets the pushbutton type to momentary = false or maintained = true
    bool setSlotFunction(const Basic::Number* const newFunction);
    bool setSlotStartState(const Basic::Number* const newFunction);
 
-private:    
+private:
    bool  functionType;     //false = momentary, true = maintained
    bool  currentState;     //false = off, true = on
    bool  mouseDown;        //mouse press down status

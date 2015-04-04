@@ -13,31 +13,30 @@ namespace Instruments {
 
 class Button : public BasicGL::Graphic {
     DECLARE_SUBCLASS(Button,BasicGL::Graphic)
-    
+
 public:
     Button();
 
     // Returns the event ID.
-    virtual int getEventId() const { return eventId; }
+    virtual int getEventId() const               { return eventId; }
 
     // Sets the Event ID to newID.
-    virtual bool setEventId(const int newId) { eventId = newId; return true; };
+    virtual bool setEventId(const int newId)     { eventId = newId; return true; };
 
     // Right now, this function merely detects when the button has been
     // clicked, but it can be overridden to do anything.
     virtual bool onSingleClick();
-    
+
     // Cancel
     virtual bool onCancel();
 
-    // Basic::Component interface
     bool event(const int event, Basic::Object* const obj = 0) override;
-    
-protected: 
+
+protected:
     // Sets the Event ID to newEvent.
     virtual bool setSlotEventId(const Basic::Number* const newEvent);
 
-private:    
+private:
     int eventId;        // holds our event number
 };
 

@@ -2,7 +2,7 @@
 // Class: CompassRose
 // Base Class: Basic::Object -> BasicGL::Graphic -> CompassRose
 //
-// Description: Generic compass used as a direction indicator.  It will 
+// Description: Generic compass used as a direction indicator.  It will
 // rotate about a heading either by someone telling it through a member function.
 // Inputs:
 //      UPDATE_VALUE  -> rotation angle (deg)
@@ -24,10 +24,10 @@ namespace Instruments {
 class CompassRose : public BasicGL::Graphic
 {
     DECLARE_SUBCLASS(CompassRose, BasicGL::Graphic)
-        
+
 public:
     CompassRose();
-    
+
     // Set functions
     virtual bool setRotationDeg(const LCreal newR);
     virtual bool setRotationRad(const LCreal newR);
@@ -35,7 +35,7 @@ public:
     virtual bool setDeCenteredRadius(const LCreal newDR);
     virtual bool setDisplacement(const LCreal newD);
     virtual bool setCentered(const bool newC);
-    
+
     // Get function
     LCreal getRotationDeg() const      { return rot * static_cast<LCreal>(Basic::Angle::R2DCC); }
     LCreal getRotationRad() const      { return rot; }
@@ -43,14 +43,12 @@ public:
     LCreal getDeCenteredRadius() const { return decRadius; }
     bool isCentered() const            { return centered; }
     LCreal getDisplacement() const     { return displacement; }
-    
-    // BasicGL::Graphic interface
+
     void draw() override;
-        
-    // Basic::Component interface
+
     void updateData(const LCreal dt = 0.0) override;
     bool event(const int event, Basic::Object* const obj = 0) override;
-    
+
 protected:
     // slot functions
     bool setSlotCenteredRadius(const Basic::Number* const newR);
@@ -64,14 +62,14 @@ protected:
     bool onUpdateDecRadius(const Basic::Number* const x);
     bool onUpdateDisplacement(const Basic::Number* const x);
     bool onUpdateCentered(const Basic::Number* const x);
-    
+
 private:
     LCreal rot;         // rotation angle (rads)
     LCreal cenRadius;   // our centered radius (inches)
     LCreal decRadius;   // our decentered radius (inches)
     bool centered;      // centered flag
     LCreal displacement;// how far to translate when we go decentered (inches)
-    
+
     SendData lTicksSD;
     SendData sTicksSD;
     SendData dialSD;
