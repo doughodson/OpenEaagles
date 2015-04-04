@@ -27,13 +27,11 @@ public:
    DiffEquation();
    DiffEquation(const unsigned int rate);
 
-   // ScalerFunc class interface
-   virtual LCreal g(const LCreal x);
+   LCreal g(const LCreal x) override;
 
 protected:
-   // ScalerFunc class protected interface
-   virtual void allocateMemory(unsigned int n);
-   virtual void clearMemory();
+   void allocateMemory(unsigned int n) override;
+   void clearMemory() override;
 
    // Difference equation coef arrays
    LCreal* pa;    // (a[k] * y[k]) terms; for k = 1 .. n

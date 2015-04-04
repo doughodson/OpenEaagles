@@ -29,13 +29,11 @@ public:
    virtual bool setLowerLimit(const LCreal v);
    virtual bool setUpperLimit(const LCreal v);
 
-   // ScalerFunc class interface
    LCreal g(const LCreal x) override;
    bool isValid() const override;
 
 protected:
-   // ScalerFunc class protected interface
-   virtual void initialize();
+   void initialize() override;
 
 private:
    void initData();  // Initialize our data

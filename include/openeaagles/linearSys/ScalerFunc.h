@@ -36,7 +36,7 @@ namespace LinearSystem {
 //
 // Slots:
 //    rate  <Frequency>  Master rate
-//    rate  <Number>     Master rate Hz 
+//    rate  <Number>     Master rate Hz
 //    x0    <Number>     Initial (previous) input value: X(0) (default: 0)
 //    y0    <Number>     Initial (previous) output value: Y(0) (default: 0)
 //
@@ -71,8 +71,7 @@ public:
    virtual bool setSlotX0(const Basic::Number* const msg);
    virtual bool setSlotY0(const Basic::Number* const msg);
 
-   // Returns true if we're valid (ie, all required parameters have been set)
-   virtual bool isValid() const;
+   bool isValid() const override;
 
 protected:
    // Allocate memory arrays -- removes old arrays, if any

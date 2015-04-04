@@ -21,7 +21,7 @@ namespace LinearSystem {
 // Factory name: SaH
 // Slots:
 //    rate  <Frequency>  Sample rate
-//    rate  <Number>     Sample rate Hz 
+//    rate  <Number>     Sample rate Hz
 //
 //------------------------------------------------------------------------------
 class SaH : public ScalerFunc
@@ -44,13 +44,11 @@ public:
    virtual bool setSlotSampleRate(const Basic::Frequency* const msg);
    virtual bool setSlotSampleRate(const Basic::Number* const msg);
 
-   // ScalerFunc class interface
    LCreal g(const LCreal x) override;
    bool isValid() const override;
 
 protected:
-   // ScalerFunc class protected interface
-   virtual void initialize();
+   void initialize() override;
 
 private:
    void initData();  // Initialize our data

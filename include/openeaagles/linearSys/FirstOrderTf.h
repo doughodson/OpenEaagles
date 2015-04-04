@@ -41,12 +41,10 @@ public:
    virtual bool setD1(const LCreal v);
    virtual bool setD2(const LCreal v);
 
-   // ScalerFunc class interface
    bool isValid() const override;
 
 protected:
-   // ScalerFunc class protected interface
-   virtual void initialize();
+   void initialize() override;
 
 private:
    void initData();  // Initialize our data
