@@ -30,11 +30,11 @@ public:
    // Basic::Terrain interface
    // ---
 
-   virtual bool isDataLoaded() const;        // Has the data been loaded
+   bool isDataLoaded() const override;
 
    // Locates an array of (at least two) elevation points (and sets valid flags if found)
    // returns the number of points found within this QuadMap
-   virtual unsigned int getElevations(
+   unsigned int getElevations(
          LCreal* const elevations,     // The elevation array (meters)
          bool* const validFlags,       // Valid elevation flag array (true if elevation was found)
          const unsigned int n,         // Size of elevation and valdFlags arrays
@@ -43,24 +43,22 @@ public:
          const LCreal direction,       // True direction (heading) angle of the data (degs)
          const LCreal maxRng,          // Range to last elevation point (meters)
          const bool   interp = false   // Interpolate between elevation posts (default: false)
-      ) const;
+      ) const override;
 
    // Locates an elevation value (meters) for a given reference point and returns
    // it in 'elev'.  Function returns true if successful, otherwise 'elev' is unchanged.
-   virtual bool getElevation(
+   bool getElevation(
          LCreal* const elev,           // The elevation value (meters)
          const double lat,             // Reference latitude (degs)
          const double lon,             // Reference longitude (degs)
          const bool interp = false     // Interpolate between elevation posts (default: false)
-      ) const;
+      ) const override;
 
-   // Basic::Component interface
    void reset() override;
 
 protected:
    virtual void findDataFiles();           // Initializes the channel array
 
-   // Basic::Terrain protected interface
    void clearData() override;
 
 private:
@@ -69,8 +67,7 @@ private:
    const Basic::Terrain* dataFiles[MAX_DATA_FILES]; // Terrain data files
    unsigned int numDataFiles;                       // Number of data files
 
-   // Basic::Terrain private interface
-   bool loadData() override;         // Load the data file
+   bool loadData() override;
 };
 
 } // End Terrain namespace

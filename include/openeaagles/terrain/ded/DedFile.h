@@ -31,10 +31,7 @@ public:
    // Dump this data to an output stream
    void dump(std::ostream& sout) const;
 
-   // ---
-   // Terrain::Database interface
-   // ---
-   virtual bool isDataLoaded() const;        // Has the data been loaded
+   bool isDataLoaded() const override;
 
 private:
    void clearHeaders();

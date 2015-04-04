@@ -39,8 +39,7 @@ private:
     bool readDtedHeaders(std::istream& in);
     bool readDtedData(std::istream& in);
 
-   // Terrain::Database private interface
-   bool loadData() override;   // Load the data file
+   bool loadData() override;
 
    bool verifyChecksum;    // verify the file checksum flag
 };

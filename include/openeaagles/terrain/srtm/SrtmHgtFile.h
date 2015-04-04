@@ -12,7 +12,7 @@ namespace Terrain {
 
 //------------------------------------------------------------------------------
 // Class: SrtmHgtFile
-// Base classes: Basic::Object -> Basic::Component 
+// Base classes: Basic::Object -> Basic::Component
 //               -> Terrain::Database -> Terrain::DataFile
 //
 // Description: SRTM data loader.
@@ -33,7 +33,7 @@ namespace Terrain {
 //     N00E000.hgt
 //     S00W000.hgt
 //     S00E000.hgt
-// where N00/S00 is the latitude of the SW corner 
+// where N00/S00 is the latitude of the SW corner
 // and W000/E000 is the longitude of the SW corner
 // N/S and E/W may be upper or lower case.
 // The file extension must be ".hgt" or ".HGT".
@@ -64,8 +64,7 @@ private:
     bool readSrtmData(std::istream& in);
     bool determineSrtmInfo(const std::string& srtmFilename, std::streamoff size);
 
-   // Terrain::Database private interface
-   bool loadData() override;   // Load the data file
+    bool loadData() override;
 };
 
 

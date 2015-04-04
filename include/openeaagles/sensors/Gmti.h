@@ -14,7 +14,7 @@ namespace Basic { class List; }
 
 namespace Sensor {
 
-class Gmti : public Simulation::Radar  
+class Gmti : public Simulation::Radar
 {
     DECLARE_SUBCLASS(Gmti,Simulation::Radar)
 
@@ -28,7 +28,6 @@ public:
 protected:
     bool setSlotPoi(Basic::List* const numList);                // Set Point of Interest
 
-    // System class -- phase callbacks
     void dynamics(const LCreal dt) override;
 
 private:

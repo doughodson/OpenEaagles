@@ -58,7 +58,7 @@ public:
    // Basic::Terrain interface
    // ---
 
-   virtual bool isDataLoaded() const;        // Has the data been loaded
+   bool isDataLoaded() const override;
 
    // Locates an array of (at least two) elevation points (and sets valid flags if found)
    // returns the number of points found within this DataFile

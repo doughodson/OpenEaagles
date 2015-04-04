@@ -8,7 +8,7 @@ namespace Eaagles {
    namespace Basic { class Object; }
    namespace Sensor {
       extern Basic::Object* sensorsFormFunc(const char* name);
-   } 
-} 
+   }
+}
 
 #endif

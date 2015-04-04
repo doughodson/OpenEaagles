@@ -11,7 +11,7 @@
 namespace Eaagles {
 namespace Sensor {
 
-class Stt : public Simulation::Radar  
+class Stt : public Simulation::Radar
 {
     DECLARE_SUBCLASS(Stt,Simulation::Radar)
 
@@ -19,7 +19,6 @@ public:
     Stt();
 
 protected:
-    // System class -- phase callbacks
     void dynamics(const LCreal dt) override;
 };
 
