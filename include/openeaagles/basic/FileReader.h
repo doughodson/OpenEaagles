@@ -87,7 +87,7 @@ class String;
 //     for invalid record numbers (e.g., beyond end of file).
 //
 //  3) The 'const char*' returned from getRecord(), getFirstRecord(),
-//     and getNextRecord() point to an internal buffer which is only 
+//     and getNextRecord() point to an internal buffer which is only
 //     valid until the next read.
 //
 //  4) The file name and path names are limited to 255 characters.
@@ -139,7 +139,6 @@ private:
    char  filename[FILENAME_LENGTH];           // file name
    char  pathname[PATHNAME_LENGTH];           // path name
 };
-
 
 
 //------------------------------------------------------------------------------

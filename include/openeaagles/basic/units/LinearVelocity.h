@@ -68,27 +68,27 @@ class Time;
 // LinearVelocity(Distance* newDistance, Seconds* newTime);
 //  Constructor with distance in units desired and time in units desired:
 //
-// LCreal getMetersPerSecond();                    
+// LCreal getMetersPerSecond();
 //  Returns in meters/second:
 //
-// bool setMetersPerSecond(LCreal newLinearVelocity);            
+// bool setMetersPerSecond(LCreal newLinearVelocity);
 //  Sets in meters/second - returns true if successful:
 //
-// bool setMeters(LCreal newDistance);                
+// bool setMeters(LCreal newDistance);
 //  Input distance in (meters)
 //
-// bool setSeconds(LCreal newTime);                
+// bool setSeconds(LCreal newTime);
 //  Input time in (seconds)
 //
-// bool setSlotDistance(Number* number);        
+// bool setSlotDistance(Number* number);
 //  Input as type of distance (Meters, Feet, ...)
 //
-// bool setSlotTime(Number* number);        
+// bool setSlotTime(Number* number);
 //  Input as type of time (Seconds, MilliSeconds, ...)
 //
 // double convert(Distance* newDistance, Time* newTime);
-//  Convert routine - converts Linear velocity and outputs in units specified - 
-//  NOTE: This will ignore the value of the input objects - the output will be in the 
+//  Convert routine - converts Linear velocity and outputs in units specified -
+//  NOTE: This will ignore the value of the input objects - the output will be in the
 //        units that are used as inputs (Input Degrees and MilliSeconds and convert
 //        will output the answer in degrees per millisecond)
 //
@@ -96,9 +96,9 @@ class Time;
 class LinearVelocity : public Number
 {
     DECLARE_SUBCLASS(LinearVelocity, Number)
-    
+
 public:
-    
+
     //---------------------------------------------------------------------
     //Constructors:
     //---------------------------------------------------------------------
@@ -115,7 +115,7 @@ public:
     //---------------------------------------------------------------------
 
     //Returns in meters/second:
-    LCreal getMetersPerSecond() const;                       
+    LCreal getMetersPerSecond() const;
     //Convert routine - converts Linear velocity and outputs in units specified:
     LCreal convert(Distance* newDistance, Time* newTime);
 
@@ -141,10 +141,10 @@ public:
 
     static const double FPS2KTSCC;    // feet per second to knots (conversion constant)
 
-private:        
+private:
     LCreal        distance;                // holds our distance (meters)
     LCreal        time;                    // holds our time seconds)
-    
+
 };
 
 } // End Basic namespace

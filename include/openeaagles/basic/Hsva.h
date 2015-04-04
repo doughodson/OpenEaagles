@@ -34,8 +34,8 @@ namespace Basic {
 //      bool Hsva::colorInterpolate( const LCreal value, const LCreal minValue,
 //                                   const LCreal maxValue,  const Hsva& minColor,
 //                                   const Hsva& maxColor}
-//          Color map interpolation - given a value, min & max limit, and HSV colors 
-//          for the min & max limits.  This routine will interpolate the HSV colors 
+//          Color map interpolation - given a value, min & max limit, and HSV colors
+//          for the min & max limits.  This routine will interpolate the HSV colors
 //          between the min & max limits to find the HSV color for the given value.
 //
 // Note:  The operators osg::Vec3*() and osg::Vec4*(), (inherited from Color)
@@ -56,7 +56,7 @@ public:
     bool colorInterpolate(
       const LCreal value,      // Value
       const LCreal minValue,   // Minimum Value
-      const LCreal maxValue,   // Maximum Value 
+      const LCreal maxValue,   // Maximum Value
       const Hsva& minColor,  // Minimum HSV color
       const Hsva& maxColor   // Minimum HSV color
     );

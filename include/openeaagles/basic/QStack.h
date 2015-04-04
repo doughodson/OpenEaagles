@@ -21,7 +21,7 @@ public:
    QStack(const unsigned int ssize) : SIZE(ssize), sp(ssize), semaphore(0)  { stack = new T[SIZE]; }
    QStack(const QStack<T> &s1) : SIZE(s1.SIZE), sp(s1.SIZE), semaphore(0)   { stack = new T[SIZE]; }
    ~QStack()                                                                { delete[] stack; }
-   
+
    unsigned int entries() const   { return (SIZE - sp); }
    bool isEmpty() const           { return (sp == SIZE); /* Empty when stack pointer equals stack size */ }
    bool isNotEmpty() const        { return !isEmpty(); }

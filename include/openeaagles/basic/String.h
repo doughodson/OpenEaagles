@@ -16,7 +16,7 @@ namespace Basic {
 //
 //      Assignment Operators:     =
 //      Concatenation Operators:  +  +=
-//      Comparison Operators:     <  <=  ==  >=  >  != 
+//      Comparison Operators:     <  <=  ==  >=  >  !=
 //      iostream Operations:      <<  >>
 //
 // Factory name: String
@@ -55,14 +55,14 @@ public:
 
     // Returns the value of this string converted to a number or zero if isNumber() is false.
     double getNumber() const;
-    
+
     // Returns true if this string is the ascii form of an integer number.
     bool isInteger() const;
 
     // Returns the value of this string converted to an integer value or zero if isInteger() is false.
     int getInteger() const;
 
-    // Returns in "subStr" a "numChars" character sub-string of 'this' string that starts a "startIndex" 
+    // Returns in "subStr" a "numChars" character sub-string of 'this' string that starts a "startIndex"
     bool getSubString(String& subStr, const unsigned int startIndex, const size_t numChars) const;
 
     // Set to the first 'w' characters of 'str'.

@@ -34,8 +34,8 @@ namespace Basic {
 //
 // Description: Abstract thread class
 //
-//    User's will need to define the work function, mainThreadFunc() that is derived 
-//    from this class.    
+//    User's will need to define the work function, mainThreadFunc() that is derived
+//    from this class.
 //
 //    Thread objects and their parent objects are ref()'d as the child threads
 //    starts, and are unref()'d when the threads terminate.  This prevents the
@@ -242,8 +242,8 @@ public:
    //Returns the index of the first thread that is completed, or -1 if an error
    static int waitForAnyCompleted(ThreadSyncTask** threads, const unsigned int num);
 
-   // Thread class function
-   virtual bool terminate();
+   // Thread interface
+   bool terminate() override;
 
    // User defined work function
    private:  virtual unsigned long userFunc() =0;

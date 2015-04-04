@@ -53,7 +53,7 @@ public:
    bool operator!=(const T* t) const           { return (p != t); }
    T* operator->()                             { return p; }
    const T* operator->() const                 { return p; }
-   
+
    // Returns a pre-ref()'d pointer to the object
    T* getRefPtr() {
       lock();

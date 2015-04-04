@@ -17,7 +17,7 @@ BEGIN_SLOTTABLE(Density)
     "volume",  // 2: Volume
 END_SLOTTABLE(Density)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(Density)
     ON_SLOT(1, setSlotMass, Mass)
     ON_SLOT(2, setSlotVolume, Volume)
@@ -30,7 +30,7 @@ Density::Density(LCreal value, const Mass* newMass, const Volume* newVolume) : N
 {
     STANDARD_CONSTRUCTOR()
 
-    if (newMass != 0 && newVolume != 0) { 
+    if (newMass != 0 && newVolume != 0) {
         myMass = newMass;
         myVolume = newVolume;
         val = value;
@@ -51,7 +51,7 @@ Density::Density(LCreal value, const Mass* newMass, const Volume* newVolume) : N
 Density::Density() : Number()
 {
     STANDARD_CONSTRUCTOR()
-    
+
     // default mass, volume and density (1 Kilogram per Cubic Meter)
     myMass = new KiloGrams(1);
     myVolume = new CubicMeters(1);
@@ -93,9 +93,9 @@ LCreal Density::convert(const Density& n) const
 {
     return myMass->convert(*n.getMass()) / myVolume->convert(*n.getVolume());
 }
-    
+
 //------------------------------------------------------------------------------
-// set() -- sets our density from some other density 
+// set() -- sets our density from some other density
 //------------------------------------------------------------------------------
 void Density::set(const Density& n)
 {
@@ -159,10 +159,10 @@ std::ostream& Density::serialize(std::ostream& sout, const int i, const bool slo
         // tab here
         j = 4;
     }
-    
+
     indent(sout, i+j);
     sout << "value: " << val << std::endl;
-    
+
     if (myMass != 0) {
         indent(sout, i+j);
         sout << "mass: " << *myMass << std::endl;
@@ -171,12 +171,12 @@ std::ostream& Density::serialize(std::ostream& sout, const int i, const bool slo
         indent(sout, i+j);
         sout << "volume: " << *myVolume << std::endl;
     }
-    
+
     if (!slotsOnly) {
         indent(sout,i);
         sout << ")" << std::endl;
     }
-            
+
     return sout;
 }
 

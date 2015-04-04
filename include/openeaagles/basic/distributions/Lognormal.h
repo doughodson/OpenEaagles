@@ -25,7 +25,7 @@ public:
 
   Lognormal();
 
-  virtual double draw();
+  double draw() override;
 
   bool setSigma(const double x)                       { sigma = x; return true; }
   double getSigma() const                             { return sigma; }

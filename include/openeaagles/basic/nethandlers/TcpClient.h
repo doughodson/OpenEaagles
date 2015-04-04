@@ -29,7 +29,7 @@ namespace Basic {
 //        )
 //
 // Note: initNetwork() will wait on a connection even if the 'noWaitFlag' is true.
-// 
+//
 //------------------------------------------------------------------------------
 class TcpClient : public TcpHandler
 {
@@ -41,18 +41,18 @@ public:
     // Slot functions
     virtual bool setSlotIpAddress(const String* const msg);
 
-    // NetHandler interface
-    virtual bool initNetwork(const bool noWaitFlag);
+    // PosixHandler interface
+    bool initNetwork(const bool noWaitFlag) override;
 
 protected:
     const char* getIpAddress()  { return ipAddr; }
     bool connectToServer();      // Connect to the server
 
-    // NetHandler interface
-    virtual bool init();         // Initialize this socket handler
+    // TcpHandler interface
+    bool init() override;
 
     // PosixHandler interface
-    virtual bool bindSocket();   // Bind socket to address
+    bool bindSocket() override;
 
 private:
     char* ipAddr;                // IP Address

@@ -12,7 +12,7 @@ namespace Basic {
 //------------------------------------------------------------------------------
 // Class: TcpServerSingle
 //
-// Description: Server side of a single TCP/IP connection.  
+// Description: Server side of a single TCP/IP connection.
 //
 // Factory name: TcpServer
 //
@@ -32,11 +32,13 @@ class TcpServerSingle : public TcpHandler
 public:
    TcpServerSingle();
 
-   // NetHandler interface
-   virtual bool initNetwork(const bool noWaitFlag);
+   // PosixHandler interface
+   bool initNetwork(const bool noWaitFlag) override;
 
 protected:
-   virtual bool bindSocket();
+   // PosixHandler interface
+   bool bindSocket() override;
+
    virtual bool listenForConnections();
    virtual bool acceptConnection();
 };

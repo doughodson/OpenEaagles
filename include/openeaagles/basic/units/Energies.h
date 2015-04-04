@@ -9,7 +9,7 @@
 //              Object -> Number -> Energy -> Joules
 
 //
-// Description:  Numbers as energy -- KiloWatt-hours, BTUs, Calories, Foot Pounds, and Joules  
+// Description:  Numbers as energy -- KiloWatt-hours, BTUs, Calories, Foot Pounds, and Joules
 //               Base unit for Energy derivations are Joules.
 //
 //
@@ -74,17 +74,17 @@ namespace Basic {
 
 // ----------------------------------------------------------------------------
 // Define Energy Conversion Constants:
-// 
+//
 // These constants were obtained from the Department of Energy, and are assumed
-// accurate as of 2/5/03.  
-// 
+// accurate as of 2/5/03.
+//
 // http://www.eia.doe.gov/kids/units.xls - Department of Energy
-// Source cited for website: Monthly Energy Review, Energy Information 
+// Source cited for website: Monthly Energy Review, Energy Information
 // Administration, Appendix A "Thermal conversion Factors" Sept. 2002, p. 161
 // ----------------------------------------------------------------------------
 
 //------------------------------------------------------------------------------
-// Class:  Energy  
+// Class:  Energy
 // Base class:  Object -> Number -> Energy
 // Description:  Base class for energy.  Defined as a Joule which is
 //               equivalent to an instance of Joules with its value equal
@@ -100,12 +100,12 @@ public:
 
     void set(const LCreal v)  { val = v; }
     void set(const Energy& n) { val = fromEnergy(n.toEnergy()); }
-    
+
     virtual LCreal toEnergy() const = 0;
     virtual LCreal fromEnergy(const LCreal a) const = 0;
     LCreal convert(const Energy& n){ return fromEnergy(n.toEnergy()); }
 
-    // Conversions between Energy 
+    // Conversions between Energy
     static LCreal btusToFootPounds(const LCreal v)          { return (v * BTU2J) * J2FP; }
     static LCreal btusToJoules(const LCreal v)              { return v * BTU2J; }
     static LCreal btusToKiloWattHours(const LCreal v)       { return (v * BTU2J) * J2KWH; }
@@ -147,7 +147,7 @@ inline std::ostream& operator<<(std::ostream& sout, const Energy& n)
 // Description: An instance of Joules with its value equal to 1.0 is one
 //              base unit for energy.
 //------------------------------------------------------------------------------
-class Joules : public Energy  
+class Joules : public Energy
 {
     DECLARE_SUBCLASS(Joules, Energy)
 
@@ -157,8 +157,9 @@ public:
     Joules(const Energy& value);
 
     static LCreal convertStatic(const Energy& n)      { return n.toEnergy(); }
-    virtual LCreal toEnergy() const                   { return static_cast<LCreal>(val); }
-    virtual LCreal fromEnergy(const LCreal a) const   { return a; }
+    // Energy interface
+    LCreal toEnergy() const override                   { return static_cast<LCreal>(val); }
+    LCreal fromEnergy(const LCreal a) const override   { return a; }
 };
 
 //------------------------------------------------------------------------------
@@ -166,7 +167,7 @@ public:
 // Base class:  Object -> Number -> Energy -> KiloWattHours
 // Description: Joules * 0.000000277778
 //------------------------------------------------------------------------------
-class KiloWattHours : public Energy  
+class KiloWattHours : public Energy
 {
     DECLARE_SUBCLASS(KiloWattHours, Energy)
 
@@ -176,10 +177,9 @@ public:
     KiloWattHours(const Energy& value);
 
     static LCreal convertStatic(const Energy& n)    { return n.toEnergy() * J2KWH; }
-    //this goes to another energy (KWH)
-    virtual LCreal toEnergy() const                 { return static_cast<LCreal>(val * KWH2J); }  
-    //this is coming from another energy (KWH)
-    virtual LCreal fromEnergy(const LCreal a) const { return a * J2KWH; }
+    // Energy interface (KWH)
+    LCreal toEnergy() const override                 { return static_cast<LCreal>(val * KWH2J); }
+    LCreal fromEnergy(const LCreal a) const override { return a * J2KWH; }
 };
 
 
@@ -188,7 +188,7 @@ public:
 // Base class:  Object -> Number -> Energy -> BTUs
 // Description:  Joules * 9.478 x 10 -04
 //------------------------------------------------------------------------------
-class BTUs : public Energy  
+class BTUs : public Energy
 {
     DECLARE_SUBCLASS(BTUs, Energy)
 
@@ -198,8 +198,9 @@ public:
     BTUs(const Energy& value);
 
     static LCreal convertStatic(const Energy& n)    { return n.toEnergy() * J2BTU; }
-    virtual LCreal toEnergy() const                 { return static_cast<LCreal>(val * BTU2J); }
-    virtual LCreal fromEnergy(const LCreal a) const { return a * J2BTU; }
+    // Energy interface
+    LCreal toEnergy() const override                 { return static_cast<LCreal>(val * BTU2J); }
+    LCreal fromEnergy(const LCreal a) const override { return a * J2BTU; }
 };
 
 
@@ -208,7 +209,7 @@ public:
 // Base class:  Object -> Number -> Energy -> Calories
 // Description:  Joules * 0.2388888888888888889
 //------------------------------------------------------------------------------
-class Calories : public Energy  
+class Calories : public Energy
 {
     DECLARE_SUBCLASS(Calories, Energy)
 
@@ -218,8 +219,9 @@ public:
     Calories(const Energy& value);
 
     static LCreal convertStatic(const Energy& n)      { return n.toEnergy() * J2C; }
-    virtual LCreal toEnergy() const                   { return static_cast<LCreal>(val * C2J); }
-    virtual LCreal fromEnergy(const LCreal a) const   { return a * J2C; }
+    // Energy interface
+    LCreal toEnergy() const override                   { return static_cast<LCreal>(val * C2J); }
+    LCreal fromEnergy(const LCreal a) const override   { return a * J2C; }
 };
 
 
@@ -228,7 +230,7 @@ public:
 // Base class:  Object -> Number -> Energy -> FootPounds
 // Description:  Joules * 0.7376
 //------------------------------------------------------------------------------
-class FootPounds : public Energy  
+class FootPounds : public Energy
 {
     DECLARE_SUBCLASS(FootPounds, Energy)
 
@@ -238,8 +240,9 @@ public:
     FootPounds(const Energy& value);
 
     static LCreal convertStatic(const Energy& n)     { return n.toEnergy() * J2FP; }
-    virtual LCreal toEnergy() const                  { return static_cast<LCreal>(val * FP2J); }
-    virtual LCreal fromEnergy(const LCreal a) const  { return a * J2FP; }
+    // Energy interface
+    LCreal toEnergy() const override                  { return static_cast<LCreal>(val * FP2J); }
+    LCreal fromEnergy(const LCreal a) const override  { return a * J2FP; }
 };
 
 } // End Basic namespace

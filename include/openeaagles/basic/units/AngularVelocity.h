@@ -29,9 +29,9 @@ class Time;
 //    time   <Time>   ! time (default: 1)
 //
 //------------------------------------------------------------------------------
-// 
+//
 // Input File Example:
-// 
+//
 //    myAngularVelocity1:
 //        ( AngularVelocity
 //            angle:    ( Radians 1.5 )
@@ -44,7 +44,7 @@ class Time;
 //        )
 //
 // Class Detail:
-// 
+//
 // AngularVelocity();
 //  Constructor for input parser:
 //
@@ -54,30 +54,30 @@ class Time;
 // AngularVelocity(Angle* newAngle, Time* newTime);
 //  Constructor with angle in units desired and time in units desired:
 //
-// LCreal getRadiansPerSecond();                    
+// LCreal getRadiansPerSecond();
 //  Returns in radians/second:
 //
 // bool setRadiansPerSecond(LCreal newAngularVelocity);
 //  Sets in radians/second - returns true if successful:
 //
-// bool setDegrees(LCreal newAngle);                
+// bool setDegrees(LCreal newAngle);
 //  Input angle in (degrees)
 //
-// bool setRadians(LCreal newAngle);                
+// bool setRadians(LCreal newAngle);
 //  Input angle in (radians)
 //
-// bool setSeconds(LCreal newTime);                
+// bool setSeconds(LCreal newTime);
 //  Input time in (seconds)
 //
-// bool setSlotAngle(Angle* angle);        
+// bool setSlotAngle(Angle* angle);
 //  Input as type of angle (Radians, Degrees, ...)
 //
-// bool setSlotTime(Time* time);        
+// bool setSlotTime(Time* time);
 //  Input as type of time (Seconds, MilliSeconds, ...)
 //
 // LCreal convert(Angle* newAngle, Time* newTime);
-//  Convert routine - converts angular velocity and outputs in units specified - 
-// NOTE: This ignores the value of the input objects - the output will be in the 
+//  Convert routine - converts angular velocity and outputs in units specified -
+// NOTE: This ignores the value of the input objects - the output will be in the
 //      units that are used as inputs (Input Degrees and MilliSeconds and convert(~)
 //      will output the answer in degrees per millisecond)
 //
@@ -85,9 +85,9 @@ class Time;
 class AngularVelocity : public Number
 {
     DECLARE_SUBCLASS(AngularVelocity, Number)
-    
+
 public:
-    
+
 //------------------------------------------------------------------------------
 //Constructors:
 //------------------------------------------------------------------------------
@@ -102,18 +102,18 @@ public:
 //------------------------------------------------------------------------------
 //Get functions:
 //------------------------------------------------------------------------------
-    
+
     //Returns in radians/second:
-    LCreal getRadiansPerSecond() const;                           
+    LCreal getRadiansPerSecond() const;
     //Convert routine - converts angular velocity and outputs in units specified:
-    LCreal convert(Angle* newAngle, Time* newTime);     
+    LCreal convert(Angle* newAngle, Time* newTime);
 
 //------------------------------------------------------------------------------
 //Set functions:
 //------------------------------------------------------------------------------
 
     //Sets Value of Object - Be sure input is in (rad/sec)
-    bool setRadiansPerSecond(const LCreal newAngularVelocity);    
+    bool setRadiansPerSecond(const LCreal newAngularVelocity);
 
 //------------------------------------------------------------------------------
 //Slot Table functions
@@ -129,7 +129,7 @@ private:
 
     LCreal        angle;                            // holds our angle (radians)
     LCreal        time;                             // holds our time (seconds)
-    
+
 };
 
 } // End Basic namespace

@@ -18,7 +18,7 @@ class List;
 class Table;
 
 //==============================================================================
-// Class: Function 
+// Class: Function
 //
 // Description: Base for the derived, multi-dimensional function classes.
 //
@@ -26,7 +26,7 @@ class Table;
 //    1) Use the storageFactory() function to create the FStorage object that
 //       will maintain the previous function call values (i.e., integration).
 //
-//   virtual FStorage* storageFactory() const;    
+//   virtual FStorage* storageFactory() const;
 //       Data storage factory (pre-ref()'d)
 //   virtual bool setSlotLfiTable(const Table* const msg);
 //       Set Slot Tables
@@ -52,7 +52,7 @@ private:
 };
 
 //==============================================================================
-// Class: Func1 
+// Class: Func1
 // Description: Generic 1-Dimensional function; f(iv1)
 // Factory name: Func1
 //==============================================================================
@@ -63,12 +63,12 @@ public:
 
    virtual double f(const double iv1, FStorage* const s = 0) const;
 
-   // Function class interface
-   virtual bool setSlotLfiTable(const Table* const msg);
+   // Function interface
+   bool setSlotLfiTable(const Table* const msg) override;
 };
 
 //==============================================================================
-// Class: Func2 
+// Class: Func2
 // Description: Generic 2-Dimensional function; f(iv1, iv2)
 // Factory name: Func2
 //==============================================================================
@@ -79,12 +79,12 @@ public:
 
    virtual double f(const double iv1, const double iv2, FStorage* const s = 0) const;
 
-   // Function class interface
-   virtual bool setSlotLfiTable(const Table* const msg);
+   // Function interface
+   bool setSlotLfiTable(const Table* const msg) override;
 };
 
 //==============================================================================
-// Class: Func3 
+// Class: Func3
 // Description: Generic 3-Dimensional function; f(iv1, iv2, iv3)
 // Factory name: Func3
 //==============================================================================
@@ -95,8 +95,8 @@ public:
 
    virtual double f(const double iv1, const double iv2, const double iv3, FStorage* const s = 0) const;
 
-   // Function class interface
-   virtual bool setSlotLfiTable(const Table* const msg);
+   // Function interface
+   bool setSlotLfiTable(const Table* const msg) override;
 };
 
 //==============================================================================
@@ -111,8 +111,8 @@ public:
 
    virtual double f(const double iv1, const double iv2, const double iv3, const double iv4, FStorage* const s = 0) const;
 
-   // Function class interface
-   virtual bool setSlotLfiTable(const Table* const msg);
+   // Function interface
+   bool setSlotLfiTable(const Table* const msg) override;
 };
 
 //==============================================================================
@@ -127,12 +127,12 @@ public:
 
    virtual double f(const double iv1, const double iv2, const double iv3, const double iv4, const double iv5, FStorage* const s = 0) const;
 
-   // Function class interface
-   virtual bool setSlotLfiTable(const Table* const msg);
+   // Function interface
+   bool setSlotLfiTable(const Table* const msg) override;
 };
 
 //==============================================================================
-// Class: Polynomial 
+// Class: Polynomial
 // Description: Polynomial function
 //                f(x) = a0 + a1*x + a2*x^2 + ... + aN*x^N
 //
@@ -146,7 +146,7 @@ public:
 //          coefficients     degree            result
 //          ------------    --------     --------------------------------
 //             none            < 0        0
-//              1               0         a0 
+//              1               0         a0
 //              2               1         a0 + a1 * x
 //              3               2         a0 + a1 * x + a2 * x^2
 //              M             N = M-1     a0 + a1 * x + a2 * x^2 + ... + aN * x^N
@@ -167,7 +167,7 @@ public:
    int getDegree() const                  { return (m-1); }
    const double* getCoefficients() const  { return a; }
 
-   virtual double f(const double x, FStorage* const s = 0) const;
+   double f(const double x, FStorage* const s = 0) const override;
 
 protected:
    virtual bool setSlotCoefficients(const List* const msg);

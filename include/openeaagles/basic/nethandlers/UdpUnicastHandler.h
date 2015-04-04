@@ -68,11 +68,9 @@ public:
    virtual bool setSlotIpAddress(const String* const msg);
 
 protected:
-   // NetHandler interface
-   virtual bool init();            // Initialize this socket handler
-
    // PosixHandler interface
-   virtual bool bindSocket();      // Bind socket to address
+   bool init() override;
+   bool bindSocket() override;
 
 private:
    char* ipAddr;   // Host's name or IP Address

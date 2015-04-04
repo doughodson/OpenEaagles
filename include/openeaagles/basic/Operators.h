@@ -38,9 +38,9 @@ class Add : public Number {
 
 public:
     Add();
-    
+
     LCreal getSecondNumber() const              { return n2; }
-    
+
     virtual bool setSecondNumber(const Number* const ssnobj);
     virtual void operation();
 

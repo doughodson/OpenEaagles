@@ -22,7 +22,7 @@ namespace Basic {
 // getSlotByIndex() for FlowRate
 //     Object* FlowRate::getSlotByIndex(const int si)
 //
-// set() -- sets our velocity from some other velocity 
+// set() -- sets our velocity from some other velocity
 //     bool FlowRate::set(const LCreal newFlowRate, Volume* newVolume, Time* newTime)
 //
 // setSlotVolume() -- sets our volume object.
@@ -31,7 +31,7 @@ namespace Basic {
 // setSlotTime() -- sets our time object.
 //     bool FlowRate::setSlotTime(Time* newTime)
 //
-// set() -- sets our velocity from some other velocity 
+// set() -- sets our velocity from some other velocity
 //     bool FlowRate::set(const LCreal newFlowRate, Volume* newVolume, Time* newTime)
 //
 // convert() -- converts from one volume/time ratio to another
@@ -44,7 +44,7 @@ namespace Basic {
 class FlowRate : public Number
 {
     DECLARE_SUBCLASS(FlowRate, Number)
-    
+
 public:
     FlowRate(LCreal newFlowRate, Volume* volume, Time* time);
     FlowRate();
@@ -57,9 +57,9 @@ public:
     bool set(const LCreal newFlowRate, Volume* newVolume, Time* newTime);
     // slot table functions
     bool setSlotVolume(Volume* newVol);
-    bool setSlotTime(Time* newTime);          
-    
-    private:
+    bool setSlotTime(Time* newTime);
+
+private:
     Volume*   myVolume;       // holds our distance type
     Time*     myTime;         // holds our time type
     LCreal    flowRate;       // holds our velocity

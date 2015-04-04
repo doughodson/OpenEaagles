@@ -125,7 +125,7 @@ class String;
 //
 //                xxx      -- Look for 'xxx' as the name of one of our children
 //                            components then our grandchildren components, etc.
-//          
+//
 //                .xxx     -- Only look for 'xxx' as the name of one of our
 //                            children components.
 //
@@ -186,12 +186,12 @@ class String;
 //    and END_EVENT_HANDLER() macros.  Along with the macros ON_EVENT(), ON_EVENT_OBJ(),
 //    ON_ANYKEY() and ON_ANYKEY_OBJ(), these macros are used to build an event dispatch
 //    table.  Components will typically provide functions, "event handlers", that will
-//    process the individual event tokens.  
+//    process the individual event tokens.
 //
 //          BEGIN_EVENT_HANDLER(Foo)
 //
 //             // The function onSelect() handles the 'SELECT' token if passed with
-//             // a Number type argument 
+//             // a Number type argument
 //             ON_EVENT_OBJ( SELECT, onSelect, Number)
 //
 //             // The function onUpdateValue() handles the 'UPDATE_VALUE' token if
@@ -412,7 +412,7 @@ protected:
    virtual bool select(const String* const name);        // Select component by name
    virtual bool select(const Number* const num);         // Select component by number
 
-   // processComponents() -- process our new components list; 
+   // processComponents() -- process our new components list;
    //   -- Add the components from the input list, 'list', to a new list
    //      make sure they are all of class Component (or derived from it)
    //      tell them that we are their container
@@ -427,7 +427,7 @@ protected:
       );
 
 private:
-   SPtr<PairStream> components; // Child components 
+   SPtr<PairStream> components; // Child components
    Component* containerPtr;     // We are a component of this container
 
    Component* selected;         // Selected child (process only this one)

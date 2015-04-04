@@ -75,28 +75,14 @@ public:
    bool getSharedFlag() const;                  // Is the socket address shared?
    void setSharedFlag(const bool b);
 
-   // Initialize the network handler -- 'noWaitFlag' is true for unblocked I/O
-   // Note: all parameters (slots) need to be set before calling this function.
-   virtual bool initNetwork(const bool noWaitFlag);
-
-   // Returns true if the network handler has been initialized (and connected if TCP)
-   virtual bool isConnected() const;
-
-   // Close (un-initialize) this network
-   virtual bool closeConnection();
-
-   // Send 'size' bytes from packet; returns true if successful
-   virtual bool sendData(const char* const packet, const int size);
-
-   // Receives a maximum of 'maxSize' bytes into 'packet.  Returns
-   // the actual number of bytes received.
-   virtual unsigned int recvData(char* const packet, const int maxSize);
-
-   // Set our socket for blocked (wait) I/O
-   virtual bool setBlocked();
-
-   // Set our socket for unblocked (no wait) I/O
-   virtual bool setNoWait();
+   // NetHandler interface
+   bool initNetwork(const bool noWaitFlag) override;
+   bool isConnected() const override;
+   bool closeConnection() override;
+   bool sendData(const char* const packet, const int size) override;
+   unsigned int recvData(char* const packet, const int maxSize) override;
+   bool setBlocked() override;
+   bool setNoWait() override;
 
    // Last recvData() origin IP and port
    uint32_t getLastFromAddr() const;     // IP address of last valid recvData()
@@ -112,7 +98,9 @@ public:
    virtual bool setSlotIgnoreSourcePort(const Number* const msg);
 
 protected:
-   virtual bool init();                // Initialize this socket handler
+   // NetHandler interface
+   bool init() override;
+
    virtual bool bindSocket();          // Bind socket to address
 
    // Sets the network IP address

@@ -37,16 +37,16 @@
 //        LCreal HoursToDays(const LCreal v)           { return (v * H2S) * S2D; }
 //        Return the appropriate conversion factors.
 //
-//      Output stream operator:  >> 
+//      Output stream operator:  >>
 //        ostream& operator<<(ostream& sout, const Time& n)
 //        Sends "( <the Time derived instance class name and value> )"
 //        to the output stream.
 //
 //
-// Public methods (For classes:  Seconds, MilliSeconds, Minutes, Hours, Days):                           
+// Public methods (For classes:  Seconds, MilliSeconds, Minutes, Hours, Days):
 //
 //     LCreal convertStatic(const Time& n)
-//        Static function to convert the given Time derived 
+//        Static function to convert the given Time derived
 //        instance into the units of another Time derived instance.
 //
 //------------------------------------------------------------------------------
@@ -60,9 +60,9 @@ namespace Basic {
 
 // ----------------------------------------------------------------------------
 // Defined Power Conversion Constants:
-// 
+//
 // These constants were obtained (and cross referenced) from the following
-// website, and are assumed accurate as of 2/5/03.  
+// website, and are assumed accurate as of 2/5/03.
 // www.nist.gov - National Institute of Standard Technology
 // ----------------------------------------------------------------------------
 // Since all units are converted to or from KiloWatts, only those constants
@@ -76,7 +76,7 @@ namespace Basic {
 // Description:  Base class for times.  Defined as a second which is equivalent
 // to an instance of Seconds with its value equal to 1.0.
 //------------------------------------------------------------------------------
-class Time : public Number  
+class Time : public Number
 {
     DECLARE_SUBCLASS(Time, Number)
 
@@ -88,7 +88,7 @@ public:
     void set(const Time& n)  { val = fromTime(n.toTime()); }
 
     virtual LCreal toTime() const =0;
-    virtual LCreal fromTime(const LCreal a) const =0;  
+    virtual LCreal fromTime(const LCreal a) const =0;
     LCreal convert(const Time& n)                        { return fromTime(n.toTime()); }
 
     // Conversions between times
@@ -164,10 +164,10 @@ inline LCreal Time::putHHMMSS(const int hh, const int mm, const int ss)
 }
 
 //------------------------------------------------------------------------------
-// Class:  Seconds // Base class:  Object -> Number -> Time -> Seconds 
+// Class:  Seconds // Base class:  Object -> Number -> Time -> Seconds
 // Description:  An instance of Seconds with its value equal to 1.0 is one base unit for times.
 //------------------------------------------------------------------------------
-class Seconds : public Time  
+class Seconds : public Time
 {
     DECLARE_SUBCLASS(Seconds, Time)
 
@@ -176,9 +176,10 @@ public:
     Seconds(const LCreal value);
     Seconds(const Time& org);
 
-    static LCreal convertStatic(const Time &n)     { return n.toTime(); }
-    virtual LCreal toTime() const                  { return static_cast<LCreal>(val); }
-    virtual LCreal fromTime(const LCreal a) const  { return a; }
+    static LCreal convertStatic(const Time &n)      { return n.toTime(); }
+    // Time interface
+    LCreal toTime() const override                  { return static_cast<LCreal>(val); }
+    LCreal fromTime(const LCreal a) const override  { return a; }
 };
 
 
@@ -187,7 +188,7 @@ public:
 // Base class:  Object -> Number -> Time -> MilliSeconds
 // Description:  Seconds / 1000.0
 //------------------------------------------------------------------------------
-class MilliSeconds : public Time  
+class MilliSeconds : public Time
 {
     DECLARE_SUBCLASS(MilliSeconds, Time)
 
@@ -196,9 +197,10 @@ public:
     MilliSeconds(const LCreal value);
     MilliSeconds(const Time& org);
 
-    static LCreal convertStatic(const Time &n)     { return n.toTime() * S2MS; }
-    virtual LCreal toTime() const                  { return static_cast<LCreal>(val * MS2S); }
-    virtual LCreal fromTime(const LCreal a) const  { return a * S2MS; }
+    static LCreal convertStatic(const Time &n)      { return n.toTime() * S2MS; }
+    // Time interface
+    LCreal toTime() const override                  { return static_cast<LCreal>(val * MS2S); }
+    LCreal fromTime(const LCreal a) const override  { return a * S2MS; }
 };
 
 
@@ -207,7 +209,7 @@ public:
 // Base class:  Object -> Number -> Time -> MicroSeconds
 // Description:  Seconds / 1000000.0
 //------------------------------------------------------------------------------
-class MicroSeconds : public Time  
+class MicroSeconds : public Time
 {
     DECLARE_SUBCLASS(MicroSeconds, Time)
 
@@ -216,9 +218,10 @@ public:
     MicroSeconds(const LCreal value);
     MicroSeconds(const Time& org);
 
-    static LCreal convertStatic(const Time &n)     { return n.toTime() * S2US; }
-    virtual LCreal toTime() const                  { return static_cast<LCreal>(val * US2S); }
-    virtual LCreal fromTime(const LCreal a) const  { return a * S2US; }
+    static LCreal convertStatic(const Time &n)      { return n.toTime() * S2US; }
+    // Time interface
+    LCreal toTime() const override                  { return static_cast<LCreal>(val * US2S); }
+    LCreal fromTime(const LCreal a) const override  { return a * S2US; }
 };
 
 
@@ -227,7 +230,7 @@ public:
 // Base class:  Object -> Number -> Time -> NanoSeconds
 // Description:  Seconds / 1000000000.0
 //------------------------------------------------------------------------------
-class NanoSeconds : public Time  
+class NanoSeconds : public Time
 {
     DECLARE_SUBCLASS(NanoSeconds, Time)
 
@@ -236,9 +239,10 @@ public:
     NanoSeconds(const LCreal value);
     NanoSeconds(const Time& org);
 
-    static LCreal convertStatic(const Time &n)     { return n.toTime() * S2NS; }
-    virtual LCreal toTime() const                  { return static_cast<LCreal>(val * NS2S); }
-    virtual LCreal fromTime(const LCreal a) const  { return a * S2NS; }
+    static LCreal convertStatic(const Time &n)      { return n.toTime() * S2NS; }
+    // Time interface
+    LCreal toTime() const override                  { return static_cast<LCreal>(val * NS2S); }
+    LCreal fromTime(const LCreal a) const override  { return a * S2NS; }
 };
 
 
@@ -247,7 +251,7 @@ public:
 // Base class:  Object -> Number -> Time -> Minutes
 // Description:  Seconds * 60.0
 //------------------------------------------------------------------------------
-class Minutes : public Time  
+class Minutes : public Time
 {
     DECLARE_SUBCLASS(Minutes, Time)
 
@@ -256,9 +260,10 @@ public:
     Minutes(const LCreal value);
     Minutes(const Time& org);
 
-    static LCreal convertStatic(const Time &n)     { return n.toTime() * S2M; }
-    virtual LCreal toTime() const                  { return static_cast<LCreal>(val * M2S); }
-    virtual LCreal fromTime(const LCreal a) const  { return a * S2M; }
+    static LCreal convertStatic(const Time &n)      { return n.toTime() * S2M; }
+    // Time interface
+    LCreal toTime() const override                  { return static_cast<LCreal>(val * M2S); }
+    LCreal fromTime(const LCreal a) const override  { return a * S2M; }
 };
 
 
@@ -267,7 +272,7 @@ public:
 // Base class:  Object -> Number -> Time -> Hours
 // Description:  Seconds * 3600.0
 //------------------------------------------------------------------------------
-class Hours : public Time  
+class Hours : public Time
 {
     DECLARE_SUBCLASS(Hours, Time)
 
@@ -276,9 +281,10 @@ public:
     Hours(const LCreal value);
     Hours(const Time& org);
 
-    static LCreal convertStatic(const Time &n)     { return n.toTime() * S2H; }
-    virtual LCreal toTime() const                  { return static_cast<LCreal>(val * H2S); }
-    virtual LCreal fromTime(const LCreal a) const  { return a * S2H; }
+    static LCreal convertStatic(const Time &n)      { return n.toTime() * S2H; }
+    // Time interface
+    LCreal toTime() const override                  { return static_cast<LCreal>(val * H2S); }
+    LCreal fromTime(const LCreal a) const override  { return a * S2H; }
 };
 
 
@@ -287,7 +293,7 @@ public:
 // Base class:  Object -> Number -> Time -> Days
 // Description:  Seconds * 3600.0 * 24.0
 //------------------------------------------------------------------------------
-class Days : public Time  
+class Days : public Time
 {
     DECLARE_SUBCLASS(Days, Time)
 
@@ -296,9 +302,10 @@ public:
     Days(const LCreal value);
     Days(const Time& org);
 
-    static LCreal convertStatic(const Time &n)    { return n.toTime() * S2D; }
-    virtual LCreal toTime() const                 { return static_cast<LCreal>(val * D2S); }
-    virtual LCreal fromTime(const LCreal a) const { return a * S2D; }
+    static LCreal convertStatic(const Time &n)     { return n.toTime() * S2D; }
+    // Time interface
+    LCreal toTime() const override                 { return static_cast<LCreal>(val * D2S); }
+    LCreal fromTime(const LCreal a) const override { return a * S2D; }
 };
 
 } // End Basic namespace

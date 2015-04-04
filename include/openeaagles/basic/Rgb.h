@@ -37,7 +37,7 @@ public:
     Rgb(const LCreal r, const LCreal g, const LCreal b);
     Rgb();
 
-    // Slot functions
+    // Slot methods
     virtual bool setSlotRed(Number* const msg);
     virtual bool setSlotGreen(Number* const msg);
     virtual bool setSlotBlue(Number* const msg);

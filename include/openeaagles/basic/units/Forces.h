@@ -7,7 +7,7 @@
 //              Object -> Number -> Force -> Poundals
 //              Object -> Number -> Force -> PoundForces
 //
-// Description:  Numbers as forces -- Newtons, KiloNewtons, Poundals,  
+// Description:  Numbers as forces -- Newtons, KiloNewtons, Poundals,
 //               PoundForces
 //               Base unit for Force derivations are Newtons.
 //
@@ -63,26 +63,26 @@ namespace Basic {
 
 // ----------------------------------------------------------------------------
 // Defined Force Conversion Constants:
-// 
+//
 // These constants were obtained (and cross referenced) from the following
-// websites, and are assumed accurate as of 2/5/03.  
-// 
-// http://labserver.catlin.edu/faculty/merrilla/ics/SpaceTravel.html 
+// websites, and are assumed accurate as of 2/5/03.
+//
+// http://labserver.catlin.edu/faculty/merrilla/ics/SpaceTravel.html
 // - Catlin Gabel School
 // http://www.pitt.edu/~rsup/forceconv.html  - University of Pittsburg
-// http://www.unc.edu/~rowlett/units/dictK.html - U. of N.C.(Chapel Hill) 
+// http://www.unc.edu/~rowlett/units/dictK.html - U. of N.C.(Chapel Hill)
 // Source for above (unc) website: Russ Rowlett dictionary - July 28, 2000
 // http://www.uoregon.edu/~opp/climbing/forcesinleadfalls.pdf - U. of Oregon
 // ----------------------------------------------------------------------------
 
 //------------------------------------------------------------------------------
-// Class:  Force  
+// Class:  Force
 // Base class:  Object -> Number -> Force
 // Description:  Base class for forces.  Defined as a Newton which is
 //               equivalent to an instance of Newtons with its value equal
 //               to 1.0.
 //------------------------------------------------------------------------------
-class Force : public Number  
+class Force : public Number
 {
     DECLARE_SUBCLASS(Force, Number)
 
@@ -97,7 +97,7 @@ public:
     virtual LCreal fromForce(const LCreal a) const = 0;
     LCreal convert(const Force& n){ return fromForce(n.toForce()); }
 
-   // Conversions between Forces 
+   // Conversions between Forces
     static LCreal newtonsToKiloNewtons(const LCreal v)     { return v * N2KN; }
     static LCreal newtonsToPoundForces(const LCreal v)     { return v * N2PF; }
     static LCreal newtonsToPoundals(const LCreal v)        { return v * N2PD; }
@@ -130,7 +130,7 @@ inline std::ostream& operator<<(std::ostream& sout, const Force& n)
 // Description:  An instance of Newtons with its value equal to 1.0 is one
 //               base unit for forces.
 //------------------------------------------------------------------------------
-class Newtons : public Force  
+class Newtons : public Force
 {
     DECLARE_SUBCLASS(Newtons, Force)
 
@@ -139,11 +139,12 @@ public:
     Newtons(const LCreal value);
     Newtons(const Force& value);
 
-    static LCreal convertStatic(const Force& n)       { return n.toForce(); }
+    static LCreal convertStatic(const Force& n)        { return n.toForce(); }
+    // Force interface
     //this goes to another force
-    virtual LCreal toForce() const                    { return static_cast<LCreal>(val); }  
+    LCreal toForce() const override                    { return static_cast<LCreal>(val); }
     //this is coming from another force
-    virtual LCreal fromForce(const LCreal a) const    { return a; }
+    LCreal fromForce(const LCreal a) const override    { return a; }
 };
 
 
@@ -152,7 +153,7 @@ public:
 // Base class:  Object -> Number -> Force -> KiloNewtons
 // Description:  Newtons * 1000.0
 //------------------------------------------------------------------------------
-class KiloNewtons : public Force  
+class KiloNewtons : public Force
 {
     DECLARE_SUBCLASS(KiloNewtons, Force)
 
@@ -162,8 +163,9 @@ public:
     KiloNewtons(const Force& value);
 
     static LCreal convertStatic(const Force& n)       { return n.toForce() * N2KN; }
-    virtual LCreal toForce() const                    { return static_cast<LCreal>(val * KN2N); }
-    virtual LCreal fromForce(const LCreal a) const    { return a * N2KN; }
+    // Force interface
+    LCreal toForce() const override                    { return static_cast<LCreal>(val * KN2N); }
+    LCreal fromForce(const LCreal a) const override    { return a * N2KN; }
 };
 
 
@@ -172,7 +174,7 @@ public:
 // Base class:  Object -> Number -> Force -> PoundForces
 // Description:  Newtons * 0.224809
 //------------------------------------------------------------------------------
-class PoundForces : public Force  
+class PoundForces : public Force
 {
     DECLARE_SUBCLASS(PoundForces, Force)
 
@@ -182,8 +184,9 @@ public:
     PoundForces(const Force& value);
 
     static LCreal convertStatic(const Force& n)       { return n.toForce() * N2PF; }
-    virtual LCreal toForce() const                    { return static_cast<LCreal>(val * PF2N); }
-    virtual LCreal fromForce(const LCreal a) const    { return a * N2PF; }
+    // Force interface
+    LCreal toForce() const override                    { return static_cast<LCreal>(val * PF2N); }
+    LCreal fromForce(const LCreal a) const override    { return a * N2PF; }
 };
 
 
@@ -192,7 +195,7 @@ public:
 // Base class:  Object -> Number -> Force -> Poundals
 // Description:  Newtons * 7.23301
 //------------------------------------------------------------------------------
-class Poundals : public Force  
+class Poundals : public Force
 {
     DECLARE_SUBCLASS(Poundals, Force)
 
@@ -202,8 +205,9 @@ public:
     Poundals(const Force& value);
 
     static LCreal convertStatic(const Force& n)       { return n.toForce() * N2PD; }
-    virtual LCreal toForce() const                    { return static_cast<LCreal>(val * PD2N); }
-    virtual LCreal fromForce(const LCreal a) const    { return a * N2PD; }
+    // Force interface
+    LCreal toForce() const override                    { return static_cast<LCreal>(val * PD2N); }
+    LCreal fromForce(const LCreal a) const override    { return a * N2PD; }
 };
 
 } // End Basic namespace

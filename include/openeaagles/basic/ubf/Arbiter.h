@@ -8,7 +8,7 @@
 
 namespace Eaagles {
 
-namespace Basic { 
+namespace Basic {
    class List;
 
 namespace Ubf {
@@ -36,8 +36,8 @@ class Arbiter : public Behavior
 public:
    Arbiter();
 
-   // Basic::Ubf::Behavior class functions
-   virtual Action* genAction(const State* const state, const LCreal dt);
+   // Basic::Ubf::Behavior interface
+   Action* genAction(const State* const state, const LCreal dt) override;
 
 protected:
    Basic::List* getBehaviors();

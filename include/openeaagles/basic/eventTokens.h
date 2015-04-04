@@ -68,8 +68,8 @@ enum {
 // MFD bezel keys
     OSB_T1                = 200,  // Left(T1) to right (T10)
     OSB_T2                = 201,
-    OSB_T3                = 202,        
-    OSB_T4                = 203,        
+    OSB_T3                = 202,
+    OSB_T4                = 203,
     OSB_T5                = 204,
     OSB_T6                = 205,
     OSB_T7                = 206,

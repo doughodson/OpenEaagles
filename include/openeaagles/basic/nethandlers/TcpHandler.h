@@ -25,11 +25,11 @@ public:
 
    bool hasBeenTerminated()          { return connectionTerminated; }
 
-   // NetHandler interface
-   virtual bool sendData(const char* const packet, const int size);
-   virtual unsigned int recvData(char* const packet, const int maxSize);
-   virtual bool isConnected() const;
-   virtual bool closeConnection();
+   // PosixHandler interface
+   bool sendData(const char* const packet, const int size) override;
+   unsigned int recvData(char* const packet, const int maxSize) override;
+   bool isConnected() const override;
+   bool closeConnection() override;
 
    // "Socket Only" constructor that will be used by one of our derived classes;
    // The socket should be an AF_INET, SOCK_STREAM type socket that has been
@@ -37,7 +37,8 @@ public:
    TcpHandler(const LcSocket socketNum);
 
 protected:
-   virtual bool init();         // Initialize this socket handler
+   // PosixHandler interface
+   bool init() override;
 
    bool connected;              // true if we are connected
    bool connectionTerminated;   // true if we had a connection, then lost it (or terminated it ourselves)

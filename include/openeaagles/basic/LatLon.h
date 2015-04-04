@@ -88,7 +88,7 @@ public:
     int getDeg() const                      { return deg; }
     int getMin() const                      { return min; }
     double getSec() const                   { return sec; }
-    
+
     //slottable functions start here
     virtual bool setDirection(const String* const sdobj);
     virtual bool setDegrees(const Number* const sdeobj);

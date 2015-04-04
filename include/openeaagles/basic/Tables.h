@@ -56,8 +56,8 @@ class Number;
 //          Thrown by Table's method loadVector() when it's passed an invalid
 //          vector.
 //
-//      ExpInvalidFStorage 
-//          Thrown by Table's storage class when the data in FStorage in incorrect. 
+//      ExpInvalidFStorage
+//          Thrown by Table's storage class when the data in FStorage in incorrect.
 //
 //==============================================================================
 class Table : public Object {
@@ -65,9 +65,9 @@ class Table : public Object {
 
 public:
    Table();
-   Table(const LCreal* dtbl, const unsigned int dsize); 
+   Table(const LCreal* dtbl, const unsigned int dsize);
 
-   // Returns a pointer to the dependent variable data table. 
+   // Returns a pointer to the dependent variable data table.
    const LCreal* getDataTable() const    { return dtable; }
 
    // Returns the number of entries in the data table
@@ -86,7 +86,7 @@ public:
 
    // Data storage factory (pre-ref()'d)
    virtual FStorage* storageFactory() const;
- 
+
    // ---
    // Static 1D Linear Function Interpolator
    //    x       - Independent variable #1
@@ -101,7 +101,7 @@ public:
          const LCreal x,
          const LCreal *x_data, const unsigned int nx,
          const LCreal *a_data,
-         const bool eFlg, 
+         const bool eFlg,
          unsigned int* const xbp=0
       );
 
@@ -139,9 +139,9 @@ public:
          const LCreal *y_data, const unsigned int ny,
          const LCreal *z_data, const unsigned int nz,
          const LCreal *a_data,
-         const bool eFlg, 
+         const bool eFlg,
          unsigned int* const xbp=0,
-         unsigned int* const ybp=0, 
+         unsigned int* const ybp=0,
          unsigned int* const zbp=0
       );
 
@@ -161,9 +161,9 @@ public:
          const LCreal *z_data, const unsigned int nz,
          const LCreal *w_data, const unsigned int nw,
          const LCreal *a_data,
-         const bool eFlg, 
+         const bool eFlg,
          unsigned int* const xbp=0,
-         unsigned int* const ybp=0, 
+         unsigned int* const ybp=0,
          unsigned int* const zbp=0,
          unsigned int* const wbp=0
       );
@@ -185,11 +185,11 @@ public:
          const LCreal *w_data, const unsigned int nw,
          const LCreal *v_data, const unsigned int nv,
          const LCreal *a_data,
-         const bool eFlg, 
+         const bool eFlg,
          unsigned int* const xbp=0,
-         unsigned int* const ybp=0, 
+         unsigned int* const ybp=0,
          unsigned int* const zbp=0,
-         unsigned int* const wbp=0, 
+         unsigned int* const wbp=0,
          unsigned int* const vbp=0
       );
 
@@ -201,22 +201,19 @@ public: // Exceptions
     class ExpInvalidTable : public Object::Exception {
         public:
             ExpInvalidTable() : Exception() {}
-            virtual const char* getDescription() const
-                            { return "table is invalid"; }
+            const char* getDescription() const override          { return "table is invalid"; }
     };
 
     class ExpInvalidVector : public Object::Exception {
         public:
             ExpInvalidVector() : Exception() {}
-            virtual const char* getDescription() const
-                            { return "table vector is invalid"; }
+            const char* getDescription() const override          { return "table vector is invalid"; }
     };
 
     class ExpInvalidFStorage : public Object::Exception {
         public:
             ExpInvalidFStorage() : Exception() {}
-            virtual const char* getDescription() const
-                            { return "Incorrect type of FStorage"; }
+            const char* getDescription() const override          { return "Incorrect type of FStorage"; }
     };
 
 
@@ -236,7 +233,7 @@ private:
 
 
 //==============================================================================
-// Class: Table1 
+// Class: Table1
 //
 // Description: 1D LFI data table
 //
@@ -255,7 +252,7 @@ public:
    // Returns the number of x breakpoints.
    unsigned int getNumXPoints() const { return nx; }
 
-   // Returns a pointer to the breakpoint data for x. 
+   // Returns a pointer to the breakpoint data for x.
    const LCreal* getXData() const     { return xtable; }
 
    LCreal getMinX() const;    // Min value of the X (iv1) breakpoints
@@ -267,15 +264,16 @@ public:
    // Load the X (iv1) breakpoints
    virtual bool setXBreakpoints1(const List* const bkpts);
 
-   // Table class functions
-   virtual unsigned int tableSize() const;
+   // Table interface
+   unsigned int tableSize() const override;
 
-   // Object class functions
+   // Object interface
    bool isValid() const override;
 
 protected:
-   virtual bool loadData(const List& list, LCreal* const table);
-   virtual void printData(std::ostream& sout, const LCreal* table, const unsigned int indent) const;
+   // Table interface
+   bool loadData(const List& list, LCreal* const table) override;
+   void printData(std::ostream& sout, const LCreal* table, const unsigned int indent) const override;
 
 private:
    LCreal* xtable;    // X Breakpoint Table
@@ -284,7 +282,7 @@ private:
 
 
 //==============================================================================
-// Class: Table2 
+// Class: Table2
 //
 // Description: 2D LFI data table
 //
@@ -305,7 +303,7 @@ public:
    // Returns the number of y breakpoints.
    unsigned int getNumYPoints() const { return ny; }
 
-   // Returns a pointer to the breakpoint data for y. 
+   // Returns a pointer to the breakpoint data for y.
    const LCreal* getYData() const     { return ytable; }
 
    LCreal getMinY() const;    // Min value of the Y (iv2) breakpoints
@@ -317,16 +315,17 @@ public:
    // Load the Y (iv2) breakpoints
    virtual bool setYBreakpoints2(const List* const bkpts);
 
-   // Base table class functions
-   virtual LCreal lfi(const LCreal iv1, FStorage* const s = 0) const;
-   virtual unsigned int tableSize() const;
+   // Table1 interface
+   LCreal lfi(const LCreal iv1, FStorage* const s = 0) const override;
+   unsigned int tableSize() const override;
 
-   // Object class functions
+   // Object interface
    bool isValid() const override;
 
 protected:
-   virtual bool loadData(const List& list, LCreal* const table);
-   virtual void printData(std::ostream& sout, const LCreal* table, const unsigned int indent) const;
+   // Table1 interface
+   bool loadData(const List& list, LCreal* const table) override;
+   void printData(std::ostream& sout, const LCreal* table, const unsigned int indent) const override;
 
 private:
    LCreal* ytable;    // Y Breakpoint Table
@@ -335,7 +334,7 @@ private:
 
 
 //==============================================================================
-// Class: Table3 
+// Class: Table3
 //
 // Description: 3D LFI data table
 //
@@ -369,17 +368,18 @@ public:
    // Loads the Z (iv3) breakpoints
    virtual bool setZBreakpoints3(const List* const bkpts);
 
-   // Base table class functions
-   virtual LCreal lfi(const LCreal iv1, const LCreal iv2, FStorage* const s = 0) const;
-   virtual LCreal lfi(const LCreal iv1, FStorage* const s = 0) const;
-   virtual unsigned int tableSize() const;
+   // Table2 interface
+   LCreal lfi(const LCreal iv1, const LCreal iv2, FStorage* const s = 0) const override;
+   LCreal lfi(const LCreal iv1, FStorage* const s = 0) const override;
+   unsigned int tableSize() const override;
 
    // Object interface
    bool isValid() const override;
 
 protected:
-   virtual bool loadData(const List& list, LCreal* const table);
-   virtual void printData(std::ostream& sout, const LCreal* table, const unsigned int indent) const;
+   // Table2 interface
+   bool loadData(const List& list, LCreal* const table) override;
+   void printData(std::ostream& sout, const LCreal* table, const unsigned int indent) const override;
 
 private:
    LCreal* ztable;    // Z Breakpoint Table
@@ -388,7 +388,7 @@ private:
 
 
 //==============================================================================
-// Class: Table4 
+// Class: Table4
 //
 // Description: 4D LFI data table
 //
@@ -411,7 +411,7 @@ public:
    // Returns the number of w breakpoints.
    unsigned int getNumWPoints() const { return nw; }
 
-   // Returns a pointer to the breakpoint data for w. 
+   // Returns a pointer to the breakpoint data for w.
    const LCreal* getWData() const     { return wtable; }
 
    LCreal getMinW() const;    // Min value of the W (iv4) breakpoints
@@ -423,18 +423,19 @@ public:
    // Loads the W (iv4) breakpoints
    virtual bool setWBreakpoints4(const List* const bkpts);
 
-   // Base table class functions
-   virtual LCreal lfi(const LCreal iv1, const LCreal iv2, const LCreal iv3, FStorage* const s = 0) const;
-   virtual LCreal lfi(const LCreal iv1, const LCreal iv2, FStorage* const s = 0) const;
-   virtual LCreal lfi(const LCreal iv1, FStorage* const s = 0) const;
-   virtual unsigned int tableSize() const;
+   // Table3 interface
+   LCreal lfi(const LCreal iv1, const LCreal iv2, const LCreal iv3, FStorage* const s = 0) const override;
+   LCreal lfi(const LCreal iv1, const LCreal iv2, FStorage* const s = 0) const override;
+   LCreal lfi(const LCreal iv1, FStorage* const s = 0) const override;
+   unsigned int tableSize() const override;
 
    // Object interface
    bool isValid() const override;
 
 protected:
-   virtual bool loadData(const List& list, LCreal* const table);
-   virtual void printData(std::ostream& sout, const LCreal* table, const unsigned int indent) const;
+   // Table3 interface
+   bool loadData(const List& list, LCreal* const table) override;
+   void printData(std::ostream& sout, const LCreal* table, const unsigned int indent) const override;
 
 private:
    LCreal* wtable;    // W Breakpoint Table
@@ -442,7 +443,7 @@ private:
 };
 
 //==============================================================================
-// Class: Table5 
+// Class: Table5
 //
 // Description: 5D LFI data table
 //
@@ -466,7 +467,7 @@ public:
    // Returns the number of v breakpoints.
    unsigned int getNumVPoints() const { return nv; }
 
-   // Returns a pointer to the breakpoint data for v. 
+   // Returns a pointer to the breakpoint data for v.
    const LCreal* getVData() const     { return vtable; }
 
    LCreal getMinV() const;    // Min value of the V (iv5) breakpoints
@@ -477,19 +478,20 @@ public:
    // Loads the V (iv5) breakpoints
    virtual bool setVBreakpoints5(const List* const bkpts);
 
-   // Base table class functions
-   virtual LCreal lfi(const LCreal iv1, const LCreal iv2, const LCreal iv3, const LCreal iv4, FStorage* const s = 0) const;
-   virtual LCreal lfi(const LCreal iv1, const LCreal iv2, const LCreal iv3, FStorage* const s = 0) const;
-   virtual LCreal lfi(const LCreal iv1, const LCreal iv2, FStorage* const s = 0) const;
-   virtual LCreal lfi(const LCreal iv1, FStorage* const s = 0) const;
-   virtual unsigned int tableSize() const;
+   // Table4 interface
+   LCreal lfi(const LCreal iv1, const LCreal iv2, const LCreal iv3, const LCreal iv4, FStorage* const s = 0) const override;
+   LCreal lfi(const LCreal iv1, const LCreal iv2, const LCreal iv3, FStorage* const s = 0) const override;
+   LCreal lfi(const LCreal iv1, const LCreal iv2, FStorage* const s = 0) const override;
+   LCreal lfi(const LCreal iv1, FStorage* const s = 0) const override;
+   unsigned int tableSize() const override;
 
    // Object interface
    bool isValid() const override;
 
 protected:
-   virtual bool loadData(const List& list, LCreal* const table);
-   virtual void printData(std::ostream& sout, const LCreal* table, const unsigned int indent) const;
+   // Table4 interface
+   bool loadData(const List& list, LCreal* const table) override;
+   void printData(std::ostream& sout, const LCreal* table, const unsigned int indent) const override;
 
 private:
    LCreal* vtable;     // V Breakpoint Table

@@ -54,12 +54,12 @@ namespace Basic {
 
 // -----------------------------------------------------------------------------
 // Defined constants:
-// All constants were collected via the internet from 
+// All constants were collected via the internet from
 //
-// All metric conversions were based on the conversion tables found in 
+// All metric conversions were based on the conversion tables found in
 // the Transportation Energy Data Book: Edition 22 - 2002, which can be found out
-// http://www-cta.ornl.gov/cta/data/tedb22/Edition22_AppendixB.pdf 
-// Since all frequency classes are based in hertz, all conversions will either 
+// http://www-cta.ornl.gov/cta/data/tedb22/Edition22_AppendixB.pdf
+// Since all frequency classes are based in hertz, all conversions will either
 // convert to or from hertz.
 ///////////////////////////////////////////////
 
@@ -88,7 +88,7 @@ public:
 
     // Conversion constants
     static const LCreal Hz2KHz;  // Hertz -> KiloHertz
-    static const LCreal KHz2Hz;  // KiloHertz -> Hertz   
+    static const LCreal KHz2Hz;  // KiloHertz -> Hertz
     static const LCreal Hz2MHz;  // Hertz -> MegaHertz
     static const LCreal MHz2Hz;  // MegaHertz -> Hertz
     static const LCreal Hz2GHz;  // Hertz -> GigaHertz
@@ -107,7 +107,7 @@ inline std::ostream& operator<<(std::ostream& sout, const Frequency& n)
 // Description:  Base unit for frequency, with a hertz being an instance of Hertz
 //               with its value equal to 1.0.
 //------------------------------------------------------------------------------
-class Hertz : public Frequency  
+class Hertz : public Frequency
 {
     DECLARE_SUBCLASS(Hertz, Frequency)
 
@@ -116,9 +116,10 @@ public:
     Hertz(const LCreal value);
     Hertz(const Frequency& value);
 
-    static LCreal convertStatic(const Frequency &n)     { return n.toFrequency(); }
-    virtual LCreal toFrequency() const                  { return static_cast<LCreal>(val); }
-    virtual LCreal fromFrequency(const LCreal a) const  { return a; }
+    static LCreal convertStatic(const Frequency &n)      { return n.toFrequency(); }
+    // Frequency interface
+    LCreal toFrequency() const override                  { return static_cast<LCreal>(val); }
+    LCreal fromFrequency(const LCreal a) const override  { return a; }
 };
 
 //------------------------------------------------------------------------------
@@ -136,9 +137,10 @@ public:
     KiloHertz(const Frequency& value);
 
 private:
-    static LCreal convertStatic(const Frequency &n)     { return n.toFrequency() * Hz2KHz; }
-    virtual LCreal toFrequency() const                  { return static_cast<LCreal>(val * KHz2Hz); }
-    virtual LCreal fromFrequency(const LCreal a) const  { return a * Hz2KHz; }
+    static LCreal convertStatic(const Frequency &n)      { return n.toFrequency() * Hz2KHz; }
+    // Frequency interface
+    LCreal toFrequency() const override                  { return static_cast<LCreal>(val * KHz2Hz); }
+    LCreal fromFrequency(const LCreal a) const override  { return a * Hz2KHz; }
 };
 
 
@@ -156,9 +158,10 @@ public:
     MegaHertz(const LCreal value);
     MegaHertz(const Frequency& value);
 
-    static LCreal convertStatic(const Frequency &n)     { return n.toFrequency() * Hz2MHz; }
-    virtual LCreal toFrequency() const                  { return static_cast<LCreal>(val * MHz2Hz); }
-    virtual LCreal fromFrequency(const LCreal a) const  { return a * Hz2MHz; }
+    static LCreal convertStatic(const Frequency &n)      { return n.toFrequency() * Hz2MHz; }
+    // Frequency interface
+    LCreal toFrequency() const override                  { return static_cast<LCreal>(val * MHz2Hz); }
+    LCreal fromFrequency(const LCreal a) const override  { return a * Hz2MHz; }
 };
 
 
@@ -176,9 +179,10 @@ public:
     GigaHertz(const LCreal value);
     GigaHertz(const Frequency& value);
 
-    static LCreal convertStatic(const Frequency &n)     { return n.toFrequency() * Hz2GHz; }
-    virtual LCreal toFrequency() const                  { return static_cast<LCreal>(val * GHz2Hz); }
-    virtual LCreal fromFrequency(const LCreal a) const  { return a * Hz2GHz; }
+    static LCreal convertStatic(const Frequency &n)      { return n.toFrequency() * Hz2GHz; }
+    // Frequency interface
+    LCreal toFrequency() const override                  { return static_cast<LCreal>(val * GHz2Hz); }
+    LCreal fromFrequency(const LCreal a) const override  { return a * Hz2GHz; }
 };
 
 
@@ -196,9 +200,10 @@ public:
     TeraHertz(const LCreal value);
     TeraHertz(const Frequency& value);
 
-    static LCreal convertStatic(const Frequency &n)     { return n.toFrequency() * Hz2THz; }
-    virtual LCreal toFrequency() const                  { return static_cast<LCreal>(val * THz2Hz); }
-    virtual LCreal fromFrequency(const LCreal a) const  { return a * Hz2THz; }
+    static LCreal convertStatic(const Frequency &n)      { return n.toFrequency() * Hz2THz; }
+    // Frequency interface
+    LCreal toFrequency() const override                  { return static_cast<LCreal>(val * THz2Hz); }
+    LCreal fromFrequency(const LCreal a) const override  { return a * Hz2THz; }
 };
 
 } // End Basic namespace

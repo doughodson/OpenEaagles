@@ -50,7 +50,7 @@ class Number;
 //
 // Enumerated:
 //      { RED, GREEN, BLUE, ALPHA }
-//          Used to index the Red, Green and Blue (RGB) color vectors      
+//          Used to index the Red, Green and Blue (RGB) color vectors
 //------------------------------------------------------------------------------
 class Color : public Object
 {
@@ -78,7 +78,7 @@ public:
 
     const osg::Vec3* getRGB() const;
     const osg::Vec4* getRGBA() const;
-    
+
     static LCreal getDefaultAlpha();
     static void setDefaultAlpha(const LCreal alpha);
 

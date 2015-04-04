@@ -52,7 +52,7 @@ namespace Basic {
 //
 //       2) The state function is a user defined, state dependent function
 //          that performs the state's actions, processes inputs, and executes
-//          transitions.  The state functions are mapped to state numbers by 
+//          transitions.  The state functions are mapped to state numbers by
 //          the "state table" using macros similar to the 'event' mapping tables
 //          in the Component class (see macros.h).
 //
@@ -64,7 +64,7 @@ namespace Basic {
 //
 // State table:
 //
-//    Use the following macros (see macros.h) to build the "state table".  
+//    Use the following macros (see macros.h) to build the "state table".
 //
 //       BEGIN_STATE_TABLE(Foo)
 //          -- Start of the state table for the 'Foo' state machine class.
@@ -127,7 +127,7 @@ namespace Basic {
 //       RTN_STATE   -- Same as NEW_STATE except we're returning from a state
 //                      that was previously call()'d by this state function.
 //
-//       HOLD_STATE  -- Holding in this state; 
+//       HOLD_STATE  -- Holding in this state;
 //
 //    For the NEW_STATE and RTN_STATE modes, use getPreviousState() to get the
 //    previous state number and use getArgument() to get an optional argument
@@ -163,7 +163,7 @@ namespace Basic {
 //       3) callState(); calls another of the parent states
 //
 //       4) rtnState(); returns to the parent's calling state from the "called" state
-//   
+//
 //    As the state transitions, the following events are sent to the child state
 //    machine that handles the state.
 //
@@ -211,6 +211,7 @@ public:
    unsigned short getState() const     { return state; }
    unsigned short getSubstate() const  { return substate; }
 
+   // Component interface
    void updateData(const LCreal dt = 0.0) override;
    void updateTC(const LCreal dt = 0.0) override;
    bool event(const int event, Object* const obj = 0) override;
@@ -246,7 +247,7 @@ protected:
    //       END_STATE_TABLE(), STATE_FUNC and STATE_MACH macros.
    //
    //    2) The state specific functions mapped by the STATE_FUNC() macro must
-   //       have a single argument of type LCreal for delta time (see the preStateProc() 
+   //       have a single argument of type LCreal for delta time (see the preStateProc()
    //       and postStateProc() functions)
    // ---
    virtual unsigned short stateTable(
@@ -301,14 +302,12 @@ protected:
    // Return to the parent's calling state, while returning an optional argument, 'arg'
    bool rtnState(Object* const arg = 0);
 
-
    // ---
    // Event handlers
    // ---
    virtual bool onEntry(Object* const msg = 0);
    virtual bool onReturn(Object* const msg = 0);
    virtual bool onExit();
-
 
    // ---
    // State machine list functions

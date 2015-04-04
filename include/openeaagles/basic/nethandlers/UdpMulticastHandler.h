@@ -30,21 +30,21 @@ class String;
 // Slots:
 //      multicastGroup  <String>    ! String containing the multicast IP address in
 //                                  the Internet standard "." (dotted) notation.
-//                                  IP multicast addresses range from 224.0.0.0 
+//                                  IP multicast addresses range from 224.0.0.0
 //                                  through 239.255.255.255 (e.g., "225.0.0.251")
 //
 //      ttl             <Number>    ! Multicast Time-To-Live (TTL) value (default: 1)
-//        
+//
 //      loopback        <Number>    ! Multicast Loopback flag (default: 0 (off))
 //
 //
 // From Windows documentation:
-//    "Note  The Winsock version of the IP_MULTICAST_LOOP option is semantically 
-//    different than the UNIX version of the IP_MULTICAST_LOOP option: 
-//    -> In Winsock, the IP_MULTICAST_LOOP option applies only to the receive path. 
-//    -> In the UNIX version, the IP_MULTICAST_LOOP option applies to the send path. 
+//    "Note  The Winsock version of the IP_MULTICAST_LOOP option is semantically
+//    different than the UNIX version of the IP_MULTICAST_LOOP option:
+//    -> In Winsock, the IP_MULTICAST_LOOP option applies only to the receive path.
+//    -> In the UNIX version, the IP_MULTICAST_LOOP option applies to the send path.
 //    -> For example, applications ON and OFF (which are easier to track than X and Y)
-//       join the same group on the same interface; application ON sets the IP_MULTICAST_LOOP 
+//       join the same group on the same interface; application ON sets the IP_MULTICAST_LOOP
 //       option on, application OFF sets the IP_MULTICAST_LOOP option off. If ON and OFF are
 //       Winsock applications, OFF can send to ON, but ON cannot sent to OFF. In contrast,
 //       if ON and OFF are UNIX applications, ON can send to OFF, but OFF cannot send to ON."
@@ -80,19 +80,17 @@ public:
     virtual bool setSlotTTL(const Number* const msg);
     virtual bool setSlotLoopback(const Number* const msg);
 
-    // NetHandler interface
-    virtual bool initNetwork(const bool noWaitFlag);
-    virtual bool isConnected() const;
-    virtual bool closeConnection();
+    // PosixHandler interface
+    bool initNetwork(const bool noWaitFlag) override;
+    bool isConnected() const override;
+    bool closeConnection() override;
 
 protected:
     virtual bool joinTheGroup();
 
-    // NetHandler interface
-    virtual bool init();            // Initialize this socket handler
-
     // PosixHandler interface
-    virtual bool bindSocket();      // Bind socket to address
+    bool init() override;
+    bool bindSocket() override;
 
 private:
     char* multicastGroup;           // Multicast Group Name

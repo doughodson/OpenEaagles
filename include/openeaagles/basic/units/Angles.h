@@ -56,11 +56,11 @@ namespace Basic {
 
 // -----------------------------------------------------------------------------
 // Defined constants:
-// All constants were collected via the internet from 
+// All constants were collected via the internet from
 // http://physics.nist.gov/cuu/Units/outside.html
 // National Institute of Technology Standards website.
-// 
-// Since all Angles are based in Semicircles, all conversions will either 
+//
+// Since all Angles are based in Semicircles, all conversions will either
 // convert to or from semicircles.
 // -----------------------------------------------------------------------------
 
@@ -71,7 +71,7 @@ namespace Basic {
 //               equivalent to an instance of Semicircle with its value equal
 //               to 1.0.
 //------------------------------------------------------------------------------
-class Angle : public Number  
+class Angle : public Number
 {
     DECLARE_SUBCLASS(Angle, Number)
 
@@ -85,7 +85,6 @@ public:
     virtual double toAngle() const = 0;
     virtual double fromAngle(const double a) const = 0;
     double convert(const Angle& n) { return fromAngle(n.toAngle()); }
-        
 
     // Conversions between angles
     static double degreesToRadians(const double v)     { return (v * D2SC) * SC2R; }
@@ -96,11 +95,11 @@ public:
     static double semicirclesToDegrees(const double v) { return v * SC2D; }
 
     // Conversion constants:
-    static const double D2SC;   // Degrees to Semi-Circle Conversion Constant 
-    static const double SC2D;   // Semi-Circle to Degrees Conversion Constant 
-    static const double R2SC;   // Radians to Semi-Circle Conversion Constant 
-    static const double SC2R;   // Semi-Circle to Radians Conversion Constant 
-    static const double R2DCC;  // Radians to Degrees Conversion Constant 
+    static const double D2SC;   // Degrees to Semi-Circle Conversion Constant
+    static const double SC2D;   // Semi-Circle to Degrees Conversion Constant
+    static const double R2SC;   // Radians to Semi-Circle Conversion Constant
+    static const double SC2R;   // Semi-Circle to Radians Conversion Constant
+    static const double R2DCC;  // Radians to Degrees Conversion Constant
     static const double D2RCC;  // Degrees to Radians Conversion Constant
 
     // Angle End-Point Check (keeps angles within the range: -180 <= x <= 180
@@ -185,7 +184,7 @@ inline double Angle::aepcdRad(double x)
 // Base class:  Object -> Number -> Angle -> Degrees
 // Description:  Angle * 180.0
 //------------------------------------------------------------------------------
-class Degrees : public Angle  
+class Degrees : public Angle
 {
     DECLARE_SUBCLASS(Degrees, Angle)
 
@@ -205,7 +204,7 @@ public:
 // Base class:  Object -> Number -> Angle -> Radians
 // Description:  Angle * PI
 //------------------------------------------------------------------------------
-class Radians : public Angle  
+class Radians : public Angle
 {
     DECLARE_SUBCLASS(Radians, Angle)
 
@@ -226,7 +225,7 @@ public:
 // Description:  An instance of Semicircles with its value equal to 1.0 is
 //               one base unit for distances.
 //------------------------------------------------------------------------------
-class Semicircles : public Angle  
+class Semicircles : public Angle
 {
     DECLARE_SUBCLASS(Semicircles, Angle)
 

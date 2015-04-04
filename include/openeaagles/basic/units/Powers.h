@@ -33,16 +33,16 @@
 //        static LCreal kiloWattsToMilliWatts( const LCreal v) { return (v * KW2W) * W2MW; }
 //        static LCreal wattsToKiloWatts(const LCreal v)       { return v * W2KW; }
 //        static LCreal wattsToHorsepower(const LCreal v)      { return v * W2HP; }
-//        static LCreal wattsToMilliWatts(const LCreal v)      { return v * W2MW; }  
+//        static LCreal wattsToMilliWatts(const LCreal v)      { return v * W2MW; }
 //        static LCreal horsepowerToWatts(const LCreal v)      { return v * HP2W; }
 //        static LCreal horsepowerToKiloWatts(const LCreal v)  { return (v * HP2W) * W2KW; }
 //        static LCreal horsepowerToMilliWatts(const LCreal v) { return (v * HP2W) * W2MW; }
 //        static LCreal milliWattsToWatts(const LCreal v)      { return v * MW2W }
 //        static LCreal milliWattsToKiloWatts(const LCreal v)  { return (v * MW2W) * W2KW; }
 //        static LCreal milliWattsToHorsepower(const LCreal v) { return (v * MW2W) * W2HP }
-//                  
+//
 //     No decibelWatts or decibelMilliWatts conversions at this time.  We can add them later
-//     if needed.                  
+//     if needed.
 //
 //     Output stream operator: >>
 //        ostream& operator<<(ostream& sout, const Power& n)
@@ -50,11 +50,11 @@
 //        to the output stream.
 //
 //
-// Public methods (For classes:  KiloWatts, Watts, Horsepower, DecibelWatts, 
+// Public methods (For classes:  KiloWatts, Watts, Horsepower, DecibelWatts,
 //                 DecibelMilliWatts):
 //
 //     LCreal convertStatic(const Power& n)
-//        Static function to convert the given Power derived 
+//        Static function to convert the given Power derived
 //        instance into the units of another Power derived class.
 //
 //----------------------------------------------------------------------------
@@ -68,17 +68,17 @@ namespace Basic {
 
 // ---------------------------------------------------------------------------
 // Defined Power Conversion Constants:
-// 
+//
 // These constants were obtained (and cross referenced) from the following
-// websites, and are assumed accurate as of 2/5/03.  
-// 
-// http://www-cta.ornl.gov/cta/data/tedb22/Edition22_AppendixB.pdf 
+// websites, and are assumed accurate as of 2/5/03.
+//
+// http://www-cta.ornl.gov/cta/data/tedb22/Edition22_AppendixB.pdf
 // - U.S. Center for Transportation Analysis
-// http://www.energy.rochester.edu/units/conversions.pdf 
+// http://www.energy.rochester.edu/units/conversions.pdf
 // - Henry Manczyk, C.P.E., C.E.M.
-// http://www.uwsp.edu/cnr/wcee/keep/Mod1/Whatis/energyresourcetables.htm 
+// http://www.uwsp.edu/cnr/wcee/keep/Mod1/Whatis/energyresourcetables.htm
 // - U. of Wisconsin
-// http://lectureonline.cl.msu.edu/~mmp/kap5/cd129.htm 
+// http://lectureonline.cl.msu.edu/~mmp/kap5/cd129.htm
 // - Michigan State University
 // ---------------------------------------------------------------------------
 // Since all units are converted to or from Watts, only those constants
@@ -86,13 +86,13 @@ namespace Basic {
 ////////////////////////////////////////////////////////////////////////
 
 //----------------------------------------------------------------------------
-// Class:  Power  
+// Class:  Power
 // Base class:  Object -> Number -> Power
 // Description:  Base class for powers.  Defined as a Watt which is
 //               equivalent to an instance of Watts with its value equal
 //               to 1.0.
 //----------------------------------------------------------------------------
-class Power : public Number  
+class Power : public Number
 {
     DECLARE_SUBCLASS(Power, Number)
 
@@ -107,13 +107,13 @@ public:
     virtual LCreal fromPower(const LCreal a) const = 0;
     LCreal convert(const Power& n) { return fromPower(n.toPower()); }
 
-    // Conversions between Powers 
+    // Conversions between Powers
     static LCreal kiloWattsToWatts(const LCreal v)       { return v * KW2W; }
     static LCreal kiloWattsToHorsepower(const LCreal v)  { return (v * KW2W) * W2HP; }
     static LCreal kiloWattsToMilliWatts( const LCreal v) { return (v * KW2W) * W2MW; }
     static LCreal wattsToKiloWatts(const LCreal v)       { return v * W2KW; }
     static LCreal wattsToHorsepower(const LCreal v)      { return v * W2HP; }
-    static LCreal wattsToMilliWatts(const LCreal v)      { return v * W2MW; }  
+    static LCreal wattsToMilliWatts(const LCreal v)      { return v * W2MW; }
     static LCreal horsepowerToWatts(const LCreal v)      { return v * HP2W; }
     static LCreal horsepowerToKiloWatts(const LCreal v)  { return (v * HP2W) * W2KW; }
     static LCreal horsepowerToMilliWatts(const LCreal v) { return (v * HP2W) * W2MW; }
@@ -136,7 +136,7 @@ inline std::ostream& operator<<(std::ostream& sout, const Power& n)
 
 
 //----------------------------------------------------------------------------
-// Class:  Watts  
+// Class:  Watts
 // Base class:  Object -> Number -> Power -> Watts
 // Description: An instance of KiloWatts with its value equal to 1.0 is one base
 // unit for power.
@@ -151,12 +151,13 @@ public:
     Watts(const Power& org);
 
     static LCreal convertStatic(const Power &n)     { return n.toPower(); }
-    virtual LCreal toPower() const                  { return static_cast<LCreal>(val); }
-    virtual LCreal fromPower(const LCreal a) const  { return a; }
+    // Power interface
+    LCreal toPower() const override                  { return static_cast<LCreal>(val); }
+    LCreal fromPower(const LCreal a) const override  { return a; }
 };
 
 //----------------------------------------------------------------------------
-// Class:  MilliWatts  
+// Class:  MilliWatts
 // Base class:  Object -> Number -> Power -> MilliWatts
 // Description: Watts * 0.01
 //----------------------------------------------------------------------------
@@ -170,12 +171,13 @@ public:
     MilliWatts(const Power& org);
 
     static LCreal convertStatic(const Power &n)     { return n.toPower() * W2MW; }
-    virtual LCreal toPower() const                  { return static_cast<LCreal>(val * MW2W); }
-    virtual LCreal fromPower(const LCreal a) const  { return a * W2MW; }
+    // Power interface
+    LCreal toPower() const override                  { return static_cast<LCreal>(val * MW2W); }
+    LCreal fromPower(const LCreal a) const override  { return a * W2MW; }
 };
 
 //----------------------------------------------------------------------------
-// Class:  KiloWatts  
+// Class:  KiloWatts
 // Base class:  Object -> Number -> Power -> KiloWatts
 // Description: Watts * 0.001
 //----------------------------------------------------------------------------
@@ -189,10 +191,11 @@ public:
     KiloWatts(const Power& org);
 
     static LCreal convertStatic(const Power &n)     { return n.toPower() * W2KW; }
+    // Power interface
     //this goes to another power
-    virtual LCreal toPower() const                  { return static_cast<LCreal>(val * KW2W); }
+    LCreal toPower() const override                  { return static_cast<LCreal>(val * KW2W); }
     //this is coming from another power
-    virtual LCreal fromPower(const LCreal a) const  { return a * W2KW; }
+    LCreal fromPower(const LCreal a) const override  { return a * W2KW; }
 };
 
 //----------------------------------------------------------------------------
@@ -210,8 +213,9 @@ public:
     Horsepower(const Power& org);
 
     static LCreal convertStatic(const Power &n)     { return n.toPower() * W2HP; }
-    virtual LCreal toPower() const                  { return static_cast<LCreal>(val * HP2W); }
-    virtual LCreal fromPower(const LCreal a) const  { return a * W2HP; }
+    // Power interface
+    LCreal toPower() const override                  { return static_cast<LCreal>(val * HP2W); }
+    LCreal fromPower(const LCreal a) const override  { return a * W2HP; }
 };
 
 //----------------------------------------------------------------------------
@@ -229,8 +233,9 @@ public:
     DecibelWatts(const Power& org);
 
     static LCreal convertStatic(const Power &n)     { return static_cast<LCreal>(10.0 * lcLog10(n.toPower())); }
-    virtual LCreal toPower() const                  { return  lcPow(static_cast<LCreal>(10.0), static_cast<LCreal>(val/10.0)); }
-    virtual LCreal fromPower(const LCreal a) const  { return 10.0f * lcLog10(a) ; }
+    // Power interface
+    LCreal toPower() const override                  { return  lcPow(static_cast<LCreal>(10.0), static_cast<LCreal>(val/10.0)); }
+    LCreal fromPower(const LCreal a) const override  { return 10.0f * lcLog10(a) ; }
 
 };
 
@@ -249,8 +254,9 @@ public:
     DecibelMilliWatts(const Power& org);
 
     static LCreal convertStatic(const Power &n)     { return static_cast<LCreal>(10.0 * lcLog10(n.toPower() * W2MW)); }
-    virtual LCreal toPower() const                  { return  MW2W * lcPow(static_cast<LCreal>(10.0), static_cast<LCreal>(val/10.0)); }
-    virtual LCreal fromPower(const LCreal a) const  { return (10.0f * lcLog10(a * W2MW)); }
+    // Power interface
+    LCreal toPower() const override                  { return  MW2W * lcPow(static_cast<LCreal>(10.0), static_cast<LCreal>(val/10.0)); }
+    LCreal fromPower(const LCreal a) const override  { return (10.0f * lcLog10(a * W2MW)); }
 
 };
 

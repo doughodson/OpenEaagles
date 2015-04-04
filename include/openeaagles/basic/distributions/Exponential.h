@@ -26,7 +26,7 @@ public:
 
   Exponential();
 
-  virtual double draw();
+  double draw() override;
 
   bool setLambda(const double x) { lambda = x; return true; }
   double getLambda() const { return lambda; }

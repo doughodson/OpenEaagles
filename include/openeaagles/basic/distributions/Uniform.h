@@ -17,7 +17,7 @@ public:
 
   Uniform();
 
-  virtual double draw();
+  double draw() override;
 
   bool setMin(const double x)                           { min = x; return true; }
   double getMin() const                                 { return min; }

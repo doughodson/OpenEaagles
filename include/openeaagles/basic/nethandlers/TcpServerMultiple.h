@@ -42,16 +42,18 @@ public:
 
    virtual TcpHandler* acceptConnection();
 
-   unsigned int getBacklog() const { return backlog; }
+   unsigned int getBacklog() const        { return backlog; }
 
    // Slot functions
    virtual bool setSlotBacklog(const Number* const msg);
 
-   // NetHandler interface
-   virtual bool initNetwork(const bool noWaitFlag);
+   // PosixHandler interface
+   bool initNetwork(const bool noWaitFlag) override;
 
 protected:
-   virtual bool bindSocket();
+   // PosixHandler interface
+   bool bindSocket() override;
+
    virtual bool setBacklog(const unsigned int value);
    virtual bool listenForConnections();
 

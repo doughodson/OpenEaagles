@@ -46,8 +46,8 @@ namespace Basic {
 //       call the I/O process functions for the devices; in which case, the
 //       inputDevices() and outputDevices() are overridden.  This thread will
 //       terminate when a SHUTDOWN_EVENT is sent to this object.
-//      
-// 
+//
+//
 // Factory name: IoHandler
 // Slots:
 //    ioData      <IoData>       ! Combined input/output data (default: none)
@@ -84,11 +84,11 @@ public:
    LCreal getPriority() const;            // Thread priority (0 low to 1 high)
    LCreal getRate() const;                // Thread rate (hz)
 
-   // Component class functions
+   // Component interface
    void reset() override;
 
 protected:
-   bool areNetworksEnabled() const { return netInitialized; }
+   bool areNetworksEnabled() const        { return netInitialized; }
    virtual bool initNetworks();           // Initialize the networks (if any)
    virtual void clear();                  // Clear our data
 
@@ -100,7 +100,7 @@ protected:
    virtual bool setSlotRate(const Frequency* const num);
    virtual bool setSlotPriority(const Number* const num);
 
-   // Basic::Component protected functions
+   // Component interface
    bool shutdownNotification() override;
 
 private:

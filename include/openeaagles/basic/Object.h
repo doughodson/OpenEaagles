@@ -80,7 +80,7 @@ namespace Basic {
 //
 //       Foo::~Foo()
 //          Class destructor provided by the macros and uses deleteData().
-//       
+//
 //       Object* clone()
 //          Returns a copy of this object.  Provided by the macros and uses
 //          the copy constructor.
@@ -198,7 +198,7 @@ namespace Basic {
 //           ON_SLOT( 3, setSlotC, String)   // setSlotA() handles "slotC" with a String type argument
 //       END_SLOT_MAP()
 //
-//    Each object instance has a slot table pointer that points to the class 
+//    Each object instance has a slot table pointer that points to the class
 //    slot table, and each class constructor must include the STANDARD_CONSTRUCTOR()
 //    macro, which will set this slot table pointer.
 //
@@ -227,10 +227,10 @@ namespace Basic {
 //       serialize(ostream& sout, int indent, bool slotsOnly)
 //          Serialize the contents of an object, as EDL, to the output stream, sout.
 //          Each output line can be indented by 'indent' spaces.  If slotsOnly is true,
-//          then only the slots are printed. 
+//          then only the slots are printed.
 //
 //       void indent(std::ostream& sout, const int ident)
-//          Indents the output stream, 'sout, by 'ident' spaces. 
+//          Indents the output stream, 'sout, by 'ident' spaces.
 //
 //
 // Standard message types (see definitions below):
@@ -266,7 +266,7 @@ namespace Basic {
 //
 //    QQueue -- Quick Queue (see QQueue.h)
 //       Use put() to add items and get() to remove items.  Use the constructor's
-//       'qsize' parameter to set the size of the queue.  
+//       'qsize' parameter to set the size of the queue.
 //
 //    QStack -- Quick Stack (see QStack.h)
 //       Use push() to add items and pop() to remove items.  Use the constructor's

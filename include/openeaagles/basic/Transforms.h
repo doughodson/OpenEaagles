@@ -60,8 +60,6 @@ public:
     virtual bool setComputematrix4(const Angle* const sc4obj);
     virtual bool setComputematrix4(const Number* const sc4obj);
 
-
-
 protected:
     virtual void computeMatrix();
     osg::Matrix m;              // transformation matrix
@@ -91,7 +89,7 @@ class Translation : public Transform {
 public:
     Translation();
 protected:
-    virtual void computeMatrix();
+    void computeMatrix() override;
 };
 
 //------------------------------------------------------------------------------
@@ -100,7 +98,7 @@ protected:
 //
 // Description: Coordinate Transformations (e.g., rotate)
 //
-// Rotation: 
+// Rotation:
 //    One parameter: Rotate "w" radians about the Z axis.
 //    Four parameters: Rotate "w" radians about the vector (x,y,z).
 // Slots:
@@ -116,7 +114,7 @@ class Rotation : public Transform {
 public:
     Rotation();
 protected:
-    virtual void computeMatrix();
+    void computeMatrix() override;
 };
 
 //------------------------------------------------------------------------------
@@ -141,7 +139,7 @@ class Scale : public Transform {
 public:
     Scale();
 protected:
-    virtual void computeMatrix();
+    void computeMatrix() override;
 };
 
 } // End Basic namespace

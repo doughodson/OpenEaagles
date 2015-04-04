@@ -5,9 +5,9 @@
 //              Object -> Number -> Mass -> Grams
 //              Object -> Number -> Mass -> KiloGrams
 //              Object -> Number -> Mass -> Slugs
-//             
 //
-// Description:  Numbers as masses -- Grams, KiloGrams, Slugs,  
+//
+// Description:  Numbers as masses -- Grams, KiloGrams, Slugs,
 //               Base unit for Mass derivations are KiloGrams.
 //
 //
@@ -55,17 +55,17 @@ namespace Basic {
 
 // ----------------------------------------------------------------------------
 // Defined Mass Conversion Constants:
-// 
+//
 // These constants were obtained (and cross referenced) from the following
-// websites, and are assumed accurate as of 2/5/03.  
-// 
+// websites, and are assumed accurate as of 2/5/03.
+//
 // http://oncampus.richmond.edu/academics/as/education/projects/webunits/measurement/mass1.html
 // - University of Richmond
 // http://www.ex.ac.uk/cimt/dictunit/ccmass.htm - University of Exeter
-// http://iul.eng.fiu.edu/Teaching/controls/course/summer2001/Appendices.pdf 
+// http://iul.eng.fiu.edu/Teaching/controls/course/summer2001/Appendices.pdf
 // - Florida International University
 // http://faculty.millikin.edu/~jaskill.nsm.faculty.mu/slug.html - Millikin University
-// http://www-cta.ornl.gov/cta/data/tedb22/Edition22_AppendixB.pdf 
+// http://www-cta.ornl.gov/cta/data/tedb22/Edition22_AppendixB.pdf
 // - Source:  Transportation Energy Data Book: Edition 22 - 2002
 // ----------------------------------------------------------------------------
 // Since all units are converted to or from KiloGrams, only those constants
@@ -73,13 +73,13 @@ namespace Basic {
 /////////////////////////////////////////////
 
 //------------------------------------------------------------------------------
-// Class:  Mass  
+// Class:  Mass
 // Base class:  Object -> Number -> Mass
 // Description:  Base class for Masses.  Defined as a KiloGram which is
 //               equivalent to an instance of KiloGrams with its value equal
 //               to 1.0.
 //------------------------------------------------------------------------------
-class Mass : public Number  
+class Mass : public Number
 {
     DECLARE_SUBCLASS(Mass, Number)
 
@@ -92,9 +92,9 @@ public:
 
     virtual LCreal toMass() const = 0;
     virtual LCreal fromMass(const LCreal a) const = 0;
-    LCreal convert(const Mass& n) const { return fromMass(n.toMass()); } 
+    LCreal convert(const Mass& n) const { return fromMass(n.toMass()); }
 
-    // Conversions between Masss 
+    // Conversions between Masss
     static LCreal gramsToKiloGrams(const LCreal v) { return v * G2KG; }
     static LCreal gramsToSlugs(const LCreal v)     { return (v * G2KG) * KG2SL; }
     static LCreal kiloGramsToGrams(const LCreal v) { return v * KG2G; }
@@ -121,7 +121,7 @@ inline std::ostream& operator<<(std::ostream& sout, const Mass& n)
 // Description:  An instance of KiloGrams with its value equal to 1.0 is one
 //               base unit for mass.
 //------------------------------------------------------------------------------
-class KiloGrams : public Mass  
+class KiloGrams : public Mass
 {
     DECLARE_SUBCLASS(KiloGrams, Mass)
 
@@ -130,11 +130,12 @@ public:
     KiloGrams(const LCreal value);
     KiloGrams(const Mass& value);
 
-    static LCreal convertStatic(const Mass &n)      { return n.toMass(); }
+    static LCreal convertStatic(const Mass &n)       { return n.toMass(); }
+    // Mass interface
     //this goes to another mass (kilograms)
-    virtual LCreal toMass() const                   { return static_cast<LCreal>(val); }  
+    LCreal toMass() const override                   { return static_cast<LCreal>(val); }
     //this is coming from another mass (kilograms)
-    virtual LCreal fromMass(const LCreal a) const   { return a; }
+    LCreal fromMass(const LCreal a) const override   { return a; }
 };
 
 
@@ -143,7 +144,7 @@ public:
 // Base class:  Object -> Number -> Mass -> Grams
 // Description:  KiloGrams * 1000
 //------------------------------------------------------------------------------
-class Grams : public Mass  
+class Grams : public Mass
 {
     DECLARE_SUBCLASS(Grams, Mass)
 
@@ -152,9 +153,10 @@ public:
     Grams(const LCreal value);
     Grams(const Mass& value);
 
-    static LCreal convertStatic(const Mass &n)      { return n.toMass() * KG2G; }
-    virtual LCreal toMass() const                   { return static_cast<LCreal>(val * G2KG); }
-    virtual LCreal fromMass(const LCreal a) const   { return a * KG2G; }
+    static LCreal convertStatic(const Mass &n)       { return n.toMass() * KG2G; }
+    // Mass interface
+    LCreal toMass() const override                   { return static_cast<LCreal>(val * G2KG); }
+    LCreal fromMass(const LCreal a) const override   { return a * KG2G; }
 };
 
 
@@ -163,7 +165,7 @@ public:
 // Base class:  Object -> Number -> Mass -> Slugs
 // Description:  KiloGram * 0.06852176585
 //------------------------------------------------------------------------------
-class Slugs : public Mass  
+class Slugs : public Mass
 {
     DECLARE_SUBCLASS(Slugs, Mass)
 
@@ -173,8 +175,9 @@ public:
     Slugs(const Mass& value);
 
     static LCreal convertStatic(const Mass &n)      { return n.toMass() * KG2SL; }
-    virtual LCreal toMass() const                   { return static_cast<LCreal>(val * SL2KG); }
-    virtual LCreal fromMass(const LCreal a) const   { return a * KG2SL; }
+    // Mass interface
+    LCreal toMass() const override                   { return static_cast<LCreal>(val * SL2KG); }
+    LCreal fromMass(const LCreal a) const override   { return a * KG2SL; }
 };
 
 } // End Basic namespace

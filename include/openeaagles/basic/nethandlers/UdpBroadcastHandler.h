@@ -44,11 +44,11 @@ public:
     virtual bool setSlotNetworkMask(const String* const msg);
 
 protected:
-    // NetHandler interface
-    virtual bool init();         // Initialize this socket handler
+    // PosixHandler interface
+    bool init() override;
 
     // PosixHandler interface
-    virtual bool bindSocket();   // Bind socket to address
+    bool bindSocket() override;
 
 private:
     char* networkMask;           // Network Mask

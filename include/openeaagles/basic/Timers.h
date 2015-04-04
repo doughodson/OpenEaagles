@@ -15,7 +15,7 @@ class Time;
 //==============================================================================
 // Class: Timer
 //
-// Description: General purpose up/down timer.  
+// Description: General purpose up/down timer.
 //
 // Slots:
 //    timerValue  <Time>      ! Timer interval (default: 0)
@@ -62,7 +62,7 @@ public:
     virtual void restart();
 
     // Sets an alarm to 'atime' seconds.  Returns true if the timer
-    // is active and one of the following conditions is met.  
+    // is active and one of the following conditions is met.
     //    direction == up   and timer >= atime
     //    direction == down and timer <= atime
     virtual bool alarm(const double atime);
@@ -108,13 +108,13 @@ private:
     static bool frz;           // Freeze all timers (freeze time)
     static Timer* timers[MAX_TIMERS];   // List of timers
     static unsigned int nTimers;        // Number of timers in the list
-    static long semaphore;              // Semaphore for the timer list 
+    static long semaphore;              // Semaphore for the timer list
 
     static void addToTimerList(Timer* timer);
     static void removeFromTimerList(Timer* timer);
 };
 
-// Inline functions
+//
 inline Timer::Type Timer::getType() const       { return dir; }
 inline double Timer::getCurrentTime() const     { return ctime; }
 inline double Timer::getAlarmTime() const       { return alarmTime; }

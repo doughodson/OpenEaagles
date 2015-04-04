@@ -16,7 +16,7 @@
 //        Sets a Volume derived instance with an LCreal.
 //
 //     set(const Volume& n)
-//        Sets, and converts if necessary, a Volume derived 
+//        Sets, and converts if necessary, a Volume derived
 //        instance with another Volume derived instance.
 //
 //     LCreal convert(const Volume& n)
@@ -30,8 +30,8 @@
 //      LCreal cubicMetersToLiters(const LCreal v) { return v * CM2L; }
 //      LCreal cubicFeetToInches(const LCreal v)   { return (v * CFT2CM) * CM2CIN; }
 //      LCreal cubicInchesToFeet(const LCreal v)   { return (v * CIN2CM) * CM2CFT; }
-//          
-//   Output stream operator:<< 
+//
+//   Output stream operator:<<
 //        ostream& operator<<(ostream& sout, const Volume& n)
 //        Sends "( <the Volume derived instance class name and value> )"
 //        to the output stream.
@@ -54,9 +54,9 @@ namespace Basic {
 
 // ----------------------------------------------------------------------------
 // Define Volumes Conversion Constants:
-// 
+//
 // These constants were obtained from the following websites, and are assumed
-// accurate as of 9/03/03.  
+// accurate as of 9/03/03.
 //
 // http://ts.nist.gov/ts/htdocs/230/235/h4402/appenc.pdf - National Institute of Standards and Technology
 // http://www.calculator.org/properties/volume.prop - Flow Simulation Calculator
@@ -65,12 +65,12 @@ namespace Basic {
 // ----------------------------------------------------------------------------
 
 //------------------------------------------------------------------------------
-// Class:  Volume  
+// Class: Volume
 // Base class:  Object -> Number -> Volume
 // Description:  Base class for volume.  Defined as a cubic meter which is
-// equivalent to an instance of CubicMeters with its value equal to 1.0.               
+// equivalent to an instance of CubicMeters with its value equal to 1.0.
 //------------------------------------------------------------------------------
-class Volume : public Number  
+class Volume : public Number
 {
     DECLARE_SUBCLASS(Volume, Number)
 
@@ -110,12 +110,12 @@ inline std::ostream& operator<<(std::ostream& sout, const Volume& n)
 
 
 //------------------------------------------------------------------------------
-// Class:  CubicMeters
+// Class: CubicMeters
 // Base class:  Object -> Number -> Volume -> CubicMeters
 // Description: An instance of CubicMeters with its value equal to 1.0 is one
 // base unit for volume.
 //------------------------------------------------------------------------------
-class CubicMeters : public Volume 
+class CubicMeters : public Volume
 {
     DECLARE_SUBCLASS(CubicMeters, Volume)
 
@@ -124,18 +124,19 @@ public:
     CubicMeters(const LCreal value);
     CubicMeters(const Volume& value);
 
-    static LCreal convertStatic(const Volume &n)    { return n.toVolume(); }
-    virtual LCreal toVolume() const                 { return static_cast<LCreal>(val); }
-    virtual LCreal fromVolume(const LCreal a) const { return a; }
+    static LCreal convertStatic(const Volume &n)      { return n.toVolume(); }
+    // Volume interface
+    LCreal toVolume() const override                  { return static_cast<LCreal>(val); }
+    LCreal fromVolume(const LCreal a) const override  { return a; }
 };
 
 
 //------------------------------------------------------------------------------
-// Class:  CubicFeet
+// Class: CubicFeet
 // Base class:  Object -> Number -> Volume -> CubicFeet
 // Description: Cubic Meters * 35.31467
 //------------------------------------------------------------------------------
-class CubicFeet : public Volume 
+class CubicFeet : public Volume
 {
     DECLARE_SUBCLASS(CubicFeet, Volume)
 
@@ -144,18 +145,19 @@ public:
     CubicFeet(const LCreal value);
     CubicFeet(const Volume& value);
 
-    static LCreal convertStatic(const Volume &n)    { return n.toVolume() * CM2CFT; }
-    virtual LCreal toVolume() const                 { return static_cast<LCreal>(val * CFT2CM); }
-    virtual LCreal fromVolume(const LCreal a) const { return a * CM2CFT; }
+    static LCreal convertStatic(const Volume &n)     { return n.toVolume() * CM2CFT; }
+    // Volume interface
+    LCreal toVolume() const override                 { return static_cast<LCreal>(val * CFT2CM); }
+    LCreal fromVolume(const LCreal a) const override { return a * CM2CFT; }
 };
 
 
 //------------------------------------------------------------------------------
-// Class:  CubicInches
+// Class: CubicInches
 // Base class:  Object -> Number -> Volume -> CubicInches
 // Description: Cubic Meters * 61023.74
 //------------------------------------------------------------------------------
-class CubicInches : public Volume 
+class CubicInches : public Volume
 {
     DECLARE_SUBCLASS(CubicInches, Volume)
 
@@ -164,18 +166,19 @@ public:
     CubicInches(const LCreal value);
     CubicInches(const Volume& value);
 
-    static LCreal convertStatic(const Volume &n)    { return n.toVolume() * CM2CIN; }
-    virtual LCreal toVolume() const                 { return static_cast<LCreal>(val * CIN2CM); }
-    virtual LCreal fromVolume(const LCreal a) const { return a * CM2CIN; }
+    static LCreal convertStatic(const Volume &n)     { return n.toVolume() * CM2CIN; }
+    // Volume interface
+    LCreal toVolume() const override                 { return static_cast<LCreal>(val * CIN2CM); }
+    LCreal fromVolume(const LCreal a) const override { return a * CM2CIN; }
 };
 
 
 //------------------------------------------------------------------------------
-// Class:  Liters
+// Class: Liters
 // Base class:  Object -> Number -> Volume -> Liters
 // Description: Cubic Meters * 1000
 //------------------------------------------------------------------------------
-class Liters : public Volume 
+class Liters : public Volume
 {
     DECLARE_SUBCLASS(Liters, Volume)
 
@@ -184,9 +187,10 @@ public:
     Liters(const LCreal value);
     Liters(const Volume& value);
 
-    static LCreal convertStatic(const Volume &n)    { return n.toVolume() * CM2L; }
-    virtual LCreal toVolume() const                 { return static_cast<LCreal>(val * L2CM); }
-    virtual LCreal fromVolume(const LCreal a) const { return a * CM2L; }
+    static LCreal convertStatic(const Volume &n)     { return n.toVolume() * CM2L; }
+    // Volume interface
+    LCreal toVolume() const override                 { return static_cast<LCreal>(val * L2CM); }
+    LCreal fromVolume(const LCreal a) const override { return a * CM2L; }
 };
 
 } // End Basic namespace

@@ -21,13 +21,13 @@ public:
    QQueue(const unsigned int qsize) : SIZE(qsize), in(0), n(0), semaphore(0)   { queue = new T[SIZE]; }
    QQueue(const QQueue<T> &q1) : SIZE(q1.SIZE), in(0), n(0), semaphore(0)      { queue = new T[SIZE]; }
    ~QQueue()                                                                   { delete[] queue; }
-   
+
    bool isEmpty() const           { return (n == 0); }
    bool isNotEmpty() const        { return (n != 0); }
    unsigned int entries() const   { return n; }
    bool isFull() const            { return (n >= SIZE); }
    bool isNotFull() const         { return (n < SIZE); }
-   
+
    // Puts an item at the back of the queue.
    bool put(T item) {
       lcLock( semaphore );

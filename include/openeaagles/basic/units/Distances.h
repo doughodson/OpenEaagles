@@ -89,7 +89,7 @@ public:
     void set(const Distance& n) { val = fromDistance(n.toDistance()); }
 
     virtual LCreal toDistance() const = 0;
-    virtual LCreal fromDistance(const LCreal) const = 0;  
+    virtual LCreal fromDistance(const LCreal) const = 0;
     LCreal convert(const Distance& n) { return fromDistance(n.toDistance()); }
 
 
@@ -161,9 +161,10 @@ public:
     Meters(const LCreal value);
     Meters(const Distance& value);
 
-    static LCreal convertStatic(const Distance& n)       { return n.toDistance(); }
-    virtual LCreal toDistance() const                    { return static_cast<LCreal>(val); }
-    virtual LCreal fromDistance(const LCreal a) const    { return a; }
+    static LCreal convertStatic(const Distance& n)        { return n.toDistance(); }
+    // Distance interface
+    LCreal toDistance() const override                    { return static_cast<LCreal>(val); }
+    LCreal fromDistance(const LCreal a) const override    { return a; }
 };
 
 
@@ -172,7 +173,7 @@ public:
 // Base class:  Object -> Number -> Distance -> CentiMeters
 // Description:  Meters * 100.0
 //------------------------------------------------------------------------------
-class CentiMeters : public Distance  
+class CentiMeters : public Distance
 {
     DECLARE_SUBCLASS(CentiMeters, Distance)
 
@@ -181,9 +182,10 @@ public:
     CentiMeters(const LCreal value);
     CentiMeters(const Distance& value);
 
-    static LCreal convertStatic(const Distance& n)       { return n.toDistance() * M2CM; }
-    virtual LCreal toDistance() const                    { return static_cast<LCreal>(val * CM2M); }
-    virtual LCreal fromDistance(const LCreal a) const    { return a * M2CM; }
+    static LCreal convertStatic(const Distance& n)        { return n.toDistance() * M2CM; }
+    // Distance interface
+    LCreal toDistance() const override                    { return static_cast<LCreal>(val * CM2M); }
+    LCreal fromDistance(const LCreal a) const override    { return a * M2CM; }
 };
 
 
@@ -193,7 +195,7 @@ public:
 // Base class:  Object -> Number -> Distance -> MicroMeters
 // Description:  Meters * 1,000,000.0
 //------------------------------------------------------------------------------
-class MicroMeters : public Distance  
+class MicroMeters : public Distance
 {
     DECLARE_SUBCLASS(MicroMeters, Distance)
 
@@ -202,9 +204,10 @@ public:
     MicroMeters(const LCreal value);
     MicroMeters(const Distance& value);
 
-    static LCreal convertStatic(const Distance& n)      { return n.toDistance() * M2UM; }
-    virtual LCreal toDistance() const                   { return static_cast<LCreal>(val * UM2M); }
-    virtual LCreal fromDistance(const LCreal a) const   { return a * M2UM; }
+    static LCreal convertStatic(const Distance& n)       { return n.toDistance() * M2UM; }
+    // Distance interface
+    LCreal toDistance() const override                   { return static_cast<LCreal>(val * UM2M); }
+    LCreal fromDistance(const LCreal a) const override   { return a * M2UM; }
 };
 
 //------------------------------------------------------------------------------
@@ -212,7 +215,7 @@ public:
 // Base class:  Object -> Number -> Distance -> MicroMeters
 // Description:  Meters * 1,000,000.0
 //------------------------------------------------------------------------------
-class Microns : public Distance  
+class Microns : public Distance
 {
     DECLARE_SUBCLASS(Microns, Distance)
 
@@ -221,16 +224,17 @@ public:
     Microns(const LCreal value);
     Microns(const Distance& value);
 
-    static LCreal convertStatic(const Distance& n)      { return n.toDistance() * M2UM; }
-    virtual LCreal toDistance() const                   { return static_cast<LCreal>(val * UM2M); }
-    virtual LCreal fromDistance(const LCreal a) const   { return a * M2UM; }
+    static LCreal convertStatic(const Distance& n)       { return n.toDistance() * M2UM; }
+    // Distance interface
+    LCreal toDistance() const override                   { return static_cast<LCreal>(val * UM2M); }
+    LCreal fromDistance(const LCreal a) const override   { return a * M2UM; }
 };
 //------------------------------------------------------------------------------
 // Class:  KiloMeters
 // Base class:  Object -> Number -> Distance -> KiloMeters
 // Description:  Meters / 1000.0
 //------------------------------------------------------------------------------
-class KiloMeters : public Distance  
+class KiloMeters : public Distance
 {
     DECLARE_SUBCLASS(KiloMeters, Distance)
 
@@ -239,9 +243,10 @@ public:
     KiloMeters(const LCreal value);
     KiloMeters(const Distance& value);
 
-    static LCreal convertStatic(const Distance& n)     { return n.toDistance() * M2KM; }
-    virtual LCreal toDistance() const                  { return static_cast<LCreal>(val * KM2M); }
-    virtual LCreal fromDistance(const LCreal a) const  { return a * M2KM; }
+    static LCreal convertStatic(const Distance& n)      { return n.toDistance() * M2KM; }
+    // Distance interface
+    LCreal toDistance() const override                  { return static_cast<LCreal>(val * KM2M); }
+    LCreal fromDistance(const LCreal a) const override  { return a * M2KM; }
 };
 
 
@@ -250,7 +255,7 @@ public:
 // Base class:  Object -> Number -> Distance -> Inches
 // Description:  Meters / 0.0254
 //------------------------------------------------------------------------------
-class Inches : public Distance  
+class Inches : public Distance
 {
     DECLARE_SUBCLASS(Inches, Distance)
 
@@ -259,9 +264,10 @@ public:
     Inches(const LCreal value);
     Inches(const Distance& value);
 
-    static LCreal convertStatic(const Distance& n)     { return n.toDistance() * M2IN; }
-    virtual LCreal toDistance() const                  { return static_cast<LCreal>(val * IN2M); }
-    virtual LCreal fromDistance(const LCreal a) const  { return a * M2IN; }
+    static LCreal convertStatic(const Distance& n)      { return n.toDistance() * M2IN; }
+    // Distance interface
+    LCreal toDistance() const override                  { return static_cast<LCreal>(val * IN2M); }
+    LCreal fromDistance(const LCreal a) const override  { return a * M2IN; }
 };
 
 
@@ -270,7 +276,7 @@ public:
 // Base class:  Object -> Number -> Distance -> Feet
 // Description:  Meters / 0.3048
 //------------------------------------------------------------------------------
-class Feet : public Distance  
+class Feet : public Distance
 {
     DECLARE_SUBCLASS(Feet, Distance)
 
@@ -279,9 +285,10 @@ public:
     Feet(const LCreal value);
     Feet(const Distance& value);
 
-    static LCreal convertStatic(const Distance& n)     { return n.toDistance() * M2FT; }
-    virtual LCreal toDistance() const                  { return static_cast<LCreal>(val * FT2M); }
-    virtual LCreal fromDistance(const LCreal a) const  { return a * M2FT; }
+    static LCreal convertStatic(const Distance& n)      { return n.toDistance() * M2FT; }
+    // Distance interface
+    LCreal toDistance() const override                  { return static_cast<LCreal>(val * FT2M); }
+    LCreal fromDistance(const LCreal a) const override  { return a * M2FT; }
 };
 
 
@@ -290,7 +297,7 @@ public:
 // Base class:  Object -> Number -> Distance -> NauticalMiles
 // Description:  Meters * 1851.999942
 //------------------------------------------------------------------------------
-class NauticalMiles : public Distance  
+class NauticalMiles : public Distance
 {
     DECLARE_SUBCLASS(NauticalMiles, Distance)
 
@@ -300,8 +307,9 @@ public:
     NauticalMiles(const Distance& value);
 
     static LCreal convertStatic(const Distance& n)    { return n.toDistance() * M2NM; }
-    virtual LCreal toDistance() const                 { return static_cast<LCreal>(val * NM2M); }
-    virtual LCreal fromDistance(const LCreal a) const { return a * M2NM; }
+    // Distance interface
+    LCreal toDistance() const override                 { return static_cast<LCreal>(val * NM2M); }
+    LCreal fromDistance(const LCreal a) const override { return a * M2NM; }
 };
 
 
@@ -310,7 +318,7 @@ public:
 // Base class:  Object -> Number -> Distance -> StatuteMiles
 // Description:  Meters * 1609.34313095
 //------------------------------------------------------------------------------
-class StatuteMiles : public Distance  
+class StatuteMiles : public Distance
 {
     DECLARE_SUBCLASS(StatuteMiles, Distance)
 
@@ -320,8 +328,9 @@ public:
     StatuteMiles(const Distance& value);
 
     static LCreal convertStatic(const Distance& n)    { return n.toDistance() * M2SM; }
-    virtual LCreal toDistance() const                 { return static_cast<LCreal>(val * SM2M); }
-    virtual LCreal fromDistance(const LCreal a) const { return a * M2SM; }
+    // Distance interface
+    LCreal toDistance() const override                 { return static_cast<LCreal>(val * SM2M); }
+    LCreal fromDistance(const LCreal a) const override { return a * M2SM; }
 };
 
 } // End Basic namespace

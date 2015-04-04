@@ -51,19 +51,19 @@ namespace Basic {
 //      getHSV(osg::Vec3 hsv)
 //          Returns the HSV components in a vector.
 //
-//      getHSV(osg::Vec3& vec) const;                
+//      getHSV(osg::Vec3& vec) const;
 //          Returns the hsv vector
 
-//      setHSV(const osg::Vec3& vec);                
+//      setHSV(const osg::Vec3& vec);
 //          Sets the hsv vector
 //
-//      virtual bool setHue(Number* const msg);           
+//      virtual bool setHue(Number* const msg);
 //          Sets the hue (see Hsv.h)
-//      virtual bool setSaturation(Number* const msg);    
+//      virtual bool setSaturation(Number* const msg);
 //          Sets the saturation (see Hsv.h)
-//      virtual bool setValue(Number* const msg);         
+//      virtual bool setValue(Number* const msg);
 //          Sets the value (see Hsv.h)
-//      virtual bool setAlpha(Number* const msg);         
+//      virtual bool setAlpha(Number* const msg);
 //          Sets the alpha value
 //
 //      static void hsv2rgb(osg::Vec4& rgb, const osg::Vec4& hsv);
@@ -101,10 +101,10 @@ public:
     void getHSV(osg::Vec3& vec) const;                // Returns the hsv vector
     bool setHSV(const osg::Vec3& vec);                // Sets the hsv vector
 
-    virtual bool setHue(Number* const msg);         // Sets the hue (see Hsv.h)
-    virtual bool setSaturation(Number* const msg);  // Sets the saturation (see Hsv.h)
-    virtual bool setValue(Number* const msg);       // Sets the value (see Hsv.h)
-    virtual bool setAlpha(Number* const msg);       // sets the alpha value
+    virtual bool setHue(Number* const msg);
+    virtual bool setSaturation(Number* const msg);
+    virtual bool setValue(Number* const msg);
+    virtual bool setAlpha(Number* const msg);
 
     static void hsv2rgb(osg::Vec4& rgb, const osg::Vec4& hsv); // Converts an HSVA color vector to a RGBA color vector
     static void hsv2rgb(osg::Vec3& rgb, const osg::Vec3& hsv); // Converts an HSV color vector to a RGB color vector

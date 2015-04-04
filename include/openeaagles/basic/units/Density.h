@@ -35,7 +35,7 @@ namespace Basic {
 // getSlotByIndex() for Density
 //     Object* Density::getSlotByIndex(const int si)
 
-// set() -- sets our density from some other density 
+// set() -- sets our density from some other density
 //     void Density::set(const Density& n)
 
 // convert() -- converts from one mass/volume ratio to another
@@ -50,7 +50,7 @@ namespace Basic {
 class Density : public Number
 {
     DECLARE_SUBCLASS(Density, Number)
-    
+
 public:
     Density(LCreal newDensity, const Mass* newMass, const Volume* newVolume);
     Density();
@@ -62,7 +62,7 @@ public:
 
     // slot table functions
     bool setSlotMass(const Mass* newMass);
-    bool setSlotVolume(const Volume* newVolume);          
+    bool setSlotVolume(const Volume* newVolume);
 
     private:
     SPtr<const Mass>     myMass;         // holds our mass type

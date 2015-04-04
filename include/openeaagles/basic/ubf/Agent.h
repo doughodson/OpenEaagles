@@ -39,6 +39,7 @@ class Agent : public Basic::Component
 public:
    Agent();
 
+   // Component interface
    void updateTC(const LCreal dt = 0.0) override;
    void updateData(const LCreal dt = 0.0) override;
    void reset() override;
@@ -87,7 +88,7 @@ class AgentTC : public Agent
 public:
    AgentTC();
 
-   // Basic::Component Interface
+   // Component interface
    void updateTC(const LCreal dt = 0.0) override;
    void updateData(const LCreal dt = 0.0) override;
 };

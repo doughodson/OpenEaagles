@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Classes: Terrain
+// Class: Terrain
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_Basic_Terrain_H__
 #define __Eaagles_Basic_Terrain_H__
@@ -30,7 +30,7 @@ class String;
 //    2) the final point [n-1] is at the maximum range
 //    3) The size of all arrays, n, must contain at least 2 points (ref point & max range)
 //------------------------------------------------------------------------------
-class Terrain : public Component 
+class Terrain : public Component
 {
     DECLARE_SUBCLASS(Terrain,Component)
 
@@ -135,9 +135,9 @@ public:
       );
 
    // aac() -- Compute Aspect Angle Cosines; computes the cosine of the angle
-   // inwhich the beam hits the terrain. 
+   // inwhich the beam hits the terrain.
    static bool aac(
-         LCreal* const aacData,        // The array for the aspect angle cosines 
+         LCreal* const aacData,        // The array for the aspect angle cosines
          const LCreal* const elevData, // The elevation array (meters)
          const bool* const maskFlags,  // (Optional) The array of mask flags
          const unsigned int n,         // Size of the arrays
@@ -151,7 +151,7 @@ public:
       const bool* const maskFlags,  // (Optional) The array of mask flags
       const unsigned int n,         // Size of the arrays
       const LCreal range,           // Range (meters)
-      const osg::Vec2& lv           // Lighting vector 
+      const osg::Vec2& lv           // Lighting vector
    );
 
    // Converts an elevation to a color (or gray scale)
@@ -167,7 +167,7 @@ public:
    //       red      @ 4/6 of maxz
    //       megenta  @ 5/6 of maxz
    //       white    @ >= maxz
-   //     
+   //
    static bool getElevationColor(
       const LCreal elevation,           // Elevation
       const LCreal minz,                // Min elevation (units: same as elevation)
