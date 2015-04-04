@@ -7,7 +7,7 @@
 #include "Graphic.h"
 
 namespace Eaagles {
-   
+
    namespace Basic {
       class Number;
    }
@@ -42,8 +42,9 @@ class Circle : public Graphic
     DECLARE_SUBCLASS(Circle,Graphic)
 public:
     Circle();
-    void drawFunc() override; 
-    
+
+    void drawFunc() override;
+
     // set functions
     virtual bool setRadius(const LCreal x)   { radius = x; return true; }
     virtual bool setFilled(const bool x)    { filled = x; return true; }
@@ -54,9 +55,8 @@ public:
     bool isFilled()         { return filled; }
     int getSlices()         { return slices; }
 
-    // Component interface
     bool event(const int event, Basic::Object* const obj = 0) override;
-    
+
 protected:
     bool setSlotRadius(const Basic::Number* const x);
     bool setSlotFilled(const Basic::Number* const x);
@@ -87,20 +87,19 @@ class OcclusionCircle : public Circle
 public:
     OcclusionCircle();
 
-    // BasicGL::Graphic interface
-    virtual void drawFunc();
-    
+    void drawFunc() override;
+
     // Set functions
     virtual bool setOuterRadius(const LCreal x)  { outerRadius = x; return true; }
 
     // get functions
     LCreal getOuterRadius()     { return outerRadius; }
-    
+
 protected:
-    bool setSlotOuterRadius(const Basic::Number* const x);        
+    bool setSlotOuterRadius(const Basic::Number* const x);
 
 private:
-    LCreal outerRadius;          // portion that is occluded         
+    LCreal outerRadius;          // portion that is occluded
 };
 
 
@@ -132,23 +131,23 @@ class Arc : public Circle
 public:
     Arc();
 
-    void drawFunc() override; 
-    
+    void drawFunc() override;
+
     // set functions
     virtual bool setStartAngle(const LCreal x) { startAngle = x; return true; }
     virtual bool setArcLength(const LCreal x)  { arcLength = x; return true; }
     virtual bool setIsConnected(const bool x) { connected = x; return true; }
-    
+
     // get functions
     LCreal getStartAngle()   { return startAngle; }
     LCreal getArcLength()    { return arcLength; }
-    bool  isConnected()     { return connected; }
+    bool  isConnected()      { return connected; }
 
 protected:
     bool setSlotStartAngle(const Basic::Number* const x);
     bool setSlotArcLength(const Basic::Number* const x);
     bool setSlotIsConnected(const Basic::Number* const x);
-    
+
 private:
     LCreal startAngle;
     LCreal arcLength;
@@ -171,20 +170,19 @@ class OcclusionArc : public Arc
 public:
     OcclusionArc();
 
-    // BasicGL::Graphic interface
     void drawFunc() override;
-    
+
     // Set functions
-    bool setOuterRadius(const LCreal x)  { outerRadius = x; return true; }    
+    bool setOuterRadius(const LCreal x)  { outerRadius = x; return true; }
 
     // get functions
-    LCreal getOuterRadius()     { return outerRadius; }
-    
+    LCreal getOuterRadius()              { return outerRadius; }
+
 protected:
-    bool setSlotOuterRadius(const Basic::Number* const x);        
-    
+    bool setSlotOuterRadius(const Basic::Number* const x);
+
 private:
-    LCreal outerRadius;          // portion that is occluded         
+    LCreal outerRadius;          // portion that is occluded
 };
 
 
@@ -203,7 +201,7 @@ class Point : public Graphic
     DECLARE_SUBCLASS(Point,Graphic)
 public:
     Point();
-    void drawFunc() override; 
+    void drawFunc() override;
 };
 
 
@@ -249,12 +247,12 @@ public:
 
     void drawFunc() override;
 
-    // set 
+    // set
     bool setSegments(const bool x)  { segment = x; return true; }
 
     // get segments indicator
     bool isSegmented() { return segment; }
-    
+
 protected:
     bool setSlotSegments(const Basic::Number* const x);
 
@@ -267,7 +265,7 @@ private:
 //
 // Factory name: Quad
 // Description:
-//      Simple openGL quad strip 
+//      Simple openGL quad strip
 //------------------------------------------------------------------------------
 class Quad : public Graphic
 {
@@ -310,7 +308,7 @@ public:
     bool isFan()                  { return fan; }
 
     // BasicGL::Graphic interface
-    void drawFunc() override; 
+    void drawFunc() override;
 
 protected:
     bool setSlotFan(const Basic::Number* const x);

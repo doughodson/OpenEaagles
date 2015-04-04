@@ -16,7 +16,7 @@ namespace BasicGL {
 // Class: MapPage
 //
 // Description: This is the generic MapPage, which can keep track of all types
-// of map-specific calculations, such as range, heading, displacement, etc.  It 
+// of map-specific calculations, such as range, heading, displacement, etc.  It
 // performs calculations that will allow all MapPage derived classes the ability to
 // easily draw and move map specific items, such as symbols and range rings.
 //
@@ -49,27 +49,27 @@ namespace BasicGL {
 //       The screen coordinates are still relative to the reference point and
 //       do not include the de-center displacement.
 //
-//    8) You can bring in heading and reference lat lon as either degrees or 
-//       radians, using the appropriate (setHeadingDeg, setHeadingRad) functions.  
+//    8) You can bring in heading and reference lat lon as either degrees or
+//       radians, using the appropriate (setHeadingDeg, setHeadingRad) functions.
 //       HOWEVER, when using an event call, all of it must be sent as degrees!
 //
 // Factory name: MapPage
 // Slots:
 //
 //   outerRadius           <Number> ! Radius (centered) of our outer circle (units) (default: 1.0)
-//   outerRadiusDecentered <Number> ! Radius (de-centered) of our outer arc (units) 
+//   outerRadiusDecentered <Number> ! Radius (de-centered) of our outer arc (units)
 //
 //   range        <Number>    ! our range, in nautical miles, of our map (default: 1.0)
 //   displacement <Number>    ! how far to translate when we are decentered (default: 0.0)
 //   centered     <Number>    ! are we centered, or de-centered (default: centered)
-// 
+//
 //   refLat       <Number>    ! reference latitude (degs) (default: 0)
 //   refLon       <Number>    ! reference longitude (degs) (default: 0)
-// 
+//
 //   refHdg       <Number>    ! reference heading (degs) (default: 0)
 //   northUp      <Number>    ! north up mode (default: true)
-// 
-// 
+//
+//
 // Inputs for the send commands are as follows:
 //      UPDATE_VALUE  = range (nautical miles)
 //      UPDATE_VALUE2 = heading (degrees)
@@ -86,7 +86,7 @@ class MapPage : public MfdPage
    DECLARE_SUBCLASS(MapPage, MfdPage)
 
 public:
-   MapPage();  
+   MapPage();
 
    // get functions
    double getReferenceLatDeg() const;  // reference latitude (degs)
@@ -105,7 +105,7 @@ public:
    bool   getCentered() const;         // centered flag
    bool   getNorthUp() const;          // north up flag
 
-   // set functions 
+   // set functions
    virtual bool setReferenceLatDeg(const double newLat); // reference latitude (degs)
    virtual bool setReferenceLonDeg(const double newLon); // reference longitude (degs)
    virtual bool setReferenceLatRad(const double newLat); // reference latitude (rads)
@@ -118,7 +118,7 @@ public:
    virtual bool setDisplacement(const LCreal newD);      // the de-centered displacement (units)
    virtual bool setCentered(const bool newC);            // the 'centered' flag
    virtual bool toggleCentered();
-   virtual bool setNorthUp(const bool x);                  
+   virtual bool setNorthUp(const bool x);
 
    // converts lat/lon to screen coordinates
    virtual bool latLon2Screen(const double lat, const double lon, LCreal* const screenX, LCreal* const screenY) const;
@@ -142,8 +142,9 @@ public:
    // convert viewport pixel position to lat / lon
    virtual void pixelsToLatLon(const int x, const int y, double &lat, double &lon);
 
-   // Basic::Component interface
-   void updateData(const LCreal dt = 0.0) override;  
+   // Page interface
+   void updateData(const LCreal dt = 0.0) override;
+   // MfdPage interface
    bool event(const int event, Basic::Object* const obj = 0) override;
 
 protected:
@@ -157,7 +158,7 @@ protected:
 
    // event functions
    virtual bool onUpdateRange(const Basic::Number* const newR);
-   virtual bool onUpdateHeading(const Basic::Number* const newH);       
+   virtual bool onUpdateHeading(const Basic::Number* const newH);
    virtual bool onUpdateReferenceLat(const Basic::Number* const newOL);
    virtual bool onUpdateReferenceLon(const Basic::Number* const newOL);
    virtual bool onUpdateCentered(const Basic::Number* const newC);
@@ -241,7 +242,7 @@ inline bool MapPage::setReferenceLonRad(const double newLon)
 inline bool MapPage::setHeadingDeg(const LCreal newHeading)
 {
    LCreal hdgRad = static_cast<LCreal>(Basic::Angle::D2RCC * newHeading);
-   heading = newHeading;  
+   heading = newHeading;
    headingSin = static_cast<LCreal>(std::sin(hdgRad));
    headingCos = static_cast<LCreal>(std::cos(hdgRad));
    return true;
@@ -290,7 +291,7 @@ inline bool MapPage::setCentered(const bool newC)
 inline bool MapPage::setNorthUp(const bool flg)
 {
    northUp = flg;
-   return true;    
+   return true;
 }
 
 inline bool MapPage::toggleCentered()

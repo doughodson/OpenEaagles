@@ -28,7 +28,7 @@ namespace BasicGL {
 //  1. ON_ENTRY
 //  2. ON_EXIT
 //  3. BUTTON_HIT
-//  4. ON_ANYKEY                                           
+//  4. ON_ANYKEY
 //
 // Public member functions:
 //  char* subpageName()
@@ -102,7 +102,7 @@ public:
    Page* subpage() const                        { return cp; }
 
    bool isPostDrawSubpage() const               { return postDraw1; }
-   
+
    virtual Basic::Pair* findSubpageByName(const char* const slotname);
    virtual Basic::Pair* findSubpageByType(const std::type_info& type);
 
@@ -120,7 +120,7 @@ public:
    virtual bool onKeyHit(const int key);
 
    // slottable functions
-   bool setPage(const Basic::Identifier* const pobj);     
+   bool setPage(const Basic::Identifier* const pobj);
    bool setSubpageStream (Basic::PairStream* const psobj);
    bool setSubpageSingle (Page* const pobj);
    bool setPagingEvent(Basic::PairStream* const peobj);
@@ -128,10 +128,11 @@ public:
    bool setSlotFocusSlavedToSubpage(const Basic::Number* const spfobj);
 
    // Graphic Interface
-   virtual void draw();
-   virtual Basic::Pair* findBySelectName(const GLuint name);
-
+   void draw() override;
+   Basic::Pair* findBySelectName(const GLuint name) override;
    bool event(const int event, Basic::Object* const obj = 0) override;
+
+   // Component interface
    void updateTC(const LCreal dt = 0.0) override;
    void updateData(const LCreal dt = 0.0) override;
    void reset() override;
@@ -143,7 +144,7 @@ protected:
 
    // Return our subpages
    Basic::PairStream* subPages()              { return subpages; }
-   
+
    // Manage our (sub)page stack
    bool clearSubpageStack();
    bool pushSubpage(const char* const name, Page* theCaller, Basic::Object* theArg = 0);

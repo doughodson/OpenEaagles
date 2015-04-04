@@ -140,9 +140,8 @@ public:
    // load our texture
    virtual void loadTexture();
 
-   // Image class functions
-   virtual bool setWidth(const unsigned int w);
-   virtual bool setHeight(const unsigned int h);
+   bool setWidth(const unsigned int w) override;
+   bool setHeight(const unsigned int h) override;
 
 protected:
    // Slot functions
@@ -171,7 +170,7 @@ private:
    int         minFilter;          // GL_NEAREST (default) or GL_LINEAR
 
    // glPixelTransferf() Attributes
-   GLfloat      redScale;           
+   GLfloat      redScale;
    GLfloat      redBias;
    GLfloat      greenScale;
    GLfloat      greenBias;

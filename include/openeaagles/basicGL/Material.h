@@ -12,7 +12,7 @@ namespace BasicGL {
 
 //------------------------------------------------------------------------------
 // Class: Material
-// 
+//
 // Description: Object which will hold materialistic information, which can then
 // have light applied to it.
 //   Ambient color - light coming from material scattered in all directions equally
@@ -42,7 +42,7 @@ class Material : public Basic::Component {
 
 public:
     Material();
-    
+
     // set data
     virtual bool setAmbientColor(osg::Vec4 x);
     virtual bool setAmbientColor(LCreal x, LCreal y, LCreal z, LCreal w = 1.0);
@@ -60,7 +60,7 @@ public:
     osg::Vec4& getEmissiveColor()       { return emissiveColor; }
     osg::Vec4& getSpecularColor()       { return specularColor; }
     LCreal     getShininess()           { return shininess; }
-   
+
 protected:
     bool setSlotAmbientColor(const Basic::PairStream* const x);
     bool setSlotAmbientColor(const Basic::Number* const x);
@@ -71,10 +71,10 @@ protected:
     bool setSlotSpecularColor(const Basic::PairStream* const x);
     bool setSlotSpecularColor(const Basic::Number* const x);
     bool setSlotShininess(const Basic::Number*const x);
-    
+
 private:
     osg::Vec4 ambientColor;     // ambient color
-    osg::Vec4 diffuseColor;     // diffuse color 
+    osg::Vec4 diffuseColor;     // diffuse color
     osg::Vec4 emissiveColor;    // emissive color
     osg::Vec4 specularColor;    // specular color
     LCreal shininess;           // shininess value

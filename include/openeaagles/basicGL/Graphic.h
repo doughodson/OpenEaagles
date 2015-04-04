@@ -101,7 +101,7 @@ class Material;
 //
 //      cursor(int* ln, int* cp)
 //          Returns true if text cursor should be seen within this
-//          object and the position of the cursor. 
+//          object and the position of the cursor.
 //
 //
 //      Color* getColor()
@@ -234,7 +234,7 @@ class Graphic : public Basic::Component
 public:
    Graphic();
 
-   Display* getDisplay(); 
+   Display* getDisplay();
    virtual void draw();
    virtual void drawFunc();
 
@@ -299,13 +299,13 @@ public:
 
    void lcSaveMatrix();
    void lcRestoreMatrix();
-   
+
    // Texture functions
    bool hasTexture() const                          { return (texture != 0); }
    GLuint getTexture() const                        { return texture; }
    bool setTextureName(const char* newName);
-   
-   // Set the GL texture id (Make sure you create a texture before you call this function!)   
+
+   // Set the GL texture id (Make sure you create a texture before you call this function!)
    virtual bool setTexture(const GLuint newTex);
 
    // Standard line width
@@ -329,12 +329,12 @@ public:
    bool setStippling(const bool x);
    bool setStippleFactor(const GLuint x);
    bool setStipplePattern(const GLushort x);
-   
+
    // Light functions
    bool setLightPosition(const LCreal x, const LCreal y, const LCreal z = 1, const LCreal w = 0);
    bool setLightPosition(osg::Vec4& newPos);
    osg::Vec4 getLightPos()                          { return lightPos; }
-   
+
 
    // Select (pick) functions
    GLuint getSelectName() const                     { return selName; }
@@ -345,7 +345,7 @@ public:
    bool isPostDrawComponents() const                { return postDraw; }
 
    virtual bool cursor(int* ln, int* cp) const;
-   
+
    // Select name incrementer (for automatic select name generation)
    // Note:  Starting value is 0x800000, so all manual select names
    // should be lower than this, so there is no confusion in the pick()
@@ -391,18 +391,18 @@ public: // Exceptions
     class ExpInvalidDisplayPtr : public Object::Exception {
         public:
             ExpInvalidDisplayPtr() : Exception() {}
-            virtual const char* getDescription() const     { return "display(): display/screen pointer is not set"; }
+            const char* getDescription() const override    { return "display(): display/screen pointer is not set"; }
     };
 
 protected:
-       
+
     // event handlers
     virtual bool onSetTextureId(const Basic::Number* const msg);
     virtual bool onSetLineWidthEvent(const Basic::Number* const msg);
     virtual bool onSetFlashRateEvent(const Basic::Number* const msg);
     virtual bool onSetVisibilityEvent(const Basic::Number* const msg);
 
-    // set slot functions 
+    // set slot functions
     virtual bool setSlotFlashRate(const Basic::Number* const msg);
     virtual bool setSlotLineWidth(const Basic::Number* const msg);
     virtual bool setSlotSelectName(const Basic::Number* const msg);
@@ -426,24 +426,24 @@ protected:
     virtual bool setSlotTranslateLight(Basic::PairStream* const msg);
 
     // Basic::Component interface
-    virtual void processComponents(            // Process our subcomponent list (which should be other Graphics)
+    void processComponents(            // Process our subcomponent list (which should be other Graphics)
          Basic::PairStream* const list,        // Source list of components
          const std::type_info& filter,         // Type filter
          Basic::Pair* const add = 0,           // Optional pair to add
          Basic::Component* const remove = 0    // Optional subcomponent to remove
-       );
+       ) override;
 
 private:
     void          initData();
     void          setupMatrix();
     void          setupMaterial();
-    
+
     Basic::PairStream* transforms;  // transformations
     osg::Matrix   m;                // transformation matrix
     osg::Matrix   m1;               // saved 'm'
     bool          haveMatrix;       // Have a transformation matrix flag
     bool          haveMatrix1;      // saved 'haveMatrix'
-    
+
     bool          postDraw;         // Post draw component (child) graphic
     GLuint        texture;          // Texture
     SPtr<Basic::Identifier> texName;   // Texture name
@@ -466,7 +466,7 @@ private:
     unsigned int     nn;            // number of normal vectors
 
     BasicGL::Display* displayPtr; // Points to our Display
-    
+
     GLuint         dlist;            // Possible Display list
     bool           noDisplayList;    // True to disable Display List
 
@@ -484,7 +484,7 @@ private:
     bool          mask;             // are we masking?
     Basic::Identifier* materialName;   // our material name
     BasicGL::Material* materialObj;   // material object, if we have one.
-    
+
     osg::Vec4 lightPos;             // light position relative to us (default is leave it where it was)
     bool lightMoved;                // our light is moving!
 };

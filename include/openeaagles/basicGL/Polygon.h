@@ -25,7 +25,7 @@ namespace BasicGL {
 //    bool isNormalVectorValid() const
 //       Returns true if the vector normal to this polygon has been computed.
 //       Calling calcNormal() will compute the normal vector for this polygon.
-//       
+//
 //    bool calcNormal()
 //       Computes the vector normal to this polygon.
 //
@@ -35,7 +35,7 @@ namespace BasicGL {
 //       containing this polygon.  Calling calcPlaneCoeff() will
 //       compute these coefficients for this polygon
 //
-//    bool arePlaneCoeffValid() const 
+//    bool arePlaneCoeffValid() const
 //       Returns true if the plane equation coefficients for this
 //       polygon are valid.  Calling calcPlaneCoeff() will compute
 //       these coefficients for this polygon.
@@ -94,7 +94,7 @@ public:
    void setLayer(const unsigned int newLayer);
 
    // Graphic Interface
-   void drawFunc() override; 
+   void drawFunc() override;
 
 private:
    osg::Vec4      coeff;      // Coefficients of the plane equation

@@ -37,7 +37,7 @@ namespace BasicGL {
 //                      0
 //                      50
 //                  }
-//  This will remain rgb 1 0 1 until the value hits 50 or more, in which 
+//  This will remain rgb 1 0 1 until the value hits 50 or more, in which
 //  it switches to the next color
 //
 //  bool ColorRotary::determineColor(const LCreal value)
@@ -62,13 +62,13 @@ public:
     virtual bool determineColor(const LCreal value);
 
 protected:
-    bool setSlotColors(Basic::PairStream* const newStream);    
+    bool setSlotColors(Basic::PairStream* const newStream);
     bool setSlotValues(const Basic::PairStream* const newStream);
 
 private:
     static const unsigned int MAX_VALUES = 50;
     Basic::PairStream* myColors;              // our colors (rgba value)
-    LCreal myValues[MAX_VALUES];              // our values 
+    LCreal myValues[MAX_VALUES];              // our values
     unsigned int numVals;                    // number of values
 };
 

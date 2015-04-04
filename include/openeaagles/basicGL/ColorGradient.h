@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: ColorGradient
 // Description:  List of colors that will return a given color based on the idx.
-// This will be used by graphics to create a per-vertex color, which makes a 
-// gradient.  
+// This will be used by graphics to create a per-vertex color, which makes a
+// gradient.
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_BasicGL_ColorGradient_H__
 #define __Eaagles_BasicGL_ColorGradient_H__
@@ -20,15 +20,15 @@ class ColorGradient : public Basic::Color {
 
 public:
     ColorGradient();
-    
+
     Basic::Color* getColorByIdx(const int idx);
 
 protected:
-    bool setSlotColors(Basic::PairStream* const newStream);    
-    
+    bool setSlotColors(Basic::PairStream* const newStream);
+
 private:
     static const int MAX_VALUES = 50;
-    Basic::PairStream* myColors;             
+    Basic::PairStream* myColors;
 };
 
 } // End BasicGL namespace

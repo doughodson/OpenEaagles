@@ -35,12 +35,12 @@ class Material;
 //    setOrtho() all define the display's window or viewport, which usually
 //    need to be set before the window is created.
 //
-// 3) On clear depth() - by default, this value is set to -1, which will 
+// 3) On clear depth() - by default, this value is set to -1, which will
 //    DISABLE the GL_DEPTH_TEST.  This in turn will cause all drawing to use the
 //    painter's algorithm.  However, if you enable GL_DEPTH_TEST, the algorithm is
 //    not adhered to, so the drawing order will appear "reversed".  So, if you are planning
 //    on using the Z buffer to adjust graphical depth, be aware that you may need
-//    to adjust your graphical positions according to the buffer, and not the order in 
+//    to adjust your graphical positions according to the buffer, and not the order in
 //    which they are drawn.
 //
 //
@@ -72,7 +72,7 @@ class Material;
 //  rightBracketChar <Number>      ! Right bracket character (default: ']')
 //  rightBracketChar <String>      ! Right bracket character (default: ']')
 //  reverseVideoBrackets  <Number> ! Reverse video brackets flag:
-//                                 ! If true, brackets are drawn with reversed video font, 
+//                                 ! If true, brackets are drawn with reversed video font,
 //                                 ! otherwise follow the field's drawing mode.  (default: false)
 //  fonts             <PairStream> ! List of fonts (default: none)
 //  clearDepth        <number>     ! clear depth; range: [ 0, 1 ] or negative for no depth buffer (default: -1.0)
@@ -273,9 +273,9 @@ public:
    bool isFontUnderlined() const;               // Is the underline font selected?
 
    // Sets the normal text font
-   bool setNormalFont(Font* const f); 
+   bool setNormalFont(Font* const f);
    bool setNormalFont(const char* const fontName);
-   bool setNormalFont(const Basic::Identifier* const fontName); 
+   bool setNormalFont(const Basic::Identifier* const fontName);
 
    // Sets the current font) based on the font mode flags.
    void selectFont(const bool reversed, const bool underlined, Font* newFont = 0);
@@ -346,7 +346,7 @@ public:
    bool setSlotClearDepth(const Basic::Number* const msg);
    bool setSlotDisplayOrientation(const Basic::String* const msg);
    bool setSlotMaterials(Basic::PairStream* const msg);
-   bool setSlotMaterials(Material* const msg);    
+   bool setSlotMaterials(Material* const msg);
    bool setSlotAntialias(const Basic::Number* const msg);
 
    // sync double buffer swapping flag
@@ -354,6 +354,7 @@ public:
    virtual bool isOkToSwap() const;
    virtual void setOkToSwap(const bool x);
 
+   // Page interface
    void updateTC(const LCreal dt = 0.0) override;
    void reset() override;
 
@@ -370,14 +371,14 @@ private:
 
     bool processSubdisplays();
     bool processTextures();
-    bool processMaterials(); 
-   
+    bool processMaterials();
+
     Basic::String* name;               // Display Name
     Basic::PairStream* subdisplays;    // Sub-displays
 
     Graphic* focusPtr;                 // Input focus
     Basic::PairStream* materials;      // list of material objects
-    
+
     Basic::PairStream* textures;       // List of textures
 
     GLsizei  vpX, vpY, vpWidth, vpHeight;                   // viewport size
@@ -402,7 +403,7 @@ private:
 
     Basic::PairStream* fontList;       // List of fonts
     Font* currentFont;                 // Current font
-    Font* normalFont;                  // Normal font 
+    Font* normalFont;                  // Normal font
     Basic::Identifier* normalFontName; // Normal font name
     bool    reversedFlg;               // Current font setting
     bool    underlinedFlg;             // Current font setting
@@ -425,7 +426,7 @@ inline Display::Orientation Display::getDisplayOrientation() const   { return or
 inline bool Display::isDisplayOrientation(const Orientation o) const { return (o == getDisplayOrientation()); }
 inline bool Display::isAntialiasing() const                 { return antialias; }
 inline const osg::Vec4& Display::getClearColor() const      { return clearColor; }
-inline GLclampd Display::getClearDepth() const              { return clearDepth; } 
+inline GLclampd Display::getClearDepth() const              { return clearDepth; }
 inline void Display::setClearDepth(const GLclampd depth)    { clearDepth = depth; }
 
 inline void Display::setDisplayOrientation(const Orientation o) { orientation = o; }

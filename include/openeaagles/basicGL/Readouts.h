@@ -40,13 +40,13 @@ class AsciiText : public Field {
 public:
    AsciiText();
 
-   virtual char filterInputEvent(const int event, const int tc);
-   virtual bool isValidInputPosition(const int tc);
+   // Field interface
+   char filterInputEvent(const int event, const int tc) override;
+   bool isValidInputPosition(const int tc) override;
+   bool event(const int key, Basic::Object* const obj = 0) override;
+
    virtual bool setTextString(const Basic::String* const stsobj);
    virtual bool setTextList(const Basic::List* const stlobj);
-
-   // Component interface
-   bool event(const int key, Basic::Object* const obj = 0) override;
 };
 
 //------------------------------------------------------------------------------
@@ -61,6 +61,7 @@ class Cursor : public Field
 
 public:
    Cursor();
+   // Field interface
    void updateData(const LCreal dt = 0.0) override;
 };
 
@@ -85,7 +86,7 @@ public:
 //   minValid        <Number>    ! Minimum valid input (default: UNDEFINED_VALUE)
 //   blankIfZero     <Boolean>   ! Display blanks if value is zero
 //
-// Example formats: 
+// Example formats:
 //
 //    ######    // Integer
 //    +#####    // Integer w/plus sign
@@ -123,7 +124,7 @@ class NumericReadout : public Field
    DECLARE_SUBCLASS(NumericReadout,Field)
 
 public:
-   NumericReadout(); 
+   NumericReadout();
 
    int getInt() const               { return int(num); }
    double getFloat() const          { return num; }
@@ -134,19 +135,17 @@ public:
    void setMaxValue(const int v)    { maxNum = double(v); redisplay(); }
    void setMaxValue(const double v) { maxNum = v; redisplay(); }
 
-   virtual double getInputValue() const;
-   virtual bool isInputValueValid() const;
-
-   virtual char filterInputEvent(const int event, const int tc);
+   // Field interface
+   double getInputValue() const override;
+   bool isInputValueValid() const override;
+   char filterInputEvent(const int event, const int tc) override;
+   bool event(const int key, Basic::Object* const obj = 0) override;
+   void updateData(const LCreal dt = 0.0) override;
 
    //event handler macro functions
    virtual bool onUpdateValue(const Basic::Float* const ouvobj);
    virtual bool onUpdateValue(const Basic::Integer* const ouvobj);
    virtual bool onUpdateValue(const Basic::Number* const ouvobj);
-   
-   // Component interface
-   bool event(const int key, Basic::Object* const obj = 0) override;
-   void updateData(const LCreal dt = 0.0) override;
 
 protected:
    virtual bool setSlotFloatToBeDisplayed(const Basic::Float* const msg);
@@ -162,7 +161,7 @@ protected:
    virtual bool setSlotMaxValid(const Basic::Number* const msg);
    virtual bool setSlotMinValid(const Basic::Number* const msg);
    virtual bool setSlotBlankZero(const Basic::Number* const msg);
-   
+
    virtual void makeText();
    virtual void redisplay();
    virtual void reformat(const char* const example);
@@ -177,7 +176,7 @@ protected:
    char minusChar;               // Negative value character
    char dpChar;                  // Decimal point character
    char undefinedChar;           // Undefined value character
-   char overflowChar;            // Overflow character  
+   char overflowChar;            // Overflow character
    bool postSign;                // If true, sign char is at end of string
 
    static Reformat* reformatter; // Generates format statements by example
@@ -196,7 +195,7 @@ private:
 //
 // Factory name: HexReadout
 //
-// Example formats: 
+// Example formats:
 //
 //    ######    // Hex number
 //    00000#    // Hex number w/leading zeros
@@ -206,13 +205,14 @@ class HexReadout : public NumericReadout {
    DECLARE_SUBCLASS(HexReadout,NumericReadout)
 
 public:
-   HexReadout(); 
-   virtual void makeText();
-   virtual char filterInputEvent(const int event, const int tc);
-   virtual double getInputValue() const;
+   HexReadout();
+
+   void makeText() override;
+   char filterInputEvent(const int event, const int tc) override;
+   double getInputValue() const override;
 
 protected:
-    virtual void reformat(const char* const example);
+   void reformat(const char* const example) override;
 };
 
 
@@ -221,7 +221,7 @@ protected:
 //
 // Factory name: OctalReadout
 //
-// Example formats: 
+// Example formats:
 //
 //    ######    // Octal number
 //    00000#    // Octal number w/leading zeros
@@ -231,13 +231,13 @@ class OctalReadout : public NumericReadout {
    DECLARE_SUBCLASS(OctalReadout,NumericReadout)
 
 public:
-   OctalReadout(); 
-   virtual void makeText();
-   virtual char filterInputEvent(const int event, const int tc);
-   virtual double getInputValue() const;
+   OctalReadout();
+   void makeText() override;
+   char filterInputEvent(const int event, const int tc) override;
+   double getInputValue() const override;
 
 protected:
-    virtual void reformat(const char* const example);
+    void reformat(const char* const example) override;
 };
 
 
@@ -246,7 +246,7 @@ protected:
 //
 // Factory name: TimeReadout
 //
-// Example formats: 
+// Example formats:
 //
 //    HH:MM:SS      // Hours, minutes and seconds
 //    0H:MM:SS.S    // Hours (w/leading zero), minutes and seconds decimal
@@ -266,13 +266,13 @@ class TimeReadout : public NumericReadout {
 
 public:
    enum TimeMode { invalid, hhmmss, hhmm, hh, mmss, mm, ss };
-   TimeReadout(); 
-   virtual char filterInputEvent(const int event, const int tc);
-   virtual double getInputValue() const;
+   TimeReadout();
+   char filterInputEvent(const int event, const int tc) override;
+   double getInputValue() const override;
 
 protected:
-   virtual void makeText();
-   virtual void reformat(const char* const example);
+   void makeText() override;
+   void reformat(const char* const example) override;
    TimeMode tmode;
 };
 
@@ -319,12 +319,12 @@ class DirectionReadout : public NumericReadout {
 public:
    enum DirMode { invalid, ddmmss, ddmm, dd };
    DirectionReadout();
-   virtual char filterInputEvent(const int event, const int tc);
-   virtual double getInputValue() const;
+   char filterInputEvent(const int event, const int tc) override;
+   double getInputValue() const override;
 
 protected:
-   virtual void makeText();
-   virtual void reformat(const char* const example);
+   void makeText() override;
+   void reformat(const char* const example) override;
    DirMode tmode;
 };
 
@@ -356,7 +356,7 @@ class LatitudeReadout : public DirectionReadout {
     DECLARE_SUBCLASS(LatitudeReadout,DirectionReadout)
 public:
     LatitudeReadout();
-    virtual char filterInputEvent(const int event, const int tc);
+    char filterInputEvent(const int event, const int tc) override;
 protected:
    //virtual void makeText();
 };
@@ -391,7 +391,7 @@ class LongitudeReadout : public DirectionReadout {
     DECLARE_SUBCLASS(LongitudeReadout,DirectionReadout)
 public:
     LongitudeReadout();
-    virtual char filterInputEvent(const int event, const int tc);
+    char filterInputEvent(const int event, const int tc) override;
 protected:
    //virtual void makeText();
 };

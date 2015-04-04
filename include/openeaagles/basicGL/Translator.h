@@ -41,7 +41,7 @@ public:
     void draw() override;
 
     // Component interface
-    bool event(const int event, Object* const obj = 0) override;  
+    bool event(const int event, Object* const obj = 0) override;
 
 private:
     // event functions

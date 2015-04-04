@@ -119,7 +119,7 @@ namespace BasicGL {
 //
 //  setChar(char c)
 //      Sets the character to c if in input mode.
-//  
+//
 //  backSpace(int ns = 1)
 //      Backs up one space if in input mode.
 //
@@ -152,7 +152,7 @@ namespace BasicGL {
 //
 //  setLinked(bool f)
 //      Sets linked to f.
-// 
+//
 //  isInheritColor()
 //      Returns true if inheritColor is on.
 //
@@ -161,8 +161,8 @@ namespace BasicGL {
 //
 //  cursor(int* ln, int* cp)
 //      Returns true if text cursor should be seen within this
-//        object and the position of the cursor. 
-// 
+//        object and the position of the cursor.
+//
 //  onSetLine(Number* oslobj)
 //      Sets the line number and returns true.
 //
@@ -177,8 +177,8 @@ class Field : public Graphic {
 
 public:
    enum Mode { display, input };
-   
-   enum { 
+
+   enum {
           // display modes
           highlight  = 0x0001,
           underline  = 0x0002,
@@ -186,7 +186,7 @@ public:
           special    = 0x0008,
           vertical   = 0x0010,
           brackets   = 0x0020,
-          
+
           // Internal use: display mode was set by the setSlotXXXX()
           highlight1 = 0x1001,
           underline1 = 0x1002,
@@ -235,12 +235,12 @@ public:
    virtual int setExample(const char* const example);
    virtual char getChar();
    virtual void setChar(const char c);
-   
+
    virtual void backSpace(const int ns = 1);
    virtual void advanceSpace(const int ns = 1);
    virtual bool onForwardSpace();
    virtual bool onBackSpace();
- 
+
    virtual char filterInputEvent(const int event, const int tc);
    virtual bool isValidInputPosition(const int tc);
 
@@ -248,27 +248,26 @@ public:
    virtual bool isInputValueValid() const;
    int getInputCharacterPosition() const            { return icp; }
 
-   bool setInputCharacterPosition(const unsigned int); 
+   bool setInputCharacterPosition(const unsigned int);
 
    bool isLinked() const                            { return linked; }
    void setLinked(const bool f)                     { linked = f; }
-   
+
    bool isInheritColor() const                      { return inheritColor; }
    bool setInheritColor(const bool i)               { inheritColor = i; return true; }
 
-   virtual bool cursor(int* ln, int* cp) const;
-   
    virtual bool onSetLine(const Basic::Number* const oslobj);
-   virtual bool onSetColumn(const Basic::Number* const oscobj); 
+   virtual bool onSetColumn(const Basic::Number* const oscobj);
 
    const Basic::String& getInputExample() const  { return inputExample; }
-   int getCharacterPos() const                   { return icp; } 
+   int getCharacterPos() const                   { return icp; }
 
    // Graphic interface
-   void drawFunc() override; 
+   bool cursor(int* ln, int* cp) const override;
+   void drawFunc() override;
+   bool event(const int event, Object* const obj = 0) override;
 
    // Component interface
-   bool event(const int event, Object* const obj = 0) override;
    void updateData(const LCreal dt = 0.0) override;
 
 

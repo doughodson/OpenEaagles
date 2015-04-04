@@ -43,12 +43,12 @@ public:
    // Write the BMP file
    bool writeFile();
 
-   // Texture class functions
-   virtual void loadTexture();
+   // Texture interface
+   void loadTexture() override;
 
 protected:
    bool setSlotTexturePath(Basic::String* const s);
-   bool setSlotTextureFileName(Basic::String* const s);  
+   bool setSlotTextureFileName(Basic::String* const s);
 
 private:
    void initData();

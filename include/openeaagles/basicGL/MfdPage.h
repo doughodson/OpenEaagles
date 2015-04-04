@@ -11,11 +11,11 @@ namespace BasicGL {
 
 // -------------------------------------------------------------------------------
 // Class: MfdPage
-// 
+//
 // Description: Base class page for any derived page that wishes to have OSB hits
-// automatically recognized and used.  This sets up 40 OSB hits, similar to a 10 x 
+// automatically recognized and used.  This sets up 40 OSB hits, similar to a 10 x
 // 10 bezel display.  Then any event that is passed with the OSB hits will call
-// the respective function, and derived classes may override the function and 
+// the respective function, and derived classes may override the function and
 // do specific actions.
 //
 // Factory name: MfdPage
@@ -23,12 +23,12 @@ namespace BasicGL {
 class MfdPage : public BasicGL::Page
 {
     DECLARE_SUBCLASS(MfdPage, BasicGL::Page)
-    
+
 public:
-    MfdPage();  
-    
+    MfdPage();
+
     // Basic::Component interface
-    bool event(const int event, Basic::Object* const obj = 0) override;    
+    bool event(const int event, Basic::Object* const obj = 0) override;
 
 protected:
     // ---

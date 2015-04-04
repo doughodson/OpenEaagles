@@ -15,17 +15,17 @@ class FTGLOutlineFont;
 #endif
 
 namespace Eaagles {
-namespace Basic { class Color; } 
+namespace Basic { class Color; }
 namespace BasicGL {
 
 //----------------------------------------------------------------------------------------------------------------------------------
 // Class: FtglFonts, FtglBitmapFont, FtglExtrdFont, FtglOutlineFont, FtglPixmapFont, FtglPolygonFont, FtglTextureFont
 // Base class:  Object -> Font -> FtglFonts -> (all other fonts are derived from FtglFonts)
-// 
-// Description: all the Freetype font classes 
+//
+// Description: all the Freetype font classes
 //---------------------------------------------------------------------------------
 // Class: FtglFonts
-// Description:  Abstract font class for the Freetype2 fonts.  This uses freetype 2 
+// Description:  Abstract font class for the Freetype2 fonts.  This uses freetype 2
 // and Open GL (FTGL) to draw the fonts.
 //
 // Factory name: FTGLFonts
@@ -35,12 +35,12 @@ namespace BasicGL {
 // public methods (member functions):
 //
 //  setFaceSize(Number* faceSize) - sets the face size in points (1/72 of an inch per point)
-//      - this is different than setting character width and height, as it 
+//      - this is different than setting character width and height, as it
 //      - expands and retracts the font proportionally.
 //
 //  unsigned int getFaceSize()
 //  -- Gets the face size of the font.
-// 
+//
 // All font files NEED the following info to work correctly:
 //      - path to the font  "path"  ie.. "C:WINNT\FONTS"
 //      - font name         "file"  ie.. "arial.ttf"
@@ -49,7 +49,7 @@ namespace BasicGL {
 // The fontWidth and fontHeight will SCALE the individual width and height, however
 // faceSize will SET the actual font width and height symmetrically (ie.. X by X instead
 // of X by Y).  You can both set the fontWidth and Height and faceSize, and that
-// will scale and then draw a font of certain facesize. 
+// will scale and then draw a font of certain facesize.
 //
 //---------------------------------------------------------------------------------
 class FtglFonts : public Font
@@ -57,17 +57,17 @@ class FtglFonts : public Font
     DECLARE_SUBCLASS(FtglFonts,Font)
 
 public:
-    FtglFonts();  
-    
-    // Slot table Set Functions 
+    FtglFonts();
+
+    // Slot table Set Functions
     virtual bool setFaceSize(const Basic::Number* const faceSize);
-    
+
     // Get Functions
-    unsigned int getFaceSize()      { return fSize; }; 
-    
+    unsigned int getFaceSize()      { return fSize; };
+
 private:
     static const int DEFAULT_FACE_SIZE;
-    int fSize;      // face size 
+    int fSize;      // face size
 };
 
 //------------------------------------------------------------------------------
@@ -95,9 +95,10 @@ class FtglBitmapFont : public FtglFonts
 public:
     FtglBitmapFont();
 
-    virtual void outputText(const double x, const double y, const char* txt, const int n, const bool vf = false, const bool rf = false);
-    virtual void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false);
-    virtual void loadFont();
+    // Font interface
+    void outputText(const double x, const double y, const char* txt, const int n, const bool vf = false, const bool rf = false) override;
+    void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false) override;
+    void loadFont() override;
 };
 
 //------------------------------------------------------------------------------
@@ -108,7 +109,7 @@ public:
 //   depth         <Number>    ! Depth (default: 5.0f)
 //
 // public member functions:
-//   setDepth(const Basic::Number* const newDepth) 
+//   setDepth(const Basic::Number* const newDepth)
 //   -- sets the depth of the extruded font
 //
 //   outputText(double x, double y, char* txt, int n, bool vf)
@@ -129,10 +130,11 @@ class FtglExtrdFont : public FtglFonts
 public:
     FtglExtrdFont();
 
-    virtual void outputText(const double x, const double y, const char* txt, const int n, const bool vf = false, const bool rf = false);
-    virtual void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false);
-    virtual void loadFont();
-    
+    // Font interface
+    void outputText(const double x, const double y, const char* txt, const int n, const bool vf = false, const bool rf = false) override;
+    void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false) override;
+    void loadFont() override;
+
     // slot table functions
     bool setDepth(const Basic::Number* const newDepth);
 
@@ -166,9 +168,10 @@ class FtglOutlineFont : public FtglFonts
 public:
     FtglOutlineFont();
 
-    virtual void outputText(const double x, const double y, const char* txt, const int n, const bool vf = false, const bool rf = false);
-    virtual void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false);
-    virtual void loadFont();
+    // Font interface
+    void outputText(const double x, const double y, const char* txt, const int n, const bool vf = false, const bool rf = false) override;
+    void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false) override;
+    void loadFont() override;
 };
 
 //------------------------------------------------------------------------------
@@ -196,9 +199,10 @@ class FtglPixmapFont : public FtglFonts
 public:
     FtglPixmapFont();
 
-    virtual void outputText(const double x, const double y, const char* txt, const int n, const bool vf = false, const bool rf = false);
-    virtual void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false);
-    virtual void loadFont();
+    // Font interface
+    void outputText(const double x, const double y, const char* txt, const int n, const bool vf = false, const bool rf = false) override;
+    void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false) override;
+    void loadFont() override;
 };
 
 //------------------------------------------------------------------------------
@@ -226,9 +230,10 @@ class FtglPolygonFont : public FtglFonts
 public:
     FtglPolygonFont();
 
-    virtual void outputText(const double x, const double y, const char* txt, const int n, const bool vf = false, const bool rf = false);
-    virtual void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false);
-    virtual void loadFont();
+    // Font interface
+    void outputText(const double x, const double y, const char* txt, const int n, const bool vf = false, const bool rf = false) override;
+    void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false) override;
+    void loadFont() override;
 };
 
 //------------------------------------------------------------------------------
@@ -259,13 +264,14 @@ class FtglHaloFont : public FtglFonts
 public:
     FtglHaloFont();
 
-    virtual void outputText(const double x, const double y, const char* txt, const int n, const bool vf = false, const bool rf = false);
-    virtual void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false);
-    virtual void loadFont();
-    
+    // Font interface
+    void outputText(const double x, const double y, const char* txt, const int n, const bool vf = false, const bool rf = false) override;
+    void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false) override;
+    void loadFont() override;
+
     Basic::Color* getHaloColor()    { return haloColor; }
     float getHaloLineWidth()        { return linewidth; }
-    FTGLOutlineFont* getOutline()    { return outline; }
+    FTGLOutlineFont* getOutline()   { return outline; }
 
 protected:
     bool setHaloColor(Basic::Color* x);
@@ -302,9 +308,10 @@ class FtglTextureFont : public FtglFonts
 public:
     FtglTextureFont();
 
-    virtual void outputText(const double x, const double y, const char* txt, const int n, const bool vf = false, const bool rf = false);
-    virtual void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false);
-    virtual void loadFont();
+    // Font interface
+    void outputText(const double x, const double y, const char* txt, const int n, const bool vf = false, const bool rf = false) override;
+    void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false) override;
+    void loadFont() override;
 };
 
 } // End BasicGL namespace

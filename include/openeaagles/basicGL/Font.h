@@ -8,7 +8,7 @@
 #include <GL/gl.h>
 
 namespace Eaagles {
-   
+
    namespace Basic {
       class Number;
       class List;
@@ -139,7 +139,7 @@ class Font : public Basic::Object {
     DECLARE_SUBCLASS(Font,Basic::Object)
 
 public:
-    static const size_t MAX_MESSAGE_LENGTH = 256; // Max length of character buffers 
+    static const size_t MAX_MESSAGE_LENGTH = 256; // Max length of character buffers
 
 public:
     Font();
@@ -147,10 +147,10 @@ public:
     virtual void outputText(const double x, const double y, const char* txt, const int n, const bool vf = false, const bool rf = false) =0;
     virtual void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false) =0;
     virtual void position(const int ln, const int cp, GLdouble& px, GLdouble& py) const;
-    
+
     virtual void setTextOrigin(const GLdouble x, const GLdouble y);
 
-    LCreal getCharacterSpacing() const                  { return charSpacing; }    
+    LCreal getCharacterSpacing() const                  { return charSpacing; }
     void setCharacterSpacing(const LCreal v)            { charSpacing = v; }
 
     LCreal getLineSpacing() const                       { return lineSpacing; }
@@ -158,16 +158,16 @@ public:
 
     GLdouble getFontWidth() const                       { return fWidth; }
     void setFontWidth(const GLdouble v)                 { fWidth = v; }
-    
+
     GLdouble getFontHeight() const                      { return fHeight; }
     void setFontHeight(const GLdouble v)                { fHeight = v; }
-    
+
     GLuint getBase() const                              { return b; }
     void setBase(const GLuint nb)                       { b = nb; }
 
     GLuint getBitmapWidth() const                       { return bWidth; }
     void setBitmapWidth(const GLuint v)                 { bWidth = v; }
-    
+
     GLuint getBitmapHeight() const                      { return bHeight; }
     void setBitmapHeight(const GLuint v)                { bHeight = v; }
 
@@ -182,12 +182,12 @@ public:
 
     const char* fontDirectory() const                   { return fontPath; }
     const char* filename() const                        { return fontFile; }
-    
+
 public: // Exceptions
     class ExpInvalidFont : public Basic::Object::Exception {
         public:
             ExpInvalidFont() : Exception() {}
-            virtual const char* getDescription() const     { return "font is invalid"; }
+            const char* getDescription() const override     { return "font is invalid"; }
     };
 
 protected:
@@ -204,13 +204,13 @@ protected:
     bool setSlotLineSpacing(const Basic::Number* const newLineSpacing);
 
 
-    static const size_t MSG_BUF_LEN = (MAX_MESSAGE_LENGTH+1); // Max length of character buffers 
+    static const size_t MSG_BUF_LEN = (MAX_MESSAGE_LENGTH+1); // Max length of character buffers
     int xferChars(char* const outp, const size_t BUF_SIZE, const char* const inp, const unsigned int n) const;
 
     GLdouble leftSide,topSide;          // Origin: upper left corner of ln=1, cp=1
     void ftgl(void* p)                                  { pFTGL = p; }
     void setFontLoaded()                                { loaded = true; }
-    
+
 private:
     static const int LUT_SIZE = 256;
     GLdouble  fWidth, fHeight;          // Font size
@@ -223,7 +223,7 @@ private:
     bool      loaded;                   // Font has been loaded
     LCreal charSpacing;                 // holds our character spacing
     LCreal lineSpacing;                 // holds our line spacing
-    
+
 };
 
 } // End BasicGL namespace
