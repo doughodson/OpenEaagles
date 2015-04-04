@@ -46,15 +46,14 @@ public:
    virtual Waypoint* waypoint(const int n);
    virtual Waypoint* getWaypoint(const int n);
 
-   // DafifDatabase Interface
-   virtual bool load(const char* code = 0);
-   virtual int getRecordLength();
-   virtual int getMaxRecords();
-   virtual int queryByRange();
-   virtual int queryByIdent(const char* id);
-   virtual int queryByKey(const char* key);
-   virtual void printLoaded(std::ostream& sout);
-   virtual void printResults(std::ostream& sout);
+   bool load(const char* code = 0) override;
+   int getRecordLength() override;
+   int getMaxRecords() override;
+   int queryByRange() override;
+   int queryByIdent(const char* id) override;
+   int queryByKey(const char* key) override;
+   void printLoaded(std::ostream& sout) override;
+   void printResults(std::ostream& sout) override;
 
 protected:
 

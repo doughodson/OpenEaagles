@@ -68,10 +68,10 @@ private:
    double oalt;
    double olat;
    double olon;
-   
+
    struct tm* gtim;
    double dtim;
-   
+
    int haveData;
 };
 

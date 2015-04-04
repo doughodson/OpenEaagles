@@ -16,10 +16,9 @@ class LaeroModel : public Simulation::AerodynamicsModel
 {
    DECLARE_SUBCLASS(LaeroModel, Simulation::AerodynamicsModel )
 
-public: 
+public:
    LaeroModel();
 
-   // DynamicsModels interface
    void dynamics(const LCreal dt) override;  // One pass model update; called from Player::dynamics()
    bool setCommandedHeadingD(const double h, const double hDps = 0, const double maxBank = 0) override;
    bool setCommandedAltitude(const double a, const double aMps = 0, const double maxPitch = 0) override;
@@ -46,7 +45,7 @@ private:
    static const double EPSILON;
    void initData();
    void update4DofModel(const LCreal dt);
-   
+
    double dT;
 
    // Body angular vel, acc components
@@ -55,12 +54,12 @@ private:
    double   r;
    double   pDot;
    double   qDot;
-   double   rDot; 
+   double   rDot;
 
    // Euler rotation angle, rate components
    double   phi;
    double   tht;
-   double   psi; 
+   double   psi;
    double   phiDot;
    double   thtDot;
    double   psiDot;

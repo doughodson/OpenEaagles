@@ -60,7 +60,7 @@ public:
       const char* file = "file2",
       const char* path = "/eaagles3rdParty/dafif/fullall/"
    );
-   
+
    virtual Navaid* navaid(const int n);
    virtual Navaid* getNavaid(const int n);
 
@@ -70,16 +70,15 @@ public:
 
    virtual void printFreqList(std::ostream& sout);
    virtual void printChannelList(std::ostream& sout);
-   
-   // DafifDatabase Interface
-   virtual bool load(const char* code = 0);
-   virtual int getRecordLength();
-   virtual int getMaxRecords();
-   virtual int queryByRange();
-   virtual int queryByIdent(const char* id);
-   virtual int queryByKey(const char* key);
-   virtual void printLoaded(std::ostream& sout);
-   virtual void printResults(std::ostream& sout);
+
+   bool load(const char* code = 0) override;
+   int getRecordLength() override;
+   int getMaxRecords() override;
+   int queryByRange() override;
+   int queryByIdent(const char* id) override;
+   int queryByKey(const char* key) override;
+   void printLoaded(std::ostream& sout) override;
+   void printResults(std::ostream& sout) override;
 
 protected:
    enum { NAVAID_MAX_RECORDS = 80000 };

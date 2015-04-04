@@ -157,7 +157,7 @@ public:
 
    void dafifType(char type[]) const;
    bool isDafifType(const char type[]) const;
-   
+
    void countryCode(char country[]) const;
    bool isCountryCode(const char country[]) const;
 
@@ -190,7 +190,7 @@ public:
    static void   dsGetString(char* const d, const char* const s, const int n);
    static bool   dsIsString(const char* const s, const char* const refStr);
    static double dsLatitude(const char* const p);     // convert string to latitude
-   static double dsLongitude(const char* const p);    // convert string to longitude 
+   static double dsLongitude(const char* const p);    // convert string to longitude
    static float  dsElevation(const char* const p);    // format#1: convert string to elevation (to nearest foot)
    static float  dsElevation1(const char* const p);   // format#2: convert string to elevation (to tenths of feet)
    static float  dsMagVariance(const char* const p);  // convert string to magnetic variation

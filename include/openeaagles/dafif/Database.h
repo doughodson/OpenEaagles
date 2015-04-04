@@ -172,7 +172,7 @@ public:
       ~Key();
       void serialize(std::ostream& sout) const;
    };
-   
+
 protected:
    bool setSlotPathname(Basic::String* const msg);
    bool setSlotFilename(Basic::String* const msg);
@@ -197,7 +197,7 @@ protected:
                         // uses rangeSort2() to sort.
 
    int rangeSort2();    // Sort results by range; range must have already
-                        // been computed. 
+                        // been computed.
 
    double range2(const double lat, const double lon) const;
 
@@ -206,16 +206,16 @@ protected:
 
    static void stripSpaces(char buff[], const int n);
    static void fillSpaces(char buff[], const int n);
-   
+
    Basic::FileReader* db; // The database (loaders)
    long ncache;      // Number of keys alloced
-   
+
    Key** rl;         // List of DAFIF records in the database
    long  nrl;        // Number of Records in rl
-   
+
    Key** ol;         // List of DAFIF records in ICAO code order
    long  nol;        // Number of Records in ol
-   
+
    Key** ql;         // query list -- results of query (usually sorted
                      //   by range)
    int   nql;        // Number of record found

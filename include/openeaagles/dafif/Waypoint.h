@@ -32,8 +32,7 @@ public:
    Waypoint();
    Waypoint(const char* const s);
 
-   // Record Interface
-   virtual void printRecord(std::ostream& sout) const;
+   void printRecord(std::ostream& sout) const override;
 
 private:
    static const Ptbl ptable;

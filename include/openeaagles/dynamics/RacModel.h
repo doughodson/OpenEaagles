@@ -33,7 +33,6 @@ class RacModel : public Simulation::AerodynamicsModel
 public: // public interface
     RacModel();
 
-    // AerodynamicsModel interface
     LCreal getGload() const override;                   // G's (+up, one at level)
     LCreal getMach() const override;                    // mach number
     LCreal getAngleOfAttack() const override;           // radians
@@ -41,7 +40,6 @@ public: // public interface
     LCreal getFlightPath() const override;              // radians
     LCreal getCalibratedAirspeed() const override;      // Kts
 
-    // DynamicsModel interface
     bool isHeadingHoldOn() const override;
     double getCommandedHeadingD() const override;
     bool setHeadingHoldOn(const bool b) override;

@@ -74,8 +74,7 @@ public:
    void  getGlideSlopeData(const double aclat, const double aclon, const double acelev, float* ilsGlideSlope, float* acGlideSlope, float* deltaGlideSlope) const;
    void  printGlideSlopeData(std::ostream& sout, const double aclat, const double aclon, const double acelev) const;
 
-   // Record Interface
-   virtual void printRecord(std::ostream& sout) const;
+   void printRecord(std::ostream& sout) const override;
 
 private:
    static const Ptbl ptable;

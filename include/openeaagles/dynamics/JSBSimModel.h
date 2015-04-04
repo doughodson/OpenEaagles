@@ -28,13 +28,12 @@ class JSBSimModel : public Simulation::AerodynamicsModel
 public:
     JSBSimModel();
 
-    // Vehicle interface
     LCreal getGload() const override;
     LCreal getMach() const override;
     LCreal getAngleOfAttack() const override;
     LCreal getSideSlip() const override;
     LCreal getFlightPath() const override;
-    LCreal getCalibratedAirspeed() const override; 
+    LCreal getCalibratedAirspeed() const override;
     LCreal getGrossWeight() const override;
     LCreal getFuelWt() const override;
     LCreal getFuelWtMax() const override;
@@ -59,16 +58,8 @@ public:
     int setThrottles(const LCreal* const positions, const int num) override;
     void setRudderPedalInput(const LCreal pedal) override;
 
-    const Basic::String* getRootDir() const { return rootDir; }   // JSBSim root directory
-    virtual bool setRootDir(const Basic::String* const dir);
-
-    const Basic::String* getModel() const { return model; }       // JSBSim model
-    virtual bool setModel(const Basic::String* const msl);
-
-    // Component interface
     void reset() override;
 
-    // DynamicsModel interface
     void dynamics(const LCreal  dt = 0.0) override;
 
     bool isHeadingHoldOn() const override;
@@ -80,11 +71,17 @@ public:
     double getCommandedVelocityKts() const override;
     bool setVelocityHoldOn(const bool b) override;
     bool setCommandedVelocityKts(const double v, const double vNps = 0) override;
-                                                                                
+
     bool isAltitudeHoldOn() const override;
     double getCommandedAltitude() const override;
     bool setAltitudeHoldOn(const bool b) override;
     bool setCommandedAltitude(const double a, const double aMps = 0, const double maxPitch = 0) override;
+
+    const Basic::String* getRootDir() const { return rootDir; }   // JSBSim root directory
+    virtual bool setRootDir(const Basic::String* const dir);
+
+    const Basic::String* getModel() const { return model; }       // JSBSim model
+    virtual bool setModel(const Basic::String* const msl);
 
 protected:
 

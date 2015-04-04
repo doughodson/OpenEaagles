@@ -20,7 +20,7 @@
 //        When no host country identifier exists, the airport identifier key
 //        is used.  Therefore, the size of 'id' must be one more than the
 //        longer of AP_IDENT_LEN and AP_KEY_LEN.
-//          
+//
 //    Airport::recordLength
 //        Length of a DAFIF Airport record.
 //
@@ -50,10 +50,9 @@ public:
    virtual AirportType airportType() const;
    virtual int isAirportType(const AirportType type) const;
 
-   virtual void ident(char id[]) const;
+   void ident(char id[]) const override;
 
-   // Record Interface
-   virtual void printRecord(std::ostream& sout) const;
+   void printRecord(std::ostream& sout) const override;
 
 private:
    static const Ptbl ptable;

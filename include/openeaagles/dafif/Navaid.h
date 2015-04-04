@@ -50,9 +50,8 @@ public:
    float range() const;             // Range field.
    float slaveVariance() const;     // Slave Variance field.
 
-   // Record class functions
-   virtual void printRecord(std::ostream& sout) const;
-   virtual void printTrueBearingRange(std::ostream& sout, const double aclat, const double aclon, const double acelev) const;
+   void printRecord(std::ostream& sout) const override;
+   void printTrueBearingRange(std::ostream& sout, const double aclat, const double aclon, const double acelev) const override;
 
 private:
    static const Ptbl ptable;

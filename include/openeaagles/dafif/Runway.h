@@ -18,16 +18,16 @@
 //      and magnetic heading fields for 'whichEnd' of the runway.
 //      WhichEnd is Runway::HIGH_END or Runway::LOW_END.
 //
-//  ident(char id[], WhichEnd whichEnd) 
+//  ident(char id[], WhichEnd whichEnd)
 //      Returns the value of the runway's (end) identifier field in 'id'.
 //
-//  int isIdent(char id[], WhichEnd whichEnd) 
+//  int isIdent(char id[], WhichEnd whichEnd)
 //      Returns true if 'id' is equal to the runway's (end) id field.
 //
-//  int width() 
+//  int width()
 //      Returns the width of the runway (feet).
 //
-//  int length() 
+//  int length()
 //      Returns the length of the runway (feet).
 //
 //  void airportKey(char apKey[])
@@ -65,7 +65,7 @@ public:
    float elevation(const WhichEnd whichEnd) const;
    float magHeading(const WhichEnd whichEnd) const;
    float slope(const WhichEnd whichEnd) const;
-   
+
    void  ident(char ident[], const WhichEnd whichEnd) const;
    int isIdent(const char id[], const WhichEnd whichEnd) const;
 
@@ -77,8 +77,7 @@ public:
 
    WhichEnd whichEnd(const char rwEndId[]) const;
 
-   // Record Interface
-   virtual void printRecord(std::ostream& sout) const;
+   void printRecord(std::ostream& sout) const override;
 
 private:
    static const Ptbl ptable;
