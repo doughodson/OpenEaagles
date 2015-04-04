@@ -70,10 +70,7 @@ public:
    unsigned int getMonth() const          { return month; }
    unsigned int getYear() const           { return year; }
 
-   // Simulation::DataRecorder class interface functions
    void processRecords() override;
-
-   // Basic::Component class interface functions
    void reset() override;
 
 protected:

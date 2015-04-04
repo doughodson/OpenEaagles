@@ -36,8 +36,7 @@ protected:
    virtual bool setSlotNetwork(Basic::NetHandler* const msg);
    virtual bool setSlotNoWait(Basic::Number* const msg);
 
-   // OutputHandler class private functions
-    virtual void processRecordImp(const DataRecordHandle* const handle);
+   void processRecordImp(const DataRecordHandle* const handle) override;
 
 private:
    void initData();
@@ -51,4 +50,4 @@ private:
 } // End Recorder namespace
 } // End Eaagles namespace
 
-#endif   // __Eaagles_Recorder_NetOutput_H__
+#endif

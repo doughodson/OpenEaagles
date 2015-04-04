@@ -22,7 +22,7 @@ namespace Recorder {
    }
 
 //------------------------------------------------------------------------------
-// Class:   TabPrinter
+// Class: TabPrinter
 // Description: Print the data from a protocol buffer DataRecord
 //
 // Factory name: TabPrinter
@@ -72,7 +72,6 @@ protected:
    virtual void printMarkerMsg(const Pb::Time* const timeMsg, const Pb::MarkerMsg* const msg);
    virtual void printInputDeviceMsg(const Pb::Time* const timeMsg, const Pb::InputDeviceMsg* const msg, const  unsigned int msgId);
 
-
    // Events without messages
    virtual void printUnhandledIdToken(const Pb::Time* const timeMsg);
    virtual void printEndOfData(const Pb::Time* const timeMsg);
@@ -103,8 +102,7 @@ protected:
    void printSimTimeMsg(std::ostream& sout, double simTime);
    void printUtcTimeMsg(std::ostream& sout, double utcTime);
 
-   // OutputHandler class private functions
-   virtual void processRecordImp(const DataRecordHandle* const handle);
+   void processRecordImp(const DataRecordHandle* const handle) override;
 
    virtual void setMsgHeaders(const bool f);
 private:
@@ -138,7 +136,7 @@ private:
    bool weaponHeader;
    bool trackHeader;
 
-   MsgHdrOptions option;    // options for printing field names
+   MsgHdrOptions option;     // options for printing field names
    unsigned int lastMessage; // previous message printed
    const char* divider;      // divider between message fields
 };

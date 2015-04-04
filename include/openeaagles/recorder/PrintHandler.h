@@ -58,8 +58,7 @@ public:
 protected:
    void setFullFilename(const char* const name);
 
-   // OutputHandler class private functions
-   virtual void processRecordImp(const DataRecordHandle* const handle);
+   void processRecordImp(const DataRecordHandle* const handle) override;
 
 private:
    void initData();

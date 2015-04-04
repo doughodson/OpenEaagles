@@ -46,8 +46,7 @@ public:
    virtual bool setPathName(const Basic::String* const msg);
 
 protected:
-   // InputHandler class protected functions
-   virtual const DataRecordHandle* readRecordImp();
+   const DataRecordHandle* readRecordImp() override;
 
 private:
    void initData();

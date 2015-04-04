@@ -26,8 +26,8 @@ namespace Recorder {
 // Description: Print player data
 //
 // Factory name: PrintPlayer
-// Slots: 
-//   playerName  <Basic::String>  ! Player name 
+// Slots:
+//   playerName  <Basic::String>  ! Player name
 //------------------------------------------------------------------------------
 class PrintPlayer : public PrintHandler
 {
@@ -41,8 +41,7 @@ protected:
 
    virtual bool setName(const Basic::String* const msg);
 
-   // OutputHandler class private functions
-   virtual void processRecordImp(const DataRecordHandle* const handle);
+   void processRecordImp(const DataRecordHandle* const handle) override;
 
 private:
    void initData();

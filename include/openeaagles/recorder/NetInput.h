@@ -40,8 +40,7 @@ protected:
    virtual bool setSlotNetwork(Basic::NetHandler* const msg);
    virtual bool setSlotNoWait(Basic::Number* const msg);
 
-   // InputHandler class protected functions
-   virtual const DataRecordHandle* readRecordImp();
+   const DataRecordHandle* readRecordImp() override;
 
 private:
    void initData();
