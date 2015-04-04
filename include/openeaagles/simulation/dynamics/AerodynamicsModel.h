@@ -16,13 +16,13 @@ namespace Simulation {
 //
 // Factory name: AerodynamicsModel
 //==============================================================================
-class AerodynamicsModel : public DynamicsModel  
+class AerodynamicsModel : public DynamicsModel
 {
     DECLARE_SUBCLASS(AerodynamicsModel, DynamicsModel)
 
 public:
     AerodynamicsModel();
-    
+
     // Vehicle data
     virtual LCreal getGload() const;                    // G's (+up, one at level)
     virtual LCreal getMach() const;                     // mach number
@@ -36,7 +36,7 @@ public:
     virtual LCreal getAmbientPressureRatio() const;     // Air pressure ratio
     virtual LCreal getWingSweepAngle() const;           // radians (or zero for no wing sweep)
     virtual bool   isWeightOnWheels() const;            // True if weight is on wheels
-    
+
     // Unit specific vehicle data
     virtual LCreal getAngleOfAttackR() const;
     virtual LCreal getAngleOfAttackD() const;
@@ -56,7 +56,7 @@ public:
     virtual int getEngThrustIdle(LCreal* const fn, const int max) const;      // Thrust if at Idle: lbs
     virtual int getEngThrustMil(LCreal* const fn, const int max) const;       // Thrust if at MIL: lbs
     virtual int getEngThrustAb(LCreal* const fn, const int max) const;        // Thrust if at Full afterburner: lbs
-    
+
     // Trim switch inputs
     virtual void setTrimSwitchRollInput(const LCreal rollTrim);
     virtual void setTrimSwitchPitchInput(const LCreal pitchTrim);

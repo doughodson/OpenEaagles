@@ -13,7 +13,7 @@ namespace Simulation {
 // Class SpaceDynamicsModel
 // Description:  External player dynamics model
 //
-// Note -- 
+// Note --
 //    1) updateTC() and updateData() are called by Component::updateTC() and
 //    Component::updateData() as part of the player's component list.
 //
@@ -22,7 +22,7 @@ namespace Simulation {
 //
 // Factory name: SpaceDynamicsModel
 //==============================================================================
-class SpaceDynamicsModel : public DynamicsModel  
+class SpaceDynamicsModel : public DynamicsModel
 {
    DECLARE_SUBCLASS(SpaceDynamicsModel, DynamicsModel)
 

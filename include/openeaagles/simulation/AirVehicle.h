@@ -36,8 +36,8 @@ namespace Simulation {
 //      setTrimSwitchPitchInput(LCreal pitchTrim)
 //      setTrimSwitch()
 //          Sets the trim switch positions:
-//              PitchTrim: -1.0 -> NoseDown;  0.0 -> Hold;  1.0 -> NoseUp 
-//              RollTrim:  -1.0 -> Left;      0.0 -> Hold;  1.0 -> Right 
+//              PitchTrim: -1.0 -> NoseDown;  0.0 -> Hold;  1.0 -> NoseUp
+//              RollTrim:  -1.0 -> Left;      0.0 -> Hold;  1.0 -> Right
 //
 //      setRudderPedalInput(const LCreal pedal)
 //          Pedal inputs: normalized
@@ -58,7 +58,7 @@ namespace Simulation {
 //
 //      setSpeedBrakesSwitch(LCreal sw)
 //          Sets the speed brake switch position:
-//              -1.0 -> Retract;  0.0 -> Hold;  1.0 -> Extend 
+//              -1.0 -> Retract;  0.0 -> Hold;  1.0 -> Extend
 //
 //      setWeaponBayDoorSwitch(LCreal sw)
 //          Weapon bay door position: 0.0 -> closed; 1.0 -> open
@@ -73,7 +73,7 @@ class AirVehicle : public Player
 
 public:
     AirVehicle();
-    
+
     // Vehicle data
     virtual LCreal getGload() const;                    // Gs (+up, one at level)
     LCreal getMach() const override;                    // mach number
@@ -122,7 +122,7 @@ public:
         setControlStickRollInput(roll);
         setControlStickPitchInput(pitch);
     }
-    
+
     // Trim switch inputs
     virtual void setTrimSwitchRollInput(const LCreal rollTrim);
     virtual void setTrimSwitchPitchInput(const LCreal pitchTrim);
@@ -142,10 +142,8 @@ public:
     // Sets the commanded wing sweep angle (radians)
     virtual void setCmdWingSweepAngle(const LCreal rad);
 
-    // Player interface
     unsigned int getMajorType() const override;
 
-    // Basic::Component interface
     void reset() override;
 
 protected:
@@ -167,7 +165,7 @@ private:
 // Class Aircraft
 // Factory name: Aircraft
 //==============================================================================
-class Aircraft : public AirVehicle  
+class Aircraft : public AirVehicle
 {
     DECLARE_SUBCLASS(Aircraft,AirVehicle)
 
@@ -180,7 +178,7 @@ public:
 // Class Helicopter
 // Factory name: Helicopter
 //==============================================================================
-class Helicopter : public AirVehicle  
+class Helicopter : public AirVehicle
 {
     DECLARE_SUBCLASS(Helicopter,AirVehicle)
 
@@ -193,7 +191,7 @@ public:
 // Class UnmannedAirVehicle
 // Factory name: UnmannedAirVehicle
 //==============================================================================
-class UnmannedAirVehicle : public AirVehicle  
+class UnmannedAirVehicle : public AirVehicle
 {
     DECLARE_SUBCLASS(UnmannedAirVehicle,AirVehicle)
 

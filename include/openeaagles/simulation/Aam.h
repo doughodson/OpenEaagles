@@ -24,8 +24,7 @@ class Aam : public Missile
 
 public:
     Aam();
-    
-    // Weapon interface
+
     const char* getDescription() const override;  // Returns "AIM"
     const char* getNickname() const override;     // Returns "GenericAam"
     int getCategory() const override;             // Returns MISSILE or GUIDED

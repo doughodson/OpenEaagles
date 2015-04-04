@@ -18,21 +18,20 @@ namespace Simulation {
 //
 // Factory name: AgmMissile
 //------------------------------------------------------------------------------
-class Agm : public Missile  
+class Agm : public Missile
 {
     DECLARE_SUBCLASS(Agm, Missile)
 
 public:
     Agm();
-    
-    // Weapon interface
+
     const char* getDescription() const override;  // returns "AGM"
     const char* getNickname() const override;     // returns "GenericAgm"
     int getCategory() const override;             // returns MISSILE | GUIDED
 
 private:
-    // Missile interface
-    virtual bool calculateVectors(const Player* const tgt, const Track* const trk, osg::Vec3* const los, osg::Vec3* const vel, osg::Vec3* const posx) const;
+    bool calculateVectors(const Player* const tgt, const Track* const trk, osg::Vec3* const los,
+          osg::Vec3* const vel, osg::Vec3* const posx) const override;
 };
 
 } // End Simulation namespace

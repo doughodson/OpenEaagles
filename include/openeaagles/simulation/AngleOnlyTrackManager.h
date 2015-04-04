@@ -21,7 +21,7 @@ namespace Simulation {
 //    elevationBin  <Number>   ! Elevation Bin (default: PI)
 //
 //==============================================================================
-class AngleOnlyTrackManager : public TrackManager  
+class AngleOnlyTrackManager : public TrackManager
 {
    DECLARE_SUBCLASS(AngleOnlyTrackManager,TrackManager)
 
@@ -30,21 +30,18 @@ public:
 
    virtual void newReport(IrQueryMsg* q, LCreal snDbl);
 
-   virtual void clearTracksAndQueues();                // Clear all tracks and queues
-   virtual bool addTrack(Track* const t);              // Add a track
+   void clearTracksAndQueues() override;
+   bool addTrack(Track* const t) override;
 
 protected:
-
-   virtual void processTrackList(const LCreal dt) =0;                  // Derived class unique
-
    virtual IrQueryMsg* getQuery(LCreal* const sn);                     // Get the next 'new' report from the queue
 
    virtual bool setSlotAzimuthBin(const Basic::Number* const num);              // Sets azimuth bin
    virtual bool setSlotElevationBin(const Basic::Number* const num);            // Sets elevation bin
-   virtual bool setSlotAlpha(const Basic::Number* const num);        // Sets alpha
-   virtual bool setSlotBeta(const Basic::Number* const num);         // Sets beta
 
-   // Basic::Component protected interface
+   bool setSlotAlpha(const Basic::Number* const num) override;
+   bool setSlotBeta(const Basic::Number* const num) override;
+
    bool shutdownNotification() override;
 
    // Prediction parameters
@@ -67,14 +64,14 @@ private:
 // Factory name: AirAngleOnlyTrkMgr
 //
 //==============================================================================
-class AirAngleOnlyTrkMgr : public AngleOnlyTrackManager  
+class AirAngleOnlyTrkMgr : public AngleOnlyTrackManager
 {
     DECLARE_SUBCLASS(AirAngleOnlyTrkMgr,AngleOnlyTrackManager)
 public:
     AirAngleOnlyTrkMgr();
 
 protected:
-    virtual void processTrackList(const LCreal dt);     // Process the reports into a track list
+    void processTrackList(const LCreal dt) override;
 };
 
 
@@ -82,7 +79,7 @@ protected:
 // Class: AirAngleOnlyTrkMgrPT
 // Base class: Basic::Object -> Basic::Component -> System -> TrackManager -> AngleOnlyTrackManager -> AirAngleOnlyTrkMgrPT
 //
-// Description: AirAngleOnlyTrkMgr that uses perceived-truth az, el, 
+// Description: AirAngleOnlyTrkMgr that uses perceived-truth az, el,
 // and (depending on usePerceivedPosVel) pos, vel from IR reports;
 // perceived truth in that some reports are IrSensor's merged reports from two or more targets,
 // azimuth, elevation, position and velocity may all be "merged" values.
@@ -101,7 +98,8 @@ public:
     AirAngleOnlyTrkMgrPT();
 
 protected:
-   virtual void processTrackList(const LCreal dt);                  // Derived class unique
+   void processTrackList(const LCreal dt) override;
+
    virtual void updateTrackAges(const LCreal dt);
    virtual void removeAgedTracks();
 private:

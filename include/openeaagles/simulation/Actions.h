@@ -28,7 +28,7 @@ class Steerpoint;
 //  2) Actions that are not ready to start (isReadyToStart()) may be skipped
 //     by the manager.
 //
-//  3) One shot action will complete during the call to trigger().  
+//  3) One shot action will complete during the call to trigger().
 //
 //  4) Any action that will take time to complete must have a manager
 //     passed via trigger().
@@ -39,7 +39,7 @@ class Steerpoint;
 //  function will find the OnboardComputer and 'trigger()' the action.
 //
 //------------------------------------------------------------------------------
-class Action : public Basic::Ubf::Action 
+class Action : public Basic::Ubf::Action
 {
     DECLARE_SUBCLASS(Action,Basic::Ubf::Action)
 
@@ -49,15 +49,14 @@ public:
    virtual bool isReadyToStart();                     // True if action is ready to start
    virtual bool isInProgress();                       // True if action is in progress
    virtual bool isCompleted();                        // True if action has been completed
-   
+
    virtual bool trigger(OnboardComputer* const mgr);  // Starts this action
    virtual bool cancel();                             // Cancels this action
-   virtual void process(const LCreal dt);             // Action processing 
+   virtual void process(const LCreal dt);             // Action processing
 
    int getRefId() const    { return refId; }          // Message Ref ID
    virtual void setRefId(const int id);               // Sets the message ref ID
 
-   // Basic::Ubf::Action interface
    bool execute(Basic::Component* actor) override;
 
 protected:
@@ -85,19 +84,19 @@ private:
 //   imageSize     <Number>   ! Image size: height & width (pixels) (default: 512)
 //
 //------------------------------------------------------------------------------
-class ActionImagingSar : public Action 
+class ActionImagingSar : public Action
 {
     DECLARE_SUBCLASS(ActionImagingSar,Action)
-   
+
 public:
    ActionImagingSar();
 
-   double getSarLatitude() const       { return sarLatitude; }    // SAR latitude in degrees
+   double getSarLatitude() const       { return sarLatitude;  }   // SAR latitude in degrees
    double getSarLongitude() const      { return sarLongitude; }   // SAR longitude in degrees
    double getSarElevation() const      { return sarElevation; }   // SAR elevation in meters
-   LCreal getResolution() const        { return resolution; }     // Image resolution in meters
-   unsigned int getImageSize() const   { return imgSize; }        // Image size
-   LCreal getOrientation() const       { return orientation; }    // Planned image orientation (Deg) (true)
+   LCreal getResolution() const        { return resolution;   }   // Image resolution in meters
+   unsigned int getImageSize() const   { return imgSize;      }   // Image size
+   LCreal getOrientation() const       { return orientation;  }   // Planned image orientation (Deg) (true)
 
    virtual bool setSarLatitude(const double v);       // Sets the SAR latitude in degrees
    virtual bool setSarLongitude(const double v);      // Sets the SAR longitude in degrees
@@ -115,17 +114,15 @@ public:
    virtual bool setSlotResolution(const Basic::Distance* const msg);
    virtual bool setSlotImageSize(const Basic::Number* const msg);
 
-   // Action Interface
-   virtual bool trigger(OnboardComputer* const mgr);  // Starts this action
-   virtual bool cancel();
-   virtual void process(const LCreal dt);
+   bool trigger(OnboardComputer* const mgr) override;
+   bool cancel() override;
+   void process(const LCreal dt) override;
 
 protected:
    Sar* getSarSystem()        { return sar; }
-   virtual void setSarSystem(Sar* const p); 
+   virtual void setSarSystem(Sar* const p);
 
-   // Action Interface
-   virtual void setCompleted(const bool flg);      // Sets the completed flag
+   void setCompleted(const bool flg) override;
 
 private:
    double sarLatitude;        // Latitude (deg)
@@ -151,10 +148,10 @@ private:
 //   station          <Number>  ! Station number to use (default: 0)
 //
 //------------------------------------------------------------------------------
-class ActionWeaponRelease : public Action 
+class ActionWeaponRelease : public Action
 {
     DECLARE_SUBCLASS(ActionWeaponRelease,Action)
-   
+
 public:
    ActionWeaponRelease();
 
@@ -169,14 +166,13 @@ public:
    // Set planned station number
    virtual bool setStation(const unsigned int num);
 
-   // Action Interface
-   virtual bool trigger(OnboardComputer* const mgr);  // Starts this action
+   bool trigger(OnboardComputer* const mgr) override;
 
 protected:
-    bool setSlotTargetLat(const Basic::LatLon* newLat);
-    bool setSlotTargetLon(const Basic::LatLon* newLon);
-    bool setSlotTargetElev(const Basic::Number* newElev);
-    bool setSlotStationNum(const Basic::Number* newStation);
+   bool setSlotTargetLat(const Basic::LatLon* newLat);
+   bool setSlotTargetLon(const Basic::LatLon* newLon);
+   bool setSlotTargetElev(const Basic::Number* newElev);
+   bool setSlotStationNum(const Basic::Number* newStation);
 
 private:
    double targetLatitude;        // latitude (deg)
@@ -187,7 +183,7 @@ private:
 
 //------------------------------------------------------------------------------
 // Class: ActionDecoyRelease
-// Description:  Releases a decoy 
+// Description:  Releases a decoy
 //
 // Factory name: ActionDecoyRelease
 // Slots:
@@ -195,25 +191,24 @@ private:
 //   interval     <Number>  ! time, in seconds, between launches (default: 0)
 //
 //------------------------------------------------------------------------------
-class ActionDecoyRelease : public Action 
+class ActionDecoyRelease : public Action
 {
     DECLARE_SUBCLASS(ActionDecoyRelease,Action)
-   
+
 public:
     ActionDecoyRelease();
-    
+
     // set functions
     virtual bool setInterval(const LCreal x) { interval = x; return true; }
     virtual bool setNumToLaunch(const int x) { numToLaunch = x; return true; }
     virtual void process(const LCreal dt);
 
-    // Action Interface
-   virtual bool trigger(OnboardComputer* const mgr);  // Starts this action
+    bool trigger(OnboardComputer* const mgr) override;
 
 protected:
     bool setSlotInterval(const Basic::Number* x);
     bool setSlotNumToLaunch(const Basic::Number* x);
-    
+
 private:
     int numToLaunch;    // how many decoys to launch this action?
     LCreal interval;    // seconds delay between launch... default is 0
@@ -232,10 +227,10 @@ private:
 //                             ! (default: 0)
 //
 //------------------------------------------------------------------------------
-class ActionCamouflageType : public Action 
+class ActionCamouflageType : public Action
 {
     DECLARE_SUBCLASS(ActionCamouflageType,Action)
-   
+
 public:
    ActionCamouflageType();
 
@@ -243,8 +238,7 @@ public:
    virtual bool setCamouflageType(const unsigned int v);                   // Sets the user defined camouflage type (or zero for none)
    virtual bool setSlotCamouflageType(const Basic::Number* const msg);   // Sets user defined camouflage type
 
-   // Action Interface
-   virtual bool trigger(OnboardComputer* const mgr);  // Starts this action
+   virtual bool trigger(OnboardComputer* const mgr) override;
 
 private:
    unsigned int camouflage;    // Camouflage type (0 is none)
