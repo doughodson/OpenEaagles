@@ -41,7 +41,7 @@
 // drawTexture() - draws a tile at a specific position.
 //      void MapDrawer::drawTexture(const int row, const int column, const int idx)
 //
-// getSlotByIndex() 
+// getSlotByIndex()
 //      Basic::Object* MapDrawer::getSlotByIndex(const int si)
 //
 // -------------------------------------------------------------------------------
@@ -77,13 +77,11 @@ public:
     // Get functions
     LCreal getMapIntensity() { return mapIntensity; }
     virtual void updateZone(int zone, int& selected, const int idx);
-            
-    // BasicGL::Graphic interface
+
     void drawFunc() override;
-    
-    // Basic::Component interface
+
     void updateData(const LCreal dt = 0.0) override;
-                  
+
 protected:
     bool setSlotMapIntensity(const Basic::Number* const x);
     bool setSlotDrawGridMode(const Basic::Number* const x);
@@ -97,13 +95,13 @@ private:
     void goDrawGrid(const int row, const int column, const int idx);
     void drawMap(const int zone, const int idx);
     // Function to determine how to scale our non-center zones to line up with the center zone
-    void determineScaling(const int idx);        
-    CadrgMap* myMap;                  // The map 
+    void determineScaling(const int idx);
+    CadrgMap* myMap;                  // The map
     LCreal pixPerTile;                // Number of pixels per tile
-    int gridSize;                     // Size of the map grid 1x1 or 3x3 or NxN                
+    int gridSize;                     // Size of the map grid 1x1 or 3x3 or NxN
     bool drawGrid;                    // Will the grid be drawn?
     LCreal mapIntensity;              // Map brightness factor
-   
+
     LCreal sinAng;                    // SIN of heading
     LCreal cosAng;                    // COS of heading
 
