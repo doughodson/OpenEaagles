@@ -63,7 +63,7 @@ class CigiClNetworkSignalProcessing;
 //    async                (Number)       True (non-zero) to run in CIGI async mode (default: false - CIGI sync)
 //    hideOwnshipModel     (Number)       True to hide the ownship's model (default: true - ownship's model is not seen)
 //    ownshipModel         (Number)       Ownship's model ID
-//    mslTrailModel        (Number)       Missile Trail" effect model ID 
+//    mslTrailModel        (Number)       Missile Trail" effect model ID
 //    smokePlumeModel      (Number)       Smoke Plume" effect model ID
 //    airExplosionModel    (Number)       Air Explosion" effect model ID
 //    groundExplosionModel (Number)       Ground Explosion" effect model ID
@@ -101,8 +101,8 @@ public:
    unsigned short getOwnshipModelID() const { return cmtOwnship; }                  // Ownship's model ID
    virtual bool setOwnshipModelId(const unsigned short);                            // Ownship's model ID
 
-   unsigned short getMslTrailModelID() const { return cmtMslTrail; }                // "Missile Trail" effect model ID 
-   virtual bool setMslTrailModelId(const unsigned short);                           // "Missile Trail" effect model ID 
+   unsigned short getMslTrailModelID() const { return cmtMslTrail; }                // "Missile Trail" effect model ID
+   virtual bool setMslTrailModelId(const unsigned short);                           // "Missile Trail" effect model ID
 
    unsigned short getSmokePlumeModelID() const { return cmtSmokePlume; }            // "Smoke Plume" effect model ID
    virtual bool setSmokePlumeModelId(const unsigned short);                         // "Smoke Plume" effect model ID
@@ -142,7 +142,6 @@ public:
    virtual bool setSlotGroundExplosionModel(const Basic::Number* const msg);
    virtual bool setSlotShipWakeModel(const Basic::Number* const msg);
 
-   // Component interface
    void updateData(const LCreal dt = 0.0) override;
    void reset() override;
 
@@ -161,7 +160,7 @@ protected:
    CigiCompCtrlV3* getOwnshipComponentControlPacket(const unsigned int buffer) {
       return (buffer < NUM_BUFFERS ? ownshipCC[buffer] : 0);
    }
-   CigiEntityCtrlV3* getOwnshipEntityControlPacket(const unsigned int buffer) { 
+   CigiEntityCtrlV3* getOwnshipEntityControlPacket(const unsigned int buffer) {
       return (buffer < NUM_BUFFERS ? ownshipEC[buffer] : 0);
    }
 
@@ -171,7 +170,7 @@ protected:
    void swapReadBuffer() { if (iw0 < NUM_BUFFERS) ir = iw0; }  // Swap the read buffer
 
    bool isIgResetRequested() const { return resetRequest; }
-   void clearIgResetRequest() { resetRequest = false; } 
+   void clearIgResetRequest() { resetRequest = false; }
 
    unsigned short getNexLosId() { return ++losReqId; }
    bool isNewLosequested() const { return newLosReq; }
@@ -204,13 +203,12 @@ protected:
    virtual bool setViewDefinitionPacket(CigiViewDefV3* const p);
    virtual bool setSensorControlPacket(CigiSensorCtrlV3* const p);
 
-   // Otw Interface
-   virtual void sendOwnshipAndModels();    // Send state data for ownship and models
-   virtual void sendElevationRequests();   // Sends terrain height requests
-   virtual void recvElevations();          // Receives terrain height data
-   virtual void frameSync();               // Send frame sync (if any)
-   virtual Simulation::OtwModel* modelFactory();       // Create OtwModel objects unique to interface
-   virtual Simulation::OtwModel* hotFactory();         // Create OtwHot objects unique to interface
+   void sendOwnshipAndModels() override;    // Send state data for ownship and models
+   void sendElevationRequests() override;   // Sends terrain height requests
+   void recvElevations() override;          // Receives terrain height data
+   void frameSync() override;               // Send frame sync (if any)
+   Simulation::OtwModel* modelFactory() override;       // Create OtwModel objects unique to interface
+   Simulation::OtwModel* hotFactory() override;         // Create OtwHot objects unique to interface
 
    virtual bool setAirVehicleData(OtwModelCigiCl* const m, const unsigned short entity, const Simulation::AirVehicle* const p);
    virtual bool setBuildingData(OtwModelCigiCl* const m, const unsigned short entity, const Simulation::Building* const p);
@@ -223,7 +221,7 @@ protected:
    virtual bool setWeaponData(OtwModelCigiCl* const m, const unsigned short entity, const Simulation::Weapon* const p);
    virtual bool setCommonModelData(CigiEntityCtrlV3* const ec, const unsigned short entity, const Simulation::Player* const p);
 
-private:    
+private:
    SPtr<CigiCl> cigi;                    // CIGI handler (direct, networked, ...)
    bool   asyncMode;                     // Running in ASYNC mode if true
    bool   hideOwn;                       // Hide ownship model flag
@@ -263,7 +261,7 @@ private:
 
    // special model IDs
    unsigned short cmtOwnship;             // Ownship's model ID
-   unsigned short cmtMslTrail;            // "Missile Trail" effect model ID 
+   unsigned short cmtMslTrail;            // "Missile Trail" effect model ID
    unsigned short cmtSmokePlume;          // "Smoke Plume" effect model ID
    unsigned short cmtAirExplosion;        // "Air Explosion" effect model ID
    unsigned short cmtGroundExplosion;     // "Ground Explosion" effect model ID
@@ -294,7 +292,7 @@ public:
    virtual bool initialize(OtwCigiCl* const p);
 
    // True if we've been successfully initialized
-   virtual bool isInitialized(); 
+   virtual bool isInitialized();
 
    // R/T frame sync -- called from OtwCigiCl::frameSync() in the R/T thread
    virtual void frameSync();
@@ -372,33 +370,32 @@ public:
    // CIGI's (sync-mode) main network loop
    virtual void mainLoop();
 
-   // CigiCl class interface
-   virtual bool initialize(OtwCigiCl* const p);
-   virtual bool isInitialized(); 
-   virtual void startMessage();
-   virtual void endMessage();
-   virtual int  getOutgoingBufferSize();
+   bool initialize(OtwCigiCl* const p) override;
+   bool isInitialized() override;
+   void startMessage() override;
+   void endMessage() override;
+   int  getOutgoingBufferSize() override;
 
-   virtual void addPacketIGCtrl(CigiIGCtrlV3* const p);
-   virtual void addPacketViewCtrl(CigiViewCtrlV3* const p);
-   virtual void addPacketSensorCtrl(CigiSensorCtrlV3* const p);
-   virtual void addPacketViewDef(CigiViewDefV3* const p);
-   virtual void addPacketEntityCtrl(CigiEntityCtrlV3* const p);
-   virtual void addPacketComponentCtrl(CigiCompCtrlV3* const p);
-   virtual void addPacketArtPartCtrl(CigiArtPartCtrlV3* const p);
-   virtual void addPacketHatHotReq(CigiHatHotReqV3* const p);
-   virtual void addPacketLosRangeReq(CigiLosVectReqV3* const p);
+   void addPacketIGCtrl(CigiIGCtrlV3* const p) override;
+   void addPacketViewCtrl(CigiViewCtrlV3* const p) override;
+   void addPacketSensorCtrl(CigiSensorCtrlV3* const p) override;
+   void addPacketViewDef(CigiViewDefV3* const p) override;
+   void addPacketEntityCtrl(CigiEntityCtrlV3* const p) override;
+   void addPacketComponentCtrl(CigiCompCtrlV3* const p) override;
+   void addPacketArtPartCtrl(CigiArtPartCtrlV3* const p) override;
+   void addPacketHatHotReq(CigiHatHotReqV3* const p) override;
+   void addPacketLosRangeReq(CigiLosVectReqV3* const p) override;
 
 protected:
    bool createCigiProcess();        // Create the CIGI network thread
    bool initCigiNetwork();          // Initialize the network
 
-private:    
+private:
    SPtr<Basic::NetHandler>   netInput;    // Input network handler
    SPtr<Basic::NetHandler>   netOutput;   // Output network handler
    SPtr<Basic::Thread>       thread;      // The thread
-   bool   networkInitialized;               // CIGI has been initialized
-   bool   networkInitFailed;                // CIGI initialization has failed
+   bool   networkInitialized;             // CIGI has been initialized
+   bool   networkInitFailed;              // CIGI initialization has failed
 
    CigiIncomingMsg* msgIn;
    CigiOutgoingMsg* msgOut;
@@ -417,23 +414,23 @@ class OtwModelCigiCl : public Simulation::OtwModel
 public:
    OtwModelCigiCl();
 
-   // OtwModel interface
-   virtual void clear();
+   void clear() override;
+
    virtual void initialize(Simulation::Player* const p);
 
    unsigned short getID() const          { return id; }
    void setID(const unsigned short i)    { id = i; }
 
    // private: or at least should have been!
-   CigiEntityCtrlV3* parentEC[OtwCigiCl::NUM_BUFFERS];    // (entity_id)   Our main entity
-   CigiEntityCtrlV3* trailEC[OtwCigiCl::NUM_BUFFERS];     // (entity_id+1) Trails (missile, smoke, wake, etc.)
-   CigiEntityCtrlV3* explosionEC[OtwCigiCl::NUM_BUFFERS]; // (entity_id+2) Expolsions (air or ground)
-   CigiEntityCtrlV3* smokeEC[OtwCigiCl::NUM_BUFFERS];     // (entity_id+3) Smoke from damage
-   CigiCompCtrlV3* damageCC[OtwCigiCl::NUM_BUFFERS];    // Damage Component Control (CC)
-   CigiCompCtrlV3* animationCC[OtwCigiCl::NUM_BUFFERS]; // animation component control
-   CigiEntityCtrlV3* attachedEC[OtwCigiCl::NUM_BUFFERS];  // (entity_id+4) Attached missile
+   CigiEntityCtrlV3* parentEC[OtwCigiCl::NUM_BUFFERS];      // (entity_id)   Our main entity
+   CigiEntityCtrlV3* trailEC[OtwCigiCl::NUM_BUFFERS];       // (entity_id+1) Trails (missile, smoke, wake, etc.)
+   CigiEntityCtrlV3* explosionEC[OtwCigiCl::NUM_BUFFERS];   // (entity_id+2) Expolsions (air or ground)
+   CigiEntityCtrlV3* smokeEC[OtwCigiCl::NUM_BUFFERS];       // (entity_id+3) Smoke from damage
+   CigiCompCtrlV3* damageCC[OtwCigiCl::NUM_BUFFERS];        // Damage Component Control (CC)
+   CigiCompCtrlV3* animationCC[OtwCigiCl::NUM_BUFFERS];     // animation component control
+   CigiEntityCtrlV3* attachedEC[OtwCigiCl::NUM_BUFFERS];    // (entity_id+4) Attached missile
    CigiArtPartCtrlV3* launcherAPC[OtwCigiCl::NUM_BUFFERS];  // Entity's launcher Articulated Part Control (APC)
-   CigiCompCtrlV3* attachedCC[OtwCigiCl::NUM_BUFFERS];  // attached missile component control
+   CigiCompCtrlV3* attachedCC[OtwCigiCl::NUM_BUFFERS];      // attached missile component control
 
    bool parentActive;
    bool trailActive;
@@ -449,7 +446,7 @@ public:
    LCreal effectsTimer;
 
 private:
-   // Entity ID  
+   // Entity ID
    unsigned short id;
 };
 

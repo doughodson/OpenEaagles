@@ -1,9 +1,6 @@
 //------------------------------------------------------------------------------
 // Class: OtwPC
-// Base class: Basic::Object -> Component -> Otw -> OtwPC
-//
 // Description: PC Visual Interface
-//
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_Otw_OtwPC_H__
 #define __Eaagles_Otw_OtwPC_H__
@@ -24,13 +21,12 @@ public:
     void reset() override;                // Send frame sync (if any)
 
 protected:
-    // Otw Interface
-    virtual void sendOwnshipAndModels();     // Send state data for ownship and models
-    virtual void sendElevationRequests();    // Sends terrain height requests
-    virtual void recvElevations();           // Receives terrain height data
-    virtual void frameSync();                // Send frame sync (if any)
-    virtual Simulation::OtwModel* modelFactory();  // Create OtwModel objects unique to interface
-    virtual Simulation::OtwModel* hotFactory(); // Create OtwHot objects unique to interface
+    void sendOwnshipAndModels() override;           // Send state data for ownship and models
+    void sendElevationRequests() override;          // Sends terrain height requests
+    void recvElevations() override;                 // Receives terrain height data
+    void frameSync() override;                      // Send frame sync (if any)
+    Simulation::OtwModel* modelFactory() override;  // Create OtwModel objects unique to interface
+    Simulation::OtwModel* hotFactory() override;    // Create OtwHot objects unique to interface
 
     bool isNetworkInitialized() const       { return netInit; }
     bool didInitializationFail() const      { return netInitFail; }
