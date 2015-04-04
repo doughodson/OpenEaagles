@@ -66,7 +66,7 @@ public:
    float magHeading(const WhichEnd whichEnd) const;
    float slope(const WhichEnd whichEnd) const;
 
-   void  ident(char ident[], const WhichEnd whichEnd) const;
+   void ident(char ident[], const WhichEnd whichEnd) const;
    int isIdent(const char id[], const WhichEnd whichEnd) const;
 
    int width() const;

@@ -36,19 +36,19 @@ public:
    unsigned short getApplicationID() const         { return appID; }
    virtual void setApplicationID(const unsigned short v);
 
-    // Input support functions
-    virtual void updateTheIPlayer();
-    virtual void entityStatePdu2Nib(const EntityStatePDU* const pdu);
+   // Input support functions
+   virtual void updateTheIPlayer();
+   virtual void entityStatePdu2Nib(const EntityStatePDU* const pdu);
 
-    // Update check functions
-    virtual bool isIffUpdateRequired(const LCreal curExecTime, const Simulation::Iff* const iffSystem);
+   // Update check functions
+   virtual bool isIffUpdateRequired(const LCreal curExecTime, const Simulation::Iff* const iffSystem);
 
-    //These are all going to be moved to separate classes, but for now, are just virtual functions, see above in disIO)
-    virtual bool IffManager(const LCreal curExecTime);
-    virtual bool emitterBeamsManager(const LCreal curExecTime);
-    virtual bool processElectromagneticEmissionPDU(const ElectromagneticEmissionPDU* const pdu);
+   //These are all going to be moved to separate classes, but for now, are just virtual functions, see above in disIO)
+   virtual bool IffManager(const LCreal curExecTime);
+   virtual bool emitterBeamsManager(const LCreal curExecTime);
+   virtual bool processElectromagneticEmissionPDU(const ElectromagneticEmissionPDU* const pdu);
 
-    // Standard (DIS) entity type codes
+   // Standard (DIS) entity type codes
    unsigned char getEntityKind() const      { return disKind; }                 // DIS kind type code (or 255 if not valid)
    unsigned char getEntityDomain() const    { return disDomain; }               // DIS domain type code
    unsigned short getEntityCountry() const  { return disCountry; }              // DIS country type code
@@ -68,17 +68,17 @@ public:
       const unsigned char  extra = 0
    );
 
-    // Nib Interface
-    virtual bool entityStateManager(const LCreal curExecTime);
-    virtual bool weaponFireMsgFactory(const LCreal curExecTime);
-    virtual bool munitionDetonationMsgFactory(const LCreal curExecTime);
-    virtual bool networkOutputManagers(const LCreal curExecTime);
+    // Nib interface
+    bool entityStateManager(const LCreal curExecTime) override;
+    bool weaponFireMsgFactory(const LCreal curExecTime) override;
+    bool munitionDetonationMsgFactory(const LCreal curExecTime) override;
+    bool networkOutputManagers(const LCreal curExecTime) override;
 
 protected:
    unsigned char manageArticulationParameters(EntityStatePDU* const pdu);
    void processArticulationParameters(const EntityStatePDU* const pdu);
 
-   // Basic::Component protected interface
+   // Basic::Component interface
    bool shutdownNotification() override;
 
    // Electromagnetic Emitter handlers (protected for now)
