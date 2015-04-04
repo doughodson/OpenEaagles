@@ -47,7 +47,6 @@ public:
    virtual unsigned int getDeviceIndex() const;
    virtual bool setDeviceIndex(const int value);
 
-   // IoDevice interface
    unsigned short getNumDiscreteInputChannels() const override;
    unsigned short getNumDiscreteInputPorts() const override;
    bool getDiscreteInput(bool* const value, const unsigned int channel, const unsigned int port) const override;
@@ -62,14 +61,14 @@ protected:
    unsigned int deviceIndex; // Device index
 
    // ---
-   // analog 
+   // analog
    // ---
    static const unsigned short MAX_AI = 16;
    unsigned short numAI;   // Number of analog channels
    LCreal inData[MAX_AI];   // Input analog array
 
    // ---
-   // digital bits 
+   // digital bits
    // ---
    static const unsigned short MAX_DI = 32;
    unsigned short numDI;      // Number of input bits

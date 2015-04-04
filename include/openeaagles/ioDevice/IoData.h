@@ -40,7 +40,6 @@ public:
    bool setNumDI(const unsigned int num);
    bool setNumDO(const unsigned int num);
 
-   // Basic::IoData interface functions
    unsigned int getNumAnalogInputChannels() const override;
    unsigned int getNumAnalogOutputChannels() const override;
    unsigned int getNumDiscreteInputChannels() const override;
@@ -53,7 +52,7 @@ public:
    bool setAnalogOutput(const unsigned int channel, const LCreal value) override;
    bool setDiscreteInput(const unsigned int channel, const bool value) override;
    bool setDiscreteOutput(const unsigned int channel, const bool value) override;
-   void clear();
+   void clear() override;
 
 protected:
    bool setSlotNumAI(const Basic::Number* const msg);

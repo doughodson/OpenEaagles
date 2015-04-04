@@ -55,7 +55,6 @@ public:
    bool setLevel(const LCreal);
    bool setInvertFlag(const bool);
 
-   // Basic::IoAdapter interface
    void processInputs(const LCreal dt, const Basic::IoDevice* const device, Basic::IoData* const inData) override;
    void processOutputs(const LCreal dt, const Basic::IoData* const outData, Basic::IoDevice* const device) override;
 

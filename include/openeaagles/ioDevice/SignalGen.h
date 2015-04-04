@@ -69,11 +69,9 @@ public:
    unsigned int getChannel() const;
    bool setChannel(const unsigned int);
 
-   // Basic::IoAdapter functions
    void processInputs(const LCreal dt, const Basic::IoDevice* const device, Basic::IoData* const inData) override;
    void processOutputs(const LCreal dt, const Basic::IoData* const outData, Basic::IoDevice* const device) override;
 
-   // Basic::Component interface
    void reset() override;
 
 protected:

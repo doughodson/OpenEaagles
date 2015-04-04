@@ -26,7 +26,7 @@ namespace IoDevice {
 //       can be shaped using an 1-D LFI table.
 //
 //          Vout = f(V1)
-// 
+//
 // Slots:
 //      ao           <Number>    Analog Output location (IoData AO's channel)
 //      channel      <Number>    Device channel number
@@ -57,7 +57,6 @@ public:
    bool setGain(const LCreal);
    bool setTable(const Basic::Table1* const);
 
-   // Basic::IoAdapter interface
    void processInputs(const LCreal dt, const Basic::IoDevice* const device, Basic::IoData* const inData) override;
    void processOutputs(const LCreal dt, const Basic::IoData* const outData, Basic::IoDevice* const device) override;
 
