@@ -65,7 +65,7 @@ public:
 
    // Is this window in 'full screen' mode?
    bool isFullScreen() const;
-   
+
    // Is accumulation buffer enabled?
    bool isAccumBuff() const;
 
@@ -101,15 +101,13 @@ public:
    bool setSlotAccumBuff(const Basic::Number* const msg);
    bool setSlotStencilBuff(const Basic::Number* const msg);
 
-   // BasicGL::Display interface
-   virtual void select();                       // Selects this display.
-   virtual void hide();
-   virtual void show();
-   virtual void swapBuffers();
-   virtual void reshapeIt(int w, int h);
-   virtual void mouseEvent(const int button, const int state, const int x, const int y);
+   void select() override;                       // Selects this display.
+   void hide() override;
+   void show() override;
+   void swapBuffers() override;
+   void reshapeIt(int w, int h) override;
+   void mouseEvent(const int button, const int state, const int x, const int y) override;
 
-   // Basic::Component interface
    void reset() override;
    bool event(const int event, Basic::Object* const obj = 0) override;
 

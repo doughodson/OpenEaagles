@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
-// Classes: Sphere, Cylinder, Cone, Cube, Torus, Dodecahedron, Tetrahedron, 
+// Classes: Sphere, Cylinder, Cone, Cube, Torus, Dodecahedron, Tetrahedron,
 // Icosahedron, Octahedron, Teapot
-// 
-// Description:  3-dimensional shapes that can be drawn.  NOTE - these shapes 
+//
+// Description:  3-dimensional shapes that can be drawn.  NOTE - these shapes
 // all use GLUT or GLU, so you have to call the basicGlutFF to serialize them
 // from the input, and you also have to link to glut or freeglut to draw them.
 //------------------------------------------------------------------------------
@@ -19,7 +19,7 @@ namespace Basic {
 namespace Glut {
 
 //------------------------------------------------------------------------------
-// Class: Circle -> Sphere 
+// Class: Circle -> Sphere
 // Description - draws a sphere with X slices and Y stacks
 //
 // Factory name: Sphere
@@ -31,14 +31,16 @@ namespace Glut {
 //------------------------------------------------------------------------------
 class Sphere : public BasicGL::Circle {
     DECLARE_SUBCLASS(Sphere, BasicGL::Circle)
+
 public:
     Sphere();
-    virtual void drawFunc(); 
-        
+
+    void drawFunc() override;
+
     // set
-    virtual bool setStacks(const int x)  { stacks = x; return true; }
+    virtual bool setStacks(const int x)       { stacks = x; return true; }
     // get
-    int getStacks() { return stacks; }
+    int getStacks()                           { return stacks; }
 
 protected:
     bool setSlotStacks(const Basic::Number* const x);
@@ -49,7 +51,7 @@ private:
 
 //------------------------------------------------------------------------------
 // Class: Circle -> Sphere -> Cylinder
-// Description - adds a top radius and height and draws a cylinder 
+// Description - adds a top radius and height and draws a cylinder
 //
 // Factory name: Cylinder
 // Slots:
@@ -61,8 +63,8 @@ class Cylinder : public Sphere {
     DECLARE_SUBCLASS(Cylinder, Sphere)
 public:
     Cylinder();
-    virtual void drawFunc(); 
-    
+    virtual void drawFunc();
+
     // set
     virtual bool setTopRadius(const LCreal x) { topRadius = x; return true; }
     virtual bool setHeight(const LCreal x)    { height = x; return true; }
@@ -90,7 +92,7 @@ class Cone : public Cylinder {
     DECLARE_SUBCLASS(Cone, Cylinder)
 public:
     Cone();
-    virtual void drawFunc(); 
+    virtual void drawFunc();
 };
 
 //------------------------------------------------------------------------------
@@ -107,12 +109,12 @@ class Cube : public BasicGL::Circle {
     DECLARE_SUBCLASS(Cube, BasicGL::Circle)
 public:
     Cube();
-    virtual void drawFunc(); 
-    
+    virtual void drawFunc();
+
     // set
     virtual bool setSize(const LCreal x) { size = x; return true; }
     // get
-    LCreal getSize()    { return size; }   
+    LCreal getSize()    { return size; }
 
 protected:
     bool setSlotSize(const Basic::Number* const srobj);
@@ -135,8 +137,8 @@ class Torus : public Sphere {
     DECLARE_SUBCLASS(Torus, Sphere)
 public:
     Torus();
-    virtual void drawFunc(); 
-    
+    virtual void drawFunc();
+
     // set
     virtual bool setOuterRadius(const LCreal x) { oRadius = x; return true; }
     // get
@@ -161,7 +163,7 @@ class Dodecahedron : public BasicGL::Circle {
     DECLARE_SUBCLASS(Dodecahedron, BasicGL::Circle)
 public:
     Dodecahedron();
-    virtual void drawFunc(); 
+    virtual void drawFunc();
 };
 
 //------------------------------------------------------------------------------
@@ -175,7 +177,7 @@ class Tetrahedron : public BasicGL::Circle {
     DECLARE_SUBCLASS(Tetrahedron, BasicGL::Circle)
 public:
     Tetrahedron();
-    virtual void drawFunc(); 
+    virtual void drawFunc();
 };
 
 //------------------------------------------------------------------------------
@@ -189,7 +191,7 @@ class Icosahedron : public BasicGL::Circle {
     DECLARE_SUBCLASS(Icosahedron, BasicGL::Circle)
 public:
     Icosahedron();
-    virtual void drawFunc(); 
+    virtual void drawFunc();
 };
 
 //------------------------------------------------------------------------------
@@ -203,7 +205,7 @@ class Octahedron : public BasicGL::Circle {
     DECLARE_SUBCLASS(Octahedron, BasicGL::Circle)
 public:
     Octahedron();
-    virtual void drawFunc(); 
+    virtual void drawFunc();
 };
 
 //------------------------------------------------------------------------------
@@ -217,7 +219,7 @@ class Teapot : public Cube {
     DECLARE_SUBCLASS(Teapot, Cube)
 public:
     Teapot();
-    virtual void drawFunc(); 
+    virtual void drawFunc();
 };
 
 } // End BasicGL namespace
