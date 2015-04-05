@@ -33,7 +33,7 @@ class Emission;
 //      LCreal getRCS(Emission* em)
 //          Computes the Radar Cross Section for the emission.
 //------------------------------------------------------------------------------
-class RfSignature : public Basic::Component  
+class RfSignature : public Basic::Component
 {
     DECLARE_SUBCLASS(RfSignature, Basic::Component)
 public:
@@ -47,9 +47,9 @@ public:
 // Factory name: SigConstant
 // Slots:
 //    rcs   <Basic::Number>  ! Constant Radar Cross Section value (default: 0.0)
-//                           !  Basic::Number(square meters) or Basic::Decibel(square meters) or Basic::Area() 
+//                           !  Basic::Number(square meters) or Basic::Decibel(square meters) or Basic::Area()
 //------------------------------------------------------------------------------
-class SigConstant : public RfSignature  
+class SigConstant : public RfSignature
 {
     DECLARE_SUBCLASS(SigConstant,RfSignature)
 public:
@@ -59,7 +59,6 @@ public:
 
     virtual bool setRCS(const Basic::Number* const num);
 
-    // RfSignature interface
     LCreal getRCS(const Emission* const em) override;
 private:
     LCreal rcs;         // Constant RCS value
@@ -73,7 +72,7 @@ private:
 //    radius   <Basic::Number>    ! Radius of the sphere (default: 0)
 //
 //------------------------------------------------------------------------------
-class SigSphere : public RfSignature  
+class SigSphere : public RfSignature
 {
     DECLARE_SUBCLASS(SigSphere,RfSignature)
 public:
@@ -83,7 +82,6 @@ public:
     LCreal computeRcs(const LCreal r)                          { return static_cast<float>(PI * r * r); }
     void setRadius(const LCreal r)                             { radius = r; rcs = computeRcs(radius); }
 
-    // RfSignature interface
     LCreal getRCS(const Emission* const em) override;
 private:
     LCreal radius;      // Sphere radius
@@ -100,7 +98,7 @@ private:
 //    b    <Basic::Number>    ! width of the plate (default: 0.0)
 //
 //------------------------------------------------------------------------------
-class SigPlate : public RfSignature  
+class SigPlate : public RfSignature
 {
     DECLARE_SUBCLASS(SigPlate,RfSignature)
 public:
@@ -113,7 +111,6 @@ public:
     virtual bool setA(Basic::Number* const num);
     virtual bool setB(Basic::Number* const num);
 
-    // RfSignature interface
     LCreal getRCS(const Emission* const em) override;
 private:
     LCreal a;       // Length dimension
@@ -126,14 +123,13 @@ private:
 //               and always facing the transmitter.
 // Factory name: SigDihedralCR
 //------------------------------------------------------------------------------
-class SigDihedralCR : public SigPlate  
+class SigDihedralCR : public SigPlate
 {
     DECLARE_SUBCLASS(SigDihedralCR,SigPlate)
 public:
     SigDihedralCR();
     SigDihedralCR(const LCreal a);
 
-    // RfSignature interface
     LCreal getRCS(const Emission* const em) override;
 private:
     LCreal length;      // Length dimension
@@ -146,14 +142,13 @@ private:
 //               and always facing the transmitter.
 // Factory name: SigTrihedralCR
 //------------------------------------------------------------------------------
-class SigTrihedralCR : public SigDihedralCR  
+class SigTrihedralCR : public SigDihedralCR
 {
     DECLARE_SUBCLASS(SigTrihedralCR,SigDihedralCR)
 public:
     SigTrihedralCR();
     SigTrihedralCR(const LCreal a);
 
-    // RfSignature interface
     LCreal getRCS(const Emission* const em) override;
 };
 
@@ -165,13 +160,12 @@ public:
 // Note:
 //  1) First pair (1:) is camouflage type 0, the second (2:) is camouflage type 1, etc.
 //------------------------------------------------------------------------------
-class SigSwitch : public RfSignature  
+class SigSwitch : public RfSignature
 {
    DECLARE_SUBCLASS(SigSwitch,RfSignature)
 public:
    SigSwitch();
 
-   // RfSignature interface
    LCreal getRCS(const Emission* const em) override;
 };
 
@@ -209,7 +203,7 @@ public:
 //  4) If 'inDecibel' is set true then the dependent data is in decibel meters
 //     squared instead of the default meters squared
 //------------------------------------------------------------------------------
-class SigAzEl : public RfSignature  
+class SigAzEl : public RfSignature
 {
     DECLARE_SUBCLASS(SigAzEl,RfSignature)
 public:
@@ -233,13 +227,12 @@ public:
    virtual bool setSlotInDegrees(const Basic::Number* const msg);
    virtual bool setSlotDecibel(const Basic::Number* const msg);
 
-   // RfSignature interface
    LCreal getRCS(const Emission* const em) override;
 protected:
    const Basic::Table2* tbl;      // The table
    bool swapOrderFlg;               // Swap independent data order from az/el to el/az
-   bool degFlg;                     // independent data in degrees 
-   bool dbFlg;                      // dependent data in decibels 
+   bool degFlg;                     // independent data in degrees
+   bool dbFlg;                      // dependent data in decibels
 };
 
 } // End Simulation namespace

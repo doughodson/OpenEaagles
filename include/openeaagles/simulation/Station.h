@@ -19,7 +19,7 @@ namespace Simulation {
    class Player;
    class Otw;
    class NetIO;
- 
+
 //------------------------------------------------------------------------------
 // Class:  Station
 //
@@ -35,10 +35,10 @@ namespace Simulation {
 //    networks     <Basic::PairStream>    ! List of interoperability network models (DIS, HLA, TENA) (default: 0)
 //
 //    otw               <Otw>             ! Single Out-The-Window (OTW) visual system (default: 0)
-//    otw          <Basic::PairStream>    ! List of Out-The-Window (OTW) visual systems 
+//    otw          <Basic::PairStream>    ! List of Out-The-Window (OTW) visual systems
 //
 //    ioHandler    <Basic::IoHandler>     ! Single I/O data handler (default: 0)
-//    ioHandler    <Basic::PairStream>    ! List of I/O data handlers 
+//    ioHandler    <Basic::PairStream>    ! List of I/O data handlers
 //
 //    ownship           <Basic::String>   ! Player name of our ownship (primary) player (default: 0)
 //
@@ -85,7 +85,7 @@ namespace Simulation {
 //    1) Currently supports the creation of three optional threads for (a) time-critical,
 //       (b) interoperabilty networks and (c) background tasks.  These are created by
 //       the virtual functions createTimeCriticalProcess(), createNetworkProcess()
-//       and createBackgroundProcess(), respectively.  Users can derive from Station Class 
+//       and createBackgroundProcess(), respectively.  Users can derive from Station Class
 //       and create their own threads (e.g., to sync any of the threads with an
 //       external interrupt).
 //
@@ -134,7 +134,7 @@ namespace Simulation {
 //       functions are called from.
 //
 //    6) When subclassing off of this class for your application, the
-//       convention is that the updateData() function for any graphic 
+//       convention is that the updateData() function for any graphic
 //       component (see BasicGL::Graphic) is called by their display
 //       manager (see BasicGL::GlutDisplay) and therefore from the
 //       display manager's thread.
@@ -144,7 +144,7 @@ namespace Simulation {
 //
 //    At shutdown, the user application must send a SHUTDOWN_EVENT event
 //    to this object.
-//       
+//
 //------------------------------------------------------------------------------
 class Station : public Basic::Component
 {
@@ -258,9 +258,6 @@ public:
    virtual bool setSlotFastForwardRate(const Basic::Number* const);
    virtual bool setSlotEnableUpdateTimers(const Basic::Number* const);
 
-   // ---
-   // Basic::Component functions
-   // ---
    void updateTC(const LCreal dt = 0.0) override;
    void updateData(const LCreal dt = 0.0) override;
    void reset() override;

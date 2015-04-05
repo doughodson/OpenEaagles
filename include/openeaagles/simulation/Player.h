@@ -1004,9 +1004,6 @@ public:
    virtual bool setSlotTestYawRate(const Basic::Angle* const msg);
    virtual bool setSlotTestBodyAxis(const Basic::Number* const msg);
 
-   // ---
-   // Basic::Component interface
-   // ---
    bool isFrozen() const override;
    void reset() override;
    void updateTC(const LCreal dt = 0.0) override;
@@ -1030,7 +1027,6 @@ protected:
    // Update terrain elevation at our location
    virtual void updateElevation();
 
-   // Basic::Component Interface
    bool shutdownNotification() override;
    void printTimingStats() override;
 
@@ -1046,13 +1042,12 @@ protected:
    virtual bool setIrSystem(Basic::Pair* const n);        // Sets our IR sensors models
    virtual bool setStoresMgr(Basic::Pair* const s);       // Sets our stores management model
 
-   // Basic::Component interface
-   virtual void processComponents(   // Process our subcomponent list (which should be other steer points)
+   void processComponents(                  // Process our subcomponent list (which should be other steer points)
       Basic::PairStream* const list,        // Source list of components
       const std::type_info& filter,         // Type filter
       Basic::Pair* const add = 0,           // Optional pair to add
       Basic::Component* const remove = 0    // Optional subcomponent to remove
-      );
+      ) override;
 
 private:
    void initData();

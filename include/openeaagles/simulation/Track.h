@@ -24,7 +24,7 @@ class Player;
 // Factory name: Track
 // Description: Generic Target Track
 //------------------------------------------------------------------------------
-class Track : public Basic::Object  
+class Track : public Basic::Object
 {
     DECLARE_SUBCLASS(Track,Basic::Object)
 
@@ -192,7 +192,7 @@ public:
    IffCode getIffCode() const                      { return iffCode; }
    virtual bool setIffCode(const IffCode s);
 
-   // Shootlist support 
+   // Shootlist support
    int getShootListIndex() const                   { return shootList; }
    virtual bool setShootListIndex(const int idx);
 
@@ -226,7 +226,7 @@ protected:
    // Track State Vector
    double      latitude;       // Latitude                                (degs)
    double      longitude;      // Longitude                               (degs)
-   osg::Vec3   los;            // Line-of-sight unit vector (NED) 
+   osg::Vec3   los;            // Line-of-sight unit vector (NED)
    osg::Vec3   pos;            // position; relative to ownship (NED)     (m)
    osg::Vec3   vel;            // Velocity; relative to ownship (NED)     (m/s)
    osg::Vec3   accel;          // Acceleration; relative to ownship (NED) ((m/s)/s)
@@ -249,7 +249,7 @@ protected:
    LCreal      relGndTrk;      // Ground track angle relative to ownship    (r)
 
    // Shoot list support
-   int         shootList;      // Shoot list index 
+   int         shootList;      // Shoot list index
    bool        wpnRel;         // Released weapon on this track
    bool        rejected;       // Target Rejected (from shoot list)
 
@@ -276,13 +276,13 @@ protected:
 // Factory name: RfTrack
 // Description: Generic R/F Target Track (onboard sensors)
 //------------------------------------------------------------------------------
-class RfTrack : public Track  
+class RfTrack : public Track
 {
    DECLARE_SUBCLASS(RfTrack,Track)
 
 public:
    RfTrack();
-    
+
    // Signal strength and last emission for onboard R/F sensor tracks
    LCreal getAvgSignal() const                     { return avgSig; }
    LCreal getMaxSignal() const                     { return maxSig; }
@@ -294,8 +294,7 @@ public:
    bool isMissileWarning() const                   { return mslWarn; }
    virtual bool setMissileWarning(const bool b);
 
-   // Track interface
-   virtual void clear();               // Clear track
+   void clear() override;
 
 //protected:
    virtual bool setLastEmission(const Emission* const em);
@@ -310,27 +309,26 @@ protected:
 // Factory name: IrTrack
 // Description: Generic IR Target Track (onboard sensors)
 //------------------------------------------------------------------------------
-class IrTrack : public Track  
+class IrTrack : public Track
 {
    DECLARE_SUBCLASS(IrTrack,Track)
 
 public:
    IrTrack();
-    
+
    // Signal strength and last emission for onboard IR sensor tracks
    LCreal getAvgSignal() const                                             { return avgSig; }
    LCreal getMaxSignal() const                                             { return maxSig; }
    int getNumSignals() const                                               { return nSig; }
    const IrQueryMsg* getLastQuery() const                                  { return lastQuery; }
    virtual bool setSignal(const LCreal snDbl, const IrQueryMsg* const q);
-   virtual bool setPosition(const osg::Vec3& p);
+   bool setPosition(const osg::Vec3& p) override;
 
    // Missile warning (from an RWR)
    bool isMissileWarning() const                                           { return mslWarn; }
    virtual bool setMissileWarning(const bool b);
 
-   // Track inteIrace
-   virtual void clear();               // Clear track
+   void clear() override;
 
 //protected:
    virtual bool setLastQuery(const IrQueryMsg* const q);

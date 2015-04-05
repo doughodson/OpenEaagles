@@ -62,10 +62,10 @@ class Action;
 //             <Basic::Number>      ! (or as degrees)
 //
 //   next      <Basic::Number>      ! "Next" steerpoint number (default: 0)
-//             <Basic::Identifier>  ! or by steerpoint name 
+//             <Basic::Identifier>  ! or by steerpoint name
 //
 //   action    <Action>             ! Action to be triggered at steerpoint crossing (auto only)
-//                                  !  Note: the "to" steerpoint will have sequenced to the 
+//                                  !  Note: the "to" steerpoint will have sequenced to the
 //                                  !  next steerpoint when action is triggered. (default: 0)
 //
 //------------------------------------------------------------------------------
@@ -78,7 +78,7 @@ public:
 
 public:
     Steerpoint();
-    
+
     StptType getSteerpointType() const          { return stptType; }
 
     // Valid data?
@@ -88,7 +88,7 @@ public:
     bool isWarnSCA() const                      { return scaWarn; }
     bool isCmdAltValid() const                  { return haveCmdAlt; }
     bool isCmdAirspeedValid() const             { return haveCmdAs; }
-    
+
     // Steerpoint parameters
     const osg::Vec3& getPosition() const        { return posVec; }
     double getLatitude() const;
@@ -111,13 +111,13 @@ public:
     LCreal getDistNM() const                    { return dst; }
     LCreal getTTG() const                       { return ttg; }
     LCreal getCrossTrackErrNM() const           { return xte; }
-    
+
     // Nav Steering: 'leg' data
     LCreal getTrueCrsDeg() const                { return tcrs; }
     LCreal getMagCrsDeg() const                 { return mcrs; }
     LCreal getLegDistNM() const                 { return tld; }
     LCreal getLegTime() const                   { return tlt; }
-    
+
     // Nav Steering: 'enroute' data
     LCreal getDistEnrouteNM() const             { return tde; }
     LCreal getETE() const                       { return ete; }
@@ -127,12 +127,12 @@ public:
     // Set the ground elevation at the steerpoint from this terrain database
     // Interpolate between elevation posts if the optional 'interp' flag is true.
     // Returns true if successful.
-    virtual bool setElevation(const Basic::Terrain* const terrain, const bool interp = false);           
-    
+    virtual bool setElevation(const Basic::Terrain* const terrain, const bool interp = false);
+
     // Set parameters
     virtual void setSteerpointType(const StptType t)    { stptType = t; }
     virtual void setPosition(const LCreal x, const LCreal y, const LCreal z);
-    virtual void setElevation(const LCreal x);           
+    virtual void setElevation(const LCreal x);
     virtual void setPosition(const osg::Vec3& newPos);
     virtual void setLatitude(const double v);
     virtual void setLongitude(const double v);
@@ -156,21 +156,20 @@ public:
     virtual void setETE(const LCreal v)                  { ete = v; }
     virtual void setETA(const LCreal v)                  { eta = v; }
     virtual void setELT(const LCreal v)                  { elt = v; }
-    
+
     // Sets the initial lat/lon (reset()) values
     virtual void setInitLatitude(const double lat)    { initLatitude = lat; }
     virtual void setInitLongitude(const double lon)   { initLongitude = lon; }
 
     // Get/set steerpoint action
-    Action* getAction() { return action; }              // Action to be performed 
-    const Action* getAction() const { return action; }  // Action to be performed 
+    Action* getAction() { return action; }              // Action to be performed
+    const Action* getAction() const { return action; }  // Action to be performed
     virtual bool setAction(Action* const act);          // Sets the action to be performed
 
    // Compute have data 'to' this point
    virtual bool compute(const Navigation* const nav, const Steerpoint* const from = 0);
    virtual void clearNavData();
 
-   // Basic::Component interface
    void reset() override;
 
 protected:
@@ -199,13 +198,12 @@ protected:
     virtual bool setSlotNext(const Basic::Identifier* const num);
     virtual bool setSlotNext(const Basic::Number* const num);
 
-    // Basic::Component interface
-    virtual void processComponents(   // Process our subcomponent list (which should be other steerpoints)
+    void processComponents(   // Process our subcomponent list (which should be other steerpoints)
          Basic::PairStream* const list,        // Source list of components
          const std::type_info& filter,           // Type filter
          Basic::Pair* const add = 0,           // Optional pair to add
          Basic::Component* const remove = 0    // Optional subcomponent to remove
-       );
+       ) override;
 
 private:
     // Steerpoint parameters
@@ -221,11 +219,11 @@ private:
     bool        needPosVec;     // Request calucaltion of 'posVec' from Lat/Lon
     bool        needLL;         // Request calucaltion of Lat/Lon from 'posVec'
     LCreal      cmdAlt;         // Commanded Altitude       (m)
-    bool        haveCmdAlt;     // Have commanded altitude   
+    bool        haveCmdAlt;     // Have commanded altitude
     LCreal      cmdAirspeed;    // Commanded Airspeed       (kts)
-    bool        haveCmdAs;      // Have commanded airspeed   
+    bool        haveCmdAs;      // Have commanded airspeed
     SPtr<Basic::Pair> next;   // "next" Steerpoint pair [ name steerpoint ]
-    
+
     // Steerpoint action
     SPtr<Action> action;        // Action to be performed at this steerpoint
 
@@ -237,13 +235,13 @@ private:
     bool        haveInitLat;    // Have initial latitude
     bool        haveInitLon;    // Have initial longitude
     bool        haveInitPos;    // Have initial pos vector
-    bool        haveInitMagVar; // Have initial mag var 
+    bool        haveInitMagVar; // Have initial mag var
     LCreal      initElev;       // Elevation                  (m)
     bool        haveInitElev;   // Have initial elevation
     LCreal      initCmdAlt;     // Initial commanded altitude (m)
     bool        haveInitCmdAlt; // Have initial cmd altitude
     LCreal      initCmdAirspeed; // Initial commanded airspeed (kts)
-    bool        haveInitCmdAs;   // Have commanded airspeed   
+    bool        haveInitCmdAs;   // Have commanded airspeed
     SPtr<const Basic::String> initNextStptName; // Name of the inital "next" steerpoint
     int         initNextStptIdx;    // Index of the initial "next" steerpoint
 
@@ -253,12 +251,12 @@ private:
     LCreal      dst;            // Distance direct-to point (nm)
     LCreal      ttg;            // Time-To-Go (direct)      (sec)
     LCreal      xte;            // Cross-Track Error        (nm)
-    
+
     LCreal      tcrs;           // TRUE Course to point     (degs)
     LCreal      mcrs;           // Mag Course to point      (degs)
     LCreal      tlt;            // Total Time this Leg      (sec)
     LCreal      tld;            // Total Leg Distance       (nm)
-    
+
     LCreal      tde;            // Total Distance Enroute   (nm)
     LCreal      ete;            // Est Time Enroute         (sec)
     LCreal      eta;            // Est Time of Arrival (UTC)(sec)

@@ -28,7 +28,7 @@ namespace Simulation {
 //
 //    scanWidth            <Number>       ! Width of the scan (radians) (default: 0.0)
 //
-//    searchVolume         <List>         ! Size of the search volume [ width  height ] (radians); 
+//    searchVolume         <List>         ! Size of the search volume [ width  height ] (radians);
 //                                        ! (default scanHeight: 0)
 //                                        ! ... and sets the 'scanWidth'
 //                                        ! ... and sets the 'scanMode'  to "horizontal"
@@ -129,13 +129,13 @@ namespace Simulation {
 //       the two, you're likely to get unexpected results.
 //
 //------------------------------------------------------------------------------
-class ScanGimbal : public Gimbal  
+class ScanGimbal : public Gimbal
 {
     DECLARE_SUBCLASS(ScanGimbal,Gimbal)
 
 public:
-    enum { MANUAL_SCAN, HORIZONTAL_BAR_SCAN, VERTICAL_BAR_SCAN, 
-           CONICAL_SCAN, CIRCULAR_SCAN, PSEUDO_RANDOM_SCAN, 
+    enum { MANUAL_SCAN, HORIZONTAL_BAR_SCAN, VERTICAL_BAR_SCAN,
+           CONICAL_SCAN, CIRCULAR_SCAN, PSEUDO_RANDOM_SCAN,
            SPIRAL_SCAN, USER_MODES };
     enum Side { BEGINNING = 0, ENDING = 1 };
 
@@ -185,7 +185,7 @@ public:
 
     virtual bool setMaxRevs(const double newMaxRevs);                            // Sets the maximum number of revolutions (spiral scan)
 
-    // Sets a search volume for horizontal scan patterns (radians) -- 
+    // Sets a search volume for horizontal scan patterns (radians) --
     virtual bool setSearchVolume(const double width, const double height, const int reqBars = 0);
 
     // Event handler(s)
@@ -204,7 +204,7 @@ public:
     virtual bool setSlotScanRadius(const Basic::Number* const newScanRadius);
     virtual bool setSlotPRVertices(const Basic::PairStream* const prObj);
     virtual bool setSlotMaxRevs(const Basic::Number* const newMaxRevs);
-   
+
     // Component Interface
     bool event(const int event, Basic::Object* const obj = 0) override;
     void reset() override;
@@ -241,10 +241,9 @@ protected:
    bool isReverseScan() const                         { return reverseScan; }
    bool setReverseScan(const bool f)                  { reverseScan = f; return true; }
 
-   bool setBarNumber(const unsigned int n)            { if (n <= numBars) { barNum = n; return true; } else return false; } 
+   bool setBarNumber(const unsigned int n)            { if (n <= numBars) { barNum = n; return true; } else return false; }
 
-   // System Interface -- Callbacks by phase
-   void dynamics(const LCreal dt) override;    // Phase 0
+   void dynamics(const LCreal dt) override;
 
 private:
     osg::Vec2d  scanPos;         // Position in scan pattern     (rad)

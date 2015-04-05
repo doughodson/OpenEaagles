@@ -73,10 +73,8 @@ public:
    // Add a new emission report (RF track managers only)
    virtual void newReport(Emission* em, LCreal snDbl);
 
-   // System Interface -- Event handler(s)
    bool killedNotification(Player* const killedBy = 0) override;
 
-   // Component Interface
    void reset() override;
 
 protected:
@@ -144,29 +142,29 @@ private:
 //==============================================================================
 class AirTrkMgr : public TrackManager
 {
-    DECLARE_SUBCLASS(AirTrkMgr,TrackManager)
+   DECLARE_SUBCLASS(AirTrkMgr,TrackManager)
 public:
-    AirTrkMgr();
+   AirTrkMgr();
 
-    LCreal getPosGate()                             { return posGate;}
-    LCreal getRngGate()                             { return rngGate;}
-    LCreal getVelGate()                             { return velGate;}
+   LCreal getPosGate()                             { return posGate;}
+   LCreal getRngGate()                             { return rngGate;}
+   LCreal getVelGate()                             { return velGate;}
 
 protected:
-    virtual void processTrackList(const LCreal dt);     // Process the reports into a track list
+   void processTrackList(const LCreal dt) override;
 
 private:
-    void initData();
-    bool setPositionGate(const Basic::Number* const num);
-    bool setRangeGate(const Basic::Number* const num);
-    bool setVelocityGate(const Basic::Number* const num);
+   void initData();
+   bool setPositionGate(const Basic::Number* const num);
+   bool setRangeGate(const Basic::Number* const num);
+   bool setVelocityGate(const Basic::Number* const num);
 
-    // Prediction parameters
-    LCreal              posGate;            // Position Gate (meters)
-    LCreal              rngGate;            // Range Gate (meters)
-    LCreal              velGate;            // Velocity Gate (m/s)
+   // Prediction parameters
+   LCreal              posGate;            // Position Gate (meters)
+   LCreal              rngGate;            // Range Gate (meters)
+   LCreal              velGate;            // Velocity Gate (m/s)
 
-    // Used by processTrackList()
+   // Used by processTrackList()
    bool** report2TrackMatch;                 // Report/Track matched matrix
    unsigned int* reportNumMatches;           // Number of matches for each report
    unsigned int* trackNumMatches;            // Number of matcher for each track
@@ -181,16 +179,16 @@ private:
 //==============================================================================
 class GmtiTrkMgr : public TrackManager
 {
-    DECLARE_SUBCLASS(GmtiTrkMgr,TrackManager)
+   DECLARE_SUBCLASS(GmtiTrkMgr,TrackManager)
 public:
-    GmtiTrkMgr();
+   GmtiTrkMgr();
 protected:
-    virtual void processTrackList(const LCreal dt);     // Process the reports into a track list
+   void processTrackList(const LCreal dt) override;
 
 private:
-    void initData();
+   void initData();
 
-    // Used by processTrackList()
+   // Used by processTrackList()
    bool** report2TrackMatch;                 // Report/Track matched matrix
    unsigned int* reportNumMatches;           // Number of matches for each report
    unsigned int* trackNumMatches;            // Number of matcher for each track
@@ -205,16 +203,16 @@ private:
 //==============================================================================
 class RwrTrkMgr : public TrackManager
 {
-    DECLARE_SUBCLASS(RwrTrkMgr,TrackManager)
+   DECLARE_SUBCLASS(RwrTrkMgr,TrackManager)
 public:
-    RwrTrkMgr();
+   RwrTrkMgr();
 protected:
-    virtual void processTrackList(const LCreal dt);     // Process the reports into a track list
+   void processTrackList(const LCreal dt) override;
 
 private:
-    void initData();
+   void initData();
 
-    // Used by processTrackList()
+   // Used by processTrackList()
    bool** report2TrackMatch;                 // Report/Track matched matrix
    unsigned int* reportNumMatches;           // Number of matches for each report
    unsigned int* trackNumMatches;            // Number of matcher for each track

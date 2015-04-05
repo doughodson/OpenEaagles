@@ -26,7 +26,7 @@ namespace Simulation {
 //                                          ! (default: DEFAULT_MAX_LAUNCH_RANGE)
 //
 //==============================================================================
-class SamVehicle : public GroundVehicle  
+class SamVehicle : public GroundVehicle
 {
    DECLARE_SUBCLASS(SamVehicle,GroundVehicle)
 
@@ -34,7 +34,7 @@ public:
    SamVehicle();
 
    // Access functions
-   virtual unsigned int getNumberOfMissiles() const;  // Number of missiles 
+   virtual unsigned int getNumberOfMissiles() const;  // Number of missiles
 
    virtual LCreal getMaxLaunchRange() const;          // Max missile launch range (meters)
    virtual LCreal getMinLaunchRange() const;          // Min missile launch range (meters)
@@ -49,7 +49,6 @@ public:
    virtual bool setSlotMinLaunchRange(const Basic::Distance* const msg);
    virtual bool setSlotMaxLaunchRange(const Basic::Distance* const msg);
 
-   // Component Interface
    void updateData(const LCreal dt = 0.0) override;
 
 private:

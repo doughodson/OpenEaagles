@@ -29,7 +29,7 @@ namespace Simulation {
 //    selected    <Number>             ! Selected weapon station number (default: 0)
 //
 //
-// Events:              
+// Events:
 //    JETTISON_EVENT <Weapon>          ! Jettison this weapon
 //    JETTISON_EVENT <ExternalStore>   ! Jettison this external store
 //
@@ -50,8 +50,8 @@ namespace Simulation {
 //
 //    4) The getStores() function returns a pre-ref()'d pointer to the stores lists.
 //
-//    5) Weapons (see Weapon.h) are derived from the Player class.  They're 
-//       attached to the launch vehicle, which owns this stores manager. 
+//    5) Weapons (see Weapon.h) are derived from the Player class.  They're
+//       attached to the launch vehicle, which owns this stores manager.
 //       When the weapon is released, it is cloned to create a flyout weapon,
 //       which is added to the simulation's player list and becomes an active
 //       player.  Weapons include bombs, missiles, effects (e.g., chaff, flares,
@@ -100,7 +100,7 @@ namespace Simulation {
 //       /* Missiles on station #1 and #5, bombs on #2 and 4, and fuel on #3 */
 //       stores: {
 //          1: ( Missile ... )
-//          2: ( Bomb ... )      
+//          2: ( Bomb ... )
 //          3: ( FuelTank ... )
 //          4: ( Bomb ... )
 //          5: ( Missile ... )
@@ -173,7 +173,6 @@ public:
    virtual bool onJettisonEvent(Weapon* const msg);
    virtual bool onJettisonEvent(ExternalStore* const msg);
 
-   // Component Interface
    void updateTC(const LCreal dt = 0.0) override;
    void updateData(const LCreal dt = 0.0) override;
    bool event(const int event, Basic::Object* const obj = 0) override;
@@ -200,8 +199,7 @@ protected:
    virtual bool setSlotStores(const Basic::PairStream* const msg); // (clones the 'msg' list)
    virtual bool setSlotSelected(Basic::Number* const msg);         // Selected station
 
-   // System class Interface -- phase() callbacks
-   void process(const LCreal dt) override;     // Phase 3
+   void process(const LCreal dt) override;
 
 private:
    void initData();

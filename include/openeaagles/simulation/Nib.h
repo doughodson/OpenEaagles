@@ -42,33 +42,33 @@ class Nib : public Basic::Component
 
 public:
    // Standard (mil-std-1278.1) Dead_Reckoning Model codes [ 0 .. 9 ]
-   enum DeadReckoning { 
+   enum DeadReckoning {
       OTHER_DRM,        // User defined (i.e., virtual function dynamicsOther())
-      STATIC_DRM,       // No dead reckoning 
-      FPW_DRM,          // World, No rotation, 1st order linear 
-      RPW_DRM,          // World, 1st order rotation, 1st order linear 
+      STATIC_DRM,       // No dead reckoning
+      FPW_DRM,          // World, No rotation, 1st order linear
+      RPW_DRM,          // World, 1st order rotation, 1st order linear
       RVW_DRM,          // World, 1st order rotation, 2nd order linear
       FVW_DRM,          // World, No rotation, 2nd order linear
       FPB_DRM,          // Body, No rotation, 1st order linear
       RPB_DRM,          // Body, 1st order rotation, 1st order linear
-      RVB_DRM,          // Body, 1st order rotation, 2nd order linear 
-      FVB_DRM,          // Body, No rotation, 2nd order linear 
+      RVB_DRM,          // Body, 1st order rotation, 2nd order linear
+      FVB_DRM,          // Body, No rotation, 2nd order linear
    };
-    
+
 public:
    Nib(const NetIO::IoType ioType);
 
    NetIO::IoType getIoType() const { return ioType; }
-   
+
    NetIO* getNetIO()  { return pNetIO; }             // Controlling Network I/O
    const NetIO* getNetIO() const { return pNetIO; }  // Controlling Network I/O (const version)
    virtual bool setNetIO(NetIO* const p);  // Sets our Network I/O controller
-    
+
    // The player, its name and ID
    Player* getPlayer()                             { return pPlayer; }
    unsigned short getPlayerID() const              { return playerID; }
    const char* getPlayerName() const               { return pname; }
-   
+
    virtual bool setPlayer(Player* const p);
    virtual void setPlayerID(const unsigned short v);
    virtual void setPlayerName(const char* s);
@@ -130,7 +130,7 @@ public:
    bool isChecked() const                             { return checked; }
    void setCheckedFlag(const bool flg)                { checked = flg; }
 
-   // Standard player (entity) type codes 
+   // Standard player (entity) type codes
    const Ntm* getTypeMapper() const               { return ntm; }
    bool isEntityTypeChecked() const               { return entityTypeChecked; }
    bool isEntityTypeUnchecked() const             { return !entityTypeChecked; }
@@ -144,13 +144,13 @@ public:
    LCreal getSmoke() const                        { return smoking; }
    LCreal getFlames() const                       { return flames; }
    unsigned int getCamouflageType() const         { return camouflage; }
-   virtual bool setDamage(const LCreal v); 
-   virtual bool setSmoke(const LCreal v); 
-   virtual bool setFlames(const LCreal v); 
+   virtual bool setDamage(const LCreal v);
+   virtual bool setSmoke(const LCreal v);
+   virtual bool setFlames(const LCreal v);
    virtual bool setCamouflageType(const unsigned int v);
 
    // Articulated Part: wing sweep angle change count
-   unsigned int getAPartWingSweepCnt() const { return apartWingSweepCnt; } 
+   unsigned int getAPartWingSweepCnt() const { return apartWingSweepCnt; }
 
    // Articulated Part: wing sweep (radians)
    LCreal getAPartWingSweep() const          { return apartWingSweep; }
@@ -172,7 +172,7 @@ public:
 
    // Articulated Part: Launcher elevation angle (radians)
    LCreal getAPartLauncherElevation() const         { return apartLnchrElev; }
-    
+
    // Articulated Part: Number of attached missiles
    unsigned int getAPartNumberAttachedNumMissiles() const { return apartNumMissiles; }
 
@@ -194,10 +194,10 @@ public:
    // NIB timeout
    bool isTimeoutEnabled() const                   { return timeoutEnbFlg; }
    void setTimeoutEnabled(const bool flg)          { timeoutEnbFlg = flg; }
-      
+
    LCreal getTimeExec() const                      { return execTime; }
    virtual void setTimeExec(const LCreal t);
-      
+
    LCreal getTimeUtc() const                       { return utcTime; }
    virtual void setTimeUtc(const LCreal t);
 
@@ -225,7 +225,6 @@ protected:
    // Update our DR time and return the new time
    double updateDrTime(const double dt)               { return (drTime += dt); }
 
-   // Basic::Component protected interface
    bool shutdownNotification() override;
 
 private:

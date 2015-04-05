@@ -100,7 +100,6 @@ public:
     virtual bool setSlotRefLongitude(const Basic::Number* const msg);     // Sets the visual database reference longitude (degs) slot
     virtual bool setSlotOtwModelTypes(const Basic::PairStream* const msg); // Sets the list of OTW model type IDs (Otm objects)
 
-    // Basic::Component interface
     void updateTC(const LCreal dt = 0.0f) override;
     void reset() override;
 
@@ -249,7 +248,7 @@ public:
 
     const Otm* getTypeMapper() const         { return typeMapper; }     // OTW unique model type mapper
 
-    unsigned short getPlayerID() const       { return playerID; }       // Player ID for the player associated with this model
+    unsigned short getPlayerID() const       { return playerID; }         // Player ID for the player associated with this model
     const Basic::String* getFederateName() const { return federateName; } // Player's federate name (if networked)
 
     int getAgeCount() const                  { return ageCount; }       // Age counter value (number of OTW frames since last OTW update)
@@ -345,23 +344,23 @@ class Otm : public Basic::Object
 public:
     Otm();
 
-    unsigned int getTypeId() const           { return typeId; }         // OTW entity type ID number
-    virtual bool setTypeId(const unsigned int newType);                 // Sets the OTW entity type number
-    virtual bool setSlotTypeId(const Basic::Number* const msg);              // Sets the OTW entity type number
+    unsigned int getTypeId() const                                        { return typeId; }      // OTW entity type ID number
+    virtual bool setTypeId(const unsigned int newType);                   // Sets the OTW entity type number
+    virtual bool setSlotTypeId(const Basic::Number* const msg);           // Sets the OTW entity type number
 
-    const Basic::Identifier* getRefFormName() const    { return refFormName; }    // Reference form name
-    virtual bool setSlotRefFormName(const Basic::Identifier* const msg);          // Sets the Reference form name
+    const Basic::Identifier* getRefFormName() const                       { return refFormName; } // Reference form name
+    virtual bool setSlotRefFormName(const Basic::Identifier* const msg);  // Sets the Reference form name
 
-    const Basic::String* getRefTypeName() const   { return refTypeName; }    // Reference type name
-    virtual bool setSlotRefTypeName(const Basic::String* const msg);         // Sets the Reference type name
+    const Basic::String* getRefTypeName() const                           { return refTypeName; } // Reference type name
+    virtual bool setSlotRefTypeName(const Basic::String* const msg);      // Sets the Reference type name
 
     // True if player's form & type names match our reference form and type names.
     virtual bool isMatchingPlayerType(const Player* const p) const;
 
 private:
     SPtr<const Basic::Identifier>  refFormName;     // Reference form name
-    SPtr<const Basic::String> refTypeName;     // Reference type name (e.g., "F-16C", "T-71"
-    unsigned int typeId;                  // OTW entity type ID number
+    SPtr<const Basic::String> refTypeName;          // Reference type name (e.g., "F-16C", "T-71"
+    unsigned int typeId;                            // OTW entity type ID number
 };
 
 } // End Simulation namespace

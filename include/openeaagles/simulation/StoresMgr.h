@@ -16,7 +16,7 @@ namespace Simulation {
 class Bomb;
 class Chaff;
 class Decoy;
-   class ExternalStore;
+class ExternalStore;
 class Flare;
 class Gun;
 class Missile;
@@ -34,10 +34,10 @@ class Weapon;
 //
 // Factory name: BaseStoresMgr
 //
-// Events:              
+// Events:
 //    WPN_REL_EVENT  <Basic::Boolean>    ! Weapon release switch with position
 //    WPN_REL_EVENT  <none>              ! Weapon release switch (single shot)
-//    WPN_RELOAD     <none>              ! Request reload of weapons 
+//    WPN_RELOAD     <none>              ! Request reload of weapons
 //
 // Notes:
 //
@@ -59,7 +59,7 @@ class Weapon;
 //       class (see Player.h).
 //
 //------------------------------------------------------------------------------
-class StoresMgr : public Stores  
+class StoresMgr : public Stores
 {
     DECLARE_SUBCLASS(StoresMgr,Stores)
 
@@ -127,17 +127,13 @@ public:
    virtual bool onTriggerSwEvent(const Basic::Boolean* const sw = 0);
    virtual bool onWpnReload();
 
-   // Component Interface
    bool event(const int event, Basic::Object* const obj = 0) override;
 
 protected:
-   // Stores class interface; protected slot functions
-   virtual bool setSlotStores(const Basic::PairStream* const msg); // (clones the 'msg' list)
+   bool setSlotStores(const Basic::PairStream* const msg) override;
 
-   // System class interface; phase() callbacks
-   void process(const LCreal dt) override;     // Phase 3
+   void process(const LCreal dt) override;
 
-   // Basic::Component class interface; protected functions
    bool shutdownNotification() override;
 
 private:
@@ -168,7 +164,7 @@ private:
 //       to the flyout weapon, or zero if unable to release a weapon.
 //
 //------------------------------------------------------------------------------
-class SimpleStoresMgr : public StoresMgr  
+class SimpleStoresMgr : public StoresMgr
 {
     DECLARE_SUBCLASS(SimpleStoresMgr,StoresMgr)
 
@@ -192,39 +188,35 @@ public:
 
    virtual bool setWeaponReleaseTimer(const LCreal v);   // Sets the release timer
 
-   // StoresMgr class events
-   virtual bool onWpnRelEvent(const Basic::Boolean* const sw = 0);
-   virtual bool onTriggerSwEvent(const Basic::Boolean* const sw = 0);
+   bool onWpnRelEvent(const Basic::Boolean* const sw = 0) override;
+   bool onTriggerSwEvent(const Basic::Boolean* const sw = 0) override;
 
-   // StoresMgr class functions
-   virtual Weapon* getCurrentWeapon();
-   virtual const Weapon* getCurrentWeapon() const;
-   virtual bool isWeaponReleased() const;
-   virtual Missile* getNextMissile();
-   virtual const Missile* getNextMissile() const;
-   virtual Sam* getNextSam();
-   virtual const Sam* getNextSam() const;
-   virtual Bomb* getNextBomb();
-   virtual const Bomb* getNextBomb() const;
-   virtual Chaff* getNextChaff();
-   virtual const Chaff* getNextChaff() const;
-   virtual Flare* getNextFlare();
-   virtual const Flare* getNextFlare() const;
-   virtual Decoy* getNextDecoy();
-   virtual const Decoy* getNextDecoy() const;
-   virtual Missile* releaseOneMissile();
-   virtual Sam* releaseOneSam();
-   virtual Bomb* releaseOneBomb();
-   virtual Chaff* releaseOneChaff();
-   virtual Flare* releaseOneFlare();
-   virtual Decoy* releaseOneDecoy();
+   Weapon* getCurrentWeapon() override;
+   const Weapon* getCurrentWeapon() const override;
+   bool isWeaponReleased() const override;
+   Missile* getNextMissile() override;
+   const Missile* getNextMissile() const override;
+   Sam* getNextSam() override;
+   const Sam* getNextSam() const override;
+   Bomb* getNextBomb() override;
+   const Bomb* getNextBomb() const override;
+   Chaff* getNextChaff() override;
+   const Chaff* getNextChaff() const override;
+   Flare* getNextFlare() override;
+   const Flare* getNextFlare() const override;
+   Decoy* getNextDecoy() override;
+   const Decoy* getNextDecoy() const override;
+   Missile* releaseOneMissile() override;
+   Sam* releaseOneSam() override;
+   Bomb* releaseOneBomb() override;
+   Chaff* releaseOneChaff() override;
+   Flare* releaseOneFlare() override;
+   Decoy* releaseOneDecoy() override;
 
-   // Component Interface
    void updateData(const LCreal dt = 0.0) override;
 
 protected:
-   // System class interface; phase() callbacks
-   void process(const LCreal dt) override;     // Phase 3
+   void process(const LCreal dt) override;
 
 private:
    void initData();

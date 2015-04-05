@@ -116,7 +116,6 @@ public:
    // Trigger the 'to' steerpoint action; auto sequencing only
    virtual void triggerAction();
 
-   // Basic::Component interface
    void updateData(const LCreal dt = 0.0) override;
    bool event(const int event, Basic::Object* const obj = 0) override;
    void reset() override;
@@ -136,13 +135,12 @@ protected:
     bool setSlotAutoSeqDistance(const Basic::Number* const msg);
     bool setSlotWrap(const Basic::Number* const msg);
 
-    // Basic::Component interface
-    virtual void processComponents(
+    void processComponents(
          Basic::PairStream* const list,        // Source list of components
          const std::type_info& filter,         // Type filter
          Basic::Pair* const add = 0,           // Optional pair to add
          Basic::Component* const remove = 0    // Optional subcomponent to remove
-       );
+       ) override;
 
 private:
    const Basic::Pair* findSteerpointImp(const Steerpoint* const sp) const;

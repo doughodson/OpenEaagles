@@ -232,7 +232,6 @@ public:
    // IPlayer factory: creates a networked player based on NIB data
    virtual Player* createIPlayer(Nib* const nib);
 
-   // Basic::Component interface
    void reset() override;
 
 protected:
@@ -271,7 +270,6 @@ protected:
    virtual bool setSlotMaxAge(const Basic::Time* const msg);                   // Sets the max age(s)
    virtual bool setSlotMaxEntityRange(const Basic::Distance* const msg);       // Sets the max entity range(s)
 
-   // Basic::Component protected interface
    bool shutdownNotification() override;
 
 //------------------------------------------------------------------------------

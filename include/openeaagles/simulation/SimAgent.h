@@ -7,7 +7,7 @@
 #include "openeaagles/basic/ubf/Agent.h"
 
 namespace Eaagles {
-namespace Simulation { 
+namespace Simulation {
 
 class Simulation;
 class Station;
@@ -33,7 +33,7 @@ public:
 
 protected:
 
-   virtual void initActor();
+   void initActor() override;
 
    Station*     getStation();
    Simulation*  getSimulation();
@@ -66,7 +66,7 @@ private:
 //   } // components
 //
 //   simulation: ( Simulation
-//    
+//
 //      players: {
 //
 //         p01: ()

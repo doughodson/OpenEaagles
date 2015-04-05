@@ -29,7 +29,7 @@ class Datalink;
 //    to the channels using the 'channels' slot.  Channel frequencies can also
 //    be assigned using the setChannelFrequency() function.  The 'numChannels'
 //    slot defines the number of channels that the radio model is capable of,
-//    and it must be set prior to setting any channel frequencies.  
+//    and it must be set prior to setting any channel frequencies.
 //
 //    The radio is in 'channel tuned' mode if the radio frequency is the same as
 //    the frequency assigned to the current channel number; otherwise the radio
@@ -73,7 +73,7 @@ class Datalink;
 //       )
 //
 //------------------------------------------------------------------------------
-class Radio : public RfSystem  
+class Radio : public RfSystem
 {
    DECLARE_SUBCLASS(Radio,RfSystem)
 
@@ -130,7 +130,6 @@ protected:
    virtual bool setSlotMaxDetectRange(Basic::Number* const num);
    virtual bool setSlotRadioId(Basic::Number* const num);
 
-   // System class -- phase callbacks
    void receive(const LCreal dt) override;
 
 private:
@@ -152,7 +151,7 @@ private:
 //
 // Factory name: CommRadio
 //------------------------------------------------------------------------------
-class CommRadio : public Radio  
+class CommRadio : public Radio
 {
    DECLARE_SUBCLASS(CommRadio,Radio)
 
@@ -168,7 +167,7 @@ public:
    virtual bool transmitDataMessage(Basic::Object* const msg);
 
 protected:
-   virtual void receivedEmissionReport(Emission* const em);
+   void receivedEmissionReport(Emission* const em) override;
 
 private:
    void initData();

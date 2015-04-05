@@ -64,22 +64,18 @@ public:
    // Slot functions
    virtual bool setSlotIGain(Basic::Number* const msg);
 
-   // System Interface -- Event handler(s)
    bool killedNotification(Player* const killedBy = 0) override;
 
-   // Basic::Component interface
    void updateData(const LCreal dt = 0.0) override;
    void reset() override;
 
 protected:
-   virtual bool onEndScanEvent(const Basic::Integer* const bar);
+   bool onEndScanEvent(const Basic::Integer* const bar) override;
 
-   // System class -- phase callbacks
    void transmit(const LCreal dt) override;
    void receive(const LCreal dt) override;
    void process(const LCreal dt) override;
 
-   // Basic::Component protected interface
    bool shutdownNotification() override;
 
 protected: // (#temporary#) allow subclasses to access and use report queue

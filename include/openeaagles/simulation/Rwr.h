@@ -15,7 +15,7 @@ namespace Simulation {
 // Description: General Radar Warning Receiver (RWR) Model
 // Factory name: Rwr
 //------------------------------------------------------------------------------
-class Rwr : public RfSensor  
+class Rwr : public RfSensor
 {
     DECLARE_SUBCLASS(Rwr,RfSensor)
 
@@ -28,7 +28,7 @@ public:
 
     int getRayIndex(const LCreal az) const;
     LCreal getRayAzimuth(const int idx) const;
-    
+
     void clearRays(const int ibuff)
     {
        if (ibuff == 0 || ibuff == 1) {
@@ -37,18 +37,15 @@ public:
        }
     }
 
-    // System Interface -- Event handler(s)
     bool killedNotification(Player* const killedBy = 0) override;
 
 protected:
    static const int MAX_EMISSIONS = 1000;
    static const int NUM_RAYS = 360;
 
-   // System Interface -- phase callbacks
    void receive(const LCreal dt) override;
    void process(const LCreal dt) override;
 
-   // Basic::Component protected interface
    bool shutdownNotification() override;
 
    void xferRays()
@@ -61,7 +58,7 @@ protected:
 private:
    void initData();
 
-   QQueue<Emission*> rptQueue;   // Report queue 
+   QQueue<Emission*> rptQueue;   // Report queue
 
    LCreal rays[2][NUM_RAYS];     // Back (sensor) buffer [0][*] and front (graphics) buffer [1][*]
 };

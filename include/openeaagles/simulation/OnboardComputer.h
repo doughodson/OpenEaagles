@@ -21,7 +21,7 @@ class TrackManager;
 // Description: Base class for all Onboard computer systems
 //
 //    Use to model the avionics packages, and uses the system of systems
-//    pattern, which allows computer models to manage other subsystem 
+//    pattern, which allows computer models to manage other subsystem
 //    computer models.
 //
 //    The on-board computer model is also responsible for managing the various
@@ -32,10 +32,10 @@ class TrackManager;
 //
 // Factory name: OnboardComputer
 //------------------------------------------------------------------------------
-class OnboardComputer : public System  
+class OnboardComputer : public System
 {
     DECLARE_SUBCLASS(OnboardComputer,System)
-   
+
 public:
    OnboardComputer();
 
@@ -59,7 +59,6 @@ public:
    virtual int getShootList(SPtr<Track>* const tlist, const int max);
    virtual int getShootList(SPtr<const Track>* const tlist, const int max) const;
 
-   // Basic::Component interface
    void reset() override;
    void updateData(const LCreal dt = 0.0) override;
 
@@ -69,10 +68,8 @@ protected:
    // Manage the active action
    virtual void actionManager(const LCreal dt);
 
-   // System class Interface -- phase() callbacks
-   void process(const LCreal dt) override;     // Phase 3
+   void process(const LCreal dt) override;
 
-   // Basic::Component protected interface
    bool shutdownNotification() override;
 
 private:

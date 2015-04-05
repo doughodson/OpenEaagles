@@ -57,7 +57,7 @@ class Simulation;
 //       (e.g., circular references).  (see Component::shutdownNotification())
 //
 //------------------------------------------------------------------------------
-class System : public Basic::Component  
+class System : public Basic::Component
 {
    DECLARE_SUBCLASS(System,Basic::Component)
 
@@ -85,7 +85,6 @@ public:
    // Event handler(s)
    virtual bool killedNotification(Player* const killedBy = 0); // Killed (KILL_EVENT) event handler
 
-   // Basic::Component interface
    void updateData(const LCreal dt = 0.0) override;
    void updateTC(const LCreal dt = 0.0) override;
    bool event(const int event, Basic::Object* const obj = 0) override;
@@ -96,7 +95,7 @@ protected:
    // Slot function(s)
    virtual bool setSlotPowerSwitch(const Basic::String* const msg);
 
-   // Time critical phase callbacks -- 
+   // Time critical phase callbacks --
    // --- to be used by the derived classes, as needed
    virtual void dynamics(const LCreal dt);    // Phase 0
    virtual void transmit(const LCreal dt);    // Phase 1
@@ -109,7 +108,7 @@ private:
    Player* ownship;      // Our player (not ref()'d because the own player owns us).
    unsigned int pwrSw;   // System's master power switch
 };
- 
+
 } // End Simulation namespace
 } // End Eaagles namespace
 

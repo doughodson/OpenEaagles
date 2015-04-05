@@ -18,7 +18,7 @@ namespace Simulation {
 //
 // Factory name: SensorMsg
 //------------------------------------------------------------------------------
-class SensorMsg : public Basic::Object  
+class SensorMsg : public Basic::Object
 {
    DECLARE_SUBCLASS(SensorMsg,Basic::Object)
 
@@ -27,13 +27,13 @@ public:
 
    // ---
    // Normalized ownship to target LOS vector (ownship's NED)
-   // ---   
+   // ---
    const osg::Vec3d& getLosVec() const          { return losO2T; }
    void setLosVec(const osg::Vec3d& v)          { losO2T = v; }
 
-   // ---   
+   // ---
    // Normalized target to ownship LOS vector (target's NED)
-   // ---   
+   // ---
    const osg::Vec3d& getTgtLosVec() const       { return losT2O; }
    void setTgtLosVec(const osg::Vec3d& v)       { losT2O = v; }
 
@@ -47,7 +47,7 @@ public:
 
    // Elevation (radians)
    LCreal getGimbalElevation() const            { return gel; }
-   void setGimbalElevation(const LCreal a)      { gel = a; } 
+   void setGimbalElevation(const LCreal a)      { gel = a; }
 
    // ---
    // Ranges
@@ -90,7 +90,7 @@ public:
    LCreal getAzimuthAoi() const                 { return iaz; }
 
    // Target's elevation AOI (radians; target body coordinates)
-   LCreal getElevationAoi() const               { return iel; } 
+   LCreal getElevationAoi() const               { return iel; }
 
    // Target's normalized AOI vector
    const osg::Vec3d& getAoiVector() const       { return aoi; }
@@ -130,7 +130,7 @@ public:
    Gimbal* getGimbal()                          { return gimbal; }
    const Gimbal* getGimbal() const              { return gimbal; }
 
-   // Pointer to the player that sent this message 
+   // Pointer to the player that sent this message
    Player* getOwnship()                         { return ownship; }
    const Player* getOwnship() const             { return ownship; }
 

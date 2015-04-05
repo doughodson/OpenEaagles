@@ -27,11 +27,11 @@ namespace Simulation {
 //    seekers, has its own member function processPlayersOfInterest() that filters
 //    by gimbal field of view and player type.  It's the responsibility of the
 //    various R/F systems to use or not use this gimbal function -- our default
-//    member function processPlayersOfInterest() does use the gimbal function. 
+//    member function processPlayersOfInterest() does use the gimbal function.
 //
 // Factory name: RfSystem
 // Slots:
-//    antennaName        <Basic::String>        ! Name of the requested Antenna 
+//    antennaName        <Basic::String>        ! Name of the requested Antenna
 //
 //    frequency          <Basic::Frequency>     ! Radio's Main Frequency (default: 0 hz)
 //                       <Basic::Number>        ! Radio's Main Frequency (hz)
@@ -51,7 +51,7 @@ namespace Simulation {
 //
 //    systemTemperature  <Basic::Number>        ! System Temperature            (Kelvin; def: 290.0)
 //
-//    lossXmit           <Basic::Number>        ! Transmit loss                 (no units; def: 1.0) 
+//    lossXmit           <Basic::Number>        ! Transmit loss                 (no units; def: 1.0)
 //                       <Basic::Decibel>       ! Transmit loss                 (dB)
 //
 //    lossRecv           <Basic::Number>        ! Receive loss                  (no units; def: 1.0)
@@ -63,7 +63,7 @@ namespace Simulation {
 //    disableEmissions   <Number>               ! Disable sending emission packets flag (default: false)
 //
 //------------------------------------------------------------------------------
-class RfSystem : public System  
+class RfSystem : public System
 {
    DECLARE_SUBCLASS(RfSystem,System)
 
@@ -107,7 +107,7 @@ public:
    virtual bool setRfSysTemp(const LCreal v);            // Sets the system temperature (Kelvin)
    virtual bool setRfThreshold(const LCreal v);          // Sets the receiver threshold (over S/N) (dB)
    virtual bool setRfNoiseFigure(const LCreal v);        // Sets the receiver noise figure (>= 1)  (no units)
-   virtual bool setRfTransmitLoss(const LCreal v);       // Sets the transmit loss (default: 1.0) (no units) 
+   virtual bool setRfTransmitLoss(const LCreal v);       // Sets the transmit loss (default: 1.0) (no units)
    virtual bool setRfReceiveLoss(const LCreal v);        // Sets the receive loss (default: 1.0) (no units)
    virtual bool setRfSignalProcessLoss(const LCreal v);  // Sets the signal Processing loss (default: 1.0) (no units)
    virtual bool setReceiverNoise(const LCreal v);        // Sets the receiver noise (Watts)
@@ -136,7 +136,6 @@ public:
    virtual bool setSlotRfSignalProcessLoss(Basic::Number* const msg);
    virtual bool setSlotDisableEmissions(Basic::Number* const msg);
 
-   // Component Interface
    void updateData(const LCreal dt = 0.0) override;
    void reset() override;
 
@@ -150,8 +149,8 @@ protected:
    // The following are filled by rfReceivedEmission() and consumed (emptied) by receive()
    LCreal jamSignal;                  // Interference signal (from Jammer)
    unsigned int np;                   // Number of emission packets being passed from rfReceivedEmission() to receive()
-   LCreal signals[MAX_EMISSIONS];     // signals values being passed from rfReceivedEmission() to receive() 
-   Emission* packets[MAX_EMISSIONS];  // emission packets being passed from rfReceivedEmission() to receive() 
+   LCreal signals[MAX_EMISSIONS];     // signals values being passed from rfReceivedEmission() to receive()
+   Emission* packets[MAX_EMISSIONS];  // emission packets being passed from rfReceivedEmission() to receive()
    mutable long packetLock;           // Semaphore to protect 'signals' and 'xxpackets
 
    // Process players of interest -- Called by our updateData() -- the background thread --
@@ -164,7 +163,7 @@ protected:
    // Basic::Component protected interface
    bool shutdownNotification() override;
 
-private:   
+private:
    void initData();
 
    Antenna*  antenna;            // Our antenna
@@ -183,7 +182,7 @@ private:
    LCreal   rfSysTemp;           // [T] System Temperature                   (Kelvin)
    LCreal   rfRecvNoise;         // [N] Noise (N = F * k * T * B)            (Watts)
    LCreal   rfThreshold;         // Receiver threshold (over S/N)            (dB)
-   LCreal   rfLossXmit;          // Transmit loss (default: 1.0)             (no units) 
+   LCreal   rfLossXmit;          // Transmit loss (default: 1.0)             (no units)
    LCreal   rfLossRecv;          // Receive loss (default: 1.0)              (no units)
    LCreal   rfLossSignalProcess; // Signal Processing loss (default: 1.0)    (no units)
 };

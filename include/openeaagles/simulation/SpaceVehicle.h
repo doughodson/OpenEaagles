@@ -49,8 +49,7 @@ public:
    //    transz:  -1.0 -> max left;  0.0 -> center;  1.0 -> max right
    virtual bool setTranslateZInput(const LCreal transz);
 
-   // Player class interface
-   LCreal getGrossWeight() const override; 
+   LCreal getGrossWeight() const override;
    unsigned int getMajorType() const override;
 };
 
@@ -59,7 +58,7 @@ public:
 // Class BoosterSpaceVehicle
 // Factory name: BoosterSpaceVehicle
 //==============================================================================
-class BoosterSpaceVehicle : public SpaceVehicle  
+class BoosterSpaceVehicle : public SpaceVehicle
 {
    DECLARE_SUBCLASS(BoosterSpaceVehicle,SpaceVehicle)
 
@@ -72,7 +71,7 @@ public:
 // Class MannedSpaceVehicle
 // Factory name: MannedSpaceVehicle
 //==============================================================================
-class MannedSpaceVehicle : public SpaceVehicle  
+class MannedSpaceVehicle : public SpaceVehicle
 {
    DECLARE_SUBCLASS(MannedSpaceVehicle,SpaceVehicle)
 
@@ -85,7 +84,7 @@ public:
 // Class UnmannedSpaceVehicle
 // Factory name: UnmannedSpaceVehicle
 //==============================================================================
-class UnmannedSpaceVehicle : public SpaceVehicle  
+class UnmannedSpaceVehicle : public SpaceVehicle
 {
    DECLARE_SUBCLASS(UnmannedSpaceVehicle,SpaceVehicle)
 
@@ -93,7 +92,6 @@ public:
    UnmannedSpaceVehicle();
 
 protected:
-   // Vehicle Dynamics -- called by updateTC() during phase zero
    void dynamics(const LCreal  dt = 0.0) override;
 };
 

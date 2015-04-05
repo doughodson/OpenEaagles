@@ -43,7 +43,6 @@ public:
 
     TabLogger();
 
-    // Basic::Component interface
     void updateTC(const LCreal dt = 0.0) override;
     void updateData(const LCreal dt = 0.0) override;
 
@@ -61,7 +60,6 @@ public:
 
     public:
         TabLogEvent();
-        virtual void captureData() =0;
     protected:
         std::ostream& makeTimeHdr(std::ostream& sout);
         std::ostream& makeTimeMsg(std::ostream& sout);
@@ -102,8 +100,8 @@ public:
     public:
         LogPlayerData(int theType, const Player* const thePlayer);
         LogPlayerData(int theType, const Player* const thePlayer, const Player* const theSource);
-        virtual const char* getDescription();
-        virtual void captureData();
+        const char* getDescription() override;
+        void captureData() override;
     private:
         int theType;
         SPtr<const Player> thePlayer;
@@ -119,7 +117,7 @@ public:
         LCreal    mach;
         LCreal    pLoading;
     };
-    
+
     //------------------------------------------------------------------------------
     // Class: TabLogger::LogGunActivity
     // Base class:  Basic::Object -> Basic::Logger::LogEvent -> SimLogEvent -> TabLogEvent -> LogGunActivity
@@ -130,8 +128,8 @@ public:
         DECLARE_SUBCLASS(LogGunActivity,TabLogEvent)
     public:
         LogGunActivity(int theType, const Player* const player, const int n);
-        virtual const char* getDescription();
-        virtual void captureData();
+        const char* getDescription() override;
+        void captureData() override;
     private:
         int theType;
         SPtr<const Player> thePlayer;
@@ -151,8 +149,8 @@ public:
     public:
         LogWeaponActivity(const int theType, const Player* const player, const Player* const wpn,
                           const Player* const tgt, const unsigned int detType, const LCreal distance = -1.0f);
-        virtual const char* getDescription();
-        virtual void captureData();
+        const char* getDescription() override;
+        void captureData() override;
     private:
         int theType;
         SPtr<const Player> thePlayer;
@@ -175,8 +173,8 @@ public:
         DECLARE_SUBCLASS(LogActiveTrack,TabLogEvent)
     public:
         LogActiveTrack(int theType, const TrackManager* const mgr, const Track* const trk);
-        virtual const char* getDescription();
-        virtual void captureData();
+        const char* getDescription() override;
+        void captureData() override;
     private:
         int theType;
         SPtr<const TrackManager> theManager;
@@ -203,8 +201,8 @@ public:
         DECLARE_SUBCLASS(LogPassiveTrack,TabLogEvent)
     public:
         LogPassiveTrack(int theType, const TrackManager* const mgr, const Track* const trk);
-        virtual const char* getDescription();
-        virtual void captureData();
+        const char* getDescription() override;
+        void captureData() override;
     private:
         int theType;
         SPtr<const TrackManager> theManager;

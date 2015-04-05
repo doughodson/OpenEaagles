@@ -61,12 +61,11 @@ public:
 public:
     SimLogger();
 
-    virtual void log(LogEvent* const event);                // Log a simulation event
+    void log(LogEvent* const event) override;               // Log a simulation event
 
     double getCurrentTime() const   { return time; }        // Current time (sec)
     TSource getTimeline() const     { return timeline; }    // Timeline (UTC, SIM or EXEC)
 
-    // Basic::Component interface
     void updateTC(const LCreal dt = 0.0) override;
     void updateData(const LCreal dt = 0.0) override;
 
@@ -147,8 +146,8 @@ public:
         DECLARE_SUBCLASS(NewPlayer,SimLogEvent)
     public:
         NewPlayer(Player* const p);
-        virtual const char* getDescription();
-        virtual void captureData();
+        const char* getDescription() override;
+        void captureData() override;
     private:
         SPtr<const Player> thePlayer;
         osg::Vec3 pos;
@@ -165,8 +164,8 @@ public:
         DECLARE_SUBCLASS(LogPlayerData,SimLogEvent)
     public:
         LogPlayerData(Player* const p);
-        virtual const char* getDescription();
-        virtual void captureData();
+        const char* getDescription() override;
+        void captureData() override;
     private:
         SPtr<const Player> thePlayer;
         osg::Vec3 pos;
@@ -186,8 +185,8 @@ public:
         DECLARE_SUBCLASS(RemovePlayer,SimLogEvent)
     public:
         RemovePlayer(Player* const p);
-        virtual const char* getDescription();
-        virtual void captureData();
+        const char* getDescription() override;
+        void captureData() override;
     private:
         SPtr<const Player> thePlayer;
         osg::Vec3 pos;
@@ -205,14 +204,14 @@ public:
         DECLARE_SUBCLASS(WeaponRelease,SimLogEvent)
     public:
         WeaponRelease(Player* const player, Player* const wpn, Player* const tgt);
-        virtual const char* getDescription();
-        virtual void captureData();
+        const char* getDescription() override;
+        void captureData() override;
     private:
         SPtr<const Player> thePlayer;
         SPtr<const Player> theWeapon;
         SPtr<const Player> theTarget;
     };
-    
+
     //------------------------------------------------------------------------------
     // Class: SimLogger::GunFired
     // Base class:  Basic::Object -> Basic::Logger::LogEvent -> GunFired
@@ -222,8 +221,8 @@ public:
         DECLARE_SUBCLASS(GunFired,SimLogEvent)
     public:
         GunFired(Player* const player, const int n);
-        virtual const char* getDescription();
-        virtual void captureData();
+        const char* getDescription() override;
+        void captureData() override;
     private:
         SPtr<const Player> thePlayer;
         int rounds;
@@ -239,8 +238,8 @@ public:
         DECLARE_SUBCLASS(KillEvent,SimLogEvent)
     public:
         KillEvent(Player* const player, Player* const wpn, Player* const tgt);
-        virtual const char* getDescription();
-        virtual void captureData();
+        const char* getDescription() override;
+        void captureData() override;
     private:
         SPtr<const Player> thePlayer;
         SPtr<const Player> theWeapon;
@@ -257,8 +256,8 @@ public:
         DECLARE_SUBCLASS(DetonationEvent,SimLogEvent)
     public:
         DetonationEvent(Player* const player, Player* const wpn, Player* const tgt, const unsigned int detType, const LCreal distance = -1.0f);
-        virtual const char* getDescription();
-        virtual void captureData();
+        const char* getDescription() override;
+        void captureData() override;
     private:
         SPtr<const Player> thePlayer;
         SPtr<const Player> theWeapon;
@@ -266,7 +265,7 @@ public:
         unsigned int detType;
         LCreal missDist;
     };
-    
+
     //------------------------------------------------------------------------------
     // Class: SimLogger::NewTrack
     // Base class:  Basic::Object -> Basic::Logger::LogEvent -> NewTrack
@@ -276,8 +275,8 @@ public:
         DECLARE_SUBCLASS(NewTrack,SimLogEvent)
     public:
         NewTrack(TrackManager* const mgr, Track* const trk);
-        virtual const char* getDescription();
-        virtual void captureData();
+        const char* getDescription() override;
+        void captureData() override;
     private:
         SPtr<const TrackManager> theManager;
         SPtr<const Track> theTrack;
@@ -291,7 +290,7 @@ public:
         osg::Vec3 tgtAngles;
         LCreal sn;              // Signal/Noise
     };
-    
+
     //------------------------------------------------------------------------------
     // Class: SimLogger::UpdateTrack
     // Base class:  Basic::Object -> Basic::Logger::LogEvent -> UpdateTrack
@@ -301,8 +300,8 @@ public:
         DECLARE_SUBCLASS(UpdateTrack,SimLogEvent)
     public:
         UpdateTrack(TrackManager* const mgr, Track* const trk);
-        virtual const char* getDescription();
-        virtual void captureData();
+        const char* getDescription() override;
+        void captureData() override;
     private:
         SPtr<const TrackManager> theManager;
         SPtr<const Track> theTrack;
@@ -326,8 +325,8 @@ public:
         DECLARE_SUBCLASS(RemovedTrack,SimLogEvent)
     public:
         RemovedTrack(TrackManager* const mgr, Track* const trk);
-        virtual const char* getDescription();
-        virtual void captureData();
+        const char* getDescription() override;
+        void captureData() override;
     private:
         SPtr<const TrackManager> theManager;
         SPtr<const Track> theTrack;
@@ -341,7 +340,7 @@ public:
         osg::Vec3 tgtAngles;
         LCreal sn;              // Signal/Noise
     };
-    
+
     //------------------------------------------------------------------------------
     // Class: SimLogger::NewRwrTrack
     // Base class:  Basic::Object -> Basic::Logger::LogEvent -> NewRwrTrack
@@ -351,8 +350,8 @@ public:
         DECLARE_SUBCLASS(NewRwrTrack,SimLogEvent)
     public:
         NewRwrTrack(TrackManager* const mgr, Track* const trk);
-        virtual const char* getDescription();
-        virtual void captureData();
+        const char* getDescription() override;
+        void captureData() override;
     private:
         SPtr<const TrackManager> theManager;
         SPtr<const Track> theTrack;
@@ -366,7 +365,7 @@ public:
         osg::Vec3 tgtAngles;
         LCreal sn;              // Signal/Noise
     };
-    
+
     //------------------------------------------------------------------------------
     // Class: SimLogger::UpdateRwrTrack
     // Base class:  Basic::Object -> Basic::Logger::LogEvent -> UpdateRwrTrack
@@ -376,8 +375,8 @@ public:
         DECLARE_SUBCLASS(UpdateRwrTrack,SimLogEvent)
     public:
         UpdateRwrTrack(TrackManager* const mgr, Track* const trk);
-        virtual const char* getDescription();
-        virtual void captureData();
+        const char* getDescription() override;
+        void captureData() override;
     private:
         SPtr<const TrackManager> theManager;
         SPtr<const Track> theTrack;
@@ -401,8 +400,8 @@ public:
         DECLARE_SUBCLASS(RemovedRwrTrack,SimLogEvent)
     public:
         RemovedRwrTrack(TrackManager* const mgr, Track* const trk);
-        virtual const char* getDescription();
-        virtual void captureData();
+        const char* getDescription() override;
+        void captureData() override;
     private:
         SPtr<const TrackManager> theManager;
         SPtr<const Track> theTrack;

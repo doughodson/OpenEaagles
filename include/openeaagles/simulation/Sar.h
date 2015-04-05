@@ -25,7 +25,7 @@ class Image;
 //    chipSize      <Basic::Number>      ! Chip size (pixels) (default: 0)
 //
 //------------------------------------------------------------------------------
-class Sar : public Radar  
+class Sar : public Radar
 {
     DECLARE_SUBCLASS(Sar,Radar)
 
@@ -47,7 +47,7 @@ public:
    double getStarePointLongitude() const   { return stareLongitude; }
    LCreal getStarePointElevation() const   { return stareElevation; }
 
-   // Set the stare point 
+   // Set the stare point
    virtual bool setStarePoint(
          const double lat,               // Latitude (deg)
          const double lon,               // Longitude (deg)
@@ -77,7 +77,7 @@ public:
     bool addImage(Basic::Pair* const newImage);
     int getNextId();
 
-   // Cancel the current SAR imaging   
+   // Cancel the current SAR imaging
    virtual void cancel();
 
    static void xyz2AzEl(const LCreal x, const LCreal y, const LCreal z, LCreal* const az, LCreal* const el);
@@ -86,7 +86,6 @@ public:
 protected:
     virtual bool setResolution(const LCreal res);   // SAR resolution (meters)
 
-    // System class -- phase callbacks
     void process(const LCreal dt) override;
 
     LCreal timer;                   // SAR timer

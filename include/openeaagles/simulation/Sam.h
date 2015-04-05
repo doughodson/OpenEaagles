@@ -16,17 +16,16 @@ namespace Simulation {
 //
 // Factory name: Sam
 //------------------------------------------------------------------------------
-class Sam : public Missile  
+class Sam : public Missile
 {
     DECLARE_SUBCLASS(Sam,Missile)
 
 public:
     Sam();
-    
-    // Weapon interface
-    virtual const char* getDescription() const;
-    virtual const char* getNickname() const;
-    virtual int getCategory() const;
+
+    const char* getDescription() const override;
+    const char* getNickname() const override;
+    int getCategory() const override;
 };
 
 } // End Simulation namespace

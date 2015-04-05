@@ -63,7 +63,7 @@ class TrackManager;
 //    class (see Player.h).
 //
 //------------------------------------------------------------------------------
-class RfSensor : public RfSystem  
+class RfSensor : public RfSystem
 {
     DECLARE_SUBCLASS(RfSensor,RfSystem)
 
@@ -108,7 +108,7 @@ public:
     // Slot functions
     virtual bool setSlotTrackManagerName(Basic::String* const v);   // Sets our track manager by name
     virtual bool setSlotModeStream(Basic::PairStream* const obj);   // Sets a list of R/F sensor submodes
-    virtual bool setSlotModeSingle(RfSensor* const obj);       // Sets a single (only) R/F sensor submode
+    virtual bool setSlotModeSingle(RfSensor* const obj);            // Sets a single (only) R/F sensor submode
     virtual bool setSlotRanges(Basic::List* const list);            // Sets out list of valid ranges (nm)
     virtual bool setSlotInitRangeIdx(Basic::Number* const num);     // Sets out initial range index [ 1 .. nRanges ]
     virtual bool setSlotPrf(const Basic::Frequency* const msg);     // Sets PRF as a Basic::Frequency
@@ -120,30 +120,27 @@ public:
     virtual bool setSlotTypeId(const Basic::String* const msg);     // Sets the type ID
     virtual bool setSlotSyncXmitWithScan(const Basic::Number* const msg); // Sets sync transmitter with antenna scan flag
 
-    // RfSystem interface
     bool isTransmitting() const override;
 
-    // Component Interface
     bool event(const int event, Basic::Object* const obj = 0) override;
     void updateData(const LCreal dt = 0.0) override;
     void reset() override;
 
 protected:
-    virtual Basic::PairStream* getModes();                          // Returns the list of submodes
-    
+    virtual Basic::PairStream* getModes();                              // Returns the list of submodes
+
     // Event handler(s)
     virtual bool onStartScanEvent(const Basic::Integer* const bar);     // Start of scan (TGT_DESIGNATE) event handler
     virtual bool onEndScanEvent(const Basic::Integer* const bar);       // End of scan (SENSOR_RTS) event handler
     virtual bool onTgtDesignateEvent();                        // Target Designate (SCAN_START) event handler
     virtual bool onReturnToSearchEvent();                      // Return to search (SCAN_END) event handler
 
-   // Basic::Component protected interface
-   bool shutdownNotification() override;
+    bool shutdownNotification() override;
 
 private:
     bool processModes();
 
-    Basic::PairStream*  modes;           // Our Submodes 
+    Basic::PairStream*  modes;           // Our Submodes
     LCreal*        ranges;          // List of ranges (nm)
     int            nRanges;         // Number of ranges
     LCreal         rng;             // Current range (nm)
@@ -153,7 +150,7 @@ private:
     int            scanBar;         // Scan (bar) number
     bool           syncXmitWithScan; // Sync transmitter with antenna scan flag
 
-    Basic::String* tmName;        // Name of our track manager 
+    Basic::String* tmName;        // Name of our track manager
     RfSensor*      masterModePtr;   // Our Master (Parent) mode (e.g., Sensor)
     TrackManager*  trackManager;    // Our Track manager -- managed by the onboard computer
 

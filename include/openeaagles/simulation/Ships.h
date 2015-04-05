@@ -15,14 +15,13 @@ namespace Simulation {
 // Description: Generic ship model
 // Factory name: Ship
 //==============================================================================
-class Ship : public Player  
+class Ship : public Player
 {
     DECLARE_SUBCLASS(Ship, Player)
 
 public:
     Ship();
 
-    // Player interface
     unsigned int getMajorType() const override;
 };
 

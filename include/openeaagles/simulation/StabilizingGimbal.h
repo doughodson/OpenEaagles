@@ -23,7 +23,7 @@ namespace Simulation {
 //    stabilizingMode  <Basic::String>    ! Sets the type of stabilization we desire  (elevation, roll, horizon)
 //                                        ! (default: HORIZON)
 //------------------------------------------------------------------------------
-class StabilizingGimbal : public Gimbal  
+class StabilizingGimbal : public Gimbal
 {
     DECLARE_SUBCLASS(StabilizingGimbal,Gimbal)
 
@@ -42,14 +42,13 @@ public:
 
    virtual bool setSlotStabilizingMode(Basic::String* const msg);
    virtual bool setSlotMountPosition(Basic::String* const msg);
-   
+
 protected:
    virtual void stabilizingController(const LCreal dt = 0.0);
    virtual void rollStabilizingController(const LCreal dt = 0.0);
    virtual void elevationStabilizingController(const LCreal dt = 0.0);
 
-   // System Interface -- Callbacks by phase
-   void dynamics(const LCreal dt) override;    // Phase 0
+   void dynamics(const LCreal dt) override;
 
 private:
    StabilizingMode  stabilizingMode; // Gimbal stabilization mode

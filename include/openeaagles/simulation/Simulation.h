@@ -48,7 +48,7 @@ namespace Simulation {
 //                                           ! area's NED coordinates.  Otherwise, use a standard spherical
 //                                           ! earth with a radius of Nav::ERAD60. (default: false)
 //
-//    simulationTime <Basic::Time>           ! Initial simulated time since midnight (UTC) (second), 
+//    simulationTime <Basic::Time>           ! Initial simulated time since midnight (UTC) (second),
 //                                           ! or -1 to use current time of day (default: -1)
 //
 //    day            <Basic::Number>         ! Initial simulated day of month [ 1 .. 31 ],
@@ -82,7 +82,7 @@ namespace Simulation {
 //
 //    a) is managed by the background thread
 //
-//    b) You can request a new player to be added to the player list by 
+//    b) You can request a new player to be added to the player list by
 //       using addNewPlayer(), however the player will not be added until
 //       updatePlayerList() is run in the background thread.
 //
@@ -291,7 +291,7 @@ public:
 
     Player* findPlayer(const short id, const int netID = 0);   // Find a player by player (and network) ID
     const Player* findPlayer(const short id, const int netID = 0) const; // Find a player by player (and network) ID (const version)
-        
+
     Player* findPlayerByName(const char* const playerName);    // Find a player by name
     const Player* findPlayerByName(const char* const playerName) const; // Find a player by name (const version)
 
@@ -303,8 +303,7 @@ public:
     virtual bool setAirports(Dafif::AirportLoader* const p);   // Sets the airport loader
     virtual bool setNavaids(Dafif::NavaidLoader* const p);     // Sets the NAVAID loader
     virtual bool setWaypoints(Dafif::WaypointLoader* const p); // Sets the waypoint loader
-    
-    // Basic::Component Interface
+
     void updateTC(const LCreal dt = 0.0) override;
     void updateData(const LCreal dt = 0.0) override;
     void reset() override;
@@ -326,7 +325,7 @@ public:
 
 protected:
     virtual void updatePlayerList();                  // Update the current player list
-    bool setSlotPlayers(Basic::PairStream* const msg); 
+    bool setSlotPlayers(Basic::PairStream* const msg);
 
     Basic::Terrain* getTerrain();                     // Returns the terrain elevation database
 
@@ -339,13 +338,12 @@ protected:
 
     virtual void incCycle();                          // Increments the cycle counter
     virtual void setCycle(const unsigned int c);      // Sets the cycle counter
-    virtual void setFrame(const unsigned int f);      // Sets the frame counter    
+    virtual void setFrame(const unsigned int f);      // Sets the frame counter
     virtual void setPhase(const unsigned int c);      // Sets the phase counter
 
     virtual void setEventID(unsigned short id);       // Sets the simulation event ID counter
     virtual void setWeaponEventID(unsigned short id); // Sets the weapon ID event counter
 
-    // Basic::Component protected interface
     void printTimingStats() override;
     bool shutdownNotification() override;
 
@@ -374,7 +372,7 @@ private:
    bool setSlotEarthModel(const Basic::String* const msg);
    bool setSlotGamingAreaEarthModel(const Basic::Number* const msg);
 
-   SPtr<Basic::PairStream> players;     // Main player list (sorted by network and player IDs)                
+   SPtr<Basic::PairStream> players;     // Main player list (sorted by network and player IDs)
    SPtr<Basic::PairStream> origPlayers; // Original player list
 
    bool loggedHeadings;          // set true once headings have been added to output file
@@ -396,7 +394,7 @@ private:
 
    unsigned int  cycleCnt;       // Real-Time Cycle Counter (Cycles consist of Frames)
    unsigned int  frameCnt;       // Real-Time Frame Counter (Frames consist of Phases)
-   unsigned int  phaseCnt;       // Real-Time Phase Counter 
+   unsigned int  phaseCnt;       // Real-Time Phase Counter
 
    double execTime;              // Executive time (seconds since start of application )
 

@@ -299,12 +299,10 @@ public:
    virtual bool setSlotJettisonable(const Basic::Number* const p);
    virtual bool setSlotTestTgtName(const Basic::String* const p);
 
-   // Player interface
    unsigned int getMajorType() const override;
    bool collisionNotification(Player* const p) override;
    bool crashNotification() override;
 
-   // Basic::Component interface
    void updateTC(const LCreal dt = 0.0) override;
    bool event(const int event, Basic::Object* const obj = 0) override;
    void reset() override;
@@ -344,10 +342,8 @@ protected:
    // At detonation: compute the location of the detonation relative to the target player
    bool setLocationOfDetonation();
 
-   // Player (protected) interface
    void dynamics(const LCreal  dt = 0.0) override;
 
-   // Basic::Component protected functions
    bool shutdownNotification() override;
 
 private:
