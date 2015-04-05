@@ -37,7 +37,6 @@ public:
    virtual bool setFuelWt(const LCreal wt);
    virtual bool isFuelWtValid() const;
 
-   // Component Interface
    void reset() override;
 
 protected:

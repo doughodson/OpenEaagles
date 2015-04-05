@@ -29,7 +29,7 @@ namespace Simulation {
 //    dragIndex      <Number>      ! drag index used by default dynamics (default: 0.0006f)
 //
 //------------------------------------------------------------------------------
-class Bomb : public Weapon  
+class Bomb : public Weapon
 {
     DECLARE_SUBCLASS(Bomb,Weapon)
 
@@ -76,10 +76,9 @@ public:
       LCreal* const tof                // TOF (sec)
     );
 
-    // Weapon class functions
-    virtual const char* getDescription() const;
-    virtual const char* getNickname() const;
-    virtual int getCategory() const;
+    const char* getDescription() const override;
+    const char* getNickname() const override;
+    int getCategory() const override;
 
 protected:
     virtual bool setNoseFuze(const bool f);
@@ -90,8 +89,8 @@ protected:
     virtual bool setFuzeTime(const LCreal v);
     virtual bool setDragIndex(const LCreal v);
 
-   // slot functions
-   bool setSlotDragIndex(Basic::Number* const p);
+    // slot functions
+    bool setSlotDragIndex(Basic::Number* const p);
     bool setSlotArmingOption(Basic::Identifier* const p);
     bool setSlotNoseFuze(Basic::Number* const p);
     bool setSlotMidFuze(Basic::Number* const p);
@@ -99,12 +98,11 @@ protected:
     bool setSlotFuzeAltitude(Basic::Number* const p);
     bool setSlotFuzeTime(Basic::Number* const p);
 
-    // Weapon class functions (protected)
-    virtual void weaponGuidance(const LCreal dt);
-    virtual void weaponDynamics(const LCreal dt);
+    void weaponGuidance(const LCreal dt) override;
+    void weaponDynamics(const LCreal dt) override;
 
 private:
-   void initData();
+    void initData();
 
     LCreal    dragIndex;             // Drag Index
 

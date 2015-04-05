@@ -35,7 +35,7 @@ namespace Simulation {
 //    yaw         <Number>   ! heading; relative to ownship axis (radians, Basic::Angle) (default: 0)
 //
 //==============================================================================
-class Gun : public ExternalStore  
+class Gun : public ExternalStore
 {
     DECLARE_SUBCLASS(Gun,ExternalStore)
 
@@ -93,7 +93,6 @@ public:
    virtual bool setSlotPitch(const Basic::Number* const num);      // Gun pitch angle to ownship
    virtual bool setSlotYaw(const Basic::Number* const num);        // Gun heading angle to ownship
 
-   // Component class functions
    void reset() override;
 
 protected:
@@ -104,10 +103,8 @@ protected:
    virtual osg::Vec3d computeInitBulletPosition();
    virtual osg::Vec3d computeInitBulletVelocity();
 
-   // System class functions
-   void process(const LCreal dt) override;     // Phase 3
+   void process(const LCreal dt) override;
 
-   // Basic::Component protected interface
    bool shutdownNotification() override;
 
 private:
@@ -122,7 +119,7 @@ private:
    int      rpm;              // Rounds per minute
    bool     fire;             // Gun is firing
    bool     armed;            // Armed flag
-   bool     unlimited;        // Unlimited bullets (aka old western movie mode)   
+   bool     unlimited;        // Unlimited bullets (aka old western movie mode)
 
    osg::Vec3d posVec;         // Position vector; relative to ownship body axis (m)
    osg::Vec3d angles;         // (Euler) angles; relative to ownship body axis (rad)
@@ -139,7 +136,7 @@ private:
 //
 // Factory name: Bullet
 //==============================================================================
-class Bullet : public Weapon  
+class Bullet : public Weapon
 {
     DECLARE_SUBCLASS(Bullet,Weapon)
 
@@ -152,7 +149,7 @@ public:
 
    LCreal getMuzzleVelocity() const                { return muzzleVel; }
 
-   // Fire (add) a burst of bullets 
+   // Fire (add) a burst of bullets
    virtual bool burstOfBullets(
       const osg::Vec3* const pos,     // Initial burst position
       const osg::Vec3* const vel,     // Initial velocity of bullets
@@ -161,12 +158,10 @@ public:
       const int re                    // Release event id
    );
 
-   // Weapon interface
    const char* getDescription() const override;
    const char* getNickname() const override;
    int getCategory() const override;
 
-   // Component Interface
    void reset() override;
 
 protected:
@@ -178,16 +173,14 @@ protected:
    const Player* getHitPlayer() const     { return hitPlayer; }
    void setHitPlayer(Player* p);
 
-   // Weapon interface
    void weaponDynamics(const LCreal dt) override;
    void updateTOF(const LCreal dt) override;
 
-   // Basic::Component protected interface
    bool shutdownNotification() override;
 
    struct Burst {
       enum Status { ACTIVE, HIT, MISS };
-      Burst() : bPos(0,0,0), bVel(0,0,0), bTof(0), bNum(0), bRate(0), bEvent(0) {}
+      Burst() : bPos(0,0,0), bVel(0,0,0), bTof(0), bNum(0), bRate(0), bEvent(0), bStatus(ACTIVE) {}
       osg::Vec3 bPos;       // Burst positions -- world  (m)
       osg::Vec3 bVel;       // Burst velocities -- world (m)
       LCreal    bTof;       // Burst time of flight      (sec)

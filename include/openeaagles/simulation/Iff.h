@@ -31,7 +31,7 @@ namespace Simulation {
 //   enableModeC   <Number>   ! Mode C on (default: 0)
 //
 //------------------------------------------------------------------------------
-class Iff : public Radio  
+class Iff : public Radio
 {
    DECLARE_SUBCLASS(Iff,Radio)
 
@@ -86,7 +86,6 @@ public:
    virtual bool setSlotEnableMode4(const Basic::Number* const msg);
    virtual bool setSlotEnableModeC(const Basic::Number* const msg);
 
-   // Basic::Component interface
    void reset() override;
 
 private:

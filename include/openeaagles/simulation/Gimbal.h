@@ -96,7 +96,7 @@ class Tdb;
 //
 //    terrainOcculting     (Boolean) Enable terrain occulting of the players of interest (default: false)
 //    checkHorizon         (Boolean) Enable horizon masking check (default: true)
-// 
+//
 //    playerOfInterestTypes (PairStream)   List of player of interest types (default: all types )
 //                                         Valid types: { "air" "ground" "weapon" "ship" "building" "lifeform" "space" }
 //
@@ -332,7 +332,6 @@ public:  // Public section
    static void limitVec(osg::Vec2d& vec, const osg::Vec2d& ll, const osg::Vec2d& ul);
    static void limitVec(osg::Vec3d& vec, const osg::Vec3d& ll, const osg::Vec3d& ul);
 
-   // Component Interface
    bool event(const int event, Basic::Object* const obj = 0) override;
    void reset() override;
 

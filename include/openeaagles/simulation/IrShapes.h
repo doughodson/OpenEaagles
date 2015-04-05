@@ -47,8 +47,9 @@ public:
 
    IrSphere();
 
-   virtual LCreal getArea();
-   LCreal getRadius()          { return radius; }
+   LCreal getArea() override;
+
+   LCreal getRadius()              { return radius; }
 
    virtual bool setSlotIrSphereRadius(const Basic::Number* const s);
 
@@ -74,8 +75,8 @@ public:
 
    IrBox();
 
-   virtual LCreal getArea();
-   virtual LCreal getReflectorAreaInFieldOfView(const IrQueryMsg* const msg);
+   LCreal getArea() override;
+   LCreal getReflectorAreaInFieldOfView(const IrQueryMsg* const msg) override;
 
    virtual bool setSlotIrBoxX(const Basic::Number* const s);
    virtual bool setSlotIrBoxY(const Basic::Number* const s);

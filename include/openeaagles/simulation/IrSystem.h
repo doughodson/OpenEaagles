@@ -10,7 +10,7 @@ namespace Eaagles {
 namespace Simulation {
    class IrSeeker;
    class IrQueryMsg;
-   class OnboardComputer; 
+   class OnboardComputer;
 
 //------------------------------------------------------------------------------
 // Class: IrSystem
@@ -26,7 +26,7 @@ namespace Simulation {
 //    seekers, has its own member function processPlayersOfInterest() that filters
 //    by gimbal field of view and player type.  It's the responsibility of the
 //    various IR systems to use or not use this gimbal function -- our default
-//    member function processPlayersOfInterest() does use the gimbal function. 
+//    member function processPlayersOfInterest() does use the gimbal function.
 //
 // Factory name: IrSystem
 // Slots:
@@ -34,14 +34,14 @@ namespace Simulation {
 //    disableQueries <Boolean>   Disable sending queries packets flag (default: false)
 //
 //------------------------------------------------------------------------------
-class IrSystem : public System  
+class IrSystem : public System
 {
    DECLARE_SUBCLASS(IrSystem,System)
 
 public:
    IrSystem();
 
-   virtual bool isQuerying() const; 
+   virtual bool isQuerying() const;
 
    virtual bool areQueriesDisabled() const;              // Returns true if sending query packets has been disabled
    virtual bool setDisableQueriesFlag(const bool b);     // Disables/enables sending the I/R queries packets
@@ -55,8 +55,7 @@ public:
    // Slot functions
    virtual bool setSlotSeekerName(Basic::String* const p);
    virtual bool setSlotDisableQueries(Basic::Number* const msg);
-  
-   // Component Interface
+
    void updateData(const LCreal dt = 0.0) override;
    void reset() override;
 
@@ -66,7 +65,6 @@ protected:
    // This function will create a filtered list of players that IR systems will interact with.
    virtual void processPlayersOfInterest();
 
-   // Basic::Component protected interface
    bool shutdownNotification() override;
 
 private:
@@ -75,7 +73,7 @@ private:
 
    bool disableQueries;             // Disable sending queries flag
 };
- 
+
 } // End Simulation namespace
 } // End Eaagles namespace
 

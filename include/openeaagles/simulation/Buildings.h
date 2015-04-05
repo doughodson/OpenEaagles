@@ -15,14 +15,13 @@ namespace Simulation {
 // Description: Generic building
 // Factory name: Building
 //==============================================================================
-class Building : public Player  
+class Building : public Player
 {
     DECLARE_SUBCLASS(Building,Player)
 
 public:
     Building();
 
-    // Player interface
     unsigned int getMajorType() const override;
 };
 

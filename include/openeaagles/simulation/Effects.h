@@ -11,7 +11,7 @@ namespace Simulation {
 
 //------------------------------------------------------------------------------
 // Class: Effects
-// Description: Base class for effects (chaff, flares, decoys, etc). 
+// Description: Base class for effects (chaff, flares, decoys, etc).
 //
 //    Even though they're not weapons, the Effects class is derived from
 //    the Weapon class because their basic behaviours are the same.  That is,
@@ -23,7 +23,7 @@ namespace Simulation {
 //    dragIndex   <Number>   ! drag index used by default dynamics (default: 0.0006f)
 //
 //------------------------------------------------------------------------------
-class Effects : public Weapon  
+class Effects : public Weapon
 {
     DECLARE_SUBCLASS(Effects,Weapon)
 
@@ -33,21 +33,18 @@ public:
     LCreal getDragIndex() const                    { return dragIndex; }
     void setDragIndex(const LCreal v)              { dragIndex = v; }
 
-    // Weapon interface
-    virtual const char* getDescription() const;
-    virtual const char* getNickname() const;
-    virtual int getCategory() const;
+    const char* getDescription() const override;
+    const char* getNickname() const override;
+    int getCategory() const override;
 
-    // Player interface
-    virtual bool collisionNotification(Player* const p);
-    virtual bool crashNotification();
+    bool collisionNotification(Player* const p) override;
+    bool crashNotification() override;
 
 protected:
    bool setSlotDragIndex(Basic::Number* const p);
 
-   // Weapon interface
-   virtual void weaponDynamics(const LCreal dt);
-   virtual void updateTOF(const LCreal dt);
+   void weaponDynamics(const LCreal dt) override;
+   void updateTOF(const LCreal dt) override;
 
 private:
     LCreal dragIndex;             // Drag Index
@@ -65,10 +62,9 @@ class Chaff : public Effects
 public:
     Chaff();
 
-    // Weapon interface
-    virtual const char* getDescription() const;
-    virtual const char* getNickname() const;
-    virtual int getCategory() const;
+    const char* getDescription() const override;
+    const char* getNickname() const override;
+    int getCategory() const override;
 };
 
 //------------------------------------------------------------------------------
@@ -83,10 +79,9 @@ class Flare : public Effects
 public:
     Flare();
 
-    // Weapon interface
-    virtual const char* getDescription() const;
-    virtual const char* getNickname() const;
-    virtual int getCategory() const;
+    const char* getDescription() const override;
+    const char* getNickname() const override;
+    int getCategory() const override;
 };
 
 //------------------------------------------------------------------------------
@@ -94,17 +89,16 @@ public:
 // Description: Generic decoy class
 // Factory name: Decoy
 //------------------------------------------------------------------------------
-class Decoy : public Effects  
+class Decoy : public Effects
 {
     DECLARE_SUBCLASS(Decoy,Effects)
 
 public:
     Decoy();
 
-    // Weapon interface
-    virtual const char* getDescription() const;
-    virtual const char* getNickname() const;
-    virtual int getCategory() const;
+    const char* getDescription() const override;
+    const char* getNickname() const override;
+    int getCategory() const override;
 };
 
 } // End Simulation namespace

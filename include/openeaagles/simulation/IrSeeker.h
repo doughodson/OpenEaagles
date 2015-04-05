@@ -16,7 +16,7 @@ namespace Simulation {
 
 class Player;
 class IrSystem;
-class IrSensor; 
+class IrSensor;
 class IrQueryMsg;
 
 //------------------------------------------------------------------------------
@@ -27,13 +27,13 @@ class IrQueryMsg;
 // Factory name: IrSeeker
 //
 //------------------------------------------------------------------------------
-class IrSeeker : public ScanGimbal  
+class IrSeeker : public ScanGimbal
 {
     DECLARE_SUBCLASS(IrSeeker,ScanGimbal)
 
 public:
 
-   IrSeeker();    
+   IrSeeker();
 
    virtual void irRequestSignature(IrQueryMsg* const irQuery);
    virtual bool irQueryReturnEvent(IrQueryMsg* const irQuery);
@@ -47,23 +47,20 @@ public:
    virtual unsigned int processPlayersOfInterest(Basic::PairStream* const poi);
 #endif
 
-   // Component Interface
    bool event(const int event, Basic::Object* const obj = 0) override;
    void reset() override;
 
 protected:
    void clearQueues();
 
-   // System class Interface -- phase() callbacks
-   void process(const LCreal dt) override;     // Phase 3
+   void process(const LCreal dt) override;
 
-   // Basic::Component protected interface
    bool shutdownNotification() override;
 
    QStack<IrQueryMsg*> freeQueryStack;  // stack of free queries of target IR signatures
    mutable long        freeQueryLock;   // Semaphore to protect 'freeQueryStack'
 
-   QQueue<IrQueryMsg*> inUseQueryQueue; // Queue of in use queries of target IR signatures 
+   QQueue<IrQueryMsg*> inUseQueryQueue; // Queue of in use queries of target IR signatures
    mutable long        inUseQueryLock;  // Semaphore to protect 'inUseQueryQueue'
 
 private:
@@ -90,7 +87,7 @@ public:
    //------------------------------------------------------------------------------
    virtual unsigned int processPlayers(Basic::PairStream* const players);
 
-   static bool horizonCheck(const osg::Vec3& position1, const osg::Vec3& position2); 
+   static bool horizonCheck(const osg::Vec3& position1, const osg::Vec3& position2);
 
 protected:
    TdbIr();

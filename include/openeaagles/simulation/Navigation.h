@@ -31,7 +31,7 @@ class Bullseye;
 //
 //    utc      <Basic::Time>        ! initial UTC time (default: 0)
 //
-//    feba     <Basic::PairStream>  ! Forward edge battle area (FEBA): 
+//    feba     <Basic::PairStream>  ! Forward edge battle area (FEBA):
 //                                  !   1) List of distance vectors [ North East ]
 //                                  !   from the gaming area reference point.
 //                                  !   2) Default unit is Nautical Miles
@@ -62,7 +62,7 @@ public:
    virtual double getLongitude() const;                     // Returns system longitude (degs)
    virtual double getAltitudeFt() const;                    // Returns system altitude (ft)
    virtual double getAltitudeM() const;                     // Returns system altitude (m)
-    
+
     // Attitude Data
    virtual bool isAttitudeDataValid() const;                // Is system attitude valid?
    virtual double getPitchDeg() const;                      // Returns system pitch (degs)
@@ -74,7 +74,7 @@ public:
                                                             //       Vb = M * Vi
                                                             //       Vi  = Vb * M
                                                             //    Where: 'Vb' is a body vector; 'Vi' is an inertial vector
-    
+
     // Mag Var
    virtual bool isMagVarValid() const;                      // Is the magnetic variation valid?
    virtual double getMagVarDeg() const;                     // Returns the magnetic variation
@@ -88,7 +88,7 @@ public:
     // UTC time
    virtual bool isUtcDataValid() const;                     // Is the UTC time valid?
    virtual double getUTC() const;                           // Returns UTC time (sec)
-    
+
     // Velocity Data
    virtual bool isVelocityDataValid() const;                // Is system velocity valid?
    virtual LCreal getGroundSpeedKts() const;                // Returns ground speed (kts)
@@ -124,16 +124,15 @@ public:
     virtual int getFeba(osg::Vec2* const points, const int max) const;
     virtual bool setFeba(osg::Vec2* const points, const int n);
 
-    // set/change the current route; does not change the initial route used by reset() 
+    // set/change the current route; does not change the initial route used by reset()
     virtual bool setRoute(Route* const msg);
 
     // Slot functions
     virtual bool setSlotRoute(const Route* const msg);  // and the initial route used by reset()
     virtual bool setSlotUtc(const Basic::Time* const msg);
-    virtual bool setSlotFeba(const Basic::PairStream* const msg); 
+    virtual bool setSlotFeba(const Basic::PairStream* const msg);
     virtual bool setSlotBullseye(Bullseye* const msg);
 
-    // Basic::Component interface
     void updateData(const LCreal dt = 0.0) override;
     void reset() override;
 
@@ -144,19 +143,19 @@ protected:
 
    // Set attitude data (angles are in degrees)
    bool setAttitude(const double roll, const double pitch, const double thdg); // (sets data valid)
-   bool setAttitude(const bool dataValidFlg); 
+   bool setAttitude(const bool dataValidFlg);
 
    // Mag Var
    bool setMagVar(const double mv); // (sets data valid);
-   bool setMagVar(const bool dataValidFlg); 
+   bool setMagVar(const bool dataValidFlg);
 
    // Winds
    bool setWinds(const LCreal dirDeg, const LCreal speedKts); // (sets data valid)
-   bool setWinds(const bool dataValidFlg); 
+   bool setWinds(const bool dataValidFlg);
 
    // UTC time
    bool setUTC(const double time); // (sets data valid)
-   bool setUTC(const bool dataValidFlg); 
+   bool setUTC(const bool dataValidFlg);
 
    // Velocity Data
    bool setGroundSpeedKts(const LCreal kts);
@@ -164,7 +163,7 @@ protected:
    bool setGroundTrackDeg(const LCreal degs);
    bool setVelocity(const osg::Vec3d& v);
    bool setAcceleration(const osg::Vec3d& v);
-   bool setVelocityDataValid(const bool dataValidFlg); 
+   bool setVelocityDataValid(const bool dataValidFlg);
 
    // Steering Data
    bool setTrueBrgDeg(const LCreal);
@@ -175,7 +174,7 @@ protected:
    bool setCrossTrackErrorNM(const LCreal);
    bool setTTG(const LCreal);
    bool setETA(const LCreal);
-   bool setNavSteeringValid(const bool dataValidFlg); 
+   bool setNavSteeringValid(const bool dataValidFlg);
 
    // Navigation methods
    virtual bool updateSysPosition();       // Method to compute nav system's positions
@@ -184,9 +183,8 @@ protected:
    virtual bool updateMagVar();            // Method to compute nav system's mag variation
    virtual bool updateNavSteering();       // Method to compute nav steering
 
-   // System class Interface -- phase() callbacks
-   void process(const LCreal dt) override;     // Phase 3
-    
+   void process(const LCreal dt) override;
+
 private:
    void initData();
 
@@ -209,7 +207,7 @@ private:
 
    // Mag var data
    double      magvar;         // Mag Var                  (degs)
-   double      mhdg;           // Mag heading              (degs)   
+   double      mhdg;           // Mag heading              (degs)
    bool        magVarValid;    // Mag var data is valid
 
    // Winds

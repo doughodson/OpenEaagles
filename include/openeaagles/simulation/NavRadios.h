@@ -18,7 +18,7 @@ namespace Simulation {
 // Description: General class for all navigation radio models
 // Factory name: NavRadio
 //------------------------------------------------------------------------------
-class NavRadio : public Radio 
+class NavRadio : public Radio
 {
     DECLARE_SUBCLASS(NavRadio, Radio)
 
@@ -36,14 +36,13 @@ protected:
    // Slave our position to our ownship
    virtual bool setPosition();
 
-   // Basic::Component class protected functions
    bool shutdownNotification() override;
 
 private:
    void initData();
 
-   SPtr<Dafif::AirportLoader> apdb; // Pointer to Airport loader     
-   SPtr<Dafif::NavaidLoader> nvdb;  // Pointer to Navaid loader     
+   SPtr<Dafif::AirportLoader> apdb; // Pointer to Airport loader
+   SPtr<Dafif::NavaidLoader> nvdb;  // Pointer to Navaid loader
 
    double latitude;                 // Ownship Latitude
    double longitude;                // Ownship Longitude
@@ -56,21 +55,21 @@ private:
 // Description: TACAN navigation radio model
 // Factory name: TacanRadio
 //------------------------------------------------------------------------------
-class TacanRadio : public NavRadio 
+class TacanRadio : public NavRadio
 {
-     DECLARE_SUBCLASS(TacanRadio,NavRadio)
+   DECLARE_SUBCLASS(TacanRadio,NavRadio)
 
 public:
    // bands
    enum Band { TCN_X_BAND = 0, TCN_Y_BAND };
-    
+
    // power modes
-    enum {
-        PWR_TCN_OFF = BaseClass::PWR_OFF,
-        PWR_TCN_REC,          // REC mode
-        PWR_TCN_TRAN_REC,     // T/R mode
-        PWR_TCN_AA_TRAN_REC,  // AA TR mode
-    };
+   enum {
+      PWR_TCN_OFF = BaseClass::PWR_OFF,
+      PWR_TCN_REC,          // REC mode
+      PWR_TCN_TRAN_REC,     // T/R mode
+      PWR_TCN_AA_TRAN_REC,  // AA TR mode
+   };
 
 public:
    TacanRadio();
@@ -78,10 +77,9 @@ public:
    Band getBand() const;
    virtual bool setBand(const Band x);
 
-   double getRange() const;       // Range (nautical miles) 
+   double getRange() const;       // Range (nautical miles)
    double getBearing() const;     // Bearing (degrees)
 
-   // Component Interface
    void updateData(const LCreal dt = 0.0) override;
 
 protected:
@@ -93,15 +91,15 @@ private:
 
    Band band;
 
-    bool rangeIsValid;
-    bool bearingIsValid;
+   bool rangeIsValid;
+   bool bearingIsValid;
 
-    double range;
-    double grdrange;
-    double bearing; 
-    double destLatitude;
-    double destLongitude;
-    LCreal currentMagVar;
+   double range;
+   double grdrange;
+   double bearing;
+   double destLatitude;
+   double destLongitude;
+   LCreal currentMagVar;
 };
 
 
@@ -110,48 +108,47 @@ private:
 // Description: ILS navigation radio model
 // Factory name: IlsRadio
 //------------------------------------------------------------------------------
-class IlsRadio : public NavRadio 
+class IlsRadio : public NavRadio
 {
-    DECLARE_SUBCLASS(IlsRadio,NavRadio)
+   DECLARE_SUBCLASS(IlsRadio,NavRadio)
 
 public:
-    // constants for figuring degrees to dots
-    static const LCreal GS_DEG_PER_DOT;
-    static const LCreal LOC_DEG_PER_DOT;
+   // constants for figuring degrees to dots
+   static const LCreal GS_DEG_PER_DOT;
+   static const LCreal LOC_DEG_PER_DOT;
 
 public:
    IlsRadio();
 
-    //Outside Access FCNs
-    LCreal getGlideslopeDifference(void);
-    LCreal getLocalizerDifference(void);
-    LCreal getGlideslopeDifferenceDots();
-    LCreal getLocalizerDifferenceDots();
+   //Outside Access FCNs
+   LCreal getGlideslopeDifference(void);
+   LCreal getLocalizerDifference(void);
+   LCreal getGlideslopeDifferenceDots();
+   LCreal getLocalizerDifferenceDots();
 
-    // Component Interface
-    void updateData(const LCreal dt = 0.0) override;
+   void updateData(const LCreal dt = 0.0) override;
 
 protected:
-    //Always find the glideslope first!!!!
-    virtual bool findILSGlideslopeByFreq(LCreal freq);
-    virtual bool findLocalizerByFreq(LCreal freq);
+   //Always find the glideslope first!!!!
+   virtual bool findILSGlideslopeByFreq(LCreal freq);
+   virtual bool findLocalizerByFreq(LCreal freq);
 
 private:
-    int timerCounter; //For Only doing calc every so often
-    bool localizerValid;
-    bool glideSlopeValid; 
-    double range; //Slant range to the end of the runway
-    double grdrange; //The Ground range to the end of the RWY
-    double bearing; //The bearing of the end of the RWY
-    double destLatitude; //Lat for end of RWY
-    double destLongitude; //Lon for end of RWY
-    LCreal deltaGlideSlope;
-    LCreal deltaLocalizerBearing;
-    LCreal currentMagVar; //Mag Var at Glideslope emitter
-    LCreal acGlideSlope;
-    LCreal acLocalizerBearing;
-    LCreal ilsGlideSlope;
-    LCreal ilsLocalizerBearing;
+   int timerCounter;              // For Only doing calc every so often
+   bool localizerValid;
+   bool glideSlopeValid;
+   double range;                  // slant range to the end of the runway
+   double grdrange;               // ground range to the end of the RWY
+   double bearing;                // bearing of the end of the RWY
+   double destLatitude;           // lat for end of RWY
+   double destLongitude;          // lon for end of RWY
+   LCreal deltaGlideSlope;
+   LCreal deltaLocalizerBearing;
+   LCreal currentMagVar;          // mag var at glideslope emitter
+   LCreal acGlideSlope;
+   LCreal acLocalizerBearing;
+   LCreal ilsGlideSlope;
+   LCreal ilsLocalizerBearing;
 };
 
 } // End Simulation namespace

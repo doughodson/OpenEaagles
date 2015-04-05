@@ -34,7 +34,7 @@ namespace Simulation {
 //   (2) This launcher is a temp solution -- this will be removed.
 //
 //==============================================================================
-class GroundVehicle : public Player  
+class GroundVehicle : public Player
 {
     DECLARE_SUBCLASS(GroundVehicle,Player)
 
@@ -45,6 +45,7 @@ public:
     GroundVehicle();
 
     LCreal getGrossWeight() const override;             // wt: lbs
+
     virtual LCreal getFuelWt() const;                   // wt: lbs
     virtual LCreal getFuelWtMax() const;                // wt: lbs
 
@@ -65,15 +66,13 @@ public:
     virtual bool setSlotLauncherUpAngle(const Basic::Angle* const msg);
     virtual bool setSlotLauncherMoveTime(const Basic::Time* const msg);
 
-    // Player interface
     unsigned int getMajorType() const override;
 
-    // Component Interface
     void reset() override;
 
 protected:
    // Launcher dynamics -- moves launcher to its commanded position
-   virtual void launcherDynamics(const LCreal dt); 
+   virtual void launcherDynamics(const LCreal dt);
 
    // Player class (protected) interface
    void dynamics(const LCreal  dt = 0.0) override;
@@ -93,7 +92,7 @@ private:
 // Class Tank
 // Factory name: Tank
 //==============================================================================
-class Tank : public GroundVehicle  
+class Tank : public GroundVehicle
 {
     DECLARE_SUBCLASS(Tank,GroundVehicle)
 
@@ -105,7 +104,7 @@ public:
 // Class ArmoredVehicle
 // Factory name: ArmoredVehicle
 //==============================================================================
-class ArmoredVehicle : public GroundVehicle  
+class ArmoredVehicle : public GroundVehicle
 {
     DECLARE_SUBCLASS(ArmoredVehicle,GroundVehicle)
 
@@ -117,7 +116,7 @@ public:
 // Class WheeledVehicle
 // Factory name: WheeledVehicle
 //==============================================================================
-class WheeledVehicle : public GroundVehicle  
+class WheeledVehicle : public GroundVehicle
 {
     DECLARE_SUBCLASS(WheeledVehicle,GroundVehicle)
 
@@ -129,7 +128,7 @@ public:
 // Class Artillery
 // Factory name: Artillery
 //==============================================================================
-class Artillery : public GroundVehicle  
+class Artillery : public GroundVehicle
 {
     DECLARE_SUBCLASS(Artillery,GroundVehicle)
 
@@ -142,7 +141,7 @@ public:
 // Class GroundStation
 // Factory name: GroundStation
 //==============================================================================
-class GroundStation : public GroundVehicle  
+class GroundStation : public GroundVehicle
 {
     DECLARE_SUBCLASS(GroundStation,GroundVehicle)
 
@@ -154,7 +153,7 @@ public:
 // Class GroundStationRadar
 // Factory name: GroundStationRadar
 //==============================================================================
-class GroundStationRadar : public GroundStation  
+class GroundStationRadar : public GroundStation
 {
     DECLARE_SUBCLASS(GroundStationRadar,GroundStation)
 
@@ -166,7 +165,7 @@ public:
 // Class GroundStationUav
 // Factory name: GroundStationUav
 //==============================================================================
-class GroundStationUav : public GroundStation  
+class GroundStationUav : public GroundStation
 {
     DECLARE_SUBCLASS(GroundStationUav,GroundStation)
 

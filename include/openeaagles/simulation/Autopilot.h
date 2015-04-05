@@ -61,7 +61,7 @@ namespace Simulation {
 //      hold values have not been set by a slot function, then the player's
 //      current values are used.
 //
-//   3) setLoiter(true) will turn loiter mode on at the current player location and heading, 
+//   3) setLoiter(true) will turn loiter mode on at the current player location and heading,
 //      while requestLoiter() will turn on loiter mode with a given anchor point and course.
 //      setLointer(false) will turn off loiter mode in both cases.
 //
@@ -160,7 +160,7 @@ public:
    virtual bool setYawSasMode(const bool f);
 
 
-   // Roll Control Input 
+   // Roll Control Input
    //      Normalized inputs
    //      roll:  -1.0 -> max left;  0.0 -> center;  1.0 -> max right
    virtual LCreal getControlStickRollInput() const { return stickRollPos; }
@@ -211,10 +211,9 @@ public:
    virtual bool setMaxPitchAngleDeg(const double x);
    // maximum velocity acceleration
    virtual bool setMaxVelAccNps(const double x);
-   
-   // Eaagles::Basic::Component interface methods
+
    void reset() override;
-    
+
 protected:
    // Slot functions
    bool setSlotNavMode(const Basic::Number* const msg);                       // Nav (route follow) mode flag
@@ -266,7 +265,7 @@ private:
    bool calcMirrorLatLon();
    // fly to a given point using the course
    bool flyCRS(const double latDeg, const double lonDeg, const double crsCmdDeg);
-   
+
    // Input controls
    LCreal   stickRollPos;     // Stick roll position:  -1.0 -> max left;    0.0 -> center;  1.0 -> max right
    LCreal   stickPitchPos;    // Stick pitch position: -1.0 -> max forward; 0.0 -> center;  1.0 -> max back
@@ -296,12 +295,12 @@ private:
 
    // Loiter mode data
    // Entry modes for loiter
-   enum EntryMode { 
-      PREENTRY, 
-      SIMPLE, 
-      DIRECT, 
-      PARALLEL, 
-      TEARDROP, 
+   enum EntryMode {
+      PREENTRY,
+      SIMPLE,
+      DIRECT,
+      PARALLEL,
+      TEARDROP,
       LOITER
    };
 
@@ -310,10 +309,10 @@ private:
    double   loiterMirrorLat;        // Loiter orbit pattern mirror point latitude  (degs)
    double   loiterMirrorLon;        // Loiter orbit pattern mirror point longitude (degs)
    double   loiterLength;           // Loiter pattern length (nm)
-   bool     loiterCcwFlag;          // Loiter pattern counter-clockwise flag 
+   bool     loiterCcwFlag;          // Loiter pattern counter-clockwise flag
    double   loiterInboundCourse;    // Loiter course we started the loiter pattern on (degs)
    EntryMode  loiterEntryMode;      // Entry mode into the loiter
-   unsigned int loiterEntryPhase;   // Phase of the entry mode 
+   unsigned int loiterEntryPhase;   // Phase of the entry mode
    bool isInbound;                  // are we on the inbound loiter
    double loiterTime;               // loiter time (seconds)
    bool loiterTimeBased;          // is our loiter based on time instead of length?

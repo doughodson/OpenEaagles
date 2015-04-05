@@ -36,7 +36,7 @@ namespace Simulation {
 //    3) This class is one of the "top level" systems attached to a Player
 //       class (see Player.h).
 //------------------------------------------------------------------------------
-class Datalink : public System  
+class Datalink : public System
 {
    DECLARE_SUBCLASS(Datalink,System)
 
@@ -51,7 +51,7 @@ public:
    CommRadio* getRadio()                        { return radio; }
    const CommRadio* getRadio() const            { return radio; }
    virtual bool setRadio(CommRadio* const);
-   
+
    const Basic::String* getRadioName() const    { return radioName; }
    virtual bool setRadioName(const Basic::String* const name);
 
@@ -80,7 +80,6 @@ public:
    // Event handler(s)
    virtual bool onDatalinkMessageEvent(Basic::Object* const);
 
-   // Component Interface
    bool event(const int event, Basic::Object* const obj = 0) override;
    void reset() override;
 
@@ -93,18 +92,16 @@ protected:
    virtual bool setSlotRadioId(const Basic::Number* const num);
    virtual bool setSlotMaxRange(const Basic::Distance* const num);
 
-   // System class protected functions
-   void dynamics(const LCreal dt) override;    // Phase 0 -> ages queues
+   void dynamics(const LCreal dt) override;
 
-   // Basic::Component protected functions
    bool shutdownNotification() override;
 
 private:
    void initData();
 
-   static const int MAX_MESSAGES = 1000;  // Max number of messages in queues 
+   static const int MAX_MESSAGES = 1000;  // Max number of messages in queues
 
-   QQueue<Basic::Object*>* inQueue;   // Received message queue  
+   QQueue<Basic::Object*>* inQueue;   // Received message queue
    QQueue<Basic::Object*>* outQueue;  // Queue for messages going out over the network/DIS
    double noRadioMaxRange;            // Max range of our datalink (NM)
 
@@ -112,7 +109,7 @@ private:
    CommRadio* radio;                  // Our radio
 
    unsigned short radioId;            // Radio ID input
-   bool useRadioIdFlg;                // Use the 'radioId' flag   
+   bool useRadioIdFlg;                // Use the 'radioId' flag
 
    bool sendLocal;                    // Send to local players flag; direct or via the radio
    bool queueForNetwork;              // Send the message to the network output queue

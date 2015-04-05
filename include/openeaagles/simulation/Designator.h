@@ -14,7 +14,7 @@ namespace Simulation {
 
 class Player;
 
-class Designator : public Basic::Object  
+class Designator : public Basic::Object
 {
     DECLARE_SUBCLASS(Designator,Basic::Object)
 
@@ -22,14 +22,14 @@ public:
    // Since we're not using DIS Designator PDUs yet, use this to send
    // data over the network.
    struct Data {
-      Data() : latitude(0), longitude(0), elevation(0), freq(0), power(0), code(0) {}
+      Data() : latitude(0), longitude(0), elevation(0), freq(0), power(0), code(0), padding(0) {}
       double      latitude;      // Latitude                         (degs)
       double      longitude;     // Longitude                        (degs)
       double      elevation;     // Elevation                        (m)
       LCreal      freq;          // Frequency                        (Hz)
       LCreal      power;         // Effective Radiated Power (ERP)   (Watts)
       unsigned short code;       // LASER code
-      unsigned short padding;       // LASER code
+      unsigned short padding;    // LASER code
    };
 
 public:

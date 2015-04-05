@@ -49,7 +49,6 @@ public:
    // Event handler(s)
    virtual bool onJettisonEvent();
 
-   // Basic::Component interface
    bool event(const int event, Basic::Object* const obj = 0) override;
    void reset() override;
 

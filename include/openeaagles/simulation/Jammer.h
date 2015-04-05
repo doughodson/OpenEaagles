@@ -15,7 +15,7 @@ namespace Simulation {
 //
 // Default R/F sensor type ID is "JAMMER"
 //------------------------------------------------------------------------------
-class Jammer : public RfSensor  
+class Jammer : public RfSensor
 {
     DECLARE_SUBCLASS(Jammer,RfSensor)
 
@@ -23,7 +23,6 @@ public:
     Jammer();
 
 protected:
-    // System Interface -- phase callbacks
     void transmit(const LCreal dt) override;
 };
 

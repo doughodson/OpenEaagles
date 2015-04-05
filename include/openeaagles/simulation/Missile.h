@@ -30,7 +30,7 @@ class Track;
 //   cmdSpeed     <Number>  ! Command speed (m/s) (default: 0.0)
 //
 //------------------------------------------------------------------------------
-class Missile : public Weapon  
+class Missile : public Weapon
 {
     DECLARE_SUBCLASS(Missile,Weapon)
 
@@ -52,19 +52,19 @@ public:
     bool setMaxG(const LCreal v);
     bool setMaxAccel(const LCreal v);
 
-    // Weapon interface
-    virtual const char* getDescription() const;
-    virtual const char* getNickname() const;
-    virtual int getCategory() const;
-    virtual void atReleaseInit();
+    const char* getDescription() const override;
+    const char* getNickname() const override;
+    int getCategory() const override;
+    void atReleaseInit() override;
+
     virtual void setCmdPitchD(const LCreal x)  { cmdPitch   = x * static_cast<LCreal>(Basic::Angle::D2RCC); }
     virtual void setCmdHdgD(const LCreal x)    { cmdHeading = x * static_cast<LCreal>(Basic::Angle::D2RCC); }
-    virtual bool setTargetTrack(Track* const trk, const bool posTrkEnb);
-    virtual bool setTargetPlayer(Player* const tgt, const bool posTrkEnb);
 
-    // Basic::Component interface
+    bool setTargetTrack(Track* const trk, const bool posTrkEnb) override;
+    bool setTargetPlayer(Player* const tgt, const bool posTrkEnb) override;
+
     bool event(const int event, Basic::Object* const obj = 0) override;
-    void reset() override;    
+    void reset() override;
 
 protected:
    virtual bool setSlotVpMin(const Basic::Number* const msg);
@@ -82,7 +82,7 @@ protected:
 
 private:
     virtual bool calculateVectors(const Player* const tgt, const Track* const trk, osg::Vec3* const los, osg::Vec3* const vel, osg::Vec3* const posx) const;
-    
+
    // ---
    // Default guidance & dynamics parameters
    // ---

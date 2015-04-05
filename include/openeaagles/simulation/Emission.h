@@ -117,7 +117,7 @@ public:
    // Returns the transmit loss (no units)
    LCreal getTransmitLoss() const   { return lossXmit; }
 
-   // Sets the transmit loss (no units) 
+   // Sets the transmit loss (no units)
    void setTransmitLoss(const LCreal v) { lossXmit = v; }
 
    // Target's Radar Cross Section (RCS) as a function of this emission data (m^2)
@@ -142,9 +142,8 @@ public:
    // Sets the ECM emission flag
    virtual void setECM(const unsigned int b) { ecmFlag = b; }
 
-   // SensorMsg class interface
-   virtual void setRange(const LCreal r);   // Sets the range to the target (meters) (which we use to set the range loss)
-   virtual void clear();                    // Clear this emission's data
+   void setRange(const LCreal r) override;   // Sets the range to the target (meters) (which we use to set the range loss)
+   void clear() override;                    // Clear this emission's data
 
 private:
    LCreal          freq;           // Frequency                        (Hz)
@@ -157,7 +156,7 @@ private:
    LCreal          gain;           // Effective antenna gain           (no units)
    LCreal          lossRng;        // Loss due to range                (m^-2)
    LCreal          lossAtmos;      // Atmospheric Attenuation Loss     (no units)
-   LCreal          lossXmit;       // Transmit loss (default: 1.0)     (no units) 
+   LCreal          lossXmit;       // Transmit loss (default: 1.0)     (no units)
    LCreal          rcs;            // Radar Cross Section (RCS)        (m^2)
    Antenna::Polarization polar;    // Antenna polarization             (enum)
    RfSystem*       transmitter;    // The system that transmitted the emission

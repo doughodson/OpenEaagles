@@ -14,7 +14,7 @@ namespace Simulation {
 //
 // Description:  Base dynamics model class
 //
-// Note -- 
+// Note --
 //
 //    1) updateTC() and updateData() are called by Component::upateTC() and
 //    Component::updateData() as part of the player's component list.
@@ -33,7 +33,7 @@ namespace Simulation {
 // Factory name: DynamicsModel
 //
 //==============================================================================
-class DynamicsModel : public Basic::Component  
+class DynamicsModel : public Basic::Component
 {
     DECLARE_SUBCLASS(DynamicsModel, Basic::Component)
 
@@ -60,7 +60,7 @@ public:
     //                            acceleration limiter (vNps)
     // acceleration limiter is determines how fast the model gets to the actual commanded velocity
     virtual bool setCommandedVelocityKts(const double v, const double vNps = 0);
-                                                                                
+
     virtual bool isAltitudeHoldOn() const;
     virtual double getCommandedAltitude() const;
     virtual bool setAltitudeHoldOn(const bool b);

@@ -31,7 +31,7 @@ class RfSystem;
 //
 //      gain            <Basic::Number>  ! Gain (default: 1.0)              (no units)
 //
-//      gainPattern     <Basic::Function> ! Gain pattern (Basic::Func1 or Basic::Func2) (db) 
+//      gainPattern     <Basic::Function> ! Gain pattern (Basic::Func1 or Basic::Func2) (db)
 //                                       ! (default: 0)
 //
 //      gainPatternDeg  <Basic::Boolean> ! Gain pattern is in degrees (true) or radians (false) (default: false)
@@ -41,18 +41,18 @@ class RfSystem;
 //      beamWidth       <Basic::Angle>   ! Beam Width  (must be greater than zero) (default: 3.5 degrees)
 //                      <Basic::Number>  ! Beam width in radians
 //
-// 
+//
 // Note
 //    1) Other defaults:
 //          maxPlayersOfInterest: 200
-//          playerOfInterestTypes: { "air" "weapon" } 
+//          playerOfInterestTypes: { "air" "weapon" }
 //
 //    2) When the Emission 'recycle' flag is enabled (default behavior), the
 //       system will try to reuse Emission objects, which removes the overhead
 //       of creating and deleting them.
 //
 //------------------------------------------------------------------------------
-class Antenna : public ScanGimbal  
+class Antenna : public ScanGimbal
 {
    DECLARE_SUBCLASS(Antenna,ScanGimbal)
 
@@ -78,7 +78,7 @@ public:
    // Antenna gain
    virtual double getGain() const              { return gain; }
 
-   // Gain pattern 
+   // Gain pattern
    const Basic::Function* gainPatternTable() const { return gainPattern; }
    bool isGainPatternDegrees() const           { return gainPatternDeg; }
 
@@ -116,24 +116,19 @@ public:
    // Event handler(s)
    virtual bool onRfEmissionReturnEventAntenna(Emission* const);
 
-   // ScanGimbal Interface -- Event handler(s)
    bool onStartScanEvent(Basic::Integer* const bar) override;
    bool onEndScanEvent(Basic::Integer* const bar) override;
 
-   // Gimbal Interface -- Event handler(s)
    bool onRfEmissionEvent(Emission* const) override;
 
-   // Component Interface
    bool event(const int event, Basic::Object* const obj = 0) override;
    void reset() override;
 
 protected:
    void clearQueues();
 
-   // System class Interface -- phase() callbacks
    void process(const LCreal dt) override;     // Phase 3
 
-   // Basic::Component protected interface
    bool shutdownNotification() override;
 
    QStack<Emission*> freeEmStack;  // Free emission stack

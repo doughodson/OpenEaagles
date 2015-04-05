@@ -38,19 +38,19 @@ public:
    // angleAspect to target
    const LCreal getAngleAspect() const { return angleAspect; }
 
-   // Set relative azimuth 
+   // Set relative azimuth
    void setRelativeAzimuth(const LCreal & n) { raz = n; }
 
    // Relative azimuth of target
    const LCreal getRelativeAzimuth() const { return raz; }
 
-   // Set relative azimuth 
+   // Set relative azimuth
    void setRelativeElevation(const LCreal & n) { rel = n; }
 
    // Relative azimuth of target
    const LCreal getRelativeElevation() const { return rel; }
 
-   // Set angle aspect. 
+   // Set angle aspect.
    void setAngleAspect(const LCreal & n) { angleAspect = n; }
 
    // Position of target player
@@ -119,22 +119,21 @@ public:
    //Set the projected area in the field of view
    void setProjectedArea(const LCreal area) {projectedArea = area; }
 
-   LCreal getSignalToNoiseRatio() const {return signalToNoiseRatio;} 
+   LCreal getSignalToNoiseRatio() const {return signalToNoiseRatio;}
    void setSignalToNoiseRatio (LCreal const newSN) {signalToNoiseRatio = newSN; }
 
-   LCreal getBackgroundNoiseRatio() const {return backgroundNoiseRatio;} 
+   LCreal getBackgroundNoiseRatio() const {return backgroundNoiseRatio;}
    void setBackgroundNoiseRatio (LCreal const newSN) {backgroundNoiseRatio = newSN; }
 
-   IrSensor* getSendingSensor() {return sendingSensor;} 
-   const IrSensor* getSendingSensor() const {return sendingSensor;} 
+   IrSensor* getSendingSensor() {return sendingSensor;}
+   const IrSensor* getSendingSensor() const {return sendingSensor;}
    void setSendingSensor(IrSensor* const newSensor);
 
    // IrQueryMsg class interface
    virtual void clearIrSignature();
 
-   // SensorMsg class interface
-   virtual void setRange(const LCreal r);   // Sets the range to the target (meters) (which we use to set the range loss)
-   virtual void clear();                    // Clear this message's data
+   void setRange(const LCreal r) override;
+   void clear() override;
 
    // FAB - valuable to keep info about merging
    enum MergedQueryStatus {
@@ -153,18 +152,18 @@ private:
    LCreal         instantaneousFieldOfView;  //IFOV                      (steradians)
    LCreal         nei;                       //NEI
    LCreal         signatureAtRange;          //Transmitted signal
-   LCreal* signatureByWaveband;              //Transmitted signal by waveband  2d array where x = number of 
-                                             // waveband bins, y = 0 (lower wavelength) , 1 (upper wavelength), 2 (sig) 
+   LCreal* signatureByWaveband;              //Transmitted signal by waveband  2d array where x = number of
+                                             // waveband bins, y = 0 (lower wavelength) , 1 (upper wavelength), 2 (sig)
    LCreal         emissivity;                //Emissivity (unitless)
    LCreal         projectedArea;             //Projected area observed   (m^2)
-   LCreal         signalToNoiseRatio;        // ratio of Signal to Noise 
+   LCreal         signalToNoiseRatio;        // ratio of Signal to Noise
    LCreal         backgroundNoiseRatio;      // ratio of background noise
-   IrSensor*      sendingSensor;             //sensor that reported this message. 
+   IrSensor*      sendingSensor;             //sensor that reported this message.
    osg::Vec3      pos;                       // position of the target.
-   osg::Vec3      vel;                       // velocity of target. 
-   osg::Vec3      accel;                     // acceleration of target. 
+   osg::Vec3      vel;                       // velocity of target.
+   osg::Vec3      accel;                     // acceleration of target.
    LCreal         angleAspect;               // Angle aspect to target.
-   LCreal         angleOffBoresight;         // Angle of target off boresight of sensor 
+   LCreal         angleOffBoresight;         // Angle of target off boresight of sensor
    LCreal         rel;                       // The relative elevation from target to sensor
    LCreal         raz;                       // The relative azimuth from target to sensor
    MergedQueryStatus mergedQueryStatus;      // Flags status of query merging   // FAB

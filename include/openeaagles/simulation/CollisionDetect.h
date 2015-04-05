@@ -77,7 +77,6 @@ public:
    virtual bool setLocalOnly(const bool flg);
    virtual bool setSendCrashEventsEnabled(const bool flg);
 
-   // Basic::Component interface
    void updateData(const LCreal dt = 0.0) override;
 
 protected:
@@ -97,7 +96,6 @@ protected:
    virtual bool setSlotLocalOnly(const Basic::Number* const msg);
    virtual bool setSlotSendCrashEvents(const Basic::Number* const msg);
 
-   // System time critical phase callbacks -- 
    void process(const LCreal dt) override;     // Phase 3
 
 protected:
@@ -111,7 +109,7 @@ protected:
       bool collided;          // We've collided with this player
       bool unmatched;         // Entry not yet matched during an update
 
-      PlayerOfInterest() 
+      PlayerOfInterest()
          : player(0), range(0.0), rangeRate(0.0),
            distance(0.0), passCnt(0), active(false),
            collided(false), unmatched(false) {}

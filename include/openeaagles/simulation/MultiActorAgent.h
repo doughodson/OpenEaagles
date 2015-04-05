@@ -7,7 +7,7 @@
 #include "openeaagles/basic/Component.h"
 
 namespace Eaagles {
-   namespace Basic { 
+   namespace Basic {
       namespace Ubf { class Behavior; class State; }
    }
 
@@ -25,7 +25,7 @@ class Station;
 //
 // Factory name: MultiActorAgent
 // Slots:
-//    state       <State>           ! state 
+//    state       <State>           ! state
 //    agentList   <PairStream>      ! behavior pairstream
 //------------------------------------------------------------------------------
 class MultiActorAgent : public Basic::Component
@@ -35,7 +35,6 @@ class MultiActorAgent : public Basic::Component
 public:
    MultiActorAgent();
 
-   // Basic::Component Interface
    void updateData(const LCreal dt = 0.0) override;
    void reset() override;
 
@@ -97,7 +96,7 @@ inline void MultiActorAgent::setActor(Basic::Component* c) { actor=c; }
 //   } // components
 //
 //   simulation: ( Simulation
-//    
+//
 //      players: {
 //
 //         p1: ()
