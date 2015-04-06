@@ -43,7 +43,6 @@ public:
    // Write the BMP file
    bool writeFile();
 
-   // Texture interface
    void loadTexture() override;
 
 protected:

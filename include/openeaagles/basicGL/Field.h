@@ -262,14 +262,11 @@ public:
    const Basic::String& getInputExample() const  { return inputExample; }
    int getCharacterPos() const                   { return icp; }
 
-   // Graphic interface
    bool cursor(int* ln, int* cp) const override;
    void drawFunc() override;
    bool event(const int event, Object* const obj = 0) override;
 
-   // Component interface
    void updateData(const LCreal dt = 0.0) override;
-
 
 protected:
    //slot table macro functions

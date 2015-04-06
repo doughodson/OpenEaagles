@@ -40,7 +40,6 @@ public:
    Object* object()                 { return obj; }      // The object
    const Object* object() const     { return obj; }      // The object (const version)
 
-   // Object interface
    bool isValid() const override;
 
 private:

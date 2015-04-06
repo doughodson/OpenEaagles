@@ -279,7 +279,6 @@ public:
     // get function
     bool isStrip()                  { return strip; }
 
-    // BasicGL::Graphic interface
     void drawFunc() override;
 
 protected:
@@ -307,7 +306,6 @@ public:
     // get function
     bool isFan()                  { return fan; }
 
-    // BasicGL::Graphic interface
     void drawFunc() override;
 
 protected:

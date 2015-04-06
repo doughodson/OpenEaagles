@@ -28,7 +28,7 @@ class SlSymbol;
 //
 //    The symbol location (e.g., lat/lon, NED, player or screen) are transformed
 //    to screen coordinates using the MapPage base class.
-//              
+//
 //
 // Notes:
 //    1) All symbol index values are one-based; range: [ 1 ... getMaxSymbols() ]
@@ -166,7 +166,6 @@ public:
    virtual bool setInterconnect(const bool x);
    bool isInterconnected()  { return interconnect; };
 
-   // BasicGL::Graphic interface
    void draw() override;
    void drawFunc() override;
 

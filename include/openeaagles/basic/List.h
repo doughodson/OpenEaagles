@@ -189,7 +189,6 @@ public:
    bool insert(Item* newItem, Item* refItem);
    Object* remove(Item* oldItem);
 
-   // Object interface
    bool isValid() const override;
 
 private:

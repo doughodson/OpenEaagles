@@ -162,7 +162,6 @@ public:
     Meters(const Distance& value);
 
     static LCreal convertStatic(const Distance& n)        { return n.toDistance(); }
-    // Distance interface
     LCreal toDistance() const override                    { return static_cast<LCreal>(val); }
     LCreal fromDistance(const LCreal a) const override    { return a; }
 };
@@ -183,7 +182,6 @@ public:
     CentiMeters(const Distance& value);
 
     static LCreal convertStatic(const Distance& n)        { return n.toDistance() * M2CM; }
-    // Distance interface
     LCreal toDistance() const override                    { return static_cast<LCreal>(val * CM2M); }
     LCreal fromDistance(const LCreal a) const override    { return a * M2CM; }
 };
@@ -205,7 +203,6 @@ public:
     MicroMeters(const Distance& value);
 
     static LCreal convertStatic(const Distance& n)       { return n.toDistance() * M2UM; }
-    // Distance interface
     LCreal toDistance() const override                   { return static_cast<LCreal>(val * UM2M); }
     LCreal fromDistance(const LCreal a) const override   { return a * M2UM; }
 };
@@ -225,7 +222,6 @@ public:
     Microns(const Distance& value);
 
     static LCreal convertStatic(const Distance& n)       { return n.toDistance() * M2UM; }
-    // Distance interface
     LCreal toDistance() const override                   { return static_cast<LCreal>(val * UM2M); }
     LCreal fromDistance(const LCreal a) const override   { return a * M2UM; }
 };
@@ -244,7 +240,6 @@ public:
     KiloMeters(const Distance& value);
 
     static LCreal convertStatic(const Distance& n)      { return n.toDistance() * M2KM; }
-    // Distance interface
     LCreal toDistance() const override                  { return static_cast<LCreal>(val * KM2M); }
     LCreal fromDistance(const LCreal a) const override  { return a * M2KM; }
 };
@@ -265,7 +260,6 @@ public:
     Inches(const Distance& value);
 
     static LCreal convertStatic(const Distance& n)      { return n.toDistance() * M2IN; }
-    // Distance interface
     LCreal toDistance() const override                  { return static_cast<LCreal>(val * IN2M); }
     LCreal fromDistance(const LCreal a) const override  { return a * M2IN; }
 };
@@ -286,7 +280,6 @@ public:
     Feet(const Distance& value);
 
     static LCreal convertStatic(const Distance& n)      { return n.toDistance() * M2FT; }
-    // Distance interface
     LCreal toDistance() const override                  { return static_cast<LCreal>(val * FT2M); }
     LCreal fromDistance(const LCreal a) const override  { return a * M2FT; }
 };
@@ -307,7 +300,6 @@ public:
     NauticalMiles(const Distance& value);
 
     static LCreal convertStatic(const Distance& n)    { return n.toDistance() * M2NM; }
-    // Distance interface
     LCreal toDistance() const override                 { return static_cast<LCreal>(val * NM2M); }
     LCreal fromDistance(const LCreal a) const override { return a * M2NM; }
 };
@@ -328,7 +320,6 @@ public:
     StatuteMiles(const Distance& value);
 
     static LCreal convertStatic(const Distance& n)    { return n.toDistance() * M2SM; }
-    // Distance interface
     LCreal toDistance() const override                 { return static_cast<LCreal>(val * SM2M); }
     LCreal fromDistance(const LCreal a) const override { return a * M2SM; }
 };

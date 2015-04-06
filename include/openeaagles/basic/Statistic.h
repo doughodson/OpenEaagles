@@ -32,7 +32,7 @@ namespace Basic {
 //    sigma(const double* const values, int size)
 //    sigma(const float* const values, int size)
 //       Adds an array of 'size' data points to the statistic
-//    
+//
 //    int getN() const
 //       Returns the number of data points that have been added to the statistic
 //
@@ -82,7 +82,7 @@ public:
    double ci(const double) const;                   // Returns confidence interval given "Z"
    double value() const      { return value1; }     // Returns the last values added by sigma()
 
-   void clear();        // Clears the statistics
+   void clear();          // Clears the statistics
 
 private:
    unsigned long n;       // number of values

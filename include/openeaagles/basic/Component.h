@@ -400,8 +400,7 @@ public:
    virtual bool setSlotDisableMsgType(const Identifier* const msg);  // Disables message types by name
    virtual bool setSlotDisableMsgType(const Number* const msg);      // Disables message types by bit
 
-   // Object class functions
-   virtual bool isMessageEnabled(const unsigned short msgType) const;
+   bool isMessageEnabled(const unsigned short msgType) const override;
 
 protected:
    virtual void printTimingStats();         // Print statistics on component timing

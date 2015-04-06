@@ -47,11 +47,9 @@ public:
    // Slot functions
    virtual bool setSlotBacklog(const Number* const msg);
 
-   // PosixHandler interface
    bool initNetwork(const bool noWaitFlag) override;
 
 protected:
-   // PosixHandler interface
    bool bindSocket() override;
 
    virtual bool setBacklog(const unsigned int value);

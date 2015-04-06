@@ -95,7 +95,6 @@ class FtglBitmapFont : public FtglFonts
 public:
     FtglBitmapFont();
 
-    // Font interface
     void outputText(const double x, const double y, const char* txt, const int n, const bool vf = false, const bool rf = false) override;
     void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false) override;
     void loadFont() override;
@@ -130,7 +129,6 @@ class FtglExtrdFont : public FtglFonts
 public:
     FtglExtrdFont();
 
-    // Font interface
     void outputText(const double x, const double y, const char* txt, const int n, const bool vf = false, const bool rf = false) override;
     void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false) override;
     void loadFont() override;
@@ -168,7 +166,6 @@ class FtglOutlineFont : public FtglFonts
 public:
     FtglOutlineFont();
 
-    // Font interface
     void outputText(const double x, const double y, const char* txt, const int n, const bool vf = false, const bool rf = false) override;
     void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false) override;
     void loadFont() override;
@@ -199,7 +196,6 @@ class FtglPixmapFont : public FtglFonts
 public:
     FtglPixmapFont();
 
-    // Font interface
     void outputText(const double x, const double y, const char* txt, const int n, const bool vf = false, const bool rf = false) override;
     void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false) override;
     void loadFont() override;
@@ -230,7 +226,6 @@ class FtglPolygonFont : public FtglFonts
 public:
     FtglPolygonFont();
 
-    // Font interface
     void outputText(const double x, const double y, const char* txt, const int n, const bool vf = false, const bool rf = false) override;
     void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false) override;
     void loadFont() override;
@@ -264,7 +259,6 @@ class FtglHaloFont : public FtglFonts
 public:
     FtglHaloFont();
 
-    // Font interface
     void outputText(const double x, const double y, const char* txt, const int n, const bool vf = false, const bool rf = false) override;
     void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false) override;
     void loadFont() override;
@@ -308,7 +302,6 @@ class FtglTextureFont : public FtglFonts
 public:
     FtglTextureFont();
 
-    // Font interface
     void outputText(const double x, const double y, const char* txt, const int n, const bool vf = false, const bool rf = false) override;
     void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false) override;
     void loadFont() override;

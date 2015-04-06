@@ -125,7 +125,6 @@ public:
     CubicMeters(const Volume& value);
 
     static LCreal convertStatic(const Volume &n)      { return n.toVolume(); }
-    // Volume interface
     LCreal toVolume() const override                  { return static_cast<LCreal>(val); }
     LCreal fromVolume(const LCreal a) const override  { return a; }
 };
@@ -146,7 +145,6 @@ public:
     CubicFeet(const Volume& value);
 
     static LCreal convertStatic(const Volume &n)     { return n.toVolume() * CM2CFT; }
-    // Volume interface
     LCreal toVolume() const override                 { return static_cast<LCreal>(val * CFT2CM); }
     LCreal fromVolume(const LCreal a) const override { return a * CM2CFT; }
 };
@@ -167,7 +165,6 @@ public:
     CubicInches(const Volume& value);
 
     static LCreal convertStatic(const Volume &n)     { return n.toVolume() * CM2CIN; }
-    // Volume interface
     LCreal toVolume() const override                 { return static_cast<LCreal>(val * CIN2CM); }
     LCreal fromVolume(const LCreal a) const override { return a * CM2CIN; }
 };
@@ -188,7 +185,6 @@ public:
     Liters(const Volume& value);
 
     static LCreal convertStatic(const Volume &n)     { return n.toVolume() * CM2L; }
-    // Volume interface
     LCreal toVolume() const override                 { return static_cast<LCreal>(val * L2CM); }
     LCreal fromVolume(const LCreal a) const override { return a * CM2L; }
 };

@@ -35,7 +35,7 @@ class Boolean : public Number {
 
 public:
     Boolean(const bool num) : Number(num ? 1.0 : 0.0)     { STANDARD_CONSTRUCTOR() }
-    Boolean()                                               { STANDARD_CONSTRUCTOR() }
+    Boolean()                                             { STANDARD_CONSTRUCTOR() }
 
     operator bool() const;
 
@@ -85,7 +85,7 @@ inline bool operator==(const Boolean& b1, const Boolean& b2)
     return b1.getBoolean() == b2.getBoolean();
 }
 
-// Return a true if the value b1 is equal to val of Boolean instance b2 
+// Return a true if the value b1 is equal to val of Boolean instance b2
 inline bool operator==(const bool b1, const Boolean& b2)
 {
     return b1 == b2.getBoolean();
@@ -98,7 +98,7 @@ inline bool operator==(const Boolean& b1, const bool b2)
     return b1.getBoolean() == b2;
 }
 
-// Return a true if the val's of the two Boolean instances are not equal 
+// Return a true if the val's of the two Boolean instances are not equal
 inline bool operator!=(const Boolean& b1, const Boolean& b2)
 {
     return b1.getBoolean() != b2.getBoolean();
@@ -121,37 +121,37 @@ inline bool operator!=(const Boolean& b1, const bool b2)
 // AND and OR operators:  && and ||
 //------------------------------------------------------------------------------
 
-// And the val's of the two Boolean instances 
+// And the val's of the two Boolean instances
 inline bool operator&&(const Boolean& b1, const Boolean& b2)
 {
     return b1.getBoolean() && b2.getBoolean();
 }
 
-// And the value b1 to val of Boolean instance b2 
+// And the value b1 to val of Boolean instance b2
 inline bool operator&&(const bool b1, const Boolean& b2)
 {
     return b1 && b2.getBoolean();
 }
 
-// And the value b2 to val of Boolean instance b1 
+// And the value b2 to val of Boolean instance b1
 inline bool operator&&(const Boolean& b1, const bool b2)
 {
     return b1.getBoolean() && b2;
 }
 
-// Or the val's of the two Boolean instances 
+// Or the val's of the two Boolean instances
 inline bool operator||(const Boolean& b1, const Boolean& b2)
 {
     return b1.getBoolean() || b2.getBoolean();
 }
 
-// Or the value b1 to val of Boolean instance b2 
+// Or the value b1 to val of Boolean instance b2
 inline bool operator||(const bool b1, const Boolean& b2)
 {
     return b1 || b2.getBoolean();
 }
 
-// Or the value b2 to val of Boolean instance b1 
+// Or the value b2 to val of Boolean instance b1
 inline bool operator||(const Boolean& b1, const bool b2)
 {
     return b1.getBoolean() || b2;

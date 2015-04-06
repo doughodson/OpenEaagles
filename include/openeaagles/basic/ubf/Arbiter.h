@@ -36,7 +36,6 @@ class Arbiter : public Behavior
 public:
    Arbiter();
 
-   // Basic::Ubf::Behavior interface
    Action* genAction(const State* const state, const LCreal dt) override;
 
 protected:

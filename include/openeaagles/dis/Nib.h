@@ -68,7 +68,6 @@ public:
       const unsigned char  extra = 0
    );
 
-    // Nib interface
     bool entityStateManager(const LCreal curExecTime) override;
     bool weaponFireMsgFactory(const LCreal curExecTime) override;
     bool munitionDetonationMsgFactory(const LCreal curExecTime) override;
@@ -78,7 +77,6 @@ protected:
    unsigned char manageArticulationParameters(EntityStatePDU* const pdu);
    void processArticulationParameters(const EntityStatePDU* const pdu);
 
-   // Basic::Component interface
    bool shutdownNotification() override;
 
    // Electromagnetic Emitter handlers (protected for now)

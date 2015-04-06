@@ -150,8 +150,7 @@ public:
     Watts(const LCreal value);
     Watts(const Power& org);
 
-    static LCreal convertStatic(const Power &n)     { return n.toPower(); }
-    // Power interface
+    static LCreal convertStatic(const Power &n)      { return n.toPower(); }
     LCreal toPower() const override                  { return static_cast<LCreal>(val); }
     LCreal fromPower(const LCreal a) const override  { return a; }
 };
@@ -170,8 +169,7 @@ public:
     MilliWatts(const LCreal value);
     MilliWatts(const Power& org);
 
-    static LCreal convertStatic(const Power &n)     { return n.toPower() * W2MW; }
-    // Power interface
+    static LCreal convertStatic(const Power &n)      { return n.toPower() * W2MW; }
     LCreal toPower() const override                  { return static_cast<LCreal>(val * MW2W); }
     LCreal fromPower(const LCreal a) const override  { return a * W2MW; }
 };
@@ -190,11 +188,8 @@ public:
     KiloWatts(const LCreal value);
     KiloWatts(const Power& org);
 
-    static LCreal convertStatic(const Power &n)     { return n.toPower() * W2KW; }
-    // Power interface
-    //this goes to another power
+    static LCreal convertStatic(const Power &n)      { return n.toPower() * W2KW; }
     LCreal toPower() const override                  { return static_cast<LCreal>(val * KW2W); }
-    //this is coming from another power
     LCreal fromPower(const LCreal a) const override  { return a * W2KW; }
 };
 
@@ -212,8 +207,7 @@ public:
     Horsepower(const LCreal value);
     Horsepower(const Power& org);
 
-    static LCreal convertStatic(const Power &n)     { return n.toPower() * W2HP; }
-    // Power interface
+    static LCreal convertStatic(const Power &n)      { return n.toPower() * W2HP; }
     LCreal toPower() const override                  { return static_cast<LCreal>(val * HP2W); }
     LCreal fromPower(const LCreal a) const override  { return a * W2HP; }
 };
@@ -232,8 +226,7 @@ public:
     DecibelWatts(const LCreal value);
     DecibelWatts(const Power& org);
 
-    static LCreal convertStatic(const Power &n)     { return static_cast<LCreal>(10.0 * lcLog10(n.toPower())); }
-    // Power interface
+    static LCreal convertStatic(const Power &n)      { return static_cast<LCreal>(10.0 * lcLog10(n.toPower())); }
     LCreal toPower() const override                  { return  lcPow(static_cast<LCreal>(10.0), static_cast<LCreal>(val/10.0)); }
     LCreal fromPower(const LCreal a) const override  { return 10.0f * lcLog10(a) ; }
 
@@ -253,8 +246,7 @@ public:
     DecibelMilliWatts(const LCreal value);
     DecibelMilliWatts(const Power& org);
 
-    static LCreal convertStatic(const Power &n)     { return static_cast<LCreal>(10.0 * lcLog10(n.toPower() * W2MW)); }
-    // Power interface
+    static LCreal convertStatic(const Power &n)      { return static_cast<LCreal>(10.0 * lcLog10(n.toPower() * W2MW)); }
     LCreal toPower() const override                  { return  MW2W * lcPow(static_cast<LCreal>(10.0), static_cast<LCreal>(val/10.0)); }
     LCreal fromPower(const LCreal a) const override  { return (10.0f * lcLog10(a * W2MW)); }
 

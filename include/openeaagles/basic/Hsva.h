@@ -50,7 +50,7 @@ public:
     Hsva(const LCreal h, const LCreal s, const LCreal v, const LCreal a);
     Hsva();
 
-    void getHSVA(osg::Vec4& hsva) const   { Hsv::getHSVA(hsva); }
+    void getHSVA(osg::Vec4& hsva) const   { Hsv::getHSVA(hsva);        }
     bool setHSVA(const osg::Vec4& vec)    { return Hsv::setHSVA(vec);  }
 
     bool colorInterpolate(

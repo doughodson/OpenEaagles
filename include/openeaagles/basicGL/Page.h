@@ -127,12 +127,10 @@ public:
    bool drawSubpageFirst(const Basic::Number* const spfobj);
    bool setSlotFocusSlavedToSubpage(const Basic::Number* const spfobj);
 
-   // Graphic Interface
    void draw() override;
    Basic::Pair* findBySelectName(const GLuint name) override;
    bool event(const int event, Basic::Object* const obj = 0) override;
 
-   // Component interface
    void updateTC(const LCreal dt = 0.0) override;
    void updateData(const LCreal dt = 0.0) override;
    void reset() override;

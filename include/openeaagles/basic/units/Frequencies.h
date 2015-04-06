@@ -117,7 +117,6 @@ public:
     Hertz(const Frequency& value);
 
     static LCreal convertStatic(const Frequency &n)      { return n.toFrequency(); }
-    // Frequency interface
     LCreal toFrequency() const override                  { return static_cast<LCreal>(val); }
     LCreal fromFrequency(const LCreal a) const override  { return a; }
 };
@@ -138,7 +137,6 @@ public:
 
 private:
     static LCreal convertStatic(const Frequency &n)      { return n.toFrequency() * Hz2KHz; }
-    // Frequency interface
     LCreal toFrequency() const override                  { return static_cast<LCreal>(val * KHz2Hz); }
     LCreal fromFrequency(const LCreal a) const override  { return a * Hz2KHz; }
 };
@@ -159,7 +157,6 @@ public:
     MegaHertz(const Frequency& value);
 
     static LCreal convertStatic(const Frequency &n)      { return n.toFrequency() * Hz2MHz; }
-    // Frequency interface
     LCreal toFrequency() const override                  { return static_cast<LCreal>(val * MHz2Hz); }
     LCreal fromFrequency(const LCreal a) const override  { return a * Hz2MHz; }
 };
@@ -180,7 +177,6 @@ public:
     GigaHertz(const Frequency& value);
 
     static LCreal convertStatic(const Frequency &n)      { return n.toFrequency() * Hz2GHz; }
-    // Frequency interface
     LCreal toFrequency() const override                  { return static_cast<LCreal>(val * GHz2Hz); }
     LCreal fromFrequency(const LCreal a) const override  { return a * Hz2GHz; }
 };
@@ -201,7 +197,6 @@ public:
     TeraHertz(const Frequency& value);
 
     static LCreal convertStatic(const Frequency &n)      { return n.toFrequency() * Hz2THz; }
-    // Frequency interface
     LCreal toFrequency() const override                  { return static_cast<LCreal>(val * THz2Hz); }
     LCreal fromFrequency(const LCreal a) const override  { return a * Hz2THz; }
 };

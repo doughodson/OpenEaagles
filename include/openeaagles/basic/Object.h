@@ -409,7 +409,7 @@ public:
    class ExpInvalidRefCount : public Exception {
    public:
       ExpInvalidRefCount() : Exception() {}
-      virtual const char* getDescription() const {
+      const char* getDescription() const override {
          return "invalid reference count";
       }
    };
@@ -417,7 +417,7 @@ public:
    class ExpInvalidRefCountDelete : public Exception {
    public:
       ExpInvalidRefCountDelete() : Exception() {}
-      virtual const char* getDescription() const {
+      const char* getDescription() const override {
          return "deleting object with positive reference count";
       }
    };

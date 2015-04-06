@@ -97,7 +97,7 @@ public:
     virtual LCreal fromForce(const LCreal a) const = 0;
     LCreal convert(const Force& n){ return fromForce(n.toForce()); }
 
-   // Conversions between Forces
+    // Conversions between Forces
     static LCreal newtonsToKiloNewtons(const LCreal v)     { return v * N2KN; }
     static LCreal newtonsToPoundForces(const LCreal v)     { return v * N2PF; }
     static LCreal newtonsToPoundals(const LCreal v)        { return v * N2PD; }
@@ -140,10 +140,7 @@ public:
     Newtons(const Force& value);
 
     static LCreal convertStatic(const Force& n)        { return n.toForce(); }
-    // Force interface
-    //this goes to another force
     LCreal toForce() const override                    { return static_cast<LCreal>(val); }
-    //this is coming from another force
     LCreal fromForce(const LCreal a) const override    { return a; }
 };
 
@@ -162,8 +159,7 @@ public:
     KiloNewtons(const LCreal value);
     KiloNewtons(const Force& value);
 
-    static LCreal convertStatic(const Force& n)       { return n.toForce() * N2KN; }
-    // Force interface
+    static LCreal convertStatic(const Force& n)        { return n.toForce() * N2KN; }
     LCreal toForce() const override                    { return static_cast<LCreal>(val * KN2N); }
     LCreal fromForce(const LCreal a) const override    { return a * N2KN; }
 };
@@ -183,8 +179,7 @@ public:
     PoundForces(const LCreal value);
     PoundForces(const Force& value);
 
-    static LCreal convertStatic(const Force& n)       { return n.toForce() * N2PF; }
-    // Force interface
+    static LCreal convertStatic(const Force& n)        { return n.toForce() * N2PF; }
     LCreal toForce() const override                    { return static_cast<LCreal>(val * PF2N); }
     LCreal fromForce(const LCreal a) const override    { return a * N2PF; }
 };
@@ -204,8 +199,7 @@ public:
     Poundals(const LCreal value);
     Poundals(const Force& value);
 
-    static LCreal convertStatic(const Force& n)       { return n.toForce() * N2PD; }
-    // Force interface
+    static LCreal convertStatic(const Force& n)        { return n.toForce() * N2PD; }
     LCreal toForce() const override                    { return static_cast<LCreal>(val * PD2N); }
     LCreal fromForce(const LCreal a) const override    { return a * N2PD; }
 };

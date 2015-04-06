@@ -193,7 +193,6 @@ public:
          unsigned int* const vbp=0
       );
 
-   // Object class functions
    bool isValid() const override;
 
 public: // Exceptions
@@ -264,14 +263,11 @@ public:
    // Load the X (iv1) breakpoints
    virtual bool setXBreakpoints1(const List* const bkpts);
 
-   // Table interface
    unsigned int tableSize() const override;
 
-   // Object interface
    bool isValid() const override;
 
 protected:
-   // Table interface
    bool loadData(const List& list, LCreal* const table) override;
    void printData(std::ostream& sout, const LCreal* table, const unsigned int indent) const override;
 
@@ -315,15 +311,12 @@ public:
    // Load the Y (iv2) breakpoints
    virtual bool setYBreakpoints2(const List* const bkpts);
 
-   // Table1 interface
    LCreal lfi(const LCreal iv1, FStorage* const s = 0) const override;
    unsigned int tableSize() const override;
 
-   // Object interface
    bool isValid() const override;
 
 protected:
-   // Table1 interface
    bool loadData(const List& list, LCreal* const table) override;
    void printData(std::ostream& sout, const LCreal* table, const unsigned int indent) const override;
 
@@ -368,16 +361,13 @@ public:
    // Loads the Z (iv3) breakpoints
    virtual bool setZBreakpoints3(const List* const bkpts);
 
-   // Table2 interface
    LCreal lfi(const LCreal iv1, const LCreal iv2, FStorage* const s = 0) const override;
    LCreal lfi(const LCreal iv1, FStorage* const s = 0) const override;
    unsigned int tableSize() const override;
 
-   // Object interface
    bool isValid() const override;
 
 protected:
-   // Table2 interface
    bool loadData(const List& list, LCreal* const table) override;
    void printData(std::ostream& sout, const LCreal* table, const unsigned int indent) const override;
 
@@ -423,17 +413,14 @@ public:
    // Loads the W (iv4) breakpoints
    virtual bool setWBreakpoints4(const List* const bkpts);
 
-   // Table3 interface
    LCreal lfi(const LCreal iv1, const LCreal iv2, const LCreal iv3, FStorage* const s = 0) const override;
    LCreal lfi(const LCreal iv1, const LCreal iv2, FStorage* const s = 0) const override;
    LCreal lfi(const LCreal iv1, FStorage* const s = 0) const override;
    unsigned int tableSize() const override;
 
-   // Object interface
    bool isValid() const override;
 
 protected:
-   // Table3 interface
    bool loadData(const List& list, LCreal* const table) override;
    void printData(std::ostream& sout, const LCreal* table, const unsigned int indent) const override;
 
@@ -478,18 +465,15 @@ public:
    // Loads the V (iv5) breakpoints
    virtual bool setVBreakpoints5(const List* const bkpts);
 
-   // Table4 interface
    LCreal lfi(const LCreal iv1, const LCreal iv2, const LCreal iv3, const LCreal iv4, FStorage* const s = 0) const override;
    LCreal lfi(const LCreal iv1, const LCreal iv2, const LCreal iv3, FStorage* const s = 0) const override;
    LCreal lfi(const LCreal iv1, const LCreal iv2, FStorage* const s = 0) const override;
    LCreal lfi(const LCreal iv1, FStorage* const s = 0) const override;
    unsigned int tableSize() const override;
 
-   // Object interface
    bool isValid() const override;
 
 protected:
-   // Table4 interface
    bool loadData(const List& list, LCreal* const table) override;
    void printData(std::ostream& sout, const LCreal* table, const unsigned int indent) const override;
 

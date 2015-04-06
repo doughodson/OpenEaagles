@@ -80,7 +80,6 @@ public:
     virtual bool setSlotTTL(const Number* const msg);
     virtual bool setSlotLoopback(const Number* const msg);
 
-    // PosixHandler interface
     bool initNetwork(const bool noWaitFlag) override;
     bool isConnected() const override;
     bool closeConnection() override;
@@ -88,7 +87,6 @@ public:
 protected:
     virtual bool joinTheGroup();
 
-    // PosixHandler interface
     bool init() override;
     bool bindSocket() override;
 

@@ -39,7 +39,7 @@ namespace Basic {
 //       buffer that are application (not device) specific.  This buffer
 //       should be passed to the I/O adapters.
 //
-// 
+//
 // Factory name: IoDevice
 // Slots:
 //    adapters <PairStream>   ! List of IoAdapter objects (default: none)
@@ -76,7 +76,6 @@ public:
    // Process device output channels and components
    virtual void processOutputs(const LCreal dt, const IoData* const outData);
 
-   // Component interface
    void reset() override;
 
 protected:

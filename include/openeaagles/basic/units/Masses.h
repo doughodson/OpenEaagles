@@ -90,7 +90,9 @@ public:
     void set(const LCreal v) { val = v; }
     void set(const Mass& n)  { val = fromMass(n.toMass()); }
 
+    //this goes to another mass (kilograms)
     virtual LCreal toMass() const = 0;
+    //this is coming from another mass (kilograms)
     virtual LCreal fromMass(const LCreal a) const = 0;
     LCreal convert(const Mass& n) const { return fromMass(n.toMass()); }
 
@@ -131,10 +133,7 @@ public:
     KiloGrams(const Mass& value);
 
     static LCreal convertStatic(const Mass &n)       { return n.toMass(); }
-    // Mass interface
-    //this goes to another mass (kilograms)
     LCreal toMass() const override                   { return static_cast<LCreal>(val); }
-    //this is coming from another mass (kilograms)
     LCreal fromMass(const LCreal a) const override   { return a; }
 };
 
@@ -154,7 +153,6 @@ public:
     Grams(const Mass& value);
 
     static LCreal convertStatic(const Mass &n)       { return n.toMass() * KG2G; }
-    // Mass interface
     LCreal toMass() const override                   { return static_cast<LCreal>(val * G2KG); }
     LCreal fromMass(const LCreal a) const override   { return a * KG2G; }
 };
@@ -175,7 +173,6 @@ public:
     Slugs(const Mass& value);
 
     static LCreal convertStatic(const Mass &n)      { return n.toMass() * KG2SL; }
-    // Mass interface
     LCreal toMass() const override                   { return static_cast<LCreal>(val * SL2KG); }
     LCreal fromMass(const LCreal a) const override   { return a * KG2SL; }
 };

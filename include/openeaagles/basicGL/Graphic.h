@@ -384,174 +384,173 @@ public:
    static void lcTexCoord4v(const LCreal* v)    { glTexCoord4dv(v); }
 
 
-   // Component interface
    bool event(const int event, Object* const obj = 0) override;
 
-public: // Exceptions
-    class ExpInvalidDisplayPtr : public Object::Exception {
-        public:
-            ExpInvalidDisplayPtr() : Exception() {}
-            const char* getDescription() const override    { return "display(): display/screen pointer is not set"; }
-    };
+public:
+   // Exceptions
+   class ExpInvalidDisplayPtr : public Object::Exception {
+      public:
+         ExpInvalidDisplayPtr() : Exception() {}
+         const char* getDescription() const override    { return "display(): display/screen pointer is not set"; }
+   };
 
 protected:
 
-    // event handlers
-    virtual bool onSetTextureId(const Basic::Number* const msg);
-    virtual bool onSetLineWidthEvent(const Basic::Number* const msg);
-    virtual bool onSetFlashRateEvent(const Basic::Number* const msg);
-    virtual bool onSetVisibilityEvent(const Basic::Number* const msg);
+   // event handlers
+   virtual bool onSetTextureId(const Basic::Number* const msg);
+   virtual bool onSetLineWidthEvent(const Basic::Number* const msg);
+   virtual bool onSetFlashRateEvent(const Basic::Number* const msg);
+   virtual bool onSetVisibilityEvent(const Basic::Number* const msg);
 
-    // set slot functions
-    virtual bool setSlotFlashRate(const Basic::Number* const msg);
-    virtual bool setSlotLineWidth(const Basic::Number* const msg);
-    virtual bool setSlotSelectName(const Basic::Number* const msg);
-    virtual bool setSlotTransformList(Basic::PairStream* msg);      // Set the transformation list
-    virtual bool setSlotSingleTransform(Basic::Transform* const msg);
-    virtual bool setSlotNoDisplayList(const Basic::Number* const msg);
-    virtual bool setSlotSubcomponentsFirst(const Basic::Number* const msg);
-    virtual bool setSlotVertices(const Basic::PairStream* const msg);
-    virtual bool setSlotNormals(const Basic::PairStream* const msg);
-    virtual bool setSlotTexCoord(const Basic::PairStream* const msg);
-    virtual bool setSlotMask(const Basic::Number* const msg);
-    virtual bool setSlotTextureName(Basic::Identifier* msg);
-    virtual bool setSlotScissorX(const Basic::Number* const msg);
-    virtual bool setSlotScissorY(const Basic::Number* const msg);
-    virtual bool setSlotScissorWidth(const Basic::Number* const msg);
-    virtual bool setSlotScissorHeight(const Basic::Number* const msg);
-    virtual bool setSlotStippling(const Basic::Number* const msg);
-    virtual bool setSlotStippleFactor(const Basic::Number* const msg);
-    virtual bool setSlotStipplePattern(const Basic::Number* const msg);
-    virtual bool setSlotVisibility(const Basic::Number* const msg);
-    virtual bool setSlotTranslateLight(Basic::PairStream* const msg);
+   // set slot functions
+   virtual bool setSlotFlashRate(const Basic::Number* const msg);
+   virtual bool setSlotLineWidth(const Basic::Number* const msg);
+   virtual bool setSlotSelectName(const Basic::Number* const msg);
+   virtual bool setSlotTransformList(Basic::PairStream* msg);      // Set the transformation list
+   virtual bool setSlotSingleTransform(Basic::Transform* const msg);
+   virtual bool setSlotNoDisplayList(const Basic::Number* const msg);
+   virtual bool setSlotSubcomponentsFirst(const Basic::Number* const msg);
+   virtual bool setSlotVertices(const Basic::PairStream* const msg);
+   virtual bool setSlotNormals(const Basic::PairStream* const msg);
+   virtual bool setSlotTexCoord(const Basic::PairStream* const msg);
+   virtual bool setSlotMask(const Basic::Number* const msg);
+   virtual bool setSlotTextureName(Basic::Identifier* msg);
+   virtual bool setSlotScissorX(const Basic::Number* const msg);
+   virtual bool setSlotScissorY(const Basic::Number* const msg);
+   virtual bool setSlotScissorWidth(const Basic::Number* const msg);
+   virtual bool setSlotScissorHeight(const Basic::Number* const msg);
+   virtual bool setSlotStippling(const Basic::Number* const msg);
+   virtual bool setSlotStippleFactor(const Basic::Number* const msg);
+   virtual bool setSlotStipplePattern(const Basic::Number* const msg);
+   virtual bool setSlotVisibility(const Basic::Number* const msg);
+   virtual bool setSlotTranslateLight(Basic::PairStream* const msg);
 
-    // Basic::Component interface
-    void processComponents(            // Process our subcomponent list (which should be other Graphics)
-         Basic::PairStream* const list,        // Source list of components
-         const std::type_info& filter,         // Type filter
-         Basic::Pair* const add = 0,           // Optional pair to add
-         Basic::Component* const remove = 0    // Optional subcomponent to remove
-       ) override;
+   void processComponents(            // Process our subcomponent list (which should be other Graphics)
+        Basic::PairStream* const list,        // Source list of components
+        const std::type_info& filter,         // Type filter
+        Basic::Pair* const add = 0,           // Optional pair to add
+        Basic::Component* const remove = 0    // Optional subcomponent to remove
+   ) override;
 
 private:
-    void          initData();
-    void          setupMatrix();
-    void          setupMaterial();
+   void          initData();
+   void          setupMatrix();
+   void          setupMaterial();
 
-    Basic::PairStream* transforms;  // transformations
-    osg::Matrix   m;                // transformation matrix
-    osg::Matrix   m1;               // saved 'm'
-    bool          haveMatrix;       // Have a transformation matrix flag
-    bool          haveMatrix1;      // saved 'haveMatrix'
+   Basic::PairStream* transforms;  // transformations
+   osg::Matrix   m;                // transformation matrix
+   osg::Matrix   m1;               // saved 'm'
+   bool          haveMatrix;       // Have a transformation matrix flag
+   bool          haveMatrix1;      // saved 'haveMatrix'
 
-    bool          postDraw;         // Post draw component (child) graphic
-    GLuint        texture;          // Texture
-    SPtr<Basic::Identifier> texName;   // Texture name
+   bool          postDraw;         // Post draw component (child) graphic
+   GLuint        texture;          // Texture
+   SPtr<Basic::Identifier> texName;   // Texture name
 
-    bool          visible;          // True if this object is visible
-    GLfloat       linewidth;        // Linewidth
-    GLuint        selName;          // Select name
-    LCreal        fRate;            // Flash rate
+   bool          visible;          // True if this object is visible
+   GLfloat       linewidth;        // Linewidth
+   GLuint        selName;          // Select name
+   LCreal        fRate;            // Flash rate
 
-    Basic::Color*  color;           // Color
-    Basic::Identifier*  colorName;  // Color name (if from color table)
+   Basic::Color*  color;           // Color
+   Basic::Identifier*  colorName;  // Color name (if from color table)
 
-    osg::Vec3*       vertices;      // Vertices
-    unsigned int     nv;            // Number of vertices
+   osg::Vec3*       vertices;      // Vertices
+   unsigned int     nv;            // Number of vertices
 
-    osg::Vec2*       texCoord;      // Texture Coordinates
-    unsigned int     ntc;           // Number of texture coordinates
+   osg::Vec2*       texCoord;      // Texture Coordinates
+   unsigned int     ntc;           // Number of texture coordinates
 
-    osg::Vec3*       norms;         // normals at each vertices
-    unsigned int     nn;            // number of normal vectors
+   osg::Vec3*       norms;         // normals at each vertices
+   unsigned int     nn;            // number of normal vectors
 
-    BasicGL::Display* displayPtr; // Points to our Display
+   BasicGL::Display* displayPtr; // Points to our Display
 
-    GLuint         dlist;            // Possible Display list
-    bool           noDisplayList;    // True to disable Display List
+   GLuint         dlist;            // Possible Display list
+   bool           noDisplayList;    // True to disable Display List
 
-    LCreal        scissorX;         // Left edge of the scissor box
-    LCreal        scissorY;         // Bottom edge of the scissor box
-    LCreal        scissorWidth;     // How far to extend the scissor horizontally
-    LCreal        scissorHeight;    // How far to extend the scissor vertically
+   LCreal        scissorX;         // Left edge of the scissor box
+   LCreal        scissorY;         // Bottom edge of the scissor box
+   LCreal        scissorWidth;     // How far to extend the scissor horizontally
+   LCreal        scissorHeight;    // How far to extend the scissor vertically
 
-    static LCreal fTimer;           // Flash control timer
-    static GLuint autoSelName;      // our automatic select name counter
+   static LCreal fTimer;           // Flash control timer
+   static GLuint autoSelName;      // our automatic select name counter
 
-    bool          stipple;          // line stipple flag (line, lineloop, circle (not filled))
-    GLuint        stippleFactor;    // line stipple factor (multiplier for each bit in line stipple pattern)
-    GLushort      stipplePattern;   // line stipple pattern (16-bit pattern for which fragments of line to draw)
-    bool          mask;             // are we masking?
-    Basic::Identifier* materialName;   // our material name
-    BasicGL::Material* materialObj;   // material object, if we have one.
+   bool          stipple;          // line stipple flag (line, lineloop, circle (not filled))
+   GLuint        stippleFactor;    // line stipple factor (multiplier for each bit in line stipple pattern)
+   GLushort      stipplePattern;   // line stipple pattern (16-bit pattern for which fragments of line to draw)
+   bool          mask;             // are we masking?
+   Basic::Identifier* materialName;   // our material name
+   BasicGL::Material* materialObj;   // material object, if we have one.
 
-    osg::Vec4 lightPos;             // light position relative to us (default is leave it where it was)
-    bool lightMoved;                // our light is moving!
+   osg::Vec4 lightPos;             // light position relative to us (default is leave it where it was)
+   bool lightMoved;                // our light is moving!
 };
 
 inline GLuint Graphic::getNewSelectName()
 {
-    return autoSelName++;
+   return autoSelName++;
 }
 
 inline void Graphic::lcSaveMatrix()
 {
-    m1 = m;
-    haveMatrix1 = haveMatrix;
+   m1 = m;
+   haveMatrix1 = haveMatrix;
 }
 
 inline void Graphic::lcRestoreMatrix()
 {
-    m = m1;
-    haveMatrix = haveMatrix1;
+   m = m1;
+   haveMatrix = haveMatrix1;
 }
 
 inline void Graphic::lcRotate(const LCreal a)
 {
-    osg::Matrix rr;
-    rr.makeRotate(a, 0.0f, 0.0f, 1.0f);
-    m.preMult(rr);
-    haveMatrix = true;
+   osg::Matrix rr;
+   rr.makeRotate(a, 0.0f, 0.0f, 1.0f);
+   m.preMult(rr);
+   haveMatrix = true;
 }
 
 inline void Graphic::lcRotate(const LCreal x, const LCreal y, const LCreal z, const LCreal a)
 {
-    osg::Matrix rr;
-    rr.makeRotate(a, x, y, z);
-    m.preMult(rr);
-    haveMatrix = true;
+   osg::Matrix rr;
+   rr.makeRotate(a, x, y, z);
+   m.preMult(rr);
+   haveMatrix = true;
 }
 
 inline void Graphic::lcScale(const LCreal s)
 {
-    osg::Matrix ss;
-    ss.makeScale(s,s,s);
-    m.preMult(ss);
-    haveMatrix = true;
+   osg::Matrix ss;
+   ss.makeScale(s,s,s);
+   m.preMult(ss);
+   haveMatrix = true;
 }
 
 inline void Graphic::lcScale(const LCreal sx, const LCreal sy)
 {
-    osg::Matrix ss;
-    ss.makeScale(sx,sy,1.0f);
-    m.preMult(ss);
-    haveMatrix = true;
+   osg::Matrix ss;
+   ss.makeScale(sx,sy,1.0f);
+   m.preMult(ss);
+   haveMatrix = true;
 }
 
 inline void Graphic::lcTranslate(const LCreal x, const LCreal y)
 {
-    osg::Matrix tt;
-    tt.makeTranslate(x,y,0.0f);
-    m.preMult(tt);
-    haveMatrix = true;
+   osg::Matrix tt;
+   tt.makeTranslate(x,y,0.0f);
+   m.preMult(tt);
+   haveMatrix = true;
 }
 
 inline void Graphic::lcTranslate(const LCreal x, const LCreal y, const LCreal z)
 {
-    osg::Matrix tt;
-    tt.makeTranslate(x,y,z);
-    m.preMult(tt);
-    haveMatrix = true;
+   osg::Matrix tt;
+   tt.makeTranslate(x,y,z);
+   m.preMult(tt);
+   haveMatrix = true;
 }
 
 } // End BasicGL namespace

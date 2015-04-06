@@ -61,7 +61,6 @@ public:
     void operator-=(const Decibel&);
     void operator-=(const LCreal);
 
-    // Number class interface
     virtual void setValue(const double nv);
     virtual bool setSlotValue(const Number* const svobj);
 

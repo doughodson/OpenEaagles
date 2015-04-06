@@ -75,7 +75,6 @@ public:
    bool getSharedFlag() const;                  // Is the socket address shared?
    void setSharedFlag(const bool b);
 
-   // NetHandler interface
    bool initNetwork(const bool noWaitFlag) override;
    bool isConnected() const override;
    bool closeConnection() override;
@@ -98,7 +97,6 @@ public:
    virtual bool setSlotIgnoreSourcePort(const Number* const msg);
 
 protected:
-   // NetHandler interface
    bool init() override;
 
    virtual bool bindSocket();          // Bind socket to address

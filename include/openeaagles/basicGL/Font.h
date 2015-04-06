@@ -183,7 +183,8 @@ public:
     const char* fontDirectory() const                   { return fontPath; }
     const char* filename() const                        { return fontFile; }
 
-public: // Exceptions
+public:
+    // Exceptions
     class ExpInvalidFont : public Basic::Object::Exception {
         public:
             ExpInvalidFont() : Exception() {}

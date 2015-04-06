@@ -354,7 +354,6 @@ public:
    virtual bool isOkToSwap() const;
    virtual void setOkToSwap(const bool x);
 
-   // Page interface
    void updateTC(const LCreal dt = 0.0) override;
    void reset() override;
 

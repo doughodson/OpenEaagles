@@ -56,9 +56,9 @@ public:
    bool isSymmetric() const;
 
    // The (i,j) element
-   double getElem(const unsigned int i, const unsigned int j) const     { return mda[i*cols + j]; } 
+   double getElem(const unsigned int i, const unsigned int j) const     { return mda[i*cols + j]; }
    double operator()(unsigned int i, unsigned int j) const              { return mda[i*cols + j]; }
-   double& operator()(unsigned int i, unsigned int j)                   { return mda[i*cols + j]; } 
+   double& operator()(unsigned int i, unsigned int j)                   { return mda[i*cols + j]; }
 
    double* operator[](unsigned int r);                                  // pointer to the n'th row
    const double* operator[](unsigned int r) const;                      // pointer to the n'th row (const version)
@@ -152,7 +152,7 @@ public:
    // For this matrix, given the maximum allowed iterations and the maximum allowed
    // error, returns the dominant eigenvalue and its associated eigenvector.
    //
-   // matrix requirements: square 
+   // matrix requirements: square
    // ---
    bool getEigenPower(const double maxErr, const int maxIter,
                    double* const eval, CVector* const evec);
@@ -166,15 +166,15 @@ public:
    bool getCholesky(Matrix* const pL, Matrix* const pU) const;
 
    // ---
-   // For this matrix, the two pointers in the argument list point to the lower and 
+   // For this matrix, the two pointers in the argument list point to the lower and
    // upper LU matrices (Doolittle).
    //
-   // matrix requirements: square 
+   // matrix requirements: square
    // ---
    bool getLU(Matrix* const pL, Matrix* const pU) const;
 
    // ---
-   // For this matrix, the two pointers in the argument list (pQ and pR) point to 
+   // For this matrix, the two pointers in the argument list (pQ and pR) point to
    // the Q (lower) and R (upper) matrices respectively.
    //
    // matrix requirements: square
@@ -234,8 +234,8 @@ protected:
    bool mulCol(const unsigned int, const double k=1.0);
    bool remRow(const unsigned int);
    bool remRows(const unsigned int, const unsigned int);
-   bool remCol(const unsigned int);    
-   bool remCols(const unsigned int, const unsigned int);    
+   bool remCol(const unsigned int);
+   bool remCols(const unsigned int, const unsigned int);
    bool remRowCol(const unsigned int, const unsigned int);
 
 private:

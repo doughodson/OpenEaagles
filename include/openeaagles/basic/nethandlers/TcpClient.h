@@ -41,17 +41,14 @@ public:
     // Slot functions
     virtual bool setSlotIpAddress(const String* const msg);
 
-    // PosixHandler interface
     bool initNetwork(const bool noWaitFlag) override;
 
 protected:
     const char* getIpAddress()  { return ipAddr; }
     bool connectToServer();      // Connect to the server
 
-    // TcpHandler interface
     bool init() override;
 
-    // PosixHandler interface
     bool bindSocket() override;
 
 private:

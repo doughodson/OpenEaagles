@@ -156,8 +156,7 @@ public:
     Joules(const LCreal value);
     Joules(const Energy& value);
 
-    static LCreal convertStatic(const Energy& n)      { return n.toEnergy(); }
-    // Energy interface
+    static LCreal convertStatic(const Energy& n)       { return n.toEnergy(); }
     LCreal toEnergy() const override                   { return static_cast<LCreal>(val); }
     LCreal fromEnergy(const LCreal a) const override   { return a; }
 };
@@ -176,8 +175,7 @@ public:
     KiloWattHours(const LCreal value);
     KiloWattHours(const Energy& value);
 
-    static LCreal convertStatic(const Energy& n)    { return n.toEnergy() * J2KWH; }
-    // Energy interface (KWH)
+    static LCreal convertStatic(const Energy& n)     { return n.toEnergy() * J2KWH; }
     LCreal toEnergy() const override                 { return static_cast<LCreal>(val * KWH2J); }
     LCreal fromEnergy(const LCreal a) const override { return a * J2KWH; }
 };
@@ -197,8 +195,7 @@ public:
     BTUs(const LCreal value);
     BTUs(const Energy& value);
 
-    static LCreal convertStatic(const Energy& n)    { return n.toEnergy() * J2BTU; }
-    // Energy interface
+    static LCreal convertStatic(const Energy& n)     { return n.toEnergy() * J2BTU; }
     LCreal toEnergy() const override                 { return static_cast<LCreal>(val * BTU2J); }
     LCreal fromEnergy(const LCreal a) const override { return a * J2BTU; }
 };
@@ -218,8 +215,7 @@ public:
     Calories(const LCreal value);
     Calories(const Energy& value);
 
-    static LCreal convertStatic(const Energy& n)      { return n.toEnergy() * J2C; }
-    // Energy interface
+    static LCreal convertStatic(const Energy& n)       { return n.toEnergy() * J2C; }
     LCreal toEnergy() const override                   { return static_cast<LCreal>(val * C2J); }
     LCreal fromEnergy(const LCreal a) const override   { return a * J2C; }
 };
@@ -239,8 +235,7 @@ public:
     FootPounds(const LCreal value);
     FootPounds(const Energy& value);
 
-    static LCreal convertStatic(const Energy& n)     { return n.toEnergy() * J2FP; }
-    // Energy interface
+    static LCreal convertStatic(const Energy& n)      { return n.toEnergy() * J2FP; }
     LCreal toEnergy() const override                  { return static_cast<LCreal>(val * FP2J); }
     LCreal fromEnergy(const LCreal a) const override  { return a * J2FP; }
 };

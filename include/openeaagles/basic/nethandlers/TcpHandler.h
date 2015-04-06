@@ -25,7 +25,6 @@ public:
 
    bool hasBeenTerminated()          { return connectionTerminated; }
 
-   // PosixHandler interface
    bool sendData(const char* const packet, const int size) override;
    unsigned int recvData(char* const packet, const int maxSize) override;
    bool isConnected() const override;
@@ -37,7 +36,6 @@ public:
    TcpHandler(const LcSocket socketNum);
 
 protected:
-   // PosixHandler interface
    bool init() override;
 
    bool connected;              // true if we are connected

@@ -182,7 +182,6 @@ public:
     SquareMeters(const Area& value);
 
     static LCreal convertStatic(const Area& n)      { return n.toArea(); }
-    // Area interface
     LCreal toArea() const override                  { return static_cast<LCreal>(val); }
     LCreal fromArea(const LCreal a) const override  { return a; }
 };
@@ -202,7 +201,6 @@ public:
     SquareFeet(const Area& value);
 
     static LCreal convertStatic(const Area& n)      { return n.toArea() * SM2SFT; }
-    // Area interface
     LCreal toArea() const override                  { return static_cast<LCreal>(val * SFT2SM); }
     LCreal fromArea(const LCreal a) const override  { return a * SM2SFT; }
 };
@@ -222,7 +220,6 @@ public:
     SquareInches(const Area& value);
 
     static LCreal convertStatic(const Area& n)      { return n.toArea() * SM2SIN; }
-    // Area interface
     LCreal toArea() const override                  { return static_cast<LCreal>(val * SIN2SM); }
     LCreal fromArea(const LCreal a) const override  { return a * SM2SIN; }
 };
@@ -242,7 +239,6 @@ public:
     SquareYards(const Area& value);
 
     static LCreal convertStatic(const Area& n)      { return n.toArea() * SM2SYD; }
-    // Area interface
     LCreal toArea() const override                  { return static_cast<LCreal>(val * SYD2SM); }
     LCreal fromArea(const LCreal a) const override  { return a * SM2SYD; }
 };
@@ -262,7 +258,6 @@ public:
     SquareMiles(const Area& value);
 
     static LCreal convertStatic(const Area& n)      { return n.toArea() * SM2SMI; }
-    // Area interface
     LCreal toArea() const override                  { return static_cast<LCreal>(val * SMI2SM); }
     LCreal fromArea(const LCreal a) const override  { return a * SM2SMI; }
 };
@@ -282,7 +277,6 @@ public:
     SquareCentiMeters(const Area& value);
 
     static LCreal convertStatic(const Area& n)      { return n.toArea() * SM2SCM; }
-    // Area interface
     LCreal toArea() const override                  { return static_cast<LCreal>(val * SCM2SM); }
     LCreal fromArea(const LCreal a) const override  { return a * SM2SCM; }
 };
@@ -302,7 +296,6 @@ public:
     SquareMilliMeters(const Area& value);
 
     static LCreal convertStatic(const Area& n)      { return n.toArea() * SM2SMM; }
-    // Area interface
     LCreal toArea() const override                  { return static_cast<LCreal>(val * SMM2SM); }
     LCreal fromArea(const LCreal a) const override  { return a * SM2SMM; }
 };
@@ -322,7 +315,6 @@ public:
     SquareKiloMeters(const Area& value);
 
     static LCreal convertStatic(const Area& n)      { return n.toArea() * SM2SKM; }
-    // Area interface
     LCreal toArea() const override                  { return static_cast<LCreal>(val * SKM2SM); }
     LCreal fromArea(const LCreal a) const override  { return a * SM2SKM; }
 };
@@ -342,7 +334,6 @@ public:
     DecibelSquareMeters(const Area& value);
 
     static LCreal convertStatic(const Area& n)     { return 10.0f * lcLog10( n.toArea() ); }
-    // Area interface
     LCreal toArea() const override                 { return lcPow(static_cast<LCreal>(10.0), static_cast<LCreal>(val/10.0)); }
     LCreal fromArea(const LCreal a) const override { return 10.0f * lcLog10(a); }
 

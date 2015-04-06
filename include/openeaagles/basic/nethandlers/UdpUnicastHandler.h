@@ -68,7 +68,6 @@ public:
    virtual bool setSlotIpAddress(const String* const msg);
 
 protected:
-   // PosixHandler interface
    bool init() override;
    bool bindSocket() override;
 

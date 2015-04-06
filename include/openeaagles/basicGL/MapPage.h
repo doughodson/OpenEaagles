@@ -142,9 +142,7 @@ public:
    // convert viewport pixel position to lat / lon
    virtual void pixelsToLatLon(const int x, const int y, double &lat, double &lon);
 
-   // Page interface
    void updateData(const LCreal dt = 0.0) override;
-   // MfdPage interface
    bool event(const int event, Basic::Object* const obj = 0) override;
 
 protected:

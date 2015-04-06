@@ -84,7 +84,6 @@ public:
    LCreal getPriority() const;            // Thread priority (0 low to 1 high)
    LCreal getRate() const;                // Thread rate (hz)
 
-   // Component interface
    void reset() override;
 
 protected:
@@ -100,7 +99,6 @@ protected:
    virtual bool setSlotRate(const Frequency* const num);
    virtual bool setSlotPriority(const Number* const num);
 
-   // Component interface
    bool shutdownNotification() override;
 
 private:

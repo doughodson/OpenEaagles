@@ -44,10 +44,7 @@ public:
     virtual bool setSlotNetworkMask(const String* const msg);
 
 protected:
-    // PosixHandler interface
     bool init() override;
-
-    // PosixHandler interface
     bool bindSocket() override;
 
 private:

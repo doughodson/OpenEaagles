@@ -27,9 +27,8 @@ public:
     Identifier(const char* string);
     Identifier();
 
-    // String interface
-    void setStr(const char* string) override;        // Sets us to a copy of 'string'
-    void catStr(const char* string) override;        // Append a copy of 'string' to our text string
+    void setStr(const char* string) override;
+    void catStr(const char* string) override;
 };
 
 } // End Basic namespace

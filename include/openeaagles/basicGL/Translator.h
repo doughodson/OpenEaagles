@@ -37,10 +37,8 @@ public:
     bool setYPos(const LCreal yPos);                    // Sets the Y position (world coord)
     bool setZPos(const LCreal zPos);                    // Sets the Z position (world coord)
 
-    // Graphic interface
     void draw() override;
 
-    // Component interface
     bool event(const int event, Object* const obj = 0) override;
 
 private:

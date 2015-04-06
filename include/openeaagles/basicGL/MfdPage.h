@@ -27,7 +27,6 @@ class MfdPage : public BasicGL::Page
 public:
     MfdPage();
 
-    // Basic::Component interface
     bool event(const int event, Basic::Object* const obj = 0) override;
 
 protected:

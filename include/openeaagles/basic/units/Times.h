@@ -177,7 +177,6 @@ public:
     Seconds(const Time& org);
 
     static LCreal convertStatic(const Time &n)      { return n.toTime(); }
-    // Time interface
     LCreal toTime() const override                  { return static_cast<LCreal>(val); }
     LCreal fromTime(const LCreal a) const override  { return a; }
 };
@@ -198,7 +197,6 @@ public:
     MilliSeconds(const Time& org);
 
     static LCreal convertStatic(const Time &n)      { return n.toTime() * S2MS; }
-    // Time interface
     LCreal toTime() const override                  { return static_cast<LCreal>(val * MS2S); }
     LCreal fromTime(const LCreal a) const override  { return a * S2MS; }
 };
@@ -219,7 +217,6 @@ public:
     MicroSeconds(const Time& org);
 
     static LCreal convertStatic(const Time &n)      { return n.toTime() * S2US; }
-    // Time interface
     LCreal toTime() const override                  { return static_cast<LCreal>(val * US2S); }
     LCreal fromTime(const LCreal a) const override  { return a * S2US; }
 };
@@ -240,7 +237,6 @@ public:
     NanoSeconds(const Time& org);
 
     static LCreal convertStatic(const Time &n)      { return n.toTime() * S2NS; }
-    // Time interface
     LCreal toTime() const override                  { return static_cast<LCreal>(val * NS2S); }
     LCreal fromTime(const LCreal a) const override  { return a * S2NS; }
 };
@@ -261,7 +257,6 @@ public:
     Minutes(const Time& org);
 
     static LCreal convertStatic(const Time &n)      { return n.toTime() * S2M; }
-    // Time interface
     LCreal toTime() const override                  { return static_cast<LCreal>(val * M2S); }
     LCreal fromTime(const LCreal a) const override  { return a * S2M; }
 };
@@ -282,7 +277,6 @@ public:
     Hours(const Time& org);
 
     static LCreal convertStatic(const Time &n)      { return n.toTime() * S2H; }
-    // Time interface
     LCreal toTime() const override                  { return static_cast<LCreal>(val * H2S); }
     LCreal fromTime(const LCreal a) const override  { return a * S2H; }
 };
@@ -303,7 +297,6 @@ public:
     Days(const Time& org);
 
     static LCreal convertStatic(const Time &n)     { return n.toTime() * S2D; }
-    // Time interface
     LCreal toTime() const override                 { return static_cast<LCreal>(val * D2S); }
     LCreal fromTime(const LCreal a) const override { return a * S2D; }
 };

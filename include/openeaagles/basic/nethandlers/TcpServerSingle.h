@@ -32,11 +32,9 @@ class TcpServerSingle : public TcpHandler
 public:
    TcpServerSingle();
 
-   // PosixHandler interface
    bool initNetwork(const bool noWaitFlag) override;
 
 protected:
-   // PosixHandler interface
    bool bindSocket() override;
 
    virtual bool listenForConnections();

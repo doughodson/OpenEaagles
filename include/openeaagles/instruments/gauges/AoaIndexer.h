@@ -25,7 +25,6 @@ class AoAIndexer : public Instrument
     DECLARE_SUBCLASS(AoAIndexer,Instrument)
 
 public:
-
     AoAIndexer();
 
     // set functions

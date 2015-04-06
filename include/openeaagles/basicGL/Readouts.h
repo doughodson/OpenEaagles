@@ -40,7 +40,6 @@ class AsciiText : public Field {
 public:
    AsciiText();
 
-   // Field interface
    char filterInputEvent(const int event, const int tc) override;
    bool isValidInputPosition(const int tc) override;
    bool event(const int key, Basic::Object* const obj = 0) override;
@@ -61,7 +60,6 @@ class Cursor : public Field
 
 public:
    Cursor();
-   // Field interface
    void updateData(const LCreal dt = 0.0) override;
 };
 
@@ -135,7 +133,6 @@ public:
    void setMaxValue(const int v)    { maxNum = double(v); redisplay(); }
    void setMaxValue(const double v) { maxNum = v; redisplay(); }
 
-   // Field interface
    double getInputValue() const override;
    bool isInputValueValid() const override;
    char filterInputEvent(const int event, const int tc) override;
@@ -411,7 +408,6 @@ class Rotary : public Field {
 
 public:
    Rotary();
-   // BasicGL::Graphic interface
    void draw() override;
 
 private:

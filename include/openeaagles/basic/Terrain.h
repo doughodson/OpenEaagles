@@ -176,7 +176,6 @@ public:
       const unsigned int numColors,     // Number of colors
       osg::Vec3& rgb);                  // Color
 
-   // Component interface
    void reset() override;
 
 protected:

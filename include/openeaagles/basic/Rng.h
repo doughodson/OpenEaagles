@@ -84,7 +84,7 @@ public:
    // default constructor: uses default seed only if this is the first instance
    //----
    Rng();
-   
+
    //----
    // constructor with 32 bit int as seed
    //----
@@ -110,28 +110,28 @@ public:
    // drawInt32() -- generate 32 bit random integer
    //-----------------------------------------------------------------
    unsigned int drawInt32();
-  
+
    //-----------------------------------------------------------------
    // draw() -- this will be defined in the distribution classes
    //-----------------------------------------------------------------
    virtual double draw();
-  
+
    //-----------------------------------------------------------------
-   // drawClosed() -- generates double floating point numbers in the 
+   // drawClosed() -- generates double floating point numbers in the
    // closed interval [0, 1]
    // mean = 1/2; variance = 1/12
    // 4294967295 = 2^32 - 1
    //-----------------------------------------------------------------
    double drawClosed();
-  
+
    //-----------------------------------------------------------------
-   // drawOpen() -- generates double floating point numbers in the 
+   // drawOpen() -- generates double floating point numbers in the
    // open interval (0, 1)
    // mean = 1/2; variance = 1/12
    // 4294967296 = 2^32
    //-----------------------------------------------------------------
    double drawOpen();
-  
+
    //-----------------------------------------------------------------
    // drawHalfOpen() -- generates double floating point numbers in the
    // half-open interval [0, 1)
@@ -139,9 +139,9 @@ public:
    // 4294967296 = 2^32
    //-----------------------------------------------------------------
    double drawHalfOpen();
-  
+
    //-----------------------------------------------------------------
-   // drawHalfOpen53() -- generates 53 bit resolution doubles in the 
+   // drawHalfOpen53() -- generates 53 bit resolution doubles in the
    // half-open interval [0, 1)
    // mean = 1/2; variance = 1/12
    // 67108864 = 2^26
@@ -152,37 +152,37 @@ public:
 
    //-----------------------------------------------------------------
    // drawExponential - Exponential Probability Distribution Function
-   // generates double floating point numbers in the half open interval 
+   // generates double floating point numbers in the half open interval
    // [0, infinity)
-   // mean = 1/lambda; variance = 1/(lambda^2) 
+   // mean = 1/lambda; variance = 1/(lambda^2)
    //-----------------------------------------------------------------
    double drawExponential(const double lambda=1.0);
 
    //-----------------------------------------------------------------
    // drawGeometric - Geometric Probability Distribution Function
-   // generates double floating point numbers in the half open interval 
+   // generates double floating point numbers in the half open interval
    // [0, infinity)
-   // mean = (1-p)/p; variance = (1-p)/(p^2) 
+   // mean = (1-p)/p; variance = (1-p)/(p^2)
    //-----------------------------------------------------------------
    unsigned int drawGeometric(const double p=0.0);
 
    //-----------------------------------------------------------------
    // drawUniformCont - Continuous Uniform Probability Distribution Function
-   // generates double floating point numbers in the interval [a, b] 
+   // generates double floating point numbers in the interval [a, b]
    // mean = (a + b)/2; variance = ((b - a)^2)/12
    //-----------------------------------------------------------------
    double drawUniformCont(const double a=0, const double b=1.0);
 
    //-----------------------------------------------------------------
    // drawUniformDisc - Discrete Uniform Probability Distribution Function
-   // generates double floating point numbers in the interval [a, b] 
+   // generates double floating point numbers in the interval [a, b]
    // mean = (a + b)/2; variance = ((b - a)^2)/12
    //-----------------------------------------------------------------
    int drawUniformDisc(const int i=0, const int j=1);
 
    //-----------------------------------------------------------------
    // drawRayleigh - Rayleigh Probability Distribution Function
-   // generates double floating point numbers in the half open interval 
+   // generates double floating point numbers in the half open interval
    // [0, infinity)
    // mean = alpha*sqrt(PI/2); variance = (alpha^2)*(2 - PI/2)
    //-----------------------------------------------------------------
@@ -190,7 +190,7 @@ public:
 
    //-----------------------------------------------------------------
    // drawGauss() - Gauss (Normal) Probability Distribution Function
-   // generates double floating point numbers in the open interval 
+   // generates double floating point numbers in the open interval
    // (-infinity, infinity)
    // mean = mu; variance = sigma^2
    //-----------------------------------------------------------------
@@ -198,43 +198,43 @@ public:
 
    //-----------------------------------------------------------------
    // drawBernoulli() - Bernoulli Probability Distribution Function
-   // generates double floating point numbers in the open interval 
+   // generates double floating point numbers in the open interval
    // (0, infinity)
-   // mean = p; variance = p*(1 - p) 
+   // mean = p; variance = p*(1 - p)
    //-----------------------------------------------------------------
    unsigned int drawBernoulli(const double p);
 
    //-----------------------------------------------------------------
    // drawBinomial() - Binomial Probability Distribution Function
-   // generates double floating point numbers in the half open interval 
+   // generates double floating point numbers in the half open interval
    // [0, infinity)
    // The Binomial distribution is the sum of n independent, identically
    // distributed Bernoulli random variables
-   // mean = np; variance = np*(1 - p) 
+   // mean = np; variance = np*(1 - p)
    //-----------------------------------------------------------------
    double drawBinomial(const int n, const double p);
 
    //-----------------------------------------------------------------
    // drawPoisson() - Poisson Probability Distribution Function
-   // generates double floating point numbers in the half open interval 
+   // generates double floating point numbers in the half open interval
    // [0, infinity)
-   // mean = alpha; variance = alpha 
+   // mean = alpha; variance = alpha
    //-----------------------------------------------------------------
    unsigned int drawPoisson(const double alpha=1.0);
 
    //-----------------------------------------------------------------
    // drawGamma() - Gamma Probability Distribution Function
-   // generates double floating point numbers in the open interval 
+   // generates double floating point numbers in the open interval
    // (0, infinity)
-   // mean = alpha/beta; variance = alpha/(beta^2) 
+   // mean = alpha/beta; variance = alpha/(beta^2)
    //-----------------------------------------------------------------
    double drawGamma(const double alpha=1.0, const double beta=1.0);
-   
+
    //-----------------------------------------------------------------
    // drawErlang - Erlang Probability Distribution Function
-   // generates double floating point numbers in the half open interval 
+   // generates double floating point numbers in the half open interval
    // [0, infinity)
-   // mean = a; variance = ?? 
+   // mean = a; variance = ??
    //-----------------------------------------------------------------
    double drawErlang(const unsigned int m, const double a);
 

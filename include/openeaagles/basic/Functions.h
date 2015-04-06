@@ -63,7 +63,6 @@ public:
 
    virtual double f(const double iv1, FStorage* const s = 0) const;
 
-   // Function interface
    bool setSlotLfiTable(const Table* const msg) override;
 };
 
@@ -79,7 +78,6 @@ public:
 
    virtual double f(const double iv1, const double iv2, FStorage* const s = 0) const;
 
-   // Function interface
    bool setSlotLfiTable(const Table* const msg) override;
 };
 
@@ -95,7 +93,6 @@ public:
 
    virtual double f(const double iv1, const double iv2, const double iv3, FStorage* const s = 0) const;
 
-   // Function interface
    bool setSlotLfiTable(const Table* const msg) override;
 };
 
@@ -111,7 +108,6 @@ public:
 
    virtual double f(const double iv1, const double iv2, const double iv3, const double iv4, FStorage* const s = 0) const;
 
-   // Function interface
    bool setSlotLfiTable(const Table* const msg) override;
 };
 
@@ -127,7 +123,6 @@ public:
 
    virtual double f(const double iv1, const double iv2, const double iv3, const double iv4, const double iv5, FStorage* const s = 0) const;
 
-   // Function interface
    bool setSlotLfiTable(const Table* const msg) override;
 };
 

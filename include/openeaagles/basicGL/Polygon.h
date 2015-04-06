@@ -93,7 +93,6 @@ public:
    unsigned int getLayer() const             { return layerValue; }
    void setLayer(const unsigned int newLayer);
 
-   // Graphic Interface
    void drawFunc() override;
 
 private:

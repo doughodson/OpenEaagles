@@ -30,7 +30,7 @@ class RacModel : public Simulation::AerodynamicsModel
 {
     DECLARE_SUBCLASS(RacModel, Simulation::AerodynamicsModel)
 
-public: // public interface
+public:
     RacModel();
 
     LCreal getGload() const override;                   // G's (+up, one at level)
@@ -52,7 +52,7 @@ public: // public interface
     double getCommandedAltitude() const override;
     bool setAltitudeHoldOn(const bool b) override;
     bool setCommandedAltitude(const double a, const double aMps = 0, const double maxPitch = 0) override;
-    void dynamics(const LCreal dt) override;             // One pass model update; called from Player::dynamics()
+    void dynamics(const LCreal dt) override;            // One pass model update; called from Player::dynamics()
 
     void reset() override;
 
