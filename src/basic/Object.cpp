@@ -21,7 +21,7 @@ unsigned int Object::numClasses = 1;
 // ---
 // Object's static member data
 // ---
-Object::_Static Object::_static(0, typeid(Object).name(), "Object", &Object::slottable, 0);
+Object::_Static Object::_static(0, typeid(Object).name(), "Object", &Object::slottable, nullptr);
 
 // ---
 // Object's SlotTable
@@ -31,7 +31,7 @@ Object::_Static Object::_static(0, typeid(Object).name(), "Object", &Object::slo
 // ---
 const char* Object::slotnames[] = { "" };
 const int Object::nslots = 0;
-const SlotTable Object::slottable(0, 0);
+const SlotTable Object::slottable(nullptr, 0);
 
 
 //------------------------------------------------------------------------------
@@ -75,7 +75,7 @@ Object* Object::clone() const
 // Check class type
 bool Object::isClassType(const std::type_info& type) const
 {
-    if ( type == typeid(Object) ) return true;  
+    if ( type == typeid(Object) ) return true;
     else return false;
 }
 
@@ -195,7 +195,7 @@ int Object::slotName2Index(const char* const slotname) const
 bool Object::setSlotByName(const char* const slotname, Object* const obj)
 {
     bool ok = false;
-    if (obj == 0) return ok;
+    if (obj == nullptr) return ok;
     int slotindex = slotName2Index(slotname);
     if (slotindex > 0) ok = setSlotByIndex(slotindex,obj);
     return ok;
@@ -334,7 +334,7 @@ void Object::indent(std::ostream& sout, const int ii) const
 // serialize() -- Sends the contents of an object (important stuff anyway) to
 //            the output stream, sout.  Each output line can be indented
 //            by 'indent' spaces.  If slotsOnly is true, then only the
-//            slots are printed. 
+//            slots are printed.
 //------------------------------------------------------------------------------
 std::ostream& Object::serialize(std::ostream& sout, const int, const bool) const
 {
@@ -360,12 +360,12 @@ Object::_Static& Object::_Static::operator=(const _Static&)
    return *this;
 }
 
-//------------------------------------------------------------------------------ 
-// Get the Object _Static member 
-//------------------------------------------------------------------------------ 
-const Object::_Static* Object::getStatic() 
-{ 
-    return &_static; 
+//------------------------------------------------------------------------------
+// Get the Object _Static member
+//------------------------------------------------------------------------------
+const Object::_Static* Object::getStatic()
+{
+    return &_static;
 }
 
 } // End Basic namespace

@@ -19,7 +19,7 @@ BEGIN_SLOTTABLE(Hsv)
     "value",        // 3: value component,      range(0.0 to 1.0)
 END_SLOTTABLE(Hsv)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(Hsv)
     ON_SLOT(1,setHue,Number)
     ON_SLOT(2,setSaturation,Number)
@@ -95,7 +95,7 @@ void Hsv::getHSVA(osg::Vec4& hhh) const
 //------------------------------------------------------------------------------
 bool Hsv::setHue(Number* const msg)
 {
-    if (msg == 0) return false;
+    if (msg == nullptr) return false;
     LCreal value = msg->getReal();
     bool ok = (value >= 0 && value <= 360);
     if (ok) { hsv[HUE] = value; hsv2rgb(color,hsv); }
@@ -108,7 +108,7 @@ bool Hsv::setHue(Number* const msg)
 //------------------------------------------------------------------------------
 bool Hsv::setSaturation(Number* const msg)
 {
-    if (msg == 0) return false;
+    if (msg == nullptr) return false;
     LCreal value = msg->getReal();
     bool ok = (value >= 0 && value <= 1);
     if (ok) { hsv[SATURATION] = value; hsv2rgb(color,hsv); }
@@ -121,7 +121,7 @@ bool Hsv::setSaturation(Number* const msg)
 //------------------------------------------------------------------------------
 bool Hsv::setValue(Number* const msg)
 {
-    if (msg == 0) return false;
+    if (msg == nullptr) return false;
     LCreal value = msg->getReal();
     bool ok = (value >= 0 && value <= 1);
     if (ok) { hsv[VALUE] = value; hsv2rgb(color,hsv); }
@@ -134,7 +134,7 @@ bool Hsv::setValue(Number* const msg)
 //------------------------------------------------------------------------------
 bool Hsv::setAlpha(Number* const msg)
 {
-    if (msg == 0) return false;
+    if (msg == nullptr) return false;
     LCreal value = msg->getReal();
     bool ok = (value >= 0 && value <= 1);
     if (ok) { hsv[ALPHA] = value; hsv2rgb(color,hsv); }
@@ -270,7 +270,7 @@ void Hsv::hsv2rgb(osg::Vec4& rgb, const osg::Vec4& hsv)
 //------------------------------------------------------------------------------
 void Hsv::rgb2hsv(osg::Vec3& hsv, const osg::Vec3& rgb)
 {
-   LCreal cmax = lcMax( rgb[RED], lcMax(rgb[GREEN],rgb[BLUE]) ); 
+   LCreal cmax = lcMax( rgb[RED], lcMax(rgb[GREEN],rgb[BLUE]) );
    LCreal cmin = lcMin( rgb[RED], lcMin(rgb[GREEN],rgb[BLUE]) );
    LCreal cdelta = cmax - cmin;
    LCreal h = 0;
@@ -278,7 +278,7 @@ void Hsv::rgb2hsv(osg::Vec3& hsv, const osg::Vec3& rgb)
 
    if ( cmax != 0.0 )
       s = cdelta / cmax;
-   
+
    if ( s != 0.0 )
    {
       LCreal rc = (cmax - rgb[RED]) / cdelta;
@@ -299,7 +299,7 @@ void Hsv::rgb2hsv(osg::Vec3& hsv, const osg::Vec3& rgb)
 
    hsv[HUE] = h;
    hsv[VALUE] = cmax;
-   hsv[SATURATION] = s;  
+   hsv[SATURATION] = s;
 }
 
 void Hsv::rgb2hsv(osg::Vec4& hsv, const osg::Vec4& rgb)
@@ -312,7 +312,7 @@ void Hsv::rgb2hsv(osg::Vec4& hsv, const osg::Vec4& rgb)
    // Copy to output (just pass alpha)
    hsv[HUE]        = hsv3[HUE];
    hsv[VALUE]      = hsv3[VALUE];
-   hsv[SATURATION] = hsv3[SATURATION];  
+   hsv[SATURATION] = hsv3[SATURATION];
 
    // Just pass alpha
    hsv[ALPHA] = rgb[ALPHA];

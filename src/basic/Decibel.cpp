@@ -13,6 +13,7 @@ IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Decibel,"dB")
 //------------------------------------------------------------------------------
 Decibel::Decibel()
 {
+   db = 0.0;
    STANDARD_CONSTRUCTOR()
 }
 
@@ -56,7 +57,7 @@ void Decibel::setValue(const double v)
 bool Decibel::setSlotValue(const Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       setValueDB( msg->getReal() );
       ok = true;
    }

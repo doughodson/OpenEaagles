@@ -3,6 +3,7 @@
 //------------------------------------------------------------------------------
 
 #include <fstream>
+#include <cstring>
 
 #include "openeaagles/basic/FileReader.h"
 
@@ -25,7 +26,7 @@ BEGIN_SLOTTABLE(FileReader)
     "recordLength",  // 3) Length (in characters) of the records
 END_SLOTTABLE(FileReader)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(FileReader)
     ON_SLOT(1,setSlotPathname,String)
     ON_SLOT(2,setSlotFilename,String)
@@ -40,9 +41,9 @@ FileReader::FileReader()
 {
    STANDARD_CONSTRUCTOR()
 
-   dbf = 0;
+   dbf = nullptr;
 
-   rec = 0;
+   rec = nullptr;
    rlen = 0;
 
    rnum = 1;
@@ -60,14 +61,14 @@ void FileReader::copyData(const FileReader& org, const bool cc)
 {
    BaseClass::copyData(org);
    if (cc) {
-      rec = 0;
-      dbf = 0;
+      rec = nullptr;
+      dbf = nullptr;
       pathname[0] = '\0';
       filename[0] = '\0';
    }
 
    // Close the old file (we'll need to open() the new one)
-   if (dbf != 0) dbf->close();
+   if (dbf != nullptr) dbf->close();
 
    lcStrcpy(pathname, PATHNAME_LENGTH, org.pathname);
    lcStrcpy(filename, FILENAME_LENGTH, org.filename);
@@ -84,16 +85,16 @@ void FileReader::copyData(const FileReader& org, const bool cc)
 void FileReader::deleteData()
 {
    // Close file and delete stream
-   if (dbf != 0) {
+   if (dbf != nullptr) {
       dbf->close();
       delete dbf;
-      dbf = 0;
+      dbf = nullptr;
    }
 
    // Delete the record buffer
-   if (rec != 0) {
+   if (rec != nullptr) {
       delete[] rec;
-      rec = 0;
+      rec = nullptr;
    }
 }
 
@@ -104,7 +105,7 @@ void FileReader::deleteData()
 bool FileReader::isReady()
 {
    bool ready = false;
-   if (dbf != 0 && rec != 0) {
+   if (dbf != nullptr && rec != nullptr) {
       if (rlen > 0 && dbf->is_open()) ready = true;
    }
    return ready;
@@ -118,7 +119,7 @@ bool FileReader::isReady()
 bool FileReader::setPathname(const char* const path)
 {
    bool ok = false;
-   if (path != 0) {
+   if (path != nullptr) {
       lcStrncpy(pathname, (PATHNAME_LENGTH-1), path, (PATHNAME_LENGTH-1));
       pathname[PATHNAME_LENGTH-1] = '\0';
       ok = true;
@@ -130,7 +131,7 @@ bool FileReader::setPathname(const char* const path)
 bool FileReader::setFilename(const char* const file)
 {
    bool ok = false;
-   if (file != 0) {
+   if (file != nullptr) {
       lcStrncpy(filename, (FILENAME_LENGTH-1), file, (FILENAME_LENGTH-1));
       filename[FILENAME_LENGTH-1] = '\0';
       ok = true;
@@ -142,7 +143,7 @@ bool FileReader::setFilename(const char* const file)
 bool FileReader::setRecordLength(const int len)
 {
    if (rlen != len) {
-      if (rec != 0) {
+      if (rec != nullptr) {
          delete[] rec;
       }
       rlen = len;
@@ -159,7 +160,7 @@ bool FileReader::setRecordLength(const int len)
 bool FileReader::setSlotPathname(String* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setPathname( *msg );
    }
    return ok;
@@ -168,7 +169,7 @@ bool FileReader::setSlotPathname(String* const msg)
 bool FileReader::setSlotFilename(String* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setFilename( *msg );
    }
    return ok;
@@ -177,7 +178,7 @@ bool FileReader::setSlotFilename(String* const msg)
 bool FileReader::setSlotRecordLength(Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setRecordLength( msg->getInt() );
    }
    return ok;
@@ -196,7 +197,7 @@ bool FileReader::open()
    lcStrcat(file, FILE_LENGTH, filename);
 
    // Open the file ...
-   if (dbf != 0) {
+   if (dbf != nullptr) {
       // close any previous files
       dbf->close();
    }
@@ -219,7 +220,7 @@ bool FileReader::open()
 const char* FileReader::getRecord(const int nn, const int ll)
 {
    // return nothing if we're not ready (e.g., the record length has not been set)
-   if ( !isReady() ) return 0;
+   if ( !isReady() ) return nullptr;
 
    // Set record number
    int n = nn;
@@ -245,7 +246,7 @@ const char* FileReader::getRecord(const int nn, const int ll)
    else {
       dbf->clear();
       crnum = -1;
-      return 0;
+      return nullptr;
    }
 
 }
@@ -269,14 +270,14 @@ std::ostream& FileReader::serialize(std::ostream& sout, const int i, const bool 
         j = 4;
     }
 
-    if (strlen(pathname) > 0) {
+    if (std::strlen(pathname) > 0) {
         indent(sout,i+j);
         sout << "pathname: \"";
         sout << pathname;
         sout << "\"" << std::endl;
     }
 
-    if (strlen(filename) > 0) {
+    if (std::strlen(filename) > 0) {
         indent(sout,i+j);
         sout << "filename: \"";
         sout << filename;

@@ -195,8 +195,8 @@ public:
 
    bool isValid() const override;
 
-public: // Exceptions
-
+public:
+    // Exceptions
     class ExpInvalidTable : public Object::Exception {
         public:
             ExpInvalidTable() : Exception() {}

@@ -16,6 +16,13 @@ codelite/
 *.pdb
 
 #
+# eclipse files (for now)
+#
+.cproject
+.project
+.settings/
+
+#
 # Qt not needed directories (created upon build)
 #
 tmp/

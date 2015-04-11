@@ -4,6 +4,8 @@
 #include "openeaagles/basic/Nav.h"
 #include "openeaagles/basic/units/Distances.h"
 
+#include <cstring>
+
 namespace Eaagles {
 namespace Basic {
 
@@ -101,30 +103,30 @@ void EarthModel::copyData(const EarthModel& org, const bool cc)
 const EarthModel* EarthModel::getEarthModel(const char* const name)
 {
    const EarthModel* em = 0;
-   if (name != 0) {
+   if (name != nullptr) {
 
-      if (strcmp( name, "airy") == 0) em = &airy;
-      else if (strcmp( name, "australianNational") == 0) em = &australianNational;
-      else if (strcmp( name, "bessel1841") == 0) em = &bessel1841;
-      else if (strcmp( name, "clark1866") == 0) em = &clark1866;
-      else if (strcmp( name, "clark1880") == 0) em = &clark1880;
-      else if (strcmp( name, "everest") == 0) em = &everest;
-      else if (strcmp( name, "fischer1960") == 0) em = &fischer1960;
-      else if (strcmp( name, "fischer1968") == 0) em = &fischer1968;
-      else if (strcmp( name, "grs1967") == 0) em = &grs1967;
-      else if (strcmp( name, "grs1980") == 0) em = &grs1980;
-      else if (strcmp( name, "helmert1906") == 0) em = &helmert1906;
-      else if (strcmp( name, "hough") == 0) em = &hough;
-      else if (strcmp( name, "international") == 0) em = &international;
-      else if (strcmp( name, "kravosky") == 0) em = &kravosky;
-      else if (strcmp( name, "modairy") == 0) em = &modAiry;
-      else if (strcmp( name, "modeverest") == 0) em = &modEverest;
-      else if (strcmp( name, "modfischer") == 0) em = &modFischer;
-      else if (strcmp( name, "southAmerican1969") == 0) em = &southAmerican1969;
-      else if (strcmp( name, "wgs60") == 0) em = &wgs60;
-      else if (strcmp( name, "wgs66") == 0) em = &wgs66;
-      else if (strcmp( name, "wgs72") == 0) em = &wgs72;
-      else if (strcmp( name, "wgs84") == 0) em = &wgs84;
+      if      (std::strcmp( name, "airy") == 0) em = &airy;
+      else if (std::strcmp( name, "australianNational") == 0) em = &australianNational;
+      else if (std::strcmp( name, "bessel1841") == 0) em = &bessel1841;
+      else if (std::strcmp( name, "clark1866") == 0) em = &clark1866;
+      else if (std::strcmp( name, "clark1880") == 0) em = &clark1880;
+      else if (std::strcmp( name, "everest") == 0) em = &everest;
+      else if (std::strcmp( name, "fischer1960") == 0) em = &fischer1960;
+      else if (std::strcmp( name, "fischer1968") == 0) em = &fischer1968;
+      else if (std::strcmp( name, "grs1967") == 0) em = &grs1967;
+      else if (std::strcmp( name, "grs1980") == 0) em = &grs1980;
+      else if (std::strcmp( name, "helmert1906") == 0) em = &helmert1906;
+      else if (std::strcmp( name, "hough") == 0) em = &hough;
+      else if (std::strcmp( name, "international") == 0) em = &international;
+      else if (std::strcmp( name, "kravosky") == 0) em = &kravosky;
+      else if (std::strcmp( name, "modairy") == 0) em = &modAiry;
+      else if (std::strcmp( name, "modeverest") == 0) em = &modEverest;
+      else if (std::strcmp( name, "modfischer") == 0) em = &modFischer;
+      else if (std::strcmp( name, "southAmerican1969") == 0) em = &southAmerican1969;
+      else if (std::strcmp( name, "wgs60") == 0) em = &wgs60;
+      else if (std::strcmp( name, "wgs66") == 0) em = &wgs66;
+      else if (std::strcmp( name, "wgs72") == 0) em = &wgs72;
+      else if (std::strcmp( name, "wgs84") == 0) em = &wgs84;
 
    }
    return em;
@@ -168,7 +170,7 @@ bool EarthModel::setF(const double f0)
 bool EarthModel::setSlotA(const Distance* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setA( Meters::convertStatic( *msg ) );
    }
    return ok;
@@ -177,7 +179,7 @@ bool EarthModel::setSlotA(const Distance* const msg)
 bool EarthModel::setSlotA(const Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setA( msg->getDouble() );
    }
    return ok;
@@ -186,7 +188,7 @@ bool EarthModel::setSlotA(const Number* const msg)
 bool EarthModel::setSlotB(const Distance* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setB( Meters::convertStatic( *msg ) );
    }
    return ok;
@@ -195,7 +197,7 @@ bool EarthModel::setSlotB(const Distance* const msg)
 bool EarthModel::setSlotB(const Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setB( msg->getDouble() );
    }
    return ok;
@@ -204,7 +206,7 @@ bool EarthModel::setSlotB(const Number* const msg)
 bool EarthModel::setSlotF(const Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setF( msg->getDouble() );
    }
    return ok;

@@ -18,7 +18,7 @@ BEGIN_SLOTTABLE(Hls)
     "saturation",  // 3: ... Saturation component, range(0.0 to 1.0)
 END_SLOTTABLE(Hls)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(Hls)
     ON_SLOT(1,setHue,Number)
     ON_SLOT(2,setLightness,Number)
@@ -87,7 +87,7 @@ void Hls::getHLS(osg::Vec3& hhh) const
 //------------------------------------------------------------------------------
 bool Hls::setHue(Number* const msg)
 {
-    if (msg == 0) return false;
+    if (msg == nullptr) return false;
     LCreal value = msg->getReal();
     bool ok = (value >= 0 && value <= 360);
     if (ok) { hls[HUE] = value; hls2rgb(color,hls); }
@@ -100,7 +100,7 @@ bool Hls::setHue(Number* const msg)
 //------------------------------------------------------------------------------
 bool Hls::setSaturation(Number* const msg)
 {
-    if (msg == 0) return false;
+    if (msg == nullptr) return false;
     LCreal value = msg->getReal();
     bool ok = (value >= 0 && value <= 1);
     if (ok) { hls[SATURATION] = value; hls2rgb(color,hls); }
@@ -113,7 +113,7 @@ bool Hls::setSaturation(Number* const msg)
 //------------------------------------------------------------------------------
 bool Hls::setLightness(Number* const msg)
 {
-    if (msg == 0) return false;
+    if (msg == nullptr) return false;
     LCreal value = msg->getReal();
     bool ok = (value >= 0 && value <= 1);
     if (ok) { hls[LIGHTNESS] = value; hls2rgb(color,hls); }
@@ -191,8 +191,7 @@ void Hls::rgb2hls(osg::Vec3& hls, const osg::Vec4& rgb)
     if (maxcol == mincol) {
         hls[SATURATION] = 0.0f;
         hls[HUE] = 0.0f;
-    }
-    else {
+    } else {
         cdelta = maxcol - mincol;
         rc = ( maxcol - rgb[RED] ) / cdelta;
         gc = ( maxcol - rgb[GREEN] ) / cdelta;
@@ -207,7 +206,7 @@ void Hls::rgb2hls(osg::Vec3& hls, const osg::Vec4& rgb)
             hls[HUE] = bc - gc;
         else if ( rgb[GREEN] == maxcol )
             hls[HUE] = 2.0f + rc - bc;
-        else 
+        else
             hls[HUE] = 4.0f + gc - rc;
         hls[HUE] *= 60.0f;
         if (hls[HUE] < 0.0) hls[HUE] += 360.0f;

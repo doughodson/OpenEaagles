@@ -45,27 +45,27 @@ Function::Function()
 {
    STANDARD_CONSTRUCTOR()
 
-   table = 0;
+   table = nullptr;
 }
 
 void Function::copyData(const Function& org, const bool cc)
 {
    BaseClass::copyData(org);
-   if (cc) table = 0;
+   if (cc) table = nullptr;
 
    {
-      const Table* copy = 0;
-      if (org.table != 0) {
+      const Table* copy = nullptr;
+      if (org.table != nullptr) {
          copy = static_cast<const Table*>(org.table->clone());
       }
       setSlotLfiTable(copy);
-      if (copy != 0) copy->unref();
+      if (copy != nullptr) copy->unref();
    }
 }
 
 void Function::deleteData()
 {
-   setSlotLfiTable(0);
+   setSlotLfiTable(nullptr);
 }
 
 //------------------------------------------------------------------------------
@@ -74,8 +74,8 @@ void Function::deleteData()
 FStorage* Function::storageFactory() const
 {
    // Since no derived class handled this ...
-   if (table != 0) {
-      // then we're going to let the table handle it, if any 
+   if (table != nullptr) {
+      // then we're going to let the table handle it, if any
       return table->storageFactory();
    }
    else {
@@ -94,7 +94,7 @@ bool Function::setSlotLfiTable(const Table* const msg)
 }
 
 //------------------------------------------------------------------------------
-// getSlotByIndex() 
+// getSlotByIndex()
 //------------------------------------------------------------------------------
 Object* Function::getSlotByIndex(const int si)
 {
@@ -112,7 +112,7 @@ std::ostream& Function::serialize(std::ostream& sout, const int i, const bool sl
       j = 4;
    }
 
-   if (table != 0) {
+   if (table != nullptr) {
       indent(sout, i + j);
       sout << "table: ";
       table->serialize(sout,(i+j+4));
@@ -129,7 +129,7 @@ std::ostream& Function::serialize(std::ostream& sout, const int i, const bool sl
 }
 
 //==============================================================================
-// Class: Func1 
+// Class: Func1
 //==============================================================================
 IMPLEMENT_SUBCLASS(Func1,"Func1")
 EMPTY_SLOTTABLE(Func1)
@@ -140,12 +140,12 @@ EMPTY_SERIALIZER(Func1)
 
 double Func1::f(const double iv1, FStorage* const s) const
 {
-   double value = 0;
+   double value = 0.0;
 
    // No derived class handled this ...
 
    const Table1* p = static_cast<const Table1*>(getTable());
-   if (p != 0) {
+   if (p != nullptr) {
       // But we do have an optional table that'll handle it.
       value = p->lfi(static_cast<LCreal>(iv1),s);
    }
@@ -156,8 +156,8 @@ double Func1::f(const double iv1, FStorage* const s) const
 bool Func1::setSlotLfiTable(const Table* const msg)
 {
    bool ok = false;
-   if (msg == 0) {
-      ok = BaseClass::setSlotLfiTable(0);    // Setting the table to null.
+   if (msg == nullptr) {
+      ok = BaseClass::setSlotLfiTable(nullptr);
    }
    else if ( msg->isClassType(typeid(Table1)) ) {
       ok = BaseClass::setSlotLfiTable(msg); // We have a 1-D table.
@@ -169,7 +169,7 @@ bool Func1::setSlotLfiTable(const Table* const msg)
 }
 
 //==============================================================================
-// Class: Func2 
+// Class: Func2
 //==============================================================================
 IMPLEMENT_SUBCLASS(Func2,"Func2")
 EMPTY_SLOTTABLE(Func2)
@@ -180,12 +180,12 @@ EMPTY_SERIALIZER(Func2)
 
 double Func2::f(const double iv1, const double iv2, FStorage* const s) const
 {
-   double value = 0;
+   double value = 0.0;
 
    // No derived class handled this ...
 
    const Table2* p = static_cast<const Table2*>(getTable());
-   if (p != 0) {
+   if (p != nullptr) {
       // But we do have an optional table that'll handle it.
       value = p->lfi(static_cast<LCreal>(iv1), static_cast<LCreal>(iv2), s);
    }
@@ -196,8 +196,8 @@ double Func2::f(const double iv1, const double iv2, FStorage* const s) const
 bool Func2::setSlotLfiTable(const Table* const msg)
 {
    bool ok = false;
-   if (msg == 0) {
-      ok = BaseClass::setSlotLfiTable(0);    // Setting the table to null.
+   if (msg == nullptr) {
+      ok = BaseClass::setSlotLfiTable(nullptr);
    }
    else if ( msg->isClassType(typeid(Table2)) ) {
       ok = BaseClass::setSlotLfiTable(msg);  // We have a 2-D table.
@@ -209,7 +209,7 @@ bool Func2::setSlotLfiTable(const Table* const msg)
 }
 
 //==============================================================================
-// Class: Func3 
+// Class: Func3
 //==============================================================================
 IMPLEMENT_SUBCLASS(Func3,"Func3")
 EMPTY_SLOTTABLE(Func3)
@@ -220,12 +220,12 @@ EMPTY_SERIALIZER(Func3)
 
 double Func3::f(const double iv1, const double iv2, const double iv3, FStorage* const s) const
 {
-   double value = 0;
+   double value = 0.0;
 
    // No derived class handled this ...
 
    const Table3* p = static_cast<const Table3*>(getTable());
-   if (p != 0) {
+   if (p != nullptr) {
       // But we do have an optional table that'll handle it.
       value = p->lfi(static_cast<LCreal>(iv1), static_cast<LCreal>(iv2), static_cast<LCreal>(iv3), s);
    }
@@ -236,8 +236,8 @@ double Func3::f(const double iv1, const double iv2, const double iv3, FStorage* 
 bool Func3::setSlotLfiTable(const Table* const msg)
 {
    bool ok = false;
-   if (msg == 0) {
-      ok = BaseClass::setSlotLfiTable(0);    // Setting the table to null.
+   if (msg == nullptr) {
+      ok = BaseClass::setSlotLfiTable(nullptr);
    }
    else if ( msg->isClassType(typeid(Table3)) ) {
       ok = BaseClass::setSlotLfiTable(msg);  // We have a 3-D table.
@@ -260,12 +260,12 @@ EMPTY_SERIALIZER(Func4)
 
 double Func4::f(const double iv1, const double iv2, const double iv3, const double iv4, FStorage* const s) const
 {
-   double value = 0;
+   double value = 0.0;
 
    // No derived class handled this ...
 
    const Table4* p = static_cast<const Table4*>(getTable());
-   if (p != 0) {
+   if (p != nullptr) {
       // But we do have an optional table that'll handle it.
       value = p->lfi(static_cast<LCreal>(iv1), static_cast<LCreal>(iv2),
                      static_cast<LCreal>(iv3), static_cast<LCreal>(iv4), s);
@@ -277,8 +277,8 @@ double Func4::f(const double iv1, const double iv2, const double iv3, const doub
 bool Func4::setSlotLfiTable(const Table* const msg)
 {
    bool ok = false;
-   if (msg == 0) {
-      ok = BaseClass::setSlotLfiTable(0);    // Setting the table to null.
+   if (msg == nullptr) {
+      ok = BaseClass::setSlotLfiTable(nullptr);    // Setting the table to null.
    }
    else if ( msg->isClassType(typeid(Table4)) ) {
       ok = BaseClass::setSlotLfiTable(msg);  // We have a 4-D table.
@@ -301,12 +301,12 @@ EMPTY_SERIALIZER(Func5)
 
 double Func5::f(const double iv1, const double iv2, const double iv3, const double iv4, const double iv5, FStorage* const s) const
 {
-   double value = 0;
+   double value = 0.0;
 
    // No derived class handled this ...
 
    const Table5* p = static_cast<const Table5*>(getTable());
-   if (p != 0) {
+   if (p != nullptr) {
       // But we do have an optional table that'll handle it.
       value = p->lfi(static_cast<LCreal>(iv1), static_cast<LCreal>(iv2), static_cast<LCreal>(iv3),
                      static_cast<LCreal>(iv4), static_cast<LCreal>(iv5) ,s);
@@ -318,8 +318,8 @@ double Func5::f(const double iv1, const double iv2, const double iv3, const doub
 bool Func5::setSlotLfiTable(const Table* const msg)
 {
    bool ok = false;
-   if (msg == 0) {
-      ok = BaseClass::setSlotLfiTable(0);    // Setting the table to null.
+   if (msg == nullptr) {
+      ok = BaseClass::setSlotLfiTable(nullptr);
    }
    else if ( msg->isClassType(typeid(Table5)) ) {
       ok = BaseClass::setSlotLfiTable(msg);  // We have a 5-D table.
@@ -366,12 +366,12 @@ void Polynomial::copyData(const Polynomial& org, const bool cc)
    BaseClass::copyData(org);
    if (cc) initData();
 
-   setCoefficients(org.a,org.m);
+   setCoefficients(org.a, org.m);
 }
 
 void Polynomial::deleteData()
 {
-   setCoefficients(0,0);
+   setCoefficients(nullptr, 0);
 }
 
 //------------------------------------------------------------------------------
@@ -380,7 +380,7 @@ void Polynomial::deleteData()
 double Polynomial::f(const double x, FStorage* const) const
 {
    double result = 0;
-   if (a != 0 && m > 0) {
+   if (m > 0) {
       unsigned int n = (m-1);
       double xx = 1.0;
       for (unsigned int i = 0; i <= n; i++) {
@@ -399,7 +399,7 @@ bool Polynomial::setCoefficients(const double* const aa, const unsigned short mm
    bool ok = false;
 
    // Clear the coefficients
-   if (aa == 0 || mm == 0) {
+   if (aa == nullptr || mm == 0) {
       for (unsigned int i = 0; i < mm; i++) {
          a[i] = 0;
       }
@@ -430,7 +430,7 @@ bool Polynomial::setSlotCoefficients(const List* const msg)
 {
    bool ok = false;
 
-   if (msg != 0) {
+   if (msg != nullptr) {
 
       unsigned int entries = msg->entries();
       if ( entries <= MAX_COEFF ) {
@@ -446,14 +446,14 @@ bool Polynomial::setSlotCoefficients(const List* const msg)
    }
    else {
       // Just remove the old ...
-      ok = setCoefficients(0,0);
+      ok = setCoefficients(nullptr, 0);
    }
 
    return ok;
 }
 
 //------------------------------------------------------------------------------
-// getSlotByIndex() 
+// getSlotByIndex()
 //------------------------------------------------------------------------------
 Object* Polynomial::getSlotByIndex(const int si)
 {

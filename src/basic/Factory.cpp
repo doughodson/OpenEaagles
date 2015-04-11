@@ -82,7 +82,7 @@ Factory::Factory()
 
 Object* Factory::createObj(const char* name)
 {
-    Object* obj = 0;
+    Object* obj = nullptr;
 
     // Numbers
     if ( std::strcmp(name, Number::getFactoryName()) == 0 ) {
@@ -118,7 +118,7 @@ Object* Factory::createObj(const char* name)
     else if ( std::strcmp(name, Divide::getFactoryName()) == 0 ) {
         obj = new Divide();
     }
- 
+
     // Components
     else if ( std::strcmp(name, FileReader::getFactoryName()) == 0 ) {
         obj = new FileReader();
@@ -140,7 +140,7 @@ Object* Factory::createObj(const char* name)
     else if ( std::strcmp(name, Scale::getFactoryName()) == 0 ) {
         obj = new Scale();
     }
-    
+
     // Tables
     else if ( std::strcmp(name, Table1::getFactoryName()) == 0 ) {
         obj = new Table1();
