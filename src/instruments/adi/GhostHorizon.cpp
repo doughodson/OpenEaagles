@@ -1,5 +1,5 @@
 #include "openeaagles/instruments/adi/GhostHorizon.h"
-#include "openeaagles/basic/Tables.h"
+#include "openeaagles/basic/functors/Tables.h"
 #include "openeaagles/basic/Rgba.h"
 #include "openeaagles/basicGL/Display.h"
 
@@ -33,7 +33,7 @@ END_SLOT_MAP()
 GhostHorizon::GhostHorizon()
 {
     STANDARD_CONSTRUCTOR()
-    
+
     skyColor.set(1, 1, 1);
     groundColor.set(1, 1, 1);
     gColorName = 0;
@@ -48,7 +48,7 @@ GhostHorizon::GhostHorizon()
 void GhostHorizon::copyData(const GhostHorizon& org, const bool cc)
 {
     BaseClass::copyData(org);
-    
+
     if (cc) {
         gColorName = 0;
         sColorName = 0;
@@ -77,21 +77,21 @@ void GhostHorizon::deleteData()
 //------------------------------------------------------------------------------
 // setSlotSkyColor() - set the color of our Ghost Horizon "sky" by a Color obj.
 //------------------------------------------------------------------------------
-bool GhostHorizon::setSlotSkyColor(const Basic::Color* const cobj)       
+bool GhostHorizon::setSlotSkyColor(const Basic::Color* const cobj)
 {
     bool ok = false;
     if (cobj != 0) {
         skyColor.set(cobj->red(), cobj->green(), cobj->blue());
         ok = true;
     }
-    
+
     return ok;
 }
 
 //------------------------------------------------------------------------------
 // setSlotSkyColor() - set the color of our Ghost Horizon "sky" by a string.
 //------------------------------------------------------------------------------
-bool GhostHorizon::setSlotSkyColor(const Basic::String* const cname)       
+bool GhostHorizon::setSlotSkyColor(const Basic::String* const cname)
 {
     bool ok = false;
     if (cname != 0) {
@@ -99,14 +99,14 @@ bool GhostHorizon::setSlotSkyColor(const Basic::String* const cname)
         else sColorName->setStr(cname->getString());
         ok = true;
     }
-    
+
     return ok;
 }
 
 //------------------------------------------------------------------------------
 // setSlotGroundColor() - set our "ground" color by string
 //------------------------------------------------------------------------------
-bool GhostHorizon::setSlotGroundColor(const Basic::String* const cname)       
+bool GhostHorizon::setSlotGroundColor(const Basic::String* const cname)
 {
     bool ok = false;
     if (cname != 0) {
@@ -114,32 +114,32 @@ bool GhostHorizon::setSlotGroundColor(const Basic::String* const cname)
         else gColorName->setStr(cname->getString());
         ok = true;
     }
-    
+
     return ok;
 }
 
 //------------------------------------------------------------------------------
 // setSlotGroundColor() - set our "ground" color by Color obj.
 //------------------------------------------------------------------------------
-bool GhostHorizon::setSlotGroundColor(const Basic::Color* const cobj)       
+bool GhostHorizon::setSlotGroundColor(const Basic::Color* const cobj)
 {
     bool ok = false;
     if (cobj != 0) {
         groundColor.set(cobj->red(), cobj->green(), cobj->blue());
         ok = true;
     }
-    
+
     return ok;
 }
 
 //------------------------------------------------------------------------------
 // setSlotWidth() - set the width of our horizon
 //------------------------------------------------------------------------------
-bool GhostHorizon::setSlotWidth(const Basic::Number* const x)       
+bool GhostHorizon::setSlotWidth(const Basic::Number* const x)
 {
     bool ok = false;
     if (x != 0) {
-        ok = setWidth(x->getReal());        
+        ok = setWidth(x->getReal());
     }
     return ok;
 }
@@ -147,11 +147,11 @@ bool GhostHorizon::setSlotWidth(const Basic::Number* const x)
 //------------------------------------------------------------------------------
 // setSlotHeight() - set the height of our horizon
 //------------------------------------------------------------------------------
-bool GhostHorizon::setSlotHeight(const Basic::Number* const x)       
+bool GhostHorizon::setSlotHeight(const Basic::Number* const x)
 {
     bool ok = false;
     if (x != 0) {
-        ok = setHeight(x->getReal());        
+        ok = setHeight(x->getReal());
     }
     return ok;
 }
@@ -162,8 +162,8 @@ bool GhostHorizon::setSlotHeight(const Basic::Number* const x)
 void GhostHorizon::drawFunc()
 {
     GLfloat ocolor[4];
-    glGetFloatv(GL_CURRENT_COLOR, ocolor);        
-  
+    glGetFloatv(GL_CURRENT_COLOR, ocolor);
+
     glPushMatrix();
 
     // if we are negative translation (pitch up), we show the ground background below us
@@ -174,11 +174,11 @@ void GhostHorizon::drawFunc()
     const Basic::Table1* table = getScalingTable();
     if (table != 0) {
         maxPitch = table->getMaxX();
-        minPitch = table->getMinX();    
+        minPitch = table->getMinX();
     }
-    
+
     LCreal value = getPreScaleInstValue();
-    
+
     if (value > maxPitch) {
             glColor3d(groundColor.x(), groundColor.y(), groundColor.z());
             glBegin(GL_POLYGON);
@@ -187,7 +187,7 @@ void GhostHorizon::drawFunc()
                 lcVertex2( width, 0);
                 lcVertex2( width, -height);
             glEnd();
-        
+
     }
     // sky
     else if (value < minPitch) {
@@ -198,10 +198,10 @@ void GhostHorizon::drawFunc()
             lcVertex2(width, 0);
             lcVertex2(width, height);
         glEnd();
-        
-    } 
+
+    }
     glPopMatrix();
-    
+
     glColor4fv(ocolor);
 }
 
@@ -212,14 +212,14 @@ void GhostHorizon::updateData(const LCreal dt)
 {
     // Update our base class
     BaseClass::updateData(dt);
-        
+
     // get our table to determine our min and max value
     LCreal maxPitch = 90;
     LCreal minPitch = -90;
     const Basic::Table1* table = getScalingTable();
     if (table != 0) {
         maxPitch = table->getMaxX();
-        minPitch = table->getMinX();    
+        minPitch = table->getMinX();
     }
     LCreal value = getPreScaleInstValue();
 

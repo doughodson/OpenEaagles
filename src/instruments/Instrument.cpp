@@ -1,7 +1,7 @@
 #include "openeaagles/instruments/Instrument.h"
 #include "openeaagles/basic/Number.h"
 #include "openeaagles/basicGL/ColorRotary.h"
-#include "openeaagles/basic/Tables.h"
+#include "openeaagles/basic/functors/Tables.h"
 #include "openeaagles/basic/PairStream.h"
 #include "openeaagles/basic/Pair.h"
 
@@ -15,7 +15,7 @@ BEGIN_SLOTTABLE(Instrument)
     "scalingTable",         // 1) table for figuring linear interpolation (if not a linear scale)
     "instVal",              // 2) our instrument value
     "allowComponentPass",   // 3) if this is true, we will send all instrument values we receive down to our components.
-END_SLOTTABLE(Instrument)       
+END_SLOTTABLE(Instrument)
 
 //------------------------------------------------------------------------------
 //  Map slot table to handles for Instrument
@@ -52,7 +52,7 @@ void Instrument::copyData(const Instrument& org, const bool cc)
 {
     // Copy our baseclass stuff first
     BaseClass::copyData(org);
-    
+
     if (cc) myTable = 0;
 
     if (org.myTable != 0) {
@@ -82,7 +82,7 @@ void Instrument::deleteData()
 
 // SLOT functions
 //------------------------------------------------------------------------------
-// setSlotScalingTable() -- 
+// setSlotScalingTable() --
 //------------------------------------------------------------------------------
 bool Instrument::setSlotScalingTable(const Basic::Table1* const newTable)
 {
@@ -107,7 +107,7 @@ bool Instrument::setSlotInstVal(const Basic::Number* const newVal)
 }
 
 //------------------------------------------------------------------------------
-// setSlotAllowValPass() -- 
+// setSlotAllowValPass() --
 //------------------------------------------------------------------------------
 bool Instrument::setSlotAllowValPass(const Basic::Number* const newAVP)
 {
@@ -122,8 +122,8 @@ bool Instrument::setSlotAllowValPass(const Basic::Number* const newAVP)
 //------------------------------------------------------------------------------
 bool Instrument::setAllowValPass(const bool newVP)
 {
-    allowPassing = newVP; 
-    return true; 
+    allowPassing = newVP;
+    return true;
 }
 
 // EVENT
@@ -146,7 +146,7 @@ bool Instrument::setInstVal(const LCreal newPos)
 {
     // store our raw instrument value, in case some instruments need them
     preScaleInstVal = newPos;
-    
+
     // do we have a table to use?
     if (myTable != 0) instVal = myTable->lfi(newPos);
     else instVal = newPos;
@@ -154,7 +154,7 @@ bool Instrument::setInstVal(const LCreal newPos)
 }
 
 //------------------------------------------------------------------------------
-// updateData() 
+// updateData()
 //------------------------------------------------------------------------------
 void Instrument::updateData(const LCreal dt)
 {
@@ -162,7 +162,7 @@ void Instrument::updateData(const LCreal dt)
    BaseClass::updateData(dt);
 
    // check for a color rotary, just in case we need one
-   BasicGL::ColorRotary* cr = dynamic_cast<BasicGL::ColorRotary*>(getColor());    
+   BasicGL::ColorRotary* cr = dynamic_cast<BasicGL::ColorRotary*>(getColor());
    if (cr != 0) cr->determineColor(preScaleInstVal);
 
    // only tell the rest of our instruments our value if we want them to know it

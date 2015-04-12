@@ -61,7 +61,7 @@ OBJS =  \
 	$(LIB)(Vectors.o) \
 	$(LIB)(Yiq.o)
 
-SUBDIRS = distributions nethandlers osg ubf units
+SUBDIRS = distributions functors nethandlers osg ubf units
 
 all: subdirs ${OBJS}
 

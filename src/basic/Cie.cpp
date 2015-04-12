@@ -5,7 +5,7 @@
 
 #include "openeaagles/basic/Float.h"
 #include "openeaagles/basic/List.h"
-#include "openeaagles/basic/Tables.h"
+#include "openeaagles/basic/functors/Tables.h"
 #include <cstdio>
 
 namespace Eaagles {
@@ -23,7 +23,7 @@ BEGIN_SLOTTABLE(Cie)
     "monitor",   // 4: ... Characteristics of intended display
 END_SLOTTABLE(Cie)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(Cie)
     ON_SLOT(1,setLuminance,Number)
     ON_SLOT(2,setX,Number)
@@ -213,7 +213,7 @@ BEGIN_SLOTTABLE(MonitorMetrics)
     "whiteCIE",  // 6: ... CIE coordinate of reference white
 END_SLOTTABLE(MonitorMetrics)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(MonitorMetrics)
     ON_SLOT(1,setSlotRed,Table1)
     ON_SLOT(2,setSlotGreen,Table1)
@@ -226,7 +226,7 @@ END_SLOT_MAP()
 //------------------------------------------------------------------------------
 // Constructor(s)
 //------------------------------------------------------------------------------
-MonitorMetrics::MonitorMetrics(const Table1* redLumTbl, const Table1* greenLumTbl, const Table1* blueLumTbl, 
+MonitorMetrics::MonitorMetrics(const Table1* redLumTbl, const Table1* greenLumTbl, const Table1* blueLumTbl,
                                const osg::Matrix& phosphorCoordMatrix, const osg::Vec3& whiteRGB, const osg::Vec3& whiteCIE)
 {
     STANDARD_CONSTRUCTOR()
@@ -304,7 +304,7 @@ void MonitorMetrics::deleteData()
 }
 
 bool MonitorMetrics::setSlotRed(const Table1* red)
-{ 
+{
     if ( red == 0 ) return false;
     redLuminance = red;
     return computeMatrix();
@@ -405,7 +405,7 @@ void MonitorMetrics::cie2rgb(osg::Vec4& rgba, const osg::Vec3& cie) const
 }
 
 //------------------------------------------------------------------------------
-// getSlotByIndex() 
+// getSlotByIndex()
 //------------------------------------------------------------------------------
 Object* MonitorMetrics::getSlotByIndex(const int si)
 {

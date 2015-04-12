@@ -1,7 +1,7 @@
 
 #include "openeaagles/dynamics/JSBSimModel.h"
 #include "openeaagles/basic/Number.h"
-#include "openeaagles/basic/Tables.h"
+#include "openeaagles/basic/functors/Tables.h"
 #include "openeaagles/basic/units/Angles.h"
 #include "openeaagles/basic/units/Distances.h"
 #include "openeaagles/basic/Statistic.h"
@@ -54,7 +54,7 @@ BEGIN_SLOTTABLE(JSBSimModel)
     "model",        //  2 JSBSim model
 END_SLOTTABLE(JSBSimModel)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(JSBSimModel)
     ON_SLOT(1,setRootDir,Basic::String)
     ON_SLOT(2,setModel,Basic::String)
@@ -527,7 +527,7 @@ int JSBSimModel::setThrottles(const LCreal* const positions, const int num)
 
 //------------------------------------------------------------------------------
 // setTrimSwitchRollInput(RollTrim) --  Sets the trim switch positions:
-//      RollTrim:  -1.0 -> Left;      0.0 -> Hold;  1.0 -> Right 
+//      RollTrim:  -1.0 -> Left;      0.0 -> Hold;  1.0 -> Right
 //------------------------------------------------------------------------------
 void JSBSimModel::setTrimSwitchRollInput(const LCreal rollTrim)
 {
@@ -536,7 +536,7 @@ void JSBSimModel::setTrimSwitchRollInput(const LCreal rollTrim)
 
 //------------------------------------------------------------------------------
 // setTrimSwitchPitchInput(PitchTrim) --  Sets the trim switch positions:
-//      PitchTrim: -1.0 -> NoseDown;  0.0 -> Hold;  1.0 -> NoseUp 
+//      PitchTrim: -1.0 -> NoseDown;  0.0 -> Hold;  1.0 -> NoseUp
 //------------------------------------------------------------------------------
 void JSBSimModel::setTrimSwitchPitchInput(const LCreal pitchTrim)
 {
@@ -558,7 +558,7 @@ void JSBSimModel::setRudderPedalInput(const LCreal pedal)
 
 //------------------------------------------------------------------------------
 // getLandingGearPosition() --   Returns the landing gear position (percent)
-//      0-> Fully Retracted;  100.0 -> Fully Extended 
+//      0-> Fully Retracted;  100.0 -> Fully Extended
 //------------------------------------------------------------------------------
 LCreal JSBSimModel::getLandingGearPosition() const
 {
@@ -604,7 +604,7 @@ void JSBSimModel::setGearHandleSwitch(const LCreal sw)
 
 //------------------------------------------------------------------------------
 // getSpeedBrakesSwitch() --   Returns the speed brake position (percent)
-//      0-> Fully Retracted;  100.0 -> Fully Extended 
+//      0-> Fully Retracted;  100.0 -> Fully Extended
 //------------------------------------------------------------------------------
 LCreal JSBSimModel::getSpeedBrakePosition() const
 {
@@ -617,7 +617,7 @@ LCreal JSBSimModel::getSpeedBrakePosition() const
 
 //------------------------------------------------------------------------------
 // setSpeedBrakesSwitch() --   Sets the speed brake switch position:
-//      -1.0 -> Retract;  0.0 -> Hold;  1.0 -> Extend 
+//      -1.0 -> Retract;  0.0 -> Hold;  1.0 -> Extend
 //------------------------------------------------------------------------------
 void JSBSimModel::setSpeedBrakesSwitch(const LCreal sw)
 {
@@ -805,7 +805,7 @@ void JSBSimModel::dynamics(const LCreal dt)
 
 
 //------------------------------------------------------------------------------
-// reset() -- 
+// reset() --
 //------------------------------------------------------------------------------
 void JSBSimModel::reset()
 {
@@ -861,7 +861,7 @@ void JSBSimModel::reset()
 #endif
         }
     }
-    
+
 #if 0
     // CGB TBD
     reset = 0;
@@ -1001,7 +1001,7 @@ bool JSBSimModel::setCommandedVelocityKts(const double v, const double vNps)
     return hasVelocityHold;
 }
 
-                                                                            
+
 //------------------------------------------------------------------------------
 // commanded altitude
 //------------------------------------------------------------------------------

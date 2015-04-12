@@ -8,7 +8,7 @@
 #include "openeaagles/simulation/Gimbal.h"
 #include "openeaagles/simulation/Player.h"
 #include "openeaagles/basic/List.h"
-#include "openeaagles/basic/Tables.h"
+#include "openeaagles/basic/functors/Tables.h"
 #include "openeaagles/basic/Number.h"
 
 #include "openeaagles/basic/Nav.h"
@@ -104,7 +104,7 @@ bool IrAtmosphere::setSlotSkyRadiance(Eaagles::Basic::Number *const num)
 }
 
 //------------------------------------------------------------------------------
-// setSlotEarthRadiance() -- set background radiance for ground 
+// setSlotEarthRadiance() -- set background radiance for ground
 //------------------------------------------------------------------------------
 bool IrAtmosphere::setSlotEarthRadiance(Eaagles::Basic::Number *const num)
 {
@@ -202,7 +202,7 @@ bool IrAtmosphere::calculateAtmosphereContribution(IrQueryMsg* const msg, LCreal
             // the distance and the tangent of the angle to the horizon
             hDist = sqrt(dh2);
             hTanAng = ( hDist / er ); // positive angles are below level (down)
-            viewAngleToHorizon = lcAtan(hTanAng); 
+            viewAngleToHorizon = lcAtan(hTanAng);
         }
 
         // determine ratio of earth and sky in the FOV
@@ -230,7 +230,7 @@ bool IrAtmosphere::calculateAtmosphereContribution(IrQueryMsg* const msg, LCreal
         LCreal upperBandBound = lowerBandBound + widths[i];
 
         // determine ratio of this band's coverage to entire atmosphere waveband
-        LCreal fractionOfBandToTotal = (upperBandBound - lowerBandBound) / totalWavelengthRange; 
+        LCreal fractionOfBandToTotal = (upperBandBound - lowerBandBound) / totalWavelengthRange;
 
         // Find the limits of the sensor
         LCreal lowerSensorBound = msg->getLowerWavelength();

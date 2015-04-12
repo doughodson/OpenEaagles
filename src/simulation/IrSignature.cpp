@@ -9,7 +9,7 @@
 #include "openeaagles/simulation/IrSensor.h"
 #include "openeaagles/simulation/AirVehicle.h"
 #include "openeaagles/simulation/Simulation.h"
-#include "openeaagles/basic/Tables.h"
+#include "openeaagles/basic/functors/Tables.h"
 #include "openeaagles/basic/List.h"
 #include "openeaagles/basic/Number.h"
 #include "openeaagles/basic/units/Areas.h"

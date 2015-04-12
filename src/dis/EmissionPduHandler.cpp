@@ -12,11 +12,11 @@
 #include "openeaagles/simulation/Jammer.h"
 #include "openeaagles/simulation/Radar.h"
 #include "openeaagles/simulation/Simulation.h"
+#include "openeaagles/basic/functors/Functions.h"
+#include "openeaagles/basic/functors/Tables.h"
 #include "openeaagles/basic/Decibel.h"
-#include "openeaagles/basic/Functions.h"
 #include "openeaagles/basic/NetHandler.h"
 #include "openeaagles/basic/Number.h"
-#include "openeaagles/basic/Tables.h"
 
 namespace Eaagles {
 namespace Network {

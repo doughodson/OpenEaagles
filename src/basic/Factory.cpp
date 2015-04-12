@@ -10,8 +10,11 @@
 #include "openeaagles/basic/FileReader.h"
 #include "openeaagles/basic/Statistic.h"
 #include "openeaagles/basic/Transforms.h"
-#include "openeaagles/basic/Tables.h"
 #include "openeaagles/basic/Timers.h"
+
+// Functors
+#include "openeaagles/basic/functors/Tables.h"
+#include "openeaagles/basic/functors/Functions.h"
 
 // Numbers
 #include "openeaagles/basic/Boolean.h"
@@ -62,7 +65,6 @@
 #include "openeaagles/basic/distributions/Uniform.h"
 
 // Others
-#include "openeaagles/basic/Functions.h"
 #include "openeaagles/basic/EarthModel.h"
 #include "openeaagles/basic/IoData.h"
 #include "openeaagles/basic/IoHandler.h"
@@ -141,7 +143,25 @@ Object* Factory::createObj(const char* name)
         obj = new Scale();
     }
 
-    // Tables
+    // Functors
+    else if ( std::strcmp(name, Func1::getFactoryName()) == 0 ) {
+        obj = new Func1();
+    }
+    else if ( std::strcmp(name, Func2::getFactoryName()) == 0 ) {
+        obj = new Func2();
+    }
+    else if ( std::strcmp(name, Func3::getFactoryName()) == 0 ) {
+        obj = new Func3();
+    }
+    else if ( std::strcmp(name, Func4::getFactoryName()) == 0 ) {
+        obj = new Func4();
+    }
+    else if ( std::strcmp(name, Func5::getFactoryName()) == 0 ) {
+        obj = new Func5();
+    }
+    else if ( std::strcmp(name, Polynomial::getFactoryName()) == 0 ) {
+        obj = new Polynomial();
+    }
     else if ( std::strcmp(name, Table1::getFactoryName()) == 0 ) {
         obj = new Table1();
     }
@@ -372,26 +392,6 @@ Object* Factory::createObj(const char* name)
     }
     else if ( std::strcmp(name, Yiq::getFactoryName()) == 0 ) {
         obj = new Yiq();
-    }
-
-    // Functions
-    else if ( std::strcmp(name, Func1::getFactoryName()) == 0 ) {
-        obj = new Func1();
-    }
-    else if ( std::strcmp(name, Func2::getFactoryName()) == 0 ) {
-        obj = new Func2();
-    }
-    else if ( std::strcmp(name, Func3::getFactoryName()) == 0 ) {
-        obj = new Func3();
-    }
-    else if ( std::strcmp(name, Func4::getFactoryName()) == 0 ) {
-        obj = new Func4();
-    }
-    else if ( std::strcmp(name, Func5::getFactoryName()) == 0 ) {
-        obj = new Func5();
-    }
-    else if ( std::strcmp(name, Polynomial::getFactoryName()) == 0 ) {
-        obj = new Polynomial();
     }
 
     // Network handlers

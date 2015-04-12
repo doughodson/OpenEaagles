@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 //        This is a limited capability:  the stabilizing gimbal can
-//        only mounted on the nose or the tail or on the y-azis on 
-//        the left or right wing. 
+//        only mounted on the nose or the tail or on the y-azis on
+//        the left or right wing.
 //------------------------------------------------------------------------------
 
 #include "openeaagles/simulation/StabilizingGimbal.h"
@@ -12,7 +12,7 @@
 #include "openeaagles/basic/PairStream.h"
 #include "openeaagles/basic/Pair.h"
 #include "openeaagles/basic/List.h"
-#include "openeaagles/basic/Tables.h"
+#include "openeaagles/basic/functors/Tables.h"
 #include "openeaagles/basic/Integer.h"
 #include "openeaagles/basic/Decibel.h"
 #include "openeaagles/basic/units/Angles.h"
@@ -31,7 +31,7 @@ BEGIN_SLOTTABLE(StabilizingGimbal)
     "stabilizingMode",      //  4: Sets the type of stabilization we desire  (elevation, roll, horizon)
 END_SLOTTABLE(StabilizingGimbal)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(StabilizingGimbal)
     ON_SLOT(1,setSlotStabilizingMode,Basic::String);
 END_SLOT_MAP()
@@ -44,7 +44,7 @@ StabilizingGimbal::StabilizingGimbal()
 {
    STANDARD_CONSTRUCTOR()
 
-   // Defaults 
+   // Defaults
    stabilizingMode = HORIZON;
    mountPosition = NOSE;
 }
@@ -77,24 +77,24 @@ void StabilizingGimbal::dynamics(const LCreal dt)
 }
 
 //------------------------------------------------------------------------------
-// stabilizingController() -- control the gimbal scanning 
+// stabilizingController() -- control the gimbal scanning
 //------------------------------------------------------------------------------
 void StabilizingGimbal::stabilizingController(const LCreal dt)
 {
     switch (stabilizingMode) {
         case ROLL : { rollStabilizingController(dt); }
             break;
-        
+
         case ELEVATION : { elevationStabilizingController(dt); }
             break;
-        
+
         case HORIZON : { rollStabilizingController(dt);  elevationStabilizingController(dt);}
             break;
     }
 }
 
 //------------------------------------------------------------------------------
-// rollStabilizingController() -- Roll stabilizes the gimbal 
+// rollStabilizingController() -- Roll stabilizes the gimbal
 //------------------------------------------------------------------------------
 void StabilizingGimbal::rollStabilizingController(const LCreal)
 {
@@ -117,7 +117,7 @@ void StabilizingGimbal::rollStabilizingController(const LCreal)
 }
 
 //------------------------------------------------------------------------------
-// elevationStabilizingController() -- Elevation stabilizes the gimbal 
+// elevationStabilizingController() -- Elevation stabilizes the gimbal
 //------------------------------------------------------------------------------
 void StabilizingGimbal::elevationStabilizingController(const LCreal)
 {
@@ -171,7 +171,7 @@ bool StabilizingGimbal::setSlotStabilizingMode(Basic::String* const msg)
         else ok = false;
     }
     return ok;
-}   
+}
 
 //------------------------------------------------------------------------------
 // setSlotMountPosition() -- calls setMountPosition()
@@ -188,7 +188,7 @@ bool StabilizingGimbal::setSlotMountPosition(Basic::String* const msg)
         else ok = false;
     }
     return ok;
-}   
+}
 
 //------------------------------------------------------------------------------
 // getSlotByIndex()

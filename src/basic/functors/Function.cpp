@@ -1,8 +1,8 @@
 
-#include "openeaagles/basic/Function.h"
+#include "openeaagles/basic/functors/Function.h"
 
 #include "openeaagles/basic/List.h"
-#include "openeaagles/basic/Tables.h"
+#include "openeaagles/basic/functors/Tables.h"
 
 namespace Eaagles {
 namespace Basic {

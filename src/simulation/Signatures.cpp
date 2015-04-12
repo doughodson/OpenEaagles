@@ -6,7 +6,7 @@
 #include "openeaagles/basic/Decibel.h"
 #include "openeaagles/basic/Pair.h"
 #include "openeaagles/basic/PairStream.h"
-#include "openeaagles/basic/Tables.h"
+#include "openeaagles/basic/functors/Tables.h"
 #include "openeaagles/basic/units/Angles.h"
 #include "openeaagles/basic/units/Areas.h"
 #include "openeaagles/basic/units/Distances.h"
@@ -56,10 +56,10 @@ EMPTY_SERIALIZER(SigConstant)
 //------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(SigConstant)
     "rcs",          // 1 Constant Radar Cross Section value
-                    //   Basic::Number(square meters) or Basic::Decibel(square meters) or Basic::Area() 
+                    //   Basic::Number(square meters) or Basic::Decibel(square meters) or Basic::Area()
 END_SLOTTABLE(SigConstant)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(SigConstant)
     ON_SLOT(1,setRCS,Basic::Number)
 END_SLOT_MAP()
@@ -110,7 +110,7 @@ LCreal SigConstant::getRCS(const Emission* const)
 }
 
 //------------------------------------------------------------------------------
-// setRCS() -- Set the RCS 
+// setRCS() -- Set the RCS
 //------------------------------------------------------------------------------
 bool SigConstant::setRCS(const Basic::Number* const num)
 {
@@ -154,7 +154,7 @@ BEGIN_SLOTTABLE(SigSphere)
     "radius",       // 1 Radius of the sphere
 END_SLOTTABLE(SigSphere)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(SigSphere)
     ON_SLOT(1,setRadiusFromSlot,Basic::Number)
 END_SLOT_MAP()
@@ -244,7 +244,7 @@ BEGIN_SLOTTABLE(SigPlate)
     "b",        // 2 width of the plate
 END_SLOTTABLE(SigPlate)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(SigPlate)
     ON_SLOT(1,setA,Basic::Number)
     ON_SLOT(2,setB,Basic::Number)
@@ -295,7 +295,7 @@ LCreal SigPlate::getRCS(const Emission* const em)
         double area = a * b;
         if (lambda > 0.0 && area > 0.0) {
             // If we have lambda and the area of the plate, compute the RCS
-            rcs = (4.0 * PI * area * area) / (lambda * lambda); 
+            rcs = (4.0 * PI * area * area) / (lambda * lambda);
         }
     }
     return static_cast<LCreal>(rcs);
@@ -403,7 +403,7 @@ LCreal SigDihedralCR::getRCS(const Emission* const em)
         if (lambda > 0.0) {
             // If we have lambda and the area of the plate, compute the RCS
             double a = getA();
-            rcs = (8.0 * PI * a*a*a*a) / (lambda*lambda); 
+            rcs = (8.0 * PI * a*a*a*a) / (lambda*lambda);
         }
     }
     return static_cast<LCreal>(rcs);
@@ -455,7 +455,7 @@ LCreal SigTrihedralCR::getRCS(const Emission* const em)
         if (lambda > 0.0) {
             // If we have lambda and the area of the plate, compute the RCS
             double a = getA();
-            rcs = (12.0 * PI * a*a*a*a) / (lambda*lambda); 
+            rcs = (12.0 * PI * a*a*a*a) / (lambda*lambda);
         }
     }
     return static_cast<LCreal>(rcs);
@@ -545,7 +545,7 @@ BEGIN_SLOTTABLE(SigAzEl)
                         //    squared instead of the default meters squared
 END_SLOTTABLE(SigAzEl)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(SigAzEl)
     ON_SLOT(1, setSlotTable,        Basic::Table2)
     ON_SLOT(2, setSlotSwapOrder,    Basic::Number)

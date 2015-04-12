@@ -9,7 +9,7 @@
 #include "openeaagles/simulation/Gimbal.h"       // FAB
 #include "openeaagles/simulation/Player.h"       // FAB
 #include "openeaagles/basic/List.h"
-#include "openeaagles/basic/Tables.h"
+#include "openeaagles/basic/functors/Tables.h"
 #include "openeaagles/basic/Number.h"
 
 #include "openeaagles/basic/Nav.h"
@@ -128,19 +128,19 @@ bool IrAtmosphere1::calculateAtmosphereContribution(IrQueryMsg* const msg, LCrea
    const LCreal* sigArray = msg->getSignatureByWaveband();
    Player* ownship = msg->getOwnship();
    Player* target = msg->getTarget();
-   
+
    // FAB - this should be angle of gimbal, not angle to target. (see base class)
    // Determine the angle above the horizon to be used for background radiation lookup
    LCreal range2D = msg->getRange();
    LCreal tanPhi = static_cast<LCreal>( (target->getAltitudeM() - ownship->getAltitudeM())/ range2D );
    LCreal tanPhiPrime = tanPhi - ( range2D / 12756776.0f ); // Twice earth radius
-   
+
    // appears that negative angles are down in this calculation
    LCreal viewingAngle = lcAtan(tanPhiPrime);
-   
+
    // table limits are 0 to pi; this correction assumes that 0 in the table is straight down, PI is straight up
    viewingAngle += PI/2.0;
-   
+
    *totalSignal = 0.0;
    *totalBackground = 0.0;
 
@@ -148,14 +148,14 @@ bool IrAtmosphere1::calculateAtmosphereContribution(IrQueryMsg* const msg, LCrea
       LCreal radiantIntensityInBin;
       LCreal lowerBandBound = centerWavelengths[i] - (widths[i] / 2.0f);
       LCreal upperBandBound = lowerBandBound + widths[i];
-      
+
       // determine ratio of this band's coverage to entire atmosphere waveband
       LCreal fractionOfBandToTotal = (upperBandBound - lowerBandBound) / ((centerWavelengths[getNumWaveBands() - 1] + (widths[getNumWaveBands() - 1] / 2.0f))-(centerWavelengths[0] - (widths[0] / 2.0f)));
-      
+
       // Find the limits of the sensor
       LCreal lowerSensorBound = msg->getLowerWavelength();
       LCreal upperSensorBound = msg->getUpperWavelength();
-      
+
       // Determine how much of this wave band overlaps the sensor limits
       LCreal lowerOverlap = getLowerEndOfWavelengthOverlap(
                                                    lowerBandBound,
@@ -163,14 +163,14 @@ bool IrAtmosphere1::calculateAtmosphereContribution(IrQueryMsg* const msg, LCrea
       LCreal upperOverlap = getUpperEndOfWavelengthOverlap(
                                                    upperBandBound,
                                                    upperSensorBound);
-      
+
       if (upperOverlap < lowerOverlap) upperOverlap = lowerOverlap;
-      
+
       LCreal overlapRatio = (upperOverlap - lowerOverlap) / (upperBandBound - lowerBandBound);
-      
+
       // Get the background radiation given the sensor altitude and the viewing angle
       LCreal backgroundRadianceInBand = overlapRatio * getBackgroundRadiation(
-                                                lowerBandBound,   
+                                                lowerBandBound,
                                                 upperBandBound,
                                                 static_cast<LCreal>(ownship->getAltitudeM()),
                                                 viewingAngle);
@@ -187,12 +187,12 @@ bool IrAtmosphere1::calculateAtmosphereContribution(IrQueryMsg* const msg, LCrea
          // assuming that signature bands match atmosphere bands
          radiantIntensityInBin = sigArray[i*3 + 2];
       }
-      
+
       // add in reflected solar radiation
       LCreal solarRadiationInBin = ((1.0f - msg->getEmissivity()) * getSolarRadiation(centerWavelengths[i],
                                     static_cast<LCreal>(target->getAltitudeM())));
       radiantIntensityInBin += (solarRadiationInBin * overlapRatio);
-      
+
       // Lookup the transmissivity in the wave band given the altitudes of sensor
       // and target and the ground range between the two
       LCreal transmissivity = getTransmissivity(
@@ -203,7 +203,7 @@ bool IrAtmosphere1::calculateAtmosphereContribution(IrQueryMsg* const msg, LCrea
                                                 range2D);
 
       *totalSignal += radiantIntensityInBin * transmissivity;
-      
+
       // Add the background radiance from the this waveband within the sensor limits
       // to the total background radiance received by the sensor, watts/sr-m^2
       *totalBackground += backgroundRadianceInBand * transmissivity;
@@ -214,8 +214,8 @@ bool IrAtmosphere1::calculateAtmosphereContribution(IrQueryMsg* const msg, LCrea
 
 //------------------------------------------------------------------------------------------------------
 // getTransmissivity() --  Return the fraction of infrared radiation transmitted in the region
-//        of the spectrum defined by the upper and lower wavelengths as a function 
-//        of the positions of the seeker and the target. The return value is between 
+//        of the spectrum defined by the upper and lower wavelengths as a function
+//        of the positions of the seeker and the target. The return value is between
 //        0.0 (no power gets through) and 1.0 (All power gets through)
 //------------------------------------------------------------------------------------------------------
 
@@ -239,7 +239,7 @@ LCreal IrAtmosphere1::getTransmissivity(
 }
 
 //------------------------------------------------------------------------------------------------------
-// getTransmissivity() -- Return the fraction of infrared radiation transmitted in the region surrounded 
+// getTransmissivity() -- Return the fraction of infrared radiation transmitted in the region surrounded
 //        by the center of the waveband as a function of the positions of the seeker and the target.
 //        The return value is between 0.0 (no power gets through) and 1.0 (All power gets through)
 //------------------------------------------------------------------------------------------------------
@@ -262,13 +262,13 @@ LCreal IrAtmosphere1::getTransmissivity(
 }
 
 //------------------------------------------------------------------------------------------------------
-// getSolarRadiation() -- Return the amount of solar radiation in the region of the spectrum defined by the 
-//        upper and lower wavelengths as a function of the target altitude. The output is in 
+// getSolarRadiation() -- Return the amount of solar radiation in the region of the spectrum defined by the
+//        upper and lower wavelengths as a function of the target altitude. The output is in
 //        the units watts/steradian sq-m.
 //------------------------------------------------------------------------------------------------------
 
 LCreal IrAtmosphere1::getSolarRadiation(
-                        const LCreal lowerWavelength,  
+                        const LCreal lowerWavelength,
                         const LCreal upperWavelength,
                         const LCreal targetAltitude) const
 {
@@ -281,7 +281,7 @@ LCreal IrAtmosphere1::getSolarRadiation(
 }
 
 //------------------------------------------------------------------------------------------------------
-// getSolarRadiation() -- Return the amount of solar radiation in the region surrounded by the center of the 
+// getSolarRadiation() -- Return the amount of solar radiation in the region surrounded by the center of the
 //        waveband as a function of the target altitude. The routine does a table lookup in a 2-D
 //        table where the x coordinate is the waveband center and the y coordinate is the altitude the
 //        target. The unit of output is Watts/steradian sq-m.
@@ -299,7 +299,7 @@ LCreal IrAtmosphere1::getSolarRadiation(
 }
 
 //------------------------------------------------------------------------------------------------------
-// getBackgroundRadiation() -- Return the amount of background radiation in the region of the spectrum defined by the 
+// getBackgroundRadiation() -- Return the amount of background radiation in the region of the spectrum defined by the
 //        upper and lower wavelengths as a function the altitude of the seeker and angle of viewing.
 //        The unit of output is Watts/steradian sq-m.
 //------------------------------------------------------------------------------------------------------
@@ -319,7 +319,7 @@ LCreal IrAtmosphere1::getBackgroundRadiation(
 }
 
 //------------------------------------------------------------------------------------------------------
-// getBackgroundRadiation() -- Return the amount of background radiation in the region surrounded by the center of the 
+// getBackgroundRadiation() -- Return the amount of background radiation in the region surrounded by the center of the
 //        waveband as a function the altitude of the seeker and angle of viewing.
 //        The unit of output is Watts/steradian sq-m.
 //------------------------------------------------------------------------------------------------------
@@ -337,7 +337,7 @@ LCreal IrAtmosphere1::getBackgroundRadiation(
 }
 
 //------------------------------------------------------------------------------------------------------
-// getSolarRadiationSignatures() -- Returns an array which holds, for each defined bin, the upper lower 
+// getSolarRadiationSignatures() -- Returns an array which holds, for each defined bin, the upper lower
 //        and wavelength and the amount of solar radiation in the bin. The array is of size 3 * numBins.
 //------------------------------------------------------------------------------------------------------
 

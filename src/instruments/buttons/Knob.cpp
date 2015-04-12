@@ -1,7 +1,7 @@
 #include "openeaagles/instruments/buttons/Knob.h"
 #include "openeaagles/basic/units/Angles.h"
 #include "openeaagles/basicGL/Display.h"
-#include "openeaagles/basic/Tables.h"
+#include "openeaagles/basic/functors/Tables.h"
 #include <GL/glu.h>
 
 namespace Eaagles {
@@ -22,7 +22,7 @@ BEGIN_SLOTTABLE(Knob)
 END_SLOTTABLE(Knob)
 
 //------------------------------------------------------------------------------
-//  Map slot table to handles 
+//  Map slot table to handles
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(Knob)
     ON_SLOT(1, setSlotValueTable, Basic::Table1)
@@ -67,9 +67,9 @@ Knob::Knob()
 void Knob::copyData(const Knob& org, const bool cc)
 {
     BaseClass::copyData(org);
-    
+
     if (cc) table = 0;
-    
+
     setSlotValueTable(org.table);
 
     value = org.value;
@@ -87,7 +87,7 @@ void Knob::copyData(const Knob& org, const bool cc)
 // deleteData() -- delete this object's data
 //------------------------------------------------------------------------------
 void Knob::deleteData()
-{ 
+{
     setSlotValueTable(0);
 }
 
@@ -136,12 +136,12 @@ bool Knob::setSlotEndlessLimit(const Basic::Number* const x)
 }
 
 //------------------------------------------------------------------------------
-// drawFunc() - 
+// drawFunc() -
 //------------------------------------------------------------------------------
 void Knob::drawFunc()
 {
     BaseClass::drawFunc();
-    
+
     // check our startX, startY about once every second
     if (findStartTimer > 1) {
         // determine our center position of our graphic
@@ -156,13 +156,13 @@ void Knob::drawFunc()
         GLdouble winx0 = 0;
         GLdouble winy0 = 0;
         GLdouble winz0 = 0;
-            
+
         // ok, we have all of our data, send it to be converted to window coordinates
         // we are starting at our matrix position, so our object coordinates are all 0
         gluProject(0, 0, 0, modelMatrix, projMatrix, viewport, &winx0, &winy0, &winz0);
-        startX = static_cast<int>(winx0); 
-        
-        // we have our viewport, so make sure we subract our y from that to get an X,Y from top , left corner instead 
+        startX = static_cast<int>(winx0);
+
+        // we have our viewport, so make sure we subract our y from that to get an X,Y from top , left corner instead
         // of bottom left corner
         startY = static_cast<int>(static_cast<GLdouble>(viewport[3]) - winy0);
         findStartTimer = 0;
@@ -177,7 +177,7 @@ bool Knob::onMotion()
     computeRotation();
     if (getDisplay() != 0) {
         getDisplay()->buttonEvent(getEventId());
-    }        
+    }
     return true;
 }
 
@@ -199,9 +199,9 @@ void Knob::computeRotation()
     BasicGL::Display* myDisplay = (BasicGL::Display*)findContainerByType(typeid(BasicGL::Display));
     // compute the rotation amout based on the start X,Y and our current X,Y
     if (myDisplay != 0) {
-        
+
         // get our end position
-        int curX = 0, curY = 0; 
+        int curX = 0, curY = 0;
         myDisplay->getMouse(&curX, &curY);
         int posMoveX = curX - startX;
         int posMoveY = curY - startY;
@@ -213,17 +213,17 @@ void Knob::computeRotation()
         if (myDisplay->getDisplayOrientation() == BasicGL::Display::CCW90) angle = atan2f((float)posMoveX, (float)(posMoveY));
         else angle = atan2f((float)posMoveY, (float)-(posMoveX));
 
-        angle *= static_cast<LCreal>(Basic::Angle::R2DCC); 
+        angle *= static_cast<LCreal>(Basic::Angle::R2DCC);
 
         if (start) {
             startAngle = static_cast<LCreal>(degsRotation);
             running = 0;
         }
         start = false;
-        
+
         //std::cout << "START ANGLE = " << startAngle << std::endl;
         //std::cout << "RUNNING ANGLE = " << running << std::endl;
-        
+
         // now get our difference
         if (lastAngle != angle) {
             LCreal temp = 0;
@@ -248,7 +248,7 @@ void Knob::computeRotation()
                 }
             }
         }
-       
+
         if (table != 0) {
             LCreal maxX = table->getMaxX();
             LCreal minX = table->getMinX();
@@ -293,7 +293,7 @@ void Knob::computeRotation()
 }
 
 //------------------------------------------------------------------------------
-// draw() - 
+// draw() -
 //------------------------------------------------------------------------------
 void Knob::draw()
 {
@@ -311,7 +311,7 @@ void Knob::draw()
 void Knob::updateData(const LCreal dt)
 {
     BaseClass::updateData(dt);
-    
+
     findStartTimer += dt;
 }
 

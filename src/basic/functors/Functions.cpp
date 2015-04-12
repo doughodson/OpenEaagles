@@ -6,10 +6,10 @@
 //    Function storage:                   FStorage
 //------------------------------------------------------------------------------
 
-#include "openeaagles/basic/Functions.h"
+#include "openeaagles/basic/functors/Functions.h"
 
 #include "openeaagles/basic/List.h"
-#include "openeaagles/basic/Tables.h"
+#include "openeaagles/basic/functors/Tables.h"
 
 namespace Eaagles {
 namespace Basic {

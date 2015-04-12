@@ -6,7 +6,7 @@
 #include "openeaagles/basic/IoDevice.h"
 #include "openeaagles/basic/IoHandler.h"
 #include "openeaagles/basic/Number.h"
-#include "openeaagles/basic/Tables.h"
+#include "openeaagles/basic/functors/Tables.h"
 
 namespace Eaagles {
 namespace IoDevice {
@@ -168,7 +168,7 @@ bool AnalogOutput::setTable(const Basic::Table1* const msg)
     bool ok = true;
 
     // Unref() the old (if any)
-    if (table != 0) { 
+    if (table != 0) {
         table->unref();
     }
 
@@ -177,7 +177,7 @@ bool AnalogOutput::setTable(const Basic::Table1* const msg)
 
     // Check and ref() the new table (if any)
     if (table != 0) {
-        if (table->isValid()) { 
+        if (table->isValid()) {
             table->ref();
         }
         else {

@@ -1,5 +1,5 @@
 
-#include "openeaagles/basic/Tables.h"
+#include "openeaagles/basic/functors/Tables.h"
 #include "openeaagles/basic/Integer.h"
 #include "openeaagles/basic/Float.h"
 #include "openeaagles/basic/List.h"
@@ -11,7 +11,7 @@ namespace Basic {
 //==============================================================================
 // Class TableStorage
 //==============================================================================
-IMPLEMENT_SUBCLASS(TableStorage,"TableStorage")
+IMPLEMENT_SUBCLASS(TableStorage, "TableStorage")
 EMPTY_SLOTTABLE(TableStorage)
 EMPTY_COPYDATA(TableStorage)
 EMPTY_DELETEDATA(TableStorage)

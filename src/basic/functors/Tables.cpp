@@ -2,7 +2,7 @@
 // Table1, Table2, Table3, Table4, Table5
 //------------------------------------------------------------------------------
 
-#include "openeaagles/basic/Tables.h"
+#include "openeaagles/basic/functors/Tables.h"
 #include "openeaagles/basic/Integer.h"
 #include "openeaagles/basic/Float.h"
 #include "openeaagles/basic/List.h"

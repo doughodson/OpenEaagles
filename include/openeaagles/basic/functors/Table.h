@@ -3,7 +3,7 @@
 #define __Eaagles_Basic_Table_H__
 
 #include "openeaagles/basic/Object.h"
-#include "openeaagles/basic/Functions.h"
+#include "openeaagles/basic/functors/Functions.h"
 
 namespace Eaagles {
 namespace Basic {

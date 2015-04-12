@@ -6,7 +6,7 @@
 #include "openeaagles/simulation/Tdb.h"
 
 #include "openeaagles/basic/Decibel.h"
-#include "openeaagles/basic/Functions.h"
+#include "openeaagles/basic/functors/Functions.h"
 #include "openeaagles/basic/Integer.h"
 #include "openeaagles/basic/List.h"
 #include "openeaagles/basic/PairStream.h"
@@ -27,13 +27,13 @@ BEGIN_SLOTTABLE(Antenna)
     "polarization",         //  1: Antenna Polarization  { none, vertical, horizontal, slant, RHC, LHC }
     "threshold",            //  2: Antenna threshold                (Basic::Power)
     "gain",                 //  3: Gain                             (no units)
-    "gainPattern",          //  4: Gain pattern (Basic::Func1 or Basic::Func2) (db) 
+    "gainPattern",          //  4: Gain pattern (Basic::Func1 or Basic::Func2) (db)
     "gainPatternDeg",       //  5: Gain pattern in degrees flag (true: degrees, false(default): radians)
     "recycle",              //  6: Recycle emissions flag (default: true)
     "beamWidth",            //  7: Beam Width              (Angle) or (Number: Radian)
 END_SLOTTABLE(Antenna)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(Antenna)
     ON_SLOT(1,  setSlotPolarization,      Basic::String)
     ON_SLOT(2,  setSlotThreshold,         Basic::Power)
@@ -67,7 +67,7 @@ Antenna::Antenna() : freeEmStack(MAX_EMISSIONS), freeEmLock(0),
 Antenna::Antenna(const Antenna& org) : freeEmStack(MAX_EMISSIONS), freeEmLock(0),
                                        inUseEmQueue(MAX_EMISSIONS), inUseEmLock(0),
                                        sys(0), gainPattern(0)
-{ 
+{
     STANDARD_CONSTRUCTOR()
     copyData(org,true);
 }
@@ -166,7 +166,7 @@ void Antenna::process(const LCreal dt)
 
    // ---
    // Recycle emissions ...
-   // Update emission queues: from 'in-use' to 'free' 
+   // Update emission queues: from 'in-use' to 'free'
    // ---
    if (recycle) {
       unsigned int n = inUseEmQueue.entries();
@@ -229,7 +229,7 @@ void Antenna::clearQueues()
         em = inUseEmQueue.get();
     }
    lcUnlock(inUseEmLock);
-}       
+}
 
 //------------------------------------------------------------------------------
 // setSlotPolarization() -- calls setPolarization()
@@ -246,7 +246,7 @@ bool Antenna::setSlotPolarization(Basic::String* const v)
     else if (*v == "RHC") ok = setPolarization(RHC);
     else if (*v == "LHC") ok = setPolarization(LHC);
     else ok = false;
-    
+
     return ok;
 }
 
@@ -259,7 +259,7 @@ bool Antenna::setSlotThreshold(Basic::Power* const p)
     // Has power units and we need watts
     Basic::Watts watts;
     double x = watts.convert(*p);
-    
+
     // Test and set the threshold
     if (x >= 0.0) ok = setThreshold(x);
 
@@ -290,7 +290,7 @@ bool Antenna::setSlotGain(const Basic::Number* const g)
 }
 
 //------------------------------------------------------------------------------
-// setSlotGainPattern() -- sets our gain pattern 
+// setSlotGainPattern() -- sets our gain pattern
 //------------------------------------------------------------------------------
 bool Antenna::setSlotGainPattern(Basic::Function* const tbl)
 {
@@ -313,7 +313,7 @@ bool Antenna::setSlotGainPatternDeg(const Basic::Number* const msg)
     }
     return ok;
 }
-   
+
 //------------------------------------------------------------------------------
 // setSlotRecycleFlg() -- sets the emission recycle flag
 //------------------------------------------------------------------------------
@@ -438,7 +438,7 @@ void Antenna::rfTransmit(Emission* const xmit)
 
       // ---
       // Lookup gain from antenna gain pattern, compute antenna
-      // effective gain and effective radiated power.    
+      // effective gain and effective radiated power.
       // ---
       bool haveGainTgt = false;
       double gainTgt[MAX_PLAYERS];
@@ -537,7 +537,7 @@ void Antenna::rfTransmit(Emission* const xmit)
 
             bool cloned = false;
             if (em == 0) {
-               // Otherwise, clone a new one 
+               // Otherwise, clone a new one
                em = xmit->clone();
                cloned = true;
             }
@@ -607,7 +607,7 @@ void Antenna::rfTransmit(Emission* const xmit)
 bool Antenna::onStartScanEvent(Basic::Integer* const bar)
 {
    // Pass the event to our system
-   RfSystem* p = getSystem();                
+   RfSystem* p = getSystem();
    if (p != 0) p->event(SCAN_START, bar);
    return true;
 }
@@ -618,7 +618,7 @@ bool Antenna::onStartScanEvent(Basic::Integer* const bar)
 bool Antenna::onEndScanEvent(Basic::Integer* const bar)
 {
    // Pass the event to our sensor
-   RfSystem* p = getSystem();                
+   RfSystem* p = getSystem();
    if (p != 0) p->event(SCAN_END, bar);
    return true;
 }
@@ -761,14 +761,14 @@ bool Antenna::onRfEmissionReturnEventAntenna(Emission* const em)
 double Antenna::getPolarizationGain(const Polarization p1) const
 {
     const int n = LHC+1;
-    static double table[n][n] = {  
+    static double table[n][n] = {
       //   NONE      VERTICAL   HORIZONTAL    SLANT         RHC         LHC
         {   1.0f,       1.0f,       1.0f,       1.0f,       1.0f,       1.0f },     // NONE
-        {   1.0f,       1.0f,       0.0f,       0.5f,       0.5f,       0.5f },     // VERTICAL    
-        {   1.0f,       0.0f,       1.0f,       0.5f,       0.5f,       0.5f },     // HORIZONTAL    
-        {   1.0f,       0.5f,       0.5f,       1.0f,       0.5f,       0.5f },     // SLANT    
-        {   1.0f,       0.5f,       0.5f,       0.5f,       1.0f,       0.0f },     // RHC    
-        {   1.0f,       0.5f,       0.5f,       0.5f,       0.0f,       1.0f },     // LHC    
+        {   1.0f,       1.0f,       0.0f,       0.5f,       0.5f,       0.5f },     // VERTICAL
+        {   1.0f,       0.0f,       1.0f,       0.5f,       0.5f,       0.5f },     // HORIZONTAL
+        {   1.0f,       0.5f,       0.5f,       1.0f,       0.5f,       0.5f },     // SLANT
+        {   1.0f,       0.5f,       0.5f,       0.5f,       1.0f,       0.0f },     // RHC
+        {   1.0f,       0.5f,       0.5f,       0.5f,       0.0f,       1.0f },     // LHC
     };
     return table[polar][p1];
 }
