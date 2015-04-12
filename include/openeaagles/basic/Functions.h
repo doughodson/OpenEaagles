@@ -1,14 +1,13 @@
 //------------------------------------------------------------------------------
 // Classes ---
-//    Base function:                      Function
 //    Polynomial function:                Polynomial
 //    Generic multi-variable functions:   Func1, Func2, Func3, Func4 and Func5
-//    Function storage:                   FStorage
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_Basic_Functions_H__
 #define __Eaagles_Basic_Functions_H__
 
 #include "openeaagles/basic/Object.h"
+#include "openeaagles/basic/Function.h"
 
 namespace Eaagles {
 namespace Basic {
@@ -16,40 +15,6 @@ namespace Basic {
 class FStorage;
 class List;
 class Table;
-
-//==============================================================================
-// Class: Function
-//
-// Description: Base for the derived, multi-dimensional function classes.
-//
-// Notes:
-//    1) Use the storageFactory() function to create the FStorage object that
-//       will maintain the previous function call values (i.e., integration).
-//
-//   virtual FStorage* storageFactory() const;
-//       Data storage factory (pre-ref()'d)
-//   virtual bool setSlotLfiTable(const Table* const msg);
-//       Set Slot Tables
-//
-// Slots:
-//    table    <Table>     ! Optional LFI table
-//
-//==============================================================================
-class Function : public Object {
-    DECLARE_SUBCLASS(Function, Object)
-
-public:
-   Function();
-
-   virtual FStorage* storageFactory() const;    // Data storage factory (pre-ref()'d)
-   virtual bool setSlotLfiTable(const Table* const msg);
-
-protected:
-   const Table* getTable() const {  return table; }
-
-private:
-   SPtr<const Table> table;   // Optional LFI Table
-};
 
 //==============================================================================
 // Class: Func1
@@ -174,18 +139,6 @@ private:
 
    double  a[MAX_COEFF];   // Constant coefficients vector
    unsigned short m;       // Number of coefficients (degree + 1)
-};
-
-//==============================================================================
-// class FStorage
-// Description: Generic storage class for past values of function calls.
-//              Use Function::storageFactory() to generate pre-ref()'d
-//              FStorage objects.
-//==============================================================================
-class FStorage : public Object {
-   DECLARE_SUBCLASS(FStorage, Object)
-public:
-   FStorage();
 };
 
 } // End Basic namespace
