@@ -23,6 +23,7 @@
 
 #include <cstdio>
 #include <cmath>
+#include <cstring>
 
 // Disable all deprecation warnings for now.  Until we fix them,
 // they are quite annoying to see over and over again...
@@ -688,7 +689,7 @@ bool Nib::entityStateManager(const LCreal curExecTime)
       // ---
       {
          const char* const pName = getPlayerName();
-         size_t nameLen = strlen(pName);
+         size_t nameLen = std::strlen(pName);
          for (unsigned int i = 0; i < EntityMarking::BUFF_SIZE; i++) {
             if (i < nameLen) {
                pdu->entityMarking.marking[i] = pName[i];

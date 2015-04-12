@@ -32,6 +32,7 @@
 #include "openeaagles/basic/String.h"
 
 #include <cstdio>
+#include <cstring>
 
 namespace Eaagles {
 namespace Basic {
@@ -45,7 +46,7 @@ BEGIN_SLOTTABLE(UdpBroadcastHandler)
     "networkMask",       // 1) Host Net Mask   "255.255.255.255"
 END_SLOTTABLE(UdpBroadcastHandler)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(UdpBroadcastHandler)
     ON_SLOT(1,setSlotNetworkMask,String)
 END_SLOT_MAP()
@@ -72,7 +73,7 @@ void UdpBroadcastHandler::copyData(const UdpBroadcastHandler& org, const bool cc
     if (networkMask != 0) delete[] networkMask;
     networkMask = 0;
     if (org.networkMask != 0) {
-        size_t len = strlen(org.networkMask);
+        size_t len = std::strlen(org.networkMask);
         networkMask = new char[len+1];
         lcStrcpy(networkMask,(len+1),org.networkMask);
     }
@@ -152,7 +153,7 @@ bool UdpBroadcastHandler::bindSocket()
                if (isMessageEnabled(MSG_INFO)) {
                   std::cout << std::hex << "UdpBroadcast::bindSocket() -- address: " << ba << std::dec << std::endl;
                }
-               setNetAddr( ba ); 
+               setNetAddr( ba );
                ok = true;
             }
         }
@@ -175,7 +176,7 @@ bool UdpBroadcastHandler::bindSocket()
 #else
        addr.sin_addr.s_addr = getNetAddr();
 #endif
-       if (getLocalPort() != 0) addr.sin_port = htons (getLocalPort());  
+       if (getLocalPort() != 0) addr.sin_port = htons (getLocalPort());
        else addr.sin_port = htons(getPort());
 
        if (bind(socketNum, reinterpret_cast<const struct sockaddr*>(&addr), sizeof(addr)) == SOCKET_ERROR) {
@@ -199,8 +200,8 @@ bool UdpBroadcastHandler::bindSocket()
 bool UdpBroadcastHandler::setSlotNetworkMask(const String* const msg)
 {
     bool ok = false;
-    if (msg != 0) { 
-        networkMask = msg->getCopyString(); 
+    if (msg != 0) {
+        networkMask = msg->getCopyString();
         ok = true;
     }
     return ok;

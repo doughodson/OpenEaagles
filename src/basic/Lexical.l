@@ -125,7 +125,7 @@ FALSE   { // Boolean Constants; false
             bool nflg = false;
             char cbuf[64];
             lcStrcpy(cbuf, sizeof(cbuf), yytext);
-            if (strlen(cbuf) == 10) {
+            if (std::strlen(cbuf) == 10) {
                if (cbuf[2] == '8') { cbuf[2] = '0'; nflg = true; }
                if (cbuf[2] == '9') { cbuf[2] = '1'; nflg = true; }
                if (cbuf[2] == 'a' || cbuf[2] == 'A') { cbuf[2] = '2'; nflg = true; }
@@ -145,7 +145,7 @@ FALSE   { // Boolean Constants; false
            bool nflg = false;
            char cbuf[64];
            lcStrcpy(cbuf, sizeof(cbuf), yytext);
-           if (strlen(cbuf) == 12) {
+           if (std::strlen(cbuf) == 12) {
               if (cbuf[1] == '2') { cbuf[1] = '0'; nflg = true; }
               if (cbuf[1] == '3') { cbuf[1] = '1'; nflg = true; }
            }
@@ -182,7 +182,7 @@ FALSE   { // Boolean Constants; false
 
 \"(\\.|[^\\"])*\"   { // Literal string (i.e., in double quotes); "hi there"
             /* return STRING without quotes */
-            size_t slen = strlen(yytext)+1;
+            size_t slen = std::strlen(yytext)+1;
             yylval.cvalp = new char[slen];
             lcStrcpy(yylval.cvalp,slen,yytext+1);
             yylval.cvalp[strlen(yylval.cvalp)-1] = 0;
@@ -191,7 +191,7 @@ FALSE   { // Boolean Constants; false
 
 \<(\\.|[^\\"])*\>   { // Literal string (i.e., in brackets); <hi there>
             /* return STRING without quotes */
-            size_t slen = strlen(yytext)+1;
+            size_t slen = std::strlen(yytext)+1;
             yylval.cvalp = new char[slen];
             lcStrcpy(yylval.cvalp,slen,yytext+1);
             yylval.cvalp[strlen(yylval.cvalp)-1] = 0;
@@ -200,7 +200,7 @@ FALSE   { // Boolean Constants; false
 
 
 {L}+[:] { // slot-id is one or more legal characters followed by a ':'
-            size_t slen = strlen(yytext)+1;
+            size_t slen = std::strlen(yytext)+1;
             yylval.cvalp = new char[slen];
             lcStrcpy(yylval.cvalp,slen,yytext);
             yylval.cvalp[strlen(yylval.cvalp)-1] = 0; // remove the :
@@ -209,7 +209,7 @@ FALSE   { // Boolean Constants; false
 
 
 {L}+    { // ident: one or more legal characters
-            size_t slen = strlen(yytext)+1;
+            size_t slen = std::strlen(yytext)+1;
             yylval.cvalp = new char[slen];
             lcStrcpy(yylval.cvalp,slen,yytext);
             return IDENT;

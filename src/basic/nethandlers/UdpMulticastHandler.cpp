@@ -32,6 +32,7 @@
 #include "openeaagles/basic/PairStream.h"
 #include "openeaagles/basic/String.h"
 #include <cstdio>
+#include <cstring>
 
 namespace Eaagles {
 namespace Basic {
@@ -45,7 +46,7 @@ BEGIN_SLOTTABLE(UdpMulticastHandler)
 
     "multicastGroup",           // 1) String containing the multicast IP address in
                                 //    the Internet standard "." (dotted) notation.
-                                //    IP multicast addresses range from 224.0.0.0 
+                                //    IP multicast addresses range from 224.0.0.0
                                 //    through 239.255.255.255 (e.g., "225.0.0.251")
 
     "ttl",                      // 2) Multicast Time-To-Live (TTL) value; default: 1
@@ -54,7 +55,7 @@ BEGIN_SLOTTABLE(UdpMulticastHandler)
 
 END_SLOTTABLE(UdpMulticastHandler)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(UdpMulticastHandler)
     ON_SLOT(1,setSlotMulticastGroup,String)
     ON_SLOT(2,setSlotTTL,Number)
@@ -82,7 +83,7 @@ void UdpMulticastHandler::copyData(const UdpMulticastHandler& org, const bool)
     // Multicast Stuff
     multicastGroup = 0;
     if (org.multicastGroup != 0) {
-        size_t len = strlen(org.multicastGroup);
+        size_t len = std::strlen(org.multicastGroup);
         multicastGroup = new char[len+1];
         lcStrcpy(multicastGroup,(len+1),org.multicastGroup);
     }
@@ -101,7 +102,7 @@ void UdpMulticastHandler::deleteData()
 }
 
 //------------------------------------------------------------------------------
-// Initialize this multicast handler -- 
+// Initialize this multicast handler --
 //------------------------------------------------------------------------------
 bool UdpMulticastHandler::initNetwork(const bool noWaitFlag)
 {
@@ -171,7 +172,7 @@ bool UdpMulticastHandler::init()
 
 // -------------------------------------------------------------
 // bindSocket() -- bind the socket to an address, and configure
-// the send and receive buffers. 
+// the send and receive buffers.
 // -------------------------------------------------------------
 bool UdpMulticastHandler::bindSocket()
 {
@@ -192,7 +193,7 @@ bool UdpMulticastHandler::bindSocket()
 #else
        addr.sin_addr.s_addr = ::inet_addr(multicastGroup);
 #endif
-       if (getLocalPort() != 0) addr.sin_port = htons (getLocalPort());  
+       if (getLocalPort() != 0) addr.sin_port = htons (getLocalPort());
        else addr.sin_port = htons(getPort());
 
        if (::bind(socketNum, reinterpret_cast<const struct sockaddr*>(&addr), sizeof(addr)) == SOCKET_ERROR) {
@@ -201,7 +202,7 @@ bool UdpMulticastHandler::bindSocket()
        }
 
        if (!setSendBuffSize()) return false;
-   
+
        if (!setRecvBuffSize()) return false;
    }
 
@@ -269,8 +270,8 @@ bool UdpMulticastHandler::closeConnection()
 bool UdpMulticastHandler::setSlotMulticastGroup(const String* const msg)
 {
     bool ok = false;
-    if (msg != 0) { 
-        multicastGroup = msg->getCopyString(); 
+    if (msg != 0) {
+        multicastGroup = msg->getCopyString();
         ok = true;
     }
     return ok;
@@ -280,8 +281,8 @@ bool UdpMulticastHandler::setSlotMulticastGroup(const String* const msg)
 bool UdpMulticastHandler::setSlotTTL(const Number* const msg)
 {
     bool ok = false;
-    if (msg != 0) { 
-        setTTL( msg->getInt() ); 
+    if (msg != 0) {
+        setTTL( msg->getInt() );
         ok = true;
     }
     return ok;
@@ -291,8 +292,8 @@ bool UdpMulticastHandler::setSlotTTL(const Number* const msg)
 bool UdpMulticastHandler::setSlotLoopback(const Number* const msg)
 {
     bool ok = false;
-    if (msg != 0) { 
-        setLoopback( msg->getBoolean() ); 
+    if (msg != 0) {
+        setLoopback( msg->getBoolean() );
         ok = true;
     }
     return ok;

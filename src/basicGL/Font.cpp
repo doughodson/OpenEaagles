@@ -3,6 +3,8 @@
 #include "openeaagles/basic/List.h"
 #include "openeaagles/basic/String.h"
 
+#include <cstring>
+
 namespace Eaagles {
 namespace BasicGL {
 
@@ -30,7 +32,7 @@ END_SLOTTABLE(Font)
 
 
 //------------------------------------------------------------------------------
-//  Map slot table to handles 
+//  Map slot table to handles
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(Font)
     ON_SLOT(1,setSlotFontWidth,Basic::Number)
@@ -39,7 +41,7 @@ BEGIN_SLOT_MAP(Font)
     ON_SLOT(4,setSlotBitmapWidth,Basic::Number)
     ON_SLOT(5,setSlotBitmapHeight,Basic::Number)
     ON_SLOT(6,setSlotFontPath,Basic::String)
-    ON_SLOT(7,setSlotFTGLFontFileName,Basic::String)   
+    ON_SLOT(7,setSlotFTGLFontFileName,Basic::String)
     ON_SLOT(8,setSlotLookupTable,Basic::List)
     ON_SLOT(9,setSlotCharacterSpacing,Basic::Number);
     ON_SLOT(10,setSlotLineSpacing,Basic::Number);
@@ -52,7 +54,7 @@ END_SLOT_MAP()
 Font::Font()
 {
     STANDARD_CONSTRUCTOR()
-    
+
     leftSide = 0;
     topSide = 0;
     b = 0;
@@ -63,7 +65,7 @@ Font::Font()
     loaded = false;
     charSpacing = 0;
     lineSpacing = 0;
-    
+
     setFontWidth( defaultFontWidth );
     setFontHeight( defaultFontHeight );
 
@@ -72,7 +74,7 @@ Font::Font()
 }
 
 Font::Font(const Font& org)
-{ 
+{
     STANDARD_CONSTRUCTOR()
     copyData(org,true);
 }
@@ -113,12 +115,12 @@ void Font::copyData(const Font& org, const bool cc)
     fontPath = 0;
     fontFile = 0;
     if (org.fontPath != 0) {
-        size_t len = strlen(org.fontPath);
+        size_t len = std::strlen(org.fontPath);
         fontPath = new char[len+1];
         lcStrcpy(fontPath,len+1,org.fontPath);
     }
     if (org.fontFile != 0) {
-        size_t len = strlen(org.fontFile);
+        size_t len = std::strlen(org.fontFile);
         fontFile = new char[len+1];
         lcStrcpy(fontFile,len+1,org.fontFile);
     }
@@ -168,7 +170,7 @@ int Font::xferChars(char* const outp, const size_t BUF_SIZE, const char* const i
 {
     if (outp == 0 || inp == 0) return 0;
     if (n >= BUF_SIZE) return 0;
-    
+
    // Buffer the string to translate the characters with the LUT,
    // as required, and to ensure that the string is terminated.
    if (pLUT != 0) {
@@ -181,7 +183,7 @@ int Font::xferChars(char* const outp, const size_t BUF_SIZE, const char* const i
       lcStrncpy(outp,BUF_SIZE,inp,n);
    }
    outp[n] = '\0';
-   return int(strlen(outp));
+   return int(std::strlen(outp));
 }
 
 
@@ -312,13 +314,13 @@ bool Font::setSlotFontPosition (const Basic::List* const sfpobj)
             std::cerr << "Font::setFontPosition: Values are invalid or missing" << std::endl;
               }
             ok = false;
-        }   
+        }
     }
     return ok;
 }
 
 //------------------------------------------------------------------------------
-//  setSlotBitmapWidth() - sets the bitmap width 
+//  setSlotBitmapWidth() - sets the bitmap width
 //------------------------------------------------------------------------------
 bool Font::setSlotBitmapWidth(const Basic::Number* const sbwobj)
 {
@@ -327,7 +329,7 @@ bool Font::setSlotBitmapWidth(const Basic::Number* const sbwobj)
 }
 
 //------------------------------------------------------------------------------
-//  setBitmapHeight() - sets the bitmap height 
+//  setBitmapHeight() - sets the bitmap height
 //------------------------------------------------------------------------------
 bool Font::setSlotBitmapHeight(const Basic::Number* const sbhobj)
 {
@@ -336,7 +338,7 @@ bool Font::setSlotBitmapHeight(const Basic::Number* const sbhobj)
 }
 
 //------------------------------------------------------------------------------
-//  setSlotFontPath() - sets the path to the font directory 
+//  setSlotFontPath() - sets the path to the font directory
 //------------------------------------------------------------------------------
 bool Font::setSlotFontPath(const Basic::String* const sfpobj)
 {

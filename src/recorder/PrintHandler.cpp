@@ -2,6 +2,7 @@
 #include "openeaagles/recorder/PrintHandler.h"
 #include "openeaagles/basic/String.h"
 #include "openeaagles/basic/Number.h"
+#include <cstring>
 
 // Disable all deprecation warnings for now.  Until we fix them,
 // they are quite annoying to see over and over again...
@@ -26,7 +27,7 @@ BEGIN_SLOTTABLE(PrintHandler)
    "pathname",     // 2) Path to the data file directory (optional)
 END_SLOTTABLE(PrintHandler)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(PrintHandler)
    ON_SLOT( 1, setFilename,        Basic::String)
    ON_SLOT( 2, setPathName,        Basic::String)
@@ -280,7 +281,7 @@ void PrintHandler::setFullFilename(const char* const name)
       fullFilename = 0;
    }
    if (name != 0) {
-      size_t n = strlen(name) + 1;
+      size_t n = std::strlen(name) + 1;
       fullFilename = new char[n];
       lcStrcpy(fullFilename, n, name);
    }

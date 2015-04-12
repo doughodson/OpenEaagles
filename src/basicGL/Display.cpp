@@ -16,6 +16,7 @@
 #include "openeaagles/basic/PairStream.h"
 
 #include <cstdio>
+#include <cstring>
 
 #include <GL/glu.h>
 
@@ -1111,7 +1112,7 @@ void Display::outputTextLC(const int ln, const int cp, const char* sp, const int
    currentFont->position(ln,cp,x,y);
    GLdouble dx = (currentFont->getCharacterSpacing());
    GLdouble dy = (currentFont->getLineSpacing());
-   size_t len = strlen(sp);
+   size_t len = std::strlen(sp);
 
    // If manual reverse text, draw a background polygon
    if (reversedFlg) {
@@ -1222,7 +1223,7 @@ void Display::outputText(const char* sp, const int n, const bool vf) const
       // Offsets to center to polygon
       GLdouble cSpace = (currentFont->getCharacterSpacing());
       GLdouble lSpace = (currentFont->getLineSpacing());
-      size_t len = strlen(sp);
+      size_t len = std::strlen(sp);
       // are we vertical?
       if (vf) {
          GLdouble startX = cSpace / 2;
@@ -1252,7 +1253,7 @@ void Display::outputText(const char* sp, const int n, const bool vf) const
       else {
          GLdouble cSpace = currentFont->getCharacterSpacing();
          GLdouble lSpace = currentFont->getLineSpacing();
-         size_t len = strlen(sp);
+         size_t len = std::strlen(sp);
 
          GLdouble startX = (cSpace * len / 2);
          GLdouble startY = (lSpace / 2);
@@ -1279,7 +1280,7 @@ void Display::outputText(const char* sp, const int n, const bool vf) const
    if (underlinedFlg) {
       GLdouble height = currentFont->getLineSpacing();
       GLdouble width = currentFont->getCharacterSpacing();
-      size_t len = strlen(sp);
+      size_t len = std::strlen(sp);
 
       if (vf) {
          // do nothing if we are vertical and underlined, because then it wouldn't be UNDERlined!

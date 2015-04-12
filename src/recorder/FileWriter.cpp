@@ -5,6 +5,7 @@
 
 #include "openeaagles/basic/String.h"
 #include <fstream>
+#include <cstring>
 
 // Disable all deprecation warnings for now.  Until we fix them,
 // they are quite annoying to see over and over again...
@@ -26,9 +27,9 @@ BEGIN_SLOTTABLE(FileWriter)
     "pathname",         // 2) Path to the data file directory (optional)
 END_SLOTTABLE(FileWriter)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(FileWriter)
-    ON_SLOT( 1, setFilename, Basic::String)   
+    ON_SLOT( 1, setFilename, Basic::String)
     ON_SLOT( 2, setPathName, Basic::String)
 END_SLOT_MAP()
 
@@ -72,7 +73,7 @@ void FileWriter::copyData(const FileWriter& org, const bool cc)
    fileOpened = false;
    fileFailed = false;
    eodFlag    = false;
-   setFullFilename(0); 
+   setFullFilename(0);
 
 }
 
@@ -386,7 +387,7 @@ void FileWriter::setFullFilename(const char* const name)
       fullFilename = 0;
    }
    if (name != 0) {
-      size_t n = strlen(name) + 1;
+      size_t n = std::strlen(name) + 1;
       fullFilename = new char[n];
       lcStrcpy(fullFilename, n, name);
    }

@@ -30,8 +30,10 @@
 
 #include "openeaagles/basic/units/Angles.h"
 #include "openeaagles/basic/units/Times.h"
+
 #include <string>
 #include <sstream>
+#include <cstring>
 
 // Disable all deprecation warnings for now.  Until we fix them,
 // they are quite annoying to see over and over again...
@@ -40,7 +42,7 @@
 #endif
 
 // ---
-// SIMLOGEVENT_B -- 
+// SIMLOGEVENT_B --
 // use this macro in place of IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS() for classes derived from SimLogger::SimLogEvent
 // ---
 #define SIMLOGEVENT_B(ThisType,FORMNAME)                                        \
@@ -84,7 +86,7 @@ BEGIN_SLOTTABLE(SimLogger)
    "includeExecTime",      // 4: record EXEC time for data ( default: true)   (Basic::Number)
 END_SLOTTABLE(SimLogger)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(SimLogger)
    ON_SLOT(1,  setSlotTimeline,        Basic::Identifier)
    ON_SLOT(2,  setSlotIncludeUtcTime,  Basic::Number)
@@ -97,9 +99,9 @@ SimLogger::SimLogger() : seQueue(MAX_QUEUE_SIZE)
 {
     STANDARD_CONSTRUCTOR()
     time = 0;
-    execTime = 0; 
-    simTime = 0;  
-    utcTime = 0;  
+    execTime = 0;
+    simTime = 0;
+    utcTime = 0;
     timeline = UTC;
     includeUtcTime = true;
     includeSimTime = true;
@@ -108,7 +110,7 @@ SimLogger::SimLogger() : seQueue(MAX_QUEUE_SIZE)
 
 // Copy Constructor
 SimLogger::SimLogger(const SimLogger& org) : seQueue(MAX_QUEUE_SIZE)
-{ 
+{
     STANDARD_CONSTRUCTOR()
     copyData(org,true);
 }
@@ -139,7 +141,7 @@ void SimLogger::copyData(const SimLogger& org, const bool)
     time = org.time;
     execTime = org.execTime;
     simTime = org.simTime;
-    utcTime = org.utcTime; 
+    utcTime = org.utcTime;
     timeline = org.timeline;
     includeUtcTime = org.includeUtcTime;
     includeSimTime = org.includeSimTime;
@@ -158,7 +160,7 @@ void SimLogger::updateTC(const LCreal dt)
 
     // Update the simulation time
     if (sim != 0) {
-        // Use the (UTC, SIM or EXEC) time 
+        // Use the (UTC, SIM or EXEC) time
         if (getTimeline() == UTC) time = sim->getSysTimeOfDay();
         else if (getTimeline() == SIM) time = sim->getSimTimeOfDay();
         else time = sim->getExecTimeSec();
@@ -318,23 +320,23 @@ std::ostream& SimLogger::serialize(std::ostream& sout, const int i, const bool s
     sout << std::endl;
 
     sout << "includeExecTime: ";
-    if (includeExecTime == true) 
+    if (includeExecTime == true)
         sout << "true";
-    else 
+    else
         sout << "false";
     sout << std::endl;
 
     sout << "includeUtcTime: ";
-    if (includeUtcTime == true) 
+    if (includeUtcTime == true)
         sout << "true";
-    else 
+    else
         sout << "false";
     sout << std::endl;
 
     sout << "includeSimTime: ";
-    if (includeSimTime == true) 
+    if (includeSimTime == true)
         sout << "true";
-    else 
+    else
         sout << "false";
 
     sout << std::endl;
@@ -374,7 +376,7 @@ SimLogger::SimLogEvent::SimLogEvent()
 }
 
 SimLogger::SimLogEvent::SimLogEvent(const SimLogEvent& org)
-{ 
+{
     STANDARD_CONSTRUCTOR()
     copyData(org,true);
 }
@@ -400,7 +402,7 @@ SimLogger::SimLogEvent* SimLogger::SimLogEvent::clone() const
 }
 
 //------------------------------------------------------------------------------
-// copyData() -- copy member data 
+// copyData() -- copy member data
 //------------------------------------------------------------------------------
 void SimLogger::SimLogEvent::copyData(const SimLogEvent& org, const bool cc)
 {
@@ -416,7 +418,7 @@ void SimLogger::SimLogEvent::copyData(const SimLogEvent& org, const bool cc)
     printExecTime = org.printExecTime;
 
     if (org.msg != 0) {
-        size_t len = strlen(org.msg);
+        size_t len = std::strlen(org.msg);
         msg = new char[len+1];
         lcStrcpy(msg,(len+1),org.msg);
     }
@@ -450,7 +452,7 @@ std::ostream& SimLogger::SimLogEvent::makeTimeMsg(std::ostream& sout)
 //------------------------------------------------------------------------------
 // makeExecTimeMsg() -- make the time string for EXEC time
 //------------------------------------------------------------------------------
-std::ostream& SimLogger::SimLogEvent::makeExecTimeMsg(std::ostream& sout)  
+std::ostream& SimLogger::SimLogEvent::makeExecTimeMsg(std::ostream& sout)
 {
     char cbuf[16];
     int hh = 0;     // Hours
@@ -466,9 +468,9 @@ std::ostream& SimLogger::SimLogEvent::makeExecTimeMsg(std::ostream& sout)
 }
 
 //------------------------------------------------------------------------------
-// makeUtcTimeMsg() -- make the time string for UTC time 
+// makeUtcTimeMsg() -- make the time string for UTC time
 //------------------------------------------------------------------------------
-std::ostream& SimLogger::SimLogEvent::makeUtcTimeMsg(std::ostream& sout)  
+std::ostream& SimLogger::SimLogEvent::makeUtcTimeMsg(std::ostream& sout)
 {
     char cbuf[16];
     int hh = 0;     // Hours
@@ -486,7 +488,7 @@ std::ostream& SimLogger::SimLogEvent::makeUtcTimeMsg(std::ostream& sout)
 //------------------------------------------------------------------------------
 // makeSimTimeMsg() -- make the time string for Simulation time
 //------------------------------------------------------------------------------
-std::ostream& SimLogger::SimLogEvent::makeSimTimeMsg(std::ostream& sout)  
+std::ostream& SimLogger::SimLogEvent::makeSimTimeMsg(std::ostream& sout)
 {
     char cbuf[16];
     int hh = 0;     // Hours
@@ -661,15 +663,15 @@ const char* SimLogger::NewPlayer::getDescription()
         // Time & Event message
         makeTimeMsg(sout);
         sout << " ADDED_PLAYER:\n";
-        
-        // Print the Player data    
+
+        // Print the Player data
         if (thePlayer != 0) {
             sout << "\tPlayer";
             makePlayerIdMsg(sout,thePlayer);
             makePlayerDataMsg(sout,pos,vel,angles);
             sout << "\n";
         }
-        
+
         // Complete the description
         int len = static_cast<int>(sout.str().size());
         msg = new char[len+1];
@@ -729,8 +731,8 @@ const char* SimLogger::LogPlayerData::getDescription()
         // Time & Event message
         makeTimeMsg(sout);
         sout << " PLAYER_DATA:\n";
-        
-        // Print the Player data    
+
+        // Print the Player data
         if (thePlayer != 0) {
             sout << "\tPlayer";
             makePlayerIdMsg(sout,thePlayer);
@@ -742,7 +744,7 @@ const char* SimLogger::LogPlayerData::getDescription()
             }
             sout << "\n";
         }
-        
+
         // Complete the description
         int len = static_cast<int>(sout.str().size());
         msg = new char[len+1];
@@ -811,8 +813,8 @@ const char* SimLogger::RemovePlayer::getDescription()
         // Time & Event message
         makeTimeMsg(sout);
         sout << " REMOVED_PLAYER:\n";
-        
-        // Print the Player Data      
+
+        // Print the Player Data
         if (thePlayer != 0) {
             sout << "\tPlayer";
             makePlayerIdMsg(sout, thePlayer);
@@ -945,8 +947,8 @@ const char* SimLogger::GunFired::getDescription()
         // Time & Event message
         makeTimeMsg(sout);
         sout << " GUN FIRED:";
-        
-        // Print the Player ID        
+
+        // Print the Player ID
         if (thePlayer != 0) {
             sout << " launcher";
             makePlayerIdMsg(sout, thePlayer);
@@ -1006,7 +1008,7 @@ const char* SimLogger::KillEvent::getDescription()
         // Time & Event message
         makeTimeMsg(sout);
         sout << " KILL_EVENT:";
-        
+
         // Print the Player ID
         if (thePlayer != 0) {
             sout << " launcher";
@@ -1180,7 +1182,7 @@ const char* SimLogger::NewTrack::getDescription()
             sout << "\n";
         }
 
-        // Target Information 
+        // Target Information
         if (theEmission != 0) {
             if (theEmission->getTarget() != 0) {
                 sout << "\tTarget";
@@ -1290,7 +1292,7 @@ const char* SimLogger::UpdateTrack::getDescription()
             sout << "\n";
         }
 
-        // Target Information 
+        // Target Information
         if (theEmission != 0) {
             if (theEmission->getTarget() != 0) {
                 sout << "\tTarget";
@@ -1400,7 +1402,7 @@ const char* SimLogger::RemovedTrack::getDescription()
             sout << "\n";
         }
 
-        // Target Information 
+        // Target Information
         if (theEmission != 0) {
             if (theEmission->getTarget() != 0) {
                 sout << "\tTarget";
@@ -1506,7 +1508,7 @@ const char* SimLogger::NewRwrTrack::getDescription()
             sout << "\n";
         }
 
-        // Target Information 
+        // Target Information
         if (theEmission != 0) {
             if (theEmission->getOwnship() != 0) {
                 sout << "\tTarget";
@@ -1610,7 +1612,7 @@ const char* SimLogger::UpdateRwrTrack::getDescription()
         // Time & Event message
         makeTimeMsg(sout);
         sout << " UPDATE_RWR_TRACK:\n";
-        
+
         // Player information
         if (thePlayer != 0) {
             sout << "\tPlayer";
@@ -1619,7 +1621,7 @@ const char* SimLogger::UpdateRwrTrack::getDescription()
             sout << "\n";
         }
 
-        // Target Information 
+        // Target Information
         if (theEmission != 0) {
             if (theEmission->getOwnship() != 0) {
                 sout << "\tTarget";
@@ -1723,7 +1725,7 @@ const char* SimLogger::RemovedRwrTrack::getDescription()
         // Time & Event message
         makeTimeMsg(sout);
         sout << " REMOVE_RWR_TRACK:\n";
-        
+
         // Player information
         if (thePlayer != 0) {
             sout << "\tPlayer";
@@ -1732,7 +1734,7 @@ const char* SimLogger::RemovedRwrTrack::getDescription()
             sout << "\n";
         }
 
-        // Target Information 
+        // Target Information
         if (theEmission != 0) {
             if (theEmission->getOwnship() != 0) {
                 sout << "\tTarget";

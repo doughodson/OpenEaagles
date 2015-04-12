@@ -1,4 +1,6 @@
+
 #include "openeaagles/basic/Identifier.h"
+#include <cstring>
 
 namespace Eaagles {
 namespace Basic {
@@ -29,7 +31,7 @@ Identifier::Identifier(const char* string) : String()
 void Identifier::setStr(const char* string)
 {
    size_t len = 0;
-   if (string != 0) len = strlen(string);
+   if (string != nullptr) len = std::strlen(string);
 
    // copy the string and replace any spaces
    if (len > 0) {
@@ -55,7 +57,7 @@ void Identifier::setStr(const char* string)
 void Identifier::catStr(const char* s)
 {
    // Early out if nothing to append
-   if (s == 0) return;
+   if (s == nullptr) return;
 
    // If this string was empty then we're really just setStr()
    if ( isEmpty() ) {
@@ -64,7 +66,7 @@ void Identifier::catStr(const char* s)
    }
 
    // replace any spaces
-   size_t len = strlen(s);
+   size_t len = std::strlen(s);
    char* newStr = new char[len+1];
    for (unsigned int i = 0; i < len; i++) {
       if (s[i] == ' ') newStr[i] = '_';

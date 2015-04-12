@@ -2,7 +2,9 @@
 #include "openeaagles/dafif/Record.h"
 #include "openeaagles/basic/Nav.h"
 #include "openeaagles/basic/String.h"
+
 #include <iostream>
+#include <cstring>
 
 namespace Eaagles {
 namespace Dafif {
@@ -16,14 +18,14 @@ EMPTY_SERIALIZER(Record)
 Record::Record()
 {
    STANDARD_CONSTRUCTOR()
-   ptbl = 0; 
+   ptbl = 0;
 }
 
 Record::Record(const char* const s)
 {
    STANDARD_CONSTRUCTOR()
 
-   ptbl = 0; 
+   ptbl = 0;
    setStr(s);
 }
 
@@ -34,7 +36,7 @@ void Record::copyData(const Record& org, const bool cc)
 {
    BaseClass::copyData(org);
    if (cc) {
-      ptbl = 0; 
+      ptbl = 0;
    }
    setStr( org );
    ptbl = org.ptbl;
@@ -58,7 +60,7 @@ void Record::resetData()
 }
 
 //------------------------------------------------------------------------------
-// setRecord() -- set our record string to 's'. 
+// setRecord() -- set our record string to 's'.
 //------------------------------------------------------------------------------
 void Record::setRecord(Basic::String* const s)
 {
@@ -66,7 +68,7 @@ void Record::setRecord(Basic::String* const s)
 }
 
 //------------------------------------------------------------------------------
-// setRecord() -- set our record string to 's'. 
+// setRecord() -- set our record string to 's'.
 //------------------------------------------------------------------------------
 void Record::setRecord(const char* const s)
 {
@@ -306,7 +308,7 @@ float Record::dsChan2freq(const int chan, const char type)
 
 
 //------------------------------------------------------------------------------
-// dsAtofn() -- convert n-characters to float  
+// dsAtofn() -- convert n-characters to float
 //------------------------------------------------------------------------------
 double Record::dsAtofn(const char* const s, const int n)
 {
@@ -324,7 +326,7 @@ double Record::dsAtofn(const char* const s, const int n)
 
 
 //------------------------------------------------------------------------------
-// dsAtoln() -- convert n-characters to long  
+// dsAtoln() -- convert n-characters to long
 //------------------------------------------------------------------------------
 long Record::dsAtoln(const char* const s, const int n)
 {
@@ -342,15 +344,15 @@ long Record::dsAtoln(const char* const s, const int n)
 
 
 //------------------------------------------------------------------------------
-// dsGetString() -- like strncpy() with 0 char* checking and the    
-// spaces removed from the tail of the string.                         
+// dsGetString() -- like strncpy() with 0 char* checking and the
+// spaces removed from the tail of the string.
 //------------------------------------------------------------------------------
 void Record::dsGetString(char* const d, const char* const s, const int n)
 {
-   // Make sure we have a place to copy it 
+   // Make sure we have a place to copy it
    if (d == 0) return;
 
-   // Make sure we have something to copy 
+   // Make sure we have something to copy
    if (s == 0 || n <= 0) {
       d[0] = '\0';
       return;
@@ -359,31 +361,31 @@ void Record::dsGetString(char* const d, const char* const s, const int n)
    // Set temp pointers
    const char* p = s;
    char*       q = d;
-   
-   // copy the string 
+
+   // copy the string
    for (int i = 0; i < n; i++) { *q++ = *p++; }
 
-   // terminate the string 
+   // terminate the string
    *q-- = '\0';
 
-   // strip spaces of the tail 
+   // strip spaces of the tail
    for (; q >= d && *q == ' '; q--) { *q = '\0'; }
 }
 
 
 //------------------------------------------------------------------------------
-// dsIsString() -- true if string p matches refStr                  
+// dsIsString() -- true if string p matches refStr
 //------------------------------------------------------------------------------
 bool Record::dsIsString(const char* const p, const char* const refStr)
 {
    size_t len;
    if (p == 0 || refStr == 0) return false;
-   len = strlen(refStr);
+   len = std::strlen(refStr);
    return strncmp(p,refStr,len) == 0;
 }
 
 //------------------------------------------------------------------------------
-// dsLatitude() -- convert string to latitude                          
+// dsLatitude() -- convert string to latitude
 //------------------------------------------------------------------------------
 double Record::dsLatitude(const char* const p)
 {
@@ -401,7 +403,7 @@ double Record::dsLatitude(const char* const p)
 }
 
 //------------------------------------------------------------------------------
-// dsLongitude() --  convert string to longitude                      
+// dsLongitude() --  convert string to longitude
 //------------------------------------------------------------------------------
 double Record::dsLongitude(const char* const p)
 {
@@ -419,7 +421,7 @@ double Record::dsLongitude(const char* const p)
 }
 
 //------------------------------------------------------------------------------
-// dsMagVariance() --  convert string to magnetic variation           
+// dsMagVariance() --  convert string to magnetic variation
 //------------------------------------------------------------------------------
 float Record::dsMagVariance(const char* const p)
 {
@@ -435,7 +437,7 @@ float Record::dsMagVariance(const char* const p)
 }
 
 //------------------------------------------------------------------------------
-// dsSlaveVariance() -- convert string to slave magnetic variation     
+// dsSlaveVariance() -- convert string to slave magnetic variation
 //------------------------------------------------------------------------------
 float Record::dsSlaveVariance(const char* const p)
 {
@@ -450,7 +452,7 @@ float Record::dsSlaveVariance(const char* const p)
 }
 
 //------------------------------------------------------------------------------
-// dsMagHeading() -- magnetic heading                                  
+// dsMagHeading() -- magnetic heading
 //------------------------------------------------------------------------------
 float Record::dsMagHeading(const char* const p)
 {
@@ -465,7 +467,7 @@ float Record::dsMagHeading(const char* const p)
 }
 
 //------------------------------------------------------------------------------
-// dsElevation() -- format#1: convert string to elevation (to nearest foot) 
+// dsElevation() -- format#1: convert string to elevation (to nearest foot)
 //------------------------------------------------------------------------------
 float Record::dsElevation(const char* const p)
 {
@@ -479,8 +481,8 @@ float Record::dsElevation(const char* const p)
 }
 
 //------------------------------------------------------------------------------
-// dsElevation1() -- format#2: convert string to elevation (to tenths  
-// of feet)                                                            
+// dsElevation1() -- format#2: convert string to elevation (to tenths
+// of feet)
 //------------------------------------------------------------------------------
 float Record::dsElevation1(const char* const p)
 {
@@ -500,13 +502,13 @@ float Record::dsElevation1(const char* const p)
 
    if (*p == '-')
       return static_cast<float>(-(e + et/10.0));
-   else 
+   else
       return static_cast<float>(e + et/10.0);
 }
 
 
 //------------------------------------------------------------------------------
-// dsFrequency() -- convert string to frequency  (MHz)   
+// dsFrequency() -- convert string to frequency  (MHz)
 //------------------------------------------------------------------------------
 float Record::dsFrequency(const char* const p)
 {

@@ -28,6 +28,7 @@
 #include "openeaagles/basic/units/Angles.h"
 #include "openeaagles/basic/units/Distances.h"
 #include "openeaagles/basic/units/Times.h"
+
 #include <cstring>
 
 #if !defined(WIN32)
@@ -1559,7 +1560,7 @@ NtmOutputNodeStd::NtmOutputNodeStd(const Player* const p, const char* const name
    tp = 0;
 
    if (name != 0) {
-      const size_t LENGTH = strlen(name) + 1;
+      const size_t LENGTH = std::strlen(name) + 1;
       nodeFactoryName = new char[LENGTH];
       lcStrcpy(nodeFactoryName,LENGTH,name);
    }
@@ -1589,7 +1590,7 @@ void NtmOutputNodeStd::copyData(const NtmOutputNodeStd& org, const bool cc)
       nodeFactoryName = 0;
    }
    if (org.nodeFactoryName != 0) {
-      const size_t LENGTH = strlen(org.nodeFactoryName) + 1;
+      const size_t LENGTH = std::strlen(org.nodeFactoryName) + 1;
       nodeFactoryName = new char[LENGTH];
       lcStrcpy(nodeFactoryName,LENGTH,org.nodeFactoryName);
    }

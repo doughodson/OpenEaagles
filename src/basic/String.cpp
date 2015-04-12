@@ -1,6 +1,7 @@
 #include "openeaagles/basic/String.h"
 
 #include <cstdlib>
+#include <cstring>
 
 namespace Eaagles {
 namespace Basic {
@@ -113,7 +114,7 @@ void String::setString(const String& origStr, const size_t w, const Justify j)
 
    int i1 = 0;                  // Source index
    int i2 = 0;                  // Destination index
-   int l1 = int(strlen(ss));    // Source string length
+   int l1 = int(std::strlen(ss));    // Source string length
    if (l1 > MAX_STRING_LENGTH) l1 = MAX_STRING_LENGTH;
    int l2 = int(w);             // Destination string length
    if (l2 > MAX_STRING_LENGTH) l2 = MAX_STRING_LENGTH;
@@ -186,7 +187,7 @@ void String::setStr(const char* string)
 {
    // copy the new text string
    if (string != 0) {
-      size_t l = strlen(string);
+      size_t l = std::strlen(string);
       if (l >= nn || str == 0) {
          if (str != 0) delete[] str;
          nn = (l+1);
@@ -217,7 +218,7 @@ void String::catStr(const char* s)
    }
 
    // Have new text to append to the original text
-   size_t l = n + strlen(s);
+   size_t l = n + std::strlen(s);
    if (l >= nn) {
       char* t = str;
       nn = (l+1);

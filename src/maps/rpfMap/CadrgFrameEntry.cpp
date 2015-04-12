@@ -4,6 +4,7 @@
 
 #include "openeaagles/maps/rpfMap/CadrgFrameEntry.h"
 #include "openeaagles/maps/rpfMap/CadrgFrame.h"
+#include <cstring>
 
 namespace Eaagles {
 namespace Maps {
@@ -68,10 +69,10 @@ void CadrgFrameEntry::deleteData()
 void CadrgFrameEntry::setPathName(const char* dir, const char* file)
 {
     exists = true;
-    directory = new char[strlen(dir) + 1];
-    strncpy(directory, dir, strlen(dir));
-    directory[strlen(dir)] = '\0';
-    strncpy(filename, file, 15);
+    directory = new char[std::strlen(dir) + 1];
+    std::strncpy(directory, dir, std::strlen(dir));
+    directory[std::strlen(dir)] = '\0';
+    std::strncpy(filename, file, 15);
     filename[15] = '\0';
 }
 

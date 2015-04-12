@@ -20,6 +20,8 @@
 #include "openeaagles/basic/units/Times.h"
 
 #include <cstdlib>
+#include <cstring>
+#include <cctype>
 
 namespace Eaagles {
 namespace Network {
@@ -802,7 +804,7 @@ bool NetIO::parseFederateName(unsigned short* const site, unsigned short* const 
       if (ok) {
          unsigned int tmp = 0;
          unsigned int cnt = 0;
-         while (cnt < 5 && isdigit(fedName[idx])) {
+         while (cnt < 5 && std::isdigit(fedName[idx])) {
             tmp *= 10;
             tmp += int(fedName[idx++] - '0');
             cnt++;
@@ -816,7 +818,7 @@ bool NetIO::parseFederateName(unsigned short* const site, unsigned short* const 
       if (ok) {
          unsigned int tmp = 0;
          unsigned int cnt = 0;
-         while (cnt < 5 && isdigit(fedName[idx])) {
+         while (cnt < 5 && std::isdigit(fedName[idx])) {
             tmp *= 10;
             tmp += int(fedName[idx++] - '0');
             cnt++;
@@ -888,7 +890,7 @@ bool NetIO::parseFederationName(unsigned short* const exercise, const char* cons
       if (ok) {
          unsigned int tmp = 0;
          unsigned int cnt = 0;
-         while (cnt < 5 && isdigit(fedName[idx])) {
+         while (cnt < 5 && std::isdigit(fedName[idx])) {
             tmp *= 10;
             tmp += int(fedName[idx++] - '0');
             cnt++;
@@ -1700,10 +1702,10 @@ bool NetIO::slot2KD(const char* const slotname, unsigned char* const kind, unsig
 {
    bool ok = false;
    if (slotname != 0 && kind != 0) {
-      size_t len = strlen(slotname);
+      size_t len = std::strlen(slotname);
       bool haveTheK = (len > 0 && (slotname[0] == 'K' || slotname[0] == 'k') );
       bool haveTheD = (len > 2 && (slotname[2] == 'D' || slotname[2] == 'd') );
-      if (haveTheK && isdigit(slotname[1]) && (len == 2 || haveTheD)) {
+      if (haveTheK && std::isdigit(slotname[1]) && (len == 2 || haveTheD)) {
          // Ok, we have a single digit (kind)
          unsigned char k = static_cast<unsigned char>(slotname[1] - '0');
          if (k < NUM_ENTITY_KINDS) {
@@ -1713,7 +1715,7 @@ bool NetIO::slot2KD(const char* const slotname, unsigned char* const kind, unsig
                // so we should have a domain value ...
                bool isNum = true;
                for (int i = 3; isNum && slotname[i] != '\0'; i++) {
-                  if ( !isdigit(slotname[i]) ) isNum = false;
+                  if ( !std::isdigit(slotname[i]) ) isNum = false;
                }
                if (isNum) {
                   int d = std::atoi(&slotname[3]);
@@ -1919,7 +1921,7 @@ void NetIO::testOutputEntityTypes(const unsigned int n)
                lcStrcpy(cbuff, 64, origType->getString());
 
 #if 0 /* optionally increment the last character to look for generic matches */
-               size_t ll = strlen(cbuff);
+               size_t ll = std::strlen(cbuff);
                if (ll > 1) {
                   cbuff[ll-1]++;
                }

@@ -32,6 +32,7 @@
 #include "openeaagles/basic/Number.h"
 
 #include <cstdio>
+#include <cstring>
 
 namespace Eaagles {
 namespace Basic {
@@ -114,7 +115,7 @@ void PosixHandler::copyData(const PosixHandler& org, const bool cc)
     if (localIpAddr != 0) delete[] localIpAddr;
     localIpAddr = 0;
     if (org.localIpAddr != 0) {
-        size_t len = strlen(org.localIpAddr);
+        size_t len = std::strlen(org.localIpAddr);
         localIpAddr = new char[len+1];
         lcStrcpy(localIpAddr,(len+1),org.localIpAddr);
     }

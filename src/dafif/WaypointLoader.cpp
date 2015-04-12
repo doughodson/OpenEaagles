@@ -159,7 +159,7 @@ int WaypointLoader::queryByRange()
 {
    double mr2(FLT_MAX);
    if (mrng > 0.0f) mr2 = mrng*mrng;
-   
+
    // compute range**2 to ref point and select all that have range less
    // than maxRange
    nql = 0;
@@ -176,7 +176,7 @@ int WaypointLoader::queryByRange()
 
    // limit number of result records
    if (qlimit > 0 && nql > qlimit) nql = qlimit;
-   
+
    return nql;
 }
 
@@ -222,8 +222,8 @@ int WaypointLoader::il_cmp(const void* p1, const void* p2)
    const WaypointKey* k1 = *(static_cast<const WaypointKey**>(const_cast<void*>(p1)));
    const WaypointKey* k2 = *(static_cast<const WaypointKey**>(const_cast<void*>(p2)));
 
-   // compare the ids 
-   int result = strcmp(k1->ident, k2->ident);
+   // compare the ids
+   int result = std::strcmp(k1->ident, k2->ident);
 
    // if equal then check the country codes (only if k1 has one)
    if (result == 0 && k1->countryCode[0] != '\0') {
@@ -257,7 +257,7 @@ void WaypointLoader::printResults(std::ostream& sout)
 
 
 //------------------------------------------------------------------------------
-// WaypointLoader::WaypointKey 
+// WaypointLoader::WaypointKey
 //------------------------------------------------------------------------------
 WaypointLoader::WaypointKey::WaypointKey(
          const long idx, const Waypoint& waypoint) : Key(idx)

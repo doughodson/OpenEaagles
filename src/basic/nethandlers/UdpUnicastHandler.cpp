@@ -30,6 +30,7 @@
 #include "openeaagles/basic/PairStream.h"
 #include "openeaagles/basic/String.h"
 #include <cstdio>
+#include <cstring>
 
 namespace Eaagles {
 namespace Basic {
@@ -44,7 +45,7 @@ BEGIN_SLOTTABLE(UdpUnicastHandler)
                         //    the Internet standard "." (dotted) notation.
 END_SLOTTABLE(UdpUnicastHandler)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(UdpUnicastHandler)
     ON_SLOT(1,setSlotIpAddress,String)
 END_SLOT_MAP()
@@ -66,13 +67,13 @@ void UdpUnicastHandler::copyData(const UdpUnicastHandler& org, const bool cc)
 
     if (cc) {
         ipAddr = 0;
-    }  
+    }
 
     // IP Address
     if (ipAddr != 0) delete[] ipAddr;
     ipAddr = 0;
     if (org.ipAddr != 0) {
-        size_t len = strlen(org.ipAddr);
+        size_t len = std::strlen(org.ipAddr);
         ipAddr = new char[len+1];
         lcStrcpy(ipAddr,(len+1),org.ipAddr);
     }
@@ -119,7 +120,7 @@ bool UdpUnicastHandler::init()
 
 // -------------------------------------------------------------
 // bindSocket() -- bind the socket to an address, and configure
-// the send and receive buffers. 
+// the send and receive buffers.
 // -------------------------------------------------------------
 bool UdpUnicastHandler::bindSocket()
 {
@@ -133,7 +134,7 @@ bool UdpUnicastHandler::bindSocket()
        bzero(&addr, sizeof(addr));
        addr.sin_family = AF_INET;
        addr.sin_addr.s_addr = getLocalAddr();
-       if (getLocalPort() != 0) addr.sin_port = htons (getLocalPort());  
+       if (getLocalPort() != 0) addr.sin_port = htons (getLocalPort());
        else addr.sin_port = htons(getPort());
 
        if (::bind(socketNum, reinterpret_cast<const struct sockaddr*>(&addr), sizeof(addr)) == SOCKET_ERROR) {
@@ -166,7 +167,7 @@ bool UdpUnicastHandler::sendDataTo(
     bzero(&addr, sizeof(addr));
     addr.sin_family = AF_INET;
     addr.sin_addr.s_addr = ip0;
-    addr.sin_port = htons(port0); 
+    addr.sin_port = htons(port0);
     socklen_t addrlen = sizeof(addr);
     int result = ::sendto(socketNum, packet, size, 0, reinterpret_cast<const struct sockaddr*>(&addr), addrlen);
     if (result == SOCKET_ERROR) {
@@ -194,9 +195,9 @@ bool UdpUnicastHandler::sendDataTo(
 bool UdpUnicastHandler::setSlotIpAddress(const String* const msg)
 {
     bool ok = false;
-    if (msg != 0) { 
+    if (msg != 0) {
         if (ipAddr != 0) delete[] ipAddr;
-        ipAddr = msg->getCopyString(); 
+        ipAddr = msg->getCopyString();
         ok = true;
     }
     return ok;

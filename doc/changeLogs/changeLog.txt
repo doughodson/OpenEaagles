@@ -8,6 +8,14 @@ general
 - renamed the 'vehicles' library to 'dynamics' to more correctly reflect
   provided functionality
 
+- added 'override' context keyword across the framework
+
+- added 'nullptr' across the framework
+
+- added more 'std::' namespace qualifiers
+
+- expanded contents of both Tables and Functions and placed into basic/functors
+ 
 --------------------------------------------------------------------------------
 basic
 

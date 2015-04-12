@@ -31,6 +31,7 @@
 #include "openeaagles/basic/Pair.h"
 #include "openeaagles/basic/PairStream.h"
 #include "openeaagles/basic/String.h"
+#include <cstring>
 
 namespace Eaagles {
 namespace Basic {
@@ -42,7 +43,7 @@ BEGIN_SLOTTABLE(TcpClient)
                     //    the Internet standard "." (dotted) notation.
 END_SLOTTABLE(TcpClient)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(TcpClient)
     ON_SLOT(1,setSlotIpAddress,String)
 END_SLOT_MAP()
@@ -69,7 +70,7 @@ void TcpClient::copyData(const TcpClient& org, const bool cc)
     if (ipAddr != 0) delete[] ipAddr;
     ipAddr = 0;
     if (org.ipAddr != 0) {
-        size_t len = strlen(org.ipAddr);
+        size_t len = std::strlen(org.ipAddr);
         ipAddr = new char[len+1];
         lcStrcpy(ipAddr,(len+1),org.ipAddr);
     }
@@ -85,7 +86,7 @@ void TcpClient::deleteData()
 }
 
 //------------------------------------------------------------------------------
-// Initialize this multicast handler -- 
+// Initialize this multicast handler --
 //------------------------------------------------------------------------------
 bool TcpClient::initNetwork(const bool noWaitFlag)
 {
@@ -118,7 +119,7 @@ bool TcpClient::init()
 
 // -------------------------------------------------------------
 // bindSocket() -- bind the socket to an address, and configure
-// the send and receive buffers. 
+// the send and receive buffers.
 // -------------------------------------------------------------
 bool TcpClient::bindSocket()
 {
@@ -129,7 +130,7 @@ bool TcpClient::bindSocket()
 
    if (ok) {
       if (!setSendBuffSize()) return false;
-   
+
       if (!setRecvBuffSize()) return false;
    }
 
@@ -152,7 +153,7 @@ bool TcpClient::connectToServer()
    bzero(&addr, sizeof(addr));
    addr.sin_family = AF_INET;
    addr.sin_addr.s_addr = getNetAddr();
-   addr.sin_port = htons(getPort()); 
+   addr.sin_port = htons(getPort());
 
    if (isMessageEnabled(MSG_INFO)) {
       std::cout << "Connecting to TCP server at " << ipAddr << ":" << getPort() << " ... " << std::flush;
@@ -188,8 +189,8 @@ bool TcpClient::connectToServer()
 bool TcpClient::setSlotIpAddress(const String* const msg)
 {
     bool ok = false;
-    if (msg != 0) { 
-        ipAddr = msg->getCopyString(); 
+    if (msg != 0) {
+        ipAddr = msg->getCopyString();
         ok = true;
     }
     return ok;

@@ -4,6 +4,7 @@
 
 #include "openeaagles/basic/support.h"
 #include <fstream>
+#include <cstring>
 
 //------------------------------------------------------------------------------
 // Window/Linux specific code
@@ -42,7 +43,7 @@ double getTimeUtc(unsigned int* const day, unsigned int* const month, unsigned i
 }
 
 //------------
-// Get UTC time since midnight (00:00:00), January 1, 1970 
+// Get UTC time since midnight (00:00:00), January 1, 1970
 //------------
 double getTime()
 {
@@ -566,7 +567,7 @@ void lcInteger2Str(const int num, char* const str, int width)
    int tnum = num;
    if (isNeg) tnum = -num;
 
-   // Convert to a string (reverse order) 
+   // Convert to a string (reverse order)
    char temp[MAX_CHARS];
    int nc = 0;
    do {
@@ -594,7 +595,7 @@ void lcInteger2Str(const int num, char* const str, int width)
 //------------
 // String copy function: Copies a string from the source, 'strSource', to the
 // destination buffer, 'strDest'.  The destination string is null terminated.
-// The 'strSource' string will be truncated if the 'strDest' string is too small. 
+// The 'strSource' string will be truncated if the 'strDest' string is too small.
 //------------
 bool lcStrcpy(char* const strDest, const size_t sizeOfDest, const char* const strSource)
 {
@@ -609,19 +610,19 @@ bool lcStrcpy(char* const strDest, const size_t sizeOfDest, const char* const st
    char* q = strDest;
    const char* p = strSource;
 
-   // Everything looks good, copy... 
+   // Everything looks good, copy...
    size_t idx = 0;
    while (idx++ < maxToCopy && (*q++ = *p++) != '\0') {}
    *q = '\0'; // null terminate
 
-   return true;   // Good result 
+   return true;   // Good result
 }
 
 //------------
 // String N copy function: Copies up to 'count' characters from the source string,
 // 'strSource', to the destination buffer, 'strDest'.  The new destination string
 // is null terminated.  The 'strSource' string will be truncated if the 'strDest'
-// string is too small. 
+// string is too small.
 //------------
 bool lcStrncpy(char* const strDest, const size_t sizeOfDest, const char* const strSource, const size_t count)
 {
@@ -637,12 +638,12 @@ bool lcStrncpy(char* const strDest, const size_t sizeOfDest, const char* const s
    char* q = strDest;
    const char* p = strSource;
 
-   // Everything looks good, copy... 
+   // Everything looks good, copy...
    size_t idx = 0;
    while (idx++ < maxToCopy && (*q++ = *p++) != '\0') {}
    *q = '\0'; // null terminate
 
-   return true;   // Good result 
+   return true;   // Good result
 }
 
 //------------
@@ -675,7 +676,7 @@ bool lcStrcat(char* const strDest, const size_t sizeOfDest, const char* const st
       // Back space for the original string's null character
       --q;
 
-      // Everything looks good, copy... 
+      // Everything looks good, copy...
       while (idx++ < maxToCopy && (*q++ = *p++) != '\0') {}
       *q = '\0'; // null terminate
    }
@@ -696,7 +697,7 @@ bool lcStrcpyFull(char* const strDest, const size_t sizeOfDest, const char* cons
    }
 
    // do we have space for the full string plus termination?
-   const size_t srcSize = strlen(strSource);
+   const size_t srcSize = std::strlen(strSource);
    if (sizeOfDest < (srcSize+1)) return false;
 
    // Max characters to copy
@@ -706,12 +707,12 @@ bool lcStrcpyFull(char* const strDest, const size_t sizeOfDest, const char* cons
    char* q = strDest;
    const char* p = strSource;
 
-   // Everything looks good, copy... 
+   // Everything looks good, copy...
    size_t idx = 0;
    while (idx++ < maxToCopy && (*q++ = *p++) != '\0') {}
    *q = '\0'; // null terminate
 
-   return true;   // Good result 
+   return true;   // Good result
 }
 
 //------------
@@ -737,12 +738,12 @@ bool lcStrncpyFull(char* const strDest, const size_t sizeOfDest, const char* con
    char* q = strDest;
    const char* p = strSource;
 
-   // Everything looks good, copy... 
+   // Everything looks good, copy...
    size_t idx = 0;
    while (idx++ < maxToCopy && (*q++ = *p++) != '\0') {}
    *q = '\0'; // null terminate
 
-   return true;   // Good result 
+   return true;   // Good result
 }
 
 //------------
@@ -770,7 +771,7 @@ bool lcStrcatFull(char* const strDest, const size_t sizeOfDest, const char* cons
    while (*q++ != '\0' && idx++ < maxToCopy) {}
 
    // do we have space for the full string plus termination?
-   const size_t srcSize = strlen(strSource);
+   const size_t srcSize = std::strlen(strSource);
 
    // if we have room for both strings ...
    bool ok = ((idx+srcSize) <= maxToCopy);
@@ -779,7 +780,7 @@ bool lcStrcatFull(char* const strDest, const size_t sizeOfDest, const char* cons
       // Back space for the original string's null character
       --q;
 
-      // Everything looks good, copy... 
+      // Everything looks good, copy...
       while (idx++ < maxToCopy && (*q++ = *p++) != '\0') {}
       *q = '\0'; // null terminate
    }
@@ -836,7 +837,7 @@ int lcStrncasecmp(const char* const s1, const char* const s2, const size_t n)
 
 //------------
 // returns number of digits in the whole number part (i.e. left of decimal)
-// of a floating point number 
+// of a floating point number
 //------------
 unsigned int getDigits(const double x)
 {

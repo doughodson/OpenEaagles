@@ -10,6 +10,7 @@
 
 #include <cstdio>
 #include <cstdlib>
+#include <cstring>
 
 // Disable all deprecation warnings for now.  Until we fix them,
 // they are quite annoying to see over and over again...
@@ -205,7 +206,7 @@ BEGIN_SLOTTABLE(NumericReadout)
    "minusChar",        //  5: Negative value character
    "dpChar",           //  6: Decimal Point character
    "undefinedChar",    //  7: Undefined value character
-   "overflowChar",     //  8: Overflow character  
+   "overflowChar",     //  8: Overflow character
    "maxValid",         //  9: Maximum valid input
    "minValid",         // 10: Minimum valid input
    "blankIfZero",      // 11: Display blanks if value is zero
@@ -230,8 +231,8 @@ END_SLOT_MAP()
 // Event handlers for NumericReadout events
 BEGIN_EVENT_HANDLER(NumericReadout)
 ON_EVENT_OBJ(UPDATE_VALUE,onUpdateValue, Basic::Float)
-ON_EVENT_OBJ(UPDATE_VALUE,onUpdateValue, Basic::Integer)    
-ON_EVENT_OBJ(UPDATE_VALUE,onUpdateValue, Basic::Number)    
+ON_EVENT_OBJ(UPDATE_VALUE,onUpdateValue, Basic::Integer)
+ON_EVENT_OBJ(UPDATE_VALUE,onUpdateValue, Basic::Number)
 END_EVENT_HANDLER()
 
 //------------------------------------------------------------------------------
@@ -383,7 +384,7 @@ double NumericReadout::getInputValue() const
 }
 
 //------------------------------------------------------------------------------
-// redisplay() -- redisplay the value 
+// redisplay() -- redisplay the value
 //------------------------------------------------------------------------------
 void NumericReadout::redisplay()
 {
@@ -423,7 +424,7 @@ void NumericReadout::redisplay()
    // Create the readout text string
    makeText();
 
-   size_t len = strlen(cbuf);
+   size_t len = std::strlen(cbuf);
 
    // When we have a replacement char for the sign character
    if (plusChar != '\0' || minusChar != '\0' || postSign) {
@@ -997,7 +998,7 @@ TimeReadout::TimeReadout()
 
    lcStrcpy(format,FORMAT_LENGTH,"%02d:%02d:%04.1f");
    tmode = hhmmss;
-} 
+}
 
 void TimeReadout::copyData(const TimeReadout& org, const bool)
 {
@@ -1323,7 +1324,7 @@ void DirectionReadout::makeText()
    bool neg = false;
    double degrees = getFloat();
    if (degrees < 0.0) {
-      degrees = -degrees; 
+      degrees = -degrees;
       neg = true;
    }
 
@@ -1357,7 +1358,7 @@ void DirectionReadout::makeText()
 
    // then turn any '@' characters to degree symbols.
    {
-      size_t len = strlen(cbuf);
+      size_t len = std::strlen(cbuf);
       for (unsigned int i = 0; i < len; i++) {
          if (cbuf[i] == '@') cbuf[i] = char(0xB0);
       }
@@ -1491,9 +1492,9 @@ Rotary::Rotary()
 // draw() -- draw our graphics
 //------------------------------------------------------------------------------
 
-// Rotary - we do this "pre-draw" of all of our possible selections, that will 
+// Rotary - we do this "pre-draw" of all of our possible selections, that will
 // eliminate the "flicker" on the first selection of the item, because we will have
-// already drawn the item one time before (here). 
+// already drawn the item one time before (here).
 void Rotary::draw()
 {
    if (preDrawSelectList) {

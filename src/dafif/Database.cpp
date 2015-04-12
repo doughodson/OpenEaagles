@@ -22,7 +22,7 @@ BEGIN_SLOTTABLE(Database)
     "filename",      // 2) File name (appended to pathname)
 END_SLOTTABLE(Database)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(Database)
     ON_SLOT(1,setSlotPathname,Basic::String)
     ON_SLOT(2,setSlotFilename,Basic::String)
@@ -47,7 +47,7 @@ Database::Database()
    ql = 0;
    nql = 0;
    qlimit = 0;
-   
+
    refLat = 0.0f;
    refLon = 0.0f;
    coslat = 1.0f;
@@ -77,7 +77,7 @@ void Database::copyData(const Database& org, const bool cc)
    ql = 0;
    nql = 0;
    qlimit = 0;
-   
+
    refLat = 0.0f;
    refLon = 0.0f;
    coslat = 1.0f;
@@ -285,7 +285,7 @@ void Database::stripSpaces(char buff[], const int n)
 //------------------------------------------------------------------------------
 void Database::fillSpaces(char buff[], const int n)
 {
-   for (int i = static_cast<int>(strlen(buff)); i < n; buff[i++] = ' ');
+   for (int i = static_cast<int>(std::strlen(buff)); i < n; buff[i++] = ' ');
    buff[n] = '\0';
 }
 
@@ -337,7 +337,7 @@ bool Database::setSlotFilename(Basic::String* const msg)
 //------------------------------------------------------------------------------
 // query functions ---
 //------------------------------------------------------------------------------
-   
+
 // Single query -- when you want only a single instance of a record that
 // matches the key.
 int Database::sQuery(Key** key, Key** base,
@@ -559,7 +559,7 @@ std::ostream& Database::serialize(std::ostream& sout, const int i, const bool sl
 }
 
 //------------------------------------------------------------------------------
-// Database::Key 
+// Database::Key
 //------------------------------------------------------------------------------
 Database::Key::Key(const int idx1)
 {
@@ -609,7 +609,7 @@ void Database::Key::serialize(std::ostream& sout) const
 
    sout << lat << ", ";
    sout << lon << "  ";
-   
+
    sout << rng2;
 
    sout << std::endl;

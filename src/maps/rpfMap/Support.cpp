@@ -4,7 +4,8 @@
 
 #include "openeaagles/maps/rpfMap/Support.h"
 #include <ctype.h>
-#include <string.h>
+#include <cctype>
+#include <cstring>
 
 namespace Eaagles {
 namespace Maps {
@@ -15,7 +16,7 @@ namespace Rpf {
 // -----------------------------------------------------------
 void swap(unsigned char *ptr, int count)
 {
-    unsigned char   *end, temp;
+    unsigned char *end, temp;
 
     end = &ptr[count - 1];
     while (end > ptr)
@@ -33,9 +34,9 @@ void swap(unsigned char *ptr, int count)
 // ----------------------------------------------------------------
 char* stringToLowercase(char* str)
 {
-    size_t len = strlen(str);
+    size_t len = std::strlen(str);
     for (size_t i = 0; i < len; i++) {
-        if (isascii(str[i]) && isalpha(str[i])) str[i] = tolower(str[i]);
+        if (isascii(str[i]) && std::isalpha(str[i])) str[i] = std::tolower(str[i]);
     }
 
     return str;

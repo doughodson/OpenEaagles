@@ -57,8 +57,8 @@ public:
       const LCreal value,      // Value
       const LCreal minValue,   // Minimum Value
       const LCreal maxValue,   // Maximum Value
-      const Hsva& minColor,  // Minimum HSV color
-      const Hsva& maxColor   // Minimum HSV color
+      const Hsva& minColor,    // Minimum HSV color
+      const Hsva& maxColor     // Minimum HSV color
     );
 };
 

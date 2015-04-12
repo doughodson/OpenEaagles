@@ -1,6 +1,7 @@
 // Image
 #include "openeaagles/basicGL/Image.h"
 #include <fstream>
+#include <cstring>
 
 // if OpenGL extension is not defined by glu.h, try loading glext.h
 #ifndef GL_BGR_EXT
@@ -42,7 +43,7 @@ struct BITMAPINFOHEADER_X {
 //
 //#endif
 
-// Byte swap check 
+// Byte swap check
 // -- returns true if this computer's byte order is big endian.
 static bool checkSwap()
 {
@@ -251,19 +252,19 @@ bool Image::readFileBMP(const char* const filename, const char* const path)
 
    // append path name
    const char* p1 = path;
-   if (p1 != 0 && strlen(p1) > 0) {
+   if (p1 != 0 && std::strlen(p1) > 0) {
       lcStrcat(bitmapFile, sizeof(bitmapFile), p1);
       lcStrcat(bitmapFile, sizeof(bitmapFile), "/");
    }
 
    // append file name
    const char* p2 = filename;
-   if (p2 != 0 && strlen(p2) > 0) {
+   if (p2 != 0 && std::strlen(p2) > 0) {
       lcStrcat(bitmapFile, sizeof(bitmapFile), p2);
    }
 
    // Do we have a full path name?
-   if (strlen(bitmapFile) <= 1) {
+   if (std::strlen(bitmapFile) <= 1) {
       if (isMessageEnabled(MSG_ERROR)) {
          std::cerr << "Image::readFileBMP(): invalid file name: " << bitmapFile << std::endl;
       }
@@ -396,19 +397,19 @@ bool Image::writeFileBMP(const char* const filename, const char* const path)
 
    // append path name
    const char* p1 = path;
-   if (p1 != 0 && strlen(path) > 0) {
+   if (p1 != 0 && std::strlen(path) > 0) {
       lcStrcat(bitmapFile, sizeof(bitmapFile), p1);
       lcStrcat(bitmapFile, sizeof(bitmapFile), "/");
    }
 
    // append file name
    const char* p2 = filename;
-   if (p2 != 0 && strlen(p2) > 0) {
+   if (p2 != 0 && std::strlen(p2) > 0) {
       lcStrcat(bitmapFile, sizeof(bitmapFile), p2);
    }
 
    // Do we have a full path name?
-   if (strlen(bitmapFile) <= 1) {
+   if (std::strlen(bitmapFile) <= 1) {
       if (isMessageEnabled(MSG_ERROR)) {
          std::cerr << "Image::writeFileBMP(): invalid file name: " << bitmapFile << std::endl;
       }

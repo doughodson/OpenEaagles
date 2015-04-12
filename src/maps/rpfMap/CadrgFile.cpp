@@ -6,6 +6,7 @@
 #include "openeaagles/maps/rpfMap/CadrgTocEntry.h"
 #include "openeaagles/basic/String.h"
 #include "openeaagles/maps/rpfMap/Support.h"
+#include <cstring>
 
 //#define PRINT_MAP_LOCATIONS
 
@@ -631,7 +632,7 @@ bool CadrgFile::initialize(const char* dir)
 
                     // Allocate our frame file directory path, which is our path name length + 1 + string length of the directory name passed in
 
-                    size_t size = ffPathLength + 1 + strlen(dir);
+                    size_t size = ffPathLength + 1 + std::strlen(dir);
                     #if defined(WIN32)
                         char* directory = (char *) malloc(size);
                     #else
@@ -645,11 +646,11 @@ bool CadrgFile::initialize(const char* dir)
                     // Read rest of directory name from Toc
                     // Skip 1st 2 chars, because they are the root characters (./), and are ignored since we are creating
                     // our own directory string
-                    toc.read(&directory[strlen(dir)], 2);
+                    toc.read(&directory[std::strlen(dir)], 2);
 
                     // We read the rest, minus the first 2 characters
-                    toc.read(&directory[strlen(dir)], ffPathLength - 2);
-                    directory[ffPathLength - 2 + strlen(dir)] = '\0';
+                    toc.read(&directory[std::strlen(dir)], ffPathLength - 2);
+                    directory[ffPathLength - 2 + std::strlen(dir)] = '\0';
 
                     // Go back to get filename tail
                     toc.seekg(currTocPos, std::ios::beg);
