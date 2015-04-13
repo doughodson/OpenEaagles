@@ -7,7 +7,8 @@ OBJS =  \
 	$(LIB)(Function.o) \
 	$(LIB)(Functions.o) \
 	$(LIB)(Table.o) \
-	$(LIB)(Tables.o)
+	$(LIB)(Tables.o) \
+	$(LIB)(table-utils.o)
 
 all: ${OBJS}
 
