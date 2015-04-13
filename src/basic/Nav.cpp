@@ -3,6 +3,10 @@
 //------------------------------------------------------------------------------
 #include "openeaagles/basic/Nav.h"
 
+// Include the NASA header file for this conversion so we do not have
+// to write it
+#include "mgrs.c"
+
 namespace Eaagles {
 namespace Basic {
 
@@ -143,7 +147,7 @@ bool Nav::gbd2ll(
 {
    // Initialize earth model parameters
    const EarthModel* pModel = em;
-   if (pModel == 0) { pModel = &EarthModel::wgs84; }
+   if (pModel == 0) pModel = &EarthModel::wgs84;
 
    const double eemA  = Distance::M2NM * pModel->getA();
    //const double eemF  = pModel->getF();
@@ -281,7 +285,7 @@ bool Nav::gll2bd(
 {
    // Initialize earth model parameters
    const EarthModel* pModel = em;
-   if (pModel == 0) { pModel = &EarthModel::wgs84; }
+   if (pModel == 0) pModel = &EarthModel::wgs84;
 
    const double eemA  = Distance::M2NM * pModel->getA();
    //const double eemF  = pModel->getF();
@@ -518,7 +522,7 @@ bool Nav::vbd2ll(
    // Initialize earth model parameters
    //---------------------------------------------
    const EarthModel* pModel = em;
-   if (pModel == 0) { pModel = &EarthModel::wgs84; }
+   if (pModel == 0) pModel = &EarthModel::wgs84;
 
    const double eemA  = pModel->getA();
    const double eemF  = pModel->getF();
@@ -651,7 +655,7 @@ bool Nav::vll2bd(
    // Initialize earth model parameters
    //---------------------------------------------
    const EarthModel* pModel = em;
-   if (pModel == 0) { pModel = &EarthModel::wgs84; }
+   if (pModel == 0) pModel = &EarthModel::wgs84;
 
    const double eemA  = pModel->getA();
    const double eemF  = pModel->getF();
@@ -947,7 +951,7 @@ bool Nav::convertEcef2Geod(
    // Initialize earth model parameters
    //---------------------------------------------
    const EarthModel* pModel = em;
-   if (pModel == 0) { pModel = &EarthModel::wgs84; }
+   if (pModel == 0) pModel = &EarthModel::wgs84;
 
    const double a  = pModel->getA();
    //const double f  = pModel->getF();
@@ -1650,6 +1654,10 @@ bool Nav::convertLL2Utm(
       double* const           pEasting,   // OUT: Easting         [M]
       const EarthModel* const pEM)        // IN:  Pointer to an optional earth model (default: WGS-84)
 {
+   // Initialize earth model parameters
+   const EarthModel* pModel = pEM;
+   if (pModel == 0) pModel = &EarthModel::wgs84;
+
    //-----------------------------------
    // local variables
    //-----------------------------------
@@ -1661,9 +1669,9 @@ bool Nav::convertLL2Utm(
    //-----------------------------------
    // local constants
    //-----------------------------------
-   const double A       = pEM->getA();
-   const double B       = pEM->getB();   
-   const double E2      = pEM->getE2();
+   const double A       = pModel->getA();
+   const double B       = pModel->getB();   
+   const double E2      = pModel->getE2();
    
    //-----------------------------------
    // check input terms valid 
@@ -1838,6 +1846,10 @@ bool Nav::convertUtm2LL(
       double* const           pLon,     // OUT: Longitude      [DEG]
       const EarthModel* const pEM)      // IN:  Pointer to an optional earth model (default: WGS-84)      
 {
+   // Initialize earth model parameters
+   const EarthModel* pModel = pEM;
+   if (pModel == 0) pModel = &EarthModel::wgs84;
+
    //-----------------------------------
    // local variables
    //-----------------------------------
@@ -1850,10 +1862,10 @@ bool Nav::convertUtm2LL(
    //-----------------------------------
    // local constants
    //-----------------------------------
-   const double A    = pEM->getA();
-   const double B    = pEM->getB();
+   const double A    = pModel->getA();
+   const double B    = pModel->getB();
    
-   const double E2   = pEM->getE2();
+   const double E2   = pModel->getE2();
    const double E4   = E2*E2;
    const double E6   = E2*E4;
    
@@ -2004,6 +2016,105 @@ bool Nav::convertUtm2LL(
    *pLon = LONDEG + Angle::R2DCC*(+DE1*T14 - DE3*T15 + DE5*T16 - DE7*T17);
 
    return true;
+}
+
+// Converts Latitude, Longitude to MGRS grid coordinate
+bool Nav::convertLL2Mgrs(
+      const double            lat,          // IN:  Latitude  [DEG]
+      const double            lon,          // IN:  Longitude [DEG]
+      const int               precision,    // IN:  Coordinate precision
+      char* const             mgrsCoord,    // OUT: MGRS grid coordinate (0 terminated)
+      const int               maxSize,      // IN:  Size of the MGRS buffer
+      const EarthModel* const pEM)          // IN:  Pointer to an optional earth model (default: WGS-84)
+{
+   // Initialize earth model parameters
+   const EarthModel* pModel = pEM;
+   if (pModel == 0) pModel = &EarthModel::wgs84;
+
+   // Figure the earth model code.  These are used by the MGRS grid routines
+   // and since we do not support a name field I am setting them based on the
+   // earth model pointer.  This is not a very robust way to do this as we
+   // should add a name field to EarthModel.
+   const char* emCode = "WE";
+   if (pModel == &EarthModel::clark1866) emCode = CLARKE_1866;
+   else if (pModel == &EarthModel::clark1880) emCode = CLARKE_1880;
+   else if (pModel == &EarthModel::bessel1841) emCode = BESSEL_1841;
+
+   // Set the MGRS parameters based on the earth model.  This routine is
+   // from NASA and I have left it intact by including it privately into
+   // this source module.
+   long error = Set_MGRS_Parameters(pModel->getA(), pModel->getF(), (char*) emCode);
+
+   if (error != MGRS_NO_ERROR) return false;
+
+   // Convert the geodetic coordinate to the UTM coordinate for use in the
+   // MGRS conversion.
+   char   latZone;
+   int    lonZone;
+   double n;
+   double e;
+
+   bool result = convertLL2Utm(lat, lon, &latZone, &lonZone, &n, &e, pEM);
+
+   if (!result) return false;
+
+   // Convert the UTM coordinates to a MGRS string.  This routine is from
+   // NASA and I have left it intact by including it privately into this
+   // source module.
+   double rlat = lat * Eaagles::Basic::Angle::D2RCC;
+   char   string[32];
+
+   error = UTM_To_MGRS(lonZone, rlat, e, n, precision, string);
+
+   if (error != MGRS_NO_ERROR) return false;
+
+   // Return the MGRS string
+   return lcStrcpy(mgrsCoord, maxSize, string);
+}
+
+// Converts MGRS grid coordinate to Latitude, Longitude
+bool Nav::convertMgrs2LL(
+      const char* const mgrsCoord,  // IN:  MGRS grid coordinate (0 terminated)
+      double* const pLat,           // OUT: Latitude  [DEG]
+      double* const pLon,           // OUT: Longitude [DEG]
+      const EarthModel* const pEM)  // IN:  Pointer to an optional earth model (default: WGS-84)
+{
+   // Initialize earth model parameters
+   const EarthModel* pModel = pEM;
+   if (pModel == 0) pModel = &EarthModel::wgs84;
+
+   // Figure the earth model code.  These are used by the MGRS grid routines
+   // and since we do not support a name field I am setting them based on the
+   // earth model pointer.  This is not a very robust way to do this as we
+   // should add a name field to EarthModel.
+   const char* emCode = "WE";
+   if (pModel == &EarthModel::clark1866) emCode = CLARKE_1866;
+   else if (pModel == &EarthModel::clark1880) emCode = CLARKE_1880;
+   else if (pModel == &EarthModel::bessel1841) emCode = BESSEL_1841;
+
+   // Set the MGRS parameters based on the earth model.  This routine is
+   // from NASA and I have left it intact by including it privately into
+   // this source module.
+   long error = Set_MGRS_Parameters(pModel->getA(), pModel->getF(), (char*) emCode);
+
+   if (error != MGRS_NO_ERROR) return false;
+
+   char   latZone;
+   int    lonZone;
+   double n;
+   double e;
+
+   // Convert the UTM coordinates to a MGRS string.  This routine is from
+   // NASA and I have left it intact by including it privately into this
+   // source module.
+   error = Convert_MGRS_To_UTM((char*) mgrsCoord, (long*) &lonZone, &latZone, &e, &n);
+
+   std::cout << "latzone=" << latZone << ",lonzone=" << lonZone << std::endl;
+
+   if (error != MGRS_NO_ERROR) return false;
+
+   // Convert the UTM coordinate into the geodetic coordinate
+   return convertUtm2LL(n, e, latZone, lonZone, pLat, pLon);
 }
 
 }  // End Basic namespace

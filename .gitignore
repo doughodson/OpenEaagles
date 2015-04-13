@@ -42,3 +42,4 @@ build/qt/*/*/*Makefile*
 
 # backup files
 *.bak
+*~
