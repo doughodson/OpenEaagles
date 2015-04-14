@@ -226,7 +226,7 @@ void Component::reset()
             while (item != nullptr) {
                 Pair* pair = static_cast<Pair*>(item->getValue());
                 Component* obj = static_cast<Component*>(pair->object());
-                if (obj != nullptr) obj->reset();
+                obj->reset();
                 item = item->getNext();
             }
         }
@@ -317,7 +317,7 @@ void Component::updateTC(const LCreal dt)
             while (item != nullptr) {
                 Pair* pair = static_cast<Pair*>(item->getValue());
                 Component* obj = static_cast<Component*>( pair->object() );
-                if (obj != nullptr) obj->tcFrame(dt);
+                obj->tcFrame(dt);
                 item = item->getNext();
             }
         }
@@ -350,7 +350,7 @@ void Component::updateData(const LCreal dt)
             while (item != nullptr) {
                 Pair* pair = static_cast<Pair*>(item->getValue());
                 Component* obj = static_cast<Component*>(pair->object());
-                if (obj != nullptr) obj->updateData(dt);
+                obj->updateData(dt);
                 item = item->getNext();
             }
         }
