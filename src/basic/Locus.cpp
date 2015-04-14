@@ -15,7 +15,7 @@ Locus::Locus()
 {
    STANDARD_CONSTRUCTOR()
 
-   data = 0;
+   data = nullptr;
    np = 0;
    refLat = 0;
    refLon = 0;
@@ -37,7 +37,7 @@ Locus::Locus(
 {
    STANDARD_CONSTRUCTOR()
 
-   data = 0;
+   data = nullptr;
    setData(newData, n, lat, lon, ang, mn, mx);
 }
 
@@ -49,7 +49,7 @@ void Locus::copyData(const Locus& org, const bool cc)
    BaseClass::copyData(org);
 
    if (cc) {
-      data = 0;
+      data = nullptr;
    }
 
    // Let setData() copy the data
@@ -107,9 +107,9 @@ void Locus::setData(
        )
 {
    // Remove any old data
-   if (data != 0) {
+   if (data != nullptr) {
       delete[] data;
-      data = 0;
+      data = nullptr;
       np = 0;
    }
 

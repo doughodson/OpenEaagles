@@ -54,7 +54,6 @@ END_SLOT_MAP()
 IoHandler::IoHandler()
 {
    STANDARD_CONSTRUCTOR()
-
    initData();
 }
 
@@ -64,9 +63,9 @@ IoHandler::IoHandler()
 //------------------------------------------------------------------------------
 void IoHandler::initData()
 {
-   inData = 0;
-   outData = 0;
-   devices = 0;
+   inData = nullptr;
+   outData = nullptr;
+   devices = nullptr;
 
    netInitialized = false;
    netInitFailed = false;
@@ -86,13 +85,13 @@ void IoHandler::copyData(const IoHandler& org, const bool cc)
    if (cc) initData();
 
    // clear the I/O buffers and list of devices
-   setSlotIoData(0);
-   setSlotDevices(0);
+   setSlotIoData(nullptr);
+   setSlotDevices(nullptr);
 
    // ---
    // copy the I/O buffers
    // ---
-   if (org.inData != 0 && org.inData == org.outData) {
+   if (org.inData != nullptr && org.inData == org.outData) {
       // Common input/output buffer
       IoData* copy = static_cast<IoData*>(org.inData->clone());
       setSlotIoData(copy);
@@ -100,12 +99,12 @@ void IoHandler::copyData(const IoHandler& org, const bool cc)
    }
    else {
       // Separate input/output buffers
-      if (org.inData != 0) {
+      if (org.inData != nullptr) {
          IoData* copy = static_cast<IoData*>(org.inData->clone());
          setSlotInputData(copy);
          copy->unref();
       }
-      if (org.outData != 0) {
+      if (org.outData != nullptr) {
          IoData* copy = static_cast<IoData*>(org.outData->clone());
          setSlotOutputData(copy);
          copy->unref();
@@ -115,7 +114,7 @@ void IoHandler::copyData(const IoHandler& org, const bool cc)
    // ---
    // copy the list of I/O devices
    // ---
-   if (org.devices !=0) {
+   if (org.devices != nullptr) {
       PairStream* copy = static_cast<PairStream*>(org.devices->clone());
       setSlotDevices(copy);
       copy->unref();
@@ -138,13 +137,13 @@ void IoHandler::copyData(const IoHandler& org, const bool cc)
 //------------------------------------------------------------------------------
 void IoHandler::deleteData()
 {
-   inData = 0;
-   outData = 0;
-   devices = 0;
+   inData = nullptr;
+   outData = nullptr;
+   devices = nullptr;
 
-   if (thread != 0) {
+   if (thread != nullptr) {
       thread->terminate();
-      thread = 0;
+      thread = nullptr;
    }
 }
 
@@ -168,9 +167,9 @@ void IoHandler::reset()
    BaseClass::reset();
 
    // Reset our I/O devices
-   if (devices != 0) {
+   if (devices != nullptr) {
       List::Item* item = devices->getFirstItem();
-      while (item != 0) {
+      while (item != nullptr) {
          Pair* const pair = static_cast<Pair* const>(item->getValue());
          IoDevice* const p = static_cast<IoDevice* const>(pair->object());
          p->reset();
@@ -193,9 +192,9 @@ void IoHandler::reset()
 bool IoHandler::shutdownNotification()
 {
    // Shutdown our I/O devices
-   if (devices != 0) {
+   if (devices != nullptr) {
       List::Item* item = devices->getFirstItem();
-      while (item != 0) {
+      while (item != nullptr) {
          Pair* const pair = static_cast<Pair* const>(item->getValue());
          IoDevice* const p = static_cast<IoDevice* const>(pair->object());
          p->event(SHUTDOWN_EVENT);
@@ -207,9 +206,9 @@ bool IoHandler::shutdownNotification()
    // this object, so it won't be deleted until the thread terminates, which it
    // will based on our BaseClass::isShutdown() function.  But at least we won't
    // mistakenly think that it's still around.
-   if (thread != 0) {
+   if (thread != nullptr) {
       thread->terminate();
-      thread = 0;
+      thread = nullptr;
    }
 
    return BaseClass::shutdownNotification();
@@ -220,8 +219,8 @@ bool IoHandler::shutdownNotification()
 // -----------------------------------------------------------------------------
 void IoHandler::clear()
 {
-   if (inData != 0) inData->clear();
-   if (outData != 0) outData->clear();
+   if (inData != nullptr) inData->clear();
+   if (outData != nullptr) outData->clear();
 }
 
 //------------------------------------------------------------------------------
@@ -232,8 +231,8 @@ bool IoHandler::initNetworks()
    bool ok1 = false;
    bool ok2 = false;
 
-   if (inData != 0) ok1 = inData->initNetwork();
-   if (outData != 0) ok2 = outData->initNetwork();
+   if (inData != nullptr) ok1 = inData->initNetwork();
+   if (outData != nullptr) ok2 = outData->initNetwork();
 
    return (ok1 && ok2);
 }
@@ -243,7 +242,7 @@ bool IoHandler::initNetworks()
 //------------------------------------------------------------------------------
 void IoHandler::inputDevices(const LCreal dt)
 {
-   if (thread == 0) inputDevicesImp(dt);
+   if (thread == nullptr) inputDevicesImp(dt);
 }
 
 //------------------------------------------------------------------------------
@@ -251,7 +250,7 @@ void IoHandler::inputDevices(const LCreal dt)
 //------------------------------------------------------------------------------
 void IoHandler::outputDevices(const LCreal dt)
 {
-   if (thread == 0) outputDevicesImp(dt);
+   if (thread == nullptr) outputDevicesImp(dt);
 }
 
 //------------------------------------------------------------------------------
@@ -260,9 +259,9 @@ void IoHandler::outputDevices(const LCreal dt)
 void IoHandler::inputDevicesImp(const LCreal dt)
 {
    // process our I/O devices
-   if (devices != 0) {
+   if (devices != nullptr) {
       List::Item* item = devices->getFirstItem();
-      while (item != 0) {
+      while (item != nullptr) {
          Pair* const pair = static_cast<Pair* const>(item->getValue());
          IoDevice* const p = static_cast<IoDevice* const>(pair->object());
          p->processInputs(dt, inData);
@@ -271,7 +270,7 @@ void IoHandler::inputDevicesImp(const LCreal dt)
    }
 
    // update the input data buffers after the input devices
-   if (inData != 0) inData->processInputs();
+   if (inData != nullptr) inData->processInputs();
 }
 
 //------------------------------------------------------------------------------
@@ -280,12 +279,12 @@ void IoHandler::inputDevicesImp(const LCreal dt)
 void IoHandler::outputDevicesImp(const LCreal dt)
 {
    // update the output data buffers before the output devices
-   if (outData != 0) outData->processOutputs();
+   if (outData != nullptr) outData->processOutputs();
 
    // process our I/O devices
-   if (devices != 0) {
+   if (devices != nullptr) {
       List::Item* item = devices->getFirstItem();
-      while (item != 0) {
+      while (item != nullptr) {
          Pair* const pair = static_cast<Pair* const>(item->getValue());
          IoDevice* const p = static_cast<IoDevice* const>(pair->object());
          p->processOutputs(dt, outData);
@@ -299,13 +298,13 @@ void IoHandler::outputDevicesImp(const LCreal dt)
 //------------------------------------------------------------------------------
 void IoHandler::createDataThread()
 {
-   if ( thread == 0 ) {
+   if ( thread == nullptr ) {
       thread = new IoThread(this, getPriority(), getRate());
       thread->unref(); // 'thread' is a SPtr<>
 
       bool ok = thread->create();
       if (!ok) {
-         thread = 0;
+         thread = nullptr;
          if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "IoHandler::createDataThread(): ERROR, failed to create the thread!" << std::endl;
          }
@@ -339,11 +338,11 @@ bool IoHandler::setSlotDevices(PairStream* const list)
 {
    bool ok = true;
 
-   if (list != 0) {
+   if (list != nullptr) {
       // check to make sure all objects on the list are I/O Devices
       unsigned int cnt = 0;
       List::Item* item = list->getFirstItem();
-      while (item != 0) {
+      while (item != nullptr) {
          cnt++;
          Pair* const pair = static_cast<Pair* const>(item->getValue());
          ok = pair->object()->isClassType(typeid(IoDevice));
@@ -366,7 +365,7 @@ bool IoHandler::setSlotDevices(PairStream* const list)
 bool IoHandler::setSlotRate(const Frequency* const msg)
 {
     bool ok = false;
-    if (msg != 0) {
+    if (msg != nullptr) {
         LCreal x = Hertz::convertStatic(*msg);
         if (x > 0) {
             rate = x;
@@ -382,7 +381,7 @@ bool IoHandler::setSlotRate(const Frequency* const msg)
 bool IoHandler::setSlotPriority(const Number* const num)
 {
     bool ok = false;
-    if (num != 0) {
+    if (num != nullptr) {
        LCreal x = num->getReal();
         if (x >= 0 && x <= 1.0f) {
             pri = x;
@@ -414,7 +413,7 @@ std::ostream& IoHandler::serialize(std::ostream& sout, const int i, const bool s
       j = 4;
    }
 
-   if (inData != 0 || outData != 0) {
+   if (inData != nullptr || outData != nullptr) {
 
       // combined data
       if (inData == outData) {
@@ -425,12 +424,12 @@ std::ostream& IoHandler::serialize(std::ostream& sout, const int i, const bool s
 
       // individual data
       else {
-         if (inData != 0) {
+         if (inData != nullptr) {
             indent(sout,i+j);
             sout << "inputData: ";
             inData->serialize(sout,(i+j+4));
          }
-         if (outData != 0) {
+         if (outData != nullptr) {
             indent(sout,i+j);
             sout << "outputData: ";
             outData->serialize(sout,(i+j+4));
@@ -439,7 +438,7 @@ std::ostream& IoHandler::serialize(std::ostream& sout, const int i, const bool s
 
    }
 
-   if (devices != 0) {
+   if (devices != nullptr) {
       indent(sout,i+j);
       sout << "devices: ";
       devices->serialize(sout,(i+j+4));

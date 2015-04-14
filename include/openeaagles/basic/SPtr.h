@@ -40,10 +40,10 @@ template <class T> class SPtr {
 public:
 
    // Constructors and destructor
-   SPtr() : p(0), semaphore(0) {}
-   SPtr(T* p_, const bool refThis = true) : p(p_), semaphore(0) { if (p != 0 && refThis) p->ref(); }
+   SPtr() : p(nullptr), semaphore(0) {}
+   SPtr(T* p_, const bool refThis = true) : p(p_), semaphore(0) { if (p != nullptr && refThis) p->ref(); }
    SPtr(SPtr<T>& p_) : p(p_.getRefPtr()), semaphore(0) {}
-   ~SPtr() { if (p != 0) p->unref(); }
+   ~SPtr() { if (p != nullptr) p->unref(); }
 
    // Conversion operator to return raw pointer (T*)
    operator T*()                               { return p; }
@@ -58,7 +58,7 @@ public:
    T* getRefPtr() {
       lock();
       T* p0 = p;
-      if (p0 != 0) p0->ref();
+      if (p0 != nullptr) p0->ref();
       unlock();
       return p0;
    }
@@ -67,7 +67,7 @@ public:
    const T* getRefPtr() const {
       lock();
       const T* p0 = p;
-      if (p0 != 0) p0->ref();
+      if (p0 != nullptr) p0->ref();
       unlock();
       return p0;
    }
@@ -75,9 +75,9 @@ public:
    // Operator: =
    SPtr<T>& operator=(T* p_) {
       lock();
-      if (p != 0) p->unref();
+      if (p != nullptr) p->unref();
       p = p_;
-      if (p != 0) p->ref();
+      if (p != nullptr) p->ref();
       unlock();
       return *this;
    }
@@ -91,9 +91,9 @@ public:
    // set() -- set the pointer with an optional reference
    void set(T* const p_, const bool refThis = true) {
       lock();
-      if (p != 0) p->unref();
+      if (p != nullptr) p->unref();
       p = p_;
-      if (p != 0 && refThis) p->ref();
+      if (p != nullptr && refThis) p->ref();
       unlock();
    }
 

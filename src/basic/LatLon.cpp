@@ -4,6 +4,8 @@
 #include "openeaagles/basic/LatLon.h"
 #include "openeaagles/basic/String.h"
 
+#include <cmath>
+
 namespace Eaagles {
 namespace Basic {
 
@@ -64,7 +66,7 @@ EMPTY_DELETEDATA(LatLon)
 //------------------------------------------------------------------------------
 void LatLon::computeVal()
 {
-    val = deg + (double(min) + double(sec)/60.0) / 60.0;
+    val = deg + (static_cast<double>(min) + static_cast<double>(sec)/60.0) / 60.0;
     if (dir == SOUTH || dir == WEST) val = -val;
 }
 
@@ -97,7 +99,7 @@ bool LatLon::setDeg(const double d)
 {
    bool ok = true;
 
-   double dd = fabs(d);
+   double dd = std::fabs(d);
    if (dir == NORTH || dir == SOUTH) {
       // check for valid degree numbers
       if (dd > 90.0) {
@@ -125,9 +127,9 @@ bool LatLon::setDeg(const double d)
 
    if (ok) {
       deg = int(dd);
-      double m = (dd - double(deg)) * 60.0;
+      double m = (dd - static_cast<double>(deg)) * 60.0;
       min = int(m);
-      sec = double(m - double(min)) * 60.0;
+      sec = double(m - static_cast<double>(min)) * 60.0;
       computeVal();
    }
    return ok;
@@ -138,11 +140,11 @@ bool LatLon::setMin(const double m) //
 {
    bool ok = true;
 
-   double mm = fabs(m);
+   double mm = std::fabs(m);
    // check for valid minute numbers
    if (mm >= 0.0 && mm < 60.0) {
-      min = int(mm);
-      sec = (mm - double(min)) * 60.0;
+      min = static_cast<int>(mm);
+      sec = (mm - static_cast<double>(min)) * 60.0;
       computeVal();
    }
    else {
@@ -160,7 +162,7 @@ bool LatLon::setSec(const double s)
 {
    bool ok = true;
 
-   double ss = fabs(s);
+   double ss = std::fabs(s);
    // check for valid second numbers
    if (ss >= 0.0 && ss < 60.0) {
       sec = ss;
@@ -211,7 +213,7 @@ std::ostream& LatLon::serialize(std::ostream& sout, const int i, const bool slot
 bool LatLon::setDirection(const String* const sdobj)
 {
    bool ok = false;
-   if (sdobj != 0) ok = setDir(*sdobj);
+   if (sdobj != nullptr) ok = setDir(*sdobj);
    return ok;
 }
 
@@ -221,7 +223,7 @@ bool LatLon::setDirection(const String* const sdobj)
 bool LatLon::setDegrees(const Number* const sdeobj)
 {
    bool ok = false;
-   if (sdeobj != 0) ok = setDeg(sdeobj->getReal());
+   if (sdeobj != nullptr) ok = setDeg(sdeobj->getReal());
    return ok;
 }
 
@@ -231,7 +233,7 @@ bool LatLon::setDegrees(const Number* const sdeobj)
 bool LatLon::setMinutes(const Number* const smobj)
 {
    bool ok = false;
-   if (smobj != 0) ok = setMin(smobj->getReal());
+   if (smobj != nullptr) ok = setMin(smobj->getReal());
    return ok;
 }
 
@@ -241,7 +243,7 @@ bool LatLon::setMinutes(const Number* const smobj)
 bool LatLon::setSeconds(const Number* const ssobj)
 {
    bool ok = false;
-   if (ssobj != 0) ok = setSec(ssobj->getReal());
+   if (ssobj != nullptr) ok = setSec(ssobj->getReal());
    return ok;
 }
 

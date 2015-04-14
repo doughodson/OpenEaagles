@@ -37,7 +37,6 @@ IoDevice::IoDevice()
    initData();
 }
 
-
 //------------------------------------------------------------------------------
 // Init member data
 //------------------------------------------------------------------------------
@@ -46,7 +45,6 @@ void IoDevice::initData()
    adapters = 0;
    devices = 0;
 }
-
 
 //------------------------------------------------------------------------------
 // copyData() -- copy member data
@@ -57,13 +55,13 @@ void IoDevice::copyData(const IoDevice& org, const bool cc)
    if (cc) initData();
 
    // clear our old lists of adapters and devices
-   setSlotAdapters(0);
-   setSlotDevices(0);
+   setSlotAdapters(nullptr);
+   setSlotDevices(nullptr);
 
    // ---
    // copy the list of I/O adapters
    // ---
-   if (org.adapters !=0) {
+   if (org.adapters != nullptr) {
       PairStream* copy = static_cast<PairStream*>(org.adapters->clone());
       setSlotAdapters(copy);
       copy->unref();
@@ -72,7 +70,7 @@ void IoDevice::copyData(const IoDevice& org, const bool cc)
    // ---
    // copy the list of I/O devices
    // ---
-   if (org.devices !=0) {
+   if (org.devices != nullptr) {
       PairStream* copy = static_cast<PairStream*>(org.devices->clone());
       setSlotDevices(copy);
       copy->unref();
@@ -84,8 +82,8 @@ void IoDevice::copyData(const IoDevice& org, const bool cc)
 //------------------------------------------------------------------------------
 void IoDevice::deleteData()
 {
-   setSlotAdapters(0);
-   setSlotDevices(0);
+   setSlotAdapters(nullptr);
+   setSlotDevices(nullptr);
 }
 
 //------------------------------------------------------------------------------
@@ -96,9 +94,9 @@ void IoDevice::reset()
    BaseClass::reset();
 
    // Reset our I/O adapters
-   if (adapters != 0) {
+   if (adapters != nullptr) {
       List::Item* item = adapters->getFirstItem();
-      while (item != 0) {
+      while (item != nullptr) {
          Pair* const pair = static_cast<Pair*>(item->getValue());
          IoAdapter* const p = static_cast<IoAdapter*>(pair->object());
          p->reset();
@@ -107,9 +105,9 @@ void IoDevice::reset()
    }
 
    // Reset our I/O devices
-   if (devices != 0) {
+   if (devices != nullptr) {
       List::Item* item = devices->getFirstItem();
-      while (item != 0) {
+      while (item != nullptr) {
          Pair* const pair = static_cast<Pair*>(item->getValue());
          IoDevice* const p = static_cast<IoDevice*>(pair->object());
          p->reset();
@@ -124,9 +122,9 @@ void IoDevice::reset()
 bool IoDevice::shutdownNotification()
 {
    // Shutdown our I/O adapters
-   if (adapters != 0) {
+   if (adapters != nullptr) {
       List::Item* item = adapters->getFirstItem();
-      while (item != 0) {
+      while (item != nullptr) {
          Pair* const pair = static_cast<Pair*>(item->getValue());
          IoAdapter* const p = static_cast<IoAdapter*>(pair->object());
          p->event(SHUTDOWN_EVENT);
@@ -135,9 +133,9 @@ bool IoDevice::shutdownNotification()
    }
 
    // Shutdown our I/O devices
-   if (devices != 0) {
+   if (devices != nullptr) {
       List::Item* item = devices->getFirstItem();
-      while (item != 0) {
+      while (item != nullptr) {
          Pair* const pair = static_cast<Pair*>(item->getValue());
          IoDevice* const p = static_cast<IoDevice*>(pair->object());
          p->event(SHUTDOWN_EVENT);
@@ -158,10 +156,10 @@ void IoDevice::processInputs(const LCreal dt, IoData* const inData)
    // class functions. ###
 
    // process any input adapters
-   if (adapters != 0) {
+   if (adapters != nullptr) {
 
       List::Item* item = adapters->getFirstItem();
-      while (item != 0) {
+      while (item != nullptr) {
          Pair* const pair = static_cast<Pair*>(item->getValue());
          IoAdapter* const p = static_cast<IoAdapter*>(pair->object());
          p->processInputs(dt, this, inData);
@@ -170,9 +168,9 @@ void IoDevice::processInputs(const LCreal dt, IoData* const inData)
    }
 
    // process any input (sub)devices
-   if (devices != 0) {
+   if (devices != nullptr) {
       List::Item* item = devices->getFirstItem();
-      while (item != 0) {
+      while (item != nullptr) {
          Pair* const pair = static_cast<Pair*>(item->getValue());
          IoDevice* const p = static_cast<IoDevice*>(pair->object());
          p->processInputs(dt, inData);
@@ -191,9 +189,9 @@ void IoDevice::processOutputs(const LCreal dt, const IoData* const outData)
    // base class functions. ###
 
    // process our output (sub)devices
-   if (devices != 0) {
+   if (devices != nullptr) {
       List::Item* item = devices->getFirstItem();
-      while (item != 0) {
+      while (item != nullptr) {
          Pair* const pair = static_cast<Pair*>(item->getValue());
          IoDevice* const p = static_cast<IoDevice*>(pair->object());
          p->processOutputs(dt, outData);
@@ -202,11 +200,11 @@ void IoDevice::processOutputs(const LCreal dt, const IoData* const outData)
    }
 
    // process any output adapters
-   if (adapters != 0) {
+   if (adapters != nullptr) {
 
-      if (outData != 0) {
+      if (outData != nullptr) {
          List::Item* item = adapters->getFirstItem();
-         while (item != 0) {
+         while (item != nullptr) {
             Pair* const pair = static_cast<Pair*>(item->getValue());
             IoAdapter* const p = static_cast<IoAdapter*>(pair->object());
             p->processOutputs(dt, outData, this);
@@ -215,7 +213,6 @@ void IoDevice::processOutputs(const LCreal dt, const IoData* const outData)
       }
    }
 }
-
 
 //------------------------------------------------------------------------------
 // Default I/O access functions
@@ -290,11 +287,11 @@ bool IoDevice::setSlotAdapters(PairStream* const list)
 {
    bool ok = true;
 
-   if (list != 0) {
+   if (list != nullptr) {
       // check to make sure all objects on the list are I/O adapters
       unsigned int cnt = 0;
       List::Item* item = list->getFirstItem();
-      while (item != 0) {
+      while (item != nullptr) {
          cnt++;
          Pair* const pair = static_cast<Pair*>(item->getValue());
          ok = pair->object()->isClassType(typeid(IoAdapter));
@@ -319,11 +316,11 @@ bool IoDevice::setSlotDevices(PairStream* const list)
 {
    bool ok = true;
 
-   if (list != 0) {
+   if (list != nullptr) {
       // check to make sure all objects on the list are I/O Devices
       unsigned int cnt = 0;
       List::Item* item = list->getFirstItem();
-      while (item != 0) {
+      while (item != nullptr) {
          cnt++;
          Pair* const pair = static_cast<Pair*>(item->getValue());
          ok = pair->object()->isClassType(typeid(IoDevice));
@@ -362,13 +359,13 @@ std::ostream& IoDevice::serialize(std::ostream& sout, const int i, const bool sl
       j = 4;
    }
 
-   if (adapters != 0) {
+   if (adapters != nullptr) {
       indent(sout,i+j);
       sout << "adapters: ";
       adapters->serialize(sout,(i+j+4));
    }
 
-   if (devices != 0) {
+   if (devices != nullptr) {
       indent(sout,i+j);
       sout << "devices: ";
       devices->serialize(sout,(i+j+4));

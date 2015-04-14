@@ -44,7 +44,7 @@ Logger::Logger()
     lout = 0;
     filename = new String();
     pathname = new String();
-    topLine = 0;
+    topLine = nullptr;
     opened = false;
     failed = false;
 }
@@ -57,14 +57,14 @@ void Logger::copyData(const Logger& org, const bool cc)
     BaseClass::copyData(org);
 
     if (cc) {
-        filename = 0;
-        pathname = 0;
+        filename = nullptr;
+        pathname = nullptr;
         lout = 0;
-        topLine = 0;
+        topLine = nullptr;
     }
-    if (filename == 0) filename = new String();
-    if (pathname == 0) pathname = new String();
-    
+    if (filename == nullptr) filename = new String();
+    if (pathname == nullptr) pathname = new String();
+
     *filename = *org.filename;
     *pathname = *org.pathname;
 
@@ -76,19 +76,19 @@ void Logger::copyData(const Logger& org, const bool cc)
 
 void Logger::deleteData()
 {
-    if (filename != 0) filename->unref();
+    if (filename != nullptr) filename->unref();
     filename = 0;
 
-    if (pathname != 0) pathname->unref();
+    if (pathname != nullptr) pathname->unref();
     pathname = 0;
 
-    setSlotTopLine(0);
+    setSlotTopLine(nullptr);
 
-    if (lout != 0) {
+    if (lout != nullptr) {
         if (isOpen()) lout->close();
         delete lout;
     }
-    lout = 0;
+    lout = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -201,7 +201,7 @@ bool Logger::openFile()
             else if (topLine != 0) {
                 *lout << *topLine << std::endl;
             }
-                
+
         }
 
         delete[] fullname;
@@ -227,7 +227,7 @@ void Logger::log(const char* const msg)
 //------------------------------------------------------------------------------
 void Logger::log(LogEvent* const event)
 {
-    if (isOpen() && event != 0) {
+    if (isOpen() && event != nullptr) {
         *lout << event->getDescription() << std::endl;
     }
 }
@@ -237,7 +237,7 @@ void Logger::log(LogEvent* const event)
 //------------------------------------------------------------------------------
 bool Logger::setSlotFilename(const String* const msg)
 {
-    if (msg != 0) {
+    if (msg != nullptr) {
         *filename = *msg;
     }
     return true;
@@ -245,7 +245,7 @@ bool Logger::setSlotFilename(const String* const msg)
 
 bool Logger::setSlotPathName(const String* const msg)
 {
-    if (msg != 0) {
+    if (msg != nullptr) {
         *pathname = *msg;
     }
     return true;
@@ -253,9 +253,9 @@ bool Logger::setSlotPathName(const String* const msg)
 
 bool Logger::setSlotTopLine(const String* const msg)
 {
-    if (topLine != 0) topLine->unref();
+    if (topLine != nullptr) topLine->unref();
     topLine = msg;
-    if (topLine != 0) topLine->ref();
+    if (topLine != nullptr) topLine->ref();
     return true;
 }
 
@@ -292,7 +292,7 @@ std::ostream& Logger::serialize(std::ostream& sout, const int i, const bool slot
     }
 
     // TopLine
-    if (topLine != 0) {
+    if (topLine != nullptr) {
        if (topLine->len() > 0) {
           indent(sout,i+j);
           sout << "topLine: \"" << *topLine << "\"" << std::endl;
@@ -343,7 +343,7 @@ Logger::LogEvent& Logger::LogEvent::operator=(const LogEvent& org)
 // Clone
 Logger::LogEvent* Logger::LogEvent::clone() const
 {
-    return 0;
+    return nullptr;
 }
 
 // Copy data function

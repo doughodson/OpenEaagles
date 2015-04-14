@@ -14,12 +14,12 @@ IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(List,"List")
 //------------------------------------------------------------------------------
 // Constructor(s)
 //------------------------------------------------------------------------------
-List::List() : headP(0), tailP(0), num(0)
+List::List() : headP(nullptr), tailP(nullptr), num(0)
 {
     STANDARD_CONSTRUCTOR()
 }
 
-List::List(const LCreal values[], const unsigned int nv) : headP(0), tailP(0), num(0)
+List::List(const LCreal values[], const unsigned int nv) : headP(nullptr), tailP(nullptr), num(0)
 {
     STANDARD_CONSTRUCTOR()
 
@@ -31,7 +31,7 @@ List::List(const LCreal values[], const unsigned int nv) : headP(0), tailP(0), n
     }
 }
 
-List::List(const int values[], const unsigned int nv) : headP(0), tailP(0), num(0)
+List::List(const int values[], const unsigned int nv) : headP(nullptr), tailP(nullptr), num(0)
 {
     STANDARD_CONSTRUCTOR()
 
@@ -52,9 +52,8 @@ void List::copyData(const List& org, const bool cc)
     BaseClass::copyData(org);
 
     if (cc) {
-        // When called from copy constructor, init these pointers
-        headP = 0;
-        tailP = 0;
+        headP = nullptr;
+        tailP = nullptr;
         num = 0;
     }
 
@@ -63,9 +62,9 @@ void List::copyData(const List& org, const bool cc)
 
     // Copy the new list
     const Item* d = org.getFirstItem();
-    for ( ; d != 0; d = d->getNext() ) {
+    for ( ; d != nullptr; d = d->getNext() ) {
         Object* p = d->getValue()->clone();
-        if (p != 0) {
+        if (p != nullptr) {
             addTail(p);
             p->unref();     // p is ref() by addTail(), so we can unref();
         }
@@ -85,7 +84,7 @@ bool List::isValid() const
     bool ok = Object::isValid();
     for (const Item* d = headP; ok && d != 0; d = d->getNext() ) {
         const Object* obj = d->getValue();
-        if (obj != 0) {
+        if (obj != nullptr) {
             if (!obj->isValid()) ok = false;
         }
         else ok = false;
@@ -101,12 +100,12 @@ void List::clear()
     // Empty out the list ...
     while (!isEmpty()) {
         Object* p = removeHead(); // First remove them
-        if (p != 0) {
+        if (p != nullptr) {
             p->unref();     // and unref() them
         }
     }
-    headP = 0;
-    tailP = 0;
+    headP = nullptr;
+    tailP = nullptr;
     num = 0;
 }
 
@@ -116,16 +115,16 @@ void List::clear()
 //------------------------------------------------------------------------------
 unsigned int List::getIndex(const Object* const obj) const
 {
-    const Item* p = 0;
+    const Item* p = nullptr;
     int idx = 0;
-    for (const Item* d = headP; d != 0; d = d->getNext() ) {
+    for (const Item* d = headP; d != nullptr; d = d->getNext() ) {
         idx++;
         if ( obj == d->getValue() )  {
             p = d;
             break;
         }
     }
-    return ((p != 0) ? idx : 0);
+    return ((p != nullptr) ? idx : 0);
 }
 
 //------------------------------------------------------------------------------
@@ -133,7 +132,7 @@ unsigned int List::getIndex(const Object* const obj) const
 //------------------------------------------------------------------------------
 void List::addHead(Object* const obj)
 {
-    if (obj == 0) return;
+    if (obj == nullptr) return;
     Item* d = new Item;
     d->value = obj;
     obj->ref();
@@ -145,7 +144,7 @@ void List::addHead(Object* const obj)
 //------------------------------------------------------------------------------
 void List::addTail(Object* const obj)
 {
-    if (obj == 0) return;
+    if (obj == nullptr) return;
     Item* d = new Item;
     d->value = obj;
     obj->ref();
@@ -158,15 +157,15 @@ void List::addTail(Object* const obj)
 bool List::remove(const Object* const obj)
 {
     bool ok = false;
-    if (obj != 0) {
+    if (obj != nullptr) {
         Item* d = headP;
-        for ( ; d != 0; d = d->getNext() ) {
+        for ( ; d != nullptr; d = d->getNext() ) {
             if ( obj == d->getValue() )  break;
         }
-        if (d != 0) {
+        if (d != nullptr) {
            remove(d);
            ok = true;
-        } 
+        }
     }
     if (ok) obj->unref();
     return ok;
@@ -185,15 +184,15 @@ bool List::remove(const Object* const obj)
 unsigned int List::getNumberList(double values[], const unsigned int max) const
 {
     unsigned int n = 0;
-    for (const Item* p = getFirstItem(); p != 0 && n < max; p = p->getNext() ) {
+    for (const Item* p = getFirstItem(); p != nullptr && n < max; p = p->getNext() ) {
         const Object* p1 = p->getValue();
         const Pair* gp = dynamic_cast<const Pair*>(p1);
-        if (gp != 0) {
+        if (gp != nullptr) {
             // when the item is a Pair, use the object it contains.
             p1 = gp->object();
         }
         const Number* pp = dynamic_cast<const Number*>(p1);
-        if (pp != 0) {
+        if (pp != nullptr) {
             // when we have a number
             values[n++] = pp->getDouble();
         }
@@ -208,15 +207,15 @@ unsigned int List::getNumberList(double values[], const unsigned int max) const
 unsigned int List::getNumberList(float values[], const unsigned int max) const
 {
     unsigned int n = 0;
-    for (const Item* p = getFirstItem(); p != 0 && n < max; p = p->getNext() ) {
+    for (const Item* p = getFirstItem(); p != nullptr && n < max; p = p->getNext() ) {
         const Object* p1 = p->getValue();
         const Pair* gp = dynamic_cast<const Pair*>(p1);
-        if (gp != 0) {
+        if (gp != nullptr) {
             // when the item is a Pair, use the object it contains.
             p1 = gp->object();
         }
         const Number* pp = dynamic_cast<const Number*>(p1);
-        if (pp != 0) {
+        if (pp != nullptr) {
             // when we have a number
             values[n++] = pp->getFloat();
         }
@@ -232,15 +231,15 @@ unsigned int List::getNumberList(float values[], const unsigned int max) const
 unsigned int List::getNumberList(int values[], const unsigned int max) const
 {
     unsigned int n = 0;
-    for (const Item* p = getFirstItem(); p != 0 && n < max; p = p->getNext() ) {
+    for (const Item* p = getFirstItem(); p != nullptr && n < max; p = p->getNext() ) {
         const Object* p1 = p->getValue();
         const Pair* gp = dynamic_cast<const Pair*>(p1);
-        if (gp != 0) {
+        if (gp != nullptr) {
             // when the item is a Pair, use the object it contains.
             p1 = gp->object();
         }
         const Number* pp = dynamic_cast<const Number*>(p1);
-        if (pp != 0) {
+        if (pp != nullptr) {
             // when we have a number
             values[n++] = pp->getInt();
         }
@@ -258,14 +257,14 @@ unsigned int List::getNumberList(int values[], const unsigned int max) const
 //------------------------------------------------------------------------------
 Object* List::removeHead()
 {
-    Object* p = 0;
-    if (headP != 0) {
+    Object* p = nullptr;
+    if (headP != nullptr) {
         Item* d = headP;
         headP = headP->next;
         p = d->getValue();
         num--;
-        if (headP != 0) headP->previous = 0;
-        else tailP = 0;
+        if (headP != nullptr) headP->previous = 0;
+        else tailP = nullptr;
         delete d;
     }
     return p;
@@ -277,14 +276,14 @@ Object* List::removeHead()
 //------------------------------------------------------------------------------
 Object* List::removeTail()
 {
-    Object* p = 0;
-    if (tailP != 0) {
+    Object* p = nullptr;
+    if (tailP != nullptr) {
         Item *d = tailP;
         tailP = tailP->previous;
         p = d->getValue();
         num--;
-        if (tailP != 0) tailP->next = 0;
-        else headP = 0;
+        if (tailP != nullptr) tailP->next = 0;
+        else headP = nullptr;
         delete d;
     }
     return p;
@@ -297,7 +296,7 @@ Object* List::removeTail()
 bool List::insert(List::Item* newItem, List::Item* refItem)
 {
     bool ok = true;
-    if (refItem != 0) {
+    if (refItem != nullptr) {
         if (refItem == headP) {
             addHead(newItem);
         }
@@ -321,12 +320,12 @@ bool List::insert(List::Item* newItem, List::Item* refItem)
 //------------------------------------------------------------------------------
 Object* List::remove(List::Item* item)
 {
-    Object* value = 0;
+    Object* value = nullptr;
     if (headP == item)
         value = removeHead();
     else if (tailP == item)
         value = removeTail();
-    else if (item != 0) {
+    else if (item != nullptr) {
         value = item->getValue();
         num--;
         Item* p = item->getPrevious();
@@ -343,11 +342,11 @@ Object* List::remove(List::Item* item)
 //------------------------------------------------------------------------------
 void List::addHead(List::Item* item)
 {
-    item->previous = 0;
+    item->previous = nullptr;
     item->next = headP;
-    if (headP != 0) headP->previous = item;
+    if (headP != nullptr) headP->previous = item;
     headP = item;
-    if (tailP == 0) tailP = item;
+    if (tailP == nullptr) tailP = item;
     num++;
 }
 
@@ -356,11 +355,11 @@ void List::addHead(List::Item* item)
 //------------------------------------------------------------------------------
 void List::addTail(List::Item* item)
 {
-    item->next = 0;
+    item->next = nullptr;
     item->previous = tailP;
-    if (tailP != 0) tailP->next = item;
+    if (tailP != nullptr) tailP->next = item;
     tailP = item;
-    if (headP == 0) headP = item;
+    if (headP == nullptr) headP = item;
     num++;
 }
 
@@ -399,14 +398,14 @@ const Object* List::getPosition1(const unsigned int n) const
     if (n < 1 || n > num) return 0;
     unsigned int i = 1;
     const Item* p = getFirstItem();
-    while (i < n && p != 0) {
+    while (i < n && p != nullptr) {
         p = p->getNext();
         i++;
     }
-    if (p != 0)
+    if (p != nullptr)
         return p->getValue();
     else
-        return 0;
+        return nullptr;
 }
 
 
@@ -416,7 +415,7 @@ const Object* List::getPosition1(const unsigned int n) const
 std::ostream& List::serialize(std::ostream& sout, const int, const bool) const
 {
     std::cout << "{" << std::endl;
-    for (const Item* p = getFirstItem(); p != 0; p = p->getNext() ) {
+    for (const Item* p = getFirstItem(); p != nullptr; p = p->getNext() ) {
         if (p->getValue() != 0) p->getValue()->serialize(sout,4);
         else std::cout << "<BAD VALUE>" << std::endl;
     }
