@@ -47,14 +47,14 @@ ThreadPoolThread::ThreadPoolThread(Component* const parent, ThreadPool*const poo
 unsigned long ThreadPoolThread::userFunc()
 {
    //Execute the thread callback methods
-   if(manager != 0)
+   if (manager != nullptr)
    {
       manager->execute(persistentObj);
       manager->execute(persistentObj, currentObj);
    }
 
    //Clear the current callback object because we're done with it
-   currentObj = 0;
+   currentObj = nullptr;
 
    //Add the thread back to the pool
    threadPool->threadAvailable(this);
@@ -64,7 +64,7 @@ unsigned long ThreadPoolThread::userFunc()
 
 void ThreadPoolThread::deleteData()
 {
-   if(manager != 0)
+   if (manager != nullptr)
       manager->destroy(persistentObj);
 }
 
@@ -95,7 +95,7 @@ EMPTY_SERIALIZER(ThreadPoolManager)
 
 Object* ThreadPoolManager::initialize()
 {
-   return 0;
+   return nullptr;
 }
 
 void ThreadPoolManager::prepare( Object* const obj )
@@ -140,14 +140,14 @@ END_SLOT_MAP()
    //------------------------------------------------------------------------------
 
 ThreadPool::ThreadPool()
-   : manager(0), numThreads(0), priority(0.5)
+   : manager(nullptr), numThreads(0), priority(0.5)
 {
    STANDARD_CONSTRUCTOR()
    initData();
 }
 
 ThreadPool::ThreadPool( ThreadPoolManager* mgr )
-   : manager(0), numThreads(0), priority(0.5)
+   : manager(nullptr), numThreads(0), priority(0.5)
 {
    STANDARD_CONSTRUCTOR()
    setManager(mgr);
@@ -155,7 +155,7 @@ ThreadPool::ThreadPool( ThreadPoolManager* mgr )
 }
 
 ThreadPool::ThreadPool( ThreadPoolManager* mgr, const unsigned int num )
-   : manager(0), numThreads(num), priority(0.5)
+   : manager(nullptr), numThreads(num), priority(0.5)
 {
    STANDARD_CONSTRUCTOR()
    setManager(mgr);
@@ -163,7 +163,7 @@ ThreadPool::ThreadPool( ThreadPoolManager* mgr, const unsigned int num )
 }
 
 ThreadPool::ThreadPool( ThreadPoolManager* mgr, const unsigned int num, const LCreal pri )
-   : manager(0), numThreads(num), priority(pri)
+   : manager(nullptr), numThreads(num), priority(pri)
 {
    STANDARD_CONSTRUCTOR()
    setManager(mgr);
@@ -174,7 +174,7 @@ void ThreadPool::initData()
 {
    actualThreads = 0;
    availableThreadsLock = 0;
-   unthreadedObj = 0;
+   unthreadedObj = nullptr;
 }
 
 
@@ -184,11 +184,11 @@ void ThreadPool::initData()
 
 void ThreadPool::setManager(ThreadPoolManager* mgr)
 {
-   if (manager != 0) {
+   if (manager != nullptr) {
       manager->unref();
    }
    manager = mgr;
-   if (manager != 0) {
+   if (manager != nullptr) {
       manager->ref();
    }
 }
@@ -205,7 +205,7 @@ void ThreadPool::initialize(Component* const parent)
       {
          //Get the callback object for this thread
          Object* callbackObj = 0;
-         if(manager != 0)
+         if (manager != nullptr)
             callbackObj = manager->initialize();
 
          //Add the thread to the master array
@@ -231,7 +231,7 @@ void ThreadPool::initialize(Component* const parent)
    }
 
    //Use single-threaded mode if we're not using threads or if threading failed
-   if(actualThreads == 0)
+   if (actualThreads == 0)
    {
       std::cout << "Running thread pool in single-threaded mode" << std::endl;
       if(manager != 0)
@@ -247,9 +247,9 @@ void ThreadPool::execute()
 void ThreadPool::execute(Object* cur)
 {
    //If we're unthreaded, just use this thread
-   if(actualThreads == 0)
+   if (actualThreads == 0)
    {
-      if(manager != 0)
+      if (manager != nullptr)
       {
          manager->prepare(unthreadedObj);
          manager->execute(unthreadedObj);
@@ -262,7 +262,7 @@ void ThreadPool::execute(Object* cur)
    ThreadPoolThread* availableThread = getAvailableThread();
 
    //If we didn't get one, we'll have to wait
-   if(availableThread == 0)
+   if (availableThread == 0)
    {
       //Wait for one to become available
       ThreadSyncTask** pp = reinterpret_cast<ThreadSyncTask**>( &allThreads[0] );
@@ -280,7 +280,7 @@ void ThreadPool::execute(Object* cur)
    }
 
    //Do we have one now (we should)?
-   if(availableThread == 0)
+   if (availableThread == 0)
    {
       //Error
       if (isMessageEnabled(MSG_ERROR)) {
@@ -290,7 +290,7 @@ void ThreadPool::execute(Object* cur)
    }
 
    //Prepare the thread
-   if(manager != 0)
+   if (manager != nullptr)
       manager->prepare(availableThread->getPersistentObj());
 
    //Launch the thread
@@ -302,12 +302,12 @@ ThreadPoolThread* ThreadPool::getAvailableThread()
 {
    ThreadPoolThread* availableThread = 0;
    lcLock(availableThreadsLock);
-   for(int i = actualThreads - 1 ; i >= 0 ; i--)
+   for (int i = actualThreads - 1 ; i >= 0 ; i--)
    {
-      if(availableThreads[i] != 0)
+      if (availableThreads[i] != nullptr)
       {
          availableThread = availableThreads[i];
-         availableThreads[i] = 0;
+         availableThreads[i] = nullptr;
          break;
       }
    }
@@ -318,9 +318,9 @@ ThreadPoolThread* ThreadPool::getAvailableThread()
 void ThreadPool::threadAvailable(ThreadPoolThread* availableThread)
 {
    lcLock(availableThreadsLock);
-   for(unsigned int i = 0 ; i < actualThreads ; i++)
+   for (unsigned int i = 0 ; i < actualThreads ; i++)
    {
-      if(availableThreads[i] == 0)
+      if (availableThreads[i] == nullptr)
       {
          availableThreads[i] = availableThread;
          break;
@@ -345,11 +345,11 @@ void ThreadPool::destroy()
    actualThreads = 0;
 
    //Destroy the unthreaded object
-   if(unthreadedObj != 0)
+   if (unthreadedObj != nullptr)
    {
-      if(manager != 0)
+      if (manager != nullptr)
          manager->destroy(unthreadedObj);
-      unthreadedObj = 0;
+      unthreadedObj = nullptr;
    }
 }
 
@@ -361,14 +361,14 @@ void ThreadPool::copyData(const ThreadPool& org, const bool cc)
 {
    BaseClass::copyData(org);
    destroy();
-   if(cc)
+   if (cc)
       initData();
 
    // Copy the manager, number of threads, and priority
-   if (org.manager != 0)
+   if (org.manager != nullptr)
       setManager( static_cast<ThreadPoolManager*>(org.manager->clone()) );
    else
-      setManager(0);
+      setManager(nullptr);
    numThreads = org.numThreads;
    priority = org.priority;
 }
@@ -376,7 +376,7 @@ void ThreadPool::copyData(const ThreadPool& org, const bool cc)
 void ThreadPool::deleteData()
 {
    destroy();
-   setManager(0);
+   setManager(nullptr);
 }
 
 //------------------------------------------------------------------------------
@@ -386,7 +386,7 @@ void ThreadPool::deleteData()
 bool ThreadPool::setSlotNumThreads(const Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       int num = msg->getInt();
       if (num >= 0 && num <= static_cast<int>(MAX_THREADS)) {
          numThreads = static_cast<unsigned int>(num);
@@ -402,7 +402,7 @@ bool ThreadPool::setSlotNumThreads(const Number* const msg)
 bool ThreadPool::setSlotPriority(const Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       LCreal pri = msg->getReal();
       if (pri >= 0 && pri <= 1.0f) {
          priority = pri;

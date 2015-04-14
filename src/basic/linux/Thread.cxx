@@ -173,13 +173,13 @@ unsigned long ThreadPeriodicTask::mainThreadFunc()
    }
 
    // Delta time
-   const double dt = 1.0/double(getRate());
-   int sec0 = int(dt);
-   int nsec0 = int((dt - double(sec0)) * 1000000000.0);
+   const double dt = 1.0/static_cast<double>(getRate());
+   int sec0 = static_cast<int>(dt);
+   int nsec0 = static_cast<int>((dt - static_cast<double>(sec0)) * 1000000000.0);
 
    // Reference time
    struct timespec tp;
-   clock_gettime(CLOCK_REALTIME,&tp);
+   clock_gettime(CLOCK_REALTIME, &tp);
 
    // Mutex
    pthread_cond_t cond = PTHREAD_COND_INITIALIZER;

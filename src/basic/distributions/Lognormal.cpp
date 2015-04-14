@@ -78,7 +78,7 @@ double Lognormal::draw()
 bool Lognormal::setSlotSigma(const Number* const x)
 {
   bool ok = false;
-  if(x != 0)
+  if(x != nullptr)
     ok = setSigma(x->getDouble());
   return ok;
 }
@@ -86,7 +86,7 @@ bool Lognormal::setSlotSigma(const Number* const x)
 bool Lognormal::setSlotMu(const Number* const x)
 {
   bool ok = false;
-  if(x != 0)
+  if(x != nullptr)
     ok = setMu(x->getDouble());
   return ok;
 }
@@ -94,7 +94,7 @@ bool Lognormal::setSlotMu(const Number* const x)
 bool Lognormal::setSlotGamma(const Number* const x)
 {
   bool ok = false;
-  if(x != 0)
+  if(x != nullptr)
     ok = setGamma(x->getDouble());
   return ok;
 }

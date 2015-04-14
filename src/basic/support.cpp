@@ -87,13 +87,13 @@ bool convertNtp2Sec(
    static const double P32 = 4294967296.0; // 2^32
 
    // Adjust by 2208988800L seconds (1900 to 1970)
-   if (seconds != 0) {
+   if (seconds != nullptr) {
       static const unsigned long ADJ = 0x83AA7E80;   // 2208988800 seconds
       *seconds = ntpSec - ADJ;
    }
 
    // fractional second to microseconds
-   if (uSec != 0) {
+   if (uSec != nullptr) {
       double fsec = double(ntpSecF) / P32;
       *uSec = static_cast<unsigned long>((fsec * 1000000.0) + 0.5);
    }
@@ -106,7 +106,7 @@ bool convertNtp2Sec(
 bool doesFileExist(const char* const fullname)
 {
    bool result = false;
-   if (fullname != 0) {
+   if (fullname != nullptr) {
       // Test open the file
       std::ifstream t;
       t.open(fullname);
@@ -282,7 +282,7 @@ void postMultVec3Array(
 //------------
 void lcSinCos(const LCreal src, LCreal* const dst1, LCreal* const dst2)
 {
-   if (dst1 != 0 && dst2 != 0) {
+   if (dst1 != nullptr && dst2 != nullptr) {
       *dst1 = lcSin(src);
       *dst2 = lcCos(src);
    }
@@ -290,17 +290,17 @@ void lcSinCos(const LCreal src, LCreal* const dst1, LCreal* const dst2)
 
 void sinCos(const double src, double* const dst1, double* const dst2)
 {
-   if (dst1 != 0 && dst2 != 0) {
-      *dst1 = sin(src);
-      *dst2 = cos(src);
+   if (dst1 != nullptr && dst2 != nullptr) {
+      *dst1 = std::sin(src);
+      *dst2 = std::cos(src);
    }
 }
 
 void sinCos(const float src, float* const dst1, float* const dst2)
 {
-   if (dst1 != 0 && dst2 != 0) {
-      *dst1 = sin(src);
-      *dst2 = cos(src);
+   if (dst1 != nullptr && dst2 != nullptr) {
+      *dst1 = std::sin(src);
+      *dst2 = std::cos(src);
    }
 }
 
@@ -321,7 +321,7 @@ void sinArray(const double* const src, double* const dst, const unsigned int n)
    const double* ps = src;
    double* pd = dst;
    for (unsigned int i = 0; i < n; i++) {
-      *pd++ = sin(*ps++);
+      *pd++ = std::sin(*ps++);
    }
 }
 
@@ -351,7 +351,7 @@ void cosArray(const double* const src, double* const dst, const unsigned int n)
    const double* ps = src;
    double* pd = dst;
    for (unsigned int i = 0; i < n; i++) {
-      *pd++ = cos(*ps++);
+      *pd++ = std::cos(*ps++);
    }
 }
 
@@ -384,8 +384,8 @@ void sinCosArray(const double* const src, double* const dst1, double* const dst2
    double* pd1 = dst1;
    double* pd2 = dst2;
    for (unsigned int i = 0; i < n; i++) {
-      *pd1++ = sin(*ps);
-      *pd2++ = cos(*ps++);
+      *pd1++ = std::sin(*ps);
+      *pd2++ = std::cos(*ps++);
    }
 }
 
@@ -417,7 +417,7 @@ void acosArray(const double* const src, double* const dst, const unsigned int n)
    double* pd = dst;
    const double* ps = src;
    for (unsigned int i = 0; i < n; i++) {
-      *pd++ = acos(*ps++);
+      *pd++ = std::acos(*ps++);
    }
 }
 
@@ -449,7 +449,7 @@ void atan2Array(const double* const yValues, const double* const xValues, double
    const double* ps1 = yValues;
    const double* ps2 = xValues;
    for (unsigned int i = 0; i < n; i++) {
-      *pd++ = atan2(*ps1++,*ps2++);
+      *pd++ = std::atan2(*ps1++,*ps2++);
    }
 }
 
@@ -471,7 +471,7 @@ void lcSqrtArray(const LCreal* const src, LCreal* const dst, const int n)
    const LCreal* ps = src;
    LCreal* pd = dst;
    for (int i = 0; i < n; i++) {
-      *pd++ = sqrt(*ps++);
+      *pd++ = std::sqrt(*ps++);
    }
 }
 
@@ -480,7 +480,7 @@ void sqrtArray(const double* const src, double* const dst, const unsigned int n)
    const double* ps = src;
    double* pd = dst;
    for (unsigned int i = 0; i < n; i++) {
-      *pd++ = sqrt(*ps++);
+      *pd++ = std::sqrt(*ps++);
    }
 }
 
@@ -510,7 +510,7 @@ void pow10Array(const double* const src, double* const dst, const unsigned int n
    double* pd = dst;
    const double* ps = src;
    for (unsigned int i = 0; i < n; i++) {
-      *pd++ = pow(10.0,*ps++);
+      *pd++ = std::pow(10.0,*ps++);
    }
 }
 
@@ -692,7 +692,7 @@ bool lcStrcat(char* const strDest, const size_t sizeOfDest, const char* const st
 //------------
 bool lcStrcpyFull(char* const strDest, const size_t sizeOfDest, const char* const strSource)
 {
-   if ((strDest == 0) || (strSource == 0) || sizeOfDest == 0) { // NULL ptr's or zero dest size
+   if ((strDest == nullptr) || (strSource == nullptr) || sizeOfDest == 0) { // NULL ptr's or zero dest size
       return false;
    }
 
@@ -723,7 +723,7 @@ bool lcStrcpyFull(char* const strDest, const size_t sizeOfDest, const char* cons
 //------------
 bool lcStrncpyFull(char* const strDest, const size_t sizeOfDest, const char* const strSource, const size_t count)
 {
-   if ((strDest == 0) || (strSource == 0) || sizeOfDest == 0) { // NULL ptr's or zero dest size
+   if ((strDest == nullptr) || (strSource == nullptr) || sizeOfDest == 0) { // NULL ptr's or zero dest size
       return false;
    }
 
@@ -755,7 +755,7 @@ bool lcStrncpyFull(char* const strDest, const size_t sizeOfDest, const char* con
 //------------
 bool lcStrcatFull(char* const strDest, const size_t sizeOfDest, const char* const strSource)
 {
-   if ((strDest == 0) || (strSource == 0) || sizeOfDest == 0) { // NULL ptr's or zero dest size
+   if ((strDest == nullptr) || (strSource == nullptr) || sizeOfDest == 0) { // NULL ptr's or zero dest size
       return false;
    }
 
@@ -793,15 +793,15 @@ bool lcStrcatFull(char* const strDest, const size_t sizeOfDest, const char* cons
 //------------
 int lcStrcasecmp(const char* const s1, const char* const s2)
 {
-   if (s1 == 0 && s2 == 0) return 0;   // They're the same if they both don't exist
-   if (s1 != 0 && s2 == 0) return  1;  // S1 is greater than S2 if S2 doesn't exist and S1 does
-   if (s1 == 0 && s2 != 0) return -1;  // S1 is less than S2 if S1 doesn't exist and S2 does
+   if (s1 == nullptr && s2 == nullptr) return  0;   // They're the same if they both don't exist
+   if (s1 != nullptr && s2 == nullptr) return  1;  // S1 is greater than S2 if S2 doesn't exist and S1 does
+   if (s1 == nullptr && s2 != nullptr) return -1;  // S1 is less than S2 if S1 doesn't exist and S2 does
 
    const char* p1 = s1;
    const char* p2 = s2;
    while (*p1 != '\0' && *p2 != '\0') {
-      int c1 = tolower(static_cast<int>(*p1++));
-      int c2 = tolower(static_cast<int>(*p2++));
+      int c1 = std::tolower(static_cast<int>(*p1++));
+      int c2 = std::tolower(static_cast<int>(*p2++));
       if (c1 < c2) return -1;
       if (c1 > c2) return  1;
    }
@@ -824,8 +824,8 @@ int lcStrncasecmp(const char* const s1, const char* const s2, const size_t n)
    const char* p2 = s2;
    size_t icnt = 0;
    while (*p1 != '\0' && *p2 != '\0' && icnt++ < n) {
-      int c1 = tolower(static_cast<int>(*p1++));
-      int c2 = tolower(static_cast<int>(*p2++));
+      int c1 = std::tolower(static_cast<int>(*p1++));
+      int c2 = std::tolower(static_cast<int>(*p2++));
       if (c1 < c2) return -1;
       if (c1 > c2) return  1;
    }

@@ -59,7 +59,7 @@ void Matrix::initData()
 {
    rows = 0;
    cols = 0;
-   mda = 0;
+   mda = nullptr;
 
    fldWidth = DEF_FLDWIDTH;
    decPoint = DEF_DECPOINT;
@@ -268,8 +268,8 @@ double Matrix::getDeterm() const
 // empty/clear the matrix
 void Matrix::emptyMatrix()
 {
-   if (mda != 0) delete[] mda;
-   mda = 0;
+   if (mda != nullptr) delete[] mda;
+   mda = nullptr;
    rows = 0;
    cols = 0;
 }
@@ -916,7 +916,7 @@ bool Matrix::remRowCol(const unsigned int r, const unsigned int c)
 //------------------------------------------------------------------------------
 void Matrix::showMatrix(const unsigned int DP, const unsigned int FW) const
 {
-   if (!isGoodMatrix() || DP < 0) {
+   if (!isGoodMatrix()) {
       std::cout << "There is a problem displaying this matrix." << std::endl;
    }
    else {

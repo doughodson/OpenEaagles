@@ -67,7 +67,7 @@ double Exponential::draw()
 bool Exponential::setSlotLambda(const Number* const x)
 {
   bool ok = false;
-  if(x != 0)
+  if(x != nullptr)
     ok = setLambda(x->getDouble());
   return ok;
 }
@@ -78,7 +78,7 @@ bool Exponential::setSlotLambda(const Number* const x)
 bool Exponential::setSlotGamma(const Number* const x)
 {
   bool ok = false;
-  if(x != 0)
+  if(x != nullptr)
     ok = setGamma(x->getDouble());
   return ok;
 }

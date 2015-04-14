@@ -70,7 +70,7 @@ END_SLOT_MAP()
 // Constructors
 //------------------------------------------------------------------------------
 PosixHandler::PosixHandler() :
-              localIpAddr(0),
+              localIpAddr(nullptr),
               localAddr(INADDR_ANY),
               netAddr(INADDR_ANY),
               fromAddr1(INADDR_NONE),
@@ -99,7 +99,7 @@ void PosixHandler::copyData(const PosixHandler& org, const bool cc)
     BaseClass::copyData(org);
 
     if (cc) {
-      localIpAddr = 0;
+      localIpAddr = nullptr;
     }
 
     port = org.port;
@@ -112,9 +112,9 @@ void PosixHandler::copyData(const PosixHandler& org, const bool cc)
     localAddr = org.localAddr;
     initialized = org.initialized;
 
-    if (localIpAddr != 0) delete[] localIpAddr;
-    localIpAddr = 0;
-    if (org.localIpAddr != 0) {
+    if (localIpAddr != nullptr) delete[] localIpAddr;
+    localIpAddr = nullptr;
+    if (org.localIpAddr != nullptr) {
         size_t len = std::strlen(org.localIpAddr);
         localIpAddr = new char[len+1];
         lcStrcpy(localIpAddr,(len+1),org.localIpAddr);
@@ -126,8 +126,8 @@ void PosixHandler::copyData(const PosixHandler& org, const bool cc)
 //------------------------------------------------------------------------------
 void PosixHandler::deleteData()
 {
-   if (localIpAddr != 0) delete[] localIpAddr;
-   localIpAddr = 0;
+   if (localIpAddr != nullptr) delete[] localIpAddr;
+   localIpAddr = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -175,7 +175,7 @@ bool PosixHandler::init()
     // ---
     // Set the local IP address
     // ---
-    if (localIpAddr != 0) {
+    if (localIpAddr != nullptr) {
         setLocalAddr(localIpAddr);
     }
 
@@ -431,7 +431,7 @@ bool PosixHandler::setNetAddr(const char* const hostname)
     bool ok = false;
     if (hostname != 0) {
         uint32_t addr0 = INADDR_NONE;
-        if (::isdigit(hostname[0])) {
+        if (std::isdigit(hostname[0])) {
             // If 'hostname' starts with a number then first try to use it as an IP address
             addr0 = ::inet_addr(hostname);
             ok = (addr0 != INADDR_NONE);
@@ -485,7 +485,7 @@ bool PosixHandler::setLocalAddr(const char* const hostname)
     bool ok = false;
     if (hostname != 0) {
         uint32_t addr0 = INADDR_NONE;
-        if (isdigit(hostname[0])) {
+        if (std::isdigit(hostname[0])) {
             // If 'hostname' starts with a number then first try to use it as an IP address
             addr0 = ::inet_addr(hostname);
             ok = (addr0 != INADDR_NONE);
@@ -530,8 +530,8 @@ bool PosixHandler::setLocalAddr(const char* const hostname)
 bool PosixHandler::setSlotLocalIpAddress(const String* const msg)
 {
     bool ok = false;
-    if (msg != 0) {
-        if (localIpAddr != 0) delete[] localIpAddr;
+    if (msg != nullptr) {
+        if (localIpAddr != nullptr) delete[] localIpAddr;
         localIpAddr = msg->getCopyString();
         ok = true;
     }
@@ -542,7 +542,7 @@ bool PosixHandler::setSlotLocalIpAddress(const String* const msg)
 bool PosixHandler::setSlotPort(const Number* const msg)
 {
     bool ok = false;
-    if (msg != 0) {
+    if (msg != nullptr) {
         int ii = msg->getInt();
         if (ii >= 0x0 && ii <= 0xffff) {
             ok = setPort( static_cast<uint16_t>(ii) );
@@ -555,7 +555,7 @@ bool PosixHandler::setSlotPort(const Number* const msg)
 bool PosixHandler::setSlotLocalPort(const Number* const msg)
 {
     bool ok = false;
-    if (msg != 0) {
+    if (msg != nullptr) {
         int ii = msg->getInt();
         if (ii >= 0x0 && ii <= 0xffff) {
             ok = setLocalPort( static_cast<uint16_t>(ii) );
@@ -568,7 +568,7 @@ bool PosixHandler::setSlotLocalPort(const Number* const msg)
 bool PosixHandler::setSlotShared(const Number* const msg)
 {
     bool ok = false;
-    if (msg != 0) {
+    if (msg != nullptr) {
         setSharedFlag( msg->getBoolean() );
         ok = true;
     }
@@ -579,7 +579,7 @@ bool PosixHandler::setSlotShared(const Number* const msg)
 bool PosixHandler::setSlotSendBuffSize(const Number* const msg)
 {
     bool ok = false;
-    if (msg != 0) {
+    if (msg != nullptr) {
         int ii = msg->getInt();
         if (ii >= 0 && ii <= 1024) {
            sendBuffSizeKb = ii;
@@ -593,7 +593,7 @@ bool PosixHandler::setSlotSendBuffSize(const Number* const msg)
 bool PosixHandler::setSlotRecvBuffSize(const Number* const msg)
 {
     bool ok = false;
-    if (msg != 0) {
+    if (msg != nullptr) {
         int ii = msg->getInt();
         if (ii >= 0 && ii <= 1024) {
            recvBuffSizeKb = ii;
@@ -607,7 +607,7 @@ bool PosixHandler::setSlotRecvBuffSize(const Number* const msg)
 bool PosixHandler::setSlotIgnoreSourcePort(const Number* const msg)
 {
     bool ok = false;
-    if (msg != 0) {
+    if (msg != nullptr) {
         int ii = msg->getInt();
         if (ii >= 0x0 && ii <= 0xffff) {
             ignoreSourcePort = uint16_t(ii);

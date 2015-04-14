@@ -111,7 +111,7 @@ public:
       );
 
    //------------------------------------------------------------------------------
-   // Legacy flat-earth projection; same as fbd2llS() 
+   // Legacy flat-earth projection; same as fbd2llS()
    //------------------------------------------------------------------------------
    static bool fbd2ll(
          const double slat,           // IN:  Starting (reference) latitude (degs)
@@ -123,7 +123,7 @@ public:
       );
 
    //------------------------------------------------------------------------------
-   // Legacy flat-earth projection; same as fll2bdS() 
+   // Legacy flat-earth projection; same as fll2bdS()
    //------------------------------------------------------------------------------
    static bool fll2bd(
          const double slat,           // IN:  Starting (reference) latitude (degs)
@@ -304,7 +304,7 @@ public:
          double* const elev = 0       // OUT: (optional) elevation angle (degs)
       );
 
- 
+
    //------------------------------------------------------------------------------
    // Vincenty direct method Lat/Lon to Brg/Dist (vbd2ll)
    //
@@ -491,7 +491,7 @@ public:
       );
 
    //----------------------------------------------------------
-   // NED position vector to LLA using a flat earth projection 
+   // NED position vector to LLA using a flat earth projection
    // with a spherical earth radius of ERAD60
    //----------------------------------------------------------
    static bool convertPosVec2llS(
@@ -630,7 +630,7 @@ public:
          const double lat,            // IN:  Geodetic latitude  (degrees)
          const double lon,            // IN:  Geodetic longitude (degrees)
          const double alt,            // IN:  Geodetic altitude  (meters)
-         double* const pX,            // OUT: ECEF X component   (meters)   
+         double* const pX,            // OUT: ECEF X component   (meters)
          double* const pY,            // OUT: ECEF Y component   (meters)
          double* const pZ,            // OUT: ECEF Z component   (meters)
          const EarthModel* const em=0 // IN:  Pointer to an optional earth model (default: WGS-84)
@@ -766,7 +766,7 @@ public:
       double* const pEasting,       // OUT: Easting  [M]
       const EarthModel* const pEM=0 // IN:  Pointer to an optional earth model (default: WGS-84)
    );
-   
+
    // Converts UTM Northing and Easting to Latitude, Longitude
    static bool convertUtm2LL(
       const double northing,        // IN:  Northing [M]
@@ -775,7 +775,7 @@ public:
       int  lonZone,                 // IN:  Longitude Zone
       double* const pLat,           // OUT: Latitude  [DEG]
       double* const pLon,           // OUT: Longitude [DEG]
-      const EarthModel* const pEM=0 // IN:  Pointer to an optional earth model (default: WGS-84)      
+      const EarthModel* const pEM=0 // IN:  Pointer to an optional earth model (default: WGS-84)
    );
 
 }; // End class Nav

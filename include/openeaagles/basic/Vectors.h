@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Classes: 
+// Classes:
 //    RVector  -- Row Vector
 //    CVector  -- Column Vector
 //------------------------------------------------------------------------------
@@ -200,7 +200,7 @@ inline RVector* multiply(const RVector& v, const double s)
    Matrix* r = multiply( *((const Matrix*)&v), s);
    return (RVector*) r;
 }
- 
+
 // ---
 // Returns a pre-ref'()d pointer to a RVector copy of the matrix A row vector
 // indicated by the index row
@@ -208,7 +208,7 @@ inline RVector* multiply(const RVector& v, const double s)
 inline RVector* getRowVector(const Matrix& A, const unsigned int r)
 {
    bool B1 = A.isGoodMatrix();
-   bool B2 = (0 <= r) && (r < A.getRows());
+   bool B2 = r < A.getRows();
    if (!B1 || !B2) return 0;
 
    const unsigned int N = A.getCols();
@@ -343,7 +343,7 @@ public:
    }
 
 
-   // overloaded "<<" operator 
+   // overloaded "<<" operator
    friend std::ostream& operator<<(std::ostream& sout, const CVector& V);
 
    void ref() { BaseClass::ref(); }
@@ -414,14 +414,14 @@ inline CVector* multiply(const CVector& v, const double s)
    Matrix* r = multiply( *((const Matrix*)&v), s);
    return (CVector*) r;
 }
- 
+
 // ---
 // Returns a pre-ref'()d pointer to a CVector copy of the c'th column vector of matrix A
 // ---
 inline CVector* getColVector(const Matrix& A, const unsigned int c)
 {
    bool B1 = A.isGoodMatrix();
-   bool B2 = (0 <= c) && (c < A.getCols());
+   bool B2 = c < A.getCols();
    if (!B1 || !B2) return 0;
 
    const unsigned int N = A.getRows();

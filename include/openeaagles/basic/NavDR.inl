@@ -32,7 +32,7 @@ inline bool NavDR::getR0Matrix(
    (*pR0)(0,0) = cosPch * cosYaw;
    (*pR0)(0,1) = cosPch * sinYaw;
    (*pR0)(0,2) = -sinPch;
-          
+           
    (*pR0)(1,0) = sinRol * sinPch * cosYaw - cosRol * sinYaw;
    (*pR0)(1,1) = sinRol * sinPch * sinYaw + cosRol * cosYaw;
    (*pR0)(1,2) = sinRol * cosPch;

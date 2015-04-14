@@ -27,7 +27,7 @@ BEGIN_SLOT_MAP(Transform)
     ON_SLOT(1,setComputematrix1,Angle)
     ON_SLOT(1,setComputematrix1,Number)
     ON_SLOT(2,setComputematrix2,Angle)
-    ON_SLOT(2,setComputematrix2,Number)       
+    ON_SLOT(2,setComputematrix2,Number)
     ON_SLOT(3,setComputematrix3,Angle)
     ON_SLOT(3,setComputematrix3,Number)
     ON_SLOT(4,setComputematrix4,Angle)
@@ -119,7 +119,7 @@ std::ostream& Transform::serialize(std::ostream& sout, const int i, const bool s
 // Class: Translation
 //==============================================================================
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Translation,"Translation")
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Translation, "Translation")
 EMPTY_SERIALIZER(Translation)
 
 //------------------------------------------------------------------------------
@@ -152,14 +152,14 @@ void Translation::computeMatrix()
         m.preMult(tt);
     }
 
-} 
+}
 
 
 //==============================================================================
 // Class: Rotation
 //==============================================================================
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Rotation,"Rotation")
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Rotation, "Rotation")
 EMPTY_SERIALIZER(Rotation)
 
 //------------------------------------------------------------------------------
@@ -199,7 +199,7 @@ void Rotation::computeMatrix()
 // Class: Scale
 //==============================================================================
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Scale,"Scale")
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Scale, "Scale")
 EMPTY_SERIALIZER(Scale)
 
 
@@ -209,7 +209,7 @@ EMPTY_SERIALIZER(Scale)
 Scale::Scale()
 {
    STANDARD_CONSTRUCTOR()
-} 
+}
 
 EMPTY_COPYDATA(Scale)
 EMPTY_DELETEDATA(Scale)
@@ -266,7 +266,7 @@ bool Transform::setComputematrix1(const Angle* const sc1obj)
 bool Transform::setComputematrix1(const Number* const sc1obj)
 {
     bool ok = true;
-    if (sc1obj != 0) {
+    if (sc1obj != nullptr) {
         v[nv++] = sc1obj->getReal();
         computeMatrix();
     }
@@ -301,7 +301,7 @@ bool Transform::setComputematrix2(const Angle* const sc2obj)
 bool Transform::setComputematrix2(const Number* const sc2obj)
 {
     bool ok = true;
-    if (sc2obj != 0) {
+    if (sc2obj != nullptr) {
         v[nv++] = sc2obj->getReal();
         computeMatrix();
     }
@@ -336,7 +336,7 @@ bool Transform::setComputematrix3(const Angle* const sc3obj)
 bool Transform::setComputematrix3(const Number* const sc3obj)
 {
     bool ok = true;
-    if (sc3obj != 0) {
+    if (sc3obj != nullptr) {
         v[nv++] = sc3obj->getReal();
         computeMatrix();
     }
@@ -371,7 +371,7 @@ bool Transform::setComputematrix4(const Angle* const sc4obj)
 bool Transform::setComputematrix4(const Number* const sc4obj)
 {
     bool ok = true;
-    if (sc4obj != 0) {
+    if (sc4obj != nullptr) {
         v[nv++] = sc4obj->getReal();
         computeMatrix();
     }

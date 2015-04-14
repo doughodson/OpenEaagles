@@ -17,18 +17,18 @@ EMPTY_SERIALIZER(RVector)
 EMPTY_COPYDATA(RVector)
 EMPTY_DELETEDATA(RVector)
 
- 
+
 //------------------------------------------------------------------------------
 // isZeroVector
 //------------------------------------------------------------------------------
 bool RVector::isZeroVector() const
 {
-   bool ok = true; 
+   bool ok = true;
    const unsigned int SIZE = getSize();
    unsigned int k = 0;
    while (ok && k < SIZE) {
       ok = ((*this)[k++] == 0.0);
-   } 
+   }
    return ok;
 }
 
@@ -46,16 +46,16 @@ double RVector::getNorm() const
 }
 
 //------------------------------------------------------------------------------
-// normalize this vector 
+// normalize this vector
 //------------------------------------------------------------------------------
 bool RVector::normalize()
 {
    if (isZeroVector()) return false;
 
-   double sf = 1.0 / getNorm();
+   const double sf = 1.0 / getNorm();
    multiply(sf);
    return true;
-} 
+}
 
 //------------------------------------------------------------------------------
 // fill with the value of 'x'
@@ -146,18 +146,18 @@ EMPTY_SERIALIZER(CVector)
 EMPTY_COPYDATA(CVector)
 EMPTY_DELETEDATA(CVector)
 
- 
+
 //------------------------------------------------------------------------------
 // isZeroVector
 //------------------------------------------------------------------------------
 bool CVector::isZeroVector() const
 {
-   bool ok = true; 
+   bool ok = true;
    const unsigned int SIZE = getSize();
    unsigned int k = 0;
    while (ok && k < SIZE) {
       ok = ((*this)[k++] == 0.0);
-   } 
+   }
    return ok;
 }
 
@@ -175,7 +175,7 @@ double CVector::getNorm() const
 }
 
 //------------------------------------------------------------------------------
-// normalize this vector 
+// normalize this vector
 //------------------------------------------------------------------------------
 bool CVector::normalize()
 {
@@ -184,7 +184,7 @@ bool CVector::normalize()
    double sf = 1.0 / getNorm();
    multiply(sf);
    return true;
-} 
+}
 
 //------------------------------------------------------------------------------
 // fill with the value of 'x'

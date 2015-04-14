@@ -12,6 +12,8 @@
 
 #include "openeaagles/basic/Object.h"
 
+#include <cmath>
+
 namespace Eaagles {
 namespace Basic {
    class CVector; // Column vector
@@ -52,7 +54,7 @@ public:
 
    bool isSquare() const                                                { return (rows == cols); }
    bool isGoodIndex(const unsigned int i, const unsigned int j) const   { return (i < rows) && (j < cols); }
-   bool isGoodMatrix() const                                            { return ((mda != 0) && (rows > 0) & (cols > 0)); }
+   bool isGoodMatrix() const                                            { return ((mda != 0) && ((rows > 0) & (cols > 0))); }
    bool isSymmetric() const;
 
    // The (i,j) element

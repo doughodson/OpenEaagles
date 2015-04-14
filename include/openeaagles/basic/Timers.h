@@ -102,10 +102,10 @@ private:
     double ctime;           // Current time (seconds).
     double alarmTime;       // Alarm time (seconds).
     double timerValue;      // Timer value (seconds).
-    bool     active;             // Active flag.
+    bool   active;          // Active flag.
     Type dir;               // Direction up/down.
 
-    static bool frz;           // Freeze all timers (freeze time)
+    static bool frz;                    // Freeze all timers (freeze time)
     static Timer* timers[MAX_TIMERS];   // List of timers
     static unsigned int nTimers;        // Number of timers in the list
     static long semaphore;              // Semaphore for the timer list

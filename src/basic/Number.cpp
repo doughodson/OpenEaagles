@@ -18,7 +18,7 @@ END_SLOTTABLE(Number)
 
 
 //------------------------------------------------------------------------------
-//  Map slot table to handles 
+//  Map slot table to handles
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(Number)
     ON_SLOT(1, setSlotValue, Number)
@@ -51,7 +51,7 @@ Object* Number::getSlotByIndex(const int si)
 bool Number::setSlotValue(const Number* const svobj)
 {
    bool ok = false;
-   if (svobj != 0) {
+   if (svobj != nullptr) {
       val = svobj->val;
       ok = true;
    }

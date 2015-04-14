@@ -18,7 +18,7 @@ BEGIN_SLOTTABLE(Yiq)
     "q",  // 3: ... Q component, range(-0.52 to 0.52)
 END_SLOTTABLE(Yiq)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(Yiq)
     ON_SLOT(1,setY,Number)
     ON_SLOT(2,setI,Number)
@@ -87,9 +87,9 @@ void Yiq::getYIQ(osg::Vec3& hhh) const
 //------------------------------------------------------------------------------
 bool Yiq::setY(Number* const msg)
 {
-    if (msg == 0) return false;
-    LCreal value = msg->getReal();
-    bool ok = (value >= 0 && value <= 1);
+    if (msg == nullptr) return false;
+    const LCreal value = msg->getReal();
+    const bool ok = (value >= 0 && value <= 1);
     if (ok) { yiq[Y] = value; yiq2rgb(color,yiq); }
     else std::cerr << "Yiq::setY: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
     return ok;
@@ -100,9 +100,9 @@ bool Yiq::setY(Number* const msg)
 //------------------------------------------------------------------------------
 bool Yiq::setI(Number* const msg)
 {
-    if (msg == 0) return false;
-    LCreal value = msg->getReal();
-    bool ok = (value >= -0.6 && value <= 0.6);
+    if (msg == nullptr) return false;
+    const LCreal value = msg->getReal();
+    const bool ok = (value >= -0.6 && value <= 0.6);
     if (ok) { yiq[I] = value; yiq2rgb(color,yiq); }
     else std::cerr << "Yiq::setI: invalid entry(" << value << "), valid range: -0.6 to 0.6" << std::endl;
     return ok;
@@ -113,9 +113,9 @@ bool Yiq::setI(Number* const msg)
 //------------------------------------------------------------------------------
 bool Yiq::setQ(Number* const msg)
 {
-    if (msg == 0) return false;
-    LCreal value = msg->getReal();
-    bool ok = (value >= -0.52 && value <= 0.52);
+    if (msg == nullptr) return false;
+    const LCreal value = msg->getReal();
+    const bool ok = (value >= -0.52 && value <= 0.52);
     if (ok) { yiq[Q] = value; yiq2rgb(color,yiq); }
     else std::cerr << "Yiq::setQ: invalid entry(" << value << "), valid range: -0.52 to 0.52" << std::endl;
     return ok;

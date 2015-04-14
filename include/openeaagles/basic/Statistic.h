@@ -6,6 +6,8 @@
 
 #include "openeaagles/basic/Object.h"
 
+#include <cmath>
+
 namespace Eaagles {
 namespace Basic {
 

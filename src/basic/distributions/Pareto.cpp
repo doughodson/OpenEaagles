@@ -65,7 +65,7 @@ double Pareto::draw()
 bool Pareto::setSlotAlpha(const Number* const x)
 {
   bool ok = false;
-  if(x != 0)
+  if(x != nullptr)
     ok = setAlpha(x->getDouble());
   return ok;
 }
@@ -73,7 +73,7 @@ bool Pareto::setSlotAlpha(const Number* const x)
 bool Pareto::setSlotBeta(const Number* const x)
 {
   bool ok = false;
-  if(x != 0)
+  if(x != nullptr)
     ok = setBeta(x->getDouble());
   return ok;
 }

@@ -1,6 +1,6 @@
 
-#ifndef __Eaagles_Basic_Lfi_utils_H__
-#define __Eaagles_Basic_Lfi_utils_H__
+#ifndef __Eaagles_Basic_lfi_utils_H__
+#define __Eaagles_Basic_lfi_utils_H__
 
 #include "openeaagles/basic/support.h"
 

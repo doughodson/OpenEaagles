@@ -17,7 +17,7 @@ EMPTY_SERIALIZER(Timer)
 bool Timer::frz = false;            // Freeze flag
 Timer* Timer::timers[MAX_TIMERS];   // List of timers
 unsigned int Timer::nTimers = 0;    // Number of timers in the list
-long Timer::semaphore = 0;          // Semaphore for the timer list 
+long Timer::semaphore = 0;          // Semaphore for the timer list
 
 
 //------------------------------------------------------------------------------
@@ -29,7 +29,7 @@ BEGIN_SLOTTABLE(Timer)
    "active",             // 3: Sets timer active (running) flag (default: false)
 END_SLOTTABLE(Timer)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(Timer)
    ON_SLOT(1, setSlotTimerValue,Time)
    ON_SLOT(2, setSlotAlarmTime,Time)
@@ -50,7 +50,7 @@ Timer::Timer()
 
 void Timer::initData()
 {
-   active = false;
+    active = false;
     timerValue = 0.0f;
     ctime  = 0.0f;
     alarmTime = 0.0f;
@@ -63,7 +63,7 @@ Timer::Timer(const Type direction, const double rtime)
 {
     STANDARD_CONSTRUCTOR()
 
-   initData();
+    initData();
 
     timerValue = rtime;
     ctime  = rtime;
@@ -75,15 +75,15 @@ Timer::Timer(const Type direction, const double rtime)
 // -----------------------------------------------------------------------------
 void Timer::copyData(const Timer& org, const bool cc)
 {
-   active = false;
+    active = false;
 
     BaseClass::copyData(org);
-   if (cc) initData();
+    if (cc) initData();
 
     timerValue = org.timerValue;
     ctime  = org.ctime;
     alarmTime = org.alarmTime;
-   dir = org.dir;
+    dir = org.dir;
     active = org.active;
 }
 
@@ -135,8 +135,8 @@ void Timer::updateTimers(const double dt)
          timers[i]->update(dt);
       }
       lcUnlock( semaphore );
-   }
-        }
+    }
+}
 
 
 // -----------------------------------------------------------------
@@ -191,7 +191,7 @@ void Timer::removeFromTimerList(Timer* timer)
 bool Timer::setSlotTimerValue(const Time* const msg)
 {
     bool ok = false;
-    if (msg != 0) {
+    if (msg != nullptr) {
       double sec = Seconds::convertStatic(*msg);
       ok = setTimerValue(sec);
       if (ok) setCurrentTime(sec);
@@ -203,7 +203,7 @@ bool Timer::setSlotTimerValue(const Time* const msg)
 bool Timer::setSlotAlarmTime(const Time* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setAlarmTime( Seconds::convertStatic(*msg) );
     }
     return ok;
@@ -213,7 +213,7 @@ bool Timer::setSlotAlarmTime(const Time* const msg)
 bool Timer::setSlotTimerActive(const Number* const msg)
 {
     bool ok = false;
-    if (msg != 0) {
+    if (msg != nullptr) {
         active = msg->getBoolean();
         ok = true;
     }

@@ -3,6 +3,8 @@
 //------------------------------------------------------------------------------
 #include "openeaagles/basic/Nav.h"
 
+#include <cmath>
+
 namespace Eaagles {
 namespace Basic {
 
@@ -143,7 +145,7 @@ bool Nav::gbd2ll(
 {
    // Initialize earth model parameters
    const EarthModel* pModel = em;
-   if (pModel == 0) { pModel = &EarthModel::wgs84; }
+   if (pModel == nullptr) { pModel = &EarthModel::wgs84; }
 
    const double eemA  = Distance::M2NM * pModel->getA();
    //const double eemF  = pModel->getF();
@@ -281,7 +283,7 @@ bool Nav::gll2bd(
 {
    // Initialize earth model parameters
    const EarthModel* pModel = em;
-   if (pModel == 0) { pModel = &EarthModel::wgs84; }
+   if (pModel == nullptr) { pModel = &EarthModel::wgs84; }
 
    const double eemA  = Distance::M2NM * pModel->getA();
    //const double eemF  = pModel->getF();
@@ -334,7 +336,7 @@ bool Nav::gll2bd(
    double z = x + y;
    z = alimd(z, 1.0);
 
-   *dist = grad * fabs(std::acos(z));
+   *dist = grad * std::fabs(std::acos(z));
    if(*dist == 0.0) {
       *brg = 0.0;
       return true;
@@ -378,7 +380,7 @@ bool Nav::gll2bdS(
 
    // -----------------------------------------------------
    // compute distance
-   if (dist != 0) {
+   if (dist != nullptr) {
       double k  = sinLat1 * sinLat2 + cosLat1 * cosLat2 * cosDLon;
       k = alimd(k, 1.0);
       *dist = ERAD60 * std::acos(k);
@@ -386,7 +388,7 @@ bool Nav::gll2bdS(
 
    // -----------------------------------------------------
    // compute bearing
-   if (brg != 0) {
+   if (brg != nullptr) {
       double k1 = sinDLon * cosLat2;
       double k2 = cosLat1 * sinLat2 - sinLat1 * cosLat2 * cosDLon;
       double k3 = std::atan2(k1, k2);
@@ -518,7 +520,7 @@ bool Nav::vbd2ll(
    // Initialize earth model parameters
    //---------------------------------------------
    const EarthModel* pModel = em;
-   if (pModel == 0) { pModel = &EarthModel::wgs84; }
+   if (pModel == nullptr) { pModel = &EarthModel::wgs84; }
 
    const double eemA  = pModel->getA();
    const double eemF  = pModel->getF();
@@ -651,7 +653,7 @@ bool Nav::vll2bd(
    // Initialize earth model parameters
    //---------------------------------------------
    const EarthModel* pModel = em;
-   if (pModel == 0) { pModel = &EarthModel::wgs84; }
+   if (pModel == nullptr) { pModel = &EarthModel::wgs84; }
 
    const double eemA  = pModel->getA();
    const double eemF  = pModel->getF();
@@ -812,7 +814,7 @@ bool Nav::computeRotationalMatrix(
    if (scTht != 0) scTht->set( stht, ctht  );
    if (scPsi != 0) scPsi->set( spsi, cpsi  );
 
-   if (m != 0) {
+   if (m != nullptr) {
       (*m)(0,0) = (+ctht*cpsi);
       (*m)(0,1) = (+ctht*spsi);
       (*m)(0,2) = (-stht);
@@ -854,7 +856,6 @@ bool Nav::computeEulerAngles(
 
    double ctht = std::sqrt(1.0 - stht*stht);
 
-
    double sphi = 0;
    double cphi = 1;
    if (ctht > 0) {
@@ -878,12 +879,12 @@ bool Nav::computeEulerAngles(
    // ---
    // Set output values
    // ---
-   if (angles != 0) {
+   if (angles != nullptr) {
       angles->set( std::atan2(sphi,cphi), std::atan2(stht,ctht), std::atan2(spsi,cpsi) );
    }
-   if (scPhi != 0) scPhi->set( sphi, cphi  );
-   if (scTht != 0) scTht->set( stht, ctht  );
-   if (scPsi != 0) scPsi->set( spsi, cpsi  );
+   if (scPhi != nullptr) scPhi->set( sphi, cphi  );
+   if (scTht != nullptr) scTht->set( stht, ctht  );
+   if (scPsi != nullptr) scPsi->set( spsi, cpsi  );
 
    return true;
 }
@@ -947,7 +948,7 @@ bool Nav::convertEcef2Geod(
    // Initialize earth model parameters
    //---------------------------------------------
    const EarthModel* pModel = em;
-   if (pModel == 0) { pModel = &EarthModel::wgs84; }
+   if (pModel == nullptr) { pModel = &EarthModel::wgs84; }
 
    const double a  = pModel->getA();
    //const double f  = pModel->getF();
@@ -1058,7 +1059,7 @@ bool Nav::convertGeod2Ecef(
    // Initialize earth model parameters
    //---------------------------------------------
    const EarthModel* p = em;
-   if (p == 0) { p = &EarthModel::wgs84; }
+   if (p == nullptr) { p = &EarthModel::wgs84; }
 
    const double a  = p->getA();
    //const double f  = p->getF();
@@ -1591,17 +1592,17 @@ static int getLonZone(const double latDeg, const double lonDeg)
 {
    //-----------------------------------
    // get longitude zone number
-   //-----------------------------------   
+   //-----------------------------------
    double lonZone = (lonDeg >= 0.0) ? 31.0 + lonDeg/6.0
                                     : 1.0 + (lonDeg + 180.0)/6.0;
 
    //-----------------------------------
    // special case longitude zone number
-   //-----------------------------------   
+   //-----------------------------------
    if ( (latDeg >= 56.0) && (latDeg < 64.0) && (lonDeg >= 3.0) && (lonDeg < 12.0) ) {
       lonZone = 32;
    }
-   
+
    //-----------------------------------
    // Special zones for Svalbard
    //-----------------------------------
@@ -1611,14 +1612,14 @@ static int getLonZone(const double latDeg, const double lonDeg)
       else if ( lonDeg >= 21.0 && lonDeg < 33.0 ) lonZone = 35;
       else if ( lonDeg >= 33.0 && lonDeg < 42.0 ) lonZone = 37;
    }
-   
+
    return int(lonZone);
 }
 
 static bool inNorthHemi(const char latZone)
 {
    bool northHemi = true;
-   
+
    if (latZone == 'M' ||
        latZone == 'L' ||
        latZone == 'K' ||
@@ -1629,7 +1630,7 @@ static bool inNorthHemi(const char latZone)
        latZone == 'E' ||
        latZone == 'D' ||
        latZone == 'C') northHemi = false;
-       
+
    return northHemi;
 }
 
@@ -1657,16 +1658,16 @@ bool Nav::convertLL2Utm(
    double k2 = 0.0;
    double k3 = 0.0;
    double k4 = 0.0;
-   
+
    //-----------------------------------
    // local constants
    //-----------------------------------
    const double A       = pEM->getA();
-   const double B       = pEM->getB();   
+   const double B       = pEM->getB();
    const double E2      = pEM->getE2();
-   
+
    //-----------------------------------
-   // check input terms valid 
+   // check input terms valid
    //-----------------------------------
    bool latValid =  (-80.0 <= lat) && (lat <=  +84.0);
    bool lonValid = (-180.0 <= lon) && (lon <= +180.0);
@@ -1683,7 +1684,7 @@ bool Nav::convertLL2Utm(
       const double COS1  = std::cos(LATRAD);
 
       const double SIN2 = SIN1*SIN1;
-      
+
       const double COS2 = COS1*COS1;
       const double COS3 = COS1*COS2;
       const double COS4 = COS1*COS3;
@@ -1691,7 +1692,7 @@ bool Nav::convertLL2Utm(
       const double COS6 = COS1*COS5;
       const double COS7 = COS1*COS6;
       const double COS8 = COS1*COS7;
-      
+
       const double TAN1 = SIN1/COS1;
       const double TAN2 = TAN1*TAN1;
       const double TAN3 = TAN1*TAN2;
@@ -1709,7 +1710,7 @@ bool Nav::convertLL2Utm(
       const double N5 = N1*N4;
 
       const double Ap =               A*( 1.0 - N1 + (1.25)  *(N2 - N3) + (81.0/64.0)*(N4 - N5) );
-      const double Bp =         (1.5)*A*(  N1 - N2 + (0.875) *(N3 - N4) + (55.0/64.0)*(N5) ); 
+      const double Bp =         (1.5)*A*(  N1 - N2 + (0.875) *(N3 - N4) + (55.0/64.0)*(N5) );
       const double Cp =      (0.9375)*A*(  N2 - N3 + (0.75)  *(N4 - N5) );
       const double Dp =   (35.0/48.0)*A*(  N3 - N4 + (0.6875)*(N5) );
       const double Ep = (315.0/512.0)*A*(  N4 - N5 );
@@ -1720,10 +1721,10 @@ bool Nav::convertLL2Utm(
       const double SIN8LAT = std::cos(6.0*LATRAD);
 
       const double S  = Ap*LATRAD - Bp*SIN2LAT + Cp*SIN4LAT - Dp*SIN6LAT + Ep*SIN8LAT;
-      
+
       //---------------
       // constants
-      //---------------   
+      //---------------
       const double EP2  = (E2 != 1.0) ? E2/(1.0 - E2) : -1.0;  // -1.0 indicates an error
       const double EP4  = EP2*EP2;
       const double EP6  = EP2*EP4;
@@ -1737,19 +1738,19 @@ bool Nav::convertLL2Utm(
       // term T1
       //---------------
       const double T1 = S*K0;
-      
+
       //---------------
       // term T2
       //---------------
       const double T2 = Q*SIN1*COS1*K0/2.0;
-      
+
       //---------------
       // term T3
       //---------------
       k1 = Q*SIN1*COS3*K0/24.0;
       k2 = 5.0 - TAN2 + 9.0*EP2*COS2 + 4.0*EP4*COS4;
       const double T3 = k1*k2;
-      
+
       //---------------
       // term T4
       //---------------
@@ -1758,26 +1759,26 @@ bool Nav::convertLL2Utm(
       k3 = 445.0*EP4*COS4 + 324.0*EP6*COS6 - 680.0*TAN2*EP4*COS4;
       k4 = 88.0*EP8*COS8 - 600.0*TAN2*EP6*COS6 - 192.0*TAN2*EP8*COS8;
       const double T4 =  k1*(k2 + k3 + k4);
-      
+
       //---------------
       // term T5
       //---------------
       k1 = Q*SIN1*COS7*K0/40320.0;
       k2 = 1385.0 - 3111.0*TAN2 + 543.0*TAN4 - TAN6;
       const double T5 = k1*k2;
-      
+
       //---------------
       // term T6
       //---------------
       const double T6 = Q*COS1*K0;
-      
+
       //---------------
       // term T7
       //---------------
       k1 = Q*COS3*K0/6.0;
       k2 = 1.0 - TAN2 + EP2*COS2;
       const double T7 = k1*k2;
-      
+
       //---------------
       // term T8
       //---------------
@@ -1785,7 +1786,7 @@ bool Nav::convertLL2Utm(
       k2 = 5.0 - 18.0*TAN2 + TAN4 + 14.0*EP2*COS2 - 58.0*TAN2*EP2*COS2;
       k3 = 13.0*EP4*COS4 + 4.0*EP6*COS6 - 64.0*TAN2*EP4*COS4 - 24.0*TAN2*EP6*COS6;
       const double T8 = k1*(k2 + k3);
-      
+
       //---------------
       // term T9
       //---------------
@@ -1813,11 +1814,11 @@ bool Nav::convertLL2Utm(
 
       const double FN  = (LATDEG < 0.0) ? 1.0e7 : 0.0;
       const double FE  = 500000.0;
-      
+
       *pNorthing = FN + T1 + dL2*T2 + dL4*T3 + dL6*T4 + dL8*T5;
       *pEasting  = FE +      dL1*T6 + dL3*T7 + dL5*T8 + dL7*T9;
    }
-   
+
    return ok;
 }
 
@@ -1836,7 +1837,7 @@ bool Nav::convertUtm2LL(
       int                     lonZone,  // IN:  Longitude Zone
       double* const           pLat,     // OUT: Latitude       [DEG]
       double* const           pLon,     // OUT: Longitude      [DEG]
-      const EarthModel* const pEM)      // IN:  Pointer to an optional earth model (default: WGS-84)      
+      const EarthModel* const pEM)      // IN:  Pointer to an optional earth model (default: WGS-84)
 {
    //-----------------------------------
    // local variables
@@ -1846,22 +1847,22 @@ bool Nav::convertUtm2LL(
    double k3 = 0.0;
    double k4 = 0.0;
    double k5 = 0.0;
-   
+
    //-----------------------------------
    // local constants
    //-----------------------------------
    const double A    = pEM->getA();
    const double B    = pEM->getB();
-   
+
    const double E2   = pEM->getE2();
    const double E4   = E2*E2;
    const double E6   = E2*E4;
-   
+
    const double EP2  = (E2 != 1.0) ? E2/(1.0 - E2) : -1.0;
    const double EP4  = EP2*EP2;
    const double EP6  = EP2*EP4;
    const double EP8  = EP2*EP6;
-   
+
    const double K01  = 0.9996;   // central scale factor for UTM
    const double K02  = K01*K01;
    const double K03  = K01*K02;
@@ -1870,38 +1871,38 @@ bool Nav::convertUtm2LL(
    const double K06  = K01*K05;
    const double K07  = K01*K06;
    const double K08  = K01*K07;
-   
+
    //-----------------------------------
    // calculate the footprint latitude (FPLAT)
    //-----------------------------------
    k1 = inNorthHemi(latZone) ? northing : (northing - 1.0e7);
    k2 = A*K01*(1.0 - E2/4.0 - (3.0/64.0)*E4 - (5.0/256.0)*E6);
-   
+
    const double MU      = k1/k2;
    const double SIN2MU  = std::sin(2.0*MU);
    const double SIN4MU  = std::cos(4.0*MU);
    const double SIN6MU  = std::sin(6.0*MU);
    const double SIN8MU  = std::cos(8.0*MU);
-   
+
    const double N1      = (A - B)/(A + B);
    const double N2      = N1*N1;
    const double N3      = N1*N2;
    const double N4      = N1*N3;
-                     
+
    const double J1      =      (3.0/2.0)*N1 - (27.0/32.0)*N3;
    const double J2      =    (21.0/16.0)*N2 - (55.0/32.0)*N4;
    const double J3      =   (151.0/96.0)*N3;
    const double J4      = (1097.0/512.0)*N4;
 
    const double FPLAT   = MU + J1*SIN2MU + J2*SIN4MU + J3*SIN6MU + J4*SIN8MU;
-   
+
    //-----------------------------------
    // powers of sin,cos,tan of FPLAT
    //-----------------------------------
    const double SIN1    = std::sin(FPLAT);
    const double SIN2    = SIN1*SIN1;
 
-   const double COS1    = std::cos(FPLAT);   
+   const double COS1    = std::cos(FPLAT);
    const double COS2    = COS1*COS1;
    const double COS3    = COS1*COS2;
    const double COS4    = COS1*COS3;
@@ -1909,7 +1910,7 @@ bool Nav::convertUtm2LL(
    const double COS6    = COS1*COS5;
    const double COS7    = COS1*COS6;
    const double COS8    = COS1*COS7;
-   
+
    const double TAN1    = SIN1/COS1;
    const double TAN2    = TAN1*TAN1;
    const double TAN3    = TAN1*TAN2;
@@ -1935,7 +1936,7 @@ bool Nav::convertUtm2LL(
    const double DE6     = DE1*DE5;
    const double DE7     = DE1*DE6;
    const double DE8     = DE1*DE7;
-   
+
    //---------------
    // term T10
    //---------------
@@ -1993,7 +1994,7 @@ bool Nav::convertUtm2LL(
    k1 = 61.0 + 662.0*TAN2 + 1320.0*TAN4 + 720.0*TAN6;
    k2 = 5040.0*Q7*COS1*K07;
    const double T17 = k1/k2;
-   
+
 
    //-----------------------------------
    // calculate latitude and longitude

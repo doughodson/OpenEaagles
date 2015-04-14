@@ -1,3 +1,4 @@
+
 #include "openeaagles/basic/Pair.h"
 #include "openeaagles/basic/Integer.h"
 #include "openeaagles/basic/Float.h"
@@ -21,12 +22,13 @@ Pair::Pair(const char* slot, Object* object)
     slotname = new Identifier(slot);
 
     // Set the object & ref()
-    if (object != 0) {
+    if (object != nullptr) {
         obj = object;
         obj->ref();
     }
-    else
+    else {
         obj  = 0;
+    }
 }
 
 //------------------------------------------------------------------------------
@@ -38,23 +40,34 @@ void Pair::copyData(const Pair& pair1, const bool cc)
 
     // If we're the copy constructor, init the following
     if (cc) {
-        slotname = 0;
-        obj = 0;
+        slotname = nullptr;
+        obj = nullptr;
     }
 
     // unref() any old data
-    if (slotname != 0) slotname->unref();
-    if (obj != 0) obj->unref();
+    if (slotname != nullptr) {
+       slotname->unref();
+    }
+
+    if (obj != nullptr) {
+       obj->unref();
+    }
 
     // Copy slotname (already ref() by constructor in clone())
-    if (pair1.slotname != 0) slotname = static_cast<Identifier*>(pair1.slotname->clone());
-    else slotname = 0;
+    if (pair1.slotname != nullptr) {
+       slotname = static_cast<Identifier*>(pair1.slotname->clone());
+    }
+    else {
+       slotname = nullptr;
+    }
 
     // Copy the object (already ref() by constructor in clone())
-    if (pair1.obj != 0) {
+    if (pair1.obj != nullptr) {
       obj = pair1.obj->clone();
     }
-    else obj = 0;
+    else {
+       obj = nullptr;
+    }
 }
 
 //------------------------------------------------------------------------------
@@ -62,11 +75,11 @@ void Pair::copyData(const Pair& pair1, const bool cc)
 //------------------------------------------------------------------------------
 void Pair::deleteData(void)
 {
-    if (slotname != 0) slotname->unref();
-    slotname = 0;
+    if (slotname != nullptr) slotname->unref();
+    slotname = nullptr;
 
-    if (obj != 0) obj->unref();
-    obj = 0;
+    if (obj != nullptr) obj->unref();
+    obj = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -75,7 +88,7 @@ void Pair::deleteData(void)
 bool Pair::isValid() const
 {
     if (!Object::isValid()) return false;
-    if (slotname == 0 || obj == 0) return false;
+    if (slotname == nullptr || obj == nullptr) return false;
     return slotname->isValid() && obj->isValid();
 }
 
@@ -84,7 +97,7 @@ bool Pair::isValid() const
 //------------------------------------------------------------------------------
 std::ostream& Pair::serialize(std::ostream& sout, const int indent, const bool) const
 {
-   if (slot() != 0 && !slot()->isEmpty()) {
+   if (slot() != nullptr && !slot()->isEmpty()) {
       sout << slot()->getString();
    }
    else {
@@ -95,7 +108,7 @@ std::ostream& Pair::serialize(std::ostream& sout, const int indent, const bool) 
    //sout << endl;
 
    const Object* obj = object();
-   if (obj != 0) {
+   if (obj != nullptr) {
       obj->serialize(sout,indent);
    }
    else sout << "<null>";

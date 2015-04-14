@@ -22,7 +22,7 @@ inline bool Nav::fbd2llE(
 {
    // Initialize earth model parameters
    const EarthModel* pModel = em;
-   if (pModel == 0) { pModel = &EarthModel::wgs84; }
+   if (pModel == nullptr) { pModel = &EarthModel::wgs84; }
 
    const double a  = Distance::M2NM * pModel->getA();   // semi-major axis
    const double e2 = pModel->getE2();  // eccentricity squared
@@ -70,7 +70,7 @@ inline bool Nav::fll2bdE(
 {
    // Initialize earth model parameters
    const EarthModel* pModel = em;
-   if (pModel == 0) { pModel = &EarthModel::wgs84; }
+   if (pModel == nullptr) { pModel = &EarthModel::wgs84; }
 
    const double a  = Distance::M2NM * pModel->getA();   // semi-major axis
    const double e2 = pModel->getE2();  // eccentricity squared
@@ -117,7 +117,7 @@ inline bool Nav::fbd2llS(
    )
 {
    bool ok = false;
-   if (dlat != 0 && dlon != 0) {
+   if (dlat != nullptr && dlon != nullptr) {
       double ang = brg * Angle::D2RCC;
       double ew = std::sin(ang) * dist;
       double ns = std::cos(ang) * dist;
@@ -148,7 +148,7 @@ inline bool Nav::fll2bdS(
    )
 {
    bool ok = false;
-   if (brg != 0 && dist != 0) {
+   if (brg != nullptr && dist != nullptr) {
       double ns = ( Angle::aepcdDeg(dlat - slat) * 60.0 );
       double ew = ( Angle::aepcdDeg(dlon - slon) * 60.0 * std::cos(slat*Angle::D2RCC) );
       *brg = std::atan2(ew,ns) * Angle::R2DCC;
@@ -244,7 +244,7 @@ inline bool Nav::aer2xyz(
 {
    bool ok = false;
 
-   if (pos != 0) {
+   if (pos != nullptr) {
       // Compute sin/cos of azimuth
       double saz, caz;
       sinCos(az,&saz,&caz);
@@ -336,7 +336,7 @@ inline bool Nav::convertEcef2Geod(
          )
 {
    bool ok = false;
-   if (lla != 0) {
+   if (lla != nullptr) {
       double lat(0.0), lon(0.0), alt(0.0);
       ok = convertEcef2Geod(vec[IX], vec[IY], vec[IZ], &lat, &lon, &alt, em);
       if (ok) lla->set(lat, lon, alt);
@@ -368,7 +368,7 @@ inline bool Nav::convertGeod2Ecef(
          )
 {
    bool ok = false;
-   if (ecef != 0) {
+   if (ecef != nullptr) {
       double x(0.0), y(0.0), z(0.0);
       ok = convertGeod2Ecef(lla[ILAT], lla[ILON], lla[IALT], &x, &y, &z, em);
       if (ok) ecef->set(x, y, z);
@@ -459,7 +459,7 @@ inline bool Nav::computeEulerAnglesDeg(
 {
    osg::Vec3d angles;
    bool ok = computeEulerAngles(rm, &angles, scPhi, scTht, scPsi);
-   if (ok && anglesD != 0) {
+   if (ok && anglesD != nullptr) {
       anglesD->set(
          angles[0] * Basic::Angle::R2DCC,
          angles[1] * Basic::Angle::R2DCC,
@@ -482,7 +482,7 @@ inline bool Nav::convertGeodAngles2EcefAngles(
          )
 {
    bool ok = false;
-   if (vc != 0) {
+   if (vc != nullptr) {
       // compute body/ECEF directional cosines
       osg::Matrixd T = rm * wm;
       // compute geocentric orientation angles
@@ -529,7 +529,7 @@ inline bool Nav::convertEcefAngles2GeodAngles(
          )
 {
    bool ok = false;
-   if (vd != 0) {
+   if (vd != nullptr) {
       // Transpose world matrix
       osg::Matrixd wmT = wm;
       wmT.transpose();
@@ -590,7 +590,7 @@ inline bool Nav::convertPosVec2llE(
 {
    // Initialize earth model parameters
    const EarthModel* pModel = em;
-   if (pModel == 0) { pModel = &EarthModel::wgs84; }
+   if (pModel == nullptr) { pModel = &EarthModel::wgs84; }
 
    const double a  = pModel->getA();   // semi-major axis
    const double e2 = pModel->getE2();  // eccentricity squared
@@ -654,7 +654,7 @@ inline bool Nav::convertPosVec2llS(
    )
 {
    bool ok = false;
-   if (lat != 0 && lon != 0 && alt != 0) {
+   if (lat != nullptr && lon != nullptr && alt != nullptr) {
 
       *lat = (pos[INORTH] * Distance::M2NM)/60.0 + slat;
 
@@ -719,7 +719,7 @@ inline bool Nav::convertLL2PosVecE(
    if (pos != 0) {
       // Initialize earth model parameters
       const EarthModel* pModel = em;
-      if (pModel == 0) { pModel = &EarthModel::wgs84; }
+      if (pModel == nullptr) { pModel = &EarthModel::wgs84; }
 
       const double a  = pModel->getA();   // semi-major axis
       const double e2 = pModel->getE2();  // eccentricity squared
@@ -756,7 +756,7 @@ inline bool Nav::convertLL2PosVecS(
    )
 {
    bool ok = false;
-   if (pos != 0) {
+   if (pos != nullptr) {
       double x = ( Angle::aepcdDeg(lat - slat) * 60.0 * Distance::NM2M );
       double y = ( Angle::aepcdDeg(lon - slon) * 60.0 * Distance::NM2M * cosSlat );
       double z = ( -alt );
@@ -807,7 +807,7 @@ inline bool Nav::convertLL2PosVec(
    )
 {
    bool ok = false;
-   if (pos != 0) {
+   if (pos != nullptr) {
       const double cosSlat = std::cos(Angle::D2RCC * slat);
       osg::Vec3d posD;
       ok = convertLL2PosVecS(slat, slon, cosSlat, lat, lon, alt, &posD);

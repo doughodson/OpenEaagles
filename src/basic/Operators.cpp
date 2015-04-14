@@ -18,16 +18,16 @@ BEGIN_SLOTTABLE(Add)
     "n2",       //  2nd number (first number is from Number)
     "n3",       //  3rd number
     "n4",       //  4th number
-    "n5",       //  5th number 
+    "n5",       //  5th number
     "n6",       //  6th number
     "n7",       //  7th number
     "n8",       //  8th number
-    "n9",       //  9th number 
+    "n9",       //  9th number
     "n10",      // 10th number
 END_SLOTTABLE(Add)
 
 //------------------------------------------------------------------------------
-//  Map slot table to handles 
+//  Map slot table to handles
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(Add)
     // Accept an Number at any slot index ...
@@ -91,24 +91,24 @@ Object* Add::getSlotByIndex(const int si)
 //------------------------------------------------------------------------------
 // operation() -- the operations
 //------------------------------------------------------------------------------
-void Add::operation() 
+void Add::operation()
 {
     val = val + n2;
 }
 
 void Subtract::operation()
-{ 
+{
     val = val - n2;
 }
 
 void Multiply::operation()
-{ 
+{
     val = val * n2;
 }
 
 void Divide::operation()
 {
-    if (n2 != 0.0f) val = (val / n2);  /* only if non-zero divisor */
+    if (n2 != 0.0) val = (val / n2);  /* only if non-zero divisor */
 }
 
 //------------------------------------------------------------------------------
@@ -191,7 +191,7 @@ std::ostream& Divide::serialize(std::ostream& sout, const int i, const bool slot
 }
 
 //------------------------------------------------------------------------------
-// setSecondNumber() -- 
+// setSecondNumber() --
 //------------------------------------------------------------------------------
 bool Add::setSecondNumber(const Number* const ssnobj)
 {

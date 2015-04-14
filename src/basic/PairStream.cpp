@@ -29,9 +29,9 @@ EMPTY_DELETEDATA(PairStream)
 //------------------------------------------------------------------------------
 Pair* PairStream::findByType(const std::type_info& type)
 {
-    Pair* p = 0;
+    Pair* p = nullptr;
     const Item* item = getFirstItem();
-    while (item != 0 && p == 0) {
+    while (item != nullptr && p == nullptr) {
         Pair* pair = const_cast<Pair*>(static_cast<const Pair*>(item->getValue()));
         if (pair->object()->isClassType(type)) p = pair;
         item = item->getNext();
@@ -41,9 +41,9 @@ Pair* PairStream::findByType(const std::type_info& type)
 
 const Pair* PairStream::findByType(const std::type_info& type) const
 {
-    const Pair* p = 0;
+    const Pair* p = nullptr;
     const Item* item = getFirstItem();
-    while (item != 0 && p == 0) {
+    while (item != nullptr && p == nullptr) {
         const Pair* pair = static_cast<const Pair*>(item->getValue());
         if (pair->object()->isClassType(type)) p = pair;
         item = item->getNext();
@@ -57,10 +57,10 @@ const Pair* PairStream::findByType(const std::type_info& type) const
 //------------------------------------------------------------------------------
 Pair* PairStream::findByName(const char* const slotname)
 {
-    Pair* p = 0;
-    if (slotname != 0) {
+    Pair* p = nullptr;
+    if (slotname != nullptr) {
         const Item* item = getFirstItem();
-        while (item != 0 && p == 0) {
+        while (item != nullptr && p == nullptr) {
             Pair* pair = const_cast<Pair*>(static_cast<const Pair*>(item->getValue()));
             if ( *(pair->slot()) == slotname ) p = pair;
             item = item->getNext();
@@ -71,10 +71,10 @@ Pair* PairStream::findByName(const char* const slotname)
 
 const Pair* PairStream::findByName(const char* const slotname) const
 {
-    const Pair* p = 0;
-    if (slotname != 0) {
+    const Pair* p = nullptr;
+    if (slotname != nullptr) {
         const Item* item = getFirstItem();
-        while (item != 0 && p == 0) {
+        while (item != nullptr && p == nullptr) {
             const Pair* pair = static_cast<const Pair*>(item->getValue());
             if ( *(pair->slot()) == slotname ) p = pair;
             item = item->getNext();
@@ -90,10 +90,10 @@ const Pair* PairStream::findByName(const char* const slotname) const
 //------------------------------------------------------------------------------
 const Identifier* PairStream::findName(const Object* const obj) const
 {
-    const Identifier* p = 0;
-    if (obj != 0) {
+    const Identifier* p = nullptr;
+    if (obj != nullptr) {
         const Item* item = getFirstItem();
-        while (item != 0 && p == 0) {
+        while (item != nullptr && p == nullptr) {
             const Pair* pair = static_cast<const Pair*>(item->getValue());
             if (pair->object() == obj) {
                 p = static_cast<Identifier*>(pair->slot()->clone());
@@ -128,7 +128,7 @@ bool PairStream::operator!=(const PairStream& stream) const
 std::ostream& PairStream::serialize(std::ostream& sout, const int i, const bool) const
 {
     const Item* item = getFirstItem();
-    while (item != 0) {
+    while (item != nullptr) {
         const Pair* pair = static_cast<const Pair*>(item->getValue());
         indent(sout,i);
         pair->serialize(sout,i);

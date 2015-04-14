@@ -32,7 +32,7 @@ Thread::Thread(Component* const p, const LCreal pri) : parent(p), priority(pri)
 {
    STANDARD_CONSTRUCTOR()
 
-   theThread = 0;
+   theThread = nullptr;
    killed = false;
    stackSize = 0;
 }
@@ -73,7 +73,7 @@ bool Thread::create()
    bool ok = true;
 
    // Check for a parent pointer
-   if (parent == 0) {
+   if (parent == nullptr) {
       std::cerr << "Thread(" << this << ")::create() -- ERROR: Parent pointer is not set!" << std::endl;
       ok = false;
    }
@@ -213,15 +213,15 @@ EMPTY_SERIALIZER(ThreadSyncTask)
 //------------------------------------------------------------------------------
 // Constructor
 //------------------------------------------------------------------------------
-ThreadSyncTask::ThreadSyncTask(Component* const p, const LCreal pri) : Thread(p,pri)
+ThreadSyncTask::ThreadSyncTask(Component* const p, const LCreal pri) : Thread(p, pri)
 {
    STANDARD_CONSTRUCTOR()
 
-   startSig = 0;
-   completedSig = 0;
+   startSig = nullptr;
+   completedSig = nullptr;
 }
 
-ThreadSyncTask::ThreadSyncTask()
+ThreadSyncTask::ThreadSyncTask() : startSig(nullptr), completedSig(nullptr)
 {
    STANDARD_CONSTRUCTOR()
    std::cerr << "ThreadSyncTask(" << this << ")::ThreadSyncTask() -- ERROR: Do not use the default constructor" << std::endl;

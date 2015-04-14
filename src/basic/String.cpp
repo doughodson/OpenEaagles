@@ -16,7 +16,7 @@ String::String()
 {
    STANDARD_CONSTRUCTOR()
 
-   str = 0;
+   str = nullptr;
    n = 0;
    nn = 0;
 }
@@ -25,7 +25,7 @@ String::String(const char* s)
 {
    STANDARD_CONSTRUCTOR()
 
-   str = 0;
+   str = nullptr;
    n = 0;
    nn = 0;
    setStr(s);
@@ -35,7 +35,7 @@ String::String(const char* s1, const char* s2)
 {
    STANDARD_CONSTRUCTOR()
 
-   str = 0;
+   str = nullptr;
    n = 0;
    nn = 0;
    setStr(s1);
@@ -48,8 +48,8 @@ String::String(const char* s1, const char* s2)
 void String::copyData(const String& org, const bool cc)
 {
    BaseClass::copyData(org);
-   if (!cc && str != 0) delete[] str;
-   str = 0;
+   if (!cc && str != nullptr) delete[] str;
+   str = nullptr;
    nn = 0;
    n = 0;
    setStr(org);
@@ -61,8 +61,8 @@ void String::copyData(const String& org, const bool cc)
 //------------------------------------------------------------------------------
 void String::deleteData()
 {
-   if (str != 0) delete[] str;
-   str = 0;
+   if (str != nullptr) delete[] str;
+   str = nullptr;
    nn = 0;
    n = 0;
 }
@@ -186,7 +186,7 @@ bool String::getSubString(String& subStr, const unsigned int startIndex, const s
 void String::setStr(const char* string)
 {
    // copy the new text string
-   if (string != 0) {
+   if (string != nullptr) {
       size_t l = std::strlen(string);
       if (l >= nn || str == 0) {
          if (str != 0) delete[] str;
@@ -209,7 +209,7 @@ void String::setStr(const char* string)
 void String::catStr(const char* s)
 {
    // early out if nothing to append
-   if (s == 0) return;
+   if (s == nullptr) return;
 
    // if this string was empty then we're really just setStr()
    if ( isEmpty() ) {
@@ -246,7 +246,7 @@ void String::setChar(const unsigned int index, const char c)
 //------------------------------------------------------------------------------
 void String::empty()
 {
-   if (str != 0) str[0] = 0;
+   if (str != nullptr) str[0] = 0;
    n = 0;
 }
 
