@@ -1,8 +1,9 @@
 
-#include "openeaagles/basic/functors/table-utils.h"
+#include "openeaagles/basic/functors/lfi-utils.h"
 
 namespace Eaagles {
 namespace Basic {
+namespace Lfi {
 
 //------------------------------------------------------------------------------
 // lfi - One dimensional Linear Function Interpolator
@@ -484,5 +485,6 @@ LCreal lfi(
 
 
 
+}
 }
 }

@@ -6,9 +6,9 @@ LIB = $(OPENEAAGLES_LIB_DIR)/liboeBasic.a
 OBJS =  \
 	$(LIB)(Function.o) \
 	$(LIB)(Functions.o) \
+	$(LIB)(lfi-utils.o) \
 	$(LIB)(Table.o) \
-	$(LIB)(Tables.o) \
-	$(LIB)(table-utils.o)
+	$(LIB)(Tables.o)
 
 all: ${OBJS}
 
