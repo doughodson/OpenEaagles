@@ -6,7 +6,11 @@
 
 namespace Eaagles {
 namespace Basic {
-namespace Lfi {
+namespace lfi {
+
+//==============================================================================
+// Linear Function Interpolators
+//==============================================================================
 
 // ---
 // 1D Linear Function Interpolator
@@ -18,7 +22,7 @@ namespace Lfi {
 //    eFlg    - Extrapolation enabled flag
 // ---
 
-LCreal lfi(const LCreal x,
+LCreal lfi_1D(const LCreal x,
            const LCreal *x_data, const unsigned int nx,
            const LCreal *a_data,
            const bool eFlg,
@@ -34,7 +38,7 @@ LCreal lfi(const LCreal x,
 //       ybp     - Pointer to the previous Y breakpoint (optional)
 // ---
 
-LCreal lfi(const LCreal x, const LCreal y,
+LCreal lfi_2D(const LCreal x, const LCreal y,
            const LCreal *x_data, const unsigned int nx,
            const LCreal *y_data, const unsigned int ny,
            const LCreal *a_data,
@@ -52,7 +56,7 @@ LCreal lfi(const LCreal x, const LCreal y,
 //       zbp     - Pointer to the previous Z breakpoint (optional)
 // ---
 
-LCreal lfi(const LCreal x, const LCreal y, const LCreal z,
+LCreal lfi_3D(const LCreal x, const LCreal y, const LCreal z,
            const LCreal *x_data, const unsigned int nx,
            const LCreal *y_data, const unsigned int ny,
            const LCreal *z_data, const unsigned int nz,
@@ -72,7 +76,7 @@ LCreal lfi(const LCreal x, const LCreal y, const LCreal z,
 //       wbp     - Pointer to the previous W breakpoint (optional)
 // ---
 
-LCreal lfi(const LCreal x, const LCreal y, const LCreal z, const LCreal w,
+LCreal lfi_4D(const LCreal x, const LCreal y, const LCreal z, const LCreal w,
            const LCreal *x_data, const unsigned int nx,
            const LCreal *y_data, const unsigned int ny,
            const LCreal *z_data, const unsigned int nz,
@@ -94,7 +98,7 @@ LCreal lfi(const LCreal x, const LCreal y, const LCreal z, const LCreal w,
 //       vbp     - Pointer to the previous V breakpoint (optional)
 // ---
 
-LCreal lfi(const LCreal x, const LCreal y, const LCreal z, const LCreal w, const LCreal v,
+LCreal lfi_5D(const LCreal x, const LCreal y, const LCreal z, const LCreal w, const LCreal v,
          const LCreal *x_data, const unsigned int nx,
          const LCreal *y_data, const unsigned int ny,
          const LCreal *z_data, const unsigned int nz,

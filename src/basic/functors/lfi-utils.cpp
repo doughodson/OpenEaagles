@@ -3,12 +3,12 @@
 
 namespace Eaagles {
 namespace Basic {
-namespace Lfi {
+namespace lfi {
 
 //------------------------------------------------------------------------------
 // lfi - One dimensional Linear Function Interpolator
 //------------------------------------------------------------------------------
-LCreal lfi(
+LCreal lfi_1D(
          const LCreal x,            // Independent variable #1
          const LCreal *x_data,      // Table of independent variable #1 breakpoints
          const unsigned int nx,     // Size of x_data table
@@ -84,7 +84,7 @@ LCreal lfi(
 //------------------------------------------------------------------------------
 // lfi - Two dimensional Linear Function Interpolator
 //------------------------------------------------------------------------------
-LCreal lfi(
+LCreal lfi_2D(
          const LCreal x,            // Independent variable #1
          const LCreal y,            // Independent variable #2
          const LCreal *x_data,      // Table of independent variable #1 breakpoints
@@ -101,7 +101,7 @@ LCreal lfi(
    // Only one point?
    // ---
    if (ny == 1) {
-      return lfi(x, x_data, nx, &a_data[0], eFlg, xbp);
+      return lfi_1D(x, x_data, nx, &a_data[0], eFlg, xbp);
    }
 
    // ---
@@ -128,7 +128,7 @@ LCreal lfi(
          // Early out at the 'low' end
          if (ybp != nullptr) *ybp = y2;
          unsigned int ax = nx * low;
-         return lfi(x, x_data, nx, &a_data[ax], eFlg, xbp);
+         return lfi_1D(x, x_data, nx, &a_data[ax], eFlg, xbp);
       }
    }
    else if (y >= y_data[high]) {
@@ -138,7 +138,7 @@ LCreal lfi(
          // Early out with the 'high' end
          if (ybp != nullptr) *ybp = y2;
          unsigned int ax = nx * high;
-         return lfi(x, x_data, nx, &a_data[ax], eFlg, xbp);
+         return lfi_1D(x, x_data, nx, &a_data[ax], eFlg, xbp);
       }
    }
    else {
@@ -163,9 +163,9 @@ LCreal lfi(
    // ---
    unsigned int y1 = y2 - delta;
    unsigned int ax1 = nx * y1;
-   LCreal a1 = lfi(x, x_data, nx, &a_data[ax1], eFlg, xbp);
+   LCreal a1 = lfi_1D(x, x_data, nx, &a_data[ax1], eFlg, xbp);
    unsigned int ax2 = nx * y2;
-   LCreal a2 = lfi(x, x_data, nx, &a_data[ax2], eFlg, xbp);
+   LCreal a2 = lfi_1D(x, x_data, nx, &a_data[ax2], eFlg, xbp);
 
    // ---
    // Final linear interpolation
@@ -177,7 +177,7 @@ LCreal lfi(
 //------------------------------------------------------------------------------
 // lfi - Three dimensional Linear Function Interpolator
 //------------------------------------------------------------------------------
-LCreal lfi(
+LCreal lfi_3D(
          const LCreal x,            // Independent variable #1
          const LCreal y,            // Independent variable #2
          const LCreal z,            // Independent variable #3
@@ -198,7 +198,7 @@ LCreal lfi(
    // Only one point?
    // ---
    if (nz == 1) {
-      return lfi(x, y, x_data, nx, y_data, ny, &a_data[0], eFlg, xbp, ybp);
+      return lfi_2D(x, y, x_data, nx, y_data, ny, &a_data[0], eFlg, xbp, ybp);
    }
 
    // ---
@@ -225,7 +225,7 @@ LCreal lfi(
          // Early out with the 'low' end
          if (zbp != nullptr) *zbp = z2;
          unsigned int ax = nx * ny * low;
-         return lfi(x, y, x_data, nx, y_data, ny, &a_data[ax], eFlg, xbp, ybp);
+         return lfi_2D(x, y, x_data, nx, y_data, ny, &a_data[ax], eFlg, xbp, ybp);
       }
    }
    else if (z >= z_data[high]) {
@@ -235,7 +235,7 @@ LCreal lfi(
          // Early out with the 'high' end
          if (zbp != nullptr) *zbp = z2;
          unsigned int ax = nx * ny * high;
-         return lfi(x, y, x_data, nx, y_data, ny, &a_data[ax], eFlg, xbp, ybp);
+         return lfi_2D(x, y, x_data, nx, y_data, ny, &a_data[ax], eFlg, xbp, ybp);
       }
    }
    else {
@@ -261,9 +261,9 @@ LCreal lfi(
    // ---
    unsigned int z1 = z2 - delta;
    unsigned int ax1 = nx * ny * z1;
-   LCreal a1 = lfi(x, y, x_data, nx, y_data, ny, &a_data[ax1], eFlg, xbp, ybp);
+   LCreal a1 = lfi_2D(x, y, x_data, nx, y_data, ny, &a_data[ax1], eFlg, xbp, ybp);
    unsigned int ax2 = nx * ny * z2;
-   LCreal a2 = lfi(x, y, x_data, nx, y_data, ny, &a_data[ax2], eFlg, xbp, ybp);
+   LCreal a2 = lfi_2D(x, y, x_data, nx, y_data, ny, &a_data[ax2], eFlg, xbp, ybp);
 
    // ---
    // Final linear interpolation
@@ -275,7 +275,7 @@ LCreal lfi(
 //------------------------------------------------------------------------------
 // lfi - Four dimension Linear Function Interpolator
 //------------------------------------------------------------------------------
-LCreal lfi(
+LCreal lfi_4D(
          const LCreal x,            // Independent variable #1
          const LCreal y,            // Independent variable #2
          const LCreal z,            // Independent variable #3
@@ -300,7 +300,7 @@ LCreal lfi(
    // Only one point?
    // ---
    if (nw == 1) {
-      return lfi(x, y, z, x_data, nx, y_data, ny, z_data, nz, &a_data[0], eFlg, xbp, ybp, zbp);
+      return lfi_3D(x, y, z, x_data, nx, y_data, ny, z_data, nz, &a_data[0], eFlg, xbp, ybp, zbp);
    }
 
    // ---
@@ -327,7 +327,7 @@ LCreal lfi(
          // Early out with the 'low' end
          if (wbp != nullptr) *wbp = w2;
          unsigned int ax = nx * ny * nz * low;
-         return lfi(x, y, z, x_data, nx, y_data, ny, z_data, nz, &a_data[ax], eFlg, xbp, ybp, zbp);
+         return lfi_3D(x, y, z, x_data, nx, y_data, ny, z_data, nz, &a_data[ax], eFlg, xbp, ybp, zbp);
       }
    }
    else if (w >= w_data[high]) {
@@ -337,7 +337,7 @@ LCreal lfi(
          // Early out with the 'high' end
          if (wbp != nullptr) *wbp = w2;
          unsigned int ax = nx* ny * nz * high;
-         return lfi(x, y, z, x_data, nx, y_data, ny, z_data, nz, &a_data[ax], eFlg, xbp, ybp, zbp);
+         return lfi_3D(x, y, z, x_data, nx, y_data, ny, z_data, nz, &a_data[ax], eFlg, xbp, ybp, zbp);
       }
    }
    else {
@@ -364,9 +364,9 @@ LCreal lfi(
    // ---
    unsigned int w1 = w2 - delta;
    unsigned int ax1 = nx * ny * nz * w1;
-   LCreal a1 = lfi(x, y, z, x_data, nx, y_data, ny, z_data, nz, &a_data[ax1], eFlg, xbp, ybp, zbp);
+   LCreal a1 = lfi_3D(x, y, z, x_data, nx, y_data, ny, z_data, nz, &a_data[ax1], eFlg, xbp, ybp, zbp);
    unsigned int ax2 = nx * ny * nz * w2;
-   LCreal a2 = lfi(x, y, z, x_data, nx, y_data, ny, z_data, nz, &a_data[ax2], eFlg, xbp, ybp, zbp);
+   LCreal a2 = lfi_3D(x, y, z, x_data, nx, y_data, ny, z_data, nz, &a_data[ax2], eFlg, xbp, ybp, zbp);
 
    // ---
    // Final linear interpolation
@@ -378,7 +378,7 @@ LCreal lfi(
 //------------------------------------------------------------------------------
 // lfi - Five dimension Linear Function Interpolator
 //------------------------------------------------------------------------------
-LCreal lfi(
+LCreal lfi_5D(
          const LCreal x,            // Independent variable #1
          const LCreal y,            // Independent variable #2
          const LCreal z,            // Independent variable #3
@@ -407,7 +407,7 @@ LCreal lfi(
    // Only one point?
    // ---
    if (nv == 1) {
-        return lfi(x, y, z, w, x_data, nx, y_data, ny, z_data, nz, w_data, nw, &a_data[0], eFlg, xbp, ybp, zbp, wbp);
+        return lfi_4D(x, y, z, w, x_data, nx, y_data, ny, z_data, nz, w_data, nw, &a_data[0], eFlg, xbp, ybp, zbp, wbp);
    }
 
    // ---
@@ -434,7 +434,7 @@ LCreal lfi(
          // Early out with the 'low' end
          if (vbp != nullptr) *vbp = v2;
          unsigned int ax = nx * ny * nz * nw * low;
-         return lfi(x, y, z, w, x_data, nx, y_data, ny, z_data, nz, w_data, nw, &a_data[ax], eFlg, xbp, ybp, zbp, wbp);
+         return lfi_4D(x, y, z, w, x_data, nx, y_data, ny, z_data, nz, w_data, nw, &a_data[ax], eFlg, xbp, ybp, zbp, wbp);
       }
    }
    else if (v >= v_data[high]) {
@@ -444,7 +444,7 @@ LCreal lfi(
          // Early out with the 'high' end
          if (vbp != nullptr) *vbp = v2;
          unsigned int ax = nx* ny * nz * nw * high;
-         return lfi(x, y, z, w, x_data, nx, y_data, ny, z_data, nz, w_data, nw, &a_data[ax], eFlg, xbp, ybp, zbp, wbp);
+         return lfi_4D(x, y, z, w, x_data, nx, y_data, ny, z_data, nz, w_data, nw, &a_data[ax], eFlg, xbp, ybp, zbp, wbp);
       }
    }
    else {
@@ -472,9 +472,9 @@ LCreal lfi(
    // ---
    unsigned int v1 = v2 - delta;
    unsigned int ax1 = nx * ny * nz * nw * v1;
-   LCreal a1 = lfi(x, y, z, w, x_data, nx, y_data, ny, z_data, nz, w_data, nw, &a_data[ax1], eFlg, xbp, ybp, zbp, wbp);
+   LCreal a1 = lfi_4D(x, y, z, w, x_data, nx, y_data, ny, z_data, nz, w_data, nw, &a_data[ax1], eFlg, xbp, ybp, zbp, wbp);
    unsigned int ax2 = nx * ny * nz * nw * v2;
-   LCreal a2 = lfi(x, y, z, w, x_data, nx, y_data, ny, z_data, nz, w_data, nw, &a_data[ax2], eFlg, xbp, ybp, zbp, wbp);
+   LCreal a2 = lfi_4D(x, y, z, w, x_data, nx, y_data, ny, z_data, nz, w_data, nw, &a_data[ax2], eFlg, xbp, ybp, zbp, wbp);
 
    // ---
    // Final linear interpolation

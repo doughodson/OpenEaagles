@@ -27,20 +27,15 @@ class Number;
 //    extrapolate <Boolean>   ! Extrapolate beyond the given data table limits (default: 0)
 //
 // Notes:
-//    1) There are several static lfi() functions that are the core linear
-//       function interpolators used by the tables classes.  If you want to
-//       maintain your own breakpoint and data tables, you may call these
-//       directly, otherwise use our derived table classes.
-//
-//    2) The isValid() function will return true only if all of the required
+//    1) The isValid() function will return true only if all of the required
 //       dependent and independent data has been set.
 //
-//    3) For large tables, use the storageFactory() function to create the FStorage
+//    2) For large tables, use the storageFactory() function to create the FStorage
 //       object (see Functions.h) that will maintain the table's previous search
 //       values.  This object is an optional parameter to the non-static lfi()
 //       functions.
 //
-//    4) If a dependent variable exceeds a breakpoint table data then the lfi()
+//    3) If a dependent variable exceeds a breakpoint table data then the lfi()
 //       result is clamped at the last known dependent value.  If the extrapolate
 //       flag is true, we'll extrapolate beyond the given data table.
 //
@@ -66,7 +61,7 @@ public:
    Table(const LCreal* dtbl, const unsigned int dsize);
 
    // Returns a pointer to the dependent variable data table.
-   const LCreal* getDataTable() const    { return dtable; }
+   const LCreal* getDataTable() const                            { return dtable; }
 
    // Returns the number of entries in the data table
    virtual unsigned int tableSize() const = 0;
@@ -76,7 +71,7 @@ public:
    virtual void findMinMax(LCreal* minValue, LCreal* maxValue) const;
 
    // Returns true if extrapolation beyond the table's data is enabled.
-   bool isExtrapolationEnabled() const   { return extFlg; }
+   bool isExtrapolationEnabled() const                           { return extFlg; }
 
    // Sets the extrapolation enabled flag.
    bool setExtrapolationEnabled(const bool flg);
@@ -84,112 +79,6 @@ public:
 
    // Data storage factory (pre-ref()'d)
    virtual FStorage* storageFactory() const;
-
-   // ---
-   // Static 1D Linear Function Interpolator
-   //    x       - Independent variable #1
-   //    x_data  - Table of independent variable #1 breakpoints
-   //    nx      - Size of x_data table
-   //    xbp     - Pointer to the previous X breakpoint (optional)
-   //    a_data  - Table of dependent variable data
-   //    eFlg    - Extrapolation enabled flag
-   // ---
-
-   static LCreal lfi(
-         const LCreal x,
-         const LCreal *x_data, const unsigned int nx,
-         const LCreal *a_data,
-         const bool eFlg,
-         unsigned int* const xbp=0
-      );
-
-   // ---
-   // Static 2D Linear Function Interpolator
-   //    Same as 1D plus ...
-   //       y       - Independent variable #2
-   //       y_data  - Table of independent variable #2 breakpoints
-   //       ny      - Size of y_data table
-   //       ybp     - Pointer to the previous Y breakpoint (optional)
-   // ---
-
-   static LCreal lfi(
-         const LCreal x, const LCreal y,
-         const LCreal *x_data, const unsigned int nx,
-         const LCreal *y_data, const unsigned int ny,
-         const LCreal *a_data,
-         const bool eFlg,
-         unsigned int* const xbp=0,
-         unsigned int* const ybp=0
-      );
-
-   // ---
-   // Static 3D Linear Function Interpolator
-   //    Same as 2D plus ...
-   //       z       - Independent variable #3
-   //       z_data  - Table of independent variable #3 breakpoints
-   //       nz      - Size of z_data table
-   //       zbp     - Pointer to the previous Z breakpoint (optional)
-   // ---
-
-   static LCreal lfi(
-         const LCreal x, const LCreal y, const LCreal z,
-         const LCreal *x_data, const unsigned int nx,
-         const LCreal *y_data, const unsigned int ny,
-         const LCreal *z_data, const unsigned int nz,
-         const LCreal *a_data,
-         const bool eFlg,
-         unsigned int* const xbp=0,
-         unsigned int* const ybp=0,
-         unsigned int* const zbp=0
-      );
-
-   // ---
-   // Static 4D Linear Function Interpolator
-   //    Same as 3D plus ...
-   //       w       - Independent variable #4
-   //       w_data  - Table of independent variable #4 breakpoints
-   //       nw      - Size of w_data table
-   //       wbp     - Pointer to the previous W breakpoint (optional)
-   // ---
-
-   static LCreal lfi(
-         const LCreal x, const LCreal y, const LCreal z, const LCreal w,
-         const LCreal *x_data, const unsigned int nx,
-         const LCreal *y_data, const unsigned int ny,
-         const LCreal *z_data, const unsigned int nz,
-         const LCreal *w_data, const unsigned int nw,
-         const LCreal *a_data,
-         const bool eFlg,
-         unsigned int* const xbp=0,
-         unsigned int* const ybp=0,
-         unsigned int* const zbp=0,
-         unsigned int* const wbp=0
-      );
-
-   // ---
-   // Static 5D Linear Function Interpolator
-   //    Same as 4D plus ...
-   //       v       - Independent variable #5
-   //       v_data  - Table of independent variable #5 breakpoints
-   //       nv      - Size of v_data table
-   //       vbp     - Pointer to the previous V breakpoint (optional)
-   // ---
-
-   static LCreal lfi(
-         const LCreal x, const LCreal y, const LCreal z, const LCreal w, const LCreal v,
-         const LCreal *x_data, const unsigned int nx,
-         const LCreal *y_data, const unsigned int ny,
-         const LCreal *z_data, const unsigned int nz,
-         const LCreal *w_data, const unsigned int nw,
-         const LCreal *v_data, const unsigned int nv,
-         const LCreal *a_data,
-         const bool eFlg,
-         unsigned int* const xbp=0,
-         unsigned int* const ybp=0,
-         unsigned int* const zbp=0,
-         unsigned int* const wbp=0,
-         unsigned int* const vbp=0
-      );
 
    bool isValid() const override;
 
