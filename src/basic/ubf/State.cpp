@@ -19,29 +19,29 @@ void State::updateGlobalState(void)
 {
    // Update all my children
    Basic::PairStream* subcomponents = getComponents();
-   if (subcomponents != 0) {
-      if (isComponentSelected() != 0) {
+   if (subcomponents != nullptr) {
+      if (isComponentSelected()) {
          // When we've selected only one
-         if (getSelectedComponent() != 0) {
+         if (getSelectedComponent() != nullptr) {
             State* state = dynamic_cast<State*>(getSelectedComponent());
-            if (state != 0)
+            if (state != nullptr)
                state->updateGlobalState();
          }
       }
       else {
          // When we should update them all
          Basic::List::Item* item = subcomponents->getFirstItem();
-         while (item != 0) {
+         while (item != nullptr) {
             Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
             Basic::Component* obj = static_cast<Basic::Component*>(pair->object());
             State* state = dynamic_cast<State*>(obj);
-            if (state != 0)
+            if (state != nullptr)
                state->updateGlobalState();
             item = item->getNext();
          }
       }
       subcomponents->unref();
-      subcomponents = 0;
+      subcomponents = nullptr;
    }
 }
 
@@ -49,29 +49,29 @@ void State::updateState(const Basic::Component* const actor)
 {
    // Update all my children
    Basic::PairStream* subcomponents = getComponents();
-   if (subcomponents != 0) {
-      if (isComponentSelected() != 0) {
+   if (subcomponents != nullptr) {
+      if (isComponentSelected()) {
          // When we've selected only one
-         if (getSelectedComponent() != 0) {
+         if (getSelectedComponent() != nullptr) {
             State* state = dynamic_cast<State*>(getSelectedComponent());
-            if (state != 0)
+            if (state != nullptr)
                state->updateState(actor);
          }
       }
       else {
          // When we should update them all
          Basic::List::Item* item = subcomponents->getFirstItem();
-         while (item != 0) {
+         while (item != nullptr) {
             Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
             Basic::Component* obj = static_cast<Basic::Component*>(pair->object());
             State* state = dynamic_cast<State*>(obj);
-            if (state != 0)
+            if (state != nullptr)
                state->updateState(actor);
             item = item->getNext();
          }
       }
       subcomponents->unref();
-      subcomponents = 0;
+      subcomponents = nullptr;
    }
 }
 
@@ -81,7 +81,7 @@ const State* State::getUbfStateByType(const std::type_info& type) const
    const State* p = this;
    if ( !p->isClassType(type) ) {
       const Basic::Pair* pair = findByType(type);
-      if (pair != 0) {
+      if (pair != nullptr) {
          p = dynamic_cast<const State*>( pair->object() );
       }
    }

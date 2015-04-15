@@ -66,7 +66,7 @@ void TcpServerSingle::deleteData()
 }
 
 //------------------------------------------------------------------------------
-// Initialize this multicast handler -- 
+// Initialize this multicast handler --
 //------------------------------------------------------------------------------
 bool TcpServerSingle::initNetwork(const bool noWaitFlag)
 {
@@ -86,7 +86,7 @@ bool TcpServerSingle::initNetwork(const bool noWaitFlag)
 
 // -------------------------------------------------------------
 // bindSocket() -- bind the socket to an address, and configure
-// the send and receive buffers. 
+// the send and receive buffers.
 // -------------------------------------------------------------
 bool TcpServerSingle::bindSocket()
 {
@@ -101,7 +101,7 @@ bool TcpServerSingle::bindSocket()
       addr.sin_family = AF_INET;
       addr.sin_addr.s_addr = INADDR_ANY;
       if (getLocalAddr() != 0) addr.sin_addr.s_addr = getLocalAddr ();
-      if (getLocalPort() != 0) addr.sin_port = htons (getLocalPort());  
+      if (getLocalPort() != 0) addr.sin_port = htons (getLocalPort());
       else addr.sin_port = htons(getPort());
 
       // Only in server do we bind
@@ -111,7 +111,7 @@ bool TcpServerSingle::bindSocket()
       }
 
       if (!setSendBuffSize()) return false;
-   
+
       if (!setRecvBuffSize()) return false;
    }
 
@@ -136,10 +136,9 @@ bool TcpServerSingle::listenForConnections()
 //------------------------------------------------------------------------------
 bool TcpServerSingle::acceptConnection()
 {
-   struct sockaddr_in clientAddr;
-
    if (socketNum == INVALID_SOCKET) return 0;
 
+   struct sockaddr_in clientAddr;
    socklen_t cAddrSize = sizeof(clientAddr);
    if (isMessageEnabled(MSG_INFO)) {
        std::cout << "Waiting to accept connection on " << getPort() << " ... " << std::flush;

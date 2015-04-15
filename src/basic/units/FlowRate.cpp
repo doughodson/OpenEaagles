@@ -17,7 +17,7 @@ BEGIN_SLOTTABLE(FlowRate)
     "flowTime", // 2: Time
 END_SLOTTABLE(FlowRate)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(FlowRate)
     ON_SLOT(1, setSlotVolume, Volume)
     ON_SLOT(2, setSlotTime, Time)
@@ -31,14 +31,14 @@ FlowRate::FlowRate(LCreal newFlowRate, Volume* volume, Time* time)
     STANDARD_CONSTRUCTOR()
 
     // set our initial distance and time (default to meters per second)
-    if (volume != 0 && time != 0) {
+    if (volume != nullptr && time != nullptr) {
         // find out what volume and time we are using, and reference them
         volume->ref();
         myVolume = volume;
         time->ref();
         myTime = time;
         flowRate = newFlowRate;
-        
+
         // We are only using volume and time for units, not actual values, so they will default to 1 for conversion purposes
         myVolume->set(1);
         myTime->set(1);
@@ -49,7 +49,7 @@ FlowRate::FlowRate(LCreal newFlowRate, Volume* volume, Time* time)
         }
         // call our default construct
         FlowRate();
-    }    
+    }
 }
 
 FlowRate::FlowRate()
@@ -67,9 +67,9 @@ FlowRate::FlowRate()
 void FlowRate::copyData(const FlowRate& org, const bool)
 {
     BaseClass::copyData(org);
-    
-    if (myVolume != 0) myVolume = org.myVolume;
-    if (myTime != 0) myTime = org.myTime;
+
+    if (myVolume != nullptr) myVolume = org.myVolume;
+    if (myTime != nullptr) myTime = org.myTime;
     flowRate = org.flowRate;
 }
 
@@ -78,10 +78,10 @@ void FlowRate::copyData(const FlowRate& org, const bool)
 //------------------------------------------------------------------------------
 void FlowRate::deleteData()
 {
-    if (myVolume != 0) myVolume->unref();
-    if (myTime != 0) myTime->unref();
-    myVolume = 0;
-    myTime = 0;
+    if (myVolume != nullptr) myVolume->unref();
+    if (myTime != nullptr) myTime->unref();
+    myVolume = nullptr;
+    myTime = nullptr;
 }
 
 
@@ -93,7 +93,7 @@ LCreal FlowRate::convert(Volume* newVolume, Time* newTime)
     // holds our converted flowRate
     LCreal tempFR = 1.0;
     // make sure we have a distance and a time to convert to
-    if (newVolume != 0 && newTime != 0) {
+    if (newVolume != nullptr && newTime != nullptr) {
         LCreal newVolVal = 1;
         LCreal newTimeVal = 1;
         // Again, we are only concerned about the type of Volume and Time we have, not the actual value
@@ -103,48 +103,48 @@ LCreal FlowRate::convert(Volume* newVolume, Time* newTime)
         // we will set our newVolVal and TimeVal to 1, to create the same flowRate.
         if (newVolume->getFactoryName() != myVolume->getFactoryName()) newVolVal = newVolume->convert(*myVolume);
         if (newTime->getFactoryName() != myTime->getFactoryName()) newTimeVal = newTime->convert(*myTime);
-        
+
         // now we figure our new flowRate
         // Get our distance units first, then multiplies by a time factor
         tempFR = flowRate * newVolVal;
         tempFR *= newTimeVal;
     }
     else std::cerr << "FlowRate::convert() - missing a time or volume object!" << std::endl;
-       
+
     return tempFR;
 }
-    
+
 //------------------------------------------------------------------------------
-// set() -- sets our velocity from some other velocity 
+// set() -- sets our velocity from some other velocity
 //------------------------------------------------------------------------------
 bool FlowRate::set(const LCreal newFlowRate, Volume* newVolume, Time* newTime)
 {
     bool ok = false;
     // make sure we have a distance and a time to convert to
-    if (newVolume != 0 && newTime != 0) {
+    if (newVolume != nullptr && newTime != nullptr) {
         LCreal newVolVal = 1;
         LCreal newTimeVal = 1;
         // we also have to set our units to 1 here, for conversion purposes
         newVolume->set(1);
-        newTime->set(1);        
+        newTime->set(1);
 
         // if we are different distances or times, we convert ourself to the new value
-        if (newVolume->getFactoryName() != myVolume->getFactoryName()) newVolVal = myVolume->convert(*newVolume);                      
+        if (newVolume->getFactoryName() != myVolume->getFactoryName()) newVolVal = myVolume->convert(*newVolume);
         if (newTime->getFactoryName() != myTime->getFactoryName()) newTimeVal = myTime->convert(*newTime);
-        
+
         // find our new velocity from the new velocity value we are given * the conversion constants
         LCreal tempFR = newFlowRate * newVolVal;
         tempFR *= newTimeVal;
-        
+
         ok = true;
-        
+
         // set our new velocity value
         flowRate = tempFR;
     }
     else std::cerr << "FlowRate::set() - missing a time or distance object!" << std::endl;
-    
+
     return ok;
-}     
+}
 
 //------------------------------------------------------------------------------
 // setSlotVolume() -- sets our volume object.
@@ -152,12 +152,12 @@ bool FlowRate::set(const LCreal newFlowRate, Volume* newVolume, Time* newTime)
 bool FlowRate::setSlotVolume(Volume* newVol)
 {
     bool ok = false;
-    if (newVol != 0) {
+    if (newVol != nullptr) {
         newVol->set(1);
         myVolume = newVol;
         ok = true;
     }
-    
+
     return ok;
 }
 
@@ -167,12 +167,12 @@ bool FlowRate::setSlotVolume(Volume* newVol)
 bool FlowRate::setSlotTime(Time* newTime)
 {
     bool ok = false;
-    if (newTime != 0) {
+    if (newTime != nullptr) {
         newTime->set(1);
         myTime = newTime;
         ok = true;
     }
-    
+
     return ok;
 }
 
@@ -196,25 +196,25 @@ std::ostream& FlowRate::serialize(std::ostream& sout, const int i, const bool sl
         // tab here
         j = 4;
     }
-    
+
     indent(sout, i+j);
     sout << "value: " << flowRate << std::endl;
-    
-    if (myVolume != 0) {
+
+    if (myVolume != nullptr) {
         indent(sout, i+j);
         sout << "volume: ";
         Volume* mv = static_cast<Volume*>(myVolume);
         mv->serialize(sout, i+j);
     }
-    if (myTime != 0) {
+    if (myTime != nullptr) {
         indent(sout, i+j);
         sout << "time: ";
         Time* mt = static_cast<Time*>(myTime);
         mt->serialize(sout, i+j);
     }
-    
+
     sout << ")" << std::endl;
-        
+
     return sout;
 }
 

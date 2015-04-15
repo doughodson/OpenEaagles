@@ -53,7 +53,7 @@
 #ifndef __Eaagles_Basic_Times_H__
 #define __Eaagles_Basic_Times_H__
 
-#include "../Number.h"
+#include "openeaagles/basic/Number.h"
 
 namespace Eaagles {
 namespace Basic {

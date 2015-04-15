@@ -18,6 +18,8 @@
 #include "openeaagles/basic/NetHandler.h"
 #include "openeaagles/basic/Number.h"
 
+#include <cmath>
+
 namespace Eaagles {
 namespace Network {
 namespace Dis {
@@ -802,11 +804,11 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
             // do threshold tests - if new value is not over threshold, reset it in bd struct to old value, so that it will not affect
             // the comparison of new bd with old emitterBeamData: ( bd != *emitterBeamData[ib] ) below
             // (but if new bd will be sent, make sure to restore the new values that we've temporarily stored (above))
-            if (fabs( (*getSavedEmitterBeamData(ib)).beamData.beamAzimuthCenter - bd.beamData.beamAzimuthCenter ) <= disIO->getEeAzThrsh()) {
+            if (std::fabs( (*getSavedEmitterBeamData(ib)).beamData.beamAzimuthCenter - bd.beamData.beamAzimuthCenter ) <= disIO->getEeAzThrsh()) {
                // did not exceed threshold, set current val to previous val, so it will not affect comparison
                bd.beamData.beamAzimuthCenter = (*getSavedEmitterBeamData(ib)).beamData.beamAzimuthCenter;
             }
-            if (fabs( (*getSavedEmitterBeamData(ib)).beamData.beamElevationCenter - bd.beamData.beamElevationCenter ) <= disIO->getEeElThrsh()) {
+            if (std::fabs( (*getSavedEmitterBeamData(ib)).beamData.beamElevationCenter - bd.beamData.beamElevationCenter ) <= disIO->getEeElThrsh()) {
                // did not exceed threshold, set current val to previous val, so it will not affect comparison
                bd.beamData.beamElevationCenter = (*getSavedEmitterBeamData(ib)).beamData.beamElevationCenter;
             }

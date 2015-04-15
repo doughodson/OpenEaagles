@@ -4,7 +4,7 @@
 #ifndef __Eaagles_Basic_FlowRate_H__
 #define __Eaagles_Basic_FlowRate_H__
 
-#include "../Number.h"
+#include "openeaagles/basic/Number.h"
 #include "Volumes.h"
 #include "Times.h"
 
@@ -52,7 +52,7 @@ public:
     // dynamic convert routine
     LCreal convert(Volume* newVolume, Time* newTime);
     // get functions
-    LCreal getFlowRate() { return flowRate; };
+    LCreal getFlowRate()                 { return flowRate; };
     // set functions
     bool set(const LCreal newFlowRate, Volume* newVolume, Time* newTime);
     // slot table functions

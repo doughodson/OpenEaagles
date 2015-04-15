@@ -167,7 +167,7 @@ int Object::slotName2Index(const char* const slotname) const
    // a) check if 'slotname' is a number (e.g., "12")
    bool isNum = true;
    for (int i = 0; isNum && slotname[i] != '\0'; i++) {
-      if ( !isdigit(slotname[i]) ) isNum = false;
+      if ( !std::isdigit(slotname[i]) ) isNum = false;
    }
 
    // b) convert 'slotname' to a slot index

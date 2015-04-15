@@ -1,27 +1,28 @@
 //------------------------------------------------------------------------------
 // Classes: IrShape, IrSphere, IrBox
 //------------------------------------------------------------------------------
-
 #include "openeaagles/simulation/IrShapes.h"
-#include "openeaagles/simulation/IrSignature.h" 
-#include "openeaagles/simulation/IrQueryMsg.h" 
-#include "openeaagles/simulation/IrSensor.h" 
-#include "openeaagles/simulation/Player.h" 
+#include "openeaagles/simulation/IrSignature.h"
+#include "openeaagles/simulation/IrQueryMsg.h"
+#include "openeaagles/simulation/IrSensor.h"
+#include "openeaagles/simulation/Player.h"
 #include "openeaagles/basic/Number.h"
 #include "openeaagles/basic/osg/Vec3"
 #include "openeaagles/basic/units/Areas.h"
 #include "openeaagles/basic/units/Distances.h"
 
+#include <cmath>
+
 namespace Eaagles {
 namespace Simulation {
 
 //==============================================================================
-// Class: IrShape (Abstract) 
+// Class: IrShape (Abstract)
 //==============================================================================
 IMPLEMENT_ABSTRACT_SUBCLASS(IrShape,"IrShape")
 
    BEGIN_SLOTTABLE(IrShape)
-   "area", 
+   "area",
    END_SLOTTABLE(IrShape)
 
    BEGIN_SLOT_MAP(IrShape)
@@ -68,17 +69,17 @@ bool IrShape::setSlotIrShapeArea(const Eaagles::Basic::Number *const num)
    return true;
 }
 
-LCreal IrShape::getArea() { 
-   return area; 
+LCreal IrShape::getArea() {
+   return area;
 }
 
 LCreal IrShape::getReflectorAreaInFieldOfView(const IrQueryMsg* const msg) {
-    
+
    LCreal angleOffBoresight = msg->getAngleOffBoresight();
 
    LCreal maxAngle = msg->getSendingSensor()->getIFOVTheta();
 
-   if (angleOffBoresight > maxAngle) return 0; 
+   if (angleOffBoresight > maxAngle) return 0;
 
    return getArea();
 }
@@ -90,7 +91,7 @@ LCreal IrShape::getReflectorAreaInFieldOfView(const IrQueryMsg* const msg) {
 IMPLEMENT_SUBCLASS(IrSphere,"IrSphere")
 EMPTY_SERIALIZER(IrSphere)
    BEGIN_SLOTTABLE(IrSphere)
-   "radius", 
+   "radius",
    END_SLOTTABLE(IrSphere)
 
    BEGIN_SLOT_MAP(IrSphere)
@@ -128,7 +129,7 @@ Basic::Object* IrSphere::getSlotByIndex(const int si)
 bool IrSphere::setSlotIrSphereRadius(const Eaagles::Basic::Number *const s) {
 
    LCreal value = 0.0f;
- 
+
    const Basic::Distance* d = dynamic_cast<const Basic::Distance*>(s);
    if (d != 0) {
       Basic::Meters m;
@@ -141,7 +142,7 @@ bool IrSphere::setSlotIrSphereRadius(const Eaagles::Basic::Number *const s) {
    return true;
 }
 
-LCreal IrSphere::getArea() { 
+LCreal IrSphere::getArea() {
    //return (LCreal) (radius * radius * 4.0 * PI);
    //Calculates the projected area of a sphere (projected area is a flat circle)
    return static_cast<LCreal>(radius * radius * PI);
@@ -155,9 +156,9 @@ LCreal IrSphere::getArea() {
 IMPLEMENT_SUBCLASS(IrBox,"IrBox")
 EMPTY_SERIALIZER(IrBox)
    BEGIN_SLOTTABLE(IrBox)
-   "x", 
-   "y", 
-   "z", 
+   "x",
+   "y",
+   "z",
    END_SLOTTABLE(IrBox)
 
    BEGIN_SLOT_MAP(IrBox)
@@ -200,7 +201,7 @@ Basic::Object* IrBox::getSlotByIndex(const int si)
 bool IrBox::setSlotIrBoxX(const Eaagles::Basic::Number *const s)
 {
    LCreal value = 0.0f;
- 
+
    const Basic::Distance* d = dynamic_cast<const Basic::Distance*>(s);
    if (d != 0) {
       Basic::Meters m;
@@ -216,7 +217,7 @@ bool IrBox::setSlotIrBoxX(const Eaagles::Basic::Number *const s)
 bool IrBox::setSlotIrBoxY(const Eaagles::Basic::Number *const s) {
 
    LCreal value = 0.0f;
- 
+
    const Basic::Distance* d = dynamic_cast<const Basic::Distance*>(s);
    if (d != 0) {
       Basic::Meters m;
@@ -232,7 +233,7 @@ bool IrBox::setSlotIrBoxY(const Eaagles::Basic::Number *const s) {
 bool IrBox::setSlotIrBoxZ(const Eaagles::Basic::Number *const s) {
 
    LCreal value = 0.0f;
- 
+
    const Basic::Distance* d = dynamic_cast<const Basic::Distance*>(s);
    if (d != 0) {
       Basic::Meters m;
@@ -245,13 +246,13 @@ bool IrBox::setSlotIrBoxZ(const Eaagles::Basic::Number *const s) {
    return true;
 }
 
-LCreal IrBox::getArea() { 
-   return static_cast<LCreal>((x*y * 2) + (2*x*z) + (2*y*z)); 
+LCreal IrBox::getArea() {
+   return static_cast<LCreal>((x*y * 2) + (2*x*z) + (2*y*z));
 }
 
 LCreal IrBox::getReflectorAreaInFieldOfView(const IrQueryMsg* const msg) {
- 
-   LCreal area = 0; 
+
+   LCreal area = 0;
 #if 1
    //retrieve the angle off of the gimbal boresight
    LCreal angleOffBoresight = msg->getAngleOffBoresight();
@@ -263,7 +264,7 @@ LCreal IrBox::getReflectorAreaInFieldOfView(const IrQueryMsg* const msg) {
    //This will cause the target to be discarded from further IR signature processing.
    if (angleOffBoresight > maxAngle){
       //std::cout << angleOffBoresight * Basic::Angle::R2DCC << " " << msg->getGimbalAzimuth() * Basic::Angle::R2DCC << " " << msg->getGimbalElevation() * Basic::Angle::R2DCC << " DETECTED" << std::endl;
-      return area;  
+      return area;
    }
 
    //std::cout << angleOffBoresight * Basic::Angle::R2DCC << " " << msg->getGimbalAzimuth() * Basic::Angle::R2DCC << " " << msg->getGimbalElevation() * Basic::Angle::R2DCC << " DETECTED" << std::endl;
@@ -272,18 +273,18 @@ LCreal IrBox::getReflectorAreaInFieldOfView(const IrQueryMsg* const msg) {
    osg::Vec3d targetAoiVector = msg->getAoiVector();
 
    // front/back of the box to the sensor
-   // x, z are members of this object corresponding to width and height. 
-   area += fabs(targetAoiVector[0]) * x * z; 
+   // x, z are members of this object corresponding to width and height.
+   area += std::fabs(targetAoiVector[0]) * x * z;
 
    // side/side of the box to the sensor
    // y,z are members of this object corresponding to length and height.
-   area += fabs(targetAoiVector[1]) * y * z; 
+   area += std::fabs(targetAoiVector[1]) * y * z;
 
    // top/bottom of the box to the sensor.
    // x,y is a member of this object corresponding to width and length.
-   area += fabs(targetAoiVector[2]) * x * y;  
+   area += std::fabs(targetAoiVector[2]) * x * y;
 
-   return area; 
+   return area;
 
 #else
    LCreal angleOffBoresight = msg->getAngleOffBoresight();
@@ -291,40 +292,40 @@ LCreal IrBox::getReflectorAreaInFieldOfView(const IrQueryMsg* const msg) {
    LCreal maxAngle = msg->getSendingSensor()->getIFOVTheta();
 
    if (angleOffBoresight > maxAngle)
-      return area;  
-   else { 
-    
+      return area;
+   else {
+
    const Player* sensorPlatform = msg->getOwnship();
    const Player* target = msg->getTarget();
    osg::Vec3 targetVelocityVector = target->getVelocity();
    osg::Vec3 targetPosition = target->getPosition();
    osg::Vec3 sensorPosition = sensorPlatform->getPosition();
-   osg::Vec3 directionToSensor =  sensorPosition - targetPosition;  
-   osg::Vec3 normalizedDirectionToSensor = directionToSensor; 
-   normalizedDirectionToSensor.normalize(); 
+   osg::Vec3 directionToSensor =  sensorPosition - targetPosition;
+   osg::Vec3 normalizedDirectionToSensor = directionToSensor;
+   normalizedDirectionToSensor.normalize();
    osg::Vec3 normalizedTargetVelocityVector = targetVelocityVector;
-   normalizedTargetVelocityVector.normalize(); 
+   normalizedTargetVelocityVector.normalize();
    osg::Vec3 targetXVector;
-   targetXVector[0] = normalizedTargetVelocityVector[0]; // x 
-   LCreal frontToSensor = targetXVector * normalizedDirectionToSensor; 
+   targetXVector[0] = normalizedTargetVelocityVector[0]; // x
+   LCreal frontToSensor = targetXVector * normalizedDirectionToSensor;
    if (frontToSensor < 0) frontToSensor = -frontToSensor;
       area += frontToSensor * x * z; // x, z are members of this object corresponding to
-                                     // width and height. 
+                                     // width and height.
 
    osg::Vec3 targetYVector;
-   targetYVector[1] = normalizedTargetVelocityVector[1]; // y 
-   LCreal sideToSensor = targetYVector * normalizedDirectionToSensor; 
+   targetYVector[1] = normalizedTargetVelocityVector[1]; // y
+   LCreal sideToSensor = targetYVector * normalizedDirectionToSensor;
    if (sideToSensor < 0) sideToSensor = -sideToSensor;
       area += sideToSensor * y * z; // y,z are members of this object corresponding to
                                     // length and height.
 
    osg::Vec3 targetZVector;
-   targetZVector[2] = normalizedTargetVelocityVector[2]; // y 
-   LCreal topToSensor = targetZVector * normalizedDirectionToSensor; 
+   targetZVector[2] = normalizedTargetVelocityVector[2]; // y
+   LCreal topToSensor = targetZVector * normalizedDirectionToSensor;
    if (topToSensor < 0) topToSensor = -topToSensor;
       area += topToSensor * x * y; // x,y is a member of this object corresponding to
-                                   // width and length. 
-   return area; 
+                                   // width and length.
+   return area;
 } // end else
 #endif
 

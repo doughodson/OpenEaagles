@@ -51,7 +51,7 @@ END_SLOT_MAP()
 //------------------------------------------------------------------------------
 // Constructors
 //------------------------------------------------------------------------------
-TcpClient::TcpClient() : ipAddr(0)
+TcpClient::TcpClient() : ipAddr(nullptr)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -64,12 +64,12 @@ void TcpClient::copyData(const TcpClient& org, const bool cc)
     BaseClass::copyData(org);
 
     if (cc) {
-      ipAddr = 0;
+      ipAddr = nullptr;
     }
 
-    if (ipAddr != 0) delete[] ipAddr;
-    ipAddr = 0;
-    if (org.ipAddr != 0) {
+    if (ipAddr != nullptr) delete[] ipAddr;
+    ipAddr = nullptr;
+    if (org.ipAddr != nullptr) {
         size_t len = std::strlen(org.ipAddr);
         ipAddr = new char[len+1];
         lcStrcpy(ipAddr,(len+1),org.ipAddr);
@@ -81,8 +81,8 @@ void TcpClient::copyData(const TcpClient& org, const bool cc)
 //------------------------------------------------------------------------------
 void TcpClient::deleteData()
 {
-    if (ipAddr != 0) delete[] ipAddr;
-    ipAddr = 0;
+    if (ipAddr != nullptr) delete[] ipAddr;
+    ipAddr = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -145,7 +145,7 @@ bool TcpClient::connectToServer()
    connected = false;
    connectionTerminated = false;
 
-   if (ipAddr == 0) return false;
+   if (ipAddr == nullptr) return false;
 
    if (socketNum == INVALID_SOCKET) return false;
 
@@ -189,7 +189,7 @@ bool TcpClient::connectToServer()
 bool TcpClient::setSlotIpAddress(const String* const msg)
 {
     bool ok = false;
-    if (msg != 0) {
+    if (msg != nullptr) {
         ipAddr = msg->getCopyString();
         ok = true;
     }

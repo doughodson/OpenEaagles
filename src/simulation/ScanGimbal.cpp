@@ -11,6 +11,8 @@
 #include "openeaagles/basic/Pair.h"
 #include "openeaagles/basic/units/Angles.h"
 
+#include <cmath>
+
 namespace Eaagles {
 namespace Simulation {
 
@@ -26,15 +28,15 @@ BEGIN_SLOTTABLE(ScanGimbal)
     "scanWidth",            //  3: Width of the scan (for search volume, or if specified manually)
     "searchVolume",         //  4: Scan width & height; sets HORIZONTAL_BAR_SCAN mode (radians)
     "reference",            //  5: Reference angles (center of search volume)
-    "barSpacing",           //  6: Scan bar width spacing 
+    "barSpacing",           //  6: Scan bar width spacing
     "numBars",              //  7: Sets the number of bars
     "revolutionsPerSec",    //  8: Revolutions per second for conical and circular scans (spiral scan too)
     "scanRadius",           //  9: Radius of the circle we are using for conical scans (radians or Basic::Angle} (spiral scan too)
-    "pseudoRandomPattern",  // 10: Pseudo Random pattern vertices (2D - az and el) 
-    "maxRevolutions",       // 11: Spiral Scan - Maximum number of revolutions 
+    "pseudoRandomPattern",  // 10: Pseudo Random pattern vertices (2D - az and el)
+    "maxRevolutions",       // 11: Spiral Scan - Maximum number of revolutions
 END_SLOTTABLE(ScanGimbal)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(ScanGimbal)
     ON_SLOT( 1, setSlotScanMode,          Basic::String)
     ON_SLOT( 2, setSlotLeftToRightScan,   Basic::Number)
@@ -74,8 +76,8 @@ ScanGimbal::ScanGimbal()
    numBars = 1;
    oddNumberOfBars = false;
    reverseScan = false;
-   leftToRightScan = true;   
-   barNum = 1; 
+   leftToRightScan = true;
+   barNum = 1;
    conAngle = 0;
    revPerSec = 5;  // 5 hz
    scanRadius = (2.0 * Basic::Angle::D2RCC); // 2 degree radius
@@ -157,7 +159,7 @@ bool ScanGimbal::onEndScanEvent(Basic::Integer* const)
 }
 
 //------------------------------------------------------------------------------
-// scanController() -- control the gimbal's scanning 
+// scanController() -- control the gimbal's scanning
 //------------------------------------------------------------------------------
 void ScanGimbal::scanController(const double dt)
 {
@@ -189,7 +191,7 @@ void ScanGimbal::scanController(const double dt)
          break;
       }
 
-      case HORIZONTAL_BAR_SCAN :          
+      case HORIZONTAL_BAR_SCAN :
       case VERTICAL_BAR_SCAN : {
          barScanController(dt);
          break;
@@ -204,10 +206,10 @@ void ScanGimbal::scanController(const double dt)
 }
 
 //------------------------------------------------------------------------------
-// conicalScanController() -- controls the conical scans 
+// conicalScanController() -- controls the conical scans
 //------------------------------------------------------------------------------
 void ScanGimbal::conicalScanController(const double dt)
-{ 
+{
     double degPerDT = (getRevPerSec() * 360.0) * dt;
     static Basic::Integer iBar(1);
 
@@ -220,15 +222,15 @@ void ScanGimbal::conicalScanController(const double dt)
             setConAngle(0);
         }
             break;
-            
+
         case 1: {
         // wait state
             if (isPositioned() || isAtLimits()) { setScanState(2); } // out of state 1
             break;// fall into state 2
         }
-              
+
         case 2: {
-            // start scan 
+            // start scan
             setFastSlewMode(false);
             setConAngle( Basic::Angle::aepcdDeg(degPerDT + getConAngle()) );
 
@@ -238,27 +240,27 @@ void ScanGimbal::conicalScanController(const double dt)
             setScanState(3);
         }
             break;
-            
+
         case 3: {
-            
+
             // turn revolutions per second into degrees per sec per frame
             // now we get this to each time step
             double conAngleN1 = getConAngle();
             setConAngle( Basic::Angle::aepcdDeg(degPerDT + getConAngle()) );
-            
+
             // end scan - finished with one rotation, check if our reference has moved
             bool onceAround = false;
-            
+
             // clockwise rotation
             if (getRevPerSec() >= 0.0) {
-                if (conAngleN1 < 0.0 && getConAngle() >= 0.0) { onceAround = true; } 
+                if (conAngleN1 < 0.0 && getConAngle() >= 0.0) { onceAround = true; }
             }
             // counter-clockwise rotation
             else {
-                if (conAngleN1 < 0.0 && getConAngle() >= 0.0) { setConAngle(0); onceAround = true; } 
-            } 
-                              
-            // after one revolution 
+                if (conAngleN1 < 0.0 && getConAngle() >= 0.0) { setConAngle(0); onceAround = true; }
+            }
+
+            // after one revolution
             if (onceAround) {
                 // Trigger the SCAN_END event handler
                 onEndScanEvent(&iBar);
@@ -266,8 +268,8 @@ void ScanGimbal::conicalScanController(const double dt)
             }
         }
             break;
-    }    
-    
+    }
+
     // azimuth
     double newX = getScanRadius() * sin(getConAngle() * Basic::Angle::D2RCC);
     // elevation
@@ -282,7 +284,7 @@ void ScanGimbal::conicalScanController(const double dt)
 // spiralScanController() -- controls the spiral scan
 //------------------------------------------------------------------------------
 void ScanGimbal::spiralScanController(const double dt)
-{ 
+{
     double degPerDT = (getRevPerSec() * 360.0) * dt;
     static Basic::Integer iBar(1);
 
@@ -296,18 +298,18 @@ void ScanGimbal::spiralScanController(const double dt)
             setNumRevs(0.0);
         }
             break;
-            
+
         case 1: {
         // wait state
             if (isPositioned() || isAtLimits()) { setScanState(2); } // out of state 1
             break;// fall into state 2
         }
-              
+
         case 2: {
-            // start scan 
+            // start scan
             setFastSlewMode(false);
             setConAngle(getConAngle() + degPerDT);
-            if (fabs(getConAngle()) > 360.0) {
+            if (std::fabs(getConAngle()) > 360.0) {
                 setNumRevs(getNumRevs()+1);
                 if (getConAngle() >= 0.0) {
                     setConAngle(getConAngle() - 360.0);
@@ -322,13 +324,13 @@ void ScanGimbal::spiralScanController(const double dt)
             setScanState(3);
         }
             break;
-            
+
         case 3: {
-            
+
             // turn revolutions per second into degrees per sec per frame
             // now we get this to each time step
             setConAngle(getConAngle() + degPerDT);
-            if (fabs(getConAngle()) > 360.0) {
+            if (std::fabs(getConAngle()) > 360.0) {
                 setNumRevs(getNumRevs()+1);
                 if (getConAngle() >= 0.0) {
                     setConAngle(getConAngle() - 360.0);
@@ -336,15 +338,15 @@ void ScanGimbal::spiralScanController(const double dt)
                     setConAngle(getConAngle() + 360.0);
                 }
             }
-            
+
             // end scan - finished with one rotation, check if our reference has moved
             bool onceAround = false;
-            
+
             if (getNumRevs() >= getMaxNumRevs()) {
                 onceAround = true;
             }
-                              
-            // after one revolution 
+
+            // after one revolution
             if (onceAround) {
                 // Trigger the SCAN_END event handler
                 onEndScanEvent(&iBar);
@@ -354,8 +356,8 @@ void ScanGimbal::spiralScanController(const double dt)
             }
         }
             break;
-    }    
-    
+    }
+
     double fullAngleRadians = getNumRevs() * 360.0;
     if (getRevPerSec() < 0.0) {
         fullAngleRadians = -fullAngleRadians;
@@ -374,10 +376,10 @@ void ScanGimbal::spiralScanController(const double dt)
 
 
 //------------------------------------------------------------------------------
-// circularScanController() -- controls the circular scans 
+// circularScanController() -- controls the circular scans
 //------------------------------------------------------------------------------
 void ScanGimbal::circularScanController(const double)
-{   
+{
     static Basic::Integer iBar(1);
 
     // Depending on our scan state, we will either start or stop the bar
@@ -390,14 +392,14 @@ void ScanGimbal::circularScanController(const double)
             setScanState(1);
         }
             break;
-            
+
         case 1: {
         // wait state
             if (isPositioned() || isAtLimits()) { setScanState(2); } // out of state 1
             break;// fall into state 2
         }
-            
-            
+
+
         case 2: {
         // start scan - switch to a rate servo, and begin spinning at a commanded rate
             // Trigger the SCAN_START event handler
@@ -408,11 +410,11 @@ void ScanGimbal::circularScanController(const double)
             setScanState(3);
         }
             break;
-            
+
         case 3: {
             // end scan - finished with one rotation, start over again
             bool onceAround = false;
-            
+
             double myAngle = Basic::Angle::aepcdRad(getPosition().x() - getRefPosition().x());
             // clockwise
             if(getCmdAzRate() >= 0.0) {
@@ -423,7 +425,7 @@ void ScanGimbal::circularScanController(const double)
                 onceAround = (myLastAngle >= 0.0 && myAngle < 0.0);
             }
             myLastAngle = myAngle;
-            
+
             if (onceAround) {
                 // Trigger the SCAN_END event handler
                 onEndScanEvent(&iBar);
@@ -431,7 +433,7 @@ void ScanGimbal::circularScanController(const double)
                 setScanState(2);
             }
         }
-    }    
+    }
 }
 
 //------------------------------------------------------------------------------
@@ -444,9 +446,9 @@ void ScanGimbal::manualScanController(const double)
 // pseudoRandomScanController() -- steps through an array of vertices (fast slew)
 //------------------------------------------------------------------------------
 void ScanGimbal::pseudoRandomScanController(const double)
-{    
+{
     static Basic::Integer iBar(1);
-    
+
     // Depending on our scan state, we will either start or stop the bar
     switch(getScanState()) {
         // reset state, must be in electronic mode or we will not operate
@@ -455,17 +457,17 @@ void ScanGimbal::pseudoRandomScanController(const double)
                 if ( isGimbalType(ELECTRONIC) ) {
                     setServoMode(POSITION_SERVO);
                     setFastSlewMode(true);
-                    setScanState(1);              
+                    setScanState(1);
                 }
                 else setScanMode(MANUAL_SCAN);
             }
         }
             break;
-            
-            
+
+
         case 1: {
         // start state - go to the desired pseudo random point (must be in electric mode)
-            if (isPositioned() || isAtLimits()) {            
+            if (isPositioned() || isAtLimits()) {
                 // make sure we have at least one vertice, then move to it
                 if (nprv != 0 && cprv <= nprv) {
                     // if this is the first vertice, send a start event
@@ -483,10 +485,10 @@ void ScanGimbal::pseudoRandomScanController(const double)
             }
         }
             break;
-            
+
         case 2: {
         // end state - reset our vertice count and send an end event
-            if (isPositioned() || isAtLimits()) {            
+            if (isPositioned() || isAtLimits()) {
                 // Trigger the SCAN_END event handler
                 onEndScanEvent(&iBar);
 
@@ -497,19 +499,19 @@ void ScanGimbal::pseudoRandomScanController(const double)
         }
             break;
     }
-    
+
     // now set our commanded position accordingly
     setCmdPos(getRefPosition()+getScanPos());
 }
 
 
 //------------------------------------------------------------------------------
-// barScanController() -- control the bar scans 
+// barScanController() -- control the bar scans
 //------------------------------------------------------------------------------
 void ScanGimbal::barScanController(const double)
 {
     static Basic::Integer iBar(1);
-    
+
     // Depending on our scan state, we will either start or stop the bar
     switch(getScanState()) {
         // reset state, we must set our bar number back to 1
@@ -521,7 +523,7 @@ void ScanGimbal::barScanController(const double)
             setFastSlewMode(true);
         }
             break;
-            
+
         case 1: {
         // start state - slow slew and compute the end position
             if (isPositioned() || isAtLimits()) {
@@ -534,10 +536,10 @@ void ScanGimbal::barScanController(const double)
             }
         }
             break;
-            
+
         case 2: {
         // end state - fast slew and compute the next bar's position (if any)
-            if (isPositioned() || isAtLimits()) {            
+            if (isPositioned() || isAtLimits()) {
                 iBar = getBarNumber();
                 // Trigger the SCAN_END event handler
                 onEndScanEvent(&iBar);
@@ -549,10 +551,10 @@ void ScanGimbal::barScanController(const double)
         }
             break;
     }
-    
+
     // now set our commanded position accordingly
     setCmdPos(getRefPosition()+getScanPos());
-}      
+}
 
 //------------------------------------------------------------------------------
 // userModesScanController() -- the user will handle this
@@ -561,7 +563,7 @@ void ScanGimbal::userModesScanController(const double)
 {}
 
 //------------------------------------------------------------------------------
-// nextBar() - steps through the bar count, until we reach our number of bars 
+// nextBar() - steps through the bar count, until we reach our number of bars
 // limit.
 //------------------------------------------------------------------------------
 void ScanGimbal::nextBar()
@@ -603,31 +605,31 @@ void ScanGimbal::nextBar()
 //------------------------------------------------------------------------------
 void ScanGimbal::computeNewBarPos(const int bar, const Side side)
 {
-    // Lookup tables 
-    // 1 bar scan 
-    static double table1[2][2] = { { -1, 0 }, 
+    // Lookup tables
+    // 1 bar scan
+    static double table1[2][2] = { { -1, 0 },
                                     { 1, 0 } };
     // 2 bar scan
     static double table2[2][2][2] = {
         { {-1, 0.5f}, {1, 0.5f} },
         { {1, -0.5f}, {-1, -0.5f} }
     };
-    
+
     // 3 bar scan
     static double table3[3][2][2] = {
         { { -1, 1 }, {  1, 1 } },
         { { 1, 0 },  { -1, 0 } },
         { { -1, -1 }, { 1 , -1 } }
     };
-    
+
     // 4 bar scan
     static double table4[4][2][2] = {
         { { -1,  1.5f},   {  1,  1.5f} },
         { {  1,  0.5f},   { -1,  0.5f} },
         { { -1, -0.5f},   {  1, -0.5f} },
         { {  1, -1.5f},   { -1, -1.5f} }
-    }; 
-        
+    };
+
     // Now we determine which table to use, depending on the number of bars
     double x = 0.0;
     double y = 0.0;
@@ -650,24 +652,24 @@ void ScanGimbal::computeNewBarPos(const int bar, const Side side)
         x = table4[bar-1][side][0];
         y = table4[bar-1][side][1];
     }
-    
+
     // swap x values if we are scanning right to left
-    if (!isLeftToRightScan()) x = -x; 
+    if (!isLeftToRightScan()) x = -x;
 
     // if we have an odd number of bars and are in the reverse scan sequence swap
     // x values on even bar numbers or on bar if only a 1 bar scan
     if (nb == 1 && isReverseScan()) {
         x = -x;
     }
-    
+
     // now turn our Unitless numbers in something we can use
     double x1 = x * (0.5 * getScanWidth());
     double y1 = y * (getBarSpacing());
-                        
+
     // We need to find which mode we are in before computing the start position
     if (getScanMode() == HORIZONTAL_BAR_SCAN) { setScanPos(x1, y1); }
     else { setScanPos(y1, x1); }
-} 
+}
 
 //------------------------------------------------------------------------------
 // resetScan() - Resets the scan pattern
@@ -749,7 +751,7 @@ bool ScanGimbal::setSearchVolume(const double width, const double height, const 
     if (reqBars != 1 && reqBars != 2 && reqBars != 3 && reqBars != 4) {
         if (scanHeight < (Basic::Angle::D2RCC * 1.0f))
             numBars = 1;
-        else if (scanHeight < (Basic::Angle::D2RCC * 5.0f)) 
+        else if (scanHeight < (Basic::Angle::D2RCC * 5.0f))
             numBars = 2;
         else if (scanHeight < (Basic::Angle::D2RCC * 10.0f))
             numBars = 3;
@@ -783,12 +785,12 @@ bool ScanGimbal::setRefPosition(const double refAz,  const double refEl)
     // set one, and if it is ok, set the other
     ok = setRefAzimuth(refAz);
     if (ok) ok = setRefElevation(refEl);
-    
+
     return ok;
 }
 
 //------------------------------------------------------------------------------
-// setBarSpacing(): sets the bar spacing 
+// setBarSpacing(): sets the bar spacing
 //------------------------------------------------------------------------------
 bool ScanGimbal::setBarSpacing(const double newSpacing)
 {
@@ -799,7 +801,7 @@ bool ScanGimbal::setBarSpacing(const double newSpacing)
 }
 
 //------------------------------------------------------------------------------
-// setNumBars(): sets the number of bars that we are using 
+// setNumBars(): sets the number of bars that we are using
 //------------------------------------------------------------------------------
 bool ScanGimbal::setNumBars(const double newNumBars)
 {
@@ -902,7 +904,7 @@ bool ScanGimbal::setSlotLeftToRightScan(const Basic::Number* const newLeftToRigh
         bool x = newLeftToRightScan->getBoolean();
         ok = setLeftToRightScan(x);
     }
-        
+
     return ok;
 }
 
@@ -926,7 +928,7 @@ bool ScanGimbal::setSlotSearchVolume(Basic::List* const numList)
         int n = numList->getNumberList(values, 2);
         if (n == 2) ok = setSearchVolume(values[0], values[1]);
     }
-    return ok;       
+    return ok;
 }
 
 // setSlotRefPosition() --  calls setRefPosition
@@ -963,18 +965,18 @@ bool ScanGimbal::setSlotNumBars(const Basic::Number* const newNumBars)
     return ok;
 }
 
-// setSlotRevPerSec() -- 
+// setSlotRevPerSec() --
 bool ScanGimbal::setSlotRevPerSec(const Basic::Number* const newRevPerSec)
 {
     bool ok = false;
-    if (newRevPerSec != 0) { 
+    if (newRevPerSec != 0) {
         double x = newRevPerSec->getDouble();
         ok = setRevPerSec(x);
     }
     return ok;
 }
 
-// setSlotScanRadius() -- 
+// setSlotScanRadius() --
 bool ScanGimbal::setSlotScanRadius(const Basic::Number* const newScanRadius)
 {
     bool ok = false;
@@ -994,8 +996,8 @@ bool ScanGimbal::setSlotScanRadius(const Basic::Number* const newScanRadius)
 //     vertices: { [ 1 2 ]  [ 3 4 ] [ 5 6 ] }
 bool ScanGimbal::setSlotPRVertices(const Basic::PairStream* const prObj)
 {
-   bool ok = true; 
-   
+   bool ok = true;
+
    if (prObj != 0) {
         // find how many vertices we have
         unsigned int n = prObj->entries();
@@ -1004,7 +1006,7 @@ bool ScanGimbal::setSlotPRVertices(const Basic::PairStream* const prObj)
         const Basic::List::Item* item = prObj->getFirstItem();
         // holds our array values
         osg::Vec2d tempVerts(0.0, 0.0);
-        
+
         while (item != 0 && nprv < n) {
             const Basic::Pair* p = dynamic_cast<const Basic::Pair*>(item->getValue());
                 if (p != 0) {
@@ -1013,7 +1015,7 @@ bool ScanGimbal::setSlotPRVertices(const Basic::PairStream* const prObj)
                     if (msg2 != 0) {
                         double values[2];
                         int nl = msg2->getNumberList(values, 2);
-                        
+
                         if (nl == 2) {
                             // set our values in our vector array
                             prScanVertices[nprv].set(values[0],values[1]);
@@ -1028,11 +1030,11 @@ bool ScanGimbal::setSlotPRVertices(const Basic::PairStream* const prObj)
     return ok;
 }
 
-// setSlotMaxRevs() -- 
+// setSlotMaxRevs() --
 bool ScanGimbal::setSlotMaxRevs(const Basic::Number* const newMaxRevs)
 {
     bool ok = false;
-    if (newMaxRevs != 0) { 
+    if (newMaxRevs != 0) {
         double x = newMaxRevs->getDouble();
         ok = setMaxRevs(x);
     }
@@ -1061,19 +1063,19 @@ std::ostream& ScanGimbal::serialize(std::ostream& sout, const int i, const bool 
 
     // scanMode:  Sets the type of scan we desire (manual, horizontal, vertical, conical, circular, pseudorandom)
     indent(sout,i+j);
-    if (scanMode == MANUAL_SCAN) 
+    if (scanMode == MANUAL_SCAN)
         sout << "scanMode: manual           //  scan type  (manual, horizontal, vertical, conical, circular, pseudorandom)"  << std::endl;
-    else if (scanMode == HORIZONTAL_BAR_SCAN) 
+    else if (scanMode == HORIZONTAL_BAR_SCAN)
         sout << "scanMode: horizontal       //  scan type  (manual, horizontal, vertical, conical, circular, pseudorandom)"  << std::endl;
-    else if (scanMode == VERTICAL_BAR_SCAN) 
+    else if (scanMode == VERTICAL_BAR_SCAN)
         sout << "scanMode: vertical         //  scan type  (manual, horizontal, vertical, conical, circular, pseudorandom)"  << std::endl;
-    else if (scanMode == CONICAL_SCAN) 
+    else if (scanMode == CONICAL_SCAN)
         sout << "scanMode: conical          //  scan type  (manual, horizontal, vertical, conical, circular, pseudorandom)"  << std::endl;
-    else if (scanMode == CIRCULAR_SCAN) 
+    else if (scanMode == CIRCULAR_SCAN)
         sout << "scanMode: circular         //  scan type  (manual, horizontal, vertical, conical, circular, pseudorandom)"  << std::endl;
-    else if (scanMode == PSEUDO_RANDOM_SCAN) 
+    else if (scanMode == PSEUDO_RANDOM_SCAN)
         sout << "scanMode: pseudorandom     //  scan type  (manual, horizontal, vertical, conical, circular, pseudorandom)"  << std::endl;
-    else if (scanMode == SPIRAL_SCAN) 
+    else if (scanMode == SPIRAL_SCAN)
         sout << "scanMode: spiral           //  scan type  (manual, horizontal, vertical, conical, circular, pseudorandom)"  << std::endl;
 
     // leftToRightScan:  True to scan from left to right (else right to left) (Default: true) (up to down or down to up)
@@ -1117,7 +1119,7 @@ std::ostream& ScanGimbal::serialize(std::ostream& sout, const int i, const bool 
     indent(sout,i+j);
     sout << "scanRadius: " << scanRadius << " \t\t // WARNING or INFO:This is really a beam width or half beam width, not a radius!" << std::endl;
 
-    // pseudoRandomPattern: Pseudo Random pattern vertices (2D - az and el) 
+    // pseudoRandomPattern: Pseudo Random pattern vertices (2D - az and el)
     if (nprv > 0) {
         indent(sout,i+j);
         sout << "pseudoRandomPattern: { ";
@@ -1127,7 +1129,7 @@ std::ostream& ScanGimbal::serialize(std::ostream& sout, const int i, const bool 
         sout << "} " << std::endl;
     }
 
-    // maxRevolutions: Spiral Scan - Maximum number of revolutions 
+    // maxRevolutions: Spiral Scan - Maximum number of revolutions
     indent(sout,i+j);
     sout << "maxRevolutions: " << maxNumRevs << std::endl;
 

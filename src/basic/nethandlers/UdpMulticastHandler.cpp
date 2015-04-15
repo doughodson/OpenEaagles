@@ -65,7 +65,7 @@ END_SLOT_MAP()
 //------------------------------------------------------------------------------
 // Constructors
 //------------------------------------------------------------------------------
-UdpMulticastHandler::UdpMulticastHandler() : multicastGroup(0)
+UdpMulticastHandler::UdpMulticastHandler() : multicastGroup(nullptr)
 {
     STANDARD_CONSTRUCTOR()
     setTTL(1);
@@ -80,9 +80,8 @@ void UdpMulticastHandler::copyData(const UdpMulticastHandler& org, const bool)
 {
     BaseClass::copyData(org);
 
-    // Multicast Stuff
-    multicastGroup = 0;
-    if (org.multicastGroup != 0) {
+    multicastGroup = nullptr;
+    if (org.multicastGroup != nullptr) {
         size_t len = std::strlen(org.multicastGroup);
         multicastGroup = new char[len+1];
         lcStrcpy(multicastGroup,(len+1),org.multicastGroup);
@@ -97,8 +96,8 @@ void UdpMulticastHandler::copyData(const UdpMulticastHandler& org, const bool)
 //------------------------------------------------------------------------------
 void UdpMulticastHandler::deleteData()
 {
-    if (multicastGroup != 0) delete[] multicastGroup;
-    multicastGroup = 0;
+    if (multicastGroup != nullptr) delete[] multicastGroup;
+    multicastGroup = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -177,7 +176,7 @@ bool UdpMulticastHandler::init()
 bool UdpMulticastHandler::bindSocket()
 {
     // Must have a group
-    if (multicastGroup == 0) return false;
+    if (multicastGroup == nullptr) return false;
 
     // ---
     // Our base class will bind the socket
@@ -193,7 +192,7 @@ bool UdpMulticastHandler::bindSocket()
 #else
        addr.sin_addr.s_addr = ::inet_addr(multicastGroup);
 #endif
-       if (getLocalPort() != 0) addr.sin_port = htons (getLocalPort());
+       if (getLocalPort() != 0) addr.sin_port = htons(getLocalPort());
        else addr.sin_port = htons(getPort());
 
        if (::bind(socketNum, reinterpret_cast<const struct sockaddr*>(&addr), sizeof(addr)) == SOCKET_ERROR) {
@@ -270,7 +269,7 @@ bool UdpMulticastHandler::closeConnection()
 bool UdpMulticastHandler::setSlotMulticastGroup(const String* const msg)
 {
     bool ok = false;
-    if (msg != 0) {
+    if (msg != nullptr) {
         multicastGroup = msg->getCopyString();
         ok = true;
     }
@@ -281,7 +280,7 @@ bool UdpMulticastHandler::setSlotMulticastGroup(const String* const msg)
 bool UdpMulticastHandler::setSlotTTL(const Number* const msg)
 {
     bool ok = false;
-    if (msg != 0) {
+    if (msg != nullptr) {
         setTTL( msg->getInt() );
         ok = true;
     }
@@ -292,7 +291,7 @@ bool UdpMulticastHandler::setSlotTTL(const Number* const msg)
 bool UdpMulticastHandler::setSlotLoopback(const Number* const msg)
 {
     bool ok = false;
-    if (msg != 0) {
+    if (msg != nullptr) {
         setLoopback( msg->getBoolean() );
         ok = true;
     }
@@ -319,7 +318,7 @@ std::ostream& UdpMulticastHandler::serialize(std::ostream& sout, const int i, co
         j = 4;
     }
 
-    if (multicastGroup != 0) {
+    if (multicastGroup != nullptr) {
         indent(sout,i+j);
         sout << "multicastGroup: \"";
         sout << multicastGroup;

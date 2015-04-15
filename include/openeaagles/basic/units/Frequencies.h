@@ -47,7 +47,7 @@
 #ifndef __Eaagles_Basic_Frequencies_H__
 #define __Eaagles_Basic_Frequencies_H__
 
-#include "../Number.h"
+#include "openeaagles/basic/Number.h"
 
 namespace Eaagles {
 namespace Basic {

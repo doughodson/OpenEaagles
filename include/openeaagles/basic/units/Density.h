@@ -4,7 +4,7 @@
 #ifndef __Eaagles_Basic_Density_H__
 #define __Eaagles_Basic_Density_H__
 
-#include "../Number.h"
+#include "openeaagles/basic/Number.h"
 #include "Masses.h"
 #include "Volumes.h"
 

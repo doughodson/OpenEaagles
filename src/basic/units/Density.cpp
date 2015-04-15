@@ -30,7 +30,7 @@ Density::Density(LCreal value, const Mass* newMass, const Volume* newVolume) : N
 {
     STANDARD_CONSTRUCTOR()
 
-    if (newMass != 0 && newVolume != 0) {
+    if (newMass != nullptr && newVolume != nullptr) {
         myMass = newMass;
         myVolume = newVolume;
         val = value;
@@ -68,8 +68,8 @@ void Density::copyData(const Density& org, const bool cc)
     if (cc)
     {
         // initialize pointers when called by copy constructor
-        myMass = 0;
-        myVolume = 0;
+        myMass = nullptr;
+        myVolume = nullptr;
     }
 
     val = org.getReal();
@@ -82,8 +82,8 @@ void Density::copyData(const Density& org, const bool cc)
 //------------------------------------------------------------------------------
 void Density::deleteData()
 {
-    myMass = 0;
-    myVolume = 0;
+    myMass = nullptr;
+    myVolume = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -120,7 +120,7 @@ const Volume* Density::getVolume() const
 //------------------------------------------------------------------------------
 bool Density::setSlotMass(const Mass* newMass)
 {
-    if (newMass != 0) {
+    if (newMass != nullptr) {
         myMass = newMass;
         return true;
     }
@@ -132,7 +132,7 @@ bool Density::setSlotMass(const Mass* newMass)
 //------------------------------------------------------------------------------
 bool Density::setSlotVolume(const Volume* newVolume)
 {
-    if (newVolume != 0) {
+    if (newVolume != nullptr) {
         myVolume = newVolume;
         return true;
     }
@@ -163,11 +163,11 @@ std::ostream& Density::serialize(std::ostream& sout, const int i, const bool slo
     indent(sout, i+j);
     sout << "value: " << val << std::endl;
 
-    if (myMass != 0) {
+    if (myMass != nullptr) {
         indent(sout, i+j);
         sout << "mass: " << *myMass << std::endl;
     }
-    if (myVolume != 0) {
+    if (myVolume != nullptr) {
         indent(sout, i+j);
         sout << "volume: " << *myVolume << std::endl;
     }

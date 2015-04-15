@@ -46,15 +46,15 @@ END_SLOT_MAP()
 Agent::Agent()
 {
    STANDARD_CONSTRUCTOR()
-   myActor = 0;
-   behavior = 0;
-   state = 0;
+   myActor = nullptr;
+   behavior = nullptr;
+   state = nullptr;
 }
 
 void Agent::deleteData()
 {
-   if ( behavior!=0 ) { behavior->unref(); behavior = 0; }
-   if ( state!=0 )    { state->unref(); state = 0; }
+   if ( behavior!=nullptr ) { behavior->unref(); behavior = nullptr; }
+   if ( state!=nullptr )    { state->unref(); state = nullptr; }
 
    myActor = 0;
 }
@@ -65,14 +65,14 @@ void Agent::deleteData()
 void Agent::reset()
 {
    // Reset our behavior and state objects
-   if (behavior != 0) {
+   if (behavior != nullptr) {
       behavior->reset();
    }
-   if (state != 0) {
+   if (state != nullptr) {
       state->reset();
    }
-   
-   myActor=0;
+
+   myActor=nullptr;
    initActor();
 
    // although state is not explicitly initialized as component, the set state
@@ -106,8 +106,8 @@ void Agent::controller(const LCreal dt)
 {
    Basic::Component* actor = getActor();
 
-   if ( (actor!=0) && (getState()!=0) && (getBehavior()!=0) ) {
-      
+   if ( (actor!=nullptr) && (getState()!=nullptr) && (getBehavior()!=nullptr) ) {
+
       // update ubf state
       getState()->updateState(actor);
 
@@ -126,9 +126,9 @@ void Agent::controller(const LCreal dt)
 //------------------------------------------------------------------------------
 void Agent::setBehavior(Behavior* const x)
 {
-   if (x==0)
+   if (x==nullptr)
       return;
-   if (behavior!=0)
+   if (behavior!=nullptr)
       behavior->unref();
    behavior = x;
    behavior->ref();
@@ -141,9 +141,9 @@ void Agent::setBehavior(Behavior* const x)
 //------------------------------------------------------------------------------
 void Agent::setState(State* const x)
 {
-   if (x==0)
+   if (x==nullptr)
       return;
-   if (state!=0)
+   if (state!=nullptr)
       state->unref();
    state = x;
    state->ref();
@@ -159,9 +159,9 @@ void Agent::setState(State* const x)
 //------------------------------------------------------------------------------
 void Agent::initActor()
 {
-   if (getActor()==0) {
+   if (getActor()==nullptr) {
       // our actor is our container
-      if (container() != 0) {
+      if (container() != nullptr) {
          setActor(container());
       }
    }
@@ -176,7 +176,7 @@ void Agent::initActor()
 bool Agent::setSlotState(State* const state)
 {
    bool ok = false;
-   if (state != 0) {
+   if (state != nullptr) {
       setState(state);
       ok = true;
    }
@@ -186,7 +186,7 @@ bool Agent::setSlotState(State* const state)
 bool Agent::setSlotBehavior(Behavior* const x)
 {
    bool ok = false;
-   if ( x!=0 ) {
+   if ( x!=nullptr ) {
       setBehavior(x);
       ok = true;
    }
@@ -224,7 +224,7 @@ void AgentTC::updateTC(const LCreal dt)
 }
 
 //------------------------------------------------------------------------------
-// updateData() - 
+// updateData() -
 //------------------------------------------------------------------------------
 void AgentTC::updateData(const LCreal dt)
 {

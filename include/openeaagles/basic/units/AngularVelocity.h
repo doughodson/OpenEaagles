@@ -5,7 +5,7 @@
 #ifndef __Eaagles_Basic_AngularVelocity_H__
 #define __Eaagles_Basic_AngularVelocity_H__
 
-#include "../Number.h"
+#include "openeaagles/basic/Number.h"
 
 namespace Eaagles {
 namespace Basic {

@@ -44,7 +44,7 @@ BEGIN_SLOTTABLE(TcpServerMultiple)
     "backlog",    // 1) Listen socket's max backlog (default: 1)
 END_SLOTTABLE(TcpServerMultiple)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(TcpServerMultiple)
     ON_SLOT(1 ,setSlotBacklog, Number)
 END_SLOT_MAP()
@@ -76,7 +76,7 @@ void TcpServerMultiple::deleteData()
 }
 
 //------------------------------------------------------------------------------
-// Initialize this multicast handler -- 
+// Initialize this multicast handler --
 //------------------------------------------------------------------------------
 bool TcpServerMultiple::initNetwork(const bool noWaitFlag)
 {
@@ -90,7 +90,7 @@ bool TcpServerMultiple::initNetwork(const bool noWaitFlag)
 
 // -------------------------------------------------------------
 // bindSocket() -- bind the socket to an address, and configure
-// the send and receive buffers. 
+// the send and receive buffers.
 // -------------------------------------------------------------
 bool TcpServerMultiple::bindSocket()
 {
@@ -105,7 +105,7 @@ bool TcpServerMultiple::bindSocket()
       addr.sin_family = AF_INET;
       addr.sin_addr.s_addr = INADDR_ANY;
       if (getLocalAddr() != 0) addr.sin_addr.s_addr = getLocalAddr ();
-      if (getLocalPort() != 0) addr.sin_port = htons (getLocalPort());  
+      if (getLocalPort() != 0) addr.sin_port = htons (getLocalPort());
       else addr.sin_port = htons(getPort());
 
       // Only in server do we bind
@@ -115,7 +115,7 @@ bool TcpServerMultiple::bindSocket()
       }
 
       if (!setSendBuffSize()) return false;
-   
+
       if (!setRecvBuffSize()) return false;
    }
 
@@ -140,7 +140,6 @@ bool TcpServerMultiple::listenForConnections()
 //------------------------------------------------------------------------------
 TcpHandler* TcpServerMultiple::acceptConnection()
 {
-   TcpHandler* newHandler = 0;
    struct sockaddr_in clientAddr;
 
    socklen_t cAddrSize = sizeof(clientAddr);
@@ -153,6 +152,7 @@ TcpHandler* TcpServerMultiple::acceptConnection()
    // Since INVALID_SOCKET is defined as -1 for POSIX, ::accept will return
    // INVALID_SOCKET as the error condition (see MSDN help and POSIX man pages
    // for more information).
+   TcpHandler* newHandler = nullptr;
    if (newSocket != INVALID_SOCKET) {
       newHandler = new TcpHandler(newSocket);
    }
@@ -179,7 +179,7 @@ bool TcpServerMultiple::setBacklog(const unsigned int value)
 bool TcpServerMultiple::setSlotBacklog(const Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setBacklog(msg->getInt());
    }
    return ok;

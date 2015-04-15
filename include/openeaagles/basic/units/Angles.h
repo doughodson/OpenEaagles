@@ -47,7 +47,7 @@
 #ifndef __Eaagles_Basic_Angles_H__
 #define __Eaagles_Basic_Angles_H__
 
-#include "../Number.h"
+#include "openeaagles/basic/Number.h"
 
 #include <cmath>
 

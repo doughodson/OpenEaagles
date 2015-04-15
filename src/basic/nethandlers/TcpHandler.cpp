@@ -196,7 +196,7 @@ unsigned int TcpHandler::recvData(char* const packet, const int maxSize)
       // to indicate there is no error
       if (errno != EAGAIN && errno != EWOULDBLOCK) {
          // Error condition! Close the conntection
-         perror("TcpHandler::recvData(): ");
+         std::perror("TcpHandler::recvData(): ");
          closeConnection();
       }
    }

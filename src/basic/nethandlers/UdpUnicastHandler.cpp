@@ -53,7 +53,7 @@ END_SLOT_MAP()
 //------------------------------------------------------------------------------
 // Constructors
 //------------------------------------------------------------------------------
-UdpUnicastHandler::UdpUnicastHandler() : ipAddr(0)
+UdpUnicastHandler::UdpUnicastHandler() : ipAddr(nullptr)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -66,13 +66,13 @@ void UdpUnicastHandler::copyData(const UdpUnicastHandler& org, const bool cc)
     BaseClass::copyData(org);
 
     if (cc) {
-        ipAddr = 0;
+        ipAddr = nullptr;
     }
 
     // IP Address
-    if (ipAddr != 0) delete[] ipAddr;
-    ipAddr = 0;
-    if (org.ipAddr != 0) {
+    if (ipAddr != nullptr) delete[] ipAddr;
+    ipAddr = nullptr;
+    if (org.ipAddr != nullptr) {
         size_t len = std::strlen(org.ipAddr);
         ipAddr = new char[len+1];
         lcStrcpy(ipAddr,(len+1),org.ipAddr);
@@ -84,8 +84,8 @@ void UdpUnicastHandler::copyData(const UdpUnicastHandler& org, const bool cc)
 //------------------------------------------------------------------------------
 void UdpUnicastHandler::deleteData()
 {
-    if (ipAddr != 0) delete[] ipAddr;
-    ipAddr = 0;
+    if (ipAddr != nullptr) delete[] ipAddr;
+    ipAddr = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -195,7 +195,7 @@ bool UdpUnicastHandler::sendDataTo(
 bool UdpUnicastHandler::setSlotIpAddress(const String* const msg)
 {
     bool ok = false;
-    if (msg != 0) {
+    if (msg != nullptr) {
         if (ipAddr != 0) delete[] ipAddr;
         ipAddr = msg->getCopyString();
         ok = true;
@@ -223,7 +223,7 @@ std::ostream& UdpUnicastHandler::serialize(std::ostream& sout, const int i, cons
         j = 4;
     }
 
-    if (ipAddr != 0) {
+    if (ipAddr != nullptr) {
         indent(sout,i+j);
         sout << "ipAddress: \"";
         sout << ipAddr;

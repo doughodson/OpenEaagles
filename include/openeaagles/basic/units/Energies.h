@@ -67,7 +67,7 @@
 #ifndef __Eaagles_Energies_H__
 #define __Eaagles_Energies_H__
 
-#include "../Number.h"
+#include "openeaagles/basic/Number.h"
 
 namespace Eaagles {
 namespace Basic {

@@ -18,7 +18,7 @@ static const unsigned int MAX_CPUS = 32;
 //-----------------------------------------------------------------------------
 // Static thread function
 //-----------------------------------------------------------------------------
-DWORD WINAPI Thread::staticThreadFunc(LPVOID lpParam) 
+DWORD WINAPI Thread::staticThreadFunc(LPVOID lpParam)
 {
    Thread* thread = static_cast<Thread*>(lpParam);
    Component* parent = thread->getParent();
@@ -71,14 +71,14 @@ bool Thread::createThread()
    DWORD dwCreationFlags = 0;
 
    // create the thread
-   HANDLE hnd = 
+   HANDLE hnd =
       CreateThread(
-         NULL,             // no security attributes 
+         NULL,             // no security attributes
          stackSize,        // stack size (bytes)
-         staticThreadFunc, // static thread function 
-         this,             // argument passed to static function 
-         dwCreationFlags,  // Creation flags 
-         NULL              // returns the thread identifier 
+         staticThreadFunc, // static thread function
+         this,             // argument passed to static function
+         dwCreationFlags,  // Creation flags
+         NULL              // returns the thread identifier
       );
 
    if ( hnd != 0 && parent->isMessageEnabled(MSG_INFO) ) {
@@ -177,7 +177,7 @@ void Thread::closeThread()
 {
    CloseHandle(theThread);
    parent = 0;
-   theThread = 0;
+   theThread = nullptr;
 }
 
 //-----------------------------------------------------------------------------
@@ -185,13 +185,13 @@ void Thread::closeThread()
 //-----------------------------------------------------------------------------
 bool Thread::terminate()
 {
-   if (theThread != 0 && !killed) {
+   if (theThread != nullptr && !killed) {
       if ( parent->isMessageEnabled(MSG_INFO) ) {
          std::cout << "Thread(" << this << ")::terminate(): handle = " << theThread << std::endl;
       }
 
       TerminateThread(theThread, 0);
-      theThread = 0;
+      theThread = nullptr;
       killed = true;
 
       // The child thread ref()'s 'this' Thread class and our parent object,

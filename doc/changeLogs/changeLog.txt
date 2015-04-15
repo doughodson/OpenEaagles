@@ -10,17 +10,28 @@ general
 
 - added 'override' context keyword throughout entire framework
 
-- added 'nullptr' context keyword throughout entire framework
+- adding 'nullptr' context keyword throughout entire framework
 
-- added more 'std::' namespace qualifiers
+- added more 'std::' namespace qualifiers to math and string functions
 
 --------------------------------------------------------------------------------
 basic
 
-   Component class: removed unnecessary casting checks in several places
+   Component class: removed unnecessary casting checks in several places (actually they were incorrect)
 
-   Tables & Functions: revised Tables and Functions classes and placed into basic/functors directory
-                       (this included breaking out all LFI functions into a separate file)
+   Functions.h/cpp: these files defined several classes including Function, Func1, Func2, Func3,
+                    Func4, Func5 and Polynomial.  The Function class has been separated into its
+                    own .h/cpp.
+
+   Tables.h/cpp: these files defined several classes including Table, Table1, Table2, Table3,
+                 Table4 and Table5.  Table class itself defined several static methods for
+                 performing linear function interpolation (LFI).  The Table class has been
+                 separated into its own .h/cpp and the LFI algoithms are now defined in the
+                 lfi-util.h header, within the 'lft::' namespace.
+
+   Tables & Functions: all of the Table and Function classes plus LFI algorithms have now be moved
+                       into a new functors subdirectory of basic.  Technically, these are not
+                       C++ functors, but role they serve is very functor-like.
 
 --------------------------------------------------------------------------------
 basicGL

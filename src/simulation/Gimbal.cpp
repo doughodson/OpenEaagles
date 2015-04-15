@@ -15,6 +15,8 @@
 #include "openeaagles/basic/units/Angles.h"
 #include "openeaagles/basic/units/Distances.h"
 
+#include <cmath>
+
 namespace Eaagles {
 namespace Simulation {
 
@@ -76,7 +78,7 @@ BEGIN_SLOTTABLE(Gimbal)
     "ownHeadingOnly",               // 36: Whether only the ownship heading is used by the target data block
 END_SLOTTABLE(Gimbal)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(Gimbal)
 
     ON_SLOT(1, setSlotType, Basic::String)               // Physical gimbal type: "mechanical" or "electronic"
@@ -97,8 +99,8 @@ BEGIN_SLOT_MAP(Gimbal)
     ON_SLOT(12, setSlotElevationUpper, Basic::Angle)     // Upper elevation limit
 
     ON_SLOT(13, setSlotRollLimits, Basic::List)          // Roll limit vector (radians) [ lower upper ]
-    ON_SLOT(14, setSlotRollLimitLower, Basic::Angle)     // Lower roll limit 
-    ON_SLOT(15, setSlotRollLimitUpper, Basic::Angle)     // Upper roll limit 
+    ON_SLOT(14, setSlotRollLimitLower, Basic::Angle)     // Lower roll limit
+    ON_SLOT(15, setSlotRollLimitUpper, Basic::Angle)     // Upper roll limit
 
     ON_SLOT(16, setSlotMaxRates, Basic::List)            // Max "mechanical" rate vector (rad/sec) [ az el roll ]
     ON_SLOT(17, setSlotMaxRateAzimuth, Basic::Angle)     // Max "mechanical" azimuth rate (Basic::Angle/sec)
@@ -328,13 +330,13 @@ void Gimbal::servoController(const double dt)
 {
    // Only if we're not frozen ...
    if (servoMode != FREEZE_SERVO) {
- 
+
       // ---
       // Compute rate
       // ---
       osg::Vec3d rate1( 0.0f, 0.0f, 0.0f );
       if (servoMode == POSITION_SERVO) {
-       
+
          // position servo: drive the gimbal toward the commanded position
          rate1 = cmdPos - pos;
          rate1[AZ_IDX]   = Basic::Angle::aepcdRad(rate1[AZ_IDX]);
@@ -372,7 +374,7 @@ void Gimbal::servoController(const double dt)
 
          // set servo rate to limited rate
          if (type == MECHANICAL) limitVec(rate1, maxRate);
-           
+
          rate = rate1;
       }
 
@@ -426,7 +428,7 @@ void Gimbal::servoController(const double dt)
             elLimit = true;
          }
       }
-       
+
       // ---
       // limit gimbal's roll position
       //  1) lowLimits[XXXX] is the counter-clockwise limit;
@@ -513,7 +515,7 @@ bool Gimbal::setType(const Type rt)
 }
 
 // setServoMode() -- Set servo mode: RATE_SERVO, POSITION_SERVO, etc.
-bool Gimbal::setServoMode(const ServoMode m)        
+bool Gimbal::setServoMode(const ServoMode m)
 {
     servoMode = m;
     return true;
@@ -609,13 +611,13 @@ bool Gimbal::setPosition(const double azim, const double elev)
 //------------------------------------------------------------------------------
 bool Gimbal::setMaxRates(const double azMaxRate, const double elMaxRate, const double rollMaxRate)
 {
-    maxRate.set( fabs(azMaxRate), fabs(elMaxRate), fabs(rollMaxRate) );
+    maxRate.set( std::fabs(azMaxRate), std::fabs(elMaxRate), std::fabs(rollMaxRate) );
     return true;
 }
 
 bool Gimbal::setMaxRates(const double azMaxRate, const double elMaxRate)
 {
-    return setMaxRates( fabs(azMaxRate), fabs(elMaxRate), 0 );
+    return setMaxRates( std::fabs(azMaxRate), std::fabs(elMaxRate), 0 );
 }
 
 //------------------------------------------------------------------------------
@@ -635,7 +637,7 @@ bool Gimbal::setElevationLimits(const double lowerLim, const double upperLim)
 {
     lowLimits[ELEV_IDX]  = lowerLim;
     highLimits[ELEV_IDX] = upperLim;
-    return true; 
+    return true;
 }
 
 //------------------------------------------------------------------------------
@@ -645,7 +647,7 @@ bool Gimbal::setRollLimits(const double lowerLim, const double upperLim)
 {
     lowLimits[ROLL_IDX]  = lowerLim;
     highLimits[ROLL_IDX] = upperLim;
-    return true; 
+    return true;
 }
 
 //------------------------------------------------------------------------------
@@ -730,7 +732,7 @@ bool Gimbal::setCmdPos(const osg::Vec3d& p)
          newPos[ELEV_IDX] = lowLimits[ELEV_IDX];
       }
    }
-      
+
    // ---
    // limit commanded roll position
    //  1) lowLimits[ROLL_IDX] is the counter-clockwise limit;
@@ -793,7 +795,7 @@ bool Gimbal::setLocation(const double x, const double y, const double z)
 bool Gimbal::setSlotType(const Basic::String* const msg)
 {
     if (msg == 0) return false;
-    
+
     bool ok = true;
     if (*msg == "mechanical") ok = setType(MECHANICAL);
     else if (*msg == "electronic") ok = setType(ELECTRONIC);
@@ -801,7 +803,7 @@ bool Gimbal::setSlotType(const Basic::String* const msg)
     return ok;
 }
 
-// setSlotLocation() - 
+// setSlotLocation() -
 bool Gimbal::setSlotLocation(const Basic::List* const msg)
 {
    bool ok = false;
@@ -988,7 +990,7 @@ bool Gimbal::setSlotMaxRates(const Basic::List* const numList)
         if (n == 2) ok = setMaxRates(values[0], values[1]);
         else if (n == 3) ok = setMaxRates(values[0], values[1], values[2]);
     }
-    
+
     return ok;
 }
 
@@ -1163,7 +1165,7 @@ bool Gimbal::setSlotPlayerTypes(const Basic::PairStream* const msg)
          const Basic::Pair* pair = static_cast<const Basic::Pair*>(item->getValue());
          const Basic::String* type = dynamic_cast<const Basic::String*>( pair->object() );
          if (type != 0) {
-            if ( lcStrcasecmp(*type,"air") == 0 ) { 
+            if ( lcStrcasecmp(*type,"air") == 0 ) {
                mask = (mask | Player::AIR_VEHICLE);
             }
             else if ( lcStrcasecmp(*type,"ground") == 0 ) {
@@ -1308,26 +1310,26 @@ bool Gimbal::isAtLimits() const
 //------------------------------------------------------------------------------
 void Gimbal::limitVec(osg::Vec2d& vec, const osg::Vec2d& lim)
 {
-  double l0 = fabs(lim[0]);
+  double l0 = std::fabs(lim[0]);
   if (vec[0] >  l0)  { vec[0] =  l0; }
   if (vec[0] < -l0)  { vec[0] = -l0; }
 
-  double l1 = fabs(lim[1]);
+  double l1 = std::fabs(lim[1]);
   if (vec[1] >  l1)  { vec[1] =  l1; }
   if (vec[1] < -l1)  { vec[1] = -l1; }
 }
 
 void Gimbal::limitVec(osg::Vec3d& vec, const osg::Vec3d& lim)
 {
-  double l0 = fabs(lim[0]);
+  double l0 = std::fabs(lim[0]);
   if (vec[0] >  l0)  { vec[0] =  l0; }
   if (vec[0] < -l0)  { vec[0] = -l0; }
 
-  double l1 = fabs(lim[1]);
+  double l1 = std::fabs(lim[1]);
   if (vec[1] >  l1)  { vec[1] =  l1; }
   if (vec[1] < -l1)  { vec[1] = -l1; }
 
-  double l2 = fabs(lim[2]);
+  double l2 = std::fabs(lim[2]);
   if (vec[2] >  l2)  { vec[2] =  l2; }
   if (vec[2] < -l2)  { vec[2] = -l2; }
 }

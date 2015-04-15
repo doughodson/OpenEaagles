@@ -33,18 +33,18 @@ double getComputerTime()
 // Get UTC time since midnight (00:00:00), January 1, 1970
 //------------
 void getTime(
-      unsigned long* const sec,  // (OUT) whole seconds 
+      unsigned long* const sec,  // (OUT) whole seconds
       unsigned long* const uSec  // (OUT) microseconds seconds
    )
 {
    struct __timeb32 timebuffer;
    _ftime32( &timebuffer );
-   if (sec != 0) *sec = timebuffer.time;
-   if (uSec != 0) *uSec = timebuffer.millitm * 1000;
+   if (sec != nullptr) *sec = timebuffer.time;
+   if (uSec != nullptr) *uSec = timebuffer.millitm * 1000;
 }
 
 //------------
-// Convert seconds since midnight (00:00:00), January 1, 1970 to year:month:day:hour:minute:second 
+// Convert seconds since midnight (00:00:00), January 1, 1970 to year:month:day:hour:minute:second
 //------------
 bool convertSec2Ymdhms(
       const unsigned long seconds,  // (IN) whole seconds since midnight (00:00:00), January 1, 1970
@@ -61,12 +61,12 @@ bool convertSec2Ymdhms(
    struct tm tmx;
    _gmtime32_s( &tmx, &time );
 
-   if (year != 0)  *year = tmx.tm_year + 1900;
-   if (month != 0) *month = tmx.tm_mon + 1;
-   if (day != 0)   *day = tmx.tm_mday;
-   if (hour != 0)  *hour = tmx.tm_hour;
-   if (min != 0)   *min = tmx.tm_min;
-   if (sec != 0)   *sec = tmx.tm_sec;
+   if (year != nullptr)  *year = tmx.tm_year + 1900;
+   if (month != nullptr) *month = tmx.tm_mon + 1;
+   if (day != nullptr)   *day = tmx.tm_mday;
+   if (hour != nullptr)  *hour = tmx.tm_hour;
+   if (min != nullptr)   *min = tmx.tm_min;
+   if (sec != nullptr)   *sec = tmx.tm_sec;
 
    return true;
 }
@@ -85,7 +85,7 @@ bool convertYmdhms2Sec(
    )
 {
    bool ok = false;
-   if (seconds != 0) {
+   if (seconds != nullptr) {
       struct tm tmx;
       tmx.tm_year = (year - 1900);
       tmx.tm_mon  = (month - 1);

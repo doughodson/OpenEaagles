@@ -41,7 +41,7 @@ Arbiter::Arbiter()
 void Arbiter::deleteData()
 {
    // unref behaviors
-   if ( behaviors!=0 ) { behaviors->unref();   behaviors = 0; }
+   if ( behaviors!=nullptr ) { behaviors->unref();   behaviors = nullptr; }
 }
 
 //------------------------------------------------------------------------------
@@ -54,12 +54,12 @@ Action* Arbiter::genAction(const State* const state, const LCreal dt)
 
    // fill out list of recommended actions by behaviors
    Basic::List::Item* item = behaviors->getFirstItem();
-   while (item != 0) {
+   while (item != nullptr) {
       // get a behavior
       Behavior* behavior = static_cast<Behavior*>(item->getValue());
       // generate action, we have reference
       Action* action = behavior->genAction(state, dt);
-      if (action != 0) {
+      if (action != nullptr) {
          // add to action set
          actionSet->addTail(action);
          // unref our action reference
@@ -86,19 +86,19 @@ Action* Arbiter::genAction(const State* const state, const LCreal dt)
 //------------------------------------------------------------------------------
 Action* Arbiter::genComplexAction(Basic::List* const actionSet)
 {
-   Action* complexAction = 0;
+   Action* complexAction = nullptr;
    unsigned int maxVote = 0;
 
    // process entire action set
    Basic::List::Item* item = actionSet->getFirstItem();
-   while (item != 0) {
+   while (item != nullptr) {
 
       // Is this action's vote higher than the previous?
       Action* action = dynamic_cast<Action*>(item->getValue());
       if (maxVote==0 || action->getVote() > maxVote) {
 
          // Yes ...
-         if (complexAction != 0) complexAction->unref();
+         if (complexAction != nullptr) complexAction->unref();
          complexAction = action;
          complexAction->ref();
          maxVote = action->getVote();
@@ -120,8 +120,6 @@ Action* Arbiter::genComplexAction(Basic::List* const actionSet)
    return complexAction;
 }
 
-
-
 //------------------------------------------------------------------------------
 // addBehavior() - add a new behavior
 //------------------------------------------------------------------------------
@@ -130,7 +128,6 @@ void Arbiter::addBehavior(Behavior* const x)
    behaviors->addTail(x);
    x->container(this);
 }
-
 
 //------------------------------------------------------------------------------
 // Slot functions
@@ -143,11 +140,11 @@ bool Arbiter::setSlotBehaviors(Basic::PairStream* const x)
    // First, make sure they are all behaviors
    {
       Basic::List::Item* item = x->getFirstItem();
-      while (item != 0 && ok) {
+      while (item != nullptr && ok) {
          Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
          item = item->getNext();
          Behavior* b = dynamic_cast<Behavior*>( pair->object() );
-         if (b == 0) {
+         if (b == nullptr) {
             // Item is NOT a behavior
             std::cerr << "setSlotBehaviors: slot: " << *pair->slot() << " is NOT of a Behavior type!" << std::endl;
             ok = false;
@@ -158,7 +155,7 @@ bool Arbiter::setSlotBehaviors(Basic::PairStream* const x)
    // next, add behaviors to our list
    if (ok) {
       Basic::List::Item* item = x->getFirstItem();
-      while (item != 0) {
+      while (item != nullptr) {
          Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
          item = item->getNext();
          Behavior* b = static_cast<Behavior*>(pair->object());

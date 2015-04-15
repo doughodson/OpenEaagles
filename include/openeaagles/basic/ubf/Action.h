@@ -25,6 +25,7 @@ namespace Ubf {
 class Action : public Basic::Object
 {
    DECLARE_SUBCLASS(Action, Basic::Object)
+
 public:
    Action();
 

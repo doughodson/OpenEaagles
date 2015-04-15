@@ -65,7 +65,7 @@
 #ifndef __Eaagles_Basic_Distance_H__
 #define __Eaagles_Basic_Distance_H__
 
-#include "../Number.h"
+#include "openeaagles/basic/Number.h"
 
 namespace Eaagles {
 namespace Basic {
@@ -86,7 +86,7 @@ public:
     Distance(const LCreal value);
 
     void set(const LCreal v)      { val = v; }
-    void set(const Distance& n) { val = fromDistance(n.toDistance()); }
+    void set(const Distance& n)   { val = fromDistance(n.toDistance()); }
 
     virtual LCreal toDistance() const = 0;
     virtual LCreal fromDistance(const LCreal) const = 0;

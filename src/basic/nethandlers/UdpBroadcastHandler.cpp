@@ -54,7 +54,7 @@ END_SLOT_MAP()
 //------------------------------------------------------------------------------
 // Constructors
 //------------------------------------------------------------------------------
-UdpBroadcastHandler::UdpBroadcastHandler() : networkMask(0)
+UdpBroadcastHandler::UdpBroadcastHandler() : networkMask(nullptr)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -67,12 +67,12 @@ void UdpBroadcastHandler::copyData(const UdpBroadcastHandler& org, const bool cc
     BaseClass::copyData(org);
 
     if (cc) {
-        networkMask = 0;
+        networkMask = nullptr;
     }
 
-    if (networkMask != 0) delete[] networkMask;
-    networkMask = 0;
-    if (org.networkMask != 0) {
+    if (networkMask != nullptr) delete[] networkMask;
+    networkMask = nullptr;
+    if (org.networkMask != nullptr) {
         size_t len = std::strlen(org.networkMask);
         networkMask = new char[len+1];
         lcStrcpy(networkMask,(len+1),org.networkMask);
@@ -84,8 +84,8 @@ void UdpBroadcastHandler::copyData(const UdpBroadcastHandler& org, const bool cc
 //------------------------------------------------------------------------------
 void UdpBroadcastHandler::deleteData()
 {
-    if (networkMask != 0) delete[] networkMask;
-    networkMask = 0;
+    if (networkMask != nullptr) delete[] networkMask;
+    networkMask = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -143,7 +143,7 @@ bool UdpBroadcastHandler::bindSocket()
     if (ok) {
         ok = false;
         uint32_t ba = 0;
-        if (networkMask != 0) {
+        if (networkMask != nullptr) {
             // User defined broadcast address
             uint32_t localNetAddr = getLocalAddr();
             uint32_t localNetMask = ::inet_addr(networkMask);
@@ -200,7 +200,7 @@ bool UdpBroadcastHandler::bindSocket()
 bool UdpBroadcastHandler::setSlotNetworkMask(const String* const msg)
 {
     bool ok = false;
-    if (msg != 0) {
+    if (msg != nullptr) {
         networkMask = msg->getCopyString();
         ok = true;
     }
@@ -227,7 +227,7 @@ std::ostream& UdpBroadcastHandler::serialize(std::ostream& sout, const int i, co
         j = 4;
     }
 
-    if (networkMask != 0) {
+    if (networkMask != nullptr) {
         indent(sout,i+j);
         sout << "networkMask: \"";
         sout << networkMask;

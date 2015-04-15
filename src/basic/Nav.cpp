@@ -1305,7 +1305,7 @@ bool Nav::getGeodCoords(
       h = std::sqrt ((wp - w) * (wp - w) + (zp - z) * (zp - z));
 
       index++;
-   } while( fabs( h - h_previous ) > 0.5 );
+   } while( std::fabs( h - h_previous ) > 0.5 );
 
 
    /* convert x,y,z into latitude, longitude and height */
@@ -1331,7 +1331,7 @@ bool Nav::getGeodCoords(
       }
       else              /* denominator is 0 */
       {
-         tanphi = (ellipseAsqOverB * std::sqrt( fabs(1.0 - w_sq / ellipseAsq))) / w;
+         tanphi = (ellipseAsqOverB * std::sqrt( std::fabs(1.0 - w_sq / ellipseAsq))) / w;
       }
       lat = atan( tanphi );
       if( zp < 0  && lat > 0)

@@ -1,8 +1,11 @@
+
 #include "openeaagles/instruments/eadi3D/Eadi3DObjects.h"
 #include "openeaagles/basic/units/Angles.h"
+
+#include <cmath>
 #include <GL/gl.h>
 
-#define MR2IN 0.026785714      // font was scaled by this 
+#define MR2IN 0.026785714      // font was scaled by this
 
 namespace Eaagles {
 namespace Instruments {
@@ -16,7 +19,7 @@ EMPTY_SLOTTABLE(Eadi3DObjects)
 EMPTY_SERIALIZER(Eadi3DObjects)
 
 //------------------------------------------------------------------------------
-// Constructor() - 
+// Constructor() -
 //------------------------------------------------------------------------------
 Eadi3DObjects::Eadi3DObjects(float radius) : radius(radius), made(false)
 {
@@ -482,7 +485,7 @@ void Eadi3DObjects::makeObjects(void)
 }
 
 //------------------------------------------------------------------------------
-// makeGlobe data - 
+// makeGlobe data -
 //------------------------------------------------------------------------------
 float globeArrowV1[3] = {0.0, 0.0, 0.0};
 float globeArrowV2[3] = {0.0, 0.0, 0.0};
@@ -582,7 +585,7 @@ void Eadi3DObjects::makeGlobe(void)
             glPushMatrix();
             glTranslatef(0.0, 0.0, -s * radius);
             glColor3fv(WHITE);
-            if (fabs(a) == 60.0 || fabs(a) == 30.0 || a == 0.0) {
+            if (std::fabs(a) == 60.0 || std::fabs(a) == 30.0 || a == 0.0) {
                 glLineWidth(4.0);
                 irisgl.circ(0.0, 0.0, c * radius);
                 if (a != 0.0) {
@@ -595,7 +598,7 @@ void Eadi3DObjects::makeGlobe(void)
                         glPushMatrix();
                         glTranslatef(-0.15f, static_cast<float>(-0.09375 * c), static_cast<float>(c * radius + 0.09375 * s));
                         glRotatef(-a, 1.0, 0.0, 0.0);
-                        glCallList(base + ( static_cast<unsigned int>(fabs(a) / 10.)));
+                        glCallList(base + ( static_cast<unsigned int>(std::fabs(a) / 10.)));
                         glTranslatef(0.1929f, 0.0f, 0.0f);
                         glCallList(base+FONT_0);
                         glPopMatrix();
@@ -604,7 +607,7 @@ void Eadi3DObjects::makeGlobe(void)
                     glPopMatrix();
                 }
                 glLineWidth(2.0);
-            } 
+            }
             else {
                 irisgl.circ(0.0, 0.0, c * radius);
             }
@@ -622,7 +625,7 @@ void Eadi3DObjects::makeGlobe(void)
 }
 
 //------------------------------------------------------------------------------
-// makeFTZRO() - 
+// makeFTZRO() -
 //------------------------------------------------------------------------------
 void Eadi3DObjects::makeFTZRO(unsigned int obj)
 {
@@ -665,7 +668,7 @@ void Eadi3DObjects::makeFTZRO(unsigned int obj)
 
 
 //------------------------------------------------------------------------------
-// makeFT1() - 
+// makeFT1() -
 //------------------------------------------------------------------------------
 void Eadi3DObjects::makeFT1(unsigned int obj)
 {
@@ -694,7 +697,7 @@ void Eadi3DObjects::makeFT1(unsigned int obj)
 
 
 //------------------------------------------------------------------------------
-// makeFT2() - 
+// makeFT2() -
 //------------------------------------------------------------------------------
 void Eadi3DObjects::makeFT2(unsigned int obj)
 {
@@ -735,7 +738,7 @@ void Eadi3DObjects::makeFT2(unsigned int obj)
 
 
 //------------------------------------------------------------------------------
-// makeFT3() - 
+// makeFT3() -
 //------------------------------------------------------------------------------
 void Eadi3DObjects::makeFT3(unsigned int obj)
 {
@@ -776,7 +779,7 @@ void Eadi3DObjects::makeFT3(unsigned int obj)
 
 
 //------------------------------------------------------------------------------
-// makeFT4() - 
+// makeFT4() -
 //------------------------------------------------------------------------------
 void Eadi3DObjects::makeFT4(unsigned int obj)
 {
@@ -802,7 +805,7 @@ void Eadi3DObjects::makeFT4(unsigned int obj)
 }
 
 //------------------------------------------------------------------------------
-// makeFT5() - 
+// makeFT5() -
 //------------------------------------------------------------------------------
 void Eadi3DObjects::makeFT5(unsigned int obj)
 {
@@ -842,7 +845,7 @@ void Eadi3DObjects::makeFT5(unsigned int obj)
 }
 
 //------------------------------------------------------------------------------
-// makeFT6() - 
+// makeFT6() -
 //------------------------------------------------------------------------------
 void Eadi3DObjects::makeFT6(unsigned int obj)
 {
@@ -892,7 +895,7 @@ void Eadi3DObjects::makeFT6(unsigned int obj)
 }
 
 //------------------------------------------------------------------------------
-// makeFT7() - 
+// makeFT7() -
 //------------------------------------------------------------------------------
 void Eadi3DObjects::makeFT7(unsigned int obj)
 {
@@ -914,7 +917,7 @@ void Eadi3DObjects::makeFT7(unsigned int obj)
 }
 
 //------------------------------------------------------------------------------
-// makeFT8() - 
+// makeFT8() -
 //------------------------------------------------------------------------------
 void Eadi3DObjects::makeFT8(unsigned int obj)
 {
@@ -982,7 +985,7 @@ void Eadi3DObjects::makeFT8(unsigned int obj)
 }
 
 //------------------------------------------------------------------------------
-// makeFT9() - 
+// makeFT9() -
 //------------------------------------------------------------------------------
 void Eadi3DObjects::makeFT9(unsigned int obj)
 {
@@ -1028,7 +1031,7 @@ void Eadi3DObjects::makeFT9(unsigned int obj)
 }
 
 //------------------------------------------------------------------------------
-// makeFTA() - 
+// makeFTA() -
 //------------------------------------------------------------------------------
 void Eadi3DObjects::makeFTA(unsigned int obj)
 {
@@ -1064,7 +1067,7 @@ void Eadi3DObjects::makeFTA(unsigned int obj)
 }
 
 //------------------------------------------------------------------------------
-// makeFTB() - 
+// makeFTB() -
 //------------------------------------------------------------------------------
 void Eadi3DObjects::makeFTB(unsigned int obj)
 {
@@ -1118,7 +1121,7 @@ void Eadi3DObjects::makeFTB(unsigned int obj)
 }
 
 //------------------------------------------------------------------------------
-// makeFTC() - 
+// makeFTC() -
 //------------------------------------------------------------------------------
 void Eadi3DObjects::makeFTC(unsigned int obj)
 {
@@ -1162,7 +1165,7 @@ void Eadi3DObjects::makeFTC(unsigned int obj)
 }
 
 //------------------------------------------------------------------------------
-// makeFTD() - 
+// makeFTD() -
 //------------------------------------------------------------------------------
 void Eadi3DObjects::makeFTD(unsigned int obj)
 {
@@ -1200,7 +1203,7 @@ void Eadi3DObjects::makeFTD(unsigned int obj)
 }
 
 //------------------------------------------------------------------------------
-// makeFTE() - 
+// makeFTE() -
 //------------------------------------------------------------------------------
 void Eadi3DObjects::makeFTE(unsigned int obj)
 {
@@ -1234,7 +1237,7 @@ void Eadi3DObjects::makeFTE(unsigned int obj)
 }
 
 //------------------------------------------------------------------------------
-// makeFTF() - 
+// makeFTF() -
 //------------------------------------------------------------------------------
 void Eadi3DObjects::makeFTF(unsigned int obj)
 {
@@ -1262,7 +1265,7 @@ void Eadi3DObjects::makeFTF(unsigned int obj)
 }
 
 //------------------------------------------------------------------------------
-// makeFTG() - 
+// makeFTG() -
 //------------------------------------------------------------------------------
 void Eadi3DObjects::makeFTG(unsigned int obj)
 {
@@ -1310,7 +1313,7 @@ void Eadi3DObjects::makeFTG(unsigned int obj)
 }
 
 //------------------------------------------------------------------------------
-// makeFTH() - 
+// makeFTH() -
 //------------------------------------------------------------------------------
 void Eadi3DObjects::makeFTH(unsigned int obj)
 {
@@ -1342,7 +1345,7 @@ void Eadi3DObjects::makeFTH(unsigned int obj)
 }
 
 //------------------------------------------------------------------------------
-// makeFTI() - 
+// makeFTI() -
 //------------------------------------------------------------------------------
 void Eadi3DObjects::makeFTI(unsigned int obj)
 {
@@ -1374,7 +1377,7 @@ void Eadi3DObjects::makeFTI(unsigned int obj)
 }
 
 //------------------------------------------------------------------------------
-// makeFTJ() - 
+// makeFTJ() -
 //------------------------------------------------------------------------------
 void Eadi3DObjects::makeFTJ(unsigned int obj)
 {
@@ -1402,7 +1405,7 @@ void Eadi3DObjects::makeFTJ(unsigned int obj)
 }
 
 //------------------------------------------------------------------------------
-// makeFTK() - 
+// makeFTK() -
 //------------------------------------------------------------------------------
 void Eadi3DObjects::makeFTK(unsigned int obj)
 {
@@ -1436,7 +1439,7 @@ void Eadi3DObjects::makeFTK(unsigned int obj)
 }
 
 //------------------------------------------------------------------------------
-// makeFTL() - 
+// makeFTL() -
 //------------------------------------------------------------------------------
 void Eadi3DObjects::makeFTL(unsigned int obj)
 {
@@ -1462,7 +1465,7 @@ void Eadi3DObjects::makeFTL(unsigned int obj)
 }
 
 //------------------------------------------------------------------------------
-// makeFTM() - 
+// makeFTM() -
 //------------------------------------------------------------------------------
 void Eadi3DObjects::makeFTM(unsigned int obj)
 {
@@ -1488,7 +1491,7 @@ void Eadi3DObjects::makeFTM(unsigned int obj)
 }
 
 //------------------------------------------------------------------------------
-// makeFTN() - 
+// makeFTN() -
 //------------------------------------------------------------------------------
 void Eadi3DObjects::makeFTN(unsigned int obj)
 {
@@ -1512,7 +1515,7 @@ void Eadi3DObjects::makeFTN(unsigned int obj)
 }
 
 //------------------------------------------------------------------------------
-// makeFTO() - 
+// makeFTO() -
 //------------------------------------------------------------------------------
 void Eadi3DObjects::makeFTO(unsigned int obj)
 {
@@ -1546,7 +1549,7 @@ void Eadi3DObjects::makeFTO(unsigned int obj)
 }
 
 //------------------------------------------------------------------------------
-// makeFTP() - 
+// makeFTP() -
 //------------------------------------------------------------------------------
 void Eadi3DObjects::makeFTP(unsigned int obj)
 {
@@ -1580,7 +1583,7 @@ void Eadi3DObjects::makeFTP(unsigned int obj)
 }
 
 //------------------------------------------------------------------------------
-// makeFTQ() - 
+// makeFTQ() -
 //------------------------------------------------------------------------------
 void Eadi3DObjects::makeFTQ(unsigned int obj)
 {
@@ -1628,7 +1631,7 @@ void Eadi3DObjects::makeFTQ(unsigned int obj)
 }
 
 //------------------------------------------------------------------------------
-// makeFTR() - 
+// makeFTR() -
 //------------------------------------------------------------------------------
 void Eadi3DObjects::makeFTR(unsigned int obj)
 {
@@ -1668,7 +1671,7 @@ void Eadi3DObjects::makeFTR(unsigned int obj)
 }
 
 //------------------------------------------------------------------------------
-// makeFTS() - 
+// makeFTS() -
 //------------------------------------------------------------------------------
 void Eadi3DObjects::makeFTS(unsigned int obj)
 {
@@ -1720,7 +1723,7 @@ void Eadi3DObjects::makeFTS(unsigned int obj)
 }
 
 //------------------------------------------------------------------------------
-// makeFTT() - 
+// makeFTT() -
 //------------------------------------------------------------------------------
 void Eadi3DObjects::makeFTT(unsigned int obj)
 {
@@ -1746,7 +1749,7 @@ void Eadi3DObjects::makeFTT(unsigned int obj)
 }
 
 //------------------------------------------------------------------------------
-// makeFTU() - 
+// makeFTU() -
 //------------------------------------------------------------------------------
 void Eadi3DObjects::makeFTU(unsigned int obj)
 {
@@ -1782,7 +1785,7 @@ void Eadi3DObjects::makeFTU(unsigned int obj)
 }
 
 //------------------------------------------------------------------------------
-// makeFTV() - 
+// makeFTV() -
 //------------------------------------------------------------------------------
 void Eadi3DObjects::makeFTV(unsigned int obj)
 {
@@ -1812,7 +1815,7 @@ void Eadi3DObjects::makeFTV(unsigned int obj)
 }
 
 //------------------------------------------------------------------------------
-// makeFTW() - 
+// makeFTW() -
 //------------------------------------------------------------------------------
 void Eadi3DObjects::makeFTW(unsigned int obj)
 {
@@ -1842,7 +1845,7 @@ void Eadi3DObjects::makeFTW(unsigned int obj)
 }
 
 //------------------------------------------------------------------------------
-// makeFTX() - 
+// makeFTX() -
 //------------------------------------------------------------------------------
 void Eadi3DObjects::makeFTX(unsigned int obj)
 {
@@ -1868,7 +1871,7 @@ void Eadi3DObjects::makeFTX(unsigned int obj)
 }
 
 //------------------------------------------------------------------------------
-// makeFTY() - 
+// makeFTY() -
 //------------------------------------------------------------------------------
 void Eadi3DObjects::makeFTY(unsigned int obj)
 {
@@ -1896,7 +1899,7 @@ void Eadi3DObjects::makeFTY(unsigned int obj)
 }
 
 //------------------------------------------------------------------------------
-// makeFTZ() - 
+// makeFTZ() -
 //------------------------------------------------------------------------------
 void Eadi3DObjects::makeFTZ(unsigned int obj)
 {
@@ -1930,7 +1933,7 @@ void Eadi3DObjects::makeFTZ(unsigned int obj)
 }
 
 //------------------------------------------------------------------------------
-// makeFTMIN() - 
+// makeFTMIN() -
 //------------------------------------------------------------------------------
 void Eadi3DObjects::makeFTMIN(unsigned int obj)
 {
@@ -1950,7 +1953,7 @@ void Eadi3DObjects::makeFTMIN(unsigned int obj)
 }
 
 //------------------------------------------------------------------------------
-// makeFTPER() - 
+// makeFTPER() -
 //------------------------------------------------------------------------------
 void Eadi3DObjects::makeFTPER(unsigned int obj)
 {
@@ -1974,7 +1977,7 @@ void Eadi3DObjects::makeFTPER(unsigned int obj)
 }
 
 //------------------------------------------------------------------------------
-// makeFTSLH() - 
+// makeFTSLH() -
 //------------------------------------------------------------------------------
 void Eadi3DObjects::makeFTSLH(unsigned int obj)
 {
