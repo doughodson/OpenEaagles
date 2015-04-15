@@ -5,6 +5,7 @@
 #include "openeaagles/basic/support.h"
 #include <fstream>
 #include <cstring>
+#include <cctype>
 
 //------------------------------------------------------------------------------
 // Window/Linux specific code
