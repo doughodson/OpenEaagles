@@ -31,7 +31,7 @@ BEGIN_SLOTTABLE(BitmapFont)
 END_SLOTTABLE(BitmapFont)
 
 //------------------------------------------------------------------------------
-//  Map slot table to handles 
+//  Map slot table to handles
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(BitmapFont)
     ON_SLOT(1, setReverse, Basic::Number)
@@ -47,14 +47,14 @@ BitmapFont::BitmapFont()
     fontMap = defaultFontMap;
     numFonts = defaultNumFonts;
     reverse = false;
-        
+
     setFontWidth( defaultFontWidth );
     setFontHeight( defaultFontHeight );
 
     setBitmapWidth( defaultFontWidth );
     setBitmapHeight( defaultFontHeight );
 }
- 
+
 //------------------------------------------------------------------------------
 // copyData() -- copy this object's data
 //------------------------------------------------------------------------------
@@ -173,7 +173,7 @@ void BitmapFont::loadFont()
 //------------------------------------------------------------------------------
 bool BitmapFont::setReverse(const Basic::Number* const rnumber)
 {
-    if (rnumber != 0)
+    if (rnumber != nullptr)
         reverse = rnumber->getBoolean();
     return true;
 }
@@ -520,7 +520,7 @@ void BitmapFont::reverseBitmapOrder(GLubyte* bitmap, unsigned int numBitmapBytes
 GLubyte* BitmapFont::loadTypeFace(const GLint index, const GLenum reverse)
 {
    // If no font to load, return
-   if (fontMap[index] == 0)
+   if (fontMap[index] == nullptr)
       return 0;
 
    // Create the font file name
@@ -533,7 +533,7 @@ GLubyte* BitmapFont::loadTypeFace(const GLint index, const GLenum reverse)
    lcStrcat(fontPathname, FONTPATHNAME_LENGTH, fontMap[index]);
 
    // Open the font file
-   FILE* fp = 0;
+   FILE* fp = nullptr;
    if( (fp = std::fopen(fontPathname, "r")) ==0 ) {
       if (isMessageEnabled(MSG_ERROR)) {
          std::cerr << "BitmapFont::loadTypeFace: unable to open font file: " << fontPathname << std::endl;
@@ -568,11 +568,11 @@ GLubyte* BitmapFont::loadTypeFace(const GLint index, const GLenum reverse)
    // Read in the bitmap bytes
    for (; i < numFontBytes; i++) {
       int value;
-      nItemsMatched = fscanf(fp, "0x%x\n", &value);
+      nItemsMatched = std::fscanf(fp, "0x%x\n", &value);
       bitmap[i] = reverse ? GLubyte(~value) : GLubyte(value);
    }
 
-   fclose(fp);
+   std::fclose(fp);
 
    // Reverse the bitmap
    reverseBitmapOrder(bitmap, numFontBytes, numBytesWide);

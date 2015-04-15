@@ -45,12 +45,10 @@ public:
 
     void drawFunc() override;
 
-    // set functions
     virtual bool setRadius(const LCreal x)   { radius = x; return true; }
     virtual bool setFilled(const bool x)    { filled = x; return true; }
     virtual bool setSlices(const int x)     { slices = x; return true; }
 
-    // get functions
     LCreal getRadius()       { return radius; }
     bool isFilled()         { return filled; }
     int getSlices()         { return slices; }
@@ -89,10 +87,8 @@ public:
 
     void drawFunc() override;
 
-    // Set functions
     virtual bool setOuterRadius(const LCreal x)  { outerRadius = x; return true; }
 
-    // get functions
     LCreal getOuterRadius()     { return outerRadius; }
 
 protected:
@@ -133,15 +129,13 @@ public:
 
     void drawFunc() override;
 
-    // set functions
-    virtual bool setStartAngle(const LCreal x) { startAngle = x; return true; }
-    virtual bool setArcLength(const LCreal x)  { arcLength = x; return true; }
-    virtual bool setIsConnected(const bool x) { connected = x; return true; }
+    virtual bool setStartAngle(const LCreal x)  { startAngle = x; return true; }
+    virtual bool setArcLength(const LCreal x)   { arcLength = x; return true; }
+    virtual bool setIsConnected(const bool x)   { connected = x; return true; }
 
-    // get functions
-    LCreal getStartAngle()   { return startAngle; }
-    LCreal getArcLength()    { return arcLength; }
-    bool  isConnected()      { return connected; }
+    LCreal getStartAngle()                      { return startAngle; }
+    LCreal getArcLength()                       { return arcLength; }
+    bool  isConnected()                         { return connected; }
 
 protected:
     bool setSlotStartAngle(const Basic::Number* const x);
@@ -172,10 +166,8 @@ public:
 
     void drawFunc() override;
 
-    // Set functions
     bool setOuterRadius(const LCreal x)  { outerRadius = x; return true; }
 
-    // get functions
     LCreal getOuterRadius()              { return outerRadius; }
 
 protected:
@@ -247,10 +239,8 @@ public:
 
     void drawFunc() override;
 
-    // set
     bool setSegments(const bool x)  { segment = x; return true; }
 
-    // get segments indicator
     bool isSegmented() { return segment; }
 
 protected:
@@ -273,10 +263,8 @@ class Quad : public Graphic
 public:
     Quad();
 
-    // set function
     bool setStrip(const bool x)     { strip = x; return true; }
 
-    // get function
     bool isStrip()                  { return strip; }
 
     void drawFunc() override;
@@ -300,10 +288,8 @@ class Triangle : public Quad
 public:
     Triangle();
 
-    // set function
     bool setFan(const bool x)     { fan = x; return true; }
 
-    // get function
     bool isFan()                  { return fan; }
 
     void drawFunc() override;

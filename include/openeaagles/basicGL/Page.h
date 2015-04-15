@@ -173,7 +173,7 @@ private:
 
    // Subpage Stack
    static const int SUBPAGE_STACK_SIZE = 50;
-   Page*  subpageStack[SUBPAGE_STACK_SIZE];
+   Page* subpageStack[SUBPAGE_STACK_SIZE];
    int      subpageSP;                 // Stack pointer
 };
 

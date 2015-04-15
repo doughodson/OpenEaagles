@@ -58,10 +58,10 @@ Font::Font()
     leftSide = 0;
     topSide = 0;
     b = 0;
-    pLUT = 0;
-    pFTGL = 0;
-    fontPath = 0;
-    fontFile = 0;
+    pLUT = nullptr;
+    pFTGL = nullptr;
+    fontPath = nullptr;
+    fontFile = nullptr;
     loaded = false;
     charSpacing = 0;
     lineSpacing = 0;
@@ -109,17 +109,17 @@ void Font::copyData(const Font& org, const bool cc)
     charSpacing = org.charSpacing;
     lineSpacing = org.lineSpacing;
     if (!cc) {
-        if (fontPath != 0) delete[] fontPath;
-        if (fontFile != 0) delete[] fontFile;
+        if (fontPath != nullptr) delete[] fontPath;
+        if (fontFile != nullptr) delete[] fontFile;
     }
-    fontPath = 0;
-    fontFile = 0;
-    if (org.fontPath != 0) {
+    fontPath = nullptr;
+    fontFile = nullptr;
+    if (org.fontPath != nullptr) {
         size_t len = std::strlen(org.fontPath);
         fontPath = new char[len+1];
         lcStrcpy(fontPath,len+1,org.fontPath);
     }
-    if (org.fontFile != 0) {
+    if (org.fontFile != nullptr) {
         size_t len = std::strlen(org.fontFile);
         fontFile = new char[len+1];
         lcStrcpy(fontFile,len+1,org.fontFile);
@@ -168,12 +168,12 @@ void Font::setTextOrigin(const GLdouble x, const GLdouble y)
 //------------------------------------------------------------------------------
 int Font::xferChars(char* const outp, const size_t BUF_SIZE, const char* const inp, const unsigned int n) const
 {
-    if (outp == 0 || inp == 0) return 0;
+    if (outp == nullptr || inp == nullptr) return 0;
     if (n >= BUF_SIZE) return 0;
 
    // Buffer the string to translate the characters with the LUT,
    // as required, and to ensure that the string is terminated.
-   if (pLUT != 0) {
+   if (pLUT != nullptr) {
       for (unsigned int i = 0; i < n; i++) {
           unsigned char idx = static_cast<unsigned char>(inp[i]);
           outp[i] = (idx < LUT_SIZE ? static_cast<char>(pLUT[idx]) : inp[i]);
@@ -233,17 +233,17 @@ std::ostream& Font::serialize(std::ostream& sout, const int i, const bool slotsO
         sout << "bitmapHeight: " << getBitmapHeight() << std::endl;
     }
 
-    if (fontDirectory() != 0) {
+    if (fontDirectory() != nullptr) {
         indent(sout,i+j);
         sout << "path: " << fontDirectory() << std::endl;
     }
 
-    if (filename() != 0) {
+    if (filename() != nullptr) {
         indent(sout,i+j);
         sout << "file: " << filename() << std::endl;
     }
 
-    if (lut() != 0) {
+    if (lut() != nullptr) {
         indent(sout,i+j);
         sout << "lut: [" << std::endl;
         indent(sout,i+j+10);
@@ -285,7 +285,7 @@ std::ostream& Font::serialize(std::ostream& sout, const int i, const bool slotsO
 //------------------------------------------------------------------------------
 bool Font::setSlotFontWidth(const Basic::Number* const sfwobj)
 {
-    if (sfwobj != 0) setFontWidth( sfwobj->getDouble() );
+    if (sfwobj != nullptr) setFontWidth( sfwobj->getDouble() );
     return true;
 }
 
@@ -294,7 +294,7 @@ bool Font::setSlotFontWidth(const Basic::Number* const sfwobj)
 //------------------------------------------------------------------------------
 bool Font::setSlotFontHeight (const Basic::Number* const sfhobj)
 {
-    if (sfhobj != 0) setFontHeight( sfhobj->getDouble() );
+    if (sfhobj != nullptr) setFontHeight( sfhobj->getDouble() );
     return true;
 }
 
@@ -304,14 +304,14 @@ bool Font::setSlotFontHeight (const Basic::Number* const sfhobj)
 bool Font::setSlotFontPosition (const Basic::List* const sfpobj)
 {
     bool ok = true;
-    if (sfpobj != 0) {
+    if (sfpobj != nullptr) {
         LCreal values[2];
         int n = sfpobj->getNumberList(values, 2);
         ok = (n == 2);
         if (ok) setTextOrigin(values[0],values[1]);
         else {
               if (isMessageEnabled(MSG_ERROR)) {
-            std::cerr << "Font::setFontPosition: Values are invalid or missing" << std::endl;
+                  std::cerr << "Font::setFontPosition: Values are invalid or missing" << std::endl;
               }
             ok = false;
         }
@@ -324,7 +324,7 @@ bool Font::setSlotFontPosition (const Basic::List* const sfpobj)
 //------------------------------------------------------------------------------
 bool Font::setSlotBitmapWidth(const Basic::Number* const sbwobj)
 {
-    if (sbwobj != 0) setBitmapWidth( sbwobj->getInt() );
+    if (sbwobj != nullptr) setBitmapWidth( sbwobj->getInt() );
     return true;
 }
 
@@ -333,7 +333,7 @@ bool Font::setSlotBitmapWidth(const Basic::Number* const sbwobj)
 //------------------------------------------------------------------------------
 bool Font::setSlotBitmapHeight(const Basic::Number* const sbhobj)
 {
-    if (sbhobj != 0) setBitmapHeight( sbhobj->getInt() );
+    if (sbhobj != nullptr) setBitmapHeight( sbhobj->getInt() );
     return true;
 }
 
@@ -343,7 +343,7 @@ bool Font::setSlotBitmapHeight(const Basic::Number* const sbhobj)
 bool Font::setSlotFontPath(const Basic::String* const sfpobj)
 {
     bool ok = true;
-    if (sfpobj != 0) {
+    if (sfpobj != nullptr) {
         size_t j = sfpobj->len();
         if (j > 0) {
             fontPath = new char[j+1];
@@ -351,7 +351,7 @@ bool Font::setSlotFontPath(const Basic::String* const sfpobj)
         }
         else {
               if (isMessageEnabled(MSG_ERROR)) {
-            std::cerr << "Font::setFontPath: Invalid font path value" << std::endl;
+                  std::cerr << "Font::setFontPath: Invalid font path value" << std::endl;
               }
             ok = false;
         }
@@ -365,7 +365,7 @@ bool Font::setSlotFontPath(const Basic::String* const sfpobj)
 bool Font::setSlotFTGLFontFileName(const Basic::String* const sgffnobj)
 {
     bool ok = true;
-    if (sgffnobj != 0) {
+    if (sgffnobj != nullptr) {
         size_t j = sgffnobj->len();
         if (j > 0) {
             fontFile = new char[j+1];
@@ -387,7 +387,7 @@ bool Font::setSlotFTGLFontFileName(const Basic::String* const sgffnobj)
 bool Font::setSlotLookupTable(const Basic::List* const sltobj)
 {
     bool ok = true;
-    if (sltobj != 0) {
+    if (sltobj != nullptr) {
         // Load the LUT
         if (pLUT == 0) pLUT = new unsigned char[LUT_SIZE];
         int values[LUT_SIZE];
@@ -406,7 +406,7 @@ bool Font::setSlotLookupTable(const Basic::List* const sltobj)
     }
     else {
           if (isMessageEnabled(MSG_ERROR)) {
-        std::cerr << "Font::setLookupTable: Nothing in the lookup table." << std::endl;
+             std::cerr << "Font::setLookupTable: Nothing in the lookup table." << std::endl;
           }
         ok = false;
     }
@@ -416,14 +416,14 @@ bool Font::setSlotLookupTable(const Basic::List* const sltobj)
 bool Font::setSlotCharacterSpacing(const Basic::Number* const newCharSpacing)
 {
     // set our character spacing
-    if (newCharSpacing != 0) setCharacterSpacing( newCharSpacing->getFloat() );
+    if (newCharSpacing != nullptr) setCharacterSpacing( newCharSpacing->getFloat() );
     return true;
 }
 
 bool Font::setSlotLineSpacing(const Basic::Number* const newLineSpacing)
 {
     // set our line spacing
-    if (newLineSpacing != 0) setLineSpacing( newLineSpacing->getFloat() );
+    if (newLineSpacing != nullptr) setLineSpacing( newLineSpacing->getFloat() );
     return true;
 }
 

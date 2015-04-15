@@ -137,7 +137,6 @@ public:
    virtual bool setBlueScale(const GLfloat s);
    virtual bool setBlueBias(const GLfloat b);
 
-   // load our texture
    virtual void loadTexture();
 
    bool setWidth(const unsigned int w) override;

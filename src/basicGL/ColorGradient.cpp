@@ -1,3 +1,4 @@
+
 #include "openeaagles/basicGL/ColorGradient.h"
 #include "openeaagles/basic/PairStream.h"
 #include "openeaagles/basic/Pair.h"
@@ -24,8 +25,8 @@ ColorGradient::ColorGradient()
    color[Color::GREEN] = 0;
    color[Color::BLUE] = 0;
    color[Color::ALPHA] = getDefaultAlpha();
-   
-   myColors = 0;
+
+   myColors = nullptr;
 }
 
 
@@ -35,8 +36,8 @@ ColorGradient::ColorGradient()
 void ColorGradient::copyData(const ColorGradient& org, const bool cc)
 {
     BaseClass::copyData(org);
-    if (cc) myColors = 0;    
-    
+    if (cc) myColors = nullptr;
+
     setSlotColors(org.myColors);
 }
 
@@ -45,20 +46,20 @@ void ColorGradient::copyData(const ColorGradient& org, const bool cc)
 //------------------------------------------------------------------------------
 void ColorGradient::deleteData()
 {
-    if (myColors != 0) {
+    if (myColors != nullptr) {
         myColors->unref();
-        myColors = 0;
+        myColors = nullptr;
     }
 }
 
 // set our slot colors via a pairstream
 bool ColorGradient::setSlotColors(Basic::PairStream* const newStream)
 {
-    if (myColors != 0) {
+    if (myColors != nullptr) {
         myColors->unref();
-        myColors = 0;
+        myColors = nullptr;
     }
-    if (newStream != 0) {
+    if (newStream != nullptr) {
         myColors = newStream;
         myColors->ref();
     }
@@ -67,11 +68,11 @@ bool ColorGradient::setSlotColors(Basic::PairStream* const newStream)
 
 Basic::Color* ColorGradient::getColorByIdx(const int idx)
 {
-    Basic::Color* fCol = 0;
+    Basic::Color* fCol = nullptr;
 
-    if (myColors != 0) {
+    if (myColors != nullptr) {
         Basic::Pair* pair = myColors->getPosition(idx);
-        if (pair != 0) {
+        if (pair != nullptr) {
             fCol = dynamic_cast<Basic::Color*>(pair->object());
         }
     }

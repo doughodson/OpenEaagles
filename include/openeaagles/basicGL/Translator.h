@@ -32,7 +32,6 @@ public:
     LCreal getYPos() const        { return myYPos; }    // Returns the Y position (world coord)
     LCreal getZPos() const        { return myZPos; }    // Returns the Z position (world coord)
 
-    // set functions
     bool setXPos(const LCreal xPos);                    // Sets the X position (world coord)
     bool setYPos(const LCreal yPos);                    // Sets the Y position (world coord)
     bool setZPos(const LCreal zPos);                    // Sets the Z position (world coord)

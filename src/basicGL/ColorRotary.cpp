@@ -42,7 +42,7 @@ ColorRotary::ColorRotary()
     color[Color::ALPHA] = getDefaultAlpha();
 
     // inits
-    myColors = 0;
+    myColors = nullptr;
     numVals = 0;
     for (unsigned int i=0; i<MAX_VALUES; i++) {
         myValues[i] = 0;
@@ -57,18 +57,18 @@ void ColorRotary::copyData(const ColorRotary& org, const bool cc)
 {
     BaseClass::copyData(org);
     if (cc) {
-        myColors = 0;
-    }    
-    
+        myColors = nullptr;
+    }
+
     if (org.numVals > 0) {
         for (unsigned int i = 0; i < org.numVals; i++) {
             myValues[i] = org.myValues[i];
-        }   
+        }
     }
-    if (org.myColors != 0) {
+    if (org.myColors != nullptr) {
         setSlotColors(org.myColors);
     }
-    else setSlotColors(0);
+    else setSlotColors(nullptr);
     numVals = org.numVals;
 }
 
@@ -77,8 +77,8 @@ void ColorRotary::copyData(const ColorRotary& org, const bool cc)
 //------------------------------------------------------------------------------
 void ColorRotary::deleteData()
 {
-    if (myColors != 0) myColors->unref();
-    myColors = 0;
+    if (myColors != nullptr) myColors->unref();
+    myColors = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -89,7 +89,7 @@ void ColorRotary::deleteData()
 bool ColorRotary::setSlotColors(Basic::PairStream* const newStream)
 {
     bool ok = false;
-    if (newStream != 0) {
+    if (newStream != nullptr) {
         myColors = newStream;
         myColors->ref();
         ok = true;
@@ -102,14 +102,14 @@ bool ColorRotary::setSlotValues(const Basic::PairStream* const newStream)
 {
     bool ok = false;
     numVals = 0;
-    if (newStream != 0) {
+    if (newStream != nullptr) {
         Basic::PairStream* a = newStream->clone();
         Basic::List::Item* item = a->getFirstItem();
-        while (item != 0) {
+        while (item != nullptr) {
             Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
-            if (pair != 0) {
+            if (pair != nullptr) {
                 Basic::Number* n = dynamic_cast<Basic::Number*>(pair->object());
-                if (n != 0) {
+                if (n != nullptr) {
                     myValues[numVals] = n->getReal();
                     numVals++;
                 }
@@ -130,7 +130,7 @@ bool ColorRotary::determineColor(const LCreal value)
 {
     bool ok = false;
     int breakPoint = 0;
-    
+
     // find out where we are in the break table
     unsigned int i = 0;
     // do an endpoint check while we are at it
@@ -139,16 +139,16 @@ bool ColorRotary::determineColor(const LCreal value)
         if (value >= myValues[i] && value < myValues[i+1]){
             breakPoint = (i + 1);
             ok = true;
-        } 
+        }
         else i++;
     }
 
-    // now set the proper color (using the breakpoint index) 
-    if (myColors != 0) {
+    // now set the proper color (using the breakpoint index)
+    if (myColors != nullptr) {
         Basic::Pair* pair = myColors->getPosition(breakPoint);
-        if (pair != 0) {
+        if (pair != nullptr) {
             Basic::Color* listcolor = dynamic_cast<Basic::Color*>(pair->object());
-            if (listcolor != 0) {
+            if (listcolor != nullptr) {
                const osg::Vec4* vec = static_cast<const osg::Vec4*>(listcolor->getRGBA());
                color = *vec;
                ok = true;

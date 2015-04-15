@@ -55,7 +55,7 @@ END_SLOT_MAP()
 //------------------------------------------------------------------------------
 // Event Table
 //------------------------------------------------------------------------------
-BEGIN_EVENT_HANDLER(Field) 
+BEGIN_EVENT_HANDLER(Field)
     if (mode == input) {
         bool kb = ( _event >= 0x20 && _event <= 0x7f );
         ON_EVENT(FORWARD_SPACE,onForwardSpace)
@@ -72,11 +72,11 @@ BEGIN_EVENT_HANDLER(Field)
             }
         }
     }
-    ON_EVENT_OBJ(SET_POSITION,setPosition,Basic::List)  
+    ON_EVENT_OBJ(SET_POSITION,setPosition,Basic::List)
     ON_EVENT_OBJ(SET_LINE,onSetLine,Basic::Number)
     ON_EVENT_OBJ(SET_COLUMN,onSetColumn,Basic::Number)
-    ON_EVENT_OBJ(SET_WIDTH,setSlotWidth,Basic::Number)   
-    ON_EVENT_OBJ(SET_HIGHLIGHT,setSlotHighlight,Basic::Number)   
+    ON_EVENT_OBJ(SET_WIDTH,setSlotWidth,Basic::Number)
+    ON_EVENT_OBJ(SET_HIGHLIGHT,setSlotHighlight,Basic::Number)
     ON_EVENT_OBJ(SET_UNDERLINE,setSlotUnderline,Basic::Number)
     ON_EVENT_OBJ(SET_REVERSED,setSlotReversed,Basic::Number)
     ON_EVENT_OBJ(SET_JUSTIFICATION,setSlotJustification,Basic::String)
@@ -99,7 +99,7 @@ Field::Field() : origStr(), inputExample(), str()
     inpModeHold = false;
     linked = false;
     inheritColor = false;
-    fontName = 0;
+    fontName = nullptr;
     startCP = 0;
 }
 
@@ -153,7 +153,7 @@ void Field::deleteData()
 void Field::updateData(const LCreal dt)
 {
     BaseClass::updateData(dt);
-    
+
     // ---
     // Set display mode when this field is in 'input' mode
     // ---
@@ -271,10 +271,10 @@ Field::Mode Field::setMode(const Field::Mode nmode)
         // Change the input focus to our container page (Page)
         if (getDisplay()->focus() == this) {
             Page* page = static_cast<Page*>(findContainerByType(typeid(Page)));
-            if (page != 0)
+            if (page != nullptr)
                 getDisplay()->focus(page);
             else
-                getDisplay()->focus(0);
+                getDisplay()->focus(nullptr);
 
             // Reset text string
             adjust();
@@ -284,7 +284,7 @@ Field::Mode Field::setMode(const Field::Mode nmode)
 
 
     return omode;
-} 
+}
 
 
 //------------------------------------------------------------------------------
@@ -369,8 +369,8 @@ bool Field::setInputCharacterPosition(const unsigned int ii)
     else if (ii < w) icp = ii;
     return true;
 }
-  
-                                       
+
+
 char Field::getChar()
 {
     if (mode == input)
@@ -398,7 +398,7 @@ bool Field::isInputValueValid() const
 
 
 //------------------------------------------------------------------------------
-// onForwardSpace() -- 
+// onForwardSpace() --
 //------------------------------------------------------------------------------
 bool Field::onForwardSpace()
 {
@@ -407,7 +407,7 @@ bool Field::onForwardSpace()
 }
 
 //------------------------------------------------------------------------------
-// onBackSpace() -- 
+// onBackSpace() --
 //------------------------------------------------------------------------------
 bool Field::onBackSpace()
 {
@@ -418,7 +418,7 @@ bool Field::onBackSpace()
 
 //------------------------------------------------------------------------------
 // cursor() -- Returns true if text cursor should be seen within this
-//             object and the position of the cursor. 
+//             object and the position of the cursor.
 //------------------------------------------------------------------------------
 bool Field::cursor(int* l, int* c) const
 {
@@ -442,15 +442,15 @@ void Field::drawFunc()
 {
     // Get a pointer to the current display
     BasicGL::Display* dsp = getDisplay();
-    if (dsp == 0) return;
+    if (dsp == nullptr) return;
 
     // ---
     // When our container is also a Field, get a pointer to it.
     // ---
-    BasicGL::Field* parent = 0;
-    if (container() != 0) {
+    BasicGL::Field* parent = nullptr;
+    if (container() != nullptr) {
         BasicGL::Field* fp = dynamic_cast<BasicGL::Field*>(container());
-        if (fp != 0) parent = fp;
+        if (fp != nullptr) parent = fp;
     }
 
     // ---
@@ -466,10 +466,10 @@ void Field::drawFunc()
     // ---
     // Select the correct font based on font name if there is one, and if not, then do it normally
     // ---
-    if (fontName != 0) dsp->selectFont(isReversed(), isUnderlined(), dsp->getFont(fontName->getString()));    
+    if (fontName != nullptr) dsp->selectFont(isReversed(), isUnderlined(), dsp->getFont(fontName->getString()));
     else dsp->selectFont(isReversed(), isUnderlined());
-    
-    
+
+
     // ---
     // Set the color
     // ---
@@ -493,7 +493,7 @@ void Field::drawFunc()
     // ---
     // draw the string
     // ---
-    
+
     if (str.len() > 0) {
         // Draw the text string
         const char* sp = str;
@@ -544,7 +544,7 @@ Basic::Object* Field::getSlotByIndex(const int si)
 bool Field::setPosition(const Basic::List* const spobj)
 {
     bool ok = true;
-    if (spobj != 0) {
+    if (spobj != nullptr) {
         int values[2];
         int n = spobj->getNumberList(values, 2);
             if (n >= 2) {
@@ -555,7 +555,7 @@ bool Field::setPosition(const Basic::List* const spobj)
                  if (isMessageEnabled(MSG_ERROR)) {
                 std::cerr << "Field::setPosition: not enough data to process list" << std::endl;
                  }
-                ok = false;   
+                ok = false;
             }
     }
     return ok;
@@ -563,39 +563,39 @@ bool Field::setPosition(const Basic::List* const spobj)
 
 
 //------------------------------------------------------------------------------
-// setLine() -- 
+// setLine() --
 //------------------------------------------------------------------------------
 bool Field::onSetLine(const Basic::Number* const oslobj)
 {
-    if (oslobj != 0) line(oslobj->getInt());
+    if (oslobj != nullptr) line(oslobj->getInt());
     return true;
 }
 
 //------------------------------------------------------------------------------
-// setColumn() -- 
-//------------------------------------------------------------------------------                          
+// setColumn() --
+//------------------------------------------------------------------------------
 bool Field::onSetColumn(const Basic::Number* const oscobj)
 {
-   if (oscobj != 0) column(oscobj->getInt());
+   if (oscobj != nullptr) column(oscobj->getInt());
    return true;
 }
-                                   
+
 //------------------------------------------------------------------------------
-// setSlotWidth() -- 
-//------------------------------------------------------------------------------                          
+// setSlotWidth() --
+//------------------------------------------------------------------------------
 bool Field::setSlotWidth(const Basic::Number* const swobj)
 {
-    
-    if (swobj != 0) width(swobj->getInt());
+
+    if (swobj != nullptr) width(swobj->getInt());
     return true;
 }
 
 //------------------------------------------------------------------------------
-// setSlotHighlight() -- 
-//------------------------------------------------------------------------------                          
+// setSlotHighlight() --
+//------------------------------------------------------------------------------
 bool Field::setSlotHighlight(const Basic::Number* const shobj)
 {
-    if (shobj != 0) {
+    if (shobj != nullptr) {
         // Set our mode
         if (shobj->getBoolean()) {
             setDisplayMode(highlight);
@@ -607,29 +607,29 @@ bool Field::setSlotHighlight(const Basic::Number* const shobj)
         }
 
         Basic::PairStream* subcomponents = getComponents();
-        if (subcomponents != 0) {
+        if (subcomponents != nullptr) {
 
             const Basic::List::Item* item = subcomponents->getFirstItem();
-            while (item != 0) {
+            while (item != nullptr) {
                 Basic::Pair* p = const_cast<Basic::Pair*>(static_cast<const Basic::Pair*>(item->getValue()));
                 Field* child = dynamic_cast<Field*>(p->object());
-                if (child != 0) child->setSlotHighlight(shobj); //changed from obj
+                if (child != nullptr) child->setSlotHighlight(shobj); //changed from obj
                 item = item->getNext();
             }
 
             subcomponents->unref();
-            subcomponents = 0;
+            subcomponents = nullptr;
         }
     }
     return true;
-}   
+}
 
 //------------------------------------------------------------------------------
-// setSlotUnderline() -- 
-//------------------------------------------------------------------------------                          
+// setSlotUnderline() --
+//------------------------------------------------------------------------------
 bool Field::setSlotUnderline(const Basic::Number* const suobj)
 {
-    if (suobj != 0) {
+    if (suobj != nullptr) {
 
         // Set our mode
         if (suobj->getBoolean()) {
@@ -646,27 +646,27 @@ bool Field::setSlotUnderline(const Basic::Number* const suobj)
         if (subcomponents != 0) {
 
             const Basic::List::Item* item = subcomponents->getFirstItem();
-            while (item != 0) {
+            while (item != nullptr) {
                 Basic::Pair* p = const_cast<Basic::Pair*>(static_cast<const Basic::Pair*>(item->getValue()));
                 Field* child = dynamic_cast<Field*>(p->object());
-                if (child != 0) child->setSlotUnderline(suobj);
+                if (child != nullptr) child->setSlotUnderline(suobj);
                 item = item->getNext();
             }
 
             subcomponents->unref();
-            subcomponents = 0;
+            subcomponents = nullptr;
         }
     }
     return true;
 }
 
 //------------------------------------------------------------------------------
-// setSlotReversed() -- 
-//------------------------------------------------------------------------------                          
+// setSlotReversed() --
+//------------------------------------------------------------------------------
 bool Field::setSlotReversed(const Basic::Number* const srobj)
 {
-   
-    if (srobj != 0) {
+
+    if (srobj != nullptr) {
 
         // Set our mode
         if (srobj->getBoolean()) {
@@ -680,18 +680,18 @@ bool Field::setSlotReversed(const Basic::Number* const srobj)
 
         // Set our children's mode
         Basic::PairStream* subcomponents = getComponents();
-        if (subcomponents != 0) {
+        if (subcomponents != nullptr) {
 
             const Basic::List::Item* item = subcomponents->getFirstItem();
-            while (item != 0) {
+            while (item != nullptr) {
                 Basic::Pair* p = const_cast<Basic::Pair*>(static_cast<const Basic::Pair*>(item->getValue()));
                 Field* child = dynamic_cast<Field*>(p->object());
-                if (child != 0) child->setSlotReversed(srobj);
+                if (child != nullptr) child->setSlotReversed(srobj);
                 item = item->getNext();
             }
 
             subcomponents->unref();
-            subcomponents = 0;
+            subcomponents = nullptr;
         }
     }
     return true;
@@ -699,11 +699,11 @@ bool Field::setSlotReversed(const Basic::Number* const srobj)
 
 
 //------------------------------------------------------------------------------
-// setSlotVertical() -- 
-//------------------------------------------------------------------------------                          
+// setSlotVertical() --
+//------------------------------------------------------------------------------
 bool Field::setSlotVertical(const Basic::Number* const ssobj)
 {
-    if (ssobj != 0) {
+    if (ssobj != nullptr) {
         // Set our mode
         if (ssobj->getBoolean()) {
             setDisplayMode(vertical);
@@ -719,11 +719,11 @@ bool Field::setSlotVertical(const Basic::Number* const ssobj)
 
 
 //------------------------------------------------------------------------------
-// setSlotBrackets() -- 
-//------------------------------------------------------------------------------                          
+// setSlotBrackets() --
+//------------------------------------------------------------------------------
 bool Field::setSlotBrackets(const Basic::Number* const ssobj)
 {
-    if (ssobj != 0) {
+    if (ssobj != nullptr) {
         // Set our mode
         if (ssobj->getBoolean()) {
             setDisplayMode(brackets);
@@ -738,35 +738,35 @@ bool Field::setSlotBrackets(const Basic::Number* const ssobj)
 }
 
 //------------------------------------------------------------------------------
-// setSlotLinked() -- 
-//------------------------------------------------------------------------------                          
+// setSlotLinked() --
+//------------------------------------------------------------------------------
 bool Field::setSlotLinked(const Basic::Number* const msg)
 {
-    if (msg != 0) {
+    if (msg != nullptr) {
         setLinked( msg->getBoolean() );
     }
     return true;
 }
 
 //------------------------------------------------------------------------------
-// setSlotInheritColor() -- 
-//------------------------------------------------------------------------------                          
+// setSlotInheritColor() --
+//------------------------------------------------------------------------------
 bool Field::setSlotInheritColor(const Basic::Number* const ic)
 {
     bool ok = false;
-    if (ic != 0) {
+    if (ic != nullptr) {
         ok = setInheritColor(ic->getBoolean());
     }
     return ok;
 }
 
 //------------------------------------------------------------------------------
-// setSlotJustification() -- 
-//------------------------------------------------------------------------------                          
+// setSlotJustification() --
+//------------------------------------------------------------------------------
 bool Field::setSlotJustification(const Basic::String* const sjobj)
 {
     bool ok = true;
-    if (sjobj != 0) {
+    if (sjobj != nullptr) {
 
         // Set our justification
         if ( *sjobj == "none" )
@@ -786,18 +786,18 @@ bool Field::setSlotJustification(const Basic::String* const sjobj)
 
         // Set our children's justification
         Basic::PairStream* subcomponents = getComponents();
-        if (subcomponents != 0) {
+        if (subcomponents != nullptr) {
 
             const Basic::List::Item* item = subcomponents->getFirstItem();
-            while (item != 0) {
+            while (item != nullptr) {
                 Basic::Pair* p = const_cast<Basic::Pair*>(static_cast<const Basic::Pair*>(item->getValue()));
                 Field* child = dynamic_cast<Field*>(p->object());
-                if (child != 0) child->setSlotJustification(sjobj);
+                if (child != nullptr) child->setSlotJustification(sjobj);
                 item = item->getNext();
             }
 
             subcomponents->unref();
-            subcomponents = 0;
+            subcomponents = nullptr;
         }
     }
     return ok;
@@ -806,19 +806,19 @@ bool Field::setSlotJustification(const Basic::String* const sjobj)
 bool Field::setSlotFont(const Basic::String* const font)
 {
     bool ok = false;
-    if (fontName != 0) fontName->unref();
-    fontName = 0;
-    if (font != 0) {
+    if (fontName != nullptr) fontName->unref();
+    fontName = nullptr;
+    if (font != nullptr) {
         fontName = font->clone();
         ok = true;
     }
-    
+
     return ok;
 }
 
 bool Field::setSlotStartCharPos(const Basic::Number* const msg) {
     bool ok = false;
-    if (msg != 0) {
+    if (msg != nullptr) {
         int ii = msg->getInt();
         if (ii > 0) {
            // come in as 1 based, convert to 0 based
@@ -826,7 +826,7 @@ bool Field::setSlotStartCharPos(const Basic::Number* const msg) {
            ok = true;
         }
     }
-    
+
     return ok;
 }
 

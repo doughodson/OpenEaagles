@@ -19,7 +19,7 @@
 #include "openeaagles/basicGL/BmpTexture.h"
 #include "openeaagles/basicGL/Rotators.h"
 #include "openeaagles/basicGL/Translator.h"
-#include "openeaagles/basicGL/Material.h"  
+#include "openeaagles/basicGL/Material.h"
 
 // pages and maps
 #include "openeaagles/basicGL/MfdPage.h"
@@ -36,7 +36,7 @@ Factory::Factory()
 
 Basic::Object* Factory::createObj(const char* name)
 {
-    Basic::Object* obj = 0;
+    Basic::Object* obj = nullptr;
 
     // General graphics support
     if ( std::strcmp(name, Graphic::getFactoryName()) == 0 ) {

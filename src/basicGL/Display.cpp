@@ -17,6 +17,7 @@
 
 #include <cstdio>
 #include <cstring>
+#include <cctype>
 
 #include <GL/glu.h>
 
@@ -120,14 +121,14 @@ Display::Display()
 void Display::initData()
 {
    name = new Basic::String(" ");
-   subdisplays = 0;
-   textures = 0;
+   subdisplays = nullptr;
+   textures = nullptr;
    stdLinewidth = 1;
    linewidth = 1;
 
    subdisplayFlg = false;
    antialias = true;
-   focusPtr = 0;
+   focusPtr = nullptr;
    mx = 0;
    my = 0;
 
@@ -141,29 +142,29 @@ void Display::initData()
    clearColor.set(0.0f,0.0f,0.0f,0.0f);
 
    {
-      colorTable = 0;
+      colorTable = nullptr;
       Basic::PairStream* p = defaultColors();
       setColorTable(p);
       p->unref();
 
       colorName = new Basic::Identifier();
 
-      normColor = 0;
+      normColor = nullptr;
       Basic::Rgba* nc = new Basic::Rgba(0.0, 1.0, 0.0, 1.0); // default: green
       setNormColor( nc );
       nc->unref();
 
-      hiColor = 0;
+      hiColor = nullptr;
       Basic::Rgba* hc = new Basic::Rgba(1.0, 0.0, 0.0, 1.0); // default: red
       setHighlightColor( hc );
       hc->unref();
    }
 
    // Font
-   fontList = 0;
-   currentFont = 0;
-   normalFont    = 0;
-   normalFontName = 0;
+   fontList = nullptr;
+   currentFont = nullptr;
+   normalFont    = nullptr;
+   normalFontName = nullptr;
 
    // default viewport size
    vpX      = -1;
@@ -187,7 +188,7 @@ void Display::initData()
    underlinedFlg = false;
 
    // materials
-   materials = 0;
+   materials = nullptr;
 
    okToSwap = true;
 }
@@ -205,22 +206,22 @@ void Display::copyData(const Display& org, const bool cc)
 
    orientation = org.orientation;
 
-   if (subdisplays != 0) { subdisplays->unref(); }
-   if (org.subdisplays != 0) {
+   if (subdisplays != nullptr) { subdisplays->unref(); }
+   if (org.subdisplays != nullptr) {
       subdisplays = org.subdisplays->clone();
       processSubdisplays();
    }
-   else subdisplays = 0;
+   else subdisplays = nullptr;
 
-   if (textures != 0) { textures->unref(); }
-   if (org.textures != 0) {
+   if (textures != nullptr) { textures->unref(); }
+   if (org.textures != nullptr) {
       textures = org.textures->clone();
       processTextures();
    }
-   else textures = 0;
+   else textures = nullptr;
 
-   if (materials != 0) materials->unref();
-   if (org.materials != 0) {
+   if (materials != nullptr) materials->unref();
+   if (org.materials != nullptr) {
       materials = org.materials->clone();
       processMaterials();
    }
@@ -245,7 +246,7 @@ void Display::copyData(const Display& org, const bool cc)
    setFontList(org.fontList);
    setFont( org.currentFont );
 
-   if (org.normalFontName != 0) setNormalFont( org.normalFontName );
+   if (org.normalFontName != nullptr) setNormalFont( org.normalFontName );
    else setNormalFont( org.normalFont );
 
    oLeft = org.oLeft;
@@ -270,25 +271,25 @@ void Display::copyData(const Display& org, const bool cc)
 //------------------------------------------------------------------------------
 void Display::deleteData()
 {
-   if (name != 0) name->unref();
-   name = 0;
+   if (name != nullptr) name->unref();
+   name = nullptr;
 
-   if (subdisplays != 0) { subdisplays->unref(); subdisplays = 0; }
+   if (subdisplays != nullptr) { subdisplays->unref(); subdisplays = nullptr; }
 
-   if (textures != 0) { textures->unref(); textures = 0; }
+   if (textures != nullptr) { textures->unref(); textures = nullptr; }
 
-   if (materials != 0) { materials->unref(); materials = 0; }
+   if (materials != nullptr) { materials->unref(); materials = nullptr; }
 
-   if (colorTable != 0) { colorTable->unref(); colorTable = 0; }
+   if (colorTable != nullptr) { colorTable->unref(); colorTable = nullptr; }
 
-   if (normColor != 0) { normColor->unref(); normColor = 0; }
+   if (normColor != nullptr) { normColor->unref(); normColor = nullptr; }
 
-   if (hiColor != 0) { hiColor->unref(); hiColor = 0; }
+   if (hiColor != nullptr) { hiColor->unref(); hiColor = nullptr; }
 
-   if (currentFont != 0) { currentFont->unref(); currentFont = 0; }
+   if (currentFont != nullptr) { currentFont->unref(); currentFont = nullptr; }
 
-   if (normalFont != 0) { normalFont->unref(); normalFont = 0; }
-   if (normalFontName != 0) { normalFontName->unref(); normalFontName = 0; }
+   if (normalFont != nullptr) { normalFont->unref(); normalFont = nullptr; }
+   if (normalFontName != nullptr) { normalFontName->unref(); normalFontName = nullptr; }
 }
 
 
@@ -300,13 +301,13 @@ void Display::updateTC(const LCreal dt)
    BaseClass::updateTC(dt);
 
    // Update any sub-displays ...
-   if (subdisplays != 0) {
+   if (subdisplays != nullptr) {
       Basic::List::Item* item = subdisplays->getFirstItem();
-      while (item != 0) {
+      while (item != nullptr) {
          Basic::Pair* pair = dynamic_cast<Basic::Pair*>(item->getValue());
-         if (pair != 0) {
+         if (pair != nullptr) {
             Display* obj = dynamic_cast<Display*>( pair->object() );
-            if (obj != 0) obj->tcFrame(dt);
+            if (obj != nullptr) obj->tcFrame(dt);
          }
          item = item->getNext();
       }
@@ -319,13 +320,13 @@ void Display::updateTC(const LCreal dt)
 void Display::reset()
 {
    BaseClass::reset();
-   if (subdisplays != 0) {
+   if (subdisplays != nullptr) {
       // Reset all of our sub-displays
       Basic::List::Item* item = subdisplays->getFirstItem();
-      while (item != 0) {
+      while (item != nullptr) {
          Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
          Component* obj = static_cast<Component*>(pair->object());
-         if (obj != 0) obj->reset();
+         if (obj != nullptr) obj->reset();
          item = item->getNext();
       }
    }
@@ -346,7 +347,7 @@ void Display::select()
 void Display::keyboardEvent(const int key)
 {
    Display* focusDisplay = dynamic_cast<Display*>( focusPtr );
-   if ( focusDisplay != 0 && focusDisplay != this) {
+   if ( focusDisplay != nullptr && focusDisplay != this) {
       // When our focus is a Display ...
       focusDisplay->keyboardEvent(key);
 
@@ -355,7 +356,7 @@ void Display::keyboardEvent(const int key)
       // When our focus is NOT at a Display ...
 
       // Null pointer?  Try to set to our current subpage
-      if (focusPtr == 0 && subpage() != 0) focusPtr = subpage();
+      if (focusPtr == nullptr && subpage() != nullptr) focusPtr = subpage();
       if (isMessageEnabled(MSG_DEBUG)) {
          std::cout << "Display::keyboardEvent(" << this << "," << key << "), focusPtr = " << focusPtr << std::endl;
       }
@@ -386,12 +387,12 @@ void Display::onMouseExit()
 void Display::buttonEvent(const int b)
 {
    // Null pointer?  Try to set to our current subpage
-   if (focusPtr == 0 && subpage() != 0) focusPtr = subpage();
+   if (focusPtr == nullptr && subpage() != nullptr) focusPtr = subpage();
 
    //if (isMessageEnabled(MSG_DEBUG)) {
    //std::cout << "Display::buttonEvent(" << this << "," << b << "), focusPtr = " << focusPtr << std::endl;
    //}
-   if (focusPtr != 0) focusPtr->event(b);
+   if (focusPtr != nullptr) focusPtr->event(b);
 }
 
 //------------------------------------------------------------------------------
@@ -411,20 +412,20 @@ void Display::setMouse(const int x, const int y, Display* const subdisplay)
    int lx = x;
    int ly = y;
 
-   if (subdisplay != 0) {
+   if (subdisplay != nullptr) {
       // When we're called from a sub-display,
       //   offset the coordinates and set the focus to the sub-display
       GLsizei sdX, sdY;
       subdisplay->getViewportOrigin(&sdX, &sdY);
       lx = x + sdX;
       ly = y + sdY;
-        if (focus() != 0 && focus() != subdisplay) {
+        if (focus() != nullptr && focus() != subdisplay) {
             // if our previous focus was a display, exit it properly
             if (focus()->isClassType(typeid(Display))) {
                 BasicGL::Display* dis = static_cast<BasicGL::Display*>(focus());
                 dis->onMouseExit();
             }
-      focus(subdisplay);
+            focus(subdisplay);
             // enter our new mouse display
             subdisplay->onMouseEnter();
         }
@@ -432,14 +433,14 @@ void Display::setMouse(const int x, const int y, Display* const subdisplay)
    else {
         // if we aren't a subdisplay, but we are a display, we
         // still need to call our entry and exit routines
-        if (focus() != 0 && focus()->isClassType(typeid(Display))) {
+        if (focus() != nullptr && focus()->isClassType(typeid(Display))) {
             BasicGL::Display* dis = static_cast<BasicGL::Display*>(focus());
             dis->onMouseExit();
         }
 
       // When we are NOT called from a sub-display,
       //   reset the focus to one of our own pages or components
-      if (focus() != 0) {
+      if (focus() != nullptr) {
          if (focus()->isClassType(typeid(Display))) {
             focus( subpage() );
          }
@@ -453,12 +454,12 @@ void Display::setMouse(const int x, const int y, Display* const subdisplay)
 
    // Send these coordinates to our parent display
    Display* parentDisplay = static_cast<Display*>(findContainerByType(typeid(Display)));
-   if (parentDisplay != 0) {
+   if (parentDisplay != nullptr) {
       parentDisplay->setMouse(lx,ly,this);
    }
 
    // If we have no focus whatsoever at the end, we take the focus
-    if (focusPtr == 0) {
+    if (focusPtr == nullptr) {
         // call our entry procedure!
         onMouseEnter();
         focus(this);
@@ -635,7 +636,7 @@ void Display::reshapeIt(int w, int h)
 
    if (oLeft == DBL_MAX) {
       // DEFAULT values
-      GLdouble a = (GLdouble(vpHeight)/GLdouble(vpWidth));
+      GLdouble a = static_cast<GLdouble>(vpHeight) / static_cast<GLdouble>(vpWidth);
       oLeft   = -1.0;
       oRight  = 1.0;
       oBottom = (-1.0*a);
@@ -710,11 +711,11 @@ void Display::setViewportSize(const GLsizei w, const GLsizei h)
 //-----------------------------------------------------------------------------
 void Display::setSubscreen(const GLdouble lf, const GLdouble rt, const GLdouble bt, const GLdouble tp)
 {
-   GLint nx = GLint( GLdouble(vpWidth) * ((lf - oLeft)/(oRight - oLeft)) );
-   GLint ny = GLint( GLdouble(vpHeight) * ((bt - oBottom)/(oTop - oBottom)) );
+   GLint nx = GLint( static_cast<GLdouble>(vpWidth) * ((lf - oLeft)/(oRight - oLeft)) );
+   GLint ny = GLint( static_cast<GLdouble>(vpHeight) * ((bt - oBottom)/(oTop - oBottom)) );
 
-   GLint nw = GLint( GLdouble(vpWidth) * ((rt - lf)/(oRight - oLeft)) );
-   GLint nh = GLint( GLdouble(vpHeight) * ((tp - bt)/(oTop - oBottom)) );
+   GLint nw = GLint( static_cast<GLdouble>(vpWidth) * ((rt - lf)/(oRight - oLeft)) );
+   GLint nh = GLint( static_cast<GLdouble>(vpHeight) * ((tp - bt)/(oTop - oBottom)) );
 
    glViewport(nx,ny,nw,nh);
    glMatrixMode(GL_PROJECTION);
@@ -854,16 +855,16 @@ void Display::setClearColor(const Basic::Color& ccolor)
 GLuint Display::getTextureByName(const Basic::Identifier* texName)
 {
    GLuint tex = 0;
-   if (texName != 0 && textures != 0) {
+   if (texName != nullptr && textures != nullptr) {
       const Basic::Pair* pair = textures->findByName( *texName );
-      if (pair != 0) {
+      if (pair != nullptr) {
          const Texture* pt = dynamic_cast<const Texture*>( pair->object() );
-         if (pt != 0) tex = pt->getTexture();
+         if (pt != nullptr) tex = pt->getTexture();
       }
    }
    if ( tex == 0 && isMessageEnabled(MSG_ERROR)) {
       std::cerr << "Display::getTextureByName(): texture ";
-      if (texName != 0) std::cerr << *texName;
+      if (texName != nullptr) std::cerr << *texName;
       std::cerr << "  not found!" << std::endl;
    }
    return tex;
@@ -874,17 +875,17 @@ GLuint Display::getTextureByName(const Basic::Identifier* texName)
 //------------------------------------------------------------------------------
 Material* Display::getMaterial(const Basic::Identifier* name)
 {
-   Material* temp = 0;
-   if (name !=0 && materials != 0) {
+   Material* temp = nullptr;
+   if (name !=nullptr && materials != nullptr) {
       const Basic::Pair* pair = materials->findByName( *name );
-      if (pair != 0) {
+      if (pair != nullptr) {
          const Material* mat = dynamic_cast<const Material*>( pair->object() );
-         if (mat != 0) temp = const_cast<Material*>(static_cast<const Material*>(mat));
+         if (mat != nullptr) temp = const_cast<Material*>(static_cast<const Material*>(mat));
       }
    }
-   if (temp == 0 && isMessageEnabled(MSG_ERROR)) {
+   if (temp == nullptr && isMessageEnabled(MSG_ERROR)) {
       std::cerr << "Display::getMaterial(): material \"";
-      if (name != 0) std::cerr << *name;
+      if (name != nullptr) std::cerr << *name;
       std::cerr << "\" not found!" << std::endl;
    }
    return temp;
@@ -896,16 +897,16 @@ Material* Display::getMaterial(const Basic::Identifier* name)
 //------------------------------------------------------------------------------
 void Display::setNormColor(const Basic::Color* const nc)
 {
-   if (normColor != 0) normColor->unref();
+   if (normColor != nullptr) normColor->unref();
    normColor = nc;
-   if (normColor != 0) normColor->ref();
+   if (normColor != nullptr) normColor->ref();
 }
 
 void Display::setHighlightColor(const Basic::Color* const nc)
 {
-   if (hiColor != 0) hiColor->unref();
+   if (hiColor != nullptr) hiColor->unref();
    hiColor = nc;
-   if (hiColor != 0) hiColor->ref();
+   if (hiColor != nullptr) hiColor->ref();
 }
 
 //------------------------------------------------------------------------------
@@ -914,9 +915,9 @@ void Display::setHighlightColor(const Basic::Color* const nc)
 bool Display::setColorTable(Basic::PairStream* const sctobj)
 {
    bool ok = true;
-   if (colorTable != 0) colorTable->unref();
+   if (colorTable != nullptr) colorTable->unref();
    colorTable = sctobj;
-   if (colorTable != 0) colorTable->ref();
+   if (colorTable != nullptr) colorTable->ref();
    else {
       if (isMessageEnabled(MSG_ERROR)) {
          std::cerr << "Display::setColorTable: No input available" << std::endl;
@@ -934,19 +935,19 @@ bool Display::setColorTable(Basic::PairStream* const sctobj)
 bool Display::setFontList(Basic::PairStream* const obj)
 {
    bool ok = true;
-   if (fontList != 0) fontList->unref();
+   if (fontList != nullptr) fontList->unref();
    fontList = obj;
-   if (fontList != 0) fontList->ref();
+   if (fontList != nullptr) fontList->ref();
    return ok;
 }
 
 // getFont() -- by name
 Font* Display::getFont(const char* const fontName)
 {
-   Font* ft = 0;
-   if (fontList != 0) {
+   Font* ft = nullptr;
+   if (fontList != nullptr) {
       Basic::Pair* p = fontList->findByName(fontName);
-      if (p != 0) ft = static_cast<Font*>(p->object());
+      if (p != nullptr) ft = static_cast<Font*>(p->object());
    }
    return ft;
 }
@@ -954,9 +955,9 @@ Font* Display::getFont(const char* const fontName)
 const Font* Display::getFont(const char* const fontName) const
 {
    const Font* ft = 0;
-   if (fontList != 0) {
+   if (fontList != nullptr) {
       const Basic::Pair* p = fontList->findByName(fontName);
-      if (p != 0) ft = static_cast<const Font*>(p->object());
+      if (p != nullptr) ft = static_cast<const Font*>(p->object());
    }
    return ft;
 }
@@ -977,9 +978,9 @@ const Font* Display::getFont(const Basic::Identifier* const fontName) const
 Font* Display::getFont(const int index)
 {
    Font* ft = 0;
-   if (fontList != 0) {
+   if (fontList != nullptr) {
       Basic::Pair* p = fontList->getPosition(index+1);
-      if (p != 0) ft = static_cast<Font*>(p->object());
+      if (p != nullptr) ft = static_cast<Font*>(p->object());
    }
    return ft;
 }
@@ -988,9 +989,9 @@ Font* Display::getFont(const int index)
 const Font* Display::getFont(const int index) const
 {
    const Font* ft = 0;
-   if (fontList != 0) {
+   if (fontList != nullptr) {
       const Basic::Pair* p = fontList->getPosition(index+1);
-      if (p != 0) ft = static_cast<const Font*>(p->object());
+      if (p != nullptr) ft = static_cast<const Font*>(p->object());
    }
    return ft;
 }
@@ -1001,12 +1002,12 @@ void Display::selectFont(const bool reversed, const bool underlined, Font* newFo
 {
    // set our font initially to the one given to us
    Font* font = newFont;
-   if (font == 0) {
+   if (font == nullptr) {
       // our font is default, since none was specified
       font = getNormalFont();
    }
    // now set this font, if we have one!
-   if (font != 0) {
+   if (font != nullptr) {
       setFont(font);
       // Save flags for reference
       reversedFlg   = reversed;
@@ -1018,9 +1019,9 @@ void Display::selectFont(const bool reversed, const bool underlined, Font* newFo
 void Display::setFont(Font* newFont)
 {
    if (currentFont != newFont) {
-      if (currentFont != 0) currentFont->unref();
+      if (currentFont != nullptr) currentFont->unref();
       currentFont = newFont;
-      if (currentFont != 0) {
+      if (currentFont != nullptr) {
          currentFont->ref();
       }
    }
@@ -1029,16 +1030,16 @@ void Display::setFont(Font* newFont)
 // getNormalFont() --- (look it up, if needed)
 Font* Display::getNormalFont()
 {
-   if (normalFont == 0 && normalFontName != 0) {
+   if (normalFont == nullptr && normalFontName != nullptr) {
       normalFont = getFont(normalFontName);
-      if (normalFont == 0) {
+      if (normalFont == nullptr) {
          // Not found!
          if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "Display::getNormalFont(): font name '" << static_cast<const char*>(*normalFontName)
                       << "' not found!" << std::endl;
          }
          normalFontName->unref();
-         normalFontName = 0;
+         normalFontName = nullptr;
       }
    }
    return normalFont;
@@ -1054,24 +1055,24 @@ const Font* Display::getNormalFont() const
 bool Display::setNormalFont(Font* const f)
 {
    bool ok = true;
-   if (normalFont != 0) normalFont->unref();
+   if (normalFont != nullptr) normalFont->unref();
    normalFont = f;
-   if (normalFont != 0) normalFont->ref();
+   if (normalFont != nullptr) normalFont->ref();
    return ok;
 }
 
 // setNormalFont() --- by name (character string)
 bool Display::setNormalFont(const char* const fontName)
 {
-   if (fontName != 0) {
-      if (normalFontName == 0) {
+   if (fontName != nullptr) {
+      if (normalFontName == nullptr) {
          normalFontName = new Basic::Identifier();
       }
       *normalFontName = fontName;
       setNormalFont( getFont(fontName) );
    }
    else {
-      if (normalFontName != 0) { normalFontName->unref(); normalFontName = 0; }
+      if (normalFontName != nullptr) { normalFontName->unref(); normalFontName = nullptr; }
       setNormalFont(static_cast<Font*>(0));
    }
    return true;
@@ -1080,15 +1081,15 @@ bool Display::setNormalFont(const char* const fontName)
 // setNormalFont() --- by name (Basic::Identifier)
 bool Display::setNormalFont(const Basic::Identifier* const fontName)
 {
-   if (fontName != 0) {
-      if (normalFontName == 0) {
+   if (fontName != nullptr) {
+      if (normalFontName == nullptr) {
          normalFontName = new Basic::Identifier();
       }
       *normalFontName = *fontName;
       setNormalFont( getFont(fontName) );
    }
    else {
-      if (normalFontName != 0) { normalFontName->unref(); normalFontName = 0; }
+      if (normalFontName != nullptr) { normalFontName->unref(); normalFontName = nullptr; }
       setNormalFont(static_cast<Font*>(0));
    }
    return true;
@@ -1101,7 +1102,7 @@ bool Display::setNormalFont(const Basic::Identifier* const fontName)
 // outputTextLC() -- output a text at (Cp, Ln)
 void Display::outputTextLC(const int ln, const int cp, const char* sp, const int n, const bool vf) const
 {
-   if (currentFont == 0 || n <= 0) return;
+   if (currentFont == nullptr || n <= 0) return;
    osg::Vec4 ocolor = getCurrentColor();
 
    Display* that = const_cast<Display*>(this);
@@ -1214,7 +1215,7 @@ void Display::outputTextLC(const int ln, const int cp, const char* sp, const int
 // outputText() -- output a text at current position
 void Display::outputText(const char* sp, const int n, const bool vf) const
 {
-   if (currentFont == 0 || n <= 0) return;
+   if (currentFont == nullptr || n <= 0) return;
 
    Display* that = const_cast<Display*>(this);
    osg::Vec4 ocolor = getCurrentColor();
@@ -1368,10 +1369,10 @@ void Display::drawRightBracket(const int ln, const int cp)
 //------------------------------------------------------------------------------
 Basic::Color* Display::getColor(const char* const colorName)
 {
-   Basic::Color* cc = 0;
-   if (colorTable != 0) {
+   Basic::Color* cc = nullptr;
+   if (colorTable != nullptr) {
       Basic::Pair* p = colorTable->findByName(colorName);
-      if (p != 0) cc = static_cast<Basic::Color*>(p->object());
+      if (p != nullptr) cc = static_cast<Basic::Color*>(p->object());
    }
    return cc;
 }
@@ -1379,10 +1380,10 @@ Basic::Color* Display::getColor(const char* const colorName)
 
 Basic::Color* Display::getColor(const int index)
 {
-   Basic::Color* cc = 0;
-   if (colorTable != 0) {
+   Basic::Color* cc = nullptr;
+   if (colorTable != nullptr) {
       Basic::Pair* p = colorTable->getPosition(index+1);
-      if (p != 0) cc = static_cast<Basic::Color*>(p->object());
+      if (p != nullptr) cc = static_cast<Basic::Color*>(p->object());
    }
    return cc;
 }
@@ -1392,7 +1393,7 @@ Basic::Color* Display::getColor(const int index)
 //-----------------------------------------------------------------------------
 void Display::addColor(Basic::Color* cc)
 {
-   if (cc != 0 && colorTable != 0) {
+   if (cc != nullptr && colorTable != nullptr) {
       int i = colorTable->entries();
       char cbuf[20];
       std::sprintf(cbuf,"%i",i);
@@ -1402,7 +1403,7 @@ void Display::addColor(Basic::Color* cc)
 
 void Display::addColor(Basic::Pair* pp)
 {
-   if (pp != 0 && colorTable != 0) {
+   if (pp != nullptr && colorTable != nullptr) {
       Basic::Object* obj = pp->object();
       if (obj->isClassType(typeid(Basic::Color))) {
          colorTable->put( pp );
@@ -1495,7 +1496,7 @@ Basic::PairStream* Display::defaultColors()
 bool Display::setName(Basic::String* const n)
 {
    bool ok = false;
-   if (n != 0) {
+   if (n != nullptr) {
       name->unref();
       n->ref();
       name = n;
@@ -1509,7 +1510,7 @@ bool Display::setName(Basic::String* const n)
 //------------------------------------------------------------------------------
 bool Display::setSlotLeftOrthoBound(const Basic::Number* const sloobj)
 {
-   if (sloobj != 0) oLeft = sloobj->getDouble();
+   if (sloobj != nullptr) oLeft = sloobj->getDouble();
    return true;
 }
 
@@ -1518,9 +1519,9 @@ bool Display::setSlotLeftOrthoBound(const Basic::Number* const sloobj)
 //------------------------------------------------------------------------------
 bool Display::setSlotMaterials(Basic::PairStream* const msg)
 {
-   if (materials != 0) materials->unref();
-   materials = 0;
-   if (msg != 0) {
+   if (materials != nullptr) materials->unref();
+   materials = nullptr;
+   if (msg != nullptr) {
       materials = msg;
       materials->ref();
       processMaterials();
@@ -1533,8 +1534,8 @@ bool Display::setSlotMaterials(Basic::PairStream* const msg)
 bool Display::setSlotMaterials(Material* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
-      if (materials != 0) materials->unref();
+   if (msg != nullptr) {
+      if (materials != nullptr) materials->unref();
 
       materials = new Basic::PairStream();
       materials->put( new Basic::Pair("1",msg) );
@@ -1549,7 +1550,7 @@ bool Display::setSlotMaterials(Material* const msg)
 bool Display::setSlotAntialias(const Basic::Number* const x)
 {
    bool ok = false;
-   if (x != 0) ok = setAntialiasing(x->getBoolean());
+   if (x != nullptr) ok = setAntialiasing(x->getBoolean());
    return ok;
 }
 
@@ -1558,7 +1559,7 @@ bool Display::setSlotAntialias(const Basic::Number* const x)
 //------------------------------------------------------------------------------
 bool Display::setSlotRightOrthoBound(const Basic::Number* const sroobj)
 {
-   if (sroobj != 0) oRight = sroobj->getDouble();
+   if (sroobj != nullptr) oRight = sroobj->getDouble();
    return true;
 }
 
@@ -1567,7 +1568,7 @@ bool Display::setSlotRightOrthoBound(const Basic::Number* const sroobj)
 //------------------------------------------------------------------------------
 bool Display::setSlotBottomOrthoBound(const Basic::Number* const sbobobj)
 {
-   if (sbobobj != 0) oBottom = sbobobj->getDouble();  // set bottom ortho bound
+   if (sbobobj != nullptr) oBottom = sbobobj->getDouble();  // set bottom ortho bound
    return true;
 }
 
@@ -1576,7 +1577,7 @@ bool Display::setSlotBottomOrthoBound(const Basic::Number* const sbobobj)
 //------------------------------------------------------------------------------
 bool Display::setSlotTopOrthoBound(const Basic::Number* const stobobj)
 {
-   if (stobobj != 0) oTop = stobobj->getDouble();  // set top ortho bound
+   if (stobobj != nullptr) oTop = stobobj->getDouble();  // set top ortho bound
    return true;
 }
 
@@ -1585,7 +1586,7 @@ bool Display::setSlotTopOrthoBound(const Basic::Number* const stobobj)
 //------------------------------------------------------------------------------
 bool Display::setSlotNearOrthoBound(const Basic::Number* const snobobj)
 {
-   if (snobobj != 0) oNear = snobobj->getDouble();
+   if (snobobj != nullptr) oNear = snobobj->getDouble();
    return true;
 }
 
@@ -1595,7 +1596,7 @@ bool Display::setSlotNearOrthoBound(const Basic::Number* const snobobj)
 //------------------------------------------------------------------------------
 bool Display::setSlotFarOrthoBound(const Basic::Number* const sfobobj)
 {
-   if (sfobobj != 0) oFar = sfobobj->getDouble();
+   if (sfobobj != nullptr) oFar = sfobobj->getDouble();
    return true;
 }
 
@@ -1604,7 +1605,7 @@ bool Display::setSlotFarOrthoBound(const Basic::Number* const sfobobj)
 //------------------------------------------------------------------------------
 bool Display::setSlotViewportXOrigin(const Basic::Number* const svxoobj)
 {
-   if (svxoobj != 0) vpX = svxoobj->getInt();
+   if (svxoobj != nullptr) vpX = svxoobj->getInt();
    return true;
 }
 
@@ -1622,7 +1623,7 @@ bool Display::setSlotViewportYOrigin(const Basic::Number* const svyoobj)
 //------------------------------------------------------------------------------
 bool Display::setSlotViewportWidth(const Basic::Number* const svwobj)
 {
-   if (svwobj != 0) vpWidth = svwobj->getInt();
+   if (svwobj != nullptr) vpWidth = svwobj->getInt();
    return true;
 }
 
@@ -1631,7 +1632,7 @@ bool Display::setSlotViewportWidth(const Basic::Number* const svwobj)
 //------------------------------------------------------------------------------
 bool Display::setSlotViewportHeight(const Basic::Number* const svhobj)
 {
-   if (svhobj != 0) vpHeight = svhobj->getInt();
+   if (svhobj != nullptr) vpHeight = svhobj->getInt();
    return true;
 }
 
@@ -1641,9 +1642,9 @@ bool Display::setSlotViewportHeight(const Basic::Number* const svhobj)
 bool Display::setSlotSubdisplayStream (Basic::PairStream* const dsobj)
 {
    bool ok = false;
-   if (dsobj != 0) {
+   if (dsobj != nullptr) {
       // When a PairStream (i.e., more than one, a list) of displays
-      if (subdisplays != 0) subdisplays->unref();
+      if (subdisplays != nullptr) subdisplays->unref();
       subdisplays = dsobj;
       subdisplays->ref();
 
@@ -1658,8 +1659,8 @@ bool Display::setSlotSubdisplayStream (Basic::PairStream* const dsobj)
 bool Display::setSlotSubdisplaySingle(Display* const dobj)
 {
    bool ok = false;
-   if (dobj != 0) {
-      if (subdisplays != 0) subdisplays->unref();
+   if (dobj != nullptr) {
+      if (subdisplays != nullptr) subdisplays->unref();
 
       subdisplays = new Basic::PairStream();
       subdisplays->put( new Basic::Pair("1",dobj) );
@@ -1674,9 +1675,9 @@ bool Display::setSlotSubdisplaySingle(Display* const dobj)
 bool Display::setSlotTexturesStream (Basic::PairStream* const obj)
 {
    bool ok = false;
-   if (obj != 0) {
+   if (obj != nullptr) {
       // When a PairStream (i.e., more than one, a list) of displays
-      if (textures != 0) textures->unref();
+      if (textures != nullptr) textures->unref();
       textures = obj;
       textures->ref();
 
@@ -1691,8 +1692,8 @@ bool Display::setSlotTexturesStream (Basic::PairStream* const obj)
 bool Display::setSlotTexturesSingle(Texture* const obj)
 {
    bool ok = false;
-   if (obj != 0) {
-      if (textures != 0) textures->unref();
+   if (obj != nullptr) {
+      if (textures != nullptr) textures->unref();
 
       textures = new Basic::PairStream();
       textures->put( new Basic::Pair("1",obj) );
@@ -1706,7 +1707,7 @@ bool Display::setSlotTexturesSingle(Texture* const obj)
 //------------------------------------------------------------------------------
 bool Display::setSlotStdLineWidth(const Basic::Number* const obj)
 {
-   if (obj != 0) setStdLineWidth( obj->getFloat() );
+   if (obj != nullptr) setStdLineWidth( obj->getFloat() );
    return true;
 }
 
@@ -1716,7 +1717,7 @@ bool Display::setSlotStdLineWidth(const Basic::Number* const obj)
 bool Display::setSlotClearColor(const Basic::Color* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       setClearColor(*msg);
       ok = true;
    }
@@ -1729,9 +1730,9 @@ bool Display::setSlotClearColor(const Basic::Color* const msg)
 bool Display::setSlotLeftBracketCharacter(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       int num = msg->getInt();
-      if (isalnum(num)) {
+      if (std::isalnum(num)) {
          setLeftBracketCharacter(char(num));
          ok = true;
       }
@@ -1742,9 +1743,9 @@ bool Display::setSlotLeftBracketCharacter(const Basic::Number* const msg)
 bool Display::setSlotLeftBracketCharacter(const Basic::String* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       const char* str = *msg;
-      if (str != 0) {
+      if (str != nullptr) {
          setLeftBracketCharacter(str[0]);
          ok = true;
       }
@@ -1758,9 +1759,9 @@ bool Display::setSlotLeftBracketCharacter(const Basic::String* const msg)
 bool Display::setSlotRightBracketCharacter(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       int num = msg->getInt();
-      if (isalnum(num)) {
+      if (std::isalnum(num)) {
          setRightBracketCharacter(char(num));
          ok = true;
       }
@@ -1771,9 +1772,9 @@ bool Display::setSlotRightBracketCharacter(const Basic::Number* const msg)
 bool Display::setSlotRightBracketCharacter(const Basic::String* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       const char* str = *msg;
-      if (str != 0) {
+      if (str != nullptr) {
          setRightBracketCharacter(str[0]);
          ok = true;
       }
@@ -1787,7 +1788,7 @@ bool Display::setSlotRightBracketCharacter(const Basic::String* const msg)
 bool Display::setSlotReverseVideoBrackets(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setReverseVideoBrackets(msg->getBoolean());
    }
    return ok;
@@ -1799,7 +1800,7 @@ bool Display::setSlotReverseVideoBrackets(const Basic::Number* const msg)
 bool Display::setSlotClearDepth(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       setClearDepth(msg->getReal());
       ok = true;
    }
@@ -1813,9 +1814,9 @@ bool Display::setSlotClearDepth(const Basic::Number* const msg)
 bool Display::setSlotDisplayOrientation(const Basic::String* const msg)
 {
    bool ok = false;
-   if (*msg == "normal") { setDisplayOrientation(NORMAL); ok = true; }
-   else if (*msg == "cw90") { setDisplayOrientation(CW90); ok = true; }
-   else if (*msg == "ccw90") { setDisplayOrientation(CCW90); ok = true; }
+   if (*msg == "normal")        { setDisplayOrientation(NORMAL);   ok = true; }
+   else if (*msg == "cw90")     { setDisplayOrientation(CW90);     ok = true; }
+   else if (*msg == "ccw90")    { setDisplayOrientation(CCW90);    ok = true; }
    else if (*msg == "inverted") { setDisplayOrientation(INVERTED); ok = true; }
    return ok;
 }
@@ -1828,13 +1829,13 @@ bool Display::setSlotDisplayOrientation(const Basic::String* const msg)
 bool Display::processSubdisplays()
 {
    bool ok = true;
-   if (subdisplays != 0) {
+   if (subdisplays != nullptr) {
       const Basic::List::Item* item = subdisplays->getFirstItem();
-      while (ok && item != 0) {
+      while (ok && item != nullptr) {
          Basic::Pair* p = const_cast<Basic::Pair*>(static_cast<const Basic::Pair*>(item->getValue()));
          item = item->getNext();
          Display* g = dynamic_cast<Display*>(p->object());
-         if (g != 0) {
+         if (g != nullptr) {
             g->container(this);
             g->setSubdisplayFlag(true);
          }
@@ -1856,13 +1857,13 @@ bool Display::processSubdisplays()
 bool Display::processTextures()
 {
    bool ok = true;
-   if (textures != 0) {
+   if (textures != nullptr) {
       const Basic::List::Item* item = textures->getFirstItem();
-      while (ok && item != 0) {
+      while (ok && item != nullptr) {
          Basic::Pair* p = const_cast<Basic::Pair*>(static_cast<const Basic::Pair*>(item->getValue()));
          item = item->getNext();
          Texture* g = dynamic_cast<Texture*>(p->object());
-         if (g == 0) {
+         if (g == nullptr) {
             // It MUST be of type Texture
             if (isMessageEnabled(MSG_ERROR)) {
                std::cerr << "Display::processTextures(): " << *p->slot() << " is not a Texture!" << std::endl;
@@ -1881,13 +1882,13 @@ bool Display::processTextures()
 bool Display::processMaterials()
 {
    bool ok = true;
-   if (materials != 0) {
+   if (materials != nullptr) {
       const Basic::List::Item* item = materials->getFirstItem();
-      while (ok && item != 0) {
+      while (ok && item != nullptr) {
          Basic::Pair* p = const_cast<Basic::Pair*>(static_cast<const Basic::Pair*>(item->getValue()));
          item = item->getNext();
          Material* g = dynamic_cast<Material*>(p->object());
-         if (g == 0) {
+         if (g == nullptr) {
             // It MUST be of type Material
             if (isMessageEnabled(MSG_ERROR)) {
                std::cerr << "Display::processMaterials(): " << *p->slot() << " is not a Material!" << std::endl;
@@ -1966,9 +1967,9 @@ void Display::configure()
 //------------------------------------------------------------------------------
 void Display::loadTextures()
 {
-   if (textures != 0) {
+   if (textures != nullptr) {
       const Basic::List::Item* item = textures->getFirstItem();
-      while (item != 0) {
+      while (item != nullptr) {
          Basic::Pair* p = const_cast<Basic::Pair*>(static_cast<const Basic::Pair*>(item->getValue()));
          item = item->getNext();
          Texture* g = static_cast<Texture*>(p->object());
@@ -1992,8 +1993,8 @@ Image* Display::readFrameBuffer(unsigned int* const w, unsigned int* const h)
 
    Image* image = readFrameBuffer(0, 0, width, height);
 
-   if (w != 0) *w = width;
-   if (h != 0) *h = height;
+   if (w != nullptr) *w = width;
+   if (h != nullptr) *h = height;
    return image;
 }
 
@@ -2009,15 +2010,11 @@ Image* Display::readFrameBuffer(const unsigned int x, const unsigned int y, cons
    // check input parameters
    if ((width < 1) || (height < 1) || (width > MAX_IMAGE_WIDTH) || (height > MAX_IMAGE_HEIGHT)) {
       std::cout << "Display::readGlBuffer(): Invalid screenshot dimensions" << std::endl;
-      return 0;
-   }
-   if ( (x<0) || (y < 0)) {
-      std::cout << "Display::readGlBuffer(): Invalid screenshot location" << std::endl;
-      return 0;
+      return nullptr;
    }
 
    // align width to 4-byte boundary:
-   unsigned int size = (width +3) / 4;
+   unsigned int size = (width + 3) / 4;
    unsigned int w = size * 4;
 
    GLubyte* pixelData = new GLubyte[PIXEL_SIZE * w * height];
@@ -2047,7 +2044,7 @@ std::ostream& Display::serialize(std::ostream& sout, const int i, const bool slo
       j = 4;
    }
 
-   if (name != 0) {
+   if (name != nullptr) {
       indent(sout,i+j);
       sout << "name:" << *name << std::endl;
    }
@@ -2110,7 +2107,7 @@ std::ostream& Display::serialize(std::ostream& sout, const int i, const bool slo
       getNormalFont()->serialize(sout,i+j+4);
    }
 
-   if (subdisplays != 0) {
+   if (subdisplays != nullptr) {
       indent(sout,i+j);
       sout << "displays: {" << std::endl;
       subdisplays->serialize(sout,i+j+4,slotsOnly);
@@ -2118,7 +2115,7 @@ std::ostream& Display::serialize(std::ostream& sout, const int i, const bool slo
       sout << "}" << std::endl;
    }
 
-   if (textures != 0) {
+   if (textures != nullptr) {
       indent(sout,i+j);
       sout << "textures: {" << std::endl;
       textures->serialize(sout,i+j+4,slotsOnly);
