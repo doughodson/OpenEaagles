@@ -47,7 +47,7 @@ IMPLEMENT_SUBCLASS(FtglHaloFont,"FTGLHaloFonts")
 EMPTY_SERIALIZER(FtglHaloFont)
 
 //------------------------------------------------------------------------------
-// Slot tables 
+// Slot tables
 //------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(FtglFonts)
     "faceSize",
@@ -61,7 +61,7 @@ BEGIN_SLOTTABLE(FtglHaloFont)
 END_SLOTTABLE(FtglHaloFont)
 
 //------------------------------------------------------------------------------
-//  Map slot table to handles 
+//  Map slot table to handles
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(FtglFonts)
     ON_SLOT(1,setFaceSize,Basic::Number)
@@ -80,11 +80,11 @@ END_SLOT_MAP()
 //------------------------------------------------------------------------------
 FtglFonts::FtglFonts()
 {
-    STANDARD_CONSTRUCTOR() 
-    fSize = DEFAULT_FACE_SIZE;     // default face size
+    STANDARD_CONSTRUCTOR()
+    fSize = DEFAULT_FACE_SIZE;
 }
 FtglFonts::FtglFonts(const FtglFonts& org)
-{ 
+{
     STANDARD_CONSTRUCTOR()
     fSize = org.fSize;
     copyData(org,true);
@@ -100,7 +100,7 @@ FtglFonts& FtglFonts::operator=(const FtglFonts& org)
 }
 FtglFonts* FtglFonts::clone() const
 {
-    return 0;
+    return nullptr;
 }
 FtglBitmapFont::FtglBitmapFont()
 {
@@ -130,8 +130,8 @@ FtglTextureFont::FtglTextureFont()
 FtglHaloFont::FtglHaloFont()
 {
     STANDARD_CONSTRUCTOR();
-    outline = 0;
-    haloColor = 0;
+    outline = nullptr;
+    haloColor = nullptr;
     linewidth = 1;
 }
 
@@ -195,8 +195,8 @@ void FtglTextureFont::copyData(const FtglTextureFont& org, const bool)
 void FtglHaloFont::copyData(const FtglHaloFont& org, const bool)
 {
     BaseClass::copyData(org);
-    if (haloColor != 0) haloColor->unref();
-    haloColor = 0;
+    if (haloColor != nullptr) haloColor->unref();
+    haloColor = nullptr;
     linewidth = org.linewidth;
 }
 
@@ -233,10 +233,10 @@ void FtglTextureFont::deleteData()
 
 void FtglHaloFont::deleteData()
 {
-    if (haloColor != 0) haloColor->unref();
-    haloColor = 0;
-    if (outline != 0) delete outline;
-    outline = 0;
+    if (haloColor != nullptr) haloColor->unref();
+    haloColor = nullptr;
+    if (outline != nullptr) delete outline;
+    outline = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -245,7 +245,7 @@ void FtglHaloFont::deleteData()
 bool FtglFonts::setFaceSize(const Basic::Number* const faceSize)
 {
     // get our new face size, else we return to a default face size
-    if (faceSize != 0) fSize = faceSize->getInt();
+    if (faceSize != nullptr) fSize = faceSize->getInt();
     else fSize = DEFAULT_FACE_SIZE;
     return true;
 };
@@ -253,7 +253,7 @@ bool FtglFonts::setFaceSize(const Basic::Number* const faceSize)
 bool FtglExtrdFont::setDepth(const Basic::Number* const newDepth)
 {
     // set our depth
-    if (newDepth != 0) depth = newDepth->getFloat();
+    if (newDepth != nullptr) depth = newDepth->getFloat();
     else depth = DEFAULT_DEPTH;
     return true;
 }
@@ -261,9 +261,9 @@ bool FtglExtrdFont::setDepth(const Basic::Number* const newDepth)
 bool FtglHaloFont::setHaloColor(Basic::Color* x)
 {
     // set our halo color
-    if (haloColor != 0) haloColor->unref();
-    haloColor = 0;
-    if (x != 0) {
+    if (haloColor != nullptr) haloColor->unref();
+    haloColor = nullptr;
+    if (x != nullptr) {
         haloColor = x;
         haloColor->ref();
     }
@@ -272,7 +272,7 @@ bool FtglHaloFont::setHaloColor(Basic::Color* x)
 bool FtglHaloFont::setLinewidth(const Basic::Number* const x )
 {
     bool ok = false;
-    if (x != 0) {
+    if (x != nullptr) {
         linewidth = x->getFloat();
         ok = true;
     }
@@ -299,9 +299,9 @@ void FtglBitmapFont::outputText(const double x, const double y, const char* txt,
     int nn = xferChars(cbuf,MSG_BUF_LEN,txt,n);
     if (nn <= 0) return;
 
-    // output the text 
+    // output the text
     FTGLBitmapFont* ftgl1 = static_cast<FTGLBitmapFont*>(FTGL());
-    if (ftgl1 != 0) {
+    if (ftgl1 != nullptr) {
         if (vf) {
             // Vertical text
             char cc[2];
@@ -309,13 +309,13 @@ void FtglBitmapFont::outputText(const double x, const double y, const char* txt,
             for (int i = 0; i < nn; i++) {
                 cc[0] = cbuf[i];
                 glRasterPos2d( x, (y - float(i)*getLineSpacing()) );
-                ftgl1->Render(cc);    
+                ftgl1->Render(cc);
             }
         }
         else {
             // Normal text
             glRasterPos2d(x,y);
-            ftgl1->Render(cbuf);    
+            ftgl1->Render(cbuf);
         }
     }
     else if (isMessageEnabled(MSG_ERROR)) {
@@ -338,10 +338,10 @@ void FtglBitmapFont::outputText(const char* txt, const int n, const bool vf, con
     char cbuf[MSG_BUF_LEN];
     int nn = xferChars(cbuf,MSG_BUF_LEN,txt,n);
     if (nn <= 0) return;
-    
+
     // output the text
     FTGLBitmapFont* ftgl1 = static_cast<FTGLBitmapFont*>(FTGL());
-    if (ftgl1 != 0) {
+    if (ftgl1 != nullptr) {
         if (vf) {
             // Vertical text
             char cc[2];
@@ -351,12 +351,12 @@ void FtglBitmapFont::outputText(const char* txt, const int n, const bool vf, con
             for (int i = 0; i < nn; i++) {
                 cc[0] = cbuf[i];
                 glRasterPos2d( rpos[0], (rpos[1] - float(i)*getLineSpacing()) );
-                ftgl1->Render(cc);    
+                ftgl1->Render(cc);
             }
         }
         else {
             // Normal text
-            ftgl1->Render(cbuf);    
+            ftgl1->Render(cbuf);
         }
     }
     else {
@@ -372,25 +372,25 @@ void FtglBitmapFont::loadFont()
     if (isLoaded()) return;
 
     // Check for required parameters
-    
-    if( filename() == 0 ) {
+
+    if( filename() == nullptr ) {
         if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "No ttf file" << std::endl;
         }
         return;
     }
-    
+
     // Generate filename
     const size_t FONTPATHNAME_LENGTH = 256;
     char fontPathname[FONTPATHNAME_LENGTH];
-    if (fontDirectory() != 0) lcStrcpy(fontPathname, FONTPATHNAME_LENGTH, fontDirectory());
+    if (fontDirectory() != nullptr) lcStrcpy(fontPathname, FONTPATHNAME_LENGTH, fontDirectory());
     else lcStrcpy(fontPathname, FONTPATHNAME_LENGTH, "./");
     lcStrcat(fontPathname, FONTPATHNAME_LENGTH, filename());
-    
-    FTGLBitmapFont* ftglFont = new FTGLBitmapFont(fontPathname);  
-    if (ftglFont != 0 && !ftglFont->Error()) {
+
+    FTGLBitmapFont* ftglFont = new FTGLBitmapFont(fontPathname);
+    if (ftglFont != nullptr && !ftglFont->Error()) {
         // set the face size and return the pointer, then tell our base class that we have a loaded font
-        ftglFont->FaceSize(getFaceSize());  
+        ftglFont->FaceSize(getFaceSize());
         ftgl(ftglFont);
         setFontLoaded();
     }
@@ -409,7 +409,7 @@ void FtglBitmapFont::loadFont()
 // FtglExtrdFont::outputText() -- FTGL output routines
 //------------------------------------------------------------------------------
 void FtglExtrdFont::outputText(const double x, const double y, const char* txt, const int n, const bool vf, const bool)
-{    
+{
     // Make sure we have characters to print
     if (n <= 0) return;
 
@@ -423,10 +423,10 @@ void FtglExtrdFont::outputText(const double x, const double y, const char* txt, 
     char cbuf[MSG_BUF_LEN];
     int nn = xferChars(cbuf,MSG_BUF_LEN,txt,n);
     if (nn <= 0) return;
-    
+
     // Output the text
     FTGLExtrdFont* ftgl1 = static_cast<FTGLExtrdFont*>(FTGL());
-    if (ftgl1 != 0) {
+    if (ftgl1 != nullptr) {
         glPushMatrix();
         glTranslated(x, y, 0.0);
         glScalef(static_cast<GLfloat>(getFontWidth()), static_cast<GLfloat>(getFontHeight()), 1.0f);
@@ -438,13 +438,13 @@ void FtglExtrdFont::outputText(const double x, const double y, const char* txt, 
             cc[1] = '\0';
             for (int i = 0; i < nn; i++) {
                 cc[0] = cbuf[i];
-                ftgl1->Render(cc);    
+                ftgl1->Render(cc);
                 glTranslated(0.0, -dy, 0.0);
             }
         }
         else {
             // Normal text
-            ftgl1->Render(cbuf);    
+            ftgl1->Render(cbuf);
         }
         glPopMatrix();
     }
@@ -470,10 +470,10 @@ void FtglExtrdFont::outputText(const char* txt, const int n, const bool vf, cons
     char cbuf[MSG_BUF_LEN];
     int nn = xferChars(cbuf,MSG_BUF_LEN,txt,n);
     if (nn <= 0) return;
-    
+
     // Output the text
     FTGLExtrdFont* ftgl1 = static_cast<FTGLExtrdFont*>(FTGL());
-    if (ftgl1 != 0) {
+    if (ftgl1 != nullptr) {
         glPushMatrix();
         glScalef(static_cast<GLfloat>(getFontWidth()), static_cast<GLfloat>(getFontHeight()), 1.0f);
         if (vf) {
@@ -484,47 +484,47 @@ void FtglExtrdFont::outputText(const char* txt, const int n, const bool vf, cons
             cc[1] = '\0';
             for (int i = 0; i < nn; i++) {
                 cc[0] = cbuf[i];
-                ftgl1->Render(cc);    
+                ftgl1->Render(cc);
                 glTranslated(0.0, -dy, 0.0);
             }
         }
         else {
             // Normal text
-            ftgl1->Render(cbuf);    
+            ftgl1->Render(cbuf);
         }
         glPopMatrix();
-    }   
+    }
     else {
         if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "FTGLExtrdFont::outputText() - no extruded font available" << std::endl;
         }
     }
 }
-    
+
 // Load FtglExtrdFont
 void FtglExtrdFont::loadFont()
 {
     if (isLoaded()) return;
 
-    // Check for required parameters  
-    if( filename() == 0 ) {
+    // Check for required parameters
+    if( filename() == nullptr ) {
         if (isMessageEnabled(MSG_ERROR)) {
         std::cerr << "No ttf file" << std::endl;
         }
         return;
     }
-    
+
     // Generate filename
     const size_t FONTPATHNAME_LENGTH = 256;
     char fontPathname[FONTPATHNAME_LENGTH];
-    if (fontDirectory() != 0) lcStrcpy(fontPathname, FONTPATHNAME_LENGTH, fontDirectory());
+    if (fontDirectory() != nullptr) lcStrcpy(fontPathname, FONTPATHNAME_LENGTH, fontDirectory());
     else lcStrcpy(fontPathname, FONTPATHNAME_LENGTH, "./");
     lcStrcat(fontPathname, FONTPATHNAME_LENGTH, filename());
-    
-    FTGLExtrdFont* ftglFont = new FTGLExtrdFont(fontPathname);  
-    if (ftglFont != 0 && !ftglFont->Error()) {
+
+    FTGLExtrdFont* ftglFont = new FTGLExtrdFont(fontPathname);
+    if (ftglFont != nullptr && !ftglFont->Error()) {
         // set the face size and return the pointer, then tell our base class that we have a loaded font
-        ftglFont->FaceSize(getFaceSize());  
+        ftglFont->FaceSize(getFaceSize());
         ftgl(ftglFont);
         // we'll put this here for now
         ftglFont->Depth(10);
@@ -560,10 +560,10 @@ void FtglOutlineFont::outputText(const double x, const double y, const char* txt
     char cbuf[MSG_BUF_LEN];
     int nn = xferChars(cbuf,MSG_BUF_LEN,txt,n);
     if (nn <= 0) return;
-    
+
     // Output the text
-    FTGLOutlineFont* ftgl1 = static_cast<FTGLOutlineFont*>(FTGL());   
-    if (ftgl1 != 0) {
+    FTGLOutlineFont* ftgl1 = static_cast<FTGLOutlineFont*>(FTGL());
+    if (ftgl1 != nullptr) {
         glPushMatrix();
         glTranslated(x, y, 0.0);
         glScalef(static_cast<GLfloat>(getFontWidth()), static_cast<GLfloat>(getFontHeight()), 1.0f);
@@ -575,16 +575,16 @@ void FtglOutlineFont::outputText(const double x, const double y, const char* txt
             cc[1] = '\0';
             for (int i = 0; i < nn; i++) {
                 cc[0] = cbuf[i];
-                ftgl1->Render(cc);    
+                ftgl1->Render(cc);
                 glTranslated(0.0, -dy, 0.0);
             }
         }
         else {
             // Normal text
-            ftgl1->Render(cbuf);    
+            ftgl1->Render(cbuf);
         }
         glPopMatrix();
-    } 
+    }
     else {
         if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "FtglOutlineFont::outputText() - no outline font available" << std::endl;
@@ -607,10 +607,10 @@ void FtglOutlineFont::outputText(const char* txt, const int n, const bool vf, co
     char cbuf[MSG_BUF_LEN];
     int nn = xferChars(cbuf,MSG_BUF_LEN,txt,n);
     if (nn <= 0) return;
-    
+
     // Output the text
-    FTGLOutlineFont* ftgl1 = static_cast<FTGLOutlineFont*>(FTGL());   
-    if (ftgl1 != 0) {
+    FTGLOutlineFont* ftgl1 = static_cast<FTGLOutlineFont*>(FTGL());
+    if (ftgl1 != nullptr) {
         glPushMatrix();
         glScalef(static_cast<GLfloat>(getFontWidth()), static_cast<GLfloat>(getFontHeight()), 1.0f);
         if (vf) {
@@ -621,16 +621,16 @@ void FtglOutlineFont::outputText(const char* txt, const int n, const bool vf, co
             cc[1] = '\0';
             for (int i = 0; i < nn; i++) {
                 cc[0] = cbuf[i];
-                ftgl1->Render(cc);    
+                ftgl1->Render(cc);
                 glTranslated(0.0, -dy, 0.0);
             }
         }
         else {
             // Normal text
-            ftgl1->Render(cbuf);    
+            ftgl1->Render(cbuf);
         }
         glPopMatrix();
-    } 
+    }
     else {
         if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "FtglOutlineFont::outputText() - no outline font available" << std::endl;
@@ -644,22 +644,22 @@ void FtglOutlineFont::loadFont()
     if (isLoaded()) return;
 
     // Check for required parameters
-    if( filename() == 0 ) {
+    if( filename() == nullptr ) {
         if (isMessageEnabled(MSG_ERROR)) {
         std::cerr << "No ttf file" << std::endl;
         }
         return;
     }
-    
+
     // Generate filename
     const size_t FONTPATHNAME_LENGTH = 256;
     char fontPathname[FONTPATHNAME_LENGTH];
-    if (fontDirectory() != 0) lcStrcpy(fontPathname, FONTPATHNAME_LENGTH, fontDirectory());
+    if (fontDirectory() != nullptr) lcStrcpy(fontPathname, FONTPATHNAME_LENGTH, fontDirectory());
     else lcStrcpy(fontPathname, FONTPATHNAME_LENGTH, "./");
     lcStrcat(fontPathname, FONTPATHNAME_LENGTH, filename());
-    
-    FTGLOutlineFont* ftglFont = new FTGLOutlineFont(fontPathname);  
-    if (ftglFont != 0 && !ftglFont->Error()) {
+
+    FTGLOutlineFont* ftglFont = new FTGLOutlineFont(fontPathname);
+    if (ftglFont != nullptr && !ftglFont->Error()) {
         // set the face size and return the pointer, then tell our base class that we have a loaded font
         ftglFont->FaceSize(getFaceSize());
         ftgl(ftglFont);
@@ -695,9 +695,9 @@ void FtglPixmapFont::outputText(const double x, const double y, const char* txt,
     int nn = xferChars(cbuf,MSG_BUF_LEN,txt,n);
     if (nn <= 0) return;
 
-    // output the text 
+    // output the text
     FTGLPixmapFont* ftgl1 = static_cast<FTGLPixmapFont*>(FTGL());
-    if (ftgl1 != 0) {
+    if (ftgl1 != nullptr) {
         if (vf) {
             // Vertical text
             char cc[2];
@@ -705,15 +705,15 @@ void FtglPixmapFont::outputText(const double x, const double y, const char* txt,
             for (int i = 0; i < nn; i++) {
                 cc[0] = cbuf[i];
                 glRasterPos2d( x, (y - float(i)*getLineSpacing()) );
-                ftgl1->Render(cc);    
+                ftgl1->Render(cc);
             }
         }
         else {
             // Normal text
             glRasterPos2d(x,y);
-            ftgl1->Render(cbuf);    
+            ftgl1->Render(cbuf);
         }
-    }  
+    }
     else {
         if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "FTGLPixmapFont::outputText() - no Pixmap font available" << std::endl;
@@ -738,8 +738,8 @@ void FtglPixmapFont::outputText(const char* txt, const int n, const bool vf, con
     if (nn <= 0) return;
 
     // output the text
-    FTGLPixmapFont* ftgl1 = static_cast<FTGLPixmapFont*>(FTGL());   
-    if (ftgl1 != 0) {
+    FTGLPixmapFont* ftgl1 = static_cast<FTGLPixmapFont*>(FTGL());
+    if (ftgl1 != nullptr) {
         if (vf) {
             // Vertical text
             char cc[2];
@@ -749,12 +749,12 @@ void FtglPixmapFont::outputText(const char* txt, const int n, const bool vf, con
             for (int i = 0; i < nn; i++) {
                 cc[0] = cbuf[i];
                 glRasterPos2d( rpos[0], (rpos[1] - float(i)*getLineSpacing()) );
-                ftgl1->Render(cc);    
+                ftgl1->Render(cc);
             }
         }
         else {
             // Normal text
-            ftgl1->Render(cbuf);    
+            ftgl1->Render(cbuf);
         }
     }
     else {
@@ -770,25 +770,25 @@ void FtglPixmapFont::loadFont()
     if (isLoaded()) return;
 
     // Check for required parameters
-    
-    if( filename() == 0 ) {
+
+    if( filename() == nullptr ) {
         if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "No ttf file" << std::endl;
         }
         return;
     }
-    
+
     // Generate filename
     const size_t FONTPATHNAME_LENGTH = 256;
     char fontPathname[FONTPATHNAME_LENGTH];
-    if (fontDirectory() != 0) lcStrcpy(fontPathname, FONTPATHNAME_LENGTH, fontDirectory());
+    if (fontDirectory() != nullptr) lcStrcpy(fontPathname, FONTPATHNAME_LENGTH, fontDirectory());
     else lcStrcpy(fontPathname, FONTPATHNAME_LENGTH, "./");
     lcStrcat(fontPathname, FONTPATHNAME_LENGTH, filename());
-    
-    FTGLPixmapFont* ftglFont = new FTGLPixmapFont(fontPathname);  
-    if (ftglFont != 0 && !ftglFont->Error()) {
+
+    FTGLPixmapFont* ftglFont = new FTGLPixmapFont(fontPathname);
+    if (ftglFont != nullptr && !ftglFont->Error()) {
         // set the face size and return the pointer, then tell our base class that we have a loaded font
-        ftglFont->FaceSize(getFaceSize());  
+        ftglFont->FaceSize(getFaceSize());
         ftgl(ftglFont);
         setFontLoaded();
     }
@@ -824,8 +824,8 @@ void FtglPolygonFont::outputText(const double x, const double y, const char* txt
     if (nn <= 0) return;
 
     // output the text
-    FTGLPolygonFont* ftgl1 = static_cast<FTGLPolygonFont*>(FTGL());   
-    if (ftgl1 != 0) {
+    FTGLPolygonFont* ftgl1 = static_cast<FTGLPolygonFont*>(FTGL());
+    if (ftgl1 != nullptr) {
         glPushMatrix();
         glTranslated(x, y, 0.0);
         glScalef(static_cast<GLfloat>(getFontWidth()), static_cast<GLfloat>(getFontHeight()), 1.0f);
@@ -837,16 +837,16 @@ void FtglPolygonFont::outputText(const double x, const double y, const char* txt
             cc[1] = '\0';
             for (int i = 0; i < nn; i++) {
                 cc[0] = cbuf[i];
-                ftgl1->Render(cc);    
+                ftgl1->Render(cc);
                 glTranslated(0.0, -dy, 0.0);
             }
         }
         else {
             // Normal text
-            ftgl1->Render(cbuf);    
+            ftgl1->Render(cbuf);
         }
         glPopMatrix();
-    }   
+    }
     else {
         if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "FtglPolygonFont::outputText() - no Polygon font available" << std::endl;
@@ -869,10 +869,10 @@ void FtglPolygonFont::outputText(const char* txt, const int n, const bool vf, co
     char cbuf[MSG_BUF_LEN];
     int nn = xferChars(cbuf,MSG_BUF_LEN,txt,n);
     if (nn <= 0) return;
-    
+
     // output the text
-    FTGLPolygonFont* ftgl1 = static_cast<FTGLPolygonFont*>(FTGL());   
-    if (ftgl1 != 0) {
+    FTGLPolygonFont* ftgl1 = static_cast<FTGLPolygonFont*>(FTGL());
+    if (ftgl1 != nullptr) {
         glPushMatrix();
         glScalef(static_cast<GLfloat>(getFontWidth()), static_cast<GLfloat>(getFontHeight()), 1.0f);
         if (vf) {
@@ -883,16 +883,16 @@ void FtglPolygonFont::outputText(const char* txt, const int n, const bool vf, co
             cc[1] = '\0';
             for (int i = 0; i < nn; i++) {
                 cc[0] = cbuf[i];
-                ftgl1->Render(cc);    
+                ftgl1->Render(cc);
                 glTranslated(0.0, -dy, 0.0);
             }
         }
         else {
             // Normal text
-            ftgl1->Render(cbuf);    
+            ftgl1->Render(cbuf);
         }
         glPopMatrix();
-    }   
+    }
     else {
         if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "FtglPolygonFont::outputText() - no Polygon font available" << std::endl;
@@ -906,25 +906,25 @@ void FtglPolygonFont::loadFont()
     if (isLoaded()) return;
 
     // Check for required parameters
-    
-    if( filename() == 0 ) {
+
+    if( filename() == nullptr ) {
         if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "No ttf file" << std::endl;
         }
         return;
     }
-    
+
     // Generate filename
     const size_t FONTPATHNAME_LENGTH = 256;
     char fontPathname[FONTPATHNAME_LENGTH];
-    if (fontDirectory() != 0) lcStrcpy(fontPathname, FONTPATHNAME_LENGTH, fontDirectory());
+    if (fontDirectory() != nullptr) lcStrcpy(fontPathname, FONTPATHNAME_LENGTH, fontDirectory());
     else lcStrcpy(fontPathname, FONTPATHNAME_LENGTH, "./");
     lcStrcat(fontPathname, FONTPATHNAME_LENGTH, filename());
-    
-    FTGLPolygonFont* ftglFont = new FTGLPolygonFont(fontPathname);  
-    if (ftglFont != 0 && !ftglFont->Error()) {
+
+    FTGLPolygonFont* ftglFont = new FTGLPolygonFont(fontPathname);
+    if (ftglFont != nullptr && !ftglFont->Error()) {
         // set the face size and return the pointer, then tell our base class that we have a loaded font
-        ftglFont->FaceSize(getFaceSize());  
+        ftglFont->FaceSize(getFaceSize());
         ftgl(ftglFont);
         setFontLoaded();
     }
@@ -945,7 +945,7 @@ void FtglPolygonFont::loadFont()
 void FtglHaloFont::outputText(const double x, const double y, const char* txt, const int n, const bool vf, const bool rf)
 {
     GLfloat ocolor[4];
-    glGetFloatv(GL_CURRENT_COLOR, ocolor);        
+    glGetFloatv(GL_CURRENT_COLOR, ocolor);
 
     // Make sure we have characters to print
     if (n <= 0) return;
@@ -961,13 +961,13 @@ void FtglHaloFont::outputText(const double x, const double y, const char* txt, c
     int nn = xferChars(cbuf,MSG_BUF_LEN,txt,n);
     if (nn <= 0) return;
 
-    if (haloColor != 0) Graphic::lcColor3(haloColor->red(), haloColor->green(), haloColor->blue()); 
+    if (haloColor != nullptr) Graphic::lcColor3(haloColor->red(), haloColor->green(), haloColor->blue());
     // default to black if we have no color specified
     else glColor3f(0,0,0);
 
-    // now render the outline font over it! 
+    // now render the outline font over it!
     if (!rf) {
-        if (outline != 0) {
+        if (outline != nullptr) {
             glPushMatrix();
             glTranslated(x, y, -0.01f);
             // get our current linewidth
@@ -983,17 +983,17 @@ void FtglHaloFont::outputText(const double x, const double y, const char* txt, c
                 cc[1] = '\0';
                 for (int i = 0; i < nn; i++) {
                     cc[0] = cbuf[i];
-                    outline->Render(cc);    
+                    outline->Render(cc);
                     glTranslated(0.0, -dy, 0.0);
                 }
             }
             else {
                 // Normal text
-                outline->Render(cbuf);    
+                outline->Render(cbuf);
             }
             glLineWidth(lw);
             glPopMatrix();
-        } 
+        }
         else {
               if (isMessageEnabled(MSG_ERROR)) {
                   std::cerr << "FtglHaloFont::outputText() - no outline font available" << std::endl;
@@ -1005,7 +1005,7 @@ void FtglHaloFont::outputText(const double x, const double y, const char* txt, c
 
     // output the text
     FTGLPolygonFont* ftgl1 = static_cast<FTGLPolygonFont*>(FTGL());
-    if (ftgl1 != 0) {
+    if (ftgl1 != nullptr) {
         glPushMatrix();
         glTranslated(x, y, 0.0);
         glScalef(static_cast<GLfloat>(getFontWidth()), static_cast<GLfloat>(getFontHeight()), 1.0f);
@@ -1017,16 +1017,16 @@ void FtglHaloFont::outputText(const double x, const double y, const char* txt, c
             cc[1] = '\0';
             for (int i = 0; i < nn; i++) {
                 cc[0] = cbuf[i];
-                ftgl1->Render(cc);    
+                ftgl1->Render(cc);
                 glTranslated(0.0, -dy, 0.0);
             }
         }
         else {
             // Normal text
-            ftgl1->Render(cbuf);    
+            ftgl1->Render(cbuf);
         }
         glPopMatrix();
-    }   
+    }
     else {
         if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "FtglPolygonFont::outputText() - no Polygon font available" << std::endl;
@@ -1038,7 +1038,7 @@ void FtglHaloFont::outputText(const char* txt, const int n, const bool vf, const
 {
 
     GLfloat ocolor[4];
-    glGetFloatv(GL_CURRENT_COLOR, ocolor);        
+    glGetFloatv(GL_CURRENT_COLOR, ocolor);
 
     // Make sure we have characters to print
     if (n <= 0) return;
@@ -1053,13 +1053,13 @@ void FtglHaloFont::outputText(const char* txt, const int n, const bool vf, const
     int nn = xferChars(cbuf,MSG_BUF_LEN,txt,n);
     if (nn <= 0) return;
 
-    if (haloColor != 0) Graphic::lcColor3(haloColor->red(), haloColor->green(), haloColor->blue()); 
+    if (haloColor != nullptr) Graphic::lcColor3(haloColor->red(), haloColor->green(), haloColor->blue());
     // default to black if we have no color specified
     else glColor3f(0,0,0);
-    
+
     if (!rf) {
         // Output the outline in black
-        if (outline != 0) {
+        if (outline != nullptr) {
             glPushMatrix();
             // get our current linewidth
             GLfloat lw = 0;
@@ -1075,16 +1075,16 @@ void FtglHaloFont::outputText(const char* txt, const int n, const bool vf, const
                 cc[1] = '\0';
                 for (int i = 0; i < nn; i++) {
                     cc[0] = cbuf[i];
-                    outline->Render(cc);    
+                    outline->Render(cc);
                     glTranslated(0.0, -dy, 0.0);
                 }
             }
             else {
-                outline->Render(cbuf);    
+                outline->Render(cbuf);
             }
             glLineWidth(lw);
             glPopMatrix();
-        } 
+        }
         else {
             if (isMessageEnabled(MSG_ERROR)) {
                 std::cerr << "FtglHaloFont::outputText() - no outline font available" << std::endl;
@@ -1096,7 +1096,7 @@ void FtglHaloFont::outputText(const char* txt, const int n, const bool vf, const
 
     // output the text
     FTGLPolygonFont* ftgl1 = static_cast<FTGLPolygonFont*>(FTGL());
-    if (ftgl1 != 0) {
+    if (ftgl1 != nullptr) {
         glPushMatrix();
         glScalef(static_cast<GLfloat>(getFontWidth()), static_cast<GLfloat>(getFontHeight()), 1.0f);
         if (vf) {
@@ -1107,15 +1107,15 @@ void FtglHaloFont::outputText(const char* txt, const int n, const bool vf, const
             cc[1] = '\0';
             for (int i = 0; i < nn; i++) {
                 cc[0] = cbuf[i];
-                ftgl1->Render(cc);    
+                ftgl1->Render(cc);
                 glTranslated(0.0, -dy, 0.0);
             }
         }
         else {
-            ftgl1->Render(cbuf);    
+            ftgl1->Render(cbuf);
         }
         glPopMatrix();
-    }   
+    }
     else {
           if (isMessageEnabled(MSG_ERROR)) {
               std::cerr << "FtglHaloFont::outputText() - no Polygon font available" << std::endl;
@@ -1129,25 +1129,25 @@ void FtglHaloFont::loadFont()
     if (isLoaded()) return;
 
     // Check for required parameters
-    
-    if( filename() == 0 ) {
+
+    if( filename() == nullptr ) {
         if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "No ttf file" << std::endl;
         }
         return;
     }
-    
+
     // Generate filename
     const size_t FONTPATHNAME_LENGTH = 256;
     char fontPathname[FONTPATHNAME_LENGTH];
-    if (fontDirectory() != 0) lcStrcpy(fontPathname, FONTPATHNAME_LENGTH, fontDirectory());
+    if (fontDirectory() != nullptr) lcStrcpy(fontPathname, FONTPATHNAME_LENGTH, fontDirectory());
     else lcStrcpy(fontPathname, FONTPATHNAME_LENGTH, "./");
     lcStrcat(fontPathname, FONTPATHNAME_LENGTH, filename());
-    
-    FTGLPolygonFont* ftglFont = new FTGLPolygonFont(fontPathname);  
-    if (ftglFont != 0 && !ftglFont->Error()) {
+
+    FTGLPolygonFont* ftglFont = new FTGLPolygonFont(fontPathname);
+    if (ftglFont != nullptr && !ftglFont->Error()) {
         // set the face size and return the pointer, then tell our base class that we have a loaded font
-        ftglFont->FaceSize(getFaceSize());  
+        ftglFont->FaceSize(getFaceSize());
         ftgl(ftglFont);
         setFontLoaded();
     }
@@ -1161,9 +1161,9 @@ void FtglHaloFont::loadFont()
     }
 
     // now create the outline font over it
-    outline = new FTGLOutlineFont(fontPathname);  
-    if (outline != 0 && !outline->Error()) {
-        // set the face size 
+    outline = new FTGLOutlineFont(fontPathname);
+    if (outline != nullptr && !outline->Error()) {
+        // set the face size
         outline->FaceSize(getFaceSize());
     }
     else {
@@ -1192,15 +1192,15 @@ void FtglTextureFont::outputText(const double x, const double y, const char* txt
         loadFont();
         if (isNotLoaded()) throw new ExpInvalidFont();
     }
-    
+
     // Prepare the output text
     char cbuf[MSG_BUF_LEN];
     int nn = xferChars(cbuf,MSG_BUF_LEN,txt,n);
     if (nn <= 0) return;
 
     // output the text
-    FTGLTextureFont* ftgl1 = static_cast<FTGLTextureFont*>(FTGL());   
-    if (ftgl1 != 0) {
+    FTGLTextureFont* ftgl1 = static_cast<FTGLTextureFont*>(FTGL());
+    if (ftgl1 != nullptr) {
         glPushMatrix();
         glTranslated(x, y, 0.0);
         glScalef(static_cast<GLfloat>(getFontWidth()), static_cast<GLfloat>(getFontHeight()), 1.0f);
@@ -1212,16 +1212,16 @@ void FtglTextureFont::outputText(const double x, const double y, const char* txt
             cc[1] = '\0';
             for (int i = 0; i < nn; i++) {
                 cc[0] = cbuf[i];
-                ftgl1->Render(cc);    
+                ftgl1->Render(cc);
                 glTranslated(0.0, -dy, 0.0);
             }
         }
         else {
             // Normal text
-            ftgl1->Render(cbuf);    
+            ftgl1->Render(cbuf);
         }
         glPopMatrix();
-    } 
+    }
     else {
           if (isMessageEnabled(MSG_ERROR)) {
               std::cerr << "FtglTextureFont::outputText() - no Texture font available" << std::endl;
@@ -1239,15 +1239,15 @@ void FtglTextureFont::outputText(const char* txt, const int n, const bool vf, co
         loadFont();
         if (isNotLoaded()) throw new ExpInvalidFont();
     }
-    
+
     // Prepare the output text
     char cbuf[MSG_BUF_LEN];
     int nn = xferChars(cbuf,MSG_BUF_LEN,txt,n);
     if (nn <= 0) return;
-    
+
     // output the text
     FTGLTextureFont* ftgl1 = static_cast<FTGLTextureFont*>(FTGL());
-    if (ftgl1 != 0) {
+    if (ftgl1 != nullptr) {
         glPushMatrix();
         glScalef(static_cast<GLfloat>(getFontWidth()), static_cast<GLfloat>(getFontHeight()), 1.0f);
         if (vf) {
@@ -1258,13 +1258,13 @@ void FtglTextureFont::outputText(const char* txt, const int n, const bool vf, co
             cc[1] = '\0';
             for (int i = 0; i < nn; i++) {
                 cc[0] = cbuf[i];
-                ftgl1->Render(cc);    
+                ftgl1->Render(cc);
                 glTranslated(0.0, -dy, 0.0);
             }
         }
         else {
             // Normal text
-            ftgl1->Render(cbuf);    
+            ftgl1->Render(cbuf);
         }
         glPopMatrix();
     }
@@ -1281,23 +1281,23 @@ void FtglTextureFont::loadFont()
     if (isLoaded()) return;
 
     // Check for required parameters
-    
-    if( filename() == 0 ) {
+
+    if( filename() == nullptr ) {
         if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "No ttf file" << std::endl;
         }
         return;
     }
-    
+
     // Generate filename
     const size_t FONTPATHNAME_LENGTH = 256;
     char fontPathname[FONTPATHNAME_LENGTH];
-    if (fontDirectory() != 0) lcStrcpy(fontPathname, FONTPATHNAME_LENGTH, fontDirectory());
+    if (fontDirectory() != nullptr) lcStrcpy(fontPathname, FONTPATHNAME_LENGTH, fontDirectory());
     else lcStrcpy(fontPathname, FONTPATHNAME_LENGTH, "./");
     lcStrcat(fontPathname, FONTPATHNAME_LENGTH, filename());
-    
-    FTGLTextureFont* ftglFont = new FTGLTextureFont(fontPathname);  
-    if (ftglFont != 0 && !ftglFont->Error()) {
+
+    FTGLTextureFont* ftglFont = new FTGLTextureFont(fontPathname);
+    if (ftglFont != nullptr && !ftglFont->Error()) {
         // set the face size and return the pointer, then tell our base class that we have a loaded font
         ftglFont->FaceSize(getFaceSize());
         ftgl(ftglFont);

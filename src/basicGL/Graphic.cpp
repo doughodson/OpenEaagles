@@ -51,10 +51,10 @@ BEGIN_SLOTTABLE(Graphic)
 END_SLOTTABLE(Graphic)
 
 //------------------------------------------------------------------------------
-//  Map slot table to handles 
+//  Map slot table to handles
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(Graphic)
-    ON_SLOT( 1, setColor, Basic::Color)        
+    ON_SLOT( 1, setColor, Basic::Color)
     ON_SLOT( 1, setColor, Basic::Identifier)
     ON_SLOT( 2, setSlotLineWidth, Basic::Number)
     ON_SLOT( 3, setSlotFlashRate, Basic::Number)
@@ -109,22 +109,22 @@ Graphic::Graphic()
 void Graphic::initData()
 {
     // Our Display
-    displayPtr = 0;
+    displayPtr = nullptr;
 
     // This object is visible
     visible  = true;
 
     // No color
-    color = 0;
-    colorName = 0;
+    color = nullptr;
+    colorName = nullptr;
 
     // No texture
     texture = 0;
-    texName = 0;
+    texName = nullptr;
 
     // No linewidth
     linewidth = 0.0f;
-    
+
     // Flash rate
     fRate = 0.0;
 
@@ -136,20 +136,20 @@ void Graphic::initData()
     haveMatrix1 = false;
     m.makeIdentity();
     m1.makeIdentity();
-    transforms = 0;
+    transforms = nullptr;
 
     // No vertices
-    vertices = 0;
+    vertices = nullptr;
     nv = 0;
 
     // No texture coordinates
-    texCoord = 0;
+    texCoord = nullptr;
     ntc = 0;
-  
+
     // No Normals
-    norms = 0;
+    norms = nullptr;
     nn = 0;
-  
+
     // Scissor parameters
     scissorX = 0;
     scissorY = 0;
@@ -166,9 +166,9 @@ void Graphic::initData()
     stipplePattern = 0xFFFF;
 
     mask = false;
-    materialName = 0;
-    materialObj = 0;
-    
+    materialName = nullptr;
+    materialObj = nullptr;
+
     lightPos.set(0.0, 0.0, 1.0, 0.0);
     lightMoved = false;
 }
@@ -182,12 +182,12 @@ void Graphic::copyData(const Graphic& org, const bool cc)
     if (cc) initData();
 
     // Just reset our display (function getDisplay() should set it)
-    displayPtr = 0;
+    displayPtr = nullptr;
 
     visible  = org.visible;
 
     // copy color information
-    if (org.colorName != 0) {
+    if (org.colorName != nullptr) {
         // Color is a name from the color table
         setColor( org.colorName );
     }
@@ -195,7 +195,7 @@ void Graphic::copyData(const Graphic& org, const bool cc)
         // Color only
         setColor( org.color );
     }
-   
+
     // Post draw flag
     postDraw = org.postDraw;
 
@@ -209,8 +209,8 @@ void Graphic::copyData(const Graphic& org, const bool cc)
     fRate   = org.fRate;
 
     // Copy transform and matrix information
-    if (transforms != 0)     { transforms->unref(); transforms = 0; }
-    if (org.transforms != 0) { transforms = org.transforms->clone(); }
+    if (transforms != nullptr)     { transforms->unref(); transforms = nullptr; }
+    if (org.transforms != nullptr) { transforms = org.transforms->clone(); }
     haveMatrix  = org.haveMatrix;
     haveMatrix1 = org.haveMatrix1;
     m  = org.m;
@@ -224,18 +224,18 @@ void Graphic::copyData(const Graphic& org, const bool cc)
     texture = 0;
     const Basic::Identifier* tname = org.texName;
     texName = const_cast<Basic::Identifier*>(static_cast<const Basic::Identifier*>(tname));
-    
+
     // Scissor data
     scissorX = org.scissorX;
     scissorY = org.scissorY;
     scissorHeight = org.scissorHeight;
-    scissorWidth = org.scissorWidth;    
+    scissorWidth = org.scissorWidth;
 
     setMaterial(org.materialName);
     setMaterial(org.materialObj);
 
     // display list
-    noDisplayList = org.noDisplayList;  // Copy the flag ... 
+    noDisplayList = org.noDisplayList;  // Copy the flag ...
     dlist = 0;                          // but, we need to create our own list
 
     stipple = org.stipple;
@@ -259,8 +259,8 @@ void Graphic::deleteData()
     noDisplayList = false;
 
     // Delete list of transformations
-    if (transforms != 0) transforms->unref();
-    transforms = 0;
+    if (transforms != nullptr) transforms->unref();
+    transforms = nullptr;
     haveMatrix  = false;
     haveMatrix1 = false;
     m.makeIdentity();
@@ -271,28 +271,28 @@ void Graphic::deleteData()
     setTextureCoord(0,0);
 
     // delete color table name, but not the color
-    if (colorName != 0) colorName->unref();
-    colorName = 0;
+    if (colorName != nullptr) colorName->unref();
+    colorName = nullptr;
     // delete the color if not from the color table (by colorName)
-    if (color != 0) color->unref();
-    color = 0;
+    if (color != nullptr) color->unref();
+    color = nullptr;
 
     // Texture
     texture = 0;
-    texName = 0;
+    texName = nullptr;
 
     linewidth = 0.0f;
     fRate = 0.0;
     visible  = true;
     selName = 0;
     postDraw = false;
-    if (materialName != 0) {
+    if (materialName != nullptr) {
         materialName->unref();
-        materialName = 0;
+        materialName = nullptr;
     }
-    if (materialObj != 0) {
+    if (materialObj != nullptr) {
         materialObj->unref();
-        materialObj = 0;
+        materialObj = nullptr;
     }
 
 }
@@ -303,25 +303,25 @@ void Graphic::deleteData()
 //------------------------------------------------------------------------------
 Basic::Pair* Graphic::findBySelectName(const GLuint name)
 {
-    Basic::Pair* q = 0;
+    Basic::Pair* q = nullptr;
     Basic::PairStream* subcomponents = getComponents();
-    if (subcomponents != 0) {
+    if (subcomponents != nullptr) {
         const Basic::List::Item* item = subcomponents->getFirstItem();
-        while (item != 0 && q == 0) {
+        while (item != nullptr && q == nullptr) {
             Basic::Pair* p = const_cast<Basic::Pair*>(static_cast<const Basic::Pair*>(item->getValue()));
             Graphic* gobj = dynamic_cast<Graphic*>(p->object());
-            if (gobj != 0 && gobj->getSelectName() == name) q = p;
+            if (gobj != nullptr && gobj->getSelectName() == name) q = p;
             item = item->getNext();
         }
         item = subcomponents->getFirstItem();
-        while (item != 0 && q == 0) {
+        while (item != nullptr && q == nullptr) {
             Basic::Pair* p = const_cast<Basic::Pair*>(static_cast<const Basic::Pair*>(item->getValue()));
             Graphic* gobj = dynamic_cast<Graphic*>(p->object());
-            if (gobj != 0) q = gobj->findBySelectName(name);
+            if (gobj != nullptr) q = gobj->findBySelectName(name);
             item = item->getNext();
         }
         subcomponents->unref();
-        subcomponents = 0;
+        subcomponents = nullptr;
     }
     return q;
 }
@@ -348,7 +348,7 @@ bool Graphic::flashOn() const
 {
    LCreal hc = fRate*2.0f;          // Half cycles per second
    LCreal count = fTimer*hc;        // Number of half cycles since start
-   return (int(count) & 0x1) != 0; // Flash is ON during odd half cycles
+   return (static_cast<int>(count) & 0x1) != 0; // Flash is ON during odd half cycles
 }
 
 bool Graphic::flashOff() const
@@ -362,7 +362,7 @@ bool Graphic::flashOff() const
 //-----------------------------------------------------------------------------
 Display* Graphic::getDisplay()
 {
-    if (displayPtr == 0) {
+    if (displayPtr == nullptr) {
         if ( isClassType(typeid(Display))) {
             // When we're a Display
             displayPtr = static_cast<Display*>(this);
@@ -371,9 +371,9 @@ Display* Graphic::getDisplay()
             // Otherwise, check our (grand) parent container
             displayPtr = dynamic_cast<Display*>( findContainerByType(typeid(Display)) );
         }
-        
+
     }
-    if (displayPtr == 0) throw new ExpInvalidDisplayPtr();
+    if (displayPtr == nullptr) throw new ExpInvalidDisplayPtr();
     return displayPtr;
 }
 
@@ -390,14 +390,14 @@ GLfloat Graphic::getStdLineWidth()
 //------------------------------------------------------------------------------
 bool Graphic::setTextureName(const char* newName)
 {
-   if (newName != 0) {
-      if (texName == 0)
-         texName = new Basic::Identifier();
-    texName->setStr(newName);
-   }
-   else {
-      texName = 0;
-   }
+    if (newName != nullptr) {
+        if (texName == nullptr)
+            texName = new Basic::Identifier();
+        texName->setStr(newName);
+    }
+    else {
+        texName = nullptr;
+    }
     texture = 0;
     return true;
 }
@@ -409,15 +409,15 @@ void Graphic::setupMaterial()
 {
     Material* tempMat = materialObj;
 
-    if (materialName != 0 && getDisplay() != 0) tempMat = getDisplay()->getMaterial(materialName);
+    if (materialName != nullptr && getDisplay() != nullptr) tempMat = getDisplay()->getMaterial(materialName);
 
-    if (tempMat != 0) {
+    if (tempMat != nullptr) {
         // enable a light
         glEnable(GL_LIGHTING);
         glEnable(GL_LIGHT0);
         glEnable(GL_NORMALIZE);
         // make sure we move our light, if we need to
-        
+
         // now add all the materials we need
 
         // set our ambient color
@@ -463,7 +463,7 @@ void Graphic::setupMaterial()
 void Graphic::draw()
 {
     Display* display = getDisplay();
-    
+
     // Flashing: return if flashing and the flash flip/flop is OFF
     if (isFlashing() && flashOff()) return;
 
@@ -479,20 +479,20 @@ void Graphic::draw()
     // if we have a color and no material, switch to that color
     bool setOldColor = false;
     osg::Vec4 ocolor;
-    if (materialName == 0 && materialObj == 0) {
-        if (colorName != 0) {
+    if (materialName == nullptr && materialObj == nullptr) {
+        if (colorName != nullptr) {
             setOldColor = true;
             ocolor = display->getCurrentColor();
             display->setColor(*colorName);
         }
-        else if (color != 0) {
+        else if (color != nullptr) {
             setOldColor = true;
             ocolor = display->getCurrentColor();
             const osg::Vec4* p = *color;
             display->setColor(*p);
         }
     }
-    
+
     bool haveMaterial = false;
     GLfloat oldPos[4];
     if (lightMoved) {
@@ -504,13 +504,13 @@ void Graphic::draw()
     }
 
     // if we have a material, switch to it
-    if (materialName != 0 || materialObj != 0) {
+    if (materialName != nullptr || materialObj != nullptr) {
         haveMaterial = true;
         setupMaterial();
     }
 
     // Find our texture, if we have one
-    if (texName != 0 && texture == 0) {
+    if (texName != nullptr && texture == 0) {
         texture = display->getTextureByName(texName);
         if (texture == 0) {
             // If zero(0) was returned, the texture wasn't found
@@ -526,7 +526,7 @@ void Graphic::draw()
         // default to GL_DECAL
         glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);
     }
-    
+
     // set line width
     GLfloat olw = 0.0;
     if (linewidth > 0.0f) {
@@ -543,7 +543,7 @@ void Graphic::draw()
 
     // push our "select" name
     if (getSelectName() > 0) glPushName(getSelectName());
-    
+
     // setup optional scissor box
     if (haveScissorBoxHave()) {
         display->setScissor(scissorX, (scissorX + scissorWidth), scissorY, (scissorY + scissorHeight));
@@ -561,27 +561,27 @@ void Graphic::draw()
 
     // Draw my children
     Basic::PairStream* subcomponents = getComponents();
-    if (subcomponents != 0) {
+    if (subcomponents != nullptr) {
         Component* s = getSelectedComponent();
-        if (s != 0) {
+        if (s != nullptr) {
         // When we've selected only one
             Graphic* selected0 = dynamic_cast<Graphic*>(s);
-            if (selected0 != 0) {
+            if (selected0 != nullptr) {
                 selected0->draw();
             }
         }
         else {
             // When we should draw them all
             Basic::List::Item* item = subcomponents->getFirstItem();
-            while (item != 0) {
+            while (item != nullptr) {
                 Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
                 Graphic* obj = dynamic_cast<Graphic*>( pair->object() );
-                if (obj != 0) obj->draw();
+                if (obj != nullptr) obj->draw();
                 item = item->getNext();
             }
         }
         subcomponents->unref();
-        subcomponents = 0;
+        subcomponents = nullptr;
     }
 
     // Postdraw our graphics after our components (children) graphics
@@ -685,7 +685,7 @@ bool Graphic::setDisableDisplayList(const bool flg)
 
 //------------------------------------------------------------------------------
 // cursor() -- Returns true if text cursor should be seen within this
-//             object and the position of the cursor. 
+//             object and the position of the cursor.
 //------------------------------------------------------------------------------
 bool Graphic::cursor(int* ln, int* cp) const
 {
@@ -704,14 +704,14 @@ void Graphic::setupMatrix()
     // Start out with an identity matrix
     m.makeIdentity();
     haveMatrix  = false;
-    
+
     // Modify the matrix with all our transformations.
-    if (transforms != 0) {
+    if (transforms != nullptr) {
         const Basic::List::Item* item = transforms->getFirstItem();
-        while (item != 0) {
+        while (item != nullptr) {
             Basic::Pair* p = const_cast<Basic::Pair*>(static_cast<const Basic::Pair*>(item->getValue()));
             Basic::Transform* t = dynamic_cast<Basic::Transform*>(p->object());
-            if (t != 0) {
+            if (t != nullptr) {
                 m.preMult( *t );
                 haveMatrix = true;
             }
@@ -723,17 +723,17 @@ void Graphic::setupMatrix()
 //------------------------------------------------------------------------------
 // setColor() -- set this object's color (using an Basic::Color)
 //------------------------------------------------------------------------------
-bool Graphic::setColor(const Basic::Color* cobj)       
+bool Graphic::setColor(const Basic::Color* cobj)
 {
     // Unref old colors
-    if (color != 0) { color->unref(); color = 0; }
-    if (colorName != 0) { colorName->unref(); colorName = 0; }
+    if (color != nullptr)     { color->unref(); color = nullptr; }
+    if (colorName != nullptr) { colorName->unref(); colorName = nullptr; }
 
-    if (cobj != 0) {
+    if (cobj != nullptr) {
         // When we're being passed a color ...
         color = cobj->clone();
     }
-    
+
     return true;
 }
 
@@ -743,12 +743,12 @@ bool Graphic::setColor(const Basic::Color* cobj)
 bool Graphic::setColor(const Basic::Identifier* cnobj)
 {
     // Unref old colors
-    if (color != 0) { color->unref(); color = 0; }
-    if (colorName != 0) { colorName->unref(); colorName = 0; }
+    if (color != nullptr)     { color->unref(); color = nullptr; }
+    if (colorName != nullptr) { colorName->unref(); colorName = nullptr; }
 
-    if (cnobj != 0) {
+    if (cnobj != nullptr) {
        // When we're being passed a name of a color from the color table ...
-            colorName = cnobj->clone();
+       colorName = cnobj->clone();
     }
     return true;
 }
@@ -760,11 +760,11 @@ bool Graphic::setColor(const Basic::Identifier* cnobj)
 bool Graphic::setColor(const Basic::Number* const cnobj)
 {
     // Unref our color name (if we have one)
-    if (colorName != 0) { colorName->unref(); colorName = 0; }
+    if (colorName != nullptr) { colorName->unref(); colorName = nullptr; }
 
     // we have to have a color rotary to do this
     ColorRotary* cr = dynamic_cast<ColorRotary*>(color);
-    if (cr != 0 && cnobj != 0) {
+    if (cr != nullptr && cnobj != nullptr) {
         cr->determineColor(cnobj->getReal());
     }
 
@@ -779,7 +779,7 @@ bool Graphic::setColor(const Basic::Number* const cnobj)
 bool Graphic::onSetTextureId(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       int v = msg->getInt();
       if (v >= 0) {
          ok = setTexture(static_cast<GLuint>(v));
@@ -804,11 +804,11 @@ bool Graphic::onSetFlashRateEvent(const Basic::Number* const msg)
 bool Graphic::onSetVisibilityEvent(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setVisibility( msg->getBoolean() );
    }
-   return ok;   
-   
+   return ok;
+
 }
 
 
@@ -937,14 +937,14 @@ bool Graphic::clipLine2D(
 bool Graphic::setVertices(const osg::Vec3* const v, const unsigned int n)
 {
    // Delete any old vertices
-   if (vertices != 0) {
+   if (vertices != nullptr) {
       delete[] vertices;
-      vertices = 0;
+      vertices = nullptr;
       nv = 0;
    }
 
    // Copy vertices
-   if (n > 0 && v != 0) {
+   if (n > 0 && v != nullptr) {
       nv = n;
       vertices = new osg::Vec3[nv];
       for (unsigned int i = 0; i < nv; i++) {
@@ -960,14 +960,14 @@ bool Graphic::setVertices(const osg::Vec3* const v, const unsigned int n)
 bool Graphic::setNormals(const osg::Vec3* const v, const unsigned int n)
 {
    // Delete any old vertices
-   if (norms != 0) {
+   if (norms != nullptr) {
       delete[] norms;
-      norms = 0;
+      norms = nullptr;
       nn = 0;
    }
 
    // Copy vertices
-   if (n > 0 && v != 0) {
+   if (n > 0 && v != nullptr) {
       nn = n;
       norms = new osg::Vec3[nn];
       for (unsigned int i = 0; i < nn; i++) {
@@ -983,14 +983,14 @@ bool Graphic::setNormals(const osg::Vec3* const v, const unsigned int n)
 bool Graphic::setTextureCoord(const osg::Vec2* const v, const unsigned int n)
 {
    // Delete any old texture coordinates
-   if (texCoord != 0) {
+   if (texCoord != nullptr) {
       delete[] texCoord;
-      texCoord = 0;
+      texCoord = nullptr;
       ntc = 0;
    }
 
    // Copy texture coordinates
-   if (n > 0 && v != 0) {
+   if (n > 0 && v != nullptr) {
       ntc = n;
       texCoord = new osg::Vec2[ntc];
       for (unsigned int i = 0; i < ntc; i++) {
@@ -1002,7 +1002,7 @@ bool Graphic::setTextureCoord(const osg::Vec2* const v, const unsigned int n)
 
 //------------------------------------------------------------------------------
 // this is for creating your own texture... make sure you create a texture before
-// you call this function!    
+// you call this function!
 //------------------------------------------------------------------------------
 bool Graphic::setTexture(const GLuint newTex)
 {
@@ -1018,16 +1018,16 @@ bool Graphic::setTexture(const GLuint newTex)
 bool Graphic::setSlotTransformList(Basic::PairStream* list)
 {
     bool ok = true;
-    if (transforms != 0) transforms->unref();
+    if (transforms != nullptr) transforms->unref();
     transforms = list;
-    if (transforms != 0) {
+    if (transforms != nullptr) {
         transforms->ref();
         Basic::List::Item* item = transforms->getFirstItem();
-        while (item != 0) {
+        while (item != nullptr) {
             Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
             Basic::Transform* ip = dynamic_cast<Basic::Transform*>( pair->object() );
-            if (ip == 0) {
-                // It's not a Basic::Transform!!! 
+            if (ip == nullptr) {
+                // It's not a Basic::Transform!!!
                 if (isMessageEnabled(MSG_WARNING)) {
                     std::cerr << "Graphic::setSlotTransformList: a member of the list is not a Basic::Transform!" << std::endl;
                 }
@@ -1056,35 +1056,35 @@ bool Graphic::setSlotSingleTransform(Basic::Transform* const sobj)
 // setSlotTranslateLight() -- tell us where to translate our light
 bool Graphic::setSlotTranslateLight(Basic::PairStream* const msg)
 {
-    if (msg != 0) {
+    if (msg != nullptr) {
         LCreal temp[4] = { 0, 0, 1, 0 };
         Basic::List::Item* item = msg->getFirstItem();
         int count = 0;
-        while (item != 0 && count < 4) {
+        while (item != nullptr && count < 4) {
             Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
-            if (pair != 0) {
+            if (pair != nullptr) {
                 Basic::Number* num = dynamic_cast<Basic::Number*>(pair->object());
-                if (num != 0) {
+                if (num != nullptr) {
                     temp[count++] = num->getReal();
                 }
-            }                        
+            }
             item = item->getNext();
         }
         // W value is always 0
         temp[3] = 0;
         setLightPosition(temp[0],temp[1], temp[2], temp[3]);
     }
-  
+
     return true;
 }
 
 bool Graphic::setLightPosition(const LCreal x, const LCreal y, const LCreal z, const LCreal w)
 {
     lightPos.set(x, y, z, w);
-        lightMoved = true;
+    lightMoved = true;
     return true;
     }
-  
+
 bool Graphic::setLightPosition(osg::Vec4& newPos)
 {
     lightPos = newPos;
@@ -1095,14 +1095,14 @@ bool Graphic::setLightPosition(osg::Vec4& newPos)
 // setSlotLineWidth -- set this object's line width
 bool Graphic::setSlotLineWidth(const Basic::Number* const msg)
 {
-    if (msg != 0) return setLineWidth( msg->getFloat() );
+    if (msg != nullptr) return setLineWidth( msg->getFloat() );
     else return false;
 }
 
 // setSlotFlashRate -- set this object's flash rate
 bool Graphic::setSlotFlashRate(const Basic::Number* const msg)
 {
-    if (msg != 0) return setFlashRate(msg->getReal());
+    if (msg != nullptr) return setFlashRate(msg->getReal());
     else return false;
 }
 
@@ -1110,15 +1110,15 @@ bool Graphic::setSlotFlashRate(const Basic::Number* const msg)
 // setSlotNoDisplayList() --  True to disable display list (default false)
 bool Graphic::setSlotNoDisplayList(const Basic::Number* const msg)
 {
-    bool ok = (msg != 0);
+    bool ok = (msg != nullptr);
     if (ok) ok = setDisableDisplayList( msg->getBoolean() );
-    return ok;  
+    return ok;
 }
 
 //  setSlotSubcomponentsFirst() --  Draw component graphics first (default: draw own graphics first)
 bool Graphic::setSlotSubcomponentsFirst(const Basic::Number* const scfobj)
 {
-    bool ok = (scfobj != 0);
+    bool ok = (scfobj != nullptr);
     if (ok) postDraw = scfobj->getBoolean();
     return ok;
 }
@@ -1126,7 +1126,7 @@ bool Graphic::setSlotSubcomponentsFirst(const Basic::Number* const scfobj)
 // setSlotSelectName() -- GL Select Buffer name (e.g., glPushName())  (unsigned integer)
 bool Graphic::setSlotSelectName(const Basic::Number* const snobj)
 {
-    bool ok = (snobj != 0);
+    bool ok = (snobj != nullptr);
     if (ok) {
          int name = snobj->getInt();
          ok = setSelectName(static_cast<GLuint>(name));
@@ -1138,7 +1138,7 @@ bool Graphic::setSlotSelectName(const Basic::Number* const snobj)
 bool Graphic::setSlotScissorX(const Basic::Number* const newX)
 {
     bool ok = false;
-    if (newX != 0) {
+    if (newX != nullptr) {
         ok = setScissorX(newX->getReal());
     }
     return ok;
@@ -1148,7 +1148,7 @@ bool Graphic::setSlotScissorX(const Basic::Number* const newX)
 bool Graphic::setSlotScissorWidth(const Basic::Number* const newWidth)
 {
     bool ok = false;
-    if (newWidth != 0) {
+    if (newWidth != nullptr) {
         ok = setScissorWidth(newWidth->getReal());
     }
     return ok;
@@ -1158,7 +1158,7 @@ bool Graphic::setSlotScissorWidth(const Basic::Number* const newWidth)
 bool Graphic::setSlotScissorY(const Basic::Number* const newY)
 {
     bool ok = false;
-    if (newY != 0) {
+    if (newY != nullptr) {
         ok = setScissorY(newY->getReal());
     }
     return ok;
@@ -1168,7 +1168,7 @@ bool Graphic::setSlotScissorY(const Basic::Number* const newY)
 bool Graphic::setSlotScissorHeight(const Basic::Number* const newHeight)
 {
     bool ok = false;
-    if (newHeight != 0) {
+    if (newHeight != nullptr) {
         ok = setScissorHeight(newHeight->getReal());
     }
     return ok;
@@ -1178,7 +1178,7 @@ bool Graphic::setSlotScissorHeight(const Basic::Number* const newHeight)
 bool Graphic::setSlotStippling(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) ok = setStippling(msg->getBoolean());
+   if (msg != nullptr) ok = setStippling(msg->getBoolean());
    return ok;
 }
 
@@ -1186,7 +1186,7 @@ bool Graphic::setSlotStippling(const Basic::Number* const msg)
 bool Graphic::setSlotStippleFactor(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
        ok = setStippleFactor(static_cast<GLuint>(msg->getInt()));
    }
    return ok;
@@ -1196,7 +1196,7 @@ bool Graphic::setSlotStippleFactor(const Basic::Number* const msg)
 bool Graphic::setSlotStipplePattern(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       int v = msg->getInt();
       if (v >= 0 && v <= 0xffff) {
          ok = setStipplePattern(static_cast<GLushort>(v));
@@ -1212,14 +1212,14 @@ bool Graphic::setSlotStipplePattern(const Basic::Number* const msg)
 bool Graphic::setSlotVisibility(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) ok = setVisibility(msg->getBoolean());
+   if (msg != nullptr) ok = setVisibility(msg->getBoolean());
    return ok;
 }
 // setSlotMask - determines if we turn off our color guns or not
 bool Graphic::setSlotMask(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
         mask = msg->getBoolean();
         ok = true;
    }
@@ -1236,9 +1236,9 @@ bool Graphic::setSlotMask(const Basic::Number* const msg)
 //------------------------------------------------------------------------------
 bool Graphic::setSlotVertices(const Basic::PairStream* const msg)
 {
-   bool ok = true; 
-   
-   if (msg != 0) {
+   bool ok = true;
+
+   if (msg != nullptr) {
 
         // Clear any old vertices
         setVertices(0,0);
@@ -1250,12 +1250,12 @@ bool Graphic::setSlotVertices(const Basic::PairStream* const msg)
         // Get the vertices from the pair stream
         nv = 0;
         const Basic::List::Item* item = msg->getFirstItem();
-        while (item != 0 && nv < n) {
+        while (item != nullptr && nv < n) {
             const Basic::Pair* p = dynamic_cast<const Basic::Pair*>(item->getValue());
-                if (p != 0) {
+                if (p != nullptr) {
                     const Basic::Object* obj2 = p->object();
                     const Basic::List* msg2 = dynamic_cast<const Basic::List*>(obj2);
-                    if (msg2 != 0) {
+                    if (msg2 != nullptr) {
                         float values[3];
                         int n = msg2->getNumberList(values, 3);
                         if (n == 2) {
@@ -1288,9 +1288,9 @@ bool Graphic::setSlotVertices(const Basic::PairStream* const msg)
 //------------------------------------------------------------------------------
 bool Graphic::setSlotNormals(const Basic::PairStream* const msg)
 {
-   bool ok = true; 
-   
-   if (msg != 0) {
+   bool ok = true;
+
+   if (msg != nullptr) {
 
         // Clear any old normals
         setNormals(0,0);
@@ -1302,12 +1302,12 @@ bool Graphic::setSlotNormals(const Basic::PairStream* const msg)
         // Get the normals from the pair stream
         nn = 0;
         const Basic::List::Item* item = msg->getFirstItem();
-        while (item != 0 && nn < n) {
+        while (item != nullptr && nn < n) {
             const Basic::Pair* p = dynamic_cast<const Basic::Pair*>(item->getValue());
-                if (p != 0) {
+                if (p != nullptr) {
                     const Basic::Object* obj2 = p->object();
                     const Basic::List* msg2 = dynamic_cast<const Basic::List*>(obj2);
-                    if (msg2 != 0) {
+                    if (msg2 != nullptr) {
                         float values[3];
                         int n = msg2->getNumberList(values, 3);
                         if (n == 2) {
@@ -1341,9 +1341,9 @@ bool Graphic::setSlotNormals(const Basic::PairStream* const msg)
 //------------------------------------------------------------------------------
 bool Graphic::setSlotTexCoord(const Basic::PairStream* const msg)
 {
-   bool ok = true; 
-   
-   if (msg != 0) {
+   bool ok = true;
+
+   if (msg != nullptr) {
 
         // Clear any old texture coords
         setTextureCoord(0,0);
@@ -1355,12 +1355,12 @@ bool Graphic::setSlotTexCoord(const Basic::PairStream* const msg)
         // Get the vertices from the pair stream
         ntc = 0;
         const Basic::List::Item* item = msg->getFirstItem();
-        while (item != 0 && ntc < n) {
+        while (item != nullptr && ntc < n) {
             const Basic::Pair* p = dynamic_cast<const Basic::Pair*>(item->getValue());
-                if (p != 0) {
+                if (p != nullptr) {
                     const Basic::Object* obj2 = p->object();
                     const Basic::List* msg2 = dynamic_cast<const Basic::List*>(obj2);
-                    if (msg2 != 0) {
+                    if (msg2 != nullptr) {
                         float values[2];
                         int n = msg2->getNumberList(values, 2);
                         if (n == 2) {
@@ -1387,10 +1387,10 @@ bool Graphic::setSlotTexCoord(const Basic::PairStream* const msg)
 bool Graphic::setMaterial(const Basic::Identifier* const msg)
 {
     // Unref old materials
-    if (materialObj != 0) { materialObj->unref(); materialObj = 0; }
-    if (materialName != 0) { materialName->unref(); materialName = 0; }
+    if (materialObj != nullptr) { materialObj->unref(); materialObj = nullptr; }
+    if (materialName != nullptr) { materialName->unref(); materialName = nullptr; }
 
-    if (msg != 0) {
+    if (msg != nullptr) {
         // When we're being passed a name of a material from the material table...
         materialName = msg->clone();
     }
@@ -1400,17 +1400,17 @@ bool Graphic::setMaterial(const Basic::Identifier* const msg)
 //------------------------------------------------------------------------------
 // setMaterial() -- sets our material (by material object)
 //------------------------------------------------------------------------------
-bool Graphic::setMaterial(const BasicGL::Material* const msg)       
+bool Graphic::setMaterial(const BasicGL::Material* const msg)
 {
     // Unref old material
-    if (materialObj != 0) { materialObj->unref(); materialObj = 0; }
-    if (materialName != 0) { materialName->unref(); materialName = 0; }
+    if (materialObj != nullptr) { materialObj->unref(); materialObj = nullptr; }
+    if (materialName != nullptr) { materialName->unref(); materialName = nullptr; }
 
-    if (msg != 0) {
+    if (msg != nullptr) {
         // When we're being passed a material ...
         materialObj = msg->clone();
     }
-    
+
     return true;
 }
 
@@ -1425,26 +1425,26 @@ bool Graphic::setSlotTextureName(Basic::Identifier* obj)
 }
 
 // setStippling() - set the stippling value
-bool Graphic::setStippling(const bool x) 
+bool Graphic::setStippling(const bool x)
 {
    stipple = x;
    return true;
 }
-    
+
 // setStippleFactor() - set the stipple factor value
-bool Graphic::setStippleFactor(const GLuint x) 
+bool Graphic::setStippleFactor(const GLuint x)
 {
    stippleFactor = x;
    return true;
 }
-    
+
 // setStipplePattern() - set the stipple pattern value
-bool Graphic::setStipplePattern(const GLushort x) 
+bool Graphic::setStipplePattern(const GLushort x)
 {
    stipplePattern = x;
    return true;
 }
-    
+
 //------------------------------------------------------------------------------
 // processComponets() -- process our components; make sure the are all of
 // type Graphic (or derived); tell them that we are their container
@@ -1456,7 +1456,7 @@ void Graphic::processComponents(
       Basic::Component* const remove
    )
 {
-   Basic::Component::processComponents(list,typeid(Graphic),add,remove);
+   Basic::Component::processComponents(list, typeid(Graphic),add,remove);
 }
 
 
@@ -1481,10 +1481,10 @@ std::ostream& Graphic::serialize(std::ostream& sout, const int i, const bool slo
         j = 4;
     }
 
-    if (color != 0) {
+    if (color != nullptr) {
         indent(sout,i+j);
         sout << "color: ";
-        if (colorName != 0) {
+        if (colorName != nullptr) {
             // When we have the name of a color from the color table
             Basic::Identifier* cn = static_cast<Basic::Identifier*>(colorName);
             cn->serialize(sout,i+j);
@@ -1509,7 +1509,7 @@ std::ostream& Graphic::serialize(std::ostream& sout, const int i, const bool slo
         sout << "flashRate: " << getFlashRate() << std::endl;
     }
 
-    if (transforms != 0) {
+    if (transforms != nullptr) {
         indent(sout,i+j);
         sout << "transform: {" << std::endl;
         transforms->serialize(sout,i+j+4,slotsOnly);

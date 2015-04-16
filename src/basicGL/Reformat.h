@@ -56,7 +56,7 @@ private:
    bool  postSign;
 };
 
-} // End Basic namespace
+} // End BasicGL namespace
 } // End Eaagles namespace
 
 #endif

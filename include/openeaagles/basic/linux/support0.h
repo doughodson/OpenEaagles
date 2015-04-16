@@ -16,6 +16,6 @@ namespace Eaagles {
 typedef long long int Integer64;
 typedef unsigned long long int LCuint64;
 
-} // End Eaagles namespace
+}
 
 #endif

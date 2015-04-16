@@ -712,7 +712,7 @@ DirectionReadout::DirMode Reformat::convertDirection(const char* s)
    return DirectionReadout::DirMode(yylex(dir));
 }
 
-} // End Basic namespace
+} // End BasicGL namespace
 } // End Eaagles namespace
 
 
