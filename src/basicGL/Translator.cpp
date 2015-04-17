@@ -21,7 +21,7 @@ BEGIN_EVENT_HANDLER(Translator)
 END_EVENT_HANDLER()
 
 //------------------------------------------------------------------------------
-// Constructor(s) 
+// Constructor(s)
 //------------------------------------------------------------------------------
 Translator::Translator()
 {
@@ -53,7 +53,7 @@ void Translator::draw()
     glPushMatrix();
         glTranslated(double(myXPos), double(myYPos), double(myZPos));
         Graphic::draw();
-    glPopMatrix();   
+    glPopMatrix();
 }
 
 // EVENT functions
@@ -63,7 +63,7 @@ void Translator::draw()
 bool Translator::onUpdateX(const Basic::Number* const newX)
 {
     bool ok = false;
-    if (newX != 0) ok = setXPos(newX->getReal());
+    if (newX != nullptr) ok = setXPos(newX->getReal());
     return ok;
 }
 //------------------------------------------------------------------------------
@@ -72,7 +72,7 @@ bool Translator::onUpdateX(const Basic::Number* const newX)
 bool Translator::onUpdateY(const Basic::Number* const newY)
 {
     bool ok = false;
-    if (newY != 0) ok = setYPos(newY->getReal());
+    if (newY != nullptr) ok = setYPos(newY->getReal());
     return ok;
 }
 //------------------------------------------------------------------------------
@@ -81,16 +81,16 @@ bool Translator::onUpdateY(const Basic::Number* const newY)
 bool Translator::onUpdateZ(const Basic::Number* const newZ)
 {
     bool ok = false;
-    if (newZ != 0) ok = setZPos(newZ->getReal());
+    if (newZ != nullptr) ok = setZPos(newZ->getReal());
     return ok;
 }
 
 //------------------------------------------------------------------------------
-// functions for setting member variables 
+// functions for setting member variables
 //------------------------------------------------------------------------------
 bool Translator::setXPos(const LCreal xPos)
 {
-    myXPos = xPos;  
+    myXPos = xPos;
     return true;
 }
 

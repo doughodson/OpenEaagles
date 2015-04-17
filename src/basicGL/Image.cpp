@@ -2,6 +2,7 @@
 #include "openeaagles/basicGL/Image.h"
 #include <fstream>
 #include <cstring>
+#include <cstdio>
 
 // if OpenGL extension is not defined by glu.h, try loading glext.h
 #ifndef GL_BGR_EXT
@@ -150,7 +151,7 @@ void Image::initData()
    height = 0;
    numComponents = 0;
    format = GL_RGB;
-   pixels = 0;
+   pixels = nullptr;
 
    xPixPerMeter = 3937;  // Default: about 100 pixels per inch
    yPixPerMeter = 3937;
@@ -176,7 +177,7 @@ void Image::copyData(const Image& org, const bool cc)
 // deleteData() -
 void Image::deleteData()
 {
-   setPixels(0);
+   setPixels(nullptr);
 
    width = 0;
    height = 0;
@@ -213,10 +214,10 @@ bool Image::setNumComponents(const unsigned int n)
 
 bool Image::setPixels(const GLubyte* const newPixels)
 {
-   if (pixels != 0) {
+   if (pixels != nullptr) {
       // delete the old pixels
       delete[] pixels;
-      pixels = 0;
+      pixels = nullptr;
    }
 
    // copy the new image
@@ -252,14 +253,14 @@ bool Image::readFileBMP(const char* const filename, const char* const path)
 
    // append path name
    const char* p1 = path;
-   if (p1 != 0 && std::strlen(p1) > 0) {
+   if (p1 != nullptr && std::strlen(p1) > 0) {
       lcStrcat(bitmapFile, sizeof(bitmapFile), p1);
       lcStrcat(bitmapFile, sizeof(bitmapFile), "/");
    }
 
    // append file name
    const char* p2 = filename;
-   if (p2 != 0 && std::strlen(p2) > 0) {
+   if (p2 != nullptr && std::strlen(p2) > 0) {
       lcStrcat(bitmapFile, sizeof(bitmapFile), p2);
    }
 
@@ -275,8 +276,8 @@ bool Image::readFileBMP(const char* const filename, const char* const path)
       std::cout << "Image: Loading file: " << filename << std::endl;
    }
 
-   FILE* fp = fopen(bitmapFile,"rb");
-   if (fp == 0) {
+   FILE* fp = std::fopen(bitmapFile,"rb");
+   if (fp == nullptr) {
       if (isMessageEnabled(MSG_ERROR)) {
          std::cerr << "Image::readFileBMP: unable to open bitmap file: " << bitmapFile << std::endl;
       }
@@ -289,26 +290,26 @@ bool Image::readFileBMP(const char* const filename, const char* const path)
    // Read the bitmap file header (BITMAPFILEHEADER)
    char bfType[2];
    uint32_t  bfSize(0);
-   uint16_t bfReserved1(0);
-   uint16_t bfReserved2(0);
+   uint16_t  bfReserved1(0);
+   uint16_t  bfReserved2(0);
    uint32_t  bfOffBits(0);
 
    //unsigned int bitmapFileHdrSize =
    //   sizeof(bfType) + sizeof(bfSize) + sizeof(bfReserved1) + sizeof(bfReserved2) + sizeof(bfOffBits);
 
-   size_t nItemsRead;
-   nItemsRead = fread(&bfType, sizeof(char), 2, fp);
+   size_t nItemsRead(0);
+   nItemsRead = std::fread(&bfType, sizeof(char), 2, fp);
 
-   nItemsRead = fread(&bfSize, sizeof(bfSize), 1, fp);
+   nItemsRead = std::fread(&bfSize, sizeof(bfSize), 1, fp);
    if (swap) bfSize = convertUInt32(bfSize);
 
-   nItemsRead = fread(&bfReserved1, sizeof(bfReserved1), 1, fp);
+   nItemsRead = std::fread(&bfReserved1, sizeof(bfReserved1), 1, fp);
    if (swap) bfReserved1 = convertUInt16(bfReserved1);
 
-   nItemsRead = fread(&bfReserved2, sizeof(bfReserved2), 1, fp);
+   nItemsRead = std::fread(&bfReserved2, sizeof(bfReserved2), 1, fp);
    if (swap) bfReserved2 = convertUInt16(bfReserved2);
 
-   nItemsRead = fread(&bfOffBits, sizeof(bfOffBits), 1, fp);
+   nItemsRead = std::fread(&bfOffBits, sizeof(bfOffBits), 1, fp);
    if (swap) bfOffBits = convertUInt32(bfOffBits);
 
    if (bfType[0] != 'B' || bfType[1] != 'M') {
@@ -321,7 +322,7 @@ bool Image::readFileBMP(const char* const filename, const char* const path)
 
    // Read the bitmap file info
    BITMAPINFOHEADER_X bmfi;
-   nItemsRead = fread(&bmfi, sizeof(BITMAPINFOHEADER_X), 1, fp);
+   nItemsRead = std::fread(&bmfi, sizeof(BITMAPINFOHEADER_X), 1, fp);
 
    if (swap) {
       bmfi.biSize = convertUInt32(bmfi.biSize);
@@ -354,7 +355,7 @@ bool Image::readFileBMP(const char* const filename, const char* const path)
    setYResolutionPPM(bmfi.biYPelsPerMeter);
 
    // Read the colors
-   GLubyte* bmap = 0;
+   GLubyte* bmap = nullptr;
    if (bmfi.biBitCount == 24) {
       setNumComponents(3);
       setFormat(GL_BGR_EXT);
@@ -371,19 +372,19 @@ bool Image::readFileBMP(const char* const filename, const char* const path)
       }
    }
 
-   if (bmap == 0) {
+   if (bmap == nullptr) {
       if (isMessageEnabled(MSG_WARNING)) {
          std::cerr << "Image::readFileBMP(3): invalid bitmap file: " << bitmapFile << std::endl;
       }
    }
 
    // close the file
-   fclose(fp);
+   std::fclose(fp);
 
    // Set the pixel bit map
-   if (bmap != 0) setPixels(bmap);
+   if (bmap != nullptr) setPixels(bmap);
 
-   return (bmap != 0);
+   return (bmap != nullptr);
 }
 
 //------------------------------------------------------------------------------
@@ -397,14 +398,14 @@ bool Image::writeFileBMP(const char* const filename, const char* const path)
 
    // append path name
    const char* p1 = path;
-   if (p1 != 0 && std::strlen(path) > 0) {
+   if (p1 != nullptr && std::strlen(path) > 0) {
       lcStrcat(bitmapFile, sizeof(bitmapFile), p1);
       lcStrcat(bitmapFile, sizeof(bitmapFile), "/");
    }
 
    // append file name
    const char* p2 = filename;
-   if (p2 != 0 && std::strlen(p2) > 0) {
+   if (p2 != nullptr && std::strlen(p2) > 0) {
       lcStrcat(bitmapFile, sizeof(bitmapFile), p2);
    }
 
@@ -431,10 +432,10 @@ bool Image::writeFileBMP(const char* const filename, const char* const path)
 
    // BITMAPFILEHEADER
    unsigned short bfType(0);
-   unsigned int  bfSize(0);
+   unsigned int   bfSize(0);
    unsigned short bfReserved1(0);
    unsigned short bfReserved2(0);
-   unsigned int  bfOffBits(0);
+   unsigned int   bfOffBits(0);
 
    unsigned int bitmapFileHdrSize =
       sizeof(bfType) + sizeof(bfSize) + sizeof(bfReserved1) + sizeof(bfReserved2) + sizeof(bfOffBits);
@@ -510,7 +511,7 @@ bool Image::writeFileBMP(const char* const filename, const char* const path)
    // close the file
    fout->close();
    delete fout;
-   fout = 0;
+   fout = nullptr;
 
    return true;
 }
@@ -525,7 +526,7 @@ GLubyte* Image::readRgbValuesBMP(FILE* const fp, const unsigned int offset, cons
     GLubyte* bmap = new GLubyte[bmSize];
 
     // Position to start of bitmap
-   fseek(fp, offset, SEEK_SET);
+    std::fseek(fp, offset, SEEK_SET);
 
     // Read the bitmap
     size_t widthBytes = (getWidth() * getNumComponents());          // Number of bytes we want per row
@@ -537,10 +538,10 @@ GLubyte* Image::readRgbValuesBMP(FILE* const fp, const unsigned int offset, cons
         size_t n = fread(p, widthBytes, 1, fp);
         if (n == 0) {
             delete[] bmap;
-            return 0;
+            return nullptr;
         }
         if (seekBytes > 0) {
-            fseek(fp, int(seekBytes), SEEK_CUR);
+            std::fseek(fp, int(seekBytes), SEEK_CUR);
         }
     }
 
@@ -564,7 +565,7 @@ GLubyte* Image::readColorValuesBMP(FILE* const fp, const unsigned int offset, co
     size_t nItemRead = fread(colorTable, 4, ctSize, fp);
 
     // Position to start of colors
-    fseek(fp, offset, SEEK_SET);
+    std::fseek(fp, offset, SEEK_SET);
 
     // Read the bitmap
     unsigned int nbytes = (((bmfi->biWidth + 3) / 4 ) * 4); // round up to 4 byte boundary
@@ -583,7 +584,7 @@ GLubyte* Image::readColorValuesBMP(FILE* const fp, const unsigned int offset, co
         }
         else {
             delete[] bmap;
-            bmap = 0;
+            bmap = nullptr;
         }
     }
 
@@ -637,7 +638,7 @@ bool Image::writeFileTGA(const char* const filename)
    TargaHead.imageDescriptor = 0;
 
    // Create the output file
-   std::ofstream* f = 0;
+   std::ofstream* f = nullptr;
 
    // Create the output stream
    f = new std::ofstream();
@@ -661,7 +662,7 @@ bool Image::writeFileTGA(const char* const filename)
 
    // delete the pointer
    delete f;
-   f = 0;
+   f = nullptr;
 
    return true;
 }

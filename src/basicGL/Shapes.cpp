@@ -53,7 +53,7 @@ void Circle::copyData(const Circle& org, const bool)
 bool Circle::updateRadius(const Basic::Number* const x)
 {
     bool ok = false;
-    if (x != 0) ok = setRadius(x->getReal());
+    if (x != nullptr) ok = setRadius(x->getReal());
     return ok;
 }
 
@@ -77,25 +77,25 @@ void Circle::drawFunc()
 bool Circle::setSlotRadius(const Basic::Number* const x)
 {
     bool ok = false;
-    if (x != 0) ok = setRadius(x->getReal());
+    if (x != nullptr) ok = setRadius(x->getReal());
     return ok;
 }
 
 bool Circle::setSlotFilled(const Basic::Number* const x)
 {
     bool ok = false;
-    if (x != 0) ok = setFilled(x->getBoolean());
+    if (x != nullptr) ok = setFilled(x->getBoolean());
     return ok;
 }
 
 bool Circle::setSlotSlices(const Basic::Number* const x)
 {
     bool ok = false;
-    if (x != 0) ok = setSlices(x->getInt());
+    if (x != nullptr) ok = setSlices(x->getInt());
     return ok;
 }
 
-// getSlotByIndex() 
+// getSlotByIndex()
 Basic::Object* Circle::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
@@ -149,7 +149,7 @@ OcclusionCircle::OcclusionCircle()
 {
     STANDARD_CONSTRUCTOR()
     // outer radius just a bit bigger than inner radius
-    outerRadius = 1.1f;   
+    outerRadius = 1.1f;
     setFilled(true);
     setSlices(100);
 }
@@ -165,7 +165,7 @@ void OcclusionCircle::copyData(const OcclusionCircle& org, const bool)
 void OcclusionCircle::drawFunc()
 {
    BEGIN_DLIST
-   GLUquadricObj *qobj = gluNewQuadric();
+   GLUquadricObj* qobj = gluNewQuadric();
    if (isFilled()) {
       gluQuadricDrawStyle(qobj, GLU_FILL);
    }
@@ -181,11 +181,11 @@ void OcclusionCircle::drawFunc()
 bool OcclusionCircle::setSlotOuterRadius(const Basic::Number* const x)
 {
     bool ok = false;
-    if (x != 0) ok = setOuterRadius(x->getReal());
+    if (x != nullptr) ok = setOuterRadius(x->getReal());
     return ok;
 }
 
-// getSlotByIndex() 
+// getSlotByIndex()
 Basic::Object* OcclusionCircle::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
@@ -256,7 +256,7 @@ void Arc::copyData(const Arc& org, const bool)
 void Arc::drawFunc()
 {
    BEGIN_DLIST
-   GLUquadricObj *qobj = gluNewQuadric();
+   GLUquadricObj* qobj = gluNewQuadric();
    if (isFilled()) {
       gluQuadricDrawStyle(qobj, GLU_FILL);
    }
@@ -277,25 +277,25 @@ void Arc::drawFunc()
 bool Arc::setSlotStartAngle(const Basic::Number* const x)
 {
     bool ok = false;
-    if (x != 0) ok = setStartAngle(x->getReal());
+    if (x != nullptr) ok = setStartAngle(x->getReal());
     return ok;
 }
 
 bool Arc::setSlotArcLength(const Basic::Number* const x)
 {
     bool ok = false;
-    if (x != 0) ok = setArcLength(x->getReal());
+    if (x != nullptr) ok = setArcLength(x->getReal());
     return ok;
 }
 
 bool Arc::setSlotIsConnected(const Basic::Number* const x)
 {
     bool ok = false;
-    if (x != 0) ok = setIsConnected(x->getBoolean());
+    if (x != nullptr) ok = setIsConnected(x->getBoolean());
     return ok;
 }
 
-// getSlotByIndex() 
+// getSlotByIndex()
 Basic::Object* Arc::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
@@ -346,7 +346,7 @@ OcclusionArc::OcclusionArc()
 {
     STANDARD_CONSTRUCTOR()
     // outer radius just a bit bigger than inner radius
-    outerRadius = 1.1f;   
+    outerRadius = 1.1f;
     setFilled(true);
     setSlices(100);
 }
@@ -362,16 +362,16 @@ void OcclusionArc::copyData(const OcclusionArc& org, const bool)
 void OcclusionArc::drawFunc()
 {
    BEGIN_DLIST
-   GLUquadricObj *qobj = gluNewQuadric();
+   GLUquadricObj* qobj = gluNewQuadric();
    if (isFilled()) {
       gluQuadricDrawStyle(qobj, GLU_FILL);
    }
    else {
       gluQuadricDrawStyle(qobj, GLU_SILHOUETTE);
    }
-   
+
    gluPartialDisk(qobj, getRadius(), outerRadius, getSlices(), 2, getStartAngle(), getArcLength());
-   
+
    gluDeleteQuadric(qobj);
    END_DLIST
 }
@@ -380,11 +380,11 @@ void OcclusionArc::drawFunc()
 bool OcclusionArc::setSlotOuterRadius(const Basic::Number* const x)
 {
     bool ok = false;
-    if (x != 0) ok = setOuterRadius(x->getReal());
+    if (x != nullptr) ok = setOuterRadius(x->getReal());
     return ok;
 }
 
-// getSlotByIndex() 
+// getSlotByIndex()
 Basic::Object* OcclusionArc::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
@@ -427,7 +427,7 @@ EMPTY_DELETEDATA(Point)
 void Point::drawFunc()
 {
    BEGIN_DLIST
-   unsigned int n = getNumberOfVertices();
+   const unsigned int n = getNumberOfVertices();
    const osg::Vec3* v = getVertices();
    glBegin(GL_POINTS);
    for (unsigned int i = 0; i < n; i++) {
@@ -451,7 +451,7 @@ EMPTY_DELETEDATA(LineLoop)
 void LineLoop::drawFunc()
 {
    BEGIN_DLIST
-   unsigned int n = getNumberOfVertices();
+   const unsigned int n = getNumberOfVertices();
    const osg::Vec3* v = getVertices();
    if (n >= 2) {
       glBegin(GL_LINE_LOOP);
@@ -495,7 +495,7 @@ void Line::copyData(const Line& org, const bool)
 void Line::drawFunc()
 {
    BEGIN_DLIST
-   unsigned int n = getNumberOfVertices();
+   const unsigned int n = getNumberOfVertices();
    const osg::Vec3* v = getVertices();
    if (n >= 2) {
       if (segment) {
@@ -522,11 +522,11 @@ void Line::drawFunc()
 bool Line::setSlotSegments(const Basic::Number* const x)
 {
     bool ok = false;
-    if (x != 0) ok = setSegments(x->getBoolean());
+    if (x != nullptr) ok = setSegments(x->getBoolean());
     return ok;
 }
 
-// getSlotByIndex() 
+// getSlotByIndex()
 Basic::Object* Line::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
@@ -573,13 +573,13 @@ END_SLOT_MAP()
 Quad::Quad()
 {
     STANDARD_CONSTRUCTOR()
-    strip = false;    
+    strip = false;
 }
 
 void Quad::copyData(const Quad& org, const bool)
 {
     BaseClass::copyData(org);
-    
+
     strip = org.strip;
 }
 
@@ -587,7 +587,7 @@ void Quad::copyData(const Quad& org, const bool)
 bool Quad::setSlotStrip(const Basic::Number* const x)
 {
     bool ok = false;
-    if (x != 0) {
+    if (x != nullptr) {
         ok = setStrip(x->getBoolean());
     }
     return ok;
@@ -597,11 +597,10 @@ bool Quad::setSlotStrip(const Basic::Number* const x)
 // Draw function
 void Quad::drawFunc()
 {
-    
     bool ok = false;
-    
+
     // Draw with texture
-    unsigned int nv = getNumberOfVertices();
+    const unsigned int nv = getNumberOfVertices();
     if (nv > 3) {
         if (!strip) {
             int rem = nv % 4;
@@ -621,12 +620,12 @@ void Quad::drawFunc()
                 ok = true;
             }
         }
-        
+
         if (ok) {
             // get our regular vertices here
             const osg::Vec3* v = getVertices();
 
-            unsigned int ntc = getNumberOfTextureCoords();
+            const unsigned int ntc = getNumberOfTextureCoords();
             // draw with texture
             if (ntc > 0 && hasTexture()) {
                 const osg::Vec2* texCoord = getTextureCoord();
@@ -637,17 +636,17 @@ void Quad::drawFunc()
                     // now our vertices
                     lcVertex3v( v[i].ptr() );
                 }
-                
+
             }
             // draw without texture
             else {
-                // get our color gradient and apply it (if we have one)            
+                // get our color gradient and apply it (if we have one)
                 ColorGradient* colGradient = dynamic_cast<ColorGradient*>(getColor());
 
                 for (unsigned int i = 0; i < nv; i++) {
-                    if (colGradient != 0) {
+                    if (colGradient != nullptr) {
                         Basic::Color* col = colGradient->getColorByIdx(i+1);
-                        if (col != 0)
+                        if (col != nullptr)
                             glColor4f(static_cast<GLfloat>(col->red()),
                                       static_cast<GLfloat>(col->green()),
                                       static_cast<GLfloat>(col->blue()),
@@ -661,11 +660,11 @@ void Quad::drawFunc()
             END_DLIST
         }
     }
-    
+
     else std::cerr << "Quad::drawFunc() - Quad or QuadStrip needs at least 4 vertices!" << std::endl;
 }
 
-// getSlotByIndex() 
+// getSlotByIndex()
 Basic::Object* Quad::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
@@ -718,7 +717,7 @@ Triangle::Triangle()
 void Triangle::copyData(const Triangle& org, const bool)
 {
     BaseClass::copyData(org);
-    
+
     fan = org.fan;
 }
 
@@ -726,24 +725,22 @@ void Triangle::copyData(const Triangle& org, const bool)
 bool Triangle::setSlotFan(const Basic::Number* const x)
 {
     bool ok = false;
-    if (x != 0) {
+    if (x != nullptr) {
         ok = setFan(x->getBoolean());
     }
     return ok;
 }
-
-
 
 // Draw function
 void Triangle::drawFunc()
 {
     // get our color gradient and apply it (if we have one)
     unsigned int nv = getNumberOfVertices();
-    
+
     bool ok = false;
     if (nv > 2) {
         if (!strip && !fan) {
-            int rem = nv % 3;
+            const int rem = nv % 3;
             if (rem != 0) std::cerr << "Triangle::drawFunc() - Triangles have to have multiple of 3 vertices, add or remove vertices!!" << std::endl;
             else {
                 BEGIN_DLIST
@@ -761,12 +758,12 @@ void Triangle::drawFunc()
             glBegin(GL_TRIANGLE_STRIP);
             ok = true;
         }
-        
+
         if (ok) {
             // get our regular vertices here
             const osg::Vec3* v = getVertices();
 
-            unsigned int ntc = getNumberOfTextureCoords();
+            const unsigned int ntc = getNumberOfTextureCoords();
             // draw with texture
             if (ntc > 0 && hasTexture()) {
                 const osg::Vec2* texCoord = getTextureCoord();
@@ -777,11 +774,11 @@ void Triangle::drawFunc()
                     // now our vertices
                     lcVertex3v( v[i].ptr() );
                 }
-                
+
             }
             // draw without texture
             else {
-                // get our color gradient and apply it (if we have one)            
+                // get our color gradient and apply it (if we have one)
                 ColorGradient* colGradient = dynamic_cast<ColorGradient*>(getColor());
 
                 for (unsigned int i = 0; i < nv; i++) {
@@ -804,7 +801,7 @@ void Triangle::drawFunc()
     else std::cerr << "Triangle::drawFunc() - Triangle or Triangle needs at least 3 vertices!" << std::endl;
 }
 
-// getSlotByIndex() 
+// getSlotByIndex()
 Basic::Object* Triangle::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);

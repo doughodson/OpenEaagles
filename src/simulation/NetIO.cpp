@@ -1755,7 +1755,7 @@ bool NtmOutputNodeStd::checkAndAddNtm(Ntm* const tgtNtm)
       // form name as this node then we just add it to the list
       // of Ntm objects assigned to this node.
       if (nodeFactoryName != 0) {
-         ok = (strcmp(tpfn, nodeFactoryName) == 0);
+         ok = (std::strcmp(tpfn, nodeFactoryName) == 0);
          if (ok) addNtmSorted(tgtNtm);
       }
 

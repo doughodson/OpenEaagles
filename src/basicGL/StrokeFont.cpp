@@ -24,7 +24,7 @@ const LCreal defaultFontHeight = 9.0f * YSCALE;
 StrokeFont::StrokeFont()
 {
     STANDARD_CONSTRUCTOR()
-    
+
     setFontWidth( defaultFontWidth );
     setFontHeight( defaultFontHeight );
     setCharacterSpacing( defaultFontWidth );
@@ -63,7 +63,7 @@ void StrokeFont::outputText(const double x, const double y, const char* txt, con
 
     // Prepare the output text
     char cbuf[MSG_BUF_LEN];
-    int nn = xferChars(cbuf,MSG_BUF_LEN,txt,n);
+    const int nn = xferChars(cbuf,MSG_BUF_LEN,txt,n);
     if (nn <= 0) return;
 
     // Set the base
@@ -111,7 +111,7 @@ void StrokeFont::outputText(const char* txt, const int n, const bool vf, const b
 
     // Prepare the output text
     char cbuf[MSG_BUF_LEN];
-    int nn = xferChars(cbuf,MSG_BUF_LEN,txt,n);
+    const int nn = xferChars(cbuf,MSG_BUF_LEN,txt,n);
     if (nn <= 0) return;
 
     // Set the base
@@ -151,7 +151,7 @@ void StrokeFont::outputText(const char* txt, const int n, const bool vf, const b
 void StrokeFont::loadFont()
 {
     if (isLoaded()) return;
-    
+
     // create the stroke font
     setBase( glGenLists(256) );
     createStrokeFont( getBase() );
@@ -165,14 +165,14 @@ void StrokeFont::loadFont()
 
 /*
  * (c) Copyright 1993, Silicon Graphics, Inc.
- * ALL RIGHTS RESERVED 
- * Permission to use, copy, modify, and distribute this software for 
+ * ALL RIGHTS RESERVED
+ * Permission to use, copy, modify, and distribute this software for
  * any purpose and without fee is hereby granted, provided that the above
  * copyright notice appear in all copies and that both the copyright notice
- * and this permission notice appear in supporting documentation, and that 
+ * and this permission notice appear in supporting documentation, and that
  * the name of Silicon Graphics, Inc. not be used in advertising
  * or publicity pertaining to distribution of the software without specific,
- * written prior permission. 
+ * written prior permission.
  *
  * THE MATERIAL EMBODIED ON THIS SOFTWARE IS PROVIDED TO YOU "AS-IS"
  * AND WITHOUT WARRANTY OF ANY KIND, EXPRESS, IMPLIED OR OTHERWISE,
@@ -186,8 +186,8 @@ void StrokeFont::loadFont()
  * ADVISED OF THE POSSIBILITY OF SUCH LOSS, HOWEVER CAUSED AND ON
  * ANY THEORY OF LIABILITY, ARISING OUT OF OR IN CONNECTION WITH THE
  * POSSESSION, USE OR PERFORMANCE OF THIS SOFTWARE.
- * 
- * US Government Users Restricted Rights 
+ *
+ * US Government Users Restricted Rights
  * Use, duplication, or disclosure by the Government is subject to
  * restrictions set forth in FAR 52.227.19(c)(2) or subparagraph
  * (c)(1)(ii) of the Rights in Technical Data and Computer Software
@@ -346,7 +346,7 @@ static GLdouble strokeFont[][1+MAX_STROKES*3] = {
       FONT_ADVANCE, 6, 0
    },
    {
-      15,   // 
+      15,   //
       FONT_BEGIN, 0, 3,
       FONT_NEXT, 0, 4,
       FONT_NEXT, 1, 5,
@@ -1180,7 +1180,7 @@ static GLdouble strokeFont[][1+MAX_STROKES*3] = {
       FONT_ADVANCE, 6, 0
    },
    {
-      95, 
+      95,
       FONT_BEGIN, 2, 3,
       FONT_NEXT, 0, 5,
       FONT_END, 2, 7,
@@ -1262,21 +1262,21 @@ GLenum StrokeFont::createStrokeFont(GLuint fontBase)
    for (GLint i = 0; strokeFont[i][0] != END_OF_LIST; i++) {
       glNewList(fontBase+static_cast<unsigned int>(strokeFont[i][0]), GL_COMPILE);
       for (GLint j = 1; strokeFont[i][j]; j += 3) {
-         unsigned int mode = static_cast<unsigned int>(strokeFont[i][j]);
+         const unsigned int mode = static_cast<unsigned int>(strokeFont[i][j]);
          if (mode == FONT_BEGIN) {
             glBegin(GL_LINE_STRIP);
-            glVertex2d(double(strokeFont[i][j+1]-XOFFSET)*XSCALE,
-               double(strokeFont[i][j+2]-YOFFSET)*YSCALE);
+            glVertex2d(static_cast<double>(strokeFont[i][j+1]-XOFFSET)*XSCALE,
+                       static_cast<double>(strokeFont[i][j+2]-YOFFSET)*YSCALE);
          } else if (mode == FONT_NEXT) {
-            glVertex2d(double(strokeFont[i][j+1]-XOFFSET)*XSCALE,
-               double(strokeFont[i][j+2]-YOFFSET)*YSCALE);
+            glVertex2d(static_cast<double>(strokeFont[i][j+1]-XOFFSET)*XSCALE,
+                       static_cast<double>(strokeFont[i][j+2]-YOFFSET)*YSCALE);
          } else if (mode == FONT_END) {
-            glVertex2d(double(strokeFont[i][j+1]-XOFFSET)*XSCALE,
-               double(strokeFont[i][j+2]-YOFFSET)*YSCALE);
+            glVertex2d(static_cast<double>(strokeFont[i][j+1]-XOFFSET)*XSCALE,
+                       static_cast<double>(strokeFont[i][j+2]-YOFFSET)*YSCALE);
             glEnd();
          } else if (mode == FONT_ADVANCE) {
-            glTranslated(double(strokeFont[i][j+1])*XSCALE,
-               double(strokeFont[i][j+2])*YSCALE, 0.0);
+            glTranslated(static_cast<double>(strokeFont[i][j+1])*XSCALE,
+                         static_cast<double>(strokeFont[i][j+2])*YSCALE, 0.0);
             break;
          }
       }

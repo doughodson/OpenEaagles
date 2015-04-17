@@ -12,6 +12,8 @@
 #include "openeaagles/basic/Pair.h"
 #include "openeaagles/basic/PairStream.h"
 
+#include <cstring>
+
 namespace Eaagles {
 namespace Maps {
 namespace Rpf {
@@ -188,7 +190,7 @@ void CadrgMap::sortMaps(const int count)
                             bool match = false;
                             for (int k = 0; k < sCount; k++) {
                                 if (scales[k] != 0) {
-                                    if (strcmp(scales[k].getString(), toc->getScale()) == 0) {
+                                    if (std::strcmp(scales[k].getString(), toc->getScale()) == 0) {
                                         match = true;
                                         num2Add[k]++;
                                     }
@@ -221,7 +223,7 @@ void CadrgMap::sortMaps(const int count)
                     for (int j = 0; j < nb; j++) {
                         CadrgTocEntry* toc = cadrgFiles[i]->entry(j);
                         if (toc != 0) {
-                            if (strcmp(toc->getScale(), scales[y].getString()) == 0) {
+                            if (std::strcmp(toc->getScale(), scales[y].getString()) == 0) {
                                 mergedCadrgFiles[mFile]->addTocEntry(toc, tocIndex++);
                             }
                         }
@@ -337,36 +339,36 @@ bool CadrgMap::zoomInMapLevel()
     int index = 0;
     if (mapLevel != 0) {
         // Early out check, we have zoomed in as far as we can
-        if (strcmp(mapLevel->getString(), "5M") == 0) return false;
+        if (std::strcmp(mapLevel->getString(), "5M") == 0) return false;
 
         Basic::String* newLevel = new Basic::String();
         //Zoom in if we can
-        if (strcmp(mapLevel->getString(), "10M") == 0) {
+        if (std::strcmp(mapLevel->getString(), "10M") == 0) {
             newLevel->setStr("5M");
             ok = true;
             index = 1;
         }
-        else if (strcmp(mapLevel->getString(), "1:250K") == 0) {
+        else if (std::strcmp(mapLevel->getString(), "1:250K") == 0) {
             newLevel->setStr("10M");
             ok = true;
             index = 2;
         }
-        else if (strcmp(mapLevel->getString(), "1:500K") == 0) {
+        else if (std::strcmp(mapLevel->getString(), "1:500K") == 0) {
             newLevel->setStr("1:250K");
             ok = true;
             index = 3;
         }
-        else if (strcmp(mapLevel->getString(), "1:1M") == 0) {
+        else if (std::strcmp(mapLevel->getString(), "1:1M") == 0) {
             newLevel->setStr("1:500K");
             ok = true;
             index = 4;
         }
-        else if (strcmp(mapLevel->getString(), "1:2M") == 0) {
+        else if (std::strcmp(mapLevel->getString(), "1:2M") == 0) {
             newLevel->setStr("1:1M");
             ok = true;
             index = 5;
         }
-        else if (strcmp(mapLevel->getString(), "1:5M") == 0) {
+        else if (std::strcmp(mapLevel->getString(), "1:5M") == 0) {
             newLevel->setStr("1:2M");
             ok = true;
             index = 6;
@@ -399,36 +401,36 @@ bool CadrgMap::zoomOutMapLevel()
     int index = 0;
     if (mapLevel != 0) {
         // Early out check, we have zoomed out as far as we can
-        if (strcmp(mapLevel->getString(), "1:5M") == 0) return false;
+        if (std::strcmp(mapLevel->getString(), "1:5M") == 0) return false;
 
         Basic::String* newLevel = new Basic::String();
         //Zoom in if we can
-        if (strcmp(mapLevel->getString(), "5M") == 0) {
+        if (std::strcmp(mapLevel->getString(), "5M") == 0) {
             newLevel->setStr("10M");
             ok = true;
             index = 6;
         }
-        else if (strcmp(mapLevel->getString(), "10M") == 0) {
+        else if (std::strcmp(mapLevel->getString(), "10M") == 0) {
             newLevel->setStr("1:250K");
             ok = true;
             index = 5;
         }
-        else if (strcmp(mapLevel->getString(), "1:250K") == 0) {
+        else if (std::strcmp(mapLevel->getString(), "1:250K") == 0) {
             newLevel->setStr("1:500K");
             ok = true;
             index = 4;
         }
-        else if (strcmp(mapLevel->getString(), "1:500K") == 0) {
+        else if (std::strcmp(mapLevel->getString(), "1:500K") == 0) {
             newLevel->setStr("1:1M");
             ok = true;
             index = 3;
         }
-        else if (strcmp(mapLevel->getString(), "1:1M") == 0) {
+        else if (std::strcmp(mapLevel->getString(), "1:1M") == 0) {
             newLevel->setStr("1:2M");
             ok = true;
             index = 2;
         }
-        else if (strcmp(mapLevel->getString(), "1:2M") == 0) {
+        else if (std::strcmp(mapLevel->getString(), "1:2M") == 0) {
             newLevel->setStr("1:5M");
             ok = true;
             index = 1;
@@ -487,7 +489,7 @@ bool CadrgMap::setMapLevel(const char* x)
                 CadrgTocEntry* toc = mergedCadrgFiles[i]->entry(j);
                 if (toc != 0) {
                     // If we find the right scale, and our current file isn't = to our last file, we set it.
-                    if (strcmp(toc->getScale(), x) == 0) {
+                    if (std::strcmp(toc->getScale(), x) == 0) {
                         if (curCadrgFile != mergedCadrgFiles[i]) {
                             // This file has our current level on it
                             if (curCadrgFile != 0) curCadrgFile->unref();

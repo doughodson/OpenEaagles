@@ -28,7 +28,7 @@ BEGIN_SLOTTABLE(Texture)
 END_SLOTTABLE(Texture)
 
 //------------------------------------------------------------------------------
-//  Map slot table to handles 
+//  Map slot table to handles
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(Texture)
     ON_SLOT(1,  setSlotWidth, Basic::Number)
@@ -74,17 +74,17 @@ void Texture::initData()
     greenScale = 1.0f;
     greenBias = 0.0f;
     blueScale = 1.0f;
-    blueBias = 0.0f; 
+    blueBias = 0.0f;
 }
 
 //------------------------------------------------------------------------------
-// copyData() - 
+// copyData() -
 //------------------------------------------------------------------------------
 void Texture::copyData(const Texture& org, const bool cc)
 {
     BaseClass::copyData(org);
     if (cc) initData();
-    
+
     texture = 0;  // copies need their own texture identifier
 
     wrapS = org.wrapS;
@@ -96,7 +96,7 @@ void Texture::copyData(const Texture& org, const bool cc)
     greenScale = org.greenScale;
     greenBias = org.greenBias;
     blueScale = org.blueScale;
-    blueBias = org.blueBias; 
+    blueBias = org.blueBias;
 }
 
 
@@ -105,7 +105,7 @@ void Texture::copyData(const Texture& org, const bool cc)
 //------------------------------------------------------------------------------
 void Texture::loadTexture()
 {
-   if (getPixels() != 0) {
+   if (getPixels() != nullptr) {
       // get our texture ID
         GLuint txt = getTexture();
 
@@ -272,7 +272,7 @@ bool Texture::setWrapS(const int v)
     if (v == GL_CLAMP || v == GL_REPEAT) {
         wrapS = v;
         ok = true;
-    } 
+    }
     return ok;
 }
 
@@ -285,7 +285,7 @@ bool Texture::setWrapT(const int v)
     if (v == GL_CLAMP || v == GL_REPEAT) {
         wrapT = v;
         ok = true;
-    } 
+    }
     return ok;
 }
 
@@ -298,7 +298,7 @@ bool Texture::setMagFilter(const int v)
     if (v == GL_NEAREST || v == GL_LINEAR) {
         magFilter = v;
         ok = true;
-    } 
+    }
     return ok;
 }
 
@@ -311,7 +311,7 @@ bool Texture::setMinFilter(const int v)
     if (v == GL_NEAREST || v == GL_LINEAR) {
         minFilter = v;
         ok = true;
-    } 
+    }
     return ok;
 }
 
@@ -326,7 +326,7 @@ bool Texture::setMinFilter(const int v)
 bool Texture::setSlotWidth(const Basic::Number* const size)
 {
     bool ok = false;
-    if (size != 0) ok = setWidth(size->getInt());
+    if (size != nullptr) ok = setWidth(size->getInt());
     return ok;
 }
 
@@ -336,7 +336,7 @@ bool Texture::setSlotWidth(const Basic::Number* const size)
 bool Texture::setSlotHeight(const Basic::Number* const size)
 {
     bool ok = false;
-    if (size != 0) ok = setHeight(size->getInt());
+    if (size != nullptr) ok = setHeight(size->getInt());
     return ok;
 }
 
@@ -346,7 +346,7 @@ bool Texture::setSlotHeight(const Basic::Number* const size)
 bool Texture::setSlotRedScale(const Basic::Number* const s)
 {
     bool ok = false;
-    if (s != 0) ok = setRedScale(static_cast<GLfloat>(s->getReal()));
+    if (s != nullptr) ok = setRedScale(static_cast<GLfloat>(s->getReal()));
     return ok;
 }
 
@@ -356,7 +356,7 @@ bool Texture::setSlotRedScale(const Basic::Number* const s)
 bool Texture::setSlotRedBias(const Basic::Number* const b)
 {
     bool ok = false;
-    if (b != 0) ok = setRedBias(static_cast<GLfloat>(b->getReal()));
+    if (b != nullptr) ok = setRedBias(static_cast<GLfloat>(b->getReal()));
     return ok;
 }
 
@@ -366,7 +366,7 @@ bool Texture::setSlotRedBias(const Basic::Number* const b)
 bool Texture::setSlotGreenScale(const Basic::Number* const s)
 {
     bool ok = false;
-    if (s != 0) ok = setGreenScale(static_cast<GLfloat>(s->getReal()));
+    if (s != nullptr) ok = setGreenScale(static_cast<GLfloat>(s->getReal()));
     return ok;
 }
 
@@ -376,7 +376,7 @@ bool Texture::setSlotGreenScale(const Basic::Number* const s)
 bool Texture::setSlotGreenBias(const Basic::Number* const b)
 {
     bool ok = false;
-    if (b != 0) ok = setGreenBias(static_cast<GLfloat>(b->getReal()));
+    if (b != nullptr) ok = setGreenBias(static_cast<GLfloat>(b->getReal()));
     return ok;
 }
 
@@ -386,7 +386,7 @@ bool Texture::setSlotGreenBias(const Basic::Number* const b)
 bool Texture::setSlotBlueScale(const Basic::Number* const s)
 {
     bool ok = false;
-    if (s != 0) ok = setBlueScale(static_cast<GLfloat>(s->getReal()));
+    if (s != nullptr) ok = setBlueScale(static_cast<GLfloat>(s->getReal()));
     return ok;
 }
 
@@ -396,7 +396,7 @@ bool Texture::setSlotBlueScale(const Basic::Number* const s)
 bool Texture::setSlotBlueBias(const Basic::Number* const b)
 {
     bool ok = false;
-    if (b != 0) ok = setBlueBias(static_cast<GLfloat>(b->getReal()));
+    if (b != nullptr) ok = setBlueBias(static_cast<GLfloat>(b->getReal()));
     return ok;
 }
 
@@ -406,7 +406,7 @@ bool Texture::setSlotBlueBias(const Basic::Number* const b)
 bool Texture::setSlotWrapS(const Basic::Identifier* const v)
 {
     bool ok = false;
-    if (v != 0) {
+    if (v != nullptr) {
         if (*v == "clamp") ok = setWrapS(GL_CLAMP);
         else if (*v == "repeat") ok = setWrapS(GL_REPEAT);
         else {
@@ -424,7 +424,7 @@ bool Texture::setSlotWrapS(const Basic::Identifier* const v)
 bool Texture::setSlotWrapT(const Basic::Identifier* const v)
 {
     bool ok = false;
-    if (v != 0) {
+    if (v != nullptr) {
         if (*v == "clamp") ok = setWrapT(GL_CLAMP);
         else if (*v == "repeat") ok = setWrapT(GL_REPEAT);
         else {
@@ -442,7 +442,7 @@ bool Texture::setSlotWrapT(const Basic::Identifier* const v)
 bool Texture::setSlotMagFilter(const Basic::Identifier* const v)
 {
     bool ok = false;
-    if (v != 0) {
+    if (v != nullptr) {
         if (*v == "nearest") ok = setMagFilter(GL_NEAREST);
         else if (*v == "linear") ok = setMagFilter(GL_LINEAR);
         else {
@@ -460,7 +460,7 @@ bool Texture::setSlotMagFilter(const Basic::Identifier* const v)
 bool Texture::setSlotMinFilter(const Basic::Identifier* const v)
 {
     bool ok = false;
-    if (v != 0) {
+    if (v != nullptr) {
         if (*v == "nearest") ok = setMinFilter(GL_NEAREST);
         else if (*v == "linear") ok = setMinFilter(GL_LINEAR);
         else {

@@ -12,8 +12,6 @@ namespace BasicGL {
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Polygon,"Polygon")
 EMPTY_SERIALIZER(Polygon)
 
-
-
 //------------------------------------------------------------------------------
 // Constructor(s)
 //------------------------------------------------------------------------------
@@ -25,7 +23,6 @@ Polygon::Polygon()
    norm.set(1,0,0);
    layerValue = 0;
 }
-
 
 //------------------------------------------------------------------------------
 // copyData() -- copy member data
@@ -39,7 +36,6 @@ void Polygon::copyData(const Polygon& org, const bool)
    norm = org.norm;
    layerValue = org.layerValue;
 }
-
 
 //------------------------------------------------------------------------------
 // deleteData() -- delete member data
@@ -58,7 +54,7 @@ bool Polygon::calcNormal()
    else {
       norm.set(1.0f,0.0f,0.0f);
    }
- 
+
    return ok;
 }
 
@@ -74,7 +70,6 @@ bool Polygon::calcNormal(osg::Vec3& n, const osg::Vec3 v[3])
 
    return true;
 }
-
 
 //------------------------------------------------------------------------------
 // find the coefficients of the plane equation
@@ -109,10 +104,9 @@ bool Polygon::calcPlaneCoeff()
       coeffValid = false;
       coeff.set(0,0,0,0);
    }
- 
+
    return coeffValid;
 }
-
 
 //------------------------------------------------------------------------------
 // compute the z value at point p using plane coefficients c.
@@ -153,7 +147,7 @@ void Polygon::drawFunc()
                 lcVertex3v( vertices[i].ptr() );
             }
             glEnd();
-            
+
         }
 
         // Draw without texture
@@ -162,23 +156,23 @@ void Polygon::drawFunc()
             // override it here and set it on a per vertex level.
             ColorGradient* colGradient = dynamic_cast<ColorGradient*>(getColor());
             glBegin(GL_POLYGON);
-            osg::Vec3* ptr = 0;
+            osg::Vec3* ptr = nullptr;
             for (unsigned int i = 0; i < nv; i++) {
-                if (colGradient != 0) {
+                if (colGradient != nullptr) {
                     Basic::Color* col = colGradient->getColorByIdx(i+1);
-                    if (col != 0)
+                    if (col != nullptr)
                        glColor4f(static_cast<GLfloat>(col->red()), static_cast<GLfloat>(col->green()),
                                  static_cast<GLfloat>(col->blue()), static_cast<GLfloat>(col->alpha()));
                 }
                 // if we have a material name, we will set up like we have a material
-                if (getMaterialName() != 0) {
+                if (getMaterialName() != nullptr) {
                     //lcVertex3v( vertices[i].ptr() );
                     ptr = const_cast<osg::Vec3*>(reinterpret_cast<const osg::Vec3*>(vertices[i].ptr()));
 
-                    if (ptr != 0) {
+                    if (ptr != nullptr) {
                         calcNormal();
                         lcNormal3(norm.x(), norm.y(), -(norm.z()));
-                        lcVertex3(ptr->x(), ptr->y(), ptr->z());     
+                        lcVertex3(ptr->x(), ptr->y(), ptr->z());
                     }
                 }
                 else {

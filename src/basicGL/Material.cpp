@@ -21,18 +21,18 @@ BEGIN_SLOTTABLE(Material)
 END_SLOTTABLE(Material)
 
 //------------------------------------------------------------------------------
-//  Map slot table to handles 
+//  Map slot table to handles
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(Material)
     ON_SLOT( 1, setSlotAmbientColor, Basic::PairStream )
-    ON_SLOT( 1, setSlotAmbientColor, Basic::Number)        
+    ON_SLOT( 1, setSlotAmbientColor, Basic::Number)
     ON_SLOT( 2, setSlotDiffuseColor, Basic::PairStream )
-    ON_SLOT( 2, setSlotDiffuseColor, Basic::Number)        
+    ON_SLOT( 2, setSlotDiffuseColor, Basic::Number)
     ON_SLOT( 3, setSlotEmissiveColor, Basic::PairStream )
-    ON_SLOT( 3, setSlotEmissiveColor, Basic::Number)        
+    ON_SLOT( 3, setSlotEmissiveColor, Basic::Number)
     ON_SLOT( 4, setSlotSpecularColor, Basic::PairStream )
-    ON_SLOT( 4, setSlotSpecularColor, Basic::Number)   
-    ON_SLOT( 5, setSlotShininess, Basic::Number)     
+    ON_SLOT( 4, setSlotSpecularColor, Basic::Number)
+    ON_SLOT( 5, setSlotShininess, Basic::Number)
 END_SLOT_MAP()
 
 
@@ -48,7 +48,7 @@ Material::Material()
     specularColor.set(0,0,0,1);     // no specular color
     shininess = 0;                  // no shine
 }
- 
+
 //------------------------------------------------------------------------------
 // copyData() -- copy this object's data
 //------------------------------------------------------------------------------
@@ -75,38 +75,38 @@ void Material::deleteData()
 //------------------------------------------------------------------------------
 bool Material::setSlotAmbientColor(const Basic::PairStream* const x)
 {
-    if (x != 0) {
+    if (x != nullptr) {
         // go through and get our data from the pairstream, and set our ambient color
         const Basic::List::Item* item = x->getFirstItem();
         int count = 0;
         LCreal temp[4] = { 1,1,1,1 };
-        while (item != 0 && count < 4) {
+        while (item != nullptr && count < 4) {
             Basic::Pair* pair = const_cast<Basic::Pair*>(static_cast<const Basic::Pair*>(item->getValue()));
-            if (pair != 0) {
+            if (pair != nullptr) {
                 Basic::Number* num = dynamic_cast<Basic::Number*>(pair->object());
-                if (num != 0) temp[count++] = num->getFloat();
+                if (num != nullptr) temp[count++] = num->getFloat();
             }
             item = item->getNext();
         }
         // if we only put in red, green, and blue, we will default to 1 on alpha
         if (count == 3) temp[3] = 1;
         // now set our vector
-        ambientColor.set(temp[0], temp[1], temp[2], temp[3]); 
+        ambientColor.set(temp[0], temp[1], temp[2], temp[3]);
     }
     return true;
 }
 //------------------------------------------------------------------------------
-// setSlotAmbientColor() - set our ambient values all the same as the number 
+// setSlotAmbientColor() - set our ambient values all the same as the number
 // given (ie - 1 would be white, 0 black, 0.5 somewhere in between)
 // ALPHA here is always 1.
 //------------------------------------------------------------------------------
 bool Material::setSlotAmbientColor(const Basic::Number* const x)
 {
-    if (x != 0) {
+    if (x != nullptr) {
         LCreal temp = x->getFloat();
         ambientColor.set(temp, temp, temp, 1);
-    }  
-    return true;  
+    }
+    return true;
 }
 
 //------------------------------------------------------------------------------
@@ -120,33 +120,33 @@ bool Material::setSlotDiffuseColor(const Basic::PairStream* const x)
         const Basic::List::Item* item = x->getFirstItem();
         int count = 0;
         LCreal temp[4] = { 1,1,1,1 };
-        while (item != 0 && count < 4) {
+        while (item != nullptr && count < 4) {
             Basic::Pair* pair = const_cast<Basic::Pair*>(static_cast<const Basic::Pair*>(item->getValue()));
-            if (pair != 0) {
+            if (pair != nullptr) {
                 Basic::Number* num = dynamic_cast<Basic::Number*>(pair->object());
-                if (num != 0) temp[count++] = num->getFloat();
+                if (num != nullptr) temp[count++] = num->getFloat();
             }
             item = item->getNext();
         }
         // if we only put in red, green, and blue, we will default to 1 on alpha
         if (count == 3) temp[3] = 1;
         // now set our vector
-        diffuseColor.set(temp[0], temp[1], temp[2], temp[3]); 
+        diffuseColor.set(temp[0], temp[1], temp[2], temp[3]);
     }
     return true;
 }
 //------------------------------------------------------------------------------
-// setSlotDiffuseColor() - set our diffuse values all the same as the number 
+// setSlotDiffuseColor() - set our diffuse values all the same as the number
 // given (ie - 1 would be white, 0 black, 0.5 somewhere in between)
 // ALPHA here is always 1.
 //------------------------------------------------------------------------------
 bool Material::setSlotDiffuseColor(const Basic::Number* const x)
 {
-    if (x != 0) {
+    if (x != nullptr) {
         LCreal temp = x->getFloat();
         diffuseColor.set(temp, temp, temp, 1);
-    }  
-    return true;  
+    }
+    return true;
 }
 
 //------------------------------------------------------------------------------
@@ -160,33 +160,33 @@ bool Material::setSlotEmissiveColor(const Basic::PairStream* const x)
         const Basic::List::Item* item = x->getFirstItem();
         int count = 0;
         LCreal temp[4] = { 1,1,1,1 };
-        while (item != 0 && count < 4) {
+        while (item != nullptr && count < 4) {
             Basic::Pair* pair = const_cast<Basic::Pair*>(static_cast<const Basic::Pair*>(item->getValue()));
-            if (pair != 0) {
+            if (pair != nullptr) {
                 Basic::Number* num = dynamic_cast<Basic::Number*>(pair->object());
-                if (num != 0) temp[count++] = num->getFloat();
+                if (num != nullptr) temp[count++] = num->getFloat();
             }
             item = item->getNext();
         }
         // if we only put in red, green, and blue, we will default to 1 on alpha
         if (count == 3) temp[3] = 1;
         // now set our vector
-        emissiveColor.set(temp[0], temp[1], temp[2], temp[3]); 
+        emissiveColor.set(temp[0], temp[1], temp[2], temp[3]);
     }
     return true;
 }
 //------------------------------------------------------------------------------
-// setSlotEmissiveColor() - set our emissive values all the same as the number 
+// setSlotEmissiveColor() - set our emissive values all the same as the number
 // given (ie - 1 would be white, 0 black, 0.5 somewhere in between)
 // ALPHA here is always 1.
 //------------------------------------------------------------------------------
 bool Material::setSlotEmissiveColor(const Basic::Number* const x)
 {
-    if (x != 0) {
+    if (x != nullptr) {
         LCreal temp = x->getFloat();
         emissiveColor.set(temp, temp, temp, 1);
-    }  
-    return true;  
+    }
+    return true;
 }
 
 //------------------------------------------------------------------------------
@@ -195,45 +195,45 @@ bool Material::setSlotEmissiveColor(const Basic::Number* const x)
 //------------------------------------------------------------------------------
 bool Material::setSlotSpecularColor(const Basic::PairStream* const x)
 {
-    if (x != 0) {
+    if (x != nullptr) {
         // go through and get our data from the pairstream, and set our ambient color
         const Basic::List::Item* item = x->getFirstItem();
         int count = 0;
         LCreal temp[4] = { 1,1,1,1 };
-        while (item != 0 && count < 4) {
+        while (item != nullptr && count < 4) {
             Basic::Pair* pair = const_cast<Basic::Pair*>(static_cast<const Basic::Pair*>(item->getValue()));
-            if (pair != 0) {
+            if (pair != nullptr) {
                 Basic::Number* num = dynamic_cast<Basic::Number*>(pair->object());
-                if (num != 0) temp[count++] = num->getFloat();
+                if (num != nullptr) temp[count++] = num->getFloat();
             }
             item = item->getNext();
         }
         // if we only put in red, green, and blue, we will default to 1 on alpha
         if (count == 3) temp[3] = 1;
         // now set our vector
-        specularColor.set(temp[0], temp[1], temp[2], temp[3]); 
+        specularColor.set(temp[0], temp[1], temp[2], temp[3]);
     }
     return true;
 }
 //------------------------------------------------------------------------------
-// setSlotSpecularColor() - set our specular values all the same as the number 
+// setSlotSpecularColor() - set our specular values all the same as the number
 // given (ie - 1 would be white, 0 black, 0.5 somewhere in between)
 // ALPHA here is always 1.
 //------------------------------------------------------------------------------
 bool Material::setSlotSpecularColor(const Basic::Number* const x)
 {
-    if (x != 0) {
+    if (x != nullptr) {
         LCreal temp = x->getFloat();
         specularColor.set(temp, temp, temp, 1);
-    }  
-    return true;  
+    }
+    return true;
 }
 //------------------------------------------------------------------------------
 // setSlotShininess() - sets the shininess of our material
 //------------------------------------------------------------------------------
 bool Material::setSlotShininess(const Basic::Number* const x)
 {
-    if (x != 0) {
+    if (x != nullptr) {
         shininess = x->getReal();
     }
     return true;
@@ -300,10 +300,8 @@ bool Material::setShininess(LCreal x)
     return true;
 }
 
-
-
 //------------------------------------------------------------------------------
-// getSlotByIndex() 
+// getSlotByIndex()
 //------------------------------------------------------------------------------
 Basic::Object* Material::getSlotByIndex(const int si)
 {

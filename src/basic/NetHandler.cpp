@@ -21,8 +21,8 @@
     #ifdef sun
         #include <sys/filio.h> // -- added for Solaris 10
     #endif
-    static const int INVALID_SOCKET = -1; // Always -1 and errno is set
-    static const int SOCKET_ERROR   = -1;
+//    static const int INVALID_SOCKET = -1; // Always -1 and errno is set
+//    static const int SOCKET_ERROR   = -1;
 #endif
 
 #include "openeaagles/basic/NetHandler.h"
@@ -96,7 +96,7 @@ void NetHandler::toNet(const void* const hostData, void* const netData, const in
    // Compute pointers to the int word (4 byte) and short
    // short word (2 byte) areas of the source (this).
    const u_long* psl  = static_cast<const u_long*>(hostData);
-   const u_short* pss = (const u_short*) (psl + nl);
+   const u_short* pss = reinterpret_cast<const u_short*>(psl + nl);
 
    // Compute pointers to the int word (4 byte) and short
    // short word (2 byte) areas of the destination (netData).
@@ -126,7 +126,7 @@ void NetHandler::toHost(const void* const netData, void* const hostData, const i
    // Compute pointers to the int word (4 byte) and short
    // short word (2 byte) areas of the source (this).
    const u_long* psl = static_cast<const u_long*>(netData);
-   const u_short* pss = (const u_short*) (psl + nl);
+   const u_short* pss = reinterpret_cast<const u_short*>(psl + nl);
 
    // Compute pointers to the int word (4 byte) and short
    // short word (2 byte) areas of the destination (hostData).

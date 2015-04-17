@@ -198,12 +198,12 @@ Basic::Object* Factory::createObj(const char* name)
     }
     
     // Target Data
-    else if (std::strcmp(name, TargetData::getFactoryName()) == 0 ) {
+    else if ( std::strcmp(name, TargetData::getFactoryName()) == 0 ) {
         obj = new TargetData();
     }
 
     // Bullseye
-    else if (std::strcmp(name, Bullseye::getFactoryName()) == 0 ) {
+    else if ( std::strcmp(name, Bullseye::getFactoryName()) == 0 ) {
         obj = new Bullseye();
     }
 

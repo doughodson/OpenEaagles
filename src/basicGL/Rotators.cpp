@@ -12,7 +12,7 @@ EMPTY_DELETEDATA(Rotators)
 // Event Handler (s)
 // -----------------------------------------------------------------------------
 BEGIN_EVENT_HANDLER(Rotators)
-    ON_EVENT_OBJ(UPDATE_VALUE,  onXRotate,    Basic::Angle)     
+    ON_EVENT_OBJ(UPDATE_VALUE,  onXRotate,    Basic::Angle)
     ON_EVENT_OBJ(UPDATE_VALUE,  onXRotate,    Basic::Number)
     ON_EVENT_OBJ(UPDATE_VALUE2, onXRotateDeg, Basic::Number)
     ON_EVENT_OBJ(UPDATE_VALUE3, onYRotate,    Basic::Angle)
@@ -106,7 +106,7 @@ bool Rotators::setZRotation(const LCreal angle)
 //------------------------------------------------------------------------------
 bool Rotators::setRotations(const LCreal x, const LCreal y, const LCreal z)
 {
-    xRot = x; 
+    xRot = x;
     yRot = y;
     zRot = z;
     return true;
@@ -117,7 +117,7 @@ bool Rotators::setRotations(const LCreal x, const LCreal y, const LCreal z)
 //------------------------------------------------------------------------------
 bool Rotators::setRotationsDeg(const LCreal x, const LCreal y, const LCreal z)
 {
-    xRot = x * static_cast<LCreal>(Basic::Angle::D2RCC); 
+    xRot = x * static_cast<LCreal>(Basic::Angle::D2RCC);
     yRot = y * static_cast<LCreal>(Basic::Angle::D2RCC);
     zRot = z * static_cast<LCreal>(Basic::Angle::D2RCC);
     return true;
@@ -129,7 +129,7 @@ bool Rotators::setRotationsDeg(const LCreal x, const LCreal y, const LCreal z)
 //------------------------------------------------------------------------------
 bool Rotators::onXRotate(const Basic::Number* const rotation)
 {
-    if (rotation != 0) return setXRotation( rotation->getReal() );
+    if (rotation != nullptr) return setXRotation( rotation->getReal() );
     return false;
 }
 
@@ -138,7 +138,7 @@ bool Rotators::onXRotate(const Basic::Number* const rotation)
 //------------------------------------------------------------------------------
 bool Rotators::onXRotate(const Basic::Angle* const rotation)
 {
-    if (rotation != 0)
+    if (rotation != nullptr)
         return setXRotation(static_cast<LCreal>(Basic::Radians::convertStatic(*rotation)));
     return false;
 }
@@ -148,7 +148,7 @@ bool Rotators::onXRotate(const Basic::Angle* const rotation)
 //------------------------------------------------------------------------------
 bool Rotators::onXRotateDeg(const Basic::Number* const rotation)
 {
-    if (rotation != 0) return setXRotationDeg( rotation->getReal() );
+    if (rotation != nullptr) return setXRotationDeg( rotation->getReal() );
     return false;
 }
 
@@ -157,7 +157,7 @@ bool Rotators::onXRotateDeg(const Basic::Number* const rotation)
 //------------------------------------------------------------------------------
 bool Rotators::onYRotate(const Basic::Number* const rotation)
 {
-    if (rotation != 0) return setYRotation( rotation->getReal() );
+    if (rotation != nullptr) return setYRotation( rotation->getReal() );
     return false;
 }
 
@@ -166,7 +166,7 @@ bool Rotators::onYRotate(const Basic::Number* const rotation)
 //------------------------------------------------------------------------------
 bool Rotators::onYRotate(const Basic::Angle* const rotation)
 {
-    if (rotation != 0)
+    if (rotation != nullptr)
         return setYRotation(static_cast<LCreal>(Basic::Radians::convertStatic(*rotation)));
     return false;
 }
@@ -176,7 +176,7 @@ bool Rotators::onYRotate(const Basic::Angle* const rotation)
 //------------------------------------------------------------------------------
 bool Rotators::onYRotateDeg(const Basic::Number* const rotation)
 {
-    if (rotation != 0) return setYRotationDeg( rotation->getReal() );
+    if (rotation != nullptr) return setYRotationDeg( rotation->getReal() );
     return false;
 }
 
@@ -185,7 +185,7 @@ bool Rotators::onYRotateDeg(const Basic::Number* const rotation)
 //------------------------------------------------------------------------------
 bool Rotators::onZRotate(const Basic::Number* const rotation)
 {
-    if (rotation != 0) return setZRotation( rotation->getReal() );
+    if (rotation != nullptr) return setZRotation( rotation->getReal() );
     return false;
 }
 
@@ -194,7 +194,7 @@ bool Rotators::onZRotate(const Basic::Number* const rotation)
 //------------------------------------------------------------------------------
 bool Rotators::onZRotate(const Basic::Angle* const rotation)
 {
-    if (rotation != 0)
+    if (rotation != nullptr)
         return setZRotation(static_cast<LCreal>(Basic::Radians::convertStatic(*rotation)));
     return false;
 }
@@ -204,7 +204,7 @@ bool Rotators::onZRotate(const Basic::Angle* const rotation)
 //------------------------------------------------------------------------------
 bool Rotators::onZRotateDeg(const Basic::Number* const rotation)
 {
-    if (rotation != 0) return setZRotationDeg( rotation->getReal() );
+    if (rotation != nullptr) return setZRotationDeg( rotation->getReal() );
     return false;
 }
 
@@ -220,7 +220,7 @@ void Rotators::draw()
     Graphic::draw();
     lcRestoreMatrix();
 }
-    
+
 } // End BasicGL namespace
 } // End Eaagles namespace
 

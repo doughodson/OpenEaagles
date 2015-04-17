@@ -19,6 +19,7 @@
 #include "openeaagles/basic/Number.h"
 
 #include <cmath>
+#include <cstring>
 
 namespace Eaagles {
 namespace Network {
@@ -311,7 +312,7 @@ bool EmissionPduHandler::isMatchingRfSystemType(const Simulation::RfSensor* cons
 {
    bool match = false;
    if (p != 0 && sensorModel != 0) {
-      match = (strcmp(sensorModel->getTypeId(),p->getTypeId()) == 0);
+      match = (std::strcmp(sensorModel->getTypeId(),p->getTypeId()) == 0);
    }
    return match;
 }

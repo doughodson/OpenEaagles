@@ -1,5 +1,5 @@
 //==============================================================================
-// Scanline -- 
+// Scanline --
 //==============================================================================
 
 #include "openeaagles/basicGL/Scanline.h"
@@ -34,35 +34,34 @@ Scanline::Scanline()
 
    curX = 0;
    curY = 0;
-   curPoly = 0;
+   curPoly = nullptr;
 
    for (unsigned int i = 0; i < MAX_POLYS; i++) {
-      pt[i] = 0;
+      pt[i] = nullptr;
    }
    nPT = 0;
 
    for (unsigned int i = 0; i < MAX_ACTIVE_POLYS; i++) {
-      apt[i] = 0;
+      apt[i] = nullptr;
    }
    nAPT = 0;
 
    for (unsigned int i = 0; i < MAX_EDGES; i++) {
-      et[i] = 0;
+      et[i] = nullptr;
    }
    nET = 0;
    refET = 0;
 
    for (unsigned int i = 0; i < MAX_ACTIVE_EDGES; i++) {
-      aet[i] = 0;
+      aet[i] = nullptr;
    }
    nAET = 0;
    refAET = 0;
 
-
    setMatrix();
 
    clipper = new Clip3D();
-   clipper->setClippingBox(0.0f,float(ix-1),0.0f,float(iy-1));
+   clipper->setClippingBox(0.0f, static_cast<float>(ix-1), 0.0f, static_cast<float>(iy-1));
 }
 
 
@@ -75,23 +74,23 @@ void Scanline::copyData(const Scanline& org, const bool cc)
 
    if (cc) {
       for (unsigned int i = 0; i < MAX_POLYS; i++) {
-         pt[i] = 0;
+         pt[i] = nullptr;
       }
       nPT = 0;
 
       for (unsigned int i = 0; i < MAX_ACTIVE_POLYS; i++) {
-         apt[i] = 0;
+         apt[i] = nullptr;
       }
       nAPT = 0;
 
       for (unsigned int i = 0; i < MAX_EDGES; i++) {
-         et[i] = 0;
+         et[i] = nullptr;
       }
       nET = 0;
       refET = 0;
 
       for (unsigned int i = 0; i < MAX_ACTIVE_EDGES; i++) {
-         aet[i] = 0;
+         aet[i] = nullptr;
       }
       nAET = 0;
       refAET = 0;
@@ -122,7 +121,7 @@ void Scanline::setMatrix()
    rr.makeTranslate((static_cast<LCreal>(ix-1)/2.0f), (static_cast<LCreal>(iy-1)/2.0f), 0.0f);
    mat.preMult(rr);
 
-   // rotate 
+   // rotate
    rr.makeRotate(angle,0.0f,0.0f,1.0f);
    mat.preMult(rr);
 
@@ -147,7 +146,7 @@ void Scanline::reset()
    refAET = 0;
    nAPT = 0;
    curY = 0.0f;
-   curPoly = NULL;
+   curPoly = nullptr;
    if (nET > 0) sortEdges(et,nET,1);
 }
 
@@ -258,11 +257,11 @@ void Scanline::purgePolygons()
 //------------------------------------------------------------------------------
 unsigned int Scanline::reduceVert(Polygon* const polygon)
 {
-   if (polygon == 0) return 0;
+   if (polygon == nullptr) return 0;
 
    unsigned int n1 = polygon->getNumberOfVertices();
    osg::Vec3* tvect  = const_cast<osg::Vec3*>(static_cast<const osg::Vec3*>(polygon->getVertices()));
-   if (tvect == 0) return 0;
+   if (tvect == nullptr) return 0;
 
    osg::Vec3* tnorms = const_cast<osg::Vec3*>(static_cast<const osg::Vec3*>(polygon->getNormals()));
    osg::Vec2* tcoord = const_cast<osg::Vec2*>(static_cast<const osg::Vec2*>(polygon->getTextureCoord()));
@@ -270,19 +269,19 @@ unsigned int Scanline::reduceVert(Polygon* const polygon)
    bool reduced = true;
    while (reduced && n1 > 2) {
       reduced = false;
-      int ix0 = int( tvect[0][0] + 0.5f );
-      int iy0 = int( tvect[0][1] + 0.5f );
+      int ix0 = static_cast<int>( tvect[0][0] + 0.5f );
+      int iy0 = static_cast<int>( tvect[0][1] + 0.5f );
       for (unsigned int i = 1; i < n1 && !reduced; i++) {
-         int ix1 = int( tvect[i][0] + 0.5f );
-         int iy1 = int( tvect[i][1] + 0.5f );
+         int ix1 = static_cast<int>( tvect[i][0] + 0.5f );
+         int iy1 = static_cast<int>( tvect[i][1] + 0.5f );
          if (ix0 == ix1 && iy0 == iy1) {
             reduced = true;
             n1--;
             // move the vertices down the array by one position ...
             for (unsigned int j = i; j < n1; j++) {
                tvect[j] = tvect[j+1];
-               if (tnorms != 0) tnorms[j] = tnorms[j+1];
-               if (tcoord != 0) tcoord[j] = tcoord[j+1];
+               if (tnorms != nullptr) tnorms[j] = tnorms[j+1];
+               if (tcoord != nullptr) tcoord[j] = tcoord[j+1];
             }
          }
          ix0 = ix1;
@@ -302,7 +301,7 @@ unsigned int Scanline::reduceVert(Polygon* const polygon)
 }
 
 //------------------------------------------------------------------------------
-// endPointCheck() -- end point check the edges 
+// endPointCheck() -- end point check the edges
 //------------------------------------------------------------------------------
 void Scanline::endPointCheck(Edge* tbl[], const int n) const
 {
@@ -339,7 +338,7 @@ void Scanline::add2EdgeTable(Edge* tbl[], const int n)
 bool Scanline::addPolygon(const Polygon* const polygon)
 {
    // quick outs
-   if (polygon == 0) return false;
+   if (polygon == nullptr) return false;
 
    // number of vertices must be at least three
    unsigned int n = polygon->getNumberOfVertices();
@@ -350,7 +349,6 @@ bool Scanline::addPolygon(const Polygon* const polygon)
    unsigned int nn = polygon->getNumberOfNormals();
    unsigned int nt = polygon->getNumberOfTextureCoords();
    if ( (nn > 0 && nn != n) || (nt > 0 && nt != n) ) return false;
-
 
    // Create a working copy of the polygon
    Polygon* tmpPolygon = polygon->clone();
@@ -394,7 +392,7 @@ bool Scanline::addPolygon(const Polygon* const polygon)
 
    // Need at least three vertices after clipping
    unsigned int cn = 0;
-   if (clipPolygon != 0) cn = clipPolygon->getNumberOfVertices();
+   if (clipPolygon != nullptr) cn = clipPolygon->getNumberOfVertices();
    if (cn >= 3) {
 
       // Back surface removal -- Dot product of a vector in the direction
@@ -426,8 +424,8 @@ bool Scanline::addPolygon(const Polygon* const polygon)
          unsigned int ii = cn - 1;
          for (unsigned int j = 0; j < cn; j++) {
 
-            Edge* newEdge = 0;
-            if (cnorms != 0) {
+            Edge* newEdge = nullptr;
+            if (cnorms != nullptr) {
                newEdge = new Edge( cvect[ii].ptr(), cnorms[ii], cvect[j].ptr(),  cnorms[j], newPolyData );
             }
             else {
@@ -445,11 +443,11 @@ bool Scanline::addPolygon(const Polygon* const polygon)
       // endPointCheck(tet,nTET);
 
       // add the temporary edge table to the real edge table
-      add2EdgeTable(tet,nTET);
+      add2EdgeTable(tet, nTET);
 
       for (int i = 0; i < nTET; i++) {
          tet[i]->unref();
-         tet[i] = 0;
+         tet[i] = nullptr;
       }
       nTET = 0;
    }
@@ -486,7 +484,7 @@ void Scanline::scan()
 void Scanline::scanline(const int y)
 {
    // reset some values
-   curPoly = 0;
+   curPoly = nullptr;
    curX = 0.0f;
    curY = static_cast<LCreal>(y);
    refAET = 0;
@@ -515,7 +513,7 @@ void Scanline::scanline(const int y)
    }
 
    // Sort the AET
-   sortEdges(aet,nAET,0);
+   sortEdges(aet, nAET, 0);
 }
 
 
@@ -524,7 +522,7 @@ void Scanline::scanline(const int y)
 //------------------------------------------------------------------------------
 const Scanline::PolyData* Scanline::step(const int x)
 {
-   curPoly = 0; 
+   curPoly = nullptr;
    curX = static_cast<LCreal>(x);
 
    // Hit an edge?  Update the active polygon table.
@@ -630,7 +628,7 @@ Scanline::PolyData::PolyData() : polygon(0), orig(0)
 }
 
 Scanline::PolyData::PolyData(const Scanline::PolyData& org) : polygon(0), orig(0)
-{ 
+{
    STANDARD_CONSTRUCTOR()
    copyData(org,true);
 }
@@ -664,14 +662,14 @@ void Scanline::PolyData::copyData(const Scanline::PolyData& org, const bool)
    nslope = org.nslope;
    aptEdge2 = org.aptEdge2;
 
-   polygon = 0;
-   if (org.polygon != 0) {
+   polygon = nullptr;
+   if (org.polygon != nullptr) {
       const Polygon* p = org.polygon;
       polygon = const_cast<Polygon*>(static_cast<const Polygon*>(p));
    }
 
-   orig = 0;
-   if (org.orig != 0) {
+   orig = nullptr;
+   if (org.orig != nullptr) {
       const Polygon* p = org.orig;
       orig = p;
    }
@@ -714,16 +712,16 @@ Scanline::Edge::Edge() : polygon(0)
    nslope.set(0.0f,0.0f,0.0f);
    valid = false;
    pointLock = false;
-   polygon = 0;
+   polygon = nullptr;
 }
 
 Scanline::Edge::Edge(
                const LCreal v0[2],
-               const osg::Vec3& vn0, 
+               const osg::Vec3& vn0,
                const LCreal v1[2],
                const osg::Vec3& vn1,
                PolyData* const p
-            ) : polygon(0)
+            ) : polygon(nullptr)
 {
    osg::Vec3 uvn;
    if (v0[1] <= v1[1]) {
@@ -790,7 +788,7 @@ Scanline::Edge::Edge(
 }
 
 Scanline::Edge::Edge(const Scanline::Edge& org) : polygon(0)
-{ 
+{
    STANDARD_CONSTRUCTOR()
    copyData(org,true);
 }
@@ -811,7 +809,6 @@ Scanline::Edge* Scanline::Edge::clone() const
    return new Scanline::Edge(*this);
 }
 
-
 //------------------------------------------------------------------------------
 // copyData() -- copy this object's data
 //------------------------------------------------------------------------------
@@ -831,7 +828,6 @@ void Scanline::Edge::copyData(const Scanline::Edge& org, const bool)
 
    const PolyData* pp = org.polygon;
    polygon = const_cast<PolyData*>(static_cast<const PolyData*>(pp));
-
 }
 
 //------------------------------------------------------------------------------
@@ -839,7 +835,7 @@ void Scanline::Edge::copyData(const Scanline::Edge& org, const bool)
 //------------------------------------------------------------------------------
 void Scanline::Edge::deleteData()
 {
-   polygon = 0;
+   polygon = nullptr;
 }
 
 //------------------------------------------------------------------------------

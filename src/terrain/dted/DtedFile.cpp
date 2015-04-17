@@ -36,6 +36,7 @@
 #include "openeaagles/terrain/dted/DtedFile.h"
 #include "openeaagles/basic/Number.h"
 #include <fstream>
+#include <cstdio>
 
 // Disable all deprecation warnings for now.  Until we fix them,
 // they are quite annoying to see over and over again...
@@ -274,8 +275,8 @@ bool DtedFile::readDtedHeaders(std::istream& in)
     // and always start on an integer degree.
     int swcLatitude;
     int swcLongitude;
-    sscanf(uhl.origin_latitude, "%3d", &swcLatitude);
-    sscanf(uhl.origin_longitude, "%3d", &swcLongitude);
+    std::sscanf(uhl.origin_latitude, "%3d", &swcLatitude);
+    std::sscanf(uhl.origin_longitude, "%3d", &swcLongitude);
     if (uhl.origin_latitude[7] == 'S')
         swcLatitude = -1*swcLatitude;
     if (uhl.origin_longitude[7] == 'W')
@@ -289,16 +290,16 @@ bool DtedFile::readDtedHeaders(std::istream& in)
     static const double TENTHS_OF_SECONDS_PER_DEGREE = 36000.0;
     int latIncr;
     int lonIncr;
-    sscanf(uhl.data_interval_latitude, "%4d", &latIncr);
-    sscanf(uhl.data_interval_longitude, "%4d", &lonIncr);
+    std::sscanf(uhl.data_interval_latitude, "%4d", &latIncr);
+    std::sscanf(uhl.data_interval_longitude, "%4d", &lonIncr);
     latSpacing = latIncr / TENTHS_OF_SECONDS_PER_DEGREE;
     lonSpacing = lonIncr / TENTHS_OF_SECONDS_PER_DEGREE;
-    
+
     // Extract the number of latitude and longitude lines
     unsigned int num_lat;
     unsigned int num_lon;
-    sscanf(uhl.number_latitude_lines, "%4u", &num_lat);
-    sscanf(uhl.number_longitude_lines, "%4u", &num_lon);
+    std::sscanf(uhl.number_latitude_lines, "%4u", &num_lat);
+    std::sscanf(uhl.number_longitude_lines, "%4u", &num_lon);
     nptlat = num_lat;
     nptlong = num_lon;
 
@@ -324,7 +325,7 @@ bool DtedFile::readDtedData(std::istream& in)
     {
         columns[i] = new short[nptlat];
     }
-    
+
     // Read the elevation array.
     for(unsigned int lon=0; lon<nptlong; lon++)
     {
@@ -462,7 +463,7 @@ Basic::Object* DtedFile::getSlotByIndex(const int si)
 }
 
 //------------------------------------------------------------------------------
-// serialize() -- 
+// serialize() --
 //------------------------------------------------------------------------------
 std::ostream& DtedFile::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {

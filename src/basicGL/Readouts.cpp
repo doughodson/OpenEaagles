@@ -58,7 +58,7 @@ AsciiText::AsciiText()
 //------------------------------------------------------------------------------
 char AsciiText::filterInputEvent(const int event, const int)
 {
-   return char(event); // All characters are valid for AsciiText fields
+   return static_cast<char>(event); // All characters are valid for AsciiText fields
 }
 
 bool AsciiText::isValidInputPosition(const int)
@@ -74,7 +74,7 @@ bool AsciiText::isValidInputPosition(const int)
 bool AsciiText::setTextString(const Basic::String* const stsobj)
 {
    bool ok = true;
-   if (stsobj != 0) {
+   if (stsobj != nullptr) {
       if (width() == 0) width(stsobj->len());
       setText(*stsobj);
    }
@@ -91,7 +91,7 @@ bool AsciiText::setTextString(const Basic::String* const stsobj)
 bool AsciiText::setTextList(const Basic::List* const stlobj)
 {
    bool ok = true;
-   if (stlobj != 0) {
+   if (stlobj != nullptr) {
       float values[256];
       int n = stlobj->getNumberList(values, 256);
       if (n > 0) {
@@ -309,7 +309,7 @@ void NumericReadout::updateData(const LCreal dt)
 bool NumericReadout::isInputValueValid() const
 {
    bool ok = true;
-   double val = getInputValue();
+   const double val = getInputValue();
    if ( (minValid != UNDEFINED_VALUE && val < minValid) ||
         (maxValid != UNDEFINED_VALUE && val > maxValid) ) {
       ok = false;
@@ -498,7 +498,7 @@ void NumericReadout::reformat(const char* const example)
 // onUpdateValue() - for Basic::Float
 bool NumericReadout::onUpdateValue(const Basic::Float* const ouvobj)
 {
-   if (ouvobj != 0) {
+   if (ouvobj != nullptr) {
       setValue(ouvobj->getDouble());
    }
    return true;
@@ -507,7 +507,7 @@ bool NumericReadout::onUpdateValue(const Basic::Float* const ouvobj)
 // onUpdateValue() - for Basic::Integer
 bool NumericReadout::onUpdateValue(const Basic::Integer* const ouvobj)
 {
-   if (ouvobj != 0) {
+   if (ouvobj != nullptr) {
       setValue(ouvobj->getInt());
    }
    return true;
@@ -516,7 +516,7 @@ bool NumericReadout::onUpdateValue(const Basic::Integer* const ouvobj)
 // onUpdateValue() - for Basic::Number
 bool NumericReadout::onUpdateValue(const Basic::Number* const ouvobj)
 {
-   if (ouvobj != 0) {
+   if (ouvobj != nullptr) {
       setValue(ouvobj->getDouble());
    }
    return true;
@@ -530,7 +530,7 @@ bool NumericReadout::onUpdateValue(const Basic::Number* const ouvobj)
 bool NumericReadout::setSlotFloatToBeDisplayed(const Basic::Float* const sftbdobj)
 {
    bool ok = true;
-   if (sftbdobj != 0) {
+   if (sftbdobj != nullptr) {
       setValue(sftbdobj->getReal());
       ok = true;
    }
@@ -547,7 +547,7 @@ bool NumericReadout::setSlotFloatToBeDisplayed(const Basic::Float* const sftbdob
 bool NumericReadout::setSlotNumberToBeDisplayed(const Basic::Number* const sntbdobj)
 {
    bool ok = true;
-   if (sntbdobj != 0) {
+   if (sntbdobj != nullptr) {
       setValue(int(sntbdobj->getInt()));
    }
    else {
@@ -563,7 +563,7 @@ bool NumericReadout::setSlotNumberToBeDisplayed(const Basic::Number* const sntbd
 bool NumericReadout::setSlotFloatMaxValue(const Basic::Float* const sfmvobj)
 {
    bool ok = true;
-   if (sfmvobj != 0) {
+   if (sfmvobj != nullptr) {
       setMaxValue(sfmvobj->getReal());
    }
    else {
@@ -579,7 +579,7 @@ bool NumericReadout::setSlotFloatMaxValue(const Basic::Float* const sfmvobj)
 bool NumericReadout::setSlotNumberMaxValue(const Basic::Number* const snmvobj)
 {
    bool ok = true;
-   if (snmvobj != 0) {
+   if (snmvobj != nullptr) {
       setMaxValue(int(snmvobj->getInt()));
    }
    else {
@@ -595,7 +595,7 @@ bool NumericReadout::setSlotNumberMaxValue(const Basic::Number* const snmvobj)
 bool NumericReadout::setSlotExampleFormatText(const Basic::String* const seftobj)
 {
    bool ok = true;
-   if (seftobj != 0) {
+   if (seftobj != nullptr) {
       if (width() == 0) width(seftobj->len());
       reformat(*seftobj);
    }
@@ -612,7 +612,7 @@ bool NumericReadout::setSlotExampleFormatText(const Basic::String* const seftobj
 bool NumericReadout::setSlotPlusChar(const Basic::String* const spcobj)
 {
    bool ok = true;
-   if (spcobj != 0) {
+   if (spcobj != nullptr) {
       const char* str = *spcobj;
       plusChar = str[0];
       redisplay();
@@ -630,7 +630,7 @@ bool NumericReadout::setSlotPlusChar(const Basic::String* const spcobj)
 bool NumericReadout::setSlotMinusChar(const Basic::String* const smcobj)
 {
    bool ok = true;
-   if (smcobj != 0) {
+   if (smcobj != nullptr) {
       const char* str = *smcobj;
       minusChar = str[0];
       redisplay();
@@ -648,7 +648,7 @@ bool NumericReadout::setSlotMinusChar(const Basic::String* const smcobj)
 bool NumericReadout::setSlotDecimalPointChar(const Basic::String* const sdpcobj)
 {
    bool ok = true;
-   if (sdpcobj != 0) {
+   if (sdpcobj != nullptr) {
       const char* str = *sdpcobj;
       dpChar = str[0];
       redisplay();
@@ -666,7 +666,7 @@ bool NumericReadout::setSlotDecimalPointChar(const Basic::String* const sdpcobj)
 bool NumericReadout::setSlotUndefinedChar(const Basic::String* const sucobj)
 {
    bool ok = true;
-   if (sucobj != 0) {
+   if (sucobj != nullptr) {
       const char* str = *sucobj;
       undefinedChar = str[0];
       redisplay();
@@ -684,7 +684,7 @@ bool NumericReadout::setSlotUndefinedChar(const Basic::String* const sucobj)
 bool NumericReadout::setSlotMaxValid(const Basic::Number* const msg)
 {
    bool ok = true;
-   if (msg != 0) {
+   if (msg != nullptr) {
       maxValid = msg->getReal();
    }
    else {
@@ -700,7 +700,7 @@ bool NumericReadout::setSlotMaxValid(const Basic::Number* const msg)
 bool NumericReadout::setSlotMinValid(const Basic::Number* const msg)
 {
    bool ok = true;
-   if (msg != 0) {
+   if (msg != nullptr) {
       minValid = msg->getReal();
    }
    else {
@@ -716,7 +716,7 @@ bool NumericReadout::setSlotMinValid(const Basic::Number* const msg)
 bool NumericReadout::setSlotBlankZero(const Basic::Number* const msg)
 {
    bool ok = true;
-   if (msg != 0) {
+   if (msg != nullptr) {
       blankZero = msg->getBoolean();
    }
    else {
@@ -732,7 +732,7 @@ bool NumericReadout::setSlotBlankZero(const Basic::Number* const msg)
 bool NumericReadout::setSlotOverflowChar(const Basic::String* const socobj)
 {
    bool ok = true;
-   if (socobj != 0) {
+   if (socobj != nullptr) {
       const char* str = *socobj;
       overflowChar = str[0];
       redisplay();
@@ -880,8 +880,8 @@ double HexReadout::getInputValue() const
    if (cbuf[0] == plusChar)  cbuf[0] = '+';
    if (cbuf[0] == minusChar) cbuf[0] = '-';
 
-   sscanf(cbuf, format, &value);
-   return double(value);
+   std::sscanf(cbuf, format, &value);
+   return static_cast<double>(value);
 }
 
 //------------------------------------------------------------------------------
@@ -932,7 +932,7 @@ char OctalReadout::filterInputEvent(const int event, const int tc)
    if (tc == '0' || tc == '#') {
       // Default numeric keys
       if ( event >= '0' && event <= '7' )
-         return char(event);
+         return static_cast<char>(event);
       else
          return '\0';
    }
@@ -956,8 +956,8 @@ double OctalReadout::getInputValue() const
    if (cbuf[0] == plusChar)  cbuf[0] = '+';
    if (cbuf[0] == minusChar) cbuf[0] = '-';
 
-   sscanf(cbuf, format, &value);
-   return double(value);
+   std::sscanf(cbuf, format, &value);
+   return static_cast<double>(value);
 }
 
 //------------------------------------------------------------------------------
@@ -1063,7 +1063,7 @@ double TimeReadout::getInputValue() const
          int   hrs = 0;
          int   min = 0;
          float sec = 0.0f;
-         sscanf(cbuf, format1, &hrs, &min, &sec);
+         std::sscanf(cbuf, format1, &hrs, &min, &sec);
          value = hrs*60.0f;
          if (value >= 0.0) value += min;
          else value -= min;
@@ -1076,7 +1076,7 @@ double TimeReadout::getInputValue() const
       case hhmm : { // Hours and minutes
          int   hrs = 0;
          float min = 0.0f;
-         sscanf(cbuf, format1, &hrs, &min);
+         std::sscanf(cbuf, format1, &hrs, &min);
          value = hrs*60.0f;
          if (value >= 0.0) value += min;
          else value -= min;
@@ -1086,7 +1086,7 @@ double TimeReadout::getInputValue() const
 
       case hh : {   // Hours only
          float hrs = 0.0f;
-         sscanf(cbuf, format1, &hrs);
+         std::sscanf(cbuf, format1, &hrs);
          value = hrs*3600.0f;
       }
       break;
@@ -1094,7 +1094,7 @@ double TimeReadout::getInputValue() const
       case mmss : { // Minutes and seconds
          int   min = 0;
          float sec = 0.0f;
-         sscanf(cbuf, format1, &min, &sec);
+         std::sscanf(cbuf, format1, &min, &sec);
          value = min*60.0f;
          if (value >= 0.0) value += sec;
          else value -= sec;
@@ -1103,14 +1103,14 @@ double TimeReadout::getInputValue() const
 
       case mm : {   // Minutes only
          float min = 0.0;
-         sscanf(cbuf, format1, &min);
+         std::sscanf(cbuf, format1, &min);
          value = min*60.0f;
       }
       break;
 
       case ss : {   // Seconds only
          float sec = 0.0;
-         sscanf(cbuf, format1, &sec);
+         std::sscanf(cbuf, format1, &sec);
          value = sec;
       }
       break;
@@ -1134,10 +1134,10 @@ void TimeReadout::makeText()
 
       case hhmmss : { // Hours, Minutes, and seconds
          double minutes = seconds/60.0f;
-         int ihrs = int(minutes/60.0f);
-         double min = minutes - double(ihrs*60);
-         int imin = int(min);
-         double sec = (min - double(imin))*60.0f;
+         int ihrs = static_cast<int>(minutes/60.0f);
+         double min = minutes - static_cast<double>(ihrs*60);
+         int imin = static_cast<int>(min);
+         double sec = (min - static_cast<double>(imin))*60.0f;
          std::sprintf(cbuf, format, ihrs, imin, sec);
          if (neg) { /* if it was negative, swap the possible + sign to the - sign */
             bool done = false;
@@ -1151,8 +1151,8 @@ void TimeReadout::makeText()
 
       case hhmm : {   // Hours and minutes
          double minutes = seconds/60.0f;
-         int  ihrs = int(minutes/60.0f);
-         double min = minutes - double(ihrs*60);
+         int  ihrs = static_cast<int>(minutes/60.0f);
+         double min = minutes - static_cast<double>(ihrs*60);
          std::sprintf(cbuf, format, ihrs, min);
          if (neg) { /* if it was negative, swap the possible + sign to the - sign */
             bool done = false;
@@ -1173,7 +1173,7 @@ void TimeReadout::makeText()
 
       case mmss : {   // Minutes and seconds
          int  imin = int(seconds/60.0f);
-         double sec = seconds - double(imin*60);
+         double sec = seconds - static_cast<double>(imin*60);
          std::sprintf(cbuf, format, imin, sec);
          if (neg) { /* if it was negative, swap the possible + sign to the - sign */
             bool done = false;
@@ -1292,7 +1292,7 @@ double DirectionReadout::getInputValue() const
          double degs = 0.0;
          double min = 0.0;
          double sec = 0.0;
-         sscanf(cbuf, "%lf@%lf'%lf", &degs, &min, &sec);
+         std::sscanf(cbuf, "%lf@%lf'%lf", &degs, &min, &sec);
          min += sec/60.0f;
          if (degs >= 0.0) value = degs + min/60.0f;
          else value = degs - min/60.0f;
@@ -1302,14 +1302,14 @@ double DirectionReadout::getInputValue() const
       case ddmm : { // Degrees and minutes
          double degs = 0.0;
          double min = 0.0;
-         sscanf(cbuf, "%lf@%lf", &degs, &min);
+         std::sscanf(cbuf, "%lf@%lf", &degs, &min);
          if (degs >= 0.0) value = degs + min/60.0f;
          else value = degs - min/60.0f;
       }
       break;
 
       case dd : {   // Degrees only
-         sscanf(cbuf, "%lf", &value);
+         std::sscanf(cbuf, "%lf", &value);
       }
       break;
    }
@@ -1332,17 +1332,17 @@ void DirectionReadout::makeText()
 
       case ddmmss : { // Degrees, Minutes, and seconds
          int     ideg = int(degrees);
-         double min = (degrees - double(ideg))*60.0f;
-         int     imin = int(min);
-         double sec = (min - double(imin))*60.0f;
+         double  min = (degrees - static_cast<double>(ideg))*60.0f;
+         int     imin = static_cast<int>(min);
+         double sec = (min - static_cast<double>(imin))*60.0f;
          if (neg) ideg = -ideg;
          std::sprintf(cbuf, format, ideg, imin, sec);
       }
       break;
 
       case ddmm : {   // Degrees and minutes
-         int     ideg = int(degrees);
-         double  min  = (degrees - double(ideg))*60.0f;
+         int     ideg = static_cast<int>(degrees);
+         double  min  = (degrees - static_cast<double>(ideg))*60.0f;
          if (neg) ideg = -ideg;
          std::sprintf(cbuf, format, ideg, min);
       }
@@ -1500,9 +1500,9 @@ void Rotary::draw()
    if (preDrawSelectList) {
       int start = 1;
       Basic::Pair* p = findByIndex(start);
-      while (p != 0) {
+      while (p != nullptr) {
          BasicGL::Graphic* g = dynamic_cast<BasicGL::Graphic*>(p->object());
-         if (g != 0) g->draw();
+         if (g != nullptr) g->draw();
          p = findByIndex(++start);
       }
       preDrawSelectList = false;
@@ -1544,7 +1544,7 @@ Rotary2::Rotary2()
 // onSelect() - Macro function for Rotary2
 bool Rotary2::onSelect(const Basic::Number* const osobj)
 {
-   if (osobj != 0) {
+   if (osobj != nullptr) {
       if (osobj->getBoolean()){
          //if true, select the second component
          Basic::Integer two(2);
