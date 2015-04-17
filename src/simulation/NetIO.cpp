@@ -1684,7 +1684,7 @@ const Ntm* NtmOutputNodeStd::findNetworkTypeMapper(const Player* const p) const
             const size_t tpTypeLen = tpType->len();
 
             if (tpTypeLen <= pTypeLen) {
-               bool match = (strncmp( pType->getString(), tpType->getString(), tpTypeLen ) == 0);
+               bool match = (std::strncmp( pType->getString(), tpType->getString(), tpTypeLen ) == 0);
                if (match) {
                   result = tstNtm;
                }
@@ -1825,7 +1825,7 @@ bool NtmOutputNodeStd::addNtmSorted(Ntm* const newNtm)
          size_t len = newTypeLen;
          if (refTypeLen < len) len = refTypeLen;
 
-         int r = strncmp(newTypeStr->getString(), refTypeStr->getString(), len);
+         int r = std::strncmp(newTypeStr->getString(), refTypeStr->getString(), len);
          if ( r == 0 && refTypeLen < newTypeLen) {
             ntmList->insert(newItem, refItem);
             inserted = true;

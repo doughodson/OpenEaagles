@@ -4,6 +4,7 @@
 
 #include <cstring>
 #include <cstdlib>
+#include <cmath>
 
 namespace Eaagles {
 namespace Dafif {
@@ -20,7 +21,7 @@ AirportLoader::AirportLoader() : Database()
    // default file
    db->setPathname("/eaagles3rdParty/data/dafif/fullall/");
    db->setFilename("file0");
-   firstAirport = 0;
+   firstAirport = nullptr;
 }
 
 AirportLoader::AirportLoader(
@@ -34,7 +35,7 @@ AirportLoader::AirportLoader(
    db->setPathname(path);
    db->setFilename(file);
    load(country);
-   firstAirport = 0;
+   firstAirport = nullptr;
 }
 
 
@@ -67,7 +68,7 @@ bool AirportLoader::load(const char* country)
    if ( !openDatabaseFile()  ) {
       // Something is wrong!
        if (isMessageEnabled(MSG_ERROR)) {
-      std::cerr << "AirportLoader::load() -- Error; unable to load Airports!" << std::endl;
+           std::cerr << "AirportLoader::load() -- Error; unable to load Airports!" << std::endl;
        }
       return false;
    }
@@ -79,18 +80,18 @@ bool AirportLoader::load(const char* country)
    Airport airport;
    const char* r = db->getFirstRecord();
    airport.setRecord(r);
-   while (r != 0 && airport.formatCode() == 1) {
+   while (r != nullptr && airport.formatCode() == 1) {
 
       // Is the airport in the correct country?
       int inArea = true;
-      if ( country != 0 ) inArea = airport.isCountryCode(country);
+      if ( country != nullptr ) inArea = airport.isCountryCode(country);
 
       if ( inArea ) {
 
          if (nrl > ncache) {
              if (isMessageEnabled(MSG_ERROR)) {
-            std::cerr << "AirportLoader: key table too small; ";
-            std::cerr << "increase AIRPORT_MAX_RECORDS" << std::endl;
+                 std::cerr << "AirportLoader: key table too small; ";
+                 std::cerr << "increase AIRPORT_MAX_RECORDS" << std::endl;
              }
              std::exit(EXIT_FAILURE);
          }
@@ -126,7 +127,7 @@ bool AirportLoader::load(const char* country)
 // ---
    Runway runway;
    runway.setRecord(r);
-   while (r != 0 && runway.formatCode() == 2) {
+   while (r != nullptr && runway.formatCode() == 2) {
 
       // Have the first record of a runway!
       char rwbuf[RUNWAY_RECORD_LEN];
@@ -136,20 +137,20 @@ bool AirportLoader::load(const char* country)
       // Look for the second record
       r = db->getNextRecord();
       runway.setRecord(r);
-      if (r == 0 || runway.formatCode() != 3) {
+      if (r == nullptr || runway.formatCode() != 3) {
          // something is wrong -- must have a second record
           if (isMessageEnabled(MSG_ERROR)) {
-         std::cerr << "AirportLoader::load: missing second record";
-         std::cerr << " of a runway description!" << std::endl;
+              std::cerr << "AirportLoader::load: missing second record";
+              std::cerr << " of a runway description!" << std::endl;
           }
-           std::exit(EXIT_FAILURE);
+          std::exit(EXIT_FAILURE);
       }
 
       // Have the second record!
       lcStrncpy( &rwbuf[AIRPORT_RECORD_LEN], AIRPORT_RECORD_LEN, r, AIRPORT_RECORD_LEN);
       runway.setRecord(rwbuf);
 
-      // Find this runway's airport key 
+      // Find this runway's airport key
       char apKey[AP_KEY_LEN+1];
       runway.airportKey(apKey);
       int n = queryByKey(apKey);
@@ -180,7 +181,7 @@ bool AirportLoader::load(const char* country)
 // Next skip arresting systems records
 // ---
 
-   while (r != 0 && runway.formatCode() == 4) {
+   while (r != nullptr && runway.formatCode() == 4) {
       r = db->getNextRecord();
       runway.setRecord(r);
    }
@@ -191,7 +192,7 @@ bool AirportLoader::load(const char* country)
 // ---
    Ils ils;
    ils.setRecord(r);
-   while (r != 0 && ils.formatCode() == 5) {
+   while (r != nullptr && ils.formatCode() == 5) {
 
       // Have the first record of a ils!
       char ilsbuf[ILS_RECORD_LEN];
@@ -201,13 +202,13 @@ bool AirportLoader::load(const char* country)
       // Look for the second record
       r = db->getNextRecord();
       ils.setRecord(r);
-      if (r == 0 || ils.formatCode() != 6) {
+      if (r == nullptr || ils.formatCode() != 6) {
          // something is wrong -- must have a second record
           if (isMessageEnabled(MSG_ERROR)) {
-         std::cerr << "AirportLoader::load: missing second record";
-         std::cerr << " of an ils description!" << std::endl;
+              std::cerr << "AirportLoader::load: missing second record";
+              std::cerr << " of an ils description!" << std::endl;
           }
-           std::exit(EXIT_FAILURE);
+          std::exit(EXIT_FAILURE);
       }
 
       // Have the second record!
@@ -244,7 +245,7 @@ bool AirportLoader::load(const char* country)
       AltIlsRecord* ilsr = dsAIParse(altIlsFile);
 
       // process records until all are read
-      while (ilsr != 0) {
+      while (ilsr != nullptr) {
 
          // Create the ils's runway identifier
          char rwId[ILS_RW_ID_LEN+1];
@@ -277,8 +278,8 @@ bool AirportLoader::load(const char* country)
 
             // setup localizer component data
             {
-               double nlat, nlon;
-               float  elev;
+               double nlat(0.0), nlon(0.0);
+               float  elev(0.0);
                key[ILS_KEY_LEN-1] = 'Z';
                Ils::IlsType type = Ils::localizer;
 
@@ -312,8 +313,8 @@ bool AirportLoader::load(const char* country)
 
             // setup glide slope component data
             {
-               double nlat, nlon;
-               float  elev;
+               double nlat(0.0), nlon(0.0);
+               float  elev(0.0);
 
                key[ILS_KEY_LEN-1] = 'G';
                Ils::IlsType type = Ils::glideSlope;
@@ -347,8 +348,8 @@ bool AirportLoader::load(const char* country)
 
             // setup Inner marker component data
             if (ilsr->imd != 0.0f) {
-               double nlat, nlon;
-               float  elev;
+               double nlat(0.0), nlon(0.0);
+               float  elev(0.0);
 
                Ils::IlsType type = Ils::innerMarker;
                key[ILS_KEY_LEN-1] = 'I';
@@ -382,8 +383,8 @@ bool AirportLoader::load(const char* country)
 
             // setup Middle marker component data
             if (ilsr->mmd != 0.0f) {
-               double nlat, nlon;
-               float  elev;
+               double nlat(0.0), nlon(0.0);
+               float  elev(0.0);
 
                Ils::IlsType type = Ils::middleMarker;
                key[ILS_KEY_LEN-1] = 'M';
@@ -414,11 +415,11 @@ bool AirportLoader::load(const char* country)
                rwk->ils = mk;
                mk->parent = rwk;
             }
- 
+
             // setup Outer marker component data
             if (ilsr->omd != 0.0f) {
-               double nlat, nlon;
-               float  elev;
+               double nlat(0.0), nlon(0.0);
+               float  elev(0.0);
 
                Ils::IlsType type = Ils::outerMarker;
                key[ILS_KEY_LEN-1] = 'O';
@@ -497,9 +498,9 @@ int AirportLoader::getMaxRecords()
 //------------------------------------------------------------------------------
 Airport* AirportLoader::airport(const int n)
 {
-   Airport* ap = 0;
+   Airport* ap = nullptr;
    const char* s = record(n);
-   if (s != 0) {
+   if (s != nullptr) {
       // when we have an airport record
       ap = new Airport(s);
    }
@@ -508,9 +509,9 @@ Airport* AirportLoader::airport(const int n)
 
 Airport* AirportLoader::getAirport(const int n)
 {
-   Airport* ap = 0;
+   Airport* ap = nullptr;
    const char* s = getRecord(n);
-   if (s != 0) {
+   if (s != nullptr) {
       if ( Record::dsAtoln( &s[FORMAT_CODE_POS-1], FORMAT_CODE_LEN ) == 1 ) {
          // when we have an airport record
          ap = new Airport(s);
@@ -521,9 +522,9 @@ Airport* AirportLoader::getAirport(const int n)
 
 Runway* AirportLoader::getRunway(const int n)
 {
-   Runway* rw = 0;
+   Runway* rw = nullptr;
    const char* s = getRecord(n);
-   if (s != 0) {
+   if (s != nullptr) {
       if ( Record::dsAtoln( &s[FORMAT_CODE_POS-1], FORMAT_CODE_LEN ) == 2 ) {
          // when we have a runway record
          rw = new Runway(s);
@@ -534,9 +535,9 @@ Runway* AirportLoader::getRunway(const int n)
 
 Ils* AirportLoader::getIls(const int n)
 {
-   Ils* ils = 0;
+   Ils* ils = nullptr;
    const char* s = getRecord(n);
-   if (s != 0) {
+   if (s != nullptr) {
       if ( Record::dsAtoln( &s[FORMAT_CODE_POS-1], FORMAT_CODE_LEN ) == 5 ) {
          // when we have an ILS record
          ils = new Ils(s);
@@ -594,7 +595,7 @@ int AirportLoader::queryByLength(const float minRwLen)
 //------------------------------------------------------------------------------
 int AirportLoader::queryByType(const Airport::AirportType type)
 {
-   return queryAirport(type,0.0f);
+   return queryAirport(type, 0.0f);
 }
 
 
@@ -606,7 +607,7 @@ int AirportLoader::queryByFreq(const float freq)
 {
    double mr2(FLT_MAX);
    if (mrng > 0.0f) mr2 = mrng*mrng;
-   
+
    // compute range**2 to ref point and select all that have range less
    // than maxRange
    nql = 0;
@@ -638,7 +639,7 @@ int AirportLoader::queryByChannel(const int chan)
 {
    double mr2(FLT_MAX);
    if (mrng > 0.0f) mr2 = mrng*mrng;
-   
+
    // compute range**2 to ref point and select all that have range less
    // than maxRange
    nql = 0;
@@ -670,7 +671,7 @@ int AirportLoader::queryAirport(const Airport::AirportType type, const float min
 {
    double mr2(FLT_MAX);
    if (mrng > 0.0f) mr2 = mrng*mrng;
-   
+
    // compute range**2 to ref point and select all that have range less
    // than maxRange
    nql = 0;
@@ -703,15 +704,15 @@ int AirportLoader::getNumRunwayRecords(const char* apkey)
 {
    // Use queryByKey() find the airport
    queryByKey(apkey);
-   
+
    // keep a pointer to the airport
-   AirportKey* apk = 0;
+   AirportKey* apk = nullptr;
    if (nql == 1) apk = static_cast<AirportKey*>(ql[0]);
    nql = 0;
 
    // count the number of runway records
    int n = 0;
-   if (apk != 0) {
+   if (apk != nullptr) {
       for (RunwayKey* rwk = apk->runways; rwk != 0; rwk = rwk->next) {
          n++;
       }
@@ -728,14 +729,14 @@ int AirportLoader::queryRunwayByNumber(const char* apkey, const int n)
 {
    // Use queryByKey() find the airport
    queryByKey(apkey);
-   
+
    // keep a pointer to the airport
-   AirportKey* apk = 0;
+   AirportKey* apk = nullptr;
    if (nql == 1) apk = static_cast<AirportKey*>(ql[0]);
 
    // find the n'th runway record
    nql = 0;
-   if (apk != 0) {
+   if (apk != nullptr) {
       int i = 0;
       for (RunwayKey* rwk = apk->runways; rwk != 0; rwk = rwk->next) {
          if (i == n) {
@@ -760,14 +761,14 @@ int AirportLoader::queryRunwayByIdent(const char* id)
 {
    // Use queryByKey() find the airport
    queryByKey(id);
-   
+
    // keep a pointer to the airport
-   AirportKey* apk = 0;
+   AirportKey* apk = nullptr;
    if (nql == 1) apk = static_cast<AirportKey*>(ql[0]);
 
    // find the runway that matches the identifier
    nql = 0;
-   if (apk != 0) {
+   if (apk != nullptr) {
 
       char rwId[RW_XE_IDENT_LEN+1];
       lcStrncpy(rwId,RW_XE_IDENT_LEN+1,&id[AP_KEY_LEN],RW_XE_IDENT_LEN);
@@ -780,8 +781,8 @@ int AirportLoader::queryRunwayByIdent(const char* id)
       stripSpaces(rwId2,RW_XE_IDENT_LEN);
 
       for (RunwayKey* rwk = apk->runways; rwk != 0; rwk = rwk->next) {
-         if ( (strncmp( &rwk->key[AP_KEY_LEN], rwId, RW_XE_IDENT_LEN ) == 0) ||
-              (strncmp( &rwk->key[AP_KEY_LEN+RW_XE_IDENT_LEN],
+         if ( (std::strncmp( &rwk->key[AP_KEY_LEN], rwId, RW_XE_IDENT_LEN ) == 0) ||
+              (std::strncmp( &rwk->key[AP_KEY_LEN+RW_XE_IDENT_LEN],
             rwId2, RW_XE_IDENT_LEN ) == 0) ) {
             ql[nql++] = rwk;
          }
@@ -808,17 +809,17 @@ int AirportLoader::queryRunwayBySubkey(const char* subkey)
 
    // Use queryByKey() find the airport
    queryByKey(rwKey);
-   
+
    // keep a pointer to the airport
-   AirportKey* apk = 0;
+   AirportKey* apk = nullptr;
    if (nql == 1) apk = static_cast<AirportKey*>(ql[0]);
 
    // find all runways that have matching keys
    nql = 0;
-   if (apk != 0) {
+   if (apk != nullptr) {
       int len = static_cast<int>(strlen(rwKey));
       for (RunwayKey* rwk = apk->runways; rwk != 0; rwk = rwk->next) {
-         if (strncmp(rwk->key,rwKey,len) == 0) ql[nql++] = rwk;
+         if (std::strncmp(rwk->key,rwKey,len) == 0) ql[nql++] = rwk;
       }
    }
 
@@ -852,8 +853,8 @@ int AirportLoader::queryRunwayByLength(const float minRwLen)
    if (nql > 0) {
       makeSimpleLinkedList();
       nql = 0;
-      for (AirportKey* apk = firstAirport; apk != 0; apk = apk->next) {
-         for (RunwayKey* rwk = apk->runways; rwk != 0; rwk = rwk->next) {
+      for (AirportKey* apk = firstAirport; apk != nullptr; apk = apk->next) {
+         for (RunwayKey* rwk = apk->runways; rwk != nullptr; rwk = rwk->next) {
             if (rwk->rwlen >= minRwLen) {
                ql[nql++] = rwk;
             }
@@ -876,7 +877,7 @@ int AirportLoader::queryRunwayByFreq(const float freq)
 {
    double mr2(FLT_MAX);
    if (mrng > 0.0f) mr2 = mrng*mrng;
-   
+
    // compute range**2 to ref point and select all that have range less
    // than maxRange
    nql = 0;
@@ -910,7 +911,7 @@ int AirportLoader::queryRunwayByChannel(const int chan)
 {
    double mr2(FLT_MAX);
    if (mrng > 0.0f) mr2 = mrng*mrng;
-   
+
    // compute range**2 to ref point and select all that have range less
    // than maxRange
    nql = 0;
@@ -943,7 +944,7 @@ int AirportLoader::getNumIlsRecords(const char* rwId)
 {
    // Use queryRunwayByIdent() find the runway
    queryRunwayByIdent(rwId);
-   
+
    // keep a pointer to the runway
    RunwayKey* rwk = 0;
    if (nql == 1) rwk = static_cast<RunwayKey*>(ql[0]);
@@ -968,7 +969,7 @@ int AirportLoader::queryIlsByNumber(const char* rwId, const int n)
 {
    // Use queryRunwayByIdent() find the runway
    queryRunwayByIdent(rwId);
-   
+
    // keep a pointer to the runway
    RunwayKey* rwk = 0;
    if (nql == 1) rwk = static_cast<RunwayKey*>(ql[0]);
@@ -1005,7 +1006,7 @@ int AirportLoader::queryIlsByIdent(const char* id)
       AirportKey* apk = static_cast<AirportKey*>(rl[i]);
       for (RunwayKey* rwk = apk->runways; rwk != 0; rwk = rwk->next) {
          for (IlsKey* ilsk = rwk->ils; ilsk != 0; ilsk = ilsk->next) {
-            if (strncmp(ilsk->id,id,ILS_IDENT_LEN) == 0) ql[nql++] = ilsk;
+            if (std::strncmp(ilsk->id,id,ILS_IDENT_LEN) == 0) ql[nql++] = ilsk;
          }
       }
    }
@@ -1020,7 +1021,7 @@ int AirportLoader::queryIlsBySubkey(const char* subkey)
 {
    // Use queryRunwayBySubkey() find the runway
    queryRunwayByIdent(subkey);
-   
+
    // keep a pointer to the runway
    RunwayKey* rwk = 0;
    if (nql == 1) rwk = static_cast<RunwayKey*>(ql[0]);
@@ -1031,7 +1032,7 @@ int AirportLoader::queryIlsBySubkey(const char* subkey)
    if (rwk != 0) {
       int len = static_cast<int>(strlen(subkey));
       for (IlsKey* ilsk = rwk->ils; ilsk != 0; ilsk = ilsk->next) {
-         if (strncmp(ilsk->key,subkey,len) == 0) ql[nql++] = ilsk;
+         if (std::strncmp(ilsk->key,subkey,len) == 0) ql[nql++] = ilsk;
       }
    }
 
@@ -1172,7 +1173,7 @@ AirportLoader::findGlideSlope(const RunwayKey* rwk, const IlsKey* lk)
    // find glide slope record that matches the localizer key
    for (IlsKey* ilsk = rwk->ils; ilsk != 0; ilsk = ilsk->next) {
       if (ilsk->type == Ils::GLIDESLOPE) {
-         if (strncmp(locKey,ilsk->key,locKeyLen) == 0) {
+         if (std::strncmp(locKey,ilsk->key,locKeyLen) == 0) {
             ql[nql++] = ilsk;
          }
       }
@@ -1213,7 +1214,7 @@ int AirportLoader::chkRwLen(const AirportKey* key, const float minRwLen)
 //------------------------------------------------------------------------------
 int AirportLoader::chkRwIlsFreq(const RunwayKey* rwk, const float freq)
 {
-   if (freq <= 0.0f || rwk == 0) return 0;
+   if (freq <= 0.0f || rwk == nullptr) return 0;
    for (const IlsKey* ilsk = rwk->ils; ilsk != 0; ilsk = ilsk->next) {
       if ( CMP_FREQ(ilsk->freq,freq) ) return true;
    }
@@ -1222,7 +1223,7 @@ int AirportLoader::chkRwIlsFreq(const RunwayKey* rwk, const float freq)
 
 int AirportLoader::chkIlsFreq(const AirportKey* apk, const float freq)
 {
-   if (freq <= 0.0f || apk == 0) return true;
+   if (freq <= 0.0f || apk == nullptr) return true;
    for (const RunwayKey* rwk = apk->runways; rwk != 0; rwk = rwk->next) {
       if ( chkRwIlsFreq(rwk,freq) ) return true;
    }
@@ -1236,7 +1237,7 @@ int AirportLoader::chkIlsFreq(const AirportKey* apk, const float freq)
 //------------------------------------------------------------------------------
 int AirportLoader::chkRwIlsChan(const RunwayKey* rwk, const int chan)
 {
-   if (chan <= 0 || rwk == 0) return 0;
+   if (chan <= 0 || rwk == nullptr) return 0;
    for (const IlsKey* ilsk = rwk->ils; ilsk != 0; ilsk = ilsk->next) {
       if (ilsk->chan == chan) return true;
    }
@@ -1245,7 +1246,7 @@ int AirportLoader::chkRwIlsChan(const RunwayKey* rwk, const int chan)
 
 int AirportLoader::chkIlsChan(const AirportKey* apk, const int chan)
 {
-   if (chan <= 0 || apk == 0) return true;
+   if (chan <= 0 || apk == nullptr) return true;
    for (const RunwayKey* rwk = apk->runways; rwk != 0; rwk = rwk->next) {
       if ( chkRwIlsChan(rwk,chan) ) return true;
    }
@@ -1258,15 +1259,15 @@ int AirportLoader::chkIlsChan(const AirportKey* apk, const int chan)
 //------------------------------------------------------------------------------
 void AirportLoader::makeSimpleLinkedList()
 {
-   firstAirport = 0;
+   firstAirport = nullptr;
    if (nql > 0) {
       firstAirport = static_cast<AirportKey*>(ql[0]);
       AirportKey* lastAP = firstAirport;
-      lastAP->next = 0;
+      lastAP->next = nullptr;
       for (int i = 1; i < nql; i++) {
          lastAP->next = static_cast<AirportKey*>(ql[i]);
          lastAP = lastAP->next;
-         lastAP->next = 0;
+         lastAP->next = nullptr;
       }
    }
 }
@@ -1288,7 +1289,7 @@ void AirportLoader::printLoaded(std::ostream& sout)
       airport.printRecord(sout);
 
       // print the airport's RUNWAY records
-      for (RunwayKey* rwk = apk->runways; rwk != 0; rwk = rwk->next) {
+      for (RunwayKey* rwk = apk->runways; rwk != nullptr; rwk = rwk->next) {
 
          runway.setRecord( dbGetRecord( rwk ) );
          sout << "Runway: ";
@@ -1320,14 +1321,14 @@ void AirportLoader::printResults(std::ostream& sout)
       airport.printRecord(sout);
 
       // print the airport's RUNWAY records
-      for (RunwayKey* rwk = apk->runways; rwk != 0; rwk = rwk->next) {
+      for (RunwayKey* rwk = apk->runways; rwk != nullptr; rwk = rwk->next) {
 
          runway.setRecord( dbGetRecord( rwk ) );
          sout << "Runway: ";
          runway.printRecord(sout);
 
          // print the runway's ILS records
-         for (IlsKey* ilsk = rwk->ils; ilsk != 0; ilsk = ilsk->next) {
+         for (IlsKey* ilsk = rwk->ils; ilsk != nullptr; ilsk = ilsk->next) {
             ils.setRecord( dbGetRecord( ilsk ) );
             sout << "ILS:    ";
             ils.printRecord(sout);
@@ -1341,10 +1342,9 @@ void AirportLoader::printResults(std::ostream& sout)
 
 
 //------------------------------------------------------------------------------
-// AirportLoader::IlsKey 
+// AirportLoader::IlsKey
 //------------------------------------------------------------------------------
-AirportLoader::IlsKey::IlsKey(const long idx,
-                                       const Ils& ils) : Key(idx)
+AirportLoader::IlsKey::IlsKey(const long idx, const Ils& ils) : Key(idx)
 {
    size = ILS_RECORD_LEN;
    lat = ils.latitude();
@@ -1363,7 +1363,7 @@ AirportLoader::IlsKey::IlsKey(const char* key1) : Key(0)
    size = ILS_RECORD_LEN;
    Record::dsGetString(key,key1,ILS_KEY_LEN);
    id[0] = '\0';
-   next = 0;
+   next = nullptr;
    freq = 0.0f;
    chan = 0;
    type = Ils::ANY;
@@ -1399,10 +1399,9 @@ void AirportLoader::IlsKey::serialize(std::ostream& sout) const
 
 
 //------------------------------------------------------------------------------
-// AirportLoader::RunwayKey 
+// AirportLoader::RunwayKey
 //------------------------------------------------------------------------------
-AirportLoader::RunwayKey::RunwayKey(const long idx,
-                                             const Runway& runway) : Key(idx)
+AirportLoader::RunwayKey::RunwayKey(const long idx, const Runway& runway) : Key(idx)
 {
    runway.key(key);
    rwlen = runway.length();
@@ -1411,8 +1410,8 @@ AirportLoader::RunwayKey::RunwayKey(const long idx,
    lat = runway.latitude(Runway::HIGH_END);
    lon = runway.longitude(Runway::HIGH_END);
 
-   next = 0;
-   ils = 0;
+   next = nullptr;
+   ils = nullptr;
 }
 
 AirportLoader::RunwayKey::RunwayKey(const char* key1) : Key(0)
@@ -1420,8 +1419,8 @@ AirportLoader::RunwayKey::RunwayKey(const char* key1) : Key(0)
    size = RUNWAY_RECORD_LEN;
    Record::dsGetString(key,key1,RW_KEY_LEN);
    rwlen = 0;
-   next = 0;
-   ils = 0;
+   next = nullptr;
+   ils = nullptr;
 }
 
 
@@ -1451,7 +1450,7 @@ void AirportLoader::RunwayKey::serialize(std::ostream& sout) const
 }
 
 //------------------------------------------------------------------------------
-// AirportLoader::AirportKey 
+// AirportLoader::AirportKey
 //------------------------------------------------------------------------------
 AirportLoader::AirportKey::AirportKey(const long idx,
                   const Airport& airport) : Key(idx)
@@ -1464,14 +1463,14 @@ AirportLoader::AirportKey::AirportKey(const long idx,
    lon = airport.longitude();
    type = airport.airportType();
 
-   runways = 0;
+   runways = nullptr;
 }
 
 AirportLoader::AirportKey::AirportKey(const char* key1) : Key(0)
 {
    size = AIRPORT_RECORD_LEN;
    Record::dsGetString(key,key1,AP_KEY_LEN);
-   runways = 0;
+   runways = nullptr;
    type = Airport::ANY;
 }
 
@@ -1498,8 +1497,6 @@ void AirportLoader::AirportKey::serialize(std::ostream& sout) const
    sout << std::endl;
 }
 
-
-
 #ifdef ALT_ILS_FILE    /* Alternate ILS support functions */
 //------------------------------------------------------------------- ## alt ILS
 // computeIlsLL() -- computes the ILS component latitude and longitude
@@ -1516,13 +1513,13 @@ static void computeIlsLL(double* nlat, double* nlon, float* elev,
    double lat = runway.latitude(we);
    double lon = runway.longitude(we);
    double thdg = runway.magHeading(we) + magvar;
-   double dist = double(loc);
+   double dist = static_cast<double>(loc);
 
    // compute delta latitude (degrees)
-   double dlat = dist * cos(thdg*DEG2RAD) * FT2DEG;
+   double dlat = dist * std::cos(thdg*DEG2RAD) * FT2DEG;
 
    // compute delta longitude (degrees)
-   double dlon = dist * sin(thdg*DEG2RAD) * FT2DEG * cos(lat*DEG2RAD);
+   double dlon = dist * std::sin(thdg*DEG2RAD) * FT2DEG * cos(lat*DEG2RAD);
 
    // compute new latitude/longitude/elevation
    *nlat = lat + dlat;
@@ -1543,15 +1540,15 @@ void printLatitude( char* buff, double lat )
       buff[0] = 'S';
    }
 
-   int deg = int(dlat);
+   int deg = static_cast<int>(dlat);
 
-   double dmin = (dlat - double(deg)) * 60.0;
-   int min = int(dmin);
+   double dmin = (dlat - static_cast<double>(deg)) * 60.0;
+   int min = static_cast<int>(dmin);
 
-   double dsec = (dmin - double(min)) * 60.0;
-   int sec = int(dsec);
+   double dsec = (dmin - static_cast<double>(min)) * 60.0;
+   int sec = static_cast<int>(dsec);
 
-   int fsec = int((dsec - double(sec)) * 100.0 );
+   int fsec = static_cast<int>((dsec - static_cast<double>(sec)) * 100.0 );
 
    std::sprintf( &buff[1], "%2d%02d%02d%02d", deg, min, sec, fsec );
 }
@@ -1569,15 +1566,15 @@ void printLongitude( char* buff, double lon )
       buff[0] = 'W';
    }
 
-   int deg = int(dlon);
+   int deg = static_cast<int>(dlon);
 
-   double dmin = (dlon - double(deg)) * 60.0;
-   int min = int(dmin);
+   double dmin = (dlon - static_cast<double>(deg)) * 60.0;
+   int min = static_cast<int>(dmin);
 
-   double dsec = (dmin - double(min)) * 60.0;
-   int sec = int(dsec);
+   double dsec = (dmin - static_cast<double>(min)) * 60.0;
+   int sec = static_cast<int>(dsec);
 
-   int fsec = int((dsec - double(sec)) * 100.0 );
+   int fsec = static_cast<int>((dsec - static_cast<double>(sec)) * 100.0 );
 
    std::sprintf( &buff[1], "%3d%02d%02d%02d", deg, min, sec, fsec );
 }
@@ -1597,10 +1594,10 @@ void printMagvar( char* buff, float magvar )
 
    int deg = int(dmv);
 
-   float dmin = (dmv - float(deg)) * 60.0;
-   int min = int(dmin);
+   float dmin = (dmv - static_cast<float>(deg)) * 60.0;
+   int min = static_cast<int>(dmin);
 
-   int fmin = int((dmin - float(min)) * 10.0 );
+   int fmin = static_cast<int>((dmin - static_cast<float>(min)) * 10.0 );
 
    std::sprintf( &buff[1], "%3d%02d%01d", deg, min, fmin );
 }
@@ -1628,18 +1625,18 @@ const char* AirportLoader::createIlsRecord(const Key* key)
    fillSpaces(irec, ILS_NAME_POS-1);
    dsGetString(&irec[ILS_NAME_POS-1], ilsk->name, ILS_NAME_LEN);
 
-   // Frequency 
+   // Frequency
    fillSpaces(irec, ILS_FREQUENCY_POS-1);
-   int ifreq = int( ilsk->freq * 1000.0f + 0.5f );
+   int ifreq = static_cast<int>( ilsk->freq * 1000.0f + 0.5f );
    std::sprintf( &irec[ILS_FREQUENCY_POS-1], "%7dM", ifreq );
 
-   // Channel 
+   // Channel
    fillSpaces(irec, ILS_CHANNEL_POS-1);
    std::sprintf( &irec[ILS_CHANNEL_POS-1], "%3dX", ilsk->chan );
 
    // Glide slope
    fillSpaces(irec, ILS_GSA_POS-1);
-   int igs = int( ilsk->gs * 100.0f + 0.5f );
+   int igs = static_cast<int>( ilsk->gs * 100.0f + 0.5f );
    std::sprintf( &irec[ILS_GSA_POS-1], "%3d", igs );
 
    // Location of localizer or glide slope

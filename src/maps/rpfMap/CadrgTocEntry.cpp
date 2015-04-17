@@ -5,6 +5,7 @@
 #include "openeaagles/maps/rpfMap/CadrgTocEntry.h"
 
 #include <cstdio>
+#include <cstring>
 
 namespace Eaagles {
 namespace Maps {
@@ -141,7 +142,7 @@ void CadrgTocEntry::setType(const char* x, const int size)
 // -----------------------------------------------------------------------------------------
 void CadrgTocEntry::setZone(const char* x, const int size)
 {
-    strncpy(zone, x, size);
+    std::strncpy(zone, x, size);
     zone[size] = 0;
 }
 
@@ -150,7 +151,7 @@ void CadrgTocEntry::setZone(const char* x, const int size)
 // -----------------------------------------------------------------------------------------
 void CadrgTocEntry::setScale(const char* x, const int size)
 {
-    strncpy(scale, x, size);
+    std::strncpy(scale, x, size);
     scale[size] = 0;
 }
 

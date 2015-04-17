@@ -112,7 +112,7 @@ public:
       IlsKey* next;                 // Next ILS key in list
       float  freq;                  // ILS component frequency (MHz)
       int    chan;                  // ILS component channel#
-      Ils::IlsType type;          // ILS component type
+      Ils::IlsType type;            // ILS component type
 
 #ifdef ALT_ILS_FILE
       float  gs;                    // ILS glide slope

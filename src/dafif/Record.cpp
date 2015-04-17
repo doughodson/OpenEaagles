@@ -5,6 +5,7 @@
 
 #include <iostream>
 #include <cstring>
+#include <cstdlib>
 
 namespace Eaagles {
 namespace Dafif {
@@ -18,14 +19,14 @@ EMPTY_SERIALIZER(Record)
 Record::Record()
 {
    STANDARD_CONSTRUCTOR()
-   ptbl = 0;
+   ptbl = nullptr;
 }
 
 Record::Record(const char* const s)
 {
    STANDARD_CONSTRUCTOR()
 
-   ptbl = 0;
+   ptbl = nullptr;
    setStr(s);
 }
 
@@ -36,7 +37,7 @@ void Record::copyData(const Record& org, const bool cc)
 {
    BaseClass::copyData(org);
    if (cc) {
-      ptbl = 0;
+      ptbl = nullptr;
    }
    setStr( org );
    ptbl = org.ptbl;
@@ -56,7 +57,7 @@ void Record::deleteData()
 //------------------------------------------------------------------------------
 void Record::resetData()
 {
-   setStr( 0 );
+   setStr( nullptr );
 }
 
 //------------------------------------------------------------------------------
@@ -95,7 +96,7 @@ bool Record::isFormatCode(const int code) const
 char Record::transactionCode() const
 {
    const char* p = makePointer(TRANSACTION_CODE_POS);
-   if (p != 0)
+   if (p != nullptr)
       return *p;
    else
       return '\0';
@@ -256,7 +257,7 @@ bool Record::isCycleDate(const char date[]) const
 //------------------------------------------------------------------------------
 const char* Record::makePointer(const size_t n) const
 {
-   const char* p = 0;
+   const char* p = nullptr;
    if (len() != 0) {
       const char* rec = *this;
       if (n > 0 && n <= len()) p = (rec + n - 1);
@@ -312,7 +313,7 @@ float Record::dsChan2freq(const int chan, const char type)
 //------------------------------------------------------------------------------
 double Record::dsAtofn(const char* const s, const int n)
 {
-   if (s == 0) return 0.0f;
+   if (s == nullptr) return 0.0f;
    if (*s == 'U') return 0.0f;
 
    const size_t BUF_LENGTH = 256;
@@ -330,7 +331,7 @@ double Record::dsAtofn(const char* const s, const int n)
 //------------------------------------------------------------------------------
 long Record::dsAtoln(const char* const s, const int n)
 {
-   if (s == 0) return 0;
+   if (s == nullptr) return 0;
    if (*s == 'U') return 0;
 
    const size_t BUF_LENGTH = 256;
@@ -339,7 +340,7 @@ long Record::dsAtoln(const char* const s, const int n)
    lcStrncpy(buf, BUF_LENGTH, s, n);
    buf[n] = '\0';
 
-   return atol(buf);
+   return std::atol(buf);
 }
 
 
@@ -381,7 +382,7 @@ bool Record::dsIsString(const char* const p, const char* const refStr)
    size_t len;
    if (p == 0 || refStr == 0) return false;
    len = std::strlen(refStr);
-   return strncmp(p,refStr,len) == 0;
+   return std::strncmp(p,refStr,len) == 0;
 }
 
 //------------------------------------------------------------------------------

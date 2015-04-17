@@ -8,6 +8,8 @@
 #include "openeaagles/basic/units/Distances.h"
 
 #include <cstring>
+#include <cmath>
+#include <cstdlib>
 
 namespace Eaagles {
 namespace Dafif {
@@ -38,13 +40,13 @@ Database::Database()
    db = new Basic::FileReader();
 
    ncache = 0;
-   rl = 0;
+   rl = nullptr;
    nrl = 0;
 
-   ol = 0;
+   ol = nullptr;
    nol = 0;
 
-   ql = 0;
+   ql = nullptr;
    nql = 0;
    qlimit = 0;
 
@@ -68,13 +70,13 @@ void Database::copyData(const Database& org, const bool cc)
    }
 
    ncache = 0;
-   rl = 0;
+   rl = nullptr;
    nrl = 0;
 
-   ol = 0;
+   ol = nullptr;
    nol = 0;
 
-   ql = 0;
+   ql = nullptr;
    nql = 0;
    qlimit = 0;
 
@@ -91,9 +93,9 @@ void Database::copyData(const Database& org, const bool cc)
 //------------------------------------------------------------------------------
 void Database::deleteData()
 {
-   if (db != 0) {
+   if (db != nullptr) {
       db->unref();
-      db = 0;
+      db = nullptr;
    }
    dbInUse = false;
    dbLoaded = false;
@@ -115,10 +117,10 @@ bool Database::openDatabaseFile()
 
    // create keys
    ncache = getMaxRecords();
-   if (rl != 0) delete[] rl;
+   if (rl != nullptr) delete[] rl;
    rl = new Key*[ncache];
    if (isMessageEnabled(MSG_DEBUG)) {
-   std::cout << "db = " << this << ", ncache = " << ncache << std::endl;
+      std::cout << "db = " << this << ", ncache = " << ncache << std::endl;
    }
 
    // open the database file
@@ -147,7 +149,7 @@ void Database::setArea(const double lat, const double lon, const double mr)
 {
    refLat = lat;
    refLon = lon;
-   coslat = cos(lat * Basic::Angle::D2RCC);
+   coslat = std::cos(lat * Basic::Angle::D2RCC);
    mrng   = mr;
 }
 
@@ -186,8 +188,8 @@ int Database::numberFound()
 //------------------------------------------------------------------------------
 double Database::range2(const double lat, const double lon) const
 {
-   double x = (lat - refLat) * 60.0;
-   double y = (lon - refLon) * coslat * 60.0;
+   const double x = (lat - refLat) * 60.0;
+   const double y = (lon - refLon) * coslat * 60.0;
    return (x * x + y * y);
 }
 
@@ -198,7 +200,7 @@ double Database::range2(const double lat, const double lon) const
 //------------------------------------------------------------------------------
 const char* Database::record(const int n, const int size)
 {
-   const char* p = 0;
+   const char* p = nullptr;
    if (n >= 0 && n < nrl) {
       p = dbGetRecord( rl[n], size );
    }
@@ -207,7 +209,7 @@ const char* Database::record(const int n, const int size)
 
 const char* Database::getRecord(const int n, const int size)
 {
-   const char* p = 0;
+   const char* p = nullptr;
    if (n >= 0 && n < nql) {
       p = dbGetRecord( ql[n], size );
    }
@@ -218,8 +220,7 @@ const char* Database::getRecord(const int n, const int size)
 // dbGetRecord() -- get record from the database
 const char* Database::dbGetRecord( const Key* key, const int size )
 {
-
-   const char* p = 0;
+   const char* p = nullptr;
 
    // size of record to read
    int ssize = key->size;
@@ -302,13 +303,13 @@ void Database::createIcaoList()
 
       // copy keys with a valid ICAO code to the ICAO list and sort
       for (int i = 0; i < nrl; i++) {
-         if ( strlen(rl[i]->icao) > 2 ) {       // at least three characters
+         if ( std::strlen(rl[i]->icao) > 2 ) {       // at least three characters
             ol[nol++] = rl[i];
          }
       }
 
       // sort the ICAO list keys
-      qsort(ol,nol,sizeof(Key*),ol_cmp);
+      std::qsort(ol,nol,sizeof(Key*),ol_cmp);
    }
 }
 
@@ -318,7 +319,7 @@ void Database::createIcaoList()
 bool Database::setSlotPathname(Basic::String* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setPathname( *msg );
    }
    return ok;
@@ -327,7 +328,7 @@ bool Database::setSlotPathname(Basic::String* const msg)
 bool Database::setSlotFilename(Basic::String* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setFilename( *msg );
    }
    return ok;
@@ -347,7 +348,7 @@ int Database::sQuery(Key** key, Key** base,
    // search the record list for matches and sort by range
    if (n != 0) {
       Key** k = static_cast<Key**>(bsearch(key, base, n, sizeof(Key*), cmp));
-      if (k != 0) {
+      if (k != nullptr) {
          ql[0] = *k;
          nql = 1;
       }
@@ -366,7 +367,7 @@ int Database::mQuery(Key** key, Key** base,
    // search the record list for matches and sort by range
    if (n != 0) {
       Key** k = static_cast<Key**>(bsearch(key, base, n, sizeof(Key*), cmp));
-      if (k != 0) {
+      if (k != nullptr) {
          expandResults(key,k,cmp,base,n);
       }
    }
@@ -438,11 +439,11 @@ void Database::expandResults(Key** key, Key** keyPtr,
 int Database::rangeSort2()
 {
    // if more than one key, sort them by range
-   if (nql > 1) qsort(ql, nql, sizeof(Key*), rlqs);
+   if (nql > 1) std::qsort(ql, nql, sizeof(Key*), rlqs);
 
    // reject records with a range greater than mrng
    if (mrng > 0.0f) {
-      double mr2 = mrng*mrng;
+      const double mr2 = mrng*mrng;
       int done = 0;
       while (nql > 0 && !done) {
          Key* k = ql[nql-1];

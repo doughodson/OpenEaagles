@@ -64,7 +64,7 @@ bool WaypointLoader::load(const char* country)
    if ( !openDatabaseFile()  ) {
       // Something is wrong!
        if (isMessageEnabled(MSG_ERROR)) {
-      std::cerr << "WaypointLoader::load() -- Error; unable to load Waypoints!" << std::endl;
+          std::cerr << "WaypointLoader::load() -- Error; unable to load Waypoints!" << std::endl;
        }
       return false;
    }
@@ -74,12 +74,12 @@ bool WaypointLoader::load(const char* country)
    // Read the file and create WaypointKey's for all records in our country
    // ---
    Waypoint waypoint;
-   for (const char* r=db->getFirstRecord(); r != 0; r=db->getNextRecord()) {
+   for (const char* r=db->getFirstRecord(); r != nullptr; r=db->getNextRecord()) {
 
       waypoint.setRecord(r);
 
       int inArea = true;
-      if ( country != 0 ) inArea = waypoint.isCountryCode(country);
+      if ( country != nullptr ) inArea = waypoint.isCountryCode(country);
 
       if ( inArea ) {
 
@@ -135,19 +135,19 @@ int WaypointLoader::getMaxRecords()
 Waypoint* WaypointLoader::waypoint(const int n)
 {
    const char* s = record(n);
-    if (s != 0)
+    if (s != nullptr)
        return new Waypoint(s);
     else
-       return 0;
+       return nullptr;
 }
 
 Waypoint* WaypointLoader::getWaypoint(const int n)
 {
     const char* s = getRecord(n);
-    if (s != 0)
+    if (s != nullptr)
        return new Waypoint(s);
     else
-       return 0;
+       return nullptr;
 }
 
 
@@ -187,7 +187,7 @@ int WaypointLoader::queryByRange()
 int WaypointLoader::queryByIdent(const char* id)
 {
    // Search for the waypoint record(s)
-   WaypointKey key(id,0);
+   WaypointKey key(id, nullptr);
    Key* pkey = &key;
    return Database::mQuery(&pkey, rl, nrl, il_cmp);
 }
@@ -259,8 +259,7 @@ void WaypointLoader::printResults(std::ostream& sout)
 //------------------------------------------------------------------------------
 // WaypointLoader::WaypointKey
 //------------------------------------------------------------------------------
-WaypointLoader::WaypointKey::WaypointKey(
-         const long idx, const Waypoint& waypoint) : Key(idx)
+WaypointLoader::WaypointKey::WaypointKey(const long idx, const Waypoint& waypoint) : Key(idx)
 {
    size = WAYPOINT_RECORD_LEN;
    waypoint.icaoCode(icao);
@@ -272,18 +271,17 @@ WaypointLoader::WaypointKey::WaypointKey(
    lon = waypoint.longitude();
 }
 
-WaypointLoader::WaypointKey::WaypointKey(
-         const char* id, const char* ccode) : Key(0)
+WaypointLoader::WaypointKey::WaypointKey(const char* id, const char* ccode) : Key(0)
 {
    size = WAYPOINT_RECORD_LEN;
    key[0] = '\0';
 
-   if (id != 0)
+   if (id != nullptr)
       lcStrcpy(ident,WP_IDENT_LEN+1,id);
    else
       ident[0] = '\0';
 
-   if (ccode != 0)
+   if (ccode != nullptr)
       lcStrcpy(countryCode,WP_CCODE_LEN+1,ccode);
    else
       countryCode[0] = '\0';

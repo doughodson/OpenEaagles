@@ -65,7 +65,7 @@ int Ils::isIlsType(const Ils::IlsType tt) const
 //------------------------------------------------------------------------------
 void Ils::getGlideSlopeData(const double aclat, const double aclon, const double acelev, float* ilsGlideSlope, float* acGlideSlope, float* deltaGlideSlope)const
 {
-   double bearing, range, grdrange, lookangle;
+   double bearing(0.0), range(0.0), grdrange(0.0), lookangle(0.0);
    Basic::Nav::glla2bd(aclat, aclon, acelev, latitude(), longitude(), elevation(), &bearing, &grdrange, &range, &lookangle);
    *ilsGlideSlope = glideSlopeAngle();
    *acGlideSlope = static_cast<float>(-lookangle);
@@ -96,7 +96,7 @@ void Ils::printRecord(std::ostream& sout) const
    typeValue[0] = getChar(ILS_CLTYPE_POS);
    sout << typeValue;
    sout << ": ";
-   
+
    sout << "( ";
 
    std::streamoff old = sout.precision();
@@ -122,11 +122,11 @@ void Ils::printRecord(std::ostream& sout) const
 }
 
 //------------------------------------------------------------------------------
-//  print Glide Slope Data for current ILS 
+//  print Glide Slope Data for current ILS
 //------------------------------------------------------------------------------
 void Ils::printGlideSlopeData(std::ostream& sout, const double aclat, const double aclon, const double acelev)const
 {
-   float ilsGlideSlope, acGlideSlope, deltaGlideSlope;
+   float ilsGlideSlope(0.0), acGlideSlope(0.0), deltaGlideSlope(0.0);
    getGlideSlopeData(aclat, aclon, acelev, &ilsGlideSlope, &acGlideSlope, &deltaGlideSlope);
    sout << "  ILS glide slope " << ilsGlideSlope << "  aircraft_glide_slope " << acGlideSlope << " delta_angle " << deltaGlideSlope;
 }

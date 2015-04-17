@@ -245,6 +245,7 @@ bool CadrgFile::initialize(const char* dir)
     // # of frame file index records
     uint            numFFIdxRec = 0;
     // Offset of frame file pathname
+
     uint            ffPathOff = 0;
     // Boundary record length
     ushort          bndryRecLength = 0;
@@ -449,7 +450,7 @@ bool CadrgFile::initialize(const char* dir)
         // Read the type in
         toc.read(type, 5);
 
-        if (strncmp(type, "CADRG", 5) == 0)
+        if (std::strncmp(type, "CADRG", 5) == 0)
             cib = false;
         else
             cib = true;
@@ -458,12 +459,12 @@ bool CadrgFile::initialize(const char* dir)
         toc.seekg(5, std::ios::cur);
         // Scale of our map (1:250k, etc...)
         char scale[12];
-        strncpy(scale, entries[i]->getScale(), 12);
+        std::strncpy(scale, entries[i]->getScale(), 12);
         toc.read(scale, 12);
 
         // Read the zone we are in.
         char zone[2];
-        strncpy(zone, entries[i]->getZone(), 1);
+        std::strncpy(zone, entries[i]->getZone(), 1);
         toc.read(zone, 1);
 
         // Skip producer (5 chars)

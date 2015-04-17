@@ -65,17 +65,15 @@ bool Navaid::isNavaidType(const Navaid::NavaidType tt) const
 }
 
 bool Navaid::isDmeType() const
-   {
+{
    NavaidType t = navaidType();
-
    // Any DME type
    return (t == ANY) || (t == VORTAC) || (t == TACAN) || (t == VOR_DME) || (t == NDB_DME) || (t == DME);
-   }
+}
 
 bool Navaid::isDirectionalType() const
-   {
+{
    NavaidType t = navaidType();
-
    // Any directional beacon type
    return (t == ANY) || (t == VOR) || (t == VORTAC) || (t == TACAN) || (t == VOR_DME);
 }
@@ -108,7 +106,7 @@ void Navaid::printRecord(std::ostream& sout) const
 
    sout << id;
    sout << "-";
-   sout << char(navaidType());
+   sout << static_cast<char>(navaidType());
    sout << "-";
    sout << ccode;
    sout << "-";
@@ -143,7 +141,7 @@ void Navaid::printRecord(std::ostream& sout) const
    sout << "-";
    sout << rc;
    sout << "-";
-   sout << range(); 
+   sout << range();
    sout << ")";
 
 }
@@ -152,9 +150,9 @@ void Navaid::printRecord(std::ostream& sout) const
 //------------------------------------------------------------------------------
 //  print true bearing and range to system
 //------------------------------------------------------------------------------
-void Navaid::printTrueBearingRange(std::ostream& sout, const double aclat, const double aclon, const double acelev)const
+void Navaid::printTrueBearingRange(std::ostream& sout, const double aclat, const double aclon, const double acelev) const
 {
-   double bearing, range, grdrange;
+   double bearing(0.0), range(0.0), grdrange(0.0);
    Basic::Nav::glla2bd(aclat, aclon, acelev, latitude(), longitude(), elevation(), &bearing, &range, &grdrange);
 
    bool rangeIsValid = true;

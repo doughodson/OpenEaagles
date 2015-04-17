@@ -1,3 +1,4 @@
+
 #include "openeaagles/dafif/NavaidLoader.h"
 #include "openeaagles/basic/FileReader.h"
 #include <cstring>
@@ -62,7 +63,7 @@ bool NavaidLoader::load(const char* country)
    if ( !openDatabaseFile()  ) {
       // Something is wrong!
        if (isMessageEnabled(MSG_ERROR)) {
-      std::cerr << "NavaidLoader::load() -- Error; unable to load Navaids!" << std::endl;
+           std::cerr << "NavaidLoader::load() -- Error; unable to load Navaids!" << std::endl;
        }
       return false;
    }
@@ -76,14 +77,14 @@ bool NavaidLoader::load(const char* country)
       navaid.setRecord(r);
 
       int inArea = true;
-      if ( country != 0 ) inArea = navaid.isCountryCode(country);
+      if ( country != nullptr ) inArea = navaid.isCountryCode(country);
 
       if ( inArea && nrl < ncache ) {
 
          if (nrl > ncache) {
              if (isMessageEnabled(MSG_ERROR)) {
-            std::cerr << "NavaidLoader: key table too small; ";
-            std::cerr << "increase NAVAID_MAX_RECORDS" << std::endl;
+                 std::cerr << "NavaidLoader: key table too small; ";
+                 std::cerr << "increase NAVAID_MAX_RECORDS" << std::endl;
              }
              std::exit(EXIT_FAILURE);
          }
@@ -104,14 +105,14 @@ bool NavaidLoader::load(const char* country)
       cl = new NavaidKey*[nrl];
    }
 
-   
+
    // copy keys with a frequency > 0 to the frequency list and sort
    nfl = 0;
    for (int i = 0; i < nrl; i++) {
       fl[nfl] = static_cast<NavaidKey*>(rl[i]);
       if ( fl[nfl]->freq > 0.0f ) nfl++;
    }
-   qsort(fl,nfl,sizeof(NavaidKey*),fl_cmp);
+   std::qsort(fl,nfl,sizeof(NavaidKey*),fl_cmp);
 
 
    // copy keys with a channel number != 0 to the channel list and sort
@@ -120,7 +121,7 @@ bool NavaidLoader::load(const char* country)
       cl[ncl] = static_cast<NavaidKey*>(rl[i]);
       if ( cl[ncl]->channel != 0 ) ncl++;
    }
-   qsort(cl,ncl,sizeof(NavaidKey*),cl_cmp);
+   std::qsort(cl,ncl,sizeof(NavaidKey*),cl_cmp);
 
    dbLoaded = true;
    return true;
@@ -151,19 +152,19 @@ int NavaidLoader::getMaxRecords()
 Navaid* NavaidLoader::navaid(const int n)
 {
    const char* s = record(n);
-   if (s != 0)
+   if (s != nullptr)
       return new Navaid(s);
    else
-      return 0;
+      return nullptr;
 }
 
 Navaid* NavaidLoader::getNavaid(const int n)
 {
     const char* s = getRecord(n);
-    if (s != 0)
+    if (s != nullptr)
        return new Navaid(s);
     else
-       return 0;
+       return nullptr;
 }
 
 
@@ -183,7 +184,7 @@ int NavaidLoader::queryByRange()
 int NavaidLoader::queryByIdent(const char* id)
 {
    // Search for the NAVAID record(s)
-   NavaidKey key(id, 0);
+   NavaidKey key(id, nullptr);
    Key* pkey = &key;
    return Database::mQuery(&pkey, rl, nrl, il_cmp);
 }
@@ -234,7 +235,7 @@ int NavaidLoader::queryByType(const Navaid::NavaidType t)
 {
    double mr2(FLT_MAX);
    if (mrng > 0.0f) mr2 = mrng*mrng;
-   
+
    // compute range**2 to ref point and select all that have range less
    // than mrng**2 and type 't'
    nql = 0;
@@ -253,7 +254,7 @@ int NavaidLoader::queryByType(const Navaid::NavaidType t)
 
    // limit number of result records
    if (qlimit > 0 && nql > qlimit) nql = qlimit;
-   
+
    return nql;
 }
 
@@ -306,7 +307,7 @@ int NavaidLoader::fl_cmp(const void* p1, const void* p2)
    int h2 = MHZ2HHZ(k2->freq);
    if (h1 < h2) result = -1;
    else if (h1 > h2) result = 1;
-   
+
    return result;
 }
 
@@ -322,7 +323,7 @@ int NavaidLoader::cl_cmp(const void* p1, const void* p2)
    // compare channels
    if (k1->channel < k2->channel) result = -1;
    else if (k1->channel > k2->channel) result = 1;
-   
+
    return result;
 }
 
@@ -367,7 +368,7 @@ void NavaidLoader::printResults(std::ostream& sout)
 }
 
 //------------------------------------------------------------------------------
-// NavaidLoader::NavaidKey 
+// NavaidLoader::NavaidKey
 //------------------------------------------------------------------------------
 NavaidLoader::NavaidKey::NavaidKey(const long idx, const Navaid& navaid): Key(idx)
 {
@@ -388,12 +389,12 @@ NavaidLoader::NavaidKey::NavaidKey(const long idx, const Navaid& navaid): Key(id
 NavaidLoader::NavaidKey::NavaidKey(const char* id, const char* ccode) : Key(0)
 {
    size = NAVAID_RECORD_LEN;
-   if (id != 0)
+   if (id != nullptr)
       lcStrcpy(ident,NA_IDENT_LEN+1,id);
    else
       ident[0] = '\0';
 
-   if (ccode != 0)
+   if (ccode != nullptr)
       lcStrcpy(countryCode,NA_CCODE_LEN+1,ccode);
    else
       countryCode[0] = '\0';

@@ -3,6 +3,7 @@
 #include <string>
 #include <stdlib.h>
 #include <iomanip>
+#include <cstring>
 
 #include "openeaagles/terrain/ded/DedFile.h"
 #include "openeaagles/basic/NetHandler.h"   // for byte-swapping only
@@ -253,7 +254,7 @@ bool DedFile::getFileHeaders( std::istream& in )
       //}
 
       // Check ID of input file
-      if ( strncmp(stdhdr->id,SS_STDID,4) != 0 ) {
+      if ( std::strncmp(stdhdr->id,SS_STDID,4) != 0 ) {
          char id[5];
          lcStrncpy(id,5,stdhdr->id,4);
          id[4] = '\0';
@@ -267,7 +268,7 @@ bool DedFile::getFileHeaders( std::istream& in )
       }
 
       // Check Part# of input file
-      if ( strncmp(stdhdr->part,PARTNO,8) != 0 ) {
+      if ( std::strncmp(stdhdr->part,PARTNO,8) != 0 ) {
          char part[10];
          lcStrncpy(part,10,stdhdr->part,8);
          part[8] = '\0';
@@ -280,7 +281,7 @@ bool DedFile::getFileHeaders( std::istream& in )
          ok = false;
       }
 
-      if ( strncmp(stdhdr->rev,REVNO,8) != 0 ) {    // Check Rev of input file
+      if ( std::strncmp(stdhdr->rev,REVNO,8) != 0 ) {    // Check Rev of input file
          char rev[10];
          lcStrncpy(rev,10,stdhdr->rev,8);
          rev[8] = '\0';
@@ -303,7 +304,7 @@ bool DedFile::getFileHeaders( std::istream& in )
             }
             ok = false;
          }
-         
+
          if (ok) {
             {
                // Byte-swap
@@ -447,9 +448,9 @@ bool DedFile::getData( std::istream& in )
          if (in.fail() || in.gcount() < NUM_BYTES_IN_COL) {
             // Read failed!
             if (isMessageEnabled(MSG_ERROR)) {
-            std::cerr << "DedFile::getData: unable to read data. fail:" << in.fail() 
-               << " gcount:" << in.gcount() 
-               << " < BYTES:" << NUM_BYTES_IN_COL 
+            std::cerr << "DedFile::getData: unable to read data. fail:" << in.fail()
+               << " gcount:" << in.gcount()
+               << " < BYTES:" << NUM_BYTES_IN_COL
                << std::endl;
             }
             ok = false;
@@ -484,7 +485,7 @@ bool DedFile::getData( std::istream& in )
    if (!ok) clearData();
 
    return ok;
-} 
+}
 
 //------------------------------------------------------------------------------
 // clear our headers
@@ -557,7 +558,7 @@ void DedFile::dump(std::ostream& sout) const
          }
          if (i > 0)  sout << std::endl;
       }
-   } 
+   }
 }
 
 }// end Terrain namespace

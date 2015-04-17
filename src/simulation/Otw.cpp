@@ -1143,7 +1143,7 @@ bool Otm::isMatchingPlayerType(const Player* const p) const
          if ( refTypeName != 0 && ptype != 0) {
 
             // Then compare at most the length of our reference type name ...
-            match = strncmp( ptype->getString(), refTypeName->getString(), refTypeName->len() ) == 0;
+            match = std::strncmp( ptype->getString(), refTypeName->getString(), refTypeName->len() ) == 0;
 
          }
 

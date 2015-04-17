@@ -37,6 +37,7 @@
 #include "openeaagles/basic/Number.h"
 #include <fstream>
 #include <cstdio>
+#include <cstring>
 
 // Disable all deprecation warnings for now.  Until we fix them,
 // they are quite annoying to see over and over again...
@@ -229,21 +230,21 @@ bool DtedFile::readDtedHeaders(std::istream& in)
     if (in.fail() || in.gcount() < sizeof(uhl))
     {
         if (isMessageEnabled(MSG_ERROR)) {
-        std::cerr << "DtedFile::readDtedHeaders: error reading UHL record." << std::endl;
+           std::cerr << "DtedFile::readDtedHeaders: error reading UHL record." << std::endl;
         }
         return false;
     }
-    if (strncmp(uhl.recognition_sentinel, UHL_RECOGNITION_SENTINEL, sizeof(uhl.recognition_sentinel)) != 0)
+    if (std::strncmp(uhl.recognition_sentinel, UHL_RECOGNITION_SENTINEL, sizeof(uhl.recognition_sentinel)) != 0)
     {
         if (isMessageEnabled(MSG_ERROR)) {
-        std::cerr << "DtedFile::readDtedHeaders: invalid recognition sentinel in UHL record." << std::endl;
+           std::cerr << "DtedFile::readDtedHeaders: invalid recognition sentinel in UHL record." << std::endl;
         }
         return false;
     }
     if (uhl.fixed_by_standard[0] != UHL_FIXED_BY_STANDARD_BYTE)
     {
         if (isMessageEnabled(MSG_ERROR)) {
-        std::cerr << "DtedFile::readDtedHeaders: invalid fixed_by_standard byte in UHL record." << std::endl;
+           std::cerr << "DtedFile::readDtedHeaders: invalid fixed_by_standard byte in UHL record." << std::endl;
         }
         return false;
     }
@@ -254,7 +255,7 @@ bool DtedFile::readDtedHeaders(std::istream& in)
     if (in.fail() || in.gcount() < sizeof(dsi))
     {
         if (isMessageEnabled(MSG_ERROR)) {
-        std::cerr << "DtedFile::readDtedHeaders: error reading DSI record." << std::endl;
+           std::cerr << "DtedFile::readDtedHeaders: error reading DSI record." << std::endl;
         }
         return false;
     }
