@@ -171,7 +171,7 @@ void NetIO::initData()
 
    // Clear emission PDU handle table
    for (unsigned int i = 0; i < MAX_EMISSION_HANDLERS; i++) {
-      emissionHandlers[i] = 0;
+      emissionHandlers[i] = nullptr;
    }
    nEmissionHandlers = 0;
 }
@@ -209,8 +209,8 @@ void NetIO::copyData(const NetIO& org, const bool cc)
    }
 
    // We need to init this ourselves, so ...
-   netInput = 0;
-   netOutput = 0;
+   netInput = nullptr;
+   netOutput = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -219,8 +219,8 @@ void NetIO::copyData(const NetIO& org, const bool cc)
 void NetIO::deleteData()
 {
     clearEmissionPduHandlers();
-    netInput = 0;
-    netOutput = 0;
+    netInput = nullptr;
+    netOutput = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -240,7 +240,7 @@ bool NetIO::initNetwork()
     bool ok = true;
 
     // Initialize network input handler
-    if (netInput != 0) {
+    if (netInput != nullptr) {
         if (netInput->initNetwork(true)) std::cout << "netInput Initialize OK" << std::endl;
     }
     else {
@@ -249,7 +249,7 @@ bool NetIO::initNetwork()
     }
 
     // Initialize network output handler
-    if (netOutput != 0) {
+    if (netOutput != nullptr) {
         if (netOutput->initNetwork(true)) std::cout << "netOutput Initialize OK" << std::endl;
     }
     else {
@@ -468,7 +468,7 @@ void NetIO::processInputList()
 {
    for (unsigned int idx = 0; idx < getInputListSize(); idx++) {
       Nib* nib = static_cast<Nib*>(getInputNib(idx));
-      if (nib != 0) nib->updateTheIPlayer();
+      if (nib != nullptr) nib->updateTheIPlayer();
    }
 
 //   std::cout << "n = " << getInputListSize();      // #DPG#
@@ -592,7 +592,7 @@ Simulation::Nib* NetIO::nibFactory(const Simulation::NetIO::IoType ioType)
 Simulation::Nib* NetIO::createNewOutputNib(Simulation::Player* const player)
 {
    Nib* nib = static_cast<Nib*>(nibFactory(OUTPUT_NIB));
-   if (nib != 0) {
+   if (nib != nullptr) {
       nib->setNetIO(this);
       nib->setPlayer(player);
       nib->setPlayerID(player->getID());
@@ -670,7 +670,7 @@ void NetIO::processElectromagneticEmissionPDU(const ElectromagneticEmissionPDU* 
 
     // Find the NIB and IPlayer for the emitting player (they must exist or we're too early)
     Nib* eNib = findDisNib(ePlayerId, eSiteId, eApplicationId, INPUT_NIB);
-    if (eNib == 0) return;
+    if (eNib == nullptr) return;
 
     // Pass on to the IPlayer's NIB for processing
     eNib->processElectromagneticEmissionPDU(pdu);
@@ -682,7 +682,7 @@ void NetIO::processElectromagneticEmissionPDU(const ElectromagneticEmissionPDU* 
 int NetIO::recvData(char* const packet, const int maxSize)
 {
    int result = 0;
-   if (netInput != 0) {
+   if (netInput != nullptr) {
       result = netInput->recvData(packet, maxSize);
    }
    return result;
@@ -694,7 +694,7 @@ int NetIO::recvData(char* const packet, const int maxSize)
 bool NetIO::sendData(const char* const packet, const int size)
 {
    bool result = 0;
-   if (netOutput != 0) {
+   if (netOutput != nullptr) {
       result = netOutput->sendData( packet, size );
    }
    return result;
@@ -721,8 +721,8 @@ unsigned int NetIO::timeStamp()
 unsigned int NetIO::makeTimeStamp(const LCreal ctime, const bool absolute)
 {
     // compute seconds in this hour
-    int hours = int(ctime / 3600.0);
-    LCreal secondsThisHour = (ctime - LCreal(hours*3600));
+    const int hours = static_cast<int>(ctime / 3600.0);
+    LCreal secondsThisHour = (ctime - static_cast<LCreal>(hours*3600));
 
     // 31 MSBs are for the 3600 seconds in this hour
     unsigned int ts = static_cast<unsigned int>((secondsThisHour/3600.0) * 0x7fffffff);
@@ -742,7 +742,7 @@ bool NetIO::makeFederateName(char* const fedName, const unsigned int len, const 
    static const int p10[5] = { 10000, 1000, 100, 10, 1 };
 
    bool ok = false;
-   if (fedName != 0 && len > 0 && site > 0 && app > 0) {
+   if (fedName != nullptr && len > 0 && site > 0 && app > 0) {
       char cbuff[64];
       unsigned int idx = 0;
 
@@ -794,13 +794,13 @@ bool NetIO::makeFederateName(char* const fedName, const unsigned int len, const 
 bool NetIO::parseFederateName(unsigned short* const site, unsigned short* const app, const char* const fedName)
 {
    bool ok = false;
-   if (site != 0 && app != 0 && fedName != 0) {
+   if (site != nullptr && app != nullptr && fedName != nullptr) {
       unsigned short tSite = 0;
       unsigned short tApp = 0;
       unsigned int idx = 0;
 
       // First check and convert site number
-      ok = ( toupper(fedName[idx++]) == 'S' );
+      ok = ( std::toupper(fedName[idx++]) == 'S' );
       if (ok) {
          unsigned int tmp = 0;
          unsigned int cnt = 0;
@@ -814,7 +814,7 @@ bool NetIO::parseFederateName(unsigned short* const site, unsigned short* const 
       }
 
       // Next check and convert application number
-      ok = ( toupper(fedName[idx++]) == 'A' );
+      ok = ( std::toupper(fedName[idx++]) == 'A' );
       if (ok) {
          unsigned int tmp = 0;
          unsigned int cnt = 0;
@@ -846,7 +846,7 @@ bool NetIO::makeFederationName(char* const fedName, const unsigned int len, cons
    static const int p10[5] = { 10000, 1000, 100, 10, 1 };
 
    bool ok = false;
-   if (fedName != 0 && len > 0 && exercise > 0) {
+   if (fedName != nullptr && len > 0 && exercise > 0) {
       char cbuff[64];
       unsigned int idx = 0;
 
@@ -882,11 +882,11 @@ bool NetIO::makeFederationName(char* const fedName, const unsigned int len, cons
 bool NetIO::parseFederationName(unsigned short* const exercise, const char* const fedName)
 {
    bool ok = false;
-   if (exercise != 0 && fedName != 0) {
+   if (exercise != nullptr && fedName != nullptr) {
       unsigned short tExercise = 0;
       unsigned int idx = 0;
 
-      ok = ( toupper(fedName[idx++]) == 'E' );
+      ok = ( std::toupper(fedName[idx++]) == 'E' );
       if (ok) {
          unsigned int tmp = 0;
          unsigned int cnt = 0;
@@ -938,11 +938,11 @@ const Dis::Ntm* NetIO::findNtmByTypeCodes(
 LCreal NetIO::getMaxEntityRange(const Simulation::Nib* const nib) const
 {
    LCreal value = 0;
-   if (nib != 0) {
+   if (nib != nullptr) {
       const Nib* disNib = dynamic_cast<const Nib*>(nib);
-      if (disNib != 0) {
-         unsigned char k = disNib->getEntityKind();
-         unsigned char d = disNib->getEntityDomain();
+      if (disNib != nullptr) {
+         const unsigned char k = disNib->getEntityKind();
+         const unsigned char d = disNib->getEntityDomain();
          value = (k < NUM_ENTITY_KINDS && d < MAX_ENTITY_DOMAINS) ? maxEntityRange[k][d] : 0;
       }
       else {
@@ -955,11 +955,11 @@ LCreal NetIO::getMaxEntityRange(const Simulation::Nib* const nib) const
 LCreal NetIO::getMaxEntityRangeSquared(const Simulation::Nib* const nib) const
 {
    LCreal value = 0;
-   if (nib != 0) {
+   if (nib != nullptr) {
       const Nib* disNib = dynamic_cast<const Nib*>(nib);
-      if (disNib != 0) {
-         unsigned char k = disNib->getEntityKind();
-         unsigned char d = disNib->getEntityDomain();
+      if (disNib != nullptr) {
+         const unsigned char k = disNib->getEntityKind();
+         const unsigned char d = disNib->getEntityDomain();
          value = (k < NUM_ENTITY_KINDS && d < MAX_ENTITY_DOMAINS) ? maxEntityRange2[k][d] : 0;
       }
       else {
@@ -972,11 +972,11 @@ LCreal NetIO::getMaxEntityRangeSquared(const Simulation::Nib* const nib) const
 LCreal NetIO::getMaxTimeDR(const Simulation::Nib* const nib) const
 {
    LCreal value = 0;
-   if (nib != 0) {
+   if (nib != nullptr) {
       const Nib* disNib = dynamic_cast<const Nib*>(nib);
-      if (disNib != 0) {
-         unsigned char k = disNib->getEntityKind();
-         unsigned char d = disNib->getEntityDomain();
+      if (disNib != nullptr) {
+         const unsigned char k = disNib->getEntityKind();
+         const unsigned char d = disNib->getEntityDomain();
          value = (k < NUM_ENTITY_KINDS && d < MAX_ENTITY_DOMAINS) ? maxTimeDR[k][d] : 0;
       }
       else {
@@ -989,11 +989,11 @@ LCreal NetIO::getMaxTimeDR(const Simulation::Nib* const nib) const
 LCreal NetIO::getMaxPositionErr(const Simulation::Nib* const nib) const
 {
    LCreal value = 0;
-   if (nib != 0) {
+   if (nib != nullptr) {
       const Nib* disNib = dynamic_cast<const Nib*>(nib);
-      if (disNib != 0) {
-         unsigned char k = disNib->getEntityKind();
-         unsigned char d = disNib->getEntityDomain();
+      if (disNib != nullptr) {
+         const unsigned char k = disNib->getEntityKind();
+         const unsigned char d = disNib->getEntityDomain();
          value = (k < NUM_ENTITY_KINDS && d < MAX_ENTITY_DOMAINS) ? maxPositionErr[k][d] : 0;
       }
       else {
@@ -1006,11 +1006,11 @@ LCreal NetIO::getMaxPositionErr(const Simulation::Nib* const nib) const
 LCreal NetIO::getMaxOrientationErr(const Simulation::Nib* const nib) const
 {
    LCreal value = 0;
-   if (nib != 0) {
+   if (nib != nullptr) {
       const Nib* disNib = dynamic_cast<const Nib*>(nib);
-      if (disNib != 0) {
-         unsigned char k = disNib->getEntityKind();
-         unsigned char d = disNib->getEntityDomain();
+      if (disNib != nullptr) {
+         const unsigned char k = disNib->getEntityKind();
+         const unsigned char d = disNib->getEntityDomain();
          value = (k < NUM_ENTITY_KINDS && d < MAX_ENTITY_DOMAINS) ? maxOrientationErr[k][d] : 0;
       }
       else {
@@ -1023,11 +1023,11 @@ LCreal NetIO::getMaxOrientationErr(const Simulation::Nib* const nib) const
 LCreal NetIO::getMaxAge(const Simulation::Nib* const nib) const
 {
    LCreal value = 0;
-   if (nib != 0) {
+   if (nib != nullptr) {
       const Nib* disNib = dynamic_cast<const Nib*>(nib);
-      if (disNib != 0) {
-         unsigned char k = disNib->getEntityKind();
-         unsigned char d = disNib->getEntityDomain();
+      if (disNib != nullptr) {
+         const unsigned char k = disNib->getEntityKind();
+         const unsigned char d = disNib->getEntityDomain();
          value = (k < NUM_ENTITY_KINDS && d < MAX_ENTITY_DOMAINS) ? maxAge[k][d] : 0;
       }
       else {
@@ -1054,7 +1054,7 @@ void NetIO::defineFederateName()
       }
    }
    else {
-      setFederateName(0);
+      setFederateName(nullptr);
    }
 }
 
@@ -1071,7 +1071,7 @@ void NetIO::defineFederationName()
       }
    }
    else {
-      setFederationName(0);
+      setFederationName(nullptr);
    }
 }
 
@@ -1258,7 +1258,7 @@ bool NetIO::setMaxAge(const LCreal v, const unsigned char kind, const unsigned c
 bool NetIO::setMaxEntityRange(const Basic::Distance* const p, const unsigned char kind, const unsigned char domain)
 {
     bool ok = false;
-    if (p != 0) {
+    if (p != nullptr) {
         Basic::Meters ref;
         LCreal meters = ref.convert(*p);
         ok = setMaxEntityRange(meters, kind, domain);
@@ -1270,7 +1270,7 @@ bool NetIO::setMaxEntityRange(const Basic::Distance* const p, const unsigned cha
 bool NetIO::setMaxTimeDR(const Basic::Time* const p, const unsigned char kind, const unsigned char domain)
 {
     bool ok = false;
-    if (p != 0) {
+    if (p != nullptr) {
         Basic::Seconds ref;
         LCreal sec = ref.convert(*p);
         ok = setMaxTimeDR(sec, kind, domain);
@@ -1282,7 +1282,7 @@ bool NetIO::setMaxTimeDR(const Basic::Time* const p, const unsigned char kind, c
 bool NetIO::setMaxPositionErr(const Basic::Distance* const p, const unsigned char kind, const unsigned char domain)
 {
     bool ok = false;
-    if (p != 0) {
+    if (p != nullptr) {
         Basic::Meters ref;
         LCreal meters = ref.convert(*p);
         ok = setMaxPositionErr(meters, kind, domain);
@@ -1294,7 +1294,7 @@ bool NetIO::setMaxPositionErr(const Basic::Distance* const p, const unsigned cha
 bool NetIO::setMaxOrientationErr(const Basic::Angle* const p, const unsigned char kind, const unsigned char domain)
 {
     bool ok = false;
-    if (p != 0) {
+    if (p != nullptr) {
         Basic::Radians ref;
         LCreal radians = static_cast<LCreal>(ref.convert(*p));
         ok = setMaxOrientationErr(radians, kind, domain);
@@ -1306,7 +1306,7 @@ bool NetIO::setMaxOrientationErr(const Basic::Angle* const p, const unsigned cha
 bool NetIO::setMaxAge(const Basic::Time* const p, const unsigned char kind, const unsigned char domain)
 {
     bool ok = false;
-    if (p != 0) {
+    if (p != nullptr) {
         Basic::Seconds ref;
         LCreal sec = ref.convert(*p);
         ok = setMaxAge(sec, kind, domain);
@@ -1361,7 +1361,7 @@ void NetIO::clearEmissionPduHandlers()
 const EmissionPduHandler* NetIO::findEmissionPduHandler(const Simulation::RfSensor* const msg)
 {
    const EmissionPduHandler* handler = 0;
-   if (msg != 0 && nEmissionHandlers > 0) {
+   if (msg != nullptr && nEmissionHandlers > 0) {
       // Try to find one with a matching R/F sensor ...
       for (unsigned int i = 0; i < nEmissionHandlers && handler == 0; i++) {
          if (emissionHandlers[i]->isMatchingRfSystemType(msg)) {
@@ -1382,7 +1382,7 @@ const EmissionPduHandler* NetIO::findEmissionPduHandler(const Simulation::RfSens
 const EmissionPduHandler* NetIO::findEmissionPduHandler(const EmissionSystem* const msg)
 {
    const EmissionPduHandler* handler = 0;
-   if (msg != 0 && nEmissionHandlers > 0) {
+   if (msg != nullptr && nEmissionHandlers > 0) {
       // Try to find one with a matching emitter name
       for (unsigned int i = 0; i < nEmissionHandlers && handler == 0; i++) {
          if (emissionHandlers[i]->isMatchingRfSystemType(msg)) {
@@ -1435,7 +1435,7 @@ bool NetIO::setSlotNetOutput(Basic::NetHandler* const msg)
 bool NetIO::setSlotVersion(const Basic::Number* const num)
 {
     bool ok = false;
-    if (num != 0) {
+    if (num != nullptr) {
         int v = num->getInt();
         if (v >= 0 && v < VERSION_MAX) {
             setVersion(static_cast<unsigned char>(v));
@@ -1452,16 +1452,16 @@ bool NetIO::setSlotVersion(const Basic::Number* const num)
 bool NetIO::setSlotMaxEntityRange(const Basic::PairStream* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       const Basic::List::Item* item = msg->getFirstItem();
-      while (item != 0) {
+      while (item != nullptr) {
 
             // get the slot and object from the pair
             const Basic::Pair* p = static_cast<const Basic::Pair*>(item->getValue());
             const char* const slotname = *p->slot();
             const Basic::Distance* pp = dynamic_cast<const Basic::Distance*>( p->object() );
 
-            if (pp != 0) {
+            if (pp != nullptr) {
                // Ok, we have a valid object,
                //  now can we get valid 'kind' and 'domain' numbers from the slot name?
                unsigned char kind = 255;
@@ -1495,16 +1495,16 @@ bool NetIO::setSlotMaxEntityRange(const Basic::Distance* const msg)
 bool NetIO::setSlotMaxTimeDR(const Basic::PairStream* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       const Basic::List::Item* item = msg->getFirstItem();
-      while (item != 0) {
+      while (item != nullptr) {
 
             // get the slot and object from the pair
             const Basic::Pair* p = static_cast<const Basic::Pair*>(item->getValue());
             const char* const slotname = *p->slot();
             const Basic::Time* pp = dynamic_cast<const Basic::Time*>( p->object() );
 
-            if (pp != 0) {
+            if (pp != nullptr) {
                // Ok, we have a valid object,
                //  now can we get valid 'kind' and 'domain' numbers from the slot name?
                unsigned char kind = 255;
@@ -1540,16 +1540,16 @@ bool NetIO::setSlotMaxTimeDR(const Basic::Time* const msg)
 bool NetIO::setSlotMaxPositionErr(const Basic::PairStream* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       const Basic::List::Item* item = msg->getFirstItem();
-      while (item != 0) {
+      while (item != nullptr) {
 
             // get the slot and object from the pair
             const Basic::Pair* p = static_cast<const Basic::Pair*>(item->getValue());
             const char* const slotname = *p->slot();
             const Basic::Distance* pp = dynamic_cast<const Basic::Distance*>( p->object() );
 
-            if (pp != 0) {
+            if (pp != nullptr) {
                // Ok, we have a valid object,
                //  now can we get valid 'kind' and 'domain' numbers from the slot name?
                unsigned char kind = 255;
@@ -1583,16 +1583,16 @@ bool NetIO::setSlotMaxPositionErr(const Basic::Distance* const msg)
 bool NetIO::setSlotMaxOrientationErr(const Basic::PairStream* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       const Basic::List::Item* item = msg->getFirstItem();
-      while (item != 0) {
+      while (item != nullptr) {
 
             // get the slot and object from the pair
             const Basic::Pair* p = static_cast<const Basic::Pair*>(item->getValue());
             const char* const slotname = *p->slot();
             const Basic::Angle* pp = dynamic_cast<const Basic::Angle*>( p->object() );
 
-            if (pp != 0) {
+            if (pp != nullptr) {
                // Ok, we have a valid object,
                //  now can we get valid 'kind' and 'domain' numbers from the slot name?
                unsigned char kind = 255;
@@ -1627,16 +1627,16 @@ bool NetIO::setSlotMaxOrientationErr(const Basic::Angle* const msg)
 bool NetIO::setSlotMaxAge(const Basic::PairStream* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       const Basic::List::Item* item = msg->getFirstItem();
-      while (item != 0) {
+      while (item != nullptr) {
 
             // get the slot and object from the pair
             const Basic::Pair* p = static_cast<const Basic::Pair*>(item->getValue());
             const char* const slotname = *p->slot();
             const Basic::Time* pp = dynamic_cast<const Basic::Time*>( p->object() );
 
-            if (pp != 0) {
+            if (pp != nullptr) {
                // Ok, we have a valid object,
                //  now can we get valid 'kind' and 'domain' numbers from the slot name?
                unsigned char kind = 255;
@@ -1670,16 +1670,16 @@ bool NetIO::setSlotMaxAge(const Basic::Time* const msg)
 bool NetIO::setSlotEmissionPduHandlers(Basic::PairStream* const msg)
 {
     bool ok = false;
-    if (msg != 0) {
+    if (msg != nullptr) {
        // First clear the old table
        clearEmissionPduHandlers();
 
        // Now scan the pair stream and put all Ntm objects into the table.
        Basic::List::Item* item = msg->getFirstItem();
-       while (item != 0 && nEmissionHandlers < MAX_EMISSION_HANDLERS) {
+       while (item != nullptr && nEmissionHandlers < MAX_EMISSION_HANDLERS) {
           Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
           EmissionPduHandler* handler = dynamic_cast<EmissionPduHandler*>( pair->object() );
-          if (handler != 0) {
+          if (handler != nullptr) {
              // We have an Ntm object, so put it in the table
              addEmissionPduHandler(handler);
           }
@@ -1701,7 +1701,7 @@ bool NetIO::setSlotEmissionPduHandlers(Basic::PairStream* const msg)
 bool NetIO::slot2KD(const char* const slotname, unsigned char* const kind, unsigned char* const domain)
 {
    bool ok = false;
-   if (slotname != 0 && kind != 0) {
+   if (slotname != nullptr && kind != nullptr) {
       size_t len = std::strlen(slotname);
       bool haveTheK = (len > 0 && (slotname[0] == 'K' || slotname[0] == 'k') );
       bool haveTheD = (len > 2 && (slotname[2] == 'D' || slotname[2] == 'd') );
@@ -1742,7 +1742,7 @@ bool NetIO::slot2KD(const char* const slotname, unsigned char* const kind, unsig
 bool NetIO::setSlotSiteID(const Basic::Number* const num)
 {
     bool ok = false;
-    if (num != 0) {
+    if (num != nullptr) {
         int v = num->getInt();
         if (v >= 0 && v <= 65535) {
             ok = setSiteID(static_cast<unsigned short>(v));
@@ -1758,7 +1758,7 @@ bool NetIO::setSlotSiteID(const Basic::Number* const num)
 bool NetIO::setSlotApplicationID(const Basic::Number* const num)
 {
     bool ok = false;
-    if (num != 0) {
+    if (num != nullptr) {
         int v = num->getInt();
         if (v >= 0 && v <= 65535) {
             ok = setApplicationID(static_cast<unsigned short>(v));
@@ -1774,7 +1774,7 @@ bool NetIO::setSlotApplicationID(const Basic::Number* const num)
 bool NetIO::setSlotExerciseID(const Basic::Number* const num)
 {
     bool ok = false;
-    if (num != 0) {
+    if (num != nullptr) {
         int v = num->getInt();
         if (v >= 0 && v <= 255) {
             ok = setExerciseID(static_cast<unsigned char>(v));
@@ -1840,23 +1840,23 @@ void NetIO::testInputEntityTypes(const unsigned int n)
    const unsigned int maxTypes = getNumInputEntityTypes();
    if (n > 0 && root != 0 && maxTypes > 0) {
       for (unsigned int i = 0; i < n; i++) {
-         int r = rand();
-         LCreal nr = (LCreal(r) / LCreal(RAND_MAX));
+         int r = std::rand();
+         LCreal nr = (static_cast<LCreal>(r) / static_cast<LCreal>(RAND_MAX));
          int idx = nint(nr * (maxTypes - 1));
          const Ntm* origNtm = static_cast<const Ntm*>(getInputEntityType(idx));
          std::cout << "i= " << i;
          std::cout << "; idx= " << idx;
          std::cout << "; origNtm= " << origNtm;
-         if (origNtm != 0) {
+         if (origNtm != nullptr) {
 
             std::cout << "; [ ";
-            std::cout << int(origNtm->getEntityKind()) << ",";
-            std::cout << int(origNtm->getEntityDomain()) << ",";
-            std::cout << int(origNtm->getEntityCountry()) << ",";
-            std::cout << int(origNtm->getEntityCategory()) << ",";
-            std::cout << int(origNtm->getEntitySubcategory()) << ",";
-            std::cout << int(origNtm->getEntitySpecific()) << ",";
-            std::cout << int(origNtm->getEntityExtra()) << ")";
+            std::cout << static_cast<int>(origNtm->getEntityKind()) << ",";
+            std::cout << static_cast<int>(origNtm->getEntityDomain()) << ",";
+            std::cout << static_cast<int>(origNtm->getEntityCountry()) << ",";
+            std::cout << static_cast<int>(origNtm->getEntityCategory()) << ",";
+            std::cout << static_cast<int>(origNtm->getEntitySubcategory()) << ",";
+            std::cout << static_cast<int>(origNtm->getEntitySpecific()) << ",";
+            std::cout << static_cast<int>(origNtm->getEntityExtra()) << ")";
             std::cout << " ]";
 
             const Ntm* foundNtm = findNtmByTypeCodes(
@@ -1870,11 +1870,11 @@ void NetIO::testInputEntityTypes(const unsigned int n)
                );
 
             std::cout << "; foundNtm= " << foundNtm;
-            if (foundNtm != 0) {
+            if (foundNtm != nullptr) {
                const Simulation::Player* foundP = origNtm->getTemplatePlayer();
                std::cout << "; form: " << foundP->getFactoryName();
                SPtr<const Basic::String> foundType( static_cast<const Basic::String*>( foundP->getType() ) );
-               if (foundType != 0) std::cout << "; type: " << *foundType;
+               if (foundType != nullptr) std::cout << "; type: " << *foundType;
             }
             if (origNtm == foundNtm) {
                std::cout << "; Match!!";
@@ -1901,14 +1901,14 @@ void NetIO::testOutputEntityTypes(const unsigned int n)
    const unsigned int maxTypes = getNumOutputEntityTypes();
    if (n > 0 && root != 0 && maxTypes > 0) {
       for (unsigned int i = 0; i < n; i++) {
-         int r = rand();
+         int r = std::rand();
          LCreal nr = (LCreal(r) / LCreal(RAND_MAX));
          int idx = nint(nr * (maxTypes - 1));
          const Ntm* origNtm = static_cast<const Ntm*>(getOutputEntityTypes(idx));
          std::cout << "i= " << i;
          std::cout << "; idx= " << idx;
          std::cout << "; origNtm= " << origNtm;
-         if (origNtm != 0) {
+         if (origNtm != nullptr) {
 
             const Simulation::Player* origP = origNtm->getTemplatePlayer();
             Simulation::Player* origP1 = origP->clone();
@@ -1936,15 +1936,15 @@ void NetIO::testOutputEntityTypes(const unsigned int n)
 
             const Ntm* foundNtm = static_cast<const Ntm*>(root->findNetworkTypeMapper(origP1));
             std::cout << "; foundNtm= " << foundNtm;
-            if (foundNtm != 0) {
+            if (foundNtm != nullptr) {
                std::cout << "; [ ";
-               std::cout << int(foundNtm->getEntityKind()) << ",";
-               std::cout << int(foundNtm->getEntityDomain()) << ",";
-               std::cout << int(foundNtm->getEntityCountry()) << ",";
-               std::cout << int(foundNtm->getEntityCategory()) << ",";
-               std::cout << int(foundNtm->getEntitySubcategory()) << ",";
-               std::cout << int(foundNtm->getEntitySpecific()) << ",";
-               std::cout << int(foundNtm->getEntityExtra()) << ")";
+               std::cout << static_cast<int>(foundNtm->getEntityKind()) << ",";
+               std::cout << static_cast<int>(foundNtm->getEntityDomain()) << ",";
+               std::cout << static_cast<int>(foundNtm->getEntityCountry()) << ",";
+               std::cout << static_cast<int>(foundNtm->getEntityCategory()) << ",";
+               std::cout << static_cast<int>(foundNtm->getEntitySubcategory()) << ",";
+               std::cout << static_cast<int>(foundNtm->getEntitySpecific()) << ",";
+               std::cout << static_cast<int>(foundNtm->getEntityExtra()) << ")";
                std::cout << " ]";
             }
             if (origNtm == foundNtm) {
@@ -1980,11 +1980,11 @@ Simulation::NetIO::NtmInputNode* NetIO::rootNtmInputNodeFactory() const
 // Class support functions
 //------------------------------------------------------------------------------
 NtmInputNode::NtmInputNode(const unsigned int l, const unsigned int c, const Ntm* ntm)
-   : level(l), code(c), ourNtm(0), subnodeList(0)
+   : level(l), code(c), ourNtm(nullptr), subnodeList(nullptr)
 {
    STANDARD_CONSTRUCTOR()
 
-   if (ntm != 0) {
+   if (ntm != nullptr) {
       ourNtm = ntm;
       ourNtm->ref();
    }
@@ -1996,24 +1996,24 @@ void NtmInputNode::copyData(const NtmInputNode& org, const bool cc)
    BaseClass::copyData(org);
 
    if (cc) {
-      ourNtm = 0;
-      subnodeList = 0;
+      ourNtm = nullptr;
+      subnodeList = nullptr;
    }
 
    level = org.level;
    code = org.code;
 
-   if (ourNtm != 0) {
+   if (ourNtm != nullptr) {
       ourNtm->unref();
-      ourNtm = 0;
+      ourNtm = nullptr;
    }
    if (org.ourNtm != 0) {
       ourNtm = org.ourNtm->clone();
    }
 
-   if (subnodeList != 0) {
+   if (subnodeList != nullptr) {
       subnodeList->unref();
-      subnodeList = 0;
+      subnodeList = nullptr;
    }
    if (org.subnodeList != 0) {
       subnodeList = org.subnodeList->clone();
@@ -2022,14 +2022,14 @@ void NtmInputNode::copyData(const NtmInputNode& org, const bool cc)
 
 void NtmInputNode::deleteData()
 {
-   if (ourNtm != 0) {
+   if (ourNtm != nullptr) {
       ourNtm->unref();
-      ourNtm = 0;
+      ourNtm = nullptr;
    }
 
-   if (subnodeList != 0) {
+   if (subnodeList != nullptr) {
       subnodeList->unref();
-      subnodeList = 0;
+      subnodeList = nullptr;
    }
 }
 
@@ -2038,10 +2038,10 @@ void NtmInputNode::deleteData()
 //------------------------------------------------------------------------------
 const Simulation::Ntm* NtmInputNode::findNetworkTypeMapper(const Simulation::Nib* const nib) const
 {
-   const Simulation::Ntm* result = 0;
+   const Simulation::Ntm* result = nullptr;
 
    const Dis::Nib* disNib = dynamic_cast<const Dis::Nib*>( nib );
-   if (disNib != 0) {
+   if (disNib != nullptr) {
       result = findNtmByTypeCodes(
             disNib->getEntityKind(),
             disNib->getEntityDomain(),
@@ -2068,7 +2068,7 @@ const Ntm* NtmInputNode::findNtmByTypeCodes(
       const unsigned char  extra
    ) const
 {
-   const Ntm* result = 0;
+   const Ntm* result = nullptr;
 
    {
       // Yes we have the proper type of NIB ...
@@ -2076,7 +2076,7 @@ const Ntm* NtmInputNode::findNtmByTypeCodes(
       // Make sure that the NIB's code for this level matches our code
       bool match = true;
       switch (level) {
-         case ROOT_LVL :         match = true; break; // the 'root' node always matches
+         case ROOT_LVL :         match = true;                   break; // the 'root' node always matches
          case KIND_LVL :         match = (code == kind);         break;
          case DOMAIN_LVL :       match = (code == domain);       break;
          case COUNTRYCODE_LVL :  match = (code == countryCode);  break;
@@ -2102,7 +2102,7 @@ const Ntm* NtmInputNode::findNtmByTypeCodes(
          // Second, we can use our NTM object, but only if we're at the category
          // level or higher (i.e., we must have match at the kind, domain, country
          // code and category levels)
-         if (result == 0 && level >= CATEGORY_LVL) {
+         if (result == nullptr && level >= CATEGORY_LVL) {
             result = ourNtm;
          }
       }
@@ -2122,7 +2122,7 @@ bool NtmInputNode::add2OurLists(Simulation::Ntm* const ntm)
 
    // Make sure we have the correct kind of NTM ...
    Dis::Ntm* disNtm = dynamic_cast<Dis::Ntm*>( ntm );
-   if (disNtm != 0) {
+   if (disNtm != nullptr) {
 
       // Make sure that the NTM's code for this level matches our code
       unsigned int currLevelCode = 0;
@@ -2188,7 +2188,7 @@ bool NtmInputNode::add2OurLists(Simulation::Ntm* const ntm)
 
             if (wild) {
                // wild card terminal node
-               if (ourNtm == 0) {
+               if (ourNtm == nullptr) {
                   ourNtm = disNtm;
                   ourNtm->ref();
                   ok = true;
@@ -2215,7 +2215,7 @@ bool NtmInputNode::add2OurLists(Simulation::Ntm* const ntm)
             // make sure the terminal node doesn't already exist.
             bool alreadyExists = false;
             const Basic::List::Item* item = subnodeList->getFirstItem();
-            while (item != 0 && !alreadyExists) {
+            while (item != nullptr && !alreadyExists) {
                //NtmInputNode* subnode = (NtmInputNode*) item->getValue();
                const NtmInputNode* csubnode = static_cast<const NtmInputNode*>(item->getValue());
                NtmInputNode* subnode = const_cast<NtmInputNode*>(csubnode);
@@ -2231,13 +2231,13 @@ bool NtmInputNode::add2OurLists(Simulation::Ntm* const ntm)
             }
             else if (isMessageEnabled(MSG_WARNING)) {
                std::cerr << "Warning: duplicate incoming NTM(";
-               std::cerr << int(disNtm->getEntityKind()) << ",";
-               std::cerr << int(disNtm->getEntityDomain()) << ",";
-               std::cerr << int(disNtm->getEntityCountry()) << ",";
-               std::cerr << int(disNtm->getEntityCategory()) << ",";
-               std::cerr << int(disNtm->getEntitySubcategory()) << ",";
-               std::cerr << int(disNtm->getEntitySpecific()) << ",";
-               std::cerr << int(disNtm->getEntityExtra()) << ")";
+               std::cerr << static_cast<int>(disNtm->getEntityKind()) << ",";
+               std::cerr << static_cast<int>(disNtm->getEntityDomain()) << ",";
+               std::cerr << static_cast<int>(disNtm->getEntityCountry()) << ",";
+               std::cerr << static_cast<int>(disNtm->getEntityCategory()) << ",";
+               std::cerr << static_cast<int>(disNtm->getEntitySubcategory()) << ",";
+               std::cerr << static_cast<int>(disNtm->getEntitySpecific()) << ",";
+               std::cerr << static_cast<int>(disNtm->getEntityExtra()) << ")";
                std::cerr << ", second ignored" << std::endl;
                err = true;
             }
@@ -2247,7 +2247,7 @@ bool NtmInputNode::add2OurLists(Simulation::Ntm* const ntm)
          // to add the NTM to one of our existing subnodes.
          if (!ok && !err && level < SPECIFIC_LVL) {
             const Basic::List::Item* item = subnodeList->getFirstItem();
-            while (item != 0 && !ok) {
+            while (item != nullptr && !ok) {
                //NtmInputNode* subnode = (NtmInputNode*) item->getValue();
                const NtmInputNode* csubnode = static_cast<const NtmInputNode*>(item->getValue());
                NtmInputNode* subnode = const_cast<NtmInputNode*>(csubnode);
@@ -2285,14 +2285,14 @@ void NtmInputNode::print(std::ostream& sout, const int icnt) const
    sout << std::endl;
 
    // Print our Ntm object
-   if (ourNtm != 0) {
+   if (ourNtm != nullptr) {
       ourNtm->serialize(sout, icnt+4);
    }
 
    // Print our subnodes
    {
       const Basic::List::Item* item = subnodeList->getFirstItem();
-      while (item != 0) {
+      while (item != nullptr) {
          const NtmInputNode* subnode = static_cast<const NtmInputNode*>(item->getValue());
          subnode->print(sout,icnt+4);
          item = item->getNext();

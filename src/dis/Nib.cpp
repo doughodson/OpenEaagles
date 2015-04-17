@@ -24,7 +24,7 @@ EMPTY_SERIALIZER(Nib)
 
 Nib::Nib(const Simulation::NetIO::IoType ioType) : Simulation::Nib(ioType)
 {
-   iffFunOpData = 0;
+   iffFunOpData = nullptr;
    iffOptions = 0;
    iffLastExecTime = 0;
 
@@ -40,12 +40,12 @@ Nib::Nib(const Simulation::NetIO::IoType ioType) : Simulation::Nib(ioType)
    appID = 0;
 
    for (unsigned int i = 0; i < MAX_AMSL; i++) {
-      apartMslTypes[i] = 0;
+      apartMslTypes[i] = nullptr;
    }
 
    numEmissionSystems = 0;
    for (unsigned int i = 0; i < MAX_EM_SYSTEMS; i++) {
-      emitterSysHandler[i] = 0;
+      emitterSysHandler[i] = nullptr;
    }
    emissionSystemsIndex = 0;
    timeOffset = 0.0;
@@ -79,28 +79,28 @@ void Nib::copyData(const Nib& org, const bool cc)
    BaseClass::copyData(org);
 
    if (cc) {
-      iffFunOpData = 0;
+      iffFunOpData = nullptr;
       for (unsigned int i = 0; i < MAX_AMSL; i++) {
-         apartMslTypes[i] = 0;
+         apartMslTypes[i] = nullptr;
       }
       for (unsigned int i = 0; i < MAX_EM_SYSTEMS; i++) {
-         emitterSysHandler[i] = 0;
+         emitterSysHandler[i] = nullptr;
       }
    }
 
    // Clear (not copy) the attached missile types
    for (unsigned int i = 0; i < MAX_AMSL; i++) {
-      if (apartMslTypes[i] != 0) {
+      if (apartMslTypes[i] != nullptr) {
          apartMslTypes[i]->unref();;
-         apartMslTypes[i] = 0;
+         apartMslTypes[i] = nullptr;
       }
    }
 
    // Clear (not copy) the emitter system handlers
    for (unsigned int i = 0; i < MAX_EM_SYSTEMS; i++) {
-      if (emitterSysHandler[i] != 0) {
+      if (emitterSysHandler[i] != nullptr) {
          delete emitterSysHandler[i];
-         emitterSysHandler[i] = 0;
+         emitterSysHandler[i] = nullptr;
       }
    }
    numEmissionSystems = 0;
@@ -118,9 +118,9 @@ void Nib::copyData(const Nib& org, const bool cc)
    siteID = org.siteID;
    appID = org.appID;
 
-   if (iffFunOpData != 0) {
+   if (iffFunOpData != nullptr) {
       delete iffFunOpData;
-      iffFunOpData = 0;
+      iffFunOpData = nullptr;
    }
    iffOptions = 0;
    iffLastExecTime = 0;
@@ -129,22 +129,22 @@ void Nib::copyData(const Nib& org, const bool cc)
 
 void Nib::deleteData()
 {
-   if (iffFunOpData != 0) {
+   if (iffFunOpData != nullptr) {
       delete iffFunOpData;
-      iffFunOpData = 0;
+      iffFunOpData = nullptr;
    }
 
    for (unsigned int i = 0; i < MAX_AMSL; i++) {
-      if (apartMslTypes[i] != 0) {
+      if (apartMslTypes[i] != nullptr) {
          apartMslTypes[i]->unref();
-         apartMslTypes[i] = 0;
+         apartMslTypes[i] = nullptr;
       }
    }
 
    for (unsigned int i = 0; i < MAX_EM_SYSTEMS; i++) {
-      if (emitterSysHandler[i] != 0) {
+      if (emitterSysHandler[i] != nullptr) {
          delete emitterSysHandler[i];
-         emitterSysHandler[i] = 0;
+         emitterSysHandler[i] = nullptr;
       }
    }
    numEmissionSystems = 0;
@@ -157,16 +157,16 @@ void Nib::deleteData()
 bool Nib::shutdownNotification()
 {
    for (unsigned int i = 0; i < MAX_AMSL; i++) {
-      if (apartMslTypes[i] != 0) {
+      if (apartMslTypes[i] != nullptr) {
          apartMslTypes[i]->unref();
-         apartMslTypes[i] = 0;
+         apartMslTypes[i] = nullptr;
       }
    }
 
    for (unsigned int i = 0; i < MAX_EM_SYSTEMS; i++) {
-      if (emitterSysHandler[i] != 0) {
+      if (emitterSysHandler[i] != nullptr) {
          emitterSysHandler[i]->unref();
-         emitterSysHandler[i] = 0;
+         emitterSysHandler[i] = nullptr;
       }
    }
    numEmissionSystems = 0;
@@ -231,9 +231,9 @@ void Nib::updateTheIPlayer()
       // ---
       // check all emission handlers for timeout
       // ---
-      NetIO* const disIO = (NetIO*)(getNetIO());
+      NetIO* const disIO = static_cast<NetIO*>(getNetIO());
       if (disIO->getVersion() >= NetIO::VERSION_7) {
-         double curExecTime = disIO->getSimulation()->getExecTimeSec();
+         const double curExecTime = disIO->getSimulation()->getExecTimeSec();
          for (unsigned char i = 0; i < numEmissionSystems; i++) {
             LCreal drTime = curExecTime - emitterSysHandler[i]->getEmPduExecTime();
             if ( drTime >= (disIO->getHbtPduEe() * disIO->getHbtTimeoutMplier()) ) {
@@ -287,10 +287,10 @@ bool Nib::processElectromagneticEmissionPDU(const ElectromagneticEmissionPDU* co
    // ---
    for (unsigned char is = 0; is < pdu->numberOfSystems && is < MAX_EM_SYSTEMS; is++) {
       const EmissionSystem* es = pdu->getEmissionSystem(is);
-      if (es != 0) {
+      if (es != nullptr) {
 
          unsigned char idNum = es->emitterSystem.emitterIdentificationNumber;
-         EmissionPduHandler* handler = 0;
+         EmissionPduHandler* handler = nullptr;
 
          // ---
          // Does a handler for this system already exist in our list?
@@ -305,17 +305,17 @@ bool Nib::processElectromagneticEmissionPDU(const ElectromagneticEmissionPDU* co
          // ---
          // Create a handler if one doesn't already exist
          // ---
-         if (handler == 0 && numEmissionSystems < MAX_EM_SYSTEMS) {
+         if (handler == nullptr && numEmissionSystems < MAX_EM_SYSTEMS) {
 
             // First, try to find an Emission PDU handler for this type system.
             // If we find one, then clone it for our use.
-            NetIO* const disIO = (NetIO*)(getNetIO());
+            NetIO* const disIO = static_cast<NetIO*>(getNetIO());
             const EmissionPduHandler* tmp = disIO->findEmissionPduHandler(es);
-            if (tmp != 0) {
+            if (tmp != nullptr) {
                handler = tmp->clone();
             }
 
-            if (handler != 0) {
+            if (handler != nullptr) {
                // Handler found!
                handler->setEmitterIdNumber( idNum );
                handler->setEmitterFunction( es->emitterSystem.function );
@@ -334,7 +334,7 @@ bool Nib::processElectromagneticEmissionPDU(const ElectromagneticEmissionPDU* co
          // ---
          // Ok, pass the location of the EmissionSystem (and beam data) to the handler
          // ---
-         if (handler != 0) {
+         if (handler != nullptr) {
             ok = handler->updateIncoming(pdu, es, this);
          }
 
@@ -359,22 +359,22 @@ bool Nib::emitterBeamsManager(const LCreal curExecTime)
       {
          // (DPG -- #### only a simple, single-beam Radar)
          const Basic::Pair * pair = getPlayer()->getSensorByType(typeid(Simulation::Radar));
-         if (pair != 0) {
+         if (pair != nullptr) {
             Simulation::RfSensor* rs = (Simulation::RfSensor*) pair->object();
 
             // When we have a R/F sensor, create a handler for it
-            EmissionPduHandler* handler = 0;
+            EmissionPduHandler* handler = nullptr;
 
             // First, try to find an Emission PDU handler for this type system.
             // If we find one, then clone it for our use.
-            NetIO* const disIO = (NetIO*)(getNetIO());
+            NetIO* const disIO = static_cast<NetIO*>(getNetIO());
             const EmissionPduHandler* tmp = disIO->findEmissionPduHandler(rs);
-            if (tmp != 0) {
+            if (tmp != nullptr) {
                handler = tmp->clone();
             }
 
             // Handler wasn't found? Then just create a simple, default emission handler
-            if (handler == 0) {
+            if (handler == nullptr) {
                handler = new EmissionPduHandler();
             }
 
@@ -388,35 +388,35 @@ bool Nib::emitterBeamsManager(const LCreal curExecTime)
       // Check for a Jammer
       {
          const Basic::Pair * pair = getPlayer()->getSensorByType(typeid(Simulation::Jammer));
-         if (pair != 0) {
+         if (pair != nullptr) {
             Simulation::RfSensor* js = (Simulation::RfSensor*) pair->object();
 
             bool singleBeam = true;
             Basic::PairStream* subcomponents = js->getComponents();
-            if (subcomponents != 0) {
+            if (subcomponents != nullptr) {
 
                // Check for multi-beam jammer (each beam is a subcomponent Jammer)
                Basic::List::Item* item = subcomponents->getFirstItem();
-               while (item != 0 && numEmissionSystems < MAX_EM_SYSTEMS) {
+               while (item != nullptr && numEmissionSystems < MAX_EM_SYSTEMS) {
 
                   Basic::Pair* pair = static_cast<Basic::Pair*>( item->getValue() );
                   Simulation::Jammer* jam = dynamic_cast<Simulation::Jammer*>( pair->object() );
-                  if (jam != 0) {
+                  if (jam != nullptr) {
                      singleBeam = false;
 
                      // When we have a R/F sensor, create a handler for it
-                     EmissionPduHandler* handler = 0;
+                     EmissionPduHandler* handler = nullptr;
 
                      // First, try to find an Emission PDU handler for this type system.
                      // If we find one, then clone it for our use.
-                     NetIO* const disIO = (NetIO*)(getNetIO());
+                     NetIO* const disIO = static_cast<NetIO*>(getNetIO());
                      const EmissionPduHandler* tmp = disIO->findEmissionPduHandler(jam);
-                     if (tmp != 0) {
+                     if (tmp != nullptr) {
                         handler = tmp->clone();
                      }
 
                      // Handler wasn't found? Then just create a simple, default handler
-                     if (handler == 0) {
+                     if (handler == nullptr) {
                         handler = new EmissionPduHandler();
                         handler->setEmitterFunction(EmissionPduHandler::ESF_JAMMING);
                      }
@@ -431,25 +431,25 @@ bool Nib::emitterBeamsManager(const LCreal curExecTime)
                }
 
                subcomponents->unref();
-               subcomponents = 0;
+               subcomponents = nullptr;
             }
 
             // Single beam jammer
             if (singleBeam && numEmissionSystems < MAX_EM_SYSTEMS) {
 
                // When we have a R/F sensor, create a handler for it
-               EmissionPduHandler* handler = 0;
+               EmissionPduHandler* handler = nullptr;
 
                // First, try to find an Emission PDU handler for this type system.
                // If we find one, then clone it for our use.
-               NetIO* const disIO = (NetIO*)(getNetIO());
+               NetIO* const disIO = static_cast<NetIO*>(getNetIO());
                const EmissionPduHandler* tmp = disIO->findEmissionPduHandler(js);
-               if (tmp != 0) {
+               if (tmp != nullptr) {
                   handler = tmp->clone();
                }
 
                // Handler wasn't found? Then just create a simple, default jammer handler
-               if (handler == 0) {
+               if (handler == nullptr) {
                   handler = new EmissionPduHandler();
                   handler->setEmitterFunction(EmissionPduHandler::ESF_JAMMING);
                }
@@ -472,7 +472,7 @@ bool Nib::emitterBeamsManager(const LCreal curExecTime)
    // and generate the PDUs as needed.
    // ---
    for (emissionSystemsIndex = 0; emissionSystemsIndex < numEmissionSystems; emissionSystemsIndex++) {
-      if (emitterSysHandler[emissionSystemsIndex] != 0) {
+      if (emitterSysHandler[emissionSystemsIndex] != nullptr) {
          emitterSysHandler[emissionSystemsIndex]->updateOutgoing(curExecTime, this);
       }
    }

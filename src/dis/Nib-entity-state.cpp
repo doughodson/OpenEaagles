@@ -47,7 +47,7 @@ static const unsigned int DEACTIVATE_BIT  = 0x00800000;   // State bit (0 - acti
 //------------------------------------------------------------------------------
 void Nib::entityStatePdu2Nib(const EntityStatePDU* const pdu)
 {
-   NetIO* const disIO = (NetIO*)(getNetIO());
+   NetIO* const disIO = static_cast<NetIO*>(getNetIO());
    Simulation::Simulation* sim = disIO->getSimulation();
 
    // Mark the current time
@@ -112,7 +112,7 @@ void Nib::entityStatePdu2Nib(const EntityStatePDU* const pdu)
       if (disTimeStamp & 0x01) {
           currentTime = getTimeUtc();
       }
-      currentTime = fmod(currentTime, 3600.0);      // just get seconds after the hour
+      currentTime = std::fmod(currentTime, 3600.0);      // just get seconds after the hour
       double timeStamp = (static_cast<double>(disTimeStamp >> 1)) * 3600.0 / (static_cast<double>(0x7fffffff));
       double relTimeStamp = timeStamp + timeOffset;
       double diffTime = currentTime - relTimeStamp;
@@ -183,7 +183,7 @@ void Nib::entityStatePdu2Nib(const EntityStatePDU* const pdu)
       unsigned int bits = ( (pdu->appearance >> 16) & 0x0000000f );
       if (getPlayer() != 0 && getPlayer()->isMajorType(Simulation::Player::LIFE_FORM)) {
          Simulation::LifeForm* lf = dynamic_cast<Simulation::LifeForm*>(getPlayer());
-         if (lf != 0) {
+         if (lf != nullptr) {
             // get our life form state (appearance bit 16 - 19)
             if (bits == 1) lf->setActionState(Simulation::LifeForm::UPRIGHT_STANDING);
             else if (bits == 2) lf->setActionState(Simulation::LifeForm::UPRIGHT_WALKING);
@@ -223,7 +223,7 @@ void Nib::entityStatePdu2Nib(const EntityStatePDU* const pdu)
 void Nib::processArticulationParameters(const EntityStatePDU* const pdu)
 {
    Simulation::Player* p = getPlayer();
-   if ( pdu->numberOfArticulationParameters > 0 && p != 0 ) {
+   if ( pdu->numberOfArticulationParameters > 0 && p != nullptr ) {
       Simulation::AirVehicle* av = dynamic_cast<Simulation::AirVehicle*>(p);
       Simulation::GroundVehicle* gv = dynamic_cast<Simulation::GroundVehicle*>(p);
 
@@ -307,13 +307,13 @@ void Nib::processArticulationParameters(const EntityStatePDU* const pdu)
                   Basic::PairStream* stores = sms->getStores();
                   if (stores != 0) {
                      Basic::List::Item* item = stores->getFirstItem();
-                     while (item != 0 && wpn == 0) {
+                     while (item != nullptr && wpn == nullptr) {
                         unsigned int s = 0;
-                        Basic::Pair* pair = (Basic::Pair*) item->getValue();
+                        Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
                         const Basic::Identifier* slot = pair->slot();
                         if (slot->isNumber()) s = static_cast<unsigned int>(slot->getNumber());
                         if (s == sta) {
-                           wpn = (Simulation::Weapon*) pair->object();  // Found it
+                           wpn = static_cast<Simulation::Weapon*>(pair->object());  // Found it
                         }
                         item = item->getNext();
                      }
@@ -327,8 +327,8 @@ void Nib::processArticulationParameters(const EntityStatePDU* const pdu)
 
                      // But if we don't have the weapon yet then we'll need to look it up
                      // using our list of incoming entity types and add it to the SMS.
-                     if (wpn == 0) {
-                        NetIO* disIO = (NetIO*)(getNetIO());
+                     if (wpn == nullptr) {
+                        NetIO* disIO = static_cast<NetIO*>(getNetIO());
                         const Ntm* ntm = disIO->findNtmByTypeCodes(
                               ap->parameterValue.entityType.kind,
                               ap->parameterValue.entityType.domain,
@@ -338,13 +338,13 @@ void Nib::processArticulationParameters(const EntityStatePDU* const pdu)
                               ap->parameterValue.entityType.specific,
                               ap->parameterValue.entityType.extra
                            );
-                        if (ntm != 0) {
+                        if (ntm != nullptr) {
                            const Simulation::Player* tp = ntm->getTemplatePlayer();
-                           if (tp != 0 && tp->isClassType(typeid(Simulation::Weapon)) ) {
+                           if (tp != nullptr && tp->isClassType(typeid(Simulation::Weapon)) ) {
                               // We've found the weapon that matches the entity type,
                               // so clone it and add it to the SMS with the correct
                               // station number
-                              wpn = (Simulation::Weapon*) tp->clone();  // clone and cast to a Weapon
+                              wpn = static_cast<Simulation::Weapon*>(tp->clone());  // clone and cast to a Weapon
                               char cbuf[20];
                               std::sprintf(cbuf,"%i",sta);
                               Basic::Pair* pair = new Basic::Pair(cbuf, wpn);
@@ -356,12 +356,12 @@ void Nib::processArticulationParameters(const EntityStatePDU* const pdu)
                      }
 
                      // If we have the weapon then set it INACTIVE (not launched)
-                     if (wpn != 0) wpn->setMode(Simulation::Player::INACTIVE);
+                     if (wpn != nullptr) wpn->setMode(Simulation::Player::INACTIVE);
 
                   }
 
                   // No weapon attached, so set our weapon (if any) to launched!
-                  else if (wpn != 0) {
+                  else if (wpn != nullptr) {
                      wpn->setMode(Simulation::Player::LAUNCHED);
                   }
 
@@ -386,11 +386,11 @@ bool Nib::entityStateManager(const LCreal curExecTime)
 
    // Get the player pointer
    const Simulation::Player* player = getPlayer();
-   if (player == 0) return ok;
+   if (player == nullptr) return ok;
 
    // Dummy weapon?
    const Simulation::Weapon* ww = dynamic_cast<const Simulation::Weapon*>( player );
-   if (ww != 0) {
+   if (ww != nullptr) {
       if (ww->isDummy()) return ok;
    }
 
@@ -404,7 +404,7 @@ bool Nib::entityStateManager(const LCreal curExecTime)
       //
 
       // Get our NetIO and the main simulation
-      NetIO* disIO = (NetIO*)(getNetIO());
+      NetIO* disIO = static_cast<NetIO*>(getNetIO());
       Simulation::Simulation* sim = disIO->getSimulation();
 
       // Capture the player data, reset the dead reckoning and
@@ -515,9 +515,9 @@ bool Nib::entityStateManager(const LCreal curExecTime)
          // Entity linear velocity (VectorDIS)
          // ---
          osg::Vec3d geocVel = getDrVelocity();
-         pdu->entityLinearVelocity.component[0] = (float)geocVel[0];
-         pdu->entityLinearVelocity.component[1] = (float)geocVel[1];
-         pdu->entityLinearVelocity.component[2] = (float)geocVel[2];
+         pdu->entityLinearVelocity.component[0] = static_cast<float>(geocVel[0]);
+         pdu->entityLinearVelocity.component[1] = static_cast<float>(geocVel[1]);
+         pdu->entityLinearVelocity.component[2] = static_cast<float>(geocVel[2]);
 
          // ---
          // Entity location (WorldCoordinates)
@@ -531,9 +531,9 @@ bool Nib::entityStateManager(const LCreal curExecTime)
          // Entity orientation (EulerAngles)
          // ---
          osg::Vec3d geocAngles = getDrEulerAngles();
-         pdu->entityOrientation.phi   = (float)geocAngles[Basic::Nav::IPHI];
-         pdu->entityOrientation.theta = (float)geocAngles[Basic::Nav::ITHETA];
-         pdu->entityOrientation.psi   = (float)geocAngles[Basic::Nav::IPSI];
+         pdu->entityOrientation.phi   = static_cast<float>(geocAngles[Basic::Nav::IPHI]);
+         pdu->entityOrientation.theta = static_cast<float>(geocAngles[Basic::Nav::ITHETA]);
+         pdu->entityOrientation.psi   = static_cast<float>(geocAngles[Basic::Nav::IPSI]);
       }
 
       // ---
@@ -588,7 +588,7 @@ bool Nib::entityStateManager(const LCreal curExecTime)
          // Life forms appearance bits
          if (player->isMajorType(Simulation::Player::LIFE_FORM)) {
             const Simulation::LifeForm* lf = dynamic_cast<const Simulation::LifeForm*>(player);
-            if (lf != 0) {
+            if (lf != nullptr) {
                // Health (aka damaged for other domains) same bits (3-4) - this is from the NIB, because it IS
                // updated
                // bits 5-8 compliance (not implemented)
@@ -654,7 +654,7 @@ bool Nib::entityStateManager(const LCreal curExecTime)
       // ---
       // Dead reckoning algorithm
       // ---
-      pdu->deadReckoningAlgorithm = (unsigned char) getDeadReckoning();
+      pdu->deadReckoningAlgorithm = static_cast<unsigned char>(getDeadReckoning());
 
       // ---
       // Other parameters
@@ -671,17 +671,17 @@ bool Nib::entityStateManager(const LCreal curExecTime)
          // Dead reckoning linear acceleration (VectorDIS)
          // ---
          osg::Vec3d geocAcc = getDrAcceleration();
-         pdu->DRentityLinearAcceleration.component[0] = (float)geocAcc[0];
-         pdu->DRentityLinearAcceleration.component[1] = (float)geocAcc[1];
-         pdu->DRentityLinearAcceleration.component[2] = (float)geocAcc[2];
+         pdu->DRentityLinearAcceleration.component[0] = static_cast<float>(geocAcc[0]);
+         pdu->DRentityLinearAcceleration.component[1] = static_cast<float>(geocAcc[1]);
+         pdu->DRentityLinearAcceleration.component[2] = static_cast<float>(geocAcc[2]);
 
          // ---
          // Dead reckoning angular velocity (AngularVelocityVectorDIS)
          // ---
          osg::Vec3d geocAngVel = getDrAngularVelocities();
-         pdu->DRentityAngularVelocity.x_axis = (float)geocAngVel[Basic::Nav::IX];
-         pdu->DRentityAngularVelocity.y_axis = (float)geocAngVel[Basic::Nav::IY];
-         pdu->DRentityAngularVelocity.z_axis = (float)geocAngVel[Basic::Nav::IZ];
+         pdu->DRentityAngularVelocity.x_axis = static_cast<float>(geocAngVel[Basic::Nav::IX]);
+         pdu->DRentityAngularVelocity.y_axis = static_cast<float>(geocAngVel[Basic::Nav::IY]);
+         pdu->DRentityAngularVelocity.z_axis = static_cast<float>(geocAngVel[Basic::Nav::IZ]);
       }
 
       // ---
@@ -716,7 +716,7 @@ bool Nib::entityStateManager(const LCreal curExecTime)
       pdu->header.length = length;
 
       if (Basic::NetHandler::isNotNetworkByteOrder()) pdu->swapBytes();
-      ok = disIO->sendData( (char*) pdu, length );
+      ok = disIO->sendData( reinterpret_cast<char*>(pdu), length );
    }
    return ok;
 }
@@ -727,11 +727,11 @@ bool Nib::entityStateManager(const LCreal curExecTime)
 unsigned char Nib::manageArticulationParameters(EntityStatePDU* const pdu)
 {
    unsigned char cnt = 0;
-   NetIO* const disIO = (NetIO*)(getNetIO());
+   NetIO* const disIO = static_cast<NetIO*>(getNetIO());
 
    // First articulation parameter is just after the main PDU
-   unsigned char *p = ((unsigned char *)pdu) + sizeof(*pdu);
-   VpArticulatedPart* ap = (VpArticulatedPart*) p;
+   unsigned char *p = (reinterpret_cast<unsigned char *>(pdu)) + sizeof(*pdu);
+   VpArticulatedPart* ap = reinterpret_cast<VpArticulatedPart*>(p);
 
    // ---
    // Air Vehicle articulated parts and attachments
@@ -742,10 +742,10 @@ unsigned char Nib::manageArticulationParameters(EntityStatePDU* const pdu)
       if (getAPartWingSweepCnt() > 0) {
          // fill the articulation parameter structure
          ap->parameterTypeDesignator = VpArticulatedPart::ARTICULATED_PART;
-         ap->changeIndicator = (unsigned char) (getAPartWingSweepCnt() & 0xff);
+         ap->changeIndicator = static_cast<unsigned char>(getAPartWingSweepCnt() & 0xff);
          ap->id = 0;
          ap->parameterType = (VpArticulatedPart::WING_SWEEP + VpArticulatedPart::AZIMUTH);
-         ap->parameterValue.value[0] = (float) getAPartWingSweep();  // radians
+         ap->parameterValue.value[0] = static_cast<float>(getAPartWingSweep());  // radians
          ap->parameterValue.value[1] = 0;
          // Update part count & pointer
          cnt++;
@@ -756,10 +756,10 @@ unsigned char Nib::manageArticulationParameters(EntityStatePDU* const pdu)
       if (getAPartGearPosCnt() > 0) {
          // fill the articulation parameter structure
          ap->parameterTypeDesignator = VpArticulatedPart::ARTICULATED_PART;
-         ap->changeIndicator = (unsigned char) (getAPartGearPosCnt() & 0xff);
+         ap->changeIndicator = static_cast<unsigned char>(getAPartGearPosCnt() & 0xff);
          ap->id = 0;
          ap->parameterType = (VpArticulatedPart::LANDING_GEAR + VpArticulatedPart::POSITION);
-         ap->parameterValue.value[0] = float(getAPartPartGearPos())/100.0f;
+         ap->parameterValue.value[0] = static_cast<float>(getAPartPartGearPos())/100.0f;
          ap->parameterValue.value[1] = 0;
          // Update part count & pointer
          cnt++;
@@ -771,10 +771,10 @@ unsigned char Nib::manageArticulationParameters(EntityStatePDU* const pdu)
 
          // Left door
          ap->parameterTypeDesignator = VpArticulatedPart::ARTICULATED_PART;
-         ap->changeIndicator = (unsigned char) (getAPartBayDoorCnt() & 0xff);
+         ap->changeIndicator = static_cast<unsigned char>(getAPartBayDoorCnt() & 0xff);
          ap->id = 0;
          ap->parameterType = (VpArticulatedPart::LEFT_WEAPON_BAY_DOOR + VpArticulatedPart::POSITION);
-         ap->parameterValue.value[0] = float(getAPartBayDoorPos())/100.0f;
+         ap->parameterValue.value[0] = static_cast<float>(getAPartBayDoorPos())/100.0f;
          ap->parameterValue.value[1] = 0;
 
          // Update part count & pointer
@@ -783,10 +783,10 @@ unsigned char Nib::manageArticulationParameters(EntityStatePDU* const pdu)
 
          // Right door
          ap->parameterTypeDesignator = VpArticulatedPart::ARTICULATED_PART;
-         ap->changeIndicator = (unsigned char) (getAPartBayDoorCnt() & 0xff);
+         ap->changeIndicator = static_cast<unsigned char>(getAPartBayDoorCnt() & 0xff);
          ap->id = 0;
          ap->parameterType = (VpArticulatedPart::RIGHT_WEAPON_BAY_DOOR + VpArticulatedPart::POSITION);
-         ap->parameterValue.value[0] = float(getAPartBayDoorPos())/100.0f;
+         ap->parameterValue.value[0] = static_cast<float>(getAPartBayDoorPos())/100.0f;
          ap->parameterValue.value[1] = 0;
 
          // Update part count & pointer
@@ -806,10 +806,10 @@ unsigned char Nib::manageArticulationParameters(EntityStatePDU* const pdu)
       if (getAPartLauncherElevationCnt() > 0) {
          // fill the articulation parameter structure
          ap->parameterTypeDesignator = VpArticulatedPart::ARTICULATED_PART;
-         ap->changeIndicator = (unsigned char) (getAPartLauncherElevationCnt() & 0xff);
+         ap->changeIndicator = static_cast<unsigned char>(getAPartLauncherElevationCnt() & 0xff);
          ap->id = 0;
          ap->parameterType = (VpArticulatedPart::PRIMARY_LAUNCHER_1 + VpArticulatedPart::ELEVATION);
-         ap->parameterValue.value[0] = float( getAPartLauncherElevation() );
+         ap->parameterValue.value[0] = static_cast<float>( getAPartLauncherElevation() );
          ap->parameterValue.value[1] = 0;
          // Update part count & pointer
          cnt++;
@@ -823,10 +823,10 @@ unsigned char Nib::manageArticulationParameters(EntityStatePDU* const pdu)
          const Simulation::Missile* msl = getAPartAttachedMissile(i+1);
 
          // Find the missile's entity type
-         if (apartMslTypes[i] == 0) {
+         if (apartMslTypes[i] == nullptr) {
 
             const Ntm* ntm = dynamic_cast<const Ntm*>( disIO->findNetworkTypeMapper(msl) );
-            if (ntm != 0) {
+            if (ntm != nullptr) {
 
                // found the NTM for the missile -- and it must be a DIS NTM
                apartMslTypes[i] = dynamic_cast<const Ntm*>(ntm);
@@ -836,11 +836,11 @@ unsigned char Nib::manageArticulationParameters(EntityStatePDU* const pdu)
          }
 
          // We must have the missile's entity type to send the attached part ...
-         if (apartMslTypes[i] != 0) {
+         if (apartMslTypes[i] != nullptr) {
 
             // fill the articulation parameter structure
             ap->parameterTypeDesignator = VpArticulatedPart::ATTACHED_PART;
-            ap->changeIndicator = (unsigned char) (getAPartAttacheMissileChangeCnt(i+1) & 0xff);
+            ap->changeIndicator = static_cast<unsigned char>(getAPartAttacheMissileChangeCnt(i+1) & 0xff);
             ap->id = 1;                   // ATTACHED to LAUNCHER (above)
             ap->parameterType = (i+1);    // Station number
             if (msl->isMode(Simulation::Player::LAUNCHED)) {

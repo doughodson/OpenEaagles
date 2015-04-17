@@ -108,7 +108,7 @@ private:
       lcUnlock( semaphore );
    }
 
-   T*  p;          // The pointer
+   T*  p;                   // The pointer
    mutable long semaphore;  // spin-lock semaphore
 };
 

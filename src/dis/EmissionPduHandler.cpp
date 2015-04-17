@@ -65,9 +65,6 @@ EmissionPduHandler::EmissionPduHandler()
 
 void EmissionPduHandler::initData()
 {
-   sensor = 0;
-   sensorModel = 0;
-   antennaModel = 0;
    noTemplatesFound = false;
    defaultIn = false;
    defaultOut = false;
@@ -97,17 +94,17 @@ void EmissionPduHandler::copyData(const EmissionPduHandler& org, const bool cc)
    // But clear out the rest (so we can start over as a new handler)
    emPduExecTime = 0;
 
-   setSensor(0);
+   setSensor(nullptr);
 
-   setSensorModel(0);
-   if (org.getSensorModel() != 0) {
+   setSensorModel(nullptr);
+   if (org.getSensorModel() != nullptr) {
       Simulation::RfSensor* tmp = org.getSensorModel()->clone();
       setSensorModel(tmp);
       tmp->unref();
    }
 
-   setAntennaModel(0);
-   if (org.getAntennaModel() != 0) {
+   setAntennaModel(nullptr);
+   if (org.getAntennaModel() != nullptr) {
       Simulation::Antenna* tmp = org.getAntennaModel()->clone();
       setAntennaModel(tmp);
       tmp->unref();
@@ -133,14 +130,14 @@ void EmissionPduHandler::copyData(const EmissionPduHandler& org, const bool cc)
 //------------------------------------------------------------------------------
 void EmissionPduHandler::deleteData()
 {
-   if (sensor != 0) { sensor->event(Eaagles::Basic::Component::SHUTDOWN_EVENT); }
-   setSensor(0);
+   if (sensor != nullptr) { sensor->event(Eaagles::Basic::Component::SHUTDOWN_EVENT); }
+   setSensor(nullptr);
 
-   if (sensorModel != 0) { sensorModel->event(Eaagles::Basic::Component::SHUTDOWN_EVENT); }
-   setSensorModel(0);
+   if (sensorModel != nullptr) { sensorModel->event(Eaagles::Basic::Component::SHUTDOWN_EVENT); }
+   setSensorModel(nullptr);
 
-   if (antennaModel != 0) { antennaModel->event(Eaagles::Basic::Component::SHUTDOWN_EVENT); }
-   setAntennaModel(0);
+   if (antennaModel != nullptr) { antennaModel->event(Eaagles::Basic::Component::SHUTDOWN_EVENT); }
+   setAntennaModel(nullptr);
 }
 
 //------------------------------------------------------------------------------
@@ -252,7 +249,7 @@ bool EmissionPduHandler::setTemplatesFound(const bool newTF)
 bool EmissionPduHandler::setSlotEmitterName(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       int i = msg->getInt();
       if (i >= 0 && i <= 0xffff) {
          ok = setEmitterName( static_cast<unsigned short>(i) );
@@ -265,7 +262,7 @@ bool EmissionPduHandler::setSlotEmitterName(const Basic::Number* const msg)
 bool EmissionPduHandler::setSlotEmitterFunction(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       int i = msg->getInt();
       if (i >= 0 && i <= 0xff) {
          ok = setEmitterFunction( static_cast<unsigned char>(i) );
@@ -289,7 +286,7 @@ bool EmissionPduHandler::setSlotAntennaTemplate(Simulation::Antenna* const msg)
 bool EmissionPduHandler::setSlotDefaultIn(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setDefaultIn( msg->getBoolean() );
    }
    return ok;
@@ -298,7 +295,7 @@ bool EmissionPduHandler::setSlotDefaultIn(const Basic::Number* const msg)
 bool EmissionPduHandler::setSlotDefaultOut(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setDefaultOut( msg->getBoolean() );
    }
    return ok;
@@ -311,7 +308,7 @@ bool EmissionPduHandler::setSlotDefaultOut(const Basic::Number* const msg)
 bool EmissionPduHandler::isMatchingRfSystemType(const Simulation::RfSensor* const p) const
 {
    bool match = false;
-   if (p != 0 && sensorModel != 0) {
+   if (p != nullptr && sensorModel != 0) {
       match = (std::strcmp(sensorModel->getTypeId(),p->getTypeId()) == 0);
    }
    return match;
@@ -321,7 +318,7 @@ bool EmissionPduHandler::isMatchingRfSystemType(const Simulation::RfSensor* cons
 bool EmissionPduHandler::isMatchingRfSystemType(const EmissionSystem* const p) const
 {
    bool match = false;
-   if (p != 0) {
+   if (p != nullptr) {
       // All we need to match is the DIS "emitter name"
       match = (emitterName == p->emitterSystem.emitterName);
    }
@@ -343,7 +340,7 @@ Basic::Object* EmissionPduHandler::getSlotByIndex(const int si)
 void EmissionPduHandler::setTimedOut()
 {
    Simulation::RfSensor* rfSys = getSensor();
-   if (rfSys != 0) {
+   if (rfSys != nullptr) {
       rfSys->setTransmitterEnableFlag(false);
       rfSys->setReceiverEnabledFlag(false);
    }
@@ -356,7 +353,7 @@ void EmissionPduHandler::setTimedOut()
 bool EmissionPduHandler::updateIncoming(const ElectromagneticEmissionPDU* const pdu, const EmissionSystem* const es, Nib* const nib)
 {
    Simulation::Player* player = nib->getPlayer();
-   if (player == 0 || noTemplatesFound) return false;
+   if (player == nullptr || noTemplatesFound) return false;
 
    // ---
    // Default sensor: process only one beam)
@@ -367,7 +364,7 @@ bool EmissionPduHandler::updateIncoming(const ElectromagneticEmissionPDU* const 
       // ---
       // Use our template models to create the RfSensor and Antenna
       // ---
-      if (getSensor() == 0 && !noTemplatesFound) {
+      if (getSensor() == nullptr && !noTemplatesFound) {
 
          Simulation::RfSensor* rp = getSensorModel();
          Simulation::Antenna*  ap = getAntennaModel();
@@ -384,7 +381,7 @@ bool EmissionPduHandler::updateIncoming(const ElectromagneticEmissionPDU* const 
             {
                // First get the (top level) container gimbal
                Simulation::Gimbal* gimbal = player->getGimbal();
-               if (gimbal == 0) {
+               if (gimbal == nullptr) {
                   // Create the container gimbal!
                   gimbal = new Simulation::Gimbal();
                   Basic::Pair* pair = new Basic::Pair("gimbal", gimbal);
@@ -404,7 +401,7 @@ bool EmissionPduHandler::updateIncoming(const ElectromagneticEmissionPDU* const 
             {
                // First get the (top level) sensor manager
                Simulation::RfSensor* sm = player->getSensor();
-               if (sm == 0) {
+               if (sm == nullptr) {
                   // Create the sensor manager
                   sm = new Simulation::SensorMgr();
                   Basic::Pair* pair = new Basic::Pair("sensorMgr", sm);
@@ -428,9 +425,9 @@ bool EmissionPduHandler::updateIncoming(const ElectromagneticEmissionPDU* const 
             noTemplatesFound = true;
 
             std::cerr << "EmissionPduHandler::updateIncoming(): warning -- no template ";
-            if (rp == 0) std::cerr << "R/F model";
-            if (rp == 0 && ap == 0) std::cerr << " or ";
-            if (ap == 0) std::cerr << "antenna model";
+            if (rp == nullptr) std::cerr << "R/F model";
+            if (rp == nullptr && ap == nullptr) std::cerr << " or ";
+            if (ap == nullptr) std::cerr << "antenna model";
             std::cerr << " found for emitterName: " << es->emitterSystem.emitterName;
             std::cerr << std::endl;
 
@@ -441,7 +438,7 @@ bool EmissionPduHandler::updateIncoming(const ElectromagneticEmissionPDU* const 
       // Update the IPlayer's sensor/antenna structures with the PDU data
       // ---
       Simulation::RfSensor* rfSys = getSensor();
-      if (rfSys != 0 && !noTemplatesFound) {
+      if (rfSys != nullptr && !noTemplatesFound) {
          Simulation::Antenna* antenna = rfSys->getAntenna();
 
          // reset the timeout clock for this Iplayer's emissions
@@ -490,7 +487,7 @@ bool EmissionPduHandler::updateIncoming(const ElectromagneticEmissionPDU* const 
    // No beam data -- turn off the transmitter and receiver
    else {
       Simulation::RfSensor* rfSys = getSensor();
-      if (rfSys != 0) {
+      if (rfSys != nullptr) {
          rfSys->setTransmitterEnableFlag(false);
          rfSys->setReceiverEnabledFlag(false);
       }
@@ -507,7 +504,7 @@ bool EmissionPduHandler::updateOutgoing(const LCreal curExecTime, Nib* const nib
    bool pduSent = false;
 
    bool stateChg = false;
-   if (nib != 0) {
+   if (nib != nullptr) {
       NetIO* const disIO = static_cast<NetIO*>(nib->getNetIO());
       if (disIO != 0 && isUpdateRequired(curExecTime, &stateChg, nib)) {
 
@@ -584,11 +581,11 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
    enum { NO, YES, UNSURE } result = UNSURE;
 
    // Early out if we don't have everything we need!
-   if (nib == 0) return NO;
+   if (nib == nullptr) return NO;
    NetIO* const disIO = static_cast<NetIO*>(nib->getNetIO());
-   if (disIO == 0) return NO;
+   if (disIO == nullptr) return NO;
    Simulation::RfSensor* beam = getSensor();
-   if (beam == 0) return NO;
+   if (beam == nullptr) return NO;
 
    // ---
    // First -- Are we're past the minimum time?  (using 1/10th of the heart beat)
@@ -599,7 +596,7 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
    // otherwise, could be entirely removed.
    if (disIO->getVersion() >= NetIO::VERSION_7) {
       LCreal drTime = curExecTime - getEmPduExecTime();
-      if ( drTime < (disIO->getHbtPduEe() /10.0f) ) {
+      if ( drTime < (disIO->getHbtPduEe() / 10.0f) ) {
          result = NO;
       }
    }
@@ -657,7 +654,7 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
          // Compute effected radiated power (watts)
          LCreal power = beam->getPeakPower();
          LCreal loss = beam->getRfTransmitLoss();
-         if (ant != 0) power = (power * static_cast<LCreal>(ant->getGain()));
+         if (ant != nullptr) power = (power * static_cast<LCreal>(ant->getGain()));
          if (loss >= 1.0f) power = (power / loss);
 
          // Effected radiated power -- dBm (dB milliwatts)
@@ -726,7 +723,7 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
 
          // Get the track list
          Simulation::TrackManager* tm = beam->getTrackManager();
-         if (tm != 0) {
+         if (tm != nullptr) {
             const int max1 = MAX_TARGETS_IN_TJ_FIELD + 1; // check for one more than the max (highDensityTracks)
             SPtr<Simulation::Track> trackList[max1];
             int n = tm->getTrackList(trackList,max1);
@@ -736,7 +733,7 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
                for (int i = 0; i < n; i++) {
                   // Does the track have a target player that we can find the entity ID for?
                   const Simulation::Player* tgt = trackList[i]->getTarget();
-                  if (tgt != 0) {
+                  if (tgt != nullptr) {
                      unsigned short  tjtPlayerID = 0;
                      unsigned short  tjtSiteID = 0;
                      unsigned short  tjtAppID = 0;
@@ -928,7 +925,7 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
 unsigned short EmissionPduHandler::emissionSystemData2PDU(EmissionSystem* const es)
 {
     // Make sure we have all the data we need
-    if (es == 0) return 0;
+    if (es == nullptr) return 0;
 
     // ---
     // Copy the EmissionSystem structures (this does not copy the beam data)

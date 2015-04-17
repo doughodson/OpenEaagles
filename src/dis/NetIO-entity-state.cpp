@@ -50,7 +50,7 @@ void NetIO::processEntityStatePDU(const EntityStatePDU* const pdu)
 
     // Search test (reject PDUs from players on our output list)
     Simulation::Nib* testNib = findDisNib(playerId, site, app, OUTPUT_NIB);
-    if (testNib != 0) return;
+    if (testNib != nullptr) return;
 
     // ---
     // Find the Network Interface Block
@@ -60,9 +60,9 @@ void NetIO::processEntityStatePDU(const EntityStatePDU* const pdu)
     // ---
     // When we don't have a NIB, create one
     // ---
-    if (nib == 0) {
+    if (nib == nullptr) {
         nib = static_cast<Nib*>( createNewInputNib() );
-        if (nib != 0) {
+        if (nib != nullptr) {
             nib->setPlayerID(playerId);
             if (pdu->entityMarking.characterSet == 1) {
                char name[12];
@@ -120,7 +120,7 @@ void NetIO::processEntityStatePDU(const EntityStatePDU* const pdu)
     // ---
     // When we have a NIB, transfer our packet data to it.
     // ---
-    if (nib != 0) {
+    if (nib != nullptr) {
        nib->entityStatePdu2Nib(pdu);
     }
 }

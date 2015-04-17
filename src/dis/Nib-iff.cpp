@@ -28,14 +28,14 @@ static const unsigned short ALTERNATE_MODE_C     = 0x0004;
 //------------------------------------------------------------------------------
 bool Nib::IffManager(const LCreal curExecTime)
 {
-   NetIO* disIO = (NetIO*)(getNetIO());
+   NetIO* disIO = static_cast<NetIO*>(getNetIO());
    const Basic::Pair* pair = getPlayer()->getRadioByType(typeid(Simulation::Iff));
 
    // OK if the player has an IFF transponder and we're the correct version.
-   bool ok = (disIO->getVersion() >= NetIO::VERSION_1278_1A) && (pair != 0);
+   bool ok = (disIO->getVersion() >= NetIO::VERSION_1278_1A) && (pair != nullptr);
 
    if (ok) {
-      const Simulation::Iff* iffSystem = (const Simulation::Iff*) pair->object();
+      const Simulation::Iff* iffSystem = static_cast<const Simulation::Iff*>(pair->object());
 
       if (isIffUpdateRequired(curExecTime, iffSystem)) {
 
@@ -84,7 +84,7 @@ bool Nib::IffManager(const LCreal curExecTime)
 
          //pdu.dumpData();
          if (Basic::NetHandler::isNotNetworkByteOrder()) pdu.swapBytes();
-         ok = disIO->sendData((char*)&pdu,sizeof(pdu));
+         ok = disIO->sendData(reinterpret_cast<char*>(&pdu), sizeof(pdu));
 
          iffLastExecTime = curExecTime;
 
@@ -135,7 +135,7 @@ bool Nib::isIffUpdateRequired(const LCreal curExecTime, const Simulation::Iff* c
    // ---
    // 1) First time?
    // ---
-   if (iffFunOpData == 0) {
+   if (iffFunOpData == nullptr) {
       options = CHANGE_INDICATOR;   // Initial report
       iffFunOpData = new FundamentalOpData();
       result = YES;
@@ -247,7 +247,7 @@ bool Nib::isIffUpdateRequired(const LCreal curExecTime, const Simulation::Iff* c
    // ---
    // 3) At least every 10 seconds
    // ---
-   if ( (result == UNSURE)) {
+   if (result == UNSURE) {
       if ( drTime >= 10.0f ) {
          result = YES;
       }

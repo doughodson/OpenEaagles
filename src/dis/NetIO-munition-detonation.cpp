@@ -25,7 +25,6 @@ namespace Dis {
 //------------------------------------------------------------------------------
 void NetIO::processDetonationPDU(const DetonationPDU* const pdu)
 {
-
    // Get the Firing Player's ID
    unsigned short fPlayerId = pdu->firingEntityID.ID;
    unsigned short fSiteId = pdu->firingEntityID.simulationID.siteIdentification;
@@ -47,10 +46,10 @@ void NetIO::processDetonationPDU(const DetonationPDU* const pdu)
    // ---
    // 1) Find the target player
    // ---
-   Simulation::Player* tPlayer = 0;
+   Simulation::Player* tPlayer = nullptr;
    if (tPlayerId != 0 && tSiteId != 0 && tApplicationId != 0) {
       Simulation::Nib* tNib = findDisNib(tPlayerId, tSiteId, tApplicationId, OUTPUT_NIB);
-      if (tNib != 0) {
+      if (tNib != nullptr) {
          tPlayer = tNib->getPlayer();
       }
    }
@@ -59,10 +58,10 @@ void NetIO::processDetonationPDU(const DetonationPDU* const pdu)
    // ---
    // 2) Find the firing player and munitions (networked) IPlayers
    // ---
-   Simulation::Player* fPlayer = 0;
+   Simulation::Player* fPlayer = nullptr;
    if (fPlayerId != 0 && fSiteId != 0 && fApplicationId != 0) {
       Simulation::Nib* fNib = findDisNib(fPlayerId, fSiteId, fApplicationId, INPUT_NIB);
-      if (fNib != 0) {
+      if (fNib != nullptr) {
          fPlayer = fNib->getPlayer();
       }
       else {
@@ -71,7 +70,7 @@ void NetIO::processDetonationPDU(const DetonationPDU* const pdu)
       }
    }
 
-   Simulation::Nib* mNib = 0;
+   Simulation::Nib* mNib = nullptr;
    if (mPlayerId != 0 && mSiteId != 0 && mApplicationId != 0) {
       mNib = findDisNib(mPlayerId, mSiteId, mApplicationId, INPUT_NIB);
    }
@@ -81,8 +80,8 @@ void NetIO::processDetonationPDU(const DetonationPDU* const pdu)
    // ---
    // 3) Update the data of the munition's NIB and player
    // ---
-   Simulation::Weapon* mPlayer = 0;
-   if (mNib != 0) {
+   Simulation::Weapon* mPlayer = nullptr;
+   if (mNib != nullptr) {
 
       // ---
       // a) Set the munition's NIB to the location of the detonation
@@ -117,7 +116,7 @@ void NetIO::processDetonationPDU(const DetonationPDU* const pdu)
 
       // Find the munition player and set its mode, location and target position
       mPlayer = dynamic_cast<Simulation::Weapon*>(mNib->getPlayer());
-      if (mPlayer != 0) {
+      if (mPlayer != nullptr) {
 
          // Munition's mode
          mPlayer->setMode(Simulation::Player::DETONATED);
@@ -148,7 +147,7 @@ void NetIO::processDetonationPDU(const DetonationPDU* const pdu)
    // ---
    // 4) Check all local players for the effects of the detonation
    // ---
-   if (mPlayer != 0) {
+   if (mPlayer != nullptr) {
       mPlayer->checkDetonationEffect();
    }
 }

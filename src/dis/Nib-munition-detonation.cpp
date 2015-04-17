@@ -35,7 +35,7 @@ bool Nib::munitionDetonationMsgFactory(const LCreal)
     //std::cout << "NetIO::munitionDetonationMsgFactory() HERE!!" << std::endl;
 
     // Get our NetIO
-    NetIO* disIO = (NetIO*)(getNetIO());
+    NetIO* disIO = static_cast<NetIO*>(getNetIO());
 
     // If our NIB's player just detonated, then it must be a weapon!
     Simulation::Weapon* mPlayer = dynamic_cast<Simulation::Weapon*>(getPlayer());
