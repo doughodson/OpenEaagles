@@ -6,6 +6,8 @@
 #include "openeaagles/basic/String.h"
 #include "openeaagles/maps/rpfMap/CadrgFrameEntry.h"
 
+#include <cstring>
+
 namespace Eaagles {
 namespace Maps {
 namespace Rpf {
@@ -24,7 +26,7 @@ EMPTY_SERIALIZER(CadrgFrame)
 CadrgFrame::CadrgFrame()
 {
     STANDARD_CONSTRUCTOR()
-    frameEntry = 0;
+    frameEntry = nullptr;
     nitfHdrLength = 0;
 }
 
@@ -37,10 +39,10 @@ void CadrgFrame::copyData(const CadrgFrame& org, const bool cc)
     // Copy our baseclass stuff first
     BaseClass::copyData(org);
 
-    if (cc) frameEntry = 0;
+    if (cc) frameEntry = nullptr;
 
-    if (org.frameEntry != 0) {
-        if (frameEntry != 0) frameEntry->unref();
+    if (org.frameEntry != nullptr) {
+        if (frameEntry != nullptr) frameEntry->unref();
         frameEntry = org.frameEntry;
         frameEntry->ref();
     }
@@ -52,8 +54,8 @@ void CadrgFrame::copyData(const CadrgFrame& org, const bool cc)
 // -------------------------------------------------------------------------------------
 void CadrgFrame::deleteData()
 {
-    if (frameEntry != 0) frameEntry->unref();
-    frameEntry = 0;
+    if (frameEntry != nullptr) frameEntry->unref();
+    frameEntry = nullptr;
 }
 
 // -------------------------------------------------------------------------------------
@@ -88,14 +90,14 @@ void CadrgFrame::load(CadrgFrameEntry* entry)
     // Temp table to transfer Lookup Table to
     unsigned char table[4][4096][4];
 
-    if (entry != 0) {
-        if (frameEntry != 0) frameEntry->unref();
+    if (entry != nullptr) {
+        if (frameEntry != nullptr) frameEntry->unref();
         frameEntry = entry;
         frameEntry->ref();
     }
 
-    Basic::String* string = 0;
-    if (frameEntry != 0) {
+    Basic::String* string = nullptr;
+    if (frameEntry != nullptr) {
         string = new Basic::String(frameEntry->getDirectory());
         string->catStr(frameEntry->getFileName());
     }
@@ -112,7 +114,7 @@ void CadrgFrame::load(CadrgFrameEntry* entry)
         return;
     }
 
-    if (string != 0) string->unref();
+    if (string != nullptr) string->unref();
 
     // National Imagery Transmission Format (NITF)  header check - skipped for now (SLS),
     // assume no NITF hdr
@@ -125,31 +127,31 @@ void CadrgFrame::load(CadrgFrameEntry* entry)
     fin.read(buf,1024);
 
     // Find the end of the header
-    char *ptr = strstr(buf,"RPFHDR");
+    char* ptr = std::strstr(buf,"RPFHDR");
 
     // Now calculate the length
     if (ptr) {
-        int dist = int(ptr - &buf[0]);
+        int dist = static_cast<int>(ptr - &buf[0]);
         nitfHdrLength = dist + 11;
     }
     // Position properly
     fin.seekg(nitfHdrLength, std::ios::beg);
 
     // Read header
-    unsigned char byte;
-    fin.read((char *) &byte, sizeof(byte));
+    unsigned char byte(0);
+    fin.read(reinterpret_cast<char*>(&byte), sizeof(byte));
     head.endian = (byte != 0);
-    fin.read((char *) &head.hdrSectionLength, sizeof(head.hdrSectionLength));
-    if (!head.endian) swap((unsigned char *) &head.hdrSectionLength, sizeof(head.hdrSectionLength));
-    fin.read((char *) head.filename, sizeof(head.filename));
-    fin.read((char *) &head.nruInd, sizeof(head.nruInd));
-    fin.read((char *) head.govSpecNum, sizeof(head.govSpecNum));
-    fin.read((char *) head.govSpecdate, sizeof(head.govSpecdate));
-    fin.read((char *) &head.secClass, sizeof(head.secClass));
-    fin.read((char *) head.secCountryCode, sizeof(head.secCountryCode));
-    fin.read((char *) head.secRelease, sizeof(head.secRelease));
-    fin.read((char *) &head.locSecLoc, sizeof(head.locSecLoc));
-    if (!head.endian) swap((unsigned char *) &head.locSecLoc, sizeof(head.locSecLoc));
+    fin.read(reinterpret_cast<char*>(&head.hdrSectionLength), sizeof(head.hdrSectionLength));
+    if (!head.endian) swap(reinterpret_cast<unsigned char*>(&head.hdrSectionLength), sizeof(head.hdrSectionLength));
+    fin.read(reinterpret_cast<char*>(head.filename), sizeof(head.filename));
+    fin.read(reinterpret_cast<char*>(&head.nruInd), sizeof(head.nruInd));
+    fin.read(reinterpret_cast<char*>(head.govSpecNum), sizeof(head.govSpecNum));
+    fin.read(reinterpret_cast<char*>(head.govSpecdate), sizeof(head.govSpecdate));
+    fin.read(reinterpret_cast<char*>(&head.secClass), sizeof(head.secClass));
+    fin.read(reinterpret_cast<char*>(head.secCountryCode), sizeof(head.secCountryCode));
+    fin.read(reinterpret_cast<char*>(head.secRelease), sizeof(head.secRelease));
+    fin.read(reinterpret_cast<char*>(&head.locSecLoc), sizeof(head.locSecLoc));
+    if (!head.endian) swap(reinterpret_cast<unsigned char*>(&head.locSecLoc), sizeof(head.locSecLoc));
 
     // Position to start of location section: 2 choices:
     fin.seekg(head.locSecLoc, std::ios::beg);
@@ -173,10 +175,10 @@ void CadrgFrame::load(CadrgFrameEntry* entry)
 
     // Read the compression tables
     fin.seekg(loc[0].physicalIdx, std::ios::beg);
-    fin.read((char *) &compression, sizeof(compression));
-    swap((unsigned char *) &compression.algorithm, sizeof(compression.algorithm));
-    swap((unsigned char *) &compression.nOffRecs, sizeof(compression.nOffRecs));
-    swap((unsigned char *) &compression.nParmOffRecs, sizeof(compression.nParmOffRecs));
+    fin.read(reinterpret_cast<char*>(&compression), sizeof(compression));
+    swap(reinterpret_cast<unsigned char*>(&compression.algorithm), sizeof(compression.algorithm));
+    swap(reinterpret_cast<unsigned char*>(&compression.nOffRecs), sizeof(compression.nOffRecs));
+    swap(reinterpret_cast<unsigned char*>(&compression.nParmOffRecs), sizeof(compression.nParmOffRecs));
 
     if (loc[2].physicalIdx == ~0) {
         std::cout << "CadrgFrame::load() : Warning: Can't find compression lookup subsection in FrameFile, using alternate computation!" << std::endl;
@@ -189,25 +191,25 @@ void CadrgFrame::load(CadrgFrameEntry* entry)
     }
 
     // Read lookup offset table offset and record length
-    fin.read((char *) &lookupOffTblOff, sizeof(lookupOffTblOff));
-    swap((unsigned char *) &lookupOffTblOff, sizeof(lookupOffTblOff));
-    fin.read((char *) &lookupTblOffRecLen, sizeof(lookupTblOffRecLen));
-    swap((unsigned char *) &lookupTblOffRecLen, sizeof(lookupTblOffRecLen));
+    fin.read(reinterpret_cast<char*>(&lookupOffTblOff), sizeof(lookupOffTblOff));
+    swap(reinterpret_cast<unsigned char*>(&lookupOffTblOff), sizeof(lookupOffTblOff));
+    fin.read(reinterpret_cast<char*>(&lookupTblOffRecLen), sizeof(lookupTblOffRecLen));
+    swap(reinterpret_cast<unsigned char*>(&lookupTblOffRecLen), sizeof(lookupTblOffRecLen));
 
     // For each compression table
     for (int i = 0; i < 4; i++) {
-        fin.read((char *) &lut[i].id, sizeof(lut[i].id));
-        fin.read((char *) &lut[i].records, sizeof(lut[i].records));
-        fin.read((char *) &lut[i].values, sizeof(lut[i].values));
-        fin.read((char *) &lut[i].bitLength, sizeof(lut[i].bitLength));
-        fin.read((char *) &lut[i].physOffset, sizeof(lut[i].physOffset));
+        fin.read(reinterpret_cast<char*>(&lut[i].id), sizeof(lut[i].id));
+        fin.read(reinterpret_cast<char*>(&lut[i].records), sizeof(lut[i].records));
+        fin.read(reinterpret_cast<char*>(&lut[i].values), sizeof(lut[i].values));
+        fin.read(reinterpret_cast<char*>(&lut[i].bitLength), sizeof(lut[i].bitLength));
+        fin.read(reinterpret_cast<char*>(&lut[i].physOffset), sizeof(lut[i].physOffset));
 
         // Used for sanity checking
-        swap((unsigned char *) &lut[i].id, sizeof(lut[i].id));
-        swap((unsigned char *) &lut[i].records, sizeof(lut[i].records));
-        swap((unsigned char *) &lut[i].values, sizeof(lut[i].values));
-        swap((unsigned char *) &lut[i].bitLength, sizeof(lut[i].bitLength));
-        swap((unsigned char *) &lut[i].physOffset, sizeof(lut[i].physOffset));
+        swap(reinterpret_cast<unsigned char*>(&lut[i].id), sizeof(lut[i].id));
+        swap(reinterpret_cast<unsigned char*>(&lut[i].records), sizeof(lut[i].records));
+        swap(reinterpret_cast<unsigned char*>(&lut[i].values), sizeof(lut[i].values));
+        swap(reinterpret_cast<unsigned char*>(&lut[i].bitLength), sizeof(lut[i].bitLength));
+        swap(reinterpret_cast<unsigned char*>(&lut[i].physOffset), sizeof(lut[i].physOffset));
         if (lut[i].records != 4096 || lut[i].values != 4 || lut[i].bitLength != 8) {
             std::cout << "CadrgFrame::load() : Bad VQ info in compression record!" << std::endl;
             return;
@@ -218,7 +220,7 @@ void CadrgFrame::load(CadrgFrameEntry* entry)
     for (int i = 0; i < 4; i++) {
         // Compression lookup subsection: loc[2]
         fin.seekg(loc[2].physicalIdx + lut[i].physOffset, std::ios::beg);
-        fin.read((char *) table[i], 4096 * 4);
+        fin.read(reinterpret_cast<char*>(table[i]), 4096 * 4);
     }
 
     // for i = 1 to 4 (# compression tables, 1 for each pixel row)
@@ -232,26 +234,26 @@ void CadrgFrame::load(CadrgFrameEntry* entry)
 
     fin.seekg(loc[1].physicalIdx, std::ios::beg);
 
-    fin.read((char *) &image.spectralGroups, sizeof(image.spectralGroups));
-    fin.read((char *) &image.subframeTables, sizeof(image.subframeTables));
-    fin.read((char *) &image.spectralTables, sizeof(image.spectralTables));
-    fin.read((char *) &image.spectralLines, sizeof(image.spectralLines));
-    fin.read((char *) &image.horizSubframes, sizeof(image.horizSubframes));
-    fin.read((char *) &image.vertSubframes, sizeof(image.vertSubframes));
-    fin.read((char *) &image.outputCols, sizeof(image.outputCols));
-    fin.read((char *) &image.outputRows, sizeof(image.outputRows));
+    fin.read(reinterpret_cast<char*>(&image.spectralGroups), sizeof(image.spectralGroups));
+    fin.read(reinterpret_cast<char*>(&image.subframeTables), sizeof(image.subframeTables));
+    fin.read(reinterpret_cast<char*>(&image.spectralTables), sizeof(image.spectralTables));
+    fin.read(reinterpret_cast<char*>(&image.spectralLines), sizeof(image.spectralLines));
+    fin.read(reinterpret_cast<char*>(&image.horizSubframes), sizeof(image.horizSubframes));
+    fin.read(reinterpret_cast<char*>(&image.vertSubframes), sizeof(image.vertSubframes));
+    fin.read(reinterpret_cast<char*>(&image.outputCols), sizeof(image.outputCols));
+    fin.read(reinterpret_cast<char*>(&image.outputRows), sizeof(image.outputRows));
     // NULL (FF) if no subfr mask table
-    fin.read((char *) &subframeMskTblOff, sizeof(subframeMskTblOff));
+    fin.read(reinterpret_cast<char*>(&subframeMskTblOff), sizeof(subframeMskTblOff));
 
-    swap((unsigned char *) &image.spectralGroups, sizeof(image.spectralGroups));
-    swap((unsigned char *) &image.subframeTables, sizeof(image.subframeTables));
-    swap((unsigned char *) &image.spectralTables, sizeof(image.spectralTables));
-    swap((unsigned char *) &image.spectralLines, sizeof(image.spectralLines));
-    swap((unsigned char *) &image.horizSubframes, sizeof(image.horizSubframes));
-    swap((unsigned char *) &image.vertSubframes, sizeof(image.vertSubframes));
-    swap((unsigned char *) &image.outputCols, sizeof(image.outputCols));
-    swap((unsigned char *) &image.outputRows, sizeof(image.outputRows));
-    swap((unsigned char *) &subframeMskTblOff, sizeof(subframeMskTblOff));
+    swap(reinterpret_cast<unsigned char*>(&image.spectralGroups), sizeof(image.spectralGroups));
+    swap(reinterpret_cast<unsigned char*>(&image.subframeTables), sizeof(image.subframeTables));
+    swap(reinterpret_cast<unsigned char*>(&image.spectralTables), sizeof(image.spectralTables));
+    swap(reinterpret_cast<unsigned char*>(&image.spectralLines), sizeof(image.spectralLines));
+    swap(reinterpret_cast<unsigned char*>(&image.horizSubframes), sizeof(image.horizSubframes));
+    swap(reinterpret_cast<unsigned char*>(&image.vertSubframes), sizeof(image.vertSubframes));
+    swap(reinterpret_cast<unsigned char*>(&image.outputCols), sizeof(image.outputCols));
+    swap(reinterpret_cast<unsigned char*>(&image.outputRows), sizeof(image.outputRows));
+    swap(reinterpret_cast<unsigned char*>(&subframeMskTblOff), sizeof(subframeMskTblOff));
 
     // ERROR Check
     if (subframeMskTblOff == 0) {
@@ -281,8 +283,8 @@ void CadrgFrame::load(CadrgFrameEntry* entry)
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 6; j++) {
                 // Read subframe offset
-                fin.read((char *) &subframeOff[i][j], 4);
-                swap((unsigned char *) &subframeOff[i][j], 4);
+                fin.read(reinterpret_cast<char*>(&subframeOff[i][j]), 4);
+                swap(reinterpret_cast<unsigned char*>(&subframeOff[i][j]), 4);
                 if (subframeOff[i][j] == 0xFFFFFFFF) masked[i][j] = true;
             }
         }
@@ -321,7 +323,7 @@ void CadrgFrame::load(CadrgFrameEntry* entry)
             indices[i][j] = (ushort)(i * 6 + j);
             if (!masked[i][j]) {
                 // (256/4)=64.  64*64 * 12bits / 8bits = 6144 bytes
-                fin.read((char *) subFrameTable[i][j], frameSize);
+                fin.read(reinterpret_cast<char*>(subFrameTable[i][j]), frameSize);
             }
         }
     }
@@ -335,12 +337,12 @@ void CadrgFrame::load(CadrgFrameEntry* entry)
 // -------------------------------------------------------------------------------------
 int CadrgFrame::decompressSubframe(int x, int y, Subframe& subFrame)
 {
-    unsigned char*  ptr;
-    unsigned int    val = 0;
-    unsigned long   blackpixel = 255;
+    unsigned char* ptr = nullptr;
+    unsigned int   val = 0;
+    unsigned long  blackpixel = 255;
 
-    int tx = x % 6;
-    int ty = y % 6;
+    const int tx = x % 6;
+    const int ty = y % 6;
     x = ty;
     y = tx;
 
@@ -349,7 +351,7 @@ int CadrgFrame::decompressSubframe(int x, int y, Subframe& subFrame)
     if (((ptr = subFrameTable[y][x]) == 0) || masked[y][x]) {
         for (int i = 0; i < 256; i ++) {
             for (int j = 0; j < 256; j ++) {
-                subFrame.image[i][j] = (unsigned char)blackpixel;
+                subFrame.image[i][j] = static_cast<unsigned char>(blackpixel);
             }
         }
     }

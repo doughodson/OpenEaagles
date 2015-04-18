@@ -593,14 +593,14 @@ void CadrgMap::latLonToTileRowColumn(const double lat, const double lon, float &
 
     // Determine our tile location(s) + pixel offset, and then set our original column, which is the aggregate of both
     // Tile row is the int result of the total row offset / pixels per tile (256)
-    tileRow = int(row) / ppt;
+    tileRow = static_cast<int>(row) / ppt;
     // The remainder is the pixel offset of that tile
     pixelRow = row - (tileRow * ppt);
     // Original row
     originRow = row;
 
     // Same here, only columns
-    tileCol = int(col) / ppt;
+    tileCol = static_cast<int>(col) / ppt;
     pixelCol = col - (tileCol*ppt);
     originCol = col;
 }

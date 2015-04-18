@@ -130,7 +130,7 @@ bool TextureTable::setSize(const int newSize)
     // Set our new table size
     maxTableSize = size;
 
-    centerTablePos = int((size / 2));
+    centerTablePos = static_cast<int>((size / 2));
     lowerBound = -centerTablePos;
     upperBound = centerTablePos;
 

@@ -69,14 +69,14 @@ Font::Font()
     setFontWidth( defaultFontWidth );
     setFontHeight( defaultFontHeight );
 
-    setBitmapWidth( int(defaultFontWidth) );
-    setBitmapHeight( int(defaultFontHeight) );
+    setBitmapWidth( static_cast<int>(defaultFontWidth) );
+    setBitmapHeight( static_cast<int>(defaultFontHeight) );
 }
 
 Font::Font(const Font& org)
 {
     STANDARD_CONSTRUCTOR()
-    copyData(org,true);
+    copyData(org, true);
 }
 
 Font::~Font()
@@ -183,7 +183,7 @@ int Font::xferChars(char* const outp, const size_t BUF_SIZE, const char* const i
       lcStrncpy(outp,BUF_SIZE,inp,n);
    }
    outp[n] = '\0';
-   return int(std::strlen(outp));
+   return static_cast<int>(std::strlen(outp));
 }
 
 
@@ -249,7 +249,7 @@ std::ostream& Font::serialize(std::ostream& sout, const int i, const bool slotsO
         indent(sout,i+j+10);
         int iiCount = 0;
         for (int ii = 0; ii < LUT_SIZE; ii++) {
-            int vLUT = 0x000000FF & int(pLUT[ii]);
+            int vLUT = 0x000000FF & static_cast<int>(pLUT[ii]);
             sout << std::hex << "0x" << vLUT << std::dec;
             iiCount++;
             if (iiCount == 256 && LUT_SIZE == 256) break;    // last one

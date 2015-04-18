@@ -453,7 +453,7 @@ int Reformat::processTime(const TimeReadout::TimeMode tm,
 
    format[j] = '\0';
 
-   return int(tm);
+   return static_cast<int>(tm);
 }
 
 
@@ -624,7 +624,7 @@ int Reformat::processDirection(const DirectionReadout::DirMode dm,
 
    format[j] = '\0';
 
-   return int(dm);
+   return static_cast<int>(dm);
 
 }
 

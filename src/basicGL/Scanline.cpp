@@ -289,8 +289,8 @@ unsigned int Scanline::reduceVert(Polygon* const polygon)
       }
       if (!reduced) {
          // check the last point with the first point
-         int ix1 = int( tvect[0][0] + 0.5f );
-         int iy1 = int( tvect[0][1] + 0.5f );
+         int ix1 = static_cast<int>( tvect[0][0] + 0.5f );
+         int iy1 = static_cast<int>( tvect[0][1] + 0.5f );
          if (ix0 == ix1 && iy0 == iy1) {
             reduced = true;
             n1--;
@@ -309,10 +309,10 @@ void Scanline::endPointCheck(Edge* tbl[], const int n) const
       Edge* p = tbl[i];
       for (int j = 0; j < n; j++) {
          Edge* q = tbl[j];
-         int qxmin = int( q->lv[0] + 0.5f );
-         int qymin = int( q->lv[1] + 0.5f );
-         int pxmax = int( p->uv[0] + 0.5f );
-         int pymax = int( p->uv[1] + 0.5f );
+         int qxmin = static_cast<int>( q->lv[0] + 0.5f );
+         int qymin = static_cast<int>( q->lv[1] + 0.5f );
+         int pxmax = static_cast<int>( p->uv[0] + 0.5f );
+         int pymax = static_cast<int>( p->uv[1] + 0.5f );
          if (pxmax == qxmin && pymax == qymin) q->incEdgeStart();
       }
    }
@@ -850,10 +850,10 @@ void Scanline::Edge::incEdgeStart()
     lv[1] += 1.0f;
     if (lv[1] > uv[1]) valid = false;
 
-    int ixmin = int( lv[0] + 0.5f );
-    int iymin = int( lv[1] + 0.5f );
-    int ixmax = int( uv[0] + 0.5f );
-    int iymax = int( uv[1] + 0.5f );
+    int ixmin = static_cast<int>( lv[0] + 0.5f );
+    int iymin = static_cast<int>( lv[1] + 0.5f );
+    int ixmax = static_cast<int>( uv[0] + 0.5f );
+    int iymax = static_cast<int>( uv[1] + 0.5f );
     if (ixmax == ixmin && iymax == iymin) pointLock = true;
 
     lvn = lvn + nslope;

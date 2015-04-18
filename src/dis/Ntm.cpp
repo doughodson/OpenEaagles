@@ -72,7 +72,7 @@ bool Ntm::copyEntityType(Simulation::Nib* const targetNib) const
 {
    bool ok = false;
    Nib* tgtNib = dynamic_cast<Nib*>(targetNib);
-   if (tgtNib != 0) {
+   if (tgtNib != nullptr) {
       ok = tgtNib->setEntityType(disKind, disDomain, disCountry, disCategory, disSubcategory, disSpecific, disExtra);
    }
    return ok;
@@ -113,7 +113,7 @@ bool Ntm::setEntityType(
 bool Ntm::setSlotDisEntityType(const Basic::List* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       int values[7];
       int n = msg->getNumberList(values, 7);
       if (n >= 4) {
@@ -222,16 +222,16 @@ std::ostream& Ntm::serialize(std::ostream& sout, const int i, const bool slotsOn
 
    indent(sout,i+j);
    sout << "disEntityType: [ ";
-   sout << int(disKind) << " ";
-   sout << int(disDomain) << " ";
-   sout << int(disCountry) << " ";
-   sout << int(disCategory) << " ";
-   sout << int(disSubcategory) << " ";
-   sout << int(disSpecific) << " ";
-   sout << int(disExtra) << " ";
+   sout << static_cast<int>(disKind) << " ";
+   sout << static_cast<int>(disDomain) << " ";
+   sout << static_cast<int>(disCountry) << " ";
+   sout << static_cast<int>(disCategory) << " ";
+   sout << static_cast<int>(disSubcategory) << " ";
+   sout << static_cast<int>(disSpecific) << " ";
+   sout << static_cast<int>(disExtra) << " ";
    sout << "]" << std::endl;
 
-   BaseClass::serialize(sout,i+j,true);
+   BaseClass::serialize(sout,i+j, true);
 
    if ( !slotsOnly ) {
       indent(sout,i);

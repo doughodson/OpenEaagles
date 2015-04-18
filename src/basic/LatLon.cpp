@@ -126,10 +126,10 @@ bool LatLon::setDeg(const double d)
    }
 
    if (ok) {
-      deg = int(dd);
+      deg = static_cast<int>(dd);
       double m = (dd - static_cast<double>(deg)) * 60.0;
-      min = int(m);
-      sec = double(m - static_cast<double>(min)) * 60.0;
+      min = static_cast<int>(m);
+      sec = static_cast<double>(m - static_cast<double>(min)) * 60.0;
       computeVal();
    }
    return ok;

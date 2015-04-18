@@ -40,7 +40,7 @@ bool Nib::weaponFireMsgFactory(const LCreal)
     // Ok, we have the weapon, now get the firing and target players
     Simulation::Player* tPlayer = mPlayer->getTargetPlayer();
     Simulation::Player* fPlayer = mPlayer->getLaunchVehicle();
-    if (fPlayer == 0) return false;
+    if (fPlayer == nullptr) return false;
 
     // ---
     // PDU header
@@ -74,7 +74,7 @@ bool Nib::weaponFireMsgFactory(const LCreal)
     // ---
     {
       bool tOk = false;
-      if (tPlayer != 0) {
+      if (tPlayer != nullptr) {
          pdu.targetEntityID.ID = tPlayer->getID();
          if (tPlayer->isLocalPlayer()) {
             // Local player, use our site/app/exercise IDs
@@ -84,7 +84,7 @@ bool Nib::weaponFireMsgFactory(const LCreal)
          }
          else {
             const Nib* fNIB = dynamic_cast<const Nib*>( tPlayer->getNib() );
-            if (fNIB != 0) {
+            if (fNIB != nullptr) {
                // Networked player, use its NIB's IDs
                pdu.targetEntityID.simulationID.siteIdentification = fNIB->getSiteID();
                pdu.targetEntityID.simulationID.applicationIdentification = fNIB->getApplicationID();

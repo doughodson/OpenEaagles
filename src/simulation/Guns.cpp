@@ -563,7 +563,7 @@ void Gun::initBullet()
 void Gun::burstFrame()
 {
    // Compute the number of rounds this burst
-   int ibullets = int(rcount + 0.5f);
+   int ibullets = static_cast<int>(rcount + 0.5f);
 
    // Do we have any bullets to fire ...
    if (ibullets > 0){

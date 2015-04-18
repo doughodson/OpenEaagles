@@ -7,6 +7,8 @@
 #include "openeaagles/basic/String.h"
 #include "openeaagles/maps/rpfMap/Support.h"
 
+#include <cstring>
+
 namespace Eaagles {
 namespace Maps {
 namespace Rpf {
@@ -121,11 +123,11 @@ void CadrgClut::load(CadrgFrameEntry& frame, int cib, ColorTableSizes clutSize)
     fin.read(buf,1024);
 
     // Search for end of header
-    char *ptr = strstr(buf,"RPFHDR");
+    char* ptr = std::strstr(buf,"RPFHDR");
 
     // Have valid pointer, find header length
     if (ptr) {
-        int dist = int(ptr - &buf[0]);
+        int dist = static_cast<int>(ptr - &buf[0]);
         headerLength = dist + 11;
     }
 

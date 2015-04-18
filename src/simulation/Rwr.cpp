@@ -27,7 +27,7 @@ Rwr::Rwr() : rptQueue(MAX_EMISSIONS)
 }
 
 Rwr::Rwr(const Rwr& org) : rptQueue(MAX_EMISSIONS)
-{ 
+{
     STANDARD_CONSTRUCTOR()
     copyData(org,true);
 }
@@ -100,7 +100,7 @@ void Rwr::receive(const LCreal dt)
    LCreal noise = getRfRecvNoise() * getRfReceiveLoss();
 #endif
 
-   // Process received emissions 
+   // Process received emissions
    TrackManager* tm = getTrackManager();
    Emission* em = 0;
    LCreal signal = 0;
@@ -191,7 +191,7 @@ void Rwr::process(const LCreal dt)
    // ---
    // Process Emissions into tracks
    // ---
-   for (Emission* em = rptQueue.get(); em != 0; em = rptQueue.get()) { 
+   for (Emission* em = rptQueue.get(); em != 0; em = rptQueue.get()) {
       // finished
       em->unref();   // this undoes the ref() added in Rwr::receive()
    }
@@ -215,19 +215,19 @@ bool Rwr::killedNotification(Player* const p)
 }
 
 //------------------------------------------------------------------------------
-// getRayIndex() -- 
+// getRayIndex() --
 //------------------------------------------------------------------------------
 int Rwr::getRayIndex(const LCreal az) const
 {
     LCreal az1 = lcAepcDeg(az);
     if (az1 < 0.0) az1 += 360.0;
-    int idx = int( (az1/ getDegreesPerRay()) + 0.5 );
+    int idx = static_cast<int>( (az1/ getDegreesPerRay()) + 0.5 );
     if (idx >= NUM_RAYS || idx < 0) idx = 0;
     return idx;
 }
-    
+
 //------------------------------------------------------------------------------
-// getRayAzimuth() -- 
+// getRayAzimuth() --
 //------------------------------------------------------------------------------
 LCreal Rwr::getRayAzimuth(const int idx) const
 {

@@ -42,6 +42,7 @@
 #define __Eaagles_Network_Dis_Struct_H__
 
 #include <iostream>
+#include <cstdint>
 
 namespace Eaagles {
 namespace Network {
@@ -375,7 +376,7 @@ struct SimulationAddressDIS{
    }
 
    friend std::ostream& operator << ( std::ostream& s, const SimulationAddressDIS* const v ) {
-      if ( v == 0 )
+      if ( v == nullptr )
          return s;
       else {
          s << *v;
@@ -434,7 +435,7 @@ struct VectorDIS {
    }
 
    friend std::ostream& operator << ( std::ostream& s, const VectorDIS* const v ) {
-      if ( v == 0 )
+      if ( v == nullptr )
          return s;
       else {
          s << *v;
@@ -492,7 +493,7 @@ struct WorldCoordinates {
    };
 
    friend std::ostream& operator << ( std::ostream& s, const WorldCoordinates* const v ) {
-      if ( v == 0 )
+      if ( v == nullptr )
          return s;
       else {
          s << *v;
@@ -651,7 +652,7 @@ struct BeamData {
    }
 
    friend std::ostream& operator << ( std::ostream& s, const BeamData* const v ) {
-      if ( v == 0 )
+      if ( v == nullptr )
          return s;
       else {
          s << *v;
@@ -809,7 +810,7 @@ struct EeFundamentalParameterData {
    }
 
    friend std::ostream& operator << ( std::ostream& s, const EeFundamentalParameterData* const v ) {
-      if ( v == 0 )
+      if ( v == nullptr )
          return s;
       else {
          s << *v;
@@ -867,7 +868,7 @@ struct EmitterSystem {
    }
 
    friend std::ostream& operator << ( std::ostream& s, const EmitterSystem* const v ) {
-      if ( v == 0 )
+      if ( v == nullptr )
          return s;
       else {
          s << *v;
@@ -934,7 +935,7 @@ struct EntityIdentifierDIS {
    }
 
    friend std::ostream& operator << ( std::ostream& s, const EntityIdentifierDIS* const v ) {
-      if ( v == 0 )
+      if ( v == nullptr )
          return s;
       else {
          s << *v;
@@ -961,7 +962,7 @@ struct EntityMarking {
    };
 
    friend std::ostream& operator << ( std::ostream& s, const EntityMarking* v ) {
-      if ( v == 0 )
+      if ( v == nullptr )
          return s;
       else {
          s << *v;
@@ -1239,7 +1240,7 @@ struct JammingTechnique {
    }
 
    friend std::ostream& operator << ( std::ostream& s, const JammingTechnique* const v ) {
-      if ( v == 0 )
+      if ( v == nullptr )
          return s;
       else {
          s << *v;
@@ -1303,7 +1304,7 @@ struct ModulationType {
    };
 
    friend std::ostream& operator << ( std::ostream& s, const ModulationType* const v ) {
-      if ( v == 0 )
+      if ( v == nullptr )
          return s;
       else {
          s << *v;
@@ -1415,7 +1416,7 @@ struct RadioEntityType {
    };
 
    friend std::ostream& operator << ( std::ostream& s, const RadioEntityType* const v ) {
-      if ( v == 0 )
+      if ( v == nullptr )
          return s;
       else {
          s << *v;
@@ -1585,7 +1586,7 @@ struct TrackJamTargets {
    }
 
    friend std::ostream& operator << ( std::ostream& s, const TrackJamTargets* const v ) {
-      if ( v == 0 )
+      if ( v == nullptr )
          return s;
       else {
          s << *v;
@@ -1625,7 +1626,7 @@ struct VariableDatum {
    };
 
    friend std::ostream& operator << ( std::ostream& s, const VariableDatum* const v ) {
-      if ( v == 0 )
+      if ( v == nullptr )
          return s;
       else {
          s << *v;
@@ -1692,8 +1693,6 @@ struct VpArticulatedPart {
       float value[2];
       EntityType entityType;
    } parameterValue;
-
-
 
    void swapBytes() {
       id = convertUInt16(id);
@@ -1776,7 +1775,7 @@ struct EmitterBeamData {
    // Note: This ONLY works after the numberOfTargetsInTrack have been initialized!
    // Note: 'idx' is zero based, so a idx == 1 will return the second TrackJamTargets structure
    TrackJamTargets* getTrackTarget(const int idx) {
-      TrackJamTargets* tjt = 0;
+      TrackJamTargets* tjt = nullptr;
       if (idx < numberOfTargetsInTrack) {
          uint8_t* p = reinterpret_cast<uint8_t*>(this) + sizeof(*this) + (sizeof(TrackJamTargets) * idx);
          tjt = reinterpret_cast<TrackJamTargets*>(p);
@@ -1784,7 +1783,7 @@ struct EmitterBeamData {
       return tjt;
    }
    const TrackJamTargets* getTrackTarget(const int idx) const {
-      const TrackJamTargets* tjt = 0;
+      const TrackJamTargets* tjt = nullptr;
       if (idx < numberOfTargetsInTrack) {
          uint8_t* p = const_cast<uint8_t*>(reinterpret_cast<const uint8_t*>(this)) + sizeof(*this) + (sizeof(TrackJamTargets) * idx);
          tjt = (const TrackJamTargets*) p;
@@ -1822,7 +1821,7 @@ struct EmitterBeamData {
       // Then swap the "targets in track" data
       for (int i = 0; i < numberOfTargetsInTrack; i++) {
          TrackJamTargets* tjt = getTrackTarget(i);
-         if (tjt != 0) tjt->swapBytes();
+         if (tjt != nullptr) tjt->swapBytes();
       }
    }
 
@@ -1841,7 +1840,7 @@ struct EmitterBeamData {
       for(int i=0; i < v.numberOfTargetsInTrack; i++)
       {
          const TrackJamTargets* tgt = v.getTrackTarget(i);
-         if (tgt != 0) {
+         if (tgt != nullptr) {
             s  << "-----------------------------------------" << std::endl
                << "Target: " << i
                << tgt
@@ -1853,7 +1852,7 @@ struct EmitterBeamData {
    }
 
    friend std::ostream& operator << ( std::ostream& s, const EmitterBeamData* const v ) {
-      if ( v == 0 )
+      if ( v == nullptr )
          return s;
       else {
          s << *v;
@@ -1918,7 +1917,7 @@ struct EmissionSystem {
    //    'numberOfBeams' member variable, need to be correct for this to work)
    // Note: 'idx' is zero based, so a idx == 1 will return the second EmitterBeamData structure
    EmitterBeamData* getEmitterBeamData(const int idx) {
-      EmitterBeamData* bd = 0;
+      EmitterBeamData* bd = nullptr;
       if (idx < numberOfBeams) {
          uint8_t *p = (reinterpret_cast<uint8_t*>(this)) + sizeof(*this);
 
@@ -1936,7 +1935,7 @@ struct EmissionSystem {
    }
 
    const EmitterBeamData* getEmitterBeamData(const int idx) const {
-      const EmitterBeamData* bd = 0;
+      const EmitterBeamData* bd = nullptr;
       if (idx < numberOfBeams) {
          uint8_t *p = const_cast<uint8_t*>(reinterpret_cast<const uint8_t*>(this)) + sizeof(*this);
 
@@ -1973,7 +1972,7 @@ struct EmissionSystem {
 
    // Another friendly print functions
    friend std::ostream& operator << ( std::ostream& s, const EmissionSystem* const v ) {
-      if ( v == 0 )
+      if ( v == nullptr )
          return s;
       else {
          s << *v;

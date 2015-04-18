@@ -18,7 +18,7 @@ BEGIN_SLOTTABLE(SaH)
     "sampleRate",   //  1: Sample update rate
 END_SLOTTABLE(SaH)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(SaH)
    ON_SLOT( 1, setSlotSampleRate, Basic::Frequency)
    ON_SLOT( 1, setSlotSampleRate, Basic::Number)
@@ -140,7 +140,7 @@ void SaH::initialize()
       // Compute sample time
       stime = 1.0f/sampleRate;
 
-      // Age of the sample data: set beyond max to force a sample at first call to g() 
+      // Age of the sample data: set beyond max to force a sample at first call to g()
       time = stime + 1.0f;
    }
 }
@@ -164,7 +164,7 @@ bool SaH::setSlotSampleRate(const Basic::Frequency* const msg)
 {
    bool ok = false;
    if (msg != 0) {
-      int v = int( Basic::Hertz::convertStatic( *msg ) + 0.5f );
+      int v = static_cast<int>( Basic::Hertz::convertStatic( *msg ) + 0.5f );
       if (v > 0) {
          setSampleRate( static_cast<unsigned int>(v) );
          ok = true;

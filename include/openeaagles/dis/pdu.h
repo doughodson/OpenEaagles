@@ -29,7 +29,9 @@
 #include "openeaagles/dis/structs.h"
 #include "openeaagles/dis/enums.h"
 
+#include <cstring>
 #include <string>
+#include <cstdint>
 
 namespace Eaagles {
 namespace Network {
@@ -64,7 +66,7 @@ struct EntityStatePDU {
    // Note: 'idx' is zero based, so an idx == 1 will return the second VpArticulatedPart structure
    VpArticulatedPart* getArticulationParameter(const unsigned int idx)
    {
-      VpArticulatedPart* ap = 0;
+      VpArticulatedPart* ap = nullptr;
       if (idx < numberOfArticulationParameters) {
          uint8_t *p = reinterpret_cast<uint8_t *>(this) + sizeof(*this);
 
@@ -83,7 +85,7 @@ struct EntityStatePDU {
 
    const VpArticulatedPart* getArticulationParameter(const unsigned int idx) const
    {
-      const VpArticulatedPart* ap = 0;
+      const VpArticulatedPart* ap = nullptr;
       if (idx < numberOfArticulationParameters) {
 
          // First articulation parameter is just after this structure
@@ -117,7 +119,7 @@ struct EntityStatePDU {
       // then swap the articulation parameters
       for(int i = 0; i < numberOfArticulationParameters; i++) {
          VpArticulatedPart* ap = getArticulationParameter(i);
-         if (ap != 0) ap->swapBytes();
+         if (ap != nullptr) ap->swapBytes();
       }
    };
 
@@ -136,7 +138,7 @@ struct EntityStatePDU {
       std::cout << entityLinearVelocity;
       std::cout << "Entity Location:" << std::endl;
       WorldCoordinates loc;
-      memcpy(&loc,&entityLocation,sizeof(WorldCoordinates));
+      std::memcpy(&loc,&entityLocation,sizeof(WorldCoordinates));
       std::cout << loc;
       std::cout << "Entity Orientation:" << std::endl;
       std::cout << entityOrientation;
@@ -236,7 +238,7 @@ struct FirePDU {
       std::cout << "Munition Entity:" << std::endl << munitionID;
       std::cout << "Event ID:" << std::endl << eventID;
       std::cout << "fireMissionIndex (" << fireMissionIndex << ")" << std::endl;
-      memcpy(&loc,&location, sizeof(WorldCoordinates));
+      std::memcpy(&loc,&location, sizeof(WorldCoordinates));
       std::cout << "Location:" << std::endl << loc;
       std::cout << "Burst Descriptor:" << std::endl << burst;
       std::cout << "Velocity vectorDISy:" << std::endl << velocity;
@@ -285,7 +287,7 @@ struct DetonationPDU {
       std::cout << "Munition Entity:" << std::endl << munitionID;
       std::cout << "Event ID:" << std::endl << eventID;
       std::cout << "Velocity vectorDISy:" << std::endl << velocity;
-      memcpy(&loc,&location,sizeof(WorldCoordinates));
+      std::memcpy(&loc,&location,sizeof(WorldCoordinates));
       std::cout << "Location:" << std::endl << loc;
       std::cout << "Burst Descriptor:" << std::endl << burst;
       std::cout << "Location In Entity Coords:" << std::endl << locationInEntityCoordinates;
@@ -825,7 +827,7 @@ struct DesignatorPDU {
        std::cout << "Designator Code: " << designatorCode << std::endl;
        std::cout << "Power          : " << power << std::endl;
        std::cout << "Wavelength     : " << wavelength << std::endl;
-       memcpy(&spotLoc,&spotLocation, sizeof(WorldCoordinates));
+       std::memcpy(&spotLoc,&spotLocation, sizeof(WorldCoordinates));
        std::cout << "Spot Location:" << std::endl << spotLoc;
        std::cout << "Spot Position:" << std::endl << spotPosition;
        std::cout.flush();

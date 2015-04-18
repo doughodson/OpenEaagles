@@ -548,7 +548,7 @@ bool NumericReadout::setSlotNumberToBeDisplayed(const Basic::Number* const sntbd
 {
    bool ok = true;
    if (sntbdobj != nullptr) {
-      setValue(int(sntbdobj->getInt()));
+      setValue(static_cast<int>(sntbdobj->getInt()));
    }
    else {
       if (isMessageEnabled(MSG_ERROR)) {
@@ -580,7 +580,7 @@ bool NumericReadout::setSlotNumberMaxValue(const Basic::Number* const snmvobj)
 {
    bool ok = true;
    if (snmvobj != nullptr) {
-      setMaxValue(int(snmvobj->getInt()));
+      setMaxValue(static_cast<int>(snmvobj->getInt()));
    }
    else {
       if (isMessageEnabled(MSG_ERROR)) {
@@ -1172,7 +1172,7 @@ void TimeReadout::makeText()
       break;
 
       case mmss : {   // Minutes and seconds
-         int  imin = int(seconds/60.0f);
+         int  imin = static_cast<int>(seconds/60.0f);
          double sec = seconds - static_cast<double>(imin*60);
          std::sprintf(cbuf, format, imin, sec);
          if (neg) { /* if it was negative, swap the possible + sign to the - sign */
@@ -1331,7 +1331,7 @@ void DirectionReadout::makeText()
    switch (tmode) {
 
       case ddmmss : { // Degrees, Minutes, and seconds
-         int     ideg = int(degrees);
+         int     ideg = static_cast<int>(degrees);
          double  min = (degrees - static_cast<double>(ideg))*60.0f;
          int     imin = static_cast<int>(min);
          double sec = (min - static_cast<double>(imin))*60.0f;
@@ -1360,7 +1360,7 @@ void DirectionReadout::makeText()
    {
       size_t len = std::strlen(cbuf);
       for (unsigned int i = 0; i < len; i++) {
-         if (cbuf[i] == '@') cbuf[i] = char(0xB0);
+         if (cbuf[i] == '@') cbuf[i] = static_cast<char>(0xB0);
       }
    }
 }

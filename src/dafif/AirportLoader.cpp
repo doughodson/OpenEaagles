@@ -354,7 +354,7 @@ bool AirportLoader::load(const char* country)
                Ils::IlsType type = Ils::innerMarker;
                key[ILS_KEY_LEN-1] = 'I';
                computeIlsLL(&nlat, &nlon, &elev, ilsr->rwEndId, runway,
-               magvar, int(ilsr->imd*NM2FT));
+               magvar, static_cast<int>(ilsr->imd*NM2FT));
                if (ilsr->imd < 0.0f) {
                   nlat = ilsr->imLat;
                   nlon = ilsr->imLon;
@@ -362,7 +362,7 @@ bool AirportLoader::load(const char* country)
                }
 
                // create an ils key for the inner marker component
-               IlsKey* mk = new IlsKey(long(ALT_ILS_IDX));
+               IlsKey* mk = new IlsKey(static_cast<long>(ALT_ILS_IDX));
                mk->lat = nlat;
                mk->lon = nlon;
                dsGetString(mk->key, key, ILS_KEY_LEN);
@@ -389,7 +389,7 @@ bool AirportLoader::load(const char* country)
                Ils::IlsType type = Ils::middleMarker;
                key[ILS_KEY_LEN-1] = 'M';
                computeIlsLL(&nlat, &nlon, &elev, ilsr->rwEndId, runway,
-               magvar, int(ilsr->mmd*NM2FT));
+               magvar, static_cast<int>(ilsr->mmd*NM2FT));
                if (ilsr->mmd < 0.0f) {
                   nlat = ilsr->mmLat;
                   nlon = ilsr->mmLon;
@@ -397,7 +397,7 @@ bool AirportLoader::load(const char* country)
                }
 
                // create an ils key for the inner marker component
-               IlsKey* mk = new IlsKey(long(ALT_ILS_IDX));
+               IlsKey* mk = new IlsKey(static_cast<long>(ALT_ILS_IDX));
                mk->lat = nlat;
                mk->lon = nlon;
                dsGetString(mk->key, key, ILS_KEY_LEN);
@@ -425,7 +425,7 @@ bool AirportLoader::load(const char* country)
                key[ILS_KEY_LEN-1] = 'O';
 
                computeIlsLL(&nlat, &nlon, &elev, ilsr->rwEndId, runway,
-               magvar, int(ilsr->omd*NM2FT));
+               magvar, static_cast<int>(ilsr->omd*NM2FT));
                if (ilsr->omd < 0.0f) {
                   nlat = ilsr->omLat;
                   nlon = ilsr->omLon;
@@ -433,7 +433,7 @@ bool AirportLoader::load(const char* country)
                }
 
                // create an ils key for the inner marker component
-               IlsKey* mk = new IlsKey(long(ALT_ILS_IDX));
+               IlsKey* mk = new IlsKey(static_cast<long>(ALT_ILS_IDX));
                mk->lat = nlat;
                mk->lon = nlon;
                dsGetString(mk->key, key, ILS_KEY_LEN);
@@ -1592,7 +1592,7 @@ void printMagvar( char* buff, float magvar )
       buff[0] = 'W';
    }
 
-   int deg = int(dmv);
+   int deg = static_cast<int>(dmv);
 
    float dmin = (dmv - static_cast<float>(deg)) * 60.0;
    int min = static_cast<int>(dmin);

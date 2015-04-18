@@ -358,7 +358,7 @@ bool Autopilot::processModeLoiter()
 bool Autopilot::flyLoiterEntry()
 {
    //-------------------------------------------------------
-   // get data pointers 
+   // get data pointers
    //-------------------------------------------------------
    Player* pPlr = getOwnship();
    bool ok = (pPlr != 0);
@@ -368,7 +368,7 @@ bool Autopilot::flyLoiterEntry()
       bool haveNav = (nav != 0);
 
       //----------------------------------------------------
-      // define local constants 
+      // define local constants
       //----------------------------------------------------
       const double MAX_BANK_RAD = maxBankAngleDegs * Basic::Angle::D2RCC;
 //      const double OFFSET_MTR   = 20.0;
@@ -435,7 +435,7 @@ bool Autopilot::flyLoiterEntry()
                   loiterInboundCourse = pPlr->getHeadingD();
                   loiterAnchorLat = pPlr->getLatitude();
                   loiterAnchorLon = pPlr->getLongitude();
-               }        
+               }
 
                // assume direct entry for now
                loiterEntryPhase = 1;
@@ -482,11 +482,11 @@ bool Autopilot::flyLoiterEntry()
                setCommandedHeadingD(obCrsDeg);
                //distCmdNM = velMps * 60.0 * Basic::Distance::M2NM;  // 1 min = 60 sec
                distCmdNM = 4.0 * rocNM;  // 1/tan(15 deg) = 0.268 = 3.732 ~= 4.0
-               if (distNM > distCmdNM) loiterEntryPhase = 2; 
+               if (distNM > distCmdNM) loiterEntryPhase = 2;
             }
             else if (loiterEntryPhase == 2) {
                flySRT();
-               if (std::fabs(hdgErrDeg) < 90.0) { 
+               if (std::fabs(hdgErrDeg) < 90.0) {
                   loiterEntryPhase = 3;
                }
             }
@@ -545,13 +545,13 @@ bool Autopilot::flyLoiterEntry()
 bool Autopilot::flyLoiter()
 {
    //-------------------------------------------------------
-   // get data pointers 
+   // get data pointers
    //-------------------------------------------------------
    Player* pPlr = getOwnship();
 
    bool ok = (pPlr != 0);
    if (ok) {
-   
+
       // get current data
       double osLatDeg = pPlr->getLatitude();
       double osLonDeg = pPlr->getLongitude();
@@ -589,13 +589,13 @@ bool Autopilot::flyLoiter()
 bool Autopilot::calcMirrorLatLon()
 {
    //-------------------------------------------------------
-   // get data pointers 
+   // get data pointers
    //-------------------------------------------------------
    Player* pPlr = getOwnship();
 
    bool ok = (pPlr != 0);
    if (ok) {
-   
+
       //----------------------------------------------------
       // define local constants
       //----------------------------------------------------
@@ -623,7 +623,7 @@ bool Autopilot::calcMirrorLatLon()
          obDistNM  = velMps * obTimeSec * Basic::Distance::M2NM;
       }
       else obDistNM = loiterLength;
-      
+
       // SLS - ask Larry about this
       //double altFt     = pPlr->getAltitudeFt();
       //if (altFt > 14000.0) { obDistNM *= 1.5; }
@@ -633,8 +633,8 @@ bool Autopilot::calcMirrorLatLon()
       double brgDeg    = std::atan2(xtDistNM, obDistNM) * Basic::Angle::R2DCC;
 
       // turning clockwise
-      if (!loiterCcwFlag) brgDeg = Basic::Angle::aepcdDeg(obCrsDeg - brgDeg); 
-      else brgDeg = Basic::Angle::aepcdDeg(obCrsDeg + brgDeg); 
+      if (!loiterCcwFlag) brgDeg = Basic::Angle::aepcdDeg(obCrsDeg - brgDeg);
+      else brgDeg = Basic::Angle::aepcdDeg(obCrsDeg + brgDeg);
 
       ok = Basic::Nav::fbd2ll(loiterAnchorLat, loiterAnchorLon, brgDeg, distNM, &loiterMirrorLat, &loiterMirrorLon);
    }
@@ -649,15 +649,15 @@ bool Autopilot::flyCRS(const double latDeg, const double lonDeg, const double cr
 {
    //-------------------------------------------------------
 
-   // get data pointers 
+   // get data pointers
    //-------------------------------------------------------
    Player* pPlr = getOwnship();
 
    bool ok = (pPlr != 0);
    if (ok) {
-   
+
       //----------------------------------------------------
-      // define local constants 
+      // define local constants
       //----------------------------------------------------
       const double MAX_BANK_RAD = maxBankAngleDegs * Basic::Angle::D2RCC;
       const double OFFSET_MTR   = 20.0;
@@ -675,7 +675,7 @@ bool Autopilot::flyCRS(const double latDeg, const double lonDeg, const double cr
 
       //-------------------------------------------------------
       // get current gama error (deg)
-      //-------------------------------------------------------   
+      //-------------------------------------------------------
       double posErrDeg = Basic::Angle::aepcdDeg(brgDeg - crsDeg);
       double posErrRad = posErrDeg * Basic::Angle::D2RCC;
 
@@ -720,7 +720,7 @@ bool Autopilot::flySRT()
 {
    setCommandedVelocityKts(210.0f);
    //-------------------------------------------------------
-   // get data pointers 
+   // get data pointers
    //-------------------------------------------------------
    Player* pPlr = getOwnship();
 
@@ -728,14 +728,14 @@ bool Autopilot::flySRT()
    if (ok) {
 
       //----------------------------------------------------
-      // define local constants 
+      // define local constants
       //----------------------------------------------------
       const double SRT_RPS       = STD_RATE_TURN_DPS * Basic::Angle::D2RCC;
 
       //----------------------------------------------------
       // get current data
       //----------------------------------------------------
-      double velMps    = pPlr->getTotalVelocity();   
+      double velMps    = pPlr->getTotalVelocity();
       double phiCmdRad = std::atan2(velMps*SRT_RPS, Eaagles::ETHGM);
       double psiDotCmdRps = Eaagles::ETHGM * std::tan(phiCmdRad) / velMps;
 
@@ -750,7 +750,7 @@ bool Autopilot::flySRT()
       double phiCmdDeg = phiCmdRad * Basic::Angle::R2DCC;
       setCommandedHeadingD(hdg + phiCmdDeg);
    }
-   
+
    return ok;
 }
 
@@ -761,10 +761,10 @@ bool Autopilot::flySRT()
 bool Autopilot::processModeFollowTheLead()
 {
    bool ok = false;
-   
+
    // attempt to get our lead player, if we don't have one initially
    if (lead == 0) getLeadPlayer();
-   
+
    // if we got a lead player, great... if not, we break out of follow the lead mode.
    if (lead != 0 && lead->isActive() && lead->getDamage() < 0.5f) {
 
@@ -896,10 +896,10 @@ bool Autopilot::processModeFollowTheLead()
 //
 //      // Offset (width) of the orbit pattern (ft)
 //      //double orbitOffsetFt  = 2.0 * radius;
-//      
+//
 //      const double AOG = 32.174;  // Acceleration of gravity, 32.174 feet/sec/sec
 //      const double SRT = 3.0;     // Standard rate turn, 3 degrees/sec (also, 180 deg/min)
-//      
+//
 //      double airSpeedFps   = speed * Basic::Distance::NM2FT / Basic::Time::H2S;  // airspeed  [feet/sec]
 //      double turnRateRps   = SRT * Basic::Angle::D2RCC;                          // standard rate turn  [radians/sec]
 //      double tanBankAngle  = airSpeedFps * turnRateRps / AOG;                    // standard rate turn tan(bank angle)  [no units]
@@ -931,7 +931,7 @@ bool Autopilot::processModeFollowTheLead()
 //         trueBrgDeg = Basic::Angle::aepcdDeg( crs + relBrgDeg );
 //      }
 //
-//      
+//
 //      // ---
 //      // Distance to mirror point (nm)
 //      // ---
@@ -966,7 +966,7 @@ bool Autopilot::headingController()
       if (md != 0) {
          // why mess with the player?  All it does is send it to the dynamics model anyways!  Skip the middle man!
          if ( isHeadingHoldOn() || isNavModeOn() ) {
-            int ihdg10 = int( getCommandedHeadingD() * 10.0f );
+            int ihdg10 = static_cast<int>( getCommandedHeadingD() * 10.0f );
             LCreal hdg = LCreal( ihdg10 ) / 10.0f;
 
             md->setCommandedHeadingD(hdg, maxTurnRateDps, maxBankAngleDegs);

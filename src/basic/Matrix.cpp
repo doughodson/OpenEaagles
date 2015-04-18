@@ -793,7 +793,7 @@ bool Matrix::remRows(const unsigned int r1, const unsigned int r2)
 
    bool ok = false;
    if (l1 && l2) {
-      unsigned int rr = 1 + std::abs(int(r2) - int(r1));
+      unsigned int rr = 1 + std::abs(static_cast<int>(r2) - static_cast<int>(r1));
       if (rr < rows) {
          double* arr = new double[(rows-rr)*cols];
          unsigned int idx1 = 0;
@@ -856,7 +856,7 @@ bool Matrix::remCols(const unsigned int c1, const unsigned int c2)
 
    bool ok = false;
    if (l1 && l2) {
-      unsigned int cc = 1 + std::abs(int(c2) - int(c1));
+      unsigned int cc = 1 + std::abs(static_cast<int>(c2) - static_cast<int>(c1));
       if (cc < cols) {
          double* arr = new double[rows*(cols-cc)];
          unsigned int idx1 = 0;

@@ -112,13 +112,13 @@ void String::setString(const String& origStr, const size_t w, const Justify j)
    // Set this to the new string justified
    // ---
 
-   int i1 = 0;                  // Source index
-   int i2 = 0;                  // Destination index
-   int l1 = int(std::strlen(ss));    // Source string length
+   int i1 = 0;                                         // Source index
+   int i2 = 0;                                         // Destination index
+   int l1 = static_cast<int>(std::strlen(ss));         // Source string length
    if (l1 > MAX_STRING_LENGTH) l1 = MAX_STRING_LENGTH;
-   int l2 = int(w);             // Destination string length
+   int l2 = static_cast<int>(w);                       // Destination string length
    if (l2 > MAX_STRING_LENGTH) l2 = MAX_STRING_LENGTH;
-   int d = l2 - l1;             // Difference in lengths
+   int d = l2 - l1;                                    // Difference in lengths
 
    switch (j) {
 

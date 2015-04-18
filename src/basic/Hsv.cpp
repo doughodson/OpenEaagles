@@ -183,7 +183,7 @@ void Hsv::hsv2rgb(osg::Vec3& rgb, const osg::Vec3& hsv)
 
         // computer some parameters
         //int i = ffloor(h);
-        int i = int(h);
+        int i = static_cast<int>(h);
         LCreal f = h - LCreal(i);
         LCreal p = v * (1.0f - s);
         LCreal q = v * (1.0f - (s * f));

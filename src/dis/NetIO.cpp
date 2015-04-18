@@ -806,7 +806,7 @@ bool NetIO::parseFederateName(unsigned short* const site, unsigned short* const 
          unsigned int cnt = 0;
          while (cnt < 5 && std::isdigit(fedName[idx])) {
             tmp *= 10;
-            tmp += int(fedName[idx++] - '0');
+            tmp += static_cast<int>(fedName[idx++] - '0');
             cnt++;
          }
          ok = (tmp > 0) && (tmp <= 0xFFFF);
@@ -820,7 +820,7 @@ bool NetIO::parseFederateName(unsigned short* const site, unsigned short* const 
          unsigned int cnt = 0;
          while (cnt < 5 && std::isdigit(fedName[idx])) {
             tmp *= 10;
-            tmp += int(fedName[idx++] - '0');
+            tmp += static_cast<int>(fedName[idx++] - '0');
             cnt++;
          }
          ok = (tmp > 0) && (tmp <= 0xFFFF);
@@ -892,7 +892,7 @@ bool NetIO::parseFederationName(unsigned short* const exercise, const char* cons
          unsigned int cnt = 0;
          while (cnt < 5 && std::isdigit(fedName[idx])) {
             tmp *= 10;
-            tmp += int(fedName[idx++] - '0');
+            tmp += static_cast<int>(fedName[idx++] - '0');
             cnt++;
          }
          ok = (tmp > 0) && (tmp <= 0xFFFF);
@@ -2195,13 +2195,13 @@ bool NtmInputNode::add2OurLists(Simulation::Ntm* const ntm)
                }
                else if (isMessageEnabled(MSG_WARNING)) {
                   std::cerr << "Warning: duplicate incoming NTM(";
-                  std::cerr << int(disNtm->getEntityKind()) << ",";
-                  std::cerr << int(disNtm->getEntityDomain()) << ",";
-                  std::cerr << int(disNtm->getEntityCountry()) << ",";
-                  std::cerr << int(disNtm->getEntityCategory()) << ",";
-                  std::cerr << int(disNtm->getEntitySubcategory()) << ",";
-                  std::cerr << int(disNtm->getEntitySpecific()) << ",";
-                  std::cerr << int(disNtm->getEntityExtra()) << ")";
+                  std::cerr << static_cast<int>(disNtm->getEntityKind()) << ",";
+                  std::cerr << static_cast<int>(disNtm->getEntityDomain()) << ",";
+                  std::cerr << static_cast<int>(disNtm->getEntityCountry()) << ",";
+                  std::cerr << static_cast<int>(disNtm->getEntityCategory()) << ",";
+                  std::cerr << static_cast<int>(disNtm->getEntitySubcategory()) << ",";
+                  std::cerr << static_cast<int>(disNtm->getEntitySpecific()) << ",";
+                  std::cerr << static_cast<int>(disNtm->getEntityExtra()) << ")";
                   std::cerr << ", second ignored" << std::endl;
                   err = true;
                }

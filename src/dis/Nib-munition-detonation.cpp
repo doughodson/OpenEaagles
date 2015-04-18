@@ -27,7 +27,7 @@ bool Nib::munitionDetonationMsgFactory(const LCreal)
 {
    // Dummy weapon?
    const Simulation::Weapon* ww = dynamic_cast<const Simulation::Weapon*>( getPlayer() );
-   if (ww != 0) {
+   if (ww != nullptr) {
       if (ww->isDummy()) return true;
    }
 
@@ -39,12 +39,12 @@ bool Nib::munitionDetonationMsgFactory(const LCreal)
 
     // If our NIB's player just detonated, then it must be a weapon!
     Simulation::Weapon* mPlayer = dynamic_cast<Simulation::Weapon*>(getPlayer());
-    if (mPlayer == 0) return false;
+    if (mPlayer == nullptr) return false;
 
     // Ok, we have the weapon, now get the firing and target players
     Simulation::Player* tPlayer = mPlayer->getTargetPlayer();
     Simulation::Player* fPlayer = mPlayer->getLaunchVehicle();
-    if (fPlayer == 0) return false;
+    if (fPlayer == nullptr) return false;
 
     // ---
     // PDU header
@@ -78,7 +78,7 @@ bool Nib::munitionDetonationMsgFactory(const LCreal)
     // ---
     {
          bool tOk = false;
-         if (tPlayer != 0) {
+         if (tPlayer != nullptr) {
             pdu.targetEntityID.ID = tPlayer->getID();
             if (tPlayer->isLocalPlayer()) {
                // Local player, use our site/app/exerc IDs
@@ -89,7 +89,7 @@ bool Nib::munitionDetonationMsgFactory(const LCreal)
             else {
                // Networked player, use its NIB's IDs
                const Nib* fNIB = dynamic_cast<const Nib*>( tPlayer->getNib() );
-               if (fNIB != 0) {
+               if (fNIB != nullptr) {
                   pdu.targetEntityID.simulationID.siteIdentification = fNIB->getSiteID();
                   pdu.targetEntityID.simulationID.applicationIdentification = fNIB->getApplicationID();
                   tOk = true;
@@ -122,9 +122,9 @@ bool Nib::munitionDetonationMsgFactory(const LCreal)
 
     // Velocity
     osg::Vec3d geocVel = mPlayer->getGeocVelocity();
-    pdu.velocity.component[0] = (float)geocVel[Basic::Nav::IX];
-    pdu.velocity.component[1] = (float)geocVel[Basic::Nav::IY];
-    pdu.velocity.component[2] = (float)geocVel[Basic::Nav::IZ];
+    pdu.velocity.component[0] = static_cast<float>(geocVel[Basic::Nav::IX]);
+    pdu.velocity.component[1] = static_cast<float>(geocVel[Basic::Nav::IY]);
+    pdu.velocity.component[2] = static_cast<float>(geocVel[Basic::Nav::IZ]);
 
     // ---
     // Burst
@@ -145,14 +145,14 @@ bool Nib::munitionDetonationMsgFactory(const LCreal)
     // Location
     // ---
     osg::Vec3 lpos = mPlayer->getDetonationLocation();
-    pdu.locationInEntityCoordinates.component[0] = (float) lpos[0];
-    pdu.locationInEntityCoordinates.component[1] = (float) lpos[1];
-    pdu.locationInEntityCoordinates.component[2] = (float) lpos[2];
+    pdu.locationInEntityCoordinates.component[0] = static_cast<float>(lpos[0]);
+    pdu.locationInEntityCoordinates.component[1] = static_cast<float>(lpos[1]);
+    pdu.locationInEntityCoordinates.component[2] = static_cast<float>(lpos[2]);
 
     // ---
     // Results
     // ---
-    pdu.detonationResult = (unsigned char)( mPlayer->getDetonationResults() );
+    pdu.detonationResult = static_cast<unsigned char>( mPlayer->getDetonationResults() );
     pdu.numberOfArticulationParameters = 0;
 
     //std::cout << "NetIO::munitionDetonationMsgFactory() results: " << int(pdu.detonationResult) << std::endl;
@@ -162,7 +162,7 @@ bool Nib::munitionDetonationMsgFactory(const LCreal)
     // Send the PDU
     // ---
     if (Basic::NetHandler::isNotNetworkByteOrder()) pdu.swapBytes();
-    ok = disIO->sendData((char*)&pdu,sizeof(pdu));
+    ok = disIO->sendData(reinterpret_cast<char*>(&pdu), sizeof(pdu));
 
     // Set the detonation message sent flag so that we don't do this again.
     setDetonationMessageSent(true);

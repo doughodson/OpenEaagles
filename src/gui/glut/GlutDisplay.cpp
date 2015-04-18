@@ -45,7 +45,7 @@ BEGIN_SLOTTABLE(GlutDisplay)
 END_SLOTTABLE(GlutDisplay)
 
 //------------------------------------------------------------------------------
-//  Map slot table to handles 
+//  Map slot table to handles
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(GlutDisplay)
    ON_SLOT(1,setSlotFullScreen,Basic::Number)
@@ -268,7 +268,7 @@ int GlutDisplay::createSubWindow(const int mainId)
          double heightRatio = static_cast<double>(vpHeight) / static_cast<double>(mainWinHeight);
 
          double xRatio = static_cast<double>(vpX) / static_cast<double>(mainWinWidth);
-         double yRatio = static_cast<double>(vpY) / static_cast<double>(mainWinHeight);    
+         double yRatio = static_cast<double>(vpY) / static_cast<double>(mainWinHeight);
 
          swPosition.set(xRatio, yRatio);
          swSize.set(widthRatio, heightRatio);
@@ -410,10 +410,10 @@ void GlutDisplay::reshapeSubWindow()
 
          // we have our new viewport width and height
          // multiply it by our ratio and reset our width and height
-         int newX = int(swPosition.x() * double(mainWinWidth) + 0.5);
-         int newY = int(swPosition.y() * double(mainWinHeight) + 0.5);
-         int newWidth = int(swSize.x() * double(mainWinWidth) + 0.5);
-         int newHeight = int(swSize.y() * double(mainWinHeight) + 0.5);
+         int newX = static_cast<int>(swPosition.x() * static_cast<double>(mainWinWidth) + 0.5);
+         int newY = static_cast<int>(swPosition.y() * static_cast<double>(mainWinHeight) + 0.5);
+         int newWidth = static_cast<int>(swSize.x() * static_cast<double>(mainWinWidth) + 0.5);
+         int newHeight = static_cast<int>(swSize.y() * static_cast<double>(mainWinHeight) + 0.5);
 
          setViewport(newX, newY, newWidth, newHeight);
 
@@ -459,7 +459,7 @@ BasicGL::Graphic* GlutDisplay::pick(const int item)
    glMatrixMode(GL_PROJECTION);
    glPushMatrix();
    glLoadIdentity();
-   gluPickMatrix(x, y, getPickWidth(), getPickHeight(), viewport);  
+   gluPickMatrix(x, y, getPickWidth(), getPickHeight(), viewport);
 
    // Get our ortho parameters
    GLdouble oLeft(0), oRight(0), oBottom(0), oTop(0), oNear(0), oFar(0);
@@ -474,7 +474,7 @@ BasicGL::Graphic* GlutDisplay::pick(const int item)
          glRotated(-90.0, 0.0, 0.0, 1.0);
       else if (getDisplayOrientation() == CCW90)
          glRotated(90.0, 0.0, 0.0, 1.0);
-      else 
+      else
          glRotated(180.0, 0.0, 0.0, 1.0);
    }
 
@@ -484,7 +484,7 @@ BasicGL::Graphic* GlutDisplay::pick(const int item)
    glSelectBuffer(MAX_BUFF_SIZE, sbuff);
    glRenderMode(GL_SELECT);
 
-   glInitNames();    
+   glInitNames();
    draw();
 
    GLint hits = glRenderMode(GL_RENDER);
@@ -495,7 +495,7 @@ BasicGL::Graphic* GlutDisplay::pick(const int item)
 
    glMatrixMode(GL_PROJECTION);
    glPopMatrix();
-   glMatrixMode(GL_MODELVIEW);  
+   glMatrixMode(GL_MODELVIEW);
 
    return selected;
 }
@@ -655,7 +655,7 @@ void GlutDisplay::specialEvent(const int key)
 // Mouse motion (with either key pressed) event handler
 //-----------------------------------------------------------------------------
 void GlutDisplay::mouseMotionEvent(const int x, const int y)
-{    
+{
    if (isMessageEnabled(MSG_DEBUG)) {
       std::cout << "GlutDisplay::mouseEvent(): " << std::endl;
    }
@@ -687,7 +687,7 @@ void GlutDisplay::mouseMotionEvent(const int x, const int y)
 // passive mouse motion (no mouse key pressed) event handler
 //-----------------------------------------------------------------------------
 void GlutDisplay::passiveMotionEvent(const int x, const int y)
-{    
+{
    if (isMessageEnabled(MSG_DEBUG)) {
    std::cout << "GlutDisplay::mouseEvent(): " << std::endl;
    }
@@ -702,7 +702,7 @@ void GlutDisplay::passiveMotionEvent(const int x, const int y)
 // passive button event handler
 //-----------------------------------------------------------------------------
 void GlutDisplay::mouseEvent(const int button, const int state, const int x, const int y)
-{    
+{
    if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
       Graphic* selected = pick();
       if (selected != 0) {
@@ -931,7 +931,7 @@ void GlutDisplay::motionFuncCB(int x, int y)
 //-----------------------------------------------------------------------------
 // GLUT mouse enter/left window event; static callback function
 //-----------------------------------------------------------------------------
-void GlutDisplay::entryFuncCB(int state) 
+void GlutDisplay::entryFuncCB(int state)
 {
    int id = glutGetWindow();
    GlutDisplay* p = findRegisteredGlutDisplay(id);
@@ -946,7 +946,7 @@ void GlutDisplay::entryFuncCB(int state)
       }
       else if (state == GLUT_ENTERED) {
          p->onMouseEnter();
-      }   
+      }
    }
 }
 
@@ -995,7 +995,7 @@ bool GlutDisplay::setSlotPickWidth(const Basic::Number* const msg)
    bool ok = false;
    if (msg != 0) {
       GLdouble s = msg->getDouble();
-      if (s > 0) { 
+      if (s > 0) {
          pickWidth = s;
          ok = true;
       }
@@ -1012,7 +1012,7 @@ bool GlutDisplay::setSlotPickHeight(const Basic::Number* const msg)
    bool ok = false;
    if (msg != 0) {
       GLdouble s = msg->getDouble();
-      if (s > 0) { 
+      if (s > 0) {
          pickHeight = s;
          ok = true;
       }
@@ -1076,7 +1076,7 @@ std::ostream& GlutDisplay::serialize(std::ostream& sout, const int i, const bool
 
    indent(sout,i+j);
    sout << "pickHeight: " << getPickHeight() << std::endl;
-   
+
    indent(sout,i+j);
    sout << "accumBuff: " << (isAccumBuff() ? "true" : "false") << std::endl;
 

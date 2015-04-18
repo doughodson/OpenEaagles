@@ -46,7 +46,7 @@ Radar::Radar() :
 }
 
 Radar::Radar(const Radar& org) :
-      myLock(0), rptQueue(MAX_EMISSIONS), rptSnQueue(MAX_EMISSIONS) 
+      myLock(0), rptQueue(MAX_EMISSIONS), rptSnQueue(MAX_EMISSIONS)
 {
     STANDARD_CONSTRUCTOR()
     copyData(org,true);
@@ -200,7 +200,7 @@ void Radar::transmit(const LCreal dt)
       em->setBandwidth(getBandwidth());
       LCreal prf1 = getPRF();
       em->setPRF(prf1);
-      int pulses = int(prf1 * dt + 0.5);
+      int pulses = static_cast<int>(prf1 * dt + 0.5);
       if (pulses == 0) pulses = 1; // at least one
       em->setPulses(pulses);
       LCreal p = getPeakPower();
@@ -539,8 +539,8 @@ unsigned int Radar::computeSweepIndex(const LCreal az)
 {
    LCreal s = LCreal(NUM_SWEEPS-1)/60.0;      // sweeps per display scaling
 
-   LCreal az1 = az + 30.0f;        // Offset from left side (sweep 0)
-   int n = int(az1*s + 0.5);       // Compute index
+   LCreal az1 = az + 30.0f;                   // Offset from left side (sweep 0)
+   int n = static_cast<int>(az1*s + 0.5);     // Compute index
    if (n >= NUM_SWEEPS) n = NUM_SWEEPS - 1;
    if (n < 0) n = 0;
    return static_cast<unsigned int>(n);

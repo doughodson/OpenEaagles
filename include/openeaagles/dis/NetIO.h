@@ -227,8 +227,8 @@ public:
    NetIO();
 
    // Network Identifications
-   unsigned short getSiteID() const                        { return siteID; }
-   unsigned short getApplicationID() const                 { return appID; }
+   unsigned short getSiteID() const                        { return siteID;     }
+   unsigned short getApplicationID() const                 { return appID;      }
    unsigned char getExerciseID() const                     { return exerciseID; }
 
    // Sends a packet (PDU) to the network
@@ -245,8 +245,8 @@ public:
    virtual bool setVersion(const unsigned char v);                            // Sets the operating version number
 
    // Emission PDU handler
-   const EmissionPduHandler* findEmissionPduHandler(const Simulation::RfSensor* const msg);
-   const EmissionPduHandler* findEmissionPduHandler(const EmissionSystem* const msg);
+   const EmissionPduHandler* findEmissionPduHandler(const Simulation::RfSensor* const);
+   const EmissionPduHandler* findEmissionPduHandler(const EmissionSystem* const);
 
    // Generate a federate name from the site and application numbers:
    //  "SnnAmm" -- where nn and mm are the site and app numbers.
@@ -363,13 +363,13 @@ protected:
    bool setSlotFederationName(const Basic::String* const msg) override;       // Sets our federation name
 
    // NetIO Interface
-   bool initNetwork() override;             // Initialize the network
-   void netInputHander() override;          // Network input handler
-   void processInputList() override;        // Update players/systems from the Input-list
+   bool initNetwork() override;                                                   // Initialize the network
+   void netInputHander() override;                                                // Network input handler
+   void processInputList() override;                                              // Update players/systems from the Input-list
    Simulation::Nib* nibFactory(const Simulation::NetIO::IoType ioType) override;  // Create a new Nib
    Simulation::NetIO::NtmInputNode* rootNtmInputNodeFactory() const override;
-   void testOutputEntityTypes(const unsigned int) override;   // Test quick lookup of outgoing entity types
-   void testInputEntityTypes(const unsigned int) override;    // Test quick lookup of incoming entity types
+   void testOutputEntityTypes(const unsigned int) override;                       // Test quick lookup of outgoing entity types
+   void testInputEntityTypes(const unsigned int) override;                        // Test quick lookup of incoming entity types
 
 private:
     void initData();
@@ -379,16 +379,16 @@ private:
     unsigned char             version;           // Version number [ 0 .. 6 ]
 
    // Network Model IDs
-   unsigned short    siteID;           // Site ID
-   unsigned short    appID;            // Application ID
-   unsigned char     exerciseID;       // Exercise ID
+   unsigned short    siteID;                     // Site ID
+   unsigned short    appID;                      // Application ID
+   unsigned char     exerciseID;                 // Exercise ID
 
    static const unsigned int MAX_PDUs = 500;            // Max PDUs in input buffer
    unsigned int inputBuffer[MAX_PDUs][MAX_PDU_SIZE/4];  // Input buffer
 
    // Distance filter by entity kind/domain
    LCreal  maxEntityRange[NUM_ENTITY_KINDS][MAX_ENTITY_DOMAINS];     // Max range from ownship           (meters)
-   LCreal  maxEntityRange2[NUM_ENTITY_KINDS][MAX_ENTITY_DOMAINS];   // Max range squared from ownship   (meters^2)
+   LCreal  maxEntityRange2[NUM_ENTITY_KINDS][MAX_ENTITY_DOMAINS];    // Max range squared from ownship   (meters^2)
 
    // Dead Reckoning (DR) parameters by entity kind/domain
    LCreal  maxTimeDR[NUM_ENTITY_KINDS][MAX_ENTITY_DOMAINS];          // Maximum DR time                  (seconds)

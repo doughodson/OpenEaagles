@@ -20,7 +20,7 @@ BEGIN_SLOTTABLE(ScalerFunc)
     "y0",     //  3: Initial (previous) output value: Y(0)
 END_SLOTTABLE(ScalerFunc)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(ScalerFunc)
    ON_SLOT( 1, setSlotRate, Basic::Frequency)
    ON_SLOT( 1, setSlotRate, Basic::Number)
@@ -153,7 +153,7 @@ bool ScalerFunc::setX0(const LCreal v)
 }
 
 bool ScalerFunc::setY0(const LCreal v)
-{ 
+{
    y0 = v;
    if (py != 0) {
       for (unsigned int i = 0; i < n; i++) {
@@ -181,7 +181,7 @@ bool ScalerFunc::setSlotRate(const Basic::Frequency* const msg)
 {
    bool ok = false;
    if (msg != 0) {
-      int v = int( Basic::Hertz::convertStatic( *msg ) + 0.5f );
+      int v = static_cast<int>( Basic::Hertz::convertStatic( *msg ) + 0.5f );
       if (v > 0) {
          setRate( static_cast<unsigned int>(v) );
          ok = true;

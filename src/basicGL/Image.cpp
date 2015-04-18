@@ -535,13 +535,13 @@ GLubyte* Image::readRgbValuesBMP(FILE* const fp, const unsigned int offset, cons
     size_t seekBytes = (origWidthBytes - widthBytes);               // Number of bytes to skip
     for (unsigned int i = 0; i < getHeight(); i++) {
         GLubyte* p = bmap + (i * widthBytes);
-        size_t n = fread(p, widthBytes, 1, fp);
+        size_t n = std::fread(p, widthBytes, 1, fp);
         if (n == 0) {
             delete[] bmap;
             return nullptr;
         }
         if (seekBytes > 0) {
-            std::fseek(fp, int(seekBytes), SEEK_CUR);
+            std::fseek(fp, static_cast<int>(seekBytes), SEEK_CUR);
         }
     }
 
@@ -562,7 +562,7 @@ GLubyte* Image::readColorValuesBMP(FILE* const fp, const unsigned int offset, co
     size_t ctSize = 256;
     if (bmfi->biClrUsed > 0) ctSize = bmfi->biClrUsed;
     GLubyte* colorTable = new GLubyte[ctSize*4];
-    size_t nItemRead = fread(colorTable, 4, ctSize, fp);
+    size_t nItemRead = std::fread(colorTable, 4, ctSize, fp);
 
     // Position to start of colors
     std::fseek(fp, offset, SEEK_SET);
@@ -571,7 +571,7 @@ GLubyte* Image::readColorValuesBMP(FILE* const fp, const unsigned int offset, co
     unsigned int nbytes = (((bmfi->biWidth + 3) / 4 ) * 4); // round up to 4 byte boundary
     GLubyte* tbuf = new GLubyte[nbytes];
     for (unsigned int i = 0; bmap != 0 && i < getHeight(); i++) {
-        size_t n = fread(tbuf, nbytes, 1, fp);
+        size_t n = std::fread(tbuf, nbytes, 1, fp);
         if (n > 0) {
             // transfer the colors
             GLubyte* p = bmap + (i * getWidth() * getNumComponents());

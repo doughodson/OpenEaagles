@@ -16,7 +16,7 @@ BEGIN_SLOTTABLE(Tape)
     "minimum",          // 6) minimum value before we don't display anymore
     "convert",          // 7) convert our max and min values to make a "rotating" display (like a heading tape, for example
     // 360 degrees would be 0 degrees, and -10 degrees would be 350 degrees, and so on)
-END_SLOTTABLE(Tape)       
+END_SLOTTABLE(Tape)
 //
 //------------------------------------------------------------------------------
 //  Map slot table to handles for Analog Dial
@@ -109,7 +109,7 @@ bool Tape::setSlotRange(const Basic::Number* const x)
 }
 
 //------------------------------------------------------------------------------
-// setSlotHeight() - set the height of our viewable tape area 
+// setSlotHeight() - set the height of our viewable tape area
 //------------------------------------------------------------------------------
 bool Tape::setSlotHeight(const Basic::Number* const x)
 {
@@ -170,7 +170,7 @@ bool Tape::setSlotConvert(const Basic::Number* const x)
 }
 
 //------------------------------------------------------------------------------
-// updateData() 
+// updateData()
 //------------------------------------------------------------------------------
 void Tape::updateData(const LCreal dt)
 {
@@ -180,9 +180,9 @@ void Tape::updateData(const LCreal dt)
     // std::cout << "INSTRUMENT VALUE = " << getInstValue() << std::endl;
     LCreal x = getInstValue();
 
-    
+
     // we take our range, add another for the 0, and then add 2 more for fillers
-    int perRange = int(range / increment) + 3;
+    int perRange = static_cast<int>(range / increment) + 3;
     // based on that we know how many numbers we have
 
     // we are diving by 100, so we need to find the nearest 100!
@@ -191,11 +191,11 @@ void Tape::updateData(const LCreal dt)
 
     //std::cout << "NEAREST = " << nearest << std::endl;
     // we know we have 11 total number vals, and we start at the low side
-    int val = (nearest * increment) - int(perRange/2) * increment;
+    int val = (nearest * increment) - static_cast<int>(perRange/2) * increment;
     //if (val > 100) {
     //  if (200 - val > 100) val = val - 100;
    //}
-    
+
     //std::cout << "PER RANGE = " << perRange << std::endl;
     // this if for the hundreds
     LCreal tempVal = 0;
@@ -214,11 +214,11 @@ void Tape::updateData(const LCreal dt)
                 if (val > maxNum) {
                     tempVal = val - maxNum - increment;
                     // find out how many increments we are passed our last value
-                    numberValsHunds[i] = int(tempVal);
+                    numberValsHunds[i] = static_cast<int>(tempVal);
                 }
                 else if (val < minNum) {
                     tempVal = val + maxNum + increment;
-                    numberValsHunds[i] = int(tempVal);
+                    numberValsHunds[i] = static_cast<int>(tempVal);
                 }
             }
         }
@@ -235,7 +235,7 @@ void Tape::updateData(const LCreal dt)
         //if (tempVal < 1 && !showNegative) numberValsThousVis[i] = 0;
         //else numberValsThousVis[i] = 0;
         numberValsThousVis[i] = vis;
-        numberValsThous[i] = int(tempVal);
+        numberValsThous[i] = static_cast<int>(tempVal);
         val += increment;
     }
 

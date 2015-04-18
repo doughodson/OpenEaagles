@@ -1613,7 +1613,7 @@ static int getLonZone(const double latDeg, const double lonDeg)
       else if ( lonDeg >= 33.0 && lonDeg < 42.0 ) lonZone = 37;
    }
 
-   return int(lonZone);
+   return static_cast<int>(lonZone);
 }
 
 static bool inNorthHemi(const char latZone)
@@ -1800,7 +1800,7 @@ bool Nav::convertLL2Utm(
       *pLatZone = getLatZone(lat);
       *pLonZone = getLonZone(lat, lon);
 
-      const int    LONZONE = 1 + int((LONDEG + 180.0)/6.0);
+      const int    LONZONE = 1 + static_cast<int>((LONDEG + 180.0)/6.0);
       const double LONORIG = 6.0*(LONZONE - 1) - 180.0 + 3.0;
 
       const double dL1 = Angle::D2RCC*(LONDEG - LONORIG);

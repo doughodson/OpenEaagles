@@ -211,7 +211,7 @@ int Field::column() const
 bool Field::withinField(const int l, const int c) const
 {
     bool stat = false;
-    if ( (l == ln) && (c >= cp) && (c <= (cp + int(w) - 1)) ) stat = true;
+    if ( (l == ln) && (c >= cp) && (c <= (cp + static_cast<int>(w) - 1)) ) stat = true;
     return stat;
 }
 
@@ -328,16 +328,16 @@ char Field::filterInputEvent(const int event, const int tc)
 int Field::setExample(const char* const example)
 {
     inputExample = example;
-    return int(inputExample.len());
+    return static_cast<int>(inputExample.len());
 }
 
 void Field::advanceSpace(const int ns)
 {
     if (mode != input) return;
     icp += ns;
-    while ( icp < int(w) && !isValidInputPosition(inputExample.getChar(icp)) ) icp++;
-    if (icp >= int(w)) {
-        icp = int(w)-1;
+    while ( icp < static_cast<int>(w) && !isValidInputPosition(inputExample.getChar(icp)) ) icp++;
+    if (icp >= static_cast<int>(w)) {
+        icp = static_cast<int>(w)-1;
         while ( !isValidInputPosition(inputExample.getChar(icp)) ) icp--;
         event(INPUT_RIGHT_EDGE);
     }
@@ -498,9 +498,9 @@ void Field::drawFunc()
         // Draw the text string
         const char* sp = str;
         if (ll > 0 && cc > 0)
-            dsp->outputTextLC(ll, cc, sp, int(width()), isVertical());
+            dsp->outputTextLC(ll, cc, sp, static_cast<int>(width()), isVertical());
         else
-            dsp->outputText(sp, int(width()), isVertical());
+            dsp->outputText(sp, static_cast<int>(width()), isVertical());
     }
 
     // ---
@@ -510,12 +510,12 @@ void Field::drawFunc()
         if (isVertical()) {
             // Position for vertical text
             dsp->drawLeftBracket(ll-1, cc);
-            dsp->drawRightBracket(ll+int(width()), cc);
+            dsp->drawRightBracket(ll + static_cast<int>(width()), cc);
         }
         else {
             // Position for normal text
             dsp->drawLeftBracket(ll, cc-1);
-            dsp->drawRightBracket(ll, cc+int(width()));
+            dsp->drawRightBracket(ll, cc + static_cast<int>(width()));
         }
     }
 

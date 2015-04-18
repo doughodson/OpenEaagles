@@ -317,12 +317,12 @@ bool CadrgFile::initialize(const char* dir)
         toc.read(buf,1024);
 
         // Look for the RPFHDR indicator
-        char* ptr = strstr(buf, "RPFHDR");
+        char* ptr = std::strstr(buf, "RPFHDR");
 
         // Found it!
         if (ptr) {
             // Distance from where we found RPFHDR to the beginning of the file (sizeof the NITF message, basically)
-            int dist = int(ptr - &buf[0]);
+            int dist = static_cast<int>(ptr - &buf[0]);
             // Padding 11 for some reason.
             nitfHdrLength = dist + 11;
         }

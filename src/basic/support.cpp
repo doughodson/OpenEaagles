@@ -572,7 +572,7 @@ void lcInteger2Str(const int num, char* const str, int width)
    char temp[MAX_CHARS];
    int nc = 0;
    do {
-      temp[nc++] = char(tnum % 10 + int('0'));
+      temp[nc++] = char(tnum % 10 + static_cast<int>('0'));
       tnum = tnum / 10;
    } while( tnum > 0 && nc < MAX_CHARS);
 
