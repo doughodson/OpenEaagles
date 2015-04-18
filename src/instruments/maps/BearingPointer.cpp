@@ -9,7 +9,7 @@ EMPTY_SERIALIZER(BearingPointer)
 BEGIN_SLOTTABLE(BearingPointer)
     "headGraphic",  // the graphic we will draw for the head
     "tailGraphic",  // the graphic we will draw for the tail
-END_SLOTTABLE(BearingPointer)       
+END_SLOTTABLE(BearingPointer)
 
 //  Map slot table to handles for Bearing Pointer
 BEGIN_SLOT_MAP(BearingPointer)
@@ -19,9 +19,9 @@ END_SLOT_MAP()
 
 // Macro event handlers for Bearing Pointer events
 BEGIN_EVENT_HANDLER(BearingPointer)
-    ON_EVENT_OBJ(UPDATE_VALUE7,onUpdateRadBearingPointer, Basic::Angle)          // Sets bearing to this Basic::Angle 
-    ON_EVENT_OBJ(UPDATE_VALUE7,onUpdateRadBearingPointer, Basic::Number)         // Sets bearing to this angle in radians 
-    ON_EVENT_OBJ(UPDATE_VALUE8, onUpdateDegBearingPointer, Basic::Number)        // Sets bearing to this angle in degrees 
+    ON_EVENT_OBJ(UPDATE_VALUE7,onUpdateRadBearingPointer, Basic::Angle)          // Sets bearing to this Basic::Angle
+    ON_EVENT_OBJ(UPDATE_VALUE7,onUpdateRadBearingPointer, Basic::Number)         // Sets bearing to this angle in radians
+    ON_EVENT_OBJ(UPDATE_VALUE8, onUpdateDegBearingPointer, Basic::Number)        // Sets bearing to this angle in degrees
 END_EVENT_HANDLER()
 
 //------------------------------------------------------------------------------
@@ -32,7 +32,7 @@ BearingPointer::BearingPointer()
     STANDARD_CONSTRUCTOR()
 
     bearing = 0;
-    myRotation = 0.0;    
+    myRotation = 0.0;
     myRadius = 0;
     head = 0;
     tail = 0;
@@ -44,7 +44,7 @@ BearingPointer::BearingPointer()
 void BearingPointer::copyData(const BearingPointer& org, const bool cc)
 {
     BaseClass::copyData(org);
-    
+
     if (cc) {
         head = 0;
         tail = 0;
@@ -52,11 +52,11 @@ void BearingPointer::copyData(const BearingPointer& org, const bool cc)
 
     setSlotHeadGraphic(org.head);
     setSlotTailGraphic(org.tail);
-    
+
     bearing = org.bearing;
     myRotation = org.myRotation;
     myRadius = org.myRadius;
-    
+
 }
 
 //------------------------------------------------------------------------------
@@ -69,7 +69,7 @@ void BearingPointer::deleteData()
 }
 
 //------------------------------------------------------------------------------
-// draw() 
+// draw()
 //------------------------------------------------------------------------------
 void BearingPointer::draw()
 {
@@ -125,7 +125,7 @@ bool BearingPointer::onUpdateDegBearingPointer(const Basic::Number* const msg)
 
 // SET functions
 //------------------------------------------------------------------------------
-//  setBearingDeg() - 
+//  setBearingDeg() -
 //------------------------------------------------------------------------------
 bool BearingPointer::setBearingDeg(const LCreal newB)
 {
@@ -134,7 +134,7 @@ bool BearingPointer::setBearingDeg(const LCreal newB)
 }
 
 //------------------------------------------------------------------------------
-//  setBearingRad() - 
+//  setBearingRad() -
 //------------------------------------------------------------------------------
 bool BearingPointer::setBearingRad(const LCreal newB)
 {
@@ -151,17 +151,17 @@ void BearingPointer::drawFunc()
     GLfloat lw;
     glGetFloatv(GL_CURRENT_COLOR, ocolor);
     glGetFloatv(GL_LINE_WIDTH, &lw);
-    
+
     // draw a default head and tail graphic, unless one is given to us, then draw it
     myRadius = 0;
     bool amICentered = isCentered();
     if (amICentered) myRadius = getCenteredRadius();
     else myRadius = getDeCenteredRadius();
-    
+
     // now draw the head graphic
     glPushMatrix();
         // translate to the top of our radius
-        glTranslated(0, GLdouble(myRadius), 0);
+        glTranslated(0, static_cast<GLdouble>(myRadius), 0);
         if (head != 0) {
             head->container(this);
             head->draw();
@@ -177,7 +177,7 @@ void BearingPointer::drawFunc()
     // now draw the tail graphic
     glPushMatrix();
         // translate to the bottom of our radius
-        glTranslated(0, GLdouble(-myRadius), 0);
+        glTranslated(0, static_cast<GLdouble>(-myRadius), 0);
         if (tail != 0) {
             tail->container(this);
             tail->draw();
@@ -201,22 +201,22 @@ void BearingPointer::updateData(const LCreal dt)
 {
     // update our base class first
     BaseClass::updateData(dt);
-    
+
     // get our heading and bearing (hopefully they are in radians, if not, the
     // calculation will be skewed
     LCreal hdg = getRotationRad();
-    
+
     // stay between +- 3.14 radians
     bearing = lcAepcRad(bearing - hdg);
     LCreal dbrg = lcAepcRad(myRotation - bearing);
-    
+
     // if we are over the max, rotate the other way
     LCreal dd0 = dbrg * dt;
     LCreal maxdd0 = (90.0f * static_cast<LCreal>(Basic::Angle::D2RCC)) * dt;      // Limit to 90 degs/sec
     if (dd0 < -maxdd0) dd0 = -maxdd0;
     if (dd0 > maxdd0) dd0 = maxdd0;
     bearing += dd0;
-    
+
     myRotation = bearing;
 }
 

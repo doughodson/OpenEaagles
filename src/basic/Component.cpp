@@ -253,7 +253,7 @@ void Component::tcFrame(const LCreal dt)
       #if defined(WIN32)
          LARGE_INTEGER fcnt;
          QueryPerformanceCounter(&fcnt);
-         tcStartTime = double( fcnt.QuadPart );
+         tcStartTime = static_cast<double>( fcnt.QuadPart );
       #else
          tcStartTime = getComputerTime();
       #endif
@@ -273,10 +273,10 @@ void Component::tcFrame(const LCreal dt)
       #if defined(WIN32)
          LARGE_INTEGER cFreq;
          QueryPerformanceFrequency(&cFreq);
-         double freq = double( cFreq.QuadPart );
+         double freq = static_cast<double>( cFreq.QuadPart );
          LARGE_INTEGER fcnt;
          QueryPerformanceCounter(&fcnt);
-         double endCnt = double( fcnt.QuadPart );
+         double endCnt = static_cast<double>( fcnt.QuadPart );
          double dcnt = endCnt - tcStartTime;
          dtime = (dcnt/freq) * 1000.0;
       #else

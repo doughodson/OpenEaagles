@@ -160,7 +160,7 @@ void LaeroModel::copyData(const LaeroModel& org, const bool cc)
 //----------------------------------------------------------
 void LaeroModel::dynamics(const LCreal dt)
 {
-    update4DofModel(dt);  
+    update4DofModel(dt);
     dT = dt;
 }
 
@@ -172,7 +172,7 @@ void LaeroModel::reset()
    BaseClass::reset();
 
    Simulation::Player* pPlr = static_cast<Simulation::Player*>( findContainerByType(typeid(Simulation::Player)) );
-   if (pPlr != 0) {
+   if (pPlr != nullptr) {
       LCreal initVel = pPlr->getInitVelocity();
       u = initVel * Basic::Distance::NM2M / Basic::Time::H2S;
    }
@@ -182,13 +182,13 @@ void LaeroModel::reset()
 // update4DofModel -- update equations of motion
 //----------------------------------------------------------
 void LaeroModel::update4DofModel(const LCreal dt)
-{   
+{
    //-------------------------------------------------------
-   // get data pointers 
+   // get data pointers
    //-------------------------------------------------------
    Simulation::Player* pPlr = static_cast<Simulation::Player*>( findContainerByType(typeid(Simulation::Player)) );
-   
-   if (pPlr != 0) {
+
+   if (pPlr != nullptr) {
 
       //==============================================================
       // ROTATIONAL EOM
@@ -255,7 +255,7 @@ void LaeroModel::update4DofModel(const LCreal dt)
       // update angular velocities
       //----------------------------------------------------
       pPlr->setAngularVelocities(p, q, r);
-      
+
 
       //==============================================================
       // TRANSLATIONAL EOM
@@ -309,12 +309,12 @@ bool LaeroModel::flyPhi(const double phiCmdDeg, const double phiDotCmdDps)
    // get data pointers
    //-------------------------------------------------------
    Simulation::Player* pPlr = static_cast<Simulation::Player*>( findContainerByType(typeid(Simulation::Player)) );
-   bool ok = (pPlr != 0);
+   bool ok = (pPlr != nullptr);
    if (ok) {
-   
+
       //-------------------------------------------------------
       // convert argument units (deg -> rad)
-      //-------------------------------------------------------   
+      //-------------------------------------------------------
       double phiCmdRad    = phiCmdDeg * Basic::Angle::D2RCC;
       double phiDotCmdRps = phiDotCmdDps * Basic::Angle::D2RCC;
 
@@ -353,12 +353,12 @@ bool LaeroModel::flyTht(const double thtCmdDeg, const double thtDotCmdDps)
    // get data pointers
    //-------------------------------------------------------
    Simulation::Player* pPlr = static_cast<Simulation::Player*>( findContainerByType(typeid(Simulation::Player)) );
-   bool ok = (pPlr != 0);
+   bool ok = (pPlr != nullptr);
    if (ok) {
-   
+
       //-------------------------------------------------------
       // convert argument units (deg -> rad)
-      //-------------------------------------------------------   
+      //-------------------------------------------------------
       double thtCmdRad    = thtCmdDeg * Basic::Angle::D2RCC;
       double thtDotCmdRps = thtDotCmdDps * Basic::Angle::D2RCC;
 
@@ -397,24 +397,24 @@ bool LaeroModel::flyPsi(const double psiCmdDeg, const double psiDotCmdDps)
    // get data pointers
    //-------------------------------------------------------
    Simulation::Player* pPlr = static_cast<Simulation::Player*>( findContainerByType(typeid(Simulation::Player)) );
-   bool ok = (pPlr != 0);
+   bool ok = (pPlr != nullptr);
    if (ok) {
-   
+
       //-------------------------------------------------------
       // convert argument units (deg -> rad)
-      //-------------------------------------------------------   
+      //-------------------------------------------------------
       double psiCmdRad    = psiCmdDeg * Basic::Angle::D2RCC;
       double psiDotCmdRps = psiDotCmdDps * Basic::Angle::D2RCC;
 
       //-------------------------------------------------------
       // current psi error (rad)
-      //-------------------------------------------------------   
+      //-------------------------------------------------------
       double psiRad    = pPlr->getHeadingR();
       double psiErrRad = psiCmdRad - psiRad;
 
       //-------------------------------------------------------
       // psi error break point (rad)
-      //-------------------------------------------------------   
+      //-------------------------------------------------------
       const double TAU = 1.0;  // time constant [sec]
       double psiErrBrkRad = psiDotCmdRps * TAU;
 
@@ -439,32 +439,32 @@ bool LaeroModel::flyPsi(const double psiCmdDeg, const double psiDotCmdDps)
 //bool LaeroModel::flyVel(const double velCmdKts, const double velDotCmdNps)
 //{
 //   //-------------------------------------------------------
-//   // get data pointers 
+//   // get data pointers
 //   //-------------------------------------------------------
 //   Simulation::Player* pPlr = static_cast<Simulation::Player*>( findContainerByType(typeid(Simulation::Player)) );
 //   bool ok = (pPlr != 0);
 //   if (ok) {
 //
 //      //-------------------------------------------------------
-//      // define local constants 
+//      // define local constants
 //      //-------------------------------------------------------
 //      const double KTS2MPS = Basic::Distance::NM2M / Basic::Time::H2S;
 //
 //      //-------------------------------------------------------
 //      // convert argument units (deg -> rad)
-//      //-------------------------------------------------------   
+//      //-------------------------------------------------------
 //      double velCmdMps     = velCmdKts * KTS2MPS;
 //      double velDotCmdMps2 = velDotCmdNps * KTS2MPS;
 //
 //      //-------------------------------------------------------
 //      // current vel error (rad)
-//      //-------------------------------------------------------   
+//      //-------------------------------------------------------
 //      double velMps    = pPlr->getTotalVelocityKts() * KTS2MPS;
 //      double velErrMps = velCmdMps - velMps;
 //
 //      //-------------------------------------------------------
 //      // vel error break point (rad)
-//      //-------------------------------------------------------   
+//      //-------------------------------------------------------
 //      const double TAU = 1.0;  // time constant [sec]
 //      double velErrBrkMps = velDotCmdMps2 * TAU;
 //
@@ -489,13 +489,13 @@ bool LaeroModel::flyPsi(const double psiCmdDeg, const double psiDotCmdDps)
 //bool LaeroModel::fly2LL(const double latDeg, const double lonDeg)
 //{
 //   //-------------------------------------------------------
-//   // get data pointers 
+//   // get data pointers
 //   //-------------------------------------------------------
 //   Simulation::Player* pPlr = static_cast<Simulation::Player*>( findContainerByType(typeid(Simulation::Player)) );
 //
 //   bool ok = (pPlr != 0);
 //   if (ok) {
-//   
+//
 //      //----------------------------------------------------
 //      // get current data
 //      //----------------------------------------------------
@@ -517,13 +517,13 @@ bool LaeroModel::flyPsi(const double psiCmdDeg, const double psiDotCmdDps)
 
 // Dynamics model interface
 bool LaeroModel::setCommandedHeadingD(const double h, const double hDps, const double maxBank)
-{ 
+{
    //-------------------------------------------------------
    // get data pointers
    //-------------------------------------------------------
    Simulation::Player* pPlr = static_cast<Simulation::Player*>( findContainerByType(typeid(Simulation::Player)) );
 
-   bool ok = (pPlr != 0);
+   bool ok = (pPlr != nullptr);
    if (ok) {
 
       //----------------------------------------------------
@@ -535,7 +535,7 @@ bool LaeroModel::setCommandedHeadingD(const double h, const double hDps, const d
 
       //-------------------------------------------------------
       // get current data
-      //-------------------------------------------------------   
+      //-------------------------------------------------------
       double velMps        = pPlr->getTotalVelocity();
       double hdgDeg        = pPlr->getHeadingD();
       double hdgErrDeg     = Basic::Angle::aepcdDeg(h - hdgDeg);
@@ -575,13 +575,13 @@ bool LaeroModel::setCommandedHeadingD(const double h, const double hDps, const d
 
 // Dynamics model interface - all input values in meters
 bool LaeroModel::setCommandedAltitude(const double a, const double aMps, const double maxPitch)
-{ 
+{
    //-------------------------------------------------------
    // get data pointers
    //-------------------------------------------------------
    Simulation::Player* pPlr = static_cast<Simulation::Player*>( findContainerByType(typeid(Simulation::Player)) );
 
-   bool ok = (pPlr != 0);
+   bool ok = (pPlr != nullptr);
    if (ok) {
 
       //-------------------------------------------------------
@@ -597,7 +597,7 @@ bool LaeroModel::setCommandedAltitude(const double a, const double aMps, const d
 
       //-------------------------------------------------------
       // get alt error break point (mtr)
-      //-------------------------------------------------------   
+      //-------------------------------------------------------
       double altDotCmdMps = aMps;
       double altErrBrkMtr = altDotCmdMps * TAU;
 
@@ -627,7 +627,7 @@ bool LaeroModel::setCommandedVelocityKts(const double v, const double vNps)
    // get data pointers
    //-------------------------------------------------------
    Simulation::Player* pPlr = static_cast<Simulation::Player*>( findContainerByType(typeid(Simulation::Player)) );
-   bool ok = (pPlr != 0);
+   bool ok = (pPlr != nullptr);
    if (ok) {
 
       //-------------------------------------------------------
@@ -637,19 +637,19 @@ bool LaeroModel::setCommandedVelocityKts(const double v, const double vNps)
 
       //-------------------------------------------------------
       // convert argument units (deg -> rad)
-      //-------------------------------------------------------   
+      //-------------------------------------------------------
       double velCmdMps     = v * KTS2MPS;
       double velDotCmdMps2 = vNps * KTS2MPS;
 
       //-------------------------------------------------------
       // current vel error (rad)
-      //-------------------------------------------------------   
+      //-------------------------------------------------------
       double velMps    = pPlr->getTotalVelocityKts() * KTS2MPS;
       double velErrMps = velCmdMps - velMps;
 
       //-------------------------------------------------------
       // vel error break point (rad)
-      //-------------------------------------------------------   
+      //-------------------------------------------------------
       const double TAU = 1.0;  // time constant [sec]
       double velErrBrkMps = velDotCmdMps2 * TAU;
 
@@ -670,5 +670,5 @@ bool LaeroModel::setCommandedVelocityKts(const double v, const double vNps)
    return true;
 }
 
-} 
-} 
+}
+}

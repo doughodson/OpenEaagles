@@ -19,7 +19,7 @@ Factory::Factory()
 
 Basic::Object* Factory::createObj(const char* name)
 {
-    Basic::Object* obj = 0;
+    Basic::Object* obj = nullptr;
 
     // RAC model
     if ( std::strcmp(name, RacModel::getFactoryName()) == 0 ) {

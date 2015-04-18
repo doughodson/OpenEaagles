@@ -551,7 +551,7 @@ GLubyte* BitmapFont::loadTypeFace(const GLint index, const GLenum reverse)
    unsigned int height1(0);
    nItemsMatched = std::fscanf(fp, "%u\n", &height1);
 
-   unsigned int numBytesWide = static_cast<int>(std::ceil(double(width1) / 8.0));
+   unsigned int numBytesWide = static_cast<int>(std::ceil(static_cast<double>(width1) / 8.0));
    unsigned int numFileBytes = numBytesWide * height1;
    unsigned int numFontBytes = numBytesWide * getBitmapHeight();
 

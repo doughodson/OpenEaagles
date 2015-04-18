@@ -12,8 +12,8 @@ BEGIN_SLOTTABLE(TickMarks)
     "quantity",         // tells us how many to draw, default is 1
     "gaugeLength",      // how far are we stretching these ticks marks out?
     "flip",             // If this is set, we will flip our tick lines (ie.. if we are horizontal, we will draw our lines horizontal, etc...)
-    "tickGraphic",      // sets a graphic to use instead of a line    
-END_SLOTTABLE(TickMarks)       
+    "tickGraphic",      // sets a graphic to use instead of a line
+END_SLOTTABLE(TickMarks)
 
 //------------------------------------------------------------------------------
 //  Map slot table to handles for Analog Dial
@@ -45,7 +45,7 @@ TickMarks::TickMarks()
 void TickMarks::copyData(const TickMarks& org, const bool cc)
 {
     BaseClass::copyData(org);
-    
+
     if (cc) myGraphic = 0;
 
     setTickGraphic(org.myGraphic);
@@ -73,17 +73,17 @@ void TickMarks::drawFunc()
 {
     GLfloat currentColor[4];
     glGetFloatv(GL_CURRENT_COLOR, currentColor);
-    
-    // determine our tick mark spacing (make sure our quantity != 0) 
+
+    // determine our tick mark spacing (make sure our quantity != 0)
     LCreal spacing = 0;
     if (quantity != 1) spacing = gaugeLength/(quantity-1);
     // if we don't have any, return
     else if (quantity == 0) return;
-        
+
     glPushMatrix();
         // if we are vertical, draw bottom to top, else draw left to right
         if (isVertical()) {
-            for (int i = 0; i < quantity; i++) {  
+            for (int i = 0; i < quantity; i++) {
                if (myGraphic == 0) {
                     glBegin(GL_LINES);
                         glVertex2f(0, 0);
@@ -97,11 +97,11 @@ void TickMarks::drawFunc()
                   myGraphic->lcRestoreMatrix();
                }
                 // increment our spacing
-                glTranslated(0, GLdouble(spacing), 0);
+                glTranslated(0, static_cast<GLdouble>(spacing), 0);
             }
         }
         else {
-            for (int i = 0; i < quantity; i++) {  
+            for (int i = 0; i < quantity; i++) {
                if (myGraphic == 0) {
                     glBegin(GL_LINES);
                         glVertex2f(0, 0);
@@ -115,11 +115,11 @@ void TickMarks::drawFunc()
                   myGraphic->lcRestoreMatrix();
               }
                 // increment our spacing
-                glTranslated(GLdouble(spacing), 0, 0);
+                glTranslated(static_cast<GLdouble>(spacing), 0, 0);
             }
         }
     glPopMatrix();
-    
+
     glColor4fv(currentColor);
 }
 
@@ -143,7 +143,7 @@ bool TickMarks::setSlotQuantity(const Basic::Number* const newQ)
     return ok;
 }
 //------------------------------------------------------------------------------
-// setSlotGaugeLength() 
+// setSlotGaugeLength()
 //------------------------------------------------------------------------------
 bool TickMarks::setSlotGaugeLength(const Basic::Number* const newL)
 {
@@ -152,7 +152,7 @@ bool TickMarks::setSlotGaugeLength(const Basic::Number* const newL)
     return ok;
 }
 //------------------------------------------------------------------------------
-// setSlotFlit() 
+// setSlotFlit()
 //------------------------------------------------------------------------------
 bool TickMarks::setSlotFlip(const Basic::Number* const x)
 {
@@ -193,7 +193,7 @@ bool TickMarks::setTickMarkLength(const LCreal newLength)
 //------------------------------------------------------------------------------
 bool TickMarks::setQuantity(const int newQ)
 {
-    quantity = newQ; 
+    quantity = newQ;
     return true;
 }
 //------------------------------------------------------------------------------
@@ -201,7 +201,7 @@ bool TickMarks::setQuantity(const int newQ)
 //------------------------------------------------------------------------------
 bool TickMarks::setGaugeLength(const LCreal newL)
 {
-    gaugeLength = newL; 
+    gaugeLength = newL;
     return true;
 }
 //------------------------------------------------------------------------------
@@ -209,7 +209,7 @@ bool TickMarks::setGaugeLength(const LCreal newL)
 //------------------------------------------------------------------------------
 bool TickMarks::setFlip(const bool x)
 {
-    flip = x; 
+    flip = x;
     return true;
 }
 

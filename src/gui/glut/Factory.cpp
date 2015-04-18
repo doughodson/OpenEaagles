@@ -19,7 +19,7 @@ Factory::Factory()
 
 Basic::Object* Factory::createObj(const char* name)
 {
-    Basic::Object* obj = 0;
+    Basic::Object* obj = nullptr;
 
     // General graphics support
     if ( std::strcmp(name, GlutDisplay::getFactoryName()) == 0 ) {

@@ -292,7 +292,7 @@ bool AirportLoader::load(const char* country)
                }
 
                // create an ils key for the localizer component
-               IlsKey* lk = new IlsKey(long(ALT_ILS_IDX));
+               IlsKey* lk = new IlsKey(static_cast<long>(ALT_ILS_IDX));
                lk->lat = nlat;
                lk->lon = nlon;
                dsGetString(lk->key, key, ILS_KEY_LEN);
@@ -327,7 +327,7 @@ bool AirportLoader::load(const char* country)
                }
 
                // create an ils key for the glode slope component
-               IlsKey* gsk = new IlsKey(long(ALT_ILS_IDX));
+               IlsKey* gsk = new IlsKey(static_cast<long>(ALT_ILS_IDX));
                gsk->lat = nlat;
                gsk->lon = nlon;
                dsGetString(gsk->key, key, ILS_KEY_LEN);

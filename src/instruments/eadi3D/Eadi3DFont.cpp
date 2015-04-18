@@ -21,7 +21,7 @@ const LCreal defaultFontHeight = static_cast<LCreal>(7.0f * YSCALE);
 Eadi3DFont::Eadi3DFont()
 {
     STANDARD_CONSTRUCTOR()
-    
+
     setFontWidth( defaultFontWidth );
     setFontHeight( defaultFontHeight );
     setCharacterSpacing( defaultFontWidth );
@@ -138,7 +138,7 @@ void Eadi3DFont::outputText(const char* txt, const int n, const bool vf, const b
 void Eadi3DFont::loadFont()
 {
     if (isLoaded()) return;
-    
+
     // create the stroke font
     setBase( glGenLists(256) );
     createEadi3DFont( getBase() );
@@ -717,21 +717,21 @@ GLenum Eadi3DFont::createEadi3DFont(GLuint fontBase)
             GLint mode = (GLint) strokeFont[i][j];
             if (mode == FONT_BEGIN) {
                 glBegin(GL_LINE_STRIP);
-                glVertex2d(double(strokeFont[i][j+1]-XOFFSET)*XSCALE,
-                double(strokeFont[i][j+2]-YOFFSET)*YSCALE);
-            } 
+                glVertex2d(static_cast<double>(strokeFont[i][j+1]-XOFFSET)*XSCALE,
+                      static_cast<double>(strokeFont[i][j+2]-YOFFSET)*YSCALE);
+            }
             else if (mode == FONT_NEXT) {
-                glVertex2d(double(strokeFont[i][j+1]-XOFFSET)*XSCALE,
-                double(strokeFont[i][j+2]-YOFFSET)*YSCALE);
-            } 
+                glVertex2d(static_cast<double>(strokeFont[i][j+1]-XOFFSET)*XSCALE,
+                      static_cast<double>(strokeFont[i][j+2]-YOFFSET)*YSCALE);
+            }
             else if (mode == FONT_END) {
-                glVertex2d(double(strokeFont[i][j+1]-XOFFSET)*XSCALE,
-                double(strokeFont[i][j+2]-YOFFSET)*YSCALE);
+                glVertex2d(static_cast<double>(strokeFont[i][j+1]-XOFFSET)*XSCALE,
+                      static_cast<double>(strokeFont[i][j+2]-YOFFSET)*YSCALE);
                 glEnd();
-            } 
+            }
             else if (mode == FONT_ADVANCE) {
-                glTranslated(double(strokeFont[i][j+1])*XSCALE,
-                double(strokeFont[i][j+2])*YSCALE, 0.0);
+                glTranslated(static_cast<double>(strokeFont[i][j+1])*XSCALE,
+                      static_cast<double>(strokeFont[i][j+2])*YSCALE, 0.0);
                 break;
             }
         }

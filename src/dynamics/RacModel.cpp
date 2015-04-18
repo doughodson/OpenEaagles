@@ -25,7 +25,7 @@ BEGIN_SLOTTABLE(RacModel)
     "maxAccel",    // 4 Maximum Acceleration    (m/s/s)
     "cmdAltitude", // 5 Command Altitude
     "cmdHeading",  // 6 Command Heading
-    "cmdSpeed",    // 7 Command speed 
+    "cmdSpeed",    // 7 Command speed
 END_SLOTTABLE(RacModel)
 
 //------------------------------------------------------------------------------
@@ -78,7 +78,7 @@ void RacModel::copyData(const RacModel& org, const bool)
 EMPTY_DELETEDATA(RacModel)
 
 //------------------------------------------------------------------------------
-// reset() -- 
+// reset() --
 //------------------------------------------------------------------------------
 void RacModel::reset()
 {
@@ -120,14 +120,14 @@ LCreal RacModel::getSideSlip() const
 LCreal RacModel::getFlightPath() const
 {
    const Simulation::Player* pp = static_cast<const Simulation::Player*>( findContainerByType(typeid(Simulation::Player)) );
-   if (pp == 0) return 0;
+   if (pp == nullptr) return 0;
    return static_cast<LCreal>(pp->getPitchR());
 }
 
 LCreal RacModel::getCalibratedAirspeed() const
 {
    const Simulation::Player* pp = static_cast<const Simulation::Player*>( findContainerByType(typeid(Simulation::Player)) );
-   if (pp == 0) return 0;
+   if (pp == nullptr) return 0;
    return pp->getTotalVelocityKts();
 }
 
@@ -166,7 +166,7 @@ double RacModel::getCommandedVelocityKts() const
 {
    return cmdVelocity;
 }
-                                                                       
+
 // setVelocityHoldOn() --   Enable/Disable velocity hold
 bool RacModel::setVelocityHoldOn(const bool)
 {
@@ -189,7 +189,7 @@ double RacModel::getCommandedAltitude() const
 {
    return cmdAltitude;
 }
-                                                                             
+
 // setAltitudeHoldOn() --   Enable/Disable altitude hold
 bool RacModel::setAltitudeHoldOn(const bool)
 {
@@ -210,7 +210,7 @@ void RacModel::updateRAC(const LCreal dt)
 {
    // Get our Player (must have one!)
    Simulation::Player* pp = static_cast<Simulation::Player*>( findContainerByType(typeid(Simulation::Player)) );
-   if (pp == 0) return;
+   if (pp == nullptr) return;
 
    // Acceleration of Gravity (M/S)
    LCreal g = ETHG * Basic::Distance::FT2M;
@@ -222,7 +222,7 @@ void RacModel::updateRAC(const LCreal dt)
        cmdHeading = static_cast<LCreal>(pp->getHeadingD());
    if (cmdVelocity < -9000.0)
        cmdVelocity = pp->getTotalVelocityKts();
-  
+
    // ---
    // Compute delta altitude; commanded vertical velocity and
    // commanded flight path angle
@@ -254,8 +254,8 @@ void RacModel::updateRAC(const LCreal dt)
    // ---
    // Computer max turn rate, max/min pitch rates
    // ---
-   LCreal ra_max = gmax * g / pp->getTotalVelocity();    // Turn rate base on vp and g,s (rad/sec) 
-   LCreal qa_max = ra_max;                           // Max pull up pitch rate (rad/sec) 
+   LCreal ra_max = gmax * g / pp->getTotalVelocity();    // Turn rate base on vp and g,s (rad/sec)
+   LCreal qa_max = ra_max;                           // Max pull up pitch rate (rad/sec)
    LCreal qa_min = -qa_max;                          // Max pushover pitch rate (rad/sec)
    if(gmax > 2.0) {
       // Max yaw rate (rad/sec)
@@ -263,7 +263,7 @@ void RacModel::updateRAC(const LCreal dt)
    }
 
    // ---
-   // Get old angular values 
+   // Get old angular values
    // ---
    const osg::Vec3 oldRates = pp->getAngularVelocities();
    //LCreal pa1 = oldRates[Simulation::Player::IROLL];
@@ -282,7 +282,7 @@ void RacModel::updateRAC(const LCreal dt)
    if(ra > ra_max) ra = ra_max;
    if(ra < -ra_max) ra = -ra_max;
 
-   // Damage 
+   // Damage
    double dd = pp->getDamage();
    if (dd > 0.5) {
       ra += (dd - 0.5) * ra_max;
@@ -329,7 +329,7 @@ void RacModel::updateRAC(const LCreal dt)
 bool RacModel::setSlotMinSpeed(const Basic::Number* const msg)
 {
     bool ok = false;
-    if (msg != 0) {
+    if (msg != nullptr) {
        vpMin = msg->getReal();
        ok = true;
     }
@@ -339,7 +339,7 @@ bool RacModel::setSlotMinSpeed(const Basic::Number* const msg)
 bool RacModel::setSlotSpeedMaxG(const Basic::Number* const msg)
 {
     bool ok = false;
-    if (msg != 0) {
+    if (msg != nullptr) {
        vpMaxG = msg->getReal();
        ok = true;
     }
@@ -349,7 +349,7 @@ bool RacModel::setSlotSpeedMaxG(const Basic::Number* const msg)
 bool RacModel::setSlotMaxG(const Basic::Number* const msg)
 {
     bool ok = false;
-    if (msg != 0) {
+    if (msg != nullptr) {
        gMax = msg->getReal();
        ok = true;
     }
@@ -359,7 +359,7 @@ bool RacModel::setSlotMaxG(const Basic::Number* const msg)
 bool RacModel::setSlotMaxAccel(const Basic::Number* const msg)
 {
     bool ok = false;
-    if (msg != 0) {
+    if (msg != nullptr) {
        maxAccel = msg->getReal();
        ok = true;
     }
@@ -369,7 +369,7 @@ bool RacModel::setSlotMaxAccel(const Basic::Number* const msg)
 bool RacModel::setSlotCmdAltitude(const Basic::Distance* const msg)
 {
     bool ok = false;
-    if (msg != 0) {
+    if (msg != nullptr) {
        double value = Basic::Meters::convertStatic( *msg );
        cmdAltitude = value;
        ok = true;
@@ -380,7 +380,7 @@ bool RacModel::setSlotCmdAltitude(const Basic::Distance* const msg)
 bool RacModel::setSlotCmdHeading(const Basic::Angle* const msg)
 {
     bool ok = false;
-    if (msg != 0) {
+    if (msg != nullptr) {
        double value  = Basic::Degrees::convertStatic( *msg );
        cmdHeading = value;
        ok = true;
@@ -391,7 +391,7 @@ bool RacModel::setSlotCmdHeading(const Basic::Angle* const msg)
 bool RacModel::setSlotCmdVelocity(const Basic::Number* const msg)
 {
     bool ok = false;
-    if (msg != 0) {
+    if (msg != nullptr) {
        double value = msg->getReal();
        cmdVelocity = value;
        ok = true;
@@ -421,7 +421,7 @@ std::ostream& RacModel::serialize(std::ostream& sout, const int i, const bool sl
 
     indent(sout,i+j);
     sout << "minSpeed: " << vpMin << std::endl;
-    
+
     indent(sout,i+j);
     sout << "speedMaxG: " << vpMaxG << std::endl;
 

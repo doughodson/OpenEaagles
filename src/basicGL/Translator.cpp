@@ -51,7 +51,7 @@ void Translator::draw()
 {
     // we are just translating here
     glPushMatrix();
-        glTranslated(double(myXPos), double(myYPos), double(myZPos));
+        glTranslated(static_cast<double>(myXPos), static_cast<double>(myYPos), static_cast<double>(myZPos));
         Graphic::draw();
     glPopMatrix();
 }

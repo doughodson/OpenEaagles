@@ -1115,7 +1115,7 @@ double TimeReadout::getInputValue() const
       }
       break;
    }
-   return double(value);
+   return static_cast<double>(value);
 }
 
 //------------------------------------------------------------------------------
@@ -1313,7 +1313,7 @@ double DirectionReadout::getInputValue() const
       }
       break;
    }
-   return double(value);
+   return static_cast<double>(value);
 }
 
 //------------------------------------------------------------------------------

@@ -40,7 +40,7 @@ double getTimeUtc(unsigned int* const day, unsigned int* const month, unsigned i
    convertSec2Ymdhms(seconds, year, month, day, &hour, &min, &sec);
 
    // Return time since midnight (sec)
-   return ( hour * 3600.0 + min * 60.0 + sec + double(uSec) / 1000000.0 );
+   return ( hour * 3600.0 + min * 60.0 + sec + static_cast<double>(uSec) / 1000000.0 );
 }
 
 //------------
@@ -50,7 +50,7 @@ double getTime()
 {
    unsigned long sec(0), uSec(0);
    getTime(&sec, &uSec);
-   return double(sec) + double(uSec)/1000000.0;
+   return static_cast<double>(sec) + static_cast<double>(uSec)/1000000.0;
 }
 
 // Convert seconds since midnight (00:00:00), January 1, 1970 to NTP time stamp
@@ -71,7 +71,7 @@ bool convertSec2Ntp(
 
    // Microseconds to fractional second
    if (ntpSecF != 0) {
-      double fsec = double(uSec) / 1000000.0;
+      double fsec = static_cast<double>(uSec) / 1000000.0;
       *ntpSecF = static_cast<unsigned long>((fsec * P32) + 0.5);
    }
    return true;
@@ -95,7 +95,7 @@ bool convertNtp2Sec(
 
    // fractional second to microseconds
    if (uSec != nullptr) {
-      double fsec = double(ntpSecF) / P32;
+      double fsec = static_cast<double>(ntpSecF) / P32;
       *uSec = static_cast<unsigned long>((fsec * 1000000.0) + 0.5);
    }
    return true;

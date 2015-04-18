@@ -97,7 +97,7 @@ IMPLEMENT_PARTIAL_SUBCLASS(Simulation,"Simulation")
 //------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Simulation)
    "players",        //  1) All players
-   "latitude",       //  2) Ref latitude 
+   "latitude",       //  2) Ref latitude
    "longitude",      //  3) Ref longitude
    "simulationTime", //  4) Simulation time
    "day",            //  5) Initial simulated day of month [ 1 .. 31 ]
@@ -123,7 +123,7 @@ BEGIN_SLOTTABLE(Simulation)
                      //    earth with a radius of Nav::ERAD60. (default: false)
 END_SLOTTABLE(Simulation)
 
-// slot map 
+// slot map
 BEGIN_SLOT_MAP(Simulation)
     ON_SLOT( 1, setSlotPlayers,         Basic::PairStream)
 
@@ -165,7 +165,7 @@ Simulation::Simulation() : newPlayerQueue(MAX_NEW_PLAYERS)
 }
 
 Simulation::Simulation(const Simulation& org) : newPlayerQueue(MAX_NEW_PLAYERS)
-{ 
+{
    STANDARD_CONSTRUCTOR()
    copyData(org,true);
 }
@@ -332,7 +332,7 @@ void Simulation::copyData(const Simulation& org, const bool cc)
    simTvUSec = org.simTvUSec;
    simTimeSlaved = org.simTimeSlaved;
 
-   simTime0 = org.simTime0; 
+   simTime0 = org.simTime0;
    simDay0 = org.simDay0;
    simMonth0 = org.simMonth0;
    simYear0 = org.simYear0;
@@ -392,7 +392,7 @@ void Simulation::deleteData()
     }
    numTcThreads = 0;
    tcThreadsFailed = false;
-    
+
    for (unsigned int i = 0; i < numBgThreads; i++) {
       bgThreads[i]->terminate();
       bgThreads[i]->unref();
@@ -763,7 +763,7 @@ void Simulation::updateTC(const LCreal dt)
       convertSec2Ymdhms(pcTvSec, &cYear, &cMonth, &cDay, &cHour, &cMin, &cSec);
 
       // Computer time of day (seconds since midnight)
-      pcTime = ( cHour * 3600.0 + cMin * 60.0 + cSec + double(pcTvUSec) / 1000000.0 );
+      pcTime = ( cHour * 3600.0 + cMin * 60.0 + cSec + static_cast<double>(pcTvUSec) / 1000000.0 );
 
       //std::printf("ComputerTimes: y=%d; m=%d; d=%d; h=%d; m=%d; s=%d, us=%06d\n", cYear, cMonth, cDay, cHour, cMin, cSec, pcTvUSec);
       //std::printf("PC sec = %d\n", pcTvSec);
@@ -805,7 +805,7 @@ void Simulation::updateTC(const LCreal dt)
       convertSec2Ymdhms(simTvSec, &cYear, &cMonth, &cDay, &cHour, &cMin, &cSec);
 
       // Computer time of day (seconds since midnight)
-      simTime = ( cHour * 3600.0 + cMin * 60.0 + cSec + double(simTvUSec) / 1000000.0 );
+      simTime = ( cHour * 3600.0 + cMin * 60.0 + cSec + static_cast<double>(simTvUSec) / 1000000.0 );
 
       //std::printf("SimTimes: y=%d; m=%d; d=%d; h=%d; m=%d; s=%d, us=%06d\n", cYear, cMonth, cDay, cHour, cMin, cSec, simTvUSec);
       //std::printf("Sim sec = %d\n", simTvSec);
@@ -945,7 +945,7 @@ void Simulation::updateData(const LCreal dt)
         }
     }
 
-    // --- 
+    // ---
     // Load DAFIF files (one pre frame)
     // ---
     if (airports != 0 && airports->numberOfRecords() == 0) {
@@ -973,7 +973,7 @@ void Simulation::updateBgPlayerList(
          const unsigned int idx,
          const unsigned int n
      )
-{   
+{
    if (playerList != 0) {
       unsigned int index = idx;
       unsigned int count = 0;
@@ -1328,12 +1328,12 @@ bool Simulation::setSlotPlayers(Basic::PairStream* const pl)
 
             if (ip1->getID() == ip2->getID()) {
                std::cerr << "Simulation::setSlotPlayers: duplicate player ID: " << ip1->getID() << std::endl;
-               ok = false;                    
+               ok = false;
             }
 
             if (*pair1->slot() == *pair2->slot()) {
                std::cerr << "Simulation::setSlotPlayers: duplicate player name: " << *pair1->slot() << std::endl;
-               ok = false;                    
+               ok = false;
             }
 
             item2 = item2->getNext();
@@ -1405,7 +1405,7 @@ void Simulation::updatePlayerList()
             item = item->getNext();
         }
     }
-    
+
     if (yes) {
 
         // Update Required!
@@ -1450,7 +1450,7 @@ void Simulation::updatePlayerList()
         // ---
         // Add any new players
         // ---
-      Basic::Pair* newPlayer = newPlayerQueue.get(); 
+      Basic::Pair* newPlayer = newPlayerQueue.get();
       while (newPlayer != 0) {
             // get the player
             Player* ip = static_cast<Player*>(newPlayer->object());
@@ -1465,7 +1465,7 @@ void Simulation::updatePlayerList()
                 getAnyEventLogger()->log(evt);
                 evt->unref();
             }
-            
+
             // Set container and name
             ip->container(this);
             ip->setName(*newPlayer->slot());
@@ -1523,13 +1523,13 @@ bool Simulation::addNewPlayer(const char* const playerName, Player* const player
 bool Simulation::insertPlayerSort(Basic::Pair* const newPlayerPair, Basic::PairStream* const newList)
 {
     newList->ref();
-    
+
     // create a new Basic::List::Item to hold the player
     Basic::List::Item* newItem = new Basic::List::Item;
     newPlayerPair->ref();
     newItem->value = newPlayerPair;
 
-    // Get the player 
+    // Get the player
     Player* newPlayer = static_cast<Player*>(newPlayerPair->object());
 
     // Search the new player list and insert into the correct position --
@@ -1554,10 +1554,10 @@ bool Simulation::insertPlayerSort(Basic::Pair* const newPlayerPair, Basic::PairS
                int result = std::strcmp(*nNib->getFederateName(), *rNib->getFederateName());
                if (result == 0) {
                   // Same federate name; compare player IDs
-                  if (nNib->getPlayerID() > rNib->getPlayerID()) result = +1; 
+                  if (nNib->getPlayerID() > rNib->getPlayerID()) result = +1;
                   else if (nNib->getPlayerID() < rNib->getPlayerID()) result = -1;
                }
-               
+
                // Insert if the new NIB's IDs are less than the ref NIB's IDs
                insert = (result < 0);
             }
@@ -1589,7 +1589,7 @@ bool Simulation::insertPlayerSort(Basic::Pair* const newPlayerPair, Basic::PairS
 
 //------------------------------------------------------------------------------
 // findPlayer() -- Find a player that matches 'id' and 'networkID'
-//------------------------------------------------------------------------------ 
+//------------------------------------------------------------------------------
 Player* Simulation::findPlayer(const short id, const int netID)
 {
    return findPlayerPrivate(id, netID);
@@ -1633,7 +1633,7 @@ Player* Simulation::findPlayerPrivate(const short id, const int netID) const
 
 //------------------------------------------------------------------------------
 // findPlayerByName() -- Find a player by name
-//------------------------------------------------------------------------------ 
+//------------------------------------------------------------------------------
 Player* Simulation::findPlayerByName(const char* const playerName)
 {
    return findPlayerByNamePrivate(playerName);
@@ -1744,7 +1744,7 @@ void Simulation::setCycle(const unsigned int c)
    cycleCnt = c;
 }
 
-// Sets the frame counter    
+// Sets the frame counter
 void Simulation::setFrame(const unsigned int f)
 {
    frameCnt = f;
