@@ -21,7 +21,7 @@ BEGIN_SLOTTABLE(SolenoidSwitch)
 END_SLOTTABLE(SolenoidSwitch)
 
 //------------------------------------------------------------------------------
-//  Map slot table to handles 
+//  Map slot table to handles
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(SolenoidSwitch)
     ON_SLOT(1, setSlotHoldTimer, Basic::Number)
@@ -40,9 +40,9 @@ SolenoidSwitch::SolenoidSwitch()
 {
     STANDARD_CONSTRUCTOR()
 
-    timer = 0;  // we will create our timer if we set a timer slot
+    timer = nullptr;               // we will create our timer if we set a timer slot
     currButtonId = CENTER_BUTTON;  // default to first current button
-    picked[0] = true;   // center button picked
+    picked[0] = true;              // center button picked
     picked[1] = false;
     picked[2] = false;
     for (int i = 0; i < NUM_BUTTONS; i++) {
@@ -60,12 +60,12 @@ void SolenoidSwitch::copyData(const SolenoidSwitch& org, const bool)
 {
    BaseClass::copyData(org);
 
-   if (org.timer != 0) {
-       if (timer != 0) {
+   if (org.timer != nullptr) {
+       if (timer != nullptr) {
            timer->unref();
            timer = org.timer->clone();
        }
-   }    
+   }
     for (int i = 0; i < NUM_BUTTONS; i++) {
         pickedSD[i].empty();
         picked[i] = org.picked[i];
@@ -81,9 +81,9 @@ void SolenoidSwitch::copyData(const SolenoidSwitch& org, const bool)
 //------------------------------------------------------------------------------
 void SolenoidSwitch::deleteData()
 {
-    if (timer != 0) {
+    if (timer != nullptr) {
         timer->unref();
-        timer = 0;
+        timer = nullptr;
     }
 }
 
@@ -93,27 +93,27 @@ void SolenoidSwitch::deleteData()
 bool SolenoidSwitch::setSlotHoldTimer(const Basic::Number* const x)
 {
     bool ok = false;
-    if (x != 0) ok = setHoldTimer(x->getReal());
+    if (x != nullptr) ok = setHoldTimer(x->getReal());
     return ok;
 }
 
 //------------------------------------------------------------------------------
 // setSlotEventMap() - this sets the list of the eventId's we want generated
 // when a button is activated.  For example, if you hold the top button until
-// the timer alarms out, instead of sending an event of 2 (top button id), it 
+// the timer alarms out, instead of sending an event of 2 (top button id), it
 // will map that event to this one and will send that to the display to be
 // processed.
 //------------------------------------------------------------------------------
 bool SolenoidSwitch::setSlotEventMap(const Basic::PairStream* const x)
 {
-    if (x != 0) {
+    if (x != nullptr) {
         if (x->entries() != 3) std::cout << "SolenoidSwitch::setSlotEventMap() - Need 3 eventIds for the button, will not send eventIds for the ones without it" << std::endl;
         int count = 0;
         const Basic::List::Item* item = x->getFirstItem();
-        while (item != 0 && count < 3) {
+        while (item != nullptr && count < 3) {
             Basic::Pair* pair = (Basic::Pair*)item->getValue();
             Basic::Number* num = dynamic_cast<Basic::Number*>(pair->object());
-            if (num != 0) eventMap[count] = num->getInt();
+            if (num != nullptr) eventMap[count] = num->getInt();
             count++;
             item = item->getNext();
         }
@@ -123,11 +123,11 @@ bool SolenoidSwitch::setSlotEventMap(const Basic::PairStream* const x)
 }
 
 //------------------------------------------------------------------------------
-// selectLatch() - tells our switch if it's ok to "latch" 
+// selectLatch() - tells our switch if it's ok to "latch"
 //------------------------------------------------------------------------------
 bool SolenoidSwitch::selectLatch(const Basic::Number* const x)
 {
-    if (x != 0) {
+    if (x != nullptr) {
         latched = x->getBoolean();
     }
     return true;
@@ -139,7 +139,7 @@ bool SolenoidSwitch::selectLatch(const Basic::Number* const x)
 //------------------------------------------------------------------------------
 bool SolenoidSwitch::setHoldTimer(const LCreal x)
 {
-    if (timer != 0) timer->alarm(x);
+    if (timer != nullptr) timer->alarm(x);
     else {
         timer = new Basic::UpTimer();
         timer->alarm(x);
@@ -162,14 +162,14 @@ void SolenoidSwitch::latch(const int buttonId)
             currButtonId = buttonId;
             picked[currButtonId-1] = true;
             // send the event ID IF we are using LOGIC instead of TIMING
-            if (timer == 0) {
+            if (timer == nullptr) {
                 if (eventMap[currButtonId-1] != -1) {
                     BasicGL::Display* myDisplay = (BasicGL::Display*)findContainerByType(typeid(BasicGL::Display));
-                    if (myDisplay != 0) {
+                    if (myDisplay != nullptr) {
                         myDisplay->buttonEvent(eventMap[currButtonId-1]);
                         //std::cout << "EVENT ID " << eventMap[currButtonId-1] << " sent!" << std::endl;
                     }
-                }   
+                }
             }
             // if we are using a timer, restart
             else timer->restart();
@@ -182,7 +182,7 @@ void SolenoidSwitch::latch(const int buttonId)
 //------------------------------------------------------------------------------
 void SolenoidSwitch::determineLatch()
 {
-    if (timer != 0) {
+    if (timer != nullptr) {
         if (timer->isRunning()) {
             // ok, we didn't hold the timer long enough, we don't switch
             // we stopped it, so we go back to our last current button
@@ -208,10 +208,10 @@ void SolenoidSwitch::determineLatch()
 void SolenoidSwitch::resetButton()
 {
     // timer logic
-    if (timer != 0) {
+    if (timer != nullptr) {
         if (currButtonId != CENTER_BUTTON) {
             BasicGL::Display* myDisplay = (BasicGL::Display*)findContainerByType(typeid(BasicGL::Display));
-            if (myDisplay != 0) {
+            if (myDisplay != nullptr) {
                 //std::cout << "EVENT ID " << eventMap[CENTER_BUTTON-1] << " sent!" << std::endl;
                 myDisplay->buttonEvent(eventMap[CENTER_BUTTON-1]);
             }
@@ -220,12 +220,12 @@ void SolenoidSwitch::resetButton()
         lastButtonId = currButtonId;
         timer->stop();
         for (int i = 0; i < NUM_BUTTONS; i++) picked[i] = false;
-        picked[currButtonId-1] = true;       
+        picked[currButtonId-1] = true;
     }
     else {
         if (currButtonId != CENTER_BUTTON) {
             BasicGL::Display* myDisplay = (BasicGL::Display*)findContainerByType(typeid(BasicGL::Display));
-            if (myDisplay != 0) {
+            if (myDisplay != nullptr) {
                 //std::cout << "EVENT ID " << eventMap[CENTER_BUTTON-1] << " sent!" << std::endl;
                 myDisplay->buttonEvent(eventMap[CENTER_BUTTON-1]);
             }
@@ -234,7 +234,7 @@ void SolenoidSwitch::resetButton()
         currButtonId = CENTER_BUTTON;
         lastButtonId = currButtonId;
         for (int i = 0; i < NUM_BUTTONS; i++) picked[i] = false;
-        picked[currButtonId-1] = true;       
+        picked[currButtonId-1] = true;
     }
 }
 
@@ -246,7 +246,7 @@ void SolenoidSwitch::updateData(const LCreal dt)
     BaseClass::updateData(dt);
 
     // timer latching
-    if (timer != 0 && timer->alarm()) {
+    if (timer != nullptr && timer->alarm()) {
         for (int i = 0; i < NUM_BUTTONS; i++) picked[i] = false;
         lastButtonId = currButtonId;
         picked[currButtonId-1] = true;
@@ -257,7 +257,7 @@ void SolenoidSwitch::updateData(const LCreal dt)
                 myDisplay->buttonEvent(eventMap[currButtonId-1]);
                 //std::cout << "TIMER EVENT ID " << eventMap[currButtonId-1] << " sent!" << std::endl;
             }
-        }   
+        }
         timer->stop();
         timer->reset();
     }
@@ -267,7 +267,7 @@ void SolenoidSwitch::updateData(const LCreal dt)
 }
 
 //------------------------------------------------------------------------------
-// getSlotByIndex() 
+// getSlotByIndex()
 //------------------------------------------------------------------------------
 Basic::Object* SolenoidSwitch::getSlotByIndex(const int si)
 {
@@ -335,7 +335,7 @@ bool SolenoidButton::onSingleClick()
 
 bool SolenoidButton::onPicked(const Basic::Number* const x)
 {
-    if (x != 0) pushed = x->getBoolean();
+    if (x != nullptr) pushed = x->getBoolean();
     return true;
 }
 

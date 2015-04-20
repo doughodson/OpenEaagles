@@ -5,30 +5,30 @@ namespace Instruments {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(EngPage,"EngPage")
 EMPTY_SERIALIZER(EngPage)
-                            
+
 //------------------------------------------------------------------------------
 // Constructor(s)
 //------------------------------------------------------------------------------
 EngPage::EngPage()
 {
     STANDARD_CONSTRUCTOR()
-    
+
     for (int i = 0; i < NUM_ENG; i++) {
-        n1[i] = 0.0;          
+        n1[i] = 0.0;
         n1SD[i].empty();
         n1ROSD[i].empty();
-        n1BoxSD[i].empty(); 
-          
-        n2[i] = 0.0;          
+        n1BoxSD[i].empty();
+
+        n2[i] = 0.0;
         n2SD[i].empty();
         n2ROSD[i].empty();
-        n2BoxSD[i].empty();  
-         
-        tit[i] = 0.0;          
+        n2BoxSD[i].empty();
+
+        tit[i] = 0.0;
         titSD[i].empty();
         titROSD[i].empty();
-        titBoxSD[i].empty();  
-         
+        titBoxSD[i].empty();
+
         ff[i] = 0.0;
         ffSD[i].empty();
         ffROSD[i].empty();
@@ -42,23 +42,23 @@ void EngPage::copyData(const EngPage& org, const bool)
 {
     // Always copy base class stuff first
     BaseClass::copyData(org);
-    
+
     for (int i = 0; i < NUM_ENG; i++) {
-        n1[i] = org.n1[i];          
+        n1[i] = org.n1[i];
         n1SD[i].empty();
         n1ROSD[i].empty();
-        n1BoxSD[i].empty(); 
-          
-        n2[i] = org.n2[i];          
+        n1BoxSD[i].empty();
+
+        n2[i] = org.n2[i];
         n2SD[i].empty();
         n2ROSD[i].empty();
-        n2BoxSD[i].empty();  
-         
-        tit[i] = org.tit[i];          
+        n2BoxSD[i].empty();
+
+        tit[i] = org.tit[i];
         titSD[i].empty();
         titROSD[i].empty();
-        titBoxSD[i].empty();  
-         
+        titBoxSD[i].empty();
+
         ff[i] = org.ff[i];
         ffSD[i].empty();
         ffROSD[i].empty();
@@ -72,7 +72,7 @@ EMPTY_DELETEDATA(EngPage)
 
 // Set functions
 //------------------------------------------------------------------------------
-// setEngN1() - 
+// setEngN1() -
 //------------------------------------------------------------------------------
 bool EngPage::setEngN1(const int idx, const LCreal newN1)
 {
@@ -85,7 +85,7 @@ bool EngPage::setEngN1(const int idx, const LCreal newN1)
 }
 
 //------------------------------------------------------------------------------
-// setEngN2() - 
+// setEngN2() -
 //------------------------------------------------------------------------------
 bool EngPage::setEngN2(const int idx, const LCreal newN2)
 {
@@ -98,7 +98,7 @@ bool EngPage::setEngN2(const int idx, const LCreal newN2)
 }
 
 //------------------------------------------------------------------------------
-// setEngTit() - 
+// setEngTit() -
 //------------------------------------------------------------------------------
 bool EngPage::setEngTit(const int idx, const LCreal newT)
 {
@@ -111,7 +111,7 @@ bool EngPage::setEngTit(const int idx, const LCreal newT)
 }
 
 //------------------------------------------------------------------------------
-// setEngFF() - 
+// setEngFF() -
 //------------------------------------------------------------------------------
 bool EngPage::setEngFF(const int idx, const LCreal newFF)
 {
@@ -130,7 +130,7 @@ void EngPage::updateData(const LCreal dt)
 {
     // update our BaseClass
     BaseClass::updateData(dt);
-    
+
     // Box visibility flags
     int n1Box[NUM_ENG];
     int n2Box[NUM_ENG];
@@ -141,7 +141,7 @@ void EngPage::updateData(const LCreal dt)
         n2Box[i] =  (n2[i] > 102.4 || n2[i] < 60);
         titBox[i] = (tit[i] > 916  || tit[i] < 219);
     }
-    
+
     // send all of our engine 1 n1 values out
     send("eng%1dn1",    UPDATE_INSTRUMENTS, n1, n1SD, NUM_ENG);
     send("eng%1dn1ro",  UPDATE_VALUE, n1, n1ROSD, NUM_ENG);

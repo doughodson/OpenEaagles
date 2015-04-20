@@ -11,7 +11,7 @@ BEGIN_SLOTTABLE(DialTickMarks)
     "length",           // length of the tick marks
     "quantity",         // tells us how many to draw, default is 1
     "tickGraphic",      // sets a graphic to use instead of a line
-END_SLOTTABLE(DialTickMarks)       
+END_SLOTTABLE(DialTickMarks)
 
 //------------------------------------------------------------------------------
 //  Map slot table to handles for Analog Dial
@@ -30,7 +30,7 @@ DialTickMarks::DialTickMarks()
     STANDARD_CONSTRUCTOR()
     length = 1;
     quantity = 1;
-    myGraphic = 0;
+    myGraphic = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -39,7 +39,7 @@ DialTickMarks::DialTickMarks()
 void DialTickMarks::copyData(const DialTickMarks& org, const bool cc)
 {
     BaseClass::copyData(org);
-    if (cc) myGraphic = 0;
+    if (cc) myGraphic = nullptr;
 
     length = org.length;
     quantity = org.quantity;
@@ -51,8 +51,8 @@ void DialTickMarks::copyData(const DialTickMarks& org, const bool cc)
 //------------------------------------------------------------------------------
 void DialTickMarks::deleteData()
 {
-    if (myGraphic != 0) myGraphic->unref();
-    myGraphic = 0;
+    if (myGraphic != nullptr) myGraphic->unref();
+    myGraphic = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -62,7 +62,7 @@ void DialTickMarks::drawFunc()
 {
     GLfloat currentColor[4];
     glGetFloatv(GL_CURRENT_COLOR, currentColor);
-    
+
     // get our data from our baseclass (AnalogDial)
     LCreal sweepAngle = getSweepAngle();
     LCreal startAngle = getStartAngle();
@@ -70,13 +70,13 @@ void DialTickMarks::drawFunc()
 
     // figure our rotation angle per tick mark (deg)
     LCreal rotation = sweepAngle/quantity;
-    
+
     glPushMatrix();
         // rotate to our start angle
         glRotatef(static_cast<GLfloat>(-startAngle), 0, 0, 1);
-        for (int i = 0; i < quantity + 1; i++) {  
+        for (int i = 0; i < quantity + 1; i++) {
             // if we have a graphic, draw that, else we draw a line
-            if (myGraphic == 0) {
+            if (myGraphic == nullptr) {
                 glBegin(GL_LINES);
                     lcVertex2(0, tRadius);
                     lcVertex2(0, tRadius - length);
@@ -91,7 +91,7 @@ void DialTickMarks::drawFunc()
             glRotatef(static_cast<GLfloat>(-rotation), 0, 0, 1);
         }
     glPopMatrix();
-    
+
     glColor4fv(currentColor);
 }
 
@@ -102,7 +102,7 @@ void DialTickMarks::drawFunc()
 bool DialTickMarks::setSlotLength(const Basic::Number* const newLength)
 {
     bool ok = true;
-    if (newLength != 0) ok = setLength(newLength->getReal());
+    if (newLength != nullptr) ok = setLength(newLength->getReal());
     return ok;
 }
 
@@ -112,7 +112,7 @@ bool DialTickMarks::setSlotLength(const Basic::Number* const newLength)
 bool DialTickMarks::setSlotQuantity(const Basic::Number* const newQ)
 {
     bool ok = true;
-    if (newQ != 0) ok = setQuantity(newQ->getInt());
+    if (newQ != nullptr) ok = setQuantity(newQ->getInt());
     return ok;
 }
 
@@ -123,9 +123,9 @@ bool DialTickMarks::setSlotQuantity(const Basic::Number* const newQ)
 bool DialTickMarks::setTickGraphic(const BasicGL::Graphic* const newGraphic)
 {
     bool ok = true;
-    if (myGraphic != 0) {
+    if (myGraphic != nullptr) {
         myGraphic->unref();
-        myGraphic = 0;
+        myGraphic = nullptr;
     }
 
     if (newGraphic != 0) {
@@ -148,7 +148,7 @@ bool DialTickMarks::setLength(const LCreal newLength)
 //------------------------------------------------------------------------------
 bool DialTickMarks::setQuantity(const int newQ)
 {
-    quantity = newQ; 
+    quantity = newQ;
     return true;
 }
 

@@ -34,8 +34,8 @@ BearingPointer::BearingPointer()
     bearing = 0;
     myRotation = 0.0;
     myRadius = 0;
-    head = 0;
-    tail = 0;
+    head = nullptr;
+    tail = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -46,8 +46,8 @@ void BearingPointer::copyData(const BearingPointer& org, const bool cc)
     BaseClass::copyData(org);
 
     if (cc) {
-        head = 0;
-        tail = 0;
+        head = nullptr;
+        tail = nullptr;
     }
 
     setSlotHeadGraphic(org.head);
@@ -64,8 +64,8 @@ void BearingPointer::copyData(const BearingPointer& org, const bool cc)
 //------------------------------------------------------------------------------
 void BearingPointer::deleteData()
 {
-    setSlotHeadGraphic(0);
-    setSlotTailGraphic(0);
+    setSlotHeadGraphic(nullptr);
+    setSlotTailGraphic(nullptr);
 }
 
 //------------------------------------------------------------------------------
@@ -90,7 +90,7 @@ void BearingPointer::draw()
 bool BearingPointer::onUpdateRadBearingPointer(const Basic::Angle* const msg)
 {
     bool ok = false;
-    if (msg != 0) {
+    if (msg != nullptr) {
         setBearingRad( static_cast<LCreal>(Basic::Radians::convertStatic( *msg )) );
         ok = true;
     }
@@ -103,7 +103,7 @@ bool BearingPointer::onUpdateRadBearingPointer(const Basic::Angle* const msg)
 bool BearingPointer::onUpdateRadBearingPointer(const Basic::Number* const msg)
 {
     bool ok = false;
-    if (msg != 0) {
+    if (msg != nullptr) {
         setBearingRad(msg->getReal());  // radians
         ok = true;
     }
@@ -116,7 +116,7 @@ bool BearingPointer::onUpdateRadBearingPointer(const Basic::Number* const msg)
 bool BearingPointer::onUpdateDegBearingPointer(const Basic::Number* const msg)
 {
     bool ok = false;
-    if (msg != 0) {
+    if (msg != nullptr) {
         setBearingDeg(msg->getReal());  // degrees
         ok = true;
     }
@@ -162,7 +162,7 @@ void BearingPointer::drawFunc()
     glPushMatrix();
         // translate to the top of our radius
         glTranslated(0, static_cast<GLdouble>(myRadius), 0);
-        if (head != 0) {
+        if (head != nullptr) {
             head->container(this);
             head->draw();
         }
@@ -178,7 +178,7 @@ void BearingPointer::drawFunc()
     glPushMatrix();
         // translate to the bottom of our radius
         glTranslated(0, static_cast<GLdouble>(-myRadius), 0);
-        if (tail != 0) {
+        if (tail != nullptr) {
             tail->container(this);
             tail->draw();
         }
@@ -228,11 +228,11 @@ void BearingPointer::updateData(const LCreal dt)
 bool BearingPointer::setSlotHeadGraphic(const BasicGL::Graphic* const newH)
 {
     bool ok = false;
-    if (head != 0) {
+    if (head != nullptr) {
         head->unref();
-        head = 0;
+        head = nullptr;
     }
-    if (newH != 0) {
+    if (newH != nullptr) {
         head = newH->clone();
         ok = true;
     }
@@ -244,11 +244,11 @@ bool BearingPointer::setSlotHeadGraphic(const BasicGL::Graphic* const newH)
 bool BearingPointer::setSlotTailGraphic(const BasicGL::Graphic* const newT)
 {
     bool ok = false;
-    if (tail != 0) {
+    if (tail != nullptr) {
         tail->unref();
-        tail = 0;
+        tail = nullptr;
     }
-    if (newT != 0) {
+    if (newT != nullptr) {
         tail = newT->clone();
         ok = true;
     }

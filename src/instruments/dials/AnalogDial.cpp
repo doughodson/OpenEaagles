@@ -14,12 +14,12 @@ BEGIN_EVENT_HANDLER(AnalogDial)
 END_EVENT_HANDLER()
 
 BEGIN_SLOTTABLE(AnalogDial)
-    "startAngle",           // 1) angle in which we start drawing our background from 
+    "startAngle",           // 1) angle in which we start drawing our background from
     "sweepAngle",           // 2) sweep angle (if not drawing a full circle and not drawing a semi-circle, you can determine how far you want the outline to draw)
     "dialRadius",           // 3) how far do we want our background to extend?
     "mobile",               // 4) do we rotate if given a value, or do we just pass it down to our components?
     "slices",               // 5) number of slices to use
-END_SLOTTABLE(AnalogDial)       
+END_SLOTTABLE(AnalogDial)
 
 //------------------------------------------------------------------------------
 //  Map slot table to handles for Analog Dial
@@ -52,7 +52,7 @@ AnalogDial::AnalogDial()
 void AnalogDial::copyData(const AnalogDial& org, const bool)
 {
     BaseClass::copyData(org);
-    
+
     originAngle = org.originAngle;
     sweepAngle = org.sweepAngle;
     radius = org.radius;
@@ -73,14 +73,14 @@ void AnalogDial::drawFunc()
 {
     GLfloat ocolor[4];
     glGetFloatv(GL_CURRENT_COLOR, ocolor);
-    
+
     // get our position from our base instrument class, which handles scaling and such
     positionAngle = getInstValue();
-    
+
     glPushMatrix();
         // move us just slightly into the background, so things will overlay us
         glTranslatef(0, 0, -0.1f);
-        if (isMobile) glRotatef( static_cast<GLfloat>(-positionAngle), 0, 0, 1);
+        if (isMobile) glRotatef(static_cast<GLfloat>(-positionAngle), 0, 0, 1);
         // draw our background
         GLUquadricObj *qobj = gluNewQuadric();
         gluQuadricDrawStyle(qobj, GLU_FILL);
@@ -88,7 +88,7 @@ void AnalogDial::drawFunc()
         gluPartialDisk(qobj, 0.0,  radius, slices, 1, originAngle, sweepAngle);
         gluDeleteQuadric(qobj);
     glPopMatrix();
-        
+
     glColor4fv(ocolor);
 }
 
@@ -98,30 +98,30 @@ void AnalogDial::drawFunc()
 bool AnalogDial::onUpdateRadius(const Basic::Number* const x)
 {
     bool ok = false;
-    if (x != 0) ok = setRadius(x->getReal());
+    if (x != nullptr) ok = setRadius(x->getReal());
     return ok;
 }
 
 // SLOT functions
 //------------------------------------------------------------------------------
-// setSlotOriginAngle() -- 
+// setSlotOriginAngle() --
 //------------------------------------------------------------------------------
-bool AnalogDial::setSlotOriginAngle(const Basic::Number* newAngle)       
+bool AnalogDial::setSlotOriginAngle(const Basic::Number* newAngle)
 {
     bool ok = false;
-    if (newAngle != 0) {
+    if (newAngle != nullptr) {
         ok = setOriginAngle(newAngle->getReal());
     }
     return ok;
 }
 
 //------------------------------------------------------------------------------
-// setSlotSweepAngle() -- 
+// setSlotSweepAngle() --
 //------------------------------------------------------------------------------
 bool AnalogDial::setSlotSweepAngle(const Basic::Number* newSweepAngle)
 {
     bool ok = false;
-    if (newSweepAngle != 0) ok = setSweepAngle(newSweepAngle->getReal());
+    if (newSweepAngle != nullptr) ok = setSweepAngle(newSweepAngle->getReal());
     return ok;
 }
 
@@ -131,7 +131,7 @@ bool AnalogDial::setSlotSweepAngle(const Basic::Number* newSweepAngle)
 bool AnalogDial::setSlotRadius(const Basic::Number* newR)
 {
     bool ok = false;
-    if (newR != 0) ok = setRadius(newR->getReal());
+    if (newR != nullptr) ok = setRadius(newR->getReal());
     return ok;
 }
 //------------------------------------------------------------------------------
@@ -140,7 +140,7 @@ bool AnalogDial::setSlotRadius(const Basic::Number* newR)
 bool AnalogDial::setSlotMobile(const Basic::Number* newM)
 {
     bool ok = false;
-    if (newM != 0) ok = setMobile(newM->getBoolean());
+    if (newM != nullptr) ok = setMobile(newM->getBoolean());
     return ok;
 }
 //------------------------------------------------------------------------------
@@ -149,7 +149,7 @@ bool AnalogDial::setSlotMobile(const Basic::Number* newM)
 bool AnalogDial::setSlotSlices(const Basic::Number* const x)
 {
     bool ok = false;
-    if (x != 0) ok = setSlices(x->getInt());
+    if (x != nullptr) ok = setSlices(x->getInt());
     return ok;
 }
 
@@ -173,7 +173,7 @@ bool AnalogDial::setSweepAngle(const LCreal newSA)
 }
 
 //------------------------------------------------------------------------------
-// setRadius() - set the radius of our dial 
+// setRadius() - set the radius of our dial
 //------------------------------------------------------------------------------
 bool AnalogDial::setRadius(const LCreal newR)
 {

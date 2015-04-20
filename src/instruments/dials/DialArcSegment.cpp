@@ -12,7 +12,7 @@ BEGIN_SLOTTABLE(DialArcSegment)
     "dynamic",                  // do we draw around a circle according to our value?
     "outerRadius",              // this will allow us to draw nice clean arcs
     "filled",                   // fill the inside?
-END_SLOTTABLE(DialArcSegment)       
+END_SLOTTABLE(DialArcSegment)
 
 //------------------------------------------------------------------------------
 //  Map slot table to handles for Analog Dial
@@ -53,12 +53,12 @@ EMPTY_DELETEDATA(DialArcSegment)
 
 // SLOT FUNCTION(s)
 //------------------------------------------------------------------------------
-// setSlotIsDyanmic() 
+// setSlotIsDyanmic()
 //------------------------------------------------------------------------------
 bool DialArcSegment::setSlotIsDynamic(const Basic::Number* const newD)
 {
     bool ok = false;
-    if (newD != 0) ok = setIsDynamic(newD->getBoolean());
+    if (newD != nullptr) ok = setIsDynamic(newD->getBoolean());
     return ok;
 }
 //------------------------------------------------------------------------------
@@ -66,8 +66,8 @@ bool DialArcSegment::setSlotIsDynamic(const Basic::Number* const newD)
 //------------------------------------------------------------------------------
 bool DialArcSegment::setSlotOuterRadius(const Basic::Number* const x)
 {
-    if (x != 0) {
-        return setOuterRadius(x->getFloat());        
+    if (x != nullptr) {
+        return setOuterRadius(x->getFloat());
     }
     return false;
 }
@@ -77,15 +77,15 @@ bool DialArcSegment::setSlotOuterRadius(const Basic::Number* const x)
 //------------------------------------------------------------------------------
 bool DialArcSegment::setSlotFilled(const Basic::Number* const x)
 {
-    if (x != 0) {
-        return setFilled(x->getBoolean());        
+    if (x != nullptr) {
+        return setFilled(x->getBoolean());
     }
     return false;
 }
 
 // SET FUNCTIONS
 //------------------------------------------------------------------------------
-// setIsDynamic() 
+// setIsDynamic()
 //------------------------------------------------------------------------------
 bool DialArcSegment::setIsDynamic(const bool newID)
 {
@@ -94,7 +94,7 @@ bool DialArcSegment::setIsDynamic(const bool newID)
 }
 
 //------------------------------------------------------------------------------
-// setOuterRadius() - 
+// setOuterRadius() -
 //------------------------------------------------------------------------------
 bool DialArcSegment::setOuterRadius(const LCreal x)
 {
@@ -103,7 +103,7 @@ bool DialArcSegment::setOuterRadius(const LCreal x)
 }
 
 //------------------------------------------------------------------------------
-// setFilled() - 
+// setFilled() -
 //------------------------------------------------------------------------------
 bool DialArcSegment::setFilled(const bool x)
 {
@@ -116,16 +116,16 @@ bool DialArcSegment::setFilled(const bool x)
 //------------------------------------------------------------------------------
 void DialArcSegment::drawFunc()
 {
-    // get our data from our base class 
+    // get our data from our base class
     LCreal startAngle = getStartAngle();
     LCreal radius = getRadius();
     LCreal sweepAngle = getSweepAngle();
-    
+
     GLint curSlices = getSlices();
-    // our slice amount should go up as we get more of a sweep, if not, it will 
+    // our slice amount should go up as we get more of a sweep, if not, it will
     // look funny.  Pretty much one slice per degree sweep
     LCreal y = lcAbs(static_cast<LCreal>(sweepAngle));
-    curSlices = curSlices + static_cast<GLint>(y * 0.05f);    
+    curSlices = curSlices + static_cast<GLint>(y * 0.05f);
 
     // draw our arc
     glPushMatrix();
@@ -133,7 +133,7 @@ void DialArcSegment::drawFunc()
         if (filled) gluQuadricDrawStyle(qobj, GL_FILL);
         else gluQuadricDrawStyle(qobj, GLU_SILHOUETTE);
         gluPartialDisk(qobj, radius, outerRadius, curSlices, 1, startAngle, sweepAngle);
-        gluDeleteQuadric(qobj);  
+        gluDeleteQuadric(qobj);
     glPopMatrix();
 }
 
@@ -143,7 +143,7 @@ void DialArcSegment::drawFunc()
 bool DialArcSegment::onUpdateRadius(const Basic::Number* const x)
 {
     bool ok = false;
-    if (x != 0) {
+    if (x != nullptr) {
         // first determine our ratio from inner to outer radius
         LCreal diff = outerRadius - getRadius();
         ok = setRadius(x->getReal());
@@ -153,7 +153,7 @@ bool DialArcSegment::onUpdateRadius(const Basic::Number* const x)
 }
 
 //------------------------------------------------------------------------------
-// updateData() 
+// updateData()
 //------------------------------------------------------------------------------
 void DialArcSegment::updateData(const LCreal dt)
 {

@@ -12,11 +12,11 @@ EMPTY_SERIALIZER(AltitudeDial)
 AltitudeDial::AltitudeDial()
 {
     STANDARD_CONSTRUCTOR()
-    
+
     dialAltSD.empty();
-    altHundredsSD.empty();    
-    altOneThousandsSD.empty();    
-    altTenThousandsSD.empty();    
+    altHundredsSD.empty();
+    altOneThousandsSD.empty();
+    altTenThousandsSD.empty();
 }
 
 //------------------------------------------------------------------------------
@@ -25,11 +25,11 @@ AltitudeDial::AltitudeDial()
 void AltitudeDial::copyData(const AltitudeDial& org, const bool)
 {
     BaseClass::copyData(org);
-    
+
     dialAltSD.empty();
-    altHundredsSD.empty();    
+    altHundredsSD.empty();
     altOneThousandsSD.empty();
-    altTenThousandsSD.empty();    
+    altTenThousandsSD.empty();
 }
 
 //------------------------------------------------------------------------------
@@ -44,10 +44,10 @@ void AltitudeDial::updateData(const LCreal dt)
 {
     // update base class first
     BaseClass::updateData(dt);
-    
+
     // figure our rotation with the new "raw" instrument value
     LCreal alt = getInstValue();
-    
+
     // send that data to the tape gauge
     LCreal altTens = ((alt/100) - static_cast<int>(alt/100)) * 10;
     LCreal altHundreds = ((alt/1000) - static_cast<int>(alt/1000)) * 10;
@@ -58,12 +58,12 @@ void AltitudeDial::updateData(const LCreal dt)
     if (altOneThousands >= 10) altOneThousands = altOneThousands - static_cast<int>(altTenThousands) * 10;
     // now figure the rest of the number
 //    int altRest = int(alt/99.9999);
-    
+
     if (altTens < 9) altHundreds = static_cast<LCreal>(static_cast<int>(altHundreds));
     else {
         LCreal x = altTens - static_cast<int>(altTens);
         altHundreds = static_cast<int>(altHundreds) + x;
-    } 
+    }
     if (altHundreds < 9) altOneThousands = static_cast<LCreal>(static_cast<int>(altOneThousands));
     else {
         // scale our hundreds value to lock with the tens
@@ -76,7 +76,7 @@ void AltitudeDial::updateData(const LCreal dt)
         LCreal x = altOneThousands - static_cast<int>(altOneThousands);
         altTenThousands = static_cast<int>(altTenThousands) + x;
     }
-    
+
     // send our data to our components
     send("dialalt", UPDATE_INSTRUMENTS, alt, dialAltSD);
     send("hundreds", UPDATE_INSTRUMENTS, altHundreds, altHundredsSD);
@@ -85,7 +85,7 @@ void AltitudeDial::updateData(const LCreal dt)
 }
 
 //------------------------------------------------------------------------------
-// figureRotation() - figures out where to rotate our gauge 
+// figureRotation() - figures out where to rotate our gauge
 // and translate our tape based on our altitude
 //------------------------------------------------------------------------------
 bool AltitudeDial::figureRotation(const LCreal thisAlt)
@@ -94,7 +94,7 @@ bool AltitudeDial::figureRotation(const LCreal thisAlt)
     LCreal hundreds = 0;
     LCreal thousands = 0;
     LCreal tenThousands = 0;
-    
+
     tenThousands = thisAlt/10000;
     thousands = (thisAlt/1000) - (static_cast<int>(thisAlt/10000)* 10);
     hundreds = ((thisAlt - (static_cast<int>(thisAlt/1000) * 1000)) / 100);

@@ -18,7 +18,7 @@ BEGIN_SLOTTABLE(RotarySwitch)
 END_SLOTTABLE(RotarySwitch)
 
 //------------------------------------------------------------------------------
-//  Map slot table to handles 
+//  Map slot table to handles
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(RotarySwitch)
    ON_SLOT(1, setSlotAngles, Basic::PairStream)
@@ -64,19 +64,19 @@ bool RotarySwitch::setSlotAngles(const Basic::PairStream* const x)
     bool ok = false;
     numAngs = 0;
     for (int i = 0; i < MAX_ANGLES; i++) angles[i] = 0;
-    if (x != 0) {
+    if (x != nullptr) {
         ok = true;
         const Basic::List::Item* item = x->getFirstItem();
-        while(item != 0) {
+        while(item != nullptr) {
             Basic::Pair* pair = (Basic::Pair*)item->getValue();
-            if (pair != 0) {
+            if (pair != nullptr) {
                 Basic::Number* n = dynamic_cast<Basic::Number*>(pair->object());
-                if (n != 0) {
+                if (n != nullptr) {
                     angles[numAngs++] = n->getReal();
                 }
             }
             item = item->getNext();
-        }  
+        }
     }
     return ok;
 }
@@ -86,7 +86,7 @@ bool RotarySwitch::setSlotAngles(const Basic::PairStream* const x)
 //------------------------------------------------------------------------------
 bool RotarySwitch::setSlotStartPosition(const Basic::Number* const x)
 {
-    if (x != 0) {
+    if (x != nullptr) {
         startPosition = x->getInt();
         currentPosition = startPosition;
     }
@@ -113,13 +113,13 @@ bool RotarySwitch::onSingleClick()
 }
 
 //------------------------------------------------------------------------------
-// updateData() - 
+// updateData() -
 //------------------------------------------------------------------------------
 void RotarySwitch::updateData(const LCreal dt)
 {
     BaseClass::updateData(dt);
-    
-    send("switch", UPDATE_VALUE6, angles[currentPosition - 1], angleSD);    
+
+    send("switch", UPDATE_VALUE6, angles[currentPosition - 1], angleSD);
 }
 
 //------------------------------------------------------------------------------

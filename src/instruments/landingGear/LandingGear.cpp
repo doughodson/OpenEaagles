@@ -12,7 +12,7 @@ BEGIN_SLOTTABLE(LandingGear)
     "gearUpValue",    // gear position that defines the "up" state of the gear handle
     // Note: Everything in between these values are considered "in Transit" and will be
     // treated as such
-END_SLOTTABLE(LandingGear)       
+END_SLOTTABLE(LandingGear)
 
 //------------------------------------------------------------------------------
 //  Map slot table to handles for LandingGear
@@ -60,21 +60,21 @@ EMPTY_DELETEDATA(LandingGear)
 
 // SLOT FUNCTIONS
 //------------------------------------------------------------------------------
-// setSlotGearDownValue() - 
+// setSlotGearDownValue() -
 //------------------------------------------------------------------------------
 bool LandingGear::setSlotGearDownValue(const Basic::Number* const newDV)
 {
     bool ok = false;
-    if (newDV != 0) ok = setGearDownValue(newDV->getReal());
+    if (newDV != nullptr) ok = setGearDownValue(newDV->getReal());
     return ok;
 }
 //------------------------------------------------------------------------------
-// setSlotGearUpValue() - 
+// setSlotGearUpValue() -
 //------------------------------------------------------------------------------
 bool LandingGear::setSlotGearUpValue(const Basic::Number* const newUV)
 {
     bool ok = false;
-    if (newUV != 0) ok = setGearUpValue(newUV->getReal());
+    if (newUV != nullptr) ok = setGearUpValue(newUV->getReal());
     return ok;
 }
 
@@ -82,16 +82,16 @@ bool LandingGear::setSlotGearUpValue(const Basic::Number* const newUV)
 //------------------------------------------------------------------------------
 // setGearDownValue() - set the value at which the gear goes down
 //------------------------------------------------------------------------------
-bool LandingGear::setGearDownValue(const LCreal newDV) 
+bool LandingGear::setGearDownValue(const LCreal newDV)
 {
     gearDV = newDV;
     return true;
 }
 
 //------------------------------------------------------------------------------
-// setGearUpValue() - 
+// setGearUpValue() -
 //------------------------------------------------------------------------------
-bool LandingGear::setGearUpValue(const LCreal newUV) 
+bool LandingGear::setGearUpValue(const LCreal newUV)
 {
     gearUV = newUV;
     return true;
@@ -103,11 +103,11 @@ bool LandingGear::setGearUpValue(const LCreal newUV)
 void LandingGear::updateData(const LCreal dt)
 {
     BaseClass::updateData(dt);
-    
+
     // this will store our last value, so we know which way we are going
     LCreal lastPos = gearPos;
     gearPos = getInstValue();
-    
+
     if (gearPos == gearUV) {
         gearState = 0;
         inTransit = false;
@@ -119,25 +119,25 @@ void LandingGear::updateData(const LCreal dt)
     // if we aren't equal to either, we are in transit
     else {
         inTransit = true;
-        // we are going towards the gear up value 
+        // we are going towards the gear up value
         if (gearPos < lastPos) gearState = 0;
         // we are going towards the down value
         else if (gearPos > lastPos) gearState = 1;
         // if we are equal, we do nothing
-    } 
-    
+    }
+
     // now send our select down based on our transition flag and gear pos
     int x = 0;
     if (gearState == 0 && !inTransit) x = 1;
     else if (gearState == 0 && inTransit) x = 2;
     else if (gearState == 1 && inTransit) x = 3;
     else if (gearState == 1 && !inTransit) x = 4;
-        
+
     send("gearpos", SELECT, x, gearSelSD);
-    
-    // determine if we have a rotary 
+
+    // determine if we have a rotary
     Basic::Pair* pair = (Basic::Pair*)findByName("gearpos");
-    if (pair != 0) haveRotary = true;
+    if (pair != nullptr) haveRotary = true;
 }
 
 //------------------------------------------------------------------------------
@@ -147,15 +147,15 @@ void LandingGear::drawFunc()
 {
     // only do this if we don't have a rotary components
     if (haveRotary) return;
-    
+
     GLfloat currentColor[4];
     GLfloat lw = 0;
     glGetFloatv(GL_CURRENT_COLOR, &currentColor[0]);
     glGetFloatv(GL_LINE_WIDTH, &lw);
-    
+
     // draw the landing gear dependent on the gear state
     // gear is up
-    if (gearState == 0) {        
+    if (gearState == 0) {
         glPushMatrix();
             glTranslatef(0, 1, 0);
             // the lines on the handle
@@ -226,7 +226,7 @@ void LandingGear::drawFunc()
                 glVertex2f(0.3f, -1);
                 glVertex2f(-0.3f, -1);
             glEnd();
-        glPopMatrix();    
+        glPopMatrix();
     }
     glColor4fv(currentColor);
     glLineWidth(lw);

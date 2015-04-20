@@ -17,7 +17,7 @@ GMeterDial::GMeterDial()
     rotation = 0.0;
     maxG = 0;    // both at 1 and -1 (on the dial)
     minG = 0;
-    
+
     gsSD.empty();
     minGSD.empty();
     maxGSD.empty();
@@ -61,9 +61,9 @@ void GMeterDial::reset()
 void GMeterDial::drawFunc()
 {
    Basic::PairStream* subcomponents = getComponents();
-   if (subcomponents != 0) {
+   if (subcomponents != nullptr) {
       subcomponents->unref();
-      subcomponents = 0;
+      subcomponents = nullptr;
       return;
    }
 
@@ -97,7 +97,7 @@ void GMeterDial::drawFunc()
             glVertex2f(0.5f, 0.0f);
         glEnd();
     glPopMatrix();
-    // Min G's 
+    // Min G's
     glPushMatrix();
         glColor3f(0.8f, 0.8f, 0.8f);
         glRotatef(static_cast<GLfloat>(minG), 0.0f, 0.0f, 1.0f);
@@ -107,36 +107,36 @@ void GMeterDial::drawFunc()
             glVertex2f(0.5f, 0.0f);
         glEnd();
     glPopMatrix();
-    
+
     glColor4fv(currentColor);
 }
 
 //------------------------------------------------------------------------------
-// updateData() - 
+// updateData() -
 //------------------------------------------------------------------------------
 void GMeterDial::updateData(const LCreal dt)
 {
     BaseClass::updateData(dt);
-    
+
     //if (isMessageEnabled(MSG_DEBUG)) {
     //std::cout << "ROTATION = " << rotation << std::endl;
     //}
 
     // update our values here
-    
+
     {
        Basic::PairStream* subcomponents = getComponents();
-       if (subcomponents == 0) return;
+       if (subcomponents == nullptr) return;
        subcomponents->unref();
-       subcomponents = 0;
+       subcomponents = nullptr;
     }
-    
+
     rotation = getPreScaleInstValue();
     if (rotation != 0) {
       if (rotation < maxG) maxG = rotation;
       if (rotation > minG) minG = rotation;
     }
-        
+
     // send our data down
     send("gs", UPDATE_INSTRUMENTS, rotation, gsSD);
     send("minG", UPDATE_INSTRUMENTS, minG, minGSD);

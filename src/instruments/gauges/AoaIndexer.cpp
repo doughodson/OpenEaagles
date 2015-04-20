@@ -45,7 +45,7 @@ AoAIndexer::AoAIndexer()
     aoaRedMin = 10;
     aoaYellowMax = -5;
     aoaYellowMin = -10;
-    aoaGreenMax = 10; 
+    aoaGreenMax = 10;
     aoaGreenMin = -5;
     selectSD.empty();
 }
@@ -57,7 +57,7 @@ void AoAIndexer::copyData(const AoAIndexer& org, const bool)
 {
     // copy base class stuff first
     BaseClass::copyData(org);
-    
+
     aoaState = org.aoaState;
     displayList = org.displayList;
     isDlist = org.isDlist;
@@ -65,7 +65,7 @@ void AoAIndexer::copyData(const AoAIndexer& org, const bool)
     aoaRedMin = org.aoaRedMin;
     aoaYellowMax = org.aoaYellowMax;
     aoaYellowMin = org.aoaYellowMin;
-    aoaGreenMax = org.aoaGreenMax; 
+    aoaGreenMax = org.aoaGreenMax;
     aoaGreenMin = org.aoaGreenMin;
     selectSD.empty();
 }
@@ -89,9 +89,9 @@ void AoAIndexer::drawFunc()
 {
     // if we have components, we are going to check for a ROTARY
     Basic::PairStream* subcomponents = getComponents();
-    if (subcomponents != 0) {
+    if (subcomponents != nullptr) {
       subcomponents->unref();
-      subcomponents = 0;
+      subcomponents = nullptr;
       return;
     }
 
@@ -99,7 +99,7 @@ void AoAIndexer::drawFunc()
     GLfloat lw = 0;
     glGetFloatv(GL_CURRENT_COLOR, &currentColor[0]);
     glGetFloatv(GL_LINE_WIDTH, &lw);
-    
+
     // check our state and draw accordingly
     if (aoaState == 1) {
         glPushMatrix();
@@ -138,8 +138,8 @@ void AoAIndexer::drawFunc()
                 glVertex2f(-0.25f, -0.025f);
                 glVertex2f(0.25f, -0.025f);
             glEnd();
-        glPopMatrix();  
-    
+        glPopMatrix();
+
         // we draw two semicircles that are almost touching
         glPushMatrix();
             glColor3f(0, 1, 0);
@@ -157,13 +157,13 @@ void AoAIndexer::drawFunc()
             gluQuadricDrawStyle(qobj2, GLU_SILHOUETTE);
             gluPartialDisk(qobj2, 0, 0.2, 1000, 1, 270, 180);
             gluDeleteQuadric(qobj2);
-        glPopMatrix();        
+        glPopMatrix();
     }
-    
+
     // if we haven't created our display list, do it now
     if (!isDlist) {
-        displayList = glGenLists(1);            
-        glNewList(displayList,GL_COMPILE);    
+        displayList = glGenLists(1);
+        glNewList(displayList,GL_COMPILE);
         // finally draw our outlines
         // top outline
         glPushMatrix();
@@ -188,7 +188,7 @@ void AoAIndexer::drawFunc()
                 glVertex2f(-0.25f, -0.025f);
                 glVertex2f(0.25f, -0.025f);
             glEnd();
-        glPopMatrix();  
+        glPopMatrix();
 
         // we draw two semicircles that are almost touching
         glPushMatrix();
@@ -207,7 +207,7 @@ void AoAIndexer::drawFunc()
             gluQuadricDrawStyle(qobj4, GLU_SILHOUETTE);
             gluPartialDisk(qobj4, 0, 0.2, 1000, 1, 270, 180);
             gluDeleteQuadric(qobj4);
-        glPopMatrix();    
+        glPopMatrix();
 
         // draw the bottom outline
         glPushMatrix();
@@ -228,7 +228,7 @@ void AoAIndexer::drawFunc()
         }
         // if we already have the display list, then call it
     else if (displayList > 0) glCallList(displayList);
-        
+
     glColor4fv(currentColor);
     glLineWidth(lw);
 }
@@ -241,9 +241,9 @@ void AoAIndexer::updateData(const LCreal dt)
 {
     // update our baseclass
     BaseClass::updateData(dt);
-    
+
     LCreal aoa = getInstValue();
-    
+
     // let's get our values
     //std::cout << "AOA RED MAX = " << aoaRedMax << std::endl;
     //std::cout << "AOA RED MIN = " << aoaRedMin << std::endl;
@@ -251,7 +251,7 @@ void AoAIndexer::updateData(const LCreal dt)
     //std::cout << "AOA YELLOW MIN = " << aoaYellowMin << std::endl;
     //std::cout << "AOA GREEN MAX = " << aoaGreenMax << std::endl;
     //std::cout << "AOA GREEN MIN = " << aoaGreenMin << std::endl;
-    
+
     // positive (red state)
     if (aoa >= aoaRedMin && aoa < aoaRedMax) aoaState = 1;
     // neutral (green state)
@@ -265,120 +265,120 @@ void AoAIndexer::updateData(const LCreal dt)
     if (aoaState == 0) x = 2;
     else if (aoaState == 1) x = 4;
     else if (aoaState == -1) x = 3;
-    
+
     // send our select down
     send("index", SELECT, x, selectSD);
-}   
+}
 
 // SLOT FUNCTIONS
 //------------------------------------------------------------------------------
-// setSlotAoaRedMax() 
+// setSlotAoaRedMax()
 //------------------------------------------------------------------------------
 bool AoAIndexer::setSlotAoaRedMax(const Basic::Number* const newRMax)
 {
     bool ok = false;
-    if (newRMax != 0) ok = setAoaRedMax(newRMax->getReal());
-    return ok; 
+    if (newRMax != nullptr) ok = setAoaRedMax(newRMax->getReal());
+    return ok;
 }
 //------------------------------------------------------------------------------
-// setSlotAoaRedMin() 
+// setSlotAoaRedMin()
 //------------------------------------------------------------------------------
 bool AoAIndexer::setSlotAoaRedMin(const Basic::Number* const newRMin)
 {
     bool ok = false;
-    if (newRMin != 0) ok = setAoaRedMin(newRMin->getReal());
-    return ok; 
+    if (newRMin != nullptr) ok = setAoaRedMin(newRMin->getReal());
+    return ok;
 }
 //------------------------------------------------------------------------------
-// setSlotAoaYellowMax() 
+// setSlotAoaYellowMax()
 //------------------------------------------------------------------------------
 bool AoAIndexer::setSlotAoaYellowMax(const Basic::Number* const newYMax)
 {
     bool ok = false;
-    if (newYMax != 0) ok = setAoaYellowMax(newYMax->getReal());
-    return ok; 
+    if (newYMax != nullptr) ok = setAoaYellowMax(newYMax->getReal());
+    return ok;
 }
 //------------------------------------------------------------------------------
-// setSlotAoaYellowMin() 
+// setSlotAoaYellowMin()
 //------------------------------------------------------------------------------
 bool AoAIndexer::setSlotAoaYellowMin(const Basic::Number* const newYMin)
 {
     bool ok = false;
-    if (newYMin != 0) ok = setAoaYellowMin(newYMin->getReal());
-    return ok; 
+    if (newYMin != nullptr) ok = setAoaYellowMin(newYMin->getReal());
+    return ok;
 }
 //------------------------------------------------------------------------------
-// setSlotAoaGreenMax() 
+// setSlotAoaGreenMax()
 //------------------------------------------------------------------------------
 bool AoAIndexer::setSlotAoaGreenMax(const Basic::Number* const newGMax)
 {
     bool ok = false;
-    if (newGMax != 0) ok = setAoaGreenMax(newGMax->getReal());
-    return ok; 
+    if (newGMax != nullptr) ok = setAoaGreenMax(newGMax->getReal());
+    return ok;
 }
 //------------------------------------------------------------------------------
-// setSlotAoaGreenMin() 
+// setSlotAoaGreenMin()
 //------------------------------------------------------------------------------
 bool AoAIndexer::setSlotAoaGreenMin(const Basic::Number* const newGMin)
 {
     bool ok = false;
-    if (newGMin != 0) ok = setAoaGreenMin(newGMin->getReal());
-    return ok; 
+    if (newGMin != nullptr) ok = setAoaGreenMin(newGMin->getReal());
+    return ok;
 }
 
 // SET functions
 //------------------------------------------------------------------------------
 // setAoaRedMin() - set min "red" value
 //------------------------------------------------------------------------------
-bool AoAIndexer::setAoaRedMin(const LCreal a) 
-{ 
-    aoaRedMin = a; 
-    return true; 
+bool AoAIndexer::setAoaRedMin(const LCreal a)
+{
+    aoaRedMin = a;
+    return true;
 }
 
 //------------------------------------------------------------------------------
 // setAoaRedMax() - set the max "red" value
 //------------------------------------------------------------------------------
-bool AoAIndexer::setAoaRedMax(const LCreal b) 
-{ 
-    aoaRedMax = b; 
-    return true; 
+bool AoAIndexer::setAoaRedMax(const LCreal b)
+{
+    aoaRedMax = b;
+    return true;
 }
 
 //------------------------------------------------------------------------------
 // setAoaYellowMin() - set "yellow" minimum
 //------------------------------------------------------------------------------
-bool AoAIndexer::setAoaYellowMin(const LCreal a) 
-{ 
-    aoaYellowMin = a; 
-    return true; 
+bool AoAIndexer::setAoaYellowMin(const LCreal a)
+{
+    aoaYellowMin = a;
+    return true;
 }
 
 //------------------------------------------------------------------------------
 // setAoaYellowMax() - set "yellow" max
 //------------------------------------------------------------------------------
-bool AoAIndexer::setAoaYellowMax(const LCreal b) 
-{ 
-    aoaYellowMax = b; 
-    return true; 
+bool AoAIndexer::setAoaYellowMax(const LCreal b)
+{
+    aoaYellowMax = b;
+    return true;
 }
 
 //------------------------------------------------------------------------------
 // setAoaGreenMin() - set "green" min
 //------------------------------------------------------------------------------
-bool AoAIndexer::setAoaGreenMin(const LCreal a) 
-{ 
-    aoaGreenMin = a; 
-    return true; 
+bool AoAIndexer::setAoaGreenMin(const LCreal a)
+{
+    aoaGreenMin = a;
+    return true;
 }
 
 //------------------------------------------------------------------------------
 // setAoaGreenMax() - set "green" max
 //------------------------------------------------------------------------------
-bool AoAIndexer::setAoaGreenMax(const LCreal b) 
-{ 
-    aoaGreenMax = b; 
-    return true; 
+bool AoAIndexer::setAoaGreenMax(const LCreal b)
+{
+    aoaGreenMax = b;
+    return true;
 }
 
 //------------------------------------------------------------------------------

@@ -36,7 +36,7 @@ TickMarks::TickMarks()
     quantity = 1;
     gaugeLength = 0;
     flip = false;
-    myGraphic = 0;
+    myGraphic = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -46,7 +46,7 @@ void TickMarks::copyData(const TickMarks& org, const bool cc)
 {
     BaseClass::copyData(org);
 
-    if (cc) myGraphic = 0;
+    if (cc) myGraphic = nullptr;
 
     setTickGraphic(org.myGraphic);
     lengthTM = org.lengthTM;
@@ -60,9 +60,9 @@ void TickMarks::copyData(const TickMarks& org, const bool cc)
 //------------------------------------------------------------------------------
 void TickMarks::deleteData()
 {
-    if (myGraphic != 0) {
+    if (myGraphic != nullptr) {
         myGraphic->unref();
-        myGraphic = 0;
+        myGraphic = nullptr;
     }
 }
 
@@ -84,7 +84,7 @@ void TickMarks::drawFunc()
         // if we are vertical, draw bottom to top, else draw left to right
         if (isVertical()) {
             for (int i = 0; i < quantity; i++) {
-               if (myGraphic == 0) {
+               if (myGraphic == nullptr) {
                     glBegin(GL_LINES);
                         glVertex2f(0, 0);
                         if (flip) lcVertex2(0, lengthTM);
@@ -102,7 +102,7 @@ void TickMarks::drawFunc()
         }
         else {
             for (int i = 0; i < quantity; i++) {
-               if (myGraphic == 0) {
+               if (myGraphic == nullptr) {
                     glBegin(GL_LINES);
                         glVertex2f(0, 0);
                         if (flip) lcVertex2(lengthTM, 0);
@@ -130,7 +130,7 @@ void TickMarks::drawFunc()
 bool TickMarks::setSlotTickMarkLength(const Basic::Number* const newLength)
 {
     bool ok = true;
-    if (newLength != 0) ok = setTickMarkLength(newLength->getReal());
+    if (newLength != nullptr) ok = setTickMarkLength(newLength->getReal());
     return ok;
 }
 //------------------------------------------------------------------------------
@@ -139,7 +139,7 @@ bool TickMarks::setSlotTickMarkLength(const Basic::Number* const newLength)
 bool TickMarks::setSlotQuantity(const Basic::Number* const newQ)
 {
     bool ok = true;
-    if (newQ != 0) ok = setQuantity(newQ->getInt());
+    if (newQ != nullptr) ok = setQuantity(newQ->getInt());
     return ok;
 }
 //------------------------------------------------------------------------------
@@ -148,7 +148,7 @@ bool TickMarks::setSlotQuantity(const Basic::Number* const newQ)
 bool TickMarks::setSlotGaugeLength(const Basic::Number* const newL)
 {
     bool ok = true;
-    if (newL != 0) ok = setGaugeLength(newL->getReal());
+    if (newL != nullptr) ok = setGaugeLength(newL->getReal());
     return ok;
 }
 //------------------------------------------------------------------------------
@@ -157,7 +157,7 @@ bool TickMarks::setSlotGaugeLength(const Basic::Number* const newL)
 bool TickMarks::setSlotFlip(const Basic::Number* const x)
 {
     bool ok = true;
-    if (x != 0) ok = setFlip(x->getBoolean());
+    if (x != nullptr) ok = setFlip(x->getBoolean());
     return ok;
 }
 //------------------------------------------------------------------------------
@@ -166,9 +166,9 @@ bool TickMarks::setSlotFlip(const Basic::Number* const x)
 bool TickMarks::setTickGraphic(const BasicGL::Graphic* const newGraphic)
 {
     bool ok = true;
-    if (myGraphic != 0) {
+    if (myGraphic != nullptr) {
         myGraphic->unref();
-        myGraphic = 0;
+        myGraphic = nullptr;
     }
     if (newGraphic != 0) {
         myGraphic = newGraphic->clone();

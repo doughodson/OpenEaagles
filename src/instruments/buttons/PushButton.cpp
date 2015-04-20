@@ -16,7 +16,7 @@ BEGIN_SLOTTABLE(PushButton)
 END_SLOTTABLE(PushButton)
 
 //------------------------------------------------------------------------------
-//  Map slot table to handles 
+//  Map slot table to handles
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(PushButton)
    ON_SLOT(1, setSlotFunction, Basic::Number)
@@ -70,7 +70,7 @@ EMPTY_DELETEDATA(PushButton)
 bool PushButton::setSlotFunction(const Basic::Number* const newFunction)
 {
    bool ok = false;
-   if (newFunction != 0) {
+   if (newFunction != nullptr) {
       ok = setFunction(newFunction->getBoolean());
    }
    return ok;
@@ -82,7 +82,7 @@ bool PushButton::setSlotFunction(const Basic::Number* const newFunction)
 bool PushButton::setSlotStartState(const Basic::Number* const newFunction)
 {
    bool ok = false;
-   if (newFunction != 0) {
+   if (newFunction != nullptr) {
       initState = newFunction->getBoolean();
       // set our current state initially
       currentState = initState;
@@ -93,11 +93,11 @@ bool PushButton::setSlotStartState(const Basic::Number* const newFunction)
 
 // Set functions
 //------------------------------------------------------------------------------
-// setFunction() - set our function type 
+// setFunction() - set our function type
 //------------------------------------------------------------------------------
 bool PushButton::setFunction(const bool x)
 {
-    functionType = x; 
+    functionType = x;
     return true;
 }
 
@@ -138,16 +138,16 @@ bool PushButton::onMouseDown()
 }
 
 //------------------------------------------------------------------------------
-// updateData() - 
+// updateData() -
 //------------------------------------------------------------------------------
 void PushButton::updateData(const LCreal dt)
 {
    BaseClass::updateData(dt);
-   
+
    //if (isMessageEnabled(MSG_DEBUG)) {
    //std::cout << "CURRENT STATE = " << currentState << std::endl;
    //}
-   
+
    send("buttons", SELECT, currentState, buttonStatusSD);
 }
 

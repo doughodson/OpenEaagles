@@ -35,7 +35,7 @@ EMPTY_DELETEDATA(GaugeSlider)
 // draw() -- draws the object(s)
 //------------------------------------------------------------------------------
 void GaugeSlider::draw()
-{   
+{
     sliderPos = getInstValue();
     bool vertical = isVertical();
     lcSaveMatrix();
@@ -43,8 +43,8 @@ void GaugeSlider::draw()
     else lcTranslate(sliderPos, 0);
 
         BaseClass::draw();
-    
-    lcRestoreMatrix();   
+
+    lcRestoreMatrix();
 }
 
 }  // end Instruments namespace

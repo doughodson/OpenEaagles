@@ -14,7 +14,7 @@
 
 #include <linux/joystick.h>
 
-#include "./UsbJoystickImp.h"
+#include "UsbJoystickImp.h"
 
 namespace Eaagles {
 namespace IoDevice {
@@ -142,7 +142,7 @@ void UsbJoystickImp::processInputs(const Eaagles::LCreal dt, Basic::IoData* cons
 {
    js_event js; // joystick event structure
 
-   // Loop reading joystick events .. 
+   // Loop reading joystick events ..
    while (true) {
 
       // read the next joystick event (if any)
@@ -171,7 +171,7 @@ void UsbJoystickImp::processInputs(const Eaagles::LCreal dt, Basic::IoData* cons
                 inData[n] = (js.value / 32767.0f);
             }
             break;
-         
+
       }
    }
 

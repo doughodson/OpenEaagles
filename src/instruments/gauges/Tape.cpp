@@ -104,7 +104,7 @@ EMPTY_DELETEDATA(Tape)
 bool Tape::setSlotRange(const Basic::Number* const x)
 {
     bool ok = false;
-    if (x != 0) ok = setRange(x->getInt());
+    if (x != nullptr) ok = setRange(x->getInt());
     return ok;
 }
 
@@ -114,7 +114,7 @@ bool Tape::setSlotRange(const Basic::Number* const x)
 bool Tape::setSlotHeight(const Basic::Number* const x)
 {
     bool ok = false;
-    if (x != 0) ok = setHeight(x->getReal());
+    if (x != nullptr) ok = setHeight(x->getReal());
     return ok;
 }
 
@@ -124,7 +124,7 @@ bool Tape::setSlotHeight(const Basic::Number* const x)
 bool Tape::setSlotIncrement(const Basic::Number* const x)
 {
     bool ok = false;
-    if (x != 0) ok = setIncrement(x->getInt());
+    if (x != nullptr) ok = setIncrement(x->getInt());
     return ok;
 }
 
@@ -134,7 +134,7 @@ bool Tape::setSlotIncrement(const Basic::Number* const x)
 bool Tape::setSlotVertical(const Basic::Number* const x)
 {
     bool ok = false;
-    if (x != 0) ok = setVertical(x->getBoolean());
+    if (x != nullptr) ok = setVertical(x->getBoolean());
     return ok;
 }
 
@@ -144,7 +144,7 @@ bool Tape::setSlotVertical(const Basic::Number* const x)
 bool Tape::setSlotMaxNum(const Basic::Number* const x)
 {
     bool ok = false;
-    if (x != 0) ok = setMaxNumber(x->getReal());
+    if (x != nullptr) ok = setMaxNumber(x->getReal());
     return ok;
 }
 
@@ -155,7 +155,7 @@ bool Tape::setSlotMaxNum(const Basic::Number* const x)
 bool Tape::setSlotMinNum(const Basic::Number* const x)
 {
     bool ok = false;
-    if (x != 0) ok = setMinNumber(x->getReal());
+    if (x != nullptr) ok = setMinNumber(x->getReal());
     return ok;
 }
 
@@ -165,7 +165,7 @@ bool Tape::setSlotMinNum(const Basic::Number* const x)
 bool Tape::setSlotConvert(const Basic::Number* const x)
 {
     bool ok = false;
-    if (x != 0) ok = setConvert(x->getBoolean());
+    if (x != nullptr) ok = setConvert(x->getBoolean());
     return ok;
 }
 
@@ -179,7 +179,6 @@ void Tape::updateData(const LCreal dt)
 
     // std::cout << "INSTRUMENT VALUE = " << getInstValue() << std::endl;
     LCreal x = getInstValue();
-
 
     // we take our range, add another for the 0, and then add 2 more for fillers
     int perRange = static_cast<int>(range / increment) + 3;

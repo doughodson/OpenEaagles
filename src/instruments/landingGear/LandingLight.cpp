@@ -10,7 +10,7 @@ EMPTY_SERIALIZER(LandingLight)
 
 BEGIN_SLOTTABLE(LandingLight)
     "lightRadius",          // 3 Radius of our light (if not components)
-END_SLOTTABLE(LandingLight)       
+END_SLOTTABLE(LandingLight)
 
 //------------------------------------------------------------------------------
 //  Map slot table to handles for LandingGear
@@ -25,7 +25,7 @@ END_SLOT_MAP()
 LandingLight::LandingLight()
 {
     STANDARD_CONSTRUCTOR()
-    lRadius = 0;    // default to 0, means don't use it...
+    lRadius = 0;             // default to 0, means don't use it...
     gearCurrent = 0;
     selSD.empty();
 }
@@ -37,7 +37,7 @@ void LandingLight::copyData(const LandingLight& org, const bool)
 {
     // copy base class stuff first
     BaseClass::copyData(org);
-     
+
     gearCurrent = org.gearCurrent;
     lRadius = org.lRadius;
     selSD.empty();
@@ -52,10 +52,10 @@ EMPTY_DELETEDATA(LandingLight)
 //------------------------------------------------------------------------------
 // setLightRadius() - how big is our light?
 //------------------------------------------------------------------------------
-bool LandingLight::setLightRadius(const LCreal newLR) 
-{ 
-    lRadius = newLR; 
-    return true; 
+bool LandingLight::setLightRadius(const LCreal newLR)
+{
+    lRadius = newLR;
+    return true;
 }
 
 
@@ -65,7 +65,7 @@ bool LandingLight::setLightRadius(const LCreal newLR)
 bool LandingLight::setSlotLightRadius(const Basic::Number* const newLR)
 {
     bool ok = false;
-    if (newLR != 0) ok = setLightRadius(newLR->getReal());
+    if (newLR != nullptr) ok = setLightRadius(newLR->getReal());
     return ok;
 }
 
@@ -74,20 +74,20 @@ bool LandingLight::setSlotLightRadius(const Basic::Number* const newLR)
 //------------------------------------------------------------------------------
 void LandingLight::drawFunc()
 {
-    // if the user specifies a light radius, then it will draw this way, 
+    // if the user specifies a light radius, then it will draw this way,
     if (lRadius == 0) return;
     GLfloat currentColor[4];
     GLfloat lw = 0;
     glGetFloatv(GL_CURRENT_COLOR, &currentColor[0]);
     glGetFloatv(GL_LINE_WIDTH, &lw);
-    
+
     // all we need is the gear up value, and we can toggle accordingly
     LCreal gearUpVal = getGearUpValue();
     LCreal gearDownVal = getGearDownValue();
     LCreal lastC = gearCurrent;
     gearCurrent = getInstValue();
-    
-    glPushMatrix();    
+
+    glPushMatrix();
         // determine which way we are going
         if (lastC >= gearCurrent) {
             // going towards the up position (getting closer to 0)
@@ -99,9 +99,9 @@ void LandingLight::drawFunc()
             if (gearCurrent >= gearDownVal) glColor3f(0, 1, 0);
             else glColor3f(0, 0, 0);
         }
-        
+
         GLUquadricObj *qobj = gluNewQuadric();
-        gluDisk( qobj, 0,  lRadius, 1000, 1);
+        gluDisk(qobj, 0,  lRadius, 1000, 1);
         gluDeleteQuadric(qobj);
     glPopMatrix();
 
@@ -115,12 +115,12 @@ void LandingLight::drawFunc()
 void LandingLight::updateData(const LCreal dt)
 {
     BaseClass::updateData(dt);
-    
+
     LCreal gearUpVal = getGearUpValue();
     LCreal gearDownVal = getGearDownValue();
     LCreal lastC = gearCurrent;
     gearCurrent = getInstValue();
-    
+
     int x = 0;
     // determine which way we are going
     if (lastC >= gearCurrent) {

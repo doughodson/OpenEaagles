@@ -16,7 +16,7 @@ BEGIN_SLOTTABLE(Switch)
 END_SLOTTABLE(Switch)
 
 //------------------------------------------------------------------------------
-//  Map slot table to handles 
+//  Map slot table to handles
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(Switch)
    ON_SLOT(1, setSlotNumSelections, Basic::Number)
@@ -57,7 +57,7 @@ EMPTY_DELETEDATA(Switch)
 bool Switch::setSlotNumSelections(const Basic::Number* const msg)
 {
     bool ok = false;
-    if (msg != 0) ok = setNumSelections(msg->getInt());
+    if (msg != nullptr) ok = setNumSelections(msg->getInt());
     return ok;
 }
 
@@ -67,13 +67,13 @@ bool Switch::setSlotNumSelections(const Basic::Number* const msg)
 bool Switch::setSlotCurrentState(const Basic::Number* const msg)
 {
     bool ok = false;
-    if (msg != 0) ok = setCurrentState(msg->getInt());
+    if (msg != nullptr) ok = setCurrentState(msg->getInt());
     return ok;
 }
 
 // SET FUNCTIONS
 //------------------------------------------------------------------------------
-// setNumSelections() - 
+// setNumSelections() -
 //------------------------------------------------------------------------------
 bool Switch::setNumSelections(const int x)
 {
@@ -82,13 +82,13 @@ bool Switch::setNumSelections(const int x)
 }
 
 //------------------------------------------------------------------------------
-// setCurrentState() - 
+// setCurrentState() -
 //------------------------------------------------------------------------------
 bool Switch::setCurrentState(const int x)
 {
     if (x <= numSelections) currentState = x;
     else currentState = numSelections;
-    return true; 
+    return true;
 }
 
 //------------------------------------------------------------------------------
@@ -102,12 +102,12 @@ bool Switch::onSingleClick()
 }
 
 //------------------------------------------------------------------------------
-// updateData() 
+// updateData()
 //------------------------------------------------------------------------------
 void Switch::updateData(const LCreal dt)
 {
     BaseClass::updateData(dt);
-    
+
     send("switch", SELECT, currentState, currentStateSD);
 }
 
