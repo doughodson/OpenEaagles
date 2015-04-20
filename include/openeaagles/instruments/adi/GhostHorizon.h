@@ -17,7 +17,6 @@ class GhostHorizon : public Adi {
 public:
     GhostHorizon();
 
-    // Set functions
     virtual bool setWidth(const LCreal x)           { width = x; return true; }
     virtual bool setHeight(const LCreal x)          { height = x; return true; }
 

@@ -285,7 +285,7 @@ void Teapot::drawFunc()
 bool Sphere::setSlotStacks(const Basic::Number* const x)
 {
     bool ok = false;
-    if (x != 0) ok = setStacks(x->getInt()); 
+    if (x != nullptr) ok = setStacks(x->getInt());
     return ok;
 }
 //------------------------------------------------------------------------------
@@ -294,7 +294,7 @@ bool Sphere::setSlotStacks(const Basic::Number* const x)
 bool Cylinder::setSlotTopRadius(const Basic::Number* const x)
 {
     bool ok = false;
-    if (x != 0) ok = setTopRadius(x->getReal()); 
+    if (x != nullptr) ok = setTopRadius(x->getReal());
     return ok;
 }
 //------------------------------------------------------------------------------
@@ -303,27 +303,27 @@ bool Cylinder::setSlotTopRadius(const Basic::Number* const x)
 bool Cylinder::setSlotHeight(const Basic::Number* const x)
 {
     bool ok = false;
-    if (x != 0) ok = setHeight(x->getReal()); 
+    if (x != nullptr) ok = setHeight(x->getReal());
     return ok;
 }
- 
+
 //------------------------------------------------------------------------------
 //  setSlotSize() -- for Cube
 //------------------------------------------------------------------------------
 bool Cube::setSlotSize(const Basic::Number* const x)
 {
     bool ok = false;
-    if (x != 0) ok = setSize(x->getReal()); 
+    if (x != nullptr) ok = setSize(x->getReal());
     return ok;
 }
- 
+
 //------------------------------------------------------------------------------
 //  setSlotOuterRadius() -- for Torus
 //------------------------------------------------------------------------------
 bool Torus::setSlotOuterRadius(const Basic::Number* const x)
 {
     bool ok = false;
-    if (x != 0) ok = setOuterRadius(x->getReal()); 
+    if (x != nullptr) ok = setOuterRadius(x->getReal());
     return ok;
 }
 
@@ -418,7 +418,7 @@ std::ostream& Torus::serialize(std::ostream& sout, const int i, const bool slots
 }
 
 //------------------------------------------------------------------------------
-// getSlotByIndex() 
+// getSlotByIndex()
 //------------------------------------------------------------------------------
 Basic::Object* Sphere::getSlotByIndex(const int si)
 {

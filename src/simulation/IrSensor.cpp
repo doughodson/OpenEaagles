@@ -43,7 +43,7 @@ BEGIN_SLOTTABLE(IrSensor)
    "sensorType",        // 6: Sensor Type                  (Contrast, Hot Spot)
    //"FOR",             // 7: Field of Regard
    //"azimuthBin",      // 7: azimuthBin
-   //"elevationBin",    // 8: elevationBin 
+   //"elevationBin",    // 8: elevationBin
    "maximumRange",      // 7: Maximum Range
    "trackManagerName",  // 8: Name of the requested Track Manager (Basic::String)
 END_SLOTTABLE(IrSensor)
@@ -312,25 +312,25 @@ bool IrSensor::calculateIrQueryReturn(IrQueryMsg* const msg)
       // attenuatedPower is irradiance, in watts/m^2
       LCreal attenuatedPower = totalSignal / rangeSquared;
 
-      // signalAboveNoise is the signal that the detector sees minus what it would see with 
+      // signalAboveNoise is the signal that the detector sees minus what it would see with
       // only the background radiation, and is just the amount of power subtracted by how much
-      // background power is being blocked. 
+      // background power is being blocked.
       // = (attenuatedPower + totalBackground*ifov - noiseBlockedByTarget) - totalBackground*ifov
       // signalAboveNoise is irradiance, in watts/m^2
 
       LCreal signalAboveNoise = attenuatedPower - noiseBlockedByTarget;
 
-      // only Contrast seekers take absolute value in this equation. 
-      // Hotspot does not. 
-      
+      // only Contrast seekers take absolute value in this equation.
+      // Hotspot does not.
+
       if (signalAboveNoise < 0.0f &&
-               (msg->getSendingSensor()->getSensorType() == IrSensor::CONTRAST)) {  
+               (msg->getSendingSensor()->getSensorType() == IrSensor::CONTRAST)) {
          signalAboveNoise = -signalAboveNoise;
       }
 
       LCreal nei = msg->getNEI();
 
-      // Determine the ratio between the signal above the noise as compared to the level of 
+      // Determine the ratio between the signal above the noise as compared to the level of
       // radiation that would create a response at the same level as the sensor's internal noise.
       // if NEI is in watts/m^2, then SNR will be dimensionless.
       // if NEI is in watts/cm^2, then need to correct by 10^4.
@@ -341,12 +341,12 @@ bool IrSensor::calculateIrQueryReturn(IrQueryMsg* const msg)
 
       // allow all signals to be returned; threshold test will be applied in process()
       {
-         IrQueryMsg* outMsg = new IrQueryMsg(); 
-         outMsg->setTarget(msg->getTarget()); 
+         IrQueryMsg* outMsg = new IrQueryMsg();
+         outMsg->setTarget(msg->getTarget());
          outMsg->setGimbalAzimuth( LCreal(msg->getGimbal()->getAzimuth()) );
          outMsg->setGimbalElevation( LCreal(msg->getGimbal()->getElevation()) );
-         outMsg->setAzimuthAoi(msg->getAzimuthAoi()); 
-         outMsg->setElevationAoi(msg->getElevationAoi()); 
+         outMsg->setAzimuthAoi(msg->getAzimuthAoi());
+         outMsg->setElevationAoi(msg->getElevationAoi());
 
          osg::Vec3 los = msg->getLosVec();
 
@@ -361,20 +361,20 @@ bool IrSensor::calculateIrQueryReturn(IrQueryMsg* const msg)
             outMsg->setRelativeElevation(el);
          }
 
-         outMsg->setLosVec(msg->getLosVec()); 
+         outMsg->setLosVec(msg->getLosVec());
          outMsg->setTgtLosVec( -msg->getLosVec() );
          outMsg->setPosVec(msg->getTarget()->getPosition());
          outMsg->setVelocityVec(msg->getTarget()->getVelocity());
          outMsg->setAccelVec(msg->getTarget()->getAcceleration());
 
-         LCreal angleAspect1 = outMsg->getPosVec().y() * 
-                                 outMsg->getVelocityVec().x() - 
+         LCreal angleAspect1 = outMsg->getPosVec().y() *
+                                 outMsg->getVelocityVec().x() -
                                  outMsg->getPosVec().x() *
                                  outMsg->getVelocityVec().y();
 
-         LCreal angleAspect2 = outMsg->getPosVec().x() * 
-                                 outMsg->getVelocityVec().x() + 
-                                 outMsg->getPosVec().y() * 
+         LCreal angleAspect2 = outMsg->getPosVec().x() *
+                                 outMsg->getVelocityVec().x() +
+                                 outMsg->getPosVec().y() *
                                  outMsg->getVelocityVec().y();
 
          outMsg->setAngleAspect(lcAtan2(-angleAspect1,angleAspect2));
@@ -411,13 +411,13 @@ void IrSensor::process(const LCreal dt)
    int numRecords = storedMessagesQueue.entries();
    if (numRecords > 0) {
       AngleOnlyTrackManager* tm = static_cast<AngleOnlyTrackManager*>(getTrackManager());
-      if (tm) { 
+      if (tm) {
          lcLock(storedMessagesLock);
          numRecords = storedMessagesQueue.entries();
 
          // Send on all messages EXCEPT those with signal below threshold and those merged
          // into another signal. Those will simply be ignored and unreferenced.
- 
+
          for (int i=0; i < numRecords; i++) {
             IrQueryMsg* msg = storedMessagesQueue.get();
             if (msg->getQueryMergeStatus() != IrQueryMsg::MERGED_OUT) {
@@ -445,7 +445,7 @@ bool IrSensor::setLowerWavelength(const LCreal w)
       ok = true;
    }
    return ok;
-   
+
 }
 
 // setUpperWavelength() - Sets the upper wavelength (microns; must be greater than 0)
@@ -471,7 +471,7 @@ bool IrSensor::setNEI(const LCreal n)
 }
 
 // setThreshold() - Sets the Signal to Noise Threshold
-bool IrSensor::setThreshold(const LCreal t) 
+bool IrSensor::setThreshold(const LCreal t)
 {
    bool ok = false;
    if (t >= 0) {
@@ -482,8 +482,8 @@ bool IrSensor::setThreshold(const LCreal t)
 }
 
 // setIFOV() - Sets the Instantaneous Field of View  (steradians)
-// also sets ifovTheta (radians) -- planar angle. 
-// FAB - solid angle = 2 * pi * (1-cos(theta/2)) -- formula below actually returns ifovtheta/2
+// also sets ifovTheta (radians) -- planar angle.
+// FAB - solid angle = 2 * pi * (1-std::cos(theta/2)) -- formula below actually returns ifovtheta/2
 //   - but all IR code that references ifovtheta actually wants ifovtheta/2 anyway
 bool IrSensor::setIFOV(const LCreal i)
 {
@@ -491,7 +491,7 @@ bool IrSensor::setIFOV(const LCreal i)
    if (i >= 0) {
       ifov = i;
       //calculate planar angle and set it as well.
-      ifovTheta =  static_cast<LCreal>(std::acos ((1 - (ifov / (2.0 * PI))))); 
+      ifovTheta =  static_cast<LCreal>(std::acos ((1 - (ifov / (2.0 * PI)))));
       ok = true;
    }
    return ok;
@@ -506,7 +506,7 @@ bool IrSensor::setSensorType(const SensorType st)
 }
 
 // setFieldOfRegard() - Sets the Instantaneous Field of View  (steradians)
-// FAB - solid angle = 2 * pi * (1-cos(theta/2)) -- formula below actually returns fieldOfRegardTheta/2
+// FAB - solid angle = 2 * pi * (1-std::cos(theta/2)) -- formula below actually returns fieldOfRegardTheta/2
 //     - but all IR code that references fieldOfRegardTheta actually wants fieldOfRegardTheta/2 anyway
 //bool IrSensor::setFieldOfRegard(const LCreal fov)
 //{
@@ -514,20 +514,20 @@ bool IrSensor::setSensorType(const SensorType st)
 //   if (fov > 0) {
 //      fieldOfRegard = fov;
 //      //calculate planar angle and set it as well.
-//      fieldOfRegardTheta =  (LCreal) acos ((1 - (fieldOfRegard / (2.0 * PI)))); 
+//      fieldOfRegardTheta =  (LCreal) acos ((1 - (fieldOfRegard / (2.0 * PI))));
 //      ok = true;
 //   }
 //   return ok;
 //}
 
-//// setAzimuthBin() - Sets the lower Azimuth Bin 
+//// setAzimuthBin() - Sets the lower Azimuth Bin
 //bool IrSensor::setAzimuthBin(const LCreal w)
 //{
 //   azimuthBin = w;
 //   return true;
 //}
 //
-//// setElevationBin() - Sets the lower Elevation Bin 
+//// setElevationBin() - Sets the lower Elevation Bin
 //bool IrSensor::setElevationBin(const LCreal w)
 //{
 //   elevationBin = w;
@@ -537,7 +537,7 @@ bool IrSensor::setSensorType(const SensorType st)
 //bool IrSensor::setSlotAzimuthBin(const Basic::Number* const msg)
 //{
 //   LCreal value = 0.0f;
-// 
+//
 //   const Basic::Angle* a = dynamic_cast<const Basic::Angle*>(msg);
 //   if (a != 0) {
 //       Basic::Radians r;
@@ -561,7 +561,7 @@ bool IrSensor::setMaximumRange(const LCreal w)
 bool IrSensor::setSlotMaximumRange(const Basic::Number* const msg)
 {
    LCreal value = 0.0f;
- 
+
    const Basic::Distance* d = dynamic_cast<const Basic::Distance*>(msg);
    if (d != 0) {
        Basic::Meters m;
@@ -578,7 +578,7 @@ bool IrSensor::setSlotMaximumRange(const Basic::Number* const msg)
 //bool IrSensor::setSlotElevationBin(const Basic::Number* const msg)
 //{
 //   LCreal value = 0.0f;
-// 
+//
 //   const Basic::Angle* a = dynamic_cast<const Basic::Angle*>(msg);
 //   if (a != 0) {
 //       Basic::Radians r;
@@ -622,7 +622,7 @@ bool IrSensor::setSlotUpperWavelength(const Basic::Number* const msg)
 {
    bool ok = false;
    LCreal value = 0.0f;
- 
+
    const Basic::Distance* d = dynamic_cast<const Basic::Distance*>(msg);
    if (d != 0) {
        Basic::MicroMeters mm;
@@ -796,7 +796,7 @@ IrQueryMsg* IrSensor::getStoredMessage()
 }
 
 //------------------------------------------------------------------------------
-// peekStoredMessage() -- Return the ith stored object but do NOT remove it. 
+// peekStoredMessage() -- Return the ith stored object but do NOT remove it.
 //------------------------------------------------------------------------------
 IrQueryMsg* IrSensor::peekStoredMessage(unsigned int i)
 {

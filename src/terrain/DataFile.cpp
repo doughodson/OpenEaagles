@@ -3,6 +3,7 @@
 #include <string>
 #include <stdlib.h>
 #include <iomanip>
+#include <cmath>
 
 #include "openeaagles/terrain/DataFile.h"
 #include "openeaagles/basic/NetHandler.h"   // for byte-swapping only
@@ -29,7 +30,7 @@ DataFile::DataFile()
    lonSpacing = 0;
    nptlat = 0;
    nptlong = 0;
-   voidValue = -32767; // default void (missing) elevation value 
+   voidValue = -32767; // default void (missing) elevation value
 }
 
 //------------------------------------------------------------------------------
@@ -178,10 +179,10 @@ unsigned int DataFile::getElevations(
    // Spacing between points (in each direction)
    double deltaPoint = maxRng / (n - 1);
    double dirR = direction * Basic::Angle::D2RCC;
-   double deltaNorth = deltaPoint * cos(dirR) * Basic::Distance::M2NM;  // (NM)
-   double deltaEast  = deltaPoint * sin(dirR) * Basic::Distance::M2NM;
+   double deltaNorth = deltaPoint * std::cos(dirR) * Basic::Distance::M2NM;  // (NM)
+   double deltaEast  = deltaPoint * std::sin(dirR) * Basic::Distance::M2NM;
    double deltaLat = deltaNorth/60.0;
-   double deltaLon = deltaEast/(60.0 * cos(lat * Basic::Angle::D2RCC));
+   double deltaLon = deltaEast/(60.0 * std::cos(lat * Basic::Angle::D2RCC));
    double deltaPointsLat = deltaLat / latSpacing;
    double deltaPointsLon = deltaLon / lonSpacing;
 
@@ -271,7 +272,7 @@ bool DataFile::getElevation(
 {
    LCreal value = 0;          // the elevation (meters)
 
-   // Early out tests 
+   // Early out tests
    if ( !isDataLoaded() ||          // Not loaded or
         (lat < getLatitudeSW()  ||
          lat > getLatitudeNE()) ||  // wrong latitude or
@@ -285,7 +286,7 @@ bool DataFile::getElevation(
    // ---
 
    double pointsLat = (lat - getLatitudeSW()) / latSpacing;
-   if (pointsLat < 0) pointsLat = 0; 
+   if (pointsLat < 0) pointsLat = 0;
 
    double pointsLon = (lon - getLongitudeSW()) / lonSpacing;
    if (pointsLon < 0) pointsLon = 0;
@@ -349,7 +350,7 @@ bool DataFile::getElevation(
 //------------------------------------------------------------------------------
 bool DataFile::computerRowIndex(unsigned int* const irow, const double lat) const
 {
-   // Early out tests 
+   // Early out tests
    if (  (lat < getLatitudeSW() ||
           lat > getLatitudeNE()) ||    // the latitude's out of range, or
          (irow == 0) ||                // the 'irow' pointer wasn't provided, or
@@ -358,7 +359,7 @@ bool DataFile::computerRowIndex(unsigned int* const irow, const double lat) cons
 
    // Locate row (latitude) index
    double points = (lat - getLatitudeSW()) / latSpacing;
-   if (points < 0) points = 0; 
+   if (points < 0) points = 0;
 
    unsigned int idx = static_cast<unsigned int>(points + 0.5);
    if (idx >= nptlat) idx = (nptlat-1);
@@ -373,7 +374,7 @@ bool DataFile::computerRowIndex(unsigned int* const irow, const double lat) cons
 //------------------------------------------------------------------------------
 bool DataFile::computeColumnIndex(unsigned int* const icol, const double lon) const
 {
-   // Early out tests 
+   // Early out tests
    if (  (lon < getLongitudeSW() ||
           lon > getLongitudeNE()) ||       // the longitude's out of range, or
          (icol == 0) ||                   // the 'icol' pointer wasn't provided, or

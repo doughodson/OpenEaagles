@@ -42,7 +42,7 @@ public:
 
    char filterInputEvent(const int event, const int tc) override;
    bool isValidInputPosition(const int tc) override;
-   bool event(const int key, Basic::Object* const obj = 0) override;
+   bool event(const int key, Basic::Object* const obj = nullptr) override;
 
    virtual bool setTextString(const Basic::String* const stsobj);
    virtual bool setTextList(const Basic::List* const stlobj);
@@ -136,7 +136,7 @@ public:
    double getInputValue() const override;
    bool isInputValueValid() const override;
    char filterInputEvent(const int event, const int tc) override;
-   bool event(const int key, Basic::Object* const obj = 0) override;
+   bool event(const int key, Basic::Object* const obj = nullptr) override;
    void updateData(const LCreal dt = 0.0) override;
 
    //event handler macro functions
@@ -430,7 +430,7 @@ class Rotary2 : public Rotary {
 
 public:
    Rotary2();
-   bool event(const int key, Basic::Object* const obj = 0) override;
+   bool event(const int key, Basic::Object* const obj = nullptr) override;
    //macro function for event handler
    virtual bool onSelect(const Basic::Number* const osobj);
 };

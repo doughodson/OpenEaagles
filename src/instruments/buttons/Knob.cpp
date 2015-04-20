@@ -45,7 +45,7 @@ END_EVENT_HANDLER()
 Knob::Knob()
 {
     STANDARD_CONSTRUCTOR()
-    table = 0;
+    table = nullptr;
     value = 0;
     startX = 0;
     startY = 0;
@@ -68,7 +68,7 @@ void Knob::copyData(const Knob& org, const bool cc)
 {
     BaseClass::copyData(org);
 
-    if (cc) table = 0;
+    if (cc) table = nullptr;
 
     setSlotValueTable(org.table);
 
@@ -88,7 +88,7 @@ void Knob::copyData(const Knob& org, const bool cc)
 //------------------------------------------------------------------------------
 void Knob::deleteData()
 {
-    setSlotValueTable(0);
+    setSlotValueTable(nullptr);
 }
 
 //------------------------------------------------------------------------------
@@ -96,9 +96,9 @@ void Knob::deleteData()
 //------------------------------------------------------------------------------
 bool Knob::setSlotValueTable(Basic::Table1* const x)
 {
-    if (table != 0) table->unref();
-    table = 0;
-    if (x != 0) {
+    if (table != nullptr) table->unref();
+    table = nullptr;
+    if (x != nullptr) {
         table = x;
         table->ref();
     }
@@ -111,7 +111,7 @@ bool Knob::setSlotValueTable(Basic::Table1* const x)
 bool Knob::setSlotEndless(const Basic::Number* const x)
 {
     bool ok = false;
-    if (x != 0) ok = setEndless(x->getBoolean());
+    if (x != nullptr) ok = setEndless(x->getBoolean());
     return ok;
 }
 
@@ -121,7 +121,7 @@ bool Knob::setSlotEndless(const Basic::Number* const x)
 bool Knob::setSlotEndlessStart(const Basic::Number* const x)
 {
     bool ok = false;
-    if (x != 0) ok = setEndlessStart(x->getReal());
+    if (x != nullptr) ok = setEndlessStart(x->getReal());
     return ok;
 }
 
@@ -131,7 +131,7 @@ bool Knob::setSlotEndlessStart(const Basic::Number* const x)
 bool Knob::setSlotEndlessLimit(const Basic::Number* const x)
 {
     bool ok = false;
-    if (x != 0) ok = setEndlessLimit(x->getReal());
+    if (x != nullptr) ok = setEndlessLimit(x->getReal());
     return ok;
 }
 
@@ -175,7 +175,7 @@ void Knob::drawFunc()
 bool Knob::onMotion()
 {
     computeRotation();
-    if (getDisplay() != 0) {
+    if (getDisplay() != nullptr) {
         getDisplay()->buttonEvent(getEventId());
     }
     return true;
@@ -198,7 +198,7 @@ void Knob::computeRotation()
 {
     BasicGL::Display* myDisplay = (BasicGL::Display*)findContainerByType(typeid(BasicGL::Display));
     // compute the rotation amout based on the start X,Y and our current X,Y
-    if (myDisplay != 0) {
+    if (myDisplay != nullptr) {
 
         // get our end position
         int curX = 0, curY = 0;
@@ -210,8 +210,12 @@ void Knob::computeRotation()
         lastAngle = angle;
         //std::cout << "START X , Y = " << startX << ", " << startY << std::endl;
         //std::cout << "POSITION X, Y = " << posMoveX << ", " << posMoveY << std::endl;
-        if (myDisplay->getDisplayOrientation() == BasicGL::Display::CCW90) angle = atan2f((float)posMoveX, (float)(posMoveY));
-        else angle = atan2f((float)posMoveY, (float)-(posMoveX));
+        if (myDisplay->getDisplayOrientation() == BasicGL::Display::CCW90) {
+           angle = atan2f(static_cast<float>(posMoveX), static_cast<float>(posMoveY));
+        }
+        else {
+           angle = atan2f(static_cast<float>(posMoveY), static_cast<float>(-posMoveX));
+        }
 
         angle *= static_cast<LCreal>(Basic::Angle::R2DCC);
 
@@ -249,7 +253,7 @@ void Knob::computeRotation()
             }
         }
 
-        if (table != 0) {
+        if (table != nullptr) {
             LCreal maxX = table->getMaxX();
             LCreal minX = table->getMinX();
             LCreal x = running + startAngle;

@@ -332,7 +332,7 @@ public:  // Public section
    static void limitVec(osg::Vec2d& vec, const osg::Vec2d& ll, const osg::Vec2d& ul);
    static void limitVec(osg::Vec3d& vec, const osg::Vec3d& ll, const osg::Vec3d& ul);
 
-   bool event(const int event, Basic::Object* const obj = 0) override;
+   bool event(const int event, Basic::Object* const obj = nullptr) override;
    void reset() override;
 
 protected:

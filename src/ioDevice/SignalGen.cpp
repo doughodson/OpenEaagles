@@ -8,6 +8,8 @@
 #include "openeaagles/basic/units/Angles.h"
 #include "openeaagles/basic/units/Frequencies.h"
 
+#include <cmath>
+
 namespace Eaagles {
 namespace IoDevice {
 
@@ -197,11 +199,11 @@ LCreal SignalGen::calc(const LCreal dt)
 
    switch (signal) {
       case SINE : {
-         value = sin(beta);
+         value = std::sin(beta);
          break;
       }
       case COSINE : {
-         value = cos(beta);
+         value = std::cos(beta);
          break;
       }
       case SQUARE : {

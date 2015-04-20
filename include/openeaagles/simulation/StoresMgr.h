@@ -127,7 +127,7 @@ public:
    virtual bool onTriggerSwEvent(const Basic::Boolean* const sw = 0);
    virtual bool onWpnReload();
 
-   bool event(const int event, Basic::Object* const obj = 0) override;
+   bool event(const int event, Basic::Object* const obj = nullptr) override;
 
 protected:
    bool setSlotStores(const Basic::PairStream* const msg) override;

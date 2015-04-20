@@ -28,13 +28,11 @@ class BearingPointer : public CompassRose
 public:
     BearingPointer();
 
-    // get function
     LCreal getBearingRad() const { return bearing; } // radians
     LCreal getBearingDeg() const { return bearing * static_cast<LCreal>(Basic::Angle::R2DCC); }    // degrees
     BasicGL::Graphic* getHeadGraphic() const { return head; }
     BasicGL::Graphic* getTailGraphic() const { return tail; }
 
-    // Set functions
     bool setBearingRad(const LCreal newB);             // radians
     bool setBearingDeg(const LCreal newB);             // degrees
 
@@ -42,7 +40,7 @@ public:
     void draw() override;
 
     void updateData(const LCreal dt = 0) override;
-    bool event(const int key, Basic::Object* const obj = 0) override;
+    bool event(const int key, Basic::Object* const obj = nullptr) override;
 
 protected:
     // slot functions

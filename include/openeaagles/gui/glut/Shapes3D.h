@@ -37,9 +37,7 @@ public:
 
     void drawFunc() override;
 
-    // set
     virtual bool setStacks(const int x)       { stacks = x; return true; }
-    // get
     int getStacks()                           { return stacks; }
 
 protected:
@@ -65,12 +63,10 @@ public:
     Cylinder();
     void drawFunc() override;
 
-    // set
-    virtual bool setTopRadius(const LCreal x) { topRadius = x; return true; }
-    virtual bool setHeight(const LCreal x)    { height = x; return true; }
-    // get
-    LCreal getTopRadius()   { return topRadius; }
-    LCreal getHeight()      { return height; }
+    virtual bool setTopRadius(const LCreal x)   { topRadius = x; return true; }
+    virtual bool setHeight(const LCreal x)      { height = x; return true; }
+    LCreal getTopRadius()                       { return topRadius; }
+    LCreal getHeight()                          { return height; }
 
 protected:
     bool setSlotTopRadius(const Basic::Number* const x);
@@ -111,10 +107,8 @@ public:
     Cube();
     void drawFunc() override;
 
-    // set
-    virtual bool setSize(const LCreal x) { size = x; return true; }
-    // get
-    LCreal getSize()    { return size; }
+    virtual bool setSize(const LCreal x)   { size = x; return true; }
+    LCreal getSize()                       { return size; }
 
 protected:
     bool setSlotSize(const Basic::Number* const srobj);
@@ -139,10 +133,8 @@ public:
     Torus();
     void drawFunc() override;
 
-    // set
-    virtual bool setOuterRadius(const LCreal x) { oRadius = x; return true; }
-    // get
-    LCreal getOuterRadius() { return oRadius; }
+    virtual bool setOuterRadius(const LCreal x)    { oRadius = x; return true; }
+    LCreal getOuterRadius()                        { return oRadius; }
 
 protected:
     bool setSlotOuterRadius(const Basic::Number* const x);

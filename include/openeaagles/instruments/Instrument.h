@@ -29,16 +29,16 @@ public:
     Instrument();
 
     // get functions
-    const Basic::Table1* getScalingTable() const { return myTable; }
-    LCreal  getInstValue() const          { return instVal; }
-    LCreal  getPreScaleInstValue() const  { return preScaleInstVal; }
-    bool isPassingAllowed() const         { return allowPassing; }
+    const Basic::Table1* getScalingTable() const    { return myTable; }
+    LCreal  getInstValue() const                    { return instVal; }
+    LCreal  getPreScaleInstValue() const            { return preScaleInstVal; }
+    bool isPassingAllowed() const                   { return allowPassing; }
 
     // set functions
     virtual bool setAllowValPass(const bool newVP);
     virtual bool setInstVal(const LCreal newPos);
 
-    bool event(const int event, Basic::Object* const obj = 0) override;
+    bool event(const int event, Basic::Object* const obj = nullptr) override;
     void updateData(const LCreal dt = 0.0) override;
 
 protected:

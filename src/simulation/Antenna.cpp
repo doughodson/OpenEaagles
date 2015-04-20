@@ -15,6 +15,8 @@
 #include "openeaagles/basic/units/Distances.h"
 #include "openeaagles/basic/units/Powers.h"
 
+#include <cmath>
+
 namespace Eaagles {
 namespace Simulation {
 
@@ -700,7 +702,7 @@ bool Antenna::onRfEmissionEvent(Emission* const em)
                   // ---
 
                   // Compute angle off antenna boresight
-                  double aar = acos(losA.x());
+                  double aar = std::acos(losA.x());
 
                   // Lookup gain in 1D table and convert from dB
                   if (gainPatternDeg)
@@ -712,7 +714,7 @@ bool Antenna::onRfEmissionEvent(Emission* const em)
          }
 
          // Compute off-boresight gain
-         double rGain = pow(10.0,rGainDb/10.0);
+         double rGain = std::pow(10.0,rGainDb/10.0);
 
          // Compute Antenna Effective Gain
          double aeGain = rGain * getGain();

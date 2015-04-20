@@ -578,7 +578,7 @@ bool CadrgMap::isValidFrame(const int row, const int column, TexturePager* tp)
 //------------------------------------------------------------------------------
 // latLonToTileRowColumn() - Takes in a given lat/lon, and based on that,
 // finds the closest tile in the map file to that lat/lon.  It also sets our
-// origin row (in (float) pixels) so we know the exact location of the lat/lon,
+// origin row (in float pixels) so we know the exact location of the lat/lon,
 // for calculating pixel offset later.  This also sets our initial origin row
 // and origin column.
 //------------------------------------------------------------------------------
@@ -626,8 +626,8 @@ void CadrgMap::latLonToPixelRowColumn(const double lat, const double lon, float 
     double deltaLat = nwLat - lat;
     double deltaLon = lon - nwLon;
 
-    if (vInt != 0) originRow = (float)(deltaLat / vInt);
-    if (hInt != 0) originCol = (float)(deltaLon / hInt);
+    if (vInt != 0) originRow = static_cast<float>(deltaLat / vInt);
+    if (hInt != 0) originCol = static_cast<float>(deltaLon / hInt);
 }
 
 // ------------------------------------------------------------------------

@@ -25,7 +25,6 @@ class AnalogDial : public Instrument
 public:
     AnalogDial();
 
-    // set functions
     virtual bool setOriginAngle(const LCreal na);
     virtual bool setSweepAngle(const LCreal newSweepAngle);
     virtual bool setRadius(const LCreal newR);
@@ -41,7 +40,7 @@ public:
 
     void drawFunc() override;
 
-    bool event(const int event, Basic::Object* const obj = 0) override;
+    bool event(const int event, Basic::Object* const obj = nullptr) override;
 
 protected:
     // slot functions

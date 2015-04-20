@@ -271,9 +271,9 @@ void ScanGimbal::conicalScanController(const double dt)
     }
 
     // azimuth
-    double newX = getScanRadius() * sin(getConAngle() * Basic::Angle::D2RCC);
+    double newX = getScanRadius() * std::sin(getConAngle() * Basic::Angle::D2RCC);
     // elevation
-    double newY = getScanRadius() * cos(getConAngle() * Basic::Angle::D2RCC);
+    double newY = getScanRadius() * std::cos(getConAngle() * Basic::Angle::D2RCC);
     setScanPos(newX, newY);
 
     // command our new position
@@ -365,9 +365,9 @@ void ScanGimbal::spiralScanController(const double dt)
     fullAngleRadians = (fullAngleRadians + getConAngle()) * Basic::Angle::D2RCC;
 
     // azimuth
-    double newX = getScanRadius() * (fullAngleRadians / (2.0 * PI)) * sin(fullAngleRadians);
+    double newX = getScanRadius() * (fullAngleRadians / (2.0 * PI)) * std::sin(fullAngleRadians);
     // elevation
-    double newY = getScanRadius() * (fullAngleRadians / (2.0 * PI)) * cos(fullAngleRadians);
+    double newY = getScanRadius() * (fullAngleRadians / (2.0 * PI)) * std::cos(fullAngleRadians);
     setScanPos(newX, newY);
 
     // command our new position

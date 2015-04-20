@@ -27,7 +27,6 @@ class AoAIndexer : public Instrument
 public:
     AoAIndexer();
 
-    // set functions
     virtual bool setAoaRedMin(const LCreal a);
     virtual bool setAoaRedMax(const LCreal b);
     virtual bool setAoaYellowMin(const LCreal a);
@@ -35,7 +34,6 @@ public:
     virtual bool setAoaGreenMin(const LCreal a);
     virtual bool setAoaGreenMax(const LCreal b);
 
-    // get functions
     LCreal getAoaRedMin() const     { return aoaRedMin; }
     LCreal getAoaRedMax() const     { return aoaRedMax; }
     LCreal getAoaYellowMin() const  { return aoaYellowMin; }
@@ -75,7 +73,7 @@ private:
 
     GLuint displayList;     // our display list name
     bool isDlist;           // do we have a display list?
-    int    aoaState;        // shows which state we are in
+    int aoaState;           // shows which state we are in
     SendData selectSD;      // which graphics are we selecting? (If we are using a rotary)
 };
 

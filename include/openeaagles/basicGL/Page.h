@@ -129,7 +129,7 @@ public:
 
    void draw() override;
    Basic::Pair* findBySelectName(const GLuint name) override;
-   bool event(const int event, Basic::Object* const obj = 0) override;
+   bool event(const int event, Basic::Object* const obj = nullptr) override;
 
    void updateTC(const LCreal dt = 0.0) override;
    void updateData(const LCreal dt = 0.0) override;

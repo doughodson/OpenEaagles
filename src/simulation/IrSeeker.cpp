@@ -17,12 +17,12 @@
 #include "openeaagles/basic/units/Distances.h"
 #include "openeaagles/basic/units/Angles.h"
 
-// Requirements: 
+// Requirements:
 // An irSeeker can have multiple irSensors - so an irSeeker is not
 // associated with any single irSensor; each irQueryMsg will contain ptr to the irSensor
 // associated with any particular interaction.
 //
-// Owning player must have an OnboardComputer,which contains a TrackManager. 
+// Owning player must have an OnboardComputer,which contains a TrackManager.
 
 namespace Eaagles {
 namespace Simulation {
@@ -46,17 +46,17 @@ END_EVENT_HANDLER()
 //------------------------------------------------------------------------------
 // Constructor(s)
 //------------------------------------------------------------------------------
-IrSeeker::IrSeeker() : 
+IrSeeker::IrSeeker() :
                freeQueryStack(MAX_QUERIES), freeQueryLock(0),
                inUseQueryQueue(MAX_QUERIES), inUseQueryLock(0)
 {
    STANDARD_CONSTRUCTOR()
 }
 
-IrSeeker::IrSeeker(const IrSeeker& org) : 
+IrSeeker::IrSeeker(const IrSeeker& org) :
                freeQueryStack(MAX_QUERIES), freeQueryLock(0),
                inUseQueryQueue(MAX_QUERIES), inUseQueryLock(0)
-{ 
+{
    STANDARD_CONSTRUCTOR()
    copyData(org,true);
 }
@@ -131,7 +131,7 @@ void IrSeeker::process(const LCreal dt)
    BaseClass::process(dt);
 
    // ---
-   // Update IR query queues: from 'in-use' to 'free' 
+   // Update IR query queues: from 'in-use' to 'free'
    // ---
    lcLock(inUseQueryLock);
    int n = inUseQueryQueue.entries();
@@ -229,7 +229,7 @@ void IrSeeker::irRequestSignature(IrQueryMsg* const irQuery)
       // ---
       for (unsigned int i = 0; i < ntgts; i++) {
 
-         // filter on sensor max range 
+         // filter on sensor max range
          // can't filter on sensor range in processPlayers - different sensors can have different max range
          if (maximumRange > 0.0 && ranges[i] > maximumRange)
             continue;
@@ -239,7 +239,7 @@ void IrSeeker::irRequestSignature(IrQueryMsg* const irQuery)
          IrQueryMsg* query = freeQueryStack.pop();
          lcUnlock(freeQueryLock);
 
-         if (query == 0) { 
+         if (query == 0) {
             query = new IrQueryMsg();
             //if (ownship->getID() != 1) {
             //    static tcnt = 0;
@@ -379,13 +379,13 @@ unsigned int TdbIr::processPlayers(Basic::PairStream* const players)
    // Early out checks (no ownship, no players of interest, no target data arrays)
    // ---
    if (gimbal == 0 || ownship == 0 || players == 0 || maxTargets == 0) return 0;
-    
+
    //const Basic::Pair* p = ((Player*)ownship)->getIrSystemByType( typeid(IrSensor) );
    //if (p == 0) return 0;
 
    // FAB - refactored
    //const IrSensor* irSensor = (const IrSensor*)( p->object() );
-   //if (irSensor == 0) 
+   //if (irSensor == 0)
       //return 0;
 
    // FAB - limit is +/- (1/2 FORtheta + 1/2 IFOVtheta) (but both get..Theta() actually return 1/2 Theta)
@@ -409,7 +409,7 @@ unsigned int TdbIr::processPlayers(Basic::PairStream* const players)
    // ---
    for (Basic::List::Item* item = players->getFirstItem(); item != 0 && numTgts < maxTargets; item = item->getNext()) {
 
-      
+
       // Get the pointer to the target player
       Basic::Pair* pair = (Basic::Pair*)(item->getValue());
       Player* target = (Player*)(pair->object());
@@ -419,7 +419,7 @@ unsigned int TdbIr::processPlayers(Basic::PairStream* const players)
      //continue;
 
       if (target != ownship && target->isActive()) {
-         bool aboveHorizon = true; 
+         bool aboveHorizon = true;
          aboveHorizon = horizonCheck (ownship->getPosition(), target->getPosition());
 
          // FAB - refactored - don't continue if we know we're excluding this target
@@ -440,11 +440,11 @@ unsigned int TdbIr::processPlayers(Basic::PairStream* const players)
          // compute ranges
          LCreal gndRng2 = losVector.x()*losVector.x() + losVector.y()*losVector.y();
          ra = lcSqrt(gndRng2);
-         
+
          // compute angles
          LCreal los_az = lcAtan2(losVector.y(),losVector.x());
          double hdng = ownship->getHeadingR();
-         aazr = lcAepcRad(los_az - (float)hdng);
+         aazr = lcAepcRad(los_az - static_cast<float>(hdng));
          aelr = lcAtan2(-losVector.z(), ra);
       }
       else {
@@ -466,14 +466,14 @@ unsigned int TdbIr::processPlayers(Basic::PairStream* const players)
          aelr = lcAtan2(za,ra);
       }
 
-         LCreal absoluteAzimuth = aazr; 
+         LCreal absoluteAzimuth = aazr;
 
-         if (aazr < 0) absoluteAzimuth = -aazr; 
+         if (aazr < 0) absoluteAzimuth = -aazr;
 
          LCreal absoluteElevation = aelr;
          if (aelr < 0) absoluteElevation = -aelr;
 
-         bool withinView = true; 
+         bool withinView = true;
 
       //   LCreal fieldOfRegardTheta = 0;
       //   LCreal sensorMaxRange = 0;
@@ -492,8 +492,8 @@ unsigned int TdbIr::processPlayers(Basic::PairStream* const players)
             (absoluteElevation > maxAngle) ||
             (ra > maxRange) ||    // beyond max range of sensor
             !aboveHorizon)
-            withinView = false; 
- 
+            withinView = false;
+
          if (withinView) {
 
             // Ref() and save the target pointer
@@ -522,25 +522,25 @@ unsigned int TdbIr::processPlayers(Basic::PairStream* const players)
 
 //------------------------------------------------------------------------------
 // Check to see if two positions are over the horizon from each other.
-// return TRUE if they are both within horizon distance, FALSE if they 
-// are over the horizon. 
+// return TRUE if they are both within horizon distance, FALSE if they
+// are over the horizon.
 //------------------------------------------------------------------------------
 bool TdbIr::horizonCheck(const osg::Vec3& position1, const osg::Vec3& position2)
 {
 
-   bool aboveHorizon = true; 
+   bool aboveHorizon = true;
 
    //LET .FIRST.NODE.DISTANCE.TO.HORIZON
    //         = SQRT.F(MAX.F (2.0 * EARTH.RADIUS * .FIRST.NODE.POSITION(3), 1.0) )
 
-   LCreal distance1 = lcSqrt( LCreal(2.0f * Basic::Nav::ERADM * -position1.z()) ); 
-   if (distance1 < 1.0f) distance1 = 1.0f; 
+   LCreal distance1 = lcSqrt( LCreal(2.0f * Basic::Nav::ERADM * -position1.z()) );
+   if (distance1 < 1.0f) distance1 = 1.0f;
 
 
    //      LET .SECOND.NODE.DISTANCE.TO.HORIZON
    //         = SQRT.F(MAX.F (2.0 * EARTH.RADIUS * .SECOND.NODE.POSITION(3), 1.0) )
 
-   LCreal distance2 = lcSqrt( LCreal(2.0f * Basic::Nav::ERADM * -position2.z()) ); 
+   LCreal distance2 = lcSqrt( LCreal(2.0f * Basic::Nav::ERADM * -position2.z()) );
    if (distance2 < 1.0f) distance2 = 1.0f;
 
    //LET .RELATIVE.POSITION(*)
@@ -550,18 +550,18 @@ bool TdbIr::horizonCheck(const osg::Vec3& position1, const osg::Vec3& position2)
 
    // LET .GROUND.TRACK.RANGE = UT.NORM.F(.RELATIVE.POSITION(*))
 
-   osg::Vec3 groundVec = position1 - position2;  
+   osg::Vec3 groundVec = position1 - position2;
 
-   LCreal gndRng = lcSqrt ((groundVec.x() * groundVec.x()) 
-                     + (groundVec.y() * groundVec.y())); 
+   LCreal gndRng = lcSqrt ((groundVec.x() * groundVec.x())
+                     + (groundVec.y() * groundVec.y()));
 
    //IF .GROUND.TRACK.RANGE < .FIRST.NODE.DISTANCE.TO.HORIZON
    //                        + .SECOND.NODE.DISTANCE.TO.HORIZON
 
    if (gndRng >= distance1 + distance2)
-      aboveHorizon = false; 
+      aboveHorizon = false;
 
-    return aboveHorizon; 
+    return aboveHorizon;
 }
 #endif
 

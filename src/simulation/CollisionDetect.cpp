@@ -11,6 +11,8 @@
 #include "openeaagles/basic/units/Angles.h"
 #include "openeaagles/basic/units/Distances.h"
 
+#include <cmath>
+
 namespace Eaagles {
 namespace Simulation {
 
@@ -28,7 +30,7 @@ BEGIN_SLOTTABLE(CollisionDetect)
    "sendCrashEvents",      //  8: Send 'CRASH_EVENT' events on collisions (default: false)
 END_SLOTTABLE(CollisionDetect)
 
-//  Map slot table 
+//  Map slot table
 BEGIN_SLOT_MAP(CollisionDetect)
     ON_SLOT( 1,  setSlotCollisionRange,      Basic::Distance)
     ON_SLOT( 2,  setSlotMaxPlayers,          Basic::Number)
@@ -83,7 +85,7 @@ void CollisionDetect::copyData(const CollisionDetect& org, const bool cc)
    resizePoiList(org.maxPlayers);
 }
 
-    
+
 void CollisionDetect::deleteData()
 {
    resizePoiList(0);
@@ -181,7 +183,7 @@ void CollisionDetect::updateData(const LCreal dt)
    osg::Matrixd wm = ownship->getWorldMat();
 
    // Local (NED) to body coordinates
-   osg::Matrixd rm = ownship->getRotMat(); 
+   osg::Matrixd rm = ownship->getRotMat();
 
    // We will be using world (ECEF) coordinates when the 'useWorld'
    // flag is true or when our ownship's local gaming area position
@@ -198,7 +200,7 @@ void CollisionDetect::updateData(const LCreal dt)
    }
 
    // Cosine of our max FOV angle
-   double cosMaxFovAngle = cos(maxAngle2Players);
+   double cosMaxFovAngle = std::cos(maxAngle2Players);
 
    // Mark all active POIs as unmatched ...
    for (unsigned int i = 0; i < maxPlayers; i++) {
@@ -206,7 +208,7 @@ void CollisionDetect::updateData(const LCreal dt)
    }
 
    // ---
-   // Scan the player list --- 
+   // Scan the player list ---
    // ---
    Basic::PairStream* plist = sim->getPlayers();
    if (plist != 0) {
@@ -314,7 +316,7 @@ void CollisionDetect::updateData(const LCreal dt)
 }
 
 //------------------------------------------------------------------------------
-// System time critical phase callbacks -- 
+// System time critical phase callbacks --
 //------------------------------------------------------------------------------
 void CollisionDetect::process(const LCreal dt)
 {
@@ -526,7 +528,7 @@ bool CollisionDetect::resizePoiList(const unsigned int newSize)
       if (maxPlayers > 0) {
          players = new PlayerOfInterest[maxPlayers];
       }
-      
+
       lcUnlock(poiLock);
    }
    return true;
@@ -583,7 +585,7 @@ bool CollisionDetect::setSlotPlayerTypes(const Basic::PairStream* const msg)
          const Basic::Pair* pair = static_cast<const Basic::Pair*>(item->getValue());
          const Basic::String* type = dynamic_cast<const Basic::String*>( pair->object() );
          if (type != 0) {
-            if ( lcStrcasecmp(*type,"air") == 0 ) { 
+            if ( lcStrcasecmp(*type,"air") == 0 ) {
                mask = (mask | Player::AIR_VEHICLE);
             }
             else if ( lcStrcasecmp(*type,"ground") == 0 ) {

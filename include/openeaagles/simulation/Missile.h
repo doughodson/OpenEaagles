@@ -63,7 +63,7 @@ public:
     bool setTargetTrack(Track* const trk, const bool posTrkEnb) override;
     bool setTargetPlayer(Player* const tgt, const bool posTrkEnb) override;
 
-    bool event(const int event, Basic::Object* const obj = 0) override;
+    bool event(const int event, Basic::Object* const obj = nullptr) override;
     void reset() override;
 
 protected:

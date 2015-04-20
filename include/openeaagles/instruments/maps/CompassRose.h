@@ -28,7 +28,6 @@ class CompassRose : public BasicGL::Graphic
 public:
     CompassRose();
 
-    // Set functions
     virtual bool setRotationDeg(const LCreal newR);
     virtual bool setRotationRad(const LCreal newR);
     virtual bool setCenteredRadius(const LCreal newR);
@@ -36,7 +35,6 @@ public:
     virtual bool setDisplacement(const LCreal newD);
     virtual bool setCentered(const bool newC);
 
-    // Get function
     LCreal getRotationDeg() const      { return rot * static_cast<LCreal>(Basic::Angle::R2DCC); }
     LCreal getRotationRad() const      { return rot; }
     LCreal getCenteredRadius() const   { return cenRadius; }
@@ -47,7 +45,7 @@ public:
     void draw() override;
 
     void updateData(const LCreal dt = 0.0) override;
-    bool event(const int event, Basic::Object* const obj = 0) override;
+    bool event(const int event, Basic::Object* const obj = nullptr) override;
 
 protected:
     // slot functions

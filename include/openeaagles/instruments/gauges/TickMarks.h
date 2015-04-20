@@ -23,14 +23,12 @@ class TickMarks : public AnalogGauge
 public:
     TickMarks();
 
-    // set functions
     virtual bool setTickMarkLength(const LCreal newLength);
     virtual bool setQuantity(const int newQ);
     virtual bool setGaugeLength(const LCreal newL);
     virtual bool setFlip(const bool x);
     virtual bool setTickGraphic(const BasicGL::Graphic* const newGraphic);
 
-    // get functions
     LCreal getTickMarkLength() const { return lengthTM; }
     int  getQuantity() const         { return quantity; }
 

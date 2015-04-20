@@ -25,11 +25,9 @@ class LandingGear : public Instrument
 public:
     LandingGear();
 
-    // set functions
     virtual bool setGearDownValue(const LCreal newDV);
     virtual bool setGearUpValue(const LCreal newUV);
 
-    // get functions
     LCreal getGearUpValue() const   { return gearUV; }
     LCreal getGearDownValue() const { return gearDV; }
     int getGearState() const        { return gearState; }

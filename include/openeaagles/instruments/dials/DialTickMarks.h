@@ -28,12 +28,10 @@ class DialTickMarks : public AnalogDial
 public:
     DialTickMarks();
 
-    // get functions
     LCreal getLength() const                    { return length; }
     int  getQuantity() const                    { return quantity; }
     BasicGL::Graphic* getTickGraphic() const    { return myGraphic;  }
 
-    // set functions
     virtual bool setLength(const LCreal newLength);
     virtual bool setQuantity(const int newQ);
     virtual bool setTickGraphic(const BasicGL::Graphic* const newGraphic);

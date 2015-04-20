@@ -17,6 +17,8 @@
 #include "openeaagles/basic/units/Distances.h"
 #include "openeaagles/basic/units/Times.h"
 
+#include <cmath>
+
 namespace Eaagles {
 namespace Simulation {
 
@@ -796,8 +798,8 @@ bool Autopilot::processModeFollowTheLead()
       // ---
       // Compute sin/cos of new heading
       // ---
-      double aa1 = sin(leadHdg);
-      double aa2 = cos(leadHdg);
+      double aa1 = std::sin(leadHdg);
+      double aa2 = std::cos(leadHdg);
 
       // ---
       // Compute displacement vector

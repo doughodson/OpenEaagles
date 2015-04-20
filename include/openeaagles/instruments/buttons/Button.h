@@ -30,10 +30,10 @@ public:
     // Cancel
     virtual bool onCancel();
 
-    bool event(const int event, Basic::Object* const obj = 0) override;
+    bool event(const int event, Basic::Object* const obj = nullptr) override;
 
 protected:
-    // Sets the Event ID to newEvent.
+    // Sets the Event ID to newEvent
     virtual bool setSlotEventId(const Basic::Number* const newEvent);
 
 private:

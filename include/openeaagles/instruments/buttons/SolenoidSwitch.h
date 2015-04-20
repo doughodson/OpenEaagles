@@ -24,7 +24,6 @@ class SolenoidSwitch : public BasicGL::Graphic
 public:
     SolenoidSwitch();
 
-    // set functions
     virtual bool setHoldTimer(const LCreal x);
 
     // button enums
@@ -46,7 +45,7 @@ public:
     Basic::UpTimer* getTimer() { return timer; }
 
     void updateData(const LCreal dt = 0.0) override;
-    bool event(const int event, Basic::Object* const obj = 0) override;
+    bool event(const int event, Basic::Object* const obj = nullptr) override;
 
 protected:
     // event function
@@ -84,7 +83,7 @@ public:
     virtual bool onMouseDown();
     virtual bool onPicked(const Basic::Number* const x);
 
-    bool event(const int event, Basic::Object* const obj = 0) override;
+    bool event(const int event, Basic::Object* const obj = nullptr) override;
     void updateData(const LCreal dt = 0.0) override;
 
 private:

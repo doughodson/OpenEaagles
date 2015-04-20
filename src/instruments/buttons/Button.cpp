@@ -16,7 +16,7 @@ BEGIN_SLOTTABLE(Button)
 END_SLOTTABLE(Button)
 
 //------------------------------------------------------------------------------
-//  Map slot table to handles 
+//  Map slot table to handles
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(Button)
     ON_SLOT(1, setSlotEventId, Basic::Number)
@@ -59,7 +59,7 @@ EMPTY_DELETEDATA(Button)
 bool Button::setSlotEventId(const Basic::Number* const newEvent)
 {
     bool ok = false;
-    if (newEvent != 0) {
+    if (newEvent != nullptr) {
         int a = newEvent->getInt();
         ok = setEventId(a);
     }
@@ -76,8 +76,8 @@ bool Button::onSingleClick()
     // event Id we have, and send that eventId
     bool ok = false;
     BasicGL::Display* myDisplay = (BasicGL::Display*)findContainerByType(typeid(BasicGL::Display));
-    
-    if (myDisplay != 0) {
+
+    if (myDisplay != nullptr) {
         myDisplay->buttonEvent(getEventId());
         ok = true;
     }

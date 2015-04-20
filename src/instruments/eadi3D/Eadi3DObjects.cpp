@@ -427,7 +427,7 @@ void Eadi3DObjects::makeObjects(void)
 
     glNewList(base+ALPHA_SYMB, GL_COMPILE);             /* greek alpha */
         glPushMatrix();
-            glScalef((float)MR2IN, (float)MR2IN, 1.0f);
+            glScalef(static_cast<float>(MR2IN), static_cast<float>(MR2IN), 1.0f);
             glBegin(GL_LINE_STRIP);
                 glVertex2f(4.0f, 5.0f);
                 glVertex2f(1.0f, 2.0f);
@@ -538,13 +538,13 @@ void Eadi3DObjects::drawArrow2(float bAngle, float s, float c)
 //------------------------------------------------------------------------------
 void Eadi3DObjects::makeGlobe(void)
 {
-    float h = (float)(sin(5.0 * Basic::Angle::D2RCC) * radius);
+    float h = static_cast<float>(std::sin(5.0 * Basic::Angle::D2RCC) * radius);
     globeArrowV1[1] = h + h;
     globeArrowV2[2] = -h;
     globeArrowV3[2] = h;
     globeArrowV4[1] = -h;
-    globeArrowV5[2] = (float)(-h / 2.0);
-    globeArrowV6[2] = (float)(h / 2.0);
+    globeArrowV5[2] = static_cast<float>(-h / 2.0);
+    globeArrowV6[2] = static_cast<float>(h / 2.0);
 
     glNewList(base+GLOBE, GL_COMPILE);
     glPushMatrix();
@@ -556,14 +556,14 @@ void Eadi3DObjects::makeGlobe(void)
             glColor3fv(WHITE);
             for (float a = -20.0; a >= -60.0; a -= 20.0) {
                 float bAngle = a;
-                float s = static_cast<float>(sin(a * Basic::Angle::D2RCC));
-                float c = static_cast<float>(cos(a * Basic::Angle::D2RCC));
+                float s = static_cast<float>(std::sin(a * Basic::Angle::D2RCC));
+                float c = static_cast<float>(std::cos(a * Basic::Angle::D2RCC));
                 drawArrow(bAngle, s, c);
                 drawArrow(-bAngle, s, -c);
             }
             float bAngle = -80.0;
-            float s = static_cast<float>(sin(-80.0 * Basic::Angle::D2RCC));
-            float c = static_cast<float>(cos(-80.0 * Basic::Angle::D2RCC));
+            float s = static_cast<float>(std::sin(-80.0 * Basic::Angle::D2RCC));
+            float c = static_cast<float>(std::cos(-80.0 * Basic::Angle::D2RCC));
             drawArrow2(bAngle, s, c);
             drawArrow2(-bAngle, s, -c);
         }
@@ -572,16 +572,16 @@ void Eadi3DObjects::makeGlobe(void)
         glColor3fv(WHITE);
         glPushMatrix();
             glRotatef(90.0f, 1.0f, 0.0f, 0.0f);
-            float s = static_cast<float>(sin(-90.0 * Basic::Angle::D2RCC));
-            float c = static_cast<float>(cos(-85.0 * Basic::Angle::D2RCC));
+            float s = static_cast<float>(std::sin(-90.0 * Basic::Angle::D2RCC));
+            float c = static_cast<float>(std::cos(-85.0 * Basic::Angle::D2RCC));
             glPushMatrix();
         glTranslatef(0.0f, 0.0f, -s * radius);
         irisgl.circf(0.0f, 0.0f, c * radius);
         glPopMatrix();
         glLineWidth(2.0);
         for (float a = -80.0; a <= 80.0; a += 10.0) {
-            s = static_cast<float>(sin(a * Basic::Angle::D2RCC));
-            c = static_cast<float>(cos(a * Basic::Angle::D2RCC));
+            s = static_cast<float>(std::sin(a * Basic::Angle::D2RCC));
+            c = static_cast<float>(std::cos(a * Basic::Angle::D2RCC));
             glPushMatrix();
             glTranslatef(0.0, 0.0, -s * radius);
             glColor3fv(WHITE);
@@ -613,8 +613,8 @@ void Eadi3DObjects::makeGlobe(void)
             }
             glPopMatrix();
         }
-        s = static_cast<float>(sin(90.0 * Basic::Angle::D2RCC));
-        c = static_cast<float>(cos(85.0 * Basic::Angle::D2RCC));
+        s = static_cast<float>(std::sin(90.0 * Basic::Angle::D2RCC));
+        c = static_cast<float>(std::cos(85.0 * Basic::Angle::D2RCC));
         glPushMatrix();
             glTranslatef(0., 0., -s * radius);
             irisgl.circf(0.0, 0.0, c * radius);

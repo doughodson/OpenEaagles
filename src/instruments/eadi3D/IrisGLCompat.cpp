@@ -1,6 +1,7 @@
 #include "openeaagles/instruments/eadi3D/IrisGLCompat.h"
 #include "openeaagles/basic/units/Angles.h"
 #include <GL/gl.h>
+#include <cmath>
 
 #define MAX_POINTS 64
 
@@ -43,8 +44,8 @@ void IrisGLCompat::arc(float x, float y, float r, float startAng, float endAng)
     float delta = static_cast<float>((2.0 * PI * fraction) / static_cast<float>(numPoints));
     glBegin(GL_LINE_STRIP);
         for (int i = 0; i < numPoints+1; i++) {
-            float vy = static_cast<float>(sin(ang) * r + y);
-            float vx = static_cast<float>(cos(ang) * r + x);
+            float vy = static_cast<float>(std::sin(ang) * r + y);
+            float vx = static_cast<float>(std::cos(ang) * r + x);
             glVertex2f(vx, vy);
             ang += delta;
         }
@@ -63,8 +64,8 @@ void IrisGLCompat::arcf(float x, float y, float r, float startAng, float endAng)
     glBegin(GL_TRIANGLE_FAN);
         glVertex2f(x, y);
         for (int i = 0; i < numPoints+1; i++) {
-            float vy = sin(ang) * r + y;
-            float vx = cos(ang) * r + x;
+            float vy = std::sin(ang) * r + y;
+            float vx = std::cos(ang) * r + x;
             glVertex2f(vx, vy);
             ang += delta;
         }
@@ -80,8 +81,8 @@ void IrisGLCompat::circ(float x, float y, float r)
     float delta = static_cast<float>((2.0 * PI) / static_cast<float>(MAX_POINTS));
     glBegin(GL_LINE_LOOP);
         for (int i = 0; i < MAX_POINTS; i++) {
-            float vy = sin(ang) * r + y;
-            float vx = cos(ang) * r + x;
+            float vy = std::sin(ang) * r + y;
+            float vx = std::cos(ang) * r + x;
             glVertex2f(vx, vy);
             ang += delta;
         }
@@ -97,8 +98,8 @@ void IrisGLCompat::circf(float x, float y, float r)
     float delta = static_cast<float>((2.0 * PI) / static_cast<float>(MAX_POINTS));
     glBegin(GL_POLYGON);
         for (int i = 0; i < MAX_POINTS; i++) {
-            float vy = sin(ang) * r + y;
-            float vx = cos(ang) * r + x;
+            float vy = std::sin(ang) * r + y;
+            float vx = std::cos(ang) * r + x;
             glVertex2f(vx, vy);
             ang += delta;
         }
@@ -114,8 +115,8 @@ void IrisGLCompat::washerf(float x, float y, float r1, float r2)
     float delta = static_cast<float>((2.0 * PI) / static_cast<float>(MAX_POINTS));
     glBegin(GL_TRIANGLE_STRIP);
         for (int i = 0; i < MAX_POINTS+1; i++) {
-            float s= sin(ang);
-            float c = cos(ang);
+            float s= std::sin(ang);
+            float c = std::cos(ang);
             float vy1 = s * r1 + y;
             float vx1 = c * r1 + x;
             float vy2 = s * r2 + y;

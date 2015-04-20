@@ -213,7 +213,7 @@ public:
 
    void updateData(const LCreal dt = 0.0) override;
    void updateTC(const LCreal dt = 0.0) override;
-   bool event(const int event, Object* const obj = 0) override;
+   bool event(const int event, Object* const obj = nullptr) override;
    void reset() override;
 
 protected:

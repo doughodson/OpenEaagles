@@ -10,6 +10,8 @@
 #include "openeaagles/basic/Terrain.h"
 #include "openeaagles/basic/units/Distances.h"
 
+#include <cmath>
+
 namespace Eaagles {
 namespace Simulation {
 
@@ -39,7 +41,7 @@ Tdb::Tdb()
 }
 
 Tdb::Tdb(const Tdb& org)
-{ 
+{
     STANDARD_CONSTRUCTOR()
     copyData(org,true);
 }
@@ -237,7 +239,7 @@ unsigned int Tdb::processPlayers(Basic::PairStream* const players)
    // ---
    const double maxRange = gimbal->getMaxRange2PlayersOfInterest();
    const double maxAngle = gimbal->getMaxAngle2PlayersOfInterest();
-   const double cosMaxFov = cos(maxAngle);
+   const double cosMaxFov = std::cos(maxAngle);
    const unsigned int mask = gimbal->getPlayerOfInterestTypes();
    const bool localOnly = gimbal->isLocalPlayersOfInterestOnly();
    const bool useWorld = gimbal->isUsingWorldCoordinates();
@@ -259,11 +261,11 @@ unsigned int Tdb::processPlayers(Basic::PairStream* const players)
       // Using heading only, ignore ownship roll and pitch
       osg::Matrixd rr;
       rr.makeRotate( ownship->getHeading(),   0, 0, 1);
-      rm *= rr; 
+      rm *= rr;
    }
    else {
       // Using ownship roll, pitch and heading
-      rm *= ownship->getRotMat(); 
+      rm *= ownship->getRotMat();
    }
 
    // ---
@@ -320,7 +322,7 @@ unsigned int Tdb::processPlayers(Basic::PairStream* const players)
    bool osSpaceVehicle = ownship->isMajorType(Player::SPACE_VEHICLE);
 
    // ---
-   // 1) Scan the player list --- 
+   // 1) Scan the player list ---
    // ---
    bool finished = false;
    for (Basic::List::Item* item = players->getFirstItem(); item != 0 && numTgts < maxTargets && !finished; item = item->getNext()) {
@@ -422,7 +424,7 @@ unsigned int Tdb::processPlayers(Basic::PairStream* const players)
 
                   if (!occulted) {
                      // !!! All is well with this target !!!
-                     
+
                      // Ref() and save the target pointer
                      target->ref();
                      targets[numTgts++] = target;
@@ -532,11 +534,11 @@ unsigned int Tdb::computeBoresightData()
          // Using heading only, ignore ownship roll and pitch
          osg::Matrixd rr;
          rr.makeRotate( ownship->getHeading(),   0, 0, 1);
-         mm *= rr; 
+         mm *= rr;
       }
       else {
          // Using ownship roll, pitch and heading
-         mm *= ownship->getRotMat(); 
+         mm *= ownship->getRotMat();
       }
 
       // ---

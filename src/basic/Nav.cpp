@@ -207,7 +207,7 @@ bool Nav::gbd2ll(
    // ---
    // *** Apply ellipsoidal correction **
    // ---
-   double ellip = 0.00334 * pow( std::cos(tslatr), 2 );
+   double ellip = 0.00334 * std::pow( std::cos(tslatr), 2 );
    dlat0 = dlat0 - ellip * (dlat0 - slat);
    dlon0 = dlon0 + ellip * (dlon0 - slon);
 
@@ -301,7 +301,7 @@ bool Nav::gll2bd(
    // ---
 
    // Ellipsoidal correction factor
-   double ellip = 0.00334 * pow( std::cos(slat*Angle::D2RCC), 2 );
+   double ellip = 0.00334 * std::pow( std::cos(slat*Angle::D2RCC), 2 );
 
    double dlat0 = Angle::aepcdDeg( dlat + ellip * Angle::aepcdDeg(dlat - slat) );
    double dlon0 = Angle::aepcdDeg( dlon - ellip * Angle::aepcdDeg(dlon - slon) );
@@ -1731,7 +1731,7 @@ bool Nav::convertLL2Utm(
       const double EP8  = EP2*EP6;
 
       const double K0   = 0.9996;
-      const double P    = A*(1.0 - E2)/pow((1.0 - E2*SIN2), 1.5);
+      const double P    = A*(1.0 - E2)/std::pow((1.0 - E2*SIN2), 1.5);
       const double Q    = P*(1.0 + EP2*COS2);
 
       //---------------
@@ -1918,7 +1918,7 @@ bool Nav::convertUtm2LL(
    const double TAN5    = TAN1*TAN4;
    const double TAN6    = TAN1*TAN5;
 
-   const double P       = A*(1.0 - E2)/pow((1.0 - E2*SIN2), 1.5);
+   const double P       = A*(1.0 - E2)/std::pow((1.0 - E2*SIN2), 1.5);
    const double Q1      = P*(1.0 + EP2*COS2);
    const double Q2      = Q1*Q1;
    const double Q3      = Q1*Q2;

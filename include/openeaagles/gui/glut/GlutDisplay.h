@@ -109,7 +109,7 @@ public:
    void mouseEvent(const int button, const int state, const int x, const int y) override;
 
    void reset() override;
-   bool event(const int event, Basic::Object* const obj = 0) override;
+   bool event(const int event, Basic::Object* const obj = nullptr) override;
 
 protected:
    // Creates a subwindow and returns the window ID (or -1 if failed)
@@ -186,16 +186,16 @@ private:
 // inline functions
 //------------------------------------------------------------------------------
 
-inline int GlutDisplay::getWindowId() const                 { return winId; }
-inline bool GlutDisplay::isWindowId(const int id) const     { return id == winId; }
-inline bool GlutDisplay::isFullScreen() const               { return fullScreenFlg; }
-inline GLdouble GlutDisplay::getPickWidth() const           { return pickWidth; }
-inline GLdouble GlutDisplay::getPickHeight() const          { return pickHeight; }
-inline bool GlutDisplay::isAccumBuff() const                { return accumBuff; }
-inline bool GlutDisplay::isStencilBuff() const              { return stencilBuff; }
-inline unsigned int GlutDisplay::getIdleSleepTime() const   { return idleSleepTimeMS; }
-inline const osg::Vec2d& GlutDisplay::getSubwindowPosition() const { return swPosition; }
-inline const osg::Vec2d& GlutDisplay::getSubwindowSize() const     { return swSize; }
+inline int GlutDisplay::getWindowId() const                         { return winId;           }
+inline bool GlutDisplay::isWindowId(const int id) const             { return id == winId;     }
+inline bool GlutDisplay::isFullScreen() const                       { return fullScreenFlg;   }
+inline GLdouble GlutDisplay::getPickWidth() const                   { return pickWidth;       }
+inline GLdouble GlutDisplay::getPickHeight() const                  { return pickHeight;      }
+inline bool GlutDisplay::isAccumBuff() const                        { return accumBuff;       }
+inline bool GlutDisplay::isStencilBuff() const                      { return stencilBuff;     }
+inline unsigned int GlutDisplay::getIdleSleepTime() const           { return idleSleepTimeMS; }
+inline const osg::Vec2d& GlutDisplay::getSubwindowPosition() const  { return swPosition;      }
+inline const osg::Vec2d& GlutDisplay::getSubwindowSize() const      { return swSize;          }
 
 } // End Glut namespace
 } // End Eaagles namespace

@@ -143,7 +143,7 @@ public:
    virtual void pixelsToLatLon(const int x, const int y, double &lat, double &lon);
 
    void updateData(const LCreal dt = 0.0) override;
-   bool event(const int event, Basic::Object* const obj = 0) override;
+   bool event(const int event, Basic::Object* const obj = nullptr) override;
 
 protected:
    // slot functions

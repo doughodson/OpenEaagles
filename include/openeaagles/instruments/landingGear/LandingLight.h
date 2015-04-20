@@ -27,10 +27,8 @@ class LandingLight : public LandingGear
 public:
     LandingLight();
 
-    // get functions
     LCreal getLightRadius() const { return lRadius; }
 
-    // set functions
     virtual bool setLightRadius(const LCreal newLR);
 
     void updateData(const LCreal dt = 0.0) override;

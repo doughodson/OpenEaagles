@@ -34,7 +34,7 @@ public:
    bool onCancel() override;
 
    void updateData(const LCreal dt = 0.0) override;
-   bool event(const int event, Basic::Object* const obj = 0) override;
+   bool event(const int event, Basic::Object* const obj = nullptr) override;
 
 protected:
    // sets the pushbutton type to momentary = false or maintained = true

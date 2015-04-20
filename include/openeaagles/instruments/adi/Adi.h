@@ -28,14 +28,12 @@ class Adi : public Instrument {
 public:
     Adi();
 
-    // get functions
     LCreal getPitchInches() const       { return scaledPitch; }
     LCreal getPitch() const             { return getPreScaleInstValue(); }
     LCreal getRollDeg() const           { return curPhi * static_cast<LCreal>(Basic::Angle::R2DCC); }
     LCreal getRollRad() const           { return curPhi; }
     LCreal getMaxRate() const           { return maxRate; }
 
-    // set functions
     virtual bool setRollRad(const LCreal newR);
     virtual bool setRollDeg(const LCreal newR);
     virtual bool setPitch(const LCreal newP);
@@ -43,7 +41,7 @@ public:
 
     void draw() override;
 
-    bool event(const int event, Basic::Object* const obj = 0) override;
+    bool event(const int event, Basic::Object* const obj = nullptr) override;
     void updateData(const LCreal dt = 0) override;
 
 protected:

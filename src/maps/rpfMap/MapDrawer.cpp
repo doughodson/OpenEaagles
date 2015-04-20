@@ -351,8 +351,8 @@ void MapDrawer::determineScaling(const int idx)
         }
 
         if (centerHi != 0 && centerVi != 0) {
-            scalingEast[idx] = (float)(currHi / centerHi);
-            scalingNorth[idx] = (float)(currVi / centerVi);
+            scalingEast[idx] = static_cast<float>(currHi / centerHi);
+            scalingNorth[idx] = static_cast<float>(currVi / centerVi);
         }
     }
 }

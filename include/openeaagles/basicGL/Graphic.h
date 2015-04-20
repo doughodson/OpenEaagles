@@ -384,7 +384,7 @@ public:
    static void lcTexCoord4v(const LCreal* v)    { glTexCoord4dv(v); }
 
 
-   bool event(const int event, Object* const obj = 0) override;
+   bool event(const int event, Object* const obj = nullptr) override;
 
 public:
    // Exceptions

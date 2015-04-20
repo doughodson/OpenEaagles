@@ -10,6 +10,8 @@
 #include "openeaagles/basic/osg/Vec3"
 #include "openeaagles/basic/osg/Quat"
 
+#include <cmath>
+
 namespace Eaagles {
 namespace Dynamics {
 
@@ -240,7 +242,7 @@ void RacModel::updateRAC(const LCreal dt)
    double cmdPitch = 0;
    LCreal vt = pp->getTotalVelocity();
    if (vt > 0) {
-      cmdPitch = asin( cmdAltRate/vt );
+      cmdPitch = std::asin( cmdAltRate/vt );
    }
 
    // ---

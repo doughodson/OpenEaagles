@@ -1008,11 +1008,11 @@ public:
    void reset() override;
    void updateTC(const LCreal dt = 0.0) override;
    void updateData(const LCreal dt = 0.0) override;
-   bool event(const int event, Basic::Object* const obj = 0) override;
+   bool event(const int event, Basic::Object* const obj = nullptr) override;
 
 protected:
    // Vehicle Dynamics -- called by updateTC() during phase zero
-   virtual void dynamics(const LCreal  dt = 0.0);
+   virtual void dynamics(const LCreal dt = 0.0);
 
    // Position update (local players only)
    void positionUpdate(const LCreal dt);

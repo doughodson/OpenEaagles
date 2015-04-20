@@ -27,12 +27,10 @@ class Knob : public Button{
 public:
     Knob();
 
-    // get function(s)
     LCreal const getValue() { return value; }
 
     bool onSingleClick() override;
 
-    // Set functions
     virtual bool setEndless(const bool x)           { endless = x; return true; }
     virtual bool setEndlessStart(const LCreal x)    { endlessStart = x; return true; }
     virtual bool setEndlessLimit(const LCreal x)    { endlessLimit = x; return true; }
@@ -41,10 +39,10 @@ public:
     void draw() override;
 
     void updateData(const LCreal dt = 0.0) override;
-    bool event(const int event, Basic::Object* const obj = 0) override;
+    bool event(const int event, Basic::Object* const obj = nullptr) override;
 
 protected:
-    // Sets the Event ID to newEvent.
+    // Sets the Event ID to newEvent
     bool setSlotValueTable(Basic::Table1* const x);
     bool setSlotEndless(const Basic::Number* const x);
     bool setSlotEndlessStart(const Basic::Number* const x);

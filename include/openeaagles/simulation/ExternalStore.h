@@ -49,7 +49,7 @@ public:
    // Event handler(s)
    virtual bool onJettisonEvent();
 
-   bool event(const int event, Basic::Object* const obj = 0) override;
+   bool event(const int event, Basic::Object* const obj = nullptr) override;
    void reset() override;
 
 protected:

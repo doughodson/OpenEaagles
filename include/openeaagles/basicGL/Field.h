@@ -264,7 +264,7 @@ public:
 
    bool cursor(int* ln, int* cp) const override;
    void drawFunc() override;
-   bool event(const int event, Object* const obj = 0) override;
+   bool event(const int event, Object* const obj = nullptr) override;
 
    void updateData(const LCreal dt = 0.0) override;
 

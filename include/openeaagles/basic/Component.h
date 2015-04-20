@@ -344,7 +344,7 @@ public:
    // Returns true if the 'event' has received and processed this component.
    // Typically implemented using the event macros (see above).
    // ---
-   virtual bool event(const int event, Object* const obj = 0);
+   virtual bool event(const int event, Object* const obj = nullptr);
 
    // ---
    // Send the 'event' message to our component named 'id' with an optional

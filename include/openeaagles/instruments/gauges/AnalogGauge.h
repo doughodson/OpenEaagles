@@ -32,14 +32,12 @@ class AnalogGauge : public Instrument
 public:
     AnalogGauge();
 
-    // set functions
     virtual bool setLeftBoundary(const LCreal newLB);
     virtual bool setRightBoundary(const LCreal newRB);
     virtual bool setIsOutlined(const bool newO);
     virtual bool setIsVertical(const bool newV);
     virtual bool setDrawMe(const bool x);
 
-    // get functions
     LCreal getLeftBoundary() const  { return leftBoundary; }
     LCreal getRightBoundary() const { return rightBoundary; }
     bool isOutlined() const         { return outline; }
