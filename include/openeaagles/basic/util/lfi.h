@@ -1,6 +1,6 @@
 
-#ifndef __Eaagles_Basic_lfi_utils_H__
-#define __Eaagles_Basic_lfi_utils_H__
+#ifndef __Eaagles_Basic_lfi_util_H__
+#define __Eaagles_Basic_lfi_util_H__
 
 #include "openeaagles/basic/support.h"
 
@@ -23,8 +23,8 @@ namespace lfi {
 // ---
 
 LCreal lfi_1D(const LCreal x,
-           const LCreal *x_data, const unsigned int nx,
-           const LCreal *a_data,
+           const LCreal* x_data, const unsigned int nx,
+           const LCreal* a_data,
            const bool eFlg,
            unsigned int* const xbp=0
           );
@@ -39,9 +39,9 @@ LCreal lfi_1D(const LCreal x,
 // ---
 
 LCreal lfi_2D(const LCreal x, const LCreal y,
-           const LCreal *x_data, const unsigned int nx,
-           const LCreal *y_data, const unsigned int ny,
-           const LCreal *a_data,
+           const LCreal* x_data, const unsigned int nx,
+           const LCreal* y_data, const unsigned int ny,
+           const LCreal* a_data,
            const bool eFlg,
            unsigned int* const xbp=0,
            unsigned int* const ybp=0
@@ -57,10 +57,10 @@ LCreal lfi_2D(const LCreal x, const LCreal y,
 // ---
 
 LCreal lfi_3D(const LCreal x, const LCreal y, const LCreal z,
-           const LCreal *x_data, const unsigned int nx,
-           const LCreal *y_data, const unsigned int ny,
-           const LCreal *z_data, const unsigned int nz,
-           const LCreal *a_data,
+           const LCreal* x_data, const unsigned int nx,
+           const LCreal* y_data, const unsigned int ny,
+           const LCreal* z_data, const unsigned int nz,
+           const LCreal* a_data,
            const bool eFlg,
            unsigned int* const xbp=0,
            unsigned int* const ybp=0,
@@ -77,11 +77,11 @@ LCreal lfi_3D(const LCreal x, const LCreal y, const LCreal z,
 // ---
 
 LCreal lfi_4D(const LCreal x, const LCreal y, const LCreal z, const LCreal w,
-           const LCreal *x_data, const unsigned int nx,
-           const LCreal *y_data, const unsigned int ny,
-           const LCreal *z_data, const unsigned int nz,
-           const LCreal *w_data, const unsigned int nw,
-           const LCreal *a_data,
+           const LCreal* x_data, const unsigned int nx,
+           const LCreal* y_data, const unsigned int ny,
+           const LCreal* z_data, const unsigned int nz,
+           const LCreal* w_data, const unsigned int nw,
+           const LCreal* a_data,
            const bool eFlg,
            unsigned int* const xbp=0,
            unsigned int* const ybp=0,
@@ -99,12 +99,12 @@ LCreal lfi_4D(const LCreal x, const LCreal y, const LCreal z, const LCreal w,
 // ---
 
 LCreal lfi_5D(const LCreal x, const LCreal y, const LCreal z, const LCreal w, const LCreal v,
-         const LCreal *x_data, const unsigned int nx,
-         const LCreal *y_data, const unsigned int ny,
-         const LCreal *z_data, const unsigned int nz,
-         const LCreal *w_data, const unsigned int nw,
-         const LCreal *v_data, const unsigned int nv,
-         const LCreal *a_data,
+         const LCreal* x_data, const unsigned int nx,
+         const LCreal* y_data, const unsigned int ny,
+         const LCreal* z_data, const unsigned int nz,
+         const LCreal* w_data, const unsigned int nw,
+         const LCreal* v_data, const unsigned int nv,
+         const LCreal* a_data,
          const bool eFlg,
          unsigned int* const xbp=0,
          unsigned int* const ybp=0,
