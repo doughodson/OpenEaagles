@@ -26,7 +26,7 @@ class Func1 : public Function {
 public:
    Func1();
 
-   virtual double f(const double iv1, FStorage* const s = 0) const;
+   virtual double f(const double iv1, FStorage* const s = nullptr) const;
 
    bool setSlotLfiTable(const Table* const msg) override;
 };
@@ -41,7 +41,7 @@ class Func2 : public Function {
 public:
    Func2();
 
-   virtual double f(const double iv1, const double iv2, FStorage* const s = 0) const;
+   virtual double f(const double iv1, const double iv2, FStorage* const s = nullptr) const;
 
    bool setSlotLfiTable(const Table* const msg) override;
 };
@@ -56,7 +56,7 @@ class Func3 : public Function {
 public:
    Func3();
 
-   virtual double f(const double iv1, const double iv2, const double iv3, FStorage* const s = 0) const;
+   virtual double f(const double iv1, const double iv2, const double iv3, FStorage* const s = nullptr) const;
 
    bool setSlotLfiTable(const Table* const msg) override;
 };
@@ -71,7 +71,7 @@ class Func4 : public Function {
 public:
    Func4();
 
-   virtual double f(const double iv1, const double iv2, const double iv3, const double iv4, FStorage* const s = 0) const;
+   virtual double f(const double iv1, const double iv2, const double iv3, const double iv4, FStorage* const s = nullptr) const;
 
    bool setSlotLfiTable(const Table* const msg) override;
 };
@@ -86,7 +86,7 @@ class Func5 : public Function {
 public:
    Func5();
 
-   virtual double f(const double iv1, const double iv2, const double iv3, const double iv4, const double iv5, FStorage* const s = 0) const;
+   virtual double f(const double iv1, const double iv2, const double iv3, const double iv4, const double iv5, FStorage* const s = nullptr) const;
 
    bool setSlotLfiTable(const Table* const msg) override;
 };
@@ -127,7 +127,7 @@ public:
    int getDegree() const                  { return (m-1); }
    const double* getCoefficients() const  { return a; }
 
-   double f(const double x, FStorage* const s = 0) const override;
+   double f(const double x, FStorage* const s = nullptr) const override;
 
 protected:
    virtual bool setSlotCoefficients(const List* const msg);
