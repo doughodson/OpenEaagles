@@ -167,7 +167,7 @@ void DiscreteOutput::processInputs(const LCreal, const Basic::IoDevice* const, B
 //------------------------------------------------------------------------------
 void DiscreteOutput::processOutputs(const LCreal, const Basic::IoData* const outData, Basic::IoDevice* const device)
 {
-   if (device != 0 && devEnb) {
+   if (device != nullptr && devEnb) {
       unsigned int chan = channel;
       unsigned int loc  = location;
       unsigned int n = ((num >= 0) ? num : -num);
@@ -175,7 +175,7 @@ void DiscreteOutput::processOutputs(const LCreal, const Basic::IoData* const out
       for (unsigned int i = 0; i < n; i++) {
 
          // Get the bit from the cockpit output data handler
-         if (outData != 0) {
+         if (outData != nullptr) {
             outData->getDiscreteOutput(loc, &value);
          }
 
@@ -200,7 +200,7 @@ void DiscreteOutput::processOutputs(const LCreal, const Basic::IoData* const out
 bool DiscreteOutput::setSlotLocation(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       int v = msg->getInt();
       if (v >= 0) {
          ok = setLocation( static_cast<unsigned int>(v) );
@@ -213,7 +213,7 @@ bool DiscreteOutput::setSlotLocation(const Basic::Number* const msg)
 bool DiscreteOutput::setSlotPort(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       int v = msg->getInt();
       if (v >= 0) {
          ok = setPort( static_cast<unsigned int>(v) );
@@ -226,7 +226,7 @@ bool DiscreteOutput::setSlotPort(const Basic::Number* const msg)
 bool DiscreteOutput::setSlotChannel(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       int v = msg->getInt();
       if (v >= 0) {
          ok = setChannel( static_cast<unsigned int>(v) );
@@ -239,7 +239,7 @@ bool DiscreteOutput::setSlotChannel(const Basic::Number* const msg)
 bool DiscreteOutput::setSlotValue(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setValue( msg->getBoolean() );
    }
    return ok;
@@ -249,7 +249,7 @@ bool DiscreteOutput::setSlotValue(const Basic::Number* const msg)
 bool DiscreteOutput::setSlotInverted(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setInvertFlag( msg->getBoolean() );
    }
    return ok;
@@ -258,7 +258,7 @@ bool DiscreteOutput::setSlotInverted(const Basic::Number* const msg)
 bool DiscreteOutput::setSlotNum(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setNumber( msg->getInt() );
    }
    return ok;

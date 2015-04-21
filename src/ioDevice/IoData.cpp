@@ -44,16 +44,16 @@ IoData::IoData()
 void IoData::initData()
 {
    numAI = 0;
-   aiTable = 0;
+   aiTable = nullptr;
 
    numAO = 0;
-   aoTable = 0;
+   aoTable = nullptr;
 
    numDI = 0;
-   diTable = 0;
+   diTable = nullptr;
 
    numDO = 0;
-   doTable = 0;
+   doTable = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -65,22 +65,22 @@ void IoData::copyData(const IoData& org, const bool cc)
    if (cc) initData();
 
    setNumAI(org.numAI);
-   if (aiTable != 0) {
+   if (aiTable != nullptr) {
       for (unsigned int i = 0; i < numAI; i++) aiTable[i] = org.aiTable[i];
    }
 
    setNumAO(org.numAO);
-   if (aoTable != 0) {
+   if (aoTable != nullptr) {
       for (unsigned int i = 0; i < numAO; i++) aoTable[i] = org.aoTable[i];
    }
 
    setNumDI(org.numDI);
-   if (diTable != 0) {
+   if (diTable != nullptr) {
       for (unsigned int i = 0; i < numDI; i++) diTable[i] = org.diTable[i];
    }
 
    setNumDO(org.numDO);
-   if (doTable != 0) {
+   if (doTable != nullptr) {
       for (unsigned int i = 0; i < numAI; i++) doTable[i] = org.doTable[i];
    }
 
@@ -111,7 +111,7 @@ unsigned int IoData::getNumDiscreteOutputChannels() const  { return numDO; }
 bool IoData::getAnalogInput(const unsigned int channel, LCreal* const value) const
 {
    bool ok = false;
-   if (value != 0 && aiTable != 0 && channel > 0 && channel <= numAI) {
+   if (value != nullptr && aiTable != nullptr && channel > 0 && channel <= numAI) {
       *value = aiTable[channel-1];
       ok = true;
    }
@@ -119,12 +119,12 @@ bool IoData::getAnalogInput(const unsigned int channel, LCreal* const value) con
 }
 
 // -----------------------------------------------------------------------------
-// getAnalogOutput() - 
+// getAnalogOutput() -
 // -----------------------------------------------------------------------------
 bool IoData::getAnalogOutput(const unsigned int channel, LCreal* const value) const
 {
    bool ok = false;
-   if (value != 0 && aoTable != 0 && channel > 0 && channel <= numAO) {
+   if (value != nullptr && aoTable != nullptr && channel > 0 && channel <= numAO) {
       *value = aoTable[channel-1];
       ok = true;
    }
@@ -132,12 +132,12 @@ bool IoData::getAnalogOutput(const unsigned int channel, LCreal* const value) co
 }
 
 // -----------------------------------------------------------------------------
-// getDiscreteInput() - 
+// getDiscreteInput() -
 // -----------------------------------------------------------------------------
-bool IoData::getDiscreteInput(const unsigned int channel, bool* const value) const 
+bool IoData::getDiscreteInput(const unsigned int channel, bool* const value) const
 {
    bool ok = false;
-   if (value != 0 && diTable != 0 && channel > 0 && channel <= numDI) {
+   if (value != nullptr && diTable != nullptr && channel > 0 && channel <= numDI) {
       *value = diTable[channel-1];
       ok = true;
    }
@@ -145,12 +145,12 @@ bool IoData::getDiscreteInput(const unsigned int channel, bool* const value) con
 }
 
 // -----------------------------------------------------------------------------
-// getDiscreteOutput() - 
+// getDiscreteOutput() -
 // -----------------------------------------------------------------------------
 bool IoData::getDiscreteOutput(const unsigned int channel, bool* const value) const
 {
    bool ok = false;
-   if (value != 0 && doTable != 0 && channel > 0 && channel <= numDO) {
+   if (value != nullptr && doTable != nullptr && channel > 0 && channel <= numDO) {
       *value = doTable[channel-1];
       ok = true;
    }
@@ -158,12 +158,12 @@ bool IoData::getDiscreteOutput(const unsigned int channel, bool* const value) co
 }
 
 // -----------------------------------------------------------------------------
-// setAnalogInput() - 
+// setAnalogInput() -
 // -----------------------------------------------------------------------------
 bool IoData::setAnalogInput(const unsigned int channel, const LCreal value)
 {
    bool ok = false;
-   if (aiTable != 0 && channel > 0 && channel <= numAI) {
+   if (aiTable != nullptr && channel > 0 && channel <= numAI) {
       aiTable[channel-1] = value;
       ok = true;
    }
@@ -171,12 +171,12 @@ bool IoData::setAnalogInput(const unsigned int channel, const LCreal value)
 }
 
 // -----------------------------------------------------------------------------
-// setAnalogOutput() - 
+// setAnalogOutput() -
 // -----------------------------------------------------------------------------
 bool IoData::setAnalogOutput(const unsigned int channel, const LCreal value)
 {
    bool ok = false;
-   if (aoTable != 0 && channel > 0 && channel <= numAO) {
+   if (aoTable != nullptr && channel > 0 && channel <= numAO) {
       aoTable[channel-1] = value;
       ok = true;
    }
@@ -184,12 +184,12 @@ bool IoData::setAnalogOutput(const unsigned int channel, const LCreal value)
 }
 
 // -----------------------------------------------------------------------------
-// setDiscreteInput() - 
+// setDiscreteInput() -
 // -----------------------------------------------------------------------------
 bool IoData::setDiscreteInput(const unsigned int channel, const bool value)
 {
    bool ok = false;
-   if (diTable != 0 && channel > 0 && channel <= numDI) {
+   if (diTable != nullptr && channel > 0 && channel <= numDI) {
       diTable[channel-1] = value;
       ok = true;
    }
@@ -197,12 +197,12 @@ bool IoData::setDiscreteInput(const unsigned int channel, const bool value)
 }
 
 // -----------------------------------------------------------------------------
-// setDiscreteOutput() - 
+// setDiscreteOutput() -
 // -----------------------------------------------------------------------------
 bool IoData::setDiscreteOutput(const unsigned int channel, const bool value)
 {
    bool ok = false;
-   if (doTable != 0 && channel > 0 && channel <= numDO) {
+   if (doTable != nullptr && channel > 0 && channel <= numDO) {
       doTable[channel-1] = value;
       ok = true;
    }
@@ -214,25 +214,25 @@ bool IoData::setDiscreteOutput(const unsigned int channel, const bool value)
 // -----------------------------------------------------------------------------
 void IoData::clear()
 {
-   if (aiTable != 0 && numAI > 0) {
+   if (aiTable != nullptr && numAI > 0) {
       for (unsigned int i = 0; i < numAI; i++) {
          aiTable[i] = 0;
       }
    }
 
-   if (aoTable != 0 && numAO > 0) {
+   if (aoTable != nullptr && numAO > 0) {
       for (unsigned int i = 0; i < numAO; i++) {
          aoTable[i] = 0;
       }
    }
 
-   if (diTable != 0 && numDI > 0) {
+   if (diTable != nullptr && numDI > 0) {
       for (unsigned int i = 0; i < numDI; i++) {
          diTable[i] = false;
       }
    }
 
-   if (doTable != 0 && numDO > 0) {
+   if (doTable != nullptr && numDO > 0) {
       for (unsigned int i = 0; i < numDO; i++) {
          doTable[i] = false;
       }
@@ -251,13 +251,13 @@ bool IoData::setNumAI(const unsigned int num)
       if (numAI > 0) {
          numAI = 0;
          delete[] aiTable;
-         aiTable = 0;
+         aiTable = nullptr;
       }
 
       // Allocate and clear the new
       if (num > 0) {
          aiTable = new LCreal[num];
-         for (unsigned int i = 0; i < num; i++) aiTable[i] = 0;
+         for (unsigned int i = 0; i < num; i++) aiTable[i] = 0.0;
          numAI = num;
       }
 
@@ -275,13 +275,13 @@ bool IoData::setNumAO(const unsigned int num)
       if (numAO > 0) {
          numAO = 0;
          delete[] aoTable;
-         aoTable = 0;
+         aoTable = nullptr;
       }
 
       // Allocate and clear the new
       if (num > 0) {
          aoTable = new LCreal[num];
-         for (unsigned int i = 0; i < num; i++) aoTable[i] = 0;
+         for (unsigned int i = 0; i < num; i++) aoTable[i] = 0.0;
          numAO = num;
       }
 
@@ -299,7 +299,7 @@ bool IoData::setNumDI(const unsigned int num)
       if (numDI > 0) {
          numDI = 0;
          delete[] diTable;
-         diTable = 0;
+         diTable = nullptr;
       }
 
       // Allocate and clear the new
@@ -323,7 +323,7 @@ bool IoData::setNumDO(const unsigned int num)
       if (numDO > 0) {
          numDO = 0;
          delete[] doTable;
-         doTable = 0;
+         doTable = nullptr;
       }
 
       // Allocate and clear the new
@@ -351,7 +351,7 @@ bool IoData::setSlotNumAI(const Basic::Number* const msg)
    bool ok = true;
    unsigned int num = 0;
 
-   if (msg != 0) {
+   if (msg != nullptr) {
       int v = msg->getInt();
       if (v >= 0) num = static_cast<unsigned int>(v);
       else ok = false;
@@ -370,7 +370,7 @@ bool IoData::setSlotNumAO(const Basic::Number* const msg)
    bool ok = true;
    unsigned int num = 0;
 
-   if (msg != 0) {
+   if (msg != nullptr) {
       int v = msg->getInt();
       if (v >= 0) num = static_cast<unsigned int>(v);
       else ok = false;
@@ -389,7 +389,7 @@ bool IoData::setSlotNumDI(const Basic::Number* const msg)
    bool ok = true;
    unsigned int num = 0;
 
-   if (msg != 0) {
+   if (msg != nullptr) {
       int v = msg->getInt();
       if (v >= 0) num = static_cast<unsigned int>(v);
       else ok = false;
@@ -408,7 +408,7 @@ bool IoData::setSlotNumDO(const Basic::Number* const msg)
    bool ok = true;
    unsigned int num = 0;
 
-   if (msg != 0) {
+   if (msg != nullptr) {
       int v = msg->getInt();
       if (v >= 0) num = static_cast<unsigned int>(v);
       else ok = false;

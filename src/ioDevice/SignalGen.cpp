@@ -162,7 +162,7 @@ void SignalGen::processInputs(const LCreal dt, const Basic::IoDevice* const, Bas
    LCreal value = calc(dt);
 
    // Send the value to the input data buffer
-   if (inData != 0) {
+   if (inData != nullptr) {
       inData->setAnalogInput(location,value);
    }
 }
@@ -175,7 +175,7 @@ void SignalGen::processOutputs(const LCreal dt, const Basic::IoData* const, Basi
    LCreal value = calc(dt);
 
    // Send the value to the AO card
-   if (device != 0) {
+   if (device != nullptr) {
       device->setAnalogOutput(value, channel);
    }
 }
@@ -231,7 +231,7 @@ LCreal SignalGen::calc(const LCreal dt)
 bool SignalGen::setSlotSignal(const Basic::String* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
 
       if (*msg == "SINE" || *msg == "sine")          ok = setSignalType(SINE);
       else if (*msg == "COSINE" || *msg == "cosine") ok = setSignalType(COSINE);
@@ -251,7 +251,7 @@ bool SignalGen::setSlotSignal(const Basic::String* const msg)
 bool SignalGen::setSlotFrequency(const Basic::Frequency* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setFrequency( Basic::Hertz::convertStatic(*msg) );
    }
    return ok;
@@ -261,7 +261,7 @@ bool SignalGen::setSlotFrequency(const Basic::Frequency* const msg)
 bool SignalGen::setSlotPhase(const Basic::Angle* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setPhase( static_cast<LCreal>(Basic::Radians::convertStatic(*msg)) );
    }
    return ok;
@@ -271,7 +271,7 @@ bool SignalGen::setSlotPhase(const Basic::Angle* const msg)
 bool SignalGen::setSlotLocation(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       int v = msg->getInt();
       if (v >= 0) {
          ok = setLocation( static_cast<unsigned int>(v) );
@@ -284,7 +284,7 @@ bool SignalGen::setSlotLocation(const Basic::Number* const msg)
 bool SignalGen::setSlotChannel(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       int v = msg->getInt();
       if (v >= 0) {
          ok = setChannel( static_cast<unsigned int>(v) );

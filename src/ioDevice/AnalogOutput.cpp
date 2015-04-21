@@ -55,7 +55,7 @@ void AnalogOutput::initData()
    value = 0;
    gain  = 1.0f;
    offset = 0.0;
-   table = 0;
+   table = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -73,12 +73,12 @@ void AnalogOutput::copyData(const AnalogOutput& org, const bool cc)
    gain = org.gain;
    offset = org.offset;
    {
-      const Basic::Table1* copy = 0;
-      if (org.table != 0) {
+      const Basic::Table1* copy = nullptr;
+      if (org.table != nullptr) {
          copy = org.table->clone();
       }
       setTable(copy);
-      if (copy != 0) copy->unref();
+      if (copy != nullptr) copy->unref();
    }
 }
 
@@ -87,7 +87,7 @@ void AnalogOutput::copyData(const AnalogOutput& org, const bool cc)
 //------------------------------------------------------------------------------
 void AnalogOutput::deleteData()
 {
-   setTable(0);
+   setTable(nullptr);
 }
 
 //------------------------------------------------------------------------------
@@ -168,7 +168,7 @@ bool AnalogOutput::setTable(const Basic::Table1* const msg)
     bool ok = true;
 
     // Unref() the old (if any)
-    if (table != 0) {
+    if (table != nullptr) {
         table->unref();
     }
 
@@ -176,7 +176,7 @@ bool AnalogOutput::setTable(const Basic::Table1* const msg)
     table = msg;
 
     // Check and ref() the new table (if any)
-    if (table != 0) {
+    if (table != nullptr) {
         if (table->isValid()) {
             table->ref();
         }
@@ -185,7 +185,7 @@ bool AnalogOutput::setTable(const Basic::Table1* const msg)
             std::cerr << "AnalogOutput::setTable(): invalid table!" << std::endl;
             }
             ok = false;
-            table = 0;
+            table = nullptr;
         }
     }
 
@@ -205,12 +205,12 @@ void AnalogOutput::processInputs(const LCreal, const Basic::IoDevice* const, Bas
 void AnalogOutput::processOutputs(const LCreal, const Basic::IoData* const outData, Basic::IoDevice* const device)
 {
    // Get a value form the cockpit output handler
-   if (outData != 0) {
+   if (outData != nullptr) {
       outData->getAnalogOutput(location,&value);
    }
 
    // Send the scaled data to the AO card
-   if (device != 0 && devEnb) {
+   if (device != nullptr && devEnb) {
       LCreal vout = 0;
       if (gain != 0) {
          vout = (value / gain ) + offset;
@@ -227,7 +227,7 @@ void AnalogOutput::processOutputs(const LCreal, const Basic::IoData* const outDa
 bool AnalogOutput::setSlotLocation(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       int v = msg->getInt();
       if (v >= 0) {
          ok = setLocation( static_cast<unsigned int>(v) );
@@ -240,7 +240,7 @@ bool AnalogOutput::setSlotLocation(const Basic::Number* const msg)
 bool AnalogOutput::setSlotChannel(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       int v = msg->getInt();
       if (v >= 0) {
          ok = setChannel( static_cast<unsigned int>(v) );
@@ -253,7 +253,7 @@ bool AnalogOutput::setSlotChannel(const Basic::Number* const msg)
 bool AnalogOutput::setSlotValue(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setValue( msg->getFloat() );
    }
    return ok;
@@ -263,7 +263,7 @@ bool AnalogOutput::setSlotValue(const Basic::Number* const msg)
 bool AnalogOutput::setSlotOffset(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setOffset( msg->getFloat() );
    }
    return ok;
@@ -273,7 +273,7 @@ bool AnalogOutput::setSlotOffset(const Basic::Number* const msg)
 bool AnalogOutput::setSlotGain(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setGain( msg->getFloat() );
       if (!ok) {
          if (isMessageEnabled(MSG_ERROR)) {

@@ -25,10 +25,10 @@ public:
    UsbJoystickImp();
 
    // Basic::IoDevice functions
-   virtual void processInputs(const LCreal dt, Basic::IoData* const inData);
+   void processInputs(const LCreal dt, Basic::IoData* const inData) override;
 
    // Basic::Component functions
-   virtual void reset();
+   void reset() override;
 
 private:
    void initData();

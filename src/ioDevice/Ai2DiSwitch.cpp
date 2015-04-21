@@ -1,4 +1,3 @@
-// Class: Ai2DiSwitch
 
 #include "openeaagles/ioDevice/Ai2DiSwitch.h"
 
@@ -134,15 +133,15 @@ bool Ai2DiSwitch::setInvertFlag(const bool f)
 void Ai2DiSwitch::processInputs(const LCreal, const Basic::IoDevice* const device, Basic::IoData* const inData)
 {
    // Default is our initial value
-   LCreal vin(0);
+   LCreal vin(0.0);
 
    // Get data from the AI device
-   if (device != 0 && devEnb) {
+   if (device != nullptr && devEnb) {
       device->getAnalogInput(&vin, channel);
    }
 
    // Set the bit to the cockpit input handler
-   if (inData != 0) {
+   if (inData != nullptr) {
       bool flag = (vin >= level);
       if (invert) flag = !flag;
       inData->setDiscreteInput(location,flag);
@@ -164,7 +163,7 @@ void Ai2DiSwitch::processOutputs(const LCreal, const Basic::IoData* const, Basic
 bool Ai2DiSwitch::setSlotLocation(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       int v = msg->getInt();
       if (v >= 0) {
          ok = setLocation( static_cast<unsigned int>(v) );
@@ -177,7 +176,7 @@ bool Ai2DiSwitch::setSlotLocation(const Basic::Number* const msg)
 bool Ai2DiSwitch::setSlotChannel(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       int v = msg->getInt();
       if (v >= 0) {
          ok = setChannel( static_cast<unsigned int>(v) );
@@ -190,7 +189,7 @@ bool Ai2DiSwitch::setSlotChannel(const Basic::Number* const msg)
 bool Ai2DiSwitch::setSlotLevel(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setLevel( msg->getReal() );
    }
    return ok;
@@ -200,7 +199,7 @@ bool Ai2DiSwitch::setSlotLevel(const Basic::Number* const msg)
 bool Ai2DiSwitch::setSlotInverted(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setInvertFlag( msg->getBoolean() );
    }
    return ok;

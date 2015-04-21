@@ -15,7 +15,7 @@
 //
 //==============================================================================
 
-#include "./UsbJoystickImp.h"
+#include "UsbJoystickImp.h"
 
 namespace Eaagles {
 namespace IoDevice {

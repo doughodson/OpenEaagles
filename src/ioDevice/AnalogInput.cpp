@@ -58,7 +58,7 @@ void AnalogInput::initData()
    deadband = 0;
    gain  = 1.0f;
    offset = 0.0;
-   table = 0;
+   table = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -78,12 +78,12 @@ void AnalogInput::copyData(const AnalogInput& org, const bool cc)
    gain = org.gain;
    offset = org.offset;
    {
-      const Basic::Table1* copy = 0;
-      if (org.table != 0) {
+      const Basic::Table1* copy = nullptr;
+      if (org.table != nullptr) {
          copy = org.table->clone();
       }
       setTable(copy);
-      if (copy != 0) copy->unref();
+      if (copy != nullptr) copy->unref();
    }
 }
 
@@ -92,7 +92,7 @@ void AnalogInput::copyData(const AnalogInput& org, const bool cc)
 //------------------------------------------------------------------------------
 void AnalogInput::deleteData()
 {
-   setTable(0);
+   setTable(nullptr);
 }
 
 //------------------------------------------------------------------------------
@@ -180,7 +180,7 @@ bool AnalogInput::setTable(const Basic::Table1* const msg)
     bool ok = true;
 
     // Unref() the old (if any)
-    if (table != 0) {
+    if (table != nullptr) {
         table->unref();
     }
 
@@ -188,7 +188,7 @@ bool AnalogInput::setTable(const Basic::Table1* const msg)
     table = msg;
 
     // Check and ref() the new table (if any)
-    if (table != 0) {
+    if (table != nullptr) {
         if (table->isValid()) {
             table->ref();
         }
@@ -197,7 +197,7 @@ bool AnalogInput::setTable(const Basic::Table1* const msg)
             std::cerr << "AnalogInput::setTable(): invalid table!" << std::endl;
             }
             ok = false;
-            table = 0;
+            table = nullptr;
         }
     }
 
@@ -214,7 +214,7 @@ void AnalogInput::processInputs(const LCreal dt, const Basic::IoDevice* const de
 
 
    // Get data from the AI card
-   if (device != 0 && devEnb) {
+   if (device != nullptr && devEnb) {
       device->getAnalogInput(&vin, channel);
    }
 
@@ -222,7 +222,7 @@ void AnalogInput::processInputs(const LCreal dt, const Basic::IoDevice* const de
    LCreal vout = convert(vin,dt);
 
    // Set the data to the input data handler
-   if (inData != 0) {
+   if (inData != nullptr) {
       inData->setAnalogInput(location,vout);
    }
 }
@@ -250,7 +250,7 @@ LCreal AnalogInput::convert(const LCreal vin, const LCreal)
 
    // Shaping function
    LCreal v3 = v2;
-   if (table != 0) v3 = table->lfi(v2);
+   if (table != nullptr) v3 = table->lfi(v2);
 
    // return final value
    return v3;
@@ -265,7 +265,7 @@ LCreal AnalogInput::convert(const LCreal vin, const LCreal)
 bool AnalogInput::setSlotLocation(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       int v = msg->getInt();
       if (v >= 0) {
          ok = setLocation( static_cast<unsigned int>(v) );
@@ -278,7 +278,7 @@ bool AnalogInput::setSlotLocation(const Basic::Number* const msg)
 bool AnalogInput::setSlotChannel(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       int v = msg->getInt();
       if (v >= 0) {
          ok = setChannel( static_cast<unsigned int>(v) );
@@ -291,7 +291,7 @@ bool AnalogInput::setSlotChannel(const Basic::Number* const msg)
 bool AnalogInput::setSlotValue(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setValue( msg->getReal() );
    }
    return ok;
@@ -301,7 +301,7 @@ bool AnalogInput::setSlotValue(const Basic::Number* const msg)
 bool AnalogInput::setSlotDeadband(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setDeadband( msg->getReal() );
    }
    return ok;
@@ -311,7 +311,7 @@ bool AnalogInput::setSlotDeadband(const Basic::Number* const msg)
 bool AnalogInput::setSlotOffset(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setOffset( msg->getReal() );
    }
    return ok;
@@ -321,7 +321,7 @@ bool AnalogInput::setSlotOffset(const Basic::Number* const msg)
 bool AnalogInput::setSlotGain(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setGain( msg->getReal() );
    }
    return ok;

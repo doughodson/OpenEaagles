@@ -79,7 +79,7 @@ void UsbJoystick::copyData(const UsbJoystick& org, const bool)
 void UsbJoystick::deleteData()
 {
    numAI = 0;
-   numDI = 0; 
+   numDI = 0;
 }
 
 //------------------------------------------------------------------------------
@@ -99,7 +99,7 @@ unsigned short UsbJoystick::getNumDiscreteInputPorts() const
 bool UsbJoystick::getDiscreteInput(bool* const value, const unsigned int bit, const unsigned int) const
 {
    bool ok = false;
-   if (value != 0 && bit < numDI) {
+   if (value != nullptr && bit < numDI) {
       *value = inBits[bit];
       ok = true;
    }
@@ -114,7 +114,7 @@ unsigned short UsbJoystick::getNumAnalogInputs() const
 bool UsbJoystick::getAnalogInput(LCreal* const value, const unsigned int channel) const
 {
    bool ok = false;
-   if (value != 0 && channel < numAI) {
+   if (value != nullptr && channel < numAI) {
       *value = inData[channel];
       ok = true;
    }
@@ -151,7 +151,7 @@ bool UsbJoystick::setDeviceIndex(const int v)
 bool UsbJoystick::setSlotDeviceIndex(const Eaagles::Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setDeviceIndex( msg->getInt() );
    }
    return ok;

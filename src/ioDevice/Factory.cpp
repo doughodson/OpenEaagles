@@ -30,7 +30,7 @@ Factory::Factory()
 
 Basic::Object* Factory::createObj(const char* name)
 {
-    Basic::Object* obj = 0;
+    Basic::Object* obj = nullptr;
 
     // Data buffers
     if ( std::strcmp(name, IoData::getFactoryName()) == 0 ) {
