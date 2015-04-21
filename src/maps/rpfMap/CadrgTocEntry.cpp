@@ -28,22 +28,22 @@ EMPTY_SERIALIZER(CadrgTocEntry)
 CadrgTocEntry::CadrgTocEntry()
 {
     STANDARD_CONSTRUCTOR()
-    nwLat = 0;
-    nwLon = 0;
-    seLat = 0;
-    seLon = 0;
-    swLat = 0;
-    swLon = 0;
-    neLat = 0;
-    neLon = 0;
-    vertInterval = 0;
-    horizInterval = 0;
-    vertResolution = 0;
-    horizResolution = 0;
+    nwLat = 0.0;
+    nwLon = 0.0;
+    seLat = 0.0;
+    seLon = 0.0;
+    swLat = 0.0;
+    swLon = 0.0;
+    neLat = 0.0;
+    neLon = 0.0;
+    vertInterval = 0.0;
+    horizInterval = 0.0;
+    vertResolution = 0.0;
+    horizResolution = 0.0;
     horizFrames = 0;
     vertFrames = 0;
     mapImage = 0;
-    frames = 0;
+    frames = nullptr;
     mapIndex = -1;
 }
 
@@ -82,9 +82,9 @@ void CadrgTocEntry::deleteData()
     for (int i = 0; i < horizFrames; i++) {
         for (int j = 0; j < vertFrames; j++) {
             CadrgFrameEntry* p = &frames[i][j];
-            if (p != 0) {
+            if (p != nullptr) {
                 p->unref();
-                p = 0;
+                p = nullptr;
             }
         }
     }
@@ -96,8 +96,10 @@ void CadrgTocEntry::deleteData()
 CadrgFrameEntry* CadrgTocEntry::getFrameEntry(const int v, const int h)
 {
     CadrgFrameEntry* p = &frames[v][h];
-    if (p != 0) return p;
-    return 0;
+    if (p != nullptr) {
+       return p;
+    }
+    return nullptr;
 }
 
 // -----------------------------------------------------------------------------------------
@@ -115,7 +117,7 @@ void CadrgTocEntry::generateItems(void)
 
     mapImage = 0;
     // Check for overview image
-    if ((strncmp(type, "OVERVIEW", 8) == 0) || (strncmp(scale, "OVERVIEW", 8) == 0)) {
+    if ((std::strncmp(type, "OVERVIEW", 8) == 0) || (std::strncmp(scale, "OVERVIEW", 8) == 0)) {
         std::sprintf(tempTitle, "%s %s", type, scale);
     }
     // Image has a nwLat of ~0

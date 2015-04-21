@@ -138,9 +138,8 @@ void CadrgClut::load(CadrgFrameEntry& frame, int cib, ColorTableSizes clutSize)
     fin.seekg(48 - 4, std::ios::cur);
 
     // Read our locations
-    fin.read((char *) &locSecPhysLoc, sizeof(locSecPhysLoc));
-    swap((unsigned char *) &locSecPhysLoc, sizeof(locSecPhysLoc));
-
+    fin.read(reinterpret_cast<char*>(&locSecPhysLoc), sizeof(locSecPhysLoc));
+    swap(reinterpret_cast<unsigned char*>(&locSecPhysLoc), sizeof(locSecPhysLoc));
 
     // Go to location section
     fin.seekg(locSecPhysLoc, std::ios::beg);
@@ -163,9 +162,9 @@ void CadrgClut::load(CadrgFrameEntry& frame, int cib, ColorTableSizes clutSize)
 
     // Read section subheader
     // Number of offset records: 2
-    fin.read((char*)&numOffsetRecs, sizeof(numOffsetRecs));
+    fin.read(reinterpret_cast<char*>(&numOffsetRecs), sizeof(numOffsetRecs));
     // Number of color convertor offset records: 3
-    fin.read((char*)&numCCOffRecs, sizeof(numCCOffRecs));
+    fin.read(reinterpret_cast<char*>(&numCCOffRecs), sizeof(numCCOffRecs));
 
     // Check for colormap subsection: id = 135
     if (loc[1].physicalIdx == ~0) {
@@ -176,35 +175,35 @@ void CadrgClut::load(CadrgFrameEntry& frame, int cib, ColorTableSizes clutSize)
     fin.seekg(loc[1].physicalIdx, std::ios::beg);
 
     // Colormap offset table offset: length 4
-    fin.read((char *) &colorMapOffTblOff, sizeof(colorMapOffTblOff));
-    swap((unsigned char *) &colorMapOffTblOff, sizeof(colorMapOffTblOff));
+    fin.read(reinterpret_cast<char*>(&colorMapOffTblOff), sizeof(colorMapOffTblOff));
+    swap(reinterpret_cast<unsigned char*>(&colorMapOffTblOff), sizeof(colorMapOffTblOff));
 
     // Offset record length:17? length 2
-    fin.read((char *) &offsetRecLen, sizeof(offsetRecLen));
-    swap((unsigned char *) &offsetRecLen, sizeof(offsetRecLen));
+    fin.read(reinterpret_cast<char*>(&offsetRecLen), sizeof(offsetRecLen));
+    swap(reinterpret_cast<unsigned char*>(&offsetRecLen), sizeof(offsetRecLen));
 
     // 216 or 217 colors desired.  No cct reading needed
     if (clutSize == CLUT_216) {
         // Read colormap offset table
         for (int i = 0; i < numOffsetRecs && !foundLut; i++) {
-            fin.read((char *) &tableId[i], sizeof(tableId[i]));
-            swap((unsigned char *) &tableId[i], sizeof(tableId[i]));
+            fin.read(reinterpret_cast<char*>(&tableId[i]), sizeof(tableId[i]));
+            swap(reinterpret_cast<unsigned char*>(&tableId[i]), sizeof(tableId[i]));
 
-            fin.read((char *) &numColRecs[i], sizeof(numColRecs[i]));
-            swap((unsigned char *) &numColRecs[i], sizeof(numColRecs[i]));
+            fin.read(reinterpret_cast<char*>(&numColRecs[i]), sizeof(numColRecs[i]));
+            swap(reinterpret_cast<unsigned char*>(&numColRecs[i]), sizeof(numColRecs[i]));
 
-            fin.read((char *) &colorElemLen[i], sizeof(colorElemLen[i]));
+            fin.read(reinterpret_cast<char*>(&colorElemLen[i]), sizeof(colorElemLen[i]));
 
-            fin.read((char *) &histRecLen[i], sizeof(histRecLen[i]));
-            swap((unsigned char *) &histRecLen[i], sizeof(histRecLen[i]));
+            fin.read(reinterpret_cast<char*>(&histRecLen[i]), sizeof(histRecLen[i]));
+            swap(reinterpret_cast<unsigned char*>(&histRecLen[i]), sizeof(histRecLen[i]));
 
             // Color table offset
-            fin.read((char *) &colorTblOff[i], sizeof(colorTblOff[i]));
-            swap((unsigned char *) &colorTblOff[i], sizeof(colorTblOff[i]));
+            fin.read(reinterpret_cast<char*>(&colorTblOff[i]), sizeof(colorTblOff[i]));
+            swap(reinterpret_cast<unsigned char*>(&colorTblOff[i]), sizeof(colorTblOff[i]));
 
             // hist. table offset
-            fin.read((char *) &histTblOff[i], sizeof(histTblOff[i]));
-            swap((unsigned char *) &histTblOff[i], sizeof(histTblOff[i]));
+            fin.read(reinterpret_cast<char*>(&histTblOff[i]), sizeof(histTblOff[i]));
+            swap(reinterpret_cast<unsigned char*>(&histTblOff[i]), sizeof(histTblOff[i]));
 
             // Look for numColRecs[i] == 216 or 217
             if ((numColRecs[i] == 216) || (numColRecs[i] == 217)) foundLut = true;
@@ -221,13 +220,13 @@ void CadrgClut::load(CadrgFrameEntry& frame, int cib, ColorTableSizes clutSize)
                     // Image base reads mono byte value
                     if (cib) {
                         // Read mono byte value
-                        fin.read((char*)&rgb[j].red, 1);
+                        fin.read(reinterpret_cast<char*>(&rgb[j].red), 1);
                         rgb[j].green = rgb[j].red;
                         rgb[j].blue = rgb[j].red;
                     }
                     else {
                         // rgb is rgba, size = 4
-                        fin.read((char *) &rgb[j], sizeof(rgb[j]));
+                        fin.read(reinterpret_cast<char*>(&rgb[j]), sizeof(rgb[j]));
 
                         // Transparency exists
                         if (numColRecs[i] == 217) {
@@ -253,32 +252,32 @@ void CadrgClut::load(CadrgFrameEntry& frame, int cib, ColorTableSizes clutSize)
         // Read cct records
         fin.seekg(loc[2].physicalIdx, std::ios::beg);
 
-        fin.read((char *) &ccOffTblOff, sizeof(ccOffTblOff));
-        swap((unsigned char *) &ccOffTblOff, sizeof(ccOffTblOff));
+        fin.read(reinterpret_cast<char*>(&ccOffTblOff), sizeof(ccOffTblOff));
+        swap(reinterpret_cast<unsigned char*>(&ccOffTblOff), sizeof(ccOffTblOff));
 
-        fin.read((char *) &ccOffRect, sizeof(ccOffRect));
-        swap((unsigned char *) &ccOffRect, sizeof(ccOffRect));
+        fin.read(reinterpret_cast<char*>(&ccOffRect), sizeof(ccOffRect));
+        swap(reinterpret_cast<unsigned char*>(&ccOffRect), sizeof(ccOffRect));
 
-        fin.read((char *) &ccRect, sizeof(ccRect));
-        swap((unsigned char *) &ccRect, sizeof(ccRect));
+        fin.read(reinterpret_cast<char*>(&ccRect), sizeof(ccRect));
+        swap(reinterpret_cast<unsigned char*>(&ccRect), sizeof(ccRect));
 
         // Color Converter offset table
         // 2 cct records
         for (int i = 0; i < numCCOffRecs; i++) {
-            fin.read((char *) &cctId[i], sizeof(cctId[i]));
-            swap((unsigned char *) &cctId[i], sizeof(cctId[i]));
+            fin.read(reinterpret_cast<char*>(&cctId[i]), sizeof(cctId[i]));
+            swap(reinterpret_cast<unsigned char*>(&cctId[i]), sizeof(cctId[i]));
 
-            fin.read((char *) &cctNumRecs[i], sizeof(cctNumRecs[i]));
-            swap((unsigned char *) &cctNumRecs[i], sizeof(cctNumRecs[i]));
+            fin.read(reinterpret_cast<char*>(&cctNumRecs[i]), sizeof(cctNumRecs[i]));
+            swap(reinterpret_cast<unsigned char*>(&cctNumRecs[i]), sizeof(cctNumRecs[i]));
 
-            fin.read((char *) &ccTblOff[i], sizeof(ccTblOff[i]));
-            swap((unsigned char *) &ccTblOff[i], sizeof(ccTblOff[i]));
+            fin.read(reinterpret_cast<char*>(&ccTblOff[i]), sizeof(ccTblOff[i]));
+            swap(reinterpret_cast<unsigned char*>(&ccTblOff[i]), sizeof(ccTblOff[i]));
 
-            fin.read((char *) &ccTblSrc[i], sizeof(ccTblSrc[i]));
-            swap((unsigned char *) &ccTblSrc[i], sizeof(ccTblSrc[i]));
+            fin.read(reinterpret_cast<char*>(&ccTblSrc[i]), sizeof(ccTblSrc[i]));
+            swap(reinterpret_cast<unsigned char*>(&ccTblSrc[i]), sizeof(ccTblSrc[i]));
 
-            fin.read((char *) &ccTblTgt[i], sizeof(ccTblTgt[i]));
-            swap((unsigned char *) &ccTblTgt[i], sizeof(ccTblTgt[i]));
+            fin.read(reinterpret_cast<char*>(&ccTblTgt[i]), sizeof(ccTblTgt[i]));
+            swap(reinterpret_cast<unsigned char*>(&ccTblTgt[i]), sizeof(ccTblTgt[i]));
         }
 
         // Go back through and read color map subsections
@@ -287,11 +286,11 @@ void CadrgClut::load(CadrgFrameEntry& frame, int cib, ColorTableSizes clutSize)
             fin.seekg(loc[1].physicalIdx + ccTblTgt[i], std::ios::beg);
 
             // We're at start of a colormap offset table
-            fin.read((char *) &tableId[0], sizeof(tableId[0]));
-            swap((unsigned char *) &tableId[0], sizeof(tableId[0]));
+            fin.read(reinterpret_cast<char*>(&tableId[0]), sizeof(tableId[0]));
+            swap(reinterpret_cast<unsigned char*>(&tableId[0]), sizeof(tableId[0]));
 
-            fin.read((char *) &numColRecs[0], sizeof(numColRecs[0]));
-            swap((unsigned char *) &numColRecs[0], sizeof(numColRecs[0]));
+            fin.read(reinterpret_cast<char*>(&numColRecs[0]), sizeof(numColRecs[0]));
+            swap(reinterpret_cast<unsigned char*>(&numColRecs[0]), sizeof(numColRecs[0]));
 
             // numColRecs[0] can't be 216 for a cct
             // Read, use 32 or 33 clrs OR read, use 16 or 17 clrs
@@ -300,18 +299,18 @@ void CadrgClut::load(CadrgFrameEntry& frame, int cib, ColorTableSizes clutSize)
 
             // Continue reading colormap subsection
             if (foundLut) {
-                fin.read((char*)&colorElemLen[0], sizeof(colorElemLen[0]));
+                fin.read(reinterpret_cast<char*>(&colorElemLen[0]), sizeof(colorElemLen[0]));
 
-                fin.read((char *) &histRecLen[0], sizeof(histRecLen[0]));
-                swap((unsigned char *) &histRecLen[0], sizeof(histRecLen[0]));
+                fin.read(reinterpret_cast<char*>(&histRecLen[0]), sizeof(histRecLen[0]));
+                swap(reinterpret_cast<unsigned char*>(&histRecLen[0]), sizeof(histRecLen[0]));
 
                 // Color table offset
-                fin.read((char *) &colorTblOff[0], sizeof(colorTblOff[0]));
-                swap((unsigned char *) &colorTblOff[0], sizeof(colorTblOff[0]));
+                fin.read(reinterpret_cast<char*>(&colorTblOff[0]), sizeof(colorTblOff[0]));
+                swap(reinterpret_cast<unsigned char*>(&colorTblOff[0]), sizeof(colorTblOff[0]));
 
                 // hist. table offset
-                fin.read((char *) &histTblOff[0], sizeof(histTblOff[0]));
-                swap((unsigned char *) &histTblOff[0], sizeof(histTblOff[0]));
+                fin.read(reinterpret_cast<char*>(&histTblOff[0]), sizeof(histTblOff[0]));
+                swap(reinterpret_cast<unsigned char*>(&histTblOff[0]), sizeof(histTblOff[0]));
 
                 // loc[1] is colormap subsection.  Seek to color/gray table.
                 fin.seekg(loc[1].physicalIdx + colorTblOff[0], std::ios::beg);
@@ -319,7 +318,7 @@ void CadrgClut::load(CadrgFrameEntry& frame, int cib, ColorTableSizes clutSize)
                 // Read the color/gray records:  32 or 33, or 16 or 17 color tables
                 for (int j = 0; j < static_cast<int>(numColRecs[0]); j++) {
                     // rgb is rgba, size = 4
-                    fin.read((char *) &rgb[j], sizeof(rgb[j]));
+                    fin.read(reinterpret_cast<char*>(&rgb[j]), sizeof(rgb[j]));
 
                     // Transparency exists
                     if (numColRecs[0] == 217) {
@@ -335,7 +334,7 @@ void CadrgClut::load(CadrgFrameEntry& frame, int cib, ColorTableSizes clutSize)
                 fin.seekg(loc[2].physicalIdx + ccTblOff[i], std::ios::beg);
 
                 // Read color conversion table: NOW 4 bytes, NOT 1
-                fin.read((char *) cct, 4 * cctNumRecs[i]);
+                fin.read(reinterpret_cast<char*>(cct), 4 * cctNumRecs[i]);
             }
         }
     }
@@ -349,7 +348,6 @@ void CadrgClut::load(CadrgFrameEntry& frame, int cib, ColorTableSizes clutSize)
     // Close our input stream
     fin.close();
 }
-
 
 // ------------------------------------------------------------------------------------------------
 // getColor() - Retrieve our color value for a specific index

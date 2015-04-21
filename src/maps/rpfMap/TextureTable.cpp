@@ -28,7 +28,7 @@ TextureTable::TextureTable()
     size = 0;
     for (int i = 0; i < MAX_TABLE_SIZE; i++ ){
         for (int j = 0; j < MAX_TABLE_SIZE; j++) {
-            texes[i][j] = 0;
+            texes[i][j] = nullptr;
         }
     }
 }
@@ -44,7 +44,7 @@ void TextureTable::copyData(const TextureTable& org, const bool cc)
     if (cc) {
         for (int i = 0; i < maxTableSize; i++) {
             for (int j = 0; j < maxTableSize; j++) {
-                texes[i][j] = 0;
+                texes[i][j] = nullptr;
             }
         }
     }
@@ -58,11 +58,11 @@ void TextureTable::copyData(const TextureTable& org, const bool cc)
 
     for (int i = 0; i < maxTableSize; i++) {
         for (int j = 0; j < maxTableSize; j++) {
-            if (texes[i][j] != 0) {
+            if (texes[i][j] != nullptr) {
                 texes[i][j]->unref();
-                texes[i][j] = 0;
+                texes[i][j] = nullptr;
             }
-            if (org.texes[i][j] != 0) {
+            if (org.texes[i][j] != nullptr) {
                 texes[i][j] = org.texes[i][j];
                 texes[i][j]->ref();
             }
@@ -78,12 +78,11 @@ void TextureTable::deleteData()
 {
     for (int i = 0; i < maxTableSize; i++) {
         for (int j = 0; j < maxTableSize; j++) {
-            if (texes[i][j] != 0) texes[i][j]->unref();
-            texes[i][j] = 0;
+            if (texes[i][j] != nullptr) texes[i][j]->unref();
+            texes[i][j] = nullptr;
         }
     }
 }
-
 
 //------------------------------------------------------------------------------
 // setCenterRowTexture() - Sets our center row.
@@ -102,7 +101,6 @@ bool TextureTable::setCenterColumnTexture(const int x)
     col = x;
     return true;
 }
-
 
 //------------------------------------------------------------------------------
 // isInBounds() - Are we in the texture boundaries?
@@ -137,8 +135,8 @@ bool TextureTable::setSize(const int newSize)
     // Clear out our texture objects
     for (int i = 0; i < maxTableSize; i++) {
         for (int j = 0; j < maxTableSize; j++) {
-            if (texes[i][j] != 0) texes[i][j]->unref();
-            texes[i][j] = 0;
+            if (texes[i][j] != nullptr) texes[i][j]->unref();
+            texes[i][j] = nullptr;
         }
     }
 
@@ -153,12 +151,12 @@ bool TextureTable::setTextureObject(int row, int col, BasicGL::Texture* newObj)
     int x = row + centerTablePos;
     int y = col + centerTablePos;
 
-    if (texes[x][y] != 0) {
+    if (texes[x][y] != nullptr) {
         texes[x][y]->unref();
-        texes[x][y] = 0;
+        texes[x][y] = nullptr;
     }
 
-    if (newObj != 0) {
+    if (newObj != nullptr) {
         texes[x][y] = newObj;
         texes[x][y]->ref();
     }

@@ -41,8 +41,8 @@ CadrgMap::CadrgMap()
 {
     STANDARD_CONSTRUCTOR()
 
-    stack = 0;
-    pathNames = 0;
+    stack = nullptr;
+    pathNames = nullptr;
     for (int i = 0; i < MAX_FILES; i++) {
         cadrgFiles[i] = 0;
     }
@@ -50,9 +50,9 @@ CadrgMap::CadrgMap()
         mergedCadrgFiles[i] = 0;
     }
     numFiles = 0;
-    curCadrgFile = 0;
+    curCadrgFile = nullptr;
     setMaxTableSize(3);
-    mapLevel = 0;
+    mapLevel = nullptr;
     initLevelLoaded = false;
 }
 
@@ -65,30 +65,30 @@ void CadrgMap::copyData(const CadrgMap& org, const bool cc)
     BaseClass::copyData(org);
 
     if (cc) {
-        curCadrgFile = 0;
-        stack = 0;
-        mapLevel = 0;
+        curCadrgFile = nullptr;
+        stack = nullptr;
+        mapLevel = nullptr;
     }
     for (int i = 0; i < MAX_FILES; i++) {
-        if (cadrgFiles[i] != 0) cadrgFiles[i]->unref();
+        if (cadrgFiles[i] != nullptr) cadrgFiles[i]->unref();
         cadrgFiles[i] = org.cadrgFiles[i]->clone();
     }
     for (int i = 0; i < MAX_FILES; i++) {
-        if (mergedCadrgFiles[i] != 0) mergedCadrgFiles[i]->unref();
+        if (mergedCadrgFiles[i] != nullptr) mergedCadrgFiles[i]->unref();
         mergedCadrgFiles[i] = org.mergedCadrgFiles[i]->clone();
     }
 
-    if (org.curCadrgFile!= 0) {
-        if (curCadrgFile != 0) curCadrgFile->unref();
+    if (org.curCadrgFile!= nullptr) {
+        if (curCadrgFile != nullptr) curCadrgFile->unref();
         curCadrgFile = org.curCadrgFile->clone();
     }
 
-    if (org.stack != 0) {
-        if (stack != 0) stack->unref();
+    if (org.stack != nullptr) {
+        if (stack != nullptr) stack->unref();
         stack = org.stack;
         stack->ref();
     }
-    if (org.mapLevel != 0) setMapLevel(org.mapLevel->getString());
+    if (org.mapLevel != nullptr) setMapLevel(org.mapLevel->getString());
 
     maxTableSize = org.maxTableSize;
     numFiles = org.numFiles;
@@ -101,18 +101,18 @@ void CadrgMap::copyData(const CadrgMap& org, const bool cc)
 void CadrgMap::deleteData()
 {
     for (int i = 0; i < MAX_FILES; i++) {
-        if (cadrgFiles[i] != 0) cadrgFiles[i]->unref();
-        cadrgFiles[i] = 0;
+        if (cadrgFiles[i] != nullptr) cadrgFiles[i]->unref();
+        cadrgFiles[i] = nullptr;
     }
     for (int i = 0; i < MAX_FILES; i++) {
-        if (mergedCadrgFiles[i] != 0) mergedCadrgFiles[i]->unref();
-        mergedCadrgFiles[i] = 0;
+        if (mergedCadrgFiles[i] != nullptr) mergedCadrgFiles[i]->unref();
+        mergedCadrgFiles[i] = nullptr;
     }
-    if (curCadrgFile != 0) curCadrgFile->unref();
-    curCadrgFile = 0;
+    if (curCadrgFile != nullptr) curCadrgFile->unref();
+    curCadrgFile = nullptr;
 
-    if (stack != 0) stack->unref();
-    stack = 0;
+    if (stack != nullptr) stack->unref();
+    stack = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -132,14 +132,14 @@ bool CadrgMap::setSlotPathnames(const Basic::PairStream* const x)
 {
     bool ok = false;
     int count = 0;
-    if (x != 0) {
+    if (x != nullptr) {
         // Go through and set up our files based on the path names given
         Basic::List::Item* item = (Basic::List::Item*)x->getFirstItem();
-        while (item != 0 && count < MAX_FILES) {
+        while (item != nullptr && count < MAX_FILES) {
             Basic::Pair* p = (Basic::Pair*)item->getValue();
-            if (p != 0) {
+            if (p != nullptr) {
                 Basic::String* text = dynamic_cast<Basic::String*>(p->object());
-                if (text != 0) {
+                if (text != nullptr) {
                     ok = setPathName(text->getString());
                 }
             }
@@ -149,8 +149,6 @@ bool CadrgMap::setSlotPathnames(const Basic::PairStream* const x)
     }
 
     sortMaps(count);
-
-
     return ok;
 }
 
@@ -178,7 +176,7 @@ void CadrgMap::sortMaps(const int count)
                 int nb = cadrgFiles[i]->getNumBoundaries();
                 for (int j = 0; j < nb; j++) {
                     CadrgTocEntry* toc  = cadrgFiles[i]->entry(j);
-                    if (toc != 0) {
+                    if (toc != nullptr) {
                         if (sCount == 0) {
                             // We are going to put the first scale into the list
                             scales[sCount].setStr(toc->getScale());
@@ -222,7 +220,7 @@ void CadrgMap::sortMaps(const int count)
                     int nb = cadrgFiles[i]->getNumBoundaries();
                     for (int j = 0; j < nb; j++) {
                         CadrgTocEntry* toc = cadrgFiles[i]->entry(j);
-                        if (toc != 0) {
+                        if (toc != nullptr) {
                             if (std::strcmp(toc->getScale(), scales[y].getString()) == 0) {
                                 mergedCadrgFiles[mFile]->addTocEntry(toc, tocIndex++);
                             }
@@ -255,7 +253,7 @@ void CadrgMap::sortMaps(const int count)
 bool CadrgMap::setSlotMaxTableSize(const Basic::Number* const x)
 {
     bool ok = false;
-    if (x != 0) ok = setMaxTableSize(x->getInt());
+    if (x != nullptr) ok = setMaxTableSize(x->getInt());
     return ok;
 
 }
@@ -266,8 +264,8 @@ bool CadrgMap::setSlotMaxTableSize(const Basic::Number* const x)
 bool CadrgMap::setPathName(const char* aGenPathName)
 {
     bool ok = false;
-    if (aGenPathName != 0) {
-        if (cadrgFiles[numFiles] == 0) cadrgFiles[numFiles] = new CadrgFile();
+    if (aGenPathName != nullptr) {
+        if (cadrgFiles[numFiles] == nullptr) cadrgFiles[numFiles] = new CadrgFile();
         cadrgFiles[numFiles]->initialize(aGenPathName);
         numFiles++;
         ok = true;
@@ -282,7 +280,7 @@ bool CadrgMap::setPathName(const char* aGenPathName)
 // ------------------------------------------------------------------------
 void CadrgMap::loadFrameToTexture(BasicGL::Texture* tex, void* pixels)
 {
-    if (tex != 0) {
+    if (tex != nullptr) {
         tex->setPixels((GLubyte*)pixels);
         tex->setWrapS(GL_CLAMP);
         tex->setWrapT(GL_CLAMP);
@@ -304,7 +302,7 @@ bool CadrgMap::setMaxTableSize(const int x)
     maxTableSize = x;
     int size = maxTableSize * 2;
     // Reset our list stack
-    if (stack != 0) stack->unref();
+    if (stack != nullptr) stack->unref();
     stack = new Basic::List();
     for (int i = 0; i < size; i++) {
         CadrgFrame* t = new CadrgFrame();
@@ -319,13 +317,13 @@ bool CadrgMap::setMaxTableSize(const int x)
 //------------------------------------------------------------------------------
 void CadrgMap::setZone(const int num, TexturePager* tp)
 {
-    if (curCadrgFile != 0) {
+    if (curCadrgFile != nullptr) {
         int numBoundaries = curCadrgFile->getNumBoundaries();
         // Make sure we are within the zone boundaries, and make sure we aren't already using that TOC entry
-        if (tp != 0) {
+        if (tp != nullptr) {
             // If we are a valid boundary, set our TOC, else clear us out.
             if (num != -1 && num < numBoundaries) tp->setToc(curCadrgFile->entry(num));
-            else tp->setToc(0);
+            else tp->setToc(nullptr);
         }
     }
 }
@@ -337,7 +335,7 @@ bool CadrgMap::zoomInMapLevel()
 {
     bool ok = false;
     int index = 0;
-    if (mapLevel != 0) {
+    if (mapLevel != nullptr) {
         // Early out check, we have zoomed in as far as we can
         if (std::strcmp(mapLevel->getString(), "5M") == 0) return false;
 
@@ -399,7 +397,7 @@ bool CadrgMap::zoomOutMapLevel()
 {
     bool ok = false;
     int index = 0;
-    if (mapLevel != 0) {
+    if (mapLevel != nullptr) {
         // Early out check, we have zoomed out as far as we can
         if (std::strcmp(mapLevel->getString(), "1:5M") == 0) return false;
 
@@ -462,11 +460,11 @@ bool CadrgMap::zoomOutMapLevel()
 bool CadrgMap::setSlotMapLevel(Basic::String* x)
 {
     bool ok = false;
-    if (mapLevel != 0) {
+    if (mapLevel != nullptr) {
         mapLevel->unref();
-        mapLevel = 0;
+        mapLevel = nullptr;
     }
-    if (x != 0) {
+    if (x != nullptr) {
         mapLevel = x;
         mapLevel->ref();
         ok = true;
@@ -483,20 +481,20 @@ bool CadrgMap::setMapLevel(const char* x)
     bool found = false;
     int num = getNumberOfCadrgFiles();
     for (int i = 0; i < num; i++) {
-        if (mergedCadrgFiles[i] != 0) {
+        if (mergedCadrgFiles[i] != nullptr) {
             int nb = mergedCadrgFiles[i]->getNumBoundaries();
             for (int j = 0; j < nb; j++) {
                 CadrgTocEntry* toc = mergedCadrgFiles[i]->entry(j);
-                if (toc != 0) {
+                if (toc != nullptr) {
                     // If we find the right scale, and our current file isn't = to our last file, we set it.
                     if (std::strcmp(toc->getScale(), x) == 0) {
                         if (curCadrgFile != mergedCadrgFiles[i]) {
                             // This file has our current level on it
-                            if (curCadrgFile != 0) curCadrgFile->unref();
+                            if (curCadrgFile != nullptr) curCadrgFile->unref();
                             curCadrgFile = mergedCadrgFiles[i];
                             curCadrgFile->ref();
                             // Now set our map level
-                            if (mapLevel != 0) mapLevel->setStr(x);
+                            if (mapLevel != nullptr) mapLevel->setStr(x);
                             else mapLevel = new Basic::String(x);
                         }
                         found = true;
@@ -516,12 +514,12 @@ int CadrgMap::findBestZone(const double lat, const double lon)
    int t = -1;
    int nb = 0;
 
-   if (curCadrgFile != 0) {
+   if (curCadrgFile != nullptr) {
       // Number of boundaries is actually the number of zones in this file!
       nb = curCadrgFile->getNumBoundaries();
       for (int i = 0; i < nb; i++) {
          CadrgTocEntry* toc = curCadrgFile->entry(i);
-         if (toc != 0 && toc->isMapImage()) {
+         if (toc != nullptr && toc->isMapImage()) {
             if (toc->isInZone(lat, lon)) return i;
          }
       }
@@ -534,9 +532,9 @@ int CadrgMap::findBestZone(const double lat, const double lon)
 //------------------------------------------------------------------------------
 MapDrawer* CadrgMap::getMapImage()
 {
-    MapDrawer* image = 0;
+    MapDrawer* image = nullptr;
     Basic::Pair* pair = findByType(typeid(MapDrawer));
-    if (pair != 0) image = dynamic_cast<MapDrawer*>(pair->object());
+    if (pair != nullptr) image = dynamic_cast<MapDrawer*>(pair->object());
     return image;
 }
 
@@ -546,9 +544,9 @@ MapDrawer* CadrgMap::getMapImage()
 //------------------------------------------------------------------------------
 const MapDrawer* CadrgMap::getMapImage() const
 {
-    MapDrawer* image = 0;
+    MapDrawer* image = nullptr;
     Basic::Pair* pair = (Basic::Pair*)findByType(typeid(MapDrawer));
-    if (pair != 0) image = dynamic_cast<MapDrawer*>(pair->object());
+    if (pair != nullptr) image = dynamic_cast<MapDrawer*>(pair->object());
     return image;
 }
 
@@ -561,9 +559,9 @@ bool CadrgMap::isValidFrame(const int row, const int column, TexturePager* tp)
    int vFrames = 0;
    int hFrames = 0;
    bool ok = false;
-   if (tp != 0) {
+   if (tp != nullptr) {
       CadrgTocEntry* currentToc = tp->getToc();
-      if (currentToc != 0) {
+      if (currentToc != nullptr) {
          vFrames = currentToc->getVertFrames();
          hFrames = currentToc->getHorizFrames();
       }
@@ -612,9 +610,9 @@ void CadrgMap::latLonToTileRowColumn(const double lat, const double lon, float &
 void CadrgMap::latLonToPixelRowColumn(const double lat, const double lon, float &originRow, float &originCol, TexturePager* tp)
 {
     double nwLat = 0, nwLon = 0, vInt = 0, hInt = 0;
-    if (tp != 0) {
+    if (tp != nullptr) {
         CadrgTocEntry* currentToc = tp->getToc();
-        if (currentToc != 0) {
+        if (currentToc != nullptr) {
             nwLat = currentToc->getNWLat();
             nwLon = currentToc->getNWLon();
             // Interval is the spacing (nominal), in decimal degrees, between each pixel in the NS and EW direction.
@@ -635,30 +633,29 @@ void CadrgMap::latLonToPixelRowColumn(const double lat, const double lon, float 
 // ------------------------------------------------------------------------
 void* CadrgMap::getPixels(const int row, const int column, TexturePager* tp)
 {
-    if (tp != 0) {
+    if (tp != nullptr) {
         CadrgTocEntry* currentToc = tp->getToc();
-        if (currentToc != 0) {
+        if (currentToc != nullptr) {
             bool ok = isValidFrame(row, column, tp);
             if (!ok) {
                 int vFrames = currentToc->getVertFrames();
                 int hFrames = currentToc->getHorizFrames();
                 std::cout << "Bad row,column " << row << "," << column << "   " << vFrames * 6 << "," << hFrames * 6 << std::endl;
-                return 0;
+                return nullptr;
             }
-
 
             int frameRow = row / 6;
             int frameCol = column / 6;
             CadrgFrameEntry* frameEntry = currentToc->getFrameEntry(frameRow, frameCol);
-            if (frameEntry != 0) {
+            if (frameEntry != nullptr) {
                 frameEntry->loadClut();
                 CadrgFrame* frame = frameEntry->getFrame();
                 // If we don't have an entry, let's pull one from the stack
-                if (frame == 0) {
+                if (frame == nullptr) {
                     Basic::List::Item* item = stack->getFirstItem();
-                    if (item != 0) {
+                    if (item != nullptr) {
                         CadrgFrame* x = (CadrgFrame*)(item->getValue());
-                        if (x != 0) {
+                        if (x != nullptr) {
                             stack->removeHead();
                             // Tell it about the frame entry that owns it
                             x->load(frameEntry);
@@ -669,7 +666,7 @@ void* CadrgMap::getPixels(const int row, const int column, TexturePager* tp)
                 }
                 // Get our frame again, because it now has been loaded
                 frame = frameEntry->getFrame();
-                if (frame != 0) {
+                if (frame != nullptr) {
                     // Setup our subframe for decompression
                     Subframe subframe;
                     // Decompress our subframe
@@ -688,7 +685,7 @@ void* CadrgMap::getPixels(const int row, const int column, TexturePager* tp)
         }
     }
 
-    return (void *) &outTile;
+    return static_cast<void*>(&outTile);
 }
 
 // ------------------------------------------------------------------------
@@ -698,9 +695,9 @@ void* CadrgMap::getPixels(const int row, const int column, TexturePager* tp)
 // ------------------------------------------------------------------------
 void CadrgMap::releaseFrame(const int row, const int column, TexturePager* tp)
 {
-    if (tp != 0) {
+    if (tp != nullptr) {
         CadrgTocEntry* currentToc = tp->getToc();
-        if (currentToc != 0) {
+        if (currentToc != nullptr) {
             bool ok = isValidFrame(row, column, tp);
             if (!ok) {
                 std::cout << "Bad row,column " << row << "," << column << "   " << currentToc->getVertFrames() * 6 << "," << currentToc->getHorizFrames() * 6 << std::endl;
@@ -711,14 +708,14 @@ void CadrgMap::releaseFrame(const int row, const int column, TexturePager* tp)
             int frameCol = column / 6;
 
             CadrgFrameEntry* frameEntry = currentToc->getFrameEntry(frameRow, frameCol);
-            if (frameEntry != 0) {
+            if (frameEntry != nullptr) {
             CadrgFrame* frame = frameEntry->getFrame();
-                if (frame != 0) {
+                if (frame != nullptr) {
                     stack->addHead(frame);
                     frame->unref();
-                    frame = 0;
+                    frame = nullptr;
                 }
-                frameEntry->setFrame(0);
+                frameEntry->setFrame(nullptr);
             }
         }
     }
@@ -730,8 +727,10 @@ void CadrgMap::releaseFrame(const int row, const int column, TexturePager* tp)
 // ------------------------------------------------------------------------
 const char* CadrgMap::getLevel()
 {
-    if (mapLevel != 0) return mapLevel->getString();
-    return 0;
+    if (mapLevel != nullptr) {
+       return mapLevel->getString();
+    }
+    return nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -741,7 +740,7 @@ void CadrgMap::updateData(LCreal dt)
 {
     BaseClass::updateData(dt);
 
-    if (!initLevelLoaded && mapLevel != 0 && !mapLevel->isEmpty()) {
+    if (!initLevelLoaded && mapLevel != nullptr && !mapLevel->isEmpty()) {
         setMapLevel(mapLevel->getString());
         initLevelLoaded = true;
     }

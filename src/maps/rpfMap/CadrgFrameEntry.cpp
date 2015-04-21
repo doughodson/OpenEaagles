@@ -29,8 +29,8 @@ CadrgFrameEntry::CadrgFrameEntry()
     STANDARD_CONSTRUCTOR()
     exists = false;
     loaded = false;
-    directory = 0;
-    frame = 0;
+    directory = nullptr;
+    frame = nullptr;
     filename[0] = '\0';
     cib = false;
 }
@@ -43,7 +43,7 @@ void CadrgFrameEntry::copyData(const CadrgFrameEntry& org, const bool cc)
     // Copy our baseclass stuff first
     BaseClass::copyData(org);
 
-    if (cc) frame = 0;
+    if (cc) frame = nullptr;
 
     setFrame(org.frame);
 
@@ -58,8 +58,8 @@ void CadrgFrameEntry::copyData(const CadrgFrameEntry& org, const bool cc)
 //--------------------------------------------------------------------------
 void CadrgFrameEntry::deleteData()
 {
-    if (frame != 0) frame->unref();
-    frame = 0;
+    if (frame != nullptr) frame->unref();
+    frame = nullptr;
     delete [] &directory;
 }
 
@@ -93,7 +93,7 @@ void CadrgFrameEntry::loadClut()
 
     clut.load(*this, cib);
 
-    loaded = 1;
+    loaded = true;
 }
 
 //--------------------------------------------------------------------------
@@ -101,15 +101,15 @@ void CadrgFrameEntry::loadClut()
 //--------------------------------------------------------------------------
 void CadrgFrameEntry::setFrame(CadrgFrame* newFrame)
 {
-    if (newFrame != 0) {
+    if (newFrame != nullptr) {
         if (frame != 0) frame->unref();
         frame = newFrame;
         frame->ref();
     }
 
     else {
-        if (frame != 0) frame->unref();
-        frame = 0;
+        if (frame != nullptr) frame->unref();
+        frame = nullptr;
     }
 }
 

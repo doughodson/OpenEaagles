@@ -24,13 +24,13 @@ TexturePager::TexturePager()
 {
     STANDARD_CONSTRUCTOR()
     maxTableSize = 0;
-    map = 0;
+    map = nullptr;
     row = 0;
     col = 0;
     diffRow = 0;
     diffCol = 0;
-    stack = 0;
-    toc = 0;
+    stack = nullptr;
+    toc = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -42,21 +42,21 @@ void TexturePager::copyData(const TexturePager& org, const bool cc)
     BaseClass::copyData(org);
 
     if (cc) {
-        map = 0;
-        stack = 0;
-        toc = 0;
+        map = nullptr;
+        stack = nullptr;
+        toc = nullptr;
     }
 
     table = org.table;
 
     maxTableSize = org.maxTableSize;
-    if (org.map != 0 ){
-        if (map != 0) map->unref();
+    if (org.map != nullptr ){
+        if (map != nullptr) map->unref();
         map = org.map;
         map->ref();
     }
-    if (org.stack != 0) {
-        if (stack != 0) stack->unref();
+    if (org.stack != nullptr) {
+        if (stack != nullptr) stack->unref();
         stack = org.stack;
         stack->ref();
     }
@@ -73,12 +73,12 @@ void TexturePager::copyData(const TexturePager& org, const bool cc)
 //------------------------------------------------------------------------------
 void TexturePager::deleteData()
 {
-    if (map != 0) map->unref();
-    map = 0;
-    if (stack != 0) stack->unref();
-    stack = 0;
-    if (toc != 0) toc->unref();
-    toc = 0;
+    if (map != nullptr) map->unref();
+    map = nullptr;
+    if (stack != nullptr) stack->unref();
+    stack = nullptr;
+    if (toc != nullptr) toc->unref();
+    toc = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -90,7 +90,7 @@ void TexturePager::setSize(int tableSize)
     table.setSize(tableSize);
     maxTableSize = tableSize;
     int size = maxTableSize * maxTableSize;
-    if (stack != 0) {
+    if (stack != nullptr) {
         stack->clear();
     }
     else stack = new Basic::List();
@@ -106,8 +106,8 @@ void TexturePager::setSize(int tableSize)
 //------------------------------------------------------------------------------
 void TexturePager::setMap(CadrgMap* newMap)
 {
-    if (newMap != 0) {
-        if (map != 0) map->unref();
+    if (newMap != nullptr) {
+        if (map != nullptr) map->unref();
         map = newMap;
         map->ref();
     }
@@ -122,7 +122,7 @@ void TexturePager::setMap(CadrgMap* newMap)
 void TexturePager::updateTextures(const int tRow, const int tCol)
 {
 
-    if (map == 0) {
+    if (map == nullptr) {
         std::cerr << "TexturePager::UpdateTextures invalid map" << std::endl;
         return;
     }
@@ -148,9 +148,9 @@ void TexturePager::updateTextures(const int tRow, const int tCol)
 //------------------------------------------------------------------------------
 void TexturePager::setToc(CadrgTocEntry* x)
 {
-    if (toc != 0) toc->unref();
+    if (toc != nullptr) toc->unref();
     toc = x;
-    if (toc != 0) toc->ref();
+    if (toc != nullptr) toc->ref();
 }
 
 // -------------------------------------------------------------------------
@@ -159,7 +159,7 @@ void TexturePager::setToc(CadrgTocEntry* x)
 // -------------------------------------------------------------------------
 void TexturePager::freeTextures()
 {
-    if (map != 0) {
+    if (map != nullptr) {
 
         // Get our starting position, which is the bottom and top of our table
         int lb = table.getLowerBoundIndex();
@@ -176,7 +176,7 @@ void TexturePager::freeTextures()
                 if (!ok) {
                     // Get our texture object at the no longer visible row,column
                     BasicGL::Texture* textureIndex = table.getTexture(i, j);
-                    if (textureIndex != 0) {
+                    if (textureIndex != nullptr) {
                         // Add the object back to the stack
                         stack->addHead(textureIndex);
                         // Tell our table to clear its object out
@@ -253,12 +253,12 @@ void TexturePager::loadNewTextures()
                     // to add one, but only if the row and column + our center row and column position fall
                     // within our valid frames.
                     BasicGL::Texture* texObj = table.getTexture(r, c);
-                    if (texObj == 0 && map->isValidFrame(r + row, c + col, this)) {
-                        if (stack != 0) {
+                    if (texObj == nullptr && map->isValidFrame(r + row, c + col, this)) {
+                        if (stack != nullptr) {
                             Basic::List::Item* item = stack->getFirstItem();
-                            if (item != 0) {
+                            if (item != nullptr) {
                                 BasicGL::Texture* obj = dynamic_cast<BasicGL::Texture*>(item->getValue());
-                                if (obj != 0) {
+                                if (obj != nullptr) {
                                     // Set our new texture object there, and remove it from our stack.
                                     table.setTextureObject(r, c, obj);
                                     stack->removeHead();
@@ -286,14 +286,14 @@ void TexturePager::loadNewTextures()
 void TexturePager::flushTextures()
 {
     // Return textures indices that are no longer used
-    if (map != 0) {
+    if (map != nullptr) {
         int lb = table.getLowerBoundIndex();
         int ub = table.getUpperBoundIndex();
         for (int i = lb; i <= ub; i++) {
             for (int j = lb; j <= ub; j++) {
                 // Find all of our texture objects and release them back to the stack
                 BasicGL::Texture* textureIndex = table.getTexture(i, j);
-                if (textureIndex != 0) {
+                if (textureIndex != nullptr) {
                     stack->addHead(textureIndex);
                     table.setTextureObject(i, j, 0);
                     map->releaseFrame(i + row, j + col, this);

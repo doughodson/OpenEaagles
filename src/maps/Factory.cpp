@@ -5,7 +5,6 @@
 
 #include "openeaagles/basic/Object.h"
 
-//
 #include "openeaagles/maps/rpfMap/MapDrawer.h"
 #include "openeaagles/maps/rpfMap/CadrgMap.h"
 
@@ -19,7 +18,7 @@ Factory::Factory()
 
 Basic::Object* Factory::createObj(const char* name)
 {
-    Basic::Object* obj = 0;
+    Basic::Object* obj = nullptr;
 
     // Map Drawer
     if ( std::strcmp(name, Rpf::MapDrawer::getFactoryName()) == 0 ) {

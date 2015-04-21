@@ -14,17 +14,14 @@ namespace Rpf {
 // -----------------------------------------------------------
 // swap() - Simple static function to swap bytes.
 // -----------------------------------------------------------
-void swap(unsigned char *ptr, int count)
+void swap(unsigned char* ptr, int count)
 {
-    unsigned char *end, temp;
-
-    end = &ptr[count - 1];
-    while (end > ptr)
-    {
+    unsigned char temp(0);
+    unsigned char* end = &ptr[count - 1];
+    while (end > ptr) {
         temp = *end;
         *end = *ptr;
         *ptr = temp;
-
         ptr++, end--;
     }
 }
@@ -70,42 +67,40 @@ void parseLocations(std::ifstream& fin, Location* locs, int count)
     uint skipLong;
     ushort skip;
 
-
     // Initialize indices so we can later tell if they weren't found
-    for (int j = 0; j < count; j++)
-    {
+    for (int j = 0; j < count; j++) {
         // DKS: want physical index: offset from start of file
         locs[j].physicalIdx = uint(~0);
     }
 
     // Skip location section length
-    fin.read((char *) &skip, sizeof(skip));
+    fin.read(reinterpret_cast<char*>(&skip), sizeof(skip));
 
     // Skip component location table offset
-    fin.read((char *) &skipLong, sizeof(skipLong));
+    fin.read(reinterpret_cast<char*>(&skipLong), sizeof(skipLong));
 
     // How many sections: # of section location records
-    fin.read((char *) &numRecords, sizeof(numRecords));
-    swap((unsigned char *) &numRecords, sizeof(numRecords));
+    fin.read(reinterpret_cast<char*>(&numRecords), sizeof(numRecords));
+    swap(reinterpret_cast<unsigned char*>(&numRecords), sizeof(numRecords));
 
     // Skip location record length
-    fin.read((char *) &skip, sizeof(skip));
+    fin.read(reinterpret_cast<char*>(&skip), sizeof(skip));
 
     // Skip component aggregate length
-    fin.read((char *) &skipLong, sizeof(skipLong));
+    fin.read(reinterpret_cast<char*>(&skipLong), sizeof(skipLong));
 
     // Now go find the ones we want
     for (int i = 0; i < numRecords; i++) {
         // Get the component id
-        fin.read((char *) &id, sizeof(id));
+        fin.read(reinterpret_cast<char*>(&id), sizeof(id));
         // Skip section length
-        fin.read((char *) &skipLong, sizeof(skipLong));
+        fin.read(reinterpret_cast<char*>(&skipLong), sizeof(skipLong));
         // Read our physical offset
-        fin.read((char *) &physicalIdx, sizeof(physicalIdx));
+        fin.read(reinterpret_cast<char*>(&physicalIdx), sizeof(physicalIdx));
 
         // Swap our bytes
-        swap((unsigned char *) &id, sizeof(id));
-        swap((unsigned char *) &physicalIdx, sizeof(physicalIdx));
+        swap(reinterpret_cast<unsigned char*>(&id), sizeof(id));
+        swap(reinterpret_cast<unsigned char*>(&physicalIdx), sizeof(physicalIdx));
 
         for (int j = 0; j < count; j++) {
             if (locs[j].componentId == id) {

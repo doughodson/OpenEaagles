@@ -33,8 +33,8 @@ CadrgFile::CadrgFile()
     STANDARD_CONSTRUCTOR()
     numBoundaries = 0;
     cib = false;
-    for (int i = 0; i < MAX_TOC_ENTRIES; i++) entries[i] = 0;
-    originalDir = 0;
+    for (int i = 0; i < MAX_TOC_ENTRIES; i++) entries[i] = nullptr;
+    originalDir = nullptr;
 }
 
 //--------------------------------------------------------------------------
@@ -46,25 +46,25 @@ void CadrgFile::copyData(const CadrgFile& org, const bool cc)
     BaseClass::copyData(org);
 
     if (cc) {
-        for (int i = 0; i < MAX_TOC_ENTRIES; i++) entries[i] = 0;
-        originalDir = 0;
+        for (int i = 0; i < MAX_TOC_ENTRIES; i++) entries[i] = nullptr;
+        originalDir = nullptr;
     }
 
     numBoundaries = org.numBoundaries;
 
     for (int i = 0; i < MAX_TOC_ENTRIES; i++) {
-        if (entries[i] != 0) {
+        if (entries[i] != nullptr) {
             entries[i]->unref();
-            entries[i] = 0;
+            entries[i] = nullptr;
         }
-        if (org.entries[i] != 0) entries[i] = org.entries[i]->clone();
+        if (org.entries[i] != nullptr) entries[i] = org.entries[i]->clone();
     }
     cib = org.cib;
-    if (originalDir != 0) {
+    if (originalDir != nullptr) {
         originalDir->unref();
-        originalDir = 0;
+        originalDir = nullptr;
     }
-    if (org.originalDir != 0) {
+    if (org.originalDir != nullptr) {
         originalDir = org.originalDir;
         originalDir->ref();
     }
@@ -77,11 +77,11 @@ void CadrgFile::deleteData()
 {
     for (int i = 0; i < MAX_TOC_ENTRIES; i++) {
         if (entries[i] != 0) entries[i]->unref();
-        entries[i] = 0;
+        entries[i] = nullptr;
     }
-    if (originalDir != 0) {
+    if (originalDir != nullptr) {
         originalDir->unref();
-        originalDir = 0;
+        originalDir = nullptr;
     }
 }
 
@@ -92,7 +92,7 @@ void CadrgFile::deleteData()
 const CadrgTocEntry* CadrgFile::entry(int boundaryIndex) const
 {
     if (boundaryIndex >= 0 && boundaryIndex < numBoundaries) return entries[boundaryIndex];
-    else return 0;
+    else return nullptr;
 }
 
 //--------------------------------------------------------------------------
@@ -102,7 +102,7 @@ const CadrgTocEntry* CadrgFile::entry(int boundaryIndex) const
 CadrgTocEntry* CadrgFile::entry(int boundaryIndex)
 {
     if (boundaryIndex >= 0 && entries[boundaryIndex] != 0) return entries[boundaryIndex];
-    else return 0;
+    else return nullptr;
 }
 
 //--------------------------------------------------------------------------
@@ -114,9 +114,9 @@ void CadrgFile::setEntries(CadrgTocEntry* newEntries[MAX_TOC_ENTRIES])
     numBoundaries = 0;
     // Clear our old entries
     for (int i = 0; i < MAX_TOC_ENTRIES; i++) {
-        if (entries[i] != 0) {
+        if (entries[i] != nullptr) {
             entries[i]->unref();
-            entries[i] = 0;
+            entries[i] = nullptr;
         }
         // Now determine if we have an entry
         if (newEntries[i] != 0) {
@@ -132,7 +132,7 @@ void CadrgFile::setEntries(CadrgTocEntry* newEntries[MAX_TOC_ENTRIES])
 //--------------------------------------------------------------------------
 void CadrgFile::setDirectory(const char* x)
 {
-    if (originalDir != 0) originalDir->setStr(x);
+    if (originalDir != nullptr) originalDir->setStr(x);
     else originalDir = new Basic::String(x);
 }
 
@@ -142,8 +142,8 @@ void CadrgFile::setDirectory(const char* x)
 void CadrgFile::addTocEntry(CadrgTocEntry* newEntry, const int idx)
 {
     // First, make sure we have an entry there
-    if (idx >= 0 && newEntry != 0) {
-        if (entries[idx] != 0) {
+    if (idx >= 0 && newEntry != nullptr) {
+        if (entries[idx] != nullptr) {
             // We don't increment our numBoudaries, because we are replacing the Toc entry
             entries[idx]->unref();
             entries[idx] = newEntry;
@@ -164,13 +164,12 @@ void CadrgFile::addTocEntry(CadrgTocEntry* newEntry, const int idx)
 void CadrgFile::removeTocEntry(const int idx)
 {
     // First, make sure we have an entry there
-    if (entries[idx] != 0) {
+    if (entries[idx] != nullptr) {
         entries[idx]->unref();
-        entries[idx] = 0;
+        entries[idx] = nullptr;
         numBoundaries--;
     }
 }
-
 
 //--------------------------------------------------------------------------
 // checkForMap() - given a directory, do we have valid map data there that
@@ -180,7 +179,7 @@ bool CadrgFile::checkForMap(const char* dir)
 {
     bool ok = false;
     // Try to find and open our a.toc file
-    std::ifstream    toc;
+    std::ifstream toc;
     Basic::String* string = new Basic::String(dir);
     string->catStr("A.TOC");
 
@@ -189,7 +188,6 @@ bool CadrgFile::checkForMap(const char* dir)
     #else
         toc.open(*string, std::ios::in);
     #endif
-
 
     // We didn't make it, so either we have a bad location, or the filename is lower case.  Let's try lowercase.
     if (toc.fail()) {
@@ -223,7 +221,7 @@ bool CadrgFile::initialize(const char* dir)
     numBoundaries = 0;
 
     // Remove all of our previous entries, if any
-    for (int yy = 0; yy < MAX_TOC_ENTRIES; yy++) entries[yy] = 0;
+    for (int yy = 0; yy < MAX_TOC_ENTRIES; yy++) entries[yy] = nullptr;
 
     // Our header
     Header          head;
@@ -261,9 +259,9 @@ bool CadrgFile::initialize(const char* dir)
     uint            ffIdxTableOff = 0;
 
     // Try to find and open our a.toc file
-    std::ifstream    toc;
+    std::ifstream toc;
     Basic::String* string = new Basic::String(dir);
-    if (originalDir != 0) originalDir->setStr(dir);
+    if (originalDir != nullptr) originalDir->setStr(dir);
     else originalDir = new Basic::String(dir);
     string->catStr("A.TOC");
 
@@ -272,7 +270,6 @@ bool CadrgFile::initialize(const char* dir)
     #else
         toc.open(*string, std::ios::in);
     #endif
-
 
     // We didn't make it, so either we have a bad location, or the filename is lower case.  Let's try lowercase.
     if (toc.fail()) {
@@ -297,7 +294,6 @@ bool CadrgFile::initialize(const char* dir)
 
     string->unref();
 
-
     // Let's read the header section length.
     // We seek right to position 31, to determine our governing spec date, which may or may not be there.  We
     // are going to see if it is there, because if it is, then we don't have an NITF message to worry about.
@@ -310,7 +306,7 @@ bool CadrgFile::initialize(const char* dir)
     // If we don't have a standard date of 199... then we know
     // that we have an National Imagery Transmission Format (NITF) message, so we should skip over the message and search
     // for the Raster Product Format Header (RPFHDR).
-    if (strncmp(head.govSpecdate, "199", 3) != 0) {
+    if (std::strncmp(head.govSpecdate, "199", 3) != 0) {
         // Make a large set of characters to read from
         char buf[1024];
         // Read in some of the file
@@ -345,22 +341,22 @@ bool CadrgFile::initialize(const char* dir)
     // <location section location>      uint:    4                  45
 
     // endian indicator
-    unsigned char byte;
-    toc.read((char *) &byte, sizeof(byte));
+    unsigned char byte(0);
+    toc.read(reinterpret_cast<char*>(&byte), sizeof(byte));
     head.endian = (byte != 0);
 
-    toc.read((char *) &head.hdrSectionLength, sizeof(head.hdrSectionLength));
+    toc.read((char*) &head.hdrSectionLength, sizeof(head.hdrSectionLength));
     // If we are using big endian encoding, we swap our bytes on uints and ushorts
-    if (!head.endian) swap((unsigned char *) &head.hdrSectionLength, sizeof(head.hdrSectionLength));
-    toc.read((char *) head.filename, sizeof(head.filename));
-    toc.read((char *) &head.nruInd, sizeof(head.nruInd));
-    toc.read((char *) head.govSpecNum, sizeof(head.govSpecNum));
-    toc.read((char *) head.govSpecdate, sizeof(head.govSpecdate));
-    toc.read((char *) &head.secClass, sizeof(head.secClass));
-    toc.read((char *) head.secCountryCode, sizeof(head.secCountryCode));
-    toc.read((char *) head.secRelease, sizeof(head.secRelease));
-    toc.read((char *) &head.locSecLoc, sizeof(head.locSecLoc));
-    if (!head.endian) swap((unsigned char *) &head.locSecLoc, sizeof(head.locSecLoc));
+    if (!head.endian) swap(reinterpret_cast<unsigned char*>(&head.hdrSectionLength), sizeof(head.hdrSectionLength));
+    toc.read(reinterpret_cast<char*>(head.filename), sizeof(head.filename));
+    toc.read(reinterpret_cast<char*>(&head.nruInd), sizeof(head.nruInd));
+    toc.read(reinterpret_cast<char*>(head.govSpecNum), sizeof(head.govSpecNum));
+    toc.read(reinterpret_cast<char*>(head.govSpecdate), sizeof(head.govSpecdate));
+    toc.read(reinterpret_cast<char*>(&head.secClass), sizeof(head.secClass));
+    toc.read(reinterpret_cast<char*>(head.secCountryCode), sizeof(head.secCountryCode));
+    toc.read(reinterpret_cast<char*>(head.secRelease), sizeof(head.secRelease));
+    toc.read(reinterpret_cast<char*>(&head.locSecLoc), sizeof(head.locSecLoc));
+    if (!head.endian) swap(reinterpret_cast<unsigned char*>(&head.locSecLoc), sizeof(head.locSecLoc));
 
     // seek to start of location section:
     toc.seekg(head.locSecLoc, std::ios::beg);
@@ -400,16 +396,16 @@ bool CadrgFile::initialize(const char* dir)
     toc.seekg(locations[0].physicalIdx, std::ios::beg);
 
     // Skip our boundary table record offset
-    toc.read((char *) &bndryRecTableOffset, sizeof(bndryRecTableOffset));
-    swap((unsigned char *) &bndryRecTableOffset, 4);
+    toc.read(reinterpret_cast<char*>(&bndryRecTableOffset), sizeof(bndryRecTableOffset));
+    swap(reinterpret_cast<unsigned char*>(&bndryRecTableOffset), 4);
 
     // Read in the number of boundary rectangle records!
-    toc.read((char *) &numBndryRecords, sizeof(numBndryRecords));
-    swap((unsigned char *) &numBndryRecords, sizeof(numBndryRecords));
+    toc.read(reinterpret_cast<char*>(&numBndryRecords), sizeof(numBndryRecords));
+    swap(reinterpret_cast<unsigned char*>(&numBndryRecords), sizeof(numBndryRecords));
 
     // Skip the boundary record length
-    toc.read((char *) &bndryRecLength, sizeof(bndryRecLength));
-    swap((unsigned char *) &bndryRecLength, sizeof(bndryRecLength));
+    toc.read(reinterpret_cast<char*>(&bndryRecLength), sizeof(bndryRecLength));
+    swap(reinterpret_cast<unsigned char*>(&bndryRecLength), sizeof(bndryRecLength));
 
     // Now we have parsed all the header information from the boundary rectangle section subheader.
     // Let's seek to the actual position of the boundary rectangle table and read the data in.
@@ -476,35 +472,35 @@ bool CadrgFile::initialize(const char* dir)
         int vertFrames = 0, horzFrames = 0;
 
         // Read all of our geodetic data.
-        toc.read((char *) &nwLat, sizeof(double));
-        toc.read((char *) &nwLon, sizeof(double));
-        toc.read((char *) &swLat, sizeof(double));
-        toc.read((char *) &swLon, sizeof(double));
-        toc.read((char *) &neLat, sizeof(double));
-        toc.read((char *) &neLon, sizeof(double));
-        toc.read((char *) &seLat, sizeof(double));
-        toc.read((char *) &seLon, sizeof(double));
-        toc.read((char *) &vertResolution, sizeof(double));
-        toc.read((char *) &horzResolution, sizeof(double));
-        toc.read((char *) &vertInterval, sizeof(double));
-        toc.read((char *) &horzInterval, sizeof(double));
-        toc.read((char *) &vertFrames, sizeof(uint));
-        toc.read((char *) &horzFrames, sizeof(uint));
+        toc.read(reinterpret_cast<char*>(&nwLat), sizeof(double));
+        toc.read(reinterpret_cast<char*>(&nwLon), sizeof(double));
+        toc.read(reinterpret_cast<char*>(&swLat), sizeof(double));
+        toc.read(reinterpret_cast<char*>(&swLon), sizeof(double));
+        toc.read(reinterpret_cast<char*>(&neLat), sizeof(double));
+        toc.read(reinterpret_cast<char*>(&neLon), sizeof(double));
+        toc.read(reinterpret_cast<char*>(&seLat), sizeof(double));
+        toc.read(reinterpret_cast<char*>(&seLon), sizeof(double));
+        toc.read(reinterpret_cast<char*>(&vertResolution), sizeof(double));
+        toc.read(reinterpret_cast<char*>(&horzResolution), sizeof(double));
+        toc.read(reinterpret_cast<char*>(&vertInterval), sizeof(double));
+        toc.read(reinterpret_cast<char*>(&horzInterval), sizeof(double));
+        toc.read(reinterpret_cast<char*>(&vertFrames), sizeof(uint));
+        toc.read(reinterpret_cast<char*>(&horzFrames), sizeof(uint));
 
-        swap((unsigned char *) &nwLat, sizeof(double));
-        swap((unsigned char *) &nwLon, sizeof(double));
-        swap((unsigned char *) &swLat, sizeof(double));
-        swap((unsigned char *) &swLon, sizeof(double));
-        swap((unsigned char *) &neLat, sizeof(double));
-        swap((unsigned char *) &neLon, sizeof(double));
-        swap((unsigned char *) &seLat, sizeof(double));
-        swap((unsigned char *) &seLon, sizeof(double));
-        swap((unsigned char *) &vertResolution, sizeof(double));
-        swap((unsigned char *) &horzResolution, sizeof(double));
-        swap((unsigned char *) &vertInterval, sizeof(double));
-        swap((unsigned char *) &horzInterval, sizeof(double));
-        swap((unsigned char *) &vertFrames, sizeof(uint));
-        swap((unsigned char *) &horzFrames, sizeof(uint));
+        swap(reinterpret_cast<unsigned char*>(&nwLat), sizeof(double));
+        swap(reinterpret_cast<unsigned char*>(&nwLon), sizeof(double));
+        swap(reinterpret_cast<unsigned char*>(&swLat), sizeof(double));
+        swap(reinterpret_cast<unsigned char*>(&swLon), sizeof(double));
+        swap(reinterpret_cast<unsigned char*>(&neLat), sizeof(double));
+        swap(reinterpret_cast<unsigned char*>(&neLon), sizeof(double));
+        swap(reinterpret_cast<unsigned char*>(&seLat), sizeof(double));
+        swap(reinterpret_cast<unsigned char*>(&seLon), sizeof(double));
+        swap(reinterpret_cast<unsigned char*>(&vertResolution), sizeof(double));
+        swap(reinterpret_cast<unsigned char*>(&horzResolution), sizeof(double));
+        swap(reinterpret_cast<unsigned char*>(&vertInterval), sizeof(double));
+        swap(reinterpret_cast<unsigned char*>(&horzInterval), sizeof(double));
+        swap(reinterpret_cast<unsigned char*>(&vertFrames), sizeof(uint));
+        swap(reinterpret_cast<unsigned char*>(&horzFrames), sizeof(uint));
 
         // Set our values back now
         entries[i]->setNWLat(nwLat);
@@ -544,7 +540,6 @@ bool CadrgFile::initialize(const char* dir)
         entries[i]->setEntries(frames);
     }
 
-
     // Read # of frame file index records
     // Skip 1 byte highest security classification
     // locations[2] + 1 is the physical location of frame file index section subheader + we skip one byte
@@ -552,26 +547,26 @@ bool CadrgFile::initialize(const char* dir)
     toc.seekg(locations[2].physicalIdx + 1, std::ios::beg);
 
     // The frame file index table offset
-    toc.read((char *) &ffIdxTableOff, sizeof(ffIdxTableOff));
-    swap((unsigned char *) &ffIdxTableOff, 4);
+    toc.read(reinterpret_cast<char*>(&ffIdxTableOff), sizeof(ffIdxTableOff));
+    swap(reinterpret_cast<unsigned char*>(&ffIdxTableOff), 4);
 
     // Number of frame file index records
-    toc.read((char *) &numFFIdxRec, sizeof(numFFIdxRec));
-    swap((unsigned char *) &numFFIdxRec, sizeof(numFFIdxRec));
+    toc.read(reinterpret_cast<char*>(&numFFIdxRec), sizeof(numFFIdxRec));
+    swap(reinterpret_cast<unsigned char*>(&numFFIdxRec), sizeof(numFFIdxRec));
 
     // Number of pathname records
-    toc.read((char *) &numPathNameRecs, sizeof(numPathNameRecs));
-    swap((unsigned char *) &numPathNameRecs, sizeof(numPathNameRecs));
+    toc.read(reinterpret_cast<char*>(&numPathNameRecs), sizeof(numPathNameRecs));
+    swap(reinterpret_cast<unsigned char*>(&numPathNameRecs), sizeof(numPathNameRecs));
 
     // Frame file index record length
-    toc.read((char *) &idxRecLength, sizeof(idxRecLength));
-    swap((unsigned char *) &idxRecLength, sizeof(idxRecLength));
+    toc.read(reinterpret_cast<char*>(&idxRecLength), sizeof(idxRecLength));
+    swap(reinterpret_cast<unsigned char*>(&idxRecLength), sizeof(idxRecLength));
 
     // Here is a temp pointer to our TOC entries
-    CadrgTocEntry* entry = 0;
+    CadrgTocEntry* entry = nullptr;
 
     // Temp point to our TOC entries frame file
-    CadrgFrameEntry* frame = 0;
+    CadrgFrameEntry* frame = nullptr;
 
     // Read through all of our frame files.
     for (i = 0; i < static_cast<int>(numFFIdxRec); i++) {
@@ -582,7 +577,6 @@ bool CadrgFile::initialize(const char* dir)
         toc.read(reinterpret_cast<char*>(&boundaryRecNum), sizeof(boundaryRecNum));
         swap(reinterpret_cast<unsigned char*>(&boundaryRecNum), sizeof(boundaryRecNum));
 
-
         // If we are outside of our boundaries, print an error!
         if (entries[boundaryRecNum] != 0 && boundaryRecNum <= numBoundaries - 1) {
             // Get our toc entry from our list
@@ -591,10 +585,10 @@ bool CadrgFile::initialize(const char* dir)
                 entry->ref();
 
                 // Read in the starting frame row and column of this frame
-                toc.read((char *) &frameRow, sizeof(frameRow));
-                toc.read((char *) &frameCol, sizeof(frameCol));
-                swap((unsigned char *) &frameRow, sizeof(frameRow));
-                swap((unsigned char *) &frameCol, sizeof(frameCol));
+                toc.read(reinterpret_cast<char*>(&frameRow), sizeof(frameRow));
+                toc.read(reinterpret_cast<char*>(&frameCol), sizeof(frameCol));
+                swap(reinterpret_cast<unsigned char*>(&frameRow), sizeof(frameRow));
+                swap(reinterpret_cast<unsigned char*>(&frameCol), sizeof(frameCol));
 
                 // We already know how many vertical and horizontal frames we have
                 int vertFrames = entry->getVertFrames();
@@ -616,11 +610,11 @@ bool CadrgFile::initialize(const char* dir)
                 CadrgFrameEntry** frames = entry->getFrames();
 
                 // Set a local frame to manipulate
-                if (frames != 0) frame = &frames[(vertFrames - 1) - frameRow][frameCol];
-                if (frame != 0 && !frame->doIExist()) {
+                if (frames != nullptr) frame = &frames[(vertFrames - 1) - frameRow][frameCol];
+                if (frame != nullptr && !frame->doIExist()) {
                     // Get our path name byte offset
-                    toc.read((char *) &ffPathOff, sizeof(ffPathOff));
-                    swap((unsigned char *) &ffPathOff, sizeof(ffPathOff));
+                    toc.read(reinterpret_cast<char*>(&ffPathOff), sizeof(ffPathOff));
+                    swap(reinterpret_cast<unsigned char*>(&ffPathOff), sizeof(ffPathOff));
 
                     // Save file position for later
                     currTocPos = toc.tellg();
@@ -628,8 +622,8 @@ bool CadrgFile::initialize(const char* dir)
                     // Go to start of pathname record, which is our LOC_FRAME_FILE_INDEX_SUBSECTION + the path offset
                     toc.seekg(locations[3].physicalIdx + ffPathOff, std::ios::beg);
 
-                    toc.read((char *) &ffPathLength, sizeof(ffPathLength));
-                    swap((unsigned char *) &ffPathLength, sizeof(ffPathLength));
+                    toc.read(reinterpret_cast<char*>(&ffPathLength), sizeof(ffPathLength));
+                    swap(reinterpret_cast<unsigned char*>(&ffPathLength), sizeof(ffPathLength));
 
                     // Allocate our frame file directory path, which is our path name length + 1 + string length of the directory name passed in
 
@@ -642,7 +636,6 @@ bool CadrgFile::initialize(const char* dir)
 
                     // 1st part of directory name is passed as our initial parameter "projects/data/maps/gncjncn/RPF/"
                     lcStrcpy(directory, size, dir);
-
 
                     // Read rest of directory name from Toc
                     // Skip 1st 2 chars, because they are the root characters (./), and are ignored since we are creating
@@ -671,7 +664,7 @@ bool CadrgFile::initialize(const char* dir)
                 }
                 // Get rid of our entry and reset
                 entry->unref();
-                entry = 0;
+                entry = nullptr;
             }
             else std::cout << "No TOC entry available at position " << boundaryRecNum << std::endl;
         }
@@ -686,13 +679,12 @@ bool CadrgFile::initialize(const char* dir)
     return true;
 }
 
-
 //--------------------------------------------------------------------------
 // getDirectory() - returns the directory we created our file from
 //--------------------------------------------------------------------------
 const char* CadrgFile::getDirectory()
 {
-    if (originalDir != 0) return originalDir->getString();
+    if (originalDir != nullptr) return originalDir->getString();
     else return "";
 }
 
