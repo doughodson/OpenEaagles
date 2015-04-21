@@ -40,7 +40,7 @@ public:
    LagFilter();
    LagFilter(const unsigned int rate, const LCreal tau);
 
-   LCreal getTau() const { return tau; }
+   LCreal getTau() const                         { return tau; }
    virtual bool setTau(const LCreal v);
 
    virtual bool setSlotTau(const Basic::Time* const msg);

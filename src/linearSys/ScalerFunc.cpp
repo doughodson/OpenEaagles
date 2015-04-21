@@ -55,8 +55,8 @@ void ScalerFunc::initData()
    x0 = 0;
    y0 = 0;
 
-   px = 0;
-   py = 0;
+   px = nullptr;
+   py = nullptr;
    n = 0;
 }
 
@@ -95,7 +95,7 @@ void ScalerFunc::deleteData()
 //------------------------------------------------------------------------------
 bool ScalerFunc::isValid() const
 {
-   return (px != 0 && py != 0 && n > 0 && BaseClass::isValid());
+   return (px != nullptr && py != nullptr && n > 0 && BaseClass::isValid());
 }
 
 //------------------------------------------------------------------------------
@@ -113,8 +113,8 @@ void ScalerFunc::allocateMemory(unsigned int n0)
    if (n0 != n) {
       // Free the old memory arrays
       if (n > 0) {
-         delete[] px;  px = 0;
-         delete[] py;  py = 0;
+         delete[] px;  px = nullptr;
+         delete[] py;  py = nullptr;
          n = 0;
       }
       // Allocate the new space
@@ -144,7 +144,7 @@ void ScalerFunc::clearMemory()
 bool ScalerFunc::setX0(const LCreal v)
 {
    x0 = v;
-   if (px != 0) {
+   if (px != nullptr) {
       for (unsigned int i = 0; i < n; i++) {
          px[i] = x0;
       }
@@ -155,7 +155,7 @@ bool ScalerFunc::setX0(const LCreal v)
 bool ScalerFunc::setY0(const LCreal v)
 {
    y0 = v;
-   if (py != 0) {
+   if (py != nullptr) {
       for (unsigned int i = 0; i < n; i++) {
          py[i] = y0;
       }
@@ -180,7 +180,7 @@ bool ScalerFunc::setRate(const unsigned int v)
 bool ScalerFunc::setSlotRate(const Basic::Frequency* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       int v = static_cast<int>( Basic::Hertz::convertStatic( *msg ) + 0.5f );
       if (v > 0) {
          setRate( static_cast<unsigned int>(v) );
@@ -193,7 +193,7 @@ bool ScalerFunc::setSlotRate(const Basic::Frequency* const msg)
 bool ScalerFunc::setSlotRate(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       int v = msg->getInt();
       if (v > 0) {
          setRate( static_cast<unsigned int>(v) );
@@ -206,7 +206,7 @@ bool ScalerFunc::setSlotRate(const Basic::Number* const msg)
 bool ScalerFunc::setSlotX0(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       setX0( msg->getReal() );
       ok = true;
    }
@@ -216,7 +216,7 @@ bool ScalerFunc::setSlotX0(const Basic::Number* const msg)
 bool ScalerFunc::setSlotY0(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       setY0( msg->getReal() );
       ok = true;
    }

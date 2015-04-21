@@ -32,10 +32,10 @@ public:
    SaH();
    SaH(const unsigned int rate, const unsigned int sampleRate);
 
-   unsigned int getSampleRate() const  { return sampleRate; } // hz
+   unsigned int getSampleRate() const         { return sampleRate; } // hz
 
    // Time since last sample (sec) [ 0 .. 1/getSampleRate() ]
-   LCreal getAge() const { return time; }
+   LCreal getAge() const                      { return time; }
 
    // Set Parameter
    virtual bool setSampleRate(const unsigned int v);   // hz
@@ -51,7 +51,7 @@ protected:
    void initialize() override;
 
 private:
-   void initData();  // Initialize our data
+   void initData();
 
    static const unsigned int ORDER = 1;
 

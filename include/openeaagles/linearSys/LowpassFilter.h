@@ -36,7 +36,7 @@ public:
    LowpassFilter();
    LowpassFilter(const unsigned int rate, const LCreal w);
 
-   LCreal getWc() const { return wc; }
+   LCreal getWc() const                           { return wc; }
    virtual bool setWc(const LCreal v);
 
    virtual bool setSlotWc(const Basic::Frequency* const msg);

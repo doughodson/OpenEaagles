@@ -55,7 +55,7 @@ protected:
    void initialize() override;
 
 private:
-   void initData();  // Initialize our data
+   void initData();
 
    static const unsigned int ORDER = 6;
 

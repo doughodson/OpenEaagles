@@ -18,7 +18,7 @@ BEGIN_SLOTTABLE(Limit)
     "upper",   //  2: Upper boundary (default:  1) (must be greater than the lower)
 END_SLOTTABLE(Limit)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(Limit)
    ON_SLOT( 1, setSlotLowerLimit, Basic::Number)
    ON_SLOT( 2, setSlotUpperLimit, Basic::Number)
@@ -47,7 +47,7 @@ EMPTY_DELETEDATA(Limit)
 bool Limit::setSlotLowerLimit(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       setLowerLimit( msg->getReal() );
       ok = true;
    }
@@ -57,7 +57,7 @@ bool Limit::setSlotLowerLimit(const Basic::Number* const msg)
 bool Limit::setSlotUpperLimit(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       setUpperLimit( msg->getReal() );
       ok = true;
    }

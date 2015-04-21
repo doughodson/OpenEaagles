@@ -15,11 +15,11 @@ IMPLEMENT_SUBCLASS(LowpassFilter,"LowpassFilter")
 // slot table for this class type
 //------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(LowpassFilter)
-    "wc",      //  1: Cutoff Frequency 
+    "wc",      //  1: Cutoff Frequency
     "wc",      //  1: Filer time constant (radians/sec)
 END_SLOTTABLE(LowpassFilter)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(LowpassFilter)
    ON_SLOT( 1, setSlotWc, Basic::Frequency)
    ON_SLOT( 1, setSlotWc, Basic::Number)
@@ -28,7 +28,7 @@ END_SLOT_MAP()
 //------------------------------------------------------------------------------
 // Constructor(s)
 //------------------------------------------------------------------------------
-LowpassFilter::LowpassFilter()
+LowpassFilter::LowpassFilter() : wc(0.0)
 {
    STANDARD_CONSTRUCTOR()
 }
@@ -68,7 +68,7 @@ bool LowpassFilter::setWc(const LCreal v)
 bool LowpassFilter::setSlotWc(const Basic::Frequency* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       LCreal hz = Basic::Hertz::convertStatic(*msg);
       LCreal rps = static_cast<LCreal>( hz * 2.0 * PI);
       if (rps > 0) {
@@ -87,7 +87,7 @@ bool LowpassFilter::setSlotWc(const Basic::Frequency* const msg)
 bool LowpassFilter::setSlotWc(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       LCreal rps = msg->getReal();
       if (rps > 0) {
          setWc( rps );

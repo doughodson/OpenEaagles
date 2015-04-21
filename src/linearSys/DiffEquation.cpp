@@ -33,8 +33,8 @@ DiffEquation::DiffEquation(const unsigned int r) : ScalerFunc(r)
 //------------------------------------------------------------------------------
 void DiffEquation::initData()
 {
-   pa = 0;
-   pb = 0;
+   pa = nullptr;
+   pb = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -67,8 +67,8 @@ void DiffEquation::allocateMemory(unsigned int n0)
    if (n0 != n) {
       // Free the old memory arrays
       if (n > 0) {
-         delete[] pa;  pa = 0;
-         delete[] pb;  pb = 0;
+         delete[] pa;  pa = nullptr;
+         delete[] pb;  pb = nullptr;
       }
 
       BaseClass::allocateMemory(n0);

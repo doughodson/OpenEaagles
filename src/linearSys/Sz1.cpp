@@ -24,7 +24,7 @@ BEGIN_SLOTTABLE(Sz1)
     "D2",      //  8: D2
 END_SLOTTABLE(Sz1)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(Sz1)
    ON_SLOT( 1, setSlotN1,   Basic::Number)
    ON_SLOT( 2, setSlotN1,   Basic::Number)
@@ -55,7 +55,7 @@ EMPTY_DELETEDATA(Sz1)
 bool Sz1::setSlotN1(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       setN1( msg->getReal() );
       ok = true;
    }
@@ -65,7 +65,7 @@ bool Sz1::setSlotN1(const Basic::Number* const msg)
 bool Sz1::setSlotN2(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       setN2( msg->getReal() );
       ok = true;
    }
@@ -75,7 +75,7 @@ bool Sz1::setSlotN2(const Basic::Number* const msg)
 bool Sz1::setSlotD1(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       setD1( msg->getReal() );
       ok = true;
    }
@@ -85,7 +85,7 @@ bool Sz1::setSlotD1(const Basic::Number* const msg)
 bool Sz1::setSlotD2(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       setD2( msg->getReal() );
       ok = true;
    }

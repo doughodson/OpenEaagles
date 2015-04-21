@@ -18,7 +18,7 @@ BEGIN_SLOTTABLE(LagFilter)
     "tau",      //  1: Filer time constant (Time or sec)
 END_SLOTTABLE(LagFilter)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(LagFilter)
    ON_SLOT( 1, setSlotTau, Basic::Time)
    ON_SLOT( 1, setSlotTau, Basic::Number)
@@ -67,7 +67,7 @@ bool LagFilter::setTau(const LCreal v)
 bool LagFilter::setSlotTau(const Basic::Time* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       LCreal tsec = Basic::Seconds::convertStatic(*msg);
       if (tsec > 0) {
          setTau( tsec );
@@ -85,7 +85,7 @@ bool LagFilter::setSlotTau(const Basic::Time* const msg)
 bool LagFilter::setSlotTau(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       LCreal tsec = msg->getReal();
       if (tsec > 0) {
          setTau( tsec );
