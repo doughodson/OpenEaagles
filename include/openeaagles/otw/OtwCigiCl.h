@@ -128,8 +128,8 @@ public:
    // Send data to the Cigi handler
    virtual bool sendCigiData();
 
-   CigiCl* getCigi() { return cigi; }
-   const CigiCl* getCigi() const { return cigi; }
+   CigiCl* getCigi()                  { return cigi; }
+   const CigiCl* getCigi() const      { return cigi; }
 
    // Set Slot functions
    virtual bool setSlotCigi(CigiCl* const msg);
@@ -394,8 +394,8 @@ private:
    SPtr<Basic::NetHandler>   netInput;    // Input network handler
    SPtr<Basic::NetHandler>   netOutput;   // Output network handler
    SPtr<Basic::Thread>       thread;      // The thread
-   bool   networkInitialized;             // CIGI has been initialized
-   bool   networkInitFailed;              // CIGI initialization has failed
+   bool networkInitialized;               // CIGI has been initialized
+   bool networkInitFailed;                // CIGI initialization has failed
 
    CigiIncomingMsg* msgIn;
    CigiOutgoingMsg* msgOut;

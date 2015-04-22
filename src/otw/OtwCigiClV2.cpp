@@ -77,14 +77,14 @@ BEGIN_SLOTTABLE(OtwCigiClV2)
    "async",                // 2) True (non-zero) to run in CIGI async mode (default: false - CIGI sync)
    "hideOwnshipModel",     // 3) True to hide the ownship's model (default: false - ownship's model is seen)
    "ownshipModel",         // 4) Ownship's model ID
-   "mslTrailModel",        // 5) Missile Trail" effect model ID 
+   "mslTrailModel",        // 5) Missile Trail" effect model ID
    "smokePlumeModel",      // 6) Smoke Plume" effect model ID
    "airExplosionModel",    // 7) Air Explosion" effect model ID
    "groundExplosionModel", // 8) GroundE xplosion" effect model ID
    "shipWakeModel",        // 9) Ship Wake" effect model ID
 END_SLOTTABLE(OtwCigiClV2)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(OtwCigiClV2)
     ON_SLOT(1, setSlotCigi,                  CigiClV2);
     ON_SLOT(2, setSlotASyncMode,             Basic::Number);
@@ -110,7 +110,7 @@ OtwCigiClV2::OtwCigiClV2() : cigi(0)
 {
    STANDARD_CONSTRUCTOR()
 
-   cigi = 0;
+   cigi = nullptr;
    cigiInitialized = false;
    cigiInitFailed = false;
 
@@ -142,7 +142,7 @@ OtwCigiClV2::OtwCigiClV2() : cigi(0)
 
    igc =  new CigiIGCtrlV2();
    los = new CigiLosVectReqV2();
-   view = 0;
+   view = nullptr;
    fov = new CigiViewDefV2();
 
    iw = NUM_BUFFERS;
@@ -165,7 +165,7 @@ void OtwCigiClV2::copyData(const OtwCigiClV2& org, const bool cc)
    BaseClass::copyData(org);
 
    if (cc) {
-      cigi = 0;
+      cigi = nullptr;
 
 	for (unsigned int i = 0; i < NUM_BUFFERS; i++) {
 	    ownshipEC[i] = new CigiEntityCtrlV2();
@@ -173,16 +173,16 @@ void OtwCigiClV2::copyData(const OtwCigiClV2& org, const bool cc)
 	}
 	igc =  new CigiIGCtrlV2();
 	los = new CigiLosVectReqV2();
-	view = 0;
-	fov = 0;
+	view = nullptr;
+	fov = nullptr;
 
 	iw = NUM_BUFFERS;
 	iw0 = NUM_BUFFERS;
 	ir = NUM_BUFFERS;
    }
 
-   cigi = 0;
-   if (org.cigi != 0) {
+   cigi = nullptr;
+   if (org.cigi != nullptr) {
       cigi = (CigiClV2*) org.cigi->clone();
    }
    cigiInitialized = false;
@@ -229,13 +229,13 @@ void OtwCigiClV2::deleteData()
    cigi = 0;
 
    for (unsigned int i = 0; i < NUM_BUFFERS; i++) {
-      if (ownshipEC[i] != 0) { delete ownshipEC[i]; ownshipEC[i] = 0; }
-      if (ownshipCC[i] != 0) { delete ownshipCC[i]; ownshipCC[i] = 0; }
+      if (ownshipEC[i] != nullptr) { delete ownshipEC[i]; ownshipEC[i] = nullptr; }
+      if (ownshipCC[i] != nullptr) { delete ownshipCC[i]; ownshipCC[i] = nullptr; }
    }
-   if (igc != 0) { delete igc; igc = 0; }
-   if (los != 0) { delete los; los = 0; }
-   if (view != 0) { delete view; view =0; }
-   if (fov != 0) { delete fov; fov = 0; }
+   if (igc != nullptr) { delete igc; igc = nullptr; }
+   if (los != nullptr) { delete los; los = nullptr; }
+   if (view != nullptr) { delete view; view = nullptr; }
+   if (fov != nullptr) { delete fov; fov = nullptr; }
    iw = NUM_BUFFERS;
    iw0 = NUM_BUFFERS;
    ir = NUM_BUFFERS;
@@ -284,11 +284,10 @@ bool OtwCigiClV2::setHideOwnshipModel(const bool f)
 //------------------------------------------------------------------------------
 void OtwCigiClV2::updateData(const LCreal dt)
 {
-
    // ---
    // Init the static CIGI system (only once for all instances)
    // ---
-   if (cigi != 0 && !cigiInitialized && !cigiInitFailed) {
+   if (cigi != nullptr && !cigiInitialized && !cigiInitFailed) {
       cigiInitialized = cigi->initialize(this);
       cigiInitFailed = !cigiInitialized;
    }
@@ -296,7 +295,7 @@ void OtwCigiClV2::updateData(const LCreal dt)
    // ---
    // Init the static CIGI system (only once for all instances)
    // ---
-   if (cigi != 0 && cigi->isInitialized()) {
+   if (cigi != nullptr && cigi->isInitialized()) {
       cigi->frameBg();
    }
 
@@ -371,14 +370,14 @@ void OtwCigiClV2::recvElevations()
 //------------------------------------------------------------------------------
 void OtwCigiClV2::frameSync()
 {
-   if (cigi != 0 && cigi->isInitialized()) {
+   if (cigi != nullptr && cigi->isInitialized()) {
       if (isASyncMode()) sendCigiData();
       cigi->frameSync();
    }
 }
 
 //------------------------------------------------------------------------------
-// reset() - Reset OTW 
+// reset() - Reset OTW
 //------------------------------------------------------------------------------
 void OtwCigiClV2::reset()
 {
@@ -399,22 +398,22 @@ bool OtwCigiClV2::updateOwnshipModel()
 {
     // Ownship active and type air vehicle?
     bool active = false;
-    if (getOwnship() != 0) active = getOwnship()->isActive();
+    if (getOwnship() != nullptr) active = getOwnship()->isActive();
     const Simulation::Player* av = getOwnship();
 
-    if (active && av != 0 && getOwnshipEntityControlPacket(iw) != 0) {
+    if (active && av != nullptr && getOwnshipEntityControlPacket(iw) != nullptr) {
         // We have an active, AirVehicle type ownship and an entity control packet ...
 
         CigiEntityCtrlV2* ec = getOwnshipEntityControlPacket(iw);
         setCommonModelData(ec,0,av); // Note: Ownship is always entity #0
         if (isOwnshipModelHidden()) {
-	   ec->SetEntityState(CigiEntityCtrlV2::LoadHideV2);
+            ec->SetEntityState(CigiEntityCtrlV2::LoadHideV2);
         }
         else {
-           // if we are being shown, make sure we update our model
-	   ec->SetEntityState(CigiEntityCtrlV2::LoadShowV2);
+            // if we are being shown, make sure we update our model
+            ec->SetEntityState(CigiEntityCtrlV2::LoadShowV2);
         }
-	ec->SetEntityType(cmtOwnship);
+        ec->SetEntityType(cmtOwnship);
         ec->SetAttachState(CigiEntityCtrlV2::Detach);
         ec->SetCollisionDetectEn(CigiEntityCtrlV2::Disable);
         ec->SetEffectState(CigiEntityCtrlV2::StopV2);
@@ -429,29 +428,29 @@ bool OtwCigiClV2::updateOwnshipModel()
             animation->SetCompState(STANDING);
             animation->SetCompData(0.0f, 0);
             animation->SetCompData(0.0f, 1);
-            
+
             if (player != 0 && animation != 0) {
                 // get our ownship models id and our model
                 Simulation::LifeForm* lf = (Simulation::LifeForm*)player;
-		if (lf != 0) {
-		    if (lf->getDamage() < 1) {
-			// Choose Animation state
-			if (lf->getActionState() == Simulation::LifeForm::UPRIGHT_STANDING) {
-			    animation->SetCompState(STANDING);
-			}
-			else if (lf->getActionState() == Simulation::LifeForm::UPRIGHT_WALKING) {
-			    animation->SetCompState(WALK);
-			}
-			else if (lf->getActionState() == Simulation::LifeForm::UPRIGHT_RUNNING) {
-			    animation->SetCompState(RUN);
-			}
-			else {
-			    // default is standing
-			    animation->SetCompState(STANDING);
-			}
-		    }
-		    else animation->SetCompState(DEAD);
-		}
+                if (lf != 0) {
+                    if (lf->getDamage() < 1) {
+                        // Choose Animation state
+                        if (lf->getActionState() == Simulation::LifeForm::UPRIGHT_STANDING) {
+                            animation->SetCompState(STANDING);
+                        }
+                        else if (lf->getActionState() == Simulation::LifeForm::UPRIGHT_WALKING) {
+                            animation->SetCompState(WALK);
+                        }
+                        else if (lf->getActionState() == Simulation::LifeForm::UPRIGHT_RUNNING) {
+                            animation->SetCompState(RUN);
+                        }
+                        else {
+                            // default is standing
+                            animation->SetCompState(STANDING);
+                        }
+                    }
+                    else animation->SetCompState(DEAD);
+                }
             }
         }
     }
@@ -468,12 +467,12 @@ int OtwCigiClV2::updateModels()
 
     // Do we have models?
     Simulation::OtwModel** const table = getModelTable();
-    if (table != 0 && getModelTableSize() > 0) {
+    if (table != nullptr && getModelTableSize() > 0) {
 
         // For all active models in the table ...
         for (unsigned short i = 0; i < getModelTableSize(); i++) {
             SPtr<OtwModelCigiClV2> model( (OtwModelCigiClV2*) table[i] );
-            if (model != 0) {
+            if (model != nullptr) {
 
                if (model->getState() != Simulation::OtwModel::INACTIVE) {
                   unsigned short entity = model->getID()* 8 + 1; // Save a block of four entities per model
@@ -485,8 +484,6 @@ int OtwCigiClV2::updateModels()
 
                   // Get the player
                   const Simulation::Player* player = model->getPlayer();
-
-
 
                   // Set the model data and ...
                   if (player->isMajorType(Simulation::Player::AIR_VEHICLE)) {
@@ -511,11 +508,11 @@ int OtwCigiClV2::updateModels()
                      const Simulation::Effects* effect      = dynamic_cast<const Simulation::Effects*>(model->getPlayer());
                      const Simulation::Missile* msl      = dynamic_cast<const Simulation::Missile*>(model->getPlayer());
                      const Simulation::Weapon* wpn       = dynamic_cast<const Simulation::Weapon*>(model->getPlayer());
-                     if (effect != 0) // Effects before general weapons (because effects are also weapons)
+                     if (effect != nullptr) // Effects before general weapons (because effects are also weapons)
                         setEffectsData(model, entity, effect);
-                     else if (msl != 0) // Missiles before general weapons (because missiles are also weapons)
+                     else if (msl != nullptr) // Missiles before general weapons (because missiles are also weapons)
                         setMissileData(model, entity, msl);
-                     else if (wpn != 0)
+                     else if (wpn != nullptr)
                         setWeaponData(model, entity, wpn);
                   }
 
@@ -528,12 +525,12 @@ int OtwCigiClV2::updateModels()
 }
 
 //------------------------------------------------------------------------------
-// setCommonModelData() -- 
+// setCommonModelData() --
 //  -- Sets a CigiEntityCtrlV2 structure with common data entity data
 //------------------------------------------------------------------------------
 bool OtwCigiClV2::setCommonModelData(CigiEntityCtrlV2* const ec, const unsigned short entity, const Simulation::Player* const p)
 {
-    bool ok = (ec != 0 && p != 0);
+    bool ok = (ec != nullptr && p != nullptr);
 
     if (ok) {
         // Set entity id, parent and state
@@ -544,16 +541,16 @@ bool OtwCigiClV2::setCommonModelData(CigiEntityCtrlV2* const ec, const unsigned 
         // Set angles
         ec->SetRoll(p->getRollD());
         ec->SetPitch(p->getPitchD());
-	LCreal hdg = p->getHeadingD();
-	if (hdg < 0.0) {
-	    hdg += 360.0;
-	}
+        LCreal hdg = p->getHeadingD();
+        if (hdg < 0.0) {
+            hdg += 360.0;
+        }
         ec->SetHeading(hdg);
-	
+
         osg::Vec3 pos = p->getPosition();
 
         // Set position
-        double lat, lon, alt;
+        double lat(0.0), lon(0.0), alt(0.0);
         Basic::Nav::convertPosVec2LL(getRefLatitude(), getRefLongitude(), pos, &lat, &lon, &alt);
         ec->SetLat(lat);
         ec->SetLon(lon);
@@ -569,13 +566,13 @@ bool OtwCigiClV2::setCommonModelData(CigiEntityCtrlV2* const ec, const unsigned 
 bool OtwCigiClV2::setAirVehicleData(OtwModelCigiClV2* const m, const unsigned short entity, const Simulation::AirVehicle* const p)
 {
     // Make sure we have an entity control block
-    if (m->parentEC[iw] == 0) {
+    if (m->parentEC[iw] == nullptr) {
         m->parentEC[iw] = new CigiEntityCtrlV2();
     }
     CigiEntityCtrlV2* const ec = m->parentEC[iw];
 
     // Smoke control block, ...
-    if (m->smokeEC[iw] == 0) {
+    if (m->smokeEC[iw] == nullptr) {
         m->smokeEC[iw] = new CigiEntityCtrlV2();
         m->smokeActive = false;
     }
@@ -588,12 +585,12 @@ bool OtwCigiClV2::setAirVehicleData(OtwModelCigiClV2* const m, const unsigned sh
             // Set the entity type
             unsigned int tt = 0;
             const Simulation::Otm* otm = m->getTypeMapper();
-            if (otm != 0) tt = otm->getTypeId();
+            if (otm != nullptr) tt = otm->getTypeId();
             if (tt > 0xffff) tt = 0;   // unsigned short only
-	    ec->SetEntityType(static_cast<unsigned short>(tt));
-            
+            ec->SetEntityType(static_cast<unsigned short>(tt));
+
             // Set entity control data
-	    ec->SetEntityState(CigiEntityCtrlV2::LoadShowV2);
+            ec->SetEntityState(CigiEntityCtrlV2::LoadShowV2);
             ec->SetAttachState(CigiEntityCtrlV2::Detach);
             ec->SetCollisionDetectEn(CigiEntityCtrlV2::Disable);
             ec->SetEffectState(CigiEntityCtrlV2::StopV2);
@@ -601,7 +598,7 @@ bool OtwCigiClV2::setAirVehicleData(OtwModelCigiClV2* const m, const unsigned sh
             ec->SetTemp(0.0f);
         }
         m->parentActive = ok;
-        
+
         // Load the smoke entity control
         if (p->getSmoke() > 0.3f) {
             // Set entity id, parent and state
@@ -615,7 +612,7 @@ bool OtwCigiClV2::setAirVehicleData(OtwModelCigiClV2* const m, const unsigned sh
             smoke->SetLat(0.0);
             smoke->SetLon(0.0);
 
-	    smoke->SetEntityState(CigiEntityCtrlV2::LoadShowV2);
+            smoke->SetEntityState(CigiEntityCtrlV2::LoadShowV2);
             smoke->SetEntityType(cmtSmokePlume);
             smoke->SetAttachState(CigiEntityCtrlV2::Attach);
             smoke->SetCollisionDetectEn(CigiEntityCtrlV2::Disable);
@@ -626,13 +623,13 @@ bool OtwCigiClV2::setAirVehicleData(OtwModelCigiClV2* const m, const unsigned sh
             m->smokeActive = true;
         }
         else {
-	    smoke->SetEntityState(CigiEntityCtrlV2::LoadHideV2);
+            smoke->SetEntityState(CigiEntityCtrlV2::LoadHideV2);
         }
 
     }
     else {
-	ec->SetEntityState(CigiEntityCtrlV2::LoadHideV2);
-	smoke->SetEntityState(CigiEntityCtrlV2::LoadHideV2);
+        ec->SetEntityState(CigiEntityCtrlV2::LoadHideV2);
+        smoke->SetEntityState(CigiEntityCtrlV2::LoadHideV2);
     }
     return true;
 }
@@ -643,20 +640,20 @@ bool OtwCigiClV2::setAirVehicleData(OtwModelCigiClV2* const m, const unsigned sh
 bool OtwCigiClV2::setBuildingData(OtwModelCigiClV2* const m, const unsigned short entity, const Simulation::Building* const p)
 {
     // Make sure we have an entity control block
-    if (m->parentEC[iw] == 0) {
+    if (m->parentEC[iw] == nullptr) {
         m->parentEC[iw] = new CigiEntityCtrlV2();
     }
     CigiEntityCtrlV2* const ec = m->parentEC[iw];
 
     // Smoke control block, ...
-    if (m->smokeEC[iw] == 0) {
+    if (m->smokeEC[iw] == nullptr) {
         m->smokeEC[iw] = new CigiEntityCtrlV2();
         m->smokeActive = false;
     }
     CigiEntityCtrlV2* const smoke = m->smokeEC[iw];
 
     // Damage control, ...
-    if (m->damageCC[iw] == 0) {
+    if (m->damageCC[iw] == nullptr) {
         m->damageCC[iw]->SetCompClassV2(CigiCompCtrlV2::EntityV2);
         m->damageCC[iw]->SetInstanceID(entity);
         m->damageCC[iw]->SetCompID(6); // Object State
@@ -671,16 +668,16 @@ bool OtwCigiClV2::setBuildingData(OtwModelCigiClV2* const m, const unsigned shor
     if (m->getState() == Simulation::OtwModel::ACTIVE) {
         bool ok = setCommonModelData(ec,entity,p);
         if (ok) {
-                    
+
             // Set the entity type
             unsigned int tt = 0;
             const Simulation::Otm* otm = m->getTypeMapper();
-            if (otm != 0) tt = otm->getTypeId();
+            if (otm != nullptr) tt = otm->getTypeId();
             if (tt > 0xffff) tt = 0;   // unsigned short only
-	    ec->SetEntityType(static_cast<unsigned short>(tt));
-            
+            ec->SetEntityType(static_cast<unsigned short>(tt));
+
             // Set entity control data
-	    ec->SetEntityState(CigiEntityCtrlV2::LoadShowV2);
+            ec->SetEntityState(CigiEntityCtrlV2::LoadShowV2);
             ec->SetAttachState(CigiEntityCtrlV2::Detach);
             ec->SetCollisionDetectEn(CigiEntityCtrlV2::Disable);
             ec->SetEffectState(CigiEntityCtrlV2::StopV2);
@@ -702,7 +699,7 @@ bool OtwCigiClV2::setBuildingData(OtwModelCigiClV2* const m, const unsigned shor
             smoke->SetLat(0.0);
             smoke->SetLon(0.0);
 
-	    smoke->SetEntityState(CigiEntityCtrlV2::LoadShowV2);
+            smoke->SetEntityState(CigiEntityCtrlV2::LoadShowV2);
             smoke->SetEntityType(cmtSmokePlume);
             smoke->SetAttachState(CigiEntityCtrlV2::Attach);
             smoke->SetCollisionDetectEn(CigiEntityCtrlV2::Disable);
@@ -713,26 +710,26 @@ bool OtwCigiClV2::setBuildingData(OtwModelCigiClV2* const m, const unsigned shor
             m->smokeActive = true;
         }
         else {
-	    smoke->SetEntityState(CigiEntityCtrlV2::LoadHideV2);
+            smoke->SetEntityState(CigiEntityCtrlV2::LoadHideV2);
         }
 
         if (p->getDamage() > 0.0) {
            if (p->isDestroyed()) {
-	      damage->SetCompState(3);	// 3 = DISTROYED
+               damage->SetCompState(3);   // 3 = DISTROYED
            }
            else {
-	      damage->SetCompState(2);	// 2 = DAMAGED
+               damage->SetCompState(2);   // 2 = DAMAGED
            }
            m->damageActive = true;
         }
         else {
-	   damage->SetCompState(1);	// 0 = DEFAULT, 1 = GOOD, 2 = DAMAGED, 3 = DISTROYED
+           damage->SetCompState(1);       // 0 = DEFAULT, 1 = GOOD, 2 = DAMAGED, 3 = DISTROYED
         }
 
     }
     else {
-	ec->SetEntityState(CigiEntityCtrlV2::LoadHideV2);
-	smoke->SetEntityState(CigiEntityCtrlV2::LoadHideV2);
+        ec->SetEntityState(CigiEntityCtrlV2::LoadHideV2);
+        smoke->SetEntityState(CigiEntityCtrlV2::LoadHideV2);
     }
     return true;
 }
@@ -743,20 +740,20 @@ bool OtwCigiClV2::setBuildingData(OtwModelCigiClV2* const m, const unsigned shor
 bool OtwCigiClV2::setGndVehicleData(OtwModelCigiClV2* const m, const unsigned short entity, const Simulation::GroundVehicle* const p)
 {
     // Make sure we have an entity control block
-    if (m->parentEC[iw] == 0) {
+    if (m->parentEC[iw] == nullptr) {
         m->parentEC[iw] = new CigiEntityCtrlV2();
     }
     CigiEntityCtrlV2* const ec = m->parentEC[iw];
 
     // Smoke control block, ...
-    if (m->smokeEC[iw] == 0) {
+    if (m->smokeEC[iw] == nullptr) {
         m->smokeEC[iw] = new CigiEntityCtrlV2();
         m->smokeActive = false;
     }
     CigiEntityCtrlV2* const smoke = m->smokeEC[iw];
 
     // Damage control, ...
-    if (m->damageCC[iw] == 0) {
+    if (m->damageCC[iw] == nullptr) {
         m->damageCC[iw]->SetCompClassV2(CigiCompCtrlV2::EntityV2);
         m->damageCC[iw]->SetInstanceID(entity);
         m->damageCC[iw]->SetCompID(6); // Object State
@@ -768,23 +765,23 @@ bool OtwCigiClV2::setGndVehicleData(OtwModelCigiClV2* const m, const unsigned sh
     CigiCompCtrlV2* const damage = m->damageCC[iw];
 
     // Articulated launcher control
-    if (m->launcherAPC[iw] == 0) {
+    if (m->launcherAPC[iw] == nullptr) {
         m->launcherAPC[iw] = new CigiArtPartCtrlV2();
         m->launcherApcActive = false;
     }
     CigiArtPartCtrlV2* const launcherAPC = m->launcherAPC[iw];
 
     // Attached part, ...
-    if (m->attachedEC[iw] == 0) {
+    if (m->attachedEC[iw] == nullptr) {
         m->attachedEC[iw] = new CigiEntityCtrlV2();
         m->attachedEcActive = false;
     }
     CigiEntityCtrlV2* const attachedPartEC = m->attachedEC[iw];
 
     // Damage control, ...
-    if (m->attachedCC[iw] == 0) {
+    if (m->attachedCC[iw] == nullptr) {
         m->attachedCC[iw] = new CigiCompCtrlV2();
-        m->attachedCcActive = false; 
+        m->attachedCcActive = false;
     }
     CigiCompCtrlV2* const attachedPartCC = m->attachedCC[iw];
 
@@ -792,16 +789,16 @@ bool OtwCigiClV2::setGndVehicleData(OtwModelCigiClV2* const m, const unsigned sh
     if (m->getState() == Simulation::OtwModel::ACTIVE) {
         bool ok = setCommonModelData(ec,entity,p);
         if (ok) {
-                    
+
             // Set the entity type
             unsigned int tt = 0;
             const Simulation::Otm* otm = m->getTypeMapper();
-            if (otm != 0) tt = otm->getTypeId();
+            if (otm != nullptr) tt = otm->getTypeId();
             if (tt > 0xffff) tt = 0;   // unsigned short only
-	    ec->SetEntityType(static_cast<unsigned short>(tt));
-            
+            ec->SetEntityType(static_cast<unsigned short>(tt));
+
             // Set entity control data
-	    ec->SetEntityState(CigiEntityCtrlV2::LoadShowV2);
+            ec->SetEntityState(CigiEntityCtrlV2::LoadShowV2);
             ec->SetAttachState(CigiEntityCtrlV2::Detach);
             ec->SetCollisionDetectEn(CigiEntityCtrlV2::Disable);
             ec->SetEffectState(CigiEntityCtrlV2::StopV2);
@@ -823,7 +820,7 @@ bool OtwCigiClV2::setGndVehicleData(OtwModelCigiClV2* const m, const unsigned sh
             smoke->SetLat(0.0);
             smoke->SetLon(0.0);
 
-	    smoke->SetEntityState(CigiEntityCtrlV2::LoadShowV2);
+            smoke->SetEntityState(CigiEntityCtrlV2::LoadShowV2);
             smoke->SetEntityType(cmtSmokePlume);
             smoke->SetAttachState(CigiEntityCtrlV2::Attach);
             smoke->SetCollisionDetectEn(CigiEntityCtrlV2::Disable);
@@ -834,26 +831,26 @@ bool OtwCigiClV2::setGndVehicleData(OtwModelCigiClV2* const m, const unsigned sh
             m->smokeActive = true;
         }
         else {
-	    smoke->SetEntityState(CigiEntityCtrlV2::LoadHideV2);
+            smoke->SetEntityState(CigiEntityCtrlV2::LoadHideV2);
         }
 
         if (p->getDamage() > 0.0) {
            if (p->isDestroyed()) {
-	      damage->SetCompState(3);	// 3 = DISTROYED
+               damage->SetCompState(3);    // 3 = DISTROYED
            }
            else {
-	      damage->SetCompState(2);	// 2 = DAMAGED
+               damage->SetCompState(2);    // 2 = DAMAGED
            }
            m->damageActive = true;
         }
         else {
-	   damage->SetCompState(1);	// 0 = DEFAULT, 1 = GOOD, 2 = DAMAGED, 3 = DISTROYED
+            damage->SetCompState(1);       // 0 = DEFAULT, 1 = GOOD, 2 = DAMAGED, 3 = DISTROYED
         }
 
     }
     else {
-	ec->SetEntityState(CigiEntityCtrlV2::LoadHideV2);
-	smoke->SetEntityState(CigiEntityCtrlV2::LoadHideV2);
+        ec->SetEntityState(CigiEntityCtrlV2::LoadHideV2);
+        smoke->SetEntityState(CigiEntityCtrlV2::LoadHideV2);
     }
 
     // NAZ-543 Articulated launcher and attached missile
@@ -863,21 +860,21 @@ bool OtwCigiClV2::setGndVehicleData(OtwModelCigiClV2* const m, const unsigned sh
 
        // find all attached missiles
        const Simulation::StoresMgr* sm = p->getStoresManagement();
-       if (sm != 0) {
+       if (sm != nullptr) {
           const Basic::PairStream* stores = sm->getStores();
-          if (stores != 0) {
+          if (stores != nullptr) {
              const Basic::List::Item* item = stores->getFirstItem();
-             while (item != 0 && apartNumMissiles == 0) {
+             while (item != nullptr && apartNumMissiles == 0) {
                 const Basic::Pair* pair = (Basic::Pair*) item->getValue();
-                if (pair != 0) {
+                if (pair != nullptr) {
                    const Simulation::Missile* msl = dynamic_cast<const Simulation::Missile*>( pair->object() );
-                   if (msl != 0) apartNumMissiles++;
+                   if (msl != nullptr) apartNumMissiles++;
                 }
                 item = item->getNext();
              }
              stores->unref();
-             stores = 0;
-          }         
+             stores = nullptr;
+          }
        }
 
        // Launcher articulation
@@ -904,10 +901,10 @@ bool OtwCigiClV2::setGndVehicleData(OtwModelCigiClV2* const m, const unsigned sh
        attachedPartEC->SetTemp(0.0f);
        if (apartNumMissiles > 0) {
 
-	  attachedPartEC->SetEntityState(CigiEntityCtrlV2::LoadShowV2);
+          attachedPartEC->SetEntityState(CigiEntityCtrlV2::LoadShowV2);
           m->attachedEcActive = true;
 
-          // Attached missile to launcher's articulation   
+          // Attached missile to launcher's articulation
           attachedPartCC->SetCompClassV2(CigiCompCtrlV2::EntityV2);
           attachedPartCC->SetInstanceID(attachedPartEC->GetEntityID());
           attachedPartCC->SetCompID(9); // 9 value is for stores attachment to locations
@@ -918,7 +915,7 @@ bool OtwCigiClV2::setGndVehicleData(OtwModelCigiClV2* const m, const unsigned sh
 
        }
        else {
-	  attachedPartEC->SetEntityState(CigiEntityCtrlV2::LoadHideV2);
+          attachedPartEC->SetEntityState(CigiEntityCtrlV2::LoadHideV2);
        }
 
     }
@@ -936,13 +933,13 @@ bool OtwCigiClV2::setGndVehicleData(OtwModelCigiClV2* const m, const unsigned sh
 bool OtwCigiClV2::setEffectsData(OtwModelCigiClV2* const m, const unsigned short entity, const Simulation::Effects* const p)
 {
    // Make sure we have an entity control block
-   if (m->parentEC[iw] == 0) {
+   if (m->parentEC[iw] == nullptr) {
       m->parentEC[iw] = new CigiEntityCtrlV2();
    }
    CigiEntityCtrlV2* const ec = m->parentEC[iw];
 
    // a smoke trail entity control block, ...
-   if (m->trailEC[iw] == 0) {
+   if (m->trailEC[iw] == nullptr) {
       m->trailEC[iw] = new CigiEntityCtrlV2();
       m->trailActive = false;
    }
@@ -962,10 +959,10 @@ bool OtwCigiClV2::setEffectsData(OtwModelCigiClV2* const m, const unsigned short
          const Simulation::Otm* otm = m->getTypeMapper();
          if (otm != 0) tt = otm->getTypeId();
          if (tt > 0xffff) tt = 0;   // unsigned short only
-	 ec->SetEntityType(static_cast<unsigned short>(tt));
-         
+         ec->SetEntityType(static_cast<unsigned short>(tt));
+
          // Set entity control data
-	 ec->SetEntityState(CigiEntityCtrlV2::LoadShowV2);
+         ec->SetEntityState(CigiEntityCtrlV2::LoadShowV2);
          ec->SetAttachState(CigiEntityCtrlV2::Detach);
          ec->SetCollisionDetectEn(CigiEntityCtrlV2::Disable);
          ec->SetEffectState(CigiEntityCtrlV2::StopV2);
@@ -986,12 +983,12 @@ bool OtwCigiClV2::setEffectsData(OtwModelCigiClV2* const m, const unsigned short
             trail->SetLat(0.0);
             trail->SetLon(0.0);
 
-	    trail->SetEntityState(CigiEntityCtrlV2::LoadShowV2);
+            trail->SetEntityState(CigiEntityCtrlV2::LoadShowV2);
             trail->SetEntityType(cmtMslTrail);
-	    trail->SetAttachState(CigiEntityCtrlV2::Attach);
-	    trail->SetCollisionDetectEn(CigiEntityCtrlV2::Disable);
-	    trail->SetEffectState(CigiEntityCtrlV2::StopV2);
-	    //trail->SetEffectState(CigiEntityCtrlV2::PlayV2);
+            trail->SetAttachState(CigiEntityCtrlV2::Attach);
+            trail->SetCollisionDetectEn(CigiEntityCtrlV2::Disable);
+            trail->SetEffectState(CigiEntityCtrlV2::StopV2);
+            //trail->SetEffectState(CigiEntityCtrlV2::PlayV2);
             trail->SetOpacity(66.6f);
             trail->SetTemp(0.0f);
             m->trailActive = true;
@@ -999,19 +996,19 @@ bool OtwCigiClV2::setEffectsData(OtwModelCigiClV2* const m, const unsigned short
       }
 
       else if (p->isClassType(typeid(Simulation::Flare))) {
-         // FLARES 
+         // FLARES
          bool ok = setCommonModelData(ec,entity,p);
          if (ok) {
 
             // Set the entity type
             unsigned int tt = 0;
             const Simulation::Otm* otm = m->getTypeMapper();
-            if (otm != 0) tt = otm->getTypeId();
+            if (otm != nullptr) tt = otm->getTypeId();
             if (tt > 0xffff) tt = 0;   // unsigned short only
-	    ec->SetEntityType(static_cast<unsigned short>(tt));
-            
+            ec->SetEntityType(static_cast<unsigned short>(tt));
+
             // Set entity control data
-	    ec->SetEntityState(CigiEntityCtrlV2::LoadShowV2);
+            ec->SetEntityState(CigiEntityCtrlV2::LoadShowV2);
             ec->SetAttachState(CigiEntityCtrlV2::Detach);
             ec->SetCollisionDetectEn(CigiEntityCtrlV2::Disable);
             ec->SetEffectState(CigiEntityCtrlV2::PlayV2);
@@ -1022,8 +1019,8 @@ bool OtwCigiClV2::setEffectsData(OtwModelCigiClV2* const m, const unsigned short
       }
       else {
          // Unknown type
-	 ec->SetEntityState(CigiEntityCtrlV2::LoadHideV2);
-	 trail->SetEntityState(CigiEntityCtrlV2::LoadHideV2);
+         ec->SetEntityState(CigiEntityCtrlV2::LoadHideV2);
+         trail->SetEntityState(CigiEntityCtrlV2::LoadHideV2);
       }
 
    }
@@ -1042,13 +1039,13 @@ bool OtwCigiClV2::setLifeFormData(OtwModelCigiClV2* const m, const unsigned shor
 {
 
     // Make sure we have an entity control block
-    if (m->parentEC[iw] == 0) {
+    if (m->parentEC[iw] == nullptr) {
         m->parentEC[iw] = new CigiEntityCtrlV2();
     }
     CigiEntityCtrlV2* const ec = m->parentEC[iw];
 
     // Animation control, ...
-    if (m->animationCC[iw] == 0) {
+    if (m->animationCC[iw] == nullptr) {
         m->animationCC[iw] = new CigiCompCtrlV2();
         m->animationCC[iw]->SetCompClassV2(CigiCompCtrlV2::EntityV2);
         m->animationCC[iw]->SetInstanceID(entity);
@@ -1067,12 +1064,12 @@ bool OtwCigiClV2::setLifeFormData(OtwModelCigiClV2* const m, const unsigned shor
             // Set the entity type
             unsigned int tt = 0;
             const Simulation::Otm* otm = m->getTypeMapper();
-            if (otm != 0) tt = otm->getTypeId();
+            if (otm != nullptr) tt = otm->getTypeId();
             if (tt > 0xffff) tt = 0;   // unsigned short only
-	    ec->SetEntityType(static_cast<unsigned short>(tt));
-            
+            ec->SetEntityType(static_cast<unsigned short>(tt));
+
             // Set entity control data
-	    ec->SetEntityState(CigiEntityCtrlV2::LoadShowV2);
+            ec->SetEntityState(CigiEntityCtrlV2::LoadShowV2);
             ec->SetAttachState(CigiEntityCtrlV2::Detach);
             ec->SetCollisionDetectEn(CigiEntityCtrlV2::Disable);
             ec->SetEffectState(CigiEntityCtrlV2::StopV2);
@@ -1082,27 +1079,27 @@ bool OtwCigiClV2::setLifeFormData(OtwModelCigiClV2* const m, const unsigned shor
         m->parentActive = ok;
 
         Simulation::LifeForm* lf = (Simulation::LifeForm*)p;
-    
-	if (lf->getDamage() <= 0.9f) {
-        // Choose Animation state
-	    if (lf->getActionState() == Simulation::LifeForm::UPRIGHT_STANDING) {
-	        animation->SetCompState(STANDING);
+
+        if (lf->getDamage() <= 0.9f) {
+            // Choose Animation state
+            if (lf->getActionState() == Simulation::LifeForm::UPRIGHT_STANDING) {
+                animation->SetCompState(STANDING);
             }
-	    else if (lf->getActionState() == Simulation::LifeForm::UPRIGHT_WALKING) {
-	        animation->SetCompState(WALK);
-	    }
-	    else if (lf->getActionState() == Simulation::LifeForm::UPRIGHT_RUNNING) {
-		animation->SetCompState(RUN);
-	    }
-	    else {
-            // default is standing
-		animation->SetCompState(STANDING);
-	    }
-	}
-	else {
-	// our damage is enough to kill us, so we are DEAD
-	    animation->SetCompState(DEAD);
-	}
+            else if (lf->getActionState() == Simulation::LifeForm::UPRIGHT_WALKING) {
+                animation->SetCompState(WALK);
+            }
+            else if (lf->getActionState() == Simulation::LifeForm::UPRIGHT_RUNNING) {
+                animation->SetCompState(RUN);
+            }
+            else {
+                // default is standing
+                animation->SetCompState(STANDING);
+            }
+        }
+        else {
+            // our damage is enough to kill us, so we are DEAD
+            animation->SetCompState(DEAD);
+        }
         m->animationActive = true;
     }
     else {
@@ -1118,21 +1115,21 @@ bool OtwCigiClV2::setLifeFormData(OtwModelCigiClV2* const m, const unsigned shor
 bool OtwCigiClV2::setMissileData(OtwModelCigiClV2* const m, const unsigned short entity, const Simulation::Missile* const p)
 {
     // Make sure we have an entity control block, ...
-    if (m->parentEC[iw] == 0) {
+    if (m->parentEC[iw] == nullptr) {
         m->parentEC[iw] = new CigiEntityCtrlV2();
         m->parentActive = false;
     }
     CigiEntityCtrlV2* const ec = m->parentEC[iw];
 
     // a smoke trail entity control block, ...
-    if (m->trailEC[iw] == 0) {
+    if (m->trailEC[iw] == nullptr) {
         m->trailEC[iw] = new CigiEntityCtrlV2();
         m->trailActive = false;
     }
     CigiEntityCtrlV2* const trail = m->trailEC[iw];
 
     // an air explosion entity control block, ...
-    if (m->explosionEC[iw] == 0) {
+    if (m->explosionEC[iw] == nullptr) {
         m->explosionEC[iw] = new CigiEntityCtrlV2();
         m->explosionEC[iw]->SetEntityID(entity+2); // Explosions are at main entity_id plus two
         m->explosionEC[iw]->SetParentID(entity);
@@ -1144,8 +1141,8 @@ bool OtwCigiClV2::setMissileData(OtwModelCigiClV2* const m, const unsigned short
         m->explosionEC[iw]->SetLat(0.0);
         m->explosionEC[iw]->SetLon(0.0);
 
-	m->explosionEC[iw]->SetEntityState(CigiEntityCtrlV2::LoadShowV2);
-	m->explosionEC[iw]->SetEntityType(cmtAirExplosion);
+        m->explosionEC[iw]->SetEntityState(CigiEntityCtrlV2::LoadShowV2);
+        m->explosionEC[iw]->SetEntityType(cmtAirExplosion);
         m->explosionEC[iw]->SetAttachState(CigiEntityCtrlV2::Detach);
         m->explosionEC[iw]->SetCollisionDetectEn(CigiEntityCtrlV2::Disable);
         m->explosionEC[iw]->SetEffectState(CigiEntityCtrlV2::StopV2);
@@ -1160,16 +1157,16 @@ bool OtwCigiClV2::setMissileData(OtwModelCigiClV2* const m, const unsigned short
     if (m->getState() == Simulation::OtwModel::ACTIVE) {
         // Load the parent entity control
         setCommonModelData(ec,entity,p);
-                    
+
         // Set the entity type
         unsigned int tt = 0;
         const Simulation::Otm* otm = m->getTypeMapper();
         if (otm != 0) tt = otm->getTypeId();
         if (tt > 0xffff) tt = 0;   // unsigned shorts only
-	ec->SetEntityType(static_cast<unsigned short>(tt));
-         
+        ec->SetEntityType(static_cast<unsigned short>(tt));
+
         // Set entity control data
-	ec->SetEntityState(CigiEntityCtrlV2::LoadShowV2);
+        ec->SetEntityState(CigiEntityCtrlV2::LoadShowV2);
         ec->SetAttachState(CigiEntityCtrlV2::Detach);
         ec->SetCollisionDetectEn(CigiEntityCtrlV2::Disable);
         ec->SetEffectState(CigiEntityCtrlV2::StopV2);
@@ -1191,12 +1188,12 @@ bool OtwCigiClV2::setMissileData(OtwModelCigiClV2* const m, const unsigned short
             trail->SetLon(0.0);
 
             //trail->Seteffect_state = EFFECT_ANIMATION_STATE_PLAY;
-	    trail->SetEntityState(CigiEntityCtrlV2::LoadShowV2);
+            trail->SetEntityState(CigiEntityCtrlV2::LoadShowV2);
             trail->SetEntityType(cmtMslTrail);
-	    trail->SetAttachState(CigiEntityCtrlV2::Attach);
-	    trail->SetCollisionDetectEn(CigiEntityCtrlV2::Disable);
-	    trail->SetEffectState(CigiEntityCtrlV2::StopV2);
-	    //trail->SetEffectState(CigiEntityCtrlV2::PlayV2);
+            trail->SetAttachState(CigiEntityCtrlV2::Attach);
+            trail->SetCollisionDetectEn(CigiEntityCtrlV2::Disable);
+            trail->SetEffectState(CigiEntityCtrlV2::StopV2);
+            //trail->SetEffectState(CigiEntityCtrlV2::PlayV2);
             trail->SetOpacity(66.6f);
             trail->SetTemp(0.0f);
             m->trailActive = true;
@@ -1204,21 +1201,21 @@ bool OtwCigiClV2::setMissileData(OtwModelCigiClV2* const m, const unsigned short
     }
     else {
         ec->SetEntityState(CigiEntityCtrlV2::LoadHideV2);
-	trail->SetEntityState(CigiEntityCtrlV2::LoadHideV2);
+        trail->SetEntityState(CigiEntityCtrlV2::LoadHideV2);
         if (m->getState() == Simulation::OtwModel::DEAD) {
-            // Start air explosion at last known location of missile
-            explosion->SetRoll(ec->GetRoll());
-            explosion->SetPitch(ec->GetPitch());
-            explosion->SetHeading(ec->GetHeading());
-            if (ec->GetAlt() > p->getTerrainElevation())
-                explosion->SetAlt(ec->GetAlt());
-            else
-                explosion->SetAlt(p->getTerrainElevation());
-            explosion->SetLat(ec->GetLat());
-            explosion->SetLon(ec->GetLon());
-	    //explosion->SetEffectState(CigiEntityCtrlV2::PlayV2);
-	    explosion->SetEffectState(CigiEntityCtrlV2::RestartV2);
-            m->explosionActive = true;  // True to start to sequence
+           // Start air explosion at last known location of missile
+           explosion->SetRoll(ec->GetRoll());
+           explosion->SetPitch(ec->GetPitch());
+           explosion->SetHeading(ec->GetHeading());
+           if (ec->GetAlt() > p->getTerrainElevation())
+              explosion->SetAlt(ec->GetAlt());
+           else
+              explosion->SetAlt(p->getTerrainElevation());
+           explosion->SetLat(ec->GetLat());
+           explosion->SetLon(ec->GetLon());
+           //explosion->SetEffectState(CigiEntityCtrlV2::PlayV2);
+           explosion->SetEffectState(CigiEntityCtrlV2::RestartV2);
+           m->explosionActive = true;  // True to start to sequence
         }
     }
     return true;
@@ -1230,13 +1227,13 @@ bool OtwCigiClV2::setMissileData(OtwModelCigiClV2* const m, const unsigned short
 bool OtwCigiClV2::setShipData(OtwModelCigiClV2* const m, const unsigned short entity, const Simulation::Ship* const p)
 {
    // Make sure we have an entity control block
-   if (m->parentEC[iw] == 0) {
+   if (m->parentEC[iw] == nullptr) {
       m->parentEC[iw] = new CigiEntityCtrlV2();
    }
    CigiEntityCtrlV2* const ec = m->parentEC[iw];
 
     // a wake entity control block, ...
-    if (m->trailEC[iw] == 0) {
+    if (m->trailEC[iw] == nullptr) {
         m->trailEC[iw] = new CigiEntityCtrlV2();
         m->trailActive = false;
     }
@@ -1246,16 +1243,16 @@ bool OtwCigiClV2::setShipData(OtwModelCigiClV2* const m, const unsigned short en
    if (m->getState() == Simulation::OtwModel::ACTIVE) {
       bool ok = setCommonModelData(ec,entity,p);
       if (ok) {
-                    
+
          // Set the entity type
          unsigned int tt = 0;
          const Simulation::Otm* otm = m->getTypeMapper();
-         if (otm != 0) tt = otm->getTypeId();
+         if (otm != nullptr) tt = otm->getTypeId();
          if (tt > 0xffff) tt = 0;   // unsigned shorts only
-	 ec->SetEntityType(static_cast<unsigned short>(tt));
-         
+         ec->SetEntityType(static_cast<unsigned short>(tt));
+
          // Set entity control data
-	 ec->SetEntityState(CigiEntityCtrlV2::LoadShowV2);
+         ec->SetEntityState(CigiEntityCtrlV2::LoadShowV2);
          ec->SetAttachState(CigiEntityCtrlV2::Detach);
          ec->SetCollisionDetectEn(CigiEntityCtrlV2::Disable);
          ec->SetEffectState(CigiEntityCtrlV2::StopV2);
@@ -1277,16 +1274,15 @@ bool OtwCigiClV2::setShipData(OtwModelCigiClV2* const m, const unsigned short en
          wake->SetLat(0.0);
          wake->SetLon(0.0);
 
-	 wake->SetEntityState(CigiEntityCtrlV2::LoadShowV2);
+         wake->SetEntityState(CigiEntityCtrlV2::LoadShowV2);
          wake->SetEntityType(cmtShipWake);
-	 wake->SetAttachState(CigiEntityCtrlV2::Attach);
-	 wake->SetCollisionDetectEn(CigiEntityCtrlV2::Disable);
-	 wake->SetEffectState(CigiEntityCtrlV2::PlayV2);
+         wake->SetAttachState(CigiEntityCtrlV2::Attach);
+         wake->SetCollisionDetectEn(CigiEntityCtrlV2::Disable);
+         wake->SetEffectState(CigiEntityCtrlV2::PlayV2);
          wake->SetOpacity(66.6f);
          wake->SetTemp(0.0f);
          m->trailActive = true;
       }
-
    }
    else {
       ec->SetEntityState(CigiEntityCtrlV2::LoadHideV2);
@@ -1303,7 +1299,7 @@ bool OtwCigiClV2::setShipData(OtwModelCigiClV2* const m, const unsigned short en
 bool OtwCigiClV2::setSpaceVehicleData(OtwModelCigiClV2* const m, const unsigned short entity, const Simulation::SpaceVehicle* const p)
 {
     // Make sure we have an entity control block
-    if (m->parentEC[iw] == 0) {
+    if (m->parentEC[iw] == nullptr) {
         m->parentEC[iw] = new CigiEntityCtrlV2();
     }
     CigiEntityCtrlV2* const ec = m->parentEC[iw];
@@ -1315,13 +1311,13 @@ bool OtwCigiClV2::setSpaceVehicleData(OtwModelCigiClV2* const m, const unsigned 
             // Set the entity type
             unsigned int tt = 0;
             const Simulation::Otm* otm = m->getTypeMapper();
-            if (otm != 0) tt = otm->getTypeId();
+            if (otm != nullptr) tt = otm->getTypeId();
             if (tt > 0xffff) tt = 0;   // unsigned short only
 
-	    ec->SetEntityType(static_cast<unsigned short>(tt));
-            
+            ec->SetEntityType(static_cast<unsigned short>(tt));
+
             // Set entity control data
-	    ec->SetEntityState(CigiEntityCtrlV2::LoadShowV2);
+            ec->SetEntityState(CigiEntityCtrlV2::LoadShowV2);
             ec->SetAttachState(CigiEntityCtrlV2::Detach);
             ec->SetCollisionDetectEn(CigiEntityCtrlV2::Disable);
             ec->SetEffectState(CigiEntityCtrlV2::StopV2);
@@ -1342,14 +1338,14 @@ bool OtwCigiClV2::setSpaceVehicleData(OtwModelCigiClV2* const m, const unsigned 
 bool OtwCigiClV2::setWeaponData(OtwModelCigiClV2* const m, const unsigned short entity, const Simulation::Weapon* const p)
 {
     // Make sure we have an entity control block, ...
-    if (m->parentEC[iw] == 0) {
+    if (m->parentEC[iw] == nullptr) {
         m->parentEC[iw] = new CigiEntityCtrlV2();
         m->parentActive = false;
     }
     CigiEntityCtrlV2* const ec = m->parentEC[iw];
 
     // an ground explosion entity control block, ...
-    if (m->explosionEC[iw] == 0) {
+    if (m->explosionEC[iw] == nullptr) {
         m->explosionEC[iw] = new CigiEntityCtrlV2();
         m->explosionEC[iw]->SetEntityID(entity+2); // Explosions are at main entity_id plus two
         m->explosionEC[iw]->SetParentID(entity);
@@ -1361,8 +1357,8 @@ bool OtwCigiClV2::setWeaponData(OtwModelCigiClV2* const m, const unsigned short 
         m->explosionEC[iw]->SetLat(0.0);
         m->explosionEC[iw]->SetLon(0.0);
 
-	m->explosionEC[iw]->SetEntityState(CigiEntityCtrlV2::LoadShowV2);
-	m->explosionEC[iw]->SetEntityType(cmtAirExplosion);
+        m->explosionEC[iw]->SetEntityState(CigiEntityCtrlV2::LoadShowV2);
+        m->explosionEC[iw]->SetEntityType(cmtAirExplosion);
         m->explosionEC[iw]->SetAttachState(CigiEntityCtrlV2::Detach);
         m->explosionEC[iw]->SetCollisionDetectEn(CigiEntityCtrlV2::Disable);
         m->explosionEC[iw]->SetEffectState(CigiEntityCtrlV2::StopV2);
@@ -1377,16 +1373,16 @@ bool OtwCigiClV2::setWeaponData(OtwModelCigiClV2* const m, const unsigned short 
     if (m->getState() == Simulation::OtwModel::ACTIVE) {
         // Load the parent entity control
         setCommonModelData(ec,entity,p);
-                    
+
         // Set the entity type
         unsigned int tt = 0;
         const Simulation::Otm* otm = m->getTypeMapper();
-        if (otm != 0) tt = otm->getTypeId();
+        if (otm != nullptr) tt = otm->getTypeId();
         if (tt > 0xffff) tt = 0;   // unsigned shorts only
-	ec->SetEntityType(static_cast<unsigned short>(tt));
-         
+        ec->SetEntityType(static_cast<unsigned short>(tt));
+
         // Set entity control data
-	ec->SetEntityState(CigiEntityCtrlV2::LoadShowV2);
+        ec->SetEntityState(CigiEntityCtrlV2::LoadShowV2);
         ec->SetAttachState(CigiEntityCtrlV2::Detach);
         ec->SetCollisionDetectEn(CigiEntityCtrlV2::Disable);
         ec->SetEffectState(CigiEntityCtrlV2::StopV2);
@@ -1404,11 +1400,11 @@ bool OtwCigiClV2::setWeaponData(OtwModelCigiClV2* const m, const unsigned short 
             if (ec->GetAlt() > p->getTerrainElevation())
                 explosion->SetAlt(ec->GetAlt());
             else
-                explosion->SetAlt(p->getTerrainElevation());
+               explosion->SetAlt(p->getTerrainElevation());
             explosion->SetLat(ec->GetLat());
             explosion->SetLon(ec->GetLon());
-	    //explosion->SetEffectState(CigiEntityCtrlV2::PlayV2);
-	    explosion->SetEffectState(CigiEntityCtrlV2::RestartV2);
+            //explosion->SetEffectState(CigiEntityCtrlV2::PlayV2);
+            explosion->SetEffectState(CigiEntityCtrlV2::RestartV2);
             m->explosionActive = true;  // True to start to sequence
         }
     }
@@ -1431,7 +1427,7 @@ bool OtwCigiClV2::lineOfSightRequest(
    bool ok = false;
    if ( !isLosRequestPending() ) {
       CigiLosVectReqV2* losReq = getLosRangeRequestPacket();
-      if (losReq != 0) {
+      if (losReq != nullptr) {
          losReq->SetSrcLat(lat);
          losReq->SetSrcLon(lon);
          losReq->SetSrcAlt(alt);
@@ -1460,11 +1456,11 @@ bool OtwCigiClV2::getLineOfSightData(
 {
    bool ok = losRespDataValid;
    if (ok) {
-      if (lat != 0) *lat = losRespLat;
-      if (lon != 0) *lon = losRespLon;
-      if (alt != 0) *alt = losRespAlt;
-      if (rng != 0) *rng = losRespRange;
-      if (material != 0) *material = losRespMaterialCode;
+      if (lat != nullptr) *lat = losRespLat;
+      if (lon != nullptr) *lon = losRespLon;
+      if (alt != nullptr) *alt = losRespAlt;
+      if (rng != nullptr) *rng = losRespRange;
+      if (material != nullptr) *material = losRespMaterialCode;
    }
    return ok;
 }
@@ -1481,11 +1477,11 @@ bool OtwCigiClV2::setSlotCigi(CigiClV2* const msg)
     return true;
 }
 
-// Set/clear the ASYNC mode 
+// Set/clear the ASYNC mode
 bool OtwCigiClV2::setSlotASyncMode(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setASyncMode(msg->getBoolean());
    }
    return ok;
@@ -1495,7 +1491,7 @@ bool OtwCigiClV2::setSlotASyncMode(const Basic::Number* const msg)
 bool OtwCigiClV2::setSlotHideOwnshipModel(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setHideOwnshipModel(msg->getBoolean());
    }
    return ok;
@@ -1504,7 +1500,7 @@ bool OtwCigiClV2::setSlotHideOwnshipModel(const Basic::Number* const msg)
 bool OtwCigiClV2::setSlotOwnshipModel(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       int v = msg->getInt();
       if (v >= 0 && v <= 0xFFFF) {
          ok = setOwnshipModelId((unsigned short) v);
@@ -1516,7 +1512,7 @@ bool OtwCigiClV2::setSlotOwnshipModel(const Basic::Number* const msg)
 bool OtwCigiClV2::setSlotMslTrailModel(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       int v = msg->getInt();
       if (v >= 0 && v <= 0xFFFF) {
          ok = setMslTrailModelId((unsigned short) v);
@@ -1528,7 +1524,7 @@ bool OtwCigiClV2::setSlotMslTrailModel(const Basic::Number* const msg)
 bool OtwCigiClV2::setSlotSmokePlumeModel(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       int v = msg->getInt();
       if (v >= 0 && v <= 0xFFFF) {
          ok = setSmokePlumeModelId((unsigned short) v);
@@ -1540,7 +1536,7 @@ bool OtwCigiClV2::setSlotSmokePlumeModel(const Basic::Number* const msg)
 bool OtwCigiClV2::setSlotAirExplosionModel(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       int v = msg->getInt();
       if (v >= 0 && v <= 0xFFFF) {
          ok = setAirExplosionModelId((unsigned short) v);
@@ -1552,7 +1548,7 @@ bool OtwCigiClV2::setSlotAirExplosionModel(const Basic::Number* const msg)
 bool OtwCigiClV2::setSlotGroundExplosionModel(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       int v = msg->getInt();
       if (v >= 0 && v <= 0xFFFF) {
          ok = setGroundExplosionModelId((unsigned short) v);
@@ -1564,7 +1560,7 @@ bool OtwCigiClV2::setSlotGroundExplosionModel(const Basic::Number* const msg)
 bool OtwCigiClV2::setSlotShipWakeModel(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       int v = msg->getInt();
       if (v >= 0 && v <= 0xFFFF) {
          ok = setShipWakeModelId((unsigned short) v);
@@ -1626,20 +1622,20 @@ bool OtwCigiClV2::sendCigiData()
     {
         // Do we have models?
         OtwModelCigiClV2** const table = (OtwModelCigiClV2**) getModelTable();
-        if (table != 0 && getModelTableSize() > 0) {
+        if (table != nullptr && getModelTableSize() > 0) {
 
             // Need at least this much in the buffer to add another entity
             int padding = (sizeof(CigiEntityCtrlV2) * 2) + sizeof(CigiHotReqV2);
-            if (newLosReq && getLosRangeRequestPacket() != 0) padding += sizeof(CigiLosVectReqV2); 
-            if (getViewControlPacket() != 0) padding += sizeof(CigiViewCtrlV2);
-            if (getViewDefinitionPacket() != 0) padding += sizeof(CigiViewDefV2);
+            if (newLosReq && getLosRangeRequestPacket() != nullptr) padding += sizeof(CigiLosVectReqV2);
+            if (getViewControlPacket() != nullptr) padding += sizeof(CigiViewCtrlV2);
+            if (getViewDefinitionPacket() != nullptr) padding += sizeof(CigiViewDefV2);
 
             // Add all of the models (that we can) to the buffer.
             int sendSize = cigi->getOutgoingBufferSize();
             int maxAge = getModelTableSize();
             for (unsigned short i = 0; i < getModelTableSize() && sendSize < (MAX_BUF_SIZE - padding); i++) {
                 SPtr<OtwModelCigiClV2> model( (OtwModelCigiClV2*) table[i] );
-                if (model != 0) {
+                if (model != nullptr) {
 
                   // For all active models in the table ...
                   // (send ground models only after 'maxAge' frames)
@@ -1652,53 +1648,53 @@ bool OtwCigiClV2::sendCigiData()
                      //   std::cout << "model: " << model->getID() << ", pid=" << model->getPlayer()->getID() << std::endl;
                      //}
                      // Explostion?
-                     if (model->explosionActive && model->explosionEC[ir] != 0) {
+                     if (model->explosionActive && model->explosionEC[ir] != nullptr) {
                         cigi->addPacketEntityCtrl(model->explosionEC[ir]);
                         model->explosionActive = false;
                      }
 
-                     if (model->parentActive && model->parentEC[ir] != 0) {
+                     if (model->parentActive && model->parentEC[ir] != nullptr) {
                         cigi->addPacketEntityCtrl(model->parentEC[ir]);
                         model->parentActive = (model->parentEC[ir]->GetEntityState() == CigiEntityCtrlV2::LoadShowV2);
 
                         // Trail effect?
-                        if (model->trailActive && model->trailEC[ir] != 0) {
+                        if (model->trailActive && model->trailEC[ir] != nullptr) {
                               cigi->addPacketEntityCtrl(model->trailEC[ir]);
                               model->trailActive = (model->trailEC[ir]->GetEntityState() == CigiEntityCtrlV2::LoadShowV2);
                         }
 
                         // Smoke affect?
-                        if (model->smokeActive && model->smokeEC[ir] != 0) {
+                        if (model->smokeActive && model->smokeEC[ir] != nullptr) {
                               cigi->addPacketEntityCtrl(model->smokeEC[ir]);
                               model->smokeActive = (model->smokeEC[ir]->GetEntityState() == CigiEntityCtrlV2::LoadShowV2);
                         }
 
                         // Animation state?
-                        if (model->animationActive && model->animationCC[ir] != 0) {
+                        if (model->animationActive && model->animationCC[ir] != nullptr) {
                               cigi->addPacketComponentCtrl(model->animationCC[ir]);
                               model->animationActive = (model->animationCC[ir]->GetCompState() > 0);
                         }
 
                         // Damage state?
-                        if (model->damageActive && model->damageCC[ir] != 0) {
+                        if (model->damageActive && model->damageCC[ir] != nullptr) {
                               cigi->addPacketComponentCtrl(model->damageCC[ir]);
                               model->damageActive = (model->damageCC[ir]->GetCompState() > 1);
                         }
 
                         // Launcher articulated state?
-                        if (model->launcherApcActive && model->launcherAPC[ir] != 0) {
+                        if (model->launcherApcActive && model->launcherAPC[ir] != nullptr) {
                               cigi->addPacketArtPartCtrl(model->launcherAPC[ir]);
                               model->launcherApcActive = (model->launcherAPC[ir]->GetPitchEn());
                         }
 
                         // Attached part?
-                        if (model->attachedEcActive && model->attachedEC[ir] != 0) {
+                        if (model->attachedEcActive && model->attachedEC[ir] != nullptr) {
                               cigi->addPacketEntityCtrl(model->attachedEC[ir]);
                               model->attachedEcActive = (model->attachedEC[ir]->GetEntityState() == CigiEntityCtrlV2::LoadShowV2);
                         }
 
                         // Attached part component control?
-                        if (model->attachedCcActive && model->attachedCC[ir] != 0 && model->attachedEC[ir] != 0) {
+                        if (model->attachedCcActive && model->attachedCC[ir] != nullptr && model->attachedEC[ir] != nullptr) {
                               cigi->addPacketComponentCtrl(model->attachedCC[ir]);
                               // we come and go with the attached part
                               model->attachedCcActive = (model->attachedEC[ir]->GetEntityState() == CigiEntityCtrlV2::LoadShowV2);
@@ -1724,16 +1720,16 @@ bool OtwCigiClV2::sendCigiData()
     if (!isElevationRequestPending()) {
         // Do we have a elevation request entries?
         OtwModelCigiClV2** const table = (OtwModelCigiClV2**) getElevationTable();
-        if (table != 0 && getElevationTableSize() > 0) {
+        if (table != nullptr && getElevationTableSize() > 0) {
             int maxAge = getElevationTableSize() * 4;
-               
+
             // For all active elevation requests in the table ...
             // -- look for the oldest request ---
-            SPtr<OtwModelCigiClV2> oldest( 0 );
-            SPtr<OtwModelCigiClV2> model( 0 );
+            SPtr<OtwModelCigiClV2> oldest( nullptr );
+            SPtr<OtwModelCigiClV2> model( nullptr );
             for (unsigned short i = 0; i < getElevationTableSize(); i++) {
                 model = table[i];
-                if (model != 0) {
+                if (model != nullptr) {
                   // Must be active and haven't been requested for at least TBD frames ...
                   if (model->isHotActive() && model->getReqCount() >= maxAge) {
                      if (oldest == 0) oldest = model;
@@ -1741,29 +1737,29 @@ bool OtwCigiClV2::sendCigiData()
                   }
                 }
             }
-            model = 0;
+            model = nullptr;
 
-            if (oldest != 0) {
-                
+            if (oldest != nullptr) {
+
                 int idx = -1;
                 for (unsigned short i = 0; idx < 0 && i < getElevationTableSize(); i++) {
                    if (table[i] == oldest) idx = i;
                 }
-                
+
                 if (idx >= 0) {
                   CigiHotReqV2 hotRequest;
                   hotRequest.SetHatHotID(table[idx]->getID());
 
-                  // Requested Position (lat/lon) 
-                  double hotLat, hotLon;
+                  // Requested Position (lat/lon)
+                  double hotLat(0.0), hotLon(0.0);
                   oldest->getPlayer()->getPositionLL(&hotLat, &hotLon);
-		  hotRequest.SetLat(hotLat);
-		  hotRequest.SetLon(hotLon);
+                  hotRequest.SetLat(hotLat);
+                  hotRequest.SetLon(hotLon);
                   //osg::Vec3 pos = oldest->getPlayer()->getPosition();
                   //LCreal alt;
                   //Basic::Nav::convertPosVec2LL(
-                  //         getRefLatitude(), getRefLongitude(), 
-                  //         pos, 
+                  //         getRefLatitude(), getRefLongitude(),
+                  //         pos,
                   //         &hotRequest.lat, &hotRequest.lon, &alt);
 
                   cigi->addPacketHotReq(&hotRequest);
@@ -1771,7 +1767,7 @@ bool OtwCigiClV2::sendCigiData()
 
                   elevationRequestSend();
                 }
-                oldest = 0;
+                oldest = nullptr;
             }
         }
     }
@@ -1781,7 +1777,7 @@ bool OtwCigiClV2::sendCigiData()
     // ---
     {
       CigiLosVectReqV2* los0 = getLosRangeRequestPacket();
-      if (isNewLosequested() && los0 != 0) {
+      if (isNewLosequested() && los0 != nullptr) {
          los->SetLosID(getNexLosId());
          cigi->addPacketLosRangeReq(los0);
          losRequestSend();
@@ -1791,7 +1787,7 @@ bool OtwCigiClV2::sendCigiData()
     // ---
     // Optional view control and definition packets
     // ---
-    if (getViewControlPacket() != 0) {
+    if (getViewControlPacket() != nullptr) {
        CigiViewCtrlV2* myView = getViewControlPacket();
        //if ( getMaxModels() == 20 ) {
            //std::cout << myView->entity_id << std::endl;
@@ -1813,7 +1809,7 @@ bool OtwCigiClV2::sendCigiData()
 
        cigi->addPacketViewCtrl(myView);
     }
-    if (getViewDefinitionPacket() != 0) {
+    if (getViewDefinitionPacket() != nullptr) {
        cigi->addPacketViewDef(getViewDefinitionPacket());
 	   //CigiViewDefV2* myView = getViewDefinitionPacket();
 	   //std::cout << "VIEW DEFINITION PACKET PARAMETERS: " << std::endl;
@@ -1834,7 +1830,7 @@ bool OtwCigiClV2::sendCigiData()
 	   //std::cout << "Right = " << myView->fov_right << std::endl;
 	   //std::cout << "Top = " << myView->fov_top << std::endl;
 	   //std::cout << "Bottom = " << myView->fov_bottom << std::endl;
-	   
+
     }
 
     // ---
@@ -1858,7 +1854,7 @@ void OtwCigiClV2::startOfFrame(const CigiSOFV2* const)
 //------------------------------------------------------------------------------
 void OtwCigiClV2::hatResp(const CigiHatRespV2* const p)
 {
-   if (p != 0) {
+   if (p != nullptr) {
       std::printf("<< Incoming\n");
 #if 0
       CigiPrintHatResponsePacket(p, 2);
@@ -1872,7 +1868,7 @@ void OtwCigiClV2::hatResp(const CigiHatRespV2* const p)
 //------------------------------------------------------------------------------
 void OtwCigiClV2::losResp(const CigiLosRespV2* const p)
 {
-   if ( p != 0 && isLosRequestPending() && losReqTimer > 0.0 ) {
+   if ( p != nullptr && isLosRequestPending() && losReqTimer > 0.0 ) {
       // We do have a pending request that hasn't timed out,
       // but is this it?
       if (p->GetLosID() == losReqId) {
@@ -1904,7 +1900,7 @@ void OtwCigiClV2::losRequestSend()
 {
    newLosReq = false;
    losReqTimer = LOS_REQ_TIMEOUT;
-} 
+}
 
 //------------------------------------------------------------------------------
 // Elevation request has been sent to the IG
@@ -1913,7 +1909,7 @@ void OtwCigiClV2::elevationRequestSend()
 {
    elevReqFlg = true;   // active request
    elevReqTimer = 0.5f; // time-out
-} 
+}
 
 
 //------------------------------------------------------------------------------
@@ -1921,7 +1917,7 @@ void OtwCigiClV2::elevationRequestSend()
 //------------------------------------------------------------------------------
 void OtwCigiClV2::collisionSegmentResp(const CigiCollDetSegRespV2* const p)
 {
-   if (p != 0) {
+   if (p != nullptr) {
       std::printf("<< Incoming\n");
 #if 0
       CigiPrintCollisionSegmentRespPacket(p, 2);
@@ -1935,7 +1931,7 @@ void OtwCigiClV2::collisionSegmentResp(const CigiCollDetSegRespV2* const p)
 //------------------------------------------------------------------------------
 void OtwCigiClV2::sensorResp(const CigiSensorRespV2* const p)
 {
-   if (p != 0) {
+   if (p != nullptr) {
       std::printf("<< Incoming\n");
 #if 0
       CigiPrintSensorResponsePacket(p, 2);
@@ -1950,17 +1946,17 @@ void OtwCigiClV2::sensorResp(const CigiSensorRespV2* const p)
 void OtwCigiClV2::hotResp(const CigiHotRespV2* const p)
 {
     // Valid?
-    if (p != 0 && p->GetValid()) {
+    if (p != nullptr && p->GetValid()) {
         // Yes and the hot_id is the elevation table index
         unsigned short id = p->GetHatHotID();
         //std::cout << "hotResp: id = " << id << std::endl;
         OtwModelCigiClV2** const table = (OtwModelCigiClV2**) getElevationTable();
-        SPtr<OtwModelCigiClV2> model(0);
-        for (unsigned int i = 0; i < getElevationTableSize() && model == 0; i++) {
+        SPtr<OtwModelCigiClV2> model(nullptr);
+        for (unsigned int i = 0; i < getElevationTableSize() && model == nullptr; i++) {
            if (table[i]->getID() == id) model = table[i];
         }
-        if (model != 0) {
-            if (model->isHotActive() && model->getPlayer() != 0) {
+        if (model != nullptr) {
+            if (model->isHotActive() && model->getPlayer() != nullptr) {
                // When the player and elevation table are still valid, store
                // the terrain elevation (meters)
                model->getPlayer()->setTerrainElevation((LCreal)p->GetHot());
@@ -1968,7 +1964,7 @@ void OtwCigiClV2::hotResp(const CigiHotRespV2* const p)
             }
         }
         elevReqFlg = false;
-        elevReqTimer = 0.0f;
+        elevReqTimer = 0.0;
     }
 }
 
@@ -1977,7 +1973,7 @@ void OtwCigiClV2::hotResp(const CigiHotRespV2* const p)
 //------------------------------------------------------------------------------
 void OtwCigiClV2::collisionVolumeResp(const CigiCollDetVolRespV2* const p)
 {
-   if (p != 0) {
+   if (p != nullptr) {
       std::printf("<< Incoming\n");
 #if 0
       CigiPrintCollisionVolumeRespPacket(p, 2);
@@ -1991,7 +1987,7 @@ void OtwCigiClV2::collisionVolumeResp(const CigiCollDetVolRespV2* const p)
 //------------------------------------------------------------------------------
 void OtwCigiClV2::igResponse(const CigiIGMsgV2* const p)
 {
-   if (p != 0) {
+   if (p != nullptr) {
       std::printf("<< Incoming\n");
 #if 0
       CigiPrintIGResponseMessagePacket(p, 2);
@@ -2023,7 +2019,7 @@ bool OtwCigiClV2::setOwnshipModelId(const unsigned short v)
    return true;
 }
 
-// "Missile Trail" effect model ID 
+// "Missile Trail" effect model ID
 bool OtwCigiClV2::setMslTrailModelId(const unsigned short v)
 {
    cmtMslTrail = v;
@@ -2079,8 +2075,8 @@ CigiClV2::CigiClV2()
 {
    STANDARD_CONSTRUCTOR()
 
-   session = 0;
-   otwCigi = 0;
+   session = nullptr;
+   otwCigi = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -2089,9 +2085,9 @@ CigiClV2::CigiClV2()
 void CigiClV2::copyData(const CigiClV2& org, const bool)
 {
    BaseClass::copyData(org);
-    
-   session = 0;
-   otwCigi = 0;  // don't unref();
+
+   session = nullptr;
+   otwCigi = nullptr;  // don't unref();
 }
 
 //------------------------------------------------------------------------------
@@ -2099,11 +2095,11 @@ void CigiClV2::copyData(const CigiClV2& org, const bool)
 //------------------------------------------------------------------------------
 void CigiClV2::deleteData()
 {
-    if (session != 0) {
+    if (session != nullptr) {
         delete session;
     }
-    session = 0;
-    otwCigi = 0;  // don't unref();
+    session = nullptr;
+    otwCigi = nullptr;  // don't unref();
 }
 
 
@@ -2133,7 +2129,7 @@ bool CigiClV2::initialize(OtwCigiClV2* const p)
       // CGBCGB ??? session->SetSynchronous(p->isSyncMode());
    }
 
-    return session != 0;
+    return session != nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -2141,8 +2137,8 @@ bool CigiClV2::initialize(OtwCigiClV2* const p)
 //------------------------------------------------------------------------------
 bool CigiClV2::isInitialized()
 {
-    return cigiInitialized && (session != 0);
-}  
+    return cigiInitialized && (session != nullptr);
+}
 
 //------------------------------------------------------------------------------
 // initCigi() -- Initialize the static CIGI system
@@ -2190,7 +2186,7 @@ private:
 
 CigiClV2NetworkSignalProcessing::~CigiClV2NetworkSignalProcessing()
 {
-    p = 0;
+    p = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -2199,42 +2195,42 @@ CigiClV2NetworkSignalProcessing::~CigiClV2NetworkSignalProcessing()
 
 void CigiClV2NetworkSignalProcessing::OnSOF(CigiBasePacket* packet)
 {
-    if (p != 0) p->startOfFrame( dynamic_cast<CigiSOFV2*> (packet) );
+    if (p != nullptr) p->startOfFrame( dynamic_cast<CigiSOFV2*> (packet) );
 }
 
 void CigiClV2NetworkSignalProcessing::OnCollDetSegResp(CigiBasePacket* packet)
 {
-    if (p != 0) p->collisionSegmentResp( dynamic_cast<CigiCollDetSegRespV2*> (packet) );
+    if (p != nullptr) p->collisionSegmentResp( dynamic_cast<CigiCollDetSegRespV2*> (packet) );
 }
 
 void CigiClV2NetworkSignalProcessing::OnCollDetVolResp(CigiBasePacket* packet)
 {
-    if (p != 0) p->collisionVolumeResp( dynamic_cast<CigiCollDetVolRespV2*> (packet) );
+    if (p != nullptr) p->collisionVolumeResp( dynamic_cast<CigiCollDetVolRespV2*> (packet) );
 }
 
 void CigiClV2NetworkSignalProcessing::OnHatResp(CigiBasePacket* packet)
 {
-    if (p != 0) p->hatResp( dynamic_cast<CigiHatRespV2*> (packet) );
+    if (p != nullptr) p->hatResp( dynamic_cast<CigiHatRespV2*> (packet) );
 }
 
 void CigiClV2NetworkSignalProcessing::OnHotResp(CigiBasePacket* packet)
 {
-    if (p != 0) p->hotResp( dynamic_cast<CigiHotRespV2*> (packet) );
+    if (p != nullptr) p->hotResp( dynamic_cast<CigiHotRespV2*> (packet) );
 }
 
 void CigiClV2NetworkSignalProcessing::OnIGMsg(CigiBasePacket* packet)
 {
-    if (p != 0) p->igResponse( dynamic_cast<CigiIGMsgV2*> (packet) );
+    if (p != nullptr) p->igResponse( dynamic_cast<CigiIGMsgV2*> (packet) );
 }
 
 void CigiClV2NetworkSignalProcessing::OnLosResp(CigiBasePacket* packet)
 {
-    if (p != 0) p->losResp( dynamic_cast<CigiLosRespV2*> (packet) );
+    if (p != nullptr) p->losResp( dynamic_cast<CigiLosRespV2*> (packet) );
 }
 
 void CigiClV2NetworkSignalProcessing::OnSensorResp(CigiBasePacket* packet)
 {
-    if (p != 0) p->sensorResp( dynamic_cast<CigiSensorRespV2*> (packet) );
+    if (p != nullptr) p->sensorResp( dynamic_cast<CigiSensorRespV2*> (packet) );
 }
 
 
@@ -2253,7 +2249,7 @@ BEGIN_SLOTTABLE(CigiClV2Network)
    "netOutput",            // 2) Network output handler
 END_SLOTTABLE(CigiClV2Network)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(CigiClV2Network)
     ON_SLOT(1, setSlotNetInput,  Basic::NetHandler)
     ON_SLOT(2, setSlotNetOutput, Basic::NetHandler)
@@ -2262,7 +2258,7 @@ END_SLOT_MAP()
 //------------------------------------------------------------------------------
 // Constructor(s)
 //------------------------------------------------------------------------------
-CigiClV2Network::CigiClV2Network() : netInput(0), netOutput(0), sigProcessor(0)
+CigiClV2Network::CigiClV2Network() : netInput(nullptr), netOutput(nullptr), sigProcessor(nullptr)
 {
    STANDARD_CONSTRUCTOR()
 
@@ -2279,17 +2275,17 @@ void CigiClV2Network::copyData(const CigiClV2Network& org, const bool cc)
    BaseClass::copyData(org);
 
    if (cc) {
-      netInput = 0;
-      netOutput = 0;
+      netInput = nullptr;
+      netOutput = nullptr;
    }
 
    // We need to init this ourselves, so ...
-   netInput = 0;
-   netOutput = 0;
+   netInput = nullptr;
+   netOutput = nullptr;
    haveThread = false;
    networkInitialized = false;
    networkInitFailed = false;
-   sigProcessor = 0;
+   sigProcessor = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -2297,12 +2293,12 @@ void CigiClV2Network::copyData(const CigiClV2Network& org, const bool cc)
 //------------------------------------------------------------------------------
 void CigiClV2Network::deleteData()
 {
-   netInput = 0;
-   netOutput = 0;
-   if (sigProcessor != 0) {
+   netInput = nullptr;
+   netOutput = nullptr;
+   if (sigProcessor != nullptr) {
 	delete sigProcessor;
    }
-   sigProcessor = 0;
+   sigProcessor = nullptr;
 }
 
 
@@ -2317,12 +2313,12 @@ bool CigiClV2Network::initialize(OtwCigiClV2* const p)
       // ---
       // Set the callback functions
       // ---
-      if (sigProcessor == 0) {
-          OtwCigiClV2* parent = getOtwCigi();
-          sigProcessor = new CigiClV2NetworkSignalProcessing(parent);
-	  if (sigProcessor == 0) {
-	      return false;
-	  }
+      if (sigProcessor == nullptr) {
+         OtwCigiClV2* parent = getOtwCigi();
+         sigProcessor = new CigiClV2NetworkSignalProcessing(parent);
+         if (sigProcessor == nullptr) {
+            return false;
+         }
       }
 
       CigiHostSession* hostSession = getSession();
@@ -2359,7 +2355,7 @@ bool CigiClV2Network::initialize(OtwCigiClV2* const p)
 bool CigiClV2Network::isInitialized()
 {
    return BaseClass::isInitialized() && networkInitialized && haveThread;
-}  
+}
 
 //------------------------------------------------------------------------------
 // initCigiClV2Network() -- Init the network
@@ -2367,18 +2363,18 @@ bool CigiClV2Network::isInitialized()
 bool CigiClV2Network::initCigiNetwork()
 {
     bool ok = true;
-    
+
     // Initialize network input handler
-    if (netInput != 0) {
+    if (netInput != nullptr) {
         if (netInput->initNetwork(false)) std::cout << "netInput Initialize OK" << std::endl;
     }
     else {
         std::cerr << "CigiClV2Network::initNetwork(): failure to find the network input handler (see slot 'netInput')" << std::endl;
         ok = false;
     }
-    
+
     // Initialize network output handler
-    if (netOutput != 0) {
+    if (netOutput != nullptr) {
         if (netOutput->initNetwork(true)) std::cout << "netOutput Initialize OK" << std::endl;
     }
     else {
@@ -2408,7 +2404,7 @@ void CigiClV2Network::endMessage()
 
     int sendSize = 0;
     unsigned char* sendBuff = msgOut->GetMsg(sendSize);
-    netOutput->sendData( (char*) sendBuff, sendSize );
+    netOutput->sendData( reinterpret_cast<char*>(sendBuff), sendSize );
 
     msgOut->UnlockMsg();
 #else
@@ -2421,7 +2417,7 @@ void CigiClV2Network::endMessage()
 
     msgOut->UpdateFrameCntr(sendBuff, recvBuff);
 
-    netOutput->sendData( (char*) sendBuff, sendSize );
+    netOutput->sendData( reinterpret_cast<char*>(sendBuff), sendSize );
 
     msgOut->UnlockMsg();
 #endif
@@ -2488,22 +2484,22 @@ void CigiClV2Network::addPacketLosRangeReq(CigiLosVectReqV2* const p)
 
 #ifdef WIN32
 // Windows thread #######################
-static DWORD WINAPI cigiThreadFunc(LPVOID lpParam) 
+static DWORD WINAPI cigiThreadFunc(LPVOID lpParam)
 {
     CigiClV2Network* otwCigi = (CigiClV2Network*) lpParam;
     std::cout << "Thread: CigiClV2Network = " << otwCigi << std::endl;
     otwCigi->mainLoop();
-    return 0; 
+    return 0;
 }
 
 #else
 // Linux thread #######################
-static void* cigiThreadFunc(void* lpParam) 
+static void* cigiThreadFunc(void* lpParam)
 {
     CigiClV2Network* otwCigi = (CigiClV2Network*) lpParam;
     std::cout << "Thread: CigiClV2Network = " << otwCigi << std::endl;
     otwCigi->mainLoop();
-    return 0; 
+    return nullptr;
 }
 #endif
 
@@ -2515,18 +2511,18 @@ bool CigiClV2Network::createCigiProcess()
 #ifdef WIN32
     // Create Windows threat
     DWORD dwThreadId;
-    CreateThread( 
-            NULL,                        // no security attributes 
-            0,                           // use default stack size  
-            cigiThreadFunc,               // thread function 
-            this,                        // argument to thread function 
-            0,                           // use default creation flags 
-            &dwThreadId);                // returns the thread identifier 
+    CreateThread(
+            NULL,                        // no security attributes
+            0,                           // use default stack size
+            cigiThreadFunc,               // thread function
+            this,                        // argument to thread function
+            0,                           // use default creation flags
+            &dwThreadId);                // returns the thread identifier
 #else
     // Create Linux process
     pthread_t thread;
-    //int stat = pthread_create(&thread, &attr, cigiThreadFunc, this); 
-    int stat = pthread_create(&thread, 0, cigiThreadFunc, this); 
+    //int stat = pthread_create(&thread, &attr, cigiThreadFunc, this);
+    int stat = pthread_create(&thread, 0, cigiThreadFunc, this);
     if (stat != 0) {
         std::cerr << "pthread_create status = " << stat << std::endl;
     }
@@ -2539,26 +2535,26 @@ bool CigiClV2Network::createCigiProcess()
 // Main loop
 //=============================================================================
 void CigiClV2Network::mainLoop()
-{    
+{
     // ---
     // Receive and processs CIGI packets from the visual system
-    // ---
-    if (netInput != 0 && netOutput != 0) {
-	bool ok = true;
-        while (ok) {
-	    msgIn->AdvanceCrntBuffer();
-	    unsigned char* rcvbuff = msgIn->GetMsgBuffer();
-            int recvCnt = netInput->recvData((char*) rcvbuff, MAX_BUF_SIZE);
+   // ---
+   if (netInput != nullptr && netOutput != nullptr) {
+      bool ok = true;
+      while (ok) {
+         msgIn->AdvanceCrntBuffer();
+         unsigned char* rcvbuff = msgIn->GetMsgBuffer();
+         int recvCnt = netInput->recvData((char*) rcvbuff, MAX_BUF_SIZE);
 
-	    if (recvCnt > 0) {
-		msgIn->SetCrntMsgSize(recvCnt);
-		msgIn->ProcessIncomingMsg();
-	    } else {
-		msgIn->SetCrntMsgSize(0);
-                ok = false; // something was wrong
-	    }
-	}
-    }
+         if (recvCnt > 0) {
+            msgIn->SetCrntMsgSize(recvCnt);
+            msgIn->ProcessIncomingMsg();
+         } else {
+            msgIn->SetCrntMsgSize(0);
+            ok = false; // something was wrong
+         }
+      }
+   }
 }
 
 //------------------------------------------------------------------------------
@@ -2601,15 +2597,15 @@ OtwModelCigiClV2::OtwModelCigiClV2()
    STANDARD_CONSTRUCTOR()
 
    for (unsigned int i = 0; i < OtwCigiClV2::NUM_BUFFERS; i++) {
-      parentEC[i] = 0;
-      trailEC[i] = 0;
-      explosionEC[i] = 0;
-      smokeEC[i] = 0;
-      damageCC[i] = 0;
-      animationCC[i] = 0;
-      attachedEC[i] = 0;
-      launcherAPC[i] = 0;
-      attachedCC[i] = 0;
+      parentEC[i] = nullptr;
+      trailEC[i] = nullptr;
+      explosionEC[i] = nullptr;
+      smokeEC[i] = nullptr;
+      damageCC[i] = nullptr;
+      animationCC[i] = nullptr;
+      attachedEC[i] = nullptr;
+      launcherAPC[i] = nullptr;
+      attachedCC[i] = nullptr;
    }
 
    parentActive = false;
@@ -2634,15 +2630,15 @@ void OtwModelCigiClV2::copyData(const OtwModelCigiClV2& org, const bool cc)
 
    if (cc) {
       for (unsigned int i = 0; i < OtwCigiClV2::NUM_BUFFERS; i++) {
-         parentEC[i] = 0;
-         trailEC[i] = 0;
-         explosionEC[i] = 0;
-         smokeEC[i] = 0;
-         damageCC[i] = 0;
-         animationCC[i] = 0;
-         attachedEC[i] = 0;
-         launcherAPC[i] = 0;
-         attachedCC[i] = 0;
+         parentEC[i] = nullptr;
+         trailEC[i] = nullptr;
+         explosionEC[i] = nullptr;
+         smokeEC[i] = nullptr;
+         damageCC[i] = nullptr;
+         animationCC[i] = nullptr;
+         attachedEC[i] = nullptr;
+         launcherAPC[i] = nullptr;
+         attachedCC[i] = nullptr;
       }
    }
 
@@ -2665,15 +2661,15 @@ void OtwModelCigiClV2::copyData(const OtwModelCigiClV2& org, const bool cc)
 void OtwModelCigiClV2::deleteData()
 {
    for (unsigned int i = 0; i < OtwCigiClV2::NUM_BUFFERS; i++) {
-      if (parentEC[i] != 0)    { delete parentEC[i]; parentEC[i] = 0; }
-      if (trailEC[i] != 0)     { delete trailEC[i]; trailEC[i] = 0; }
-      if (explosionEC[i] != 0) { delete explosionEC[i]; explosionEC[i] = 0; }
-      if (smokeEC[i] != 0)     { delete smokeEC[i]; smokeEC[i] = 0; }
-      if (damageCC[i] != 0)    { delete damageCC[i]; damageCC[i] = 0; }
-      if (animationCC[i] != 0) { delete animationCC[i]; animationCC[i] = 0; }
-      if (attachedEC[i] != 0)  { delete attachedEC[i]; attachedEC[i] = 0; }
-      if (launcherAPC[i] != 0) { delete launcherAPC[i]; launcherAPC[i] = 0; }
-      if (attachedCC[i] != 0)  { delete attachedCC[i]; attachedCC[i] = 0; }
+      if (parentEC[i] != nullptr)    { delete parentEC[i]; parentEC[i] = nullptr; }
+      if (trailEC[i] != nullptr)     { delete trailEC[i]; trailEC[i] = nullptr; }
+      if (explosionEC[i] != nullptr) { delete explosionEC[i]; explosionEC[i] = nullptr; }
+      if (smokeEC[i] != nullptr)     { delete smokeEC[i]; smokeEC[i] = nullptr; }
+      if (damageCC[i] != nullptr)    { delete damageCC[i]; damageCC[i] = nullptr; }
+      if (animationCC[i] != nullptr) { delete animationCC[i]; animationCC[i] = nullptr; }
+      if (attachedEC[i] != nullptr)  { delete attachedEC[i]; attachedEC[i] = nullptr; }
+      if (launcherAPC[i] != nullptr) { delete launcherAPC[i]; launcherAPC[i] = nullptr; }
+      if (attachedCC[i] != nullptr)  { delete attachedCC[i]; attachedCC[i] = nullptr; }
    }
 }
 

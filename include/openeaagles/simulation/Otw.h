@@ -100,7 +100,7 @@ public:
     virtual bool setSlotRefLongitude(const Basic::Number* const msg);     // Sets the visual database reference longitude (degs) slot
     virtual bool setSlotOtwModelTypes(const Basic::PairStream* const msg); // Sets the list of OTW model type IDs (Otm objects)
 
-    void updateTC(const LCreal dt = 0.0f) override;
+    void updateTC(const LCreal dt = 0.0) override;
     void reset() override;
 
 protected:

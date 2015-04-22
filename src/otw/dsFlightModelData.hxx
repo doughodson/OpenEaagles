@@ -1,17 +1,17 @@
 /****************************************************************************
  * dsFlightModelData.hxx
- *                                                                           
+ *
  * Author:	              Westfall, Orion
  * Creation Date:         12-Mar-2001
  *
  *
  * Purpose:        Data structure to hold data from flight model
- *                                                                            
- * Description:    
  *
- * Notes:                            
+ * Description:
  *
- * Date          Name                  Description                                     
+ * Notes:
+ *
+ * Date          Name                  Description
  * -----------   -------------------   ----------------------------------------
  * 13-Mar-2001   Orion Westfall        Created
  *
@@ -21,7 +21,7 @@
 #define DSFLIGHTMODELDATA
 
 #include "geoTypes.h"
- 
+
 class dsFlightModelData
 {
 public:
@@ -72,6 +72,6 @@ public:
 
   float_4          m_spares[4];
 };
-     
+
 
 #endif

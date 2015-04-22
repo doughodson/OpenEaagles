@@ -31,7 +31,7 @@ BEGIN_SLOTTABLE(OtwPC)
     "netOutput",        // 1) Network output handler
 END_SLOTTABLE(OtwPC)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(OtwPC)
     ON_SLOT(1,setSlotNetOutput,Basic::NetHandler)
 END_SLOT_MAP()
@@ -39,7 +39,7 @@ END_SLOT_MAP()
 //------------------------------------------------------------------------------
 // Constructor(s)
 //------------------------------------------------------------------------------
-OtwPC::OtwPC() : netOutput(0)
+OtwPC::OtwPC() : netOutput(nullptr)
 {
     STANDARD_CONSTRUCTOR()
     setMaxRange(0);
@@ -58,12 +58,12 @@ void OtwPC::copyData(const OtwPC& org, const bool cc)
     BaseClass::copyData(org);
 
     if (cc) {
-        netOutput = 0;
+        netOutput = nullptr;
         setMaxRange(0);
         setMaxModels(0);
         setMaxElevations(0);
     }
-    netOutput = 0;
+    netOutput = nullptr;
     netInit = org.netInit;
     netInitFail = org.netInitFail;
     scnt = 0;
@@ -74,7 +74,7 @@ void OtwPC::copyData(const OtwPC& org, const bool cc)
 //------------------------------------------------------------------------------
 void OtwPC::deleteData()
 {
-    netOutput = 0;
+    netOutput = nullptr;
     netInit = false;
     netInitFail = false;
 }
@@ -140,7 +140,7 @@ void OtwPC::frameSync()
 }
 
 //------------------------------------------------------------------------------
-// reset() - Reset OTW 
+// reset() - Reset OTW
 //------------------------------------------------------------------------------
 void OtwPC::reset()
 {
@@ -153,9 +153,9 @@ void OtwPC::reset()
 bool OtwPC::initNetwork()
 {
     bool ok = true;
-    
+
     // Initialize network output handler
-    if (netOutput != 0) {
+    if (netOutput != nullptr) {
         if (netOutput->initNetwork(true)) {
             if (isMessageEnabled(MSG_INFO)) {
                 std::cout << "netOutput Initialize OK" << std::endl;
@@ -171,8 +171,6 @@ bool OtwPC::initNetwork()
 
     return ok;
 }
-
-
 
 //------------------------------------------------------------------------------
 // Set Slot Functions
@@ -193,7 +191,6 @@ Basic::Object* OtwPC::getSlotByIndex(const int si)
     return BaseClass::getSlotByIndex(si);
 }
 
-
 //------------------------------------------------------------------------------
 // sendPcData() -- Send PC data block
 //------------------------------------------------------------------------------
@@ -203,8 +200,8 @@ void OtwPC::sendPcData()
 
     // Ownship type air vehicle?
     const Simulation::AirVehicle* av = dynamic_cast<const Simulation::AirVehicle*>(getOwnship());
-    if (av != 0) {
-    
+    if (av != nullptr) {
+
         dsFlightModelData fmd;
 
         fmd.m_x_cg = 0;
@@ -253,7 +250,7 @@ void OtwPC::sendPcData()
         fmd.m_target_wearth = 0;
         fmd.m_target_vcas = 0;
 
-        if (netOutput != 0) {
+        if (netOutput != nullptr) {
            netOutput->sendData( reinterpret_cast<char*>(&fmd), sizeof(fmd) );
         }
     }

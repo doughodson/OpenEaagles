@@ -18,7 +18,7 @@ Factory::Factory()
 
 Basic::Object* Factory::createObj(const char* name)
 {
-    Basic::Object* obj = 0;
+    Basic::Object* obj = nullptr;
 
     // Common Image Generation Interface (CIGI)
     if ( std::strcmp(name, OtwCigiCl::getFactoryName()) == 0 ) {

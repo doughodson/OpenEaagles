@@ -7,7 +7,7 @@
 class CigiEntityCtrlV2;
 class CigiCompCtrlV2;
 class CigiIGCtrlV2;
-class CigiLosVectReqV2;	// CGBCGB CIGI_LOS_RANGE_REQUEST* los;          // LOS request packet
+class CigiLosVectReqV2;    // CGBCGB CIGI_LOS_RANGE_REQUEST* los;          // LOS request packet
 class CigiViewCtrlV2;
 class CigiViewDefV2;
 class CigiArtPartCtrlV2;
@@ -19,7 +19,7 @@ class CigiLosRespV2;
 class CigiCollDetSegRespV2;
 class CigiCollDetVolRespV2;
 class CigiSensorRespV2;
-class CigiIGMsgV2;	// CGBCGB CIGI_IG_RESPONSE_MESSAGE
+class CigiIGMsgV2;        // CGBCGB CIGI_IG_RESPONSE_MESSAGE
 class CigiHostSession;
 class CigiIncomingMsg;
 class CigiOutgoingMsg;
@@ -63,7 +63,7 @@ class CigiClV2NetworkSignalProcessing;
 //    async                (Number)       True (non-zero) to run in CIGI async mode (default: false - CIGI sync)
 //    hideOwnshipModel     (Number)       True to hide the ownship's model (default: false - ownship's model is seen)
 //    ownshipModel         (Number)       Ownship's model ID
-//    mslTrailModel        (Number)       Missile Trail" effect model ID 
+//    mslTrailModel        (Number)       Missile Trail" effect model ID
 //    smokePlumeModel      (Number)       Smoke Plume" effect model ID
 //    airExplosionModel    (Number)       Air Explosion" effect model ID
 //    groundExplosionModel (Number)       Ground Explosion" effect model ID
@@ -101,8 +101,8 @@ public:
    unsigned short getOwnshipModelID() const { return cmtOwnship; }         // Ownship's model ID
    virtual bool setOwnshipModelId(const unsigned short);                   // Ownship's model ID
 
-   unsigned short getMslTrailModelID() const { return cmtMslTrail; }       // "Missile Trail" effect model ID 
-   virtual bool setMslTrailModelId(const unsigned short);                  // "Missile Trail" effect model ID 
+   unsigned short getMslTrailModelID() const { return cmtMslTrail; }       // "Missile Trail" effect model ID
+   virtual bool setMslTrailModelId(const unsigned short);                  // "Missile Trail" effect model ID
 
    unsigned short getSmokePlumeModelID() const { return cmtSmokePlume; }   // "Smoke Plume" effect model ID
    virtual bool setSmokePlumeModelId(const unsigned short);                // "Smoke Plume" effect model ID
@@ -144,7 +144,7 @@ public:
    virtual bool setSlotShipWakeModel(const Basic::Number* const msg);
 
    // Component interface
-   virtual void updateData(const LCreal dt = 0.0f);
+   virtual void updateData(const LCreal dt = 0.0);
    virtual void reset();
 
 protected:
@@ -161,7 +161,7 @@ protected:
     CigiCompCtrlV2* getOwnshipComponentControlPacket(const unsigned int buffer) {
         return (buffer < NUM_BUFFERS ? ownshipCC[buffer] : 0);
     }
-    CigiEntityCtrlV2* getOwnshipEntityControlPacket(const unsigned int buffer) { 
+    CigiEntityCtrlV2* getOwnshipEntityControlPacket(const unsigned int buffer) {
        return (buffer < NUM_BUFFERS ? ownshipEC[buffer] : 0);
     }
 
@@ -171,7 +171,7 @@ protected:
     void swapReadBuffer() { if (iw0 < NUM_BUFFERS) ir = iw0; } // Swap the read buffer
 
     bool isIgResetRequested() const { return resetRequest; }
-    void clearIgResetRequest() { resetRequest = false; } 
+    void clearIgResetRequest() { resetRequest = false; }
 
     unsigned short getNexLosId() { return ++losReqId; }
     bool isNewLosequested() const { return newLosReq; }
@@ -222,7 +222,7 @@ protected:
     virtual bool setWeaponData(OtwModelCigiClV2* const m, const unsigned short entity, const Simulation::Weapon* const p);
     virtual bool setCommonModelData(CigiEntityCtrlV2* const ec, const unsigned short entity, const Simulation::Player* const p);
 
-private:    
+private:
     SPtr<CigiClV2> cigi;                      // CIGI handler (direct, networked, ...)
     bool   asyncMode;                     // Running in ASYNC mode if true
     bool   hideOwn;                       // Hide ownship model flag
@@ -240,7 +240,7 @@ private:
     double  losRespLon;                   // LOS Response longitude intersection point (deg)
     double  losRespAlt;                   // LOS Response altitude intersection point (m)
     LCreal  losRespRange;                 // LOS response range (m)
-    int     losRespMaterialCode;          // LOS response material code response 
+    int     losRespMaterialCode;          // LOS response material code response
     unsigned short losRespId;             // LOS Response ID
     bool    losRespDataValid;             // LOS response data is valid flag
     unsigned short losReqId;              // LOS Request ID
@@ -253,16 +253,16 @@ private:
     unsigned int ir;                      // Read index
 
     // Packets
-    CigiEntityCtrlV2*	ownshipEC[NUM_BUFFERS];	// Ownship entity control packet
-    CigiCompCtrlV2*	ownshipCC[NUM_BUFFERS];	// ownship component control packet
-    CigiIGCtrlV2*	igc;			// IG control packet
-    CigiLosVectReqV2*	los;			// LOS request packet
-    CigiViewCtrlV2*	view;			// View control packet (optional, set by derived classes)
-    CigiViewDefV2*	fov;			// FOV defination packet (optional, set by derived classes
+    CigiEntityCtrlV2* ownshipEC[NUM_BUFFERS];   // Ownship entity control packet
+    CigiCompCtrlV2* ownshipCC[NUM_BUFFERS];     // ownship component control packet
+    CigiIGCtrlV2* igc;                          // IG control packet
+    CigiLosVectReqV2* los;                      // LOS request packet
+    CigiViewCtrlV2* view;                       // View control packet (optional, set by derived classes)
+    CigiViewDefV2* fov;                         // FOV defination packet (optional, set by derived classes
 
     // special model IDs
     unsigned short cmtOwnship;             // Ownship's model ID
-    unsigned short cmtMslTrail;            // "Missile Trail" effect model ID 
+    unsigned short cmtMslTrail;            // "Missile Trail" effect model ID
     unsigned short cmtSmokePlume;          // "Smoke Plume" effect model ID
     unsigned short cmtAirExplosion;        // "Air Explosion" effect model ID
     unsigned short cmtGroundExplosion;     // "GroundE xplosion" effect model ID
@@ -295,7 +295,7 @@ public:
    virtual bool initialize(OtwCigiClV2* const p);
 
    // True if we've been successfully initialized
-   virtual bool isInitialized(); 
+   virtual bool isInitialized();
 
    // R/T frame sync -- called from OtwCigiClV2::frameSync() in the R/T thread
    virtual void frameSync();
@@ -342,8 +342,8 @@ private:
 };
 
 //------------------------------------------------------------------------------
-// Class:	CigiClV2Network
-// Base class:	Basic::Object -> CigiClV2 -> CigiClV2Network
+// Class: CigiClV2Network
+// Base class: Basic::Object -> CigiClV2 -> CigiClV2Network
 //
 // Description: Networked CIGI interface to the IG system
 //
@@ -368,7 +368,7 @@ public:
 
    // CigiClV2 class interface
    virtual bool initialize(OtwCigiClV2* const p);
-   virtual bool isInitialized(); 
+   virtual bool isInitialized();
    virtual void startMessage();
    virtual void endMessage();
    virtual int  getOutgoingBufferSize();
@@ -386,16 +386,16 @@ protected:
    bool createCigiProcess();        // Create the CIGI network thread
    bool initCigiNetwork();          // Initialize the network
 
-private:    
+private:
    SPtr<Basic::NetHandler>   netInput;    // Input network handler
    SPtr<Basic::NetHandler>   netOutput;   // Output network handler
-   bool   haveThread;                       // Have a network thread
-   bool   networkInitialized;               // CIGI has been initialized
-   bool   networkInitFailed;                // CIGI initialization has failed
+   bool haveThread;                       // Have a network thread
+   bool networkInitialized;               // CIGI has been initialized
+   bool networkInitFailed;                // CIGI initialization has failed
 
-    CigiIncomingMsg* msgIn;
-    CigiOutgoingMsg* msgOut;
-    CigiClV2NetworkSignalProcessing* sigProcessor;
+   CigiIncomingMsg* msgIn;
+   CigiOutgoingMsg* msgOut;
+   CigiClV2NetworkSignalProcessing* sigProcessor;
 };
 
 //------------------------------------------------------------------------------
@@ -442,11 +442,11 @@ public:
     LCreal effectsTimer;
 
 private:
-    // Entity ID  
+    // Entity ID
    unsigned short id;
 };
 
 } // End Otw namespace
 } // End Eaagles namespace
 
-#endif // __OTWCIGICLV2_H__
+#endif

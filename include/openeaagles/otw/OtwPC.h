@@ -18,7 +18,7 @@ class OtwPC : public Simulation::Otw
 public:
     OtwPC();
 
-    void reset() override;                // Send frame sync (if any)
+    void reset() override;                          // Send frame sync (if any)
 
 protected:
     void sendOwnshipAndModels() override;           // Send state data for ownship and models
@@ -39,9 +39,9 @@ private:
     bool setSlotNetOutput(Basic::NetHandler* const msg);
 
     SPtr<Basic::NetHandler> netOutput;      // Output network handler
-    bool             netInit;               // Network has been initialized
-    bool             netInitFail;           // Initialization attempt failed
-    int              scnt;                  // Send timer
+    bool netInit;                           // Network has been initialized
+    bool netInitFail;                       // Initialization attempt failed
+    int scnt;                               // Send timer
 };
 
 } // End Otw namespace
