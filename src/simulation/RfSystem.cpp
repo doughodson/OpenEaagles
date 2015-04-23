@@ -28,14 +28,14 @@ BEGIN_SLOTTABLE(RfSystem)
    "threshold",            //  5: RF: Receiver threshold above noise (dB, def: 0.0)
    "noiseFigure",          //  6: RF: Noise Figure (> 1)            (no units; def: 1.0)
    "systemTemperature",    //  7: RF: System Temperature            (Kelvin; def: 290.0)
-   "lossXmit",             //  8: RF: Transmit loss                 (dB or no units; def: 1.0) 
+   "lossXmit",             //  8: RF: Transmit loss                 (dB or no units; def: 1.0)
    "lossRecv",             //  9: RF: Receive loss                  (dB or no units; def: 1.0)
    "lossSignalProcess",    // 10: RF: Signal Processing loss        (dB or no units; def: 1.0)
    "disableEmissions",     // 11: Disable sending emission packets flag (default: false)
    "bandwidthNoise",       // 12: Bandwidth Noise (Hz; def: 'bandwidth') (Basic::Number or Basic::Frequency)
 END_SLOTTABLE(RfSystem)
 
-//  Map slot table 
+//  Map slot table
 BEGIN_SLOT_MAP(RfSystem)
     ON_SLOT(1,  setSlotAntennaName,  Basic::String)
     ON_SLOT(2,  setSlotFrequency,    Basic::Number)
@@ -125,7 +125,7 @@ void RfSystem::copyData(const RfSystem& org, const bool cc)
    computeReceiverNoise();
 }
 
-    
+
 //------------------------------------------------------------------------------
 // deleteData() -- delete member data
 //------------------------------------------------------------------------------
@@ -173,21 +173,21 @@ void RfSystem::reset()
    if (getAntenna() == 0 && getAntennaName() != 0 && getOwnship() != 0) {
       // We have a name of the antenna, but not the antenna itself
       const char* name = *getAntennaName();
-      
+
       // Get the named antenna from the player's list of gimbals, antennas and optics
       Antenna* p = dynamic_cast<Antenna*>( getOwnship()->getGimbalByName(name) );
       if (p != 0) {
          setAntenna( p );
          getAntenna()->setSystem(this);
       }
-      
+
       if (getAntenna() == 0) {
          // The assigned antenna was not found!
          std::cerr << "RfSystem::reset() ERROR -- antenna: " << name << ", was not found!" << std::endl;
          setSlotAntennaName(0);
       }
    }
-    
+
    // ---
    // Initialize players of interest
    // ---
@@ -307,7 +307,7 @@ LCreal RfSystem::transmitPower(const LCreal peakPwr) const
 
 
 //------------------------------------------------------------------------------
-// Get Functions 
+// Get Functions
 //------------------------------------------------------------------------------
 
 // Returns true if the R/F system's receiver is enabled
@@ -320,7 +320,7 @@ bool RfSystem::isReceiverEnabled() const
 bool RfSystem::isTransmitterEnabled() const
 {
    return xmitEnable && (getPowerSwitch() > PWR_STBY);
-} 
+}
 
 // Returns true if the R/F system is transmitting
 bool RfSystem::isTransmitting() const
@@ -583,7 +583,7 @@ bool RfSystem::setTransmitterEnableFlag(const bool b)
    xmitEnable = b;
    return true;
 }
-   
+
 // Disables/enables sending the R/F emissions packets
 bool RfSystem::setDisableEmissionsFlag(const bool b)
 {
@@ -607,7 +607,7 @@ bool RfSystem::setAntenna(Antenna* const p)
 // Compute receiver thermal noise (equation 2-8)
 bool RfSystem::computeReceiverNoise()
 {
-   return setReceiverNoise(rfNoiseFigure * float(BOLTZMANN) * rfSysTemp * getBandwidthNoise());
+   return setReceiverNoise(rfNoiseFigure * static_cast<float>(BOLTZMANN) * rfSysTemp * getBandwidthNoise());
 }
 
 //------------------------------------------------------------------------------
@@ -889,7 +889,7 @@ std::ostream& RfSystem::serialize(std::ostream& sout, const int i, const bool sl
     indent(sout,i+j);
     sout << "systemTemperature: " << rfSysTemp  << std::endl;
 
-    //"lossXmit",             //  RF: Transmit loss                 (dB or no units; def: 1.0) 
+    //"lossXmit",             //  RF: Transmit loss                 (dB or no units; def: 1.0)
     indent(sout,i+j);
     sout << "lossXmit: " << rfLossXmit  << std::endl;
 

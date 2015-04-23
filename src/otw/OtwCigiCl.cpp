@@ -1420,10 +1420,10 @@ bool OtwCigiCl::lineOfSightRequest(
          losReq->SetSrcLat(lat);
          losReq->SetSrcLon(lon);
          losReq->SetSrcAlt(alt);
-         losReq->SetVectAz( float(-hdg) );
-         losReq->SetVectEl( float(pitch) );
-         losReq->SetMinRange( float(minRange) );
-         losReq->SetMaxRange( float(maxRange) );
+         losReq->SetVectAz( static_cast<float>(-hdg) );
+         losReq->SetVectEl( static_cast<float>(pitch) );
+         losReq->SetMinRange( static_cast<float>(minRange) );
+         losReq->SetMaxRange( static_cast<float>(maxRange) );
          newLosReq = true;             // new request,
          losRespDataValid = false;     // so, the previous data is not valid
          ok = true;

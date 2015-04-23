@@ -45,8 +45,8 @@ class Integer : public Number {
     DECLARE_SUBCLASS(Integer,Number)
 
 public:
-    Integer(const int num) : Number(double(num)) { STANDARD_CONSTRUCTOR() }
-    Integer()                                      { STANDARD_CONSTRUCTOR() }
+    Integer(const int num) : Number(static_cast<double>(num)) { STANDARD_CONSTRUCTOR() }
+    Integer()                                                 { STANDARD_CONSTRUCTOR() }
 
     operator int() const;
 

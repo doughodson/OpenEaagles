@@ -43,7 +43,7 @@ public:
    void setFrequency(const LCreal f) {
       if (f > 0.0) {
          freq = f;
-         lambda = float(LIGHTSPEED)/f;
+         lambda = static_cast<float>(LIGHTSPEED)/f;
       }
    }
 
@@ -51,7 +51,7 @@ public:
    void setWavelength(const LCreal l) {
       if (l > 0.0) {
          lambda = l;
-         freq = float(LIGHTSPEED)/l;
+         freq = static_cast<float>(LIGHTSPEED)/l;
       }
    }
 

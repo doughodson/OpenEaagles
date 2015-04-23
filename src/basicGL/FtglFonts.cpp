@@ -308,7 +308,7 @@ void FtglBitmapFont::outputText(const double x, const double y, const char* txt,
             cc[1] = '\0';
             for (int i = 0; i < nn; i++) {
                 cc[0] = cbuf[i];
-                glRasterPos2d( x, (y - float(i)*getLineSpacing()) );
+                glRasterPos2d( x, (y - static_cast<float>(i)*getLineSpacing()) );
                 ftgl1->Render(cc);
             }
         }
@@ -350,7 +350,7 @@ void FtglBitmapFont::outputText(const char* txt, const int n, const bool vf, con
             glGetDoublev(GL_CURRENT_RASTER_POSITION, rpos);
             for (int i = 0; i < nn; i++) {
                 cc[0] = cbuf[i];
-                glRasterPos2d( rpos[0], (rpos[1] - float(i)*getLineSpacing()) );
+                glRasterPos2d( rpos[0], (rpos[1] - static_cast<float>(i)*getLineSpacing()) );
                 ftgl1->Render(cc);
             }
         }
@@ -704,7 +704,7 @@ void FtglPixmapFont::outputText(const double x, const double y, const char* txt,
             cc[1] = '\0';
             for (int i = 0; i < nn; i++) {
                 cc[0] = cbuf[i];
-                glRasterPos2d( x, (y - float(i)*getLineSpacing()) );
+                glRasterPos2d( x, (y - static_cast<float>(i)*getLineSpacing()) );
                 ftgl1->Render(cc);
             }
         }
@@ -748,7 +748,7 @@ void FtglPixmapFont::outputText(const char* txt, const int n, const bool vf, con
             glGetDoublev(GL_CURRENT_RASTER_POSITION, rpos);
             for (int i = 0; i < nn; i++) {
                 cc[0] = cbuf[i];
-                glRasterPos2d( rpos[0], (rpos[1] - float(i)*getLineSpacing()) );
+                glRasterPos2d( rpos[0], (rpos[1] - static_cast<float>(i)*getLineSpacing()) );
                 ftgl1->Render(cc);
             }
         }

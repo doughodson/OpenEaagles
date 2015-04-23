@@ -127,10 +127,10 @@ public:
    int getInt() const               { return int(num); }
    double getFloat() const          { return num; }
 
-   void setValue(const int v)       { num = double(v); redisplay(); }
+   void setValue(const int v)       { num = static_cast<double>(v); redisplay(); }
    void setValue(const double v)    { num = v; redisplay(); }
 
-   void setMaxValue(const int v)    { maxNum = double(v); redisplay(); }
+   void setMaxValue(const int v)    { maxNum = static_cast<double>(v); redisplay(); }
    void setMaxValue(const double v) { maxNum = v; redisplay(); }
 
    double getInputValue() const override;

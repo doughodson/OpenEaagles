@@ -454,7 +454,7 @@ void Eadi3DPage::globeBall(LCreal pitch, LCreal roll, LCreal pitchCmd, LCreal ro
             else lcColor3v(GROUND);
     glRotated(90.0, 1.0, 0.0, 0.0);
             /* arcf(0.,0.,radius,180.0,0); */
-            eadiObjs.irisgl.circf(0., 0., float(radius));
+            eadiObjs.irisgl.circf(0., 0., static_cast<float>(radius));
     glPopMatrix();
     eadiObjs.drawObj(Eadi3DObjects::GLOBE);
     glPopMatrix();

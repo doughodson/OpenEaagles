@@ -92,7 +92,7 @@ void BitmapFont::outputText(const double x, const double y, const char* txt, con
     if (vf) {
         // Vertical text
         for (int i = 0; i < nn; i++) {
-            glRasterPos2d( x, (y - float(i)*getLineSpacing()) );
+            glRasterPos2d( x, (y - static_cast<float>(i)*getLineSpacing()) );
             glCallLists(1, GL_UNSIGNED_BYTE, &cbuf[i]);
         }
     }
@@ -127,7 +127,7 @@ void BitmapFont::outputText(const char* txt, const int n, const bool vf, const b
         // Vertical text
         GLdouble rpos[4] = { 0, 0, 0, 0 };
         for (int i = 0; i < nn; i++) {
-            glRasterPos2d( rpos[0], (rpos[1] - float(i)*getLineSpacing()) );
+            glRasterPos2d( rpos[0], (rpos[1] - static_cast<float>(i)*getLineSpacing()) );
             glCallLists(1, GL_UNSIGNED_BYTE, &cbuf[i]);
         }
     }
