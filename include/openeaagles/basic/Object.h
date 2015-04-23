@@ -6,6 +6,7 @@
 #include "openeaagles/basic/macros.h"
 #include "openeaagles/basic/SlotTable.h"
 #include "openeaagles/basic/safe_ptr.h"
+#include "openeaagles/basic/ref_ptr.h"
 
 namespace Eaagles {
 namespace Basic {

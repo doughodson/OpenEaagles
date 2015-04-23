@@ -321,7 +321,7 @@ public:
    virtual Pair* findByType(const std::type_info& type);
    virtual const Pair* findByType(const std::type_info& type) const;
 
-   bool isComponentSelected() const                { return (selection != 0); }
+   bool isComponentSelected() const                { return (selection != nullptr); }
    Component* getSelectedComponent()               { return selected; }
    const Component* getSelectedComponent() const   { return selected; }
 
@@ -427,17 +427,17 @@ protected:
 
 private:
    safe_ptr<PairStream> components; // Child components
-   Component* containerPtr;     // We are a component of this container
+   Component* containerPtr;         // We are a component of this container
 
-   Component* selected;         // Selected child (process only this one)
-   Object*    selection;        // Name of selected child
+   Component* selected;             // Selected child (process only this one)
+   Object*    selection;            // Name of selected child
 
    safe_ptr<Logger> elog;           // Our event logger
    safe_ptr<Logger> elog0;          // Event logger from slots
-   Statistic* timingStats;      // Timing statistics
-   bool pts;                    // Print timing statistics
-   bool frz;                    // Freeze flag -- true if this component is frozen
-   bool shutdown;               // True if this component is being (or has been) shutdown
+   Statistic* timingStats;          // Timing statistics
+   bool pts;                        // Print timing statistics
+   bool frz;                        // Freeze flag -- true if this component is frozen
+   bool shutdown;                   // True if this component is being (or has been) shutdown
 };
 
 } // End Basic namespace
