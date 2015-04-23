@@ -15,7 +15,7 @@ EMPTY_SERIALIZER(DataRecordHandle)
 DataRecordHandle::DataRecordHandle()
 {
    STANDARD_CONSTRUCTOR()
-   record = 0;
+   record = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -41,7 +41,7 @@ void DataRecordHandle::copyData(const DataRecordHandle& org, const bool cc)
 // deleteData() -- delete member data
 void DataRecordHandle::deleteData()
 {
-   if (record != 0) { delete record;  record = 0; }
+   if (record != nullptr) { delete record;  record = nullptr; }
 }
 
 } // End Recorder namespace
