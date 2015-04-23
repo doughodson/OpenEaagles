@@ -205,14 +205,14 @@ private:
    void initData();
 
    // Full external stores list; set by setSlotStores()
-   SPtr<Basic::PairStream> storesList;
+   Basic::safe_ptr<Basic::PairStream> storesList;
 
    // Station tables
-   SPtr<Weapon> weaponTbl[MAX_STATIONS];  // Weapons by station
-   unsigned int numWpn;                   // Number of weapons in table
+   Basic::safe_ptr<Weapon> weaponTbl[MAX_STATIONS];    // Weapons by station
+   unsigned int numWpn;                                // Number of weapons in table
 
-   SPtr<ExternalStore> esTbl[MAX_STATIONS]; // External store by station
-   unsigned int numEs;                    // Number of external stores in table
+   Basic::safe_ptr<ExternalStore> esTbl[MAX_STATIONS]; // External store by station
+   unsigned int numEs;                                 // Number of external stores in table
 
    unsigned int ns;                       // Number of Stations
    unsigned int selected;                 // Selection station number [ 1 ... ns ] (or zero if none)

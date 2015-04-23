@@ -215,17 +215,17 @@ private:
     LCreal      pta;            // Planned Time of Arrival  (sec)
     LCreal      sca;            // Safe Clearance Alt       (ft)
     LCreal      magvar;         // Mag Var                  (degs)
-    SPtr<const Basic::String> description; // Description
+    Basic::safe_ptr<const Basic::String> description; // Description
     bool        needPosVec;     // Request calucaltion of 'posVec' from Lat/Lon
     bool        needLL;         // Request calucaltion of Lat/Lon from 'posVec'
     LCreal      cmdAlt;         // Commanded Altitude       (m)
     bool        haveCmdAlt;     // Have commanded altitude
     LCreal      cmdAirspeed;    // Commanded Airspeed       (kts)
     bool        haveCmdAs;      // Have commanded airspeed
-    SPtr<Basic::Pair> next;   // "next" Steerpoint pair [ name steerpoint ]
+    Basic::safe_ptr<Basic::Pair> next;  // "next" Steerpoint pair [ name steerpoint ]
 
     // Steerpoint action
-    SPtr<Action> action;        // Action to be performed at this steerpoint
+    Basic::safe_ptr<Action> action;     // Action to be performed at this steerpoint
 
     // Initial (reset) data
     double      initLatitude;   // latitude
@@ -242,7 +242,7 @@ private:
     bool        haveInitCmdAlt; // Have initial cmd altitude
     LCreal      initCmdAirspeed; // Initial commanded airspeed (kts)
     bool        haveInitCmdAs;   // Have commanded airspeed
-    SPtr<const Basic::String> initNextStptName; // Name of the inital "next" steerpoint
+    Basic::safe_ptr<const Basic::String> initNextStptName; // Name of the inital "next" steerpoint
     int         initNextStptIdx;    // Index of the initial "next" steerpoint
 
     // Computed data

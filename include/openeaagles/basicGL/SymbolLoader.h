@@ -178,7 +178,7 @@ protected:
 
    virtual SlSymbol* symbolFactory();  // Creates symbols objects
 
-   int getSymbols(SPtr<SlSymbol>* const newSyms, const int max);
+   int getSymbols(Basic::safe_ptr<SlSymbol>* const newSyms, const int max);
 
 private:
    void initData();

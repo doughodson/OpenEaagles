@@ -92,7 +92,7 @@ void Route::copyData(const Route& org, const bool cc)
         Basic::String* n = 0;
         if (org.initToStptName != 0) n = org.initToStptName->clone();
         initToStptName = n;
-        if (n != 0) n->unref();  // SPtr<> has it
+        if (n != 0) n->unref();  // safe_ptr<> has it
     }
 
     initToStptIdx = org.initToStptIdx;
@@ -460,7 +460,7 @@ const Basic::Pair* Route::findSteerpointImp(const unsigned int idx) const
 //------------------------------------------------------------------------------
 // getSteerpoints() -- Get the route we're flying to (starting at 'to')
 //------------------------------------------------------------------------------
-unsigned int Route::getSteerpoints(SPtr<Steerpoint>* const stptList, const unsigned int max)
+unsigned int Route::getSteerpoints(Basic::safe_ptr<Steerpoint>* const stptList, const unsigned int max)
 {
     unsigned int i = 0;
     Basic::PairStream* steerpoints = getComponents();
@@ -499,7 +499,7 @@ unsigned int Route::getSteerpoints(SPtr<Steerpoint>* const stptList, const unsig
 //------------------------------------------------------------------------------
 // getAllSteerpoints() -- Get all of the steerpoints in the route
 //------------------------------------------------------------------------------
-unsigned int Route::getAllSteerpoints(SPtr<Steerpoint>* const stptList, const unsigned int max)
+unsigned int Route::getAllSteerpoints(Basic::safe_ptr<Steerpoint>* const stptList, const unsigned int max)
 {
     unsigned int i = 0;
     Basic::PairStream* steerpoints = getComponents();
@@ -659,7 +659,7 @@ bool Route::replaceAllSteerpoints(Basic::PairStream* const newSteerpointList, un
 //------------------------------------------------------------------------------
 // deleteSteerpoint() - goes through and deletes the steerpoint if there is a match
 //------------------------------------------------------------------------------
-bool Route::deleteSteerpoint(Steerpoint* const sp) 
+bool Route::deleteSteerpoint(Steerpoint* const sp)
 {
    // get a pointer to our current 'to' steerpoint
    const Steerpoint* p = getSteerpoint();

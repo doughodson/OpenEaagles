@@ -443,9 +443,9 @@ private:
    bool          haveMatrix;       // Have a transformation matrix flag
    bool          haveMatrix1;      // saved 'haveMatrix'
 
-   bool          postDraw;         // Post draw component (child) graphic
-   GLuint        texture;          // Texture
-   SPtr<Basic::Identifier> texName;   // Texture name
+   bool          postDraw;                       // Post draw component (child) graphic
+   GLuint        texture;                        // Texture
+   Basic::safe_ptr<Basic::Identifier> texName;   // Texture name
 
    bool          visible;          // True if this object is visible
    GLfloat       linewidth;        // Linewidth

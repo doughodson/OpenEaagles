@@ -991,7 +991,7 @@ void SymbolLoader::draw()
 //------------------------------------------------------------------------------
 // Gets our list of symbols, and returns the number of symbols
 //------------------------------------------------------------------------------
-int SymbolLoader::getSymbols(SPtr<SlSymbol>* const newSyms, const int max)
+int SymbolLoader::getSymbols(Basic::safe_ptr<SlSymbol>* const newSyms, const int max)
 {
    int numSymbols = 0;
    if (max > 0) {

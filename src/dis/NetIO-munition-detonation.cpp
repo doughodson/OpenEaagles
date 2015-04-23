@@ -65,7 +65,7 @@ void NetIO::processDetonationPDU(const DetonationPDU* const pdu)
          fPlayer = fNib->getPlayer();
       }
       else {
-         SPtr<Basic::PairStream> players( getSimulation()->getPlayers() );
+         Basic::safe_ptr<Basic::PairStream> players( getSimulation()->getPlayers() );
          fPlayer = getSimulation()->findPlayer(fPlayerId);
       }
    }

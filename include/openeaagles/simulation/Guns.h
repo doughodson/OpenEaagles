@@ -193,8 +193,8 @@ protected:
 private:
    enum { MBT = 100 };        // Max number of burst trajectories
 
-   LCreal   muzzleVel;        // Muzzle velocity                           (m/s)
-   SPtr<Player> hitPlayer;    // Player we hit (if any)
+   LCreal   muzzleVel;                 // Muzzle velocity (m/s)
+   Basic::safe_ptr<Player> hitPlayer;  // Player we hit (if any)
 
    // Bullet trajectories
    int       nbt;             // Number of burst trajectories

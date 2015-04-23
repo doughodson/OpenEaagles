@@ -268,14 +268,14 @@ void Simulation::copyData(const Simulation& org, const bool cc)
    if (origPlayers != 0) { origPlayers = 0; }
    if (org.origPlayers != 0) {
       origPlayers = org.origPlayers->clone();
-      origPlayers->unref();  // SPtr<> has it
+      origPlayers->unref();  // safe_ptr<> has it
    }
 
    // Copy active players
    if (players != 0)     { players = 0; }
    if (org.players != 0) {
       players = org.players->clone();
-      players->unref();  // SPtr<> has it
+      players->unref();  // safe_ptr<> has it
    }
 
    const Dafif::AirportLoader* apLoader = org.airports;
@@ -413,7 +413,7 @@ void Simulation::reset()
    // Something old and something new ...
    // ... We're going to create a new player list.
    // ---
-   SPtr<Basic::PairStream> newList( new Basic::PairStream() );
+   Basic::safe_ptr<Basic::PairStream> newList( new Basic::PairStream() );
    newList->unref();  // 'newList' has it, so unref() from the 'new'
 
    // ---
@@ -421,7 +421,7 @@ void Simulation::reset()
    // ---
    {
       if (origPlayers != 0) {
-         SPtr<Basic::PairStream> origPlayerList = origPlayers;
+         Basic::safe_ptr<Basic::PairStream> origPlayerList = origPlayers;
          Basic::List::Item* item = origPlayerList->getFirstItem();
          while (item != 0) {
             Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
@@ -443,7 +443,7 @@ void Simulation::reset()
    // ---
    {
       if (players != 0) {
-         SPtr<Basic::PairStream> origPlayerList = players;
+         Basic::safe_ptr<Basic::PairStream> origPlayerList = players;
          Basic::List::Item* item = origPlayerList->getFirstItem();
          while (item != 0) {
             Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
@@ -646,7 +646,7 @@ void Simulation::reset()
    // Now reset the new player list
    // ---
    if (players != 0) {
-      SPtr<Basic::PairStream> pl = players;
+      Basic::safe_ptr<Basic::PairStream> pl = players;
       Basic::List::Item* item = pl->getFirstItem();
       while (item != 0) {
          Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
@@ -822,7 +822,7 @@ void Simulation::updateTC(const LCreal dt)
    // ---
    {
       // This locks the current player list for this time-critical frame
-      SPtr<Basic::PairStream> currentPlayerList = players;
+      Basic::safe_ptr<Basic::PairStream> currentPlayerList = players;
 
       for (unsigned int f = 0; f < 4; f++) {
 
@@ -914,7 +914,7 @@ void Simulation::updateData(const LCreal dt)
 
     // Update all players
     if (players != 0) {
-        SPtr<Basic::PairStream> currentPlayerList = players;
+         Basic::safe_ptr<Basic::PairStream> currentPlayerList = players;
 
          if (reqBgThreads == 1) {
             // Our single thread
@@ -1362,7 +1362,7 @@ bool Simulation::setSlotPlayers(Basic::PairStream* const pl)
 
       // Copy original players to the new list
       if (origPlayers != 0) {
-         SPtr<Basic::PairStream> origPlayerList = origPlayers;
+         Basic::safe_ptr<Basic::PairStream> origPlayerList = origPlayers;
          Basic::List::Item* item = origPlayerList->getFirstItem();
          while (item != 0) {
             Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
@@ -1396,7 +1396,7 @@ void Simulation::updatePlayerList()
 
     // Second, check for delete requests
     if (!yes) {
-        SPtr<Basic::PairStream> pl = players;
+        Basic::safe_ptr<Basic::PairStream> pl = players;
         Basic::List::Item* item = pl->getFirstItem();
         while (!yes && item != 0) {
             Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
@@ -1413,13 +1413,13 @@ void Simulation::updatePlayerList()
         // ---
         // Something old and something new ...
         // ---
-        SPtr<Basic::PairStream> newList( new Basic::PairStream() );
+       Basic::safe_ptr<Basic::PairStream> newList( new Basic::PairStream() );
         newList->unref();  // 'newList' has it, so unref() from the 'new'
 
         // ---
         // Copy players to the new list; except 'deleteRequest' mode players
         // ---
-        SPtr<Basic::PairStream> oldList = players;
+        Basic::safe_ptr<Basic::PairStream> oldList = players;
         Basic::List::Item* item = oldList->getFirstItem();
         while (item != 0) {
             Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());

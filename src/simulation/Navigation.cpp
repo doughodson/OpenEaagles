@@ -84,10 +84,10 @@ void Navigation::initData()
    tk = 0;
    velValid = false;
    magvar = 0;
-   mhdg = 0;   
+   mhdg = 0;
    magVarValid = 0;
-   windDirD = 0;   
-   windSpdKts = 0;   
+   windDirD = 0;
+   windSpdKts = 0;
    windsValid = false;
    navStrValid = false;
    tbrg = 0;
@@ -97,7 +97,7 @@ void Navigation::initData()
    tcrs = 0;
    mcrs = 0;
    xte = 0;
-   eta = 0; 
+   eta = 0;
 
    utc = 0;
    initUTC = 0;
@@ -123,14 +123,14 @@ void Navigation::copyData(const Navigation& org, const bool cc)
       Route* p = org.priRoute->clone();
       priRoute = p;
       p->container(this);
-      p->unref();  // SPtr<> has it
+      p->unref();  // safe_ptr<> has it
    }
    else priRoute = 0;
 
    if (org.initRoute != 0) {
       Route* p = org.initRoute->clone();
       initRoute = p;
-      p->unref();  // SPtr<> has it
+      p->unref();  // safe_ptr<> has it
    }
    else initRoute = 0;
 
@@ -138,7 +138,7 @@ void Navigation::copyData(const Navigation& org, const bool cc)
       Bullseye* b = org.bull->clone();
       bull = b;
       b->container(this);
-      b->unref();  // SPtr<> has it
+      b->unref();  // safe_ptr<> has it
    }
    else bull = 0;
 
@@ -158,10 +158,10 @@ void Navigation::copyData(const Navigation& org, const bool cc)
    tk = org.tk;
    velValid = org.velValid;
    magvar = org.magvar;
-   mhdg = org.mhdg;   
+   mhdg = org.mhdg;
    magVarValid = org.magVarValid;
    windDirD = org.windDirD;
-   windSpdKts = org.windSpdKts;  
+   windSpdKts = org.windSpdKts;
    windsValid = org.windsValid;
    navStrValid = org.navStrValid;
    tbrg = org.tbrg;
@@ -171,7 +171,7 @@ void Navigation::copyData(const Navigation& org, const bool cc)
    tcrs = org.tcrs;
    mcrs = org.mcrs;
    xte = org.xte;
-   eta = org.eta; 
+   eta = org.eta;
    utc = org.utc;
    initUTC = org.initUTC;
    utcValid = org.utcValid;
@@ -220,7 +220,7 @@ void Navigation::reset()
    }
    if (initRoute != 0) {
       priRoute = initRoute->clone();
-      priRoute->unref();  // SPtr<> has it
+      priRoute->unref();  // safe_ptr<> has it
    }
    if (priRoute != 0) {
       priRoute->container(this);
@@ -234,7 +234,7 @@ void Navigation::reset()
    const Simulation* sim = getSimulation();
    if (sim != 0) {
       refLat = sim->getRefLatitude();
-      refLon = sim->getRefLongitude();     
+      refLon = sim->getRefLongitude();
    }
 }
 
@@ -721,7 +721,7 @@ bool Navigation::updateSysPosition()
     }
     return ok;
 }
-             
+
 // (default) System attitude function  (using truth data from ownship)
 bool Navigation::updateSysAttitude()
 {
@@ -791,11 +791,11 @@ int Navigation::getFeba(osg::Vec2* const points, const int max) const
 {
     int n = 0;
     if (points != 0 && max > 0 && feba != 0 && nFeba > 0) {
-    
+
         // Number of points; limited by 'max'
         n = nFeba;
         if (n > max) n = max;
-        
+
         // Copy the FEBA points
         for (int i = 0; i < n; i++) {
             points[i] = feba[i];
@@ -850,7 +850,7 @@ bool Navigation::setSlotRoute(const Route* const msg)
    }
    if (initRoute != 0) {
       priRoute = initRoute->clone();
-      priRoute->unref();  // SPtr<> has it
+      priRoute->unref();  // safe_ptr<> has it
    }
    if (priRoute != 0) {
       priRoute->container(this);
@@ -896,7 +896,7 @@ bool Navigation::setSlotFeba(const Basic::PairStream* const msg)
                         const Basic::Pair* pair2 = dynamic_cast<const Basic::Pair*>(msg2->getPosition(1));
                         if (pair2 != 0) pNum = dynamic_cast<const Basic::Number*>(pair2->object());
                         else pNum = dynamic_cast<const Basic::Number*>(msg2->getPosition(1));
-                        
+
                         if (pNum != 0) {
                             const Basic::Distance* pDist = dynamic_cast<const Basic::Distance*>(pNum);
                             if (pDist != 0) {
@@ -913,7 +913,7 @@ bool Navigation::setSlotFeba(const Basic::PairStream* const msg)
                         const Basic::Pair* pair2 = dynamic_cast<const Basic::Pair*>(msg2->getPosition(2));
                         if (pair2 != 0) pNum = dynamic_cast<const Basic::Number*>(pair2->object());
                         else pNum = dynamic_cast<const Basic::Number*>(msg2->getPosition(2));
-                        
+
                         if (pNum != 0) {
                             const Basic::Distance* pDist = dynamic_cast<const Basic::Distance*>(pNum);
                             if (pDist != 0) {
@@ -938,7 +938,7 @@ bool Navigation::setSlotFeba(const Basic::PairStream* const msg)
             }
             item = item->getNext();
         }
-        
+
         // If we have a valid FEBA, then save it
         if (ok) {
             setFeba(tmpFeba, np);

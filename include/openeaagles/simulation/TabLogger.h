@@ -104,8 +104,8 @@ public:
         void captureData() override;
     private:
         int theType;
-        SPtr<const Player> thePlayer;
-        SPtr<const Player> theSource;   // source of damage, usually a weapon, always a player
+        Basic::safe_ptr<const Player> thePlayer;
+        Basic::safe_ptr<const Player> theSource;   // source of damage, usually a weapon, always a player
         osg::Vec3 pos;
         osg::Vec3 vel;
         osg::Vec3 angles;
@@ -132,7 +132,7 @@ public:
         void captureData() override;
     private:
         int theType;
-        SPtr<const Player> thePlayer;
+        Basic::safe_ptr<const Player> thePlayer;
         int rounds;
     };
 
@@ -153,10 +153,10 @@ public:
         void captureData() override;
     private:
         int theType;
-        SPtr<const Player> thePlayer;
-        SPtr<const Player> theWeapon;
-        SPtr<const Player> theTarget;
-        SPtr<const Track> theTrack;
+        Basic::safe_ptr<const Player> thePlayer;
+        Basic::safe_ptr<const Player> theWeapon;
+        Basic::safe_ptr<const Player> theTarget;
+        Basic::safe_ptr<const Track> theTrack;
         unsigned short eventID;
         unsigned int detType;
         LCreal missDist;
@@ -177,10 +177,10 @@ public:
         void captureData() override;
     private:
         int theType;
-        SPtr<const TrackManager> theManager;
-        SPtr<const Track> theTrack;
-        SPtr<const Player> thePlayer;
-        SPtr<const Emission> theEmission;
+        Basic::safe_ptr<const TrackManager> theManager;
+        Basic::safe_ptr<const Track> theTrack;
+        Basic::safe_ptr<const Player> thePlayer;
+        Basic::safe_ptr<const Emission> theEmission;
         osg::Vec3 pos;
         osg::Vec3 vel;
         osg::Vec3 angles;
@@ -205,10 +205,10 @@ public:
         void captureData() override;
     private:
         int theType;
-        SPtr<const TrackManager> theManager;
-        SPtr<const Track> theTrack;
-        SPtr<const Player> thePlayer;
-        SPtr<const Emission> theEmission;
+        Basic::safe_ptr<const TrackManager> theManager;
+        Basic::safe_ptr<const Track> theTrack;
+        Basic::safe_ptr<const Player> thePlayer;
+        Basic::safe_ptr<const Emission> theEmission;
         osg::Vec3 pos;
         osg::Vec3 vel;
         osg::Vec3 angles;

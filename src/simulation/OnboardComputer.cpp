@@ -116,7 +116,7 @@ void OnboardComputer::triggerAction(Action* const toAction)
    }
 
    // ---
-   // find and start the current 'to' steerpont action 
+   // find and start the current 'to' steerpont action
    // ---
    if (toAction != 0) {
       // trigger the action
@@ -139,7 +139,7 @@ void OnboardComputer::actionManager(const LCreal dt)
       // update the action
       action->process(dt);
       if (action->isCompleted()) {
-         // The action has finished 
+         // The action has finished
          action = 0;
       }
    }
@@ -171,7 +171,7 @@ int OnboardComputer::getShootList(const Track* tlist[], const int max) const
     return n;
 }
 
-int OnboardComputer::getShootList(SPtr<Track>* const tlist, const int max)
+int OnboardComputer::getShootList(Basic::safe_ptr<Track>* const tlist, const int max)
 {
     int n = 0;
     if (nextToShoot != 0 && tlist != 0 && max > 0) {
@@ -181,7 +181,7 @@ int OnboardComputer::getShootList(SPtr<Track>* const tlist, const int max)
     return n;
 }
 
-int OnboardComputer::getShootList(SPtr<const Track>* const tlist, const int max) const
+int OnboardComputer::getShootList(Basic::safe_ptr<const Track>* const tlist, const int max) const
 {
     int n = 0;
     if (nextToShoot != 0 && tlist != 0 && max > 0) {
@@ -192,14 +192,14 @@ int OnboardComputer::getShootList(SPtr<const Track>* const tlist, const int max)
 }
 
 //------------------------------------------------------------------------------
-// getNextTarget() -- Find the next target to shoot 
+// getNextTarget() -- Find the next target to shoot
 //------------------------------------------------------------------------------
 Track* OnboardComputer::getNextTarget()
 {
     Track* trk = 0;
-    
+
     int n = 0;
-    SPtr<Track> trackList[2];
+    Basic::safe_ptr<Track> trackList[2];
     n = getShootList(trackList,2);
     if (n > 0) trk = trackList[0];
 
@@ -218,16 +218,16 @@ void OnboardComputer::updateShootList(const bool step)
 
    // First, let's get the active track list
    const unsigned int MAX_TRKS = 20;
-   SPtr<Track> trackList[MAX_TRKS];
+   Basic::safe_ptr<Track> trackList[MAX_TRKS];
 
    int n = 0;
    TrackManager* tm = getTrackManagerByType(typeid(AirTrkMgr));
    // fall back to whatever TM we have, if we don't have an AirTrkMgr
    if (tm == 0) tm = getTrackManagerByType(typeid(TrackManager));
    if (tm != 0) n = tm->getTrackList(trackList,MAX_TRKS);
-    
+
    if (n > 0) {
-       
+
       // ---
       // Find the current next-to-shoot index
       // ---
@@ -237,7 +237,7 @@ void OnboardComputer::updateShootList(const bool step)
             if (nts == trackList[i]) cNTS = i;
          }
       }
-        
+
       // ---
       // Update the next to shoot?
       // ---
@@ -278,7 +278,7 @@ void OnboardComputer::updateShootList(const bool step)
          // 3) Keep the same next-to-shoot track
          nNTS = cNTS;
       }
-        
+
       // ---
       // update the shoot list index values in the tracks
       // ---
@@ -309,17 +309,17 @@ bool OnboardComputer::requestNextToShoot(const Track* const nts)
 {
    bool ok = false;
    if (nts != 0) {
-       
+
       // First, let's get the active track list
       const unsigned int MAX_TRKS = 20;
-      SPtr<Track> trackList[MAX_TRKS];
+      Basic::safe_ptr<Track> trackList[MAX_TRKS];
 
       int n = 0;
       TrackManager* tm = getTrackManagerByType(typeid(AirTrkMgr));
       // fall back to whatever TM we have, if we don't have an AirTrkMgr
       if (tm == 0) tm = getTrackManagerByType(typeid(TrackManager));
       if (tm != 0) n = tm->getTrackList(trackList,MAX_TRKS);
-       
+
       if (n > 0) {
 
          // try to find the requested track and save its index
@@ -362,7 +362,7 @@ void OnboardComputer::setNextToShoot(Track* const p)
 }
 
 //------------------------------------------------------------------------------
-// getTrackManagerByType() -- return the first track manager of type 
+// getTrackManagerByType() -- return the first track manager of type
 //------------------------------------------------------------------------------
 TrackManager* OnboardComputer::getTrackManagerByType(const std::type_info& type)
 {

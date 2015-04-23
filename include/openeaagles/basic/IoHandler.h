@@ -110,16 +110,16 @@ private:
    friend class IoThread;
 
    // Data I/O handlers
-   SPtr<IoData> inData;       // "input" data received from the hardware
-   SPtr<IoData> outData;      // "output" data sent to the hardware
-   SPtr<PairStream> devices;  // Device list
+   safe_ptr<IoData> inData;       // "input" data received from the hardware
+   safe_ptr<IoData> outData;      // "output" data sent to the hardware
+   safe_ptr<PairStream> devices;  // Device list
 
    bool netInitialized;       // Networks (if any) are initialized
    bool netInitFailed;        // Network init has failed
 
    LCreal rate;               // Thread Rate (hz)
    LCreal pri;                // Priority of the thread (0->lowest, 1->highest)
-   SPtr<Basic::Thread> thread; // The thread
+   safe_ptr<Basic::Thread> thread; // The thread
 };
 
 } // end Basic

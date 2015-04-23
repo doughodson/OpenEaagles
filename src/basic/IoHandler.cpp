@@ -300,7 +300,7 @@ void IoHandler::createDataThread()
 {
    if ( thread == nullptr ) {
       thread = new IoThread(this, getPriority(), getRate());
-      thread->unref(); // 'thread' is a SPtr<>
+      thread->unref(); // 'thread' is a safe_ptr<>
 
       bool ok = thread->create();
       if (!ok) {

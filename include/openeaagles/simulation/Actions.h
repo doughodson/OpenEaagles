@@ -66,7 +66,7 @@ protected:
    virtual void setCompleted(const bool flg);      // Sets the completed flag
 
 private:
-   SPtr<OnboardComputer> manager;   // Our manager (only set while we're in progress)
+   Basic::safe_ptr<OnboardComputer> manager;   // Our manager (only set while we're in progress)
    int            refId;            // Ref ID
    bool           completed;        // True if action has been completed
 };

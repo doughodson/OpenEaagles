@@ -4,8 +4,8 @@
 // Note: The "Lc" prefix stands for "Link class" in honor of Ed Link, who
 //       invented the "Link Blue Box", which was the first flight simulator.
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Support_H__
-#define __Eaagles_Support_H__
+#ifndef __Eaagles_support_H__
+#define __Eaagles_support_H__
 
 // ---
 // Framework configuration file
@@ -73,7 +73,7 @@ typedef double LCreal;
 namespace Eaagles {
 
 // ---
-// Simple semaphore spinlock and unlock functions: 
+// Simple semaphore spinlock and unlock functions:
 //    lcLock(long& s)   -- locks the semaphore w/spinlock wait
 //    lcUnlock(long& s) -- frees the semaphore
 // where 's' is the semaphore that must be initialized to zero.
@@ -267,7 +267,7 @@ inline LCreal deadband(const LCreal x, const LCreal limit)
 }
 
 
-// inRange -- is a number bounded by lo and hi 
+// inRange -- is a number bounded by lo and hi
 inline bool inRange(const LCreal x, const LCreal lo, const LCreal hi)
 {
     return ((lo <= x) && (x <= hi));
@@ -286,16 +286,16 @@ double getComputerTime();
 // UTC time of day (seconds since midnight) and optional date (day/month/year)
 double getTimeUtc(unsigned int* const day=0, unsigned int* const month=0, unsigned int* const year=0);
 
-// Get UTC time since midnight (00:00:00), January 1, 1970 
+// Get UTC time since midnight (00:00:00), January 1, 1970
 double getTime();
 
-// Get UTC time since midnight (00:00:00), January 1, 1970 
+// Get UTC time since midnight (00:00:00), January 1, 1970
 void getTime(
-      unsigned long* const sec,  // (OUT) whole seconds 
+      unsigned long* const sec,  // (OUT) whole seconds
       unsigned long* const uSec  // (OUT) microseconds seconds
    );
 
-// Convert seconds since midnight (00:00:00), January 1, 1970 to year:month:day:hour:minute:second 
+// Convert seconds since midnight (00:00:00), January 1, 1970 to year:month:day:hour:minute:second
 bool convertSec2Ymdhms(
       const unsigned long seconds,  // (IN) whole seconds since midnight (00:00:00), January 1, 1970
       unsigned int* const year,     // (OUT) year YYYY
@@ -456,7 +456,7 @@ void lcAtan2Array(const LCreal* const yValues, const LCreal* const xValues, LCre
 void atan2Array(const double* const yValues, const double* const xValues, double* const atans, const unsigned int n);
 void atan2Array(const float*  const yValues, const float*  const xValues, float*  const atans, const unsigned int n);
 
-// Computes the square roots of 'n' real values  
+// Computes the square roots of 'n' real values
 void lcSqrtArray(const LCreal* const src, LCreal* const dst, const int n);
 void sqrtArray(const double* const src, double* const dst, const unsigned int n);
 void sqrtArray(const float*  const src, float*  const dst, const unsigned int n);
@@ -478,13 +478,13 @@ void lcInteger2Str(const int num, char* const str, int width);
 
 // String copy function: Copies a string from the source, 'strSource', to the
 // destination buffer, 'strDest'.  The destination string is null terminated.
-// The 'strSource' string will be truncated if the 'strDest' string is too small. 
+// The 'strSource' string will be truncated if the 'strDest' string is too small.
 bool lcStrcpy(char* const strDest, const size_t sizeOfDest, const char* const strSource);
 
 // String N copy function: Copies up to 'count' characters from the source string,
 // 'strSource', to the destination buffer, 'strDest'.  The new destination string
 // is null terminated.  The 'strSource' string will be truncated if the 'strDest'
-// string is too small. 
+// string is too small.
 bool lcStrncpy(char* const strDest, const size_t sizeOfDest, const char* const strSource, const size_t count);
 
 // String cat function: Appends the 'strSource' string to the end of the 'strDest'
@@ -526,7 +526,7 @@ int lcStrcasecmp(const char* const s1, const char* const s2);
 int lcStrncasecmp(const char* const s1, const char* const s2, const size_t n);
 
 // returns number of digits in the whole number part (i.e. left of decimal)
-// of a floating point number 
+// of a floating point number
 unsigned int getDigits(const double x);
 
 } // End Eaagles namespace

@@ -374,9 +374,9 @@ protected:
 private:
     void initData();
 
-    SPtr<Basic::NetHandler>   netInput;          // Input network handler
-    SPtr<Basic::NetHandler>   netOutput;         // Output network handler
-    unsigned char             version;           // Version number [ 0 .. 6 ]
+    Basic::safe_ptr<Basic::NetHandler>   netInput;    // Input network handler
+    Basic::safe_ptr<Basic::NetHandler>   netOutput;   // Output network handler
+    unsigned char             version;                // Version number [ 0 .. 6 ]
 
    // Network Model IDs
    unsigned short    siteID;                     // Site ID

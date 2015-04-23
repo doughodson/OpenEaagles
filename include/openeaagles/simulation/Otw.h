@@ -196,7 +196,7 @@ private:
       OtwModelKey(const unsigned short pid, const Basic::String* const federateName);
       // OtwModel IDs  -- Comparisons in this order --
       unsigned short  playerID;   // Player ID
-      SPtr<const Basic::String> fName;  // Federate name
+      Basic::safe_ptr<const Basic::String> fName;  // Federate name
    };
 
    // OTW model type table
@@ -290,7 +290,7 @@ private:
 
     // Model IDs  -- Comparisons in this order --
     unsigned short playerID;     // Player ID
-    SPtr<const Basic::String> federateName; // Federate name
+    Basic::safe_ptr<const Basic::String> federateName; // Federate name
 };
 
 //------------------------------------------------------------------------------
@@ -358,9 +358,9 @@ public:
     virtual bool isMatchingPlayerType(const Player* const p) const;
 
 private:
-    SPtr<const Basic::Identifier>  refFormName;     // Reference form name
-    SPtr<const Basic::String> refTypeName;          // Reference type name (e.g., "F-16C", "T-71"
-    unsigned int typeId;                            // OTW entity type ID number
+    Basic::safe_ptr<const Basic::Identifier>  refFormName;   // Reference form name
+    Basic::safe_ptr<const Basic::String> refTypeName;        // Reference type name (e.g., "F-16C", "T-71"
+    unsigned int typeId;                                 // OTW entity type ID number
 };
 
 } // End Simulation namespace

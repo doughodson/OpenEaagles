@@ -65,7 +65,7 @@ protected:
 private:
    Behavior* behavior;
    State* state;
-   SPtr<Basic::Component> myActor;
+   safe_ptr<Basic::Component> myActor;
 };
 
 inline void Agent::setActor(Basic::Component* const actor)      { myActor = actor; return; }

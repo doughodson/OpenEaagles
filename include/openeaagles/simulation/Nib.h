@@ -275,14 +275,14 @@ private:
 
    NetIO::IoType ioType;               // Input/Output direction of this NIB
 
-   SPtr<const Basic::String> federateName; // Federate name
-   SPtr<Player> pPlayer;               // Our player
-   SPtr<NetIO> pNetIO;                 // Our Network
+   Basic::safe_ptr<const Basic::String> federateName; // Federate name
+   Basic::safe_ptr<Player> pPlayer;                   // Our player
+   Basic::safe_ptr<NetIO> pNetIO;                     // Our Network
    bool checked;                       // NIB was checked
    unsigned short  playerID;           // Player ID
 
    // Type mapper and type checked flags
-   SPtr<const Ntm> ntm;                // Type mapper
+   Basic::safe_ptr<const Ntm> ntm;     // Type mapper
    bool entityTypeChecked;             // Entity type has been checked
 
    // Player data

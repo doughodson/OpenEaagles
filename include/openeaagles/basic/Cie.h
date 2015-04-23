@@ -78,7 +78,7 @@ public:
 
 protected:
     osg::Vec3 cie;
-    SPtr<const MonitorMetrics> monitor;
+    safe_ptr<const MonitorMetrics> monitor;
 };
 
 
@@ -104,7 +104,7 @@ protected:
 //
 // Public methods: Base class public methods, plus ...
 //
-//     MonitorMetrics(const Table1* redLuminance, const Table1* greenLuminance, const Table1* blueLuminance, 
+//     MonitorMetrics(const Table1* redLuminance, const Table1* greenLuminance, const Table1* blueLuminance,
 //                    const osg::Matrix& phosphorCoordinates, const osg::Vec3& whiteRGB, const osg::Vec3& whiteCIE);
 //         Special constructor to initialize the object with the given values.
 //
@@ -116,7 +116,7 @@ class MonitorMetrics : public Object {
 
 public:
     MonitorMetrics();
-    MonitorMetrics(const Table1* redLuminance, const Table1* greenLuminance, const Table1* blueLuminance, 
+    MonitorMetrics(const Table1* redLuminance, const Table1* greenLuminance, const Table1* blueLuminance,
                    const osg::Matrix& phosphorCoordinates, const osg::Vec3& whiteRGB, const osg::Vec3& whiteCIE);
     bool setSlotRed(const Table1* red);
     bool setSlotGreen(const Table1* green);
@@ -134,9 +134,9 @@ private:
     osg::Matrix transform;
 
     // RGB luminance vs RGB level on this monitor
-    SPtr<const Table1> redLuminance;
-    SPtr<const Table1> greenLuminance;
-    SPtr<const Table1> blueLuminance;
+    safe_ptr<const Table1> redLuminance;
+    safe_ptr<const Table1> greenLuminance;
+    safe_ptr<const Table1> blueLuminance;
 
     // CIE coordinates of Red, Green, and Blue for this monitor
     osg::Matrix phosphorCoordinates;

@@ -270,7 +270,7 @@ bool TrackManager::setMaxTrackAge(const double s)
 // getTrackList() -- Sets entries in 'tlist' to a maximum of 'max' target
 //                  tracks and returns the actual number of tracks.
 //------------------------------------------------------------------------------
-int TrackManager::getTrackList(SPtr<Track>* const tlist, const unsigned int max) const
+int TrackManager::getTrackList(Basic::safe_ptr<Track>* const tlist, const unsigned int max) const
 {
    int n = 0;
 
@@ -289,7 +289,7 @@ int TrackManager::getTrackList(SPtr<Track>* const tlist, const unsigned int max)
 // getTrackList() -- Sets entries in 'tlist' to a maximum of 'max' target
 //                  tracks and returns the actual number of tracks.
 //------------------------------------------------------------------------------
-int TrackManager::getTrackList(SPtr<const Track>* const tlist, const unsigned int max) const
+int TrackManager::getTrackList(Basic::safe_ptr<const Track>* const tlist, const unsigned int max) const
 {
    int n = 0;
 

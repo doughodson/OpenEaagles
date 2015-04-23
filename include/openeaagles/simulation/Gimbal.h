@@ -387,7 +387,7 @@ private:
    bool     useWorld;         // Using player of interest's world coordinates
    bool     ownHeadingOnly;   // Whether only the ownship heading is used by the target data block
 
-   SPtr<Tdb> tdb;             // Current Target Data Block
+   Basic::safe_ptr<Tdb> tdb;  // Current Target Data Block
 };
 
 } // End Simulation namespace

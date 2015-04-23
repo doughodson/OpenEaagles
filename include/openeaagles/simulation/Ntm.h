@@ -77,7 +77,7 @@ public:
    virtual bool setSlotTemplatePlayer(const Player* const msg);     // Sets the template player
 
 private:
-    SPtr<const Player>  tPlayer; // Template player
+   Basic::safe_ptr<const Player>  tPlayer; // Template player
 };
 
 } // End Simulation namespace

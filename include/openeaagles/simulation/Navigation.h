@@ -188,9 +188,9 @@ protected:
 private:
    void initData();
 
-   SPtr<const Route> initRoute; // initial route (for reset purposes)
-   SPtr<Route> priRoute;        // Primary route
-   SPtr<Bullseye> bull;         // our bullseye (just one for now)
+   Basic::safe_ptr<const Route> initRoute; // initial route (for reset purposes)
+   Basic::safe_ptr<Route> priRoute;        // Primary route
+   Basic::safe_ptr<Bullseye> bull;         // our bullseye (just one for now)
 
    // Positional data
    double      latitude;       // System Latitude          (degs)

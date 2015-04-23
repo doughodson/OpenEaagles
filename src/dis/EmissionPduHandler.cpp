@@ -725,7 +725,7 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
          Simulation::TrackManager* tm = beam->getTrackManager();
          if (tm != nullptr) {
             const int max1 = MAX_TARGETS_IN_TJ_FIELD + 1; // check for one more than the max (highDensityTracks)
-            SPtr<Simulation::Track> trackList[max1];
+            Basic::safe_ptr<Simulation::Track> trackList[max1];
             int n = tm->getTrackList(trackList,max1);
             if (n <= MAX_TARGETS_IN_TJ_FIELD) {
 

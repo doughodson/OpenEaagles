@@ -45,7 +45,7 @@ protected:
 private:
    void initData();
 
-    SPtr<Eaagles::Basic::NetHandler> netHandler;   // Network handler (input/output, or just output if netInput is defined)
+    Basic::safe_ptr<Eaagles::Basic::NetHandler> netHandler;   // Network handler (input/output, or just output if netInput is defined)
     bool   networkInitialized;                     // Network has been initialized
     bool   networkInitFailed;                      // Network initialization has failed
     bool   noWaitFlag;                             // No wait (unblocked) I/O flag

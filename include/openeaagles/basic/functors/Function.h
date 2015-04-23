@@ -42,7 +42,7 @@ protected:
    const Table* getTable() const {  return table; }
 
 private:
-   SPtr<const Table> table;   // Optional LFI Table
+   safe_ptr<const Table> table;   // Optional LFI Table
 };
 
 //==============================================================================

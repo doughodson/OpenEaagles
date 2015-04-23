@@ -5,6 +5,7 @@
 #include "openeaagles/basic/support.h"
 #include "openeaagles/basic/macros.h"
 #include "openeaagles/basic/SlotTable.h"
+#include "openeaagles/basic/safe_ptr.h"
 
 namespace Eaagles {
 namespace Basic {
@@ -261,9 +262,6 @@ namespace Basic {
 //
 // Templates:
 //
-//    SPtr -- Smart pointers (see Sptr.h)
-//       Provides automatic ref() and unref() of Object(s)
-//
 //    QQueue -- Quick Queue (see QQueue.h)
 //       Use put() to add items and get() to remove items.  Use the constructor's
 //       'qsize' parameter to set the size of the queue.
@@ -381,9 +379,6 @@ public:
 
    // ref(), unref() and getRefCount()
    #include "openeaagles/basic/refCount.h"
-
-   // SPtr -- Smart pointer (automatic ref() and unref() of objects)
-   #include "openeaagles/basic/SPtr.h"
 
    // QQueue -- Quick queue
    #include "openeaagles/basic/QQueue.h"

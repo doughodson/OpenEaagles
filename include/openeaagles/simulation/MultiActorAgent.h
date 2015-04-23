@@ -53,9 +53,9 @@ protected:
 
    struct AgentItem
    {
-      SPtr<Basic::String> actorName;
-      SPtr<Basic::Ubf::Behavior> behavior;
-      SPtr<Basic::Component> actor;
+      Basic::safe_ptr<Basic::String> actorName;
+      Basic::safe_ptr<Basic::Ubf::Behavior> behavior;
+      Basic::safe_ptr<Basic::Component> actor;
    };
 
    static const unsigned int MAX_AGENTS = 10;

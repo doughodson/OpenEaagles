@@ -1873,7 +1873,7 @@ void NetIO::testInputEntityTypes(const unsigned int n)
             if (foundNtm != nullptr) {
                const Simulation::Player* foundP = origNtm->getTemplatePlayer();
                std::cout << "; form: " << foundP->getFactoryName();
-               SPtr<const Basic::String> foundType( static_cast<const Basic::String*>( foundP->getType() ) );
+               Basic::safe_ptr<const Basic::String> foundType( static_cast<const Basic::String*>( foundP->getType() ) );
                if (foundType != nullptr) std::cout << "; type: " << *foundType;
             }
             if (origNtm == foundNtm) {
@@ -1914,7 +1914,7 @@ void NetIO::testOutputEntityTypes(const unsigned int n)
             Simulation::Player* origP1 = origP->clone();
 
             std::cout << "; form: " << origP->getFactoryName();
-            SPtr<Basic::String> origType( (Basic::String*) origP->getType() );
+            Basic::safe_ptr<Basic::String> origType( (Basic::String*) origP->getType() );
             if (origType != 0) {
 
                char cbuff[64];

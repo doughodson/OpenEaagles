@@ -372,8 +372,8 @@ private:
    bool setSlotEarthModel(const Basic::String* const msg);
    bool setSlotGamingAreaEarthModel(const Basic::Number* const msg);
 
-   SPtr<Basic::PairStream> players;     // Main player list (sorted by network and player IDs)
-   SPtr<Basic::PairStream> origPlayers; // Original player list
+   Basic::safe_ptr<Basic::PairStream> players;     // Main player list (sorted by network and player IDs)
+   Basic::safe_ptr<Basic::PairStream> origPlayers; // Original player list
 
    bool loggedHeadings;          // set true once headings have been added to output file
 

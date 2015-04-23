@@ -415,15 +415,15 @@ private:
    void cleanupInputList();   // Clean-up the Input-List (remove out of date items)
 
    // Network Model IDs
-   unsigned short netID;                     // Networkd ID
-   SPtr<const Basic::String> federationName; // Federation name
-   SPtr<const Basic::String> federateName;   // Federate name
+   unsigned short netID;                            // Networkd ID
+   Basic::safe_ptr<const Basic::String> federationName; // Federation name
+   Basic::safe_ptr<const Basic::String> federateName;   // Federate name
 
-   SPtr<Station>    station;           // Our station class
-   SPtr<Simulation> simulation;        // Our simulation class
-   TSource          timeline;          // Source of our timeline
-   unsigned short   iffEventID;        // IFF event ID (as needed)
-   unsigned short   emEventID;         // Emission event ID (as needed)
+   Basic::safe_ptr<Station>    station;           // Our station class
+   Basic::safe_ptr<Simulation> simulation;        // Our simulation class
+   TSource          timeline;                 // Source of our timeline
+   unsigned short   iffEventID;               // IFF event ID (as needed)
+   unsigned short   emEventID;                // Emission event ID (as needed)
 
    // Network Model mode flags
    bool              inputFlg;         // Network input enabled
@@ -459,7 +459,7 @@ private: // Nib related private
       }
       // NIB IDs  -- Comparisons in this order --
       unsigned short id;            // Player id
-      SPtr<const Basic::String> fName;  // Federate name
+      Basic::safe_ptr<const Basic::String> fName;  // Federate name
    };
 
    // Search callbacks: object name compare function --

@@ -172,9 +172,9 @@ private:
    osg::Vec3d      losT2O;         // Normalized target to ownship LOS vector (target's NED)
    osg::Vec3d      aoi;            // Normalized target Angle Of Incidence (AOI) vector
    Gimbal*         gimbal;         // The gimbal that transmitted the message
-   SPtr<Player>    ownship;        // The originating (ownship) player
-   SPtr<Player>    target;         // The Target player
-   SPtr<Basic::Object> dataMsg;    // Embedded data message (e.g., datalink, etc)
+   Basic::safe_ptr<Player>    ownship;     // The originating (ownship) player
+   Basic::safe_ptr<Player>    target;      // The Target player
+   Basic::safe_ptr<Basic::Object> dataMsg; // Embedded data message (e.g., datalink, etc)
    bool            returnReq;      // Return Request
    bool            localOnly;      // Local players only flag
 };

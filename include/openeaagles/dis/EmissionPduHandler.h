@@ -19,10 +19,10 @@ namespace Dis {
 //
 // Description: Handles the DIS input/output from an emitter system
 //              (e.g., RfSensor class)
-// 
+//
 // Factory name: EmissionPduHandler
 // Slots:
-//     emitterName      (Number)    DIS emitter name (see DIS enums) 
+//     emitterName      (Number)    DIS emitter name (see DIS enums)
 //     emitterFunction  (Number)    DIS emitter function code (see enums)
 //     sensor           (RfSensor)  Template sensor model
 //     antenna          (Antenna)   Template antenna model
@@ -191,9 +191,9 @@ private:
    unsigned char emitterIdNumber;   // Unique ID number for each emitter system
    unsigned char emitterFunction;   // Emitter function code
 
-   SPtr<Simulation::RfSensor> sensor;              // The R/F sensor (radar, jammers, etc)
-   SPtr<Simulation::RfSensor> sensorModel;         // Our template sensor model
-   SPtr<Simulation::Antenna>  antennaModel;        // Our template antenna model
+   Basic::safe_ptr<Simulation::RfSensor> sensor;              // The R/F sensor (radar, jammers, etc)
+   Basic::safe_ptr<Simulation::RfSensor> sensorModel;         // Our template sensor model
+   Basic::safe_ptr<Simulation::Antenna>  antennaModel;        // Our template antenna model
 
    LCreal           emPduExecTime;                 // Exec time of last Emission PDU output (seconds)
 };
@@ -210,7 +210,7 @@ inline Simulation::RfSensor* EmissionPduHandler::getSensor()             { retur
 inline const Simulation::RfSensor* EmissionPduHandler::getSensor() const { return sensor; }
 
 inline Simulation::RfSensor* EmissionPduHandler::getSensorModel()    { return sensorModel; }
-inline const Simulation::RfSensor* EmissionPduHandler::getSensorModel() const { return sensorModel; } 
+inline const Simulation::RfSensor* EmissionPduHandler::getSensorModel() const { return sensorModel; }
 
 inline Simulation::Antenna* EmissionPduHandler::getAntennaModel()    { return antennaModel; }
 inline const Simulation::Antenna* EmissionPduHandler::getAntennaModel() const { return antennaModel; }

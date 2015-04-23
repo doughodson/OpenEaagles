@@ -15,7 +15,7 @@ class Polygon;
 //------------------------------------------------------------------------------
 // Class: Scanline
 // Base class: Object -> Scanline
-// Description:  (Abstract) 2D scan line engine.  
+// Description:  (Abstract) 2D scan line engine.
 // Factory name: Scanline
 //------------------------------------------------------------------------------
 class Scanline : public Basic::Object
@@ -50,12 +50,12 @@ protected:
       PolyData();
       void getNorm(osg::Vec3& lnorm, const LCreal x) const;
 
-      LCreal      x0;               // X value at start
-      osg::Vec3   n0;               // Initial Norm
-      osg::Vec3   nslope;           // Norm slope
-      bool        aptEdge2;         // reached second edge
-      SPtr<Polygon> polygon;      // Clipped (working) polygon
-      SPtr<const Polygon> orig;   // Original polygon
+      LCreal      x0;                    // X value at start
+      osg::Vec3   n0;                    // Initial Norm
+      osg::Vec3   nslope;                // Norm slope
+      bool        aptEdge2;              // reached second edge
+      Basic::safe_ptr<Polygon> polygon;      // Clipped (working) polygon
+      Basic::safe_ptr<const Polygon> orig;   // Original polygon
    };
 
 protected:
@@ -78,7 +78,7 @@ protected:
       osg::Vec3   nslope;     // Norm slope
       bool        valid;      // valid edge
       bool        pointLock;  // after incEdgeStart() edge became a point
-      SPtr<PolyData> polygon;    // This edge belongs to this polygon
+      Basic::safe_ptr<PolyData> polygon;    // This edge belongs to this polygon
    };
 
 protected:

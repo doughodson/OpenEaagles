@@ -58,24 +58,24 @@ void Stt::dynamics(const LCreal dt)
         double az = 0.0;
         double el = 0.0;
 
-        SPtr<Simulation::Track> trackList[2];
+        Basic::safe_ptr<Simulation::Track> trackList[2];
         int n = tm->getTrackList(trackList,2);
-        
+
         if (n > 0) {
             // ---
             // Point the antenna at the first track
             // ---
-            
+
             // Relative position vector to track
             osg::Vec3d dpoi = trackList[0]->getPosition();
-            
+
             // rotate to ownship heading
             double sinHdg = getOwnship()->getSinHeading();
             double cosHdg = getOwnship()->getCosHeading();
             double x =  dpoi[Simulation::Player::INORTH] * cosHdg + dpoi[Simulation::Player::IEAST] * sinHdg;
             double y = -dpoi[Simulation::Player::INORTH] * sinHdg + dpoi[Simulation::Player::IEAST] * cosHdg;
             double z = dpoi[Simulation::Player::IDOWN];
-            
+
             // Compute az & el to track
             double grng = sqrt(x*x + y*y);
             az = atan2(y,x);
@@ -91,7 +91,7 @@ void Stt::dynamics(const LCreal dt)
             if (az < leftLim) az = leftLim;
             else if (az > rightLim) az = rightLim;
             if (el < lowerLim) el = lowerLim;
-            else if (el > upperLim) el = upperLim;            
+            else if (el > upperLim) el = upperLim;
 
             // Set the reference 'look' angles and conical scan mode
             getAntenna()->setRefAzimuth(az);
@@ -121,7 +121,7 @@ std::ostream& Stt::serialize(std::ostream& sout, const int i, const bool slotsOn
         j = 4;
     }
 
-    // ###DPG need to print slots 
+    // ###DPG need to print slots
     BaseClass::serialize(sout,i+j,true);
 
     if ( !slotsOnly ) {

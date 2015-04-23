@@ -158,7 +158,7 @@ bool StoresMgr::isWeaponDeliveryMode(const unsigned int testMode) const
 }
 
 // Returns the delivery mode
-unsigned int StoresMgr::getWeaponDeliveryMode() const 
+unsigned int StoresMgr::getWeaponDeliveryMode() const
 {
    return mode;
 }
@@ -230,7 +230,7 @@ Weapon* StoresMgr::getCurrentWeapon()
    Weapon* wpn = getWeapon();
 
    if (wpn == 0) {
-      // If not found then check to see if the selected station 
+      // If not found then check to see if the selected station
       // was really a Stores class object.  If so then ask it
       // for its selected station's weapon
       ExternalStore* es = getExternalStore();
@@ -250,7 +250,7 @@ const Weapon* StoresMgr::getCurrentWeapon() const
    const Weapon* wpn = getWeapon();
 
    if (wpn == 0) {
-      // If not found then check to see if the selected station 
+      // If not found then check to see if the selected station
       // was really a Stores class object.  If so then ask it
       // for its selected station's weapon
       const ExternalStore* es = getExternalStore();
@@ -373,7 +373,7 @@ void StoresMgr::searchAndAdd(Basic::PairStream* const mainList, const std::type_
 
          item = item->getNext();
       }
-   }  
+   }
 }
 
 //------------------------------------------------------------------------------
@@ -593,7 +593,7 @@ int SimpleStoresMgr::getNumCurrentWeapons() const
    return nCurWpn;
 }
 
-// Are weapons are being released 
+// Are weapons are being released
 bool SimpleStoresMgr::isWeaponReleased() const
 {
    return (wpnRelTimer > 0.0);
@@ -941,7 +941,7 @@ Track* SimpleStoresMgr::getNextTarget()
 
          // Get the next to shoot
          int n = 0;
-         SPtr<Track> track;
+         Basic::safe_ptr<Track> track;
          n = obc->getShootList(&track,1);
          if (n > 0) trk = track;
 

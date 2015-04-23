@@ -172,7 +172,7 @@ protected:
 private:
    void initData();
 
-   SPtr<Datalink> datalink;   // Our companion datalink system
+   Basic::safe_ptr<Datalink> datalink;   // Our companion datalink system
 };
 
 } // End Simulation namespace

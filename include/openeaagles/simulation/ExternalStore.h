@@ -62,7 +62,7 @@ protected:
 private:
    void initData();
 
-   SPtr<const Basic::String> type; // Type string for external store
+   Basic::safe_ptr<const Basic::String> type; // Type string for external store
    bool        canJettison;     // Weapon can be jettisoned.
    bool        jettisoned;      // Weapon has been jettisoned.
 };

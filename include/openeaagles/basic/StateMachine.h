@@ -324,14 +324,14 @@ private:
    // Next state
    unsigned short nState;     // Next state number
    unsigned short nSubstate;  // Next substate number
-   SPtr<Object> nArg;         // Next argument
+   safe_ptr<Object> nArg;         // Next argument
    Mode nMode;                // Next mode
 
    // Current state
    unsigned short state;      // Current state number
    unsigned short substate;   // Current substate number
    Mode mode;                 // Current mode
-   SPtr<Object> arg;          // Current argument
+   safe_ptr<Object> arg;          // Current argument
    StateMachine* stMach;      // Current state's state machine object
    Identifier* stMachName;    // Current state's state machine name
 
@@ -347,7 +347,7 @@ private:
    unsigned short sp;                        // Stack pointer
 
    // List of state machines
-   SPtr<PairStream> stMachList;
+   safe_ptr<PairStream> stMachList;
 };
 
 } // End Basic namespace

@@ -349,56 +349,56 @@ protected:
 private:
     void initData();
 
-    static const LCreal DEFAULT_MAX_TGT_RNG;        // meters
-    static const LCreal DEFAULT_MAX_TGT_LOS_ERR;    // radians
+    static const LCreal DEFAULT_MAX_TGT_RNG;     // meters
+    static const LCreal DEFAULT_MAX_TGT_LOS_ERR; // radians
 
-    SPtr<Weapon>  flyoutWpn;     // Initial weapon: points to the cloned flyout weapon
-                                 // Cloned flyout: weapon: points to self
+    Basic::safe_ptr<Weapon>  flyoutWpn;     // Initial weapon: points to the cloned flyout weapon
+                                            // Cloned flyout: weapon: points to self
 
-    SPtr<Weapon>  initialWpn;    // Initial weapon: points to self
-                                 // Cloned flyout: points to the initial weapon
+    Basic::safe_ptr<Weapon>  initialWpn;    // Initial weapon: points to self
+                                            // Cloned flyout: points to the initial weapon
 
-    osg::Vec3     tgtPos;        // Target Position -- platform coord (NED)
-    bool       tgtPosValid;      // If true, target position is valid
-    SPtr<Player>  tgtPlayer;     // Target Player
-    SPtr<Track>   tgtTrack;      // Target Track
-    osg::Vec3d    tgtVel;        // Target/Track Velocity (m/s) relative to ownship velocity
-    SPtr<Player>  launchVehicle; // Launching/Releasing Player
-    bool       posTrkEnb;        // If true, update tgtPos from the target/track
-    LCreal     maxTgtRng;        // Max target range for default tgt selection      (meters)
-    LCreal     maxTgtLosErr;     // Max target LOS error for default tgt selection  (radians)
-    LCreal     detonationRange;  // Range to target at time of detonation           (meters)
-    osg::Vec3  tgtDetLoc;        // Detonation location in target player's coord    (meters)
+    osg::Vec3  tgtPos;                      // Target Position -- platform coord (NED)
+    bool       tgtPosValid;                 // If true, target position is valid
+    Basic::safe_ptr<Player>  tgtPlayer;     // Target Player
+    Basic::safe_ptr<Track>   tgtTrack;      // Target Track
+    osg::Vec3d    tgtVel;                   // Target/Track Velocity (m/s) relative to ownship velocity
+    Basic::safe_ptr<Player>  launchVehicle; // Launching/Releasing Player
+    bool       posTrkEnb;                   // If true, update tgtPos from the target/track
+    LCreal     maxTgtRng;                   // Max target range for default tgt selection      (meters)
+    LCreal     maxTgtLosErr;                // Max target LOS error for default tgt selection  (radians)
+    LCreal     detonationRange;             // Range to target at time of detonation           (meters)
+    osg::Vec3  tgtDetLoc;                   // Detonation location in target player's coord    (meters)
 
-    SPtr<Stores> launcher;       // Launcher
-    int         station;         // Station number (on launcher)
+    Basic::safe_ptr<Stores> launcher;   // Launcher
+    int         station;                // Station number (on launcher)
 
-    int         weaponID;        // Weapon type ID (user defined)
-    unsigned short eventID;      // Release event ID
-    bool        power;           // Weapon power flag
-    bool        failed;          // Weapon failed flag
-    bool        released;        // Released flag
-    bool        releaseHold;     // Weapon is holding in PRE_RELEASE mode
-    bool        willHang;        // Weapon will hang (or jam) on release.
-    bool        hung;            // Hung (or jammed) weapon flag
-    bool        blocked;         // Weapon blocked flag
-    bool        canJettison;     // Weapon can be jettisioned.
-    bool        jettisoned;      // Weapon has been jettisioned.
-    bool        dummyFlg;        // Dummy (launch, but don't flyout or detonate)
-    Detonation  results;         // Results of weapon detonation
-    SPtr<const Basic::String> tstTgtNam; // Test only: target player name
+    int         weaponID;               // Weapon type ID (user defined)
+    unsigned short eventID;             // Release event ID
+    bool        power;                  // Weapon power flag
+    bool        failed;                 // Weapon failed flag
+    bool        released;               // Released flag
+    bool        releaseHold;            // Weapon is holding in PRE_RELEASE mode
+    bool        willHang;               // Weapon will hang (or jam) on release.
+    bool        hung;                   // Hung (or jammed) weapon flag
+    bool        blocked;                // Weapon blocked flag
+    bool        canJettison;            // Weapon can be jettisioned.
+    bool        jettisoned;             // Weapon has been jettisioned.
+    bool        dummyFlg;               // Dummy (launch, but don't flyout or detonate)
+    Detonation  results;                // Results of weapon detonation
+    Basic::safe_ptr<const Basic::String> tstTgtNam; // Test only: target player name
 
     // ---
     // Default guidance & dynamics parameters
     // ---
-    LCreal      tof;            // Current time of flight   (sec)   (tod)
-    LCreal      maxTOF;         // max time of flight       (sec)
-    LCreal      tsg;            // time to start guidance   (sec)
-    LCreal      maxBurstRng;    // max burst range -- most entities are damaged within this range. (meters)
-    LCreal      lethalRange;    // lethal range -- most entities are killed within this range.     (meters)
-    LCreal      sobt;           // start-of-burn time       (sec)
-    LCreal      eobt;           // end-of-burn time         (sec)
-    LCreal      maxGimbal;      // max gimbal angle         (radians)
+    LCreal tof;            // Current time of flight   (sec)   (tod)
+    LCreal maxTOF;         // max time of flight       (sec)
+    LCreal tsg;            // time to start guidance   (sec)
+    LCreal maxBurstRng;    // max burst range -- most entities are damaged within this range. (meters)
+    LCreal lethalRange;    // lethal range -- most entities are killed within this range.     (meters)
+    LCreal sobt;           // start-of-burn time       (sec)
+    LCreal eobt;           // end-of-burn time         (sec)
+    LCreal maxGimbal;      // max gimbal angle         (radians)
 };
 
 } // End Simulation namespace

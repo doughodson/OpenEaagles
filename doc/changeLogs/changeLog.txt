@@ -14,6 +14,22 @@ general
 
 - added more 'std::' namespace qualifiers to math and string functions
 
+- The shared pointer class template (SPtr<>) that was defined inside Object's
+  scope has been moved outside and into 'Basic' namespace.  It has also been
+  renamed to 'safe_ptr<>'.
+
+  This was done for several reasons:
+     1) Declutter the Object class
+     2) To more clearly indicate the functionality provided by this implementation
+        of a shared pointer.  Namely, it intellegently manages ref-based
+        Objects AND is also thread-proof (meaning, multiple threads can access the
+        same shared pointer object safely.
+
+  To adjust to the new style, search and replace all 'SPtr<>' templates with
+  'Basic::safe_ptr<>' - for example:
+
+  'SPtr<RfSignature>' would be replaced by 'Basic::safe_ptr<RfSignature>'
+
 --------------------------------------------------------------------------------
 basic
 

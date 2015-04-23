@@ -92,8 +92,8 @@ protected:
 private:
    void initData();
 
-   SPtr<PairStream>  adapters;   // Adapter list
-   SPtr<PairStream>  devices;    // Device list
+   safe_ptr<PairStream>  adapters;   // Adapter list
+   safe_ptr<PairStream>  devices;    // Device list
 };
 
 } // end IoDevice namespace

@@ -93,8 +93,8 @@ public:
    virtual const Basic::Pair* findSteerpoint(const unsigned int idx) const;
 
    // Get the route -- or use Basic::Component::getComponents()
-   virtual unsigned int getSteerpoints(SPtr<Steerpoint>* const stptList, const unsigned int max);    // Start from 'to'
-   virtual unsigned int getAllSteerpoints(SPtr<Steerpoint>* const stptList, const unsigned int max); // All
+   virtual unsigned int getSteerpoints(Basic::safe_ptr<Steerpoint>* const stptList, const unsigned int max);    // Start from 'to'
+   virtual unsigned int getAllSteerpoints(Basic::safe_ptr<Steerpoint>* const stptList, const unsigned int max); // All
    virtual unsigned int getNumberOfSteerpoints() const;   // return the number of steerpoint (components) in our route
 
    // Insert a steerpoint at 'pos' position in our list;
@@ -148,13 +148,13 @@ private:
    const Basic::Pair* findSteerpointImp(const unsigned int idx) const;
    const Steerpoint* getSteerpointImp() const;
 
-   SPtr<Basic::Pair>         to;                  // "To" Steerpoint pair [ name steerpoint ]
-   SPtr<const Basic::String> initToStptName;      // Name of the initial "to" steerpoint
-   unsigned int              initToStptIdx;       // Index of the initial "to" steerpoint
-   unsigned int              stptIdx;             // Steerpoint index [ 1 ... n ] in list
-   LCreal                    autoSeqDistNM;       // Distance to auto sequence               (NM)
-   bool                      autoSeq;             // Auto sequence of steerpoint
-   bool                      wrap;                // Wrap around route when inc or dec 'to' steerpoint
+   Basic::safe_ptr<Basic::Pair>         to;             // "To" Steerpoint pair [ name steerpoint ]
+   Basic::safe_ptr<const Basic::String> initToStptName; // Name of the initial "to" steerpoint
+   unsigned int              initToStptIdx;             // Index of the initial "to" steerpoint
+   unsigned int              stptIdx;                   // Steerpoint index [ 1 ... n ] in list
+   LCreal                    autoSeqDistNM;             // Distance to auto sequence (NM)
+   bool                      autoSeq;                   // Auto sequence of steerpoint
+   bool                      wrap;                      // Wrap around route when inc or dec 'to' steerpoint
 };
 
 //------------------------------------------------------------------------------

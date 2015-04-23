@@ -222,7 +222,7 @@ protected:
    virtual bool setCommonModelData(CigiEntityCtrlV3* const ec, const unsigned short entity, const Simulation::Player* const p);
 
 private:
-   SPtr<CigiCl> cigi;                    // CIGI handler (direct, networked, ...)
+   Basic::safe_ptr<CigiCl> cigi;         // CIGI handler (direct, networked, ...)
    bool   asyncMode;                     // Running in ASYNC mode if true
    bool   hideOwn;                       // Hide ownship model flag
 
@@ -391,9 +391,9 @@ protected:
    bool initCigiNetwork();          // Initialize the network
 
 private:
-   SPtr<Basic::NetHandler>   netInput;    // Input network handler
-   SPtr<Basic::NetHandler>   netOutput;   // Output network handler
-   SPtr<Basic::Thread>       thread;      // The thread
+   Basic::safe_ptr<Basic::NetHandler>  netInput;    // Input network handler
+   Basic::safe_ptr<Basic::NetHandler>  netOutput;   // Output network handler
+   Basic::safe_ptr<Basic::Thread>      thread;      // The thread
    bool networkInitialized;               // CIGI has been initialized
    bool networkInitFailed;                // CIGI initialization has failed
 

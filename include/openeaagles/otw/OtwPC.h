@@ -38,10 +38,10 @@ private:
     // Set Slot functions
     bool setSlotNetOutput(Basic::NetHandler* const msg);
 
-    SPtr<Basic::NetHandler> netOutput;      // Output network handler
-    bool netInit;                           // Network has been initialized
-    bool netInitFail;                       // Initialization attempt failed
-    int scnt;                               // Send timer
+    Basic::safe_ptr<Basic::NetHandler> netOutput;  // Output network handler
+    bool netInit;                              // Network has been initialized
+    bool netInitFail;                          // Initialization attempt failed
+    int scnt;                                  // Send timer
 };
 
 } // End Otw namespace

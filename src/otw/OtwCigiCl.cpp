@@ -476,7 +476,7 @@ int OtwCigiCl::updateModels()
 
       // For all active models in the table ...
       for (unsigned short i = 0; i < getModelTableSize(); i++) {
-         SPtr<OtwModelCigiCl> model( static_cast<OtwModelCigiCl*>(table[i]) );
+         Basic::safe_ptr<OtwModelCigiCl> model( static_cast<OtwModelCigiCl*>(table[i]) );
          if (model != nullptr) {
 
             if (model->getState() != Simulation::OtwModel::INACTIVE) {
@@ -1620,7 +1620,7 @@ bool OtwCigiCl::sendCigiData()
          int sendSize = cigi->getOutgoingBufferSize();
          int maxAge = getModelTableSize();
          for (unsigned short i = 0; i < getModelTableSize() && sendSize < (MAX_BUF_SIZE - padding); i++) {
-            SPtr<OtwModelCigiCl> model( static_cast<OtwModelCigiCl*>(table[i]) );
+            Basic::safe_ptr<OtwModelCigiCl> model( static_cast<OtwModelCigiCl*>(table[i]) );
             if (model != nullptr) {
 
                // For all active models in the table ...
@@ -1713,8 +1713,8 @@ bool OtwCigiCl::sendCigiData()
 
          // For all active elevation requests in the table ...
          // -- look for the oldest request ---
-         SPtr<OtwModelCigiCl> oldest( nullptr );
-         SPtr<OtwModelCigiCl> model( nullptr );
+         Basic::safe_ptr<OtwModelCigiCl> oldest( nullptr );
+         Basic::safe_ptr<OtwModelCigiCl> model( nullptr );
          for (unsigned short i = 0; i < getElevationTableSize(); i++) {
             model = table[i];
             if (model != nullptr) {
@@ -1940,7 +1940,7 @@ void OtwCigiCl::hatHotResp(const CigiHatHotRespV3* const p)
       //}
 
       OtwModelCigiCl** const table = reinterpret_cast<OtwModelCigiCl**>( getElevationTable() );
-      SPtr<OtwModelCigiCl> model(nullptr);
+      Basic::safe_ptr<OtwModelCigiCl> model(nullptr);
       for (unsigned int i = 0; i < getElevationTableSize() && model == nullptr; i++) {
          if (table[i]->getID() == id) model = table[i];
       }
@@ -2431,7 +2431,7 @@ bool CigiClNetwork::createCigiProcess()
 
       // parent -> our OTW manager
       thread = new NetThread(this, 0.6);
-      thread->unref(); // 'thread' is a SPtr<>
+      thread->unref(); // 'thread' is a safe_ptr<>
 
       bool ok = thread->create();
       if (!ok) {

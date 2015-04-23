@@ -1055,10 +1055,10 @@ private:
    // ---
    // Player identity
    // ---
-   SPtr<Basic::String>  type;    // Type of vehicle
-   unsigned short id;            // Player ID
-   Basic::Identifier  pname;     // Player's Name
-   Side           side;          // Which side (see above)
+   Basic::safe_ptr<Basic::String>  type; // Type of vehicle
+   unsigned short id;                    // Player ID
+   Basic::Identifier  pname;             // Player's Name
+   Side           side;                  // Which side (see above)
 
    // ---
    // Player State
@@ -1130,14 +1130,14 @@ private:
    // ---
    // Appearance
    // ---
-   SPtr<RfSignature> signature;   // Player's RCS signature
-   SPtr<IrSignature> irSignature; // Player's IR signature
-   unsigned int camouflage;       // Camouflage type (0 is none)
-   LCreal      damage;            // Damage state from no damage(0.0) to destroyed (1.0)
-   LCreal      smoking;           // Smoke state from no smoke (0.0) to maximum (1.0)
-   LCreal      flames;            // Flames state from no flames (0.0) to maximum (1.0)
-   bool        justKilled;        // Just killed flag
-   unsigned short killedBy;       // Killed by player ID
+   Basic::safe_ptr<RfSignature> signature;   // Player's RCS signature
+   Basic::safe_ptr<IrSignature> irSignature; // Player's IR signature
+   unsigned int camouflage;                  // Camouflage type (0 is none)
+   LCreal      damage;                       // Damage state from no damage(0.0) to destroyed (1.0)
+   LCreal      smoking;                      // Smoke state from no smoke (0.0) to maximum (1.0)
+   LCreal      flames;                       // Flames state from no flames (0.0) to maximum (1.0)
+   bool        justKilled;                   // Just killed flag
+   unsigned short killedBy;                  // Killed by player ID
 
    // ---
    // Initialization, Controls, Freeze and Reset

@@ -293,7 +293,7 @@ void Station::deleteData()
 }
 
 //------------------------------------------------------------------------------
-// reset() -- Reset the station 
+// reset() -- Reset the station
 //------------------------------------------------------------------------------
 void Station::reset()
 {
@@ -381,7 +381,7 @@ void Station::updateTC(const LCreal dt)
    // Process station inputs
    inputDevices(dt);
 
-   // Update the simulation 
+   // Update the simulation
    if (sim != 0) sim->tcFrame(dt);
 
    // Process station outputs
@@ -574,7 +574,7 @@ void Station::createTimeCriticalProcess()
 {
    if ( tcThread == 0 ) {
       tcThread = new TcThread(this, getTimeCriticalPriority(), getTimeCriticalRate());
-      tcThread->unref(); // 'tcThread' is a SPtr<>
+      tcThread->unref(); // 'tcThread' is a safe_ptr<>
 
       if (tcStackSize > 0) tcThread->setStackSize( tcStackSize );
 
@@ -595,7 +595,7 @@ void Station::createNetworkProcess()
 {
    if ( netThread == 0 ) {
       netThread = new NetThread(this, getNetworkPriority(), getNetworkRate());
-      netThread->unref(); // 'netThread' is a SPtr<>
+      netThread->unref(); // 'netThread' is a safe_ptr<>
 
       if (netStackSize > 0) netThread->setStackSize( netStackSize );
 
@@ -616,7 +616,7 @@ void Station::createBackgroundProcess()
 {
    if ( bgThread == 0 ) {
       bgThread = new BgThread(this, getBackgroundPriority(), getBackgroundRate());
-      bgThread->unref(); // 'bgThread' is a SPtr<>
+      bgThread->unref(); // 'bgThread' is a safe_ptr<>
 
       if (bgStackSize > 0) bgThread->setStackSize( bgStackSize );
 
@@ -680,7 +680,7 @@ void Station::processBackgroundTasks(const LCreal dt)
 //------------------------------------------------------------------------------
 void Station::processNetworkInputTasks(const LCreal dt)
 {
-   Basic::Object::SPtr<Basic::PairStream> networks( getNetworks() );
+   Basic::safe_ptr<Basic::PairStream> networks( getNetworks() );
    if (networks != 0) {
       Basic::List::Item* item = networks->getFirstItem();
       while (item != 0) {
@@ -699,7 +699,7 @@ void Station::processNetworkInputTasks(const LCreal dt)
 //------------------------------------------------------------------------------
 void Station::processNetworkOutputTasks(const LCreal dt)
 {
-   Basic::Object::SPtr<Basic::PairStream> networks( getNetworks() );
+   Basic::safe_ptr<Basic::PairStream> networks( getNetworks() );
    if (networks != 0) {
       Basic::List::Item* item = networks->getFirstItem();
       while (item != 0) {
@@ -781,7 +781,7 @@ Basic::PairStream* Station::getNetworks()
 const Basic::PairStream* Station::getNetworks() const
 {
    return networks;
-} 
+}
 
 // I/O handlers
 Basic::PairStream* Station::getIoHandlers()
@@ -847,7 +847,7 @@ LCreal Station::getBackgroundRate() const
    return bgRate;
 }
 
-// Background thread priority 
+// Background thread priority
 LCreal Station::getBackgroundPriority() const
 {
    return bgPri;
@@ -984,7 +984,7 @@ bool Station::setOwnshipByName(const char* const newOS)
          if (p != 0) {
             Player* newOwnship = static_cast<Player*>(p->object());
             if (newOwnship != ownship) {
-               // Ok, we found the new ownship and it IS a different 
+               // Ok, we found the new ownship and it IS a different
                // player then the previous ownship ...
                setOwnshipPlayer( newOwnship );
                set = true;
@@ -1125,7 +1125,7 @@ bool Station::setSlotOutTheWindow(Basic::PairStream* const list)
    // Remove the old OTW interfaces
    if (otw != 0) {
 
-      SPtr<Basic::PairStream> oldList( otw );
+      Basic::safe_ptr<Basic::PairStream> oldList( otw );
       otw = 0;
 
       // we are no longer the container for these old OTW interfaces
@@ -1261,7 +1261,7 @@ bool Station::setSlotTimeCriticalRate(const Basic::Number* const num)
 
 
 //------------------------------------------------------------------------------
-// setSlotTimeCriticalPri() -- Sets the T/C thread priority 
+// setSlotTimeCriticalPri() -- Sets the T/C thread priority
 //------------------------------------------------------------------------------
 bool Station::setSlotTimeCriticalPri(const Basic::Number* const num)
 {
@@ -1313,7 +1313,7 @@ bool Station::setSlotNetworkRate(const Basic::Number* const num)
 
 
 //------------------------------------------------------------------------------
-// setSlotNetworkPri() -- Sets the network thread priority 
+// setSlotNetworkPri() -- Sets the network thread priority
 //------------------------------------------------------------------------------
 bool Station::setSlotNetworkPri(const Basic::Number* const num)
 {
@@ -1365,7 +1365,7 @@ bool Station::setSlotBackgroundRate(const Basic::Number* const num)
 
 
 //------------------------------------------------------------------------------
-// setSlotBackgroundPri() -- Sets the background thread priority 
+// setSlotBackgroundPri() -- Sets the background thread priority
 //------------------------------------------------------------------------------
 bool Station::setSlotBackgroundPri(const Basic::Number* const num)
 {
@@ -1476,7 +1476,7 @@ std::ostream& Station::serialize(std::ostream& sout, const int i, const bool slo
     if (sim != 0) {
         indent(sout,i+j);
         sout << "simulation: " << std::endl;
-        
+
         sim->serialize(sout,(i+j));
     }
 
@@ -1582,7 +1582,7 @@ EMPTY_COPYDATA(NetThread)
 EMPTY_DELETEDATA(NetThread)
 EMPTY_SERIALIZER(NetThread)
 
-NetThread::NetThread(Basic::Component* const parent, const LCreal priority, const LCreal rate) 
+NetThread::NetThread(Basic::Component* const parent, const LCreal priority, const LCreal rate)
       : Basic::ThreadPeriodicTask(parent, priority, rate)
 {
    STANDARD_CONSTRUCTOR()

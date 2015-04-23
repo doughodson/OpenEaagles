@@ -140,10 +140,10 @@ private:
    void initData();
    void searchAndAdd(Basic::PairStream* const, const std::type_info&, Basic::PairStream*);
 
-   SPtr<Basic::PairStream> weaponsList;  // Weapon list; set by setSlotStores()
-   SPtr<Basic::PairStream> externalList; // External equipment list; set by setSlotStores()
-   SPtr<Basic::PairStream> fuelList;     // External fuel tank list; set by setSlotStores()
-   SPtr<Gun> gunPtr;                     // Gun model; set by setSlotStores()
+   Basic::safe_ptr<Basic::PairStream> weaponsList;  // Weapon list; set by setSlotStores()
+   Basic::safe_ptr<Basic::PairStream> externalList; // External equipment list; set by setSlotStores()
+   Basic::safe_ptr<Basic::PairStream> fuelList;     // External fuel tank list; set by setSlotStores()
+   Basic::safe_ptr<Gun> gunPtr;                     // Gun model; set by setSlotStores()
 
    bool   gunFlg;          // Gun has been selected
    unsigned int   mode;               // Weapon delivery mode

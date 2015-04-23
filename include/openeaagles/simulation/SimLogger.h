@@ -149,7 +149,7 @@ public:
         const char* getDescription() override;
         void captureData() override;
     private:
-        SPtr<const Player> thePlayer;
+        Basic::safe_ptr<const Player> thePlayer;
         osg::Vec3 pos;
         osg::Vec3 vel;
         osg::Vec3 angles;
@@ -167,7 +167,7 @@ public:
         const char* getDescription() override;
         void captureData() override;
     private:
-        SPtr<const Player> thePlayer;
+        Basic::safe_ptr<const Player> thePlayer;
         osg::Vec3 pos;
         osg::Vec3 vel;
         osg::Vec3 angles;
@@ -188,7 +188,7 @@ public:
         const char* getDescription() override;
         void captureData() override;
     private:
-        SPtr<const Player> thePlayer;
+        Basic::safe_ptr<const Player> thePlayer;
         osg::Vec3 pos;
         osg::Vec3 vel;
         osg::Vec3 angles;
@@ -207,9 +207,9 @@ public:
         const char* getDescription() override;
         void captureData() override;
     private:
-        SPtr<const Player> thePlayer;
-        SPtr<const Player> theWeapon;
-        SPtr<const Player> theTarget;
+        Basic::safe_ptr<const Player> thePlayer;
+        Basic::safe_ptr<const Player> theWeapon;
+        Basic::safe_ptr<const Player> theTarget;
     };
 
     //------------------------------------------------------------------------------
@@ -224,7 +224,7 @@ public:
         const char* getDescription() override;
         void captureData() override;
     private:
-        SPtr<const Player> thePlayer;
+        Basic::safe_ptr<const Player> thePlayer;
         int rounds;
     };
 
@@ -241,9 +241,9 @@ public:
         const char* getDescription() override;
         void captureData() override;
     private:
-        SPtr<const Player> thePlayer;
-        SPtr<const Player> theWeapon;
-        SPtr<const Player> theTarget;
+        Basic::safe_ptr<const Player> thePlayer;
+        Basic::safe_ptr<const Player> theWeapon;
+        Basic::safe_ptr<const Player> theTarget;
     };
 
     //------------------------------------------------------------------------------
@@ -259,9 +259,9 @@ public:
         const char* getDescription() override;
         void captureData() override;
     private:
-        SPtr<const Player> thePlayer;
-        SPtr<const Player> theWeapon;
-        SPtr<const Player> theTarget;
+        Basic::safe_ptr<const Player> thePlayer;
+        Basic::safe_ptr<const Player> theWeapon;
+        Basic::safe_ptr<const Player> theTarget;
         unsigned int detType;
         LCreal missDist;
     };
@@ -278,10 +278,10 @@ public:
         const char* getDescription() override;
         void captureData() override;
     private:
-        SPtr<const TrackManager> theManager;
-        SPtr<const Track> theTrack;
-        SPtr<const Player> thePlayer;
-        SPtr<const Emission> theEmission;
+        Basic::safe_ptr<const TrackManager> theManager;
+        Basic::safe_ptr<const Track> theTrack;
+        Basic::safe_ptr<const Player> thePlayer;
+        Basic::safe_ptr<const Emission> theEmission;
         osg::Vec3 pos;
         osg::Vec3 vel;
         osg::Vec3 angles;
@@ -303,10 +303,10 @@ public:
         const char* getDescription() override;
         void captureData() override;
     private:
-        SPtr<const TrackManager> theManager;
-        SPtr<const Track> theTrack;
-        SPtr<const Player> thePlayer;
-        SPtr<const Emission> theEmission;
+        Basic::safe_ptr<const TrackManager> theManager;
+        Basic::safe_ptr<const Track> theTrack;
+        Basic::safe_ptr<const Player> thePlayer;
+        Basic::safe_ptr<const Emission> theEmission;
         osg::Vec3 pos;
         osg::Vec3 vel;
         osg::Vec3 angles;
@@ -328,10 +328,10 @@ public:
         const char* getDescription() override;
         void captureData() override;
     private:
-        SPtr<const TrackManager> theManager;
-        SPtr<const Track> theTrack;
-        SPtr<const Player> thePlayer;
-        SPtr<const Emission> theEmission;
+        Basic::safe_ptr<const TrackManager> theManager;
+        Basic::safe_ptr<const Track> theTrack;
+        Basic::safe_ptr<const Player> thePlayer;
+        Basic::safe_ptr<const Emission> theEmission;
         osg::Vec3 pos;
         osg::Vec3 vel;
         osg::Vec3 angles;
@@ -353,10 +353,10 @@ public:
         const char* getDescription() override;
         void captureData() override;
     private:
-        SPtr<const TrackManager> theManager;
-        SPtr<const Track> theTrack;
-        SPtr<const Player> thePlayer;
-        SPtr<const Emission> theEmission;
+        Basic::safe_ptr<const TrackManager> theManager;
+        Basic::safe_ptr<const Track> theTrack;
+        Basic::safe_ptr<const Player> thePlayer;
+        Basic::safe_ptr<const Emission> theEmission;
         osg::Vec3 pos;
         osg::Vec3 vel;
         osg::Vec3 angles;
@@ -378,10 +378,10 @@ public:
         const char* getDescription() override;
         void captureData() override;
     private:
-        SPtr<const TrackManager> theManager;
-        SPtr<const Track> theTrack;
-        SPtr<const Player> thePlayer;
-        SPtr<const Emission> theEmission;
+        Basic::safe_ptr<const TrackManager> theManager;
+        Basic::safe_ptr<const Track> theTrack;
+        Basic::safe_ptr<const Player> thePlayer;
+        Basic::safe_ptr<const Emission> theEmission;
         osg::Vec3 pos;
         osg::Vec3 vel;
         osg::Vec3 angles;
@@ -403,10 +403,10 @@ public:
         const char* getDescription() override;
         void captureData() override;
     private:
-        SPtr<const TrackManager> theManager;
-        SPtr<const Track> theTrack;
-        SPtr<const Player> thePlayer;
-        SPtr<const Emission> theEmission;
+        Basic::safe_ptr<const TrackManager> theManager;
+        Basic::safe_ptr<const Track> theTrack;
+        Basic::safe_ptr<const Player> thePlayer;
+        Basic::safe_ptr<const Emission> theEmission;
         osg::Vec3 pos;
         osg::Vec3 vel;
         osg::Vec3 angles;

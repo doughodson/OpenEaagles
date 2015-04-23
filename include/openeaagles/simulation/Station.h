@@ -284,30 +284,30 @@ private:
    virtual void createNetworkProcess();    // Creates a network thread
    virtual void createBackgroundProcess(); // Creates a B/G thread
 
-   Simulation* sim;                        // Simulation model
-   SPtr<Basic::PairStream> otw;            // List of  Out-The-Window visual system interfaces
-   SPtr<Basic::PairStream> networks;       // List of networks
-   SPtr<Basic::PairStream> ioHandlers;     // List of I/O data handlers
-   Player* ownship;                        // Ownship (primary) player
-   const Basic::String* ownshipName;       // Name of our ownship player
-   bool tmrUpdateEnbl;                     // Enable Basic::Timers::updateTimers() call from updateTC()
-   DataRecorder* dataRecorder;             // Data Recorder
+   Simulation* sim;                               // Simulation model
+   Basic::safe_ptr<Basic::PairStream> otw;        // List of  Out-The-Window visual system interfaces
+   Basic::safe_ptr<Basic::PairStream> networks;   // List of networks
+   Basic::safe_ptr<Basic::PairStream> ioHandlers; // List of I/O data handlers
+   Player* ownship;                          // Ownship (primary) player
+   const Basic::String* ownshipName;         // Name of our ownship player
+   bool tmrUpdateEnbl;                       // Enable Basic::Timers::updateTimers() call from updateTC()
+   DataRecorder* dataRecorder;               // Data Recorder
 
-   LCreal tcRate;                          // Time-critical thread Rate (hz)
-   LCreal tcPri;                           // Priority of the time-critical thread (0->lowest, 1->highest)
-   unsigned int tcStackSize;               // Time-critical thread stack size (bytes or zero for system default size)
-   SPtr<Basic::Thread> tcThread;           // The Time-critical thread
-   unsigned int fastForwardRate;           // Time-critical thread fast forward rate
+   LCreal tcRate;                            // Time-critical thread Rate (hz)
+   LCreal tcPri;                             // Priority of the time-critical thread (0->lowest, 1->highest)
+   unsigned int tcStackSize;                 // Time-critical thread stack size (bytes or zero for system default size)
+   Basic::safe_ptr<Basic::Thread> tcThread;  // The Time-critical thread
+   unsigned int fastForwardRate;             // Time-critical thread fast forward rate
 
-   LCreal netRate;                         // Network thread Rate (hz)
-   LCreal netPri;                          // Priority of the Network thread (0->lowest, 1->highest)
-   unsigned int netStackSize;              // Network thread stack size (bytes or zero for system default size)
-   SPtr<Basic::Thread> netThread;          // The optional network thread
+   LCreal netRate;                           // Network thread Rate (hz)
+   LCreal netPri;                            // Priority of the Network thread (0->lowest, 1->highest)
+   unsigned int netStackSize;                // Network thread stack size (bytes or zero for system default size)
+   Basic::safe_ptr<Basic::Thread> netThread; // The optional network thread
 
-   LCreal bgRate;                          // Background thread Rate (hz)
-   LCreal bgPri;                           // Priority of the Background thread (0->lowest, 1->highest)
-   unsigned int bgStackSize;               // Background thread stack size (bytes or zero for system default size)
-   SPtr<Basic::Thread> bgThread;           // The optional background thread
+   LCreal bgRate;                            // Background thread Rate (hz)
+   LCreal bgPri;                             // Priority of the Background thread (0->lowest, 1->highest)
+   unsigned int bgStackSize;                 // Background thread stack size (bytes or zero for system default size)
+   Basic::safe_ptr<Basic::Thread> bgThread;  // The optional background thread
 
    LCreal startupResetTimer;               // Startup RESET timer (sends a RESET_EVENT after timeout)
    const Basic::Time* startupResetTimer0;  // Init value of the startup RESET timer

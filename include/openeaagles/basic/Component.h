@@ -426,14 +426,14 @@ protected:
       );
 
 private:
-   SPtr<PairStream> components; // Child components
+   safe_ptr<PairStream> components; // Child components
    Component* containerPtr;     // We are a component of this container
 
    Component* selected;         // Selected child (process only this one)
    Object*    selection;        // Name of selected child
 
-   SPtr<Logger> elog;           // Our event logger
-   SPtr<Logger> elog0;          // Event logger from slots
+   safe_ptr<Logger> elog;           // Our event logger
+   safe_ptr<Logger> elog0;          // Event logger from slots
    Statistic* timingStats;      // Timing statistics
    bool pts;                    // Print timing statistics
    bool frz;                    // Freeze flag -- true if this component is frozen

@@ -168,8 +168,8 @@ private:
    bool  focusSlavedToSubpage;         // Input event focus should follow subpage changes
 
    // Passed by calling page
-   SPtr<Basic::Object> pageArg;        // Paging argument
-   const Page* caller;                 // Calling page
+   Basic::safe_ptr<Basic::Object> pageArg;   // Paging argument
+   const Page* caller;                       // Calling page
 
    // Subpage Stack
    static const int SUBPAGE_STACK_SIZE = 50;
