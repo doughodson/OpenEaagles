@@ -21,7 +21,7 @@ EMPTY_DELETEDATA(InputHandler)
 //------------------------------------------------------------------------------
 const DataRecordHandle* InputHandler::readRecord()
 {
-   const DataRecordHandle* p = 0;
+   const DataRecordHandle* p = nullptr;
    bool finished = false;
 
    while (!finished) {

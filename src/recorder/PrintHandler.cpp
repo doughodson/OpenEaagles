@@ -13,7 +13,6 @@
 namespace Eaagles {
 namespace Recorder {
 
-
 //==============================================================================
 // Class PrintHandler
 //==============================================================================
@@ -46,10 +45,10 @@ PrintHandler::PrintHandler()
 
 void PrintHandler::initData()
 {
-   sout = 0;
-   fullFilename = 0;
-   filename = 0;
-   pathname = 0;
+   sout = nullptr;
+   fullFilename = nullptr;
+   filename = nullptr;
+   pathname = nullptr;
    fileOpened = false;
    fileFailed = false;
    firstPassFlg = true;
@@ -68,16 +67,16 @@ void PrintHandler::copyData(const PrintHandler& org, const bool cc)
    setPathName(org.pathname);
 
    // Need to re-open the file
-   if (sout != 0) {
+   if (sout != nullptr) {
       if (isOpen()) sout->close();
       delete sout;
    }
-   sout = 0;
+   sout = nullptr;
    fileOpened = false;
    fileFailed = false;
    firstPassFlg = true;
    fileEmpty = true;
-   setFullFilename(0);
+   setFullFilename(nullptr);
 }
 
 //------------------------------------------------------------------------------
@@ -85,16 +84,15 @@ void PrintHandler::copyData(const PrintHandler& org, const bool cc)
 //------------------------------------------------------------------------------
 void PrintHandler::deleteData()
 {
-   if (sout != 0) {
+   if (sout != nullptr) {
       if (isOpen()) sout->close();
       delete sout;
    }
-   sout = 0;
+   sout = nullptr;
 
-   setFilename(0);
-   setPathName(0);
+   setFilename(nullptr);
+   setPathName(nullptr);
 }
-
 
 
 //------------------------------------------------------------------------------
@@ -104,13 +102,13 @@ void PrintHandler::deleteData()
 // Is the data file open?
 bool PrintHandler::isOpen() const
 {
-   return fileOpened && sout != 0 && sout->is_open();
+   return fileOpened && sout != nullptr && sout->is_open();
 }
 
 // Did we have an open or write error?
 bool PrintHandler::isFailed() const
 {
-   return fileFailed || (sout != 0 && sout->fail());
+   return fileFailed || (sout != nullptr && sout->fail());
 }
 
 // File name with path and possible version number
@@ -122,16 +120,16 @@ const char* PrintHandler::getFullFilename() const
 // File name as entered
 const char* PrintHandler::getFilename() const
 {
-   const char* p = 0;
-   if (filename != 0) p = *filename;
+   const char* p = nullptr;
+   if (filename != nullptr) p = *filename;
    return p;
 }
 
 // Path to file
 const char* PrintHandler::getPathname() const
 {
-   const char* p = 0;
-   if (pathname != 0) p = *pathname;
+   const char* p = nullptr;
+   if (pathname != nullptr) p = *pathname;
    return p;
 }
 
@@ -150,7 +148,7 @@ bool PrintHandler::openFile()
    if (isOpen()) return true;
 
    // If we don't have a file name then we're using the standard output
-   if (filename == 0 || filename->len() ==  0) return true;
+   if (filename == nullptr || filename->len() == 0) return true;
 
    // clear the old 'full' file name
    setFullFilename(0);
@@ -164,7 +162,7 @@ bool PrintHandler::openFile()
    // Allocate space for the full file name
    //---
    size_t nameLength = 0;
-   if (pathname != 0) {
+   if (pathname != nullptr) {
       nameLength += pathname->len();     // add the length of the path name
       nameLength += 1;                         // add a character for the slash
    }
@@ -179,7 +177,7 @@ bool PrintHandler::openFile()
    //---
    // Create the (initial) full file name
    //---
-   if (pathname != 0 && pathname->len() > 0) {
+   if (pathname != nullptr && pathname->len() > 0) {
       lcStrcat(fullname, nameLength ,*pathname);
       lcStrcat(fullname, nameLength, "/");
    }
@@ -224,7 +222,7 @@ bool PrintHandler::openFile()
       //---
       // Make sure we have an output stream
       //---
-      if (sout == 0) sout = new std::ofstream();
+      if (sout == nullptr) sout = new std::ofstream();
 
       //---
       // Open the file
@@ -262,7 +260,7 @@ void PrintHandler::closeFile()
    if (isOpen()) {
 
       // close the file
-      if (sout != 0) sout->close();
+      if (sout != nullptr) sout->close();
 
       fileOpened = false;
       fileFailed = false;
@@ -276,11 +274,11 @@ void PrintHandler::closeFile()
 
 void PrintHandler::setFullFilename(const char* const name)
 {
-   if (fullFilename != 0) {
+   if (fullFilename != nullptr) {
       delete[] fullFilename;
-      fullFilename = 0;
+      fullFilename = nullptr;
    }
-   if (name != 0) {
+   if (name != nullptr) {
       size_t n = std::strlen(name) + 1;
       fullFilename = new char[n];
       lcStrcpy(fullFilename, n, name);
@@ -289,16 +287,16 @@ void PrintHandler::setFullFilename(const char* const name)
 
 bool PrintHandler::setFilename(const Basic::String* const msg)
 {
-   if (filename != 0) { filename->unref(); filename = 0; }
-   if (msg != 0) filename = new Basic::String(*msg);
+   if (filename != nullptr) { filename->unref(); filename = nullptr; }
+   if (msg != nullptr) filename = new Basic::String(*msg);
 
     return true;
 }
 
 bool PrintHandler::setPathName(const Basic::String* const msg)
 {
-   if (pathname != 0) { pathname->unref(); pathname = 0; }
-   if (msg != 0) pathname = new Basic::String(*msg);
+   if (pathname != nullptr) { pathname->unref(); pathname = nullptr; }
+   if (msg != nullptr) pathname = new Basic::String(*msg);
 
    return true;
 }
@@ -311,14 +309,14 @@ void PrintHandler::printToOutput(const char* const msg)
 {
    // First pass?  Do we need to open a file?
    if (firstPassFlg) {
-      if ( filename != 0 && !isOpen() && !isFailed() ) {
+      if ( filename != nullptr && !isOpen() && !isFailed() ) {
          openFile();
       }
       firstPassFlg = false;
    }
 
    // Output to a file?
-   if (sout != 0 && isOpen()) {
+   if (sout != nullptr && isOpen()) {
       *sout << msg << std::endl;
       fileEmpty = false;
    }

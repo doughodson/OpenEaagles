@@ -26,9 +26,9 @@ BEGIN_SLOTTABLE(FileReader)
     "pathname",         // 2) Path to the data file directory (optional)
 END_SLOTTABLE(FileReader)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(FileReader)
-    ON_SLOT( 1, setFilename, Basic::String)   
+    ON_SLOT( 1, setFilename, Basic::String)
     ON_SLOT( 2, setPathName, Basic::String)
 END_SLOT_MAP()
 
@@ -44,9 +44,9 @@ FileReader::FileReader()
 void FileReader::initData()
 {
    ibuf = new char[MAX_INPUT_BUFFER_SIZE];
-   sin = 0;
-   filename = 0;
-   pathname = 0;
+   sin = nullptr;
+   filename = nullptr;
+   pathname = nullptr;
    fileOpened = false;
    fileFailed = false;
    firstPassFlg = true;
@@ -61,11 +61,11 @@ void FileReader::copyData(const FileReader& org, const bool cc)
    if (cc) initData();
 
    // Need to re-open the file
-   if (sin != 0) {
+   if (sin != nullptr) {
       if (isOpen()) sin->close();
       delete sin;
    }
-   sin = 0;
+   sin = nullptr;
    setFilename(org.filename);
    setPathName(org.pathname);
    fileOpened = false;
@@ -78,16 +78,16 @@ void FileReader::copyData(const FileReader& org, const bool cc)
 //------------------------------------------------------------------------------
 void FileReader::deleteData()
 {
-   if (sin != 0) {
+   if (sin != nullptr) {
       if (isOpen()) sin->close();
       delete sin;
    }
-   sin = 0;
+   sin = nullptr;
 
-   setFilename(0);
-   setPathName(0);
+   setFilename(nullptr);
+   setPathName(nullptr);
 
-   if (ibuf != 0) { delete[] ibuf; ibuf = 0; }
+   if (ibuf != nullptr) { delete[] ibuf; ibuf = nullptr; }
 }
 
 
@@ -96,12 +96,12 @@ void FileReader::deleteData()
 //------------------------------------------------------------------------------
 bool FileReader::isOpen() const
 {
-   return fileOpened && sin != 0 && sin->is_open();
+   return fileOpened && sin != nullptr && sin->is_open();
 }
 
 bool FileReader::isFailed() const
 {
-   return fileFailed || (sin != 0 && sin->fail());
+   return fileFailed || (sin != nullptr && sin->fail());
 }
 
 
@@ -118,7 +118,7 @@ bool FileReader::openFile()
    bool tFailed = false;
 
    // Need a file name
-   if (filename == 0 || filename->len() ==  0) {
+   if (filename == nullptr || filename->len() ==  0) {
       if (isMessageEnabled(MSG_ERROR)) {
          std::cerr << "FileReader::openFile(): Unable to open data file: no file name" << std::endl;
       }
@@ -131,7 +131,7 @@ bool FileReader::openFile()
       // Allocate space for the full file name
       //---
       size_t nameLength = 0;
-      if (pathname != 0) {
+      if (pathname != nullptr) {
          nameLength += pathname->len();     // add the length of the path name
          nameLength += 1;                         // add a character for the slash
       }
@@ -144,7 +144,7 @@ bool FileReader::openFile()
       //---
       // Create the (initial) full file name
       //---
-      if (pathname != 0 && pathname->len() > 0) {
+      if (pathname != nullptr && pathname->len() > 0) {
          lcStrcat(fullname, nameLength ,*pathname);
          lcStrcat(fullname, nameLength, "/");
       }
@@ -162,7 +162,7 @@ bool FileReader::openFile()
          //---
          // Make sure we have an input stream
          //---
-         if (sin == 0) sin = new std::ifstream();
+         if (sin == nullptr) sin = new std::ifstream();
 
          //---
          // Open the file (binary input mode)
@@ -204,13 +204,12 @@ void FileReader::closeFile()
    }
 }
 
-
 //------------------------------------------------------------------------------
 // Read a record
 //------------------------------------------------------------------------------
 const DataRecordHandle* FileReader::readRecordImp()
 {
-   DataRecordHandle* handle = 0;
+   DataRecordHandle* handle = nullptr;
 
    // First pass?  Does the file need to be opened?
    if (firstPassFlg) {
@@ -226,7 +225,6 @@ const DataRecordHandle* FileReader::readRecordImp()
 
       // Number of bytes in the next serialized DataRecord
       unsigned int n = 0;
-
 
       // ---
       // Read the size of the next serialized DataRecord
@@ -279,11 +277,11 @@ const DataRecordHandle* FileReader::readRecordImp()
                handle = new DataRecordHandle(dataRecord);
             }
 
-            // parsing error 
+            // parsing error
             else if (isMessageEnabled(MSG_ERROR | MSG_WARNING)) {
                std::cerr << "FileReader::readRecord() -- ParseFromString() error" << std::endl;
                delete dataRecord;
-               dataRecord = 0;
+               dataRecord = nullptr;
             }
          }
 
@@ -300,20 +298,19 @@ const DataRecordHandle* FileReader::readRecordImp()
 //------------------------------------------------------------------------------
 bool FileReader::setFilename(const Basic::String* const msg)
 {
-   if (filename != 0) { filename->unref(); filename = 0; }
-   if (msg != 0) filename = new Basic::String(*msg);
+   if (filename != nullptr) { filename->unref(); filename = nullptr; }
+   if (msg != nullptr) filename = new Basic::String(*msg);
 
    return true;
 }
 
 bool FileReader::setPathName(const Basic::String* const msg)
 {
-   if (pathname != 0) { pathname->unref(); pathname = 0; }
-   if (msg != 0) pathname = new Basic::String(*msg);
+   if (pathname != nullptr) { pathname->unref(); pathname = nullptr; }
+   if (msg != nullptr) pathname = new Basic::String(*msg);
 
    return true;
 }
-
 
 //------------------------------------------------------------------------------
 // getSlotByIndex() for Component
@@ -322,7 +319,6 @@ Basic::Object* FileReader::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }
-
 
 //------------------------------------------------------------------------------
 // serialize

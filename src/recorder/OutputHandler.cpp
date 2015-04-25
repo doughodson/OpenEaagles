@@ -16,11 +16,10 @@ IMPLEMENT_SUBCLASS(OutputHandler,"RecorderOutputHandler")
 EMPTY_SLOTTABLE(OutputHandler)
 EMPTY_SERIALIZER(OutputHandler)
 
-
 //------------------------------------------------------------------------------
 // Constructor
 //------------------------------------------------------------------------------
-OutputHandler::OutputHandler()
+OutputHandler::OutputHandler():semaphore(0)
 {
    STANDARD_CONSTRUCTOR()
    initData();
@@ -64,14 +63,14 @@ bool OutputHandler::shutdownNotification()
 {
    // Pass the shutdown notification to our subcomponent recorders
    Basic::PairStream* subcomponents = getComponents();
-   if (subcomponents != 0) {
+   if (subcomponents != nullptr) {
       for (Basic::List::Item* item = subcomponents->getFirstItem(); item != 0; item = item->getNext()) {
          Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
          OutputHandler* sc = static_cast<OutputHandler*>(pair->object());
          sc->event(SHUTDOWN_EVENT);
       }
       subcomponents->unref();
-      subcomponents = 0;
+      subcomponents = nullptr;
    }
 
    return BaseClass::shutdownNotification();
@@ -93,17 +92,16 @@ void OutputHandler::processRecord(const DataRecordHandle* const dataRecord)
       // Next, pass the data record to our subcomponent OutputHandlers
       // for further processing
       Basic::PairStream* subcomponents = getComponents();
-      if (subcomponents != 0) {
-         for (Basic::List::Item* item = subcomponents->getFirstItem(); item != 0; item = item->getNext()) {
+      if (subcomponents != nullptr) {
+         for (Basic::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
 
             Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
             OutputHandler* sc = static_cast<OutputHandler*>(pair->object());
 
             sc->processRecord(dataRecord);
-
          }
          subcomponents->unref();
-         subcomponents = 0;
+         subcomponents = nullptr;
       }
 
    }
@@ -115,7 +113,7 @@ void OutputHandler::processRecord(const DataRecordHandle* const dataRecord)
 //------------------------------------------------------------------------------
 void OutputHandler::addToQueue(const DataRecordHandle* const dataRecord)
 {
-   if (dataRecord != 0) {
+   if (dataRecord != nullptr) {
       lcLock( semaphore );
       // const cast away to put into the queue
       queue.put( const_cast<DataRecordHandle*>(static_cast<const DataRecordHandle*>(dataRecord)) );
@@ -135,8 +133,8 @@ void OutputHandler::processQueue()
    lcUnlock( semaphore );
 
    // While we have records ...
-   while (dataRecord != 0) {
-      // process this record, 
+   while (dataRecord != nullptr) {
+      // process this record,
       processRecord(dataRecord);
       dataRecord->unref();
 

@@ -8,7 +8,6 @@
 namespace Eaagles {
 namespace Recorder {
 
-
 //==============================================================================
 // Class NetInput
 //==============================================================================
@@ -20,7 +19,7 @@ BEGIN_SLOTTABLE(NetInput)
    "noWait",               // 2) No wait (unblocked) I/O flag (default: false -- blocked I/O)
 END_SLOTTABLE(NetInput)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(NetInput)
     ON_SLOT(1, setSlotNetwork,   Eaagles::Basic::NetHandler)
     ON_SLOT(2, setSlotNoWait,    Eaagles::Basic::Number)
@@ -29,7 +28,7 @@ END_SLOT_MAP()
 //------------------------------------------------------------------------------
 // Constructor
 //------------------------------------------------------------------------------
-NetInput::NetInput() : netHandler(0)
+NetInput::NetInput() : netHandler(nullptr)
 {
    STANDARD_CONSTRUCTOR()
    initData();
@@ -57,7 +56,7 @@ void NetInput::copyData(const NetInput& org, const bool cc)
    noWaitFlag = org.noWaitFlag;
 
    // We need to init this ourselves, so ...
-   netHandler = 0;
+   netHandler = nullptr;
    networkInitialized = false;
    networkInitFailed = false;
    firstPassFlg = true;
@@ -70,8 +69,8 @@ void NetInput::copyData(const NetInput& org, const bool cc)
 void NetInput::deleteData()
 {
    closeConnections();
-   netHandler = 0;
-   if (ibuf != 0) { delete[] ibuf; ibuf = 0; }
+   netHandler = nullptr;
+   if (ibuf != nullptr) { delete[] ibuf; ibuf = nullptr; }
 }
 
 
@@ -91,7 +90,7 @@ bool NetInput::isNetworkEnabled() const
 bool NetInput::initNetworks()
 {
    bool ok = false;
-   if (netHandler != 0) {
+   if (netHandler != nullptr) {
       ok = netHandler->initNetwork(noWaitFlag);
       networkInitialized = ok;
       networkInitFailed = !ok;
@@ -99,17 +98,15 @@ bool NetInput::initNetworks()
    return ok;
 }
 
-
 //------------------------------------------------------------------------------
 // close the network connection
 //------------------------------------------------------------------------------
 void NetInput::closeConnections()
 {
-   if (netHandler != 0 && networkInitialized) netHandler->closeConnection();
+   if (netHandler != nullptr && networkInitialized) netHandler->closeConnection();
    networkInitialized = false;
    networkInitFailed = false;
 }
-
 
 //------------------------------------------------------------------------------
 // Read a record
@@ -124,8 +121,7 @@ const DataRecordHandle* NetInput::readRecordImp()
       firstPassFlg = false;
    }
 
-
-   DataRecordHandle* handle = 0;
+   DataRecordHandle* handle = nullptr;
 
    // When the file is open and ready ...
    if ( networkInitialized && netHandler->isConnected() ) {
@@ -133,8 +129,7 @@ const DataRecordHandle* NetInput::readRecordImp()
       // ---
       // Try to read a message into 'ibuf'
       // ---
-      unsigned int n = 0;
-      n = netHandler->recvData( ibuf, MAX_INPUT_BUFFER_SIZE );
+      unsigned int n = netHandler->recvData( ibuf, MAX_INPUT_BUFFER_SIZE );
 
       // ---
       // If we've successfully read a message from the network
@@ -154,11 +149,11 @@ const DataRecordHandle* NetInput::readRecordImp()
          else if (isMessageEnabled(MSG_ERROR | MSG_WARNING)) {
             std::cerr << "NetInput::readRecord() -- ParseFromString() error" << std::endl;
             delete dataRecord;
-            dataRecord = 0;
+            dataRecord = nullptr;
          }
 
       }
-   }  
+   }
    return handle;
 }
 
@@ -178,13 +173,12 @@ bool NetInput::setSlotNetwork(Eaagles::Basic::NetHandler* const msg)
 bool NetInput::setSlotNoWait(Eaagles::Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       noWaitFlag = msg->getBoolean();
       ok = true;
    }
    return ok;
 }
-
 
 //------------------------------------------------------------------------------
 // getSlotByIndex() for Component

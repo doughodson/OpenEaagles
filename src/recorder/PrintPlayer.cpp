@@ -30,7 +30,7 @@ BEGIN_SLOTTABLE(PrintPlayer)
    "playerName",   // 1) Player name
 END_SLOTTABLE(PrintPlayer)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(PrintPlayer)
    ON_SLOT( 1, setName,        Basic::String)
 END_SLOT_MAP()
@@ -48,7 +48,7 @@ PrintPlayer::PrintPlayer()
 
 void PrintPlayer::initData()
 {
-   name = 0;
+   name = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -60,10 +60,10 @@ void PrintPlayer::copyData(const PrintPlayer& org, const bool cc)
    if (cc) initData();
 
    { // clone player name
-      const Basic::String* clone = 0;
-      if (org.name != 0) clone = org.name->clone();
+      const Basic::String* clone = nullptr;
+      if (org.name != nullptr) clone = org.name->clone();
       setName(clone);
-      if (clone != 0) clone->unref();
+      if (clone != nullptr) clone->unref();
    }
 }
 
@@ -72,7 +72,7 @@ void PrintPlayer::copyData(const PrintPlayer& org, const bool cc)
 //------------------------------------------------------------------------------
 void PrintPlayer::deleteData()
 {
-   setName(0);
+   setName(nullptr);
 }
 
 //------------------------------------------------------------------------------
@@ -80,9 +80,9 @@ void PrintPlayer::deleteData()
 //------------------------------------------------------------------------------
 bool PrintPlayer::setName(const Basic::String* const msg)
 {
-   if (name != 0) { name->unref(); }
+   if (name != nullptr) { name->unref(); }
    name = msg;
-   if (name != 0) { name->ref(); }
+   if (name != nullptr) { name->ref(); }
    return true;
 }
 
@@ -100,12 +100,12 @@ Basic::Object* PrintPlayer::getSlotByIndex(const int si)
 //------------------------------------------------------------------------------
 void PrintPlayer::processRecordImp(const DataRecordHandle* const handle)
 {
-   if (handle == 0) return;  // cannot continue
+   if (handle == nullptr) return;  // cannot continue
    const Pb::DataRecord* dataRecord = handle->getRecord();
-   if (dataRecord == 0) return;  // cannot continue
+   if (dataRecord == nullptr) return;  // cannot continue
 
    // Get the time msg
-   const Pb::Time* timeMsg = 0;
+   const Pb::Time* timeMsg = nullptr;
    if (dataRecord->has_time()) {
       timeMsg = &dataRecord->time();
    }
@@ -116,9 +116,8 @@ void PrintPlayer::processRecordImp(const DataRecordHandle* const handle)
    MsgType msgType = UNKNOWN;
    std::string msgTypeStr = "";
 
-
-   const Pb::PlayerId* playerIdMsg = 0;
-   const Pb::PlayerState* playerStMsg = 0;
+   const Pb::PlayerId* playerIdMsg = nullptr;
+   const Pb::PlayerState* playerStMsg = nullptr;
 
    switch (messageId) {
 
@@ -132,7 +131,7 @@ void PrintPlayer::processRecordImp(const DataRecordHandle* const handle)
             playerStMsg = &msg->state();
             std::string playerName = playerIdMsg->name();  // example
          }
-         break; 
+         break;
       }
 
       case REID_PLAYER_REMOVED : {
@@ -207,7 +206,7 @@ void PrintPlayer::processRecordImp(const DataRecordHandle* const handle)
    // if message handled, continue
    if (msgType != UNKNOWN) {
 
-      bool printIt = (name == 0);
+      bool printIt = (name == nullptr);
       if (!printIt) {
          if (playerIdMsg != 0 && playerIdMsg->has_name()) {
             const char* sname = playerIdMsg->name().c_str();

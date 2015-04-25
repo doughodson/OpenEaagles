@@ -44,10 +44,10 @@ FileWriter::FileWriter()
 
 void FileWriter::initData()
 {
-   sout = 0;
-   fullFilename = 0;
-   filename = 0;
-   pathname = 0;
+   sout = nullptr;
+   fullFilename = nullptr;
+   filename = nullptr;
+   pathname = nullptr;
    fileOpened = false;
    fileFailed = false;
    eodFlag    = false;
@@ -65,16 +65,15 @@ void FileWriter::copyData(const FileWriter& org, const bool cc)
    setPathName(org.pathname);
 
    // Need to re-open the file
-   if (sout != 0) {
+   if (sout != nullptr) {
       if (isOpen()) sout->close();
       delete sout;
    }
-   sout = 0;
+   sout = nullptr;
    fileOpened = false;
    fileFailed = false;
    eodFlag    = false;
-   setFullFilename(0);
-
+   setFullFilename(nullptr);
 }
 
 //------------------------------------------------------------------------------
@@ -82,14 +81,14 @@ void FileWriter::copyData(const FileWriter& org, const bool cc)
 //------------------------------------------------------------------------------
 void FileWriter::deleteData()
 {
-   if (sout != 0) {
+   if (sout != nullptr) {
       if (isOpen()) sout->close();
       delete sout;
    }
-   sout = 0;
+   sout = nullptr;
 
-   setFilename(0);
-   setPathName(0);
+   setFilename(nullptr);
+   setPathName(nullptr);
 }
 
 
@@ -112,13 +111,13 @@ bool FileWriter::shutdownNotification()
 // Is the data file open?
 bool FileWriter::isOpen() const
 {
-   return fileOpened && sout != 0 && sout->is_open();
+   return fileOpened && sout != nullptr && sout->is_open();
 }
 
 // Did we have an open or write error?
 bool FileWriter::isFailed() const
 {
-   return fileFailed || (sout != 0 && sout->fail());
+   return fileFailed || (sout != nullptr && sout->fail());
 }
 
 // File name with path and possible version number
@@ -130,16 +129,16 @@ const char* FileWriter::getFullFilename() const
 // File name as entered
 const char* FileWriter::getFilename() const
 {
-   const char* p = 0;
-   if (filename != 0) p = *filename;
+   const char* p = nullptr;
+   if (filename != nullptr) p = *filename;
    return p;
 }
 
 // Path to file
 const char* FileWriter::getPathname() const
 {
-   const char* p = 0;
-   if (pathname != 0) p = *pathname;
+   const char* p = nullptr;
+   if (pathname != nullptr) p = *pathname;
    return p;
 }
 
@@ -153,16 +152,15 @@ bool FileWriter::openFile()
    if (isOpen()) return true;
 
    // clear the old 'full' file name
-   setFullFilename(0);
+   setFullFilename(nullptr);
 
    // local flags (default is success)
    bool tOpened = true;
    bool tFailed = false;
    eodFlag = false;
 
-
    // Need a file name
-   if (filename == 0 || filename->len() ==  0) {
+   if (filename == nullptr || filename->len() ==  0) {
       if (isMessageEnabled(MSG_ERROR)) {
          std::cerr << "FileWriter::openFile(): Unable to open data file: no file name" << std::endl;
       }
@@ -175,7 +173,7 @@ bool FileWriter::openFile()
       // Allocate space for the full file name
       //---
       size_t nameLength = 0;
-      if (pathname != 0) {
+      if (pathname != nullptr) {
          nameLength += pathname->len();     // add the length of the path name
          nameLength += 1;                         // add a character for the slash
       }
@@ -189,7 +187,7 @@ bool FileWriter::openFile()
       //---
       // Create the (initial) full file name
       //---
-      if (pathname != 0 && pathname->len() > 0) {
+      if (pathname != nullptr && pathname->len() > 0) {
          lcStrcat(fullname, nameLength ,*pathname);
          lcStrcat(fullname, nameLength, "/");
       }
@@ -232,7 +230,7 @@ bool FileWriter::openFile()
          //---
          // Make sure we have an output stream
          //---
-         if (sout == 0) sout = new std::ofstream();
+         if (sout == nullptr) sout = new std::ofstream();
 
          //---
          // Open the file (binary output mode)
@@ -293,7 +291,7 @@ void FileWriter::closeFile()
          // write the message
          processRecordImp(handle);
          handle->unref();
-         handle = 0;
+         handle = nullptr;
       }
 
       // now close the file
@@ -336,7 +334,7 @@ void FileWriter::processRecordImp(const DataRecordHandle* const handle)
 
          // Convert size to an integer string
          char nbuff[8];
-         sprintf(nbuff, "%04d", n);
+         std::sprintf(nbuff, "%04d", n);
 
          // Convert the leading zeros to spaces
          if (nbuff[0] == '0') {
@@ -382,11 +380,11 @@ void FileWriter::processRecordImp(const DataRecordHandle* const handle)
 
 void FileWriter::setFullFilename(const char* const name)
 {
-   if (fullFilename != 0) {
+   if (fullFilename != nullptr) {
       delete[] fullFilename;
-      fullFilename = 0;
+      fullFilename = nullptr;
    }
-   if (name != 0) {
+   if (name != nullptr) {
       size_t n = std::strlen(name) + 1;
       fullFilename = new char[n];
       lcStrcpy(fullFilename, n, name);
@@ -395,20 +393,19 @@ void FileWriter::setFullFilename(const char* const name)
 
 bool FileWriter::setFilename(const Basic::String* const msg)
 {
-   if (filename != 0) { filename->unref(); filename = 0; }
-   if (msg != 0) filename = new Basic::String(*msg);
+   if (filename != nullptr) { filename->unref(); filename = nullptr; }
+   if (msg != nullptr) filename = new Basic::String(*msg);
 
     return true;
 }
 
 bool FileWriter::setPathName(const Basic::String* const msg)
 {
-   if (pathname != 0) { pathname->unref(); pathname = 0; }
-   if (msg != 0) pathname = new Basic::String(*msg);
+   if (pathname != nullptr) { pathname->unref(); pathname = nullptr; }
+   if (msg != nullptr) pathname = new Basic::String(*msg);
 
    return true;
 }
-
 
 //------------------------------------------------------------------------------
 // getSlotByIndex() for Component
@@ -417,7 +414,6 @@ Basic::Object* FileWriter::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }
-
 
 //------------------------------------------------------------------------------
 // serialize

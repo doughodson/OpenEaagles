@@ -33,7 +33,7 @@ BEGIN_SLOTTABLE(TabPrinter)
    "divider",      // 2) Field divider
 END_SLOTTABLE(TabPrinter)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(TabPrinter)
    ON_SLOT( 1, setSlotMsgHdr,      Basic::String)
    ON_SLOT( 2, setSlotDivider,     Basic::String)
@@ -113,7 +113,7 @@ void TabPrinter::setMsgHeaders(const bool f)
 bool TabPrinter::setSlotMsgHdr(const Basic::String* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = true;
 
       if ((*msg == "NO_HDR") || (*msg == "no_hdr") ) {
@@ -144,7 +144,7 @@ bool TabPrinter::setSlotMsgHdr(const Basic::String* const msg)
 bool TabPrinter::setSlotDivider(const Basic::String* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = true;
       divider = msg->getCopyString();
    }
@@ -166,12 +166,12 @@ Basic::Object* TabPrinter::getSlotByIndex(const int si)
 //------------------------------------------------------------------------------
 void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
 {
-   if (handle == 0) return;  // cannot continue
+   if (handle == nullptr) return;  // cannot continue
    const Pb::DataRecord* dataRecord = handle->getRecord();
-   if (dataRecord == 0) return;  // cannot continue
+   if (dataRecord == nullptr) return;  // cannot continue
 
    // Get the time msg
-   const Pb::Time* timeMsg = 0;
+   const Pb::Time* timeMsg = nullptr;
    if (dataRecord->has_time()) {
       timeMsg = &dataRecord->time();
    }
@@ -214,7 +214,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
             const Pb::FileIdMsg* msg = &dataRecord->file_id_msg();
             printFileIdMsg(timeMsg, msg);
          }
-         break; 
+         break;
       }
 
       // events:
@@ -225,7 +225,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
             const Pb::NewPlayerEventMsg* msg = &dataRecord->new_player_event_msg();
             printNewPlayerEventMsg(timeMsg, msg);
          }
-         break; 
+         break;
       }
 
       case REID_PLAYER_REMOVED : {
@@ -432,7 +432,7 @@ void TabPrinter::printFileIdMsg(const Pb::Time* const timeMsg, const Pb::FileIdM
 
    sout << "FILE ID" << divider << "IDENTIFIER" << divider << "DATA"  << divider;
    printTimeMsg(sout, timeMsg);
-   if (msg != 0) {
+   if (msg != nullptr) {
       // File Id
       if (msg->has_event_name()) {
          sout << msg->event_name() << divider;
@@ -507,7 +507,7 @@ void TabPrinter::printNewPlayerEventMsg(const Pb::Time* const timeMsg, const Pb:
    sout << "PLAYER" << divider << "NEW" << divider << "DATA" << divider;
    printTimeMsg(sout, timeMsg);
 
-   if (msg != 0) {
+   if (msg != nullptr) {
       // player ID
       if (msg->has_id()) {
          printPlayerIdMsg(sout, &msg->id());
@@ -547,7 +547,7 @@ void TabPrinter::printPlayerRemovedEventMsg(const Pb::Time* const timeMsg, const
       sout << "PLAYER" << divider << "REMOVED" << divider << "DATA" << divider;
    printTimeMsg(sout, timeMsg);
 
-   if (msg != 0) {
+   if (msg != nullptr) {
       // player ID
       if (msg->has_id()) {
          printPlayerIdMsg(sout, &msg->id());
@@ -591,7 +591,7 @@ void TabPrinter::printPlayerDataMsg(const Pb::Time* const timeMsg, const Pb::Pla
 
       sout << "PLAYER" << divider << "DATA" << divider << "DATA" << divider;
    printTimeMsg(sout, timeMsg);
-   if (msg != 0) {
+   if (msg != nullptr) {
       // player ID
       if (msg->has_id()) {
          printPlayerIdMsg(sout, &msg->id());
@@ -649,7 +649,7 @@ void TabPrinter::printPlayerDamagedEventMsg(const Pb::Time* const timeMsg, const
 
    sout << "PLAYER" << divider << "DAMAGE" << divider << "DATA" << divider;
    printTimeMsg(sout, timeMsg);
-   if (msg != 0) {
+   if (msg != nullptr) {
       // player ID
       if (msg->has_id()) {
          printPlayerIdMsg(sout, &msg->id());
@@ -692,7 +692,7 @@ void TabPrinter::printPlayerCollisionEventMsg(const Pb::Time* const timeMsg, con
    sout << "PLAYER" << divider << "COLLISION" << divider << "DATA" << divider;
 
    printTimeMsg(sout, timeMsg);
-   if (msg != 0) {
+   if (msg != nullptr) {
       // player ID
       if (msg->has_id()) {
          printPlayerIdMsg(sout, &msg->id());
@@ -740,7 +740,7 @@ void TabPrinter::printPlayerCrashEventMsg(const Pb::Time* const timeMsg, const P
 
    sout << "PLAYER" << divider << "CRASH" << divider << "DATA" << divider;
    printTimeMsg(sout, timeMsg);
-   if (msg != 0) {
+   if (msg != nullptr) {
       // Player Id
       if (msg->has_id()) {
          printPlayerIdMsg(sout, &msg->id());
@@ -782,7 +782,7 @@ void TabPrinter::printPlayerKilledEventMsg(const Pb::Time* const timeMsg, const 
 
    sout << "PLAYER" << divider << "KILL" << divider << "DATA" << divider;
    printTimeMsg(sout, timeMsg);
-   if (msg != 0) {
+   if (msg != nullptr) {
       // Player Id
       if (msg->has_id()) {
          printPlayerIdMsg(sout, &msg->id());
@@ -828,7 +828,7 @@ void TabPrinter::printWeaponReleaseEventMsg(const Pb::Time* const timeMsg, const
    sout << "WEAPON" << divider << "RELEASE" << divider << "DATA" << divider;
 
    printTimeMsg(sout, timeMsg);
-   if (msg != 0) {
+   if (msg != nullptr) {
       // Player Id Wpn
       if (msg->has_wpn_id()) {
          printPlayerIdMsg(sout, &msg->wpn_id());
@@ -880,7 +880,7 @@ void TabPrinter::printWeaponHungEventMsg(const Pb::Time* const timeMsg, const Pb
 
    sout << "WEAPON" << divider << "HUNG" << divider << "DATA" << divider;
    printTimeMsg(sout, timeMsg);
-   if (msg != 0) {
+   if (msg != nullptr) {
       // Player Id Wpn
       if (msg->has_wpn_id()) {
          printPlayerIdMsg(sout, &msg->wpn_id());
@@ -935,7 +935,7 @@ void TabPrinter::printWeaponDetonationEventMsg(const Pb::Time* const timeMsg, co
 
    sout << "WEAPON" << divider << "DETONATION" << divider << "DATA" << divider;
    printTimeMsg(sout, timeMsg);
-   if (msg != 0) {
+   if (msg != nullptr) {
       // Player Id Wpn
       if (msg->has_wpn_id()) {
          printPlayerIdMsg(sout, &msg->wpn_id());
@@ -1005,7 +1005,7 @@ void TabPrinter::printGunFiredEventMsg(const Pb::Time* const timeMsg, const Pb::
 
    sout << "GUN" << divider << "FIRED" << divider << "DATA" << divider;
    printTimeMsg(sout, timeMsg);
-   if (msg != 0) {
+   if (msg != nullptr) {
       // player ID shooter
       if (msg->has_shooter_id()) {
          printPlayerIdMsg(sout, &msg->shooter_id());
@@ -1046,7 +1046,7 @@ void TabPrinter::printNewTrackEventMsg(const Pb::Time* const timeMsg, const Pb::
    printTimeMsg(sout, timeMsg);
 
     {
-      if (msg != 0) {
+      if (msg != nullptr) {
          // print values
          // Track ID
          if (msg->has_track_id()) {
@@ -1122,7 +1122,7 @@ void TabPrinter::printTrackRemovedEventMsg(const Pb::Time* const timeMsg, const 
    sout << "TRACK" << divider << "REMOVED" << divider << "DATA" << divider;
 
    printTimeMsg(sout, timeMsg);
-   if (msg != 0) {
+   if (msg != nullptr) {
       // Track ID
          if (msg->has_track_id()) {
             sout << msg->track_id() << divider;
@@ -1168,7 +1168,7 @@ void TabPrinter::printTrackDataMsg(const Pb::Time* const timeMsg, const Pb::Trac
 
    printTimeMsg(sout, timeMsg);
    {
-      if (msg != 0) {
+      if (msg != nullptr) {
          // print values
          // Track ID
          if (msg->has_track_id()) {
@@ -1232,7 +1232,6 @@ void TabPrinter::printTrackDataMsg(const Pb::Time* const timeMsg, const Pb::Trac
 //------------------------------------------------------------------------------
 void TabPrinter::printTrackMsgHdr(std::ostream& sout)
 {
-
       printTimeMsgHdr(sout);
 
       sout << "TRACK ID" << divider;
@@ -1248,7 +1247,6 @@ void TabPrinter::printTrackMsgHdr(std::ostream& sout)
       printPlayerIdMsgHdr(sout); // player ID header
       printPlayerStateMsgHdr(sout);  // player stat
       printEmissionDataMsgHdr(sout);  // emission data
-
 }
 
 
@@ -1259,7 +1257,7 @@ void TabPrinter::printTimeMsg(std::ostream& sout, const Pb::Time* const timeMsg)
 {
 
    // print time message values:
-   if (timeMsg != 0) {
+   if (timeMsg != nullptr) {
       if (timeMsg->has_exec_time()) {
          printExecTimeMsg(sout, timeMsg->exec_time());
          sout << divider;
@@ -1299,9 +1297,8 @@ void TabPrinter::printTimeMsgHdr(std::ostream& sout)
 //------------------------------------------------------------------------------
 void TabPrinter::printPlayerIdMsg(std::ostream& sout, const Pb::PlayerId* const msg)
 {
-
    // values
-   if (msg != 0) {
+   if (msg != nullptr) {
       if (msg->has_id()) {
          // player ID
          if (msg->has_id()) {
@@ -1360,15 +1357,14 @@ void TabPrinter::printPlayerIdSpacer(std::ostream& sout)
 void TabPrinter::printPlayerStateMsg(std::ostream& sout, const Pb::PlayerState* const msg)
 {
    // Player State
-
-   if (msg != 0) {
+   if (msg != nullptr) {
       // position
       if (msg->has_pos()) {
 
          // Convert x,y,z to lat/lon:
-         double pLat;
-         double pLon;
-         double pAlt;
+         double pLat(0.0);
+         double pLon(0.0);
+         double pAlt(0.0);
          if (( msg->pos().has_x()) && ( msg->pos().has_y()) && ( msg->pos().has_z())) {
             Eaagles::Basic::Nav::convertEcef2Geod(msg->pos().x(), msg->pos().y(),  msg->pos().z(),
                &pLat, &pLon, &pAlt);
@@ -1457,7 +1453,7 @@ void TabPrinter::printPlayerStateMsgHdr(std::ostream& sout)
 }
 
 //------------------------------------------------------------------------------
-// printPlayerDataSpacer() -- creates empty space for the player ID message 
+// printPlayerDataSpacer() -- creates empty space for the player ID message
 //------------------------------------------------------------------------------
 void TabPrinter::printPlayerDataSpacer(std::ostream& sout)
 {
@@ -1493,7 +1489,7 @@ void TabPrinter::printCommonTrackDataMsg(std::ostream& sout, const Pb::TrackData
 {
    // Track Data
 
-   if (msg != 0) {
+   if (msg != nullptr) {
       if (msg->has_type()) {
          sout << msg->type() << divider;
       }
@@ -1619,8 +1615,8 @@ void TabPrinter::printTrackDataSpacer(std::ostream& sout)
    sout <<  divider;              // elevation
    sout <<  divider;              // range
    sout <<  divider;              // latitude
-   sout << divider;               // longitude
-   sout << divider;               // altitude
+   sout <<  divider;              // longitude
+   sout <<  divider;              // altitude
    sout <<  divider << divider << divider;           // position
    sout <<  divider << divider << divider;           // velocity
    sout <<  divider;              // avg signal
@@ -1633,7 +1629,7 @@ void TabPrinter::printTrackDataSpacer(std::ostream& sout)
 //------------------------------------------------------------------------------
 void TabPrinter::printEmissionDataMsg(std::ostream& sout, const Pb::EmissionData* const msg)
 {
-   if (msg != 0) {
+   if (msg != nullptr) {
       // emission data values
       if (msg->has_frequency()) {
          sout << msg->frequency() << divider;
@@ -1682,7 +1678,6 @@ void TabPrinter::printEmissionDataMsg(std::ostream& sout, const Pb::EmissionData
 //------------------------------------------------------------------------------
 void TabPrinter::printEmissionDataMsgHdr(std::ostream& sout)
 {
-
    // emission data header
    sout << "frequency" << divider;
    sout << "wave length" << divider;
@@ -1731,7 +1726,7 @@ void TabPrinter::printMarkerMsg(const Pb::Time* const timeMsg, const Pb::MarkerM
    sout << "MARKER" << divider << "MESSAGE" << divider << "DATA" << divider;
 
    printTimeMsg(sout, timeMsg);
-   if (msg != 0) {
+   if (msg != nullptr) {
       if (msg->has_id()) {
          sout << msg->id() << divider;
       }
@@ -1764,7 +1759,6 @@ void TabPrinter::printInputDeviceMsg(const Pb::Time* const timeMsg, const Pb::In
    if (msgId == REID_AI_EVENT) inputType = "ANALOG ";
    else inputType = "DISCRETE";
 
-
    if (printHeader) {
       sout << "INPUT" << divider << "DEVICE" << divider << "HEADER" << divider;
       printTimeMsgHdr(sout);  // time header
@@ -1777,7 +1771,7 @@ void TabPrinter::printInputDeviceMsg(const Pb::Time* const timeMsg, const Pb::In
    sout << "INPUT"  << divider << "DEVICE" << divider << "DATA" << divider;
 
    printTimeMsg(sout, timeMsg);
-   if (msg != 0) {
+   if (msg != nullptr) {
       sout << inputType << divider;  // analog or discrete
       if (msg->has_id()) {
          sout << msg->id() << divider;
@@ -1884,12 +1878,10 @@ void TabPrinter::printExecTimeMsg(std::ostream& sout, double execTime)
     Basic::Time::getHHMMSS(LCreal(execTime), &hh, &mm, &ss);
     std::sprintf(cbuf, "%02d:%02d:%06.3f", hh, mm, ss);
     sout << cbuf;
-
 }
 
-
 //------------------------------------------------------------------------------
-// printUtcTimeMsg() -- print the time string for UTC time 
+// printUtcTimeMsg() -- print the time string for UTC time
 //------------------------------------------------------------------------------
 void TabPrinter::printUtcTimeMsg(std::ostream& sout, double utcTime)
 {
@@ -1902,9 +1894,7 @@ void TabPrinter::printUtcTimeMsg(std::ostream& sout, double utcTime)
     Basic::Time::getHHMMSS(LCreal(utcTime), &hh, &mm, &ss);
     std::sprintf(cbuf, "%02d:%02d:%06.3f", hh, mm, ss);
     sout << cbuf;
-
 }
-
 
 //------------------------------------------------------------------------------
 // printSimTimeMsg() -- print the time string for Simulation time
@@ -1920,9 +1910,7 @@ void TabPrinter::printSimTimeMsg(std::ostream& sout, double simTime)
     Basic::Time::getHHMMSS(LCreal(simTime), &hh, &mm, &ss);
     std::sprintf(cbuf, "%02d:%02d:%06.3f", hh, mm, ss);
     sout << cbuf;
-
 }
-
 
 } // End Recorder namespace
 } // End Eaagles namespace

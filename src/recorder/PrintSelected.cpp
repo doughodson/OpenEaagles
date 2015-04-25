@@ -41,7 +41,7 @@ BEGIN_SLOTTABLE(PrintSelected)
    "timeOnly",       // 7) match time conditions only. Print ALL messages that match
 END_SLOTTABLE(PrintSelected)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(PrintSelected)
    ON_SLOT( 1, setSlotMsgToken,        Basic::Number)
    ON_SLOT( 2, setSlotFieldName,       Basic::String)
@@ -75,8 +75,8 @@ void PrintSelected::initData()
 
    fieldNameStr = "";
    compareStr = "";
-   recMsg = 0;
-   eventMsg = 0;
+   recMsg = nullptr;
+   eventMsg = nullptr;
    foundSelected = false;
    printHeader = false;
    timeOnly = false;
@@ -117,7 +117,7 @@ void PrintSelected::deleteData()
 bool PrintSelected::setSlotMsgToken(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = true;
       msgToken = msg->getInt();
    }
@@ -127,7 +127,7 @@ bool PrintSelected::setSlotMsgToken(const Basic::Number* const msg)
 bool PrintSelected::setSlotFieldName(const Basic::String* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = true;
       fieldName = msg->getCopyString();
       fieldNameStr.assign(fieldName);
@@ -139,7 +139,7 @@ bool PrintSelected::setSlotFieldName(const Basic::String* const msg)
 bool PrintSelected::setSlotCompareToStr(const Basic::String* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = true;
       compareValS = msg->getCopyString();
       compareStr.assign(compareValS);
@@ -150,7 +150,7 @@ bool PrintSelected::setSlotCompareToStr(const Basic::String* const msg)
 bool PrintSelected::setSlotCompareToNum(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = true;
       compareValI = msg->getInt();
    }
@@ -160,7 +160,7 @@ bool PrintSelected::setSlotCompareToNum(const Basic::Number* const msg)
 bool PrintSelected::setSlotCompareToDbl(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = true;
       compareValD = msg->getDouble();
    }
@@ -170,9 +170,8 @@ bool PrintSelected::setSlotCompareToDbl(const Basic::Number* const msg)
 
 bool PrintSelected::setSlotCondition(const Basic::String* const msg)
 {
-
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = true;
 
       if ((*msg == "EQ") || (*msg == "eq")) {
@@ -196,7 +195,7 @@ bool PrintSelected::setSlotCondition(const Basic::String* const msg)
 bool PrintSelected::setSlotTimeOnly(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = true;
       timeOnly = msg->getBoolean();
    }
@@ -217,9 +216,9 @@ Basic::Object* PrintSelected::getSlotByIndex(const int si)
 void PrintSelected::processRecordImp(const DataRecordHandle* const handle)
 {
 
-   if (handle == 0) return;  // cannot continue
+   if (handle == nullptr) return;  // cannot continue
    const Pb::DataRecord* dataRecord = handle->getRecord();
-   if (dataRecord == 0) return;  // cannot continue
+   if (dataRecord == nullptr) return;  // cannot continue
 
    // using reflection:
    // save to: const google::protobuf::Message* recMsg
@@ -237,10 +236,9 @@ void PrintSelected::processRecordImp(const DataRecordHandle* const handle)
    processMessage( &dataRecord->time());
 
    // Process the event message
-   const google::protobuf::Message* processMsg = 0;
+   const google::protobuf::Message* processMsg = nullptr;
    std::string msgCat = "";
    std::string msgType = "";
-
 
    switch (msgToken) {
       case REID_FILE_ID: {
@@ -384,7 +382,7 @@ void PrintSelected::processRecordImp(const DataRecordHandle* const handle)
    }
 
    // Process the message and see if the conditions are found
-   if (!timeOnly && (processMsg != 0)) {
+   if (!timeOnly && (processMsg != nullptr)) {
       processMessage(processMsg);
    }
 
@@ -452,7 +450,7 @@ void PrintSelected::processRecordImp(const DataRecordHandle* const handle)
       // Print out the event message
       // print the message, whatever it is, because it matches the time criteria
       std::string msgName = getEventMsgName(recMsg);  // This also sets event message
-      if (eventMsg != 0) {
+      if (eventMsg != nullptr) {
          printMessage(soutFields, soutVals, eventMsg);
       }
 
@@ -464,23 +462,19 @@ void PrintSelected::processRecordImp(const DataRecordHandle* const handle)
       }
       printToOutput( soutVals.str().c_str() );
    }
-
-
 }
-
 
 //------------------------------------------------------------------------------
 // processMessage(): Recursive function to go through all messages
 //---------------------------------------------------------------------------
 void PrintSelected::processMessage(const google::protobuf::Message* const msg)
 {
-
    const google::protobuf::Message& root = *msg;
    const google::protobuf::Descriptor* descriptor = msg->GetDescriptor();
    const google::protobuf::Reflection* reflection = msg->GetReflection();
 
    int fieldCount = descriptor->field_count();
-   const google::protobuf::FieldDescriptor* fieldDescriptor = 0;
+   const google::protobuf::FieldDescriptor* fieldDescriptor = nullptr;
 
    // look at fields to find a match with the slot condition
    if (fieldCount > 0) {
@@ -578,7 +572,6 @@ void PrintSelected::processMessage(const google::protobuf::Message* const msg)
          }
       }
    }
-
 }
 
 //------------------------------------------------------------------------------
@@ -586,7 +579,6 @@ void PrintSelected::processMessage(const google::protobuf::Message* const msg)
 //---------------------------------------------------------------------------
 void PrintSelected::printMessage(std::ostream& soutFields, std::ostream& soutVals, const google::protobuf::Message* const msg)
 {
-
    const google::protobuf::Descriptor* descriptor = msg->GetDescriptor();
    const google::protobuf::Reflection* reflection = msg->GetReflection();
 
@@ -766,7 +758,7 @@ std::string PrintSelected::getEventMsgName(const google::protobuf::Message* cons
    const google::protobuf::Message& root = *msg;
 
    int fieldCount = descriptor->field_count();
-   const google::protobuf::FieldDescriptor* fieldDescriptor = 0;
+   const google::protobuf::FieldDescriptor* fieldDescriptor = nullptr;
    eventMsg = 0;
 
    if (descriptor->field_count() > 0) {
@@ -775,7 +767,7 @@ std::string PrintSelected::getEventMsgName(const google::protobuf::Message* cons
          // Get field descriptor (includes messages)
          fieldDescriptor = descriptor->field(i);
 
-         // Is this a message? 
+         // Is this a message?
          if (fieldDescriptor->cpp_type() == google::protobuf::FieldDescriptor::CPPTYPE_MESSAGE) {
             // Yes, check has field, then save the name
             if (reflection->HasField(root, fieldDescriptor)) {

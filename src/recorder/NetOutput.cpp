@@ -19,7 +19,7 @@ BEGIN_SLOTTABLE(NetOutput)
    "noWait",               // 2) No wait (unblocked) I/O flag (default: false -- blocked I/O)
 END_SLOTTABLE(NetOutput)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(NetOutput)
     ON_SLOT(1, setSlotNetwork,   Eaagles::Basic::NetHandler)
     ON_SLOT(2, setSlotNoWait,    Eaagles::Basic::Number)
@@ -41,7 +41,6 @@ void NetOutput::initData()
    noWaitFlag = false;
 }
 
-
 //------------------------------------------------------------------------------
 // copyData() -- copy member data
 //------------------------------------------------------------------------------
@@ -50,7 +49,7 @@ void NetOutput::copyData(const NetOutput& org, const bool)
    BaseClass::copyData(org);
 
    // We need to init this ourselves, so ...
-   netHandler = 0;
+   netHandler = nullptr;
    networkInitialized = false;
    networkInitFailed = false;
 }
@@ -62,7 +61,7 @@ void NetOutput::copyData(const NetOutput& org, const bool)
 void NetOutput::deleteData()
 {
    closeConnections();
-   netHandler = 0;
+   netHandler = nullptr;
 }
 
 
@@ -82,7 +81,7 @@ bool NetOutput::isNetworkEnabled() const
 bool NetOutput::initNetworks()
 {
    bool ok = false;
-   if (netHandler != 0) {
+   if (netHandler != nullptr) {
       ok = netHandler->initNetwork(noWaitFlag);
       networkInitialized = ok;
       networkInitFailed = !ok;
@@ -96,7 +95,7 @@ bool NetOutput::initNetworks()
 //------------------------------------------------------------------------------
 void NetOutput::closeConnections()
 {
-   if (netHandler != 0 && networkInitialized) netHandler->closeConnection();
+   if (netHandler != nullptr && networkInitialized) netHandler->closeConnection();
    networkInitialized = false;
    networkInitFailed = false;
 }
@@ -114,7 +113,7 @@ void NetOutput::processRecordImp(const DataRecordHandle* const handle)
    // ---
    if ( !networkInitialized && !networkInitFailed ) initNetworks();
 
-   if (handle != 0 && networkInitialized && netHandler->isConnected()) {
+   if (handle != nullptr && networkInitialized && netHandler->isConnected()) {
 
       // The DataRecord to be sent
       const Pb::DataRecord* dataRecord = handle->getRecord();
@@ -162,7 +161,7 @@ bool NetOutput::setSlotNetwork(Eaagles::Basic::NetHandler* const msg)
 bool NetOutput::setSlotNoWait(Eaagles::Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       noWaitFlag = msg->getBoolean();
       ok = true;
    }
