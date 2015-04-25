@@ -413,7 +413,7 @@ void CollisionDetect::process(const LCreal dt)
                // Did we collide at the closest point?
                if (r2 <= cr2) {
                   collision = true;
-                  distance = sqrt(r2);
+                  distance = std::sqrt(r2);
                }
             }
          }

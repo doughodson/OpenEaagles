@@ -832,7 +832,7 @@ bool Autopilot::processModeFollowTheLead()
       // ---
       // Compute total velocity
       // ---
-      double vt = sqrt(vx*vx + vy*vy);
+      double vt = std::sqrt(vx*vx + vy*vy);
 
       // ---
       // Compute normalized velocity vector giving us only
@@ -854,7 +854,7 @@ bool Autopilot::processModeFollowTheLead()
       // ---
       // Compute commanded heading, velocity and altitude
       // ---
-      double dhdg = atan2(uy,ux);
+      double dhdg = std::atan2(uy,ux);
       double chhdg = Basic::Angle::aepcdRad(dhdg + leadHdg);
       setCommandedHeadingD( chhdg * Basic::Angle::R2DCC );
 
@@ -922,7 +922,7 @@ bool Autopilot::processModeFollowTheLead()
 //      // ---
 //      // Bearing to mirror point (degs)
 //      // ---
-//      double relBrgDeg = atan2(orbitOffsetFt, -orbitLengthFt) * Basic::Angle::R2DCC;
+//      double relBrgDeg = std::atan2(orbitOffsetFt, -orbitLengthFt) * Basic::Angle::R2DCC;
 //      double trueBrgDeg = 0;
 //      if (ccwFlg) {
 //         // Counter-clockwise (left) turn

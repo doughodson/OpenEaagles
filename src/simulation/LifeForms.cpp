@@ -10,6 +10,8 @@
 #include "openeaagles/basic/osg/Matrix"
 #include "openeaagles/basic/units/Angles.h"
 
+#include <cmath>
+
 namespace Eaagles {
 namespace Simulation {
 
@@ -85,7 +87,7 @@ bool LifeForm::setActionState(const int x)
 
 void LifeForm::reset()
 {
-   // do our resetting first 
+   // do our resetting first
    if (isLocalPlayer()) {
       actionState = UPRIGHT_STANDING;
       lookAngle = 0;
@@ -144,13 +146,13 @@ bool LifeForm::setVelocity(const LCreal ue, const LCreal ve, const LCreal we)
     // based on our velocity, we will run or walk, or stand still
     LCreal tempX = lcAbs(ue);
     LCreal tempY = lcAbs(ve);
-    
+
     // we only change our appearance bit if we are parachuting
-    if (actionState != PARACHUTING) {    
+    if (actionState != PARACHUTING) {
         // test for running and walking
         if (tempX == 0 && tempY == 0) actionState = UPRIGHT_STANDING;
         if (tempX > 0 || tempY > 0) actionState = UPRIGHT_WALKING;
-        if (tempX > 8 || tempY > 8) actionState = UPRIGHT_RUNNING; 
+        if (tempX > 8 || tempY > 8) actionState = UPRIGHT_RUNNING;
     }
 
     return ok;
@@ -196,7 +198,7 @@ void LifeForm::look(const LCreal up, const LCreal sdws)
             LCreal tempSdws = sdws;
             LCreal tempUp = up;
             if (lcAbs(tempSdws) < 0.00005f) tempSdws = 0;
-            if (lcAbs(tempUp) < 0.05f) tempUp = 0;    
+            if (lcAbs(tempUp) < 0.05f) tempUp = 0;
             hdg += tempSdws;
             hdg = lcAepcRad(hdg);
             // we don't change our pitch when we look up and down, we only change our look angle, so we have to keep
@@ -235,7 +237,7 @@ void LifeForm::look(const LCreal up, const LCreal sdws)
                                 vecPos = tgtPos - myPos;
                                 az = lcAtan2(vecPos.y(), vecPos.x());
                                 range = (vecPos.x() * vecPos.x() + vecPos.y() * vecPos.y());
-                                range = sqrt(range);
+                                range = std::sqrt(range);
                                 // now get our elevation
                                 el = lcAtan2(-vecPos.z(), range);
                                 diffAz = lcAbs(lcAepcRad(az - static_cast<LCreal>(getHeadingR())));
@@ -265,7 +267,7 @@ void LifeForm::look(const LCreal up, const LCreal sdws)
                 osg::Vec3 vecPos = tgtPlayer->getPosition() - getPosition();
                 LCreal az = lcAtan2(vecPos.y(), vecPos.x());
                 LCreal range = (vecPos.x() * vecPos.x() + vecPos.y() * vecPos.y());
-                range = sqrt(range);
+                range = std::sqrt(range);
                 // now get our elevation
                 LCreal el = lcAtan2(-vecPos.z(), range);
                 // now force that on us

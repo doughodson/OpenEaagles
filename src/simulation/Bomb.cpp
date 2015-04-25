@@ -4,6 +4,8 @@
 #include "openeaagles/basic/Number.h"
 #include "openeaagles/basic/units/Distances.h"
 
+#include <cmath>
+
 namespace Eaagles {
 namespace Simulation {
 
@@ -23,7 +25,7 @@ BEGIN_SLOTTABLE(Bomb)
     "dragIndex",        // 7: drag index used by default dynamics
 END_SLOTTABLE(Bomb)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(Bomb)
    ON_SLOT( 1, setSlotArmingOption, Basic::Identifier)
    ON_SLOT( 2, setSlotNoseFuze,     Basic::Number)
@@ -334,7 +336,7 @@ void Bomb::weaponDynamics(const LCreal dt)
    // ---
    // Compute Euler angles
    // ---
-   LCreal vg = sqrt(ve1[INORTH]*ve1[INORTH] + ve1[IEAST]*ve1[IEAST]);
+   LCreal vg = std::sqrt(ve1[INORTH]*ve1[INORTH] + ve1[IEAST]*ve1[IEAST]);
    LCreal newPsi   = lcAtan2(ve1[IEAST],ve1[INORTH]);
    LCreal newTheta = lcAtan2( -ve1[IDOWN], vg );
 
@@ -530,7 +532,7 @@ std::ostream& Bomb::serialize(std::ostream& sout, const int i, const bool slotsO
       indent(sout,i+j);
       sout << "tailFuze: true" << std::endl;
    }
-   
+
    if ( getFuzeAltitude() != 0.0f ) {
       indent(sout,i+j);
       sout << "fuzeAltitude: " << getFuzeAltitude() << std::endl;

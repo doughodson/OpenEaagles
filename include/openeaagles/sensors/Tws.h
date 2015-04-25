@@ -10,7 +10,7 @@
 namespace Eaagles {
 namespace Sensor {
 
-class Tws : public Simulation::Radar  
+class Tws : public Simulation::Radar
 {
     DECLARE_SUBCLASS(Tws,Simulation::Radar)
 

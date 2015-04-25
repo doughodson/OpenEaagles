@@ -14,6 +14,8 @@
 #include "openeaagles/basic/Nav.h"
 #include "openeaagles/basic/units/Distances.h"
 
+#include <cmath>
+
 namespace Eaagles {
 namespace Simulation {
 
@@ -200,7 +202,7 @@ bool IrAtmosphere::calculateAtmosphereContribution(IrQueryMsg* const msg, LCreal
             double dh2 = distEC2 - er2;
 
             // the distance and the tangent of the angle to the horizon
-            hDist = sqrt(dh2);
+            hDist = std::sqrt(dh2);
             hTanAng = ( hDist / er ); // positive angles are below level (down)
             viewAngleToHorizon = lcAtan(hTanAng);
         }

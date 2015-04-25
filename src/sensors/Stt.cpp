@@ -14,6 +14,8 @@
 #include "openeaagles/basic/units/Times.h"
 #include "openeaagles/basic/units/Frequencies.h"
 
+#include <cmath>
+
 namespace Eaagles {
 namespace Sensor {
 
@@ -53,7 +55,7 @@ void Stt::dynamics(const LCreal dt)
     // Update the antenna's Reference position
     // ---
     Simulation::TrackManager* tm = getTrackManager();
-    if (getAntenna() != 0 && getOwnship() != 0 && tm != 0) {
+    if (getAntenna() != nullptr && getOwnship() != 0 && tm != nullptr) {
 
         double az = 0.0;
         double el = 0.0;
@@ -77,9 +79,9 @@ void Stt::dynamics(const LCreal dt)
             double z = dpoi[Simulation::Player::IDOWN];
 
             // Compute az & el to track
-            double grng = sqrt(x*x + y*y);
-            az = atan2(y,x);
-            el = atan2(-z,grng);
+            double grng = std::sqrt(x*x + y*y);
+            az = std::atan2(y,x);
+            el = std::atan2(-z,grng);
 
             // Get current antenna limits
             double leftLim, rightLim;

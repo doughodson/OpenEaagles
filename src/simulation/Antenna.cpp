@@ -680,13 +680,13 @@ bool Antenna::onRfEmissionEvent(Emission* const em)
                double ra2 = xa*xa + ya*ya;
 
                // Compute range along antenna x-y plane
-               double ra = sqrt(ra2);
+               double ra = std::sqrt(ra2);
 
                // Compute azimuth off boresight
-               double aazr = atan2(ya,xa);
+               double aazr = std::atan2(ya,xa);
 
                // Compute elevation off boresight
-               double aelr = atan2(za,ra);
+               double aelr = std::atan2(za,ra);
 
                // Lookup gain in 2D table and convert from dB
                if (gainPatternDeg)

@@ -13,6 +13,8 @@
 #include "openeaagles/basic/units/Distances.h"
 #include "openeaagles/basic/PairStream.h"
 
+#include <cmath>
+
 namespace Eaagles {
 namespace Simulation {
 
@@ -260,7 +262,7 @@ bool Bullet::checkForTargetHit()
                             vecPos = tgtPos - myPos;
                             //az = lcAtan2(vecPos.y(), vecPos.x());
                             range = (vecPos.x() * vecPos.x() + vecPos.y() * vecPos.y());
-                            range = sqrt(range);
+                            range = std::sqrt(range);
                             if (range < maxRange) {
                                 // tell this target we hit it
                                 player->processDetonation(range, this);

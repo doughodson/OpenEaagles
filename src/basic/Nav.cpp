@@ -1255,7 +1255,7 @@ bool Nav::getGeodCoords(
 
    /* calculate wp_sq */
    double wp_sq = xp_sq + yp_sq;
-   double wp = sqrt( wp_sq );
+   double wp = std::sqrt( wp_sq );
 
    /* initial guess */
    double temp_m = ellipseAsq * zp_sq + ellipseBsq * wp_sq;

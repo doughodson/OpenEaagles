@@ -1,7 +1,6 @@
 //------------------------------------------------------------------------------
 // Class: Gmti
 // Description: Very simple, Ground-Moving-Target-Indication (GMTI) mode radar
-//
 //------------------------------------------------------------------------------
 #ifndef __Eaagles_Sensor_Gmti_H__
 #define __Eaagles_Sensor_Gmti_H__

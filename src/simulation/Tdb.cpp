@@ -314,7 +314,7 @@ unsigned int Tdb::processPlayers(Basic::PairStream* const players)
       double dh2 = distEC2 - er2;
 
       // the distance and the tangent of the angle to the horizon
-      hDist = sqrt(dh2);
+      hDist = std::sqrt(dh2);
       hTanAng = ( hDist / earthRadius ); // positive angles are below level (down)
    }
 
@@ -370,7 +370,7 @@ unsigned int Tdb::processPlayers(Basic::PairStream* const players)
             // Compute the tangent of the angle from our local level to
             // the target (positive angles are down)
             double tanTgtAng = 999999.9; // initial tangent (down)
-            double xyRng = sqrt(losNED[0]*losNED[0] + losNED[1]*losNED[1]);
+            double xyRng = std::sqrt(losNED[0]*losNED[0] + losNED[1]*losNED[1]);
             if (xyRng > 0) tanTgtAng = losNED[2]/xyRng;
             else if (losNED[2] <= 0) tanTgtAng = -999999.9; // up
 
