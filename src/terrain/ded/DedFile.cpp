@@ -29,7 +29,7 @@ struct DedStdHdr {
 
    DedStdHdr() {
       len = 0;
-      for (unsigned int i = 0; i <  4; i++) { id[i] = '0'; }
+      for (unsigned int i = 0; i <  4; i++) { id[i]     = '0'; }
       for (unsigned int i = 0; i <  8; i++) { part[i]   = '0'; rev[i]    = '0'; }
       for (unsigned int i = 0; i < 26; i++) { create[i] = '0'; update[i] = '0'; }
       for (unsigned int i = 0; i < 52; i++) { spare[i]  = '0'; }
@@ -37,7 +37,7 @@ struct DedStdHdr {
 
    DedStdHdr(const DedStdHdr& org) {
       len = org.len;
-      for (unsigned int i = 0; i <  4; i++) { id[i] = org.id[i]; }
+      for (unsigned int i = 0; i <  4; i++) { id[i]     = org.id[i]; }
       for (unsigned int i = 0; i <  8; i++) { part[i]   = org.part[i];   rev[i]    = org.rev[i]; }
       for (unsigned int i = 0; i < 26; i++) { create[i] = org.create[i]; update[i] = org.update[i]; }
       for (unsigned int i = 0; i < 52; i++) { spare[i]  = org.spare[i]; }
@@ -78,29 +78,29 @@ struct DedCellHdr {
    float deltax, deltay;      // actual distance between points in feet
 
    DedCellHdr() {
-      latstart = 0;
-      latend = 0;
-      longstart = 0;
-      longend = 0;
-      deltalat = 0;
-      deltalong = 0;
-      nptlat = 0;
-      nptlong = 0;
-      deltax = 0;
-      deltay = 0;
+      latstart  = 0.0;
+      latend    = 0.0;
+      longstart = 0.0;
+      longend   = 0.0;
+      deltalat  = 0.0;
+      deltalong = 0.0;
+      nptlat    = 0.0;
+      nptlong   = 0.0;
+      deltax    = 0.0;
+      deltay    = 0.0;
    }
 
    DedCellHdr(const DedCellHdr& org) {
-      latstart = org.latstart;
-      latend = org.latend;
+      latstart  = org.latstart;
+      latend    = org.latend;
       longstart = org.longstart;
-      longend = org.longend;
-      deltalat = org.deltalat;
+      longend   = org.longend;
+      deltalat  = org.deltalat;
       deltalong = org.deltalong;
-      nptlat = org.nptlat;
-      nptlong = org.nptlong;
-      deltax = org.deltax;
-      deltay = org.deltay;
+      nptlat    = org.nptlat;
+      nptlong   = org.nptlong;
+      deltax    = org.deltax;
+      deltay    = org.deltay;
    }
 };
 
@@ -113,7 +113,7 @@ static const double DEG_TO_RAD   = 0.017453292;
 static const char* const SS_STDID = "SSYS";
 static const char* const PARTNO  = "DMA1";
 static const char* const REVNO   = "V1.0";
-static const LCreal NUM_SECS_PER_DEG_10 = 36000.0f;   // # seconds in a degree * 10.0
+static const LCreal NUM_SECS_PER_DEG_10 = 36000.0;    // # seconds in a degree * 10.0
 
 //------------------------------------------------------------------------------
 // Constructor
@@ -122,9 +122,9 @@ DedFile::DedFile()
 {
    STANDARD_CONSTRUCTOR()
 
-   stdhdr = 0;
-   fstat = 0;
-   cells = 0;
+   stdhdr = nullptr;
+   fstat = nullptr;
+   cells = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -135,32 +135,32 @@ void DedFile::copyData(const DedFile& org, const bool cc)
    BaseClass::copyData(org);
 
    if (cc) {
-      stdhdr = 0;
-      fstat = 0;
-      cells = 0;
+      stdhdr = nullptr;
+      fstat = nullptr;
+      cells = nullptr;
    }
 
    clearHeaders();
 
    // Copy the headers and data (in order)
-   if (org.stdhdr != 0) {
+   if (org.stdhdr != nullptr) {
 
       // First the standard header
       stdhdr = new DedStdHdr(*org.stdhdr);
 
-      if (org.fstat != 0) {
+      if (org.fstat != nullptr) {
          // Next, the stats header
          fstat = new DedStats(*org.fstat);
 
-         if (cells != 0) {
+         if (cells != nullptr) {
             // Now the Cells
 
             // allocated and clear the cell pointers
             cells = new DedCellHdr*[fstat->ncell];
             for (unsigned int i = 0; i < fstat->ncell; i++) {
                // Copy the cell headers
-               if (org.cells[i] != 0) cells[i] = new DedCellHdr(*org.cells[i]);
-               else cells[i] = 0;
+               if (org.cells[i] != nullptr) cells[i] = new DedCellHdr(*org.cells[i]);
+               else cells[i] = nullptr;
             }
 
          } // end cells check
@@ -184,9 +184,8 @@ void DedFile::deleteData()
 // Has the data been loaded
 bool DedFile::isDataLoaded() const
 {
-   return BaseClass::isDataLoaded() && (cells != 0);
+   return BaseClass::isDataLoaded() && (cells != nullptr);
 }
-
 
 //------------------------------------------------------------------------------
 // Load the data file
@@ -236,7 +235,7 @@ bool DedFile::getFileHeaders( std::istream& in )
 
    // Read file header
    stdhdr = new DedStdHdr();
-   in.read( (char*) stdhdr, sizeof(DedStdHdr) );
+   in.read( reinterpret_cast<char*>(stdhdr), sizeof(DedStdHdr) );
    if (in.fail() || in.gcount() < sizeof(DedStdHdr)) {
       if (isMessageEnabled(MSG_ERROR)) {
       std::cerr << "DedFile::getFileHeaders: invalid standard header.";
@@ -297,7 +296,7 @@ bool DedFile::getFileHeaders( std::istream& in )
       if (ok) {
          // Read file header
          fstat = new DedStats();
-         in.read( (char*) fstat, sizeof(DedStats) );
+         in.read( reinterpret_cast<char*>(fstat), sizeof(DedStats) );
          if (in.fail() || in.gcount() < sizeof(DedStats)) {
             if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "DedFile::getFileHeaders: invalid statistics header.";
@@ -329,13 +328,13 @@ bool DedFile::getFileHeaders( std::istream& in )
             // allocated and clear the cell pointers
             cells = new DedCellHdr*[fstat->ncell];
             for (unsigned int i = 0; i < fstat->ncell; i++) {
-               cells[i] = 0;
+               cells[i] = nullptr;
             }
 
             // Read the cell headers
             for (unsigned int i = 0; i < fstat->ncell && ok; i++) {
                cells[i] = new DedCellHdr();
-               in.read( (char*) cells[i], sizeof(DedCellHdr) );
+               in.read( reinterpret_cast<char*>(cells[i]), sizeof(DedCellHdr) );
                if (in.fail() || in.gcount() < sizeof(DedCellHdr)) {
                    if (isMessageEnabled(MSG_ERROR)) {
                        std::cerr << "DedFile::getFileHeaders: invalid cell headers.";
@@ -346,7 +345,7 @@ bool DedFile::getFileHeaders( std::istream& in )
 
                // Byte-swap
                if (ok) {
-                  float fTemp = 0;
+                  float fTemp = 0.0;
                   Basic::NetHandler::fromNetOrder(&fTemp, cells[i]->latstart);
                   cells[i]->latstart = fTemp;
                   Basic::NetHandler::fromNetOrder(&fTemp, cells[i]->latend);
@@ -381,7 +380,7 @@ bool DedFile::getFileHeaders( std::istream& in )
             }
 
             // Pass our data to the baseclass
-            if (ok && cells[0] != 0) {
+            if (ok && cells[0] != nullptr) {
                if (cells[0]->latstart <= cells[0]->latend) {
                   setLatitudeNE( cells[0]->latend );
                   setLatitudeSW( cells[0]->latstart );
@@ -435,8 +434,8 @@ bool DedFile::getData( std::istream& in )
       }
 
       // reset min/max elevations
-      LCreal minElev0 = 99999;
-      LCreal maxElev0 = 0;
+      LCreal minElev0 = 99999.0;
+      LCreal maxElev0 = 0.0;
 
       // Read in the data
       const int NUM_BYTES_IN_COL = sizeof(short) * N;
@@ -493,24 +492,24 @@ bool DedFile::getData( std::istream& in )
 void DedFile::clearHeaders()
 {
    // Delete the cell headers
-   if (cells != 0 && fstat != 0) {
+   if (cells != nullptr && fstat != nullptr) {
       for (unsigned int i = 0; i < fstat->ncell; i++) {
-         if (cells[i] != 0) delete cells[i];
+         if (cells[i] != nullptr) delete cells[i];
       }
       delete cells;
-      cells = 0;
+      cells = nullptr;
    }
 
    // Delete the Statistics header
-   if (fstat != 0) {
+   if (fstat != nullptr) {
       delete fstat;
-      fstat = 0;
+      fstat = nullptr;
    }
 
    // Delete the standard header
-   if (stdhdr != 0) {
+   if (stdhdr != nullptr) {
       delete stdhdr;
-      stdhdr = 0;
+      stdhdr = nullptr;
    }
 }
 

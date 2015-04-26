@@ -24,7 +24,7 @@ QuadMap::QuadMap()
 
    numDataFiles = 0;
    for (unsigned int i = 0; i < MAX_DATA_FILES; i++) {
-      dataFiles[i] = 0;
+      dataFiles[i] = nullptr;
    }
 }
 
@@ -40,7 +40,7 @@ void QuadMap::copyData(const QuadMap& org, const bool cc)
    if (cc) {
       numDataFiles = 0;
       for (unsigned int i = 0; i < MAX_DATA_FILES; i++) {
-         dataFiles[i] = 0;
+         dataFiles[i] = nullptr;
       }
    }
 
@@ -81,8 +81,8 @@ bool QuadMap::isDataLoaded() const
 }
 
 unsigned int QuadMap::getNumDataFiles() const
-{ 
-    return numDataFiles; 
+{
+    return numDataFiles;
 }
 
 const Basic::Terrain* QuadMap::getDataFile(const unsigned int i)  const
@@ -109,7 +109,7 @@ unsigned int QuadMap::getElevations(
    unsigned int num = 0;
 
    // Early out tests
-   if ( elevations == 0 ||             // The elevation array wasn't provided, or
+   if ( elevations == nullptr ||       // The elevation array wasn't provided, or
         validFlags == 0 ||             // the valid flag array wasn't provided, or
         n < 2 ||                       // there are too few points, or
         (lat < -89.0 || lat > 89.0) || // and we're not starting at the north or south poles
@@ -136,7 +136,7 @@ bool QuadMap::getElevation(
    ) const
 {
 
-   // Early out tests 
+   // Early out tests
    if ( !isDataLoaded() ||          // Not loaded or
         (lat < getLatitudeSW()  ||
          lat > getLatitudeNE()) ||  // wrong latitude or
@@ -145,15 +145,15 @@ bool QuadMap::getElevation(
         ) return false;
 
 
-   LCreal value = 0;          // the elevation (meters)
+   LCreal value = 0.0;              // the elevation (meters)
    bool found = false;
    for (unsigned int i = 0; i < numDataFiles && !found; i++) {
       found = dataFiles[i]->getElevation(&value, lat, lon, interp);
    }
 
-   if (found)
+   if (found) {
       *elev = value;
-
+   }
    return found;
 }
 
@@ -169,13 +169,13 @@ void QuadMap::findDataFiles()
    // Find the DataFile objects
    {
       Basic::PairStream* subcomponents = getComponents();
-      if (subcomponents != 0) {
+      if (subcomponents != nullptr) {
          unsigned int count = 0;
          Basic::List::Item* item = subcomponents->getFirstItem();
-         while (item != 0 && count < MAX_DATA_FILES) {
+         while (item != nullptr && count < MAX_DATA_FILES) {
             Basic::Pair* pair = static_cast<Basic::Pair*>( item->getValue() );
             Basic::Terrain* dataFile = dynamic_cast<Basic::Terrain*>( pair->object() );
-            if (dataFile != 0 && dataFile->isDataLoaded()) {
+            if (dataFile != nullptr && dataFile->isDataLoaded()) {
                dataFile->ref();
                dataFiles[count] = dataFile;
                count++;
@@ -184,14 +184,14 @@ void QuadMap::findDataFiles()
          }
          numDataFiles = count;
          subcomponents->unref();
-         subcomponents = 0;
+         subcomponents = nullptr;
       }
    }
 
    // Find the max/min elevations and the corner points
    if (numDataFiles > 0) {
-      LCreal elevMin =  999999.0f;
-      LCreal elevMax = -999999.0f;
+      LCreal elevMin =  999999.0;
+      LCreal elevMax = -999999.0;
       double lowerLat = 90.0;
       double lowerLon = 180.0;
       double upperLat = -90.0;
@@ -246,12 +246,12 @@ void QuadMap::findDataFiles()
 bool QuadMap::setDataFile(const unsigned int i, Basic::Terrain* newDF)
 {
     if (i < MAX_DATA_FILES && newDF != 0 ) {
-        if (dataFiles[i] == 0) {
+        if (dataFiles[i] == nullptr) {
             dataFiles[i] = newDF;
             dataFiles[i]->ref();
             // make sure we increment our # of data files, since this is a new one!
             numDataFiles++;
-        }    
+        }
         else {
             dataFiles[i]->unref();
             dataFiles[i] = newDF;
@@ -266,7 +266,7 @@ bool QuadMap::setDataFile(const unsigned int i, Basic::Terrain* newDF)
 //------------------------------------------------------------------------------
 bool QuadMap::loadData()
 {
-   // We're not loading data -- 
+   // We're not loading data --
    // but we contain component DataFile objects that will.
    return true;
 }
@@ -277,9 +277,9 @@ bool QuadMap::loadData()
 void QuadMap::clearData()
 {
    for (unsigned int i = 0; i < MAX_DATA_FILES; i++) {
-      if (dataFiles[i] != 0) {
+      if (dataFiles[i] != nullptr) {
          dataFiles[i]->unref();
-         dataFiles[i] = 0;
+         dataFiles[i] = nullptr;
       }
    }
    numDataFiles = 0;

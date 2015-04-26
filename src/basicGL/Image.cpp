@@ -648,7 +648,7 @@ bool Image::writeFileTGA(const char* const filename)
 
    if (f->is_open()) {
       // Write the header values
-      f->write( (char*) &TargaHead, sizeof(TargaHead));
+      f->write( reinterpret_cast<char*>(&TargaHead), sizeof(TargaHead));
 
       // Write the pixel data to the file
       for (unsigned int j = 0; j < height; j++) {

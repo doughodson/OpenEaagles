@@ -345,7 +345,7 @@ bool CadrgFile::initialize(const char* dir)
     toc.read(reinterpret_cast<char*>(&byte), sizeof(byte));
     head.endian = (byte != 0);
 
-    toc.read((char*) &head.hdrSectionLength, sizeof(head.hdrSectionLength));
+    toc.read(reinterpret_cast<char*>(&head.hdrSectionLength), sizeof(head.hdrSectionLength));
     // If we are using big endian encoding, we swap our bytes on uints and ushorts
     if (!head.endian) swap(reinterpret_cast<unsigned char*>(&head.hdrSectionLength), sizeof(head.hdrSectionLength));
     toc.read(reinterpret_cast<char*>(head.filename), sizeof(head.filename));

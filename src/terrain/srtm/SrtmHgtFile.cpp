@@ -116,13 +116,13 @@ bool SrtmHgtFile::loadData()
     // Compute the filename (why can't we be given just one filename string!??)
     std::string temp_filename;
     const char* p = getPathname();
-    if (p != 0)
+    if (p != nullptr)
     {
         temp_filename += p;
         temp_filename += '/';
     }
     p = getFilename();
-    if (p != 0)
+    if (p != nullptr)
         temp_filename += p;
 
     std::string srtmFilename(p);
@@ -134,7 +134,7 @@ bool SrtmHgtFile::loadData()
     if ( in.fail() )
     {
         if (isMessageEnabled(MSG_ERROR)) {
-        std::cerr << "SrtmHgtFile::loadData() ERROR, could not open file: " << filename << std::endl;
+            std::cerr << "SrtmHgtFile::loadData() ERROR, could not open file: " << filename << std::endl;
         }
         return false;
     }
@@ -148,7 +148,7 @@ bool SrtmHgtFile::loadData()
         clearData();
         in.close();
         if (isMessageEnabled(MSG_ERROR)) {
-        std::cerr << "SrtmHgtFile::loadData() ERROR in determining SRTM type: " << filename << std::endl;
+            std::cerr << "SrtmHgtFile::loadData() ERROR in determining SRTM type: " << filename << std::endl;
         }
         return false;
     }
@@ -159,7 +159,7 @@ bool SrtmHgtFile::loadData()
         clearData();
         in.close();
         if (isMessageEnabled(MSG_ERROR)) {
-        std::cerr << "SrtmHgtFile::loadData() ERROR reading data from file: " << filename << std::endl;
+            std::cerr << "SrtmHgtFile::loadData() ERROR reading data from file: " << filename << std::endl;
         }
         return false;
     }
@@ -232,7 +232,7 @@ bool SrtmHgtFile::readSrtmData(std::istream& in)
     if (nptlat < 1 || nptlong < 1)
     {
         if (isMessageEnabled(MSG_ERROR)) {
-        std::cerr << "SrtmHgtFile::readSrtmData: SRTM headers indicate an empty file." << std::endl;
+            std::cerr << "SrtmHgtFile::readSrtmData: SRTM headers indicate an empty file." << std::endl;
         }
         return false;
     }
@@ -250,16 +250,16 @@ bool SrtmHgtFile::readSrtmData(std::istream& in)
         //unsigned long checksum = 0;
 
         // Read elevation values for record
-        LCreal minElev0 = 99999;
-        LCreal maxElev0 = 0;
+        LCreal minElev0 = 99999.0;
+        LCreal maxElev0 = 0.0;
         for(unsigned int lon=0; lon<nptlong; lon++)
         {
             unsigned char values[2];
-            in.read((char*)values, sizeof(values));
+            in.read(reinterpret_cast<char*>(values), sizeof(values));
             if (in.fail() || in.gcount() < sizeof(values))
             {
                 if (isMessageEnabled(MSG_ERROR)) {
-                std::cerr << "SrtmHgtFile::readSrtmData: error reading data value." << std::endl;
+                    std::cerr << "SrtmHgtFile::readSrtmData: error reading data value." << std::endl;
                 }
                 return false;
             }
@@ -285,16 +285,12 @@ bool SrtmHgtFile::readSrtmData(std::istream& in)
 //------------------------------------------------------------------------------
 short SrtmHgtFile::readValue(const unsigned char hbyte, const unsigned char lbyte)
 {
-    short height;
-    short sign_val;
-    unsigned char nhbyte;
-
     // The data is stored as 2 byte characters (sign and magnitude)
     // with high byte first.  The high bit is the sign bit.  Check for
     // sign bit and then turn it off and set SIGN_VAL accordingly.
-    height   = 0;
-    sign_val = 1;
-    nhbyte   = hbyte;
+    short height = 0;
+    short sign_val = 1;
+    unsigned char nhbyte = hbyte;
 
     if (hbyte & ~0177)
     {
@@ -302,7 +298,7 @@ short SrtmHgtFile::readValue(const unsigned char hbyte, const unsigned char lbyt
         nhbyte   = hbyte & 0177;
         sign_val = -1;
     }
-    height = (256 * (short)nhbyte + (short)lbyte) * sign_val;
+    height = (256 * static_cast<short>(nhbyte) + static_cast<short>(lbyte)) * sign_val;
 
     return height;
 }

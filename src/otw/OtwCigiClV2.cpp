@@ -471,7 +471,7 @@ int OtwCigiClV2::updateModels()
 
         // For all active models in the table ...
         for (unsigned short i = 0; i < getModelTableSize(); i++) {
-            SPtr<OtwModelCigiClV2> model( (OtwModelCigiClV2*) table[i] );
+            Basic::safe_ptr<OtwModelCigiClV2> model( (OtwModelCigiClV2*) table[i] );
             if (model != nullptr) {
 
                if (model->getState() != Simulation::OtwModel::INACTIVE) {
@@ -505,7 +505,7 @@ int OtwCigiClV2::updateModels()
                      setBuildingData(model, entity, (const Simulation::Building*) player);
                   }
                   else if (player->isMajorType(Simulation::Player::WEAPON)) {
-                     const Simulation::Effects* effect      = dynamic_cast<const Simulation::Effects*>(model->getPlayer());
+                     const Simulation::Effects* effect   = dynamic_cast<const Simulation::Effects*>(model->getPlayer());
                      const Simulation::Missile* msl      = dynamic_cast<const Simulation::Missile*>(model->getPlayer());
                      const Simulation::Weapon* wpn       = dynamic_cast<const Simulation::Weapon*>(model->getPlayer());
                      if (effect != nullptr) // Effects before general weapons (because effects are also weapons)
@@ -1634,7 +1634,7 @@ bool OtwCigiClV2::sendCigiData()
             int sendSize = cigi->getOutgoingBufferSize();
             int maxAge = getModelTableSize();
             for (unsigned short i = 0; i < getModelTableSize() && sendSize < (MAX_BUF_SIZE - padding); i++) {
-                SPtr<OtwModelCigiClV2> model( (OtwModelCigiClV2*) table[i] );
+                Basic::safe_ptr<OtwModelCigiClV2> model( (OtwModelCigiClV2*) table[i] );
                 if (model != nullptr) {
 
                   // For all active models in the table ...
@@ -1725,8 +1725,8 @@ bool OtwCigiClV2::sendCigiData()
 
             // For all active elevation requests in the table ...
             // -- look for the oldest request ---
-            SPtr<OtwModelCigiClV2> oldest( nullptr );
-            SPtr<OtwModelCigiClV2> model( nullptr );
+            Basic::safe_ptr<OtwModelCigiClV2> oldest( nullptr );
+            Basic::safe_ptr<OtwModelCigiClV2> model( nullptr );
             for (unsigned short i = 0; i < getElevationTableSize(); i++) {
                 model = table[i];
                 if (model != nullptr) {
@@ -1951,7 +1951,7 @@ void OtwCigiClV2::hotResp(const CigiHotRespV2* const p)
         unsigned short id = p->GetHatHotID();
         //std::cout << "hotResp: id = " << id << std::endl;
         OtwModelCigiClV2** const table = (OtwModelCigiClV2**) getElevationTable();
-        SPtr<OtwModelCigiClV2> model(nullptr);
+        Basic::safe_ptr<OtwModelCigiClV2> model(nullptr);
         for (unsigned int i = 0; i < getElevationTableSize() && model == nullptr; i++) {
            if (table[i]->getID() == id) model = table[i];
         }
@@ -2544,7 +2544,7 @@ void CigiClV2Network::mainLoop()
       while (ok) {
          msgIn->AdvanceCrntBuffer();
          unsigned char* rcvbuff = msgIn->GetMsgBuffer();
-         int recvCnt = netInput->recvData((char*) rcvbuff, MAX_BUF_SIZE);
+         int recvCnt = netInput->recvData(reinterpret_cast<char*>(rcvbuff), MAX_BUF_SIZE);
 
          if (recvCnt > 0) {
             msgIn->SetCrntMsgSize(recvCnt);

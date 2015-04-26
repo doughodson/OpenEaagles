@@ -24,7 +24,7 @@ DataFile::DataFile()
 {
    STANDARD_CONSTRUCTOR()
 
-   columns = 0;
+   columns = nullptr;
 
    latSpacing = 0;
    lonSpacing = 0;
@@ -41,7 +41,7 @@ void DataFile::copyData(const DataFile& org, const bool cc)
    BaseClass::copyData(org);
 
    if (cc) {
-      columns = 0;
+      columns = nullptr;
       nptlat = 0;
       nptlong = 0;
    }
@@ -54,19 +54,19 @@ void DataFile::copyData(const DataFile& org, const bool cc)
    latSpacing = org.latSpacing;
    lonSpacing = org.lonSpacing;
 
-   if (org.columns != 0 && org.nptlat > 0 && org.nptlong > 0) {
+   if (org.columns != nullptr && org.nptlat > 0 && org.nptlong > 0) {
 
       // Allocate memory space for the elevation data and copy the data
       columns = new short*[nptlong];
       for (unsigned int i = 0; i < nptlong; i++) {
-         if (org.columns[i] != 0) {
+         if (org.columns[i] != nullptr) {
             columns[i] = new short[nptlat];
             for (unsigned int j = 0; j < nptlat; j++) {
                columns[i][j] = org.columns[i][j];
             }
          }
          else {
-            columns[i] = 0;
+            columns[i] = nullptr;
          }
       }
 
@@ -109,7 +109,7 @@ unsigned int DataFile::getNumLonPoints() const
 // Spacing between latitude points (degs), or zero if the data isn't loaded
 double DataFile::getLatSpacing() const
 {
-   double v = 0;
+   double v = 0.0;
    if (isDataLoaded()) {
       v = latSpacing;
    }
@@ -119,7 +119,7 @@ double DataFile::getLatSpacing() const
 // Spacing between longitude points (degs), or zero if the data isn't loaded
 double DataFile::getLonSpacing() const
 {
-   double v = 0;
+   double v = 0.0;
    if (isDataLoaded()) {
       v = lonSpacing;
    }
@@ -128,7 +128,7 @@ double DataFile::getLonSpacing() const
 
 const short* DataFile::getColumn(const unsigned int idx) const
 {
-   const short* p = 0;
+   const short* p = nullptr;
    if (isDataLoaded() && idx < getNumLonPoints()) {
       p = columns[idx];
    }
@@ -138,7 +138,7 @@ const short* DataFile::getColumn(const unsigned int idx) const
 // Has the data been loaded
 bool DataFile::isDataLoaded() const
 {
-   return (columns != 0);
+   return (columns != nullptr);
 }
 
 
@@ -160,8 +160,8 @@ unsigned int DataFile::getElevations(
    unsigned int num = 0;
 
    // Early out tests
-   if ( elevations == 0 ||             // The elevation array wasn't provided, or
-        validFlags == 0 ||             // the valid flag array wasn't provided, or
+   if ( elevations == nullptr ||       // The elevation array wasn't provided, or
+        validFlags == nullptr ||       // the valid flag array wasn't provided, or
         n < 2 ||                       // there are too few points, or
         (lat < -89.0 || lat > 89.0) || // and we're not starting at the north or south poles
         maxRng <= 0                    // the max range is less than or equal to zero
@@ -280,7 +280,6 @@ bool DataFile::getElevation(
          lon > getLongitudeNE())    // wrong longitude
         ) return false;
 
-
    // ---
    // Compute the lat and lon points
    // ---
@@ -362,7 +361,9 @@ bool DataFile::computerRowIndex(unsigned int* const irow, const double lat) cons
    if (points < 0) points = 0;
 
    unsigned int idx = static_cast<unsigned int>(points + 0.5);
-   if (idx >= nptlat) idx = (nptlat-1);
+   if (idx >= nptlat) {
+      idx = nptlat - 1;
+   }
 
    *irow = idx;
    return true;
@@ -376,18 +377,20 @@ bool DataFile::computeColumnIndex(unsigned int* const icol, const double lon) co
 {
    // Early out tests
    if (  (lon < getLongitudeSW() ||
-          lon > getLongitudeNE()) ||       // the longitude's out of range, or
+          lon > getLongitudeNE()) ||      // the longitude's out of range, or
          (icol == 0) ||                   // the 'icol' pointer wasn't provided, or
          !isDataLoaded()                  // the data isn't loaded
       ) return false;
 
    // Locate column (longitude) index
    double points = (lon - getLongitudeSW()) / lonSpacing;
-   if (points < 0) points = 0;
-
+   if (points < 0) {
+      points = 0.0;
+   }
    unsigned int idx = static_cast<unsigned int>(points + 0.5);
-   if (idx >= nptlong) idx = (nptlong-1);
-
+   if (idx >= nptlong) {
+      idx = nptlong - 1;
+   }
    *icol = idx;
    return true;
 }
@@ -416,7 +419,7 @@ bool DataFile::computeLongitude(double* const lon, const unsigned int icol) cons
 {
    // Early out tests
    if ( (icol >= nptlong) ||  // the index isn't within range, or
-         (lon == 0)       ||  // the longitude pointer wasn't provided, or
+         (lon == nullptr) ||  // the longitude pointer wasn't provided, or
          !isDataLoaded()      // the data isn't loaded
       ) return false;
 
@@ -430,17 +433,17 @@ bool DataFile::computeLongitude(double* const lon, const unsigned int icol) cons
 void DataFile::clearData()
 {
    // Delete the columns of data
-   if (columns != 0) {
+   if (columns != nullptr) {
       // Delete the columns of data
       for (unsigned int i = 0; i < nptlong; i++) {
-         if (columns[i] != 0) {
+         if (columns[i] != nullptr) {
             delete[] columns[i];
-            columns[i] = 0;
+            columns[i] = nullptr;
          }
       }
       // Delete the array of pointers to the columns of data
       delete[] columns;
-      columns = 0;
+      columns = nullptr;
    }
 
    nptlat = 0;

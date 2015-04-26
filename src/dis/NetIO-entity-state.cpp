@@ -66,7 +66,7 @@ void NetIO::processEntityStatePDU(const EntityStatePDU* const pdu)
             nib->setPlayerID(playerId);
             if (pdu->entityMarking.characterSet == 1) {
                char name[12];
-               lcStrcpy(name, 12, (char*)pdu->entityMarking.marking);
+               lcStrcpy(name, 12, reinterpret_cast<const char*>(pdu->entityMarking.marking));
                nib->setPlayerName(name);
             }
             else
