@@ -6,6 +6,8 @@
 
 #include "openeaagles/simulation/ScanGimbal.h"
 #include "openeaagles/simulation/Tdb.h"
+#include "openeaagles/basic/safe_queue.h"
+#include "openeaagles/basic/safe_stack.h"
 
 //#define USE_TDBIR
 
@@ -57,11 +59,11 @@ protected:
 
    bool shutdownNotification() override;
 
-   QStack<IrQueryMsg*> freeQueryStack;  // stack of free queries of target IR signatures
-   mutable long        freeQueryLock;   // Semaphore to protect 'freeQueryStack'
+   Basic::safe_stack<IrQueryMsg*> freeQueryStack;  // stack of free queries of target IR signatures
+   mutable long freeQueryLock;                     // Semaphore to protect 'freeQueryStack'
 
-   QQueue<IrQueryMsg*> inUseQueryQueue; // Queue of in use queries of target IR signatures
-   mutable long        inUseQueryLock;  // Semaphore to protect 'inUseQueryQueue'
+   Basic::safe_queue<IrQueryMsg*> inUseQueryQueue; // Queue of in use queries of target IR signatures
+   mutable long inUseQueryLock;                    // Semaphore to protect 'inUseQueryQueue'
 
 private:
    static const int MAX_QUERIES = 10000;   // Max size of queues and arrays

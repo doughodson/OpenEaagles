@@ -27,7 +27,7 @@ BEGIN_SLOTTABLE(Datalink)
    "trackManagerName",  // 4: Track Manager Name
 END_SLOTTABLE(Datalink)
 
-//  Map slot table 
+//  Map slot table
 BEGIN_SLOT_MAP(Datalink)
     ON_SLOT(1,setSlotRadioId,Basic::Number)
     ON_SLOT(2,setSlotMaxRange,Basic::Distance)
@@ -68,8 +68,8 @@ void Datalink::initData()
    trackManager = 0;
    tmName = 0;
 
-   inQueue = new QQueue<Basic::Object*>(MAX_MESSAGES);
-   outQueue = new QQueue<Basic::Object*>(MAX_MESSAGES);
+   inQueue = new Basic::safe_queue<Basic::Object*>(MAX_MESSAGES);
+   outQueue = new Basic::safe_queue<Basic::Object*>(MAX_MESSAGES);
 }
 
 void Datalink::copyData(const Datalink& org, const bool cc)
@@ -244,7 +244,7 @@ void Datalink::reset()
             if (obc != 0) {
                setTrackManager(obc->getTrackManagerByName(name));
             }
-        }    
+        }
         if (getTrackManager() == 0) {
             // The assigned track manager was not found!
             //if (isMessageEnabled(MSG_ERROR)) {
@@ -291,7 +291,7 @@ void Datalink::dynamics(const LCreal)
     Eaagles::Simulation::Message *msg = 0;
     while((numIn < MAX_MESSAGES) && inQueue->isNotEmpty()) {
         Eaagles::Basic::Object* tempObj = inQueue->get();
-        msg = dynamic_cast<Eaagles::Simulation::Message*>(tempObj);        
+        msg = dynamic_cast<Eaagles::Simulation::Message*>(tempObj);
         if(msg != 0) {
             if(getComputerTime() - msg->getTimeStamp() > msg->getLifeSpan()) {
                 //remove message by not adding to list to be put back into queue
@@ -316,7 +316,7 @@ void Datalink::dynamics(const LCreal)
     msg = 0;
     while((numOut < MAX_MESSAGES) && outQueue->isNotEmpty()) {
         Eaagles::Basic::Object* tempObj = outQueue->get();
-        msg = dynamic_cast<Eaagles::Simulation::Message*>(tempObj);        
+        msg = dynamic_cast<Eaagles::Simulation::Message*>(tempObj);
         if(msg != 0) {
             if(getComputerTime() - msg->getTimeStamp() > msg->getLifeSpan()) {
                 //remove message by not adding to list to be put back into queue
@@ -334,7 +334,7 @@ void Datalink::dynamics(const LCreal)
         for(int i = 0; i < numOut; i++) {
             outQueue->put(tempOutQueue[i]);
         }
-    }    
+    }
 }
 
 //------------------------------------------------------------------------------
@@ -408,7 +408,7 @@ bool Datalink::sendMessage(Basic::Object* const msg)
 }
 
 //------------------------------------------------------------------------------
-// receiveMessage() -- 
+// receiveMessage() --
 //------------------------------------------------------------------------------
 Basic::Object* Datalink::receiveMessage()
 {
@@ -448,7 +448,7 @@ bool Datalink::queueIncomingMessage(Basic::Object* const msg)
 }
 
 //------------------------------------------------------------------------------
-// queueOutgoingMessage() -- Queue up an out going message -- 
+// queueOutgoingMessage() -- Queue up an out going message --
 //------------------------------------------------------------------------------
 bool Datalink::queueOutgoingMessage(Basic::Object* const msg)
 {

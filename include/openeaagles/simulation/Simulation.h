@@ -5,6 +5,7 @@
 #define __Eaagles_Simulation_Simulation_H__
 
 #include "openeaagles/basic/Component.h"
+#include "openeaagles/basic/safe_queue.h"
 
 namespace Eaagles {
    namespace Basic { class Distance; class EarthModel; class LatLon; class Pair; class Time; class Terrain; }
@@ -286,17 +287,17 @@ public:
 
     DataRecorder* getDataRecorder();               // Returns the data recorder
 
-    Station* getStation();                                // Returns our Station
-    const Station* getStation() const;                    // Returns our Station (const version)
+    Station* getStation();                         // Returns our Station
+    const Station* getStation() const;             // Returns our Station (const version)
 
-    Player* findPlayer(const short id, const int netID = 0);   // Find a player by player (and network) ID
+    Player* findPlayer(const short id, const int netID = 0);             // Find a player by player (and network) ID
     const Player* findPlayer(const short id, const int netID = 0) const; // Find a player by player (and network) ID (const version)
 
-    Player* findPlayerByName(const char* const playerName);    // Find a player by name
+    Player* findPlayerByName(const char* const playerName);             // Find a player by name
     const Player* findPlayerByName(const char* const playerName) const; // Find a player by name (const version)
 
     virtual bool addNewPlayer(const char* const playerName, Player* const player); // Add a new player
-    virtual bool addNewPlayer(Basic::Pair* const player);      // Add a new player (pair: name, player)
+    virtual bool addNewPlayer(Basic::Pair* const player);                          // Add a new player (pair: name, player)
 
     virtual bool setInitialSimulationTime(const long time);    // Sets the initial simulated time (sec; or less than zero to slave to UTC)
 
@@ -324,7 +325,7 @@ public:
     );
 
 protected:
-    virtual void updatePlayerList();                  // Update the current player list
+    virtual void updatePlayerList();                  // Updates the current player list
     bool setSlotPlayers(Basic::PairStream* const msg);
 
     Basic::Terrain* getTerrain();                     // Returns the terrain elevation database
@@ -416,28 +417,28 @@ private:
    unsigned short eventWpnID;    // Weapon event ID
    unsigned short relWpnId;      // Current released weapon ID
 
-   QQueue<Basic::Pair*> newPlayerQueue;   // Queue of new players
+   Basic::safe_queue<Basic::Pair*> newPlayerQueue;   // Queue of new players
 
    IrAtmosphere*          irAtmosphere; // Atmosphere data for IR algorithms
-   Basic::Terrain*        terrain;    // Terrain data
-   Dafif::AirportLoader*  airports;   // Airport loader
-   Dafif::NavaidLoader*   navaids;    // NAVAID loader
-   Dafif::WaypointLoader* waypoints;  // Waypoint loader
-   Station*               station;    // The Station that owns us (not ref()'d)
+   Basic::Terrain*        terrain;      // Terrain data
+   Dafif::AirportLoader*  airports;     // Airport loader
+   Dafif::NavaidLoader*   navaids;      // NAVAID loader
+   Dafif::WaypointLoader* waypoints;    // Waypoint loader
+   Station*               station;      // The Station that owns us (not ref()'d)
 
    // Time critical thread pool
    static const unsigned short MAX_TC_THREADS = 32;
    SimTcThread* tcThreads[MAX_TC_THREADS]; // Thread pool; 'numTcThreads' threads
-   unsigned int reqTcThreads;          // Requested number of threads
-   unsigned int numTcThreads;          // Number of threads in pool; should be (reqTcThreads - 1)
-   bool tcThreadsFailed;               // Failed to create threads.
+   unsigned int reqTcThreads;              // Requested number of threads
+   unsigned int numTcThreads;              // Number of threads in pool; should be (reqTcThreads - 1)
+   bool tcThreadsFailed;                   // Failed to create threads.
 
    // Background thread pool
    static const unsigned short MAX_BG_THREADS = 32;
    SimBgThread* bgThreads[MAX_BG_THREADS]; // Thread pool; 'reqBgThreads' threads
-   unsigned int reqBgThreads;          // Requested number of threads
-   unsigned int numBgThreads;          // Number of threads in pool; should be (reqBgThreads - 1)
-   bool bgThreadsFailed;               // Failed to create threads.
+   unsigned int reqBgThreads;              // Requested number of threads
+   unsigned int numBgThreads;              // Number of threads in pool; should be (reqBgThreads - 1)
+   bool bgThreadsFailed;                   // Failed to create threads.
 };
 
 } // End Simulation namespace

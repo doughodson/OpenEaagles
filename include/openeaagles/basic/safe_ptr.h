@@ -10,19 +10,19 @@ namespace Basic {
 //------------------------------------------------------------------------------
 // Template safe_ptr<T>
 //
-// Description: Safe shared pointer to an object of type T.
+// Description: Thread-safe shared pointer to an object of type T.
 //              Provides automatic ref() and unref() of the object.
 //
 // Example #1
 //
-//    Object* p = new Object();  // New object; ref cnt is one
+//    Object* p = new Object();         // New object; ref cnt is one
 //
-//    safe_ptr<Object> sp1( p ); // ref cnt is two
+//    Basic::safe_ptr<Object> sp1( p ); // ref cnt is two
 //
-//    safe_ptr<Object> sp2();    // 'sp2' is null
-//    sp2 = p;                   // ref cnt is three
+//    Basic::safe_ptr<Object> sp2();    // 'sp2' is null
+//    sp2 = p;                          // ref cnt is three
 //
-//    safe_ptr<Object> sp3(sp2);     // ref cnt is four
+//    Basic::safe_ptr<Object> sp3(sp2); // ref cnt is four
 //
 //    p->unref();                // ref cnt is three
 //    sp3 = 0;                   // ref cnt is two
@@ -32,12 +32,12 @@ namespace Basic {
 //
 // Example #2
 //
-//    safe_ptr<Object> sp1( new Object(), false );  // new object; ref cnt stays at one
+//    Basic::safe_ptr<Object> sp1( new Object(), false );  // new object; ref cnt stays at one
 //
 //
 // Example #3
 //
-//    safe_ptr<Object> sp1();          // 'sp1' is null
+//    Basic::safe_ptr<Object> sp1();   // 'sp1' is null
 //    sp1.set( new Object(), false );  // new object; ref cnt stays at one
 //
 //------------------------------------------------------------------------------
@@ -46,10 +46,10 @@ public:
 
    // constructors
    safe_ptr() : p(nullptr), semaphore(0) {}
-   safe_ptr(T* p_, const bool refThis = true) : p(p_), semaphore(0) { if (p != nullptr && refThis) p->ref(); }
-   safe_ptr(safe_ptr<T>& p_) : p(p_.getRefPtr()), semaphore(0) {}
+   safe_ptr(T* p_, const bool refThis = true) : p(p_), semaphore(0)  { if (p != nullptr && refThis) p->ref(); }
+   safe_ptr(safe_ptr<T>& p_) : p(p_.getRefPtr()), semaphore(0)       {}
    // destructor
-   ~safe_ptr() { if (p != nullptr) p->unref(); }
+   ~safe_ptr()                                                       { if (p != nullptr) p->unref(); }
 
    // Conversion operator to return raw pointer (T*)
    operator T*()                               { return p; }

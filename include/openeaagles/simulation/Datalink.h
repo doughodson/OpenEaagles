@@ -5,6 +5,7 @@
 #define __Eaagles_Simulation_Datalink_H__
 
 #include "openeaagles/simulation/System.h"
+#include "openeaagles/basic/safe_queue.h"
 
 namespace Eaagles {
    namespace Basic { class Distance; class Number; class String; }
@@ -48,33 +49,33 @@ public:
 
    unsigned short getRadioID() const;
 
-   CommRadio* getRadio()                        { return radio; }
-   const CommRadio* getRadio() const            { return radio; }
+   CommRadio* getRadio()                                               { return radio; }
+   const CommRadio* getRadio() const                                   { return radio; }
    virtual bool setRadio(CommRadio* const);
 
-   const Basic::String* getRadioName() const    { return radioName; }
+   const Basic::String* getRadioName() const                           { return radioName; }
    virtual bool setRadioName(const Basic::String* const name);
 
    // Max range (nm) of datalink without radio
-   double getMaxRange() const                   { return noRadioMaxRange; }
+   double getMaxRange() const                                          { return noRadioMaxRange; }
    virtual bool setMaxRange(const double nm);
 
    // Send messages to our local players; direct or via the radio (default: true)
-   bool isLocalSendEnabled() const              { return sendLocal; }
+   bool isLocalSendEnabled() const                                     { return sendLocal; }
    virtual bool setLocalSendEnabled(const bool flg);
 
    // Send messages to the network output queue (default: true)
-   bool isNetworkQueueEnabled() const           { return queueForNetwork; }
+   bool isNetworkQueueEnabled() const                                  { return queueForNetwork; }
    virtual bool setNetworkQueueEnabled(const bool flg);
 
    // For network handler to get to the messages
-   QQueue<Basic::Object*>* getOutputQueue()     { return outQueue; }
+   Basic::safe_queue<Basic::Object*>* getOutputQueue()                 { return outQueue; }
 
-   TrackManager* getTrackManager()              { return trackManager; }
-   const TrackManager* getTrackManager() const  { return trackManager; }
+   TrackManager* getTrackManager()                                     { return trackManager; }
+   const TrackManager* getTrackManager() const                         { return trackManager; }
    virtual bool setTrackManager(TrackManager* const tm);
 
-   const Basic::String* getTrackManagerName() const { return tmName; }
+   const Basic::String* getTrackManagerName() const                    { return tmName; }
    virtual bool setTrackManagerName(const Basic::String* const name);
 
    // Event handler(s)
@@ -101,9 +102,9 @@ private:
 
    static const int MAX_MESSAGES = 1000;  // Max number of messages in queues
 
-   QQueue<Basic::Object*>* inQueue;   // Received message queue
-   QQueue<Basic::Object*>* outQueue;  // Queue for messages going out over the network/DIS
-   double noRadioMaxRange;            // Max range of our datalink (NM)
+   Basic::safe_queue<Basic::Object*>* inQueue;   // Received message queue
+   Basic::safe_queue<Basic::Object*>* outQueue;  // Queue for messages going out over the network/DIS
+   double noRadioMaxRange;                       // Max range of our datalink (NM)
 
    const Basic::String* radioName;    // Name of our radio
    CommRadio* radio;                  // Our radio

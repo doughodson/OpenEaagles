@@ -5,6 +5,7 @@
 #define __Eaagles_Simulation_TrackManager_H__
 
 #include "openeaagles/simulation/System.h"
+#include "openeaagles/basic/safe_queue.h"
 
 namespace Eaagles {
 namespace Simulation {
@@ -111,8 +112,8 @@ protected:
    unsigned int        nextTrkId;          // Next track ID
    unsigned int        firstTrkId;         // First (starting) track ID
 
-   QQueue<Emission*>   emQueue;            // Emission input queue
-   QQueue<LCreal>      snQueue;            // S/N input queue.
+   Basic::safe_queue<Emission*>   emQueue; // Emission input queue
+   Basic::safe_queue<LCreal>      snQueue; // S/N input queue.
    mutable long        queueLock;          // Semaphore to protect both emQueue and snQueue
 
    // System class Interface -- phase() callbacks

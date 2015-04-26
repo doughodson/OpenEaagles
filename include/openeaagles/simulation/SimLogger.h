@@ -20,6 +20,7 @@
 #define __Eaagles_Simulation_SimLogger_H__
 
 #include "openeaagles/basic/Logger.h"
+#include "openeaagles/basic/safe_queue.h"
 
 namespace Eaagles {
    namespace Basic {
@@ -82,7 +83,7 @@ protected:
 
 private:
     static const int MAX_QUEUE_SIZE = 1000;     // Max size of the logger event queue
-    QQueue<SimLogEvent*> seQueue;               // Sim Event Queue
+    Basic::safe_queue<SimLogEvent*> seQueue;    // Sim Event Queue
 
     double          time;                       // Sim time (seconds)
     double          execTime;                   // Executive time (seconds)

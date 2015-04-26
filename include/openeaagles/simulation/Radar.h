@@ -5,6 +5,7 @@
 #define __Eaagles_Simulation_Radar_H__
 
 #include "openeaagles/simulation/RfSensor.h"
+#include "openeaagles/basic/safe_queue.h"
 
 namespace Eaagles {
 namespace Simulation {
@@ -84,8 +85,8 @@ protected: // (#temporary#) allow subclasses to access and use report queue
    mutable long myLock;
 
    // Queues
-   QQueue<Emission*>   rptQueue;       // Reporting emission queue
-   QQueue<LCreal>      rptSnQueue;     // Reporting Signal/Nose queue  (dB)
+   Basic::safe_queue<Emission*>   rptQueue;       // Reporting emission queue
+   Basic::safe_queue<LCreal>      rptSnQueue;     // Reporting Signal/Nose queue  (dB)
 
    // Reports
    Emission*   reports[MAX_REPORTS];   // Best emission for this report

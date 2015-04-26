@@ -5,6 +5,7 @@
 #define __Eaagles_Simulation_Rwr_H__
 
 #include "openeaagles/simulation/RfSensor.h"
+#include "openeaagles/basic/safe_queue.h"
 
 namespace Eaagles {
 namespace Simulation {
@@ -58,7 +59,7 @@ protected:
 private:
    void initData();
 
-   QQueue<Emission*> rptQueue;   // Report queue
+   Basic::safe_queue<Emission*> rptQueue;   // Report queue
 
    LCreal rays[2][NUM_RAYS];     // Back (sensor) buffer [0][*] and front (graphics) buffer [1][*]
 };

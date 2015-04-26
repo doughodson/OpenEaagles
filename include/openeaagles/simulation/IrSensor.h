@@ -10,6 +10,7 @@
 #define __Eaagles_Simulation_IrSensor_H__
 
 #include "openeaagles/simulation/IrSystem.h"
+#include "openeaagles/basic/safe_queue.h"
 
 namespace Eaagles {
 
@@ -169,7 +170,7 @@ protected:
    virtual IrQueryMsg* getStoredMessage();
    virtual IrQueryMsg* peekStoredMessage(unsigned int i);
 
-   QQueue<IrQueryMsg*>  storedMessagesQueue;
+   Basic::safe_queue<IrQueryMsg*> storedMessagesQueue;
    mutable long storedMessagesLock;          // Semaphore to protect 'storedMessagesQueue'
 
 private:

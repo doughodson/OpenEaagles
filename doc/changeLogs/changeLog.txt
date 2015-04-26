@@ -8,11 +8,17 @@ general
 - renamed the 'vehicles' library to 'dynamics' to more correctly reflect
   provided functionality
 
-- added 'override' context keyword throughout entire framework
+- added 'override' context keyword throughout entire framework  This has no
+  impact or effect on existing applications, but it does serve to improve readability
+  and code quality.
 
-- adding 'nullptr' context keyword throughout entire framework
+- adding 'nullptr' context keyword throughout entire framework.  This has no
+  impact or effect on existing applications, but it does serve to improve readability
+  and code quality.
 
-- added more 'std::' namespace qualifiers to math and string functions
+- added more 'std::' namespace qualifiers to math and string functions.  This has no
+  impact or effect on existing applications, but it does serve to improve readability
+  and code quality.
 
 - The shared pointer class template (SPtr<>) that was defined inside Object's
   scope has been moved outside and into 'Basic' namespace.  It has also been
@@ -30,19 +36,32 @@ general
 
   'SPtr<RfSignature>' would be replaced by 'Basic::safe_ptr<RfSignature>'
 
+- Both the thread safe queue and stack templates (formally QQueue and QStack) have been
+  moved out from under the Object umbrella and into Basic namespace akin to safe_ptr.
+  Like safe_ptr<>, they have been renamed to better indicate there thread-safe functionality,
+  (i.e. a thread safe queue and stack), safe_queue<> and safe_stack<>.
+
+  Although it is unlikely you will need to make any adjustments in existing applications, as
+  these queues constructs mostly show up in the simulation classes to support radar and IR
+  modeling.  If you do just replace "QQueue<>" with "Basic::safe_queue<>" and "QStack"
+  with "Basic::safe_stack<>".
+
+  You will also need to include the specific template header file of interest ("safe_queue.h"
+  and/or "safe_stack.h")
+
 --------------------------------------------------------------------------------
 basic
 
    Component class: removed unnecessary casting checks in several places (actually they were incorrect)
 
    Functions.h/cpp: these files defined several classes including Function, Func1, Func2, Func3,
-                    Func4, Func5 and Polynomial.  The Function class has been separated into its
-                    own .h/cpp.
+                    Func4, Func5 and Polynomial.  The Function classes have been separated into their
+                    own .h/cpp files.
 
    Tables.h/cpp: these files defined several classes including Table, Table1, Table2, Table3,
                  Table4 and Table5.  Table class itself defined several static methods for
-                 performing linear function interpolation (LFI).  The Table class has been
-                 separated into its own .h/cpp and the LFI algoithms are now defined in the
+                 performing linear function interpolation (LFI).  The Table classes have been
+                 separated into their own .h/cpp and the LFI algoithms are now defined in the
                  lfi-util.h header, within the 'lft::' namespace.
 
    Tables & Functions: all of the Table and Function classes plus LFI algorithms have now be moved
@@ -90,6 +109,11 @@ simulation
      only defines the 'DynamicsModel' class.
 
    - Aerodynamics.h and SpaceDynamics.h now both reside in the simulation/dynamics directory.
+
+   - The references to 'QQueue<>' in classes AngleOnlyTrackManager, Antenna, Datalink, IrSeeker, Radar,
+     Rwr, SimLogger, Simulation and TrackManager have been updated to 'Basic::safe_queue<>'
+
+   - The references to 'QStack<>' in classes Antenna and IrSeeker have been updated to 'Basic::safe_stack<>'
 
 
 --------------------------------------------------------------------------------

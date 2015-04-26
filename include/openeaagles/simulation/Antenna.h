@@ -5,6 +5,8 @@
 #define __Eaagles_Simulation_Antenna_H__
 
 #include "openeaagles/simulation/ScanGimbal.h"
+#include "openeaagles/basic/safe_queue.h"
+#include "openeaagles/basic/safe_stack.h"
 
 namespace Eaagles {
    namespace Basic {
@@ -131,11 +133,11 @@ protected:
 
    bool shutdownNotification() override;
 
-   QStack<Emission*> freeEmStack;  // Free emission stack
-   mutable long      freeEmLock;   // Semaphore to protect 'freeEmStack'
+   Basic::safe_stack<Emission*> freeEmStack;  // Free emission stack
+   mutable long      freeEmLock;              // Semaphore to protect 'freeEmStack'
 
-   QQueue<Emission*> inUseEmQueue; // In use emission queue
-   mutable long      inUseEmLock;  // Semaphore to protect 'inUseEmQueue'
+   Basic::safe_queue<Emission*> inUseEmQueue; // In use emission queue
+   mutable long      inUseEmLock;             // Semaphore to protect 'inUseEmQueue'
 
 private:
    void initData();

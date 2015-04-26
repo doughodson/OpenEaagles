@@ -6,7 +6,6 @@
 #include "openeaagles/basic/macros.h"
 #include "openeaagles/basic/SlotTable.h"
 #include "openeaagles/basic/safe_ptr.h"
-#include "openeaagles/basic/ref_ptr.h"
 
 namespace Eaagles {
 namespace Basic {
@@ -380,12 +379,6 @@ public:
 
    // ref(), unref() and getRefCount()
    #include "openeaagles/basic/refCount.h"
-
-   // QQueue -- Quick queue
-   #include "openeaagles/basic/QQueue.h"
-
-   // QStack -- Quick stack
-   #include "openeaagles/basic/QStack.h"
 
    // Output the list of known Eaagles classes
    static void writeClassList(std::ostream& sout);

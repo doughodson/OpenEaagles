@@ -5,6 +5,7 @@
 #define __Eaagles_Simulation_AngleOnlyTrackManager_H__
 
 #include "openeaagles/simulation/TrackManager.h"
+#include "openeaagles/basic/safe_queue.h"
 
 namespace Eaagles {
 namespace Simulation {
@@ -36,8 +37,8 @@ public:
 protected:
    virtual IrQueryMsg* getQuery(LCreal* const sn);                     // Get the next 'new' report from the queue
 
-   virtual bool setSlotAzimuthBin(const Basic::Number* const num);              // Sets azimuth bin
-   virtual bool setSlotElevationBin(const Basic::Number* const num);            // Sets elevation bin
+   virtual bool setSlotAzimuthBin(const Basic::Number* const num);     // Sets azimuth bin
+   virtual bool setSlotElevationBin(const Basic::Number* const num);   // Sets elevation bin
 
    bool setSlotAlpha(const Basic::Number* const num) override;
    bool setSlotBeta(const Basic::Number* const num) override;
@@ -51,8 +52,8 @@ protected:
    LCreal              oneMinusBeta;       // 1 - Beta parameter
 
 private:
-   QQueue<IrQueryMsg*>   queryQueue;       // Emission input queue (used with the
-                                           //   TrackManager::queueLock semaphore)
+   Basic::safe_queue<IrQueryMsg*> queryQueue;  // Emission input queue (used with the
+                                               //   TrackManager::queueLock semaphore)
 
 };
 
