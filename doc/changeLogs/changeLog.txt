@@ -9,16 +9,16 @@ general
   provided functionality
 
 - added 'override' context keyword throughout entire framework  This has no
-  impact or effect on existing applications, but it does serve to improve readability
-  and code quality.
+  impact or effect on existing applications, but it does serve to improve code
+  readability and quality.
 
 - adding 'nullptr' context keyword throughout entire framework.  This has no
-  impact or effect on existing applications, but it does serve to improve readability
-  and code quality.
+  impact or effect on existing applications, but it does serve to improve code
+  readability and quality.
 
 - added more 'std::' namespace qualifiers to math and string functions.  This has no
-  impact or effect on existing applications, but it does serve to improve readability
-  and code quality.
+  impact or effect on existing applications, but it does serve to improve code
+  readability and quality.
 
 - The shared pointer class template (SPtr<>) that was defined inside Object's
   scope has been moved outside and into 'Basic' namespace.  It has also been
@@ -26,28 +26,26 @@ general
 
   This was done for several reasons:
      1) Declutter the Object class
-     2) To more clearly indicate the functionality provided by this implementation
-        of a shared pointer.  Namely, it intellegently manages ref-based
-        Objects AND is also thread-proof (meaning, multiple threads can access the
-        same shared pointer object safely.
+     2) Renamed to more clearly indicate the functionality provided by this
+        implementation of a shared pointer - namely, it intellegently manages ref-based
+        Objects AND is also thread-safe (meaning, multiple threads can access the
+        same shared pointer object).
 
-  To adjust to the new style, search and replace all 'SPtr<>' templates with
-  'Basic::safe_ptr<>' - for example:
+  To adjust existing code to the new style, search and replace all 'SPtr<>' templates
+  with 'Basic::safe_ptr<>' - for example:
 
-  'SPtr<RfSignature>' would be replaced by 'Basic::safe_ptr<RfSignature>'
+  E.g., 'SPtr<RfSignature>' would be replaced by 'Basic::safe_ptr<RfSignature>'
 
-- Both the thread safe queue and stack templates (formally QQueue and QStack) have been
-  moved out from under the Object umbrella and into Basic namespace akin to safe_ptr.
-  Like safe_ptr<>, they have been renamed to better indicate there thread-safe functionality,
-  (i.e. a thread safe queue and stack), safe_queue<> and safe_stack<>.
+- Both the thread safe queue and stack templates (previously QQueue<> and QStack<>) have been
+  moved out from under the Object umbrella and into Basic namespace akin to safe_ptr<>.
+  Like safe_ptr<>, they have been renamed to better indicate their thread-safe functionality,
+  (i.e. a thread-safe queue and stack), safe_queue<> and safe_stack<>.
 
   Although it is unlikely you will need to make any adjustments in existing applications, as
-  these queues constructs mostly show up in the simulation classes to support radar and IR
-  modeling.  If you do just replace "QQueue<>" with "Basic::safe_queue<>" and "QStack"
-  with "Basic::safe_stack<>".
-
-  You will also need to include the specific template header file of interest ("safe_queue.h"
-  and/or "safe_stack.h")
+  these queue constructs mostly reside in the simulation classes to support radar and IR
+  modeling.  If you do, just replace "QQueue<>" with "Basic::safe_queue<>" and "QStack"
+  with "Basic::safe_stack<>". You will also need to include the specific template header
+  file(s) of interest ("safe_queue.h" and/or "safe_stack.h")
 
 --------------------------------------------------------------------------------
 basic
