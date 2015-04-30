@@ -24,7 +24,7 @@ BEGIN_SLOTTABLE(AirVehicle)
                         //      number: zero for up, non-zero for down
 END_SLOTTABLE(AirVehicle)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(AirVehicle)
     ON_SLOT(1,setInitGearPos,Basic::String)
     ON_SLOT(1,setInitGearPos,Basic::Number)
@@ -36,7 +36,7 @@ END_SLOT_MAP()
 AirVehicle::AirVehicle()
 {
     STANDARD_CONSTRUCTOR()
-    
+
     static Basic::String generic("GenericAirVehicle");
     setType(&generic);
 
@@ -52,7 +52,6 @@ AirVehicle::AirVehicle()
 void AirVehicle::copyData(const AirVehicle& org, const bool)
 {
    BaseClass::copyData(org);
-
 
    initGearPos = org.initGearPos;
    gearPos = org.gearPos;
@@ -89,7 +88,7 @@ void AirVehicle::reset()
 }
 
 //------------------------------------------------------------------------------
-// Data access functions that need conversion 
+// Data access functions that need conversion
 //------------------------------------------------------------------------------
 LCreal AirVehicle::getAngleOfAttackD() const
 {
@@ -133,7 +132,7 @@ Basic::Object* AirVehicle::getSlotByIndex(const int si)
 bool AirVehicle::setInitGearPos(const Basic::String* const pos)
 {
    bool ok = false;
-   if (pos != 0) {
+   if (pos != nullptr) {
       if (*pos == "up" || *pos == "UP") {
          initGearPos = 0.0;
          gearPos = 0.0;
@@ -160,7 +159,7 @@ bool AirVehicle::setInitGearPos(const Basic::String* const pos)
 bool AirVehicle::setInitGearPos(const Basic::Number* const pos)
 {
    bool ok = false;
-   if (pos != 0) {
+   if (pos != nullptr) {
       if (pos->getReal() == 0.0f) {
          initGearPos = 0.0;
          gearPos = 0.0;
@@ -183,7 +182,7 @@ LCreal AirVehicle::getGload() const
 {
    LCreal value = 0.0;
    const AerodynamicsModel* aero = getAerodynamicsModel();
-   if (aero != 0) {
+   if (aero != nullptr) {
       value = aero->getGload();
    }
    return value;
@@ -193,7 +192,7 @@ LCreal AirVehicle::getMach() const
 {
    LCreal value = 0.0;
    const AerodynamicsModel* aero = getAerodynamicsModel();
-   if (aero != 0) value = aero->getMach();
+   if (aero != nullptr) value = aero->getMach();
    else value = BaseClass::getMach();
    return value;
 }
@@ -202,7 +201,7 @@ LCreal AirVehicle::getAngleOfAttack() const
 {
    LCreal value = 0.0;
    const AerodynamicsModel* aero = getAerodynamicsModel();
-   if (aero != 0) {
+   if (aero != nullptr) {
       value = aero->getAngleOfAttack();
    }
    return value;
@@ -212,7 +211,7 @@ LCreal AirVehicle::getSideSlip() const
 {
    LCreal value = 0.0;
    const AerodynamicsModel* aero = getAerodynamicsModel();
-   if (aero != 0) {
+   if (aero != nullptr) {
       value = aero->getSideSlip();
    }
    return value;
@@ -222,7 +221,7 @@ LCreal AirVehicle::getFlightPath() const
 {
    LCreal value = 0.0;
    const AerodynamicsModel* aero = getAerodynamicsModel();
-   if (aero != 0) {
+   if (aero != nullptr) {
       value = aero->getFlightPath();
    }
    return value;
@@ -232,7 +231,7 @@ LCreal AirVehicle::getFuelWt() const
 {
    LCreal value = 0.0;
    const AerodynamicsModel* aero = getAerodynamicsModel();
-   if (aero != 0) {
+   if (aero != nullptr) {
       value = aero->getFuelWt();
    }
    return value;
@@ -242,7 +241,7 @@ LCreal AirVehicle::getFuelWtMax() const
 {
    LCreal value = 0.0;
    const AerodynamicsModel* aero = getAerodynamicsModel();
-   if (aero != 0) {
+   if (aero != nullptr) {
       value = aero->getFuelWtMax();
    }
    return value;
@@ -252,7 +251,7 @@ LCreal AirVehicle::getGrossWeight() const
 {
    LCreal value = 0.0;
    const AerodynamicsModel* aero = getAerodynamicsModel();
-   if (aero != 0) {
+   if (aero != nullptr) {
       value = aero->getGrossWeight();
    }
    return value;
@@ -262,7 +261,7 @@ LCreal AirVehicle::getCalibratedAirspeed() const
 {
    LCreal value = getTotalVelocityKts();      // Default: use total velocity
    const AerodynamicsModel* aero = getAerodynamicsModel();
-   if (aero != 0) {
+   if (aero != nullptr) {
       value = aero->getCalibratedAirspeed();
    }
    return value;
@@ -272,7 +271,7 @@ LCreal AirVehicle::getAmbientPressureRatio() const
 {
    LCreal value = 1.0;      // Default: 1.0
    const AerodynamicsModel* aero = getAerodynamicsModel();
-   if (aero != 0) {
+   if (aero != nullptr) {
       value = aero->getAmbientPressureRatio();
    }
    return value;
@@ -280,24 +279,24 @@ LCreal AirVehicle::getAmbientPressureRatio() const
 
 //------------------------------------------------------------------------------
 // setTrimSwitchRollInput(RollTrim) --  Sets the trim switch positions:
-//      RollTrim:  -1.0 -> Left;      0.0 -> Hold;  1.0 -> Right 
+//      RollTrim:  -1.0 -> Left;      0.0 -> Hold;  1.0 -> Right
 //------------------------------------------------------------------------------
 void AirVehicle::setTrimSwitchRollInput(const LCreal value)
 {
    AerodynamicsModel* aero = getAerodynamicsModel();
-   if (aero != 0) {
+   if (aero != nullptr) {
       aero->setTrimSwitchRollInput(value);
    }
 }
 
 //------------------------------------------------------------------------------
 // setTrimSwitchPitchInput(PitchTrim) --  Sets the trim switch positions:
-//      PitchTrim: -1.0 -> NoseDown;  0.0 -> Hold;  1.0 -> NoseUp 
+//      PitchTrim: -1.0 -> NoseDown;  0.0 -> Hold;  1.0 -> NoseUp
 //------------------------------------------------------------------------------
 void AirVehicle::setTrimSwitchPitchInput(const LCreal value)
 {
    AerodynamicsModel* aero = getAerodynamicsModel();
-   if (aero != 0) {
+   if (aero != nullptr) {
       aero->setTrimSwitchPitchInput(value);
    }
 }
@@ -309,7 +308,7 @@ void AirVehicle::setTrimSwitchPitchInput(const LCreal value)
 void AirVehicle::setRudderPedalInput(const LCreal value)
 {
    AerodynamicsModel* aero = getAerodynamicsModel();
-   if (aero != 0) {
+   if (aero != nullptr) {
       aero->setRudderPedalInput(value);
    }
 }
@@ -322,32 +321,32 @@ void AirVehicle::setRudderPedalInput(const LCreal value)
 void AirVehicle::setBrakes(const LCreal left, const LCreal right)
 {
    AerodynamicsModel* aero = getAerodynamicsModel();
-   if (aero != 0) {
+   if (aero != nullptr) {
       aero->setBrakes(left, right);
    }
 }
 
 //------------------------------------------------------------------------------
-// setFlaps() -- 
+// setFlaps() --
 //      Commanded flap position from retracted (0.0) to fully extended (1.0)
 //------------------------------------------------------------------------------
 void AirVehicle::setFlaps(const LCreal value)
 {
    AerodynamicsModel* aero = getAerodynamicsModel();
-   if (aero != 0) {
+   if (aero != nullptr) {
       aero->setFlaps(value);
    }
 }
 
 //------------------------------------------------------------------------------
 // getLandingGearPosition() --   Returns the landing gear position (percent)
-//      0-> Fully Retracted;  100.0 -> Fully Extended 
+//      0-> Fully Retracted;  100.0 -> Fully Extended
 //------------------------------------------------------------------------------
 LCreal AirVehicle::getLandingGearPosition() const
 {
    LCreal value = gearPos;
    const AerodynamicsModel* aero = getAerodynamicsModel();
-   if (aero != 0) {
+   if (aero != nullptr) {
       value = aero->getLandingGearPosition();
    }
    return value;
@@ -355,13 +354,13 @@ LCreal AirVehicle::getLandingGearPosition() const
 
 //------------------------------------------------------------------------------
 // getWeaponBayDoorPosition() --   Returns the weapon bay door position (percent)
-//      0-> closed;  100.0 -> Fully Open 
+//      0-> closed;  100.0 -> Fully Open
 //------------------------------------------------------------------------------
 LCreal AirVehicle::getWeaponBayDoorPosition() const
 {
    LCreal value = wpnBayDoorPos;
    const AerodynamicsModel* aero = getAerodynamicsModel();
-   if (aero != 0) {
+   if (aero != nullptr) {
       value = aero->getWeaponBayDoorPosition();
    }
    return value;
@@ -374,7 +373,7 @@ bool AirVehicle::isWeightOnWheels() const
 {
    bool flg = false;
    const AerodynamicsModel* aero = getAerodynamicsModel();
-   if (aero != 0) {
+   if (aero != nullptr) {
       flg = aero->isWeightOnWheels();
    }
    return flg;
@@ -390,20 +389,20 @@ void AirVehicle::setGearHandleSwitch(const LCreal value)
    else gearPos = 0;
 
    AerodynamicsModel* aero = getAerodynamicsModel();
-   if (aero != 0) {
+   if (aero != nullptr) {
       aero->setGearHandleSwitch(value);
    }
 }
 
 //------------------------------------------------------------------------------
 // getSpeedBrakesSwitch() --   Returns the speed brake position (percent)
-//      0-> Fully Retracted;  100.0 -> Fully Extended 
+//      0-> Fully Retracted;  100.0 -> Fully Extended
 //------------------------------------------------------------------------------
 LCreal AirVehicle::getSpeedBrakePosition() const
 {
    LCreal value = 0.0;
    const AerodynamicsModel* aero = getAerodynamicsModel();
-   if (aero != 0) {
+   if (aero != nullptr) {
       value = aero->getSpeedBrakePosition();
    }
    return value;
@@ -414,10 +413,10 @@ LCreal AirVehicle::getSpeedBrakePosition() const
 //------------------------------------------------------------------------------
 LCreal AirVehicle::getWingSweepAngle() const
 {
-   LCreal value = wingSweep;  
+   LCreal value = wingSweep;
 
    const AerodynamicsModel* aero = getAerodynamicsModel();
-   if (aero != 0) {
+   if (aero != nullptr) {
       value = aero->getWingSweepAngle();
    }
    return value;
@@ -425,12 +424,12 @@ LCreal AirVehicle::getWingSweepAngle() const
 
 //------------------------------------------------------------------------------
 // setSpeedBrakesSwitch() --   Sets the speed brake switch position:
-//      -1.0 -> Retract;  0.0 -> Hold;  1.0 -> Extend 
+//      -1.0 -> Retract;  0.0 -> Hold;  1.0 -> Extend
 //------------------------------------------------------------------------------
 void AirVehicle::setSpeedBrakesSwitch(const LCreal value)
 {
    AerodynamicsModel* aero = getAerodynamicsModel();
-   if (aero != 0) {
+   if (aero != nullptr) {
       aero->setSpeedBrakesSwitch(value);
    }
 }
@@ -445,7 +444,7 @@ void AirVehicle::setWeaponBayDoorSwitch(const LCreal value)
    else wpnBayDoorPos = 0;
 
    AerodynamicsModel* aero = getAerodynamicsModel();
-   if (aero != 0) {
+   if (aero != nullptr) {
       aero->setWeaponBayDoorSwitch(value);
    }
 }
@@ -458,7 +457,7 @@ void AirVehicle::setCmdWingSweepAngle(const LCreal value)
    wingSweep = value;
 
    AerodynamicsModel* aero = getAerodynamicsModel();
-   if (aero != 0) {
+   if (aero != nullptr) {
       aero->setCmdWingSweepAngle(value);
    }
 }
@@ -470,7 +469,7 @@ int AirVehicle::getNumberOfEngines() const
 {
    int  n = 0;
    const AerodynamicsModel* aero = getAerodynamicsModel();
-   if (aero != 0) {
+   if (aero != nullptr) {
       n = aero->getNumberOfEngines();
    }
    return n;
@@ -480,7 +479,7 @@ int AirVehicle::getEngThrust(LCreal* const data, const int max) const
 {
    int  n = 0;
    const AerodynamicsModel* aero = getAerodynamicsModel();
-   if (aero != 0) {
+   if (aero != nullptr) {
       n = aero->getEngThrust(data, max);
    }
    return n;
@@ -490,7 +489,7 @@ int AirVehicle::getEngThrustIdle(LCreal* const data, const int max) const
 {
    int  n = 0;
    const AerodynamicsModel* aero = getAerodynamicsModel();
-   if (aero != 0) {
+   if (aero != nullptr) {
       n = aero->getEngThrustIdle(data, max);
    }
    return n;
@@ -500,7 +499,7 @@ int AirVehicle::getEngThrustMil(LCreal* const data, const int max) const
 {
    int  n = 0;
    const AerodynamicsModel* aero = getAerodynamicsModel();
-   if (aero != 0) {
+   if (aero != nullptr) {
       n = aero->getEngThrustMil(data, max);
    }
    return n;
@@ -510,7 +509,7 @@ int AirVehicle::getEngThrustAb(LCreal* const data, const int max) const
 {
    int  n = 0;
    const AerodynamicsModel* aero = getAerodynamicsModel();
-   if (aero != 0) {
+   if (aero != nullptr) {
       n = aero->getEngThrustAb(data, max);
    }
    return n;
@@ -520,7 +519,7 @@ int AirVehicle::getEngRPM(LCreal* const data, const int max) const
 {
    int  n = 0;
    const AerodynamicsModel* aero = getAerodynamicsModel();
-   if (aero != 0) {
+   if (aero != nullptr) {
       n = aero->getEngRPM(data, max);
    }
    return n;
@@ -530,7 +529,7 @@ int AirVehicle::getEngN1(LCreal* const data, const int max) const
 {
    int  n = 0;
    const AerodynamicsModel* aero = getAerodynamicsModel();
-   if (aero != 0) {
+   if (aero != nullptr) {
       n = aero->getEngN1(data, max);
    }
    return n;
@@ -540,7 +539,7 @@ int AirVehicle::getEngPLA(LCreal* const data, const int max) const
 {
    int  n = 0;
    const AerodynamicsModel* aero = getAerodynamicsModel();
-   if (aero != 0) {
+   if (aero != nullptr) {
       n = aero->getEngPLA(data, max);
    }
    return n;
@@ -550,7 +549,7 @@ int AirVehicle::getEngFuelFlow(LCreal* const data, const int max) const
 {
    int  n = 0;
    const AerodynamicsModel* aero = getAerodynamicsModel();
-   if (aero != 0) {
+   if (aero != nullptr) {
       n = aero->getEngFuelFlow(data, max);
    }
    return n;
@@ -560,7 +559,7 @@ int AirVehicle::getEngOilPressure(LCreal* const data, const int max) const
 {
    int  n = 0;
    const AerodynamicsModel* aero = getAerodynamicsModel();
-   if (aero != 0) {
+   if (aero != nullptr) {
       n = aero->getEngOilPressure(data, max);
    }
    return n;
@@ -570,7 +569,7 @@ int AirVehicle::getEngInletTemp(LCreal* const data, const int max) const
 {
    int  n = 0;
    const AerodynamicsModel* aero = getAerodynamicsModel();
-   if (aero != 0) {
+   if (aero != nullptr) {
       n = aero->getEngInletTemp(data, max);
    }
    return n;
@@ -580,7 +579,7 @@ int AirVehicle::getEngNozzle(LCreal* const data, const int max) const
 {
    int  n = 0;
    const AerodynamicsModel* aero = getAerodynamicsModel();
-   if (aero != 0) {
+   if (aero != nullptr) {
       n = aero->getEngNozzle(data, max);
    }
    return n;
@@ -592,7 +591,7 @@ int AirVehicle::getEngNozzle(LCreal* const data, const int max) const
 bool AirVehicle::isRadarAltValid() const
 {
     LCreal ra = getRadarAltitude();
-    return (ra >= 0 && ra <= 5000);    
+    return (ra >= 0 && ra <= 5000);
 }
 
 LCreal AirVehicle::getRadarAltitude() const

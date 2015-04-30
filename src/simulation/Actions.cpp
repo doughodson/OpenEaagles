@@ -31,7 +31,7 @@ Action::Action()
 {
    STANDARD_CONSTRUCTOR()
 
-   manager = 0;
+   manager = nullptr;
 
    refId = 0;
    completed = false;
@@ -45,13 +45,13 @@ void Action::copyData(const Action& org, const bool cc)
    BaseClass::copyData(org);
 
    if (cc) {
-      manager = 0;
+      manager = nullptr;
    }
 
    refId = org.refId;
    completed = org.completed;
 
-   setManager(0);
+   setManager(nullptr);
 }
 
 //------------------------------------------------------------------------------
@@ -59,7 +59,7 @@ void Action::copyData(const Action& org, const bool cc)
 //------------------------------------------------------------------------------
 void Action::deleteData()
 {
-   setManager(0);
+   setManager(nullptr);
 }
 
 //------------------------------------------------------------------------------
@@ -75,7 +75,7 @@ bool Action::isReadyToStart()
 // True if action is in progress
 bool Action::isInProgress()
 {
-   return (manager != 0);
+   return (manager != nullptr);
 }
 
 // True if action has been completed
@@ -91,7 +91,7 @@ bool Action::isCompleted()
 // Sets the completed flag
 void Action::setCompleted(const bool flg)
 {
-   if (flg) setManager(0);
+   if (flg) setManager(nullptr);
    completed = flg;
 }
 
@@ -142,22 +142,22 @@ void Action::process(const LCreal)
 bool Action::execute(Basic::Component* actor)
 {
    bool ok = false;
-   if (actor != 0) {
+   if (actor != nullptr) {
 
       // Was the actor our OBC?
       OnboardComputer* obc = dynamic_cast<OnboardComputer*>( actor );
 
       // If not, was it our ownship ...
       //   and can we get our OBC from our ownship
-      if (obc == 0) {
+      if (obc == nullptr) {
          Player* own = dynamic_cast<Player*>( actor );
-         if (own != 0) {
+         if (own != nullptr) {
             obc = own->getOnboardComputer();
          }
       }
 
       // If we could find our OBC from the actor then trigger this action
-      if (obc != 0) {
+      if (obc != nullptr) {
          ok = trigger(obc);
       }
 
@@ -201,7 +201,7 @@ BEGIN_SLOTTABLE(ActionImagingSar)
    "imageSize",      //  5) Image size: height & width (pixels) (default: 512)
 END_SLOTTABLE(ActionImagingSar)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(ActionImagingSar)
     ON_SLOT(1, setSlotSarLat,     Basic::LatLon)
     ON_SLOT(2, setSlotSarLon,     Basic::LatLon)
@@ -217,16 +217,16 @@ ActionImagingSar::ActionImagingSar()
 {
    STANDARD_CONSTRUCTOR()
 
-   sar = 0;
+   sar = nullptr;
 
-   sarLatitude = 0;
-   sarLongitude = 0;
-   sarElevation = 0;
+   sarLatitude = 0.0;
+   sarLongitude = 0.0;
+   sarElevation = 0.0;
    resolution = 3;
    imgSize = 512;
-   orientation = 0;
+   orientation = 0.0;
 
-   timer = 0;
+   timer = 0.0;
 }
 
 //------------------------------------------------------------------------------
@@ -237,7 +237,7 @@ void ActionImagingSar::copyData(const ActionImagingSar& org, const bool cc)
    BaseClass::copyData(org);
 
    if (cc) {
-      sar = 0;
+      sar = nullptr;
    }
 
    sarLatitude = org.sarLatitude;
@@ -247,8 +247,8 @@ void ActionImagingSar::copyData(const ActionImagingSar& org, const bool cc)
    imgSize = org.imgSize;
    orientation = org.orientation;
 
-   timer = 0;
-   setSarSystem(0);
+   timer = 0.0;
+   setSarSystem(nullptr);
 }
 
 //------------------------------------------------------------------------------
@@ -265,21 +265,21 @@ bool ActionImagingSar::trigger(OnboardComputer* const mgr)
 {
    bool ok = false;
 
-   if (mgr != 0) {
+   if (mgr != nullptr) {
 
       // Find our ownship player & SAR system
       Player* ownship = static_cast<Player*>(mgr->findContainerByType(typeid(Player)));
-      if (ownship != 0) {
+      if (ownship != nullptr) {
          Basic::Pair* pair = ownship->getSensorByType(typeid(Sar));
          if (isMessageEnabled(MSG_INFO)) {
             std::cout << "Looking for SAR: pair = " << pair << std::endl;
          }
-         if (pair != 0) {
+         if (pair != nullptr) {
             setSarSystem( static_cast<Sar*>(pair->object()) );
          }
       }
 
-      if (sar != 0 && ownship != 0) {
+      if (sar != nullptr && ownship != nullptr) {
          if (isMessageEnabled(MSG_INFO)) {
             std::cout << "Requesting an image from the SAR: refId: " << getRefId() << std::endl;
          }
@@ -295,7 +295,7 @@ bool ActionImagingSar::trigger(OnboardComputer* const mgr)
    }
 
    if (ok) setManager(mgr);
-   else setManager(0);
+   else setManager(nullptr);
 
    return ok;
 }
@@ -305,7 +305,7 @@ bool ActionImagingSar::trigger(OnboardComputer* const mgr)
 //------------------------------------------------------------------------------
 bool ActionImagingSar::cancel()
 {
-   if (getSarSystem() != 0) {
+   if (getSarSystem() != nullptr) {
       getSarSystem()->cancel();
    }
    return BaseClass::cancel();
@@ -318,7 +318,7 @@ void ActionImagingSar::process(const LCreal dt)
 {
    BaseClass::process(dt);
 
-   if (isInProgress() && getSarSystem() != 0) {
+   if (isInProgress() && getSarSystem() != nullptr) {
 
       // Check if SAR has finished
       if ( !getSarSystem()->isImagingInProgress()) {
@@ -329,7 +329,7 @@ void ActionImagingSar::process(const LCreal dt)
          setCompleted(true);
       }
 
-      // Process safety time-out 
+      // Process safety time-out
       timer += dt;
       static const LCreal MAX_SAR_TIME = 120.0f;
       if (timer > MAX_SAR_TIME) {
@@ -394,18 +394,18 @@ bool ActionImagingSar::setImageSize(const unsigned int v)
 // Sets the completed flag
 void ActionImagingSar::setCompleted(const bool flg)
 {
-   if (flg) setSarSystem(0);
+   if (flg) setSarSystem(nullptr);
    BaseClass::setCompleted(flg);
 }
 
 // Set the SAR system
 void ActionImagingSar::setSarSystem(Sar* const p)
 {
-   if (sar != 0) {
+   if (sar != nullptr) {
       sar->unref();
    }
    sar = p;
-   if (sar != 0) {
+   if (sar != nullptr) {
       sar->ref();
    }
 }
@@ -417,7 +417,7 @@ void ActionImagingSar::setSarSystem(Sar* const p)
 bool ActionImagingSar::setSlotSarLat(const Basic::LatLon* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setSarLatitude(msg->getDouble());
    }
    return ok;
@@ -426,7 +426,7 @@ bool ActionImagingSar::setSlotSarLat(const Basic::LatLon* const msg)
 bool ActionImagingSar::setSlotSarLon(const Basic::LatLon* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setSarLongitude(msg->getDouble());
    }
    return ok;
@@ -435,7 +435,7 @@ bool ActionImagingSar::setSlotSarLon(const Basic::LatLon* const msg)
 bool ActionImagingSar::setSlotSarElev(const Basic::Distance* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       LCreal elev = Basic::Meters::convertStatic( *msg );
       ok = setSarElevation( elev );
    }
@@ -445,7 +445,7 @@ bool ActionImagingSar::setSlotSarElev(const Basic::Distance* const msg)
 bool ActionImagingSar::setSlotResolution(const Basic::Distance* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       LCreal res = Basic::Meters::convertStatic( *msg );
       ok = setResolution( res );
    }
@@ -455,7 +455,7 @@ bool ActionImagingSar::setSlotResolution(const Basic::Distance* const msg)
 bool ActionImagingSar::setSlotImageSize(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setImageSize( msg->getInt() );
       if (!ok) {
          if (isMessageEnabled(MSG_INFO)) {
@@ -471,7 +471,7 @@ bool ActionImagingSar::setSlotImageSize(const Basic::Number* const msg)
 //------------------------------------------------------------------------------
 LCreal ActionImagingSar::computeOrientation(const Steerpoint* const wp)
 {
-   if (wp != 0) {
+   if (wp != nullptr) {
       double slat = wp->getLatitude();
       double slon = wp->getLongitude();
       double dlat = getSarLatitude();
@@ -543,7 +543,7 @@ BEGIN_SLOTTABLE(ActionWeaponRelease)
    "station",           //  4) Station number to use (default to next available)
 END_SLOTTABLE(ActionWeaponRelease)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(ActionWeaponRelease)
     ON_SLOT(1, setSlotTargetLat, Basic::LatLon)
     ON_SLOT(2, setSlotTargetLon, Basic::LatLon)
@@ -559,9 +559,9 @@ ActionWeaponRelease::ActionWeaponRelease()
    STANDARD_CONSTRUCTOR()
 
    station = 0;
-   targetLatitude = 0;
-   targetLongitude = 0;
-   targetElevation = 0;
+   targetLatitude = 0.0;
+   targetLongitude = 0.0;
+   targetElevation = 0.0;
 }
 
 //------------------------------------------------------------------------------
@@ -591,17 +591,17 @@ bool ActionWeaponRelease::trigger(OnboardComputer* const mgr)
 {
    bool ok = false;
 
-   if (mgr != 0) {
+   if (mgr != nullptr) {
       Player* own = static_cast<Player*>(mgr->findContainerByType(typeid(Player)));
-      if (own != 0) {
+      if (own != nullptr) {
 
          StoresMgr* sms = own->getStoresManagement();
-         if (sms != 0) {
+         if (sms != nullptr) {
 
             // Get the simulation ref point
             Simulation* sim = own->getSimulation();
-            double refLat = sim->getRefLatitude();
-            double refLon = sim->getRefLongitude();
+            const double refLat = sim->getRefLatitude();
+            const double refLon = sim->getRefLongitude();
 
             // Computes the target's position vector
             osg::Vec3 tgtPos;                            // Target position  (m) NED
@@ -616,7 +616,7 @@ bool ActionWeaponRelease::trigger(OnboardComputer* const mgr)
 
             // Release the weapon and set the target
             Weapon* flyout = sms->releaseOneBomb();
-            if (flyout != 0) {
+            if (flyout != nullptr) {
                 flyout->setTargetPosition(tgtPos);
             }
          }
@@ -632,7 +632,7 @@ bool ActionWeaponRelease::trigger(OnboardComputer* const mgr)
 //------------------------------------------------------------------------------
 // Set functions
 //------------------------------------------------------------------------------
-   
+
 // Sets the target location (latitude & longitude in radians, elevation in meters)
 bool ActionWeaponRelease::setTargetLocation(const double tgtLat, const double tgtLon, const double tgtElev)
 {
@@ -653,7 +653,7 @@ bool ActionWeaponRelease::setStation(const unsigned int num)
 bool ActionWeaponRelease::setSlotTargetLat(const Basic::LatLon* newLat)
 {
     bool ok = false;
-    if (newLat != 0) {
+    if (newLat != nullptr) {
         targetLatitude = newLat->getDouble();
         ok = true;
     }
@@ -662,7 +662,7 @@ bool ActionWeaponRelease::setSlotTargetLat(const Basic::LatLon* newLat)
 bool ActionWeaponRelease::setSlotTargetLon(const Basic::LatLon* newLon)
 {
     bool ok = false;
-    if (newLon != 0) {
+    if (newLon != nullptr) {
         targetLongitude = newLon->getDouble();
         ok = true;
     }
@@ -671,7 +671,7 @@ bool ActionWeaponRelease::setSlotTargetLon(const Basic::LatLon* newLon)
 bool ActionWeaponRelease::setSlotTargetElev(const Basic::Number* newElev)
 {
     bool ok = false;
-    if (newElev != 0) {
+    if (newElev != nullptr) {
         targetElevation = newElev->getReal();
         ok = true;
     }
@@ -680,7 +680,7 @@ bool ActionWeaponRelease::setSlotTargetElev(const Basic::Number* newElev)
 bool ActionWeaponRelease::setSlotStationNum(const Basic::Number* newStation)
 {
     bool ok = false;
-    if (newStation != 0) {
+    if (newStation != nullptr) {
         station = newStation->getInt();
         ok = true;
     }
@@ -737,7 +737,7 @@ BEGIN_SLOTTABLE(ActionDecoyRelease)
    "interval",       //  2) time, in seconds, between launches
 END_SLOTTABLE(ActionDecoyRelease)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(ActionDecoyRelease)
     ON_SLOT(1, setSlotNumToLaunch, Basic::Number)
     ON_SLOT(2, setSlotInterval, Basic::Number)
@@ -749,10 +749,10 @@ END_SLOT_MAP()
 ActionDecoyRelease::ActionDecoyRelease()
 {
    STANDARD_CONSTRUCTOR()
-   interval = 0;
+   interval = 0.0;
    numToLaunch = 1;
-   tod = 0;
-   startTOD = 0;
+   tod = 0.0;
+   startTOD = 0.0;
 }
 
 //------------------------------------------------------------------------------
@@ -781,13 +781,13 @@ bool ActionDecoyRelease::trigger(OnboardComputer* const mgr)
 {
    bool ok = false;
 
-   if (mgr != 0) {
+   if (mgr != nullptr) {
       Player* own = static_cast<Player*>(mgr->findContainerByType(typeid(Player)));
-      if (own != 0) {
+      if (own != nullptr) {
          StoresMgr* sms = own->getStoresManagement();
-         if (sms != 0) {
+         if (sms != nullptr) {
          if (numToLaunch > 1) {
-                if (interval == 0) {
+                if (interval == 0.0) {
                     // launch all at once
                     ok = true;
                     for (int i = 0; i < numToLaunch; i++) {
@@ -808,14 +808,14 @@ bool ActionDecoyRelease::trigger(OnboardComputer* const mgr)
             else {
                 ok = true;
                 // only one to launch, then just launch one!
-                sms->releaseOneDecoy();    
+                sms->releaseOneDecoy();
             }
          }
       }
    }
-   
+
    // do we need to launch more at a certain interval?  If so, we aren't complete yet!
-                
+
    BaseClass::setCompleted(ok);
 
    return ok;
@@ -825,27 +825,27 @@ void ActionDecoyRelease::process(const LCreal)
 {
     // keep counting until we have our "interval" of seconds
     OnboardComputer* mgr = getManager();
-    if (mgr != 0) {
+    if (mgr != nullptr) {
         Player* own = static_cast<Player*>(mgr->findContainerByType(typeid(Player)));
-        if (own != 0) {
+        if (own != nullptr) {
             tod = own->getSimulation()->getSimTimeOfDay();
             if (interval < (tod - startTOD)) {
                 // we have hit our interval, release another decoy
                 StoresMgr* sms = own->getStoresManagement();
-                if (sms != 0) {
+                if (sms != nullptr) {
                     sms->releaseOneDecoy();
                     numToLaunch--;
                     if (numToLaunch == 0) {
-                        setManager(0);
+                        setManager(nullptr);
                         BaseClass::setCompleted(true);
                     }
                     else {
                         // keep going, start counting again!
                         startTOD = tod;
                     }
-                }    
+                }
             }
-        } 
+        }
     }
 }
 
@@ -853,7 +853,7 @@ void ActionDecoyRelease::process(const LCreal)
 bool ActionDecoyRelease::setSlotNumToLaunch(const Basic::Number* x)
 {
     bool ok = false;
-    if (x != 0) {
+    if (x != nullptr) {
         ok = setNumToLaunch(x->getInt());
     }
     return ok;
@@ -861,7 +861,7 @@ bool ActionDecoyRelease::setSlotNumToLaunch(const Basic::Number* x)
 bool ActionDecoyRelease::setSlotInterval(const Basic::Number* x)
 {
     bool ok = false;
-    if (x != 0) {
+    if (x != nullptr) {
         ok = setInterval(x->getReal());
     }
     return ok;
@@ -887,7 +887,7 @@ std::ostream& ActionDecoyRelease::serialize(std::ostream& sout, const int i, con
         sout << "( " << getFactoryName() << std::endl;
         j = 4;
     }
-    
+
     BaseClass::serialize(sout,i+j,true);
 
     if ( !slotsOnly ) {
@@ -912,7 +912,7 @@ BEGIN_SLOTTABLE(ActionCamouflageType)
    "camouflageType",    //  1) User defined camouflage type (positive integer or zero for none)
 END_SLOTTABLE(ActionCamouflageType)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(ActionCamouflageType)
     ON_SLOT( 1, setSlotCamouflageType, Basic::Number)
 END_SLOT_MAP()
@@ -951,9 +951,9 @@ bool ActionCamouflageType::trigger(OnboardComputer* const mgr)
 {
    bool ok = false;
 
-   if (mgr != 0) {
+   if (mgr != nullptr) {
       Player* own = static_cast<Player*>(mgr->findContainerByType(typeid(Player)));
-      if (own != 0) {
+      if (own != nullptr) {
 
          // Set our ownship's camouflage type
          own->setCamouflageType( getCamouflageType() );
@@ -981,7 +981,7 @@ bool ActionCamouflageType::setCamouflageType(const unsigned int v)
 bool ActionCamouflageType::setSlotCamouflageType(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       int ii = msg->getInt();
       if (ii >= 0) {
          ok = setCamouflageType( ii );
