@@ -7,6 +7,8 @@
 #include "openeaagles/basic/units/Distances.h"
 #include "openeaagles/basic/units/Times.h"
 
+#include <cmath>
+
 namespace Eaagles {
 namespace Simulation {
 
@@ -30,7 +32,7 @@ BEGIN_SLOTTABLE(GroundVehicle)
     "launcherMoveTime",       // 4: Max time to move between 'down' and 'up' positions (Basic::Time)
 END_SLOTTABLE(GroundVehicle)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(GroundVehicle)
     ON_SLOT(1, setSlotCommandedPosition, Basic::Identifier)
     ON_SLOT(2, setSlotLauncherDownAngle, Basic::Angle)
@@ -50,12 +52,12 @@ GroundVehicle::GroundVehicle()
    lnchrDownAngle = DEFAULT_LAUNCHER_DOWN_ANGLE;
    lnchrUpAngle   = DEFAULT_LAUNCHER_UP_ANGLE;
    lnchrMoveTime  = DEFAULT_LAUNCHER_MOVE_TIME;
-   lnchrAngle     = 0;
-   lnchrRate      = 0;
+   lnchrAngle     = 0.0;
+   lnchrRate      = 0.0;
    initLnchrPos   = NONE;
    cmdLnchrPos    = NONE;
 
-    setTerrainOffset(1.5);      // default offset from terrain to CG
+   setTerrainOffset(1.5);      // default offset from terrain to CG
 }
 
 //------------------------------------------------------------------------------
@@ -63,7 +65,7 @@ GroundVehicle::GroundVehicle()
 //------------------------------------------------------------------------------
 void GroundVehicle::copyData(const GroundVehicle& org, const bool)
 {
-    BaseClass::copyData(org);
+   BaseClass::copyData(org);
 
    lnchrDownAngle = org.lnchrDownAngle;
    lnchrUpAngle = org.lnchrUpAngle;
@@ -97,17 +99,17 @@ void GroundVehicle::reset()
       if (initLnchrPos == UP) {
          cmdLnchrPos = UP;
          lnchrAngle = lnchrUpAngle;
-         lnchrRate = 0;
+         lnchrRate = 0.0;
       }
       else if (initLnchrPos == DOWN) {
          cmdLnchrPos = DOWN;
          lnchrAngle = lnchrDownAngle;
-         lnchrRate = 0;
+         lnchrRate = 0.0;
       }
       else {
          cmdLnchrPos = NONE;
-         lnchrAngle = 0;
-         lnchrRate = 0;
+         lnchrAngle = 0.0;
+         lnchrRate = 0.0;
       }
    }
 }
@@ -131,18 +133,18 @@ void GroundVehicle::launcherDynamics(const LCreal dt)
       LCreal rate = (lnchrUpAngle - lnchrDownAngle) / lnchrMoveTime;
       LCreal angle = lnchrAngle;
 
-      if (cmdLnchrPos == UP && lnchrAngle != lnchrUpAngle) { 
+      if (cmdLnchrPos == UP && lnchrAngle != lnchrUpAngle) {
          angle = lnchrAngle + (rate * dt);
          if (angle >= lnchrUpAngle) {
             angle = lnchrUpAngle;
-            rate = 0;
+            rate = 0.0;
          }
       }
-      else if (cmdLnchrPos == DOWN && lnchrAngle != lnchrDownAngle) { 
+      else if (cmdLnchrPos == DOWN && lnchrAngle != lnchrDownAngle) {
          angle = lnchrAngle - (rate * dt);
          if (angle <= lnchrDownAngle) {
             angle = lnchrDownAngle;
-            rate = 0;
+            rate = 0.0;
          }
       }
 
@@ -202,7 +204,7 @@ bool GroundVehicle::commandLauncher(const LauncherCommand cmd)
 bool GroundVehicle::setLauncherPosition(const LCreal rad)
 {
    lnchrAngle = rad;
-   lnchrRate = 0;
+   lnchrRate = 0.0;
    cmdLnchrPos = NONE;
    return true;
 }
@@ -215,7 +217,7 @@ bool GroundVehicle::setLauncherPosition(const LCreal rad)
 bool GroundVehicle::setSlotCommandedPosition(const Basic::Identifier* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       if (*msg == "up" || *msg == "UP") {
          initLnchrPos = UP;
          cmdLnchrPos = UP;
@@ -234,7 +236,7 @@ bool GroundVehicle::setSlotCommandedPosition(const Basic::Identifier* const msg)
 bool GroundVehicle::setSlotLauncherDownAngle(const Basic::Angle* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       lnchrDownAngle = static_cast<LCreal>(Basic::Radians::convertStatic( *msg ));
       ok = true;
    }
@@ -245,7 +247,7 @@ bool GroundVehicle::setSlotLauncherDownAngle(const Basic::Angle* const msg)
 bool GroundVehicle::setSlotLauncherUpAngle(const Basic::Angle* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       lnchrUpAngle = static_cast<LCreal>(Basic::Radians::convertStatic( *msg ));
       ok = true;
    }
@@ -256,7 +258,7 @@ bool GroundVehicle::setSlotLauncherUpAngle(const Basic::Angle* const msg)
 bool GroundVehicle::setSlotLauncherMoveTime(const Basic::Time* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       lnchrMoveTime = Basic::Seconds::convertStatic( *msg );
       ok = true;
    }

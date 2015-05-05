@@ -18,7 +18,7 @@ BEGIN_SLOTTABLE(ExternalStore)
    "jettisonable" // 2) External store can be jettisoned (default: true)
 END_SLOTTABLE(ExternalStore)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(ExternalStore)
    ON_SLOT( 1, setSlotType, Basic::String)
    ON_SLOT( 2, setSlotJettisonable, Basic::Number )
@@ -42,7 +42,7 @@ ExternalStore::ExternalStore()
 // init member data
 void ExternalStore::initData()
 {
-   type = 0;
+   type = nullptr;
    canJettison = true; // default
    jettisoned = false;
 }
@@ -54,10 +54,10 @@ void ExternalStore::copyData(const ExternalStore& org, const bool cc)
    if (cc) initData();
 
    {
-      const Basic::String* p = 0;
-      if (org.type != 0) p = org.type->clone();
+      const Basic::String* p = nullptr;
+      if (org.type != nullptr) p = org.type->clone();
       setSlotType( p );
-      if (p != 0) p->unref();
+      if (p != nullptr) p->unref();
    }
 
    canJettison  = org.canJettison;
@@ -67,7 +67,7 @@ void ExternalStore::copyData(const ExternalStore& org, const bool cc)
 // Delete member data
 void ExternalStore::deleteData()
 {
-   type = 0;
+   type = nullptr;
 }
 
 //------------------------------------------------------------------------------

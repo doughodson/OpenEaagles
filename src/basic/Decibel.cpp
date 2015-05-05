@@ -23,7 +23,6 @@ Decibel::Decibel(const LCreal value)
    setValueDB(value);
 }
 
-
 //------------------------------------------------------------------------------
 // copyData(), deleteData() -- copy (delete) member data
 //------------------------------------------------------------------------------
@@ -42,7 +41,7 @@ EMPTY_DELETEDATA(Decibel)
 void Decibel::setValueDB(const LCreal v)
 {
    db = v;
-   val = lcPow( LCreal(10.0), LCreal(db/10.0) );
+   val = lcPow( static_cast<LCreal>(10.0), static_cast<LCreal>(db/10.0) );
 }
 
 void Decibel::setValue(const double v)

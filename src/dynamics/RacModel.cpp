@@ -317,10 +317,10 @@ void RacModel::updateRAC(const LCreal dt)
    pp->setAngularVelocities(pa, qa, ra);
 
    // Set our velocity vector (body coordinates)
-   pp->setVelocityBody( LCreal(newVP), 0.0, 0.0);
+   pp->setVelocityBody( static_cast<LCreal>(newVP), 0.0, 0.0);
 
    // Set our acceleration vector (body coordinates)
-   pp->setAccelerationBody( LCreal(vpdot), 0.0, 0.0);
+   pp->setAccelerationBody( static_cast<LCreal>(vpdot), 0.0, 0.0);
 }
 
 

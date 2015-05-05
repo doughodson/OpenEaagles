@@ -64,8 +64,8 @@ void Bomb::initData()
    noseFuze  = false;
    midFuze   = false;
    tailFuze  = false;
-   fuzeAlt   = 0.0f;
-   fuzeTime  = 0.0f;
+   fuzeAlt   = 0.0;
+   fuzeTime  = 0.0;
    setDragIndex(0.0006f);
 
    missDistRef.set(0,0,0);
@@ -205,24 +205,24 @@ void Bomb::weaponGuidance(const LCreal)
    if (isGuidanceEnabled()) {
 
       // Get target position
-      osg::Vec3 tgtPos = getTargetPosition();
+      const osg::Vec3 tgtPos = getTargetPosition();
 
       // weapon velocities (platform)
-      osg::Vec3 vel = getVelocity();
+      const osg::Vec3 vel = getVelocity();
 
       // weapon velocities (relative)
       LCreal velG = lcSqrt (vel[0]*vel[0] + vel[1]*vel[1]);
       if (velG < 1.0f) velG = 1.0f;
 
       // Earth to platform sin/cos
-      LCreal prcos = vel[0] / velG;
-      LCreal prsin = vel[1] / velG;
+      const LCreal prcos = vel[0] / velG;
+      const LCreal prsin = vel[1] / velG;
 
       // Target position (platform)
-      osg::Vec3 tgtPosP = tgtPos - getPosition();
+      const osg::Vec3 tgtPosP = tgtPos - getPosition();
 
       // Target range distance
-      LCreal tsrng = tgtPosP.length();
+      const LCreal tsrng = tgtPosP.length();
 
       // Target position (relative)
       tgtRangeRef.set(
@@ -239,8 +239,8 @@ void Bomb::weaponGuidance(const LCreal)
       osg::Vec3 initPos(0.0, 0.0, static_cast<LCreal>(-getAltitude()));
       osg::Vec3 initVel = vel;
       LCreal groundPlane = tgtPos[2];
-      LCreal timeStep = 0.1f;
-      LCreal maxTime = 60.0f;
+      LCreal timeStep = 0.1;
+      LCreal maxTime = 60.0;
 
       // Outputs
       LCreal tof = 0;
@@ -255,7 +255,7 @@ void Bomb::weaponGuidance(const LCreal)
       // ---
 
       // miss Dist (Platform)
-      osg::Vec3 pmd = tgtPosP - ip;
+      const osg::Vec3 pmd = tgtPosP - ip;
 
       // rotate to ref coord sys
       missDistRef.set(
@@ -304,7 +304,7 @@ void Bomb::weaponDynamics(const LCreal dt)
    // ---
 
    // First drag
-   osg::Vec3 tmp = getVelocity() * (-dragIndex);
+   const osg::Vec3 tmp = getVelocity() * (-dragIndex);
 
    // then gravity
    osg::Vec3 ae1 = tmp;
@@ -312,7 +312,7 @@ void Bomb::weaponDynamics(const LCreal dt)
 
    // and the controls from guidance, if any
    if (guidanceValid) {
-      LCreal h = g * 2.0f;
+      const LCreal h = g * 2.0f;
       osg::Vec3 ab0(0, 0, 0); // body accelerations
 
       ab0[1] = h * cmdStrAz;  // body Y accel (m/s/s)
@@ -331,14 +331,14 @@ void Bomb::weaponDynamics(const LCreal dt)
    // ---
    // Compute new velocity vector (earth)
    // ---
-   osg::Vec3 ve1 = getVelocity() + (ae1 * dt);
+   const osg::Vec3 ve1 = getVelocity() + (ae1 * dt);
 
    // ---
    // Compute Euler angles
    // ---
-   LCreal vg = std::sqrt(ve1[INORTH]*ve1[INORTH] + ve1[IEAST]*ve1[IEAST]);
-   LCreal newPsi   = lcAtan2(ve1[IEAST],ve1[INORTH]);
-   LCreal newTheta = lcAtan2( -ve1[IDOWN], vg );
+   const LCreal vg = std::sqrt(ve1[INORTH]*ve1[INORTH] + ve1[IEAST]*ve1[IEAST]);
+   const LCreal newPsi   = lcAtan2(ve1[IEAST],ve1[INORTH]);
+   const LCreal newTheta = lcAtan2( -ve1[IDOWN], vg );
 
 
    // ---
@@ -384,7 +384,7 @@ bool Bomb::weaponImpactPrediction(
    static const LCreal g = ETHG * Basic::Distance::FT2M;      // Acceleration of Gravity (m/s/s)
 
    // Make sure we have all of our pointers
-   if (initPos == 0 || initVel == 0 || finalPos == 0 || tof == 0) return false;
+   if (initPos == nullptr || initVel == nullptr || finalPos == nullptr || tof == nullptr) return false;
 
    // Set initial position & velocity
    osg::Vec3 pos = *initPos;
@@ -429,7 +429,7 @@ bool Bomb::weaponImpactPrediction(
 bool Bomb::setSlotArmingOption(Basic::Identifier* const p)
 {
     bool ok = false;
-    if (p != 0) {
+    if (p != nullptr) {
        if (*p == "NONE" || *p == "none") ok = setArmingOption(NONE);
        else if (*p == "FREE_FALL" || *p == "free_fall") ok = setArmingOption(FREE_FALL);
        else if (*p == "RETARDED" || *p == "retarded") ok = setArmingOption(RETARDED);

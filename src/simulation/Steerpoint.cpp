@@ -44,7 +44,7 @@ BEGIN_SLOTTABLE(Steerpoint)
     "action",           // 14) Steerpoint action        (Action)
 END_SLOTTABLE(Steerpoint)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(Steerpoint)
     ON_SLOT( 1, setSlotSteerpointType, Basic::Identifier)
 
@@ -89,24 +89,24 @@ END_SLOT_MAP()
 Steerpoint::Steerpoint()
 {
     STANDARD_CONSTRUCTOR()
-    
+
     description = 0;
     action = 0;
-    
-    latitude = 0; 
+
+    latitude = 0;
     longitude = 0;
     elevation = 0;
     posVec.set(0,0,0);
-    stptType = DEST;  
-    pta = 0;  
-    sca = 0; 
-    magvar = 0; 
+    stptType = DEST;
+    pta = 0;
+    sca = 0;
+    magvar = 0;
     needPosVec = true;
-    needLL = true; 
+    needLL = true;
     cmdAlt = 0;
     haveCmdAlt = false;
     cmdAirspeed = 0;
-    haveCmdAs = false;  
+    haveCmdAs = false;
     next = 0;
 
     initLatitude = 0;
@@ -122,7 +122,7 @@ Steerpoint::Steerpoint()
     initCmdAlt = 0;
     haveInitCmdAlt = false;
     initCmdAirspeed = 0;
-    haveInitCmdAs = false; 
+    haveInitCmdAs = false;
     initNextStptName = 0;
     initNextStptIdx = 0;
 
@@ -151,7 +151,7 @@ Steerpoint::Steerpoint()
 void Steerpoint::copyData(const Steerpoint& org, const bool cc)
 {
     BaseClass::copyData(org);
-    
+
     if (cc) {
         next = 0;
         initNextStptName = 0;
@@ -160,7 +160,7 @@ void Steerpoint::copyData(const Steerpoint& org, const bool cc)
     }
 
     next = 0; // find it using 'initNextStptName' or 'initNexStptIdx'
-    
+
     {
        Basic::String* n = 0;
        if (org.initNextStptName != 0) n = org.initNextStptName->clone();
@@ -183,17 +183,17 @@ void Steerpoint::copyData(const Steerpoint& org, const bool cc)
        action = aa;
        if (aa != 0) aa->unref();
     }
-    
-    latitude = org.latitude; 
+
+    latitude = org.latitude;
     longitude = org.longitude;
     elevation = org.elevation;
     posVec = org.posVec;
-    stptType = org.stptType;  
-    pta = org.pta;  
-    sca = org.sca; 
-    magvar = org.magvar; 
+    stptType = org.stptType;
+    pta = org.pta;
+    sca = org.sca;
+    magvar = org.magvar;
     needPosVec = org.needPosVec;
-    needLL = org.needLL; 
+    needLL = org.needLL;
     cmdAlt = org.cmdAlt;
     haveCmdAlt = org.haveCmdAlt;
     cmdAirspeed = org.cmdAirspeed;
@@ -254,7 +254,7 @@ void Steerpoint::reset()
         initPosVec[Player::IDOWN] = -initElev;
         posVec[Player::IDOWN] = -initElev;
     }
-    
+
     // ---
     // Set initial positions -- give priority to lat/lon entries
     // ---
@@ -683,7 +683,7 @@ bool Steerpoint::compute(const Navigation* const nav, const Steerpoint* const fr
 {
     bool ok = false;
     if (nav != 0) {
-    
+
         // ---
         // Update Mag Var (if needed)
         // ---
@@ -711,9 +711,9 @@ bool Steerpoint::compute(const Navigation* const nav, const Steerpoint* const fr
         }
 
         // ## Note: at this point we need a valid lat/lon position
-        
+
         if (isLatLonValid()) {
-            
+
             // ---
             // Compute 'direct-to' bearing,  distance & time
             // ---
@@ -722,10 +722,10 @@ bool Steerpoint::compute(const Navigation* const nav, const Steerpoint* const fr
             double toTTG = 0.0;
             Basic::Nav::gll2bd(nav->getLatitude(), nav->getLongitude(), getLatitude(), getLongitude(), &toBrg, &toDist);
 
-            setTrueBrgDeg( LCreal(toBrg) );
-            setDistNM( LCreal(toDist) );
+            setTrueBrgDeg( static_cast<LCreal>(toBrg) );
+            setDistNM( static_cast<LCreal>(toDist) );
             setMagBrgDeg( lcAepcDeg( getTrueBrgDeg() - getMagVarDeg() ) );
-            
+
             if (nav->isVelocityDataValid() && nav->getGroundSpeedKts() > 0.0) {
                 toTTG = (toDist/nav->getGroundSpeedKts()) * Basic::Time::H2S;
             }
@@ -740,13 +740,13 @@ bool Steerpoint::compute(const Navigation* const nav, const Steerpoint* const fr
             if (from != 0) {
                 // When we have a 'from' steerpoint, we can compute this leg's data
                 Basic::Nav::gll2bd(from->getLatitude(), from->getLongitude(), getLatitude(), getLongitude(), &toBrg, &toDist);
-                setTrueCrsDeg( LCreal(toBrg) );
+                setTrueCrsDeg( static_cast<LCreal>(toBrg) );
                 setMagCrsDeg( lcAepcDeg( getTrueCrsDeg() - getMagVarDeg() ) );
-                setLegDistNM( LCreal(toDist) );
+                setLegDistNM( static_cast<LCreal>(toDist) );
                 if (nav->isVelocityDataValid() && nav->getGroundSpeedKts() > 0.0) {
                     toTTG = (toDist/nav->getGroundSpeedKts()) * Basic::Time::H2S;
                 }
-                setLegTime( LCreal(toTTG) );
+                setLegTime( static_cast<LCreal>(toTTG) );
                 setDistEnrouteNM( from->getDistEnrouteNM() + getLegDistNM() );
                 setETE( from->getETE() + getLegTime() );
             }
@@ -761,7 +761,7 @@ bool Steerpoint::compute(const Navigation* const nav, const Steerpoint* const fr
             }
 
             // ---
-            // Compute Est Time of Arrival and the PTA Early/Late time        
+            // Compute Est Time of Arrival and the PTA Early/Late time
             // ---
             setETA( static_cast<LCreal>(getETE() + nav->getUTC()) );
             LCreal delta = getPTA() - getETA();
@@ -790,7 +790,7 @@ bool Steerpoint::compute(const Navigation* const nav, const Steerpoint* const fr
                 steerpoints->unref();
                 steerpoints = 0;
             }
-        
+
             // ---
             // Check for safe clearance altitude warning
             // ---
@@ -805,7 +805,7 @@ bool Steerpoint::compute(const Navigation* const nav, const Steerpoint* const fr
     }
     return ok;
 }
-    
+
 //------------------------------------------------------------------------------
 // processComponets() -- process our components; make sure the are all of
 // type Steerpoint (or derived); tell them that we are their container

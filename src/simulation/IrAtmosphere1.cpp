@@ -42,9 +42,9 @@ IrAtmosphere1::IrAtmosphere1()
 {
    STANDARD_CONSTRUCTOR()
 
-   solarRadiationTable = 0;
-   backgroundRadiationTable = 0;
-   transmissivityTable = 0;
+   solarRadiationTable = nullptr;
+   backgroundRadiationTable = nullptr;
+   transmissivityTable = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -60,19 +60,19 @@ void IrAtmosphere1::copyData(const IrAtmosphere1& org, const bool)
 //------------------------------------------------------------------------------
 void IrAtmosphere1::deleteData()
 {
-   if (solarRadiationTable != 0) {
+   if (solarRadiationTable != nullptr) {
       solarRadiationTable->unref();
-      solarRadiationTable = 0;
+      solarRadiationTable = nullptr;
    }
 
-   if (backgroundRadiationTable != 0) {
+   if (backgroundRadiationTable != nullptr) {
       backgroundRadiationTable->unref();
-      backgroundRadiationTable = 0;
+      backgroundRadiationTable = nullptr;
    }
 
-   if (transmissivityTable != 0) {
+   if (transmissivityTable != nullptr) {
       transmissivityTable->unref();
-      transmissivityTable = 0;
+      transmissivityTable = nullptr;
    }
 }
 
@@ -84,8 +84,8 @@ bool IrAtmosphere1::setSlotSolarRadiationTable(const Basic::Table2* const tbl)
 {
    bool ok = false;
    // tbl->serialize(std::cout);
-   if (tbl != 0) {
-      if (solarRadiationTable != 0) solarRadiationTable->unref();
+   if (tbl != nullptr) {
+      if (solarRadiationTable != nullptr) solarRadiationTable->unref();
       tbl->ref();
       solarRadiationTable = tbl;
       ok = true;
@@ -96,8 +96,8 @@ bool IrAtmosphere1::setSlotSolarRadiationTable(const Basic::Table2* const tbl)
 bool IrAtmosphere1::setSlotBackgroundRadiationTable(const Basic::Table3* const tbl)
 {
    bool ok = false;
-   if (tbl != 0) {
-      if (backgroundRadiationTable != 0) backgroundRadiationTable->unref();
+   if (tbl != nullptr) {
+      if (backgroundRadiationTable != nullptr) backgroundRadiationTable->unref();
       tbl->ref();
       backgroundRadiationTable = tbl;
       ok = true;
@@ -108,8 +108,8 @@ bool IrAtmosphere1::setSlotBackgroundRadiationTable(const Basic::Table3* const t
 bool IrAtmosphere1::setSlotTransmissivityTable(const Basic::Table4* const tbl)
 {
    bool ok = false;
-   if (tbl != 0) {
-      if (transmissivityTable != 0) transmissivityTable->unref();
+   if (tbl != nullptr) {
+      if (transmissivityTable != nullptr) transmissivityTable->unref();
       tbl->ref();
       transmissivityTable = tbl;
       ok = true;
@@ -126,14 +126,14 @@ bool IrAtmosphere1::calculateAtmosphereContribution(IrQueryMsg* const msg, LCrea
    const LCreal* centerWavelengths = getWaveBandCenters();
    const LCreal* widths = getWaveBandWidths();
    const LCreal* sigArray = msg->getSignatureByWaveband();
-   Player* ownship = msg->getOwnship();
-   Player* target = msg->getTarget();
+   const Player* ownship = msg->getOwnship();
+   const Player* target = msg->getTarget();
 
    // FAB - this should be angle of gimbal, not angle to target. (see base class)
    // Determine the angle above the horizon to be used for background radiation lookup
-   LCreal range2D = msg->getRange();
-   LCreal tanPhi = static_cast<LCreal>( (target->getAltitudeM() - ownship->getAltitudeM())/ range2D );
-   LCreal tanPhiPrime = tanPhi - ( range2D / 12756776.0f ); // Twice earth radius
+   const LCreal range2D = msg->getRange();
+   const LCreal tanPhi = static_cast<LCreal>( (target->getAltitudeM() - ownship->getAltitudeM())/ range2D );
+   const LCreal tanPhiPrime = tanPhi - ( range2D / 12756776.0f ); // Twice earth radius
 
    // appears that negative angles are down in this calculation
    LCreal viewingAngle = lcAtan(tanPhiPrime);
@@ -145,28 +145,23 @@ bool IrAtmosphere1::calculateAtmosphereContribution(IrQueryMsg* const msg, LCrea
    *totalBackground = 0.0;
 
    for (unsigned int i=0; i<getNumWaveBands(); i++) {
-      LCreal radiantIntensityInBin;
-      LCreal lowerBandBound = centerWavelengths[i] - (widths[i] / 2.0f);
-      LCreal upperBandBound = lowerBandBound + widths[i];
+      const LCreal lowerBandBound = centerWavelengths[i] - (widths[i] / 2.0f);
+      const LCreal upperBandBound = lowerBandBound + widths[i];
 
       // determine ratio of this band's coverage to entire atmosphere waveband
-      LCreal fractionOfBandToTotal = (upperBandBound - lowerBandBound) / ((centerWavelengths[getNumWaveBands() - 1] + (widths[getNumWaveBands() - 1] / 2.0f))-(centerWavelengths[0] - (widths[0] / 2.0f)));
+      const LCreal fractionOfBandToTotal = (upperBandBound - lowerBandBound) / ((centerWavelengths[getNumWaveBands() - 1] + (widths[getNumWaveBands() - 1] / 2.0f))-(centerWavelengths[0] - (widths[0] / 2.0f)));
 
       // Find the limits of the sensor
-      LCreal lowerSensorBound = msg->getLowerWavelength();
-      LCreal upperSensorBound = msg->getUpperWavelength();
+      const LCreal lowerSensorBound = msg->getLowerWavelength();
+      const LCreal upperSensorBound = msg->getUpperWavelength();
 
       // Determine how much of this wave band overlaps the sensor limits
-      LCreal lowerOverlap = getLowerEndOfWavelengthOverlap(
-                                                   lowerBandBound,
-                                                   lowerSensorBound);
-      LCreal upperOverlap = getUpperEndOfWavelengthOverlap(
-                                                   upperBandBound,
-                                                   upperSensorBound);
+      const LCreal lowerOverlap = getLowerEndOfWavelengthOverlap(lowerBandBound, lowerSensorBound);
+      LCreal upperOverlap = getUpperEndOfWavelengthOverlap(upperBandBound, upperSensorBound);
 
       if (upperOverlap < lowerOverlap) upperOverlap = lowerOverlap;
 
-      LCreal overlapRatio = (upperOverlap - lowerOverlap) / (upperBandBound - lowerBandBound);
+      const LCreal overlapRatio = (upperOverlap - lowerOverlap) / (upperBandBound - lowerBandBound);
 
       // Get the background radiation given the sensor altitude and the viewing angle
       LCreal backgroundRadianceInBand = overlapRatio * getBackgroundRadiation(
@@ -174,6 +169,7 @@ bool IrAtmosphere1::calculateAtmosphereContribution(IrQueryMsg* const msg, LCrea
                                                 upperBandBound,
                                                 static_cast<LCreal>(ownship->getAltitudeM()),
                                                 viewingAngle);
+      LCreal radiantIntensityInBin(0.0);
       if (sigArray == 0) {
          // signature is a simple number
          // distribute simple signature evenly across atmosphere bins
@@ -189,13 +185,13 @@ bool IrAtmosphere1::calculateAtmosphereContribution(IrQueryMsg* const msg, LCrea
       }
 
       // add in reflected solar radiation
-      LCreal solarRadiationInBin = ((1.0f - msg->getEmissivity()) * getSolarRadiation(centerWavelengths[i],
+      const LCreal solarRadiationInBin = ((1.0f - msg->getEmissivity()) * getSolarRadiation(centerWavelengths[i],
                                     static_cast<LCreal>(target->getAltitudeM())));
       radiantIntensityInBin += (solarRadiationInBin * overlapRatio);
 
       // Lookup the transmissivity in the wave band given the altitudes of sensor
       // and target and the ground range between the two
-      LCreal transmissivity = getTransmissivity(
+      const LCreal transmissivity = getTransmissivity(
                                                 lowerBandBound,
                                                 upperBandBound,
                                                 static_cast<LCreal>(ownship->getAltitudeM()),
@@ -226,9 +222,9 @@ LCreal IrAtmosphere1::getTransmissivity(
                const LCreal targetAltitude,
                const LCreal range) const
 {
-   LCreal wavebandCenter = (upperWavelength + lowerWavelength) / 2;
+   const LCreal wavebandCenter = (upperWavelength + lowerWavelength) / 2;
    LCreal trans = 1.0;  //Default to full propagation of energy in the absence of a table.
-   if (0 != transmissivityTable){
+   if (transmissivityTable != nullptr){
       trans = transmissivityTable->lfi(wavebandCenter,seekerAltitude,targetAltitude,range);
    }
    else {
@@ -251,7 +247,7 @@ LCreal IrAtmosphere1::getTransmissivity(
                         const LCreal range) const
 {
    LCreal trans = 1.0;
-   if (0 != transmissivityTable){
+   if (transmissivityTable != nullptr){
       trans = transmissivityTable->lfi(wavebandCenter,seekerAltitude,targetAltitude,range);
    }
    else {
@@ -272,9 +268,9 @@ LCreal IrAtmosphere1::getSolarRadiation(
                         const LCreal upperWavelength,
                         const LCreal targetAltitude) const
 {
-   LCreal wavebandCenter = (upperWavelength + lowerWavelength) / 2;
-   LCreal solarRadiation = 0;
-   if (0 != solarRadiationTable){
+   const LCreal wavebandCenter = (upperWavelength + lowerWavelength) / 2.0;
+   LCreal solarRadiation = 0.0;
+   if (solarRadiationTable != nullptr){
       solarRadiation = solarRadiationTable->lfi(wavebandCenter,targetAltitude);
    }
    return solarRadiation;
@@ -291,8 +287,8 @@ LCreal IrAtmosphere1::getSolarRadiation(
                         const LCreal wavebandCenter,
                         const LCreal targetAltitude) const
 {
-   LCreal sr = 0;
-   if (0 != solarRadiationTable){
+   LCreal sr = 0.0;
+   if (solarRadiationTable != nullptr){
       sr = solarRadiationTable->lfi(wavebandCenter,targetAltitude);
    }
    return sr;
@@ -310,9 +306,9 @@ LCreal IrAtmosphere1::getBackgroundRadiation(
                            const LCreal seekerAltitude,
                            const LCreal viewAngle) const
 {
-   LCreal wavebandCenter = (upperWavelength + lowerWavelength) / 2;
-   LCreal bgRadiation = 0;
-   if (0!= backgroundRadiationTable){
+   const LCreal wavebandCenter = (upperWavelength + lowerWavelength) / 2.0;
+   LCreal bgRadiation = 0.0;
+   if (backgroundRadiationTable != nullptr){
       bgRadiation = backgroundRadiationTable->lfi(wavebandCenter,seekerAltitude,viewAngle);
    }
    return bgRadiation;
@@ -329,8 +325,8 @@ LCreal IrAtmosphere1::getBackgroundRadiation(
                         const LCreal seekerAltitude,
                         const LCreal viewAngle) const
 {
-   LCreal bgRadiation = 0;
-   if ( 0 != backgroundRadiationTable){
+   LCreal bgRadiation = 0.0;
+   if (backgroundRadiationTable != nullptr){
       bgRadiation = backgroundRadiationTable->lfi(wavebandCenter,seekerAltitude,viewAngle);
    }
    return bgRadiation;
@@ -350,9 +346,9 @@ void IrAtmosphere1::getSolarRadiationSignatures(
    const LCreal* centerWavelengths = this->getWaveBandCenters();
    const LCreal* widths = this->getWaveBandWidths();
    for (unsigned int i = 0; i < getNumWaveBands(); i++) {
-      LCreal centerWavelength = centerWavelengths[i];
-      LCreal lowerWavelength = centerWavelength - (widths[i] / 2.0f);
-      LCreal upperWavelength = lowerWavelength + widths[i];
+      const LCreal centerWavelength = centerWavelengths[i];
+      const LCreal lowerWavelength = centerWavelength - (widths[i] / 2.0);
+      const LCreal upperWavelength = lowerWavelength + widths[i];
       signatureArray[i*3] = lowerWavelength;
       signatureArray[i*3 + 1] = upperWavelength;
       if (upperBound > lowerWavelength && lowerBound < upperWavelength) {

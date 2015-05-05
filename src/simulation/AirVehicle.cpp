@@ -467,7 +467,7 @@ void AirVehicle::setCmdWingSweepAngle(const LCreal value)
 //------------------------------------------------------------------------------
 int AirVehicle::getNumberOfEngines() const
 {
-   int  n = 0;
+   int n = 0;
    const AerodynamicsModel* aero = getAerodynamicsModel();
    if (aero != nullptr) {
       n = aero->getNumberOfEngines();
@@ -477,7 +477,7 @@ int AirVehicle::getNumberOfEngines() const
 
 int AirVehicle::getEngThrust(LCreal* const data, const int max) const
 {
-   int  n = 0;
+   int n = 0;
    const AerodynamicsModel* aero = getAerodynamicsModel();
    if (aero != nullptr) {
       n = aero->getEngThrust(data, max);
@@ -487,7 +487,7 @@ int AirVehicle::getEngThrust(LCreal* const data, const int max) const
 
 int AirVehicle::getEngThrustIdle(LCreal* const data, const int max) const
 {
-   int  n = 0;
+   int n = 0;
    const AerodynamicsModel* aero = getAerodynamicsModel();
    if (aero != nullptr) {
       n = aero->getEngThrustIdle(data, max);
@@ -497,7 +497,7 @@ int AirVehicle::getEngThrustIdle(LCreal* const data, const int max) const
 
 int AirVehicle::getEngThrustMil(LCreal* const data, const int max) const
 {
-   int  n = 0;
+   int n = 0;
    const AerodynamicsModel* aero = getAerodynamicsModel();
    if (aero != nullptr) {
       n = aero->getEngThrustMil(data, max);
@@ -507,7 +507,7 @@ int AirVehicle::getEngThrustMil(LCreal* const data, const int max) const
 
 int AirVehicle::getEngThrustAb(LCreal* const data, const int max) const
 {
-   int  n = 0;
+   int n = 0;
    const AerodynamicsModel* aero = getAerodynamicsModel();
    if (aero != nullptr) {
       n = aero->getEngThrustAb(data, max);
@@ -517,7 +517,7 @@ int AirVehicle::getEngThrustAb(LCreal* const data, const int max) const
 
 int AirVehicle::getEngRPM(LCreal* const data, const int max) const
 {
-   int  n = 0;
+   int n = 0;
    const AerodynamicsModel* aero = getAerodynamicsModel();
    if (aero != nullptr) {
       n = aero->getEngRPM(data, max);
@@ -527,7 +527,7 @@ int AirVehicle::getEngRPM(LCreal* const data, const int max) const
 
 int AirVehicle::getEngN1(LCreal* const data, const int max) const
 {
-   int  n = 0;
+   int n = 0;
    const AerodynamicsModel* aero = getAerodynamicsModel();
    if (aero != nullptr) {
       n = aero->getEngN1(data, max);
@@ -537,7 +537,7 @@ int AirVehicle::getEngN1(LCreal* const data, const int max) const
 
 int AirVehicle::getEngPLA(LCreal* const data, const int max) const
 {
-   int  n = 0;
+   int n = 0;
    const AerodynamicsModel* aero = getAerodynamicsModel();
    if (aero != nullptr) {
       n = aero->getEngPLA(data, max);
@@ -547,7 +547,7 @@ int AirVehicle::getEngPLA(LCreal* const data, const int max) const
 
 int AirVehicle::getEngFuelFlow(LCreal* const data, const int max) const
 {
-   int  n = 0;
+   int n = 0;
    const AerodynamicsModel* aero = getAerodynamicsModel();
    if (aero != nullptr) {
       n = aero->getEngFuelFlow(data, max);
@@ -557,7 +557,7 @@ int AirVehicle::getEngFuelFlow(LCreal* const data, const int max) const
 
 int AirVehicle::getEngOilPressure(LCreal* const data, const int max) const
 {
-   int  n = 0;
+   int n = 0;
    const AerodynamicsModel* aero = getAerodynamicsModel();
    if (aero != nullptr) {
       n = aero->getEngOilPressure(data, max);
@@ -567,7 +567,7 @@ int AirVehicle::getEngOilPressure(LCreal* const data, const int max) const
 
 int AirVehicle::getEngInletTemp(LCreal* const data, const int max) const
 {
-   int  n = 0;
+   int n = 0;
    const AerodynamicsModel* aero = getAerodynamicsModel();
    if (aero != nullptr) {
       n = aero->getEngInletTemp(data, max);
@@ -577,7 +577,7 @@ int AirVehicle::getEngInletTemp(LCreal* const data, const int max) const
 
 int AirVehicle::getEngNozzle(LCreal* const data, const int max) const
 {
-   int  n = 0;
+   int n = 0;
    const AerodynamicsModel* aero = getAerodynamicsModel();
    if (aero != nullptr) {
       n = aero->getEngNozzle(data, max);

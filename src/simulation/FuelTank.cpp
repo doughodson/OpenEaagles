@@ -76,7 +76,7 @@ bool   FuelTank::isFuelWtValid() const          { return (fuelWt >= 0 && fuelWt 
 
 bool FuelTank::setSlotFuelWt(const Basic::Number* const msg)
 {
-    if (msg == 0) return false;
+    if (msg == nullptr) return false;
     bool ok = setFuelWt( msg->getReal() );
     if (ok) initFuelWt = getFuelWt();
     return ok;
@@ -84,7 +84,7 @@ bool FuelTank::setSlotFuelWt(const Basic::Number* const msg)
 
 bool FuelTank::setSlotCapacity(const Basic::Number* const msg)
 {
-    if (msg == 0) return false;
+    if (msg == nullptr) return false;
     return setCapacity( msg->getReal() );
 }
 

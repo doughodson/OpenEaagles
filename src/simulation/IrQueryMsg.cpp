@@ -21,27 +21,26 @@ IrQueryMsg::IrQueryMsg()
 {
     STANDARD_CONSTRUCTOR()
 
-   lowerWavelength = 0.0f;
-   upperWavelength = 0.0f;
-   instantaneousFieldOfView = 0.0f;
-   nei = 0.0f;
-   signatureByWaveband = 0;
-   signatureAtRange = 0.0f;
-   emissivity = 1.0f;
-   projectedArea = 0.0f;
-   signalToNoiseRatio = 0.0f;     // ratio of Signal to Noise 
-   backgroundNoiseRatio = 0.0f;
-   sendingSensor = 0; 
+   lowerWavelength = 0.0;
+   upperWavelength = 0.0;
+   instantaneousFieldOfView = 0.0;
+   nei = 0.0;
+   signatureByWaveband = nullptr;
+   signatureAtRange = 0.0;
+   emissivity = 1.0;
+   projectedArea = 0.0;
+   signalToNoiseRatio = 0.0;     // ratio of Signal to Noise
+   backgroundNoiseRatio = 0.0;
+   sendingSensor = nullptr;
    pos.set(0,0,0);
    vel.set(0,0,0);
    accel.set(0,0,0);
-   angleAspect = 0.0f;
-   angleOffBoresight = 0.0f;
-   rel = 0.0f;
-   raz = 0.0f;
+   angleAspect = 0.0;
+   angleOffBoresight = 0.0;
+   rel = 0.0;
+   raz = 0.0;
    mergedQueryStatus = NOT_MERGED;
 }
-
 
 //------------------------------------------------------------------------------
 // copyData() -- copy member data
@@ -52,8 +51,8 @@ void IrQueryMsg::copyData(const IrQueryMsg& org, const bool cc)
 
    // If copy constructor, init these pointers
    if (cc) {
-      signatureByWaveband = 0;
-      sendingSensor = 0; 
+      signatureByWaveband = nullptr;
+      sendingSensor = nullptr;
    }
 
 //   if (org.signatureByWaveband != 0) {
@@ -61,7 +60,7 @@ void IrQueryMsg::copyData(const IrQueryMsg& org, const bool cc)
 //   }
 //   else setSignatureByWaveband(0);
 
-   // Signature by waveband not copied 
+   // Signature by waveband not copied
 
    lowerWavelength = org.lowerWavelength;
    upperWavelength = org.upperWavelength;
@@ -74,7 +73,7 @@ void IrQueryMsg::copyData(const IrQueryMsg& org, const bool cc)
    backgroundNoiseRatio = org.backgroundNoiseRatio;
 
    setSendingSensor(org.sendingSensor);
-   
+
    pos = org.pos;
    vel = org.vel;
    accel = org.accel;
@@ -92,7 +91,7 @@ void IrQueryMsg::copyData(const IrQueryMsg& org, const bool cc)
 void IrQueryMsg::deleteData()
 {
    clear();
-   if (signatureByWaveband != 0)  delete signatureByWaveband;
+   if (signatureByWaveband != nullptr)  delete signatureByWaveband;
 }
 
 //------------------------------------------------------------------------------
@@ -102,7 +101,7 @@ void IrQueryMsg::deleteData()
 // Clear the IR signature data
 void IrQueryMsg::clearIrSignature()
 {
-   setSignatureByWaveband(0);
+   setSignatureByWaveband(nullptr);
 }
 
 // Sets the range to the target
@@ -112,7 +111,7 @@ void IrQueryMsg::setRange(const LCreal r)
 }
 
 //Set the signature by waveband
-void IrQueryMsg::setSignatureByWaveband (LCreal* const sig)
+void IrQueryMsg::setSignatureByWaveband(LCreal* const sig)
 {
 //   if (signatureByWaveband != 0) signatureByWaveband->unref();
    signatureByWaveband = sig;
@@ -121,9 +120,9 @@ void IrQueryMsg::setSignatureByWaveband (LCreal* const sig)
 
 void IrQueryMsg::setSendingSensor(IrSensor* const newSensor)
 {
-   if (sendingSensor != 0) sendingSensor->unref();
+   if (sendingSensor != nullptr) sendingSensor->unref();
    sendingSensor = newSensor;
-   if (sendingSensor != 0) sendingSensor->ref();
+   if (sendingSensor != nullptr) sendingSensor->ref();
 }
 
 //------------------------------------------------------------------------------
@@ -131,8 +130,8 @@ void IrQueryMsg::setSendingSensor(IrSensor* const newSensor)
 //------------------------------------------------------------------------------
 void IrQueryMsg::clear()
 {
-   setSignatureByWaveband(0);
-   setSendingSensor(0);
+   setSignatureByWaveband(nullptr);
+   setSendingSensor(nullptr);
 
    BaseClass::clear();
 }

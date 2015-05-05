@@ -113,6 +113,12 @@ simulation
 
    - The references to 'QStack<>' in classes Antenna and IrSeeker have been updated to 'Basic::safe_stack<>'
 
+   Image class
+      1) renamed method "setOrigialImageData(...)" to "setOriginalImageData(...)" to 
+         correct spelling mistake.
+
+   Lifeforms class
+      1) initialized 'lookAngle' in contructor (bug fix)
 
 --------------------------------------------------------------------------------
 terrain

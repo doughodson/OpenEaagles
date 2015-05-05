@@ -48,7 +48,7 @@ Bullet::Bullet()
    setMaxTOF( DEFAULT_MAX_TOF );
 
    muzzleVel = DEFAULT_MUZZLE_VEL;
-   hitPlayer = 0;
+   hitPlayer = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -60,7 +60,7 @@ void Bullet::copyData(const Bullet& org, const bool)
    BaseClass::copyData(org);
 
    nbt = 0;
-   hitPlayer = 0;
+   hitPlayer = nullptr;
 
    for (int i = 0; i < MBT; i++) {
       bursts[i].bPos = org.bursts[i].bPos;
@@ -74,7 +74,7 @@ void Bullet::copyData(const Bullet& org, const bool)
 
 void Bullet::deleteData()
 {
-   setHitPlayer(0);
+   setHitPlayer(nullptr);
 }
 
 //------------------------------------------------------------------------------
@@ -82,7 +82,7 @@ void Bullet::deleteData()
 //------------------------------------------------------------------------------
 bool Bullet::shutdownNotification()
 {
-   setHitPlayer(0);
+   setHitPlayer(nullptr);
    return BaseClass::shutdownNotification();
 }
 
@@ -93,7 +93,7 @@ void Bullet::reset()
 {
    BaseClass::reset();
    resetBurstTrajectories();
-   setHitPlayer(0);
+   setHitPlayer(nullptr);
 }
 
 //------------------------------------------------------------------------------
@@ -214,7 +214,7 @@ bool Bullet::checkForTargetHit()
 {
    Player* ownship = getLaunchVehicle();
    Player* tgt = getTargetPlayer();
-   if (ownship != 0 && tgt != 0) {
+   if (ownship != nullptr && tgt != nullptr) {
       osg::Vec3 osPos = tgt->getPosition();
 
       // For all active bursts ...
@@ -224,7 +224,7 @@ bool Bullet::checkForTargetHit()
             // Check if we're within range of the target
             osg::Vec3 rPos = bursts[i].bPos - osPos;
             LCreal rng = rPos.length();
-            if (rng < 10.0f) {
+            if (rng < 10.0) {
                // Yes -- it's a hit!
                bursts[i].bStatus = Burst::HIT;
                setHitPlayer(tgt);
@@ -248,15 +248,15 @@ bool Bullet::checkForTargetHit()
         //LCreal diffEl = 0;
         LCreal maxRange = 1; // close range of detonation
         Simulation* sim = getSimulation();
-        if (sim != 0) {
+        if (sim != nullptr) {
             Basic::PairStream* players = sim->getPlayers();
-            if (players != 0) {
+            if (players != nullptr) {
                 Basic::List::Item* item = players->getFirstItem();
-                while (item != 0) {
+                while (item != nullptr) {
                     Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
-                    if (pair != 0) {
+                    if (pair != nullptr) {
                         Player* player = dynamic_cast<Player*>(pair->object());
-                        if (player != 0 && player != ownship && player->isMajorType(LIFE_FORM) && !player->isDestroyed()) {
+                        if (player != nullptr && player != ownship && player->isMajorType(LIFE_FORM) && !player->isDestroyed()) {
                             // ok, calculate our position from this guy
                             tgtPos = player->getPosition();
                             vecPos = tgtPos - myPos;
@@ -272,7 +272,7 @@ bool Bullet::checkForTargetHit()
                     item = item->getNext();
                 }
                 players->unref();
-                players = 0;
+                players = nullptr;
             }
         }
 
@@ -334,7 +334,7 @@ Gun::Gun()
 {
    STANDARD_CONSTRUCTOR()
 
-   bullet = 0;
+   bullet = nullptr;
 
    armed = false;
    fire = false;
@@ -342,7 +342,7 @@ Gun::Gun()
 
    burstFrameTimer = 0;
    burstFrameTime = 1.0f/LCreal(DEFAULT_BURST_RATE);
-   rcount = 0;
+   rcount = 0.0;
 
    shortBurstTimer = 0.0;
    shortBurstTime  = 0.5;
@@ -352,8 +352,8 @@ Gun::Gun()
 
    rpm = DEFAULT_ROUNDS_PER_MINUTE;
 
-   setPosition(0,0,0);
-   setAngles(0,0,0);
+   setPosition(0.0, 0.0, 0.0);
+   setAngles(0.0, 0.0, 0.0);
    // Note: rotation matrix (mm) was initialized by setAngles()
 
 }
@@ -366,15 +366,15 @@ void Gun::copyData(const Gun& org, const bool cc)
    BaseClass::copyData(org);
 
    if (cc) {
-      bullet = 0;
+      bullet = nullptr;
    }
 
-   if (org.getBulletType() != 0) {
+   if (org.getBulletType() != nullptr) {
       Bullet* b = org.getBulletType()->clone();
       setBulletType( b );
       b->unref();
    }
-   else setBulletType(0);
+   else setBulletType(nullptr);
 
    armed = org.armed;
 
@@ -396,15 +396,15 @@ void Gun::copyData(const Gun& org, const bool cc)
 
 void Gun::deleteData()
 {
-   setBulletType(0);
+   setBulletType(nullptr);
 }
 
 bool Gun::shutdownNotification()
 {
-   if (bullet != 0) {
+   if (bullet != nullptr) {
       bullet->event(SHUTDOWN_EVENT);
       bullet->unref();
-      bullet = 0;
+      bullet = nullptr;
    }
 
    return BaseClass::shutdownNotification();
@@ -416,7 +416,7 @@ bool Gun::shutdownNotification()
 void Gun::reset()
 {
    BaseClass::reset();
-   if (getBulletType() != 0) getBulletType()->reset();
+   if (getBulletType() != nullptr) getBulletType()->reset();
    reload();
 }
 
@@ -470,8 +470,8 @@ void Gun::process(const LCreal dt)
 //------------------------------------------------------------------------------
 LCreal Gun::computeBulletRatePerSecond()
 {
-   LCreal spinUp = 1.0f;
-   return (LCreal(rpm) / 60.0f) * spinUp;
+   LCreal spinUp = 1.0;
+   return (static_cast<LCreal>(rpm) / 60.0f) * spinUp;
 }
 
 //------------------------------------------------------------------------------
@@ -539,11 +539,11 @@ bool Gun::setGunArmed(const bool flg)
 //------------------------------------------------------------------------------
 bool Gun::setBulletType(Bullet* const b)
 {
-   if (bullet != 0) {
+   if (bullet != nullptr) {
       bullet->unref();
    }
    bullet = b;
-   if (bullet != 0) {
+   if (bullet != nullptr) {
       bullet->ref();
       bullet->container(this);
    }
@@ -556,7 +556,7 @@ bool Gun::setBulletType(Bullet* const b)
 void Gun::initBullet()
 {
    Bullet* p = getBulletType();
-   if (p != 0) p->reset();
+   if (p != nullptr) p->reset();
 }
 
 //------------------------------------------------------------------------------
@@ -594,7 +594,7 @@ void Gun::burstFrame()
       }
 
       // TabLogger is deprecated
-      if (ownship != 0 && getAnyEventLogger() != 0) {
+      if (ownship != nullptr && getAnyEventLogger() != nullptr) {
          TabLogger::TabLogEvent* evt = new TabLogger::LogGunActivity(1, ownship, ibullets); // type 1 == gun fired
          getAnyEventLogger()->log(evt);
          evt->unref();
@@ -604,7 +604,7 @@ void Gun::burstFrame()
       // player to flyout the rounds.
       Bullet* wpn = getBulletType();
       Simulation* sim = static_cast<Simulation*>( findContainerByType(typeid(Simulation)) );
-      if (wpn != 0 && ownship != 0 && sim != 0) {
+      if (wpn != nullptr && ownship != nullptr && sim != nullptr) {
 
          // Compute the bullet burst's initial position and velocity
          osg::Vec3 ipos = computeInitBulletPosition();
@@ -612,19 +612,19 @@ void Gun::burstFrame()
 
          // Get the bullet player being used to fly-out the bullets
          Bullet* flyout = static_cast<Bullet*>( wpn->getFlyoutWeapon() );
-         if (flyout == 0) {
+         if (flyout == nullptr) {
             // If we don't have the flyout bullet (i.e., weapon and player) ... create it
             wpn->setLaunchVehicle(ownship);
             flyout = static_cast<Bullet*>( wpn->release() );
          }
 
             // The flyout bullet (player) will handle this burst of bullets.
-         if (flyout != 0) {
+         if (flyout != nullptr) {
             flyout->burstOfBullets(&ipos, &ivel, ibullets, getRoundsPerMinute(), sim->getNewWeaponEventID() );
          }
 
          // Cleanup
-         if (flyout != 0) { flyout->unref(); flyout = 0; }
+         if (flyout != nullptr) { flyout->unref(); flyout = nullptr; }
 
       }
    }
@@ -639,7 +639,7 @@ osg::Vec3d Gun::computeInitBulletPosition()
 {
    osg::Vec3d pe1 = posVec;
    Player* ownship = dynamic_cast<Player*>( findContainerByType(typeid(Player)) );
-   if (ownship != 0) {
+   if (ownship != nullptr) {
       // Body position to earth (NED) position
       osg::Vec3d gunPosE = posVec * ownship->getRotMat();
       pe1 = gunPosE + ownship->getPosition();
@@ -654,13 +654,13 @@ osg::Vec3d Gun::computeInitBulletVelocity()
 {
    osg::Vec3d ve1(0,0,0);   // velocity -- earth (m/s)
    Player* ownship = dynamic_cast<Player*>( findContainerByType(typeid(Player)) );
-   if (ownship != 0) {
+   if (ownship != nullptr) {
       // compute the earth (NED) to gun matrix
       osg::Matrixd mm = getRotMat() * ownship->getRotMat();
 
       // Get muzzle velocity in gun axis and transform to earth axis
       LCreal muzzleVel = Bullet::DEFAULT_MUZZLE_VEL;
-      if (getBulletType() != 0) muzzleVel = getBulletType()->getMuzzleVelocity();
+      if (getBulletType() != nullptr) muzzleVel = getBulletType()->getMuzzleVelocity();
       osg::Vec3d va(muzzleVel, 0.0, 0.0);
       ve1 = va * mm;  // same as:  ve1 = mm(T) * va
    }
@@ -699,7 +699,7 @@ bool Gun::setAngles(const double r, const double p, const double y)
 bool Gun::setSlotNumRounds(const Basic::Number* const num)
 {
    bool ok = false;
-   if (num != 0) {
+   if (num != nullptr) {
       ok = setMaxRounds( num->getInt() );
    }
    return ok;
@@ -709,7 +709,7 @@ bool Gun::setSlotNumRounds(const Basic::Number* const num)
 bool Gun::setSlotUnlimited(const Basic::Number* const num)
 {
    bool ok = false;
-   if (num != 0) {
+   if (num != nullptr) {
       ok = setUnlimited( num->getBoolean() );
    }
    return ok;
@@ -719,7 +719,7 @@ bool Gun::setSlotUnlimited(const Basic::Number* const num)
 bool Gun::setSlotRate(const Basic::Number* const num)
 {
    bool ok = false;
-   if (num != 0) {
+   if (num != nullptr) {
       ok = setRoundsPerMinute( num->getInt() );
    }
    return ok;
@@ -729,16 +729,16 @@ bool Gun::setSlotRate(const Basic::Number* const num)
 bool Gun::setSlotBurstRate(const Basic::Number* const num)
 {
    bool ok = false;
-   if (num != 0) {
-      int rate = num->getInt();
+   if (num != nullptr) {
+      const int rate = num->getInt();
       if (rate > 0 && rate <= 20) {
          burstFrameTime = 1.0f/LCreal(rate);
          ok = true;
       }
       else {
-            if (isMessageEnabled(MSG_ERROR)) {
-         std::cerr << "Player::setSlotBurstRate: invalid burst rate, valid range is 1 .. 20hz" << std::endl;
-      }
+         if (isMessageEnabled(MSG_ERROR)) {
+            std::cerr << "Player::setSlotBurstRate: invalid burst rate, valid range is 1 .. 20hz" << std::endl;
+         }
    }
    }
    return ok;
@@ -749,7 +749,7 @@ bool Gun::setSlotPosition(Basic::List* const numList)
 {
    bool ok = false;
    LCreal values[3];
-   int n = numList->getNumberList(values, 3);
+   const int n = numList->getNumberList(values, 3);
    if (n == 3) {
       setPosition(values[0], values[1], values[2]);
       ok = true;
@@ -764,11 +764,11 @@ bool Gun::setSlotRoll(const Basic::Number* const num)
    double value = -1000.0;
 
    const Basic::Angle* p = dynamic_cast<const Basic::Angle*>(num);
-   if (p != 0) {
+   if (p != nullptr) {
       Basic::Radians radian;
       value = radian.convert(*p);
    }
-   else if (num != 0) {
+   else if (num != nullptr) {
       value = num->getDouble();
    }
 
@@ -777,9 +777,9 @@ bool Gun::setSlotRoll(const Basic::Number* const num)
       ok = true;
    }
    else {
-         if (isMessageEnabled(MSG_ERROR)) {
-      std::cerr << "Player::setSlotInitRoll: invalid roll angle, valid range is [-pi ... +pi]" << std::endl;
-   }
+      if (isMessageEnabled(MSG_ERROR)) {
+         std::cerr << "Player::setSlotInitRoll: invalid roll angle, valid range is [-pi ... +pi]" << std::endl;
+      }
    }
    return ok;
 }
@@ -791,11 +791,11 @@ bool Gun::setSlotPitch(const Basic::Number* const num)
    double value = -1000.0;
 
    const Basic::Angle* p = dynamic_cast<const Basic::Angle*>(num);
-   if (p != 0) {
+   if (p != nullptr) {
       Basic::Radians radian;
       value = radian.convert(*p);
    }
-   else if (num != 0) {
+   else if (num != nullptr) {
       value = num->getDouble();
    }
 
@@ -804,9 +804,9 @@ bool Gun::setSlotPitch(const Basic::Number* const num)
       ok = true;
    }
    else {
-         if (isMessageEnabled(MSG_ERROR)) {
-      std::cerr << "Gun::setSlotPitch: invalid pitch angle, valid range is [-pi ... +pi]" << std::endl;
-   }
+      if (isMessageEnabled(MSG_ERROR)) {
+         std::cerr << "Gun::setSlotPitch: invalid pitch angle, valid range is [-pi ... +pi]" << std::endl;
+      }
    }
    return ok;
 }
@@ -818,11 +818,11 @@ bool Gun::setSlotYaw(const Basic::Number* const num)
    double value = -1000.0;
 
    const Basic::Angle* p = dynamic_cast<const Basic::Angle*>(num);
-   if (p != 0) {
+   if (p != nullptr) {
       Basic::Radians radian;
       value = radian.convert(*p);
    }
-   else if (num != 0) {
+   else if (num != nullptr) {
       value = num->getDouble();
    }
 
@@ -831,9 +831,9 @@ bool Gun::setSlotYaw(const Basic::Number* const num)
       ok = true;
    }
    else {
-         if (isMessageEnabled(MSG_ERROR)) {
-      std::cerr << "Gun::setSlotYaw: invalid yaw angle, valid range is [-pi ... +2*pi]" << std::endl;
-         }
+      if (isMessageEnabled(MSG_ERROR)) {
+         std::cerr << "Gun::setSlotYaw: invalid yaw angle, valid range is [-pi ... +2*pi]" << std::endl;
+      }
    }
    return ok;
 }

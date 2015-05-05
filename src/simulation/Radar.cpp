@@ -227,7 +227,7 @@ void Radar::receive(const LCreal dt)
    if (getAntenna() == 0) return;
 
    // Clear the next sweep
-   csweep = computeSweepIndex( LCreal(Basic::Angle::R2DCC * getAntenna()->getAzimuth()) );
+   csweep = computeSweepIndex( static_cast<LCreal>(Basic::Angle::R2DCC * getAntenna()->getAzimuth()) );
    clearSweep(csweep);
 
    // Compute noise level

@@ -179,7 +179,7 @@ void MapPage::pixelsToLatLon(const int x, const int y, double &lat, double &lon)
       if (!getNorthUp()) {
          LCreal acX = 0;
          LCreal acY = 0;
-         earth2Aircraft( LCreal(xpos), LCreal(ypos), &acX, &acY);
+         earth2Aircraft( static_cast<LCreal>(xpos), static_cast<LCreal>(ypos), &acX, &acY);
          xpos = acX;
          ypos = acY;
       }

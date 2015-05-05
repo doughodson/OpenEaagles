@@ -502,7 +502,7 @@ void lcPow10Array(const LCreal* const src, LCreal* const dst, const int n)
    LCreal* pd = dst;
    const LCreal* ps = src;
    for (int i = 0; i < n; i++) {
-      *pd++ = lcPow( LCreal(10.0), *ps++);
+      *pd++ = lcPow( static_cast<LCreal>(10.0), *ps++);
    }
 }
 

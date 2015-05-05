@@ -62,11 +62,11 @@ void Datalink::initData()
    sendLocal = true;
    queueForNetwork = true;
 
-   radio = 0;
-   radioName = 0;
+   radio = nullptr;
+   radioName = nullptr;
 
-   trackManager = 0;
-   tmName = 0;
+   trackManager = nullptr;
+   tmName = nullptr;
 
    inQueue = new Basic::safe_queue<Basic::Object*>(MAX_MESSAGES);
    outQueue = new Basic::safe_queue<Basic::Object*>(MAX_MESSAGES);
@@ -85,37 +85,37 @@ void Datalink::copyData(const Datalink& org, const bool cc)
    queueForNetwork = org.queueForNetwork;
 
    {
-      const Basic::String* p = 0;
-      if (org.radioName != 0) {
+      const Basic::String* p = nullptr;
+      if (org.radioName != nullptr) {
          p = org.radioName->clone();
       }
       setRadioName( p );
-      setRadio(0);
+      setRadio(nullptr);
    }
 
    {
-      const Basic::String* p = 0;
-      if (org.tmName != 0) {
+      const Basic::String* p = nullptr;
+      if (org.tmName != nullptr) {
          p = org.tmName->clone();
       }
       setTrackManagerName( p );
-      setTrackManager(0);
+      setTrackManager(nullptr);
    }
 }
 
 void Datalink::deleteData()
 {
-   if (inQueue != 0 && outQueue != 0) {
+   if (inQueue != nullptr && outQueue != nullptr) {
       clearQueues();
       delete inQueue;
       delete outQueue;
-      inQueue = 0;
-      outQueue = 0;
+      inQueue = nullptr;
+      outQueue = nullptr;
    }
-   setRadio(0);
-   setRadioName(0);
-   setTrackManager(0);
-   setTrackManagerName(0);
+   setRadio(nullptr);
+   setRadioName(nullptr);
+   setTrackManager(nullptr);
+   setTrackManagerName(nullptr);
 }
 
 //------------------------------------------------------------------------------
@@ -124,9 +124,9 @@ void Datalink::deleteData()
 bool Datalink::shutdownNotification()
 {
    clearQueues();
-   setRadio(0);
-   setTrackManager(0);
-   setTrackManagerName(0);
+   setRadio(nullptr);
+   setTrackManager(nullptr);
+   setTrackManagerName(nullptr);
 
    return BaseClass::shutdownNotification();
 }
@@ -140,7 +140,7 @@ unsigned short Datalink::getRadioID() const
    if (useRadioIdFlg) {
       id = radioId;
    }
-   else if (radio != 0) {
+   else if (radio != nullptr) {
       id = radio->getRadioId();
    }
    return id;
@@ -174,12 +174,12 @@ bool Datalink::setNetworkQueueEnabled(const bool flg)
 // set our comm radio system
 bool Datalink::setRadio(CommRadio* const p)
 {
-   if (radio != 0) {
-      radio->setDatalink(0);
+   if (radio != nullptr) {
+      radio->setDatalink(nullptr);
       radio->unref();
    }
    radio = p;
-   if (radio != 0) {
+   if (radio != nullptr) {
       radio->ref();
       radio->setDatalink(this);
    }
@@ -189,11 +189,11 @@ bool Datalink::setRadio(CommRadio* const p)
 //  Sets our radio's name
 bool Datalink::setRadioName(const Basic::String* const p)
 {
-    if (radioName != 0) {
+    if (radioName != nullptr) {
         radioName->unref();
     }
     radioName = p;
-    if (radioName != 0) {
+    if (radioName != nullptr) {
         radioName->ref();
     }
     return true;
@@ -202,11 +202,11 @@ bool Datalink::setRadioName(const Basic::String* const p)
 // set the track manager
 bool Datalink::setTrackManager(TrackManager* const tm)
 {
-    if (trackManager != 0) {
+    if (trackManager != nullptr) {
         trackManager->unref();
     }
     trackManager = tm;
-    if (trackManager != 0) {
+    if (trackManager != nullptr) {
         trackManager->ref();
     }
     return true;
@@ -215,11 +215,11 @@ bool Datalink::setTrackManager(TrackManager* const tm)
 // set the track manager's name
 bool Datalink::setTrackManagerName(const Basic::String* const name)
 {
-    if (tmName != 0) {
+    if (tmName != nullptr) {
         tmName->unref();
     }
     tmName = name;
-    if (tmName != 0) {
+    if (tmName != nullptr) {
         tmName->ref();
     }
     return true;
@@ -234,18 +234,18 @@ void Datalink::reset()
    // ---
    // Do we need to find the track manager?
    // ---
-   if (getTrackManager() == 0 && getTrackManagerName() != 0) {
+   if (getTrackManager() == nullptr && getTrackManagerName() != nullptr) {
         // We have a name of the track manager, but not the track manager itself
         const char* name = *getTrackManagerName();
         // Get the named track manager from the onboard computer
         Player* ownship = dynamic_cast<Player*>( findContainerByType(typeid(Player)) );
-        if (ownship != 0) {
+        if (ownship != nullptr) {
             OnboardComputer* obc = ownship->getOnboardComputer();
-            if (obc != 0) {
+            if (obc != nullptr) {
                setTrackManager(obc->getTrackManagerByName(name));
             }
         }
-        if (getTrackManager() == 0) {
+        if (getTrackManager() == nullptr) {
             // The assigned track manager was not found!
             //if (isMessageEnabled(MSG_ERROR)) {
             //std::cerr << "Datalink ERROR -- track manager, " << name << ", was not found!" << std::endl;
@@ -255,17 +255,17 @@ void Datalink::reset()
    // ---
    // Do we need to find the comm radio?
    // ---
-   if (getRadio() == 0 && getRadioName() != 0) {
+   if (getRadio() == nullptr && getRadioName() != nullptr) {
         // We have a name of the radio, but not the radio itself
         const char* name = *getRadioName();
         // Get the named radio from the component list of radios
         Player* ownship = dynamic_cast<Player*>( findContainerByType(typeid(Player)) );
-        if (ownship != 0) {
+        if (ownship != nullptr) {
             CommRadio* cr = dynamic_cast<CommRadio*>(ownship->getRadioByName(name));
             setRadio(cr);
         }
         CommRadio* rad = getRadio();
-        if (rad == 0) {
+        if (rad == nullptr) {
             // The assigned radio was not found!
             if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "Datalink ERROR -- radio, " << name << ", was not found!" << std::endl;
@@ -288,11 +288,11 @@ void Datalink::dynamics(const LCreal)
     //age queues
     Eaagles::Basic::Object* tempInQueue[MAX_MESSAGES];
     int numIn = 0;
-    Eaagles::Simulation::Message *msg = 0;
+    Eaagles::Simulation::Message* msg = nullptr;
     while((numIn < MAX_MESSAGES) && inQueue->isNotEmpty()) {
         Eaagles::Basic::Object* tempObj = inQueue->get();
         msg = dynamic_cast<Eaagles::Simulation::Message*>(tempObj);
-        if(msg != 0) {
+        if(msg != nullptr) {
             if(getComputerTime() - msg->getTimeStamp() > msg->getLifeSpan()) {
                 //remove message by not adding to list to be put back into queue
                 msg->unref();
@@ -301,7 +301,7 @@ void Datalink::dynamics(const LCreal)
                 tempInQueue[numIn++] = msg;
             }
         }
-        else if(tempObj != 0) {
+        else if(tempObj != nullptr) {
             tempInQueue[numIn++] = tempObj;
         }
     }
@@ -313,11 +313,11 @@ void Datalink::dynamics(const LCreal)
 
     Eaagles::Basic::Object* tempOutQueue[MAX_MESSAGES];
     int numOut = 0;
-    msg = 0;
+    msg = nullptr;
     while((numOut < MAX_MESSAGES) && outQueue->isNotEmpty()) {
         Eaagles::Basic::Object* tempObj = outQueue->get();
         msg = dynamic_cast<Eaagles::Simulation::Message*>(tempObj);
-        if(msg != 0) {
+        if(msg != nullptr) {
             if(getComputerTime() - msg->getTimeStamp() > msg->getLifeSpan()) {
                 //remove message by not adding to list to be put back into queue
                 msg->unref();
@@ -326,7 +326,7 @@ void Datalink::dynamics(const LCreal)
                 tempOutQueue[numOut++] = msg;
             }
             }
-        else if(tempObj != 0) {
+        else if(tempObj != nullptr) {
             tempOutQueue[numOut++] = tempObj;
         }
     }
@@ -349,22 +349,22 @@ bool Datalink::sendMessage(Basic::Object* const msg)
       // ---
       // Have a comm radio -- then we'll just let our companion radio system handle this
       // ---
-      if (radio != 0) {
+      if (radio != nullptr) {
          sent = radio->transmitDataMessage(msg);
       }
 
       // ---
       // No comm radio -- then we'll send this out to the other players ourself.
       // ---
-      else if (getOwnship() != 0) {
+      else if (getOwnship() != nullptr) {
          Simulation* sim = getSimulation();
-         if (sim != 0) {
+         if (sim != nullptr) {
 
             Basic::PairStream* players = sim->getPlayers();
-            if (players != 0) {
+            if (players != nullptr) {
 
             Basic::List::Item* playerItem = players->getFirstItem();
-            while (playerItem != 0) {
+            while (playerItem != nullptr) {
 
                Basic::Pair* playerPair = static_cast<Basic::Pair*>(playerItem->getValue());
                Player* player = static_cast<Player*>(playerPair->object());
@@ -379,13 +379,13 @@ bool Datalink::sendMessage(Basic::Object* const msg)
                else {
                   // Networked players are at the end of the list,
                   // so we can stop now.
-                  playerItem = 0;
+                  playerItem = nullptr;
                }
 
             }
 
                players->unref();
-               players = 0;
+               players = nullptr;
             }
          }
          sent = true;
@@ -397,7 +397,7 @@ bool Datalink::sendMessage(Basic::Object* const msg)
    // ---
    if (queueForNetwork) {
       Player* ownship = getOwnship();
-      if (ownship != 0) {
+      if (ownship != nullptr) {
          if (ownship->isLocalPlayer()) {
             queueOutgoingMessage(msg);
          }
@@ -422,7 +422,7 @@ Basic::Object* Datalink::receiveMessage()
 bool Datalink::queueIncomingMessage(Basic::Object* const msg)
 {
    // Only queue message if Ownship is local.  IPlayer messages are processed on their local systems
-   if ((getOwnship() == 0) || !(getOwnship()->isLocalPlayer())) {
+   if ((getOwnship() == nullptr) || !(getOwnship()->isLocalPlayer())) {
       return true;
    }
 
@@ -440,7 +440,7 @@ bool Datalink::queueIncomingMessage(Basic::Object* const msg)
          obj->unref();
       } //clear out 10 oldest messages
    }
-   if (msg != 0) {
+   if (msg != nullptr) {
       msg->ref();
       inQueue->put(msg);
    }
@@ -463,10 +463,10 @@ bool Datalink::queueOutgoingMessage(Basic::Object* const msg)
 
         for(int i = 0; i < 10; i++) {
             Basic::Object* obj = outQueue->get();
-            if (obj != 0) obj->unref();
+            if (obj != nullptr) obj->unref();
         } //clear out 10 oldest messages
     }
-    if (msg != 0) {
+    if (msg != nullptr) {
        msg->ref();
        outQueue->put(msg);
     }
@@ -479,12 +479,12 @@ bool Datalink::queueOutgoingMessage(Basic::Object* const msg)
 void Datalink::clearQueues()
 {
    Basic::Object* msg = inQueue->get();
-   while (msg != 0) {
+   while (msg != nullptr) {
       msg->unref();
       msg = inQueue->get();
    }
    msg = outQueue->get();
-   while (msg != 0) {
+   while (msg != nullptr) {
       msg->unref();
       msg = outQueue->get();
    }
@@ -500,14 +500,14 @@ bool Datalink::onDatalinkMessageEvent(Basic::Object* const msg)
 {
    // Just pass it down to all of our subcomponents
    Basic::PairStream* subcomponents = getComponents();
-   if (subcomponents != 0) {
+   if (subcomponents != nullptr) {
       for (Basic::List::Item* item = subcomponents->getFirstItem(); item != 0; item = item->getNext()) {
          Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
          Basic::Component* sc = static_cast<Basic::Component*>(pair->object());
          sc->event(DATALINK_MESSAGE, msg);
       }
       subcomponents->unref();
-      subcomponents = 0;
+      subcomponents = nullptr;
    }
    return true;
 }
@@ -519,8 +519,8 @@ bool Datalink::onDatalinkMessageEvent(Basic::Object* const msg)
 bool Datalink::setSlotRadioId(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
-      int v = msg->getInt();
+   if (msg != nullptr) {
+      const int v = msg->getInt();
       if (v >= 0 && v <= 0xffff) {
          radioId = static_cast<unsigned short>(v);
          useRadioIdFlg = true;
@@ -533,8 +533,8 @@ bool Datalink::setSlotRadioId(const Basic::Number* const msg)
 bool Datalink::setSlotMaxRange(const Basic::Distance* const msg)
 {
    bool ok = false;
-   if(msg != 0) {
-      double rng = Basic::NauticalMiles::convertStatic(*msg);
+   if(msg != nullptr) {
+      const double rng = Basic::NauticalMiles::convertStatic(*msg);
       ok = setMaxRange(rng);
    }
    return ok;

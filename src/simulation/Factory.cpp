@@ -83,7 +83,7 @@ Factory::Factory()
 
 Basic::Object* Factory::createObj(const char* name)
 {
-    Basic::Object* obj = 0;
+    Basic::Object* obj = nullptr;
 
     // Basic Simulations
     if ( std::strcmp(name, Simulation::getFactoryName()) == 0 ) {
@@ -196,7 +196,7 @@ Basic::Object* Factory::createObj(const char* name)
     else if ( std::strcmp(name, Steerpoint::getFactoryName()) == 0 ) {
         obj = new Steerpoint();
     }
-    
+
     // Target Data
     else if ( std::strcmp(name, TargetData::getFactoryName()) == 0 ) {
         obj = new TargetData();

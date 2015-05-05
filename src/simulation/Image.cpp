@@ -19,19 +19,19 @@ Image::Image()
 
     id = 0;
     xmitEnble = false;
-    latitude = 0;
-    longitude = 0;
-    elevation = 0;
-    orientation = 0;
-    resolution = 0;
+    latitude = 0.0;
+    longitude = 0.0;
+    elevation = 0.0;
+    orientation = 0.0;
+    resolution = 0.0;
 
-    data = 0;
+    data = nullptr;
     size = 0;
     width = 0;
     height = 0;
     depth = 0;
 
-    origData = 0;
+    origData = nullptr;
     origSize = 0;
     origCompressed = 0;
 }
@@ -44,9 +44,9 @@ void Image::copyData(const Image& org, const bool cc)
     BaseClass::copyData(org);
 
     if (cc) {
-        data = 0;
+        data = nullptr;
         size = 0;
-        origData = 0;
+        origData = nullptr;
         origSize = 0;
     }
 
@@ -61,14 +61,14 @@ void Image::copyData(const Image& org, const bool cc)
 
     // Copy the images
     setImageData(org.getImageData(), org.getWidth(), org.getHeight(), org.getDepth());
-    setOrigialImageData(org.getOrigImageData(), org.getOrigImageSize(), org.isOrigImageDataCompressed());
+    setOriginalImageData(org.getOrigImageData(), org.getOrigImageSize(), org.isOrigImageDataCompressed());
 }
 
 void Image::deleteData()
 {
     // Clear the images
-    setImageData(0, 0, 0, 0);
-    setOrigialImageData(0, 0, 0);
+    setImageData(nullptr, 0, 0, 0);
+    setOriginalImageData(nullptr, 0, 0);
 }
 
 //------------------------------------------------------------------------------
@@ -80,11 +80,11 @@ bool Image::setImageData(const unsigned char* const image, const unsigned int w,
 
     // Allocate space for and transfer the new image
     unsigned int s = (w*h*d);
-    unsigned char* buff = 0;
-    if (image != 0) {
+    unsigned char* buff = nullptr;
+    if (image != nullptr) {
         // Allocate space
         buff = new unsigned char[s];
-        if (buff != 0) {
+        if (buff != nullptr) {
             // Transfer the image
             for (unsigned int i = 0; i < s; i++) buff[i] = image[i];
         }
@@ -94,7 +94,7 @@ bool Image::setImageData(const unsigned char* const image, const unsigned int w,
     // If all's well, set our member variables
     if (ok) {
         // Clear the old image (if any)
-        if (data != 0) delete[] data;
+        if (data != nullptr) delete[] data;
         data = buff;
         size = s;
         width = w;
@@ -108,16 +108,16 @@ bool Image::setImageData(const unsigned char* const image, const unsigned int w,
 //------------------------------------------------------------------------------
 // setOrigialImageData() -- Load original image data
 //------------------------------------------------------------------------------
-bool Image::setOrigialImageData(const unsigned char* const ti, const unsigned int s, const bool c)
+bool Image::setOriginalImageData(const unsigned char* const ti, const unsigned int s, const bool c)
 {
     bool ok = true;     // Assume all will go well.
 
     // Allocate space for and transfer the new image
-    unsigned char* buff = 0;
-    if (ti != 0) {
+    unsigned char* buff = nullptr;
+    if (ti != nullptr) {
         // Allocate space
         buff = new unsigned char[s];
-        if (buff != 0) {
+        if (buff != nullptr) {
             // Transfer the image
             for (unsigned int i = 0; i < s; i++) buff[i] = ti[i];
         }
@@ -127,7 +127,7 @@ bool Image::setOrigialImageData(const unsigned char* const ti, const unsigned in
     // If all's well, set our member variables
     if (ok) {
         // Clear the old image (if any)
-        if (origData != 0) delete[] origData;
+        if (origData != nullptr) delete[] origData;
         origData = buff;
         origSize = s;
         origCompressed = c;
@@ -146,7 +146,7 @@ bool Image::testImage(const unsigned w0, const unsigned h0)
 
     for (unsigned int h = 0; h < h0; h++) {
         for (unsigned int w = 0; w < w0; w++) {
-            
+
             // Edges
             unsigned char c = 0x00;
             if (h < 64 || h >= (h0 - 32)) c = 0x7f;

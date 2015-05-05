@@ -19,7 +19,6 @@
 namespace Eaagles {
 namespace Simulation {
 
-
 IMPLEMENT_SUBCLASS(IrAtmosphere,"IrAtmosphere")
 EMPTY_SERIALIZER(IrAtmosphere)
 EMPTY_COPYDATA(IrAtmosphere)
@@ -46,9 +45,9 @@ END_SLOT_MAP()
 IrAtmosphere::IrAtmosphere()
 {
     STANDARD_CONSTRUCTOR()
-    waveBandTable = 0;
+    waveBandTable = nullptr;
     numWaveBands = 0;
-    transmissivityTable1=0;
+    transmissivityTable1 = nullptr;
     skyRadiance = 0.0;
     earthRadiance = 0.0;
 }
@@ -58,8 +57,8 @@ IrAtmosphere::IrAtmosphere()
 //------------------------------------------------------------------------------
 void IrAtmosphere::deleteData()
 {
-    if (waveBandTable != 0) {waveBandTable->unref(); waveBandTable = 0; }
-    if (transmissivityTable1 != 0) {transmissivityTable1->unref(); transmissivityTable1 = 0; }
+    if (waveBandTable != nullptr)        { waveBandTable->unref();        waveBandTable = nullptr;        }
+    if (transmissivityTable1 != nullptr) { transmissivityTable1->unref(); transmissivityTable1 = nullptr; }
 }
 
 //------------------------------------------------------------------------------
@@ -69,8 +68,8 @@ void IrAtmosphere::deleteData()
 bool IrAtmosphere::setSlotWaveBands(const Basic::Table1* const tbl)
 {
     bool ok = false;
-    if (tbl != 0) {
-        if (waveBandTable != 0) waveBandTable->unref();
+    if (tbl != nullptr) {
+        if (waveBandTable != nullptr) waveBandTable->unref();
         tbl->ref();
         waveBandTable = tbl;
         numWaveBands = tbl->getNumXPoints();
@@ -82,8 +81,8 @@ bool IrAtmosphere::setSlotWaveBands(const Basic::Table1* const tbl)
 bool IrAtmosphere::setSlotTransmissivityTable1(const Basic::Table1* const tbl)
 {
     bool ok = false;
-    if (tbl != 0) {
-        if (transmissivityTable1 != 0) transmissivityTable1->unref();
+    if (tbl != nullptr) {
+        if (transmissivityTable1 != nullptr) transmissivityTable1->unref();
         tbl->ref();
         transmissivityTable1 = tbl;
         ok = true;
@@ -94,13 +93,12 @@ bool IrAtmosphere::setSlotTransmissivityTable1(const Basic::Table1* const tbl)
 //------------------------------------------------------------------------------
 // setSlotSkyRadiance() -- sky radiance
 //------------------------------------------------------------------------------
-bool IrAtmosphere::setSlotSkyRadiance(Eaagles::Basic::Number *const num)
+bool IrAtmosphere::setSlotSkyRadiance(Eaagles::Basic::Number* const num)
 {
     bool ok = false;
-    if (num != 0) {
-        LCreal x = num->getReal();
-        skyRadiance=x;
-        ok=true;
+    if (num != nullptr) {
+        skyRadiance = num->getReal();
+        ok = true;
     }
     return ok;
 }
@@ -108,13 +106,12 @@ bool IrAtmosphere::setSlotSkyRadiance(Eaagles::Basic::Number *const num)
 //------------------------------------------------------------------------------
 // setSlotEarthRadiance() -- set background radiance for ground
 //------------------------------------------------------------------------------
-bool IrAtmosphere::setSlotEarthRadiance(Eaagles::Basic::Number *const num)
+bool IrAtmosphere::setSlotEarthRadiance(Eaagles::Basic::Number* const num)
 {
     bool ok = false;
-    if (num != 0) {
-        LCreal x = num->getReal();
-        earthRadiance=x;
-        ok=true;
+    if (num != nullptr) {
+        earthRadiance = num->getReal();
+        ok = true;
     }
     return ok;
 }
@@ -124,10 +121,10 @@ bool IrAtmosphere::setSlotEarthRadiance(Eaagles::Basic::Number *const num)
 LCreal IrAtmosphere::getTransmissivity(const unsigned int i, const LCreal range) const
 {
     LCreal trans = 1.0;
-    if (0 != transmissivityTable1 && i < transmissivityTable1->tableSize()) {
+    if (transmissivityTable1 != nullptr && i < transmissivityTable1->tableSize()) {
         const LCreal* transmissivities = transmissivityTable1->getDataTable();
         trans = transmissivities[i];
-        trans = exp(trans * -0.001 * range);
+        trans = std::exp(trans * -0.001 * range);
     }
     return trans;
 }
@@ -135,9 +132,9 @@ LCreal IrAtmosphere::getTransmissivity(const unsigned int i, const LCreal range)
 LCreal IrAtmosphere::getTransmissivity(const LCreal wavebandCenter, const LCreal range) const
 {
     LCreal trans = 1.0;
-    if (0 != transmissivityTable1){
+    if (transmissivityTable1 != nullptr){
         trans = transmissivityTable1->lfi(wavebandCenter);
-        trans = exp(trans * -0.001 * range);
+        trans = std::exp(trans * -0.001 * range);
     }
     return trans;
 }
@@ -151,12 +148,12 @@ bool IrAtmosphere::calculateAtmosphereContribution(IrQueryMsg* const msg, LCreal
     LCreal range2D = msg->getRange();
     *totalSignal = 0.0;
     *totalBackground = 0.0;
-    LCreal backgroundRadiance = 0.0;
+    LCreal backgroundRadiance(0.0);
 
     // determine relation of FOV to horizon, to decide how much earth and how much sky in background
     {
-        LCreal currentViewAngle;
-        LCreal viewAngleToHorizon;
+        LCreal currentViewAngle(0.0);
+        LCreal viewAngleToHorizon(0.0);
 
         // viewAngleToTarget is angle to target, not angle my sensor is actually pointing.
         // we want the fov i'm actually pointing at, not a FOV centered on each target
@@ -176,9 +173,9 @@ bool IrAtmosphere::calculateAtmosphereContribution(IrQueryMsg* const msg, LCreal
 
         // determine elevation angle of gimbal/ownship, negative angles are down
         {
-            osg::Vec3d angles;
-            osg::Matrixd mm = msg->getGimbal()->getRotMat() * msg->getOwnship()->getRotMat();
+            const osg::Matrixd mm = msg->getGimbal()->getRotMat() * msg->getOwnship()->getRotMat();
             // compute Geodetic orientation angles
+            osg::Vec3d angles;
             Basic::Nav::computeEulerAngles(mm, &angles);
             currentViewAngle = angles[Player::IPITCH];
         }
@@ -189,17 +186,17 @@ bool IrAtmosphere::calculateAtmosphereContribution(IrQueryMsg* const msg, LCreal
             double hTanAng = 0;
 
             // earth radius in meters
-            double er = Basic::Nav::ERAD60 * Basic::Distance::NM2M;
+            const double er = Basic::Nav::ERAD60 * Basic::Distance::NM2M;
 
             // distance from the center of the earth
-            double distEC = msg->getOwnship()->getAltitudeM() + er;
-            double distEC2 = distEC * distEC;  // squared
+            const double distEC = msg->getOwnship()->getAltitudeM() + er;
+            const double distEC2 = distEC * distEC;  // squared
 
             // earth radius squared
-            double er2 = er * er;
+            const double er2 = er * er;
 
             // distance to horizon squared
-            double dh2 = distEC2 - er2;
+            const double dh2 = distEC2 - er2;
 
             // the distance and the tangent of the angle to the horizon
             hDist = std::sqrt(dh2);
@@ -208,8 +205,8 @@ bool IrAtmosphere::calculateAtmosphereContribution(IrQueryMsg* const msg, LCreal
         }
 
         // determine ratio of earth and sky in the FOV
-        LCreal angleToHorizon = currentViewAngle + viewAngleToHorizon;
-        LCreal fovtheta = msg->getSendingSensor()->getIFOVTheta();
+        const LCreal angleToHorizon = currentViewAngle + viewAngleToHorizon;
+        const LCreal fovtheta = msg->getSendingSensor()->getIFOVTheta();
 
         if (angleToHorizon - fovtheta >= 0) {
             // no ground, all sky?
@@ -227,33 +224,29 @@ bool IrAtmosphere::calculateAtmosphereContribution(IrQueryMsg* const msg, LCreal
     }
 
     for (unsigned int i=0; i<getNumWaveBands(); i++) {
-        LCreal radiantIntensityInBin;
-        LCreal lowerBandBound = centerWavelengths[i] - (widths[i] / 2.0f);
-        LCreal upperBandBound = lowerBandBound + widths[i];
+        const LCreal lowerBandBound = centerWavelengths[i] - (widths[i] / 2.0);
+        const LCreal upperBandBound = lowerBandBound + widths[i];
 
         // determine ratio of this band's coverage to entire atmosphere waveband
-        LCreal fractionOfBandToTotal = (upperBandBound - lowerBandBound) / totalWavelengthRange;
+        const LCreal fractionOfBandToTotal = (upperBandBound - lowerBandBound) / totalWavelengthRange;
 
         // Find the limits of the sensor
-        LCreal lowerSensorBound = msg->getLowerWavelength();
-        LCreal upperSensorBound = msg->getUpperWavelength();
+        const LCreal lowerSensorBound = msg->getLowerWavelength();
+        const LCreal upperSensorBound = msg->getUpperWavelength();
 
         // Determine how much of this wave band overlaps the sensor limits
-        LCreal lowerOverlap = getLowerEndOfWavelengthOverlap(
-            lowerBandBound,
-            lowerSensorBound);
-        LCreal upperOverlap = getUpperEndOfWavelengthOverlap(
-            upperBandBound,
-            upperSensorBound);
+        LCreal lowerOverlap = getLowerEndOfWavelengthOverlap(lowerBandBound, lowerSensorBound);
+        LCreal upperOverlap = getUpperEndOfWavelengthOverlap(upperBandBound, upperSensorBound);
 
         if (upperOverlap < lowerOverlap) upperOverlap = lowerOverlap;
 
-        LCreal overlapRatio = (upperOverlap - lowerOverlap) / (upperBandBound - lowerBandBound);
+        const LCreal overlapRatio = (upperOverlap - lowerOverlap) / (upperBandBound - lowerBandBound);
 
         // this depends on whether target is a sky or earth based target
-        LCreal backgroundRadianceInBand = backgroundRadiance * fractionOfBandToTotal * overlapRatio;
+        const LCreal backgroundRadianceInBand = backgroundRadiance * fractionOfBandToTotal * overlapRatio;
 
-        if (sigArray == 0) {
+        LCreal radiantIntensityInBin(0.0);
+        if (sigArray == nullptr) {
             // signature is a simple number
             // distribute simple signature evenly across atmosphere bins
             // need to apply overlapRatio to simple signature - already applied for complex signature in IrSignature...
@@ -281,15 +274,17 @@ bool IrAtmosphere::calculateAtmosphereContribution(IrQueryMsg* const msg, LCreal
 //------------------------------------------------------------------------------
 // getWaveBandCenters() -- Return center frequency of all wave bands
 //------------------------------------------------------------------------------
-const LCreal* IrAtmosphere::getWaveBandCenters() const {
-    return ((waveBandTable!=0) ? waveBandTable->getXData() : 0);
+const LCreal* IrAtmosphere::getWaveBandCenters() const
+{
+    return ((waveBandTable!=nullptr) ? waveBandTable->getXData() : nullptr);
 }
 
 //------------------------------------------------------------------------------
 // getWaveBandWidths() -- Return widths for all wave band frequencies
 //------------------------------------------------------------------------------
-const LCreal* IrAtmosphere::getWaveBandWidths() const {
-    return ((waveBandTable != 0) ? waveBandTable->getDataTable() : 0);
+const LCreal* IrAtmosphere::getWaveBandWidths() const
+{
+    return ((waveBandTable != nullptr) ? waveBandTable->getDataTable() : nullptr);
 }
 
 Basic::Object* IrAtmosphere::getSlotByIndex(const int si)

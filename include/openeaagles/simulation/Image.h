@@ -51,7 +51,7 @@ public:
     // Set image functions
     virtual bool testImage(const unsigned w, const unsigned h);
     virtual bool setImageData(const unsigned char* const image, const unsigned int width, const unsigned int height, const unsigned int depth);
-    virtual bool setOrigialImageData(const unsigned char* const image, const unsigned int size, const bool compressed);
+    virtual bool setOriginalImageData(const unsigned char* const image, const unsigned int size, const bool compressed);
 
 private:
     // SAR data

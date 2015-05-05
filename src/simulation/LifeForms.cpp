@@ -30,8 +30,9 @@ LifeForm::LifeForm()
     static Basic::String generic("LifeForm");
     setType(&generic);
     actionState = UPRIGHT_STANDING;
+    lookAngle = 0.0;
     tgtAquired = false;
-    tgtPlayer = 0;
+    tgtPlayer = nullptr;
     lockMode = SEARCHING;
     weaponSel = LF_GUN;
 
@@ -45,20 +46,20 @@ void LifeForm::copyData(const LifeForm& org, const bool cc)
 {
     BaseClass::copyData(org);
     if (cc) {
-       tgtPlayer = 0;
+       tgtPlayer = nullptr;
     }
     actionState = org.actionState;
     tgtAquired = org.tgtAquired;
-    if (tgtPlayer != 0) tgtPlayer->unref();
-    tgtPlayer = 0;
+    if (tgtPlayer != nullptr) tgtPlayer->unref();
+    tgtPlayer = nullptr;
     lockMode = org.lockMode;
     weaponSel = org.weaponSel;
 }
 
 void LifeForm::deleteData()
 {
-    if (tgtPlayer != 0) tgtPlayer->unref();
-    tgtPlayer = 0;
+    if (tgtPlayer != nullptr) tgtPlayer->unref();
+    tgtPlayer = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -66,8 +67,8 @@ void LifeForm::deleteData()
 //------------------------------------------------------------------------------
 bool LifeForm::shutdownNotification()
 {
-   if (tgtPlayer != 0) tgtPlayer->unref();
-   tgtPlayer = 0;
+   if (tgtPlayer != nullptr) tgtPlayer->unref();
+   tgtPlayer = nullptr;
    return BaseClass::shutdownNotification();
 }
 
@@ -90,13 +91,13 @@ void LifeForm::reset()
    // do our resetting first
    if (isLocalPlayer()) {
       actionState = UPRIGHT_STANDING;
-      lookAngle = 0;
+      lookAngle = 0.0;
       tgtAquired = false;
       lockMode = SEARCHING;
       weaponSel = LF_GUN;
    }
-   if (tgtPlayer != 0) tgtPlayer->unref();
-   tgtPlayer = 0;
+   if (tgtPlayer != nullptr) tgtPlayer->unref();
+   tgtPlayer = nullptr;
 
    BaseClass::reset();
 }
@@ -106,17 +107,17 @@ void LifeForm::fire()
     Basic::Number* hdgObj = new Basic::Number(getHeadingR());
     Basic::Number* pitchObj = new Basic::Number(lookAngle * Basic::Angle::D2RCC);
     StoresMgr* mgr = getStoresManagement();
-    if (mgr != 0) {
-        if (getSimulation() != 0) {
+    if (mgr != nullptr) {
+        if (getSimulation() != nullptr) {
             if (weaponSel == LF_MISSILE) {
                 mgr->setGunSelected(false);
                 Missile* missile = mgr->getNextMissile();
-                if (missile != 0) {
+                if (missile != nullptr) {
                     missile->setSlotInitPitch(pitchObj);
                     missile->setSlotInitHeading(hdgObj);
                     missile->reset();
                     Missile* msl = mgr->releaseOneMissile();
-                    if (msl != 0) {
+                    if (msl != nullptr) {
                         if (tgtAquired && tgtPlayer != 0) msl->setTargetPlayer(tgtPlayer, true);
                     }
                 }
@@ -124,7 +125,7 @@ void LifeForm::fire()
             else if (weaponSel == LF_GUN) {
                 mgr->setGunSelected(true);
                 Gun* myGun = mgr->getGun();
-                if (myGun != 0) {
+                if (myGun != nullptr) {
                     myGun->setGunArmed(true);
                     Basic::Number* num = new Basic::Number(lookAngle * Basic::Angle::D2RCC);
                     myGun->setSlotPitch(num);
@@ -138,14 +139,13 @@ void LifeForm::fire()
     pitchObj->unref();
 }
 
-
 // override our set velocity, so we can determine if we are walking, running, or standing
 bool LifeForm::setVelocity(const LCreal ue, const LCreal ve, const LCreal we)
 {
     bool ok = BaseClass::setVelocity(ue, ve, we);
     // based on our velocity, we will run or walk, or stand still
-    LCreal tempX = lcAbs(ue);
-    LCreal tempY = lcAbs(ve);
+    const LCreal tempX = lcAbs(ue);
+    const LCreal tempY = lcAbs(ve);
 
     // we only change our appearance bit if we are parachuting
     if (actionState != PARACHUTING) {
@@ -169,18 +169,18 @@ void LifeForm::move(const LCreal fwd, const LCreal sdws)
         // our deadband (if we are barely moving, just stop)
         if (lcAbs(tempFwd) < 0.9f) tempFwd = 0;
         if (lcAbs(tempSdws) < 0.9f) tempSdws = 0;
-        double xVel = tempFwd * (lcCos(hdg));
-        double yVel = tempFwd * (lcSin(hdg));
+        const double xVel = tempFwd * (lcCos(hdg));
+        const double yVel = tempFwd * (lcSin(hdg));
 
         // now calculate our sideways velocity
-        double xxVel = tempSdws * (lcCos((hdg + (90 * static_cast<LCreal>(Basic::Angle::D2RCC)))));
-        double yyVel = tempSdws * (lcSin((hdg + (90 * static_cast<LCreal>(Basic::Angle::D2RCC)))));
+        const double xxVel = tempSdws * (lcCos((hdg + (90 * static_cast<LCreal>(Basic::Angle::D2RCC)))));
+        const double yyVel = tempSdws * (lcSin((hdg + (90 * static_cast<LCreal>(Basic::Angle::D2RCC)))));
 
         // now add the vectors
-        double newXVel = xVel + xxVel;
-        double newYVel = yVel + yyVel;
+        const double newXVel = xVel + xxVel;
+        const double newYVel = yVel + yyVel;
 
-        LCreal zVel = 0;
+        LCreal zVel = 0.0;
         setVelocity(static_cast<LCreal>(newXVel), static_cast<LCreal>(newYVel), zVel);
     }
     else setVelocity(0, 0, 0);
@@ -192,13 +192,13 @@ void LifeForm::look(const LCreal up, const LCreal sdws)
         if (lockMode != LOCKED) {
             lockMode = SEARCHING;
             // our up and sideways come in as -5 to 5, which is a rate to adjust heading
-            osg::Vec3 old = getEulerAngles();
+            const osg::Vec3 old = getEulerAngles();
             LCreal hdg = old.z();
             LCreal ptc = lookAngle;
             LCreal tempSdws = sdws;
             LCreal tempUp = up;
-            if (lcAbs(tempSdws) < 0.00005f) tempSdws = 0;
-            if (lcAbs(tempUp) < 0.05f) tempUp = 0;
+            if (lcAbs(tempSdws) < 0.00005) tempSdws = 0;
+            if (lcAbs(tempUp) < 0.05) tempUp = 0;
             hdg += tempSdws;
             hdg = lcAepcRad(hdg);
             // we don't change our pitch when we look up and down, we only change our look angle, so we have to keep
@@ -212,26 +212,26 @@ void LifeForm::look(const LCreal up, const LCreal sdws)
             setEulerAngles(eul);
             // now based on this we need to know if we have a target in our crosshairs...
             tgtAquired = false;
-            if (tgtPlayer != 0) tgtPlayer->unref();
-            tgtPlayer = 0;
-            osg::Vec3 myPos = getPosition();
+            if (tgtPlayer != nullptr) tgtPlayer->unref();
+            tgtPlayer = nullptr;
+            const osg::Vec3 myPos = getPosition();
             osg::Vec3 tgtPos;
             osg::Vec3 vecPos;
-            LCreal az = 0, el = 0, range = 0, diffAz = 0, diffEl = 0;
-            LCreal maxAz = (0.7f * static_cast<LCreal>(Basic::Angle::D2RCC));
-            LCreal maxEl = (0.7f * static_cast<LCreal>(Basic::Angle::D2RCC));
+            LCreal az = 0.0, el = 0.0, range = 0.0, diffAz = 0.0, diffEl = 0.0;
+            const LCreal maxAz = (0.7f * static_cast<LCreal>(Basic::Angle::D2RCC));
+            const LCreal maxEl = (0.7f * static_cast<LCreal>(Basic::Angle::D2RCC));
             //LCreal maxRange = 1500.0f; // long range right now
-            LCreal la = lookAngle * static_cast<LCreal>(Basic::Angle::D2RCC);
+            const LCreal la = lookAngle * static_cast<LCreal>(Basic::Angle::D2RCC);
             Simulation* sim = getSimulation();
-            if (sim != 0) {
+            if (sim != nullptr) {
                 Basic::PairStream* players = sim->getPlayers();
-                if (players != 0) {
+                if (players != nullptr) {
                     Basic::List::Item* item = players->getFirstItem();
-                    while (item != 0 && !tgtAquired) {
+                    while (item != nullptr && !tgtAquired) {
                         Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
-                        if (pair != 0) {
+                        if (pair != nullptr) {
                             Player* player = dynamic_cast<Player*>(pair->object());
-                            if (player != 0 && player != this && !player->isMajorType(WEAPON) && !player->isDestroyed()) {
+                            if (player != nullptr && player != this && !player->isMajorType(WEAPON) && !player->isDestroyed()) {
                                 // ok, calculate our position from this guy
                                 tgtPos = player->getPosition();
                                 vecPos = tgtPos - myPos;
@@ -246,7 +246,7 @@ void LifeForm::look(const LCreal up, const LCreal sdws)
                                     lockMode = TGT_IN_SIGHT;
                                     tgtAquired = true;
                                     if (tgtPlayer != player) {
-                                        if (tgtPlayer != 0) tgtPlayer->unref();
+                                        if (tgtPlayer != nullptr) tgtPlayer->unref();
                                         tgtPlayer = player;
                                         tgtPlayer->ref();
                                     }
@@ -256,7 +256,7 @@ void LifeForm::look(const LCreal up, const LCreal sdws)
                         item = item->getNext();
                     }
                     players->unref();
-                    players = 0;
+                    players = nullptr;
                 }
             }
         }
@@ -264,12 +264,12 @@ void LifeForm::look(const LCreal up, const LCreal sdws)
         else {
             if (tgtPlayer == 0) lockMode = SEARCHING;
             else {
-                osg::Vec3 vecPos = tgtPlayer->getPosition() - getPosition();
-                LCreal az = lcAtan2(vecPos.y(), vecPos.x());
+                const osg::Vec3 vecPos = tgtPlayer->getPosition() - getPosition();
+                const LCreal az = lcAtan2(vecPos.y(), vecPos.x());
                 LCreal range = (vecPos.x() * vecPos.x() + vecPos.y() * vecPos.y());
                 range = std::sqrt(range);
                 // now get our elevation
-                LCreal el = lcAtan2(-vecPos.z(), range);
+                const LCreal el = lcAtan2(-vecPos.z(), range);
                 // now force that on us
                 setLookAngle(el * static_cast<LCreal>(Basic::Angle::R2DCC));
                 setEulerAngles(0, 0, az);

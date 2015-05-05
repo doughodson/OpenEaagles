@@ -59,7 +59,7 @@ END_EVENT_HANDLER()
 //------------------------------------------------------------------------------
 Antenna::Antenna() : freeEmStack(MAX_EMISSIONS), freeEmLock(0),
                      inUseEmQueue(MAX_EMISSIONS), inUseEmLock(0),
-                     sys(0), gainPattern(0)
+                     sys(nullptr), gainPattern(nullptr)
 {
    STANDARD_CONSTRUCTOR()
 
@@ -68,7 +68,7 @@ Antenna::Antenna() : freeEmStack(MAX_EMISSIONS), freeEmLock(0),
 
 Antenna::Antenna(const Antenna& org) : freeEmStack(MAX_EMISSIONS), freeEmLock(0),
                                        inUseEmQueue(MAX_EMISSIONS), inUseEmLock(0),
-                                       sys(0), gainPattern(0)
+                                       sys(nullptr), gainPattern(nullptr)
 {
     STANDARD_CONSTRUCTOR()
     copyData(org,true);
@@ -92,14 +92,14 @@ Antenna* Antenna::clone() const
 
 void Antenna::initData()
 {
-   gainPattern = 0;
-   sys = 0;
+   gainPattern = nullptr;
+   sys = nullptr;
 
    gain = 1.0;
    polar = NONE;
    threshold = 0.0;
    gainPatternDeg = false;  // default: radians
-   recycle = true; // recycle emissions
+   recycle = true;          // recycle emissions
    beamWidth = (Basic::Angle::D2RCC * 3.5);
 }
 
@@ -108,32 +108,31 @@ void Antenna::initData()
 //------------------------------------------------------------------------------
 void Antenna::copyData(const Antenna& org, const bool cc)
 {
-    BaseClass::copyData(org);
+   BaseClass::copyData(org);
    if (cc) initData();
 
-    setSystem(0);
-    polar = org.polar;
-    threshold = org.threshold;
-    gain = org.gain;
-    gainPatternDeg = org.gainPatternDeg;
+   setSystem(nullptr);
+   polar = org.polar;
+   threshold = org.threshold;
+   gain = org.gain;
+   gainPatternDeg = org.gainPatternDeg;
 
-    if (org.gainPattern != 0) {
-       Basic::Function* copy = org.gainPattern->clone();
-       setSlotGainPattern( copy );
-       copy->unref();
-    }
-    else {
-       setSlotGainPattern(0);
-    }
+   if (org.gainPattern != nullptr) {
+      Basic::Function* copy = org.gainPattern->clone();
+      setSlotGainPattern( copy );
+      copy->unref();
+   } else {
+      setSlotGainPattern(nullptr);
+   }
 
-    recycle = org.recycle;
-    beamWidth = org.beamWidth;
+   recycle = org.recycle;
+   beamWidth = org.beamWidth;
 }
 
 void Antenna::deleteData()
 {
-   setSystem(0);
-   setSlotGainPattern(0);
+   setSystem(nullptr);
+   setSlotGainPattern(nullptr);
 
    clearQueues();
 }
@@ -153,7 +152,7 @@ void Antenna::reset()
 //------------------------------------------------------------------------------
 bool Antenna::shutdownNotification()
 {
-    setSystem(0);
+    setSystem(nullptr);
     clearQueues();
 
     return BaseClass::shutdownNotification();
@@ -179,14 +178,14 @@ void Antenna::process(const LCreal dt)
          Emission* em = inUseEmQueue.get();
          lcUnlock(inUseEmLock);
 
-         if (em != 0 && em->getRefCount() > 1) {
+         if (em != nullptr && em->getRefCount() > 1) {
             // Others are still referencing the emission, put back on in-use queue
             lcLock(inUseEmLock);
             inUseEmQueue.put(em);
             lcUnlock(inUseEmLock);
          }
 
-         else if (em != 0 && em->getRefCount() <= 1) {
+         else if (em != nullptr && em->getRefCount() <= 1) {
             // No one else is referencing the emission, push to the free stack
             em->clear();
             lcLock(freeEmLock);
@@ -205,9 +204,9 @@ void Antenna::process(const LCreal dt)
 //------------------------------------------------------------------------------
 bool Antenna::setSystem(RfSystem* const s)
 {
-   if (sys != 0) sys->unref();
+   if (sys != nullptr) sys->unref();
    sys = s;
-   if (sys != 0) sys->ref();
+   if (sys != nullptr) sys->ref();
    return true;
 }
 
@@ -217,19 +216,19 @@ bool Antenna::setSystem(RfSystem* const s)
 void Antenna::clearQueues()
 {
    lcLock(freeEmLock);
-    Emission* em = freeEmStack.pop();
-    while (em != 0) {
-        em->unref();
-        em = freeEmStack.pop();
-    }
+   Emission* em = freeEmStack.pop();
+   while (em != nullptr) {
+      em->unref();
+      em = freeEmStack.pop();
+   }
    lcUnlock(freeEmLock);
 
    lcLock(inUseEmLock);
-    em = inUseEmQueue.get();
-    while (em != 0) {
-        em->unref();
-        em = inUseEmQueue.get();
-    }
+   em = inUseEmQueue.get();
+   while (em != nullptr) {
+      em->unref();
+      em = inUseEmQueue.get();
+   }
    lcUnlock(inUseEmLock);
 }
 
@@ -238,18 +237,18 @@ void Antenna::clearQueues()
 //------------------------------------------------------------------------------
 bool Antenna::setSlotPolarization(Basic::String* const v)
 {
-    if (v == 0) return false;
+   if (v == nullptr) return false;
 
-    bool ok = true;
-    if (*v == "none") ok = setPolarization(NONE);
-    else if (*v == "vertical") ok = setPolarization(VERTICAL);
-    else if (*v == "horizontal") ok = setPolarization(HORIZONTAL);
-    else if (*v == "slant") ok = setPolarization(SLANT);
-    else if (*v == "RHC") ok = setPolarization(RHC);
-    else if (*v == "LHC") ok = setPolarization(LHC);
-    else ok = false;
+   bool ok = true;
+   if (*v == "none") ok = setPolarization(NONE);
+   else if (*v == "vertical") ok = setPolarization(VERTICAL);
+   else if (*v == "horizontal") ok = setPolarization(HORIZONTAL);
+   else if (*v == "slant") ok = setPolarization(SLANT);
+   else if (*v == "RHC") ok = setPolarization(RHC);
+   else if (*v == "LHC") ok = setPolarization(LHC);
+   else ok = false;
 
-    return ok;
+   return ok;
 }
 
 //------------------------------------------------------------------------------
@@ -257,15 +256,15 @@ bool Antenna::setSlotPolarization(Basic::String* const v)
 //------------------------------------------------------------------------------
 bool Antenna::setSlotThreshold(Basic::Power* const p)
 {
-    bool ok = false;
-    // Has power units and we need watts
-    Basic::Watts watts;
-    double x = watts.convert(*p);
+   bool ok = false;
+   // Has power units and we need watts
+   Basic::Watts watts;
+   const double x = watts.convert(*p);
 
-    // Test and set the threshold
-    if (x >= 0.0) ok = setThreshold(x);
+   // Test and set the threshold
+   if (x >= 0.0) ok = setThreshold(x);
 
-    return ok;
+   return ok;
 }
 
 //------------------------------------------------------------------------------
@@ -273,22 +272,21 @@ bool Antenna::setSlotThreshold(Basic::Power* const p)
 //------------------------------------------------------------------------------
 bool Antenna::setSlotGain(const Basic::Number* const g)
 {
-    bool ok = false;
-    double value = -1.0;
+   bool ok = false;
+   double value = -1.0;
 
-    if (g != 0) {
-        value = g->getReal();
-    }
+   if (g != nullptr) {
+      value = g->getReal();
+   }
 
-    if (value >= 0.0) {
-        ok = setGain(value);
-    }
-    else {
-        if (isMessageEnabled(MSG_ERROR)) {
-        std::cerr << "Antenna::setGain: invalid gain" << std::endl;
-    }
-    }
-    return ok;
+   if (value >= 0.0) {
+      ok = setGain(value);
+   } else {
+      if (isMessageEnabled(MSG_ERROR)) {
+         std::cerr << "Antenna::setGain: invalid gain" << std::endl;
+      }
+   }
+   return ok;
 }
 
 //------------------------------------------------------------------------------
@@ -297,9 +295,9 @@ bool Antenna::setSlotGain(const Basic::Number* const g)
 bool Antenna::setSlotGainPattern(Basic::Function* const tbl)
 {
     bool ok = true;
-    if (gainPattern != 0) gainPattern->unref();
+    if (gainPattern != nullptr) gainPattern->unref();
     gainPattern = tbl;
-    if (gainPattern != 0) gainPattern->ref();
+    if (gainPattern != nullptr) gainPattern->ref();
     return ok;
 }
 
@@ -309,7 +307,7 @@ bool Antenna::setSlotGainPattern(Basic::Function* const tbl)
 bool Antenna::setSlotGainPatternDeg(const Basic::Number* const msg)
 {
     bool ok = true;
-    if (msg != 0) {
+    if (msg != nullptr) {
         gainPatternDeg = msg->getBoolean();
         ok = true;
     }
@@ -322,7 +320,7 @@ bool Antenna::setSlotGainPatternDeg(const Basic::Number* const msg)
 bool Antenna::setSlotRecycleFlg(const Basic::Number* const msg)
 {
     bool ok = true;
-    if (msg != 0) {
+    if (msg != nullptr) {
         ok = setEmissionRecycleFlag( msg->getBoolean() );
     }
     return ok;
@@ -334,7 +332,7 @@ bool Antenna::setSlotRecycleFlg(const Basic::Number* const msg)
 bool Antenna::setSlotBeamWidth(const Basic::Angle* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       double x = Basic::Radians::convertStatic( *msg );
       ok = setBeamWidth( x );
       if (!ok) {
@@ -350,7 +348,7 @@ bool Antenna::setSlotBeamWidth(const Basic::Angle* const msg)
 bool Antenna::setSlotBeamWidth(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setBeamWidth( msg->getDouble() );
       if (!ok) {
          std::cerr << "Antenna::setSlotBeamWidth: Error setting beam width!" << std::endl;
@@ -420,9 +418,9 @@ void Antenna::rfTransmit(Emission* const xmit)
    // Need something to transmit and someone to send to
    Tdb* tdb = getCurrentTDB();
    Player* ownship = getOwnship();
-   if (xmit == 0 || tdb == 0 || ownship == 0) {
+   if (xmit == nullptr || tdb == nullptr || ownship == nullptr) {
       // Clean up and leave
-      if (tdb != 0) tdb->unref();
+      if (tdb != nullptr) tdb->unref();
       return;
    }
 
@@ -436,7 +434,7 @@ void Antenna::rfTransmit(Emission* const xmit)
    // If we have targets
    // ---
    const osg::Vec3d* losG = tdb->getGimbalLosVectors();
-   if (ntgts > 0 && losG != 0) {
+   if (ntgts > 0 && losG != nullptr) {
 
       // ---
       // Lookup gain from antenna gain pattern, compute antenna
@@ -447,7 +445,7 @@ void Antenna::rfTransmit(Emission* const xmit)
       if (gainPattern != 0) {
          Basic::Func1* gainFunc1 = dynamic_cast<Basic::Func1*>(gainPattern);
          Basic::Func2* gainFunc2 = dynamic_cast<Basic::Func2*>(gainPattern);
-         if (gainFunc2 != 0) {
+         if (gainFunc2 != nullptr) {
             // ---
             // Antenna pattern: 2D table (az & el off antenna boresight)
             // ---
@@ -473,7 +471,7 @@ void Antenna::rfTransmit(Emission* const xmit)
             pow10Array(gainTgt0, gainTgt, ntgts);
             haveGainTgt = true;
          }
-         else if (gainFunc1 != 0) {
+         else if (gainFunc1 != nullptr) {
             // ---
             // Antenna Pattern: 1D table (off antenna boresight only
             // ---
@@ -502,7 +500,7 @@ void Antenna::rfTransmit(Emission* const xmit)
          // No antenna pattern table
          // ---
          for (unsigned int i = 0; i < ntgts; i++) {
-            gainTgt[i] = 1.0f;
+            gainTgt[i] = 1.0;
          }
       }
 
@@ -530,7 +528,7 @@ void Antenna::rfTransmit(Emission* const xmit)
          if (erp[i] > threshold) {
 
             // Get a free emission packet
-            Emission* em(0);
+            Emission* em(nullptr);
             if (recycle) {
                lcLock(freeEmLock);
                em = freeEmStack.pop();
@@ -538,14 +536,14 @@ void Antenna::rfTransmit(Emission* const xmit)
             }
 
             bool cloned = false;
-            if (em == 0) {
+            if (em == nullptr) {
                // Otherwise, clone a new one
                em = xmit->clone();
                cloned = true;
             }
 
             // Send the emission to the other player
-            if (em != 0) {
+            if (em != nullptr) {
 
                // a) Copy the template emission
                if (!cloned) *em = *xmit;
@@ -554,16 +552,16 @@ void Antenna::rfTransmit(Emission* const xmit)
                em->setGimbal(this);
                em->setOwnship(ownship);
 
-               em->setRange( LCreal(ranges[i]) );
+               em->setRange( static_cast<LCreal>(ranges[i]) );
                em->setLosVec(losO2T[i]);
                em->setTgtLosVec(losT2O[i]);
-               em->setRangeRate( LCreal(rngRates[i]) );
+               em->setRangeRate( static_cast<LCreal>(rngRates[i]) );
                em->setTarget(targets[i]);
 
-               em->setGimbalAzimuth( LCreal(getAzimuth()) );
-               em->setGimbalElevation( LCreal(getElevation()) );
-               em->setPower( LCreal(erp[i]) );
-               em->setGain( LCreal(aeGain[i]) );
+               em->setGimbalAzimuth( static_cast<LCreal>(getAzimuth()) );
+               em->setGimbalElevation( static_cast<LCreal>(getElevation()) );
+               em->setPower( static_cast<LCreal>(erp[i]) );
+               em->setGain( static_cast<LCreal>(aeGain[i]) );
                em->setPolarization(getPolarization());
                em->setLocalPlayersOnly( isLocalPlayersOfInterestOnly() );
 
@@ -610,7 +608,7 @@ bool Antenna::onStartScanEvent(Basic::Integer* const bar)
 {
    // Pass the event to our system
    RfSystem* p = getSystem();
-   if (p != 0) p->event(SCAN_START, bar);
+   if (p != nullptr) p->event(SCAN_START, bar);
    return true;
 }
 
@@ -621,7 +619,7 @@ bool Antenna::onEndScanEvent(Basic::Integer* const bar)
 {
    // Pass the event to our sensor
    RfSystem* p = getSystem();
-   if (p != 0) p->event(SCAN_END, bar);
+   if (p != nullptr) p->event(SCAN_END, bar);
    return true;
 }
 
@@ -648,12 +646,12 @@ bool Antenna::onRfEmissionEvent(Emission* const em)
 
       Player* ownship = getOwnship();
       RfSystem* sys1 = getSystem();
-      if (ownship != 0 && sys1 != 0) {
+      if (ownship != nullptr && sys1 != nullptr) {
          sys1->ref();
 
          // Line-Of-Sight (LOS) vectors back to the transmitter.
-         osg::Vec3d xlos = em->getTgtLosVec();
-         osg::Vec4d los0( xlos.x(), xlos.y(), xlos.z(), 0.0);
+         const osg::Vec3d xlos = em->getTgtLosVec();
+         const osg::Vec4d los0( xlos.x(), xlos.y(), xlos.z(), 0.0);
 
          // 2) Transform local NED LOS vectors to antenna coordinates
          osg::Matrixd mm = getRotMat();
@@ -663,30 +661,30 @@ bool Antenna::onRfEmissionEvent(Emission* const em)
          // ---
          // Compute antenna gains in the direction of the transmitter
          // ---
-         double rGainDb = 0.0f;
-         if (gainPattern != 0) {
+         double rGainDb = 0.0;
+         if (gainPattern != nullptr) {
 
             Basic::Func1* gainFunc1 = dynamic_cast<Basic::Func1*>(gainPattern);
             Basic::Func2* gainFunc2 = dynamic_cast<Basic::Func2*>(gainPattern);
-            if (gainFunc2 != 0) {
+            if (gainFunc2 != nullptr) {
                // ---
                // 3-a) Antenna pattern: 2D table (az & el off antenna boresight)
                // ---
 
                // Get component arrays and ground range squared
-               double xa =  losA.x();
-               double ya =  losA.y();
-               double za = -losA.z();
-               double ra2 = xa*xa + ya*ya;
+               const double xa =  losA.x();
+               const double ya =  losA.y();
+               const double za = -losA.z();
+               const double ra2 = xa*xa + ya*ya;
 
                // Compute range along antenna x-y plane
-               double ra = std::sqrt(ra2);
+               const double ra = std::sqrt(ra2);
 
                // Compute azimuth off boresight
-               double aazr = std::atan2(ya,xa);
+               const double aazr = std::atan2(ya,xa);
 
                // Compute elevation off boresight
-               double aelr = std::atan2(za,ra);
+               const double aelr = std::atan2(za,ra);
 
                // Lookup gain in 2D table and convert from dB
                if (gainPatternDeg)
@@ -696,33 +694,33 @@ bool Antenna::onRfEmissionEvent(Emission* const em)
 
             }
 
-            else if (gainFunc1 != 0) {
+            else if (gainFunc1 != nullptr) {
                // ---
-                  // 3-b) Antenna Pattern: 1D table (off antenna boresight only
-                  // ---
+               // 3-b) Antenna Pattern: 1D table (off antenna boresight only
+               // ---
 
-                  // Compute angle off antenna boresight
-                  double aar = std::acos(losA.x());
+               // Compute angle off antenna boresight
+               const double aar = std::acos(losA.x());
 
-                  // Lookup gain in 1D table and convert from dB
-                  if (gainPatternDeg)
-                     rGainDb = gainFunc1->f( aar * Basic::Angle::R2DCC );
-                  else
-                     rGainDb = gainFunc1->f(aar);
+               // Lookup gain in 1D table and convert from dB
+               if (gainPatternDeg)
+                  rGainDb = gainFunc1->f( aar * Basic::Angle::R2DCC );
+               else
+                  rGainDb = gainFunc1->f(aar);
 
             }
          }
 
          // Compute off-boresight gain
-         double rGain = std::pow(10.0,rGainDb/10.0);
+         const double rGain = std::pow(10.0,rGainDb/10.0);
 
          // Compute Antenna Effective Gain
-         double aeGain = rGain * getGain();
-         double lambda = em->getWavelength();
-         double aea = getEffectiveArea(aeGain, lambda);
+         const double aeGain = rGain * getGain();
+         const double lambda = em->getWavelength();
+         const double aea = getEffectiveArea(aeGain, lambda);
 
-         double pGain = getPolarizationGain(em->getPolarization());
-         double raGain = aea * pGain;
+         const double pGain = getPolarizationGain(em->getPolarization());
+         const double raGain = aea * pGain;
 
          sys1->rfReceivedEmission(em, this, LCreal(raGain));
 
@@ -742,7 +740,7 @@ bool Antenna::onRfEmissionReturnEventAntenna(Emission* const em)
     bool used = false;
     // Pass all returned emissions to our sensor
     RfSystem* sys1 = getSystem();
-    if (sys1 != 0) {
+    if (sys1 != nullptr) {
         sys1->ref();
 
         // Compute antenna effective area
@@ -797,7 +795,7 @@ std::ostream& Antenna::serialize(std::ostream& sout, const int i, const bool slo
     }
 
     // Gain pattern
-    if (gainPattern != 0) {
+    if (gainPattern != nullptr) {
         indent(sout,i+j);
         sout << "gainPattern: " ;
         gainPattern->serialize(sout,(i+j+4));
@@ -814,7 +812,7 @@ std::ostream& Antenna::serialize(std::ostream& sout, const int i, const bool slo
     sout << std::endl;
 
     indent(sout,i+j);
-   sout << "recycle: " << (isEmissionRecycleEnabled() ? "true" : "false") << std::endl;
+    sout << "recycle: " << (isEmissionRecycleEnabled() ? "true" : "false") << std::endl;
 
     BaseClass::serialize(sout,i+j,true);
 

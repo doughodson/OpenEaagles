@@ -4,6 +4,8 @@
 #include "openeaagles/simulation/RfSystem.h"
 #include "openeaagles/simulation/Player.h"
 
+#include <cmath>
+
 namespace Eaagles {
 namespace Simulation {
 
@@ -34,7 +36,7 @@ Emission::Emission()
     lossXmit = 1.0;
     rcs = 0.0;
     polar = Antenna::NONE;
-    transmitter = 0;
+    transmitter = nullptr;
     ecmFlag = ECM_OFF;
 }
 
@@ -48,7 +50,7 @@ void Emission::copyData(const Emission& org, const bool cc)
 
     // If copy constructor, init these pointers
     if (cc) {
-        transmitter = 0;
+        transmitter = nullptr;
     }
 
     // Copy the data
@@ -86,7 +88,7 @@ void Emission::deleteData()
 void Emission::clear()
 {
    BaseClass::clear();
-   setTransmitter(0);
+   setTransmitter(nullptr);
 }
 
 //------------------------------------------------------------------------------

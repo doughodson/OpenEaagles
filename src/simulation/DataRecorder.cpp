@@ -32,8 +32,8 @@ DataRecorder::DataRecorder()
 
 void DataRecorder::initData()
 {
-   sta = 0;
-   sim = 0;
+   sta = nullptr;
+   sim = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -44,8 +44,8 @@ void DataRecorder::copyData(const DataRecorder& org, const bool cc)
    BaseClass::copyData(org);
    if (cc) initData();
 
-   sta = 0;
-   sim = 0;
+   sta = nullptr;
+   sim = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -53,8 +53,8 @@ void DataRecorder::copyData(const DataRecorder& org, const bool cc)
 //------------------------------------------------------------------------------
 void DataRecorder::deleteData()
 {
-   sta = 0;
-   sim = 0;
+   sta = nullptr;
+   sim = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -68,9 +68,9 @@ void DataRecorder::processRecords()
 // Our parent Station
 Station* DataRecorder::getStation()
 {
-   if (sta == 0) {
+   if (sta == nullptr) {
       sta = static_cast<Station*>(findContainerByType(typeid(Station)));
-      if (sta == 0 && isMessageEnabled(MSG_ERROR)) {
+      if (sta == nullptr && isMessageEnabled(MSG_ERROR)) {
          std::cerr << "DataRecorder::getStation(): ERROR, unable to locate the Station class!" << std::endl;
       }
    }
@@ -80,7 +80,7 @@ Station* DataRecorder::getStation()
 // Our parent Station (const version)
 const Station* DataRecorder::getStation() const
 {
-   if (sta != 0) {
+   if (sta != nullptr) {
       return sta;
    }
    else {
@@ -95,16 +95,16 @@ const Station* DataRecorder::getStation() const
 // The simulation
 Simulation* DataRecorder::getSimulation()
 {
-   if (sim == 0) {
+   if (sim == nullptr) {
       Station* p = getStation();
-      if (p != 0) sim = p->getSimulation();
+      if (p != nullptr) sim = p->getSimulation();
    }
    return sim;
 }
 
 const Simulation* DataRecorder::getSimulation() const
 {
-   if (sim != 0) {
+   if (sim != nullptr) {
       return sim;
    }
    else {
@@ -132,7 +132,7 @@ BEGIN_SLOTTABLE(RecorderComponent)
     "disabledList",        // 2)  List of disabled data records
 END_SLOTTABLE(RecorderComponent)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(RecorderComponent)
     ON_SLOT( 1, setSlotEnabledList,  Basic::List)
     ON_SLOT( 2, setSlotDisabledList, Basic::List)
@@ -149,10 +149,10 @@ RecorderComponent::RecorderComponent()
 
 void RecorderComponent::initData()
 {
-   enabledList = 0;
+   enabledList = nullptr;
    numEnabled = 0;
 
-   disabledList = 0;
+   disabledList = nullptr;
    numDisabled = 0;
 }
 
@@ -173,8 +173,8 @@ void RecorderComponent::copyData(const RecorderComponent& org, const bool cc)
 //------------------------------------------------------------------------------
 void RecorderComponent::deleteData()
 {
-   setEnabledList(0,0);
-   setDisabledList(0,0);
+   setEnabledList(nullptr, 0);
+   setDisabledList(nullptr, 0);
 }
 
 //------------------------------------------------------------------------------
@@ -183,14 +183,14 @@ void RecorderComponent::deleteData()
 bool RecorderComponent::setEnabledList(const unsigned int* const list, const unsigned int n)
 {
    // Remove the old list
-   if (enabledList != 0) {
+   if (enabledList != nullptr) {
       delete[] enabledList;
-      enabledList = 0;
+      enabledList = nullptr;
    }
    numEnabled = 0;
 
    // Create the new list
-   if (list != 0 && n > 0) {
+   if (list != nullptr && n > 0) {
       enabledList = new unsigned int[n];
       for (unsigned int i = 0; i < n; i++) {
          enabledList[i] = list[i];
@@ -208,14 +208,14 @@ bool RecorderComponent::setEnabledList(const unsigned int* const list, const uns
 bool RecorderComponent::setDisabledList(const unsigned int* const list, const unsigned int n)
 {
    // Remove the old list
-   if (disabledList != 0) {
+   if (disabledList != nullptr) {
       delete[] disabledList;
-      disabledList = 0;
+      disabledList = nullptr;
    }
    numDisabled = 0;
 
    // Create the new list
-   if (list != 0 && n > 0) {
+   if (list != nullptr && n > 0) {
       disabledList = new unsigned int[n];
       for (unsigned int i = 0; i < n; i++) {
          disabledList[i] = list[i];
@@ -233,7 +233,7 @@ bool RecorderComponent::setDisabledList(const unsigned int* const list, const un
 bool RecorderComponent::setSlotEnabledList(const Basic::List* const list)
 {
    unsigned int n2 = 0;
-   unsigned int* p2 = 0;
+   unsigned int* p2 = nullptr;
 
    // Items in the list ...
    unsigned int n = list->entries();
@@ -251,14 +251,14 @@ bool RecorderComponent::setSlotEnabledList(const Basic::List* const list)
          }
       }
       delete[] p1;
-      p1 = 0;
+      p1 = nullptr;
    }
 
-   // Set the list -- 
+   // Set the list --
    setEnabledList(p2, n2);
-   if (p2 != 0) {
+   if (p2 != nullptr) {
       delete[] p2;
-      p2 = 0;
+      p2 = nullptr;
    }
 
    return true;
@@ -267,7 +267,7 @@ bool RecorderComponent::setSlotEnabledList(const Basic::List* const list)
 bool RecorderComponent::setSlotDisabledList(const Basic::List* const list)
 {
    unsigned int n2 = 0;
-   unsigned int* p2 = 0;
+   unsigned int* p2 = nullptr;
 
    // Items in the list ...
    unsigned int n = list->entries();
@@ -285,14 +285,14 @@ bool RecorderComponent::setSlotDisabledList(const Basic::List* const list)
          }
       }
       delete[] p1;
-      p1 = 0;
+      p1 = nullptr;
    }
 
-   // Set the list -- 
+   // Set the list --
    setDisabledList(p2, n2);
-   if (p2 != 0) {
+   if (p2 != nullptr) {
       delete[] p2;
-      p2 = 0;
+      p2 = nullptr;
    }
 
    return true;
@@ -321,7 +321,7 @@ std::ostream& RecorderComponent::serialize(std::ostream& sout, const int i, cons
    }
 
    // Enabled list -- printing as numeric values only
-   if (numEnabled > 0 && enabledList != 0) {
+   if (numEnabled > 0 && enabledList != nullptr) {
       indent(sout, i + j);
       sout << "enabledList: " << "[";
       for (unsigned int i = 0; i < numEnabled; i++) sout << " " << enabledList[i];
@@ -329,7 +329,7 @@ std::ostream& RecorderComponent::serialize(std::ostream& sout, const int i, cons
    }
 
    // Disabled list -- printing as numeric values only
-   if (numDisabled > 0 && disabledList != 0) {
+   if (numDisabled > 0 && disabledList != nullptr) {
       indent(sout, i + j);
       sout << "disabledList: " << "[";
       for (unsigned int i = 0; i < numDisabled; i++) sout << " " << disabledList[i];

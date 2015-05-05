@@ -16,7 +16,6 @@ namespace Simulation {
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Jammer,"Jammer")
 EMPTY_SERIALIZER(Jammer)
 
-
 //------------------------------------------------------------------------------
 // Constructor(s)
 //------------------------------------------------------------------------------
@@ -37,8 +36,6 @@ void Jammer::copyData(const Jammer& org, const bool)
 }
 
 EMPTY_DELETEDATA(Jammer)
-
-
 
 //------------------------------------------------------------------------------
 // transmit() -- send jam emissions

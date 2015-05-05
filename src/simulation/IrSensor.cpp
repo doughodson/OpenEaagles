@@ -66,23 +66,22 @@ END_SLOT_MAP()
 //------------------------------------------------------------------------------
 // Constructors, destructor, copy operator and clone()
 //------------------------------------------------------------------------------
-IrSensor::IrSensor() : storedMessagesQueue(MAX_EMISSIONS), storedMessagesLock(0), tmName(0), trackManager(0)
+IrSensor::IrSensor() : storedMessagesQueue(MAX_EMISSIONS), storedMessagesLock(0), tmName(nullptr), trackManager(nullptr)
 {
    STANDARD_CONSTRUCTOR()
 
-   tmName = 0;
-   lowerWavelength = 0;
-   upperWavelength = 0;
-   nei = 0;
-   threshold = 0;
-   ifov = 0;
-   ifovTheta = 0;
+   lowerWavelength = 0.0;
+   upperWavelength = 0.0;
+   nei = 0.0;
+   threshold = 0.0;
+   ifov = 0.0;
+   ifovTheta = 0.0;
    sensorType = HOTSPOT;
    //fieldOfRegard = 0;
    //fieldOfRegardTheta = 0;
    //azimuthBin = 0.0f;
    //elevationBin = 0.0f;
-   maximumRange = 0.0f;
+   maximumRange = 0.0;
 }
 
 IrSensor::~IrSensor()
@@ -93,7 +92,7 @@ IrSensor::~IrSensor()
 IrSensor::IrSensor(const IrSensor& org) : storedMessagesQueue(MAX_EMISSIONS), storedMessagesLock(0)
 {
     STANDARD_CONSTRUCTOR()
-    copyData(org,true);
+    copyData(org, true);
 }
 
 IrSensor* IrSensor::clone() const
@@ -109,8 +108,8 @@ void IrSensor::copyData(const IrSensor& org, const bool cc)
    BaseClass::copyData(org);
 
    if (cc) {
-       tmName = 0;
-       trackManager = 0;
+       tmName = nullptr;
+       trackManager = nullptr;
    }
 
    lowerWavelength = org.lowerWavelength;
@@ -126,13 +125,13 @@ void IrSensor::copyData(const IrSensor& org, const bool cc)
    //elevationBin = org.elevationBin;
    maximumRange = org.maximumRange;
 
-   if (org.tmName != 0) {
+   if (org.tmName != nullptr) {
       Basic::String* copy = org.tmName->clone();
       setTrackManagerName( copy );
       copy->unref();
    }
    else {
-      setTrackManagerName(0);
+      setTrackManagerName(nullptr);
    }
 
    // do not copy data.
@@ -145,8 +144,8 @@ void IrSensor::copyData(const IrSensor& org, const bool cc)
 //------------------------------------------------------------------------------
 void IrSensor::deleteData()
 {
-   setTrackManager(0);
-   setTrackManagerName(0);
+   setTrackManager(nullptr);
+   setTrackManagerName(nullptr);
    clearTracksAndQueues();
 }
 
@@ -155,7 +154,7 @@ void IrSensor::deleteData()
 //------------------------------------------------------------------------------
 bool IrSensor::shutdownNotification()
 {
-   setTrackManager(0);
+   setTrackManager(nullptr);
    clearTracksAndQueues();
    return BaseClass::shutdownNotification();
 }
@@ -171,22 +170,22 @@ void IrSensor::reset()
    // Do we need to find the track manager?
    // ---
    lcLock(storedMessagesLock);
-   if (getTrackManager() == 0 && getTrackManagerName() != 0 && getOwnship() != 0) {
+   if (getTrackManager() == nullptr && getTrackManagerName() != nullptr && getOwnship() != nullptr) {
       // We have a name of the track manager, but not the track manager itself
       const char* name = *getTrackManagerName();
 
       // Get the named track manager from the onboard computer
       OnboardComputer* obc = getOwnship()->getOnboardComputer();
-      if (obc != 0) {
+      if (obc != nullptr) {
          setTrackManager( obc->getTrackManagerByName(name) );
       }
 
-      if (getTrackManager() == 0) {
+      if (getTrackManager() == nullptr) {
           // The assigned track manager was not found!
           if (isMessageEnabled(MSG_ERROR)) {
               std::cerr << "IrSensor::reset() ERROR -- track manager, " << name << ", was not found!" << std::endl;
           }
-         setTrackManagerName(0);
+         setTrackManagerName(nullptr);
       }
    }
    lcUnlock(storedMessagesLock);
@@ -202,22 +201,22 @@ void IrSensor::updateData(const LCreal dt)
    // ---
    // Do we need to find the track manager?
    // ---
-   if (getTrackManager() == 0 && getTrackManagerName() != 0 && getOwnship() != 0) {
+   if (getTrackManager() == nullptr && getTrackManagerName() != nullptr && getOwnship() != nullptr) {
       // We have a name of the track manager, but not the track manager itself
       const char* name = *getTrackManagerName();
 
       // Get the named track manager from the onboard computer
       OnboardComputer* obc = getOwnship()->getOnboardComputer();
-      if (obc != 0) {
+      if (obc != nullptr) {
          setTrackManager( obc->getTrackManagerByName(name) );
       }
 
-      if (getTrackManager() == 0) {
+      if (getTrackManager() == nullptr) {
          // The assigned track manager was not found!
          if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "IrSensor::reset() ERROR -- track manager, " << name << ", was not found!" << std::endl;
          }
-         setTrackManagerName(0);
+         setTrackManagerName(nullptr);
       }
    }
 }
@@ -231,10 +230,10 @@ void IrSensor::transmit(const LCreal dt)
 
    // In transmit (request IR) mode and have a IrSeeker
    IrSeeker* seeker = dynamic_cast<IrSeeker*>( getSeeker() );
-   if (seeker != 0 && isQuerying()) {
+   if (seeker != nullptr && isQuerying()) {
       // Send the emission to the other player
       IrQueryMsg* irQuery = new IrQueryMsg();
-      if (irQuery != 0) {
+      if (irQuery != nullptr) {
          irQuery->setLowerWavelength(getLowerWavelength());
          irQuery->setUpperWavelength(getUpperWavelength());
          irQuery->setInstantaneousFieldOfView(getIFOV());
@@ -256,7 +255,7 @@ void IrSensor::transmit(const LCreal dt)
 bool IrSensor::calculateIrQueryReturn(IrQueryMsg* const msg)
 {
    Player* ownship = getOwnship();
-   IrAtmosphere* atmos = 0;
+   IrAtmosphere* atmos = nullptr;
    LCreal totalSignal = 0.0;
    LCreal totalBackground = 0.0;
 
@@ -264,13 +263,13 @@ bool IrSensor::calculateIrQueryReturn(IrQueryMsg* const msg)
       // this should not happen
    }
 
-   if (ownship != 0) {
+   if (ownship != nullptr) {
       Simulation* sim = ownship->getSimulation();
       if (sim)
          atmos = sim->getIrAtmosphere();
    }
 
-   if (atmos == 0) {
+   if (atmos == nullptr) {
       // assume simple signature
       totalSignal = msg->getSignatureAtRange();
    }
@@ -278,16 +277,16 @@ bool IrSensor::calculateIrQueryReturn(IrQueryMsg* const msg)
       atmos->calculateAtmosphereContribution(msg, &totalSignal, &totalBackground);
    }
 
-   if (totalSignal > 0.0f) {
+   if (totalSignal > 0.0) {
 
-      LCreal targetRange = msg->getRange();
-      LCreal rangeSquared =  targetRange * targetRange;
-      LCreal reflectorArea = msg->getProjectedArea();
-      LCreal ifov = msg->getInstantaneousFieldOfView();
+      const LCreal targetRange = msg->getRange();
+      const LCreal rangeSquared =  targetRange * targetRange;
+      const LCreal reflectorArea = msg->getProjectedArea();
+      const LCreal ifov = msg->getInstantaneousFieldOfView();
 
       // The relevant amount of background area is the field of view multiplied by the range squared
 
-      LCreal backgroundArea =  ifov * rangeSquared;
+      const LCreal backgroundArea =  ifov * rangeSquared;
 
       // The seeker detects by comparing the amount of signal present
       // with the target to the amount of signal there would be without the target.
@@ -310,7 +309,7 @@ bool IrSensor::calculateIrQueryReturn(IrQueryMsg* const msg)
       }
 
       // attenuatedPower is irradiance, in watts/m^2
-      LCreal attenuatedPower = totalSignal / rangeSquared;
+      const LCreal attenuatedPower = totalSignal / rangeSquared;
 
       // signalAboveNoise is the signal that the detector sees minus what it would see with
       // only the background radiation, and is just the amount of power subtracted by how much
@@ -323,28 +322,28 @@ bool IrSensor::calculateIrQueryReturn(IrQueryMsg* const msg)
       // only Contrast seekers take absolute value in this equation.
       // Hotspot does not.
 
-      if (signalAboveNoise < 0.0f &&
+      if (signalAboveNoise < 0.0 &&
                (msg->getSendingSensor()->getSensorType() == IrSensor::CONTRAST)) {
          signalAboveNoise = -signalAboveNoise;
       }
 
-      LCreal nei = msg->getNEI();
+      const LCreal nei = msg->getNEI();
 
       // Determine the ratio between the signal above the noise as compared to the level of
       // radiation that would create a response at the same level as the sensor's internal noise.
       // if NEI is in watts/m^2, then SNR will be dimensionless.
       // if NEI is in watts/cm^2, then need to correct by 10^4.
 
-      LCreal signalToNoiseRatio = signalAboveNoise / nei;
-      LCreal backgroundNoiseRatio = noiseBlockedByTarget / nei;
+      const LCreal signalToNoiseRatio = signalAboveNoise / nei;
+      const LCreal backgroundNoiseRatio = noiseBlockedByTarget / nei;
       //LCreal signalToNoiseThreshold = msg->getSendingSensor()->getThreshold();
 
       // allow all signals to be returned; threshold test will be applied in process()
       {
          IrQueryMsg* outMsg = new IrQueryMsg();
          outMsg->setTarget(msg->getTarget());
-         outMsg->setGimbalAzimuth( LCreal(msg->getGimbal()->getAzimuth()) );
-         outMsg->setGimbalElevation( LCreal(msg->getGimbal()->getElevation()) );
+         outMsg->setGimbalAzimuth( static_cast<LCreal>(msg->getGimbal()->getAzimuth()) );
+         outMsg->setGimbalElevation( static_cast<LCreal>(msg->getGimbal()->getElevation()) );
          outMsg->setAzimuthAoi(msg->getAzimuthAoi());
          outMsg->setElevationAoi(msg->getElevationAoi());
 
@@ -411,7 +410,7 @@ void IrSensor::process(const LCreal dt)
    int numRecords = storedMessagesQueue.entries();
    if (numRecords > 0) {
       AngleOnlyTrackManager* tm = static_cast<AngleOnlyTrackManager*>(getTrackManager());
-      if (tm) {
+      if (tm != nullptr) {
          lcLock(storedMessagesLock);
          numRecords = storedMessagesQueue.entries();
 
@@ -560,14 +559,14 @@ bool IrSensor::setMaximumRange(const LCreal w)
 
 bool IrSensor::setSlotMaximumRange(const Basic::Number* const msg)
 {
-   LCreal value = 0.0f;
+   LCreal value = 0.0;
 
    const Basic::Distance* d = dynamic_cast<const Basic::Distance*>(msg);
-   if (d != 0) {
+   if (d != nullptr) {
        Basic::Meters m;
        value = static_cast<LCreal>(m.convert(*d));
    }
-   else if (msg != 0) {
+   else if (msg != nullptr) {
       value = msg->getReal();
    }
 
@@ -596,15 +595,15 @@ bool IrSensor::setSlotMaximumRange(const Basic::Number* const msg)
 // setSlotLowerWavelength() - Sets lower wavelength
 bool IrSensor::setSlotLowerWavelength(const Basic::Number* const msg)
 {
-   LCreal value = 0.0f;
+   LCreal value = 0.0;
    bool ok = false;
 
    const Basic::Distance* d = dynamic_cast<const Basic::Distance*>(msg);
-   if (d != 0) {
+   if (d != nullptr) {
        Basic::MicroMeters mm;
        value = static_cast<LCreal>(mm.convert(*d));
    }
-   else if (msg != 0) {
+   else if (msg != nullptr) {
       value = msg->getReal();
    }
    ok = setLowerWavelength(value);
@@ -621,14 +620,14 @@ bool IrSensor::setSlotLowerWavelength(const Basic::Number* const msg)
 bool IrSensor::setSlotUpperWavelength(const Basic::Number* const msg)
 {
    bool ok = false;
-   LCreal value = 0.0f;
+   LCreal value = 0.0;
 
    const Basic::Distance* d = dynamic_cast<const Basic::Distance*>(msg);
-   if (d != 0) {
+   if (d != nullptr) {
        Basic::MicroMeters mm;
        value = static_cast<LCreal>(mm.convert(*d));
    }
-   else if (msg != 0) {
+   else if (msg != nullptr) {
       value = msg->getReal();
    }
    ok = setUpperWavelength(value);
@@ -644,7 +643,7 @@ bool IrSensor::setSlotUpperWavelength(const Basic::Number* const msg)
 bool IrSensor::setSlotNEI(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       LCreal x = msg->getReal();
       ok = setNEI(x);
       if (!ok) {
@@ -660,7 +659,7 @@ bool IrSensor::setSlotNEI(const Basic::Number* const msg)
 bool IrSensor::setSlotThreshold(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       LCreal x = msg->getReal();
       ok = setThreshold(x);
       if (!ok) {
@@ -676,7 +675,7 @@ bool IrSensor::setSlotThreshold(const Basic::Number* const msg)
 bool IrSensor::setSlotIFOV(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       LCreal x = msg->getReal();
       ok = setIFOV(x);
       if (!ok) {
@@ -693,7 +692,7 @@ bool IrSensor::setSlotSensorType(const Basic::String* const msg)
 {
    bool ok = false;
 
-   if (msg != 0) {
+   if (msg != nullptr) {
       if (*msg == "contrast") ok = setSensorType(CONTRAST);
       else if (*msg == "hot spot") ok = setSensorType(HOTSPOT);
       if (!ok) {
@@ -732,11 +731,11 @@ bool IrSensor::setSlotTrackManagerName(Basic::String* const v)
 //------------------------------------------------------------------------------
 bool IrSensor::setTrackManagerName(Basic::String* name)
 {
-    if (tmName != 0) {
+    if (tmName != nullptr) {
         tmName->unref();
     }
     tmName = name;
-    if (tmName != 0) {
+    if (tmName != nullptr) {
         tmName->ref();
     }
     return true;
@@ -747,11 +746,11 @@ bool IrSensor::setTrackManagerName(Basic::String* name)
 //------------------------------------------------------------------------------
 bool IrSensor::setTrackManager(TrackManager* tm)
 {
-    if (trackManager != 0) {
+    if (trackManager != nullptr) {
         trackManager->unref();
     }
     trackManager = tm;
-    if (trackManager != 0) {
+    if (trackManager != nullptr) {
         trackManager->ref();
     }
     return true;
@@ -786,7 +785,7 @@ const TrackManager* IrSensor::getTrackManager() const
 //------------------------------------------------------------------------------
 IrQueryMsg* IrSensor::getStoredMessage()
 {
-   IrQueryMsg* msg = 0;
+   IrQueryMsg* msg = nullptr;
 
    lcLock(storedMessagesLock);
    msg = storedMessagesQueue.get();
@@ -800,7 +799,7 @@ IrQueryMsg* IrSensor::getStoredMessage()
 //------------------------------------------------------------------------------
 IrQueryMsg* IrSensor::peekStoredMessage(unsigned int i)
 {
-   IrQueryMsg* msg = 0;
+   IrQueryMsg* msg = nullptr;
 
    lcLock(storedMessagesLock);
    msg = storedMessagesQueue.peek0(i);
@@ -814,7 +813,7 @@ IrQueryMsg* IrSensor::peekStoredMessage(unsigned int i)
 void IrSensor::addStoredMessage(IrQueryMsg* msg)
 {
    // Queue up emissions reports
-   if (msg != 0) {
+   if (msg != nullptr) {
       lcLock(storedMessagesLock);
       storedMessagesQueue.put(msg);
       lcUnlock(storedMessagesLock);
@@ -829,7 +828,7 @@ void IrSensor::clearTracksAndQueues()
    // Clear out the queues
    // ---
    lcLock(storedMessagesLock);
-   for (IrQueryMsg* msg = storedMessagesQueue.get(); msg != 0; msg = storedMessagesQueue.get())  {
+   for (IrQueryMsg* msg = storedMessagesQueue.get(); msg != nullptr; msg = storedMessagesQueue.get())  {
       msg->unref();
    }
    lcUnlock(storedMessagesLock);

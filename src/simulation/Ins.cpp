@@ -15,6 +15,7 @@ namespace Simulation {
 IMPLEMENT_SUBCLASS(Ins,"Ins")
 EMPTY_SLOTTABLE(Ins)
 EMPTY_SERIALIZER(Ins)
+EMPTY_DELETEDATA(Ins)
 
 //------------------------------------------------------------------------------
 // Constructor
@@ -23,14 +24,14 @@ Ins::Ins() : gyroBias(), accelBias()
 {
     STANDARD_CONSTRUCTOR()
 
-    wander      = 0.0f;
-    dBias       = 0.0f;
-    dSFact      = 0.0f;
+    wander      = 0.0;
+    dBias       = 0.0;
+    dSFact      = 0.0;
 
     // Alignment/Kalman filter data
     alignMode   = SHDG;
     alignTTG    = 0.0;
-    quality     = 0.0f;
+    quality     = 0.0;
 }
 
 //------------------------------------------------------------------------------
@@ -49,13 +50,6 @@ void Ins::copyData(const Ins& org, const bool)
     alignMode   = org.alignMode;
     alignTTG    = org.alignTTG;
     quality     = org.quality;
-}
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete this object's data
-//------------------------------------------------------------------------------
-void Ins::deleteData()
-{
 }
 
 //------------------------------------------------------------------------------
@@ -78,14 +72,14 @@ void Ins::setAlignmentMode(const AlignMode mode)
 
 void Ins::setGyroBias(const osg::Vec3* const p)
 {
-    if (p != 0) {
+    if (p != nullptr) {
         gyroBias = *p;
     }
 }
 
 void Ins::setAccelBias(const osg::Vec3* const p)
 {
-    if (p != 0) {
+    if (p != nullptr) {
         accelBias = *p;
     }
 }

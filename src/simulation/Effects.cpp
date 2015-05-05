@@ -22,7 +22,7 @@ BEGIN_SLOTTABLE(Effects)
     "dragIndex",        // 1: drag index used by default dynamics
 END_SLOTTABLE(Effects)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(Effects)
     ON_SLOT(1,setSlotDragIndex,Basic::Number)
 END_SLOT_MAP()
@@ -71,7 +71,7 @@ void Effects::deleteData()
 //------------------------------------------------------------------------------
 bool Effects::crashNotification()
 {
-    bool ok = killedNotification();
+    const bool ok = killedNotification();
     setDetonationResults(DETONATE_NONE);
     setMode(DETONATED);
     return ok;
@@ -82,7 +82,7 @@ bool Effects::crashNotification()
 //------------------------------------------------------------------------------
 bool Effects::collisionNotification(Player* const p)
 {
-    bool ok = killedNotification(p);
+    const bool ok = killedNotification(p);
     setMode(DETONATED);
     setDetonationResults(DETONATE_NONE);
     return ok;
@@ -121,7 +121,7 @@ void Effects::weaponDynamics(const LCreal dt)
    // ---
 
    // First drag
-   osg::Vec3 tmp = getVelocity() * (-dragIndex);
+   const osg::Vec3 tmp = getVelocity() * (-dragIndex);
 
    // then gravity
    osg::Vec3 ae1 = tmp;
@@ -195,7 +195,7 @@ const char* Chaff::getNickname() const        { return "Chaff"; }
 Chaff::Chaff()
 {
     STANDARD_CONSTRUCTOR()
-    
+
     static Basic::String generic("Chaff");
     setType(&generic);
 }

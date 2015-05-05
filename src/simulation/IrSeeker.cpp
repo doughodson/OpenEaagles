@@ -137,7 +137,7 @@ void IrSeeker::process(const LCreal dt)
    int n = inUseQueryQueue.entries();
    for (int i = 0; i < n; i++) {
       IrQueryMsg* query = inUseQueryQueue.get();
-      if (query != 0) {
+      if (query != nullptr) {
          if (query->getRefCount() <= 1) {
             // No one else is referencing the query, push on free stack
             query->clear();
@@ -167,7 +167,7 @@ void IrSeeker::clearQueues()
 {
    lcLock(freeQueryLock);
    IrQueryMsg* query = freeQueryStack.pop();
-   while (query != 0) {
+   while (query != nullptr) {
       query->unref();
       query = freeQueryStack.pop();
    }
@@ -175,7 +175,7 @@ void IrSeeker::clearQueues()
 
    lcLock(inUseQueryLock);
    query = inUseQueryQueue.get();
-   while (query != 0) {
+   while (query != nullptr) {
       query->unref();
       query = inUseQueryQueue.get();
    }
@@ -195,9 +195,9 @@ void IrSeeker::irRequestSignature(IrQueryMsg* const irQuery)
 
    Tdb* tdb0 = getCurrentTDB();
    Player* ownship = getOwnship();
-   if (irQuery == 0 || tdb0 == 0 || ownship == 0) {
+   if (irQuery == nullptr || tdb0 == nullptr || ownship == nullptr) {
       // Clean up and leave
-      if (tdb0 != 0) tdb0->unref();
+      if (tdb0 != nullptr) tdb0->unref();
       return;
    }
 
@@ -213,7 +213,7 @@ void IrSeeker::irRequestSignature(IrQueryMsg* const irQuery)
    // If we have targets
    // ---
    const osg::Vec3d* losG = tdb0->getGimbalLosVectors();
-   if (ntgts > 0 && losG != 0) {
+   if (ntgts > 0 && losG != nullptr) {
 
       // Fetch the required data arrays from the TargetDataBlock
       const double* ranges = tdb0->getTargetRanges();
@@ -222,7 +222,7 @@ void IrSeeker::irRequestSignature(IrQueryMsg* const irQuery)
       const osg::Vec3d* losO2T = tdb0->getLosVectors();
       const osg::Vec3d* losT2O = tdb0->getTargetLosVectors();
       Player** targets = tdb0->getTargets();
-      LCreal maximumRange = irQuery->getMaxRangeNM()*Basic::Distance::NM2M;
+      const LCreal maximumRange = irQuery->getMaxRangeNM()*Basic::Distance::NM2M;
 
       // ---
       // Send query packets to the targets
@@ -239,7 +239,7 @@ void IrSeeker::irRequestSignature(IrQueryMsg* const irQuery)
          IrQueryMsg* query = freeQueryStack.pop();
          lcUnlock(freeQueryLock);
 
-         if (query == 0) {
+         if (query == nullptr) {
             query = new IrQueryMsg();
             //if (ownship->getID() != 1) {
             //    static tcnt = 0;
@@ -253,7 +253,7 @@ void IrSeeker::irRequestSignature(IrQueryMsg* const irQuery)
          }
 
          // Send the IR query message to the other player
-         if (query != 0) {
+         if (query != nullptr) {
 
             // a) Copy the template query msg
             *query = *irQuery;
@@ -262,15 +262,15 @@ void IrSeeker::irRequestSignature(IrQueryMsg* const irQuery)
             query->setGimbal(this);
             query->setOwnship(ownship);
 
-            query->setRange( LCreal(ranges[i]) );
+            query->setRange( static_cast<LCreal>(ranges[i]) );
             query->setLosVec( losO2T[i] );
             query->setTgtLosVec( losT2O[i] );
-            query->setRangeRate( LCreal(rngRates[i]) );
+            query->setRangeRate( static_cast<LCreal>(rngRates[i]) );
             query->setTarget(targets[i]);
-            query->setAngleOffBoresight( LCreal(anglesOffBoresight[i]) );
+            query->setAngleOffBoresight( static_cast<LCreal>(anglesOffBoresight[i]) );
 
-            query->setGimbalAzimuth( LCreal(getAzimuth()) );
-            query->setGimbalElevation( LCreal(getElevation()) );
+            query->setGimbalAzimuth( static_cast<LCreal>(getAzimuth()) );
+            query->setGimbalElevation( static_cast<LCreal>(getElevation()) );
 
             // c) Send the query to the target
             targets[i]->event(IR_QUERY, query);
@@ -378,7 +378,7 @@ unsigned int TdbIr::processPlayers(Basic::PairStream* const players)
    // ---
    // Early out checks (no ownship, no players of interest, no target data arrays)
    // ---
-   if (gimbal == 0 || ownship == 0 || players == 0 || maxTargets == 0) return 0;
+   if (gimbal == 0 || ownship == nullptr || players == nullptr || maxTargets == 0) return 0;
 
    //const Basic::Pair* p = ((Player*)ownship)->getIrSystemByType( typeid(IrSensor) );
    //if (p == 0) return 0;
@@ -533,14 +533,14 @@ bool TdbIr::horizonCheck(const osg::Vec3& position1, const osg::Vec3& position2)
    //LET .FIRST.NODE.DISTANCE.TO.HORIZON
    //         = SQRT.F(MAX.F (2.0 * EARTH.RADIUS * .FIRST.NODE.POSITION(3), 1.0) )
 
-   LCreal distance1 = lcSqrt( LCreal(2.0f * Basic::Nav::ERADM * -position1.z()) );
+   LCreal distance1 = lcSqrt( static_cast<LCreal>(2.0f * Basic::Nav::ERADM * -position1.z()) );
    if (distance1 < 1.0f) distance1 = 1.0f;
 
 
    //      LET .SECOND.NODE.DISTANCE.TO.HORIZON
    //         = SQRT.F(MAX.F (2.0 * EARTH.RADIUS * .SECOND.NODE.POSITION(3), 1.0) )
 
-   LCreal distance2 = lcSqrt( LCreal(2.0f * Basic::Nav::ERADM * -position2.z()) );
+   LCreal distance2 = lcSqrt( static_cast<LCreal>(2.0f * Basic::Nav::ERADM * -position2.z()) );
    if (distance2 < 1.0f) distance2 = 1.0f;
 
    //LET .RELATIVE.POSITION(*)

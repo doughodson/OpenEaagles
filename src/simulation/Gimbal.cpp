@@ -175,8 +175,8 @@ void Gimbal::initData()
    initCmdRate = cmdRate;
    initCmdPos = cmdPos;
 
-   maxRngPlayers = 0;
-   maxAnglePlayers = 0;
+   maxRngPlayers = 0.0;
+   maxAnglePlayers = 0.0;
    terrainOcculting = false;
    checkHorizon = true;
    localOnly = false;
@@ -185,7 +185,7 @@ void Gimbal::initData()
    playerTypes = 0xFFFF;   // all types
    maxPlayers = 200;
 
-   tdb = 0;
+   tdb = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -223,7 +223,7 @@ void Gimbal::copyData(const Gimbal& org, const bool cc)
    playerTypes = org.playerTypes;
    maxPlayers = org.maxPlayers;
 
-   tdb = 0;
+   tdb = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -231,7 +231,7 @@ void Gimbal::copyData(const Gimbal& org, const bool cc)
 //------------------------------------------------------------------------------
 void Gimbal::deleteData()
 {
-   tdb = 0;
+   tdb = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -251,7 +251,7 @@ void Gimbal::reset()
 //------------------------------------------------------------------------------
 bool Gimbal::shutdownNotification()
 {
-    tdb = 0;
+    tdb = nullptr;
 
     return BaseClass::shutdownNotification();
 }
@@ -273,16 +273,16 @@ bool Gimbal::onRfEmissionEvent(Emission* const em)
    if (isComponentSelected()) {
       // Just pass it to our selected subcomponent
       Gimbal* sc = dynamic_cast<Gimbal*>( getSelectedComponent() );
-      if (sc != 0 && sc->getPowerSwitch() != System::PWR_OFF) sc->onRfEmissionEvent(em);
+      if (sc != nullptr && sc->getPowerSwitch() != System::PWR_OFF) sc->onRfEmissionEvent(em);
    }
    else {
       // Pass it down to all of our subcomponents
       Basic::PairStream* subcomponents = getComponents();
-      if (subcomponents != 0) {
-         for (Basic::List::Item* item = subcomponents->getFirstItem(); item != 0; item = item->getNext()) {
+      if (subcomponents != nullptr) {
+         for (Basic::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
             Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
             Gimbal* sc = dynamic_cast<Gimbal*>( pair->object() );
-            if (sc != 0 && sc->getPowerSwitch() != System::PWR_OFF) sc->onRfEmissionEvent(em);
+            if (sc != nullptr && sc->getPowerSwitch() != System::PWR_OFF) sc->onRfEmissionEvent(em);
          }
          subcomponents->unref();
          subcomponents = 0;
@@ -297,9 +297,9 @@ bool Gimbal::onRfEmissionEvent(Emission* const em)
 bool Gimbal::fromPlayerOfInterest(const Emission* const em)
 {
    bool ok = false;
-   if (em != 0) {
+   if (em != nullptr) {
       const Player* const p = em->getOwnship();
-      if (p != 0) {
+      if (p != nullptr) {
          ok = ((playerTypes & p->getMajorType()) != 0);
          if (ok && localOnly) {
             ok = p->isLocalPlayer();
@@ -316,7 +316,7 @@ double Gimbal::getEarthRadius() const
 {
    double erad = Basic::Nav::ERAD60 * Basic::Distance::NM2M;
    const Player* own = getOwnship();
-   if (own != 0) {
+   if (own != nullptr) {
       erad = own->getEarthRadius();
    }
 
@@ -480,27 +480,27 @@ double Gimbal::getRollD() const
 
 void Gimbal::getAzimuthLimits(double* const leftLim, double* const rightLim) const
 {
-    if (leftLim != 0) *leftLim = lowLimits[AZ_IDX];
-    if (rightLim != 0) *rightLim = highLimits[AZ_IDX];
+    if (leftLim != nullptr) *leftLim = lowLimits[AZ_IDX];
+    if (rightLim != nullptr) *rightLim = highLimits[AZ_IDX];
 }
 
 void Gimbal::getElevationLimits(double* const lowerLim, double* const upperLim) const
 {
-    if (lowerLim != 0) *lowerLim = lowLimits[ELEV_IDX];
-    if (upperLim != 0) *upperLim = highLimits[ELEV_IDX];
+    if (lowerLim != nullptr) *lowerLim = lowLimits[ELEV_IDX];
+    if (upperLim != nullptr) *upperLim = highLimits[ELEV_IDX];
 }
 
 void Gimbal::getRollLimits(double* const lowerLim, double* const upperLim) const
 {
-    if (lowerLim != 0) *lowerLim = lowLimits[ROLL_IDX];
-    if (upperLim != 0) *upperLim = highLimits[ROLL_IDX];
+    if (lowerLim != nullptr) *lowerLim = lowLimits[ROLL_IDX];
+    if (upperLim != nullptr) *upperLim = highLimits[ROLL_IDX];
 }
 
 void Gimbal::getMaxRates(double* const azMaxRate, double* const ezMaxRate, double* const rollMaxRate) const
 {
-    if (azMaxRate != 0)   *azMaxRate = maxRate[AZ_IDX];
-    if (ezMaxRate != 0)   *ezMaxRate = maxRate[ELEV_IDX];
-    if (rollMaxRate != 0) *rollMaxRate = maxRate[ROLL_IDX];
+    if (azMaxRate != nullptr)   *azMaxRate = maxRate[AZ_IDX];
+    if (ezMaxRate != nullptr)   *ezMaxRate = maxRate[ELEV_IDX];
+    if (rollMaxRate != nullptr) *rollMaxRate = maxRate[ROLL_IDX];
 }
 
 //------------------------------------------------------------------------------
@@ -794,7 +794,7 @@ bool Gimbal::setLocation(const double x, const double y, const double z)
 // setSlotType() -- calls setType()
 bool Gimbal::setSlotType(const Basic::String* const msg)
 {
-    if (msg == 0) return false;
+    if (msg == nullptr) return false;
 
     bool ok = true;
     if (*msg == "mechanical") ok = setType(MECHANICAL);
@@ -807,9 +807,9 @@ bool Gimbal::setSlotType(const Basic::String* const msg)
 bool Gimbal::setSlotLocation(const Basic::List* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       double values[3];
-      int n = msg->getNumberList(values, 3);
+      const int n = msg->getNumberList(values, 3);
       if (n == 3) ok = setLocation(values[0], values[1], values[2]);
    }
    return ok;
@@ -819,9 +819,9 @@ bool Gimbal::setSlotLocation(const Basic::List* const msg)
 bool Gimbal::setSlotPosition(const Basic::List* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       double values[3];
-      int n = msg->getNumberList(values, 3);
+      const int n = msg->getNumberList(values, 3);
       if (n == 2) ok = setPosition(values[0], values[1]);
       else if (n == 3) ok = setPosition(values[0], values[1], values[2]);
       if (ok) initPos = pos;
@@ -833,8 +833,8 @@ bool Gimbal::setSlotPosition(const Basic::List* const msg)
 bool Gimbal::setSlotPosAzimuth(const Basic::Angle* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
-       double az = Basic::Radians::convertStatic(*msg);
+   if (msg != nullptr) {
+       const double az = Basic::Radians::convertStatic(*msg);
        ok = setPosition(az, getElevation(), getRoll());
        if (ok) initPos = pos;
    }
@@ -845,8 +845,8 @@ bool Gimbal::setSlotPosAzimuth(const Basic::Angle* const msg)
 bool Gimbal::setSlotPosElevation(const Basic::Angle* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
-       double el = Basic::Radians::convertStatic(*msg);
+   if (msg != nullptr) {
+       const double el = Basic::Radians::convertStatic(*msg);
        ok = setPosition(getAzimuth(), el, getRoll());
        if (ok) initPos = pos;
    }
@@ -857,8 +857,8 @@ bool Gimbal::setSlotPosElevation(const Basic::Angle* const msg)
 bool Gimbal::setSlotPosRoll(const Basic::Angle* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
-       double roll = Basic::Radians::convertStatic(*msg);
+   if (msg != nullptr) {
+       const double roll = Basic::Radians::convertStatic(*msg);
        ok = setPosition(getAzimuth(), getElevation(), roll);
        if (ok) initPos = pos;
    }
@@ -869,9 +869,9 @@ bool Gimbal::setSlotPosRoll(const Basic::Angle* const msg)
 bool Gimbal::setSlotAzimuthLimits(const Basic::List* const msg)
 {
     bool ok = false;
-    if (msg != 0) {
+    if (msg != nullptr) {
         double values[2];
-        int n = msg->getNumberList(values, 2);
+        const int n = msg->getNumberList(values, 2);
         if (n == 2) ok = setAzimuthLimits(values[0], values[1]);  // (left, right)
     }
     return ok;
@@ -881,10 +881,10 @@ bool Gimbal::setSlotAzimuthLimits(const Basic::List* const msg)
 bool Gimbal::setSlotAzimuthLimitLeft(const Basic::Angle* const msg)
 {
     bool ok = false;
-    if (msg != 0) {
+    if (msg != nullptr) {
         double leftLim, rightLim;
         getAzimuthLimits(&leftLim, &rightLim);
-        double value = Basic::Radians::convertStatic(*msg);
+        const double value = Basic::Radians::convertStatic(*msg);
         ok = setAzimuthLimits(value, rightLim);
     }
     return ok;
@@ -894,10 +894,10 @@ bool Gimbal::setSlotAzimuthLimitLeft(const Basic::Angle* const msg)
 bool Gimbal::setSlotAzimuthLimitRight(const Basic::Angle* const msg)
 {
     bool ok = false;
-    if (msg != 0) {
+    if (msg != nullptr) {
         double leftLim, rightLim;
         getAzimuthLimits(&leftLim, &rightLim);
-        double value = Basic::Radians::convertStatic(*msg);
+        const double value = Basic::Radians::convertStatic(*msg);
         ok = setAzimuthLimits(leftLim, value);
     }
     return ok;
@@ -907,9 +907,9 @@ bool Gimbal::setSlotAzimuthLimitRight(const Basic::Angle* const msg)
 bool Gimbal::setSlotElevationLimits(const Basic::List* const numList)
 {
     bool ok = false;
-    if (numList != 0) {
+    if (numList != nullptr) {
         double values[2];
-        int n = numList->getNumberList(values, 2);
+        const int n = numList->getNumberList(values, 2);
         if (n == 2) ok = setElevationLimits(values[0], values[1]);
     }
     return ok;
@@ -919,10 +919,10 @@ bool Gimbal::setSlotElevationLimits(const Basic::List* const numList)
 bool Gimbal::setSlotElevationLower(const Basic::Angle* const msg)
 {
     bool ok = false;
-    if (msg != 0) {
+    if (msg != nullptr) {
         double lowerLim, upperLim;
         getElevationLimits(&lowerLim, &upperLim);
-        double value = Basic::Radians::convertStatic(*msg);
+        const double value = Basic::Radians::convertStatic(*msg);
         ok = setElevationLimits(value, upperLim);
     }
     return ok;
@@ -932,10 +932,10 @@ bool Gimbal::setSlotElevationLower(const Basic::Angle* const msg)
 bool Gimbal::setSlotElevationUpper(const Basic::Angle* const msg)
 {
     bool ok = false;
-    if (msg != 0) {
+    if (msg != nullptr) {
         double lowerLim, upperLim;
         getElevationLimits(&lowerLim, &upperLim);
-        double value = Basic::Radians::convertStatic(*msg);
+        const double value = Basic::Radians::convertStatic(*msg);
         ok = setElevationLimits(lowerLim, value);
     }
     return ok;
@@ -947,8 +947,8 @@ bool Gimbal::setSlotRollLimits(const Basic::List* const numList)
 {
     bool ok = false;
     double values[2];
-    if (numList != 0) {
-        int n = numList->getNumberList(values, 2);
+    if (numList != nullptr) {
+        const int n = numList->getNumberList(values, 2);
         if (n == 2) ok = setRollLimits(values[0], values[1]);
     }
     return ok;
@@ -958,10 +958,10 @@ bool Gimbal::setSlotRollLimits(const Basic::List* const numList)
 bool Gimbal::setSlotRollLimitLower(const Basic::Angle* const msg)
 {
     bool ok = false;
-    if (msg != 0) {
+    if (msg != nullptr) {
         double lowerLim, upperLim;
         getRollLimits(&lowerLim, &upperLim);
-        double value = Basic::Radians::convertStatic(*msg);
+        const double value = Basic::Radians::convertStatic(*msg);
         ok = setRollLimits(value, upperLim);
     }
     return ok;
@@ -971,10 +971,10 @@ bool Gimbal::setSlotRollLimitLower(const Basic::Angle* const msg)
 bool Gimbal::setSlotRollLimitUpper(const Basic::Angle* const msg)
 {
     bool ok = false;
-    if (msg != 0) {
+    if (msg != nullptr) {
         double lowerLim, upperLim;
         getRollLimits(&lowerLim, &upperLim);
-        double value = Basic::Radians::convertStatic(*msg);
+        const double value = Basic::Radians::convertStatic(*msg);
         ok = setRollLimits(lowerLim, value);
     }
     return ok;
@@ -984,9 +984,9 @@ bool Gimbal::setSlotRollLimitUpper(const Basic::Angle* const msg)
 bool Gimbal::setSlotMaxRates(const Basic::List* const numList)
 {
     bool ok = false;
-    if (numList != 0) {
+    if (numList != nullptr) {
         double values[3];
-        int n = numList->getNumberList(values, 3);
+        const int n = numList->getNumberList(values, 3);
         if (n == 2) ok = setMaxRates(values[0], values[1]);
         else if (n == 3) ok = setMaxRates(values[0], values[1], values[2]);
     }
@@ -998,10 +998,10 @@ bool Gimbal::setSlotMaxRates(const Basic::List* const numList)
 bool Gimbal::setSlotMaxRateAzimuth(const Basic::Angle* const msg)
 {
     bool ok = false;
-    if (msg != 0) {
+    if (msg != nullptr) {
         double azMaxRate, ezMaxRate, rollMaxRate;
         getMaxRates(&azMaxRate, &ezMaxRate, &rollMaxRate);
-        double value = Basic::Radians::convertStatic(*msg);
+        const double value = Basic::Radians::convertStatic(*msg);
         ok = setMaxRates(value, ezMaxRate, rollMaxRate);
     }
     return ok;
@@ -1011,10 +1011,10 @@ bool Gimbal::setSlotMaxRateAzimuth(const Basic::Angle* const msg)
 bool Gimbal::setSlotMaxRateElevation(const Basic::Angle* const msg)
 {
     bool ok = false;
-    if (msg != 0) {
+    if (msg != nullptr) {
         double azMaxRate, ezMaxRate, rollMaxRate;
         getMaxRates(&azMaxRate, &ezMaxRate, &rollMaxRate);
-        double value = Basic::Radians::convertStatic(*msg);
+        const double value = Basic::Radians::convertStatic(*msg);
         ok = setMaxRates(azMaxRate, value, rollMaxRate);
     }
     return ok;
@@ -1024,10 +1024,10 @@ bool Gimbal::setSlotMaxRateElevation(const Basic::Angle* const msg)
 bool Gimbal::setSlotMaxRateRoll(const Basic::Angle* const msg)
 {
     bool ok = false;
-    if (msg != 0) {
+    if (msg != nullptr) {
         double azMaxRate, ezMaxRate, rollMaxRate;
         getMaxRates(&azMaxRate, &ezMaxRate, &rollMaxRate);
-        double value = Basic::Radians::convertStatic(*msg);
+        const double value = Basic::Radians::convertStatic(*msg);
         ok = setMaxRates(azMaxRate, ezMaxRate, value);
     }
     return ok;
@@ -1037,9 +1037,9 @@ bool Gimbal::setSlotMaxRateRoll(const Basic::Angle* const msg)
 bool Gimbal::setSlotCmdPos(const Basic::List* const numList)
 {
     bool ok = false;
-    if (numList != 0) {
+    if (numList != nullptr) {
       double values[3];
-      int n = numList->getNumberList(values, 3);
+      const int n = numList->getNumberList(values, 3);
       if (n == 2) ok = setCmdPos(values[0],values[1]);
       else if (n == 3) ok = setCmdPos(values[0],values[1],values[2]);
       if (ok) initCmdPos = cmdPos;
@@ -1052,8 +1052,8 @@ bool Gimbal::setSlotCmdPos(const Basic::List* const numList)
 bool Gimbal::setSlotCmdPosAzimuth(const Basic::Angle* const msg)
 {
     bool ok = false;
-    if (msg != 0) {
-        double value = Basic::Radians::convertStatic(*msg);
+    if (msg != nullptr) {
+        const double value = Basic::Radians::convertStatic(*msg);
         ok = setCmdPos(value, getCmdElev(), getCmdRoll());
         if (ok) initCmdPos = cmdPos;
     }
@@ -1064,8 +1064,8 @@ bool Gimbal::setSlotCmdPosAzimuth(const Basic::Angle* const msg)
 bool Gimbal::setSlotCmdPosElevation(const Basic::Angle* const msg)
 {
     bool ok = false;
-    if (msg != 0) {
-        double value = Basic::Radians::convertStatic(*msg);
+    if (msg != nullptr) {
+        const double value = Basic::Radians::convertStatic(*msg);
         ok = setCmdPos(getCmdAz(), value, getCmdRoll());
         if (ok) initCmdPos = cmdPos;
     }
@@ -1076,8 +1076,8 @@ bool Gimbal::setSlotCmdPosElevation(const Basic::Angle* const msg)
 bool Gimbal::setSlotCmdPosRoll(const Basic::Angle* const msg)
 {
     bool ok = false;
-    if (msg != 0) {
-        double value = Basic::Radians::convertStatic(*msg);
+    if (msg != nullptr) {
+        const double value = Basic::Radians::convertStatic(*msg);
         ok = setCmdPos(getCmdAz(), getCmdElev(), value);
         if (ok) initCmdPos = cmdPos;
     }
@@ -1088,9 +1088,9 @@ bool Gimbal::setSlotCmdPosRoll(const Basic::Angle* const msg)
 bool Gimbal::setSlotCmdRate(const Basic::List* const numList)
 {
    bool ok = false;
-   if (numList != 0) {
+   if (numList != nullptr) {
       double values[3];
-      int n = numList->getNumberList(values, 3);
+      const int n = numList->getNumberList(values, 3);
       if (n == 2) ok = setCmdRate(values[0],values[1]);
       else if (n == 3) ok = setCmdRate(values[0],values[1],values[2]);
       if (ok) initCmdRate = cmdRate;
@@ -1102,8 +1102,8 @@ bool Gimbal::setSlotCmdRate(const Basic::List* const numList)
 bool Gimbal::setSlotCmdRateAzimuth(const Basic::Angle* const msg)
 {
     bool ok = false;
-    if (msg != 0) {
-        double value = Basic::Radians::convertStatic(*msg);
+    if (msg != nullptr) {
+        const double value = Basic::Radians::convertStatic(*msg);
         ok = setCmdRate(value, getCmdElevRate(), getCmdRollRate());
         if (ok) initCmdRate = cmdRate;
     }
@@ -1114,8 +1114,8 @@ bool Gimbal::setSlotCmdRateAzimuth(const Basic::Angle* const msg)
 bool Gimbal::setSlotCmdRateElevation(const Basic::Angle* const msg)
 {
     bool ok = false;
-    if (msg != 0) {
-        double value = Basic::Radians::convertStatic(*msg);
+    if (msg != nullptr) {
+        const double value = Basic::Radians::convertStatic(*msg);
         ok = setCmdRate(getCmdAzRate(), value, getCmdRollRate());
         if (ok) initCmdRate = cmdRate;
     }
@@ -1126,8 +1126,8 @@ bool Gimbal::setSlotCmdRateElevation(const Basic::Angle* const msg)
 bool Gimbal::setSlotCmdRateRoll(const Basic::Angle* const msg)
 {
     bool ok = false;
-    if (msg != 0) {
-        double value = Basic::Radians::convertStatic(*msg);
+    if (msg != nullptr) {
+        const double value = Basic::Radians::convertStatic(*msg);
         ok = setCmdRate(getCmdAzRate(), getCmdElevRate(), value);
         if (ok) initCmdRate = cmdRate;
     }
@@ -1138,7 +1138,7 @@ bool Gimbal::setSlotCmdRateRoll(const Basic::Angle* const msg)
 bool Gimbal::setSlotTerrainOcculting(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setTerrainOccultingEnabled(msg->getBoolean());
    }
    return ok;
@@ -1148,7 +1148,7 @@ bool Gimbal::setSlotTerrainOcculting(const Basic::Number* const msg)
 bool Gimbal::setSlotCheckHorizon(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setHorizonCheckEnabled(msg->getBoolean());
    }
    return ok;
@@ -1158,13 +1158,13 @@ bool Gimbal::setSlotCheckHorizon(const Basic::Number* const msg)
 bool Gimbal::setSlotPlayerTypes(const Basic::PairStream* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       unsigned int mask = 0;
       const Basic::List::Item* item = msg->getFirstItem();
-      while (item != 0) {
+      while (item != nullptr) {
          const Basic::Pair* pair = static_cast<const Basic::Pair*>(item->getValue());
          const Basic::String* type = dynamic_cast<const Basic::String*>( pair->object() );
-         if (type != 0) {
+         if (type != nullptr) {
             if ( lcStrcasecmp(*type,"air") == 0 ) {
                mask = (mask | Player::AIR_VEHICLE);
             }
@@ -1198,7 +1198,7 @@ bool Gimbal::setSlotPlayerTypes(const Basic::PairStream* const msg)
 bool Gimbal::setSlotMaxPlayers(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setMaxPlayersOfInterest( msg->getInt() );
    }
    return ok;
@@ -1208,8 +1208,8 @@ bool Gimbal::setSlotMaxPlayers(const Basic::Number* const msg)
 bool Gimbal::setSlotMaxRange2PlayersOfInterest(const Basic::Distance* const msg)
 {
     bool ok = false;
-    if (msg != 0) {
-        double value = Basic::Meters::convertStatic(*msg);
+    if (msg != nullptr) {
+        const double value = Basic::Meters::convertStatic(*msg);
         ok = setMaxRange2PlayersOfInterest(value);
     }
     return ok;
@@ -1219,8 +1219,8 @@ bool Gimbal::setSlotMaxRange2PlayersOfInterest(const Basic::Distance* const msg)
 bool Gimbal::setSlotMaxAngle2PlayersOfInterest(const Basic::Angle* const msg)
 {
     bool ok = false;
-    if (msg != 0) {
-        double value = Basic::Radians::convertStatic(*msg);
+    if (msg != nullptr) {
+        const double value = Basic::Radians::convertStatic(*msg);
         ok = setMaxAngle2PlayersOfInterest(value);
     }
     return ok;
@@ -1230,7 +1230,7 @@ bool Gimbal::setSlotMaxAngle2PlayersOfInterest(const Basic::Angle* const msg)
 bool Gimbal::setSlotLocalPlayersOfInterestOnly(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setLocalPlayersOfInterestOnly(msg->getBoolean());
    }
    return ok;
@@ -1240,7 +1240,7 @@ bool Gimbal::setSlotLocalPlayersOfInterestOnly(const Basic::Number* const msg)
 bool Gimbal::setSlotUseWorldCoordinates(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setUseWorld(msg->getBoolean());
    }
    return ok;
@@ -1250,7 +1250,7 @@ bool Gimbal::setSlotUseWorldCoordinates(const Basic::Number* const msg)
 bool Gimbal::setSlotUseOwnHeadingOnly(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setOwnHeadingOnly(msg->getBoolean());
    }
    return ok;
@@ -1276,7 +1276,7 @@ void Gimbal::updateMatrix()
    // If so then post multiply by our container's matrix
    // ---
    const Gimbal* p = dynamic_cast<const Gimbal*>( container() );
-   if (p != 0) { mm1 *= p->getRotMat(); }
+   if (p != nullptr) { mm1 *= p->getRotMat(); }
 
    // Set as the new matrix
    tm = mm1;

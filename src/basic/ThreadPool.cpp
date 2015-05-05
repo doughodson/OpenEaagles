@@ -16,7 +16,7 @@ class ThreadPoolThread : public ThreadSyncTask {
    friend class ThreadPool;
 
 public:
-   ThreadPoolThread(Component* const parent, ThreadPool*const pool, ThreadPoolManager*const mgr, const LCreal priority, Object* const obj);
+   ThreadPoolThread(Component* const parent, ThreadPool* const pool, ThreadPoolManager* const mgr, const LCreal priority, Object* const obj);
 
 protected:
    Object* getPersistentObj();
@@ -38,7 +38,7 @@ EMPTY_SLOTTABLE(ThreadPoolThread)
 EMPTY_COPYDATA(ThreadPoolThread)
 EMPTY_SERIALIZER(ThreadPoolThread)
 
-ThreadPoolThread::ThreadPoolThread(Component* const parent, ThreadPool*const pool, ThreadPoolManager*const mgr, const LCreal priority, Object* const obj)
+ThreadPoolThread::ThreadPoolThread(Component* const parent, ThreadPool* const pool, ThreadPoolManager* const mgr, const LCreal priority, Object* const obj)
    : ThreadSyncTask(parent, priority), threadPool(pool), manager(mgr), persistentObj(obj)
 {
    STANDARD_CONSTRUCTOR()

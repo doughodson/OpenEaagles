@@ -29,7 +29,7 @@ BEGIN_SLOTTABLE(Iff)
    "enableModeC",    // 11) Mode C on
 END_SLOTTABLE(Iff)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(Iff)
    ON_SLOT( 1, setSlotMode1,        Basic::Number)
    ON_SLOT( 2, setSlotMode2,        Basic::Number)
@@ -51,7 +51,7 @@ Iff::Iff()
 {
    STANDARD_CONSTRUCTOR()
 
-   mode1 = 0; 
+   mode1 = 0;
    mode2 = 0;
    mode3a = 0;
    mode4a = 0;
@@ -64,7 +64,7 @@ Iff::Iff()
    enableModeC = 0;
 
    whichMode4 = false;
-   icMode1 = 0; 
+   icMode1 = 0;
    icMode2 = 0;
    icMode3a = 0;
    icMode4a = 0;
@@ -84,29 +84,29 @@ void Iff::copyData(const Iff& org, const bool)
 {
    BaseClass::copyData(org);
 
-   mode1 = org.mode1; 
-   mode2 = org.mode2; 
-   mode3a = org.mode3a; 
-   mode4a = org.mode4a; 
+   mode1 = org.mode1;
+   mode2 = org.mode2;
+   mode3a = org.mode3a;
+   mode4a = org.mode4a;
    mode4b = org.mode4b;
 
-   enableMode1 = org.enableMode1; 
-   enableMode2 = org.enableMode2; 
-   enableMode3a = org.enableMode3a; 
-   enableMode4 = org.enableMode4; 
+   enableMode1 = org.enableMode1;
+   enableMode2 = org.enableMode2;
+   enableMode3a = org.enableMode3a;
+   enableMode4 = org.enableMode4;
    enableModeC = org.enableModeC;
    whichMode4 = org.whichMode4;
 
-   icMode1 = org.icMode1; 
-   icMode2 = org.icMode2; 
-   icMode3a = org.icMode3a; 
-   icMode4a = org.icMode4a; 
+   icMode1 = org.icMode1;
+   icMode2 = org.icMode2;
+   icMode3a = org.icMode3a;
+   icMode4a = org.icMode4a;
    icMode4b = org.icMode4b;
-   icMode1Flg = org.icMode1Flg; 
-   icMode2Flg = org.icMode2Flg; 
-   icMode3aFlg = org.icMode3aFlg; 
-   icMode4Flg = org.icMode4Flg; 
-   icModeCFlg = org.icModeCFlg; 
+   icMode1Flg = org.icMode1Flg;
+   icMode2Flg = org.icMode2Flg;
+   icMode3aFlg = org.icMode3aFlg;
+   icMode4Flg = org.icMode4Flg;
+   icModeCFlg = org.icModeCFlg;
    icWhichMode4 = org.icWhichMode4;
 }
 
@@ -124,7 +124,6 @@ void Iff::reset()
 {
    BaseClass::reset();
 
-   
    setMode1(icMode1);
    setEnabledMode1(icMode1Flg);
 
@@ -141,7 +140,7 @@ void Iff::reset()
    setWhichMode4(icWhichMode4);
 
    setEnabledModeC(icModeCFlg);
-   
+
 }
 
 //------------------------------------------------------------------------------
@@ -209,78 +208,78 @@ bool Iff::setWhichMode4(const bool newM)
 // Slot functions
 bool Iff::setSlotEnableMode1(const Basic::Number* const msg)
 {
-    if (msg != 0) setEnabledMode1(msg->getBoolean());
+    if (msg != nullptr) setEnabledMode1(msg->getBoolean());
     // make sure we hold this reset value
     icMode1Flg = enableMode1;
     return true;
 }
 bool Iff::setSlotEnableMode2(const Basic::Number* const msg)
 {
-    if (msg != 0) setEnabledMode2(msg->getBoolean());
+    if (msg != nullptr) setEnabledMode2(msg->getBoolean());
     icMode2Flg = enableMode2;
     return true;
 }
 bool Iff::setSlotEnableMode3a(const Basic::Number* const msg)
 {
-    if (msg != 0) setEnabledMode3a(msg->getBoolean());
+    if (msg != nullptr) setEnabledMode3a(msg->getBoolean());
     icMode3aFlg = enableMode3a;
     return true;
 }
 bool Iff::setSlotEnableMode4(const Basic::Number* const msg)
 {
-    if (msg != 0) setEnabledMode4(msg->getBoolean());
+    if (msg != nullptr) setEnabledMode4(msg->getBoolean());
     icMode4Flg = enableMode4;
     return true;
 }
 bool Iff::setSlotWhichMode4(const Basic::Number* const msg)
 {
-    if (msg != 0) setWhichMode4(msg->getBoolean());
+    if (msg != nullptr) setWhichMode4(msg->getBoolean());
     icWhichMode4 = whichMode4;
     return true;
 }
 bool Iff::setSlotEnableModeC(const Basic::Number* const msg)
 {
-    if (msg != 0) setEnabledModeC(msg->getBoolean());
+    if (msg != nullptr) setEnabledModeC(msg->getBoolean());
     icModeCFlg = enableModeC;
     return true;
 }
 bool Iff::setSlotMode1(const Basic::Number* const msg)
 {
     bool ok = false;
-    if (msg != 0) ok = setMode1(static_cast<unsigned short>(msg->getInt()));
+    if (msg != nullptr) ok = setMode1(static_cast<unsigned short>(msg->getInt()));
     if (ok) icMode1 = mode1;
     return ok;
 }
 bool Iff::setSlotMode2(const Basic::Number* const msg)
 {
     bool ok = false;
-    if (msg != 0) ok = setMode2(static_cast<unsigned short>(msg->getInt()));
+    if (msg != nullptr) ok = setMode2(static_cast<unsigned short>(msg->getInt()));
     if (ok) icMode2 = mode2;
     return ok;
 }
 bool Iff::setSlotMode3a(const Basic::Number* const msg)
 {
     bool ok = false;
-    if (msg != 0) ok = setMode3a(static_cast<unsigned short>(msg->getInt()));
+    if (msg != nullptr) ok = setMode3a(static_cast<unsigned short>(msg->getInt()));
     if (ok) icMode3a = mode3a;
     return ok;
 }
 bool Iff::setSlotMode4a(const Basic::Number* const msg)
 {
     bool ok = false;
-    if (msg != 0) ok = setMode4A(static_cast<unsigned short>(msg->getInt()));
+    if (msg != nullptr) ok = setMode4A(static_cast<unsigned short>(msg->getInt()));
     icMode4a = mode4a;
     return ok;
 }
 bool Iff::setSlotMode4b(const Basic::Number* const msg)
 {
     bool ok = false;
-    if (msg != 0) ok = setMode4B(static_cast<unsigned short>(msg->getInt()));
+    if (msg != nullptr) ok = setMode4B(static_cast<unsigned short>(msg->getInt()));
     icMode4b = mode4b;
     return ok;
 }
 //bool Iff::setSlotPower(const Basic::String* const msg)
-//{   
+//{
 //    if (strcmp(msg->getString(), "OFF") == 0) pwr = OFF;
 //    else if (strcmp(msg->getString(), "STANDBY") == 0) pwr = STANDBY;
 //    else if (strcmp(msg->getString(), "LOW") == 0) pwr = LOW;

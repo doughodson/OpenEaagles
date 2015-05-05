@@ -516,7 +516,7 @@ bool IlsRadio::findLocalizerByFreq(LCreal freq)
                //p->getTrueBearingRange(getLatitude(),getLongitude(),getAltitude(),&bearing,&range,&grdrange);
    //
    //            //Need a test to see if we want the low end or high end here:
-   //            acLocalizerBearing = (LCreal)trueBearing1;
+   //            acLocalizerBearing = static_cast<LCreal>(trueBearing1);
    //            //If localizer is from -270 - 90 we know the plane is south and will use low end of RWY
    //            if((acLocalizerBearing>0)&(acLocalizerBearing<=90)|(acLocalizerBearing>270)){
    //               //Use the Low End of RWY

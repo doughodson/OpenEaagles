@@ -64,7 +64,7 @@ void CollisionDetect::initData()
    localOnly = false;         // Default: Include networked players
    sendCrashEvents = false;   // Default: sending crash events is not enabled
 
-   players = 0;
+   players = nullptr;
    maxPlayers = 0;
    resizePoiList(20);         // Default: 20 POI
 }
@@ -177,18 +177,18 @@ void CollisionDetect::updateData(const LCreal dt)
    Simulation* const sim = getSimulation();
 
    // early out checks ...
-   if (ownship == 0 || sim == 0 || maxPlayers == 0) return;
+   if (ownship == nullptr || sim == nullptr || maxPlayers == 0) return;
 
    // World (ECEF) to local (NED)
-   osg::Matrixd wm = ownship->getWorldMat();
+   const osg::Matrixd wm = ownship->getWorldMat();
 
    // Local (NED) to body coordinates
-   osg::Matrixd rm = ownship->getRotMat();
+   const osg::Matrixd rm = ownship->getRotMat();
 
    // We will be using world (ECEF) coordinates when the 'useWorld'
    // flag is true or when our ownship's local gaming area position
    // is not valid.
-   bool usingEcefFlg = useWorld || !(ownship->isPositionVectorValid());
+   const bool usingEcefFlg = useWorld || !(ownship->isPositionVectorValid());
 
    // Position Vector (ECEF or local gaming area NED)
    osg::Vec3d ownPos;
@@ -200,7 +200,7 @@ void CollisionDetect::updateData(const LCreal dt)
    }
 
    // Cosine of our max FOV angle
-   double cosMaxFovAngle = std::cos(maxAngle2Players);
+   const double cosMaxFovAngle = std::cos(maxAngle2Players);
 
    // Mark all active POIs as unmatched ...
    for (unsigned int i = 0; i < maxPlayers; i++) {
@@ -211,11 +211,11 @@ void CollisionDetect::updateData(const LCreal dt)
    // Scan the player list ---
    // ---
    Basic::PairStream* plist = sim->getPlayers();
-   if (plist != 0) {
+   if (plist != nullptr) {
 
       Basic::List::Item* item = plist->getFirstItem();
       bool finished = false;
-      while ( item != 0 && !finished ) {
+      while ( item != nullptr && !finished ) {
 
          // Get the pointer to the target player
          Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
@@ -247,7 +247,7 @@ void CollisionDetect::updateData(const LCreal dt)
             osg::Vec3d los = (tgtPos - ownPos);
 
             // Normalized and compute length:
-            double range = los.normalize();
+            const double range = los.normalize();
 
             // In-range check; but only if max range is greater than zero
             bool inRange = (maxRange2Players == 0.0);
@@ -323,7 +323,7 @@ void CollisionDetect::process(const LCreal dt)
    Player* const ownship = getOwnship();
 
    // early out checks ...
-   if (ownship == 0 || maxPlayers == 0 || dt == 0.0) return;
+   if (ownship == nullptr || maxPlayers == 0 || dt == 0.0) return;
 
    // We will be using world (ECEF) coordinates when the 'useWorld'
    // flag is true or when our ownship's local gaming area position
@@ -344,7 +344,7 @@ void CollisionDetect::process(const LCreal dt)
    }
 
    // Collision range squared
-   double cr2 = collisionRange * collisionRange;
+   const double cr2 = collisionRange * collisionRange;
 
    lcLock(poiLock);
 
@@ -374,12 +374,12 @@ void CollisionDetect::process(const LCreal dt)
          osg::Vec3d los = (tgtPos - ownPos);
 
          // Current and previous target range
-         double tgtRng = los.length();
-         double tgtRng0 = players[i].range;
+         const double tgtRng = los.length();
+         const double tgtRng0 = players[i].range;
 
          // Current and previous ranging rate
-         double rngRate = (tgtRng - tgtRng0)/dt;
-         double rngRate0 = players[i].rangeRate;
+         const double rngRate = (tgtRng - tgtRng0)/dt;
+         const double rngRate0 = players[i].rangeRate;
 
          // Distance at possible collision
          double distance = tgtRng;
@@ -401,14 +401,14 @@ void CollisionDetect::process(const LCreal dt)
             if (velRelSq > 0) {
 
                // LOS vector (dot) relative velocity vector
-               double rdv = los * velRel;
+               const double rdv = los * velRel;
 
                // Interpolate back to the closest point
-               double ndt = -rdv/velRelSq;
+               const double ndt = -rdv/velRelSq;
                osg::Vec3d closestPoint = los + (velRel*ndt);
 
                // Compute the range squared at the closest point
-               double r2 = closestPoint.length2();
+               const double r2 = closestPoint.length2();
 
                // Did we collide at the closest point?
                if (r2 <= cr2) {
@@ -461,7 +461,7 @@ void CollisionDetect::process(const LCreal dt)
 //------------------------------------------------------------------------------
 void CollisionDetect::updatePoiList(Player* const target)
 {
-   if (maxPlayers > 0 && target != 0) {
+   if (maxPlayers > 0 && target != nullptr) {
 
       lcLock(poiLock);
 
@@ -516,9 +516,9 @@ bool CollisionDetect::resizePoiList(const unsigned int newSize)
       lcLock(poiLock);
 
       // Free the old list memory
-      if (maxPlayers > 0 && players != 0) {
+      if (maxPlayers > 0 && players != nullptr) {
          delete[] players;
-         players = 0;
+         players = nullptr;
       }
 
       // Assign the new size
@@ -554,8 +554,8 @@ void CollisionDetect::clearPoiList()
 bool CollisionDetect::setSlotCollisionRange(const Basic::Distance* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
-      double meters = Basic::Meters::convertStatic(*msg);
+   if (msg != nullptr) {
+      const double meters = Basic::Meters::convertStatic(*msg);
       if (meters >= 0.0) {
          ok = setCollisionRange( meters );
       }
@@ -566,8 +566,8 @@ bool CollisionDetect::setSlotCollisionRange(const Basic::Distance* const msg)
 bool CollisionDetect::setSlotMaxPlayers(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
-      int n = msg->getInt();
+   if (msg != nullptr) {
+      const int n = msg->getInt();
       if (n >= 0) {
          ok = setMaxPlayers( static_cast<unsigned int>(n) );
       }
@@ -578,13 +578,13 @@ bool CollisionDetect::setSlotMaxPlayers(const Basic::Number* const msg)
 bool CollisionDetect::setSlotPlayerTypes(const Basic::PairStream* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       unsigned int mask = 0;
       const Basic::List::Item* item = msg->getFirstItem();
       while (item != 0) {
          const Basic::Pair* pair = static_cast<const Basic::Pair*>(item->getValue());
          const Basic::String* type = dynamic_cast<const Basic::String*>( pair->object() );
-         if (type != 0) {
+         if (type != nullptr) {
             if ( lcStrcasecmp(*type,"air") == 0 ) {
                mask = (mask | Player::AIR_VEHICLE);
             }
@@ -617,8 +617,8 @@ bool CollisionDetect::setSlotPlayerTypes(const Basic::PairStream* const msg)
 bool CollisionDetect::setSlotMaxRange2Players(const Basic::Distance* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
-      double meters = Basic::Meters::convertStatic(*msg);
+   if (msg != nullptr) {
+      const double meters = Basic::Meters::convertStatic(*msg);
       if (meters >= 0.0) {
          ok = setMaxRange2Players( meters );
       }
@@ -629,8 +629,8 @@ bool CollisionDetect::setSlotMaxRange2Players(const Basic::Distance* const msg)
 bool CollisionDetect::setSlotMaxAngle2Players(const Basic::Angle* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
-      double radians = Basic::Radians::convertStatic(*msg);
+   if (msg != nullptr) {
+      const double radians = Basic::Radians::convertStatic(*msg);
       if (radians >= 0.0) {
          ok = setMaxAngle2Players( radians );
       }
@@ -641,7 +641,7 @@ bool CollisionDetect::setSlotMaxAngle2Players(const Basic::Angle* const msg)
 bool CollisionDetect::setSlotUseWorldCoordinates(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setUseWorld( msg->getBoolean() );
    }
    return ok;
@@ -650,7 +650,7 @@ bool CollisionDetect::setSlotUseWorldCoordinates(const Basic::Number* const msg)
 bool CollisionDetect::setSlotLocalOnly(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setLocalOnly( msg->getBoolean() );
    }
    return ok;
@@ -659,7 +659,7 @@ bool CollisionDetect::setSlotLocalOnly(const Basic::Number* const msg)
 bool CollisionDetect::setSlotSendCrashEvents(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setSendCrashEventsEnabled( msg->getBoolean() );
    }
    return ok;
