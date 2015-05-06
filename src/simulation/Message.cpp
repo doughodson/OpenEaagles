@@ -21,11 +21,11 @@ Message::Message()
 //-------------------------------------------------------------------------
 void Message::initData()
 {
-   timeStamp = 0;
-   lifeSpan = 5;    // seconds
+   timeStamp = 0.0;
+   lifeSpan = 5.0;    // seconds
    ack = ACK;
    senderName = new Basic::String();
-   destNames = 0;
+   destNames = nullptr;
 }
 
 //-------------------------------------------------------------------------
@@ -33,8 +33,8 @@ void Message::initData()
 //-------------------------------------------------------------------------
 void Message::deleteData()
 {
-   if (senderName != 0) { senderName->unref();  senderName = 0; }
-   if (destNames  != 0) { destNames->unref();   destNames  = 0; }
+   if (senderName != nullptr) { senderName->unref();  senderName = nullptr; }
+   if (destNames  != nullptr) { destNames->unref();   destNames  = nullptr; }
 }
 
 //-------------------------------------------------------------------------
@@ -49,18 +49,18 @@ void Message::copyData(const Message& org, const bool cc)
    lifeSpan = org.lifeSpan;
    ack = org.ack;
 
-   if (senderName != 0) {
+   if (senderName != nullptr) {
       senderName->unref();
-      senderName = 0;
+      senderName = nullptr;
    }
-   if (org.senderName != 0)
+   if (org.senderName != nullptr)
       senderName = org.senderName->clone();
 
-   if (destNames != 0) {
+   if (destNames != nullptr) {
       destNames->unref();
-      destNames = 0;
+      destNames = nullptr;
    }
-   if (org.destNames != 0)
+   if (org.destNames != nullptr)
       destNames = org.destNames->clone();
 }
 
@@ -69,14 +69,14 @@ void Message::copyData(const Message& org, const bool cc)
 //-------------------------------------------------------------------------
 void Message::setSenderName(const Basic::String* const sName)
 {
-   if(sName != 0) {
+   if(sName != nullptr) {
       *senderName = *sName;
    }
 }
 
 void Message::setSenderName(const char* const sName)
 {
-   if(sName != 0) {
+   if(sName != nullptr) {
       *senderName = sName;
    }
 }
@@ -87,8 +87,8 @@ void Message::setSenderName(const char* const sName)
 bool Message::addDestName(Basic::String* const name)
 {
    bool ret = false;
-   if(name != 0) {
-      if (destNames == 0)
+   if(name != nullptr) {
+      if (destNames == nullptr)
          destNames = new Basic::List();
       destNames->addTail(name);
       ret = true;
@@ -99,7 +99,7 @@ bool Message::addDestName(Basic::String* const name)
 bool Message::addDestName(const char* const name)
 {
    bool ret = false;
-   if (name != 0) {
+   if (name != nullptr) {
       Basic::String* p = new Basic::String(name);
       ret = addDestName(p);
    }
@@ -108,20 +108,20 @@ bool Message::addDestName(const char* const name)
 
 void Message::removeDestName(Basic::String* const name)
 {
-   if (destNames != 0) {
+   if (destNames != nullptr) {
       destNames->remove(name);
       if (destNames->entries() == 0) {
          destNames->unref();
-         destNames = 0;
+         destNames = nullptr;
       }
    }
 }
 
 void Message::clearDestNames()
 {
-   if (destNames != 0) {
+   if (destNames != nullptr) {
       destNames->unref();
-      destNames = 0;
+      destNames = nullptr;
    }
 }
 

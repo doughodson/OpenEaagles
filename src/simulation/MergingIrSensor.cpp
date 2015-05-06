@@ -25,10 +25,10 @@ EMPTY_DELETEDATA(MergingIrSensor)
 // Slot table
 BEGIN_SLOTTABLE(MergingIrSensor)
    "azimuthBin",        // 1: azimuthBin
-   "elevationBin",      // 2: elevationBin 
+   "elevationBin",      // 2: elevationBin
 END_SLOTTABLE(MergingIrSensor)
 
-//  Map slot table 
+//  Map slot table
 BEGIN_SLOT_MAP(MergingIrSensor)
    ON_SLOT(1,setSlotAzimuthBin,Basic::Number)
    ON_SLOT(2,setSlotElevationBin,Basic::Number)
@@ -40,8 +40,8 @@ END_SLOT_MAP()
 MergingIrSensor::MergingIrSensor()
 {
    STANDARD_CONSTRUCTOR()
-   azimuthBin = 0.0f;
-   elevationBin = 0.0f;
+   azimuthBin = 0.0;
+   elevationBin = 0.0;
 }
 
 //------------------------------------------------------------------------------
@@ -63,9 +63,9 @@ void MergingIrSensor::reset()
    BaseClass::reset();
 
    // check the type of our track manager - we need to use the AirAngleOnlyTrkMgrPT
-   if (getTrackManager() != 0) {
+   if (getTrackManager() != nullptr) {
       const AirAngleOnlyTrkMgrPT* a = dynamic_cast<const AirAngleOnlyTrkMgrPT*>(getTrackManager());
-      if (a==0) {
+      if (a == nullptr) {
          if (isMessageEnabled(MSG_WARNING)) {
             std::cerr << "MergingIrSensor::reset() : track manager is not an AirAngleOnlyTrkMgrPT" << std::endl;
          }
@@ -80,28 +80,28 @@ void MergingIrSensor::receive(const LCreal dt)
 }
 
 void MergingIrSensor::mergeIrReturns()
-{ 
+{
    int numRecords = storedMessagesQueue.entries();
    if (numRecords > 0) {
 
-      //int* deleteArray = new int [numRecords]; 
+      //int* deleteArray = new int [numRecords];
       //if (deleteArray == 0) {
       //   if (isMessageEnabled(MSG_ERROR)) {
-      //      std::cerr << "Error: Allocation memory failure in IrSensor::mergeIrReturns" << std::endl; 
+      //      std::cerr << "Error: Allocation memory failure in IrSensor::mergeIrReturns" << std::endl;
       //   }
       //}
-      //else { 
+      //else {
          //for (int i=0; i < numRecords; i++) {
-         //   deleteArray[i] = 0; 
+         //   deleteArray[i] = 0;
          //}
 
          lcLock(storedMessagesLock);
-         // Traverse the stored message queue using peek (). Examine every 
-         // message. Compare every stored message against every OTHER stored 
-         // message. If the two are too close together, merge the two signals 
-         // and mark the second message in the delete array.  
-         // Proceed through the loop, ignoring all messages marked "deleted" 
-         // in the delete array. 
+         // Traverse the stored message queue using peek (). Examine every
+         // message. Compare every stored message against every OTHER stored
+         // message. If the two are too close together, merge the two signals
+         // and mark the second message in the delete array.
+         // Proceed through the loop, ignoring all messages marked "deleted"
+         // in the delete array.
          numRecords = storedMessagesQueue.entries();
 
          if (isMessageEnabled(MSG_DEBUG)) {
@@ -109,45 +109,45 @@ void MergingIrSensor::mergeIrReturns()
          }
 
          for (int i=0; i < numRecords; i++) {
-               //if (deleteArray[i] == 0) {  // Do not bother processing those marked 
+               //if (deleteArray[i] == 0) {  // Do not bother processing those marked
                // for deletion -- these have already been
-               // merged and must be ignored. 
+               // merged and must be ignored.
 
-            IrQueryMsg* currentMsg = storedMessagesQueue.peek0(i); 
+            IrQueryMsg* currentMsg = storedMessagesQueue.peek0(i);
 
-            // Do not bother processing those marked 
+            // Do not bother processing those marked
             // for deletion -- these have already been
-            // merged and must be ignored. 
+            // merged and must be ignored.
             if (currentMsg->getQueryMergeStatus()!= IrQueryMsg::MERGED_OUT) {
 
                for (int j = i+1; j < numRecords; j++) {
 
                   IrQueryMsg* nextMsg = storedMessagesQueue.peek0(j);
                   LCreal azimuthDelta = currentMsg->getRelativeAzimuth() - nextMsg->getRelativeAzimuth();
-                  LCreal elevationDelta = currentMsg->getRelativeElevation() 
+                  LCreal elevationDelta = currentMsg->getRelativeElevation()
                      - nextMsg->getRelativeElevation();
 
-                  if (azimuthDelta < 0) 
-                     azimuthDelta = -azimuthDelta; 
+                  if (azimuthDelta < 0)
+                     azimuthDelta = -azimuthDelta;
 
-                  if (elevationDelta < 0) 
-                     elevationDelta = -elevationDelta; 
+                  if (elevationDelta < 0)
+                     elevationDelta = -elevationDelta;
 
-                  if ((azimuthDelta < azimuthBin) && 
+                  if ((azimuthDelta < azimuthBin) &&
                      (elevationDelta < elevationBin)) { // two signals are too close together
-                    // for the sensor to distinguish between them; 
-                    // we will merge the two signals based 
-                    // on their weighted signal-to-noise. 
-                    LCreal currentRatio = 0.0f;
-                    LCreal nextRatio = 0.0f;
+                    // for the sensor to distinguish between them;
+                    // we will merge the two signals based
+                    // on their weighted signal-to-noise.
+                    LCreal currentRatio = 0.0;
+                    LCreal nextRatio = 0.0;
 
-                    // find current ratio. 
+                    // find current ratio.
                     if (isMessageEnabled(MSG_DEBUG)) {
-                     std::cout << "IrSensor: merging target " <<  nextMsg->getTarget()->getName()->getString() 
-                       << " into target " <<currentMsg->getTarget()->getName()->getString()  << std::endl;
+                       std::cout << "IrSensor: merging target " <<  nextMsg->getTarget()->getName()->getString()
+                                 << " into target " <<currentMsg->getTarget()->getName()->getString()  << std::endl;
                     }
 
-                    if (currentMsg->getSignalToNoiseRatio() > 
+                    if (currentMsg->getSignalToNoiseRatio() >
                        currentMsg->getBackgroundNoiseRatio()) {
 
                           currentRatio = currentMsg->getSignalToNoiseRatio() +
@@ -157,15 +157,15 @@ void MergingIrSensor::mergeIrReturns()
                        if (currentMsg->getSignalToNoiseRatio() < 0) {
                           currentRatio = -currentMsg->getSignalToNoiseRatio() -
                              currentMsg->getBackgroundNoiseRatio();
-                       } else { 
+                       } else {
                           currentRatio = -currentMsg->getSignalToNoiseRatio() -
                              currentMsg->getBackgroundNoiseRatio();
-                       } // signaltonoise < 0 
+                       } // signaltonoise < 0
 
-                    } // if current signal > background 
+                    } // if current signal > background
 
-                    //now do the same thing for the next message. 
-                    if (nextMsg->getSignalToNoiseRatio() > 
+                    //now do the same thing for the next message.
+                    if (nextMsg->getSignalToNoiseRatio() >
                        nextMsg->getBackgroundNoiseRatio()) {
                           nextRatio = nextMsg->getSignalToNoiseRatio() +
                              nextMsg->getBackgroundNoiseRatio();
@@ -173,24 +173,24 @@ void MergingIrSensor::mergeIrReturns()
                        if (nextMsg->getSignalToNoiseRatio() < 0) {
                           nextRatio = -nextMsg->getSignalToNoiseRatio() -
                              nextMsg->getBackgroundNoiseRatio();
-                       } else { 
+                       } else {
                           nextRatio = -nextMsg->getSignalToNoiseRatio() -
                              nextMsg->getBackgroundNoiseRatio();
-                       } // signaltonoise < 0 
+                       } // signaltonoise < 0
 
-                    } // if next signal > background 
+                    } // if next signal > background
 
-                    // use ratios to find weights. 
-                    LCreal sumRatio = currentRatio + nextRatio; 
+                    // use ratios to find weights.
+                    LCreal sumRatio = currentRatio + nextRatio;
 
-                    LCreal currentWeight = currentRatio / sumRatio;
-                    LCreal nextWeight = static_cast<LCreal>(1.0) - currentWeight; 
+                    const LCreal currentWeight = currentRatio / sumRatio;
+                    const LCreal nextWeight = 1.0 - currentWeight;
 
                     //combine line-of-sight vector using weights
                     currentMsg->setLosVec((currentMsg->getLosVec() * currentWeight) +
                        (nextMsg->getLosVec() * nextWeight));
 
-                    // combine position 
+                    // combine position
                     currentMsg->setPosVec((currentMsg->getPosVec() * currentWeight) +
                        (nextMsg->getPosVec() * nextWeight));
 
@@ -198,18 +198,18 @@ void MergingIrSensor::mergeIrReturns()
                     currentMsg->setVelocityVec((currentMsg->getVelocityVec() * currentWeight) +
                        (nextMsg->getVelocityVec() * nextWeight));
 
-                    // combine acceleration 
+                    // combine acceleration
                     currentMsg->setAccelVec((currentMsg->getAccelVec() * currentWeight) +
                        (nextMsg->getAccelVec() * nextWeight));
 
-                    // combine signal to noise ratios. 
+                    // combine signal to noise ratios.
                     sumRatio = sumRatio - currentMsg->getBackgroundNoiseRatio();
-                    if (sumRatio < 0) 
+                    if (sumRatio < 0)
                        sumRatio = -sumRatio;
 
                     currentMsg->setSignalToNoiseRatio(sumRatio);
 
-                    //combine Azimuth and Elevation. 
+                    //combine Azimuth and Elevation.
                     currentMsg->setAzimuthAoi((currentMsg->getAzimuthAoi() * currentWeight) +
                        nextMsg->getAzimuthAoi() * nextWeight);
 
@@ -229,25 +229,25 @@ void MergingIrSensor::mergeIrReturns()
                     currentMsg->setQueryMergeStatus(IrQueryMsg::MERGED);
                     nextMsg->setQueryMergeStatus(IrQueryMsg::MERGED_OUT);
 
-                    //deleteArray[j] = 1;  // now that we have merged this signal with the 
-                    // Ith signal, it must be deleted. It will not 
-                    // be passed on to the track manager. 
+                    //deleteArray[j] = 1;  // now that we have merged this signal with the
+                    // Ith signal, it must be deleted. It will not
+                    // be passed on to the track manager.
 
                     //if (isMessageEnabled(MSG_INFO)) {
                     //std::cout << "IrSensor: End Merge" << std::endl;
                     //}
 
-                  } // if we merge 
-               } // end for j = i + 1; 
+                  } // if we merge
+               } // end for j = i + 1;
             } // End if delete Array
             else { // debug - this target ws merged into another
                int x=0;
                x=x+1;
             }
-         } // end for i = 0; 
+         } // end for i = 0;
          lcUnlock(storedMessagesLock);
          //delete[] deleteArray;
-      //} // newArray is not null. 
+      //} // newArray is not null.
    } // numRecords > 0
 }
 
@@ -259,30 +259,30 @@ Basic::Object* MergingIrSensor::getSlotByIndex(const int si)
     return BaseClass::getSlotByIndex(si);
 }
 
-// setAzimuthBin() - Sets the lower Azimuth Bin 
+// setAzimuthBin() - Sets the lower Azimuth Bin
 bool MergingIrSensor::setAzimuthBin(const LCreal w)
-{ 
+{
    azimuthBin = w;
    return true;
 }
 
-// setElevationBin() - Sets the lower Elevation Bin 
+// setElevationBin() - Sets the lower Elevation Bin
 bool MergingIrSensor::setElevationBin(const LCreal w)
 {
    elevationBin = w;
    return true;
 }
- 
+
 bool MergingIrSensor::setSlotAzimuthBin(const Basic::Number* const msg)
 {
-   LCreal value = 0.0f;
+   LCreal value = 0.0;
 
    const Basic::Angle* a = dynamic_cast<const Basic::Angle*>(msg);
-   if (a != 0) {
+   if (a != nullptr) {
        Basic::Radians r;
        value = static_cast<LCreal>(r.convert(*a));
    }
-   else if (msg != 0) {
+   else if (msg != nullptr) {
       value = msg->getReal();
    }
    setAzimuthBin(value);
@@ -291,14 +291,14 @@ bool MergingIrSensor::setSlotAzimuthBin(const Basic::Number* const msg)
 
 bool MergingIrSensor::setSlotElevationBin(const Basic::Number* const msg)
 {
-   LCreal value = 0.0f;
- 
+   LCreal value = 0.0;
+
    const Basic::Angle* a = dynamic_cast<const Basic::Angle*>(msg);
-   if (a != 0) {
+   if (a != nullptr) {
        Basic::Radians r;
        value = static_cast<LCreal>(r.convert(*a));
    }
-   else if (msg != 0) {
+   else if (msg != nullptr) {
       value = msg->getReal();
    }
    setElevationBin(value);

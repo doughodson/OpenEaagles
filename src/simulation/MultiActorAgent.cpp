@@ -35,7 +35,7 @@ EMPTY_COPYDATA(MultiActorAgent)
 
 // slot table for this class type
 BEGIN_SLOTTABLE(MultiActorAgent)
-   "state",                      //  1) state 
+   "state",                      //  1) state
    "agentList"                   //  2) behavior pairstream
 END_SLOTTABLE(MultiActorAgent)
 
@@ -49,9 +49,9 @@ MultiActorAgent::MultiActorAgent()
 {
    STANDARD_CONSTRUCTOR()
    nAgents = 0;
-   state = 0;
-   myStation = 0;
-   actor = 0;
+   state = nullptr;
+   myStation = nullptr;
+   actor = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -60,18 +60,18 @@ MultiActorAgent::MultiActorAgent()
 void MultiActorAgent::deleteData()
 {
    // unref state
-   if ( state!=0 )    { state->unref(); state = 0; }
+   if ( state != nullptr )    { state->unref(); state = nullptr; }
    clearAgentList();
 }
 
 void MultiActorAgent::reset()
 {
    Simulation* sim = getSimulation();
-   if (sim != 0) {
+   if (sim != nullptr) {
       // convert component names to component ptrs, for all behaviors in the list
       for (unsigned int i=0; i<nAgents; i++) {
          Basic::Component* c = sim->findPlayerByName(agentList[i].actorName->getString());
-         if (c != 0) {
+         if (c != nullptr) {
             agentList[i].actor = c;
             // send reset to each
             agentList[i].behavior->reset();
@@ -97,14 +97,14 @@ void MultiActorAgent::updateData(const LCreal dt)
 
 void MultiActorAgent::controller(const LCreal dt)
 {
-   if ( (getState()!=0) && (nAgents>0) ) {
+   if ( (getState() != nullptr) && (nAgents>0) ) {
       // update global state once for all agents
       getState()->updateGlobalState();
 
       // for each behavior/actor pair, update state and generate action
       for (unsigned int i=0; i<nAgents; i++) {
-         if (agentList[i].actor!=0) {
-            
+         if (agentList[i].actor != nullptr) {
+
             setActor(agentList[i].actor);
             Basic::Ubf::Behavior* behavior = agentList[i].behavior;
 
@@ -119,16 +119,16 @@ void MultiActorAgent::controller(const LCreal dt)
             }
          }
       }
-      setActor(0);
+      setActor(nullptr);
    }
 }
 
 
 void MultiActorAgent::setState(Basic::Ubf::State* const x)
 {
-   if (x==0)
+   if (x == nullptr)
       return;
-   if (state!=0)
+   if (state != nullptr)
       state->unref();
    state = x;
    state->ref();
@@ -140,9 +140,9 @@ void MultiActorAgent::setState(Basic::Ubf::State* const x)
 
 Station* MultiActorAgent::getStation()
 {
-   if ( myStation==0 ) {
+   if ( myStation == nullptr ) {
       Station* s = dynamic_cast<Station*>(findContainerByType(typeid(Station)));
-      if (s != 0) {
+      if (s != nullptr) {
          myStation = s;
       }
    }
@@ -151,9 +151,9 @@ Station* MultiActorAgent::getStation()
 //
 Simulation* MultiActorAgent::getSimulation()
 {
-   Simulation* sim = 0;
+   Simulation* sim = nullptr;
    Station* s = getStation();
-   if (s != 0) {
+   if (s != nullptr) {
       sim = s->getSimulation();
    }
    return sim;
@@ -165,9 +165,9 @@ bool MultiActorAgent::clearAgentList()
    // Clear our agent list
    while (nAgents > 0) {
       nAgents--;
-      agentList[nAgents].actorName = 0;
-      agentList[nAgents].behavior = 0;
-      agentList[nAgents].actor = 0;
+      agentList[nAgents].actorName = nullptr;
+      agentList[nAgents].behavior = nullptr;
+      agentList[nAgents].actor = nullptr;
    }
    return true;
 }
@@ -179,7 +179,7 @@ bool MultiActorAgent::addAgent(Basic::String* name, Basic::Ubf::Behavior* const 
    if (nAgents < MAX_AGENTS) {
       agentList[nAgents].actorName = name;
       agentList[nAgents].behavior = b;
-      agentList[nAgents].actor = 0;
+      agentList[nAgents].actor = nullptr;
       nAgents++;
       b->container(this);
       ok = true;
@@ -195,7 +195,7 @@ bool MultiActorAgent::addAgent(Basic::String* name, Basic::Ubf::Behavior* const 
 bool MultiActorAgent::setSlotState(Basic::Ubf::State* const state)
 {
    bool ok = false;
-   if (state != 0) {
+   if (state != nullptr) {
       setState(state);
       ok = true;
    }
@@ -206,17 +206,17 @@ bool MultiActorAgent::setSlotState(Basic::Ubf::State* const state)
 bool MultiActorAgent::setSlotAgentList(Basic::PairStream* const msg)
 {
     bool ok = false;
-    if (msg != 0) {
+    if (msg != nullptr) {
        // First clear the old list
        clearAgentList();
 
        // Now scan the pair stream and put all Ntm objects into the table.
        Basic::List::Item* item = msg->getFirstItem();
-       while (item != 0) {
+       while (item != nullptr) {
           Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
           //std::cerr << "MultiActorAgent::setSlotagentList: slot: " << *pair->slot() << std::endl;
           Basic::Ubf::Behavior* b = dynamic_cast<Basic::Ubf::Behavior*>( pair->object() );
-          if (b != 0) {
+          if (b != nullptr) {
              // We have an  object, so put it in the table
              addAgent(pair->slot(), b);
           }
