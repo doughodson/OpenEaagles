@@ -1432,7 +1432,7 @@ void Simulation::updatePlayerList()
             else {
             // Deleting this player: remove us as its container
             // and don't add to the new player list
-                p->container(0);
+                p->container(nullptr);
 
                 BEGIN_RECORD_DATA_SAMPLE( getDataRecorder(), REID_PLAYER_REMOVED )
                    SAMPLE_1_OBJECT( p )

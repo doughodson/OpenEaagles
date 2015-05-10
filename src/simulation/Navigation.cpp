@@ -65,50 +65,50 @@ Navigation::Navigation() : rm()
 
 void Navigation::initData()
 {
-   priRoute = 0;
-   initRoute = 0;
-   bull = 0;
+   priRoute = nullptr;
+   initRoute = nullptr;
+   bull = nullptr;
 
-   latitude = 0;
-   longitude = 0;
-   altitude = 0;
+   latitude = 0.0;
+   longitude = 0.0;
+   altitude = 0.0;
    posValid = false;
-   heading = 0;
-   pitch = 0;
-   roll = 0;
+   heading = 0.0;
+   pitch = 0.0;
+   roll = 0.0;
    attValid = false;
    velVec.set(0,0,0);
    accelVec.set(0,0,0);
-   gs = 0;
-   tas = 0;
-   tk = 0;
+   gs = 0.0;
+   tas = 0.0;
+   tk = 0.0;
    velValid = false;
-   magvar = 0;
-   mhdg = 0;
-   magVarValid = 0;
-   windDirD = 0;
-   windSpdKts = 0;
+   magvar = 0.0;
+   mhdg = 0.0;
+   magVarValid = false;
+   windDirD = 0.0;
+   windSpdKts = 0.0;
    windsValid = false;
    navStrValid = false;
-   tbrg = 0;
-   mbrg = 0;
-   dst = 0;
-   ttg = 0;
-   tcrs = 0;
-   mcrs = 0;
-   xte = 0;
-   eta = 0;
+   tbrg = 0.0;
+   mbrg = 0.0;
+   dst = 0.0;
+   ttg = 0.0;
+   tcrs = 0.0;
+   mcrs = 0.0;
+   xte = 0.0;
+   eta = 0.0;
 
-   utc = 0;
-   initUTC = 0;
+   utc = 0.0;
+   initUTC = 0.0;
    utcValid = false;
 
    // No FEBA
-   feba = 0;
+   feba = nullptr;
    nFeba = 0;
 
-   refLat = 0;
-   refLon = 0;
+   refLat = 0.0;
+   refLon = 0.0;
 }
 
 //------------------------------------------------------------------------------
@@ -119,28 +119,28 @@ void Navigation::copyData(const Navigation& org, const bool cc)
    BaseClass::copyData(org);
    if (cc) initData();
 
-   if (org.priRoute != 0) {
+   if (org.priRoute != nullptr) {
       Route* p = org.priRoute->clone();
       priRoute = p;
       p->container(this);
       p->unref();  // safe_ptr<> has it
    }
-   else priRoute = 0;
+   else priRoute = nullptr;
 
-   if (org.initRoute != 0) {
+   if (org.initRoute != nullptr) {
       Route* p = org.initRoute->clone();
       initRoute = p;
       p->unref();  // safe_ptr<> has it
    }
-   else initRoute = 0;
+   else initRoute = nullptr;
 
-   if (org.bull != 0) {
+   if (org.bull != nullptr) {
       Bullseye* b = org.bull->clone();
       bull = b;
       b->container(this);
       b->unref();  // safe_ptr<> has it
    }
-   else bull = 0;
+   else bull = nullptr;
 
    latitude = org.latitude;
    longitude = org.longitude;
@@ -187,12 +187,12 @@ void Navigation::copyData(const Navigation& org, const bool cc)
 //------------------------------------------------------------------------------
 void Navigation::deleteData()
 {
-    priRoute = 0;
-    initRoute = 0;
-    bull = 0;
+    priRoute = nullptr;
+    initRoute = nullptr;
+    bull = nullptr;
 
     // Delete the FEBA
-    setFeba(0, 0);
+    setFeba(nullptr, 0);
 }
 
 //------------------------------------------------------------------------------
@@ -214,25 +214,25 @@ void Navigation::reset()
    utcValid = true;
 
    // Reset the route to the initial route and reset
-   if (priRoute != 0) {
-      priRoute->container(0);
-      priRoute = 0;
+   if (priRoute != nullptr) {
+      priRoute->container(nullptr);
+      priRoute = nullptr;
    }
-   if (initRoute != 0) {
+   if (initRoute != nullptr) {
       priRoute = initRoute->clone();
       priRoute->unref();  // safe_ptr<> has it
    }
-   if (priRoute != 0) {
+   if (priRoute != nullptr) {
       priRoute->container(this);
       priRoute->event(RESET_EVENT);
    }
 
    // Reset our bullseye
-   if (bull != 0) bull->event(RESET_EVENT);
+   if (bull != nullptr) bull->event(RESET_EVENT);
 
    // Set the reference center of our gaming area
    const Simulation* sim = getSimulation();
-   if (sim != 0) {
+   if (sim != nullptr) {
       refLat = sim->getRefLatitude();
       refLon = sim->getRefLongitude();
    }
@@ -246,7 +246,7 @@ void Navigation::updateData(const LCreal dt)
    // ---
    // Update the BaseClass and our primary route
    // ---
-   if (priRoute != 0) priRoute->updateData(dt);
+   if (priRoute != nullptr) priRoute->updateData(dt);
 }
 
 //------------------------------------------------------------------------------
@@ -259,7 +259,7 @@ void Navigation::process(const LCreal dt)
    // ---
    // Update our position, attitude and velocities
    // ---
-   if (getOwnship() != 0) {
+   if (getOwnship() != nullptr) {
       velValid = updateSysVelocity();
       posValid = updateSysPosition();
       attValid = updateSysAttitude();
@@ -280,10 +280,10 @@ void Navigation::process(const LCreal dt)
    // ---
    // Update our primary route
    // ---
-   if (priRoute != 0) priRoute->tcFrame(dt);
+   if (priRoute != nullptr) priRoute->tcFrame(dt);
 
    // Update our bullseye
-   if (bull != 0) bull->compute(this);
+   if (bull != nullptr) bull->compute(this);
 
    // ---
    // Update our navigational steering data
@@ -711,7 +711,7 @@ bool Navigation::setNavSteeringValid(const bool flg)
 bool Navigation::updateSysPosition()
 {
     bool ok = false;
-    if (getOwnship() != 0) {
+    if (getOwnship() != nullptr) {
         // -- convert ownship's position vector to lat/lon/alt
         double lat0 = 0;
         double lon0 = 0;
@@ -726,7 +726,7 @@ bool Navigation::updateSysPosition()
 bool Navigation::updateSysAttitude()
 {
     bool ok = false;
-    if (getOwnship() != 0) {
+    if (getOwnship() != nullptr) {
         setAttitude(getOwnship()->getRollD(), getOwnship()->getPitchD(), getOwnship()->getHeadingD());
         ok = true;
     }
@@ -745,7 +745,7 @@ bool Navigation::updateMagVar()
 bool Navigation::updateSysVelocity()
 {
     bool ok = false;
-    if (getOwnship() != 0) {
+    if (getOwnship() != nullptr) {
         setVelocity( getOwnship()->getVelocity() );
         setAcceleration( getOwnship()->getAcceleration() );
         setGroundSpeedKts( getOwnship()->getGroundSpeedKts() );
@@ -762,9 +762,9 @@ bool Navigation::updateSysVelocity()
 // (default) Nav steering function (pull data from the 'to' steerpoint)
 bool Navigation::updateNavSteering()
 {
-   if (getPriRoute() != 0) {
+   if (getPriRoute() != nullptr) {
       const Steerpoint* to = getPriRoute()->getSteerpoint();
-      if (to != 0) {
+      if (to != nullptr) {
          if (to->isNavDataValid()) {
             setTrueBrgDeg( to->getTrueBrgDeg() );
             setMagBrgDeg( to->getMagBrgDeg() );
@@ -790,7 +790,7 @@ bool Navigation::updateNavSteering()
 int Navigation::getFeba(osg::Vec2* const points, const int max) const
 {
     int n = 0;
-    if (points != 0 && max > 0 && feba != 0 && nFeba > 0) {
+    if (points != nullptr && max > 0 && feba != nullptr && nFeba > 0) {
 
         // Number of points; limited by 'max'
         n = nFeba;
@@ -810,8 +810,8 @@ int Navigation::getFeba(osg::Vec2* const points, const int max) const
 bool Navigation::setFeba(osg::Vec2* const points, const int n)
 {
     // First delete any old FEBA lines
-    if (feba != 0) delete[] feba;
-    feba = 0;
+    if (feba != nullptr) delete[] feba;
+    feba = nullptr;
     nFeba = 0;
 
     if (points != 0 && n >= 2) { // Need at least two points
@@ -830,9 +830,9 @@ bool Navigation::setFeba(osg::Vec2* const points, const int n)
 bool Navigation::setRoute(Route* const msg)
 {
    // we are a new route, but our last new route wasn't the original route
-   if (priRoute != 0) priRoute->container(0);
+   if (priRoute != nullptr) priRoute->container(nullptr);
    priRoute = msg;
-   if (priRoute != 0) priRoute->container(this);
+   if (priRoute != nullptr) priRoute->container(this);
    return true;
 }
 
@@ -844,15 +844,15 @@ bool Navigation::setSlotRoute(const Route* const msg)
 {
    initRoute = msg;
 
-   if (priRoute != 0) {
-      priRoute->container(0);
-      priRoute = 0;
+   if (priRoute != nullptr) {
+      priRoute->container(nullptr);
+      priRoute = nullptr;
    }
-   if (initRoute != 0) {
+   if (initRoute != nullptr) {
       priRoute = initRoute->clone();
       priRoute->unref();  // safe_ptr<> has it
    }
-   if (priRoute != 0) {
+   if (priRoute != nullptr) {
       priRoute->container(this);
    }
    return true;
@@ -861,7 +861,7 @@ bool Navigation::setSlotRoute(const Route* const msg)
 bool Navigation::setSlotUtc(const Basic::Time* const msg)
 {
     bool ok = false;
-    if (msg != 0) {
+    if (msg != nullptr) {
         initUTC = Basic::Seconds::convertStatic( *msg );
         ok = true;
     }
@@ -873,7 +873,7 @@ bool Navigation::setSlotFeba(const Basic::PairStream* const msg)
 {
     bool ok = true;
 
-    if (msg != 0) {
+    if (msg != nullptr) {
         // allocate space for the points
         int max = msg->entries();
         osg::Vec2* tmpFeba = new osg::Vec2[max];
@@ -881,25 +881,25 @@ bool Navigation::setSlotFeba(const Basic::PairStream* const msg)
         // Get the points from the pair stream
         int np = 0;
         const Basic::List::Item* item = msg->getFirstItem();
-        while (item != 0 && np < max && ok) {
+        while (item != nullptr && np < max && ok) {
             bool validFlg = false;
             const Basic::Pair* p = dynamic_cast<const Basic::Pair*>(item->getValue());
-            if (p != 0) {
+            if (p != nullptr) {
                 const Basic::Object* obj2 = p->object();
                 const Basic::List* msg2 = dynamic_cast<const Basic::List*>(obj2);
-                if (msg2 != 0) {
+                if (msg2 != nullptr) {
                     LCreal values[2];
                     int n = 0;
 
                     { // Get the north (first) distance
-                        const Basic::Number* pNum = 0;
+                        const Basic::Number* pNum = nullptr;
                         const Basic::Pair* pair2 = dynamic_cast<const Basic::Pair*>(msg2->getPosition(1));
-                        if (pair2 != 0) pNum = dynamic_cast<const Basic::Number*>(pair2->object());
+                        if (pair2 != nullptr) pNum = dynamic_cast<const Basic::Number*>(pair2->object());
                         else pNum = dynamic_cast<const Basic::Number*>(msg2->getPosition(1));
 
-                        if (pNum != 0) {
+                        if (pNum != nullptr) {
                             const Basic::Distance* pDist = dynamic_cast<const Basic::Distance*>(pNum);
-                            if (pDist != 0) {
+                            if (pDist != nullptr) {
                                 values[n++] = Basic::NauticalMiles::convertStatic(*pDist);
                             }
                             else {
@@ -909,14 +909,14 @@ bool Navigation::setSlotFeba(const Basic::PairStream* const msg)
                     }
 
                     { // Get the east (second) distance
-                        const Basic::Number* pNum = 0;
+                        const Basic::Number* pNum = nullptr;
                         const Basic::Pair* pair2 = dynamic_cast<const Basic::Pair*>(msg2->getPosition(2));
-                        if (pair2 != 0) pNum = dynamic_cast<const Basic::Number*>(pair2->object());
+                        if (pair2 != nullptr) pNum = dynamic_cast<const Basic::Number*>(pair2->object());
                         else pNum = dynamic_cast<const Basic::Number*>(msg2->getPosition(2));
 
-                        if (pNum != 0) {
+                        if (pNum != nullptr) {
                             const Basic::Distance* pDist = dynamic_cast<const Basic::Distance*>(pNum);
-                            if (pDist != 0) {
+                            if (pDist != nullptr) {
                                 values[n++] = Basic::NauticalMiles::convertStatic(*pDist);
                             }
                             else {
@@ -949,11 +949,11 @@ bool Navigation::setSlotFeba(const Basic::PairStream* const msg)
 }
 bool Navigation::setSlotBullseye(Bullseye* const msg)
 {
-   if (bull != 0) {
-      bull->container(0);
+   if (bull != nullptr) {
+      bull->container(nullptr);
    }
    bull = msg;
-   if (bull != 0) {
+   if (bull != nullptr) {
       bull->container(this);
    }
    return true;
@@ -970,7 +970,7 @@ std::ostream& Navigation::serialize(std::ostream& sout, const int i, const bool 
     }
 
     // primary route
-    if (priRoute != 0) {
+    if (priRoute != nullptr) {
         indent(sout,i+j);
         sout << "route: " << std::endl;
         priRoute->serialize(sout,(i+j),slotsOnly);

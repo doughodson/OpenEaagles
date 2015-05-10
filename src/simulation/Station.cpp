@@ -1061,9 +1061,9 @@ bool Station::setOwnshipPlayer(Player* const newOS)
 //------------------------------------------------------------------------------
 bool Station::setDataRecorder(DataRecorder* const p)
 {
-   if (dataRecorder != 0) { dataRecorder->container(0); dataRecorder->unref(); }
+   if (dataRecorder != nullptr) { dataRecorder->container(nullptr); dataRecorder->unref(); }
    dataRecorder = p;
-   if (dataRecorder != 0) { dataRecorder->container(this); dataRecorder->ref(); }
+   if (dataRecorder != nullptr) { dataRecorder->container(this); dataRecorder->ref(); }
    return true;
 }
 
@@ -1073,12 +1073,12 @@ bool Station::setDataRecorder(DataRecorder* const p)
 //-----------------------------------------------------------------------------
 bool Station::setSlotSimulation(Simulation* const p)
 {
-    if (sim != 0) {
-        sim->container(0);
+    if (sim != nullptr) {
+        sim->container(nullptr);
         sim->unref();
     }
     sim = p;
-    if (sim != 0) {
+    if (sim != nullptr) {
         sim->ref();
         sim->container(this);
     }
@@ -1123,16 +1123,16 @@ bool Station::setSlotOutTheWindow(Basic::PairStream* const list)
     }
 
    // Remove the old OTW interfaces
-   if (otw != 0) {
+   if (otw != nullptr) {
 
       Basic::safe_ptr<Basic::PairStream> oldList( otw );
-      otw = 0;
+      otw = nullptr;
 
       // we are no longer the container for these old OTW interfaces
-      for (Basic::List::Item* item = oldList->getFirstItem(); item != 0; item = item->getNext()) {
+      for (Basic::List::Item* item = oldList->getFirstItem(); item != nullptr; item = item->getNext()) {
          Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
          Component* p = static_cast<Component*>(pair->object());
-         p->container(0);
+         p->container(nullptr);
       }
    }
 
@@ -1157,25 +1157,25 @@ bool Station::setSlotIoHandler(Basic::PairStream* const list)
     bool ok = true;
 
     // Remove the old list
-    if (ioHandlers != 0) {
+    if (ioHandlers != nullptr) {
         // we are no longer the container for these handlers
-        for (Basic::List::Item* item = ioHandlers->getFirstItem(); item != 0; item = item->getNext()) {
+        for (Basic::List::Item* item = ioHandlers->getFirstItem(); item != nullptr; item = item->getNext()) {
             Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
             Basic::Component* p = static_cast<Basic::Component*>(pair->object());
-            p->container(0);
+            p->container(nullptr);
         }
-        ioHandlers = 0;
+        ioHandlers = nullptr;
     }
 
     // Set our list pointer
     ioHandlers = list;
 
     // Make sure the new list is setup correctly
-    if (ioHandlers != 0) {
-        for (Basic::List::Item* item = ioHandlers->getFirstItem(); item != 0; item = item->getNext()) {
+    if (ioHandlers != nullptr) {
+        for (Basic::List::Item* item = ioHandlers->getFirstItem(); item != nullptr; item = item->getNext()) {
             Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
             Basic::IoHandler* p = dynamic_cast<Basic::IoHandler*>(pair->object());
-            if (p != 0) {
+            if (p != nullptr) {
                 // We are its container
                 p->container(this);
             }
@@ -1194,9 +1194,9 @@ bool Station::setSlotIoHandler(Basic::PairStream* const list)
 //------------------------------------------------------------------------------
 bool Station::setSlotOwnshipName(const Basic::String* const newName)
 {
-   if (ownshipName != 0) ownshipName->unref();
+   if (ownshipName != nullptr) ownshipName->unref();
    ownshipName = newName;
-   if (ownshipName != 0) ownshipName->ref();
+   if (ownshipName != nullptr) ownshipName->ref();
    return true;
 }
 
@@ -1208,12 +1208,12 @@ bool Station::setSlotNetworks(Basic::PairStream* const a)
     bool ok = true;
 
     // Remove the old networks list
-    if (networks != 0) {
+    if (networks != nullptr) {
         // we are no longer the container for these networks
-        for (Basic::List::Item* item = networks->getFirstItem(); item != 0; item = item->getNext()) {
+        for (Basic::List::Item* item = networks->getFirstItem(); item != nullptr; item = item->getNext()) {
             Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
             NetIO* p = static_cast<NetIO*>(pair->object());
-            p->container(0);
+            p->container(nullptr);
         }
     }
 
@@ -1221,11 +1221,11 @@ bool Station::setSlotNetworks(Basic::PairStream* const a)
     networks = a;
 
     // Make sure the new network list is setup correctly
-    if (networks != 0) {
-        for (Basic::List::Item* item = networks->getFirstItem(); item != 0; item = item->getNext()) {
+    if (networks != nullptr) {
+        for (Basic::List::Item* item = networks->getFirstItem(); item != nullptr; item = item->getNext()) {
             Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
             NetIO* p = dynamic_cast<NetIO*>(pair->object());
-            if (p != 0) {
+            if (p != nullptr) {
                 // We are this network's container
                 p->container(this);
             }
@@ -1246,7 +1246,7 @@ bool Station::setSlotNetworks(Basic::PairStream* const a)
 bool Station::setSlotTimeCriticalRate(const Basic::Number* const num)
 {
     bool ok = false;
-    if (num != 0) {
+    if (num != nullptr) {
         LCreal rate = num->getReal();
         if (rate > 0) {
             tcRate = rate;

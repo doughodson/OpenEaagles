@@ -246,7 +246,7 @@ Player::Player()
 void Player::initData()
 {
    static Basic::String generic("GenericPlayer");
-   type = 0;
+   type = nullptr;
    setType(&generic);
 
    id = 0;
@@ -254,9 +254,9 @@ void Player::initData()
    side = GRAY;
 
    mode = ACTIVE;
-   latitude = 0;
-   longitude = 0;
-   altitude = 0;
+   latitude = 0.0;
+   longitude = 0.0;
+   altitude = 0.0;
    Basic::Nav::computeWorldMatrix(latitude, longitude, &wm);
 
    angles.set(0,0,0);
@@ -267,9 +267,9 @@ void Player::initData()
 
    q.set(rm);
 
-   vp = 0;
-   gndSpd = 0;
-   gndTrk = 0;
+   vp = 0.0;
+   gndSpd = 0.0;
+   gndTrk = 0.0;
    useCoordSys = CS_NONE;
    useCoordSysN1 = CS_NONE;
 
@@ -286,7 +286,7 @@ void Player::initData()
    angularVel.set(0,0,0);
    gcAngVel.set(0,0,0);
 
-   tElev    = 0.0f;
+   tElev    = 0.0;
    tElevValid = false;
 
    altSlaved = false;
@@ -302,10 +302,10 @@ void Player::initData()
    killRemoval = false;
    tElevReq = false;     // default: terrain height isn't required
    interpTrrn = false;
-   tOffset = 0.0f;
+   tOffset = 0.0;
 
-   signature = 0;
-   irSignature = 0;
+   signature = nullptr;
+   irSignature = nullptr;
    camouflage = 0;
    damage = 0.0;
    smoking = 0.0;
@@ -323,39 +323,39 @@ void Player::initData()
    initLon = 0.0;
    initLatLonFlg = false;
 
-   initAlt = 0;
-   initVp = 0;
+   initAlt = 0.0;
+   initVp = 0.0;
    initMode = mode;
    initAngles.set(0,0,0);
    testAngRates.set(0,0,0);
    testBodyAxis = false;
 
-   dataLogTimer = 0.0f;
-   dataLogTime  = 0.0f;
+   dataLogTimer = 0.0;
+   dataLogTime  = 0.0;
 
-   nib = 0;
+   nib = nullptr;
    netID = 0;
    enableNetOutput = true;
    nibList = new Nib*[NetIO::MAX_NETWORD_ID];
    for (unsigned int i = 0; i < NetIO::MAX_NETWORD_ID; i++) {
-      nibList[i] = 0;
+      nibList[i] = nullptr;
    }
 
-   sim = 0;
-   dyn = 0;
-   datalink = 0;
-   gimbal = 0;
-   nav = 0;
-   obc = 0;
-   pilot = 0;
-   radio = 0;
-   sensor = 0;
-   irSystem = 0;
-   sms = 0;
+   sim = nullptr;
+   dyn = nullptr;
+   datalink = nullptr;
+   gimbal = nullptr;
+   nav = nullptr;
+   obc = nullptr;
+   pilot = nullptr;
+   radio = nullptr;
+   sensor = nullptr;
+   irSystem = nullptr;
+   sms = nullptr;
    loadSysPtrs = true;
 
    for (unsigned int i = 0; i < MAX_RF_REFLECTIONS; i++) {
-      rfReflect[i] = 0;
+      rfReflect[i] = nullptr;
       rfReflectTimer[i] = 0;
    }
 
@@ -379,7 +379,7 @@ void Player::copyData(const Player& org, const bool cc)
 
    id = org.id;
 
-   if (org.pname != 0) {
+   if (org.pname != nullptr) {
       setName(org.pname);
    }
 
@@ -441,22 +441,22 @@ void Player::copyData(const Player& org, const bool cc)
    interpTrrn = org.interpTrrn;
    tOffset = org.tOffset;
 
-   if (org.signature != 0) {
+   if (org.signature != nullptr) {
       RfSignature* copy = org.signature->clone();
       setSlotSignature( copy );
       copy->unref();
    }
    else {
-      setSlotSignature(0);
+      setSlotSignature(nullptr);
    }
 
-   if (org.irSignature != 0) {
+   if (org.irSignature != nullptr) {
       IrSignature* copy = org.irSignature->clone();
       setSlotIrSignature( copy );
       copy->unref();
    }
    else {
-      setSlotIrSignature(0);
+      setSlotIrSignature(nullptr);
    }
 
    camouflage = org.camouflage;
@@ -490,28 +490,28 @@ void Player::copyData(const Player& org, const bool cc)
    enableNetOutput = org.enableNetOutput;
 
    // NIB pointers are not copied!
-   setNib( 0 );
+   setNib( nullptr );
    for (unsigned int i = 0; i < NetIO::MAX_NETWORD_ID; i++) {
-      setOutgoingNib(0, i);
+      setOutgoingNib(nullptr, i);
    }
 
    // The following are not copied ..
-   sim = 0;
-   setDynamicsModel(0);
-   setDatalink(0);
-   setGimbal(0);
-   setIrSystem(0);
-   setNavigation(0);
-   setOnboardComputer(0);
-   setPilot(0);
-   setRadio(0);
-   setSensor(0);
-   setStoresMgr(0);
+   sim = nullptr;
+   setDynamicsModel(nullptr);
+   setDatalink(nullptr);
+   setGimbal(nullptr);
+   setIrSystem(nullptr);
+   setNavigation(nullptr);
+   setOnboardComputer(nullptr);
+   setPilot(nullptr);
+   setRadio(nullptr);
+   setSensor(nullptr);
+   setStoresMgr(nullptr);
    loadSysPtrs = true;
 
    // Reflected emission requests are not copied
    for (unsigned int i = 0; i < MAX_RF_REFLECTIONS; i++) {
-      if (rfReflect[i] != 0) { rfReflect[i]->unref(); rfReflect[i] = 0; }
+      if (rfReflect[i] != nullptr) { rfReflect[i]->unref(); rfReflect[i] = nullptr; }
       rfReflectTimer[i] = 0;
    }
 
@@ -527,33 +527,32 @@ void Player::copyData(const Player& org, const bool cc)
 void Player::deleteData()
 {
    type = 0;
-   signature = 0;
-   irSignature = 0;
-   sim = 0;
+   signature = nullptr;
+   irSignature = nullptr;
+   sim = nullptr;
 
-   setNib(0);
-   if (nibList != 0) {
+   setNib(nullptr);
+   if (nibList != nullptr) {
       for (unsigned int i = 0; i < NetIO::MAX_NETWORD_ID; i++) {
-         setOutgoingNib(0, i);
+         setOutgoingNib(nullptr, i);
       }
       delete[] nibList;
-      nibList = 0;
+      nibList = nullptr;
    }
 
-
-   setDynamicsModel(0);
-   setDatalink(0);
-   setGimbal(0);
-   setIrSystem(0);
-   setNavigation(0);
-   setOnboardComputer(0);
-   setPilot(0);
-   setRadio(0);
-   setSensor(0);
-   setStoresMgr(0);
+   setDynamicsModel(nullptr);
+   setDatalink(nullptr);
+   setGimbal(nullptr);
+   setIrSystem(nullptr);
+   setNavigation(nullptr);
+   setOnboardComputer(nullptr);
+   setPilot(nullptr);
+   setRadio(nullptr);
+   setSensor(nullptr);
+   setStoresMgr(nullptr);
 
    for (unsigned int i = 0; i < MAX_RF_REFLECTIONS; i++) {
-      if (rfReflect[i] != 0) { rfReflect[i]->unref(); rfReflect[i] = 0; }
+      if (rfReflect[i] != nullptr) { rfReflect[i]->unref(); rfReflect[i] = nullptr; }
    }
 }
 
@@ -562,15 +561,15 @@ void Player::deleteData()
 //------------------------------------------------------------------------------
 bool Player::shutdownNotification()
 {
-   if (nib != 0) nib->event(SHUTDOWN_EVENT);
-   if (nibList != 0) {
+   if (nib != nullptr) nib->event(SHUTDOWN_EVENT);
+   if (nibList != nullptr) {
       for (unsigned int i = 0; i < NetIO::MAX_NETWORD_ID; i++) {
-         if (nibList[i] != 0) nibList[i]->event(SHUTDOWN_EVENT);
+         if (nibList[i] != nullptr) nibList[i]->event(SHUTDOWN_EVENT);
       }
    }
 
    for (unsigned int i = 0; i < MAX_RF_REFLECTIONS; i++) {
-      if (rfReflect[i] != 0) { rfReflect[i]->unref(); rfReflect[i] = 0; }
+      if (rfReflect[i] != nullptr) { rfReflect[i]->unref(); rfReflect[i] = nullptr; }
    }
 
    return BaseClass::shutdownNotification();
@@ -582,7 +581,7 @@ bool Player::shutdownNotification()
 bool Player::isFrozen() const
 {
    bool frz = BaseClass::isFrozen();
-   if (!frz && sim != 0) frz = sim->isFrozen();
+   if (!frz && sim != nullptr) frz = sim->isFrozen();
    return frz;
 }
 
@@ -639,16 +638,16 @@ void Player::reset()
       // Reset misc
       // ---
       setMode(initMode);
-      setDamage(0.0f);
-      setSmoke(0.0f);
-      setFlames(0.0f);
+      setDamage(0.0);
+      setSmoke(0.0);
+      setFlames(0.0);
       justKilled = false;
       killedBy = 0;
 
       altSlaved = false;
       posSlaved = false;
 
-      tElev    = 0.0f;
+      tElev    = 0.0;
       tElevValid = false;
 
       syncState1Ready = false;
@@ -680,12 +679,12 @@ void Player::updateTC(const LCreal dt0)
       // Time-out requests for reflections of RF emissions hitting us
       // ---
       for (unsigned int i = 0; i < MAX_RF_REFLECTIONS; i++) {
-         if (rfReflect[i] != 0) {
+         if (rfReflect[i] != nullptr) {
             rfReflectTimer[i] -= dt0;
             if (rfReflectTimer[i] <= 0) {
                // Clear the request
                rfReflect[i]->unref();
-               rfReflect[i] = 0;
+               rfReflect[i] = nullptr;
             }
          }
       }
@@ -711,7 +710,7 @@ void Player::updateTC(const LCreal dt0)
             if (dataLogTime > 0.0) {
                // When we have a data logging time, update the timer
                dataLogTimer -= dt4;
-               if (dataLogTimer <= 0.0f) {
+               if (dataLogTimer <= 0.0) {
                   // At timeout, log the player's data and ...
 
                   BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_PLAYER_DATA )
@@ -719,7 +718,7 @@ void Player::updateTC(const LCreal dt0)
                   END_RECORD_DATA_SAMPLE()
 
                   // TabLogger is deprecated
-                  if (getAnyEventLogger() != 0) {
+                  if (getAnyEventLogger() != nullptr) {
                      TabLogger::TabLogEvent* evt = new TabLogger::LogPlayerData(2, this); // type 2: update
                      getAnyEventLogger()->log(evt);
                      evt->unref();
@@ -731,8 +730,8 @@ void Player::updateTC(const LCreal dt0)
             }
 
             // Update signatures after we've updated our dynamics
-            if (signature != 0) signature->updateTC(dt4);
-            if (irSignature != 0) irSignature->updateTC(dt4);
+            if (signature != nullptr) signature->updateTC(dt4);
+            if (irSignature != nullptr) irSignature->updateTC(dt4);
          }
          break;
 
@@ -770,8 +769,8 @@ void Player::updateData(const LCreal dt)
    if (mode == ACTIVE || mode == PRE_RELEASE) {
 
       // Update signatures
-      if (signature != 0) signature->updateData(dt);
-      if (irSignature != 0) irSignature->updateData(dt);
+      if (signature != nullptr) signature->updateData(dt);
+      if (irSignature != nullptr) irSignature->updateData(dt);
 
       // ---
       // Update the terrain elevation
@@ -831,7 +830,7 @@ LCreal Player::getCG() const
 // Return true if heading-hold mode is on
 bool Player::isHeadingHoldOn() const
 {
-   if (getDynamicsModel() != 0)
+   if (getDynamicsModel() != nullptr)
       return getDynamicsModel()->isHeadingHoldOn();
    else
       return false;
@@ -846,7 +845,7 @@ double Player::getCommandedHeading() const
 // Return commanded heading (degrees)
 double Player::getCommandedHeadingD() const
 {
-   if (getDynamicsModel() != 0)
+   if (getDynamicsModel() != nullptr)
       return getDynamicsModel()->getCommandedHeadingD();
    else
       return 0;
@@ -861,7 +860,7 @@ double Player::getCommandedHeadingR() const
 // Return true if velocity-hold mode is on
 bool Player::isVelocityHoldOn() const
 {
-   if (getDynamicsModel() != 0)
+   if (getDynamicsModel() != nullptr)
       return getDynamicsModel()->isVelocityHoldOn();
    else
       return false;
@@ -870,7 +869,7 @@ bool Player::isVelocityHoldOn() const
 // Commanded (true) velocity (knots)
 double Player::getCommandedVelocityKts() const
 {
-   if (getDynamicsModel() != 0)
+   if (getDynamicsModel() != nullptr)
       return getDynamicsModel()->getCommandedVelocityKts();
    else
       return 0;
@@ -891,7 +890,7 @@ double Player::getCommandedVelocityMps() const
 // Return true if altitude-hold mode is on
 bool Player::isAltitudeHoldOn() const
 {
-   if (getDynamicsModel() != 0)
+   if (getDynamicsModel() != nullptr)
       return getDynamicsModel()->isAltitudeHoldOn();
    else
       return false;
@@ -900,7 +899,7 @@ bool Player::isAltitudeHoldOn() const
 // Get commanded (HAE) altitude, default (meters)
 double Player::getCommandedAltitude() const
 {
-   if (getDynamicsModel() != 0)
+   if (getDynamicsModel() != nullptr)
       return getDynamicsModel()->getCommandedAltitude();
    else
       return 0;
@@ -927,8 +926,8 @@ bool Player::isDestroyed() const
 // Player's outgoing NIB(s)
 Nib* Player::getLocalNib(const unsigned int netId)
 {
-   Nib* p = 0;
-   if (nibList != 0 && netId >= 1 && netId <= NetIO::MAX_NETWORD_ID) {
+   Nib* p = nullptr;
+   if (nibList != nullptr && netId >= 1 && netId <= NetIO::MAX_NETWORD_ID) {
       p = nibList[netId-1];
    }
    return p;
@@ -937,8 +936,8 @@ Nib* Player::getLocalNib(const unsigned int netId)
 // Player's outgoing NIB(s)  (const version)
 const Nib* Player::getLocalNib(const unsigned int netId) const
 {
-   const Nib* p = 0;
-   if (nibList != 0 && netId >= 1 && netId <= NetIO::MAX_NETWORD_ID) {
+   const Nib* p = nullptr;
+   if (nibList != nullptr && netId >= 1 && netId <= NetIO::MAX_NETWORD_ID) {
       p = nibList[netId-1];
    }
    return p;
@@ -950,9 +949,9 @@ double Player::getEarthRadius() const
    double erad = Basic::Nav::ERAD60 * Basic::Distance::NM2M;  // (default)
 
    const Simulation* sim = getSimulation();
-   if (sim != 0) {
+   if (sim != nullptr) {
       const Basic::EarthModel* pModel = sim->getEarthModel();
-      if (pModel == 0) pModel = &Basic::EarthModel::wgs84;
+      if (pModel == nullptr) pModel = &Basic::EarthModel::wgs84;
 
       const double b  = pModel->getB();   // semi-major axis
       const double e2 = pModel->getE2();  // eccentricity squared
@@ -960,7 +959,7 @@ double Player::getEarthRadius() const
       const double slat = getLatitude();
       const double cosSlat = std::cos(Basic::Angle::D2RCC * slat);
 
-      erad = b/sqrt(1.0 - e2*cosSlat*cosSlat); 
+      erad = b / std::sqrt(1.0 - e2*cosSlat*cosSlat);
    }
 
    return erad;
@@ -973,9 +972,9 @@ double Player::getEarthRadius() const
 // Controlling simulation model
 Simulation* Player::getSimulation()
 {
-   if (sim == 0) {
+   if (sim == nullptr) {
       sim = static_cast<Simulation*>(findContainerByType(typeid(Simulation)));
-      if (sim == 0 && isMessageEnabled(MSG_ERROR)) {
+      if (sim == nullptr && isMessageEnabled(MSG_ERROR)) {
          std::cerr << "Player::getSimulation(): ERROR, unable to locate the Simulation class!" << std::endl;
       }
    }
@@ -985,7 +984,7 @@ Simulation* Player::getSimulation()
 // Controlling simulation model (const version)
 const Simulation* Player::getSimulation() const
 {
-   if (sim != 0) {
+   if (sim != nullptr) {
       return sim;
    }
    else {
@@ -1004,19 +1003,19 @@ const Simulation* Player::getSimulation() const
 // Player's dynamics model
 DynamicsModel* Player::getDynamicsModel()
 {
-   return (dyn != 0) ? (static_cast<DynamicsModel*>(dyn->object())) : 0;
+   return (dyn != nullptr) ? (static_cast<DynamicsModel*>(dyn->object())) : nullptr;
 }
 
 // Player's dynamics model (const version)
 const DynamicsModel* Player::getDynamicsModel() const
 {
-   return (dyn != 0) ? (static_cast<DynamicsModel*>(dyn->object())) : 0;
+   return (dyn != nullptr) ? (static_cast<DynamicsModel*>(dyn->object())) : nullptr;
 }
 
 // Name of the Player's dynamics model
 const Basic::Identifier* Player::getDynamicsModelName() const
 {
-   return (dyn != 0) ? dyn->slot() : 0;
+   return (dyn != nullptr) ? dyn->slot() : nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -1026,26 +1025,26 @@ const Basic::Identifier* Player::getDynamicsModelName() const
 // Player's pilot model
 Pilot* Player::getPilot()
 {
-   return (pilot != 0) ? (static_cast<Pilot*>(pilot->object())) : 0;
+   return (pilot != nullptr) ? (static_cast<Pilot*>(pilot->object())) : nullptr;
 }
 
 // Player's pilot model (const version)
 const Pilot* Player::getPilot() const
 {
-   return (pilot != 0) ? (static_cast<Pilot*>(pilot->object())) : 0;
+   return (pilot != nullptr) ? (static_cast<Pilot*>(pilot->object())) : nullptr;
 }
 
 // Name of the player's pilot model
 const Basic::Identifier* Player::getPilotName() const
 {
-   return (pilot != 0) ? pilot->slot() : 0;
+   return (pilot != nullptr) ? pilot->slot() : nullptr;
 }
 
 // Returns a Pilot model by its name
 Pilot* Player::getPilotByName(const char* const name1)
 {
-   Pilot* p = 0;
-   if (pilot != 0) {
+   Pilot* p = nullptr;
+   if (pilot != nullptr) {
 
       // Is this a complex (xxx.yyy name)?
       // To check, copy the first name up to a possible period.
@@ -1059,7 +1058,7 @@ Pilot* Player::getPilotByName(const char* const name1)
       fname[i] = '\0';
 
       // Now compare the first name with the name of our top level system
-      Basic::Pair* pair = 0;
+      Basic::Pair* pair = nullptr;
       if ( *getPilotName() == fname ) {
          // The first name matches our top level system name ...
          if (name[i] == '.') {
@@ -1078,7 +1077,7 @@ Pilot* Player::getPilotByName(const char* const name1)
       }
 
       // Did we find a match?
-      if (pair != 0) {
+      if (pair != nullptr) {
          // Yes, now make sure it's the correct type!
          p = dynamic_cast<Pilot*>( pair->object() );
       }
@@ -1089,9 +1088,9 @@ Pilot* Player::getPilotByName(const char* const name1)
 // Returns a Pilot model by its type
 Basic::Pair* Player::getPilotByType(const std::type_info& type)
 {
-   Basic::Pair* p = 0;  // Our return value
+   Basic::Pair* p = nullptr;  // Our return value
 
-   if (pilot != 0) {
+   if (pilot != nullptr) {
       Pilot* root = getPilot();  // Root node of the list
       if (root->isClassType(type)) {
          // Our root is the correct type.
@@ -1113,19 +1112,19 @@ Basic::Pair* Player::getPilotByType(const std::type_info& type)
 // Player's stores (weapons, fuel) manager model
 StoresMgr* Player::getStoresManagement()
 {
-   return (sms != 0) ? (static_cast<StoresMgr*>(sms->object())) : 0;
+   return (sms != nullptr) ? (static_cast<StoresMgr*>(sms->object())) : nullptr;
 }
 
 // Player's stores (weapons, fuel) manager model (const version)
 const StoresMgr* Player::getStoresManagement() const
 {
-   return (sms != 0) ? (static_cast<StoresMgr*>(sms->object())) : 0;
+   return (sms != nullptr) ? (static_cast<StoresMgr*>(sms->object())) : nullptr;
 }
 
 // Name of the player's stores (weapons, fuel) manager model
 const Basic::Identifier* Player::getStoresManagementName() const
 {
-   return (sms != 0) ? sms->slot() : 0;
+   return (sms != nullptr) ? sms->slot() : nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -1135,26 +1134,26 @@ const Basic::Identifier* Player::getStoresManagementName() const
 // Player's top level Datalink model
 Datalink* Player::getDatalink()
 {
-   return (datalink != 0) ? (static_cast<Datalink*>(datalink->object())) : 0;
+   return (datalink != nullptr) ? (static_cast<Datalink*>(datalink->object())) : nullptr;
 }
 
 // Player's top level Datalink (const version)
 const Datalink* Player::getDatalink() const
 {
-   return (datalink != 0) ? (static_cast<Datalink*>(datalink->object())) : 0;
+   return (datalink != nullptr) ? (static_cast<Datalink*>(datalink->object())) : nullptr;
 }
 
 // Name of the player's top level Datalink model
 const Basic::Identifier* Player::getDatalinkName() const
 {
-   return (datalink != 0) ? datalink->slot() : 0;
+   return (datalink != nullptr) ? datalink->slot() : nullptr;
 }
 
 // Returns a Datalink model by its name
 Datalink* Player::getDatalinkByName(const char* const name1)
 {
-   Datalink* p = 0;
-   if (datalink != 0) {
+   Datalink* p = nullptr;
+   if (datalink != nullptr) {
 
       // Is this a complex (xxx.yyy name)?
       // To check, copy the first name up to a possible period.
@@ -1168,7 +1167,7 @@ Datalink* Player::getDatalinkByName(const char* const name1)
       fname[i] = '\0';
 
       // Now compare the first name with the name of our top level system
-      Basic::Pair* pair = 0;
+      Basic::Pair* pair = nullptr;
       if ( *getDatalinkName() == fname ) {
          // The first name matches our top level system name ...
          if (name[i] == '.') {
@@ -1187,7 +1186,7 @@ Datalink* Player::getDatalinkByName(const char* const name1)
       }
 
       // Did we find a match?
-      if (pair != 0) {
+      if (pair != nullptr) {
          // Yes, now make sure it's the correct type!
          p = dynamic_cast<Datalink*>( pair->object() );
       }
@@ -1198,9 +1197,9 @@ Datalink* Player::getDatalinkByName(const char* const name1)
 // Returns a Datalink model by its type
 Basic::Pair* Player::getDatalinkByType(const std::type_info& type)
 {
-   Basic::Pair* p = 0;                 // Our return value
+   Basic::Pair* p = nullptr;                 // Our return value
 
-   if (datalink != 0) {
+   if (datalink != nullptr) {
       Datalink* root = getDatalink();  // Root node of the list
       if (root->isClassType(type)) {
          // Our root is the correct type.
@@ -1222,26 +1221,26 @@ Basic::Pair* Player::getDatalinkByType(const std::type_info& type)
 // Player's top level Gimbal model
 Gimbal* Player::getGimbal()
 {
-   return (gimbal != 0) ? ((Gimbal*) gimbal->object()) : 0;
+   return (gimbal != nullptr) ? ((Gimbal*) gimbal->object()) : nullptr;
 }
 
 // Player's top level Gimbal (const version)
 const Gimbal* Player::getGimbal() const
 {
-   return (gimbal != 0) ? (static_cast<Gimbal*>(gimbal->object())) : 0;
+   return (gimbal != nullptr) ? (static_cast<Gimbal*>(gimbal->object())) : nullptr;
 }
 
 // Name of the player's top level Gimbal model
 const Basic::Identifier* Player::getGimbalName() const
 {
-   return (gimbal != 0) ? gimbal->slot() : 0;
+   return (gimbal != nullptr) ? gimbal->slot() : nullptr;
 }
 
 // Returns a Gimbal model by its name
 Gimbal* Player::getGimbalByName(const char* const name1)
 {
-   Gimbal* p = 0;
-   if (gimbal != 0) {
+   Gimbal* p = nullptr;
+   if (gimbal != nullptr) {
 
       // Is this a complex (xxx.yyy name)?
       // To check, copy the first name up to a possible period.
@@ -1255,7 +1254,7 @@ Gimbal* Player::getGimbalByName(const char* const name1)
       fname[i] = '\0';
 
       // Now compare the first name with the name of our top level system
-      Basic::Pair* pair = 0;
+      Basic::Pair* pair = nullptr;
       if ( *getGimbalName() == fname ) {
          // The first name matches our top level system name ...
          if (name[i] == '.') {
@@ -1274,7 +1273,7 @@ Gimbal* Player::getGimbalByName(const char* const name1)
       }
 
       // Did we find a match?
-      if (pair != 0) {
+      if (pair != nullptr) {
          // Yes, now make sure it's the correct type!
          p = dynamic_cast<Gimbal*>( pair->object() );
       }
@@ -1285,9 +1284,9 @@ Gimbal* Player::getGimbalByName(const char* const name1)
 // Returns a Gimbal model by its type
 Basic::Pair* Player::getGimbalByType(const std::type_info& type)
 {
-   Basic::Pair* p = 0;                // Our return value
+   Basic::Pair* p = nullptr;                // Our return value
 
-   if (gimbal != 0) {
+   if (gimbal != nullptr) {
       Gimbal* root = getGimbal();   // Root node of the list
       if (root->isClassType(type)) {
          // Our root is the correct type.
@@ -1309,26 +1308,26 @@ Basic::Pair* Player::getGimbalByType(const std::type_info& type)
 // Player's top level Navigation model
 Navigation* Player::getNavigation()
 {
-   return (nav != 0) ? (static_cast<Navigation*>(nav->object())) : 0;
+   return (nav != nullptr) ? (static_cast<Navigation*>(nav->object())) : nullptr;
 }
 
 // Player's top level Navigation (const version)
 const Navigation* Player::getNavigation() const
 {
-   return (nav != 0) ? (static_cast<Navigation*>(nav->object())) : 0;
+   return (nav != nullptr) ? (static_cast<Navigation*>(nav->object())) : nullptr;
 }
 
 // Name of the player's top level Navigation model
 const Basic::Identifier* Player::getNavigationName() const
 {
-   return (nav != 0) ? nav->slot() : 0;
+   return (nav != nullptr) ? nav->slot() : nullptr;
 }
 
 // Returns a Navigation model by its name
 Navigation* Player::getNavigationByName(const char* const name1)
 {
-   Navigation* p = 0;
-   if (nav != 0) {
+   Navigation* p = nullptr;
+   if (nav != nullptr) {
 
       // Is this a complex (xxx.yyy name)?
       // To check, copy the first name up to a possible period.
@@ -1342,7 +1341,7 @@ Navigation* Player::getNavigationByName(const char* const name1)
       fname[i] = '\0';
 
       // Now compare the first name with the name of the root system
-      Basic::Pair* pair = 0;
+      Basic::Pair* pair = nullptr;
       if ( *getNavigationName() == fname ) {
          // The first name matches our root name ...
          if (name[i] == '.') {
@@ -1361,7 +1360,7 @@ Navigation* Player::getNavigationByName(const char* const name1)
       }
 
       // Did we find a match?
-      if (pair != 0) {
+      if (pair != nullptr) {
          // Yes, now make sure it's the correct type!
          p = dynamic_cast<Navigation*>( pair->object() );
       }
@@ -1372,9 +1371,9 @@ Navigation* Player::getNavigationByName(const char* const name1)
 // Returns a Navigation model by its type
 Basic::Pair* Player::getNavigationByType(const std::type_info& type)
 {
-   Basic::Pair* p = 0;                // Our return value
+   Basic::Pair* p = nullptr;                 // Our return value
 
-   if (nav != 0) {
+   if (nav != nullptr) {
       Navigation* root = getNavigation();    // Root node of the list
       if (root->isClassType(type)) {
          // Our root is the correct type.
@@ -1396,26 +1395,26 @@ Basic::Pair* Player::getNavigationByType(const std::type_info& type)
 // Player's top level OnboardComputer model
 OnboardComputer* Player::getOnboardComputer()
 {
-   return (obc != 0) ? (static_cast<OnboardComputer*>(obc->object())) : 0;
+   return (obc != nullptr) ? (static_cast<OnboardComputer*>(obc->object())) : nullptr;
 }
 
 // Player's top level OnboardComputer (const version)
 const OnboardComputer* Player::getOnboardComputer() const
 {
-   return (obc != 0) ? (static_cast<OnboardComputer*>(obc->object())) : 0;
+   return (obc != nullptr) ? (static_cast<OnboardComputer*>(obc->object())) : nullptr;
 }
 
 // Name of the player's top level OnboardComputer model
 const Basic::Identifier* Player::getOnboardComputerName() const
 {
-   return (obc != 0) ? obc->slot() : 0;
+   return (obc != nullptr) ? obc->slot() : nullptr;
 }
 
 // Returns an OnboardComputer model by its name
 OnboardComputer* Player::getOnboardComputerByName(const char* const name1)
 {
-   OnboardComputer* p = 0;
-   if (obc != 0) {
+   OnboardComputer* p = nullptr;
+   if (obc != nullptr) {
 
       // Is this a complex (xxx.yyy name)?
       // To check, copy the first name up to a possible period.
@@ -1429,7 +1428,7 @@ OnboardComputer* Player::getOnboardComputerByName(const char* const name1)
       fname[i] = '\0';
 
       // Now compare the first name with the name of the root system
-      Basic::Pair* pair = 0;
+      Basic::Pair* pair = nullptr;
       if ( *getOnboardComputerName() == fname ) {
          // The first name matches our root name ...
          if (name[i] == '.') {
@@ -1448,7 +1447,7 @@ OnboardComputer* Player::getOnboardComputerByName(const char* const name1)
       }
 
       // Did we find a match?
-      if (pair != 0) {
+      if (pair != nullptr) {
          // Yes, now make sure it's the correct type!
          p = dynamic_cast<OnboardComputer*>( pair->object() );
       }
@@ -1459,9 +1458,9 @@ OnboardComputer* Player::getOnboardComputerByName(const char* const name1)
 // Returns an OnboardComputer model by its type
 Basic::Pair* Player::getOnboardComputerByType(const std::type_info& type)
 {
-   Basic::Pair* p = 0;                // Our return value
+   Basic::Pair* p = nullptr;                // Our return value
 
-   if (obc != 0) {
+   if (obc != nullptr) {
       OnboardComputer* root = getOnboardComputer();    // Root node of the list
       if (root->isClassType(type)) {
          // Our root is the correct type.
@@ -1483,26 +1482,26 @@ Basic::Pair* Player::getOnboardComputerByType(const std::type_info& type)
 // Player's top level Radio model
 Radio* Player::getRadio()
 {
-   return (radio != 0) ? (static_cast<Radio*>(radio->object())) : 0;
+   return (radio != nullptr) ? (static_cast<Radio*>(radio->object())) : nullptr;
 }
 
 // Player's top level Radio (const version)
 const Radio* Player::getRadio() const
 {
-   return (radio != 0) ? (static_cast<Radio*>(radio->object())) : 0;
+   return (radio != nullptr) ? (static_cast<Radio*>(radio->object())) : nullptr;
 }
 
 // Name of the player's top level Radio model
 const Basic::Identifier* Player::getRadioName() const
 {
-   return (radio != 0) ? radio->slot() : 0;
+   return (radio != nullptr) ? radio->slot() : nullptr;
 }
 
 // Returns a Radio model by its name
 Radio* Player::getRadioByName(const char* const name1)
 {
-   Radio* p = 0;
-   if (radio != 0) {
+   Radio* p = nullptr;
+   if (radio != nullptr) {
 
       // Is this a complex (xxx.yyy name)?
       // To check, copy the first name up to a possible period.
@@ -1535,7 +1534,7 @@ Radio* Player::getRadioByName(const char* const name1)
       }
 
       // Did we find a match?
-      if (pair != 0) {
+      if (pair != nullptr) {
          // Yes, now make sure it's the correct type!
          p = dynamic_cast<Radio*>( pair->object() );
       }
@@ -1546,9 +1545,9 @@ Radio* Player::getRadioByName(const char* const name1)
 // Returns a Radio model by its type
 Basic::Pair* Player::getRadioByType(const std::type_info& type)
 {
-   Basic::Pair* p = 0;                // Our return value
+   Basic::Pair* p = nullptr;                // Our return value
 
-   if (radio != 0) {
+   if (radio != nullptr) {
       Radio* root = getRadio();    // Root node of the list
       if (root->isClassType(type)) {
          // Our root is the correct type.
@@ -1570,26 +1569,26 @@ Basic::Pair* Player::getRadioByType(const std::type_info& type)
 // Player's top level R/F sensor model
 RfSensor* Player::getSensor()
 {
-   return (sensor != 0) ? (static_cast<RfSensor*>(sensor->object())) : 0;
+   return (sensor != nullptr) ? (static_cast<RfSensor*>(sensor->object())) : nullptr;
 }
 
 // Name of the player's top level R/F sensor model
 const RfSensor* Player::getSensor() const
 {
-   return (sensor != 0) ? (static_cast<RfSensor*>(sensor->object())) : 0;
+   return (sensor != nullptr) ? (static_cast<RfSensor*>(sensor->object())) : nullptr;
 }
 
 // Name of the player's top level R/F sensor model
 const Basic::Identifier* Player::getSensorName() const
 {
-   return (sensor != 0) ? sensor->slot() : 0;
+   return (sensor != nullptr) ? sensor->slot() : nullptr;
 }
 
 // Returns a R/F sensor model by its name
 RfSensor* Player::getSensorByName(const char* const name1)
 {
-   RfSensor* p = 0;
-   if (sensor != 0) {
+   RfSensor* p = nullptr;
+   if (sensor != nullptr) {
 
       // Is this a complex (xxx.yyy name)?
       // To check, copy the first name up to a possible period.
@@ -1603,7 +1602,7 @@ RfSensor* Player::getSensorByName(const char* const name1)
       fname[i] = '\0';
 
       // Now compare the first name with the name of our top level system
-      Basic::Pair* pair = 0;
+      Basic::Pair* pair = nullptr;
       if ( *getSensorName() == fname ) {
          // The first name matches our top level system name ...
          if (name[i] == '.') {
@@ -1622,7 +1621,7 @@ RfSensor* Player::getSensorByName(const char* const name1)
       }
 
       // Did we find a match?
-      if (pair != 0) {
+      if (pair != nullptr) {
          // Yes, now make sure it's the correct type!
          p = dynamic_cast<RfSensor*>( pair->object() );
       }
@@ -1633,9 +1632,9 @@ RfSensor* Player::getSensorByName(const char* const name1)
 // Returns a R/F sensor model by its type
 Basic::Pair* Player::getSensorByType(const std::type_info& type)
 {
-   Basic::Pair* p = 0;                // Our return value
+   Basic::Pair* p = nullptr;                // Our return value
 
-   if (sensor != 0) {
+   if (sensor != nullptr) {
       RfSensor* root = getSensor();   // Root node of the list
       if (root->isClassType(type)) {
          // Our root sensor is the correct type.
@@ -1657,26 +1656,26 @@ Basic::Pair* Player::getSensorByType(const std::type_info& type)
 // Player's top level IR sensor model
 IrSystem* Player::getIrSystem()
 {
-   return (irSystem != 0) ? (static_cast<IrSystem*>(irSystem->object())) : 0;
+   return (irSystem != nullptr) ? (static_cast<IrSystem*>(irSystem->object())) : nullptr;
 }
 
 // Name of the player's top level IR sensor model
 const IrSystem* Player::getIrSystem() const
 {
-   return (irSystem != 0) ? (static_cast<IrSystem*>(irSystem->object())) : 0;
+   return (irSystem != nullptr) ? (static_cast<IrSystem*>(irSystem->object())) : nullptr;
 }
 
 // Name of the player's top level IR sensor model
 const Basic::Identifier* Player::getIrSystemName() const
 {
-   return (irSystem != 0) ? irSystem->slot() : 0;
+   return (irSystem != nullptr) ? irSystem->slot() : nullptr;
 }
 
 // Returns a IR sensor model by its name
 IrSystem* Player::getIrSystemByName(const char* const name1)
 {
-   IrSystem* p = 0;
-   if (irSystem != 0) {
+   IrSystem* p = nullptr;
+   if (irSystem != nullptr) {
 
       // Is this a complex (xxx.yyy name)?
       // To check, copy the first name up to a possible period.
@@ -1690,7 +1689,7 @@ IrSystem* Player::getIrSystemByName(const char* const name1)
       fname[i] = '\0';
 
       // Now compare the first name with the name of our top level system
-      Basic::Pair* pair = 0;
+      Basic::Pair* pair = nullptr;
       if ( *getIrSystemName() == fname ) {
          // The first name matches our top level system name ...
          if (name[i] == '.') {
@@ -1709,7 +1708,7 @@ IrSystem* Player::getIrSystemByName(const char* const name1)
       }
 
       // Did we find a match?
-      if (pair != 0) {
+      if (pair != nullptr) {
          // Yes, now make sure it's the correct type!
          p = dynamic_cast<IrSystem*>( pair->object() );
       }
@@ -1720,9 +1719,9 @@ IrSystem* Player::getIrSystemByName(const char* const name1)
 // Returns a IR sensor model by its type
 Basic::Pair* Player::getIrSystemByType(const std::type_info& type)
 {
-   Basic::Pair* p = 0;                // Our return value
+   Basic::Pair* p = nullptr;                // Our return value
 
-   if (irSystem != 0) {
+   if (irSystem != nullptr) {
       IrSystem* root = getIrSystem();   // Root node of the list
       if (root->isClassType(type)) {
          // Our root sensor is the correct type.
@@ -1744,12 +1743,12 @@ Basic::Pair* Player::getIrSystemByType(const std::type_info& type)
 // Sets player's type string ("F-16A", "Tank", "SA-6", etc)
 bool Player::setType(const Basic::String* const msg)
 {
-   if (msg != 0) {
+   if (msg != nullptr) {
       Basic::String* p = msg->clone();
       type.set(p, false);
    }
    else {
-      type = 0;
+      type = nullptr;
    }
    return true;
 }
@@ -1835,8 +1834,8 @@ void Player::resetJustKilled()
 bool Player::setDamage(const LCreal v)
 {
    LCreal x = v;
-   if (x < 0) x = 0.0f;
-   if (x > 1) x = 1.0f;
+   if (x < 0) x = 0.0;
+   if (x > 1) x = 1.0;
    damage = x;
    return true;
 }
@@ -1845,8 +1844,8 @@ bool Player::setDamage(const LCreal v)
 bool Player::setSmoke(const LCreal v)
 {
    LCreal x = v;
-   if (x < 0) x = 0.0f;
-   if (x > 1) x = 1.0f;
+   if (x < 0) x = 0.0;
+   if (x > 1) x = 1.0;
    smoking = x;
    return true;
 }
@@ -1855,8 +1854,8 @@ bool Player::setSmoke(const LCreal v)
 bool Player::setFlames(const LCreal v)
 {
    LCreal x = v;
-   if (x < 0) x = 0.0f;
-   if (x > 1) x = 1.0f;
+   if (x < 0) x = 0.0;
+   if (x > 1) x = 1.0;
    flames = x;
    return true;
 }
@@ -1892,7 +1891,7 @@ bool Player::setAttitudeFreeze(const bool f)
 // Enable/Disable heading hold
 bool Player::setHeadingHoldOn(const bool b)
 {
-   if (getDynamicsModel() != 0)
+   if (getDynamicsModel() != nullptr)
       return getDynamicsModel()->setHeadingHoldOn(b);
    else
       return false;
@@ -1907,7 +1906,7 @@ bool Player::setCommandedHeading(const double h)
 // Sets commanded (true) heading (true: degs)
 bool Player::setCommandedHeadingD(const double h)
 {
-   if (getDynamicsModel() != 0)
+   if (getDynamicsModel() != nullptr)
       return getDynamicsModel()->setCommandedHeadingD(h);
    else
       return false;
@@ -1922,7 +1921,7 @@ bool Player::setCommandedHeadingR(const double h)
 // Enable/Disable velocity hold
 bool Player::setVelocityHoldOn(const bool b)
 {
-   if (getDynamicsModel() != 0)
+   if (getDynamicsModel() != nullptr)
       return getDynamicsModel()->setVelocityHoldOn(b);
    else
       return false;
@@ -1931,7 +1930,7 @@ bool Player::setVelocityHoldOn(const bool b)
 // Sets the commanded (true) velocity (knots)
 bool Player::setCommandedVelocityKts(const double a)
 {
-   if (getDynamicsModel() != 0)
+   if (getDynamicsModel() != nullptr)
       return getDynamicsModel()->setCommandedVelocityKts(a);
    else
       return false;
@@ -1940,7 +1939,7 @@ bool Player::setCommandedVelocityKts(const double a)
 // Enable/Disable altitude hold
 bool Player::setAltitudeHoldOn(const bool b)
 {
-   if (getDynamicsModel() != 0)
+   if (getDynamicsModel() != nullptr)
       return getDynamicsModel()->setAltitudeHoldOn(b);
    else
       return false;
@@ -1949,7 +1948,7 @@ bool Player::setAltitudeHoldOn(const bool b)
 // Sets commanded (HAE) altitude, default (meters)
 bool Player::setCommandedAltitude(const double a)
 {
-   if (getDynamicsModel() != 0)
+   if (getDynamicsModel() != nullptr)
       return getDynamicsModel()->setCommandedAltitude(a);
    else
       return false;
@@ -1970,13 +1969,13 @@ bool Player::setCommandedAltitudeFt(const double a)
 // Sets a pointer to the Network Interface Block (NIB)
 bool Player::setNib(Nib* const n)
 {
-   if (nib != 0) nib->unref();
+   if (nib != nullptr) nib->unref();
    nib = n;
-   if (nib != 0) {
+   if (nib != nullptr) {
       // Ref() the new NIB and get the network ID
       nib->ref();
       NetIO* netIO = nib->getNetIO();
-      if (netIO != 0) netID = netIO->getNetworkID();
+      if (netIO != nullptr) netID = netIO->getNetworkID();
    }
    else {
       netID = 0;
@@ -1995,11 +1994,11 @@ bool Player::setEnableNetOutput(const bool x)
 bool Player::setOutgoingNib(Nib* const p, const unsigned int id)
 {
    bool ok = false;
-   if (nibList != 0 && id >= 1 && id <= NetIO::MAX_NETWORD_ID) {
+   if (nibList != nullptr && id >= 1 && id <= NetIO::MAX_NETWORD_ID) {
       unsigned int idx = id - 1;
-      if (nibList[idx] != 0) nibList[idx]->unref();
+      if (nibList[idx] != nullptr) nibList[idx]->unref();
       nibList[idx] = p;
-      if (nibList[idx] != 0) nibList[idx]->ref();
+      if (nibList[idx] != nullptr) nibList[idx]->ref();
    }
    return ok;
 }
@@ -2080,11 +2079,11 @@ bool Player::setPosition(const double n, const double e, const double d, const b
    posVecValid = (maxRefRange <= 0.0) || (posVecNED.length2() <= (maxRefRange*maxRefRange));
 
    // Compute & set the lat/lon/alt position
-   double refLat = s->getRefLatitude();
-   double refLon = s->getRefLongitude();
-   double cosRlat = s->getCosRefLat();
+   const double refLat = s->getRefLatitude();
+   const double refLon = s->getRefLongitude();
+   const double cosRlat = s->getCosRefLat();
    if (s->isGamingAreaUsingEarthModel()) {
-      double sinRlat = s->getSinRefLat();
+      const double sinRlat = s->getSinRefLat();
       Basic::Nav::convertPosVec2llE(refLat, refLon, sinRlat, cosRlat, posVecNED, &latitude, &longitude, &altitude, em);
    }
    else {
@@ -2146,11 +2145,11 @@ bool Player::setPositionLLA(const double lat, const double lon, const double alt
    rmW2B = rm * wm;
 
    // Compute and set the position vector relative to sim ref pt
-   double refLat = s->getRefLatitude();
-   double refLon = s->getRefLongitude();
-   double cosRlat = s->getCosRefLat();
+   const double refLat = s->getRefLatitude();
+   const double refLon = s->getRefLongitude();
+   const double cosRlat = s->getCosRefLat();
    if (s->isGamingAreaUsingEarthModel()) {
-      double sinRlat = s->getSinRefLat();
+      const double sinRlat = s->getSinRefLat();
       Basic::Nav::convertLL2PosVecE(refLat, refLon, sinRlat, cosRlat, lat, lon, alt, &posVecNED, em);
    }
    else {
@@ -2199,11 +2198,11 @@ bool Player::setGeocPosition(const osg::Vec3d& pos, const bool slaved)
    rmW2B = rm * wm;
 
    // Compute and set the position vector relative to sim ref pt
-   double refLat = s->getRefLatitude();
-   double refLon = s->getRefLongitude();
-   double cosRlat = s->getCosRefLat();
+   const double refLat = s->getRefLatitude();
+   const double refLon = s->getRefLongitude();
+   const double cosRlat = s->getCosRefLat();
    if (s->isGamingAreaUsingEarthModel()) {
-      double sinRlat = s->getSinRefLat();
+      const double sinRlat = s->getSinRefLat();
       Basic::Nav::convertLL2PosVecE(refLat, refLon, sinRlat, cosRlat, latitude, longitude, altitude, &posVecNED, em);
    }
    else {
@@ -2391,7 +2390,6 @@ bool Player::setAcceleration(const osg::Vec3& newAccel)
    return true;
 }
 
-
 // Sets body velocities: (m/s) [ ua -> fwd(+), va -> right(+), wa -> down(+) ]
 bool Player::setVelocityBody(const LCreal ua, const LCreal va, const LCreal wa)
 {
@@ -2400,9 +2398,9 @@ bool Player::setVelocityBody(const LCreal ua, const LCreal va, const LCreal wa)
    velVecECEF = velVecNED * wm;   // compute geocentric velocity vector
 
    // Compute other velocities
-   LCreal ue = static_cast<LCreal>(velVecNED[INORTH]);
-   LCreal ve = static_cast<LCreal>(velVecNED[IEAST]);
-   LCreal we = static_cast<LCreal>(velVecNED[IDOWN]);
+   const LCreal ue = static_cast<LCreal>(velVecNED[INORTH]);
+   const LCreal ve = static_cast<LCreal>(velVecNED[IEAST]);
+   const LCreal we = static_cast<LCreal>(velVecNED[IDOWN]);
    vp = lcSqrt(ue*ue + ve*ve + we*we); // Total
    gndSpd = lcSqrt(ue*ue + ve*ve);     // Ground speed
    gndTrk = lcAtan2(ve,ue);            // Ground track
@@ -2439,9 +2437,9 @@ bool Player::setGeocVelocity(const LCreal vx, const LCreal vy, const LCreal vz)
    velVecBody = rm * velVecNED;
 
    // Compute other velocities
-   LCreal ue = static_cast<LCreal>(velVecNED[INORTH]);
-   LCreal ve = static_cast<LCreal>(velVecNED[IEAST]);
-   LCreal we = static_cast<LCreal>(velVecNED[IDOWN]);
+   const LCreal ue = static_cast<LCreal>(velVecNED[INORTH]);
+   const LCreal ve = static_cast<LCreal>(velVecNED[IEAST]);
+   const LCreal we = static_cast<LCreal>(velVecNED[IDOWN]);
    vp = lcSqrt(ue*ue + ve*ve + we*we); // Total
    gndSpd = lcSqrt(ue*ue + ve*ve);     // Ground speed
    gndTrk = lcAtan2(ve,ue);            // Ground track
@@ -2529,7 +2527,7 @@ bool Player::setInitAltitude(const double alt)
 //------------------------------------------------------------------------------
 void Player::setControlStickRollInput(const LCreal value)
 {
-   if (getDynamicsModel() != 0) {
+   if (getDynamicsModel() != nullptr) {
       getDynamicsModel()->setControlStickRollInput(value);
    }
 }
@@ -2540,7 +2538,7 @@ void Player::setControlStickRollInput(const LCreal value)
 //------------------------------------------------------------------------------
 void Player::setControlStickPitchInput(const LCreal value)
 {
-   if (getDynamicsModel() != 0) {
+   if (getDynamicsModel() != nullptr) {
       getDynamicsModel()->setControlStickPitchInput(value);
    }
 }
@@ -2559,8 +2557,8 @@ void Player::setControlStickPitchInput(const LCreal value)
 //------------------------------------------------------------------------------
 int Player::setThrottles(const LCreal* const data, const int num)
 {
-   int  n = 0;
-   if (getDynamicsModel() != 0) {
+   int n = 0;
+   if (getDynamicsModel() != nullptr) {
       n = getDynamicsModel()->setThrottles(data, num);
    }
    return n;
@@ -2574,10 +2572,10 @@ void Player::processDetonation(const LCreal detRange, Weapon* const wpn)
    if (!isKillOverride()) {
 
       // Weapon, launcher & range info
-      Player* launcher = 0;
+      Player* launcher = nullptr;
       LCreal rng = detRange;
-      LCreal blastRange  = 500.0f;    // burst range (meters)
-      LCreal lethalRange =  50.0f;    // lethal range  (meters)
+      LCreal blastRange  = 500.0;    // burst range (meters)
+      LCreal lethalRange =  50.0;    // lethal range  (meters)
       if (wpn != 0) {
          launcher = wpn->getLaunchVehicle();
          blastRange = wpn->getMaxBurstRng();
@@ -2598,11 +2596,11 @@ void Player::processDetonation(const LCreal detRange, Weapon* const wpn)
       else if (rng <= blastRange) {
          // use distance to compute amount of damage
          LCreal damageRng = blastRange - lethalRange;
-         if (damageRng <= 1.0f) damageRng = 1.0f;
-         LCreal newDamage = 1.0f - ( (rng - lethalRange) / damageRng );
+         if (damageRng <= 1.0) damageRng = 1.0;
+         LCreal newDamage = 1.0 - ( (rng - lethalRange) / damageRng );
          setDamage(newDamage + getDamage());
-         setFlames( getDamage() - 0.25f );
-         setSmoke( getDamage() + 0.25f );
+         setFlames( getDamage() - 0.25 );
+         setSmoke( getDamage() + 0.25 );
          if ( isDestroyed() ) {
             event(KILL_EVENT, launcher);
          }
@@ -2616,7 +2614,7 @@ void Player::processDetonation(const LCreal detRange, Weapon* const wpn)
       SAMPLE_2_OBJECTS( this, wpn )
    END_RECORD_DATA_SAMPLE()
 
-   if (getAnyEventLogger() != 0) {  // EventLogger Deprecated
+   if (getAnyEventLogger() != nullptr) {  // EventLogger Deprecated
       TabLogger::TabLogEvent* evt = new TabLogger::LogPlayerData(4, this, wpn); // type 4: damage state
       getAnyEventLogger()->log(evt);
       evt->unref();
@@ -2635,20 +2633,20 @@ bool Player::killedNotification(Player* const p)
       // Let all of our subcomponents know that we were just killed
       {
          Basic::PairStream* subcomponents = getComponents();
-         if (subcomponents != 0) {
-            for (Basic::List::Item* item = subcomponents->getFirstItem(); item != 0; item = item->getNext()) {
+         if (subcomponents != nullptr) {
+            for (Basic::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
                Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
                Basic::Component* sc = static_cast<Basic::Component*>(pair->object());
                sc->event(KILL_EVENT, p);
             }
             subcomponents->unref();
-            subcomponents = 0;
+            subcomponents = nullptr;
          }
       }
 
-      setDamage(1.0f);
-      setSmoke(1.0f);
-      setFlames(1.0f);
+      setDamage(1.0);
+      setSmoke(1.0);
+      setFlames(1.0);
 
       // Set our status
       if (killRemoval && isLocalPlayer()) {
@@ -2656,8 +2654,8 @@ bool Player::killedNotification(Player* const p)
          justKilled = true;
          setMode(KILLED);
 
-         if (p != 0) killedBy = p->getID();
-         else  killedBy = 0;
+         if (p != nullptr) killedBy = p->getID();
+         else killedBy = 0;
       }
 
    }
@@ -2668,7 +2666,7 @@ bool Player::killedNotification(Player* const p)
    END_RECORD_DATA_SAMPLE()
 
    // TabLogger is deprecated
-   if (getAnyEventLogger() != 0) {  // EventLogger Deprecated
+   if (getAnyEventLogger() != nullptr) {  // EventLogger Deprecated
       TabLogger::TabLogEvent* evt = new TabLogger::LogPlayerData(7, this, p); // type 7: kill
       getAnyEventLogger()->log(evt);
       evt->unref();
@@ -2688,21 +2686,21 @@ bool Player::collisionNotification(Player* const p)
       // Let all of our subcomponents know that we were just killed
       {
          Basic::PairStream* subcomponents = getComponents();
-         if (subcomponents != 0) {
-            for (Basic::List::Item* item = subcomponents->getFirstItem(); item != 0; item = item->getNext()) {
+         if (subcomponents != nullptr) {
+            for (Basic::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
                Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
                Basic::Component* sc = static_cast<Basic::Component*>(pair->object());
                sc->event(KILL_EVENT, p);
             }
             subcomponents->unref();
-            subcomponents = 0;
+            subcomponents = nullptr;
          }
       }
 
       // Set our status
       justKilled = true;
-      if (p != 0) killedBy = p->getID();
-      else  killedBy = 0;
+      if (p != nullptr) killedBy = p->getID();
+      else killedBy = 0;
       setMode(CRASHED);
    }
 
@@ -2713,7 +2711,7 @@ bool Player::collisionNotification(Player* const p)
    END_RECORD_DATA_SAMPLE()
 
    // TabLogger is deprecated
-   if (getAnyEventLogger() != 0) {  // EventLogger Deprecated
+   if (getAnyEventLogger() != nullptr) {  // EventLogger Deprecated
       TabLogger::TabLogEvent* evt = new TabLogger::LogPlayerData(5, this, p); // type 5: collision
       getAnyEventLogger()->log(evt);
       evt->unref();
@@ -2734,14 +2732,14 @@ bool Player::crashNotification()
       // Let all of our subcomponents know that we were just killed
       {
          Basic::PairStream* subcomponents = getComponents();
-         if (subcomponents != 0) {
-            for (Basic::List::Item* item = subcomponents->getFirstItem(); item != 0; item = item->getNext()) {
+         if (subcomponents != nullptr) {
+            for (Basic::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
                Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
                Basic::Component* sc = static_cast<Basic::Component*>(pair->object());
                sc->event(KILL_EVENT);
             }
             subcomponents->unref();
-            subcomponents = 0;
+            subcomponents = nullptr;
          }
       }
 
@@ -2758,7 +2756,7 @@ bool Player::crashNotification()
    END_RECORD_DATA_SAMPLE()
 
    // TabLogger is deprecated
-   if (getAnyEventLogger() != 0) {  // EventLogger Deprecated
+   if (getAnyEventLogger() != nullptr) {  // EventLogger Deprecated
       TabLogger::TabLogEvent* evt = new TabLogger::LogPlayerData(6, this); // type 6: crash
       getAnyEventLogger()->log(evt);
       evt->unref();
@@ -2775,7 +2773,7 @@ bool Player::onWpnRelEvent(const Basic::Boolean* const sw)
    bool used = false;
 
    StoresMgr* p = getStoresManagement();
-   if (p != 0) {
+   if (p != nullptr) {
       // When we have an SMS, let it handle this event ...
       used = p->onWpnRelEvent(sw);
    }
@@ -2797,7 +2795,7 @@ bool Player::onTriggerSwEvent(const Basic::Boolean* const sw)
 {
    bool used = false;
 
-   if (sms != 0) {
+   if (sms != nullptr) {
       // When we have an SMS, let it handle this event ...
       used = getStoresManagement()->onTriggerSwEvent(sw);
    }
@@ -2814,7 +2812,7 @@ bool Player::onTriggerSwEvent(const Basic::Boolean* const sw)
 //------------------------------------------------------------------------------
 bool Player::onTgtStepEvent()
 {
-   if (obc != 0) {
+   if (obc != nullptr) {
       getOnboardComputer()->updateShootList(true);
    }
    return true;
@@ -2858,9 +2856,9 @@ bool Player::onRfEmissionEventPlayer(Emission* const em)
    // 3) Compute the azimuth and elevation angles of incidence (AOI)
    {
       // 3-a) Get the aoi vector values & compute range squared
-      LCreal xa = aoi.x();
-      LCreal ya = aoi.y();
-      LCreal za = -aoi.z();
+      const LCreal xa = aoi.x();
+      const LCreal ya = aoi.y();
+      const LCreal za = -aoi.z();
 
       // 3-b) Compute azimuth: az = atan2(ya, xa)
       LCreal aazr = lcAtan2(ya, xa);
@@ -2875,7 +2873,7 @@ bool Player::onRfEmissionEventPlayer(Emission* const em)
    // 4) Compute and return the RCS
    if (em->isReturnRequested()) {
 
-      if (signature != 0) {
+      if (signature != nullptr) {
          LCreal rcs = signature->getRCS(em);
          em->setRCS(rcs);
       }
@@ -2888,7 +2886,7 @@ bool Player::onRfEmissionEventPlayer(Emission* const em)
    // 6) Pass the emission to our antennas
    {
       Gimbal* g = getGimbal();
-      if (g != 0 && g->getPowerSwitch() != System::PWR_OFF) {
+      if (g != nullptr && g->getPowerSwitch() != System::PWR_OFF) {
          g->event(RF_EMISSION,em);
       }
    }
@@ -2897,7 +2895,7 @@ bool Player::onRfEmissionEventPlayer(Emission* const em)
    //    (we're doing do calculations here, this is only meaningful to
    //     the receiving player)
    for (unsigned int i = 0; i < MAX_RF_REFLECTIONS; i++) {
-      if (rfReflect[i] != 0) rfReflect[i]->event(RF_REFLECTED_EMISSION,em);
+      if (rfReflect[i] != nullptr) rfReflect[i]->event(RF_REFLECTED_EMISSION,em);
    }
 
    return true;
@@ -2927,10 +2925,10 @@ bool Player::onReflectionsRequest(Basic::Component* const p)
    for (unsigned int i = 0; i < MAX_RF_REFLECTIONS && !ok; i++) {
       if (rfReflect[i] == p) {
          // Old request -- reset the timer
-         rfReflectTimer[i] = 1.1f;
+         rfReflectTimer[i] = 1.1;
          ok = true;
       }
-      else if (rfReflect[i] == 0) {
+      else if (rfReflect[i] == nullptr) {
          idx = i;
       }
    }
@@ -2939,7 +2937,7 @@ bool Player::onReflectionsRequest(Basic::Component* const p)
    if (!ok && idx >= 0) {
       p->ref();
       rfReflect[idx] = p;
-      rfReflectTimer[idx] = 1.1f;
+      rfReflectTimer[idx] = 1.1;
       ok = true;
    }
 
@@ -2959,7 +2957,7 @@ bool Player::onReflectionsCancel(const Basic::Component* const p)
       if (rfReflect[i] == p) {
          // Clear the request
          rfReflect[i]->unref();
-         rfReflect[i] = 0;
+         rfReflect[i] = nullptr;
          ok = true;
       }
    }
@@ -3004,9 +3002,9 @@ bool Player::onIrMsgEventPlayer(IrQueryMsg* const msg)
    // 3) Compute the azimuth and elevation angles of incidence (AOI)
 
    // 3-a) Get the aoi vector values & compute range squared
-   LCreal xa = aoi.x();
-   LCreal ya = aoi.y();
-   LCreal za = -aoi.z();
+   const LCreal xa = aoi.x();
+   const LCreal ya = aoi.y();
+   const LCreal za = -aoi.z();
 
    // 3-b) Compute azimuth: az = atan2(ya, xa)
    LCreal aazr = lcAtan2(ya, xa);
@@ -3030,7 +3028,7 @@ bool Player::onIrMsgEventPlayer(IrQueryMsg* const msg)
 bool Player::onDatalinkMessageEventPlayer(Basic::Object* const msg)
 {
    // Just pass it down to all of our datalink system
-   if (getDatalink() != 0) {
+   if (getDatalink() != nullptr) {
       getDatalink()->event(DATALINK_MESSAGE,msg);
    }
    return true;
@@ -3052,7 +3050,7 @@ void Player::dynamics(const LCreal dt)
    // ---
    if (isLocalPlayer()) {
       // Update the external dynamics model (if any)
-      if (getDynamicsModel() != 0) {
+      if (getDynamicsModel() != nullptr) {
          // If we have a dynamics model ...
          getDynamicsModel()->freeze( isFrozen() );
          getDynamicsModel()->dynamics(dt);
@@ -3060,8 +3058,8 @@ void Player::dynamics(const LCreal dt)
 
       // Update our position
       positionUpdate(dt);
-      
-      if(getNib() != 0 || true) {
+
+      if(getNib() != nullptr || true) {
          if(!syncState1Ready) {
             syncState1.setGeocPosition(getGeocPosition());
             syncState1.setGeocVelocity(getGeocVelocity());
@@ -3215,7 +3213,7 @@ void Player::positionUpdate(const LCreal dt)
             double clat = std::cos(latitude * Basic::Angle::D2RCC);
 
             const Basic::EarthModel* em = getSimulation()->getEarthModel();
-            if (em == 0) em = &Basic::EarthModel::wgs84;
+            if (em == nullptr) em = &Basic::EarthModel::wgs84;
 
             const double a  = em->getA();   // semi-major axis (meters)
             const double e2 = em->getE2();  // eccentricity squared
@@ -3374,7 +3372,7 @@ void Player::deadReckonPosition(const LCreal dt)
 {
    if ( !isNetworkedPlayer() ) return;
 
-   if (getNib() != 0) {
+   if (getNib() != nullptr) {
       nib->ref();
 
       // Dead reckon our position and orientation
@@ -3386,21 +3384,21 @@ void Player::deadReckonPosition(const LCreal dt)
          //std::cout << drPos[1] << ", ";
          //std::cout << drPos[2] << ") ";
          //std::cout << std::endl;
-   
+
       // Ground clamping enabled?
       bool gcEnabled = tElevValid && isMajorType(GROUND_VEHICLE | SHIP | BUILDING | LIFE_FORM);
-   
+
       if (!gcEnabled) {
          // Not ground clamping then set the DR position
          setGeocPosition( drPos );
       }
-   
+
       else {
          // Ground clamping!
-   
+
          // 1) Compute the ground clamped altitude
          double alt = tElev + tOffset;
-   
+
          // 2) Compute the geodetic lat/lon position
          const Basic::EarthModel* em = getSimulation()->getEarthModel();
          double ecef[3] = { drPos[0], drPos[1], drPos[2] };
@@ -3408,14 +3406,14 @@ void Player::deadReckonPosition(const LCreal dt)
          Basic::Nav::convertEcef2Geod(ecef, lla, em);
          double lat = lla[Basic::Nav::ILAT];
          double lon = lla[Basic::Nav::ILON];
-   
+
          // 3) Set position using these ground clamped coordinates
          setPositionLLA(lat, lon, alt);
       }
-   
+
       // Set the DR orientation
       setGeocEulerAngles( drAngles );
-   
+
       // Linear velocity and acceleration, as well as angular velocity, are set
       // using the initial (T=0) dead-reckoning values
       setGeocVelocity( nib->getDrVelocity() );
@@ -3489,9 +3487,9 @@ void Player::updateElevation()
    // Only if isTerrainElevationRequired() is false, otherwise the terrain
    // elevation is from the OTW system.
    const Simulation* s = getSimulation();
-   if (s != 0 && !isTerrainElevationRequired()) {
+   if (s != nullptr && !isTerrainElevationRequired()) {
       const Basic::Terrain* terrain = s->getTerrain();
-      if (terrain != 0) {
+      if (terrain != nullptr) {
          LCreal el = 0;
          terrain->getElevation(&el, getLatitude(), getLongitude(), isDtedTerrainInterpolationEnabled());
          setTerrainElevation(el);
@@ -3514,13 +3512,13 @@ void Player::printTimingStats()
 bool Player::setDynamicsModel(Basic::Pair* const sys)
 {
    bool ok = false;
-   if (sys == 0) {
-      if (dyn != 0) dyn->unref();
-      dyn = 0;
+   if (sys == nullptr) {
+      if (dyn != nullptr) dyn->unref();
+      dyn = nullptr;
       ok = true;
    }
    else if ( sys->object()->isClassType(typeid(DynamicsModel)) ) {
-      if (dyn != 0) dyn->unref();
+      if (dyn != nullptr) dyn->unref();
       dyn = sys;
       dyn->ref();
       ok = true;
@@ -3534,13 +3532,13 @@ bool Player::setDynamicsModel(Basic::Pair* const sys)
 bool Player::setDatalink(Basic::Pair* const sys)
 {
    bool ok = false;
-   if (sys == 0) {
-      if (datalink != 0) datalink->unref();
-      datalink = 0;
+   if (sys == nullptr) {
+      if (datalink != nullptr) datalink->unref();
+      datalink = nullptr;
       ok = true;
    }
    else if ( sys->object()->isClassType(typeid(Datalink)) ) {
-      if (datalink != 0) datalink->unref();
+      if (datalink != nullptr) datalink->unref();
       datalink = sys;
       datalink->ref();
       ok = true;
@@ -3554,13 +3552,13 @@ bool Player::setDatalink(Basic::Pair* const sys)
 bool Player::setGimbal(Basic::Pair* const sys)
 {
    bool ok = false;
-   if (sys == 0) {
-      if (gimbal != 0) gimbal->unref();
-      gimbal = 0;
+   if (sys == nullptr) {
+      if (gimbal != nullptr) gimbal->unref();
+      gimbal = nullptr;
       ok = true;
    }
    else if ( sys->object()->isClassType(typeid(Gimbal)) ) {
-      if (gimbal != 0) gimbal->unref();
+      if (gimbal != nullptr) gimbal->unref();
       gimbal = sys;
       gimbal->ref();
       ok = true;
@@ -3574,13 +3572,13 @@ bool Player::setGimbal(Basic::Pair* const sys)
 bool Player::setNavigation(Basic::Pair* const sys)
 {
    bool ok = false;
-   if (sys == 0) {
-      if (nav != 0) nav->unref();
-      nav = 0;
+   if (sys == nullptr) {
+      if (nav != nullptr) nav->unref();
+      nav = nullptr;
       ok = true;
    }
    else if ( sys->object()->isClassType(typeid(Navigation)) ) {
-      if (nav != 0) nav->unref();
+      if (nav != nullptr) nav->unref();
       nav = sys;
       nav->ref();
       ok = true;
@@ -3594,13 +3592,13 @@ bool Player::setNavigation(Basic::Pair* const sys)
 bool Player::setOnboardComputer(Basic::Pair* const sys)
 {
    bool ok = false;
-   if (sys == 0) {
-      if (obc != 0) obc->unref();
-      obc = 0;
+   if (sys == nullptr) {
+      if (obc != nullptr) obc->unref();
+      obc = nullptr;
       ok = true;
    }
    else if ( sys->object()->isClassType(typeid(OnboardComputer)) ) {
-      if (obc != 0) obc->unref();
+      if (obc != nullptr) obc->unref();
       obc = sys;
       obc->ref();
       ok = true;
@@ -3614,13 +3612,13 @@ bool Player::setOnboardComputer(Basic::Pair* const sys)
 bool Player::setPilot(Basic::Pair* const sys)
 {
    bool ok = false;
-   if (sys == 0) {
-      if (pilot != 0) pilot->unref();
-      pilot = 0;
+   if (sys == nullptr) {
+      if (pilot != nullptr) pilot->unref();
+      pilot = nullptr;
       ok = true;
    }
    else if ( sys->object()->isClassType(typeid(Pilot)) ) {
-      if (pilot != 0) pilot->unref();
+      if (pilot != nullptr) pilot->unref();
       pilot = sys;
       pilot->ref();
       ok = true;
@@ -3634,13 +3632,13 @@ bool Player::setPilot(Basic::Pair* const sys)
 bool Player::setRadio(Basic::Pair* const sys)
 {
    bool ok = false;
-   if (sys == 0) {
-      if (radio != 0) radio->unref();
-      radio = 0;
+   if (sys == nullptr) {
+      if (radio != nullptr) radio->unref();
+      radio = nullptr;
       ok = true;
    }
    else if ( sys->object()->isClassType(typeid(Radio)) ) {
-      if (radio != 0) radio->unref();
+      if (radio != nullptr) radio->unref();
       radio = sys;
       radio->ref();
       ok = true;
@@ -3654,13 +3652,13 @@ bool Player::setRadio(Basic::Pair* const sys)
 bool Player::setSensor(Basic::Pair* const sys)
 {
    bool ok = false;
-   if (sys == 0) {
-      if (sensor != 0) sensor->unref();
-      sensor = 0;
+   if (sys == nullptr) {
+      if (sensor != nullptr) sensor->unref();
+      sensor = nullptr;
       ok = true;
    }
    else if ( sys->object()->isClassType(typeid(RfSensor)) ) {
-      if (sensor != 0) sensor->unref();
+      if (sensor != nullptr) sensor->unref();
       sensor = sys;
       sensor->ref();
       ok = true;
@@ -3674,13 +3672,13 @@ bool Player::setSensor(Basic::Pair* const sys)
 bool Player::setIrSystem(Basic::Pair* const sys)
 {
    bool ok = false;
-   if (sys == 0) {
-      if (irSystem != 0) irSystem->unref();
-      irSystem = 0;
+   if (sys == nullptr) {
+      if (irSystem != nullptr) irSystem->unref();
+      irSystem = nullptr;
       ok = true;
    }
    else if ( sys->object()->isClassType(typeid(IrSystem)) ) {
-      if (irSystem != 0) irSystem->unref();
+      if (irSystem != nullptr) irSystem->unref();
       irSystem = sys;
       irSystem->ref();
       ok = true;
@@ -3694,13 +3692,13 @@ bool Player::setIrSystem(Basic::Pair* const sys)
 bool Player::setStoresMgr(Basic::Pair* const sys)
 {
    bool ok = false;
-   if (sys == 0) {
-      if (sms != 0) sms->unref();
-      sms = 0;
+   if (sys == nullptr) {
+      if (sms != nullptr) sms->unref();
+      sms = nullptr;
       ok = true;
    }
    else if ( sys->object()->isClassType(typeid(StoresMgr)) ) {
-      if (sms != 0) sms->unref();
+      if (sms != nullptr) sms->unref();
       sms = sys;
       sms->ref();
       ok = true;
@@ -3716,7 +3714,7 @@ bool Player::setStoresMgr(Basic::Pair* const sys)
 bool Player::setSlotInitXPos(const Basic::Distance* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       osg::Vec2d pos = getInitPosition();
       pos[INORTH] = Basic::Meters::convertStatic(*msg);
       ok = setInitPosition(pos);
@@ -3728,7 +3726,7 @@ bool Player::setSlotInitXPos(const Basic::Distance* const msg)
 bool Player::setSlotInitXPos(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       osg::Vec2d pos = getInitPosition();
       pos[INORTH] = msg->getReal();
       ok = setInitPosition(pos);
@@ -3740,7 +3738,7 @@ bool Player::setSlotInitXPos(const Basic::Number* const msg)
 bool Player::setSlotInitYPos(const Basic::Distance* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       osg::Vec2d pos = getInitPosition();
       pos[IEAST] = Basic::Meters::convertStatic(*msg);
       ok = setInitPosition(pos);
@@ -3752,7 +3750,7 @@ bool Player::setSlotInitYPos(const Basic::Distance* const msg)
 bool Player::setSlotInitYPos(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       osg::Vec2d pos = getInitPosition();
       pos[IEAST] = msg->getReal();
       ok = setInitPosition(pos);
@@ -3764,8 +3762,8 @@ bool Player::setSlotInitYPos(const Basic::Number* const msg)
 bool Player::setSlotInitAlt(const Basic::Distance* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
-      LCreal value = Basic::Meters::convertStatic(*msg);
+   if (msg != nullptr) {
+      const LCreal value = Basic::Meters::convertStatic(*msg);
       setInitAltitude( value );
       ok = true;
    }
@@ -3776,7 +3774,7 @@ bool Player::setSlotInitAlt(const Basic::Distance* const msg)
 bool Player::setSlotInitAlt(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       LCreal value = msg->getReal();
       setInitAltitude( value );
       ok = true;
@@ -3789,7 +3787,7 @@ bool Player::setSlotInitPosition(const Basic::List* const msg)
 {
    bool ok = false;
    double values[3];
-   int n = msg->getNumberList(values, 3);
+   const int n = msg->getNumberList(values, 3);
    if (n == 3) {
       setInitPosition(values[0], values[1]);
       setInitAltitude( -values[2] );
@@ -3802,8 +3800,8 @@ bool Player::setSlotInitPosition(const Basic::List* const msg)
 bool Player::setSlotInitLat(const Basic::LatLon* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
-      double val = msg->getDouble();
+   if (msg != nullptr) {
+      const double val = msg->getDouble();
       if (val >= -90.0 && val <= 90.0) {
          ok = setInitLat( val );
       }
@@ -3818,8 +3816,8 @@ bool Player::setSlotInitLat(const Basic::LatLon* const msg)
 bool Player::setSlotInitLat(const Basic::Angle* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
-      double val = static_cast<LCreal>(Basic::Degrees::convertStatic(*msg));
+   if (msg != nullptr) {
+      const double val = static_cast<LCreal>(Basic::Degrees::convertStatic(*msg));
       if (val >= -90.0 && val <= 90.0) {
          ok = setInitLat( val );
       }
@@ -3834,8 +3832,8 @@ bool Player::setSlotInitLat(const Basic::Angle* const msg)
 bool Player::setSlotInitLat(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
-      double val = msg->getDouble();
+   if (msg != nullptr) {
+      const double val = msg->getDouble();
       if (val >= -90.0 && val <= 90.0) {
          ok = setInitLat( val );
       }
@@ -3850,8 +3848,8 @@ bool Player::setSlotInitLat(const Basic::Number* const msg)
 bool Player::setSlotInitLon(const Basic::LatLon* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
-      double val = msg->getDouble();
+   if (msg != nullptr) {
+      const double val = msg->getDouble();
       if (val >= -180.0 && val <= 180.0) {
          ok = setInitLon( val );
       }
@@ -3866,8 +3864,8 @@ bool Player::setSlotInitLon(const Basic::LatLon* const msg)
 bool Player::setSlotInitLon(const Basic::Angle* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
-      double val = static_cast<LCreal>(Basic::Degrees::convertStatic(*msg));
+   if (msg != nullptr) {
+      const double val = static_cast<LCreal>(Basic::Degrees::convertStatic(*msg));
       if (val >= -180.0 && val <= 180.0) {
          ok = setInitLon( val );
       }
@@ -3882,8 +3880,8 @@ bool Player::setSlotInitLon(const Basic::Angle* const msg)
 bool Player::setSlotInitLon(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
-      double val = msg->getDouble();
+   if (msg != nullptr) {
+      const double val = msg->getDouble();
       if (val >= -180.0 && val <= 180.0) {
          ok = setInitLon( val );
       }
@@ -3899,7 +3897,7 @@ bool Player::setSlotInitGeocentric(const Basic::List* const msg)
 {
    bool ok = false;
    double values[3];
-   int n = msg->getNumberList(values, 3);
+   const int n = msg->getNumberList(values, 3);
    if (n == 3) {
       osg::Vec3d pos(values[0], values[1], values[2]);
       ok = setInitGeocentricPosition(pos);
@@ -3911,10 +3909,8 @@ bool Player::setSlotInitGeocentric(const Basic::List* const msg)
 bool Player::setSlotInitRoll(const Basic::Angle* const msg)
 {
    bool ok = false;
-
-   if (msg != 0) {
-      double value = Basic::Radians::convertStatic(*msg);
-
+   if (msg != nullptr) {
+      const double value = Basic::Radians::convertStatic(*msg);
       if ( value >= -PI && value <= PI ) {
          initAngles[IROLL] = value;
          ok = true;
@@ -3931,10 +3927,8 @@ bool Player::setSlotInitRoll(const Basic::Angle* const msg)
 bool Player::setSlotInitRoll(const Basic::Number* const msg)
 {
    bool ok = false;
-
-   if (msg != 0) {
-      double value = msg->getDouble();
-
+   if (msg != nullptr) {
+      const double value = msg->getDouble();
       if ( value >= -(2.0*PI) && value <= (2.0*PI) ) {
          initAngles[IROLL] = value;
          ok = true;
@@ -3951,10 +3945,8 @@ bool Player::setSlotInitRoll(const Basic::Number* const msg)
 bool Player::setSlotInitPitch(const Basic::Angle* const msg)
 {
    bool ok = false;
-
-   if (msg != 0) {
-      double value = Basic::Radians::convertStatic(*msg);
-
+   if (msg != nullptr) {
+      const double value = Basic::Radians::convertStatic(*msg);
       if ( value >= -(PI/2.0) && value <= (PI/2.0) ) {
          initAngles[IPITCH] = value;
          ok = true;
@@ -3971,10 +3963,8 @@ bool Player::setSlotInitPitch(const Basic::Angle* const msg)
 bool Player::setSlotInitPitch(const Basic::Number* const msg)
 {
    bool ok = false;
-
-   if (msg != 0) {
-      double value = msg->getDouble();
-
+   if (msg != nullptr) {
+      const double value = msg->getDouble();
       if ( value >= -(PI/2.0) && value <= (PI/2.0) ) {
          initAngles[IPITCH] = value;
          ok = true;
@@ -3991,10 +3981,8 @@ bool Player::setSlotInitPitch(const Basic::Number* const msg)
 bool Player::setSlotInitHeading(const Basic::Angle* const msg)
 {
    bool ok = false;
-
-   if (msg != 0) {
+   if (msg != nullptr) {
       double value = Basic::Radians::convertStatic(*msg);
-
       if ( value >= -PI && value <= (2.0*PI+0.001) ) {
          if (value >= 2.0*PI) value -= 2.0*PI;
          initAngles[IYAW] = value;
@@ -4012,10 +4000,8 @@ bool Player::setSlotInitHeading(const Basic::Angle* const msg)
 bool Player::setSlotInitHeading(const Basic::Number* const msg)
 {
    bool ok = false;
-
-   if (msg != 0) {
+   if (msg != nullptr) {
       double value = msg->getDouble();
-
       if ( value >= -PI && value <= (2.0*PI+0.001) ) {
          if (value >= 2.0*PI) value -= 2.0*PI;
          initAngles[IYAW] = value;
@@ -4029,13 +4015,12 @@ bool Player::setSlotInitHeading(const Basic::Number* const msg)
    return ok;
 }
 
-
 // initEuler: Initial Euler Angles: radians [ roll pitch yaw ]
 bool Player::setSlotInitEulerAngles(const Basic::List* const numList)
 {
    bool ok = false;
    double values[3];
-   int n = numList->getNumberList(values, 3);
+   const int n = numList->getNumberList(values, 3);
    if (n == 3) {
       if ( ( values[0] >= -(2.0f*PI) && values[0] <= (2.0f*PI) ) &&
          ( values[1] >= -PI && values[1] <= PI ) &&
@@ -4057,9 +4042,8 @@ bool Player::setSlotInitEulerAngles(const Basic::List* const numList)
 bool Player::setSlotTestRollRate(const Basic::Angle* const msg)
 {
    bool ok = false;
-
-   if (msg != 0) {
-      double value = Basic::Radians::convertStatic(*msg);
+   if (msg != nullptr) {
+      const double value = Basic::Radians::convertStatic(*msg);
       testAngRates[IROLL] = value;
       ok = true;
    }
@@ -4071,9 +4055,8 @@ bool Player::setSlotTestRollRate(const Basic::Angle* const msg)
 bool Player::setSlotTestPitchRate(const Basic::Angle* const msg)
 {
    bool ok = false;
-
-   if (msg != 0) {
-      double value = Basic::Radians::convertStatic(*msg);
+   if (msg != nullptr) {
+      const double value = Basic::Radians::convertStatic(*msg);
       testAngRates[IPITCH] = value;
       ok = true;
    }
@@ -4085,9 +4068,8 @@ bool Player::setSlotTestPitchRate(const Basic::Angle* const msg)
 bool Player::setSlotTestYawRate(const Basic::Angle* const msg)
 {
    bool ok = false;
-
-   if (msg != 0) {
-      double value = Basic::Radians::convertStatic(*msg);
+   if (msg != nullptr) {
+      const double value = Basic::Radians::convertStatic(*msg);
       testAngRates[IYAW] = value;
       ok = true;
    }
@@ -4099,7 +4081,7 @@ bool Player::setSlotTestYawRate(const Basic::Angle* const msg)
 bool Player::setSlotTestBodyAxis(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       testBodyAxis = msg->getBoolean();
       ok = true;
    }
@@ -4111,7 +4093,7 @@ bool Player::setSlotTestBodyAxis(const Basic::Number* const msg)
 bool Player::setSlotInitVelocity(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       initVp = msg->getReal();
       ok = true;
    }
@@ -4122,7 +4104,7 @@ bool Player::setSlotInitVelocity(const Basic::Number* const msg)
 bool Player::setSlotInitVelocityKts(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       initVp = (msg->getReal() * Eaagles::Basic::Distance::NM2M) / 3600.0f;
       ok = true;
    }
@@ -4184,11 +4166,11 @@ bool Player::setSlotUseCoordSys(Basic::String* const msg)
 // signature: Player's RCS signature
 bool Player::setSlotSignature(RfSignature* const s)
 {
-   if (signature != 0) {
-      signature->container(0);
+   if (signature != nullptr) {
+      signature->container(nullptr);
    }
    signature = s;
-   if (signature != 0) {
+   if (signature != nullptr) {
       signature->container(this);
    }
    return true;
@@ -4205,7 +4187,7 @@ bool Player::setSlotIrSignature(IrSignature* const s)
 bool Player::setSlotCamouflageType(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       int ii = msg->getInt();
       if (ii >= 0) {
          ok = setCamouflageType( ii );
@@ -4218,7 +4200,7 @@ bool Player::setSlotCamouflageType(const Basic::Number* const msg)
 bool Player::setSlotTerrainElevReq(const Basic::Number* const num)
 {
    bool ok = false;
-   if (num != 0) {
+   if (num != nullptr) {
       ok = setTerrainElevationRequired(num->getBoolean());
    }
    return ok;
@@ -4228,7 +4210,7 @@ bool Player::setSlotTerrainElevReq(const Basic::Number* const num)
 bool Player::setSlotInterpolateTerrain(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setInterpolateTerrain(msg->getBoolean());
    }
    return ok;
@@ -4238,7 +4220,7 @@ bool Player::setSlotInterpolateTerrain(const Basic::Number* const msg)
 bool Player::setSlotTerrainOffset(const Basic::Distance* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setTerrainOffset( Basic::Meters::convertStatic( *msg ) );
    }
    return ok;
@@ -4248,7 +4230,7 @@ bool Player::setSlotTerrainOffset(const Basic::Distance* const msg)
 bool Player::setSlotPositionFreeze(const Basic::Number* const num)
 {
    bool ok = false;
-   if (num != 0) {
+   if (num != nullptr) {
       ok = setPositionFreeze( num->getBoolean() );
    }
    return ok;
@@ -4258,7 +4240,7 @@ bool Player::setSlotPositionFreeze(const Basic::Number* const num)
 bool Player::setSlotAltitudeFreeze(const Basic::Number* const num)
 {
    bool ok = false;
-   if (num != 0) {
+   if (num != nullptr) {
       ok = setAltitudeFreeze( num->getBoolean() );
    }
    return ok;
@@ -4268,7 +4250,7 @@ bool Player::setSlotAltitudeFreeze(const Basic::Number* const num)
 bool Player::setSlotAttitudeFreeze(const Basic::Number* const num)
 {
    bool ok = false;
-   if (num != 0) {
+   if (num != nullptr) {
       ok = setAttitudeFreeze( num->getBoolean() );
    }
    return ok;
@@ -4278,7 +4260,7 @@ bool Player::setSlotAttitudeFreeze(const Basic::Number* const num)
 bool Player::setSlotFuelFreeze(const Basic::Number* const num)
 {
    bool ok = false;
-   if (num != 0) {
+   if (num != nullptr) {
       ok = setFuelFreeze( num->getBoolean() );
    }
    return ok;
@@ -4288,7 +4270,7 @@ bool Player::setSlotFuelFreeze(const Basic::Number* const num)
 bool Player::setSlotCrashOverride(const Basic::Number* const num)
 {
    bool ok = false;
-   if (num != 0) {
+   if (num != nullptr) {
       ok = setCrashOverride( num->getBoolean() );
    }
    return ok;
@@ -4298,7 +4280,7 @@ bool Player::setSlotCrashOverride(const Basic::Number* const num)
 bool Player::setSlotKillOverride(const Basic::Number* const num)
 {
    bool ok = false;
-   if (num != 0) {
+   if (num != nullptr) {
       ok = setKillOverride( num->getBoolean() );
    }
    return ok;
@@ -4308,7 +4290,7 @@ bool Player::setSlotKillOverride(const Basic::Number* const num)
 bool Player::setSlotKillRemoval(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setKillRemoval( msg->getBoolean() );
    }
    return ok;
@@ -4318,7 +4300,7 @@ bool Player::setSlotKillRemoval(const Basic::Number* const msg)
 bool Player::setSlotEnableNetOutput(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setEnableNetOutput(msg->getBoolean());
    }
    return ok;
@@ -4328,7 +4310,7 @@ bool Player::setSlotEnableNetOutput(const Basic::Number* const msg)
 bool Player::setSlotDataLogTime(const Basic::Time* const num)
 {
    bool ok = false;
-   if (num != 0) {
+   if (num != nullptr) {
       dataLogTime = num->getReal();
       ok = true;
    }
@@ -4492,14 +4474,14 @@ std::ostream& Player::serialize(std::ostream& sout, const int i, const bool slot
    sout << std::endl;
 
    // RCS Signature
-   if (signature != 0) {
+   if (signature != nullptr) {
       indent(sout,i+j);
       sout << "signature: ";
       signature->serialize(sout,i+j+4);
    }
 
    // IR Signature
-   if (irSignature != 0) {
+   if (irSignature != nullptr) {
       indent(sout, i + j);
       sout << "irSignature: ";
       irSignature->serialize(sout, i+j+4);
