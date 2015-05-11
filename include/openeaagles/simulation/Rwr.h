@@ -23,7 +23,7 @@ class Rwr : public RfSensor
 public:
     Rwr();
 
-    LCreal getDegreesPerRay() const         { return 360.0f/LCreal(NUM_RAYS); }
+    LCreal getDegreesPerRay() const         { return 360.0f / static_cast<LCreal>(NUM_RAYS); }
     int getNumberOfRays() const             { return NUM_RAYS; }
     LCreal getRay(const int i) const        { return (i >= 0 && i < NUM_RAYS) ? rays[1][i] : 0.0f; }
 

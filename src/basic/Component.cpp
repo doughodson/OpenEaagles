@@ -1410,7 +1410,7 @@ Object* Component::SendData::getValue(const float value)
         past = new Float(value);
         return past;
     }
-    if (*num != LCreal(value)) {
+    if (*num != static_cast<LCreal>(value)) {
         *num = value;
         return num;
     }

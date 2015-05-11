@@ -167,7 +167,7 @@ void NetIO::initData()
    setMaxPositionErr(DRA_POS_THRST_DFLT, 255, 255);          //  (meters)
    setMaxOrientationErr(DRA_ORIENT_THRST_DFLT, 255, 255);    //  (radians)
    setMaxAge(HRT_BEAT_MPLIER*HRT_BEAT_TIMER, 255, 255);      //  (seconds)
-   setMaxEntityRange(LCreal(0), 255, 255); // no range filtering
+   setMaxEntityRange(static_cast<LCreal>(0), 255, 255);      // no range filtering
 
    // Clear emission PDU handle table
    for (unsigned int i = 0; i < MAX_EMISSION_HANDLERS; i++) {
@@ -1902,7 +1902,7 @@ void NetIO::testOutputEntityTypes(const unsigned int n)
    if (n > 0 && root != 0 && maxTypes > 0) {
       for (unsigned int i = 0; i < n; i++) {
          int r = std::rand();
-         LCreal nr = (LCreal(r) / LCreal(RAND_MAX));
+         LCreal nr = static_cast<LCreal>(r) / static_cast<LCreal>(RAND_MAX);
          int idx = nint(nr * (maxTypes - 1));
          const Ntm* origNtm = static_cast<const Ntm*>(getOutputEntityTypes(idx));
          std::cout << "i= " << i;

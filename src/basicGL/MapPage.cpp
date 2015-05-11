@@ -265,8 +265,8 @@ bool MapPage::latLon2Screen(const double lat, const double lon,
       // Adjust for the decentered displayment
       if ( !getCentered() ) screenY += getDisplacement();
 
-      *x = LCreal(screenX);
-      *y = LCreal(screenY);
+      *x = static_cast<LCreal>(screenX);
+      *y = static_cast<LCreal>(screenY);
 
       ok = true;
    }

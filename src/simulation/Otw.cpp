@@ -50,33 +50,33 @@ Otw::Otw()
 {
     STANDARD_CONSTRUCTOR()
 
-    ownship = 0;
-    playerList = 0;
+    ownship = nullptr;
+    playerList = nullptr;
     rstFlg = false;
     rstReq = false;
 
     refLat  = 0.0;
     refLon  = 0.0;
 
-    maxRange = 20000.0f;         // Default: 20km
+    maxRange = 20000.0;          // Default: 20km
 
     maxModels = 0;               // Default: no models
     maxElevations = 0;           // Default: no elevation requests
 
     // Clear the tables
     for (unsigned int i = 0; i < MAX_MODELS; i++) {
-        modelTbl[i] = 0;
+        modelTbl[i] = nullptr;
     }
     nModels = 0;
 
     for (unsigned int i = 0; i < MAX_MODELS; i++) {
-        hotTbl[i] = 0;
+        hotTbl[i] = nullptr;
     }
     nHots = 0;
 
 
     for (unsigned int i = 0; i < MAX_MODELS_TYPES; i++) {
-        otwModelTypes[i] = 0;
+        otwModelTypes[i] = nullptr;
     }
     nOtwModelTypes = 0;
 
@@ -90,18 +90,18 @@ void Otw::copyData(const Otw& org, const bool cc)
    BaseClass::copyData(org);
 
    if (cc) {
-      ownship = 0;
-      playerList = 0;
+      ownship = nullptr;
+      playerList = nullptr;
       for (unsigned int i = 0; i < MAX_MODELS; i++) {
-         modelTbl[i] = 0;
+         modelTbl[i] = nullptr;
       }
       nModels = 0;
       for (unsigned int i = 0; i < MAX_MODELS; i++) {
-         hotTbl[i] = 0;
+         hotTbl[i] = nullptr;
       }
       nHots = 0;
       for (unsigned int i = 0; i < MAX_MODELS_TYPES; i++) {
-         otwModelTypes[i] = 0;
+         otwModelTypes[i] = nullptr;
       }
       nOtwModelTypes = 0;
    }
@@ -127,8 +127,6 @@ void Otw::copyData(const Otw& org, const bool cc)
 
     setOwnship(org.ownship);
     setPlayerList(org.playerList);
-
-
 }
 
 //------------------------------------------------------------------------------
@@ -136,8 +134,8 @@ void Otw::copyData(const Otw& org, const bool cc)
 //------------------------------------------------------------------------------
 void Otw::deleteData()
 {
-   setOwnship(0);
-   setPlayerList(0);
+   setOwnship(nullptr);
+   setPlayerList(nullptr);
    resetTables();
    clearOtwModelTypes();
 }
@@ -148,7 +146,7 @@ void Otw::deleteData()
 void Otw::reset()
 {
     BaseClass::reset();
-    setPlayerList(0);
+    setPlayerList(nullptr);
     rstReq = true;
 }
 
@@ -183,7 +181,7 @@ void Otw::clearOtwModelTypes()
    while (nOtwModelTypes > 0) {
       nOtwModelTypes--;
       otwModelTypes[nOtwModelTypes]->unref();
-      otwModelTypes[nOtwModelTypes] = 0;
+      otwModelTypes[nOtwModelTypes] = nullptr;
    }
 }
 
@@ -272,14 +270,14 @@ void Otw::mapPlayerList2ModelTable()
       modelTbl[i]->setCheckedFlag(false);
    }
 
-   if (playerList != 0) {
+   if (playerList != nullptr) {
       // We must have a player list ...
 
       // ---
       // Find players that are alive and within range of the visual system ...
       // ---
       Basic::List::Item* item = playerList->getFirstItem();
-      while (item != 0) {
+      while (item != nullptr) {
 
          // Get a pointer to the player, 'p'
          Basic::Pair* pair = dynamic_cast<Basic::Pair*>(item->getValue());
@@ -287,7 +285,7 @@ void Otw::mapPlayerList2ModelTable()
 
          bool dummy = false;
          const Weapon* wpn = dynamic_cast<const Weapon*>( p );
-         if (wpn != 0) dummy = wpn->isDummy();
+         if (wpn != nullptr) dummy = wpn->isDummy();
 
          if ( p != getOwnship() && !dummy ) {
 
@@ -300,7 +298,7 @@ void Otw::mapPlayerList2ModelTable()
             // Check if this player is alive and within range.
             if (p->isActive() && inRange) {
                // When alive and in range ...
-               if (model != 0) {
+               if (model != nullptr) {
                   // a) and it already has a model entry: make sure it's active ...
                   model->setState( OtwModel::ACTIVE );
                }
@@ -311,19 +309,19 @@ void Otw::mapPlayerList2ModelTable()
             }
             else if (p->isDead() && inRange) {
                // When player isn't alive and it had a model entry
-               if (model != 0) {
+               if (model != nullptr) {
                   // set state to dead
                   model->setState( OtwModel::DEAD );
                }
             }
             else {
                // When player is out-of-range and it had a model entry
-               if (model != 0) {
+               if (model != nullptr) {
                   // set state to out-of-range
                   model->setState( OtwModel::OUT_OF_RANGE );
                }
             }
-            if (model != 0) model->setCheckedFlag(true);
+            if (model != nullptr) model->setCheckedFlag(true);
 
          }
 
@@ -357,13 +355,13 @@ void Otw::mapPlayers2ElevTable()
    }
 
    // When we have a player list ...
-   if (playerList != 0) {
+   if (playerList != nullptr) {
 
       // ---
       // Find players that are alive and require terrain elevation from the visual system ...
       // ---
       Basic::List::Item* item = playerList->getFirstItem();
-      while (item != 0) {
+      while (item != nullptr) {
 
          // Get a pointer to the player, 'p'
          Basic::Pair* pair = dynamic_cast<Basic::Pair*>(item->getValue());
@@ -380,7 +378,7 @@ void Otw::mapPlayers2ElevTable()
                // Find the player's model entry (if any)
                OtwModel* model = findModel(p, HOT_TABLE);
 
-               if (model != 0) {
+               if (model != nullptr) {
                   // The player has a valid entry.
                   model->incReqCount();
                }
@@ -388,7 +386,7 @@ void Otw::mapPlayers2ElevTable()
                   // Player doesn't have an entry, so create one.
                   model = newElevEntry(p);
                }
-               if (model != 0) model->setCheckedFlag(true);
+               if (model != nullptr) model->setCheckedFlag(true);
             }
 
          }
@@ -415,8 +413,8 @@ void Otw::mapPlayers2ElevTable()
 //------------------------------------------------------------------------------
 LCreal Otw::computeRangeToPlayer(const Player* const ip) const
 {
-    LCreal rng = maxRange*2.0f + 1.0f;  // Default is out-of-range
-    if (ownship != 0) {
+    LCreal rng = maxRange*2.0 + 1.0;  // Default is out-of-range
+    if (ownship != nullptr) {
         osg::Vec3 diff = ip->getPosition() - ownship->getPosition();
         rng = diff.length();
     }
@@ -429,14 +427,14 @@ LCreal Otw::computeRangeToPlayer(const Player* const ip) const
 //------------------------------------------------------------------------------
 OtwModel* Otw::newModelEntry(Player* const ip)
 {
-   OtwModel* model = 0;
+   OtwModel* model = nullptr;
 
    // Only if we have a player pointer ...
-   if (ip != 0 && (getModelTableSize() < getMaxModels())) {
+   if (ip != nullptr && (getModelTableSize() < getMaxModels())) {
 
       // Create a model entry for this player
       model = modelFactory();
-      if (model != 0) {
+      if (model != nullptr) {
          // Yes, initialize the model entry
          model->initialize(ip, otwModelTypes, nOtwModelTypes);
          addModelToList(model, MODEL_TABLE);
@@ -452,14 +450,14 @@ OtwModel* Otw::newModelEntry(Player* const ip)
 //------------------------------------------------------------------------------
 OtwModel* Otw::newElevEntry(Player* const ip)
 {
-   OtwModel* model = 0;
+   OtwModel* model = nullptr;
 
    // Only if we have a player pointer ...
-   if (ip != 0 && (getElevationTableSize() < getMaxElevations())) {
+   if (ip != nullptr && (getElevationTableSize() < getMaxElevations())) {
 
       // Create a model entry for this player
       model = hotFactory();
-      if (model != 0) {
+      if (model != nullptr) {
          // Yes, initialize the model entry
          model->initialize(ip);
          addModelToList(model, HOT_TABLE);
@@ -488,9 +486,9 @@ void Otw::setOwnship0(Player* const newOwnship)
     if (ownship == newOwnship) return;
 
     // Unref() the old, set and ref() the new
-    if (ownship != 0) ownship->unref();
+    if (ownship != nullptr) ownship->unref();
     ownship = newOwnship;
-    if (ownship != 0) ownship->ref();
+    if (ownship != nullptr) ownship->ref();
 }
 
 //------------------------------------------------------------------------------
@@ -502,9 +500,9 @@ void Otw::setPlayerList(Basic::PairStream* const newPlayerList)
     if (playerList == newPlayerList) return;
 
     // Unref() the old, set and ref() the new
-    if (playerList != 0) playerList->unref();
+    if (playerList != nullptr) playerList->unref();
     playerList = newPlayerList;
-    if (playerList != 0) playerList->ref();
+    if (playerList != nullptr) playerList->ref();
 }
 
 //------------------------------------------------------------------------------
@@ -544,7 +542,7 @@ bool Otw::setMaxElevations(const unsigned int n)
 bool Otw::addModelToList(OtwModel* const model, const TableType type)
 {
    bool ok = false;
-   if (model != 0) {
+   if (model != nullptr) {
 
       // Select the table
       OtwModel** tbl = modelTbl;
@@ -622,7 +620,7 @@ void Otw::removeModelFromList(const int idx, const TableType type)
       else --nModels;
 
       // clear the last pointer
-      tbl[n-1] = 0;
+      tbl[n-1] = nullptr;
 
       // Unref the model
       model->unref();
@@ -658,7 +656,7 @@ void Otw::removeModelFromList(OtwModel* const model, const TableType type)
       else --nModels;
 
       // clear the last pointer
-      tbl[n-1] = 0;
+      tbl[n-1] = nullptr;
 
       // Unref the model
       model->unref();
@@ -670,31 +668,30 @@ void Otw::removeModelFromList(OtwModel* const model, const TableType type)
 //------------------------------------------------------------------------------
 OtwModel* Otw::findModel(const unsigned short playerID, const Basic::String* const federateName, const TableType type)
 {
-
    // Define the key
    OtwModelKey key(playerID, federateName);
 
    // Binary search the table for the models
-   OtwModel* found = 0;
+   OtwModel* found = nullptr;
    if (type == HOT_TABLE) {
       OtwModel** k =
          static_cast<OtwModel**>(bsearch(&key, hotTbl, nHots, sizeof(OtwModel*), compareKey2Model));
-      if (k != 0) found = *k;
+      if (k != nullptr) found = *k;
    }
    else {
       OtwModel** k =
          static_cast<OtwModel**>(bsearch(&key, modelTbl, nModels, sizeof(OtwModel*), compareKey2Model));
-      if (k != 0) found = *k;
+      if (k != nullptr) found = *k;
    }
    return found;
 }
 
 OtwModel* Otw::findModel(const Player* const player, const TableType type)
 {
-   OtwModel* found = 0;
-   if (player != 0) {
+   OtwModel* found = nullptr;
+   if (player != nullptr) {
       // Get the player's IDs
-      const Basic::String* fName = 0;
+      const Basic::String* fName = nullptr;
       if (player->isNetworkedPlayer()) {
          // If networked, used original IDs
          const Nib* pNib = player->getNib();
@@ -712,7 +709,6 @@ OtwModel* Otw::findModel(const Player* const player, const TableType type)
 //------------------------------------------------------------------------------
 int Otw::compareKey2Model(const void* key, const void* model)
 {
-
    // The Key
    const OtwModelKey* pKey = static_cast<const OtwModelKey*>(key);
 
@@ -732,11 +728,11 @@ int Otw::compareKey2Model(const void* key, const void* model)
       const Basic::String* pKeyFedName = pKey->fName;
       const Basic::String* pModelFedName = pModel->getFederateName();
 
-      if (pKeyFedName == 0 && pModelFedName != 0) result = -1;
+      if (pKeyFedName == nullptr && pModelFedName != nullptr) result = -1;
 
-      else if (pKeyFedName != 0 && pModelFedName == 0) result = +1;
+      else if (pKeyFedName != nullptr && pModelFedName == nullptr) result = +1;
 
-      else if (pKeyFedName != 0 && pModelFedName != 0) {
+      else if (pKeyFedName != nullptr && pModelFedName != nullptr) {
          result = std::strcmp(*pKeyFedName, *pModelFedName);
       }
    }
@@ -778,9 +774,9 @@ bool Otw::setSlotMaxRange(const Basic::Distance* const msg)
 {
     bool ok = false;
 
-    if (msg != 0) {
+    if (msg != nullptr) {
         // We have a distance which we can convert to meters
-        LCreal rng = Basic::Meters::convertStatic(*msg);
+        const LCreal rng = Basic::Meters::convertStatic(*msg);
         ok = setMaxRange( rng );
     }
 
@@ -796,7 +792,7 @@ bool Otw::setSlotMaxRange(const Basic::Number* const msg)
 {
     bool ok = false;
 
-    if (msg != 0) {
+    if (msg != nullptr) {
         // We have a simple number, which should be meters!
         ok = setMaxRange(msg->getReal());
     }
@@ -812,8 +808,8 @@ bool Otw::setSlotMaxRange(const Basic::Number* const msg)
 bool Otw::setSlotMaxModels(const Basic::Number* const num)
 {
     bool ok = false;
-    if (num != 0) {
-        int n = num->getInt();
+    if (num != nullptr) {
+        const int n = num->getInt();
         if (n >= 0) {
              ok = setMaxModels( static_cast<unsigned int>(n) );
         }
@@ -827,8 +823,8 @@ bool Otw::setSlotMaxModels(const Basic::Number* const num)
 bool Otw::setSlotMaxElevations(const Basic::Number* const num)
 {
     bool ok = false;
-    if (num != 0) {
-        int n = num->getInt();
+    if (num != nullptr) {
+        const int n = num->getInt();
         if (n >= 0) {
              ok = setMaxElevations( static_cast<unsigned int>(n) );
         }
@@ -843,7 +839,7 @@ bool Otw::setSlotMaxElevations(const Basic::Number* const num)
 bool Otw::setSlotRefLatitude(const Basic::Number* const num)
 {
     bool ok = false;
-    if (num != 0) {
+    if (num != nullptr) {
         ok = setRefLatitude(num->getDouble());
     }
     return ok;
@@ -853,7 +849,7 @@ bool Otw::setSlotRefLatitude(const Basic::Number* const num)
 bool Otw::setSlotRefLongitude(const Basic::Number* const num)
 {
     bool ok = false;
-    if (num != 0) {
+    if (num != nullptr) {
         ok = setRefLongitude(num->getDouble());
     }
     return ok;
@@ -863,17 +859,17 @@ bool Otw::setSlotRefLongitude(const Basic::Number* const num)
 bool Otw::setSlotOtwModelTypes(const Basic::PairStream* const msg)
 {
     bool ok = false;
-    if (msg != 0) {
+    if (msg != nullptr) {
        // First clear the old table
        clearOtwModelTypes();
 
        // Now scan the pair stream and put all Otm objects
        // into the table.
        const Basic::List::Item* item = msg->getFirstItem();
-       while (item != 0 && nOtwModelTypes < MAX_MODELS_TYPES) {
+       while (item != nullptr && nOtwModelTypes < MAX_MODELS_TYPES) {
           const Basic::Pair* pair = static_cast<const Basic::Pair*>(item->getValue());
           const Otm* otwType = dynamic_cast<const Otm*>( pair->object() );
-          if (otwType != 0) {
+          if (otwType != nullptr) {
              // We have an Otm object, so put it in the table
              otwType->ref();
              otwModelTypes[nOtwModelTypes] = otwType;
@@ -913,7 +909,7 @@ EMPTY_SERIALIZER(OtwModel)
 // ---
 // constructor
 // ---
-OtwModel::OtwModel() : player(0), federateName(0)
+OtwModel::OtwModel() : player(nullptr), federateName(nullptr)
 {
    STANDARD_CONSTRUCTOR()
 
@@ -927,7 +923,7 @@ void OtwModel::copyData(const OtwModel& org, const bool cc)
 {
     BaseClass::copyData(org);
     if (cc) {
-        player = 0;
+        player = nullptr;
     }
 
     setPlayer(org.player);
@@ -950,7 +946,7 @@ void OtwModel::copyData(const OtwModel& org, const bool cc)
 // ---
 void OtwModel::deleteData()
 {
-    setPlayer(0);
+    setPlayer(nullptr);
 }
 
 // ---
@@ -958,23 +954,23 @@ void OtwModel::deleteData()
 // ---
 void OtwModel::setPlayer(Player* const p)
 {
-   if (player != 0) {
+   if (player != nullptr) {
       player->unref();
       playerID = 0;
-      federateName = 0;
+      federateName = nullptr;
    }
 
    player = p;
 
-   if (player != 0) {
+   if (player != nullptr) {
       player->ref();
       playerID = player->getID();
       const Nib* nib = player->getNib();
-      if (nib != 0) {
+      if (nib != nullptr) {
          federateName = nib->getFederateName();
       }
       else {
-         federateName = 0;
+         federateName = nullptr;
       }
    }
 }
@@ -992,11 +988,11 @@ void OtwModel::initialize(Player* const p, const Otm** const otwModelTable, cons
    checked = true;
 
    // If the OTW model table was provided, then look for a match.
-   if (otwModelTable != 0 && numModels > 0) {
+   if (otwModelTable != nullptr && numModels > 0) {
       bool found = false;
       for (unsigned int i = 0; i < numModels && !found; i++) {
          const Otm* otwTypeMapper = otwModelTable[i];
-         if (otwTypeMapper != 0) {
+         if (otwTypeMapper != nullptr) {
             if (otwTypeMapper->isMatchingPlayerType(p)) {
                // We found a match for our player in the OTW model table!
                typeMapper = otwTypeMapper;
@@ -1012,7 +1008,7 @@ void OtwModel::initialize(Player* const p, const Otm** const otwModelTable, cons
 // ---
 void OtwModel::clear()
 {
-   setPlayer(0);
+   setPlayer(nullptr);
    state = INACTIVE;
    ageCount = 0;
    checked = false;
@@ -1020,7 +1016,7 @@ void OtwModel::clear()
    rcount = 0;
    hotActive = false;
    playerID = 0;
-   federateName = 0;
+   federateName = nullptr;
 }
 
 
@@ -1053,8 +1049,8 @@ Otm::Otm()
 {
    STANDARD_CONSTRUCTOR()
 
-   refFormName = 0;
-   refTypeName = 0;
+   refFormName = nullptr;
+   refTypeName = nullptr;
    typeId = 0;
 }
 
@@ -1066,8 +1062,8 @@ void Otm::copyData(const Otm& org, const bool cc)
    BaseClass::copyData(org);
 
    if (cc) {
-      refFormName = 0;
-      refTypeName = 0;
+      refFormName = nullptr;
+      refTypeName = nullptr;
    }
 
    setTypeId( org.typeId );
@@ -1081,8 +1077,8 @@ void Otm::copyData(const Otm& org, const bool cc)
 void Otm::deleteData()
 {
    setTypeId( 0 );
-   setSlotRefFormName( 0 );
-   setSlotRefTypeName( 0 );
+   setSlotRefFormName( nullptr );
+   setSlotRefTypeName( nullptr );
 }
 
 //------------------------------------------------------------------------------
@@ -1100,8 +1096,8 @@ bool Otm::setTypeId(const unsigned int newType)
 bool Otm::setSlotTypeId(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
-      int i = msg->getInt();
+   if (msg != nullptr) {
+      const int i = msg->getInt();
       if (i >= 0) {
          ok = setTypeId( static_cast<unsigned int>(i) );
       }
@@ -1129,7 +1125,7 @@ bool Otm::setSlotRefTypeName(const Basic::String* const msg)
 bool Otm::isMatchingPlayerType(const Player* const p) const
 {
    bool match = false;
-   if (p != 0 && refFormName != 0) {
+   if (p != nullptr && refFormName != nullptr) {
       // first match the form name --
       if (p->isFactoryName( *refFormName ) ) {
 
@@ -1140,13 +1136,12 @@ bool Otm::isMatchingPlayerType(const Player* const p) const
 
          // Do we have both type names?
          const Basic::String* ptype = p->getType();
-         if ( refTypeName != 0 && ptype != 0) {
+         if ( refTypeName != nullptr && ptype != nullptr) {
 
             // Then compare at most the length of our reference type name ...
             match = std::strncmp( ptype->getString(), refTypeName->getString(), refTypeName->len() ) == 0;
 
          }
-
       }
    }
    return match;

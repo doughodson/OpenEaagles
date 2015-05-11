@@ -291,7 +291,7 @@ bool Track::setPosition(const osg::Vec4& p)
    return setPosition(pos3);
 }
 
-// setCircularError() -- sets the track's estimated position error, meters, 
+// setCircularError() -- sets the track's estimated position error, meters,
 bool Track::setCircularError(const LCreal err)
 {
    cErr = err;
@@ -411,7 +411,7 @@ void RfTrack::copyData(const RfTrack& org, const bool cc)
     if (cc) {
         lastEM = 0;
     }
-    
+
     setLastEmission( org.lastEM );
 
     mslWarn = org.mslWarn;
@@ -452,7 +452,7 @@ bool RfTrack::setSignal(const LCreal snDbl, const Emission* const em)
             sum += lastSN[i];
             if (lastSN[i] > maxs) maxs = lastSN[i];
         }
-        avg = sum/LCreal(nSig);
+        avg = sum / static_cast<LCreal>(nSig);
     }
     avgSig = avg;
     maxSig = maxs;
@@ -467,7 +467,7 @@ bool RfTrack::setSignal(const LCreal snDbl, const Emission* const em)
 // setLastEmission() -- set the last emission pointer
 bool RfTrack::setLastEmission(const Emission* const em)
 {
-   if (lastEM != 0) lastEM->unref(); 
+   if (lastEM != 0) lastEM->unref();
    lastEM = em;
    if (lastEM != 0) lastEM->ref();
    return true;
@@ -512,7 +512,7 @@ EMPTY_SERIALIZER(IrTrack)
 IrTrack::IrTrack() : lastQuery(0)
 {
     STANDARD_CONSTRUCTOR()
-    
+
     clear();
 }
 
@@ -527,7 +527,7 @@ void IrTrack::copyData(const IrTrack& org, const bool cc)
     if (cc) {
         lastQuery = 0;
     }
-    
+
     setLastQuery( org.lastQuery );
 
     mslWarn = org.mslWarn;
@@ -568,7 +568,7 @@ bool IrTrack::setSignal(const LCreal snDbl, const IrQueryMsg* const q)
             sum += lastSN[i];
             if (lastSN[i] > maxs) maxs = lastSN[i];
         }
-        avg = sum/LCreal(nSig);
+        avg = sum / static_cast<LCreal>(nSig);
     }
     avgSig = avg;
     maxSig = maxs;
@@ -604,7 +604,7 @@ bool IrTrack::setPosition(const osg::Vec3& p)
 // setLastQuery() -- set the last emission pointer
 bool IrTrack::setLastQuery(const IrQueryMsg* const q)
 {
-   if (lastQuery != 0) lastQuery->unref(); 
+   if (lastQuery != 0) lastQuery->unref();
    lastQuery = q;
    if (lastQuery != 0) lastQuery->ref();
    return true;

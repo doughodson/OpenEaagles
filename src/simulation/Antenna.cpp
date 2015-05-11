@@ -722,7 +722,7 @@ bool Antenna::onRfEmissionEvent(Emission* const em)
          const double pGain = getPolarizationGain(em->getPolarization());
          const double raGain = aea * pGain;
 
-         sys1->rfReceivedEmission(em, this, LCreal(raGain));
+         sys1->rfReceivedEmission(em, this, static_cast<LCreal>(raGain));
 
          sys1->unref();
       }
@@ -747,7 +747,7 @@ bool Antenna::onRfEmissionReturnEventAntenna(Emission* const em)
         double aea = getEffectiveArea(em->getGain(), em->getWavelength());
         // Same antenna -- polarization match -- polarization gain is 1.0
         // So just use Antenna effective area
-        sys1->rfReceivedEmission(em, this, LCreal(aea));
+        sys1->rfReceivedEmission(em, this, static_cast<LCreal>(aea));
         used = true;
 
         sys1->unref();

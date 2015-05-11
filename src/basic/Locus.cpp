@@ -79,7 +79,7 @@ LCreal Locus::getRange(const unsigned int idx) const
 {
    LCreal rng = 0;
    if (idx < np && isDataValid()) {
-      rng = minRng + deltaRng*LCreal(idx);
+      rng = minRng + deltaRng * static_cast<LCreal>(idx);
    }
    return rng;
 }

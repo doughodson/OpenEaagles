@@ -341,7 +341,7 @@ Gun::Gun()
    unlimited = false;
 
    burstFrameTimer = 0;
-   burstFrameTime = 1.0f/LCreal(DEFAULT_BURST_RATE);
+   burstFrameTime = 1.0f / static_cast<LCreal>(DEFAULT_BURST_RATE);
    rcount = 0.0;
 
    shortBurstTimer = 0.0;
@@ -574,7 +574,7 @@ void Gun::burstFrame()
       if ( !isUnlimited() ) {
          if (ibullets > rounds) {
             ibullets = rounds;
-            rcount = LCreal(ibullets);
+            rcount = static_cast<LCreal>(ibullets);
          }
          rounds -= ibullets;
       }
@@ -732,7 +732,7 @@ bool Gun::setSlotBurstRate(const Basic::Number* const num)
    if (num != nullptr) {
       const int rate = num->getInt();
       if (rate > 0 && rate <= 20) {
-         burstFrameTime = 1.0f/LCreal(rate);
+         burstFrameTime = 1.0f / static_cast<LCreal>(rate);
          ok = true;
       }
       else {

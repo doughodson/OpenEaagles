@@ -71,7 +71,7 @@ Radar* Radar::clone() const
 void Radar::initData()
 {
    for (unsigned int i = 0; i < MAX_REPORTS; i++) {
-      reports[i] = 0;
+      reports[i] = nullptr;
       rptMaxSn[i] = 0;
    }
    numReports = 0;
@@ -84,7 +84,7 @@ void Radar::initData()
    currentJamSignal = 0.0;
    numberOfJammedEmissions = 0;
 
-   rfIGain = 1.0f;
+   rfIGain = 1.0;
 }
 
 //------------------------------------------------------------------------------
@@ -137,9 +137,9 @@ void Radar::clearTracksAndQueues()
    // Clear reports
    lcLock(myLock);
    for (unsigned int i = 0; i < numReports && i < MAX_REPORTS; i++) {
-      if (reports[i] != 0) {
+      if (reports[i] != nullptr) {
          reports[i]->unref();
-         reports[i] = 0;
+         reports[i] = nullptr;
       }
    }
    numReports = 0;
@@ -198,12 +198,12 @@ void Radar::transmit(const LCreal dt)
       Emission* em = new Emission();
       em->setFrequency(getFrequency());
       em->setBandwidth(getBandwidth());
-      LCreal prf1 = getPRF();
+      const LCreal prf1 = getPRF();
       em->setPRF(prf1);
       int pulses = static_cast<int>(prf1 * dt + 0.5);
       if (pulses == 0) pulses = 1; // at least one
       em->setPulses(pulses);
-      LCreal p = getPeakPower();
+      const LCreal p = getPeakPower();
       em->setPower(p);
       em->setMaxRangeNM(getRange());
       em->setPulseWidth(getPulseWidth());
@@ -224,7 +224,7 @@ void Radar::receive(const LCreal dt)
    BaseClass::receive(dt);
 
    // Can't do anything without an antenna
-   if (getAntenna() == 0) return;
+   if (getAntenna() == nullptr) return;
 
    // Clear the next sweep
    csweep = computeSweepIndex( static_cast<LCreal>(Basic::Angle::R2DCC * getAntenna()->getAzimuth()) );
@@ -235,8 +235,8 @@ void Radar::receive(const LCreal dt)
    // Basically, we're simulation Hannen's S/I equation from page 356 of his notes.
    // Where I is N + J. J is noise from jamming.
    // Receiver Loss affects the total I, so we have to wait until this point to account for it.
-   LCreal interference = (getRfRecvNoise() + jamSignal) * getRfReceiveLoss();
-   LCreal noise = getRfRecvNoise() * getRfReceiveLoss();
+   const LCreal interference = (getRfRecvNoise() + jamSignal) * getRfReceiveLoss();
+   const LCreal noise = getRfRecvNoise() * getRfReceiveLoss();
    currentJamSignal = jamSignal * getRfReceiveLoss();
    int countNumJammedEm = 0;
 
@@ -244,7 +244,7 @@ void Radar::receive(const LCreal dt)
    // Process Returned Emissions
    // ---
 
-   Emission* em = 0;
+   Emission* em = nullptr;
    LCreal signal = 0;
 
    // Get an emission from the queue
@@ -256,7 +256,7 @@ void Radar::receive(const LCreal dt)
    }
    lcUnlock(packetLock);
 
-   while (em != 0) {
+   while (em != nullptr) {
 
       // exclude noise jammers (accounted for already in RfSystem::rfReceivedEmission)
       if (em->getTransmitter() == this || (em->isECM() && !em->isECMType(Emission::ECM_NOISE)) ) {
@@ -278,7 +278,7 @@ void Radar::receive(const LCreal dt)
          //LCreal maxRng4 = (maxRng*maxRng*maxRng*maxRng);
          //LCreal rng = (em->getRange());
 
-         LCreal s1 = 1.0f;
+         const LCreal s1 = 1.0;
          //if (rng > 0) {
          //    LCreal rng4 = (rng*rng*rng*rng);
          //    s1 = (rng4/maxRng4);
@@ -289,10 +289,10 @@ void Radar::receive(const LCreal dt)
          if (signal > 0.0) {
 
             // Signal/Noise  (Equation 2-9)
-            LCreal signalToInterferenceRatio = signal / interference;
-            LCreal signalToInterferenceRatioDbl = 10.0f * lcLog10(signalToInterferenceRatio);
-            LCreal signalToNoiseRatio = signal / noise;
-            LCreal signalToNoiseRatioDbl = 10.0f * lcLog10(signalToNoiseRatio);
+            const LCreal signalToInterferenceRatio = signal / interference;
+            const LCreal signalToInterferenceRatioDbl = 10.0f * lcLog10(signalToInterferenceRatio);
+            const LCreal signalToNoiseRatio = signal / noise;
+            const LCreal signalToNoiseRatioDbl = 10.0f * lcLog10(signalToNoiseRatio);
 
             //std::cout << "Radar::receive(" << em->getTarget() << "): ";
             //std::cout << " pwr=" << em->getPower();
@@ -333,7 +333,7 @@ void Radar::receive(const LCreal dt)
       }
 
       em->unref();   // this unref() undoes the ref() done by RfSystem::rfReceivedEmission
-      em = 0;
+      em = nullptr;
 
       //if (np >= 0 && np < MAX_EMISSIONS) {
       //    packets[np] = 0;
@@ -366,10 +366,10 @@ void Radar::process(const LCreal dt)
 
    // Find the track manager
    TrackManager* tm = getTrackManager();
-   if (tm == 0) {
+   if (tm == nullptr) {
       // No track manager! Then just flush the input queue.
       lcLock(myLock);
-      for (Emission* em = rptQueue.get(); em != 0; em = rptQueue.get()) {
+      for (Emission* em = rptQueue.get(); em != nullptr; em = rptQueue.get()) {
          em->unref();
          rptSnQueue.get();
       }
@@ -385,11 +385,11 @@ void Radar::process(const LCreal dt)
 
       lcLock(myLock);
       for (unsigned int i = 0; i < numReports && i < MAX_REPORTS; i++) {
-         if (tm != 0) {
+         if (tm != nullptr) {
             tm->newReport(reports[i], rptMaxSn[i]);
          }
          reports[i]->unref();
-         reports[i] = 0;
+         reports[i] = nullptr;
          rptMaxSn[i] = 0;
       }
       numReports = 0;
@@ -411,7 +411,7 @@ void Radar::process(const LCreal dt)
       Emission* em = rptQueue.get();
       LCreal snDbl = rptSnQueue.get();
 
-      if (em != 0) {
+      if (em != nullptr) {
          // ---
          // 1) Match the emission with existing reports
          // ---
@@ -463,7 +463,7 @@ void Radar::process(const LCreal dt)
 unsigned int Radar::getReports(const Emission** list, const unsigned int max) const
 {
    unsigned int num = 0;
-   if (list != 0 && max > 0 && numReports > 0) {
+   if (list != nullptr && max > 0 && numReports > 0) {
       lcLock(myLock);
       num = numReports;
       if (num > max) num = max;
@@ -508,7 +508,7 @@ void Radar::clearSweep(const unsigned int n)
 {
    if (n < NUM_SWEEPS) {
       for (unsigned int i = 0; i < PTRS_PER_SWEEP; i++) {
-         sweeps[n][i] = 0.0f;
+         sweeps[n][i] = 0.0;
          vclos[n][i] = 0.0;
       }
    }
@@ -519,7 +519,7 @@ void Radar::clearSweep(const unsigned int n)
 //------------------------------------------------------------------------------
 void Radar::ageSweeps()
 {
-   const LCreal aging = 0.002f;
+   const LCreal aging = 0.002;
    for (unsigned int i = 0; i < NUM_SWEEPS; i++) {
       for (unsigned int j = 0; j < PTRS_PER_SWEEP; j++) {
          LCreal p = sweeps[i][j];
@@ -537,10 +537,10 @@ void Radar::ageSweeps()
 //------------------------------------------------------------------------------
 unsigned int Radar::computeSweepIndex(const LCreal az)
 {
-   LCreal s = LCreal(NUM_SWEEPS-1)/60.0;      // sweeps per display scaling
+   LCreal s = static_cast<LCreal>(NUM_SWEEPS-1)/60.0;      // sweeps per display scaling
 
-   LCreal az1 = az + 30.0f;                   // Offset from left side (sweep 0)
-   int n = static_cast<int>(az1*s + 0.5);     // Compute index
+   LCreal az1 = az + 30.0;                                 // Offset from left side (sweep 0)
+   int n = static_cast<int>(az1*s + 0.5);                  // Compute index
    if (n >= NUM_SWEEPS) n = NUM_SWEEPS - 1;
    if (n < 0) n = 0;
    return static_cast<unsigned int>(n);
@@ -557,7 +557,7 @@ unsigned int Radar::computeRangeIndex(const LCreal rng)
    //LCreal maxRng = 40000.0;
    LCreal maxRng = getRange() * Basic::Distance::NM2M;
    LCreal rng1 = (rng/ maxRng );
-   unsigned int n = static_cast<unsigned int>(rng1 * LCreal(PTRS_PER_SWEEP) + 0.5);
+   unsigned int n = static_cast<unsigned int>(rng1 * static_cast<LCreal>(PTRS_PER_SWEEP) + 0.5);
    if (n >= PTRS_PER_SWEEP) n = PTRS_PER_SWEEP - 1;
    return n;
 }

@@ -794,7 +794,7 @@ std::string PrintSelected::printTimeMsg(double time)
     LCreal ss = 0;  // Sec
 
     // utc time
-    Basic::Time::getHHMMSS(LCreal(time), &hh, &mm, &ss);
+    Basic::Time::getHHMMSS(static_cast<LCreal>(time), &hh, &mm, &ss);
     std::sprintf(cbuf, "%02d:%02d:%06.3f", hh, mm, ss);
     std::string timeStr;
     timeStr.assign(cbuf);

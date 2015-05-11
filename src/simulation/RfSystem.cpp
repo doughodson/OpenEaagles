@@ -253,7 +253,7 @@ void RfSystem::rfReceivedEmission(Emission* const em, Antenna* const, LCreal raG
       if (affectsRfSystem(em)) {
 
          // Pulses this radar frame (from emission)
-         //LCreal pulses = LCreal( em->getPulses() );
+         //LCreal pulses = static_cast<LCreal>( em->getPulses() );
          //if (pulses <= 0) pulses = 1.0f;
 
          // Compute signal losses

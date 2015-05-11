@@ -635,7 +635,7 @@ LCreal SigAzEl::getRCS(const Emission* const em)
 
       // If the dependent data is in decibels ...
       if (isDecibel()) {
-         rcs = lcPow(LCreal(10.0f), LCreal(rcs/10.0f));
+         rcs = lcPow(static_cast<LCreal>(10.0), static_cast<LCreal>(rcs / 10.0));
       }
    }
    return rcs;

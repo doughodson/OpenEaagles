@@ -112,7 +112,7 @@ void FirstOrderTf::initialize()
    BaseClass::initialize();
 
    if (isValid()) {
-      const LCreal T = 1.0f/LCreal(rate);
+      const LCreal T = 1.0f / static_cast<LCreal>(rate);
       pa[0] = 0;
       pa[1] = -(T*d2 - 2.0f*d1)/(T*d2 + 2.0f*d1);
       pb[0] =  (T*n2 + 2.0f*n1)/(T*d2 + 2.0f*d1);

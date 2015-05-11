@@ -729,7 +729,7 @@ bool Steerpoint::compute(const Navigation* const nav, const Steerpoint* const fr
             if (nav->isVelocityDataValid() && nav->getGroundSpeedKts() > 0.0) {
                 toTTG = (toDist/nav->getGroundSpeedKts()) * Basic::Time::H2S;
             }
-            setTTG(LCreal(toTTG));
+            setTTG(static_cast<LCreal>(toTTG));
 
             // ---
             // Compute 'leg' course, distance & time, as well as enroute distance & times

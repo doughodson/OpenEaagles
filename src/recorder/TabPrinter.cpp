@@ -9,7 +9,6 @@
 #include "openeaagles/basic/units/Angles.h"
 #include "openeaagles/basic/Nav.h"
 
-
 // Disable all deprecation warnings for now.  Until we fix them,
 // they are quite annoying to see over and over again...
 #if(_MSC_VER>=1400)   // VC8+
@@ -1875,7 +1874,7 @@ void TabPrinter::printExecTimeMsg(std::ostream& sout, double execTime)
     double ss = 0;  // Sec
 
     // exec time
-    Basic::Time::getHHMMSS(LCreal(execTime), &hh, &mm, &ss);
+    Basic::Time::getHHMMSS(static_cast<LCreal>(execTime), &hh, &mm, &ss);
     std::sprintf(cbuf, "%02d:%02d:%06.3f", hh, mm, ss);
     sout << cbuf;
 }
@@ -1891,7 +1890,7 @@ void TabPrinter::printUtcTimeMsg(std::ostream& sout, double utcTime)
     LCreal ss = 0;  // Sec
 
     // sim time
-    Basic::Time::getHHMMSS(LCreal(utcTime), &hh, &mm, &ss);
+    Basic::Time::getHHMMSS(static_cast<LCreal>(utcTime), &hh, &mm, &ss);
     std::sprintf(cbuf, "%02d:%02d:%06.3f", hh, mm, ss);
     sout << cbuf;
 }
@@ -1907,7 +1906,7 @@ void TabPrinter::printSimTimeMsg(std::ostream& sout, double simTime)
     LCreal ss = 0;  // Sec
 
     // utc time
-    Basic::Time::getHHMMSS(LCreal(simTime), &hh, &mm, &ss);
+    Basic::Time::getHHMMSS(static_cast<LCreal>(simTime), &hh, &mm, &ss);
     std::sprintf(cbuf, "%02d:%02d:%06.3f", hh, mm, ss);
     sout << cbuf;
 }

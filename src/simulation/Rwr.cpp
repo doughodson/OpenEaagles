@@ -231,7 +231,7 @@ int Rwr::getRayIndex(const LCreal az) const
 //------------------------------------------------------------------------------
 LCreal Rwr::getRayAzimuth(const int idx) const
 {
-    LCreal az = getDegreesPerRay() * LCreal(idx);
+    LCreal az = getDegreesPerRay() * static_cast<LCreal>(idx);
     return lcAepcDeg(az);
 }
 
