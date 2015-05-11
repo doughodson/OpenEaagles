@@ -115,15 +115,15 @@ LCreal SigConstant::getRCS(const Emission* const)
 bool SigConstant::setRCS(const Basic::Number* const num)
 {
     bool ok = false;
-    LCreal r = -1.0f;
+    LCreal r = -1.0;
 
     const Basic::Area* d = dynamic_cast<const Basic::Area*>(num);
-    if (d != 0) {
+    if (d != nullptr) {
         // Has area units and we need square meters
         Basic::SquareMeters m2;
         r = m2.convert(*d);
     }
-    else if (num != 0) {
+    else if (num != nullptr) {
         // square meters (Number or Decibel)
         r = num->getReal();
     }
@@ -204,15 +204,15 @@ LCreal SigSphere::getRCS(const Emission* const)
 bool SigSphere::setRadiusFromSlot(Basic::Number* const num)
 {
     bool ok = false;
-    LCreal r = -1.0f;
+    LCreal r = -1.0;
 
     Basic::Distance* d = dynamic_cast<Basic::Distance*>(num);
-    if (d != 0) {
+    if (d != nullptr) {
         // Has distance units and we need meters
         Basic::Meters meters;
         r = meters.convert(*d);
     }
-    else if (num != 0) {
+    else if (num != nullptr) {
         // Just a Number
         r = num->getReal();
     }
@@ -290,7 +290,7 @@ void SigPlate::deleteData()
 LCreal SigPlate::getRCS(const Emission* const em)
 {
     double rcs = 0.0;
-    if (em != 0) {
+    if (em != nullptr) {
         double lambda = em->getWavelength();
         double area = a * b;
         if (lambda > 0.0 && area > 0.0) {
@@ -307,15 +307,15 @@ LCreal SigPlate::getRCS(const Emission* const em)
 bool SigPlate::setA(Basic::Number* const num)
 {
     bool ok = false;
-    LCreal v = -1.0f;
+    LCreal v = -1.0;
 
     Basic::Distance* d = dynamic_cast<Basic::Distance*>(num);
-    if (d != 0) {
+    if (d != nullptr) {
         // Has distance units and we need meters
         Basic::Meters meters;
         v = meters.convert(*d);
     }
-    else if (num != 0) {
+    else if (num != nullptr) {
         // Just a Number
         v = num->getReal();
     }
@@ -331,15 +331,15 @@ bool SigPlate::setA(Basic::Number* const num)
 bool SigPlate::setB(Basic::Number* const num)
 {
     bool ok = false;
-    LCreal v = -1.0f;
+    LCreal v = -1.0;
 
     Basic::Distance* d = dynamic_cast<Basic::Distance*>(num);
-    if (d != 0) {
+    if (d != nullptr) {
         // Has distance units and we need meters
         Basic::Meters meters;
         v = meters.convert(*d);
     }
-    else if (num != 0) {
+    else if (num != nullptr) {
         // Just a Number
         v = num->getReal();
     }
@@ -370,11 +370,13 @@ EMPTY_SERIALIZER(SigDihedralCR)
 SigDihedralCR::SigDihedralCR()
 {
     STANDARD_CONSTRUCTOR()
+    length = 0.0;
 }
 
-SigDihedralCR::SigDihedralCR(const LCreal a) : SigPlate(a,0.0)
+SigDihedralCR::SigDihedralCR(const LCreal a) : SigPlate(a, 0.0)
 {
     STANDARD_CONSTRUCTOR()
+    length = 0.0;
 }
 
 //------------------------------------------------------------------------------
@@ -398,11 +400,11 @@ void SigDihedralCR::deleteData()
 LCreal SigDihedralCR::getRCS(const Emission* const em)
 {
     double rcs = 0.0;
-    if (em != 0) {
-        double lambda = em->getWavelength();
+    if (em != nullptr) {
+        const double lambda = em->getWavelength();
         if (lambda > 0.0) {
             // If we have lambda and the area of the plate, compute the RCS
-            double a = getA();
+            const double a = getA();
             rcs = (8.0 * PI * a*a*a*a) / (lambda*lambda);
         }
     }
@@ -450,11 +452,11 @@ void SigTrihedralCR::deleteData()
 LCreal SigTrihedralCR::getRCS(const Emission* const em)
 {
     double rcs = 0.0;
-    if (em != 0) {
-        double lambda = em->getWavelength();
+    if (em != nullptr) {
+        const double lambda = em->getWavelength();
         if (lambda > 0.0) {
             // If we have lambda and the area of the plate, compute the RCS
-            double a = getA();
+            const double a = getA();
             rcs = (12.0 * PI * a*a*a*a) / (lambda*lambda);
         }
     }
@@ -501,7 +503,7 @@ LCreal SigSwitch::getRCS(const Emission* const em)
 
    // Find our ownship player ...
    const Player* ownship = static_cast<const Player*>(findContainerByType(typeid(Player)));
-   if (ownship != 0) {
+   if (ownship != nullptr) {
 
       // get our ownship's camouflage type
       unsigned int camouflage = ownship->getCamouflageType();
@@ -509,9 +511,9 @@ LCreal SigSwitch::getRCS(const Emission* const em)
 
       // find a RfSignature with this index
       Basic::Pair* pair = findByIndex(camouflage);
-      if (pair != 0) {
+      if (pair != nullptr) {
          RfSignature* sig = dynamic_cast<RfSignature*>( pair->object() );
-         if (sig != 0) {
+         if (sig != nullptr) {
 
             // OK -- we've found the correct RfSignature subcomponent
             // now let it do all of the work
@@ -560,7 +562,7 @@ SigAzEl::SigAzEl()
 {
    STANDARD_CONSTRUCTOR()
 
-   tbl = 0;
+   tbl = nullptr;
    swapOrderFlg = false;
    degFlg = false;
    dbFlg = false;
@@ -570,8 +572,8 @@ SigAzEl::SigAzEl(const Basic::Table2* const tbl0)
 {
    STANDARD_CONSTRUCTOR()
 
-   tbl = 0;
-   if (tbl0 != 0) {
+   tbl = nullptr;
+   if (tbl0 != nullptr) {
       tbl = tbl0->clone();
    }
    swapOrderFlg = false;
@@ -586,11 +588,11 @@ void SigAzEl::copyData(const SigAzEl& org, const bool cc)
 {
    BaseClass::copyData(org);
    if (cc) {
-      tbl = 0;
+      tbl = nullptr;
    }
 
-   if (tbl != 0) { tbl->unref(); tbl = 0; }
-   if (org.tbl != 0) {
+   if (tbl != nullptr) { tbl->unref(); tbl = nullptr; }
+   if (org.tbl != nullptr) {
       tbl = org.tbl->clone();
    }
 
@@ -604,7 +606,7 @@ void SigAzEl::copyData(const SigAzEl& org, const bool cc)
 //------------------------------------------------------------------------------
 void SigAzEl::deleteData()
 {
-    if (tbl != 0) { tbl->unref(); tbl = 0; }
+    if (tbl != nullptr) { tbl->unref(); tbl = nullptr; }
 }
 
 //------------------------------------------------------------------------------
@@ -613,7 +615,7 @@ void SigAzEl::deleteData()
 LCreal SigAzEl::getRCS(const Emission* const em)
 {
    LCreal rcs = 0.0;
-   if (em != 0 && tbl != 0) {
+   if (em != nullptr && tbl != nullptr) {
 
       // angle of arrival (radians)
       LCreal iv1 = em->getAzimuthAoi();
@@ -647,7 +649,7 @@ LCreal SigAzEl::getRCS(const Emission* const em)
 bool SigAzEl::isTableValid() const
 {
    bool ok = false;
-   if (tbl != 0) {
+   if (tbl != nullptr) {
       ok = tbl->isValid();
    }
    return ok;
@@ -683,8 +685,8 @@ bool SigAzEl::setDecibel(const bool flg)
 bool SigAzEl::setSlotTable(const Basic::Table2* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
-      if (tbl != 0) tbl->unref();
+   if (msg != nullptr) {
+      if (tbl != nullptr) tbl->unref();
       msg->ref();
       tbl = msg;
       ok = true;
@@ -695,7 +697,7 @@ bool SigAzEl::setSlotTable(const Basic::Table2* const msg)
 bool SigAzEl::setSlotSwapOrder(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setSwapOrder( msg->getBoolean() );
    }
    return ok;
@@ -704,7 +706,7 @@ bool SigAzEl::setSlotSwapOrder(const Basic::Number* const msg)
 bool SigAzEl::setSlotInDegrees(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setInDegrees( msg->getBoolean() );
    }
    return ok;
@@ -713,7 +715,7 @@ bool SigAzEl::setSlotInDegrees(const Basic::Number* const msg)
 bool SigAzEl::setSlotDecibel(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setDecibel( msg->getBoolean() );
    }
    return ok;

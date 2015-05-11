@@ -36,10 +36,10 @@ void SensorMsg::initData()
     losO2T.set(0,0,0);
     losT2O.set(0,0,0);
     aoi.set(0,0,0);
-    ownship = 0;
-    gimbal = 0;
-    target = 0;
-    dataMsg = 0;
+    ownship = nullptr;
+    gimbal = nullptr;
+    target = nullptr;
+    dataMsg = nullptr;
 
     returnReq = false;
     localOnly = false;
@@ -96,10 +96,10 @@ void SensorMsg::deleteData()
 //------------------------------------------------------------------------------
 void SensorMsg::clear()
 {
-   setOwnship(0);
-   setGimbal(0);
-   setTarget(0);
-   setDataMessage(0);
+   setOwnship(nullptr);
+   setGimbal(nullptr);
+   setTarget(nullptr);
+   setDataMessage(nullptr);
 }
 //------------------------------------------------------------------------------
 // Sets the range to the target

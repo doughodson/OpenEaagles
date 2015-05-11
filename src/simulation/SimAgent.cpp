@@ -1,6 +1,4 @@
-//
-// SimAgent
-//
+
 #include "openeaagles/simulation/SimAgent.h"
 
 #include "openeaagles/basic/ubf/Action.h"
@@ -17,12 +15,12 @@
 namespace Eaagles {
 namespace Simulation {
 
-//
+//------------------------------------------------------------------------------
 // Class: SimAgent
 //
 // Description: An Agent that manages a component (the "actor") with a behavior
 // (either a player, or a player's component)
-//
+//------------------------------------------------------------------------------
 
 IMPLEMENT_SUBCLASS(SimAgent, "SimAgent")
 EMPTY_SERIALIZER(SimAgent)
@@ -43,9 +41,9 @@ END_SLOT_MAP()
 SimAgent::SimAgent()
 {
    STANDARD_CONSTRUCTOR()
-   actorPlayerName   = 0;
-   actorComponentName   = 0;
-   myStation     = 0;
+   actorPlayerName = nullptr;
+   actorComponentName = nullptr;
+   myStation = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -53,21 +51,21 @@ SimAgent::SimAgent()
 //------------------------------------------------------------------------------
 void SimAgent::deleteData()
 {
-   if (actorPlayerName!=0) {
+   if (actorPlayerName!=nullptr) {
       actorPlayerName->unref();
-      actorPlayerName=0;
+      actorPlayerName=nullptr;
    }
-   if (actorComponentName!=0) {
+   if (actorComponentName!=nullptr) {
       actorComponentName->unref();
-      actorComponentName=0;
+      actorComponentName=nullptr;
    }
 }
 
 Station* SimAgent::getStation()
 {
-   if ( myStation==0 ) {
+   if ( myStation==nullptr ) {
       Station* s = dynamic_cast<Station*>(findContainerByType(typeid(Station)));
-      if (s != 0) {
+      if (s != nullptr) {
          myStation = s;
       }
    }
@@ -76,9 +74,9 @@ Station* SimAgent::getStation()
 
 Simulation* SimAgent::getSimulation()
 {
-   Simulation* sim = 0;
+   Simulation* sim = nullptr;
    Station* s = getStation();
-   if (s != 0) {
+   if (s != nullptr) {
       sim = s->getSimulation();
    }
    return sim;
@@ -87,28 +85,28 @@ Simulation* SimAgent::getSimulation()
 // finds our actor during reset() processing
 void SimAgent::initActor()
 {
-   if (getActor() == 0 ) {
-      if (actorPlayerName == 0) {
+   if (getActor() == nullptr ) {
+      if (actorPlayerName == nullptr) {
          // not correctly specified as a SimAgent, try baseClass ?
          BaseClass::initActor();
       }
       else {
          Simulation* sim = getSimulation();
-         if ( sim!=0 ) {
+         if ( sim != nullptr ) {
             Basic::Component* player = sim->findPlayerByName(actorPlayerName->getString());
-            if (actorComponentName == 0) {
+            if (actorComponentName == nullptr) {
                // no player component specified, so the player is the actor
                setActor(player);
             }
-            else if (player!=0) {
+            else if (player != nullptr) {
                Basic::Pair* pair = player->findByName(actorComponentName->getString());
-               if (pair != 0) {
+               if (pair != nullptr) {
                   setActor(dynamic_cast<Basic::Component*>( pair->object() ));
                }
             }
          }
       }
-   }     
+   }
 }
 
 void SimAgent::setActorPlayerByName(const char* x)
@@ -126,7 +124,7 @@ void SimAgent::setActorComponentByName(const char* x)
 bool SimAgent::setSlotActorPlayerName(const Basic::String* const x)
 {
    bool ok = false;
-   if ( x!=0 ) {
+   if ( x != nullptr ) {
       setActorPlayerByName(x->getString());
       ok = true;
    }
@@ -136,7 +134,7 @@ bool SimAgent::setSlotActorPlayerName(const Basic::String* const x)
 bool SimAgent::setSlotActorComponentName(const Basic::String* const x)
 {
    bool ok = false;
-   if ( x!=0 ) {
+   if ( x != nullptr ) {
       setActorComponentByName(x->getString());
       ok = true;
    }

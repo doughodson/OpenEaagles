@@ -120,6 +120,9 @@ simulation
    Lifeforms class
       1) initialized 'lookAngle' in contructor (bug fix)
 
+   SigDihedralCR class
+      1) Added initialization for 'length' (bug fix)
+
 --------------------------------------------------------------------------------
 terrain
  

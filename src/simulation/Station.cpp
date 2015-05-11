@@ -64,9 +64,9 @@ class BgThread : public Basic::ThreadPeriodicTask {
 //=============================================================================
 IMPLEMENT_SUBCLASS(Station,"Station")
 
-const LCreal Station::DEFAULT_TC_THREAD_PRI  = 0.8f;
-const LCreal Station::DEFAULT_BG_THREAD_PRI  = 0.5f;
-const LCreal Station::DEFAULT_NET_THREAD_PRI = 0.5f;
+const LCreal Station::DEFAULT_TC_THREAD_PRI  = 0.8;
+const LCreal Station::DEFAULT_BG_THREAD_PRI  = 0.5;
+const LCreal Station::DEFAULT_NET_THREAD_PRI = 0.5;
 
 //------------------------------------------------------------------------------
 // Slot table

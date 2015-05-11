@@ -98,7 +98,7 @@ void StabilizingGimbal::stabilizingController(const LCreal dt)
 //------------------------------------------------------------------------------
 void StabilizingGimbal::rollStabilizingController(const LCreal)
 {
-    if (getOwnship() == 0) return;
+    if (getOwnship() == nullptr) return;
 
     osg::Vec3 tpos = getCmdPosition();
     if (mountPosition == NOSE){
@@ -121,7 +121,7 @@ void StabilizingGimbal::rollStabilizingController(const LCreal)
 //------------------------------------------------------------------------------
 void StabilizingGimbal::elevationStabilizingController(const LCreal)
 {
-    if (getOwnship() == 0) return;
+    if (getOwnship() == nullptr) return;
 
     osg::Vec3 tpos = getCmdPosition();
     if (mountPosition == NOSE){
@@ -164,7 +164,7 @@ bool StabilizingGimbal::setSlotStabilizingMode(Basic::String* const msg)
 {
     // set our scan mode
     bool ok = true;
-    if (msg != 0) {
+    if (msg != nullptr) {
         if (*msg == "roll") ok = setStabilizingMode(ROLL);
         else if (*msg == "elevation") ok = setStabilizingMode(ELEVATION);
         else if (*msg == "horizon") ok = setStabilizingMode(HORIZON);
@@ -180,7 +180,7 @@ bool StabilizingGimbal::setSlotMountPosition(Basic::String* const msg)
 {
     // set our scan mode
     bool ok = true;
-    if (msg != 0) {
+    if (msg != nullptr) {
         if (*msg == "nose") ok = setMountPosition(NOSE);
         else if (*msg == "tail") ok = setMountPosition(TAIL);
         else if (*msg == "left") ok = setMountPosition(LEFT_WING);

@@ -41,7 +41,7 @@ unsigned int SpaceVehicle::getMajorType() const
 LCreal SpaceVehicle::getFuelWt() const
 {
    LCreal value = 0.0;
-   if (getDynamicsModel() != 0) {
+   if (getDynamicsModel() != nullptr) {
       value = getDynamicsModel()->getFuelWt();
    }
    return value;
@@ -50,7 +50,7 @@ LCreal SpaceVehicle::getFuelWt() const
 LCreal SpaceVehicle::getFuelWtMax() const
 {
    LCreal value = 0.0;
-   if (getDynamicsModel() != 0) {
+   if (getDynamicsModel() != nullptr) {
       value = getDynamicsModel()->getFuelWtMax();
    }
    return value;
@@ -59,7 +59,7 @@ LCreal SpaceVehicle::getFuelWtMax() const
 LCreal SpaceVehicle::getGrossWeight() const
 {
    LCreal value = 0.0;
-   if (getDynamicsModel() != 0) {
+   if (getDynamicsModel() != nullptr) {
       value = getDynamicsModel()->getGrossWeight();
    }
    return value;
@@ -73,7 +73,7 @@ bool SpaceVehicle::setControlStickYawInput(const LCreal yaw)
 {
    bool ok = false;
    SpaceDynamicsModel* model = dynamic_cast<SpaceDynamicsModel*>(getDynamicsModel());
-   if (model != 0) {
+   if (model != nullptr) {
       ok = model->setControlStickYawInput(yaw);
    }
    return ok;
@@ -87,7 +87,7 @@ bool SpaceVehicle::setTranslateXInput(const LCreal transx)
 {
    bool ok = false;
    SpaceDynamicsModel* model = dynamic_cast<SpaceDynamicsModel*>(getDynamicsModel());
-   if (model != 0) {
+   if (model != nullptr) {
       ok = model->setTranslateXInput(transx);
    }
    return ok;
@@ -101,7 +101,7 @@ bool SpaceVehicle::setTranslateYInput(const LCreal transy)
 {
    bool ok = false;
    SpaceDynamicsModel* model = dynamic_cast<SpaceDynamicsModel*>(getDynamicsModel());
-   if (model != 0) {
+   if (model != nullptr) {
       ok = model->setTranslateYInput(transy);
    }
    return ok;
@@ -115,7 +115,7 @@ bool SpaceVehicle::setTranslateZInput(const LCreal transz)
 {
    bool ok = false;
    SpaceDynamicsModel* model = dynamic_cast<SpaceDynamicsModel*>(getDynamicsModel());
-   if (model != 0) {
+   if (model != nullptr) {
       ok = model->setTranslateZInput(transz);
    }
    return ok;
@@ -127,7 +127,7 @@ bool SpaceVehicle::setTranslateZInput(const LCreal transz)
 int SpaceVehicle::getNumberOfEngines() const
 {
    int  n = 0;
-   if (getDynamicsModel() != 0) {
+   if (getDynamicsModel() != nullptr) {
       n = getDynamicsModel()->getNumberOfEngines();
    }
    return n;
@@ -136,7 +136,7 @@ int SpaceVehicle::getNumberOfEngines() const
 int SpaceVehicle::getEngThrust(LCreal* const data, const int max) const
 {
    int  n = 0;
-   if (getDynamicsModel() != 0) {
+   if (getDynamicsModel() != nullptr) {
       n = getDynamicsModel()->getEngThrust(data, max);
    }
    return n;
