@@ -59,7 +59,7 @@ void Rwr::initData()
 //------------------------------------------------------------------------------
 void Rwr::copyData(const Rwr& org, const bool cc)
 {
-    BaseClass::copyData(org);
+   BaseClass::copyData(org);
    if (cc) initData();
 }
 
@@ -69,7 +69,7 @@ void Rwr::copyData(const Rwr& org, const bool cc)
 void Rwr::deleteData()
 {
    // Clear out the queues
-   for (Emission* em = rptQueue.get(); em != 0; em = rptQueue.get()) { em->unref(); }
+   for (Emission* em = rptQueue.get(); em != nullptr; em = rptQueue.get()) { em->unref(); }
 }
 
 //------------------------------------------------------------------------------
@@ -78,7 +78,7 @@ void Rwr::deleteData()
 bool Rwr::shutdownNotification()
 {
    // Clear out the queues
-   for (Emission* em = rptQueue.get(); em != 0; em = rptQueue.get()) { em->unref(); }
+   for (Emission* em = rptQueue.get(); em != nullptr; em = rptQueue.get()) { em->unref(); }
    return BaseClass::shutdownNotification();
 }
 
@@ -102,7 +102,7 @@ void Rwr::receive(const LCreal dt)
 
    // Process received emissions
    TrackManager* tm = getTrackManager();
-   Emission* em = 0;
+   Emission* em = nullptr;
    LCreal signal = 0;
 
    // Get an emission from the queue
@@ -114,7 +114,7 @@ void Rwr::receive(const LCreal dt)
    }
    lcUnlock(packetLock);
 
-   while (em != 0) {
+   while (em != nullptr) {
 
       //std::cout << "Rwr::receive(" << em->getOwnship() << "): ";
       //std::cout << " pwr=" << em->getPower();
@@ -133,8 +133,8 @@ void Rwr::receive(const LCreal dt)
       if (signal > 0.0 && dt != 0.0) {
 
          // Signal over noise (equation 3-5)
-         LCreal sn = signal / noise;
-         LCreal snDbl = 10.0f * lcLog10(sn);
+         const LCreal sn = signal / noise;
+         const LCreal snDbl = 10.0 * lcLog10(sn);
 
          // Is S/N above receiver threshold  ## dpg -- for now, don't include ECM emissions
          if (snDbl > getRfThreshold() && !em->isECM() && rptQueue.isNotFull()) {
@@ -144,12 +144,12 @@ void Rwr::receive(const LCreal dt)
             }
 
             // Get Angle Of Arrival
-            LCreal aoa= em->getAzimuthAoi();
+            const LCreal aoa= em->getAzimuthAoi();
 
             // Store received power for real-beam display
-            LCreal sigDbl = 10.0f * lcLog10(signal);
-            LCreal signal10 = (sigDbl + 50.0f)/50.f;
-            int idx = getRayIndex( static_cast<LCreal>(Basic::Angle::R2DCC * aoa) );
+            const LCreal sigDbl = 10.0f * lcLog10(signal);
+            const LCreal signal10 = (sigDbl + 50.0f)/50.f;
+            const int idx = getRayIndex( static_cast<LCreal>(Basic::Angle::R2DCC * aoa) );
             rays[0][idx] = lim01(rays[0][idx] + signal10);
             //if (idx == 0 && getOwnship()->getID() == 1011) {
             //   std::cout << "sig = " << signal10 << std::endl;
@@ -163,7 +163,7 @@ void Rwr::receive(const LCreal dt)
 
       // finished
       em->unref();   // this unref() undoes the ref() done by RfSystem::rfReceivedEmission
-      em = 0;
+      em = nullptr;
 
 
       // Get another emission from the queue
@@ -191,7 +191,7 @@ void Rwr::process(const LCreal dt)
    // ---
    // Process Emissions into tracks
    // ---
-   for (Emission* em = rptQueue.get(); em != 0; em = rptQueue.get()) {
+   for (Emission* em = rptQueue.get(); em != nullptr; em = rptQueue.get()) {
       // finished
       em->unref();   // this undoes the ref() added in Rwr::receive()
    }
@@ -205,7 +205,7 @@ bool Rwr::killedNotification(Player* const p)
     // ---
     // Clear out the queues
     // ---
-    for (Emission* em = rptQueue.get(); em != 0; em = rptQueue.get()) { em->unref(); }
+    for (Emission* em = rptQueue.get(); em != nullptr; em = rptQueue.get()) { em->unref(); }
 
     // ---
     // Make sure our base class knows we're dead.
@@ -231,7 +231,7 @@ int Rwr::getRayIndex(const LCreal az) const
 //------------------------------------------------------------------------------
 LCreal Rwr::getRayAzimuth(const int idx) const
 {
-    LCreal az = getDegreesPerRay() * static_cast<LCreal>(idx);
+    const LCreal az = getDegreesPerRay() * static_cast<LCreal>(idx);
     return lcAepcDeg(az);
 }
 

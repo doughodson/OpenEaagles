@@ -24,7 +24,7 @@ const char* Sam::getNickname() const       { return "GenericAam"; }
 Sam::Sam()
 {
     STANDARD_CONSTRUCTOR()
-        
+
    static Basic::String gsam(getDescription());
    setType(&gsam);
 }

@@ -34,15 +34,15 @@ static const LCreal DEFAULT_SAR_TIME = 10.0f;
 //------------------------------------------------------------------------------
 // Constructor
 //------------------------------------------------------------------------------
-Sar::Sar() : imgList(0)
+Sar::Sar() : imgList(nullptr)
 {
    STANDARD_CONSTRUCTOR()
 
    nextId = 1;
-   stareLatitude = 0;
-   stareLongitude = 0;
-   stareElevation = 0;
-   resolution = 1;
+   stareLatitude = 0.0;
+   stareLongitude = 0.0;
+   stareElevation = 0.0;
+   resolution = 1.0;
    chipSize = 0;
    busy = false;
    haveLL = false;
@@ -63,7 +63,7 @@ void Sar::copyData(const Sar& org, const bool cc)
    BaseClass::copyData(org);
 
    if (cc) {
-      imgList = 0;
+      imgList = nullptr;
       setReceiverEnabledFlag(false);
       setTransmitterEnableFlag(false);
    }
@@ -83,11 +83,11 @@ void Sar::copyData(const Sar& org, const bool cc)
    timer = org.timer;
 
    // Copy the images
-   if (imgList != 0) {
+   if (imgList != nullptr) {
       imgList->unref();
-      imgList = 0;
+      imgList = nullptr;
    }
-   if (org.imgList != 0) {
+   if (org.imgList != nullptr) {
       imgList = org.imgList->clone();
    }
 }
@@ -98,9 +98,9 @@ void Sar::copyData(const Sar& org, const bool cc)
 void Sar::deleteData()
 {
     // Clear the images
-    if (imgList != 0) {
+    if (imgList != nullptr) {
         imgList->unref();
-        imgList = 0;
+        imgList = nullptr;
     }
 }
 
@@ -124,18 +124,18 @@ bool Sar::isSystemReady() const
 Basic::PairStream* Sar::getImages()
 {
     Basic::PairStream* p = imgList;
-    if (p != 0) p->ref();
+    if (p != nullptr) p->ref();
     return p;
 }
 
 // Returns the last image
 const Image* Sar::getImage() const
 {
-    const Image* p = 0;
-    if (imgList != 0) {
+    const Image* p = nullptr;
+    if (imgList != nullptr) {
         const Basic::Pair* pair = imgList->getPosition( imgList->entries() );    // Last item
         p = dynamic_cast<const Image*>(pair->object());
-        if (p != 0) p->ref();
+        if (p != nullptr) p->ref();
     }
     return p;
 }
@@ -159,8 +159,8 @@ bool Sar::setStarePoint(const double lat, const double lon, const LCreal elev)
 bool Sar::setSlotChipSize(const Basic::Number* const msg)
 {
     bool ok = false;
-    if (msg != 0) {
-        int n = msg->getInt();
+    if (msg != nullptr) {
+        const int n = msg->getInt();
         if (n >= 0) {
             ok = setChipSize( n );
         }
@@ -175,7 +175,7 @@ bool Sar::setResolution(const LCreal res)
 }
 
 //------------------------------------------------------------------------------
-// requestImage() -- Request a new image: 
+// requestImage() -- Request a new image:
 //------------------------------------------------------------------------------
 bool Sar::requestImage(
         const unsigned int w,           // Image width (pixels)
@@ -197,7 +197,7 @@ bool Sar::requestImage(
 }
 
 //------------------------------------------------------------------------------
-// cancel() -- Cancel the current SAR imaging   
+// cancel() -- Cancel the current SAR imaging
 //------------------------------------------------------------------------------
 void Sar::cancel()
 {
@@ -206,7 +206,7 @@ void Sar::cancel()
 }
 
 //------------------------------------------------------------------------------
-// process() -- 
+// process() --
 //------------------------------------------------------------------------------
 void Sar::process(const LCreal dt)
 {
@@ -219,21 +219,21 @@ void Sar::process(const LCreal dt)
       // Point the beam
       // ---
       Antenna* ant = getAntenna();
-      if (ant != 0) {
-         
-         Simulation* s = getSimulation();
-         double refLat = s->getRefLatitude();
-         double refLon = s->getRefLongitude();
+      if (ant != nullptr) {
+
+         const Simulation* s = getSimulation();
+         const double refLat = s->getRefLatitude();
+         const double refLon = s->getRefLongitude();
 
          osg::Vec3 pos;
          Basic::Nav::convertLL2PosVec(
             refLat, refLon,                           // Ref point (at sea level)
-            getStarePointLatitude(), getStarePointLongitude(), getStarePointElevation(), 
+            getStarePointLatitude(), getStarePointLongitude(), getStarePointElevation(),
             &pos); // x,y,z  NED
 
          // Platform (ownship) coord and then body
-         osg::Vec3 posP = pos - getOwnship()->getPosition();
-         osg::Vec3 posB = getOwnship()->getRotMat() * posP;
+         const osg::Vec3 posP = pos - getOwnship()->getPosition();
+         const osg::Vec3 posB = getOwnship()->getRotMat() * posP;
 
          // Convert to az/el
          LCreal tgt_az = 0.0;   // Angle (degs)
@@ -241,8 +241,8 @@ void Sar::process(const LCreal dt)
          xyz2AzEl(posB, &tgt_az, &tgt_el);
 
          // Command to that position
-         LCreal az = tgt_az * static_cast<LCreal>(Basic::Angle::D2RCC);
-         LCreal el = tgt_el * static_cast<LCreal>(Basic::Angle::D2RCC);
+         const LCreal az = tgt_az * static_cast<LCreal>(Basic::Angle::D2RCC);
+         const LCreal el = tgt_el * static_cast<LCreal>(Basic::Angle::D2RCC);
 
          ant->setRefAzimuth(az);
          ant->setRefElevation(el);
@@ -267,7 +267,7 @@ void Sar::process(const LCreal dt)
             std::cout << "Sar:: Generating test image: resolution: " << getResolution() << std::endl;
          }
          if (getResolution() > 0) p->setResolution( getResolution() );
-         else p->setResolution( 3.0f * Basic::Distance::FT2M );
+         else p->setResolution( 3.0 * Basic::Distance::FT2M );
          Basic::Pair* pp = new Basic::Pair("image", p);
          addImage(pp);
          // ### TEST
@@ -296,18 +296,18 @@ int Sar::getNextId()
 //------------------------------------------------------------------------------
 bool Sar::setChipSize(const unsigned int pixels)
 {
-    chipSize = pixels;   
+    chipSize = pixels;
     return true;
 }
 
 //------------------------------------------------------------------------------
-// addImage() -- Add an image to the end of the list of images 
+// addImage() -- Add an image to the end of the list of images
 //------------------------------------------------------------------------------
 bool Sar::addImage(Basic::Pair* const newImage)
 {
     bool ok = false;
-    if (newImage != 0) {
-        if (imgList == 0) {
+    if (newImage != nullptr) {
+        if (imgList == nullptr) {
             imgList = new Basic::PairStream();
         }
         imgList->put(newImage);
@@ -322,12 +322,12 @@ bool Sar::addImage(Basic::Pair* const newImage)
 void Sar::xyz2AzEl(const LCreal x, const LCreal y, const LCreal z, LCreal* const az, LCreal* const el)
 {
    // Compute azimuth (degs)
-   if (az != 0) {
+   if (az != nullptr) {
       *az = lcAtan2(y, x) * static_cast<LCreal>(Basic::Angle::R2DCC);
    }
 
-   if (el != 0) {
-      LCreal r = lcSqrt(x * x + y * y);
+   if (el != nullptr) {
+      const LCreal r = lcSqrt(x * x + y * y);
       *el = lcAtan2(-z, r) * static_cast<LCreal>(Basic::Angle::R2DCC);
    }
 }

@@ -81,7 +81,7 @@ RfSensor::RfSensor() : modes(nullptr), ranges(nullptr), masterModePtr(nullptr), 
     initRngIdx = 1;
     prf = 0.0;
     pulseWidth = 0.0;
-    beamWidth = (static_cast<LCreal>(Basic::Angle::D2RCC) * 3.5f);
+    beamWidth = (static_cast<LCreal>(Basic::Angle::D2RCC) * 3.5);
     syncXmitWithScan = false;
 
     typeId[0] = '\0';

@@ -105,18 +105,18 @@ const double TWO_PI = PI + PI;
 //                          0.0000024E-23 (uncertainty)
 // ---
 const double LIGHTSPEED = 299792458.0;
-const double BOLTZMANN = 1.3806503e-23f;
+const double BOLTZMANN = 1.3806503e-23;
 
 // One "G" to feet per second per second
 //  [This is an estimated average.
 //  [One actual "G" is a function of latitude, longitude, and other exotic parameters.]
-const LCreal ETHG = 32.16f;
-const double ETHGM = ETHG * 0.3048f;    // meters
+const LCreal ETHG = 32.16;
+const double ETHGM = ETHG * 0.3048;    // meters
 
 // Convert Barometric Pressure (Inches Mercury to/from Millibars)
 // This is an estimate.
-const LCreal INCH2MBAR  = (1013.2f / 29.92f);     // LDB -  Inches -> Mbars
-const LCreal MBAR2INCH  = (1.0f / INCH2MBAR);     // LDB -  Mbars -> Inches
+const LCreal INCH2MBAR  = (1013.2 / 29.92);     // LDB -  Inches -> Mbars
+const LCreal MBAR2INCH  = (1.0 / INCH2MBAR);     // LDB -  Mbars -> Inches
 
 // Earth gravitational parameter.
 // Units: meters cubed per seconds squared.
@@ -127,13 +127,13 @@ const double MuM3perS2 = 3986004.418E8;
 // default initial values for various readouts
 // ---
 const LCreal UNDEFINED_VALUE         = FLT_MIN;
-const LCreal INIT_VALUE              = 0.0f;
+const LCreal INIT_VALUE              = 0.0;
 const int    INIT_INT_VALUE          = 0;
 const int    INIT_SELECT_VALUE       = 1;
-const LCreal INIT_TIME_VALUE         = 0.0f;
-const LCreal INIT_DIRECTION_VALUE    = 0.0f;
-const LCreal INIT_LATITUDE_VALUE     = 0.0f;
-const LCreal INIT_LONGITUDE_VALUE    = 0.0f;
+const LCreal INIT_TIME_VALUE         = 0.0;
+const LCreal INIT_DIRECTION_VALUE    = 0.0;
+const LCreal INIT_LATITUDE_VALUE     = 0.0;
+const LCreal INIT_LONGITUDE_VALUE    = 0.0;
 
 // ---
 // Max/min functions
