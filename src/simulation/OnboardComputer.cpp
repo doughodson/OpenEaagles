@@ -21,8 +21,8 @@ OnboardComputer::OnboardComputer()
 {
    STANDARD_CONSTRUCTOR()
 
-   nextToShoot = 0;
-   action = 0;
+   nextToShoot = nullptr;
+   action = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -33,14 +33,14 @@ void OnboardComputer::copyData(const OnboardComputer& org, const bool cc)
    BaseClass::copyData(org);
 
    if (cc) {
-      nextToShoot = 0;
-      action = 0;
+      nextToShoot = nullptr;
+      action = nullptr;
    }
 
    action = 0; // Need to trigger the action
 
    // Clear next to shoot list
-   setNextToShoot(0);
+   setNextToShoot(nullptr);
 }
 
 //------------------------------------------------------------------------------
@@ -48,8 +48,8 @@ void OnboardComputer::copyData(const OnboardComputer& org, const bool cc)
 //------------------------------------------------------------------------------
 void OnboardComputer::deleteData()
 {
-   setNextToShoot(0);
-   action = 0;
+   setNextToShoot(nullptr);
+   action = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -57,8 +57,8 @@ void OnboardComputer::deleteData()
 //------------------------------------------------------------------------------
 bool OnboardComputer::shutdownNotification()
 {
-   setNextToShoot(0);
-   action = 0;
+   setNextToShoot(nullptr);
+   action = nullptr;
    return BaseClass::shutdownNotification();
 }
 
@@ -72,13 +72,13 @@ void OnboardComputer::reset()
    // ---
    // Cancel the current steerpoint action (if nay)
    // ---
-   if (action != 0) {
+   if (action != nullptr) {
       action->cancel();
-      action = 0;
+      action = nullptr;
    }
 
    // Clear shoot list
-   setNextToShoot(0);
+   setNextToShoot(nullptr);
 }
 
 //------------------------------------------------------------------------------
@@ -111,14 +111,14 @@ void OnboardComputer::triggerAction(Action* const toAction)
    // ---
    // Cancel any previous action
    // ---
-   if (action != 0) {
+   if (action != nullptr) {
       action->cancel();
    }
 
    // ---
    // find and start the current 'to' steerpont action
    // ---
-   if (toAction != 0) {
+   if (toAction != nullptr) {
       // trigger the action
       toAction->trigger(this);
 
@@ -135,12 +135,12 @@ void OnboardComputer::triggerAction(Action* const toAction)
 //------------------------------------------------------------------------------
 void OnboardComputer::actionManager(const LCreal dt)
 {
-   if (action != 0) {
+   if (action != nullptr) {
       // update the action
       action->process(dt);
       if (action->isCompleted()) {
          // The action has finished
-         action = 0;
+         action = nullptr;
       }
    }
 }
@@ -152,7 +152,7 @@ void OnboardComputer::actionManager(const LCreal dt)
 int OnboardComputer::getShootList(Track* tlist[], const int max)
 {
     int n = 0;
-    if (nextToShoot != 0 && tlist != 0 && max > 0) {
+    if (nextToShoot != nullptr && tlist != nullptr && max > 0) {
         nextToShoot->ref();
         tlist[0] = nextToShoot;
         n = 1;
@@ -163,7 +163,7 @@ int OnboardComputer::getShootList(Track* tlist[], const int max)
 int OnboardComputer::getShootList(const Track* tlist[], const int max) const
 {
     int n = 0;
-    if (nextToShoot != 0 && tlist != 0 && max > 0) {
+    if (nextToShoot != nullptr && tlist != nullptr && max > 0) {
         nextToShoot->ref();
         tlist[0] = nextToShoot;
         n = 1;
@@ -174,7 +174,7 @@ int OnboardComputer::getShootList(const Track* tlist[], const int max) const
 int OnboardComputer::getShootList(Basic::safe_ptr<Track>* const tlist, const int max)
 {
     int n = 0;
-    if (nextToShoot != 0 && tlist != 0 && max > 0) {
+    if (nextToShoot != nullptr && tlist != nullptr && max > 0) {
         tlist[0] = nextToShoot;
         n = 1;
     }
@@ -184,7 +184,7 @@ int OnboardComputer::getShootList(Basic::safe_ptr<Track>* const tlist, const int
 int OnboardComputer::getShootList(Basic::safe_ptr<const Track>* const tlist, const int max) const
 {
     int n = 0;
-    if (nextToShoot != 0 && tlist != 0 && max > 0) {
+    if (nextToShoot != nullptr && tlist != nullptr && max > 0) {
         tlist[0] = nextToShoot;
         n = 1;
     }
@@ -196,13 +196,12 @@ int OnboardComputer::getShootList(Basic::safe_ptr<const Track>* const tlist, con
 //------------------------------------------------------------------------------
 Track* OnboardComputer::getNextTarget()
 {
-    Track* trk = 0;
-
-    int n = 0;
     Basic::safe_ptr<Track> trackList[2];
-    n = getShootList(trackList,2);
-    if (n > 0) trk = trackList[0];
-
+    int n = getShootList(trackList,2);
+    Track* trk = nullptr;
+    if (n > 0) {
+       trk = trackList[0];
+    }
     return trk;
 }
 
@@ -223,8 +222,8 @@ void OnboardComputer::updateShootList(const bool step)
    int n = 0;
    TrackManager* tm = getTrackManagerByType(typeid(AirTrkMgr));
    // fall back to whatever TM we have, if we don't have an AirTrkMgr
-   if (tm == 0) tm = getTrackManagerByType(typeid(TrackManager));
-   if (tm != 0) n = tm->getTrackList(trackList,MAX_TRKS);
+   if (tm == nullptr) tm = getTrackManagerByType(typeid(TrackManager));
+   if (tm != nullptr) n = tm->getTrackList(trackList,MAX_TRKS);
 
    if (n > 0) {
 
@@ -232,7 +231,7 @@ void OnboardComputer::updateShootList(const bool step)
       // Find the current next-to-shoot index
       // ---
       Track* nts = nextToShoot;
-      if (nextToShoot != 0) {
+      if (nextToShoot != nullptr) {
          for (int i = 0; i < n && cNTS < 0; i++) {
             if (nts == trackList[i]) cNTS = i;
          }
@@ -246,7 +245,7 @@ void OnboardComputer::updateShootList(const bool step)
          //    that has a valid ground speed.
          int i = 0;
          do {
-            if (trackList[i]->getGroundSpeed() >= 1.0f) {
+            if (trackList[i]->getGroundSpeed() >= 1.0) {
                if (nNTS >= 0) {
                   // is this one closer?
                   if (trackList[i]->getRange() < trackList[nNTS]->getRange()) {
@@ -298,7 +297,7 @@ void OnboardComputer::updateShootList(const bool step)
 
    // Update the next to shoot
    if (nNTS >= 0) setNextToShoot( trackList[nNTS] );
-   else setNextToShoot(0);
+   else setNextToShoot(nullptr);
 }
 
 //------------------------------------------------------------------------------
@@ -308,7 +307,7 @@ void OnboardComputer::updateShootList(const bool step)
 bool OnboardComputer::requestNextToShoot(const Track* const nts)
 {
    bool ok = false;
-   if (nts != 0) {
+   if (nts != nullptr) {
 
       // First, let's get the active track list
       const unsigned int MAX_TRKS = 20;
@@ -317,8 +316,8 @@ bool OnboardComputer::requestNextToShoot(const Track* const nts)
       int n = 0;
       TrackManager* tm = getTrackManagerByType(typeid(AirTrkMgr));
       // fall back to whatever TM we have, if we don't have an AirTrkMgr
-      if (tm == 0) tm = getTrackManagerByType(typeid(TrackManager));
-      if (tm != 0) n = tm->getTrackList(trackList,MAX_TRKS);
+      if (tm == nullptr) tm = getTrackManagerByType(typeid(TrackManager));
+      if (tm != nullptr) n = tm->getTrackList(trackList,MAX_TRKS);
 
       if (n > 0) {
 
@@ -351,12 +350,12 @@ bool OnboardComputer::requestNextToShoot(const Track* const nts)
 //------------------------------------------------------------------------------
 void OnboardComputer::setNextToShoot(Track* const p)
 {
-   if (nextToShoot != 0) {
+   if (nextToShoot != nullptr) {
       nextToShoot->unref();
-      nextToShoot = 0;
+      nextToShoot = nullptr;
    }
    nextToShoot = p;
-   if (nextToShoot != 0) {
+   if (nextToShoot != nullptr) {
       nextToShoot->ref();
    }
 }
@@ -366,9 +365,9 @@ void OnboardComputer::setNextToShoot(Track* const p)
 //------------------------------------------------------------------------------
 TrackManager* OnboardComputer::getTrackManagerByType(const std::type_info& type)
 {
-   TrackManager* p = 0;
+   TrackManager* p = nullptr;
    Basic::Pair* pair = findByType(type);
-   if (pair != 0) {
+   if (pair != nullptr) {
       p = dynamic_cast<TrackManager*>( pair->object() );
    }
    return p;
@@ -376,9 +375,9 @@ TrackManager* OnboardComputer::getTrackManagerByType(const std::type_info& type)
 
 const TrackManager* OnboardComputer::getTrackManagerByType(const std::type_info& type) const
 {
-   const TrackManager* p = 0;
+   const TrackManager* p = nullptr;
    const Basic::Pair* pair = findByType(type);
-   if (pair != 0) {
+   if (pair != nullptr) {
       p = dynamic_cast<const TrackManager*>( pair->object() );
    }
    return p;
@@ -389,9 +388,9 @@ const TrackManager* OnboardComputer::getTrackManagerByType(const std::type_info&
 //------------------------------------------------------------------------------
 TrackManager* OnboardComputer::getTrackManagerByName(const char* const name)
 {
-   TrackManager* p = 0;
+   TrackManager* p = nullptr;
    Basic::Pair* pair = findByName(name);
-   if (pair != 0) {
+   if (pair != nullptr) {
       p = dynamic_cast<TrackManager*>( pair->object() );
    }
    return p;
@@ -399,14 +398,14 @@ TrackManager* OnboardComputer::getTrackManagerByName(const char* const name)
 
 const TrackManager* OnboardComputer::getTrackManagerByName(const char* const name) const
 {
-   const TrackManager* p = 0;
+   const TrackManager* p = nullptr;
    const Basic::Pair* pair = findByName(name);
-   if (pair != 0) {
+   if (pair != nullptr) {
       p = dynamic_cast<const TrackManager*>( pair->object() );
    }
    return p;
 }
 
-
 } // End Simulation namespace
 } // End Eaagles namespace
+

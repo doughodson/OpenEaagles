@@ -15,7 +15,7 @@ BEGIN_SLOTTABLE(Ntm)
    "template",       // 1) Template player
 END_SLOTTABLE(Ntm)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(Ntm)
     ON_SLOT(1, setSlotTemplatePlayer, Player)
 END_SLOT_MAP()
@@ -27,7 +27,7 @@ Ntm::Ntm()
 {
    STANDARD_CONSTRUCTOR()
 
-   tPlayer = 0;
+   tPlayer = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -38,7 +38,7 @@ void Ntm::copyData(const Ntm& org, const bool cc)
    BaseClass::copyData(org);
 
    if (cc) {
-      tPlayer = 0;
+      tPlayer = nullptr;
    }
 
    setSlotTemplatePlayer( org.tPlayer );
@@ -49,7 +49,7 @@ void Ntm::copyData(const Ntm& org, const bool cc)
 //------------------------------------------------------------------------------
 void Ntm::deleteData()
 {
-   setSlotTemplatePlayer( 0 );
+   setSlotTemplatePlayer( nullptr );
 }
 
 //------------------------------------------------------------------------------
@@ -68,8 +68,8 @@ bool Ntm::setSlotTemplatePlayer(const Player* const msg)
 //------------------------------------------------------------------------------
 Basic::Object* Ntm::getSlotByIndex(const int si)
 {
-    return BaseClass::getSlotByIndex(si);
-         }
+   return BaseClass::getSlotByIndex(si);
+}
 
 //------------------------------------------------------------------------------
 // serialize
@@ -81,20 +81,20 @@ std::ostream& Ntm::serialize(std::ostream& sout, const int i, const bool slotsOn
       indent(sout,i);
       sout << "( " << getFactoryName() << std::endl;
       j = 4;
-      }
+   }
 
-   if (tPlayer != 0) {
+   if (tPlayer != nullptr) {
       indent(sout,i+j);
       //sout << "template:" << std::endl;
       //tPlayer->serialize(sout,(i+j+4));
       sout << "template: ( " << tPlayer->getFactoryName();
       const Basic::String* tt = tPlayer->getType();
-      if (tt != 0) {
+      if (tt != nullptr) {
          sout << " type: " << *tt;
-   }
+      }
       sout << " )";
       sout << std::endl;
-}
+   }
 
    BaseClass::serialize(sout,i+j,true);
 

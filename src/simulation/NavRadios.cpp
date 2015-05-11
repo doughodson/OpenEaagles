@@ -30,12 +30,12 @@ NavRadio::NavRadio()
 
 void NavRadio::initData()
 {
-   apdb           = 0;
-   nvdb           = 0;
+   apdb           = nullptr;
+   nvdb           = nullptr;
 
-   latitude       = 0;
-   longitude      = 0;
-   altitude       = 0;
+   latitude       = 0.0;
+   longitude      = 0.0;
+   altitude       = 0.0;
 }
 
 
@@ -51,8 +51,8 @@ void NavRadio::copyData(const NavRadio& org, const bool cc)
    longitude = org.longitude;
    altitude = org.altitude;
 
-   apdb = 0;
-   nvdb = 0;
+   apdb = nullptr;
+   nvdb = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -60,8 +60,8 @@ void NavRadio::copyData(const NavRadio& org, const bool cc)
 //------------------------------------------------------------------------------
 void NavRadio::deleteData()
 {
-   apdb = 0;
-   nvdb = 0;
+   apdb = nullptr;
+   nvdb = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -69,8 +69,8 @@ void NavRadio::deleteData()
 //------------------------------------------------------------------------------
 bool NavRadio::shutdownNotification()
 {
-   apdb = 0;
-   nvdb = 0;
+   apdb = nullptr;
+   nvdb = nullptr;
 
    return BaseClass::shutdownNotification();
 }
@@ -97,34 +97,32 @@ double NavRadio::getAltitude() const
 Dafif::NavaidLoader* NavRadio::getNavaidLoader()
 {
    // If we don't have a NAVAID loader, try to get one from our simulation
-   if (nvdb == 0) {
+   if (nvdb == nullptr) {
       Simulation* sim = getSimulation();
-      if (sim != 0) {
+      if (sim != nullptr) {
          Dafif::NavaidLoader* p = sim->getNavaids();
-         if (p != 0 && p->isDbLoader()) {
+         if (p != nullptr && p->isDbLoader()) {
             nvdb = p;
-            }
          }
       }
-
-   return nvdb;
    }
+   return nvdb;
+}
 
 Dafif::AirportLoader* NavRadio::getAirportLoader()
 {
    // If we don't have an airport loader, try to get one from our simulation
-   if (apdb == 0) {
+   if (apdb == nullptr) {
       Simulation* sim = getSimulation();
-      if (sim != 0) {
+      if (sim != nullptr) {
          Dafif::AirportLoader* p = sim->getAirports();
-         if (p != 0 && p->isDbLoader()) {
+         if (p != nullptr && p->isDbLoader()) {
             apdb = p;
          }
-            }
-         }
-
-   return apdb;
       }
+   }
+   return apdb;
+}
 
 //------------------------------------------------------------------------------
 // set the position to that of our ownship vehicle
@@ -134,7 +132,7 @@ bool NavRadio::setPosition()
    bool ok = false;
 
    const Player* p = getOwnship();
-   if (p != 0) {
+   if (p != nullptr) {
       latitude = p->getLatitude();
       longitude = p->getLongitude();
       altitude = p->getAltitudeFt();
@@ -155,7 +153,7 @@ EMPTY_SERIALIZER(TacanRadio)
 //------------------------------------------------------------------------------
 TacanRadio::TacanRadio()
 {
-     STANDARD_CONSTRUCTOR()
+   STANDARD_CONSTRUCTOR()
 
    initData();
 }
@@ -168,12 +166,12 @@ void TacanRadio::initData()
 
     rangeIsValid = false;
     bearingIsValid = false;
-    range = 0;
-    grdrange = 0;
-    bearing = 0;
-    destLatitude = 0;
-    destLongitude = 0;
-    currentMagVar = 0;
+    range = 0.0;
+    grdrange = 0.0;
+    bearing = 0.0;
+    destLatitude = 0.0;
+    destLongitude = 0.0;
+    currentMagVar = 0.0;
     band = TCN_X_BAND;
 
     // Set frequencies
@@ -182,23 +180,23 @@ void TacanRadio::initData()
 
         // channels [ 1 .. 16 ]
         while (chan <= 16) {
-            setChannelFrequency(chan++, 0.0f);
+            setChannelFrequency(chan++, 0.0);
         }
 
         // channels [ 17 .. 59 ]
         while (chan < 59) {
-            setChannelFrequency(chan, (LCreal(chan) * 0.1f + 106.3f));
+            setChannelFrequency(chan, (static_cast<LCreal>(chan) * 0.1 + 106.3));
             chan++;
         }
 
         // channels [ 60 .. 69 ]
         while (chan <= 69) {
-            setChannelFrequency(chan++, 0.0f);
+            setChannelFrequency(chan++, 0.0);
         }
 
         // channels [ 70 .. 126 ]
         while (chan <= 126) {
-            setChannelFrequency(chan, (LCreal(chan) * 0.1f + 107.3f) );
+            setChannelFrequency(chan, (static_cast<LCreal>(chan) * 0.1 + 107.3) );
             chan++;
         }
     }
@@ -209,18 +207,18 @@ void TacanRadio::initData()
 //------------------------------------------------------------------------------
 void TacanRadio::copyData(const TacanRadio& org, const bool cc)
 {
-     BaseClass::copyData(org);
+   BaseClass::copyData(org);
    if (cc) initData();
 
-     rangeIsValid = org.rangeIsValid;
-     bearingIsValid = org.bearingIsValid;
-     range = org.range;
-     grdrange = org.grdrange;
-     bearing = org.bearing;
-     destLatitude = org.destLatitude;
-     destLongitude = org.destLongitude;
-     currentMagVar = org.currentMagVar;
-     band = org.band;
+   rangeIsValid = org.rangeIsValid;
+   bearingIsValid = org.bearingIsValid;
+   range = org.range;
+   grdrange = org.grdrange;
+   bearing = org.bearing;
+   destLatitude = org.destLatitude;
+   destLongitude = org.destLongitude;
+   currentMagVar = org.currentMagVar;
+   band = org.band;
 }
 
 //------------------------------------------------------------------------------
@@ -235,19 +233,19 @@ void TacanRadio::deleteData()
 //------------------------------------------------------------------------------
 void TacanRadio::updateData(const LCreal dt)
 {
-    BaseClass::updateData(dt);
+   BaseClass::updateData(dt);
 
-    //Must have ownship
-    if (getOwnship() == 0) return;
+   //Must have ownship
+   if (getOwnship() == nullptr) return;
 
    // Set our position to that of our ownship vehicle
    setPosition();
 
    //
 
-        //Get Range and Bearing...
+   //Get Range and Bearing...
    //bool rangeBearingTestResult = getRangeBearing(&rangeIsValid,&range,&grdrange,&bearingIsValid,&bearing);
-    }
+}
 
 //------------------------------------------------------------------------------
 // Get functions
@@ -260,12 +258,12 @@ TacanRadio::Band TacanRadio::getBand() const
 
 double TacanRadio::getRange() const
 {
-    return range;
+   return range;
 }
 
 double TacanRadio::getBearing() const
 {
-    return bearing;
+   return bearing;
 }
 
 //------------------------------------------------------------------------------
@@ -276,14 +274,14 @@ double TacanRadio::getBearing() const
 bool TacanRadio::setBand(const Band x)
 {
    band = x;
-    return true;
+   return true;
 }
 
 
 //------------------------------------------------------------------------------
 // computeRangeBearing
 //------------------------------------------------------------------------------
-bool TacanRadio::computeRangeBearing(bool *rngIsValid, double *range, double *grdrange, bool *bearingIsValid, double *bearing)
+bool TacanRadio::computeRangeBearing(bool* rngIsValid, double* range, double* grdrange, bool* bearingIsValid, double* bearing)
 {
    bool ok = false;
 
@@ -326,11 +324,11 @@ bool TacanRadio::computeRangeBearing(bool *rngIsValid, double *range, double *gr
 //==============================================================================
 // Class: IlsRadio
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(IlsRadio,"IlsRadio")
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(IlsRadio, "IlsRadio")
 EMPTY_SERIALIZER(IlsRadio)
 
-const LCreal IlsRadio::GS_DEG_PER_DOT = 0.25f;
-const LCreal IlsRadio::LOC_DEG_PER_DOT = 1.25f;
+const LCreal IlsRadio::GS_DEG_PER_DOT = 0.25;
+const LCreal IlsRadio::LOC_DEG_PER_DOT = 1.25;
 
 //------------------------------------------------------------------------------
 // Constructor(s)
@@ -342,20 +340,20 @@ IlsRadio::IlsRadio()
     setMaxDetectRange(35.0);
 
     timerCounter = 0;
-    destLatitude = 0;
-    destLongitude = 0;
-    currentMagVar = 0;
+    destLatitude = 0.0;
+    destLongitude = 0.0;
+    currentMagVar = 0.0;
     localizerValid = false;
     glideSlopeValid = false;
-    range = 0;
-    grdrange = 0;
-    bearing = 0;
-    ilsGlideSlope = 0;
-    acGlideSlope = 0;
-    deltaGlideSlope = 0;
-    ilsLocalizerBearing = 0;
-    acLocalizerBearing = 0;
-    deltaLocalizerBearing = 0;
+    range = 0.0;
+    grdrange = 0.0;
+    bearing = 0.0;
+    ilsGlideSlope = 0.0;
+    acGlideSlope = 0.0;
+    deltaGlideSlope = 0.0;
+    ilsLocalizerBearing = 0.0;
+    acLocalizerBearing = 0.0;
+    deltaLocalizerBearing = 0.0;
 }
 
 //------------------------------------------------------------------------------
@@ -395,13 +393,13 @@ void IlsRadio::deleteData()
 void IlsRadio::updateData(const LCreal dt)
 {
    //Must have ownship
-    if (getOwnship() == 0) return;
+    if (getOwnship() == nullptr) return;
 
     // Set our position to that of our ownship vehicle
     setPosition();
 
     //Do not update data every time...Hard code delay length...
-    if(timerCounter==0){
+    if(timerCounter == 0){
         //Get Glideslope and Runway orientation:
         glideSlopeValid = findILSGlideslopeByFreq(getFrequency());
         localizerValid = findLocalizerByFreq(getFrequency());
@@ -409,12 +407,12 @@ void IlsRadio::updateData(const LCreal dt)
         //Get test results - make sure dest LL do not change as plane flies
         Basic::Nav::gbd2ll(getLatitude(),getLongitude(),bearing,grdrange,&destLatitude,&destLongitude);
         //Test for bad result...
-        if((glideSlopeValid==false)|(localizerValid==false)){
+        if ((glideSlopeValid == false)|(localizerValid == false)) {
             //std::cerr << "No ILS In Range..." << std::endl;
         }
     }
-    else if(timerCounter==30){
-        timerCounter=0; //Make sure the lookup occurs on the next cycle
+    else if (timerCounter == 30) {
+        timerCounter = 0; //Make sure the lookup occurs on the next cycle
     }
     else{
         timerCounter++; //Do not do another DB lookup - wait for some time
@@ -426,7 +424,7 @@ void IlsRadio::updateData(const LCreal dt)
 //------------------------------------------------------------------------------
 // Outside FCNs
 //------------------------------------------------------------------------------
-LCreal IlsRadio::getGlideslopeDifference(void)
+LCreal IlsRadio::getGlideslopeDifference()
 {
     return deltaGlideSlope;
 }
@@ -436,7 +434,7 @@ LCreal IlsRadio::getGlideslopeDifferenceDots()
     return deltaGlideSlope / GS_DEG_PER_DOT;
 }
 
-LCreal IlsRadio::getLocalizerDifference(void)
+LCreal IlsRadio::getLocalizerDifference()
 {
     return deltaLocalizerBearing;
 }
@@ -454,7 +452,7 @@ bool IlsRadio::findILSGlideslopeByFreq(LCreal freq)
    //Reset glideSlopeValid so only the first valid glide slope is returned...
    glideSlopeValid = false;
 
-   if (getAirportLoader() != 0 && freq > 0) {
+   if (getAirportLoader() != nullptr && freq > 0) {
       if (getAirportLoader()->requestDbInUse()) {
          //Set the active area:
          getAirportLoader()->setArea(getLatitude(), getLongitude(), getMaxDetectRange());

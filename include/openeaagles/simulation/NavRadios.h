@@ -121,8 +121,8 @@ public:
    IlsRadio();
 
    //Outside Access FCNs
-   LCreal getGlideslopeDifference(void);
-   LCreal getLocalizerDifference(void);
+   LCreal getGlideslopeDifference();
+   LCreal getLocalizerDifference();
    LCreal getGlideslopeDifferenceDots();
    LCreal getLocalizerDifferenceDots();
 

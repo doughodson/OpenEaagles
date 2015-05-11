@@ -13,17 +13,19 @@
 #include "openeaagles/basic/units/Angles.h"
 #include "openeaagles/basic/units/Distances.h"
 
+#include <cmath>
+
 namespace Eaagles {
 namespace Simulation {
 
 //==============================================================================
 // Class: Nib
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Nib,"Nib")
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Nib, "Nib")
 EMPTY_SERIALIZER(Nib)
 
 Nib::Nib(const NetIO::IoType t) : ioType(t),
-             pPlayer(0), pNetIO(0), ntm(0)
+             pPlayer(nullptr), pNetIO(nullptr), ntm(nullptr)
 {
    STANDARD_CONSTRUCTOR()
 
@@ -32,13 +34,13 @@ Nib::Nib(const NetIO::IoType t) : ioType(t),
 
 void Nib::initData()
 {
-   federateName = 0;
-   pPlayer = 0;
-   pNetIO = 0;
+   federateName = nullptr;
+   pPlayer = nullptr;
+   pNetIO = nullptr;
    checked = false;
    playerID = 0;
 
-   ntm = 0;
+   ntm = nullptr;
    entityTypeChecked = false;
 
    lcStrcpy(pname, PNAME_BUF_SIZE, "EAAGLES");
@@ -52,8 +54,8 @@ void Nib::initData()
    camouflage = 0;
    detMsgSent = false;
 
-   execTime = 0;
-   utcTime = 0;
+   execTime = 0.0;
+   utcTime = 0.0;
 
    drNum = STATIC_DRM;
    drP0.set(0,0,0);
@@ -65,23 +67,23 @@ void Nib::initData()
    drWwT.identity();
    drOmega.identity();
 
-   drTime = 0;
+   drTime = 0.0;
    drPos.set(0,0,0);
    drAngles.set(0,0,0);
 
    smoothVel.set(0,0,0);
-   smoothTime = 0;
+   smoothTime = 0.0;
 
    apartWingSweepCnt = 0;
    apartGearPosCnt = 0;
    apartBayDoorCnt = 0;
    apartLnchrElevCnt = 0;
-   apartWingSweep = 0;
-   apartLandingGear = 0;
-   apartBayDoor = 0;
-   apartLnchrElev = 0;
+   apartWingSweep = 0.0;
+   apartLandingGear = 0.0;
+   apartBayDoor = 0.0;
+   apartLnchrElev = 0.0;
    for (unsigned int i = 0; i < MAX_AMSL; i++) {
-      apartMsl[i] = 0;
+      apartMsl[i] = nullptr;
       apartMslCnt[i] = 0;
       apartMslAttached[i] = false;
    }
@@ -98,7 +100,7 @@ void Nib::copyData(const Nib& org, const bool cc)
 
    const Player* p = org.pPlayer;
    setPlayer( const_cast<Player*>(p) );
-   setNetIO(0);
+   setNetIO(nullptr);
    setTypeMapper(org.ntm);
 
    checked = org.checked;
@@ -151,9 +153,9 @@ void Nib::copyData(const Nib& org, const bool cc)
 
    // Need to clear attached missiles -- after clone these need to be found again
    for (unsigned int i = 0; i < MAX_AMSL; i++) {
-      if (apartMsl[i] != 0) {
+      if (apartMsl[i] != nullptr) {
          apartMsl[i]->unref();
-         apartMsl[i] = 0;
+         apartMsl[i] = nullptr;
          apartMslCnt[i] = 0;
          apartMslAttached[i] = false;
       }
@@ -166,15 +168,15 @@ void Nib::copyData(const Nib& org, const bool cc)
 
 void Nib::deleteData()
 {
-   setPlayer(0);
-   setNetIO(0);
-   setTypeMapper(0);
+   setPlayer(nullptr);
+   setNetIO(nullptr);
+   setTypeMapper(nullptr);
 
    // Clear attached missiles
    for (unsigned int i = 0; i < MAX_AMSL; i++) {
-      if (apartMsl[i] != 0) {
+      if (apartMsl[i] != nullptr) {
          apartMsl[i]->unref();
-         apartMsl[i] = 0;
+         apartMsl[i] = nullptr;
          apartMslCnt[i] = 0;
          apartMslAttached[i] = false;
       }
@@ -187,15 +189,15 @@ void Nib::deleteData()
 //------------------------------------------------------------------------------
 bool Nib::shutdownNotification()
 {
-    setPlayer(0);
-    setNetIO(0);
-    setTypeMapper(0);
+    setPlayer(nullptr);
+    setNetIO(nullptr);
+    setTypeMapper(nullptr);
 
     // Clear attached missiles
    for (unsigned int i = 0; i < MAX_AMSL; i++) {
-      if (apartMsl[i] != 0) {
+      if (apartMsl[i] != nullptr) {
          apartMsl[i]->unref();
-         apartMsl[i] = 0;
+         apartMsl[i] = nullptr;
          apartMslCnt[i] = 0;
          apartMslAttached[i] = false;
       }
@@ -211,7 +213,7 @@ bool Nib::shutdownNotification()
 bool Nib::setPlayer(Player* const p)
 {
     pPlayer = p;
-    if (pPlayer != 0) {
+    if (pPlayer != nullptr) {
         playerID = pPlayer->getID();
     }
     else {
@@ -226,8 +228,8 @@ bool Nib::setPlayer(Player* const p)
 //------------------------------------------------------------------------------
 void Nib::setPlayerName(const char* s)
 {
-    if  (s != 0) {
-        lcStrcpy(pname,PNAME_BUF_SIZE,s);
+    if (s != nullptr) {
+        lcStrcpy(pname,PNAME_BUF_SIZE, s);
     }
     else {
         pname[0] = ' ';
@@ -291,7 +293,7 @@ bool Nib::setOutputPlayerType(const Player* const p)
 {
    bool ok = false;
 
-   if (getNetIO() != 0) {
+   if (getNetIO() != nullptr) {
 
       // Mark that we've been here.
       setEntityTypeChecked( true );
@@ -301,7 +303,7 @@ bool Nib::setOutputPlayerType(const Player* const p)
 
       // If we found a type mapper for this Player type,
       // then set the mapper and copy the unique type codes
-      if (typeMapper != 0) {
+      if (typeMapper != nullptr) {
          ok = typeMapper->copyEntityType(this);
          if (ok) setTypeMapper(typeMapper);
       }
@@ -367,8 +369,8 @@ void Nib::setEntityTypeChecked(const bool f)
 bool Nib::setDamage(const LCreal v)
 {
    LCreal x = v;
-   if (x < 0) x = 0.0f;
-   if (x > 1) x = 1.0f;
+   if (x < 0) x = 0.0;
+   if (x > 1) x = 1.0;
    damage = x;
    return true;
 }
@@ -377,8 +379,8 @@ bool Nib::setDamage(const LCreal v)
 bool Nib::setSmoke(const LCreal v)
 {
    LCreal x = v;
-   if (x < 0) x = 0.0f;
-   if (x > 1) x = 1.0f;
+   if (x < 0) x = 0.0;
+   if (x > 1) x = 1.0;
    smoking = x;
    return true;
 }
@@ -387,8 +389,8 @@ bool Nib::setSmoke(const LCreal v)
 bool Nib::setFlames(const LCreal v)
 {
    LCreal x = v;
-   if (x < 0) x = 0.0f;
-   if (x > 1) x = 1.0f;
+   if (x < 0) x = 0.0;
+   if (x > 1) x = 1.0;
    flames = x;
    return true;
 }
@@ -419,7 +421,7 @@ bool Nib::isPlayerStateUpdateRequired(const LCreal curExecTime)
    // 1) Make sure that we have a valid player and entity type
    // ---
    const Player* player = getPlayer();
-   if (player == 0 || isEntityTypeInvalid()) result = NO;
+   if (player == nullptr || isEntityTypeInvalid()) result = NO;
 
    // ---
    // 2) Mode changes
@@ -436,7 +438,7 @@ bool Nib::isPlayerStateUpdateRequired(const LCreal curExecTime)
 
       //LCreal drTime = curExecTime - getTimeExec();
       SynchronizedState playerState = player->getSynchronizedState();
-      LCreal drTime = static_cast<LCreal>(playerState.getTimeExec()) - getTimeExec();
+      const LCreal drTime = static_cast<LCreal>(playerState.getTimeExec()) - getTimeExec();
 
       // 3-a) Freeze flag has changed
       if ( (player->isFrozen() && isNotFrozen()) || (!player->isFrozen() && isFrozen()) ) {
@@ -473,14 +475,14 @@ bool Nib::isPlayerStateUpdateRequired(const LCreal curExecTime)
          if (!player->isPositionFrozen() && !player->isAltitudeFrozen()) {
 
             // max position error (meters)
-            LCreal maxPosErr = getNetIO()->getMaxPositionErr(this);
-            LCreal maxPosErr2 = maxPosErr*maxPosErr;  // squared
+            const LCreal maxPosErr = getNetIO()->getMaxPositionErr(this);
+            const LCreal maxPosErr2 = maxPosErr*maxPosErr;  // squared
 
             // Check if the length of the position error (squared) is greater
             // than the max error (squared)
             //osg::Vec3d ppos = player->getGeocPosition();
-            osg::Vec3d ppos = playerState.getGeocPosition();
-            osg::Vec3d errPos = drPos - ppos;
+            const osg::Vec3d ppos = playerState.getGeocPosition();
+            const osg::Vec3d errPos = drPos - ppos;
             if (errPos.length2() >= maxPosErr2) {
                result = YES;
             }
@@ -490,12 +492,11 @@ bool Nib::isPlayerStateUpdateRequired(const LCreal curExecTime)
          if (result == UNSURE && !player->isAttitudeFrozen()) {
 
             // max angle error (radians)
-            LCreal maxAngleErr = getNetIO()->getMaxOrientationErr(this);
+            const LCreal maxAngleErr = getNetIO()->getMaxOrientationErr(this);
 
             // Compute angular error
             //osg::Vec3 errAngles = drAngles - player->getGeocEulerAngles();
             osg::Vec3 errAngles = drAngles - playerState.getGeocEulerAngles();
-
 
             // Check if any angle error is greater than the max error
             errAngles[0] = lcAbs( lcAepcDeg(errAngles[0]) );
@@ -521,7 +522,7 @@ bool Nib::isPlayerStateUpdateRequired(const LCreal curExecTime)
       // an part if the position is greater than zero or if we've previously been
       // sending the wing sweep (count > 0).
       {
-         LCreal angle = av->getWingSweepAngle();  //  radians
+         const LCreal angle = av->getWingSweepAngle();  //  radians
          if (angle > 0 || apartWingSweepCnt > 0) {
             // Check if the angle has changed.
             if (angle != apartWingSweep) {
@@ -536,7 +537,7 @@ bool Nib::isPlayerStateUpdateRequired(const LCreal curExecTime)
       // an part if the gear is not up (pos != 0) or if we've previously been
       // sending the gear position (count > 0).
       {
-         LCreal pos = av->getLandingGearPosition(); // (0% up; 100% down)
+         const LCreal pos = av->getLandingGearPosition(); // (0% up; 100% down)
          if (pos > 0 || apartGearPosCnt > 0) {
             // Check if the pos has changed.
             if (pos != apartLandingGear) {
@@ -551,7 +552,7 @@ bool Nib::isPlayerStateUpdateRequired(const LCreal curExecTime)
       // an part if the door is not closed (pos != 0) or if we've previously been
       // sending the door position (count > 0).
       {
-         LCreal pos = av->getWeaponBayDoorPosition(); // % (0% closed; 100% open)
+         const LCreal pos = av->getWeaponBayDoorPosition(); // % (0% closed; 100% open)
          if (pos > 0 || apartBayDoorCnt > 0) {
             // Check if the pos has changed.
             if (pos != apartBayDoor) {
@@ -575,22 +576,22 @@ bool Nib::isPlayerStateUpdateRequired(const LCreal curExecTime)
       //       (on SamVehicles and Artillery only)
       if ( gv->isClassType(typeid(SamVehicle)) || gv->isClassType(typeid(Artillery)) ) {
 
-         LCreal angle = gv->getLauncherPosition();  //  (radians)
+         const LCreal angle = gv->getLauncherPosition();  //  (radians)
 
          // First pass --
          if (apartLnchrElevCnt == 0) {
 
             // find all missiles missiles
             const StoresMgr* sm = gv->getStoresManagement();
-            if (sm != 0) {
+            if (sm != nullptr) {
                const Basic::PairStream* stores = sm->getStores();
-               if (stores != 0) {
+               if (stores != nullptr) {
                   const Basic::List::Item* item = stores->getFirstItem();
-                  while (item != 0 && apartNumMissiles < MAX_AMSL) {
+                  while (item != nullptr && apartNumMissiles < MAX_AMSL) {
                      const Basic::Pair* pair = static_cast<const Basic::Pair*>(item->getValue());
-                     if (pair != 0) {
+                     if (pair != nullptr) {
                         const Missile* msl = dynamic_cast<const Missile*>( pair->object() );
-                        if (msl != 0) {
+                        if (msl != nullptr) {
                            // Save the pointer to the missile, set the missile's change count to 1,
                            // and up the missile count
                            msl->ref();
@@ -603,7 +604,7 @@ bool Nib::isPlayerStateUpdateRequired(const LCreal curExecTime)
                      item = item->getNext();
                   }
                   stores->unref();
-                  stores = 0;
+                  stores = nullptr;
                }
 
             }
@@ -652,7 +653,6 @@ bool Nib::isPlayerStateUpdateRequired(const LCreal curExecTime)
       }
    }
 
-
    return (result == YES);
 }
 
@@ -662,12 +662,12 @@ bool Nib::isPlayerStateUpdateRequired(const LCreal curExecTime)
 void Nib::playerState2Nib()
 {
    const Player* player = getPlayer();
-   if (player != 0) {
+   if (player != nullptr) {
       // Player name
-      const char* cname = 0;
+      const char* cname = nullptr;
       const Basic::String* sname = player->getName();
-      if (sname != 0) cname = *sname;
-      if (cname != 0) setPlayerName(cname);
+      if (sname != nullptr) cname = *sname;
+      if (cname != nullptr) setPlayerName(cname);
       else setPlayerName("EAAGLES");
 
       freeze( player->isFrozen() );
@@ -728,7 +728,7 @@ void Nib::playerState2Nib()
 void Nib::nib2PlayerState()
 {
    Player* player = getPlayer();
-   if (player != 0) {
+   if (player != nullptr) {
 
       // Drive modes
       player->freeze( isFrozen() );
@@ -825,7 +825,7 @@ bool Nib::resetDeadReckoning(
    osg::Vec3d err;
    if (ioType == NetIO::INPUT_NIB && drTime > 0) {
       err = drPosN1 - drP0;
-      double len = err.length();
+      const double len = err.length();
       if (len < (2.0 * Basic::Distance::KM2M) ) {
          smoothVel = err/drTime;
          smoothTime = drTime;
@@ -1000,16 +1000,16 @@ bool Nib::drComputeMatrixR0(
    // intermediate values
    //--------------------------------------------------------------------------
 
-   double Rol = RPY[0];
-   double Pch = RPY[1];
-   double Yaw = RPY[2];
+   const double Rol = RPY[0];
+   const double Pch = RPY[1];
+   const double Yaw = RPY[2];
 
-   double sinRol = std::sin(Rol);
-   double cosRol = std::cos(Rol);
-   double sinPch = std::sin(Pch);
-   double cosPch = std::cos(Pch);
-   double sinYaw = std::sin(Yaw);
-   double cosYaw = std::cos(Yaw);
+   const double sinRol = std::sin(Rol);
+   const double cosRol = std::cos(Rol);
+   const double sinPch = std::sin(Pch);
+   const double cosPch = std::cos(Pch);
+   const double sinYaw = std::sin(Yaw);
+   const double cosYaw = std::cos(Yaw);
 
    //--------------------------------------------------------------------------
    // Compute R0 - initial orientation matrix (World --> Body)
@@ -1042,9 +1042,9 @@ bool Nib::drComputeMatrixWwT(
    // Compute wwT Matrix
    //--------------------------------------------------------------------------
 
-   double Wx = av[0];
-   double Wy = av[1];
-   double Wz = av[2];
+   const double Wx = av[0];
+   const double Wy = av[1];
+   const double Wz = av[2];
 
    (*pwwT)(0,0) = Wx * Wx;
    (*pwwT)(0,1) = Wx * Wy;
@@ -1074,9 +1074,9 @@ bool Nib::drComputeMatrixOmega(
    // Compute Omega Matrix
    //--------------------------------------------------------------------------
 
-   double Wx = av[0];
-   double Wy = av[1];
-   double Wz = av[2];
+   const double Wx = av[0];
+   const double Wy = av[1];
+   const double Wz = av[2];
 
    (*pOmega)(0,0) = 0.0;
    (*pOmega)(0,1) = -Wz;
@@ -1109,23 +1109,23 @@ bool Nib::drComputeMatrixDR(
    // intermediate values
    //--------------------------------------------------------------------------
 
-   double Wx = av[0];
-   double Wy = av[1];
-   double Wz = av[2];
-   double absAV2 = Wx*Wx + Wy*Wy + Wz*Wz;
+   const double Wx = av[0];
+   const double Wy = av[1];
+   const double Wz = av[2];
+   const double absAV2 = Wx*Wx + Wy*Wy + Wz*Wz;
 
    if (absAV2 > 0.0) {
-      double absAV1 = std::sqrt(absAV2);
+      const double absAV1 = std::sqrt(absAV2);
 
-      double cosWT = std::cos(absAV1 * dT);
-      double sinWT = std::sin(absAV1 * dT);
+      const double cosWT = std::cos(absAV1 * dT);
+      const double sinWT = std::sin(absAV1 * dT);
 
       //--------------------------------------------------------------------------
       // Get matrix scaling Coefficients (k1, k2, k3)
       //--------------------------------------------------------------------------
-      double k1 = (1.0 - cosWT) / absAV2;
-      double k2 = cosWT;
-      double k3 = sinWT / absAV1;
+      const double k1 = (1.0 - cosWT) / absAV2;
+      const double k2 = cosWT;
+      const double k3 = sinWT / absAV1;
 
       //--------------------------------------------------------------------------
       // Compute Dead Reckoning Matrix (DR)
@@ -1156,24 +1156,24 @@ bool Nib::drComputeMatrixR1(
    // intermediate values
    //--------------------------------------------------------------------------
 
-   double Wx = av[0];
-   double Wy = av[1];
-   double Wz = av[2];
-   double absAV2 = Wx*Wx + Wy*Wy + Wz*Wz;
+   const double Wx = av[0];
+   const double Wy = av[1];
+   const double Wz = av[2];
+   const double absAV2 = Wx*Wx + Wy*Wy + Wz*Wz;
 
    if (absAV2 > 0.0) {
-      double absAV1 = std::sqrt(absAV2);
-      double absAV3 = absAV2 * absAV1;
+      const double absAV1 = std::sqrt(absAV2);
+      const double absAV3 = absAV2 * absAV1;
 
-      double cosWT = std::cos(absAV1 * dT);
-      double sinWT = std::sin(absAV1 * dT);
+      const double cosWT = std::cos(absAV1 * dT);
+      const double sinWT = std::sin(absAV1 * dT);
 
       //----------------------------------------------------------------------
       // Get Matrix Coefficients (k1, k2, k3)
       //----------------------------------------------------------------------
-      double k1 = (absAV1 * dT - sinWT) / absAV3;
-      double k2 = sinWT / absAV1;
-      double k3 = (1.0 - cosWT) / absAV2;
+      const double k1 = (absAV1 * dT - sinWT) / absAV3;
+      const double k2 = sinWT / absAV1;
+      const double k3 = (1.0 - cosWT) / absAV2;
 
       //----------------------------------------------------------------------
       // Compute R1 Matrix
@@ -1203,25 +1203,25 @@ bool Nib::drComputeMatrixR2(
    //--------------------------------------------------------------------------
    // intermediate values
    //--------------------------------------------------------------------------
-   double Wx = av[0];
-   double Wy = av[1];
-   double Wz = av[2];
-   double absAV2 = Wx*Wx + Wy*Wy + Wz*Wz;
+   const double Wx = av[0];
+   const double Wy = av[1];
+   const double Wz = av[2];
+   const double absAV2 = Wx*Wx + Wy*Wy + Wz*Wz;
 
    if (absAV2 > 0.0) {
-      double absAV1 = std::sqrt(absAV2);
-      double absAV3 = absAV2 * absAV1;
-      double absAV4 = absAV1 * absAV3;
+      const double absAV1 = std::sqrt(absAV2);
+      const double absAV3 = absAV2 * absAV1;
+      const double absAV4 = absAV1 * absAV3;
 
-      double cosWT = std::cos(absAV1 * dT);
-      double sinWT = std::sin(absAV1 * dT);
+      const double cosWT = std::cos(absAV1 * dT);
+      const double sinWT = std::sin(absAV1 * dT);
 
       //--------------------------------------------------------------------------
       // Get Matrix Scaling Coefficients (k1, k2, k3)
       //--------------------------------------------------------------------------
-      double k1 = (0.5*absAV2*dT*dT - cosWT - absAV1*dT*sinWT + 1.0) / absAV4;
-      double k2 = (cosWT + absAV1*dT*sinWT - 1.0) / absAV2;
-      double k3 = (sinWT - absAV1*dT*cosWT) / absAV3;
+      const double k1 = (0.5*absAV2*dT*dT - cosWT - absAV1*dT*sinWT + 1.0) / absAV4;
+      const double k2 = (cosWT + absAV1*dT*sinWT - 1.0) / absAV2;
+      const double k3 = (sinWT - absAV1*dT*cosWT) / absAV3;
 
       //--------------------------------------------------------------------------
       // Compute R2 Matrix
