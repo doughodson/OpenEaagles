@@ -63,7 +63,7 @@ BEGIN_SLOTTABLE(Weapon)
     "testTgtName"       // 17: TEST only: target player name
 END_SLOTTABLE(Weapon)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(Weapon)
     ON_SLOT( 1,  setSlotReleased,    Basic::Number)
     ON_SLOT( 2,  setSlotFailed,      Basic::Number)
@@ -178,7 +178,7 @@ void Weapon::copyData(const Weapon& org, const bool cc)
    setInitialWeapon(0);
    setTargetTrack(0,false);
    setTargetPlayer(0,false);
-   setLauncher(0,0);
+   setLauncher(nullptr, 0);
    setLaunchVehicle(0);
 
    tgtPos = org.tgtPos;
@@ -221,7 +221,7 @@ void Weapon::deleteData()
    setInitialWeapon(0);
    setTargetTrack(0,false);
    setTargetPlayer(0,false);
-   setLauncher(0,0);
+   setLauncher(nullptr, 0);
    setLaunchVehicle(0);
 }
 
@@ -364,7 +364,7 @@ bool Weapon::shutdownNotification()
    setInitialWeapon(0);
    setTargetTrack(0,false);
    setTargetPlayer(0,false);
-   setLauncher(0,0);
+   setLauncher(nullptr, 0);
    setLaunchVehicle(0);
 
    return BaseClass::shutdownNotification();
@@ -460,7 +460,7 @@ void Weapon::checkDetonationEffect()
       bool finished = false;
       while (item != 0 && !finished) {
          Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
-         Player* p = static_cast<Player*>(pair->object()); 
+         Player* p = static_cast<Player*>(pair->object());
          finished = p->isNetworkedPlayer();  // local only
          if (!finished && (p != this) ) {
             osg::Vec3 dpos = p->getPosition() - getPosition();
@@ -814,7 +814,7 @@ void Weapon::updateTOF(const LCreal dt)
 void Weapon::positionTracking()
 {
     if (posTrkEnb) {
-        
+
         // When we have track manager -- follow the first track
         if (tgtTrack != 0) {
             setTargetPosition(tgtTrack->getPosition());
@@ -828,7 +828,7 @@ void Weapon::positionTracking()
             setTargetPosition(tgtPlayer->getPosition() - p0);
             setTargetVelocity(tgtPlayer->getVelocity() - vel);
         }
-        
+
         else {
             // Loss of position tracking ...
             posTrkEnb = false;
@@ -975,7 +975,7 @@ bool Weapon::isFailed() const
    return failed;
 }
 
-// True if the weapon is hung 
+// True if the weapon is hung
 bool Weapon::isHung() const
 {
    return hung;
@@ -1101,7 +1101,7 @@ const Player* Weapon::getTargetPlayer() const
    return tgtPlayer;
 }
 
-// Pre-ref()'d pointer to the fly-out weapon 
+// Pre-ref()'d pointer to the fly-out weapon
 Weapon* Weapon::getFlyoutWeapon()
 {
    return flyoutWpn.getRefPtr();
@@ -1113,7 +1113,7 @@ const Weapon* Weapon::getFlyoutWeapon() const
    return flyoutWpn.getRefPtr();
 }
 
-// Pre-ref()'d pointer to the initial weapon 
+// Pre-ref()'d pointer to the initial weapon
 Weapon* Weapon::getInitialWeapon()
 {
    return initialWpn.getRefPtr();
@@ -1164,7 +1164,7 @@ bool Weapon::setTargetPlayer(Player* const tgt, const bool pt)
 {
     tgtPlayer = tgt;
     tgtTrack = 0;
-       
+
     // Track position?
     posTrkEnb = (pt && tgt != 0);
     positionTracking();
@@ -1176,7 +1176,7 @@ bool Weapon::setTargetTrack(Track* const trk, const bool pt)
 {
     tgtPlayer = 0;
     tgtTrack = trk;
-    
+
     // Track position?
     posTrkEnb = (pt && trk != 0);
     positionTracking();
@@ -1304,7 +1304,7 @@ bool Weapon::setEOBT(const LCreal v)
    return true;
 }
 
-// Sets the weapon's type ID number 
+// Sets the weapon's type ID number
 bool Weapon::setWeaponID(const int n)
 {
    weaponID = n;
@@ -1401,7 +1401,7 @@ bool Weapon::setSlotFailed(const Basic::Number* const p)
     return true;
 }
 
-// Power: weapon power flag 
+// Power: weapon power flag
 bool Weapon::setSlotPower(const Basic::Number* const p)
 {
     setPower( p->getBoolean() );

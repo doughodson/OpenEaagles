@@ -21,7 +21,7 @@ BEGIN_SLOTTABLE(System)
    "powerSwitch",    //  1) Power switch position ("OFF", "STBY", "ON") (default: "ON")
 END_SLOTTABLE(System)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(System)
    ON_SLOT( 1, setSlotPowerSwitch, Basic::String)
 END_SLOT_MAP()
@@ -43,7 +43,7 @@ System::System() : ownship(0)
    STANDARD_CONSTRUCTOR()
 
    pwrSw = PWR_ON;   // Default: power is ON
-   ownship = 0;
+   ownship = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -54,7 +54,7 @@ void System::copyData(const System& org, const bool)
    BaseClass::copyData(org);
 
    // Don't copy ownship, we'll need to reacquire it.
-   ownship = 0;
+   ownship = nullptr;
 
    pwrSw = org.pwrSw;
 }
@@ -64,7 +64,7 @@ void System::copyData(const System& org, const bool)
 //------------------------------------------------------------------------------
 void System::deleteData()
 {
-   ownship = 0;
+   ownship = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -73,7 +73,7 @@ void System::deleteData()
 bool System::isFrozen() const
 {
    bool frz = BaseClass::isFrozen();
-   if (!frz && ownship != 0) frz = ownship->isFrozen();
+   if (!frz && ownship != nullptr) frz = ownship->isFrozen();
    return frz;
 }
 
@@ -83,7 +83,7 @@ bool System::isFrozen() const
 void System::reset()
 {
    // We're nothing without an ownship ...
-   if (ownship == 0 && getOwnship() == 0) return;
+   if (ownship == nullptr && getOwnship() == nullptr) return;
 
    BaseClass::reset();
 }
@@ -94,7 +94,7 @@ void System::reset()
 void System::updateData(const LCreal dt)
 {
    // We're nothing without an ownship ...
-   if (ownship == 0 && getOwnship() == 0) return;
+   if (ownship == nullptr && getOwnship() == nullptr) return;
 
    BaseClass::updateData(dt);
 }
@@ -105,12 +105,12 @@ void System::updateData(const LCreal dt)
 void System::updateTC(const LCreal dt0)
 {
    // We're nothing without an ownship ...
-   if (ownship == 0 && getOwnship() == 0) return;
+   if (ownship == nullptr && getOwnship() == nullptr) return;
 
    // ---
    // Delta time
    // ---
-   
+
    // real or frozen?
    LCreal dt = dt0;
    if (isFrozen()) dt = 0.0;
@@ -122,7 +122,7 @@ void System::updateTC(const LCreal dt0)
    // Four phases per frame
    // ---
    Simulation* sim = ownship->getSimulation();
-   if (sim == 0) return;
+   if (sim == nullptr) return;
 
    switch (sim->phase()) {
 
@@ -176,14 +176,14 @@ bool System::killedNotification(Player* const p)
 {
    // Just let all of our subcomponents know that we were just killed
    Basic::PairStream* subcomponents = getComponents();
-   if(subcomponents != 0) {
+   if(subcomponents != nullptr) {
       for (Basic::List::Item* item = subcomponents->getFirstItem(); item != 0; item = item->getNext()) {
          Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
          Basic::Component* sc = static_cast<Basic::Component*>(pair->object());
          sc->event(KILL_EVENT, p);
       }
       subcomponents->unref();
-      subcomponents = 0;
+      subcomponents = nullptr;
    }
    return true;
 }
@@ -195,16 +195,16 @@ bool System::killedNotification(Player* const p)
 // Returns a pointer to the main Simulation class
 Simulation* System::getSimulation()
 {
-   Simulation* p = 0;
-   if (ownship != 0) p = ownship->getSimulation();
+   Simulation* p = nullptr;
+   if (ownship != nullptr) p = ownship->getSimulation();
    return p;
 }
 
 // Returns a pointer to the main Simulation class (const version)
 const Simulation* System::getSimulation() const
 {
-   const Simulation* p = 0;
-   if (ownship != 0) p = ownship->getSimulation();
+   const Simulation* p = nullptr;
+   if (ownship != nullptr) p = ownship->getSimulation();
    return p;
 }
 
@@ -217,14 +217,14 @@ unsigned int System::getPowerSwitch() const
 // Returns a pointer to our ownship player
 Player* System::getOwnship()
 {
-   if (ownship == 0) findOwnship();
+   if (ownship == nullptr) findOwnship();
    return ownship;
 }
 
 // Returns a pointer to our ownship player (const version)
 const Player* System::getOwnship() const
 {
-   if (ownship != 0) {
+   if (ownship != nullptr) {
    return ownship;
 }
    else {
@@ -250,11 +250,11 @@ bool System::setPowerSwitch(const unsigned int p)
 // find our ownship
 bool System::findOwnship()
 {
-   if (ownship == 0) {
+   if (ownship == nullptr) {
       ownship = static_cast<Player*>(findContainerByType( typeid(Player) ));
    }
 
-   return (ownship != 0);
+   return (ownship != nullptr);
 }
 
 
@@ -264,7 +264,7 @@ bool System::findOwnship()
 bool System::setSlotPowerSwitch(const Basic::String* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       if (*msg == "OFF" || *msg == "off") ok = setPowerSwitch(PWR_OFF);
       else if (*msg == "STBY" || *msg == "stby") ok = setPowerSwitch(PWR_STBY);
       else if (*msg == "ON" || *msg == "on") ok = setPowerSwitch(PWR_ON);

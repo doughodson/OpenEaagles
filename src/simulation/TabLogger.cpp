@@ -26,7 +26,7 @@
 #include <sstream>
 
 // ---
-// TABLOGEVENT_B -- 
+// TABLOGEVENT_B --
 // use this macro in place of IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS() for classes derived from TabLogger::TabLogEvent
 // ---
 #define TABLOGEVENT_B(ThisType,FORMNAME)                                        \
@@ -63,7 +63,7 @@ IMPLEMENT_PARTIAL_SUBCLASS(TabLogger,"TabLogger")
 EMPTY_SLOTTABLE(TabLogger)
 EMPTY_DELETEDATA(TabLogger)
 
-// Constructor: 
+// Constructor:
 TabLogger::TabLogger()
 {
     STANDARD_CONSTRUCTOR()
@@ -158,7 +158,7 @@ TabLogger::TabLogEvent::TabLogEvent()
 }
 
 TabLogger::TabLogEvent::TabLogEvent(const TabLogEvent& org)
-{ 
+{
     STANDARD_CONSTRUCTOR()
     copyData(org,true);
 }
@@ -180,11 +180,11 @@ TabLogger::TabLogEvent& TabLogger::TabLogEvent::operator=(const TabLogEvent& org
 
 TabLogger::TabLogEvent* TabLogger::TabLogEvent::clone() const
 {
-    return 0;
+    return nullptr;
 }
 
 //------------------------------------------------------------------------------
-// copyData() -- copy member data 
+// copyData() -- copy member data
 //------------------------------------------------------------------------------
 void TabLogger::TabLogEvent::copyData(const TabLogEvent& org, const bool)
 {
@@ -205,7 +205,7 @@ std::ostream& TabLogger::TabLogEvent::makeTimeHdr(std::ostream& sout)
 //------------------------------------------------------------------------------
 std::ostream& TabLogger::TabLogEvent::makeTimeMsg(std::ostream& sout)
 {
-    BaseClass::makeTabTimeMsg(sout);   
+    BaseClass::makeTabTimeMsg(sout);
     return sout;
 }
 
@@ -240,7 +240,7 @@ std::ostream& TabLogger::TabLogEvent::makePlayerIdSpacer(std::ostream& sout)
 //------------------------------------------------------------------------------
 std::ostream& TabLogger::TabLogEvent::makePlayerIdMsg(std::ostream& sout, const Player* const player)
 {
-    if (player != 0) {
+    if (player != nullptr) {
 
         sout << player->getID()    << "\t" ;           // player ID                           (1 field)
 
@@ -251,13 +251,13 @@ std::ostream& TabLogger::TabLogEvent::makePlayerIdMsg(std::ostream& sout, const 
 
             const NetIO* const pNet = pNib->getNetIO();
 
-            if (pNet != 0)
+            if (pNet != nullptr)
                 sout << pNet->getNetworkID() << "\t";
-            else 
+            else
                 sout << "\t";
 
         }
-        else 
+        else
             sout <<"\t\t" ;
     }
     else
@@ -273,20 +273,20 @@ std::ostream& TabLogger::TabLogEvent::makePlayerIdMsg(std::ostream& sout, const 
 std::ostream& TabLogger::TabLogEvent::makePlayerDataHdr( std::ostream& sout )
 {
     sout << "X position" << "\t"          // (3 fields)
-         << "Y position" << "\t"     
-         << "Z position" << "\t" ;   
+         << "Y position" << "\t"
+         << "Z position" << "\t" ;
     sout << "vel[0]" << "\t"              // (3 fields)
-         << "vel[1]" << "\t"   
-         << "vel[2]" << "\t" ;  
+         << "vel[1]" << "\t"
+         << "vel[2]" << "\t" ;
     sout << "orientation[0]" << "\t"      // (3 fields)
-         << "orientation[1]" << "\t"  
+         << "orientation[1]" << "\t"
          << "orientation[2]" << "\t" ;
     return sout;
 }
 
 
 //------------------------------------------------------------------------------
-// makePlayerDataSpacer() -- creates empty space for the player ID message 
+// makePlayerDataSpacer() -- creates empty space for the player ID message
 //------------------------------------------------------------------------------
 std::ostream& TabLogger::TabLogEvent::makePlayerDataSpacer( std::ostream& sout )
 {
@@ -311,13 +311,13 @@ std::ostream& TabLogger::TabLogEvent::makePlayerDataMsg(  std::ostream& sout,
                                osg::Vec3 pos0, osg::Vec3 vel0, osg::Vec3 angles0)
 {
     sout << pos0[0]   << "\t"                                 // (3 fields)
-         << pos0[1]   << "\t" 
+         << pos0[1]   << "\t"
          << pos0[2]   << "\t" ;
     sout << vel0[0]   << "\t"                                 // (3 fields)
-         << vel0[1]   << "\t" 
-         << vel0[2]   << "\t" ; 
+         << vel0[1]   << "\t"
+         << vel0[2]   << "\t" ;
     sout << (angles0[0] * Basic::Angle::R2DCC) << "\t"      // (3 fields)
-         << (angles0[1] * Basic::Angle::R2DCC) << "\t" 
+         << (angles0[1] * Basic::Angle::R2DCC) << "\t"
          << (angles0[2] * Basic::Angle::R2DCC) << "\t" ;
     return sout;
 }
@@ -325,10 +325,10 @@ std::ostream& TabLogger::TabLogEvent::makePlayerDataMsg(  std::ostream& sout,
 
 
 //------------------------------------------------------------------------------
-// makePlayerLatLonSpacer() -- creates empty space for the player ID message 
+// makePlayerLatLonSpacer() -- creates empty space for the player ID message
 //------------------------------------------------------------------------------
 std::ostream& TabLogger::TabLogEvent::makePlayerLatLonSpacer(  std::ostream& sout)
-{ 
+{
     sout << "\t" ;               // latitude                  // (1 field)
     sout << "\t" ;               // longitude                 // (1 field)
 
@@ -389,14 +389,14 @@ std::ostream& TabLogger::TabLogEvent::makePlayerDamageSpacer(std::ostream& sout)
 //------------------------------------------------------------------------------
 std::ostream& TabLogger::TabLogEvent::makePlayerDamageMsg(std::ostream& sout, const Player* const player, bool checkKillOverride)
 {
-    if (player != 0) {
+    if (player != nullptr) {
 
         sout << player->getDamage()    << "\t" ;            // player damage value                   (1 field)
 
-        if (  (checkKillOverride && player->isKillOverride() ) ||   // kill or crash override 
+        if (  (checkKillOverride && player->isKillOverride() ) ||   // kill or crash override
               (!checkKillOverride && player->isCrashOverride() ))   //          (true/false)         (1 field)
             sout << "true" << "\t" ;
-        else 
+        else
             sout << "false" << "\t" ;
     }
     else
@@ -410,7 +410,7 @@ std::ostream& TabLogger::TabLogEvent::makePlayerDamageMsg(std::ostream& sout, co
 //------------------------------------------------------------------------------
 std::ostream& TabLogger::TabLogEvent::makeTrackDataHdr(std::ostream& sout)
 {
-    sout << "Type"                     << "\t";   // type                   (1 field)    
+    sout << "Type"                     << "\t";   // type                   (1 field)
     sout << "Track ID"                 << "\t";   // track ID               (1 field)
     sout << "Range"                    << "\t";   // range                  (1 field)
     sout << "Ground Range"             << "\t";   // ground range           (1 field)
@@ -420,11 +420,11 @@ std::ostream& TabLogger::TabLogEvent::makeTrackDataHdr(std::ostream& sout)
 
     sout << "position[0]"     << "\t"             // position               (3 fields)
          << "position[1]"     << "\t"
-         << "position[2]"     << "\t" ; 
-    
+         << "position[2]"     << "\t" ;
+
     sout << "velocity[0]"     << "\t"             // velocity               (3 fields)
-         << "velocity[1]"     << "\t" 
-         << "velocity[2]"     << "\t" ; 
+         << "velocity[1]"     << "\t"
+         << "velocity[2]"     << "\t" ;
 
     sout << "signal"          << "\t" ;           // signal                 (1 field)
     sout << "shootlist index" << "\t" ;           // shootlist index        (1 field)
@@ -438,7 +438,7 @@ std::ostream& TabLogger::TabLogEvent::makeTrackDataHdr(std::ostream& sout)
 //------------------------------------------------------------------------------
 std::ostream& TabLogger::TabLogEvent::makeTrackDataMsg(std::ostream& sout, const Track* const trk)
 {
-    if (trk != 0)  {
+    if (trk != nullptr)  {
 
         sout << trk->getType()            << "\t" ;    // type                   (1 field)
         sout << trk->getTrackID()         << "\t" ;    // track ID               (1 field)
@@ -453,13 +453,13 @@ std::ostream& TabLogger::TabLogEvent::makeTrackDataMsg(std::ostream& sout, const
              << tpos[1]    << "\t"
              << tpos[2]    << "\t" ;
 
-        osg::Vec3 tvel = trk->getVelocity(); 
+        osg::Vec3 tvel = trk->getVelocity();
         sout << tvel[0]    << "\t"                     // velocity               (3 fields)
-             << tvel[1]    << "\t" 
+             << tvel[1]    << "\t"
              << tvel[2]    << "\t" ;
 
-        const RfTrack* const rfTrk = dynamic_cast<const RfTrack*>(trk); 
-        if (rfTrk != 0) 
+        const RfTrack* const rfTrk = dynamic_cast<const RfTrack*>(trk);
+        if (rfTrk != nullptr)
             sout << rfTrk->getAvgSignal() << "\t";     // signal                 (1 field)
         else
             sout << "\t";
@@ -467,7 +467,7 @@ std::ostream& TabLogger::TabLogEvent::makeTrackDataMsg(std::ostream& sout, const
         sout <<  trk->getShootListIndex() << "\t";     // shootlist index        (1 field)
 
     }
-    else 
+    else
         sout << "\t\t\t\t\t\t \t\t\t \t\t\t \t \t";    // (14 spacer fields)
 
     return sout;
@@ -510,7 +510,7 @@ std::ostream& TabLogger::TabLogEvent::makeEmissionDataSpacer(std::ostream& sout)
 //------------------------------------------------------------------------------
 std::ostream& TabLogger::TabLogEvent::makeEmissionDataMsg(std::ostream& sout, const Emission* const em)
 {
-    if (em != 0) {
+    if (em != nullptr) {
 
         sout << (Basic::Angle::R2DCC * em->getAzimuthAoi())     << "\t";  // azimuth AOI    (1 field)
         sout << (Basic::Angle::R2DCC * em->getElevationAoi())   << "\t";  // elevation AOI  (1 field)
@@ -519,7 +519,7 @@ std::ostream& TabLogger::TabLogEvent::makeEmissionDataMsg(std::ostream& sout, co
         sout << (em->getPulseWidth())                           << "\t";  // pulsewidth     (1 field)
         sout << (em->getPRF())                                  << "\t";  // prf            (1 field)
     }
-    else 
+    else
         sout << "\t\t\t\t\t\t" ;   // (six spacer fields)
 
     return sout;
@@ -536,15 +536,15 @@ EMPTY_SERIALIZER(TabLogger::LogPlayerData)
 TabLogger::LogPlayerData::LogPlayerData(int t, const Player* const p)
 {
     STANDARD_CONSTRUCTOR()
-    theSource = 0;
+    theSource = nullptr;
     thePlayer = p;
     theType = t;
     pos.set(0,0,0);
     vel.set(0,0,0);
     angles.set(0,0,0);
-    alpha = 0;
-    beta = 0;
-    ias = 0;
+    alpha = 0.0;
+    beta = 0.0;
+    ias = 0.0;
     mach = 0.0;
     pLoading = 0.0;
 }
@@ -575,18 +575,18 @@ void TabLogger::LogPlayerData::copyData(const LogPlayerData& org, const bool)
 // Delete data function
 void TabLogger::LogPlayerData::deleteData()
 {
-    theSource = 0;
-    thePlayer = 0;
+    theSource = nullptr;
+    thePlayer = nullptr;
     theType = 0;
 }
 
 // Get the description
 const char* TabLogger::LogPlayerData::getDescription()
 {
-    if (msg == 0) {
+    if (msg == nullptr) {
 
         std::stringstream sout;
-        
+
         if (theType != 0)
             makeTimeMsg(sout);
         else
@@ -624,7 +624,7 @@ const char* TabLogger::LogPlayerData::getDescription()
             sout << "damage source: " ;
             makePlayerIdHdr(sout);
         }
-        else if (thePlayer == 0) {
+        else if (thePlayer == nullptr) {
             // no player data, so leave the line blank and skedaddle
             //sout << "\n";
         }
@@ -634,7 +634,7 @@ const char* TabLogger::LogPlayerData::getDescription()
             makePlayerDataMsg(sout,pos,vel,angles);
             makePlayerLatLonMsg(sout, latitude, longitude);
 
-            if ((ias >= 0.0f) && (theType == 2)) {
+            if ((ias >= 0.0) && (theType == 2)) {
                 sout << alpha << "\t" ;   // (1 field)
                 sout << beta  << "\t" ;   // (1 field)
                 sout << ias   << "\t" ;   // (1 field)
@@ -653,9 +653,9 @@ const char* TabLogger::LogPlayerData::getDescription()
 
             // print damage data
             if (theType == 4) {                               // detonation
-                // third field in makePlayerDamageMsg differentiates between checking 
+                // third field in makePlayerDamageMsg differentiates between checking
                 //    killOverride (true) and crashOverride (false).
-                makePlayerDamageMsg(sout, thePlayer, true);  
+                makePlayerDamageMsg(sout, thePlayer, true);
                 makePlayerIdMsg(sout, theSource);
             }
             else if ((theType == 5) || (theType == 7)) {      // collision or kill
@@ -671,9 +671,9 @@ const char* TabLogger::LogPlayerData::getDescription()
                 makePlayerIdSpacer(sout);
             }
         }
-        
+
         // Complete the description
-        int len = static_cast<int>(sout.str().size());
+        const int len = static_cast<int>(sout.str().size());
         msg = new char[len+1];
         lcStrncpy(msg, (len+1), sout.str().c_str(), len);
     }
@@ -683,7 +683,7 @@ const char* TabLogger::LogPlayerData::getDescription()
 // Capture the data
 void TabLogger::LogPlayerData::captureData()
 {
-    if (thePlayer != 0) {
+    if (thePlayer != nullptr) {
         alpha = -1.0;
         beta = -1.0;
         ias = -1.0;
@@ -695,7 +695,7 @@ void TabLogger::LogPlayerData::captureData()
             angles = thePlayer->getEulerAngles();
             const Player* const p = thePlayer;
             const AirVehicle* const av = dynamic_cast<const AirVehicle*>(p);
-            if ((av != 0) && (theType == 2) ) {
+            if ((av != nullptr) && (theType == 2) ) {
                 alpha = av->getAngleOfAttackD();
                 beta = av->getSideSlipD();
                 ias = av->getCalibratedAirspeed();
@@ -732,13 +732,13 @@ void TabLogger::LogGunActivity::copyData(const LogGunActivity& org, const bool)
 void TabLogger::LogGunActivity::deleteData()
 {
     theType = 0;
-    thePlayer = 0;
+    thePlayer = nullptr;
 }
 
 // Get the description
 const char* TabLogger::LogGunActivity::getDescription()
 {
-    if (msg == 0) {
+    if (msg == nullptr) {
 
         std::stringstream sout;
 
@@ -769,7 +769,7 @@ const char* TabLogger::LogGunActivity::getDescription()
         }
 
         // Complete the description
-        int len = static_cast<int>(sout.str().size());
+        const int len = static_cast<int>(sout.str().size());
         msg = new char[len+1];
         lcStrncpy(msg, (len+1), sout.str().c_str(), len);
     }
@@ -799,7 +799,7 @@ TabLogger::LogWeaponActivity::LogWeaponActivity(const int callType, const Player
     theTarget = tgt;
     detType   = t;
     missDist  = d;
-    theTrack = 0;
+    theTrack = nullptr;
     eventID = 0;
 }
 
@@ -813,16 +813,16 @@ void TabLogger::LogWeaponActivity::copyData(const LogWeaponActivity& org, const 
 void TabLogger::LogWeaponActivity::deleteData()
 {
     theType   = 0;
-    thePlayer = 0;
-    theWeapon = 0;
-    theTarget = 0;
-    theTrack = 0;
+    thePlayer = nullptr;
+    theWeapon = nullptr;
+    theTarget = nullptr;
+    theTrack = nullptr;
 }
 
 // Get the description
 const char* TabLogger::LogWeaponActivity::getDescription()
 {
-    if (msg == 0) {
+    if (msg == nullptr) {
 
         std::stringstream sout;
 
@@ -840,7 +840,7 @@ const char* TabLogger::LogWeaponActivity::getDescription()
         case 1:    { sout << "RELEASE\t";      break; }
         case 2:    { sout << "DETONATE\t";     break; }
         case 3:    { sout << "KILL\t";         break; }  // "KILL" not currently in use.
-        case 4:    { sout << "HUNG\t";         break; }   
+        case 4:    { sout << "HUNG\t";         break; }
         default:   { sout << "UNKNOWN\t";      break; }  // unknown weapon activity....
         }
 
@@ -864,18 +864,18 @@ const char* TabLogger::LogWeaponActivity::getDescription()
             makeTrackDataHdr(sout);
         }
         else {
-            // Print the (launcher) Player ID        
+            // Print the (launcher) Player ID
             makePlayerIdMsg(sout, thePlayer);
-            
-            // Print the weapon ID        
+
+            // Print the weapon ID
             makePlayerIdMsg(sout, theWeapon);
-            
-            // Print the target ID        
+
+            // Print the target ID
             makePlayerIdMsg(sout, theTarget);
 
             sout << eventID      << "\t" ;   // launch event ID           // (1 field)
 
-            if ((theType == 1) || (theType == 4)) {  // (type 1, launch) or (type 4, hung store) 
+            if ((theType == 1) || (theType == 4)) {  // (type 1, launch) or (type 4, hung store)
                 sout << "\t";                // detonation type           // (1 field)
                 sout << "\t";                // miss distance             // (1 field)
             }
@@ -888,7 +888,7 @@ const char* TabLogger::LogWeaponActivity::getDescription()
         }
 
         // Complete the description
-        int len = static_cast<int>(sout.str().size());
+        const int len = static_cast<int>(sout.str().size());
         msg = new char[len+1];
         lcStrncpy(msg, (len+1), sout.str().c_str(), len);
     }
@@ -901,7 +901,7 @@ void TabLogger::LogWeaponActivity::captureData()
     const Player* const w = theWeapon;
     const Weapon* const wpn = dynamic_cast<const Weapon*>(w);
 
-    if (wpn != 0) {
+    if (wpn != nullptr) {
         theTrack = wpn->getTargetTrack();
         eventID = wpn->getReleaseEventID();
     }
@@ -918,17 +918,17 @@ EMPTY_SERIALIZER(TabLogger::LogActiveTrack)
 TabLogger::LogActiveTrack::LogActiveTrack(int t, const TrackManager* const mgr, const Track* const trk)
 {
     STANDARD_CONSTRUCTOR()
-    thePlayer = 0;
-    theEmission = 0;
+    thePlayer = nullptr;
+    theEmission = nullptr;
     theType = t;
     theManager = mgr;
     theTrack = trk;
-    if (theManager != 0) {
+    if (theManager != nullptr) {
         thePlayer = dynamic_cast<const Player*>( theManager->findContainerByType(typeid(Player)) );
     }
-    if (theTrack != 0) {
+    if (theTrack != nullptr) {
         const RfTrack* const rfTrk = dynamic_cast<const RfTrack*>(trk);
-        if (rfTrk != 0) {
+        if (rfTrk != nullptr) {
             theEmission = rfTrk->getLastEmission();
         }
     }
@@ -938,7 +938,7 @@ TabLogger::LogActiveTrack::LogActiveTrack(int t, const TrackManager* const mgr, 
     tgtPos.set(0,0,0);
     tgtVel.set(0,0,0);
     tgtAngles.set(0,0,0);
-    sn = 0;
+    sn = 0.0;
 }
 
 // Copy data function
@@ -951,16 +951,16 @@ void TabLogger::LogActiveTrack::copyData(const LogActiveTrack& org, const bool)
 void TabLogger::LogActiveTrack::deleteData()
 {
     theType = 0;
-    theManager = 0;
-    theTrack = 0;
-    thePlayer = 0;
-    theEmission = 0;
+    theManager = nullptr;
+    theTrack = nullptr;
+    thePlayer = nullptr;
+    theEmission = nullptr;
 }
 
 // Get the description
 const char* TabLogger::LogActiveTrack::getDescription()
 {
-    if (msg == 0) {
+    if (msg == nullptr) {
         std::stringstream sout;
 
         // Time & Event message
@@ -989,23 +989,23 @@ const char* TabLogger::LogActiveTrack::getDescription()
             makePlayerIdHdr(sout);
             makePlayerDataHdr(sout);
 
-            sout << "Track: " ; 
+            sout << "Track: " ;
             makeTrackDataHdr(sout);
         }
         else {
             // Player information
             makePlayerIdMsg(sout, thePlayer);
 
-            if (thePlayer != 0) 
+            if (thePlayer != nullptr)
                 makePlayerDataMsg(sout,pos,vel,angles);
             else
                 makePlayerDataSpacer(sout);
-            
-            // Target Information 
-            if (theEmission != 0) {
+
+            // Target Information
+            if (theEmission != nullptr) {
                 makePlayerIdMsg(sout, theEmission->getTarget());
 
-                if (theEmission->getTarget() != 0) 
+                if (theEmission->getTarget() != nullptr)
                     makePlayerDataMsg(sout,tgtPos,tgtVel,tgtAngles);
                 else
                     makePlayerDataSpacer(sout);
@@ -1014,13 +1014,13 @@ const char* TabLogger::LogActiveTrack::getDescription()
                 makePlayerIdSpacer(sout);
                 makePlayerDataSpacer(sout);
             }
-            
+
             // General track information
             makeTrackDataMsg(sout, theTrack);
         }
 
         // Complete the description
-        int len = static_cast<int>(sout.str().size());
+        const int len = static_cast<int>(sout.str().size());
         msg = new char[len+1];
         lcStrncpy(msg, (len+1), sout.str().c_str(), len);
     }
@@ -1030,13 +1030,13 @@ const char* TabLogger::LogActiveTrack::getDescription()
 // Capture the data
 void TabLogger::LogActiveTrack::captureData()
 {
-    if (thePlayer != 0) {
+    if (thePlayer != nullptr) {
         pos = thePlayer->getPosition();
         vel = thePlayer->getVelocity();
         angles = thePlayer->getEulerAngles();
     }
-    if (theEmission != 0) {
-        if (theEmission->getTarget() != 0) {
+    if (theEmission != nullptr) {
+        if (theEmission->getTarget() != nullptr) {
             tgtPos = theEmission->getTarget()->getPosition();
             tgtVel = theEmission->getTarget()->getVelocity();
             tgtAngles = theEmission->getTarget()->getEulerAngles();
@@ -1055,17 +1055,17 @@ EMPTY_SERIALIZER(TabLogger::LogPassiveTrack)
 TabLogger::LogPassiveTrack::LogPassiveTrack(int t, const TrackManager* const mgr, const Track* const trk)
 {
     STANDARD_CONSTRUCTOR()
-    thePlayer = 0;
-    theEmission = 0;
+    thePlayer = nullptr;
+    theEmission = nullptr;
     theType = t;
     theManager = mgr;
     theTrack = trk;
-    if (theManager != 0) {
+    if (theManager != nullptr) {
         thePlayer = dynamic_cast<const Player*>( theManager->findContainerByType(typeid(Player)) );
     }
-    if (theTrack != 0) {
+    if (theTrack != nullptr) {
         const RfTrack* const rfTrk = dynamic_cast<const RfTrack*>(trk);
-        if (rfTrk != 0) {
+        if (rfTrk != nullptr) {
             theEmission = rfTrk->getLastEmission();
         }
     }
@@ -1075,7 +1075,7 @@ TabLogger::LogPassiveTrack::LogPassiveTrack(int t, const TrackManager* const mgr
     tgtPos.set(0,0,0);
     tgtVel.set(0,0,0);
     tgtAngles.set(0,0,0);
-    sn = 0;
+    sn = 0.0;
 }
 
 // Copy data function
@@ -1088,16 +1088,16 @@ void TabLogger::LogPassiveTrack::copyData(const LogPassiveTrack& org, const bool
 void TabLogger::LogPassiveTrack::deleteData()
 {
     theType = 0;
-    theManager = 0;
-    theTrack = 0;
-    thePlayer = 0;
-    theEmission = 0;
+    theManager = nullptr;
+    theTrack = nullptr;
+    thePlayer = nullptr;
+    theEmission = nullptr;
 }
 
 // Get the description
 const char* TabLogger::LogPassiveTrack::getDescription()
 {
-    if (msg == 0) {
+    if (msg == nullptr) {
         std::stringstream sout;
 
         // Time & Event message
@@ -1116,7 +1116,7 @@ const char* TabLogger::LogPassiveTrack::getDescription()
         case 3:    { sout << "REMOVED\t";      break; }
         default:   { sout << "UNKNOWN\t";      break; }  // someone called for a track.... unknown reason
         }
-        
+
         if (theType == 0) { // header line
 
             sout << "Player: " ;
@@ -1137,16 +1137,16 @@ const char* TabLogger::LogPassiveTrack::getDescription()
             // Player information
             makePlayerIdMsg(sout, thePlayer);
 
-            if (thePlayer != 0) 
+            if (thePlayer != nullptr)
                 makePlayerDataMsg(sout,pos,vel,angles);
             else
                 makePlayerDataSpacer(sout);
-            
-            // Target Information 
+
+            // Target Information
             if (theEmission != 0) {
                 makePlayerIdMsg(sout, theEmission->getOwnship());
 
-                if (theEmission->getOwnship() != 0) 
+                if (theEmission->getOwnship() != nullptr)
                     makePlayerDataMsg(sout,tgtPos,tgtVel,tgtAngles);
                 else
                     makePlayerDataSpacer(sout);
@@ -1164,7 +1164,7 @@ const char* TabLogger::LogPassiveTrack::getDescription()
         }
 
         // Complete the description
-        int len = static_cast<int>(sout.str().size());
+        const int len = static_cast<int>(sout.str().size());
         msg = new char[len+1];
         lcStrncpy(msg, (len+1), sout.str().c_str(), len);
     }
@@ -1174,14 +1174,14 @@ const char* TabLogger::LogPassiveTrack::getDescription()
 // Capture the data
 void TabLogger::LogPassiveTrack::captureData()
 {
-    if (thePlayer != 0) {
+    if (thePlayer != nullptr) {
         pos = thePlayer->getPosition();
         vel = thePlayer->getVelocity();
         angles = thePlayer->getEulerAngles();
     }
-    if (theEmission != 0) {
+    if (theEmission != nullptr) {
         // The emission's ownship is our target!
-        if (theEmission->getOwnship() != 0) {
+        if (theEmission->getOwnship() != nullptr) {
             tgtPos = theEmission->getOwnship()->getPosition();
             tgtVel = theEmission->getOwnship()->getVelocity();
             tgtAngles = theEmission->getOwnship()->getEulerAngles();

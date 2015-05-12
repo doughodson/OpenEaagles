@@ -31,7 +31,7 @@ BEGIN_SLOTTABLE(TargetData)
     "velocity",            // 13) Impact velocity (ft/sec) (default: 0)
 END_SLOTTABLE(TargetData)
 
-// Map slot table to handles 
+// Map slot table to handles
 BEGIN_SLOT_MAP(TargetData)
     ON_SLOT( 1, setSlotEnabled,Basic::Number)
     ON_SLOT( 2, setSlotCompleted,Basic::Number)
@@ -66,20 +66,20 @@ END_SLOT_MAP()
 TargetData::TargetData()
 {
     STANDARD_CONSTRUCTOR()
-    
+
     enabled      = false;
     completed    = false;
-    wpnType      = 0;
+    wpnType      = nullptr;
     quantity     = 0;
     stickType    = MIDPOINT;
-    stickDist    = 0;
-    maxMissDist  = 0;
-    interval     = 0;
+    stickDist    = 0.0;
+    maxMissDist  = 0.0;
+    interval     = 0.0;
     manualAssign = false;
-    armDelay     = 0;
-    angle        = 0;
-    azimuth      = 0;
-    velocity     = 0;
+    armDelay     = 0.0;
+    angle        = 0.0;
+    azimuth      = 0.0;
+    velocity     = 0.0;
 }
 
 
@@ -89,9 +89,9 @@ TargetData::TargetData()
 void TargetData::copyData(const TargetData& org, const bool cc)
 {
     BaseClass::copyData(org);
-    
+
     if (cc) {
-      wpnType = 0;
+      wpnType = nullptr;
     }
 
     enabled      = org.enabled;
@@ -115,7 +115,7 @@ void TargetData::copyData(const TargetData& org, const bool cc)
 //------------------------------------------------------------------------------
 void TargetData::deleteData()
 {
-    setWpnType(0);
+    setWpnType(nullptr);
 }
 
 //------------------------------------------------------------------------------
@@ -136,9 +136,9 @@ bool TargetData::setVelocity(const double fps)        { velocity = fps; return t
 
 bool TargetData::setWpnType(const Basic::String* const s)
 {
-   if (wpnType != 0) wpnType->unref();
+   if (wpnType != nullptr) wpnType->unref();
    wpnType = s;
-   if (wpnType != 0) wpnType->ref();
+   if (wpnType != nullptr) wpnType->ref();
     return true;
 }
 
@@ -149,7 +149,7 @@ bool TargetData::setWpnType(const Basic::String* const s)
 bool TargetData::setSlotEnabled(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setEnabled(msg->getBoolean());
    }
    return ok;
@@ -159,7 +159,7 @@ bool TargetData::setSlotEnabled(const Basic::Number* const msg)
 bool TargetData::setSlotCompleted(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setCompleted(msg->getBoolean());
    }
    return ok;
@@ -174,8 +174,8 @@ bool TargetData::setSlotWpnType(const Basic::String* const msg)
 bool TargetData::setSlotQuantity(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
-      int v = msg->getInt();
+   if (msg != nullptr) {
+      const int v = msg->getInt();
       if (v >= 0) {
          ok = setQuantity(static_cast<unsigned int>(msg->getInt()));
       }
@@ -186,7 +186,7 @@ bool TargetData::setSlotQuantity(const Basic::Number* const msg)
 bool TargetData::setSlotManualAssign(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setManualAssign(msg->getBoolean());
    }
    return ok;
@@ -195,7 +195,7 @@ bool TargetData::setSlotManualAssign(const Basic::Number* const msg)
 bool TargetData::setSlotStickType(const Basic::Identifier* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       if (*msg == "MIDPOINT" || *msg == "midpoint") {
          ok = setStickType(MIDPOINT);
       }
@@ -213,7 +213,7 @@ bool TargetData::setSlotStickType(const Basic::Identifier* const msg)
 bool TargetData::setSlotStickDistance(const Basic::Distance* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setStickDistance( Basic::Feet::convertStatic(*msg) );
    }
    return ok;
@@ -222,7 +222,7 @@ bool TargetData::setSlotStickDistance(const Basic::Distance* const msg)
 bool TargetData::setSlotStickDistance(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setStickDistance(msg->getDouble());
    }
    return ok;
@@ -231,7 +231,7 @@ bool TargetData::setSlotStickDistance(const Basic::Number* const msg)
 bool TargetData::setSlotInterval(const Basic::Time* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setInterval( Basic::MilliSeconds::convertStatic(*msg) );
    }
    return ok;
@@ -241,7 +241,7 @@ bool TargetData::setSlotInterval(const Basic::Time* const msg)
 bool TargetData::setSlotInterval(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setInterval(msg->getDouble());
    }
    return ok;
@@ -251,7 +251,7 @@ bool TargetData::setSlotInterval(const Basic::Number* const msg)
 bool TargetData::setSlotMaxMissDistance(const Basic::Distance* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setMaxMissDistance( Basic::Feet::convertStatic(*msg) );
    }
    return ok;
@@ -260,7 +260,7 @@ bool TargetData::setSlotMaxMissDistance(const Basic::Distance* const msg)
 bool TargetData::setSlotMaxMissDistance(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setMaxMissDistance(msg->getDouble());
    }
    return ok;
@@ -269,7 +269,7 @@ bool TargetData::setSlotMaxMissDistance(const Basic::Number* const msg)
 bool TargetData::setSlotArmDelay(const Basic::Time* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setArmDelay( Basic::Seconds::convertStatic(*msg) );
    }
    return ok;
@@ -278,7 +278,7 @@ bool TargetData::setSlotArmDelay(const Basic::Time* const msg)
 bool TargetData::setSlotArmDelay(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setArmDelay(msg->getDouble());
    }
    return ok;
@@ -288,7 +288,7 @@ bool TargetData::setSlotArmDelay(const Basic::Number* const msg)
 bool TargetData::setSlotAngle(const Basic::Angle* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setAngle( Basic::Degrees::convertStatic(*msg) );
    }
    return ok;
@@ -298,7 +298,7 @@ bool TargetData::setSlotAngle(const Basic::Angle* const msg)
 bool TargetData::setSlotAngle(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setAngle(msg->getDouble());
    }
    return ok;
@@ -308,7 +308,7 @@ bool TargetData::setSlotAngle(const Basic::Number* const msg)
 bool TargetData::setSlotAzimuth(const Basic::Angle* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setAzimuth( Basic::Degrees::convertStatic(*msg) );
    }
    return ok;
@@ -318,7 +318,7 @@ bool TargetData::setSlotAzimuth(const Basic::Angle* const msg)
 bool TargetData::setSlotAzimuth(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setAzimuth(msg->getDouble());
    }
    return ok;
@@ -328,7 +328,7 @@ bool TargetData::setSlotAzimuth(const Basic::Number* const msg)
 bool TargetData::setSlotVelocity(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = setVelocity(msg->getDouble());
    }
    return ok;
@@ -363,7 +363,7 @@ std::ostream& TargetData::serialize(std::ostream& sout, const int i, const bool 
 
     {
         const Basic::String* s = getWpnType();
-        if (s != 0) {
+        if (s != nullptr) {
             indent(sout,i+j);
             sout << "weaponType: " << s  << std::endl;
         }
@@ -376,7 +376,7 @@ std::ostream& TargetData::serialize(std::ostream& sout, const int i, const bool 
     sout << "manualAssign: " <<  (getManualAssign() ? "true" : "false")  << std::endl;
 
     {
-        unsigned int st = getStickType();
+        const unsigned int st = getStickType();
         if (st == MIDPOINT) {
             indent(sout,i+j);
             sout << "stickType: " << "MIDPOINT" << std::endl;
