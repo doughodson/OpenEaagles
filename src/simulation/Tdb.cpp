@@ -64,28 +64,28 @@ Tdb* Tdb::clone() const
 
 void Tdb::initData()
 {
-   ownship = 0;
-   gimbal = 0;
+   ownship = nullptr;
+   gimbal = nullptr;
    usingEcefFlg = false;
 
-   targets = 0;
+   targets = nullptr;
    maxTargets = 0;
    numTgts = 0;
 
-   ranges = 0;
-   rngRates = 0;
-   losG = 0;
-   losO2T = 0;
-   losT2O = 0;
-   aar = 0;
-   aazr = 0;
-   aelr = 0;
+   ranges = nullptr;
+   rngRates = nullptr;
+   losG = nullptr;
+   losO2T = nullptr;
+   losT2O = nullptr;
+   aar = nullptr;
+   aazr = nullptr;
+   aelr = nullptr;
 
-   xa = 0;
-   ya = 0;
-   za = 0;
-   ra2 = 0;
-   ra = 0;
+   xa = nullptr;
+   ya = nullptr;
+   za = nullptr;
+   ra2 = nullptr;
+   ra = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -101,7 +101,7 @@ void Tdb::copyData(const Tdb& org, const bool cc)
    // Reallocate the space as needed
    resizeArrays(org.maxTargets);
 
-   if (targets != 0) {
+   if (targets != nullptr) {
       for (unsigned int i = 0; i < org.numTgts; i++) {
          org.targets[i]->ref();
          targets[i] = org.targets[i];
@@ -125,7 +125,7 @@ void Tdb::copyData(const Tdb& org, const bool cc)
 void Tdb::deleteData()
 {
    resizeArrays(0);
-   setGimbal(0);
+   setGimbal(nullptr);
 }
 
 //------------------------------------------------------------------------------
@@ -135,12 +135,12 @@ void Tdb::clearArrays()
 {
    // We just want to unref() our targets and set numTgts to zero.
    // -- we really don't care about the other data if numTgts is zero
-   if (targets != 0) {
+   if (targets != nullptr) {
       while (numTgts > 0) {
          --numTgts;
-         if (targets[numTgts] != 0) {
+         if (targets[numTgts] != nullptr) {
             targets[numTgts]->unref();
-            targets[numTgts] = 0;
+            targets[numTgts] = nullptr;
          }
       }
    }
@@ -164,23 +164,23 @@ bool Tdb::resizeArrays(const unsigned int newSize)
       if (newSize != maxTargets) {
 
          // Free up the old memory
-         if (ranges != 0)   { delete[] ranges;   ranges = 0; }
-         if (rngRates != 0) { delete[] rngRates; rngRates = 0; }
-         if (losG != 0)     { delete[] losG;     losG = 0; }
-         if (losO2T != 0)   { delete[] losO2T;   losO2T = 0; }
-         if (losT2O != 0)   { delete[] losT2O;   losT2O = 0; }
-         if (aar != 0)      { delete[] aar;      aar = 0; }
-         if (aazr != 0)     { delete[] aazr;     aazr = 0; }
-         if (aelr != 0)     { delete[] aelr;     aelr = 0; }
+         if (ranges   != nullptr)   { delete[] ranges;   ranges   = nullptr; }
+         if (rngRates != nullptr)   { delete[] rngRates; rngRates = nullptr; }
+         if (losG     != nullptr)   { delete[] losG;     losG     = nullptr; }
+         if (losO2T   != nullptr)   { delete[] losO2T;   losO2T   = nullptr; }
+         if (losT2O   != nullptr)   { delete[] losT2O;   losT2O   = nullptr; }
+         if (aar      != nullptr)   { delete[] aar;      aar      = nullptr; }
+         if (aazr     != nullptr)   { delete[] aazr;     aazr     = nullptr; }
+         if (aelr     != nullptr)   { delete[] aelr;     aelr     = nullptr; }
 
-         if (targets != 0)  { delete[] targets;  targets = 0; }
+         if (targets != nullptr)    { delete[] targets;  targets  = nullptr; }
          maxTargets = 0;
 
-         if (xa != 0)  { delete[] xa;  xa = 0; }
-         if (ya != 0)  { delete[] ya;  ya = 0; }
-         if (za != 0)  { delete[] za;  za = 0; }
-         if (ra2 != 0)  { delete[] ra2;  ra2 = 0; }
-         if (ra != 0)  { delete[] ra;  ra = 0; }
+         if (xa  != nullptr)  { delete[] xa;  xa  = nullptr; }
+         if (ya  != nullptr)  { delete[] ya;  ya  = nullptr; }
+         if (za  != nullptr)  { delete[] za;  za  = nullptr; }
+         if (ra2 != nullptr)  { delete[] ra2; ra2 = nullptr; }
+         if (ra  != nullptr)  { delete[] ra;  ra  = nullptr; }
 
          // Allocate new memory
          if (newSize > 0) {
@@ -194,7 +194,7 @@ bool Tdb::resizeArrays(const unsigned int newSize)
             aelr     = new double[newSize];
             targets  = new Player*[newSize];
             for (unsigned int i = 0; i < newSize; i++) {
-               targets[i] = 0;
+               targets[i] = nullptr;
             }
             maxTargets = newSize;
             xa = new double[newSize];
@@ -223,12 +223,12 @@ unsigned int Tdb::processPlayers(Basic::PairStream* const players)
    // ---
    // Early out checks (no ownship, no players of interest, no target data arrays)
    // ---
-   if (gimbal == 0 || ownship == 0 || players == 0 || maxTargets == 0) return 0;
+   if (gimbal == nullptr || ownship == nullptr || players == nullptr || maxTargets == 0) return 0;
 
    // ---
    // Terrain occulting check setup
    // ---
-   const Basic::Terrain* terrain = 0;
+   const Basic::Terrain* terrain = nullptr;
    if (gimbal->isTerrainOccultingEnabled()) {
       const Simulation* const sim = ownship->getSimulation();
       terrain = sim->getTerrain();
@@ -247,7 +247,6 @@ unsigned int Tdb::processPlayers(Basic::PairStream* const players)
    const double earthRadius = gimbal->getEarthRadius();
    const bool checkHorizon = gimbal->isHorizonCheckEnabled();
 
-
    // ---
    // Get the matrices
    // ---
@@ -260,7 +259,7 @@ unsigned int Tdb::processPlayers(Basic::PairStream* const players)
    if (ownHdgOnly) {
       // Using heading only, ignore ownship roll and pitch
       osg::Matrixd rr;
-      rr.makeRotate( ownship->getHeading(),   0, 0, 1);
+      rr.makeRotate( ownship->getHeading(), 0, 0, 1);
       rm *= rr;
    }
    else {
@@ -289,9 +288,9 @@ unsigned int Tdb::processPlayers(Basic::PairStream* const players)
    }
 
    // Geodetic position of our ownship
-   double osLat = ownship->getLatitude();
-   double osLon = ownship->getLongitude();
-   double osAlt = ownship->getAltitudeM();
+   const double osLat = ownship->getLatitude();
+   const double osLon = ownship->getLongitude();
+   const double osAlt = ownship->getAltitudeM();
 
    // If we're using ECEF coordinates then we compute the distance
    // to the earth horizon and the tangent of the angle from our
@@ -301,17 +300,17 @@ unsigned int Tdb::processPlayers(Basic::PairStream* const players)
    if (usingEcefFlg) {
       // Our vertical offset from our ownship is the inverse of the 'z'
       // translation component from our gimbal to NED matrix.
-      double vertOffset = -rm(3,2);    // Z translation (but positive up)
+      const double vertOffset = -rm(3,2);    // Z translation (but positive up)
 
       // distance from the center of the earth
-      double distEC = vertOffset + osAlt + earthRadius;
-      double distEC2 = distEC * distEC;  // squared
+      const double distEC = vertOffset + osAlt + earthRadius;
+      const double distEC2 = distEC * distEC;  // squared
 
       // earth radius squared
-      double er2 = earthRadius * earthRadius;
+      const double er2 = earthRadius * earthRadius;
 
       // distance to horizon squared
-      double dh2 = distEC2 - er2;
+      const double dh2 = distEC2 - er2;
 
       // the distance and the tangent of the angle to the horizon
       hDist = std::sqrt(dh2);
@@ -319,7 +318,7 @@ unsigned int Tdb::processPlayers(Basic::PairStream* const players)
    }
 
    // Are we a space vehicle?
-   bool osSpaceVehicle = ownship->isMajorType(Player::SPACE_VEHICLE);
+   const bool osSpaceVehicle = ownship->isMajorType(Player::SPACE_VEHICLE);
 
    // ---
    // 1) Scan the player list ---
@@ -335,7 +334,7 @@ unsigned int Tdb::processPlayers(Basic::PairStream* const players)
       finished = localOnly && target->isNetworkedPlayer();
 
       // We should process this target if ...
-      bool processTgt =
+      const bool processTgt =
          !finished &&                                       // we're not finished AND
          target != ownship &&                               // its not our ownship AND
          target->isActive() &&                              // the target is active AND
@@ -350,7 +349,7 @@ unsigned int Tdb::processPlayers(Basic::PairStream* const players)
          else tlos = target->getPosition() - p0;
 
          // Normalized and compute length: unit LOS vector and range (meters)
-         double range = tlos.normalize();
+         const double range = tlos.normalize();
 
          // In-range check (only if maxRange is greater than zero)
          bool inRange = (maxRange == 0);
@@ -389,7 +388,7 @@ unsigned int Tdb::processPlayers(Basic::PairStream* const players)
                bool inFov = (maxAngle == 0);
                if ( !inFov ) {
                   // LOS vector: NED to gimbal coordinates
-                  osg::Vec3d losG = rm * losNED;
+                  const osg::Vec3d losG = rm * losNED;
                   inFov = (losG.x() >= cosMaxFov);
                }
 
@@ -399,9 +398,9 @@ unsigned int Tdb::processPlayers(Basic::PairStream* const players)
                   bool occulted = false;
                   if (terrain != 0 && !osSpaceVehicle) {
 
-                     double tgtLat = target->getLatitude();
-                     double tgtLon = target->getLongitude();
-                     double tgtAlt = target->getAltitudeM();
+                     const double tgtLat = target->getLatitude();
+                     const double tgtLon = target->getLongitude();
+                     const double tgtAlt = target->getAltitudeM();
 
                      // Is the target a space vehicle?
                      if ( target->isMajorType(Player::SPACE_VEHICLE) ) {
@@ -450,7 +449,7 @@ unsigned int Tdb::computeBoresightData()
    // ---
    // Early out checks (no ownship, no players of interest, no target data arrays)
    // ---
-   if (gimbal == 0 || ownship == 0 || numTgts == 0) return 0;
+   if (gimbal == nullptr || ownship == nullptr || numTgts == 0) return 0;
 
    // If 'ownHdgOnly' is true (default) then only the ownship's heading angle is used,
    // which earth stabilizes the gimbal in roll and pitch, otherwise the full
@@ -533,7 +532,7 @@ unsigned int Tdb::computeBoresightData()
       if (ownHdgOnly) {
          // Using heading only, ignore ownship roll and pitch
          osg::Matrixd rr;
-         rr.makeRotate( ownship->getHeading(),   0, 0, 1);
+         rr.makeRotate( ownship->getHeading(), 0, 0, 1);
          mm *= rr;
       }
       else {
@@ -587,15 +586,15 @@ unsigned int Tdb::computeBoresightData()
 void Tdb::setGimbal(const Gimbal* const newGimbal)
 {
    // Unref() the old, set and ref() the new
-   if (ownship != 0) { ownship->unref(); ownship = 0; }
-   if (gimbal != 0) gimbal->unref();
+   if (ownship != nullptr) { ownship->unref(); ownship = nullptr; }
+   if (gimbal != nullptr) gimbal->unref();
 
    gimbal = newGimbal;
 
-   if (gimbal != 0) {
+   if (gimbal != nullptr) {
       gimbal->ref();
       ownship = gimbal->getOwnship();
-      if (ownship != 0) ownship->ref();
+      if (ownship != nullptr) ownship->ref();
    }
 }
 

@@ -124,46 +124,46 @@ Weapon::Weapon()
 //------------------------------------------------------------------------------
 void Weapon::initData()
 {
-   flyoutWpn = 0;
-   initialWpn = 0;
+   flyoutWpn = nullptr;
+   initialWpn = nullptr;
 
    tgtPos.set(0,0,0);
    tgtVel.set(0,0,0);
    tgtPosValid = false;
-   tgtPlayer = 0;
-   tgtTrack = 0;
-   launchVehicle = 0;
+   tgtPlayer = nullptr;
+   tgtTrack = nullptr;
+   launchVehicle = nullptr;
    posTrkEnb = false;
    maxTgtRng = DEFAULT_MAX_TGT_RNG;
    maxTgtLosErr = DEFAULT_MAX_TGT_LOS_ERR;
-   detonationRange = 0;
+   detonationRange = 0.0;
    tgtDetLoc.set(0,0,0);
-   launcher  = 0;
-   station   = 0;
+   launcher = nullptr;
+   station = 0;
    weaponID = 0;
    eventID = 0;
 
-   power     = true;
-   failed    = false;
-   released  = false;
-   releaseHold  = false;
-   willHang = false;
-   hung      = false;
-   blocked   = 0;
+   power       = true;
+   failed      = false;
+   released    = false;
+   releaseHold = false;
+   willHang    = false;
+   hung        = false;
+   blocked     = false;
    canJettison = true; // default
-   jettisoned = false;
-   dummyFlg  = false;
-   results = DETONATE_NONE;
-   tstTgtNam = 0;
+   jettisoned  = false;
+   dummyFlg    = false;
+   results     = DETONATE_NONE;
+   tstTgtNam   = nullptr;
 
-   tof = 0;
-   setMaxTOF(60.0f);
-   setTSG(9999.0f);
-   setMaxBurstRng(500.0f);
-   setLethalRange(50.0f);
-   setSOBT(9999.0f);
-   setEOBT(0.0f);
-   setMaxGimbalAngle(30.0f * static_cast<LCreal>(Basic::Angle::D2RCC));
+   tof = 0.0;
+   setMaxTOF(60.0);
+   setTSG(9999.0);
+   setMaxBurstRng(500.0);
+   setLethalRange(50.0);
+   setSOBT(9999.0);
+   setEOBT(0.0);
+   setMaxGimbalAngle(30.0 * static_cast<LCreal>(Basic::Angle::D2RCC));
 }
 
 //------------------------------------------------------------------------------
@@ -174,55 +174,55 @@ void Weapon::copyData(const Weapon& org, const bool cc)
    BaseClass::copyData(org);
    if (cc) initData();
 
-   setFlyoutWeapon(0);
-   setInitialWeapon(0);
-   setTargetTrack(0,false);
-   setTargetPlayer(0,false);
+   setFlyoutWeapon(nullptr);
+   setInitialWeapon(nullptr);
+   setTargetTrack(nullptr, false);
+   setTargetPlayer(nullptr, false);
    setLauncher(nullptr, 0);
-   setLaunchVehicle(0);
+   setLaunchVehicle(nullptr);
 
-   tgtPos = org.tgtPos;
-   tgtVel = org.tgtVel;
-   tgtPosValid = org.tgtPosValid;
-   posTrkEnb = org.posTrkEnb;
-   maxTgtRng = org.maxTgtRng;
-   maxTgtLosErr = org.maxTgtLosErr;
+   tgtPos          = org.tgtPos;
+   tgtVel          = org.tgtVel;
+   tgtPosValid     = org.tgtPosValid;
+   posTrkEnb       = org.posTrkEnb;
+   maxTgtRng       = org.maxTgtRng;
+   maxTgtLosErr    = org.maxTgtLosErr;
    detonationRange = org.detonationRange;
-   tgtDetLoc = org.tgtDetLoc;
-   station = org.station;
-   weaponID = org.weaponID;
-   eventID = org.eventID;
-   power     = org.power;
-   failed    = org.failed;
-   released  = org.released;
-   releaseHold  = org.releaseHold;
-   willHang  = org.willHang;
-   hung      = org.hung;
-   blocked   = org.blocked;
-   canJettison  = org.canJettison;
-   jettisoned = org.jettisoned;
-   dummyFlg  = org.dummyFlg;
-   results = org.results;
-   tstTgtNam = org.tstTgtNam;
+   tgtDetLoc       = org.tgtDetLoc;
+   station         = org.station;
+   weaponID        = org.weaponID;
+   eventID         = org.eventID;
+   power           = org.power;
+   failed          = org.failed;
+   released        = org.released;
+   releaseHold     = org.releaseHold;
+   willHang        = org.willHang;
+   hung            = org.hung;
+   blocked         = org.blocked;
+   canJettison     = org.canJettison;
+   jettisoned      = org.jettisoned;
+   dummyFlg        = org.dummyFlg;
+   results         = org.results;
+   tstTgtNam       = org.tstTgtNam;
 
-   tof = org.tof;
-   maxTOF = org.maxTOF;
-   tsg = org.tsg;
-   maxBurstRng = org.maxBurstRng;
-   lethalRange = org.lethalRange;
-   eobt = org.eobt;
-   sobt = org.sobt;
-   maxGimbal = org.maxGimbal;
+   tof             = org.tof;
+   maxTOF          = org.maxTOF;
+   tsg             = org.tsg;
+   maxBurstRng     = org.maxBurstRng;
+   lethalRange     = org.lethalRange;
+   eobt            = org.eobt;
+   sobt            = org.sobt;
+   maxGimbal       = org.maxGimbal;
 }
 
 void Weapon::deleteData()
 {
-   setFlyoutWeapon(0);
-   setInitialWeapon(0);
-   setTargetTrack(0,false);
-   setTargetPlayer(0,false);
+   setFlyoutWeapon(nullptr);
+   setInitialWeapon(nullptr);
+   setTargetTrack(nullptr, false);
+   setTargetPlayer(nullptr, false);
    setLauncher(nullptr, 0);
-   setLaunchVehicle(0);
+   setLaunchVehicle(nullptr);
 }
 
 //------------------------------------------------------------------------------
@@ -235,7 +235,7 @@ void Weapon::reset()
    Weapon* flyout = getFlyoutWeapon();
 
    // If there's a flyout weapon still in PRE_RELEASE then reset it
-   if (flyout != 0 && flyout != this && flyout->isMode(PRE_RELEASE) ) {
+   if (flyout != nullptr && flyout != this && flyout->isMode(PRE_RELEASE) ) {
       flyout->reset();
    }
 
@@ -245,35 +245,35 @@ void Weapon::reset()
       setMode(DELETE_REQUEST);
    }
 
-   hung      = false;
-   released  = false;
-   failed    = false;
+   hung       = false;
+   released   = false;
+   failed     = false;
    jettisoned = false;
 
    setDetonationResults(DETONATE_NONE);
 
-   setFlyoutWeapon(0);
-   setInitialWeapon(0);
-   setTargetTrack(0,false);
-   setTargetPlayer(0,false);
+   setFlyoutWeapon(nullptr);
+   setInitialWeapon(nullptr);
+   setTargetTrack(nullptr, false);
+   setTargetPlayer(nullptr, false);
 
    // launch vehicle
-   if ( ( getLaunchVehicle() == 0 ) && ( flyout != this ) ) {
+   if ( ( getLaunchVehicle() == nullptr ) && ( flyout != this ) ) {
       setLaunchVehicle( static_cast<Player*>(findContainerByType( typeid(Player) )) );
    }
 
    // Test player?
-   if (tstTgtNam != 0) {
+   if (tstTgtNam != nullptr) {
       Simulation* s = getSimulation();
-      if (s != 0) {
+      if (s != nullptr) {
          Player* t = s->findPlayerByName( *tstTgtNam );
-         if (t != 0) setTargetPlayer(t,true);
+         if (t != nullptr) setTargetPlayer(t, true);
      }
    }
 
    setTOF(0.0);
 
-   if (flyout != 0) flyout->unref();
+   if (flyout != nullptr) flyout->unref();
 }
 
 //------------------------------------------------------------------------------
@@ -300,7 +300,7 @@ void Weapon::updateTC(const LCreal dt)
       if (posTrkEnb) positionTracking();
 
       // Update our Time-Of-Flight (TOF)
-      if (isMode(ACTIVE)) updateTOF(dt*4.0f);
+      if (isMode(ACTIVE)) updateTOF(dt * 4.0);
    }
 }
 
@@ -320,11 +320,11 @@ void Weapon::dynamics(const LCreal dt)
       // 1) Weapon's position is its position relative to the launcher (launcher's body coordinates)
       // 2) Rotate to earth coordinates
       // 3) Add the launcher's position
-      osg::Vec2d ip = getInitPosition();
-      osg::Vec3d pos0b(ip.x(), ip.y(), -getInitAltitude());
-      osg::Vec3d pos0e = pos0b * lvM; // body to earth
-      osg::Vec3d lpos = getLaunchVehicle()->getPosition();
-      osg::Vec3d pos1 = lpos + pos0e;
+      const osg::Vec2d ip = getInitPosition();
+      const osg::Vec3d pos0b(ip.x(), ip.y(), -getInitAltitude());
+      const osg::Vec3d pos0e = pos0b * lvM; // body to earth
+      const osg::Vec3d lpos = getLaunchVehicle()->getPosition();
+      const osg::Vec3d pos1 = lpos + pos0e;
       setPosition( pos1 );
 
       // Weapon's orientation at launch
@@ -344,7 +344,7 @@ void Weapon::dynamics(const LCreal dt)
    }
    else if (!isJettisoned()) {
 
-      if (isLocalPlayer() && !isDummy() && getDynamicsModel() == 0) {
+      if (isLocalPlayer() && !isDummy() && getDynamicsModel() == nullptr) {
          // Use our default (simple) weapon model
          weaponGuidance(dt);
          weaponDynamics(dt);
@@ -360,12 +360,12 @@ void Weapon::dynamics(const LCreal dt)
 bool Weapon::shutdownNotification()
 {
    // Clear all of our pointers
-   setFlyoutWeapon(0);
-   setInitialWeapon(0);
-   setTargetTrack(0,false);
-   setTargetPlayer(0,false);
+   setFlyoutWeapon(nullptr);
+   setInitialWeapon(nullptr);
+   setTargetTrack(nullptr, false);
+   setTargetPlayer(nullptr, false);
    setLauncher(nullptr, 0);
-   setLaunchVehicle(0);
+   setLaunchVehicle(nullptr);
 
    return BaseClass::shutdownNotification();
 }
@@ -407,7 +407,7 @@ bool Weapon::onJettisonEvent()
 
       // If there is a flyout weapon that's still in PRE_RELEASE mode
       // then call its jettison event handler.
-      if (flyout != 0 && flyout != this && flyout->isMode(PRE_RELEASE) ) {
+      if (flyout != nullptr && flyout != this && flyout->isMode(PRE_RELEASE) ) {
          flyout->onJettisonEvent();
       }
 
@@ -426,8 +426,8 @@ bool Weapon::onJettisonEvent()
       setReleased(true);
 
       // cleanup
-      if (flyout != 0) flyout->unref();
-      if (initWpn != 0) initWpn->unref();
+      if (flyout != nullptr) flyout->unref();
+      if (initWpn != nullptr) initWpn->unref();
 
       ok = true;
    }
@@ -441,38 +441,38 @@ bool Weapon::onJettisonEvent()
 void Weapon::checkDetonationEffect()
 {
    Simulation* s = getSimulation();
-   if (s != 0) {
+   if (s != nullptr) {
       // Only local players within 10X max burst range
-      LCreal maxRng = 10.0f * getMaxBurstRng();
+      LCreal maxRng = 10.0 * getMaxBurstRng();
 
       // Find our target (if any)
       const Player* tgt = getTargetPlayer();
-      if (tgt == 0) {
+      if (tgt == nullptr) {
          const Track* trk = getTargetTrack();
-         if (trk != 0) tgt = trk->getTarget();
+         if (trk != nullptr) tgt = trk->getTarget();
       }
 
       Basic::PairStream* plist = s->getPlayers();
-      if (plist != 0) {
-      Basic::List::Item* item = plist->getFirstItem();
+      if (plist != nullptr) {
+         Basic::List::Item* item = plist->getFirstItem();
 
-      // Process the detonation for all local, in-range players
-      bool finished = false;
-      while (item != 0 && !finished) {
-         Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
-         Player* p = static_cast<Player*>(pair->object());
-         finished = p->isNetworkedPlayer();  // local only
-         if (!finished && (p != this) ) {
-            osg::Vec3 dpos = p->getPosition() - getPosition();
-            LCreal rng = dpos.length();
-            if ( (rng <= maxRng) || (p == tgt) ) p->processDetonation(rng, this);
+         // Process the detonation for all local, in-range players
+         bool finished = false;
+         while (item != nullptr && !finished) {
+            Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+            Player* p = static_cast<Player*>(pair->object());
+            finished = p->isNetworkedPlayer();  // local only
+            if (!finished && (p != this) ) {
+               osg::Vec3 dpos = p->getPosition() - getPosition();
+               LCreal rng = dpos.length();
+               if ( (rng <= maxRng) || (p == tgt) ) p->processDetonation(rng, this);
+            }
+            item = item->getNext();
          }
-         item = item->getNext();
-      }
 
          // cleanup
          plist->unref();
-         plist = 0;
+         plist = nullptr;
       }
 
    }
@@ -493,7 +493,7 @@ bool Weapon::collisionNotification(Player* const other)
       setDetonationResults(DETONATE_ENTITY_IMPACT);
 
       // Compute detonation location relative to the other ship
-      setTargetPlayer(other,false);
+      setTargetPlayer(other, false);
       setLocationOfDetonation();
 
       // Ground detonation -- anyone here to see it?
@@ -507,7 +507,7 @@ bool Weapon::collisionNotification(Player* const other)
    }
 
    // TabLogger is deprecated
-   if (getAnyEventLogger() != 0) {
+   if (getAnyEventLogger() != nullptr) {
       TabLogger::TabLogEvent* evt = new TabLogger::LogWeaponActivity(2, getLaunchVehicle(), this, getTargetPlayer(), DETONATE_ENTITY_IMPACT, getDetonationRange());  // type 2 for "detonate"
       getAnyEventLogger()->log(evt);
       evt->unref();
@@ -533,7 +533,7 @@ bool Weapon::crashNotification()
       // ---
       // Compute location of detonation relative to target
       // ---
-      if (getTargetPlayer() != 0) {
+      if (getTargetPlayer() != nullptr) {
          setLocationOfDetonation();
       }
 
@@ -552,7 +552,7 @@ bool Weapon::crashNotification()
    }
 
    // TabLogger is deprecated
-   if (getAnyEventLogger() != 0) {
+   if (getAnyEventLogger() != nullptr) {
       TabLogger::TabLogEvent* evt = new TabLogger::LogWeaponActivity(2, getLaunchVehicle(), this, getTargetPlayer(), DETONATE_GROUND_IMPACT, getDetonationRange());  // type 2 for "detonate"
       getAnyEventLogger()->log(evt);
       evt->unref();
@@ -573,7 +573,7 @@ Weapon* Weapon::prerelease()
    //   and we'll need a launching player and a simulation
    Simulation* sim = static_cast<Simulation*>( findContainerByType(typeid(Simulation)) );
    Player* lplayer = getLaunchVehicle();
-   if (!isReleased() && !isJettisoned() && flyout == 0 && lplayer != 0 && sim != 0) {
+   if (!isReleased() && !isJettisoned() && flyout == nullptr && lplayer != nullptr && sim != nullptr) {
 
       // we'll get an event at the time of release.
       // but get an event ID to use as our player ID
@@ -629,7 +629,7 @@ Weapon* Weapon::prerelease()
 //------------------------------------------------------------------------------
 Weapon* Weapon::release()
 {
-   Weapon* flyout = 0;
+   Weapon* flyout = nullptr;
 
    // When this weapon isn't already released, blocked or jettisoned.
    if ( !isReleased() && !isBlocked() && !isJettisoned() ) {
@@ -640,12 +640,12 @@ Weapon* Weapon::release()
          // and we have a launching player and a simulation ...
          Player* lplayer = getLaunchVehicle();
          Simulation* sim = static_cast<Simulation*>( findContainerByType(typeid(Simulation)) );
-         if ( lplayer != 0 && sim != 0) {
+         if ( lplayer != nullptr && sim != nullptr) {
 
             // then release the weapon!
 
             flyout = getFlyoutWeapon();
-            if (flyout != 0) {
+            if (flyout != nullptr) {
                // When we've already created a flyout weapon, which is on the
                // player list in 'release hold' ...
 
@@ -706,7 +706,7 @@ Weapon* Weapon::release()
             END_RECORD_DATA_SAMPLE()
 
             // TabLogger is deprecated
-            if (getAnyEventLogger() != 0) {
+            if (getAnyEventLogger() != nullptr) {
                // type 1 for "launch", last two fields effectively null
                TabLogger::TabLogEvent* evt = new TabLogger::LogWeaponActivity(1, getLaunchVehicle(), 0, 0, 0, 0.0);
                getAnyEventLogger()->log(evt);
@@ -725,7 +725,7 @@ Weapon* Weapon::release()
          END_RECORD_DATA_SAMPLE()
 
             // TabLogger is deprecated
-            if (getAnyEventLogger() != 0) {
+            if (getAnyEventLogger() != nullptr) {
                // type 4 for "hung store"
                TabLogger::TabLogEvent* evt = new TabLogger::LogWeaponActivity(4, getLaunchVehicle(), this, 0, 0, 0.0);
                getAnyEventLogger()->log(evt);
@@ -748,7 +748,7 @@ void Weapon::atReleaseInit()
    }
 
    // Reset the dynamics mode (if any)
-   if (getDynamicsModel() != 0) {
+   if (getDynamicsModel() != nullptr) {
         getDynamicsModel()->atReleaseInit();
    }
 }
@@ -797,7 +797,7 @@ void Weapon::updateTOF(const LCreal dt)
          END_RECORD_DATA_SAMPLE()
 
          // TabLogger is deprecated
-         if (getAnyEventLogger() != 0) {
+         if (getAnyEventLogger() != nullptr) {
             TabLogger::TabLogEvent* evt = new TabLogger::LogWeaponActivity(2, getLaunchVehicle(), this, getTargetPlayer(), DETONATE_DETONATION);  // type 2 for "detonate"
             getAnyEventLogger()->log(evt);
             evt->unref();
@@ -816,12 +816,12 @@ void Weapon::positionTracking()
     if (posTrkEnb) {
 
         // When we have track manager -- follow the first track
-        if (tgtTrack != 0) {
+        if (tgtTrack != nullptr) {
             setTargetPosition(tgtTrack->getPosition());
             setTargetVelocity(tgtTrack->getVelocity());
         }
 
-        else if (tgtPlayer != 0) {
+        else if (tgtPlayer != nullptr) {
             // No sensor, but we have a target player -- fake it and just follow the target
             osg::Vec3 p0 = getPosition();
             osg::Vec3d vel = getVelocity();
@@ -843,7 +843,7 @@ void Weapon::positionTracking()
 bool Weapon::computeTargetLocation(osg::Vec3* const loc, const Player* const tgt)
 {
    bool ok = false;
-   if (tgt != 0 && loc != 0) {
+   if (tgt != nullptr && loc != nullptr) {
       osg::Vec3 posP = getPosition() - tgt->getPosition();
       osg::Vec3 posB = tgt->getRotMat() * posP;
       *loc = posB;
@@ -861,13 +861,13 @@ bool Weapon::setLocationOfDetonation()
 
    // Find our target (if any)
    const Player* tgt = getTargetPlayer();
-   if (tgt == 0) {
+   if (tgt == nullptr) {
       const Track* trk = getTargetTrack();
-      if (trk != 0) tgt = trk->getTarget();
+      if (trk != nullptr) tgt = trk->getTarget();
    }
 
    // computer the location of the detonation relative to the target player
-   if (tgt != 0) {
+   if (tgt != nullptr) {
       osg::Vec3 loc;
       ok = computeTargetLocation(&loc, tgt);
       if (ok) setDetonationLocation(loc);
@@ -882,7 +882,7 @@ bool Weapon::setLocationOfDetonation()
 // Returns pre-ref()'d pointer to the initial or fly-out based on modes
 Weapon* Weapon::getPointer()
 {
-   if (flyoutWpn != 0) {
+   if (flyoutWpn != nullptr) {
       return flyoutWpn.getRefPtr();
    }
    else {
@@ -894,7 +894,7 @@ Weapon* Weapon::getPointer()
 // Returns pre-ref()'d pointer to the initial or fly-out based on modes (const version)
 const Weapon* Weapon::getPointer() const
 {
-   if (flyoutWpn != 0) {
+   if (flyoutWpn != nullptr) {
       return flyoutWpn.getRefPtr();
    }
    else {
@@ -1163,10 +1163,10 @@ const osg::Vec3& Weapon::getDetonationLocation() const
 bool Weapon::setTargetPlayer(Player* const tgt, const bool pt)
 {
     tgtPlayer = tgt;
-    tgtTrack = 0;
+    tgtTrack = nullptr;
 
     // Track position?
-    posTrkEnb = (pt && tgt != 0);
+    posTrkEnb = (pt && tgt != nullptr);
     positionTracking();
     return true;
 }
@@ -1174,11 +1174,11 @@ bool Weapon::setTargetPlayer(Player* const tgt, const bool pt)
 // setTargetTrack() -- sets a pointer to the target track
 bool Weapon::setTargetTrack(Track* const trk, const bool pt)
 {
-    tgtPlayer = 0;
+    tgtPlayer = nullptr;
     tgtTrack = trk;
 
     // Track position?
-    posTrkEnb = (pt && trk != 0);
+    posTrkEnb = (pt && trk != nullptr);
     positionTracking();
     return true;
 }
@@ -1433,7 +1433,7 @@ bool Weapon::setSlotDummy(const Basic::Number* const p)
 bool Weapon::setSlotMaxTOF(const Basic::Time* const p)
 {
    bool ok = false;
-   if (p != 0) {
+   if (p != nullptr) {
       ok = setMaxTOF( Basic::Seconds::convertStatic( *p ) );
    }
    return ok;
@@ -1449,7 +1449,7 @@ bool Weapon::setSlotMaxTOF(const Basic::Number* const p)
 bool Weapon::setSlotTSG(const Basic::Time* const p)
 {
    bool ok = false;
-   if (p != 0) {
+   if (p != nullptr) {
       ok = setTSG( Basic::Seconds::convertStatic( *p ) );
    }
    return ok;
@@ -1465,7 +1465,7 @@ bool Weapon::setSlotTSG(const Basic::Number* const p)
 bool Weapon::setSlotMaxBurstRng(const Basic::Distance* const p)
 {
    bool ok = false;
-   if (p != 0) {
+   if (p != nullptr) {
       ok = setMaxBurstRng( Basic::Meters::convertStatic( *p ) );
    }
    return ok;
@@ -1482,7 +1482,7 @@ bool Weapon::setSlotMaxBurstRng(const Basic::Number* const p)
 bool Weapon::setSlotLethalRange(const Basic::Distance* const p)
 {
    bool ok = false;
-   if (p != 0) {
+   if (p != nullptr) {
       ok = setLethalRange( Basic::Meters::convertStatic( *p ) );
    }
    return ok;
@@ -1498,7 +1498,7 @@ bool Weapon::setSlotLethalRange(const Basic::Number* const p)
 bool Weapon::setSlotSOBT(const Basic::Time* const p)
 {
    bool ok = false;
-   if (p != 0) {
+   if (p != nullptr) {
       ok = setSOBT( Basic::Seconds::convertStatic( *p ) );
    }
    return ok;
@@ -1515,7 +1515,7 @@ bool Weapon::setSlotSOBT(const Basic::Number* const p)
 bool Weapon::setSlotEOBT(const Basic::Time* const p)
 {
    bool ok = false;
-   if (p != 0) {
+   if (p != nullptr) {
       ok = setEOBT( Basic::Seconds::convertStatic( *p ) );
    }
    return ok;
@@ -1540,7 +1540,7 @@ bool Weapon::setSlotTgtPos(const Basic::List* const numList)
 {
     bool ok = false;
     LCreal values[3];
-    int n = numList->getNumberList(values, 3);
+    const int n = numList->getNumberList(values, 3);
     if (n == 3) {
       osg::Vec3 tp(values[0], values[1], values[2]);
       setTargetPosition(tp);

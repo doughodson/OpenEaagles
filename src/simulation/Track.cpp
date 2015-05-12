@@ -19,7 +19,7 @@ EMPTY_SERIALIZER(Track)
 //------------------------------------------------------------------------------
 // Constructor(s)
 //------------------------------------------------------------------------------
-Track::Track() : tgt(0)
+Track::Track() : tgt(nullptr)
 {
     STANDARD_CONSTRUCTOR()
 
@@ -36,7 +36,7 @@ void Track::copyData(const Track& org, const bool cc)
 
    // If copy constructor, init these pointers
    if (cc) {
-      tgt = 0;
+      tgt = nullptr;
    }
 
    setTarget( org.tgt );
@@ -97,7 +97,7 @@ void Track::copyData(const Track& org, const bool cc)
 
 void Track::deleteData()
 {
-   setTarget(0);
+   setTarget(nullptr);
    clear();
 }
 
@@ -158,7 +158,7 @@ void Track::clear()
    osAccel.set(0,0,0);
 
 
-   setTarget(0);
+   setTarget(nullptr);
 }
 
 
@@ -167,7 +167,7 @@ void Track::clear()
 //------------------------------------------------------------------------------
 void Track::ownshipDynamics(const LCreal gtrk, const osg::Vec3 velOS, const osg::Vec3 accelOS, const LCreal)
 {
-    osGndTrk = gtrk;
+   osGndTrk = gtrk;
    osVel = velOS;
    osAccel = accelOS;
 }
@@ -180,7 +180,7 @@ void Track::ownshipDynamics(const LCreal gtrk, const osg::Vec3 velOS, const osg:
 bool Track::getLatLonPosition(double* const lat, double* const lon) const
 {
    bool ok = false;
-   if (llValid && lat != 0 && lon != 0) {
+   if (llValid && lat != nullptr && lon != nullptr) {
       *lat = latitude;
       *lon = longitude;
       ok = true;
@@ -267,7 +267,7 @@ bool Track::setPosition(const osg::Vec3& p)
    pos = p;
 
    // compute ranges
-   LCreal gndRng2 = pos.x()*pos.x() + pos.y()*pos.y();
+   const LCreal gndRng2 = pos.x()*pos.x() + pos.y()*pos.y();
    gndRng = lcSqrt(gndRng2);
    rng = lcSqrt(gndRng2 +  pos.z()*pos.z());
 
@@ -314,7 +314,7 @@ bool Track::setVelocity(const osg::Vec3 v)
    osg::Vec3 totalVel = vel + osVel;
 
    gndSpd = lcSqrt(totalVel[0]*totalVel[0] + totalVel[1]*totalVel[1]);
-   gndTrk = lcAtan2(totalVel[1],totalVel[0]);
+   gndTrk = lcAtan2(totalVel[1], totalVel[0]);
    relGndTrk = lcAepcRad(gndTrk - osGndTrk);
 
    LCreal tmp1 = pos[1] * totalVel[0] - pos[0] * totalVel[1];
@@ -376,9 +376,9 @@ bool Track::setRejected(const bool f)
 // setTarget() -- set the target pointer
 bool Track::setTarget(Player* const p)
 {
-   if (tgt != 0) tgt->unref();
+   if (tgt != nullptr) tgt->unref();
    tgt = p;
-   if (tgt != 0) tgt->ref();
+   if (tgt != nullptr) tgt->ref();
    return true;
 }
 
@@ -409,7 +409,7 @@ void RfTrack::copyData(const RfTrack& org, const bool cc)
 
     // If copy constructor, init these pointers
     if (cc) {
-        lastEM = 0;
+        lastEM = nullptr;
     }
 
     setLastEmission( org.lastEM );
@@ -427,7 +427,7 @@ void RfTrack::copyData(const RfTrack& org, const bool cc)
 
 void RfTrack::deleteData()
 {
-    setLastEmission(0);
+    setLastEmission(nullptr);
 }
 
 //------------------------------------------------------------------------------
@@ -444,9 +444,9 @@ bool RfTrack::setSignal(const LCreal snDbl, const Emission* const em)
     if (nSig < MAX_SIG) nSig++;
 
     // Compute average signal
-    LCreal sum = 0.0f;
-    LCreal avg = 0.0f;
-    LCreal maxs = 0.0f;
+    LCreal sum = 0.0;
+    LCreal avg = 0.0;
+    LCreal maxs = 0.0;
     if (nSig > 0) {
         for (int i = 0; i < nSig; i++) {
             sum += lastSN[i];
@@ -467,9 +467,9 @@ bool RfTrack::setSignal(const LCreal snDbl, const Emission* const em)
 // setLastEmission() -- set the last emission pointer
 bool RfTrack::setLastEmission(const Emission* const em)
 {
-   if (lastEM != 0) lastEM->unref();
+   if (lastEM != nullptr) lastEM->unref();
    lastEM = em;
-   if (lastEM != 0) lastEM->ref();
+   if (lastEM != nullptr) lastEM->ref();
    return true;
 }
 
@@ -487,7 +487,7 @@ void RfTrack::clear()
 {
    mslWarn = false;
 
-   setLastEmission(0);
+   setLastEmission(nullptr);
    avgSig = 0;
    maxSig = 0;
    nSig = 0;
@@ -525,7 +525,7 @@ void IrTrack::copyData(const IrTrack& org, const bool cc)
 
     // If copy constructor, init these pointers
     if (cc) {
-        lastQuery = 0;
+        lastQuery = nullptr;
     }
 
     setLastQuery( org.lastQuery );
@@ -543,7 +543,7 @@ void IrTrack::copyData(const IrTrack& org, const bool cc)
 
 void IrTrack::deleteData()
 {
-    setLastQuery(0);
+    setLastQuery(nullptr);
 }
 
 //------------------------------------------------------------------------------
@@ -560,9 +560,9 @@ bool IrTrack::setSignal(const LCreal snDbl, const IrQueryMsg* const q)
     if (nSig < MAX_SIG) nSig++;
 
     // Compute average signal
-    LCreal sum = 0.0f;
-    LCreal avg = 0.0f;
-    LCreal maxs = 0.0f;
+    LCreal sum = 0.0;
+    LCreal avg = 0.0;
+    LCreal maxs = 0.0;
     if (nSig > 0) {
         for (int i = 0; i < nSig; i++) {
             sum += lastSN[i];
@@ -604,9 +604,9 @@ bool IrTrack::setPosition(const osg::Vec3& p)
 // setLastQuery() -- set the last emission pointer
 bool IrTrack::setLastQuery(const IrQueryMsg* const q)
 {
-   if (lastQuery != 0) lastQuery->unref();
+   if (lastQuery != nullptr) lastQuery->unref();
    lastQuery = q;
-   if (lastQuery != 0) lastQuery->ref();
+   if (lastQuery != nullptr) lastQuery->ref();
    return true;
 }
 
@@ -624,7 +624,7 @@ void IrTrack::clear()
 {
    mslWarn = false;
 
-   setLastQuery(0);
+   setLastQuery(nullptr);
    avgSig = 0;
    maxSig = 0;
    nSig = 0;

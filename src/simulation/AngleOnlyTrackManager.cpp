@@ -611,7 +611,7 @@ void AirAngleOnlyTrkMgr::processTrackList(const LCreal dt)
             END_RECORD_DATA_SAMPLE()
 
             // TabLogger is deprecated
-            if (getAnyEventLogger() != 0) {
+            if (getAnyEventLogger() != nullptr) {
                 TabLogger::TabLogEvent* evt = new TabLogger::LogPassiveTrack(1, this,newTrk); // type 1 for "new"
                 getAnyEventLogger()->log(evt);
                 evt->unref();

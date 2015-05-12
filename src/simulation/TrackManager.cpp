@@ -57,7 +57,7 @@ TrackManager::TrackManager() :
 {
    STANDARD_CONSTRUCTOR()
 
-      initData();
+   initData();
 }
 
 TrackManager::TrackManager(const TrackManager& org) :
@@ -80,7 +80,7 @@ TrackManager& TrackManager::operator=(const TrackManager& org)
 
 TrackManager* TrackManager::clone() const
 {
-   return 0;
+   return nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -89,9 +89,9 @@ TrackManager* TrackManager::clone() const
 void TrackManager::initData()
 {
    nTrks = 0;
-   for (unsigned int i = 0; i < MAX_TRKS; i++) tracks[i] = 0;
+   for (unsigned int i = 0; i < MAX_TRKS; i++) tracks[i] = nullptr;
    maxTrks = MAX_TRKS;
-   maxTrackAge = 3;        // default age (2 sec)
+   maxTrackAge = 3.0;        // default age (2 sec)
 
    trkListLock = 0;
    queueLock = 0;
@@ -134,10 +134,11 @@ void TrackManager::copyData(const TrackManager& org, const bool cc)
 
    // Copy Matrix A
    haveMatrixA = org.haveMatrixA;
-   for (int i = 0; i < 3; i++)
-      for (int j = 0; j < 3; j++)
+   for (int i = 0; i < 3; i++) {
+      for (int j = 0; j < 3; j++) {
          A[i][j] = org.A[i][j];
-
+      }
+   }
    // Parameters
    alpha   = org.alpha;
    beta    = org.beta;
@@ -161,7 +162,7 @@ void TrackManager::clearTracksAndQueues()
    // Clear out the queue(s)
    // ---
    lcLock(queueLock);
-   for (Emission* em = emQueue.get(); em != 0; em = emQueue.get()) {
+   for (Emission* em = emQueue.get(); em != nullptr; em = emQueue.get()) {
       em->unref();    // unref() the emission
       snQueue.get();  // and every emission had a S/N value
    }
@@ -171,13 +172,13 @@ void TrackManager::clearTracksAndQueues()
    // Clear the track list
    // ---
    lcLock(trkListLock);
-   int n = nTrks;
+   const int n = nTrks;
    nTrks = 0;
    for (int i = 0; i < n; i++) {
       if (tracks[i] != 0) {
          tracks[i]->clear();
          tracks[i]->unref();
-         tracks[i] = 0;
+         tracks[i] = nullptr;
       }
    }
    lcUnlock(trkListLock);
@@ -274,7 +275,7 @@ int TrackManager::getTrackList(Basic::safe_ptr<Track>* const tlist, const unsign
 {
    int n = 0;
 
-   if (tlist != 0) {
+   if (tlist != nullptr) {
       lcLock(trkListLock);
       for (unsigned int i = 0; i < nTrks && i < max; i++) {
          tlist[n++] = tracks[i];
@@ -293,7 +294,7 @@ int TrackManager::getTrackList(Basic::safe_ptr<const Track>* const tlist, const 
 {
    int n = 0;
 
-   if (tlist != 0) {
+   if (tlist != nullptr) {
       lcLock(trkListLock);
       for (unsigned int i = 0; i < nTrks && i < max; i++) {
          tlist[n++] = tracks[i];
@@ -311,7 +312,7 @@ int TrackManager::getTrackList(Track* tlist[], const unsigned int max)
 {
    int n = 0;
 
-   if (tlist != 0) {
+   if (tlist != nullptr) {
       lcLock(trkListLock);
       for (unsigned int i = 0; i < nTrks && i < max; i++) {
          tlist[n] = tracks[i];
@@ -328,7 +329,7 @@ int TrackManager::getTrackList(const Track* tlist[], const unsigned int max) con
 {
    int n = 0;
 
-   if (tlist != 0) {
+   if (tlist != nullptr) {
       lcLock(trkListLock);
       for (unsigned int i = 0; i < nTrks && i < max; i++) {
          tlist[n] = tracks[i];
@@ -356,7 +357,7 @@ bool TrackManager::killedNotification(Player* const p)
 void TrackManager::newReport(Emission* em, LCreal sn)
 {
    // Queue up emissions reports
-   if (em != 0) {
+   if (em != nullptr) {
       lcLock(queueLock);
       if (emQueue.isNotFull()) {
       em->ref();
@@ -373,11 +374,11 @@ void TrackManager::newReport(Emission* em, LCreal sn)
 //------------------------------------------------------------------------------
 Emission* TrackManager::getReport(LCreal* const sn)
 {
-   Emission* em = 0;
+   Emission* em = nullptr;
 
    lcLock(queueLock);
    em = emQueue.get();
-   if (em != 0) {
+   if (em != nullptr) {
       *sn = snQueue.get();
    }
    lcUnlock(queueLock);
@@ -410,11 +411,11 @@ void TrackManager::makeMatrixA(LCreal dt)
 {
    // Delta time (default: 50 hz)
    LCreal t = dt;
-   if (t == 0) t = 1.0f/50.0f;
+   if (t == 0) t = 1.0 / 50.0;
 
    A[0][0] = 1;
    A[0][1] = t;
-   A[0][2] = (t*t)/2.0f;
+   A[0][2] = (t*t)/2.0;
 
    A[1][0] = 0;
    A[1][1] = 1;
@@ -433,7 +434,7 @@ void TrackManager::makeMatrixA(LCreal dt)
 bool TrackManager::setSlotMaxTracks(const Basic::Number* const num)
 {
    bool ok = false;
-   if (num != 0) {
+   if (num != nullptr) {
       int max = num->getInt();
       if (max > 0 && max <= static_cast<int>(MAX_TRKS)) {
          maxTrks = static_cast<unsigned int>(max);
@@ -453,12 +454,12 @@ bool TrackManager::setSlotMaxTrackAge(const Basic::Number* const num)
 {
    LCreal age = 0.0;
    const Basic::Time* p = dynamic_cast<const Basic::Time*>(num);
-   if (p != 0) {
+   if (p != nullptr) {
       // We have a time and we want it in seconds ...
       Basic::Seconds seconds;
       age = seconds.convert(*p);
    }
-   else if (num != 0) {
+   else if (num != nullptr) {
       // We have only a number, assume it's in seconds ...
       age = num->getReal();
    }
@@ -481,7 +482,7 @@ bool TrackManager::setSlotMaxTrackAge(const Basic::Number* const num)
 bool TrackManager::setSlotFirstTrackId(const Basic::Number* const num)
 {
    bool ok = false;
-   if (num != 0) {
+   if (num != nullptr) {
       int first = num->getInt();
       if (first >= 0) {
          firstTrkId = static_cast<unsigned int>(first);
@@ -501,7 +502,7 @@ bool TrackManager::setSlotFirstTrackId(const Basic::Number* const num)
 bool TrackManager::setSlotAlpha(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = true;
       alpha = msg->getReal();
    }
@@ -514,7 +515,7 @@ bool TrackManager::setSlotAlpha(const Basic::Number* const msg)
 bool TrackManager::setSlotBeta(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = true;
       beta = msg->getReal();
    }
@@ -527,7 +528,7 @@ bool TrackManager::setSlotBeta(const Basic::Number* const msg)
 bool TrackManager::setSlotGamma(const Basic::Number* const msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       ok = true;
       gamma = msg->getReal();
    }
@@ -540,7 +541,7 @@ bool TrackManager::setSlotGamma(const Basic::Number* const msg)
 bool TrackManager::setSlotLogTrackUpdates(const Basic::Number* const num)
 {
    bool ok = false;
-   if (num != 0) {
+   if (num != nullptr) {
       ok = setLogTrackUpdates( num->getBoolean() );
    }
    return ok;
@@ -653,9 +654,9 @@ void AirTrkMgr::initData()
 {
    setType( Track::ONBOARD_SENSOR_BIT | Track::AIR_TRACK_BIT );
 
-   posGate =  2.0f * Basic::Distance::NM2M;
-   rngGate =  500.0f;
-   velGate =   10.0f;
+   posGate =  2.0 * Basic::Distance::NM2M;
+   rngGate =  500.0;
+   velGate =   10.0;
 
    reportNumMatches = new unsigned int[MAX_REPORTS];
    trackNumMatches = new unsigned int[MAX_TRKS];
@@ -700,25 +701,25 @@ void AirTrkMgr::copyData(const AirTrkMgr& org, const bool cc)
 //------------------------------------------------------------------------------
 void AirTrkMgr::deleteData()
 {
-   if (report2TrackMatch != 0) {
+   if (report2TrackMatch != nullptr) {
       for (unsigned int i = 0; i < MAX_REPORTS; i++) {
-         if (report2TrackMatch[i] != 0) {
+         if (report2TrackMatch[i] != nullptr) {
             delete[] report2TrackMatch[i];
-            report2TrackMatch[i] = 0;
+            report2TrackMatch[i] = nullptr;
          }
       }
       delete[] report2TrackMatch;
-      report2TrackMatch = 0;
+      report2TrackMatch = nullptr;
    }
 
-   if (reportNumMatches != 0) {
+   if (reportNumMatches != nullptr) {
       delete[] reportNumMatches;
-      reportNumMatches = 0;
+      reportNumMatches = nullptr;
    }
 
-   if (trackNumMatches != 0) {
+   if (trackNumMatches != nullptr) {
       delete[] trackNumMatches;
-      trackNumMatches = 0;
+      trackNumMatches = nullptr;
    }
 }
 
@@ -734,7 +735,7 @@ void AirTrkMgr::processTrackList(const LCreal dt)
 
    // Make sure we have an ownship to work with
    Player* ownship = dynamic_cast<Player*>( findContainerByType(typeid(Player)) );
-   if (ownship == 0 || dt == 0) return;
+   if (ownship == nullptr || dt == 0) return;
 
    // Make sure we have the A and B matrix
    if (!haveMatrixA) makeMatrixA(dt);
@@ -763,7 +764,7 @@ void AirTrkMgr::processTrackList(const LCreal dt)
    LCreal newSignal[MAX_REPORTS];
    LCreal newRdot[MAX_REPORTS];
    osg::Vec3 tgtPos[MAX_REPORTS];
-   for (Emission* em = getReport(&tmp); em != 0; em = getReport(&tmp)) {
+   for (Emission* em = getReport(&tmp); em != nullptr; em = getReport(&tmp)) {
 
       if (nReports < MAX_REPORTS) {
 
@@ -900,7 +901,7 @@ void AirTrkMgr::processTrackList(const LCreal dt)
          }
 
          // TabLogger is deprecated
-         if (getLogTrackUpdates()  &&  (getAnyEventLogger() != 0)) {
+         if (getLogTrackUpdates()  &&  (getAnyEventLogger() != nullptr)) {
             TabLogger::TabLogEvent* evt = new TabLogger::LogActiveTrack(2, this,tracks[i]); // type 2 for "update"
             getAnyEventLogger()->log(evt);
             evt->unref();
@@ -930,7 +931,7 @@ void AirTrkMgr::processTrackList(const LCreal dt)
             SAMPLE_2_OBJECTS( ownship, tracks[it] )
          END_RECORD_DATA_SAMPLE()
 
-         if (getAnyEventLogger() != 0) {
+         if (getAnyEventLogger() != nullptr) {
             // TabLogger is deprecated
             TabLogger::TabLogEvent* evt = new TabLogger::LogActiveTrack(3, this,trk); // type 3 for "remove"
             getAnyEventLogger()->log(evt);
@@ -969,7 +970,7 @@ void AirTrkMgr::processTrackList(const LCreal dt)
          newTrk->setTarget( emissions[i]->getTarget() );
          newTrk->setType(Track::AIR_TRACK_BIT | Track::ONBOARD_SENSOR_BIT);
          newTrk->setPosition(tgtPos[i]);
-         newTrk->ownshipDynamics(osGndTrk, osVel, osAccel, 0.0f);
+         newTrk->ownshipDynamics(osGndTrk, osVel, osAccel, 0.0);
          newTrk->setRangeRate(newRdot[i]);
          newTrk->setSignal(newSignal[i],emissions[i]);
 
@@ -981,7 +982,7 @@ void AirTrkMgr::processTrackList(const LCreal dt)
             SAMPLE_2_OBJECTS( ownship, tracks[i] )
          END_RECORD_DATA_SAMPLE()
 
-         if (getAnyEventLogger() != 0) {
+         if (getAnyEventLogger() != nullptr) {
             // TabLogger is deprecated
             TabLogger::TabLogEvent* evt = new TabLogger::LogActiveTrack(1, this,newTrk); // type 1 for "new"
             getAnyEventLogger()->log(evt);
@@ -1002,12 +1003,12 @@ bool AirTrkMgr::setPositionGate(const Basic::Number* const num)
 {
    LCreal value = 0.0;
    const Basic::Distance* p = dynamic_cast<const Basic::Distance*>(num);
-   if (p != 0) {
+   if (p != nullptr) {
       // We have a distance and we want it in meters ...
       Basic::Meters meters;
       value = meters.convert(*p);
    }
-   else if (num != 0) {
+   else if (num != nullptr) {
       // We have only a number, assume it's in meters ...
       value = num->getReal();
    }
@@ -1031,12 +1032,12 @@ bool AirTrkMgr::setRangeGate(const Basic::Number* const num)
 {
    LCreal value = 0.0;
    const Basic::Distance* p = dynamic_cast<const Basic::Distance*>(num);
-   if (p != 0) {
+   if (p != nullptr) {
       // We have a distance and we want it in meters ...
       Basic::Meters meters;
       value = meters.convert(*p);
    }
-   else if (num != 0) {
+   else if (num != nullptr) {
       // We have only a number, assume it's in meters ...
       value = num->getReal();
    }
@@ -1059,7 +1060,7 @@ bool AirTrkMgr::setRangeGate(const Basic::Number* const num)
 bool AirTrkMgr::setVelocityGate(const Basic::Number* const num)
 {
    LCreal value = 0.0;
-   if (num != 0) {
+   if (num != nullptr) {
       // We have only a number, assume it's in meters ...
       value = num->getReal();
    }
@@ -1175,25 +1176,25 @@ void GmtiTrkMgr::copyData(const GmtiTrkMgr& org, const bool cc)
 //------------------------------------------------------------------------------
 void GmtiTrkMgr::deleteData()
 {
-   if (report2TrackMatch != 0) {
+   if (report2TrackMatch != nullptr) {
       for (unsigned int i = 0; i < MAX_REPORTS; i++) {
-         if (report2TrackMatch[i] != 0) {
+         if (report2TrackMatch[i] != nullptr) {
             delete[] report2TrackMatch[i];
-            report2TrackMatch[i] = 0;
+            report2TrackMatch[i] = nullptr;
          }
       }
       delete[] report2TrackMatch;
-      report2TrackMatch = 0;
+      report2TrackMatch = nullptr;
    }
 
-   if (reportNumMatches != 0) {
+   if (reportNumMatches != nullptr) {
       delete[] reportNumMatches;
-      reportNumMatches = 0;
+      reportNumMatches = nullptr;
    }
 
-   if (trackNumMatches != 0) {
+   if (trackNumMatches != nullptr) {
       delete[] trackNumMatches;
-      trackNumMatches = 0;
+      trackNumMatches = nullptr;
    }
 }
 
@@ -1206,7 +1207,7 @@ void GmtiTrkMgr::processTrackList(const LCreal dt)
 
    // Make sure we have an ownship to work with
    Player* ownship = dynamic_cast<Player*>( findContainerByType(typeid(Player)) );
-   if (ownship == 0 || dt == 0) return;
+   if (ownship == nullptr || dt == 0) return;
 
    // Make sure we have the A and B matrix
    if (!haveMatrixA) makeMatrixA(dt);
@@ -1214,9 +1215,9 @@ void GmtiTrkMgr::processTrackList(const LCreal dt)
    // ---
    // 1) Apply ownship dynamics to current track positions and age the tracks by delta time
    // ---
-   osg::Vec3 osVel = ownship->getVelocity();
-   osg::Vec3 osAccel = ownship->getAcceleration();
-   LCreal osGndTrk = ownship->getGroundTrack();
+   const osg::Vec3 osVel = ownship->getVelocity();
+   const osg::Vec3 osAccel = ownship->getAcceleration();
+   const LCreal osGndTrk = ownship->getGroundTrack();
    lcLock(trkListLock);
    for (unsigned int i = 0; i < nTrks; i++) {
       tracks[i]->ownshipDynamics(osGndTrk, osVel, osAccel, dt);
@@ -1234,7 +1235,7 @@ void GmtiTrkMgr::processTrackList(const LCreal dt)
    LCreal newSignal[MAX_REPORTS];
    LCreal newRdot[MAX_REPORTS];
    osg::Vec3 tgtPos[MAX_REPORTS];
-   for (Emission* em = getReport(&tmp); em != 0; em = getReport(&tmp)) {
+   for (Emission* em = getReport(&tmp); em != nullptr; em = getReport(&tmp)) {
       if (nReports < MAX_REPORTS) {
       Player* tgt = em->getTarget();
       if (tgt->isMajorType(Player::GROUND_VEHICLE)) {
@@ -1328,9 +1329,9 @@ void GmtiTrkMgr::processTrackList(const LCreal dt)
    lcLock(trkListLock);
    for (unsigned int i = 0; i < nTrks; i++) {
       // Save X(k)
-      osg::Vec3 tpos = tracks[i]->getPosition();
-      osg::Vec3 tvel = tracks[i]->getVelocity();
-      osg::Vec3 tacc = tracks[i]->getAcceleration();
+      const osg::Vec3 tpos = tracks[i]->getPosition();
+      const osg::Vec3 tvel = tracks[i]->getVelocity();
+      const osg::Vec3 tacc = tracks[i]->getAcceleration();
 
       if (haveU[i]) {
          // Have Input vector U, use ...
@@ -1353,7 +1354,7 @@ void GmtiTrkMgr::processTrackList(const LCreal dt)
          }
 
          // TabLogger is deprecated
-         if (getLogTrackUpdates()  &&  (getAnyEventLogger() != 0)) {
+         if (getLogTrackUpdates()  &&  (getAnyEventLogger() != nullptr)) {
             TabLogger::TabLogEvent* evt = new TabLogger::LogActiveTrack(2, this,tracks[i]); // type 2 for "update"
             getAnyEventLogger()->log(evt);
             evt->unref();
@@ -1386,7 +1387,7 @@ void GmtiTrkMgr::processTrackList(const LCreal dt)
          END_RECORD_DATA_SAMPLE()
 
          // TabLogger is deprecated
-         if (getAnyEventLogger() != 0) {
+         if (getAnyEventLogger() != nullptr) {
             TabLogger::TabLogEvent* evt = new TabLogger::LogActiveTrack(3, this,tracks[it]); // type 3 for "remove"
             getAnyEventLogger()->log(evt);
             evt->unref();
@@ -1418,9 +1419,9 @@ void GmtiTrkMgr::processTrackList(const LCreal dt)
          newTrk->setTarget( emissions[i]->getTarget() );
          newTrk->setType(Track::GND_TRACK_BIT | Track::ONBOARD_SENSOR_BIT);
          newTrk->setPosition(tgtPos[i]);
-         newTrk->ownshipDynamics(osGndTrk, osVel, osAccel, 0.0f);
+         newTrk->ownshipDynamics(osGndTrk, osVel, osAccel, 0.0);
          newTrk->setRangeRate(newRdot[i]);
-         newTrk->setSignal(newSignal[i],emissions[i]);
+         newTrk->setSignal(newSignal[i], emissions[i]);
 
          if (isMessageEnabled(MSG_INFO)) {
             std::cout << "New GND track[it] = [" << nTrks << "] id = " << newTrk->getTrackID() << std::endl;
@@ -1432,7 +1433,7 @@ void GmtiTrkMgr::processTrackList(const LCreal dt)
          END_RECORD_DATA_SAMPLE()
 
          // TabLogger is deprecated
-         if (getAnyEventLogger() != 0) {
+         if (getAnyEventLogger() != nullptr) {
             TabLogger::TabLogEvent* evt = new TabLogger::LogActiveTrack(1, this,newTrk); // type 1 for "new"
             getAnyEventLogger()->log(evt);
             evt->unref();
@@ -1506,25 +1507,25 @@ void RwrTrkMgr::copyData(const RwrTrkMgr& org, const bool cc)
 //------------------------------------------------------------------------------
 void RwrTrkMgr::deleteData()
 {
-   if (report2TrackMatch != 0) {
+   if (report2TrackMatch != nullptr) {
       for (unsigned int i = 0; i < MAX_REPORTS; i++) {
-         if (report2TrackMatch[i] != 0) {
+         if (report2TrackMatch[i] != nullptr) {
             delete[] report2TrackMatch[i];
-            report2TrackMatch[i] = 0;
+            report2TrackMatch[i] = nullptr;
          }
       }
       delete[] report2TrackMatch;
-      report2TrackMatch = 0;
+      report2TrackMatch = nullptr;
    }
 
-   if (reportNumMatches != 0) {
+   if (reportNumMatches != nullptr) {
       delete[] reportNumMatches;
-      reportNumMatches = 0;
+      reportNumMatches = nullptr;
    }
 
-   if (trackNumMatches != 0) {
+   if (trackNumMatches != nullptr) {
       delete[] trackNumMatches;
-      trackNumMatches = 0;
+      trackNumMatches = nullptr;
    }
 }
 
@@ -1533,11 +1534,9 @@ void RwrTrkMgr::deleteData()
 //------------------------------------------------------------------------------
 void RwrTrkMgr::processTrackList(const LCreal dt)
 {
-   LCreal tmp;
-
    // Make sure we have an ownship to work with
    Player* ownship = dynamic_cast<Player*>( findContainerByType(typeid(Player)) );
-   if (ownship == 0 || dt == 0) return;
+   if (ownship == nullptr || dt == 0) return;
 
    // Make sure we have the A and B matrix
    if (!haveMatrixA) makeMatrixA(dt);
@@ -1565,6 +1564,7 @@ void RwrTrkMgr::processTrackList(const LCreal dt)
    LCreal newSignal[MAX_REPORTS];
    LCreal newRdot[MAX_REPORTS];
    osg::Vec3 tgtPos[MAX_REPORTS];
+   LCreal tmp = 0.0;
    for (Emission* em = getReport(&tmp); em != 0; em = getReport(&tmp)) {
       if (nReports < MAX_REPORTS) {
          // save the report
@@ -1676,7 +1676,7 @@ void RwrTrkMgr::processTrackList(const LCreal dt)
          }
 
          // TabLogger is deprecated
-         if (getLogTrackUpdates()  &&  (getAnyEventLogger() != 0)) {
+         if (getLogTrackUpdates()  &&  (getAnyEventLogger() != nullptr)) {
             TabLogger::TabLogEvent* evt = new TabLogger::LogPassiveTrack(2, this,tracks[i]); // type 2 for "update"
             getAnyEventLogger()->log(evt);
             evt->unref();
@@ -1708,7 +1708,7 @@ void RwrTrkMgr::processTrackList(const LCreal dt)
          END_RECORD_DATA_SAMPLE()
 
          // TabLogger is deprecated
-         if (getAnyEventLogger() != 0) {
+         if (getAnyEventLogger() != nullptr) {
             TabLogger::TabLogEvent* evt = new TabLogger::LogPassiveTrack(3, this, tracks[it]); // type 3 for "removed"
             getAnyEventLogger()->log(evt);
             evt->unref();
@@ -1753,8 +1753,8 @@ void RwrTrkMgr::processTrackList(const LCreal dt)
          END_RECORD_DATA_SAMPLE()
 
          // TabLogger is deprecated
-         if (getAnyEventLogger() != 0) {
-            TabLogger::TabLogEvent* evt = new TabLogger::LogPassiveTrack(1,this,newTrk); // type 1 for "new"
+         if (getAnyEventLogger() != nullptr) {
+            TabLogger::TabLogEvent* evt = new TabLogger::LogPassiveTrack(1, this, newTrk); // type 1 for "new"
             getAnyEventLogger()->log(evt);
             evt->unref();
          }
