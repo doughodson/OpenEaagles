@@ -431,7 +431,7 @@ bool Nav::glla2bd(
       *slantRng = deltaAlt;
       *dist = 0.0;
       *brg  = 0.0;
-      if (elev != 0) {
+      if (elev != nullptr) {
          if (deltaAlt > 0)
             *elev = 90.0;
          else
@@ -445,7 +445,7 @@ bool Nav::glla2bd(
    if (ok) {
       *slantRng = std::sqrt ( (*dist) * (*dist) + deltaAlt * deltaAlt );
 
-      if (elev != 0 && (*slantRng) > 0) {
+      if (elev != nullptr && (*slantRng) > 0) {
          *elev = Angle::R2DCC * std::asin(deltaAlt/ (*slantRng));
       }
    }
@@ -477,7 +477,7 @@ bool Nav::glla2bdS(
       *slantRng = deltaAlt;
       *dist = 0.0;
       *brg  = 0.0;
-      if (elev != 0) {
+      if (elev != nullptr) {
          if (deltaAlt > 0)
             *elev = 90.0;
          else
@@ -490,7 +490,7 @@ bool Nav::glla2bdS(
 
    if (ok) {
       *slantRng = std::sqrt ( (*dist) * (*dist) + deltaAlt * deltaAlt );
-      if (elev != 0 && (*slantRng) > 0) {
+      if (elev != nullptr && (*slantRng) > 0) {
          *elev = Angle::R2DCC * std::asin(deltaAlt/ (*slantRng));
       }
    }
@@ -756,7 +756,7 @@ bool Nav::vll2bd(
    //-----------------------------------
    // calculate destination bearing (deg)
    //-----------------------------------
-   if (brng2 != 0) {
+   if (brng2 != nullptr) {
       p =  cosU1 * sinLambda;
       q = -sinU1 * cosU2 + cosU1 * sinU2 * cosLambda;
       double Alfa2 = std::atan2(p, q);                                     // Eq. 21
@@ -810,9 +810,9 @@ bool Nav::computeRotationalMatrix(
    double spsi = std::sin(psi);
    double cpsi = std::cos(psi);
 
-   if (scPhi != 0) scPhi->set( sphi, cphi  );
-   if (scTht != 0) scTht->set( stht, ctht  );
-   if (scPsi != 0) scPsi->set( spsi, cpsi  );
+   if (scPhi != nullptr) scPhi->set( sphi, cphi  );
+   if (scTht != nullptr) scTht->set( stht, ctht  );
+   if (scPsi != nullptr) scPsi->set( spsi, cpsi  );
 
    if (m != nullptr) {
       (*m)(0,0) = (+ctht*cpsi);

@@ -102,7 +102,7 @@ void EarthModel::copyData(const EarthModel& org, const bool cc)
 //------------------------------------------------------------------------------
 const EarthModel* EarthModel::getEarthModel(const char* const name)
 {
-   const EarthModel* em = 0;
+   const EarthModel* em = nullptr;
    if (name != nullptr) {
 
       if      (std::strcmp( name, "airy") == 0) em = &airy;

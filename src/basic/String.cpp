@@ -188,8 +188,8 @@ void String::setStr(const char* string)
    // copy the new text string
    if (string != nullptr) {
       size_t l = std::strlen(string);
-      if (l >= nn || str == 0) {
-         if (str != 0) delete[] str;
+      if (l >= nn || str == nullptr) {
+         if (str != nullptr) delete[] str;
          nn = (l+1);
          str = new char[nn];
       }
@@ -267,7 +267,7 @@ String& String::operator=(const char* s)
 std::ostream& String::serialize(std::ostream& sout, const int, const bool) const
 {
    sout << "\"";
-   if (str != 0) sout << str;
+   if (str != nullptr) sout << str;
    sout << "\"";
    return sout;
 }

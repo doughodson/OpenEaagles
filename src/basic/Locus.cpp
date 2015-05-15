@@ -114,7 +114,7 @@ void Locus::setData(
    }
 
    // Copy the new data
-   if (n < MAX_SIZE && newData != 0) {
+   if (n < MAX_SIZE && newData != nullptr) {
       np = n;
       data = new LCreal[np];
       LCreal* p = data;
@@ -144,7 +144,7 @@ void Locus::setData(
 void Locus::clearData()
 {
    // Let setData() clear the data
-   setData(0, 0, 0, 0, 0, 0, 0);
+   setData(nullptr, 0, 0, 0, 0, 0, 0);
 }
 
 } // end Basic namespace}

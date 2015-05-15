@@ -37,7 +37,7 @@ BEGIN_EVENT_HANDLER(StateMachine)
 
    // If our current state is controlled by another StateMachine then
    // see if this StateMachine will handled this event.
-   if (stMach != 0 && !_used) _used = stMach->event(_event,_obj);
+   if (stMach != nullptr && !_used) _used = stMach->event(_event,_obj);
 END_EVENT_HANDLER()
 
 
@@ -97,7 +97,7 @@ void StateMachine::copyData(const StateMachine& org, const bool cc)
 //------------------------------------------------------------------------------
 void StateMachine::deleteData()
 {
-   setStMach(0,CURR_STATE);
+   setStMach(nullptr,CURR_STATE);
    setSlotStateMachines(nullptr);
 }
 
@@ -416,7 +416,7 @@ void StateMachine::postStateProc(const LCreal)
 //------------------------------------------------------------------------------
 Pair* StateMachine::findStMachByName(const char* const name)
 {
-    Pair* p = 0;
+    Pair* p = nullptr;
     if (stMachList != nullptr && name != nullptr) p = stMachList->findByName(name);
     return p;
 }
@@ -453,9 +453,9 @@ bool StateMachine::setStMach(const char* const name, const StateTableCode code)
 
       // When they're not the same then we make a switch ...
       if (!ok) {
-         if (name != 0) {
+         if (name != nullptr) {
             Pair* p = findStMachByName(name);
-            if (p != 0) {
+            if (p != nullptr) {
                stMach = static_cast<StateMachine*>(p->object());
                stMachName = p->slot();
                ok = true;
@@ -476,7 +476,7 @@ bool StateMachine::setStMach(const char* const name, const StateTableCode code)
 
    else {
       // -- only need to look to see if this named state machine exists.
-      ok = (findStMachByName(name) != 0);
+      ok = (findStMachByName(name) != nullptr);
    }
 
    return ok;

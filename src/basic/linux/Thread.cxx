@@ -114,7 +114,7 @@ bool Thread::createThread()
 
    theThread = thread;
 
-   return (theThread != 0);
+   return (theThread != nullptr);
 }
 
 //-----------------------------------------------------------------------------
@@ -138,14 +138,14 @@ void Thread::closeThread()
 //-----------------------------------------------------------------------------
 bool Thread::terminate()
 {
-   if (theThread != 0 && !killed) {
+   if (theThread != nullptr && !killed) {
       if ( getParent()->isMessageEnabled(MSG_INFO) ) {
          std::cout << "Thread(" << this << ")::terminate(): handle = " << theThread << std::endl;
       }
 
       pthread_t* thread = static_cast<pthread_t*>(theThread);
       pthread_kill(*thread, SIGKILL);
-      theThread = 0;
+      theThread = nullptr;
       killed = true;
 
       // The staticThreadFunc() function ref()'s 'this' Thread class and our
@@ -238,7 +238,7 @@ bool ThreadSyncTask::createSignals()
    // create the start mutex already set, signalStart() will release it.
    {
       pthread_mutex_t* mutex = new pthread_mutex_t;
-      pthread_mutex_init(mutex,NULL);
+      pthread_mutex_init(mutex,nullptr);
       pthread_mutex_lock(mutex);
       startSig = mutex;
    }
@@ -246,7 +246,7 @@ bool ThreadSyncTask::createSignals()
    // create the completed semaphore already set, signalCompleted() will release it.
    {
       pthread_mutex_t* mutex = new pthread_mutex_t;
-      pthread_mutex_init(mutex,NULL);
+      pthread_mutex_init(mutex,nullptr);
       pthread_mutex_lock(mutex);
       completedSig = mutex;
    }
@@ -261,13 +261,13 @@ void ThreadSyncTask::closeSignals()
 {
    {
       pthread_mutex_t* mutex = static_cast<pthread_mutex_t*>(startSig);
-      startSig = 0;
+      startSig = nullptr;
       pthread_mutex_destroy(mutex);
    }
 
    {
       pthread_mutex_t* mutex = static_cast<pthread_mutex_t*>(completedSig);
-      completedSig = 0;
+      completedSig = nullptr;
       pthread_mutex_destroy(mutex);
    }
 }
@@ -313,9 +313,9 @@ void ThreadSyncTask::waitForCompleted()
 //-----------------------------------------------------------------------------
 void ThreadSyncTask::waitForAllCompleted(ThreadSyncTask** threads, const unsigned int num)
 {
-   if (threads != 0 && num > 0) {
+   if (threads != nullptr && num > 0) {
       for (unsigned int i = 0; i < num; i++) {
-         if (threads[i] != 0) {
+         if (threads[i] != nullptr) {
             threads[i]->waitForCompleted();
          }
       }
@@ -327,11 +327,11 @@ void ThreadSyncTask::waitForAllCompleted(ThreadSyncTask** threads, const unsigne
 //-----------------------------------------------------------------------------
 int ThreadSyncTask::waitForAnyCompleted(ThreadSyncTask** threads, const unsigned int num)
 {
-   if (threads != 0 && num > 0) {
+   if (threads != nullptr && num > 0) {
       //Make sure we have at least one valid thread (since we'll enter an infinite loop and deadlock otherwise)
       unsigned int i = 0;
       for (; i < num; i++) {
-         if (threads[i] != 0) {
+         if (threads[i] != nullptr) {
             break;
          }
       }
@@ -339,7 +339,7 @@ int ThreadSyncTask::waitForAnyCompleted(ThreadSyncTask** threads, const unsigned
          //Loop until one of them releases
          while(true) {
             for (i = 0; i < num; i++) {
-               if (threads[i] != 0) {
+               if (threads[i] != nullptr) {
                   pthread_mutex_t* mutex = static_cast<pthread_mutex_t*>(threads[i]->completedSig);
                   if (pthread_mutex_trylock(mutex) == 0) {
                      return i;

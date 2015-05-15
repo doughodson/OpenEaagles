@@ -93,8 +93,8 @@ void Terrain::deleteData()
 {
    clearData();
 
-   setPathname(0);
-   setFilename(0);
+   setPathname(nullptr);
+   setFilename(nullptr);
 }
 
 //------------------------------------------------------------------------------
@@ -123,7 +123,7 @@ void Terrain::clearData()
 // Returns the name of the datafile
 const char* Terrain::getFilename() const
 {
-   const char* p = 0;
+   const char* p = nullptr;
    if (file != nullptr) {
       p = *file;
    }
@@ -133,7 +133,7 @@ const char* Terrain::getFilename() const
 // Returns the path to the datafiles
 const char* Terrain::getPathname() const
 {
-   const char* p = 0;
+   const char* p = nullptr;
    if (path != nullptr) {
       // Our path
       p = *path;
@@ -341,7 +341,7 @@ bool Terrain::occultCheck(
    bool occulted = false;
 
    // Early out checks
-   if (  elevations == 0 ||    // The elevation array wasn't provided, or
+   if (  elevations == nullptr ||    // The elevation array wasn't provided, or
          n < 2 ||              // there are too few points, or
          range <= 0            // the range is less than or equal to zero
          ) return occulted;
@@ -472,7 +472,7 @@ bool Terrain::vbwShadowChecker(
 
    LCreal deltaRng = (range / (n - 1));
    LCreal currentRange = 0;
-   if (validFlags != 0) {
+   if (validFlags != nullptr) {
       // with valid flags
       LCreal tanLookAngle = 0;
       for (unsigned int i = 0; i < n; i++) {
@@ -694,7 +694,7 @@ bool Terrain::getElevationColor(
 {
 
    // early out test
-   if ( colorTable == 0 || // no color table, or
+   if ( colorTable == nullptr || // no color table, or
         numColors < 1      // no colors, or
          ) return false;
 
@@ -742,7 +742,7 @@ bool Terrain::getElevationColor(
 
    // Return the RGB value of this new color
    const osg::Vec3* p = colorHsv.getRGB();
-   if (p != 0) rgb = *p;
+   if (p != nullptr) rgb = *p;
 
    return true;
 }

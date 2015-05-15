@@ -204,7 +204,7 @@ void ThreadPool::initialize(Component* const parent)
       for (unsigned int i = 0; i < numThreads; i++)
       {
          //Get the callback object for this thread
-         Object* callbackObj = 0;
+         Object* callbackObj = nullptr;
          if (manager != nullptr)
             callbackObj = manager->initialize();
 
@@ -222,7 +222,7 @@ void ThreadPool::initialize(Component* const parent)
          else
          {
             allThreads[actualThreads]->unref();
-            allThreads[actualThreads] = 0;
+            allThreads[actualThreads] = nullptr;
             if (isMessageEnabled(MSG_ERROR)) {
                std::cerr << "ThreadPool::initialize(): ERROR, failed to create a thread pool thread!" << std::endl;
             }
@@ -234,14 +234,14 @@ void ThreadPool::initialize(Component* const parent)
    if (actualThreads == 0)
    {
       std::cout << "Running thread pool in single-threaded mode" << std::endl;
-      if(manager != 0)
+      if(manager != nullptr)
          unthreadedObj = manager->initialize();
    }
 }
 
 void ThreadPool::execute()
 {
-   execute(0);
+   execute(nullptr);
 }
 
 void ThreadPool::execute(Object* cur)
@@ -262,7 +262,7 @@ void ThreadPool::execute(Object* cur)
    ThreadPoolThread* availableThread = getAvailableThread();
 
    //If we didn't get one, we'll have to wait
-   if (availableThread == 0)
+   if (availableThread == nullptr)
    {
       //Wait for one to become available
       ThreadSyncTask** pp = reinterpret_cast<ThreadSyncTask**>( &allThreads[0] );
@@ -280,7 +280,7 @@ void ThreadPool::execute(Object* cur)
    }
 
    //Do we have one now (we should)?
-   if (availableThread == 0)
+   if (availableThread == nullptr)
    {
       //Error
       if (isMessageEnabled(MSG_ERROR)) {
@@ -300,7 +300,7 @@ void ThreadPool::execute(Object* cur)
 
 ThreadPoolThread* ThreadPool::getAvailableThread()
 {
-   ThreadPoolThread* availableThread = 0;
+   ThreadPoolThread* availableThread = nullptr;
    lcLock(availableThreadsLock);
    for (int i = actualThreads - 1 ; i >= 0 ; i--)
    {
@@ -335,11 +335,11 @@ void ThreadPool::destroy()
    for (unsigned int i = 0; i < actualThreads; i++) {
       allThreads[i]->terminate();
       allThreads[i]->unref();
-      allThreads[i] = 0;
+      allThreads[i] = nullptr;
    }
    lcLock(availableThreadsLock);
    for (unsigned int i = 0; i < actualThreads; i++) {
-      availableThreads[i] = 0;
+      availableThreads[i] = nullptr;
    }
    lcUnlock(availableThreadsLock);
    actualThreads = 0;

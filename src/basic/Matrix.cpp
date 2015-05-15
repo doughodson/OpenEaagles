@@ -171,7 +171,7 @@ Matrix* Matrix::getTranspose() const
 // if the matrix can not be inverted
 Matrix* Matrix::getInvGJ() const
 {
-   Matrix* m = 0;
+   Matrix* m = nullptr;
    if (isSquare()) {
       m = new Matrix(*this);
       m->invert();
@@ -183,16 +183,16 @@ Matrix* Matrix::getInvGJ() const
 // if the matrix can not be inverted
 Matrix* Matrix::getInvLU() const
 {
-   if (!isGoodMatrix() || !isSquare()) return 0;
+   if (!isGoodMatrix() || !isSquare()) return nullptr;
 
    const unsigned int N = rows;
    Matrix* pL = new Matrix(N,N);
    Matrix* pU = new Matrix(N,N);
    getLU(pL, pU);
 
-   bool b1 = (pL == 0);
-   bool b2 = (pU == 0);
-   if (b1 || b2) return 0;
+   bool b1 = (pL == nullptr);
+   bool b2 = (pU == nullptr);
+   if (b1 || b2) return nullptr;
 
    Matrix* pB = new Matrix(N,N);
    pB->makeIdent();
@@ -225,10 +225,10 @@ Matrix* Matrix::getInvLU() const
       }
    }
 
-   if (pL != 0) pL->unref();
-   if (pU != 0) pU->unref();
-   if (pB != 0) pB->unref();
-   if (pY != 0) pY->unref();
+   if (pL != nullptr) pL->unref();
+   if (pU != nullptr) pU->unref();
+   if (pB != nullptr) pB->unref();
+   if (pY != nullptr) pY->unref();
 
    return pX;
 }
@@ -243,7 +243,7 @@ double Matrix::getDeterm() const
    const unsigned int N = rows;
    Matrix* pL = new Matrix(N,N);
    Matrix* pU = new Matrix(N,N);
-   if ((pL == 0) || (pU == 0)) return 0;
+   if ((pL == nullptr) || (pU == nullptr)) return 0;
 
    getLU(pL, pU);
 
@@ -254,8 +254,8 @@ double Matrix::getDeterm() const
    }
 
    // unref pointers
-   if (pL != 0) pL->unref();
-   if (pU != 0) pU->unref();
+   if (pL != nullptr) pL->unref();
+   if (pU != nullptr) pU->unref();
 
    return determ;
 }
@@ -356,7 +356,7 @@ bool Matrix::setFldWidth(const unsigned int FW)
 //------------------------------------------------------------------------------
 double* Matrix::operator[](unsigned int x)
 {
-   double* p = 0;
+   double* p = nullptr;
    if (x < rows) {
       unsigned int idx = cols * x;
       p = &mda[idx];
@@ -366,7 +366,7 @@ double* Matrix::operator[](unsigned int x)
 
 const double* Matrix::operator[](unsigned int x) const
 {
-   const double* p = 0;
+   const double* p = nullptr;
    if (x < rows) {
       unsigned int idx = cols * x;
       p = &mda[idx];
@@ -464,7 +464,7 @@ bool Matrix::multiply(const double s)
 //------------------------------------------------------------------------------
 bool Matrix::transpose()
 {
-   bool ok = mda != 0 && rows > 0 && cols > 0;
+   bool ok = mda != nullptr && rows > 0 && cols > 0;
    if (ok) {
       double* temp = new double[rows*cols];
 
@@ -493,7 +493,7 @@ bool Matrix::transpose()
 //------------------------------------------------------------------------------
 bool Matrix::invert()
 {
-   bool ok = mda != 0 && rows > 0 && cols > 0 && isSquare();
+   bool ok = mda != nullptr && rows > 0 && cols > 0 && isSquare();
 
    if (ok) {
       Matrix m(rows, cols);
@@ -1076,8 +1076,8 @@ bool Matrix::getEigenPower(const double maxErr, const int maxIter,
    CVector* pZ = new CVector(N);          // current eigenvector estimate
    pZ->fillWith(1.0);                     // all 1's in initial estimate
 
-   CVector* pW = 0;                       // updated eigenvector estimate
-   CVector* pE = 0;                       // error vector
+   CVector* pW = nullptr;                       // updated eigenvector estimate
+   CVector* pE = nullptr;                       // error vector
    double Wmag = 0.0;                     // largest magnitude element of W
 
    //-------------------------------------------------------
@@ -1139,9 +1139,9 @@ bool Matrix::getEigenPower(const double maxErr, const int maxIter,
    //-------------------------------------------------------
    // unref pointers
    //-------------------------------------------------------
-   if (pW != 0) pW->unref();
-   if (pZ != 0) pZ->unref();
-   if (pA != 0) pA->unref();
+   if (pW != nullptr) pW->unref();
+   if (pZ != nullptr) pZ->unref();
+   if (pA != nullptr) pA->unref();
 
    return true;
 }
@@ -1317,13 +1317,13 @@ bool Matrix::getQR(Matrix* const pQ, Matrix* const pR) const
       //-------------------------------------------------------
       // Unref pointers
       //-------------------------------------------------------
-      if (pW   != 0) pW->unref();
-      if (pWT  != 0) pWT->unref();
-      if (pRIT != 0) pRIT->unref();
-      if (pU   != 0) pU->unref();
-      if (pUT  != 0) pUT->unref();
-      if (pM1  != 0) pM1->unref();
-      if (pM2  != 0) pM2->unref();
+      if (pW   != nullptr) pW->unref();
+      if (pWT  != nullptr) pWT->unref();
+      if (pRIT != nullptr) pRIT->unref();
+      if (pU   != nullptr) pU->unref();
+      if (pUT  != nullptr) pUT->unref();
+      if (pM1  != nullptr) pM1->unref();
+      if (pM2  != nullptr) pM2->unref();
    }
 
    //-------------------------------------------------------
@@ -1335,8 +1335,8 @@ bool Matrix::getQR(Matrix* const pQ, Matrix* const pR) const
    //-------------------------------------------------------
    // Unref pointers
    //-------------------------------------------------------
-   if (pQI != 0) pQI->unref();
-   if (pRI != 0) pRI->unref();
+   if (pQI != nullptr) pQI->unref();
+   if (pRI != nullptr) pRI->unref();
    pX->unref();
    pV->unref();
 
@@ -1411,10 +1411,10 @@ bool Matrix::getTriDiagonal(Matrix* const pA) const
       //----------------------------------------------------
       // unref intermediate loop pointers
       //----------------------------------------------------
-      if (pX != 0) pX->unref();
-      if (pY != 0) pY->unref();
-      if (pM != 0) pM->unref();
-      if (pH != 0) pH->unref();
+      if (pX != nullptr) pX->unref();
+      if (pY != nullptr) pY->unref();
+      if (pM != nullptr) pM->unref();
+      if (pH != nullptr) pH->unref();
    }
 
    //-------------------------------------------------------
@@ -1425,7 +1425,7 @@ bool Matrix::getTriDiagonal(Matrix* const pA) const
    //----------------------------------------------------
    // unref pointers
    //----------------------------------------------------
-   if (pAI != 0) pAI->unref();
+   if (pAI != nullptr) pAI->unref();
 
    return true;
 }

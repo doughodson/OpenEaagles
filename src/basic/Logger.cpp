@@ -41,7 +41,7 @@ Logger::Logger()
 {
     STANDARD_CONSTRUCTOR()
 
-    lout = 0;
+    lout = nullptr;
     filename = new String();
     pathname = new String();
     topLine = nullptr;
@@ -59,7 +59,7 @@ void Logger::copyData(const Logger& org, const bool cc)
     if (cc) {
         filename = nullptr;
         pathname = nullptr;
-        lout = 0;
+        lout = nullptr;
         topLine = nullptr;
     }
     if (filename == nullptr) filename = new String();
@@ -77,10 +77,10 @@ void Logger::copyData(const Logger& org, const bool cc)
 void Logger::deleteData()
 {
     if (filename != nullptr) filename->unref();
-    filename = 0;
+    filename = nullptr;
 
     if (pathname != nullptr) pathname->unref();
-    pathname = 0;
+    pathname = nullptr;
 
     setSlotTopLine(nullptr);
 
@@ -182,7 +182,7 @@ bool Logger::openFile()
             //---
             // Make sure we have an output stream
             //---
-            if (lout == 0) lout = new std::ofstream();
+            if (lout == nullptr) lout = new std::ofstream();
 
             //---
             // Open the file
@@ -198,7 +198,7 @@ bool Logger::openFile()
                 tOpened = false;
                 tFailed = true;
             }
-            else if (topLine != 0) {
+            else if (topLine != nullptr) {
                 *lout << *topLine << std::endl;
             }
 

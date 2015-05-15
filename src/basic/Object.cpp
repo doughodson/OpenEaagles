@@ -82,7 +82,7 @@ bool Object::isClassType(const std::type_info& type) const
 // Check factory name
 bool Object::isFactoryName(const char name[]) const
 {
-    if (name == 0) return false;
+    if (name == nullptr) return false;
     if ( std::strcmp(_static.fname, name) == 0 )  return true;
     else return false;
 }
@@ -90,7 +90,7 @@ bool Object::isFactoryName(const char name[]) const
 // Check form name
 bool Object::isFormName(const char name[]) const
 {
-    if (name == 0) return false;
+    if (name == nullptr) return false;
     if ( std::strcmp(_static.fname, name) == 0 )  return true;
     else return false;
 }
@@ -122,7 +122,7 @@ bool Object::setSlotByIndex(const int, Object* const)
 Object* Object::getSlotByIndex(const int)
 {
     // We have no slots, so we shouldn't ever be here!
-    return 0;
+    return nullptr;
 }
 
 // get form name
@@ -157,7 +157,7 @@ int Object::slotName2Index(const char* const slotname) const
    int slotindex = 0;
 
    // No 'slotname' then no slot index
-   if (slotname == 0) {
+   if (slotname == nullptr) {
       return slotindex;
    }
 
@@ -206,7 +206,7 @@ bool Object::setSlotByName(const char* const slotname, Object* const obj)
 //------------------------------------------------------------------------------
 Object* Object::getSlotByName(const char* const slotname)
 {
-    Object* obj = 0;
+    Object* obj = nullptr;
     int slotindex = slotName2Index(slotname);
     if (slotindex > 0) obj = getSlotByIndex(slotindex);
     return obj;

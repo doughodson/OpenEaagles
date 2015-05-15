@@ -21,7 +21,7 @@ void lcSleep(const unsigned int msec)
 double getComputerTime()
 {
    timeval tv;
-   gettimeofday(&tv,NULL);
+   gettimeofday(&tv,nullptr);
    return static_cast<double>(tv.tv_sec) + static_cast<double>(tv.tv_usec)/1000000.0;
 }
 

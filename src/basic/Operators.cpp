@@ -32,7 +32,7 @@ END_SLOTTABLE(Add)
 BEGIN_SLOT_MAP(Add)
     // Accept an Number at any slot index ...
     Number* _msg = dynamic_cast<Number*>(obj);
-    if (_msg != 0) { _ok = setSecondNumber(_msg); }
+    if (_msg != nullptr) { _ok = setSecondNumber(_msg); }
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -195,7 +195,7 @@ std::ostream& Divide::serialize(std::ostream& sout, const int i, const bool slot
 //------------------------------------------------------------------------------
 bool Add::setSecondNumber(const Number* const ssnobj)
 {
-    if (ssnobj != 0) {
+    if (ssnobj != nullptr) {
         n2 = ssnobj->getReal();
         operation();
     }

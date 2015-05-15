@@ -72,7 +72,7 @@ void IoHandler::initData()
 
    rate = 50;
    pri = 0.5f;
-   thread = 0;
+   thread = nullptr;
 }
 
 
@@ -126,9 +126,9 @@ void IoHandler::copyData(const IoHandler& org, const bool cc)
    rate = 50;
    pri = 0.0;
 
-   if (thread != 0) {
+   if (thread != nullptr) {
       thread->terminate();
-      thread = 0;
+      thread = nullptr;
    }
 }
 

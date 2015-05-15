@@ -27,7 +27,7 @@ Pair::Pair(const char* slot, Object* object)
         obj->ref();
     }
     else {
-        obj  = 0;
+        obj  = nullptr;
     }
 }
 

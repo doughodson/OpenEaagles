@@ -81,7 +81,7 @@ Component::Component()
    STANDARD_CONSTRUCTOR()
 
    // Child components and our container
-   components = 0;
+   components = nullptr;
    containerPtr = nullptr;
 
    // Nothing selected
@@ -91,7 +91,7 @@ Component::Component()
    elog = nullptr;       // No event logger
    elog0 = nullptr;
 
-   timingStats = 0;
+   timingStats = nullptr;
    pts = false;
 
    frz = false;    // We're not frozen
@@ -106,13 +106,13 @@ void Component::copyData(const Component& org, const bool cc)
    BaseClass::copyData(org);
 
    if (cc) {
-      components = 0;
+      components = nullptr;
       containerPtr = nullptr;
       selected = nullptr;
       selection = nullptr;
       elog = nullptr;
       elog0 = nullptr;
-      timingStats = 0;
+      timingStats = nullptr;
       shutdown = false;
    }
 
@@ -122,7 +122,7 @@ void Component::copyData(const Component& org, const bool cc)
    if (org.elog0 != nullptr)
       elog0 = static_cast<Logger*>(org.elog0->clone());
    else
-      elog0 = 0;
+      elog0 = nullptr;
 
    // Copy selection
    setSelectionName(org.selection);
@@ -137,7 +137,7 @@ void Component::copyData(const Component& org, const bool cc)
       tmp->unref();
    }
    else
-      components = 0;
+      components = nullptr;
 
    // Timing statistics
    if (timingStats != nullptr) timingStats->unref();
@@ -418,7 +418,7 @@ bool Component::shutdownNotification()
          item = item->getNext();
       }
       subcomponents->unref();
-      subcomponents = 0;
+      subcomponents = nullptr;
    }
 
    // And tell the logger
@@ -521,7 +521,7 @@ const Pair* Component::findByName(const char* const slotname) const
         }
 
         subcomponents->unref();
-        subcomponents = 0;
+        subcomponents = nullptr;
     }
     return q;
 }
@@ -539,7 +539,7 @@ Pair* Component::findByName(const char* const slotname)
 //------------------------------------------------------------------------------
 const Pair* Component::findByIndex(const int slotindex) const
 {
-   const Pair* p = 0;
+   const Pair* p = nullptr;
 
    const PairStream* subcomponents = getComponents();
    if (subcomponents != nullptr) {
@@ -583,7 +583,7 @@ const Pair* Component::findByType(const std::type_info& type) const
             item = item->getNext();
         }
         subcomponents->unref();
-        subcomponents = 0;
+        subcomponents = nullptr;
     }
     return q;
 }

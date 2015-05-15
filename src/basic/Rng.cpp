@@ -150,7 +150,7 @@ void Rng::seed(const unsigned int* array, int size)
 bool Rng::setSlotSeed(const Number* const x)
 {
    bool ok = false;
-   if(x != 0) {
+   if(x != nullptr) {
       seed(x->getInt());
       ok = true;
    }

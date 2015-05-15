@@ -64,13 +64,13 @@ bool convertSec2Ntp(
    static const double P32 = 4294967296.0; // 2^32
 
    // Adjust by 2208988800 seconds (1900 to 1970)
-   if (ntpSec != 0) {
+   if (ntpSec != nullptr) {
       static const unsigned long ADJ = 0x83AA7E80;   // 2208988800 seconds
       *ntpSec = seconds + ADJ;
    }
 
    // Microseconds to fractional second
-   if (ntpSecF != 0) {
+   if (ntpSecF != nullptr) {
       double fsec = static_cast<double>(uSec) / 1000000.0;
       *ntpSecF = static_cast<unsigned long>((fsec * P32) + 0.5);
    }
@@ -600,7 +600,7 @@ void lcInteger2Str(const int num, char* const str, int width)
 //------------
 bool lcStrcpy(char* const strDest, const size_t sizeOfDest, const char* const strSource)
 {
-   if ((strDest == 0) || (strSource == 0) || sizeOfDest == 0) { // NULL ptr's or zero dest size
+   if ((strDest == nullptr) || (strSource == nullptr) || sizeOfDest == 0) { // NULL ptr's or zero dest size
       return false;
    }
 
@@ -627,7 +627,7 @@ bool lcStrcpy(char* const strDest, const size_t sizeOfDest, const char* const st
 //------------
 bool lcStrncpy(char* const strDest, const size_t sizeOfDest, const char* const strSource, const size_t count)
 {
-   if ((strDest == 0) || (strSource == 0) || sizeOfDest == 0) { // NULL ptr's or zero dest size
+   if ((strDest == nullptr) || (strSource == nullptr) || sizeOfDest == 0) { // NULL ptr's or zero dest size
       return false;
    }
 
@@ -656,7 +656,7 @@ bool lcStrncpy(char* const strDest, const size_t sizeOfDest, const char* const s
 //------------
 bool lcStrcat(char* const strDest, const size_t sizeOfDest, const char* const strSource)
 {
-   if ((strDest == 0) || (strSource == 0) || sizeOfDest == 0) { // NULL ptr's or zero dest size
+   if ((strDest == nullptr) || (strSource == nullptr) || sizeOfDest == 0) { // NULL ptr's or zero dest size
       return false;
    }
 
@@ -817,9 +817,9 @@ int lcStrcasecmp(const char* const s1, const char* const s2)
 //------------
 int lcStrncasecmp(const char* const s1, const char* const s2, const size_t n)
 {
-   if ( (s1 == 0 && s2 == 0) || n == 0) return 0;  // They're the same if they both don't exist
-   if (s1 != 0 && s2 == 0) return  1;  // S1 is greater than S2 if S2 doesn't exist and S1 does
-   if (s1 == 0 && s2 != 0) return -1;  // S1 is less than S2 if S1 doesn't exist and S2 does
+   if ( (s1 == nullptr && s2 == nullptr) || n == 0) return 0;  // They're the same if they both don't exist
+   if (s1 != nullptr && s2 == nullptr) return  1;  // S1 is greater than S2 if S2 doesn't exist and S1 does
+   if (s1 == nullptr && s2 != nullptr) return -1;  // S1 is less than S2 if S1 doesn't exist and S2 does
 
    const char* p1 = s1;
    const char* p2 = s2;

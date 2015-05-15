@@ -82,7 +82,7 @@ void List::deleteData()
 bool List::isValid() const
 {
     bool ok = Object::isValid();
-    for (const Item* d = headP; ok && d != 0; d = d->getNext() ) {
+    for (const Item* d = headP; ok && d != nullptr; d = d->getNext() ) {
         const Object* obj = d->getValue();
         if (obj != nullptr) {
             if (!obj->isValid()) ok = false;
@@ -263,7 +263,7 @@ Object* List::removeHead()
         headP = headP->next;
         p = d->getValue();
         num--;
-        if (headP != nullptr) headP->previous = 0;
+        if (headP != nullptr) headP->previous = nullptr;
         else tailP = nullptr;
         delete d;
     }
@@ -282,7 +282,7 @@ Object* List::removeTail()
         tailP = tailP->previous;
         p = d->getValue();
         num--;
-        if (tailP != nullptr) tailP->next = 0;
+        if (tailP != nullptr) tailP->next = nullptr;
         else headP = nullptr;
         delete d;
     }
@@ -372,7 +372,7 @@ bool List::operator==(const List& l) const
 
    const Item* tt = getFirstItem();
    const Item* ll = l.getFirstItem();
-   while (tt != 0) {
+   while (tt != nullptr) {
       if (tt->getValue() != ll->getValue()) return false;
       tt = tt->getNext();
       ll = ll->getNext();
@@ -395,7 +395,7 @@ bool List::operator!=(const List& l) const
 //------------------------------------------------------------------------------
 const Object* List::getPosition1(const unsigned int n) const
 {
-    if (n < 1 || n > num) return 0;
+    if (n < 1 || n > num) return nullptr;
     unsigned int i = 1;
     const Item* p = getFirstItem();
     while (i < n && p != nullptr) {
@@ -416,7 +416,7 @@ std::ostream& List::serialize(std::ostream& sout, const int, const bool) const
 {
     std::cout << "{" << std::endl;
     for (const Item* p = getFirstItem(); p != nullptr; p = p->getNext() ) {
-        if (p->getValue() != 0) p->getValue()->serialize(sout,4);
+        if (p->getValue() != nullptr) p->getValue()->serialize(sout,4);
         else std::cout << "<BAD VALUE>" << std::endl;
     }
     std::cout << "}" << std::endl;

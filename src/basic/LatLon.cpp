@@ -79,7 +79,7 @@ void LatLon::computeVal()
 bool LatLon::setDir(const char* const d)
 {
     dir = NONE;
-    if (d != 0) {
+    if (d != nullptr) {
         if (d[0] == 'N' || d[0] == 'n')      dir = NORTH;
         else if (d[0] == 'S' || d[0] == 's') dir = SOUTH;
         else if (d[0] == 'E' || d[0] == 'e') dir = EAST;

@@ -61,7 +61,7 @@ void Cie::copyData(const Cie& org, const bool cc)
 {
    BaseClass::copyData(org);
 
-   if (cc) monitor = 0;
+   if (cc) monitor = nullptr;
 
    cie = org.cie;
    monitor = org.monitor;
@@ -69,7 +69,7 @@ void Cie::copyData(const Cie& org, const bool cc)
 
 void Cie::deleteData()
 {
-   monitor = 0;
+   monitor = nullptr;
 }
 
 
@@ -101,7 +101,7 @@ void Cie::getCIE(osg::Vec3& hhh) const
 //------------------------------------------------------------------------------
 bool Cie::setLuminance(Number* const msg)
 {
-    if (msg == 0) return false;
+    if (msg == nullptr) return false;
     LCreal value = msg->getReal();
     bool ok = (value >= 0 && value <= 1);
     if (ok) { cie[LUMINANCE] = value; cie2rgb(color,cie,monitor); }
@@ -114,7 +114,7 @@ bool Cie::setLuminance(Number* const msg)
 //------------------------------------------------------------------------------
 bool Cie::setX(Number* const msg)
 {
-    if (msg == 0) return false;
+    if (msg == nullptr) return false;
     LCreal value = msg->getReal();
     bool ok = (value >= 0 && value <= 1);
     if (ok) { cie[X] = value; cie2rgb(color,cie,monitor); }
@@ -127,7 +127,7 @@ bool Cie::setX(Number* const msg)
 //------------------------------------------------------------------------------
 bool Cie::setY(Number* const msg)
 {
-    if (msg == 0) return false;
+    if (msg == nullptr) return false;
     LCreal value = msg->getReal();
     bool ok = (value >= 0 && value <= 1);
     if (ok) { cie[Y] = value; cie2rgb(color,cie,monitor); }
@@ -140,7 +140,7 @@ bool Cie::setY(Number* const msg)
 //------------------------------------------------------------------------------
 bool Cie::setMonitor(MonitorMetrics* const msg)
 {
-    if (msg == 0) return false;
+    if (msg == nullptr) return false;
     monitor = msg;
     cie2rgb(color,cie,monitor);
     return true;
@@ -159,7 +159,7 @@ Object* Cie::getSlotByIndex(const int si)
 //------------------------------------------------------------------------------
 void Cie::cie2rgb(osg::Vec4& rgb, const osg::Vec3& cie, const MonitorMetrics* m)
 {
-   if ( m == 0 )
+   if ( m == nullptr )
       return;
 
    m->cie2rgb(rgb, cie);
@@ -282,9 +282,9 @@ void MonitorMetrics::copyData(const MonitorMetrics& org, const bool cc)
     BaseClass::copyData(org);
 
     if (cc) {
-        redLuminance = 0;
-        greenLuminance = 0;
-        blueLuminance = 0;
+        redLuminance = nullptr;
+        greenLuminance = nullptr;
+        blueLuminance = nullptr;
     }
 
     transform = org.transform;
@@ -298,28 +298,28 @@ void MonitorMetrics::copyData(const MonitorMetrics& org, const bool cc)
 
 void MonitorMetrics::deleteData()
 {
-    redLuminance = 0;
-    greenLuminance = 0;
-    blueLuminance = 0;
+    redLuminance = nullptr;
+    greenLuminance = nullptr;
+    blueLuminance = nullptr;
 }
 
 bool MonitorMetrics::setSlotRed(const Table1* red)
 {
-    if ( red == 0 ) return false;
+    if ( red == nullptr ) return false;
     redLuminance = red;
     return computeMatrix();
 }
 
 bool MonitorMetrics::setSlotGreen(const Table1* green)
 {
-    if ( green == 0 ) return false;
+    if ( green == nullptr ) return false;
     greenLuminance = green;
     return computeMatrix();
 }
 
 bool MonitorMetrics::setSlotBlue(const Table1* blue)
 {
-    if ( blue == 0 ) return false;
+    if ( blue == nullptr ) return false;
     blueLuminance = blue;
     return computeMatrix();
 }
@@ -328,7 +328,7 @@ bool MonitorMetrics::setSlotPhosphors(const List* phosphors)
 {
     LCreal listItems[6];
 
-    if ( phosphors == 0 ) return false;
+    if ( phosphors == nullptr ) return false;
     if ( phosphors->entries() != 6 ) return false;
     if ( phosphors->getNumberList(listItems, 6) != 6 ) return false;
 
@@ -344,7 +344,7 @@ bool MonitorMetrics::setSlotWhiteRGB(const List* whiteRGB)
 {
     LCreal listItems[3];
 
-    if ( whiteRGB == 0 ) return false;
+    if ( whiteRGB == nullptr ) return false;
     if ( whiteRGB->entries() != 6 ) return false;
     if ( whiteRGB->getNumberList(listItems, 3) != 3 ) return false;
 
@@ -356,7 +356,7 @@ bool MonitorMetrics::setSlotWhiteCIE(const List* whiteCIE)
 {
     LCreal listItems[3];
 
-    if ( whiteCIE == 0 ) return false;
+    if ( whiteCIE == nullptr ) return false;
     if ( whiteCIE->entries() != 6 ) return false;
     if ( whiteCIE->getNumberList(listItems, 3) != 3 ) return false;
 

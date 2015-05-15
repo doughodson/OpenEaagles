@@ -89,7 +89,7 @@ void Cmy::getCMY(osg::Vec3& hhh) const
 //------------------------------------------------------------------------------
 bool Cmy::setCyan(Number* const msg)
 {
-    if (msg == 0) return false;
+    if (msg == nullptr) return false;
     LCreal value = msg->getReal();
     bool ok = (value >= 0 && value <= 1);
     if (ok) { cmy[CYAN] = value; cmy2rgb(color,cmy); }
@@ -102,7 +102,7 @@ bool Cmy::setCyan(Number* const msg)
 //------------------------------------------------------------------------------
 bool Cmy::setMagenta(Number* const msg)
 {
-    if (msg == 0) return false;
+    if (msg == nullptr) return false;
     LCreal value = msg->getReal();
     bool ok = (value >= 0 && value <= 1);
     if (ok) { cmy[MAGENTA] = value; cmy2rgb(color,cmy); }
@@ -115,7 +115,7 @@ bool Cmy::setMagenta(Number* const msg)
 //------------------------------------------------------------------------------
 bool Cmy::setYellow(Number* const msg)
 {
-    if (msg == 0) return false;
+    if (msg == nullptr) return false;
     LCreal value = msg->getReal();
     bool ok = (value >= 0 && value <= 1);
     if (ok) { cmy[YELLOW] = value; cmy2rgb(color,cmy); }

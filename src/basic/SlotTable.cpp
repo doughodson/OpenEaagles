@@ -69,10 +69,10 @@ const char* SlotTable::name(const unsigned int slotindex) const
    const char* name = nullptr;
 
    // check base table first
-   if (baseTable != 0) name = baseTable->name(slotindex);
+   if (baseTable != nullptr) name = baseTable->name(slotindex);
 
    // if not in baseTable, check our table
-   if (name == 0) {
+   if (name == nullptr) {
       int i = static_cast<int>(slotindex);      // a) start with slotindex
       if (baseTable != nullptr) i -= baseTable->n();  // b) subt baseTable->n()
       --i;                                      // c) make it zero based
@@ -101,7 +101,7 @@ unsigned int SlotTable::index(const char* const slotname) const
          // if we're here, we found a match
          i = j;                                    // a) start with j
          i++;                                      // b) make it one based
-         if (baseTable != 0) i += baseTable->n();  // c) add baseTable->n()
+         if (baseTable != nullptr) i += baseTable->n();  // c) add baseTable->n()
       }
    }
 
