@@ -1,0 +1,31 @@
+
+website: http://clang.llvm.org/
+
+Ubuntu packages: http://llvm.org/apt/
+
+apt-get install clang-modernize-3.5
+
+Notes:
+
+http://clang.llvm.org/extra/ModernizerUsage.html
+
+To run:
+
+clang-modernize-3.5 -p=. -include=. -use-nullptr
+
+#
+# To create compilation databasefile or 'compile_command.json' file
+#
+
+Install Bear from: https://github.com/rizsotto/Bear
+
+git clone https://github.com/rizsotto/Bear.git
+mkdir bear-build
+cd bear-build
+cmake ../Bear
+
+After install use 'bear make all' to generate
+compile_commands.json file
+
+
+
