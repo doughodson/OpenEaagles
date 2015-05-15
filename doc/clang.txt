@@ -13,6 +13,11 @@ To run:
 
 clang-modernize-3.5 -p=. -include=. -use-nullptr
 
+example (basic)
+
+cd basic
+clang-modernize-3.5 -p=. -include=. -exclude-from=../exclude-files.txt -use-nullptr
+
 #
 # To create compilation databasefile or 'compile_command.json' file
 #
