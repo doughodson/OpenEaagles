@@ -1,0 +1,1682 @@
+[
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Exponential.o Exponential.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic/distributions", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/distributions/Exponential.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Lognormal.o Lognormal.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic/distributions", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/distributions/Lognormal.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Pareto.o Pareto.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic/distributions", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/distributions/Pareto.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Uniform.o Uniform.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic/distributions", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/distributions/Uniform.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Function.o Function.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic/functors", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/functors/Function.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Functions.o Functions.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic/functors", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/functors/Functions.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Table.o Table.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic/functors", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/functors/Table.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Tables.o Tables.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic/functors", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/functors/Tables.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o PosixHandler.o PosixHandler.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic/nethandlers", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/nethandlers/PosixHandler.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o TcpClient.o TcpClient.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic/nethandlers", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/nethandlers/TcpClient.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o TcpHandler.o TcpHandler.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic/nethandlers", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/nethandlers/TcpHandler.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o TcpServerMultiple.o TcpServerMultiple.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic/nethandlers", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/nethandlers/TcpServerMultiple.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o TcpServerSingle.o TcpServerSingle.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic/nethandlers", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/nethandlers/TcpServerSingle.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o UdpBroadcastHandler.o UdpBroadcastHandler.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic/nethandlers", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/nethandlers/UdpBroadcastHandler.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o UdpMulticastHandler.o UdpMulticastHandler.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic/nethandlers", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/nethandlers/UdpMulticastHandler.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o UdpUnicastHandler.o UdpUnicastHandler.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic/nethandlers", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/nethandlers/UdpUnicastHandler.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Math.o Math.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic/osg", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/osg/Math.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Matrixd.o Matrixd.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic/osg", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/osg/Matrixd.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o MatrixDecomposition.o MatrixDecomposition.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic/osg", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/osg/MatrixDecomposition.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Matrixf.o Matrixf.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic/osg", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/osg/Matrixf.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Quat.o Quat.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic/osg", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/osg/Quat.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Action.o Action.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic/ubf", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/ubf/Action.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Agent.o Agent.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic/ubf", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/ubf/Agent.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Arbiter.o Arbiter.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic/ubf", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/ubf/Arbiter.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Behavior.o Behavior.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic/ubf", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/ubf/Behavior.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o State.o State.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic/ubf", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/ubf/State.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Angles.o Angles.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic/units", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/units/Angles.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o AngularVelocity.o AngularVelocity.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic/units", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/units/AngularVelocity.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Areas.o Areas.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic/units", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/units/Areas.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Density.o Density.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic/units", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/units/Density.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Distances.o Distances.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic/units", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/units/Distances.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Energies.o Energies.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic/units", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/units/Energies.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o FlowRate.o FlowRate.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic/units", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/units/FlowRate.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Forces.o Forces.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic/units", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/units/Forces.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Frequencies.o Frequencies.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic/units", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/units/Frequencies.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o LinearVelocity.o LinearVelocity.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic/units", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/units/LinearVelocity.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Masses.o Masses.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic/units", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/units/Masses.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Powers.o Powers.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic/units", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/units/Powers.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Times.o Times.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic/units", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/units/Times.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Volumes.o Volumes.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic/units", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/units/Volumes.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o lfi.o lfi.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic/util", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/util/lfi.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o support.o support.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/support.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o basicFF.o basicFF.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/basicFF.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Boolean.o Boolean.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/Boolean.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Cie.o Cie.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/Cie.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Cmy.o Cmy.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/Cmy.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Color.o Color.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/Color.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Complex.o Complex.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/Complex.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Component.o Component.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/Component.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Decibel.o Decibel.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/Decibel.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o EarthModel.o EarthModel.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/EarthModel.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Factory.o Factory.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/Factory.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o FileReader.o FileReader.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/FileReader.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Float.o Float.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/Float.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Hls.o Hls.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/Hls.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Hsva.o Hsva.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/Hsva.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Hsv.o Hsv.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/Hsv.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Identifier.o Identifier.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/Identifier.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Integer.o Integer.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/Integer.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o IoAdapter.o IoAdapter.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/IoAdapter.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o IoData.o IoData.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/IoData.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o IoDevice.o IoDevice.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/IoDevice.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o IoHandler.o IoHandler.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/IoHandler.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o LatLon.o LatLon.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/LatLon.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Lexical.o Lexical.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/Lexical.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o List.o List.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/List.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Locus.o Locus.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/Locus.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Logger.o Logger.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/Logger.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Matrix.o Matrix.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/Matrix.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Nav.o Nav.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/Nav.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o NavDR.o NavDR.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/NavDR.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o NetHandler.o NetHandler.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/NetHandler.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Number.o Number.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/Number.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Object.o Object.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/Object.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Operators.o Operators.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/Operators.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Pair.o Pair.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/Pair.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o PairStream.o PairStream.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/PairStream.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Parser.o Parser.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/Parser.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Rgba.o Rgba.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/Rgba.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Rgb.o Rgb.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/Rgb.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Rng.o Rng.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/Rng.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o SlotTable.o SlotTable.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/SlotTable.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Stack.o Stack.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/Stack.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Statistic.o Statistic.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/Statistic.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o StateMachine.o StateMachine.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/StateMachine.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o String.o String.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/String.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Terrain.o Terrain.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/Terrain.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Thread.o Thread.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/Thread.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o ThreadPool.o ThreadPool.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/ThreadPool.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Timers.o Timers.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/Timers.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Transforms.o Transforms.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/Transforms.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Vectors.o Vectors.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/Vectors.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Yiq.o Yiq.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basic", 
+        "file": "/home/me/oe/OpenEaagles/src/basic/Yiq.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -I/usr/include/freetype2 -c -o basicGLFF.o basicGLFF.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basicGL", 
+        "file": "/home/me/oe/OpenEaagles/src/basicGL/basicGLFF.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -I/usr/include/freetype2 -c -o BmpTexture.o BmpTexture.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basicGL", 
+        "file": "/home/me/oe/OpenEaagles/src/basicGL/BmpTexture.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -I/usr/include/freetype2 -c -o BitmapFont.o BitmapFont.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basicGL", 
+        "file": "/home/me/oe/OpenEaagles/src/basicGL/BitmapFont.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -I/usr/include/freetype2 -c -o Clip3D.o Clip3D.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basicGL", 
+        "file": "/home/me/oe/OpenEaagles/src/basicGL/Clip3D.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -I/usr/include/freetype2 -c -o ColorGradient.o ColorGradient.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basicGL", 
+        "file": "/home/me/oe/OpenEaagles/src/basicGL/ColorGradient.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -I/usr/include/freetype2 -c -o ColorRotary.o ColorRotary.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basicGL", 
+        "file": "/home/me/oe/OpenEaagles/src/basicGL/ColorRotary.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -I/usr/include/freetype2 -c -o Display.o Display.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basicGL", 
+        "file": "/home/me/oe/OpenEaagles/src/basicGL/Display.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -I/usr/include/freetype2 -c -o Factory.o Factory.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basicGL", 
+        "file": "/home/me/oe/OpenEaagles/src/basicGL/Factory.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -I/usr/include/freetype2 -c -o Field.o Field.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basicGL", 
+        "file": "/home/me/oe/OpenEaagles/src/basicGL/Field.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -I/usr/include/freetype2 -c -o Font.o Font.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basicGL", 
+        "file": "/home/me/oe/OpenEaagles/src/basicGL/Font.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -I/usr/include/freetype2 -c -o FtglFonts.o FtglFonts.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basicGL", 
+        "file": "/home/me/oe/OpenEaagles/src/basicGL/FtglFonts.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -I/usr/include/freetype2 -c -o Graphic.o Graphic.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basicGL", 
+        "file": "/home/me/oe/OpenEaagles/src/basicGL/Graphic.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -I/usr/include/freetype2 -c -o Image.o Image.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basicGL", 
+        "file": "/home/me/oe/OpenEaagles/src/basicGL/Image.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -I/usr/include/freetype2 -c -o Material.o Material.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basicGL", 
+        "file": "/home/me/oe/OpenEaagles/src/basicGL/Material.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -I/usr/include/freetype2 -c -o Page.o Page.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basicGL", 
+        "file": "/home/me/oe/OpenEaagles/src/basicGL/Page.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -I/usr/include/freetype2 -c -o Polygon.o Polygon.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basicGL", 
+        "file": "/home/me/oe/OpenEaagles/src/basicGL/Polygon.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -I/usr/include/freetype2 -c -o Readouts.o Readouts.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basicGL", 
+        "file": "/home/me/oe/OpenEaagles/src/basicGL/Readouts.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -I/usr/include/freetype2 -c -o Reformat.o Reformat.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basicGL", 
+        "file": "/home/me/oe/OpenEaagles/src/basicGL/Reformat.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -I/usr/include/freetype2 -c -o Rotators.o Rotators.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basicGL", 
+        "file": "/home/me/oe/OpenEaagles/src/basicGL/Rotators.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -I/usr/include/freetype2 -c -o Scanline.o Scanline.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basicGL", 
+        "file": "/home/me/oe/OpenEaagles/src/basicGL/Scanline.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -I/usr/include/freetype2 -c -o Shapes.o Shapes.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basicGL", 
+        "file": "/home/me/oe/OpenEaagles/src/basicGL/Shapes.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -I/usr/include/freetype2 -c -o StrokeFont.o StrokeFont.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basicGL", 
+        "file": "/home/me/oe/OpenEaagles/src/basicGL/StrokeFont.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -I/usr/include/freetype2 -c -o Texture.o Texture.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basicGL", 
+        "file": "/home/me/oe/OpenEaagles/src/basicGL/Texture.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -I/usr/include/freetype2 -c -o MfdPage.o MfdPage.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basicGL", 
+        "file": "/home/me/oe/OpenEaagles/src/basicGL/MfdPage.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -I/usr/include/freetype2 -c -o MapPage.o MapPage.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basicGL", 
+        "file": "/home/me/oe/OpenEaagles/src/basicGL/MapPage.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -I/usr/include/freetype2 -c -o SymbolLoader.o SymbolLoader.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basicGL", 
+        "file": "/home/me/oe/OpenEaagles/src/basicGL/SymbolLoader.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -I/usr/include/freetype2 -c -o Translator.o Translator.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/basicGL", 
+        "file": "/home/me/oe/OpenEaagles/src/basicGL/Translator.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Adi.o Adi.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/instruments/adi", 
+        "file": "/home/me/oe/OpenEaagles/src/instruments/adi/Adi.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o GhostHorizon.o GhostHorizon.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/instruments/adi", 
+        "file": "/home/me/oe/OpenEaagles/src/instruments/adi/GhostHorizon.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Button.o Button.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/instruments/buttons", 
+        "file": "/home/me/oe/OpenEaagles/src/instruments/buttons/Button.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o PushButton.o PushButton.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/instruments/buttons", 
+        "file": "/home/me/oe/OpenEaagles/src/instruments/buttons/PushButton.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o RotarySwitch.o RotarySwitch.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/instruments/buttons", 
+        "file": "/home/me/oe/OpenEaagles/src/instruments/buttons/RotarySwitch.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Knob.o Knob.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/instruments/buttons", 
+        "file": "/home/me/oe/OpenEaagles/src/instruments/buttons/Knob.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Switch.o Switch.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/instruments/buttons", 
+        "file": "/home/me/oe/OpenEaagles/src/instruments/buttons/Switch.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o SolenoidSwitch.o SolenoidSwitch.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/instruments/buttons", 
+        "file": "/home/me/oe/OpenEaagles/src/instruments/buttons/SolenoidSwitch.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o AltitudeDial.o AltitudeDial.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/instruments/dials", 
+        "file": "/home/me/oe/OpenEaagles/src/instruments/dials/AltitudeDial.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o AnalogDial.o AnalogDial.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/instruments/dials", 
+        "file": "/home/me/oe/OpenEaagles/src/instruments/dials/AnalogDial.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o DialArcSegment.o DialArcSegment.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/instruments/dials", 
+        "file": "/home/me/oe/OpenEaagles/src/instruments/dials/DialArcSegment.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o DialPointer.o DialPointer.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/instruments/dials", 
+        "file": "/home/me/oe/OpenEaagles/src/instruments/dials/DialPointer.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o DialTickMarks.o DialTickMarks.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/instruments/dials", 
+        "file": "/home/me/oe/OpenEaagles/src/instruments/dials/DialTickMarks.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o GMeterDial.o GMeterDial.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/instruments/dials", 
+        "file": "/home/me/oe/OpenEaagles/src/instruments/dials/GMeterDial.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o LandingGear.o LandingGear.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/instruments/landingGear", 
+        "file": "/home/me/oe/OpenEaagles/src/instruments/landingGear/LandingGear.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o LandingLight.o LandingLight.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/instruments/landingGear", 
+        "file": "/home/me/oe/OpenEaagles/src/instruments/landingGear/LandingLight.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o BearingPointer.o BearingPointer.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/instruments/maps", 
+        "file": "/home/me/oe/OpenEaagles/src/instruments/maps/BearingPointer.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o CompassRose.o CompassRose.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/instruments/maps", 
+        "file": "/home/me/oe/OpenEaagles/src/instruments/maps/CompassRose.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o EngPage.o EngPage.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/instruments/eng", 
+        "file": "/home/me/oe/OpenEaagles/src/instruments/eng/EngPage.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o AnalogGauge.o AnalogGauge.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/instruments/gauges", 
+        "file": "/home/me/oe/OpenEaagles/src/instruments/gauges/AnalogGauge.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o AoaIndexer.o AoaIndexer.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/instruments/gauges", 
+        "file": "/home/me/oe/OpenEaagles/src/instruments/gauges/AoaIndexer.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o GaugeSlider.o GaugeSlider.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/instruments/gauges", 
+        "file": "/home/me/oe/OpenEaagles/src/instruments/gauges/GaugeSlider.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Tape.o Tape.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/instruments/gauges", 
+        "file": "/home/me/oe/OpenEaagles/src/instruments/gauges/Tape.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o TickMarks.o TickMarks.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/instruments/gauges", 
+        "file": "/home/me/oe/OpenEaagles/src/instruments/gauges/TickMarks.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Eadi3DObjects.o Eadi3DObjects.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/instruments/eadi3D", 
+        "file": "/home/me/oe/OpenEaagles/src/instruments/eadi3D/Eadi3DObjects.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Eadi3DPage.o Eadi3DPage.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/instruments/eadi3D", 
+        "file": "/home/me/oe/OpenEaagles/src/instruments/eadi3D/Eadi3DPage.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o IrisGLCompat.o IrisGLCompat.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/instruments/eadi3D", 
+        "file": "/home/me/oe/OpenEaagles/src/instruments/eadi3D/IrisGLCompat.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Factory.o Factory.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/instruments", 
+        "file": "/home/me/oe/OpenEaagles/src/instruments/Factory.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o instrumentsFF.o instrumentsFF.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/instruments", 
+        "file": "/home/me/oe/OpenEaagles/src/instruments/instrumentsFF.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Instrument.o Instrument.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/instruments", 
+        "file": "/home/me/oe/OpenEaagles/src/instruments/Instrument.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o dafifFF.o dafifFF.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/dafif", 
+        "file": "/home/me/oe/OpenEaagles/src/dafif/dafifFF.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Airport.o Airport.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/dafif", 
+        "file": "/home/me/oe/OpenEaagles/src/dafif/Airport.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o AirportLoader.o AirportLoader.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/dafif", 
+        "file": "/home/me/oe/OpenEaagles/src/dafif/AirportLoader.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Record.o Record.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/dafif", 
+        "file": "/home/me/oe/OpenEaagles/src/dafif/Record.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Database.o Database.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/dafif", 
+        "file": "/home/me/oe/OpenEaagles/src/dafif/Database.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Factory.o Factory.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/dafif", 
+        "file": "/home/me/oe/OpenEaagles/src/dafif/Factory.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Ils.o Ils.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/dafif", 
+        "file": "/home/me/oe/OpenEaagles/src/dafif/Ils.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Navaid.o Navaid.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/dafif", 
+        "file": "/home/me/oe/OpenEaagles/src/dafif/Navaid.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o NavaidLoader.o NavaidLoader.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/dafif", 
+        "file": "/home/me/oe/OpenEaagles/src/dafif/NavaidLoader.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Runway.o Runway.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/dafif", 
+        "file": "/home/me/oe/OpenEaagles/src/dafif/Runway.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Waypoint.o Waypoint.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/dafif", 
+        "file": "/home/me/oe/OpenEaagles/src/dafif/Waypoint.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o WaypointLoader.o WaypointLoader.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/dafif", 
+        "file": "/home/me/oe/OpenEaagles/src/dafif/WaypointLoader.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Ai2DiSwitch.o Ai2DiSwitch.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/ioDevice", 
+        "file": "/home/me/oe/OpenEaagles/src/ioDevice/Ai2DiSwitch.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o AnalogInput.o AnalogInput.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/ioDevice", 
+        "file": "/home/me/oe/OpenEaagles/src/ioDevice/AnalogInput.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o AnalogOutput.o AnalogOutput.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/ioDevice", 
+        "file": "/home/me/oe/OpenEaagles/src/ioDevice/AnalogOutput.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o DiscreteInput.o DiscreteInput.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/ioDevice", 
+        "file": "/home/me/oe/OpenEaagles/src/ioDevice/DiscreteInput.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o DiscreteOutput.o DiscreteOutput.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/ioDevice", 
+        "file": "/home/me/oe/OpenEaagles/src/ioDevice/DiscreteOutput.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Factory.o Factory.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/ioDevice", 
+        "file": "/home/me/oe/OpenEaagles/src/ioDevice/Factory.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o IoData.o IoData.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/ioDevice", 
+        "file": "/home/me/oe/OpenEaagles/src/ioDevice/IoData.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o ioDeviceFF.o ioDeviceFF.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/ioDevice", 
+        "file": "/home/me/oe/OpenEaagles/src/ioDevice/ioDeviceFF.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o SignalGen.o SignalGen.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/ioDevice", 
+        "file": "/home/me/oe/OpenEaagles/src/ioDevice/SignalGen.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o UsbJoystick.o UsbJoystick.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/ioDevice", 
+        "file": "/home/me/oe/OpenEaagles/src/ioDevice/UsbJoystick.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o linux/UsbJoystickImp.o linux/UsbJoystickImp.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/ioDevice", 
+        "file": "/home/me/oe/OpenEaagles/src/ioDevice/linux/UsbJoystickImp.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o DiffEquation.o DiffEquation.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/linearSys", 
+        "file": "/home/me/oe/OpenEaagles/src/linearSys/DiffEquation.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o FirstOrderTf.o FirstOrderTf.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/linearSys", 
+        "file": "/home/me/oe/OpenEaagles/src/linearSys/FirstOrderTf.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o LagFilter.o LagFilter.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/linearSys", 
+        "file": "/home/me/oe/OpenEaagles/src/linearSys/LagFilter.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Limit01.o Limit01.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/linearSys", 
+        "file": "/home/me/oe/OpenEaagles/src/linearSys/Limit01.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Limit11.o Limit11.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/linearSys", 
+        "file": "/home/me/oe/OpenEaagles/src/linearSys/Limit11.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Limit.o Limit.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/linearSys", 
+        "file": "/home/me/oe/OpenEaagles/src/linearSys/Limit.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o LimitFunc.o LimitFunc.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/linearSys", 
+        "file": "/home/me/oe/OpenEaagles/src/linearSys/LimitFunc.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o LowpassFilter.o LowpassFilter.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/linearSys", 
+        "file": "/home/me/oe/OpenEaagles/src/linearSys/LowpassFilter.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o SaH.o SaH.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/linearSys", 
+        "file": "/home/me/oe/OpenEaagles/src/linearSys/SaH.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o ScalerFunc.o ScalerFunc.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/linearSys", 
+        "file": "/home/me/oe/OpenEaagles/src/linearSys/ScalerFunc.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o SecondOrderTf.o SecondOrderTf.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/linearSys", 
+        "file": "/home/me/oe/OpenEaagles/src/linearSys/SecondOrderTf.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Sz1.o Sz1.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/linearSys", 
+        "file": "/home/me/oe/OpenEaagles/src/linearSys/Sz1.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Sz2.o Sz2.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/linearSys", 
+        "file": "/home/me/oe/OpenEaagles/src/linearSys/Sz2.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Aam.o Aam.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/Aam.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Actions.o Actions.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/Actions.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Agm.o Agm.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/Agm.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o AircraftIrSignature.o AircraftIrSignature.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/AircraftIrSignature.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o AirVehicle.o AirVehicle.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/AirVehicle.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o AngleOnlyTrackManager.o AngleOnlyTrackManager.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/AngleOnlyTrackManager.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Antenna.o Antenna.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/Antenna.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Autopilot.o Autopilot.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/Autopilot.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o AvionicsPod.o AvionicsPod.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/AvionicsPod.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Bomb.o Bomb.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/Bomb.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Buildings.o Buildings.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/Buildings.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Bullseye.o Bullseye.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/Bullseye.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o CollisionDetect.o CollisionDetect.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/CollisionDetect.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Datalink.o Datalink.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/Datalink.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o DataRecorder.o DataRecorder.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/DataRecorder.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Designator.o Designator.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/Designator.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o DynamicsModel.o DynamicsModel.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/DynamicsModel.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Effects.o Effects.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/Effects.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Emission.o Emission.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/Emission.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o ExternalStore.o ExternalStore.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/ExternalStore.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Factory.o Factory.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/Factory.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o FuelTank.o FuelTank.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/FuelTank.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Gimbal.o Gimbal.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/Gimbal.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Gps.o Gps.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/Gps.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o GroundVehicle.o GroundVehicle.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/GroundVehicle.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Guns.o Guns.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/Guns.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Iff.o Iff.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/Iff.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Image.o Image.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/Image.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Ins.o Ins.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/Ins.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o IrAtmosphere.o IrAtmosphere.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/IrAtmosphere.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o IrAtmosphere1.o IrAtmosphere1.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/IrAtmosphere1.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o IrQueryMsg.o IrQueryMsg.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/IrQueryMsg.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o IrSeeker.o IrSeeker.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/IrSeeker.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o IrSensor.o IrSensor.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/IrSensor.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o IrShapes.o IrShapes.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/IrShapes.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o IrSignature.o IrSignature.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/IrSignature.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o IrSystem.o IrSystem.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/IrSystem.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Jammer.o Jammer.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/Jammer.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o LifeForms.o LifeForms.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/LifeForms.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o MergingIrSensor.o MergingIrSensor.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/MergingIrSensor.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Message.o Message.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/Message.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Missile.o Missile.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/Missile.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o MultiActorAgent.o MultiActorAgent.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/MultiActorAgent.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Navigation.o Navigation.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/Navigation.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o NavRadios.o NavRadios.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/NavRadios.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o NetIO.o NetIO.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/NetIO.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Nib.o Nib.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/Nib.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Ntm.o Ntm.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/Ntm.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o OnboardComputer.o OnboardComputer.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/OnboardComputer.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Otw.o Otw.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/Otw.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Pilot.o Pilot.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/Pilot.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Player.o Player.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/Player.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Radar.o Radar.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/Radar.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Radio.o Radio.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/Radio.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o RfSensor.o RfSensor.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/RfSensor.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o RfSystem.o RfSystem.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/RfSystem.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Route.o Route.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/Route.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Rwr.o Rwr.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/Rwr.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Sam.o Sam.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/Sam.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o SamVehicles.o SamVehicles.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/SamVehicles.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Sar.o Sar.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/Sar.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o ScanGimbal.o ScanGimbal.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/ScanGimbal.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o SensorMsg.o SensorMsg.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/SensorMsg.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Ships.o Ships.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/Ships.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Signatures.o Signatures.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/Signatures.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o SimAgent.o SimAgent.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/SimAgent.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o SimLogger.o SimLogger.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/SimLogger.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Simulation.o Simulation.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/Simulation.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o simulationFF.o simulationFF.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/simulationFF.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o SpaceVehicle.o SpaceVehicle.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/SpaceVehicle.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o StabilizingGimbal.o StabilizingGimbal.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/StabilizingGimbal.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Station.o Station.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/Station.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Steerpoint.o Steerpoint.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/Steerpoint.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Stores.o Stores.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/Stores.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o StoresMgr.o StoresMgr.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/StoresMgr.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o SynchronizedState.o SynchronizedState.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/SynchronizedState.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o System.o System.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/System.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o TabLogger.o TabLogger.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/TabLogger.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o TargetData.o TargetData.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/TargetData.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Tdb.o Tdb.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/Tdb.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Track.o Track.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/Track.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o TrackManager.o TrackManager.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/TrackManager.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Weapon.o Weapon.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/Weapon.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o AerodynamicsModel.o AerodynamicsModel.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation/dynamics", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/dynamics/AerodynamicsModel.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o SpaceDynamicsModel.o SpaceDynamicsModel.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/simulation/dynamics", 
+        "file": "/home/me/oe/OpenEaagles/src/simulation/dynamics/SpaceDynamicsModel.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Factory.o Factory.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/sensors", 
+        "file": "/home/me/oe/OpenEaagles/src/sensors/Factory.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Gmti.o Gmti.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/sensors", 
+        "file": "/home/me/oe/OpenEaagles/src/sensors/Gmti.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o sensorsFF.o sensorsFF.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/sensors", 
+        "file": "/home/me/oe/OpenEaagles/src/sensors/sensorsFF.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Stt.o Stt.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/sensors", 
+        "file": "/home/me/oe/OpenEaagles/src/sensors/Stt.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Tws.o Tws.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/sensors", 
+        "file": "/home/me/oe/OpenEaagles/src/sensors/Tws.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o DedFile.o DedFile.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/terrain/ded", 
+        "file": "/home/me/oe/OpenEaagles/src/terrain/ded/DedFile.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o DtedFile.o DtedFile.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/terrain/dted", 
+        "file": "/home/me/oe/OpenEaagles/src/terrain/dted/DtedFile.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o SrtmHgtFile.o SrtmHgtFile.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/terrain/srtm", 
+        "file": "/home/me/oe/OpenEaagles/src/terrain/srtm/SrtmHgtFile.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o DataFile.o DataFile.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/terrain", 
+        "file": "/home/me/oe/OpenEaagles/src/terrain/DataFile.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Factory.o Factory.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/terrain", 
+        "file": "/home/me/oe/OpenEaagles/src/terrain/Factory.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o QuadMap.o QuadMap.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/terrain", 
+        "file": "/home/me/oe/OpenEaagles/src/terrain/QuadMap.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o terrainFF.o terrainFF.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/terrain", 
+        "file": "/home/me/oe/OpenEaagles/src/terrain/terrainFF.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o disFF.o disFF.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/dis", 
+        "file": "/home/me/oe/OpenEaagles/src/dis/disFF.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o EmissionPduHandler.o EmissionPduHandler.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/dis", 
+        "file": "/home/me/oe/OpenEaagles/src/dis/EmissionPduHandler.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Factory.o Factory.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/dis", 
+        "file": "/home/me/oe/OpenEaagles/src/dis/Factory.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o NetIO.o NetIO.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/dis", 
+        "file": "/home/me/oe/OpenEaagles/src/dis/NetIO.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o NetIO-entity-state.o NetIO-entity-state.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/dis", 
+        "file": "/home/me/oe/OpenEaagles/src/dis/NetIO-entity-state.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o NetIO-munition-detonation.o NetIO-munition-detonation.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/dis", 
+        "file": "/home/me/oe/OpenEaagles/src/dis/NetIO-munition-detonation.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o NetIO-weapon-fire.o NetIO-weapon-fire.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/dis", 
+        "file": "/home/me/oe/OpenEaagles/src/dis/NetIO-weapon-fire.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Nib.o Nib.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/dis", 
+        "file": "/home/me/oe/OpenEaagles/src/dis/Nib.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Nib-entity-state.o Nib-entity-state.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/dis", 
+        "file": "/home/me/oe/OpenEaagles/src/dis/Nib-entity-state.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Nib-iff.o Nib-iff.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/dis", 
+        "file": "/home/me/oe/OpenEaagles/src/dis/Nib-iff.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Nib-munition-detonation.o Nib-munition-detonation.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/dis", 
+        "file": "/home/me/oe/OpenEaagles/src/dis/Nib-munition-detonation.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Nib-weapon-fire.o Nib-weapon-fire.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/dis", 
+        "file": "/home/me/oe/OpenEaagles/src/dis/Nib-weapon-fire.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Ntm.o Ntm.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/dis", 
+        "file": "/home/me/oe/OpenEaagles/src/dis/Ntm.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -I/usr/local/include/JSBSim -c -o Factory.o Factory.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/dynamics", 
+        "file": "/home/me/oe/OpenEaagles/src/dynamics/Factory.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -I/usr/local/include/JSBSim -c -o JSBSimModel.o JSBSimModel.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/dynamics", 
+        "file": "/home/me/oe/OpenEaagles/src/dynamics/JSBSimModel.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -I/usr/local/include/JSBSim -c -o LaeroModel.o LaeroModel.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/dynamics", 
+        "file": "/home/me/oe/OpenEaagles/src/dynamics/LaeroModel.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -I/usr/local/include/JSBSim -c -o RacModel.o RacModel.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/dynamics", 
+        "file": "/home/me/oe/OpenEaagles/src/dynamics/RacModel.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -I/usr/local/include/JSBSim -c -o dynamicsFF.o dynamicsFF.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/dynamics", 
+        "file": "/home/me/oe/OpenEaagles/src/dynamics/dynamicsFF.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o CadrgClut.o CadrgClut.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/maps/rpfMap", 
+        "file": "/home/me/oe/OpenEaagles/src/maps/rpfMap/CadrgClut.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o CadrgFile.o CadrgFile.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/maps/rpfMap", 
+        "file": "/home/me/oe/OpenEaagles/src/maps/rpfMap/CadrgFile.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o CadrgFrame.o CadrgFrame.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/maps/rpfMap", 
+        "file": "/home/me/oe/OpenEaagles/src/maps/rpfMap/CadrgFrame.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o CadrgFrameEntry.o CadrgFrameEntry.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/maps/rpfMap", 
+        "file": "/home/me/oe/OpenEaagles/src/maps/rpfMap/CadrgFrameEntry.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o CadrgMap.o CadrgMap.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/maps/rpfMap", 
+        "file": "/home/me/oe/OpenEaagles/src/maps/rpfMap/CadrgMap.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o CadrgTocEntry.o CadrgTocEntry.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/maps/rpfMap", 
+        "file": "/home/me/oe/OpenEaagles/src/maps/rpfMap/CadrgTocEntry.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o MapDrawer.o MapDrawer.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/maps/rpfMap", 
+        "file": "/home/me/oe/OpenEaagles/src/maps/rpfMap/MapDrawer.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o TexturePager.o TexturePager.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/maps/rpfMap", 
+        "file": "/home/me/oe/OpenEaagles/src/maps/rpfMap/TexturePager.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o TextureTable.o TextureTable.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/maps/rpfMap", 
+        "file": "/home/me/oe/OpenEaagles/src/maps/rpfMap/TextureTable.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Support.o Support.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/maps/rpfMap", 
+        "file": "/home/me/oe/OpenEaagles/src/maps/rpfMap/Support.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Factory.o Factory.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/maps", 
+        "file": "/home/me/oe/OpenEaagles/src/maps/Factory.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o mapsFF.o mapsFF.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/maps", 
+        "file": "/home/me/oe/OpenEaagles/src/maps/mapsFF.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o DataRecord.pb.o DataRecord.pb.cc", 
+        "directory": "/home/me/oe/OpenEaagles/src/recorder/protobuf", 
+        "file": "/home/me/oe/OpenEaagles/src/recorder/protobuf/DataRecord.pb.cc"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o DataRecorder.o DataRecorder.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/recorder", 
+        "file": "/home/me/oe/OpenEaagles/src/recorder/DataRecorder.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o DataRecordHandle.o DataRecordHandle.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/recorder", 
+        "file": "/home/me/oe/OpenEaagles/src/recorder/DataRecordHandle.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Factory.o Factory.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/recorder", 
+        "file": "/home/me/oe/OpenEaagles/src/recorder/Factory.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o FileReader.o FileReader.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/recorder", 
+        "file": "/home/me/oe/OpenEaagles/src/recorder/FileReader.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o FileWriter.o FileWriter.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/recorder", 
+        "file": "/home/me/oe/OpenEaagles/src/recorder/FileWriter.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o InputHandler.o InputHandler.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/recorder", 
+        "file": "/home/me/oe/OpenEaagles/src/recorder/InputHandler.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o NetInput.o NetInput.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/recorder", 
+        "file": "/home/me/oe/OpenEaagles/src/recorder/NetInput.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o NetOutput.o NetOutput.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/recorder", 
+        "file": "/home/me/oe/OpenEaagles/src/recorder/NetOutput.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o OutputHandler.o OutputHandler.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/recorder", 
+        "file": "/home/me/oe/OpenEaagles/src/recorder/OutputHandler.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o PrintHandler.o PrintHandler.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/recorder", 
+        "file": "/home/me/oe/OpenEaagles/src/recorder/PrintHandler.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o PrintPlayer.o PrintPlayer.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/recorder", 
+        "file": "/home/me/oe/OpenEaagles/src/recorder/PrintPlayer.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o PrintSelected.o PrintSelected.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/recorder", 
+        "file": "/home/me/oe/OpenEaagles/src/recorder/PrintSelected.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o recorderFF.o recorderFF.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/recorder", 
+        "file": "/home/me/oe/OpenEaagles/src/recorder/recorderFF.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o TabPrinter.o TabPrinter.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/recorder", 
+        "file": "/home/me/oe/OpenEaagles/src/recorder/TabPrinter.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Factory.o Factory.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/gui/glut", 
+        "file": "/home/me/oe/OpenEaagles/src/gui/glut/Factory.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o glutFF.o glutFF.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/gui/glut", 
+        "file": "/home/me/oe/OpenEaagles/src/gui/glut/glutFF.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o GlutDisplay.o GlutDisplay.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/gui/glut", 
+        "file": "/home/me/oe/OpenEaagles/src/gui/glut/GlutDisplay.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Shapes3D.o Shapes3D.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/gui/glut", 
+        "file": "/home/me/oe/OpenEaagles/src/gui/glut/Shapes3D.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o Factory.o Factory.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/otw", 
+        "file": "/home/me/oe/OpenEaagles/src/otw/Factory.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o OtwCigiCl.o OtwCigiCl.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/otw", 
+        "file": "/home/me/oe/OpenEaagles/src/otw/OtwCigiCl.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o OtwPC.o OtwPC.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/otw", 
+        "file": "/home/me/oe/OpenEaagles/src/otw/OtwPC.cpp"
+    }, 
+    {
+        "command": "g++ -g -O2 -fPIC -I/home/me/oe/OpenEaagles/include -I/usr/local/include -pthread -Wno-long-long -Wall -std=c++11 -c -o otwFF.o otwFF.cpp", 
+        "directory": "/home/me/oe/OpenEaagles/src/otw", 
+        "file": "/home/me/oe/OpenEaagles/src/otw/otwFF.cpp"
+    }
+]
