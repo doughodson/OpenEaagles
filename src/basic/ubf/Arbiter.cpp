@@ -112,7 +112,7 @@ Action* Arbiter::genComplexAction(Basic::List* const actionSet)
       std::cout << "Arbiter: chose action with vote= " << maxVote << std::endl;
 
    // Use our vote value; if its been set
-   if (getVote() > 0 && complexAction != 0) {
+   if (getVote() > 0 && complexAction != nullptr) {
       complexAction->setVote(getVote());
    }
 

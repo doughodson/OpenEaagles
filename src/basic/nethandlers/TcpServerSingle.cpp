@@ -154,7 +154,7 @@ bool TcpServerSingle::acceptConnection()
    if (isMessageEnabled(MSG_INFO)) {
        std::cout << "Accepted";
        char* ip = ::inet_ntoa(clientAddr.sin_addr);
-       if (ip != 0) {
+       if (ip != nullptr) {
            std::cout << " connection from " << ip;
        }
        std::cout << std::endl;

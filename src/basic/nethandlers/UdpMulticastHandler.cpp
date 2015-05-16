@@ -218,7 +218,7 @@ bool UdpMulticastHandler::joinTheGroup()
 
    // Find our network address
    uint32_t mg = htonl (INADDR_NONE);
-   if (multicastGroup != 0) mg = ::inet_addr(multicastGroup);
+   if (multicastGroup != nullptr) mg = ::inet_addr(multicastGroup);
    if (mg != INADDR_NONE) {
       setNetAddr(mg);
    }

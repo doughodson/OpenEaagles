@@ -216,7 +216,7 @@ std::ostream& TcpClient::serialize(std::ostream& sout, const int i, const bool s
         j = 4;
     }
 
-    if (ipAddr != 0) {
+    if (ipAddr != nullptr) {
         indent(sout,i+j);
         sout << "ipAddress: \"";
         sout << ipAddr;

@@ -56,7 +56,7 @@ void Agent::deleteData()
    if ( behavior!=nullptr ) { behavior->unref(); behavior = nullptr; }
    if ( state!=nullptr )    { state->unref(); state = nullptr; }
 
-   myActor = 0;
+   myActor = nullptr;
 }
 
 //------------------------------------------------------------------------------

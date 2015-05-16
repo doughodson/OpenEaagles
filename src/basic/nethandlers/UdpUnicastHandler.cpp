@@ -196,7 +196,7 @@ bool UdpUnicastHandler::setSlotIpAddress(const String* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
-        if (ipAddr != 0) delete[] ipAddr;
+        if (ipAddr != nullptr) delete[] ipAddr;
         ipAddr = msg->getCopyString();
         ok = true;
     }

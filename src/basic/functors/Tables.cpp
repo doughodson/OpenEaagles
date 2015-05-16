@@ -498,7 +498,7 @@ void Table3::copyData(const Table3& org, const bool cc)
     BaseClass::copyData(org);
 
     // Delete old data
-    if (!cc && ztable != nullptr) { delete[] ztable; ztable = 0; }
+    if (!cc && ztable != nullptr) { delete[] ztable; ztable = nullptr; }
 
     // Copy new data
     nz = org.nz;
@@ -1051,7 +1051,7 @@ END_SLOT_MAP()
 Table5::Table5() : Table4()
 {
    STANDARD_CONSTRUCTOR()
-   vtable = 0;
+   vtable = nullptr;
    nv = 0;
 }
 

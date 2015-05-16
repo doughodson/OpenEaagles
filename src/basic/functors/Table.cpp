@@ -77,7 +77,7 @@ Table& Table::operator=(const Table& org)
 
 Table* Table::clone() const
 {
-    return 0;
+    return nullptr;
 }
 
 void Table::copyData(const Table& org, const bool cc)

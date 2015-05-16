@@ -429,7 +429,7 @@ bool PosixHandler::setNetAddr(const uint32_t addr0)
 bool PosixHandler::setNetAddr(const char* const hostname)
 {
     bool ok = false;
-    if (hostname != 0) {
+    if (hostname != nullptr) {
         uint32_t addr0 = INADDR_NONE;
         if (std::isdigit(hostname[0])) {
             // If 'hostname' starts with a number then first try to use it as an IP address
@@ -442,16 +442,16 @@ bool PosixHandler::setNetAddr(const char* const hostname)
                std::cout << "PosixHandler::setNetAddr(): Looking up host name: " << hostname;
             }
             const hostent* const p = gethostbyname(hostname);
-            if (p != 0 && p->h_length > 0) {
+            if (p != nullptr && p->h_length > 0) {
 
                 // 'q' points to the four byte address (in network order) as a single unsigned integer
                 const unsigned int* const q = reinterpret_cast<const unsigned int*>(p->h_addr_list[0]);
-                if (q != 0) {
+                if (q != nullptr) {
                     struct in_addr in;
                     in.s_addr = *q;
                     addr0 = in.s_addr;
                     const char* const ipAddr = ::inet_ntoa(in);
-                    if (ipAddr != 0) {
+                    if (ipAddr != nullptr) {
                         if (isMessageEnabled(MSG_DEBUG)) {
                            std::cout << " -- IP Address: " << ipAddr << std::endl;
                         }
@@ -483,7 +483,7 @@ bool PosixHandler::setLocalAddr(const uint32_t addr0)
 bool PosixHandler::setLocalAddr(const char* const hostname)
 {
     bool ok = false;
-    if (hostname != 0) {
+    if (hostname != nullptr) {
         uint32_t addr0 = INADDR_NONE;
         if (std::isdigit(hostname[0])) {
             // If 'hostname' starts with a number then first try to use it as an IP address
@@ -496,16 +496,16 @@ bool PosixHandler::setLocalAddr(const char* const hostname)
                 std::cout << "PosixHandler::setLocalAddr(): Looking up host name: " << hostname;
             }
             const hostent* p = gethostbyname(hostname);
-            if (p != 0 && p->h_length > 0) {
+            if (p != nullptr && p->h_length > 0) {
                 // 'q' points to the four byte address (in network order) as a single unsigned integer
                 const unsigned int* const q = reinterpret_cast<const unsigned int*>(p->h_addr_list[0]);
-                if (q != 0) {
+                if (q != nullptr) {
                     struct in_addr in;
                     in.s_addr = *q;
                     addr0 = in.s_addr;
 
                     char* ipAddr = ::inet_ntoa(in);
-                    if (ipAddr != 0) {
+                    if (ipAddr != nullptr) {
                         if (isMessageEnabled(MSG_DEBUG)) {
                            std::cout << " -- IP Address: " << ipAddr << std::endl;
                         }
