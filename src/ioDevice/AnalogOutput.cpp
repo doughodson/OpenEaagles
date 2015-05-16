@@ -319,7 +319,7 @@ std::ostream& AnalogOutput::serialize(std::ostream& sout, const int i, const boo
    indent(sout,i+j);
    sout << "gain: " << getGain() << std::endl;
 
-   if (table != 0) {
+   if (table != nullptr) {
       indent(sout,i+j);
       sout << "table: ";
       table->serialize(sout,(i+j+4));

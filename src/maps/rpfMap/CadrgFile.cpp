@@ -76,7 +76,7 @@ void CadrgFile::copyData(const CadrgFile& org, const bool cc)
 void CadrgFile::deleteData()
 {
     for (int i = 0; i < MAX_TOC_ENTRIES; i++) {
-        if (entries[i] != 0) entries[i]->unref();
+        if (entries[i] != nullptr) entries[i]->unref();
         entries[i] = nullptr;
     }
     if (originalDir != nullptr) {
@@ -101,7 +101,7 @@ const CadrgTocEntry* CadrgFile::entry(int boundaryIndex) const
 //--------------------------------------------------------------------------
 CadrgTocEntry* CadrgFile::entry(int boundaryIndex)
 {
-    if (boundaryIndex >= 0 && entries[boundaryIndex] != 0) return entries[boundaryIndex];
+    if (boundaryIndex >= 0 && entries[boundaryIndex] != nullptr) return entries[boundaryIndex];
     else return nullptr;
 }
 
@@ -119,7 +119,7 @@ void CadrgFile::setEntries(CadrgTocEntry* newEntries[MAX_TOC_ENTRIES])
             entries[i] = nullptr;
         }
         // Now determine if we have an entry
-        if (newEntries[i] != 0) {
+        if (newEntries[i] != nullptr) {
             entries[i] = newEntries[i];
             entries[i]->ref();
             numBoundaries++;
@@ -578,10 +578,10 @@ bool CadrgFile::initialize(const char* dir)
         swap(reinterpret_cast<unsigned char*>(&boundaryRecNum), sizeof(boundaryRecNum));
 
         // If we are outside of our boundaries, print an error!
-        if (entries[boundaryRecNum] != 0 && boundaryRecNum <= numBoundaries - 1) {
+        if (entries[boundaryRecNum] != nullptr && boundaryRecNum <= numBoundaries - 1) {
             // Get our toc entry from our list
             entry = entries[boundaryRecNum];
-            if (entry != 0) {
+            if (entry != nullptr) {
                 entry->ref();
 
                 // Read in the starting frame row and column of this frame

@@ -102,7 +102,7 @@ void CadrgFrameEntry::loadClut()
 void CadrgFrameEntry::setFrame(CadrgFrame* newFrame)
 {
     if (newFrame != nullptr) {
-        if (frame != 0) frame->unref();
+        if (frame != nullptr) frame->unref();
         frame = newFrame;
         frame->ref();
     }

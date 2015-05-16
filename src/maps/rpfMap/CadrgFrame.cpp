@@ -348,7 +348,7 @@ int CadrgFrame::decompressSubframe(int x, int y, Subframe& subFrame)
 
     // This should never occur since all subFrames should be present,
     // but if it does occur, just put up black pixels on the screen.
-    if (((ptr = subFrameTable[y][x]) == 0) || masked[y][x]) {
+    if (((ptr = subFrameTable[y][x]) == nullptr) || masked[y][x]) {
         for (int i = 0; i < 256; i ++) {
             for (int j = 0; j < 256; j ++) {
                 subFrame.image[i][j] = static_cast<unsigned char>(blackpixel);

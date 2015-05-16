@@ -180,7 +180,7 @@ void TexturePager::freeTextures()
                         // Add the object back to the stack
                         stack->addHead(textureIndex);
                         // Tell our table to clear its object out
-                        table.setTextureObject(i, j, 0);
+                        table.setTextureObject(i, j, nullptr);
                         // Tell our map to release its frame entry's frames, so we aren't storing those unecessarily
                         map->releaseFrame(r + row, c + col, this);
                     }
@@ -295,7 +295,7 @@ void TexturePager::flushTextures()
                 BasicGL::Texture* textureIndex = table.getTexture(i, j);
                 if (textureIndex != nullptr) {
                     stack->addHead(textureIndex);
-                    table.setTextureObject(i, j, 0);
+                    table.setTextureObject(i, j, nullptr);
                     map->releaseFrame(i + row, j + col, this);
                 }
             }

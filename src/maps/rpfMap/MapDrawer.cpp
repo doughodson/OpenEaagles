@@ -260,7 +260,7 @@ void MapDrawer::drawFunc()
     //double lat = 0, lon = 0;
 
     // Determine our rotation, if needed.
-    if (getDisplay() != 0) getDisplay()->getOrtho(dLeft, dRight, dBottom, dTop, dNear, dFar);
+    if (getDisplay() != nullptr) getDisplay()->getOrtho(dLeft, dRight, dBottom, dTop, dNear, dFar);
 
     if (myMap != nullptr) {
         const double rLat = myMap->getReferenceLatDeg();
@@ -362,7 +362,7 @@ void MapDrawer::determineScaling(const int idx)
 // -----------------------------------------------------------------------
 void MapDrawer::drawMap(const int zone, const int idx)
 {
-    if (myMap != nullptr && pagers[idx] != nullptr && showMap && getDisplay() != 0){
+    if (myMap != nullptr && pagers[idx] != nullptr && showMap && getDisplay() != nullptr){
         // Update the tiles for the pager
         pagers[idx]->updateTextures(textureRow[idx], textureCol[idx]);
         // Set up for drawing

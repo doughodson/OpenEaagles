@@ -44,10 +44,10 @@ CadrgMap::CadrgMap()
     stack = nullptr;
     pathNames = nullptr;
     for (int i = 0; i < MAX_FILES; i++) {
-        cadrgFiles[i] = 0;
+        cadrgFiles[i] = nullptr;
     }
     for (int i = 0; i < MAX_FILES; i++) {
-        mergedCadrgFiles[i] = 0;
+        mergedCadrgFiles[i] = nullptr;
     }
     numFiles = 0;
     curCadrgFile = nullptr;
@@ -120,7 +120,7 @@ void CadrgMap::deleteData()
 //------------------------------------------------------------------------------
 int CadrgMap::getNumberOfCadrgFiles() {
     int num = 0;
-    for (int i = 0; i < MAX_FILES; i++) if (mergedCadrgFiles[i] != 0) num++;
+    for (int i = 0; i < MAX_FILES; i++) if (mergedCadrgFiles[i] != nullptr) num++;
     return num;
 }
 
@@ -171,7 +171,7 @@ void CadrgMap::sortMaps(const int count)
             // We are going to step through all of the files, and figure out which
             // file has the same levels.  As we do this, we will group all of the entries with
             // the same scale into one File, and then it will include all of the files with the same scale (level)
-            if (cadrgFiles[i] != 0) {
+            if (cadrgFiles[i] != nullptr) {
                 // First file, get the first entry, and figure out the scale
                 int nb = cadrgFiles[i]->getNumBoundaries();
                 for (int j = 0; j < nb; j++) {
@@ -187,7 +187,7 @@ void CadrgMap::sortMaps(const int count)
                             // We have to compare our scales with the new TOC scale, to see if we need a new category
                             bool match = false;
                             for (int k = 0; k < sCount; k++) {
-                                if (scales[k] != 0) {
+                                if (scales[k] != nullptr) {
                                     if (std::strcmp(scales[k].getString(), toc->getScale()) == 0) {
                                         match = true;
                                         num2Add[k]++;
@@ -207,8 +207,8 @@ void CadrgMap::sortMaps(const int count)
         int mFile = 0;
         // Clear our our merged files if we haven't done that
         for (int i = 0; i < MAX_FILES; i++) {
-            if (mergedCadrgFiles[i] != 0) mergedCadrgFiles[i]->unref();
-            mergedCadrgFiles[i] = 0;
+            if (mergedCadrgFiles[i] != nullptr) mergedCadrgFiles[i]->unref();
+            mergedCadrgFiles[i] = nullptr;
         }
         // Now we know the number to add to the scount, so we can create our new files
         for (int y = 0; y < sCount; y++) {
@@ -216,7 +216,7 @@ void CadrgMap::sortMaps(const int count)
             // Now go through our files, find the one that matches, and add it
             int tocIndex = 0;
             for (int i = 0; i < MAX_FILES; i++) {
-                if (cadrgFiles[i] != 0) {
+                if (cadrgFiles[i] != nullptr) {
                     int nb = cadrgFiles[i]->getNumBoundaries();
                     for (int j = 0; j < nb; j++) {
                         CadrgTocEntry* toc = cadrgFiles[i]->entry(j);

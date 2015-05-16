@@ -187,7 +187,7 @@ void OtwCigiCl::copyData(const OtwCigiCl& org, const bool cc)
       ir = NUM_BUFFERS;
    }
 
-   cigi = 0;
+   cigi = nullptr;
    if (org.cigi != nullptr) {
       cigi = org.cigi->clone();
    }
@@ -403,11 +403,11 @@ bool OtwCigiCl::updateOwnshipModel()
 {
    // Ownship active and type air vehicle?
    bool active = false;
-   if (getOwnship() != 0) active = getOwnship()->isActive() || getOwnship()->isMode(Simulation::Player::PRE_RELEASE);
+   if (getOwnship() != nullptr) active = getOwnship()->isActive() || getOwnship()->isMode(Simulation::Player::PRE_RELEASE);
 
    const Simulation::Player* av = getOwnship();
 
-   if (active && av != 0 && getOwnshipEntityControlPacket(iw) != nullptr) {
+   if (active && av != nullptr && getOwnshipEntityControlPacket(iw) != nullptr) {
       // We have an active, AirVehicle type ownship and an entity control packet ...
 
       CigiEntityCtrlV3* ec = getOwnshipEntityControlPacket(iw);
@@ -1636,53 +1636,53 @@ bool OtwCigiCl::sendCigiData()
                   //}
                   //}
                   // Explosion?
-                  if (model->explosionActive && model->explosionEC[ir] != 0) {
+                  if (model->explosionActive && model->explosionEC[ir] != nullptr) {
                      cigi->addPacketEntityCtrl(model->explosionEC[ir]);
                      model->explosionActive = false;
                   }
 
-                  if (model->parentActive && model->parentEC[ir] != 0) {
+                  if (model->parentActive && model->parentEC[ir] != nullptr) {
                      cigi->addPacketEntityCtrl(model->parentEC[ir]);
                      model->parentActive = (model->parentEC[ir]->GetEntityState() == CigiEntityCtrlV3::Active);
 
                      // Trail effect?
-                     if (model->trailActive && model->trailEC[ir] != 0) {
+                     if (model->trailActive && model->trailEC[ir] != nullptr) {
                         cigi->addPacketEntityCtrl(model->trailEC[ir]);
                         model->trailActive = (model->trailEC[ir]->GetEntityState() == CigiEntityCtrlV3::Active);
                      }
 
                      // Smoke affect?
-                     if (model->smokeActive && model->smokeEC[ir] != 0) {
+                     if (model->smokeActive && model->smokeEC[ir] != nullptr) {
                         cigi->addPacketEntityCtrl(model->smokeEC[ir]);
                         model->smokeActive = (model->smokeEC[ir]->GetEntityState() == CigiEntityCtrlV3::Active);
                      }
 
                      // Animation state?
-                     if (model->animationActive && model->animationCC[ir] != 0) {
+                     if (model->animationActive && model->animationCC[ir] != nullptr) {
                         cigi->addPacketComponentCtrl(model->animationCC[ir]);
                         model->animationActive = (model->animationCC[ir]->GetCompState() > 0);
                      }
 
                      // Damage state?
-                     if (model->damageActive && model->damageCC[ir] != 0) {
+                     if (model->damageActive && model->damageCC[ir] != nullptr) {
                         cigi->addPacketComponentCtrl(model->damageCC[ir]);
                         model->damageActive = (model->damageCC[ir]->GetCompState() > 1);
                      }
 
                      // Launcher articulated state?
-                     if (model->launcherApcActive && model->launcherAPC[ir] != 0) {
+                     if (model->launcherApcActive && model->launcherAPC[ir] != nullptr) {
                         cigi->addPacketArtPartCtrl(model->launcherAPC[ir]);
                         model->launcherApcActive = (model->launcherAPC[ir]->GetPitchEn());
                      }
 
                      // Attached part?
-                     if (model->attachedEcActive && model->attachedEC[ir] != 0) {
+                     if (model->attachedEcActive && model->attachedEC[ir] != nullptr) {
                         cigi->addPacketEntityCtrl(model->attachedEC[ir]);
                         model->attachedEcActive = (model->attachedEC[ir]->GetEntityState() == CigiEntityCtrlV3::Active);
                      }
 
                      // Attached part component control?
-                     if (model->attachedCcActive && model->attachedCC[ir] != 0 && model->attachedEC[ir] != 0) {
+                     if (model->attachedCcActive && model->attachedCC[ir] != nullptr && model->attachedEC[ir] != nullptr) {
                         cigi->addPacketComponentCtrl(model->attachedCC[ir]);
                         // we come and go with the attached part
                         model->attachedCcActive = (model->attachedEC[ir]->GetEntityState() == CigiEntityCtrlV3::Active);
