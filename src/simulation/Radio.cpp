@@ -207,7 +207,7 @@ bool Radio::setNumberOfChannels(const unsigned short n)
    // When 'n' is less than or equal to the max
    else if (n <= MAX_CHANNELS) {
       // delete the old table and create a new one.
-      if (chanFreqTbl != 0) delete[] chanFreqTbl;
+      if (chanFreqTbl != nullptr) delete[] chanFreqTbl;
       chanFreqTbl = new LCreal[n];
       numChan = n;
    }
@@ -326,7 +326,7 @@ bool Radio::setSlotChannels(const Basic::PairStream* const msg)
    {
       unsigned short chan = 1;
       const Basic::List::Item* item = msg->getFirstItem();
-      while (chan <= nc && item != 0) {
+      while (chan <= nc && item != nullptr) {
 
          const Basic::Pair* pair = static_cast<const Basic::Pair*>(item->getValue());
          const Basic::Frequency* p = static_cast<const Basic::Frequency*>(pair->object());

@@ -54,7 +54,7 @@ END_SLOT_MAP()
 //------------------------------------------------------------------------------
 // Constructors, destructor, copy operator and clone()
 //------------------------------------------------------------------------------
-RfSystem::RfSystem() : packetLock(0), antenna(0), antennaName(0)
+RfSystem::RfSystem() : packetLock(0), antenna(nullptr), antennaName(nullptr)
 {
    STANDARD_CONSTRUCTOR()
 
@@ -131,7 +131,7 @@ void RfSystem::deleteData()
    setAntenna(nullptr);
    setSlotAntennaName(nullptr);
    for (unsigned int i = 0; i < np && i < MAX_EMISSIONS; i++) {
-      if (packets[i] != 0) {
+      if (packets[i] != nullptr) {
          packets[i]->unref();
          packets[i] = nullptr;
       }
@@ -147,7 +147,7 @@ bool RfSystem::shutdownNotification()
    setAntenna(nullptr);
 
    for (unsigned int i = 0; i < np && i < MAX_EMISSIONS; i++) {
-      if (packets[i] != 0) {
+      if (packets[i] != nullptr) {
          packets[i]->unref();
          packets[i] = nullptr;
       }

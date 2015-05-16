@@ -141,7 +141,7 @@ void RfSensor::copyData(const RfSensor& org, const bool cc)
 //------------------------------------------------------------------------------
 void RfSensor::deleteData()
 {
-    setRanges(0,0);
+    setRanges(nullptr,0);
     setTrackManager(nullptr);
     setMasterMode(nullptr);
     setTrackManagerName(nullptr);
@@ -347,7 +347,7 @@ bool RfSensor::setRanges(const LCreal* const rngs, const int n)
 {
     // Clear old ranges
     if (ranges != nullptr) delete[] ranges;
-    ranges = 0;
+    ranges = nullptr;
     nRanges = 0;
     rngIdx = 1;
 

@@ -352,7 +352,7 @@ bool DataFile::computerRowIndex(unsigned int* const irow, const double lat) cons
    // Early out tests
    if (  (lat < getLatitudeSW() ||
           lat > getLatitudeNE()) ||    // the latitude's out of range, or
-         (irow == 0) ||                // the 'irow' pointer wasn't provided, or
+         (irow == nullptr) ||                // the 'irow' pointer wasn't provided, or
          !isDataLoaded()               // the data isn't loaded
       ) return false;
 
@@ -378,7 +378,7 @@ bool DataFile::computeColumnIndex(unsigned int* const icol, const double lon) co
    // Early out tests
    if (  (lon < getLongitudeSW() ||
           lon > getLongitudeNE()) ||      // the longitude's out of range, or
-         (icol == 0) ||                   // the 'icol' pointer wasn't provided, or
+         (icol == nullptr) ||                   // the 'icol' pointer wasn't provided, or
          !isDataLoaded()                  // the data isn't loaded
       ) return false;
 
@@ -403,7 +403,7 @@ bool DataFile::computeLatitude(double* const lat, const unsigned int irow) const
 {
    // Early out tests
    if ( (irow >= nptlat) ||   // the index isn't within range, or
-         (lat == 0)      ||   // the latitude pointer wasn't provided, or
+         (lat == nullptr)      ||   // the latitude pointer wasn't provided, or
          !isDataLoaded()      // the data isn't loaded
       ) return false;
 

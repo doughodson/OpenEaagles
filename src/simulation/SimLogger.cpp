@@ -602,7 +602,7 @@ std::ostream& SimLogger::SimLogEvent::makeTrackDataMsg(std::ostream& sout, const
         sout << "\t Velocity          =(" << tvel[0]    << "," << tvel[1]    << "," << tvel[2]    << ")"      << "\n";
 
         const RfTrack* const rfTrk = dynamic_cast<const RfTrack*>(trk);
-        if (rfTrk != 0) {
+        if (rfTrk != nullptr) {
            sout << "\t Signal            = " << rfTrk->getAvgSignal()       << "\n";
         }
     }
@@ -665,7 +665,7 @@ const char* SimLogger::NewPlayer::getDescription()
         sout << " ADDED_PLAYER:\n";
 
         // Print the Player data
-        if (thePlayer != 0) {
+        if (thePlayer != nullptr) {
             sout << "\tPlayer";
             makePlayerIdMsg(sout,thePlayer);
             makePlayerDataMsg(sout,pos,vel,angles);
@@ -815,7 +815,7 @@ const char* SimLogger::RemovePlayer::getDescription()
         sout << " REMOVED_PLAYER:\n";
 
         // Print the Player Data
-        if (thePlayer != 0) {
+        if (thePlayer != nullptr) {
             sout << "\tPlayer";
             makePlayerIdMsg(sout, thePlayer);
             makePlayerDataMsg(sout,pos,vel,angles);
@@ -1510,7 +1510,7 @@ const char* SimLogger::NewRwrTrack::getDescription()
 
         // Target Information
         if (theEmission != nullptr) {
-            if (theEmission->getOwnship() != 0) {
+            if (theEmission->getOwnship() != nullptr) {
                 sout << "\tTarget";
                 makePlayerIdMsg(sout, theEmission->getOwnship());
                 makePlayerDataMsg(sout,tgtPos,tgtVel,tgtAngles);

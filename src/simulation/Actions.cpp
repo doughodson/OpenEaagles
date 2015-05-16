@@ -124,7 +124,7 @@ bool Action::trigger(OnboardComputer* const mgr)
 bool Action::cancel()
 {
    completed = true;
-   setManager(0);
+   setManager(nullptr);
    return true;
 }
 

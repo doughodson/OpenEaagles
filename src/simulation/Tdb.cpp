@@ -324,7 +324,7 @@ unsigned int Tdb::processPlayers(Basic::PairStream* const players)
    // 1) Scan the player list ---
    // ---
    bool finished = false;
-   for (Basic::List::Item* item = players->getFirstItem(); item != 0 && numTgts < maxTargets && !finished; item = item->getNext()) {
+   for (Basic::List::Item* item = players->getFirstItem(); item != nullptr && numTgts < maxTargets && !finished; item = item->getNext()) {
 
       // Get the pointer to the target player
       Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
@@ -396,7 +396,7 @@ unsigned int Tdb::processPlayers(Basic::PairStream* const players)
 
                   // Terrain occulting if we have terrain data and we're not a space vehicle
                   bool occulted = false;
-                  if (terrain != 0 && !osSpaceVehicle) {
+                  if (terrain != nullptr && !osSpaceVehicle) {
 
                      const double tgtLat = target->getLatitude();
                      const double tgtLon = target->getLongitude();

@@ -176,7 +176,7 @@ void Bullet::resetBurstTrajectories()
 //------------------------------------------------------------------------------
 bool Bullet::burstOfBullets(const osg::Vec3* const pos, const osg::Vec3* const vel, const int num, const int rate, const int e)
 {
-   if (nbt < MBT && pos != 0 && vel != 0) {
+   if (nbt < MBT && pos != nullptr && vel != nullptr) {
       bursts[nbt].bPos = *pos;  // Burst positions -- world  (m)
       bursts[nbt].bVel = *vel;  // Burst velocities -- world (m)
       bursts[nbt].bTof = 0;    // Burst time of flight      (sec)
@@ -586,7 +586,7 @@ void Gun::burstFrame()
       // Log this event
       Player* ownship = static_cast<Player*>( findContainerByType(typeid(Player)) );
 
-      if (ownship != 0) {
+      if (ownship != nullptr) {
          BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_GUN_FIRED )
             SAMPLE_1_OBJECT( ownship )
             SAMPLE_1_VALUE( rcount )

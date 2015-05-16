@@ -165,7 +165,7 @@ std::ostream& ExternalStore::serialize(std::ostream& sout, const int i, const bo
       j = 4;
    }
 
-   if (type != 0) {
+   if (type != nullptr) {
       indent(sout,i+j);
       sout << "type: " << *type << std::endl;
    }

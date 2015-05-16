@@ -1380,7 +1380,7 @@ bool Autopilot::setControlStickPitchInput(const LCreal pos)
 int Autopilot::setThrottles(const LCreal* const positions, const unsigned int num)
 {
    unsigned int n = 0;
-   if (positions != 0) {
+   if (positions != nullptr) {
       for (unsigned int i = 0; i < num && i < MAX_THR; i++) {
          const LCreal pos = positions[i];
          if (pos >= -1.0f && pos <= 2.0f) {

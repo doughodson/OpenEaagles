@@ -293,25 +293,25 @@ bool StoresMgr::setGunSelected(const bool flg)
 // Empty "simple" get and release functions (derived classes can define these as needed)
 //------------------------------------------------------------------------------
 
-Missile* StoresMgr::getNextMissile()               { return 0; }
-const Missile* StoresMgr::getNextMissile() const   { return 0; }
-Sam* StoresMgr::getNextSam()                       { return 0; }
-const Sam* StoresMgr::getNextSam() const           { return 0; }
-Bomb* StoresMgr::getNextBomb()                     { return 0; }
-const Bomb* StoresMgr::getNextBomb() const         { return 0; }
-Chaff* StoresMgr::getNextChaff()                   { return 0; }
-const Chaff* StoresMgr::getNextChaff() const       { return 0; }
-Flare* StoresMgr::getNextFlare()                   { return 0; }
-const Flare* StoresMgr::getNextFlare() const       { return 0; }
-Decoy* StoresMgr::getNextDecoy()                   { return 0; }
-const Decoy* StoresMgr::getNextDecoy() const       { return 0; }
+Missile* StoresMgr::getNextMissile()               { return nullptr; }
+const Missile* StoresMgr::getNextMissile() const   { return nullptr; }
+Sam* StoresMgr::getNextSam()                       { return nullptr; }
+const Sam* StoresMgr::getNextSam() const           { return nullptr; }
+Bomb* StoresMgr::getNextBomb()                     { return nullptr; }
+const Bomb* StoresMgr::getNextBomb() const         { return nullptr; }
+Chaff* StoresMgr::getNextChaff()                   { return nullptr; }
+const Chaff* StoresMgr::getNextChaff() const       { return nullptr; }
+Flare* StoresMgr::getNextFlare()                   { return nullptr; }
+const Flare* StoresMgr::getNextFlare() const       { return nullptr; }
+Decoy* StoresMgr::getNextDecoy()                   { return nullptr; }
+const Decoy* StoresMgr::getNextDecoy() const       { return nullptr; }
 
-Missile* StoresMgr::releaseOneMissile()   { return 0; }
-Sam* StoresMgr::releaseOneSam()           { return 0; }
-Bomb* StoresMgr::releaseOneBomb()         { return 0; }
-Chaff* StoresMgr::releaseOneChaff()       { return 0; }
-Flare* StoresMgr::releaseOneFlare()       { return 0; }
-Decoy* StoresMgr::releaseOneDecoy()       { return 0; }
+Missile* StoresMgr::releaseOneMissile()   { return nullptr; }
+Sam* StoresMgr::releaseOneSam()           { return nullptr; }
+Bomb* StoresMgr::releaseOneBomb()         { return nullptr; }
+Chaff* StoresMgr::releaseOneChaff()       { return nullptr; }
+Flare* StoresMgr::releaseOneFlare()       { return nullptr; }
+Decoy* StoresMgr::releaseOneDecoy()       { return nullptr; }
 
 //------------------------------------------------------------------------------
 // Empty event handlers (derived classes can define these as needed)

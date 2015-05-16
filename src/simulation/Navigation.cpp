@@ -814,7 +814,7 @@ bool Navigation::setFeba(osg::Vec2* const points, const int n)
     feba = nullptr;
     nFeba = 0;
 
-    if (points != 0 && n >= 2) { // Need at least two points
+    if (points != nullptr && n >= 2) { // Need at least two points
         nFeba = n;
         feba = new osg::Vec2[nFeba];
         for (int i = 0; i < nFeba; i++) {

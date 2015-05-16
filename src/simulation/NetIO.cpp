@@ -728,7 +728,7 @@ Player* NetIO::createIPlayer(Nib* const nib)
    // ---
    // In range and we haven't done a type check yet.
    // ---
-   if (inRange && nib != 0 && nib->isEntityTypeUnchecked()) {
+   if (inRange && nib != nullptr && nib->isEntityTypeUnchecked()) {
 
       // Mark that we've been here.
       nib->setEntityTypeChecked( true );
@@ -1841,7 +1841,7 @@ bool NtmOutputNodeStd::addNtmSorted(Ntm* const newNtm)
          refItem = refItem->getNext();
       }
 
-      if (!inserted && !err) ntmList->insert(newItem,0);
+      if (!inserted && !err) ntmList->insert(newItem,nullptr);
 
       ok = true;
    }

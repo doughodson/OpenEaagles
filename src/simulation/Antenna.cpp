@@ -442,7 +442,7 @@ void Antenna::rfTransmit(Emission* const xmit)
       // ---
       bool haveGainTgt = false;
       double gainTgt[MAX_PLAYERS];
-      if (gainPattern != 0) {
+      if (gainPattern != nullptr) {
          Basic::Func1* gainFunc1 = dynamic_cast<Basic::Func1*>(gainPattern);
          Basic::Func2* gainFunc2 = dynamic_cast<Basic::Func2*>(gainPattern);
          if (gainFunc2 != nullptr) {

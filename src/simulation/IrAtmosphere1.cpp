@@ -170,7 +170,7 @@ bool IrAtmosphere1::calculateAtmosphereContribution(IrQueryMsg* const msg, LCrea
                                                 static_cast<LCreal>(ownship->getAltitudeM()),
                                                 viewingAngle);
       LCreal radiantIntensityInBin(0.0);
-      if (sigArray == 0) {
+      if (sigArray == nullptr) {
          // signature is a simple number
          // distribute simple signature evenly across atmosphere bins
          // need to apply overlapRatio to simple signature - already applied for complex signature in IrSignature...

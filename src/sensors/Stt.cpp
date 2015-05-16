@@ -55,7 +55,7 @@ void Stt::dynamics(const LCreal dt)
     // Update the antenna's Reference position
     // ---
     Simulation::TrackManager* tm = getTrackManager();
-    if (getAntenna() != nullptr && getOwnship() != 0 && tm != nullptr) {
+    if (getAntenna() != nullptr && getOwnship() != nullptr && tm != nullptr) {
 
         double az = 0.0;
         double el = 0.0;

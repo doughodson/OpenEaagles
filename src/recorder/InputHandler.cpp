@@ -30,13 +30,13 @@ const DataRecordHandle* InputHandler::readRecord()
       p = readRecordImp();
 
       // Did we get one?
-      if (p != 0) {
+      if (p != nullptr) {
          // Yes -- now check to see if this data record is enabled
          unsigned int id = p->getRecord()->id();
          bool enabled = isDataEnabled(id);
 
          if (enabled) finished = true;    // If it is then we're done
-         else { p->unref(); p = 0; }      // If itis disabled then we'll try again
+         else { p->unref(); p = nullptr; }      // If itis disabled then we'll try again
       }
 
       // When we didn't receive a record then we're done for now and they

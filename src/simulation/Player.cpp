@@ -526,7 +526,7 @@ void Player::copyData(const Player& org, const bool cc)
 //------------------------------------------------------------------------------
 void Player::deleteData()
 {
-   type = 0;
+   type = nullptr;
    signature = nullptr;
    irSignature = nullptr;
    sim = nullptr;
@@ -1515,7 +1515,7 @@ Radio* Player::getRadioByName(const char* const name1)
       fname[i] = '\0';
 
       // Now compare the first name with the name of the root system
-      Basic::Pair* pair = 0;
+      Basic::Pair* pair = nullptr;
       if ( *getRadioName() == fname ) {
          // The first name matches our root name ...
          if (name[i] == '.') {
@@ -2576,7 +2576,7 @@ void Player::processDetonation(const LCreal detRange, Weapon* const wpn)
       LCreal rng = detRange;
       LCreal blastRange  = 500.0;    // burst range (meters)
       LCreal lethalRange =  50.0;    // lethal range  (meters)
-      if (wpn != 0) {
+      if (wpn != nullptr) {
          launcher = wpn->getLaunchVehicle();
          blastRange = wpn->getMaxBurstRng();
          lethalRange  = wpn->getLethalRange();
@@ -2983,7 +2983,7 @@ bool Player::onReflectionsCancel(const Basic::Component* const p)
 bool Player::onIrMsgEventPlayer(IrQueryMsg* const msg)
 {
    // Player must be active and have an IR signature ...
-   if (isNotMode(ACTIVE) || irSignature == 0) {
+   if (isNotMode(ACTIVE) || irSignature == nullptr) {
       msg->clearIrSignature();
       return true;
    }
@@ -3092,7 +3092,7 @@ void Player::dynamics(const LCreal dt)
       // ---
       if (getAltitudeAgl() < 0.0 && isLocalPlayer() && isMajorType(AIR_VEHICLE | WEAPON | SPACE_VEHICLE)) {
          // We're below the ground!
-         this->event(CRASH_EVENT,0);
+         this->event(CRASH_EVENT,nullptr);
       }
    }
 
@@ -4417,7 +4417,7 @@ std::ostream& Player::serialize(std::ostream& sout, const int i, const bool slot
    sout << std::endl;
 
    //  Type of player vehicle ("F-16A", "Tank", "SA-6", etc.)
-   if (type != 0) {
+   if (type != nullptr) {
       indent(sout,i+j);
       sout << "type: " << *type << std::endl;
    }

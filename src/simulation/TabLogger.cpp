@@ -1143,7 +1143,7 @@ const char* TabLogger::LogPassiveTrack::getDescription()
                 makePlayerDataSpacer(sout);
 
             // Target Information
-            if (theEmission != 0) {
+            if (theEmission != nullptr) {
                 makePlayerIdMsg(sout, theEmission->getOwnship());
 
                 if (theEmission->getOwnship() != nullptr)

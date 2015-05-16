@@ -394,7 +394,7 @@ void AirAngleOnlyTrkMgr::processTrackList(const LCreal dt)
     }
 
     // Clean out the rest of the queue, if we had more than the maximum IR query messages
-    for (IrQueryMsg* q = getQuery(&tmp); q != 0; q = getQuery(&tmp)) {
+    for (IrQueryMsg* q = getQuery(&tmp); q != nullptr; q = getQuery(&tmp)) {
         q->unref();
     }
 

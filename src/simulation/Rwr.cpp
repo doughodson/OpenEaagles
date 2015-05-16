@@ -139,7 +139,7 @@ void Rwr::receive(const LCreal dt)
          // Is S/N above receiver threshold  ## dpg -- for now, don't include ECM emissions
          if (snDbl > getRfThreshold() && !em->isECM() && rptQueue.isNotFull()) {
             // Send report to the track manager
-            if (tm != 0) {
+            if (tm != nullptr) {
                tm->newReport(em, snDbl);
             }
 

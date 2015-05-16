@@ -452,7 +452,7 @@ void ScanGimbal::pseudoRandomScanController(const double)
     switch(getScanState()) {
         // reset state, must be in electronic mode or we will not operate
         case 0: {
-            if (prScanVertices != 0) {
+            if (prScanVertices != nullptr) {
                 if ( isGimbalType(ELECTRONIC) ) {
                     setServoMode(POSITION_SERVO);
                     setFastSlewMode(true);
@@ -982,7 +982,7 @@ bool ScanGimbal::setSlotScanRadius(const Basic::Number* const newScanRadius)
     if (newScanRadius != nullptr) {
         double x = newScanRadius->getDouble();
         const Basic::Angle* aa = dynamic_cast<const Basic::Angle*>(newScanRadius);
-        if (aa != 0) {
+        if (aa != nullptr) {
             x = Basic::Radians::convertStatic(*aa);
         }
         ok = setScanRadius(x);

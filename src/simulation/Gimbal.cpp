@@ -285,7 +285,7 @@ bool Gimbal::onRfEmissionEvent(Emission* const em)
             if (sc != nullptr && sc->getPowerSwitch() != System::PWR_OFF) sc->onRfEmissionEvent(em);
          }
          subcomponents->unref();
-         subcomponents = 0;
+         subcomponents = nullptr;
       }
    }
    return true;

@@ -175,7 +175,7 @@ void TrackManager::clearTracksAndQueues()
    const int n = nTrks;
    nTrks = 0;
    for (int i = 0; i < n; i++) {
-      if (tracks[i] != 0) {
+      if (tracks[i] != nullptr) {
          tracks[i]->clear();
          tracks[i]->unref();
          tracks[i] = nullptr;
@@ -1565,7 +1565,7 @@ void RwrTrkMgr::processTrackList(const LCreal dt)
    LCreal newRdot[MAX_REPORTS];
    osg::Vec3 tgtPos[MAX_REPORTS];
    LCreal tmp = 0.0;
-   for (Emission* em = getReport(&tmp); em != 0; em = getReport(&tmp)) {
+   for (Emission* em = getReport(&tmp); em != nullptr; em = getReport(&tmp)) {
       if (nReports < MAX_REPORTS) {
          // save the report
       Player* tgt = em->getOwnship();  // The emissions ownship is our target!

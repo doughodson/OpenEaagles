@@ -86,7 +86,7 @@ void Route::copyData(const Route& org, const bool cc)
         initToStptName = nullptr;
     }
 
-    to = 0; // find it using 'initToStptName' or 'initToStptIdx'
+    to = nullptr; // find it using 'initToStptName' or 'initToStptIdx'
 
     {
         Basic::String* n = nullptr;
@@ -339,7 +339,7 @@ bool Route::directTo(const Steerpoint* const stpt)
     }
 
     else if (stpt == nullptr) {
-      to = 0;
+      to = nullptr;
       stptIdx = 0;
       ok = true;
     }
@@ -478,7 +478,7 @@ unsigned int Route::getSteerpoints(Basic::safe_ptr<Steerpoint>* const stptList, 
         }
 
         // Get the route we're flying 'to'
-        while (item != 0 && i < max) {
+        while (item != nullptr && i < max) {
             Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
             Steerpoint* p = dynamic_cast<Steerpoint*>(pair->object());
             if (p != nullptr) {
@@ -505,7 +505,7 @@ unsigned int Route::getAllSteerpoints(Basic::safe_ptr<Steerpoint>* const stptLis
     Basic::PairStream* steerpoints = getComponents();
     if (stptList != nullptr && max > 0 && steerpoints != nullptr) {
         Basic::List::Item* item = steerpoints->getFirstItem();
-        while (item != 0 && i < max) {
+        while (item != nullptr && i < max) {
             Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
             Steerpoint* p = dynamic_cast<Steerpoint*>(pair->object());
             if (p != nullptr) {
@@ -666,7 +666,7 @@ bool Route::deleteSteerpoint(Steerpoint* const sp)
 
    // remove the steerpoint
    Basic::PairStream* steerpoints = getComponents();
-   Basic::Component::processComponents(steerpoints,typeid(Steerpoint),0,sp);
+   Basic::Component::processComponents(steerpoints,typeid(Steerpoint),nullptr,sp);
    if (steerpoints != nullptr) {
       steerpoints->unref();
       steerpoints = nullptr;

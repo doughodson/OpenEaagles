@@ -37,7 +37,7 @@ void OnboardComputer::copyData(const OnboardComputer& org, const bool cc)
       action = nullptr;
    }
 
-   action = 0; // Need to trigger the action
+   action = nullptr; // Need to trigger the action
 
    // Clear next to shoot list
    setNextToShoot(nullptr);

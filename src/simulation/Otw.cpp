@@ -1012,7 +1012,7 @@ void OtwModel::clear()
    state = INACTIVE;
    ageCount = 0;
    checked = false;
-   typeMapper = 0;
+   typeMapper = nullptr;
    rcount = 0;
    hotActive = false;
    playerID = 0;

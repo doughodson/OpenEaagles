@@ -208,7 +208,7 @@ void PrintPlayer::processRecordImp(const DataRecordHandle* const handle)
 
       bool printIt = (name == nullptr);
       if (!printIt) {
-         if (playerIdMsg != 0 && playerIdMsg->has_name()) {
+         if (playerIdMsg != nullptr && playerIdMsg->has_name()) {
             const char* sname = playerIdMsg->name().c_str();
             printIt = (*name == sname);
          }

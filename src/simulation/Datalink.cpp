@@ -501,7 +501,7 @@ bool Datalink::onDatalinkMessageEvent(Basic::Object* const msg)
    // Just pass it down to all of our subcomponents
    Basic::PairStream* subcomponents = getComponents();
    if (subcomponents != nullptr) {
-      for (Basic::List::Item* item = subcomponents->getFirstItem(); item != 0; item = item->getNext()) {
+      for (Basic::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
          Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
          Basic::Component* sc = static_cast<Basic::Component*>(pair->object());
          sc->event(DATALINK_MESSAGE, msg);

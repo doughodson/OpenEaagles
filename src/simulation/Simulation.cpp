@@ -487,27 +487,27 @@ void Simulation::reset()
    if ( !loggedHeadings ) {  // EventLogger Deprecated
       if (getAnyEventLogger() != nullptr) {
          {
-            TabLogger::TabLogEvent* evt = new TabLogger::LogPlayerData(0, 0); // code 0 for "header" msg
+            TabLogger::TabLogEvent* evt = new TabLogger::LogPlayerData(0, nullptr); // code 0 for "header" msg
             getAnyEventLogger()->log(evt);
             evt->unref();
          }
          {
-            TabLogger::TabLogEvent* evt = new TabLogger::LogActiveTrack(0, 0, 0); // code 0 for "header" msg
+            TabLogger::TabLogEvent* evt = new TabLogger::LogActiveTrack(0, nullptr, nullptr); // code 0 for "header" msg
             getAnyEventLogger()->log(evt);
             evt->unref();
          }
          {
-            TabLogger::TabLogEvent* evt = new TabLogger::LogPassiveTrack(0, 0, 0); // code 0 for "header" msg
+            TabLogger::TabLogEvent* evt = new TabLogger::LogPassiveTrack(0, nullptr, nullptr); // code 0 for "header" msg
             getAnyEventLogger()->log(evt);
             evt->unref();
          }
          {
-            TabLogger::TabLogEvent* evt = new TabLogger::LogWeaponActivity(0, 0, 0, 0, 0, 0.0); // code 0 for "header" msg
+            TabLogger::TabLogEvent* evt = new TabLogger::LogWeaponActivity(0, nullptr, nullptr, nullptr, 0, 0.0); // code 0 for "header" msg
             getAnyEventLogger()->log(evt);
             evt->unref();
          }
          {
-            TabLogger::TabLogEvent* evt = new TabLogger::LogGunActivity(0, 0, 0); // code 0 for "header" msg
+            TabLogger::TabLogEvent* evt = new TabLogger::LogGunActivity(0, nullptr, 0); // code 0 for "header" msg
             getAnyEventLogger()->log(evt);
             evt->unref();
          }
@@ -570,7 +570,7 @@ void Simulation::reset()
          }
          else {
             bgThreads[numBgThreads]->unref();
-            bgThreads[numBgThreads] = 0;
+            bgThreads[numBgThreads] = nullptr;
             if (isMessageEnabled(MSG_ERROR)) {
                std::cerr << "Simulation::reset(): ERROR, failed to create a background pool thread!" << std::endl;
             }

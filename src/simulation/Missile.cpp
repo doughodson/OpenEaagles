@@ -387,7 +387,7 @@ void Missile::weaponGuidance(const LCreal dt)
       // (or default to the values from above)
       // ---
       if (tgt != nullptr) {
-         calculateVectors(tgt, 0, &los, &vel, 0);
+         calculateVectors(tgt, nullptr, &los, &vel, nullptr);
       }
 
       // compute range to target
@@ -465,8 +465,8 @@ void Missile::weaponGuidance(const LCreal dt)
             setDetonationResults( DETONATE_DETONATION );
 
             // because we've just missed the target
-            setTargetPlayer(0,false);
-            setTargetTrack(0,false);
+            setTargetPlayer(nullptr,false);
+            setTargetTrack(nullptr,false);
 
             // Log the event
             const LCreal detRange = trngT;

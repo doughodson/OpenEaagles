@@ -392,7 +392,7 @@ void PrintSelected::processRecordImp(const DataRecordHandle* const handle)
    if (foundSelected &&  timeOnly) {
       // print the message, whatever it is, because it matches the time criteria
       std::string msgName = getEventMsgName(recMsg);  // This also sets the event message
-      if (eventMsg != 0) {
+      if (eventMsg != nullptr) {
          soutFields << std::left << std::setw(32) << msgName << "\t" << "HEADER" << "\t";
          soutVals << std::left << std::setw(32) << msgName << "\t" "VALUES" << "\t";
 
@@ -587,7 +587,7 @@ void PrintSelected::printMessage(std::ostream& soutFields, std::ostream& soutVal
 
    int fieldCount = descriptor->field_count();
 
-   const google::protobuf::FieldDescriptor* fieldDescriptor = 0;
+   const google::protobuf::FieldDescriptor* fieldDescriptor = nullptr;
 
    std::string msgDivider = ";   ";
    std::string fieldDivider = ", ";
@@ -759,7 +759,7 @@ std::string PrintSelected::getEventMsgName(const google::protobuf::Message* cons
 
    int fieldCount = descriptor->field_count();
    const google::protobuf::FieldDescriptor* fieldDescriptor = nullptr;
-   eventMsg = 0;
+   eventMsg = nullptr;
 
    if (descriptor->field_count() > 0) {
       for (int i = 0; i < fieldCount; i++) {

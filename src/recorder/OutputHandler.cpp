@@ -64,7 +64,7 @@ bool OutputHandler::shutdownNotification()
    // Pass the shutdown notification to our subcomponent recorders
    Basic::PairStream* subcomponents = getComponents();
    if (subcomponents != nullptr) {
-      for (Basic::List::Item* item = subcomponents->getFirstItem(); item != 0; item = item->getNext()) {
+      for (Basic::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
          Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
          OutputHandler* sc = static_cast<OutputHandler*>(pair->object());
          sc->event(SHUTDOWN_EVENT);

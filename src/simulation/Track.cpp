@@ -393,7 +393,7 @@ EMPTY_SERIALIZER(RfTrack)
 //------------------------------------------------------------------------------
 // Constructor(s)
 //------------------------------------------------------------------------------
-RfTrack::RfTrack() : lastEM(0)
+RfTrack::RfTrack() : lastEM(nullptr)
 {
     STANDARD_CONSTRUCTOR()
 
@@ -509,7 +509,7 @@ EMPTY_SERIALIZER(IrTrack)
 //------------------------------------------------------------------------------
 // Constructor(s)
 //------------------------------------------------------------------------------
-IrTrack::IrTrack() : lastQuery(0)
+IrTrack::IrTrack() : lastQuery(nullptr)
 {
     STANDARD_CONSTRUCTOR()
 

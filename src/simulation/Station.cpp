@@ -207,7 +207,7 @@ void Station::copyData(const Station& org, const bool cc)
    }
 
    // Copy the networks
-   if (org.networks != 0) {
+   if (org.networks != nullptr) {
       Basic::PairStream* copy = org.networks->clone();
       setSlotNetworks( copy );
       copy->unref();
@@ -1471,7 +1471,7 @@ std::ostream& Station::serialize(std::ostream& sout, const int i, const bool slo
     }
 
     // simulation model
-    if (sim != 0) {
+    if (sim != nullptr) {
         indent(sout,i+j);
         sout << "simulation: " << std::endl;
 

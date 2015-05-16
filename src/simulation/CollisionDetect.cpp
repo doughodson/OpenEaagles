@@ -355,7 +355,7 @@ void CollisionDetect::process(const LCreal dt)
 
       // If this player active  ...
       Player* const tgt = players[i].player;
-      if ( players[i].active && tgt != 0 && tgt->isActive() ) {
+      if ( players[i].active && tgt != nullptr && tgt->isActive() ) {
 
          // Target position and velocity vectors
          //   (ECEF or local gaming area NED)
@@ -581,7 +581,7 @@ bool CollisionDetect::setSlotPlayerTypes(const Basic::PairStream* const msg)
    if (msg != nullptr) {
       unsigned int mask = 0;
       const Basic::List::Item* item = msg->getFirstItem();
-      while (item != 0) {
+      while (item != nullptr) {
          const Basic::Pair* pair = static_cast<const Basic::Pair*>(item->getValue());
          const Basic::String* type = dynamic_cast<const Basic::String*>( pair->object() );
          if (type != nullptr) {

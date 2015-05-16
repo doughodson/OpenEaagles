@@ -28,7 +28,7 @@ END_SLOT_MAP()
 //------------------------------------------------------------------------------
 // Constructor
 //------------------------------------------------------------------------------
-NetOutput::NetOutput() : netHandler(0)
+NetOutput::NetOutput() : netHandler(nullptr)
 {
    STANDARD_CONSTRUCTOR()
    initData();

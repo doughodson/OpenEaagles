@@ -118,7 +118,7 @@ void LifeForm::fire()
                     missile->reset();
                     Missile* msl = mgr->releaseOneMissile();
                     if (msl != nullptr) {
-                        if (tgtAquired && tgtPlayer != 0) msl->setTargetPlayer(tgtPlayer, true);
+                        if (tgtAquired && tgtPlayer != nullptr) msl->setTargetPlayer(tgtPlayer, true);
                     }
                 }
             }
@@ -262,7 +262,7 @@ void LifeForm::look(const LCreal up, const LCreal sdws)
         }
         // else we are locking on target, and need to follow our target player
         else {
-            if (tgtPlayer == 0) lockMode = SEARCHING;
+            if (tgtPlayer == nullptr) lockMode = SEARCHING;
             else {
                 const osg::Vec3 vecPos = tgtPlayer->getPosition() - getPosition();
                 const LCreal az = lcAtan2(vecPos.y(), vecPos.x());

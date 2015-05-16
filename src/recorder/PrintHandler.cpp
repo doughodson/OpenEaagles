@@ -151,7 +151,7 @@ bool PrintHandler::openFile()
    if (filename == nullptr || filename->len() == 0) return true;
 
    // clear the old 'full' file name
-   setFullFilename(0);
+   setFullFilename(nullptr);
 
    // local flags (default is success)
    bool tOpened = true;

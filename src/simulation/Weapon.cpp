@@ -701,14 +701,14 @@ Weapon* Weapon::release()
             }
 
             BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_WEAPON_RELEASED )
-               SAMPLE_3_OBJECTS( flyout, getLaunchVehicle(), 0 )  // weapon, shooter, target
+               SAMPLE_3_OBJECTS( flyout, getLaunchVehicle(), nullptr )  // weapon, shooter, target
                SAMPLE_2_VALUES( 0, 0.0 )
             END_RECORD_DATA_SAMPLE()
 
             // TabLogger is deprecated
             if (getAnyEventLogger() != nullptr) {
                // type 1 for "launch", last two fields effectively null
-               TabLogger::TabLogEvent* evt = new TabLogger::LogWeaponActivity(1, getLaunchVehicle(), 0, 0, 0, 0.0);
+               TabLogger::TabLogEvent* evt = new TabLogger::LogWeaponActivity(1, getLaunchVehicle(), nullptr, nullptr, 0, 0.0);
                getAnyEventLogger()->log(evt);
                evt->unref();
             }
@@ -721,13 +721,13 @@ Weapon* Weapon::release()
          setHung(true);
 
          BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_WEAPON_HUNG )
-            SAMPLE_3_OBJECTS( this, getLaunchVehicle(), 0 )
+            SAMPLE_3_OBJECTS( this, getLaunchVehicle(), nullptr )
          END_RECORD_DATA_SAMPLE()
 
             // TabLogger is deprecated
             if (getAnyEventLogger() != nullptr) {
                // type 4 for "hung store"
-               TabLogger::TabLogEvent* evt = new TabLogger::LogWeaponActivity(4, getLaunchVehicle(), this, 0, 0, 0.0);
+               TabLogger::TabLogEvent* evt = new TabLogger::LogWeaponActivity(4, getLaunchVehicle(), this, nullptr, 0, 0.0);
                getAnyEventLogger()->log(evt);
                evt->unref();
             }

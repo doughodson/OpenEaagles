@@ -88,7 +88,7 @@ unsigned int QuadMap::getNumDataFiles() const
 const Basic::Terrain* QuadMap::getDataFile(const unsigned int i)  const
 {
     if (i < MAX_DATA_FILES) return dataFiles[i];
-    else return 0;
+    else return nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -110,7 +110,7 @@ unsigned int QuadMap::getElevations(
 
    // Early out tests
    if ( elevations == nullptr ||       // The elevation array wasn't provided, or
-        validFlags == 0 ||             // the valid flag array wasn't provided, or
+        validFlags == nullptr ||             // the valid flag array wasn't provided, or
         n < 2 ||                       // there are too few points, or
         (lat < -89.0 || lat > 89.0) || // and we're not starting at the north or south poles
         maxRng <= 0                    // the max range is less than or equal to zero
@@ -245,7 +245,7 @@ void QuadMap::findDataFiles()
 //------------------------------------------------------------------------------
 bool QuadMap::setDataFile(const unsigned int i, Basic::Terrain* newDF)
 {
-    if (i < MAX_DATA_FILES && newDF != 0 ) {
+    if (i < MAX_DATA_FILES && newDF != nullptr ) {
         if (dataFiles[i] == nullptr) {
             dataFiles[i] = newDF;
             dataFiles[i]->ref();

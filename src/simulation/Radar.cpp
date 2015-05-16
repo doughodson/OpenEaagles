@@ -149,7 +149,7 @@ void Radar::clearTracksAndQueues()
    // Clear out the queues
    // ---
    lcLock(myLock);
-   for (Emission* em = rptQueue.get(); em != 0; em = rptQueue.get()) { em->unref(); }
+   for (Emission* em = rptQueue.get(); em != nullptr; em = rptQueue.get()) { em->unref(); }
    while (rptSnQueue.isNotEmpty()) { rptSnQueue.get(); }
    lcUnlock(myLock);
 }
@@ -570,7 +570,7 @@ unsigned int Radar::computeRangeIndex(const LCreal rng)
 bool Radar::setSlotIGain(Basic::Number* const v)
 {
    bool ok = false;
-   if (v != 0) {
+   if (v != nullptr) {
       LCreal g = v->getReal();
       if (g >= 1.0) {
          ok = setIGain(g);

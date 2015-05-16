@@ -333,13 +333,13 @@ std::ostream& FileReader::serialize(std::ostream& sout, const int i, const bool 
    }
 
    // File name
-   if (filename != 0 && filename->len() > 0) {
+   if (filename != nullptr && filename->len() > 0) {
       indent(sout,i+j);
       sout << "filename: \"" << *filename << "\""<< std::endl;
    }
 
    // Path name
-   if (pathname != 0 && pathname->len() > 0) {
+   if (pathname != nullptr && pathname->len() > 0) {
       indent(sout,i+j);
       sout << "pathname: \"" << *pathname << "\"" << std::endl;
    }

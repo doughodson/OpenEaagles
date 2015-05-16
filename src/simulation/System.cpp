@@ -38,7 +38,7 @@ END_EVENT_HANDLER()
 //------------------------------------------------------------------------------
 // Constructors, destructor, copy operator and clone()
 //------------------------------------------------------------------------------
-System::System() : ownship(0)
+System::System() : ownship(nullptr)
 {
    STANDARD_CONSTRUCTOR()
 
@@ -177,7 +177,7 @@ bool System::killedNotification(Player* const p)
    // Just let all of our subcomponents know that we were just killed
    Basic::PairStream* subcomponents = getComponents();
    if(subcomponents != nullptr) {
-      for (Basic::List::Item* item = subcomponents->getFirstItem(); item != 0; item = item->getNext()) {
+      for (Basic::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
          Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
          Basic::Component* sc = static_cast<Basic::Component*>(pair->object());
          sc->event(KILL_EVENT, p);

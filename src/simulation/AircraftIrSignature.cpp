@@ -237,7 +237,7 @@ bool AircraftIrSignature::getIrSignature(IrQueryMsg* const msg)
             msg->setEmissivity(getEmissivity());
         }
         else{
-            msg->setSignatureByWaveband(0);
+            msg->setSignatureByWaveband(nullptr);
         }
     }
     return ok;

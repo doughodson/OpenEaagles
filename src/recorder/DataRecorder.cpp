@@ -727,7 +727,7 @@ bool DataRecorder::recordNewTrack(const Basic::Object* objs[4], const double val
    if (rfTrk != nullptr) {
 
       const Simulation::Emission* emissionData = rfTrk->getLastEmission();
-      if (emissionData != 0) {
+      if (emissionData != nullptr) {
          genEmissionData( newTrackMsg->mutable_emission_data(), emissionData);
       }
 
