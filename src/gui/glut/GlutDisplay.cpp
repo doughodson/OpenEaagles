@@ -359,7 +359,7 @@ void GlutDisplay::reshapeIt(int w, int h)
    if (w > 10 && h > 10) {
       BaseClass::reshapeIt(w, h);
 
-      if (subDisplays() != 0 && okToResize) {
+      if (subDisplays() != nullptr && okToResize) {
 
          // go through and put our new numbers in
          Basic::List::Item* item = subDisplays()->getFirstItem();
@@ -591,7 +591,7 @@ BasicGL::Graphic* GlutDisplay::findSelected(const GLint hits, const GLuint sbuff
    // ---
    if (id > 0) {
       Basic::Pair* pair = findBySelectName(id);
-      if (pair != 0) {
+      if (pair != nullptr) {
          sel = static_cast<Graphic*>(pair->object());
       }
    }
@@ -760,7 +760,7 @@ bool GlutDisplay::unregisterGlutDisplay(const int id)
 GlutDisplay* GlutDisplay::findRegisteredGlutDisplay(const int id)
 {
    GlutDisplay* found = nullptr;
-   for (int i = 0; found == 0 && i < numGlutDisplays; i++) {
+   for (int i = 0; found == nullptr && i < numGlutDisplays; i++) {
       if (id == idList[i]) {
          found = displayList[i];
       }

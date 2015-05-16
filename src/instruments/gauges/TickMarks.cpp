@@ -170,7 +170,7 @@ bool TickMarks::setTickGraphic(const BasicGL::Graphic* const newGraphic)
         myGraphic->unref();
         myGraphic = nullptr;
     }
-    if (newGraphic != 0) {
+    if (newGraphic != nullptr) {
         myGraphic = newGraphic->clone();
         myGraphic->container(this);
         ok = true;

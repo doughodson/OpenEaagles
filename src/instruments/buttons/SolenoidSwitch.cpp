@@ -253,7 +253,7 @@ void SolenoidSwitch::updateData(const LCreal dt)
         timer->stop();
         if (eventMap[currButtonId-1] != -1) {
             BasicGL::Display* myDisplay = (BasicGL::Display*)findContainerByType(typeid(BasicGL::Display));
-            if (myDisplay != 0) {
+            if (myDisplay != nullptr) {
                 myDisplay->buttonEvent(eventMap[currButtonId-1]);
                 //std::cout << "TIMER EVENT ID " << eventMap[currButtonId-1] << " sent!" << std::endl;
             }
@@ -315,7 +315,7 @@ bool SolenoidButton::onMouseDown()
     if (!noTimer) {
         // tell our switch to latch
         SolenoidSwitch* hs = (SolenoidSwitch*)findContainerByType(typeid(SolenoidSwitch));
-        if (hs != 0) hs->latch(getEventId());
+        if (hs != nullptr) hs->latch(getEventId());
     }
     return true;
 }
@@ -328,7 +328,7 @@ bool SolenoidButton::onSingleClick()
     if (!noTimer) {
         // if we are timing, we need to tell our switch that it needs to start timing
         SolenoidSwitch* hs = (SolenoidSwitch*)findContainerByType(typeid(SolenoidSwitch));
-        if (hs != 0) hs->determineLatch();
+        if (hs != nullptr) hs->determineLatch();
     }
     return true;
 }

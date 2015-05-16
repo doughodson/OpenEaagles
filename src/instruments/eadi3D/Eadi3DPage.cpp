@@ -692,7 +692,7 @@ void Eadi3DPage::windows(LCreal cas, LCreal alt, LCreal aoa, LCreal mach, LCreal
     /* cas */
     glPushMatrix();
     glTranslated(-2.4375, 1.59375, 0.);
-        if (airSpeedType != 0) {
+        if (airSpeedType != nullptr) {
             if (airSpeedType[0] == 'T') eadiObjs.drawObj(Eadi3DObjects::FONT_T);
             else if (airSpeedType[0] == 'G') eadiObjs.drawObj(Eadi3DObjects::FONT_G);
             else eadiObjs.drawObj(Eadi3DObjects::FONT_C);

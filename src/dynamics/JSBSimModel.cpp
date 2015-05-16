@@ -839,7 +839,7 @@ void JSBSimModel::reset()
 
         fdmex->LoadModel(model->getString());
         JSBSim::FGPropertyManager* propMgr = fdmex->GetPropertyManager();
-        if (propMgr != 0) {
+        if (propMgr != nullptr) {
             hasHeadingHold = propMgr->HasNode("ap/heading_hold") && propMgr->HasNode("ap/heading_setpoint");
             hasVelocityHold = propMgr->HasNode("ap/airspeed_hold") && propMgr->HasNode("ap/airspeed_setpoint");
             hasAltitudeHold = propMgr->HasNode("ap/altitude_hold") && propMgr->HasNode("ap/altitude_setpoint");
