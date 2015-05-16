@@ -181,7 +181,7 @@ void Nib::entityStatePdu2Nib(const EntityStatePDU* const pdu)
    // Life form states
    {
       unsigned int bits = ( (pdu->appearance >> 16) & 0x0000000f );
-      if (getPlayer() != 0 && getPlayer()->isMajorType(Simulation::Player::LIFE_FORM)) {
+      if (getPlayer() != nullptr && getPlayer()->isMajorType(Simulation::Player::LIFE_FORM)) {
          Simulation::LifeForm* lf = dynamic_cast<Simulation::LifeForm*>(getPlayer());
          if (lf != nullptr) {
             // get our life form state (appearance bit 16 - 19)
@@ -250,26 +250,26 @@ void Nib::processArticulationParameters(const EntityStatePDU* const pdu)
 
                // Landing gear (air vehicles only)
                case VpArticulatedPart::LANDING_GEAR :
-                  if (av != 0 && typeMetric == VpArticulatedPart::POSITION)
+                  if (av != nullptr && typeMetric == VpArticulatedPart::POSITION)
                      av->setGearHandleSwitch(value);
                   break;
 
                   // Weapon bay door(s) (air vehicles only)
                case VpArticulatedPart::LEFT_WEAPON_BAY_DOOR :
                case VpArticulatedPart::RIGHT_WEAPON_BAY_DOOR :
-                  if (av != 0 && typeMetric == VpArticulatedPart::POSITION)
+                  if (av != nullptr && typeMetric == VpArticulatedPart::POSITION)
                      av->setWeaponBayDoorSwitch(value);
                   break;
 
                   // Wing sweep (air vehicles only)
                case VpArticulatedPart::WING_SWEEP :
-                  if (av != 0 && typeMetric == VpArticulatedPart::AZIMUTH)
+                  if (av != nullptr && typeMetric == VpArticulatedPart::AZIMUTH)
                      av->setCmdWingSweepAngle(value);
                   break;
 
                   // Primary launcher position #1 (ground vehicles only)
                case VpArticulatedPart::PRIMARY_LAUNCHER_1 :
-                  if (gv != 0 && typeMetric == VpArticulatedPart::ELEVATION)
+                  if (gv != nullptr && typeMetric == VpArticulatedPart::ELEVATION)
                      gv->setLauncherPosition(value);
                   break;
 
@@ -289,7 +289,7 @@ void Nib::processArticulationParameters(const EntityStatePDU* const pdu)
                Simulation::StoresMgr* sms = p->getStoresManagement();
 
                // If needed, create the stores manager
-               if (sms == 0) {
+               if (sms == nullptr) {
                   sms = new Simulation::StoresMgr();
                   Basic::Pair* pair = new Basic::Pair("storesMgr", sms);
                   sms->unref();   // pair owns it
@@ -299,13 +299,13 @@ void Nib::processArticulationParameters(const EntityStatePDU* const pdu)
 
                // We need to make sure we have the attached weapon and that it's
                // either in INACTIVE mode (not launched) or LAUNCHED mode (kind == 0)
-               if (sms != 0) {
+               if (sms != nullptr) {
 
-                  Simulation::Weapon* wpn = 0;
+                  Simulation::Weapon* wpn = nullptr;
 
                   // find the weapon at station 'sta'
                   Basic::PairStream* stores = sms->getStores();
-                  if (stores != 0) {
+                  if (stores != nullptr) {
                      Basic::List::Item* item = stores->getFirstItem();
                      while (item != nullptr && wpn == nullptr) {
                         unsigned int s = 0;
@@ -830,7 +830,7 @@ unsigned char Nib::manageArticulationParameters(EntityStatePDU* const pdu)
 
                // found the NTM for the missile -- and it must be a DIS NTM
                apartMslTypes[i] = dynamic_cast<const Ntm*>(ntm);
-               if (apartMslTypes[i] != 0) apartMslTypes[i]->ref();
+               if (apartMslTypes[i] != nullptr) apartMslTypes[i]->ref();
             }
 
          }

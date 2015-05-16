@@ -308,7 +308,7 @@ bool EmissionPduHandler::setSlotDefaultOut(const Basic::Number* const msg)
 bool EmissionPduHandler::isMatchingRfSystemType(const Simulation::RfSensor* const p) const
 {
    bool match = false;
-   if (p != nullptr && sensorModel != 0) {
+   if (p != nullptr && sensorModel != nullptr) {
       match = (std::strcmp(sensorModel->getTypeId(),p->getTypeId()) == 0);
    }
    return match;
@@ -370,7 +370,7 @@ bool EmissionPduHandler::updateIncoming(const ElectromagneticEmissionPDU* const 
          Simulation::Antenna*  ap = getAntennaModel();
 
          // If we have both the RF system and antenna models ...
-         if (rp != 0 && ap != 0) {
+         if (rp != nullptr && ap != nullptr) {
             rp->setAntenna(ap); // The Radar owns the antenna
 
             // Reset
@@ -506,7 +506,7 @@ bool EmissionPduHandler::updateOutgoing(const LCreal curExecTime, Nib* const nib
    bool stateChg = false;
    if (nib != nullptr) {
       NetIO* const disIO = static_cast<NetIO*>(nib->getNetIO());
-      if (disIO != 0 && isUpdateRequired(curExecTime, &stateChg, nib)) {
+      if (disIO != nullptr && isUpdateRequired(curExecTime, &stateChg, nib)) {
 
          // Out going Electromagnetic Emission PDU is just a buffer to be filled
          unsigned int packet[NetIO::MAX_PDU_SIZE / 4];
@@ -665,7 +665,7 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
          bd.parameterData.pulseRepetitiveFrequency = static_cast<float>(beam->getPRF());          // Hz (Average)
          bd.parameterData.pulseWidth = static_cast<float>(beam->getPulseWidth()) * 1000000.0f;    // uSec
 
-         if (ant != 0) {
+         if (ant != nullptr) {
             bd.beamData.beamAzimuthCenter   = static_cast<float>(ant->getRefAzimuth());      // Radians
             bd.beamData.beamAzimuthSweep    = static_cast<float>(ant->getScanWidth()/2.0);   // Radians -- half angles
             bd.beamData.beamElevationCenter = static_cast<float>(ant->getRefElevation());    // Radians
@@ -745,7 +745,7 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
                      }
                      else {
                         const Nib* const tjtNib = dynamic_cast<const Nib*>( tgt->getNib() );
-                        if (tjtNib != 0) {
+                        if (tjtNib != nullptr) {
                            tjtPlayerID = tjtNib->getPlayerID();
                            tjtSiteID = tjtNib->getSiteID();
                            tjtAppID  = tjtNib->getApplicationID();

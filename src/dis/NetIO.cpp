@@ -40,7 +40,7 @@ public:
          CATEGORY_LVL, SUBCATEGORY_LVL, SPECIFIC_LVL, EXTRA_LVL };
 
 public:
-   NtmInputNode(const unsigned int level, const unsigned int code, const Ntm* ntm = 0);
+   NtmInputNode(const unsigned int level, const unsigned int code, const Ntm* ntm = nullptr);
 
    virtual const Ntm* findNtmByTypeCodes(
          const unsigned char  kind,
@@ -146,7 +146,7 @@ END_SLOT_MAP()
 //------------------------------------------------------------------------------
 // Constructors, destructor, copy operator and clone()
 //------------------------------------------------------------------------------
-NetIO::NetIO() : netInput(0), netOutput(0)
+NetIO::NetIO() : netInput(nullptr), netOutput(nullptr)
 {
    STANDARD_CONSTRUCTOR()
 
@@ -611,7 +611,7 @@ Simulation::Nib* NetIO::createNewOutputNib(Simulation::Player* const player)
          // Mapping another federate name to DIS site and application IDs.
          // Currently using parseFederateName(), but really should have a
          // more robust federate name to site/app ID map list.
-         if (fName != 0) ok = parseFederateName(&site, &app, *fName);
+         if (fName != nullptr) ok = parseFederateName(&site, &app, *fName);
          else ok = false;
       }
       nib->setFederateName(fName);
@@ -636,7 +636,7 @@ Simulation::Nib* NetIO::createNewOutputNib(Simulation::Player* const player)
 //------------------------------------------------------------------------------
 Nib* NetIO::findDisNib(const unsigned short playerID, const unsigned short site, const unsigned short app, const IoType ioType)
 {
-   Nib* nib = 0;
+   Nib* nib = nullptr;
    char cbuff[32];
    bool ok = makeFederateName(cbuff, 32, site, app);
    if (ok) {
@@ -920,10 +920,10 @@ const Dis::Ntm* NetIO::findNtmByTypeCodes(
          const unsigned char  extra
       ) const
 {
-   const Dis::Ntm* result = 0;
+   const Dis::Ntm* result = nullptr;
 
    const Dis::NtmInputNode* disRoot = dynamic_cast<const Dis::NtmInputNode*>( getRootNtmInputNode() );
-   if (disRoot != 0) {
+   if (disRoot != nullptr) {
 
       result = disRoot->findNtmByTypeCodes(kind, domain, countryCode, category, subcategory, specific, extra);
 
@@ -1348,7 +1348,7 @@ void NetIO::clearEmissionPduHandlers()
    while (nEmissionHandlers > 0) {
       nEmissionHandlers--;
       emissionHandlers[nEmissionHandlers]->unref();
-      emissionHandlers[nEmissionHandlers] = 0;
+      emissionHandlers[nEmissionHandlers] = nullptr;
    }
 }
 
@@ -1360,16 +1360,16 @@ void NetIO::clearEmissionPduHandlers()
 // By RfSensor data
 const EmissionPduHandler* NetIO::findEmissionPduHandler(const Simulation::RfSensor* const msg)
 {
-   const EmissionPduHandler* handler = 0;
+   const EmissionPduHandler* handler = nullptr;
    if (msg != nullptr && nEmissionHandlers > 0) {
       // Try to find one with a matching R/F sensor ...
-      for (unsigned int i = 0; i < nEmissionHandlers && handler == 0; i++) {
+      for (unsigned int i = 0; i < nEmissionHandlers && handler == nullptr; i++) {
          if (emissionHandlers[i]->isMatchingRfSystemType(msg)) {
             handler = emissionHandlers[i];
          }
       }
       // If not found, try to find a default outgoing handler
-      for (unsigned int i = 0; i < nEmissionHandlers && handler == 0; i++) {
+      for (unsigned int i = 0; i < nEmissionHandlers && handler == nullptr; i++) {
          if (emissionHandlers[i]->isDefaultOutgoingHandler()) {
             handler = emissionHandlers[i];
          }
@@ -1381,16 +1381,16 @@ const EmissionPduHandler* NetIO::findEmissionPduHandler(const Simulation::RfSens
 // By Emission System PDU data
 const EmissionPduHandler* NetIO::findEmissionPduHandler(const EmissionSystem* const msg)
 {
-   const EmissionPduHandler* handler = 0;
+   const EmissionPduHandler* handler = nullptr;
    if (msg != nullptr && nEmissionHandlers > 0) {
       // Try to find one with a matching emitter name
-      for (unsigned int i = 0; i < nEmissionHandlers && handler == 0; i++) {
+      for (unsigned int i = 0; i < nEmissionHandlers && handler == nullptr; i++) {
          if (emissionHandlers[i]->isMatchingRfSystemType(msg)) {
             handler = emissionHandlers[i];
          }
       }
       // If not found, try to find a default incoming handler
-      for (unsigned int i = 0; i < nEmissionHandlers && handler == 0; i++) {
+      for (unsigned int i = 0; i < nEmissionHandlers && handler == nullptr; i++) {
          if (emissionHandlers[i]->isDefaultIncomingHandler()) {
             handler = emissionHandlers[i];
          }
@@ -1808,14 +1808,14 @@ std::ostream& NetIO::serialize(std::ostream& sout, const int i, const bool slots
 
 
     // Network Input Handler
-    if (netInput != 0) {
+    if (netInput != nullptr) {
         indent(sout,i+j);
         sout << "netInput: ";
         netInput->serialize(sout,(i+j+4),true);
     }
 
     // Network Output Handler
-    if (netOutput != 0) {
+    if (netOutput != nullptr) {
         indent(sout,i+j);
         sout << "netOutput: ";
         netOutput->serialize(sout,(i+j+4),true);
@@ -1838,7 +1838,7 @@ void NetIO::testInputEntityTypes(const unsigned int n)
 {
    const NtmInputNode* root = getRootNtmInputNode();
    const unsigned int maxTypes = getNumInputEntityTypes();
-   if (n > 0 && root != 0 && maxTypes > 0) {
+   if (n > 0 && root != nullptr && maxTypes > 0) {
       for (unsigned int i = 0; i < n; i++) {
          int r = std::rand();
          LCreal nr = (static_cast<LCreal>(r) / static_cast<LCreal>(RAND_MAX));
@@ -1899,7 +1899,7 @@ void NetIO::testOutputEntityTypes(const unsigned int n)
 {
    const NtmOutputNode* root = getRootNtmOutputNode();
    const unsigned int maxTypes = getNumOutputEntityTypes();
-   if (n > 0 && root != 0 && maxTypes > 0) {
+   if (n > 0 && root != nullptr && maxTypes > 0) {
       for (unsigned int i = 0; i < n; i++) {
          int r = std::rand();
          LCreal nr = static_cast<LCreal>(r) / static_cast<LCreal>(RAND_MAX);
@@ -1915,7 +1915,7 @@ void NetIO::testOutputEntityTypes(const unsigned int n)
 
             std::cout << "; form: " << origP->getFactoryName();
             Basic::safe_ptr<Basic::String> origType( (Basic::String*) origP->getType() );
-            if (origType != 0) {
+            if (origType != nullptr) {
 
                char cbuff[64];
                lcStrcpy(cbuff, 64, origType->getString());
@@ -2007,7 +2007,7 @@ void NtmInputNode::copyData(const NtmInputNode& org, const bool cc)
       ourNtm->unref();
       ourNtm = nullptr;
    }
-   if (org.ourNtm != 0) {
+   if (org.ourNtm != nullptr) {
       ourNtm = org.ourNtm->clone();
    }
 
@@ -2015,7 +2015,7 @@ void NtmInputNode::copyData(const NtmInputNode& org, const bool cc)
       subnodeList->unref();
       subnodeList = nullptr;
    }
-   if (org.subnodeList != 0) {
+   if (org.subnodeList != nullptr) {
       subnodeList = org.subnodeList->clone();
    }
 }
@@ -2092,7 +2092,7 @@ const Ntm* NtmInputNode::findNtmByTypeCodes(
          // our subnodes to see if they can find a match
          if (level < EXTRA_LVL) {
             const Basic::List::Item* item = subnodeList->getFirstItem();
-            while (item != 0 && result == 0) {
+            while (item != nullptr && result == nullptr) {
                const NtmInputNode* subnode = static_cast<const NtmInputNode*>(item->getValue());
                result = subnode->findNtmByTypeCodes(kind, domain, countryCode, category, subcategory, specific, extra);
                item = item->getNext();

@@ -351,10 +351,10 @@ long Record::dsAtoln(const char* const s, const int n)
 void Record::dsGetString(char* const d, const char* const s, const int n)
 {
    // Make sure we have a place to copy it
-   if (d == 0) return;
+   if (d == nullptr) return;
 
    // Make sure we have something to copy
-   if (s == 0 || n <= 0) {
+   if (s == nullptr || n <= 0) {
       d[0] = '\0';
       return;
    }
@@ -380,7 +380,7 @@ void Record::dsGetString(char* const d, const char* const s, const int n)
 bool Record::dsIsString(const char* const p, const char* const refStr)
 {
    size_t len;
-   if (p == 0 || refStr == 0) return false;
+   if (p == nullptr || refStr == nullptr) return false;
    len = std::strlen(refStr);
    return std::strncmp(p,refStr,len) == 0;
 }
@@ -391,7 +391,7 @@ bool Record::dsIsString(const char* const p, const char* const refStr)
 double Record::dsLatitude(const char* const p)
 {
    double lat = 0.0f;
-   if (p != 0) {
+   if (p != nullptr) {
       char   h = *p;
       double d = dsAtofn(p+1, 2);
       double m = dsAtofn(p+3, 2);
@@ -409,7 +409,7 @@ double Record::dsLatitude(const char* const p)
 double Record::dsLongitude(const char* const p)
 {
    double lon = 0.0;
-   if (p != 0) {
+   if (p != nullptr) {
       char   h = *p;
       double d = dsAtofn(p+1, 3);
       double m = dsAtofn(p+4, 2);
@@ -427,7 +427,7 @@ double Record::dsLongitude(const char* const p)
 float Record::dsMagVariance(const char* const p)
 {
    double mv = 0.0;
-   if (p != 0) {
+   if (p != nullptr) {
       double d = dsAtofn(p+1, 3);
       double m = dsAtofn(p+4, 2);
       double f = dsAtofn(p+6, 1);
@@ -443,7 +443,7 @@ float Record::dsMagVariance(const char* const p)
 float Record::dsSlaveVariance(const char* const p)
 {
    double sv = 0.0;
-   if (p != 0) {
+   if (p != nullptr) {
       if (*p != ' ') {
          double v = dsAtofn(p+1, 3);
          sv = ( (*p == 'E') ? v : -v );
@@ -459,7 +459,7 @@ float Record::dsMagHeading(const char* const p)
 {
    char ct;
    double mh = 0.0;
-   if (p != 0) {
+   if (p != nullptr) {
       mh = dsAtofn(p,3);    // units
       ct = *(p+3);          // tenths
       if (ct != '/') mh += static_cast<float>(ct - '0')/10.0f;
@@ -472,7 +472,7 @@ float Record::dsMagHeading(const char* const p)
 //------------------------------------------------------------------------------
 float Record::dsElevation(const char* const p)
 {
-   if (p == 0) return 0.0f;
+   if (p == nullptr) return 0.0f;
    if (*p == '\0') return 0.0f;
 
    if (*p == '-')
@@ -490,7 +490,7 @@ float Record::dsElevation1(const char* const p)
    double e, et;
    char ct;
 
-   if (p == 0) return 0.0f;
+   if (p == nullptr) return 0.0f;
    if (*p == '\0') return 0.0f;
 
    e = 0.0;

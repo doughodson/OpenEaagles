@@ -65,7 +65,7 @@ void Airport::ident(char id[]) const
 {
    id[0] = '\0';
    const char* p = makePointer(ptbl->ident);
-   if (p != 0) {
+   if (p != nullptr) {
       // look for an ID
       if (*p != 'N' && *(p+1) != ' ') {
          dsGetString( id, p, ptbl->identLength );

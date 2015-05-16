@@ -72,7 +72,7 @@ bool NavaidLoader::load(const char* country)
    // Read the file and create NavaidKey's for all records in our country
    // ---
    Navaid navaid;
-   for (const char* r=db->getFirstRecord(); r != 0; r=db->getNextRecord()) {
+   for (const char* r=db->getFirstRecord(); r != nullptr; r=db->getNextRecord()) {
 
       navaid.setRecord(r);
 

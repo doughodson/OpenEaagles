@@ -138,7 +138,7 @@ void NetIO::processDetonationPDU(const DetonationPDU* const pdu)
          mPlayer->setDetonationLocation(loc);
 
          // Munition's launcher
-         if (mPlayer->getLaunchVehicle() == 0 && fPlayer != 0) {
+         if (mPlayer->getLaunchVehicle() == nullptr && fPlayer != nullptr) {
             mPlayer->setLaunchVehicle(fPlayer);
          }
       }

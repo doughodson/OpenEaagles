@@ -215,7 +215,7 @@ void Nib::updateTheIPlayer()
    // ---
    // If we haven't tried to created the IPlayer yet ...
    // ---
-   if (p == 0 && isEntityTypeUnchecked()) {
+   if (p == nullptr && isEntityTypeUnchecked()) {
       // create the player
       p = getNetIO()->createIPlayer(this);
    }
@@ -223,7 +223,7 @@ void Nib::updateTheIPlayer()
    // ---
    // Update the player's data from our object's attributes
    // ---
-   if (p != 0) {
+   if (p != nullptr) {
       // This transfers player data from our basic NIB to the player.
       nib2PlayerState();
       // ... transfer additional data in the future ....
@@ -295,7 +295,7 @@ bool Nib::processElectromagneticEmissionPDU(const ElectromagneticEmissionPDU* co
          // ---
          // Does a handler for this system already exist in our list?
          // ---
-         for (unsigned char i = 0; i < numEmissionSystems && handler == 0; i++) {
+         for (unsigned char i = 0; i < numEmissionSystems && handler == nullptr; i++) {
             if (idNum == emitterSysHandler[i]->getEmitterIdNumber()) {
                // Yes it does!
                handler = emitterSysHandler[i];
