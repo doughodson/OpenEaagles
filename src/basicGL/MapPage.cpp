@@ -348,7 +348,7 @@ bool MapPage::aircraft2Screen(const LCreal acX, const LCreal acY, LCreal* const 
 bool MapPage::earth2Aircraft(const LCreal earthX, const LCreal earthY, LCreal* const acX, LCreal* const acY) const
 {
    bool ok = false;
-   if (acX != 0 && acY != 0) {
+   if (acX != nullptr && acY != nullptr) {
       const double x =  (earthX * headingCos) + (earthY * headingSin);
       const double y = -(earthX * headingSin) + (earthY * headingCos);
       *acX = static_cast<LCreal>(x);
@@ -365,7 +365,7 @@ bool MapPage::earth2Aircraft(const LCreal earthX, const LCreal earthY, LCreal* c
 bool MapPage::latLon2Earth(const double lat, const double lon, LCreal* const earthX, LCreal* const earthY) const
 {
    bool ok = false;
-   if (earthX != 0 && earthY != 0) {
+   if (earthX != nullptr && earthY != nullptr) {
       *earthX = static_cast<LCreal>((lat - referenceLat) * 60.0);
       *earthY = static_cast<LCreal>((lon - referenceLon) * 60.0 * cosineLatReference);
       ok = true;

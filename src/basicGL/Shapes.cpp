@@ -782,9 +782,9 @@ void Triangle::drawFunc()
                 ColorGradient* colGradient = dynamic_cast<ColorGradient*>(getColor());
 
                 for (unsigned int i = 0; i < nv; i++) {
-                    if (colGradient != 0) {
+                    if (colGradient != nullptr) {
                         Basic::Color* col = colGradient->getColorByIdx(i+1);
-                        if (col != 0)
+                        if (col != nullptr)
                             glColor4f(static_cast<GLfloat>(col->red()),
                                       static_cast<GLfloat>(col->green()),
                                       static_cast<GLfloat>(col->blue()),

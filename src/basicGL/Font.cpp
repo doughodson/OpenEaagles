@@ -92,7 +92,7 @@ Font& Font::operator=(const Font& org)
 
 Font* Font::clone() const
 {
-    return 0;
+    return nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -389,7 +389,7 @@ bool Font::setSlotLookupTable(const Basic::List* const sltobj)
     bool ok = true;
     if (sltobj != nullptr) {
         // Load the LUT
-        if (pLUT == 0) pLUT = new unsigned char[LUT_SIZE];
+        if (pLUT == nullptr) pLUT = new unsigned char[LUT_SIZE];
         int values[LUT_SIZE];
         int nn = sltobj->getNumberList(values, LUT_SIZE);
         int ii = 0;

@@ -144,7 +144,7 @@ void Field::deleteData()
     icp   = 0;
     inpDspMode = 0;
     inpModeHold = false;
-    setSlotFont(0);
+    setSlotFont(nullptr);
 }
 
 //------------------------------------------------------------------------------
@@ -458,7 +458,7 @@ void Field::drawFunc()
     // ---
     int ll = line();
     int cc = column();
-    if (ll == 0 && parent != 0) {
+    if (ll == 0 && parent != nullptr) {
         ll = parent->line();
         cc = parent->column();
     }
@@ -478,11 +478,11 @@ void Field::drawFunc()
     // only use default colors if we aren't inheriting our container's colors
 
     if (!isInheritColor()) {
-        if (getColorName() == 0 && getColor() == 0) {
-            const Basic::Color* cc = 0;
+        if (getColorName() == nullptr && getColor() == nullptr) {
+            const Basic::Color* cc = nullptr;
             if (isHighLighted()) cc = dsp->getHighlightColor();
             else cc = dsp->getNormColor();
-            if (cc != 0) {
+            if (cc != nullptr) {
                 const osg::Vec4* p = cc->getRGBA();
                 dsp->setColor(*p);
                 restoreColor = true;
@@ -643,7 +643,7 @@ bool Field::setSlotUnderline(const Basic::Number* const suobj)
 
         // Set our children's mode
         Basic::PairStream* subcomponents = getComponents();
-        if (subcomponents != 0) {
+        if (subcomponents != nullptr) {
 
             const Basic::List::Item* item = subcomponents->getFirstItem();
             while (item != nullptr) {

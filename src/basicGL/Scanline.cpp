@@ -223,14 +223,14 @@ void Scanline::clear()
    while (nET > 0) {
       --nET;
       et[nET]->unref();
-      et[nET] = 0;
+      et[nET] = nullptr;
    }
 
    // empty the polygon table
    while (nPT > 0) {
       --nPT;
       pt[nPT]->unref();
-      pt[nPT] = 0;
+      pt[nPT] = nullptr;
    }
 }
 
@@ -617,7 +617,7 @@ IMPLEMENT_PARTIAL_SUBCLASS(Scanline::PolyData,"ScanlinePolyData")
 EMPTY_SLOTTABLE(Scanline::PolyData)
 EMPTY_SERIALIZER(Scanline::PolyData)
 
-Scanline::PolyData::PolyData() : polygon(0), orig(0)
+Scanline::PolyData::PolyData() : polygon(nullptr), orig(nullptr)
 {
    STANDARD_CONSTRUCTOR()
 
@@ -627,7 +627,7 @@ Scanline::PolyData::PolyData() : polygon(0), orig(0)
    aptEdge2 = false;
 }
 
-Scanline::PolyData::PolyData(const Scanline::PolyData& org) : polygon(0), orig(0)
+Scanline::PolyData::PolyData(const Scanline::PolyData& org) : polygon(nullptr), orig(nullptr)
 {
    STANDARD_CONSTRUCTOR()
    copyData(org,true);
@@ -699,7 +699,7 @@ IMPLEMENT_PARTIAL_SUBCLASS(Scanline::Edge,"ScanlineEdge")
 EMPTY_SLOTTABLE(Scanline::Edge)
 EMPTY_SERIALIZER(Scanline::Edge)
 
-Scanline::Edge::Edge() : polygon(0)
+Scanline::Edge::Edge() : polygon(nullptr)
 {
    STANDARD_CONSTRUCTOR()
 
@@ -761,7 +761,7 @@ Scanline::Edge::Edge(
                const LCreal v0[2],
                const LCreal v1[2],
                PolyData* const p
-            ) : polygon(0)
+            ) : polygon(nullptr)
 {
    if (v0[1] <= v1[1]) {
       lv.set(v0[0],v0[1]);
@@ -787,7 +787,7 @@ Scanline::Edge::Edge(
    nslope.set(0.0f,0.0f,0.0f);
 }
 
-Scanline::Edge::Edge(const Scanline::Edge& org) : polygon(0)
+Scanline::Edge::Edge(const Scanline::Edge& org) : polygon(nullptr)
 {
    STANDARD_CONSTRUCTOR()
    copyData(org,true);

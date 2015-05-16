@@ -360,7 +360,7 @@ void Display::keyboardEvent(const int key)
       if (isMessageEnabled(MSG_DEBUG)) {
          std::cout << "Display::keyboardEvent(" << this << "," << key << "), focusPtr = " << focusPtr << std::endl;
       }
-      if (focusPtr != 0) focusPtr->event(key);
+      if (focusPtr != nullptr) focusPtr->event(key);
    }
 
 }
@@ -834,7 +834,7 @@ void Display::setColor(const char* cname1)
    if (*colorName == cname1) return;
 
    Basic::Color* newColor = getColor(cname1);
-   if (newColor != 0) {
+   if (newColor != nullptr) {
       colorName->setStr(cname1);
       color = *(newColor->getRGBA());
       lcColor4v(color.ptr());
@@ -954,7 +954,7 @@ Font* Display::getFont(const char* const fontName)
 // getFont() -- by name (const version)
 const Font* Display::getFont(const char* const fontName) const
 {
-   const Font* ft = 0;
+   const Font* ft = nullptr;
    if (fontList != nullptr) {
       const Basic::Pair* p = fontList->findByName(fontName);
       if (p != nullptr) ft = static_cast<const Font*>(p->object());
@@ -977,7 +977,7 @@ const Font* Display::getFont(const Basic::Identifier* const fontName) const
 // getFont() -- by index
 Font* Display::getFont(const int index)
 {
-   Font* ft = 0;
+   Font* ft = nullptr;
    if (fontList != nullptr) {
       Basic::Pair* p = fontList->getPosition(index+1);
       if (p != nullptr) ft = static_cast<Font*>(p->object());
@@ -988,7 +988,7 @@ Font* Display::getFont(const int index)
 // getFont() -- by index (const version)
 const Font* Display::getFont(const int index) const
 {
-   const Font* ft = 0;
+   const Font* ft = nullptr;
    if (fontList != nullptr) {
       const Basic::Pair* p = fontList->getPosition(index+1);
       if (p != nullptr) ft = static_cast<const Font*>(p->object());
@@ -1073,7 +1073,7 @@ bool Display::setNormalFont(const char* const fontName)
    }
    else {
       if (normalFontName != nullptr) { normalFontName->unref(); normalFontName = nullptr; }
-      setNormalFont(static_cast<Font*>(0));
+      setNormalFont(static_cast<Font*>(nullptr));
    }
    return true;
 }
@@ -1090,7 +1090,7 @@ bool Display::setNormalFont(const Basic::Identifier* const fontName)
    }
    else {
       if (normalFontName != nullptr) { normalFontName->unref(); normalFontName = nullptr; }
-      setNormalFont(static_cast<Font*>(0));
+      setNormalFont(static_cast<Font*>(nullptr));
    }
    return true;
 }
@@ -2100,7 +2100,7 @@ std::ostream& Display::serialize(std::ostream& sout, const int i, const bool slo
    indent(sout,i+j);
    sout << "}" << std::endl;
 
-   if (getNormalFont() != 0) {
+   if (getNormalFont() != nullptr) {
       indent(sout,i+j);
       sout << "normalFont:" << std::endl;
       indent(sout,i+j+4);

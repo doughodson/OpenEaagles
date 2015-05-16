@@ -266,9 +266,9 @@ void Graphic::deleteData()
     m.makeIdentity();
     m1.makeIdentity();
 
-    setVertices(0,0);
-    setNormals(0,0);
-    setTextureCoord(0,0);
+    setVertices(nullptr,0);
+    setNormals(nullptr,0);
+    setTextureCoord(nullptr,0);
 
     // delete color table name, but not the color
     if (colorName != nullptr) colorName->unref();
@@ -515,7 +515,7 @@ void Graphic::draw()
         if (texture == 0) {
             // If zero(0) was returned, the texture wasn't found
             // So forget about it.
-            texName =0;
+            texName =nullptr;
         }
     }
 
@@ -1241,7 +1241,7 @@ bool Graphic::setSlotVertices(const Basic::PairStream* const msg)
    if (msg != nullptr) {
 
         // Clear any old vertices
-        setVertices(0,0);
+        setVertices(nullptr,0);
 
         // allocate space for the vertices
         unsigned int n = msg->entries();
@@ -1293,7 +1293,7 @@ bool Graphic::setSlotNormals(const Basic::PairStream* const msg)
    if (msg != nullptr) {
 
         // Clear any old normals
-        setNormals(0,0);
+        setNormals(nullptr,0);
 
         // allocate space for the vertices
         unsigned int n = msg->entries();
@@ -1346,7 +1346,7 @@ bool Graphic::setSlotTexCoord(const Basic::PairStream* const msg)
    if (msg != nullptr) {
 
         // Clear any old texture coords
-        setTextureCoord(0,0);
+        setTextureCoord(nullptr,0);
 
         // allocate space for the vertices
         unsigned int n = msg->entries();

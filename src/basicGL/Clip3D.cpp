@@ -240,10 +240,10 @@ Polygon* Clip3D::clip(const Polygon& inPoly) const
       outPoly->setVertices(p,n);
 
       if (pn != nullptr) outPoly->setNormals(pn,n);
-      else outPoly->setNormals(0,0);
+      else outPoly->setNormals(nullptr,0);
 
       if (pt != nullptr) outPoly->setTextureCoord(pt,n);
-      else outPoly->setTextureCoord(0,0);
+      else outPoly->setTextureCoord(nullptr,0);
    }
    else {
       // Nothing really to output, so delete the output polygon

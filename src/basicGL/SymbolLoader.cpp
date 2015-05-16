@@ -149,7 +149,7 @@ int SymbolLoader::getSymbolIndex(const BasicGL::Graphic* const mySymbol) const
 //------------------------------------------------------------------------------
 SlSymbol* SymbolLoader::getSymbol(const int xPixel, const int yPixel)
 {
-   SlSymbol* sym = 0;
+   SlSymbol* sym = nullptr;
    if (getDisplay() != nullptr) {
 
       // we have to do a little math and figure our pixel to inches value
@@ -343,7 +343,7 @@ bool SymbolLoader::removeSymbol(const int idx)
             BasicGL::Graphic* g = static_cast<BasicGL::Graphic*>(pair->object());
 
             Basic::PairStream* x = getComponents();
-            Basic::Component::processComponents(x, typeid(BasicGL::Graphic), 0, g);
+            Basic::Component::processComponents(x, typeid(BasicGL::Graphic), nullptr, g);
             x->unref();
          }
 
@@ -709,7 +709,7 @@ bool SymbolLoader::setSymbolColor(const int idx, const char* name, const Basic::
                // and change 'g' to point to the subcomponent instead.
                if (name != nullptr) {
                   Basic::Pair* spair = g->findByName(name);
-                  if (spair != 0) {
+                  if (spair != nullptr) {
                      // subcomponent found by name
                      g = static_cast<BasicGL::Graphic*>(spair->object());
                   }
@@ -752,7 +752,7 @@ bool SymbolLoader::setSymbolColor(const int idx, const char* name, const Basic::
                // and change 'g' to point to the subcomponent instead.
                if (name != nullptr) {
                   Basic::Pair* spair = g->findByName(name);
-                  if (spair != 0) {
+                  if (spair != nullptr) {
                      // subcomponent found by name
                      g = static_cast<BasicGL::Graphic*>(spair->object());
                   }
@@ -942,7 +942,7 @@ void SymbolLoader::draw()
                            symbols[i]->setHdgGraphics(phdg);
                         }
                      }
-                     if (phdg != 0) {
+                     if (phdg != nullptr) {
                         Basic::Degrees* angObj = symbols[i]->getHdgAngleObj();
                         if (angObj == nullptr) {
                            angObj = new Basic::Degrees();
@@ -1014,7 +1014,7 @@ int SymbolLoader::getSymbols(Basic::safe_ptr<SlSymbol>* const newSyms, const int
 bool SymbolLoader::setSlotTemplates(Basic::PairStream* msg)
 {
    bool ok = false;
-   if (msg != 0) {
+   if (msg != nullptr) {
       if (templates != nullptr) templates->unref();
       templates = msg;
       if (templates != nullptr) templates->ref();

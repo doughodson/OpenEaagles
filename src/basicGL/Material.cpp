@@ -115,7 +115,7 @@ bool Material::setSlotAmbientColor(const Basic::Number* const x)
 //------------------------------------------------------------------------------
 bool Material::setSlotDiffuseColor(const Basic::PairStream* const x)
 {
-    if (x != 0) {
+    if (x != nullptr) {
         // go through and get our data from the pairstream, and set our ambient color
         const Basic::List::Item* item = x->getFirstItem();
         int count = 0;
@@ -155,7 +155,7 @@ bool Material::setSlotDiffuseColor(const Basic::Number* const x)
 //------------------------------------------------------------------------------
 bool Material::setSlotEmissiveColor(const Basic::PairStream* const x)
 {
-    if (x != 0) {
+    if (x != nullptr) {
         // go through and get our data from the pairstream, and set our ambient color
         const Basic::List::Item* item = x->getFirstItem();
         int count = 0;

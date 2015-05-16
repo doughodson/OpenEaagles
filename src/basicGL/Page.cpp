@@ -205,7 +205,7 @@ Basic::Pair* Page::findBySelectName(const GLuint name)
     Basic::Pair* q = Graphic::findBySelectName(name);
 
     // If still not found, check our subpage ...
-    if (q == 0 && cp != nullptr) {
+    if (q == nullptr && cp != nullptr) {
         q = cp->findBySelectName(name);
     }
     return q;
@@ -364,7 +364,7 @@ bool Page::onButtonHit(const Basic::String* const obhobj)
     if (obhobj != nullptr && pageChgEvents != nullptr) {
         used = true;
         Basic::Pair* pageEvent = pageChgEvents->findByName(*obhobj);
-        if (pageEvent != 0) {
+        if (pageEvent != nullptr) {
             Basic::Identifier* id = dynamic_cast<Basic::Identifier*>(pageEvent->object());
             if (id != nullptr) {
                 // Find our container and the new page ID, then push
@@ -392,7 +392,7 @@ bool Page::onKeyHit(const int key)
         Basic::Pair*pageEvent = pageChgEvents->findByName(keyName);
         if (pageEvent != nullptr) {
             Basic::Identifier* id = dynamic_cast<Basic::Identifier*>(pageEvent->object());
-            if (id != 0) {
+            if (id != nullptr) {
                 // Find our container and the new page ID, then push
                 // current page and go to new page
                 newPage(*id,this);

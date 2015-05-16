@@ -154,7 +154,7 @@ void BitmapFont::loadFont()
     for (unsigned int i=0; i < numFonts; i++)
     {
         GLubyte* bitmap = loadTypeFace(i, reverse);
-        if (bitmap == 0) continue;
+        if (bitmap == nullptr) continue;
 
         GLfloat xmove = static_cast<GLfloat>(getBitmapWidth());
         GLfloat ymove = 0.0;
@@ -221,38 +221,38 @@ std::ostream& BitmapFont::serialize(std::ostream& sout, const int i, const bool 
 // the ASCII character to map to a font file.
 static const char* defaultMap[] =
 {
-   0,                   // null
-   0,                   // soh
-   0,                   // stx
-   0,                   // etx
-   0,                   // eot
-   0,                   // enq
-   0,                   // ack
-   0,                   // bell
-   0,                   // bs
-   0,                   // ht
-   0,                   // nl
-   0,                   // vt
-   0,                   // np
-   0,                   // cr
-   0,                   // so
-   0,                   // si
-   0,                   // dle
-   0,                   // dc1
-   0,                   // dc2
-   0,                   // dc3
-   0,                   // dc4
-   0,                   // nak
-   0,                   // syn
-   0,                   // etb
-   0,                   // can
-   0,                   // em
-   0,                   // sub
-   0,                   // esc
-   0,                   // fs
-   0,                   // gs
-   0,                   // rs
-   0,                   // us
+   nullptr,                   // null
+   nullptr,                   // soh
+   nullptr,                   // stx
+   nullptr,                   // etx
+   nullptr,                   // eot
+   nullptr,                   // enq
+   nullptr,                   // ack
+   nullptr,                   // bell
+   nullptr,                   // bs
+   nullptr,                   // ht
+   nullptr,                   // nl
+   nullptr,                   // vt
+   nullptr,                   // np
+   nullptr,                   // cr
+   nullptr,                   // so
+   nullptr,                   // si
+   nullptr,                   // dle
+   nullptr,                   // dc1
+   nullptr,                   // dc2
+   nullptr,                   // dc3
+   nullptr,                   // dc4
+   nullptr,                   // nak
+   nullptr,                   // syn
+   nullptr,                   // etb
+   nullptr,                   // can
+   nullptr,                   // em
+   nullptr,                   // sub
+   nullptr,                   // esc
+   nullptr,                   // fs
+   nullptr,                   // gs
+   nullptr,                   // rs
+   nullptr,                   // us
    "space.fon",         // ' '
    "exclamation.fon",   // '!'
    "doublequote.fon",   // '"'
@@ -349,135 +349,135 @@ static const char* defaultMap[] =
    "verticalbar.fon",   // '|'
    "rightcurly.fon",    // '}'
    "tilda.fon",         // '~'
-   0,                   // del
-   0,                   // 0x80
-   0,                   // 0x81
-   0,                   // 0x82
-   0,                   // 0x83
-   0,                   // 0x84
-   0,                   // 0x85
-   0,                   // 0x86
-   0,                   // 0x87
-   0,                   // 0x88
-   0,                   // 0x89
-   0,                   // 0x8A
-   0,                   // 0x8B
-   0,                   // 0x8C
-   0,                   // 0x8D
-   0,                   // 0x8E
-   0,                   // 0x8F
-   0,                   // 0x90
-   0,                   // 0x91
-   0,                   // 0x92
-   0,                   // 0x93
-   0,                   // 0x94
-   0,                   // 0x95
-   0,                   // 0x96
-   0,                   // 0x97
-   0,                   // 0x98
-   0,                   // 0x99
-   0,                   // 0x9A
-   0,                   // 0x9B
-   0,                   // 0x9C
-   0,                   // 0x9D
-   0,                   // 0x9E
-   0,                   // 0x9F
-   0,                   // 0xA0
-   0,                   // 0xA1
-   0,                   // 0xA2
-   0,                   // 0xA3
-   0,                   // 0xA4
-   0,                   // 0xA5
-   0,                   // 0xA6
-   0,                   // 0xA7
-   0,                   // 0xA8
-   0,                   // 0xA9
-   0,                   // 0xAA
-   0,                   // 0xAB
-   0,                   // 0xAC
-   0,                   // 0xAD
-   0,                   // 0xAE
-   0,                   // 0xAF
+   nullptr,                   // del
+   nullptr,                   // 0x80
+   nullptr,                   // 0x81
+   nullptr,                   // 0x82
+   nullptr,                   // 0x83
+   nullptr,                   // 0x84
+   nullptr,                   // 0x85
+   nullptr,                   // 0x86
+   nullptr,                   // 0x87
+   nullptr,                   // 0x88
+   nullptr,                   // 0x89
+   nullptr,                   // 0x8A
+   nullptr,                   // 0x8B
+   nullptr,                   // 0x8C
+   nullptr,                   // 0x8D
+   nullptr,                   // 0x8E
+   nullptr,                   // 0x8F
+   nullptr,                   // 0x90
+   nullptr,                   // 0x91
+   nullptr,                   // 0x92
+   nullptr,                   // 0x93
+   nullptr,                   // 0x94
+   nullptr,                   // 0x95
+   nullptr,                   // 0x96
+   nullptr,                   // 0x97
+   nullptr,                   // 0x98
+   nullptr,                   // 0x99
+   nullptr,                   // 0x9A
+   nullptr,                   // 0x9B
+   nullptr,                   // 0x9C
+   nullptr,                   // 0x9D
+   nullptr,                   // 0x9E
+   nullptr,                   // 0x9F
+   nullptr,                   // 0xA0
+   nullptr,                   // 0xA1
+   nullptr,                   // 0xA2
+   nullptr,                   // 0xA3
+   nullptr,                   // 0xA4
+   nullptr,                   // 0xA5
+   nullptr,                   // 0xA6
+   nullptr,                   // 0xA7
+   nullptr,                   // 0xA8
+   nullptr,                   // 0xA9
+   nullptr,                   // 0xAA
+   nullptr,                   // 0xAB
+   nullptr,                   // 0xAC
+   nullptr,                   // 0xAD
+   nullptr,                   // 0xAE
+   nullptr,                   // 0xAF
    "degreesymbol.fon",  // 0xB0
-   0,                   // 0xB1
-   0,                   // 0xB2
-   0,                   // 0xB3
-   0,                   // 0xB4
-   0,                   // 0xB5
-   0,                   // 0xB6
-   0,                   // 0xB7
-   0,                   // 0xB8
-   0,                   // 0xB9
-   0,                   // 0xBA
-   0,                   // 0xBB
-   0,                   // 0xBC
-   0,                   // 0xBD
-   0,                   // 0xBE
-   0,                   // 0xBF
-   0,                   // 0xC0
-   0,                   // 0xC1
-   0,                   // 0xC2
-   0,                   // 0xC3
-   0,                   // 0xC4
-   0,                   // 0xC5
-   0,                   // 0xC6
-   0,                   // 0xC7
-   0,                   // 0xC8
-   0,                   // 0xC9
-   0,                   // 0xCA
-   0,                   // 0xCB
-   0,                   // 0xCC
-   0,                   // 0xCD
-   0,                   // 0xCE
-   0,                   // 0xCF
-   0,                   // 0xD0
-   0,                   // 0xD1
-   0,                   // 0xD2
-   0,                   // 0xD3
-   0,                   // 0xD4
-   0,                   // 0xD5
-   0,                   // 0xD6
-   0,                   // 0xD7
-   0,                   // 0xD8
-   0,                   // 0xD9
-   0,                   // 0xDA
-   0,                   // 0xDB
-   0,                   // 0xDC
-   0,                   // 0xDD
-   0,                   // 0xDE
-   0,                   // 0xDF
-   0,                   // 0xE0
-   0,                   // 0xE1
-   0,                   // 0xE2
-   0,                   // 0xE3
-   0,                   // 0xE4
-   0,                   // 0xE5
-   0,                   // 0xE6
-   0,                   // 0xE7
-   0,                   // 0xE8
-   0,                   // 0xE9
-   0,                   // 0xEA
-   0,                   // 0xEB
-   0,                   // 0xEC
-   0,                   // 0xED
-   0,                   // 0xEE
-   0,                   // 0xEF
-   0,                   // 0xF0
-   0,                   // 0xF1
-   0,                   // 0xF2
-   0,                   // 0xF3
-   0,                   // 0xF4
-   0,                   // 0xF5
-   0,                   // 0xF6
-   0,                   // 0xF7
-   0,                   // 0xF8
-   0,                   // 0xF9
-   0,                   // 0xFA
-   0,                   // 0xFB
-   0,                   // 0xFC
-   0,                   // 0xFD
-   0,                   // 0xFE
-   0                    // 0xFF
+   nullptr,                   // 0xB1
+   nullptr,                   // 0xB2
+   nullptr,                   // 0xB3
+   nullptr,                   // 0xB4
+   nullptr,                   // 0xB5
+   nullptr,                   // 0xB6
+   nullptr,                   // 0xB7
+   nullptr,                   // 0xB8
+   nullptr,                   // 0xB9
+   nullptr,                   // 0xBA
+   nullptr,                   // 0xBB
+   nullptr,                   // 0xBC
+   nullptr,                   // 0xBD
+   nullptr,                   // 0xBE
+   nullptr,                   // 0xBF
+   nullptr,                   // 0xC0
+   nullptr,                   // 0xC1
+   nullptr,                   // 0xC2
+   nullptr,                   // 0xC3
+   nullptr,                   // 0xC4
+   nullptr,                   // 0xC5
+   nullptr,                   // 0xC6
+   nullptr,                   // 0xC7
+   nullptr,                   // 0xC8
+   nullptr,                   // 0xC9
+   nullptr,                   // 0xCA
+   nullptr,                   // 0xCB
+   nullptr,                   // 0xCC
+   nullptr,                   // 0xCD
+   nullptr,                   // 0xCE
+   nullptr,                   // 0xCF
+   nullptr,                   // 0xD0
+   nullptr,                   // 0xD1
+   nullptr,                   // 0xD2
+   nullptr,                   // 0xD3
+   nullptr,                   // 0xD4
+   nullptr,                   // 0xD5
+   nullptr,                   // 0xD6
+   nullptr,                   // 0xD7
+   nullptr,                   // 0xD8
+   nullptr,                   // 0xD9
+   nullptr,                   // 0xDA
+   nullptr,                   // 0xDB
+   nullptr,                   // 0xDC
+   nullptr,                   // 0xDD
+   nullptr,                   // 0xDE
+   nullptr,                   // 0xDF
+   nullptr,                   // 0xE0
+   nullptr,                   // 0xE1
+   nullptr,                   // 0xE2
+   nullptr,                   // 0xE3
+   nullptr,                   // 0xE4
+   nullptr,                   // 0xE5
+   nullptr,                   // 0xE6
+   nullptr,                   // 0xE7
+   nullptr,                   // 0xE8
+   nullptr,                   // 0xE9
+   nullptr,                   // 0xEA
+   nullptr,                   // 0xEB
+   nullptr,                   // 0xEC
+   nullptr,                   // 0xED
+   nullptr,                   // 0xEE
+   nullptr,                   // 0xEF
+   nullptr,                   // 0xF0
+   nullptr,                   // 0xF1
+   nullptr,                   // 0xF2
+   nullptr,                   // 0xF3
+   nullptr,                   // 0xF4
+   nullptr,                   // 0xF5
+   nullptr,                   // 0xF6
+   nullptr,                   // 0xF7
+   nullptr,                   // 0xF8
+   nullptr,                   // 0xF9
+   nullptr,                   // 0xFA
+   nullptr,                   // 0xFB
+   nullptr,                   // 0xFC
+   nullptr,                   // 0xFD
+   nullptr,                   // 0xFE
+   nullptr                    // 0xFF
 };
 
 const unsigned int BitmapFont::defaultNumFonts = sizeof(defaultMap) / sizeof(const char*);
@@ -521,12 +521,12 @@ GLubyte* BitmapFont::loadTypeFace(const GLint index, const GLenum reverse)
 {
    // If no font to load, return
    if (fontMap[index] == nullptr)
-      return 0;
+      return nullptr;
 
    // Create the font file name
    const size_t FONTPATHNAME_LENGTH = 256;
    char fontPathname[FONTPATHNAME_LENGTH];
-   if (fontDirectory() != 0)
+   if (fontDirectory() != nullptr)
       lcStrcpy(fontPathname, FONTPATHNAME_LENGTH, fontDirectory());
    else
       lcStrcpy(fontPathname, FONTPATHNAME_LENGTH, "./");
@@ -534,11 +534,11 @@ GLubyte* BitmapFont::loadTypeFace(const GLint index, const GLenum reverse)
 
    // Open the font file
    FILE* fp = nullptr;
-   if( (fp = std::fopen(fontPathname, "r")) ==0 ) {
+   if( (fp = std::fopen(fontPathname, "r")) ==nullptr ) {
       if (isMessageEnabled(MSG_ERROR)) {
          std::cerr << "BitmapFont::loadTypeFace: unable to open font file: " << fontPathname << std::endl;
       }
-      return 0;
+      return nullptr;
    }
 
    // used to store the num of input items successfully matched and assigned

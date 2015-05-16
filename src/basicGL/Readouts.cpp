@@ -175,7 +175,7 @@ void Cursor::updateData(const LCreal dt)
 {
    int ln = 0;
    int cp = 0;
-   if (getDisplay()->focus() != 0) {
+   if (getDisplay()->focus() != nullptr) {
       setVisibility( getDisplay()->focus()->cursor(&ln,&cp) );
    }
    else {

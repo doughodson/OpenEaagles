@@ -28,7 +28,7 @@ public:
    Reformat() : rfFlexLexer(), dataType(invalid), postSign(false) { }
    virtual ~Reformat() { }
 
-   const char* getFormat() const { return dataType != invalid ? format : 0; }
+   const char* getFormat() const { return dataType != invalid ? format : nullptr; }
 
    Reformat::DataType convertNumber(const char* s);
    Reformat::DataType convertOctal(const char* s);

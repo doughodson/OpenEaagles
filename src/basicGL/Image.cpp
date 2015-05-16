@@ -222,7 +222,7 @@ bool Image::setPixels(const GLubyte* const newPixels)
 
    // copy the new image
    unsigned int size = width * height * numComponents;
-   if (newPixels != 0 && size > 0) {
+   if (newPixels != nullptr && size > 0) {
       pixels = new GLubyte[size];
       for (unsigned int i = 0; i < size; i++) { pixels[i] = newPixels[i]; }
    }
@@ -570,7 +570,7 @@ GLubyte* Image::readColorValuesBMP(FILE* const fp, const unsigned int offset, co
     // Read the bitmap
     unsigned int nbytes = (((bmfi->biWidth + 3) / 4 ) * 4); // round up to 4 byte boundary
     GLubyte* tbuf = new GLubyte[nbytes];
-    for (unsigned int i = 0; bmap != 0 && i < getHeight(); i++) {
+    for (unsigned int i = 0; bmap != nullptr && i < getHeight(); i++) {
         size_t n = std::fread(tbuf, nbytes, 1, fp);
         if (n > 0) {
             // transfer the colors
