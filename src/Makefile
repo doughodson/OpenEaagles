@@ -26,7 +26,9 @@ PROJECTS += dafif
 PROJECTS += ioDevice
 PROJECTS += linearSys 
 PROJECTS += simulation sensors terrain
-PROJECTS += dis dynamics maps
+PROJECTS += dis
+PROJECTS += dynamics
+PROJECTS += maps
 PROJECTS += recorder
 
 #

@@ -42,6 +42,11 @@ OPENEAAGLES_LIB_DIR = $(OE_ROOT)/lib/linux
 FREETYPE2_INC_DIR = /usr/include/freetype2
 
 # ---
+# HLA RTI
+# ---
+HLA_INC_DIR = /usr/local/include/hla13
+
+# ---
 # deviceIO device options
 # ---
 JOYSTICKDEVICE = 1

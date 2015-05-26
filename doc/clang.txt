@@ -27,6 +27,8 @@ git clone https://github.com/rizsotto/Bear.git
 mkdir bear-build
 cd bear-build
 cmake ../Bear
+make
+make install
 
 After install use 'bear make all' to generate
 compile_commands.json file
