@@ -27,6 +27,7 @@ Nib::Nib(const Simulation::NetIO::IoType ioType) : Simulation::Nib(ioType)
    iffFunOpData = nullptr;
    iffOptions = 0;
    iffLastExecTime = 0;
+   iffEventId = 0;
 
    disKind = 0;
    disDomain = 0;
@@ -124,6 +125,7 @@ void Nib::copyData(const Nib& org, const bool cc)
    }
    iffOptions = 0;
    iffLastExecTime = 0;
+   iffEventId = 0;
    timeOffset = 0.0;
 }
 

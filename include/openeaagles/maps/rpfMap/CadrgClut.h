@@ -34,6 +34,7 @@ public:
         unsigned char green;
         unsigned char blue;
         unsigned char alpha;
+        Rgb() { red = 0; green = 0; blue = 0; alpha = 0; }
     };
     // Color lookup table - 216, 32 or 16 colors
     enum ColorTableSizes { CLUT_216, CLUT_32, CLUT_16 };

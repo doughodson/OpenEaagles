@@ -805,6 +805,7 @@ void AirAngleOnlyTrkMgrPT::processTrackList(const LCreal dt)
         // Report to Track matching matrix
         unsigned int report2TrackMatch[MAX_REPORTS][MAX_TRKS];    // Report/Track matched matrix
         unsigned int trackNumMatches[MAX_TRKS];                   // Number of matcher for each track
+        for (unsigned int ii = 0; ii < MAX_TRKS; ii++) trackNumMatches[ii] = 0;
 
         if (nReports > 0) {
 

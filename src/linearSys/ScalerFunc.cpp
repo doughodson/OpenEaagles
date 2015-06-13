@@ -63,9 +63,10 @@ void ScalerFunc::initData()
 //------------------------------------------------------------------------------
 // copyData() -- copy member data
 //------------------------------------------------------------------------------
-void ScalerFunc::copyData(const ScalerFunc& org, const bool)
+void ScalerFunc::copyData(const ScalerFunc& org, const bool cc)
 {
    BaseClass::copyData(org);
+   if (cc) initData();
 
    rate = org.rate;
    x0 = org.x0;
@@ -73,6 +74,7 @@ void ScalerFunc::copyData(const ScalerFunc& org, const bool)
 
    // copy data array -- derived classes must have called allocateMemory() prior
    // to calling this copyData() function.
+   allocateMemory( org.n );
    if (n > 0) {
       for (unsigned int i = 0; i < n; i++) {
          px[i] = org.px[i];

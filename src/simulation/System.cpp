@@ -224,17 +224,12 @@ Player* System::getOwnship()
 // Returns a pointer to our ownship player (const version)
 const Player* System::getOwnship() const
 {
-   if (ownship != nullptr) {
+   if (ownship == nullptr) {
+      (const_cast<System*>(this))->findOwnship();
+   }
    return ownship;
 }
-   else {
-      // Yes this is a "const cast-away", but its the non-const version
-      // that initially finds our ownship Player class.
-      const System* sys = static_cast<const System*>(this);
-      const Player* own = sys->getOwnship();
-      return own;
-   }
-}
+
 
 //-----------------------------------------------------------------------------
 // Set functions

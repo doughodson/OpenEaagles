@@ -269,7 +269,9 @@ void Station::copyData(const Station& org, const bool cc)
    }
 
    // Attach our ownship
-   setOwnshipByName( *ownshipName );
+   if (ownshipName != nullptr) {
+      setOwnshipByName( *ownshipName );
+   }
 }
 
 //------------------------------------------------------------------------------
@@ -473,7 +475,7 @@ bool Station::shutdownNotification()
       Basic::List::Item* item = networks->getFirstItem();
       while (item != nullptr) {
          Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
-         Basic::Component* p = dynamic_cast<Basic::Component*>(pair->object());
+         Basic::Component* p = static_cast<Basic::Component*>(pair->object());
          p->event(SHUTDOWN_EVENT);
          item = item->getNext();
       }
@@ -484,7 +486,7 @@ bool Station::shutdownNotification()
       Basic::List::Item* item = ioHandlers->getFirstItem();
       while (item != nullptr) {
          Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
-         Basic::Component* p = dynamic_cast<Basic::Component*>(pair->object());
+         Basic::Component* p = static_cast<Basic::Component*>(pair->object());
          p->event(SHUTDOWN_EVENT);
          item = item->getNext();
       }
@@ -503,7 +505,7 @@ bool Station::shutdownNotification()
       Basic::List::Item* item = otw ->getFirstItem();
       while (item != nullptr) {
          Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
-         Basic::Component* p = dynamic_cast<Basic::Component*>(pair->object());
+         Basic::Component* p = static_cast<Basic::Component*>(pair->object());
          p->event(SHUTDOWN_EVENT);
          item = item->getNext();
       }

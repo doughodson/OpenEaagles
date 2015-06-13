@@ -67,9 +67,7 @@ void PrintSelected::initData()
 {
 
    msgToken = 0;
-   fieldName = "";
    compareValD = 0.0;
-   compareValS = "";
    compareValI = 0;
    condition = EQ;
 
@@ -91,9 +89,7 @@ void PrintSelected::copyData(const PrintSelected& org, const bool cc)
    if (cc) initData();
 
    msgToken = org.msgToken;
-   fieldName = org.fieldName;
    compareValD = org.compareValD;
-   compareValS = org.compareValS;
    compareValI = org.compareValI;
    condition = org.condition;
 
@@ -129,8 +125,7 @@ bool PrintSelected::setSlotFieldName(const Basic::String* const msg)
    bool ok = false;
    if (msg != nullptr) {
       ok = true;
-      fieldName = msg->getCopyString();
-      fieldNameStr.assign(fieldName);
+      fieldNameStr.assign( msg->getString() );
    }
    return ok;
 
@@ -141,8 +136,7 @@ bool PrintSelected::setSlotCompareToStr(const Basic::String* const msg)
    bool ok = false;
    if (msg != nullptr) {
       ok = true;
-      compareValS = msg->getCopyString();
-      compareStr.assign(compareValS);
+      compareStr.assign( msg->getString() );
    }
    return ok;
 }
@@ -579,6 +573,9 @@ void PrintSelected::processMessage(const google::protobuf::Message* const msg)
 //---------------------------------------------------------------------------
 void PrintSelected::printMessage(std::ostream& soutFields, std::ostream& soutVals, const google::protobuf::Message* const msg)
 {
+   std::streamsize oldWidth = soutFields.width();
+   std::ostream::fmtflags oldFlags = soutFields.flags();
+
    const google::protobuf::Descriptor* descriptor = msg->GetDescriptor();
    const google::protobuf::Reflection* reflection = msg->GetReflection();
 
@@ -678,6 +675,8 @@ void PrintSelected::printMessage(std::ostream& soutFields, std::ostream& soutVal
       }
    }
 
+   soutFields.width( oldWidth );
+   soutFields.setf( oldFlags );
 }
 
 // Set selection data by function call:
@@ -693,19 +692,18 @@ bool PrintSelected::setMsgToken(const unsigned int token)
 //------------------------------------------------------------------------------
 // setFieldOfInterest(): Set field of interest
 //---------------------------------------------------------------------------
-bool PrintSelected::setFieldOfInterest(const std::string field )
+bool PrintSelected::setFieldOfInterest(const std::string& field )
 {
    fieldNameStr = field;
-   fieldName = field.c_str();
    return true;
 }
+
 //------------------------------------------------------------------------------
 // setCompareToValue(): Set string to compare to field
 //---------------------------------------------------------------------------
-bool PrintSelected::setCompareToValue(const std::string strVal)
+bool PrintSelected::setCompareToValue(const std::string& strVal)
 {
-   compareValS = strVal.c_str();
-   compareStr.assign(compareValS);
+   compareStr = strVal;
    return true;
 }
 

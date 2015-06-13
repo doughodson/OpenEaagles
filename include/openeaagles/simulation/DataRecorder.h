@@ -165,6 +165,8 @@ protected:
 
 private:
    void initData();
+   Station* getStationImp();
+   Simulation* getSimulationImp();
 
    Station* sta;     // The Station that owns us (not ref()'d)
    Simulation* sim;     // The simulation system (not ref()'d)

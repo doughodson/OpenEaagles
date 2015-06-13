@@ -973,10 +973,7 @@ double Player::getEarthRadius() const
 Simulation* Player::getSimulation()
 {
    if (sim == nullptr) {
-      sim = static_cast<Simulation*>(findContainerByType(typeid(Simulation)));
-      if (sim == nullptr && isMessageEnabled(MSG_ERROR)) {
-         std::cerr << "Player::getSimulation(): ERROR, unable to locate the Simulation class!" << std::endl;
-      }
+      getSimulationImp();
    }
    return sim;
 }
@@ -984,17 +981,24 @@ Simulation* Player::getSimulation()
 // Controlling simulation model (const version)
 const Simulation* Player::getSimulation() const
 {
-   if (sim != nullptr) {
-      return sim;
+   if (sim == nullptr) {
+      (const_cast<Player*>(this))->getSimulationImp();
    }
-   else {
-      // Yes this is a "const cast-away", but its the non-const version
-      // that initially finds our Simulation class.
-      const Player* p = static_cast<const Player*>(this);
-      const Simulation* s = p->getSimulation();
-      return s;
-   }
+   return sim;
 }
+
+// Find our simulation model
+Simulation* Player::getSimulationImp()
+{
+   if (sim == nullptr) {
+      sim = static_cast<Simulation*>(findContainerByType(typeid(Simulation)));
+      if (sim == nullptr && isMessageEnabled(MSG_ERROR)) {
+         std::cerr << "Player::getSimulationImp(): ERROR, unable to locate the Simulation class!" << std::endl;
+      }
+   }
+   return sim;
+}
+
 
 //------------------------------------------------------------------------------
 // Dynamics model access functions
@@ -2917,8 +2921,9 @@ bool Player::onRfReflectedEmissionEventPlayer(Emission* const)
 //------------------------------------------------------------------------------
 bool Player::onReflectionsRequest(Basic::Component* const p)
 {
-   bool ok = false;        // Did we succeed?
-   int idx = -1;           // Empty slot index
+   bool ok = false;           // Did we succeed?
+   unsigned int idx = 0;      // Empty slot index
+   bool haveEmptySlot = false;
 
    // First see if this is a re-request ...
    //  (and look for an empty slot while we're at it)
@@ -2930,11 +2935,12 @@ bool Player::onReflectionsRequest(Basic::Component* const p)
       }
       else if (rfReflect[i] == nullptr) {
          idx = i;
+         haveEmptySlot = true;
       }
    }
 
    // New request and we have an empty slot?
-   if (!ok && idx >= 0) {
+   if (!ok && haveEmptySlot) {
       p->ref();
       rfReflect[idx] = p;
       rfReflectTimer[idx] = 1.1;

@@ -55,6 +55,7 @@ void TextureTable::copyData(const TextureTable& org, const bool cc)
     upperBound = org.upperBound;
     row = org.row;
     col = org.col;
+    size = org.size;
 
     for (int i = 0; i < maxTableSize; i++) {
         for (int j = 0; j < maxTableSize; j++) {

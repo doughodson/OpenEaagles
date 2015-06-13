@@ -943,6 +943,8 @@ bool Navigation::setSlotFeba(const Basic::PairStream* const msg)
         if (ok) {
             setFeba(tmpFeba, np);
         }
+
+        delete[] tmpFeba;
     }
 
     return ok;

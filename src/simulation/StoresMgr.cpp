@@ -367,8 +367,10 @@ void StoresMgr::searchAndAdd(Basic::PairStream* const mainList, const std::type_
          const Stores* sp = dynamic_cast<const Stores*>(p);
          if ( sp != nullptr ) {
             const Basic::PairStream* pstores = sp->getStores();
-            searchAndAdd(const_cast<Basic::PairStream*>(pstores), type, sublist);
-            pstores->unref();
+            if (pstores != nullptr) {
+               searchAndAdd(const_cast<Basic::PairStream*>(pstores), type, sublist);
+               pstores->unref();
+            }
          }
 
          item = item->getNext();
@@ -609,7 +611,7 @@ Missile* SimpleStoresMgr::getNextMissile()
 
 const Missile* SimpleStoresMgr::getNextMissile() const
 {
-   return (const_cast<SimpleStoresMgr*>(static_cast<const SimpleStoresMgr*>(this)))->getNextMissileImp();
+   return (const_cast<SimpleStoresMgr*>(this))->getNextMissileImp();
 }
 
 Missile* SimpleStoresMgr::getNextMissileImp()
@@ -647,7 +649,7 @@ Sam* SimpleStoresMgr::getNextSam()
 
 const Sam* SimpleStoresMgr::getNextSam() const
 {
-   return (const_cast<SimpleStoresMgr*>(static_cast<const SimpleStoresMgr*>(this)))->getNextSamImp();
+   return (const_cast<SimpleStoresMgr*>(this))->getNextSamImp();
 }
 
 Sam* SimpleStoresMgr::getNextSamImp()
@@ -686,7 +688,7 @@ Bomb* SimpleStoresMgr::getNextBomb()
 
 const Bomb* SimpleStoresMgr::getNextBomb() const
 {
-   return (const_cast<SimpleStoresMgr*>(static_cast<const SimpleStoresMgr*>(this)))->getNextBombImp();
+   return (const_cast<SimpleStoresMgr*>(this))->getNextBombImp();
 }
 
 Bomb* SimpleStoresMgr::getNextBombImp()
@@ -725,7 +727,7 @@ Chaff* SimpleStoresMgr::getNextChaff()
 
 const Chaff* SimpleStoresMgr::getNextChaff() const
 {
-   return (const_cast<SimpleStoresMgr*>(static_cast<const SimpleStoresMgr*>(this)))->getNextChaffImp();
+   return (const_cast<SimpleStoresMgr*>(this))->getNextChaffImp();
 }
 
 Chaff* SimpleStoresMgr::getNextChaffImp()
@@ -764,7 +766,7 @@ Flare* SimpleStoresMgr::getNextFlare()
 
 const Flare* SimpleStoresMgr::getNextFlare() const
 {
-   return (const_cast<SimpleStoresMgr*>(static_cast<const SimpleStoresMgr*>(this)))->getNextFlareImp();
+   return (const_cast<SimpleStoresMgr*>(this))->getNextFlareImp();
 }
 
 Flare* SimpleStoresMgr::getNextFlareImp()
@@ -803,7 +805,7 @@ Decoy* SimpleStoresMgr::getNextDecoy()
 
 const Decoy* SimpleStoresMgr::getNextDecoy() const
 {
-   return (const_cast<SimpleStoresMgr*>(static_cast<const SimpleStoresMgr*>(this)))->getNextDecoyImp();
+   return (const_cast<SimpleStoresMgr*>(this))->getNextDecoyImp();
 }
 
 Decoy* SimpleStoresMgr::getNextDecoyImp()

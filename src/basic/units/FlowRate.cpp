@@ -47,8 +47,9 @@ FlowRate::FlowRate(LCreal newFlowRate, Volume* volume, Time* time)
         if (isMessageEnabled(MSG_INFO)) {
             std::cout << "FlowRate::FlowRate() - missing a time or volume object, flow rate is default to 1.0 Cubic Feet per Second" << std::endl;
         }
-        // call our default construct
-        FlowRate();
+        myVolume = new CubicFeet(1);
+        myTime = new Seconds(1);
+        flowRate = 1;
     }
 }
 
@@ -64,9 +65,13 @@ FlowRate::FlowRate()
 //------------------------------------------------------------------------------
 // copyData() -- copy this object's data
 //------------------------------------------------------------------------------
-void FlowRate::copyData(const FlowRate& org, const bool)
+void FlowRate::copyData(const FlowRate& org, const bool cc)
 {
     BaseClass::copyData(org);
+    if (cc) {
+       myVolume = new CubicFeet(1);
+       myTime = new Seconds(1);
+    }
 
     if (myVolume != nullptr) myVolume = org.myVolume;
     if (myTime != nullptr) myTime = org.myTime;

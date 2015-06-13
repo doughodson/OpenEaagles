@@ -94,7 +94,7 @@ Action* Arbiter::genComplexAction(Basic::List* const actionSet)
    while (item != nullptr) {
 
       // Is this action's vote higher than the previous?
-      Action* action = dynamic_cast<Action*>(item->getValue());
+      Action* action = static_cast<Action*>(item->getValue());
       if (maxVote==0 || action->getVote() > maxVote) {
 
          // Yes ...

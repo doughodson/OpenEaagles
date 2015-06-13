@@ -102,7 +102,10 @@ void Object::copyData(const Object& org, const bool cc)
     slotTable = org.slotTable;
     enbMsgBits = org.enbMsgBits;
     disMsgBits = org.disMsgBits;
-    if (cc) refCount = 1;    // (start out ref() by the creator)
+    if (cc) {
+       refCount = 1;    // (start out ref() by the creator)
+       semaphore = 0;
+    }
 }
 
 // Delete object data -- derived classes should delete

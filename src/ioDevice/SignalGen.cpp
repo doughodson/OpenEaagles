@@ -23,7 +23,7 @@ IMPLEMENT_SUBCLASS(SignalGen,"SignalGenAI")
 BEGIN_SLOTTABLE(SignalGen)
     "signal",     // 1) Signal type { SINE, COSINE, SQUARE, SAW }
     "frequency",  // 2) Signal frequency
-    "phase"       // 3) Phase shift)
+    "phase",      // 3) Phase shift)
     "ai",         // 4) Analog Input location (IoData's AI channel)
     "channel",    // 5) Device channel number
 END_SLOTTABLE(SignalGen)
@@ -208,7 +208,7 @@ LCreal SignalGen::calc(const LCreal dt)
       }
       case SQUARE : {
          if (beta > 0 && beta < PI) value = 1.0;
-         else value = 1.0;
+         else value = 0.0;
          break;
       }
       case SAW : {
@@ -315,11 +315,11 @@ std::ostream& SignalGen::serialize(std::ostream& sout, const int i, const bool s
    indent(sout,i+j);
    sout << "signal: ";
    switch ( getSignalType() ) {
-      case SINE : sout << "SINE";
-      case COSINE : sout << "COSINE";
-      case SQUARE : sout << "SQUARE";
-      case SAW : sout << "SAW";
-      default : sout << "XXXX";
+      case SINE : sout << "SINE"; break;
+      case COSINE : sout << "COSINE"; break;
+      case SQUARE : sout << "SQUARE"; break;
+      case SAW : sout << "SAW"; break;
+      default : sout << "XXXX"; break;
    }
    sout << std::endl;
 

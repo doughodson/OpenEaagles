@@ -190,12 +190,9 @@ Matrix* Matrix::getInvLU() const
    Matrix* pU = new Matrix(N,N);
    getLU(pL, pU);
 
-   bool b1 = (pL == nullptr);
-   bool b2 = (pU == nullptr);
-   if (b1 || b2) return nullptr;
-
    Matrix* pB = new Matrix(N,N);
    pB->makeIdent();
+
    Matrix* pY = new Matrix(N,N);
    Matrix* pX = new Matrix(N,N);
 
@@ -225,10 +222,10 @@ Matrix* Matrix::getInvLU() const
       }
    }
 
-   if (pL != nullptr) pL->unref();
-   if (pU != nullptr) pU->unref();
-   if (pB != nullptr) pB->unref();
-   if (pY != nullptr) pY->unref();
+   pL->unref();
+   pU->unref();
+   pB->unref();
+   pY->unref();
 
    return pX;
 }
@@ -243,7 +240,6 @@ double Matrix::getDeterm() const
    const unsigned int N = rows;
    Matrix* pL = new Matrix(N,N);
    Matrix* pU = new Matrix(N,N);
-   if ((pL == nullptr) || (pU == nullptr)) return 0;
 
    getLU(pL, pU);
 
@@ -254,8 +250,8 @@ double Matrix::getDeterm() const
    }
 
    // unref pointers
-   if (pL != nullptr) pL->unref();
-   if (pU != nullptr) pU->unref();
+   pL->unref();
+   pU->unref();
 
    return determ;
 }
@@ -940,6 +936,9 @@ void Matrix::showMatrix(const unsigned int DP, const unsigned int FW) const
          fldwth = sum;
       }
 
+      std::ios_base::fmtflags oldFmtFlgs =  std::cout.flags();
+      std::streamsize oldprec = std::cout.precision();
+
       std::cout << std::setiosflags(std::ios::fixed)
          << std::setprecision(decpnt);
 
@@ -950,6 +949,10 @@ void Matrix::showMatrix(const unsigned int DP, const unsigned int FW) const
          }
          std::cout << std::endl;
       }
+
+      std::cout.setf(oldFmtFlgs);
+      std::cout << std::setprecision(oldprec);
+
    }
 }
 
@@ -968,6 +971,9 @@ std::ostream& operator<<(std::ostream& sout, const Matrix& m)
       const unsigned int MARGIN = 3;
       const unsigned int FLDWTH = DECPNT + DPZERO + DIGITS + MARGIN;
 
+      std::ios_base::fmtflags oldFmtFlgs =  sout.flags();
+      std::streamsize oldprec = sout.precision();
+
       sout << std::setprecision(DECPNT)
          << std::setiosflags(std::ios::fixed);
 
@@ -977,6 +983,10 @@ std::ostream& operator<<(std::ostream& sout, const Matrix& m)
          }
          sout << std::endl;
       }
+
+      sout.setf(oldFmtFlgs);
+      sout << std::setprecision(oldprec);
+
    }
    return sout;
 }
@@ -1076,8 +1086,6 @@ bool Matrix::getEigenPower(const double maxErr, const int maxIter,
    CVector* pZ = new CVector(N);          // current eigenvector estimate
    pZ->fillWith(1.0);                     // all 1's in initial estimate
 
-   CVector* pW = nullptr;                       // updated eigenvector estimate
-   CVector* pE = nullptr;                       // error vector
    double Wmag = 0.0;                     // largest magnitude element of W
 
    //-------------------------------------------------------
@@ -1085,44 +1093,58 @@ bool Matrix::getEigenPower(const double maxErr, const int maxIter,
    //-------------------------------------------------------
    while ((Err > maxErr) && (Iter < maxIter))
    {
-      //----------------------------------------------------
-      // get estimate of eigenvector
-      //----------------------------------------------------
-      pW = Basic::multiply(*pA, *pZ);   // get new estimate (W) based on old estimate (Z)
-      Wmag = pW->getMaxMag();           // max mag value from elements of vector W
-      if (Wmag == 0.0) return false;
-      pW->multiply(1.0/Wmag);           // normalize eigenvector with max element of W
-
-      //----------------------------------------------------
-      // get estimate of eigenvalue
-      //----------------------------------------------------
-      alfa = Wmag;                   // save Wmag eigenvalue estimate
-
-      //----------------------------------------------------
-      // refine eigenvalue estimate by using Rayleigh quotient
-      // (may or may not be worth the additional calculations)
-      //----------------------------------------------------
-      bool rayleigh = false;
-      if (rayleigh)
       {
-         RVector* pZT = pZ->getTranspose();
-         double num = Basic::dotProduct(*pZT, *pW);
-         double den = Basic::dotProduct(*pZT, *pZ);
-         alfa *= (num / den);  // save Rayleigh eigenvalue estimate
-      }
+         //----------------------------------------------------
+         // get estimate of eigenvector
+         //----------------------------------------------------
+         CVector* pW = Basic::multiply(*pA, *pZ);   // get new estimate (W) based on old estimate (Z)
+         Wmag = pW->getMaxMag();           // max mag value from elements of vector W
+         if (Wmag == 0.0) {
+            // mag value is zero; cleanup and leave
+            pW->unref();
+            pZ->unref();
+            pA->unref();
+            return false;
+         }
+         pW->multiply(1.0/Wmag);           // normalize eigenvector with max element of W
 
-      //----------------------------------------------------
-      // save eigenvector W estimate in vector Z to begin next loop
-      //----------------------------------------------------
-      *pZ = *pW;                        // save eigenvector estimate for next iteration
+         //----------------------------------------------------
+         // get estimate of eigenvalue
+         //----------------------------------------------------
+         alfa = Wmag;                   // save Wmag eigenvalue estimate
+
+         //----------------------------------------------------
+         // refine eigenvalue estimate by using Rayleigh quotient
+         // (may or may not be worth the additional calculations)
+         //----------------------------------------------------
+#if 0
+         {
+            RVector* pZT = pZ->getTranspose();
+            double num = Basic::dotProduct(*pZT, *pW);
+            double den = Basic::dotProduct(*pZT, *pZ);
+            alfa *= (num / den);  // save Rayleigh eigenvalue estimate
+            pZT->unref();
+         }
+#endif
+
+         //----------------------------------------------------
+         // save eigenvector W estimate in vector Z to begin next loop
+         //----------------------------------------------------
+         *pZ = *pW;                        // save eigenvector estimate for next iteration
+         pW->unref();
+      }
 
       //----------------------------------------------------
       // calculate error of estimate: Err = ||A*Z - alfa*Z||
       //----------------------------------------------------
-      pE = Basic::multiply(*pA, *pZ);
-      pW = Basic::multiply(*pZ, alfa);  // pW used here as intermediate vector
-      pE->subtract(*pW);
-      Err = pE->getNorm();              // magnitude of error vector
+      {
+         CVector* pE = Basic::multiply(*pA, *pZ);
+         CVector* pW1 = Basic::multiply(*pZ, alfa);  // pW1 used here as intermediate vector
+         pE->subtract(*pW1);
+         Err = pE->getNorm();              // magnitude of error vector
+         pE->unref();
+         pW1->unref();
+      }
 
       //----------------------------------------------------
       // increment iterator for next loop
@@ -1139,9 +1161,8 @@ bool Matrix::getEigenPower(const double maxErr, const int maxIter,
    //-------------------------------------------------------
    // unref pointers
    //-------------------------------------------------------
-   if (pW != nullptr) pW->unref();
-   if (pZ != nullptr) pZ->unref();
-   if (pA != nullptr) pA->unref();
+   pZ->unref();
+   pA->unref();
 
    return true;
 }
@@ -1277,6 +1298,7 @@ bool Matrix::getQR(Matrix* const pQ, Matrix* const pR) const
    // Begin loop
    //-------------------------------------------------------
    for (int k = 0; k < N-1; k++) {
+
       pX->fillWith(0.0);
       for (int i = k; i<N ; i++) {
          (*pX)[i] = (*pRI)(i,k);
@@ -1287,43 +1309,56 @@ bool Matrix::getQR(Matrix* const pQ, Matrix* const pR) const
       (*pV)[k] += g;
       double s = pV->getNorm();
 
-      if (s == 0.0) return false;
+      if (s == 0.0) {
+         pQI->unref();
+         pRI->unref();
+         pX->unref();
+         pV->unref();
+         return false;
+      }
 
       CVector* pW = Basic::multiply((*pV), 1.0/s);
       RVector* pWT = pW->getTranspose();
 
-      //----------------------------------------------------
-      // U' = (2*R'*W)'
-      //----------------------------------------------------
-      Matrix* pRIT = pRI->getTranspose();
-      CVector* pU = Basic::multiply((*pRIT), (*pW));
-      pU = Basic::multiply((*pU), 2.0);
-      RVector* pUT = pU->getTranspose();
+      {
+         //----------------------------------------------------
+         // U' = (2*R'*W)'
+         //----------------------------------------------------
+         Matrix* pRIT = pRI->getTranspose();
+         CVector* pU0 = Basic::multiply((*pRIT), (*pW));
+         CVector* pU = Basic::multiply((*pU0), 2.0);
+         RVector* pUT = pU->getTranspose();
+         pU0->unref();
+         pU->unref();
+         pRIT->unref();
 
-      //----------------------------------------------------
-      // R = R - W*U'
-      //----------------------------------------------------
-      Matrix* pM1 = outerProduct(*pW, *pUT);
-      pRI = Basic::subtract(*pRI, *pM1);
+         //----------------------------------------------------
+         // R = R - W*U'
+         //----------------------------------------------------
+         Matrix* pM1 = outerProduct(*pW, *pUT);
+         pRI->subtract(*pM1);
+         pM1->unref();
+         pUT->unref();
+      }
 
       //----------------------------------------------------
       // Q = Q - 2*Q*W*W'
       //----------------------------------------------------
-      Matrix* pM2 = outerProduct(*pW, *pWT);
-      pM2 = Basic::multiply(*pQI, *pM2);
-      pM2 = Basic::multiply(*pM2, 2.0);
-      pQI = Basic::subtract(*pQI, *pM2);
+      {
+         Matrix* pM2 = outerProduct(*pW, *pWT);
+         Matrix* pM3 = Basic::multiply(*pQI, *pM2);
+         Matrix* pM4 = Basic::multiply(*pM3, 2.0);
+         pQI->subtract(*pM4);
+         pM2->unref();
+         pM3->unref();
+         pM4->unref();
+      }
 
       //-------------------------------------------------------
       // Unref pointers
       //-------------------------------------------------------
-      if (pW   != nullptr) pW->unref();
-      if (pWT  != nullptr) pWT->unref();
-      if (pRIT != nullptr) pRIT->unref();
-      if (pU   != nullptr) pU->unref();
-      if (pUT  != nullptr) pUT->unref();
-      if (pM1  != nullptr) pM1->unref();
-      if (pM2  != nullptr) pM2->unref();
+      pW->unref();
+      pWT->unref();
    }
 
    //-------------------------------------------------------
@@ -1335,8 +1370,8 @@ bool Matrix::getQR(Matrix* const pQ, Matrix* const pR) const
    //-------------------------------------------------------
    // Unref pointers
    //-------------------------------------------------------
-   if (pQI != nullptr) pQI->unref();
-   if (pRI != nullptr) pRI->unref();
+   pQI->unref();
+   pRI->unref();
    pX->unref();
    pV->unref();
 
@@ -1385,14 +1420,12 @@ bool Matrix::getTriDiagonal(Matrix* const pA) const
       //----------------------------------------------------
       // construct row vector Y = X'
       //----------------------------------------------------
-      RVector* pY = new RVector(N);
-      pY = pX->getTranspose();
+      RVector* pY = pX->getTranspose();
 
       //----------------------------------------------------
       // M = 2*X*Y = 2*X*X'
       //----------------------------------------------------
-      Matrix* pM = new Matrix(N,N);
-      pM = outerProduct(*pX, *pY);
+      Matrix* pM = outerProduct(*pX, *pY);
       pM->multiply(2.0);
 
       //----------------------------------------------------
@@ -1405,16 +1438,19 @@ bool Matrix::getTriDiagonal(Matrix* const pA) const
       //----------------------------------------------------
       // A = H*A*H
       //----------------------------------------------------
-      pAI = Basic::multiply(*pH, *pAI);
-      pAI = Basic::multiply(*pAI, *pH);
+      Matrix* pAI0 = Basic::multiply(*pH, *pAI);
+      Matrix* pAI1 = Basic::multiply(*pAI0, *pH);
+      *pAI = *pAI1;
 
       //----------------------------------------------------
       // unref intermediate loop pointers
       //----------------------------------------------------
-      if (pX != nullptr) pX->unref();
-      if (pY != nullptr) pY->unref();
-      if (pM != nullptr) pM->unref();
-      if (pH != nullptr) pH->unref();
+      pX->unref();
+      pY->unref();
+      pM->unref();
+      pH->unref();
+      pAI0->unref();
+      pAI1->unref();
    }
 
    //-------------------------------------------------------
@@ -1425,7 +1461,7 @@ bool Matrix::getTriDiagonal(Matrix* const pA) const
    //----------------------------------------------------
    // unref pointers
    //----------------------------------------------------
-   if (pAI != nullptr) pAI->unref();
+   pAI->unref();
 
    return true;
 }

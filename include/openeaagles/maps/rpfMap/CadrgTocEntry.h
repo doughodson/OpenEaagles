@@ -92,6 +92,8 @@ public:
     virtual void generateItems();
 
 private:
+    void initData();
+
     char type[5];               // Type of map entry we are (ie.. CADRG)
     char  scale[12];            // Scale of this entry (1:500K, etc.)
     char  zone[1];              // Zone this entry falls in 

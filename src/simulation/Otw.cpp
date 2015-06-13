@@ -280,7 +280,7 @@ void Otw::mapPlayerList2ModelTable()
       while (item != nullptr) {
 
          // Get a pointer to the player, 'p'
-         Basic::Pair* pair = dynamic_cast<Basic::Pair*>(item->getValue());
+         Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
          Player* p = static_cast<Player*>(pair->object());
 
          bool dummy = false;
@@ -364,7 +364,7 @@ void Otw::mapPlayers2ElevTable()
       while (item != nullptr) {
 
          // Get a pointer to the player, 'p'
-         Basic::Pair* pair = dynamic_cast<Basic::Pair*>(item->getValue());
+         Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
          Player* p = static_cast<Player*>(pair->object());
 
          // Check if this player is alive and within range.

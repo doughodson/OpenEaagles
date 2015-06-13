@@ -30,6 +30,8 @@ END_SLOT_MAP()
 LagFilter::LagFilter()
 {
    STANDARD_CONSTRUCTOR()
+
+   tau = 1.0;
 }
 
 LagFilter::LagFilter(const unsigned int rate, const LCreal t)
@@ -40,7 +42,14 @@ LagFilter::LagFilter(const unsigned int rate, const LCreal t)
    tau = t;
 }
 
-EMPTY_COPYDATA(LagFilter)
+// Copy data function
+void LagFilter::copyData(const LagFilter& org, const bool)
+{
+    BaseClass::copyData(org);
+
+    tau = org.tau;
+}
+
 EMPTY_DELETEDATA(LagFilter)
 
 //------------------------------------------------------------------------------

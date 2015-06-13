@@ -64,22 +64,41 @@ void Complex::copyData(const Complex& org, const bool)
 //------------------------------------------------------------------------------
 void Complex::showComplex(const int decpnt) const
 {
-    std::cout << std::setprecision(decpnt) << std::setiosflags(std::ios::fixed);
-    std::cout << getReal() << " + j*" << getImag() << std::endl;
+   std::ios_base::fmtflags oldFmtFlgs =  std::cout.flags();
+   std::streamsize oldprec = std::cout.precision();
+
+   std::cout << std::setprecision(decpnt) << std::setiosflags(std::ios::fixed);
+   std::cout << getReal() << " + j*" << getImag() << std::endl;
+
+   std::cout.setf(oldFmtFlgs);
+   std::cout << std::setprecision(oldprec);
 }
 
 void Complex::showPhasor(const int decpnt) const
 {
-    std::cout << std::setprecision(decpnt) << std::setiosflags(std::ios::fixed);
-    std::cout << "<" << this->getMag() << ", " << this->getArg() << ">" << std::endl;
+   std::ios_base::fmtflags oldFmtFlgs =  std::cout.flags();
+   std::streamsize oldprec = std::cout.precision();
+
+   std::cout << std::setprecision(decpnt) << std::setiosflags(std::ios::fixed);
+   std::cout << "<" << this->getMag() << ", " << this->getArg() << ">" << std::endl;
+
+   std::cout.setf(oldFmtFlgs);
+   std::cout << std::setprecision(oldprec);
 }
 
 std::ostream& operator<<(std::ostream& sout, const Complex& z)
 {
-    const int decpnt = 2;
-    sout << std::setprecision(decpnt) << std::setiosflags(std::ios::fixed);
-    sout << z.getReal() << " + j*" << z.getImag();
-    return sout;
+   std::ios_base::fmtflags oldFmtFlgs =  sout.flags();
+   std::streamsize oldprec = sout.precision();
+
+   const int decpnt = 2;
+   sout << std::setprecision(decpnt) << std::setiosflags(std::ios::fixed);
+   sout << z.getReal() << " + j*" << z.getImag();
+
+   sout.setf(oldFmtFlgs);
+   sout << std::setprecision(oldprec);
+
+   return sout;
 }
 
 //------------------------------------------------------------------------------

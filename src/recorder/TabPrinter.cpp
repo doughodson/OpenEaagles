@@ -113,19 +113,22 @@ bool TabPrinter::setSlotMsgHdr(const Basic::String* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      ok = true;
 
       if ((*msg == "NO_HDR") || (*msg == "no_hdr") ) {
          option = NO_HDR;
+         ok = true;
       }
       else if ((*msg == "ALL_MSGS") || (*msg == "all_msgs") ) {
          option = ALL_MSGS;
+         ok = true;
       }
       else if ((*msg == "NEW_MSG") || (*msg == "new_msg") ) {
          option = NEW_MSG;
+         ok = true;
       }
       else if ((*msg == "ON_CHANGE") || (*msg == "on_change") ) {
          option = ON_CHANGE;
+         ok = true;
       }
 
       if (!ok && isMessageEnabled(MSG_ERROR)) {
@@ -134,7 +137,7 @@ bool TabPrinter::setSlotMsgHdr(const Basic::String* const msg)
       }
    }
 
-    return ok;
+   return ok;
 }
 
 //------------------------------------------------------------------------------

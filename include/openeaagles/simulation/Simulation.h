@@ -350,6 +350,7 @@ protected:
 
 private:
    void initData();
+   Station* getStationImp();
 
    bool insertPlayerSort(Basic::Pair* const newPlayer, Basic::PairStream* const newList);
    Player* findPlayerPrivate(const short id, const int netID) const;

@@ -60,7 +60,7 @@ void CadrgFrameEntry::deleteData()
 {
     if (frame != nullptr) frame->unref();
     frame = nullptr;
-    delete [] &directory;
+    delete[] directory;
 }
 
 //--------------------------------------------------------------------------

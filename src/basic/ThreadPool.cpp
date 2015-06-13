@@ -39,7 +39,7 @@ EMPTY_COPYDATA(ThreadPoolThread)
 EMPTY_SERIALIZER(ThreadPoolThread)
 
 ThreadPoolThread::ThreadPoolThread(Component* const parent, ThreadPool* const pool, ThreadPoolManager* const mgr, const LCreal priority, Object* const obj)
-   : ThreadSyncTask(parent, priority), threadPool(pool), manager(mgr), persistentObj(obj)
+   : ThreadSyncTask(parent, priority), threadPool(pool), manager(mgr), persistentObj(obj), currentObj(nullptr)
 {
    STANDARD_CONSTRUCTOR()
 }
@@ -173,6 +173,10 @@ ThreadPool::ThreadPool( ThreadPoolManager* mgr, const unsigned int num, const LC
 void ThreadPool::initData()
 {
    actualThreads = 0;
+   for (unsigned int i = 0; i < MAX_THREADS; i++) {
+      allThreads[i] = nullptr;
+      availableThreads[i] = nullptr;
+   }
    availableThreadsLock = 0;
    unthreadedObj = nullptr;
 }

@@ -317,6 +317,7 @@ bool Image::readFileBMP(const char* const filename, const char* const path)
       if (isMessageEnabled(MSG_ERROR)) {
          std::cerr << "Image::readFileBMP(1): invalid bitmap file: " << bitmapFile << std::endl;
       }
+      std::fclose(fp);
       return false;
    }
 
@@ -343,6 +344,7 @@ bool Image::readFileBMP(const char* const filename, const char* const path)
       if (isMessageEnabled(MSG_ERROR)) {
          std::cerr << "Image::readFileBMP(2): invalid bitmap file: " << bitmapFile << std::endl;
       }
+      std::fclose(fp);
       return false;
    }
 

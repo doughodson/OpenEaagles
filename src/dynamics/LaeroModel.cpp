@@ -49,6 +49,8 @@ LaeroModel::LaeroModel()
 //----------------------------------------------------------
 void LaeroModel::initData()
 {
+   dT       = 0.0;
+
    // Body angular vel, acc components
    p        = 0.0;
    q        = 0.0;
@@ -105,6 +107,8 @@ void LaeroModel::copyData(const LaeroModel& org, const bool cc)
 {
    BaseClass::copyData(org);
    if (cc) initData();
+
+   dT       = org.dT;
 
    // Body angular vel, acc components
    p        = org.p;

@@ -318,7 +318,7 @@ bool Radio::setSlotChannels(const Basic::PairStream* const msg)
    // Quick out if the number of channels hasn't been set.
    // ---
    unsigned short nc = getNumberOfChannels();
-   if (nc == 0 && msg != nullptr) {
+   if (nc == 0 || msg == nullptr) {
       std::cerr << "Radio::setSlotChannels() Number of channels is not set!" << std::endl;
       return false;
    }

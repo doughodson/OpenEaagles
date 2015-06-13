@@ -631,20 +631,32 @@ std::ostream& SimLogger::SimLogEvent::makeEmissionDataMsg(std::ostream& sout, co
 SIMLOGEVENT_B(NewPlayer,"SimLogger::NewPlayer")
 EMPTY_SERIALIZER(SimLogger::NewPlayer)
 
-// Constructor
+// Constructors
 SimLogger::NewPlayer::NewPlayer(Player* const p)
 {
     STANDARD_CONSTRUCTOR()
+    initData();
     thePlayer = p;
+}
+
+void SimLogger::NewPlayer::initData()
+{
+    thePlayer = nullptr;
     pos.set(0,0,0);
     vel.set(0,0,0);
     angles.set(0,0,0);
 }
 
 // Copy data function
-void SimLogger::NewPlayer::copyData(const NewPlayer& org, const bool)
+void SimLogger::NewPlayer::copyData(const NewPlayer& org, const bool cc)
 {
     BaseClass::copyData(org);
+    if (cc) initData();
+
+    thePlayer = org.thePlayer;
+    pos = org.pos;
+    vel = org.vel;
+    angles = org.angles;
 }
 
 // Delete data function
@@ -696,11 +708,17 @@ void SimLogger::NewPlayer::captureData()
 SIMLOGEVENT_B(LogPlayerData,"SimLogger::LogPlayerData")
 EMPTY_SERIALIZER(SimLogger::LogPlayerData)
 
-// Constructor
+// Constructors
 SimLogger::LogPlayerData::LogPlayerData(Player* const p)
 {
     STANDARD_CONSTRUCTOR()
+    initData();
     thePlayer = p;
+}
+
+void SimLogger::LogPlayerData::initData()
+{
+    thePlayer = nullptr;
     pos.set(0,0,0);
     vel.set(0,0,0);
     angles.set(0,0,0);
@@ -710,9 +728,18 @@ SimLogger::LogPlayerData::LogPlayerData(Player* const p)
 }
 
 // Copy data function
-void SimLogger::LogPlayerData::copyData(const LogPlayerData& org, const bool)
+void SimLogger::LogPlayerData::copyData(const LogPlayerData& org, const bool cc)
 {
     BaseClass::copyData(org);
+    if (cc) initData();
+
+    thePlayer = org.thePlayer;
+    pos = org.pos;
+    vel = org.vel;
+    angles = org.angles;
+    alpha = org.alpha;
+    beta = org.beta;
+    ias = org.ias;
 }
 
 // Delete data function
@@ -785,16 +812,28 @@ EMPTY_SERIALIZER(SimLogger::RemovePlayer)
 SimLogger::RemovePlayer::RemovePlayer(Player* const p)
 {
     STANDARD_CONSTRUCTOR()
+    initData();
     thePlayer = p;
+}
+
+void SimLogger::RemovePlayer::initData()
+{
+    thePlayer = nullptr;
     pos.set(0,0,0);
     vel.set(0,0,0);
     angles.set(0,0,0);
 }
 
 // Copy data function
-void SimLogger::RemovePlayer::copyData(const RemovePlayer& org, const bool)
+void SimLogger::RemovePlayer::copyData(const RemovePlayer& org, const bool cc)
 {
     BaseClass::copyData(org);
+    if (cc) initData();
+
+    thePlayer = org.thePlayer;
+    pos = org.pos;
+    vel = org.vel;
+    angles = org.angles;
 }
 
 // Delete data function
@@ -855,10 +894,21 @@ SimLogger::WeaponRelease::WeaponRelease(Player* const lancher, Player* const wpn
     theTarget = tgt;
 }
 
+void SimLogger::WeaponRelease::initData()
+{
+    thePlayer = nullptr;
+    theWeapon = nullptr;
+    theTarget = nullptr;
+}
+
 // Copy data function
-void SimLogger::WeaponRelease::copyData(const WeaponRelease& org, const bool)
+void SimLogger::WeaponRelease::copyData(const WeaponRelease& org, const bool cc)
 {
     BaseClass::copyData(org);
+    if (cc) initData();
+    thePlayer = org.thePlayer;
+    theWeapon = org.theWeapon;
+    theTarget = org.theTarget;
 }
 
 // Delete data function
@@ -925,10 +975,20 @@ SimLogger::GunFired::GunFired(Player* const lancher, const int n)
     rounds = n;
 }
 
+void SimLogger::GunFired::initData()
+{
+    thePlayer = nullptr;
+    rounds = 0;
+}
+
 // Copy data function
-void SimLogger::GunFired::copyData(const GunFired& org, const bool)
+void SimLogger::GunFired::copyData(const GunFired& org, const bool cc)
 {
     BaseClass::copyData(org);
+    if (cc) initData();
+
+    thePlayer = org.thePlayer;
+    rounds = org.rounds;
 }
 
 // Delete data function
@@ -984,10 +1044,21 @@ SimLogger::KillEvent::KillEvent(Player* const lancher, Player* const wpn, Player
     theTarget = tgt;
 }
 
+void SimLogger::KillEvent::initData()
+{
+    thePlayer = nullptr;
+    theWeapon = nullptr;
+    theTarget = nullptr;
+}
+
 // Copy data function
-void SimLogger::KillEvent::copyData(const KillEvent& org, const bool)
+void SimLogger::KillEvent::copyData(const KillEvent& org, const bool cc)
 {
     BaseClass::copyData(org);
+    if (cc) initData();
+    thePlayer = org.thePlayer;
+    theWeapon = org.theWeapon;
+    theTarget = org.theTarget;
 }
 
 // Delete data function
@@ -1057,10 +1128,25 @@ SimLogger::DetonationEvent::DetonationEvent(Player* const lancher, Player* const
     missDist  = d;
 }
 
+void SimLogger::DetonationEvent::initData()
+{
+    thePlayer = nullptr;
+    theWeapon = nullptr;
+    theTarget = nullptr;
+    detType   = 0;
+    missDist  = 0;
+}
+
 // Copy data function
-void SimLogger::DetonationEvent::copyData(const DetonationEvent& org, const bool)
+void SimLogger::DetonationEvent::copyData(const DetonationEvent& org, const bool cc)
 {
     BaseClass::copyData(org);
+    if (cc) initData();
+    thePlayer = org.thePlayer;
+    theWeapon = org.theWeapon;
+    theTarget = org.theTarget;
+    detType   = org.detType;
+    missDist  = org.missDist;
 }
 
 // Delete data function
@@ -1126,10 +1212,12 @@ EMPTY_SERIALIZER(SimLogger::NewTrack)
 SimLogger::NewTrack::NewTrack(TrackManager* const mgr, Track* const trk)
 {
     STANDARD_CONSTRUCTOR()
-    thePlayer = nullptr;
-    theEmission = nullptr;
+
+    initData();
+
     theManager = mgr;
     theTrack = trk;
+
     if (theManager != nullptr) {
         thePlayer = dynamic_cast<const Player*>( theManager->findContainerByType(typeid(Player)) );
     }
@@ -1139,6 +1227,14 @@ SimLogger::NewTrack::NewTrack(TrackManager* const mgr, Track* const trk)
             theEmission = rfTrk->getLastEmission();
         }
     }
+}
+
+void SimLogger::NewTrack::initData()
+{
+    thePlayer = nullptr;
+    theEmission = nullptr;
+    theManager = nullptr;
+    theTrack = nullptr;
     pos.set(0,0,0);
     vel.set(0,0,0);
     angles.set(0,0,0);
@@ -1149,9 +1245,22 @@ SimLogger::NewTrack::NewTrack(TrackManager* const mgr, Track* const trk)
 }
 
 // Copy data function
-void SimLogger::NewTrack::copyData(const NewTrack& org, const bool)
+void SimLogger::NewTrack::copyData(const NewTrack& org, const bool cc)
 {
     BaseClass::copyData(org);
+    if (cc) initData();
+
+    thePlayer = org.thePlayer;
+    theEmission = org.theEmission;
+    theManager = org.theManager;
+    theTrack = org.theTrack;
+    pos = org.pos;
+    vel = org.vel;
+    angles = org.angles;
+    tgtPos = org.tgtPos;
+    tgtVel = org.tgtVel;
+    tgtAngles = org.tgtAngles;
+    sn = org.sn;
 }
 
 // Delete data function
@@ -1236,8 +1345,9 @@ EMPTY_SERIALIZER(SimLogger::UpdateTrack)
 SimLogger::UpdateTrack::UpdateTrack(TrackManager* const mgr, Track* const trk)
 {
     STANDARD_CONSTRUCTOR()
-    thePlayer = nullptr;
-    theEmission = nullptr;
+
+    initData();
+
     theManager = mgr;
     theTrack = trk;
     if (theManager != nullptr) {
@@ -1249,6 +1359,14 @@ SimLogger::UpdateTrack::UpdateTrack(TrackManager* const mgr, Track* const trk)
             theEmission = rfTrk->getLastEmission();
         }
     }
+}
+
+void SimLogger::UpdateTrack::initData()
+{
+    thePlayer = nullptr;
+    theEmission = nullptr;
+    theManager = nullptr;
+    theTrack = nullptr;
     pos.set(0,0,0);
     vel.set(0,0,0);
     angles.set(0,0,0);
@@ -1258,10 +1376,24 @@ SimLogger::UpdateTrack::UpdateTrack(TrackManager* const mgr, Track* const trk)
     sn = 0.0;
 }
 
+
 // Copy data function
-void SimLogger::UpdateTrack::copyData(const UpdateTrack& org, const bool)
+void SimLogger::UpdateTrack::copyData(const UpdateTrack& org, const bool cc)
 {
     BaseClass::copyData(org);
+    if (cc) initData();
+
+    thePlayer = org.thePlayer;
+    theEmission = org.theEmission;
+    theManager = org.theManager;
+    theTrack = org.theTrack;
+    pos = org.pos;
+    vel = org.vel;
+    angles = org.angles;
+    tgtPos = org.tgtPos;
+    tgtVel = org.tgtVel;
+    tgtAngles = org.tgtAngles;
+    sn = org.sn;
 }
 
 // Delete data function
@@ -1346,8 +1478,9 @@ EMPTY_SERIALIZER(SimLogger::RemovedTrack)
 SimLogger::RemovedTrack::RemovedTrack(TrackManager* const mgr, Track* const trk)
 {
     STANDARD_CONSTRUCTOR()
-    thePlayer = nullptr;
-    theEmission = nullptr;
+
+    initData();
+
     theManager = mgr;
     theTrack = trk;
     if (theManager != nullptr) {
@@ -1359,6 +1492,14 @@ SimLogger::RemovedTrack::RemovedTrack(TrackManager* const mgr, Track* const trk)
             theEmission = rfTrk->getLastEmission();
         }
     }
+}
+
+void SimLogger::RemovedTrack::initData()
+{
+    thePlayer = nullptr;
+    theEmission = nullptr;
+    theManager = nullptr;
+    theTrack = nullptr;
     pos.set(0,0,0);
     vel.set(0,0,0);
     angles.set(0,0,0);
@@ -1369,9 +1510,22 @@ SimLogger::RemovedTrack::RemovedTrack(TrackManager* const mgr, Track* const trk)
 }
 
 // Copy data function
-void SimLogger::RemovedTrack::copyData(const RemovedTrack& org, const bool)
+void SimLogger::RemovedTrack::copyData(const RemovedTrack& org, const bool cc)
 {
     BaseClass::copyData(org);
+    if (cc) initData();
+
+    thePlayer = org.thePlayer;
+    theEmission = org.theEmission;
+    theManager = org.theManager;
+    theTrack = org.theTrack;
+    pos = org.pos;
+    vel = org.vel;
+    angles = org.angles;
+    tgtPos = org.tgtPos;
+    tgtVel = org.tgtVel;
+    tgtAngles = org.tgtAngles;
+    sn = org.sn;
 }
 
 // Delete data function
@@ -1452,8 +1606,9 @@ EMPTY_SERIALIZER(SimLogger::NewRwrTrack)
 SimLogger::NewRwrTrack::NewRwrTrack(TrackManager* const mgr, Track* const trk)
 {
     STANDARD_CONSTRUCTOR()
-    thePlayer = nullptr;
-    theEmission = nullptr;
+
+    initData();
+
     theManager = mgr;
     theTrack = trk;
     if (theManager != nullptr) {
@@ -1465,6 +1620,14 @@ SimLogger::NewRwrTrack::NewRwrTrack(TrackManager* const mgr, Track* const trk)
             theEmission = rfTrk->getLastEmission();
         }
     }
+}
+
+void SimLogger::NewRwrTrack::initData()
+{
+    thePlayer = nullptr;
+    theEmission = nullptr;
+    theManager = nullptr;
+    theTrack = nullptr;
     pos.set(0,0,0);
     vel.set(0,0,0);
     angles.set(0,0,0);
@@ -1475,9 +1638,22 @@ SimLogger::NewRwrTrack::NewRwrTrack(TrackManager* const mgr, Track* const trk)
 }
 
 // Copy data function
-void SimLogger::NewRwrTrack::copyData(const NewRwrTrack& org, const bool)
+void SimLogger::NewRwrTrack::copyData(const NewRwrTrack& org, const bool cc)
 {
     BaseClass::copyData(org);
+    if (cc) initData();
+
+    thePlayer = org.thePlayer;
+    theEmission = org.theEmission;
+    theManager = org.theManager;
+    theTrack = org.theTrack;
+    pos = org.pos;
+    vel = org.vel;
+    angles = org.angles;
+    tgtPos = org.tgtPos;
+    tgtVel = org.tgtVel;
+    tgtAngles = org.tgtAngles;
+    sn = org.sn;
 }
 
 // Delete data function
@@ -1565,8 +1741,9 @@ EMPTY_SERIALIZER(SimLogger::UpdateRwrTrack)
 SimLogger::UpdateRwrTrack::UpdateRwrTrack(TrackManager* const mgr, Track* const trk)
 {
     STANDARD_CONSTRUCTOR()
-    thePlayer = nullptr;
-    theEmission = nullptr;
+
+    initData();
+
     theManager = mgr;
     theTrack = trk;
     if (theManager != nullptr) {
@@ -1578,6 +1755,14 @@ SimLogger::UpdateRwrTrack::UpdateRwrTrack(TrackManager* const mgr, Track* const 
             theEmission = rfTrk->getLastEmission();
         }
     }
+}
+
+void SimLogger::UpdateRwrTrack::initData()
+{
+    thePlayer = nullptr;
+    theEmission = nullptr;
+    theManager = nullptr;
+    theTrack = nullptr;
     pos.set(0,0,0);
     vel.set(0,0,0);
     angles.set(0,0,0);
@@ -1588,9 +1773,22 @@ SimLogger::UpdateRwrTrack::UpdateRwrTrack(TrackManager* const mgr, Track* const 
 }
 
 // Copy data function
-void SimLogger::UpdateRwrTrack::copyData(const UpdateRwrTrack& org, const bool)
+void SimLogger::UpdateRwrTrack::copyData(const UpdateRwrTrack& org, const bool cc)
 {
     BaseClass::copyData(org);
+    if (cc) initData();
+
+    thePlayer = org.thePlayer;
+    theEmission = org.theEmission;
+    theManager = org.theManager;
+    theTrack = org.theTrack;
+    pos = org.pos;
+    vel = org.vel;
+    angles = org.angles;
+    tgtPos = org.tgtPos;
+    tgtVel = org.tgtVel;
+    tgtAngles = org.tgtAngles;
+    sn = org.sn;
 }
 
 // Delete data function
@@ -1678,8 +1876,9 @@ EMPTY_SERIALIZER(SimLogger::RemovedRwrTrack)
 SimLogger::RemovedRwrTrack::RemovedRwrTrack(TrackManager* const mgr, Track* const trk)
 {
     STANDARD_CONSTRUCTOR()
-    thePlayer = nullptr;
-    theEmission = nullptr;
+
+    initData();
+
     theManager = mgr;
     theTrack = trk;
     if (theManager != nullptr) {
@@ -1691,6 +1890,14 @@ SimLogger::RemovedRwrTrack::RemovedRwrTrack(TrackManager* const mgr, Track* cons
             theEmission = rfTrk->getLastEmission();
         }
     }
+}
+
+void SimLogger::RemovedRwrTrack::initData()
+{
+    thePlayer = nullptr;
+    theEmission = nullptr;
+    theManager = nullptr;
+    theTrack = nullptr;
     pos.set(0,0,0);
     vel.set(0,0,0);
     angles.set(0,0,0);
@@ -1701,9 +1908,22 @@ SimLogger::RemovedRwrTrack::RemovedRwrTrack(TrackManager* const mgr, Track* cons
 }
 
 // Copy data function
-void SimLogger::RemovedRwrTrack::copyData(const RemovedRwrTrack& org, const bool)
+void SimLogger::RemovedRwrTrack::copyData(const RemovedRwrTrack& org, const bool cc)
 {
     BaseClass::copyData(org);
+    if (cc) initData();
+
+    thePlayer = org.thePlayer;
+    theEmission = org.theEmission;
+    theManager = org.theManager;
+    theTrack = org.theTrack;
+    pos = org.pos;
+    vel = org.vel;
+    angles = org.angles;
+    tgtPos = org.tgtPos;
+    tgtVel = org.tgtVel;
+    tgtAngles = org.tgtAngles;
+    sn = org.sn;
 }
 
 // Delete data function

@@ -37,11 +37,15 @@ Thread::Thread(Component* const p, const LCreal pri) : parent(p), priority(pri)
    stackSize = 0;
 }
 
-Thread::Thread()
+Thread::Thread() : parent(nullptr), priority(0), killed(false), stackSize(0), theThread(nullptr)
 {
    STANDARD_CONSTRUCTOR()
    std::cerr << "Thread(" << this << ")::Thread() -- ERROR: Do not use the default constructor" << std::endl;
    std::cerr << "Thread(" << this << ")::Thread() -- ERROR: Did NOT create the thread!" << std::endl;
+
+   theThread = nullptr;
+   killed = false;
+   stackSize = 0;
 }
 
 //------------------------------------------------------------------------------
@@ -327,6 +331,7 @@ ThreadPeriodicTask::ThreadPeriodicTask(Component* const p, const LCreal pri, con
 }
 
 ThreadPeriodicTask::ThreadPeriodicTask()
+                                       : Thread(), rate(0), bfStats(), tcnt(0), vdtFlg(false)
 {
    STANDARD_CONSTRUCTOR()
    std::cerr << "ThreadPeriodicTask(" << this << ")::ThreadPeriodicTask() -- ERROR: Do not use the default constructor" << std::endl;

@@ -60,6 +60,9 @@ LinearVelocity::LinearVelocity(const Distance* const newDistance, const Time* co
 {
     STANDARD_CONSTRUCTOR()
 
+    distance = 1;
+    time = 1;
+
     //Set checks to false
     bool okDistance = false;
     bool okTime = false;

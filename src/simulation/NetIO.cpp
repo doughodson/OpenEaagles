@@ -435,7 +435,7 @@ bool NetIO::networkInitialization()
     netInitFail = false;
 
     // 1) Find our Station
-    station = dynamic_cast<Station*>( findContainerByType(typeid(Station)) );
+    station = static_cast<Station*>( findContainerByType(typeid(Station)) );
     if (station != nullptr) {
         // 2) Find the Simulation
         simulation = station->getSimulation();
@@ -991,7 +991,7 @@ const Ntm* NetIO::findNetworkTypeMapper(const Player* const p) const
 bool NetIO::addInputEntityType(Ntm* const ntm)
 {
    bool ok = false;
-   if (nInputEntityTypes < MAX_ENTITY_TYPES) {
+   if (nInputEntityTypes < MAX_ENTITY_TYPES && ntm != nullptr) {
 
       ntm->ref();
       inputEntityTypes[nInputEntityTypes] = ntm;
@@ -1003,7 +1003,7 @@ bool NetIO::addInputEntityType(Ntm* const ntm)
       }
 
       // Add to the quick look tree
-      if (inputNtmTree != nullptr && ntm != nullptr) {
+      if (inputNtmTree != nullptr) {
          ok = inputNtmTree->add2OurLists(ntm);
       }
 
@@ -1015,7 +1015,7 @@ bool NetIO::addInputEntityType(Ntm* const ntm)
 bool NetIO::addOutputEntityType(Ntm* const ntm)
 {
    bool ok = false;
-   if (nOutputEntityTypes < MAX_ENTITY_TYPES) {
+   if (nOutputEntityTypes < MAX_ENTITY_TYPES && ntm != nullptr) {
 
       ntm->ref();
       outputEntityTypes[nOutputEntityTypes] = ntm;
@@ -1027,7 +1027,7 @@ bool NetIO::addOutputEntityType(Ntm* const ntm)
       }
 
       // add to the root node
-      if (outputNtmTree != nullptr && ntm != nullptr) {
+      if (outputNtmTree != nullptr) {
          ok = outputNtmTree->add2OurLists(ntm);
       }
    }

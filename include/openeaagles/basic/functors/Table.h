@@ -123,7 +123,7 @@ private:
 class TableStorage : public FStorage {
    DECLARE_SUBCLASS(TableStorage, FStorage)
 public:
-   TableStorage() { xbp = 0; ybp = 0; zbp = 0; wbp = 0; vbp = 0; }
+   TableStorage();
    unsigned int xbp, ybp, zbp, wbp, vbp;
 };
 
