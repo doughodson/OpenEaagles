@@ -7,7 +7,8 @@
 namespace Eaagles {
 namespace Dafif {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(NavaidLoader,"NavaidLoader")
+IMPLEMENT_SUBCLASS(NavaidLoader,"NavaidLoader")
+EMPTY_SLOTTABLE(NavaidLoader)
 EMPTY_SERIALIZER(NavaidLoader)
 
 //------------------------------------------------------------------------------
@@ -16,9 +17,15 @@ EMPTY_SERIALIZER(NavaidLoader)
 NavaidLoader::NavaidLoader() : Database()
 {
    STANDARD_CONSTRUCTOR()
+
    // default file
    db->setPathname("/eaagles3rdParty/data/dafif/fullall/");
    db->setFilename("file2");
+
+   fl = 0;
+   nfl = 0;
+   cl = 0;
+   ncl = 0;
 }
 
 NavaidLoader::NavaidLoader(
@@ -31,6 +38,12 @@ NavaidLoader::NavaidLoader(
 
    db->setPathname(path);
    db->setFilename(file);
+
+   fl = 0;
+   nfl = 0;
+   cl = 0;
+   ncl = 0;
+
    load(country);
 }
 
@@ -42,6 +55,12 @@ void NavaidLoader::copyData(const NavaidLoader& org, const bool cc)
 {
    BaseClass::copyData(org);
    if (cc) {
+      db->setPathname("/eaagles3rdParty/data/dafif/fullall/");
+      db->setFilename("file2");
+      fl = 0;
+      nfl = 0;
+      cl = 0;
+      ncl = 0;
    }
 }
 
@@ -50,6 +69,10 @@ void NavaidLoader::copyData(const NavaidLoader& org, const bool cc)
 //------------------------------------------------------------------------------
 void NavaidLoader::deleteData()
 {
+   delete[] fl;
+   nfl = 0;
+   delete[] cl;
+   ncl = 0;
 }
 
 //------------------------------------------------------------------------------

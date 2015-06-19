@@ -473,7 +473,8 @@ void multArrayConst(const float* const src, const float c, LCreal* const dst, co
 
 
 
-// Converts the integer number, 'num', to an ascii string.
+// Converts the integer number, 'num', to a 'width' character ascii string
+// (this size of 'str' must be at least width+1 bytes to include the null termination)
 void lcInteger2Str(const int num, char* const str, int width);
 
 // String copy function: Copies a string from the source, 'strSource', to the

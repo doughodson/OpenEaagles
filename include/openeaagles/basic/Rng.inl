@@ -260,9 +260,12 @@ inline double Rng::drawErlang(const unsigned int m, const double a)
 //----
 inline unsigned int Rng::drawInt32()
 { 
-   if (p == n) gen_state(); // new state vector needed
-   // gen_state() is split off to be non-inline, because it is only called once
-   // in every 624 calls and otherwise irand() would become too big to get inlined
+   if (p == n) {
+      gen_state(); // new state vector needed
+      // gen_state() is split off to be non-inline, because it is only called once
+      // in every 624 calls and otherwise irand() would become too big to get inlined
+      p = 0; // reset position
+   }
 
    unsigned int x = state[p++];
    x ^= (x >> 11);

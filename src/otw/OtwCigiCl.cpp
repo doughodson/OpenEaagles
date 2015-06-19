@@ -427,34 +427,36 @@ bool OtwCigiCl::updateOwnshipModel()
       if (getOwnshipComponentControlPacket(iw) != nullptr) {
          const Simulation::LifeForm* player = dynamic_cast<const Simulation::LifeForm*>(getOwnship());
          CigiCompCtrlV3* animation = ownshipCC[iw];
-         animation->SetCompClassV3(CigiCompCtrlV3::EntityV3);
-         animation->SetInstanceID(0);
-         animation->SetCompID(8); // Change Model Animation
-         animation->SetCompState(STANDING);
-         animation->SetCompData(0.0f, 0);
-         animation->SetCompData(0.0f, 1);
+         if (animation != nullptr) {
+            animation->SetCompClassV3(CigiCompCtrlV3::EntityV3);
+            animation->SetInstanceID(0);
+            animation->SetCompID(8); // Change Model Animation
+            animation->SetCompState(STANDING);
+            animation->SetCompData(0.0f, 0);
+            animation->SetCompData(0.0f, 1);
 
-         if (player != nullptr && animation != nullptr) {
-            // get our ownship models id and our model
-            Simulation::LifeForm* lf = const_cast<Simulation::LifeForm*>(static_cast<const Simulation::LifeForm*>(player));
-            if (lf != nullptr) {
-               if (lf->getDamage() < 1) {
-                  // Choose Animation state
-                  if (lf->getActionState() == Simulation::LifeForm::UPRIGHT_STANDING) {
-                     animation->SetCompState(STANDING);
+            if (player != nullptr) {
+               // get our ownship models id and our model
+               Simulation::LifeForm* lf = const_cast<Simulation::LifeForm*>(static_cast<const Simulation::LifeForm*>(player));
+               if (lf != nullptr) {
+                  if (lf->getDamage() < 1) {
+                     // Choose Animation state
+                     if (lf->getActionState() == Simulation::LifeForm::UPRIGHT_STANDING) {
+                        animation->SetCompState(STANDING);
+                     }
+                     else if (lf->getActionState() == Simulation::LifeForm::UPRIGHT_WALKING) {
+                        animation->SetCompState(WALK);
+                     }
+                     else if (lf->getActionState() == Simulation::LifeForm::UPRIGHT_RUNNING) {
+                        animation->SetCompState(RUN);
+                     }
+                     else {
+                        // default is standing
+                        animation->SetCompState(STANDING);
+                     }
                   }
-                  else if (lf->getActionState() == Simulation::LifeForm::UPRIGHT_WALKING) {
-                     animation->SetCompState(WALK);
-                  }
-                  else if (lf->getActionState() == Simulation::LifeForm::UPRIGHT_RUNNING) {
-                     animation->SetCompState(RUN);
-                  }
-                  else {
-                     // default is standing
-                     animation->SetCompState(STANDING);
-                  }
+                  else animation->SetCompState(DEAD);
                }
-               else animation->SetCompState(DEAD);
             }
          }
       }
@@ -2670,29 +2672,30 @@ OtwModelCigiCl::OtwModelCigiCl()
 {
    STANDARD_CONSTRUCTOR()
 
-      for (unsigned int i = 0; i < OtwCigiCl::NUM_BUFFERS; i++) {
-         parentEC[i]    = nullptr;
-         trailEC[i]     = nullptr;
-         explosionEC[i] = nullptr;
-         smokeEC[i]     = nullptr;
-         damageCC[i]    = nullptr;
-         animationCC[i] = nullptr;
-         attachedEC[i]  = nullptr;
-         launcherAPC[i] = nullptr;
-         attachedCC[i]  = nullptr;
-      }
+   for (unsigned int i = 0; i < OtwCigiCl::NUM_BUFFERS; i++) {
+      parentEC[i]    = nullptr;
+      trailEC[i]     = nullptr;
+      explosionEC[i] = nullptr;
+      smokeEC[i]     = nullptr;
+      damageCC[i]    = nullptr;
+      animationCC[i] = nullptr;
+      attachedEC[i]  = nullptr;
+      launcherAPC[i] = nullptr;
+      attachedCC[i]  = nullptr;
+   }
 
-      parentActive = false;
-      trailActive = false;
-      explosionActive = false;
-      smokeActive = false;
-      damageActive = false;
-      animationActive = false;
-      attachedEcActive = false;
-      launcherApcActive = false;
-      attachedCcActive = false;
-      isGroundPlayer = false;
-      effectsTimer = 0.0;
+   parentActive = false;
+   trailActive = false;
+   explosionActive = false;
+   smokeActive = false;
+   damageActive = false;
+   animationActive = false;
+   attachedEcActive = false;
+   launcherApcActive = false;
+   attachedCcActive = false;
+   isGroundPlayer = false;
+   effectsTimer = 0.0;
+   id = 0;
 }
 
 // ---
@@ -2727,6 +2730,7 @@ void OtwModelCigiCl::copyData(const OtwModelCigiCl& org, const bool cc)
    attachedCcActive = false;
    isGroundPlayer = false;
    effectsTimer = 0.0;
+   id = 0;
 }
 
 // ---

@@ -67,8 +67,8 @@ public:
 
    // Set comparison criteria:
    bool setMsgToken(const unsigned int token);
-   bool setFieldOfInterest(const std::string fieldName );
-   bool setCompareToValue(const std::string strVal);
+   bool setFieldOfInterest(const std::string& fieldName );
+   bool setCompareToValue(const std::string& strVal);
    bool setCompareToValue(const int numVal );
    bool setCompareToValue(const double dblVal );
    bool setCompareCondition(const Condition cc );
@@ -94,9 +94,7 @@ private:
    // slot data:
 
    unsigned int msgToken;
-   const char* fieldName;
    double compareValD;
-   const char* compareValS;
    int compareValI;
    Condition condition;
 

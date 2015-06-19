@@ -47,6 +47,7 @@ IrShape::IrShape()
 void IrShape::copyData(const IrShape& org, const bool)
 {
    BaseClass::copyData(org);
+   area = org.area;
 }
 
 Basic::Object* IrShape::getSlotByIndex(const int si)
@@ -114,6 +115,7 @@ IrSphere::IrSphere()
 void IrSphere::copyData(const IrSphere& org, const bool)
 {
    BaseClass::copyData(org);
+   radius = org.radius;
 }
 
 //------------------------------------------------------------------------------
@@ -188,6 +190,9 @@ IrBox::IrBox()
 void IrBox::copyData(const IrBox& org, const bool)
 {
    BaseClass::copyData(org);
+   x = org.x;
+   y = org.y;
+   z = org.z;
 }
 
 //------------------------------------------------------------------------------

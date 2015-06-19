@@ -10,7 +10,7 @@
 namespace Eaagles {
 namespace BasicGL {
 
-IMPLEMENT_ABSTRACT_SUBCLASS(Scanline,"Scanline")
+IMPLEMENT_SUBCLASS(Scanline,"Scanline")
 EMPTY_SLOTTABLE(Scanline)
 EMPTY_SERIALIZER(Scanline)
 
@@ -21,6 +21,11 @@ Scanline::Scanline()
 {
    STANDARD_CONSTRUCTOR()
 
+   initData();
+}
+
+void Scanline::initData()
+{
    angle = 0.0f;
 
    cx = 239.5f;
@@ -71,32 +76,8 @@ Scanline::Scanline()
 void Scanline::copyData(const Scanline& org, const bool cc)
 {
    BaseClass::copyData(org);
+   if (cc) initData();
 
-   if (cc) {
-      for (unsigned int i = 0; i < MAX_POLYS; i++) {
-         pt[i] = nullptr;
-      }
-      nPT = 0;
-
-      for (unsigned int i = 0; i < MAX_ACTIVE_POLYS; i++) {
-         apt[i] = nullptr;
-      }
-      nAPT = 0;
-
-      for (unsigned int i = 0; i < MAX_EDGES; i++) {
-         et[i] = nullptr;
-      }
-      nET = 0;
-      refET = 0;
-
-      for (unsigned int i = 0; i < MAX_ACTIVE_EDGES; i++) {
-         aet[i] = nullptr;
-      }
-      nAET = 0;
-      refAET = 0;
-
-      clipper = new Clip3D();
-   }
 }
 
 
@@ -105,6 +86,8 @@ void Scanline::copyData(const Scanline& org, const bool cc)
 //------------------------------------------------------------------------------
 void Scanline::deleteData()
 {
+   clipper->unref();
+   clipper = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -134,6 +117,14 @@ void Scanline::setMatrix()
    // translate world orgin to center of display area
    rr.makeTranslate(-cx,-cy,0.0f);
    mat.preMult(rr);
+}
+
+
+//------------------------------------------------------------------------------
+// callback() -- default handler
+//------------------------------------------------------------------------------
+void Scanline::callback(const PolyData* const /*p*/, const unsigned int /*x*/, const unsigned int /*y*/)
+{
 }
 
 //------------------------------------------------------------------------------
@@ -751,7 +742,11 @@ Scanline::Edge::Edge(
       nslope.set(0.0f,0.0f,0.0f);
       valid = true;
    }
-   else valid = false;
+   else {
+      slope = 0.0f;
+      nslope.set(0.0f,0.0f,0.0f);
+      valid = false;
+   }
 
    polygon = p;
    pointLock = false;
@@ -778,7 +773,10 @@ Scanline::Edge::Edge(
       slope = (uv[0] - lv[0]) / (uv[1] - lv[1]) ;
       valid = true;
    }
-   else valid = false;
+   else {
+      slope = 0;
+      valid = false;
+   }
 
    polygon = p;
    pointLock = false;

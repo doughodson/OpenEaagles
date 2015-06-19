@@ -556,16 +556,18 @@ LCreal AircraftIrSignature::getPLA(const AirVehicle* const airModel) {
 LCreal AircraftIrSignature::getHotPartsRadiation(const IrQueryMsg* const msg)
 {
     LCreal currentPla = 1.0;
+    LCreal targetAlt = 0;
+    LCreal targetVel = 0;
 
     const Player* targetAircraft = msg->getTarget();
     if (targetAircraft != nullptr) {
         if (targetAircraft->isClassType(typeid(AirVehicle))) {
             currentPla = getPLA(static_cast<const AirVehicle*>(targetAircraft));
+            targetAlt = static_cast<LCreal>(targetAircraft->getAltitudeM());
+            targetVel = targetAircraft->getMach();
         }
     }
 
-    LCreal targetAlt = static_cast<LCreal>(targetAircraft->getAltitudeM());
-    LCreal targetVel = targetAircraft->getMach();
     LCreal targetAzimuth = msg->getAzimuthAoi();
     LCreal targetElevation = msg->getElevationAoi();
     if (targetAzimuth < 0) targetAzimuth = -targetAzimuth;

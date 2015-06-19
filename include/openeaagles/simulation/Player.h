@@ -1051,6 +1051,7 @@ protected:
 
 private:
    void initData();
+   Simulation* getSimulationImp();
 
    // ---
    // Player identity

@@ -40,12 +40,14 @@ void DiffEquation::initData()
 //------------------------------------------------------------------------------
 // copyData() -- copy member data
 //------------------------------------------------------------------------------
-void DiffEquation::copyData(const DiffEquation& org, const bool)
+void DiffEquation::copyData(const DiffEquation& org, const bool cc)
 {
    BaseClass::copyData(org);
+   if (cc) initData();
 
    // copy data array -- derived classes must have called allocateMemory() prior
    // to calling this copyData() function.
+   allocateMemory( org.n );
    for (unsigned int i = 0; i < n; i++) {
       pa[i] = org.pa[i];
       pb[i] = org.pb[i];

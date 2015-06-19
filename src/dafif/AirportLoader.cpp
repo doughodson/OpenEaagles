@@ -9,7 +9,8 @@
 namespace Eaagles {
 namespace Dafif {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(AirportLoader,"AirportLoader")
+IMPLEMENT_SUBCLASS(AirportLoader,"AirportLoader")
+EMPTY_SLOTTABLE(AirportLoader)
 EMPTY_SERIALIZER(AirportLoader)
 
 //------------------------------------------------------------------------------
@@ -46,6 +47,9 @@ void AirportLoader::copyData(const AirportLoader& org, const bool cc)
 {
    BaseClass::copyData(org);
    if (cc) {
+      db->setPathname("/eaagles3rdParty/data/dafif/fullall/");
+      db->setFilename("file0");
+      firstAirport = nullptr;
    }
 }
 
@@ -1352,6 +1356,7 @@ AirportLoader::IlsKey::IlsKey(const long idx, const Ils& ils) : Key(idx)
 
    ils.key(key);
    ils.ident(id);
+   parent = nullptr;
    next = nullptr;
    freq = ils.frequency();
    chan = ils.channel();
@@ -1363,6 +1368,7 @@ AirportLoader::IlsKey::IlsKey(const char* key1) : Key(0)
    size = ILS_RECORD_LEN;
    Record::dsGetString(key,key1,ILS_KEY_LEN);
    id[0] = '\0';
+   parent = nullptr;
    next = nullptr;
    freq = 0.0f;
    chan = 0;
@@ -1410,6 +1416,7 @@ AirportLoader::RunwayKey::RunwayKey(const long idx, const Runway& runway) : Key(
    lat = runway.latitude(Runway::HIGH_END);
    lon = runway.longitude(Runway::HIGH_END);
 
+   parent = nullptr;
    next = nullptr;
    ils = nullptr;
 }
@@ -1419,6 +1426,7 @@ AirportLoader::RunwayKey::RunwayKey(const char* key1) : Key(0)
    size = RUNWAY_RECORD_LEN;
    Record::dsGetString(key,key1,RW_KEY_LEN);
    rwlen = 0;
+   parent = nullptr;
    next = nullptr;
    ils = nullptr;
 }
@@ -1426,8 +1434,11 @@ AirportLoader::RunwayKey::RunwayKey(const char* key1) : Key(0)
 
 AirportLoader::RunwayKey::~RunwayKey()
 {
-   for (IlsKey* ilsk = ils; ilsk != nullptr; ilsk = ilsk->next) {
-      delete ilsk;
+   IlsKey* ilsk = ils;
+   while (ilsk != nullptr) {
+      IlsKey* x = ilsk;
+      ilsk = ilsk->next;
+      delete x;
    }
 }
 
@@ -1463,6 +1474,7 @@ AirportLoader::AirportKey::AirportKey(const long idx,
    lon = airport.longitude();
    type = airport.airportType();
 
+   next = nullptr;
    runways = nullptr;
 }
 
@@ -1471,14 +1483,18 @@ AirportLoader::AirportKey::AirportKey(const char* key1) : Key(0)
    size = AIRPORT_RECORD_LEN;
    Record::dsGetString(key,key1,AP_KEY_LEN);
    runways = nullptr;
+   next = nullptr;
    type = Airport::ANY;
 }
 
 
 AirportLoader::AirportKey::~AirportKey()
 {
-   for (RunwayKey* rwk = runways; rwk != nullptr; rwk = rwk->next) {
-      delete rwk;
+   RunwayKey* rwk = runways;
+   while (rwk != nullptr) {
+      RunwayKey* x = rwk;
+      rwk = rwk->next;
+      delete x;
    }
 }
 

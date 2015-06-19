@@ -13,9 +13,28 @@ namespace Basic {
 //==============================================================================
 IMPLEMENT_SUBCLASS(TableStorage, "TableStorage")
 EMPTY_SLOTTABLE(TableStorage)
-EMPTY_COPYDATA(TableStorage)
 EMPTY_DELETEDATA(TableStorage)
 EMPTY_SERIALIZER(TableStorage)
+
+TableStorage::TableStorage()
+{
+   STANDARD_CONSTRUCTOR()
+   xbp = 0;
+   ybp = 0;
+   zbp = 0;
+   wbp = 0;
+   vbp = 0;
+}
+
+void TableStorage::copyData(const TableStorage& org, const bool cc)
+{
+    BaseClass::copyData(org);
+   xbp = org.xbp;
+   ybp = org.ybp;
+   zbp = org.zbp;
+   wbp = org.wbp;
+   vbp = org.vbp;
+}
 
 //==============================================================================
 // Class Table

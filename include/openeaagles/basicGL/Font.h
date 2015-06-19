@@ -177,7 +177,7 @@ public:
 
     const unsigned char* lut() const                    { return pLUT; }
 
-    bool isFTGL() const                                 { return (pFTGL != 0); }
+    bool isFTGL() const                                 { return (pFTGL != nullptr); }
     void* FTGL()                                        { return pFTGL; }
 
     const char* fontDirectory() const                   { return fontPath; }
@@ -213,6 +213,8 @@ protected:
     void setFontLoaded()                                { loaded = true; }
 
 private:
+    void initData();
+
     static const int LUT_SIZE = 256;
     GLdouble  fWidth, fHeight;          // Font size
     GLuint    bWidth, bHeight;          // Bitmap size

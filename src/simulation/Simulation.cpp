@@ -1194,10 +1194,7 @@ DataRecorder* Simulation::getDataRecorder()
 Station* Simulation::getStation()
 {
    if (station == nullptr) {
-      station = static_cast<Station*>(findContainerByType(typeid(Station)));
-      if (station == nullptr && isMessageEnabled(MSG_ERROR)) {
-         std::cerr << "Simulation::getStation(): ERROR, unable to locate the Station class!" << std::endl;
-      }
+      getStationImp();
    }
    return station;
 }
@@ -1205,16 +1202,23 @@ Station* Simulation::getStation()
 // Our Station (const version)
 const Station* Simulation::getStation() const
 {
-   if (station != nullptr) {
-      return station;
+   if (station == nullptr) {
+      (const_cast<Simulation*>(this))->getStationImp();
    }
-   else {
-      // Yes this is a "const cast-away", but its the non-const version
-      // that initially finds our Station class.
-      const Station* s = (static_cast<const Simulation*>(this))->getStation();
-      return s;
-   }
+   return station;
 }
+
+Station* Simulation::getStationImp()
+{
+   if (station == nullptr) {
+      station = static_cast<Station*>(findContainerByType(typeid(Station)));
+      if (station == nullptr && isMessageEnabled(MSG_ERROR)) {
+         std::cerr << "Simulation::getStationImp(): ERROR, unable to locate the Station class!" << std::endl;
+      }
+   }
+   return station;
+}
+
 
 //------------------------------------------------------------------------------
 // Sets the airport loader

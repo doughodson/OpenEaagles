@@ -559,7 +559,7 @@ void multArrayConst(const float* const src, const float c, LCreal* const dst, co
 //------------
 void lcInteger2Str(const int num, char* const str, int width)
 {
-   const int MAX_CHARS = 24;
+   const int MAX_CHARS = 32;
 
    // check sign
    bool isNeg = (num < 0);
@@ -577,7 +577,9 @@ void lcInteger2Str(const int num, char* const str, int width)
    } while( tnum > 0 && nc < MAX_CHARS);
 
    // Add the negative character (if needed)
-   if(isNeg) temp[nc++] = '-';
+   if(isNeg && nc < MAX_CHARS) {
+      temp[nc++] = '-';
+   }
 
    // pad with blanks
    int nBlanks = (width - nc);

@@ -82,7 +82,7 @@ protected:
    };
 
 protected:
-   virtual void callback(const PolyData* const p, const unsigned int x, const unsigned int y) =0;
+   virtual void callback(const PolyData* const p, const unsigned int x, const unsigned int y);
 
    virtual void reset();
    virtual void scanline(const int y);
@@ -97,6 +97,8 @@ protected:
    virtual void add2EdgeTable(Edge* tbl[], const int n);
 
 private:
+   void initData();
+
    static const unsigned int MAX_EDGES = 4000;
    static const unsigned int MAX_ACTIVE_EDGES = 1000;
    static const unsigned int MAX_POLYS = 500;

@@ -101,6 +101,9 @@ void CadrgFrame::load(CadrgFrameEntry* entry)
         string = new Basic::String(frameEntry->getDirectory());
         string->catStr(frameEntry->getFileName());
     }
+    if (string == nullptr) {
+       return;
+    }
 
     #if defined(WIN32)
         std::ifstream   fin(*string, std::ios::in | std::ios::binary);
@@ -114,7 +117,7 @@ void CadrgFrame::load(CadrgFrameEntry* entry)
         return;
     }
 
-    if (string != nullptr) string->unref();
+    string->unref();
 
     // National Imagery Transmission Format (NITF)  header check - skipped for now (SLS),
     // assume no NITF hdr

@@ -103,6 +103,7 @@ public:
         const char* getDescription() override;
         void captureData() override;
     private:
+        void initData();
         int theType;
         Basic::safe_ptr<const Player> thePlayer;
         Basic::safe_ptr<const Player> theSource;   // source of damage, usually a weapon, always a player
@@ -131,6 +132,7 @@ public:
         const char* getDescription() override;
         void captureData() override;
     private:
+        void initData();
         int theType;
         Basic::safe_ptr<const Player> thePlayer;
         int rounds;
@@ -152,6 +154,7 @@ public:
         const char* getDescription() override;
         void captureData() override;
     private:
+        void initData();
         int theType;
         Basic::safe_ptr<const Player> thePlayer;
         Basic::safe_ptr<const Player> theWeapon;
@@ -176,6 +179,7 @@ public:
         const char* getDescription() override;
         void captureData() override;
     private:
+        void initData();
         int theType;
         Basic::safe_ptr<const TrackManager> theManager;
         Basic::safe_ptr<const Track> theTrack;
@@ -204,6 +208,7 @@ public:
         const char* getDescription() override;
         void captureData() override;
     private:
+        void initData();
         int theType;
         Basic::safe_ptr<const TrackManager> theManager;
         Basic::safe_ptr<const Track> theTrack;

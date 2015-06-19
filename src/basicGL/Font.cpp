@@ -53,30 +53,35 @@ END_SLOT_MAP()
 //------------------------------------------------------------------------------
 Font::Font()
 {
-    STANDARD_CONSTRUCTOR()
+   STANDARD_CONSTRUCTOR()
 
-    leftSide = 0;
-    topSide = 0;
-    b = 0;
-    pLUT = nullptr;
-    pFTGL = nullptr;
-    fontPath = nullptr;
-    fontFile = nullptr;
-    loaded = false;
-    charSpacing = 0;
-    lineSpacing = 0;
+   initData();
+}
 
-    setFontWidth( defaultFontWidth );
-    setFontHeight( defaultFontHeight );
+void Font::initData()
+{
+   leftSide = 0;
+   topSide = 0;
+   b = 0;
+   pLUT = nullptr;
+   pFTGL = nullptr;
+   fontPath = nullptr;
+   fontFile = nullptr;
+   loaded = false;
+   charSpacing = 0;
+   lineSpacing = 0;
 
-    setBitmapWidth( static_cast<int>(defaultFontWidth) );
-    setBitmapHeight( static_cast<int>(defaultFontHeight) );
+   setFontWidth( defaultFontWidth );
+   setFontHeight( defaultFontHeight );
+
+   setBitmapWidth( static_cast<int>(defaultFontWidth) );
+   setBitmapHeight( static_cast<int>(defaultFontHeight) );
 }
 
 Font::Font(const Font& org)
 {
-    STANDARD_CONSTRUCTOR()
-    copyData(org, true);
+   STANDARD_CONSTRUCTOR()
+   copyData(org, true);
 }
 
 Font::~Font()
@@ -86,13 +91,13 @@ Font::~Font()
 
 Font& Font::operator=(const Font& org)
 {
-    if (this != &org) copyData(org,false);
-    return *this;
+   if (this != &org) copyData(org,false);
+   return *this;
 }
 
 Font* Font::clone() const
 {
-    return nullptr;
+   return nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -100,37 +105,51 @@ Font* Font::clone() const
 //------------------------------------------------------------------------------
 void Font::copyData(const Font& org, const bool cc)
 {
-    BaseClass::copyData(org);
-    leftSide = org.leftSide;
-    topSide = org.topSide;
-    b = org.b;
-    pLUT = org.pLUT;
-    pFTGL = org.pFTGL;
-    charSpacing = org.charSpacing;
-    lineSpacing = org.lineSpacing;
-    if (!cc) {
-        if (fontPath != nullptr) delete[] fontPath;
-        if (fontFile != nullptr) delete[] fontFile;
-    }
-    fontPath = nullptr;
-    fontFile = nullptr;
-    if (org.fontPath != nullptr) {
-        size_t len = std::strlen(org.fontPath);
-        fontPath = new char[len+1];
-        lcStrcpy(fontPath,len+1,org.fontPath);
-    }
-    if (org.fontFile != nullptr) {
-        size_t len = std::strlen(org.fontFile);
-        fontFile = new char[len+1];
-        lcStrcpy(fontFile,len+1,org.fontFile);
-    }
-    loaded = org.loaded;
+   BaseClass::copyData(org);
+   if (cc) initData();
 
-    fWidth = org.fWidth;
-    fHeight = org.fHeight;
-    bWidth = org.bWidth;
-    bHeight = org.bHeight;
+   leftSide = org.leftSide;
+   topSide = org.topSide;
+   b = org.b;
 
+   if (org.pLUT != nullptr) {
+      if (pLUT == nullptr) {
+         pLUT = new unsigned char[LUT_SIZE];
+      }
+      for (unsigned int i = 0; i < LUT_SIZE; i++) {
+         pLUT[i] = org.pLUT[i];
+      }
+   }
+   else {
+      if (pLUT != nullptr) delete[] pLUT;
+      pLUT = nullptr;
+   }
+
+   pFTGL = org.pFTGL;
+
+   if (fontPath != nullptr) delete[] fontPath;
+   if (fontFile != nullptr) delete[] fontFile;
+   fontPath = nullptr;
+   fontFile = nullptr;
+   if (org.fontPath != nullptr) {
+      size_t len = std::strlen(org.fontPath);
+      fontPath = new char[len+1];
+      lcStrcpy(fontPath,len+1,org.fontPath);
+   }
+   if (org.fontFile != nullptr) {
+      size_t len = std::strlen(org.fontFile);
+      fontFile = new char[len+1];
+      lcStrcpy(fontFile,len+1,org.fontFile);
+   }
+   loaded = org.loaded;
+
+   charSpacing = org.charSpacing;
+   lineSpacing = org.lineSpacing;
+
+   fWidth = org.fWidth;
+   fHeight = org.fHeight;
+   bWidth = org.bWidth;
+   bHeight = org.bHeight;
 }
 
 //------------------------------------------------------------------------------
@@ -138,6 +157,14 @@ void Font::copyData(const Font& org, const bool cc)
 //------------------------------------------------------------------------------
 void Font::deleteData()
 {
+   if (pLUT != nullptr) delete[] pLUT;
+   pLUT = nullptr;
+
+   if (fontPath != nullptr) delete[] fontPath;
+   fontPath = nullptr;
+
+   if (fontFile != nullptr) delete[] fontFile;
+   fontFile = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -176,7 +203,7 @@ int Font::xferChars(char* const outp, const size_t BUF_SIZE, const char* const i
    if (pLUT != nullptr) {
       for (unsigned int i = 0; i < n; i++) {
           unsigned char idx = static_cast<unsigned char>(inp[i]);
-          outp[i] = (idx < LUT_SIZE ? static_cast<char>(pLUT[idx]) : inp[i]);
+          outp[i] = static_cast<char>(pLUT[idx]);
       }
    }
    else {

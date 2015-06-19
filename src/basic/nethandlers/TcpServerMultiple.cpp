@@ -155,11 +155,11 @@ TcpHandler* TcpServerMultiple::acceptConnection()
    TcpHandler* newHandler = nullptr;
    if (newSocket != INVALID_SOCKET) {
       newHandler = new TcpHandler(newSocket);
-   }
 
-   // Set blocked or no-wait
-   if (noWait) newHandler->setNoWait();
-   else newHandler->setBlocked();
+      // Set blocked or no-wait
+      if (noWait) newHandler->setNoWait();
+      else newHandler->setBlocked();
+   }
 
    return newHandler;
 }

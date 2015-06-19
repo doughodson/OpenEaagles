@@ -224,7 +224,7 @@ bool Nib::isIffUpdateRequired(const LCreal curExecTime, const Simulation::Iff* c
          (opData.modifier != iffFunOpData->modifier);
 
       if (changed) {
-         options = CHANGE_INDICATOR;
+         //options = CHANGE_INDICATOR;
          result = YES;
       }
 

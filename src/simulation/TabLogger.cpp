@@ -536,12 +536,34 @@ EMPTY_SERIALIZER(TabLogger::LogPlayerData)
 TabLogger::LogPlayerData::LogPlayerData(int t, const Player* const p)
 {
     STANDARD_CONSTRUCTOR()
-    theSource = nullptr;
+
+    initData();
     thePlayer = p;
     theType = t;
+}
+
+TabLogger::LogPlayerData::LogPlayerData(int t, const Player* const p, const Player* const w)
+{
+    STANDARD_CONSTRUCTOR()
+
+    initData();
+
+    theSource = w;  // source of damage, usually a weapon, always a player
+    thePlayer = p;
+    theType = t;
+    mach = -1.0;
+}
+
+void TabLogger::LogPlayerData::initData()
+{
+    theSource = nullptr;
+    thePlayer = nullptr;
+    theType = 0;
     pos.set(0,0,0);
     vel.set(0,0,0);
     angles.set(0,0,0);
+    latitude = 0.0;
+    longitude = 0.0;
     alpha = 0.0;
     beta = 0.0;
     ias = 0.0;
@@ -549,27 +571,25 @@ TabLogger::LogPlayerData::LogPlayerData(int t, const Player* const p)
     pLoading = 0.0;
 }
 
-TabLogger::LogPlayerData::LogPlayerData(int t, const Player* const p, const Player* const w)
-{
-    STANDARD_CONSTRUCTOR()
-    theSource = w;  // source of damage, usually a weapon, always a player
-    thePlayer = p;
-    theType = t;
-    pos.set(0,0,0);
-    vel.set(0,0,0);
-    angles.set(0,0,0);
-    alpha = 0;
-    beta = 0;
-    ias = 0;
-    mach = -1.0;
-    pLoading = 0.0;
-}
-
-
 // Copy data function
-void TabLogger::LogPlayerData::copyData(const LogPlayerData& org, const bool)
+void TabLogger::LogPlayerData::copyData(const LogPlayerData& org, const bool cc)
 {
     BaseClass::copyData(org);
+    if (cc) initData();
+
+    theSource = org.theSource;
+    thePlayer = org.thePlayer;
+    theType = org.theType;
+    pos = org.pos;
+    vel = org.vel;
+    angles = org.angles;
+    latitude = org.latitude;
+    longitude = org.longitude;
+    alpha = org.alpha;
+    beta = org.beta;
+    ias = org.ias;
+    mach = org.mach;
+    pLoading = org.pLoading;
 }
 
 // Delete data function
@@ -722,10 +742,21 @@ TabLogger::LogGunActivity::LogGunActivity(int t, const Player* const launcher, c
     rounds = n;
 }
 
+void TabLogger::LogGunActivity::initData()
+{
+    theType = 0;
+    thePlayer = nullptr;
+    rounds = 0;
+}
+
 // Copy data function
-void TabLogger::LogGunActivity::copyData(const LogGunActivity& org, const bool)
+void TabLogger::LogGunActivity::copyData(const LogGunActivity& org, const bool cc)
 {
     BaseClass::copyData(org);
+    if (cc) initData();
+    theType = org.theType;
+    thePlayer = org.thePlayer;
+    rounds = org.rounds;
 }
 
 // Delete data function
@@ -803,10 +834,31 @@ TabLogger::LogWeaponActivity::LogWeaponActivity(const int callType, const Player
     eventID = 0;
 }
 
+void TabLogger::LogWeaponActivity::initData()
+{
+    theType   = 0;
+    thePlayer = nullptr;
+    theWeapon = nullptr;
+    theTarget = nullptr;
+    detType   = 0;
+    missDist  = 0;
+    theTrack = nullptr;
+    eventID = 0;
+}
+
 // Copy data function
-void TabLogger::LogWeaponActivity::copyData(const LogWeaponActivity& org, const bool)
+void TabLogger::LogWeaponActivity::copyData(const LogWeaponActivity& org, const bool cc)
 {
     BaseClass::copyData(org);
+    if (cc) initData();
+    theType   = org.theType;
+    thePlayer = org.thePlayer;
+    theWeapon = org.theWeapon;
+    theTarget = org.theTarget;
+    detType   = org.detType;
+    missDist  = org.missDist;
+    theTrack = org.theTrack;
+    eventID = org.eventID;
 }
 
 // Delete data function
@@ -918,8 +970,9 @@ EMPTY_SERIALIZER(TabLogger::LogActiveTrack)
 TabLogger::LogActiveTrack::LogActiveTrack(int t, const TrackManager* const mgr, const Track* const trk)
 {
     STANDARD_CONSTRUCTOR()
-    thePlayer = nullptr;
-    theEmission = nullptr;
+
+    initData();
+
     theType = t;
     theManager = mgr;
     theTrack = trk;
@@ -932,6 +985,15 @@ TabLogger::LogActiveTrack::LogActiveTrack(int t, const TrackManager* const mgr, 
             theEmission = rfTrk->getLastEmission();
         }
     }
+}
+
+void TabLogger::LogActiveTrack::initData()
+{
+    thePlayer = nullptr;
+    theEmission = nullptr;
+    theType = 0;
+    theManager = nullptr;
+    theTrack = nullptr;
     pos.set(0,0,0);
     vel.set(0,0,0);
     angles.set(0,0,0);
@@ -942,9 +1004,23 @@ TabLogger::LogActiveTrack::LogActiveTrack(int t, const TrackManager* const mgr, 
 }
 
 // Copy data function
-void TabLogger::LogActiveTrack::copyData(const LogActiveTrack& org, const bool)
+void TabLogger::LogActiveTrack::copyData(const LogActiveTrack& org, const bool cc)
 {
     BaseClass::copyData(org);
+    if (cc) initData();
+
+    thePlayer = org.thePlayer;
+    theEmission = org.theEmission;
+    theType = org.theType;
+    theManager = org.theManager;
+    theTrack = org.theTrack;
+    pos = org.pos;
+    vel = org.vel;
+    angles = org.angles;
+    tgtPos = org.tgtPos;
+    tgtVel = org.tgtVel;
+    tgtAngles = org.tgtAngles;
+    sn = org.sn;
 }
 
 // Delete data function
@@ -1055,8 +1131,9 @@ EMPTY_SERIALIZER(TabLogger::LogPassiveTrack)
 TabLogger::LogPassiveTrack::LogPassiveTrack(int t, const TrackManager* const mgr, const Track* const trk)
 {
     STANDARD_CONSTRUCTOR()
-    thePlayer = nullptr;
-    theEmission = nullptr;
+
+    initData();
+
     theType = t;
     theManager = mgr;
     theTrack = trk;
@@ -1069,6 +1146,15 @@ TabLogger::LogPassiveTrack::LogPassiveTrack(int t, const TrackManager* const mgr
             theEmission = rfTrk->getLastEmission();
         }
     }
+}
+
+void TabLogger::LogPassiveTrack::initData()
+{
+    thePlayer = nullptr;
+    theEmission = nullptr;
+    theType = 0;
+    theManager = nullptr;
+    theTrack = nullptr;
     pos.set(0,0,0);
     vel.set(0,0,0);
     angles.set(0,0,0);
@@ -1079,9 +1165,23 @@ TabLogger::LogPassiveTrack::LogPassiveTrack(int t, const TrackManager* const mgr
 }
 
 // Copy data function
-void TabLogger::LogPassiveTrack::copyData(const LogPassiveTrack& org, const bool)
+void TabLogger::LogPassiveTrack::copyData(const LogPassiveTrack& org, const bool cc)
 {
     BaseClass::copyData(org);
+    if (cc) initData();
+
+    thePlayer = org.thePlayer;
+    theEmission = org.theEmission;
+    theType = org.theType;
+    theManager = org.theManager;
+    theTrack = org.theTrack;
+    pos = org.pos;
+    vel = org.vel;
+    angles = org.angles;
+    tgtPos = org.tgtPos;
+    tgtVel = org.tgtVel;
+    tgtAngles = org.tgtAngles;
+    sn = org.sn;
 }
 
 // Delete data function

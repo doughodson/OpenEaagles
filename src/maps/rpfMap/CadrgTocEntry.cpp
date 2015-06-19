@@ -28,6 +28,11 @@ EMPTY_SERIALIZER(CadrgTocEntry)
 CadrgTocEntry::CadrgTocEntry()
 {
     STANDARD_CONSTRUCTOR()
+    initData();
+}
+
+void CadrgTocEntry::initData()
+{
     nwLat = 0.0;
     nwLon = 0.0;
     seLat = 0.0;
@@ -50,10 +55,11 @@ CadrgTocEntry::CadrgTocEntry()
 // ---------------------------------------------------------------------------------------------------
 // copyData()
 // ---------------------------------------------------------------------------------------------------
-void CadrgTocEntry::copyData(const CadrgTocEntry& org, const bool)
+void CadrgTocEntry::copyData(const CadrgTocEntry& org, const bool cc)
 {
     // Copy our baseclass stuff first
     BaseClass::copyData(org);
+    if (cc) initData();
 
     nwLat = org.nwLat;
     nwLon = org.nwLon;
@@ -127,6 +133,8 @@ void CadrgTocEntry::generateItems(void)
         mapImage = 1;
     }
     std::sprintf(title, "%s", tempTitle);
+
+    delete[] tempTitle;
 }
 
 // Set functions

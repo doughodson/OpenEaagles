@@ -69,10 +69,7 @@ void DataRecorder::processRecords()
 Station* DataRecorder::getStation()
 {
    if (sta == nullptr) {
-      sta = static_cast<Station*>(findContainerByType(typeid(Station)));
-      if (sta == nullptr && isMessageEnabled(MSG_ERROR)) {
-         std::cerr << "DataRecorder::getStation(): ERROR, unable to locate the Station class!" << std::endl;
-      }
+      getStationImp();
    }
    return sta;
 }
@@ -80,20 +77,44 @@ Station* DataRecorder::getStation()
 // Our parent Station (const version)
 const Station* DataRecorder::getStation() const
 {
-   if (sta != nullptr) {
-      return sta;
+   if (sta == nullptr) {
+      (const_cast<DataRecorder*>(this))->getStationImp();
    }
-   else {
-      // Yes this is a "const cast-away", but it is the non-const version
-      // that initially finds our Station class.
-      const DataRecorder* p = static_cast<const DataRecorder*>(this);
-      const Station* s = p->getStation();
-      return s;
-   }
+   return sta;
 }
+
+// Find our parent Station
+Station* DataRecorder::getStationImp()
+{
+   if (sta == nullptr) {
+      sta = static_cast<Station*>(findContainerByType(typeid(Station)));
+      if (sta == nullptr && isMessageEnabled(MSG_ERROR)) {
+         std::cerr << "DataRecorder::getStationImp(): ERROR, unable to locate the Station class!" << std::endl;
+      }
+   }
+   return sta;
+}
+
 
 // The simulation
 Simulation* DataRecorder::getSimulation()
+{
+   if (sim == nullptr) {
+      getSimulationImp();
+   }
+   return sim;
+}
+
+const Simulation* DataRecorder::getSimulation() const
+{
+   if (sim == nullptr) {
+      (const_cast<DataRecorder*>(this))->getSimulationImp();
+   }
+   return sim;
+}
+
+// The simulation
+Simulation* DataRecorder::getSimulationImp()
 {
    if (sim == nullptr) {
       Station* p = getStation();
@@ -102,24 +123,12 @@ Simulation* DataRecorder::getSimulation()
    return sim;
 }
 
-const Simulation* DataRecorder::getSimulation() const
-{
-   if (sim != nullptr) {
-      return sim;
-   }
-   else {
-      // Yes this is a "const cast-away", but its the non-const version
-      // that initially finds our Simulation class.
-      const DataRecorder* p = static_cast<const DataRecorder*>(this);
-      const Simulation* s = p->getSimulation();
-      return s;
-   }
-}
 
 bool DataRecorder::recordDataImp(const unsigned int id, const Basic::Object* pObjects[4], const double values[4])
 {
    return true;
 }
+
 
 //==============================================================================
 // Class RecorderComponent

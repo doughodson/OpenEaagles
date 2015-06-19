@@ -90,7 +90,7 @@ Polygon* Clip3D::clip(const Polygon& inPoly) const
    // ---
    const unsigned int num = inPoly.getNumberOfVertices();
    const osg::Vec3* const in = inPoly.getVertices();
-   if (in != nullptr && inPoly.getNumberOfVertices() < 2) return nullptr;
+   if (in == nullptr || inPoly.getNumberOfVertices() < 2) return nullptr;
 
    // ---
    // count vertices "outside" with respect to each of the six planes

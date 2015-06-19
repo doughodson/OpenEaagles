@@ -86,7 +86,7 @@ bool LatLon::setDir(const char* const d)
         else if (d[0] == 'W' || d[0] == 'w') dir = WEST;
     }
 
-    if (dir == NONE) {
+    if (dir == NONE && d != nullptr) {
         if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "LatLon::setDir: invalid lat/long direction: " << d << std::endl;
         }

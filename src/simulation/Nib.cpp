@@ -514,7 +514,7 @@ bool Nib::isPlayerStateUpdateRequired(const LCreal curExecTime)
    // ---
    // 4) Check for air vehicle articulated and attached parts (always check this)
    // ---
-   if ( player->isMajorType(Player::AIR_VEHICLE) ) {
+   if ( player != nullptr && player->isMajorType(Player::AIR_VEHICLE) ) {
 
       const AirVehicle* av = static_cast<const AirVehicle*>(player);
 
@@ -568,7 +568,7 @@ bool Nib::isPlayerStateUpdateRequired(const LCreal curExecTime)
    // ---
    // 5) Check for ground vehicle articulated and attached parts (always check this)
    // ---
-   if ( player->isMajorType(Player::GROUND_VEHICLE) ) {
+   if ( player != nullptr && player->isMajorType(Player::GROUND_VEHICLE) ) {
 
       const GroundVehicle* gv = static_cast<const GroundVehicle*>(player);
 

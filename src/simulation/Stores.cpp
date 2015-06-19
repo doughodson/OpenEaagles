@@ -643,11 +643,9 @@ bool Stores::setSlotStores(const Basic::PairStream* const msg)
                   assignExtStoreToStation(stationNumber, cwpn);
                }
 
-               if (cpair != nullptr) {
-                  // Add to the new stores list
-                  newStores->put(cpair);
-                  cpair->unref(); // the new list has it.
-               }
+               // Add to the new stores list
+               newStores->put(cpair);
+               cpair->unref(); // the new list has it.
             }
             else {
                std::cerr << "Stores::setSlotStores(): invalid external stores type; use Weapon or Stores classes" << std::endl;

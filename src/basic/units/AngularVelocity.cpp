@@ -54,6 +54,11 @@ AngularVelocity::AngularVelocity(const Angle* const newAngle, const Time* const 
 {
     STANDARD_CONSTRUCTOR()
 
+    //Set a default angle, time, and angularVelocity
+    angle = 1;
+    time = 1;
+    val = 1;
+
     //Set Checks to false:
     bool okAngle = false;
     bool okTime = false;

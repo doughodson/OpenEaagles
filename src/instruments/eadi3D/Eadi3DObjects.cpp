@@ -21,7 +21,7 @@ EMPTY_SERIALIZER(Eadi3DObjects)
 //------------------------------------------------------------------------------
 // Constructor() -
 //------------------------------------------------------------------------------
-Eadi3DObjects::Eadi3DObjects(float radius) : radius(radius), made(false)
+Eadi3DObjects::Eadi3DObjects(float radius) : base(0), radius(radius), made(false)
 {
 }
 

@@ -82,6 +82,7 @@ bool Nav::aer2xyzArray(
    delete [] caz;
    delete [] sel;
    delete [] cel;
+   delete [] pos0;
 
    return true;
 }

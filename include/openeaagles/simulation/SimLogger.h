@@ -150,6 +150,7 @@ public:
         const char* getDescription() override;
         void captureData() override;
     private:
+        void initData();
         Basic::safe_ptr<const Player> thePlayer;
         osg::Vec3 pos;
         osg::Vec3 vel;
@@ -168,6 +169,7 @@ public:
         const char* getDescription() override;
         void captureData() override;
     private:
+        void initData();
         Basic::safe_ptr<const Player> thePlayer;
         osg::Vec3 pos;
         osg::Vec3 vel;
@@ -189,6 +191,7 @@ public:
         const char* getDescription() override;
         void captureData() override;
     private:
+        void initData();
         Basic::safe_ptr<const Player> thePlayer;
         osg::Vec3 pos;
         osg::Vec3 vel;
@@ -208,6 +211,7 @@ public:
         const char* getDescription() override;
         void captureData() override;
     private:
+        void initData();
         Basic::safe_ptr<const Player> thePlayer;
         Basic::safe_ptr<const Player> theWeapon;
         Basic::safe_ptr<const Player> theTarget;
@@ -225,6 +229,7 @@ public:
         const char* getDescription() override;
         void captureData() override;
     private:
+        void initData();
         Basic::safe_ptr<const Player> thePlayer;
         int rounds;
     };
@@ -242,6 +247,7 @@ public:
         const char* getDescription() override;
         void captureData() override;
     private:
+        void initData();
         Basic::safe_ptr<const Player> thePlayer;
         Basic::safe_ptr<const Player> theWeapon;
         Basic::safe_ptr<const Player> theTarget;
@@ -260,6 +266,7 @@ public:
         const char* getDescription() override;
         void captureData() override;
     private:
+        void initData();
         Basic::safe_ptr<const Player> thePlayer;
         Basic::safe_ptr<const Player> theWeapon;
         Basic::safe_ptr<const Player> theTarget;
@@ -279,6 +286,7 @@ public:
         const char* getDescription() override;
         void captureData() override;
     private:
+        void initData();
         Basic::safe_ptr<const TrackManager> theManager;
         Basic::safe_ptr<const Track> theTrack;
         Basic::safe_ptr<const Player> thePlayer;
@@ -304,6 +312,7 @@ public:
         const char* getDescription() override;
         void captureData() override;
     private:
+        void initData();
         Basic::safe_ptr<const TrackManager> theManager;
         Basic::safe_ptr<const Track> theTrack;
         Basic::safe_ptr<const Player> thePlayer;
@@ -329,6 +338,7 @@ public:
         const char* getDescription() override;
         void captureData() override;
     private:
+        void initData();
         Basic::safe_ptr<const TrackManager> theManager;
         Basic::safe_ptr<const Track> theTrack;
         Basic::safe_ptr<const Player> thePlayer;
@@ -354,6 +364,7 @@ public:
         const char* getDescription() override;
         void captureData() override;
     private:
+        void initData();
         Basic::safe_ptr<const TrackManager> theManager;
         Basic::safe_ptr<const Track> theTrack;
         Basic::safe_ptr<const Player> thePlayer;
@@ -379,6 +390,7 @@ public:
         const char* getDescription() override;
         void captureData() override;
     private:
+        void initData();
         Basic::safe_ptr<const TrackManager> theManager;
         Basic::safe_ptr<const Track> theTrack;
         Basic::safe_ptr<const Player> thePlayer;
@@ -404,6 +416,7 @@ public:
         const char* getDescription() override;
         void captureData() override;
     private:
+        void initData();
         Basic::safe_ptr<const TrackManager> theManager;
         Basic::safe_ptr<const Track> theTrack;
         Basic::safe_ptr<const Player> thePlayer;
