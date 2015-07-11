@@ -36,7 +36,7 @@ simulation:
 
    ScanGimbal class
       1) changed 'int' variables to 'unsigned int'
-      2) getRefPosition() now returns a refernece to a osg::Vec2d
+      2) getRefPosition() now returns a reference to a osg::Vec2d
       3) changed 'ScanMode' to 'unsigned int' and added 'USER_MODES' to allow
          users to extend the enumerated scan modes with their own modes.
       4) added the virtual member function userModesScanController(), which

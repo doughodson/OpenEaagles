@@ -1,2 +1,2 @@
-Stable version v15.07
+Developmental version based on v15.07
 

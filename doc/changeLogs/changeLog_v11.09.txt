@@ -35,7 +35,7 @@ basicGL:
     SymbolLoader class
         1) Added a new slot function, "interconnect", which will tell the symbol
            loader to draw lines between the symbols that it draws.  This is useful
-           for drawing routes, etc...
+           for drawing routes, etc.
 
 
 --------------------------------------------------------------------------------

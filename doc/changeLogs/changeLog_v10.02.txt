@@ -61,7 +61,7 @@ basic:
       3) Added a table of known Eaagles classes
          -- Added function writeClassList() to write out the list of known classes
             with their form names, full class names and the number of objects
-            instanciated for each class
+            instantiated for each class
       4) SET_SLOTTABLE macro has been renamed to STANDARD_CONSTRUCTOR(), and it's required
          in all constructor functions
       5) Added macro STANDARD_DESTRUCTOR(), which is required in all destructor functions.
@@ -159,7 +159,7 @@ basicGL:
          of the pick area.
 
    Readouts.*
-      1) Changed several interal variables from float to double
+      1) Changed several internal variables from float to double
 
 
 --------------------------------------------------------------------------------
@@ -213,7 +213,7 @@ simulation:
          function to access the LOS vector
 
    Autopilot.cpp --
-      1) changed various member funciton parameter and member variables to type 'double'
+      1) changed various member function parameter and member variables to type 'double'
       
    Gimbal class
       1) All 'LCreal', osg::Vec2, osg::Vec3 and osg::Matrix are changed to double,
@@ -264,13 +264,13 @@ simulation:
 
    NetIO class
       1) createIPlayer() -- now setting the new player's container pointer (bug fix)
-      2) Fucntion createIPlayer() now sets the player's geocentric
-         velocity, accelertion and angular rate
+      2) Function createIPlayer() now sets the player's geocentric
+         velocity, acceleration and angular rate
 
    Nib class
       1) member variables 'emitterSysHandler', 'numEmissionSystems' and
          'emissionSystemsIndex' were moved from private to protected.
-         (Tempoary fix to a problem that will be addressed)
+         (Temporary fix to a problem that will be addressed)
 
    Player class
       1) Transposed the rotational matrix and renamed the function getRotationalMatrix()
@@ -333,8 +333,8 @@ simulation:
       17) Added the getInitAngles() member function that returns a vector
           with the initial conditions euler angles 
 
-      18) Fucntion deadReckonPosition() now sets the player's geocentric
-          velocity, accelertion and angular rate
+      18) Function deadReckonPosition() now sets the player's geocentric
+          velocity, acceleration and angular rate
 
    Radar class
       1) Added an integration gain
@@ -366,7 +366,7 @@ simulation:
 
    SensorMgr class
       1) Added a LOS vector from the target back to ownship in the target's
-         NED coordinates; added funcitons getTgtLosVec() and setTgtLosVec()
+         NED coordinates; added functions getTgtLosVec() and setTgtLosVec()
       2) Vectors now type 'double' (i.e., osg::Vec3d)
       3) Renamed functions getAzimuthAoa(), getElevationAoa() and getAoaVector()
          to getAzimuthAoi(), getElevationAoi() and getAoiVector(); to be
@@ -463,9 +463,9 @@ simulation:
 vehicles:
 
    JSBSimModel
-      1) dynamics() -- modified how the velocity vector, acceration vector and euler
+      1) dynamics() -- modified how the velocity vector, acceleration vector and euler
          are passed to the base Player class (see Player class changes)
 
    RacModel
-      1) updateRAC() -- modified how the velocity vector, acceration vector and euler
+      1) updateRAC() -- modified how the velocity vector, acceleration vector and euler
          are passed to the base Player class (see Player class changes)

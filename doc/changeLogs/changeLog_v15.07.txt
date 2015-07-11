@@ -1,0 +1,336 @@
+================================================================================
+Changes since v14.09
+================================================================================
+
+--------------------------------------------------------------------------------
+general
+
+- renamed the 'vehicles' library to 'dynamics' to more correctly reflect
+  provided functionality
+
+- added 'override' context keyword throughout entire framework.  This has no
+  impact or effect on existing applications, but it does serve to improve code
+  readability and quality.
+
+- added 'nullptr' context keyword throughout entire framework.  This has no
+  impact or effect on existing applications, but it does serve to improve code
+  readability and quality.
+
+- added more 'std::' namespace qualifiers to math and string functions.  This has no
+  impact or effect on existing applications, but it does serve to improve code
+  readability and quality.
+
+- The shared pointer class template (SPtr<>) that was defined inside Object's
+  scope has been moved outside and into 'Basic' namespace.  It has also been
+  renamed to 'safe_ptr<>'.
+
+  This was done for several reasons:
+     1) Declutter the Object class
+     2) Renamed to more clearly indicate the functionality provided by this
+        implementation of a shared pointer - namely, it intellegently manages ref-based
+        Objects AND is also thread-safe (meaning, multiple threads can access the
+        same shared pointer object).
+
+  To adjust existing code to the new style, search and replace all 'SPtr<>' templates
+  with 'Basic::safe_ptr<>'
+
+  For example: 'SPtr<RfSignature>' would be replaced by 'Basic::safe_ptr<RfSignature>'
+
+- Both the thread safe queue and stack templates (previously QQueue<> and QStack<>) have been
+  moved out from under the Object class umbrella and into Basic namespace akin to safe_ptr<>.
+  Like safe_ptr<>, they have been renamed to better indicate their thread-safe functionality,
+  the thread-safe queue and stack, are now named safe_queue<> and safe_stack<>.
+
+  It is unlikely you will need to make any adjustments in existing applications, as
+  these queue constructs mostly reside in the simulation classes to support radar and IR
+  modeling.  If adjustments need to be made, replace "QQueue<>" with "Basic::safe_queue<>"
+  and "QStack" with "Basic::safe_stack<>". You will also need to include the specific
+  template header file(s) of interest ("safe_queue.h" and/or "safe_stack.h")
+
+--------------------------------------------------------------------------------
+basic
+
+   Component class: removed unnecessary casting checks in several places (they were incorrect)
+
+   Functions.h/cpp: these files defined several classes including Function, Func1, Func2, Func3,
+                    Func4, Func5 and Polynomial.  The Function classes have been separated into their
+                    own .h/cpp files.
+
+   Tables.h/cpp: these files defined several classes including Table, Table1, Table2, Table3,
+                 Table4 and Table5.  Table class itself defined several static methods for
+                 performing linear function interpolation (LFI).  The Table classes have been
+                 separated into their own .h/cpp and the LFI algorithms are now defined in the
+                 lfi.h header, within the 'lfi::' namespace.
+
+   Tables & Functions: all of the Table and Function classes plus LFI algorithms have be moved
+                       into a new functors subdirectory of basic.  Technically, these are not
+                       C++ functors, but role they serve is very functor-like.
+
+   Complex.cpp
+      -- Restoring the iostream flags at the end of showComplex(), showPhasor() and the << operator
+   
+   LatLon.cpp
+      -- setDir(): added a null pointer check
+
+   Matrix.cpp
+      -- Corrected various ref() and unref() issues in getInvLU(), getDeterm(),
+         getEigerPower(), getQR() and getTriDiagnal()
+      -- Restoring the iostream flags at end of showMatrix and the << operator
+
+   Nav.cpp
+      -- aer2xyzArray(): deleting the temporary vector 'pos0'
+
+   Object.cpp
+      -- copyData(*, TRUE): now initializing the 'semaphore' member variable.
+
+   Rng.inl
+      -- drawInt32(): setting 'p' to zero after the gen_state() call; just to
+         make the Coverity scan happy.
+
+   Thread.cpp
+      -- Thread(): unused default constructor: added code to initialize all of
+         the member variables (just in case)
+      -- ThreadPeriodicTask(): unused default constructor: added code to initialize
+         all of the member variables (just in case)
+
+   ThreadPool.cpp
+      -- initData(): added code to initialize allThreads[] and availableThreads[i]
+      -- ThreadPoolThread(): now initializing the 'currentObj' pointer.
+
+   Table.cpp
+      -- added the TableStoreage::copyData() function
+
+   support.cpp
+      -- lcInteger2str(): increased MAX_CHARS to 32, and now checking to see
+         if 'nc' is less than MAX_CHARS before adding the '-' character.
+
+   nethandlers/TcpServerMultiple.cpp
+      -- moved the code that calls setNoWait() under the valid socket check.
+
+   ubf/Arbiter.cpp
+      -- getComplexAction(): changed the dynamic_cast() to static_cast().
+
+   units/AngularVelocity.cpp
+      -- AngularVelocity(): initializing all of the member variables.
+
+   units/FlowRate.cpp
+      -- FlowRate() and copyData(): initializing all of the member variables.
+
+   units/LinearVelocity.cpp
+      -- LinearVelocity(): initializing all of the member variables.
+
+--------------------------------------------------------------------------------
+basicGL
+
+   Clip3D.cpp
+      -- clip(): corrected the 'inPoly' validity check.
+
+   Font.cpp
+      -- added the initData() function, and updated the copyData() and
+         deleteData() functions.
+
+   Image.cpp
+      -- readFileBMP(): added fclose() to close the input file before
+         the early function returns.
+
+   Scanline.cpp
+      -- added a default callback() function; Scanline is not longer abstract.
+      -- added the initData() function and modified the copyData() and the
+         deleteData() functions.
+      -- Modified the Edge() constructor to initialize 'slope' on all paths.
+
+--------------------------------------------------------------------------------
+dafif
+
+   AirportLoader.cpp
+      -- copyData(): added initialization code.
+      -- AirportKey() constructors: setting 'next' to nullptr.
+      -- AirportKey() destructor: properly getting the 'next' pointer before
+         deleting the RunwayKey key.
+      -- RunwayKey() constructors: setting 'parent' to nullptr.
+      -- RunwayKey() destructor: properly getting the 'next' pointer before
+         deleting the IlsKey.
+      -- IlsKey() constructors: setting 'parent' to nullptr.
+
+   NavaidLoader.cpp
+      -- the copyData() function and both constructors now copy or initialize all
+         of the member variables
+      -- deleteData() now deletes the 'fl' and 'cl' arrays.
+
+--------------------------------------------------------------------------------
+dis
+
+   NIb-iff.cpp
+      -- isIffUpdateRequired(): removed the unused setting of the 'options' variable.
+
+   Nib.cpp
+      -- the constructor and copyData() now initialize/copy the 'iffEventId' member variable.
+
+--------------------------------------------------------------------------------
+dynamics
+
+   Lareo.cpp
+      -- the constructor and copyData() now initialize/copy the 'dT' member variable.
+
+--------------------------------------------------------------------------------
+instruments
+
+   eadi3D/Eadi3DObjects.cpp
+      -- Eadi3DObjects(): initializes the 'base' variable
+
+
+--------------------------------------------------------------------------------
+ioDevice
+
+   SignalGen.cpp
+      -- added a comma after the 'phase' slot in the slot table.
+      -- calc(): for the 'SQUARE' wave case; setting 'value' to zero on the 'else' path.
+      -- serializer(): added 'break' statements to each of the switch cases.
+
+--------------------------------------------------------------------------------
+linearSys
+
+   DiffEquation.cpp
+      -- copyData(): now calling initData() and re-allocating memory for 'pa' and 'pb'.
+
+   LagFilter.cpp
+      -- added the copyData() function.
+
+   ScalerFunc.cpp
+      -- copyData(): now calling initData() and re-allocating memory for 'px' and 'py'.
+
+--------------------------------------------------------------------------------
+maps
+
+   rpfMap/CadrgClut.h
+      Added the Rgb() constructor to the Rgb structure.
+
+   rpfMap/CadrgFrame.cpp
+      load(): now returning if 'string' pointer is null.
+
+   rpfMap/CadrgFrameEntry.cpp
+      deleteData(): corrected syntax of the delete 'directory' statement.
+
+   rpfMap/CadrgTocEntry.cpp
+      added the initData() function, and calling initData() from copyData().
+
+   rpfMap/TextureTable.cpp
+      copyData(): added code to copy 'size'.
+
+--------------------------------------------------------------------------------
+otw
+
+   OtwCigiCl.cpp
+      updateOwnshipModel(): added a check for a null 'animation' pointer.
+
+--------------------------------------------------------------------------------
+recorder
+
+   PrintSelected class
+      -- removed the unused pointers 'fieldName' and 'compareValS'.
+      -- changed the argument in both the setFieldOfInterest() and setCompareToValue()
+         functions to pass by reference.
+      -- printMessage(): Now restoring the iostream flags.
+
+   TabPrinter.cpp
+      setSlotMsgHdr(): modified where 'ok' is set to 'true'
+
+--------------------------------------------------------------------------------
+simulation
+
+   - DynamicsModels.h used to include class definitions for both 'DynamicsModel' and 'AerodynamicsModel'.
+     'AerodynamicsModel' class has been separated and defined in file 'AerodynamicsModel.h'
+     As a result, the file 'DynamicsModels.h' has been renamed to proper 'DynamicsModel.h' as it now
+     only defines the 'DynamicsModel' class.
+
+   - Aerodynamics.h and SpaceDynamics.h now both reside in the simulation/dynamics directory.
+
+   - The references to 'QQueue<>' in classes AngleOnlyTrackManager, Antenna, Datalink, IrSeeker, Radar,
+     Rwr, SimLogger, Simulation and TrackManager have been updated to 'Basic::safe_queue<>'
+
+   - The references to 'QStack<>' in classes Antenna and IrSeeker have been updated to 'Basic::safe_stack<>'
+
+   AircraftIrSignature.cpp
+      -- getHotPartsRadiation(): now setting 'targetAlt' and 'targetVel' within null 'targetAircraft'
+         pointer check block.
+
+   AirAngleOnlyTrkMgrPT.cpp
+      -- processTrackList(): initializing the 'trackNumMatches' array to zeros.
+
+   DataRecorder class
+      -- added the getStationImp() function, and modified both versions of getStation()
+         to use this new function.
+      -- added the getSimulationImp() function, and modified both versions of getSimulation()
+         to use this new function.
+
+   Image class
+      1) renamed method "setOrigialImageData(...)" to "setOriginalImageData(...)" to 
+         correct spelling mistake.
+
+   IrShapes.cpp
+      -- IrBox::copyData(): now copies all of the member variables
+      -- IrShape::copyData(): now copies all of the member variables
+      -- IrSphere::copyData(): now copies all of the member variables
+
+   Lifeforms class
+      1) initialized 'lookAngle' in constructor (bug fix)
+
+   Navigation.cpp
+      -- setSlotFeba(): now deleting the temporary array 'tmpFeba'.
+
+   NetIo.cpp
+      -- networkInitialization(): changed a dynamic cast to a static cast.
+      -- addInputEntityType(): moved the null 'ntm' pointer check.
+      -- addOutputEntityType(): moved the null 'ntm' pointer check.
+
+   Nib.cpp
+      -- isPlayerStateUpdateRequired(): added two null 'player' pointer checks.
+
+   Otw.cpp
+      -- changed dynamic casts to static casts in both the mapPlayerList2ModelTable()
+         and the mapPlayers2ElevTable() functions.
+
+   Player class
+      -- added the getSimulationImp() function, and modified both versions of getSimulation()
+         to use this new function.
+      -- onReflectionsRequest(): modified to use a new 'haveEmptySlot' flag instead
+         of a negative value of 'idx' to indicate if an empty slot was found.
+
+   Radio.cpp
+      -- setSlotChannels(): corrected the validity check.
+
+   SigDihedralCR class
+      1) Added initialization for 'length' (bug fix)
+
+   SimLogger class
+      -- added the initData() function, and modified the copyData() function for all of the
+         classes derived from the SimLogger::SimLogEvent class.
+
+   Simulation class
+      -- added the getStationImp() function, and modified both versions of getStation()
+         to use this new function.
+
+   Station class
+      -- deleteData(): changed several dynamic casts to static casts.
+
+   Stores.cpp
+      -- setSlotStores(): removed the null 'cpair' pointer check.
+
+   StoresMgr.cpp
+      -- searchAndAdd(): added a null 'pstores' pointer check.
+      -- removed the extra static_cast<> in the getNext*() functions.
+
+   System.cpp
+      -- modified the const version of getOwnship() to use the findOwnship() function.
+
+   TabLogger class
+      -- added the initData() function, and modified the copyData() function for all of the
+         classes derived from the TabLogger::TabLogEvent class.
+
+--------------------------------------------------------------------------------
+terrain
+ 
+
+--------------------------------------------------------------------------------
+
+

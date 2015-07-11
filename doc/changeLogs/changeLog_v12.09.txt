@@ -12,8 +12,8 @@ general
 
       2) Defined additional parameters for ...
          -- EAAGLES_CONFIG_MAX_CLASSES for Basic::Object::MAX_CLASSES 
-         -- EAAGLES_CONFIG_MAX_PLAYERS_OF_INTEREST for imulation::Gimbal::MAX_PLAYERS 
-         -- EAAGLES_CONFIG_RF_MAX_EMISSIONS for imulation::RfSystem::MAX_EMISSIONS
+         -- EAAGLES_CONFIG_MAX_PLAYERS_OF_INTEREST for Simulation::Gimbal::MAX_PLAYERS 
+         -- EAAGLES_CONFIG_RF_MAX_EMISSIONS for Simulation::RfSystem::MAX_EMISSIONS
          -- EAAGLES_CONFIG_MAX_TRACKS for Simulation::TrackManager::MAX_TRKS
          -- EAAGLES_CONFIG_MAX_REPORTS for Simulation::Radar::MAX_REPORTS and
             Simulation::TrackManager::MAX_REPORTS

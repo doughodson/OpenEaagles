@@ -81,10 +81,10 @@ simulation:
       1) setSlotInitLat() and setSlotInitLon() -- changed local variable from LCreal to double
 
 	Station class
-      1) Added default thread priorites to constructor
+      1) Added default thread priorities to constructor
 
    Station class
-      1) Set default priorites for background and network threads.
+      1) Set default priorities for background and network threads.
 
    Stores class
       1) getExternalStore() -- (bug fix) now properly returns a pre-ref'd pointer, as documented

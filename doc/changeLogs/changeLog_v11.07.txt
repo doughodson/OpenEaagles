@@ -289,7 +289,7 @@ simulation:
          based upon MODTRAN generated data.
 
    IrSignature class
-      1) This class has been reworked to provide a simplier signature representation.
+      1) This class has been reworked to provide a simpler signature representation.
          Detailed representation for an aircraft is now provided by the AircraftIrSignature
          class.
 

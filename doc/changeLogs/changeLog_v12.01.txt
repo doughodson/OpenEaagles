@@ -14,7 +14,7 @@ Global changes:
 basic
 
    Component class
-      1) shutdownNotification() -- Now sents a shutdown notification to the logger.
+      1) shutdownNotification() -- Now sends a shutdown notification to the logger.
 
    Nav class
       1) Added UTM conversion routines

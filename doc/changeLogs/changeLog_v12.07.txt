@@ -22,14 +22,14 @@ general
 --------------------------------------------------------------------------------
 basic
 
-   Float classs
+   Float class
       -- Only providing constructors for LCreal defined as double
 
    Nav class
       -- convertPosVec2llE(): removed the meters to nautical mile conversion from
       the semi-major axis; should be in meters (bug fix)
 
-   Number classs
+   Number class
       -- Only providing constructors for LCreal defined as double
 
    Rng class

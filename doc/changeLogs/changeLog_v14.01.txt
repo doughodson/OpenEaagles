@@ -168,7 +168,7 @@ simulation
    RfSensor class
       1) Updated serialize method
       2) setSlotModeSingle() -- unref()'d the new Pair (fixed a "memory drip")
-      3) Deprecated the 'beamWidth' slot and related fuctions; 'beamWidth' is
+      3) Deprecated the 'beamWidth' slot and related functions; 'beamWidth' is
          being moved to the Antenna class.
 
    RfSystem class
@@ -188,7 +188,7 @@ simulation
 
    TrackManager class
       1) converted several local member function arrays to class member arrays.
-      2) Corrected the usage of the boolean matrixes 'report2TrackMatch' from int to bool
+      2) Corrected the usage of the boolean matrices 'report2TrackMatch' from int to bool
       3) Data recording of new and removed tracks no longer checks for a event logger (fix)
 
    Weapon class

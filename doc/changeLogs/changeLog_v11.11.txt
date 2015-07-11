@@ -32,7 +32,7 @@ basicGL
 
    MapPage class
       1) (bug fix) fixed getCurrentRadius() to return the correct centered or
-         decentered radius value
+         de-centered radius value
 
    Readout class
       1) added makeText method to lat/lon readouts to change "@" to degree symbol
@@ -54,7 +54,7 @@ dis
 --------------------------------------------------------------------------------
 ioDevice
 
-   -- removed all Keithly I/O device driver classes (these are not used anymore)
+   -- removed all Keithly I/O device driver classes (these are not used any more)
 
 
 --------------------------------------------------------------------------------
