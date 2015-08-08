@@ -10,6 +10,7 @@
 #include "openeaagles/basic/List.h"
 #include "openeaagles/basic/PairStream.h"
 #include "openeaagles/basic/String.h"
+#include "openeaagles/basic/Integer.h"
 
 // JSBSim model headers
 #include <JSBSim/FGFDMExec.h>
@@ -40,24 +41,25 @@
 #include <JSBSim/models/propulsion/FGPropeller.h>
 #include <JSBSim/models/propulsion/FGTank.h>
 
-
 namespace Eaagles {
 namespace Dynamics {
 
-IMPLEMENT_SUBCLASS(JSBSimModel,"JSBSimModel")
+IMPLEMENT_SUBCLASS(JSBSimModel, "JSBSimModel")
 
 //------------------------------------------------------------------------------
 // Slot table
 //------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(JSBSimModel)
-    "rootDir",      //  1 root directory for JSBSim models
-    "model",        //  2 JSBSim model
+    "rootDir",      //  1: JSBSim root directory for models
+    "model",        //  2: JSBSim model
+    "debugLevel",   //  3: JSBSim debug level (controls verbosity)
 END_SLOTTABLE(JSBSimModel)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(JSBSimModel)
-    ON_SLOT(1,setRootDir,Basic::String)
-    ON_SLOT(2,setModel,Basic::String)
+    ON_SLOT(1, setRootDir,    Basic::String)
+    ON_SLOT(2, setModel,      Basic::String)
+    ON_SLOT(3, setDebugLevel, Basic::Integer)
 END_SLOT_MAP()
 
 EMPTY_SERIALIZER(JSBSimModel)
@@ -74,8 +76,11 @@ JSBSimModel::JSBSimModel()
 
 void JSBSimModel::initData()
 {
+    // slot parameters
     rootDir = nullptr;
     model = nullptr;
+    debugLevel = 0;
+
     fdmex = nullptr;
     propMgr = nullptr;
     pitchTrimPos         = static_cast<LCreal>(0.0);
@@ -106,24 +111,28 @@ void JSBSimModel::copyData(const JSBSimModel& org, const bool cc)
     fdmex = nullptr;
     propMgr = nullptr;
 
+    // slot parameters
     setRootDir( org.rootDir );
     setModel( org.model );
+    debugLevel = org.debugLevel;
 
-    pitchTrimPos = org.pitchTrimPos;
-    pitchTrimRate = org.pitchTrimRate;
-    pitchTrimSw = org.pitchTrimSw;
-    rollTrimPos = org.rollTrimPos;
-    rollTrimRate = org.rollTrimRate;
-    rollTrimSw = org.rollTrimSw;
-    headingHoldOn = org.headingHoldOn;
-    altitudeHoldOn = org.altitudeHoldOn;
-    velocityHoldOn = org.velocityHoldOn;
-    commandedHeadingDeg = org.commandedHeadingDeg;
-    commandedAltitudeFt = org.commandedAltitudeFt;
+    pitchTrimPos    = org.pitchTrimPos;
+    pitchTrimRate   = org.pitchTrimRate;
+    pitchTrimSw     = org.pitchTrimSw;
+    rollTrimPos     = org.rollTrimPos;
+    rollTrimRate    = org.rollTrimRate;
+    rollTrimSw      = org.rollTrimSw;
+    headingHoldOn   = org.headingHoldOn;
+    altitudeHoldOn  = org.altitudeHoldOn;
+    velocityHoldOn  = org.velocityHoldOn;
+
+    commandedHeadingDeg  = org.commandedHeadingDeg;
+    commandedAltitudeFt  = org.commandedAltitudeFt;
     commandedVelocityKts = org.commandedVelocityKts;
-    hasHeadingHold = org.hasHeadingHold;
-    hasVelocityHold = org.hasVelocityHold;
-    hasAltitudeHold = org.hasAltitudeHold;
+
+    hasHeadingHold       = org.hasHeadingHold;
+    hasVelocityHold      = org.hasVelocityHold;
+    hasAltitudeHold      = org.hasAltitudeHold;
 }
 
 //------------------------------------------------------------------------------
@@ -413,10 +422,10 @@ int JSBSimModel::getEngPLA(LCreal* const pla, const int max) const
     }
     for (int i = 0; i < num; i++) {
         JSBSim::FGEngine* eng = Propulsion->GetEngine(i);
-        double t = FCS->GetThrottlePos(i);
-        double tmin = eng->GetThrottleMin();
-        double tmax = eng->GetThrottleMax();
-        double throttle = (t - tmin) / (tmax - tmin) * 100.0;
+        const double t = FCS->GetThrottlePos(i);
+        const double tmin = eng->GetThrottleMin();
+        const double tmax = eng->GetThrottleMax();
+        const double throttle = (t - tmin) / (tmax - tmin) * 100.0;
         pla[i] = static_cast<LCreal>(throttle);
     }
     return num;
@@ -441,14 +450,14 @@ int JSBSimModel::getEngNozzle(LCreal* const pla, const int max) const
         switch (eng->GetType()) {
         case JSBSim::FGEngine::etTurbine:
             {
-            JSBSim::FGTurbine* eng1 = static_cast<JSBSim::FGTurbine*>(eng);
-            pla[i] = static_cast<LCreal>(eng1->GetNozzle() * 100.0);
+                JSBSim::FGTurbine* eng1 = static_cast<JSBSim::FGTurbine*>(eng);
+                pla[i] = static_cast<LCreal>(eng1->GetNozzle() * 100.0);
             }
             break;
         case JSBSim::FGEngine::etTurboprop:
             {
-            JSBSim::FGTurboProp* eng1 = static_cast<JSBSim::FGTurboProp*>(eng);
-            pla[i] = static_cast<LCreal>(eng1->GetNozzle() * 100.0);
+                JSBSim::FGTurboProp* eng1 = static_cast<JSBSim::FGTurboProp*>(eng);
+                pla[i] = static_cast<LCreal>(eng1->GetNozzle() * 100.0);
             }
             break;
         case JSBSim::FGEngine::etPiston:
@@ -831,7 +840,7 @@ void JSBSimModel::reset()
             propMgr = new JSBSim::FGPropertyManager();
         }
         fdmex = new JSBSim::FGFDMExec(propMgr);
-
+        fdmex->SetDebugLevel(debugLevel);           // sets the verbosity of JSBSim model instance
         std::string RootDir(rootDir->getString());
         fdmex->SetAircraftPath(RootDir + "aircraft");
         fdmex->SetEnginePath(RootDir + "engine");
@@ -937,6 +946,15 @@ bool JSBSimModel::setModel(const Basic::String* const mdl)
     return true;
 }
 
+// Sets JSBSim debug level
+bool JSBSimModel::setDebugLevel(const Basic::Integer* const level)
+{
+   if (level != nullptr) {
+      debugLevel = level->getInt();
+   }
+   return true;
+}
+
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
@@ -1027,6 +1045,6 @@ bool JSBSimModel::setCommandedAltitude(const double a, const double, const doubl
     return hasAltitudeHold;
 }
 
-} // End Dynamics namespace
-} // End Eaagles namespace
+}
+}
 

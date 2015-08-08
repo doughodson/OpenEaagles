@@ -17,6 +17,7 @@ namespace Eaagles {
 
 namespace Basic {
     class String;
+    class Integer;
 };
 
 namespace Dynamics {
@@ -77,11 +78,13 @@ public:
     bool setAltitudeHoldOn(const bool b) override;
     bool setCommandedAltitude(const double a, const double aMps = 0, const double maxPitch = 0) override;
 
-    const Basic::String* getRootDir() const { return rootDir; }   // JSBSim root directory
-    virtual bool setRootDir(const Basic::String* const dir);
-
-    const Basic::String* getModel() const { return model; }       // JSBSim model
-    virtual bool setModel(const Basic::String* const msl);
+    // slot methods
+    const Basic::String* getRootDir() const  { return rootDir;    }   // JSBSim root directory
+    virtual bool setRootDir(const Basic::String* const);
+    const Basic::String* getModel() const    { return model;      }   // JSBSim model
+    virtual bool setModel(const Basic::String* const);
+    int getDebugLevel() const                { return debugLevel; }   // JSBSim debug level
+    virtual bool setDebugLevel(const Basic::Integer* const);
 
 protected:
 
@@ -93,6 +96,7 @@ private:
 
     const Basic::String* rootDir;   // root directory for JSBSim models
     const Basic::String* model;     // JSBSim model
+    int   debugLevel;
 
     LCreal pitchTrimPos;    // +/- 1.0
     LCreal pitchTrimRate;   // maxVal(1.0) per sec

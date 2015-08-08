@@ -25,6 +25,10 @@ dis
 --------------------------------------------------------------------------------
 dynamics
 
+   JSBSimModel class
+      -- Added new slot parameter ('debugLevel') to set the debug level for JSBSim
+         model instance. This controls the verbosity (i.e., output printed to console)
+         of the model itself.  Slot parameter accepts an integer value.
 
 --------------------------------------------------------------------------------
 instruments
