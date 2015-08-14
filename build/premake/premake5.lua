@@ -6,6 +6,7 @@
 --     vs2010     (Visual Studio 2010)
 --     vs2012     (Visual Studio 2012)
 --     vs2013     (Visual Studio 2013)
+--     vs2015     (Visual Studio 2015)
 --     codeblocks (Code::Blocks)
 --     codelite   (CodeLite)
 --
@@ -31,7 +32,7 @@ OE3rdPartyIncPath = OE_3RD_PARTY_ROOT.."/include"
 -- compiled libraries
 --
 locationPath  = "../" .. _ACTION
-if (_ACTION == "vs2010") or (_ACTION == "vs2012") or (_ACTION == "vs2013") then
+if (_ACTION == "vs2010") or (_ACTION == "vs2012") or (_ACTION == "vs2013") or (_ACTION == "vs2015") then
   targetDirPath = "../../lib/".._ACTION
 end
 if (_ACTION == "codelite") or (_ACTION == "codeblocks") then
@@ -75,7 +76,7 @@ solution "oe"
    -- common release configuration flags and symbols
    configuration { "Release" }
       flags { "Optimize" }
-      if (_ACTION == "vs2010") or (_ACTION == "vs2012") or (_ACTION == "vs2013") then
+      if (_ACTION == "vs2010") or (_ACTION == "vs2012") or (_ACTION == "vs2013") or (_ACTION == "vs2015") then
          -- enable compiler intrinsics and favour speed over size
          buildoptions { "/Oi", "/Ot" }
          defines { "WIN32", "_LIB", "NDEBUG" }
@@ -88,7 +89,7 @@ solution "oe"
    configuration { "Debug" }
       targetsuffix "_d"
       flags { "Symbols" }
-      if (_ACTION == "vs2010") or (_ACTION == "vs2012") or (_ACTION == "vs2013") then
+      if (_ACTION == "vs2010") or (_ACTION == "vs2012") or (_ACTION == "vs2013") or (_ACTION == "vs2015") then
          -- enable compiler intrinsics
          buildoptions { "/Oi" }
          defines { "WIN32", "_LIB", "_DEBUG" }
