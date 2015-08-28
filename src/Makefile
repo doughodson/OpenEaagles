@@ -49,12 +49,7 @@ PROJECTS += otw
 #
 # Rules
 #
-all:
-	@echo ${OE_ROOT}
-	for subdir in $(PROJECTS); do \
-	  echo making $@ in $$subdir; \
-	  (cd $$subdir && $(MAKE)) || exit 1; \
-	done
+all: $(PROJECTS)
 
 install: uninstall
 	-cp -r ../include/openeaagles /usr/local/include/openeaagles
@@ -64,10 +59,10 @@ uninstall:
 	-rm -rf /usr/local/include/openeaagles
 	-rm -rf /usr/local/lib/openeaagles
 
-clean:
+clean: $(PROJECTS)
 	-rm -f *.o
-	for subdir in $(PROJECTS); do \
-	    echo $@ in $$subdir; \
-	    (cd $$subdir && $(MAKE) $@) || exit 1; \
-	done
+
+$(PROJECTS)::
+	@echo making in $@
+	$(MAKE) -j 1 -C $@ $(MAKECMDGOALS)
 
