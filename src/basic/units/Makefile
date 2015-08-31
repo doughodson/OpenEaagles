@@ -4,22 +4,29 @@ include ../../makedefs
 LIB = $(OPENEAAGLES_LIB_DIR)/liboeBasic.a
 
 OBJS =  \
-	$(LIB)(Angles.o) \
-	$(LIB)(AngularVelocity.o) \
-	$(LIB)(Areas.o) \
-	$(LIB)(Density.o) \
-	$(LIB)(Distances.o) \
-	$(LIB)(Energies.o) \
-	$(LIB)(FlowRate.o) \
-	$(LIB)(Forces.o) \
-	$(LIB)(Frequencies.o) \
-	$(LIB)(LinearVelocity.o) \
-	$(LIB)(Masses.o) \
-	$(LIB)(Powers.o) \
-	$(LIB)(Times.o) \
-	$(LIB)(Volumes.o)
+	Angles.o \
+	AngularVelocity.o \
+	Areas.o \
+	Density.o \
+	Distances.o \
+	Energies.o \
+	FlowRate.o \
+	Forces.o \
+	Frequencies.o \
+	LinearVelocity.o \
+	Masses.o \
+	Powers.o \
+	Times.o \
+	Volumes.o
 
-all: ${OBJS}
+all:
+	$(MAKE) compile
+	$(MAKE) archive
+    
+compile: ${OBJS}
+    
+archive:
+	ar rv $(LIB) ${OBJS}
 
 clean:
 	-rm -f *.o

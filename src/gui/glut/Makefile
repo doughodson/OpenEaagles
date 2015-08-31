@@ -4,13 +4,20 @@ include ../../makedefs
 LIB = $(OPENEAAGLES_LIB_DIR)/liboeGlut.a
 
 OBJS =  \
-	$(LIB)(Factory.o) \
-	$(LIB)(glutFF.o) \
-	$(LIB)(GlutDisplay.o) \
-	$(LIB)(Shapes3D.o)
+	Factory.o \
+	glutFF.o \
+	GlutDisplay.o \
+	Shapes3D.o
 
-all: ${OBJS}
-
+all:
+	$(MAKE) compile
+	$(MAKE) archive
+    
+compile: ${OBJS}
+    
+archive:
+	ar rv $(LIB) ${OBJS}
+    
 clean:
 	-rm -f *.o
 	-rm -f $(LIB)

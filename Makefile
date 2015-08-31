@@ -1,16 +1,11 @@
 
 # Libraries
-LIBS = src
+SUBDIRS = src
 
-all:
-	for subdir in $(LIBS); do \
-	  echo making $@ in $$subdir; \
-	  (cd $$subdir && $(MAKE)) || exit 1; \
-	done
+all: $(SUBDIRS)
 
-clean:
-	for subdir in $(LIBS); do \
-	    echo $@ in $$subdir; \
-	    (cd $$subdir && $(MAKE) $@) || exit 1; \
-	done
+clean: $(SUBDIRS)
+    
+$(SUBDIRS)::
+	$(MAKE) -C $@ $(MAKECMDGOALS)
 

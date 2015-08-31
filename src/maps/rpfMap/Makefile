@@ -4,18 +4,25 @@ include ../../makedefs
 LIB = $(OPENEAAGLES_LIB_DIR)/liboeMaps.a
 
 OBJS = \
-	$(LIB)(CadrgClut.o) \
-	$(LIB)(CadrgFile.o) \
-	$(LIB)(CadrgFrame.o) \
-	$(LIB)(CadrgFrameEntry.o) \
-	$(LIB)(CadrgMap.o) \
-	$(LIB)(CadrgTocEntry.o) \
-	$(LIB)(MapDrawer.o) \
-	$(LIB)(TexturePager.o) \
-	$(LIB)(TextureTable.o) \
-	$(LIB)(Support.o) 
+	CadrgClut.o \
+	CadrgFile.o \
+	CadrgFrame.o \
+	CadrgFrameEntry.o \
+	CadrgMap.o \
+	CadrgTocEntry.o \
+	MapDrawer.o \
+	TexturePager.o \
+	TextureTable.o \
+	Support.o 
 
-all: ${OBJS}
+all:
+	$(MAKE) compile
+	$(MAKE) archive
+    
+compile: ${OBJS}
+    
+archive:
+	ar rv $(LIB) ${OBJS}
 
 clean:
 	-rm -f *.o

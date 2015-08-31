@@ -1,18 +1,22 @@
 #
 include ../makedefs
 
-#CPPFLAGS += -DCIGI_LITTLE_ENDIAN
-#CPPFLAGS += -I$(CIGICL_DIR)
-
 LIB = $(OPENEAAGLES_LIB_DIR)/liboeOtw.a
 
 OBJS =  \
-	$(LIB)(Factory.o) \
-	$(LIB)(OtwCigiCl.o) \
-	$(LIB)(OtwPC.o) \
-	$(LIB)(otwFF.o)
+	Factory.o \
+	OtwCigiCl.o \
+	OtwPC.o \
+	otwFF.o
 
-all: ${OBJS}
+all:
+	$(MAKE) compile
+	$(MAKE) archive
+    
+compile: ${OBJS}
+    
+archive:
+	ar rv $(LIB) ${OBJS}
 
 clean:
 	-rm -f *.o

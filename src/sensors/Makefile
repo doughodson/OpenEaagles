@@ -4,13 +4,20 @@ include ../makedefs
 LIB = $(OPENEAAGLES_LIB_DIR)/liboeSensors.a
 
 OBJS =  \
-	$(LIB)(Factory.o) \
-	$(LIB)(Gmti.o) \
-	$(LIB)(sensorsFF.o) \
-	$(LIB)(Stt.o) \
-	$(LIB)(Tws.o)
+	Factory.o \
+	Gmti.o \
+	sensorsFF.o \
+	Stt.o \
+	Tws.o
 
-all: ${OBJS} 
+all:
+	$(MAKE) compile
+	$(MAKE) archive
+    
+compile: ${OBJS}
+    
+archive:
+	ar rv $(LIB) ${OBJS}
 
 clean:
 	-rm -f *.o

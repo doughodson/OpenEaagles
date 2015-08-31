@@ -3,9 +3,16 @@ include ../../makedefs
 
 LIB = $(OPENEAAGLES_LIB_DIR)/liboeTerrain.a
 
-OBJS =  $(LIB)(SrtmHgtFile.o) 
+OBJS =  SrtmHgtFile.o 
 
-all: ${OBJS} 
+all:
+	$(MAKE) compile
+	$(MAKE) archive
+    
+compile: ${OBJS}
+    
+archive:
+	ar rv $(LIB) ${OBJS}
 
 clean:
 	-rm -f *.o

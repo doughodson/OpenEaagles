@@ -4,21 +4,28 @@ include ../makedefs
 LIB = $(OPENEAAGLES_LIB_DIR)/liboeInstruments.a
 
 OBJS =  \
-	$(LIB)(Factory.o) \
-	$(LIB)(instrumentsFF.o) \
-	$(LIB)(Instrument.o) 
+	Factory.o \
+	instrumentsFF.o \
+	Instrument.o 
 
 SUBDIRS = adi buttons dials landingGear maps eng gauges eadi3D 
 
-all: subdirs ${OBJS}
-
-subdirs:
+all:
+	$(MAKE) compile
+	$(MAKE) archive
+    
+compile: $(SUBDIRS) ${OBJS}
+    
+archive:
 	for subdir in $(SUBDIRS); do \
-	  echo making $@ in $$subdir; \
-	  (cd $$subdir && $(MAKE)) || exit 1; \
+		$(MAKE) -C $$subdir $(MAKECMDGOALS); \
 	done
+	ar rv $(LIB) ${OBJS}
 
-clean:
+clean: $(SUBDIRS)
 	-rm -f *.o
 	-rm -f $(LIB)
+    
+$(SUBDIRS)::
+	$(MAKE) -C $@ $(MAKECMDGOALS)
 

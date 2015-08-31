@@ -4,10 +4,17 @@ include ../../makedefs
 LIB = $(OPENEAAGLES_LIB_DIR)/liboeSimulation.a
 
 OBJS =  \
-	$(LIB)(AerodynamicsModel.o) \
-	$(LIB)(SpaceDynamicsModel.o)
+	AerodynamicsModel.o \
+	SpaceDynamicsModel.o
 
-all: ${OBJS}
+all:
+	$(MAKE) compile
+	$(MAKE) archive
+    
+compile: ${OBJS}
+    
+archive:
+	ar rv $(LIB) ${OBJS}
 
 clean:
 	-rm -f *.o

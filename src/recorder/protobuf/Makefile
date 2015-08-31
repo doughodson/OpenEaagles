@@ -3,10 +3,19 @@ include ../../makedefs
 
 LIB = $(OPENEAAGLES_LIB_DIR)/liboeRecorder.a
 
-OBJS =  \
-	$(LIB)(DataRecord.pb.o)
+CPPFLAGS += -I$(OE_ROOT)/include/openeaagles/recorder/protobuf
 
-all: ${OBJS}
+OBJS =  \
+	DataRecord.pb.o
+
+all:
+	$(MAKE) compile
+	$(MAKE) archive
+    
+compile: ${OBJS}
+    
+archive:
+	ar rv $(LIB) ${OBJS}
 
 clean:
 	-rm -f *.o
