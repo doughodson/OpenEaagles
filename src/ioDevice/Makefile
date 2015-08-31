@@ -17,7 +17,7 @@ OBJS =  \
 
 # specific IO devices to be included in compile
 ifdef JOYSTICKDEVICE
-OBJS += windows/UsbJoystickImp.o
+OBJS += linux/UsbJoystickImp.o
 endif
 
 all:
