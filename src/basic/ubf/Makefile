@@ -4,13 +4,20 @@ include ../../makedefs
 LIB = $(OPENEAAGLES_LIB_DIR)/liboeBasic.a
 
 OBJS =  \
-	$(LIB)(Action.o) \
-	$(LIB)(Agent.o) \
-	$(LIB)(Arbiter.o) \
-	$(LIB)(Behavior.o) \
-	$(LIB)(State.o)
+	Action.o \
+	Agent.o \
+	Arbiter.o \
+	Behavior.o \
+	State.o
 
-all: ${OBJS}
+all:
+	$(MAKE) compile
+	$(MAKE) archive
+    
+compile: ${OBJS}
+    
+archive:
+	ar rv $(LIB) ${OBJS}
 
 clean:
 	-rm -f *.o

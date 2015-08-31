@@ -20,41 +20,38 @@ include makedefs
 # simulation   : -
 # terrain      : -
 #
-PROJECTS = basic
-PROJECTS += basicGL instruments
-PROJECTS += dafif
-PROJECTS += ioDevice
-PROJECTS += linearSys 
-PROJECTS += simulation sensors terrain
-PROJECTS += dis
-PROJECTS += dynamics
-PROJECTS += maps
-PROJECTS += recorder
+SUBDIRS = basic
+SUBDIRS += basicGL 
+SUBDIRS += instruments
+SUBDIRS += dafif
+SUBDIRS += ioDevice
+SUBDIRS += linearSys 
+SUBDIRS += simulation sensors terrain
+SUBDIRS += dis
+SUBDIRS += dynamics
+SUBDIRS += maps
+SUBDIRS += recorder
 
 #
 # GUI interface libraries
 #
-PROJECTS += "gui/glut"
+SUBDIRS += "gui/glut"
 
 # Out-the-Window interface classes to talk to visual systems
 # - CIGI Class Library 3.x interface
 # - download and install cigicl
-PROJECTS += otw
+SUBDIRS += otw
 
 #
 # HLA interface library
 #
-#PROJECTS += "hla"
+#SUBDIRS += "hla"
 
 #
 # Rules
 #
-all:
-	@echo ${OE_ROOT}
-	for subdir in $(PROJECTS); do \
-	  echo making $@ in $$subdir; \
-	  (cd $$subdir && $(MAKE)) || exit 1; \
-	done
+
+all: $(SUBDIRS)
 
 install: uninstall
 	-cp -r ../include/openeaagles /usr/local/include/openeaagles
@@ -64,10 +61,8 @@ uninstall:
 	-rm -rf /usr/local/include/openeaagles
 	-rm -rf /usr/local/lib/openeaagles
 
-clean:
+clean: $(SUBDIRS)
 	-rm -f *.o
-	for subdir in $(PROJECTS); do \
-	    echo $@ in $$subdir; \
-	    (cd $$subdir && $(MAKE) $@) || exit 1; \
-	done
 
+$(SUBDIRS)::
+	$(MAKE) -C $@ $(MAKECMDGOALS)

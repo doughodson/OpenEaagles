@@ -4,11 +4,18 @@ include ../../makedefs
 LIB = $(OPENEAAGLES_LIB_DIR)/liboeInstruments.a
 
 OBJS =  \
-	$(LIB)(Eadi3DObjects.o) \
-	$(LIB)(Eadi3DPage.o) \
-	$(LIB)(IrisGLCompat.o)
+	Eadi3DObjects.o \
+	Eadi3DPage.o \
+	IrisGLCompat.o
 
-all: ${OBJS}
+all:
+	$(MAKE) compile
+	$(MAKE) archive
+    
+compile: ${OBJS}
+    
+archive:
+	ar rv $(LIB) ${OBJS}
 
 clean:
 	-rm -f *.o

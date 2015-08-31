@@ -5,16 +5,21 @@ LIB = $(OPENEAAGLES_LIB_DIR)/liboeDynamics.a
 
 CPPFLAGS += -I$(JSBSIM_INC_DIR)
 
-SUBDIRS = 
-
 OBJS =  \
-	$(LIB)(Factory.o) \
-	$(LIB)(JSBSimModel.o) \
-	$(LIB)(LaeroModel.o)  \
-	$(LIB)(RacModel.o) \
-	$(LIB)(dynamicsFF.o)
+	Factory.o \
+	JSBSimModel.o \
+	LaeroModel.o  \
+	RacModel.o \
+	dynamicsFF.o
 
-all: ${OBJS}
+all:
+	$(MAKE) compile
+	$(MAKE) archive
+    
+compile: ${OBJS}
+    
+archive:
+	ar rv $(LIB) ${OBJS}
 
 clean:
 	-rm -f *.o

@@ -4,23 +4,30 @@ include ../makedefs
 LIB = $(OPENEAAGLES_LIB_DIR)/liboeIoDevice.a
 
 OBJS =  \
-	$(LIB)(Ai2DiSwitch.o) \
-	$(LIB)(AnalogInput.o) \
-	$(LIB)(AnalogOutput.o) \
-	$(LIB)(DiscreteInput.o) \
-	$(LIB)(DiscreteOutput.o) \
-	$(LIB)(Factory.o) \
-	$(LIB)(IoData.o) \
-	$(LIB)(ioDeviceFF.o) \
-	$(LIB)(SignalGen.o) \
-	$(LIB)(UsbJoystick.o)
+	Ai2DiSwitch.o \
+	AnalogInput.o \
+	AnalogOutput.o \
+	DiscreteInput.o \
+	DiscreteOutput.o \
+	Factory.o \
+	IoData.o \
+	ioDeviceFF.o \
+	SignalGen.o \
+	UsbJoystick.o
 
 # specific IO devices to be included in compile
 ifdef JOYSTICKDEVICE
-OBJS += $(LIB)(linux/UsbJoystickImp.o)
+OBJS += linux/UsbJoystickImp.o
 endif
 
-all: ${OBJS}
+all:
+	$(MAKE) compile
+	$(MAKE) archive
+    
+compile: ${OBJS}
+    
+archive:
+	ar rv $(LIB) ${OBJS}
 
 clean:
 	-rm -f *.o

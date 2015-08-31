@@ -4,16 +4,23 @@ include ../../makedefs
 LIB = $(OPENEAAGLES_LIB_DIR)/liboeBasic.a
 
 OBJS =  \
-	$(LIB)(PosixHandler.o) \
-	$(LIB)(TcpClient.o) \
-	$(LIB)(TcpHandler.o) \
-	$(LIB)(TcpServerMultiple.o) \
-	$(LIB)(TcpServerSingle.o) \
-	$(LIB)(UdpBroadcastHandler.o) \
-	$(LIB)(UdpMulticastHandler.o) \
-	$(LIB)(UdpUnicastHandler.o)
+	PosixHandler.o \
+	TcpClient.o \
+	TcpHandler.o \
+	TcpServerMultiple.o \
+	TcpServerSingle.o \
+	UdpBroadcastHandler.o \
+	UdpMulticastHandler.o \
+	UdpUnicastHandler.o
 
-all: ${OBJS}
+all:
+	$(MAKE) compile
+	$(MAKE) archive
+    
+compile: ${OBJS}
+    
+archive:
+	ar rv $(LIB) ${OBJS}
 
 clean:
 	-rm -f *.o

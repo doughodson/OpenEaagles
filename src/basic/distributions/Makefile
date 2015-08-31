@@ -4,12 +4,19 @@ include ../../makedefs
 LIB = $(OPENEAAGLES_LIB_DIR)/liboeBasic.a
 
 OBJS =  \
-	$(LIB)(Exponential.o) \
-	$(LIB)(Lognormal.o) \
-	$(LIB)(Pareto.o) \
-	$(LIB)(Uniform.o)
+	Exponential.o \
+	Lognormal.o \
+	Pareto.o \
+	Uniform.o
 
-all: ${OBJS}
+all:
+	$(MAKE) compile
+	$(MAKE) archive
+    
+compile: ${OBJS}
+    
+archive:
+	ar rv $(LIB) ${OBJS}
 
 clean:
 	-rm -f *.o
