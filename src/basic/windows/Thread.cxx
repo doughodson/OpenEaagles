@@ -207,6 +207,26 @@ bool Thread::terminate()
 //==============================================================================
 // class ThreadPeriodicTask
 //==============================================================================
+//-----------------------------------------------------------------------------
+// Create the thread
+//-----------------------------------------------------------------------------
+bool ThreadPeriodicTask::create()
+{
+   shutdownThread = false;
+   return BaseClass::create();
+}
+
+//-----------------------------------------------------------------------------
+// Treminate the thread
+//-----------------------------------------------------------------------------
+bool ThreadPeriodicTask::terminate()
+{
+   shutdownThread = true;
+   while (!isTerminated()){
+      Sleep(1);
+   }
+   return isTerminated();
+}
 
 //-----------------------------------------------------------------------------
 // Our main thread function
@@ -230,7 +250,7 @@ unsigned long ThreadPeriodicTask::mainThreadFunc()
       const double startTime = getComputerTime();;           // Computer's time of day (sec) run started
       double dt = 1.0/static_cast<double>(getRate());
 
-      while (!getParent()->isShutdown()) {
+      while (!getParent()->isShutdown() && !shutdownThread) {
 
          // ---
          // User defined tasks
