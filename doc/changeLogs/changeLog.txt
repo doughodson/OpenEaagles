@@ -15,6 +15,9 @@ general
 --------------------------------------------------------------------------------
 basic
 
+   -- removed legacy support for factory names "BroadcastHandler", "MulticastHandler",
+      and "UdpHandler" - instead use "UdpBroadcastHandler", "UdpMulticastHandler"
+	  and "UdpUnicastHandler"
 
 --------------------------------------------------------------------------------
 basicGL

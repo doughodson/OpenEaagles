@@ -413,20 +413,6 @@ Object* Factory::createObj(const char* name)
     else if ( std::strcmp(name, UdpUnicastHandler::getFactoryName()) == 0 ) {
         obj = new UdpUnicastHandler();
     }
-    // Network handlers (backward compatible form names for UDP oriented communication)
-    // the mapping to old form names was added 16 Nov 2013 -- should be removed in the future
-    else if ( std::strcmp(name, "BroadcastHandler") == 0 ) {
-        std::cerr << "\nWARNING! Name 'BroadcastHandler' has been depreciated, use 'UdpBroadcastHandler' instead.\n\n";
-        obj = new UdpBroadcastHandler();
-    }
-    else if ( std::strcmp(name, "MulticastHandler") == 0 ) {
-        std::cerr << "\nWARNING! Name 'MulticastHandler' has been depreciated, use 'UdpMulticastHandler' instead.\n\n";
-        obj = new UdpMulticastHandler();
-    }
-    else if ( std::strcmp(name, "UdpHandler") == 0 ) {
-        std::cerr << "\nWARNING! Name 'UdpHandler' has been depreciated, use 'UdpUnicastHandler' instead.\n\n";
-        obj = new UdpUnicastHandler();
-    }
 
     // Random number generator and distributions
     else if ( std::strcmp(name, Rng::getFactoryName()) == 0 ) {
