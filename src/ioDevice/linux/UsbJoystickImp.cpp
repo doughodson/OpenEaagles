@@ -136,7 +136,7 @@ void UsbJoystickImp::reset()
 //------------------------------------------------------------------------------
 // Go get our AIs and DIs here
 //------------------------------------------------------------------------------
-void UsbJoystickImp::processInputs(const Eaagles::LCreal dt, Basic::IoData* const pInData)
+void UsbJoystickImp::processInputs(const oe::LCreal dt, Basic::IoData* const pInData)
 {
    js_event js; // joystick event structure
 
@@ -179,3 +179,4 @@ void UsbJoystickImp::processInputs(const Eaagles::LCreal dt, Basic::IoData* cons
 
 } // IoDevice namespace
 } // end oe namespace
+

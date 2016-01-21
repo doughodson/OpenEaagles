@@ -18,7 +18,8 @@ namespace IoDevice {
 // Form Name: UsbJoystick
 //
 //------------------------------------------------------------------------------
-class UsbJoystickImp : public UsbJoystick {
+class UsbJoystickImp : public UsbJoystick
+{
     DECLARE_SUBCLASS(UsbJoystickImp,UsbJoystick)
 
 public:
@@ -41,3 +42,4 @@ private:
 } // end oe namespace
 
 #endif
+
