@@ -5,7 +5,7 @@
 #include <sys/time.h>
 #include <ctime>
 
-namespace Eaagles {
+namespace oe {
 
 //------------
 // Sleep for 'msec' milliseconds
@@ -102,5 +102,5 @@ bool convertYmdhms2Sec(
    return ok;
 }
 
-} // End Eaagles namespace
+} // End oe namespace
 
