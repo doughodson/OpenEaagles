@@ -22,6 +22,6 @@ protected:
 };
 
 }  // end namespace BasicGL
-}  // end namespace Eaagles
+}  // end namespace oe
 
 #endif

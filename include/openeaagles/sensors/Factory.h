@@ -22,6 +22,6 @@ protected:
 };
 
 }  // end namespace Sensor
-}  // end namespace Eaagles
+}  // end namespace oe
 
 #endif

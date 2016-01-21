@@ -461,6 +461,6 @@ Object* Factory::createObj(const char* name)
 }
 
 }  // end namespace Basic
-}  // end namespace Eaagles
+}  // end namespace oe
 
 

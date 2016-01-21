@@ -16,7 +16,7 @@ namespace Dis {
 //
 // Description: DIS Network Type Mapper
 //
-//    This class, which is derived from the Simulation::Ntm, maps Eaagles
+//    This class, which is derived from the Simulation::Ntm, maps OpenEaagles
 //    player types to/from DIS entity type codes.
 //
 //

@@ -22,6 +22,6 @@ protected:
 };
 
 }  // end namespace Glut
-}  // end namespace Eaagles
+}  // end namespace oe
 
 #endif

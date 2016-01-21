@@ -33,7 +33,7 @@ namespace Recorder {
 // Factory name: PrintSelected
 // Slots:
 //   messageToken    <Basic::Number>   ! Message ID (token)
-//   fieldName       <Basic::String>   ! Full field name (e.g., Eaagles.Recorder.Pb.PlayerId.name)
+//   fieldName       <Basic::String>   ! Full field name (e.g., oe.Recorder.Pb.PlayerId.name)
 //   compareToValS   <Basic::String>   ! value to compare (string)
 //   compareToValI   <Basic::Number>   ! value to compare (num)
 //   compareToValD   <Basic::Number>   ! value to compare (dbl)

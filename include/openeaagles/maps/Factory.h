@@ -22,6 +22,6 @@ protected:
 };
 
 }  // end namespace Maps
-}  // end namespace Eaagles
+}  // end namespace oe
 
 #endif

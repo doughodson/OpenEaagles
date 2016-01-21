@@ -59,4 +59,4 @@ Basic::Object* Factory::createObj(const char* name)
 }
 
 }  // end namespace Recorder
-}  // end namespace Eaagles
+}  // end namespace oe

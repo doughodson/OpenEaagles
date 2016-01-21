@@ -22,6 +22,6 @@ protected:
 };
 
 }  // end namespace Dynamics
-}  // end namespace Eaagles
+}  // end namespace oe
 
 #endif

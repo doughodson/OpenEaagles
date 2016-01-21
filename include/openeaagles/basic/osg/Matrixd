@@ -854,15 +854,13 @@ inline Vec4d Matrixd::operator* (const Vec4d& v) const
     return postMult(v);
 }
 
-/** OpenEaagles: Binary scalar multiply */
 inline Matrixd operator * (const double s, const Matrixd& m)
 {
   return (m * s);
 }
 
 
-} //namespace osg
-} // End oe namespace
-
+} // namespace osg
+} // namespace oe
 
 #endif

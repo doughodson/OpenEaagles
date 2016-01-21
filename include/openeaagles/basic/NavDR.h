@@ -135,7 +135,7 @@ public:
 #include "openeaagles/basic/NavDR.inl"
 
 }  // end namespace Basic
-}  // end namespace Eaagles
+}  // end namespace oe
 
 #endif
 

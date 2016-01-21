@@ -36,4 +36,4 @@ Basic::Object* Factory::createObj(const char* name)
 }
 
 }  // end namespace Sensor
-}  // end namespace Eaagles
+}  // end namespace oe

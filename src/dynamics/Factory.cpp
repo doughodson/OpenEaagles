@@ -38,4 +38,4 @@ Basic::Object* Factory::createObj(const char* name)
 }
 
 }  // end namespace Dynamics
-}  // end namespace Eaagles
+}  // end namespace oe

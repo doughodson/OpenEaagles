@@ -149,5 +149,5 @@ std::ostream& Complex::serialize(std::ostream& sout, const int i, const bool slo
 }
 
 }  // end namespace Basic
-}  // end namespace Eaagles
+}  // end namespace oe
 

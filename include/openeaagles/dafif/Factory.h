@@ -22,6 +22,6 @@ protected:
 };
 
 }  // end namespace Dafif
-}  // end namespace Eaagles
+}  // end namespace oe
 
 #endif

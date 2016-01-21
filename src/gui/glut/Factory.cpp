@@ -61,5 +61,5 @@ Basic::Object* Factory::createObj(const char* name)
 }
 
 }  // end namespace Glut
-}  // end namespace Eaagles
+}  // end namespace oe
 

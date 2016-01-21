@@ -429,4 +429,4 @@ Basic::Object* Factory::createObj(const char* name)
 }
 
 }  // end namespace Simulation
-}  // end namespace Eaagles
+}  // end namespace oe

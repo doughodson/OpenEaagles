@@ -22,6 +22,6 @@ protected:
 };
 
 }  // end namespace IoDevice
-}  // end namespace Eaagles
+}  // end namespace oe
 
 #endif

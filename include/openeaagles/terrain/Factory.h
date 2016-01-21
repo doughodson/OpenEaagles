@@ -22,6 +22,6 @@ protected:
 };
 
 }  // end namespace Terrain
-}  // end namespace Eaagles
+}  // end namespace oe
 
 #endif

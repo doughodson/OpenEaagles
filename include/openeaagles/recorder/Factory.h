@@ -22,6 +22,6 @@ protected:
 };
 
 }  // end namespace Recorder
-}  // end namespace Eaagles
+}  // end namespace oe
 
 #endif

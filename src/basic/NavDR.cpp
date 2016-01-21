@@ -172,4 +172,4 @@ bool NavDR::deadReckoning(
 }
 
 }  // end namespace Basic
-}  // end namespace Eaagles
+}  // end namespace oe

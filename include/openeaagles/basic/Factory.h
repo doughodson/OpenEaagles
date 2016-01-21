@@ -21,6 +21,6 @@ protected:
 };
 
 }  // end namespace Basic
-}  // end namespace Eaagles
+}  // end namespace oe
 
 #endif

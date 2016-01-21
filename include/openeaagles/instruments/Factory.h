@@ -22,6 +22,6 @@ protected:
 };
 
 }  // end namespace Instruments
-}  // end namespace Eaagles
+}  // end namespace oe
 
 #endif

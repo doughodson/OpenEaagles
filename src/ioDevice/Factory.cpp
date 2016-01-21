@@ -70,4 +70,4 @@ Basic::Object* Factory::createObj(const char* name)
 }
 
 }  // end namespace IoDevice
-}  // end namespace Eaagles
+}  // end namespace oe

@@ -177,5 +177,5 @@ Basic::Object* Factory::createObj(const char* name)
 }
 
 }  // end namespace Instruments
-}  // end namespace Eaagles
+}  // end namespace oe
 

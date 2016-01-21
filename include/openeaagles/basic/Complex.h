@@ -139,6 +139,6 @@ private:
 #include "openeaagles/basic/Complex.inl"
 
 }  // end namespace Basic
-}  // end namespace Eaagles
+}  // end namespace oe
 
 #endif

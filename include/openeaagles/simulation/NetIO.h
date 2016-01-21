@@ -114,7 +114,7 @@ namespace Simulation {
 //    The oe player objects do not contain any state data related to the
 //    interoperability networks that their being sent to.  As a result, an
 //    oe player can be sent to more than one interoperability network,
-//    and the 'enableRelay' slot can be used to enable the relaying of Eaagles
+//    and the 'enableRelay' slot can be used to enable the relaying of OpenEaagles
 //    players that were discovered from other interoperability networks.
 //
 //

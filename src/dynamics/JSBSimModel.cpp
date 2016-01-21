@@ -761,7 +761,7 @@ void JSBSimModel::dynamics(const LCreal dt)
         //    acData->n1, acData->n2, acData->n3, 0,
         //    0,          0,          0,          1
         //    );
-        // std::printf("Eaagles*EA: (%6.1f, %6.1f, %6.1f)\n", getRollD(), getPitchD(), getHeadingD());
+        // std::printf("oe*EA: (%6.1f, %6.1f, %6.1f)\n", getRollD(), getPitchD(), getHeadingD());
         // osg::Matrix m0 = getRotationalMatrix();
         // osg::Quat q0 = getQuaternions();
         // setRotationalMatrix(m2);
@@ -770,10 +770,10 @@ void JSBSimModel::dynamics(const LCreal dt)
         // osg::Matrix m1 = getRotationalMatrix();
         // std::printf("oe EA: (%6.1f, %6.1f, %6.1f)\n", getRollD(), getPitchD(), getHeadingD());
         // std::printf("JSBSim    EA: (%6.1f, %6.1f, %6.1f)\n", acData->phi, acData->theta, acData->psi);
-        // std::printf("Eaagles* Q: (%6.3f, %6.3f, %6.3f, %6.3f)\n", q0[0], q0[1], q0[2], q0[3]);
+        // std::printf("oe* Q: (%6.3f, %6.3f, %6.3f, %6.3f)\n", q0[0], q0[1], q0[2], q0[3]);
         // std::printf("oe  Q: (%6.3f, %6.3f, %6.3f, %6.3f)\n", eq[0], eq[1], eq[2], eq[3]);
         // std::printf("JSBSim     Q: (%6.3f, %6.3f, %6.3f, %6.3f)\n", fq[0], fq[1], fq[2], fq[3]);
-        // std::printf("Eaagles*mm: (%6.3f, %6.3f, %6.3f, %6.3f)\n", m0(0,0), m0(0,1), m0(0,2), m0(0,3));
+        // std::printf("oe*mm: (%6.3f, %6.3f, %6.3f, %6.3f)\n", m0(0,0), m0(0,1), m0(0,2), m0(0,3));
         // std::printf("            (%6.3f, %6.3f, %6.3f, %6.3f)\n", m0(1,0), m0(1,1), m0(1,2), m0(1,3));
         // std::printf("            (%6.3f, %6.3f, %6.3f, %6.3f)\n", m0(2,0), m0(2,1), m0(2,2), m0(2,3));
         // std::printf("            (%6.3f, %6.3f, %6.3f, %6.3f)\n", m0(3,0), m0(3,1), m0(3,2), m0(3,3));

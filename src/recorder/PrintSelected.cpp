@@ -33,7 +33,7 @@ IMPLEMENT_SUBCLASS(PrintSelected,"PrintSelected")
 //------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(PrintSelected)
    "messageToken",   // 1) Message ID (token)
-   "fieldName",      // 2) Full field name (e.g., Eaagles.Recorder.Pb.PlayerId.name)
+   "fieldName",      // 2) Full field name (e.g., oe.Recorder.Pb.PlayerId.name)
    "compareToValS",  // 3) value to compare (string)
    "compareToValI",  // 4) value to compare (num)
    "compareToValD",  // 5) value to compare (dbl)
