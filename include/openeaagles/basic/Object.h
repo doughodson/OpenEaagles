@@ -420,7 +420,7 @@ private:
 
    // Table of registered classes:
    // --- pointers to the static member structure, _Static
-   static const unsigned int MAX_CLASSES = EAAGLES_CONFIG_MAX_CLASSES;
+   static const unsigned int MAX_CLASSES = OE_CONFIG_MAX_CLASSES;
    static const _Static* classes[MAX_CLASSES];
    static unsigned int numClasses;
 };

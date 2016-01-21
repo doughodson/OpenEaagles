@@ -5,12 +5,15 @@ Changes since v15.07
 --------------------------------------------------------------------------------
 general
 
--- Renamed 'Eaagles' namespace to 'oe' to align namespace to project name
+-- Renamed 'Eaagles' namespace to 'oe' to align with project name
 -- Renamed all namespaces to lowercase names - this complies with typical C++
--- convention and avoids confusion with classnames
+   convention and avoids confusion with classnames
 
 -- Removed legacy support for 'formnames' in base Object
 -- All form functions have now been removed -- should use 'Factory' functions
+
+-- Renamed global framework configuration options to start with 'OE' instead
+   of 'EAAGLES'
 
 --------------------------------------------------------------------------------
 basic

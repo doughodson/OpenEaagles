@@ -79,8 +79,8 @@ public:
    void reset() override;
 
 protected:
-   static const unsigned int MAX_TRKS = EAAGLES_CONFIG_MAX_TRACKS;         // Max tracks
-   static const unsigned int MAX_REPORTS = EAAGLES_CONFIG_MAX_REPORTS;     // Max number of reports
+   static const unsigned int MAX_TRKS = OE_CONFIG_MAX_TRACKS;         // Max tracks
+   static const unsigned int MAX_REPORTS = OE_CONFIG_MAX_REPORTS;     // Max number of reports
 
    unsigned int getNewTrackID()                             { return nextTrkId++; }
 
