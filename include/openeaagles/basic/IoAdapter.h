@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: IoAdapter
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_IoAdapter_H__
-#define __Eaagles_Basic_IoAdapter_H__
+#ifndef __oe_Basic_IoAdapter_H__
+#define __oe_Basic_IoAdapter_H__
 
 #include "openeaagles/basic/Component.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
    class IoData;
    class IoDevice;
@@ -42,6 +42,6 @@ public:
 };
 
 } // end Basic
-} // end Eaagles namespace
+} // end oe namespace
 
 #endif

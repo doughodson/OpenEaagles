@@ -6,13 +6,13 @@
 // In some cases (during missile launch), waiting for the background thread to perform this
 // operation may disrupt a seeker/sensor's ability to track a target.
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_IrSensor_H__
-#define __Eaagles_Simulation_IrSensor_H__
+#ifndef __oe_Simulation_IrSensor_H__
+#define __oe_Simulation_IrSensor_H__
 
 #include "openeaagles/simulation/IrSystem.h"
 #include "openeaagles/basic/safe_queue.h"
 
-namespace Eaagles {
+namespace oe {
 
 namespace Basic { class Integer; class Number; class String; }
 

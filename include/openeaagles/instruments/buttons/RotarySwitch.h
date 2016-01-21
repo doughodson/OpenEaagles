@@ -4,12 +4,12 @@
 // Description: Generic multi-position selector switch that knows when it is left or right
 //                mouse clicked and moves to next or previous switch position.
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Instruments_RotarySwitch_H__
-#define __Eaagles_Instruments_RotarySwitch_H__
+#ifndef __oe_Instruments_RotarySwitch_H__
+#define __oe_Instruments_RotarySwitch_H__
 
 #include "openeaagles/instruments/buttons/Button.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Instruments {
 
 class RotarySwitch : public Button
@@ -41,6 +41,6 @@ private:
 };
 
 }  // end Instruments namespace
-}  // end Eaagles namespace
+}  // end oe namespace
 
 #endif

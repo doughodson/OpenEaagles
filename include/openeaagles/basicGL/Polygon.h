@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: Polygon
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_BasicGL_Polygon_H__
-#define __Eaagles_BasicGL_Polygon_H__
+#ifndef __oe_BasicGL_Polygon_H__
+#define __oe_BasicGL_Polygon_H__
 
 #include "Graphic.h"
 
-namespace Eaagles {
+namespace oe {
 namespace BasicGL {
 
 //------------------------------------------------------------------------------
@@ -103,6 +103,6 @@ private:
 };
 
 } // End BasicGL namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

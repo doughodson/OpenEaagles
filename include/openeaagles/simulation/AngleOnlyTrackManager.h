@@ -1,13 +1,13 @@
 //----------------------------------------------------
 // Classes: AngleOnlyTrackManager, AirAngleOnlyTrkMgr
 //----------------------------------------------------
-#ifndef __Eaagles_Simulation_AngleOnlyTrackManager_H__
-#define __Eaagles_Simulation_AngleOnlyTrackManager_H__
+#ifndef __oe_Simulation_AngleOnlyTrackManager_H__
+#define __oe_Simulation_AngleOnlyTrackManager_H__
 
 #include "openeaagles/simulation/TrackManager.h"
 #include "openeaagles/basic/safe_queue.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
    class IrQueryMsg;
    class Track;
@@ -108,6 +108,6 @@ private:
 };
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

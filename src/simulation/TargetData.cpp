@@ -7,7 +7,7 @@
 #include "openeaagles/basic/units/Distances.h"
 #include "openeaagles/basic/units/Times.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 IMPLEMENT_SUBCLASS(TargetData,"TargetData")
@@ -416,4 +416,4 @@ std::ostream& TargetData::serialize(std::ostream& sout, const int i, const bool 
 }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace

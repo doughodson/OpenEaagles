@@ -34,7 +34,7 @@
 #include <cstdio>
 #include <cstring>
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 //==============================================================================
@@ -667,5 +667,5 @@ std::ostream& PosixHandler::serialize(std::ostream& sout, const int i, const boo
 }
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace
 

@@ -19,7 +19,7 @@
 # pragma warning(disable: 4996)
 #endif
 
-namespace Eaagles {
+namespace oe {
 namespace Recorder {
 
 
@@ -801,4 +801,4 @@ std::string PrintSelected::printTimeMsg(double time)
 }
 
 } // End Recorder namespace
-} // End Eaagles namespace
+} // End oe namespace

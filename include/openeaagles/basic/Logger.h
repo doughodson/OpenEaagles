@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Classes: Logger, Logger::LogEvent
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_Logger_H__
-#define __Eaagles_Basic_Logger_H__
+#ifndef __oe_Basic_Logger_H__
+#define __oe_Basic_Logger_H__
 
 #include "openeaagles/basic/Component.h"
 #include <fstream>
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 //------------------------------------------------------------------------------
@@ -92,6 +92,6 @@ private:
 };
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

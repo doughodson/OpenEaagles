@@ -6,12 +6,12 @@
 // all use GLUT or GLU, so you have to call the basicGlutFF to serialize them
 // from the input, and you also have to link to glut or freeglut to draw them.
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Glut_Shapes3D_H__
-#define __Eaagles_Glut_Shapes3D_H__
+#ifndef __oe_Glut_Shapes3D_H__
+#define __oe_Glut_Shapes3D_H__
 
 #include "openeaagles/basicGL/Shapes.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
     class Number;
 }
@@ -215,6 +215,6 @@ public:
 };
 
 } // End BasicGL namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

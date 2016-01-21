@@ -7,7 +7,7 @@
 
 #include "openeaagles/basic/Object.h"
 
-namespace Eaagles {
+namespace oe {
 namespace BasicGL {
 
 Basic::Object* basicGLFormFunc(const char* name)
@@ -23,4 +23,4 @@ Basic::Object* basicGLFormFunc(const char* name)
 }
 
 } // End BasicGL namespace
-} // End Eaagles namespace
+} // End oe namespace

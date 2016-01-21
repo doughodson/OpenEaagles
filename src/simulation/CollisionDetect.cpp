@@ -13,7 +13,7 @@
 
 #include <cmath>
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 IMPLEMENT_SUBCLASS(CollisionDetect,"CollisionDetect")
@@ -697,4 +697,4 @@ std::ostream& CollisionDetect::serialize(std::ostream& sout, const int i, const 
 }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace

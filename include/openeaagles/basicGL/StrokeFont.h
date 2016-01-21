@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: StrokeFont
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_BasicGL_StrokeFont_H__
-#define __Eaagles_BasicGL_StrokeFont_H__
+#ifndef __oe_BasicGL_StrokeFont_H__
+#define __oe_BasicGL_StrokeFont_H__
 
 #include "Font.h"
 
-namespace Eaagles {
+namespace oe {
 namespace BasicGL {
 
 //------------------------------------------------------------------------------
@@ -39,6 +39,6 @@ public:
 
 
 } // End BasicGL namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

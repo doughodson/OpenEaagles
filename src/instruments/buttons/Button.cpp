@@ -2,7 +2,7 @@
 #include "openeaagles/basic/Number.h"
 #include "openeaagles/basicGL/Display.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Instruments {
 
 IMPLEMENT_SUBCLASS(Button,"Button")
@@ -103,4 +103,4 @@ Basic::Object* Button::getSlotByIndex(const int si)
 }
 
 }  // end Instruments namespace
-}  // end Eaagles namespace
+}  // end oe namespace

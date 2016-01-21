@@ -11,7 +11,7 @@
 #include "openeaagles/basic/units/Areas.h"
 #include "openeaagles/basic/units/Distances.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 //==============================================================================
@@ -731,4 +731,4 @@ Basic::Object* SigAzEl::getSlotByIndex(const int si)
 
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace

@@ -4,12 +4,12 @@
 //
 // Description: Tests the secondary pfd page
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Instruments_EngPage_H__
-#define __Eaagles_Instruments_EngPage_H__
+#ifndef __oe_Instruments_EngPage_H__
+#define __oe_Instruments_EngPage_H__
 
 #include "openeaagles/basicGL/Page.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Instruments {
 
 class EngPage : public BasicGL::Page
@@ -62,6 +62,6 @@ private:
 };
 
 }  // end Instruments namespace
-}  // end Eaagles namespace
+}  // end oe namespace
 
 #endif

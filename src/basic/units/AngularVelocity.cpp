@@ -4,7 +4,7 @@
 #include "openeaagles/basic/units/Times.h"
 #include "openeaagles/basic/SlotTable.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 //------------------------------------------------------------------------------
@@ -288,4 +288,4 @@ void AngularVelocity::deleteData()
 }
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace

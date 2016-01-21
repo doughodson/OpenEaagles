@@ -7,7 +7,7 @@
 
 #include "openeaagles/basic/Object.h"
 
-namespace Eaagles {
+namespace oe {
 namespace IoDevice {
 
 Basic::Object* ioDeviceFormFunc(const char* name)
@@ -23,5 +23,5 @@ Basic::Object* ioDeviceFormFunc(const char* name)
 }
 
 }  //end IoDevice
-} // end Eaagles namespace
+} // end oe namespace
 

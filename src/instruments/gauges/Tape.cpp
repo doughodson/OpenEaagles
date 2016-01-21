@@ -1,7 +1,7 @@
 #include "openeaagles/instruments/gauges/Tape.h"
 #include "openeaagles/basic/Number.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Instruments {
 
 IMPLEMENT_SUBCLASS(Tape, "Tape")
@@ -262,4 +262,4 @@ Basic::Object* Tape::getSlotByIndex(const int si)
 }
 
 }  // end Instruments namespace
-}  // end Eaagles namespace
+}  // end oe namespace

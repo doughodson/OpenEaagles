@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Classes: IrShape, IrSphere, IrBox
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_IrShape_H__
-#define __Eaagles_Simulation_IrShape_H__
+#ifndef __oe_Simulation_IrShape_H__
+#define __oe_Simulation_IrShape_H__
 
 #include "openeaagles/basic/Object.h"
 
-namespace Eaagles {
+namespace oe {
 
 namespace Basic { class Number; }
 
@@ -88,6 +88,6 @@ private:
 };
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

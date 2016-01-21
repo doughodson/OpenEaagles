@@ -19,7 +19,7 @@
 #include "openeaagles/basic/units/Powers.h"
 #include "openeaagles/basic/osg/Vec3"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 IMPLEMENT_SUBCLASS(StabilizingGimbal,"StabilizingGimbal")
@@ -221,4 +221,4 @@ std::ostream& StabilizingGimbal::serialize(std::ostream& sout, const int i, cons
 }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace

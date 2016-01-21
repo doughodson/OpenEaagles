@@ -18,8 +18,8 @@
 //
 //------------------------------------------------------------------------------
 
-#ifndef __Eaagles_Maps_Rpf_Support_H__
-#define __Eaagles_Maps_Rpf_Support_H__
+#ifndef __oe_Maps_Rpf_Support_H__
+#define __oe_Maps_Rpf_Support_H__
 
 #include <fstream>
 
@@ -27,7 +27,7 @@ typedef unsigned short ushort;
 typedef unsigned int uint;
 typedef unsigned char uchar;
 
-namespace Eaagles {
+namespace oe {
 namespace Maps {
 namespace Rpf {
 
@@ -148,6 +148,6 @@ void parseLocations(std::ifstream& fin, Location* locs, int count);
 
 } // End Rpf namespace
 } // End Maps namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

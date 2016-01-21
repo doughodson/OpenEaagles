@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Classes: OtwCigiCl, CigiCl, CigiClNetwork, OtwModelCigiCl
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Otw_OtwCigiCl_H__
-#define __Eaagles_Otw_OtwCigiCl_H__
+#ifndef __oe_Otw_OtwCigiCl_H__
+#define __oe_Otw_OtwCigiCl_H__
 
 class CigiEntityCtrlV3;
 class CigiCompCtrlV3;
@@ -26,7 +26,7 @@ class CigiOutgoingMsg;
 
 #include "openeaagles/simulation/Otw.h"
 
-namespace Eaagles {
+namespace oe {
 
    namespace Basic {
       class NetHandler;
@@ -451,6 +451,6 @@ private:
 };
 
 } // End Otw namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: UsbJoystickImp -- Linux implementation
 //------------------------------------------------------------------------------
-#ifndef __IoDevice_Linu_UsbJoystickImp_H__
-#define __IoDevice_Linu_UsbJoystickImp_H__
+#ifndef __oe_IoDevice_Linux_UsbJoystickImp_H__
+#define __oe_IoDevice_Linux_UsbJoystickImp_H__
 
 #include "openeaagles/ioDevice/UsbJoystick.h"
 
-namespace Eaagles {
+namespace oe {
 namespace IoDevice {
 
 //------------------------------------------------------------------------------
@@ -38,6 +38,6 @@ private:
 };
 
 } // end IoDevice
-} // end Eaagles namespace
+} // end oe namespace
 
 #endif

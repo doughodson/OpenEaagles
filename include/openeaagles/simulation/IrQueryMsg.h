@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: IrQueryMsg
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_IrQueryMsg_H__
-#define __Eaagles_Simulation_IrQueryMsg_H__
+#ifndef __oe_Simulation_IrQueryMsg_H__
+#define __oe_Simulation_IrQueryMsg_H__
 
 #include "openeaagles/simulation/SensorMsg.h"
 
-namespace Eaagles {
+namespace oe {
 
 namespace Basic { class List; }
 
@@ -170,6 +170,6 @@ private:
 };
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

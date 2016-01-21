@@ -8,7 +8,7 @@
 #include "openeaagles/terrain/ded/DedFile.h"
 #include "openeaagles/basic/NetHandler.h"   // for byte-swapping only
 
-namespace Eaagles {
+namespace oe {
 namespace Terrain {
 
 IMPLEMENT_SUBCLASS(DedFile,"DedFile")
@@ -561,4 +561,4 @@ void DedFile::dump(std::ostream& sout) const
 }
 
 }// end Terrain namespace
-}// end Eaagles namespace
+}// end oe namespace

@@ -14,7 +14,7 @@
 #ifndef OSG_VEC2S_OE
 #define OSG_VEC2S_OE 1
 
-namespace Eaagles {
+namespace oe {
 namespace osg {
 
 class Vec2s
@@ -147,5 +147,5 @@ inline Vec2s componentDivide(const Vec2s& lhs, const Vec2s& rhs)
 }
 
 }    // end of namespace osg
-} // End Eaagles namespace
+} // End oe namespace
 #endif

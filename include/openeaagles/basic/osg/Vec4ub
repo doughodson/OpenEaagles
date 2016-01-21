@@ -16,7 +16,7 @@
 
 #include "./Vec3"
 
-namespace Eaagles {
+namespace oe {
 namespace osg {
 
 /** General purpose float quad.
@@ -158,6 +158,6 @@ class Vec4ub
 };    // end of class Vec4ub
 
 }    // end of namespace osg
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

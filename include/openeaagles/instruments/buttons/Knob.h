@@ -12,12 +12,12 @@
 //  )
 //  startAngle: 20      // angle from which to start rotation
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Instruments_Knob_H__
-#define __Eaagles_Instruments_Knob_H__
+#ifndef __oe_Instruments_Knob_H__
+#define __oe_Instruments_Knob_H__
 
 #include "openeaagles/instruments/buttons/Button.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic { class Table1; }
 namespace Instruments {
 
@@ -70,6 +70,6 @@ private:
 };
 
 }  // end Instruments namespace
-}  // end Eaagles namespace
+}  // end oe namespace
 
 #endif

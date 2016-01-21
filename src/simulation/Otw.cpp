@@ -14,7 +14,7 @@
 #include "openeaagles/basic/units/Distances.h"
 #include <cstring>
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(Otw,"Otw")
@@ -1157,4 +1157,4 @@ Basic::Object* Otm::getSlotByIndex(const int si)
 }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace

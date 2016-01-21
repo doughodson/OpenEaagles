@@ -10,7 +10,7 @@
 #include "openeaagles/basic/units/Angles.h"
 #include "openeaagles/basic/units/Distances.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Terrain {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(DataFile,"DataFile")
@@ -459,4 +459,4 @@ void DataFile::clearData()
 }
 
 }// end Terrain namespace
-}// end Eaagles namespace
+}// end oe namespace

@@ -11,13 +11,13 @@
 //        virtual int decompressSubframe(const int x, const int y, Subframe& subFrame);
 //
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Maps_Rpf_CadrgFrame_H__
-#define __Eaagles_Maps_Rpf_CadrgFrame_H__
+#ifndef __oe_Maps_Rpf_CadrgFrame_H__
+#define __oe_Maps_Rpf_CadrgFrame_H__
 
 #include "openeaagles/basic/Object.h"
 #include "openeaagles/maps/rpfMap/Support.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Maps {
 namespace Rpf {
 
@@ -46,7 +46,7 @@ private:
 
 } // End Rpf namespace
 } // End Maps namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif
 

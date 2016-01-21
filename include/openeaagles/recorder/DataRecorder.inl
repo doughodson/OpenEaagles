@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // DataRecorder macros
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Recorder_DataRecorder_Inline__
-#define __Eaagles_Recorder_DataRecorder_Inline__
+#ifndef __oe_Recorder_DataRecorder_Inline__
+#define __oe_Recorder_DataRecorder_Inline__
 
 //==============================================================================
 // inline functions
@@ -25,7 +25,7 @@ inline const OutputHandler* DataRecorder::getOutputHandler() const    {  return 
 #define BEGIN_RECORDER_HANDLER_TABLE(ThisType)                 \
 bool ThisType::recordDataImp(                                  \
       const unsigned int _id,                                  \
-      const Eaagles::Basic::Object* _obj[4],                   \
+      const oe::Basic::Object* _obj[4],                   \
       const double _val[4] )                                   \
 {                                                              \
    bool _recorded = false;                                     \

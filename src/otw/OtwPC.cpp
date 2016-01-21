@@ -18,7 +18,7 @@
 #include "openeaagles/basic/units/Distances.h"
 #include "openeaagles/basic/units/Angles.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Otw {
 
 IMPLEMENT_SUBCLASS(OtwPC,"OtwPC")
@@ -257,5 +257,5 @@ void OtwPC::sendPcData()
 }
 
 } // End Otw namespace
-} // End Eaagles namespace
+} // End oe namespace
 

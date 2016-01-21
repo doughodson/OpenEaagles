@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: QuadMap
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Terrain_QuadMap_H__
-#define __Eaagles_Terrain_QuadMap_H__
+#ifndef __oe_Terrain_QuadMap_H__
+#define __oe_Terrain_QuadMap_H__
 
 #include "openeaagles/basic/Terrain.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Terrain {
    class DataFile;
 
@@ -71,6 +71,6 @@ private:
 };
 
 } // End Terrain namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

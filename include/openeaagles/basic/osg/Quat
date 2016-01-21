@@ -19,7 +19,7 @@
 #include "./Vec3d"
 #include "./Vec4d"
 
-namespace Eaagles {
+namespace oe {
 namespace osg {
 
 class Matrixf;
@@ -389,6 +389,6 @@ class Quat
 };    // end of class prototype
 
 }    // end of namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif 

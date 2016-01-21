@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: TabPrinter
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Recorder_TabPrinter_H__
-#define __Eaagles_Recorder_TabPrinter_H__
+#ifndef __oe_Recorder_TabPrinter_H__
+#define __oe_Recorder_TabPrinter_H__
 
 #include "openeaagles/recorder/OutputHandler.h"
 #include "openeaagles/recorder/PrintHandler.h"
@@ -10,7 +10,7 @@
 #include <sstream>
 #include <fstream>
 
-namespace Eaagles {
+namespace oe {
 namespace Recorder {
    namespace Pb {
       class Time; class FileIdMsg; class NewPlayerEventMsg; class PlayerRemovedEventMsg; class PlayerDataMsg;
@@ -146,6 +146,6 @@ private:
 inline bool TabPrinter::isSimReset() const { return simReset; }
 
 } // End Recorder namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

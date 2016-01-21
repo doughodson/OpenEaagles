@@ -36,72 +36,72 @@
 /* change the name of the scanner class - results in "rfFlexLexer" */
 %option prefix="rf" 
 
-/* derived 'Eaagles::BasicGL::Reformat' is a subclass of yyFlexLexer */
-%option yyclass="Eaagles::BasicGL::Reformat"
+/* derived 'oe::BasicGL::Reformat' is a subclass of yyFlexLexer */
+%option yyclass="oe::BasicGL::Reformat"
 
 %%
 
 \+?0*#+\+?		{  // "+0#"	Integer w/sign and leading zeros
-			   return Eaagles::BasicGL::Reformat::processInteger(yytext, yyleng);
+			   return oe::BasicGL::Reformat::processInteger(yytext, yyleng);
 			}
 
 \+?0*#+\.#+\+?		{  // "+0#.#"	Floating w/sign and leading zeros
-			   return Eaagles::BasicGL::Reformat::processFloat(yytext, yyleng);
+			   return oe::BasicGL::Reformat::processFloat(yytext, yyleng);
 			}
 
 \+?(0|H)H+:?MM:?SS(\.S+)?\+?	{  // HH:MM:SS  Hours, minutes and seconds
-			   return Eaagles::BasicGL::Reformat::processTime(Eaagles::BasicGL::TimeReadout::hhmmss,
+			   return oe::BasicGL::Reformat::processTime(oe::BasicGL::TimeReadout::hhmmss,
 								yytext, yyleng);
 			}
 
 \+?(0|H)H+:?MM(\.M+)?\+?	{  // HH:MM		Hours and minutes
-			   return Eaagles::BasicGL::Reformat::processTime(Eaagles::BasicGL::TimeReadout::hhmm, yytext, yyleng);
+			   return oe::BasicGL::Reformat::processTime(oe::BasicGL::TimeReadout::hhmm, yytext, yyleng);
 			}
 
 \+?(0|H)H+(\.H+)?\+?	{  // HH		Hours
-			   return Eaagles::BasicGL::Reformat::processTime(Eaagles::BasicGL::TimeReadout::hh, yytext, yyleng);
+			   return oe::BasicGL::Reformat::processTime(oe::BasicGL::TimeReadout::hh, yytext, yyleng);
 			}
 
 \+?(0|M)M+:?SS(\.S+)?\+?	{  // MM:SS		Minutes and seconds
-			   return Eaagles::BasicGL::Reformat::processTime(Eaagles::BasicGL::TimeReadout::mmss, yytext, yyleng);
+			   return oe::BasicGL::Reformat::processTime(oe::BasicGL::TimeReadout::mmss, yytext, yyleng);
 			}
 
 \+?(0|M)M+(\.M+)?\+?	{  // MM		Minutes
-			   return Eaagles::BasicGL::Reformat::processTime(Eaagles::BasicGL::TimeReadout::mm, yytext, yyleng);
+			   return oe::BasicGL::Reformat::processTime(oe::BasicGL::TimeReadout::mm, yytext, yyleng);
 			}
 
 \+?(0|S)S+(\.S+)?\+?	{  // SS		Seconds
-			   return Eaagles::BasicGL::Reformat::processTime(Eaagles::BasicGL::TimeReadout::ss, yytext, yyleng);
+			   return oe::BasicGL::Reformat::processTime(oe::BasicGL::TimeReadout::ss, yytext, yyleng);
 			}
 
 \+?(0|D)D{1,2}@?MM\'?SS(\.S+)?\"?\+?	{
 			   // +DDMMSS	Degrees, minutes and seconds
-			   return Eaagles::BasicGL::Reformat::processDirection(Eaagles::BasicGL::DirectionReadout::ddmmss,
+			   return oe::BasicGL::Reformat::processDirection(oe::BasicGL::DirectionReadout::ddmmss,
 								yytext, yyleng);
 			}
 
 \+?(0|D)D{1,2}@?MM(\.M+)?\'?\+?	{
 			   // +DDMM		Degrees and minutes
-			   return Eaagles::BasicGL::Reformat::processDirection(Eaagles::BasicGL::DirectionReadout::ddmm,
+			   return oe::BasicGL::Reformat::processDirection(oe::BasicGL::DirectionReadout::ddmm,
 								yytext, yyleng);
 			}
 
 \+?(0|D)D{1,2}(\.D+)?@?\+?	{
 			   // +DD		Degrees
-			   return Eaagles::BasicGL::Reformat::processDirection(Eaagles::BasicGL::DirectionReadout::dd,
+			   return oe::BasicGL::Reformat::processDirection(oe::BasicGL::DirectionReadout::dd,
 								yytext, yyleng);
 			}
 
 \+?D(\.D+)?@?\+?	{
 			   // +DD		Degrees
-			   return Eaagles::BasicGL::Reformat::processDirection(Eaagles::BasicGL::DirectionReadout::dd,
+			   return oe::BasicGL::Reformat::processDirection(oe::BasicGL::DirectionReadout::dd,
 								yytext, yyleng);
 			}
 
 %%
 
 
-namespace Eaagles {
+namespace oe {
 namespace BasicGL {
 
 //------------------------------------------------------------------------------
@@ -713,6 +713,6 @@ DirectionReadout::DirMode Reformat::convertDirection(const char* s)
 }
 
 } // End BasicGL namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 

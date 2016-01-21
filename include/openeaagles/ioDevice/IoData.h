@@ -1,10 +1,10 @@
 
-#ifndef __Eaagles_IoDevice_IoData_H__
-#define __Eaagles_IoDevice_IoData_H__
+#ifndef __oe_IoDevice_IoData_H__
+#define __oe_IoDevice_IoData_H__
 
 #include "openeaagles/basic/IoData.h"
 
-namespace Eaagles {
+namespace oe {
 
 namespace Basic { class Number; }
 
@@ -77,6 +77,6 @@ private:
 };
 
 } // end IoDevice
-} // end Eaagles namespace
+} // end oe namespace
 
 #endif

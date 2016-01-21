@@ -13,7 +13,7 @@
 # pragma warning(disable: 4996)
 #endif
 
-namespace Eaagles {
+namespace oe {
 namespace BasicGL {
 
 IMPLEMENT_SUBCLASS(BitmapFont,"BitmapFont")
@@ -581,4 +581,4 @@ GLubyte* BitmapFont::loadTypeFace(const GLint index, const GLenum reverse)
 }
 
 } // End BasicGL namespace
-} // End Eaagles namespace
+} // End oe namespace

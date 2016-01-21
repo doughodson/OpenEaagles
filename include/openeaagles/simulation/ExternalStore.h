@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: ExternalStore
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_ExternalStore_H__
-#define __Eaagles_Simulation_ExternalStore_H__
+#ifndef __oe_Simulation_ExternalStore_H__
+#define __oe_Simulation_ExternalStore_H__
 
 #include "openeaagles/simulation/System.h"
 
-namespace Eaagles {
+namespace oe {
    namespace Basic { class String; }
 
 namespace Simulation {
@@ -68,6 +68,6 @@ private:
 };
 
 } // end Simulation namespace
-} // end Eaagles namespace
+} // end oe namespace
 
 #endif

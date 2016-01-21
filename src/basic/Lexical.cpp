@@ -328,7 +328,7 @@ int yyFlexLexer::yylex()
 	return 0;
 	}
 
-#define YY_DECL int Eaagles::Basic::Lexical::yylex()
+#define YY_DECL int oe::Basic::Lexical::yylex()
 static yyconst flex_int16_t yy_nxt[][128] =
     {
     {
@@ -2000,7 +2000,7 @@ static yyconst yy_state_type yy_NUL_trans[93] =
 #line 1 "Lexical.l"
 #line 2 "Lexical.l"
 //
-// Lexical generator for reading OpenEaagles configuration files.
+// Lexical generator for reading Openoe configuration files.
 //
 
 // Disable all deprecation warnings for now.  Until we fix them,
@@ -2034,7 +2034,7 @@ using namespace std;
 /* no calls to yywrap */
 #define YY_NO_UNISTD_H 1
 /* change the name of the scanner class - results in "basicFlexLexer" */
-/* derived 'Eaagles::Basic::Lexical' is a subclass of yyFlexLexer */
+/* derived 'oe::Basic::Lexical' is a subclass of yyFlexLexer */
 #line 2039 "Lexical.cpp"
 
 #define INITIAL 0

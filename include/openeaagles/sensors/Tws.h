@@ -2,12 +2,12 @@
 // Class: Tws
 // Description: Simple, Track-While-Scan Mode Radar
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Sensor_Tws_H__
-#define __Eaagles_Sensor_Tws_H__
+#ifndef __oe_Sensor_Tws_H__
+#define __oe_Sensor_Tws_H__
 
 #include "openeaagles/simulation/Radar.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Sensor {
 
 class Tws : public Simulation::Radar
@@ -22,6 +22,6 @@ private:
 };
 
 } // End Sensor namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

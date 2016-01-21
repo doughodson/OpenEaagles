@@ -4,7 +4,7 @@
 #include "openeaagles/basic/Rgba.h"
 #include "openeaagles/basic/Float.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 IMPLEMENT_SUBCLASS(Rgba,"rgba")
@@ -79,4 +79,4 @@ std::ostream& Rgba::serialize(std::ostream& sout, const int i, const bool slotsO
 }
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace

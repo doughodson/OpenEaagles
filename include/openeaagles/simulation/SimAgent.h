@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: SimAgent
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_SimAgent_H__
-#define __Eaagles_Simulation_SimAgent_H__
+#ifndef __oe_Simulation_SimAgent_H__
+#define __oe_Simulation_SimAgent_H__
 
 #include "openeaagles/basic/ubf/Agent.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 class Simulation;
@@ -77,7 +77,7 @@ private:
 //) // Station
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif
 

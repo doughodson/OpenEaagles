@@ -15,7 +15,7 @@
 
 #include <cmath>
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 //==============================================================================
@@ -869,4 +869,4 @@ std::ostream& Gun::serialize(std::ostream& sout, const int i, const bool slotsOn
 }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace

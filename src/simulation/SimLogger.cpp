@@ -67,7 +67,7 @@
         return new SimLogger::ThisType(*this);                                  \
     }
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 //==============================================================================
@@ -1998,4 +1998,4 @@ void SimLogger::RemovedRwrTrack::captureData()
 }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace

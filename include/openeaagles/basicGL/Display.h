@@ -1,10 +1,10 @@
 
-#ifndef __Eaagles_BasicGL_Display_H__
-#define __Eaagles_BasicGL_Display_H__
+#ifndef __oe_BasicGL_Display_H__
+#define __oe_BasicGL_Display_H__
 
 #include "Page.h"
 
-namespace Eaagles {
+namespace oe {
 
    namespace Basic {
       class Color;
@@ -458,6 +458,6 @@ inline bool Display::isOkToSwap() const                     { return okToSwap; }
 inline void Display::setOkToSwap(const bool x)              { okToSwap = x; }
 
 } // End BasicGL namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

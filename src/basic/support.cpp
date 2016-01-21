@@ -23,7 +23,7 @@
   #include "linux/support.cxx"
 #endif
 
-namespace Eaagles {
+namespace oe {
 
 //------------
 // UTC time of day (seconds since midnight) and optional date (day/month/year)
@@ -853,4 +853,4 @@ unsigned int getDigits(const double x)
    return digits;
 }
 
-} // End Eaagles namespace
+} // End oe namespace

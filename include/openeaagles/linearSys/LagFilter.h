@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // LagFilter class -- First order lag filter
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_LinearSystem_LagFilter_H__
-#define __Eaagles_LinearSystem_LagFilter_H__
+#ifndef __oe_LinearSystem_LagFilter_H__
+#define __oe_LinearSystem_LagFilter_H__
 
 #include "openeaagles/linearSys/FirstOrderTf.h"
 
-namespace Eaagles {
+namespace oe {
    namespace Basic { class Time; }
 
 namespace LinearSystem {
@@ -51,6 +51,6 @@ private:
 };
 
 } // End LinearSystem namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

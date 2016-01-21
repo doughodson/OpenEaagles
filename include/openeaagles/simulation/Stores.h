@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Classes: Stores
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_Stores_H__
-#define __Eaagles_Simulation_Stores_H__
+#ifndef __oe_Simulation_Stores_H__
+#define __oe_Simulation_Stores_H__
 
 #include "openeaagles/simulation/ExternalStore.h"
 
-namespace Eaagles {
+namespace oe {
    namespace Basic { class Number; class PairStream; }
 
 namespace Simulation {
@@ -227,6 +227,6 @@ private:
 };
 
 } // end Simulation namespace
-} // end Eaagles namespace
+} // end oe namespace
 
 #endif

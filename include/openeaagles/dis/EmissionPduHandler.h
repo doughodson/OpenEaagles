@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Classes: EmissionPduHandler
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Network_Dis_EmissionPduHandler_H__
-#define __Eaagles_Network_Dis_EmissionPduHandler_H__
+#ifndef __oe_Network_Dis_EmissionPduHandler_H__
+#define __oe_Network_Dis_EmissionPduHandler_H__
 
 #include "openeaagles/dis/NetIO.h"
 #include "openeaagles/dis/structs.h"
 
-namespace Eaagles {
+namespace oe {
    namespace Simulation {
       class Antenna;
    }
@@ -234,6 +234,6 @@ inline const TrackJamTargets* EmissionPduHandler::getSavedTrackJamTargetData(con
 
 } // End Dis namespace
 } // End Network namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

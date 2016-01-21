@@ -23,7 +23,7 @@
 
 // #define NET_TIMING_TEST
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 static const unsigned int DEFAULT_FAST_FORWARD_RATE = 1;
@@ -1619,4 +1619,4 @@ unsigned long BgThread::userFunc(const LCreal dt)
 }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace

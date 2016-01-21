@@ -17,7 +17,7 @@
 #include "./Vec2d"
 #include "./Vec3f"
 
-namespace Eaagles {
+namespace oe {
 namespace osg {
 
 /** General purpose double triple for use as vertices, vectors and normals.
@@ -222,6 +222,6 @@ inline Vec3d componentDivide(const Vec3d& lhs, const Vec3d& rhs)
 }
 
 }    // end of namespace osg
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

@@ -36,7 +36,7 @@
 #include <arpa/inet.h>
 #endif
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 //==============================================================================
@@ -1886,4 +1886,4 @@ void NtmOutputNodeStd::print(std::ostream& sout, const int icnt) const
 }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace

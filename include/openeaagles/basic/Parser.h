@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Parser
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_Parser_H__
-#define __Eaagles_Basic_Parser_H__
+#ifndef __oe_Basic_Parser_H__
+#define __oe_Basic_Parser_H__
 
 // parser and form functions
 #include "openeaagles/basic/support.h"
 
-namespace Eaagles {
+namespace oe {
    namespace Basic {
 
       class Object;

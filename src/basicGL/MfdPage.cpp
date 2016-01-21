@@ -1,6 +1,6 @@
 #include "openeaagles/basicGL/MfdPage.h"
 
-namespace Eaagles {
+namespace oe {
 namespace BasicGL {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(MfdPage,"MfdPage")
@@ -119,4 +119,4 @@ bool MfdPage::onOsbL9()    { return false; }
 bool MfdPage::onOsbL10()   { return false; }
 
 }  // end of BasicGL namespace
-}  // end of Eaagles namespace
+}  // end of oe namespace

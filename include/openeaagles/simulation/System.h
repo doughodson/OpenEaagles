@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: System
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_System_H__
-#define __Eaagles_Simulation_System_H__
+#ifndef __oe_Simulation_System_H__
+#define __oe_Simulation_System_H__
 
 #include "openeaagles/basic/Component.h"
 
-namespace Eaagles {
+namespace oe {
    namespace Basic { class String; }
 
 namespace Simulation {
@@ -110,6 +110,6 @@ private:
 };
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

@@ -14,7 +14,7 @@
 #include "openeaagles/basic/Number.h"
 #include "openeaagles/basic/units/Areas.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 IMPLEMENT_SUBCLASS(IrSignature,"IrSignature")
@@ -178,7 +178,7 @@ bool IrSignature::setSlotBaseHeatSignature(Basic::Number* const num)
 //------------------------------------------------------------------------------
 // setSlotEmissivity() -- set emissivity
 //------------------------------------------------------------------------------
-bool IrSignature::setSlotEmissivity(Eaagles::Basic::Number* const num)
+bool IrSignature::setSlotEmissivity(oe::Basic::Number* const num)
 {
    bool ok = false;
    if (num != nullptr) {
@@ -196,7 +196,7 @@ bool IrSignature::setSlotEmissivity(Eaagles::Basic::Number* const num)
 //------------------------------------------------------------------------------
 // setSlotEffectiveArea() -- set effective area
 //------------------------------------------------------------------------------
-bool IrSignature::setSlotEffectiveArea(Eaagles::Basic::Number* const num)
+bool IrSignature::setSlotEffectiveArea(oe::Basic::Number* const num)
 {
    bool ok = false;
    LCreal value = 0.0;
@@ -269,4 +269,4 @@ const LCreal* IrSignature::getWaveBandWidths() const
 }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace

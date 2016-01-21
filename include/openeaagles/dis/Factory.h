@@ -3,10 +3,10 @@
 //
 // Description: Class factory
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Network_Dis_Factory_H__
-#define __Eaagles_Network_Dis_Factory_H__
+#ifndef __oe_Network_Dis_Factory_H__
+#define __oe_Network_Dis_Factory_H__
 
-namespace Eaagles {
+namespace oe {
 
 namespace Basic { class Object; }
 
@@ -24,6 +24,6 @@ protected:
 
 } // End Dis namespace
 } // End Network namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

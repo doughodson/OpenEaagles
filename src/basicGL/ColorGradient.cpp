@@ -3,7 +3,7 @@
 #include "openeaagles/basic/PairStream.h"
 #include "openeaagles/basic/Pair.h"
 
-namespace Eaagles {
+namespace oe {
 namespace BasicGL {
 
 IMPLEMENT_SUBCLASS(ColorGradient,"ColorGradient")
@@ -88,4 +88,4 @@ Basic::Object* BasicGL::ColorGradient::getSlotByIndex(const int si)
 }
 
 } // End BasicGL namespace
-} // End Eaagles namespace
+} // End oe namespace

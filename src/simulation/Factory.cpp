@@ -75,7 +75,7 @@
 
 #include <cstring>
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 Factory::Factory()

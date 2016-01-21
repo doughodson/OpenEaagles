@@ -19,7 +19,7 @@
 
 #include <cmath>
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
    // default flight control attributes associated with flying a pattern
@@ -402,7 +402,7 @@ bool Autopilot::flyLoiterEntry()
 
       // Player only data
       const double velMps    = pPlr->getTotalVelocity();
-      const double rocMtr    = velMps * velMps / Eaagles::ETHGM / std::tan(MAX_BANK_RAD);
+      const double rocMtr    = velMps * velMps / oe::ETHGM / std::tan(MAX_BANK_RAD);
       const double rocNM     = rocMtr * Basic::Distance::M2NM;
       const double obCrsDeg  = Basic::Angle::aepcdDeg(loiterInboundCourse + 180.0);
 
@@ -609,11 +609,11 @@ bool Autopilot::calcMirrorLatLon()
       // get current data
       //----------------------------------------------------
       const double velMps = pPlr->getTotalVelocity();
-      double phiCmdRad = std::atan2(velMps * SRT_RPS, Eaagles::ETHGM);
+      double phiCmdRad = std::atan2(velMps * SRT_RPS, oe::ETHGM);
       if (phiCmdRad > MAX_BANK_RAD) { phiCmdRad = MAX_BANK_RAD; }
 
       // radius of the center (nautical miles)
-      const double rocMtr    = velMps * velMps / (Eaagles::ETHGM * std::tan(phiCmdRad));
+      const double rocMtr    = velMps * velMps / (oe::ETHGM * std::tan(phiCmdRad));
       const double rocNM     = rocMtr * Basic::Distance::M2NM;
       const double xtDistNM  = 2.0 * rocNM;
 
@@ -682,7 +682,7 @@ bool Autopilot::flyCRS(const double latDeg, const double lonDeg, const double cr
       const double posErrDeg = Basic::Angle::aepcdDeg(brgDeg - crsDeg);
       const double posErrRad = posErrDeg * Basic::Angle::D2RCC;
 
-      const double rocMtr    = velMps * velMps / Eaagles::ETHGM / std::tan(MAX_BANK_RAD);
+      const double rocMtr    = velMps * velMps / oe::ETHGM / std::tan(MAX_BANK_RAD);
       //double rocNM     = rocMtr * Basic::Distance::M2NM;
 
       const double xtRngNM   = std::fabs(distNM * std::sin(posErrRad));
@@ -739,8 +739,8 @@ bool Autopilot::flySRT()
       // get current data
       //----------------------------------------------------
       const double velMps    = pPlr->getTotalVelocity();
-      double phiCmdRad = std::atan2(velMps*SRT_RPS, Eaagles::ETHGM);
-      double psiDotCmdRps = Eaagles::ETHGM * std::tan(phiCmdRad) / velMps;
+      double phiCmdRad = std::atan2(velMps*SRT_RPS, oe::ETHGM);
+      double psiDotCmdRps = oe::ETHGM * std::tan(phiCmdRad) / velMps;
 
       // turn left
       if (loiterCcwFlag) {
@@ -1718,4 +1718,4 @@ Basic::Object* Autopilot::getSlotByIndex(const int si)
 }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace

@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Classes: IrSeeker, TdbIr
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_IrSeeker_H__
-#define __Eaagles_Simulation_IrSeeker_H__
+#ifndef __oe_Simulation_IrSeeker_H__
+#define __oe_Simulation_IrSeeker_H__
 
 #include "openeaagles/simulation/ScanGimbal.h"
 #include "openeaagles/simulation/Tdb.h"
@@ -11,7 +11,7 @@
 
 //#define USE_TDBIR
 
-namespace Eaagles {
+namespace oe {
    namespace Basic { class PairStream; }
 
 namespace Simulation {
@@ -97,6 +97,6 @@ protected:
 #endif
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

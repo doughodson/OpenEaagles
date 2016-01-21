@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: ScanGimbal
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_ScanGimbal_H__
-#define __Eaagles_Simulation_ScanGimbal_H__
+#ifndef __oe_Simulation_ScanGimbal_H__
+#define __oe_Simulation_ScanGimbal_H__
 
 #include "openeaagles/simulation/Gimbal.h"
 
-namespace Eaagles {
+namespace oe {
 
 namespace Basic { class Integer; }
 
@@ -272,6 +272,6 @@ private:
 };
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

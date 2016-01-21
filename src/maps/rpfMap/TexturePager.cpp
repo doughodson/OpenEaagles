@@ -9,7 +9,7 @@
 #include "openeaagles/basic/Pair.h"
 #include "openeaagles/basic/List.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Maps {
 namespace Rpf {
 
@@ -305,5 +305,5 @@ void TexturePager::flushTextures()
 
 } // End Rpf namespace
 } // End Maps namespace
-} // End Eaagles namespace
+} // End oe namespace
 

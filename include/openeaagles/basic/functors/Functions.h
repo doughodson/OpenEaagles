@@ -3,13 +3,13 @@
 //    Polynomial function:                Polynomial
 //    Generic multi-variable functions:   Func1, Func2, Func3, Func4 and Func5
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_Functions_H__
-#define __Eaagles_Basic_Functions_H__
+#ifndef __oe_Basic_Functions_H__
+#define __oe_Basic_Functions_H__
 
 #include "openeaagles/basic/Object.h"
 #include "openeaagles/basic/functors/Function.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 class FStorage;
@@ -142,6 +142,6 @@ private:
 };
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

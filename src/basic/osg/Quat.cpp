@@ -21,7 +21,7 @@
 /// http://www.gamasutra.com/features/programming/19980703/quaternions_01.htm
 /// http://mathworld.wolfram.com/Quaternion.html
 
-namespace Eaagles {
+namespace oe {
 namespace osg {
 
 void Quat::set(const Matrixf& matrix)
@@ -351,4 +351,4 @@ void Quat::slerp( value_type t, const Quat& from, const Quat& to )
 #define QW  _v[3]
 
 } // End osg namespace
-} // End Eaagles namespace
+} // End oe namespace

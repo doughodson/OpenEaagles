@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Classes: DtedFile
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Terrain_DtedFile_H__
-#define __Eaagles_Terrain_DtedFile_H__
+#ifndef __oe_Terrain_DtedFile_H__
+#define __oe_Terrain_DtedFile_H__
 
 #include "../DataFile.h"
 
-namespace Eaagles {
+namespace oe {
    namespace Basic { class Number; }
 namespace Terrain {
 
@@ -46,6 +46,6 @@ private:
 
 
 } // End Terrain namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

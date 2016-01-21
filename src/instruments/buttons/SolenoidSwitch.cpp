@@ -6,7 +6,7 @@
 #include "openeaagles/basic/PairStream.h"
 #include "openeaagles/basic/Timers.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Instruments {
 
 IMPLEMENT_SUBCLASS(SolenoidSwitch,"SolenoidSwitch")
@@ -348,4 +348,4 @@ void SolenoidButton::updateData(LCreal dt)
 
 
 }  // end Instruments namespace
-}  // end Eaagles namespace
+}  // end oe namespace

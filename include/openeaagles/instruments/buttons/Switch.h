@@ -4,12 +4,12 @@
 // Description: Button that can have multiple formats, up to as many as the user
 // wants.
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Instruments_Switch_H__
-#define __Eaagles_Instruments_Switch_H__
+#ifndef __oe_Instruments_Switch_H__
+#define __oe_Instruments_Switch_H__
 
 #include "openeaagles/instruments/buttons/Button.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Instruments {
 
 class Switch : public Button {
@@ -41,6 +41,6 @@ private:
 };
 
 }  // end Instruments namespace
-}  // end Eaagles namespace
+}  // end oe namespace
 
 #endif

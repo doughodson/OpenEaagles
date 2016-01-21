@@ -4,12 +4,12 @@
 //    OtwModel -- Model class; manages player to OTW model relationships
 //    Otm      -- Type Mapper class; maps player types to OTW model types
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_Otw_H__
-#define __Eaagles_Simulation_Otw_H__
+#ifndef __oe_Simulation_Otw_H__
+#define __oe_Simulation_Otw_H__
 
 #include "openeaagles/basic/Component.h"
 
-namespace Eaagles {
+namespace oe {
    namespace Basic {
       class Distance;
       class Identifier;
@@ -364,6 +364,6 @@ private:
 };
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

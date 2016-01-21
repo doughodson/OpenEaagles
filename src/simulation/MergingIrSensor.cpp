@@ -15,7 +15,7 @@
 #include "openeaagles/basic/units/Distances.h"
 #include "openeaagles/basic/units/Angles.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 IMPLEMENT_SUBCLASS(MergingIrSensor, "MergingIrSensor")

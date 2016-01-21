@@ -2,8 +2,8 @@
 // Class: JSBSimModel
 // Description: JSBSim Model
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Dynamics_JSBSimModel_H__
-#define __Eaagles_Dynamics_JSBSimModel_H__
+#ifndef __oe_Dynamics_JSBSimModel_H__
+#define __oe_Dynamics_JSBSimModel_H__
 
 #include "openeaagles/simulation/dynamics/AerodynamicsModel.h"
 #include "openeaagles/basic/String.h"
@@ -13,7 +13,7 @@ namespace JSBSim {
     class FGPropertyManager;
 }
 
-namespace Eaagles {
+namespace oe {
 
 namespace Basic {
     class String;
@@ -117,6 +117,6 @@ private:
 };
 
 } // End Dynamics namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

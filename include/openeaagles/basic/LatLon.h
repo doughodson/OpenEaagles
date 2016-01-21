@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: LatLon
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_LatLon_H__
-#define __Eaagles_Basic_LatLon_H__
+#ifndef __oe_Basic_LatLon_H__
+#define __oe_Basic_LatLon_H__
 
 #include "openeaagles/basic/Number.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 class String;
@@ -110,6 +110,6 @@ private:
 };
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

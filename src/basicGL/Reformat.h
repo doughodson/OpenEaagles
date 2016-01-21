@@ -2,8 +2,8 @@
 // Lexical generator for the Readout reformatter
 //
 
-#ifndef _Eaagles_BasicGL_Reformat_H_
-#define _Eaagles_BasicGL_Reformat_H_
+#ifndef __oe_BasicGL_Reformat_H__
+#define __oe_BasicGL_Reformat_H__
 
 #ifndef __FLEX_LEXER_H
 #undef yyFlexLexer
@@ -14,7 +14,7 @@
 #include "openeaagles/basicGL/Readouts.h"
 #include <sstream>
 
-namespace Eaagles {
+namespace oe {
 namespace BasicGL {
 
 // Reformat converts example strings into C/C++ format specifiers for
@@ -57,7 +57,7 @@ private:
 };
 
 } // End BasicGL namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif
 

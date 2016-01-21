@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: Arbiter
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_Ubf_Arbiter_H__
-#define __Eaagles_Basic_Ubf_Arbiter_H__
+#ifndef __oe_Basic_Ubf_Arbiter_H__
+#define __oe_Basic_Ubf_Arbiter_H__
 
 #include "Behavior.h"
 
-namespace Eaagles {
+namespace oe {
 
 namespace Basic {
    class List;
@@ -59,7 +59,7 @@ inline Basic::List* Arbiter::getBehaviors()                 { return behaviors; 
 
 } // End Ubf namespace
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif
 

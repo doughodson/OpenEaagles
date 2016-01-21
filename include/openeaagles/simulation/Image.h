@@ -3,12 +3,12 @@
 // Factory name: SarImage
 // Description: SAR image structure
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_Image_H__
-#define __Eaagles_Simulation_Image_H__
+#ifndef __oe_Simulation_Image_H__
+#define __oe_Simulation_Image_H__
 
 #include "openeaagles/basic/Object.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 class Image : public Basic::Object
@@ -77,6 +77,6 @@ private:
 };
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

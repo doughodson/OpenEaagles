@@ -7,7 +7,7 @@
 
 #define MR2IN 0.026785714      // font was scaled by this
 
-namespace Eaagles {
+namespace oe {
 namespace Instruments {
 
 float WHITE[3] = { 1.0, 1.0, 1.0 };
@@ -2042,4 +2042,4 @@ void Eadi3DObjects::makeFont(void) {
 }
 
 } // End Instruments namespace
-} // End Eaagles namespace
+} // End oe namespace

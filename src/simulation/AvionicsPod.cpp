@@ -2,7 +2,7 @@
 
 #include "openeaagles/basic/Number.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 //==============================================================================
@@ -17,5 +17,5 @@ EMPTY_SERIALIZER(AvionicsPod)
 
 
 } // end Simulation namespace
-} // end Eaagles namespace
+} // end oe namespace
 

@@ -5,7 +5,7 @@
 
 #define MAX_POINTS 64
 
-namespace Eaagles {
+namespace oe {
 namespace Instruments {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(IrisGLCompat,"IrisGLCompat")
@@ -182,5 +182,5 @@ void IrisGLCompat::rdr2(float x, float y)
 }
 
 } // End Instruments namespace
-} // End Eaagles namespace
+} // End oe namespace
 

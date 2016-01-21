@@ -3,7 +3,7 @@
 #include "openeaagles/basic/Rgba.h"
 #include "openeaagles/basicGL/Display.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Instruments {
 
 IMPLEMENT_SUBCLASS(GhostHorizon, "GhostHorizon")
@@ -262,4 +262,4 @@ Basic::Object* GhostHorizon::getSlotByIndex(const int si)
 }
 
 }; // end of Instruments namespace
-}; // end of Eaagles namespace
+}; // end of oe namespace

@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: Route
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_Route_H__
-#define __Eaagles_Simulation_Route_H__
+#ifndef __oe_Simulation_Route_H__
+#define __oe_Simulation_Route_H__
 
 #include "openeaagles/basic/Component.h"
 
-namespace Eaagles {
+namespace oe {
    namespace Basic {
       class Identifier;
       class Distance;
@@ -222,6 +222,6 @@ inline const Basic::Pair* Route::findSteerpoint(const unsigned int idx) const
 }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

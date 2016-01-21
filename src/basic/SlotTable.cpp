@@ -2,7 +2,7 @@
 #include "openeaagles/basic/SlotTable.h"
 #include <cstring>
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 //------------------------------------------------------------------------------
@@ -130,5 +130,5 @@ std::ostream& SlotTable::serialize(std::ostream& sout, const int, const bool) co
 }
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace
 

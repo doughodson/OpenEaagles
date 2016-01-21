@@ -6,7 +6,7 @@
 
 #include <cmath>
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 IMPLEMENT_SUBCLASS(LatLon,"LatLon")
@@ -248,4 +248,4 @@ bool LatLon::setSeconds(const Number* const ssobj)
 }
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace

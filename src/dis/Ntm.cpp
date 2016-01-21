@@ -8,7 +8,7 @@
 #include "openeaagles/basic/Pair.h"
 #include "openeaagles/basic/PairStream.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Network {
 namespace Dis {
 
@@ -243,4 +243,4 @@ std::ostream& Ntm::serialize(std::ostream& sout, const int i, const bool slotsOn
 
 } // End Dis namespace
 } // End Network namespace
-} // End Eaagles namespace
+} // End oe namespace

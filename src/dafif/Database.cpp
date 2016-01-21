@@ -11,7 +11,7 @@
 #include <cmath>
 #include <cstdlib>
 
-namespace Eaagles {
+namespace oe {
 namespace Dafif {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(Database,"Database")
@@ -617,4 +617,4 @@ void Database::Key::serialize(std::ostream& sout) const
 }
 
 } // End Dafif namespace
-} // End Eaagles namespace
+} // End oe namespace

@@ -5,7 +5,7 @@
 #include "openeaagles/basic/Boolean.h"
 #include "openeaagles/basic/String.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 IMPLEMENT_SUBCLASS(Pair, "Pair")
@@ -118,5 +118,5 @@ std::ostream& Pair::serialize(std::ostream& sout, const int indent, const bool) 
 }
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace
 

@@ -112,12 +112,12 @@
 //      Basic::Object* CadrgMap::getSlotByIndex(const int si)
 //
 // ---------------------------------------------------------------------------------
-#ifndef __Eaagles_Maps_Rpf_CadrgMap_H__
-#define __Eaagles_Maps_Rpf_CadrgMap_H__
+#ifndef __oe_Maps_Rpf_CadrgMap_H__
+#define __oe_Maps_Rpf_CadrgMap_H__
 
 #include "openeaagles/basicGL/MapPage.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic { class List; }
 namespace BasicGL { class Texture; }
 namespace Maps {
@@ -207,7 +207,7 @@ private:
 
 }  // End Rpf namespace
 }  // End Maps namespace
-}  // End Eaagles namespace
+}  // End oe namespace
 
 #endif
 

@@ -110,7 +110,7 @@
 
 #endif
 
-namespace Eaagles {
+namespace oe {
 namespace osg {
 
 // define the standard trig values
@@ -247,7 +247,7 @@ extern double findAsciiToDouble(const char* str);
 inline float findAsciiToFloat(const char* str) { return static_cast<float>(findAsciiToDouble(str)); }
 
 }
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif  // __OSG_MATH
 

@@ -10,7 +10,7 @@
 
 #include <cmath>
 
-namespace Eaagles {
+namespace oe {
 namespace IoDevice {
 
 //==============================================================================
@@ -346,4 +346,4 @@ std::ostream& SignalGen::serialize(std::ostream& sout, const int i, const bool s
 }
 
 } // end IoDevice
-} // end Eaagles namespace
+} // end oe namespace

@@ -19,7 +19,7 @@
 #include "./Vec3d"
 #include <float.h> 
 
-namespace Eaagles {
+namespace oe {
 namespace osg {
 
 template<typename VT>
@@ -239,6 +239,6 @@ typedef BoundingBoxImpl<Vec3d> BoundingBoxd;
 #endif
 
 }
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

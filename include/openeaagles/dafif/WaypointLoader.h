@@ -24,13 +24,13 @@
 //       Range: 0 .. numberFound()-1
 //
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Dafif_WaypointLoader_H__
-#define __Eaagles_Dafif_WaypointLoader_H__
+#ifndef __oe_Dafif_WaypointLoader_H__
+#define __oe_Dafif_WaypointLoader_H__
 
 #include "Database.h"
 #include "Waypoint.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Dafif {
 
 class WaypointLoader : public Database {
@@ -81,6 +81,6 @@ protected:
 };
 
 } // End Dafif namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

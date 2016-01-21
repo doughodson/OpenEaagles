@@ -16,7 +16,7 @@
 
 #include <cmath>
 
-namespace Eaagles {
+namespace oe {
 namespace Sensor {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Stt,"Stt")
@@ -135,4 +135,4 @@ std::ostream& Stt::serialize(std::ostream& sout, const int i, const bool slotsOn
 }
 
 } // End Sensor namespace
-} // End Eaagles namespace
+} // End oe namespace

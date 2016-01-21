@@ -2,12 +2,12 @@
 // Class: OtwPC
 // Description: PC Visual Interface
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Otw_OtwPC_H__
-#define __Eaagles_Otw_OtwPC_H__
+#ifndef __oe_Otw_OtwPC_H__
+#define __oe_Otw_OtwPC_H__
 
 #include "openeaagles/simulation/Otw.h"
 
-namespace Eaagles {
+namespace oe {
    namespace Basic { class NetHandler; }
 namespace Otw {
 
@@ -45,6 +45,6 @@ private:
 };
 
 } // End Otw namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

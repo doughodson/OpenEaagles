@@ -16,7 +16,7 @@
 
 #include <cmath>
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 IMPLEMENT_SUBCLASS(IrAtmosphere,"IrAtmosphere")
@@ -93,7 +93,7 @@ bool IrAtmosphere::setSlotTransmissivityTable1(const Basic::Table1* const tbl)
 //------------------------------------------------------------------------------
 // setSlotSkyRadiance() -- sky radiance
 //------------------------------------------------------------------------------
-bool IrAtmosphere::setSlotSkyRadiance(Eaagles::Basic::Number* const num)
+bool IrAtmosphere::setSlotSkyRadiance(oe::Basic::Number* const num)
 {
     bool ok = false;
     if (num != nullptr) {
@@ -106,7 +106,7 @@ bool IrAtmosphere::setSlotSkyRadiance(Eaagles::Basic::Number* const num)
 //------------------------------------------------------------------------------
 // setSlotEarthRadiance() -- set background radiance for ground
 //------------------------------------------------------------------------------
-bool IrAtmosphere::setSlotEarthRadiance(Eaagles::Basic::Number* const num)
+bool IrAtmosphere::setSlotEarthRadiance(oe::Basic::Number* const num)
 {
     bool ok = false;
     if (num != nullptr) {
@@ -293,5 +293,5 @@ Basic::Object* IrAtmosphere::getSlotByIndex(const int si)
 }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 

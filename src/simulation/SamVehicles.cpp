@@ -10,7 +10,7 @@
 #include "openeaagles/basic/units/Distances.h"
 #include "openeaagles/basic/units/Times.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 //==============================================================================
@@ -181,4 +181,4 @@ Basic::Object* SamVehicle::getSlotByIndex(const int si)
 }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace

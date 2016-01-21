@@ -7,7 +7,7 @@
 #include <cstdio>
 #include <cstring>
 
-namespace Eaagles {
+namespace oe {
 namespace Maps {
 namespace Rpf {
 
@@ -176,5 +176,5 @@ bool CadrgTocEntry::isInZone(double lat, double lon)
 
 } // End Rpf namespace
 } // End Maps namespace
-} // End Eaagles namespace
+} // End oe namespace
 

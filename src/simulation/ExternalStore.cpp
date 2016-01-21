@@ -4,7 +4,7 @@
 #include "openeaagles/basic/Number.h"
 #include "openeaagles/basic/String.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 //------------------------------------------------------------
@@ -185,4 +185,4 @@ std::ostream& ExternalStore::serialize(std::ostream& sout, const int i, const bo
 
 
 } // end Simulation namespace
-} // end Eaagles namespace
+} // end oe namespace

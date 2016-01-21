@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: IrSystem
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_IrSystem_H__
-#define __Eaagles_Simulation_IrSystem_H__
+#ifndef __oe_Simulation_IrSystem_H__
+#define __oe_Simulation_IrSystem_H__
 
 #include "openeaagles/simulation/System.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
    class IrSeeker;
    class IrQueryMsg;
@@ -75,6 +75,6 @@ private:
 };
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

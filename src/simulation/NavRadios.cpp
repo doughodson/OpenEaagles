@@ -9,7 +9,7 @@
 #include "openeaagles/basic/Number.h"
 #include "openeaagles/basic/units/Distances.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 //==============================================================================
@@ -540,4 +540,4 @@ bool IlsRadio::findLocalizerByFreq(LCreal freq)
 }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace

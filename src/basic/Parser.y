@@ -4,8 +4,7 @@
 //
 // Description: Parser for the description files.
 //
-//
-// Form function:
+// Factory function:
 //
 //    Object* (*ParserFormFunc)(const char* formname)
 //
@@ -46,10 +45,10 @@
 #include "openeaagles/basic/List.h"
 #include "Lexical.h"
 
-static Eaagles::Basic::Object*  result;          // Result of all our work
-static Eaagles::Basic::Lexical* lex;             // Lex generator
-static Eaagles::Basic::ParserFormFunc formFunc;  // Form function 
-static int errCount;            // Error count
+static oe::Basic::Object*  result;          // Result of all our work
+static oe::Basic::Lexical* lex;             // Lex generator
+static oe::Basic::ParserFormFunc formFunc;  // Factory function 
+static int errCount;                        // Error count
 
 //------------------------------------------------------------------------------
 // yylex() -- user defined; used by the parser to call the lexical generator
@@ -74,10 +73,10 @@ inline void yyerror(const char* s)
 // gufParse() -- Returns an object of type 'formname' with its slots set to
 //                values in 'argList'.
 //------------------------------------------------------------------------------
-static Eaagles::Basic::Object* gufParse(const char* formname, Eaagles::Basic::PairStream* argList)
+static oe::Basic::Object* gufParse(const char* formname, oe::Basic::PairStream* argList)
 {
     char emsg[256];
-    Eaagles::Basic::Object* form = 0;
+    oe::Basic::Object* form = 0;
 
     if (formFunc != 0) {
 
@@ -87,27 +86,27 @@ static Eaagles::Basic::Object* gufParse(const char* formname, Eaagles::Basic::Pa
 
        // set slots in our new object
        if (form != 0 && argList != 0) {
-          Eaagles::Basic::List::Item* item = argList->getFirstItem();
+          oe::Basic::List::Item* item = argList->getFirstItem();
           while (item != 0) {
-               Eaagles::Basic::Pair* p = (Eaagles::Basic::Pair*) item->getValue();
+               oe::Basic::Pair* p = static_cast<oe::Basic::Pair*>(item->getValue());
                bool ok = form->setSlotByName(*p->slot(), p->object());
                if (!ok) {
-                  Eaagles::lcStrcpy(emsg,sizeof(emsg),"error while setting slot name: ");
-                  Eaagles::lcStrcat(emsg,sizeof(emsg),*p->slot());
+                  oe::lcStrcpy(emsg, sizeof(emsg), "error while setting slot name: ");
+                  oe::lcStrcat(emsg, sizeof(emsg), *p->slot());
                   yyerror(emsg);
                }
                item = item->getNext();
           }
           bool ok = form->isValid();
           if (!ok) {
-             Eaagles::lcStrcpy(emsg,sizeof(emsg),"error: invalid form: ");
-             Eaagles::lcStrcat(emsg,sizeof(emsg),formname);
+             oe::lcStrcpy(emsg, sizeof(emsg), "error: invalid form: ");
+             oe::lcStrcat(emsg, sizeof(emsg), formname);
              yyerror(emsg);
           }
        }
        else if (form == 0) {
-          Eaagles::lcStrcpy(emsg,sizeof(emsg),"undefined form name: ");
-          Eaagles::lcStrcat(emsg,sizeof(emsg),formname);
+          oe::lcStrcpy(emsg, sizeof(emsg), "undefined form name: ");
+          oe::lcStrcat(emsg, sizeof(emsg), formname);
           yyerror(emsg);
        }
 
@@ -124,11 +123,11 @@ static Eaagles::Basic::Object* gufParse(const char* formname, Eaagles::Basic::Pa
    long                             lval;
    bool                             bval;
    char*                            cvalp;
-   Eaagles::Basic::Object*          ovalp;
-   Eaagles::Basic::Pair*            pvalp;
-   Eaagles::Basic::PairStream*      svalp;
-   Eaagles::Basic::List*            lvalp;
-   Eaagles::Basic::Number*          nvalp;
+   oe::Basic::Object*          ovalp;
+   oe::Basic::Pair*            pvalp;
+   oe::Basic::PairStream*      svalp;
+   oe::Basic::List*            lvalp;
+   oe::Basic::Number*          nvalp;
 }
 
 // Add types to some for our tokens and rules
@@ -151,16 +150,16 @@ static Eaagles::Basic::Object* gufParse(const char* formname, Eaagles::Basic::Pa
 //--------------------------------------------------------------------------
 %%
 file    : form                      { result = $1; }
-        | SLOT_ID form              { if ($2 != 0) { result = new Eaagles::Basic::Pair($1, $2); delete[] $1; $2->unref(); } }
+        | SLOT_ID form              { if ($2 != 0) { result = new oe::Basic::Pair($1, $2); delete[] $1; $2->unref(); } }
         ;
 
-arglist :                           { $$ = new Eaagles::Basic::PairStream(); }
+arglist :                           { $$ = new oe::Basic::PairStream(); }
 
         | arglist form              { if ($2 != 0) {
                                         int i = $1->entries();
                                         char cbuf[20];
                                         std::sprintf(cbuf,"%i",i+1);
-                                        Eaagles::Basic::Pair* p = new Eaagles::Basic::Pair(cbuf, $2);
+                                        oe::Basic::Pair* p = new oe::Basic::Pair(cbuf, $2);
                                         $2->unref();
                                         $1->put(p);
                                         p->unref();
@@ -172,7 +171,7 @@ arglist :                           { $$ = new Eaagles::Basic::PairStream(); }
                                     int i = $1->entries();
                                     char cbuf[20];
                                     std::sprintf(cbuf,"%i",i+1);
-                                    Eaagles::Basic::Pair* p = new Eaagles::Basic::Pair(cbuf, $2);
+                                    oe::Basic::Pair* p = new oe::Basic::Pair(cbuf, $2);
                                     $2->unref();
                                     $1->put(p);
                                     p->unref();
@@ -185,32 +184,32 @@ arglist :                           { $$ = new Eaagles::Basic::PairStream(); }
 
 form    : '(' IDENT arglist ')'     { $$ = gufParse($2, $3); delete[] $2; $3->unref(); }
 
-        | '{' arglist '}'           { $$ = (Eaagles::Basic::Object*) $2; }
+        | '{' arglist '}'           { $$ = (oe::Basic::Object*) $2; }
         ;
 
 
-slot_value  : SLOT_ID prim          { $$ = new Eaagles::Basic::Pair($1, $2); delete[] $1; $2->unref(); }
-        | SLOT_ID form              { $$ = new Eaagles::Basic::Pair($1, $2); delete[] $1; $2->unref(); }
+slot_value  : SLOT_ID prim          { $$ = new oe::Basic::Pair($1, $2); delete[] $1; $2->unref(); }
+        | SLOT_ID form              { $$ = new oe::Basic::Pair($1, $2); delete[] $1; $2->unref(); }
         ;
 
-prim    : STRING_LITERAL            { $$ = new Eaagles::Basic::String($1); delete[] $1; }
-        | IDENT                     { $$ = new Eaagles::Basic::Identifier($1); delete[] $1; }
-        | BOOLconstant              { $$ = new Eaagles::Basic::Boolean($1); }
+prim    : STRING_LITERAL            { $$ = new oe::Basic::String($1); delete[] $1; }
+        | IDENT                     { $$ = new oe::Basic::Identifier($1); delete[] $1; }
+        | BOOLconstant              { $$ = new oe::Basic::Boolean($1); }
         | '[' numlist ']'           { $$ = $2; }
         | number                    { $$ = $1; }
         ;
 
-numlist : number                    { $$ = new Eaagles::Basic::List(); $$->put($1); $1->unref(); }
+numlist : number                    { $$ = new oe::Basic::List(); $$->put($1); $1->unref(); }
         | numlist number            { $$ = $1; $$->put($2); $2->unref(); }
         ;
 
-number  : INTEGERconstant       { $$ = new Eaagles::Basic::Integer($1); }
-        | FLOATINGconstant      { $$ = new Eaagles::Basic::Float($1); }
+number  : INTEGERconstant       { $$ = new oe::Basic::Integer($1); }
+        | FLOATINGconstant      { $$ = new oe::Basic::Float($1); }
         ;
 %%
 
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 //------------------------------------------------------------------------------
@@ -242,4 +241,4 @@ Object* lcParser(const char* filename, ParserFormFunc func, int* numErrors)
 }
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace

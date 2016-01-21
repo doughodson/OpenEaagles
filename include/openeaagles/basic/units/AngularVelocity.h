@@ -2,12 +2,12 @@
 // Class AngularVelocity
 //------------------------------------------------------------------------------
 
-#ifndef __Eaagles_Basic_AngularVelocity_H__
-#define __Eaagles_Basic_AngularVelocity_H__
+#ifndef __oe_Basic_AngularVelocity_H__
+#define __oe_Basic_AngularVelocity_H__
 
 #include "openeaagles/basic/Number.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 class Angle;
@@ -133,6 +133,6 @@ private:
 };
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

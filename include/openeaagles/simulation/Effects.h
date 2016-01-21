@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Classes: Effects, Chaff, Flare and Decoy
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_Effects_H__
-#define __Eaagles_Simulation_Effects_H__
+#ifndef __oe_Simulation_Effects_H__
+#define __oe_Simulation_Effects_H__
 
 #include "openeaagles/simulation/Weapon.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 //------------------------------------------------------------------------------
@@ -102,6 +102,6 @@ public:
 };
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

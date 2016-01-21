@@ -1,14 +1,14 @@
 //------------------------------------------------------------------------------
 // Class: Message
 //----------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_Message_H__
-#define __Eaagles_Simulation_Message_H__
+#ifndef __oe_Simulation_Message_H__
+#define __oe_Simulation_Message_H__
 
 #include "openeaagles/basic/Object.h"
 #include "openeaagles/basic/String.h"
 #include "openeaagles/basic/List.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 //------------------------------------------------------------------------------
@@ -72,6 +72,6 @@ inline void Message::setLifeSpan(const double ls)                       { lifeSp
 inline void Message::setAckCode(const AckCodes a)                       { ack = a;              }
 
 } // End simulation
-} // End Eaagles Namespace
+} // End oe Namespace
 
 #endif

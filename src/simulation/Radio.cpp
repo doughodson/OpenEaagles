@@ -14,7 +14,7 @@
 #include "openeaagles/basic/units/Frequencies.h"
 #include "openeaagles/basic/units/Powers.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 //==============================================================================
@@ -557,4 +557,4 @@ void CommRadio::receivedEmissionReport(Emission* const em)
 }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace

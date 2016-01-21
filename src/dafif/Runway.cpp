@@ -2,7 +2,7 @@
 #include "openeaagles/basic/Nav.h"
 #include <iostream>
 
-namespace Eaagles {
+namespace oe {
 namespace Dafif {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Runway,"Runway")
@@ -128,4 +128,4 @@ void Runway::printRunwayMagHeading(std::ostream& sout, const double aclat, const
 }
 
 } // End Dafif namespace
-} // End Eaagles namespace
+} // End oe namespace

@@ -1,10 +1,10 @@
 
-#ifndef __Eaagles_IoDevice_DiscreteInput_H__
-#define __Eaagles_IoDevice_DiscreteInput_H__
+#ifndef __oe_IoDevice_DiscreteInput_H__
+#define __oe_IoDevice_DiscreteInput_H__
 
 #include "openeaagles/basic/IoAdapter.h"
 
-namespace Eaagles {
+namespace oe {
    namespace Basic { class Number; }
 
 namespace IoDevice {
@@ -73,6 +73,6 @@ private:
 };
 
 } // end IoDevice
-} // end Eaagles namespace
+} // end oe namespace
 
 #endif

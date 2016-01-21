@@ -3,7 +3,7 @@
 #include "openeaagles/basic/Number.h"
 #include "openeaagles/basic/units/Frequencies.h"
 
-namespace Eaagles {
+namespace oe {
 namespace LinearSystem {
 
 //==============================================================================
@@ -270,4 +270,4 @@ std::ostream& ScalerFunc::serialize(std::ostream& sout, const int i, const bool 
 }
 
 } // End LinearSystem namespace
-} // End Eaagles namespace
+} // End oe namespace

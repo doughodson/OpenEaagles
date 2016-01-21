@@ -11,7 +11,7 @@
 #include "openeaagles/basic/List.h"
 #include "openeaagles/basic/functors/Tables.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 //==============================================================================
@@ -380,4 +380,4 @@ std::ostream& Polynomial::serialize(std::ostream& sout, const int i, const bool 
 
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace

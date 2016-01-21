@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: Weapon
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_Weapon_H__
-#define __Eaagles_Simulation_Weapon_H__
+#ifndef __oe_Simulation_Weapon_H__
+#define __oe_Simulation_Weapon_H__
 
 #include "openeaagles/simulation/Player.h"
 
-namespace Eaagles {
+namespace oe {
    namespace Basic { class Angle; class Distance; class String; class Time; }
 
 namespace Simulation {
@@ -402,6 +402,6 @@ private:
 };
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

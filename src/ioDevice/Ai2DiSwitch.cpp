@@ -6,7 +6,7 @@
 #include "openeaagles/basic/IoHandler.h"
 #include "openeaagles/basic/Number.h"
 
-namespace Eaagles {
+namespace oe {
 namespace IoDevice {
 
 //==============================================================================
@@ -248,4 +248,4 @@ std::ostream& Ai2DiSwitch::serialize(std::ostream& sout, const int i, const bool
 }
 
 } // end IoDevice
-} // end Eaagles namespace
+} // end oe namespace

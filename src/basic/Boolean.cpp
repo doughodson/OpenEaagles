@@ -4,7 +4,7 @@
 
 #include "openeaagles/basic/Boolean.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 IMPLEMENT_SUBCLASS(Boolean,"boolean")
@@ -24,4 +24,4 @@ std::ostream& Boolean::serialize(std::ostream& sout, const int, const bool) cons
 }
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace

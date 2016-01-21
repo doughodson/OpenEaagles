@@ -25,13 +25,13 @@
 //      bool CadrgTocEntry::isInZone(double lat, double lon)
 //------------------------------------------------------------------------------
 
-#ifndef __Eaagles_Maps_Rpf_CadrgTocEntry_H__
-#define __Eaagles_Maps_Rpf_CadrgTocEntry_H__
+#ifndef __oe_Maps_Rpf_CadrgTocEntry_H__
+#define __oe_Maps_Rpf_CadrgTocEntry_H__
 
 #include "openeaagles/maps/rpfMap/CadrgFrameEntry.h"
 #include "openeaagles/basic/Object.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Maps {
 namespace Rpf {
 
@@ -119,7 +119,7 @@ private:
 
 } // End Rpf namespace
 } // End Maps namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif
 

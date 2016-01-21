@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: AnalogGauge
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Instruments_AnalogGuage_H__
-#define __Eaagles_Instruments_AnalogGuage_H__
+#ifndef __oe_Instruments_AnalogGuage_H__
+#define __oe_Instruments_AnalogGuage_H__
 
 #include "openeaagles/instruments/Instrument.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Instruments {
 
 //------------------------------------------------------------------------------
@@ -63,6 +63,6 @@ private:
 };
 
 }  // end Instruments namespace
-}  // end Eaagles namespace
+}  // end oe namespace
 
 #endif

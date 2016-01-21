@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Classes: AirVehicle, Aircraft, Helicopter, UnmannedAirVehicle
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_AirVehicle_H__
-#define __Eaagles_Simulation_AirVehicle_H__
+#ifndef __oe_Simulation_AirVehicle_H__
+#define __oe_Simulation_AirVehicle_H__
 
 #include "openeaagles/simulation/Player.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
    class AerodynamicsModel;
 
@@ -200,6 +200,6 @@ public:
 };
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

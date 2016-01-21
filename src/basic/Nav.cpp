@@ -5,7 +5,7 @@
 
 #include <cmath>
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 //------------------------------------------------------------------------------
@@ -2009,4 +2009,4 @@ bool Nav::convertUtm2LL(
 }
 
 }  // End Basic namespace
-}  // End Eaagles namespace
+}  // End oe namespace

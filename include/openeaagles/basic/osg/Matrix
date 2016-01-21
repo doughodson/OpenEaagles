@@ -18,7 +18,7 @@
 #include "./Matrixd"
 #include "./Matrixf"
 
-namespace Eaagles {
+namespace oe {
 namespace osg {
 
 #ifdef LCREAL_DOUBLE
@@ -28,7 +28,7 @@ namespace osg {
 #endif
 
 } //namespace osg
-} // End Eaagles namespace
+} // End oe namespace
 
 
 #endif

@@ -15,7 +15,7 @@
 #include "openeaagles/basic/Nav.h"
 #include "openeaagles/basic/units/Distances.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 IMPLEMENT_SUBCLASS(IrAtmosphere1,"IrAtmosphere1")
@@ -366,4 +366,4 @@ Basic::Object* IrAtmosphere1::getSlotByIndex(const int si)
 }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace

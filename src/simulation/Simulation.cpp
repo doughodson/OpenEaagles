@@ -33,7 +33,7 @@
 #include <cstring>
 #include <cmath>
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 //=============================================================================
@@ -2161,5 +2161,5 @@ unsigned long SimBgThread::userFunc()
 }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 

@@ -1,11 +1,11 @@
 
-#ifndef __Eaagles_Basic_Table_H__
-#define __Eaagles_Basic_Table_H__
+#ifndef __oe_Basic_Table_H__
+#define __oe_Basic_Table_H__
 
 #include "openeaagles/basic/Object.h"
 #include "openeaagles/basic/functors/Functions.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 class List;
@@ -129,6 +129,6 @@ public:
 
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

@@ -1,6 +1,6 @@
 #include "openeaagles/instruments/maps/CompassRose.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Instruments {
 
 IMPLEMENT_SUBCLASS(CompassRose, "CompassRose")
@@ -257,4 +257,4 @@ Basic::Object* CompassRose::getSlotByIndex(const int si)
 }
 
 }  // end Instruments namespace
-}  // end Eaagles namespace
+}  // end oe namespace

@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: DynamicsModel
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_DynamicsModel_H__
-#define __Eaagles_Simulation_DynamicsModel_H__
+#ifndef __oe_Simulation_DynamicsModel_H__
+#define __oe_Simulation_DynamicsModel_H__
 
 #include "openeaagles/basic/Component.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 //==============================================================================
@@ -107,6 +107,6 @@ public:
 };
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

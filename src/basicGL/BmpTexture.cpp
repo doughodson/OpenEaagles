@@ -12,7 +12,7 @@
 #endif
 
 
-namespace Eaagles {
+namespace oe {
 namespace BasicGL {
 
 IMPLEMENT_SUBCLASS(BmpTexture,"BitmapTexture")
@@ -69,7 +69,7 @@ void BmpTexture::copyData(const BmpTexture& org, const bool cc)
 bool BmpTexture::setTextureFileName(const char* const fileName)
 {
    if (fileName != nullptr) {
-      Eaagles::lcStrcpy(texFile, sizeof(texFile), fileName);
+      oe::lcStrcpy(texFile, sizeof(texFile), fileName);
    }
    else {
       texFile[0] = '\0';
@@ -80,7 +80,7 @@ bool BmpTexture::setTextureFileName(const char* const fileName)
 bool BmpTexture::setTexturePath(const char* const path)
 {
    if (path != nullptr) {
-      Eaagles::lcStrcpy(texPath, sizeof(texPath), path);
+      oe::lcStrcpy(texPath, sizeof(texPath), path);
    }
    else {
       texPath[0] = '\0';
@@ -145,4 +145,4 @@ Basic::Object* BmpTexture::getSlotByIndex(const int si)
 }
 
 } // End BasicGL namespace
-} // End Eaagles namespace
+} // End oe namespace

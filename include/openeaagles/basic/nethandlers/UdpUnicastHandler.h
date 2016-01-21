@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: UdpUnicastHandler
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_UdpUnicastHandler_H__
-#define __Eaagles_Basic_UdpUnicastHandler_H__
+#ifndef __oe_Basic_UdpUnicastHandler_H__
+#define __oe_Basic_UdpUnicastHandler_H__
 
 #include "openeaagles/basic/nethandlers/PosixHandler.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 class String;
@@ -76,7 +76,7 @@ private:
 };
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif
 

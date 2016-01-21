@@ -18,7 +18,7 @@
 //------------------------------------------------------------------------------
 #include "openeaagles/basicGL/Clip3D.h"
 
-namespace Eaagles {
+namespace oe {
 namespace BasicGL {
 
 IMPLEMENT_SUBCLASS(Clip3D,"Clip3D")
@@ -527,4 +527,4 @@ unsigned int Clip3D::polyClip2Halfspace(
 
 
 } // End BasicGL namespace
-} // End Eaagles namespace
+} // End oe namespace

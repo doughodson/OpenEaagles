@@ -3,7 +3,7 @@
 #include <cstring>
 #include <cstdlib>
 
-namespace Eaagles {
+namespace oe {
 namespace Dafif {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(WaypointLoader,"WaypointLoader")
@@ -314,4 +314,4 @@ void WaypointLoader::WaypointKey::serialize(std::ostream& sout) const
 }
 
 } // End Dafif namespace
-} // End Eaagles namespace
+} // End oe namespace

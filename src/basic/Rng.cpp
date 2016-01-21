@@ -2,7 +2,7 @@
 #include "openeaagles/basic/Rng.h"
 #include "openeaagles/basic/Number.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 IMPLEMENT_SUBCLASS(Rng,"Rng")

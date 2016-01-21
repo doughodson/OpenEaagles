@@ -1,7 +1,7 @@
 
 #include "openeaagles/basic/Locus.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 IMPLEMENT_SUBCLASS(Locus,"Locus")
@@ -148,4 +148,4 @@ void Locus::clearData()
 }
 
 } // end Basic namespace}
-} // end Eaagles namespace
+} // end oe namespace

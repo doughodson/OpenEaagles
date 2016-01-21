@@ -3,10 +3,10 @@
 // Application Protocols - Enumerations for DIS PDU's
 // Standard: 1278.1a
 //--------------------------------------------------------------
-#ifndef __Eaagles_Network_Dis_Enum_H__
-#define __Eaagles_Network_Dis_Enum_H__
+#ifndef __oe_Network_Dis_Enum_H__
+#define __oe_Network_Dis_Enum_H__
 
-namespace Eaagles {
+namespace oe {
 namespace Network {
 namespace Dis {
 
@@ -91,6 +91,6 @@ namespace Dis {
 
 } // End Dis namespace
 } // End Network namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

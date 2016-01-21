@@ -35,7 +35,7 @@
 
 #include <cstdio>
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 IMPLEMENT_SUBCLASS(TcpServerSingle, "TcpServerSingle")
@@ -186,5 +186,5 @@ bool TcpServerSingle::acceptConnection()
 }
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace
 

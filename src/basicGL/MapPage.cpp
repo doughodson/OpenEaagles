@@ -4,7 +4,7 @@
 #include "openeaagles/basic/Pair.h"
 #include "openeaagles/basic/Number.h"
 
-namespace Eaagles {
+namespace oe {
 namespace BasicGL {
 
 IMPLEMENT_SUBCLASS(MapPage,"MapPage")
@@ -560,5 +560,5 @@ Basic::Object* MapPage::getSlotByIndex(const int si)
 }
 
 }  // end of BasicGL namespace
-}  // end of Eaagles namespace
+}  // end of oe namespace
 

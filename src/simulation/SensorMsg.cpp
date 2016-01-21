@@ -4,7 +4,7 @@
 #include "openeaagles/simulation/Player.h"
 #include "openeaagles/basic/units/Distances.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 //==============================================================================
@@ -157,4 +157,4 @@ void SensorMsg::setDataMessage(Basic::Object* const msg)
 }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace

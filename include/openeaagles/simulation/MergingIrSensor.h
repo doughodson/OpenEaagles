@@ -5,12 +5,12 @@
 //              if they are not within specified az & el bin.
 //              Merges targets that are within bins in receive frame.
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_MergingIrSensor_H__
-#define __Eaagles_Simulation_MergingIrSensor_H__
+#ifndef __oe_Simulation_MergingIrSensor_H__
+#define __oe_Simulation_MergingIrSensor_H__
 
 #include "openeaagles/simulation/IrSensor.h"
 
-namespace Eaagles {
+namespace oe {
 
 namespace Basic { class Integer; class Number; class String; }
 

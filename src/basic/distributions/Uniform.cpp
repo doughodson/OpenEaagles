@@ -4,7 +4,7 @@
 #include "openeaagles/basic/distributions/Uniform.h"
 #include "openeaagles/basic/Number.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 IMPLEMENT_SUBCLASS(Uniform,"Uniform")
@@ -110,6 +110,6 @@ std::ostream& Uniform::serialize(std::ostream& sout, const int i, const bool slo
 
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 

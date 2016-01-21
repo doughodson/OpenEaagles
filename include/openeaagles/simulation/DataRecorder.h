@@ -47,13 +47,13 @@
 //       then no data is recorded
 //
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_DataRecorder_H__
-#define __Eaagles_Simulation_DataRecorder_H__
+#ifndef __oe_Simulation_DataRecorder_H__
+#define __oe_Simulation_DataRecorder_H__
 
 #include "openeaagles/basic/Component.h"
 #include "openeaagles/simulation/dataRecorderTokens.h"
 
-namespace Eaagles {
+namespace oe {
    namespace Basic { class List; }
 namespace Simulation {
    class Simulation;
@@ -124,7 +124,7 @@ private:
 //    for implementing the recording 'hooks' in the simulation code.
 //
 //    2) The actual data recorder is implemented by the derived class
-//    Eaagles::Recorder::DataRecorder (see "openeaagles/recorder/DataRecorder.h")
+//    oe::Recorder::DataRecorder (see "openeaagles/recorder/DataRecorder.h")
 //
 //    3) Recorded data records are defined by their "recorder event id" tokens;
 //       (see openeaagles/simulation/dataRecorderTokens.h)
@@ -175,7 +175,7 @@ private:
 #include "openeaagles/simulation/DataRecorder.inl"
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif
 

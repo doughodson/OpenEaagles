@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: PairStream
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_PairStream_H__
-#define __Eaagles_Basic_PairStream_H__
+#ifndef __oe_Basic_PairStream_H__
+#define __oe_Basic_PairStream_H__
 
 #include "openeaagles/basic/List.h"
 #include "Pair.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 class Identifier;
@@ -113,6 +113,6 @@ public:
 };
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: Ntm
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Network_Dis_Ntm_H__
-#define __Eaagles_Network_Dis_Ntm_H__
+#ifndef __oe_Network_Dis_Ntm_H__
+#define __oe_Network_Dis_Ntm_H__
 
 #include "openeaagles/simulation/Ntm.h"
 #include "openeaagles/dis/NetIO.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Network {
 namespace Dis {
 
@@ -71,6 +71,6 @@ private:
 
 } // End Dis namespace
 } // End Network namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

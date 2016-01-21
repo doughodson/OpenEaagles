@@ -10,7 +10,7 @@
 #include "openeaagles/basic/PairStream.h"
 #include "openeaagles/basic/osg/Vec4"
 
-namespace Eaagles {
+namespace oe {
 namespace BasicGL {
 
 IMPLEMENT_SUBCLASS(ColorRotary,"ColorRotary")
@@ -167,4 +167,4 @@ Basic::Object* BasicGL::ColorRotary::getSlotByIndex(const int si)
 }
 
 } // End BasicGL namespace
-} // End Eaagles namespace
+} // End oe namespace

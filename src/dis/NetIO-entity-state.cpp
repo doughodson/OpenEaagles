@@ -27,7 +27,7 @@
 # pragma warning(disable: 4996)
 #endif
 
-namespace Eaagles {
+namespace oe {
 namespace Network {
 namespace Dis {
 
@@ -127,4 +127,4 @@ void NetIO::processEntityStatePDU(const EntityStatePDU* const pdu)
 
 } // End Dis namespace
 } // End Network namespace
-} // End Eaagles namespace
+} // End oe namespace

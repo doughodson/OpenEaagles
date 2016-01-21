@@ -6,7 +6,7 @@
 
 #include "openeaagles/basic/Number.h"
 
-namespace Eaagles {
+namespace oe {
 namespace IoDevice {
 
 /* both the linux and windows version use the 'UsbJoystick' form name */
@@ -19,7 +19,7 @@ END_SLOTTABLE(UsbJoystick)
 
 //  Map slot table to handles
 BEGIN_SLOT_MAP(UsbJoystick)
-    ON_SLOT( 1, setSlotDeviceIndex,  Eaagles::Basic::Number)
+    ON_SLOT( 1, setSlotDeviceIndex,  oe::Basic::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -148,7 +148,7 @@ bool UsbJoystick::setDeviceIndex(const int v)
 //------------------------------------------------------------------------------
 
 // deviceIndex: device index
-bool UsbJoystick::setSlotDeviceIndex(const Eaagles::Basic::Number* const msg)
+bool UsbJoystick::setSlotDeviceIndex(const oe::Basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -160,7 +160,7 @@ bool UsbJoystick::setSlotDeviceIndex(const Eaagles::Basic::Number* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for Component
 //------------------------------------------------------------------------------
-Eaagles::Basic::Object* UsbJoystick::getSlotByIndex(const int si)
+oe::Basic::Object* UsbJoystick::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
@@ -190,5 +190,5 @@ std::ostream& UsbJoystick::serialize(std::ostream& sout, const int i, const bool
 }
 
 } // IoDevice namespace
-} // end Eaagles namespace
+} // end oe namespace
 

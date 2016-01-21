@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: FileWriter
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Recorder_FileWriter_H__
-#define __Eaagles_Recorder_FileWriter_H__
+#ifndef __oe_Recorder_FileWriter_H__
+#define __oe_Recorder_FileWriter_H__
 
 #include "openeaagles/recorder/OutputHandler.h"
 
-namespace Eaagles {
+namespace oe {
    namespace Basic { class String; }
 namespace Recorder {
 
@@ -81,6 +81,6 @@ private:
 };
 
 } // End Recorder namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

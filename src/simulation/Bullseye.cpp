@@ -2,7 +2,7 @@
 
 #include "openeaagles/simulation/Bullseye.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Bullseye,"Bullseye")
@@ -33,4 +33,4 @@ void Bullseye::deleteData()
 }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace

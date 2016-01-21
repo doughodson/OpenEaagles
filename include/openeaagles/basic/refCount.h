@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // ref(), unref() and getRefCount() functions
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_RefCount_H__
-#define __Eaagles_Basic_RefCount_H__
+#ifndef __oe_Basic_RefCount_H__
+#define __oe_Basic_RefCount_H__
 
    // ---
    // If the following is defined then ref() will print a message to standard

@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
-// OpenEaagles Data Recorder
+// Openoe Data Recorder
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Recorder_DataRecorder_H__
-#define __Eaagles_Recorder_DataRecorder_H__
+#ifndef __oe_Recorder_DataRecorder_H__
+#define __oe_Recorder_DataRecorder_H__
 
 #include "openeaagles/simulation/DataRecorder.h"
 
-namespace Eaagles {
+namespace oe {
    namespace Simulation { class Player; class Track; class Emission; }
    namespace Basic { class String; }
 
@@ -18,7 +18,7 @@ namespace Recorder {
 
 //------------------------------------------------------------------------------
 // Class: DataRecorder
-// Description: OpenEaagles data recorder; receives and processes data samples
+// Description: Openoe data recorder; receives and processes data samples
 //
 // Factory name: DataRecorder
 // Slots:
@@ -152,6 +152,6 @@ private:
 #include "openeaagles/recorder/DataRecorder.inl"
 
 } // End Recorder namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

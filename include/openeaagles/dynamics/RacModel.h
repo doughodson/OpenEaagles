@@ -1,10 +1,10 @@
 
-#ifndef __Eaagles_Dynamics_RacModel_H__
-#define __Eaagles_Dynamics_RacModel_H__
+#ifndef __oe_Dynamics_RacModel_H__
+#define __oe_Dynamics_RacModel_H__
 
 #include "openeaagles/simulation/dynamics/AerodynamicsModel.h"
 
-namespace Eaagles {
+namespace oe {
 
 namespace Basic { class Angle; class Distance; class Number; }
 
@@ -78,6 +78,6 @@ private:
 };
 
 } // End Dynamics namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

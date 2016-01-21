@@ -13,7 +13,7 @@
 # pragma warning(disable: 4996)
 #endif
 
-namespace Eaagles {
+namespace oe {
 namespace BasicGL {
 
 //------------------------------------------------------------------------------
@@ -671,4 +671,4 @@ bool Image::writeFileTGA(const char* const filename)
 #endif
 
 } // End BasicGL namespace
-} // End Eaagles namespace
+} // End oe namespace

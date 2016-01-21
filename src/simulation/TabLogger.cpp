@@ -52,7 +52,7 @@
     }
 
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 //==============================================================================
@@ -1290,4 +1290,4 @@ void TabLogger::LogPassiveTrack::captureData()
 }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace

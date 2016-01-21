@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: Player
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_Player_H__
-#define __Eaagles_Simulation_Player_H__
+#ifndef __oe_Simulation_Player_H__
+#define __oe_Simulation_Player_H__
 
 #include "openeaagles/basic/Component.h"
 
@@ -17,7 +17,7 @@
 
 #include "openeaagles/simulation/SynchronizedState.h"
 
-namespace Eaagles {
+namespace oe {
    namespace Basic {
       class Angle;
       class Boolean;
@@ -1217,6 +1217,6 @@ private:
 #include "openeaagles/simulation/Player.inl"
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

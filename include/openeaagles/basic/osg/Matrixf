@@ -18,7 +18,7 @@
 #include "./Vec4d"
 #include "./Quat"
 
-namespace Eaagles {
+namespace oe {
 namespace osg {
 
 class Matrixf;
@@ -937,7 +937,7 @@ inline Matrixf operator * (const float s, const Matrixf& m)
 }
 
 } //namespace osg
-} // End Eaagles namespace
+} // End oe namespace
 
 
 #endif

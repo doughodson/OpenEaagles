@@ -12,7 +12,7 @@
 
 #include <cstring>
 
-namespace Eaagles {
+namespace oe {
 namespace Terrain {
 
 Factory::Factory()

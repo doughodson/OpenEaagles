@@ -6,7 +6,7 @@
 
 #include "openeaagles/basic/Object.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Maps {
 
 Basic::Object* mapsFormFunc(const char* name)
@@ -22,5 +22,5 @@ Basic::Object* mapsFormFunc(const char* name)
 }
 
 } // end Maps namespace
-} // end Eaagles namespace
+} // end oe namespace
 

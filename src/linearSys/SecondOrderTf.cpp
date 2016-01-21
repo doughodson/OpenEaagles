@@ -1,7 +1,7 @@
 
 #include "openeaagles/linearSys/SecondOrderTf.h"
 
-namespace Eaagles {
+namespace oe {
 namespace LinearSystem {
 
 //==============================================================================
@@ -169,4 +169,4 @@ bool SecondOrderTf::setD3(const LCreal v)
 }
 
 } // End LinearSystem namespace
-} // End Eaagles namespace
+} // End oe namespace

@@ -5,7 +5,7 @@
 #include "openeaagles/basic/NetHandler.h"
 #include "openeaagles/basic/Number.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Recorder {
 
 //==============================================================================
@@ -21,8 +21,8 @@ END_SLOTTABLE(NetOutput)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(NetOutput)
-    ON_SLOT(1, setSlotNetwork,   Eaagles::Basic::NetHandler)
-    ON_SLOT(2, setSlotNoWait,    Eaagles::Basic::Number)
+    ON_SLOT(1, setSlotNetwork,   oe::Basic::NetHandler)
+    ON_SLOT(2, setSlotNoWait,    oe::Basic::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -151,14 +151,14 @@ void NetOutput::processRecordImp(const DataRecordHandle* const handle)
 //------------------------------------------------------------------------------
 
 // Network Handler
-bool NetOutput::setSlotNetwork(Eaagles::Basic::NetHandler* const msg)
+bool NetOutput::setSlotNetwork(oe::Basic::NetHandler* const msg)
 {
    netHandler = msg;
    return true;
 }
 
 // No wait (unblocked) I/O flag
-bool NetOutput::setSlotNoWait(Eaagles::Basic::Number* const msg)
+bool NetOutput::setSlotNoWait(oe::Basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -172,10 +172,10 @@ bool NetOutput::setSlotNoWait(Eaagles::Basic::Number* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for Component
 //------------------------------------------------------------------------------
-Eaagles::Basic::Object* NetOutput::getSlotByIndex(const int si)
+oe::Basic::Object* NetOutput::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }
 
 } // End Recorder namespace
-} // End Eaagles namespace
+} // End oe namespace

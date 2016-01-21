@@ -2,12 +2,12 @@
 // Sz2 class -- Second order transfer function
 // ##### IN-WORK #####
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_LinearSystem_Sz2_H__
-#define __Eaagles_LinearSystem_Sz2_H__
+#ifndef __oe_LinearSystem_Sz2_H__
+#define __oe_LinearSystem_Sz2_H__
 
 #include "openeaagles/linearSys/SecondOrderTf.h"
 
-namespace Eaagles {
+namespace oe {
 namespace LinearSystem {
 
 //------------------------------------------------------------------------------
@@ -60,6 +60,6 @@ public:
 };
 
 } // End LinearSystem namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

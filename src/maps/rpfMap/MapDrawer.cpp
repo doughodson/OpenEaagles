@@ -12,7 +12,7 @@
 #include "openeaagles/basic/units/Angles.h"
 #include "openeaagles/basicGL/Texture.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Maps {
 namespace Rpf {
 
@@ -505,5 +505,5 @@ Basic::Object* MapDrawer::getSlotByIndex(const int si)
 
 } // End Rpf namespace
 } // End Maps namespace
-} // End Eaagles namespace
+} // End oe namespace
 

@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: Navigation
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_Navigation_H__
-#define __Eaagles_Simulation_Navigation_H__
+#ifndef __oe_Simulation_Navigation_H__
+#define __oe_Simulation_Navigation_H__
 
 #include "openeaagles/simulation/System.h"
 #include "openeaagles/basic/osg/Vec2"
 
-namespace Eaagles {
+namespace oe {
 
 namespace Basic { class Time; }
 
@@ -249,6 +249,6 @@ private:
 };
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

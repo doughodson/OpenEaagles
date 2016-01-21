@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: IoData
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_IoData_H__
-#define __Eaagles_Basic_IoData_H__
+#ifndef __oe_Basic_IoData_H__
+#define __oe_Basic_IoData_H__
 
 #include "openeaagles/basic/Object.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 //------------------------------------------------------------------------------
@@ -100,6 +100,6 @@ public:
 };
 
 } // end Basic namespace
-} // end Eaagles namespace
+} // end oe namespace
 
 #endif

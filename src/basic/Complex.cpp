@@ -9,7 +9,7 @@
 #include <iomanip>
 #include <cmath>
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 IMPLEMENT_SUBCLASS(Complex,"Complex")

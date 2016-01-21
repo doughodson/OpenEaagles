@@ -8,7 +8,7 @@
 #include "openeaagles/basic/PairStream.h"
 #include "openeaagles/basic/Pair.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(OnboardComputer,"OnboardComputer")
@@ -407,5 +407,5 @@ const TrackManager* OnboardComputer::getTrackManagerByName(const char* const nam
 }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 

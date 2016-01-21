@@ -40,12 +40,12 @@
 //       Length of a DAFIF Runway record pair.
 //
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Dafif_Runway_H__
-#define __Eaagles_Dafif_Runway_H__
+#ifndef __oe_Dafif_Runway_H__
+#define __oe_Dafif_Runway_H__
 
 #include "Record.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Dafif {
 
 class Runway : public Record {
@@ -189,6 +189,6 @@ inline Runway::WhichEnd Runway::whichEnd(const char rwEndId[]) const
 }
 
 } // End Dafif namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

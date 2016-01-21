@@ -12,7 +12,7 @@
 
 #include <cstring>
 
-namespace Eaagles {
+namespace oe {
 namespace Network {
 namespace Dis {
 
@@ -38,5 +38,5 @@ Basic::Object* Factory::createObj(const char* name)
 
 } // End Dis namespace
 } // End Network namespace
-} // End Eaagles namespace
+} // End oe namespace
 

@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: MultiActorAgent
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_MultiActorAgent_H__
-#define __Eaagles_Simulation_MultiActorAgent_H__
+#ifndef __oe_Simulation_MultiActorAgent_H__
+#define __oe_Simulation_MultiActorAgent_H__
 
 #include "openeaagles/basic/Component.h"
 
-namespace Eaagles {
+namespace oe {
    namespace Basic {
       namespace Ubf { class Behavior; class State; }
    }
@@ -79,7 +79,7 @@ private:
 inline void MultiActorAgent::setActor(Basic::Component* c) { actor=c; }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 
 // A MultiActorAgent can be configured as shown below: (assuming the existence of the "abc" state and behavior classes)

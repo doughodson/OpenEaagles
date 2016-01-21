@@ -7,7 +7,7 @@
 
 #include "openeaagles/basic/Object.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Dafif {
 
 Basic::Object* dafifFormFunc(const char* name)
@@ -23,4 +23,4 @@ Basic::Object* dafifFormFunc(const char* name)
 }
 
 } // End Dafif namespace
-} // End Eaagles namespace
+} // End oe namespace

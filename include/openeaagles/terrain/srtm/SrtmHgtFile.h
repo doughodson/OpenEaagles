@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Classes: SrtmHgtFile
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Terrain_SrtmHgtFile_H__
-#define __Eaagles_Terrain_SrtmHgtFile_H__
+#ifndef __oe_Terrain_SrtmHgtFile_H__
+#define __oe_Terrain_SrtmHgtFile_H__
 
 #include "../DataFile.h"
 
-namespace Eaagles {
+namespace oe {
    namespace Basic { class Number; }
 namespace Terrain {
 
@@ -19,7 +19,7 @@ namespace Terrain {
 //
 // Adapted from Terrain::DtedFile
 //
-// OpenEaagles version by Christopher Buell
+// Openoe version by Christopher Buell
 //
 // obtain SRTM data files from ftp://e0srp01u.ecs.nasa.gov/srtm/version2
 //
@@ -69,6 +69,6 @@ private:
 
 
 } // End Terrain namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

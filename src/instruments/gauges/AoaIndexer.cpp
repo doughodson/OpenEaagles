@@ -4,7 +4,7 @@
 #include "openeaagles/basic/units/Angles.h"
 #include <GL/glu.h>
 
-namespace Eaagles {
+namespace oe {
 namespace Instruments {
 
 IMPLEMENT_SUBCLASS(AoAIndexer,"AoAIndexer")
@@ -390,4 +390,4 @@ Basic::Object* AoAIndexer::getSlotByIndex(const int si)
 }
 
 }  // end Instruments namespace
-}  // end Eaagles namespace
+}  // end oe namespace

@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: Image
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_BasicGL_Image_H__
-#define __Eaagles_BasicGL_Image_H__
+#ifndef __oe_BasicGL_Image_H__
+#define __oe_BasicGL_Image_H__
 
 #include "openeaagles/basic/Object.h"
 #include <GL/gl.h>
 
-namespace Eaagles {
+namespace oe {
    namespace Basic { class Number; }
 
 namespace BasicGL {
@@ -92,6 +92,6 @@ inline unsigned int Image::getXResolutionPPM() const  { return xPixPerMeter; }
 inline unsigned int Image::getYResolutionPPM() const  { return yPixPerMeter; }
 
 } // End BasicGL namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

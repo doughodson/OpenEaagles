@@ -40,7 +40,7 @@
     C[i][j] gets (A[i][j]);}
 
 
-namespace Eaagles {
+namespace oe {
 namespace osg {
 namespace MatrixDecomposition
 {
@@ -689,4 +689,4 @@ void osg::Matrixd::decompose(osg::Vec3d& t,
 }
 
 } // End osg namespace
-} // End Eaagles namespace
+} // End oe namespace

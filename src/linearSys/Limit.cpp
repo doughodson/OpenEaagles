@@ -2,7 +2,7 @@
 #include "openeaagles/linearSys/Limit.h"
 #include "openeaagles/basic/Number.h"
 
-namespace Eaagles {
+namespace oe {
 namespace LinearSystem {
 
 //==============================================================================
@@ -101,4 +101,4 @@ std::ostream& Limit::serialize(std::ostream& sout, const int i, const bool slots
 }
 
 } // End LinearSystem namespace
-} // End Eaagles namespace
+} // End oe namespace

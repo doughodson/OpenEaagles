@@ -8,15 +8,15 @@
 //
 //    'Key' events (values 0 to MAX_KEY_EVENT) are passed up the container tree if not used (see Component::event()).
 //       Key values   0 to 127 are keyboard (ASCII) events
-//       Key values 128 to (USER_KEY_EVENT-1) reserved for the OpenEaagles toolkit
+//       Key values 128 to (USER_KEY_EVENT-1) reserved for the Openoe toolkit
 //       Key values USER_KEY_EVENT to MAX_KEY_EVENT available for user events
 //
 //    Non-key events --
-//       Event values (MAX_KEY_EVENT+1) to (USER_EVENTS-1) reserved for the OpenEaagles toolkit
+//       Event values (MAX_KEY_EVENT+1) to (USER_EVENTS-1) reserved for the Openoe toolkit
 //       Event values above USER_EVENT are available for user events
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_Event_Tokens_H__
-#define __Eaagles_Basic_Event_Tokens_H__
+#ifndef __oe_Basic_Event_Tokens_H__
+#define __oe_Basic_Event_Tokens_H__
 
 // ---
 // Key events -- Are passed up to an object's container if not used.

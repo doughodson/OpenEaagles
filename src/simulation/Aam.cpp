@@ -1,7 +1,7 @@
 
 #include "openeaagles/simulation/Aam.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 //==============================================================================
@@ -44,4 +44,4 @@ Aam::Aam()
 }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace

@@ -13,7 +13,7 @@
 #include "openeaagles/basic/Number.h"
 #include "openeaagles/basic/units/Areas.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 IMPLEMENT_SUBCLASS(AircraftIrSignature,"AircraftIrSignature")
@@ -682,5 +682,5 @@ LCreal* AircraftIrSignature::getHeatSignature(IrQueryMsg* msg)
 
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 

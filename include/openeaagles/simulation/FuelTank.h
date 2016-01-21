@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: FuelTank
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_FuelTank_H__
-#define __Eaagles_Simulation_FuelTank_H__
+#ifndef __oe_Simulation_FuelTank_H__
+#define __oe_Simulation_FuelTank_H__
 
 #include "openeaagles/simulation/ExternalStore.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 //------------------------------------------------------------------------------
@@ -50,6 +50,6 @@ private:
 };
 
 } // end Simulation namespace
-} // end Eaagles namespace
+} // end oe namespace
 
 #endif

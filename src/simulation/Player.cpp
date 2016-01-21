@@ -39,7 +39,7 @@
 
 #include "openeaagles/simulation/SynchronizedState.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 IMPLEMENT_SUBCLASS(Player,"Player")
@@ -4111,7 +4111,7 @@ bool Player::setSlotInitVelocityKts(const Basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      initVp = (msg->getReal() * Eaagles::Basic::Distance::NM2M) / 3600.0f;
+      initVp = (msg->getReal() * oe::Basic::Distance::NM2M) / 3600.0f;
       ok = true;
    }
    return ok;
@@ -4591,4 +4591,4 @@ std::ostream& Player::serialize(std::ostream& sout, const int i, const bool slot
 }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace

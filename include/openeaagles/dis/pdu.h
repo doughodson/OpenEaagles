@@ -23,8 +23,8 @@
 //    7.11.8   ActionResponsePDU_R
 //
 //--------------------------------------------------------------
-#ifndef __Eaagles_Network_Dis_Pdu_H__
-#define __Eaagles_Network_Dis_Pdu_H__
+#ifndef __oe_Network_Dis_Pdu_H__
+#define __oe_Network_Dis_Pdu_H__
 
 #include "openeaagles/dis/structs.h"
 #include "openeaagles/dis/enums.h"
@@ -33,7 +33,7 @@
 #include <string>
 #include <cstdint>
 
-namespace Eaagles {
+namespace oe {
 namespace Network {
 namespace Dis {
 
@@ -1166,6 +1166,6 @@ struct ActionResponsePDU_R {
 
 } // End Dis namespace
 } // End Network namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

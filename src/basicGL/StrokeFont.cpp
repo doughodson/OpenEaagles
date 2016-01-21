@@ -4,7 +4,7 @@
 //------------------------------------------------------------------------------
 #include "openeaagles/basicGL/StrokeFont.h"
 
-namespace Eaagles {
+namespace oe {
 namespace BasicGL {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(StrokeFont,"StrokeFont")
@@ -1286,5 +1286,5 @@ GLenum StrokeFont::createStrokeFont(GLuint fontBase)
 }
 
 } // End BasicGL namespace
-} // End Eaagles namespace
+} // End oe namespace
 

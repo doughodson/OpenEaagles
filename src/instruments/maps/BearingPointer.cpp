@@ -1,6 +1,6 @@
 #include "openeaagles/instruments/maps/BearingPointer.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Instruments {
 
 IMPLEMENT_SUBCLASS(BearingPointer, "BearingPointer")
@@ -264,4 +264,4 @@ Basic::Object* BearingPointer::getSlotByIndex(const int si)
 }
 
 }  // end Instruments namespace
-}  // end Eaagles namespace
+}  // end oe namespace

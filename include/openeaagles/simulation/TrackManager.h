@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Classes: TrackManager, AirTrkMgr, GmtiGrkMgr, RwrGrkMgr
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_TrackManager_H__
-#define __Eaagles_Simulation_TrackManager_H__
+#ifndef __oe_Simulation_TrackManager_H__
+#define __oe_Simulation_TrackManager_H__
 
 #include "openeaagles/simulation/System.h"
 #include "openeaagles/basic/safe_queue.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 class Emission;
@@ -220,6 +220,6 @@ private:
 };
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

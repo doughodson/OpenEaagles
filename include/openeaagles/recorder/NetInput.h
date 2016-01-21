@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: NetInput
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Recorder_NetInput_H__
-#define __Eaagles_Recorder_NetInput_H__
+#ifndef __oe_Recorder_NetInput_H__
+#define __oe_Recorder_NetInput_H__
 
 #include "openeaagles/recorder/InputHandler.h"
 
-namespace Eaagles {
+namespace oe {
    namespace Basic { class NetHandler; class Number; }
 
 namespace Recorder {
@@ -45,7 +45,7 @@ protected:
 private:
    void initData();
 
-    Basic::safe_ptr<Eaagles::Basic::NetHandler> netHandler;   // Network handler (input/output, or just output if netInput is defined)
+    Basic::safe_ptr<oe::Basic::NetHandler> netHandler;   // Network handler (input/output, or just output if netInput is defined)
     bool   networkInitialized;                     // Network has been initialized
     bool   networkInitFailed;                      // Network initialization has failed
     bool   noWaitFlag;                             // No wait (unblocked) I/O flag
@@ -55,6 +55,6 @@ private:
 };
 
 } // End Recorder namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

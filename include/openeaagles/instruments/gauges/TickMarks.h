@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: TickMarks
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Instruments_TickMarks_H__
-#define __Eaagles_Instruments_TickMarks_H__
+#ifndef __oe_Instruments_TickMarks_H__
+#define __oe_Instruments_TickMarks_H__
 
 #include "openeaagles/instruments/gauges/AnalogGauge.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Instruments {
 
 //------------------------------------------------------------------------------
@@ -50,6 +50,6 @@ private:
 };
 
 }  // end of Instruments namespace
-}  // end of Eaagles namespace
+}  // end of oe namespace
 
 #endif

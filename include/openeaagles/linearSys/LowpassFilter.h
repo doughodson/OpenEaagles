@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // LowpassFilter class -- First order low pass filter
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_LinearSystem_LowpassFilter_H__
-#define __Eaagles_LinearSystem_LowpassFilter_H__
+#ifndef __oe_LinearSystem_LowpassFilter_H__
+#define __oe_LinearSystem_LowpassFilter_H__
 
 #include "openeaagles/linearSys/FirstOrderTf.h"
 
-namespace Eaagles {
+namespace oe {
 namespace LinearSystem {
 
 //------------------------------------------------------------------------------
@@ -47,6 +47,6 @@ private:
 };
 
 } // End LinearSystem namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

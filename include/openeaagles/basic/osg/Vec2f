@@ -16,7 +16,7 @@
 
 #include "./Math"
 
-namespace Eaagles {
+namespace oe {
 namespace osg {
 
 /** General purpose float pair. Uses include representation of
@@ -187,6 +187,6 @@ inline Vec2f componentDivide(const Vec2f& lhs, const Vec2f& rhs)
 }
 
 }    // end of namespace osg
-} // End Eaagles namespace
+} // End oe namespace
 #endif
 

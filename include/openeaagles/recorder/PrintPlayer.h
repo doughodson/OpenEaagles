@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: PrintPlayer
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Recorder_PrintPlayer_H__
-#define __Eaagles_Recorder_PrintPlayer_H__
+#ifndef __oe_Recorder_PrintPlayer_H__
+#define __oe_Recorder_PrintPlayer_H__
 
 #include "openeaagles/recorder/OutputHandler.h"
 #include "openeaagles/recorder/PrintHandler.h"
@@ -10,7 +10,7 @@
 #include <sstream>
 #include <fstream>
 
-namespace Eaagles {
+namespace oe {
 namespace Recorder {
    namespace Pb {
       class Time; class FileIdMsg; class NewPlayerEventMsg; class PlayerRemovedEventMsg; class PlayerDataMsg;
@@ -50,6 +50,6 @@ private:
 };
 
 } // End Recorder namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

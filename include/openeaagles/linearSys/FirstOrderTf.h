@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // FirstOrderTf class -- General first order transfer function
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_LinearSystem_FirstOrderTf_H__
-#define __Eaagles_LinearSystem_FirstOrderTf_H__
+#ifndef __oe_LinearSystem_FirstOrderTf_H__
+#define __oe_LinearSystem_FirstOrderTf_H__
 
 #include "openeaagles/linearSys/DiffEquation.h"
 
-namespace Eaagles {
+namespace oe {
 namespace LinearSystem {
 
 //------------------------------------------------------------------------------
@@ -59,6 +59,6 @@ private:
 };
 
 } // End LinearSystem namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

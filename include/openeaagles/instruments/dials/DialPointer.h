@@ -6,12 +6,12 @@
 // scaled rate.
 // Input:  UPDATE_INSTRUMENTS (from instruments)
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Instruments_DialPointer_H__
-#define __Eaagles_Instruments_DialPointer_H__
+#ifndef __oe_Instruments_DialPointer_H__
+#define __oe_Instruments_DialPointer_H__
 
 #include "openeaagles/instruments/dials/AnalogDial.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Instruments {
 
 class DialPointer : public AnalogDial {
@@ -24,6 +24,6 @@ public:
 };
 
 }  // end of Instruments namespace
-}  // end of Eaagles namespace
+}  // end of oe namespace
 
 #endif

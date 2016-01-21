@@ -1,14 +1,14 @@
 //------------------------------------------------------------------------------
 // Classes: Table1, Table2, Table3, Table4, Table5
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_Tables_H__
-#define __Eaagles_Basic_Tables_H__
+#ifndef __oe_Basic_Tables_H__
+#define __oe_Basic_Tables_H__
 
 #include "openeaagles/basic/Object.h"
 #include "openeaagles/basic/functors/Functions.h"
 #include "openeaagles/basic/functors/Table.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 class List;
@@ -266,6 +266,6 @@ private:
 };
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

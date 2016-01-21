@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: Bomb
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_Bomb_H__
-#define __Eaagles_Simulation_Bomb_H__
+#ifndef __oe_Simulation_Bomb_H__
+#define __oe_Simulation_Bomb_H__
 
 #include "openeaagles/simulation/Weapon.h"
 
-namespace Eaagles {
+namespace oe {
    namespace Basic { class Identifier; }
 
 namespace Simulation {
@@ -123,6 +123,6 @@ private:
 };
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

@@ -109,13 +109,13 @@
 //       set this variable to their own <class>::ptable.
 //
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Dafif_Record_H__
-#define __Eaagles_Dafif_Record_H__
+#ifndef __oe_Dafif_Record_H__
+#define __oe_Dafif_Record_H__
 
 #include "openeaagles/basic/String.h"
 #include "dafifc.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Dafif {
 
 class Record : public Basic::String {
@@ -231,6 +231,6 @@ protected:
 };
 
 } // End Dafif namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

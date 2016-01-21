@@ -3,7 +3,7 @@
 
 #include "openeaagles/basic/units/Angles.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 //==============================================================================
@@ -201,4 +201,4 @@ bool DynamicsModel::setFuelWt(const LCreal)
 }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace

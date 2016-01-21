@@ -1,14 +1,14 @@
 //------------------------------------------------------------------------------
 // Class: Antenna
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_Antenna_H__
-#define __Eaagles_Simulation_Antenna_H__
+#ifndef __oe_Simulation_Antenna_H__
+#define __oe_Simulation_Antenna_H__
 
 #include "openeaagles/simulation/ScanGimbal.h"
 #include "openeaagles/basic/safe_queue.h"
 #include "openeaagles/basic/safe_stack.h"
 
-namespace Eaagles {
+namespace oe {
    namespace Basic {
       class Function;
       class Power;
@@ -162,6 +162,6 @@ private:
 };
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

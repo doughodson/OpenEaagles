@@ -3,7 +3,7 @@
 #include "openeaagles/basic/Number.h"
 #include "openeaagles/basic/units/Frequencies.h"
 
-namespace Eaagles {
+namespace oe {
 namespace LinearSystem {
 
 //==============================================================================
@@ -135,4 +135,4 @@ std::ostream& LowpassFilter::serialize(std::ostream& sout, const int i, const bo
 }
 
 } // End LinearSystem namespace
-} // End Eaagles namespace
+} // End oe namespace

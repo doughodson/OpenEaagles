@@ -15,7 +15,7 @@
 # pragma warning(disable: 4996)
 #endif
 
-namespace Eaagles {
+namespace oe {
 namespace BasicGL {
 
 IMPLEMENT_SUBCLASS(SymbolLoader, "SymbolLoader")
@@ -1187,4 +1187,4 @@ void SlSymbol::setHdgGraphics(Graphic* const v)
 }
 
 }  // end of BasicGL namespace
-}  // end of Eaagles namespace
+}  // end of oe namespace

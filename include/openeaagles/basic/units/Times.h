@@ -50,12 +50,12 @@
 //        instance into the units of another Time derived instance.
 //
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_Times_H__
-#define __Eaagles_Basic_Times_H__
+#ifndef __oe_Basic_Times_H__
+#define __oe_Basic_Times_H__
 
 #include "openeaagles/basic/Number.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 // ----------------------------------------------------------------------------
@@ -302,6 +302,6 @@ public:
 };
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

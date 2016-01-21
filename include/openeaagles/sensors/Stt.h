@@ -3,12 +3,12 @@
 // Description: Simple, Single-Target-Track Mode Radar
 //
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Sensor_Stt_H__
-#define __Eaagles_Sensor_Stt_H__
+#ifndef __oe_Sensor_Stt_H__
+#define __oe_Sensor_Stt_H__
 
 #include "openeaagles/simulation/Radar.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Sensor {
 
 class Stt : public Simulation::Radar
@@ -23,6 +23,6 @@ protected:
 };
 
 } // End Sensor namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

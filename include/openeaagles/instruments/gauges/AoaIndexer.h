@@ -12,12 +12,12 @@
 //      green -> in limit area
 //      yellow -> under limit area
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Instruments_AoAIndexer_H__
-#define __Eaagles_Instruments_AoAIndexer_H__
+#ifndef __oe_Instruments_AoAIndexer_H__
+#define __oe_Instruments_AoAIndexer_H__
 
 #include "openeaagles/instruments/Instrument.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Instruments {
 
 class AoAIndexer : public Instrument
@@ -78,6 +78,6 @@ private:
 };
 
 }  // end Instruments namespace
-}  // end Eaagles namespace
+}  // end oe namespace
 
 #endif

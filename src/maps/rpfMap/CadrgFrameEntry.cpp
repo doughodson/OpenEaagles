@@ -6,7 +6,7 @@
 #include "openeaagles/maps/rpfMap/CadrgFrame.h"
 #include <cstring>
 
-namespace Eaagles {
+namespace oe {
 namespace Maps {
 namespace Rpf {
 
@@ -115,4 +115,4 @@ void CadrgFrameEntry::setFrame(CadrgFrame* newFrame)
 
 } // End Rpf namespace
 } // End Maps namespace
-} // End Eaagles namespace
+} // End oe namespace

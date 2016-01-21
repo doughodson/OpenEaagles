@@ -4,7 +4,7 @@
 
 #include "openeaagles/basic/List.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 //==============================================================================
@@ -137,5 +137,5 @@ void IrQueryMsg::clear()
 }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 

@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: FileReader
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_FileReader_H__
-#define __Eaagles_Basic_FileReader_H__
+#ifndef __oe_Basic_FileReader_H__
+#define __oe_Basic_FileReader_H__
 
 #include "openeaagles/basic/Object.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 class Number;
@@ -174,6 +174,6 @@ inline const char* FileReader::getFirstRecord()
 }
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

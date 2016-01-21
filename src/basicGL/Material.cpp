@@ -3,7 +3,7 @@
 #include "openeaagles/basic/Pair.h"
 #include "openeaagles/basic/PairStream.h"
 
-namespace Eaagles {
+namespace oe {
 namespace BasicGL {
 
 IMPLEMENT_SUBCLASS(Material,"Material")
@@ -309,5 +309,5 @@ Basic::Object* Material::getSlotByIndex(const int si)
 }
 
 } // End BasicGL namespace
-} // End Eaagles namespace
+} // End oe namespace
 

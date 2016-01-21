@@ -3,7 +3,7 @@
 #include "openeaagles/basic/Number.h"
 #include "openeaagles/basic/units/Times.h"
 
-namespace Eaagles {
+namespace oe {
 namespace LinearSystem {
 
 //==============================================================================
@@ -143,4 +143,4 @@ std::ostream& LagFilter::serialize(std::ostream& sout, const int i, const bool s
 }
 
 } // End LinearSystem namespace
-} // End Eaagles namespace
+} // End oe namespace

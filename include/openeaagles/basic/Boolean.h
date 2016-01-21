@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class:  Boolean
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_Boolean_H__
-#define __Eaagles_Basic_Boolean_H__
+#ifndef __oe_Basic_Boolean_H__
+#define __oe_Basic_Boolean_H__
 
 #include "openeaagles/basic/Number.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 //------------------------------------------------------------------------------
@@ -181,6 +181,6 @@ inline std::ostream& operator<<(std::ostream& sout, const Boolean& n)
 }
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

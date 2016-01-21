@@ -6,7 +6,7 @@
 #include "openeaagles/basicGL/ColorGradient.h"
 #include <GL/glu.h>
 
-namespace Eaagles {
+namespace oe {
 namespace BasicGL {
 
 //==============================================================================
@@ -831,4 +831,4 @@ std::ostream& Triangle::serialize(std::ostream& sout, const int i, const bool sl
 
 
 } // End BasicGL namespace
-} // End Eaagles namespace
+} // End oe namespace

@@ -2,13 +2,13 @@
 // Class: Rng - Mersenne Twister random number generator
 //------------------------------------------------------------------------------
 
-#ifndef __Eaagles_Basic_Rng_H__
-#define __Eaagles_Basic_Rng_H__
+#ifndef __oe_Basic_Rng_H__
+#define __oe_Basic_Rng_H__
 
 #include "openeaagles/basic/Object.h"
 #include <cmath>
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 // C++ include file for MT19937, with initialization improved 2002/1/26.

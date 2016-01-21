@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: Rwr
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_Rwr_H__
-#define __Eaagles_Simulation_Rwr_H__
+#ifndef __oe_Simulation_Rwr_H__
+#define __oe_Simulation_Rwr_H__
 
 #include "openeaagles/simulation/RfSensor.h"
 #include "openeaagles/basic/safe_queue.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 //------------------------------------------------------------------------------
 // Class: Rwr
@@ -65,6 +65,6 @@ private:
 };
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

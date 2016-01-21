@@ -6,7 +6,7 @@
 
 #include "openeaagles/basic/Object.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Recorder {
 
 Basic::Object* recorderFormFunc(const char* name)
@@ -22,4 +22,4 @@ Basic::Object* recorderFormFunc(const char* name)
 }
 
 } // End Recorder namespace
-} // End Eaagles namespace
+} // End oe namespace

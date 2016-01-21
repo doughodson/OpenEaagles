@@ -1,11 +1,11 @@
 
-#ifndef __Eaagles_Simulation_SynchronizedState_H__
-#define __Eaagles_Simulation_SynchronizedState_H__
+#ifndef __oe_Simulation_SynchronizedState_H__
+#define __oe_Simulation_SynchronizedState_H__
 
 #include "openeaagles/basic/Object.h"
 #include "openeaagles/basic/osg/Vec3"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 //------------------------------------------------------------------------------
@@ -54,7 +54,7 @@ private:
 };
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif
 

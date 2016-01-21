@@ -39,12 +39,12 @@
 //
 //------------------------------------------------------------------------------
 
-#ifndef __Eaagles_Maps_Rpf_CadrgFile_H__
-#define __Eaagles_Maps_Rpf_CadrgFile_H__
+#ifndef __oe_Maps_Rpf_CadrgFile_H__
+#define __oe_Maps_Rpf_CadrgFile_H__
 
 #include "openeaagles/basic/Object.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic { class String; }
 namespace Maps {
 namespace Rpf {
@@ -90,6 +90,6 @@ private:
 
 }  // End Rpf namespace
 }  // End Maps namespace
-}  // End Eaagles namespace
+}  // End oe namespace
 
 #endif

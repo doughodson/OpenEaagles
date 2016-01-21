@@ -1,6 +1,6 @@
 #include "openeaagles/instruments/eadi3D/Eadi3DFont.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Instruments {
 
 IMPLEMENT_SUBCLASS(Eadi3DFont,"Eadi3DFont")
@@ -741,5 +741,5 @@ GLenum Eadi3DFont::createEadi3DFont(GLuint fontBase)
 }
 
 } // End Instruments namespace
-} // End Eaagles namespace
+} // End oe namespace
 

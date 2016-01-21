@@ -21,7 +21,7 @@
 #include <cmath>
 #include <cstring>
 
-namespace Eaagles {
+namespace oe {
 namespace Network {
 namespace Dis {
 
@@ -130,13 +130,13 @@ void EmissionPduHandler::copyData(const EmissionPduHandler& org, const bool cc)
 //------------------------------------------------------------------------------
 void EmissionPduHandler::deleteData()
 {
-   if (sensor != nullptr) { sensor->event(Eaagles::Basic::Component::SHUTDOWN_EVENT); }
+   if (sensor != nullptr) { sensor->event(oe::Basic::Component::SHUTDOWN_EVENT); }
    setSensor(nullptr);
 
-   if (sensorModel != nullptr) { sensorModel->event(Eaagles::Basic::Component::SHUTDOWN_EVENT); }
+   if (sensorModel != nullptr) { sensorModel->event(oe::Basic::Component::SHUTDOWN_EVENT); }
    setSensorModel(nullptr);
 
-   if (antennaModel != nullptr) { antennaModel->event(Eaagles::Basic::Component::SHUTDOWN_EVENT); }
+   if (antennaModel != nullptr) { antennaModel->event(oe::Basic::Component::SHUTDOWN_EVENT); }
    setAntennaModel(nullptr);
 }
 
@@ -973,4 +973,4 @@ unsigned short EmissionPduHandler::emissionSystemData2PDU(EmissionSystem* const 
 
 } // End Dis namespace
 } // End Network namespace
-} // End Eaagles namespace
+} // End oe namespace

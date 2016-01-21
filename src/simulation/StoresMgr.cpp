@@ -26,7 +26,7 @@
 # pragma warning(disable: 4996)
 #endif
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 //==============================================================================
@@ -1131,4 +1131,4 @@ bool SimpleStoresMgr::onTriggerSwEvent(const Basic::Boolean* const sw)
 
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace

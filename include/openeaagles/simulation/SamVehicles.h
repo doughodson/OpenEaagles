@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Classes: SamVehicle
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_SamVehicle_H__
-#define __Eaagles_Simulation_SamVehicle_H__
+#ifndef __oe_Simulation_SamVehicle_H__
+#define __oe_Simulation_SamVehicle_H__
 
 #include "openeaagles/simulation/GroundVehicle.h"
 
-namespace Eaagles {
+namespace oe {
    namespace Basic {
       class Distance;
       class Identifier;
@@ -58,6 +58,6 @@ private:
 };
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

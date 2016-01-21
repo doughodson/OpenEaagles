@@ -15,7 +15,7 @@
 # pragma warning(disable: 4996)
 #endif
 
-namespace Eaagles {
+namespace oe {
 namespace Recorder {
 
 
@@ -397,7 +397,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
          break;
       }
       default: {
-         // not an Eaagles message.
+         // not an oe message.
          break;
       }
    }
@@ -1368,7 +1368,7 @@ void TabPrinter::printPlayerStateMsg(std::ostream& sout, const Pb::PlayerState* 
          double pLon(0.0);
          double pAlt(0.0);
          if (( msg->pos().has_x()) && ( msg->pos().has_y()) && ( msg->pos().has_z())) {
-            Eaagles::Basic::Nav::convertEcef2Geod(msg->pos().x(), msg->pos().y(),  msg->pos().z(),
+            oe::Basic::Nav::convertEcef2Geod(msg->pos().x(), msg->pos().y(),  msg->pos().z(),
                &pLat, &pLon, &pAlt);
             sout << pLat << divider << pLon << divider << pAlt << divider;
          }
@@ -1915,4 +1915,4 @@ void TabPrinter::printSimTimeMsg(std::ostream& sout, double simTime)
 }
 
 } // End Recorder namespace
-} // End Eaagles namespace
+} // End oe namespace

@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: IrAtmosphere
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_IrAtmosphere_H__
-#define __Eaagles_Simulation_IrAtmosphere_H__
+#ifndef __oe_Simulation_IrAtmosphere_H__
+#define __oe_Simulation_IrAtmosphere_H__
 
 #include "openeaagles/basic/Component.h"
 
-namespace Eaagles {
+namespace oe {
 
    namespace Basic {
       class Number;
@@ -151,6 +151,6 @@ private:
 };
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

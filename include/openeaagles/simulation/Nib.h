@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: Nib
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_Nib_H__
-#define __Eaagles_Simulation_Nib_H__
+#ifndef __oe_Simulation_Nib_H__
+#define __oe_Simulation_Nib_H__
 
 #include "openeaagles/simulation/NetIO.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
    class Missile;
 
@@ -338,6 +338,6 @@ private:
 };
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

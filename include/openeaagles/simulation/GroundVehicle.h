@@ -5,12 +5,12 @@
 // Description: Generic Ground Vehicles
 //
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_GroundVehicle_H__
-#define __Eaagles_Simulation_GroundVehicle_H__
+#ifndef __oe_Simulation_GroundVehicle_H__
+#define __oe_Simulation_GroundVehicle_H__
 
 #include "openeaagles/simulation/Player.h"
 
-namespace Eaagles {
+namespace oe {
    namespace Basic {
       class Distance;
       class Identifier;
@@ -174,6 +174,6 @@ public:
 };
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

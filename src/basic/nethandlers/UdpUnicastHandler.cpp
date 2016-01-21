@@ -32,7 +32,7 @@
 #include <cstdio>
 #include <cstring>
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 //==============================================================================
@@ -241,5 +241,5 @@ std::ostream& UdpUnicastHandler::serialize(std::ostream& sout, const int i, cons
 }
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace
 

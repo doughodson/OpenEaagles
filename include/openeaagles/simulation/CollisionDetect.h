@@ -1,17 +1,17 @@
 //------------------------------------------------------------------------------
 // Class: CollisionDetect
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_CollisionDetect_H__
-#define __Eaagles_Simulation_CollisionDetect_H__
+#ifndef __oe_Simulation_CollisionDetect_H__
+#define __oe_Simulation_CollisionDetect_H__
 
-namespace Eaagles {
+namespace oe {
    namespace Basic { class Angle; class Distance; class Number; class PairStream; }
 }
 
 #include "openeaagles/simulation/System.h"
 #include "openeaagles/config.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
    class Player;
 
@@ -149,6 +149,6 @@ inline bool CollisionDetect::isLocalOnly() const               { return localOnl
 inline bool CollisionDetect::isSendCrashEventsEnabled() const  { return sendCrashEvents; }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

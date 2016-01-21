@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: Sar
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_Sar_H__
-#define __Eaagles_Simulation_Sar_H__
+#ifndef __oe_Simulation_Sar_H__
+#define __oe_Simulation_Sar_H__
 
 #include "openeaagles/simulation/Radar.h"
 
-namespace Eaagles {
+namespace oe {
    namespace Basic {
       class Pair;
       class PairStream;
@@ -107,6 +107,6 @@ private:
 };
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

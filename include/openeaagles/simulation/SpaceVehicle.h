@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Classes: SpaceVehicle, BoosterSpaceVehicle, MannedSpaceVehicle, UnmannedSpaceVehicle
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_SpaceVehicle_H__
-#define __Eaagles_Simulation_SpaceVehicle_H__
+#ifndef __oe_Simulation_SpaceVehicle_H__
+#define __oe_Simulation_SpaceVehicle_H__
 
 #include "openeaagles/simulation/Player.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 //==============================================================================
@@ -96,6 +96,6 @@ protected:
 };
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

@@ -37,12 +37,12 @@
 //        Length of a DAFIF ILS record pair.
 //
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Dafif_Ils_H__
-#define __Eaagles_Dafif_Ils_H__
+#ifndef __oe_Dafif_Ils_H__
+#define __oe_Dafif_Ils_H__
 
 #include "Record.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Dafif {
 
 class Ils : public Record
@@ -125,6 +125,6 @@ inline void Ils::runwayEndIdent(char rwEndKey[]) const
 }
 
 } // End Dafif namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

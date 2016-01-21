@@ -13,7 +13,7 @@
 
 #include <cmath>
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 //==============================================================================
@@ -55,7 +55,7 @@ Basic::Object* IrShape::getSlotByIndex(const int si)
    return BaseClass::getSlotByIndex(si);
 }
 
-bool IrShape::setSlotIrShapeArea(const Eaagles::Basic::Number* const num)
+bool IrShape::setSlotIrShapeArea(const oe::Basic::Number* const num)
 {
    LCreal value = 0.0;
    const Basic::Area* a = dynamic_cast<const Basic::Area*>(num);
@@ -130,7 +130,7 @@ Basic::Object* IrSphere::getSlotByIndex(const int si)
    return BaseClass::getSlotByIndex(si);
 }
 
-bool IrSphere::setSlotIrSphereRadius(const Eaagles::Basic::Number* const s)
+bool IrSphere::setSlotIrSphereRadius(const oe::Basic::Number* const s)
 {
    LCreal value = 0.0;
 
@@ -207,7 +207,7 @@ Basic::Object* IrBox::getSlotByIndex(const int si)
    return BaseClass::getSlotByIndex(si);
 }
 
-bool IrBox::setSlotIrBoxX(const Eaagles::Basic::Number* const s)
+bool IrBox::setSlotIrBoxX(const oe::Basic::Number* const s)
 {
    LCreal value = 0.0;
 
@@ -223,7 +223,7 @@ bool IrBox::setSlotIrBoxX(const Eaagles::Basic::Number* const s)
    return true;
 }
 
-bool IrBox::setSlotIrBoxY(const Eaagles::Basic::Number* const s)
+bool IrBox::setSlotIrBoxY(const oe::Basic::Number* const s)
 {
    LCreal value = 0.0;
 
@@ -239,7 +239,7 @@ bool IrBox::setSlotIrBoxY(const Eaagles::Basic::Number* const s)
    return true;
 }
 
-bool IrBox::setSlotIrBoxZ(const Eaagles::Basic::Number* const s)
+bool IrBox::setSlotIrBoxZ(const oe::Basic::Number* const s)
 {
    LCreal value = 0.0;
 
@@ -343,4 +343,4 @@ LCreal IrBox::getReflectorAreaInFieldOfView(const IrQueryMsg* const msg)
 } // end of method
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace

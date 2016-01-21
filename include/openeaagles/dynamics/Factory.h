@@ -3,10 +3,10 @@
 //
 // Description: Class factory
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Dynamics_Factory_H__
-#define __Eaagles_Dynamics_Factory_H__
+#ifndef __oe_Dynamics_Factory_H__
+#define __oe_Dynamics_Factory_H__
 
-namespace Eaagles {
+namespace oe {
 
 namespace Basic { class Object; }
 

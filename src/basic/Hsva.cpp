@@ -5,7 +5,7 @@
 #include "openeaagles/basic/Float.h"
 #include "openeaagles/basic/units/Angles.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 IMPLEMENT_SUBCLASS(Hsva,"hsva")
@@ -104,4 +104,4 @@ std::ostream& Hsva::serialize(std::ostream& sout, const int i, const bool slotsO
 }
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace

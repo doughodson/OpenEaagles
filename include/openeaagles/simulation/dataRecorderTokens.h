@@ -6,7 +6,7 @@
 //
 //    2) Token IDs 500 to 999 are reserved
 //
-//    3) This file is used by both C++ and Eaagles input files, so only use
+//    3) This file is used by both C++ and oe input files, so only use
 //       C pre-processor directives in this configuration file.
 //
 //    4) P1 to P4 are the required objects passed to the SAMPLE macro, and
@@ -14,8 +14,8 @@
 //       (see "openeaagles/simulation/DataRecorder.h")
 //
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_Id_Tokens_H__
-#define __Eaagles_Simulation_Id_Tokens_H__
+#ifndef __oe_Simulation_Id_Tokens_H__
+#define __oe_Simulation_Id_Tokens_H__
 
 // Data recorder and handler messages <internal use only>
 #define REID_END_OF_DATA          0    // Last data record message <can not be disabled>

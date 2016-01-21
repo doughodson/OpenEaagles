@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: RfSystem
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_RfSystem_H__
-#define __Eaagles_Simulation_RfSystem_H__
+#ifndef __oe_Simulation_RfSystem_H__
+#define __oe_Simulation_RfSystem_H__
 
 #include "openeaagles/simulation/System.h"
 
-namespace Eaagles {
+namespace oe {
    namespace Basic { class Decibel; }
 
 namespace Simulation {
@@ -188,6 +188,6 @@ private:
 };
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

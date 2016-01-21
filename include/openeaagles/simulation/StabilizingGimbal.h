@@ -7,12 +7,12 @@
 // Public Member functions:
 //
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_StabilizingGimbal_H__
-#define __Eaagles_Simulation_StabilizingGimbal_H__
+#ifndef __oe_Simulation_StabilizingGimbal_H__
+#define __oe_Simulation_StabilizingGimbal_H__
 
 #include "openeaagles/simulation/Gimbal.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 //------------------------------------------------------------------------------
@@ -56,6 +56,6 @@ private:
 };
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

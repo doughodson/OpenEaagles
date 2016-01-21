@@ -1,7 +1,7 @@
 #include "openeaagles/instruments/dials/DialTickMarks.h"
 #include "openeaagles/basic/Number.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Instruments {
 
 IMPLEMENT_SUBCLASS(DialTickMarks, "DialTickMarks")
@@ -161,4 +161,4 @@ Basic::Object* DialTickMarks::getSlotByIndex(const int si)
 }
 
 }  // end Instruments namespace
-}  // end Eaagles namespace
+}  // end oe namespace

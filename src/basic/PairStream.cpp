@@ -3,7 +3,7 @@
 
 #include <cstdlib>
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(PairStream, "PairStream")
@@ -138,4 +138,4 @@ std::ostream& PairStream::serialize(std::ostream& sout, const int i, const bool)
 }
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace

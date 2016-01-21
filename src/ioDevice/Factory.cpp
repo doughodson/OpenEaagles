@@ -22,7 +22,7 @@
    #include "./linux/UsbJoystickImp.h"
 #endif
 
-namespace Eaagles {
+namespace oe {
 namespace IoDevice {
 
 Factory::Factory()

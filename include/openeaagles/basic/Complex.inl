@@ -2,8 +2,8 @@
 // Class: Complex
 // inline functions
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_Complex_Inline__
-#define __Eaagles_Basic_Complex_Inline__
+#ifndef __oe_Basic_Complex_Inline__
+#define __oe_Basic_Complex_Inline__
 
 //------------------------------------------------------------------------------
 // Unary Arithmetic Functions and Overloaded Operators

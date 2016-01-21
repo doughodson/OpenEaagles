@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: Gimbal
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_Gimbal_H__
-#define __Eaagles_Simulation_Gimbal_H__
+#ifndef __oe_Simulation_Gimbal_H__
+#define __oe_Simulation_Gimbal_H__
 
 #include "openeaagles/simulation/System.h"
 
-namespace Eaagles {
+namespace oe {
    namespace Basic {
       class Angle;
       class Distance;
@@ -391,6 +391,6 @@ private:
 };
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

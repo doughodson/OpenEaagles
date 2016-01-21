@@ -2,7 +2,7 @@
 #include "openeaagles/basic/Number.h"
 #include <GL/glu.h>
 
-namespace Eaagles {
+namespace oe {
 namespace Instruments {
 
 IMPLEMENT_SUBCLASS(DialArcSegment, "DialArcSegment")
@@ -171,4 +171,4 @@ Basic::Object* DialArcSegment::getSlotByIndex(const int si)
 }
 
 }  // end of Instruments namespace
-}  // end of Eaagles namespace
+}  // end of oe namespace

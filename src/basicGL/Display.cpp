@@ -32,7 +32,7 @@
 # pragma warning(disable: 4996)
 #endif
 
-namespace Eaagles {
+namespace oe {
 namespace BasicGL {
 
 IMPLEMENT_SUBCLASS(Display,"Display")
@@ -2144,4 +2144,4 @@ std::ostream& Display::serialize(std::ostream& sout, const int i, const bool slo
 }
 
 } // End BasicGL namespace
-} // End Eaagles namespace
+} // End oe namespace

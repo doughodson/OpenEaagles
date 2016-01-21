@@ -8,7 +8,7 @@
 #include <cstdlib>
 #include <cstring>
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 // ---
@@ -372,5 +372,5 @@ const Object::_Static* Object::getStatic()
 }
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace
 

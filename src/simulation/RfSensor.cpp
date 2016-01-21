@@ -19,7 +19,7 @@
 #include "openeaagles/basic/units/Powers.h"
 #include "openeaagles/basic/units/Times.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 //==============================================================================
@@ -859,4 +859,4 @@ void SensorMgr::deleteData()
 }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace

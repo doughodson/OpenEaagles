@@ -2,12 +2,12 @@
 // Class: Building
 // Description: Generic building
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_Building_H__
-#define __Eaagles_Simulation_Building_H__
+#ifndef __oe_Simulation_Building_H__
+#define __oe_Simulation_Building_H__
 
 #include "openeaagles/simulation/Player.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 //==============================================================================
@@ -26,6 +26,6 @@ public:
 };
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

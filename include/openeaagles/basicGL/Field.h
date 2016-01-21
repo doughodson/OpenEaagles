@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: Field
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_BasicGL_Field_H__
-#define __Eaagles_BasicGL_Field_H__
+#ifndef __oe_BasicGL_Field_H__
+#define __oe_BasicGL_Field_H__
 
 #include "Graphic.h"
 #include "openeaagles/basic/String.h"
 
-namespace Eaagles {
+namespace oe {
 
    namespace Basic {
       class List;
@@ -306,6 +306,6 @@ private:
 };
 
 } // End BasicGL namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

@@ -6,7 +6,7 @@
 
 #include "openeaagles/basic/Number.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 namespace Ubf {
 
@@ -65,5 +65,5 @@ Basic::Object* Behavior::getSlotByIndex(const int si)
 
 } // End Ubf namespace
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace
 

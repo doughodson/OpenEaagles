@@ -6,7 +6,7 @@
 
 #include "openeaagles/basic/Object.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Terrain {
 
 Basic::Object* terrainFormFunc(const char* name)
@@ -22,4 +22,4 @@ Basic::Object* terrainFormFunc(const char* name)
 }
 
 } // End Terrain namespace
-} // End Eaagles namespace
+} // End oe namespace

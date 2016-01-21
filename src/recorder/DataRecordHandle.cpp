@@ -2,7 +2,7 @@
 #include "openeaagles/recorder/DataRecordHandle.h"
 #include "openeaagles/recorder/protobuf/DataRecord.pb.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Recorder {
 
 IMPLEMENT_SUBCLASS(DataRecordHandle,"DataRecordHandle")
@@ -45,4 +45,4 @@ void DataRecordHandle::deleteData()
 }
 
 } // End Recorder namespace
-} // End Eaagles namespace
+} // End oe namespace

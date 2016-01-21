@@ -2,8 +2,8 @@
 // Class: Rng
 // inline functions
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_Rng_Inline__
-#define __Eaagles_Basic_Rng_Inline__
+#ifndef __oe_Basic_Rng_Inline__
+#define __oe_Basic_Rng_Inline__
 
 //-----------------------------------------------------------------
 // drawClosed() -- generates double floating point numbers in the 

@@ -3,7 +3,7 @@
 //------------------------------------------------------------------------------
 #include "openeaagles/basic/Number.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 IMPLEMENT_SUBCLASS(Number,"Number")
@@ -59,4 +59,4 @@ bool Number::setSlotValue(const Number* const svobj)
 }
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace

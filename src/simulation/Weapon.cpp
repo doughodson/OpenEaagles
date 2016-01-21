@@ -30,7 +30,7 @@
 # pragma warning(disable: 4996)
 #endif
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 //==============================================================================
@@ -1650,4 +1650,4 @@ std::ostream& Weapon::serialize(std::ostream& sout, const int i, const bool slot
 }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace

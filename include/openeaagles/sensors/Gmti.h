@@ -2,12 +2,12 @@
 // Class: Gmti
 // Description: Very simple, Ground-Moving-Target-Indication (GMTI) mode radar
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Sensor_Gmti_H__
-#define __Eaagles_Sensor_Gmti_H__
+#ifndef __oe_Sensor_Gmti_H__
+#define __oe_Sensor_Gmti_H__
 
 #include "openeaagles/simulation/Radar.h"
 
-namespace Eaagles {
+namespace oe {
 
 namespace Basic { class List; }
 
@@ -34,6 +34,6 @@ private:
 };
 
 } // End Sensor namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

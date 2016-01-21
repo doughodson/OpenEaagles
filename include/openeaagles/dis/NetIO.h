@@ -4,12 +4,12 @@
 //    Dis::Nib    -- DIS Network Interface Block class
 //    Dis::Ntm    -- DIS Type Mapper class
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Network_Dis_NetIO_H__
-#define __Eaagles_Network_Dis_NetIO_H__
+#ifndef __oe_Network_Dis_NetIO_H__
+#define __oe_Network_Dis_NetIO_H__
 
 #include "openeaagles/simulation/NetIO.h"
 
-namespace Eaagles {
+namespace oe {
    namespace Basic { class NetHandler; }
    namespace Simulation { class Iff; class RfSensor; }
 
@@ -408,6 +408,6 @@ private:
 
 } // End Dis namespace
 } // End Network namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

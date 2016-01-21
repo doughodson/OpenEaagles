@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: Navaid
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Dafif_Navaid_H__
-#define __Eaagles_Dafif_Navaid_H__
+#ifndef __oe_Dafif_Navaid_H__
+#define __oe_Dafif_Navaid_H__
 
 #include "Record.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Dafif {
 
 //------------------------------------------------------------------------------
@@ -126,6 +126,6 @@ inline void Navaid::radioClass(char rc[]) const
 }
 
 } // End Dafif namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

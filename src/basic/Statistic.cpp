@@ -3,7 +3,7 @@
 //------------------------------------------------------------------------------
 #include "openeaagles/basic/Statistic.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Statistic,"Statistic")
@@ -56,4 +56,4 @@ void Statistic::clear()
 }
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace

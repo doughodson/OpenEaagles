@@ -5,7 +5,7 @@
 #include "openeaagles/simulation/Player.h"
 #include "openeaagles/simulation/SensorMsg.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 //==============================================================================
@@ -636,4 +636,4 @@ void IrTrack::clear()
 }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace

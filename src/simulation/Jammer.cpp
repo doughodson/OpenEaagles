@@ -10,7 +10,7 @@
 #include "openeaagles/basic/units/Frequencies.h"
 #include "openeaagles/basic/units/Powers.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Jammer,"Jammer")
@@ -60,4 +60,4 @@ void Jammer::transmit(const LCreal)
 }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace

@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: Ins
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_Ins_H__
-#define __Eaagles_Simulation_Ins_H__
+#ifndef __oe_Simulation_Ins_H__
+#define __oe_Simulation_Ins_H__
 
 #include "openeaagles/simulation/Navigation.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 //------------------------------------------------------------------------------
@@ -59,6 +59,6 @@ private:
 };
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

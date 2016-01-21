@@ -4,12 +4,12 @@
 // Description: Dynamic class that renders only the portion of the tape
 //              that is needed on the screen
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Instruments_Tape_H__
-#define __Eaagles_Instruments_Tape_H__
+#ifndef __oe_Instruments_Tape_H__
+#define __oe_Instruments_Tape_H__
 
 #include "openeaagles/instruments/Instrument.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Instruments {
 
 class Tape : public Instrument
@@ -22,11 +22,11 @@ public:
     void updateData(const LCreal dt = 0.0) override;
 
     virtual bool setRange(const int x)                  { range = x; return true; }
-    virtual bool setHeight(const Eaagles::LCreal x)     { height = x; return true; }
+    virtual bool setHeight(const oe::LCreal x)     { height = x; return true; }
     virtual bool setIncrement(const int x)              { increment = x; return true; }
     virtual bool setVertical(const bool x)              { vertical = x; return true; }
-    virtual bool setMaxNumber(const Eaagles::LCreal x)  { maxNum = x; return true; }
-    virtual bool setMinNumber(const Eaagles::LCreal x)  { minNum = x; return true; }
+    virtual bool setMaxNumber(const oe::LCreal x)  { maxNum = x; return true; }
+    virtual bool setMinNumber(const oe::LCreal x)  { minNum = x; return true; }
     virtual bool setConvert(const bool x)               { convert = x; return true; }
 
 protected:
@@ -61,6 +61,6 @@ private:
 };
 
 }  // end of Instruments namespace
-}  // end of Eaagles namespace
+}  // end of oe namespace
 
 #endif

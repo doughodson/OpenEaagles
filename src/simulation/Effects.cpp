@@ -8,7 +8,7 @@
 #include "openeaagles/basic/units/Angles.h"
 #include "openeaagles/basic/units/Distances.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 //==============================================================================
@@ -284,4 +284,4 @@ void Decoy::deleteData()
 }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace

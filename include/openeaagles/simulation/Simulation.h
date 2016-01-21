@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: Simulation
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_Simulation_H__
-#define __Eaagles_Simulation_Simulation_H__
+#ifndef __oe_Simulation_Simulation_H__
+#define __oe_Simulation_Simulation_H__
 
 #include "openeaagles/basic/Component.h"
 #include "openeaagles/basic/safe_queue.h"
 
-namespace Eaagles {
+namespace oe {
    namespace Basic { class Distance; class EarthModel; class LatLon; class Pair; class Time; class Terrain; }
    namespace Dafif { class AirportLoader; class NavaidLoader; class WaypointLoader; }
 
@@ -443,6 +443,6 @@ private:
 };
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

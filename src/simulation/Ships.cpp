@@ -4,7 +4,7 @@
 #include "openeaagles/basic/osg/Matrix"
 #include "openeaagles/basic/units/Angles.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 //==============================================================================
@@ -44,4 +44,4 @@ unsigned int Ship::getMajorType() const
 }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace

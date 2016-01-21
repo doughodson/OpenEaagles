@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Classes: Transform, Translation, Rotation, Scale
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_Transform_H__
-#define __Eaagles_Basic_Transform_H__
+#ifndef __oe_Basic_Transform_H__
+#define __oe_Basic_Transform_H__
 
 #include "openeaagles/basic/Object.h"
 #include "openeaagles/basic/osg/Matrix"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 class Angle;
@@ -143,6 +143,6 @@ protected:
 };
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

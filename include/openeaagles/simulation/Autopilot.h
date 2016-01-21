@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: Autopilot
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_Autopilot_H__
-#define __Eaagles_Simulation_Autopilot_H__
+#ifndef __oe_Simulation_Autopilot_H__
+#define __oe_Simulation_Autopilot_H__
 
 #include "openeaagles/simulation/Pilot.h"
 
-namespace Eaagles {
+namespace oe {
    namespace Basic { class Angle; class Distance; class Identifier; class Number; class Time; }
 
 namespace Simulation {
@@ -345,6 +345,6 @@ inline double Autopilot::getMaxPitchAngle() const           { return maxPitchAng
 inline double Autopilot::getMaxVelAcc() const               { return maxVelAccNps; }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

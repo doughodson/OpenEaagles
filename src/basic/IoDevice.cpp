@@ -6,7 +6,7 @@
 #include "openeaagles/basic/Pair.h"
 #include "openeaagles/basic/PairStream.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 //==============================================================================
@@ -382,4 +382,4 @@ std::ostream& IoDevice::serialize(std::ostream& sout, const int i, const bool sl
 }
 
 } // end IoDevice
-} // end Eaagles namespace
+} // end oe namespace

@@ -14,7 +14,7 @@
 #ifndef OSG_VEC2B_OE
 #define OSG_VEC2B_OE 1
 
-namespace Eaagles {
+namespace oe {
 namespace osg {
 
 /** General purpose float triple.
@@ -152,6 +152,6 @@ class Vec2b
 
 
 }    // end of namespace osg
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

@@ -2,7 +2,7 @@
 #include "openeaagles/basic/ThreadPool.h"
 #include "openeaagles/basic/Thread.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 //==============================================================================
@@ -425,4 +425,4 @@ Object* ThreadPool::getSlotByIndex(const int si)
 }
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace

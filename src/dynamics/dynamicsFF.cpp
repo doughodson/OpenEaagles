@@ -6,7 +6,7 @@
 
 #include "openeaagles/basic/Object.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Dynamics {
 
 Basic::Object* dynamicsFormFunc(const char* name)
@@ -22,4 +22,4 @@ Basic::Object* dynamicsFormFunc(const char* name)
 }
 
 } // End Vehicle namespace
-} // End Eaagles namespace
+} // End oe namespace

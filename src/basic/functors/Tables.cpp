@@ -9,7 +9,7 @@
 #include "openeaagles/basic/List.h"
 #include "openeaagles/basic/Pair.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 //==============================================================================
@@ -1366,4 +1366,4 @@ void Table5::printData(std::ostream& sout, const LCreal* tbl, const unsigned int
 }
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace

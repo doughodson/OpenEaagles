@@ -4,7 +4,7 @@
 #include "openeaagles/basicGL/Translator.h"
 #include "openeaagles/basic/Number.h"
 
-namespace Eaagles {
+namespace oe {
 namespace BasicGL {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Translator, "Translator")
@@ -107,4 +107,4 @@ bool Translator::setZPos(const LCreal zPos)
 }
 
 } // End BasicGL namespace
-} // End Eaagles namespace
+} // End oe namespace

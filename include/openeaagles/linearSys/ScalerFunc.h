@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // ScalerFunc class -- Abstract scaler function
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_LinearSystem_ScalerFunc_H__
-#define __Eaagles_LinearSystem_ScalerFunc_H__
+#ifndef __oe_LinearSystem_ScalerFunc_H__
+#define __oe_LinearSystem_ScalerFunc_H__
 
 #include "openeaagles/basic/Object.h"
 
-namespace Eaagles {
+namespace oe {
    namespace Basic {
       class Frequency;
       class Number;
@@ -97,6 +97,6 @@ private:
 };
 
 } // End LinearSystem namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

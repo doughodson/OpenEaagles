@@ -12,7 +12,7 @@
 #include "openeaagles/basic/PairStream.h"
 #include "openeaagles/basic/Number.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 IMPLEMENT_SUBCLASS(FileReader,"FileReader")
@@ -300,4 +300,4 @@ std::ostream& FileReader::serialize(std::ostream& sout, const int i, const bool 
 }
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace

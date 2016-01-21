@@ -3,12 +3,12 @@
 //
 // Description: Abstract difference equation
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_LinearSystem_DiffEquation_H__
-#define __Eaagles_LinearSystem_DiffEquation_H__
+#ifndef __oe_LinearSystem_DiffEquation_H__
+#define __oe_LinearSystem_DiffEquation_H__
 
 #include "openeaagles/linearSys/ScalerFunc.h"
 
-namespace Eaagles {
+namespace oe {
 namespace LinearSystem {
 
 //------------------------------------------------------------------------------
@@ -42,6 +42,6 @@ private:
 };
 
 } // End LinearSystem namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

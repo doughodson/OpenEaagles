@@ -10,12 +10,12 @@
 //      UPDATE_INSTRUMENTS -> (from instrument), sets our rotation angle
 //      UPDATE_VALUE -> setRadius (inches)
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Instruments_AnalogDial_H__
-#define __Eaagles_Instruments_AnalogDial_H__
+#ifndef __oe_Instruments_AnalogDial_H__
+#define __oe_Instruments_AnalogDial_H__
 
 #include "openeaagles/instruments/Instrument.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Instruments {
 
 class AnalogDial : public Instrument
@@ -62,6 +62,6 @@ private:
 };
 
 }  // end Instruments namespace
-}  // end Eaagles namespace
+}  // end oe namespace
 
 #endif

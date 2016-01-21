@@ -10,7 +10,7 @@
 #include "openeaagles/basic/Pair.h"
 #include "openeaagles/basic/String.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 namespace Ubf {
 
@@ -232,5 +232,5 @@ void AgentTC::updateData(const LCreal dt)
 
 } // End Ubf namespace
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace
 

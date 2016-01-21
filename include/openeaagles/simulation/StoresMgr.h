@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Classes: StoresMgr, SimpleStoresMgr
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_StoresMgr_H__
-#define __Eaagles_Simulation_StoresMgr_H__
+#ifndef __oe_Simulation_StoresMgr_H__
+#define __oe_Simulation_StoresMgr_H__
 
 #include "openeaagles/simulation/Stores.h"
 
-namespace Eaagles {
+namespace oe {
    namespace Basic {
       class Boolean;
       class PairStream;
@@ -234,6 +234,6 @@ private:
 };
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

@@ -2,12 +2,12 @@
 // SecondOrderTf class -- Second order transfer function
 // ##### IN-WORK #####
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_LinearSystem_SecondOrderTf_H__
-#define __Eaagles_LinearSystem_SecondOrderTf_H__
+#ifndef __oe_LinearSystem_SecondOrderTf_H__
+#define __oe_LinearSystem_SecondOrderTf_H__
 
 #include "openeaagles/linearSys/DiffEquation.h"
 
-namespace Eaagles {
+namespace oe {
 namespace LinearSystem {
 
 //------------------------------------------------------------------------------
@@ -69,6 +69,6 @@ private:
 };
 
 } // End LinearSystem namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: PrintSelected
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Recorder_PrintSelected_H__
-#define __Eaagles_Recorder_PrintSelected_H__
+#ifndef __oe_Recorder_PrintSelected_H__
+#define __oe_Recorder_PrintSelected_H__
 
 #include "openeaagles/recorder/OutputHandler.h"
 #include "openeaagles/recorder/PrintHandler.h"
@@ -14,7 +14,7 @@
 #include "google/protobuf/descriptor.h"
 #include "google/protobuf/message.h"
 
-namespace Eaagles {
+namespace oe {
       namespace Basic { class Float; class Integer; }
 namespace Recorder {
    namespace Pb {
@@ -122,6 +122,6 @@ inline bool PrintSelected::getCompareToBool() const
 }
 
 } // End Recorder namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

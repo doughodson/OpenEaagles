@@ -7,7 +7,7 @@
 #include "openeaagles/basic/Factory.h"
 #include <iostream>
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 Object* basicFormFunc(const char* name)
@@ -23,4 +23,4 @@ Object* basicFormFunc(const char* name)
 }
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace

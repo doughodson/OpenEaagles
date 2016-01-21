@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: DataRecordHandle
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Recorder_DataRecordHandle_H__
-#define __Eaagles_Recorder_DataRecordHandle_H__
+#ifndef __oe_Recorder_DataRecordHandle_H__
+#define __oe_Recorder_DataRecordHandle_H__
 
 #include "openeaagles/basic/Object.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Recorder {
 
    // Main (protocol buffer) data record
@@ -45,6 +45,6 @@ private:
 inline const Pb::DataRecord* DataRecordHandle::getRecord() const { return record; }
 
 } // End Recorder namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

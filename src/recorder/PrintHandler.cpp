@@ -10,7 +10,7 @@
 # pragma warning(disable: 4996)
 #endif
 
-namespace Eaagles {
+namespace oe {
 namespace Recorder {
 
 //==============================================================================
@@ -344,4 +344,4 @@ void PrintHandler::processRecordImp(const DataRecordHandle* const handle)
 }
 
 } // End Recorder namespace
-} // End Eaagles namespace
+} // End oe namespace

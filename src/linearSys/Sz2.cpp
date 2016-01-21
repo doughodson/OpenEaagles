@@ -2,7 +2,7 @@
 #include "openeaagles/linearSys/Sz2.h"
 #include "openeaagles/basic/Number.h"
 
-namespace Eaagles {
+namespace oe {
 namespace LinearSystem {
 
 //==============================================================================
@@ -168,4 +168,4 @@ std::ostream& Sz2::serialize(std::ostream& sout, const int i, const bool slotsOn
 }
 
 } // End LinearSystem namespace
-} // End Eaagles namespace
+} // End oe namespace

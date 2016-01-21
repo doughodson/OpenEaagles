@@ -26,7 +26,7 @@
 
 #include <cmath>
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 //IMPLEMENT_SUBCLASS(IrSensor,"IrSensor")

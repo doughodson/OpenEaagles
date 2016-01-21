@@ -13,7 +13,7 @@
 #include "openeaagles/basic/units/Times.h"
 #include "openeaagles/basic/units/Frequencies.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Sensor {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Tws,"Tws")
@@ -67,4 +67,4 @@ std::ostream& Tws::serialize(std::ostream& sout, const int i, const bool slotsOn
 }
 
 } // End Sensor namespace
-} // End Eaagles namespace
+} // End oe namespace

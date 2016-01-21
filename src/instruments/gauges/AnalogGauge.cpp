@@ -1,7 +1,7 @@
 #include "openeaagles/instruments/gauges/AnalogGauge.h"
 #include "openeaagles/basic/Number.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Instruments {
 
 IMPLEMENT_SUBCLASS(AnalogGauge, "AnalogGauge")
@@ -186,4 +186,4 @@ Basic::Object* AnalogGauge::getSlotByIndex(const int si)
 }
 
 }  // end Instruments namespace
-}  // end Eaagles namespace
+}  // end oe namespace

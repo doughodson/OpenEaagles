@@ -1,15 +1,15 @@
 //------------------------------------------------------------------------------
 // Class: PrintHandler
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Recorder_PrintHandler_H__
-#define __Eaagles_Recorder_PrintHandler_H__
+#ifndef __oe_Recorder_PrintHandler_H__
+#define __oe_Recorder_PrintHandler_H__
 
 #include "openeaagles/recorder/OutputHandler.h"
 #include <string>
 #include <sstream>
 #include <fstream>
 
-namespace Eaagles {
+namespace oe {
 namespace Recorder {
 
 //------------------------------------------------------------------------------
@@ -76,6 +76,6 @@ private:
 };
 
 } // End Recorder namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

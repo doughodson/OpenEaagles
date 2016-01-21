@@ -13,12 +13,12 @@
 //    Length of a DAFIF Waypoint record.
 //
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Dafif_Waypoint_H__
-#define __Eaagles_Dafif_Waypoint_H__
+#ifndef __oe_Dafif_Waypoint_H__
+#define __oe_Dafif_Waypoint_H__
 
 #include "Record.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Dafif {
 
 class Waypoint : public Record
@@ -40,6 +40,6 @@ private:
 };
 
 } // End Dafif namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

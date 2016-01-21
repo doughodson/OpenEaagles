@@ -15,7 +15,7 @@
 
 #include <string.h>
 
-namespace Eaagles {
+namespace oe {
 
 double osg::asciiToDouble(const char* str)
 {
@@ -132,4 +132,4 @@ double osg::findAsciiToDouble(const char* str)
    return 0.0;
 }
 
-} // End Eaagles namespace
+} // End oe namespace

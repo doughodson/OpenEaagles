@@ -7,7 +7,7 @@
 #include "openeaagles/basicGL/Polygon.h"
 #include "openeaagles/basic/units/Angles.h"
 
-namespace Eaagles {
+namespace oe {
 namespace BasicGL {
 
 IMPLEMENT_SUBCLASS(Scanline,"Scanline")
@@ -861,5 +861,5 @@ void Scanline::Edge::incEdgeStart()
 
 
 } // End BasicGL namespace
-} // End Eaagles namespace
+} // End oe namespace
 

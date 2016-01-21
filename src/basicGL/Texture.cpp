@@ -2,7 +2,7 @@
 #include "openeaagles/basic/Number.h"
 #include "openeaagles/basic/Identifier.h"
 
-namespace Eaagles {
+namespace oe {
 namespace BasicGL {
 
 IMPLEMENT_SUBCLASS(Texture,"Texture")
@@ -481,4 +481,4 @@ Basic::Object* Texture::getSlotByIndex(const int si)
 }
 
 } // End BasicGL namespace
-} // End Eaagles namespace
+} // End oe namespace

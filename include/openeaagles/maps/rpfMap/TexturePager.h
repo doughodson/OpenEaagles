@@ -39,13 +39,13 @@
 //
 // ------------------------------------------------------------------------------
 
-#ifndef __Eaagles_Maps_Rpf_TexturePager_H__
-#define __Eaagles_Maps_Rpf_TexturePager_H__
+#ifndef __oe_Maps_Rpf_TexturePager_H__
+#define __oe_Maps_Rpf_TexturePager_H__
 
 #include "openeaagles/basic/Object.h"
 #include "TextureTable.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic { class List; }
 namespace Maps {
 namespace Rpf {
@@ -93,7 +93,7 @@ private:
 
 } // End Rpf namespace
 } // End Maps namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif
 

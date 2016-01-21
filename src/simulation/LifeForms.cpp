@@ -12,7 +12,7 @@
 
 #include <cmath>
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 //==============================================================================
@@ -327,4 +327,4 @@ EMPTY_COPYDATA(Parachutist)
 EMPTY_DELETEDATA(Parachutist)
 */
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace

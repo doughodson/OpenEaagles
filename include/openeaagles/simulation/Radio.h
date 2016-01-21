@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Classes: Radio, CommRadio
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_Radio_H__
-#define __Eaagles_Simulation_Radio_H__
+#ifndef __oe_Simulation_Radio_H__
+#define __oe_Simulation_Radio_H__
 
 #include "RfSystem.h"
 
-namespace Eaagles {
+namespace oe {
    namespace Basic { class PairStream; }
 
 namespace Simulation {
@@ -176,6 +176,6 @@ private:
 };
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

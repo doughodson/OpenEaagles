@@ -13,7 +13,7 @@
 #include "openeaagles/basic/LatLon.h"
 #include "openeaagles/basic/units/Distances.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 
@@ -1024,4 +1024,4 @@ std::ostream& ActionCamouflageType::serialize(std::ostream& sout, const int i, c
 }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace

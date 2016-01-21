@@ -3,7 +3,7 @@
 #include "openeaagles/basic/Pair.h"
 #include "openeaagles/basic/Number.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Instruments {
 
 IMPLEMENT_SUBCLASS(RotarySwitch,"RotarySwitch")
@@ -131,4 +131,4 @@ Basic::Object* RotarySwitch::getSlotByIndex(const int si)
 }
 
 }  // end Instruments namespace
-}  // end Eaagles namespace
+}  // end oe namespace

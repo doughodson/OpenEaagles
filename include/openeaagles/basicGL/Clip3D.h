@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: Clip3D
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_BasicGL_Clip3D_H__
-#define __Eaagles_BasicGL_Clip3D_H__
+#ifndef __oe_BasicGL_Clip3D_H__
+#define __oe_BasicGL_Clip3D_H__
 
 #include "openeaagles/basic/Object.h"
 #include "Polygon.h"
 
-namespace Eaagles {
+namespace oe {
 namespace BasicGL {
 
 //------------------------------------------------------------------------------
@@ -83,7 +83,7 @@ private:
 };
 
 } // End BasicGL namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 
 #endif

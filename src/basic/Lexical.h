@@ -3,8 +3,8 @@
 //------------------------------------------------------------------------------
 #include <fstream>
 
-#ifndef _Eaagles_Basic_Lexical_H_
-#define _Eaagles_Basic_Lexical_H_
+#ifndef _oe_Basic_Lexical_H_
+#define _oe_Basic_Lexical_H_
 
 #ifndef __FLEX_LEXER_H
 #define yyFlexLexer basicFlexLexer
@@ -12,7 +12,7 @@
 #undef yyFlexLexer
 #endif
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 //------------------------------------------------------------------------------
@@ -41,7 +41,7 @@ private:
 };
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif
 

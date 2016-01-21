@@ -19,7 +19,7 @@
 #include "openeaagles/basic/units/Distances.h"
 #include "openeaagles/basic/units/Times.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 IMPLEMENT_SUBCLASS(Steerpoint,"Steerpoint")
@@ -902,4 +902,4 @@ std::ostream& Steerpoint::serialize(std::ostream& sout, const int i, const bool 
 }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace

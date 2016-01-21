@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: IrisGLCompat
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Instruments_IrisGLCompat_H__
-#define __Eaagles_Instruments_IrisGLCompat_H__
+#ifndef __oe_Instruments_IrisGLCompat_H__
+#define __oe_Instruments_IrisGLCompat_H__
 
 #include "openeaagles/basic/Object.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Instruments {
 
 //------------------------------------------------------------------------------
@@ -38,6 +38,6 @@ private:
 };
 
 } // End Instruments namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

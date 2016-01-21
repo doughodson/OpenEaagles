@@ -2,7 +2,7 @@
 
 #include "openeaagles/basic/IoData.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 //==============================================================================
@@ -121,4 +121,4 @@ void IoData::clear()
 }
 
 } // end Basic
-} // end Eaagles namespace
+} // end oe namespace

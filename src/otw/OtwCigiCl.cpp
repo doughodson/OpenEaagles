@@ -65,7 +65,7 @@
 
 #include <cstdio>
 
-namespace Eaagles {
+namespace oe {
 namespace Otw {
 
 //==============================================================================
@@ -2780,4 +2780,4 @@ void OtwModelCigiCl::clear()
 }
 
 } // End Otw namespace
-} // End Eaagles namespace
+} // End oe namespace

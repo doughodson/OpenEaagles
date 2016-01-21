@@ -2,7 +2,7 @@
 
 #include "openeaagles/basic/Number.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 //==============================================================================
@@ -120,5 +120,5 @@ std::ostream& FuelTank::serialize(std::ostream& sout, const int i, const bool sl
 }
 
 } // end Simulation namespace
-} // end Eaagles namespace
+} // end oe namespace
 

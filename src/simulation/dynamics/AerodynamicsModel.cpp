@@ -2,7 +2,7 @@
 #include "openeaagles/simulation/dynamics/AerodynamicsModel.h"
 #include "openeaagles/basic/units/Angles.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(AerodynamicsModel, "AerodynamicsModel")
@@ -257,4 +257,4 @@ int AerodynamicsModel::getEngThrustAb(LCreal* const, const int) const
 }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace

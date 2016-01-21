@@ -14,7 +14,7 @@
 #include "openeaagles/basic/String.h"
 #include "openeaagles/basic/units/Distances.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 IMPLEMENT_SUBCLASS(Datalink,"Datalink")
@@ -286,12 +286,12 @@ void Datalink::reset()
 void Datalink::dynamics(const LCreal)
 {
     //age queues
-    Eaagles::Basic::Object* tempInQueue[MAX_MESSAGES];
+    oe::Basic::Object* tempInQueue[MAX_MESSAGES];
     int numIn = 0;
-    Eaagles::Simulation::Message* msg = nullptr;
+    oe::Simulation::Message* msg = nullptr;
     while((numIn < MAX_MESSAGES) && inQueue->isNotEmpty()) {
-        Eaagles::Basic::Object* tempObj = inQueue->get();
-        msg = dynamic_cast<Eaagles::Simulation::Message*>(tempObj);
+        oe::Basic::Object* tempObj = inQueue->get();
+        msg = dynamic_cast<oe::Simulation::Message*>(tempObj);
         if(msg != nullptr) {
             if(getComputerTime() - msg->getTimeStamp() > msg->getLifeSpan()) {
                 //remove message by not adding to list to be put back into queue
@@ -311,12 +311,12 @@ void Datalink::dynamics(const LCreal)
         }
     }
 
-    Eaagles::Basic::Object* tempOutQueue[MAX_MESSAGES];
+    oe::Basic::Object* tempOutQueue[MAX_MESSAGES];
     int numOut = 0;
     msg = nullptr;
     while((numOut < MAX_MESSAGES) && outQueue->isNotEmpty()) {
-        Eaagles::Basic::Object* tempObj = outQueue->get();
-        msg = dynamic_cast<Eaagles::Simulation::Message*>(tempObj);
+        oe::Basic::Object* tempObj = outQueue->get();
+        msg = dynamic_cast<oe::Simulation::Message*>(tempObj);
         if(msg != nullptr) {
             if(getComputerTime() - msg->getTimeStamp() > msg->getLifeSpan()) {
                 //remove message by not adding to list to be put back into queue
@@ -571,4 +571,4 @@ std::ostream& Datalink::serialize(std::ostream& sout, const int i, const bool sl
 }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace

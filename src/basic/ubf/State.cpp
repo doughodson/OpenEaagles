@@ -4,7 +4,7 @@
 #include "openeaagles/basic/Pair.h"
 #include "openeaagles/basic/PairStream.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 namespace Ubf {
 
@@ -91,5 +91,5 @@ const State* State::getUbfStateByType(const std::type_info& type) const
 
 } // End Ubf namespace
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace
 

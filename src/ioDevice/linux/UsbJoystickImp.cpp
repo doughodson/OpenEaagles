@@ -1,8 +1,6 @@
 //==============================================================================
 // UsbJoystickImp -- Linux implementation
 //==============================================================================
-
-
 #include <errno.h>
 
 #include <iostream>
@@ -16,10 +14,10 @@
 
 #include "UsbJoystickImp.h"
 
-namespace Eaagles {
+namespace oe {
 namespace IoDevice {
 
-IMPLEMENT_SUBCLASS(UsbJoystickImp,"UsbJoystick")
+IMPLEMENT_SUBCLASS(UsbJoystickImp, "UsbJoystick")
 EMPTY_SLOTTABLE(UsbJoystickImp)
 EMPTY_SERIALIZER(UsbJoystickImp)
 EMPTY_DELETEDATA(UsbJoystickImp)
@@ -180,5 +178,4 @@ void UsbJoystickImp::processInputs(const Eaagles::LCreal dt, Basic::IoData* cons
 }
 
 } // IoDevice namespace
-} // end Eaagles namespace
-
+} // end oe namespace

@@ -3,8 +3,8 @@
 // 
 // (Master event list is eventTokens.h)
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Event_Tokens_EPP__
-#define __Eaagles_Event_Tokens_EPP__
+#ifndef __oe_Event_Tokens_EPP__
+#define __oe_Event_Tokens_EPP__
 
 // ---
 // Key events -- Are passed up to an object's container if not used.

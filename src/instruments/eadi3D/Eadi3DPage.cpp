@@ -10,7 +10,7 @@
 #define RADIUS_140      1.729                   /* 140 in view */
 #define RADIUS_120      1.877                   /* 120 in view */
 
-namespace Eaagles {
+namespace oe {
 namespace Instruments {
 
 static LCreal GROUND[3] = { 0.588235294f, 0.294117647f, 0.0f };
@@ -1100,4 +1100,4 @@ void Eadi3DPage::setLocalizerValid(const bool locValid)
 }
 
 }; // end Instruments namespace
-}; // end Eaagles namespace
+}; // end oe namespace

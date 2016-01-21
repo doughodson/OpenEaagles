@@ -6,7 +6,7 @@
 #include "openeaagles/basic/PairStream.h"
 #include <GL/glu.h>
 
-namespace Eaagles {
+namespace oe {
 namespace BasicGL {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Polygon,"Polygon")
@@ -186,5 +186,5 @@ void Polygon::drawFunc()
 }
 
 } // End BasicGL namespace
-} // End Eaagles namespace
+} // End oe namespace
 

@@ -10,7 +10,7 @@
 
 #include <cstring>
 
-namespace Eaagles {
+namespace oe {
 namespace Otw {
 
 Factory::Factory()

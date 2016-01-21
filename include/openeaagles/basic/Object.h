@@ -1,13 +1,13 @@
 
-#ifndef __Eaagles_Basic_Object_H__
-#define __Eaagles_Basic_Object_H__
+#ifndef __oe_Basic_Object_H__
+#define __oe_Basic_Object_H__
 
 #include "openeaagles/basic/support.h"
 #include "openeaagles/basic/macros.h"
 #include "openeaagles/basic/SlotTable.h"
 #include "openeaagles/basic/safe_ptr.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 //------------------------------------------------------------------------------
@@ -142,7 +142,7 @@ namespace Basic {
 //
 //    Typically an application will build its own application level factory,
 //    which in turn will call the various factory methods for the model libraries and
-//    OpenEaagles libraries that the application requires.  By ordering these factory
+//    Openoe libraries that the application requires.  By ordering these factory
 //    calls at the application level, the factory can search a library containing
 //    a few more specific models prior to searching a library of many generic models,
 //    and if a more specific model exists for a given factory name then it is used,
@@ -168,7 +168,7 @@ namespace Basic {
 //          Static function that returns the form name of class Foo.
 //
 //    (For examples of factory classes, see basic/Factory.cpp, basicGL/Factory.cpp,
-//     simulation/Factory.cpp, as well as the various OpenEaagles examples)
+//     simulation/Factory.cpp, as well as the various Openoe examples)
 //
 //
 // Slots and the Slot table:
@@ -220,7 +220,7 @@ namespace Basic {
 //
 //    A serializer must be written for each derived class, or use EMPTY_SERIALIZER().
 //
-//    Serializes the object to 'sout' in the standard Eaagles Description
+//    Serializes the object to 'sout' in the standard oe Description
 //    Language (EDL) format, which includes the object's factory name and slots.
 //
 //       serialize(ostream& sout)
@@ -284,13 +284,13 @@ namespace Basic {
 //       (See macro STANDARD_CONSTRUCTOR())
 //
 //
-// Table of known OpenEaagles classes and object counters
+// Table of known Openoe classes and object counters
 //
-//    A list of 'known' OpenEaagles classes is maintained as a table of pointers
-//    to the _Static structure, which is contained in each OpenEaagles class.  The
+//    A list of 'known' Openoe classes is maintained as a table of pointers
+//    to the _Static structure, which is contained in each Openoe class.  The
 //    table is a private, static member variable.  The various IMPLEMENT_SUBCLASS
 //    macros register the class using the registerClass() function; therefore all
-//    OpenEaagles classes implemented in an application are known.
+//    Openoe classes implemented in an application are known.
 //
 //    The STANDARD_CONSTRUCTOR() and STANDARD_DESTRUCTOR() macros increment and
 //    decrement, respectively, a counter located in each class _Static structure.
@@ -299,7 +299,7 @@ namespace Basic {
 //    instantiated objects, is also maintained.
 //
 //       writeClassList(std::ostream& sout)
-//          Writes the table of known OpenEaagles classes, which includes the
+//          Writes the table of known Openoe classes, which includes the
 //          form name, object counters and full C++ class name for each class,
 //          to the 'sout' output stream.
 //
@@ -380,7 +380,7 @@ public:
    // ref(), unref() and getRefCount()
    #include "openeaagles/basic/refCount.h"
 
-   // Output the list of known Eaagles classes
+   // Output the list of known oe classes
    static void writeClassList(std::ostream& sout);
 
    // ---
@@ -437,7 +437,7 @@ private:
 };
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif
 

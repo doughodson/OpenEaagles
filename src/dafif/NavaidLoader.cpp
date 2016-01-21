@@ -4,7 +4,7 @@
 #include <cstring>
 #include <cstdlib>
 
-namespace Eaagles {
+namespace oe {
 namespace Dafif {
 
 IMPLEMENT_SUBCLASS(NavaidLoader,"NavaidLoader")
@@ -485,4 +485,4 @@ NavaidLoader::NavaidKey::~NavaidKey()
 }
 
 } // End Dafif namespace
-} // End Eaagles namespace
+} // End oe namespace

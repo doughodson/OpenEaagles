@@ -17,7 +17,7 @@
 #include "./Vec2f"
 #include "./Math"
 
-namespace Eaagles {
+namespace oe {
 namespace osg {
 
 /** General purpose float triple for use as vertices, vectors and normals.
@@ -220,7 +220,7 @@ const Vec3f Y_AXIS(0.0,1.0,0.0);
 const Vec3f Z_AXIS(0.0,0.0,1.0);
 
 }    // end of namespace osg
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif
 

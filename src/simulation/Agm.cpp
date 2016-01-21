@@ -2,7 +2,7 @@
 #include "openeaagles/simulation/Agm.h"
 #include "openeaagles/simulation/Track.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 //==============================================================================
@@ -81,4 +81,4 @@ bool Agm::calculateVectors(const Player* const tgt, const Track* const trk, osg:
 }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace

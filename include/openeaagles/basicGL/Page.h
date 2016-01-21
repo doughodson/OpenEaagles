@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: Page
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_BasicGL_Page_H__
-#define __Eaagles_BasicGL_Page_H__
+#ifndef __oe_BasicGL_Page_H__
+#define __oe_BasicGL_Page_H__
 
 #include "Graphic.h"
 #include "openeaagles/basic/Identifier.h"
 
-namespace Eaagles {
+namespace oe {
 namespace BasicGL {
 
 //------------------------------------------------------------------------------
@@ -178,6 +178,6 @@ private:
 };
 
 } // End BasicGL namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

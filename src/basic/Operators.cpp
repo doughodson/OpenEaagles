@@ -3,7 +3,7 @@
 //------------------------------------------------------------------------------
 #include "openeaagles/basic/Operators.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 IMPLEMENT_SUBCLASS(Add,"+")
@@ -203,4 +203,4 @@ bool Add::setSecondNumber(const Number* const ssnobj)
 }
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace

@@ -5,7 +5,7 @@
 #include "openeaagles/basic/Pair.h"
 #include "openeaagles/basic/String.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 IMPLEMENT_SUBCLASS(Iff,"Iff")
@@ -301,4 +301,4 @@ Basic::Object* Iff::getSlotByIndex(const int si)
 }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace

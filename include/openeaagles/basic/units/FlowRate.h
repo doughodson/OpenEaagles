@@ -1,14 +1,14 @@
 //------------------------------------------------------------------------------
 // Class: FlowRate
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_FlowRate_H__
-#define __Eaagles_Basic_FlowRate_H__
+#ifndef __oe_Basic_FlowRate_H__
+#define __oe_Basic_FlowRate_H__
 
 #include "openeaagles/basic/Number.h"
 #include "Volumes.h"
 #include "Times.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 //------------------------------------------------------------------------------
 // Classes: FlowRate
@@ -66,6 +66,6 @@ private:
 };
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

@@ -2,7 +2,7 @@
 
 #include "openeaagles/simulation/Pilot.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 IMPLEMENT_SUBCLASS(Pilot,"Pilot")
@@ -13,4 +13,4 @@ EMPTY_DELETEDATA(Pilot)
 EMPTY_SERIALIZER(Pilot)
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace

@@ -35,7 +35,7 @@
 
 #include <cstdio>
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 IMPLEMENT_SUBCLASS(TcpServerMultiple, "TcpServerMultiple")
@@ -222,5 +222,5 @@ std::ostream& TcpServerMultiple::serialize(std::ostream& sout, const int i, cons
 }
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace
 

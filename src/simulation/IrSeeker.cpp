@@ -24,7 +24,7 @@
 //
 // Owning player must have an OnboardComputer,which contains a TrackManager.
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 //==============================================================================
@@ -566,5 +566,5 @@ bool TdbIr::horizonCheck(const osg::Vec3& position1, const osg::Vec3& position2)
 #endif
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 

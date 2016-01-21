@@ -4,7 +4,7 @@
 #include "openeaagles/basic/List.h"
 #include "openeaagles/basic/functors/Tables.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 //==============================================================================
@@ -118,4 +118,4 @@ std::ostream& Function::serialize(std::ostream& sout, const int i, const bool sl
 }
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace

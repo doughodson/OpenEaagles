@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Windows Visual Studio unique stuff
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Windows_Support0_H__
-#define __Eaagles_Windows_Support0_H__
+#ifndef __oe_Windows_Support0_H__
+#define __oe_Windows_Support0_H__
 
 #include <winsock2.h>
 #include <ERRNO.H>
@@ -37,14 +37,14 @@
   #include <cfloat>
 #endif
 
-namespace Eaagles {
+namespace oe {
 
 typedef LONGLONG  Integer64;
 typedef ULONGLONG LCuint64;
 
 
 
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif
 

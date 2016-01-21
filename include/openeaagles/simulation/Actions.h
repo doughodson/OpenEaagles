@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Actions -- Things to do.
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_Action_H__
-#define __Eaagles_Simulation_Action_H__
+#ifndef __oe_Simulation_Action_H__
+#define __oe_Simulation_Action_H__
 
 #include "openeaagles/basic/ubf/Action.h"
 
-namespace Eaagles {
+namespace oe {
 
    namespace Basic { class Distance; class LatLon; class Number; }
 
@@ -245,6 +245,6 @@ private:
 };
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

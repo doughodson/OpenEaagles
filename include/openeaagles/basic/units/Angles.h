@@ -44,14 +44,14 @@
 //        instance into the units of a specific Angle derived class.
 //
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_Angles_H__
-#define __Eaagles_Basic_Angles_H__
+#ifndef __oe_Basic_Angles_H__
+#define __oe_Basic_Angles_H__
 
 #include "openeaagles/basic/Number.h"
 
 #include <cmath>
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 // -----------------------------------------------------------------------------
@@ -240,7 +240,7 @@ public:
 };
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif
 

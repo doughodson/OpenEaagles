@@ -6,7 +6,7 @@
 
 #include "openeaagles/basic/Object.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 Basic::Object* simulationFormFunc(const char* name)
@@ -22,5 +22,5 @@ Basic::Object* simulationFormFunc(const char* name)
 }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 

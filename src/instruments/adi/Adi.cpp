@@ -1,6 +1,6 @@
 #include "openeaagles/instruments/adi/Adi.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Instruments {
 
 IMPLEMENT_SUBCLASS(Adi, "Adi")
@@ -202,4 +202,4 @@ Basic::Object* Adi::getSlotByIndex(const int si)
 }
 
 }; // end of Instruments namespace
-}; // end of Eaagles namespace
+}; // end of oe namespace

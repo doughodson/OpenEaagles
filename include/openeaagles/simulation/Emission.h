@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: Emission
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_Emission_H__
-#define __Eaagles_Simulation_Emission_H__
+#ifndef __oe_Simulation_Emission_H__
+#define __oe_Simulation_Emission_H__
 
 #include "openeaagles/simulation/SensorMsg.h"
 #include "openeaagles/simulation/Antenna.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
    class RfSystem;
 
@@ -164,6 +164,6 @@ private:
 };
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

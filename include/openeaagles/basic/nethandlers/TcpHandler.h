@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: TcpHandler
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_TcpHandler_H__
-#define __Eaagles_Basic_TcpHandler_H__
+#ifndef __oe_Basic_TcpHandler_H__
+#define __oe_Basic_TcpHandler_H__
 
 #include "openeaagles/basic/nethandlers/PosixHandler.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 class String;
@@ -45,7 +45,7 @@ protected:
 };
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif
 

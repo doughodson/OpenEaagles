@@ -17,7 +17,7 @@
 
 #include <cmath>
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 //==============================================================================
@@ -1097,4 +1097,4 @@ void AirAngleOnlyTrkMgrPT::processTrackList(const LCreal dt)
 }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace

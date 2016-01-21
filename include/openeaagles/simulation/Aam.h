@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: Aam
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_Aam_H__
-#define __Eaagles_Simulation_Aam_H__
+#ifndef __oe_Simulation_Aam_H__
+#define __oe_Simulation_Aam_H__
 
 #include "openeaagles/simulation/Missile.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 //------------------------------------------------------------------------------
@@ -31,6 +31,6 @@ public:
 };
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

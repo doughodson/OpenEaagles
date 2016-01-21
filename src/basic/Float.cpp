@@ -3,7 +3,7 @@
 //------------------------------------------------------------------------------
 #include "openeaagles/basic/Float.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Float,"float")
@@ -26,4 +26,4 @@ std::ostream& Float::serialize(std::ostream& sout, const int, const bool) const
 }
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace

@@ -8,7 +8,7 @@
 
 #include <cstring>
 
-namespace Eaagles {
+namespace oe {
 namespace Maps {
 namespace Rpf {
 
@@ -397,5 +397,5 @@ int CadrgFrame::decompressSubframe(int x, int y, Subframe& subFrame)
 
 }  // End Rpf namespace
 }  // End Maps namespace
-}  // End Eaagles namespace
+}  // End oe namespace
 

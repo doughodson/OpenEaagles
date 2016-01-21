@@ -1,10 +1,10 @@
 
-#ifndef __Eaagles_IoDevice_UsbJoystick_H__
-#define __Eaagles_IoDevice_UsbJoystick_H__
+#ifndef __oe_IoDevice_UsbJoystick_H__
+#define __oe_IoDevice_UsbJoystick_H__
 
 #include "openeaagles/basic/IoDevice.h"
 
-namespace Eaagles {
+namespace oe {
 
 namespace Basic { class Number; }
 
@@ -79,6 +79,6 @@ private:
 };
 
 } // end IoDevice
-} // end Eaagles namespace
+} // end oe namespace
 
 #endif

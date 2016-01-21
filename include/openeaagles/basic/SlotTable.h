@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: SlotTable
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_SlotTable_H__
-#define __Eaagles_Basic_SlotTable_H__
+#ifndef __oe_Basic_SlotTable_H__
+#define __oe_Basic_SlotTable_H__
 
 #include <iostream>
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 //------------------------------------------------------------------------------
@@ -55,7 +55,7 @@ private:
 };
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif
 

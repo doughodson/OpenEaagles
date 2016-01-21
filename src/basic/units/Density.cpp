@@ -1,7 +1,7 @@
 #include "openeaagles/basic/units/Density.h"
 #include "openeaagles/basic/SlotTable.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 //==============================================================================
@@ -181,5 +181,5 @@ std::ostream& Density::serialize(std::ostream& sout, const int i, const bool slo
 }
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace
 

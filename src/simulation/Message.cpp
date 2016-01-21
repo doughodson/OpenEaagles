@@ -1,7 +1,7 @@
 
 #include "openeaagles/simulation/Message.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 IMPLEMENT_SUBCLASS(Message,"Message")
@@ -126,5 +126,5 @@ void Message::clearDestNames()
 }
 
 } //End simulation Namespace
-} //End Eaagles Namespace
+} //End oe Namespace
 

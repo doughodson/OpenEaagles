@@ -9,7 +9,7 @@
 
 #include <cstring>
 
-namespace Eaagles {
+namespace oe {
 namespace Maps {
 namespace Rpf {
 
@@ -362,5 +362,5 @@ const CadrgClut::Rgb& CadrgClut::getColor(unsigned int index) const {
 
 } // end Rpf namespace
 } // end Maps namespace
-} // end Eaagles namespace
+} // end oe namespace
 

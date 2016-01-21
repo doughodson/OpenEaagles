@@ -99,13 +99,13 @@
 //       Prints the records in the ICAO sorted list
 //
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Dafif_Database_H__
-#define __Eaagles_Dafif_Database_H__
+#ifndef __oe_Dafif_Database_H__
+#define __oe_Dafif_Database_H__
 
 #include "openeaagles/basic/Object.h"
 #include "dafifc.h"
 
-namespace Eaagles {
+namespace oe {
    namespace Basic {
       class FileReader;
       class String;
@@ -231,6 +231,6 @@ protected:
 };
 
 } // End Dafif namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

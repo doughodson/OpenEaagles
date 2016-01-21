@@ -14,7 +14,7 @@
 #include "openeaagles/basic/units/Angles.h"
 #include "openeaagles/basic/units/Distances.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(Terrain,"TerrainDatabase")
@@ -786,4 +786,4 @@ std::ostream& Terrain::serialize(std::ostream& sout, const int i, const bool slo
 }
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace

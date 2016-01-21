@@ -1,10 +1,10 @@
 
 #include "openeaagles/basic/support.h"
 
-#ifndef __Eaagles_Basic_safe_ptr_H__
-#define __Eaagles_Basic_safe_ptr_H__
+#ifndef __oe_Basic_safe_ptr_H__
+#define __oe_Basic_safe_ptr_H__
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 //------------------------------------------------------------------------------

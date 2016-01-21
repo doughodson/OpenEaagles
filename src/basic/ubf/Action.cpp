@@ -4,7 +4,7 @@
 
 #include "openeaagles/basic/ubf/Action.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 namespace Ubf {
 
@@ -27,5 +27,5 @@ void Action::copyData(const Action& org, const bool cc)
 
 } // End Ubf namespace
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace
 

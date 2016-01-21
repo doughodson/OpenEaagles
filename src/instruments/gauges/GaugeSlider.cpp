@@ -1,6 +1,6 @@
 #include "openeaagles/instruments/gauges/GaugeSlider.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Instruments {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(GaugeSlider, "GaugeSlider")
@@ -48,4 +48,4 @@ void GaugeSlider::draw()
 }
 
 }  // end Instruments namespace
-}  // end Eaagles namespace
+}  // end oe namespace

@@ -3,14 +3,14 @@
 //          LatitudeReadout, LongitudeReadout, DirectionReadout, Rotary, Rotary2,
 //          Cursor
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_BasicGL_Readouts_H__
-#define __Eaagles_BasicGL_Readouts_H__
+#ifndef __oe_BasicGL_Readouts_H__
+#define __oe_BasicGL_Readouts_H__
 
 #include "Field.h"
 #include "openeaagles/basic/Number.h"
 #include "openeaagles/basic/Integer.h"
 
-namespace Eaagles {
+namespace oe {
    namespace Basic { class Float; class Integer; }
 namespace BasicGL {
    class Reformat;
@@ -436,6 +436,6 @@ public:
 };
 
 } // End BasicGL namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

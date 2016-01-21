@@ -6,7 +6,7 @@
 
 #include "openeaagles/basic/Object.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Instruments {
 
 Basic::Object* instrumentsFormFunc(const char* name)
@@ -22,4 +22,4 @@ Basic::Object* instrumentsFormFunc(const char* name)
 }
 
 }; // end of Instruments namespace  
-}; // end of Eaagles namespace
+}; // end of oe namespace

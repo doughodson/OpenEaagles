@@ -28,7 +28,7 @@
 
 #include <cstring>
 
-namespace Eaagles {
+namespace oe {
 namespace BasicGL {
 
 Factory::Factory()

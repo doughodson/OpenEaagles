@@ -16,7 +16,7 @@
 
 #include "./Vec2f"
 
-namespace Eaagles {
+namespace oe {
 namespace osg {
 
 /** General purpose double pair, uses include representation of
@@ -191,5 +191,5 @@ inline Vec2d componentDivide(const Vec2d& lhs, const Vec2d& rhs)
 }
 
 }    // end of namespace osg
-} // End Eaagles namespace
+} // End oe namespace
 #endif

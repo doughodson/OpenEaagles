@@ -1,10 +1,10 @@
 
-#ifndef __Eaagles_Basic_lfi_H__
-#define __Eaagles_Basic_lfi_H__
+#ifndef __oe_Basic_lfi_H__
+#define __oe_Basic_lfi_H__
 
 #include "openeaagles/basic/support.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 namespace lfi {
 

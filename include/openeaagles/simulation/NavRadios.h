@@ -3,12 +3,12 @@
 //
 // The NAV radios are being updated and are not current fully functional!!!
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_NavRadio_H__
-#define __Eaagles_Simulation_NavRadio_H__
+#ifndef __oe_Simulation_NavRadio_H__
+#define __oe_Simulation_NavRadio_H__
 
 #include "openeaagles/simulation/Radio.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Dafif { class AirportLoader; class NavaidLoader; }
 
 namespace Simulation {
@@ -152,6 +152,6 @@ private:
 };
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

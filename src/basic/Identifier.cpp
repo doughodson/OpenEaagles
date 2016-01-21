@@ -2,7 +2,7 @@
 #include "openeaagles/basic/Identifier.h"
 #include <cstring>
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 IMPLEMENT_SUBCLASS(Identifier,"Identifier")
@@ -99,4 +99,4 @@ std::ostream& Identifier::serialize(std::ostream& sout, const int, const bool) c
 }
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace

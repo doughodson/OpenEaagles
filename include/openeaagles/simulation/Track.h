@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Classes: Track, RfTrack, IrTrack
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_Track_H__
-#define __Eaagles_Simulation_Track_H__
+#ifndef __oe_Simulation_Track_H__
+#define __oe_Simulation_Track_H__
 
 #include "openeaagles/basic/Object.h"
 
@@ -11,7 +11,7 @@
 #include "openeaagles/basic/units/Angles.h"
 #include "openeaagles/basic/units/Distances.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 class Emission;
@@ -339,7 +339,7 @@ protected:
 };
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif
 

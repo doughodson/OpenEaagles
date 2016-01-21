@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: EarthModel
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_EarthModel_H__
-#define __Eaagles_Basic_EarthModel_H__
+#ifndef __oe_Basic_EarthModel_H__
+#define __oe_Basic_EarthModel_H__
 
 #include "openeaagles/basic/Object.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
    class Distance;
    class Number;
@@ -98,6 +98,6 @@ inline double EarthModel::getF() const  { return f; }
 inline double EarthModel::getE2() const { return e2; }
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

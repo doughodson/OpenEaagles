@@ -4,7 +4,7 @@
 
 #include "openeaagles/simulation/SynchronizedState.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 //==============================================================================
@@ -104,5 +104,5 @@ bool SynchronizedState::setAngularVelocities(const osg::Vec3d& newAngVel)
 }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 

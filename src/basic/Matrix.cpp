@@ -6,7 +6,7 @@
 #include <iostream>
 #include <iomanip>
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 //==============================================================================
@@ -1468,4 +1468,4 @@ bool Matrix::getTriDiagonal(Matrix* const pA) const
 
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace

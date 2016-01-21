@@ -54,7 +54,7 @@
 
 #include <cstring>
 
-namespace Eaagles {
+namespace oe {
 namespace Instruments {
 
 Factory::Factory()

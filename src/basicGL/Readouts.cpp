@@ -18,7 +18,7 @@
 # pragma warning(disable: 4996)
 #endif
 
-namespace Eaagles {
+namespace oe {
 namespace BasicGL {
 
 //==============================================================================
@@ -1560,4 +1560,4 @@ bool Rotary2::onSelect(const Basic::Number* const osobj)
 }
 
 } // End BasicGL namespace
-} // End Eaagles namespace
+} // End oe namespace

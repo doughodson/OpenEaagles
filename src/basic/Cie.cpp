@@ -8,7 +8,7 @@
 #include "openeaagles/basic/functors/Tables.h"
 #include <cstdio>
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 IMPLEMENT_SUBCLASS(Cie,"cie")
@@ -413,4 +413,4 @@ Object* MonitorMetrics::getSlotByIndex(const int si)
 }
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace

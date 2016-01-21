@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: NavDR
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_NavDR_H__
-#define __Eaagles_Basic_NavDR_H__
+#ifndef __oe_Basic_NavDR_H__
+#define __oe_Basic_NavDR_H__
 
 #include "openeaagles/basic/support.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 //------------------------------------------------------------------------------

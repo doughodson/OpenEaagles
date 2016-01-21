@@ -19,7 +19,7 @@
 #include "openeaagles/simulation/DataRecorder.h"
 #include "openeaagles/simulation/Simulation.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 //==============================================================================
@@ -1767,4 +1767,4 @@ void RwrTrkMgr::processTrackList(const LCreal dt)
 }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace

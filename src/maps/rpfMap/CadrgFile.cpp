@@ -10,7 +10,7 @@
 
 //#define PRINT_MAP_LOCATIONS
 
-namespace Eaagles {
+namespace oe {
 namespace Maps {
 namespace Rpf {
 
@@ -691,5 +691,5 @@ const char* CadrgFile::getDirectory()
 
 } // End Rpf namespace
 } // End Maps namespace
-} // End Eaagles namespace
+} // End oe namespace
 

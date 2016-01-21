@@ -64,12 +64,12 @@
 //
 //------------------------------------------------------------------------------
 
-#ifndef __Eaagles_Energies_H__
-#define __Eaagles_Energies_H__
+#ifndef __oe_Energies_H__
+#define __oe_Energies_H__
 
 #include "openeaagles/basic/Number.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 // ----------------------------------------------------------------------------
@@ -241,6 +241,6 @@ public:
 };
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: Datalink
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_Datalink_H__
-#define __Eaagles_Simulation_Datalink_H__
+#ifndef __oe_Simulation_Datalink_H__
+#define __oe_Simulation_Datalink_H__
 
 #include "openeaagles/simulation/System.h"
 #include "openeaagles/basic/safe_queue.h"
 
-namespace Eaagles {
+namespace oe {
    namespace Basic { class Distance; class Number; class String; }
 
 namespace Simulation {
@@ -120,6 +120,6 @@ private:
 };
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

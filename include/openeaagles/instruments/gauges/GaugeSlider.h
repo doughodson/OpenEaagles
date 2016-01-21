@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: GaugeSlider
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Instruments_GuageSlider_H__
-#define __Eaagles_Instruments_GuageSlider_H__
+#ifndef __oe_Instruments_GuageSlider_H__
+#define __oe_Instruments_GuageSlider_H__
 
 #include "openeaagles/instruments/gauges/AnalogGauge.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Instruments {
 
 //------------------------------------------------------------------------------
@@ -29,6 +29,6 @@ private:
 };
 
 }  // end Instruments namespace
-}  // end Eaagles namespace
+}  // end oe namespace
 
 #endif

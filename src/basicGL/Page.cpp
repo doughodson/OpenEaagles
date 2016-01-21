@@ -7,7 +7,7 @@
 #include "openeaagles/basic/Number.h"
 #include "openeaagles/basic/Pair.h"
 
-namespace Eaagles {
+namespace oe {
 namespace BasicGL {
 
 IMPLEMENT_SUBCLASS(Page,"Page")
@@ -614,4 +614,4 @@ std::ostream& Page::serialize(std::ostream& sout, const int i, const bool slotsO
 }
 
 } // End BasicGL namespace
-} // End Eaagles namespace
+} // End oe namespace

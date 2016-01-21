@@ -14,7 +14,7 @@
 #include "openeaagles/basic/units/Powers.h"
 #include "openeaagles/basic/units/Frequencies.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 IMPLEMENT_SUBCLASS(RfSystem,"RfSystem")
@@ -920,4 +920,4 @@ std::ostream& RfSystem::serialize(std::ostream& sout, const int i, const bool sl
 }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace

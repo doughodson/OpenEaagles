@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Classes: NetIO
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_NetIO_H__
-#define __Eaagles_Simulation_NetIO_H__
+#ifndef __oe_Simulation_NetIO_H__
+#define __oe_Simulation_NetIO_H__
 
 #include "openeaagles/basic/Component.h"
 #include "openeaagles/simulation/Player.h"
 
-namespace Eaagles {
+namespace oe {
    namespace Basic { class Angle; class Distance; class Identifier; class List;
                      class String; class Time;
    }
@@ -37,10 +37,10 @@ namespace Simulation {
 //    timeline             (Basic::Identifier)  ! Source of the time line { UTC or EXEC } (default: UTC)
 //
 //    inputEntityTypes     (Basic::PairSteam)   ! Incoming entity type mappers (default: 0)
-//                                              !   (Ntm objects that map incoming entity types to Eaagles player types)
+//                                              !   (Ntm objects that map incoming entity types to oe player types)
 //
 //    outputEntityTypes    (Basic::PairSteam)   ! Outgoing entity type mappers (default: 0)
-//                                              !   (Ntm objects that map Eaagles player types to outgoing entity types)
+//                                              !   (Ntm objects that map oe player types to outgoing entity types)
 //
 //    maxTimeDR            (Basic::Time)        ! Max DR time (default: 5 seconds)
 //    maxPositionError     (Basic::Distance)    ! Max DR position error (default: 3 meters)
@@ -53,7 +53,7 @@ namespace Simulation {
 //
 // NetIO class objects:
 //
-//    An Eaagles application, which is typically controlled by a Station class
+//    An oe application, which is typically controlled by a Station class
 //    object, can have multiple (i.e., MAX_NETWORD_ID) NetIO objects.  Each NetIO
 //    object handles a different interoperabiltiy network
 //
@@ -71,7 +71,7 @@ namespace Simulation {
 //    on the interoperability network.
 //
 //    As incoming entities are discovered, their entity type codes are mapped
-//    to Eaagles player types using Network Type Mapping (Ntm) objects.  These
+//    to oe player types using Network Type Mapping (Ntm) objects.  These
 //    Ntm objects are listed in the "incoming entity type mapper" list, which
 //    is set using the 'inputEntityTypes' slot.  An entity is ignored if its
 //    entity type does not match any of the Ntm objects on the incoming list.
@@ -83,7 +83,7 @@ namespace Simulation {
 //
 //    A network specific Network Interface Block (Nib) is created, using the
 //    nibFactory() function, to manage the flow of data from the network entity
-//    to the Eaagles player.  The incoming Nib objects are managed using the
+//    to the oe player.  The incoming Nib objects are managed using the
 //    "input Nib" list.
 //
 //    The incoming surrogate players contain the ID of the NetIO object that
@@ -99,7 +99,7 @@ namespace Simulation {
 //    Use the 'enableOutput' slot to enable or disable the sending of our
 //    application's local players to this interoperability network.
 //
-//    As local Eaagles players are discovered by this class, their player
+//    As local oe players are discovered by this class, their player
 //    types are mapped to network entity type codes using the Ntm obects that
 //    are listed in the "outgoing entity type mapper" list, which is set using
 //    the "outputEntityTypes" slot.  A local player is not sent to the network
@@ -108,12 +108,12 @@ namespace Simulation {
 //    to the network)
 //
 //    A network specific Nib is created, using the nibFactory() function, to
-//    manage the flow of data from the Eaagles player to the network entity.
+//    manage the flow of data from the oe player to the network entity.
 //    The outgoing Nib objects are managed using the "output Nib" list.
 //
-//    The Eaagles player objects do not contain any state data related to the
+//    The oe player objects do not contain any state data related to the
 //    interoperability networks that their being sent to.  As a result, an
-//    Eaagles player can be sent to more than one interoperability network,
+//    oe player can be sent to more than one interoperability network,
 //    and the 'enableRelay' slot can be used to enable the relaying of Eaagles
 //    players that were discovered from other interoperability networks.
 //
@@ -483,6 +483,6 @@ private:  // Ntm related private
 
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

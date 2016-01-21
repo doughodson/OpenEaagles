@@ -9,7 +9,7 @@
 #include <GL/glut.h>
 #include <GL/glu.h>
 
-namespace Eaagles {
+namespace oe {
 namespace Glut {
 
 IMPLEMENT_SUBCLASS(Sphere,"Sphere")
@@ -441,4 +441,4 @@ Basic::Object* Torus::getSlotByIndex(const int si)
 }
 
 } // End Glut namespace
-} // End Eaagles namespace
+} // End oe namespace

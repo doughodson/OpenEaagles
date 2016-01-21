@@ -1,6 +1,6 @@
 
-#ifndef __Eaagles_BasicGL_Graphic_H__
-#define __Eaagles_BasicGL_Graphic_H__
+#ifndef __oe_BasicGL_Graphic_H__
+#define __oe_BasicGL_Graphic_H__
 
 #include "openeaagles/basic/Component.h"
 #include "openeaagles/basic/osg/Vec2"
@@ -9,7 +9,7 @@
 #include "openeaagles/basic/osg/Matrix"
 #include <GL/gl.h>
 
-namespace Eaagles {
+namespace oe {
 
    namespace Basic {
       class Color;
@@ -554,6 +554,6 @@ inline void Graphic::lcTranslate(const LCreal x, const LCreal y, const LCreal z)
 }
 
 } // End BasicGL namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

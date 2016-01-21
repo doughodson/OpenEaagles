@@ -14,7 +14,7 @@
 #include "openeaagles/basic/Integer.h"
 #include "openeaagles/basic/Float.h"
 
-namespace Eaagles {
+namespace oe {
 namespace BasicGL {
 
 IMPLEMENT_SUBCLASS(Graphic,"Graphic")
@@ -1594,4 +1594,4 @@ std::ostream& Graphic::serialize(std::ostream& sout, const int i, const bool slo
 }
 
 } // End BasicGL namespace
-} // End Eaagles namespace
+} // End oe namespace

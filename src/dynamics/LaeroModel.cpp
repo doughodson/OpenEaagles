@@ -22,7 +22,7 @@
 #include <iomanip>
 #include <cmath>
 
-namespace Eaagles {
+namespace oe {
 namespace Dynamics {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(LaeroModel,"LaeroModel")
@@ -548,7 +548,7 @@ bool LaeroModel::setCommandedHeadingD(const double h, const double hDps, const d
       //-------------------------------------------------------
       // get absolute heading rate of change (hdgDotAbsDps)
       //-------------------------------------------------------
-      double hdgDotMaxAbsRps = Eaagles::ETHGM * std::tan(MAX_BANK_RAD) / velMps;
+      double hdgDotMaxAbsRps = oe::ETHGM * std::tan(MAX_BANK_RAD) / velMps;
       double hdgDotMaxAbsDps = hdgDotMaxAbsRps * Basic::Angle::R2DCC;
 
       double hdgDotAbsDps = hDps;
@@ -570,7 +570,7 @@ bool LaeroModel::setCommandedHeadingD(const double h, const double hDps, const d
       //-------------------------------------------------------
       // define bank angle as a function of turn rate
       //-------------------------------------------------------
-      double phiCmdDeg = std::atan2(psiDot * velMps, Eaagles::ETHGM) * Basic::Angle::R2DCC;
+      double phiCmdDeg = std::atan2(psiDot * velMps, oe::ETHGM) * Basic::Angle::R2DCC;
       ok = flyPhi(phiCmdDeg);
    }
 

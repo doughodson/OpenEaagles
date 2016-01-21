@@ -17,7 +17,7 @@
 #include "./Vec3d"
 #include "./Vec4f"
 
-namespace Eaagles {
+namespace oe {
 namespace osg {
 
 /** General purpose double quad. Uses include representation
@@ -296,6 +296,6 @@ inline Vec4d componentDivide(const Vec4d& lhs, const Vec4d& rhs)
 }
 
 }    // end of namespace osg
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

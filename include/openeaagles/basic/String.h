@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: String
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_String_H__
-#define __Eaagles_Basic_String_H__
+#ifndef __oe_Basic_String_H__
+#define __oe_Basic_String_H__
 
 #include "openeaagles/basic/Object.h"
 
@@ -10,7 +10,7 @@
 #include <cctype>
 #include <cstring>
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 //------------------------------------------------------------------------------
@@ -455,6 +455,6 @@ inline std::istream& operator>>(std::istream& sin, String& s)
 }
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

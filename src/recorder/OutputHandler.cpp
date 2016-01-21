@@ -6,7 +6,7 @@
 #include "openeaagles/basic/Pair.h"
 #include "openeaagles/basic/PairStream.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Recorder {
 
 //==============================================================================
@@ -178,4 +178,4 @@ void OutputHandler::processComponents(
 }
 
 } // End Recorder namespace
-} // End Eaagles namespace
+} // End oe namespace

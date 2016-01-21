@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: Translator
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_BasicGL_Translator_H__
-#define __Eaagles_BasicGL_Translator_H__
+#ifndef __oe_BasicGL_Translator_H__
+#define __oe_BasicGL_Translator_H__
 
 #include "Graphic.h"
 
-namespace Eaagles {
+namespace oe {
    namespace Basic { class Number; }
 namespace BasicGL {
 
@@ -52,6 +52,6 @@ private:
 };
 
 } // End BasicGL namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

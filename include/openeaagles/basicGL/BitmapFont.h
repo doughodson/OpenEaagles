@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: BitmapFont
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_BasicGL_BitmapFont_H__
-#define __Eaagles_BasicGL_BitmapFont_H__
+#ifndef __oe_BasicGL_BitmapFont_H__
+#define __oe_BasicGL_BitmapFont_H__
 
 #include "Font.h"
 
-namespace Eaagles {
+namespace oe {
 
 namespace Basic { class Number; }
 
@@ -67,6 +67,6 @@ private:
 };
 
 } // End BasicGL namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

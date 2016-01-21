@@ -1,8 +1,8 @@
 //----------------------------------------------------------------------------------------------------------------------------------
 // Class: FtglFonts, FtglBitmapFont, FtglExtrdFont, FtglOutlineFont, FtglPixmapFont, FtglPolygonFont, FtglTextureFont
 //----------------------------------------------------------------------------------------------------------------------------------
-#ifndef __Eaagles_BasicGL_FtglFont_H__
-#define __Eaagles_BasicGL_FtglFont_H__
+#ifndef __oe_BasicGL_FtglFont_H__
+#define __oe_BasicGL_FtglFont_H__
 
 #include "Font.h"
 
@@ -14,7 +14,7 @@ class FTGLOutlineFont;
 #include <FTGL/ftgl.h>
 #endif
 
-namespace Eaagles {
+namespace oe {
 namespace Basic { class Color; }
 namespace BasicGL {
 
@@ -308,6 +308,6 @@ public:
 };
 
 } // End BasicGL namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

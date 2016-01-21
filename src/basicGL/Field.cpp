@@ -11,7 +11,7 @@
 #include "openeaagles/basic/Pair.h"
 #include "openeaagles/basic/PairStream.h"
 
-namespace Eaagles {
+namespace oe {
 namespace BasicGL {
 
 IMPLEMENT_SUBCLASS(Field,"Field")
@@ -899,4 +899,4 @@ std::ostream& Field::serialize(std::ostream& sout, const int i, const bool slots
 }
 
 } // End BasicGL namespace
-} // End Eaagles namespace
+} // End oe namespace

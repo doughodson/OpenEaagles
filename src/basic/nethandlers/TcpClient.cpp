@@ -33,7 +33,7 @@
 #include "openeaagles/basic/String.h"
 #include <cstring>
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 IMPLEMENT_SUBCLASS(TcpClient, "TcpClient")
@@ -234,5 +234,5 @@ std::ostream& TcpClient::serialize(std::ostream& sout, const int i, const bool s
 }
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace
 

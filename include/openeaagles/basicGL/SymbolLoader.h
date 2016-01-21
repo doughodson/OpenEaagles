@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Classes: SymbolLoader, SlSymbol
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_BasicGL_SymbolLoader_H__
-#define __Eaagles_BasicGL_SymbolLoader_H__
+#ifndef __oe_BasicGL_SymbolLoader_H__
+#define __oe_BasicGL_SymbolLoader_H__
 
 #include "openeaagles/basicGL/MapPage.h"
 
-namespace Eaagles {
+namespace oe {
 namespace BasicGL {
 
 class SlSymbol;
@@ -331,6 +331,6 @@ inline void SlSymbol::setACCoordFlag(const bool flg)     { acFlg = flg; }
 inline void SlSymbol::setScreenFlag(const bool flg)      { scrnFlg = flg; }
 
 }  // end of BasicGL namespace
-}  // end of Eaagles namespace
+}  // end of oe namespace
 
 #endif

@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: InputHandler
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Recorder_InputHandler_H__
-#define __Eaagles_Recorder_InputHandler_H__
+#ifndef __oe_Recorder_InputHandler_H__
+#define __oe_Recorder_InputHandler_H__
 
 #include "openeaagles/simulation/DataRecorder.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Recorder {
    class DataRecordHandle;
 
@@ -31,6 +31,6 @@ protected:
 };
 
 } // End Recorder namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

@@ -17,7 +17,7 @@
 #include <FTGL/FTGLTextureFont.h>
 #endif
 
-namespace Eaagles {
+namespace oe {
 namespace BasicGL {
 
 //------------------------------------------------------------------------------
@@ -1314,5 +1314,5 @@ void FtglTextureFont::loadFont()
 }
 
 } // End BasicGL namespace
-} // End Eaagles namespace
+} // End oe namespace
 

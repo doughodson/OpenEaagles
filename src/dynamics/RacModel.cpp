@@ -12,7 +12,7 @@
 
 #include <cmath>
 
-namespace Eaagles {
+namespace oe {
 namespace Dynamics {
 
 IMPLEMENT_SUBCLASS(RacModel, "RacModel")
@@ -444,4 +444,4 @@ std::ostream& RacModel::serialize(std::ostream& sout, const int i, const bool sl
 }
 
 } // End Dynamics namespace
-} // End Eaagles namespace
+} // End oe namespace

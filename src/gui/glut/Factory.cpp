@@ -11,7 +11,7 @@
 
 #include <cstring>
 
-namespace Eaagles {
+namespace oe {
 namespace Glut {
 
 Factory::Factory()

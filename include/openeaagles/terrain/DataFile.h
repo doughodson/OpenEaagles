@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: DataFile
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Terrain_DataFile_H__
-#define __Eaagles_Terrain_DataFile_H__
+#ifndef __oe_Terrain_DataFile_H__
+#define __oe_Terrain_DataFile_H__
 
 #include "openeaagles/basic/Terrain.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Terrain {
 
 //------------------------------------------------------------------------------
@@ -95,6 +95,6 @@ protected:
 };
 
 } // End Terrain namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

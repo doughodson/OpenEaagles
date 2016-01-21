@@ -4,7 +4,7 @@
 #include "openeaagles/basic/distributions/Pareto.h"
 #include "openeaagles/basic/Number.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 IMPLEMENT_SUBCLASS(Pareto,"Pareto")
@@ -107,6 +107,6 @@ std::ostream& Pareto::serialize(std::ostream& sout, const int i, const bool slot
 }
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 

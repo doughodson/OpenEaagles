@@ -17,7 +17,7 @@
 
 #include <cstring>
 
-namespace Eaagles {
+namespace oe {
 namespace Recorder {
 
 Factory::Factory()

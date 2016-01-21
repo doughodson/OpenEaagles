@@ -6,7 +6,7 @@
 #include "openeaagles/basic/units/Angles.h"
 #include "openeaagles/basic/units/Distances.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 //==============================================================================
@@ -687,4 +687,4 @@ void UnmannedAirVehicle::deleteData()
 }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace

@@ -3,7 +3,7 @@
 #include <cstdlib>
 #include <cstring>
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 IMPLEMENT_SUBCLASS(String, "String")
@@ -273,4 +273,4 @@ std::ostream& String::serialize(std::ostream& sout, const int, const bool) const
 }
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace

@@ -4,8 +4,8 @@
 // Note: The "Lc" prefix stands for "Link class" in honor of Ed Link, who
 //       invented the "Link Blue Box", which was the first flight simulator.
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_support_H__
-#define __Eaagles_support_H__
+#ifndef __oe_support_H__
+#define __oe_support_H__
 
 // ---
 // Framework configuration file
@@ -18,7 +18,7 @@
 //    release.  For now it's defined only as double; but you can manual
 //    change it to float, if required.
 // ---
-namespace Eaagles {
+namespace oe {
 
 #define LCREAL_DOUBLE
 typedef double LCreal;
@@ -70,7 +70,7 @@ typedef double LCreal;
 #endif
 
 
-namespace Eaagles {
+namespace oe {
 
 // ---
 // Simple semaphore spinlock and unlock functions:
@@ -530,7 +530,7 @@ int lcStrncasecmp(const char* const s1, const char* const s2, const size_t n);
 // of a floating point number
 unsigned int getDigits(const double x);
 
-} // End Eaagles namespace
+} // End oe namespace
 
 
 #endif

@@ -2,7 +2,7 @@
 #include "openeaagles/basic/NavDR.h"
 #include "openeaagles/basic/Nav.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 //==============================================================================

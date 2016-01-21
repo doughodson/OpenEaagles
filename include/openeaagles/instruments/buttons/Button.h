@@ -3,12 +3,12 @@
 // Base class:  Basic::Object -> Basic::Component -> BasicGL::Graphic -> Button
 // Description: Generic button that knows when it is clicked
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Instruments_Button_H__
-#define __Eaagles_Instruments_Button_H__
+#ifndef __oe_Instruments_Button_H__
+#define __oe_Instruments_Button_H__
 
 #include "openeaagles/basicGL/Graphic.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Instruments {
 
 class Button : public BasicGL::Graphic {
@@ -41,6 +41,6 @@ private:
 };
 
 }  // end Instruments namespace
-}  // end Eaagles namespace
+}  // end oe namespace
 
 #endif

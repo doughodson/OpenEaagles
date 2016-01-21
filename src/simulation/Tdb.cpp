@@ -12,7 +12,7 @@
 
 #include <cmath>
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 //==============================================================================
@@ -599,4 +599,4 @@ void Tdb::setGimbal(const Gimbal* const newGimbal)
 }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace

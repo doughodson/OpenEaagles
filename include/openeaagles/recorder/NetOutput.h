@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: NetOutput
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Recorder_NetOutput_H__
-#define __Eaagles_Recorder_NetOutput_H__
+#ifndef __oe_Recorder_NetOutput_H__
+#define __oe_Recorder_NetOutput_H__
 
 #include "openeaagles/recorder/OutputHandler.h"
 
-namespace Eaagles {
+namespace oe {
    namespace Basic { class NetHandler; class Number; }
 
 namespace Recorder {
@@ -48,6 +48,6 @@ private:
 };
 
 } // End Recorder namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

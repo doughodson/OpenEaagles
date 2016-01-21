@@ -2,7 +2,7 @@
 #include "openeaagles/simulation/Image.h"
 
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 IMPLEMENT_SUBCLASS(Image,"SarImage")
@@ -167,4 +167,4 @@ bool Image::testImage(const unsigned w0, const unsigned h0)
 }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace

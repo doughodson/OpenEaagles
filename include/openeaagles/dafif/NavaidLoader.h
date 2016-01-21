@@ -42,13 +42,13 @@
 //       Prints the records loaded in channel number order.
 //
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Dafif_NavaidLoader_H__
-#define __Eaagles_Dafif_NavaidLoader_H__
+#ifndef __oe_Dafif_NavaidLoader_H__
+#define __oe_Dafif_NavaidLoader_H__
 
 #include "Database.h"
 #include "Navaid.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Dafif {
 
 class NavaidLoader : public Database {
@@ -121,6 +121,6 @@ private:
 };
 
 } // End Dafif namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

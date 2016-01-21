@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: Jammer
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_Jammer_H__
-#define __Eaagles_Simulation_Jammer_H__
+#ifndef __oe_Simulation_Jammer_H__
+#define __oe_Simulation_Jammer_H__
 
 #include "openeaagles/simulation/RfSensor.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 //------------------------------------------------------------------------------
 // Class: Jammer
@@ -27,6 +27,6 @@ protected:
 };
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

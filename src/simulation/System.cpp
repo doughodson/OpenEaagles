@@ -9,7 +9,7 @@
 #include "openeaagles/basic/Number.h"
 #include "openeaagles/basic/PairStream.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 IMPLEMENT_SUBCLASS(System,"System")
@@ -309,4 +309,4 @@ std::ostream& System::serialize(std::ostream& sout, const int i, const bool slot
 }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace

@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: Hsva
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_Hsva_H__
-#define __Eaagles_Basic_Hsva_H__
+#ifndef __oe_Basic_Hsva_H__
+#define __oe_Basic_Hsva_H__
 
 #include "openeaagles/basic/Hsv.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 //------------------------------------------------------------------------------
@@ -63,6 +63,6 @@ public:
 };
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

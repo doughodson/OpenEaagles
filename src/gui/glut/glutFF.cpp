@@ -7,7 +7,7 @@
 
 #include "openeaagles/basic/Object.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Glut {
 
 Basic::Object* glutFormFunc(const char* name)
@@ -23,5 +23,5 @@ Basic::Object* glutFormFunc(const char* name)
 }
 
 } // End Glut namespace
-} // End Eaagles namespace
+} // End oe namespace
 

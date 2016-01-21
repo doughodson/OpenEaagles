@@ -12,12 +12,12 @@
 //
 // Description: RF Signatures
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_Signature_H__
-#define __Eaagles_Simulation_Signature_H__
+#ifndef __oe_Simulation_Signature_H__
+#define __oe_Simulation_Signature_H__
 
 #include "openeaagles/basic/Component.h"
 
-namespace Eaagles {
+namespace oe {
    namespace Basic {
       class Number;
       class Table2;
@@ -236,6 +236,6 @@ protected:
 };
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: PosixHandler
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_PosixHandler_H__
-#define __Eaagles_Basic_PosixHandler_H__
+#ifndef __oe_Basic_PosixHandler_H__
+#define __oe_Basic_PosixHandler_H__
 
 #include "openeaagles/basic/NetHandler.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 class Number;
@@ -193,7 +193,7 @@ inline uint16_t PosixHandler::getLastFromPort() const
 }
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif
 

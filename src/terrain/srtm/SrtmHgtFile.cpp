@@ -63,7 +63,7 @@
 #include <cstdlib>
 #include <cctype>
 
-namespace Eaagles {
+namespace oe {
 namespace Terrain {
 
 //===========================================================================================
@@ -324,4 +324,4 @@ std::ostream& SrtmHgtFile::serialize(std::ostream& sout, const int i, const bool
 }
 
 } // End Terrain namespace
-} // End Eaagles namespace
+} // End oe namespace

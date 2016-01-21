@@ -18,7 +18,7 @@
 #include "./Vec3f"
 #include "./Vec3d"
 
-namespace Eaagles {
+namespace oe {
 namespace osg {
 
 template<typename VT>
@@ -303,6 +303,6 @@ typedef BoundingSphereImpl<Vec3d> BoundingSphered;
 #endif
 
 }
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

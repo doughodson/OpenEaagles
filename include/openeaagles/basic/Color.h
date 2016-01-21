@@ -1,14 +1,14 @@
 //------------------------------------------------------------------------------
 // Class:  Color
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_Color_H__
-#define __Eaagles_Basic_Color_H__
+#ifndef __oe_Basic_Color_H__
+#define __oe_Basic_Color_H__
 
 #include "openeaagles/basic/Object.h"
 #include "openeaagles/basic/osg/Vec3"
 #include "openeaagles/basic/osg/Vec4"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 class Number;
@@ -89,6 +89,6 @@ protected:
 
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

@@ -2,7 +2,7 @@
 
 #include "openeaagles/basic/PairStream.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Instruments {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(GMeterDial,"GMeterDial")
@@ -145,4 +145,4 @@ void GMeterDial::updateData(const LCreal dt)
 }
 
 }  // end of Instruments namespace
-}  // end of Eaagles namespace
+}  // end of oe namespace

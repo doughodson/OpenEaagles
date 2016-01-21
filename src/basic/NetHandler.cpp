@@ -27,7 +27,7 @@
 
 #include "openeaagles/basic/NetHandler.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 //==============================================================================
@@ -152,5 +152,5 @@ bool NetHandler::checkByteOrder()
 }
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace
 

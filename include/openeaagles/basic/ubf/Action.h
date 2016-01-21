@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: Action
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_Ubf_Action_H__
-#define __Eaagles_Basic_Ubf_Action_H__
+#ifndef __oe_Basic_Ubf_Action_H__
+#define __oe_Basic_Ubf_Action_H__
 
 #include "openeaagles/basic/Object.h"
 
-namespace Eaagles {
+namespace oe {
 
 namespace Basic {
    class Component;
@@ -44,7 +44,7 @@ inline unsigned int Action::getVote() const            { return vote; }
 
 } // End Ubf namespace
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif
 

@@ -1,7 +1,7 @@
 
 #include "openeaagles/linearSys/DiffEquation.h"
 
-namespace Eaagles {
+namespace oe {
 namespace LinearSystem {
 
 //==============================================================================
@@ -130,4 +130,4 @@ LCreal DiffEquation::g(const LCreal xn)
 }
 
 } // End LinearSystem namespace
-} // End Eaagles namespace
+} // End oe namespace

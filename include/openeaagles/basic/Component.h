@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: Component
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_Component_H__
-#define __Eaagles_Basic_Component_H__
+#ifndef __oe_Basic_Component_H__
+#define __oe_Basic_Component_H__
 
 #include "openeaagles/basic/Object.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 class Identifier;
@@ -20,7 +20,7 @@ class String;
 //------------------------------------------------------------------------------
 // Class: Component
 //
-// Description: Base class for all OpenEaagles components.  Components provide
+// Description: Base class for all Openoe components.  Components provide
 //              a common interface for time critical and non-time critical tasks,
 //              and for passing event messages.  Any component can be a container
 //              for a list of components.
@@ -178,9 +178,9 @@ class String;
 //    event tokens must be processed quickly, similar to interrupt handlers.
 //
 //    Standard event tokens are defined in the file, eventTokens.h, which is included
-//    by this Component class and are therefore within the Eaagles::Basic::Component
+//    by this Component class and are therefore within the oe::Basic::Component
 //    namespace.  There is a companion file, eventTokens.epp, which can be included
-//    as part of the Eaagles Description Language (EDL) input files.
+//    as part of the oe Description Language (EDL) input files.
 //
 //    The event() function can be implemented using the BEGIN_EVENT_HANDLER()
 //    and END_EVENT_HANDLER() macros.  Along with the macros ON_EVENT(), ON_EVENT_OBJ(),
@@ -441,7 +441,7 @@ private:
 };
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 
 #endif

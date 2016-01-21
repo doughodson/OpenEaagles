@@ -13,7 +13,7 @@
 
 #include <cmath>
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 IMPLEMENT_SUBCLASS(ScanGimbal,"ScanGimbal")
@@ -1144,4 +1144,4 @@ std::ostream& ScanGimbal::serialize(std::ostream& sout, const int i, const bool 
 }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace

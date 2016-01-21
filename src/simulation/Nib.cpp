@@ -15,7 +15,7 @@
 
 #include <cmath>
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 //==============================================================================
@@ -208,7 +208,7 @@ bool Nib::shutdownNotification()
 }
 
 //------------------------------------------------------------------------------
-// setPlayer() -- sets a pointer to the OpenEaagles player
+// setPlayer() -- sets a pointer to the Openoe player
 //------------------------------------------------------------------------------
 bool Nib::setPlayer(Player* const p)
 {
@@ -224,7 +224,7 @@ bool Nib::setPlayer(Player* const p)
 
 
 //------------------------------------------------------------------------------
-// setPlayer() -- sets a pointer to the OpenEaagles player
+// setPlayer() -- sets a pointer to the Openoe player
 //------------------------------------------------------------------------------
 void Nib::setPlayerName(const char* s)
 {
@@ -1237,4 +1237,4 @@ bool Nib::drComputeMatrixR2(
 }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace

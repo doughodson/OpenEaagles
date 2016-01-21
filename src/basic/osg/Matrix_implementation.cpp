@@ -34,7 +34,7 @@
     +((a)._mat[r][2] * (b)._mat[2][c]) \
     +((a)._mat[r][3] * (b)._mat[3][c])
 
-namespace Eaagles {
+namespace oe {
 namespace osg {
 
 //using namespace osg;

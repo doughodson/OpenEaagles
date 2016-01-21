@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Limit11 function
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_LinearSystem_Limit11_H__
-#define __Eaagles_LinearSystem_Limit11_H__
+#ifndef __oe_LinearSystem_Limit11_H__
+#define __oe_LinearSystem_Limit11_H__
 
 #include "openeaagles/linearSys/LimitFunc.h"
 
-namespace Eaagles {
+namespace oe {
 namespace LinearSystem {
 
 //------------------------------------------------------------------------------
@@ -24,6 +24,6 @@ public:
 };
 
 } // End LinearSystem namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

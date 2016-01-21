@@ -8,7 +8,7 @@
 #include "openeaagles/basic/Pair.h"
 #include "openeaagles/basic/PairStream.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 namespace Ubf {
 
@@ -176,5 +176,5 @@ Basic::Object* Arbiter::getSlotByIndex(const int si)
 
 } // End Ubf namespace
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace
 

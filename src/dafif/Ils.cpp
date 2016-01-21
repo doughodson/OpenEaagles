@@ -4,7 +4,7 @@
 #include "openeaagles/basic/units/Distances.h"
 #include <iostream>
 
-namespace Eaagles {
+namespace oe {
 namespace Dafif {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Ils,"Ils")
@@ -132,4 +132,4 @@ void Ils::printGlideSlopeData(std::ostream& sout, const double aclat, const doub
 }
 
 } // End Dafif namespace
-} // End Eaagles namespace
+} // End oe namespace

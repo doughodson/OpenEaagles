@@ -1,6 +1,6 @@
 #include "openeaagles/instruments/eng/EngPage.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Instruments {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(EngPage,"EngPage")
@@ -168,4 +168,4 @@ void EngPage::updateData(const LCreal dt)
 }
 
 }  // end of Instruments namespace
-}  // end of Eaagles Namespace
+}  // end of oe Namespace

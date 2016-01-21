@@ -5,7 +5,7 @@
 
 #include <cstring>
 
-namespace Eaagles {
+namespace oe {
 namespace BasicGL {
 
 IMPLEMENT_PARTIAL_SUBCLASS(Font,"Font")
@@ -455,4 +455,4 @@ bool Font::setSlotLineSpacing(const Basic::Number* const newLineSpacing)
 }
 
 } // End BasicGL namespace
-} // End Eaagles namespace
+} // End oe namespace

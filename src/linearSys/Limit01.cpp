@@ -1,7 +1,7 @@
 
 #include "openeaagles/linearSys/Limit01.h"
 
-namespace Eaagles {
+namespace oe {
 namespace LinearSystem {
 
 //==============================================================================
@@ -23,4 +23,4 @@ EMPTY_COPYDATA(Limit01)
 EMPTY_DELETEDATA(Limit01)
 
 } // End LinearSystem namespace
-} // End Eaagles namespace
+} // End oe namespace

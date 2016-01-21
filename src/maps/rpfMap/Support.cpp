@@ -7,7 +7,7 @@
 #include <cctype>
 #include <cstring>
 
-namespace Eaagles {
+namespace oe {
 namespace Maps {
 namespace Rpf {
 
@@ -113,5 +113,5 @@ void parseLocations(std::ifstream& fin, Location* locs, int count)
 
 } // End Rpf namespace
 } // End Maps namespace
-} // End Eaagles namespace
+} // End oe namespace
 

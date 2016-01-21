@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Sz1 class -- First order transfer function
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_LinearSystem_Sz1_H__
-#define __Eaagles_LinearSystem_Sz1_H__
+#ifndef __oe_LinearSystem_Sz1_H__
+#define __oe_LinearSystem_Sz1_H__
 
 #include "openeaagles/linearSys/FirstOrderTf.h"
 
-namespace Eaagles {
+namespace oe {
 namespace LinearSystem {
 
 //------------------------------------------------------------------------------
@@ -50,6 +50,6 @@ public:
 };
 
 } // End LinearSystem namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

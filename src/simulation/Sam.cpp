@@ -1,7 +1,7 @@
 
 #include "openeaagles/simulation/Sam.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 //==============================================================================
@@ -30,4 +30,4 @@ Sam::Sam()
 }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace

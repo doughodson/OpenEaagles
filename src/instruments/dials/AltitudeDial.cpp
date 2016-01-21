@@ -1,6 +1,6 @@
 #include "openeaagles/instruments/dials/AltitudeDial.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Instruments {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(AltitudeDial,"AltitudeDial")
@@ -103,5 +103,5 @@ bool AltitudeDial::figureRotation(const LCreal thisAlt)
 }
 
 }  // end Instruments namespace
-}  // end Eaagles namespace
+}  // end oe namespace
 

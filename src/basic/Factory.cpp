@@ -76,7 +76,7 @@
 
 #include <cstring>
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 Factory::Factory()

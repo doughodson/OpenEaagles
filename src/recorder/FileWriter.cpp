@@ -13,7 +13,7 @@
 # pragma warning(disable: 4996)
 #endif
 
-namespace Eaagles {
+namespace oe {
 namespace Recorder {
 
 //==============================================================================
@@ -448,4 +448,4 @@ std::ostream& FileWriter::serialize(std::ostream& sout, const int i, const bool 
 }
 
 } // End Recorder namespace
-} // End Eaagles namespace
+} // End oe namespace

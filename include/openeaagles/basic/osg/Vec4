@@ -18,7 +18,7 @@
 #include "./Vec4f"
 #include "./Vec4d"
 
-namespace Eaagles {
+namespace oe {
 namespace osg {
 
 #ifdef LCREAL_DOUBLE
@@ -28,6 +28,6 @@ namespace osg {
 #endif
 
 }
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

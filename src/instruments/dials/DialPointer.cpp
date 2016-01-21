@@ -1,7 +1,7 @@
 #include "openeaagles/instruments/dials/DialPointer.h"
 #include "openeaagles/basic/units/Angles.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Instruments {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(DialPointer, "DialPointer")
@@ -39,4 +39,4 @@ void DialPointer::draw()
 }
 
 }  // end of Instruments namespace
-}  // end of Eaagles namespace
+}  // end of oe namespace

@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: Iff
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Simulation_Iff_H__
-#define __Eaagles_Simulation_Iff_H__
+#ifndef __oe_Simulation_Iff_H__
+#define __oe_Simulation_Iff_H__
 
 #include "openeaagles/simulation/Radio.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 //------------------------------------------------------------------------------
@@ -120,6 +120,6 @@ private:
 };
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

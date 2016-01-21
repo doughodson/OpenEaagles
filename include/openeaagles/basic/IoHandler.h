@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: IoHandler
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_IoHandler_H__
-#define __Eaagles_Basic_IoHandler_H__
+#ifndef __oe_Basic_IoHandler_H__
+#define __oe_Basic_IoHandler_H__
 
 #include "openeaagles/basic/Component.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
    class Frequency;
    class IoData;
@@ -29,7 +29,7 @@ namespace Basic {
 //    handlers will contain a number of I/O adapters that control the flow of
 //    data between a device handler and an I/O data buffer (see IoAdapter.h).
 //
-//    For an example, see the OpenEaagles example 'testIo'.
+//    For an example, see the Openoe example 'testIo'.
 //
 //
 // Notes:
@@ -123,6 +123,6 @@ private:
 };
 
 } // end Basic
-} // end Eaagles namespace
+} // end oe namespace
 
 #endif

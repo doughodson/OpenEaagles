@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class:  Rgb
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Basic_Rgb_H__
-#define __Eaagles_Basic_Rgb_H__
+#ifndef __oe_Basic_Rgb_H__
+#define __oe_Basic_Rgb_H__
 
 #include "openeaagles/basic/Color.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 //------------------------------------------------------------------------------
@@ -45,6 +45,6 @@ public:
 };
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

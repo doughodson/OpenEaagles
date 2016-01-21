@@ -1,7 +1,7 @@
 #include "openeaagles/dafif/Waypoint.h"
 #include <iostream>
 
-namespace Eaagles {
+namespace oe {
 namespace Dafif {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Waypoint,"Waypoint")
@@ -80,4 +80,4 @@ void Waypoint::printRecord(std::ostream& sout) const
 }
 
 } // End Dafif namespace
-} // End Eaagles namespace
+} // End oe namespace

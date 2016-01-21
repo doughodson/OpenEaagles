@@ -5,7 +5,7 @@
 #include "openeaagles/basic/PairStream.h"
 #include "openeaagles/basic/Pair.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Instruments {
 
 IMPLEMENT_SUBCLASS(Instrument, "Instrument")
@@ -196,4 +196,4 @@ Basic::Object* Instrument::getSlotByIndex(const int si)
 }
 
 }  // end Instruments namespace
-}  // end Eaagles namespace
+}  // end oe namespace

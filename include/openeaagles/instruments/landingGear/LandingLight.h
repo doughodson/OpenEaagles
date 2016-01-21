@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: LandingLight
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Instruments_LandingLight_H__
-#define __Eaagles_Instruments_LandingLight_H__
+#ifndef __oe_Instruments_LandingLight_H__
+#define __oe_Instruments_LandingLight_H__
 
 #include "LandingGear.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic { class Identifier; }
 namespace Instruments {
 
@@ -46,6 +46,6 @@ private:
 };
 
 }  // end Instruments namespace
-}  // end Eaagles namespace
+}  // end oe namespace
 
 #endif

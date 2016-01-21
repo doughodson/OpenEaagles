@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Class: Eadi3DFont
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Instruments_Eadi3DFont_H__
-#define __Eaagles_Instruments_Eadi3DFont_H__
+#ifndef __oe_Instruments_Eadi3DFont_H__
+#define __oe_Instruments_Eadi3DFont_H__
 
 #include "openeaagles/basicGL/Font.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Instruments {
 
 //------------------------------------------------------------------------------
@@ -37,6 +37,6 @@ public:
 
 
 } // End Instruments namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

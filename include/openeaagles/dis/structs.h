@@ -38,13 +38,13 @@
 //    7.6.2    EmissionSystem (part of Electromagnetic Emission PDU)
 //    7.6.2    EmitterBeamData (part of Electromagnetic Emission PDU)
 //--------------------------------------------------------------
-#ifndef __Eaagles_Network_Dis_Struct_H__
-#define __Eaagles_Network_Dis_Struct_H__
+#ifndef __oe_Network_Dis_Struct_H__
+#define __oe_Network_Dis_Struct_H__
 
 #include <iostream>
 #include <cstdint>
 
-namespace Eaagles {
+namespace oe {
 namespace Network {
 namespace Dis {
 
@@ -2107,6 +2107,6 @@ struct SimCoordinates {
 
 } // End Dis namespace
 } // End Network namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

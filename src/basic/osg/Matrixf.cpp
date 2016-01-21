@@ -17,7 +17,7 @@
 // specialized Matrix_implementation to be Matrixf
 #define  Matrix_implementation Matrixf
 
-namespace Eaagles {
+namespace oe {
 
 osg::Matrixf::Matrixf( const osg::Matrixd& mat )
 {
@@ -35,7 +35,7 @@ void osg::Matrixf::set(const osg::Matrixd& rhs)
     set(rhs.ptr());
 }
 
-} // End Eaagles namespace
+} // End oe namespace
 
 // now compile up Matrix via Matrix_implementation
 #include "Matrix_implementation.cpp"

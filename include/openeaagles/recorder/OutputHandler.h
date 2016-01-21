@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: OutputHandler
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Recorder_OutputHandler_H__
-#define __Eaagles_Recorder_OutputHandler_H__
+#ifndef __oe_Recorder_OutputHandler_H__
+#define __oe_Recorder_OutputHandler_H__
 
 #include "openeaagles/simulation/DataRecorder.h"
 #include "openeaagles/basic/List.h"
 
-namespace Eaagles {
+namespace oe {
    namespace Basic { class List; }
 
 namespace Recorder {
@@ -75,6 +75,6 @@ private:
 };
 
 } // End Recorder namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

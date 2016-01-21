@@ -10,12 +10,12 @@
 //     const CadrgClut::Rgb& getColor(unsigned int index) const;
 //
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Maps_Rpf_CadrgClut_H__
-#define __Eaagles_Maps_Rpf_CadrgClut_H__
+#ifndef __oe_Maps_Rpf_CadrgClut_H__
+#define __oe_Maps_Rpf_CadrgClut_H__
 
 #include "openeaagles/basic/Object.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Maps {
 namespace Rpf {
 
@@ -57,6 +57,6 @@ private:
 
 } // end Rpf namespace
 } // end Maps namespace
-} // end Eaagles namespace
+} // end oe namespace
 
 #endif

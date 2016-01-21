@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: Font
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_BasicGL_Font_H__
-#define __Eaagles_BasicGL_Font_H__
+#ifndef __oe_BasicGL_Font_H__
+#define __oe_BasicGL_Font_H__
 
 #include "openeaagles/basic/Object.h"
 #include <GL/gl.h>
 
-namespace Eaagles {
+namespace oe {
 
    namespace Basic {
       class Number;
@@ -230,6 +230,6 @@ private:
 };
 
 } // End BasicGL namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

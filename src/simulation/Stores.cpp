@@ -9,7 +9,7 @@
 #include "openeaagles/basic/Pair.h"
 #include "openeaagles/basic/PairStream.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 //==============================================================================
@@ -747,4 +747,4 @@ std::ostream& Stores::serialize(std::ostream& sout, const int i, const bool slot
 }
 
 } // end Simulation namespace
-} // end Eaagles namespace
+} // end oe namespace

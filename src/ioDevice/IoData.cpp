@@ -4,7 +4,7 @@
 
 #include "openeaagles/basic/Number.h"
 
-namespace Eaagles {
+namespace oe {
 namespace IoDevice {
 
 //==============================================================================
@@ -468,4 +468,4 @@ std::ostream& IoData::serialize(std::ostream& sout, const int i, const bool slot
 }
 
 } // end IoDevice
-} // end Eaagles namespace
+} // end oe namespace

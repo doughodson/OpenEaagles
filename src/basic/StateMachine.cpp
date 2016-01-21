@@ -5,7 +5,7 @@
 #include "openeaagles/basic/Pair.h"
 #include "openeaagles/basic/PairStream.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(StateMachine,"AbstractStateMachine")
@@ -571,5 +571,5 @@ std::ostream& StateMachine::serialize(std::ostream& sout, const int i, const boo
 }
 
 } // End Basic namespace
-} // End Eaagles namespace
+} // End oe namespace
 

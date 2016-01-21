@@ -2,13 +2,13 @@
 // Class:  BasicGL::Page -> Eadi3DPage
 //
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Instruments_Eadi3DPage_H__
-#define __Eaagles_Instruments_Eadi3DPage_H__
+#ifndef __oe_Instruments_Eadi3DPage_H__
+#define __oe_Instruments_Eadi3DPage_H__
 
 #include "openeaagles/basicGL/Page.h"
 #include "openeaagles/instruments/eadi3D/Eadi3DObjects.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Instruments {
 
 class Eadi3DPage : public BasicGL::Page{
@@ -99,6 +99,6 @@ private:
 };
 
 }; // end of Instruments namespace
-}; // end of Eaagles namespace
+}; // end of oe namespace
 
 #endif

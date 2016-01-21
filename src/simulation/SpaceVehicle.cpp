@@ -3,7 +3,7 @@
 
 #include "openeaagles/basic/units/Distances.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 //==============================================================================
@@ -215,4 +215,4 @@ void UnmannedSpaceVehicle::dynamics(const LCreal dt)
 }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace

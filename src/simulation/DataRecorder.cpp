@@ -11,7 +11,7 @@
 
 #include "openeaagles/basic/List.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Simulation {
 
 //==============================================================================
@@ -354,5 +354,5 @@ std::ostream& RecorderComponent::serialize(std::ostream& sout, const int i, cons
 }
 
 } // End Simulation namespace
-} // End Eaagles namespace
+} // End oe namespace
 

@@ -6,7 +6,7 @@
 #include <cstdlib>
 #include <cmath>
 
-namespace Eaagles {
+namespace oe {
 namespace Dafif {
 
 IMPLEMENT_SUBCLASS(AirportLoader,"AirportLoader")
@@ -1709,4 +1709,4 @@ const char* AirportLoader::createIlsRecord(const Key* key)
 #endif
 
 } // End Dafif namespace
-} // End Eaagles namespace
+} // End oe namespace

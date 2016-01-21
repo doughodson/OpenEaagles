@@ -14,7 +14,7 @@
 #ifndef OSG_VEC4S_OE
 #define OSG_VEC4S_OE 1
 
-namespace Eaagles {
+namespace oe {
 namespace osg {
 
 /** General purpose float quad. Uses include representation
@@ -189,7 +189,7 @@ inline Vec4s componentDivide(const Vec4s& lhs, const Vec4s& rhs)
 }
 
 }    // end of namespace osg
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif
 

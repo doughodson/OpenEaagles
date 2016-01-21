@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: Material
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_BasicGL_Material_H__
-#define __Eaagles_BasicGL_Material_H__
+#ifndef __oe_BasicGL_Material_H__
+#define __oe_BasicGL_Material_H__
 
 #include "openeaagles/basic/Component.h"
 #include <GL/glu.h>
 
-namespace Eaagles {
+namespace oe {
 namespace BasicGL {
 
 //------------------------------------------------------------------------------
@@ -81,6 +81,6 @@ private:
 };
 
 } // End BasicGL namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: Rotators
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_BasicGL_Rotators_H__
-#define __Eaagles_BasicGL_Rotators_H__
+#ifndef __oe_BasicGL_Rotators_H__
+#define __oe_BasicGL_Rotators_H__
 
 #include "Graphic.h"
 #include "openeaagles/basic/units/Angles.h"
 
-namespace Eaagles {
+namespace oe {
 namespace BasicGL {
 
 //------------------------------------------------------------------------------
@@ -77,6 +77,6 @@ private:
 };
 
 } // End BasicGL namespace
-} // End Eaagles namespace
+} // End oe namespace
 
 #endif

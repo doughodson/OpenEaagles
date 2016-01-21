@@ -9,7 +9,7 @@
 #include "openeaagles/basic/Thread.h"
 #include "openeaagles/basic/units/Frequencies.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Basic {
 
 //=============================================================================
@@ -484,4 +484,4 @@ unsigned long IoThread::userFunc(const LCreal dt)
 }
 
 } // End Basic
-} // end Eaagles namespace
+} // end oe namespace

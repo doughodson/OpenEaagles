@@ -5,7 +5,7 @@
 #include "openeaagles/maps/rpfMap/TextureTable.h"
 #include "openeaagles/basicGL/Texture.h"
 
-namespace Eaagles {
+namespace oe {
 namespace Maps {
 namespace Rpf {
 
@@ -175,5 +175,5 @@ BasicGL::Texture* TextureTable::getTexture(int row, int col)
 
 } // End Rpf namespace
 } // End Maps namespace
-} // End Eaagles namespace
+} // End oe namespace
 
