@@ -72,7 +72,6 @@ OBJS =  \
 	$(LIB)(SimAgent.o) \
 	$(LIB)(SimLogger.o) \
 	$(LIB)(Simulation.o) \
-	$(LIB)(simulationFF.o) \
 	$(LIB)(SpaceVehicle.o) \
 	$(LIB)(StabilizingGimbal.o) \
 	$(LIB)(Station.o) \

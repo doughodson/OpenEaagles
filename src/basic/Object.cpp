@@ -87,14 +87,6 @@ bool Object::isFactoryName(const char name[]) const
     else return false;
 }
 
-// Check form name
-bool Object::isFormName(const char name[]) const
-{
-    if (name == nullptr) return false;
-    if ( std::strcmp(_static.fname, name) == 0 )  return true;
-    else return false;
-}
-
 // Copy object data -- derived classes should call
 // BaseClass::copyData() first and then copy their data.
 void Object::copyData(const Object& org, const bool cc)
@@ -126,12 +118,6 @@ Object* Object::getSlotByIndex(const int)
 {
     // We have no slots, so we shouldn't ever be here!
     return nullptr;
-}
-
-// get form name
-const char* Object::getFormName()
-{
-    return _static.fname;
 }
 
 // get factory name

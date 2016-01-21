@@ -4,7 +4,6 @@ include ../makedefs
 LIB = $(OPENEAAGLES_LIB_DIR)/liboeDafif.a
 
 OBJS =  \
-	$(LIB)(dafifFF.o) \
 	$(LIB)(Airport.o) \
 	$(LIB)(AirportLoader.o) \
 	$(LIB)(Record.o) \

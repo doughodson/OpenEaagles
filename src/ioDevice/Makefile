@@ -11,7 +11,6 @@ OBJS =  \
 	$(LIB)(DiscreteOutput.o) \
 	$(LIB)(Factory.o) \
 	$(LIB)(IoData.o) \
-	$(LIB)(ioDeviceFF.o) \
 	$(LIB)(SignalGen.o) \
 	$(LIB)(UsbJoystick.o)
 

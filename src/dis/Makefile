@@ -4,7 +4,6 @@ include ../makedefs
 LIB = $(OPENEAAGLES_LIB_DIR)/liboeDis.a
 
 OBJS =  \
-	$(LIB)(disFF.o) \
 	$(LIB)(EmissionPduHandler.o) \
 	$(LIB)(Factory.o) \
 	$(LIB)(NetIO.o) \

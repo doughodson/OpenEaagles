@@ -6,8 +6,7 @@ LIB = $(OPENEAAGLES_LIB_DIR)/liboeTerrain.a
 OBJS =  \
 	$(LIB)(DataFile.o) \
 	$(LIB)(Factory.o) \
-	$(LIB)(QuadMap.o) \
-	$(LIB)(terrainFF.o)
+	$(LIB)(QuadMap.o)
 
 SUBDIRS = ded dted srtm
 

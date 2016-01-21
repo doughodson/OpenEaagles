@@ -16,7 +16,6 @@ OBJS =  \
 	$(LIB)(PrintHandler.o) \
 	$(LIB)(PrintPlayer.o) \
 	$(LIB)(PrintSelected.o) \
-	$(LIB)(recorderFF.o) \
 	$(LIB)(TabPrinter.o)
 
 SUBDIRS = protobuf

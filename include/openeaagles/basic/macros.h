@@ -136,9 +136,7 @@
     private: static const unsigned int classIndex;                                                    \
     protected: static const _Static* getStatic();                                                     \
     public: static const char* getFactoryName();                                                      \
-    public: static const char* getFormName();                                                         \
     public: virtual bool isFactoryName(const char name[]) const;                                      \
-    public: virtual bool isFormName(const char name[]) const;                                         \
     protected: virtual bool setSlotByIndex(const int slotindex, ::oe::Basic::Object* const obj);      \
     protected: virtual ::oe::Basic::Object* getSlotByIndex(const int slotindex);                      \
     public: static const ::oe::Basic::SlotTable& getSlotTable();                                      \
@@ -157,14 +155,7 @@
         &ThisType::slottable, BaseClass::getStatic()                                   \
     );                                                                                 \
     const ThisType::_Static* ThisType::getStatic() { return &_static; }                \
-    const char* ThisType::getFormName() { return _static.fname; }                      \
     const char* ThisType::getFactoryName() { return _static.fname; }                   \
-    bool ThisType::isFormName(const char name[]) const                                 \
-    {                                                                                  \
-        if (name == 0) return false;                                                   \
-        if ( std::strcmp(_static.fname,name) == 0 )  return true;                      \
-        else return ThisType::BaseClass::isFormName(name);                             \
-    }                                                                                  \
     bool ThisType::isFactoryName(const char name[]) const                              \
     {                                                                                  \
         if (name == 0) return false;                                                   \
@@ -203,14 +194,7 @@
         &ThisType::slottable, BaseClass::getStatic()                                   \
     );                                                                                 \
     const ThisType::_Static* ThisType::getStatic() { return &_static; }                \
-    const char* ThisType::getFormName() { return _static.fname; }                      \
     const char* ThisType::getFactoryName() { return _static.fname; }                   \
-    bool ThisType::isFormName(const char name[]) const                                 \
-    {                                                                                  \
-        if (name == 0) return false;                                                   \
-        if ( std::strcmp(_static.fname,name) == 0 )  return true;                      \
-        else return ThisType::BaseClass::isFormName(name);                             \
-    }                                                                                  \
     bool ThisType::isFactoryName(const char name[]) const                              \
     {                                                                                  \
         if (name == 0) return false;                                                   \
@@ -232,14 +216,7 @@
         &ThisType::slottable, BaseClass::getStatic()                                   \
     );                                                                                 \
     const ThisType::_Static* ThisType::getStatic() { return &_static; }                \
-    const char* ThisType::getFormName() { return _static.fname; }                      \
     const char* ThisType::getFactoryName() { return _static.fname; }                   \
-    bool ThisType::isFormName(const char name[]) const                                 \
-    {                                                                                  \
-        if (name == 0) return false;                                                   \
-        if ( std::strcmp(_static.fname,name) == 0 )  return true;                      \
-        else return ThisType::BaseClass::isFormName(name);                             \
-    }                                                                                  \
     bool ThisType::isFactoryName(const char name[]) const                              \
     {                                                                                  \
         if (name == 0) return false;                                                   \

@@ -158,17 +158,8 @@ namespace Basic {
 //       const char* Foo::getFactoryName()
 //          Static function that returns the factory name of class Foo.
 //
-//    Depreciated form name support functions (use factory support functions instead)
-//
-//       bool isFormName(char* name)
-//          Returns true if this object's form name is 'name' or if it is
-//          derived from a form named 'name'.
-//
-//       const char* Foo::getFormName()
-//          Static function that returns the form name of class Foo.
-//
 //    (For examples of factory classes, see basic/Factory.cpp, basicGL/Factory.cpp,
-//     simulation/Factory.cpp, as well as the various Openoe examples)
+//     simulation/Factory.cpp, as well as the various OpenEaagles examples)
 //
 //
 // Slots and the Slot table:
@@ -319,9 +310,7 @@ class Object
 
    public: virtual bool isClassType(const std::type_info& type) const;
    public: virtual bool isFactoryName(const char name[]) const;
-   public: virtual bool isFormName(const char name[]) const;               // depreciated
    public: static const char* getFactoryName();
-   public: static const char* getFormName();                               // depreciated
    public: static const char* getClassName();
    public: virtual std::ostream& serialize(std::ostream& sout, const int i = 0, const bool slotsOnly = false) const;
 

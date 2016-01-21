@@ -5,7 +5,6 @@ LIB = $(OPENEAAGLES_LIB_DIR)/liboeBasic.a
 
 OBJS =  \
 	$(LIB)(support.o) \
-	$(LIB)(basicFF.o) \
 	$(LIB)(Boolean.o) \
 	$(LIB)(Cie.o) \
 	$(LIB)(Cmy.o) \

@@ -4,7 +4,6 @@ include ../makedefs
 LIB = $(OPENEAAGLES_LIB_DIR)/liboeBasicGL.a
 
 OBJS =  \
-	$(LIB)(basicGLFF.o) \
 	$(LIB)(BmpTexture.o) \
 	$(LIB)(BitmapFont.o) \
 	$(LIB)(Clip3D.o) \
