@@ -109,7 +109,7 @@ solution "oe"
          "../../include/openeaagles/basic/**.inl",
          "../../include/openeaagles/basic/**.epp",
          "../../include/openeaagles/basic/osg/*",
-         "../../src/basic/**.cpp"
+         "../../src/basic/*"
       }
       excludes {
          "../../src/basic/osg/Matrix_implementation.cpp",
@@ -121,7 +121,7 @@ solution "oe"
    project "basicGL"
       files {
          "../../include/openeaagles/basicGL/**.h",
-         "../../src/basicGL/**.cpp"
+         "../../src/basicGL/*"
       }
       includedirs { OE3rdPartyIncPath.."/freetype2" }
       defines { "FTGL_LIBRARY_STATIC" }
