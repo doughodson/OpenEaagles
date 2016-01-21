@@ -30,7 +30,7 @@ public:
 
     LCreal getPitchInches() const       { return scaledPitch; }
     LCreal getPitch() const             { return getPreScaleInstValue(); }
-    LCreal getRollDeg() const           { return curPhi * static_cast<LCreal>(Basic::Angle::R2DCC); }
+    LCreal getRollDeg() const           { return curPhi * static_cast<LCreal>(basic::Angle::R2DCC); }
     LCreal getRollRad() const           { return curPhi; }
     LCreal getMaxRate() const           { return maxRate; }
 
@@ -41,20 +41,20 @@ public:
 
     void draw() override;
 
-    bool event(const int event, Basic::Object* const obj = nullptr) override;
+    bool event(const int event, basic::Object* const obj = nullptr) override;
     void updateData(const LCreal dt = 0) override;
 
 protected:
     // slot functions
-    virtual bool setSlotMaxRate(const Basic::Angle* const newMR);
-    virtual bool setSlotMaxRate(const Basic::Number* const newMR);
+    virtual bool setSlotMaxRate(const basic::Angle* const newMR);
+    virtual bool setSlotMaxRate(const basic::Number* const newMR);
 
 private:
     // event function
-    bool onUpdatePitchAdi(const Basic::Number* const newP);
-    bool onUpdateRollDegAdi(const Basic::Number* const newR);
-    bool onUpdateRollRadAdi(const Basic::Number* const newR);
-    bool onUpdateMaxRateAdi(const Basic::Number* const newMR);
+    bool onUpdatePitchAdi(const basic::Number* const newP);
+    bool onUpdateRollDegAdi(const basic::Number* const newR);
+    bool onUpdateRollRadAdi(const basic::Number* const newR);
+    bool onUpdateMaxRateAdi(const basic::Number* const newMR);
 
     LCreal pitch;       // actual pitch (degrees)
     LCreal scaledPitch; // our pitch value (inches)

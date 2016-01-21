@@ -2,8 +2,8 @@
 // Class: NavDR
 // inline functions
 //------------------------------------------------------------------------------
-#ifndef __oe_Basic_NavDR_Inline__
-#define __oe_Basic_NavDR_Inline__
+#ifndef __oe_basic_NavDR_Inline__
+#define __oe_basic_NavDR_Inline__
 
 //==============================================================================
 // Compute R0 Matrix

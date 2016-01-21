@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 // Class: Waypoint
-// Base class: Basic::Object -> Basic::String -> Record -> Waypoint
+// Base class: basic::Object -> basic::String -> Record -> Waypoint
 //
 // Description: Access to the DAFIF Waypoint records.
 //

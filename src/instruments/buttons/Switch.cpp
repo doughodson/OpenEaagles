@@ -19,8 +19,8 @@ END_SLOTTABLE(Switch)
 //  Map slot table to handles
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(Switch)
-   ON_SLOT(1, setSlotNumSelections, Basic::Number)
-   ON_SLOT(2, setSlotCurrentState, Basic::Number)
+   ON_SLOT(1, setSlotNumSelections, basic::Number)
+   ON_SLOT(2, setSlotCurrentState, basic::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -54,7 +54,7 @@ EMPTY_DELETEDATA(Switch)
 //------------------------------------------------------------------------------
 // setSlotNumSelections() - set the number of "stops"
 //------------------------------------------------------------------------------
-bool Switch::setSlotNumSelections(const Basic::Number* const msg)
+bool Switch::setSlotNumSelections(const basic::Number* const msg)
 {
     bool ok = false;
     if (msg != nullptr) ok = setNumSelections(msg->getInt());
@@ -64,7 +64,7 @@ bool Switch::setSlotNumSelections(const Basic::Number* const msg)
 //------------------------------------------------------------------------------
 // setSlotCurrentState() - set the state of our switch
 //------------------------------------------------------------------------------
-bool Switch::setSlotCurrentState(const Basic::Number* const msg)
+bool Switch::setSlotCurrentState(const basic::Number* const msg)
 {
     bool ok = false;
     if (msg != nullptr) ok = setCurrentState(msg->getInt());
@@ -114,7 +114,7 @@ void Switch::updateData(const LCreal dt)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for Switch
 //------------------------------------------------------------------------------
-Basic::Object* Switch::getSlotByIndex(const int si)
+basic::Object* Switch::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

@@ -6,7 +6,7 @@
 
 namespace oe {
 
-namespace Basic { class Angle; class Distance; class Number; }
+namespace basic { class Angle; class Distance; class Number; }
 
 namespace Dynamics {
 
@@ -57,13 +57,13 @@ public:
     void reset() override;
 
     // Slot methods
-    virtual bool setSlotMinSpeed(const Basic::Number* const msg);
-    virtual bool setSlotSpeedMaxG(const Basic::Number* const msg);
-    virtual bool setSlotMaxG(const Basic::Number* const msg);
-    virtual bool setSlotMaxAccel(const Basic::Number* const msg);
-    virtual bool setSlotCmdAltitude(const Basic::Distance* const msg);
-    virtual bool setSlotCmdHeading(const Basic::Angle* const msg);
-    virtual bool setSlotCmdVelocity(const Basic::Number* const msg);
+    virtual bool setSlotMinSpeed(const basic::Number* const msg);
+    virtual bool setSlotSpeedMaxG(const basic::Number* const msg);
+    virtual bool setSlotMaxG(const basic::Number* const msg);
+    virtual bool setSlotMaxAccel(const basic::Number* const msg);
+    virtual bool setSlotCmdAltitude(const basic::Distance* const msg);
+    virtual bool setSlotCmdHeading(const basic::Angle* const msg);
+    virtual bool setSlotCmdVelocity(const basic::Number* const msg);
 
 private:
     void updateRAC(const LCreal dt);

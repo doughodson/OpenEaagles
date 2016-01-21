@@ -8,14 +8,14 @@
 
 namespace oe {
 
-namespace Basic { class Object; }
+namespace basic { class Object; }
 
 namespace Glut {
 
 class Factory
 {
 public:
-   static Basic::Object* createObj(const char* name);
+   static basic::Object* createObj(const char* name);
 
 protected:
    Factory();   // prevent object creation

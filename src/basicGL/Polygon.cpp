@@ -159,7 +159,7 @@ void Polygon::drawFunc()
             osg::Vec3* ptr = nullptr;
             for (unsigned int i = 0; i < nv; i++) {
                 if (colGradient != nullptr) {
-                    Basic::Color* col = colGradient->getColorByIdx(i+1);
+                    basic::Color* col = colGradient->getColorByIdx(i+1);
                     if (col != nullptr)
                        glColor4f(static_cast<GLfloat>(col->red()), static_cast<GLfloat>(col->green()),
                                  static_cast<GLfloat>(col->blue()), static_cast<GLfloat>(col->alpha()));

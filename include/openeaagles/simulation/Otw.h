@@ -10,7 +10,7 @@
 #include "openeaagles/basic/Component.h"
 
 namespace oe {
-   namespace Basic {
+   namespace basic {
       class Distance;
       class Identifier;
       class Number;
@@ -25,7 +25,7 @@ class Otm;
 
 //------------------------------------------------------------------------------
 // Class: Otw
-// Base class: Basic::Object -> Basic::Component -> Otw
+// Base class: basic::Object -> basic::Component -> Otw
 // Description: Abstract Out-The-Window (OTW) visual system interface class
 //
 // Notes:
@@ -57,9 +57,9 @@ class Otm;
 //    otwModelTypes  <PairStream>   ! OTW system's model type IDs (list of Otm objects) (default: 0)
 //
 //------------------------------------------------------------------------------
-class Otw : public Basic::Component
+class Otw : public basic::Component
 {
-    DECLARE_SUBCLASS(Otw,Basic::Component)
+    DECLARE_SUBCLASS(Otw,basic::Component)
 
 public:
     // Model table types
@@ -81,7 +81,7 @@ public:
 
     virtual bool setRefLatitude(const double v);                     // Sets the visual database reference latitude  (degs)
     virtual bool setRefLongitude(const double v);                    // Sets the visual database reference longitude (degs)
-    virtual void setPlayerList(Basic::PairStream* const newPlayerList); // Sets the player list that we're to use to generate player/models
+    virtual void setPlayerList(basic::PairStream* const newPlayerList); // Sets the player list that we're to use to generate player/models
 
     bool setMaxRange(const LCreal r);                                // Sets the max range (meters)
     bool setMaxModels(const unsigned int n);                         // Sets the max number of active, in-range player/models
@@ -92,13 +92,13 @@ public:
     virtual void setOwnship(Player* const newOwnship);
 
     // Slot functions
-    virtual bool setSlotMaxRange(const Basic::Distance* const msg);       // Sets the max range (Distance) slot
-    virtual bool setSlotMaxRange(const Basic::Number* const msg);         // Sets the max range (meters) slot
-    virtual bool setSlotMaxModels(const Basic::Number* const msg);        // Sets the max number of active, in-range player/models slot
-    virtual bool setSlotMaxElevations(const Basic::Number* const msg);    // Sets the max number of player terrain elevation requests slot
-    virtual bool setSlotRefLatitude(const Basic::Number* const msg);      // Sets the visual database reference latitude  (degs) slot
-    virtual bool setSlotRefLongitude(const Basic::Number* const msg);     // Sets the visual database reference longitude (degs) slot
-    virtual bool setSlotOtwModelTypes(const Basic::PairStream* const msg); // Sets the list of OTW model type IDs (Otm objects)
+    virtual bool setSlotMaxRange(const basic::Distance* const msg);       // Sets the max range (Distance) slot
+    virtual bool setSlotMaxRange(const basic::Number* const msg);         // Sets the max range (meters) slot
+    virtual bool setSlotMaxModels(const basic::Number* const msg);        // Sets the max number of active, in-range player/models slot
+    virtual bool setSlotMaxElevations(const basic::Number* const msg);    // Sets the max number of player terrain elevation requests slot
+    virtual bool setSlotRefLatitude(const basic::Number* const msg);      // Sets the visual database reference latitude  (degs) slot
+    virtual bool setSlotRefLongitude(const basic::Number* const msg);     // Sets the visual database reference longitude (degs) slot
+    virtual bool setSlotOtwModelTypes(const basic::PairStream* const msg); // Sets the list of OTW model type IDs (Otm objects)
 
     void updateTC(const LCreal dt = 0.0) override;
     void reset() override;
@@ -110,7 +110,7 @@ protected:
     virtual LCreal computeRangeToPlayer(const Player* const ip) const;
 
     // Find a player's model object in table 'type' by the player IDs
-    virtual OtwModel* findModel(const unsigned short playerID, const Basic::String* const federateName, const TableType type);
+    virtual OtwModel* findModel(const unsigned short playerID, const basic::String* const federateName, const TableType type);
 
     // Find a player's model object in table 'type' using a pointer to the player
     virtual OtwModel* findModel(const Player* const player, const TableType type);
@@ -179,7 +179,7 @@ private:
 
    // Simulation inputs
    Player*        ownship;                         // Current ownship
-   Basic::PairStream*  playerList;               // Current player list
+   basic::PairStream*  playerList;               // Current player list
    bool           rstFlg;                          // Reset in progress
    bool           rstReq;                          // Reset request flag
 
@@ -193,10 +193,10 @@ private:
 
    // OtwModel quick lookup key
     struct OtwModelKey {
-      OtwModelKey(const unsigned short pid, const Basic::String* const federateName);
+      OtwModelKey(const unsigned short pid, const basic::String* const federateName);
       // OtwModel IDs  -- Comparisons in this order --
       unsigned short  playerID;   // Player ID
-      Basic::safe_ptr<const Basic::String> fName;  // Federate name
+      basic::safe_ptr<const basic::String> fName;  // Federate name
    };
 
    // OTW model type table
@@ -211,7 +211,7 @@ private:
 
 //------------------------------------------------------------------------------
 // Class: OtwModel
-// Base class: Basic::Object -> OtwModel
+// Base class: basic::Object -> OtwModel
 // Description: General class that associates an active, in-range player with the
 //              OTW system's model object or height-of-terrain request.
 //
@@ -223,9 +223,9 @@ private:
 //       the Otw class).
 // Factory name: OtwModel
 //------------------------------------------------------------------------------
-class OtwModel : public Basic::Object
+class OtwModel : public basic::Object
 {
-    DECLARE_SUBCLASS(OtwModel,Basic::Object)
+    DECLARE_SUBCLASS(OtwModel,basic::Object)
 
 public:
     enum State {
@@ -249,7 +249,7 @@ public:
     const Otm* getTypeMapper() const         { return typeMapper; }     // OTW unique model type mapper
 
     unsigned short getPlayerID() const       { return playerID; }         // Player ID for the player associated with this model
-    const Basic::String* getFederateName() const { return federateName; } // Player's federate name (if networked)
+    const basic::String* getFederateName() const { return federateName; } // Player's federate name (if networked)
 
     int getAgeCount() const                  { return ageCount; }       // Age counter value (number of OTW frames since last OTW update)
     int incAgeCount()                        { return ++ageCount; }     // Increments the age counter
@@ -290,12 +290,12 @@ private:
 
     // Model IDs  -- Comparisons in this order --
     unsigned short playerID;     // Player ID
-    Basic::safe_ptr<const Basic::String> federateName; // Federate name
+    basic::safe_ptr<const basic::String> federateName; // Federate name
 };
 
 //------------------------------------------------------------------------------
 // Class: Otm
-// Base class: Basic::Object -> Otm
+// Base class: basic::Object -> Otm
 //
 // Description: OTW-Type-Mapper (OTM) --
 //              Maps player's form name and type string to a OTW entity type ID.
@@ -337,29 +337,29 @@ private:
 //          (e.g., Test player's general "F-16" type would not match our "F-16C")
 //
 //------------------------------------------------------------------------------
-class Otm : public Basic::Object
+class Otm : public basic::Object
 {
-    DECLARE_SUBCLASS(Otm,Basic::Object)
+    DECLARE_SUBCLASS(Otm,basic::Object)
 
 public:
     Otm();
 
     unsigned int getTypeId() const                                        { return typeId; }      // OTW entity type ID number
     virtual bool setTypeId(const unsigned int newType);                   // Sets the OTW entity type number
-    virtual bool setSlotTypeId(const Basic::Number* const msg);           // Sets the OTW entity type number
+    virtual bool setSlotTypeId(const basic::Number* const msg);           // Sets the OTW entity type number
 
-    const Basic::Identifier* getRefFormName() const                       { return refFormName; } // Reference form name
-    virtual bool setSlotRefFormName(const Basic::Identifier* const msg);  // Sets the Reference form name
+    const basic::Identifier* getRefFormName() const                       { return refFormName; } // Reference form name
+    virtual bool setSlotRefFormName(const basic::Identifier* const msg);  // Sets the Reference form name
 
-    const Basic::String* getRefTypeName() const                           { return refTypeName; } // Reference type name
-    virtual bool setSlotRefTypeName(const Basic::String* const msg);      // Sets the Reference type name
+    const basic::String* getRefTypeName() const                           { return refTypeName; } // Reference type name
+    virtual bool setSlotRefTypeName(const basic::String* const msg);      // Sets the Reference type name
 
     // True if player's form & type names match our reference form and type names.
     virtual bool isMatchingPlayerType(const Player* const p) const;
 
 private:
-    Basic::safe_ptr<const Basic::Identifier>  refFormName;   // Reference form name
-    Basic::safe_ptr<const Basic::String> refTypeName;        // Reference type name (e.g., "F-16C", "T-71"
+    basic::safe_ptr<const basic::Identifier>  refFormName;   // Reference form name
+    basic::safe_ptr<const basic::String> refTypeName;        // Reference type name (e.g., "F-16C", "T-71"
     unsigned int typeId;                                 // OTW entity type ID number
 };
 

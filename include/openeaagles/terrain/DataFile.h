@@ -19,9 +19,9 @@ namespace Terrain {
 //    2) the final elevation point [n-1] is at the maximum range
 //    3) The size of all arrays, n, must contain at least 2 points (ref point & max range)
 //------------------------------------------------------------------------------
-class DataFile : public Basic::Terrain
+class DataFile : public basic::Terrain
 {
-   DECLARE_SUBCLASS(DataFile, Basic::Terrain)
+   DECLARE_SUBCLASS(DataFile, basic::Terrain)
 
 public:
    DataFile();
@@ -55,7 +55,7 @@ public:
    const short* getColumn(const unsigned int idx) const;
 
    // ---
-   // Basic::Terrain interface
+   // basic::Terrain interface
    // ---
 
    bool isDataLoaded() const override;
@@ -90,7 +90,7 @@ protected:
    unsigned int nptlong;            // Number of points in longitude (i.e., number of columns)
    short    voidValue;              // Value representing a void (missing) data point
 
-   // Basic::Terrain protected interface
+   // basic::Terrain protected interface
    void clearData() override;
 };
 

@@ -30,8 +30,8 @@ END_SLOTTABLE(MergingIrSensor)
 
 //  Map slot table
 BEGIN_SLOT_MAP(MergingIrSensor)
-   ON_SLOT(1,setSlotAzimuthBin,Basic::Number)
-   ON_SLOT(2,setSlotElevationBin,Basic::Number)
+   ON_SLOT(1,setSlotAzimuthBin,basic::Number)
+   ON_SLOT(2,setSlotElevationBin,basic::Number)
 END_SLOT_MAP()
 
 
@@ -254,7 +254,7 @@ void MergingIrSensor::mergeIrReturns()
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Basic::Object* MergingIrSensor::getSlotByIndex(const int si)
+basic::Object* MergingIrSensor::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
@@ -273,13 +273,13 @@ bool MergingIrSensor::setElevationBin(const LCreal w)
    return true;
 }
 
-bool MergingIrSensor::setSlotAzimuthBin(const Basic::Number* const msg)
+bool MergingIrSensor::setSlotAzimuthBin(const basic::Number* const msg)
 {
    LCreal value = 0.0;
 
-   const Basic::Angle* a = dynamic_cast<const Basic::Angle*>(msg);
+   const basic::Angle* a = dynamic_cast<const basic::Angle*>(msg);
    if (a != nullptr) {
-       Basic::Radians r;
+       basic::Radians r;
        value = static_cast<LCreal>(r.convert(*a));
    }
    else if (msg != nullptr) {
@@ -289,13 +289,13 @@ bool MergingIrSensor::setSlotAzimuthBin(const Basic::Number* const msg)
    return true;
 }
 
-bool MergingIrSensor::setSlotElevationBin(const Basic::Number* const msg)
+bool MergingIrSensor::setSlotElevationBin(const basic::Number* const msg)
 {
    LCreal value = 0.0;
 
-   const Basic::Angle* a = dynamic_cast<const Basic::Angle*>(msg);
+   const basic::Angle* a = dynamic_cast<const basic::Angle*>(msg);
    if (a != nullptr) {
-       Basic::Radians r;
+       basic::Radians r;
        value = static_cast<LCreal>(r.convert(*a));
    }
    else if (msg != nullptr) {

@@ -50,11 +50,11 @@ public:
    virtual const IrSeeker* getSeeker() const;            // Get the seeker model (const version)
    virtual bool setSeeker(IrSeeker* const p);            // Sets the IR's seeker model
 
-   virtual const Basic::String* getSeekerName() const;   // Name of the seeker model, or zero (0) if none
+   virtual const basic::String* getSeekerName() const;   // Name of the seeker model, or zero (0) if none
 
    // Slot functions
-   virtual bool setSlotSeekerName(Basic::String* const p);
-   virtual bool setSlotDisableQueries(Basic::Number* const msg);
+   virtual bool setSlotSeekerName(basic::String* const p);
+   virtual bool setSlotDisableQueries(basic::Number* const msg);
 
    void updateData(const LCreal dt = 0.0) override;
    void reset() override;
@@ -69,7 +69,7 @@ protected:
 
 private:
    IrSeeker*  seeker;               // Our seeker
-   Basic::String* seekerName;       // Name of our seeker
+   basic::String* seekerName;       // Name of our seeker
 
    bool disableQueries;             // Disable sending queries flag
 };

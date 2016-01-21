@@ -45,12 +45,12 @@ END_SLOTTABLE(EmissionPduHandler)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(EmissionPduHandler)
-    ON_SLOT(1, setSlotEmitterName,     Basic::Number )
-    ON_SLOT(2, setSlotEmitterFunction, Basic::Number )
+    ON_SLOT(1, setSlotEmitterName,     basic::Number )
+    ON_SLOT(2, setSlotEmitterFunction, basic::Number )
     ON_SLOT(3, setSlotSensorTemplate,  Simulation::RfSensor )
     ON_SLOT(4, setSlotAntennaTemplate, Simulation::Antenna )
-    ON_SLOT(5, setSlotDefaultIn,       Basic::Number )
-    ON_SLOT(6, setSlotDefaultOut,      Basic::Number )
+    ON_SLOT(5, setSlotDefaultIn,       basic::Number )
+    ON_SLOT(6, setSlotDefaultOut,      basic::Number )
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -130,13 +130,13 @@ void EmissionPduHandler::copyData(const EmissionPduHandler& org, const bool cc)
 //------------------------------------------------------------------------------
 void EmissionPduHandler::deleteData()
 {
-   if (sensor != nullptr) { sensor->event(oe::Basic::Component::SHUTDOWN_EVENT); }
+   if (sensor != nullptr) { sensor->event(oe::basic::Component::SHUTDOWN_EVENT); }
    setSensor(nullptr);
 
-   if (sensorModel != nullptr) { sensorModel->event(oe::Basic::Component::SHUTDOWN_EVENT); }
+   if (sensorModel != nullptr) { sensorModel->event(oe::basic::Component::SHUTDOWN_EVENT); }
    setSensorModel(nullptr);
 
-   if (antennaModel != nullptr) { antennaModel->event(oe::Basic::Component::SHUTDOWN_EVENT); }
+   if (antennaModel != nullptr) { antennaModel->event(oe::basic::Component::SHUTDOWN_EVENT); }
    setAntennaModel(nullptr);
 }
 
@@ -246,7 +246,7 @@ bool EmissionPduHandler::setTemplatesFound(const bool newTF)
 //------------------------------------------------------------------------------
 
 // Sets the our DIS Emitter Name
-bool EmissionPduHandler::setSlotEmitterName(const Basic::Number* const msg)
+bool EmissionPduHandler::setSlotEmitterName(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -259,7 +259,7 @@ bool EmissionPduHandler::setSlotEmitterName(const Basic::Number* const msg)
 }
 
 // Sets our DIS Emitter Function
-bool EmissionPduHandler::setSlotEmitterFunction(const Basic::Number* const msg)
+bool EmissionPduHandler::setSlotEmitterFunction(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -283,7 +283,7 @@ bool EmissionPduHandler::setSlotAntennaTemplate(Simulation::Antenna* const msg)
    return setAntennaModel(msg);
 }
 
-bool EmissionPduHandler::setSlotDefaultIn(const Basic::Number* const msg)
+bool EmissionPduHandler::setSlotDefaultIn(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -292,7 +292,7 @@ bool EmissionPduHandler::setSlotDefaultIn(const Basic::Number* const msg)
    return ok;
 }
 
-bool EmissionPduHandler::setSlotDefaultOut(const Basic::Number* const msg)
+bool EmissionPduHandler::setSlotDefaultOut(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -328,7 +328,7 @@ bool EmissionPduHandler::isMatchingRfSystemType(const EmissionSystem* const p) c
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Basic::Object* EmissionPduHandler::getSlotByIndex(const int si)
+basic::Object* EmissionPduHandler::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
@@ -384,14 +384,14 @@ bool EmissionPduHandler::updateIncoming(const ElectromagneticEmissionPDU* const 
                if (gimbal == nullptr) {
                   // Create the container gimbal!
                   gimbal = new Simulation::Gimbal();
-                  Basic::Pair* pair = new Basic::Pair("gimbal", gimbal);
+                  basic::Pair* pair = new basic::Pair("gimbal", gimbal);
                   gimbal->unref();  // pair owns it
                   player->addComponent(pair);
                   pair->unref();    // player owns it
                }
                // Add this antenna to the container gimbal
                ap->container(gimbal);
-               Basic::Pair* pair = new Basic::Pair("antenna", ap);
+               basic::Pair* pair = new basic::Pair("antenna", ap);
                ap->unref();   // pair owns it
                gimbal->addComponent(pair);
                pair->unref(); // top level gimbal owns it
@@ -404,14 +404,14 @@ bool EmissionPduHandler::updateIncoming(const ElectromagneticEmissionPDU* const 
                if (sm == nullptr) {
                   // Create the sensor manager
                   sm = new Simulation::SensorMgr();
-                  Basic::Pair* pair = new Basic::Pair("sensorMgr", sm);
+                  basic::Pair* pair = new basic::Pair("sensorMgr", sm);
                   sm->unref();   // pair owns it
                   player->addComponent(pair);
                   pair->unref(); // player owns it
                }
                // Add this system to the sensor manager
                rp->container(sm);
-               Basic::Pair* pair = new Basic::Pair("sensor", rp);
+               basic::Pair* pair = new basic::Pair("sensor", rp);
                rp->unref();   // pair owns it
                sm->addComponent(pair);
                pair->unref(); // sensor manager owns it
@@ -449,7 +449,7 @@ bool EmissionPduHandler::updateIncoming(const ElectromagneticEmissionPDU* const 
 
          // DPG ### Setting peak power to the effected radiated power from the PDU,
          // so our transmitter loss and antenna gain should both be set to 0 dB (real 1.0).
-         Basic::Decibel db( bd->parameterData.effectiveRadiatedPower  );  // dBm (dB milliwatts)
+         basic::Decibel db( bd->parameterData.effectiveRadiatedPower  );  // dBm (dB milliwatts)
          rfSys->setPeakPower( db.getReal() / 1000.0f );
 
          rfSys->setPRF( bd->parameterData.pulseRepetitiveFrequency );
@@ -462,7 +462,7 @@ bool EmissionPduHandler::updateIncoming(const ElectromagneticEmissionPDU* const 
                antenna->setRefAzimuth( 0 );
                antenna->setRefElevation( bd->beamData.beamElevationCenter );
                antenna->setScanMode( Simulation::ScanGimbal::CIRCULAR_SCAN );
-               antenna->setCmdRate( (24.0f * static_cast<LCreal>(Basic::Angle::D2RCC)), 0 );  // default rates
+               antenna->setCmdRate( (24.0f * static_cast<LCreal>(basic::Angle::D2RCC)), 0 );  // default rates
          }
          else {
             // Standard search volume parameters
@@ -559,7 +559,7 @@ bool EmissionPduHandler::updateOutgoing(const LCreal curExecTime, Nib* const nib
             //pdu->dumpData();
 
             int length = pdu->header.length;
-            if (Basic::NetHandler::isNotNetworkByteOrder()) pdu->swapBytes();
+            if (basic::NetHandler::isNotNetworkByteOrder()) pdu->swapBytes();
             pduSent = disIO->sendData(reinterpret_cast<char*>(pdu), length);
 
             setEmPduExecTime(curExecTime);
@@ -658,7 +658,7 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
          if (loss >= 1.0f) power = (power / loss);
 
          // Effected radiated power -- dBm (dB milliwatts)
-         Basic::Decibel db;
+         basic::Decibel db;
          db.setValue( power * 1000.0f );
          bd.parameterData.effectiveRadiatedPower = static_cast<float>(db.getValueDB());
 
@@ -674,9 +674,9 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
          else {
             // Default values
             bd.beamData.beamAzimuthCenter   = 0.0f;
-            bd.beamData.beamAzimuthSweep    = 30.0f * static_cast<float>(Basic::Angle::D2RCC);
+            bd.beamData.beamAzimuthSweep    = 30.0f * static_cast<float>(basic::Angle::D2RCC);
             bd.beamData.beamElevationCenter = 0.0f;
-            bd.beamData.beamElevationSweep  = 2.0f * static_cast<float>(Basic::Angle::D2RCC);
+            bd.beamData.beamElevationSweep  = 2.0f * static_cast<float>(basic::Angle::D2RCC);
          }
          bd.beamData.beamSweepSync = 0;
 
@@ -694,7 +694,7 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
 
          if (getEmitterFunction() != ESF_JAMMING) {
             // Radar
-            if ( bd.beamData.beamAzimuthSweep == 0 || bd.beamData.beamAzimuthSweep >= (180.0f * Basic::Angle::D2RCC) ) {
+            if ( bd.beamData.beamAzimuthSweep == 0 || bd.beamData.beamAzimuthSweep >= (180.0f * basic::Angle::D2RCC) ) {
                // ... full azimuth sweep?  assume searching
                bd.beamFunction = BF_SEARCH;
                es.emitterSystem.function = ESF_EW; // override emitter sys function to EW when searching
@@ -725,7 +725,7 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
          Simulation::TrackManager* tm = beam->getTrackManager();
          if (tm != nullptr) {
             const int max1 = MAX_TARGETS_IN_TJ_FIELD + 1; // check for one more than the max (highDensityTracks)
-            Basic::safe_ptr<Simulation::Track> trackList[max1];
+            basic::safe_ptr<Simulation::Track> trackList[max1];
             int n = tm->getTrackList(trackList,max1);
             if (n <= MAX_TARGETS_IN_TJ_FIELD) {
 

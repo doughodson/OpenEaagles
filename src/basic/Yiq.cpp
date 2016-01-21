@@ -5,7 +5,7 @@
 #include "openeaagles/basic/Float.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 IMPLEMENT_SUBCLASS(Yiq,"yiq")
 
@@ -182,5 +182,5 @@ std::ostream& Yiq::serialize(std::ostream& sout, const int i, const bool slotsOn
     return sout;
 }
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace

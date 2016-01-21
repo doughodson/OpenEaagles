@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: TcpClient
 //------------------------------------------------------------------------------
-#ifndef __oe_Basic_TcpClient_H__
-#define __oe_Basic_TcpClient_H__
+#ifndef __oe_basic_TcpClient_H__
+#define __oe_basic_TcpClient_H__
 
 #include "openeaagles/basic/nethandlers/TcpHandler.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 //------------------------------------------------------------------------------
 // Class: TcpClient
@@ -55,7 +55,7 @@ private:
     char* ipAddr;                // IP Address
 };
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace
 
 #endif

@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: IoData
 //------------------------------------------------------------------------------
-#ifndef __oe_Basic_IoData_H__
-#define __oe_Basic_IoData_H__
+#ifndef __oe_basic_IoData_H__
+#define __oe_basic_IoData_H__
 
 #include "openeaagles/basic/Object.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 //------------------------------------------------------------------------------
 // Class:  IoData
@@ -99,7 +99,7 @@ public:
    virtual void clear();
 };
 
-} // end Basic namespace
+} // end basic namespace
 } // end oe namespace
 
 #endif

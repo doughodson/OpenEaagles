@@ -11,24 +11,24 @@
 
 namespace oe {
 
-namespace Basic { class PairStream; }
+namespace basic { class PairStream; }
 
 namespace BasicGL {
 
-class ColorGradient : public Basic::Color {
-    DECLARE_SUBCLASS(ColorGradient,Basic::Color)
+class ColorGradient : public basic::Color {
+    DECLARE_SUBCLASS(ColorGradient,basic::Color)
 
 public:
     ColorGradient();
 
-    Basic::Color* getColorByIdx(const int idx);
+    basic::Color* getColorByIdx(const int idx);
 
 protected:
-    bool setSlotColors(Basic::PairStream* const newStream);
+    bool setSlotColors(basic::PairStream* const newStream);
 
 private:
     static const int MAX_VALUES = 50;
-    Basic::PairStream* myColors;
+    basic::PairStream* myColors;
 };
 
 } // End BasicGL namespace

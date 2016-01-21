@@ -9,7 +9,7 @@
 #include "openeaagles/basic/PairStream.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
 namespace Ubf {
 
 IMPLEMENT_SUBCLASS(Arbiter, "UbfArbiter")
@@ -25,7 +25,7 @@ END_SLOTTABLE(Arbiter)
 
 //  mapping of slots to handles
 BEGIN_SLOT_MAP(Arbiter)
-   ON_SLOT(1, setSlotBehaviors, Basic::PairStream)
+   ON_SLOT(1, setSlotBehaviors, basic::PairStream)
 END_SLOT_MAP()
 
 
@@ -35,7 +35,7 @@ END_SLOT_MAP()
 Arbiter::Arbiter()
 {
    STANDARD_CONSTRUCTOR()
-   behaviors = new Basic::List();
+   behaviors = new basic::List();
 }
 
 void Arbiter::deleteData()
@@ -50,10 +50,10 @@ void Arbiter::deleteData()
 Action* Arbiter::genAction(const State* const state, const LCreal dt)
 {
    // create list for action set
-   Basic::List* actionSet = new Basic::List();
+   basic::List* actionSet = new basic::List();
 
    // fill out list of recommended actions by behaviors
-   Basic::List::Item* item = behaviors->getFirstItem();
+   basic::List::Item* item = behaviors->getFirstItem();
    while (item != nullptr) {
       // get a behavior
       Behavior* behavior = static_cast<Behavior*>(item->getValue());
@@ -84,13 +84,13 @@ Action* Arbiter::genAction(const State* const state, const LCreal dt)
 //------------------------------------------------------------------------------
 // Default: select the action with the highest vote
 //------------------------------------------------------------------------------
-Action* Arbiter::genComplexAction(Basic::List* const actionSet)
+Action* Arbiter::genComplexAction(basic::List* const actionSet)
 {
    Action* complexAction = nullptr;
    unsigned int maxVote = 0;
 
    // process entire action set
-   Basic::List::Item* item = actionSet->getFirstItem();
+   basic::List::Item* item = actionSet->getFirstItem();
    while (item != nullptr) {
 
       // Is this action's vote higher than the previous?
@@ -133,15 +133,15 @@ void Arbiter::addBehavior(Behavior* const x)
 // Slot functions
 //------------------------------------------------------------------------------
 
-bool Arbiter::setSlotBehaviors(Basic::PairStream* const x)
+bool Arbiter::setSlotBehaviors(basic::PairStream* const x)
 {
    bool ok = true;
 
    // First, make sure they are all behaviors
    {
-      Basic::List::Item* item = x->getFirstItem();
+      basic::List::Item* item = x->getFirstItem();
       while (item != nullptr && ok) {
-         Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+         basic::Pair* pair = static_cast<basic::Pair*>(item->getValue());
          item = item->getNext();
          Behavior* b = dynamic_cast<Behavior*>( pair->object() );
          if (b == nullptr) {
@@ -154,9 +154,9 @@ bool Arbiter::setSlotBehaviors(Basic::PairStream* const x)
 
    // next, add behaviors to our list
    if (ok) {
-      Basic::List::Item* item = x->getFirstItem();
+      basic::List::Item* item = x->getFirstItem();
       while (item != nullptr) {
-         Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+         basic::Pair* pair = static_cast<basic::Pair*>(item->getValue());
          item = item->getNext();
          Behavior* b = static_cast<Behavior*>(pair->object());
          addBehavior(b);
@@ -169,12 +169,12 @@ bool Arbiter::setSlotBehaviors(Basic::PairStream* const x)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Basic::Object* Arbiter::getSlotByIndex(const int si)
+basic::Object* Arbiter::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }
 
 } // End Ubf namespace
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace
 

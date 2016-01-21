@@ -19,8 +19,8 @@ END_SLOTTABLE(PushButton)
 //  Map slot table to handles
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(PushButton)
-   ON_SLOT(1, setSlotFunction, Basic::Number)
-   ON_SLOT(2, setSlotStartState, Basic::Number)
+   ON_SLOT(1, setSlotFunction, basic::Number)
+   ON_SLOT(2, setSlotStartState, basic::Number)
 END_SLOT_MAP()
 
 
@@ -67,7 +67,7 @@ EMPTY_DELETEDATA(PushButton)
 //------------------------------------------------------------------------------
 // setSlotFunction() - sets our pushbutton functionality ie momentary or maintained
 //------------------------------------------------------------------------------
-bool PushButton::setSlotFunction(const Basic::Number* const newFunction)
+bool PushButton::setSlotFunction(const basic::Number* const newFunction)
 {
    bool ok = false;
    if (newFunction != nullptr) {
@@ -79,7 +79,7 @@ bool PushButton::setSlotFunction(const Basic::Number* const newFunction)
 //------------------------------------------------------------------------------
 // setStartFunction() - sets our pushbutton start state  ie not pressed or pressed
 //------------------------------------------------------------------------------
-bool PushButton::setSlotStartState(const Basic::Number* const newFunction)
+bool PushButton::setSlotStartState(const basic::Number* const newFunction)
 {
    bool ok = false;
    if (newFunction != nullptr) {
@@ -154,7 +154,7 @@ void PushButton::updateData(const LCreal dt)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for Button
 //------------------------------------------------------------------------------
-Basic::Object* PushButton::getSlotByIndex(const int si)
+basic::Object* PushButton::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

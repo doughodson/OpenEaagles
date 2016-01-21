@@ -25,7 +25,7 @@ Aam::Aam()
 {
     STANDARD_CONSTRUCTOR()
         
-   static Basic::String gaam(getDescription());
+   static basic::String gaam(getDescription());
    setType(&gaam);
 
    // Default guidance & dynamics for generic A/A missile

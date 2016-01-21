@@ -60,7 +60,7 @@ void Stt::dynamics(const LCreal dt)
         double az = 0.0;
         double el = 0.0;
 
-        Basic::safe_ptr<Simulation::Track> trackList[2];
+        basic::safe_ptr<Simulation::Track> trackList[2];
         int n = tm->getTrackList(trackList,2);
 
         if (n > 0) {

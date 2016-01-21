@@ -8,7 +8,7 @@
 
 namespace oe {
 
-namespace Basic { class Integer; }
+namespace basic { class Integer; }
 
 namespace Simulation {
 
@@ -41,8 +41,8 @@ namespace Simulation {
 //
 //    revolutionsPerSec    <Number>       ! Revolutions per second for conical and circular scans (hz) (default: 5)
 //
-//    scanRadius           <Number>       ! Radius of the circle we are using for conical scans (radians or Basic::Angle} (spiral scan too)
-//                                        ! (default: 2.0 * Basic::Angle::D2RCC, 2 degree radius)
+//    scanRadius           <Number>       ! Radius of the circle we are using for conical scans (radians or basic::Angle} (spiral scan too)
+//                                        ! (default: 2.0 * basic::Angle::D2RCC, 2 degree radius)
 //
 //    pseudoRandomPattern  <PairStream>   ! Pseudo Random pattern vertices (2D - az and el) (default: 0, 0)
 //
@@ -50,8 +50,8 @@ namespace Simulation {
 //
 //
 // Events:
-//    SCAN_START        (Basic::Integer)     Start of scan event
-//    SCAN_END          (Basic::Integer)     End of scan event
+//    SCAN_START        (basic::Integer)     Start of scan event
+//    SCAN_END          (basic::Integer)     End of scan event
 //
 //
 // Public member functions:
@@ -189,24 +189,24 @@ public:
     virtual bool setSearchVolume(const double width, const double height, const int reqBars = 0);
 
     // Event handler(s)
-    virtual bool onStartScanEvent(Basic::Integer* const bar);
-    virtual bool onEndScanEvent(Basic::Integer* const bar);
+    virtual bool onStartScanEvent(basic::Integer* const bar);
+    virtual bool onEndScanEvent(basic::Integer* const bar);
 
     // Slot functions
-    virtual bool setSlotScanMode(Basic::String* const newMode);
-    virtual bool setSlotLeftToRightScan(const Basic::Number* const newLeftToRightScan);
-    virtual bool setSlotScanWidth(const Basic::Number* const newWidth);
-    virtual bool setSlotSearchVolume(Basic::List* const numList);
-    virtual bool setSlotRefPosition(const Basic::List* const numList);
-    virtual bool setSlotBarSpacing(const Basic::Number* const newSpacing);
-    virtual bool setSlotNumBars(const Basic::Number* const newNumBars);
-    virtual bool setSlotRevPerSec(const Basic::Number* const newRevPerSec);
-    virtual bool setSlotScanRadius(const Basic::Number* const newScanRadius);
-    virtual bool setSlotPRVertices(const Basic::PairStream* const prObj);
-    virtual bool setSlotMaxRevs(const Basic::Number* const newMaxRevs);
+    virtual bool setSlotScanMode(basic::String* const newMode);
+    virtual bool setSlotLeftToRightScan(const basic::Number* const newLeftToRightScan);
+    virtual bool setSlotScanWidth(const basic::Number* const newWidth);
+    virtual bool setSlotSearchVolume(basic::List* const numList);
+    virtual bool setSlotRefPosition(const basic::List* const numList);
+    virtual bool setSlotBarSpacing(const basic::Number* const newSpacing);
+    virtual bool setSlotNumBars(const basic::Number* const newNumBars);
+    virtual bool setSlotRevPerSec(const basic::Number* const newRevPerSec);
+    virtual bool setSlotScanRadius(const basic::Number* const newScanRadius);
+    virtual bool setSlotPRVertices(const basic::PairStream* const prObj);
+    virtual bool setSlotMaxRevs(const basic::Number* const newMaxRevs);
 
     // Component Interface
-    bool event(const int event, Basic::Object* const obj = nullptr) override;
+    bool event(const int event, basic::Object* const obj = nullptr) override;
     void reset() override;
 
 protected:

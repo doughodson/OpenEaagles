@@ -9,7 +9,7 @@
 
 namespace oe {
 
-   namespace Basic {
+   namespace basic {
       class List;
    }
 
@@ -225,10 +225,10 @@ public:
    void clearDisplayMode(const int t)     { dmode &= ~t; }
    void clearAllDisplayModes()            { dmode = 0; }
 
-   Basic::String::Justify justification() const;
-   Basic::String::Justify justification(const Basic::String::Justify t);
+   basic::String::Justify justification() const;
+   basic::String::Justify justification(const basic::String::Justify t);
 
-   virtual bool setPosition(const Basic::List* const spobj);
+   virtual bool setPosition(const basic::List* const spobj);
 
    virtual bool withinField(const int ln, const int cp) const;
    virtual void setText(const char newString[]);
@@ -256,10 +256,10 @@ public:
    bool isInheritColor() const                      { return inheritColor; }
    bool setInheritColor(const bool i)               { inheritColor = i; return true; }
 
-   virtual bool onSetLine(const Basic::Number* const oslobj);
-   virtual bool onSetColumn(const Basic::Number* const oscobj);
+   virtual bool onSetLine(const basic::Number* const oslobj);
+   virtual bool onSetColumn(const basic::Number* const oscobj);
 
-   const Basic::String& getInputExample() const  { return inputExample; }
+   const basic::String& getInputExample() const  { return inputExample; }
    int getCharacterPos() const                   { return icp; }
 
    bool cursor(int* ln, int* cp) const override;
@@ -270,21 +270,21 @@ public:
 
 protected:
    //slot table macro functions
-   virtual bool setSlotWidth(const Basic::Number* const swobj);
-   virtual bool setSlotHighlight(const Basic::Number* const shobj);
-   virtual bool setSlotUnderline(const Basic::Number* const suobj);
-   virtual bool setSlotReversed(const Basic::Number* const srobj);
-   virtual bool setSlotJustification(const Basic::String* const sjobj);
-   virtual bool setSlotVertical(const Basic::Number* const ssobj);
-   virtual bool setSlotBrackets(const Basic::Number* const obj);
-   virtual bool setSlotLinked(const Basic::Number* const msg);
-   virtual bool setSlotInheritColor(const Basic::Number* const ic);
-   virtual bool setSlotFont(const Basic::String* const font);
-   virtual bool setSlotStartCharPos(const Basic::Number* const x);
+   virtual bool setSlotWidth(const basic::Number* const swobj);
+   virtual bool setSlotHighlight(const basic::Number* const shobj);
+   virtual bool setSlotUnderline(const basic::Number* const suobj);
+   virtual bool setSlotReversed(const basic::Number* const srobj);
+   virtual bool setSlotJustification(const basic::String* const sjobj);
+   virtual bool setSlotVertical(const basic::Number* const ssobj);
+   virtual bool setSlotBrackets(const basic::Number* const obj);
+   virtual bool setSlotLinked(const basic::Number* const msg);
+   virtual bool setSlotInheritColor(const basic::Number* const ic);
+   virtual bool setSlotFont(const basic::String* const font);
+   virtual bool setSlotStartCharPos(const basic::Number* const x);
 
-   Basic::String origStr;        // Original text saved by setText
-   Basic::String inputExample;   // Input Template String
-   Basic::String str;            // Text stored in field
+   basic::String origStr;        // Original text saved by setText
+   basic::String inputExample;   // Input Template String
+   basic::String str;            // Text stored in field
    Mode     mode;                // Current mode
    int      icp;                 // Input character pointer
    int      inpDspMode;          // Auto switches to this display mode during input mode
@@ -300,9 +300,9 @@ private:
    unsigned int startCP;            // our starting character position that we "write" from
 
    int      dmode;                  // Display mode flags
-   Basic::String::Justify jmode;    // Justification mode
+   basic::String::Justify jmode;    // Justification mode
    bool     inheritColor;           // Inherit color instead of using a default color
-   Basic::String* fontName;         // name of the font we want our display to use (if overridden)
+   basic::String* fontName;         // name of the font we want our display to use (if overridden)
 };
 
 } // End BasicGL namespace

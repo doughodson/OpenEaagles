@@ -45,22 +45,22 @@ BEGIN_SLOTTABLE(IrSensor)
    //"azimuthBin",      // 7: azimuthBin
    //"elevationBin",    // 8: elevationBin
    "maximumRange",      // 7: Maximum Range
-   "trackManagerName",  // 8: Name of the requested Track Manager (Basic::String)
+   "trackManagerName",  // 8: Name of the requested Track Manager (basic::String)
 END_SLOTTABLE(IrSensor)
 
 //  Map slot table
 BEGIN_SLOT_MAP(IrSensor)
-   ON_SLOT(1,setSlotLowerWavelength,Basic::Number)
-   ON_SLOT(2,setSlotUpperWavelength,Basic::Number)
-   ON_SLOT(3,setSlotNEI,Basic::Number)
-   ON_SLOT(4,setSlotThreshold,Basic::Number)
-   ON_SLOT(5,setSlotIFOV,Basic::Number)
-   ON_SLOT(6,setSlotSensorType,Basic::String)
-   //ON_SLOT(7,setSlotFieldOfRegard,Basic::Number)
-   //ON_SLOT(7,setSlotAzimuthBin,Basic::Number)
-   //ON_SLOT(8,setSlotElevationBin,Basic::Number)
-   ON_SLOT(7,setSlotMaximumRange,Basic::Number)
-   ON_SLOT(8,setSlotTrackManagerName,Basic::String)
+   ON_SLOT(1,setSlotLowerWavelength,basic::Number)
+   ON_SLOT(2,setSlotUpperWavelength,basic::Number)
+   ON_SLOT(3,setSlotNEI,basic::Number)
+   ON_SLOT(4,setSlotThreshold,basic::Number)
+   ON_SLOT(5,setSlotIFOV,basic::Number)
+   ON_SLOT(6,setSlotSensorType,basic::String)
+   //ON_SLOT(7,setSlotFieldOfRegard,basic::Number)
+   //ON_SLOT(7,setSlotAzimuthBin,basic::Number)
+   //ON_SLOT(8,setSlotElevationBin,basic::Number)
+   ON_SLOT(7,setSlotMaximumRange,basic::Number)
+   ON_SLOT(8,setSlotTrackManagerName,basic::String)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -126,7 +126,7 @@ void IrSensor::copyData(const IrSensor& org, const bool cc)
    maximumRange = org.maximumRange;
 
    if (org.tmName != nullptr) {
-      Basic::String* copy = org.tmName->clone();
+      basic::String* copy = org.tmName->clone();
       setTrackManagerName( copy );
       copy->unref();
    }
@@ -239,7 +239,7 @@ void IrSensor::transmit(const LCreal dt)
          irQuery->setInstantaneousFieldOfView(getIFOV());
          irQuery->setSendingSensor(this);
          irQuery->setNEI(getNEI());
-         irQuery->setMaxRangeNM(getMaximumRange()* Basic::Distance::M2NM);
+         irQuery->setMaxRangeNM(getMaximumRange()* basic::Distance::M2NM);
          seeker->irRequestSignature(irQuery);
          irQuery->unref();
       } // If irQuery not null
@@ -533,13 +533,13 @@ bool IrSensor::setSensorType(const SensorType st)
 //   return true;
 //}
 //
-//bool IrSensor::setSlotAzimuthBin(const Basic::Number* const msg)
+//bool IrSensor::setSlotAzimuthBin(const basic::Number* const msg)
 //{
 //   LCreal value = 0.0f;
 //
-//   const Basic::Angle* a = dynamic_cast<const Basic::Angle*>(msg);
+//   const basic::Angle* a = dynamic_cast<const basic::Angle*>(msg);
 //   if (a != 0) {
-//       Basic::Radians r;
+//       basic::Radians r;
 //       value = (LCreal)r.convert(*a);
 //   }
 //   else if (msg != 0) {
@@ -557,13 +557,13 @@ bool IrSensor::setMaximumRange(const LCreal w)
    return true;
 }
 
-bool IrSensor::setSlotMaximumRange(const Basic::Number* const msg)
+bool IrSensor::setSlotMaximumRange(const basic::Number* const msg)
 {
    LCreal value = 0.0;
 
-   const Basic::Distance* d = dynamic_cast<const Basic::Distance*>(msg);
+   const basic::Distance* d = dynamic_cast<const basic::Distance*>(msg);
    if (d != nullptr) {
-       Basic::Meters m;
+       basic::Meters m;
        value = static_cast<LCreal>(m.convert(*d));
    }
    else if (msg != nullptr) {
@@ -574,13 +574,13 @@ bool IrSensor::setSlotMaximumRange(const Basic::Number* const msg)
    return true;
 }
 
-//bool IrSensor::setSlotElevationBin(const Basic::Number* const msg)
+//bool IrSensor::setSlotElevationBin(const basic::Number* const msg)
 //{
 //   LCreal value = 0.0f;
 //
-//   const Basic::Angle* a = dynamic_cast<const Basic::Angle*>(msg);
+//   const basic::Angle* a = dynamic_cast<const basic::Angle*>(msg);
 //   if (a != 0) {
-//       Basic::Radians r;
+//       basic::Radians r;
 //       value = (LCreal)r.convert(*a);
 //   }
 //   else if (msg != 0) {
@@ -593,14 +593,14 @@ bool IrSensor::setSlotMaximumRange(const Basic::Number* const msg)
 //}
 
 // setSlotLowerWavelength() - Sets lower wavelength
-bool IrSensor::setSlotLowerWavelength(const Basic::Number* const msg)
+bool IrSensor::setSlotLowerWavelength(const basic::Number* const msg)
 {
    LCreal value = 0.0;
    bool ok = false;
 
-   const Basic::Distance* d = dynamic_cast<const Basic::Distance*>(msg);
+   const basic::Distance* d = dynamic_cast<const basic::Distance*>(msg);
    if (d != nullptr) {
-       Basic::MicroMeters mm;
+       basic::MicroMeters mm;
        value = static_cast<LCreal>(mm.convert(*d));
    }
    else if (msg != nullptr) {
@@ -617,14 +617,14 @@ bool IrSensor::setSlotLowerWavelength(const Basic::Number* const msg)
 }
 
 // setSlotUpperWavelength() - Sets upper wavelength
-bool IrSensor::setSlotUpperWavelength(const Basic::Number* const msg)
+bool IrSensor::setSlotUpperWavelength(const basic::Number* const msg)
 {
    bool ok = false;
    LCreal value = 0.0;
 
-   const Basic::Distance* d = dynamic_cast<const Basic::Distance*>(msg);
+   const basic::Distance* d = dynamic_cast<const basic::Distance*>(msg);
    if (d != nullptr) {
-       Basic::MicroMeters mm;
+       basic::MicroMeters mm;
        value = static_cast<LCreal>(mm.convert(*d));
    }
    else if (msg != nullptr) {
@@ -640,7 +640,7 @@ bool IrSensor::setSlotUpperWavelength(const Basic::Number* const msg)
 }
 
 // setSlotNEI() - Sets Noise Equivalent Irradiance
-bool IrSensor::setSlotNEI(const Basic::Number* const msg)
+bool IrSensor::setSlotNEI(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -656,7 +656,7 @@ bool IrSensor::setSlotNEI(const Basic::Number* const msg)
 }
 
 // setSlotThreshold() - Sets Signal to Noise Threshold
-bool IrSensor::setSlotThreshold(const Basic::Number* const msg)
+bool IrSensor::setSlotThreshold(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -672,7 +672,7 @@ bool IrSensor::setSlotThreshold(const Basic::Number* const msg)
 }
 
 // setSlotIFOV() - Sets Instantaneous Field of View
-bool IrSensor::setSlotIFOV(const Basic::Number* const msg)
+bool IrSensor::setSlotIFOV(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -688,7 +688,7 @@ bool IrSensor::setSlotIFOV(const Basic::Number* const msg)
 }
 
 // setSlotSensorType() -- Sets the Sensor Type
-bool IrSensor::setSlotSensorType(const Basic::String* const msg)
+bool IrSensor::setSlotSensorType(const basic::String* const msg)
 {
    bool ok = false;
 
@@ -705,7 +705,7 @@ bool IrSensor::setSlotSensorType(const Basic::String* const msg)
 }
 
 // setSlotFieldOfRegard() - Sets the field of regard
-//bool IrSensor::setSlotFieldOfRegard(const Basic::Number* const msg)
+//bool IrSensor::setSlotFieldOfRegard(const basic::Number* const msg)
 //{
 //   bool ok = false;
 //   if (msg != 0) {
@@ -722,14 +722,14 @@ bool IrSensor::setSlotSensorType(const Basic::String* const msg)
 //}
 // setSlotTrackManagerName() -- sets the name of the track manager;
 // we'll lookup the actual track manager in reset() later
-bool IrSensor::setSlotTrackManagerName(Basic::String* const v)
+bool IrSensor::setSlotTrackManagerName(basic::String* const v)
 {
     return setTrackManagerName(v);
 }
 //------------------------------------------------------------------------------
 // setTrackManagerName() -- Sets the track manager's name
 //------------------------------------------------------------------------------
-bool IrSensor::setTrackManagerName(Basic::String* name)
+bool IrSensor::setTrackManagerName(basic::String* name)
 {
     if (tmName != nullptr) {
         tmName->unref();
@@ -758,13 +758,13 @@ bool IrSensor::setTrackManager(TrackManager* tm)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Basic::Object* IrSensor::getSlotByIndex(const int si)
+basic::Object* IrSensor::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
 
 // Returns the requested track manager's name
-const Basic::String* IrSensor::getTrackManagerName() const
+const basic::String* IrSensor::getTrackManagerName() const
 {
    return tmName;
 }

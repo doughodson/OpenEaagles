@@ -54,7 +54,7 @@ public:
    );
 
    // Slot functions
-   virtual bool setSlotDisEntityType(const Basic::List* const);         // Sets DIS entity type enumerations
+   virtual bool setSlotDisEntityType(const basic::List* const);         // Sets DIS entity type enumerations
 
    bool copyEntityType(Simulation::Nib* const targetNib) const override;
 

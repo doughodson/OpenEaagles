@@ -1,13 +1,13 @@
 //---------------------------------------------------------------------
 // Class: LinearVelocity
 //---------------------------------------------------------------------
-#ifndef __oe_Basic_LinearVelocity_H__
-#define __oe_Basic_LinearVelocity_H__
+#ifndef __oe_basic_LinearVelocity_H__
+#define __oe_basic_LinearVelocity_H__
 
 #include "openeaagles/basic/Number.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 class Distance;
 class Time;
@@ -147,7 +147,7 @@ private:
 
 };
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace
 
 #endif

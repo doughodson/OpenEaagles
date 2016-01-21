@@ -40,8 +40,8 @@ public:
    void reset() override;
 
 protected:
-   virtual bool setSlotFuelWt(const Basic::Number* const msg);
-   virtual bool setSlotCapacity(const Basic::Number* const msg);
+   virtual bool setSlotFuelWt(const basic::Number* const msg);
+   virtual bool setSlotCapacity(const basic::Number* const msg);
 
 private:
    LCreal capacity;      // Fuel capacity (lb)

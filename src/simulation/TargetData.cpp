@@ -33,31 +33,31 @@ END_SLOTTABLE(TargetData)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(TargetData)
-    ON_SLOT( 1, setSlotEnabled,Basic::Number)
-    ON_SLOT( 2, setSlotCompleted,Basic::Number)
-    ON_SLOT( 3,setSlotWpnType,Basic::String)
-    ON_SLOT( 4, setSlotQuantity,Basic::Number)
-    ON_SLOT( 5, setSlotManualAssign,Basic::Number)
-    ON_SLOT( 6,setSlotStickType,Basic::Identifier)
+    ON_SLOT( 1, setSlotEnabled,basic::Number)
+    ON_SLOT( 2, setSlotCompleted,basic::Number)
+    ON_SLOT( 3,setSlotWpnType,basic::String)
+    ON_SLOT( 4, setSlotQuantity,basic::Number)
+    ON_SLOT( 5, setSlotManualAssign,basic::Number)
+    ON_SLOT( 6,setSlotStickType,basic::Identifier)
 
-    ON_SLOT( 7, setSlotStickDistance,Basic::Distance)
-    ON_SLOT( 7,setSlotStickDistance,Basic::Number)
+    ON_SLOT( 7, setSlotStickDistance,basic::Distance)
+    ON_SLOT( 7,setSlotStickDistance,basic::Number)
 
-    ON_SLOT( 8, setSlotInterval,Basic::Time)
-    ON_SLOT( 8, setSlotInterval,Basic::Number)
+    ON_SLOT( 8, setSlotInterval,basic::Time)
+    ON_SLOT( 8, setSlotInterval,basic::Number)
 
-    ON_SLOT( 9, setSlotMaxMissDistance,Basic::Distance)
-    ON_SLOT( 9, setSlotMaxMissDistance,Basic::Number)
+    ON_SLOT( 9, setSlotMaxMissDistance,basic::Distance)
+    ON_SLOT( 9, setSlotMaxMissDistance,basic::Number)
 
-    ON_SLOT(10, setSlotArmDelay,Basic::Time)
-    ON_SLOT(10,setSlotArmDelay,Basic::Number)
+    ON_SLOT(10, setSlotArmDelay,basic::Time)
+    ON_SLOT(10,setSlotArmDelay,basic::Number)
 
-    ON_SLOT(11, setSlotAngle,Basic::Angle)
-    ON_SLOT(11,setSlotAngle,Basic::Number)
+    ON_SLOT(11, setSlotAngle,basic::Angle)
+    ON_SLOT(11,setSlotAngle,basic::Number)
 
-    ON_SLOT(12, setSlotAzimuth,Basic::Angle)
-    ON_SLOT(12,setSlotAzimuth,Basic::Number)
-    ON_SLOT(13,setSlotVelocity,Basic::Number)
+    ON_SLOT(12, setSlotAzimuth,basic::Angle)
+    ON_SLOT(12,setSlotAzimuth,basic::Number)
+    ON_SLOT(13,setSlotVelocity,basic::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -134,7 +134,7 @@ bool TargetData::setAngle(const double degs)          { angle = degs; return tru
 bool TargetData::setAzimuth(const double degs)        { azimuth = degs; return true; }
 bool TargetData::setVelocity(const double fps)        { velocity = fps; return true; }
 
-bool TargetData::setWpnType(const Basic::String* const s)
+bool TargetData::setWpnType(const basic::String* const s)
 {
    if (wpnType != nullptr) wpnType->unref();
    wpnType = s;
@@ -146,7 +146,7 @@ bool TargetData::setWpnType(const Basic::String* const s)
 //------------------------------------------------------------------------------
 // Set slot functions
 //------------------------------------------------------------------------------
-bool TargetData::setSlotEnabled(const Basic::Number* const msg)
+bool TargetData::setSlotEnabled(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -156,7 +156,7 @@ bool TargetData::setSlotEnabled(const Basic::Number* const msg)
 }
 
 
-bool TargetData::setSlotCompleted(const Basic::Number* const msg)
+bool TargetData::setSlotCompleted(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -166,12 +166,12 @@ bool TargetData::setSlotCompleted(const Basic::Number* const msg)
 }
 
 
-bool TargetData::setSlotWpnType(const Basic::String* const msg)
+bool TargetData::setSlotWpnType(const basic::String* const msg)
 {
     return setWpnType(msg);
 }
 
-bool TargetData::setSlotQuantity(const Basic::Number* const msg)
+bool TargetData::setSlotQuantity(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -183,7 +183,7 @@ bool TargetData::setSlotQuantity(const Basic::Number* const msg)
    return ok;
 }
 
-bool TargetData::setSlotManualAssign(const Basic::Number* const msg)
+bool TargetData::setSlotManualAssign(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -192,7 +192,7 @@ bool TargetData::setSlotManualAssign(const Basic::Number* const msg)
    return ok;
 }
 
-bool TargetData::setSlotStickType(const Basic::Identifier* const msg)
+bool TargetData::setSlotStickType(const basic::Identifier* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -210,16 +210,16 @@ bool TargetData::setSlotStickType(const Basic::Identifier* const msg)
    return ok;
 }
 
-bool TargetData::setSlotStickDistance(const Basic::Distance* const msg)
+bool TargetData::setSlotStickDistance(const basic::Distance* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      ok = setStickDistance( Basic::Feet::convertStatic(*msg) );
+      ok = setStickDistance( basic::Feet::convertStatic(*msg) );
    }
    return ok;
 }
 
-bool TargetData::setSlotStickDistance(const Basic::Number* const msg)
+bool TargetData::setSlotStickDistance(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -228,17 +228,17 @@ bool TargetData::setSlotStickDistance(const Basic::Number* const msg)
    return ok;
 }
 
-bool TargetData::setSlotInterval(const Basic::Time* const msg)
+bool TargetData::setSlotInterval(const basic::Time* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      ok = setInterval( Basic::MilliSeconds::convertStatic(*msg) );
+      ok = setInterval( basic::MilliSeconds::convertStatic(*msg) );
    }
    return ok;
 }
 
 
-bool TargetData::setSlotInterval(const Basic::Number* const msg)
+bool TargetData::setSlotInterval(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -248,16 +248,16 @@ bool TargetData::setSlotInterval(const Basic::Number* const msg)
 }
 
 
-bool TargetData::setSlotMaxMissDistance(const Basic::Distance* const msg)
+bool TargetData::setSlotMaxMissDistance(const basic::Distance* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      ok = setMaxMissDistance( Basic::Feet::convertStatic(*msg) );
+      ok = setMaxMissDistance( basic::Feet::convertStatic(*msg) );
    }
    return ok;
 }
 
-bool TargetData::setSlotMaxMissDistance(const Basic::Number* const msg)
+bool TargetData::setSlotMaxMissDistance(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -266,16 +266,16 @@ bool TargetData::setSlotMaxMissDistance(const Basic::Number* const msg)
    return ok;
 }
 
-bool TargetData::setSlotArmDelay(const Basic::Time* const msg)
+bool TargetData::setSlotArmDelay(const basic::Time* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      ok = setArmDelay( Basic::Seconds::convertStatic(*msg) );
+      ok = setArmDelay( basic::Seconds::convertStatic(*msg) );
    }
    return ok;
 }
 
-bool TargetData::setSlotArmDelay(const Basic::Number* const msg)
+bool TargetData::setSlotArmDelay(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -285,17 +285,17 @@ bool TargetData::setSlotArmDelay(const Basic::Number* const msg)
 }
 
 
-bool TargetData::setSlotAngle(const Basic::Angle* const msg)
+bool TargetData::setSlotAngle(const basic::Angle* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      ok = setAngle( Basic::Degrees::convertStatic(*msg) );
+      ok = setAngle( basic::Degrees::convertStatic(*msg) );
    }
    return ok;
 }
 
 
-bool TargetData::setSlotAngle(const Basic::Number* const msg)
+bool TargetData::setSlotAngle(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -305,17 +305,17 @@ bool TargetData::setSlotAngle(const Basic::Number* const msg)
 }
 
 
-bool TargetData::setSlotAzimuth(const Basic::Angle* const msg)
+bool TargetData::setSlotAzimuth(const basic::Angle* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      ok = setAzimuth( Basic::Degrees::convertStatic(*msg) );
+      ok = setAzimuth( basic::Degrees::convertStatic(*msg) );
    }
    return ok;
 }
 
 
-bool TargetData::setSlotAzimuth(const Basic::Number* const msg)
+bool TargetData::setSlotAzimuth(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -325,7 +325,7 @@ bool TargetData::setSlotAzimuth(const Basic::Number* const msg)
 }
 
 
-bool TargetData::setSlotVelocity(const Basic::Number* const msg)
+bool TargetData::setSlotVelocity(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -337,7 +337,7 @@ bool TargetData::setSlotVelocity(const Basic::Number* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Basic::Object* TargetData::getSlotByIndex(const int si)
+basic::Object* TargetData::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
@@ -362,7 +362,7 @@ std::ostream& TargetData::serialize(std::ostream& sout, const int i, const bool 
     sout << "completed: " << (isCompleted() ? "true" : "false")  << std::endl;
 
     {
-        const Basic::String* s = getWpnType();
+        const basic::String* s = getWpnType();
         if (s != nullptr) {
             indent(sout,i+j);
             sout << "weaponType: " << s  << std::endl;

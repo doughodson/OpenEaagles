@@ -45,13 +45,13 @@
 //        into the units of a specific Mass derived class.
 //
 //------------------------------------------------------------------------------
-#ifndef __oe_Basic_Masses_H__
-#define __oe_Basic_Masses_H__
+#ifndef __oe_basic_Masses_H__
+#define __oe_basic_Masses_H__
 
 #include "openeaagles/basic/Number.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 // ----------------------------------------------------------------------------
 // Defined Mass Conversion Constants:
@@ -177,7 +177,7 @@ public:
     LCreal fromMass(const LCreal a) const override   { return a * KG2SL; }
 };
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace
 
 #endif

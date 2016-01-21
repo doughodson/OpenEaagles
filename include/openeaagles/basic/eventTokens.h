@@ -15,8 +15,8 @@
 //       Event values (MAX_KEY_EVENT+1) to (USER_EVENTS-1) reserved for the Openoe toolkit
 //       Event values above USER_EVENT are available for user events
 //------------------------------------------------------------------------------
-#ifndef __oe_Basic_Event_Tokens_H__
-#define __oe_Basic_Event_Tokens_H__
+#ifndef __oe_basic_Event_Tokens_H__
+#define __oe_basic_Event_Tokens_H__
 
 // ---
 // Key events -- Are passed up to an object's container if not used.

@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: StateMachine
 //------------------------------------------------------------------------------
-#ifndef __oe_Basic_StateMachine_H__
-#define __oe_Basic_StateMachine_H__
+#ifndef __oe_basic_StateMachine_H__
+#define __oe_basic_StateMachine_H__
 
 #include "openeaagles/basic/Component.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
    class PairStream;
 
 //------------------------------------------------------------------------------
@@ -350,7 +350,7 @@ private:
    safe_ptr<PairStream> stMachList;
 };
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace
 
 #endif

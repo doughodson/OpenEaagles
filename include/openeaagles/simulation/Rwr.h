@@ -11,7 +11,7 @@ namespace oe {
 namespace Simulation {
 //------------------------------------------------------------------------------
 // Class: Rwr
-// Base class: Basic::Object -> ... -> RfSystem -> RfSensor -> Rwr
+// Base class: basic::Object -> ... -> RfSystem -> RfSensor -> Rwr
 //
 // Description: General Radar Warning Receiver (RWR) Model
 // Factory name: Rwr
@@ -59,7 +59,7 @@ protected:
 private:
    void initData();
 
-   Basic::safe_queue<Emission*> rptQueue;   // Report queue
+   basic::safe_queue<Emission*> rptQueue;   // Report queue
 
    LCreal rays[2][NUM_RAYS];     // Back (sensor) buffer [0][*] and front (graphics) buffer [1][*]
 };

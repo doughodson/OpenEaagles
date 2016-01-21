@@ -8,7 +8,7 @@
 #include <GL/gl.h>
 
 namespace oe {
-   namespace Basic { class Number; }
+   namespace basic { class Number; }
 
 namespace BasicGL {
    struct BITMAPINFOHEADER_X;
@@ -17,8 +17,8 @@ namespace BasicGL {
 // Class: Image
 // Description: Base class for images and textures
 //------------------------------------------------------------------------------
-class Image : public Basic::Object {
-   DECLARE_SUBCLASS(Image,Basic::Object)
+class Image : public basic::Object {
+   DECLARE_SUBCLASS(Image,basic::Object)
 
 public:
    // Max length of file name or directory path

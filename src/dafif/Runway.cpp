@@ -50,8 +50,8 @@ EMPTY_DELETEDATA(Runway)
 void Runway::getRunwayMagHeading(const double aclat, const double aclon, const double acelev, float* magHeading1, float* magHeading2, double* trueBearing1, double* trueBearing2)const
 {
    double range(0.0), grdrange(0.0);
-   Basic::Nav::glla2bd(aclat, aclon, acelev, latitude(LOW_END), longitude(LOW_END), elevation(LOW_END), trueBearing1, &range, &grdrange);
-   Basic::Nav::glla2bd(aclat, aclon, acelev, latitude(HIGH_END), longitude(HIGH_END), elevation(HIGH_END), trueBearing2, &range, &grdrange);
+   basic::Nav::glla2bd(aclat, aclon, acelev, latitude(LOW_END), longitude(LOW_END), elevation(LOW_END), trueBearing1, &range, &grdrange);
+   basic::Nav::glla2bd(aclat, aclon, acelev, latitude(HIGH_END), longitude(HIGH_END), elevation(HIGH_END), trueBearing2, &range, &grdrange);
    *magHeading1 = magHeading(LOW_END);
    *magHeading2 = magHeading(HIGH_END);
 }

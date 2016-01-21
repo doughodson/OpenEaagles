@@ -8,7 +8,7 @@
 
 namespace oe {
 
-namespace Basic { class PairStream; }
+namespace basic { class PairStream; }
 
 namespace BasicGL {
 
@@ -51,9 +51,9 @@ namespace BasicGL {
 //       Set our slot values via a pairstream
 //
 //------------------------------------------------------------------------------
-class ColorRotary : public Basic::Color
+class ColorRotary : public basic::Color
 {
-    DECLARE_SUBCLASS(ColorRotary,Basic::Color)
+    DECLARE_SUBCLASS(ColorRotary,basic::Color)
 
 public:
     ColorRotary();
@@ -62,12 +62,12 @@ public:
     virtual bool determineColor(const LCreal value);
 
 protected:
-    bool setSlotColors(Basic::PairStream* const newStream);
-    bool setSlotValues(const Basic::PairStream* const newStream);
+    bool setSlotColors(basic::PairStream* const newStream);
+    bool setSlotValues(const basic::PairStream* const newStream);
 
 private:
     static const unsigned int MAX_VALUES = 50;
-    Basic::PairStream* myColors;              // our colors (rgba value)
+    basic::PairStream* myColors;              // our colors (rgba value)
     LCreal myValues[MAX_VALUES];              // our values
     unsigned int numVals;                    // number of values
 };

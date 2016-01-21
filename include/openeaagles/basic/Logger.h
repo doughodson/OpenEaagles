@@ -1,14 +1,14 @@
 //------------------------------------------------------------------------------
 // Classes: Logger, Logger::LogEvent
 //------------------------------------------------------------------------------
-#ifndef __oe_Basic_Logger_H__
-#define __oe_Basic_Logger_H__
+#ifndef __oe_basic_Logger_H__
+#define __oe_basic_Logger_H__
 
 #include "openeaagles/basic/Component.h"
 #include <fstream>
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 //------------------------------------------------------------------------------
 // Class: Logger
@@ -91,7 +91,7 @@ private:
     bool           failed;       // Open or write failed
 };
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace
 
 #endif

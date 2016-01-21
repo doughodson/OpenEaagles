@@ -11,7 +11,7 @@
 #include "openeaagles/basic/Integer.h"
 
 namespace oe {
-   namespace Basic { class Float; class Integer; }
+   namespace basic { class Float; class Integer; }
 namespace BasicGL {
    class Reformat;
 
@@ -42,10 +42,10 @@ public:
 
    char filterInputEvent(const int event, const int tc) override;
    bool isValidInputPosition(const int tc) override;
-   bool event(const int key, Basic::Object* const obj = nullptr) override;
+   bool event(const int key, basic::Object* const obj = nullptr) override;
 
-   virtual bool setTextString(const Basic::String* const stsobj);
-   virtual bool setTextList(const Basic::List* const stlobj);
+   virtual bool setTextString(const basic::String* const stsobj);
+   virtual bool setTextList(const basic::List* const stlobj);
 };
 
 //------------------------------------------------------------------------------
@@ -136,28 +136,28 @@ public:
    double getInputValue() const override;
    bool isInputValueValid() const override;
    char filterInputEvent(const int event, const int tc) override;
-   bool event(const int key, Basic::Object* const obj = nullptr) override;
+   bool event(const int key, basic::Object* const obj = nullptr) override;
    void updateData(const LCreal dt = 0.0) override;
 
    //event handler macro functions
-   virtual bool onUpdateValue(const Basic::Float* const ouvobj);
-   virtual bool onUpdateValue(const Basic::Integer* const ouvobj);
-   virtual bool onUpdateValue(const Basic::Number* const ouvobj);
+   virtual bool onUpdateValue(const basic::Float* const ouvobj);
+   virtual bool onUpdateValue(const basic::Integer* const ouvobj);
+   virtual bool onUpdateValue(const basic::Number* const ouvobj);
 
 protected:
-   virtual bool setSlotFloatToBeDisplayed(const Basic::Float* const msg);
-   virtual bool setSlotNumberToBeDisplayed(const Basic::Number* const msg);
-   virtual bool setSlotFloatMaxValue(const Basic::Float* const msg);
-   virtual bool setSlotNumberMaxValue(const Basic::Number* const msg);
-   virtual bool setSlotExampleFormatText(const Basic::String* const msg);
-   virtual bool setSlotPlusChar(const Basic::String* const msg);
-   virtual bool setSlotMinusChar(const Basic::String* const msg);
-   virtual bool setSlotDecimalPointChar(const Basic::String* const msg);
-   virtual bool setSlotUndefinedChar(const Basic::String* const msg);
-   virtual bool setSlotOverflowChar(const Basic::String* const msg);
-   virtual bool setSlotMaxValid(const Basic::Number* const msg);
-   virtual bool setSlotMinValid(const Basic::Number* const msg);
-   virtual bool setSlotBlankZero(const Basic::Number* const msg);
+   virtual bool setSlotFloatToBeDisplayed(const basic::Float* const msg);
+   virtual bool setSlotNumberToBeDisplayed(const basic::Number* const msg);
+   virtual bool setSlotFloatMaxValue(const basic::Float* const msg);
+   virtual bool setSlotNumberMaxValue(const basic::Number* const msg);
+   virtual bool setSlotExampleFormatText(const basic::String* const msg);
+   virtual bool setSlotPlusChar(const basic::String* const msg);
+   virtual bool setSlotMinusChar(const basic::String* const msg);
+   virtual bool setSlotDecimalPointChar(const basic::String* const msg);
+   virtual bool setSlotUndefinedChar(const basic::String* const msg);
+   virtual bool setSlotOverflowChar(const basic::String* const msg);
+   virtual bool setSlotMaxValid(const basic::Number* const msg);
+   virtual bool setSlotMinValid(const basic::Number* const msg);
+   virtual bool setSlotBlankZero(const basic::Number* const msg);
 
    virtual void makeText();
    virtual void redisplay();
@@ -430,9 +430,9 @@ class Rotary2 : public Rotary {
 
 public:
    Rotary2();
-   bool event(const int key, Basic::Object* const obj = nullptr) override;
+   bool event(const int key, basic::Object* const obj = nullptr) override;
    //macro function for event handler
-   virtual bool onSelect(const Basic::Number* const osobj);
+   virtual bool onSelect(const basic::Number* const osobj);
 };
 
 } // End BasicGL namespace

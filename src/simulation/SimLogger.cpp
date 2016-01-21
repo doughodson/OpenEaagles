@@ -80,18 +80,18 @@ EMPTY_DELETEDATA(SimLogger)
 // Slot table
 //------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(SimLogger)
-   "timeline",             // 1: Source of the time line { UTC, SIM or EXEC } (default: UTC)  (Basic::Identifier)
-   "includeUtcTime",       // 2: record UTC time for data  ( default: true)   (Basic::Number)
-   "includeSimTime",       // 3: record SIM time for data  ( default: true)   (Basic::Number)
-   "includeExecTime",      // 4: record EXEC time for data ( default: true)   (Basic::Number)
+   "timeline",             // 1: Source of the time line { UTC, SIM or EXEC } (default: UTC)  (basic::Identifier)
+   "includeUtcTime",       // 2: record UTC time for data  ( default: true)   (basic::Number)
+   "includeSimTime",       // 3: record SIM time for data  ( default: true)   (basic::Number)
+   "includeExecTime",      // 4: record EXEC time for data ( default: true)   (basic::Number)
 END_SLOTTABLE(SimLogger)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(SimLogger)
-   ON_SLOT(1,  setSlotTimeline,        Basic::Identifier)
-   ON_SLOT(2,  setSlotIncludeUtcTime,  Basic::Number)
-   ON_SLOT(3,  setSlotIncludeSimTime,  Basic::Number)
-   ON_SLOT(4,  setSlotIncludeExecTime, Basic::Number)
+   ON_SLOT(1,  setSlotTimeline,        basic::Identifier)
+   ON_SLOT(2,  setSlotIncludeUtcTime,  basic::Number)
+   ON_SLOT(3,  setSlotIncludeSimTime,  basic::Number)
+   ON_SLOT(4,  setSlotIncludeExecTime, basic::Number)
 END_SLOT_MAP()
 
 // Constructor
@@ -188,7 +188,7 @@ void SimLogger::updateData(const LCreal dt)
     SimLogEvent* event = seQueue.get();
     while (event != nullptr) {
         const char* const p = event->getDescription();
-        Basic::Logger::log(p);
+        basic::Logger::log(p);
         event->unref();
 
         event = seQueue.get();
@@ -216,7 +216,7 @@ void SimLogger::log(LogEvent* const event)
         seQueue.put(simEvent);
     }
     else {
-        Basic::Logger::log(event);
+        basic::Logger::log(event);
     }
 }
 
@@ -254,7 +254,7 @@ bool SimLogger::setIncludeExecTime(const bool b)
 //------------------------------------------------------------------------------
 
 // Sets the source of the time ( UTM, SIM or EXEC )
-bool SimLogger::setSlotTimeline(const Basic::Identifier* const p)
+bool SimLogger::setSlotTimeline(const basic::Identifier* const p)
 {
     bool ok = false;
     if (p != nullptr) {
@@ -275,19 +275,19 @@ bool SimLogger::setSlotTimeline(const Basic::Identifier* const p)
 }
 
 // whether or not to include UTC time in tabular time message
-bool SimLogger::setSlotIncludeUtcTime(const Basic::Number* const num)
+bool SimLogger::setSlotIncludeUtcTime(const basic::Number* const num)
 {
     return setIncludeUtcTime(num->getBoolean());
 }
 
 // whether or not to include SIM time in tabular time message
-bool SimLogger::setSlotIncludeSimTime(const Basic::Number* const num)
+bool SimLogger::setSlotIncludeSimTime(const basic::Number* const num)
 {
     return setIncludeSimTime(num->getBoolean());
 }
 
 // whether or not to include EXEC time in tabular time message
-bool SimLogger::setSlotIncludeExecTime(const Basic::Number* const num)
+bool SimLogger::setSlotIncludeExecTime(const basic::Number* const num)
 {
     return setIncludeExecTime(num->getBoolean());
 }
@@ -295,7 +295,7 @@ bool SimLogger::setSlotIncludeExecTime(const Basic::Number* const num)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Basic::Object* SimLogger::getSlotByIndex(const int si)
+basic::Object* SimLogger::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
@@ -442,7 +442,7 @@ std::ostream& SimLogger::SimLogEvent::makeTimeMsg(std::ostream& sout)
     int hh = 0;     // Hours
     int mm = 0;     // Min
     LCreal ss = 0;  // Sec
-    Basic::Time::getHHMMSS(static_cast<LCreal>(time), &hh, &mm, &ss);
+    basic::Time::getHHMMSS(static_cast<LCreal>(time), &hh, &mm, &ss);
     std::sprintf(cbuf, "%02d:%02d:%06.3f", hh, mm, ss);
     sout << cbuf;
     return sout;
@@ -460,7 +460,7 @@ std::ostream& SimLogger::SimLogEvent::makeExecTimeMsg(std::ostream& sout)
     LCreal ss = 0;  // Sec
 
     // exec time
-    Basic::Time::getHHMMSS(static_cast<LCreal>(execTime), &hh, &mm, &ss);
+    basic::Time::getHHMMSS(static_cast<LCreal>(execTime), &hh, &mm, &ss);
     std::sprintf(cbuf, "%02d:%02d:%06.3f", hh, mm, ss);
     sout << cbuf;
 
@@ -478,7 +478,7 @@ std::ostream& SimLogger::SimLogEvent::makeUtcTimeMsg(std::ostream& sout)
     LCreal ss = 0;  // Sec
 
     // sim time
-    Basic::Time::getHHMMSS(static_cast<LCreal>(utcTime), &hh, &mm, &ss);
+    basic::Time::getHHMMSS(static_cast<LCreal>(utcTime), &hh, &mm, &ss);
     std::sprintf(cbuf, "%02d:%02d:%06.3f", hh, mm, ss);
     sout << cbuf;
 
@@ -496,7 +496,7 @@ std::ostream& SimLogger::SimLogEvent::makeSimTimeMsg(std::ostream& sout)
     LCreal ss = 0;  // Sec
 
     // utc time
-    Basic::Time::getHHMMSS(static_cast<LCreal>(simTime), &hh, &mm, &ss);
+    basic::Time::getHHMMSS(static_cast<LCreal>(simTime), &hh, &mm, &ss);
     std::sprintf(cbuf, "%02d:%02d:%06.3f", hh, mm, ss);
     sout << cbuf;
 
@@ -580,7 +580,7 @@ std::ostream& SimLogger::SimLogEvent::makePlayerDataMsg(
 {
     sout << ", position=("    << pos0[0]    << "," << pos0[1]    << "," << pos0[2]    << ")";
     sout << ", velocity=("    << vel0[0]    << "," << vel0[1]    << "," << vel0[2]    << ")";
-    sout << ", orientation=(" << (angles0[0] * Basic::Angle::R2DCC) << "," << (angles0[1] * Basic::Angle::R2DCC) << "," << (angles0[2] * Basic::Angle::R2DCC) << ")";
+    sout << ", orientation=(" << (angles0[0] * basic::Angle::R2DCC) << "," << (angles0[1] * basic::Angle::R2DCC) << "," << (angles0[2] * basic::Angle::R2DCC) << ")";
     return sout;
 }
 
@@ -615,8 +615,8 @@ std::ostream& SimLogger::SimLogEvent::makeTrackDataMsg(std::ostream& sout, const
 std::ostream& SimLogger::SimLogEvent::makeEmissionDataMsg(std::ostream& sout, const Emission* const em)
 {
     if (em != nullptr) {
-        sout << "\t AOI Azimuth   = " << (Basic::Angle::R2DCC * em->getAzimuthAoi())   << "\n";
-        sout << "\t AOI Elevation = " << (Basic::Angle::R2DCC * em->getElevationAoi()) << "\n";
+        sout << "\t AOI Azimuth   = " << (basic::Angle::R2DCC * em->getAzimuthAoi())   << "\n";
+        sout << "\t AOI Elevation = " << (basic::Angle::R2DCC * em->getElevationAoi()) << "\n";
         sout << "\t Frequency     = " << (em->getFrequency())                     << "\n";
         sout << "\t Lambda        = " << (em->getWavelength())                    << "\n";
         sout << "\t Pulse width   = " << (em->getPulseWidth())                    << "\n";

@@ -33,7 +33,7 @@ END_SLOTTABLE(StabilizingGimbal)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(StabilizingGimbal)
-    ON_SLOT(1,setSlotStabilizingMode,Basic::String);
+    ON_SLOT(1,setSlotStabilizingMode,basic::String);
 END_SLOT_MAP()
 
 
@@ -160,7 +160,7 @@ bool StabilizingGimbal::setMountPosition(const MountPosition m)
 //------------------------------------------------------------------------------
 // setSlotStabilizingMode() -- calls setStabalizingMode()
 //------------------------------------------------------------------------------
-bool StabilizingGimbal::setSlotStabilizingMode(Basic::String* const msg)
+bool StabilizingGimbal::setSlotStabilizingMode(basic::String* const msg)
 {
     // set our scan mode
     bool ok = true;
@@ -176,7 +176,7 @@ bool StabilizingGimbal::setSlotStabilizingMode(Basic::String* const msg)
 //------------------------------------------------------------------------------
 // setSlotMountPosition() -- calls setMountPosition()
 //------------------------------------------------------------------------------
-bool StabilizingGimbal::setSlotMountPosition(Basic::String* const msg)
+bool StabilizingGimbal::setSlotMountPosition(basic::String* const msg)
 {
     // set our scan mode
     bool ok = true;
@@ -193,7 +193,7 @@ bool StabilizingGimbal::setSlotMountPosition(Basic::String* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Basic::Object* StabilizingGimbal::getSlotByIndex(const int si)
+basic::Object* StabilizingGimbal::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

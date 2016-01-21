@@ -1,15 +1,15 @@
 //------------------------------------------------------------------------------
 // Classes: Table1, Table2, Table3, Table4, Table5
 //------------------------------------------------------------------------------
-#ifndef __oe_Basic_Tables_H__
-#define __oe_Basic_Tables_H__
+#ifndef __oe_basic_Tables_H__
+#define __oe_basic_Tables_H__
 
 #include "openeaagles/basic/Object.h"
 #include "openeaagles/basic/functors/Functions.h"
 #include "openeaagles/basic/functors/Table.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 class List;
 class Number;
@@ -265,7 +265,7 @@ private:
    unsigned int nv;    // Number of v breakpoints
 };
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace
 
 #endif

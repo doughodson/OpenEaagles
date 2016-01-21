@@ -10,7 +10,7 @@
 #include <cmath>
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 IMPLEMENT_SUBCLASS(Complex,"Complex")
 EMPTY_DELETEDATA(Complex)
@@ -148,6 +148,6 @@ std::ostream& Complex::serialize(std::ostream& sout, const int i, const bool slo
     return sout;
 }
 
-}  // end namespace Basic
+}  // end namespace basic
 }  // end namespace oe
 

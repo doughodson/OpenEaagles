@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 // Class: BearingPointer
-// Base Class: Basic::Object -> BasicGL::Graphic -> CompassRose -> BearingPointer
+// Base Class: basic::Object -> BasicGL::Graphic -> CompassRose -> BearingPointer
 //
 // Description: This is a bearing pointer, which works in conjunction with
 // a compass rose to determine bearing, however, it is independent of CompassRose,
@@ -10,7 +10,7 @@
 //
 // Inputs:
 //      UPDATE_VALUE 1 - 6 (from Compass rose) -> handles centered, radius, and such
-//      UPDATE_VALUE7 - sets bearing (radians or Basic::Angle)
+//      UPDATE_VALUE7 - sets bearing (radians or basic::Angle)
 //      UPDATE_VALUE8 - sets bearing (degrees)
 //------------------------------------------------------------------------------
 #ifndef __oe_Instruments_BearingPointer_H__
@@ -29,7 +29,7 @@ public:
     BearingPointer();
 
     LCreal getBearingRad() const { return bearing; } // radians
-    LCreal getBearingDeg() const { return bearing * static_cast<LCreal>(Basic::Angle::R2DCC); }    // degrees
+    LCreal getBearingDeg() const { return bearing * static_cast<LCreal>(basic::Angle::R2DCC); }    // degrees
     BasicGL::Graphic* getHeadGraphic() const { return head; }
     BasicGL::Graphic* getTailGraphic() const { return tail; }
 
@@ -40,7 +40,7 @@ public:
     void draw() override;
 
     void updateData(const LCreal dt = 0) override;
-    bool event(const int key, Basic::Object* const obj = nullptr) override;
+    bool event(const int key, basic::Object* const obj = nullptr) override;
 
 protected:
     // slot functions
@@ -49,9 +49,9 @@ protected:
 
 private:
     // event handlers
-    bool onUpdateRadBearingPointer(const Basic::Angle* const msg);
-    bool onUpdateRadBearingPointer(const Basic::Number* const msg);
-    bool onUpdateDegBearingPointer(const Basic::Number* const msg);
+    bool onUpdateRadBearingPointer(const basic::Angle* const msg);
+    bool onUpdateRadBearingPointer(const basic::Number* const msg);
+    bool onUpdateDegBearingPointer(const basic::Number* const msg);
 
     LCreal bearing;     // used for bearing pointer, or if anyone else needs it for calculations (radians)
     LCreal myRotation;  // how much we are going to rotate the compass

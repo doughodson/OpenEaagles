@@ -7,7 +7,7 @@
 #include <iomanip>
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 //==============================================================================
 // Matrix
@@ -1097,7 +1097,7 @@ bool Matrix::getEigenPower(const double maxErr, const int maxIter,
          //----------------------------------------------------
          // get estimate of eigenvector
          //----------------------------------------------------
-         CVector* pW = Basic::multiply(*pA, *pZ);   // get new estimate (W) based on old estimate (Z)
+         CVector* pW = basic::multiply(*pA, *pZ);   // get new estimate (W) based on old estimate (Z)
          Wmag = pW->getMaxMag();           // max mag value from elements of vector W
          if (Wmag == 0.0) {
             // mag value is zero; cleanup and leave
@@ -1120,8 +1120,8 @@ bool Matrix::getEigenPower(const double maxErr, const int maxIter,
 #if 0
          {
             RVector* pZT = pZ->getTranspose();
-            double num = Basic::dotProduct(*pZT, *pW);
-            double den = Basic::dotProduct(*pZT, *pZ);
+            double num = basic::dotProduct(*pZT, *pW);
+            double den = basic::dotProduct(*pZT, *pZ);
             alfa *= (num / den);  // save Rayleigh eigenvalue estimate
             pZT->unref();
          }
@@ -1138,8 +1138,8 @@ bool Matrix::getEigenPower(const double maxErr, const int maxIter,
       // calculate error of estimate: Err = ||A*Z - alfa*Z||
       //----------------------------------------------------
       {
-         CVector* pE = Basic::multiply(*pA, *pZ);
-         CVector* pW1 = Basic::multiply(*pZ, alfa);  // pW1 used here as intermediate vector
+         CVector* pE = basic::multiply(*pA, *pZ);
+         CVector* pW1 = basic::multiply(*pZ, alfa);  // pW1 used here as intermediate vector
          pE->subtract(*pW1);
          Err = pE->getNorm();              // magnitude of error vector
          pE->unref();
@@ -1317,7 +1317,7 @@ bool Matrix::getQR(Matrix* const pQ, Matrix* const pR) const
          return false;
       }
 
-      CVector* pW = Basic::multiply((*pV), 1.0/s);
+      CVector* pW = basic::multiply((*pV), 1.0/s);
       RVector* pWT = pW->getTranspose();
 
       {
@@ -1325,8 +1325,8 @@ bool Matrix::getQR(Matrix* const pQ, Matrix* const pR) const
          // U' = (2*R'*W)'
          //----------------------------------------------------
          Matrix* pRIT = pRI->getTranspose();
-         CVector* pU0 = Basic::multiply((*pRIT), (*pW));
-         CVector* pU = Basic::multiply((*pU0), 2.0);
+         CVector* pU0 = basic::multiply((*pRIT), (*pW));
+         CVector* pU = basic::multiply((*pU0), 2.0);
          RVector* pUT = pU->getTranspose();
          pU0->unref();
          pU->unref();
@@ -1346,8 +1346,8 @@ bool Matrix::getQR(Matrix* const pQ, Matrix* const pR) const
       //----------------------------------------------------
       {
          Matrix* pM2 = outerProduct(*pW, *pWT);
-         Matrix* pM3 = Basic::multiply(*pQI, *pM2);
-         Matrix* pM4 = Basic::multiply(*pM3, 2.0);
+         Matrix* pM3 = basic::multiply(*pQI, *pM2);
+         Matrix* pM4 = basic::multiply(*pM3, 2.0);
          pQI->subtract(*pM4);
          pM2->unref();
          pM3->unref();
@@ -1438,8 +1438,8 @@ bool Matrix::getTriDiagonal(Matrix* const pA) const
       //----------------------------------------------------
       // A = H*A*H
       //----------------------------------------------------
-      Matrix* pAI0 = Basic::multiply(*pH, *pAI);
-      Matrix* pAI1 = Basic::multiply(*pAI0, *pH);
+      Matrix* pAI0 = basic::multiply(*pH, *pAI);
+      Matrix* pAI1 = basic::multiply(*pAI0, *pH);
       *pAI = *pAI1;
 
       //----------------------------------------------------
@@ -1467,5 +1467,5 @@ bool Matrix::getTriDiagonal(Matrix* const pA) const
 }
 
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace

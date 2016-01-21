@@ -7,7 +7,7 @@
 #include "openeaagles/basic/Object.h"
 
 namespace oe {
-   namespace Basic {
+   namespace basic {
       class Angle;
       class Distance;
       class Identifier;
@@ -52,9 +52,9 @@ namespace Simulation {
 //
 //    velocity         <Number>     ! Impact velocity (ft/sec) (default: 0)
 //------------------------------------------------------------------------------
-class TargetData : public Basic::Object
+class TargetData : public basic::Object
 {
-   DECLARE_SUBCLASS(TargetData,Basic::Object)
+   DECLARE_SUBCLASS(TargetData,basic::Object)
 
 public:
    // 'Stick' types
@@ -66,7 +66,7 @@ public:
 
     bool isEnabled() const;
     bool isCompleted() const;
-    const Basic::String* getWpnType() const;
+    const basic::String* getWpnType() const;
     unsigned int getQuantity() const;
     unsigned int getStickType() const;
     double getStickDistance() const;      // Feet
@@ -80,7 +80,7 @@ public:
 
     bool setEnabled(const bool b);
     bool setCompleted(const bool b);
-    bool setWpnType(const Basic::String* const s);
+    bool setWpnType(const basic::String* const s);
     bool setQuantity(const unsigned int q);
     bool setStickType(const unsigned int t);
     bool setStickDistance(const double ft);
@@ -93,30 +93,30 @@ public:
     bool setVelocity(const double fps);
 
 protected:
-    bool setSlotEnabled(const Basic::Number* const msg);
-    bool setSlotCompleted(const Basic::Number* const msg);
-    bool setSlotWpnType(const Basic::String* const msg);
-    bool setSlotQuantity(const Basic::Number* const msg);
-    bool setSlotManualAssign(const Basic::Number* const msg);
-    bool setSlotStickType(const Basic::Identifier* const msg);
-    bool setSlotStickDistance(const Basic::Distance* const msg);
-    bool setSlotStickDistance(const Basic::Number* const msg);
-    bool setSlotInterval(const Basic::Time* const msg);
-    bool setSlotInterval(const Basic::Number* const msg);
-    bool setSlotMaxMissDistance(const Basic::Distance* const msg);
-    bool setSlotMaxMissDistance(const Basic::Number* const msg);
-    bool setSlotArmDelay(const Basic::Time* const msg);
-    bool setSlotArmDelay(const Basic::Number* const msg);
-    bool setSlotAngle(const Basic::Angle* const msg);
-    bool setSlotAngle(const Basic::Number* const msg);
-    bool setSlotAzimuth(const Basic::Angle* const msg);
-    bool setSlotAzimuth(const Basic::Number* const msg);
-    bool setSlotVelocity(const Basic::Number* const msg);
+    bool setSlotEnabled(const basic::Number* const msg);
+    bool setSlotCompleted(const basic::Number* const msg);
+    bool setSlotWpnType(const basic::String* const msg);
+    bool setSlotQuantity(const basic::Number* const msg);
+    bool setSlotManualAssign(const basic::Number* const msg);
+    bool setSlotStickType(const basic::Identifier* const msg);
+    bool setSlotStickDistance(const basic::Distance* const msg);
+    bool setSlotStickDistance(const basic::Number* const msg);
+    bool setSlotInterval(const basic::Time* const msg);
+    bool setSlotInterval(const basic::Number* const msg);
+    bool setSlotMaxMissDistance(const basic::Distance* const msg);
+    bool setSlotMaxMissDistance(const basic::Number* const msg);
+    bool setSlotArmDelay(const basic::Time* const msg);
+    bool setSlotArmDelay(const basic::Number* const msg);
+    bool setSlotAngle(const basic::Angle* const msg);
+    bool setSlotAngle(const basic::Number* const msg);
+    bool setSlotAzimuth(const basic::Angle* const msg);
+    bool setSlotAzimuth(const basic::Number* const msg);
+    bool setSlotVelocity(const basic::Number* const msg);
 
 private:
     bool enabled;
     bool completed;
-    const Basic::String* wpnType;
+    const basic::String* wpnType;
 
     double angle;          // degs
     double azimuth;        // degs
@@ -134,7 +134,7 @@ private:
 
 inline bool TargetData::isEnabled() const                    { return enabled; }
 inline bool TargetData::isCompleted() const                  { return completed; }
-inline const Basic::String* TargetData::getWpnType() const   { return wpnType; }
+inline const basic::String* TargetData::getWpnType() const   { return wpnType; }
 inline unsigned int TargetData::getQuantity() const          { return quantity; }
 inline unsigned int TargetData::getStickType() const         { return stickType; }
 inline double TargetData::getStickDistance() const           { return stickDist; }

@@ -19,7 +19,7 @@ EMPTY_SERIALIZER(Building)
 Building::Building()
 {
     STANDARD_CONSTRUCTOR()
-    static Basic::String generic("GenericBuilding");
+    static basic::String generic("GenericBuilding");
     setType(&generic);
 }
 

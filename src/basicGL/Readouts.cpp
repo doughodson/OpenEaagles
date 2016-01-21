@@ -34,13 +34,13 @@ BEGIN_SLOTTABLE(AsciiText)
 END_SLOTTABLE(AsciiText)
 
 BEGIN_SLOT_MAP(AsciiText)
-   ON_SLOT(1,setTextString, Basic::String)
-   ON_SLOT(1,setTextList, Basic::List)
+   ON_SLOT(1,setTextString, basic::String)
+   ON_SLOT(1,setTextList, basic::List)
 END_SLOT_MAP()
 
 // Event handlers for AsciiText events
 BEGIN_EVENT_HANDLER(AsciiText)
-   ON_EVENT_OBJ(UPDATE_VALUE,setTextString,Basic::String)
+   ON_EVENT_OBJ(UPDATE_VALUE,setTextString,basic::String)
 END_EVENT_HANDLER()
 
 //------------------------------------------------------------------------------
@@ -70,8 +70,8 @@ bool AsciiText::isValidInputPosition(const int)
 // Slot functions
 //------------------------------------------------------------------------------
 
-// setTextString() -- takes in a Basic::String and sets it
-bool AsciiText::setTextString(const Basic::String* const stsobj)
+// setTextString() -- takes in a basic::String and sets it
+bool AsciiText::setTextString(const basic::String* const stsobj)
 {
    bool ok = true;
    if (stsobj != nullptr) {
@@ -88,7 +88,7 @@ bool AsciiText::setTextString(const Basic::String* const stsobj)
 }
 
 // setTextList() -- takes in alist of ascii numbers
-bool AsciiText::setTextList(const Basic::List* const stlobj)
+bool AsciiText::setTextList(const basic::List* const stlobj)
 {
    bool ok = true;
    if (stlobj != nullptr) {
@@ -118,7 +118,7 @@ bool AsciiText::setTextList(const Basic::List* const stlobj)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Basic::Object* AsciiText::getSlotByIndex(const int si)
+basic::Object* AsciiText::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }
@@ -213,26 +213,26 @@ BEGIN_SLOTTABLE(NumericReadout)
 END_SLOTTABLE(NumericReadout)
 
 BEGIN_SLOT_MAP(NumericReadout)
-   ON_SLOT(1,setSlotFloatToBeDisplayed,Basic::Float)
-   ON_SLOT(1,setSlotNumberToBeDisplayed,Basic::Number)
-   ON_SLOT(2,setSlotFloatMaxValue,Basic::Float)
-   ON_SLOT(2,setSlotNumberMaxValue,Basic::Number)
-   ON_SLOT(3,setSlotExampleFormatText,Basic::String)
-   ON_SLOT(4,setSlotPlusChar,Basic::String)
-   ON_SLOT(5,setSlotMinusChar,Basic::String)
-   ON_SLOT(6,setSlotDecimalPointChar,Basic::String)
-   ON_SLOT(7,setSlotUndefinedChar,Basic::String)
-   ON_SLOT(8,setSlotOverflowChar,Basic::String)
-   ON_SLOT(9,setSlotMaxValid,Basic::Number)
-   ON_SLOT(10,setSlotMinValid,Basic::Number)
-   ON_SLOT(11,setSlotBlankZero,Basic::Number)
+   ON_SLOT(1,setSlotFloatToBeDisplayed,basic::Float)
+   ON_SLOT(1,setSlotNumberToBeDisplayed,basic::Number)
+   ON_SLOT(2,setSlotFloatMaxValue,basic::Float)
+   ON_SLOT(2,setSlotNumberMaxValue,basic::Number)
+   ON_SLOT(3,setSlotExampleFormatText,basic::String)
+   ON_SLOT(4,setSlotPlusChar,basic::String)
+   ON_SLOT(5,setSlotMinusChar,basic::String)
+   ON_SLOT(6,setSlotDecimalPointChar,basic::String)
+   ON_SLOT(7,setSlotUndefinedChar,basic::String)
+   ON_SLOT(8,setSlotOverflowChar,basic::String)
+   ON_SLOT(9,setSlotMaxValid,basic::Number)
+   ON_SLOT(10,setSlotMinValid,basic::Number)
+   ON_SLOT(11,setSlotBlankZero,basic::Number)
 END_SLOT_MAP()
 
 // Event handlers for NumericReadout events
 BEGIN_EVENT_HANDLER(NumericReadout)
-ON_EVENT_OBJ(UPDATE_VALUE,onUpdateValue, Basic::Float)
-ON_EVENT_OBJ(UPDATE_VALUE,onUpdateValue, Basic::Integer)
-ON_EVENT_OBJ(UPDATE_VALUE,onUpdateValue, Basic::Number)
+ON_EVENT_OBJ(UPDATE_VALUE,onUpdateValue, basic::Float)
+ON_EVENT_OBJ(UPDATE_VALUE,onUpdateValue, basic::Integer)
+ON_EVENT_OBJ(UPDATE_VALUE,onUpdateValue, basic::Number)
 END_EVENT_HANDLER()
 
 //------------------------------------------------------------------------------
@@ -247,7 +247,7 @@ NumericReadout::NumericReadout()
    cbuf[0]   = '\0';
    format[0] = '\0';
    lcStrcpy(format,FORMAT_LENGTH,"%.0f");
-   justification(Basic::String::RIGHT);
+   justification(basic::String::RIGHT);
    plusChar = '\0';
    minusChar = '\0';
    dpChar    = '\0';
@@ -495,8 +495,8 @@ void NumericReadout::reformat(const char* const example)
 // Event functions
 //------------------------------------------------------------------------------
 
-// onUpdateValue() - for Basic::Float
-bool NumericReadout::onUpdateValue(const Basic::Float* const ouvobj)
+// onUpdateValue() - for basic::Float
+bool NumericReadout::onUpdateValue(const basic::Float* const ouvobj)
 {
    if (ouvobj != nullptr) {
       setValue(ouvobj->getDouble());
@@ -504,8 +504,8 @@ bool NumericReadout::onUpdateValue(const Basic::Float* const ouvobj)
    return true;
 }
 
-// onUpdateValue() - for Basic::Integer
-bool NumericReadout::onUpdateValue(const Basic::Integer* const ouvobj)
+// onUpdateValue() - for basic::Integer
+bool NumericReadout::onUpdateValue(const basic::Integer* const ouvobj)
 {
    if (ouvobj != nullptr) {
       setValue(ouvobj->getInt());
@@ -513,8 +513,8 @@ bool NumericReadout::onUpdateValue(const Basic::Integer* const ouvobj)
    return true;
 }
 
-// onUpdateValue() - for Basic::Number
-bool NumericReadout::onUpdateValue(const Basic::Number* const ouvobj)
+// onUpdateValue() - for basic::Number
+bool NumericReadout::onUpdateValue(const basic::Number* const ouvobj)
 {
    if (ouvobj != nullptr) {
       setValue(ouvobj->getDouble());
@@ -527,7 +527,7 @@ bool NumericReadout::onUpdateValue(const Basic::Number* const ouvobj)
 //------------------------------------------------------------------------------
 
 //  setSlotFloatToBeDisplayed() --
-bool NumericReadout::setSlotFloatToBeDisplayed(const Basic::Float* const sftbdobj)
+bool NumericReadout::setSlotFloatToBeDisplayed(const basic::Float* const sftbdobj)
 {
    bool ok = true;
    if (sftbdobj != nullptr) {
@@ -544,7 +544,7 @@ bool NumericReadout::setSlotFloatToBeDisplayed(const Basic::Float* const sftbdob
 }
 
 //  setSlotNumberToBeDisplayed() --
-bool NumericReadout::setSlotNumberToBeDisplayed(const Basic::Number* const sntbdobj)
+bool NumericReadout::setSlotNumberToBeDisplayed(const basic::Number* const sntbdobj)
 {
    bool ok = true;
    if (sntbdobj != nullptr) {
@@ -560,7 +560,7 @@ bool NumericReadout::setSlotNumberToBeDisplayed(const Basic::Number* const sntbd
 }
 
 //  setSlotFloatMaxValue() --
-bool NumericReadout::setSlotFloatMaxValue(const Basic::Float* const sfmvobj)
+bool NumericReadout::setSlotFloatMaxValue(const basic::Float* const sfmvobj)
 {
    bool ok = true;
    if (sfmvobj != nullptr) {
@@ -576,7 +576,7 @@ bool NumericReadout::setSlotFloatMaxValue(const Basic::Float* const sfmvobj)
 }
 
 //  setSlotNumberMaxValue() --
-bool NumericReadout::setSlotNumberMaxValue(const Basic::Number* const snmvobj)
+bool NumericReadout::setSlotNumberMaxValue(const basic::Number* const snmvobj)
 {
    bool ok = true;
    if (snmvobj != nullptr) {
@@ -592,7 +592,7 @@ bool NumericReadout::setSlotNumberMaxValue(const Basic::Number* const snmvobj)
 }
 
 //  setSlotExampleFormatText() --
-bool NumericReadout::setSlotExampleFormatText(const Basic::String* const seftobj)
+bool NumericReadout::setSlotExampleFormatText(const basic::String* const seftobj)
 {
    bool ok = true;
    if (seftobj != nullptr) {
@@ -609,7 +609,7 @@ bool NumericReadout::setSlotExampleFormatText(const Basic::String* const seftobj
 }
 
 //  setSlotPlusChar() -- positive value character
-bool NumericReadout::setSlotPlusChar(const Basic::String* const spcobj)
+bool NumericReadout::setSlotPlusChar(const basic::String* const spcobj)
 {
    bool ok = true;
    if (spcobj != nullptr) {
@@ -627,7 +627,7 @@ bool NumericReadout::setSlotPlusChar(const Basic::String* const spcobj)
 }
 
 //  setSlotMinusChar() -- negative value character
-bool NumericReadout::setSlotMinusChar(const Basic::String* const smcobj)
+bool NumericReadout::setSlotMinusChar(const basic::String* const smcobj)
 {
    bool ok = true;
    if (smcobj != nullptr) {
@@ -645,7 +645,7 @@ bool NumericReadout::setSlotMinusChar(const Basic::String* const smcobj)
 }
 
 //  setSlotDecimalPointChar() -- decimal point character
-bool NumericReadout::setSlotDecimalPointChar(const Basic::String* const sdpcobj)
+bool NumericReadout::setSlotDecimalPointChar(const basic::String* const sdpcobj)
 {
    bool ok = true;
    if (sdpcobj != nullptr) {
@@ -663,7 +663,7 @@ bool NumericReadout::setSlotDecimalPointChar(const Basic::String* const sdpcobj)
 }
 
 //  setSlotUndefinedChar() -- undefined value character
-bool NumericReadout::setSlotUndefinedChar(const Basic::String* const sucobj)
+bool NumericReadout::setSlotUndefinedChar(const basic::String* const sucobj)
 {
    bool ok = true;
    if (sucobj != nullptr) {
@@ -681,7 +681,7 @@ bool NumericReadout::setSlotUndefinedChar(const Basic::String* const sucobj)
 }
 
 //  setSlotMaxValid() -- Maximum valid value
-bool NumericReadout::setSlotMaxValid(const Basic::Number* const msg)
+bool NumericReadout::setSlotMaxValid(const basic::Number* const msg)
 {
    bool ok = true;
    if (msg != nullptr) {
@@ -697,7 +697,7 @@ bool NumericReadout::setSlotMaxValid(const Basic::Number* const msg)
 }
 
 //  setSlotMinValid() -- Minimum valid value
-bool NumericReadout::setSlotMinValid(const Basic::Number* const msg)
+bool NumericReadout::setSlotMinValid(const basic::Number* const msg)
 {
    bool ok = true;
    if (msg != nullptr) {
@@ -713,7 +713,7 @@ bool NumericReadout::setSlotMinValid(const Basic::Number* const msg)
 }
 
 //  setSlotBlankZero() -- Display blank if value is zero
-bool NumericReadout::setSlotBlankZero(const Basic::Number* const msg)
+bool NumericReadout::setSlotBlankZero(const basic::Number* const msg)
 {
    bool ok = true;
    if (msg != nullptr) {
@@ -729,7 +729,7 @@ bool NumericReadout::setSlotBlankZero(const Basic::Number* const msg)
 }
 
 //  setSlotOverflowChar() --overflow character
-bool NumericReadout::setSlotOverflowChar(const Basic::String* const socobj)
+bool NumericReadout::setSlotOverflowChar(const basic::String* const socobj)
 {
    bool ok = true;
    if (socobj != nullptr) {
@@ -749,7 +749,7 @@ bool NumericReadout::setSlotOverflowChar(const Basic::String* const socobj)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Basic::Object* NumericReadout::getSlotByIndex(const int si)
+basic::Object* NumericReadout::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }
@@ -1482,7 +1482,7 @@ Rotary::Rotary()
 {
    STANDARD_CONSTRUCTOR()
 
-   Basic::Integer* p = new Basic::Integer(1);    // default rotary item
+   basic::Integer* p = new basic::Integer(1);    // default rotary item
    setSelectionName(p);
    p->unref();
    preDrawSelectList = true;
@@ -1499,7 +1499,7 @@ void Rotary::draw()
 {
    if (preDrawSelectList) {
       int start = 1;
-      Basic::Pair* p = findByIndex(start);
+      basic::Pair* p = findByIndex(start);
       while (p != nullptr) {
          BasicGL::Graphic* g = dynamic_cast<BasicGL::Graphic*>(p->object());
          if (g != nullptr) g->draw();
@@ -1522,7 +1522,7 @@ EMPTY_SERIALIZER(Rotary2)
 
 // Event handler for Rotary2 events
 BEGIN_EVENT_HANDLER(Rotary2)
-ON_EVENT_OBJ(SELECT,onSelect,Basic::Number)
+ON_EVENT_OBJ(SELECT,onSelect,basic::Number)
 END_EVENT_HANDLER()
 
 //------------------------------------------------------------------------------
@@ -1532,7 +1532,7 @@ Rotary2::Rotary2()
 {
    STANDARD_CONSTRUCTOR()
 
-   Basic::Integer* p = new Basic::Integer(1);    // default rotary item
+   basic::Integer* p = new basic::Integer(1);    // default rotary item
    setSelectionName(p);
    p->unref();
 }
@@ -1542,17 +1542,17 @@ Rotary2::Rotary2()
 //------------------------------------------------------------------------------
 
 // onSelect() - Macro function for Rotary2
-bool Rotary2::onSelect(const Basic::Number* const osobj)
+bool Rotary2::onSelect(const basic::Number* const osobj)
 {
    if (osobj != nullptr) {
       if (osobj->getBoolean()){
          //if true, select the second component
-         Basic::Integer two(2);
+         basic::Integer two(2);
          select(&two);
       }
       else {
          //if false, select the first component
-         Basic::Integer one(1);
+         basic::Integer one(1);
          select(&one);
       }
    }

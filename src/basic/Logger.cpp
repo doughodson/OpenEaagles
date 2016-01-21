@@ -5,7 +5,7 @@
 #include "openeaagles/basic/String.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 // Disable all deprecation warnings for now.  Until we fix them,
 // they are quite annoying to see over and over again...
@@ -357,5 +357,5 @@ void Logger::LogEvent::deleteData()
 {
 }
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace

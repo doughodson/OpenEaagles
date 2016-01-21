@@ -18,7 +18,7 @@
 #include "openeaagles/basic/Component.h"
 
 namespace oe {
-   namespace Basic {
+   namespace basic {
       class Number;
       class Table2;
    }
@@ -33,9 +33,9 @@ class Emission;
 //      LCreal getRCS(Emission* em)
 //          Computes the Radar Cross Section for the emission.
 //------------------------------------------------------------------------------
-class RfSignature : public Basic::Component
+class RfSignature : public basic::Component
 {
-    DECLARE_SUBCLASS(RfSignature, Basic::Component)
+    DECLARE_SUBCLASS(RfSignature, basic::Component)
 public:
     RfSignature();
     virtual LCreal getRCS(const Emission* const em)=0;
@@ -46,8 +46,8 @@ public:
 // Descriptions: Constant RCS signature
 // Factory name: SigConstant
 // Slots:
-//    rcs   <Basic::Number>  ! Constant Radar Cross Section value (default: 0.0)
-//                           !  Basic::Number(square meters) or Basic::Decibel(square meters) or Basic::Area()
+//    rcs   <basic::Number>  ! Constant Radar Cross Section value (default: 0.0)
+//                           !  basic::Number(square meters) or basic::Decibel(square meters) or basic::Area()
 //------------------------------------------------------------------------------
 class SigConstant : public RfSignature
 {
@@ -55,9 +55,9 @@ class SigConstant : public RfSignature
 public:
     SigConstant();
     SigConstant(const LCreal c);
-    SigConstant(const Basic::Number* const c);
+    SigConstant(const basic::Number* const c);
 
-    virtual bool setRCS(const Basic::Number* const num);
+    virtual bool setRCS(const basic::Number* const num);
 
     LCreal getRCS(const Emission* const em) override;
 private:
@@ -69,7 +69,7 @@ private:
 // Descriptions: RfSignature of a simple sphere based on radius
 // Factory name: SigSphere
 // Slots:
-//    radius   <Basic::Number>    ! Radius of the sphere (default: 0)
+//    radius   <basic::Number>    ! Radius of the sphere (default: 0)
 //
 //------------------------------------------------------------------------------
 class SigSphere : public RfSignature
@@ -78,7 +78,7 @@ class SigSphere : public RfSignature
 public:
     SigSphere();
     SigSphere(const LCreal r);
-    virtual bool setRadiusFromSlot(Basic::Number* const num);
+    virtual bool setRadiusFromSlot(basic::Number* const num);
     LCreal computeRcs(const LCreal r)                          { return static_cast<float>(PI * r * r); }
     void setRadius(const LCreal r)                             { radius = r; rcs = computeRcs(radius); }
 
@@ -94,8 +94,8 @@ private:
 //               normal to the transmitter.
 // Factory name: SigPlate
 // Slots:
-//    a    <Basic::Number>    ! length of the plate (default: 0.0)
-//    b    <Basic::Number>    ! width of the plate (default: 0.0)
+//    a    <basic::Number>    ! length of the plate (default: 0.0)
+//    b    <basic::Number>    ! width of the plate (default: 0.0)
 //
 //------------------------------------------------------------------------------
 class SigPlate : public RfSignature
@@ -108,8 +108,8 @@ public:
     LCreal getA() const                             { return a; }
     LCreal getB() const                             { return b; }
 
-    virtual bool setA(Basic::Number* const num);
-    virtual bool setB(Basic::Number* const num);
+    virtual bool setA(basic::Number* const num);
+    virtual bool setB(basic::Number* const num);
 
     LCreal getRCS(const Emission* const em) override;
 private:
@@ -177,19 +177,19 @@ public:
 // Factory name: SigAzEl
 // Slots:
 //
-//    table      <Basic::Table2>   ! Table of RCS by target Az/El angles (default: 0)
+//    table      <basic::Table2>   ! Table of RCS by target Az/El angles (default: 0)
 //
-//    swapOrder  <Basic::Number>   ! True if elevation is the table's first independent (default: false)
+//    swapOrder  <basic::Number>   ! True if elevation is the table's first independent (default: false)
 //                     ! variable and azimuth is the second.
 //
-//    inDegrees  <Basic::Number>   ! True if the table's independent variables az and
+//    inDegrees  <basic::Number>   ! True if the table's independent variables az and
 //                                 ! el are in degrees instead of the default radians (default: false)
 //
-//    inDecibel  <Basic::Number>   ! True if the dependent data is in decibel meters
+//    inDecibel  <basic::Number>   ! True if the dependent data is in decibel meters
 //                                 ! squared instead of the default meters squared (default: false)
 //
 // Notes:
-//  1) Must provide a Basic::Table2 (2 dimensional) table, where ...
+//  1) Must provide a basic::Table2 (2 dimensional) table, where ...
 //       -- Azimuth is the first independent variable (radians),
 //       -- Elevation is the second independent variable (radians),
 //       -- and the RCS is the dependent variable (meters squared)
@@ -208,7 +208,7 @@ class SigAzEl : public RfSignature
     DECLARE_SUBCLASS(SigAzEl,RfSignature)
 public:
    SigAzEl();
-   SigAzEl(const Basic::Table2* const tbl);
+   SigAzEl(const basic::Table2* const tbl);
 
    virtual bool isTableValid() const;
 
@@ -222,14 +222,14 @@ public:
    virtual bool setDecibel(const bool flg);
 
    // Slot functions
-   virtual bool setSlotTable(const Basic::Table2* const tbl);
-   virtual bool setSlotSwapOrder(const Basic::Number* const msg);
-   virtual bool setSlotInDegrees(const Basic::Number* const msg);
-   virtual bool setSlotDecibel(const Basic::Number* const msg);
+   virtual bool setSlotTable(const basic::Table2* const tbl);
+   virtual bool setSlotSwapOrder(const basic::Number* const msg);
+   virtual bool setSlotInDegrees(const basic::Number* const msg);
+   virtual bool setSlotDecibel(const basic::Number* const msg);
 
    LCreal getRCS(const Emission* const em) override;
 protected:
-   const Basic::Table2* tbl;      // The table
+   const basic::Table2* tbl;      // The table
    bool swapOrderFlg;               // Swap independent data order from az/el to el/az
    bool degFlg;                     // independent data in degrees
    bool dbFlg;                      // dependent data in decibels

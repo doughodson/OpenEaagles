@@ -3530,7 +3530,7 @@ DirectionReadout::DirMode Reformat::convertDirection(const char* s)
    return DirectionReadout::DirMode(yylex(dir));
 }
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace
 
 

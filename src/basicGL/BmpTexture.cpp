@@ -31,8 +31,8 @@ END_SLOTTABLE(BmpTexture)
 //  Map slot table to handles
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(BmpTexture)
-    ON_SLOT(1, setSlotTexturePath, Basic::String)
-    ON_SLOT(2, setSlotTextureFileName, Basic::String)
+    ON_SLOT(1, setSlotTexturePath, basic::String)
+    ON_SLOT(2, setSlotTextureFileName, basic::String)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -121,7 +121,7 @@ bool BmpTexture::writeFile()
 //------------------------------------------------------------------------------
 
 // setSlotTexturePath() -- sets the path to the textures directory
-bool BmpTexture::setSlotTexturePath(Basic::String* const s)
+bool BmpTexture::setSlotTexturePath(basic::String* const s)
 {
    if (s != nullptr) setTexturePath(*s);
    else setTexturePath(nullptr);
@@ -129,7 +129,7 @@ bool BmpTexture::setSlotTexturePath(Basic::String* const s)
 }
 
 // setSlotTextureFileName() -- sets the texture file name
-bool BmpTexture::setSlotTextureFileName(Basic::String* const s)
+bool BmpTexture::setSlotTextureFileName(basic::String* const s)
 {
    if (s != nullptr) setTextureFileName(*s);
    else setTextureFileName(nullptr);
@@ -139,7 +139,7 @@ bool BmpTexture::setSlotTextureFileName(Basic::String* const s)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for Page
 //------------------------------------------------------------------------------
-Basic::Object* BmpTexture::getSlotByIndex(const int si)
+basic::Object* BmpTexture::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: Agent
 //------------------------------------------------------------------------------
-#ifndef __oe_Basic_Ubf_Agent_H__
-#define __oe_Basic_Ubf_Agent_H__
+#ifndef __oe_basic_Ubf_Agent_H__
+#define __oe_basic_Ubf_Agent_H__
 
 #include "openeaagles/basic/Component.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
 namespace Ubf {
 
 class Behavior;
@@ -32,9 +32,9 @@ class Action;
 //    state       <State>     ! The agent's state object
 //    behavior    <Behavior>  ! behavior
 //------------------------------------------------------------------------------
-class Agent : public Basic::Component
+class Agent : public basic::Component
 {
-   DECLARE_SUBCLASS(Agent, Basic::Component)
+   DECLARE_SUBCLASS(Agent, basic::Component)
 
 public:
    Agent();
@@ -55,8 +55,8 @@ protected:
 
    virtual void initActor();
 
-   Basic::Component* getActor();
-   void setActor(Basic::Component* const myActor);
+   basic::Component* getActor();
+   void setActor(basic::Component* const myActor);
 
    // slot functions
    virtual bool setSlotBehavior(Behavior* const);
@@ -65,11 +65,11 @@ protected:
 private:
    Behavior* behavior;
    State* state;
-   safe_ptr<Basic::Component> myActor;
+   safe_ptr<basic::Component> myActor;
 };
 
-inline void Agent::setActor(Basic::Component* const actor)      { myActor = actor; return; }
-inline Basic::Component* Agent::getActor()                      { return myActor; }
+inline void Agent::setActor(basic::Component* const actor)      { myActor = actor; return; }
+inline basic::Component* Agent::getActor()                      { return myActor; }
 
 
 //------------------------------------------------------------------------------
@@ -93,7 +93,7 @@ public:
 };
 
 } // End Ubf namespace
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace
 
 #endif

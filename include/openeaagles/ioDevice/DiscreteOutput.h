@@ -6,7 +6,7 @@
 
 namespace oe {
 
-namespace Basic { class NetHandler; class Number; }
+namespace basic { class NetHandler; class Number; }
 
 namespace IoDevice {
 
@@ -29,9 +29,9 @@ class IoDevice;
 // Note: If 'num' is less than zero then the DOs are stored in reverse
 //       order (i.e., 'do' location is decremented).
 //------------------------------------------------------------------------------
-class DiscreteOutput : public Basic::IoAdapter
+class DiscreteOutput : public basic::IoAdapter
 {
-   DECLARE_SUBCLASS(DiscreteOutput, Basic::IoAdapter)
+   DECLARE_SUBCLASS(DiscreteOutput, basic::IoAdapter)
 
 public:
    DiscreteOutput();
@@ -50,17 +50,17 @@ public:
    bool setInvertFlag(const bool);
    bool setNumber(const int);
 
-   void processInputs(const LCreal dt, const Basic::IoDevice* const device, Basic::IoData* const inData) override;
-   void processOutputs(const LCreal dt, const Basic::IoData* const outData, Basic::IoDevice* const device) override;
+   void processInputs(const LCreal dt, const basic::IoDevice* const device, basic::IoData* const inData) override;
+   void processOutputs(const LCreal dt, const basic::IoData* const outData, basic::IoDevice* const device) override;
 
 protected:
    // Slot functions
-   virtual bool setSlotLocation(const Basic::Number* const msg);
-   virtual bool setSlotPort(const Basic::Number* const msg);
-   virtual bool setSlotChannel(const Basic::Number* const msg);
-   virtual bool setSlotValue(const Basic::Number* const msg);
-   virtual bool setSlotInverted(const Basic::Number* const msg);
-   virtual bool setSlotNum(const Basic::Number* const msg);
+   virtual bool setSlotLocation(const basic::Number* const msg);
+   virtual bool setSlotPort(const basic::Number* const msg);
+   virtual bool setSlotChannel(const basic::Number* const msg);
+   virtual bool setSlotValue(const basic::Number* const msg);
+   virtual bool setSlotInverted(const basic::Number* const msg);
+   virtual bool setSlotNum(const basic::Number* const msg);
 
 private:
    void initData();

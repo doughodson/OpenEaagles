@@ -316,9 +316,9 @@ std::ostream& TabLogger::TabLogEvent::makePlayerDataMsg(  std::ostream& sout,
     sout << vel0[0]   << "\t"                                 // (3 fields)
          << vel0[1]   << "\t"
          << vel0[2]   << "\t" ;
-    sout << (angles0[0] * Basic::Angle::R2DCC) << "\t"      // (3 fields)
-         << (angles0[1] * Basic::Angle::R2DCC) << "\t"
-         << (angles0[2] * Basic::Angle::R2DCC) << "\t" ;
+    sout << (angles0[0] * basic::Angle::R2DCC) << "\t"      // (3 fields)
+         << (angles0[1] * basic::Angle::R2DCC) << "\t"
+         << (angles0[2] * basic::Angle::R2DCC) << "\t" ;
     return sout;
 }
 
@@ -512,8 +512,8 @@ std::ostream& TabLogger::TabLogEvent::makeEmissionDataMsg(std::ostream& sout, co
 {
     if (em != nullptr) {
 
-        sout << (Basic::Angle::R2DCC * em->getAzimuthAoi())     << "\t";  // azimuth AOI    (1 field)
-        sout << (Basic::Angle::R2DCC * em->getElevationAoi())   << "\t";  // elevation AOI  (1 field)
+        sout << (basic::Angle::R2DCC * em->getAzimuthAoi())     << "\t";  // azimuth AOI    (1 field)
+        sout << (basic::Angle::R2DCC * em->getElevationAoi())   << "\t";  // elevation AOI  (1 field)
         sout << (em->getFrequency())                            << "\t";  // frequency      (1 field)
         sout << (em->getWavelength())                           << "\t";  // wavelength     (1 field)
         sout << (em->getPulseWidth())                           << "\t";  // pulsewidth     (1 field)

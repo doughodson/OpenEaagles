@@ -37,11 +37,11 @@ public:
 protected:
    virtual IrQueryMsg* getQuery(LCreal* const sn);                     // Get the next 'new' report from the queue
 
-   virtual bool setSlotAzimuthBin(const Basic::Number* const num);     // Sets azimuth bin
-   virtual bool setSlotElevationBin(const Basic::Number* const num);   // Sets elevation bin
+   virtual bool setSlotAzimuthBin(const basic::Number* const num);     // Sets azimuth bin
+   virtual bool setSlotElevationBin(const basic::Number* const num);   // Sets elevation bin
 
-   bool setSlotAlpha(const Basic::Number* const num) override;
-   bool setSlotBeta(const Basic::Number* const num) override;
+   bool setSlotAlpha(const basic::Number* const num) override;
+   bool setSlotBeta(const basic::Number* const num) override;
 
    bool shutdownNotification() override;
 
@@ -52,14 +52,14 @@ protected:
    LCreal              oneMinusBeta;       // 1 - Beta parameter
 
 private:
-   Basic::safe_queue<IrQueryMsg*> queryQueue;  // Emission input queue (used with the
+   basic::safe_queue<IrQueryMsg*> queryQueue;  // Emission input queue (used with the
                                                //   TrackManager::queueLock semaphore)
 
 };
 
 //==============================================================================
 // Class: AirAngleOnlyTrkMgr
-// Base class: Basic::Object -> Basic::Component -> System -> TrackManager -> AirAngleOnlyTrkMgr
+// Base class: basic::Object -> basic::Component -> System -> TrackManager -> AirAngleOnlyTrkMgr
 //
 // Description: Track Manager for A/A modes (e.g., TWS, ACM, SST)
 // Factory name: AirAngleOnlyTrkMgr
@@ -78,7 +78,7 @@ protected:
 
 //==============================================================================
 // Class: AirAngleOnlyTrkMgrPT
-// Base class: Basic::Object -> Basic::Component -> System -> TrackManager -> AngleOnlyTrackManager -> AirAngleOnlyTrkMgrPT
+// Base class: basic::Object -> basic::Component -> System -> TrackManager -> AngleOnlyTrackManager -> AirAngleOnlyTrkMgrPT
 //
 // Description: AirAngleOnlyTrkMgr that uses perceived-truth az, el,
 // and (depending on usePerceivedPosVel) pos, vel from IR reports;

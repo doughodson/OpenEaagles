@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 // Class:       Switch
-// Base class:  Basic::Object -> Basic::Component -> BasicGL::Graphic -> Button -> Switch
+// Base class:  basic::Object -> basic::Component -> BasicGL::Graphic -> Button -> Switch
 // Description: Button that can have multiple formats, up to as many as the user
 // wants.
 //------------------------------------------------------------------------------
@@ -31,8 +31,8 @@ public:
     void updateData(const LCreal dt = 0.0) override;
 
 protected:
-    bool setSlotNumSelections(const Basic::Number* const msg);
-    bool setSlotCurrentState(const Basic::Number* const msg);
+    bool setSlotNumSelections(const basic::Number* const msg);
+    bool setSlotCurrentState(const basic::Number* const msg);
 
 private:
     int currentState;   // which state are we currently in?

@@ -6,7 +6,7 @@
 
 namespace oe {
 
-namespace Basic { class Angle; class Frequency; class String; }
+namespace basic { class Angle; class Frequency; class String; }
 
 namespace IoDevice {
 
@@ -43,9 +43,9 @@ class IoData;
 //      channel   <Number>       ! Output device channel number (AO signal generator only)
 //
 //------------------------------------------------------------------------------
-class SignalGen : public Basic::IoAdapter
+class SignalGen : public basic::IoAdapter
 {
-   DECLARE_SUBCLASS(SignalGen, Basic::IoAdapter)
+   DECLARE_SUBCLASS(SignalGen, basic::IoAdapter)
 
 public:
    enum Signal { SINE, COSINE, SQUARE, SAW };
@@ -69,8 +69,8 @@ public:
    unsigned int getChannel() const;
    bool setChannel(const unsigned int);
 
-   void processInputs(const LCreal dt, const Basic::IoDevice* const device, Basic::IoData* const inData) override;
-   void processOutputs(const LCreal dt, const Basic::IoData* const outData, Basic::IoDevice* const device) override;
+   void processInputs(const LCreal dt, const basic::IoDevice* const device, basic::IoData* const inData) override;
+   void processOutputs(const LCreal dt, const basic::IoData* const outData, basic::IoDevice* const device) override;
 
    void reset() override;
 
@@ -79,11 +79,11 @@ protected:
    LCreal calc(const LCreal dt);
 
    // Slot functions
-   virtual bool setSlotLocation(const Basic::Number* const msg);
-   virtual bool setSlotChannel(const Basic::Number* const msg);
-   virtual bool setSlotSignal(const Basic::String* const msg);
-   virtual bool setSlotFrequency(const Basic::Frequency* const msg);
-   virtual bool setSlotPhase(const Basic::Angle* const msg);
+   virtual bool setSlotLocation(const basic::Number* const msg);
+   virtual bool setSlotChannel(const basic::Number* const msg);
+   virtual bool setSlotSignal(const basic::String* const msg);
+   virtual bool setSlotFrequency(const basic::Frequency* const msg);
+   virtual bool setSlotPhase(const basic::Angle* const msg);
 
 private:
    void initData();

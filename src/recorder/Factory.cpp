@@ -23,9 +23,9 @@ namespace Recorder {
 Factory::Factory()
 {}
 
-Basic::Object* Factory::createObj(const char* name)
+basic::Object* Factory::createObj(const char* name)
 {
-    Basic::Object* obj = nullptr;
+    basic::Object* obj = nullptr;
 
     if ( std::strcmp(name, FileWriter::getFactoryName()) == 0 ) {
         obj = new FileWriter();

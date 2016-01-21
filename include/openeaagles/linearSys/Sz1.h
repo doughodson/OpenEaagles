@@ -11,7 +11,7 @@ namespace LinearSystem {
 
 //------------------------------------------------------------------------------
 // Class:  Sz1
-// Base class:  Basic::Object -> ScalerFunc-> DiffEquation -> FirstOrderTf -> Sz1
+// Base class:  basic::Object -> ScalerFunc-> DiffEquation -> FirstOrderTf -> Sz1
 //
 // Description: Models a first order continuous transfer function (see FirstOrderTf)
 //
@@ -43,10 +43,10 @@ public:
    Sz1();
 
    // Set slot functions
-   virtual bool setSlotN1(const Basic::Number* const msg);
-   virtual bool setSlotN2(const Basic::Number* const msg);
-   virtual bool setSlotD1(const Basic::Number* const msg);
-   virtual bool setSlotD2(const Basic::Number* const msg);
+   virtual bool setSlotN1(const basic::Number* const msg);
+   virtual bool setSlotN2(const basic::Number* const msg);
+   virtual bool setSlotD1(const basic::Number* const msg);
+   virtual bool setSlotD2(const basic::Number* const msg);
 };
 
 } // End LinearSystem namespace

@@ -1,11 +1,11 @@
 
 #include "openeaagles/basic/support.h"
 
-#ifndef __oe_Basic_safe_ptr_H__
-#define __oe_Basic_safe_ptr_H__
+#ifndef __oe_basic_safe_ptr_H__
+#define __oe_basic_safe_ptr_H__
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 //------------------------------------------------------------------------------
 // Template safe_ptr<T>
@@ -17,12 +17,12 @@ namespace Basic {
 //
 //    Object* p = new Object();         // New object; ref cnt is one
 //
-//    Basic::safe_ptr<Object> sp1( p ); // ref cnt is two
+//    basic::safe_ptr<Object> sp1( p ); // ref cnt is two
 //
-//    Basic::safe_ptr<Object> sp2();    // 'sp2' is null
+//    basic::safe_ptr<Object> sp2();    // 'sp2' is null
 //    sp2 = p;                          // ref cnt is three
 //
-//    Basic::safe_ptr<Object> sp3(sp2); // ref cnt is four
+//    basic::safe_ptr<Object> sp3(sp2); // ref cnt is four
 //
 //    p->unref();                // ref cnt is three
 //    sp3 = 0;                   // ref cnt is two
@@ -32,12 +32,12 @@ namespace Basic {
 //
 // Example #2
 //
-//    Basic::safe_ptr<Object> sp1( new Object(), false );  // new object; ref cnt stays at one
+//    basic::safe_ptr<Object> sp1( new Object(), false );  // new object; ref cnt stays at one
 //
 //
 // Example #3
 //
-//    Basic::safe_ptr<Object> sp1();   // 'sp1' is null
+//    basic::safe_ptr<Object> sp1();   // 'sp1' is null
 //    sp1.set( new Object(), false );  // new object; ref cnt stays at one
 //
 //------------------------------------------------------------------------------

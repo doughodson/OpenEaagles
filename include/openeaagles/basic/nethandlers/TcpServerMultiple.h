@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: TcpServerMultiple
 //------------------------------------------------------------------------------
-#ifndef __oe_Basic_TcpServerMultiple_H__
-#define __oe_Basic_TcpServerMultiple_H__
+#ifndef __oe_basic_TcpServerMultiple_H__
+#define __oe_basic_TcpServerMultiple_H__
 
 #include "openeaagles/basic/nethandlers/TcpHandler.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 //------------------------------------------------------------------------------
 // Class: TcpServerMultiple
@@ -59,7 +59,7 @@ private:
    unsigned int backlog;
 };
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace
 
 #endif

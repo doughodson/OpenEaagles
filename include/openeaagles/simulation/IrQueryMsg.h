@@ -8,7 +8,7 @@
 
 namespace oe {
 
-namespace Basic { class List; }
+namespace basic { class List; }
 
 namespace Simulation {
 

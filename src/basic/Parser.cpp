@@ -94,9 +94,9 @@
 #include "openeaagles/basic/List.h"
 #include "Lexical.h"
 
-static oe::Basic::Object*  result;       // Result of all our work
-static oe::Basic::Lexical* lex;          // Lex generator
-static oe::Basic::ParserFormFunc formFunc; // Form fuction 
+static oe::basic::Object*  result;       // Result of all our work
+static oe::basic::Lexical* lex;          // Lex generator
+static oe::basic::ParserFormFunc formFunc; // Form fuction 
 static int errCount;            // Error count
 
 //------------------------------------------------------------------------------
@@ -122,10 +122,10 @@ inline void yyerror(const char* s)
 // gufParse() -- Returns an object of type 'formname' with its slots set to
 //                values in 'argList'.
 //------------------------------------------------------------------------------
-static oe::Basic::Object* gufParse(const char* formname, oe::Basic::PairStream* argList)
+static oe::basic::Object* gufParse(const char* formname, oe::basic::PairStream* argList)
 {
     char emsg[256];
-    oe::Basic::Object* form = 0;
+    oe::basic::Object* form = 0;
 
     if (formFunc != 0) {
 
@@ -135,9 +135,9 @@ static oe::Basic::Object* gufParse(const char* formname, oe::Basic::PairStream* 
 
        // set slots in our new object
        if (form != 0 && argList != 0) {
-          oe::Basic::List::Item* item = argList->getFirstItem();
+          oe::basic::List::Item* item = argList->getFirstItem();
           while (item != 0) {
-               oe::Basic::Pair* p = static_cast<oe::Basic::Pair*>(item->getValue());
+               oe::basic::Pair* p = static_cast<oe::basic::Pair*>(item->getValue());
                bool ok = form->setSlotByName(*p->slot(), p->object());
                if (!ok) {
                   oe::lcStrcpy(emsg,sizeof(emsg),"error while setting slot name: ");
@@ -215,11 +215,11 @@ typedef union YYSTYPE
    long                             lval;
    bool                             bval;
    char*                            cvalp;
-   oe::Basic::Object*          ovalp;
-   oe::Basic::Pair*            pvalp;
-   oe::Basic::PairStream*      svalp;
-   oe::Basic::List*            lvalp;
-   oe::Basic::Number*          nvalp;
+   oe::basic::Object*          ovalp;
+   oe::basic::Pair*            pvalp;
+   oe::basic::PairStream*      svalp;
+   oe::basic::List*            lvalp;
+   oe::basic::Number*          nvalp;
 
 
 
@@ -1452,14 +1452,14 @@ yyreduce:
 
 /* Line 1455 of yacc.c  */
 #line 154 "Parser.y"
-    { if ((yyvsp[(2) - (2)].ovalp) != 0) { result = new oe::Basic::Pair((yyvsp[(1) - (2)].cvalp), (yyvsp[(2) - (2)].ovalp)); delete[] (yyvsp[(1) - (2)].cvalp); (yyvsp[(2) - (2)].ovalp)->unref(); } ;}
+    { if ((yyvsp[(2) - (2)].ovalp) != 0) { result = new oe::basic::Pair((yyvsp[(1) - (2)].cvalp), (yyvsp[(2) - (2)].ovalp)); delete[] (yyvsp[(1) - (2)].cvalp); (yyvsp[(2) - (2)].ovalp)->unref(); } ;}
     break;
 
   case 4:
 
 /* Line 1455 of yacc.c  */
 #line 157 "Parser.y"
-    { (yyval.svalp) = new oe::Basic::PairStream(); ;}
+    { (yyval.svalp) = new oe::basic::PairStream(); ;}
     break;
 
   case 5:
@@ -1470,7 +1470,7 @@ yyreduce:
                                         int i = (yyvsp[(1) - (2)].svalp)->entries();
                                         char cbuf[20];
                                         std::sprintf(cbuf,"%i",i+1);
-                                        oe::Basic::Pair* p = new oe::Basic::Pair(cbuf, (yyvsp[(2) - (2)].ovalp));
+                                        oe::basic::Pair* p = new oe::basic::Pair(cbuf, (yyvsp[(2) - (2)].ovalp));
                                         (yyvsp[(2) - (2)].ovalp)->unref();
                                         (yyvsp[(1) - (2)].svalp)->put(p);
                                         p->unref();
@@ -1487,7 +1487,7 @@ yyreduce:
                                     int i = (yyvsp[(1) - (2)].svalp)->entries();
                                     char cbuf[20];
                                     std::sprintf(cbuf,"%i",i+1);
-                                    oe::Basic::Pair* p = new oe::Basic::Pair(cbuf, (yyvsp[(2) - (2)].ovalp));
+                                    oe::basic::Pair* p = new oe::basic::Pair(cbuf, (yyvsp[(2) - (2)].ovalp));
                                     (yyvsp[(2) - (2)].ovalp)->unref();
                                     (yyvsp[(1) - (2)].svalp)->put(p);
                                     p->unref();
@@ -1513,42 +1513,42 @@ yyreduce:
 
 /* Line 1455 of yacc.c  */
 #line 188 "Parser.y"
-    { (yyval.ovalp) = (oe::Basic::Object*) (yyvsp[(2) - (3)].svalp); ;}
+    { (yyval.ovalp) = (oe::basic::Object*) (yyvsp[(2) - (3)].svalp); ;}
     break;
 
   case 10:
 
 /* Line 1455 of yacc.c  */
 #line 192 "Parser.y"
-    { (yyval.pvalp) = new oe::Basic::Pair((yyvsp[(1) - (2)].cvalp), (yyvsp[(2) - (2)].ovalp)); delete[] (yyvsp[(1) - (2)].cvalp); (yyvsp[(2) - (2)].ovalp)->unref(); ;}
+    { (yyval.pvalp) = new oe::basic::Pair((yyvsp[(1) - (2)].cvalp), (yyvsp[(2) - (2)].ovalp)); delete[] (yyvsp[(1) - (2)].cvalp); (yyvsp[(2) - (2)].ovalp)->unref(); ;}
     break;
 
   case 11:
 
 /* Line 1455 of yacc.c  */
 #line 193 "Parser.y"
-    { (yyval.pvalp) = new oe::Basic::Pair((yyvsp[(1) - (2)].cvalp), (yyvsp[(2) - (2)].ovalp)); delete[] (yyvsp[(1) - (2)].cvalp); (yyvsp[(2) - (2)].ovalp)->unref(); ;}
+    { (yyval.pvalp) = new oe::basic::Pair((yyvsp[(1) - (2)].cvalp), (yyvsp[(2) - (2)].ovalp)); delete[] (yyvsp[(1) - (2)].cvalp); (yyvsp[(2) - (2)].ovalp)->unref(); ;}
     break;
 
   case 12:
 
 /* Line 1455 of yacc.c  */
 #line 196 "Parser.y"
-    { (yyval.ovalp) = new oe::Basic::String((yyvsp[(1) - (1)].cvalp)); delete[] (yyvsp[(1) - (1)].cvalp); ;}
+    { (yyval.ovalp) = new oe::basic::String((yyvsp[(1) - (1)].cvalp)); delete[] (yyvsp[(1) - (1)].cvalp); ;}
     break;
 
   case 13:
 
 /* Line 1455 of yacc.c  */
 #line 197 "Parser.y"
-    { (yyval.ovalp) = new oe::Basic::Identifier((yyvsp[(1) - (1)].cvalp)); delete[] (yyvsp[(1) - (1)].cvalp); ;}
+    { (yyval.ovalp) = new oe::basic::Identifier((yyvsp[(1) - (1)].cvalp)); delete[] (yyvsp[(1) - (1)].cvalp); ;}
     break;
 
   case 14:
 
 /* Line 1455 of yacc.c  */
 #line 198 "Parser.y"
-    { (yyval.ovalp) = new oe::Basic::Boolean((yyvsp[(1) - (1)].bval)); ;}
+    { (yyval.ovalp) = new oe::basic::Boolean((yyvsp[(1) - (1)].bval)); ;}
     break;
 
   case 15:
@@ -1569,7 +1569,7 @@ yyreduce:
 
 /* Line 1455 of yacc.c  */
 #line 203 "Parser.y"
-    { (yyval.lvalp) = new oe::Basic::List(); (yyval.lvalp)->put((yyvsp[(1) - (1)].nvalp)); (yyvsp[(1) - (1)].nvalp)->unref(); ;}
+    { (yyval.lvalp) = new oe::basic::List(); (yyval.lvalp)->put((yyvsp[(1) - (1)].nvalp)); (yyvsp[(1) - (1)].nvalp)->unref(); ;}
     break;
 
   case 18:
@@ -1583,14 +1583,14 @@ yyreduce:
 
 /* Line 1455 of yacc.c  */
 #line 207 "Parser.y"
-    { (yyval.nvalp) = new oe::Basic::Integer((yyvsp[(1) - (1)].lval)); ;}
+    { (yyval.nvalp) = new oe::basic::Integer((yyvsp[(1) - (1)].lval)); ;}
     break;
 
   case 20:
 
 /* Line 1455 of yacc.c  */
 #line 208 "Parser.y"
-    { (yyval.nvalp) = new oe::Basic::Float((yyvsp[(1) - (1)].dval)); ;}
+    { (yyval.nvalp) = new oe::basic::Float((yyvsp[(1) - (1)].dval)); ;}
     break;
 
 
@@ -1813,7 +1813,7 @@ yyreturn:
 
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 //------------------------------------------------------------------------------
 // parse() -- Returns an Object that was constructed from
@@ -1843,6 +1843,6 @@ Object* lcParser(const char* filename, ParserFormFunc func, int* numErrors)
     return q;
 }
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace
 

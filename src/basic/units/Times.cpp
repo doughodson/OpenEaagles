@@ -6,7 +6,7 @@
 #include "openeaagles/basic/SlotTable.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 //==============================================================================
 // Time --
@@ -261,5 +261,5 @@ Days::Days(const Time& org) : Time()
 EMPTY_COPYDATA(Days)
 EMPTY_DELETEDATA(Days)
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace

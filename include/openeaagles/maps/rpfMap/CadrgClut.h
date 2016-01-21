@@ -21,9 +21,9 @@ namespace Rpf {
 
 class CadrgFrameEntry;
 
-class CadrgClut: public Basic::Object
+class CadrgClut: public basic::Object
 {
-    DECLARE_SUBCLASS(CadrgClut, Basic::Object)
+    DECLARE_SUBCLASS(CadrgClut, basic::Object)
 
 public:
     CadrgClut();

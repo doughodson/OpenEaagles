@@ -24,7 +24,7 @@ END_SLOTTABLE(Effects)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(Effects)
-    ON_SLOT(1,setSlotDragIndex,Basic::Number)
+    ON_SLOT(1,setSlotDragIndex,basic::Number)
 END_SLOT_MAP()
 
 // Weapon data for general bomb
@@ -39,7 +39,7 @@ Effects::Effects()
 {
     STANDARD_CONSTRUCTOR()
 
-    static Basic::String generic("Effects");
+    static basic::String generic("Effects");
     setType(&generic);
 
     setDragIndex(0.0006f);
@@ -114,7 +114,7 @@ void Effects::updateTOF(const LCreal dt)
 void Effects::weaponDynamics(const LCreal dt)
 {
    // Useful constant
-   static const LCreal g = ETHG * Basic::Distance::FT2M;      // Acceleration of Gravity (m/s/s)
+   static const LCreal g = ETHG * basic::Distance::FT2M;      // Acceleration of Gravity (m/s/s)
 
    // ---
    // Compute & Set acceleration vector (earth)
@@ -163,7 +163,7 @@ void Effects::weaponDynamics(const LCreal dt)
 //------------------------------------------------------------------------------
 
 // dragIndex: drag index used by default dynamics
-bool Effects::setSlotDragIndex(Basic::Number* const p)
+bool Effects::setSlotDragIndex(basic::Number* const p)
 {
     setDragIndex( p->getReal() );
     return true;
@@ -172,7 +172,7 @@ bool Effects::setSlotDragIndex(Basic::Number* const p)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Basic::Object* Effects::getSlotByIndex(const int si)
+basic::Object* Effects::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
@@ -196,7 +196,7 @@ Chaff::Chaff()
 {
     STANDARD_CONSTRUCTOR()
 
-    static Basic::String generic("Chaff");
+    static basic::String generic("Chaff");
     setType(&generic);
 }
 
@@ -232,7 +232,7 @@ Flare::Flare()
 {
     STANDARD_CONSTRUCTOR()
 
-    static Basic::String generic("Flare");
+    static basic::String generic("Flare");
     setType(&generic);
 }
 
@@ -267,7 +267,7 @@ Decoy::Decoy()
 {
     STANDARD_CONSTRUCTOR()
 
-    static Basic::String generic("Decoy");
+    static basic::String generic("Decoy");
     setType(&generic);
 }
 

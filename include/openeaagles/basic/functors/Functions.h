@@ -3,14 +3,14 @@
 //    Polynomial function:                Polynomial
 //    Generic multi-variable functions:   Func1, Func2, Func3, Func4 and Func5
 //------------------------------------------------------------------------------
-#ifndef __oe_Basic_Functions_H__
-#define __oe_Basic_Functions_H__
+#ifndef __oe_basic_Functions_H__
+#define __oe_basic_Functions_H__
 
 #include "openeaagles/basic/Object.h"
 #include "openeaagles/basic/functors/Function.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 class FStorage;
 class List;
@@ -98,7 +98,7 @@ public:
 //
 // Factory names: Polynomial
 // Slots:
-//    coefficients   <Basic::List>  ! Constant coefficients vector: [ a0 a1 a2 ... aN ]
+//    coefficients   <basic::List>  ! Constant coefficients vector: [ a0 a1 a2 ... aN ]
 //
 // Notes
 //    1) The degree of the polynomial is determined by the size of the coefficients vector.
@@ -141,7 +141,7 @@ private:
    unsigned short m;       // Number of coefficients (degree + 1)
 };
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace
 
 #endif

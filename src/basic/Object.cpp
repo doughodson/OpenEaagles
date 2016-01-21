@@ -9,7 +9,7 @@
 #include <cstring>
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 // ---
 // Table of registered classes
@@ -357,6 +357,6 @@ const Object::_Static* Object::getStatic()
     return &_static;
 }
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace
 

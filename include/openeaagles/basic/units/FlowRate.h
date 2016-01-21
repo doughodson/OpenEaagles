@@ -1,15 +1,15 @@
 //------------------------------------------------------------------------------
 // Class: FlowRate
 //------------------------------------------------------------------------------
-#ifndef __oe_Basic_FlowRate_H__
-#define __oe_Basic_FlowRate_H__
+#ifndef __oe_basic_FlowRate_H__
+#define __oe_basic_FlowRate_H__
 
 #include "openeaagles/basic/Number.h"
 #include "Volumes.h"
 #include "Times.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
 //------------------------------------------------------------------------------
 // Classes: FlowRate
 //
@@ -65,7 +65,7 @@ private:
     LCreal    flowRate;       // holds our velocity
 };
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace
 
 #endif

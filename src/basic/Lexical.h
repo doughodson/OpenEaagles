@@ -3,8 +3,8 @@
 //------------------------------------------------------------------------------
 #include <fstream>
 
-#ifndef _oe_Basic_Lexical_H_
-#define _oe_Basic_Lexical_H_
+#ifndef _oe_basic_Lexical_H_
+#define _oe_basic_Lexical_H_
 
 #ifndef __FLEX_LEXER_H
 #define yyFlexLexer basicFlexLexer
@@ -13,7 +13,7 @@
 #endif
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 //------------------------------------------------------------------------------
 // Class:  Lexical
@@ -40,7 +40,7 @@ private:
 
 };
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace
 
 #endif

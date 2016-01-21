@@ -1,11 +1,11 @@
 
-#ifndef __oe_Basic_Exponential_H__
-#define __oe_Basic_Exponential_H__
+#ifndef __oe_basic_Exponential_H__
+#define __oe_basic_Exponential_H__
 
 #include "../Rng.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 //====================================================================
 // Exponential
@@ -44,7 +44,7 @@ protected:
 
 };
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace
 
 #endif

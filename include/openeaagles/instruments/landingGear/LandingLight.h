@@ -7,7 +7,7 @@
 #include "LandingGear.h"
 
 namespace oe {
-namespace Basic { class Identifier; }
+namespace basic { class Identifier; }
 namespace Instruments {
 
 //------------------------------------------------------------------------------
@@ -37,7 +37,7 @@ public:
 
 protected:
     // slot functions
-    bool setSlotLightRadius(const Basic::Number* const newLR);
+    bool setSlotLightRadius(const basic::Number* const newLR);
 
 private:
     LCreal lRadius;     // our light radius

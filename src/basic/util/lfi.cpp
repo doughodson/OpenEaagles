@@ -2,7 +2,7 @@
 #include "openeaagles/basic/util/lfi.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
 namespace lfi {
 
 //------------------------------------------------------------------------------

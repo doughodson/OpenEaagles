@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Classes: UpTimer, DownTimer, Timer
 //------------------------------------------------------------------------------
-#ifndef __oe_Basic_Timer_H__
-#define __oe_Basic_Timer_H__
+#ifndef __oe_basic_Timer_H__
+#define __oe_basic_Timer_H__
 
 #include "openeaagles/basic/Object.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 class Number;
 class Time;
@@ -149,7 +149,7 @@ public:
     DownTimer(const double rtime = 0.0);
 };
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace
 
 #endif

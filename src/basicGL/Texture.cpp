@@ -31,18 +31,18 @@ END_SLOTTABLE(Texture)
 //  Map slot table to handles
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(Texture)
-    ON_SLOT(1,  setSlotWidth, Basic::Number)
-    ON_SLOT(2,  setSlotHeight, Basic::Number)
-    ON_SLOT(3,  setSlotRedScale, Basic::Number)
-    ON_SLOT(4,  setSlotRedBias, Basic::Number)
-    ON_SLOT(5,  setSlotGreenScale, Basic::Number)
-    ON_SLOT(6,  setSlotGreenBias, Basic::Number)
-    ON_SLOT(7,  setSlotBlueScale, Basic::Number)
-    ON_SLOT(8,  setSlotBlueBias, Basic::Number)
-    ON_SLOT(9,  setSlotWrapS, Basic::Identifier)
-    ON_SLOT(10, setSlotWrapT, Basic::Identifier)
-    ON_SLOT(11, setSlotMagFilter, Basic::Identifier)
-   ON_SLOT(12, setSlotMinFilter, Basic::Identifier)
+    ON_SLOT(1,  setSlotWidth, basic::Number)
+    ON_SLOT(2,  setSlotHeight, basic::Number)
+    ON_SLOT(3,  setSlotRedScale, basic::Number)
+    ON_SLOT(4,  setSlotRedBias, basic::Number)
+    ON_SLOT(5,  setSlotGreenScale, basic::Number)
+    ON_SLOT(6,  setSlotGreenBias, basic::Number)
+    ON_SLOT(7,  setSlotBlueScale, basic::Number)
+    ON_SLOT(8,  setSlotBlueBias, basic::Number)
+    ON_SLOT(9,  setSlotWrapS, basic::Identifier)
+    ON_SLOT(10, setSlotWrapT, basic::Identifier)
+    ON_SLOT(11, setSlotMagFilter, basic::Identifier)
+   ON_SLOT(12, setSlotMinFilter, basic::Identifier)
 END_SLOT_MAP()
 
 
@@ -323,7 +323,7 @@ bool Texture::setMinFilter(const int v)
 //------------------------------------------------------------------------------
 // setSlotWidth() - sets our width slot
 //------------------------------------------------------------------------------
-bool Texture::setSlotWidth(const Basic::Number* const size)
+bool Texture::setSlotWidth(const basic::Number* const size)
 {
     bool ok = false;
     if (size != nullptr) ok = setWidth(size->getInt());
@@ -333,7 +333,7 @@ bool Texture::setSlotWidth(const Basic::Number* const size)
 //------------------------------------------------------------------------------
 // setSlotHeight() - sets our height slot
 //------------------------------------------------------------------------------
-bool Texture::setSlotHeight(const Basic::Number* const size)
+bool Texture::setSlotHeight(const basic::Number* const size)
 {
     bool ok = false;
     if (size != nullptr) ok = setHeight(size->getInt());
@@ -343,7 +343,7 @@ bool Texture::setSlotHeight(const Basic::Number* const size)
 //------------------------------------------------------------------------------
 // setSlotRedScale() - sets the red scale
 //------------------------------------------------------------------------------
-bool Texture::setSlotRedScale(const Basic::Number* const s)
+bool Texture::setSlotRedScale(const basic::Number* const s)
 {
     bool ok = false;
     if (s != nullptr) ok = setRedScale(static_cast<GLfloat>(s->getReal()));
@@ -353,7 +353,7 @@ bool Texture::setSlotRedScale(const Basic::Number* const s)
 //------------------------------------------------------------------------------
 // setSlotRedBias() - sets the red bias
 //------------------------------------------------------------------------------
-bool Texture::setSlotRedBias(const Basic::Number* const b)
+bool Texture::setSlotRedBias(const basic::Number* const b)
 {
     bool ok = false;
     if (b != nullptr) ok = setRedBias(static_cast<GLfloat>(b->getReal()));
@@ -363,7 +363,7 @@ bool Texture::setSlotRedBias(const Basic::Number* const b)
 //------------------------------------------------------------------------------
 // setSlotGreenScale() - sets the blue scale
 //------------------------------------------------------------------------------
-bool Texture::setSlotGreenScale(const Basic::Number* const s)
+bool Texture::setSlotGreenScale(const basic::Number* const s)
 {
     bool ok = false;
     if (s != nullptr) ok = setGreenScale(static_cast<GLfloat>(s->getReal()));
@@ -373,7 +373,7 @@ bool Texture::setSlotGreenScale(const Basic::Number* const s)
 //------------------------------------------------------------------------------
 // setSlotGreenBias() - sets the green bias
 //------------------------------------------------------------------------------
-bool Texture::setSlotGreenBias(const Basic::Number* const b)
+bool Texture::setSlotGreenBias(const basic::Number* const b)
 {
     bool ok = false;
     if (b != nullptr) ok = setGreenBias(static_cast<GLfloat>(b->getReal()));
@@ -383,7 +383,7 @@ bool Texture::setSlotGreenBias(const Basic::Number* const b)
 //------------------------------------------------------------------------------
 // setSlotBlueScale() - sets the blue scale
 //------------------------------------------------------------------------------
-bool Texture::setSlotBlueScale(const Basic::Number* const s)
+bool Texture::setSlotBlueScale(const basic::Number* const s)
 {
     bool ok = false;
     if (s != nullptr) ok = setBlueScale(static_cast<GLfloat>(s->getReal()));
@@ -393,7 +393,7 @@ bool Texture::setSlotBlueScale(const Basic::Number* const s)
 //------------------------------------------------------------------------------
 // setSlotBlueBias() - sets the blue bias
 //------------------------------------------------------------------------------
-bool Texture::setSlotBlueBias(const Basic::Number* const b)
+bool Texture::setSlotBlueBias(const basic::Number* const b)
 {
     bool ok = false;
     if (b != nullptr) ok = setBlueBias(static_cast<GLfloat>(b->getReal()));
@@ -403,7 +403,7 @@ bool Texture::setSlotBlueBias(const Basic::Number* const b)
 //------------------------------------------------------------------------------
 // setSlotWrapS() -- sets the wrapS slot
 //------------------------------------------------------------------------------
-bool Texture::setSlotWrapS(const Basic::Identifier* const v)
+bool Texture::setSlotWrapS(const basic::Identifier* const v)
 {
     bool ok = false;
     if (v != nullptr) {
@@ -421,7 +421,7 @@ bool Texture::setSlotWrapS(const Basic::Identifier* const v)
 //------------------------------------------------------------------------------
 // setSlotWrapT() -- sets the wrapT slot
 //------------------------------------------------------------------------------
-bool Texture::setSlotWrapT(const Basic::Identifier* const v)
+bool Texture::setSlotWrapT(const basic::Identifier* const v)
 {
     bool ok = false;
     if (v != nullptr) {
@@ -439,7 +439,7 @@ bool Texture::setSlotWrapT(const Basic::Identifier* const v)
 //------------------------------------------------------------------------------
 // setSlotMagFilter() -- sets the magFilter slot
 //------------------------------------------------------------------------------
-bool Texture::setSlotMagFilter(const Basic::Identifier* const v)
+bool Texture::setSlotMagFilter(const basic::Identifier* const v)
 {
     bool ok = false;
     if (v != nullptr) {
@@ -457,7 +457,7 @@ bool Texture::setSlotMagFilter(const Basic::Identifier* const v)
 //------------------------------------------------------------------------------
 // setSlotMinFilter() -- sets the minFilter slot
 //------------------------------------------------------------------------------
-bool Texture::setSlotMinFilter(const Basic::Identifier* const v)
+bool Texture::setSlotMinFilter(const basic::Identifier* const v)
 {
     bool ok = false;
     if (v != nullptr) {
@@ -475,7 +475,7 @@ bool Texture::setSlotMinFilter(const Basic::Identifier* const v)
 //------------------------------------------------------------------------------
 // getSlotByIndex() - for our slot table
 //------------------------------------------------------------------------------
-Basic::Object* Texture::getSlotByIndex(const int si)
+basic::Object* Texture::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

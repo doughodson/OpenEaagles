@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: SlotTable
 //------------------------------------------------------------------------------
-#ifndef __oe_Basic_SlotTable_H__
-#define __oe_Basic_SlotTable_H__
+#ifndef __oe_basic_SlotTable_H__
+#define __oe_basic_SlotTable_H__
 
 #include <iostream>
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 //------------------------------------------------------------------------------
 // Class: SlotTable
@@ -54,7 +54,7 @@ private:
    unsigned int nslots1;   // Number of slots in table
 };
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace
 
 #endif

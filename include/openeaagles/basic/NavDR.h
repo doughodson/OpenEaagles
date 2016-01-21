@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: NavDR
 //------------------------------------------------------------------------------
-#ifndef __oe_Basic_NavDR_H__
-#define __oe_Basic_NavDR_H__
+#ifndef __oe_basic_NavDR_H__
+#define __oe_basic_NavDR_H__
 
 #include "openeaagles/basic/support.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 //------------------------------------------------------------------------------
 // Class: NavDR
@@ -134,7 +134,7 @@ public:
 //--------------------------------------------------------------------------
 #include "openeaagles/basic/NavDR.inl"
 
-}  // end namespace Basic
+}  // end namespace basic
 }  // end namespace oe
 
 #endif

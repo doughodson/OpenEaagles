@@ -16,8 +16,8 @@ BEGIN_SLOTTABLE(FuelTank)
 END_SLOTTABLE(FuelTank)
 
 BEGIN_SLOT_MAP(FuelTank)
-    ON_SLOT(1, setSlotFuelWt, Basic::Number)
-    ON_SLOT(2, setSlotCapacity, Basic::Number)
+    ON_SLOT(1, setSlotFuelWt, basic::Number)
+    ON_SLOT(2, setSlotCapacity, basic::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -74,7 +74,7 @@ bool   FuelTank::isFuelWtValid() const          { return (fuelWt >= 0 && fuelWt 
 // Slot functions
 //------------------------------------------------------------------------------
 
-bool FuelTank::setSlotFuelWt(const Basic::Number* const msg)
+bool FuelTank::setSlotFuelWt(const basic::Number* const msg)
 {
     if (msg == nullptr) return false;
     bool ok = setFuelWt( msg->getReal() );
@@ -82,7 +82,7 @@ bool FuelTank::setSlotFuelWt(const Basic::Number* const msg)
     return ok;
 }
 
-bool FuelTank::setSlotCapacity(const Basic::Number* const msg)
+bool FuelTank::setSlotCapacity(const basic::Number* const msg)
 {
     if (msg == nullptr) return false;
     return setCapacity( msg->getReal() );
@@ -91,7 +91,7 @@ bool FuelTank::setSlotCapacity(const Basic::Number* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Basic::Object* FuelTank::getSlotByIndex(const int si)
+basic::Object* FuelTank::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

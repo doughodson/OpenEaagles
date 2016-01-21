@@ -20,8 +20,8 @@ END_SLOTTABLE(ExternalStore)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(ExternalStore)
-   ON_SLOT( 1, setSlotType, Basic::String)
-   ON_SLOT( 2, setSlotJettisonable, Basic::Number )
+   ON_SLOT( 1, setSlotType, basic::String)
+   ON_SLOT( 2, setSlotJettisonable, basic::Number )
 END_SLOT_MAP()
 
 // Event() map
@@ -54,7 +54,7 @@ void ExternalStore::copyData(const ExternalStore& org, const bool cc)
    if (cc) initData();
 
    {
-      const Basic::String* p = nullptr;
+      const basic::String* p = nullptr;
       if (org.type != nullptr) p = org.type->clone();
       setSlotType( p );
       if (p != nullptr) p->unref();
@@ -99,7 +99,7 @@ bool ExternalStore::onJettisonEvent()
 //------------------------------------------------------------------------------
 
 // Get the type string
-const Basic::String* ExternalStore::getType() const
+const basic::String* ExternalStore::getType() const
 {
    return type;
 }
@@ -132,14 +132,14 @@ bool ExternalStore::setJettisonable(const bool f)
 //------------------------------------------------------------------------------
 
 // Set type string
-bool ExternalStore::setSlotType(const Basic::String* const msg)
+bool ExternalStore::setSlotType(const basic::String* const msg)
 {
    type = msg;
    return true;
 }
 
 // jettisonable: weapon can be jettisoned
-bool ExternalStore::setSlotJettisonable(Basic::Number* const p)
+bool ExternalStore::setSlotJettisonable(basic::Number* const p)
 {
    setJettisonable( p->getBoolean() );
    return true;
@@ -148,7 +148,7 @@ bool ExternalStore::setSlotJettisonable(Basic::Number* const p)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Basic::Object* ExternalStore::getSlotByIndex(const int si)
+basic::Object* ExternalStore::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }

@@ -27,7 +27,7 @@ END_SLOTTABLE(Radar)
 
 //  Map slot table
 BEGIN_SLOT_MAP(Radar)
-    ON_SLOT(1,  setSlotIGain, Basic::Number)
+    ON_SLOT(1,  setSlotIGain, basic::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -227,7 +227,7 @@ void Radar::receive(const LCreal dt)
    if (getAntenna() == nullptr) return;
 
    // Clear the next sweep
-   csweep = computeSweepIndex( static_cast<LCreal>(Basic::Angle::R2DCC * getAntenna()->getAzimuth()) );
+   csweep = computeSweepIndex( static_cast<LCreal>(basic::Angle::R2DCC * getAntenna()->getAzimuth()) );
    clearSweep(csweep);
 
    // Compute noise level
@@ -274,7 +274,7 @@ void Radar::receive(const LCreal dt)
          signal *= rfIGain;
 
          // Range attenuation: we don't want the strong signal from short range targets
-         LCreal maxRng = getRange() * Basic::Distance::NM2M;
+         LCreal maxRng = getRange() * basic::Distance::NM2M;
          //LCreal maxRng4 = (maxRng*maxRng*maxRng*maxRng);
          //LCreal rng = (em->getRange());
 
@@ -494,7 +494,7 @@ bool Radar::killedNotification(Player* const p)
 //------------------------------------------------------------------------------
 // onEndScanEvent() -- process the end of a scan
 //------------------------------------------------------------------------------
-bool Radar::onEndScanEvent(const Basic::Integer* const bar)
+bool Radar::onEndScanEvent(const basic::Integer* const bar)
 {
    endOfScanFlg = true;
    BaseClass::onEndScanEvent(bar);
@@ -555,7 +555,7 @@ unsigned int Radar::computeRangeIndex(const LCreal rng)
    if (rng < 0) return 0;
 
    //LCreal maxRng = 40000.0;
-   LCreal maxRng = getRange() * Basic::Distance::NM2M;
+   LCreal maxRng = getRange() * basic::Distance::NM2M;
    LCreal rng1 = (rng/ maxRng );
    unsigned int n = static_cast<unsigned int>(rng1 * static_cast<LCreal>(PTRS_PER_SWEEP) + 0.5);
    if (n >= PTRS_PER_SWEEP) n = PTRS_PER_SWEEP - 1;
@@ -567,7 +567,7 @@ unsigned int Radar::computeRangeIndex(const LCreal rng)
 //------------------------------------------------------------------------------
 
 // igain: Integrator gain (dB or no units; def: 1.0)
-bool Radar::setSlotIGain(Basic::Number* const v)
+bool Radar::setSlotIGain(basic::Number* const v)
 {
    bool ok = false;
    if (v != nullptr) {
@@ -585,7 +585,7 @@ bool Radar::setSlotIGain(Basic::Number* const v)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Basic::Object* Radar::getSlotByIndex(const int si)
+basic::Object* Radar::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }

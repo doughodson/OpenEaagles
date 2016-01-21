@@ -5,7 +5,7 @@
 #include "openeaagles/basic/functors/Tables.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 //==============================================================================
 // class FStorage
@@ -117,5 +117,5 @@ std::ostream& Function::serialize(std::ostream& sout, const int i, const bool sl
    return sout;
 }
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace

@@ -178,7 +178,7 @@ void LaeroModel::reset()
    Simulation::Player* pPlr = static_cast<Simulation::Player*>( findContainerByType(typeid(Simulation::Player)) );
    if (pPlr != nullptr) {
       LCreal initVel = pPlr->getInitVelocity();
-      u = initVel * Basic::Distance::NM2M / Basic::Time::H2S;
+      u = initVel * basic::Distance::NM2M / basic::Time::H2S;
    }
 }
 
@@ -319,8 +319,8 @@ bool LaeroModel::flyPhi(const double phiCmdDeg, const double phiDotCmdDps)
       //-------------------------------------------------------
       // convert argument units (deg -> rad)
       //-------------------------------------------------------
-      double phiCmdRad    = phiCmdDeg * Basic::Angle::D2RCC;
-      double phiDotCmdRps = phiDotCmdDps * Basic::Angle::D2RCC;
+      double phiCmdRad    = phiCmdDeg * basic::Angle::D2RCC;
+      double phiDotCmdRps = phiDotCmdDps * basic::Angle::D2RCC;
 
       //-------------------------------------------------------
       // current phi error (rad)
@@ -363,8 +363,8 @@ bool LaeroModel::flyTht(const double thtCmdDeg, const double thtDotCmdDps)
       //-------------------------------------------------------
       // convert argument units (deg -> rad)
       //-------------------------------------------------------
-      double thtCmdRad    = thtCmdDeg * Basic::Angle::D2RCC;
-      double thtDotCmdRps = thtDotCmdDps * Basic::Angle::D2RCC;
+      double thtCmdRad    = thtCmdDeg * basic::Angle::D2RCC;
+      double thtDotCmdRps = thtDotCmdDps * basic::Angle::D2RCC;
 
       //-------------------------------------------------------
       // current tht error (rad)
@@ -407,8 +407,8 @@ bool LaeroModel::flyPsi(const double psiCmdDeg, const double psiDotCmdDps)
       //-------------------------------------------------------
       // convert argument units (deg -> rad)
       //-------------------------------------------------------
-      double psiCmdRad    = psiCmdDeg * Basic::Angle::D2RCC;
-      double psiDotCmdRps = psiDotCmdDps * Basic::Angle::D2RCC;
+      double psiCmdRad    = psiCmdDeg * basic::Angle::D2RCC;
+      double psiDotCmdRps = psiDotCmdDps * basic::Angle::D2RCC;
 
       //-------------------------------------------------------
       // current psi error (rad)
@@ -452,7 +452,7 @@ bool LaeroModel::flyPsi(const double psiCmdDeg, const double psiDotCmdDps)
 //      //-------------------------------------------------------
 //      // define local constants
 //      //-------------------------------------------------------
-//      const double KTS2MPS = Basic::Distance::NM2M / Basic::Time::H2S;
+//      const double KTS2MPS = basic::Distance::NM2M / basic::Time::H2S;
 //
 //      //-------------------------------------------------------
 //      // convert argument units (deg -> rad)
@@ -507,7 +507,7 @@ bool LaeroModel::flyPsi(const double psiCmdDeg, const double psiDotCmdDps)
 //      double osLonDeg  = pPlr->getLongitude();
 //      double brgDeg = 0.0;
 //      double rngMtr = 0.0;
-//      Basic::Nav::gll2bd(osLatDeg, osLonDeg, latDeg, lonDeg, &brgDeg,&rngMtr);
+//      basic::Nav::gll2bd(osLatDeg, osLonDeg, latDeg, lonDeg, &brgDeg,&rngMtr);
 //
 //      //-------------------------------------------------------
 //      // fly to heading necessary to intercept lat/lon
@@ -533,7 +533,7 @@ bool LaeroModel::setCommandedHeadingD(const double h, const double hDps, const d
       //----------------------------------------------------
       // define local constants
       //----------------------------------------------------
-      const double MAX_BANK_RAD = maxBank * Basic::Angle::D2RCC;
+      const double MAX_BANK_RAD = maxBank * basic::Angle::D2RCC;
       //const double TAU = 2.0;  // time constant [sec]
       const double TAU = 1.0;  // time constant [sec]
 
@@ -542,14 +542,14 @@ bool LaeroModel::setCommandedHeadingD(const double h, const double hDps, const d
       //-------------------------------------------------------
       double velMps        = pPlr->getTotalVelocity();
       double hdgDeg        = pPlr->getHeadingD();
-      double hdgErrDeg     = Basic::Angle::aepcdDeg(h - hdgDeg);
+      double hdgErrDeg     = basic::Angle::aepcdDeg(h - hdgDeg);
       double hdgErrAbsDeg  = std::fabs(hdgErrDeg);
 
       //-------------------------------------------------------
       // get absolute heading rate of change (hdgDotAbsDps)
       //-------------------------------------------------------
       double hdgDotMaxAbsRps = oe::ETHGM * std::tan(MAX_BANK_RAD) / velMps;
-      double hdgDotMaxAbsDps = hdgDotMaxAbsRps * Basic::Angle::R2DCC;
+      double hdgDotMaxAbsDps = hdgDotMaxAbsRps * basic::Angle::R2DCC;
 
       double hdgDotAbsDps = hDps;
       if (hdgDotAbsDps > hdgDotMaxAbsDps) {
@@ -565,12 +565,12 @@ bool LaeroModel::setCommandedHeadingD(const double h, const double hDps, const d
       // define direction of heading rate of change (hdgDotDps)
       //-------------------------------------------------------
       double hdgDotDps = sign(hdgErrDeg) * hdgDotAbsDps;
-      psiDot = hdgDotDps * Basic::Angle::D2RCC;
+      psiDot = hdgDotDps * basic::Angle::D2RCC;
 
       //-------------------------------------------------------
       // define bank angle as a function of turn rate
       //-------------------------------------------------------
-      double phiCmdDeg = std::atan2(psiDot * velMps, oe::ETHGM) * Basic::Angle::R2DCC;
+      double phiCmdDeg = std::atan2(psiDot * velMps, oe::ETHGM) * basic::Angle::R2DCC;
       ok = flyPhi(phiCmdDeg);
    }
 
@@ -616,7 +616,7 @@ bool LaeroModel::setCommandedAltitude(const double a, const double aMps, const d
       //-------------------------------------------------------
       // assign result to altitude control
       //-------------------------------------------------------
-      double thtCmdDeg = (altDotMps / u) * Basic::Angle::R2DCC;
+      double thtCmdDeg = (altDotMps / u) * basic::Angle::R2DCC;
       // SLS - TO DO: Limit commanded pitch to max pitch angle as well.
       ok = flyTht(thtCmdDeg);
    }
@@ -637,7 +637,7 @@ bool LaeroModel::setCommandedVelocityKts(const double v, const double vNps)
       //-------------------------------------------------------
       // define local constants
       //-------------------------------------------------------
-      const double KTS2MPS = Basic::Distance::NM2M / Basic::Time::H2S;
+      const double KTS2MPS = basic::Distance::NM2M / basic::Time::H2S;
 
       //-------------------------------------------------------
       // convert argument units (deg -> rad)

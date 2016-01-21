@@ -18,9 +18,9 @@ END_SLOTTABLE(DialArcSegment)
 //  Map slot table to handles for Analog Dial
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(DialArcSegment)
-    ON_SLOT(1, setSlotIsDynamic, Basic::Number)
-    ON_SLOT(2, setSlotOuterRadius, Basic::Number)
-    ON_SLOT(3, setSlotFilled, Basic::Number)
+    ON_SLOT(1, setSlotIsDynamic, basic::Number)
+    ON_SLOT(2, setSlotOuterRadius, basic::Number)
+    ON_SLOT(3, setSlotFilled, basic::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -55,7 +55,7 @@ EMPTY_DELETEDATA(DialArcSegment)
 //------------------------------------------------------------------------------
 // setSlotIsDyanmic()
 //------------------------------------------------------------------------------
-bool DialArcSegment::setSlotIsDynamic(const Basic::Number* const newD)
+bool DialArcSegment::setSlotIsDynamic(const basic::Number* const newD)
 {
     bool ok = false;
     if (newD != nullptr) ok = setIsDynamic(newD->getBoolean());
@@ -64,7 +64,7 @@ bool DialArcSegment::setSlotIsDynamic(const Basic::Number* const newD)
 //------------------------------------------------------------------------------
 // setSlotOuterRadius() - sets the OUTER dial radius
 //------------------------------------------------------------------------------
-bool DialArcSegment::setSlotOuterRadius(const Basic::Number* const x)
+bool DialArcSegment::setSlotOuterRadius(const basic::Number* const x)
 {
     if (x != nullptr) {
         return setOuterRadius(x->getFloat());
@@ -75,7 +75,7 @@ bool DialArcSegment::setSlotOuterRadius(const Basic::Number* const x)
 //------------------------------------------------------------------------------
 // setSlotFilled() - is our segment filled or not?
 //------------------------------------------------------------------------------
-bool DialArcSegment::setSlotFilled(const Basic::Number* const x)
+bool DialArcSegment::setSlotFilled(const basic::Number* const x)
 {
     if (x != nullptr) {
         return setFilled(x->getBoolean());
@@ -140,7 +140,7 @@ void DialArcSegment::drawFunc()
 //------------------------------------------------------------------------------
 // onUpdateRadius() - event function to update our radius value
 //------------------------------------------------------------------------------
-bool DialArcSegment::onUpdateRadius(const Basic::Number* const x)
+bool DialArcSegment::onUpdateRadius(const basic::Number* const x)
 {
     bool ok = false;
     if (x != nullptr) {
@@ -165,7 +165,7 @@ void DialArcSegment::updateData(const LCreal dt)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for Instrument
 //------------------------------------------------------------------------------
-Basic::Object* DialArcSegment::getSlotByIndex(const int si)
+basic::Object* DialArcSegment::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

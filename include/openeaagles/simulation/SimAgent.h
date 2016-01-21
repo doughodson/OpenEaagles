@@ -25,9 +25,9 @@ class Station;
 //    actorPlayerName      <String>    ! The agent's actor - playerName
 //    actorComponentName   <String>    ! The agent's actor - componentName
 //------------------------------------------------------------------------------
-class SimAgent : public Basic::Ubf::Agent
+class SimAgent : public basic::Ubf::Agent
 {
-   DECLARE_SUBCLASS(SimAgent, Basic::Ubf::Agent)
+   DECLARE_SUBCLASS(SimAgent, basic::Ubf::Agent)
 public:
    SimAgent();
 
@@ -44,12 +44,12 @@ protected:
 
    // slot functions
    // slot to set agent's actor (component to be controlled)
-   bool setSlotActorPlayerName(const Basic::String* const);
-   bool setSlotActorComponentName(const Basic::String* const);
+   bool setSlotActorPlayerName(const basic::String* const);
+   bool setSlotActorComponentName(const basic::String* const);
 
 private:
-   const Basic::String*    actorPlayerName;
-   const Basic::String*    actorComponentName;
+   const basic::String*    actorPlayerName;
+   const basic::String*    actorComponentName;
    Station* myStation;
 };
 

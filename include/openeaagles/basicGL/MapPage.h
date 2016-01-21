@@ -143,31 +143,31 @@ public:
    virtual void pixelsToLatLon(const int x, const int y, double &lat, double &lon);
 
    void updateData(const LCreal dt = 0.0) override;
-   bool event(const int event, Basic::Object* const obj = nullptr) override;
+   bool event(const int event, basic::Object* const obj = nullptr) override;
 
 protected:
    // slot functions
-   virtual bool setSlotOuterRadius(const Basic::Number* const newRadius);
-   virtual bool setSlotOuterRadiusDC(const Basic::Number* const newRadiusDC);
-   virtual bool setSlotRange(const Basic::Number* const newR);
-   virtual bool setSlotDisplacement(const Basic::Number* const newD);
-   virtual bool setSlotCentered(const Basic::Number* const newC);
-   virtual bool setSlotNorthUp(const Basic::Number* const x);
+   virtual bool setSlotOuterRadius(const basic::Number* const newRadius);
+   virtual bool setSlotOuterRadiusDC(const basic::Number* const newRadiusDC);
+   virtual bool setSlotRange(const basic::Number* const newR);
+   virtual bool setSlotDisplacement(const basic::Number* const newD);
+   virtual bool setSlotCentered(const basic::Number* const newC);
+   virtual bool setSlotNorthUp(const basic::Number* const x);
 
    // event functions
-   virtual bool onUpdateRange(const Basic::Number* const newR);
-   virtual bool onUpdateHeading(const Basic::Number* const newH);
-   virtual bool onUpdateReferenceLat(const Basic::Number* const newOL);
-   virtual bool onUpdateReferenceLon(const Basic::Number* const newOL);
-   virtual bool onUpdateCentered(const Basic::Number* const newC);
-   virtual bool onUpdateOuterRadius(const Basic::Number* const newR);
-   virtual bool onUpdateOuterRadiusDC(const Basic::Number* const newRDC);
-   virtual bool onUpdateDisplacement(const Basic::Number* const newD);
+   virtual bool onUpdateRange(const basic::Number* const newR);
+   virtual bool onUpdateHeading(const basic::Number* const newH);
+   virtual bool onUpdateReferenceLat(const basic::Number* const newOL);
+   virtual bool onUpdateReferenceLon(const basic::Number* const newOL);
+   virtual bool onUpdateCentered(const basic::Number* const newC);
+   virtual bool onUpdateOuterRadius(const basic::Number* const newR);
+   virtual bool onUpdateOuterRadiusDC(const basic::Number* const newRDC);
+   virtual bool onUpdateDisplacement(const basic::Number* const newD);
 
    // ref lat/lon heading
-   virtual bool setSlotRefLat(const Basic::Number* const x);
-   virtual bool setSlotRefLon(const Basic::Number* const x);
-   virtual bool setSlotRefHdg(const Basic::Number* const x);
+   virtual bool setSlotRefLat(const basic::Number* const x);
+   virtual bool setSlotRefLon(const basic::Number* const x);
+   virtual bool setSlotRefHdg(const basic::Number* const x);
 
 private:
    void initData();
@@ -197,11 +197,11 @@ private:
 
 inline double MapPage::getReferenceLatDeg() const  { return referenceLat; }
 inline double MapPage::getReferenceLonDeg() const  { return referenceLon; }
-inline double MapPage::getReferenceLatRad() const  { return referenceLat * Basic::Angle::D2RCC; }
-inline double MapPage::getReferenceLonRad() const  { return referenceLon * Basic::Angle::D2RCC; }
+inline double MapPage::getReferenceLatRad() const  { return referenceLat * basic::Angle::D2RCC; }
+inline double MapPage::getReferenceLonRad() const  { return referenceLon * basic::Angle::D2RCC; }
 inline LCreal MapPage::getCosRefLat() const        { return static_cast<LCreal>(cosineLatReference); }
 inline LCreal MapPage::getHeadingDeg() const       { return static_cast<LCreal>(heading); }
-inline LCreal MapPage::getHeadingRad() const       { return static_cast<LCreal>(heading * Basic::Angle::D2RCC); }
+inline LCreal MapPage::getHeadingRad() const       { return static_cast<LCreal>(heading * basic::Angle::D2RCC); }
 inline LCreal MapPage::getOuterRadius() const      { return static_cast<LCreal>(outerRadius); }
 inline LCreal MapPage::getCurrentRadius() const    { return static_cast<LCreal>(isCentered ? outerRadius : outerRadiusDC);  }
 inline LCreal MapPage::getOuterRadiusDC() const    { return static_cast<LCreal>(outerRadiusDC); }
@@ -214,7 +214,7 @@ inline bool   MapPage::getNorthUp() const          { return northUp; }
 inline bool MapPage::setReferenceLatDeg(const double newLat)
 {
    referenceLat = newLat;
-   cosineLatReference = static_cast<LCreal>(std::cos((Basic::Angle::D2RCC*referenceLat)));
+   cosineLatReference = static_cast<LCreal>(std::cos((basic::Angle::D2RCC*referenceLat)));
    return true;
 }
 
@@ -227,19 +227,19 @@ inline bool MapPage::setReferenceLonDeg(const double newLon)
 inline bool MapPage::setReferenceLatRad(const double newLat)
 {
    cosineLatReference = static_cast<LCreal>(std::cos(newLat));
-   referenceLat = newLat * Basic::Angle::R2DCC;
+   referenceLat = newLat * basic::Angle::R2DCC;
    return true;
 }
 
 inline bool MapPage::setReferenceLonRad(const double newLon)
 {
-   referenceLon = newLon * Basic::Angle::R2DCC;
+   referenceLon = newLon * basic::Angle::R2DCC;
    return true;
 }
 
 inline bool MapPage::setHeadingDeg(const LCreal newHeading)
 {
-   LCreal hdgRad = static_cast<LCreal>(Basic::Angle::D2RCC * newHeading);
+   LCreal hdgRad = static_cast<LCreal>(basic::Angle::D2RCC * newHeading);
    heading = newHeading;
    headingSin = static_cast<LCreal>(std::sin(hdgRad));
    headingCos = static_cast<LCreal>(std::cos(hdgRad));
@@ -248,7 +248,7 @@ inline bool MapPage::setHeadingDeg(const LCreal newHeading)
 
 inline bool MapPage::setHeadingRad(const LCreal newHeading)
 {
-   heading = newHeading * static_cast<LCreal>(Basic::Angle::R2DCC);
+   heading = newHeading * static_cast<LCreal>(basic::Angle::R2DCC);
    LCreal temp = newHeading;
    if (northUp) temp = 0;
    headingSin = static_cast<LCreal>(std::sin(temp));

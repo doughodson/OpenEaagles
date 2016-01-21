@@ -57,9 +57,9 @@ END_SLOTTABLE(JSBSimModel)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(JSBSimModel)
-    ON_SLOT(1, setRootDir,    Basic::String)
-    ON_SLOT(2, setModel,      Basic::String)
-    ON_SLOT(3, setDebugLevel, Basic::Integer)
+    ON_SLOT(1, setRootDir,    basic::String)
+    ON_SLOT(2, setModel,      basic::String)
+    ON_SLOT(3, setDebugLevel, basic::Integer)
 END_SLOT_MAP()
 
 EMPTY_SERIALIZER(JSBSimModel)
@@ -722,16 +722,16 @@ void JSBSimModel::dynamics(const LCreal dt)
     // Set values for Player & AirVehicle interfaces
     //    (Note: Player::dynamics() computes the new position)
     // ---
-    p->setAltitude(Basic::Distance::FT2M * Propagate->GetAltitudeASL(), true);
-    p->setVelocity(static_cast<LCreal>(Basic::Distance::FT2M * Propagate->GetVel(JSBSim::FGJSBBase::eNorth)),
-                   static_cast<LCreal>(Basic::Distance::FT2M * Propagate->GetVel(JSBSim::FGJSBBase::eEast)),
-                   static_cast<LCreal>(Basic::Distance::FT2M * Propagate->GetVel(JSBSim::FGJSBBase::eDown)));
-    p->setVelocityBody(static_cast<LCreal>(Basic::Distance::FT2M * Propagate->GetUVW(1)),
-                       static_cast<LCreal>(Basic::Distance::FT2M * Propagate->GetUVW(2)),
-                       static_cast<LCreal>(Basic::Distance::FT2M * Propagate->GetUVW(3)));
-//    LCreal accX = Basic::Distance::FT2M * Propagate->GetUVWdot(1);
-//    LCreal accY = Basic::Distance::FT2M * Propagate->GetUVWdot(2);
-//    LCreal accZ = Basic::Distance::FT2M * Propagate->GetUVWdot(3);
+    p->setAltitude(basic::Distance::FT2M * Propagate->GetAltitudeASL(), true);
+    p->setVelocity(static_cast<LCreal>(basic::Distance::FT2M * Propagate->GetVel(JSBSim::FGJSBBase::eNorth)),
+                   static_cast<LCreal>(basic::Distance::FT2M * Propagate->GetVel(JSBSim::FGJSBBase::eEast)),
+                   static_cast<LCreal>(basic::Distance::FT2M * Propagate->GetVel(JSBSim::FGJSBBase::eDown)));
+    p->setVelocityBody(static_cast<LCreal>(basic::Distance::FT2M * Propagate->GetUVW(1)),
+                       static_cast<LCreal>(basic::Distance::FT2M * Propagate->GetUVW(2)),
+                       static_cast<LCreal>(basic::Distance::FT2M * Propagate->GetUVW(3)));
+//    LCreal accX = basic::Distance::FT2M * Propagate->GetUVWdot(1);
+//    LCreal accY = basic::Distance::FT2M * Propagate->GetUVWdot(2);
+//    LCreal accZ = basic::Distance::FT2M * Propagate->GetUVWdot(3);
     const JSBSim::FGMatrix33& Tb2l = Propagate->GetTb2l();
     const JSBSim::FGColumnVector3& vUVWdot = Accelerations->GetUVWdot();
 
@@ -743,9 +743,9 @@ void JSBSimModel::dynamics(const LCreal dt)
                             static_cast<LCreal>(Propagate->GetPQR(JSBSim::FGJSBBase::eR)));
 
     JSBSim::FGColumnVector3 vVeldot = Tb2l * vUVWdot;
-    p->setAcceleration(static_cast<LCreal>(Basic::Distance::FT2M * vVeldot(1)),
-                       static_cast<LCreal>(Basic::Distance::FT2M * vVeldot(2)),
-                       static_cast<LCreal>(Basic::Distance::FT2M * vVeldot(3)));
+    p->setAcceleration(static_cast<LCreal>(basic::Distance::FT2M * vVeldot(1)),
+                       static_cast<LCreal>(basic::Distance::FT2M * vVeldot(2)),
+                       static_cast<LCreal>(basic::Distance::FT2M * vVeldot(3)));
 
     //std::printf("(%6.1f, %6.1f, %6.1f)   vel=%8.1f   alt=%8.1f alt2=%8.1f\n", acData->phi, acData->theta, acData->psi, acData->vp, acData->hp, (M2FT*getAltitude()) );
     //std::printf("f=%6.1f p=%6.1f, qa=%6.1f, a=%6.1f, g=%6.1f\n", hotasIO->pitchForce, acData->theta, acData->qa, acData->alpha, acData->gamma );
@@ -802,7 +802,7 @@ void JSBSimModel::dynamics(const LCreal dt)
             }
             if (hasAltitudeHold) {
                 propNode->SetBool("ap/altitude_hold", isAltitudeHoldOn());
-                propNode->SetDouble("ap/altitude_setpoint", (getCommandedAltitude() * Basic::Distance::M2FT) );
+                propNode->SetDouble("ap/altitude_setpoint", (getCommandedAltitude() * basic::Distance::M2FT) );
             }
         }
     }
@@ -864,7 +864,7 @@ void JSBSimModel::reset()
             }
             if (hasAltitudeHold) {
                 propMgr->Tie("ap/altitude_hold", this, &JSBSimModel::isAltitudeHoldOn);
-                propMgr->Tie("ap/altitude_setpoint", this, &JSBSimModel::getCommandedAltitude * Basic::Distance::M2FT);
+                propMgr->Tie("ap/altitude_setpoint", this, &JSBSimModel::getCommandedAltitude * basic::Distance::M2FT);
             }
 #endif
         }
@@ -878,18 +878,18 @@ void JSBSimModel::reset()
     JSBSim::FGInitialCondition* fgic = fdmex->GetIC();
     if (fgic == nullptr) return;
 
-    fgic->SetAltitudeASLFtIC(Basic::Distance::M2FT * p->getAltitude());
+    fgic->SetAltitudeASLFtIC(basic::Distance::M2FT * p->getAltitude());
 
 #if 0
-    fgic->SetTrueHeadingDegIC(Basic::Angle::R2DCC * p->getHeading());
-    fgic->SetRollAngleDegIC(Basic::Angle::R2DCC * p->getRoll());
-    fgic->SetPitchAngleDegIC(Basic::Angle::R2DCC * p->getPitch());
+    fgic->SetTrueHeadingDegIC(basic::Angle::R2DCC * p->getHeading());
+    fgic->SetRollAngleDegIC(basic::Angle::R2DCC * p->getRoll());
+    fgic->SetPitchAngleDegIC(basic::Angle::R2DCC * p->getPitch());
 #else
-    fgic->SetPsiDegIC(Basic::Angle::R2DCC * p->getHeading());
-    fgic->SetPhiDegIC(Basic::Angle::R2DCC * p->getRoll());
-    fgic->SetThetaDegIC(Basic::Angle::R2DCC * p->getPitch());
+    fgic->SetPsiDegIC(basic::Angle::R2DCC * p->getHeading());
+    fgic->SetPhiDegIC(basic::Angle::R2DCC * p->getRoll());
+    fgic->SetThetaDegIC(basic::Angle::R2DCC * p->getPitch());
 #endif
-    fgic->SetVtrueKtsIC(Basic::Distance::M2NM * p->getTotalVelocity() * 3600.0f);
+    fgic->SetVtrueKtsIC(basic::Distance::M2NM * p->getTotalVelocity() * 3600.0f);
     fgic->SetLatitudeDegIC(p->getInitLatitude());
     fgic->SetLongitudeDegIC(p->getInitLongitude());
 
@@ -921,7 +921,7 @@ void JSBSimModel::reset()
 //------------------------------------------------------------------------------
 
 // Sets root directory for JSBSim models
-bool JSBSimModel::setRootDir(const Basic::String* const dir)
+bool JSBSimModel::setRootDir(const basic::String* const dir)
 {
     if (rootDir != nullptr) {
        rootDir->unref();
@@ -934,7 +934,7 @@ bool JSBSimModel::setRootDir(const Basic::String* const dir)
 }
 
 // Sets JSBSim model
-bool JSBSimModel::setModel(const Basic::String* const mdl)
+bool JSBSimModel::setModel(const basic::String* const mdl)
 {
     if (model != nullptr) {
        model->unref();
@@ -947,7 +947,7 @@ bool JSBSimModel::setModel(const Basic::String* const mdl)
 }
 
 // Sets JSBSim debug level
-bool JSBSimModel::setDebugLevel(const Basic::Integer* const level)
+bool JSBSimModel::setDebugLevel(const basic::Integer* const level)
 {
    if (level != nullptr) {
       debugLevel = level->getInt();
@@ -958,7 +958,7 @@ bool JSBSimModel::setDebugLevel(const Basic::Integer* const level)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Basic::Object* JSBSimModel::getSlotByIndex(const int si)
+basic::Object* JSBSimModel::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
@@ -1028,7 +1028,7 @@ bool JSBSimModel::isAltitudeHoldOn() const
 
 double JSBSimModel::getCommandedAltitude() const
 {
-    return commandedAltitudeFt * Basic::Distance::FT2M;
+    return commandedAltitudeFt * basic::Distance::FT2M;
 }
 
 bool JSBSimModel::setAltitudeHoldOn(const bool b)
@@ -1041,7 +1041,7 @@ bool JSBSimModel::setAltitudeHoldOn(const bool b)
 
 bool JSBSimModel::setCommandedAltitude(const double a, const double, const double)
 {
-    commandedAltitudeFt = a * Basic::Distance::M2FT;
+    commandedAltitudeFt = a * basic::Distance::M2FT;
     return hasAltitudeHold;
 }
 

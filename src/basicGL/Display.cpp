@@ -43,7 +43,7 @@ IMPLEMENT_SUBCLASS(Display,"Display")
 BEGIN_SLOTTABLE(Display)
    "name",                 //  1) Display name
    "colorTable",           //  2) Color table
-   "normalFont",           //  3) Normal font; Font or Basic::Identifier
+   "normalFont",           //  3) Normal font; Font or basic::Identifier
    "left",                 //  4) Left ortho bound
    "right",                //  5) Right ortho bound
    "bottom",               //  6) Bottom ortho bound
@@ -57,9 +57,9 @@ BEGIN_SLOTTABLE(Display)
    "displays",             // 14) Sub-displays
    "stdLineWidth",         // 15) Standard Line width
    "textures",             // 16) Texture(s)
-   "clearColor",           // 17) Clear (Background) color; Basic::Color
-   "leftBracketChar",      // 18) Left bracket character;  Basic::String or Basic::Number; default: '['
-   "rightBracketChar",     // 19) Right bracket character; Basic::String or Basic::Number; default: ']'
+   "clearColor",           // 17) Clear (Background) color; basic::Color
+   "leftBracketChar",      // 18) Left bracket character;  basic::String or basic::Number; default: '['
+   "rightBracketChar",     // 19) Right bracket character; basic::String or basic::Number; default: ']'
    "reverseVideoBrackets", // 20) Reverse video brackets flag:
                            //     If true, brackets are drawn with reversed video font,
                            //     otherwise follow the field's drawing mode.  default: false
@@ -74,37 +74,37 @@ END_SLOTTABLE(Display)
 //  Map slot table to handles
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(Display)
-   ON_SLOT(1,setName,Basic::String)
-   ON_SLOT(2,setColorTable,Basic::PairStream)
+   ON_SLOT(1,setName,basic::String)
+   ON_SLOT(2,setColorTable,basic::PairStream)
    ON_SLOT(3,setNormalFont,Font)
-   ON_SLOT(3,setNormalFont,Basic::Identifier)
-   ON_SLOT(4,setSlotLeftOrthoBound,Basic::Number)
-   ON_SLOT(5,setSlotRightOrthoBound,Basic::Number)
-   ON_SLOT(6,setSlotBottomOrthoBound,Basic::Number)
-   ON_SLOT(7,setSlotTopOrthoBound,Basic::Number)
-   ON_SLOT(8,setSlotNearOrthoBound,Basic::Number)
-   ON_SLOT(9,setSlotFarOrthoBound,Basic::Number)
-   ON_SLOT(10,setSlotViewportXOrigin,Basic::Number)
-   ON_SLOT(11,setSlotViewportYOrigin,Basic::Number)
-   ON_SLOT(12,setSlotViewportWidth,Basic::Number)
-   ON_SLOT(13,setSlotViewportHeight,Basic::Number)
-   ON_SLOT(14,setSlotSubdisplayStream,Basic::PairStream)
+   ON_SLOT(3,setNormalFont,basic::Identifier)
+   ON_SLOT(4,setSlotLeftOrthoBound,basic::Number)
+   ON_SLOT(5,setSlotRightOrthoBound,basic::Number)
+   ON_SLOT(6,setSlotBottomOrthoBound,basic::Number)
+   ON_SLOT(7,setSlotTopOrthoBound,basic::Number)
+   ON_SLOT(8,setSlotNearOrthoBound,basic::Number)
+   ON_SLOT(9,setSlotFarOrthoBound,basic::Number)
+   ON_SLOT(10,setSlotViewportXOrigin,basic::Number)
+   ON_SLOT(11,setSlotViewportYOrigin,basic::Number)
+   ON_SLOT(12,setSlotViewportWidth,basic::Number)
+   ON_SLOT(13,setSlotViewportHeight,basic::Number)
+   ON_SLOT(14,setSlotSubdisplayStream,basic::PairStream)
    ON_SLOT(14,setSlotSubdisplaySingle,Display)
-   ON_SLOT(15,setSlotStdLineWidth,Basic::Number)
-   ON_SLOT(16,setSlotTexturesStream,Basic::PairStream)
+   ON_SLOT(15,setSlotStdLineWidth,basic::Number)
+   ON_SLOT(16,setSlotTexturesStream,basic::PairStream)
    ON_SLOT(16,setSlotTexturesSingle,Texture)
-   ON_SLOT(17,setSlotClearColor,Basic::Color)
-   ON_SLOT(18,setSlotLeftBracketCharacter,Basic::Number)
-   ON_SLOT(18,setSlotLeftBracketCharacter,Basic::String)
-   ON_SLOT(19,setSlotRightBracketCharacter,Basic::Number)
-   ON_SLOT(19,setSlotRightBracketCharacter,Basic::String)
-   ON_SLOT(20,setSlotReverseVideoBrackets,Basic::Number)
-   ON_SLOT(21,setFontList,Basic::PairStream)
-   ON_SLOT(22,setSlotClearDepth,Basic::Number)
-   ON_SLOT(23,setSlotDisplayOrientation,Basic::String)
-   ON_SLOT(24,setSlotMaterials,Basic::PairStream)
+   ON_SLOT(17,setSlotClearColor,basic::Color)
+   ON_SLOT(18,setSlotLeftBracketCharacter,basic::Number)
+   ON_SLOT(18,setSlotLeftBracketCharacter,basic::String)
+   ON_SLOT(19,setSlotRightBracketCharacter,basic::Number)
+   ON_SLOT(19,setSlotRightBracketCharacter,basic::String)
+   ON_SLOT(20,setSlotReverseVideoBrackets,basic::Number)
+   ON_SLOT(21,setFontList,basic::PairStream)
+   ON_SLOT(22,setSlotClearDepth,basic::Number)
+   ON_SLOT(23,setSlotDisplayOrientation,basic::String)
+   ON_SLOT(24,setSlotMaterials,basic::PairStream)
    ON_SLOT(24,setSlotMaterials,Material)
-   ON_SLOT(25,setSlotAntialias,Basic::Number)
+   ON_SLOT(25,setSlotAntialias,basic::Number)
 END_SLOT_MAP()
 
 
@@ -120,7 +120,7 @@ Display::Display()
 
 void Display::initData()
 {
-   name = new Basic::String(" ");
+   name = new basic::String(" ");
    subdisplays = nullptr;
    textures = nullptr;
    stdLinewidth = 1;
@@ -143,19 +143,19 @@ void Display::initData()
 
    {
       colorTable = nullptr;
-      Basic::PairStream* p = defaultColors();
+      basic::PairStream* p = defaultColors();
       setColorTable(p);
       p->unref();
 
-      colorName = new Basic::Identifier();
+      colorName = new basic::Identifier();
 
       normColor = nullptr;
-      Basic::Rgba* nc = new Basic::Rgba(0.0, 1.0, 0.0, 1.0); // default: green
+      basic::Rgba* nc = new basic::Rgba(0.0, 1.0, 0.0, 1.0); // default: green
       setNormColor( nc );
       nc->unref();
 
       hiColor = nullptr;
-      Basic::Rgba* hc = new Basic::Rgba(1.0, 0.0, 0.0, 1.0); // default: red
+      basic::Rgba* hc = new basic::Rgba(1.0, 0.0, 0.0, 1.0); // default: red
       setHighlightColor( hc );
       hc->unref();
    }
@@ -302,9 +302,9 @@ void Display::updateTC(const LCreal dt)
 
    // Update any sub-displays ...
    if (subdisplays != nullptr) {
-      Basic::List::Item* item = subdisplays->getFirstItem();
+      basic::List::Item* item = subdisplays->getFirstItem();
       while (item != nullptr) {
-         Basic::Pair* pair = dynamic_cast<Basic::Pair*>(item->getValue());
+         basic::Pair* pair = dynamic_cast<basic::Pair*>(item->getValue());
          if (pair != nullptr) {
             Display* obj = dynamic_cast<Display*>( pair->object() );
             if (obj != nullptr) obj->tcFrame(dt);
@@ -322,9 +322,9 @@ void Display::reset()
    BaseClass::reset();
    if (subdisplays != nullptr) {
       // Reset all of our sub-displays
-      Basic::List::Item* item = subdisplays->getFirstItem();
+      basic::List::Item* item = subdisplays->getFirstItem();
       while (item != nullptr) {
-         Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+         basic::Pair* pair = static_cast<basic::Pair*>(item->getValue());
          Component* obj = static_cast<Component*>(pair->object());
          if (obj != nullptr) obj->reset();
          item = item->getNext();
@@ -494,7 +494,7 @@ void Display::clear()
    }
 
    osg::Vec4f cc = getClearColor();
-   glClearColor(cc[Basic::Color::RED], cc[Basic::Color::GREEN], cc[Basic::Color::BLUE], cc[Basic::Color::ALPHA]);
+   glClearColor(cc[basic::Color::RED], cc[basic::Color::GREEN], cc[basic::Color::BLUE], cc[basic::Color::ALPHA]);
 
    if (clearDepth >= 0.0f)
       glClear(GL_DEPTH_BUFFER_BIT|GL_COLOR_BUFFER_BIT);
@@ -833,7 +833,7 @@ void Display::setColor(const char* cname1)
    // Already set? Then leave
    if (*colorName == cname1) return;
 
-   Basic::Color* newColor = getColor(cname1);
+   basic::Color* newColor = getColor(cname1);
    if (newColor != nullptr) {
       colorName->setStr(cname1);
       color = *(newColor->getRGBA());
@@ -844,7 +844,7 @@ void Display::setColor(const char* cname1)
 //------------------------------------------------------------------------------
 // setClearColor() -- set the clear color (used by a screen clear)
 //------------------------------------------------------------------------------
-void Display::setClearColor(const Basic::Color& ccolor)
+void Display::setClearColor(const basic::Color& ccolor)
 {
    clearColor = *ccolor.getRGBA();
 }
@@ -852,11 +852,11 @@ void Display::setClearColor(const Basic::Color& ccolor)
 //------------------------------------------------------------------------------
 // getTextureByName()  -- get a texture by name
 //------------------------------------------------------------------------------
-GLuint Display::getTextureByName(const Basic::Identifier* texName)
+GLuint Display::getTextureByName(const basic::Identifier* texName)
 {
    GLuint tex = 0;
    if (texName != nullptr && textures != nullptr) {
-      const Basic::Pair* pair = textures->findByName( *texName );
+      const basic::Pair* pair = textures->findByName( *texName );
       if (pair != nullptr) {
          const Texture* pt = dynamic_cast<const Texture*>( pair->object() );
          if (pt != nullptr) tex = pt->getTexture();
@@ -873,11 +873,11 @@ GLuint Display::getTextureByName(const Basic::Identifier* texName)
 //------------------------------------------------------------------------------
 // getMaterial()  -- gets a material by name
 //------------------------------------------------------------------------------
-Material* Display::getMaterial(const Basic::Identifier* name)
+Material* Display::getMaterial(const basic::Identifier* name)
 {
    Material* temp = nullptr;
    if (name !=nullptr && materials != nullptr) {
-      const Basic::Pair* pair = materials->findByName( *name );
+      const basic::Pair* pair = materials->findByName( *name );
       if (pair != nullptr) {
          const Material* mat = dynamic_cast<const Material*>( pair->object() );
          if (mat != nullptr) temp = const_cast<Material*>(static_cast<const Material*>(mat));
@@ -895,14 +895,14 @@ Material* Display::getMaterial(const Basic::Identifier* name)
 //------------------------------------------------------------------------------
 // setNormColor() &  setHighlightColor() -- set default text colors
 //------------------------------------------------------------------------------
-void Display::setNormColor(const Basic::Color* const nc)
+void Display::setNormColor(const basic::Color* const nc)
 {
    if (normColor != nullptr) normColor->unref();
    normColor = nc;
    if (normColor != nullptr) normColor->ref();
 }
 
-void Display::setHighlightColor(const Basic::Color* const nc)
+void Display::setHighlightColor(const basic::Color* const nc)
 {
    if (hiColor != nullptr) hiColor->unref();
    hiColor = nc;
@@ -912,7 +912,7 @@ void Display::setHighlightColor(const Basic::Color* const nc)
 //------------------------------------------------------------------------------
 // setColorTable() -- set the color table
 //------------------------------------------------------------------------------
-bool Display::setColorTable(Basic::PairStream* const sctobj)
+bool Display::setColorTable(basic::PairStream* const sctobj)
 {
    bool ok = true;
    if (colorTable != nullptr) colorTable->unref();
@@ -932,7 +932,7 @@ bool Display::setColorTable(Basic::PairStream* const sctobj)
 //------------------------------------------------------------------------------
 
 // setFontList() -- set the font list
-bool Display::setFontList(Basic::PairStream* const obj)
+bool Display::setFontList(basic::PairStream* const obj)
 {
    bool ok = true;
    if (fontList != nullptr) fontList->unref();
@@ -946,7 +946,7 @@ Font* Display::getFont(const char* const fontName)
 {
    Font* ft = nullptr;
    if (fontList != nullptr) {
-      Basic::Pair* p = fontList->findByName(fontName);
+      basic::Pair* p = fontList->findByName(fontName);
       if (p != nullptr) ft = static_cast<Font*>(p->object());
    }
    return ft;
@@ -956,20 +956,20 @@ const Font* Display::getFont(const char* const fontName) const
 {
    const Font* ft = nullptr;
    if (fontList != nullptr) {
-      const Basic::Pair* p = fontList->findByName(fontName);
+      const basic::Pair* p = fontList->findByName(fontName);
       if (p != nullptr) ft = static_cast<const Font*>(p->object());
    }
    return ft;
 }
 
 // getFont() -- by name
-Font* Display::getFont(const Basic::Identifier* const fontName)
+Font* Display::getFont(const basic::Identifier* const fontName)
 {
    return getFont(*fontName);
 }
 
 // getFont() -- by name (const version)
-const Font* Display::getFont(const Basic::Identifier* const fontName) const
+const Font* Display::getFont(const basic::Identifier* const fontName) const
 {
    return getFont(*fontName);
 }
@@ -979,7 +979,7 @@ Font* Display::getFont(const int index)
 {
    Font* ft = nullptr;
    if (fontList != nullptr) {
-      Basic::Pair* p = fontList->getPosition(index+1);
+      basic::Pair* p = fontList->getPosition(index+1);
       if (p != nullptr) ft = static_cast<Font*>(p->object());
    }
    return ft;
@@ -990,7 +990,7 @@ const Font* Display::getFont(const int index) const
 {
    const Font* ft = nullptr;
    if (fontList != nullptr) {
-      const Basic::Pair* p = fontList->getPosition(index+1);
+      const basic::Pair* p = fontList->getPosition(index+1);
       if (p != nullptr) ft = static_cast<const Font*>(p->object());
    }
    return ft;
@@ -1066,7 +1066,7 @@ bool Display::setNormalFont(const char* const fontName)
 {
    if (fontName != nullptr) {
       if (normalFontName == nullptr) {
-         normalFontName = new Basic::Identifier();
+         normalFontName = new basic::Identifier();
       }
       *normalFontName = fontName;
       setNormalFont( getFont(fontName) );
@@ -1078,12 +1078,12 @@ bool Display::setNormalFont(const char* const fontName)
    return true;
 }
 
-// setNormalFont() --- by name (Basic::Identifier)
-bool Display::setNormalFont(const Basic::Identifier* const fontName)
+// setNormalFont() --- by name (basic::Identifier)
+bool Display::setNormalFont(const basic::Identifier* const fontName)
 {
    if (fontName != nullptr) {
       if (normalFontName == nullptr) {
-         normalFontName = new Basic::Identifier();
+         normalFontName = new basic::Identifier();
       }
       *normalFontName = *fontName;
       setNormalFont( getFont(fontName) );
@@ -1367,23 +1367,23 @@ void Display::drawRightBracket(const int ln, const int cp)
 //------------------------------------------------------------------------------
 // getColor() -- get color by index or color name
 //------------------------------------------------------------------------------
-Basic::Color* Display::getColor(const char* const colorName)
+basic::Color* Display::getColor(const char* const colorName)
 {
-   Basic::Color* cc = nullptr;
+   basic::Color* cc = nullptr;
    if (colorTable != nullptr) {
-      Basic::Pair* p = colorTable->findByName(colorName);
-      if (p != nullptr) cc = static_cast<Basic::Color*>(p->object());
+      basic::Pair* p = colorTable->findByName(colorName);
+      if (p != nullptr) cc = static_cast<basic::Color*>(p->object());
    }
    return cc;
 }
 
 
-Basic::Color* Display::getColor(const int index)
+basic::Color* Display::getColor(const int index)
 {
-   Basic::Color* cc = nullptr;
+   basic::Color* cc = nullptr;
    if (colorTable != nullptr) {
-      Basic::Pair* p = colorTable->getPosition(index+1);
-      if (p != nullptr) cc = static_cast<Basic::Color*>(p->object());
+      basic::Pair* p = colorTable->getPosition(index+1);
+      if (p != nullptr) cc = static_cast<basic::Color*>(p->object());
    }
    return cc;
 }
@@ -1391,21 +1391,21 @@ Basic::Color* Display::getColor(const int index)
 //-----------------------------------------------------------------------------
 // addColor() -- add a color to the color table.
 //-----------------------------------------------------------------------------
-void Display::addColor(Basic::Color* cc)
+void Display::addColor(basic::Color* cc)
 {
    if (cc != nullptr && colorTable != nullptr) {
       int i = colorTable->entries();
       char cbuf[20];
       std::sprintf(cbuf,"%i",i);
-      colorTable->put( new Basic::Pair(cbuf, cc) );
+      colorTable->put( new basic::Pair(cbuf, cc) );
    }
 }
 
-void Display::addColor(Basic::Pair* pp)
+void Display::addColor(basic::Pair* pp)
 {
    if (pp != nullptr && colorTable != nullptr) {
-      Basic::Object* obj = pp->object();
-      if (obj->isClassType(typeid(Basic::Color))) {
+      basic::Object* obj = pp->object();
+      if (obj->isClassType(typeid(basic::Color))) {
          colorTable->put( pp );
       }
    }
@@ -1414,15 +1414,15 @@ void Display::addColor(Basic::Pair* pp)
 //-----------------------------------------------------------------------------
 // defaultColors() -- loads a pre-refed() Pairstream with default colors.
 //-----------------------------------------------------------------------------
-Basic::PairStream* Display::defaultColors()
+basic::PairStream* Display::defaultColors()
 {
    // allocate our new colortable
-   Basic::PairStream* defColorTable = new Basic::PairStream();
+   basic::PairStream* defColorTable = new basic::PairStream();
 
    // black
    {
-      Basic::Rgba* color = new Basic::Rgba(0.0f, 0.0f, 0.0f, 1.0f);
-      Basic::Pair* pair = new Basic::Pair("black", color);
+      basic::Rgba* color = new basic::Rgba(0.0f, 0.0f, 0.0f, 1.0f);
+      basic::Pair* pair = new basic::Pair("black", color);
       defColorTable->put(pair);
       // now unref our local variables, because our pair ref()'d the Rgba object, and
       // PairStream ref()'d the pair.
@@ -1431,56 +1431,56 @@ Basic::PairStream* Display::defaultColors()
    }
    // red
    {
-      Basic::Rgba* color = new Basic::Rgba(1.0f, 0.0f, 0.0f, 1.0f);
-      Basic::Pair* pair = new Basic::Pair("red", color);
+      basic::Rgba* color = new basic::Rgba(1.0f, 0.0f, 0.0f, 1.0f);
+      basic::Pair* pair = new basic::Pair("red", color);
       defColorTable->put(pair);
       color->unref();
       pair->unref();
    }
    // green
    {
-      Basic::Rgba* color = new Basic::Rgba(0.0f, 1.0f, 0.0f, 1.0f);
-      Basic::Pair* pair = new Basic::Pair("green", color);
+      basic::Rgba* color = new basic::Rgba(0.0f, 1.0f, 0.0f, 1.0f);
+      basic::Pair* pair = new basic::Pair("green", color);
       defColorTable->put(pair);
       color->unref();
       pair->unref();
    }
    // yellow
    {
-      Basic::Rgba* color = new Basic::Rgba(1.0f, 1.0f, 0.0f, 1.0f);
-      Basic::Pair* pair = new Basic::Pair("yellow", color);
+      basic::Rgba* color = new basic::Rgba(1.0f, 1.0f, 0.0f, 1.0f);
+      basic::Pair* pair = new basic::Pair("yellow", color);
       defColorTable->put(pair);
       color->unref();
       pair->unref();
    }
    // blue
    {
-      Basic::Rgba* color = new Basic::Rgba(0.0f, 0.0f, 1.0f, 1.0f);
-      Basic::Pair* pair = new Basic::Pair("blue", color);
+      basic::Rgba* color = new basic::Rgba(0.0f, 0.0f, 1.0f, 1.0f);
+      basic::Pair* pair = new basic::Pair("blue", color);
       defColorTable->put(pair);
       color->unref();
       pair->unref();
    }
    // magenta
    {
-      Basic::Rgba* color = new Basic::Rgba(1.0f, 0.0f, 1.0f, 1.0f);
-      Basic::Pair* pair = new Basic::Pair("magenta", color);
+      basic::Rgba* color = new basic::Rgba(1.0f, 0.0f, 1.0f, 1.0f);
+      basic::Pair* pair = new basic::Pair("magenta", color);
       defColorTable->put(pair);
       color->unref();
       pair->unref();
    }
    // cyan
    {
-      Basic::Rgba* color = new Basic::Rgba(0.0f, 1.0f, 1.0f, 1.0f);
-      Basic::Pair* pair = new Basic::Pair("cyan", color);
+      basic::Rgba* color = new basic::Rgba(0.0f, 1.0f, 1.0f, 1.0f);
+      basic::Pair* pair = new basic::Pair("cyan", color);
       defColorTable->put(pair);
       color->unref();
       pair->unref();
    }
    // white
    {
-      Basic::Rgba* color = new Basic::Rgba(1.0f, 1.0f, 1.0f, 1.0f);
-      Basic::Pair* pair = new Basic::Pair("white", color);
+      basic::Rgba* color = new basic::Rgba(1.0f, 1.0f, 1.0f, 1.0f);
+      basic::Pair* pair = new basic::Pair("white", color);
       defColorTable->put(pair);
       color->unref();
       pair->unref();
@@ -1493,7 +1493,7 @@ Basic::PairStream* Display::defaultColors()
 //------------------------------------------------------------------------------
 // setName() -- set the display name
 //------------------------------------------------------------------------------
-bool Display::setName(Basic::String* const n)
+bool Display::setName(basic::String* const n)
 {
    bool ok = false;
    if (n != nullptr) {
@@ -1508,7 +1508,7 @@ bool Display::setName(Basic::String* const n)
 //------------------------------------------------------------------------------
 // setLeftOrthoBound() -- set left orthogonal bound
 //------------------------------------------------------------------------------
-bool Display::setSlotLeftOrthoBound(const Basic::Number* const sloobj)
+bool Display::setSlotLeftOrthoBound(const basic::Number* const sloobj)
 {
    if (sloobj != nullptr) oLeft = sloobj->getDouble();
    return true;
@@ -1517,7 +1517,7 @@ bool Display::setSlotLeftOrthoBound(const Basic::Number* const sloobj)
 //------------------------------------------------------------------------------
 //  setSlotMaterials() -- set our list of materials
 //------------------------------------------------------------------------------
-bool Display::setSlotMaterials(Basic::PairStream* const msg)
+bool Display::setSlotMaterials(basic::PairStream* const msg)
 {
    if (materials != nullptr) materials->unref();
    materials = nullptr;
@@ -1537,8 +1537,8 @@ bool Display::setSlotMaterials(Material* const msg)
    if (msg != nullptr) {
       if (materials != nullptr) materials->unref();
 
-      materials = new Basic::PairStream();
-      materials->put( new Basic::Pair("1",msg) );
+      materials = new basic::PairStream();
+      materials->put( new basic::Pair("1",msg) );
       ok = processMaterials();
    }
    return ok;
@@ -1547,7 +1547,7 @@ bool Display::setSlotMaterials(Material* const msg)
 //------------------------------------------------------------------------------
 // setSlotAntialias -- turn on/off anti aliasing
 //------------------------------------------------------------------------------
-bool Display::setSlotAntialias(const Basic::Number* const x)
+bool Display::setSlotAntialias(const basic::Number* const x)
 {
    bool ok = false;
    if (x != nullptr) ok = setAntialiasing(x->getBoolean());
@@ -1557,7 +1557,7 @@ bool Display::setSlotAntialias(const Basic::Number* const x)
 //------------------------------------------------------------------------------
 // setRightOrthoBound() -- set right orthogonal bound
 //------------------------------------------------------------------------------
-bool Display::setSlotRightOrthoBound(const Basic::Number* const sroobj)
+bool Display::setSlotRightOrthoBound(const basic::Number* const sroobj)
 {
    if (sroobj != nullptr) oRight = sroobj->getDouble();
    return true;
@@ -1566,7 +1566,7 @@ bool Display::setSlotRightOrthoBound(const Basic::Number* const sroobj)
 //------------------------------------------------------------------------------
 // setBottomOrthoBound() -- set bottom orthogonal bound
 //------------------------------------------------------------------------------
-bool Display::setSlotBottomOrthoBound(const Basic::Number* const sbobobj)
+bool Display::setSlotBottomOrthoBound(const basic::Number* const sbobobj)
 {
    if (sbobobj != nullptr) oBottom = sbobobj->getDouble();  // set bottom ortho bound
    return true;
@@ -1575,7 +1575,7 @@ bool Display::setSlotBottomOrthoBound(const Basic::Number* const sbobobj)
 //------------------------------------------------------------------------------
 // setTopOrthoBound() --  set top orthogonal bound
 //------------------------------------------------------------------------------
-bool Display::setSlotTopOrthoBound(const Basic::Number* const stobobj)
+bool Display::setSlotTopOrthoBound(const basic::Number* const stobobj)
 {
    if (stobobj != nullptr) oTop = stobobj->getDouble();  // set top ortho bound
    return true;
@@ -1584,7 +1584,7 @@ bool Display::setSlotTopOrthoBound(const Basic::Number* const stobobj)
 //------------------------------------------------------------------------------
 // setNearOrthoBound() -- set near orthogonal bound
 //------------------------------------------------------------------------------
-bool Display::setSlotNearOrthoBound(const Basic::Number* const snobobj)
+bool Display::setSlotNearOrthoBound(const basic::Number* const snobobj)
 {
    if (snobobj != nullptr) oNear = snobobj->getDouble();
    return true;
@@ -1594,7 +1594,7 @@ bool Display::setSlotNearOrthoBound(const Basic::Number* const snobobj)
 //------------------------------------------------------------------------------
 // setFarOrthoBound() -- set far orthogonal bound
 //------------------------------------------------------------------------------
-bool Display::setSlotFarOrthoBound(const Basic::Number* const sfobobj)
+bool Display::setSlotFarOrthoBound(const basic::Number* const sfobobj)
 {
    if (sfobobj != nullptr) oFar = sfobobj->getDouble();
    return true;
@@ -1603,7 +1603,7 @@ bool Display::setSlotFarOrthoBound(const Basic::Number* const sfobobj)
 //------------------------------------------------------------------------------
 // setViewportXOrigin() -- set viewport x origin
 //------------------------------------------------------------------------------
-bool Display::setSlotViewportXOrigin(const Basic::Number* const svxoobj)
+bool Display::setSlotViewportXOrigin(const basic::Number* const svxoobj)
 {
    if (svxoobj != nullptr) vpX = svxoobj->getInt();
    return true;
@@ -1612,7 +1612,7 @@ bool Display::setSlotViewportXOrigin(const Basic::Number* const svxoobj)
 //------------------------------------------------------------------------------
 // setViewportYOrigin() -- set viewport y origin
 //------------------------------------------------------------------------------
-bool Display::setSlotViewportYOrigin(const Basic::Number* const svyoobj)
+bool Display::setSlotViewportYOrigin(const basic::Number* const svyoobj)
 {
    if (svyoobj) vpY = svyoobj->getInt();
    return true;
@@ -1621,7 +1621,7 @@ bool Display::setSlotViewportYOrigin(const Basic::Number* const svyoobj)
 //------------------------------------------------------------------------------
 // setViewportWidth() -- set viewport width
 //------------------------------------------------------------------------------
-bool Display::setSlotViewportWidth(const Basic::Number* const svwobj)
+bool Display::setSlotViewportWidth(const basic::Number* const svwobj)
 {
    if (svwobj != nullptr) vpWidth = svwobj->getInt();
    return true;
@@ -1630,7 +1630,7 @@ bool Display::setSlotViewportWidth(const Basic::Number* const svwobj)
 //------------------------------------------------------------------------------
 // setViewportHeight() -- set viewport height
 //------------------------------------------------------------------------------
-bool Display::setSlotViewportHeight(const Basic::Number* const svhobj)
+bool Display::setSlotViewportHeight(const basic::Number* const svhobj)
 {
    if (svhobj != nullptr) vpHeight = svhobj->getInt();
    return true;
@@ -1639,7 +1639,7 @@ bool Display::setSlotViewportHeight(const Basic::Number* const svhobj)
 //------------------------------------------------------------------------------
 //  setSlotSubdisplayStream() -- it takes a pair stream
 //------------------------------------------------------------------------------
-bool Display::setSlotSubdisplayStream (Basic::PairStream* const dsobj)
+bool Display::setSlotSubdisplayStream (basic::PairStream* const dsobj)
 {
    bool ok = false;
    if (dsobj != nullptr) {
@@ -1662,8 +1662,8 @@ bool Display::setSlotSubdisplaySingle(Display* const dobj)
    if (dobj != nullptr) {
       if (subdisplays != nullptr) subdisplays->unref();
 
-      subdisplays = new Basic::PairStream();
-      subdisplays->put( new Basic::Pair("1",dobj) );
+      subdisplays = new basic::PairStream();
+      subdisplays->put( new basic::Pair("1",dobj) );
       ok = processSubdisplays();
    }
    return ok;
@@ -1672,7 +1672,7 @@ bool Display::setSlotSubdisplaySingle(Display* const dobj)
 //------------------------------------------------------------------------------
 //  setSlotTexturesStream() -- it takes a pair stream
 //------------------------------------------------------------------------------
-bool Display::setSlotTexturesStream (Basic::PairStream* const obj)
+bool Display::setSlotTexturesStream (basic::PairStream* const obj)
 {
    bool ok = false;
    if (obj != nullptr) {
@@ -1695,8 +1695,8 @@ bool Display::setSlotTexturesSingle(Texture* const obj)
    if (obj != nullptr) {
       if (textures != nullptr) textures->unref();
 
-      textures = new Basic::PairStream();
-      textures->put( new Basic::Pair("1",obj) );
+      textures = new basic::PairStream();
+      textures->put( new basic::Pair("1",obj) );
       ok = processTextures();
    }
    return ok;
@@ -1705,7 +1705,7 @@ bool Display::setSlotTexturesSingle(Texture* const obj)
 //------------------------------------------------------------------------------
 //  setSlotStdLineWidth() -- sets the standard line width for the display
 //------------------------------------------------------------------------------
-bool Display::setSlotStdLineWidth(const Basic::Number* const obj)
+bool Display::setSlotStdLineWidth(const basic::Number* const obj)
 {
    if (obj != nullptr) setStdLineWidth( obj->getFloat() );
    return true;
@@ -1714,7 +1714,7 @@ bool Display::setSlotStdLineWidth(const Basic::Number* const obj)
 //------------------------------------------------------------------------------
 // setSlotClearColor() -- sets the clear color slot
 //------------------------------------------------------------------------------
-bool Display::setSlotClearColor(const Basic::Color* const msg)
+bool Display::setSlotClearColor(const basic::Color* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1727,7 +1727,7 @@ bool Display::setSlotClearColor(const Basic::Color* const msg)
 //------------------------------------------------------------------------------
 // setSlotLeftBracketCharacter() -- sets the left bracket character
 //------------------------------------------------------------------------------
-bool Display::setSlotLeftBracketCharacter(const Basic::Number* const msg)
+bool Display::setSlotLeftBracketCharacter(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1740,7 +1740,7 @@ bool Display::setSlotLeftBracketCharacter(const Basic::Number* const msg)
    return ok;
 }
 
-bool Display::setSlotLeftBracketCharacter(const Basic::String* const msg)
+bool Display::setSlotLeftBracketCharacter(const basic::String* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1756,7 +1756,7 @@ bool Display::setSlotLeftBracketCharacter(const Basic::String* const msg)
 //------------------------------------------------------------------------------
 // setSlotRightBracketCharacter() -- sets the right bracket character
 //------------------------------------------------------------------------------
-bool Display::setSlotRightBracketCharacter(const Basic::Number* const msg)
+bool Display::setSlotRightBracketCharacter(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1769,7 +1769,7 @@ bool Display::setSlotRightBracketCharacter(const Basic::Number* const msg)
    return ok;
 }
 
-bool Display::setSlotRightBracketCharacter(const Basic::String* const msg)
+bool Display::setSlotRightBracketCharacter(const basic::String* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1785,7 +1785,7 @@ bool Display::setSlotRightBracketCharacter(const Basic::String* const msg)
 //------------------------------------------------------------------------------
 // setSlotReverseVideoBrackets() -- set reverse video brackets flag
 //------------------------------------------------------------------------------
-bool Display::setSlotReverseVideoBrackets(const Basic::Number* const msg)
+bool Display::setSlotReverseVideoBrackets(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1797,7 +1797,7 @@ bool Display::setSlotReverseVideoBrackets(const Basic::Number* const msg)
 //------------------------------------------------------------------------------
 // setSlotClearDepth() -- sets the clear depth buffer slot
 //------------------------------------------------------------------------------
-bool Display::setSlotClearDepth(const Basic::Number* const msg)
+bool Display::setSlotClearDepth(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1811,7 +1811,7 @@ bool Display::setSlotClearDepth(const Basic::Number* const msg)
 // setSlotDisplayOrientation() -- sets display orientation slot
 //                                 ( normal, cw90, ccw90, inverted }
 //------------------------------------------------------------------------------
-bool Display::setSlotDisplayOrientation(const Basic::String* const msg)
+bool Display::setSlotDisplayOrientation(const basic::String* const msg)
 {
    bool ok = false;
    if (*msg == "normal")        { setDisplayOrientation(NORMAL);   ok = true; }
@@ -1830,9 +1830,9 @@ bool Display::processSubdisplays()
 {
    bool ok = true;
    if (subdisplays != nullptr) {
-      const Basic::List::Item* item = subdisplays->getFirstItem();
+      const basic::List::Item* item = subdisplays->getFirstItem();
       while (ok && item != nullptr) {
-         Basic::Pair* p = const_cast<Basic::Pair*>(static_cast<const Basic::Pair*>(item->getValue()));
+         basic::Pair* p = const_cast<basic::Pair*>(static_cast<const basic::Pair*>(item->getValue()));
          item = item->getNext();
          Display* g = dynamic_cast<Display*>(p->object());
          if (g != nullptr) {
@@ -1858,9 +1858,9 @@ bool Display::processTextures()
 {
    bool ok = true;
    if (textures != nullptr) {
-      const Basic::List::Item* item = textures->getFirstItem();
+      const basic::List::Item* item = textures->getFirstItem();
       while (ok && item != nullptr) {
-         Basic::Pair* p = const_cast<Basic::Pair*>(static_cast<const Basic::Pair*>(item->getValue()));
+         basic::Pair* p = const_cast<basic::Pair*>(static_cast<const basic::Pair*>(item->getValue()));
          item = item->getNext();
          Texture* g = dynamic_cast<Texture*>(p->object());
          if (g == nullptr) {
@@ -1883,9 +1883,9 @@ bool Display::processMaterials()
 {
    bool ok = true;
    if (materials != nullptr) {
-      const Basic::List::Item* item = materials->getFirstItem();
+      const basic::List::Item* item = materials->getFirstItem();
       while (ok && item != nullptr) {
-         Basic::Pair* p = const_cast<Basic::Pair*>(static_cast<const Basic::Pair*>(item->getValue()));
+         basic::Pair* p = const_cast<basic::Pair*>(static_cast<const basic::Pair*>(item->getValue()));
          item = item->getNext();
          Material* g = dynamic_cast<Material*>(p->object());
          if (g == nullptr) {
@@ -1968,9 +1968,9 @@ void Display::configure()
 void Display::loadTextures()
 {
    if (textures != nullptr) {
-      const Basic::List::Item* item = textures->getFirstItem();
+      const basic::List::Item* item = textures->getFirstItem();
       while (item != nullptr) {
-         Basic::Pair* p = const_cast<Basic::Pair*>(static_cast<const Basic::Pair*>(item->getValue()));
+         basic::Pair* p = const_cast<basic::Pair*>(static_cast<const basic::Pair*>(item->getValue()));
          item = item->getNext();
          Texture* g = static_cast<Texture*>(p->object());
          g->loadTexture();
@@ -2028,7 +2028,7 @@ Image* Display::readFrameBuffer(const unsigned int x, const unsigned int y, cons
 //------------------------------------------------------------------------------
 // getSlotByIndex() for Page
 //------------------------------------------------------------------------------
-Basic::Object* Display::getSlotByIndex(const int si)
+basic::Object* Display::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }

@@ -2,8 +2,8 @@
 // Class: Rng
 // inline functions
 //------------------------------------------------------------------------------
-#ifndef __oe_Basic_Rng_Inline__
-#define __oe_Basic_Rng_Inline__
+#ifndef __oe_basic_Rng_Inline__
+#define __oe_basic_Rng_Inline__
 
 //-----------------------------------------------------------------
 // drawClosed() -- generates double floating point numbers in the 
@@ -94,7 +94,7 @@ inline unsigned int Rng::drawGeometric(const double p)
 //-----------------------------------------------------------------
 inline double Rng::drawUniformCont(const double a, const double b)
 {
-   //Basic::Rng* pU = new Basic::Rng;
+   //basic::Rng* pU = new basic::Rng;
    double u = 0.0;
    if (a <= b) {
       u = a + (b - a)*drawClosed();

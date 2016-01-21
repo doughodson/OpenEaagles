@@ -8,7 +8,7 @@
 
 namespace oe {
 
-namespace Basic { class Object; }
+namespace basic { class Object; }
 
 namespace Network {
 namespace Dis {
@@ -16,7 +16,7 @@ namespace Dis {
 class Factory
 {
 public:
-   static Basic::Object* createObj(const char* name);
+   static basic::Object* createObj(const char* name);
 
 protected:
    Factory();   // prevent object creation

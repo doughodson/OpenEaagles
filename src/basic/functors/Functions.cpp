@@ -12,7 +12,7 @@
 #include "openeaagles/basic/functors/Tables.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 //==============================================================================
 // Class: Func1
@@ -379,5 +379,5 @@ std::ostream& Polynomial::serialize(std::ostream& sout, const int i, const bool 
 }
 
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace

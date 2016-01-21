@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: IoHandler
 //------------------------------------------------------------------------------
-#ifndef __oe_Basic_IoHandler_H__
-#define __oe_Basic_IoHandler_H__
+#ifndef __oe_basic_IoHandler_H__
+#define __oe_basic_IoHandler_H__
 
 #include "openeaagles/basic/Component.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
    class Frequency;
    class IoData;
    class Number;
@@ -119,10 +119,10 @@ private:
 
    LCreal rate;               // Thread Rate (hz)
    LCreal pri;                // Priority of the thread (0->lowest, 1->highest)
-   safe_ptr<Basic::Thread> thread; // The thread
+   safe_ptr<basic::Thread> thread; // The thread
 };
 
-} // end Basic
+} // end basic
 } // end oe namespace
 
 #endif

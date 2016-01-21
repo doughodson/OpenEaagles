@@ -7,7 +7,7 @@
 #include "../DataFile.h"
 
 namespace oe {
-   namespace Basic { class Number; }
+   namespace basic { class Number; }
 namespace Terrain {
 
 //------------------------------------------------------------------------------
@@ -28,7 +28,7 @@ public:
 
 protected:
    bool isVerifyChecksum() const { return verifyChecksum; }
-   virtual bool setSlotVerifyChecksum(const Basic::Number* const msg);
+   virtual bool setSlotVerifyChecksum(const basic::Number* const msg);
 
 private:
     // Interpret signed-magnitude values from DTED file

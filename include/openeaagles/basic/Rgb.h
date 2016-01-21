@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class:  Rgb
 //------------------------------------------------------------------------------
-#ifndef __oe_Basic_Rgb_H__
-#define __oe_Basic_Rgb_H__
+#ifndef __oe_basic_Rgb_H__
+#define __oe_basic_Rgb_H__
 
 #include "openeaagles/basic/Color.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 //------------------------------------------------------------------------------
 // Class:  Rgb
@@ -44,7 +44,7 @@ public:
     virtual bool setSlotAlpha(Number* const msg);
 };
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace
 
 #endif

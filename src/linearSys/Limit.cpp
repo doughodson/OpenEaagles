@@ -20,8 +20,8 @@ END_SLOTTABLE(Limit)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(Limit)
-   ON_SLOT( 1, setSlotLowerLimit, Basic::Number)
-   ON_SLOT( 2, setSlotUpperLimit, Basic::Number)
+   ON_SLOT( 1, setSlotLowerLimit, basic::Number)
+   ON_SLOT( 2, setSlotUpperLimit, basic::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -44,7 +44,7 @@ EMPTY_DELETEDATA(Limit)
 // Set slot functions
 //------------------------------------------------------------------------------
 
-bool Limit::setSlotLowerLimit(const Basic::Number* const msg)
+bool Limit::setSlotLowerLimit(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -54,7 +54,7 @@ bool Limit::setSlotLowerLimit(const Basic::Number* const msg)
    return ok;
 }
 
-bool Limit::setSlotUpperLimit(const Basic::Number* const msg)
+bool Limit::setSlotUpperLimit(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -68,7 +68,7 @@ bool Limit::setSlotUpperLimit(const Basic::Number* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for Limit
 //------------------------------------------------------------------------------
-Basic::Object* Limit::getSlotByIndex(const int si)
+basic::Object* Limit::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

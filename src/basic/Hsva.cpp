@@ -6,7 +6,7 @@
 #include "openeaagles/basic/units/Angles.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 IMPLEMENT_SUBCLASS(Hsva,"hsva")
 
@@ -60,11 +60,11 @@ bool Hsva::colorInterpolate(
 {
    LCreal p = (value - minValue) / (maxValue - minValue );
    osg::Vec4 deltaColor = maxColor.hsv - minColor.hsv;
-   deltaColor[Basic::Hsv::HUE] = lcAepcDeg(deltaColor[Basic::Hsv::HUE]);
+   deltaColor[basic::Hsv::HUE] = lcAepcDeg(deltaColor[basic::Hsv::HUE]);
    osg::Vec4 newColor = minColor.hsv + deltaColor * p;
-   newColor[Basic::Hsv::HUE] = lcAepcDeg(newColor[Basic::Hsv::HUE]);
-   if (newColor[Basic::Hsv::HUE] < 0) {
-      newColor[Basic::Hsv::HUE] += 360.0f;
+   newColor[basic::Hsv::HUE] = lcAepcDeg(newColor[basic::Hsv::HUE]);
+   if (newColor[basic::Hsv::HUE] < 0) {
+      newColor[basic::Hsv::HUE] += 360.0f;
    }
    setHSVA(newColor);
    return true;
@@ -103,5 +103,5 @@ std::ostream& Hsva::serialize(std::ostream& sout, const int i, const bool slotsO
     return sout;
 }
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace

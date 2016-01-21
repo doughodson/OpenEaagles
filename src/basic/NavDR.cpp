@@ -3,7 +3,7 @@
 #include "openeaagles/basic/Nav.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 //==============================================================================
 // Dead Reckoning Function
@@ -171,5 +171,5 @@ bool NavDR::deadReckoning(
    return true;
 }
 
-}  // end namespace Basic
+}  // end namespace basic
 }  // end namespace oe

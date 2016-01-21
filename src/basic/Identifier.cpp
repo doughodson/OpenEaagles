@@ -3,7 +3,7 @@
 #include <cstring>
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 IMPLEMENT_SUBCLASS(Identifier,"Identifier")
 EMPTY_SLOTTABLE(Identifier)
@@ -98,5 +98,5 @@ std::ostream& Identifier::serialize(std::ostream& sout, const int, const bool) c
     return sout;
 }
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace

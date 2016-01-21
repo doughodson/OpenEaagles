@@ -7,7 +7,7 @@
 #include "openeaagles/simulation/Radar.h"
 
 namespace oe {
-   namespace Basic {
+   namespace basic {
       class Pair;
       class PairStream;
    }
@@ -17,12 +17,12 @@ class Image;
 
 //------------------------------------------------------------------------------
 // Class: Sar
-// Base class: Basic::Object -> ... -> RfSensor -> Radar -> Sar
+// Base class: basic::Object -> ... -> RfSensor -> Radar -> Sar
 //
 // Description: Generic SAR
 // Factory name: Sar
 // Slots:
-//    chipSize      <Basic::Number>      ! Chip size (pixels) (default: 0)
+//    chipSize      <basic::Number>      ! Chip size (pixels) (default: 0)
 //
 //------------------------------------------------------------------------------
 class Sar : public Radar
@@ -36,7 +36,7 @@ public:
    virtual bool isSystemReady() const;
 
    // Returns a list of all images (prereferenced)
-   virtual Basic::PairStream* getImages();
+   virtual basic::PairStream* getImages();
 
    // Returns the most recent image (prereferenced)
    virtual const Image* getImage() const;
@@ -65,7 +65,7 @@ public:
    virtual bool setChipSize(const unsigned int pixels);
 
    // Slot functions
-   virtual bool setSlotChipSize(const Basic::Number* const msg);
+   virtual bool setSlotChipSize(const basic::Number* const msg);
 
    // Request a new image
    virtual bool  requestImage(
@@ -74,7 +74,7 @@ public:
          const LCreal resolution         // Image Resolution (meters/pixel)
       );
 
-    bool addImage(Basic::Pair* const newImage);
+    bool addImage(basic::Pair* const newImage);
     int getNextId();
 
    // Cancel the current SAR imaging
@@ -91,7 +91,7 @@ protected:
     LCreal timer;                   // SAR timer
 
 private:
-    Basic::PairStream*   imgList; // List of SAR images
+    basic::PairStream*   imgList; // List of SAR images
 
     int             nextId;         // Next image ID
     double          stareLatitude;  // Degrees

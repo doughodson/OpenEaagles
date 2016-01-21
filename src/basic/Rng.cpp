@@ -3,7 +3,7 @@
 #include "openeaagles/basic/Number.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 IMPLEMENT_SUBCLASS(Rng,"Rng")
 EMPTY_SERIALIZER(Rng)

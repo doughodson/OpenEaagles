@@ -36,9 +36,9 @@ namespace Simulation {
 // Factory name: Nib
 //
 //------------------------------------------------------------------------------
-class Nib : public Basic::Component
+class Nib : public basic::Component
 {
-   DECLARE_SUBCLASS(Nib,Basic::Component)
+   DECLARE_SUBCLASS(Nib,basic::Component)
 
 public:
    // Standard (mil-std-1278.1) Dead_Reckoning Model codes [ 0 .. 9 ]
@@ -73,8 +73,8 @@ public:
    virtual void setPlayerID(const unsigned short v);
    virtual void setPlayerName(const char* s);
 
-   virtual const Basic::String* getFederateName() const;           // Federate name as String
-   virtual bool setFederateName(const Basic::String* const msg);   // Sets our federate name
+   virtual const basic::String* getFederateName() const;           // Federate name as String
+   virtual bool setFederateName(const basic::String* const msg);   // Sets our federate name
 
    // Mode
    bool isMode(const Player::Mode m) const            { return mode == m; }
@@ -275,14 +275,14 @@ private:
 
    NetIO::IoType ioType;               // Input/Output direction of this NIB
 
-   Basic::safe_ptr<const Basic::String> federateName; // Federate name
-   Basic::safe_ptr<Player> pPlayer;                   // Our player
-   Basic::safe_ptr<NetIO> pNetIO;                     // Our Network
+   basic::safe_ptr<const basic::String> federateName; // Federate name
+   basic::safe_ptr<Player> pPlayer;                   // Our player
+   basic::safe_ptr<NetIO> pNetIO;                     // Our Network
    bool checked;                       // NIB was checked
    unsigned short  playerID;           // Player ID
 
    // Type mapper and type checked flags
-   Basic::safe_ptr<const Ntm> ntm;     // Type mapper
+   basic::safe_ptr<const Ntm> ntm;     // Type mapper
    bool entityTypeChecked;             // Entity type has been checked
 
    // Player data

@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: Cmy
 //------------------------------------------------------------------------------
-#ifndef __oe_Basic_Cmy_H__
-#define __oe_Basic_Cmy_H__
+#ifndef __oe_basic_Cmy_H__
+#define __oe_basic_Cmy_H__
 
 #include "openeaagles/basic/Color.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 //------------------------------------------------------------------------------
 // Class:  Cmy
@@ -77,7 +77,7 @@ protected:
 };
 
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace
 
 #endif

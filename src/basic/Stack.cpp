@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Stack,"Stack")
 
@@ -22,5 +22,5 @@ std::ostream& Stack::serialize(std::ostream& sout, const int, const bool) const
     return sout;
 }
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace

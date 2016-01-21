@@ -9,7 +9,7 @@
 
 namespace oe {
 
-   namespace Basic {
+   namespace basic {
       class Number;
       class List;
       class String;
@@ -135,8 +135,8 @@ namespace BasicGL {
 //
 //Comment section last updated: 2004.10.13 by MJK
 //------------------------------------------------------------------------------
-class Font : public Basic::Object {
-    DECLARE_SUBCLASS(Font,Basic::Object)
+class Font : public basic::Object {
+    DECLARE_SUBCLASS(Font,basic::Object)
 
 public:
     static const size_t MAX_MESSAGE_LENGTH = 256; // Max length of character buffers
@@ -185,7 +185,7 @@ public:
 
 public:
     // Exceptions
-    class ExpInvalidFont : public Basic::Object::Exception {
+    class ExpInvalidFont : public basic::Object::Exception {
         public:
             ExpInvalidFont() : Exception() {}
             const char* getDescription() const override     { return "font is invalid"; }
@@ -193,16 +193,16 @@ public:
 
 protected:
     // Slot functions
-    bool setSlotFontWidth(const Basic::Number* const sfwobj);
-    bool setSlotFontHeight (const Basic::Number* const sfhobj);
-    bool setSlotFontPosition (const Basic::List* const sfpobj);
-    bool setSlotBitmapWidth(const Basic::Number* const sbwobj);
-    bool setSlotBitmapHeight(const Basic::Number* const sbhobj);
-    bool setSlotFontPath(const Basic::String* const sfpobj);
-    bool setSlotFTGLFontFileName(const Basic::String* const sgffnobj);
-    bool setSlotLookupTable(const Basic::List* const sltobj);
-    bool setSlotCharacterSpacing(const Basic::Number* const newCharSpacing);
-    bool setSlotLineSpacing(const Basic::Number* const newLineSpacing);
+    bool setSlotFontWidth(const basic::Number* const sfwobj);
+    bool setSlotFontHeight (const basic::Number* const sfhobj);
+    bool setSlotFontPosition (const basic::List* const sfpobj);
+    bool setSlotBitmapWidth(const basic::Number* const sbwobj);
+    bool setSlotBitmapHeight(const basic::Number* const sbhobj);
+    bool setSlotFontPath(const basic::String* const sfpobj);
+    bool setSlotFTGLFontFileName(const basic::String* const sgffnobj);
+    bool setSlotLookupTable(const basic::List* const sltobj);
+    bool setSlotCharacterSpacing(const basic::Number* const newCharSpacing);
+    bool setSlotLineSpacing(const basic::Number* const newLineSpacing);
 
 
     static const size_t MSG_BUF_LEN = (MAX_MESSAGE_LENGTH+1); // Max length of character buffers

@@ -37,10 +37,10 @@
 //       int CadrgMap::getNumberOfCadrgFiles()
 //
 // setSlotPathnames() - Pathnames to the CADRG A.toc files.
-//       bool CadrgMap::setSlotPathnames(const Basic::PairStream* const x)
+//       bool CadrgMap::setSlotPathnames(const basic::PairStream* const x)
 //
 // setSlotMaxTableSize() - Sets our max table size and array up
-//       bool CadrgMap::setSlotMaxTableSize(const Basic::Number* const x)
+//       bool CadrgMap::setSlotMaxTableSize(const basic::Number* const x)
 //
 // setPathName() - Set our path name, which will also initialize our cadrg file
 //       bool CadrgMap::setPathName(const char* aGenPathName)
@@ -62,7 +62,7 @@
 //       bool CadrgMap::zoomOutMapLevel()
 //
 // setSlotMapLevel() - Initially sets our map resolution level
-//       bool CadrgMap::setSlotMapLevel(Basic::String* x)
+//       bool CadrgMap::setSlotMapLevel(basic::String* x)
 //
 // setMapLevel() - See if the given resolution level exists in our files, and if it does,
 // set it as the current cadrg file.
@@ -109,7 +109,7 @@
 //      void CadrgMap::updateData(LCreal dt)
 //
 // getSlotByIndex() - Get the slot data.
-//      Basic::Object* CadrgMap::getSlotByIndex(const int si)
+//      basic::Object* CadrgMap::getSlotByIndex(const int si)
 //
 // ---------------------------------------------------------------------------------
 #ifndef __oe_Maps_Rpf_CadrgMap_H__
@@ -118,7 +118,7 @@
 #include "openeaagles/basicGL/MapPage.h"
 
 namespace oe {
-namespace Basic { class List; }
+namespace basic { class List; }
 namespace BasicGL { class Texture; }
 namespace Maps {
 namespace Rpf {
@@ -187,9 +187,9 @@ public:
 
 protected:
     // Slot functions
-    bool setSlotPathnames(const Basic::PairStream* const x);
-    bool setSlotMaxTableSize(const Basic::Number* const x);
-    bool setSlotMapLevel(Basic::String* x);
+    bool setSlotPathnames(const basic::PairStream* const x);
+    bool setSlotMaxTableSize(const basic::Number* const x);
+    bool setSlotMapLevel(basic::String* x);
 
 private:
     static const int MAX_FILES = 10;            // Holds the maximum number of cadrg files we can hold
@@ -197,11 +197,11 @@ private:
     CadrgFile* mergedCadrgFiles[MAX_FILES];     // Merged list of cadrg files from all paths
     int numFiles;                               // Number of CADRG files we are holding
     CadrgFile* curCadrgFile;                    // The current CADRG file we are using
-    Basic::PairStream* pathNames;               // Holds our path names for the directories of our files
+    basic::PairStream* pathNames;               // Holds our path names for the directories of our files
     int maxTableSize;                           // Our max table size
-    Basic::List* stack;                         // Stack of unused frames
+    basic::List* stack;                         // Stack of unused frames
     ColorArray outTile;                         // Holds the tile color information
-    Basic::String* mapLevel;                    // Our map "level" we are ("1:500K", etc..)
+    basic::String* mapLevel;                    // Our map "level" we are ("1:500K", etc..)
     bool initLevelLoaded;                       // Has our initial map level been loaded?
 };
 

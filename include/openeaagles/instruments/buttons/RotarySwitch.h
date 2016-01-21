@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 // Class:       RotarySwitch
-// Base class:  Basic::Object -> Basic::Component -> BasicGL::Graphic -> Button -> RotarySwitch
+// Base class:  basic::Object -> basic::Component -> BasicGL::Graphic -> Button -> RotarySwitch
 // Description: Generic multi-position selector switch that knows when it is left or right
 //                mouse clicked and moves to next or previous switch position.
 //------------------------------------------------------------------------------
@@ -27,8 +27,8 @@ public:
    void updateData(const LCreal dt = 0.0) override;
 
 protected:
-    bool setSlotAngles(const Basic::PairStream* const stream);
-    bool setSlotStartPosition(const Basic::Number* const x);
+    bool setSlotAngles(const basic::PairStream* const stream);
+    bool setSlotStartPosition(const basic::Number* const x);
 
 private:
     static const int MAX_ANGLES = 500;

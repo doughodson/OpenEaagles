@@ -81,9 +81,9 @@ namespace Simulation {
 Factory::Factory()
 {}
 
-Basic::Object* Factory::createObj(const char* name)
+basic::Object* Factory::createObj(const char* name)
 {
-    Basic::Object* obj = nullptr;
+    basic::Object* obj = nullptr;
 
     // Basic Simulations
     if ( std::strcmp(name, Simulation::getFactoryName()) == 0 ) {

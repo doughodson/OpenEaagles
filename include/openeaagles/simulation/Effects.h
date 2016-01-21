@@ -41,7 +41,7 @@ public:
     bool crashNotification() override;
 
 protected:
-   bool setSlotDragIndex(Basic::Number* const p);
+   bool setSlotDragIndex(basic::Number* const p);
 
    void weaponDynamics(const LCreal dt) override;
    void updateTOF(const LCreal dt) override;

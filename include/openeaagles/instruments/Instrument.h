@@ -18,7 +18,7 @@
 #include "openeaagles/basicGL/Graphic.h"
 
 namespace oe {
-   namespace Basic { class Table1; }
+   namespace basic { class Table1; }
 
 namespace Instruments {
 
@@ -29,7 +29,7 @@ public:
     Instrument();
 
     // get functions
-    const Basic::Table1* getScalingTable() const    { return myTable; }
+    const basic::Table1* getScalingTable() const    { return myTable; }
     LCreal  getInstValue() const                    { return instVal; }
     LCreal  getPreScaleInstValue() const            { return preScaleInstVal; }
     bool isPassingAllowed() const                   { return allowPassing; }
@@ -38,21 +38,21 @@ public:
     virtual bool setAllowValPass(const bool newVP);
     virtual bool setInstVal(const LCreal newPos);
 
-    bool event(const int event, Basic::Object* const obj = nullptr) override;
+    bool event(const int event, basic::Object* const obj = nullptr) override;
     void updateData(const LCreal dt = 0.0) override;
 
 protected:
     // slot functions
-    bool setSlotScalingTable(const Basic::Table1* const newTable);
-    bool setSlotInstVal(const Basic::Number* const newVal);
-    bool setSlotAllowValPass(const Basic::Number* const newAVP);
+    bool setSlotScalingTable(const basic::Table1* const newTable);
+    bool setSlotInstVal(const basic::Number* const newVal);
+    bool setSlotAllowValPass(const basic::Number* const newAVP);
 
     // event functions
-    bool onUpdateInstVal(const Basic::Number* const newPos);
+    bool onUpdateInstVal(const basic::Number* const newPos);
 
 private:
     // member variables
-    const Basic::Table1* myTable; // holds our scaling data
+    const basic::Table1* myTable; // holds our scaling data
     LCreal instVal;                 // our instrument value
     LCreal preScaleInstVal;         // our pre-scaled instrument value (before linear interpolation)
     bool allowPassing;              // do we pass our instrument value down to our components?

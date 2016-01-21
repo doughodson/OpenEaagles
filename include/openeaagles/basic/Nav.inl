@@ -2,8 +2,8 @@
 // Class: Nav
 // Description: inline functions
 //------------------------------------------------------------------------------
-#ifndef __oe_Basic_Nav_Inline__
-#define __oe_Basic_Nav_Inline__
+#ifndef __oe_basic_Nav_Inline__
+#define __oe_basic_Nav_Inline__
 
 //------------------------------------------------------------------------------
 // Flat-Earth: Computes the destination (target) lat/lon from starting (ref)
@@ -461,9 +461,9 @@ inline bool Nav::computeEulerAnglesDeg(
    bool ok = computeEulerAngles(rm, &angles, scPhi, scTht, scPsi);
    if (ok && anglesD != nullptr) {
       anglesD->set(
-         angles[0] * Basic::Angle::R2DCC,
-         angles[1] * Basic::Angle::R2DCC,
-         angles[2] * Basic::Angle::R2DCC
+         angles[0] * basic::Angle::R2DCC,
+         angles[1] * basic::Angle::R2DCC,
+         angles[2] * basic::Angle::R2DCC
          );
    }
    return ok;

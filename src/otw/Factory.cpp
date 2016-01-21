@@ -16,9 +16,9 @@ namespace Otw {
 Factory::Factory()
 {}
 
-Basic::Object* Factory::createObj(const char* name)
+basic::Object* Factory::createObj(const char* name)
 {
-    Basic::Object* obj = nullptr;
+    basic::Object* obj = nullptr;
 
     // Common Image Generation Interface (CIGI)
     if ( std::strcmp(name, OtwCigiCl::getFactoryName()) == 0 ) {

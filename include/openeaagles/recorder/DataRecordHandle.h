@@ -26,9 +26,9 @@ namespace Recorder {
 //       of handle2's DataRecord will be copied into handle1's DataRecord.
 //
 //------------------------------------------------------------------------------
-class DataRecordHandle : public Basic::Object
+class DataRecordHandle : public basic::Object
 {
-    DECLARE_SUBCLASS(DataRecordHandle, Basic::Object)
+    DECLARE_SUBCLASS(DataRecordHandle, basic::Object)
 
 public:
    DataRecordHandle(Pb::DataRecord* const record);

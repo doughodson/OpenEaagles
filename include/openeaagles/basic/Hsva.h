@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: Hsva
 //------------------------------------------------------------------------------
-#ifndef __oe_Basic_Hsva_H__
-#define __oe_Basic_Hsva_H__
+#ifndef __oe_basic_Hsva_H__
+#define __oe_basic_Hsva_H__
 
 #include "openeaagles/basic/Hsv.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 //------------------------------------------------------------------------------
 // Class:  Hsva
@@ -62,7 +62,7 @@ public:
     );
 };
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace
 
 #endif

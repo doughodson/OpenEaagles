@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class:  Number
 //------------------------------------------------------------------------------
-#ifndef __oe_Basic_Number_H__
-#define __oe_Basic_Number_H__
+#ifndef __oe_basic_Number_H__
+#define __oe_basic_Number_H__
 
 #include "openeaagles/basic/Object.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 //------------------------------------------------------------------------------
 // Class: Number
@@ -36,7 +36,7 @@ namespace Basic {
 //
 //------------------------------------------------------------------------------
 class Number : public Object {
-   DECLARE_SUBCLASS(Number,Object)
+   DECLARE_SUBCLASS(Number, Object)
 
 public:
    Number()                         { val = 0.0;   STANDARD_CONSTRUCTOR() }
@@ -61,7 +61,7 @@ protected:
    double val;   // value of this object
 };
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace
 
 #endif

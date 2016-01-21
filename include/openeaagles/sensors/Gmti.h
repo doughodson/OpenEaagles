@@ -9,7 +9,7 @@
 
 namespace oe {
 
-namespace Basic { class List; }
+namespace basic { class List; }
 
 namespace Sensor {
 
@@ -25,7 +25,7 @@ public:
     void setPoi(const osg::Vec3& newPos);
 
 protected:
-    bool setSlotPoi(Basic::List* const numList);                // Set Point of Interest
+    bool setSlotPoi(basic::List* const numList);                // Set Point of Interest
 
     void dynamics(const LCreal dt) override;
 

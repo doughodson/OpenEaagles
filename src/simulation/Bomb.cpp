@@ -27,13 +27,13 @@ END_SLOTTABLE(Bomb)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(Bomb)
-   ON_SLOT( 1, setSlotArmingOption, Basic::Identifier)
-   ON_SLOT( 2, setSlotNoseFuze,     Basic::Number)
-   ON_SLOT( 3, setSlotMidFuze,      Basic::Number)
-   ON_SLOT( 4, setSlotTailFuze,     Basic::Number)
-   ON_SLOT( 5, setSlotFuzeAltitude, Basic::Number)
-   ON_SLOT( 6, setSlotFuzeTime,     Basic::Number)
-   ON_SLOT( 7, setSlotDragIndex,    Basic::Number)
+   ON_SLOT( 1, setSlotArmingOption, basic::Identifier)
+   ON_SLOT( 2, setSlotNoseFuze,     basic::Number)
+   ON_SLOT( 3, setSlotMidFuze,      basic::Number)
+   ON_SLOT( 4, setSlotTailFuze,     basic::Number)
+   ON_SLOT( 5, setSlotFuzeAltitude, basic::Number)
+   ON_SLOT( 6, setSlotFuzeTime,     basic::Number)
+   ON_SLOT( 7, setSlotDragIndex,    basic::Number)
 END_SLOT_MAP()
 
 // Weapon data for general bomb
@@ -48,7 +48,7 @@ Bomb::Bomb()
 {
    STANDARD_CONSTRUCTOR()
 
-   static Basic::String generic("Bomb");
+   static basic::String generic("Bomb");
    setType(&generic);
 
    initData();
@@ -297,7 +297,7 @@ void Bomb::weaponGuidance(const LCreal)
 void Bomb::weaponDynamics(const LCreal dt)
 {
    // Useful constant
-   static const LCreal g = ETHG * Basic::Distance::FT2M;      // Acceleration of Gravity (m/s/s)
+   static const LCreal g = ETHG * basic::Distance::FT2M;      // Acceleration of Gravity (m/s/s)
 
    // ---
    // Compute & Set acceleration vector (earth)
@@ -381,7 +381,7 @@ bool Bomb::weaponImpactPrediction(
    )
 {
    // Useful constant
-   static const LCreal g = ETHG * Basic::Distance::FT2M;      // Acceleration of Gravity (m/s/s)
+   static const LCreal g = ETHG * basic::Distance::FT2M;      // Acceleration of Gravity (m/s/s)
 
    // Make sure we have all of our pointers
    if (initPos == nullptr || initVel == nullptr || finalPos == nullptr || tof == nullptr) return false;
@@ -426,7 +426,7 @@ bool Bomb::weaponImpactPrediction(
 // Set Slot routines --
 //------------------------------------------------------------------------------
 
-bool Bomb::setSlotArmingOption(Basic::Identifier* const p)
+bool Bomb::setSlotArmingOption(basic::Identifier* const p)
 {
     bool ok = false;
     if (p != nullptr) {
@@ -443,42 +443,42 @@ bool Bomb::setSlotArmingOption(Basic::Identifier* const p)
 }
 
 // noseFuze: Nose fuze flag
-bool Bomb::setSlotNoseFuze(Basic::Number* const p)
+bool Bomb::setSlotNoseFuze(basic::Number* const p)
 {
     setNoseFuze( p->getBoolean() );
     return true;
 }
 
 // midFuze: Middle fuze flag
-bool Bomb::setSlotMidFuze(Basic::Number* const p)
+bool Bomb::setSlotMidFuze(basic::Number* const p)
 {
     setMidFuze( p->getBoolean() );
     return true;
 }
 
 // tailFuze: Tail fuze flag
-bool Bomb::setSlotTailFuze(Basic::Number* const p)
+bool Bomb::setSlotTailFuze(basic::Number* const p)
 {
     setTailFuze( p->getBoolean() );
     return true;
 }
 
 // fuzeAltitude:  Fuze arming Altitude
-bool Bomb::setSlotFuzeAltitude(Basic::Number* const p)
+bool Bomb::setSlotFuzeAltitude(basic::Number* const p)
 {
     setFuzeAltitude( p->getFloat() );
     return true;
 }
 
 // fuzeTime:  Fuze Arming Time
-bool Bomb::setSlotFuzeTime(Basic::Number* const p)
+bool Bomb::setSlotFuzeTime(basic::Number* const p)
 {
     setFuzeTime( p->getFloat() );
     return true;
 }
 
 // dragIndex: drag index used by default dynamics
-bool Bomb::setSlotDragIndex(Basic::Number* const p)
+bool Bomb::setSlotDragIndex(basic::Number* const p)
 {
     setDragIndex( p->getReal() );
     return true;
@@ -487,7 +487,7 @@ bool Bomb::setSlotDragIndex(Basic::Number* const p)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Basic::Object* Bomb::getSlotByIndex(const int si)
+basic::Object* Bomb::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

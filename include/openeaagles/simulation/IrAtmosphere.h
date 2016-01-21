@@ -8,7 +8,7 @@
 
 namespace oe {
 
-   namespace Basic {
+   namespace basic {
       class Number;
       class Table1;
       class Table2;
@@ -88,9 +88,9 @@ class IrQueryMsg;
 //
 //------------------------------------------------------------------------------
 
-class IrAtmosphere : public Basic::Component
+class IrAtmosphere : public basic::Component
 {
-   DECLARE_SUBCLASS(IrAtmosphere,Basic::Component)
+   DECLARE_SUBCLASS(IrAtmosphere,basic::Component)
 
 public:
    IrAtmosphere();
@@ -130,10 +130,10 @@ public:
 protected:
 
    // slot operations 
-   virtual bool setSlotWaveBands(const Basic::Table1* const tbl);
-   virtual bool setSlotTransmissivityTable1(const Basic::Table1* const tbl);
-   virtual bool setSlotSkyRadiance(Basic::Number* const num);
-   virtual bool setSlotEarthRadiance(Basic::Number* const num);
+   virtual bool setSlotWaveBands(const basic::Table1* const tbl);
+   virtual bool setSlotTransmissivityTable1(const basic::Table1* const tbl);
+   virtual bool setSlotSkyRadiance(basic::Number* const num);
+   virtual bool setSlotEarthRadiance(basic::Number* const num);
 
    LCreal getTransmissivity(const unsigned int i, const LCreal range) const;
    LCreal getTransmissivity(const LCreal waveBandCenter, const LCreal range) const;
@@ -143,8 +143,8 @@ protected:
 private:
 
    unsigned int numWaveBands;
-   const Basic::Table1* waveBandTable;
-   const Basic::Table1* transmissivityTable1;
+   const basic::Table1* waveBandTable;
+   const basic::Table1* transmissivityTable1;
 
    LCreal skyRadiance;      // Simple background radiance for targets in sky
    LCreal earthRadiance;    // Simple background radiance for targets on ground

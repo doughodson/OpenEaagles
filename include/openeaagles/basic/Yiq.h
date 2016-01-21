@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: Yiq
 //------------------------------------------------------------------------------
-#ifndef __oe_Basic_Yiq_H__
-#define __oe_Basic_Yiq_H__
+#ifndef __oe_basic_Yiq_H__
+#define __oe_basic_Yiq_H__
 
 #include "openeaagles/basic/Color.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 //------------------------------------------------------------------------------
 // Class:  Yiq
@@ -81,7 +81,7 @@ protected:
 };
 
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace
 
 #endif

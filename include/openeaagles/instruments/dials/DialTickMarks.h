@@ -40,8 +40,8 @@ public:
 
 protected:
     // slot functions
-    bool setSlotLength(const Basic::Number* const newLength);
-    bool setSlotQuantity(const Basic::Number* const newQ);
+    bool setSlotLength(const basic::Number* const newLength);
+    bool setSlotQuantity(const basic::Number* const newQ);
 
 private:
     LCreal      length;             // tick mark length (if not a graphic)

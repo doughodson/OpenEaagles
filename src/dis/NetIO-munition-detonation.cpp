@@ -65,7 +65,7 @@ void NetIO::processDetonationPDU(const DetonationPDU* const pdu)
          fPlayer = fNib->getPlayer();
       }
       else {
-         Basic::safe_ptr<Basic::PairStream> players( getSimulation()->getPlayers() );
+         basic::safe_ptr<basic::PairStream> players( getSimulation()->getPlayers() );
          fPlayer = getSimulation()->findPlayer(fPlayerId);
       }
    }
@@ -89,14 +89,14 @@ void NetIO::processDetonationPDU(const DetonationPDU* const pdu)
 
       // Get the geocentric position, velocity and acceleration from the PDU
       osg::Vec3d geocPos;
-      geocPos[Basic::Nav::IX] = pdu->location.X_coord;
-      geocPos[Basic::Nav::IY] = pdu->location.Y_coord;
-      geocPos[Basic::Nav::IZ] = pdu->location.Z_coord;
+      geocPos[basic::Nav::IX] = pdu->location.X_coord;
+      geocPos[basic::Nav::IY] = pdu->location.Y_coord;
+      geocPos[basic::Nav::IZ] = pdu->location.Z_coord;
 
       osg::Vec3d geocVel;
-      geocVel[Basic::Nav::IX] = pdu->velocity.component[0];
-      geocVel[Basic::Nav::IY] = pdu->velocity.component[1];
-      geocVel[Basic::Nav::IZ] = pdu->velocity.component[2];
+      geocVel[basic::Nav::IX] = pdu->velocity.component[0];
+      geocVel[basic::Nav::IY] = pdu->velocity.component[1];
+      geocVel[basic::Nav::IZ] = pdu->velocity.component[2];
 
       osg::Vec3d geocAcc(0,0,0);
       osg::Vec3d geocAngles(0,0,0);

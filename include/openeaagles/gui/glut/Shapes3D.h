@@ -12,7 +12,7 @@
 #include "openeaagles/basicGL/Shapes.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
     class Number;
 }
 
@@ -41,7 +41,7 @@ public:
     int getStacks()                           { return stacks; }
 
 protected:
-    bool setSlotStacks(const Basic::Number* const x);
+    bool setSlotStacks(const basic::Number* const x);
 
 private:
     int stacks;
@@ -69,8 +69,8 @@ public:
     LCreal getHeight()                          { return height; }
 
 protected:
-    bool setSlotTopRadius(const Basic::Number* const x);
-    bool setSlotHeight(const Basic::Number* const x);
+    bool setSlotTopRadius(const basic::Number* const x);
+    bool setSlotHeight(const basic::Number* const x);
 
 private:
     LCreal topRadius;
@@ -111,7 +111,7 @@ public:
     LCreal getSize()                       { return size; }
 
 protected:
-    bool setSlotSize(const Basic::Number* const srobj);
+    bool setSlotSize(const basic::Number* const srobj);
 
 private:
     LCreal size;
@@ -137,7 +137,7 @@ public:
     LCreal getOuterRadius()                        { return oRadius; }
 
 protected:
-    bool setSlotOuterRadius(const Basic::Number* const x);
+    bool setSlotOuterRadius(const basic::Number* const x);
 
 private:
     LCreal oRadius;

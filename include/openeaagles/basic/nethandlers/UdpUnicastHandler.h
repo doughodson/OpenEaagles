@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: UdpUnicastHandler
 //------------------------------------------------------------------------------
-#ifndef __oe_Basic_UdpUnicastHandler_H__
-#define __oe_Basic_UdpUnicastHandler_H__
+#ifndef __oe_basic_UdpUnicastHandler_H__
+#define __oe_basic_UdpUnicastHandler_H__
 
 #include "openeaagles/basic/nethandlers/PosixHandler.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 class String;
 
@@ -75,7 +75,7 @@ private:
    char* ipAddr;   // Host's name or IP Address
 };
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace
 
 #endif

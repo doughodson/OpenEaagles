@@ -8,7 +8,7 @@
 #include "openeaagles/basic/osg/Vec3"
 
 namespace oe {
-   namespace Basic {
+   namespace basic {
       class Angle;
       class Distance;
       class Identifier;
@@ -30,48 +30,48 @@ class Action;
 //
 // Factory name: Steerpoint
 // Slots:
-//   stptType  <Basic::Identifier>  ! Steerpoint type; default: DEST
+//   stptType  <basic::Identifier>  ! Steerpoint type; default: DEST
 //                                  ! { ROUTE, DEST, MARK, FIX, OAP, TGT }
 //
-//   latitude  <Basic::LatLon>      ! Steerpoint latitude  (default: 0)
-//             <Basic::Number>      ! (or as degrees decimal)
+//   latitude  <basic::LatLon>      ! Steerpoint latitude  (default: 0)
+//             <basic::Number>      ! (or as degrees decimal)
 //
-//   longitude <Basic::LatLon>      ! Steerpoint longitude (default: 0)
-//             <Basic::Number>      ! (or as degrees decimal)
+//   longitude <basic::LatLon>      ! Steerpoint longitude (default: 0)
+//             <basic::Number>      ! (or as degrees decimal)
 //
-//   xPos      <Basic::Distance>    ! X (north) distance from gaming area reference point
-//   yPos      <Basic::Distance>    ! Y (east) distance from gaming area reference point
+//   xPos      <basic::Distance>    ! X (north) distance from gaming area reference point
+//   yPos      <basic::Distance>    ! Y (east) distance from gaming area reference point
 //                                  ! (default: 0, 0)
-//   elevation <Basic::Distance>    ! Terrain elevation at steerpoint (default: 0)
-//             <Basic::Number>      ! (or as meters)
+//   elevation <basic::Distance>    ! Terrain elevation at steerpoint (default: 0)
+//             <basic::Number>      ! (or as meters)
 //
-//   altitude  <Basic::Distance>    ! Commanded altitude to steerpoint (default: 0)
-//             <Basic::Number>      ! (or as meters)
+//   altitude  <basic::Distance>    ! Commanded altitude to steerpoint (default: 0)
+//             <basic::Number>      ! (or as meters)
 //
-//   airspeed  <Basic::Number>      ! Commanded true airspeed (Kts) (default: 0)
+//   airspeed  <basic::Number>      ! Commanded true airspeed (Kts) (default: 0)
 //
-//   pta       <Basic::Distance>    ! Planned Time of Arrival (PTA)  (default: 0)
-//             <Basic::Number>      ! (or as seconds)
+//   pta       <basic::Distance>    ! Planned Time of Arrival (PTA)  (default: 0)
+//             <basic::Number>      ! (or as seconds)
 //
-//   sca       <Basic::Distance>    ! Safe Clearance Altitude (SCA) (default: 0)
-//             <Basic::Number>      ! (or as feet)
+//   sca       <basic::Distance>    ! Safe Clearance Altitude (SCA) (default: 0)
+//             <basic::Number>      ! (or as feet)
 //
-//   description <Basic::String>    ! Description of steerpoint (default: 0)
+//   description <basic::String>    ! Description of steerpoint (default: 0)
 //
-//   magvar    <Basic::Angle>       ! Magnetic Var at steerpoint (default: 0)
-//             <Basic::Number>      ! (or as degrees)
+//   magvar    <basic::Angle>       ! Magnetic Var at steerpoint (default: 0)
+//             <basic::Number>      ! (or as degrees)
 //
-//   next      <Basic::Number>      ! "Next" steerpoint number (default: 0)
-//             <Basic::Identifier>  ! or by steerpoint name
+//   next      <basic::Number>      ! "Next" steerpoint number (default: 0)
+//             <basic::Identifier>  ! or by steerpoint name
 //
 //   action    <Action>             ! Action to be triggered at steerpoint crossing (auto only)
 //                                  !  Note: the "to" steerpoint will have sequenced to the
 //                                  !  next steerpoint when action is triggered. (default: 0)
 //
 //------------------------------------------------------------------------------
-class Steerpoint : public Basic::Component
+class Steerpoint : public basic::Component
 {
-   DECLARE_SUBCLASS(Steerpoint,Basic::Component)
+   DECLARE_SUBCLASS(Steerpoint,basic::Component)
 
 public:
    enum StptType { DEST, MARK, FIX, OAP, IP, TGT, TGT_GRP };
@@ -127,7 +127,7 @@ public:
     // Set the ground elevation at the steerpoint from this terrain database
     // Interpolate between elevation posts if the optional 'interp' flag is true.
     // Returns true if successful.
-    virtual bool setElevation(const Basic::Terrain* const terrain, const bool interp = false);
+    virtual bool setElevation(const basic::Terrain* const terrain, const bool interp = false);
 
     // Set parameters
     virtual void setSteerpointType(const StptType t)    { stptType = t; }
@@ -138,7 +138,7 @@ public:
     virtual void setLongitude(const double v);
     virtual void setPTA(const LCreal v)                 { pta = v; }
     virtual void setSCA(const LCreal v)                 { sca = v; }
-    virtual void setDescription(const Basic::String* const d);
+    virtual void setDescription(const basic::String* const d);
     virtual void setCmdAltitude(const LCreal v);
     virtual void setCmdAirspeedKts(const LCreal v);
 
@@ -175,34 +175,34 @@ public:
 protected:
 
     // Slot functions
-    virtual bool setSlotSteerpointType(const Basic::Identifier* const msg);
-    virtual bool setSlotLatitude(const Basic::LatLon* const msg);
-    virtual bool setSlotLatitude(const Basic::Number* const msg);
-    virtual bool setSlotLongitude(const Basic::LatLon* const msg);
-    virtual bool setSlotLongitude(const Basic::Number* const msg);
-    virtual bool setSlotPosition(const Basic::List* const numList);
-    virtual bool setSlotXPos(const Basic::Distance* const num);
-    virtual bool setSlotYPos(const Basic::Distance* const num);
-    virtual bool setSlotElevation(const Basic::Distance* const num);
-    virtual bool setSlotElevation(const Basic::Number* const num);
-    virtual bool setSlotPTA(const Basic::Time* const msg);
-    virtual bool setSlotPTA(const Basic::Number* const msg);
-    virtual bool setSlotSCA(const Basic::Distance* const msg);
-    virtual bool setSlotSCA(const Basic::Number* const msg);
-    virtual bool setSlotDescription(const Basic::String* const msg);
-    virtual bool setSlotMagVar(const Basic::Angle* const msg);
-    virtual bool setSlotMagVar(const Basic::Number* const msg);
-    virtual bool setSlotCmdAltitude(const Basic::Distance* const num);
-    virtual bool setSlotCmdAltitude(const Basic::Number* const num);
-    virtual bool setSlotCmdAirspeed(const Basic::Number* const num);
-    virtual bool setSlotNext(const Basic::Identifier* const num);
-    virtual bool setSlotNext(const Basic::Number* const num);
+    virtual bool setSlotSteerpointType(const basic::Identifier* const msg);
+    virtual bool setSlotLatitude(const basic::LatLon* const msg);
+    virtual bool setSlotLatitude(const basic::Number* const msg);
+    virtual bool setSlotLongitude(const basic::LatLon* const msg);
+    virtual bool setSlotLongitude(const basic::Number* const msg);
+    virtual bool setSlotPosition(const basic::List* const numList);
+    virtual bool setSlotXPos(const basic::Distance* const num);
+    virtual bool setSlotYPos(const basic::Distance* const num);
+    virtual bool setSlotElevation(const basic::Distance* const num);
+    virtual bool setSlotElevation(const basic::Number* const num);
+    virtual bool setSlotPTA(const basic::Time* const msg);
+    virtual bool setSlotPTA(const basic::Number* const msg);
+    virtual bool setSlotSCA(const basic::Distance* const msg);
+    virtual bool setSlotSCA(const basic::Number* const msg);
+    virtual bool setSlotDescription(const basic::String* const msg);
+    virtual bool setSlotMagVar(const basic::Angle* const msg);
+    virtual bool setSlotMagVar(const basic::Number* const msg);
+    virtual bool setSlotCmdAltitude(const basic::Distance* const num);
+    virtual bool setSlotCmdAltitude(const basic::Number* const num);
+    virtual bool setSlotCmdAirspeed(const basic::Number* const num);
+    virtual bool setSlotNext(const basic::Identifier* const num);
+    virtual bool setSlotNext(const basic::Number* const num);
 
     void processComponents(   // Process our subcomponent list (which should be other steerpoints)
-         Basic::PairStream* const list,        // Source list of components
+         basic::PairStream* const list,        // Source list of components
          const std::type_info& filter,           // Type filter
-         Basic::Pair* const add = 0,           // Optional pair to add
-         Basic::Component* const remove = 0    // Optional subcomponent to remove
+         basic::Pair* const add = 0,           // Optional pair to add
+         basic::Component* const remove = 0    // Optional subcomponent to remove
        ) override;
 
 private:
@@ -215,17 +215,17 @@ private:
     LCreal      pta;            // Planned Time of Arrival  (sec)
     LCreal      sca;            // Safe Clearance Alt       (ft)
     LCreal      magvar;         // Mag Var                  (degs)
-    Basic::safe_ptr<const Basic::String> description; // Description
+    basic::safe_ptr<const basic::String> description; // Description
     bool        needPosVec;     // Request calucaltion of 'posVec' from Lat/Lon
     bool        needLL;         // Request calucaltion of Lat/Lon from 'posVec'
     LCreal      cmdAlt;         // Commanded Altitude       (m)
     bool        haveCmdAlt;     // Have commanded altitude
     LCreal      cmdAirspeed;    // Commanded Airspeed       (kts)
     bool        haveCmdAs;      // Have commanded airspeed
-    Basic::safe_ptr<Basic::Pair> next;  // "next" Steerpoint pair [ name steerpoint ]
+    basic::safe_ptr<basic::Pair> next;  // "next" Steerpoint pair [ name steerpoint ]
 
     // Steerpoint action
-    Basic::safe_ptr<Action> action;     // Action to be performed at this steerpoint
+    basic::safe_ptr<Action> action;     // Action to be performed at this steerpoint
 
     // Initial (reset) data
     double      initLatitude;   // latitude
@@ -242,7 +242,7 @@ private:
     bool        haveInitCmdAlt; // Have initial cmd altitude
     LCreal      initCmdAirspeed; // Initial commanded airspeed (kts)
     bool        haveInitCmdAs;   // Have commanded airspeed
-    Basic::safe_ptr<const Basic::String> initNextStptName; // Name of the inital "next" steerpoint
+    basic::safe_ptr<const basic::String> initNextStptName; // Name of the inital "next" steerpoint
     int         initNextStptIdx;    // Index of the initial "next" steerpoint
 
     // Computed data

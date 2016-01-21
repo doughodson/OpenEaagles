@@ -6,7 +6,7 @@
 #include <iomanip>
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 //==============================================================================
 // RVector
@@ -267,6 +267,6 @@ bool CVector::setFldWidth(const unsigned int FW)
 }
 
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace
 

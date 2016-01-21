@@ -218,7 +218,7 @@ bool Tdb::resizeArrays(const unsigned int newSize)
 // max angles, etc.
 // (Background task)
 //------------------------------------------------------------------------------
-unsigned int Tdb::processPlayers(Basic::PairStream* const players)
+unsigned int Tdb::processPlayers(basic::PairStream* const players)
 {
    // ---
    // Early out checks (no ownship, no players of interest, no target data arrays)
@@ -228,7 +228,7 @@ unsigned int Tdb::processPlayers(Basic::PairStream* const players)
    // ---
    // Terrain occulting check setup
    // ---
-   const Basic::Terrain* terrain = nullptr;
+   const basic::Terrain* terrain = nullptr;
    if (gimbal->isTerrainOccultingEnabled()) {
       const Simulation* const sim = ownship->getSimulation();
       terrain = sim->getTerrain();
@@ -295,7 +295,7 @@ unsigned int Tdb::processPlayers(Basic::PairStream* const players)
    // If we're using ECEF coordinates then we compute the distance
    // to the earth horizon and the tangent of the angle from our
    // local level to the earth horizon
-   double hDist = 1000000.0 * Basic::Distance::NM2M;  // Distance to horizon (m) (default: really far away)
+   double hDist = 1000000.0 * basic::Distance::NM2M;  // Distance to horizon (m) (default: really far away)
    double hTanAng = 0;                                // Tangent of the angle to horizon (positive down)
    if (usingEcefFlg) {
       // Our vertical offset from our ownship is the inverse of the 'z'
@@ -324,10 +324,10 @@ unsigned int Tdb::processPlayers(Basic::PairStream* const players)
    // 1) Scan the player list ---
    // ---
    bool finished = false;
-   for (Basic::List::Item* item = players->getFirstItem(); item != nullptr && numTgts < maxTargets && !finished; item = item->getNext()) {
+   for (basic::List::Item* item = players->getFirstItem(); item != nullptr && numTgts < maxTargets && !finished; item = item->getNext()) {
 
       // Get the pointer to the target player
-      Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+      basic::Pair* pair = static_cast<basic::Pair*>(item->getValue());
       Player* target = static_cast<Player*>(pair->object());
 
       // Did we complete the local only players?
@@ -406,10 +406,10 @@ unsigned int Tdb::processPlayers(Basic::PairStream* const players)
                      if ( target->isMajorType(Player::SPACE_VEHICLE) ) {
                         // Get the true, great-circle bearing to the target
                         double tbrg(0), distNM(0);
-                        Basic::Nav::vll2bd(osLat, osLon, tgtLat, tgtLon, &tbrg, &distNM);
+                        basic::Nav::vll2bd(osLat, osLon, tgtLat, tgtLon, &tbrg, &distNM);
 
                         // Set the distance to check to 60 nm
-                        double dist = 60.0 * Basic::Distance::NM2M;
+                        double dist = 60.0 * basic::Distance::NM2M;
 
                         // Terrain occulting check toward the space vehicle
                         occulted = terrain->targetOcculting2(osLat, osLon, osAlt, tbrg, dist, -tanTgtAng);

@@ -7,7 +7,7 @@
 #include "openeaagles/basic/Object.h"
 
 namespace oe {
-   namespace Basic {
+   namespace basic {
       class Frequency;
       class Number;
    }
@@ -41,9 +41,9 @@ namespace LinearSystem {
 //    y0    <Number>     Initial (previous) output value: Y(0) (default: 0)
 //
 //------------------------------------------------------------------------------
-class ScalerFunc : public Basic::Object
+class ScalerFunc : public basic::Object
 {
-    DECLARE_SUBCLASS(ScalerFunc,Basic::Object)
+    DECLARE_SUBCLASS(ScalerFunc,basic::Object)
 
 public:
    ScalerFunc();
@@ -66,10 +66,10 @@ public:
    virtual bool setRate(const unsigned int v);
 
    // Set slot functions
-   virtual bool setSlotRate(const Basic::Frequency* const msg);
-   virtual bool setSlotRate(const Basic::Number* const msg);
-   virtual bool setSlotX0(const Basic::Number* const msg);
-   virtual bool setSlotY0(const Basic::Number* const msg);
+   virtual bool setSlotRate(const basic::Frequency* const msg);
+   virtual bool setSlotRate(const basic::Number* const msg);
+   virtual bool setSlotX0(const basic::Number* const msg);
+   virtual bool setSlotY0(const basic::Number* const msg);
 
    bool isValid() const override;
 

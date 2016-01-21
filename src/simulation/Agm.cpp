@@ -26,7 +26,7 @@ Agm::Agm()
 {
     STANDARD_CONSTRUCTOR()
 
-    static Basic::String generic("AGM");
+    static basic::String generic("AGM");
     setType(&generic);
 
    // Default guidance & dynamics for generic A/G missile

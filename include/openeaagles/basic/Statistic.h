@@ -1,15 +1,15 @@
 //------------------------------------------------------------------------------
 // Class:  Statistic
 //------------------------------------------------------------------------------
-#ifndef __oe_Basic_Statistic_H__
-#define __oe_Basic_Statistic_H__
+#ifndef __oe_basic_Statistic_H__
+#define __oe_basic_Statistic_H__
 
 #include "openeaagles/basic/Object.h"
 
 #include <cmath>
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 //------------------------------------------------------------------------------
 // Class:  Statistic

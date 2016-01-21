@@ -2,7 +2,7 @@
 #include "openeaagles/basic/SlotTable.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 //==============================================================================
 // Density --
@@ -180,6 +180,6 @@ std::ostream& Density::serialize(std::ostream& sout, const int i, const bool slo
     return sout;
 }
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace
 

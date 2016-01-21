@@ -29,9 +29,9 @@ namespace Rpf {
 
 class CadrgFrame;
 
-class CadrgFrameEntry : public Basic::Object
+class CadrgFrameEntry : public basic::Object
 {
-    DECLARE_SUBCLASS(CadrgFrameEntry, Basic::Object)
+    DECLARE_SUBCLASS(CadrgFrameEntry, basic::Object)
 
 public:
     CadrgFrameEntry();

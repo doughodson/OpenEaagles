@@ -171,7 +171,7 @@ int OnboardComputer::getShootList(const Track* tlist[], const int max) const
     return n;
 }
 
-int OnboardComputer::getShootList(Basic::safe_ptr<Track>* const tlist, const int max)
+int OnboardComputer::getShootList(basic::safe_ptr<Track>* const tlist, const int max)
 {
     int n = 0;
     if (nextToShoot != nullptr && tlist != nullptr && max > 0) {
@@ -181,7 +181,7 @@ int OnboardComputer::getShootList(Basic::safe_ptr<Track>* const tlist, const int
     return n;
 }
 
-int OnboardComputer::getShootList(Basic::safe_ptr<const Track>* const tlist, const int max) const
+int OnboardComputer::getShootList(basic::safe_ptr<const Track>* const tlist, const int max) const
 {
     int n = 0;
     if (nextToShoot != nullptr && tlist != nullptr && max > 0) {
@@ -196,7 +196,7 @@ int OnboardComputer::getShootList(Basic::safe_ptr<const Track>* const tlist, con
 //------------------------------------------------------------------------------
 Track* OnboardComputer::getNextTarget()
 {
-    Basic::safe_ptr<Track> trackList[2];
+    basic::safe_ptr<Track> trackList[2];
     int n = getShootList(trackList,2);
     Track* trk = nullptr;
     if (n > 0) {
@@ -217,7 +217,7 @@ void OnboardComputer::updateShootList(const bool step)
 
    // First, let's get the active track list
    const unsigned int MAX_TRKS = 20;
-   Basic::safe_ptr<Track> trackList[MAX_TRKS];
+   basic::safe_ptr<Track> trackList[MAX_TRKS];
 
    int n = 0;
    TrackManager* tm = getTrackManagerByType(typeid(AirTrkMgr));
@@ -311,7 +311,7 @@ bool OnboardComputer::requestNextToShoot(const Track* const nts)
 
       // First, let's get the active track list
       const unsigned int MAX_TRKS = 20;
-      Basic::safe_ptr<Track> trackList[MAX_TRKS];
+      basic::safe_ptr<Track> trackList[MAX_TRKS];
 
       int n = 0;
       TrackManager* tm = getTrackManagerByType(typeid(AirTrkMgr));
@@ -366,7 +366,7 @@ void OnboardComputer::setNextToShoot(Track* const p)
 TrackManager* OnboardComputer::getTrackManagerByType(const std::type_info& type)
 {
    TrackManager* p = nullptr;
-   Basic::Pair* pair = findByType(type);
+   basic::Pair* pair = findByType(type);
    if (pair != nullptr) {
       p = dynamic_cast<TrackManager*>( pair->object() );
    }
@@ -376,7 +376,7 @@ TrackManager* OnboardComputer::getTrackManagerByType(const std::type_info& type)
 const TrackManager* OnboardComputer::getTrackManagerByType(const std::type_info& type) const
 {
    const TrackManager* p = nullptr;
-   const Basic::Pair* pair = findByType(type);
+   const basic::Pair* pair = findByType(type);
    if (pair != nullptr) {
       p = dynamic_cast<const TrackManager*>( pair->object() );
    }
@@ -389,7 +389,7 @@ const TrackManager* OnboardComputer::getTrackManagerByType(const std::type_info&
 TrackManager* OnboardComputer::getTrackManagerByName(const char* const name)
 {
    TrackManager* p = nullptr;
-   Basic::Pair* pair = findByName(name);
+   basic::Pair* pair = findByName(name);
    if (pair != nullptr) {
       p = dynamic_cast<TrackManager*>( pair->object() );
    }
@@ -399,7 +399,7 @@ TrackManager* OnboardComputer::getTrackManagerByName(const char* const name)
 const TrackManager* OnboardComputer::getTrackManagerByName(const char* const name) const
 {
    const TrackManager* p = nullptr;
-   const Basic::Pair* pair = findByName(name);
+   const basic::Pair* pair = findByName(name);
    if (pair != nullptr) {
       p = dynamic_cast<const TrackManager*>( pair->object() );
    }

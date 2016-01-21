@@ -1,14 +1,14 @@
 //------------------------------------------------------------------------------
 // Class: Pair
 //------------------------------------------------------------------------------
-#ifndef __oe_Basic_Pair_H__
-#define __oe_Basic_Pair_H__
+#ifndef __oe_basic_Pair_H__
+#define __oe_basic_Pair_H__
 
 #include "openeaagles/basic/Object.h"
 #include "openeaagles/basic/Identifier.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 //------------------------------------------------------------------------------
 // Class: Pair
@@ -47,7 +47,7 @@ private:
    Object* obj;            // Object
 };
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace
 
 #endif

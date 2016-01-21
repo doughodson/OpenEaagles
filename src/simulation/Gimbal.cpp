@@ -35,36 +35,36 @@ BEGIN_SLOTTABLE(Gimbal)
     "location",               //  2: Relative location vector         (meters) [ x y z ]
 
     "initPosition",           //  3: Initial position vector          (radians) [ az el roll ]
-    "initPosAzimuth",         //  4: Initial azimuth position         (Basic::Angle)
-    "initPosElevation",       //  5: Initial elevation position       (Basic::Angle)
-    "initPosRoll",            //  6: Initial roll position            (Basic::Angle)
+    "initPosAzimuth",         //  4: Initial azimuth position         (basic::Angle)
+    "initPosElevation",       //  5: Initial elevation position       (basic::Angle)
+    "initPosRoll",            //  6: Initial roll position            (basic::Angle)
 
     "azimuthLimits",          //  7: Azimuth limit vector             (radians) [ left right ] [ range: -pi to pi; else unlimited ]
-    "azimuthLimitLeft",       //  8: Left azimuth limit               (Basic::Angle) [ range: -pi to pi; else unlimited ]
-    "azimuthLimitRight",      //  9: Right azimuth limit              (Basic::Angle) [ range: -pi to pi; else unlimited ]
+    "azimuthLimitLeft",       //  8: Left azimuth limit               (basic::Angle) [ range: -pi to pi; else unlimited ]
+    "azimuthLimitRight",      //  9: Right azimuth limit              (basic::Angle) [ range: -pi to pi; else unlimited ]
 
     "elevationLimits",        // 10: Elevation limit vector           (radians) [ lower upper ] [ range: -pi to pi; else unlimited ]
-    "elevationLimitLower",    // 11: Lower elevation limit            (Basic::Angle) [ range: -pi to pi; else unlimited ]
-    "elevationLimitUpper",    // 12: Upper elevation limit            (Basic::Angle) [ range: -pi to pi; else unlimited ]
+    "elevationLimitLower",    // 11: Lower elevation limit            (basic::Angle) [ range: -pi to pi; else unlimited ]
+    "elevationLimitUpper",    // 12: Upper elevation limit            (basic::Angle) [ range: -pi to pi; else unlimited ]
 
     "rollLimits",             // 13: Roll limit vector                (radians) [ lower upper ] [ range: -pi to pi; else unlimited ]
-    "rollLimitLower",         // 14: Lower roll limit                 (Basic::Angle) [ range: -pi to pi; else unlimited ]
-    "rollLimitUpper",         // 15: Upper roll limit                 (Basic::Angle) [ range: -pi to pi; else unlimited ]
+    "rollLimitLower",         // 14: Lower roll limit                 (basic::Angle) [ range: -pi to pi; else unlimited ]
+    "rollLimitUpper",         // 15: Upper roll limit                 (basic::Angle) [ range: -pi to pi; else unlimited ]
 
     "maxRates",               // 16: Max "mechanical" rate vector     (rad/sec) [ az el roll ]
-    "maxRateAzimuth",         // 17: Max "mechanical" azimuth rate    (Basic::Angle/sec)
-    "maxRateElevation",       // 18: Max "mechanical" elevation rate  (Basic::Angle/sec)
-    "maxRateRoll",            // 19: Max "mechanical" roll rate       (Basic::Angle/sec)
+    "maxRateAzimuth",         // 17: Max "mechanical" azimuth rate    (basic::Angle/sec)
+    "maxRateElevation",       // 18: Max "mechanical" elevation rate  (basic::Angle/sec)
+    "maxRateRoll",            // 19: Max "mechanical" roll rate       (basic::Angle/sec)
 
     "commandPosition",        // 20: Commanded position vector        (radians) [ az el roll ] (sets POSITION_SERVO)
-    "commandPosAzimuth",      // 21: Commanded azimuth position       (Basic::Angle) (sets POSITION_SERVO)
-    "commandPosElevation",    // 22: Commanded elevation position     (Basic::Angle) (sets POSITION_SERVO)
-    "commandPosRoll",         // 23: Commanded roll position          (Basic::Angle) (sets POSITION_SERVO)
+    "commandPosAzimuth",      // 21: Commanded azimuth position       (basic::Angle) (sets POSITION_SERVO)
+    "commandPosElevation",    // 22: Commanded elevation position     (basic::Angle) (sets POSITION_SERVO)
+    "commandPosRoll",         // 23: Commanded roll position          (basic::Angle) (sets POSITION_SERVO)
 
     "commandRates",           // 24: Commanded rate vector            (rad/sec) [ az el roll ] (sets RATE_SERVO)
-    "commandRateAzimuth",     // 25: Commanded azimuth rate           (Basic::Angle/sec) (sets RATE_SERVO)
-    "commandRateElevation",   // 26: Commanded elevation rate         (Basic::Angle/sec) (sets RATE_SERVO)
-    "commandRateRoll",        // 27: Commanded roll rate              (Basic::Angle/sec) (sets RATE_SERVO)
+    "commandRateAzimuth",     // 25: Commanded azimuth rate           (basic::Angle/sec) (sets RATE_SERVO)
+    "commandRateElevation",   // 26: Commanded elevation rate         (basic::Angle/sec) (sets RATE_SERVO)
+    "commandRateRoll",        // 27: Commanded roll rate              (basic::Angle/sec) (sets RATE_SERVO)
 
     "terrainOcculting",             // 28: Enable terrain occulting of tye players of interest (default: false)
     "checkHorizon",                 // 29:  Enable horizon masking check (default: true)
@@ -81,53 +81,53 @@ END_SLOTTABLE(Gimbal)
 // Map slot table to handles
 BEGIN_SLOT_MAP(Gimbal)
 
-    ON_SLOT(1, setSlotType, Basic::String)               // Physical gimbal type: "mechanical" or "electronic"
+    ON_SLOT(1, setSlotType, basic::String)               // Physical gimbal type: "mechanical" or "electronic"
 
-    ON_SLOT(2, setSlotLocation, Basic::List)             // Relative location vector (meters) [ x y z ]
+    ON_SLOT(2, setSlotLocation, basic::List)             // Relative location vector (meters) [ x y z ]
 
-    ON_SLOT(3, setSlotPosition, Basic::List)             // Initial position vector (radians) [ az el roll ]
-    ON_SLOT(4, setSlotPosAzimuth, Basic::Angle)          // Initial azimuth position
-    ON_SLOT(5, setSlotPosElevation, Basic::Angle)        // Initial elevation position
-    ON_SLOT(6, setSlotPosRoll, Basic::Angle)             // Initial roll position
+    ON_SLOT(3, setSlotPosition, basic::List)             // Initial position vector (radians) [ az el roll ]
+    ON_SLOT(4, setSlotPosAzimuth, basic::Angle)          // Initial azimuth position
+    ON_SLOT(5, setSlotPosElevation, basic::Angle)        // Initial elevation position
+    ON_SLOT(6, setSlotPosRoll, basic::Angle)             // Initial roll position
 
-    ON_SLOT(7, setSlotAzimuthLimits, Basic::List)        // Azimuth limit vector (radians) [ left right ]
-    ON_SLOT(8, setSlotAzimuthLimitLeft, Basic::Angle)    // Left azimuth limit
-    ON_SLOT(9, setSlotAzimuthLimitRight, Basic::Angle)   // Right azimuth limit
+    ON_SLOT(7, setSlotAzimuthLimits, basic::List)        // Azimuth limit vector (radians) [ left right ]
+    ON_SLOT(8, setSlotAzimuthLimitLeft, basic::Angle)    // Left azimuth limit
+    ON_SLOT(9, setSlotAzimuthLimitRight, basic::Angle)   // Right azimuth limit
 
-    ON_SLOT(10, setSlotElevationLimits, Basic::List)     // Elevation limit vector (radians) [ lower upper ]
-    ON_SLOT(11, setSlotElevationLower, Basic::Angle)     // Lower elevation limit
-    ON_SLOT(12, setSlotElevationUpper, Basic::Angle)     // Upper elevation limit
+    ON_SLOT(10, setSlotElevationLimits, basic::List)     // Elevation limit vector (radians) [ lower upper ]
+    ON_SLOT(11, setSlotElevationLower, basic::Angle)     // Lower elevation limit
+    ON_SLOT(12, setSlotElevationUpper, basic::Angle)     // Upper elevation limit
 
-    ON_SLOT(13, setSlotRollLimits, Basic::List)          // Roll limit vector (radians) [ lower upper ]
-    ON_SLOT(14, setSlotRollLimitLower, Basic::Angle)     // Lower roll limit
-    ON_SLOT(15, setSlotRollLimitUpper, Basic::Angle)     // Upper roll limit
+    ON_SLOT(13, setSlotRollLimits, basic::List)          // Roll limit vector (radians) [ lower upper ]
+    ON_SLOT(14, setSlotRollLimitLower, basic::Angle)     // Lower roll limit
+    ON_SLOT(15, setSlotRollLimitUpper, basic::Angle)     // Upper roll limit
 
-    ON_SLOT(16, setSlotMaxRates, Basic::List)            // Max "mechanical" rate vector (rad/sec) [ az el roll ]
-    ON_SLOT(17, setSlotMaxRateAzimuth, Basic::Angle)     // Max "mechanical" azimuth rate (Basic::Angle/sec)
-    ON_SLOT(18, setSlotMaxRateElevation, Basic::Angle)   // Max "mechanical" elevation rate (Basic::Angle/sec)
-    ON_SLOT(19, setSlotMaxRateRoll, Basic::Angle)        // Max "mechanical" roll rate (Basic::Angle/sec)
+    ON_SLOT(16, setSlotMaxRates, basic::List)            // Max "mechanical" rate vector (rad/sec) [ az el roll ]
+    ON_SLOT(17, setSlotMaxRateAzimuth, basic::Angle)     // Max "mechanical" azimuth rate (basic::Angle/sec)
+    ON_SLOT(18, setSlotMaxRateElevation, basic::Angle)   // Max "mechanical" elevation rate (basic::Angle/sec)
+    ON_SLOT(19, setSlotMaxRateRoll, basic::Angle)        // Max "mechanical" roll rate (basic::Angle/sec)
 
-    ON_SLOT(20, setSlotCmdPos, Basic::List)              // Commanded position vector  [ az el roll ] (sets POSITION_SERVO)
-    ON_SLOT(21, setSlotCmdPosAzimuth, Basic::Angle)      // Commanded azimuth position  (sets POSITION_SERVO)
-    ON_SLOT(22, setSlotCmdPosElevation, Basic::Angle)    // Commanded elevation position (sets POSITION_SERVO)
-    ON_SLOT(23, setSlotCmdPosRoll, Basic::Angle)         // Commanded roll position  (sets POSITION_SERVO)
+    ON_SLOT(20, setSlotCmdPos, basic::List)              // Commanded position vector  [ az el roll ] (sets POSITION_SERVO)
+    ON_SLOT(21, setSlotCmdPosAzimuth, basic::Angle)      // Commanded azimuth position  (sets POSITION_SERVO)
+    ON_SLOT(22, setSlotCmdPosElevation, basic::Angle)    // Commanded elevation position (sets POSITION_SERVO)
+    ON_SLOT(23, setSlotCmdPosRoll, basic::Angle)         // Commanded roll position  (sets POSITION_SERVO)
 
-    ON_SLOT(24, setSlotCmdRate, Basic::List)             // Commanded rate vector (rad/sec) [ az el roll ] (sets RATE_SERVO)
-    ON_SLOT(25, setSlotCmdRateAzimuth, Basic::Angle)     // Commanded azimuth rate (sets RATE_SERVO)
-    ON_SLOT(26, setSlotCmdRateElevation, Basic::Angle)   // Commanded elevation rate (sets RATE_SERVO)
-    ON_SLOT(27, setSlotCmdRateRoll, Basic::Angle)        // Commanded roll rate (sets RATE_SERVO)
+    ON_SLOT(24, setSlotCmdRate, basic::List)             // Commanded rate vector (rad/sec) [ az el roll ] (sets RATE_SERVO)
+    ON_SLOT(25, setSlotCmdRateAzimuth, basic::Angle)     // Commanded azimuth rate (sets RATE_SERVO)
+    ON_SLOT(26, setSlotCmdRateElevation, basic::Angle)   // Commanded elevation rate (sets RATE_SERVO)
+    ON_SLOT(27, setSlotCmdRateRoll, basic::Angle)        // Commanded roll rate (sets RATE_SERVO)
 
-    ON_SLOT(28, setSlotTerrainOcculting, Basic::Number)  // Enable terrain occulting (default: false)
-    ON_SLOT(29, setSlotCheckHorizon, Basic::Number)      // Enable horizon masking check (default: true)
-    ON_SLOT(30, setSlotPlayerTypes, Basic::PairStream)   // Player of interest types (default: 0 )
+    ON_SLOT(28, setSlotTerrainOcculting, basic::Number)  // Enable terrain occulting (default: false)
+    ON_SLOT(29, setSlotCheckHorizon, basic::Number)      // Enable horizon masking check (default: true)
+    ON_SLOT(30, setSlotPlayerTypes, basic::PairStream)   // Player of interest types (default: 0 )
                                                          //    types: { "air" "ground" "weapon" "ship" "building" "lifeform" }
-    ON_SLOT(31, setSlotMaxPlayers, Basic::Number)        // Max number of players of interest (default: 0)
-    ON_SLOT(32, setSlotMaxRange2PlayersOfInterest, Basic::Distance) // Max range to players of interest or zero for all (default: 0)
-    ON_SLOT(33, setSlotMaxAngle2PlayersOfInterest, Basic::Angle)    // Max angle of gimbal boresight to players of interest or zero for all (default: 0)
-    ON_SLOT(34, setSlotLocalPlayersOfInterestOnly, Basic::Number)   // Sets the local only players of interest flag (default: false)
+    ON_SLOT(31, setSlotMaxPlayers, basic::Number)        // Max number of players of interest (default: 0)
+    ON_SLOT(32, setSlotMaxRange2PlayersOfInterest, basic::Distance) // Max range to players of interest or zero for all (default: 0)
+    ON_SLOT(33, setSlotMaxAngle2PlayersOfInterest, basic::Angle)    // Max angle of gimbal boresight to players of interest or zero for all (default: 0)
+    ON_SLOT(34, setSlotLocalPlayersOfInterestOnly, basic::Number)   // Sets the local only players of interest flag (default: false)
 
-    ON_SLOT(35, setSlotUseWorldCoordinates, Basic::Number)   // Using player of interest's world (ECEF) coordinate system
-    ON_SLOT(36,setSlotUseOwnHeadingOnly,Basic::Number)
+    ON_SLOT(35, setSlotUseWorldCoordinates, basic::Number)   // Using player of interest's world (ECEF) coordinate system
+    ON_SLOT(36,setSlotUseOwnHeadingOnly,basic::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -162,14 +162,14 @@ void Gimbal::initData()
    cmdPos.set(0,0,0);
    location.set(0,0,0);
 
-   cmdRate.set((Basic::Angle::D2RCC *   0.0), (Basic::Angle::D2RCC *   0.0), (Basic::Angle::D2RCC *   0.0));
-   maxRate.set((Basic::Angle::D2RCC * 120.0), (Basic::Angle::D2RCC * 120.0), (Basic::Angle::D2RCC * 120.0));
+   cmdRate.set((basic::Angle::D2RCC *   0.0), (basic::Angle::D2RCC *   0.0), (basic::Angle::D2RCC *   0.0));
+   maxRate.set((basic::Angle::D2RCC * 120.0), (basic::Angle::D2RCC * 120.0), (basic::Angle::D2RCC * 120.0));
 
    atLimit = false;
    fastSlew = true;
 
-   lowLimits.set( (Basic::Angle::D2RCC * -720.0), (Basic::Angle::D2RCC * -720.0), (Basic::Angle::D2RCC * -720.0));   // default: no limits
-   highLimits.set((Basic::Angle::D2RCC *  720.0), (Basic::Angle::D2RCC *  720.0), (Basic::Angle::D2RCC *  720.0));    // default: no limits
+   lowLimits.set( (basic::Angle::D2RCC * -720.0), (basic::Angle::D2RCC * -720.0), (basic::Angle::D2RCC * -720.0));   // default: no limits
+   highLimits.set((basic::Angle::D2RCC *  720.0), (basic::Angle::D2RCC *  720.0), (basic::Angle::D2RCC *  720.0));    // default: no limits
 
    initPos = pos;
    initCmdRate = cmdRate;
@@ -277,10 +277,10 @@ bool Gimbal::onRfEmissionEvent(Emission* const em)
    }
    else {
       // Pass it down to all of our subcomponents
-      Basic::PairStream* subcomponents = getComponents();
+      basic::PairStream* subcomponents = getComponents();
       if (subcomponents != nullptr) {
-         for (Basic::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
-            Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+         for (basic::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
+            basic::Pair* pair = static_cast<basic::Pair*>(item->getValue());
             Gimbal* sc = dynamic_cast<Gimbal*>( pair->object() );
             if (sc != nullptr && sc->getPowerSwitch() != System::PWR_OFF) sc->onRfEmissionEvent(em);
          }
@@ -314,7 +314,7 @@ bool Gimbal::fromPlayerOfInterest(const Emission* const em)
 //------------------------------------------------------------------------------
 double Gimbal::getEarthRadius() const
 {
-   double erad = Basic::Nav::ERAD60 * Basic::Distance::NM2M;
+   double erad = basic::Nav::ERAD60 * basic::Distance::NM2M;
    const Player* own = getOwnship();
    if (own != nullptr) {
       erad = own->getEarthRadius();
@@ -339,9 +339,9 @@ void Gimbal::servoController(const double dt)
 
          // position servo: drive the gimbal toward the commanded position
          rate1 = cmdPos - pos;
-         rate1[AZ_IDX]   = Basic::Angle::aepcdRad(rate1[AZ_IDX]);
-         rate1[ELEV_IDX] = Basic::Angle::aepcdRad(rate1[ELEV_IDX]);
-         rate1[ROLL_IDX] = Basic::Angle::aepcdRad(rate1[ROLL_IDX]);
+         rate1[AZ_IDX]   = basic::Angle::aepcdRad(rate1[AZ_IDX]);
+         rate1[ELEV_IDX] = basic::Angle::aepcdRad(rate1[ELEV_IDX]);
+         rate1[ROLL_IDX] = basic::Angle::aepcdRad(rate1[ROLL_IDX]);
 
          // ---
          // rate1 is radians per frame (step)
@@ -383,9 +383,9 @@ void Gimbal::servoController(const double dt)
       //    newPos = pos{old} + dt*rate
       // ---
       osg::Vec3d newPos = pos + (rate*dt);
-      newPos[AZ_IDX]   = Basic::Angle::aepcdRad(newPos[AZ_IDX]);
-      newPos[ELEV_IDX] = Basic::Angle::aepcdRad(newPos[ELEV_IDX]);
-      newPos[ROLL_IDX] = Basic::Angle::aepcdRad(newPos[ROLL_IDX]);
+      newPos[AZ_IDX]   = basic::Angle::aepcdRad(newPos[AZ_IDX]);
+      newPos[ELEV_IDX] = basic::Angle::aepcdRad(newPos[ELEV_IDX]);
+      newPos[ROLL_IDX] = basic::Angle::aepcdRad(newPos[ROLL_IDX]);
 
       // ---
       // limit gimbal's azimuth position
@@ -396,13 +396,13 @@ void Gimbal::servoController(const double dt)
       // ---
       bool azLimit = false;
       if (highLimits[AZ_IDX] >= -PI && highLimits[AZ_IDX] <= PI) {
-         if ( Basic::Angle::aepcdRad(highLimits[AZ_IDX] - newPos[AZ_IDX]) <= 0.0f ) {
+         if ( basic::Angle::aepcdRad(highLimits[AZ_IDX] - newPos[AZ_IDX]) <= 0.0f ) {
             newPos[AZ_IDX] = highLimits[AZ_IDX];
             azLimit = true;
          }
       }
       if (lowLimits[AZ_IDX] >= -PI && lowLimits[AZ_IDX] <= PI) {
-         if ( Basic::Angle::aepcdRad(lowLimits[AZ_IDX] - newPos[AZ_IDX]) >= 0.0f) {
+         if ( basic::Angle::aepcdRad(lowLimits[AZ_IDX] - newPos[AZ_IDX]) >= 0.0f) {
             newPos[AZ_IDX] = lowLimits[AZ_IDX];
             azLimit = true;
          }
@@ -417,13 +417,13 @@ void Gimbal::servoController(const double dt)
       // ---
       bool elLimit = false;
       if (highLimits[ELEV_IDX] >= -PI && highLimits[ELEV_IDX] <= PI) {
-         if ( Basic::Angle::aepcdRad(highLimits[ELEV_IDX] - newPos[ELEV_IDX]) <= 0.0f ) {
+         if ( basic::Angle::aepcdRad(highLimits[ELEV_IDX] - newPos[ELEV_IDX]) <= 0.0f ) {
             newPos[ELEV_IDX] = highLimits[ELEV_IDX];
             elLimit = true;
          }
       }
       if (lowLimits[ELEV_IDX] >= -PI && lowLimits[ELEV_IDX] <= PI) {
-         if ( Basic::Angle::aepcdRad(lowLimits[ELEV_IDX] - newPos[ELEV_IDX]) >= 0.0f) {
+         if ( basic::Angle::aepcdRad(lowLimits[ELEV_IDX] - newPos[ELEV_IDX]) >= 0.0f) {
             newPos[ELEV_IDX] = lowLimits[ELEV_IDX];
             elLimit = true;
          }
@@ -438,13 +438,13 @@ void Gimbal::servoController(const double dt)
       // ---
       bool rollLimit = false;
       if (highLimits[ROLL_IDX] >= -PI && highLimits[ROLL_IDX] <= PI) {
-         if ( Basic::Angle::aepcdRad(highLimits[ROLL_IDX] - newPos[ROLL_IDX]) <= 0.0f ) {
+         if ( basic::Angle::aepcdRad(highLimits[ROLL_IDX] - newPos[ROLL_IDX]) <= 0.0f ) {
             newPos[ROLL_IDX] = highLimits[ROLL_IDX];
             rollLimit = true;
          }
       }
       if (lowLimits[ROLL_IDX] >= -PI && lowLimits[ROLL_IDX] <= PI) {
-         if ( Basic::Angle::aepcdRad(lowLimits[ROLL_IDX] - newPos[ROLL_IDX]) >= 0.0f) {
+         if ( basic::Angle::aepcdRad(lowLimits[ROLL_IDX] - newPos[ROLL_IDX]) >= 0.0f) {
             newPos[ROLL_IDX] = lowLimits[ROLL_IDX];
             rollLimit = true;
          }
@@ -465,17 +465,17 @@ void Gimbal::servoController(const double dt)
 //------------------------------------------------------------------------------
 double Gimbal::getAzimuthD() const
 {
-   return pos[AZ_IDX] * Basic::Angle::R2DCC;
+   return pos[AZ_IDX] * basic::Angle::R2DCC;
 }
 
 double Gimbal::getElevationD() const
 {
-   return pos[ELEV_IDX] * Basic::Angle::R2DCC;
+   return pos[ELEV_IDX] * basic::Angle::R2DCC;
 }
 
 double Gimbal::getRollD() const
 {
-   return pos[ROLL_IDX] * Basic::Angle::R2DCC;
+   return pos[ROLL_IDX] * basic::Angle::R2DCC;
 }
 
 void Gimbal::getAzimuthLimits(double* const leftLim, double* const rightLim) const
@@ -693,9 +693,9 @@ bool Gimbal::setCmdPos(const osg::Vec3d& p)
    // Limit range from -pi to pi
    // ---
    osg::Vec3d newPos = p;
-   newPos[AZ_IDX]   = Basic::Angle::aepcdRad(newPos[AZ_IDX]);
-   newPos[ELEV_IDX] = Basic::Angle::aepcdRad(newPos[ELEV_IDX]);
-   newPos[ROLL_IDX] = Basic::Angle::aepcdRad(newPos[ROLL_IDX]);
+   newPos[AZ_IDX]   = basic::Angle::aepcdRad(newPos[AZ_IDX]);
+   newPos[ELEV_IDX] = basic::Angle::aepcdRad(newPos[ELEV_IDX]);
+   newPos[ROLL_IDX] = basic::Angle::aepcdRad(newPos[ROLL_IDX]);
 
    // ---
    // limit commanded azimuth position
@@ -705,12 +705,12 @@ bool Gimbal::setCmdPos(const osg::Vec3d& p)
    //     (unlimited if the limit is greater than 180 deg)
    // ---
    if (highLimits[AZ_IDX] >= -PI && highLimits[AZ_IDX] <= PI) {
-      if ( Basic::Angle::aepcdRad(highLimits[AZ_IDX] - newPos[AZ_IDX]) <= 0.0f ) {
+      if ( basic::Angle::aepcdRad(highLimits[AZ_IDX] - newPos[AZ_IDX]) <= 0.0f ) {
          newPos[AZ_IDX] = highLimits[AZ_IDX];
       }
    }
    if (lowLimits[AZ_IDX] >= -PI && lowLimits[AZ_IDX] <= PI) {
-      if ( Basic::Angle::aepcdRad(lowLimits[AZ_IDX] - newPos[AZ_IDX]) >= 0.0f) {
+      if ( basic::Angle::aepcdRad(lowLimits[AZ_IDX] - newPos[AZ_IDX]) >= 0.0f) {
          newPos[AZ_IDX] = lowLimits[AZ_IDX];
       }
    }
@@ -723,12 +723,12 @@ bool Gimbal::setCmdPos(const osg::Vec3d& p)
    //     (unlimited if the limit is greater than 180 deg)
    // ---
    if (highLimits[ELEV_IDX] >= -PI && highLimits[ELEV_IDX] <= PI) {
-      if ( Basic::Angle::aepcdRad(highLimits[ELEV_IDX] - newPos[ELEV_IDX]) <= 0.0f ) {
+      if ( basic::Angle::aepcdRad(highLimits[ELEV_IDX] - newPos[ELEV_IDX]) <= 0.0f ) {
          newPos[ELEV_IDX] = highLimits[ELEV_IDX];
       }
    }
    if (lowLimits[ELEV_IDX] >= -PI && lowLimits[ELEV_IDX] <= PI) {
-      if ( Basic::Angle::aepcdRad(lowLimits[ELEV_IDX] - newPos[ELEV_IDX]) >= 0.0f) {
+      if ( basic::Angle::aepcdRad(lowLimits[ELEV_IDX] - newPos[ELEV_IDX]) >= 0.0f) {
          newPos[ELEV_IDX] = lowLimits[ELEV_IDX];
       }
    }
@@ -741,12 +741,12 @@ bool Gimbal::setCmdPos(const osg::Vec3d& p)
    //     (unlimited if the limit is greater than 180 deg)
    // ---
    if (highLimits[ROLL_IDX] >= -PI && highLimits[ROLL_IDX] <= PI) {
-      if ( Basic::Angle::aepcdRad(highLimits[ROLL_IDX] - newPos[ROLL_IDX]) <= 0.0f ) {
+      if ( basic::Angle::aepcdRad(highLimits[ROLL_IDX] - newPos[ROLL_IDX]) <= 0.0f ) {
          newPos[ROLL_IDX] = highLimits[ROLL_IDX];
       }
    }
    if (lowLimits[ROLL_IDX] >= -PI && lowLimits[ROLL_IDX] <= PI) {
-      if ( Basic::Angle::aepcdRad(lowLimits[ROLL_IDX] - newPos[ROLL_IDX]) >= 0.0f) {
+      if ( basic::Angle::aepcdRad(lowLimits[ROLL_IDX] - newPos[ROLL_IDX]) >= 0.0f) {
          newPos[ROLL_IDX] = lowLimits[ROLL_IDX];
       }
    }
@@ -792,7 +792,7 @@ bool Gimbal::setLocation(const double x, const double y, const double z)
 //------------------------------------------------------------------------------
 
 // setSlotType() -- calls setType()
-bool Gimbal::setSlotType(const Basic::String* const msg)
+bool Gimbal::setSlotType(const basic::String* const msg)
 {
     if (msg == nullptr) return false;
 
@@ -804,7 +804,7 @@ bool Gimbal::setSlotType(const Basic::String* const msg)
 }
 
 // setSlotLocation() -
-bool Gimbal::setSlotLocation(const Basic::List* const msg)
+bool Gimbal::setSlotLocation(const basic::List* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -816,7 +816,7 @@ bool Gimbal::setSlotLocation(const Basic::List* const msg)
 }
 
 // setSlotPosition() - Initial positon vector (radians) [ az el roll ]
-bool Gimbal::setSlotPosition(const Basic::List* const msg)
+bool Gimbal::setSlotPosition(const basic::List* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -830,11 +830,11 @@ bool Gimbal::setSlotPosition(const Basic::List* const msg)
 }
 
 // setSlotPosAzimuth() - Initial azimuth positon
-bool Gimbal::setSlotPosAzimuth(const Basic::Angle* const msg)
+bool Gimbal::setSlotPosAzimuth(const basic::Angle* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-       const double az = Basic::Radians::convertStatic(*msg);
+       const double az = basic::Radians::convertStatic(*msg);
        ok = setPosition(az, getElevation(), getRoll());
        if (ok) initPos = pos;
    }
@@ -842,11 +842,11 @@ bool Gimbal::setSlotPosAzimuth(const Basic::Angle* const msg)
 }
 
 // setSlotPosElevation() - Initial elevation positon
-bool Gimbal::setSlotPosElevation(const Basic::Angle* const msg)
+bool Gimbal::setSlotPosElevation(const basic::Angle* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-       const double el = Basic::Radians::convertStatic(*msg);
+       const double el = basic::Radians::convertStatic(*msg);
        ok = setPosition(getAzimuth(), el, getRoll());
        if (ok) initPos = pos;
    }
@@ -854,11 +854,11 @@ bool Gimbal::setSlotPosElevation(const Basic::Angle* const msg)
 }
 
 // setSlotPosRoll() - Initial roll positon
-bool Gimbal::setSlotPosRoll(const Basic::Angle* const msg)
+bool Gimbal::setSlotPosRoll(const basic::Angle* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-       const double roll = Basic::Radians::convertStatic(*msg);
+       const double roll = basic::Radians::convertStatic(*msg);
        ok = setPosition(getAzimuth(), getElevation(), roll);
        if (ok) initPos = pos;
    }
@@ -866,7 +866,7 @@ bool Gimbal::setSlotPosRoll(const Basic::Angle* const msg)
 }
 
 // setSlotAzimuthLimits() - Azimuth limit vector (radians) [ left right ]
-bool Gimbal::setSlotAzimuthLimits(const Basic::List* const msg)
+bool Gimbal::setSlotAzimuthLimits(const basic::List* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
@@ -878,33 +878,33 @@ bool Gimbal::setSlotAzimuthLimits(const Basic::List* const msg)
 }
 
 // setSlotAzimuthLimitLeft() - Left azimuth limit
-bool Gimbal::setSlotAzimuthLimitLeft(const Basic::Angle* const msg)
+bool Gimbal::setSlotAzimuthLimitLeft(const basic::Angle* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
         double leftLim, rightLim;
         getAzimuthLimits(&leftLim, &rightLim);
-        const double value = Basic::Radians::convertStatic(*msg);
+        const double value = basic::Radians::convertStatic(*msg);
         ok = setAzimuthLimits(value, rightLim);
     }
     return ok;
 }
 
 // setSlotAzimuthLimitRight() - Right azimuth limit
-bool Gimbal::setSlotAzimuthLimitRight(const Basic::Angle* const msg)
+bool Gimbal::setSlotAzimuthLimitRight(const basic::Angle* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
         double leftLim, rightLim;
         getAzimuthLimits(&leftLim, &rightLim);
-        const double value = Basic::Radians::convertStatic(*msg);
+        const double value = basic::Radians::convertStatic(*msg);
         ok = setAzimuthLimits(leftLim, value);
     }
     return ok;
 }
 
 // setSlotElevationLimits() - calls setElevationLimits()
-bool Gimbal::setSlotElevationLimits(const Basic::List* const numList)
+bool Gimbal::setSlotElevationLimits(const basic::List* const numList)
 {
     bool ok = false;
     if (numList != nullptr) {
@@ -916,26 +916,26 @@ bool Gimbal::setSlotElevationLimits(const Basic::List* const numList)
 }
 
 // setSlotElevationLower() - Lower elevation limit
-bool Gimbal::setSlotElevationLower(const Basic::Angle* const msg)
+bool Gimbal::setSlotElevationLower(const basic::Angle* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
         double lowerLim, upperLim;
         getElevationLimits(&lowerLim, &upperLim);
-        const double value = Basic::Radians::convertStatic(*msg);
+        const double value = basic::Radians::convertStatic(*msg);
         ok = setElevationLimits(value, upperLim);
     }
     return ok;
 }
 
 // setSlotElevationUpper() - Upper elevation limit
-bool Gimbal::setSlotElevationUpper(const Basic::Angle* const msg)
+bool Gimbal::setSlotElevationUpper(const basic::Angle* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
         double lowerLim, upperLim;
         getElevationLimits(&lowerLim, &upperLim);
-        const double value = Basic::Radians::convertStatic(*msg);
+        const double value = basic::Radians::convertStatic(*msg);
         ok = setElevationLimits(lowerLim, value);
     }
     return ok;
@@ -943,7 +943,7 @@ bool Gimbal::setSlotElevationUpper(const Basic::Angle* const msg)
 
 
 // setSlotRollLimits() - calls setRollLimits()
-bool Gimbal::setSlotRollLimits(const Basic::List* const numList)
+bool Gimbal::setSlotRollLimits(const basic::List* const numList)
 {
     bool ok = false;
     double values[2];
@@ -955,33 +955,33 @@ bool Gimbal::setSlotRollLimits(const Basic::List* const numList)
 }
 
 // setSlotRollLimitLower() - Lower roll limit
-bool Gimbal::setSlotRollLimitLower(const Basic::Angle* const msg)
+bool Gimbal::setSlotRollLimitLower(const basic::Angle* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
         double lowerLim, upperLim;
         getRollLimits(&lowerLim, &upperLim);
-        const double value = Basic::Radians::convertStatic(*msg);
+        const double value = basic::Radians::convertStatic(*msg);
         ok = setRollLimits(value, upperLim);
     }
     return ok;
 }
 
 // setSlotRollLimitUpper() - Upper roll limit
-bool Gimbal::setSlotRollLimitUpper(const Basic::Angle* const msg)
+bool Gimbal::setSlotRollLimitUpper(const basic::Angle* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
         double lowerLim, upperLim;
         getRollLimits(&lowerLim, &upperLim);
-        const double value = Basic::Radians::convertStatic(*msg);
+        const double value = basic::Radians::convertStatic(*msg);
         ok = setRollLimits(lowerLim, value);
     }
     return ok;
 }
 
 // setSlotMaxRates() -- calls setMaxRates()
-bool Gimbal::setSlotMaxRates(const Basic::List* const numList)
+bool Gimbal::setSlotMaxRates(const basic::List* const numList)
 {
     bool ok = false;
     if (numList != nullptr) {
@@ -994,47 +994,47 @@ bool Gimbal::setSlotMaxRates(const Basic::List* const numList)
     return ok;
 }
 
-// setSlotMaxRateAzimuth() - Max "mechanical" azimuth rate (Basic::Angle/sec)
-bool Gimbal::setSlotMaxRateAzimuth(const Basic::Angle* const msg)
+// setSlotMaxRateAzimuth() - Max "mechanical" azimuth rate (basic::Angle/sec)
+bool Gimbal::setSlotMaxRateAzimuth(const basic::Angle* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
         double azMaxRate, ezMaxRate, rollMaxRate;
         getMaxRates(&azMaxRate, &ezMaxRate, &rollMaxRate);
-        const double value = Basic::Radians::convertStatic(*msg);
+        const double value = basic::Radians::convertStatic(*msg);
         ok = setMaxRates(value, ezMaxRate, rollMaxRate);
     }
     return ok;
 }
 
-// setSlotMaxRateElevation() - Max "mechanical" elevation rate (Basic::Angle/sec)
-bool Gimbal::setSlotMaxRateElevation(const Basic::Angle* const msg)
+// setSlotMaxRateElevation() - Max "mechanical" elevation rate (basic::Angle/sec)
+bool Gimbal::setSlotMaxRateElevation(const basic::Angle* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
         double azMaxRate, ezMaxRate, rollMaxRate;
         getMaxRates(&azMaxRate, &ezMaxRate, &rollMaxRate);
-        const double value = Basic::Radians::convertStatic(*msg);
+        const double value = basic::Radians::convertStatic(*msg);
         ok = setMaxRates(azMaxRate, value, rollMaxRate);
     }
     return ok;
 }
 
-// setSlotMaxRateRoll() - Max "mechanical" roll rate (Basic::Angle/sec)
-bool Gimbal::setSlotMaxRateRoll(const Basic::Angle* const msg)
+// setSlotMaxRateRoll() - Max "mechanical" roll rate (basic::Angle/sec)
+bool Gimbal::setSlotMaxRateRoll(const basic::Angle* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
         double azMaxRate, ezMaxRate, rollMaxRate;
         getMaxRates(&azMaxRate, &ezMaxRate, &rollMaxRate);
-        const double value = Basic::Radians::convertStatic(*msg);
+        const double value = basic::Radians::convertStatic(*msg);
         ok = setMaxRates(azMaxRate, ezMaxRate, value);
     }
     return ok;
 }
 
 // setSlotCmdPos() -- calls setCmdPos()
-bool Gimbal::setSlotCmdPos(const Basic::List* const numList)
+bool Gimbal::setSlotCmdPos(const basic::List* const numList)
 {
     bool ok = false;
     if (numList != nullptr) {
@@ -1049,11 +1049,11 @@ bool Gimbal::setSlotCmdPos(const Basic::List* const numList)
 }
 
 // setSlotCmdPosAzimuth - Commanded azimuth position  (sets POSITION_SERVO)
-bool Gimbal::setSlotCmdPosAzimuth(const Basic::Angle* const msg)
+bool Gimbal::setSlotCmdPosAzimuth(const basic::Angle* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
-        const double value = Basic::Radians::convertStatic(*msg);
+        const double value = basic::Radians::convertStatic(*msg);
         ok = setCmdPos(value, getCmdElev(), getCmdRoll());
         if (ok) initCmdPos = cmdPos;
     }
@@ -1061,11 +1061,11 @@ bool Gimbal::setSlotCmdPosAzimuth(const Basic::Angle* const msg)
 }
 
 // setSlotCmdPosElevation() - Commanded elevation position (sets POSITION_SERVO)
-bool Gimbal::setSlotCmdPosElevation(const Basic::Angle* const msg)
+bool Gimbal::setSlotCmdPosElevation(const basic::Angle* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
-        const double value = Basic::Radians::convertStatic(*msg);
+        const double value = basic::Radians::convertStatic(*msg);
         ok = setCmdPos(getCmdAz(), value, getCmdRoll());
         if (ok) initCmdPos = cmdPos;
     }
@@ -1073,11 +1073,11 @@ bool Gimbal::setSlotCmdPosElevation(const Basic::Angle* const msg)
 }
 
 // setSlotCmdPosRoll() - Commanded roll position  (sets POSITION_SERVO)
-bool Gimbal::setSlotCmdPosRoll(const Basic::Angle* const msg)
+bool Gimbal::setSlotCmdPosRoll(const basic::Angle* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
-        const double value = Basic::Radians::convertStatic(*msg);
+        const double value = basic::Radians::convertStatic(*msg);
         ok = setCmdPos(getCmdAz(), getCmdElev(), value);
         if (ok) initCmdPos = cmdPos;
     }
@@ -1085,7 +1085,7 @@ bool Gimbal::setSlotCmdPosRoll(const Basic::Angle* const msg)
 }
 
 // setSlotCmdRate() -- calls setCmdRate()
-bool Gimbal::setSlotCmdRate(const Basic::List* const numList)
+bool Gimbal::setSlotCmdRate(const basic::List* const numList)
 {
    bool ok = false;
    if (numList != nullptr) {
@@ -1099,11 +1099,11 @@ bool Gimbal::setSlotCmdRate(const Basic::List* const numList)
 }
 
 // setSlotCmdRateAzimuth() - Commanded azimuth rate (sets RATE_SERVO)
-bool Gimbal::setSlotCmdRateAzimuth(const Basic::Angle* const msg)
+bool Gimbal::setSlotCmdRateAzimuth(const basic::Angle* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
-        const double value = Basic::Radians::convertStatic(*msg);
+        const double value = basic::Radians::convertStatic(*msg);
         ok = setCmdRate(value, getCmdElevRate(), getCmdRollRate());
         if (ok) initCmdRate = cmdRate;
     }
@@ -1111,11 +1111,11 @@ bool Gimbal::setSlotCmdRateAzimuth(const Basic::Angle* const msg)
 }
 
 // setSlotCmdRateElevation() - Commanded elevation rate (sets RATE_SERVO)
-bool Gimbal::setSlotCmdRateElevation(const Basic::Angle* const msg)
+bool Gimbal::setSlotCmdRateElevation(const basic::Angle* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
-        const double value = Basic::Radians::convertStatic(*msg);
+        const double value = basic::Radians::convertStatic(*msg);
         ok = setCmdRate(getCmdAzRate(), value, getCmdRollRate());
         if (ok) initCmdRate = cmdRate;
     }
@@ -1123,11 +1123,11 @@ bool Gimbal::setSlotCmdRateElevation(const Basic::Angle* const msg)
 }
 
 // setSlotCmdRateRoll() - Commanded roll rate (sets RATE_SERVO)
-bool Gimbal::setSlotCmdRateRoll(const Basic::Angle* const msg)
+bool Gimbal::setSlotCmdRateRoll(const basic::Angle* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
-        const double value = Basic::Radians::convertStatic(*msg);
+        const double value = basic::Radians::convertStatic(*msg);
         ok = setCmdRate(getCmdAzRate(), getCmdElevRate(), value);
         if (ok) initCmdRate = cmdRate;
     }
@@ -1135,7 +1135,7 @@ bool Gimbal::setSlotCmdRateRoll(const Basic::Angle* const msg)
 }
 
 // Enable target terrain occulting (default: false)
-bool Gimbal::setSlotTerrainOcculting(const Basic::Number* const msg)
+bool Gimbal::setSlotTerrainOcculting(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1145,7 +1145,7 @@ bool Gimbal::setSlotTerrainOcculting(const Basic::Number* const msg)
 }
 
 // Enable horizon masking check (default: true)
-bool Gimbal::setSlotCheckHorizon(const Basic::Number* const msg)
+bool Gimbal::setSlotCheckHorizon(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1155,15 +1155,15 @@ bool Gimbal::setSlotCheckHorizon(const Basic::Number* const msg)
 }
 
 // Player of interest types (default: 0 )
-bool Gimbal::setSlotPlayerTypes(const Basic::PairStream* const msg)
+bool Gimbal::setSlotPlayerTypes(const basic::PairStream* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
       unsigned int mask = 0;
-      const Basic::List::Item* item = msg->getFirstItem();
+      const basic::List::Item* item = msg->getFirstItem();
       while (item != nullptr) {
-         const Basic::Pair* pair = static_cast<const Basic::Pair*>(item->getValue());
-         const Basic::String* type = dynamic_cast<const Basic::String*>( pair->object() );
+         const basic::Pair* pair = static_cast<const basic::Pair*>(item->getValue());
+         const basic::String* type = dynamic_cast<const basic::String*>( pair->object() );
          if (type != nullptr) {
             if ( lcStrcasecmp(*type,"air") == 0 ) {
                mask = (mask | Player::AIR_VEHICLE);
@@ -1195,7 +1195,7 @@ bool Gimbal::setSlotPlayerTypes(const Basic::PairStream* const msg)
 }
 
 // Max number of players of interest (default: 0)
-bool Gimbal::setSlotMaxPlayers(const Basic::Number* const msg)
+bool Gimbal::setSlotMaxPlayers(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1205,29 +1205,29 @@ bool Gimbal::setSlotMaxPlayers(const Basic::Number* const msg)
 }
 
 // Max range to players of interest or zero for all (meters)
-bool Gimbal::setSlotMaxRange2PlayersOfInterest(const Basic::Distance* const msg)
+bool Gimbal::setSlotMaxRange2PlayersOfInterest(const basic::Distance* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
-        const double value = Basic::Meters::convertStatic(*msg);
+        const double value = basic::Meters::convertStatic(*msg);
         ok = setMaxRange2PlayersOfInterest(value);
     }
     return ok;
 }
 
 // Max angle of gimbal boresight to players of interest or zero for all (rad)
-bool Gimbal::setSlotMaxAngle2PlayersOfInterest(const Basic::Angle* const msg)
+bool Gimbal::setSlotMaxAngle2PlayersOfInterest(const basic::Angle* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
-        const double value = Basic::Radians::convertStatic(*msg);
+        const double value = basic::Radians::convertStatic(*msg);
         ok = setMaxAngle2PlayersOfInterest(value);
     }
     return ok;
 }
 
 // Sets the local only players of interest flag
-bool Gimbal::setSlotLocalPlayersOfInterestOnly(const Basic::Number* const msg)
+bool Gimbal::setSlotLocalPlayersOfInterestOnly(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1237,7 +1237,7 @@ bool Gimbal::setSlotLocalPlayersOfInterestOnly(const Basic::Number* const msg)
 }
 
 // Using player of interest's world (ECEF) coordinate system
-bool Gimbal::setSlotUseWorldCoordinates(const Basic::Number* const msg)
+bool Gimbal::setSlotUseWorldCoordinates(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1247,7 +1247,7 @@ bool Gimbal::setSlotUseWorldCoordinates(const Basic::Number* const msg)
 }
 
 // Sets the own heading only flag
-bool Gimbal::setSlotUseOwnHeadingOnly(const Basic::Number* const msg)
+bool Gimbal::setSlotUseOwnHeadingOnly(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1264,7 +1264,7 @@ void Gimbal::updateMatrix()
 {
    // Start with a rotational matrix
    osg::Matrixd mm1;
-   Basic::Nav::computeRotationalMatrix( getRoll(), getElevation(), getAzimuth(), &mm1);
+   basic::Nav::computeRotationalMatrix( getRoll(), getElevation(), getAzimuth(), &mm1);
 
    // Post multiply by a translate to our location
    osg::Matrixd rr;
@@ -1291,9 +1291,9 @@ bool Gimbal::isPositioned(const double tol0) const
    if (tol < 0) tol = defaultTolerance;
 
    osg::Vec3d t;
-   t[AZ_IDX]   = Basic::Angle::aepcdRad( pos[AZ_IDX]   - cmdPos[AZ_IDX] );
-   t[ELEV_IDX] = Basic::Angle::aepcdRad( pos[ELEV_IDX] - cmdPos[ELEV_IDX] );
-   t[ROLL_IDX] = Basic::Angle::aepcdRad( pos[ROLL_IDX] - cmdPos[ROLL_IDX] );
+   t[AZ_IDX]   = basic::Angle::aepcdRad( pos[AZ_IDX]   - cmdPos[AZ_IDX] );
+   t[ELEV_IDX] = basic::Angle::aepcdRad( pos[ELEV_IDX] - cmdPos[ELEV_IDX] );
+   t[ROLL_IDX] = basic::Angle::aepcdRad( pos[ROLL_IDX] - cmdPos[ROLL_IDX] );
    return t.length2() < (tol*tol);
 }
 
@@ -1357,7 +1357,7 @@ void Gimbal::limitVec(osg::Vec3d& vec, const osg::Vec3d& ll, const osg::Vec3d& u
 //------------------------------------------------------------------------------
 // Process the Players-Of-Interest (POI) list
 //------------------------------------------------------------------------------
-unsigned int Gimbal::processPlayersOfInterest(Basic::PairStream* const poi)
+unsigned int Gimbal::processPlayersOfInterest(basic::PairStream* const poi)
 {
    Tdb* tdb0 = new Tdb(maxPlayers, this);
 
@@ -1396,7 +1396,7 @@ bool Gimbal::setCurrentTdb(Tdb* const newTdb)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Basic::Object* Gimbal::getSlotByIndex(const int si)
+basic::Object* Gimbal::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

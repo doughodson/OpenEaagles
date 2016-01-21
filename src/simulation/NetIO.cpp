@@ -79,23 +79,23 @@ END_SLOTTABLE(NetIO)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(NetIO)
-   ON_SLOT(1,  setSlotNetworkID,          Basic::Number)
-   ON_SLOT(2,  setSlotFederationName,     Basic::String)
-   ON_SLOT(3,  setSlotFederateName,       Basic::String)
+   ON_SLOT(1,  setSlotNetworkID,          basic::Number)
+   ON_SLOT(2,  setSlotFederationName,     basic::String)
+   ON_SLOT(3,  setSlotFederateName,       basic::String)
 
-   ON_SLOT(4,  setSlotEnableInput,        Basic::Number)
-   ON_SLOT(5,  setSlotEnableOutput,       Basic::Number)
-   ON_SLOT(6,  setSlotEnableRelay,        Basic::Number)
-   ON_SLOT(7,  setSlotTimeline,           Basic::Identifier)
+   ON_SLOT(4,  setSlotEnableInput,        basic::Number)
+   ON_SLOT(5,  setSlotEnableOutput,       basic::Number)
+   ON_SLOT(6,  setSlotEnableRelay,        basic::Number)
+   ON_SLOT(7,  setSlotTimeline,           basic::Identifier)
 
-   ON_SLOT(8,  setSlotInputEntityTypes,   Basic::PairStream)
-   ON_SLOT(9,  setSlotOutputEntityTypes,  Basic::PairStream)
+   ON_SLOT(8,  setSlotInputEntityTypes,   basic::PairStream)
+   ON_SLOT(9,  setSlotOutputEntityTypes,  basic::PairStream)
 
-   ON_SLOT(10, setSlotMaxTimeDR,          Basic::Time)
-   ON_SLOT(11, setSlotMaxPositionErr,     Basic::Distance)
-   ON_SLOT(12, setSlotMaxOrientationErr,  Basic::Angle)
-   ON_SLOT(13, setSlotMaxAge,             Basic::Time)
-   ON_SLOT(14, setSlotMaxEntityRange,     Basic::Distance)
+   ON_SLOT(10, setSlotMaxTimeDR,          basic::Time)
+   ON_SLOT(11, setSlotMaxPositionErr,     basic::Distance)
+   ON_SLOT(12, setSlotMaxOrientationErr,  basic::Angle)
+   ON_SLOT(13, setSlotMaxAge,             basic::Time)
+   ON_SLOT(14, setSlotMaxEntityRange,     basic::Distance)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -177,9 +177,9 @@ void NetIO::copyData(const NetIO& org, const bool cc)
 
    netID = org.netID;
 
-   const Basic::String* p1 = org.federateName;
+   const basic::String* p1 = org.federateName;
    federateName = p1;
-   const Basic::String* p2 = org.federationName;
+   const basic::String* p2 = org.federationName;
    federationName = p2;
 
    inputFlg = org.inputFlg;
@@ -318,13 +318,13 @@ LCreal NetIO::getMaxAge(const Nib* const) const
 }
 
 // Federate name as String
-const Basic::String* NetIO::getFederateName() const
+const basic::String* NetIO::getFederateName() const
 {
    return federateName;
 }
 
 // Federation name as String
-const Basic::String* NetIO::getFederationName() const
+const basic::String* NetIO::getFederationName() const
 {
    return federationName;
 }
@@ -388,14 +388,14 @@ bool NetIO::setMaxEntityRange(const LCreal v)
 }
 
 // Sets our federate name
-bool NetIO::setFederateName(const Basic::String* const msg)
+bool NetIO::setFederateName(const basic::String* const msg)
 {
    federateName = msg;
    return true;
 }
 
 // Sets our federation name
-bool NetIO::setFederationName(const Basic::String* const msg)
+bool NetIO::setFederationName(const basic::String* const msg)
 {
    federationName = msg;
    return true;
@@ -537,16 +537,16 @@ void NetIO::updateOutputList()
       if ( isOutputEnabled() ) {
 
          // Get the player list pointer (pre-ref()'d)
-         Basic::PairStream* players = getSimulation()->getPlayers();
+         basic::PairStream* players = getSimulation()->getPlayers();
 
          // For all players
          bool finished = false;
          unsigned int newCount = 0;
-         Basic::List::Item* playerItem = players->getFirstItem();
+         basic::List::Item* playerItem = players->getFirstItem();
          while (playerItem != nullptr && !finished) {
 
             // Get player list items
-            Basic::Pair* playerPair = static_cast<Basic::Pair*>(playerItem->getValue());
+            basic::Pair* playerPair = static_cast<basic::Pair*>(playerItem->getValue());
             Player* player = static_cast<Player*>(playerPair->object());
 
             if (player->isLocalPlayer() || (isRelayEnabled() && player->getNetworkID() != getNetworkID()) )  {
@@ -666,7 +666,7 @@ Nib* NetIO::createNewOutputNib(Player* const player)
       // Default DR: World, No rotation, 2nd order linear
       nib->setDeadReckoning(Nib::FVW_DRM);
 
-      const Basic::String* fName = getFederateName();
+      const basic::String* fName = getFederateName();
       if (player->isNetworkedPlayer()) {
          Nib* pNib = player->getNib();
          fName = pNib->getFederateName();
@@ -769,7 +769,7 @@ Player* NetIO::createIPlayer(Nib* const nib)
          // ---
          // Add it to the player list
          // ---
-         Basic::Pair* playerPair = new Basic::Pair(nib->getPlayerName(), player);
+         basic::Pair* playerPair = new basic::Pair(nib->getPlayerName(), player);
          getSimulation()->addNewPlayer(playerPair);
 
          player->reset();
@@ -819,7 +819,7 @@ bool NetIO::addNib2InputList(Nib* const nib)
 //------------------------------------------------------------------------------
 // findNib() -- find the NIB that matches ALL IDs.
 //------------------------------------------------------------------------------
-Nib* NetIO::findNib(const unsigned short playerID, const Basic::String* const federateName, const IoType ioType)
+Nib* NetIO::findNib(const unsigned short playerID, const basic::String* const federateName, const IoType ioType)
 {
    // Define the key
    NibKey key(playerID, federateName);
@@ -844,7 +844,7 @@ Nib* NetIO::findNib(const Player* const player, const IoType ioType)
    Nib* found = nullptr;
    if (player != nullptr) {
       // Get the player's IDs
-      const Basic::String* fName = getFederateName();
+      const basic::String* fName = getFederateName();
       if (player->isNetworkedPlayer()) {
          // If networked, used original IDs
          const Nib* pNib = player->getNib();
@@ -1126,7 +1126,7 @@ void NetIO::testOutputEntityTypes(const unsigned int)
 //------------------------------------------------------------------------------
 
 // Set networkID
-bool NetIO::setSlotNetworkID(const Basic::Number* const num)
+bool NetIO::setSlotNetworkID(const basic::Number* const num)
 {
     bool ok = false;
     if (num != nullptr) {
@@ -1143,19 +1143,19 @@ bool NetIO::setSlotNetworkID(const Basic::Number* const num)
 }
 
 // Sets our federate name
-bool NetIO::setSlotFederateName(const Basic::String* const msg)
+bool NetIO::setSlotFederateName(const basic::String* const msg)
 {
    return setFederateName(msg);
 }
 
 // Sets our federation name
-bool NetIO::setSlotFederationName(const Basic::String* const msg)
+bool NetIO::setSlotFederationName(const basic::String* const msg)
 {
    return setFederationName(msg);
 }
 
 // Set input enable flag
-bool NetIO::setSlotEnableInput(const Basic::Number* const p)
+bool NetIO::setSlotEnableInput(const basic::Number* const p)
 {
     bool ok = false;
     if (p != nullptr) {
@@ -1166,7 +1166,7 @@ bool NetIO::setSlotEnableInput(const Basic::Number* const p)
 }
 
 // Set output enable flag
-bool NetIO::setSlotEnableOutput(const Basic::Number* const p)
+bool NetIO::setSlotEnableOutput(const basic::Number* const p)
 {
     bool ok = false;
     if (p != nullptr) {
@@ -1177,7 +1177,7 @@ bool NetIO::setSlotEnableOutput(const Basic::Number* const p)
 }
 
 // Set relay enable flag
-bool NetIO::setSlotEnableRelay(const Basic::Number* const p)
+bool NetIO::setSlotEnableRelay(const basic::Number* const p)
 {
     bool ok = false;
     if (p != nullptr) {
@@ -1188,7 +1188,7 @@ bool NetIO::setSlotEnableRelay(const Basic::Number* const p)
 }
 
 // Sets the source of the time ( UTC or EXEC )
-bool NetIO::setSlotTimeline(const Basic::Identifier* const p)
+bool NetIO::setSlotTimeline(const basic::Identifier* const p)
 {
     bool ok = false;
     if (p != nullptr) {
@@ -1205,7 +1205,7 @@ bool NetIO::setSlotTimeline(const Basic::Identifier* const p)
 }
 
 // Sets the table of input entity to player mapper objects
-bool NetIO::setSlotInputEntityTypes(Basic::PairStream* const msg)
+bool NetIO::setSlotInputEntityTypes(basic::PairStream* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
@@ -1213,9 +1213,9 @@ bool NetIO::setSlotInputEntityTypes(Basic::PairStream* const msg)
        clearInputEntityTypes();
 
        // Now scan the pair stream and put all Ntm objects into the table.
-       Basic::List::Item* item = msg->getFirstItem();
+       basic::List::Item* item = msg->getFirstItem();
        while (item != nullptr) {
-          Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+          basic::Pair* pair = static_cast<basic::Pair*>(item->getValue());
           Ntm* ntm = dynamic_cast<Ntm*>( pair->object() );
           if (ntm != nullptr) {
              // We have an Ntm object, so put it in the table
@@ -1236,7 +1236,7 @@ bool NetIO::setSlotInputEntityTypes(Basic::PairStream* const msg)
 }
 
 // Sets the table of output entity to player mapper objects
-bool NetIO::setSlotOutputEntityTypes(Basic::PairStream* const msg)
+bool NetIO::setSlotOutputEntityTypes(basic::PairStream* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
@@ -1244,9 +1244,9 @@ bool NetIO::setSlotOutputEntityTypes(Basic::PairStream* const msg)
        clearOutputEntityTypes();
 
        // Now scan the pair stream and put all Ntm objects into the table.
-       Basic::List::Item* item = msg->getFirstItem();
+       basic::List::Item* item = msg->getFirstItem();
        while (item != nullptr) {
-          Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+          basic::Pair* pair = static_cast<basic::Pair*>(item->getValue());
           Ntm* ntm = dynamic_cast<Ntm*>( pair->object() );
           if (ntm != nullptr) {
             // We have an Ntm object, so put it in the table
@@ -1266,55 +1266,55 @@ bool NetIO::setSlotOutputEntityTypes(Basic::PairStream* const msg)
 }
 
 // Sets the mac DR time(s)
-bool NetIO::setSlotMaxTimeDR(const Basic::Time* const msg)
+bool NetIO::setSlotMaxTimeDR(const basic::Time* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      const LCreal time = Basic::Seconds::convertStatic( *msg );
+      const LCreal time = basic::Seconds::convertStatic( *msg );
       ok = setMaxTimeDR( time );
    }
    return ok;
 }
 
 // Sets the max positional error(s)
-bool NetIO::setSlotMaxPositionErr(const Basic::Distance* const msg)
+bool NetIO::setSlotMaxPositionErr(const basic::Distance* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      const LCreal err = Basic::Meters::convertStatic( *msg );
+      const LCreal err = basic::Meters::convertStatic( *msg );
       ok = setMaxPositionErr( err );
    }
    return ok;
 }
 
 // Sets the max orientation error(s)
-bool NetIO::setSlotMaxOrientationErr(const Basic::Angle* const msg)
+bool NetIO::setSlotMaxOrientationErr(const basic::Angle* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      const LCreal err = static_cast<LCreal>(Basic::Radians::convertStatic( *msg ));
+      const LCreal err = static_cast<LCreal>(basic::Radians::convertStatic( *msg ));
       ok = setMaxOrientationErr( err );
    }
    return ok;
 }
 
 // Sets the max age(s)
-bool NetIO::setSlotMaxAge(const Basic::Time* const msg)
+bool NetIO::setSlotMaxAge(const basic::Time* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      const LCreal age = Basic::Seconds::convertStatic( *msg );
+      const LCreal age = basic::Seconds::convertStatic( *msg );
       ok = setMaxAge( age );
    }
    return ok;
 }
 
 // Sets the max entity range(s)
-bool NetIO::setSlotMaxEntityRange(const Basic::Distance* const msg)
+bool NetIO::setSlotMaxEntityRange(const basic::Distance* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      const LCreal rng = Basic::Meters::convertStatic( *msg );
+      const LCreal rng = basic::Meters::convertStatic( *msg );
       ok = setMaxEntityRange( rng );
    }
    return ok;
@@ -1323,7 +1323,7 @@ bool NetIO::setSlotMaxEntityRange(const Basic::Distance* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Basic::Object* NetIO::getSlotByIndex(const int si)
+basic::Object* NetIO::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }
@@ -1346,7 +1346,7 @@ std::ostream& NetIO::serialize(std::ostream& sout, const int i, const bool slots
    sout << std::endl;
 
    {
-      const Basic::String* name = getFederateName();
+      const basic::String* name = getFederateName();
       if (name != nullptr && name->len() > 0) {
          indent(sout,i+j);
          sout << "federateName: ";
@@ -1356,7 +1356,7 @@ std::ostream& NetIO::serialize(std::ostream& sout, const int i, const bool slots
    }
 
    {
-      const Basic::String* name = getFederationName();
+      const basic::String* name = getFederationName();
       if (name != nullptr && name->len() > 0) {
          indent(sout,i+j);
          sout << "federationName: ";
@@ -1417,13 +1417,13 @@ std::ostream& NetIO::serialize(std::ostream& sout, const int i, const bool slots
    sout << "maxPositionError: ( Meters " << maxPositionErr << " )" << std::endl;
 
    indent(sout,i+j);
-   sout << "maxOrientationError: ( Degrees " << (maxOrientationErr*Basic::Angle::R2DCC) << " )" << std::endl;
+   sout << "maxOrientationError: ( Degrees " << (maxOrientationErr*basic::Angle::R2DCC) << " )" << std::endl;
 
    indent(sout,i+j);
    sout << "maxAge: ( Seconds " << maxAge << " )" << std::endl;
 
    indent(sout,i+j);
-   sout << "maxEntityRange: ( NauticalMiles " << (maxEntityRange*Basic::Distance::M2NM) << " )" << std::endl;
+   sout << "maxEntityRange: ( NauticalMiles " << (maxEntityRange*basic::Distance::M2NM) << " )" << std::endl;
 
    BaseClass::serialize(sout,i+j,true);
 
@@ -1528,8 +1528,8 @@ private:
 
    char* nodeFactoryName;     // Factory name for this node
    const Player* tp;          // Template player for this node
-   Basic::List* ntmList;      // List of Ntm objects at this level
-   Basic::List* subnodeList;  // List of NtmOutputNode nodes for players derived this level
+   basic::List* ntmList;      // List of Ntm objects at this level
+   basic::List* subnodeList;  // List of NtmOutputNode nodes for players derived this level
 };
 
 IMPLEMENT_SUBCLASS(NtmOutputNodeStd,"NtmOutputNodeStd")
@@ -1565,8 +1565,8 @@ NtmOutputNodeStd::NtmOutputNodeStd(const Player* const p, const char* const name
       tp = p;
 }
 
-   ntmList = new Basic::List();
-   subnodeList = new Basic::List();
+   ntmList = new basic::List();
+   subnodeList = new basic::List();
 }
 
 void NtmOutputNodeStd::copyData(const NtmOutputNodeStd& org, const bool cc)
@@ -1652,7 +1652,7 @@ const Ntm* NtmOutputNodeStd::findNetworkTypeMapper(const Player* const p) const
 
       // First, we'll search our subnodes to see if they'll find a match
       // (i.e., if it's derived from our node then there may be a better match)
-      const Basic::List::Item* item = subnodeList->getFirstItem();
+      const basic::List::Item* item = subnodeList->getFirstItem();
       while (item != nullptr && result == nullptr) {
          const NtmOutputNodeStd* subnode = static_cast<const NtmOutputNodeStd*>(item->getValue());
          result = subnode->findNetworkTypeMapper(p);
@@ -1664,18 +1664,18 @@ const Ntm* NtmOutputNodeStd::findNetworkTypeMapper(const Player* const p) const
       if (result == nullptr && nodeFactoryName != nullptr) {
 
          // Target player's type string and length
-         const Basic::String* const pType = p->getType();
+         const basic::String* const pType = p->getType();
          const size_t pTypeLen = pType->len();
 
          // Search the NTM for a match with the most matching type string characters,
          // but not more than the target player's type string.
-         const Basic::List::Item* item = ntmList->getFirstItem();
+         const basic::List::Item* item = ntmList->getFirstItem();
          while (item != nullptr && result == nullptr) {
 
             // Get the template player and its type string with length
             const Ntm* tstNtm = static_cast<const Ntm*>(item->getValue());
             const Player* const tp = tstNtm->getTemplatePlayer();
-            const Basic::String* const tpType = tp->getType();
+            const basic::String* const tpType = tp->getType();
             const size_t tpTypeLen = tpType->len();
 
             if (tpTypeLen <= pTypeLen) {
@@ -1718,7 +1718,7 @@ bool NtmOutputNodeStd::add2OurLists(Ntm* const tgtNtm)
       if (ok) {
          // Yes -- check to see if it really belongs to one of our subnodes.
          bool found = false;
-         Basic::List::Item* item = subnodeList->getFirstItem();
+         basic::List::Item* item = subnodeList->getFirstItem();
          while (item != nullptr && !found) {
             NtmOutputNodeStd* subnode = static_cast<NtmOutputNodeStd*>(item->getValue());
             found = subnode->add2OurLists(tgtNtm);
@@ -1763,7 +1763,7 @@ bool NtmOutputNodeStd::checkAndAddNtm(Ntm* const tgtNtm)
          newNode->addNtmSorted(tgtNtm);
 
          // Case #2A : check if any of our subnodes is really a subnode of the new node.
-         Basic::List::Item* item = subnodeList->getFirstItem();
+         basic::List::Item* item = subnodeList->getFirstItem();
          while (item != nullptr) {
             NtmOutputNodeStd* subnode = static_cast<NtmOutputNodeStd*>(item->getValue());
             item = item->getNext();
@@ -1796,23 +1796,23 @@ bool NtmOutputNodeStd::addNtmSorted(Ntm* const newNtm)
       newNtm->ref();
 
       // Create a new List::Item to contain this Ntm
-      Basic::List::Item* newItem = new Basic::List::Item();
+      basic::List::Item* newItem = new basic::List::Item();
       newItem->value = newNtm;
 
       // Get the template player's type string from the 'new' Ntm
       const Player* newP = newNtm->getTemplatePlayer();
-      const Basic::String* newTypeStr = newP->getType();
+      const basic::String* newTypeStr = newP->getType();
       const size_t newTypeLen = newTypeStr->len();
 
       bool inserted = false;
       bool err = false;
-      Basic::List::Item* refItem = ntmList->getFirstItem();
+      basic::List::Item* refItem = ntmList->getFirstItem();
       while (refItem != nullptr && !inserted && !err) {
 
          // Get the ref player's string from the 'ref' Ntm.
          const Ntm* refNtm =  static_cast<const Ntm*>(refItem->getValue());
          const Player* refP = refNtm->getTemplatePlayer();
-         const Basic::String* refTypeStr = refP->getType();
+         const basic::String* refTypeStr = refP->getType();
          const size_t refTypeLen = refTypeStr->len();
 
          // compare to the shortest string length
@@ -1863,7 +1863,7 @@ void NtmOutputNodeStd::print(std::ostream& sout, const int icnt) const
 
    // Print our Ntm objects
    {
-      const Basic::List::Item* item = ntmList->getFirstItem();
+      const basic::List::Item* item = ntmList->getFirstItem();
       while (item != nullptr) {
          const Ntm* ntm = static_cast<const Ntm*>(item->getValue());
          ntm->serialize(sout, icnt+4);
@@ -1873,7 +1873,7 @@ void NtmOutputNodeStd::print(std::ostream& sout, const int icnt) const
 
    // Print our subnodes
    {
-      const Basic::List::Item* item = subnodeList->getFirstItem();
+      const basic::List::Item* item = subnodeList->getFirstItem();
       while (item != nullptr) {
          const NtmOutputNodeStd* subnode = static_cast<const NtmOutputNodeStd*>(item->getValue());
          subnode->print(sout, icnt+4);

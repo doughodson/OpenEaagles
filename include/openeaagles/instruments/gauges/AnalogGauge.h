@@ -48,10 +48,10 @@ public:
 
 protected:
     // slot functions
-    virtual bool setSlotLeftBoundary(const Basic::Number* const newLB);
-    virtual bool setSlotRightBoundary(const Basic::Number* const newRB);
-    virtual bool setSlotIsOutlined(const Basic::Number* const newO);
-    virtual bool setSlotIsVertical(const Basic::Number* const newV);
+    virtual bool setSlotLeftBoundary(const basic::Number* const newLB);
+    virtual bool setSlotRightBoundary(const basic::Number* const newRB);
+    virtual bool setSlotIsOutlined(const basic::Number* const newO);
+    virtual bool setSlotIsVertical(const basic::Number* const newV);
 
 private:
     LCreal gaugePos;                // direction, in inches, that we want to scale our gauge

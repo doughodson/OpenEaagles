@@ -22,10 +22,10 @@ END_SLOTTABLE(IoData)
 
 //  Map slot table to handles
 BEGIN_SLOT_MAP(IoData)
-   ON_SLOT( 1, setSlotNumAI,    Basic::Number)
-   ON_SLOT( 2, setSlotNumAO,    Basic::Number)
-   ON_SLOT( 3, setSlotNumDI,    Basic::Number)
-   ON_SLOT( 4, setSlotNumDO,    Basic::Number)
+   ON_SLOT( 1, setSlotNumAI,    basic::Number)
+   ON_SLOT( 2, setSlotNumAO,    basic::Number)
+   ON_SLOT( 3, setSlotNumDI,    basic::Number)
+   ON_SLOT( 4, setSlotNumDO,    basic::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -343,7 +343,7 @@ bool IoData::setNumDO(const unsigned int num)
 // -----------------------------------------------------------------------------
 
 // numAI: Number of analog inputs (AIs)
-bool IoData::setSlotNumAI(const Basic::Number* const msg)
+bool IoData::setSlotNumAI(const basic::Number* const msg)
 {
    // Null 'msg' is ok, but the value of 'msg' must
    // be greater than or equal to zero.
@@ -362,7 +362,7 @@ bool IoData::setSlotNumAI(const Basic::Number* const msg)
 }
 
 // numAO: Number of analog outputs (AOs)
-bool IoData::setSlotNumAO(const Basic::Number* const msg)
+bool IoData::setSlotNumAO(const basic::Number* const msg)
 {
    // Null 'msg' is ok, but the value of 'msg' must
    // be greater than or equal to zero.
@@ -381,7 +381,7 @@ bool IoData::setSlotNumAO(const Basic::Number* const msg)
 }
 
 // numDI: Number of discrete inputs (DIs)
-bool IoData::setSlotNumDI(const Basic::Number* const msg)
+bool IoData::setSlotNumDI(const basic::Number* const msg)
 {
    // Null 'msg' is ok, but the value of 'msg' must
    // be greater than or equal to zero.
@@ -400,7 +400,7 @@ bool IoData::setSlotNumDI(const Basic::Number* const msg)
 }
 
 // numDO: Number of discrete outputs (DOs)
-bool IoData::setSlotNumDO(const Basic::Number* const msg)
+bool IoData::setSlotNumDO(const basic::Number* const msg)
 {
    // Null 'msg' is ok, but the value of 'msg' must
    // be greater than or equal to zero.
@@ -421,7 +421,7 @@ bool IoData::setSlotNumDO(const Basic::Number* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for Component
 //------------------------------------------------------------------------------
-Basic::Object* IoData::getSlotByIndex(const int si)
+basic::Object* IoData::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

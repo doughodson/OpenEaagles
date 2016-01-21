@@ -5,7 +5,7 @@
 #include "openeaagles/basic/PairStream.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
 namespace Ubf {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(State, "UbfState")
@@ -18,7 +18,7 @@ EMPTY_SERIALIZER(State)
 void State::updateGlobalState(void)
 {
    // Update all my children
-   Basic::PairStream* subcomponents = getComponents();
+   basic::PairStream* subcomponents = getComponents();
    if (subcomponents != nullptr) {
       if (isComponentSelected()) {
          // When we've selected only one
@@ -30,10 +30,10 @@ void State::updateGlobalState(void)
       }
       else {
          // When we should update them all
-         Basic::List::Item* item = subcomponents->getFirstItem();
+         basic::List::Item* item = subcomponents->getFirstItem();
          while (item != nullptr) {
-            Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
-            Basic::Component* obj = static_cast<Basic::Component*>(pair->object());
+            basic::Pair* pair = static_cast<basic::Pair*>(item->getValue());
+            basic::Component* obj = static_cast<basic::Component*>(pair->object());
             State* state = dynamic_cast<State*>(obj);
             if (state != nullptr)
                state->updateGlobalState();
@@ -45,10 +45,10 @@ void State::updateGlobalState(void)
    }
 }
 
-void State::updateState(const Basic::Component* const actor)
+void State::updateState(const basic::Component* const actor)
 {
    // Update all my children
-   Basic::PairStream* subcomponents = getComponents();
+   basic::PairStream* subcomponents = getComponents();
    if (subcomponents != nullptr) {
       if (isComponentSelected()) {
          // When we've selected only one
@@ -60,10 +60,10 @@ void State::updateState(const Basic::Component* const actor)
       }
       else {
          // When we should update them all
-         Basic::List::Item* item = subcomponents->getFirstItem();
+         basic::List::Item* item = subcomponents->getFirstItem();
          while (item != nullptr) {
-            Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
-            Basic::Component* obj = static_cast<Basic::Component*>(pair->object());
+            basic::Pair* pair = static_cast<basic::Pair*>(item->getValue());
+            basic::Component* obj = static_cast<basic::Component*>(pair->object());
             State* state = dynamic_cast<State*>(obj);
             if (state != nullptr)
                state->updateState(actor);
@@ -80,7 +80,7 @@ const State* State::getUbfStateByType(const std::type_info& type) const
 {
    const State* p = this;
    if ( !p->isClassType(type) ) {
-      const Basic::Pair* pair = findByType(type);
+      const basic::Pair* pair = findByType(type);
       if (pair != nullptr) {
          p = dynamic_cast<const State*>( pair->object() );
       }
@@ -90,6 +90,6 @@ const State* State::getUbfStateByType(const std::type_info& type) const
 
 
 } // End Ubf namespace
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace
 

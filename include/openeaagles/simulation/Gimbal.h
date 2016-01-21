@@ -7,7 +7,7 @@
 #include "openeaagles/simulation/System.h"
 
 namespace oe {
-   namespace Basic {
+   namespace basic {
       class Angle;
       class Distance;
       class List;
@@ -237,7 +237,7 @@ public:  // Public section
    virtual bool setOwnHeadingOnly(const bool flg);                         // Use only the ownship player's heading to when transforming between body and local NED
 
    // Process the Players-Of-Interest (POI) list
-   virtual unsigned int processPlayersOfInterest(Basic::PairStream* const poi);
+   virtual unsigned int processPlayersOfInterest(basic::PairStream* const poi);
 
    // Sets the servo mode: { FREEZE_SERVO, RATE_SERVO, POSITION_SERVO }
    // Returns false if the mode could not be changed
@@ -271,68 +271,68 @@ public:  // Public section
    virtual bool onRfEmissionEvent(Emission* const);                      // Handles R/F emission events
 
    // Slot functions
-   virtual bool setSlotType(const Basic::String* const msg);             // Physical gimbal type: "mechanical" or "electronic"
-   virtual bool setSlotLocation(const Basic::List* const msg);           // Relative location vector (meters) [ x y z ]
+   virtual bool setSlotType(const basic::String* const msg);             // Physical gimbal type: "mechanical" or "electronic"
+   virtual bool setSlotLocation(const basic::List* const msg);           // Relative location vector (meters) [ x y z ]
 
-   virtual bool setSlotPosition(const Basic::List* const msg);           // Initial position vector (radians) [ az el roll ]
-   virtual bool setSlotPosAzimuth(const Basic::Angle* const msg);        // Initial azimuth position
-   virtual bool setSlotPosElevation(const Basic::Angle* const msg);      // Initial elevation position
-   virtual bool setSlotPosRoll(const Basic::Angle* const msg);           // Initial roll position
+   virtual bool setSlotPosition(const basic::List* const msg);           // Initial position vector (radians) [ az el roll ]
+   virtual bool setSlotPosAzimuth(const basic::Angle* const msg);        // Initial azimuth position
+   virtual bool setSlotPosElevation(const basic::Angle* const msg);      // Initial elevation position
+   virtual bool setSlotPosRoll(const basic::Angle* const msg);           // Initial roll position
 
-   virtual bool setSlotAzimuthLimits(const Basic::List* const msg);      // Azimuth limit vector (radians) [ left right ]
-   virtual bool setSlotAzimuthLimitLeft(const Basic::Angle* const msg);  // Left azimuth limit
-   virtual bool setSlotAzimuthLimitRight(const Basic::Angle* const msg); // Right azimuth limit
+   virtual bool setSlotAzimuthLimits(const basic::List* const msg);      // Azimuth limit vector (radians) [ left right ]
+   virtual bool setSlotAzimuthLimitLeft(const basic::Angle* const msg);  // Left azimuth limit
+   virtual bool setSlotAzimuthLimitRight(const basic::Angle* const msg); // Right azimuth limit
 
-   virtual bool setSlotElevationLimits(const Basic::List* const msg);    // Elevation limit vector (radians) [ lower upper ]
-   virtual bool setSlotElevationLower(const Basic::Angle* const msg);    // Lower elevation limit
-   virtual bool setSlotElevationUpper(const Basic::Angle* const msg);    // Upper elevation limit
+   virtual bool setSlotElevationLimits(const basic::List* const msg);    // Elevation limit vector (radians) [ lower upper ]
+   virtual bool setSlotElevationLower(const basic::Angle* const msg);    // Lower elevation limit
+   virtual bool setSlotElevationUpper(const basic::Angle* const msg);    // Upper elevation limit
 
-   virtual bool setSlotRollLimits(const Basic::List* const msg);         // Roll limit vector (radians) [ lower upper ]
-   virtual bool setSlotRollLimitLower(const Basic::Angle* const msg);    // Lower roll limit
-   virtual bool setSlotRollLimitUpper(const Basic::Angle* const msg);    // Upper roll limit
+   virtual bool setSlotRollLimits(const basic::List* const msg);         // Roll limit vector (radians) [ lower upper ]
+   virtual bool setSlotRollLimitLower(const basic::Angle* const msg);    // Lower roll limit
+   virtual bool setSlotRollLimitUpper(const basic::Angle* const msg);    // Upper roll limit
 
-   virtual bool setSlotMaxRates(const Basic::List* const msg);           // Max "mechanical" rate vector (rad/sec) [ az el roll ]
-   virtual bool setSlotMaxRateAzimuth(const Basic::Angle* const msg);    // Max "mechanical" azimuth rate (Basic::Angle/sec)
-   virtual bool setSlotMaxRateElevation(const Basic::Angle* const msg);  // Max "mechanical" elevation rate (Basic::Angle/sec)
-   virtual bool setSlotMaxRateRoll(const Basic::Angle* const msg);       // Max "mechanical" roll rate (Basic::Angle/sec)
+   virtual bool setSlotMaxRates(const basic::List* const msg);           // Max "mechanical" rate vector (rad/sec) [ az el roll ]
+   virtual bool setSlotMaxRateAzimuth(const basic::Angle* const msg);    // Max "mechanical" azimuth rate (basic::Angle/sec)
+   virtual bool setSlotMaxRateElevation(const basic::Angle* const msg);  // Max "mechanical" elevation rate (basic::Angle/sec)
+   virtual bool setSlotMaxRateRoll(const basic::Angle* const msg);       // Max "mechanical" roll rate (basic::Angle/sec)
 
-   virtual bool setSlotCmdPos(const Basic::List* const msg);             // Commanded position vector  [ az el roll ] (sets POSITION_SERVO)
-   virtual bool setSlotCmdPosAzimuth(const Basic::Angle* const msg);     // Commanded azimuth position  (sets POSITION_SERVO)
-   virtual bool setSlotCmdPosElevation(const Basic::Angle* const msg);   // Commanded elevation position (sets POSITION_SERVO)
-   virtual bool setSlotCmdPosRoll(const Basic::Angle* const msg);        // Commanded roll position  (sets POSITION_SERVO)
+   virtual bool setSlotCmdPos(const basic::List* const msg);             // Commanded position vector  [ az el roll ] (sets POSITION_SERVO)
+   virtual bool setSlotCmdPosAzimuth(const basic::Angle* const msg);     // Commanded azimuth position  (sets POSITION_SERVO)
+   virtual bool setSlotCmdPosElevation(const basic::Angle* const msg);   // Commanded elevation position (sets POSITION_SERVO)
+   virtual bool setSlotCmdPosRoll(const basic::Angle* const msg);        // Commanded roll position  (sets POSITION_SERVO)
 
-   virtual bool setSlotCmdRate(const Basic::List* const msg);            // Commanded rate vector (rad/sec) [ az el roll ] (sets RATE_SERVO)
-   virtual bool setSlotCmdRateAzimuth(const Basic::Angle* const msg);    // Commanded azimuth rate (sets RATE_SERVO)
-   virtual bool setSlotCmdRateElevation(const Basic::Angle* const msg);  // Commanded elevation rate (sets RATE_SERVO)
-   virtual bool setSlotCmdRateRoll(const Basic::Angle* const msg);       // Commanded roll rate (sets RATE_SERVO)
+   virtual bool setSlotCmdRate(const basic::List* const msg);            // Commanded rate vector (rad/sec) [ az el roll ] (sets RATE_SERVO)
+   virtual bool setSlotCmdRateAzimuth(const basic::Angle* const msg);    // Commanded azimuth rate (sets RATE_SERVO)
+   virtual bool setSlotCmdRateElevation(const basic::Angle* const msg);  // Commanded elevation rate (sets RATE_SERVO)
+   virtual bool setSlotCmdRateRoll(const basic::Angle* const msg);       // Commanded roll rate (sets RATE_SERVO)
 
-   virtual bool setSlotTerrainOcculting(const Basic::Number* const msg); // Enable target terrain occulting (default: false)
-   virtual bool setSlotCheckHorizon(const Basic::Number* const msg);     // Enable horizon masking check (default: true)
+   virtual bool setSlotTerrainOcculting(const basic::Number* const msg); // Enable target terrain occulting (default: false)
+   virtual bool setSlotCheckHorizon(const basic::Number* const msg);     // Enable horizon masking check (default: true)
 
-   virtual bool setSlotPlayerTypes(const Basic::PairStream* const msg);  // Player of interest types (default: 0 )
-   virtual bool setSlotMaxPlayers(const Basic::Number* const msg);       // Max number of players of interest (default: 0)
+   virtual bool setSlotPlayerTypes(const basic::PairStream* const msg);  // Player of interest types (default: 0 )
+   virtual bool setSlotMaxPlayers(const basic::Number* const msg);       // Max number of players of interest (default: 0)
 
    // Max range to players of interest or zero for all (meters)
-   virtual bool setSlotMaxRange2PlayersOfInterest(const Basic::Distance* const msg);
+   virtual bool setSlotMaxRange2PlayersOfInterest(const basic::Distance* const msg);
 
    // Max angle of gimbal boresight to players of interest or zero for all (rad)
-   virtual bool setSlotMaxAngle2PlayersOfInterest(const Basic::Angle* const msg);
+   virtual bool setSlotMaxAngle2PlayersOfInterest(const basic::Angle* const msg);
 
    // Sets the local only players of interest flag
-   virtual bool setSlotLocalPlayersOfInterestOnly(const Basic::Number* const msg);
+   virtual bool setSlotLocalPlayersOfInterestOnly(const basic::Number* const msg);
 
    // Using player of interest's world (ECEF) coordinate system
-   virtual bool setSlotUseWorldCoordinates(const Basic::Number* const msg);
+   virtual bool setSlotUseWorldCoordinates(const basic::Number* const msg);
 
    // Use only the ownship player's heading to when transforming between body and local NED
-   virtual bool setSlotUseOwnHeadingOnly(const Basic::Number* const msg);
+   virtual bool setSlotUseOwnHeadingOnly(const basic::Number* const msg);
 
    static void limitVec(osg::Vec2d& vec, const osg::Vec2d& lim);
    static void limitVec(osg::Vec3d& vec, const osg::Vec3d& lim);
    static void limitVec(osg::Vec2d& vec, const osg::Vec2d& ll, const osg::Vec2d& ul);
    static void limitVec(osg::Vec3d& vec, const osg::Vec3d& ll, const osg::Vec3d& ul);
 
-   bool event(const int event, Basic::Object* const obj = nullptr) override;
+   bool event(const int event, basic::Object* const obj = nullptr) override;
    void reset() override;
 
 protected:
@@ -349,7 +349,7 @@ protected:
    // System Interface -- Callbacks by phase
    void dynamics(const LCreal dt) override;    // Phase 0
 
-   // Basic::Component protected interface
+   // basic::Component protected interface
    bool shutdownNotification() override;
 
 private:
@@ -387,7 +387,7 @@ private:
    bool     useWorld;         // Using player of interest's world coordinates
    bool     ownHeadingOnly;   // Whether only the ownship heading is used by the target data block
 
-   Basic::safe_ptr<Tdb> tdb;  // Current Target Data Block
+   basic::safe_ptr<Tdb> tdb;  // Current Target Data Block
 };
 
 } // End Simulation namespace

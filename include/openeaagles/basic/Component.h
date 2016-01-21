@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: Component
 //------------------------------------------------------------------------------
-#ifndef __oe_Basic_Component_H__
-#define __oe_Basic_Component_H__
+#ifndef __oe_basic_Component_H__
+#define __oe_basic_Component_H__
 
 #include "openeaagles/basic/Object.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 class Identifier;
 class Logger;
@@ -178,7 +178,7 @@ class String;
 //    event tokens must be processed quickly, similar to interrupt handlers.
 //
 //    Standard event tokens are defined in the file, eventTokens.h, which is included
-//    by this Component class and are therefore within the oe::Basic::Component
+//    by this Component class and are therefore within the oe::basic::Component
 //    namespace.  There is a companion file, eventTokens.epp, which can be included
 //    as part of the oe Description Language (EDL) input files.
 //
@@ -440,7 +440,7 @@ private:
    bool shutdown;                   // True if this component is being (or has been) shutdown
 };
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace
 
 

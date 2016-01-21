@@ -30,11 +30,11 @@ public:
     void updateData(const LCreal dt = 0.0) override;
 
 protected:
-    bool setSlotIsDynamic(const Basic::Number* const newD);
-    bool setSlotOuterRadius(const Basic::Number* const x);
-    bool setSlotFilled(const Basic::Number* const x);
+    bool setSlotIsDynamic(const basic::Number* const newD);
+    bool setSlotOuterRadius(const basic::Number* const x);
+    bool setSlotFilled(const basic::Number* const x);
 
-    bool onUpdateRadius(const Basic::Number* const x) override;
+    bool onUpdateRadius(const basic::Number* const x) override;
 
 private:
     bool isDynamic;     // are we setting sweep angle based on value?

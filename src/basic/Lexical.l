@@ -47,8 +47,8 @@ using namespace std;
 /* change the name of the scanner class - results in "basicFlexLexer" */
 %option prefix="basic"
 
-/* derived 'oe::Basic::Lexical' is a subclass of yyFlexLexer */
-%option yyclass="oe::Basic::Lexical"
+/* derived 'oe::basic::Lexical' is a subclass of yyFlexLexer */
+%option yyclass="oe::basic::Lexical"
 
 
 

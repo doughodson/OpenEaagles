@@ -17,9 +17,9 @@ namespace Glut {
 Factory::Factory()
 {}
 
-Basic::Object* Factory::createObj(const char* name)
+basic::Object* Factory::createObj(const char* name)
 {
-    Basic::Object* obj = nullptr;
+    basic::Object* obj = nullptr;
 
     // General graphics support
     if ( std::strcmp(name, GlutDisplay::getFactoryName()) == 0 ) {

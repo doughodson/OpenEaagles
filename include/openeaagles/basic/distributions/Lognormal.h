@@ -1,6 +1,6 @@
 
-#ifndef __oe_Basic_Lognormal_H__
-#define __oe_Basic_Lognormal_H__
+#ifndef __oe_basic_Lognormal_H__
+#define __oe_basic_Lognormal_H__
 
 #include "../Rng.h"
 
@@ -13,7 +13,7 @@
 //
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 class Number;
 
@@ -47,7 +47,7 @@ protected:
 
 };
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace
 
 #endif

@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: Integer
 //------------------------------------------------------------------------------
-#ifndef __oe_Basic_Integer_H__
-#define __oe_Basic_Integer_H__
+#ifndef __oe_basic_Integer_H__
+#define __oe_basic_Integer_H__
 
 #include "openeaagles/basic/Number.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 //------------------------------------------------------------------------------
 // Class:  Integer
@@ -425,7 +425,7 @@ inline std::ostream& operator<<(std::ostream& sout, const Integer& n)
    return sout;
 }
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace
 
 #endif

@@ -12,7 +12,7 @@
 //#define USE_TDBIR
 
 namespace oe {
-   namespace Basic { class PairStream; }
+   namespace basic { class PairStream; }
 
 namespace Simulation {
 
@@ -46,10 +46,10 @@ public:
 #ifdef USE_TDBIR
    // FAB - was missing, but needed, since IrSeeker uses TdbIr; copied in from v2009_0204
    // Gimbal Interface
-   virtual unsigned int processPlayersOfInterest(Basic::PairStream* const poi);
+   virtual unsigned int processPlayersOfInterest(basic::PairStream* const poi);
 #endif
 
-   bool event(const int event, Basic::Object* const obj = nullptr) override;
+   bool event(const int event, basic::Object* const obj = nullptr) override;
    void reset() override;
 
 protected:
@@ -59,10 +59,10 @@ protected:
 
    bool shutdownNotification() override;
 
-   Basic::safe_stack<IrQueryMsg*> freeQueryStack;  // stack of free queries of target IR signatures
+   basic::safe_stack<IrQueryMsg*> freeQueryStack;  // stack of free queries of target IR signatures
    mutable long freeQueryLock;                     // Semaphore to protect 'freeQueryStack'
 
-   Basic::safe_queue<IrQueryMsg*> inUseQueryQueue; // Queue of in use queries of target IR signatures
+   basic::safe_queue<IrQueryMsg*> inUseQueryQueue; // Queue of in use queries of target IR signatures
    mutable long inUseQueryLock;                    // Semaphore to protect 'inUseQueryQueue'
 
 private:
@@ -87,7 +87,7 @@ public:
    // range rate, normalized Line-Of-Sight (LOS) vectors for each target player.
    // (Background task)
    //------------------------------------------------------------------------------
-   virtual unsigned int processPlayers(Basic::PairStream* const players);
+   virtual unsigned int processPlayers(basic::PairStream* const players);
 
    static bool horizonCheck(const osg::Vec3& position1, const osg::Vec3& position2);
 

@@ -1,6 +1,6 @@
 
-#ifndef __oe_Basic_Object_H__
-#define __oe_Basic_Object_H__
+#ifndef __oe_basic_Object_H__
+#define __oe_basic_Object_H__
 
 #include "openeaagles/basic/support.h"
 #include "openeaagles/basic/macros.h"
@@ -8,7 +8,7 @@
 #include "openeaagles/basic/safe_ptr.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 //------------------------------------------------------------------------------
 // Class: Object
@@ -425,7 +425,7 @@ private:
    static unsigned int numClasses;
 };
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace
 
 #endif

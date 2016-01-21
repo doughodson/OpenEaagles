@@ -17,9 +17,9 @@ namespace Sensor {
 Factory::Factory()
 {}
 
-Basic::Object* Factory::createObj(const char* name)
+basic::Object* Factory::createObj(const char* name)
 {
-    Basic::Object* obj = nullptr;
+    basic::Object* obj = nullptr;
 
     // Sensors
     if ( std::strcmp(name, Gmti::getFactoryName()) == 0 ) {

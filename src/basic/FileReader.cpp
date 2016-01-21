@@ -13,7 +13,7 @@
 #include "openeaagles/basic/Number.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 IMPLEMENT_SUBCLASS(FileReader,"FileReader")
 
@@ -299,5 +299,5 @@ std::ostream& FileReader::serialize(std::ostream& sout, const int i, const bool 
     return sout;
 }
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace

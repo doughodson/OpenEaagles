@@ -240,7 +240,7 @@ void Nib::setPlayerName(const char* s)
 //------------------------------------------------------------------------------
 // Federate name as String
 //------------------------------------------------------------------------------
-const Basic::String* Nib::getFederateName() const
+const basic::String* Nib::getFederateName() const
 {
    return federateName;
 }
@@ -248,7 +248,7 @@ const Basic::String* Nib::getFederateName() const
 //------------------------------------------------------------------------------
 // Sets our federate name
 //------------------------------------------------------------------------------
-bool Nib::setFederateName(const Basic::String* const msg)
+bool Nib::setFederateName(const basic::String* const msg)
 {
    federateName = msg;
    return true;
@@ -584,11 +584,11 @@ bool Nib::isPlayerStateUpdateRequired(const LCreal curExecTime)
             // find all missiles missiles
             const StoresMgr* sm = gv->getStoresManagement();
             if (sm != nullptr) {
-               const Basic::PairStream* stores = sm->getStores();
+               const basic::PairStream* stores = sm->getStores();
                if (stores != nullptr) {
-                  const Basic::List::Item* item = stores->getFirstItem();
+                  const basic::List::Item* item = stores->getFirstItem();
                   while (item != nullptr && apartNumMissiles < MAX_AMSL) {
-                     const Basic::Pair* pair = static_cast<const Basic::Pair*>(item->getValue());
+                     const basic::Pair* pair = static_cast<const basic::Pair*>(item->getValue());
                      if (pair != nullptr) {
                         const Missile* msl = dynamic_cast<const Missile*>( pair->object() );
                         if (msl != nullptr) {
@@ -665,7 +665,7 @@ void Nib::playerState2Nib()
    if (player != nullptr) {
       // Player name
       const char* cname = nullptr;
-      const Basic::String* sname = player->getName();
+      const basic::String* sname = player->getName();
       if (sname != nullptr) cname = *sname;
       if (cname != nullptr) setPlayerName(cname);
       else setPlayerName("EAAGLES");
@@ -826,7 +826,7 @@ bool Nib::resetDeadReckoning(
    if (ioType == NetIO::INPUT_NIB && drTime > 0) {
       err = drPosN1 - drP0;
       const double len = err.length();
-      if (len < (2.0 * Basic::Distance::KM2M) ) {
+      if (len < (2.0 * basic::Distance::KM2M) ) {
          smoothVel = err/drTime;
          smoothTime = drTime;
       }
@@ -886,7 +886,7 @@ bool Nib::mainDeadReckoning(
          osg::Matrixd DR;
          drComputeMatrixDR(dT, drAV0, drWwT, drOmega, &DR);
          osg::Matrixd Rwb = DR * drR0;
-         Basic::Nav::computeEulerAngles(Rwb, pNewRPY);
+         basic::Nav::computeEulerAngles(Rwb, pNewRPY);
 
          *pNewP0 = drP0 + drV0*dT;
       }
@@ -897,7 +897,7 @@ bool Nib::mainDeadReckoning(
          osg::Matrixd DR;
          drComputeMatrixDR(dT, drAV0, drWwT, drOmega, &DR);
          osg::Matrixd Rwb = DR * drR0;
-         Basic::Nav::computeEulerAngles(Rwb, pNewRPY);
+         basic::Nav::computeEulerAngles(Rwb, pNewRPY);
 
          *pNewP0 = drP0 + drV0*dT + drA0*(0.5*dT*dT);
       }
@@ -930,7 +930,7 @@ bool Nib::mainDeadReckoning(
          drComputeMatrixDR(dT, drAV0, drWwT, drOmega, &DR);
          osg::Matrixd Rwb = DR * drR0;
 
-         Basic::Nav::computeEulerAngles(Rwb, pNewRPY);
+         basic::Nav::computeEulerAngles(Rwb, pNewRPY);
 
          osg::Matrixd R1;
          drComputeMatrixR1(dT, drAV0, drWwT, drOmega, &R1);
@@ -946,7 +946,7 @@ bool Nib::mainDeadReckoning(
          drComputeMatrixDR(dT, drAV0, drWwT, drOmega, &DR);
          osg::Matrixd Rwb = DR * drR0;
 
-         Basic::Nav::computeEulerAngles(Rwb, pNewRPY);
+         basic::Nav::computeEulerAngles(Rwb, pNewRPY);
 
          osg::Matrixd R1;
          drComputeMatrixR1(dT, drAV0, drWwT, drOmega, &R1);

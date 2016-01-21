@@ -103,33 +103,33 @@ public:
 
    bool isPostDrawSubpage() const               { return postDraw1; }
 
-   virtual Basic::Pair* findSubpageByName(const char* const slotname);
-   virtual Basic::Pair* findSubpageByType(const std::type_info& type);
+   virtual basic::Pair* findSubpageByName(const char* const slotname);
+   virtual basic::Pair* findSubpageByType(const std::type_info& type);
 
    bool isFocusSlavedToSubpage() const          { return focusSlavedToSubpage; }
    void setFocusSlavedToSubpage(const bool f)   { focusSlavedToSubpage = f; }
 
    // Call new sub-page
-   bool newSubpage(Page* const newPage, Page* theCaller, Basic::Object* theArg = 0);
-   bool newSubpage(const char* const name, Page* theCaller, Basic::Object* theArg = 0);
+   bool newSubpage(Page* const newPage, Page* theCaller, basic::Object* theArg = 0);
+   bool newSubpage(const char* const name, Page* theCaller, basic::Object* theArg = 0);
 
    // event handler functions
    virtual bool onEntry();
    virtual bool onExit();
-   virtual bool onButtonHit(const Basic::String* const obhobj);
+   virtual bool onButtonHit(const basic::String* const obhobj);
    virtual bool onKeyHit(const int key);
 
    // slottable functions
-   bool setPage(const Basic::Identifier* const pobj);
-   bool setSubpageStream (Basic::PairStream* const psobj);
+   bool setPage(const basic::Identifier* const pobj);
+   bool setSubpageStream (basic::PairStream* const psobj);
    bool setSubpageSingle (Page* const pobj);
-   bool setPagingEvent(Basic::PairStream* const peobj);
-   bool drawSubpageFirst(const Basic::Number* const spfobj);
-   bool setSlotFocusSlavedToSubpage(const Basic::Number* const spfobj);
+   bool setPagingEvent(basic::PairStream* const peobj);
+   bool drawSubpageFirst(const basic::Number* const spfobj);
+   bool setSlotFocusSlavedToSubpage(const basic::Number* const spfobj);
 
    void draw() override;
-   Basic::Pair* findBySelectName(const GLuint name) override;
-   bool event(const int event, Basic::Object* const obj = nullptr) override;
+   basic::Pair* findBySelectName(const GLuint name) override;
+   bool event(const int event, basic::Object* const obj = nullptr) override;
 
    void updateTC(const LCreal dt = 0.0) override;
    void updateData(const LCreal dt = 0.0) override;
@@ -137,38 +137,38 @@ public:
 
 protected:
    // Return our paging arguments
-   Basic::Object* getArgument()               { return pageArg; }
+   basic::Object* getArgument()               { return pageArg; }
    const Page* getCaller()                    { return caller; }
 
    // Return our subpages
-   Basic::PairStream* subPages()              { return subpages; }
+   basic::PairStream* subPages()              { return subpages; }
 
    // Manage our (sub)page stack
    bool clearSubpageStack();
-   bool pushSubpage(const char* const name, Page* theCaller, Basic::Object* theArg = 0);
-   bool popSubpage(Page* theCaller, Basic::Object* theArg = 0);
+   bool pushSubpage(const char* const name, Page* theCaller, basic::Object* theArg = 0);
+   bool popSubpage(Page* theCaller, basic::Object* theArg = 0);
 
    // Call/push/pop major pages (our container's pages, which we are a member of)
-   bool newPage(Page* const newPage, Page* theCaller, Basic::Object* theArg = 0);
-   bool newPage(const char* const name, Page* theCaller, Basic::Object* theArg = 0);
-   bool pushPage(const char* const name, Page* theCaller, Basic::Object* theArg = 0);
-   bool popPage(Page* theCaller, Basic::Object* theArg = 0);
+   bool newPage(Page* const newPage, Page* theCaller, basic::Object* theArg = 0);
+   bool newPage(const char* const name, Page* theCaller, basic::Object* theArg = 0);
+   bool pushPage(const char* const name, Page* theCaller, basic::Object* theArg = 0);
+   bool popPage(Page* theCaller, basic::Object* theArg = 0);
 
 private:
    bool processSubpages();
 
    Page*       cp;                     // Current Subpage
-   Basic::Identifier cpName;           // Current Subpage Name
+   basic::Identifier cpName;           // Current Subpage Name
    Page*       np;                     // New subpage (requesting a page change)
 
-   Basic::PairStream* subpages;        // Subpages
-   Basic::PairStream* pageChgEvents;   // Page change events
+   basic::PairStream* subpages;        // Subpages
+   basic::PairStream* pageChgEvents;   // Page change events
 
    bool  postDraw1;                    // Post draw component (child) graphic
    bool  focusSlavedToSubpage;         // Input event focus should follow subpage changes
 
    // Passed by calling page
-   Basic::safe_ptr<Basic::Object> pageArg;   // Paging argument
+   basic::safe_ptr<basic::Object> pageArg;   // Paging argument
    const Page* caller;                       // Calling page
 
    // Subpage Stack

@@ -8,7 +8,7 @@
 #include "openeaagles/simulation/Otw.h"
 
 namespace oe {
-   namespace Basic { class NetHandler; }
+   namespace basic { class NetHandler; }
 namespace Otw {
 
 class OtwPC : public Simulation::Otw
@@ -36,9 +36,9 @@ private:
     bool initNetwork();                     // Initialize the network
 
     // Set Slot functions
-    bool setSlotNetOutput(Basic::NetHandler* const msg);
+    bool setSlotNetOutput(basic::NetHandler* const msg);
 
-    Basic::safe_ptr<Basic::NetHandler> netOutput;  // Output network handler
+    basic::safe_ptr<basic::NetHandler> netOutput;  // Output network handler
     bool netInit;                              // Network has been initialized
     bool netInitFail;                          // Initialization attempt failed
     int scnt;                                  // Send timer

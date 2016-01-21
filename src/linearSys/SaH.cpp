@@ -20,8 +20,8 @@ END_SLOTTABLE(SaH)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(SaH)
-   ON_SLOT( 1, setSlotSampleRate, Basic::Frequency)
-   ON_SLOT( 1, setSlotSampleRate, Basic::Number)
+   ON_SLOT( 1, setSlotSampleRate, basic::Frequency)
+   ON_SLOT( 1, setSlotSampleRate, basic::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -160,11 +160,11 @@ bool SaH::setSampleRate(const unsigned int v)
 // Set slot functions
 //------------------------------------------------------------------------------
 
-bool SaH::setSlotSampleRate(const Basic::Frequency* const msg)
+bool SaH::setSlotSampleRate(const basic::Frequency* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      int v = static_cast<int>( Basic::Hertz::convertStatic( *msg ) + 0.5f );
+      int v = static_cast<int>( basic::Hertz::convertStatic( *msg ) + 0.5f );
       if (v > 0) {
          setSampleRate( static_cast<unsigned int>(v) );
          ok = true;
@@ -173,7 +173,7 @@ bool SaH::setSlotSampleRate(const Basic::Frequency* const msg)
    return ok;
 }
 
-bool SaH::setSlotSampleRate(const Basic::Number* const msg)
+bool SaH::setSlotSampleRate(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -190,7 +190,7 @@ bool SaH::setSlotSampleRate(const Basic::Number* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for SaH
 //------------------------------------------------------------------------------
-Basic::Object* SaH::getSlotByIndex(const int si)
+basic::Object* SaH::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

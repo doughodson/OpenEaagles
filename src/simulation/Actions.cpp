@@ -139,7 +139,7 @@ void Action::process(const LCreal)
 // Execute as an UBF action
 // -- Use the 'actor' to find our OBC and 'trigger' this action.
 //------------------------------------------------------------------------------
-bool Action::execute(Basic::Component* actor)
+bool Action::execute(basic::Component* actor)
 {
    bool ok = false;
    if (actor != nullptr) {
@@ -203,11 +203,11 @@ END_SLOTTABLE(ActionImagingSar)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(ActionImagingSar)
-    ON_SLOT(1, setSlotSarLat,     Basic::LatLon)
-    ON_SLOT(2, setSlotSarLon,     Basic::LatLon)
-    ON_SLOT(3, setSlotSarElev,    Basic::Distance)
-    ON_SLOT(4, setSlotResolution, Basic::Distance)
-    ON_SLOT(5, setSlotImageSize,  Basic::Number)
+    ON_SLOT(1, setSlotSarLat,     basic::LatLon)
+    ON_SLOT(2, setSlotSarLon,     basic::LatLon)
+    ON_SLOT(3, setSlotSarElev,    basic::Distance)
+    ON_SLOT(4, setSlotResolution, basic::Distance)
+    ON_SLOT(5, setSlotImageSize,  basic::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -270,7 +270,7 @@ bool ActionImagingSar::trigger(OnboardComputer* const mgr)
       // Find our ownship player & SAR system
       Player* ownship = static_cast<Player*>(mgr->findContainerByType(typeid(Player)));
       if (ownship != nullptr) {
-         Basic::Pair* pair = ownship->getSensorByType(typeid(Sar));
+         basic::Pair* pair = ownship->getSensorByType(typeid(Sar));
          if (isMessageEnabled(MSG_INFO)) {
             std::cout << "Looking for SAR: pair = " << pair << std::endl;
          }
@@ -414,7 +414,7 @@ void ActionImagingSar::setSarSystem(Sar* const p)
 // Slot functions
 //------------------------------------------------------------------------------
 
-bool ActionImagingSar::setSlotSarLat(const Basic::LatLon* const msg)
+bool ActionImagingSar::setSlotSarLat(const basic::LatLon* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -423,7 +423,7 @@ bool ActionImagingSar::setSlotSarLat(const Basic::LatLon* const msg)
    return ok;
 }
 
-bool ActionImagingSar::setSlotSarLon(const Basic::LatLon* const msg)
+bool ActionImagingSar::setSlotSarLon(const basic::LatLon* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -432,27 +432,27 @@ bool ActionImagingSar::setSlotSarLon(const Basic::LatLon* const msg)
    return ok;
 }
 
-bool ActionImagingSar::setSlotSarElev(const Basic::Distance* const msg)
+bool ActionImagingSar::setSlotSarElev(const basic::Distance* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      LCreal elev = Basic::Meters::convertStatic( *msg );
+      LCreal elev = basic::Meters::convertStatic( *msg );
       ok = setSarElevation( elev );
    }
    return ok;
 }
 
-bool ActionImagingSar::setSlotResolution(const Basic::Distance* const msg)
+bool ActionImagingSar::setSlotResolution(const basic::Distance* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      LCreal res = Basic::Meters::convertStatic( *msg );
+      LCreal res = basic::Meters::convertStatic( *msg );
       ok = setResolution( res );
    }
    return ok;
 }
 
-bool ActionImagingSar::setSlotImageSize(const Basic::Number* const msg)
+bool ActionImagingSar::setSlotImageSize(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -477,7 +477,7 @@ LCreal ActionImagingSar::computeOrientation(const Steerpoint* const wp)
       double dlat = getSarLatitude();
       double dlon = getSarLongitude();
       double brg, distNM;
-      Basic::Nav::gll2bd(slat, slon, dlat, dlon, &brg, &distNM);
+      basic::Nav::gll2bd(slat, slon, dlat, dlon, &brg, &distNM);
       orientation = static_cast<LCreal>(-brg);
    }
    return orientation;
@@ -486,7 +486,7 @@ LCreal ActionImagingSar::computeOrientation(const Steerpoint* const wp)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Basic::Object* ActionImagingSar::getSlotByIndex(const int si)
+basic::Object* ActionImagingSar::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
@@ -545,10 +545,10 @@ END_SLOTTABLE(ActionWeaponRelease)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(ActionWeaponRelease)
-    ON_SLOT(1, setSlotTargetLat, Basic::LatLon)
-    ON_SLOT(2, setSlotTargetLon, Basic::LatLon)
-    ON_SLOT(3, setSlotTargetElev, Basic::Number)
-    ON_SLOT(4, setSlotStationNum, Basic::Number)
+    ON_SLOT(1, setSlotTargetLat, basic::LatLon)
+    ON_SLOT(2, setSlotTargetLon, basic::LatLon)
+    ON_SLOT(3, setSlotTargetElev, basic::Number)
+    ON_SLOT(4, setSlotStationNum, basic::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -605,7 +605,7 @@ bool ActionWeaponRelease::trigger(OnboardComputer* const mgr)
 
             // Computes the target's position vector
             osg::Vec3 tgtPos;                            // Target position  (m) NED
-            Basic::Nav::convertLL2PosVec(
+            basic::Nav::convertLL2PosVec(
                refLat, refLon,                           // Ref point (at sea level)
                getTargetLatitude(), getTargetLongitude(), getTargetElevation(),
                &tgtPos); // x,y,z  NED
@@ -650,7 +650,7 @@ bool ActionWeaponRelease::setStation(const unsigned int num)
 }
 
 // Slot functions
-bool ActionWeaponRelease::setSlotTargetLat(const Basic::LatLon* newLat)
+bool ActionWeaponRelease::setSlotTargetLat(const basic::LatLon* newLat)
 {
     bool ok = false;
     if (newLat != nullptr) {
@@ -659,7 +659,7 @@ bool ActionWeaponRelease::setSlotTargetLat(const Basic::LatLon* newLat)
     }
     return ok;
 }
-bool ActionWeaponRelease::setSlotTargetLon(const Basic::LatLon* newLon)
+bool ActionWeaponRelease::setSlotTargetLon(const basic::LatLon* newLon)
 {
     bool ok = false;
     if (newLon != nullptr) {
@@ -668,7 +668,7 @@ bool ActionWeaponRelease::setSlotTargetLon(const Basic::LatLon* newLon)
     }
     return ok;
 }
-bool ActionWeaponRelease::setSlotTargetElev(const Basic::Number* newElev)
+bool ActionWeaponRelease::setSlotTargetElev(const basic::Number* newElev)
 {
     bool ok = false;
     if (newElev != nullptr) {
@@ -677,7 +677,7 @@ bool ActionWeaponRelease::setSlotTargetElev(const Basic::Number* newElev)
     }
     return ok;
 }
-bool ActionWeaponRelease::setSlotStationNum(const Basic::Number* newStation)
+bool ActionWeaponRelease::setSlotStationNum(const basic::Number* newStation)
 {
     bool ok = false;
     if (newStation != nullptr) {
@@ -690,7 +690,7 @@ bool ActionWeaponRelease::setSlotStationNum(const Basic::Number* newStation)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Basic::Object* ActionWeaponRelease::getSlotByIndex(const int si)
+basic::Object* ActionWeaponRelease::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
@@ -739,8 +739,8 @@ END_SLOTTABLE(ActionDecoyRelease)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(ActionDecoyRelease)
-    ON_SLOT(1, setSlotNumToLaunch, Basic::Number)
-    ON_SLOT(2, setSlotInterval, Basic::Number)
+    ON_SLOT(1, setSlotNumToLaunch, basic::Number)
+    ON_SLOT(2, setSlotInterval, basic::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -850,7 +850,7 @@ void ActionDecoyRelease::process(const LCreal)
 }
 
 // Slot functions
-bool ActionDecoyRelease::setSlotNumToLaunch(const Basic::Number* x)
+bool ActionDecoyRelease::setSlotNumToLaunch(const basic::Number* x)
 {
     bool ok = false;
     if (x != nullptr) {
@@ -858,7 +858,7 @@ bool ActionDecoyRelease::setSlotNumToLaunch(const Basic::Number* x)
     }
     return ok;
 }
-bool ActionDecoyRelease::setSlotInterval(const Basic::Number* x)
+bool ActionDecoyRelease::setSlotInterval(const basic::Number* x)
 {
     bool ok = false;
     if (x != nullptr) {
@@ -871,7 +871,7 @@ bool ActionDecoyRelease::setSlotInterval(const Basic::Number* x)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Basic::Object* ActionDecoyRelease::getSlotByIndex(const int si)
+basic::Object* ActionDecoyRelease::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
@@ -914,7 +914,7 @@ END_SLOTTABLE(ActionCamouflageType)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(ActionCamouflageType)
-    ON_SLOT( 1, setSlotCamouflageType, Basic::Number)
+    ON_SLOT( 1, setSlotCamouflageType, basic::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -978,7 +978,7 @@ bool ActionCamouflageType::setCamouflageType(const unsigned int v)
 }
 
 // Sets user defined camouflage type
-bool ActionCamouflageType::setSlotCamouflageType(const Basic::Number* const msg)
+bool ActionCamouflageType::setSlotCamouflageType(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -993,7 +993,7 @@ bool ActionCamouflageType::setSlotCamouflageType(const Basic::Number* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Basic::Object* ActionCamouflageType::getSlotByIndex(const int si)
+basic::Object* ActionCamouflageType::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

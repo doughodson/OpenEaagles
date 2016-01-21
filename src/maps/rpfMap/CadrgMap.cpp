@@ -28,9 +28,9 @@ BEGIN_SLOTTABLE(CadrgMap)
 END_SLOTTABLE(CadrgMap)
 
 BEGIN_SLOT_MAP(CadrgMap)
-    ON_SLOT(1, setSlotPathnames, Basic::PairStream)
-    ON_SLOT(2, setSlotMaxTableSize, Basic::Number)
-    ON_SLOT(3, setSlotMapLevel, Basic::String)
+    ON_SLOT(1, setSlotPathnames, basic::PairStream)
+    ON_SLOT(2, setSlotMaxTableSize, basic::Number)
+    ON_SLOT(3, setSlotMapLevel, basic::String)
 END_SLOT_MAP()
 
 
@@ -128,17 +128,17 @@ int CadrgMap::getNumberOfCadrgFiles() {
 //------------------------------------------------------------------------------
 // setSlotPathnames() - Pathnames to the CADRG A.toc files.
 //------------------------------------------------------------------------------
-bool CadrgMap::setSlotPathnames(const Basic::PairStream* const x)
+bool CadrgMap::setSlotPathnames(const basic::PairStream* const x)
 {
     bool ok = false;
     int count = 0;
     if (x != nullptr) {
         // Go through and set up our files based on the path names given
-        Basic::List::Item* item = (Basic::List::Item*)x->getFirstItem();
+        basic::List::Item* item = (basic::List::Item*)x->getFirstItem();
         while (item != nullptr && count < MAX_FILES) {
-            Basic::Pair* p = (Basic::Pair*)item->getValue();
+            basic::Pair* p = (basic::Pair*)item->getValue();
             if (p != nullptr) {
-                Basic::String* text = dynamic_cast<Basic::String*>(p->object());
+                basic::String* text = dynamic_cast<basic::String*>(p->object());
                 if (text != nullptr) {
                     ok = setPathName(text->getString());
                 }
@@ -163,7 +163,7 @@ void CadrgMap::sortMaps(const int count)
         std::cout << "CadrgMap - loading map files..." << std::endl;
         // Go through and see if we have matching scales
         // list of possible scales
-        Basic::String* scales = new Basic::String[MAX_FILES];
+        basic::String* scales = new basic::String[MAX_FILES];
         int sCount = 0;
         // We are going to have to create a list of which scale to add and how many to add
         int num2Add[MAX_FILES] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
@@ -250,7 +250,7 @@ void CadrgMap::sortMaps(const int count)
 //------------------------------------------------------------------------------
 // setSlotMaxTableSize() - Sets our max table size and array up.
 //------------------------------------------------------------------------------
-bool CadrgMap::setSlotMaxTableSize(const Basic::Number* const x)
+bool CadrgMap::setSlotMaxTableSize(const basic::Number* const x)
 {
     bool ok = false;
     if (x != nullptr) ok = setMaxTableSize(x->getInt());
@@ -303,7 +303,7 @@ bool CadrgMap::setMaxTableSize(const int x)
     int size = maxTableSize * 2;
     // Reset our list stack
     if (stack != nullptr) stack->unref();
-    stack = new Basic::List();
+    stack = new basic::List();
     for (int i = 0; i < size; i++) {
         CadrgFrame* t = new CadrgFrame();
         stack->addHead(t);
@@ -339,7 +339,7 @@ bool CadrgMap::zoomInMapLevel()
         // Early out check, we have zoomed in as far as we can
         if (std::strcmp(mapLevel->getString(), "5M") == 0) return false;
 
-        Basic::String* newLevel = new Basic::String();
+        basic::String* newLevel = new basic::String();
         //Zoom in if we can
         if (std::strcmp(mapLevel->getString(), "10M") == 0) {
             newLevel->setStr("5M");
@@ -401,7 +401,7 @@ bool CadrgMap::zoomOutMapLevel()
         // Early out check, we have zoomed out as far as we can
         if (std::strcmp(mapLevel->getString(), "1:5M") == 0) return false;
 
-        Basic::String* newLevel = new Basic::String();
+        basic::String* newLevel = new basic::String();
         //Zoom in if we can
         if (std::strcmp(mapLevel->getString(), "5M") == 0) {
             newLevel->setStr("10M");
@@ -457,7 +457,7 @@ bool CadrgMap::zoomOutMapLevel()
 //------------------------------------------------------------------------------
 // setSlotMapLevel() - Initially sets our map resolution level.
 //------------------------------------------------------------------------------
-bool CadrgMap::setSlotMapLevel(Basic::String* x)
+bool CadrgMap::setSlotMapLevel(basic::String* x)
 {
     bool ok = false;
     if (mapLevel != nullptr) {
@@ -495,7 +495,7 @@ bool CadrgMap::setMapLevel(const char* x)
                             curCadrgFile->ref();
                             // Now set our map level
                             if (mapLevel != nullptr) mapLevel->setStr(x);
-                            else mapLevel = new Basic::String(x);
+                            else mapLevel = new basic::String(x);
                         }
                         found = true;
                     }
@@ -533,7 +533,7 @@ int CadrgMap::findBestZone(const double lat, const double lon)
 MapDrawer* CadrgMap::getMapImage()
 {
     MapDrawer* image = nullptr;
-    Basic::Pair* pair = findByType(typeid(MapDrawer));
+    basic::Pair* pair = findByType(typeid(MapDrawer));
     if (pair != nullptr) image = dynamic_cast<MapDrawer*>(pair->object());
     return image;
 }
@@ -545,7 +545,7 @@ MapDrawer* CadrgMap::getMapImage()
 const MapDrawer* CadrgMap::getMapImage() const
 {
     MapDrawer* image = nullptr;
-    Basic::Pair* pair = (Basic::Pair*)findByType(typeid(MapDrawer));
+    basic::Pair* pair = (basic::Pair*)findByType(typeid(MapDrawer));
     if (pair != nullptr) image = dynamic_cast<MapDrawer*>(pair->object());
     return image;
 }
@@ -652,7 +652,7 @@ void* CadrgMap::getPixels(const int row, const int column, TexturePager* tp)
                 CadrgFrame* frame = frameEntry->getFrame();
                 // If we don't have an entry, let's pull one from the stack
                 if (frame == nullptr) {
-                    Basic::List::Item* item = stack->getFirstItem();
+                    basic::List::Item* item = stack->getFirstItem();
                     if (item != nullptr) {
                         CadrgFrame* x = (CadrgFrame*)(item->getValue());
                         if (x != nullptr) {
@@ -749,7 +749,7 @@ void CadrgMap::updateData(LCreal dt)
 //------------------------------------------------------------------------------
 // getSlotByIndex() - Get the slot data.
 //------------------------------------------------------------------------------
-Basic::Object* CadrgMap::getSlotByIndex(const int si)
+basic::Object* CadrgMap::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

@@ -8,7 +8,7 @@
 #include <GL/gl.h>
 
 namespace oe {
-    namespace Basic { class String; }
+    namespace basic { class String; }
 
 namespace BasicGL {
 
@@ -46,8 +46,8 @@ public:
    void loadTexture() override;
 
 protected:
-   bool setSlotTexturePath(Basic::String* const s);
-   bool setSlotTextureFileName(Basic::String* const s);
+   bool setSlotTexturePath(basic::String* const s);
+   bool setSlotTextureFileName(basic::String* const s);
 
 private:
    void initData();

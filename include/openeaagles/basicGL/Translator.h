@@ -7,7 +7,7 @@
 #include "Graphic.h"
 
 namespace oe {
-   namespace Basic { class Number; }
+   namespace basic { class Number; }
 namespace BasicGL {
 
 //------------------------------------------------------------------------------
@@ -42,9 +42,9 @@ public:
 
 private:
     // event functions
-    bool onUpdateX(const Basic::Number* const newX);
-    bool onUpdateY(const Basic::Number* const newY);
-    bool onUpdateZ(const Basic::Number* const newZ);
+    bool onUpdateX(const basic::Number* const newX);
+    bool onUpdateY(const basic::Number* const newY);
+    bool onUpdateZ(const basic::Number* const newZ);
 
     LCreal myXPos;
     LCreal myYPos;

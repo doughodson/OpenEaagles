@@ -41,8 +41,8 @@ END_SLOTTABLE(MultiActorAgent)
 
 //  mapping of slots to handles
 BEGIN_SLOT_MAP(MultiActorAgent)
-   ON_SLOT(1,  setSlotState, Basic::Ubf::State)
-   ON_SLOT(2,  setSlotAgentList, Basic::PairStream)
+   ON_SLOT(1,  setSlotState, basic::Ubf::State)
+   ON_SLOT(2,  setSlotAgentList, basic::PairStream)
 END_SLOT_MAP()
 
 MultiActorAgent::MultiActorAgent()
@@ -70,7 +70,7 @@ void MultiActorAgent::reset()
    if (sim != nullptr) {
       // convert component names to component ptrs, for all behaviors in the list
       for (unsigned int i=0; i<nAgents; i++) {
-         Basic::Component* c = sim->findPlayerByName(agentList[i].actorName->getString());
+         basic::Component* c = sim->findPlayerByName(agentList[i].actorName->getString());
          if (c != nullptr) {
             agentList[i].actor = c;
             // send reset to each
@@ -106,13 +106,13 @@ void MultiActorAgent::controller(const LCreal dt)
          if (agentList[i].actor != nullptr) {
 
             setActor(agentList[i].actor);
-            Basic::Ubf::Behavior* behavior = agentList[i].behavior;
+            basic::Ubf::Behavior* behavior = agentList[i].behavior;
 
             // update ubf state
             getState()->updateState(agentList[i].actor);
 
             // generate an action
-            Basic::Ubf::Action* action = behavior->genAction(getState(), dt);
+            basic::Ubf::Action* action = behavior->genAction(getState(), dt);
             if (action) { // allow possibility of no action returned
                action->execute(getActor());
                action->unref();
@@ -124,7 +124,7 @@ void MultiActorAgent::controller(const LCreal dt)
 }
 
 
-void MultiActorAgent::setState(Basic::Ubf::State* const x)
+void MultiActorAgent::setState(basic::Ubf::State* const x)
 {
    if (x == nullptr)
       return;
@@ -133,7 +133,7 @@ void MultiActorAgent::setState(Basic::Ubf::State* const x)
    state = x;
    state->ref();
    state->container(this);
-   Basic::Pair* p = new Basic::Pair("", state);
+   basic::Pair* p = new basic::Pair("", state);
    addComponent(p);
    p->unref();
 }
@@ -173,7 +173,7 @@ bool MultiActorAgent::clearAgentList()
 }
 
 // Adds an item to the input entity type table
-bool MultiActorAgent::addAgent(Basic::String* name, Basic::Ubf::Behavior* const b)
+bool MultiActorAgent::addAgent(basic::String* name, basic::Ubf::Behavior* const b)
 {
    bool ok = false;
    if (nAgents < MAX_AGENTS) {
@@ -192,7 +192,7 @@ bool MultiActorAgent::addAgent(Basic::String* name, Basic::Ubf::Behavior* const 
 //------------------------------------------------------------------------------
 
 // Sets the state object for this agent
-bool MultiActorAgent::setSlotState(Basic::Ubf::State* const state)
+bool MultiActorAgent::setSlotState(basic::Ubf::State* const state)
 {
    bool ok = false;
    if (state != nullptr) {
@@ -203,7 +203,7 @@ bool MultiActorAgent::setSlotState(Basic::Ubf::State* const state)
 }
 
 // Sets the actor/behavior list
-bool MultiActorAgent::setSlotAgentList(Basic::PairStream* const msg)
+bool MultiActorAgent::setSlotAgentList(basic::PairStream* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
@@ -211,11 +211,11 @@ bool MultiActorAgent::setSlotAgentList(Basic::PairStream* const msg)
        clearAgentList();
 
        // Now scan the pair stream and put all Ntm objects into the table.
-       Basic::List::Item* item = msg->getFirstItem();
+       basic::List::Item* item = msg->getFirstItem();
        while (item != nullptr) {
-          Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+          basic::Pair* pair = static_cast<basic::Pair*>(item->getValue());
           //std::cerr << "MultiActorAgent::setSlotagentList: slot: " << *pair->slot() << std::endl;
-          Basic::Ubf::Behavior* b = dynamic_cast<Basic::Ubf::Behavior*>( pair->object() );
+          basic::Ubf::Behavior* b = dynamic_cast<basic::Ubf::Behavior*>( pair->object() );
           if (b != nullptr) {
              // We have an  object, so put it in the table
              addAgent(pair->slot(), b);
@@ -230,7 +230,7 @@ bool MultiActorAgent::setSlotAgentList(Basic::PairStream* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Basic::Object* MultiActorAgent::getSlotByIndex(const int si)
+basic::Object* MultiActorAgent::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }

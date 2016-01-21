@@ -5,7 +5,7 @@
 #include "openeaagles/basic/Number.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 IMPLEMENT_SUBCLASS(Exponential,"Exponential")
 
@@ -112,7 +112,7 @@ std::ostream& Exponential::serialize(std::ostream& sout, const int i, const bool
 }
 
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace
 
 

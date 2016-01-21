@@ -118,8 +118,8 @@
 namespace oe {
 namespace Dafif {
 
-class Record : public Basic::String {
-    DECLARE_SUBCLASS(Record,Basic::String)
+class Record : public basic::String {
+    DECLARE_SUBCLASS(Record,basic::String)
 
 public:
    // record types
@@ -133,7 +133,7 @@ public:
    Record(const char* const s);
 
    void setRecord(const char* const s);
-   void setRecord(Basic::String* const s);
+   void setRecord(basic::String* const s);
 
    virtual void printRecord(std::ostream&) const    {}
 

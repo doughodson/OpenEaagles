@@ -33,11 +33,11 @@ END_SLOTTABLE(IrSignature)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(IrSignature)
-   ON_SLOT(1,setSlotWaveBandSizes,Basic::Table1)
+   ON_SLOT(1,setSlotWaveBandSizes,basic::Table1)
    ON_SLOT(2,setSlotIrShapeSignature, IrShape)
-   ON_SLOT(3,setSlotBaseHeatSignature,Basic::Number)
-   ON_SLOT(4,setSlotEmissivity,Basic::Number)
-   ON_SLOT(5,setSlotEffectiveArea,Basic::Number)
+   ON_SLOT(3,setSlotBaseHeatSignature,basic::Number)
+   ON_SLOT(4,setSlotEmissivity,basic::Number)
+   ON_SLOT(5,setSlotEffectiveArea,basic::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -57,7 +57,7 @@ IrSignature::IrSignature()
    // create a default waveband, middle infrared band : 3-5 micron (100 THz - 60 THz)
    //LCreal xdata[8] = { 4.0f };
    //LCreal gdata[8] = { 2.0f };
-   //waveBandTable = new Basic::Table1(gdata, 1, xdata, 1);
+   //waveBandTable = new basic::Table1(gdata, 1, xdata, 1);
    //numWaveBands=1;
 }
 
@@ -82,7 +82,7 @@ void IrSignature::copyData(const IrSignature& org, const bool cc)
    effectiveArea     = org.effectiveArea;
 
    if (org.waveBandTable != nullptr) {
-      Basic::Table1* copy = org.waveBandTable->clone();
+      basic::Table1* copy = org.waveBandTable->clone();
       setSlotWaveBandSizes( copy );
       copy->unref();
    }
@@ -117,7 +117,7 @@ void IrSignature::deleteData()
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Basic::Object* IrSignature::getSlotByIndex(const int si)
+basic::Object* IrSignature::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }
@@ -125,7 +125,7 @@ Basic::Object* IrSignature::getSlotByIndex(const int si)
 //------------------------------------------------------------------------------
 // setSlotBinSizes() --  set number of separate bands
 //------------------------------------------------------------------------------
-bool IrSignature::setSlotWaveBandSizes(const Basic::Table1* const tbl)
+bool IrSignature::setSlotWaveBandSizes(const basic::Table1* const tbl)
 {
    if (waveBandTable != nullptr) {
       waveBandTable->unref();
@@ -159,7 +159,7 @@ bool IrSignature::setSlotIrShapeSignature(IrShape* const s)
 //------------------------------------------------------------------------------
 // setSlotBaseHeatSignature() -- set base heat signature
 //------------------------------------------------------------------------------
-bool IrSignature::setSlotBaseHeatSignature(Basic::Number* const num)
+bool IrSignature::setSlotBaseHeatSignature(basic::Number* const num)
 {
    bool ok = false;
    if (num != nullptr) {
@@ -178,7 +178,7 @@ bool IrSignature::setSlotBaseHeatSignature(Basic::Number* const num)
 //------------------------------------------------------------------------------
 // setSlotEmissivity() -- set emissivity
 //------------------------------------------------------------------------------
-bool IrSignature::setSlotEmissivity(oe::Basic::Number* const num)
+bool IrSignature::setSlotEmissivity(oe::basic::Number* const num)
 {
    bool ok = false;
    if (num != nullptr) {
@@ -196,14 +196,14 @@ bool IrSignature::setSlotEmissivity(oe::Basic::Number* const num)
 //------------------------------------------------------------------------------
 // setSlotEffectiveArea() -- set effective area
 //------------------------------------------------------------------------------
-bool IrSignature::setSlotEffectiveArea(oe::Basic::Number* const num)
+bool IrSignature::setSlotEffectiveArea(oe::basic::Number* const num)
 {
    bool ok = false;
    LCreal value = 0.0;
 
-   const Basic::Area* a = dynamic_cast<const Basic::Area*>(num);
+   const basic::Area* a = dynamic_cast<const basic::Area*>(num);
    if (a != nullptr) {
-      Basic::SquareMeters sm;
+      basic::SquareMeters sm;
       value = static_cast<LCreal>(sm.convert(*a));
    } else if (num != nullptr) {
       value = num->getReal();

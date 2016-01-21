@@ -46,39 +46,39 @@ END_SLOTTABLE(Steerpoint)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(Steerpoint)
-    ON_SLOT( 1, setSlotSteerpointType, Basic::Identifier)
+    ON_SLOT( 1, setSlotSteerpointType, basic::Identifier)
 
-    ON_SLOT( 2, setSlotLatitude,       Basic::LatLon)
-    ON_SLOT( 2, setSlotLatitude,       Basic::Number)
+    ON_SLOT( 2, setSlotLatitude,       basic::LatLon)
+    ON_SLOT( 2, setSlotLatitude,       basic::Number)
 
-    ON_SLOT( 3, setSlotLongitude,      Basic::LatLon)
-    ON_SLOT( 3, setSlotLongitude,      Basic::Number)
+    ON_SLOT( 3, setSlotLongitude,      basic::LatLon)
+    ON_SLOT( 3, setSlotLongitude,      basic::Number)
 
-    ON_SLOT( 4, setSlotXPos,           Basic::Distance)
+    ON_SLOT( 4, setSlotXPos,           basic::Distance)
 
-    ON_SLOT( 5, setSlotYPos,           Basic::Distance)
+    ON_SLOT( 5, setSlotYPos,           basic::Distance)
 
-    ON_SLOT( 6, setSlotElevation,      Basic::Distance)
-    ON_SLOT( 6, setSlotElevation,      Basic::Number)
+    ON_SLOT( 6, setSlotElevation,      basic::Distance)
+    ON_SLOT( 6, setSlotElevation,      basic::Number)
 
-    ON_SLOT( 7, setSlotCmdAltitude,    Basic::Distance)
-    ON_SLOT( 7, setSlotCmdAltitude,    Basic::Number)
+    ON_SLOT( 7, setSlotCmdAltitude,    basic::Distance)
+    ON_SLOT( 7, setSlotCmdAltitude,    basic::Number)
 
-    ON_SLOT( 8, setSlotCmdAirspeed,    Basic::Number)
+    ON_SLOT( 8, setSlotCmdAirspeed,    basic::Number)
 
-    ON_SLOT( 9, setSlotPTA,            Basic::Time)
-    ON_SLOT( 9, setSlotPTA,            Basic::Number)
+    ON_SLOT( 9, setSlotPTA,            basic::Time)
+    ON_SLOT( 9, setSlotPTA,            basic::Number)
 
-    ON_SLOT(10, setSlotSCA,            Basic::Distance)
-    ON_SLOT(10, setSlotSCA,            Basic::Number)
+    ON_SLOT(10, setSlotSCA,            basic::Distance)
+    ON_SLOT(10, setSlotSCA,            basic::Number)
 
-    ON_SLOT(11, setSlotDescription,    Basic::String)
+    ON_SLOT(11, setSlotDescription,    basic::String)
 
-    ON_SLOT(12, setSlotMagVar,         Basic::Angle)
-    ON_SLOT(12, setSlotMagVar,         Basic::Number)
+    ON_SLOT(12, setSlotMagVar,         basic::Angle)
+    ON_SLOT(12, setSlotMagVar,         basic::Number)
 
-    ON_SLOT(13, setSlotNext,           Basic::Identifier)
-    ON_SLOT(13, setSlotNext,           Basic::Number)
+    ON_SLOT(13, setSlotNext,           basic::Identifier)
+    ON_SLOT(13, setSlotNext,           basic::Number)
 
     ON_SLOT(14, setAction,             Action)
 END_SLOT_MAP()
@@ -162,7 +162,7 @@ void Steerpoint::copyData(const Steerpoint& org, const bool cc)
     next = nullptr; // find it using 'initNextStptName' or 'initNexStptIdx'
 
     {
-       Basic::String* n = nullptr;
+       basic::String* n = nullptr;
        if (org.initNextStptName != nullptr) n = org.initNextStptName->clone();
        initNextStptName = n;
        if (n != nullptr) n->unref();
@@ -171,7 +171,7 @@ void Steerpoint::copyData(const Steerpoint& org, const bool cc)
     initNextStptIdx = org.initNextStptIdx;
 
     {
-       Basic::String* s = nullptr;
+       basic::String* s = nullptr;
        if (org.description != nullptr) s = org.description->clone();
        description = s;
        if (s != nullptr) s->unref();
@@ -284,7 +284,7 @@ void Steerpoint::reset()
 
 LCreal Steerpoint::getElevationFt() const
 {
-    return getElevationM() * Basic::Distance::M2FT;
+    return getElevationM() * basic::Distance::M2FT;
 }
 
 const char* Steerpoint::getDescription() const
@@ -312,14 +312,14 @@ double Steerpoint::getLongitude() const
 
 LCreal Steerpoint::getCmdAltitudeFt() const
 {
-    return getCmdAltitude() * Basic::Distance::M2FT;
+    return getCmdAltitude() * basic::Distance::M2FT;
 }
 
 //------------------------------------------------------------------------------
 // Set the ground elevation at the steerpoint from this terrain database
 // Returns true if successful.
 //------------------------------------------------------------------------------
-bool Steerpoint::setElevation(const Basic::Terrain* const terrain, const bool interp)
+bool Steerpoint::setElevation(const basic::Terrain* const terrain, const bool interp)
 {
    bool ok = false;
    if (!needLL) {
@@ -367,7 +367,7 @@ void Steerpoint::setElevation(const LCreal x)
     posVec[Player::IDOWN] = -x;
 }
 
-void Steerpoint::setDescription(const Basic::String* const d)
+void Steerpoint::setDescription(const basic::String* const d)
 {
     description = d;
 }
@@ -394,7 +394,7 @@ bool Steerpoint::setAction(Action* const aa)
 //------------------------------------------------------------------------------
 // Set slot functions
 //------------------------------------------------------------------------------
-bool Steerpoint::setSlotSteerpointType(const Basic::Identifier* const msg)
+bool Steerpoint::setSlotSteerpointType(const basic::Identifier* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
@@ -414,7 +414,7 @@ bool Steerpoint::setSlotSteerpointType(const Basic::Identifier* const msg)
     return ok;
 }
 
-bool Steerpoint::setSlotLatitude(const Basic::LatLon* const msg)
+bool Steerpoint::setSlotLatitude(const basic::LatLon* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
@@ -425,7 +425,7 @@ bool Steerpoint::setSlotLatitude(const Basic::LatLon* const msg)
     }
     return ok;
 }
-bool Steerpoint::setSlotLatitude(const Basic::Number* const msg)
+bool Steerpoint::setSlotLatitude(const basic::Number* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
@@ -436,7 +436,7 @@ bool Steerpoint::setSlotLatitude(const Basic::Number* const msg)
     }
     return ok;
 }
-bool Steerpoint::setSlotLongitude(const Basic::LatLon* const msg)
+bool Steerpoint::setSlotLongitude(const basic::LatLon* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
@@ -447,7 +447,7 @@ bool Steerpoint::setSlotLongitude(const Basic::LatLon* const msg)
     }
     return ok;
 }
-bool Steerpoint::setSlotLongitude(const Basic::Number* const msg)
+bool Steerpoint::setSlotLongitude(const basic::Number* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
@@ -459,7 +459,7 @@ bool Steerpoint::setSlotLongitude(const Basic::Number* const msg)
     return ok;
 }
 
-bool Steerpoint::setSlotPosition(const Basic::List* const msg)
+bool Steerpoint::setSlotPosition(const basic::List* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
@@ -477,11 +477,11 @@ bool Steerpoint::setSlotPosition(const Basic::List* const msg)
     return ok;
 }
 
-bool Steerpoint::setSlotXPos(const Basic::Distance* const msg)
+bool Steerpoint::setSlotXPos(const basic::Distance* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
-        initPosVec[Player::INORTH] = Basic::Meters::convertStatic(*msg);
+        initPosVec[Player::INORTH] = basic::Meters::convertStatic(*msg);
         haveInitPos = true;
         setPosition( initPosVec[0], initPosVec[1], initPosVec[2] );
         ok = true;
@@ -489,11 +489,11 @@ bool Steerpoint::setSlotXPos(const Basic::Distance* const msg)
     return ok;
 }
 
-bool Steerpoint::setSlotYPos(const Basic::Distance* const msg)
+bool Steerpoint::setSlotYPos(const basic::Distance* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
-        initPosVec[Player::IEAST] = Basic::Meters::convertStatic(*msg);
+        initPosVec[Player::IEAST] = basic::Meters::convertStatic(*msg);
         haveInitPos = true;
         setPosition( initPosVec[0], initPosVec[1], initPosVec[2] );
         ok = true;
@@ -501,11 +501,11 @@ bool Steerpoint::setSlotYPos(const Basic::Distance* const msg)
     return ok;
 }
 
-bool Steerpoint::setSlotElevation(const Basic::Distance* const msg)
+bool Steerpoint::setSlotElevation(const basic::Distance* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
-        initElev = Basic::Meters::convertStatic(*msg);
+        initElev = basic::Meters::convertStatic(*msg);
         elevation  = initElev;
         initPosVec[Player::IDOWN] = -initElev;
         posVec[Player::IDOWN] = -initElev;
@@ -514,7 +514,7 @@ bool Steerpoint::setSlotElevation(const Basic::Distance* const msg)
     }
     return ok;
 }
-bool Steerpoint::setSlotElevation(const Basic::Number* const msg)
+bool Steerpoint::setSlotElevation(const basic::Number* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
@@ -528,16 +528,16 @@ bool Steerpoint::setSlotElevation(const Basic::Number* const msg)
     return ok;
 }
 
-bool Steerpoint::setSlotPTA(const Basic::Time* const msg)
+bool Steerpoint::setSlotPTA(const basic::Time* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
-        setPTA( Basic::Seconds::convertStatic(*msg) );
+        setPTA( basic::Seconds::convertStatic(*msg) );
         ok = true;
     }
     return ok;
 }
-bool Steerpoint::setSlotPTA(const Basic::Number* const msg)
+bool Steerpoint::setSlotPTA(const basic::Number* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
@@ -547,16 +547,16 @@ bool Steerpoint::setSlotPTA(const Basic::Number* const msg)
     }
     return ok;
 }
-bool Steerpoint::setSlotSCA(const Basic::Distance* const msg)
+bool Steerpoint::setSlotSCA(const basic::Distance* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
-        setSCA( Basic::Feet::convertStatic(*msg) );
+        setSCA( basic::Feet::convertStatic(*msg) );
         ok = true;
     }
     return ok;
 }
-bool Steerpoint::setSlotSCA(const Basic::Number* const msg)
+bool Steerpoint::setSlotSCA(const basic::Number* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
@@ -567,7 +567,7 @@ bool Steerpoint::setSlotSCA(const Basic::Number* const msg)
     return ok;
 }
 
-bool Steerpoint::setSlotDescription(const Basic::String* const msg)
+bool Steerpoint::setSlotDescription(const basic::String* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
@@ -577,17 +577,17 @@ bool Steerpoint::setSlotDescription(const Basic::String* const msg)
     return ok;
 }
 
-bool Steerpoint::setSlotMagVar(const Basic::Angle* const msg)
+bool Steerpoint::setSlotMagVar(const basic::Angle* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
-        initMagVar = static_cast<LCreal>(Basic::Degrees::convertStatic(*msg));
+        initMagVar = static_cast<LCreal>(basic::Degrees::convertStatic(*msg));
         haveInitMagVar = true;
         ok = true;
     }
     return ok;
 }
-bool Steerpoint::setSlotMagVar(const Basic::Number* const msg)
+bool Steerpoint::setSlotMagVar(const basic::Number* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
@@ -599,11 +599,11 @@ bool Steerpoint::setSlotMagVar(const Basic::Number* const msg)
     return ok;
 }
 
-bool Steerpoint::setSlotCmdAltitude(const Basic::Distance* const msg)
+bool Steerpoint::setSlotCmdAltitude(const basic::Distance* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
-        initCmdAlt = Basic::Meters::convertStatic(*msg);
+        initCmdAlt = basic::Meters::convertStatic(*msg);
         haveInitCmdAlt = true;
         setCmdAltitude(initCmdAlt);
         ok = true;
@@ -611,7 +611,7 @@ bool Steerpoint::setSlotCmdAltitude(const Basic::Distance* const msg)
     return ok;
 }
 
-bool Steerpoint::setSlotCmdAltitude(const Basic::Number* const msg)
+bool Steerpoint::setSlotCmdAltitude(const basic::Number* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
@@ -623,7 +623,7 @@ bool Steerpoint::setSlotCmdAltitude(const Basic::Number* const msg)
     return ok;
 }
 
-bool Steerpoint::setSlotCmdAirspeed(const Basic::Number* const msg)
+bool Steerpoint::setSlotCmdAirspeed(const basic::Number* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
@@ -635,7 +635,7 @@ bool Steerpoint::setSlotCmdAirspeed(const Basic::Number* const msg)
     return ok;
 }
 
-bool Steerpoint::setSlotNext(const Basic::Identifier* const msg)
+bool Steerpoint::setSlotNext(const basic::Identifier* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
@@ -645,7 +645,7 @@ bool Steerpoint::setSlotNext(const Basic::Identifier* const msg)
     return ok;
 }
 
-bool Steerpoint::setSlotNext(const Basic::Number* const msg)
+bool Steerpoint::setSlotNext(const basic::Number* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
@@ -700,13 +700,13 @@ bool Steerpoint::compute(const Navigation* const nav, const Steerpoint* const fr
         if ( !isLatLonValid() && isPosVecValid() ) {
             // Compute our lat/lon when we only have the Pos Vec
             double elev = 0.0;
-            Basic::Nav::convertPosVec2LL(nav->getRefLatitude(), nav->getRefLongitude(), posVec, &latitude, &longitude, &elev);
+            basic::Nav::convertPosVec2LL(nav->getRefLatitude(), nav->getRefLongitude(), posVec, &latitude, &longitude, &elev);
             elevation  = static_cast<LCreal>(elev);
             needLL = false;
         }
         if ( isLatLonValid() && !isPosVecValid() ) {
             // Compute our Pos Vec when we only have the lat/lon
-            Basic::Nav::convertLL2PosVec(nav->getRefLatitude(), nav->getRefLongitude(), latitude, longitude, elevation, &posVec);
+            basic::Nav::convertLL2PosVec(nav->getRefLatitude(), nav->getRefLongitude(), latitude, longitude, elevation, &posVec);
             needPosVec = false;
         }
 
@@ -720,14 +720,14 @@ bool Steerpoint::compute(const Navigation* const nav, const Steerpoint* const fr
             double toBrg = 0.0;
             double toDist = 0.0;
             double toTTG = 0.0;
-            Basic::Nav::gll2bd(nav->getLatitude(), nav->getLongitude(), getLatitude(), getLongitude(), &toBrg, &toDist);
+            basic::Nav::gll2bd(nav->getLatitude(), nav->getLongitude(), getLatitude(), getLongitude(), &toBrg, &toDist);
 
             setTrueBrgDeg( static_cast<LCreal>(toBrg) );
             setDistNM( static_cast<LCreal>(toDist) );
             setMagBrgDeg( lcAepcDeg( getTrueBrgDeg() - getMagVarDeg() ) );
 
             if (nav->isVelocityDataValid() && nav->getGroundSpeedKts() > 0.0) {
-                toTTG = (toDist/nav->getGroundSpeedKts()) * Basic::Time::H2S;
+                toTTG = (toDist/nav->getGroundSpeedKts()) * basic::Time::H2S;
             }
             setTTG(static_cast<LCreal>(toTTG));
 
@@ -739,12 +739,12 @@ bool Steerpoint::compute(const Navigation* const nav, const Steerpoint* const fr
             toTTG = 0.0;
             if (from != nullptr) {
                 // When we have a 'from' steerpoint, we can compute this leg's data
-                Basic::Nav::gll2bd(from->getLatitude(), from->getLongitude(), getLatitude(), getLongitude(), &toBrg, &toDist);
+                basic::Nav::gll2bd(from->getLatitude(), from->getLongitude(), getLatitude(), getLongitude(), &toBrg, &toDist);
                 setTrueCrsDeg( static_cast<LCreal>(toBrg) );
                 setMagCrsDeg( lcAepcDeg( getTrueCrsDeg() - getMagVarDeg() ) );
                 setLegDistNM( static_cast<LCreal>(toDist) );
                 if (nav->isVelocityDataValid() && nav->getGroundSpeedKts() > 0.0) {
-                    toTTG = (toDist/nav->getGroundSpeedKts()) * Basic::Time::H2S;
+                    toTTG = (toDist/nav->getGroundSpeedKts()) * basic::Time::H2S;
                 }
                 setLegTime( static_cast<LCreal>(toTTG) );
                 setDistEnrouteNM( from->getDistEnrouteNM() + getLegDistNM() );
@@ -765,24 +765,24 @@ bool Steerpoint::compute(const Navigation* const nav, const Steerpoint* const fr
             // ---
             setETA( static_cast<LCreal>(getETE() + nav->getUTC()) );
             LCreal delta = getPTA() - getETA();
-            if (delta >= Basic::Time::D2S) delta -= Basic::Time::D2S;
+            if (delta >= basic::Time::D2S) delta -= basic::Time::D2S;
             setELT( delta );
 
             // ---
             // Compute Cross-track error (NM); negative values are when the desired track
             //  to this point is left of our navigation position
             // ---
-            LCreal aa = lcAepcDeg( getTrueBrgDeg() - getTrueCrsDeg() ) * static_cast<LCreal>(Basic::Angle::D2RCC);
+            LCreal aa = lcAepcDeg( getTrueBrgDeg() - getTrueCrsDeg() ) * static_cast<LCreal>(basic::Angle::D2RCC);
             setCrossTrackErrNM( getDistNM() * lcSin(aa) );
 
             // ---
             // Update our component steerpoint list (from NAV data, or 'direct-to' only)
             // ---
-            Basic::PairStream* steerpoints = getComponents();
+            basic::PairStream* steerpoints = getComponents();
             if (steerpoints != nullptr) {
-                Basic::List::Item* item = steerpoints->getFirstItem();
+                basic::List::Item* item = steerpoints->getFirstItem();
                 while (item != nullptr) {
-                    Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+                    basic::Pair* pair = static_cast<basic::Pair*>(item->getValue());
                     Steerpoint* p = static_cast<Steerpoint*>(pair->object());
                     p->compute(nav);
                     item = item->getNext();
@@ -809,19 +809,19 @@ bool Steerpoint::compute(const Navigation* const nav, const Steerpoint* const fr
 // type Steerpoint (or derived); tell them that we are their container
 //------------------------------------------------------------------------------
 void Steerpoint::processComponents(
-      Basic::PairStream* const list,
+      basic::PairStream* const list,
       const std::type_info&,
-      Basic::Pair* const add,
-      Basic::Component* const remove
+      basic::Pair* const add,
+      basic::Component* const remove
    )
 {
-   Basic::Component::processComponents(list,typeid(Steerpoint),add,remove);
+   basic::Component::processComponents(list,typeid(Steerpoint),add,remove);
 }
 
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Basic::Object* Steerpoint::getSlotByIndex(const int si)
+basic::Object* Steerpoint::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

@@ -7,7 +7,7 @@
 #include "openeaagles/simulation/RfSystem.h"
 
 namespace oe {
-   namespace Basic {
+   namespace basic {
       class Angle;
       class Frequency;
       class Integer;
@@ -88,11 +88,11 @@ public:
     virtual bool isScanOn() const;                       // Is the Sensor scanning
     virtual int getScanBar() const;                      // Returns the current bar number for a raster scan
 
-    virtual const Basic::PairStream* getModes() const;        // Returns the list of sensor submodes
+    virtual const basic::PairStream* getModes() const;        // Returns the list of sensor submodes
     virtual bool setMasterMode(RfSensor* const m);       // Set our master mode (container)
 
-    virtual const Basic::String* getTrackManagerName() const; // Returns the requested track manager's name
-    virtual bool setTrackManagerName(Basic::String* const a); // Sets the name of the track manager to use
+    virtual const basic::String* getTrackManagerName() const; // Returns the requested track manager's name
+    virtual bool setTrackManagerName(basic::String* const a); // Sets the name of the track manager to use
 
     virtual TrackManager* getTrackManager();             // Returns our current track manager
     virtual const TrackManager* getTrackManager() const; // Returns our current track manager (const version)
@@ -106,32 +106,32 @@ public:
     virtual bool setInitRngIdx(const int idx);                // Sets the starting range index; returns true if successful
 
     // Slot functions
-    virtual bool setSlotTrackManagerName(Basic::String* const v);   // Sets our track manager by name
-    virtual bool setSlotModeStream(Basic::PairStream* const obj);   // Sets a list of R/F sensor submodes
+    virtual bool setSlotTrackManagerName(basic::String* const v);   // Sets our track manager by name
+    virtual bool setSlotModeStream(basic::PairStream* const obj);   // Sets a list of R/F sensor submodes
     virtual bool setSlotModeSingle(RfSensor* const obj);            // Sets a single (only) R/F sensor submode
-    virtual bool setSlotRanges(Basic::List* const list);            // Sets out list of valid ranges (nm)
-    virtual bool setSlotInitRangeIdx(Basic::Number* const num);     // Sets out initial range index [ 1 .. nRanges ]
-    virtual bool setSlotPrf(const Basic::Frequency* const msg);     // Sets PRF as a Basic::Frequency
-    virtual bool setSlotPrf(const Basic::Number* const msg);        // Sets PRF in hertz
-    virtual bool setSlotPulseWidth(const Basic::Time* const msg);   // Sets pulse width using Basic::Time
-    virtual bool setSlotPulseWidth(const Basic::Number* const msg); // Sets pulse width in seconds
-    virtual bool setSlotBeamWidth(const Basic::Angle* const msg);   // Sets beam width as a Basic::Angle
-    virtual bool setSlotBeamWidth(const Basic::Number* const msg);  // Sets beam width in radians
-    virtual bool setSlotTypeId(const Basic::String* const msg);     // Sets the type ID
-    virtual bool setSlotSyncXmitWithScan(const Basic::Number* const msg); // Sets sync transmitter with antenna scan flag
+    virtual bool setSlotRanges(basic::List* const list);            // Sets out list of valid ranges (nm)
+    virtual bool setSlotInitRangeIdx(basic::Number* const num);     // Sets out initial range index [ 1 .. nRanges ]
+    virtual bool setSlotPrf(const basic::Frequency* const msg);     // Sets PRF as a basic::Frequency
+    virtual bool setSlotPrf(const basic::Number* const msg);        // Sets PRF in hertz
+    virtual bool setSlotPulseWidth(const basic::Time* const msg);   // Sets pulse width using basic::Time
+    virtual bool setSlotPulseWidth(const basic::Number* const msg); // Sets pulse width in seconds
+    virtual bool setSlotBeamWidth(const basic::Angle* const msg);   // Sets beam width as a basic::Angle
+    virtual bool setSlotBeamWidth(const basic::Number* const msg);  // Sets beam width in radians
+    virtual bool setSlotTypeId(const basic::String* const msg);     // Sets the type ID
+    virtual bool setSlotSyncXmitWithScan(const basic::Number* const msg); // Sets sync transmitter with antenna scan flag
 
     bool isTransmitting() const override;
 
-    bool event(const int event, Basic::Object* const obj = nullptr) override;
+    bool event(const int event, basic::Object* const obj = nullptr) override;
     void updateData(const LCreal dt = 0.0) override;
     void reset() override;
 
 protected:
-    virtual Basic::PairStream* getModes();                              // Returns the list of submodes
+    virtual basic::PairStream* getModes();                              // Returns the list of submodes
 
     // Event handler(s)
-    virtual bool onStartScanEvent(const Basic::Integer* const bar);     // Start of scan (TGT_DESIGNATE) event handler
-    virtual bool onEndScanEvent(const Basic::Integer* const bar);       // End of scan (SENSOR_RTS) event handler
+    virtual bool onStartScanEvent(const basic::Integer* const bar);     // Start of scan (TGT_DESIGNATE) event handler
+    virtual bool onEndScanEvent(const basic::Integer* const bar);       // End of scan (SENSOR_RTS) event handler
     virtual bool onTgtDesignateEvent();                        // Target Designate (SCAN_START) event handler
     virtual bool onReturnToSearchEvent();                      // Return to search (SCAN_END) event handler
 
@@ -140,7 +140,7 @@ protected:
 private:
     bool processModes();
 
-    Basic::PairStream*  modes;           // Our Submodes
+    basic::PairStream*  modes;           // Our Submodes
     LCreal*        ranges;          // List of ranges (nm)
     int            nRanges;         // Number of ranges
     LCreal         rng;             // Current range (nm)
@@ -150,7 +150,7 @@ private:
     int            scanBar;         // Scan (bar) number
     bool           syncXmitWithScan; // Sync transmitter with antenna scan flag
 
-    Basic::String* tmName;        // Name of our track manager
+    basic::String* tmName;        // Name of our track manager
     RfSensor*      masterModePtr;   // Our Master (Parent) mode (e.g., Sensor)
     TrackManager*  trackManager;    // Our Track manager -- managed by the onboard computer
 

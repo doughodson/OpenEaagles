@@ -17,9 +17,9 @@ namespace Dynamics {
 Factory::Factory()
 {}
 
-Basic::Object* Factory::createObj(const char* name)
+basic::Object* Factory::createObj(const char* name)
 {
-    Basic::Object* obj = nullptr;
+    basic::Object* obj = nullptr;
 
     // RAC model
     if ( std::strcmp(name, RacModel::getFactoryName()) == 0 ) {

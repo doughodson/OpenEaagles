@@ -7,12 +7,12 @@
 #include "../DataFile.h"
 
 namespace oe {
-   namespace Basic { class Number; }
+   namespace basic { class Number; }
 namespace Terrain {
 
 //------------------------------------------------------------------------------
 // Class: SrtmHgtFile
-// Base classes: Basic::Object -> Basic::Component
+// Base classes: basic::Object -> basic::Component
 //               -> Terrain::Database -> Terrain::DataFile
 //
 // Description: SRTM data loader.

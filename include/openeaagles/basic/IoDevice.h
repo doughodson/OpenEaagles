@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: IoDevice
 //------------------------------------------------------------------------------
-#ifndef __oe_Basic_IoDevice_H__
-#define __oe_Basic_IoDevice_H__
+#ifndef __oe_basic_IoDevice_H__
+#define __oe_basic_IoDevice_H__
 
 #include "openeaagles/basic/Component.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
    class IoData;
 
 //------------------------------------------------------------------------------
@@ -32,7 +32,7 @@ namespace Basic {
 //       example: AI channels range from 0 to (getNumAnalogInputs() - 1)
 //
 //    2) Use the reset() function, reset(), to open the device, and the
-//       deleteData() function, Basic::Object::deleteData(), to close the
+//       deleteData() function, basic::Object::deleteData(), to close the
 //       device (both as required).
 //
 //    3) Both processInputs() and processOutputs() are passed an I/O data
@@ -46,8 +46,8 @@ namespace Basic {
 //    devices  <PairStream>   ! List of IoDevice objects; i.e., sub-devices (default: none)
 //
 //------------------------------------------------------------------------------
-class IoDevice : public Basic::Component {
-    DECLARE_SUBCLASS(IoDevice,Basic::Component)
+class IoDevice : public basic::Component {
+    DECLARE_SUBCLASS(IoDevice,basic::Component)
 
 public:
    IoDevice();
@@ -86,7 +86,7 @@ protected:
    virtual bool setSlotAdapters(PairStream* const list);
    virtual bool setSlotDevices(PairStream* const list);
 
-   // Basic::Component protected functions
+   // basic::Component protected functions
    bool shutdownNotification() override;
 
 private:

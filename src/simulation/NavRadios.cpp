@@ -405,7 +405,7 @@ void IlsRadio::updateData(const LCreal dt)
         localizerValid = findLocalizerByFreq(getFrequency());
 
         //Get test results - make sure dest LL do not change as plane flies
-        Basic::Nav::gbd2ll(getLatitude(),getLongitude(),bearing,grdrange,&destLatitude,&destLongitude);
+        basic::Nav::gbd2ll(getLatitude(),getLongitude(),bearing,grdrange,&destLatitude,&destLongitude);
         //Test for bad result...
         if ((glideSlopeValid == false)|(localizerValid == false)) {
             //std::cerr << "No ILS In Range..." << std::endl;

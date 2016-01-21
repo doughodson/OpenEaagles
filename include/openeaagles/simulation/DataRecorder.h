@@ -54,7 +54,7 @@
 #include "openeaagles/simulation/dataRecorderTokens.h"
 
 namespace oe {
-   namespace Basic { class List; }
+   namespace basic { class List; }
 namespace Simulation {
    class Simulation;
    class Station;
@@ -80,9 +80,9 @@ namespace Simulation {
 //                               ! (default: no records are disabled)
 //
 //------------------------------------------------------------------------------
-class RecorderComponent : public Basic::Component
+class RecorderComponent : public basic::Component
 {
-   DECLARE_SUBCLASS(RecorderComponent, Basic::Component)
+   DECLARE_SUBCLASS(RecorderComponent, basic::Component)
 
 public:
    RecorderComponent();
@@ -99,8 +99,8 @@ public:
 
 protected:
    // Slot functions
-   bool setSlotEnabledList(const Basic::List* const list);
-   bool setSlotDisabledList(const Basic::List* const list);
+   bool setSlotEnabledList(const basic::List* const list);
+   bool setSlotDisabledList(const basic::List* const list);
 
 private:
    void initData();
@@ -145,7 +145,7 @@ public:
    // Record Data function
    bool recordData(
       const unsigned int id,              // Recorder event Id
-      const Basic::Object* pObjects[4],   // Sample objects
+      const basic::Object* pObjects[4],   // Sample objects
       const double values[4]              // Sample values
    );
 
@@ -156,7 +156,7 @@ protected:
    // Implementation of the record data function
    virtual bool recordDataImp(
       const unsigned int id,              // Recorder event Id
-      const Basic::Object* pObjects[4],   // Sample objects
+      const basic::Object* pObjects[4],   // Sample objects
       const double values[4]              // Sample values
    );
 

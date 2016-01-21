@@ -1,11 +1,11 @@
 
 #include "openeaagles/basic/support.h"
 
-#ifndef __oe_Basic_safe_queue_H__
-#define __oe_Basic_safe_queue_H__
+#ifndef __oe_basic_safe_queue_H__
+#define __oe_basic_safe_queue_H__
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 //------------------------------------------------------------------------------
 // Template safe_queue<T>
@@ -18,7 +18,7 @@ namespace Basic {
 //    3) put(), get(), peek() and clear() are internally protected by a semaphore
 //
 // Examples:
-//    Basic::safe_queue<int>* q1 = new Basic::safe_queue<int>(100); // queue size 100 items
+//    basic::safe_queue<int>* q1 = new basic::safe_queue<int>(100); // queue size 100 items
 //    q1->put(1);           // puts 1 on the queue
 //    q1->put(2);           // puts 2 on the queue
 //    int i = q1->get();    // i is equal to 1

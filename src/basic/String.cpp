@@ -4,7 +4,7 @@
 #include <cstring>
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 IMPLEMENT_SUBCLASS(String, "String")
 EMPTY_SLOTTABLE(String)
@@ -272,5 +272,5 @@ std::ostream& String::serialize(std::ostream& sout, const int, const bool) const
    return sout;
 }
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace

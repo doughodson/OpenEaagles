@@ -11,7 +11,7 @@ namespace LinearSystem {
 
 //------------------------------------------------------------------------------
 // Class:  FirstOrderTf
-// Base class:  Basic::Object -> ScalerFunc-> DiffEquation -> FirstOrderTf
+// Base class:  basic::Object -> ScalerFunc-> DiffEquation -> FirstOrderTf
 //
 // Description: Models a first order continuous transfer function in the discrete
 //              z-domain using a difference equation with Tustin coefficients.

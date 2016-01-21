@@ -44,7 +44,7 @@
    ::oe::Simulation::DataRecorder* _p = pRecorder;        \
    if (pRecorder != 0)  {                                      \
       unsigned int _token = token;                             \
-      const ::oe::Basic::Object* _obj[4] = { 0, 0, 0, 0 };  \
+      const ::oe::basic::Object* _obj[4] = { 0, 0, 0, 0 };  \
       double _val[4] = { 0, 0, 0, 0 };
 
 #define SAMPLE_1_OBJECT(P1)               _obj[0] = P1;
@@ -69,7 +69,7 @@
 // Record Data function
 inline bool DataRecorder::recordData(
       const unsigned int id,
-      const Basic::Object* pObjects[4],
+      const basic::Object* pObjects[4],
       const double values[4]
    )
 {

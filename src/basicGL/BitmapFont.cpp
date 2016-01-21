@@ -34,7 +34,7 @@ END_SLOTTABLE(BitmapFont)
 //  Map slot table to handles
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(BitmapFont)
-    ON_SLOT(1, setReverse, Basic::Number)
+    ON_SLOT(1, setReverse, basic::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -171,7 +171,7 @@ void BitmapFont::loadFont()
 //------------------------------------------------------------------------------
 // setReverse() -- sets text in reverse type
 //------------------------------------------------------------------------------
-bool BitmapFont::setReverse(const Basic::Number* const rnumber)
+bool BitmapFont::setReverse(const basic::Number* const rnumber)
 {
     if (rnumber != nullptr)
         reverse = rnumber->getBoolean();
@@ -182,7 +182,7 @@ bool BitmapFont::setReverse(const Basic::Number* const rnumber)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for Page
 //------------------------------------------------------------------------------
-Basic::Object* BitmapFont::getSlotByIndex(const int si)
+basic::Object* BitmapFont::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

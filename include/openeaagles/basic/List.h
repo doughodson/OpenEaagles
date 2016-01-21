@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: List
 //------------------------------------------------------------------------------
-#ifndef __oe_Basic_List_H__
-#define __oe_Basic_List_H__
+#ifndef __oe_basic_List_H__
+#define __oe_basic_List_H__
 
 #include "openeaagles/basic/Object.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 //------------------------------------------------------------------------------
 // Class: List
@@ -201,7 +201,7 @@ private:
 
 };
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace
 
 #endif

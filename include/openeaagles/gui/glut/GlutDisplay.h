@@ -93,13 +93,13 @@ public:
    const osg::Vec2d& getSubwindowSize() const;
 
    // Slot functions
-   bool setSlotFullScreen(const Basic::Number* const msg);
-   bool setSlotIdleSleepTime(const Basic::Number* const msg);
-   bool setSlotResizeWindows(const Basic::Number* const msg);
-   bool setSlotPickWidth(const Basic::Number* const msg);
-   bool setSlotPickHeight(const Basic::Number* const msg);
-   bool setSlotAccumBuff(const Basic::Number* const msg);
-   bool setSlotStencilBuff(const Basic::Number* const msg);
+   bool setSlotFullScreen(const basic::Number* const msg);
+   bool setSlotIdleSleepTime(const basic::Number* const msg);
+   bool setSlotResizeWindows(const basic::Number* const msg);
+   bool setSlotPickWidth(const basic::Number* const msg);
+   bool setSlotPickHeight(const basic::Number* const msg);
+   bool setSlotAccumBuff(const basic::Number* const msg);
+   bool setSlotStencilBuff(const basic::Number* const msg);
 
    void select() override;                       // Selects this display.
    void hide() override;
@@ -109,7 +109,7 @@ public:
    void mouseEvent(const int button, const int state, const int x, const int y) override;
 
    void reset() override;
-   bool event(const int event, Basic::Object* const obj = nullptr) override;
+   bool event(const int event, basic::Object* const obj = nullptr) override;
 
 protected:
    // Creates a subwindow and returns the window ID (or -1 if failed)

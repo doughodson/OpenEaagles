@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: Float
 //------------------------------------------------------------------------------
-#ifndef __oe_Basic_Float_H__
-#define __oe_Basic_Float_H__
+#ifndef __oe_basic_Float_H__
+#define __oe_basic_Float_H__
 
 #include "openeaagles/basic/Number.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 //------------------------------------------------------------------------------
 // Class:  Float
@@ -377,7 +377,7 @@ inline std::ostream& operator<<(std::ostream& sout, const Float& n)
    return sout;
 }
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace
 
 

@@ -7,7 +7,7 @@
 #include "openeaagles/basic/SlotTable.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 
 //==============================================================================
@@ -324,5 +324,5 @@ StatuteMiles::StatuteMiles(const Distance& value) : Distance()
 EMPTY_COPYDATA(StatuteMiles)
 EMPTY_DELETEDATA(StatuteMiles)
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace

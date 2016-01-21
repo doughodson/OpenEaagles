@@ -45,15 +45,15 @@
 #include "openeaagles/basic/Object.h"
 
 namespace oe {
-namespace Basic { class String; }
+namespace basic { class String; }
 namespace Maps {
 namespace Rpf {
 
 class CadrgTocEntry;
 
-class CadrgFile : public Basic::Object
+class CadrgFile : public basic::Object
 {
-    DECLARE_SUBCLASS(CadrgFile, Basic::Object)
+    DECLARE_SUBCLASS(CadrgFile, basic::Object)
 
 public:
     CadrgFile();
@@ -85,7 +85,7 @@ private:
     int numBoundaries;                          // How many boundaries are there?
     CadrgTocEntry* entries[MAX_TOC_ENTRIES];    // Holds our table of contents entries
     bool cib;                                   // CIB flag
-    Basic::String* originalDir;                 // directory of the file we are associated with
+    basic::String* originalDir;                 // directory of the file we are associated with
 };
 
 }  // End Rpf namespace

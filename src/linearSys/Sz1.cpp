@@ -26,14 +26,14 @@ END_SLOTTABLE(Sz1)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(Sz1)
-   ON_SLOT( 1, setSlotN1,   Basic::Number)
-   ON_SLOT( 2, setSlotN1,   Basic::Number)
-   ON_SLOT( 3, setSlotN2,   Basic::Number)
-   ON_SLOT( 4, setSlotN2,   Basic::Number)
-   ON_SLOT( 5, setSlotD1,   Basic::Number)
-   ON_SLOT( 6, setSlotD1,   Basic::Number)
-   ON_SLOT( 7, setSlotD2,   Basic::Number)
-   ON_SLOT( 8, setSlotD2,   Basic::Number)
+   ON_SLOT( 1, setSlotN1,   basic::Number)
+   ON_SLOT( 2, setSlotN1,   basic::Number)
+   ON_SLOT( 3, setSlotN2,   basic::Number)
+   ON_SLOT( 4, setSlotN2,   basic::Number)
+   ON_SLOT( 5, setSlotD1,   basic::Number)
+   ON_SLOT( 6, setSlotD1,   basic::Number)
+   ON_SLOT( 7, setSlotD2,   basic::Number)
+   ON_SLOT( 8, setSlotD2,   basic::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -52,7 +52,7 @@ EMPTY_DELETEDATA(Sz1)
 // Set slot functions
 //------------------------------------------------------------------------------
 
-bool Sz1::setSlotN1(const Basic::Number* const msg)
+bool Sz1::setSlotN1(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -62,7 +62,7 @@ bool Sz1::setSlotN1(const Basic::Number* const msg)
    return ok;
 }
 
-bool Sz1::setSlotN2(const Basic::Number* const msg)
+bool Sz1::setSlotN2(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -72,7 +72,7 @@ bool Sz1::setSlotN2(const Basic::Number* const msg)
    return ok;
 }
 
-bool Sz1::setSlotD1(const Basic::Number* const msg)
+bool Sz1::setSlotD1(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -82,7 +82,7 @@ bool Sz1::setSlotD1(const Basic::Number* const msg)
    return ok;
 }
 
-bool Sz1::setSlotD2(const Basic::Number* const msg)
+bool Sz1::setSlotD2(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -95,7 +95,7 @@ bool Sz1::setSlotD2(const Basic::Number* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for Sz1
 //------------------------------------------------------------------------------
-Basic::Object* Sz1::getSlotByIndex(const int si)
+basic::Object* Sz1::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

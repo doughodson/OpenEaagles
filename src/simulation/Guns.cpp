@@ -40,7 +40,7 @@ Bullet::Bullet()
 {
    STANDARD_CONSTRUCTOR()
 
-   static Basic::String generic("Bullet");
+   static basic::String generic("Bullet");
    setType(&generic);
 
    nbt = 0;
@@ -194,7 +194,7 @@ bool Bullet::burstOfBullets(const osg::Vec3* const pos, const osg::Vec3* const v
 //------------------------------------------------------------------------------
 void Bullet::updateBurstTrajectories(const LCreal dt)
 {
-   static const LCreal g = ETHG * Basic::Distance::FT2M;      // Acceleration of Gravity (m/s/s)
+   static const LCreal g = ETHG * basic::Distance::FT2M;      // Acceleration of Gravity (m/s/s)
 
    // For all active bursts
    for (int i = 0; i < nbt; i++) {
@@ -249,11 +249,11 @@ bool Bullet::checkForTargetHit()
         LCreal maxRange = 1; // close range of detonation
         Simulation* sim = getSimulation();
         if (sim != nullptr) {
-            Basic::PairStream* players = sim->getPlayers();
+            basic::PairStream* players = sim->getPlayers();
             if (players != nullptr) {
-                Basic::List::Item* item = players->getFirstItem();
+                basic::List::Item* item = players->getFirstItem();
                 while (item != nullptr) {
-                    Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+                    basic::Pair* pair = static_cast<basic::Pair*>(item->getValue());
                     if (pair != nullptr) {
                         Player* player = dynamic_cast<Player*>(pair->object());
                         if (player != nullptr && player != ownship && player->isMajorType(LIFE_FORM) && !player->isDestroyed()) {
@@ -309,22 +309,22 @@ BEGIN_SLOTTABLE(Gun)
 
     // The following are used to position the gun on the ownship player
     "position",         //  6: Position vector; relative to ownship axis [ nose right down ]  (meters)
-    "roll",             //  7: roll angle; relative to ownship axis (radians, Basic::Angle)
-    "pitch",            //  8: pitch; relative to ownship axis (radians, Basic::Angle)
-    "yaw"               //  9: heading; relative to ownship axis (radians, Basic::Angle)
+    "roll",             //  7: roll angle; relative to ownship axis (radians, basic::Angle)
+    "pitch",            //  8: pitch; relative to ownship axis (radians, basic::Angle)
+    "yaw"               //  9: heading; relative to ownship axis (radians, basic::Angle)
 END_SLOTTABLE(Gun)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(Gun)
     ON_SLOT(1, setBulletType, Bullet)
-    ON_SLOT(2, setSlotNumRounds,  Basic::Number)
-    ON_SLOT(3, setSlotUnlimited,  Basic::Number)
-    ON_SLOT(4, setSlotRate,       Basic::Number)
-    ON_SLOT(5, setSlotBurstRate,  Basic::Number)
-    ON_SLOT(6, setSlotPosition,Basic::List)
-    ON_SLOT(7, setSlotRoll,  Basic::Number)
-    ON_SLOT(8, setSlotPitch, Basic::Number)
-    ON_SLOT(9, setSlotYaw,   Basic::Number)
+    ON_SLOT(2, setSlotNumRounds,  basic::Number)
+    ON_SLOT(3, setSlotUnlimited,  basic::Number)
+    ON_SLOT(4, setSlotRate,       basic::Number)
+    ON_SLOT(5, setSlotBurstRate,  basic::Number)
+    ON_SLOT(6, setSlotPosition,basic::List)
+    ON_SLOT(7, setSlotRoll,  basic::Number)
+    ON_SLOT(8, setSlotPitch, basic::Number)
+    ON_SLOT(9, setSlotYaw,   basic::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -686,7 +686,7 @@ bool Gun::setAngles(const double r, const double p, const double y)
     angles.set(r,p,y);
 
     // Set rotational matrix
-    Basic::Nav::computeRotationalMatrix(getRoll(), getPitch(), getYaw(), &rm);
+    basic::Nav::computeRotationalMatrix(getRoll(), getPitch(), getYaw(), &rm);
 
     return true;
 }
@@ -696,7 +696,7 @@ bool Gun::setAngles(const double r, const double p, const double y)
 //------------------------------------------------------------------------------
 
 // Number of rounds
-bool Gun::setSlotNumRounds(const Basic::Number* const num)
+bool Gun::setSlotNumRounds(const basic::Number* const num)
 {
    bool ok = false;
    if (num != nullptr) {
@@ -706,7 +706,7 @@ bool Gun::setSlotNumRounds(const Basic::Number* const num)
 }
 
 // Unlimited rounds flag
-bool Gun::setSlotUnlimited(const Basic::Number* const num)
+bool Gun::setSlotUnlimited(const basic::Number* const num)
 {
    bool ok = false;
    if (num != nullptr) {
@@ -716,7 +716,7 @@ bool Gun::setSlotUnlimited(const Basic::Number* const num)
 }
 
 // Rate of fire (rds per min)
-bool Gun::setSlotRate(const Basic::Number* const num)
+bool Gun::setSlotRate(const basic::Number* const num)
 {
    bool ok = false;
    if (num != nullptr) {
@@ -726,7 +726,7 @@ bool Gun::setSlotRate(const Basic::Number* const num)
 }
 
 // Burst rate
-bool Gun::setSlotBurstRate(const Basic::Number* const num)
+bool Gun::setSlotBurstRate(const basic::Number* const num)
 {
    bool ok = false;
    if (num != nullptr) {
@@ -745,7 +745,7 @@ bool Gun::setSlotBurstRate(const Basic::Number* const num)
 }
 
 // Gun position relative to ownship
-bool Gun::setSlotPosition(Basic::List* const numList)
+bool Gun::setSlotPosition(basic::List* const numList)
 {
    bool ok = false;
    LCreal values[3];
@@ -758,14 +758,14 @@ bool Gun::setSlotPosition(Basic::List* const numList)
 }
 
 // Gun roll angle to ownship
-bool Gun::setSlotRoll(const Basic::Number* const num)
+bool Gun::setSlotRoll(const basic::Number* const num)
 {
    bool ok = false;
    double value = -1000.0;
 
-   const Basic::Angle* p = dynamic_cast<const Basic::Angle*>(num);
+   const basic::Angle* p = dynamic_cast<const basic::Angle*>(num);
    if (p != nullptr) {
-      Basic::Radians radian;
+      basic::Radians radian;
       value = radian.convert(*p);
    }
    else if (num != nullptr) {
@@ -785,14 +785,14 @@ bool Gun::setSlotRoll(const Basic::Number* const num)
 }
 
 // Gun pitch angle to ownship
-bool Gun::setSlotPitch(const Basic::Number* const num)
+bool Gun::setSlotPitch(const basic::Number* const num)
 {
    bool ok = false;
    double value = -1000.0;
 
-   const Basic::Angle* p = dynamic_cast<const Basic::Angle*>(num);
+   const basic::Angle* p = dynamic_cast<const basic::Angle*>(num);
    if (p != nullptr) {
-      Basic::Radians radian;
+      basic::Radians radian;
       value = radian.convert(*p);
    }
    else if (num != nullptr) {
@@ -812,14 +812,14 @@ bool Gun::setSlotPitch(const Basic::Number* const num)
 }
 
 // Gun heading angle to ownship
-bool Gun::setSlotYaw(const Basic::Number* const num)
+bool Gun::setSlotYaw(const basic::Number* const num)
 {
    bool ok = false;
    double value = -1000.0;
 
-   const Basic::Angle* p = dynamic_cast<const Basic::Angle*>(num);
+   const basic::Angle* p = dynamic_cast<const basic::Angle*>(num);
    if (p != nullptr) {
-      Basic::Radians radian;
+      basic::Radians radian;
       value = radian.convert(*p);
    }
    else if (num != nullptr) {
@@ -841,7 +841,7 @@ bool Gun::setSlotYaw(const Basic::Number* const num)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Basic::Object* Gun::getSlotByIndex(const int si)
+basic::Object* Gun::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

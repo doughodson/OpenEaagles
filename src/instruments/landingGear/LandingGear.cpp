@@ -18,8 +18,8 @@ END_SLOTTABLE(LandingGear)
 //  Map slot table to handles for LandingGear
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(LandingGear)
-    ON_SLOT(1, setSlotGearDownValue, Basic::Number)
-    ON_SLOT(2, setSlotGearUpValue, Basic::Number)
+    ON_SLOT(1, setSlotGearDownValue, basic::Number)
+    ON_SLOT(2, setSlotGearUpValue, basic::Number)
 END_SLOT_MAP()
 
 
@@ -62,7 +62,7 @@ EMPTY_DELETEDATA(LandingGear)
 //------------------------------------------------------------------------------
 // setSlotGearDownValue() -
 //------------------------------------------------------------------------------
-bool LandingGear::setSlotGearDownValue(const Basic::Number* const newDV)
+bool LandingGear::setSlotGearDownValue(const basic::Number* const newDV)
 {
     bool ok = false;
     if (newDV != nullptr) ok = setGearDownValue(newDV->getReal());
@@ -71,7 +71,7 @@ bool LandingGear::setSlotGearDownValue(const Basic::Number* const newDV)
 //------------------------------------------------------------------------------
 // setSlotGearUpValue() -
 //------------------------------------------------------------------------------
-bool LandingGear::setSlotGearUpValue(const Basic::Number* const newUV)
+bool LandingGear::setSlotGearUpValue(const basic::Number* const newUV)
 {
     bool ok = false;
     if (newUV != nullptr) ok = setGearUpValue(newUV->getReal());
@@ -136,7 +136,7 @@ void LandingGear::updateData(const LCreal dt)
     send("gearpos", SELECT, x, gearSelSD);
 
     // determine if we have a rotary
-    Basic::Pair* pair = (Basic::Pair*)findByName("gearpos");
+    basic::Pair* pair = (basic::Pair*)findByName("gearpos");
     if (pair != nullptr) haveRotary = true;
 }
 
@@ -235,7 +235,7 @@ void LandingGear::drawFunc()
 //------------------------------------------------------------------------------
 // getSlotByIndex() for LandingGear
 //------------------------------------------------------------------------------
-Basic::Object* LandingGear::getSlotByIndex(const int si)
+basic::Object* LandingGear::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

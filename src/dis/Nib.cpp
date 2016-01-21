@@ -360,7 +360,7 @@ bool Nib::emitterBeamsManager(const LCreal curExecTime)
       // Check for the single-beam RADAR
       {
          // (DPG -- #### only a simple, single-beam Radar)
-         const Basic::Pair * pair = getPlayer()->getSensorByType(typeid(Simulation::Radar));
+         const basic::Pair * pair = getPlayer()->getSensorByType(typeid(Simulation::Radar));
          if (pair != nullptr) {
             Simulation::RfSensor* rs = (Simulation::RfSensor*) pair->object();
 
@@ -389,19 +389,19 @@ bool Nib::emitterBeamsManager(const LCreal curExecTime)
 
       // Check for a Jammer
       {
-         const Basic::Pair * pair = getPlayer()->getSensorByType(typeid(Simulation::Jammer));
+         const basic::Pair * pair = getPlayer()->getSensorByType(typeid(Simulation::Jammer));
          if (pair != nullptr) {
             Simulation::RfSensor* js = (Simulation::RfSensor*) pair->object();
 
             bool singleBeam = true;
-            Basic::PairStream* subcomponents = js->getComponents();
+            basic::PairStream* subcomponents = js->getComponents();
             if (subcomponents != nullptr) {
 
                // Check for multi-beam jammer (each beam is a subcomponent Jammer)
-               Basic::List::Item* item = subcomponents->getFirstItem();
+               basic::List::Item* item = subcomponents->getFirstItem();
                while (item != nullptr && numEmissionSystems < MAX_EM_SYSTEMS) {
 
-                  Basic::Pair* pair = static_cast<Basic::Pair*>( item->getValue() );
+                  basic::Pair* pair = static_cast<basic::Pair*>( item->getValue() );
                   Simulation::Jammer* jam = dynamic_cast<Simulation::Jammer*>( pair->object() );
                   if (jam != nullptr) {
                      singleBeam = false;

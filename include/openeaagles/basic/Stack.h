@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: Stack
 //------------------------------------------------------------------------------
-#ifndef __oe_Basic_Stack_H__
-#define __oe_Basic_Stack_H__
+#ifndef __oe_basic_Stack_H__
+#define __oe_basic_Stack_H__
 
 #include "openeaagles/basic/List.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 //------------------------------------------------------------------------------
 // Class: Stack
@@ -71,7 +71,7 @@ inline int Stack::operator!=(const Stack& list) const
     return *s1 != *s2;
 }
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace
 
 #endif

@@ -27,15 +27,15 @@ BEGIN_SLOTTABLE(MapPage)
 END_SLOTTABLE(MapPage)
 
 BEGIN_SLOT_MAP(MapPage)
-    ON_SLOT(1, setSlotOuterRadius, Basic::Number)
-    ON_SLOT(2, setSlotOuterRadiusDC, Basic::Number)
-    ON_SLOT(3, setSlotRange, Basic::Number)
-    ON_SLOT(4, setSlotDisplacement, Basic::Number)
-    ON_SLOT(5, setSlotCentered, Basic::Number)
-    ON_SLOT(6, setSlotRefLat, Basic::Number)
-    ON_SLOT(7, setSlotRefLon, Basic::Number)
-    ON_SLOT(8, setSlotRefHdg, Basic::Number)
-    ON_SLOT(9, setSlotNorthUp, Basic::Number)
+    ON_SLOT(1, setSlotOuterRadius, basic::Number)
+    ON_SLOT(2, setSlotOuterRadiusDC, basic::Number)
+    ON_SLOT(3, setSlotRange, basic::Number)
+    ON_SLOT(4, setSlotDisplacement, basic::Number)
+    ON_SLOT(5, setSlotCentered, basic::Number)
+    ON_SLOT(6, setSlotRefLat, basic::Number)
+    ON_SLOT(7, setSlotRefLon, basic::Number)
+    ON_SLOT(8, setSlotRefHdg, basic::Number)
+    ON_SLOT(9, setSlotNorthUp, basic::Number)
 END_SLOT_MAP()
 
 
@@ -43,14 +43,14 @@ END_SLOT_MAP()
 //  Event Handler
 //------------------------------------------------------------------------------
 BEGIN_EVENT_HANDLER(MapPage)
-    ON_EVENT_OBJ(UPDATE_VALUE,  onUpdateRange, Basic::Number)
-    ON_EVENT_OBJ(UPDATE_VALUE2, onUpdateHeading, Basic::Number)
-    ON_EVENT_OBJ(UPDATE_VALUE3, onUpdateReferenceLat, Basic::Number)
-    ON_EVENT_OBJ(UPDATE_VALUE4, onUpdateReferenceLon, Basic::Number)
-    ON_EVENT_OBJ(UPDATE_VALUE5, onUpdateCentered, Basic::Number)
-    ON_EVENT_OBJ(UPDATE_VALUE6, onUpdateOuterRadius, Basic::Number)
-    ON_EVENT_OBJ(UPDATE_VALUE7, onUpdateOuterRadiusDC, Basic::Number)
-    ON_EVENT_OBJ(UPDATE_VALUE8, onUpdateDisplacement, Basic::Number)
+    ON_EVENT_OBJ(UPDATE_VALUE,  onUpdateRange, basic::Number)
+    ON_EVENT_OBJ(UPDATE_VALUE2, onUpdateHeading, basic::Number)
+    ON_EVENT_OBJ(UPDATE_VALUE3, onUpdateReferenceLat, basic::Number)
+    ON_EVENT_OBJ(UPDATE_VALUE4, onUpdateReferenceLon, basic::Number)
+    ON_EVENT_OBJ(UPDATE_VALUE5, onUpdateCentered, basic::Number)
+    ON_EVENT_OBJ(UPDATE_VALUE6, onUpdateOuterRadius, basic::Number)
+    ON_EVENT_OBJ(UPDATE_VALUE7, onUpdateOuterRadiusDC, basic::Number)
+    ON_EVENT_OBJ(UPDATE_VALUE8, onUpdateDisplacement, basic::Number)
 END_EVENT_HANDLER()
 
 //------------------------------------------------------------------------------
@@ -381,7 +381,7 @@ bool MapPage::latLon2Earth(const double lat, const double lon, LCreal* const ear
 //------------------------------------------------------------------------------
 // onUpdateRange() - set our new range
 //------------------------------------------------------------------------------
-bool MapPage::onUpdateRange(const Basic::Number* const newR)
+bool MapPage::onUpdateRange(const basic::Number* const newR)
 {
    bool ok = false;
    if (newR != nullptr) ok = setRange(newR->getReal());
@@ -391,7 +391,7 @@ bool MapPage::onUpdateRange(const Basic::Number* const newR)
 //------------------------------------------------------------------------------
 // onUpdateHeading() - set our new heading
 //------------------------------------------------------------------------------
-bool MapPage::onUpdateHeading(const Basic::Number* const newH)
+bool MapPage::onUpdateHeading(const basic::Number* const newH)
 {
    bool ok = false;
    if (newH != nullptr) ok = setHeadingDeg(newH->getReal());
@@ -401,7 +401,7 @@ bool MapPage::onUpdateHeading(const Basic::Number* const newH)
 //------------------------------------------------------------------------------
 // onUpdateReferenceLat() - set our new reference latitude
 //------------------------------------------------------------------------------
-bool MapPage::onUpdateReferenceLat(const Basic::Number* const newOL)
+bool MapPage::onUpdateReferenceLat(const basic::Number* const newOL)
 {
    bool ok = false;
    if (newOL != nullptr) ok = setReferenceLatDeg(newOL->getDouble());
@@ -411,7 +411,7 @@ bool MapPage::onUpdateReferenceLat(const Basic::Number* const newOL)
 //------------------------------------------------------------------------------
 // onUpdateReferenceLon() - set our new reference longitude
 //------------------------------------------------------------------------------
-bool MapPage::onUpdateReferenceLon(const Basic::Number* const newOL)
+bool MapPage::onUpdateReferenceLon(const basic::Number* const newOL)
 {
    bool ok = false;
    if (newOL != nullptr) ok = setReferenceLonDeg(newOL->getDouble());
@@ -421,7 +421,7 @@ bool MapPage::onUpdateReferenceLon(const Basic::Number* const newOL)
 //------------------------------------------------------------------------------
 // onUpdateCentered() - set our centered / decentered flag
 //------------------------------------------------------------------------------
-bool MapPage::onUpdateCentered(const Basic::Number* const newC)
+bool MapPage::onUpdateCentered(const basic::Number* const newC)
 {
    bool ok = false;
    if (newC != nullptr) ok = setCentered(newC->getBoolean());
@@ -431,7 +431,7 @@ bool MapPage::onUpdateCentered(const Basic::Number* const newC)
 //------------------------------------------------------------------------------
 // onUpdateOuterRadius() - set our new outer map area
 //------------------------------------------------------------------------------
-bool MapPage::onUpdateOuterRadius(const Basic::Number* const newR)
+bool MapPage::onUpdateOuterRadius(const basic::Number* const newR)
 {
    bool ok = false;
    if (newR != nullptr) ok = setOuterRadius(newR->getReal());
@@ -441,7 +441,7 @@ bool MapPage::onUpdateOuterRadius(const Basic::Number* const newR)
 //------------------------------------------------------------------------------
 // onUpdateOuterRadiusDC() - set our new outer map area, decentered
 //------------------------------------------------------------------------------
-bool MapPage::onUpdateOuterRadiusDC(const Basic::Number* const newRDC)
+bool MapPage::onUpdateOuterRadiusDC(const basic::Number* const newRDC)
 {
    bool ok = false;
    if (newRDC != nullptr) ok = setOuterRadiusDC(newRDC->getReal());
@@ -451,7 +451,7 @@ bool MapPage::onUpdateOuterRadiusDC(const Basic::Number* const newRDC)
 //------------------------------------------------------------------------------
 // onUpdateDisplacement() - set our new displacement
 //------------------------------------------------------------------------------
-bool MapPage::onUpdateDisplacement(const Basic::Number* const newD)
+bool MapPage::onUpdateDisplacement(const basic::Number* const newD)
 {
    bool ok = false;
    if (newD != nullptr) ok = setDisplacement(newD->getReal());
@@ -463,7 +463,7 @@ bool MapPage::onUpdateDisplacement(const Basic::Number* const newD)
 // setSlotOuterRadius() - sets the outer radius of our compass rose, if we
 // are centered
 //------------------------------------------------------------------------------
-bool MapPage::setSlotOuterRadius(const Basic::Number* const newRadius)
+bool MapPage::setSlotOuterRadius(const basic::Number* const newRadius)
 {
    bool ok = false;
    if (newRadius != nullptr) ok = setOuterRadius(newRadius->getReal());
@@ -474,7 +474,7 @@ bool MapPage::setSlotOuterRadius(const Basic::Number* const newRadius)
 // setSlotOuterRadiusDC() - sets the outer radius of our compass rose, if
 // we are de-centered
 //------------------------------------------------------------------------------
-bool MapPage::setSlotOuterRadiusDC(const Basic::Number* const newDCRadius)
+bool MapPage::setSlotOuterRadiusDC(const basic::Number* const newDCRadius)
 {
    bool ok = false;
    if (newDCRadius != nullptr) ok = setOuterRadiusDC(newDCRadius->getReal());
@@ -484,7 +484,7 @@ bool MapPage::setSlotOuterRadiusDC(const Basic::Number* const newDCRadius)
 //------------------------------------------------------------------------------
 // setSlotRange() - sets the range of our viewing areas, in nautical miles
 //------------------------------------------------------------------------------
-bool MapPage::setSlotRange(const Basic::Number* const newR)
+bool MapPage::setSlotRange(const basic::Number* const newR)
 {
    bool ok = false;
    if (newR != nullptr) ok = setRange(newR->getReal());
@@ -494,7 +494,7 @@ bool MapPage::setSlotRange(const Basic::Number* const newR)
 //------------------------------------------------------------------------------
 // setSlotDisplacement() - sets how far we translate before we draw
 //------------------------------------------------------------------------------
-bool MapPage::setSlotDisplacement(const Basic::Number* const newD)
+bool MapPage::setSlotDisplacement(const basic::Number* const newD)
 {
    bool ok = false;
    if (newD != nullptr) ok = setDisplacement(newD->getReal());
@@ -504,7 +504,7 @@ bool MapPage::setSlotDisplacement(const Basic::Number* const newD)
 //------------------------------------------------------------------------------
 // setSlotCentered() - sets if we are centered or decentered
 //------------------------------------------------------------------------------
-bool MapPage::setSlotCentered(const Basic::Number* const newC)
+bool MapPage::setSlotCentered(const basic::Number* const newC)
 {
    bool ok = false;
    if (newC != nullptr) ok = setCentered(newC->getBoolean());
@@ -514,7 +514,7 @@ bool MapPage::setSlotCentered(const Basic::Number* const newC)
 //------------------------------------------------------------------------------
 // setSlotRefLat() - sets ref lat from slot
 //------------------------------------------------------------------------------
-bool MapPage::setSlotRefLat(const Basic::Number* const x)
+bool MapPage::setSlotRefLat(const basic::Number* const x)
 {
    bool ok = false;
    if (x != nullptr) ok = setReferenceLatDeg(x->getDouble());
@@ -524,7 +524,7 @@ bool MapPage::setSlotRefLat(const Basic::Number* const x)
 //------------------------------------------------------------------------------
 // setSlotRefLon() - sets ref lon from slot
 //------------------------------------------------------------------------------
-bool MapPage::setSlotRefLon(const Basic::Number* const x)
+bool MapPage::setSlotRefLon(const basic::Number* const x)
 {
    bool ok = false;
    if (x != nullptr) ok = setReferenceLonDeg(x->getDouble());
@@ -534,7 +534,7 @@ bool MapPage::setSlotRefLon(const Basic::Number* const x)
 //------------------------------------------------------------------------------
 // setSlotRefHdg() - sets ref heading from slot
 //------------------------------------------------------------------------------
-bool MapPage::setSlotRefHdg(const Basic::Number* const x)
+bool MapPage::setSlotRefHdg(const basic::Number* const x)
 {
    bool ok = false;
    if (x != nullptr) ok = setHeadingDeg(x->getReal());
@@ -544,7 +544,7 @@ bool MapPage::setSlotRefHdg(const Basic::Number* const x)
 //------------------------------------------------------------------------------
 // setSlotNorthUp() - sets north up / track up from slot
 //------------------------------------------------------------------------------
-bool MapPage::setSlotNorthUp(const Basic::Number* const x)
+bool MapPage::setSlotNorthUp(const basic::Number* const x)
 {
    bool ok = false;
    if (x != nullptr) ok = setNorthUp(x->getBoolean());
@@ -554,7 +554,7 @@ bool MapPage::setSlotNorthUp(const Basic::Number* const x)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for MapPage
 //------------------------------------------------------------------------------
-Basic::Object* MapPage::getSlotByIndex(const int si)
+basic::Object* MapPage::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }

@@ -124,7 +124,7 @@ Simulation* DataRecorder::getSimulationImp()
 }
 
 
-bool DataRecorder::recordDataImp(const unsigned int id, const Basic::Object* pObjects[4], const double values[4])
+bool DataRecorder::recordDataImp(const unsigned int id, const basic::Object* pObjects[4], const double values[4])
 {
    return true;
 }
@@ -143,8 +143,8 @@ END_SLOTTABLE(RecorderComponent)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(RecorderComponent)
-    ON_SLOT( 1, setSlotEnabledList,  Basic::List)
-    ON_SLOT( 2, setSlotDisabledList, Basic::List)
+    ON_SLOT( 1, setSlotEnabledList,  basic::List)
+    ON_SLOT( 2, setSlotDisabledList, basic::List)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -239,7 +239,7 @@ bool RecorderComponent::setDisabledList(const unsigned int* const list, const un
 //------------------------------------------------------------------------------
 // Slot functions
 //------------------------------------------------------------------------------
-bool RecorderComponent::setSlotEnabledList(const Basic::List* const list)
+bool RecorderComponent::setSlotEnabledList(const basic::List* const list)
 {
    unsigned int n2 = 0;
    unsigned int* p2 = nullptr;
@@ -273,7 +273,7 @@ bool RecorderComponent::setSlotEnabledList(const Basic::List* const list)
    return true;
 }
 
-bool RecorderComponent::setSlotDisabledList(const Basic::List* const list)
+bool RecorderComponent::setSlotDisabledList(const basic::List* const list)
 {
    unsigned int n2 = 0;
    unsigned int* p2 = nullptr;
@@ -311,7 +311,7 @@ bool RecorderComponent::setSlotDisabledList(const Basic::List* const list)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for Component
 //------------------------------------------------------------------------------
-Basic::Object* RecorderComponent::getSlotByIndex(const int si)
+basic::Object* RecorderComponent::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }

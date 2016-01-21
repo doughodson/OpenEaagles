@@ -34,13 +34,13 @@ END_SLOTTABLE(Otw)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(Otw)
-    ON_SLOT(1, setSlotMaxRange,      Basic::Distance)
-    ON_SLOT(1, setSlotMaxRange,      Basic::Number)
-    ON_SLOT(2, setSlotMaxModels,     Basic::Number)
-    ON_SLOT(3, setSlotMaxElevations, Basic::Number)
-    ON_SLOT(4, setSlotRefLatitude,   Basic::Number)
-    ON_SLOT(5, setSlotRefLongitude,  Basic::Number)
-    ON_SLOT(6, setSlotOtwModelTypes, Basic::PairStream)
+    ON_SLOT(1, setSlotMaxRange,      basic::Distance)
+    ON_SLOT(1, setSlotMaxRange,      basic::Number)
+    ON_SLOT(2, setSlotMaxModels,     basic::Number)
+    ON_SLOT(3, setSlotMaxElevations, basic::Number)
+    ON_SLOT(4, setSlotRefLatitude,   basic::Number)
+    ON_SLOT(5, setSlotRefLongitude,  basic::Number)
+    ON_SLOT(6, setSlotOtwModelTypes, basic::PairStream)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -276,11 +276,11 @@ void Otw::mapPlayerList2ModelTable()
       // ---
       // Find players that are alive and within range of the visual system ...
       // ---
-      Basic::List::Item* item = playerList->getFirstItem();
+      basic::List::Item* item = playerList->getFirstItem();
       while (item != nullptr) {
 
          // Get a pointer to the player, 'p'
-         Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+         basic::Pair* pair = static_cast<basic::Pair*>(item->getValue());
          Player* p = static_cast<Player*>(pair->object());
 
          bool dummy = false;
@@ -360,11 +360,11 @@ void Otw::mapPlayers2ElevTable()
       // ---
       // Find players that are alive and require terrain elevation from the visual system ...
       // ---
-      Basic::List::Item* item = playerList->getFirstItem();
+      basic::List::Item* item = playerList->getFirstItem();
       while (item != nullptr) {
 
          // Get a pointer to the player, 'p'
-         Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+         basic::Pair* pair = static_cast<basic::Pair*>(item->getValue());
          Player* p = static_cast<Player*>(pair->object());
 
          // Check if this player is alive and within range.
@@ -494,7 +494,7 @@ void Otw::setOwnship0(Player* const newOwnship)
 //------------------------------------------------------------------------------
 // setPlayerList() -- Sets our player list pointer
 //------------------------------------------------------------------------------
-void Otw::setPlayerList(Basic::PairStream* const newPlayerList)
+void Otw::setPlayerList(basic::PairStream* const newPlayerList)
 {
     // Nothing's changed, just return
     if (playerList == newPlayerList) return;
@@ -666,7 +666,7 @@ void Otw::removeModelFromList(OtwModel* const model, const TableType type)
 //------------------------------------------------------------------------------
 // findModel() -- find the model that matches ALL IDs.
 //------------------------------------------------------------------------------
-OtwModel* Otw::findModel(const unsigned short playerID, const Basic::String* const federateName, const TableType type)
+OtwModel* Otw::findModel(const unsigned short playerID, const basic::String* const federateName, const TableType type)
 {
    // Define the key
    OtwModelKey key(playerID, federateName);
@@ -691,7 +691,7 @@ OtwModel* Otw::findModel(const Player* const player, const TableType type)
    OtwModel* found = nullptr;
    if (player != nullptr) {
       // Get the player's IDs
-      const Basic::String* fName = nullptr;
+      const basic::String* fName = nullptr;
       if (player->isNetworkedPlayer()) {
          // If networked, used original IDs
          const Nib* pNib = player->getNib();
@@ -725,8 +725,8 @@ int Otw::compareKey2Model(const void* key, const void* model)
 
    if (result == 0) {
       // If they're the same playr IDs, compare the federate names
-      const Basic::String* pKeyFedName = pKey->fName;
-      const Basic::String* pModelFedName = pModel->getFederateName();
+      const basic::String* pKeyFedName = pKey->fName;
+      const basic::String* pModelFedName = pModel->getFederateName();
 
       if (pKeyFedName == nullptr && pModelFedName != nullptr) result = -1;
 
@@ -770,13 +770,13 @@ bool Otw::setRefLongitude(const double v)
 //------------------------------------------------------------------------------
 
 // setSlotMaxRange() -- sets the maxRange slot
-bool Otw::setSlotMaxRange(const Basic::Distance* const msg)
+bool Otw::setSlotMaxRange(const basic::Distance* const msg)
 {
     bool ok = false;
 
     if (msg != nullptr) {
         // We have a distance which we can convert to meters
-        const LCreal rng = Basic::Meters::convertStatic(*msg);
+        const LCreal rng = basic::Meters::convertStatic(*msg);
         ok = setMaxRange( rng );
     }
 
@@ -788,7 +788,7 @@ bool Otw::setSlotMaxRange(const Basic::Distance* const msg)
 }
 
 // setSlotMaxRange() -- sets the maxRange slot
-bool Otw::setSlotMaxRange(const Basic::Number* const msg)
+bool Otw::setSlotMaxRange(const basic::Number* const msg)
 {
     bool ok = false;
 
@@ -805,7 +805,7 @@ bool Otw::setSlotMaxRange(const Basic::Number* const msg)
 }
 
 // setSlotMaxModels() -- sets the max number of models slot
-bool Otw::setSlotMaxModels(const Basic::Number* const num)
+bool Otw::setSlotMaxModels(const basic::Number* const num)
 {
     bool ok = false;
     if (num != nullptr) {
@@ -820,7 +820,7 @@ bool Otw::setSlotMaxModels(const Basic::Number* const num)
     return ok;
 }
 
-bool Otw::setSlotMaxElevations(const Basic::Number* const num)
+bool Otw::setSlotMaxElevations(const basic::Number* const num)
 {
     bool ok = false;
     if (num != nullptr) {
@@ -836,7 +836,7 @@ bool Otw::setSlotMaxElevations(const Basic::Number* const num)
 }
 
 // latitude: Ref latitude (deg)
-bool Otw::setSlotRefLatitude(const Basic::Number* const num)
+bool Otw::setSlotRefLatitude(const basic::Number* const num)
 {
     bool ok = false;
     if (num != nullptr) {
@@ -846,7 +846,7 @@ bool Otw::setSlotRefLatitude(const Basic::Number* const num)
 }
 
 // longitude: Ref longitude (deg)
-bool Otw::setSlotRefLongitude(const Basic::Number* const num)
+bool Otw::setSlotRefLongitude(const basic::Number* const num)
 {
     bool ok = false;
     if (num != nullptr) {
@@ -856,7 +856,7 @@ bool Otw::setSlotRefLongitude(const Basic::Number* const num)
 }
 
 // Sets the list of OTW model type IDs (Otm objects)
-bool Otw::setSlotOtwModelTypes(const Basic::PairStream* const msg)
+bool Otw::setSlotOtwModelTypes(const basic::PairStream* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
@@ -865,9 +865,9 @@ bool Otw::setSlotOtwModelTypes(const Basic::PairStream* const msg)
 
        // Now scan the pair stream and put all Otm objects
        // into the table.
-       const Basic::List::Item* item = msg->getFirstItem();
+       const basic::List::Item* item = msg->getFirstItem();
        while (item != nullptr && nOtwModelTypes < MAX_MODELS_TYPES) {
-          const Basic::Pair* pair = static_cast<const Basic::Pair*>(item->getValue());
+          const basic::Pair* pair = static_cast<const basic::Pair*>(item->getValue());
           const Otm* otwType = dynamic_cast<const Otm*>( pair->object() );
           if (otwType != nullptr) {
              // We have an Otm object, so put it in the table
@@ -885,7 +885,7 @@ bool Otw::setSlotOtwModelTypes(const Basic::PairStream* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Basic::Object* Otw::getSlotByIndex(const int si)
+basic::Object* Otw::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
@@ -893,7 +893,7 @@ Basic::Object* Otw::getSlotByIndex(const int si)
 //==============================================================================
 // Otw::OtwModelKey class
 //==============================================================================
-Otw::OtwModelKey::OtwModelKey(const unsigned short pid, const Basic::String* const federateName)
+Otw::OtwModelKey::OtwModelKey(const unsigned short pid, const basic::String* const federateName)
 {
    playerID = pid;
    fName = federateName;
@@ -937,7 +937,7 @@ void OtwModel::copyData(const OtwModel& org, const bool cc)
 
     playerID = org.playerID;
 
-    const Basic::String* pp = org.federateName;
+    const basic::String* pp = org.federateName;
     federateName = pp;
 }
 
@@ -1037,9 +1037,9 @@ END_SLOTTABLE(Otm)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(Otm)
-    ON_SLOT(1, setSlotRefFormName, Basic::Identifier)
-    ON_SLOT(2, setSlotRefTypeName, Basic::String)
-    ON_SLOT(3, setSlotTypeId,      Basic::Number)
+    ON_SLOT(1, setSlotRefFormName, basic::Identifier)
+    ON_SLOT(2, setSlotRefTypeName, basic::String)
+    ON_SLOT(3, setSlotTypeId,      basic::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -1093,7 +1093,7 @@ bool Otm::setTypeId(const unsigned int newType)
 }
 
 // Sets the OTW entity type number
-bool Otm::setSlotTypeId(const Basic::Number* const msg)
+bool Otm::setSlotTypeId(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1106,14 +1106,14 @@ bool Otm::setSlotTypeId(const Basic::Number* const msg)
 }
 
 // Sets the player's form name
-bool Otm::setSlotRefFormName(const Basic::Identifier* const msg)
+bool Otm::setSlotRefFormName(const basic::Identifier* const msg)
 {
    refFormName = msg;
    return true;
 }
 
 // Sets the player's type name
-bool Otm::setSlotRefTypeName(const Basic::String* const msg)
+bool Otm::setSlotRefTypeName(const basic::String* const msg)
 {
    refTypeName = msg;
    return true;
@@ -1135,7 +1135,7 @@ bool Otm::isMatchingPlayerType(const Player* const p) const
          match = true;
 
          // Do we have both type names?
-         const Basic::String* ptype = p->getType();
+         const basic::String* ptype = p->getType();
          if ( refTypeName != nullptr && ptype != nullptr) {
 
             // Then compare at most the length of our reference type name ...
@@ -1151,7 +1151,7 @@ bool Otm::isMatchingPlayerType(const Player* const p) const
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Basic::Object* Otm::getSlotByIndex(const int si)
+basic::Object* Otm::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

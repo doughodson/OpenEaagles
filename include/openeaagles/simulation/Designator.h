@@ -14,9 +14,9 @@ namespace Simulation {
 
 class Player;
 
-class Designator : public Basic::Object
+class Designator : public basic::Object
 {
-    DECLARE_SUBCLASS(Designator,Basic::Object)
+    DECLARE_SUBCLASS(Designator,basic::Object)
 
 public:
    // Since we're not using DIS Designator PDUs yet, use this to send

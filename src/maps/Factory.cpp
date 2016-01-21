@@ -16,9 +16,9 @@ namespace Maps {
 Factory::Factory()
 {}
 
-Basic::Object* Factory::createObj(const char* name)
+basic::Object* Factory::createObj(const char* name)
 {
-    Basic::Object* obj = nullptr;
+    basic::Object* obj = nullptr;
 
     // Map Drawer
     if ( std::strcmp(name, Rpf::MapDrawer::getFactoryName()) == 0 ) {

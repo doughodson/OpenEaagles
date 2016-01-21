@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: TcpHandler
 //------------------------------------------------------------------------------
-#ifndef __oe_Basic_TcpHandler_H__
-#define __oe_Basic_TcpHandler_H__
+#ifndef __oe_basic_TcpHandler_H__
+#define __oe_basic_TcpHandler_H__
 
 #include "openeaagles/basic/nethandlers/PosixHandler.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 class String;
 
@@ -44,7 +44,7 @@ protected:
    bool  noWait;                // TCP's no wait I/O flag
 };
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace
 
 #endif

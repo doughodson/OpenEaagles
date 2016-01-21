@@ -48,8 +48,8 @@ public:
    virtual unsigned int getMaxTracks() const;
    virtual unsigned int getNumTracks() const;
 
-   virtual int getTrackList(Basic::safe_ptr<Track>* const slist, const unsigned int max) const;
-   virtual int getTrackList(Basic::safe_ptr<const Track>* const slist, const unsigned int max) const;
+   virtual int getTrackList(basic::safe_ptr<Track>* const slist, const unsigned int max) const;
+   virtual int getTrackList(basic::safe_ptr<const Track>* const slist, const unsigned int max) const;
 
    // Note: Tracks have been ref() before being returned and need to
    // be unref() by the user.
@@ -87,13 +87,13 @@ protected:
    virtual void processTrackList(const LCreal dt) =0;                   // Derived class unique
 
    virtual Emission* getReport(LCreal* const sn);                       // Get the next 'new' report from the queue
-   virtual bool setSlotMaxTracks(const Basic::Number* const num);       // Sets the maximum number of track files
-   virtual bool setSlotMaxTrackAge(const Basic::Number* const num);     // Sets the maximum age of tracks
-   virtual bool setSlotFirstTrackId(const Basic::Number* const num);    // Sets the first (starting) track id number
-   virtual bool setSlotAlpha(const Basic::Number* const num);           // Sets alpha
-   virtual bool setSlotBeta(const Basic::Number* const num);            // Sets beta
-   virtual bool setSlotGamma(const Basic::Number* const num);           // Sets gamma
-   virtual bool setSlotLogTrackUpdates(const Basic::Number* const num); // Sets logTrackUpdates
+   virtual bool setSlotMaxTracks(const basic::Number* const num);       // Sets the maximum number of track files
+   virtual bool setSlotMaxTrackAge(const basic::Number* const num);     // Sets the maximum age of tracks
+   virtual bool setSlotFirstTrackId(const basic::Number* const num);    // Sets the first (starting) track id number
+   virtual bool setSlotAlpha(const basic::Number* const num);           // Sets alpha
+   virtual bool setSlotBeta(const basic::Number* const num);            // Sets beta
+   virtual bool setSlotGamma(const basic::Number* const num);           // Sets gamma
+   virtual bool setSlotLogTrackUpdates(const basic::Number* const num); // Sets logTrackUpdates
 
    // Track List
    Track*              tracks[MAX_TRKS];   // Tracks
@@ -112,14 +112,14 @@ protected:
    unsigned int        nextTrkId;          // Next track ID
    unsigned int        firstTrkId;         // First (starting) track ID
 
-   Basic::safe_queue<Emission*>   emQueue; // Emission input queue
-   Basic::safe_queue<LCreal>      snQueue; // S/N input queue.
+   basic::safe_queue<Emission*>   emQueue; // Emission input queue
+   basic::safe_queue<LCreal>      snQueue; // S/N input queue.
    mutable long        queueLock;          // Semaphore to protect both emQueue and snQueue
 
    // System class Interface -- phase() callbacks
    void process(const LCreal dt) override;     // Phase 3
 
-   // Basic::Component protected interface
+   // basic::Component protected interface
    bool shutdownNotification() override;
 
 private:
@@ -136,9 +136,9 @@ private:
 // Description: Track Manager for A/A modes (e.g., TWS, ACM, SST)
 // Factory name: AirTrkMgr
 // Slots:
-//   positionGate   <Basic::Number>  ! Position Gate (meters) (default: 2.0f * NM2M)
-//   rangeGate      <Basic::Number>  ! Range Gate (meters) (default: 500.0f)
-//   velocityGate   <Basic::Number>  ! Velocity Gate (m/s) (default: 10.0f)
+//   positionGate   <basic::Number>  ! Position Gate (meters) (default: 2.0f * NM2M)
+//   rangeGate      <basic::Number>  ! Range Gate (meters) (default: 500.0f)
+//   velocityGate   <basic::Number>  ! Velocity Gate (m/s) (default: 10.0f)
 //
 //==============================================================================
 class AirTrkMgr : public TrackManager
@@ -156,9 +156,9 @@ protected:
 
 private:
    void initData();
-   bool setPositionGate(const Basic::Number* const num);
-   bool setRangeGate(const Basic::Number* const num);
-   bool setVelocityGate(const Basic::Number* const num);
+   bool setPositionGate(const basic::Number* const num);
+   bool setRangeGate(const basic::Number* const num);
+   bool setVelocityGate(const basic::Number* const num);
 
    // Prediction parameters
    LCreal              posGate;            // Position Gate (meters)

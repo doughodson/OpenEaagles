@@ -6,7 +6,7 @@
 
 namespace oe {
 
-namespace Basic { class Number; }
+namespace basic { class Number; }
 
 namespace IoDevice {
 
@@ -37,9 +37,9 @@ namespace IoDevice {
 //    deviceIndex <Number>    Unit index
 //
 //------------------------------------------------------------------------------
-class UsbJoystick : public Basic::IoDevice
+class UsbJoystick : public basic::IoDevice
 {
-    DECLARE_SUBCLASS(UsbJoystick, Basic::IoDevice)
+    DECLARE_SUBCLASS(UsbJoystick, basic::IoDevice)
 
 public:
    UsbJoystick();
@@ -56,7 +56,7 @@ public:
 protected:
 
    // Slot functions
-   virtual bool setSlotDeviceIndex(const Basic::Number* const msg);
+   virtual bool setSlotDeviceIndex(const basic::Number* const msg);
 
    unsigned int deviceIndex; // Device index
 

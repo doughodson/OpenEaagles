@@ -6,7 +6,7 @@
 #include "openeaagles/basic/PairStream.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(StateMachine,"AbstractStateMachine")
 
@@ -535,7 +535,7 @@ bool StateMachine::setSlotStateMachines(const PairStream* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Basic::Object* StateMachine::getSlotByIndex(const int si)
+basic::Object* StateMachine::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
@@ -570,6 +570,6 @@ std::ostream& StateMachine::serialize(std::ostream& sout, const int i, const boo
     return sout;
 }
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace
 

@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 // Class: StabilizingGimbal
-// Base class: Basic::Object -> Basic::Component -> System -> Gimbal -> StabilizingGimbal
+// Base class: basic::Object -> basic::Component -> System -> Gimbal -> StabilizingGimbal
 //
 // Description: This gimbal tries to counter the player's roll, pitch and yaw movements.
 //
@@ -20,7 +20,7 @@ namespace Simulation {
 // Description: This gimbal tries to counter the player's roll, pitch and yaw movements.
 // Factory name: StabilizingGimbal
 // Slots:
-//    stabilizingMode  <Basic::String>    ! Sets the type of stabilization we desire  (elevation, roll, horizon)
+//    stabilizingMode  <basic::String>    ! Sets the type of stabilization we desire  (elevation, roll, horizon)
 //                                        ! (default: HORIZON)
 //------------------------------------------------------------------------------
 class StabilizingGimbal : public Gimbal
@@ -40,8 +40,8 @@ public:
    MountPosition getMountPosition() const                      { return mountPosition; }
    virtual bool setMountPosition(const MountPosition m);
 
-   virtual bool setSlotStabilizingMode(Basic::String* const msg);
-   virtual bool setSlotMountPosition(Basic::String* const msg);
+   virtual bool setSlotStabilizingMode(basic::String* const msg);
+   virtual bool setSlotMountPosition(basic::String* const msg);
 
 protected:
    virtual void stabilizingController(const LCreal dt = 0.0);

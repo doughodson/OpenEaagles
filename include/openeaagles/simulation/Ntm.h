@@ -59,9 +59,9 @@ class Nib;
 //          Best match is returned: #1 (best), #2, #5 and #6 (worst)
 //
 //------------------------------------------------------------------------------
-class Ntm : public Basic::Object
+class Ntm : public basic::Object
 {
-    DECLARE_SUBCLASS(Ntm,Basic::Object)
+    DECLARE_SUBCLASS(Ntm,basic::Object)
 
 public:
    Ntm();
@@ -77,7 +77,7 @@ public:
    virtual bool setSlotTemplatePlayer(const Player* const msg);     // Sets the template player
 
 private:
-   Basic::safe_ptr<const Player>  tPlayer; // Template player
+   basic::safe_ptr<const Player>  tPlayer; // Template player
 };
 
 } // End Simulation namespace

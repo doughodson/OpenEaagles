@@ -10,7 +10,7 @@
 
 namespace oe {
 
-   namespace Basic {
+   namespace basic {
       class Number;
       class Table1;
       class Table2;
@@ -157,14 +157,14 @@ protected:
    ) const;
 
    //Slot functions
-   virtual bool setSlotSolarRadiationTable(const Basic::Table2* const tbl);
-   virtual bool setSlotBackgroundRadiationTable(const Basic::Table3* const tbl);
-   virtual bool setSlotTransmissivityTable(const Basic::Table4* const tbl);
+   virtual bool setSlotSolarRadiationTable(const basic::Table2* const tbl);
+   virtual bool setSlotBackgroundRadiationTable(const basic::Table3* const tbl);
+   virtual bool setSlotTransmissivityTable(const basic::Table4* const tbl);
 
 private:
-   const Basic::Table2* solarRadiationTable;
-   const Basic::Table3* backgroundRadiationTable;
-   const Basic::Table4* transmissivityTable;
+   const basic::Table2* solarRadiationTable;
+   const basic::Table3* backgroundRadiationTable;
+   const basic::Table4* transmissivityTable;
 };
 
 } // End Simulation namespace

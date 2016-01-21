@@ -37,9 +37,9 @@ namespace BasicGL { class Texture; }
 namespace Maps {
 namespace Rpf {
 
-class TextureTable : public Basic::Object
+class TextureTable : public basic::Object
 {
-    DECLARE_SUBCLASS(TextureTable, Basic::Object)
+    DECLARE_SUBCLASS(TextureTable, basic::Object)
 
 public:
     TextureTable();

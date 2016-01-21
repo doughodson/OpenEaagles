@@ -1,14 +1,14 @@
 //------------------------------------------------------------------------------
 // Class: Arbiter
 //------------------------------------------------------------------------------
-#ifndef __oe_Basic_Ubf_Arbiter_H__
-#define __oe_Basic_Ubf_Arbiter_H__
+#ifndef __oe_basic_Ubf_Arbiter_H__
+#define __oe_basic_Ubf_Arbiter_H__
 
 #include "Behavior.h"
 
 namespace oe {
 
-namespace Basic {
+namespace basic {
    class List;
 
 namespace Ubf {
@@ -39,7 +39,7 @@ public:
    Action* genAction(const State* const state, const LCreal dt) override;
 
 protected:
-   Basic::List* getBehaviors();
+   basic::List* getBehaviors();
 
    // evaluates a list of actions and return an optional "complex action"
    // (default: returns the action with the highest vote value)
@@ -49,16 +49,16 @@ protected:
    void addBehavior(Behavior* const);
 
    // slot functions
-   bool setSlotBehaviors(Basic::PairStream* const);
+   bool setSlotBehaviors(basic::PairStream* const);
 
 private:
-   Basic::List* behaviors;
+   basic::List* behaviors;
 };
 
-inline Basic::List* Arbiter::getBehaviors()                 { return behaviors; }
+inline basic::List* Arbiter::getBehaviors()                 { return behaviors; }
 
 } // End Ubf namespace
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace
 
 #endif

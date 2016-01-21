@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 // Class: Database
-// Base class:  Basic::Object -> Database
+// Base class:  basic::Object -> Database
 //
 // Description: Abstract class used to access DAFIF databases; both file
 //              loaders and network clients.
@@ -106,14 +106,14 @@
 #include "dafifc.h"
 
 namespace oe {
-   namespace Basic {
+   namespace basic {
       class FileReader;
       class String;
    }
 namespace Dafif {
 
-class Database : public Basic::Object {
-    DECLARE_SUBCLASS(Database,Basic::Object)
+class Database : public basic::Object {
+    DECLARE_SUBCLASS(Database,basic::Object)
 
 public:
    Database();
@@ -174,8 +174,8 @@ public:
    };
 
 protected:
-   bool setSlotPathname(Basic::String* const msg);
-   bool setSlotFilename(Basic::String* const msg);
+   bool setSlotPathname(basic::String* const msg);
+   bool setSlotFilename(basic::String* const msg);
 
    bool openDatabaseFile();
 
@@ -207,7 +207,7 @@ protected:
    static void stripSpaces(char buff[], const int n);
    static void fillSpaces(char buff[], const int n);
 
-   Basic::FileReader* db; // The database (loaders)
+   basic::FileReader* db; // The database (loaders)
    long ncache;      // Number of keys alloced
 
    Key** rl;         // List of DAFIF records in the database

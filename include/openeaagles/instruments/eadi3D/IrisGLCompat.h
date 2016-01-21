@@ -14,8 +14,8 @@ namespace Instruments {
 // Description:  IrisGL compatibility
 //
 //------------------------------------------------------------------------------
-class IrisGLCompat : public Basic::Object {
-    DECLARE_SUBCLASS(IrisGLCompat,Basic::Object)
+class IrisGLCompat : public basic::Object {
+    DECLARE_SUBCLASS(IrisGLCompat,basic::Object)
 public:
     IrisGLCompat();
 

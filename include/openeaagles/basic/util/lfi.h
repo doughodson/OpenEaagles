@@ -1,11 +1,11 @@
 
-#ifndef __oe_Basic_lfi_H__
-#define __oe_Basic_lfi_H__
+#ifndef __oe_basic_lfi_H__
+#define __oe_basic_lfi_H__
 
 #include "openeaagles/basic/support.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
 namespace lfi {
 
 //==============================================================================

@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 // Class: Ils
-// Base class: Basic::Object -> Basic::String -> Record -> Ils
+// Base class: basic::Object -> basic::String -> Record -> Ils
 //
 // Description: Access to the DAFIF ILS records.
 //

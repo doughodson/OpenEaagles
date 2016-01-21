@@ -50,15 +50,15 @@ END_SLOTTABLE(DataRecorder)
 
 BEGIN_SLOT_MAP(DataRecorder)
    ON_SLOT( 1, setOutputHandler,   OutputHandler)
-   ON_SLOT( 2, setSlotEventName,   Basic::String)
-   ON_SLOT( 3, setSlotApplication, Basic::String)
-   ON_SLOT( 4, setSlotCaseNum,     Basic::Number)
-   ON_SLOT( 5, setSlotMissionNum,  Basic::Number)
-   ON_SLOT( 6, setSlotSubjectNum,  Basic::Number)
-   ON_SLOT( 7, setSlotRunNum,      Basic::Number)
-   ON_SLOT( 8, setSlotDay,         Basic::Number)
-   ON_SLOT( 9, setSlotMonth,       Basic::Number)
-   ON_SLOT( 10, setSlotYear,       Basic::Number)
+   ON_SLOT( 2, setSlotEventName,   basic::String)
+   ON_SLOT( 3, setSlotApplication, basic::String)
+   ON_SLOT( 4, setSlotCaseNum,     basic::Number)
+   ON_SLOT( 5, setSlotMissionNum,  basic::Number)
+   ON_SLOT( 6, setSlotSubjectNum,  basic::Number)
+   ON_SLOT( 7, setSlotRunNum,      basic::Number)
+   ON_SLOT( 8, setSlotDay,         basic::Number)
+   ON_SLOT( 9, setSlotMonth,       basic::Number)
+   ON_SLOT( 10, setSlotYear,       basic::Number)
 END_SLOT_MAP()
 
 
@@ -218,7 +218,7 @@ bool DataRecorder::shutdownNotification()
 //    value[0] => marker ID
 //    value[1] => marker source ID
 //------------------------------------------------------------------------------
-bool DataRecorder::recordMarker(const Basic::Object* objs[4], const double values[4])
+bool DataRecorder::recordMarker(const basic::Object* objs[4], const double values[4])
 {
    Pb::DataRecord* msg = new Pb::DataRecord();
 
@@ -243,7 +243,7 @@ bool DataRecorder::recordMarker(const Basic::Object* objs[4], const double value
 //    value[1] => input source ID
 //    value[2] => value
 //------------------------------------------------------------------------------
-bool DataRecorder::recordAI(const Basic::Object* objs[4], const double values[4])
+bool DataRecorder::recordAI(const basic::Object* objs[4], const double values[4])
 {
    Pb::DataRecord* msg = new Pb::DataRecord();
 
@@ -270,7 +270,7 @@ bool DataRecorder::recordAI(const Basic::Object* objs[4], const double values[4]
 //    value[1] => input source ID
 //    value[2] => value
 //------------------------------------------------------------------------------
-bool DataRecorder::recordDI(const Basic::Object* objs[4], const double values[4])
+bool DataRecorder::recordDI(const basic::Object* objs[4], const double values[4])
 {
    Pb::DataRecord* msg = new Pb::DataRecord();
 
@@ -295,7 +295,7 @@ bool DataRecorder::recordDI(const Basic::Object* objs[4], const double values[4]
 // New player event handler
 //    objs[0] => the new player
 //------------------------------------------------------------------------------
-bool DataRecorder::recordNewPlayer(const Basic::Object* objs[4], const double values[4])
+bool DataRecorder::recordNewPlayer(const basic::Object* objs[4], const double values[4])
 {
    const Simulation::Player* player = dynamic_cast<const Simulation::Player*>( objs[0] );
    if (player == nullptr) return false;
@@ -322,7 +322,7 @@ bool DataRecorder::recordNewPlayer(const Basic::Object* objs[4], const double va
 // Player removed event handler
 //    objs[0] => the player being removed
 //------------------------------------------------------------------------------
-bool DataRecorder::recordPlayerRemoved(const Basic::Object* objs[4], const double values[4])
+bool DataRecorder::recordPlayerRemoved(const basic::Object* objs[4], const double values[4])
 {
    const Simulation::Player* player = dynamic_cast<const Simulation::Player*>( objs[0] );
    if (player == nullptr) return false;
@@ -349,7 +349,7 @@ bool DataRecorder::recordPlayerRemoved(const Basic::Object* objs[4], const doubl
 // Record player's data handler
 //    objs[0] => the player being recorded
 //------------------------------------------------------------------------------
-bool DataRecorder::recordPlayerData(const Basic::Object* objs[4], const double values[4])
+bool DataRecorder::recordPlayerData(const basic::Object* objs[4], const double values[4])
 {
    const Simulation::Player* player = dynamic_cast<const Simulation::Player*>( objs[0] );
    if (player == nullptr) return false;
@@ -383,7 +383,7 @@ bool DataRecorder::recordPlayerData(const Basic::Object* objs[4], const double v
 // Player damaged event handler
 //    objs[0] => the player damaged
 //------------------------------------------------------------------------------
-bool DataRecorder::recordPlayerDamaged(const Basic::Object* objs[4], const double values[4])
+bool DataRecorder::recordPlayerDamaged(const basic::Object* objs[4], const double values[4])
 {
    const Simulation::Player* player = dynamic_cast<const Simulation::Player*>( objs[0] );
    if (player == nullptr) return false;
@@ -410,7 +410,7 @@ bool DataRecorder::recordPlayerDamaged(const Basic::Object* objs[4], const doubl
 //    objs[0] => the player in the collision
 //    objs[1] => the other player in the collision
 //------------------------------------------------------------------------------
-bool DataRecorder::recordPlayerCollision(const Basic::Object* objs[4], const double values[4])
+bool DataRecorder::recordPlayerCollision(const basic::Object* objs[4], const double values[4])
 {
    const Simulation::Player* player = dynamic_cast<const Simulation::Player*>( objs[0] );
    if (player == nullptr) return false;
@@ -442,7 +442,7 @@ bool DataRecorder::recordPlayerCollision(const Basic::Object* objs[4], const dou
 // Player crashed event handler
 //    objs[0] => the player crashed
 //------------------------------------------------------------------------------
-bool DataRecorder::recordPlayerCrash(const Basic::Object* objs[4], const double values[4])
+bool DataRecorder::recordPlayerCrash(const basic::Object* objs[4], const double values[4])
 {
    const Simulation::Player* player = dynamic_cast<const Simulation::Player*>( objs[0] );
    if (player == nullptr) return false;
@@ -469,7 +469,7 @@ bool DataRecorder::recordPlayerCrash(const Basic::Object* objs[4], const double 
 //    objs[0] => the player killed
 //    objs[1] => the shooter player
 //------------------------------------------------------------------------------
-bool DataRecorder::recordPlayerKilled(const Basic::Object* objs[4], const double values[4])
+bool DataRecorder::recordPlayerKilled(const basic::Object* objs[4], const double values[4])
 {
    const Simulation::Player* player = dynamic_cast<const Simulation::Player*>( objs[0] );
    if (player == nullptr) return false;
@@ -502,7 +502,7 @@ bool DataRecorder::recordPlayerKilled(const Basic::Object* objs[4], const double
 //    objs[1] => the shooter
 //    objs[2] => the target
 //------------------------------------------------------------------------------
-bool DataRecorder::recordWeaponReleased(const Basic::Object* objs[4], const double values[4])
+bool DataRecorder::recordWeaponReleased(const basic::Object* objs[4], const double values[4])
 {
    const Simulation::Player* wpn = dynamic_cast<const Simulation::Player*>( objs[0] );
    if (wpn == nullptr) return false;
@@ -541,7 +541,7 @@ bool DataRecorder::recordWeaponReleased(const Basic::Object* objs[4], const doub
 //    objs[1] => the shooter
 //    objs[2] => the target
 //------------------------------------------------------------------------------
-bool DataRecorder::recordWeaponHung(const Basic::Object* objs[4], const double values[4])
+bool DataRecorder::recordWeaponHung(const basic::Object* objs[4], const double values[4])
 {
    const Simulation::Player* wpn = dynamic_cast<const Simulation::Player*>( objs[0] );
    if (wpn == nullptr) return false;
@@ -581,7 +581,7 @@ bool DataRecorder::recordWeaponHung(const Basic::Object* objs[4], const double v
 //    values[0] => detonation type
 //    values[1] => miss distance
 //------------------------------------------------------------------------------
-bool DataRecorder::recordWeaponDetonation(const Basic::Object* objs[4], const double values[4])
+bool DataRecorder::recordWeaponDetonation(const basic::Object* objs[4], const double values[4])
 {
    const Simulation::Player* wpn = dynamic_cast<const Simulation::Player*>( objs[0] );
    if (wpn == nullptr) return false;
@@ -660,7 +660,7 @@ bool DataRecorder::recordWeaponDetonation(const Basic::Object* objs[4], const do
 //    objs[0] => the shooter
 //    values[0] => rounds
 //------------------------------------------------------------------------------
-bool DataRecorder::recordGunFired(const Basic::Object* objs[4], const double values[4])
+bool DataRecorder::recordGunFired(const basic::Object* objs[4], const double values[4])
 {
    const Simulation::Player* shooter = dynamic_cast<const Simulation::Player*>( objs[0] );
    if (shooter == nullptr) return false;
@@ -688,7 +688,7 @@ bool DataRecorder::recordGunFired(const Basic::Object* objs[4], const double val
 //    objs[0] => the player (ownship)
 //    objs[1] => the track
 //------------------------------------------------------------------------------
-bool DataRecorder::recordNewTrack(const Basic::Object* objs[4], const double values[4])
+bool DataRecorder::recordNewTrack(const basic::Object* objs[4], const double values[4])
 {
    // objects
    const Simulation::Player* player = dynamic_cast<const Simulation::Player*>( objs[0] );
@@ -744,7 +744,7 @@ bool DataRecorder::recordNewTrack(const Basic::Object* objs[4], const double val
 //    objs[0] => the player (ownship)
 //    objs[1] => the track
 //------------------------------------------------------------------------------
-bool DataRecorder::recordTrackRemoved(const Basic::Object* objs[4], const double values[4])
+bool DataRecorder::recordTrackRemoved(const basic::Object* objs[4], const double values[4])
 {
    // objects
    const Simulation::Player* player = dynamic_cast<const Simulation::Player*>( objs[0] );
@@ -777,7 +777,7 @@ bool DataRecorder::recordTrackRemoved(const Basic::Object* objs[4], const double
 //    objs[0] => the player (ownship)
 //    objs[1] => the track
 //------------------------------------------------------------------------------
-bool DataRecorder::recordTrackData(const Basic::Object* objs[4], const double values[4])
+bool DataRecorder::recordTrackData(const basic::Object* objs[4], const double values[4])
 {
    // objects
    const Simulation::Player* player = dynamic_cast<const Simulation::Player*>( objs[0] );
@@ -840,13 +840,13 @@ void DataRecorder::genPlayerId( Pb::PlayerId* const id, const Simulation::Player
          id->set_id( player->getID() );
 
          // Player name
-         const Basic::String* name = player->getName();
+         const basic::String* name = player->getName();
          if (name != nullptr) id->set_name( *name );
 
          // Networked player federation name
          if ( player->isNetworkedPlayer() ) {
             const Simulation::Nib* nib = player->getNib();
-            const Basic::String* fedName = nib->getFederateName();
+            const basic::String* fedName = nib->getFederateName();
             if (fedName != nullptr) id->set_fed_name( *fedName );
          }
       }
@@ -1118,7 +1118,7 @@ bool DataRecorder::setOutputHandler(OutputHandler* const msg)
    return true;
 }
 
-bool DataRecorder::setSlotEventName(Basic::String* const msg)
+bool DataRecorder::setSlotEventName(basic::String* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1128,7 +1128,7 @@ bool DataRecorder::setSlotEventName(Basic::String* const msg)
    return ok;
 }
 
-bool DataRecorder::setSlotApplication(Basic::String* const msg)
+bool DataRecorder::setSlotApplication(basic::String* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1138,7 +1138,7 @@ bool DataRecorder::setSlotApplication(Basic::String* const msg)
    return ok;
 }
 
-bool DataRecorder::setSlotCaseNum(Basic::Number* const msg)
+bool DataRecorder::setSlotCaseNum(basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1148,7 +1148,7 @@ bool DataRecorder::setSlotCaseNum(Basic::Number* const msg)
    return ok;
 }
 
-bool DataRecorder::setSlotMissionNum(Basic::Number* const msg)
+bool DataRecorder::setSlotMissionNum(basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1158,7 +1158,7 @@ bool DataRecorder::setSlotMissionNum(Basic::Number* const msg)
    return ok;
 }
 
-bool DataRecorder::setSlotSubjectNum(Basic::Number* const msg)
+bool DataRecorder::setSlotSubjectNum(basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1168,7 +1168,7 @@ bool DataRecorder::setSlotSubjectNum(Basic::Number* const msg)
    return ok;
 }
 
-bool DataRecorder::setSlotRunNum(Basic::Number* const msg)
+bool DataRecorder::setSlotRunNum(basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1178,7 +1178,7 @@ bool DataRecorder::setSlotRunNum(Basic::Number* const msg)
    return ok;
 }
 
-bool DataRecorder::setSlotDay(Basic::Number* const msg)
+bool DataRecorder::setSlotDay(basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1188,7 +1188,7 @@ bool DataRecorder::setSlotDay(Basic::Number* const msg)
    return ok;
 }
 
-bool DataRecorder::setSlotMonth(Basic::Number* const msg)
+bool DataRecorder::setSlotMonth(basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1198,7 +1198,7 @@ bool DataRecorder::setSlotMonth(Basic::Number* const msg)
    return ok;
 }
 
-bool DataRecorder::setSlotYear(Basic::Number* const msg)
+bool DataRecorder::setSlotYear(basic::Number* const msg)
 {
    bool ok = false;
 
@@ -1212,7 +1212,7 @@ bool DataRecorder::setSlotYear(Basic::Number* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for Component
 //------------------------------------------------------------------------------
-Basic::Object* DataRecorder::getSlotByIndex(const int si)
+basic::Object* DataRecorder::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }

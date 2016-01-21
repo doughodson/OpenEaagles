@@ -328,7 +328,7 @@ int yyFlexLexer::yylex()
 	return 0;
 	}
 
-#define YY_DECL int oe::Basic::Lexical::yylex()
+#define YY_DECL int oe::basic::Lexical::yylex()
 static yyconst flex_int16_t yy_nxt[][128] =
     {
     {
@@ -2034,7 +2034,7 @@ using namespace std;
 /* no calls to yywrap */
 #define YY_NO_UNISTD_H 1
 /* change the name of the scanner class - results in "basicFlexLexer" */
-/* derived 'oe::Basic::Lexical' is a subclass of yyFlexLexer */
+/* derived 'oe::basic::Lexical' is a subclass of yyFlexLexer */
 #line 2039 "Lexical.cpp"
 
 #define INITIAL 0

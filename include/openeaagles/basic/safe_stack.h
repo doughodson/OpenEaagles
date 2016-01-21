@@ -1,11 +1,11 @@
 
 #include "openeaagles/basic/support.h"
 
-#ifndef __oe_Basic_safe_stack_H__
-#define __oe_Basic_safe_stack_H__
+#ifndef __oe_basic_safe_stack_H__
+#define __oe_basic_safe_stack_H__
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 //------------------------------------------------------------------------------
 // Template safe_stack<T>
@@ -18,7 +18,7 @@ namespace Basic {
 //    3) push(), pop() and clear() are internally protected by a semaphore
 //
 // Examples:
-//    Basic::safe_stack<int>* q1 = new Basic::safe_stack<int>(100); // stack size 100 items
+//    basic::safe_stack<int>* q1 = new basic::safe_stack<int>(100); // stack size 100 items
 //    s1->push(1);          // pushes 1 on to the queue
 //    s1->push(2);          // pushes 2 on to the queue
 //    int i = s1->pop();    // i is equal to 2

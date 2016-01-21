@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: Identifier
 //------------------------------------------------------------------------------
-#ifndef __oe_Basic_Identifier_H__
-#define __oe_Basic_Identifier_H__
+#ifndef __oe_basic_Identifier_H__
+#define __oe_basic_Identifier_H__
 
 #include "openeaagles/basic/String.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 //------------------------------------------------------------------------------
 // Class: Identifier
@@ -31,7 +31,7 @@ public:
     void catStr(const char* string) override;
 };
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace
 
 #endif

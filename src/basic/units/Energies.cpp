@@ -7,7 +7,7 @@
 #include "openeaagles/basic/SlotTable.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 
 //////////////////////////////////////////////////////////////////////
@@ -212,6 +212,6 @@ FootPounds::FootPounds(const Energy& value) : Energy()
 EMPTY_COPYDATA(FootPounds)
 EMPTY_DELETEDATA(FootPounds)
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace
 

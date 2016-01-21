@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: LatLon
 //------------------------------------------------------------------------------
-#ifndef __oe_Basic_LatLon_H__
-#define __oe_Basic_LatLon_H__
+#ifndef __oe_basic_LatLon_H__
+#define __oe_basic_LatLon_H__
 
 #include "openeaagles/basic/Number.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 class String;
 class Number;
@@ -109,7 +109,7 @@ private:
     double  sec;                // seconds
 };
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace
 
 #endif

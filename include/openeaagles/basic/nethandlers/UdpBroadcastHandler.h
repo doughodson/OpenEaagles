@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: UdpBroadcastHandler
 //------------------------------------------------------------------------------
-#ifndef __oe_Basic_UdpBroadcastHandler_H__
-#define __oe_Basic_UdpBroadcastHandler_H__
+#ifndef __oe_basic_UdpBroadcastHandler_H__
+#define __oe_basic_UdpBroadcastHandler_H__
 
 #include "openeaagles/basic/nethandlers/PosixHandler.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 class String;
 class Number;
@@ -51,7 +51,7 @@ private:
     char* networkMask;           // Network Mask
 };
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace
 
 #endif

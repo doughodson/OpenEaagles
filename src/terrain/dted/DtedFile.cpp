@@ -110,7 +110,7 @@ END_SLOTTABLE(DtedFile)
 
 // slot map
 BEGIN_SLOT_MAP(DtedFile)
-   ON_SLOT(1, setSlotVerifyChecksum, Basic::Number)
+   ON_SLOT(1, setSlotVerifyChecksum, basic::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -151,7 +151,7 @@ void DtedFile::deleteData()
 //------------------------------------------------------------------------------
 // Slot functions
 //------------------------------------------------------------------------------
-bool DtedFile::setSlotVerifyChecksum(const Basic::Number* const msg)
+bool DtedFile::setSlotVerifyChecksum(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -451,7 +451,7 @@ long DtedFile::readValue(const unsigned char hbyte, const unsigned char byte1, c
 //------------------------------------------------------------------------------
 // getSlotByIndex() for Component
 //------------------------------------------------------------------------------
-Basic::Object* DtedFile::getSlotByIndex(const int si)
+basic::Object* DtedFile::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

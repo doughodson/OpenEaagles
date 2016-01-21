@@ -32,7 +32,7 @@ END_SLOTTABLE(PrintPlayer)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(PrintPlayer)
-   ON_SLOT( 1, setName,        Basic::String)
+   ON_SLOT( 1, setName,        basic::String)
 END_SLOT_MAP()
 
 EMPTY_SERIALIZER(PrintPlayer)
@@ -60,7 +60,7 @@ void PrintPlayer::copyData(const PrintPlayer& org, const bool cc)
    if (cc) initData();
 
    { // clone player name
-      const Basic::String* clone = nullptr;
+      const basic::String* clone = nullptr;
       if (org.name != nullptr) clone = org.name->clone();
       setName(clone);
       if (clone != nullptr) clone->unref();
@@ -78,7 +78,7 @@ void PrintPlayer::deleteData()
 //------------------------------------------------------------------------------
 // setName
 //------------------------------------------------------------------------------
-bool PrintPlayer::setName(const Basic::String* const msg)
+bool PrintPlayer::setName(const basic::String* const msg)
 {
    if (name != nullptr) { name->unref(); }
    name = msg;
@@ -90,7 +90,7 @@ bool PrintPlayer::setName(const Basic::String* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Basic::Object* PrintPlayer::getSlotByIndex(const int si)
+basic::Object* PrintPlayer::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

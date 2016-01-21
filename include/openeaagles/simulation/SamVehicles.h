@@ -7,7 +7,7 @@
 #include "openeaagles/simulation/GroundVehicle.h"
 
 namespace oe {
-   namespace Basic {
+   namespace basic {
       class Distance;
       class Identifier;
       class Time;
@@ -20,9 +20,9 @@ namespace Simulation {
 //
 // Factory name: SamVehicle
 // Slots:
-//    minLaunchRange    <Basic::Distance>   ! Min launch range (Basic::Distance)
+//    minLaunchRange    <basic::Distance>   ! Min launch range (basic::Distance)
 //                                          ! (default: DEFAULT_MIN_LAUNCH_RANGE)
-//    maxLaunchRange    <Basic::Distance>   ! Max launch range (Basic::Distance)
+//    maxLaunchRange    <basic::Distance>   ! Max launch range (basic::Distance)
 //                                          ! (default: DEFAULT_MAX_LAUNCH_RANGE)
 //
 //==============================================================================
@@ -46,8 +46,8 @@ public:
    virtual bool setMinLaunchRange(const LCreal rng);
 
    // Slot functions
-   virtual bool setSlotMinLaunchRange(const Basic::Distance* const msg);
-   virtual bool setSlotMaxLaunchRange(const Basic::Distance* const msg);
+   virtual bool setSlotMinLaunchRange(const basic::Distance* const msg);
+   virtual bool setSlotMaxLaunchRange(const basic::Distance* const msg);
 
    void updateData(const LCreal dt = 0.0) override;
 

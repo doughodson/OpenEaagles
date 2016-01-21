@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class:  Decibel
 //------------------------------------------------------------------------------
-#ifndef __oe_Basic_Decibel_H__
-#define __oe_Basic_Decibel_H__
+#ifndef __oe_basic_Decibel_H__
+#define __oe_basic_Decibel_H__
 
 #include "openeaagles/basic/Number.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 //------------------------------------------------------------------------------
 // Class:  Decibel
@@ -261,7 +261,7 @@ inline std::ostream& operator<<(std::ostream& sout, const Decibel& n)
    return sout;
 }
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace
 
 #endif

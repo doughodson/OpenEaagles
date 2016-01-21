@@ -74,17 +74,17 @@ public:
    virtual void setEnabledModeC(const bool flg);
 
    // Slot functions
-   virtual bool setSlotMode1(const Basic::Number* const msg);
-   virtual bool setSlotMode2(const Basic::Number* const msg);
-   virtual bool setSlotMode3a(const Basic::Number* const msg);
-   virtual bool setSlotMode4a(const Basic::Number* const msg);
-   virtual bool setSlotMode4b(const Basic::Number* const msg);
-   virtual bool setSlotEnableMode1(const Basic::Number* const msg);
-   virtual bool setSlotEnableMode2(const Basic::Number* const msg);
-   virtual bool setSlotEnableMode3a(const Basic::Number* const msg);
-   virtual bool setSlotWhichMode4(const Basic::Number* const msg);
-   virtual bool setSlotEnableMode4(const Basic::Number* const msg);
-   virtual bool setSlotEnableModeC(const Basic::Number* const msg);
+   virtual bool setSlotMode1(const basic::Number* const msg);
+   virtual bool setSlotMode2(const basic::Number* const msg);
+   virtual bool setSlotMode3a(const basic::Number* const msg);
+   virtual bool setSlotMode4a(const basic::Number* const msg);
+   virtual bool setSlotMode4b(const basic::Number* const msg);
+   virtual bool setSlotEnableMode1(const basic::Number* const msg);
+   virtual bool setSlotEnableMode2(const basic::Number* const msg);
+   virtual bool setSlotEnableMode3a(const basic::Number* const msg);
+   virtual bool setSlotWhichMode4(const basic::Number* const msg);
+   virtual bool setSlotEnableMode4(const basic::Number* const msg);
+   virtual bool setSlotEnableModeC(const basic::Number* const msg);
 
    void reset() override;
 

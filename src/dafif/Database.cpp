@@ -26,8 +26,8 @@ END_SLOTTABLE(Database)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(Database)
-    ON_SLOT(1,setSlotPathname,Basic::String)
-    ON_SLOT(2,setSlotFilename,Basic::String)
+    ON_SLOT(1,setSlotPathname,basic::String)
+    ON_SLOT(2,setSlotFilename,basic::String)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -37,7 +37,7 @@ Database::Database()
 {
    STANDARD_CONSTRUCTOR()
 
-   db = new Basic::FileReader();
+   db = new basic::FileReader();
 
    ncache = 0;
    rl = nullptr;
@@ -66,7 +66,7 @@ void Database::copyData(const Database& org, const bool cc)
 {
    BaseClass::copyData(org);
    if (cc) {
-      db = new Basic::FileReader();
+      db = new basic::FileReader();
    }
 
    ncache = 0;
@@ -149,7 +149,7 @@ void Database::setArea(const double lat, const double lon, const double mr)
 {
    refLat = lat;
    refLon = lon;
-   coslat = std::cos(lat * Basic::Angle::D2RCC);
+   coslat = std::cos(lat * basic::Angle::D2RCC);
    mrng   = mr;
 }
 
@@ -316,7 +316,7 @@ void Database::createIcaoList()
 //------------------------------------------------------------------------------
 // Set slot functions
 //------------------------------------------------------------------------------
-bool Database::setSlotPathname(Basic::String* const msg)
+bool Database::setSlotPathname(basic::String* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -325,7 +325,7 @@ bool Database::setSlotPathname(Basic::String* const msg)
    return ok;
 }
 
-bool Database::setSlotFilename(Basic::String* const msg)
+bool Database::setSlotFilename(basic::String* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -521,7 +521,7 @@ void Database::printIcaoList(std::ostream& sout)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for Component
 //------------------------------------------------------------------------------
-Basic::Object* Database::getSlotByIndex(const int si)
+basic::Object* Database::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

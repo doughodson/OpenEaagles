@@ -23,8 +23,8 @@ namespace Instruments {
 //          Produces the stroke font map.
 //
 //------------------------------------------------------------------------------
-class Eadi3DObjects : public Basic::Object {
-    DECLARE_SUBCLASS(Eadi3DObjects,Basic::Object)
+class Eadi3DObjects : public basic::Object {
+    DECLARE_SUBCLASS(Eadi3DObjects,basic::Object)
 
 public:
     Eadi3DObjects(float radius = 1.625);

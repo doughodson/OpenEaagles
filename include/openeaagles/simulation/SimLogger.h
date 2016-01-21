@@ -23,7 +23,7 @@
 #include "openeaagles/basic/safe_queue.h"
 
 namespace oe {
-   namespace Basic {
+   namespace basic {
       class Identifier;
    }
 namespace Simulation {
@@ -36,19 +36,19 @@ class TrackManager;
 
 //------------------------------------------------------------------------------
 // Class: SimLogger
-// Base class:  Basic::Object -> Basic::Component -> Basic::Logger -> SimLogger
+// Base class:  basic::Object -> basic::Component -> basic::Logger -> SimLogger
 // Description: Simulation Event & Data Logger
 //
 // Factory name: SimLogger
 // Slots:
-//    timeline          <Basic::Identifier>  ! Source of the timeline { UTC, SIM or EXEC } (default: UTC)
-//    includeUtcTime    <Basic::Number>      ! whether to record UTC time                  (default: true)
-//    includeSimTime    <Basic::Number>      ! whether to record SIM time                  (default: true)
-//    includeExecTime   <Basic::Number>      ! whether to record EXEC time                 (default: true)
+//    timeline          <basic::Identifier>  ! Source of the timeline { UTC, SIM or EXEC } (default: UTC)
+//    includeUtcTime    <basic::Number>      ! whether to record UTC time                  (default: true)
+//    includeSimTime    <basic::Number>      ! whether to record SIM time                  (default: true)
+//    includeExecTime   <basic::Number>      ! whether to record EXEC time                 (default: true)
 //------------------------------------------------------------------------------
-class SimLogger : public Basic::Logger
+class SimLogger : public basic::Logger
 {
-    DECLARE_SUBCLASS(SimLogger, Basic::Logger)
+    DECLARE_SUBCLASS(SimLogger, basic::Logger)
 
 public:
     enum TSource {   // Source of the time line
@@ -76,14 +76,14 @@ protected:
    virtual bool setIncludeSimTime(const bool b);                           // whether to record SIM time
    virtual bool setIncludeExecTime(const bool b);                          // whether to record EXEC time
 
-   virtual bool setSlotTimeline(const Basic::Identifier* const p);         // Sets the source of the time (UTC, SIM or EXEC)
-   virtual bool setSlotIncludeUtcTime(const Basic::Number* const num);     // whether to record UTC time
-   virtual bool setSlotIncludeSimTime(const Basic::Number* const num);     // whether to record SIM time
-   virtual bool setSlotIncludeExecTime(const Basic::Number* const num);    // whether to record EXEC time
+   virtual bool setSlotTimeline(const basic::Identifier* const p);         // Sets the source of the time (UTC, SIM or EXEC)
+   virtual bool setSlotIncludeUtcTime(const basic::Number* const num);     // whether to record UTC time
+   virtual bool setSlotIncludeSimTime(const basic::Number* const num);     // whether to record SIM time
+   virtual bool setSlotIncludeExecTime(const basic::Number* const num);    // whether to record EXEC time
 
 private:
     static const int MAX_QUEUE_SIZE = 1000;     // Max size of the logger event queue
-    Basic::safe_queue<SimLogEvent*> seQueue;    // Sim Event Queue
+    basic::safe_queue<SimLogEvent*> seQueue;    // Sim Event Queue
 
     double          time;                       // Sim time (seconds)
     double          execTime;                   // Executive time (seconds)
@@ -101,11 +101,11 @@ public:
 
     //------------------------------------------------------------------------------
     // Class: SimLogger::SimLogEvent
-    // Base class:  Basic::Object -> Basic::Logger::LogEvent -> SimLogEvent
+    // Base class:  basic::Object -> basic::Logger::LogEvent -> SimLogEvent
     // Description: Abstract class for all simulation log events
     //------------------------------------------------------------------------------
-    class SimLogEvent : public Basic::Logger::LogEvent {
-        DECLARE_SUBCLASS(SimLogEvent,Basic::Logger::LogEvent)
+    class SimLogEvent : public basic::Logger::LogEvent {
+        DECLARE_SUBCLASS(SimLogEvent,basic::Logger::LogEvent)
     public:
         SimLogEvent();
         virtual void captureData() =0;
@@ -140,7 +140,7 @@ public:
 
     //------------------------------------------------------------------------------
     // Class: SimLogger::NewPlayer
-    // Base class:  Basic::Object -> Basic::Logger::LogEvent -> NewPlayer
+    // Base class:  basic::Object -> basic::Logger::LogEvent -> NewPlayer
     // Description: Log a new player event
     //------------------------------------------------------------------------------
     class NewPlayer : public SimLogEvent {
@@ -151,7 +151,7 @@ public:
         void captureData() override;
     private:
         void initData();
-        Basic::safe_ptr<const Player> thePlayer;
+        basic::safe_ptr<const Player> thePlayer;
         osg::Vec3 pos;
         osg::Vec3 vel;
         osg::Vec3 angles;
@@ -159,7 +159,7 @@ public:
 
     //------------------------------------------------------------------------------
     // Class: SimLogger::LogPlayerData
-    // Base class:  Basic::Object -> Basic::Logger::LogEvent -> LogPlayerData
+    // Base class:  basic::Object -> basic::Logger::LogEvent -> LogPlayerData
     // Description: Log player's data event
     //------------------------------------------------------------------------------
     class LogPlayerData : public SimLogEvent {
@@ -170,7 +170,7 @@ public:
         void captureData() override;
     private:
         void initData();
-        Basic::safe_ptr<const Player> thePlayer;
+        basic::safe_ptr<const Player> thePlayer;
         osg::Vec3 pos;
         osg::Vec3 vel;
         osg::Vec3 angles;
@@ -181,7 +181,7 @@ public:
 
     //------------------------------------------------------------------------------
     // Class: SimLogger::RemovePlayer
-    // Base class:  Basic::Object -> Basic::Logger::LogEvent -> RemovePlayer
+    // Base class:  basic::Object -> basic::Logger::LogEvent -> RemovePlayer
     // Description: Log a remove player event
     //------------------------------------------------------------------------------
     class RemovePlayer : public SimLogEvent {
@@ -192,7 +192,7 @@ public:
         void captureData() override;
     private:
         void initData();
-        Basic::safe_ptr<const Player> thePlayer;
+        basic::safe_ptr<const Player> thePlayer;
         osg::Vec3 pos;
         osg::Vec3 vel;
         osg::Vec3 angles;
@@ -200,7 +200,7 @@ public:
 
     //------------------------------------------------------------------------------
     // Class: SimLogger::WeaponRelease
-    // Base class:  Basic::Object -> Basic::Logger::LogEvent -> WeaponRelease
+    // Base class:  basic::Object -> basic::Logger::LogEvent -> WeaponRelease
     // Description: Log a weapon release (e.g., missile launch) event
     //   (i.e., the 'player' released weapon, 'wpn' at the target player, 'tgt'.
     //------------------------------------------------------------------------------
@@ -212,14 +212,14 @@ public:
         void captureData() override;
     private:
         void initData();
-        Basic::safe_ptr<const Player> thePlayer;
-        Basic::safe_ptr<const Player> theWeapon;
-        Basic::safe_ptr<const Player> theTarget;
+        basic::safe_ptr<const Player> thePlayer;
+        basic::safe_ptr<const Player> theWeapon;
+        basic::safe_ptr<const Player> theTarget;
     };
 
     //------------------------------------------------------------------------------
     // Class: SimLogger::GunFired
-    // Base class:  Basic::Object -> Basic::Logger::LogEvent -> GunFired
+    // Base class:  basic::Object -> basic::Logger::LogEvent -> GunFired
     // Description: Log a gun fire event; Player just fired a burst of 'n' rounds
     //------------------------------------------------------------------------------
     class GunFired : public SimLogEvent {
@@ -230,13 +230,13 @@ public:
         void captureData() override;
     private:
         void initData();
-        Basic::safe_ptr<const Player> thePlayer;
+        basic::safe_ptr<const Player> thePlayer;
         int rounds;
     };
 
     //------------------------------------------------------------------------------
     // Class: SimLogger::KillEvent
-    // Base class:  Basic::Object -> Basic::Logger::LogEvent -> KillEvent
+    // Base class:  basic::Object -> basic::Logger::LogEvent -> KillEvent
     // Description: Log a kill event
     //    (i.e., Target, 'tgt', killed by weapon, 'wpn', released from the 'player'.
     //------------------------------------------------------------------------------
@@ -248,14 +248,14 @@ public:
         void captureData() override;
     private:
         void initData();
-        Basic::safe_ptr<const Player> thePlayer;
-        Basic::safe_ptr<const Player> theWeapon;
-        Basic::safe_ptr<const Player> theTarget;
+        basic::safe_ptr<const Player> thePlayer;
+        basic::safe_ptr<const Player> theWeapon;
+        basic::safe_ptr<const Player> theTarget;
     };
 
     //------------------------------------------------------------------------------
     // Class: SimLogger::DetonationEvent
-    // Base class:  Basic::Object -> Basic::Logger::LogEvent -> DetonationEvent
+    // Base class:  basic::Object -> basic::Logger::LogEvent -> DetonationEvent
     // Description: Log a detonation event
     //    (i.e., Target, 'tgt', killed by weapon, 'wpn', released from the 'player'.
     //------------------------------------------------------------------------------
@@ -267,16 +267,16 @@ public:
         void captureData() override;
     private:
         void initData();
-        Basic::safe_ptr<const Player> thePlayer;
-        Basic::safe_ptr<const Player> theWeapon;
-        Basic::safe_ptr<const Player> theTarget;
+        basic::safe_ptr<const Player> thePlayer;
+        basic::safe_ptr<const Player> theWeapon;
+        basic::safe_ptr<const Player> theTarget;
         unsigned int detType;
         LCreal missDist;
     };
 
     //------------------------------------------------------------------------------
     // Class: SimLogger::NewTrack
-    // Base class:  Basic::Object -> Basic::Logger::LogEvent -> NewTrack
+    // Base class:  basic::Object -> basic::Logger::LogEvent -> NewTrack
     // Description: Log an added track event
     //------------------------------------------------------------------------------
     class NewTrack : public SimLogEvent {
@@ -287,10 +287,10 @@ public:
         void captureData() override;
     private:
         void initData();
-        Basic::safe_ptr<const TrackManager> theManager;
-        Basic::safe_ptr<const Track> theTrack;
-        Basic::safe_ptr<const Player> thePlayer;
-        Basic::safe_ptr<const Emission> theEmission;
+        basic::safe_ptr<const TrackManager> theManager;
+        basic::safe_ptr<const Track> theTrack;
+        basic::safe_ptr<const Player> thePlayer;
+        basic::safe_ptr<const Emission> theEmission;
         osg::Vec3 pos;
         osg::Vec3 vel;
         osg::Vec3 angles;
@@ -302,7 +302,7 @@ public:
 
     //------------------------------------------------------------------------------
     // Class: SimLogger::UpdateTrack
-    // Base class:  Basic::Object -> Basic::Logger::LogEvent -> UpdateTrack
+    // Base class:  basic::Object -> basic::Logger::LogEvent -> UpdateTrack
     // Description: Log a update track event
     //------------------------------------------------------------------------------
     class UpdateTrack : public SimLogEvent {
@@ -313,10 +313,10 @@ public:
         void captureData() override;
     private:
         void initData();
-        Basic::safe_ptr<const TrackManager> theManager;
-        Basic::safe_ptr<const Track> theTrack;
-        Basic::safe_ptr<const Player> thePlayer;
-        Basic::safe_ptr<const Emission> theEmission;
+        basic::safe_ptr<const TrackManager> theManager;
+        basic::safe_ptr<const Track> theTrack;
+        basic::safe_ptr<const Player> thePlayer;
+        basic::safe_ptr<const Emission> theEmission;
         osg::Vec3 pos;
         osg::Vec3 vel;
         osg::Vec3 angles;
@@ -328,7 +328,7 @@ public:
 
     //------------------------------------------------------------------------------
     // Class: SimLogger::RemovedTrack
-    // Base class:  Basic::Object -> Basic::Logger::LogEvent -> RemovedTrack
+    // Base class:  basic::Object -> basic::Logger::LogEvent -> RemovedTrack
     // Description: Log a removed track event
     //------------------------------------------------------------------------------
     class RemovedTrack : public SimLogEvent {
@@ -339,10 +339,10 @@ public:
         void captureData() override;
     private:
         void initData();
-        Basic::safe_ptr<const TrackManager> theManager;
-        Basic::safe_ptr<const Track> theTrack;
-        Basic::safe_ptr<const Player> thePlayer;
-        Basic::safe_ptr<const Emission> theEmission;
+        basic::safe_ptr<const TrackManager> theManager;
+        basic::safe_ptr<const Track> theTrack;
+        basic::safe_ptr<const Player> thePlayer;
+        basic::safe_ptr<const Emission> theEmission;
         osg::Vec3 pos;
         osg::Vec3 vel;
         osg::Vec3 angles;
@@ -354,7 +354,7 @@ public:
 
     //------------------------------------------------------------------------------
     // Class: SimLogger::NewRwrTrack
-    // Base class:  Basic::Object -> Basic::Logger::LogEvent -> NewRwrTrack
+    // Base class:  basic::Object -> basic::Logger::LogEvent -> NewRwrTrack
     // Description: Log an added RWR track event
     //------------------------------------------------------------------------------
     class NewRwrTrack : public SimLogEvent {
@@ -365,10 +365,10 @@ public:
         void captureData() override;
     private:
         void initData();
-        Basic::safe_ptr<const TrackManager> theManager;
-        Basic::safe_ptr<const Track> theTrack;
-        Basic::safe_ptr<const Player> thePlayer;
-        Basic::safe_ptr<const Emission> theEmission;
+        basic::safe_ptr<const TrackManager> theManager;
+        basic::safe_ptr<const Track> theTrack;
+        basic::safe_ptr<const Player> thePlayer;
+        basic::safe_ptr<const Emission> theEmission;
         osg::Vec3 pos;
         osg::Vec3 vel;
         osg::Vec3 angles;
@@ -380,7 +380,7 @@ public:
 
     //------------------------------------------------------------------------------
     // Class: SimLogger::UpdateRwrTrack
-    // Base class:  Basic::Object -> Basic::Logger::LogEvent -> UpdateRwrTrack
+    // Base class:  basic::Object -> basic::Logger::LogEvent -> UpdateRwrTrack
     // Description: Log update RWR track event
     //------------------------------------------------------------------------------
     class UpdateRwrTrack : public SimLogEvent {
@@ -391,10 +391,10 @@ public:
         void captureData() override;
     private:
         void initData();
-        Basic::safe_ptr<const TrackManager> theManager;
-        Basic::safe_ptr<const Track> theTrack;
-        Basic::safe_ptr<const Player> thePlayer;
-        Basic::safe_ptr<const Emission> theEmission;
+        basic::safe_ptr<const TrackManager> theManager;
+        basic::safe_ptr<const Track> theTrack;
+        basic::safe_ptr<const Player> thePlayer;
+        basic::safe_ptr<const Emission> theEmission;
         osg::Vec3 pos;
         osg::Vec3 vel;
         osg::Vec3 angles;
@@ -406,7 +406,7 @@ public:
 
     //------------------------------------------------------------------------------
     // Class: SimLogger::RemovedRwrTrack
-    // Base class:  Basic::Object -> Basic::Logger::LogEvent -> RemovedRwrTrack
+    // Base class:  basic::Object -> basic::Logger::LogEvent -> RemovedRwrTrack
     // Description: Log a removed RWR track event
     //------------------------------------------------------------------------------
     class RemovedRwrTrack : public SimLogEvent {
@@ -417,10 +417,10 @@ public:
         void captureData() override;
     private:
         void initData();
-        Basic::safe_ptr<const TrackManager> theManager;
-        Basic::safe_ptr<const Track> theTrack;
-        Basic::safe_ptr<const Player> thePlayer;
-        Basic::safe_ptr<const Emission> theEmission;
+        basic::safe_ptr<const TrackManager> theManager;
+        basic::safe_ptr<const Track> theTrack;
+        basic::safe_ptr<const Player> thePlayer;
+        basic::safe_ptr<const Emission> theEmission;
         osg::Vec3 pos;
         osg::Vec3 vel;
         osg::Vec3 angles;

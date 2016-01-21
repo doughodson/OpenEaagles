@@ -8,7 +8,7 @@
 
 namespace oe {
 
-namespace Basic { class Number; }
+namespace basic { class Number; }
 
 namespace BasicGL {
 
@@ -49,7 +49,7 @@ public:
     void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false) override;
     void loadFont() override;
 
-    virtual bool setReverse(const Basic::Number* const rnumber);
+    virtual bool setReverse(const basic::Number* const rnumber);
 
 private:
     // Loader support functions

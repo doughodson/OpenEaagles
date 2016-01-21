@@ -55,9 +55,9 @@ namespace Simulation {
 //       Z+ is the cross product of X into Y
 //
 //------------------------------------------------------------------------------
-class Tdb : public Basic::Object
+class Tdb : public basic::Object
 {
-   DECLARE_SUBCLASS(Tdb,Basic::Object)
+   DECLARE_SUBCLASS(Tdb,basic::Object)
 
 public:
    Tdb(const unsigned int maxTargets, const Gimbal* const gimbal);
@@ -69,7 +69,7 @@ public:
    // 
    // Notes:
    //------------------------------------------------------------------------------
-   virtual unsigned int processPlayers(Basic::PairStream* const players);
+   virtual unsigned int processPlayers(basic::PairStream* const players);
 
    // ---
    // Data from processPlayers()

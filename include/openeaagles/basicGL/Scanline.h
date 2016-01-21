@@ -18,9 +18,9 @@ class Polygon;
 // Description:  (Abstract) 2D scan line engine.
 // Factory name: Scanline
 //------------------------------------------------------------------------------
-class Scanline : public Basic::Object
+class Scanline : public basic::Object
 {
-   DECLARE_SUBCLASS(Scanline,Basic::Object)
+   DECLARE_SUBCLASS(Scanline,basic::Object)
 
 public:
    Scanline();
@@ -44,8 +44,8 @@ public:
 
 protected:
    // PolyData Description
-   class PolyData : public Basic::Object {
-      DECLARE_SUBCLASS(PolyData,Basic::Object)
+   class PolyData : public basic::Object {
+      DECLARE_SUBCLASS(PolyData,basic::Object)
    public:
       PolyData();
       void getNorm(osg::Vec3& lnorm, const LCreal x) const;
@@ -54,14 +54,14 @@ protected:
       osg::Vec3   n0;                    // Initial Norm
       osg::Vec3   nslope;                // Norm slope
       bool        aptEdge2;              // reached second edge
-      Basic::safe_ptr<Polygon> polygon;      // Clipped (working) polygon
-      Basic::safe_ptr<const Polygon> orig;   // Original polygon
+      basic::safe_ptr<Polygon> polygon;      // Clipped (working) polygon
+      basic::safe_ptr<const Polygon> orig;   // Original polygon
    };
 
 protected:
    // Edge Description
-   class Edge : public Basic::Object {
-      DECLARE_SUBCLASS(Edge,Basic::Object)
+   class Edge : public basic::Object {
+      DECLARE_SUBCLASS(Edge,basic::Object)
    public:
       Edge();
       Edge(const LCreal v0[2], const osg::Vec3& vn0, const LCreal v1[2], const osg::Vec3& vn1, PolyData* const p);
@@ -78,7 +78,7 @@ protected:
       osg::Vec3   nslope;     // Norm slope
       bool        valid;      // valid edge
       bool        pointLock;  // after incEdgeStart() edge became a point
-      Basic::safe_ptr<PolyData> polygon;    // This edge belongs to this polygon
+      basic::safe_ptr<PolyData> polygon;    // This edge belongs to this polygon
    };
 
 protected:

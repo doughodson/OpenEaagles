@@ -34,9 +34,9 @@ namespace BasicGL {
 Factory::Factory()
 {}
 
-Basic::Object* Factory::createObj(const char* name)
+basic::Object* Factory::createObj(const char* name)
 {
-    Basic::Object* obj = nullptr;
+    basic::Object* obj = nullptr;
 
     // General graphics support
     if ( std::strcmp(name, Graphic::getFactoryName()) == 0 ) {

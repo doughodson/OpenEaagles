@@ -7,15 +7,15 @@
 // "Applied Numerical Methods for Digital Computation", 4ed, James-Smith-Wolford, Harper Collins (1993)
 // "Applied Numerical Analysis Using Matlab", 1ed, Laurene V. Fausett, Prentice Hall (1999)
 //------------------------------------------------------------------------------
-#ifndef __oe_Basic_Matrix_H__
-#define __oe_Basic_Matrix_H__
+#ifndef __oe_basic_Matrix_H__
+#define __oe_basic_Matrix_H__
 
 #include "openeaagles/basic/Object.h"
 
 #include <cmath>
 
 namespace oe {
-namespace Basic {
+namespace basic {
    class CVector; // Column vector
    class RVector; // Row vector
 

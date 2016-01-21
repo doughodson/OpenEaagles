@@ -33,10 +33,10 @@ END_SLOTTABLE(IrAtmosphere)
 
 // slot map
 BEGIN_SLOT_MAP(IrAtmosphere)
-   ON_SLOT(1,setSlotWaveBands, Basic::Table1)
-   ON_SLOT(2,setSlotTransmissivityTable1, Basic::Table1)
-   ON_SLOT(3,setSlotSkyRadiance, Basic::Number)
-   ON_SLOT(4,setSlotEarthRadiance, Basic::Number)
+   ON_SLOT(1,setSlotWaveBands, basic::Table1)
+   ON_SLOT(2,setSlotTransmissivityTable1, basic::Table1)
+   ON_SLOT(3,setSlotSkyRadiance, basic::Number)
+   ON_SLOT(4,setSlotEarthRadiance, basic::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -65,7 +65,7 @@ void IrAtmosphere::deleteData()
 // Slot functions
 //------------------------------------------------------------------------------
 
-bool IrAtmosphere::setSlotWaveBands(const Basic::Table1* const tbl)
+bool IrAtmosphere::setSlotWaveBands(const basic::Table1* const tbl)
 {
     bool ok = false;
     if (tbl != nullptr) {
@@ -78,7 +78,7 @@ bool IrAtmosphere::setSlotWaveBands(const Basic::Table1* const tbl)
     return ok;
 }
 
-bool IrAtmosphere::setSlotTransmissivityTable1(const Basic::Table1* const tbl)
+bool IrAtmosphere::setSlotTransmissivityTable1(const basic::Table1* const tbl)
 {
     bool ok = false;
     if (tbl != nullptr) {
@@ -93,7 +93,7 @@ bool IrAtmosphere::setSlotTransmissivityTable1(const Basic::Table1* const tbl)
 //------------------------------------------------------------------------------
 // setSlotSkyRadiance() -- sky radiance
 //------------------------------------------------------------------------------
-bool IrAtmosphere::setSlotSkyRadiance(oe::Basic::Number* const num)
+bool IrAtmosphere::setSlotSkyRadiance(oe::basic::Number* const num)
 {
     bool ok = false;
     if (num != nullptr) {
@@ -106,7 +106,7 @@ bool IrAtmosphere::setSlotSkyRadiance(oe::Basic::Number* const num)
 //------------------------------------------------------------------------------
 // setSlotEarthRadiance() -- set background radiance for ground
 //------------------------------------------------------------------------------
-bool IrAtmosphere::setSlotEarthRadiance(oe::Basic::Number* const num)
+bool IrAtmosphere::setSlotEarthRadiance(oe::basic::Number* const num)
 {
     bool ok = false;
     if (num != nullptr) {
@@ -176,17 +176,17 @@ bool IrAtmosphere::calculateAtmosphereContribution(IrQueryMsg* const msg, LCreal
             const osg::Matrixd mm = msg->getGimbal()->getRotMat() * msg->getOwnship()->getRotMat();
             // compute Geodetic orientation angles
             osg::Vec3d angles;
-            Basic::Nav::computeEulerAngles(mm, &angles);
+            basic::Nav::computeEulerAngles(mm, &angles);
             currentViewAngle = angles[Player::IPITCH];
         }
 
         // FAB determine angle to horizon, positive angles are down
         {
-            double hDist = 1000000.0 * Basic::Distance::NM2M;  // Distance to horizon (m) (default: really far away)
+            double hDist = 1000000.0 * basic::Distance::NM2M;  // Distance to horizon (m) (default: really far away)
             double hTanAng = 0;
 
             // earth radius in meters
-            const double er = Basic::Nav::ERAD60 * Basic::Distance::NM2M;
+            const double er = basic::Nav::ERAD60 * basic::Distance::NM2M;
 
             // distance from the center of the earth
             const double distEC = msg->getOwnship()->getAltitudeM() + er;
@@ -287,7 +287,7 @@ const LCreal* IrAtmosphere::getWaveBandWidths() const
     return ((waveBandTable != nullptr) ? waveBandTable->getDataTable() : nullptr);
 }
 
-Basic::Object* IrAtmosphere::getSlotByIndex(const int si)
+basic::Object* IrAtmosphere::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

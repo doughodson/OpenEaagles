@@ -56,12 +56,12 @@ EMPTY_SERIALIZER(SigConstant)
 //------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(SigConstant)
     "rcs",          // 1 Constant Radar Cross Section value
-                    //   Basic::Number(square meters) or Basic::Decibel(square meters) or Basic::Area()
+                    //   basic::Number(square meters) or basic::Decibel(square meters) or basic::Area()
 END_SLOTTABLE(SigConstant)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(SigConstant)
-    ON_SLOT(1,setRCS,Basic::Number)
+    ON_SLOT(1,setRCS,basic::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -79,7 +79,7 @@ SigConstant::SigConstant(const LCreal r)
     rcs = r;
 }
 
-SigConstant::SigConstant(const Basic::Number* const c)
+SigConstant::SigConstant(const basic::Number* const c)
 {
     STANDARD_CONSTRUCTOR()
     setRCS(c);
@@ -112,15 +112,15 @@ LCreal SigConstant::getRCS(const Emission* const)
 //------------------------------------------------------------------------------
 // setRCS() -- Set the RCS
 //------------------------------------------------------------------------------
-bool SigConstant::setRCS(const Basic::Number* const num)
+bool SigConstant::setRCS(const basic::Number* const num)
 {
     bool ok = false;
     LCreal r = -1.0;
 
-    const Basic::Area* d = dynamic_cast<const Basic::Area*>(num);
+    const basic::Area* d = dynamic_cast<const basic::Area*>(num);
     if (d != nullptr) {
         // Has area units and we need square meters
-        Basic::SquareMeters m2;
+        basic::SquareMeters m2;
         r = m2.convert(*d);
     }
     else if (num != nullptr) {
@@ -136,7 +136,7 @@ bool SigConstant::setRCS(const Basic::Number* const num)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Basic::Object* SigConstant::getSlotByIndex(const int si)
+basic::Object* SigConstant::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
@@ -156,7 +156,7 @@ END_SLOTTABLE(SigSphere)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(SigSphere)
-    ON_SLOT(1,setRadiusFromSlot,Basic::Number)
+    ON_SLOT(1,setRadiusFromSlot,basic::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -201,15 +201,15 @@ LCreal SigSphere::getRCS(const Emission* const)
 //------------------------------------------------------------------------------
 // setRadiusFromSlot() -- Set the radius from Slot table
 //------------------------------------------------------------------------------
-bool SigSphere::setRadiusFromSlot(Basic::Number* const num)
+bool SigSphere::setRadiusFromSlot(basic::Number* const num)
 {
     bool ok = false;
     LCreal r = -1.0;
 
-    Basic::Distance* d = dynamic_cast<Basic::Distance*>(num);
+    basic::Distance* d = dynamic_cast<basic::Distance*>(num);
     if (d != nullptr) {
         // Has distance units and we need meters
-        Basic::Meters meters;
+        basic::Meters meters;
         r = meters.convert(*d);
     }
     else if (num != nullptr) {
@@ -225,7 +225,7 @@ bool SigSphere::setRadiusFromSlot(Basic::Number* const num)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Basic::Object* SigSphere::getSlotByIndex(const int si)
+basic::Object* SigSphere::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
@@ -246,8 +246,8 @@ END_SLOTTABLE(SigPlate)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(SigPlate)
-    ON_SLOT(1,setA,Basic::Number)
-    ON_SLOT(2,setB,Basic::Number)
+    ON_SLOT(1,setA,basic::Number)
+    ON_SLOT(2,setB,basic::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -304,15 +304,15 @@ LCreal SigPlate::getRCS(const Emission* const em)
 //------------------------------------------------------------------------------
 // setA() -- Set the length
 //------------------------------------------------------------------------------
-bool SigPlate::setA(Basic::Number* const num)
+bool SigPlate::setA(basic::Number* const num)
 {
     bool ok = false;
     LCreal v = -1.0;
 
-    Basic::Distance* d = dynamic_cast<Basic::Distance*>(num);
+    basic::Distance* d = dynamic_cast<basic::Distance*>(num);
     if (d != nullptr) {
         // Has distance units and we need meters
-        Basic::Meters meters;
+        basic::Meters meters;
         v = meters.convert(*d);
     }
     else if (num != nullptr) {
@@ -328,15 +328,15 @@ bool SigPlate::setA(Basic::Number* const num)
 //------------------------------------------------------------------------------
 // setB() -- Set the width
 //------------------------------------------------------------------------------
-bool SigPlate::setB(Basic::Number* const num)
+bool SigPlate::setB(basic::Number* const num)
 {
     bool ok = false;
     LCreal v = -1.0;
 
-    Basic::Distance* d = dynamic_cast<Basic::Distance*>(num);
+    basic::Distance* d = dynamic_cast<basic::Distance*>(num);
     if (d != nullptr) {
         // Has distance units and we need meters
-        Basic::Meters meters;
+        basic::Meters meters;
         v = meters.convert(*d);
     }
     else if (num != nullptr) {
@@ -352,7 +352,7 @@ bool SigPlate::setB(Basic::Number* const num)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Basic::Object* SigPlate::getSlotByIndex(const int si)
+basic::Object* SigPlate::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
@@ -510,7 +510,7 @@ LCreal SigSwitch::getRCS(const Emission* const em)
       camouflage++; // our components are one based
 
       // find a RfSignature with this index
-      Basic::Pair* pair = findByIndex(camouflage);
+      basic::Pair* pair = findByIndex(camouflage);
       if (pair != nullptr) {
          RfSignature* sig = dynamic_cast<RfSignature*>( pair->object() );
          if (sig != nullptr) {
@@ -538,7 +538,7 @@ EMPTY_SERIALIZER(SigAzEl)
 // Slot table
 //------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(SigAzEl)
-    "table",            // 1: Table of RCS by target Az/El angles  (Basic::Table2)
+    "table",            // 1: Table of RCS by target Az/El angles  (basic::Table2)
     "swapOrder",        // 2: True if elevation is the table's first independent
                         //    variable and azimuth is the second.
     "inDegrees",        // 3: True if the table's independent variables az and
@@ -549,10 +549,10 @@ END_SLOTTABLE(SigAzEl)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(SigAzEl)
-    ON_SLOT(1, setSlotTable,        Basic::Table2)
-    ON_SLOT(2, setSlotSwapOrder,    Basic::Number)
-    ON_SLOT(3, setSlotInDegrees,    Basic::Number)
-    ON_SLOT(4, setSlotDecibel,      Basic::Number)
+    ON_SLOT(1, setSlotTable,        basic::Table2)
+    ON_SLOT(2, setSlotSwapOrder,    basic::Number)
+    ON_SLOT(3, setSlotInDegrees,    basic::Number)
+    ON_SLOT(4, setSlotDecibel,      basic::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -568,7 +568,7 @@ SigAzEl::SigAzEl()
    dbFlg = false;
 }
 
-SigAzEl::SigAzEl(const Basic::Table2* const tbl0)
+SigAzEl::SigAzEl(const basic::Table2* const tbl0)
 {
    STANDARD_CONSTRUCTOR()
 
@@ -629,8 +629,8 @@ LCreal SigAzEl::getRCS(const Emission* const em)
 
       // If the table's independent variables are in degrees ..
       if (isInDegrees()) {
-         iv1 *= static_cast<LCreal>(Basic::Angle::R2DCC);
-         iv2 *= static_cast<LCreal>(Basic::Angle::R2DCC);
+         iv1 *= static_cast<LCreal>(basic::Angle::R2DCC);
+         iv2 *= static_cast<LCreal>(basic::Angle::R2DCC);
       }
 
       rcs = tbl->lfi(iv1,iv2);
@@ -682,7 +682,7 @@ bool SigAzEl::setDecibel(const bool flg)
 //------------------------------------------------------------------------------
 
 // Sets the signature table
-bool SigAzEl::setSlotTable(const Basic::Table2* const msg)
+bool SigAzEl::setSlotTable(const basic::Table2* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -694,7 +694,7 @@ bool SigAzEl::setSlotTable(const Basic::Table2* const msg)
    return ok;
 }
 
-bool SigAzEl::setSlotSwapOrder(const Basic::Number* const msg)
+bool SigAzEl::setSlotSwapOrder(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -703,7 +703,7 @@ bool SigAzEl::setSlotSwapOrder(const Basic::Number* const msg)
    return ok;
 }
 
-bool SigAzEl::setSlotInDegrees(const Basic::Number* const msg)
+bool SigAzEl::setSlotInDegrees(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -712,7 +712,7 @@ bool SigAzEl::setSlotInDegrees(const Basic::Number* const msg)
    return ok;
 }
 
-bool SigAzEl::setSlotDecibel(const Basic::Number* const msg)
+bool SigAzEl::setSlotDecibel(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -724,7 +724,7 @@ bool SigAzEl::setSlotDecibel(const Basic::Number* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Basic::Object* SigAzEl::getSlotByIndex(const int si)
+basic::Object* SigAzEl::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

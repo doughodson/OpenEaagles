@@ -62,10 +62,10 @@ void OutputHandler::deleteData()
 bool OutputHandler::shutdownNotification()
 {
    // Pass the shutdown notification to our subcomponent recorders
-   Basic::PairStream* subcomponents = getComponents();
+   basic::PairStream* subcomponents = getComponents();
    if (subcomponents != nullptr) {
-      for (Basic::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
-         Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+      for (basic::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
+         basic::Pair* pair = static_cast<basic::Pair*>(item->getValue());
          OutputHandler* sc = static_cast<OutputHandler*>(pair->object());
          sc->event(SHUTDOWN_EVENT);
       }
@@ -91,11 +91,11 @@ void OutputHandler::processRecord(const DataRecordHandle* const dataRecord)
 
       // Next, pass the data record to our subcomponent OutputHandlers
       // for further processing
-      Basic::PairStream* subcomponents = getComponents();
+      basic::PairStream* subcomponents = getComponents();
       if (subcomponents != nullptr) {
-         for (Basic::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
+         for (basic::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
 
-            Basic::Pair* pair = static_cast<Basic::Pair*>(item->getValue());
+            basic::Pair* pair = static_cast<basic::Pair*>(item->getValue());
             OutputHandler* sc = static_cast<OutputHandler*>(pair->object());
 
             sc->processRecord(dataRecord);
@@ -168,10 +168,10 @@ bool OutputHandler::isDataTypeEnabled(const DataRecordHandle* const handle) cons
 //  make sure our subcomponents are all of type OutputHandler (or derived)
 //------------------------------------------------------------------------------
 void OutputHandler::processComponents(
-      Basic::PairStream* const list,
+      basic::PairStream* const list,
       const std::type_info&,
-      Basic::Pair* const add,
-      Basic::Component* const remove
+      basic::Pair* const add,
+      basic::Component* const remove
    )
 {
    BaseClass::processComponents(list,typeid(OutputHandler),add,remove);

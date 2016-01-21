@@ -25,10 +25,10 @@ END_SLOTTABLE(Ai2DiSwitch)
 
 //  Map slot table to handles
 BEGIN_SLOT_MAP(Ai2DiSwitch)
-    ON_SLOT( 1, setSlotLocation, Basic::Number)
-    ON_SLOT( 2, setSlotChannel,  Basic::Number)
-    ON_SLOT( 3, setSlotLevel,    Basic::Number)
-    ON_SLOT( 4, setSlotInverted, Basic::Number)
+    ON_SLOT( 1, setSlotLocation, basic::Number)
+    ON_SLOT( 2, setSlotChannel,  basic::Number)
+    ON_SLOT( 3, setSlotLevel,    basic::Number)
+    ON_SLOT( 4, setSlotInverted, basic::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -130,7 +130,7 @@ bool Ai2DiSwitch::setInvertFlag(const bool f)
 //------------------------------------------------------------------------------
 // process inputs
 //------------------------------------------------------------------------------
-void Ai2DiSwitch::processInputs(const LCreal, const Basic::IoDevice* const device, Basic::IoData* const inData)
+void Ai2DiSwitch::processInputs(const LCreal, const basic::IoDevice* const device, basic::IoData* const inData)
 {
    // Default is our initial value
    LCreal vin(0.0);
@@ -151,7 +151,7 @@ void Ai2DiSwitch::processInputs(const LCreal, const Basic::IoDevice* const devic
 //------------------------------------------------------------------------------
 // process outputs
 //------------------------------------------------------------------------------
-void Ai2DiSwitch::processOutputs(const LCreal, const Basic::IoData* const, Basic::IoDevice* const)
+void Ai2DiSwitch::processOutputs(const LCreal, const basic::IoData* const, basic::IoDevice* const)
 {
 }
 
@@ -160,7 +160,7 @@ void Ai2DiSwitch::processOutputs(const LCreal, const Basic::IoData* const, Basic
 //------------------------------------------------------------------------------
 
 // location: Input array index (location)
-bool Ai2DiSwitch::setSlotLocation(const Basic::Number* const msg)
+bool Ai2DiSwitch::setSlotLocation(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -173,7 +173,7 @@ bool Ai2DiSwitch::setSlotLocation(const Basic::Number* const msg)
 }
 
 // channel: Device's AI channel number
-bool Ai2DiSwitch::setSlotChannel(const Basic::Number* const msg)
+bool Ai2DiSwitch::setSlotChannel(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -186,7 +186,7 @@ bool Ai2DiSwitch::setSlotChannel(const Basic::Number* const msg)
 }
 
 // level: Level to switch DI (default: 0)
-bool Ai2DiSwitch::setSlotLevel(const Basic::Number* const msg)
+bool Ai2DiSwitch::setSlotLevel(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -196,7 +196,7 @@ bool Ai2DiSwitch::setSlotLevel(const Basic::Number* const msg)
 }
 
 // invert: Inverted bit flag (default: false)
-bool Ai2DiSwitch::setSlotInverted(const Basic::Number* const msg)
+bool Ai2DiSwitch::setSlotInverted(const basic::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -209,7 +209,7 @@ bool Ai2DiSwitch::setSlotInverted(const Basic::Number* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for Component
 //------------------------------------------------------------------------------
-Basic::Object* Ai2DiSwitch::getSlotByIndex(const int si)
+basic::Object* Ai2DiSwitch::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

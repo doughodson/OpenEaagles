@@ -33,8 +33,8 @@ END_SLOTTABLE(AngleOnlyTrackManager)
 
 //  Map slot table
 BEGIN_SLOT_MAP(AngleOnlyTrackManager)
-    ON_SLOT(1, setSlotAzimuthBin, Basic::Number)
-    ON_SLOT(2, setSlotElevationBin, Basic::Number)
+    ON_SLOT(1, setSlotAzimuthBin, basic::Number)
+    ON_SLOT(2, setSlotElevationBin, basic::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -184,13 +184,13 @@ bool AngleOnlyTrackManager::addTrack(Track* const t)
 //------------------------------------------------------------------------------
 // Sets azimuth bin
 //------------------------------------------------------------------------------
-bool AngleOnlyTrackManager::setSlotAzimuthBin(const Basic::Number* const msg)
+bool AngleOnlyTrackManager::setSlotAzimuthBin(const basic::Number* const msg)
 {
     LCreal value = 0.0;
 
-    const Basic::Angle* a = dynamic_cast<const Basic::Angle*>(msg);
+    const basic::Angle* a = dynamic_cast<const basic::Angle*>(msg);
     if (a != nullptr) {
-        Basic::Radians r;
+        basic::Radians r;
         value = static_cast<LCreal>(r.convert(*a));
     }
     else if (msg != nullptr) {
@@ -205,13 +205,13 @@ bool AngleOnlyTrackManager::setSlotAzimuthBin(const Basic::Number* const msg)
 //------------------------------------------------------------------------------
 // Sets azimuth bin
 //------------------------------------------------------------------------------
-bool AngleOnlyTrackManager::setSlotElevationBin(const Basic::Number* const msg)
+bool AngleOnlyTrackManager::setSlotElevationBin(const basic::Number* const msg)
 {
     LCreal value = 0.0;
 
-    const Basic::Angle* a = dynamic_cast<const Basic::Angle*>(msg);
+    const basic::Angle* a = dynamic_cast<const basic::Angle*>(msg);
     if (a != nullptr) {
-        Basic::Radians r;
+        basic::Radians r;
         value = static_cast<LCreal>(r.convert(*a));
     }
     else if (msg != nullptr) {
@@ -226,7 +226,7 @@ bool AngleOnlyTrackManager::setSlotElevationBin(const Basic::Number* const msg)
 //------------------------------------------------------------------------------
 // Sets alpha
 //------------------------------------------------------------------------------
-bool AngleOnlyTrackManager::setSlotAlpha(const Basic::Number* const msg)
+bool AngleOnlyTrackManager::setSlotAlpha(const basic::Number* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
@@ -240,7 +240,7 @@ bool AngleOnlyTrackManager::setSlotAlpha(const Basic::Number* const msg)
 //------------------------------------------------------------------------------
 // Sets beta
 //------------------------------------------------------------------------------
-bool AngleOnlyTrackManager::setSlotBeta(const Basic::Number* const msg)
+bool AngleOnlyTrackManager::setSlotBeta(const basic::Number* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
@@ -254,7 +254,7 @@ bool AngleOnlyTrackManager::setSlotBeta(const Basic::Number* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Basic::Object* AngleOnlyTrackManager::getSlotByIndex(const int si)
+basic::Object* AngleOnlyTrackManager::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

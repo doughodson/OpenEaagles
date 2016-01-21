@@ -8,7 +8,7 @@
 #include "openeaagles/simulation/Player.h"
 
 namespace oe {
-   namespace Basic { class Angle; class Distance; class Identifier; class List;
+   namespace basic { class Angle; class Distance; class Identifier; class List;
                      class String; class Time;
    }
 
@@ -27,27 +27,27 @@ namespace Simulation {
 //
 // Factory name: NetIO
 // Slots:
-//    networkID            (Basic::Number)      ! Network ID number: [ 1 .. MAX_NETWORD_ID ] (default: 1)
-//    federationName       (Basic::String)      ! Federation name (default: 0)
-//    federateName         (Basic::String)      ! Name of this federate (default: 0)
+//    networkID            (basic::Number)      ! Network ID number: [ 1 .. MAX_NETWORD_ID ] (default: 1)
+//    federationName       (basic::String)      ! Federation name (default: 0)
+//    federateName         (basic::String)      ! Name of this federate (default: 0)
 //
-//    enableInput          (Basic::Boolean)     ! Input Enable  accept players from this network (default: true)
-//    enableOutput         (Basic::Boolean)     ! Output enable: send players to this network (default: true)
-//    enableRelay          (Basic::Boolean)     ! Relay enable: send other network players to this network (default: true)
-//    timeline             (Basic::Identifier)  ! Source of the time line { UTC or EXEC } (default: UTC)
+//    enableInput          (basic::Boolean)     ! Input Enable  accept players from this network (default: true)
+//    enableOutput         (basic::Boolean)     ! Output enable: send players to this network (default: true)
+//    enableRelay          (basic::Boolean)     ! Relay enable: send other network players to this network (default: true)
+//    timeline             (basic::Identifier)  ! Source of the time line { UTC or EXEC } (default: UTC)
 //
-//    inputEntityTypes     (Basic::PairSteam)   ! Incoming entity type mappers (default: 0)
+//    inputEntityTypes     (basic::PairSteam)   ! Incoming entity type mappers (default: 0)
 //                                              !   (Ntm objects that map incoming entity types to oe player types)
 //
-//    outputEntityTypes    (Basic::PairSteam)   ! Outgoing entity type mappers (default: 0)
+//    outputEntityTypes    (basic::PairSteam)   ! Outgoing entity type mappers (default: 0)
 //                                              !   (Ntm objects that map oe player types to outgoing entity types)
 //
-//    maxTimeDR            (Basic::Time)        ! Max DR time (default: 5 seconds)
-//    maxPositionError     (Basic::Distance)    ! Max DR position error (default: 3 meters)
-//    maxOrientationError  (Basic::Angle)       ! Max DR angular error (default: 3 degrees)
-//    maxAge               (Basic::Time)        ! Max age (without update) of networked players (default: 12.5 seconds)
+//    maxTimeDR            (basic::Time)        ! Max DR time (default: 5 seconds)
+//    maxPositionError     (basic::Distance)    ! Max DR position error (default: 3 meters)
+//    maxOrientationError  (basic::Angle)       ! Max DR angular error (default: 3 degrees)
+//    maxAge               (basic::Time)        ! Max age (without update) of networked players (default: 12.5 seconds)
 //
-//    maxEntityRange       (Basic::Distance)    ! Max entity range of networked players,
+//    maxEntityRange       (basic::Distance)    ! Max entity range of networked players,
 //                                              !  or zero for no max range (default: 0 -- no range filtering)
 //
 //
@@ -145,9 +145,9 @@ namespace Simulation {
 // Note: public and protected sections for Nib and Ntm support are located
 //       after the main public and protected sections.
 //------------------------------------------------------------------------------
-class NetIO : public Basic::Component
+class NetIO : public basic::Component
 {
-   DECLARE_SUBCLASS(NetIO,Basic::Component)
+   DECLARE_SUBCLASS(NetIO,basic::Component)
 
 public:
     // Source of the time line
@@ -175,10 +175,10 @@ public:
    unsigned short getNetworkID() const { return netID; }
 
    // Federate name as String
-   virtual const Basic::String* getFederateName() const;
+   virtual const basic::String* getFederateName() const;
 
    // Federation name as String
-   virtual const Basic::String* getFederationName() const;
+   virtual const basic::String* getFederationName() const;
 
    // Current time (seconds: UTC or EXEC)
    double getCurrentTime();
@@ -251,24 +251,24 @@ protected:
    virtual bool setMaxOrientationErr(const LCreal v);       // Sets the max orientation error (rad)
    virtual bool setMaxAge(const LCreal v);                  // Sets the max age; for removal (sec)
    virtual bool setMaxEntityRange(const LCreal v);          // Sets the max entity range (meters)
-   virtual bool setFederateName(const Basic::String* const msg);   // Sets our federate name
-   virtual bool setFederationName(const Basic::String* const msg); // Sets our federation name
+   virtual bool setFederateName(const basic::String* const msg);   // Sets our federate name
+   virtual bool setFederationName(const basic::String* const msg); // Sets our federation name
 
    // Set slot routines
-   virtual bool setSlotNetworkID(const Basic::Number* const p);                // Sets the network ID
-   virtual bool setSlotFederateName(const Basic::String* const msg);           // Sets our federate name
-   virtual bool setSlotFederationName(const Basic::String* const msg);         // Sets our federation name
-   virtual bool setSlotEnableInput(const Basic::Number* const p);              // Sets input enabled flag
-   virtual bool setSlotEnableOutput(const Basic::Number* const p);             // Sets output enabled flag
-   virtual bool setSlotEnableRelay(const Basic::Number* const p);              // Sets relay enabled flag
-   virtual bool setSlotTimeline(const Basic::Identifier* const p);             // Sets the source of the time ( UTC or EXEC )
-   virtual bool setSlotInputEntityTypes(Basic::PairStream* const msg);         // Sets the table of input entity to player mapper objects
-   virtual bool setSlotOutputEntityTypes(Basic::PairStream* const msg);        // Sets the table of output entity to player mapper objects
-   virtual bool setSlotMaxTimeDR(const Basic::Time* const msg);                // Sets the mac DR time(s)
-   virtual bool setSlotMaxPositionErr(const Basic::Distance* const msg);       // Sets the max positional error(s)
-   virtual bool setSlotMaxOrientationErr(const Basic::Angle* const msg);       // Sets the max orientation error(s)
-   virtual bool setSlotMaxAge(const Basic::Time* const msg);                   // Sets the max age(s)
-   virtual bool setSlotMaxEntityRange(const Basic::Distance* const msg);       // Sets the max entity range(s)
+   virtual bool setSlotNetworkID(const basic::Number* const p);                // Sets the network ID
+   virtual bool setSlotFederateName(const basic::String* const msg);           // Sets our federate name
+   virtual bool setSlotFederationName(const basic::String* const msg);         // Sets our federation name
+   virtual bool setSlotEnableInput(const basic::Number* const p);              // Sets input enabled flag
+   virtual bool setSlotEnableOutput(const basic::Number* const p);             // Sets output enabled flag
+   virtual bool setSlotEnableRelay(const basic::Number* const p);              // Sets relay enabled flag
+   virtual bool setSlotTimeline(const basic::Identifier* const p);             // Sets the source of the time ( UTC or EXEC )
+   virtual bool setSlotInputEntityTypes(basic::PairStream* const msg);         // Sets the table of input entity to player mapper objects
+   virtual bool setSlotOutputEntityTypes(basic::PairStream* const msg);        // Sets the table of output entity to player mapper objects
+   virtual bool setSlotMaxTimeDR(const basic::Time* const msg);                // Sets the mac DR time(s)
+   virtual bool setSlotMaxPositionErr(const basic::Distance* const msg);       // Sets the max positional error(s)
+   virtual bool setSlotMaxOrientationErr(const basic::Angle* const msg);       // Sets the max orientation error(s)
+   virtual bool setSlotMaxAge(const basic::Time* const msg);                   // Sets the max age(s)
+   virtual bool setSlotMaxEntityRange(const basic::Distance* const msg);       // Sets the max entity range(s)
 
    bool shutdownNotification() override;
 
@@ -284,7 +284,7 @@ public:
 
 public:
    // NIB support
-   virtual Nib* findNib(const unsigned short playerID, const Basic::String* const federateName, const IoType ioType);
+   virtual Nib* findNib(const unsigned short playerID, const basic::String* const federateName, const IoType ioType);
    virtual Nib* findNib(const Player* const player, const IoType ioType);
    virtual bool addNibToList(Nib* const nib, const IoType ioType);
    virtual void removeNibFromList(Nib* const nib, const IoType ioType);
@@ -360,8 +360,8 @@ public:
    virtual const Ntm* findNetworkTypeMapper(const Player* const p) const;
 
    // NTM input node
-   class NtmInputNode : public Basic::Object {
-      DECLARE_SUBCLASS(NtmInputNode,Basic::Object)
+   class NtmInputNode : public basic::Object {
+      DECLARE_SUBCLASS(NtmInputNode,basic::Object)
    public:
       NtmInputNode();
       virtual const Ntm* findNetworkTypeMapper(const Nib* const p) const =0;
@@ -370,8 +370,8 @@ public:
    };
 
    // NTM output node
-   class NtmOutputNode : public Basic::Object {
-      DECLARE_SUBCLASS(NtmOutputNode,Basic::Object)
+   class NtmOutputNode : public basic::Object {
+      DECLARE_SUBCLASS(NtmOutputNode,basic::Object)
    public:
       NtmOutputNode();
       virtual const Ntm* findNetworkTypeMapper(const Player* const p) const =0;
@@ -416,11 +416,11 @@ private:
 
    // Network Model IDs
    unsigned short netID;                            // Networkd ID
-   Basic::safe_ptr<const Basic::String> federationName; // Federation name
-   Basic::safe_ptr<const Basic::String> federateName;   // Federate name
+   basic::safe_ptr<const basic::String> federationName; // Federation name
+   basic::safe_ptr<const basic::String> federateName;   // Federate name
 
-   Basic::safe_ptr<Station>    station;           // Our station class
-   Basic::safe_ptr<Simulation> simulation;        // Our simulation class
+   basic::safe_ptr<Station>    station;           // Our station class
+   basic::safe_ptr<Simulation> simulation;        // Our simulation class
    TSource          timeline;                 // Source of our timeline
    unsigned short   iffEventID;               // IFF event ID (as needed)
    unsigned short   emEventID;                // Emission event ID (as needed)
@@ -453,13 +453,13 @@ private: // Nib related private
 
    // NIB quick lookup key
    struct NibKey {
-      NibKey(const unsigned short playerId, const Basic::String* const federateName) {
+      NibKey(const unsigned short playerId, const basic::String* const federateName) {
          fName = federateName;
          id = playerId;
       }
       // NIB IDs  -- Comparisons in this order --
       unsigned short id;            // Player id
-      Basic::safe_ptr<const Basic::String> fName;  // Federate name
+      basic::safe_ptr<const basic::String> fName;  // Federate name
    };
 
    // Search callbacks: object name compare function --

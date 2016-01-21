@@ -31,32 +31,32 @@ BEGIN_SLOTTABLE(ScanGimbal)
     "barSpacing",           //  6: Scan bar width spacing
     "numBars",              //  7: Sets the number of bars
     "revolutionsPerSec",    //  8: Revolutions per second for conical and circular scans (spiral scan too)
-    "scanRadius",           //  9: Radius of the circle we are using for conical scans (radians or Basic::Angle} (spiral scan too)
+    "scanRadius",           //  9: Radius of the circle we are using for conical scans (radians or basic::Angle} (spiral scan too)
     "pseudoRandomPattern",  // 10: Pseudo Random pattern vertices (2D - az and el)
     "maxRevolutions",       // 11: Spiral Scan - Maximum number of revolutions
 END_SLOTTABLE(ScanGimbal)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(ScanGimbal)
-    ON_SLOT( 1, setSlotScanMode,          Basic::String)
-    ON_SLOT( 2, setSlotLeftToRightScan,   Basic::Number)
-    ON_SLOT( 3, setSlotScanWidth,         Basic::Number)
-    ON_SLOT( 4, setSlotSearchVolume,      Basic::List)
-    ON_SLOT( 5, setSlotRefPosition,       Basic::List)
-    ON_SLOT( 6, setSlotBarSpacing,        Basic::Number)
-    ON_SLOT( 7, setSlotNumBars,           Basic::Number)
-    ON_SLOT( 8, setSlotRevPerSec,         Basic::Number)
-    ON_SLOT( 9, setSlotScanRadius,        Basic::Number)
-    ON_SLOT(10, setSlotPRVertices,        Basic::PairStream)
-    ON_SLOT(11, setSlotMaxRevs,           Basic::Number)
+    ON_SLOT( 1, setSlotScanMode,          basic::String)
+    ON_SLOT( 2, setSlotLeftToRightScan,   basic::Number)
+    ON_SLOT( 3, setSlotScanWidth,         basic::Number)
+    ON_SLOT( 4, setSlotSearchVolume,      basic::List)
+    ON_SLOT( 5, setSlotRefPosition,       basic::List)
+    ON_SLOT( 6, setSlotBarSpacing,        basic::Number)
+    ON_SLOT( 7, setSlotNumBars,           basic::Number)
+    ON_SLOT( 8, setSlotRevPerSec,         basic::Number)
+    ON_SLOT( 9, setSlotScanRadius,        basic::Number)
+    ON_SLOT(10, setSlotPRVertices,        basic::PairStream)
+    ON_SLOT(11, setSlotMaxRevs,           basic::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
 // Event() map
 //------------------------------------------------------------------------------
 BEGIN_EVENT_HANDLER(ScanGimbal)
-    ON_EVENT_OBJ(SCAN_START, onStartScanEvent,  Basic::Integer)
-    ON_EVENT_OBJ(SCAN_END,   onEndScanEvent,    Basic::Integer)
+    ON_EVENT_OBJ(SCAN_START, onStartScanEvent,  basic::Integer)
+    ON_EVENT_OBJ(SCAN_END,   onEndScanEvent,    basic::Integer)
 END_EVENT_HANDLER()
 
 //------------------------------------------------------------------------------
@@ -80,7 +80,7 @@ ScanGimbal::ScanGimbal()
    barNum = 1;
    conAngle = 0.0;
    revPerSec = 5.0;  // 5 hz
-   scanRadius = (2.0 * Basic::Angle::D2RCC); // 2 degree radius
+   scanRadius = (2.0 * basic::Angle::D2RCC); // 2 degree radius
    myLastAngle = 0.0;
    prScanVertices = nullptr;
    nprv = 0;
@@ -145,7 +145,7 @@ void ScanGimbal::dynamics(const LCreal dt)
 //------------------------------------------------------------------------------
 // onStartScanEvent() -- process the start of a scan
 //------------------------------------------------------------------------------
-bool ScanGimbal::onStartScanEvent(Basic::Integer* const)
+bool ScanGimbal::onStartScanEvent(basic::Integer* const)
 {
    return true;
 }
@@ -153,7 +153,7 @@ bool ScanGimbal::onStartScanEvent(Basic::Integer* const)
 //------------------------------------------------------------------------------
 // onEndScanEvent() -- process the end of a scan
 //------------------------------------------------------------------------------
-bool ScanGimbal::onEndScanEvent(Basic::Integer* const)
+bool ScanGimbal::onEndScanEvent(basic::Integer* const)
 {
    return true;
 }
@@ -210,7 +210,7 @@ void ScanGimbal::scanController(const double dt)
 void ScanGimbal::conicalScanController(const double dt)
 {
     const double degPerDT = (getRevPerSec() * 360.0) * dt;
-    static Basic::Integer iBar(1);
+    static basic::Integer iBar(1);
 
     switch(getScanState()) {
         // reset state: move to ref position
@@ -231,7 +231,7 @@ void ScanGimbal::conicalScanController(const double dt)
         case 2: {
             // start scan
             setFastSlewMode(false);
-            setConAngle( Basic::Angle::aepcdDeg(degPerDT + getConAngle()) );
+            setConAngle( basic::Angle::aepcdDeg(degPerDT + getConAngle()) );
 
             // Trigger the SCAN_START event handler
             onStartScanEvent(&iBar);
@@ -245,7 +245,7 @@ void ScanGimbal::conicalScanController(const double dt)
             // turn revolutions per second into degrees per sec per frame
             // now we get this to each time step
             double conAngleN1 = getConAngle();
-            setConAngle( Basic::Angle::aepcdDeg(degPerDT + getConAngle()) );
+            setConAngle( basic::Angle::aepcdDeg(degPerDT + getConAngle()) );
 
             // end scan - finished with one rotation, check if our reference has moved
             bool onceAround = false;
@@ -270,9 +270,9 @@ void ScanGimbal::conicalScanController(const double dt)
     }
 
     // azimuth
-    const double newX = getScanRadius() * std::sin(getConAngle() * Basic::Angle::D2RCC);
+    const double newX = getScanRadius() * std::sin(getConAngle() * basic::Angle::D2RCC);
     // elevation
-    const double newY = getScanRadius() * std::cos(getConAngle() * Basic::Angle::D2RCC);
+    const double newY = getScanRadius() * std::cos(getConAngle() * basic::Angle::D2RCC);
     setScanPos(newX, newY);
 
     // command our new position
@@ -285,7 +285,7 @@ void ScanGimbal::conicalScanController(const double dt)
 void ScanGimbal::spiralScanController(const double dt)
 {
     const double degPerDT = (getRevPerSec() * 360.0) * dt;
-    static Basic::Integer iBar(1);
+    static basic::Integer iBar(1);
 
     switch(getScanState()) {
         // reset state: move to ref position
@@ -361,7 +361,7 @@ void ScanGimbal::spiralScanController(const double dt)
     if (getRevPerSec() < 0.0) {
         fullAngleRadians = -fullAngleRadians;
     }
-    fullAngleRadians = (fullAngleRadians + getConAngle()) * Basic::Angle::D2RCC;
+    fullAngleRadians = (fullAngleRadians + getConAngle()) * basic::Angle::D2RCC;
 
     // azimuth
     const double newX = getScanRadius() * (fullAngleRadians / (2.0 * PI)) * std::sin(fullAngleRadians);
@@ -379,7 +379,7 @@ void ScanGimbal::spiralScanController(const double dt)
 //------------------------------------------------------------------------------
 void ScanGimbal::circularScanController(const double)
 {
-    static Basic::Integer iBar(1);
+    static basic::Integer iBar(1);
 
     // Depending on our scan state, we will either start or stop the bar
     switch(getScanState()) {
@@ -405,7 +405,7 @@ void ScanGimbal::circularScanController(const double)
             onStartScanEvent(&iBar);
             setServoMode(RATE_SERVO);
             setFastSlewMode(false);
-            myLastAngle = Basic::Angle::aepcdRad(getPosition().x() - getRefPosition().x());
+            myLastAngle = basic::Angle::aepcdRad(getPosition().x() - getRefPosition().x());
             setScanState(3);
         }
             break;
@@ -414,7 +414,7 @@ void ScanGimbal::circularScanController(const double)
             // end scan - finished with one rotation, start over again
             bool onceAround = false;
 
-            double myAngle = Basic::Angle::aepcdRad(getPosition().x() - getRefPosition().x());
+            double myAngle = basic::Angle::aepcdRad(getPosition().x() - getRefPosition().x());
             // clockwise
             if(getCmdAzRate() >= 0.0) {
                 onceAround = (myLastAngle < 0.0 && myAngle >= 0.0);
@@ -446,7 +446,7 @@ void ScanGimbal::manualScanController(const double)
 //------------------------------------------------------------------------------
 void ScanGimbal::pseudoRandomScanController(const double)
 {
-    static Basic::Integer iBar(1);
+    static basic::Integer iBar(1);
 
     // Depending on our scan state, we will either start or stop the bar
     switch(getScanState()) {
@@ -509,7 +509,7 @@ void ScanGimbal::pseudoRandomScanController(const double)
 //------------------------------------------------------------------------------
 void ScanGimbal::barScanController(const double)
 {
-    static Basic::Integer iBar(1);
+    static basic::Integer iBar(1);
 
     // Depending on our scan state, we will either start or stop the bar
     switch(getScanState()) {
@@ -685,12 +685,12 @@ bool ScanGimbal::resetScan()
 
 double ScanGimbal::getScanWidthD() const
 {
-   return scanWidth * Basic::Angle::R2DCC;
+   return scanWidth * basic::Angle::R2DCC;
 }
 
 double ScanGimbal::getScanHeightD() const
 {
-   return scanHeight * Basic::Angle::R2DCC;
+   return scanHeight * basic::Angle::R2DCC;
 }
 
 void ScanGimbal::getScanVolume(double* const width, double* const height) const
@@ -701,13 +701,13 @@ void ScanGimbal::getScanVolume(double* const width, double* const height) const
 
 void ScanGimbal::getScanVolumeD(double* const width, double* const height) const
 {
-   if (width != nullptr) *width = scanWidth * Basic::Angle::R2DCC;
-   if (height != nullptr) *height = scanHeight * Basic::Angle::R2DCC;
+   if (width != nullptr) *width = scanWidth * basic::Angle::R2DCC;
+   if (height != nullptr) *height = scanHeight * basic::Angle::R2DCC;
 }
 
 double ScanGimbal::getScanRadiusD() const
 {
-   return scanRadius * Basic::Angle::R2DCC;
+   return scanRadius * basic::Angle::R2DCC;
 }
 
 //------------------------------------------------------------------------------
@@ -748,11 +748,11 @@ bool ScanGimbal::setSearchVolume(const double width, const double height, const 
     scanHeight = height;
 
     if (reqBars != 1 && reqBars != 2 && reqBars != 3 && reqBars != 4) {
-        if (scanHeight < (Basic::Angle::D2RCC * 1.0f))
+        if (scanHeight < (basic::Angle::D2RCC * 1.0f))
             numBars = 1;
-        else if (scanHeight < (Basic::Angle::D2RCC * 5.0f))
+        else if (scanHeight < (basic::Angle::D2RCC * 5.0f))
             numBars = 2;
-        else if (scanHeight < (Basic::Angle::D2RCC * 10.0f))
+        else if (scanHeight < (basic::Angle::D2RCC * 10.0f))
             numBars = 3;
         else
             numBars = 4;
@@ -878,7 +878,7 @@ bool ScanGimbal::setMaxRevs(const double newMaxRevs)
 //------------------------------------------------------------------------------
 
 // setSlotScanMode() -- calls setScanMode()
-bool ScanGimbal::setSlotScanMode(Basic::String* const newMode)
+bool ScanGimbal::setSlotScanMode(basic::String* const newMode)
 {
     // set our scan mode
     bool ok = true;
@@ -896,7 +896,7 @@ bool ScanGimbal::setSlotScanMode(Basic::String* const newMode)
 }
 
 // setSlotLeftToRightScan() - calls setLeftToRightScan()
-bool ScanGimbal::setSlotLeftToRightScan(const Basic::Number* const newLeftToRightScan)
+bool ScanGimbal::setSlotLeftToRightScan(const basic::Number* const newLeftToRightScan)
 {
     bool ok = false;
     if (newLeftToRightScan != nullptr) {
@@ -908,7 +908,7 @@ bool ScanGimbal::setSlotLeftToRightScan(const Basic::Number* const newLeftToRigh
 }
 
 // setSlotScanWidth() -- calls setScanWidth()
-bool ScanGimbal::setSlotScanWidth(const Basic::Number* const newWidth)
+bool ScanGimbal::setSlotScanWidth(const basic::Number* const newWidth)
 {
     bool ok = false;
     if (newWidth != nullptr) {
@@ -919,7 +919,7 @@ bool ScanGimbal::setSlotScanWidth(const Basic::Number* const newWidth)
 }
 
 // setSlotSearchVolume() -- calls setSearchVolume()
-bool ScanGimbal::setSlotSearchVolume(Basic::List* const numList)
+bool ScanGimbal::setSlotSearchVolume(basic::List* const numList)
 {
     bool ok = false;
     double values[2];
@@ -931,7 +931,7 @@ bool ScanGimbal::setSlotSearchVolume(Basic::List* const numList)
 }
 
 // setSlotRefPosition() --  calls setRefPosition
-bool ScanGimbal::setSlotRefPosition(const Basic::List* const numList)
+bool ScanGimbal::setSlotRefPosition(const basic::List* const numList)
 {
     bool ok = false;
     double values[2];
@@ -943,7 +943,7 @@ bool ScanGimbal::setSlotRefPosition(const Basic::List* const numList)
 }
 
 // setSlotBarSpacing() --
-bool ScanGimbal::setSlotBarSpacing(const Basic::Number* const newSpacing)
+bool ScanGimbal::setSlotBarSpacing(const basic::Number* const newSpacing)
 {
     bool ok = false;
     if (newSpacing != nullptr) {
@@ -954,7 +954,7 @@ bool ScanGimbal::setSlotBarSpacing(const Basic::Number* const newSpacing)
 }
 
 // setSlotNumBars() --
-bool ScanGimbal::setSlotNumBars(const Basic::Number* const newNumBars)
+bool ScanGimbal::setSlotNumBars(const basic::Number* const newNumBars)
 {
     bool ok = false;
     if (newNumBars != nullptr) {
@@ -965,7 +965,7 @@ bool ScanGimbal::setSlotNumBars(const Basic::Number* const newNumBars)
 }
 
 // setSlotRevPerSec() --
-bool ScanGimbal::setSlotRevPerSec(const Basic::Number* const newRevPerSec)
+bool ScanGimbal::setSlotRevPerSec(const basic::Number* const newRevPerSec)
 {
     bool ok = false;
     if (newRevPerSec != nullptr) {
@@ -976,14 +976,14 @@ bool ScanGimbal::setSlotRevPerSec(const Basic::Number* const newRevPerSec)
 }
 
 // setSlotScanRadius() --
-bool ScanGimbal::setSlotScanRadius(const Basic::Number* const newScanRadius)
+bool ScanGimbal::setSlotScanRadius(const basic::Number* const newScanRadius)
 {
     bool ok = false;
     if (newScanRadius != nullptr) {
         double x = newScanRadius->getDouble();
-        const Basic::Angle* aa = dynamic_cast<const Basic::Angle*>(newScanRadius);
+        const basic::Angle* aa = dynamic_cast<const basic::Angle*>(newScanRadius);
         if (aa != nullptr) {
-            x = Basic::Radians::convertStatic(*aa);
+            x = basic::Radians::convertStatic(*aa);
         }
         ok = setScanRadius(x);
     }
@@ -993,7 +993,7 @@ bool ScanGimbal::setSlotScanRadius(const Basic::Number* const newScanRadius)
 // setSlotPRVertices() -- gets a pairstream and puts the vertices into an array
 // example --
 //     vertices: { [ 1 2 ]  [ 3 4 ] [ 5 6 ] }
-bool ScanGimbal::setSlotPRVertices(const Basic::PairStream* const prObj)
+bool ScanGimbal::setSlotPRVertices(const basic::PairStream* const prObj)
 {
    bool ok = true;
 
@@ -1002,15 +1002,15 @@ bool ScanGimbal::setSlotPRVertices(const Basic::PairStream* const prObj)
         unsigned int n = prObj->entries();
         // Get the vertices from the pair stream
         nprv = 0;
-        const Basic::List::Item* item = prObj->getFirstItem();
+        const basic::List::Item* item = prObj->getFirstItem();
         // holds our array values
         osg::Vec2d tempVerts(0.0, 0.0);
 
         while (item != nullptr && nprv < n) {
-            const Basic::Pair* p = dynamic_cast<const Basic::Pair*>(item->getValue());
+            const basic::Pair* p = dynamic_cast<const basic::Pair*>(item->getValue());
                 if (p != nullptr) {
-                    const Basic::Object* obj2 = p->object();
-                    const Basic::List* msg2 = dynamic_cast<const Basic::List*>(obj2);
+                    const basic::Object* obj2 = p->object();
+                    const basic::List* msg2 = dynamic_cast<const basic::List*>(obj2);
                     if (msg2 != nullptr) {
                         double values[2];
                         int nl = msg2->getNumberList(values, 2);
@@ -1030,7 +1030,7 @@ bool ScanGimbal::setSlotPRVertices(const Basic::PairStream* const prObj)
 }
 
 // setSlotMaxRevs() --
-bool ScanGimbal::setSlotMaxRevs(const Basic::Number* const newMaxRevs)
+bool ScanGimbal::setSlotMaxRevs(const basic::Number* const newMaxRevs)
 {
     bool ok = false;
     if (newMaxRevs != nullptr) {
@@ -1043,7 +1043,7 @@ bool ScanGimbal::setSlotMaxRevs(const Basic::Number* const newMaxRevs)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Basic::Object* ScanGimbal::getSlotByIndex(const int si)
+basic::Object* ScanGimbal::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
@@ -1114,7 +1114,7 @@ std::ostream& ScanGimbal::serialize(std::ostream& sout, const int i, const bool 
     indent(sout,i+j);
     sout << "revolutionsPerSec: " << getRevPerSec() << std::endl;
 
-    // scanRadius: Radius of the circle we are using for conical scans (radians or Basic::Angle} (spiral scan too)
+    // scanRadius: Radius of the circle we are using for conical scans (radians or basic::Angle} (spiral scan too)
     indent(sout,i+j);
     sout << "scanRadius: " << scanRadius << " \t\t // WARNING or INFO:This is really a beam width or half beam width, not a radius!" << std::endl;
 

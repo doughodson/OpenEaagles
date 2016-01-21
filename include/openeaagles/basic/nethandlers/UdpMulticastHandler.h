@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: UdpMulticastHandler
 //------------------------------------------------------------------------------
-#ifndef __oe_Basic_UdpMulticastHandler_H__
-#define __oe_Basic_UdpMulticastHandler_H__
+#ifndef __oe_basic_UdpMulticastHandler_H__
+#define __oe_basic_UdpMulticastHandler_H__
 
 #include "openeaagles/basic/nethandlers/PosixHandler.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 class String;
 
@@ -97,7 +97,7 @@ private:
     bool  initialized;              // handler has been initialized
 };
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace
 
 #endif

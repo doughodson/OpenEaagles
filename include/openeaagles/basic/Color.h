@@ -1,15 +1,15 @@
 //------------------------------------------------------------------------------
 // Class:  Color
 //------------------------------------------------------------------------------
-#ifndef __oe_Basic_Color_H__
-#define __oe_Basic_Color_H__
+#ifndef __oe_basic_Color_H__
+#define __oe_basic_Color_H__
 
 #include "openeaagles/basic/Object.h"
 #include "openeaagles/basic/osg/Vec3"
 #include "openeaagles/basic/osg/Vec4"
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 class Number;
 
@@ -54,7 +54,7 @@ class Number;
 //------------------------------------------------------------------------------
 class Color : public Object
 {
-    DECLARE_SUBCLASS(Color,Object)
+    DECLARE_SUBCLASS(Color, Object)
 
 public:
     // Components of RGB color
@@ -88,7 +88,7 @@ protected:
 };
 
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace
 
 #endif

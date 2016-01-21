@@ -34,7 +34,7 @@
 #include <cstring>
 
 namespace oe {
-namespace Basic {
+namespace basic {
 
 IMPLEMENT_SUBCLASS(TcpClient, "TcpClient")
 
@@ -233,6 +233,6 @@ std::ostream& TcpClient::serialize(std::ostream& sout, const int i, const bool s
     return sout;
 }
 
-} // End Basic namespace
+} // End basic namespace
 } // End oe namespace
 

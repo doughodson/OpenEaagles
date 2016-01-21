@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: IoAdapter
 //------------------------------------------------------------------------------
-#ifndef __oe_Basic_IoAdapter_H__
-#define __oe_Basic_IoAdapter_H__
+#ifndef __oe_basic_IoAdapter_H__
+#define __oe_basic_IoAdapter_H__
 
 #include "openeaagles/basic/Component.h"
 
 namespace oe {
-namespace Basic {
+namespace basic {
    class IoData;
    class IoDevice;
 
@@ -20,8 +20,8 @@ namespace Basic {
 //              device objects.
 //
 //------------------------------------------------------------------------------
-class IoAdapter : public Basic::Component {
-    DECLARE_SUBCLASS(IoAdapter,Basic::Component)
+class IoAdapter : public basic::Component {
+    DECLARE_SUBCLASS(IoAdapter,basic::Component)
 
 public:
    IoAdapter();
@@ -41,7 +41,7 @@ public:
       ) =0;
 };
 
-} // end Basic
+} // end basic
 } // end oe namespace
 
 #endif

@@ -60,9 +60,9 @@ namespace Instruments {
 Factory::Factory()
 {}
 
-Basic::Object* Factory::createObj(const char* name)
+basic::Object* Factory::createObj(const char* name)
 {
-    Basic::Object* obj = 0;
+    basic::Object* obj = 0;
 
     // Instrument
     if ( std::strcmp(name, Instrument::getFactoryName()) == 0 ) {
