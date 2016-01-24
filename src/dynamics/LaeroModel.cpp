@@ -23,7 +23,7 @@
 #include <cmath>
 
 namespace oe {
-namespace Dynamics {
+namespace dynamics {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(LaeroModel,"LaeroModel")
 EMPTY_SERIALIZER(LaeroModel)

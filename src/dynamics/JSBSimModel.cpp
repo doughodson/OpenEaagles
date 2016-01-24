@@ -42,7 +42,7 @@
 #include <JSBSim/models/propulsion/FGTank.h>
 
 namespace oe {
-namespace Dynamics {
+namespace dynamics {
 
 IMPLEMENT_SUBCLASS(JSBSimModel, "JSBSimModel")
 

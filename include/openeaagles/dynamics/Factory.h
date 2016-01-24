@@ -3,14 +3,14 @@
 //
 // Description: Class factory
 //------------------------------------------------------------------------------
-#ifndef __oe_Dynamics_Factory_H__
-#define __oe_Dynamics_Factory_H__
+#ifndef __oe_dynamics_Factory_H__
+#define __oe_dynamics_Factory_H__
 
 namespace oe {
 
 namespace basic { class Object; }
 
-namespace Dynamics {
+namespace dynamics {
 
 class Factory
 {
@@ -21,7 +21,7 @@ protected:
    Factory();   // prevent object creation
 };
 
-}  // end namespace Dynamics
+}  // end namespace dynamics
 }  // end namespace oe
 
 #endif

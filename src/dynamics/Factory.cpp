@@ -12,7 +12,7 @@
 #include <cstring>
 
 namespace oe {
-namespace Dynamics {
+namespace dynamics {
 
 Factory::Factory()
 {}
@@ -37,5 +37,5 @@ basic::Object* Factory::createObj(const char* name)
     return obj;
 }
 
-}  // end namespace Dynamics
+}  // end namespace dynamics
 }  // end namespace oe

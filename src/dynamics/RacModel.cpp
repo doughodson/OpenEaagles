@@ -13,7 +13,7 @@
 #include <cmath>
 
 namespace oe {
-namespace Dynamics {
+namespace dynamics {
 
 IMPLEMENT_SUBCLASS(RacModel, "RacModel")
 
@@ -443,5 +443,5 @@ std::ostream& RacModel::serialize(std::ostream& sout, const int i, const bool sl
     return sout;
 }
 
-} // End Dynamics namespace
+} // End dynamics namespace
 } // End oe namespace
