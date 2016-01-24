@@ -6,8 +6,8 @@
 // all use GLUT or GLU, so you have to call the basicGlutFF to serialize them
 // from the input, and you also have to link to glut or freeglut to draw them.
 //------------------------------------------------------------------------------
-#ifndef __oe_Glut_Shapes3D_H__
-#define __oe_Glut_Shapes3D_H__
+#ifndef __oe_glut_Shapes3D_H__
+#define __oe_glut_Shapes3D_H__
 
 #include "openeaagles/basicGL/Shapes.h"
 
@@ -16,7 +16,7 @@ namespace basic {
     class Number;
 }
 
-namespace Glut {
+namespace glut {
 
 //------------------------------------------------------------------------------
 // Class: Circle -> Sphere
@@ -214,7 +214,7 @@ public:
     void drawFunc() override;
 };
 
-} // End BasicGL namespace
+} // End glut namespace
 } // End oe namespace
 
 #endif

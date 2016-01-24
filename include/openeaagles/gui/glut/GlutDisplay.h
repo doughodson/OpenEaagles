@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: GlutDisplay
 //------------------------------------------------------------------------------
-#ifndef __oe_Glut_GlutDisplay_H__
-#define __oe_Glut_GlutDisplay_H__
+#ifndef __oe_glut_GlutDisplay_H__
+#define __oe_glut_GlutDisplay_H__
 
 #include "openeaagles/basicGL/Display.h"
 
 namespace oe {
-namespace Glut {
+namespace glut {
 
 //------------------------------------------------------------------------------
 // Class:  GlutDisplay
@@ -197,7 +197,7 @@ inline unsigned int GlutDisplay::getIdleSleepTime() const           { return idl
 inline const osg::Vec2d& GlutDisplay::getSubwindowPosition() const  { return swPosition;      }
 inline const osg::Vec2d& GlutDisplay::getSubwindowSize() const      { return swSize;          }
 
-} // End Glut namespace
+} // End glut namespace
 } // End oe namespace
 
 #endif

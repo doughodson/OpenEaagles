@@ -1,7 +1,6 @@
 //------------------------------------------------------------------------------
 // Shapes3D - shapes in 3D (mostly GLU shapes)
 //------------------------------------------------------------------------------
-
 #include "openeaagles/gui/glut/Shapes3D.h"
 
 #include "openeaagles/basic/Number.h"
@@ -10,7 +9,7 @@
 #include <GL/glu.h>
 
 namespace oe {
-namespace Glut {
+namespace glut {
 
 IMPLEMENT_SUBCLASS(Sphere,"Sphere")
 
@@ -440,5 +439,5 @@ basic::Object* Torus::getSlotByIndex(const int si)
     return BaseClass::getSlotByIndex(si);
 }
 
-} // End Glut namespace
+} // End glut namespace
 } // End oe namespace

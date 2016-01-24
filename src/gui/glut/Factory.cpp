@@ -12,7 +12,7 @@
 #include <cstring>
 
 namespace oe {
-namespace Glut {
+namespace glut {
 
 Factory::Factory()
 {}
@@ -60,6 +60,6 @@ basic::Object* Factory::createObj(const char* name)
     return obj;
 }
 
-}  // end namespace Glut
+}  // end namespace glut
 }  // end namespace oe
 

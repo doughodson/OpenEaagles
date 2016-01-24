@@ -20,7 +20,7 @@
 #endif
 
 namespace oe {
-namespace Glut {
+namespace glut {
 
 IMPLEMENT_SUBCLASS(GlutDisplay,"GlutDisplay")
 
@@ -145,7 +145,7 @@ bool GlutDisplay::onEscKey()
    if (isMainDisplay()) {
       shutdownNotification();
       if (isMessageEnabled(MSG_INFO)) {
-         std::cout<<"oe::Glut::GlutDisplay::onEscKey()Exit by the ESC key!"<<std::endl;
+         std::cout<<"oe::glut::GlutDisplay::onEscKey()Exit by the ESC key!"<<std::endl;
       }
 #ifdef __FREEGLUT_EXT_H__     /* freeglut only */
       glutLeaveMainLoop();
@@ -1093,5 +1093,5 @@ std::ostream& GlutDisplay::serialize(std::ostream& sout, const int i, const bool
    return sout;
 }
 
-} // End Glut namespace
+} // End glut namespace
 } // End oe namespace

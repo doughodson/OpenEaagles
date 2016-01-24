@@ -3,14 +3,14 @@
 //
 // Description: Class factory
 //------------------------------------------------------------------------------
-#ifndef __oe_Glut_Factory_H__
-#define __oe_Glut_Factory_H__
+#ifndef __oe_glut_Factory_H__
+#define __oe_glut_Factory_H__
 
 namespace oe {
 
 namespace basic { class Object; }
 
-namespace Glut {
+namespace glut {
 
 class Factory
 {
@@ -21,7 +21,7 @@ protected:
    Factory();   // prevent object creation
 };
 
-}  // end namespace Glut
+}  // end namespace glut
 }  // end namespace oe
 
 #endif
