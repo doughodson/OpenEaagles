@@ -12,7 +12,7 @@
 #include <cstdlib>
 
 namespace oe {
-namespace Dafif {
+namespace dafif {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(Database,"Database")
 
@@ -616,5 +616,5 @@ void Database::Key::serialize(std::ostream& sout) const
    sout << std::endl;
 }
 
-} // End Dafif namespace
+} // End dafif namespace
 } // End oe namespace

@@ -42,14 +42,14 @@
 //       Prints the records loaded in channel number order.
 //
 //------------------------------------------------------------------------------
-#ifndef __oe_Dafif_NavaidLoader_H__
-#define __oe_Dafif_NavaidLoader_H__
+#ifndef __oe_dafif_NavaidLoader_H__
+#define __oe_dafif_NavaidLoader_H__
 
 #include "Database.h"
 #include "Navaid.h"
 
 namespace oe {
-namespace Dafif {
+namespace dafif {
 
 class NavaidLoader : public Database {
     DECLARE_SUBCLASS(NavaidLoader,Database)
@@ -120,7 +120,7 @@ private:
 
 };
 
-} // End Dafif namespace
+} // End dafif namespace
 } // End oe namespace
 
 #endif

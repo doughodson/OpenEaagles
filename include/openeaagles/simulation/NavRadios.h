@@ -9,7 +9,7 @@
 #include "openeaagles/simulation/Radio.h"
 
 namespace oe {
-namespace Dafif { class AirportLoader; class NavaidLoader; }
+namespace dafif { class AirportLoader; class NavaidLoader; }
 
 namespace Simulation {
 
@@ -30,8 +30,8 @@ protected:
    double getLongitude() const;
    double getAltitude() const;
 
-   Dafif::NavaidLoader* getNavaidLoader();
-   Dafif::AirportLoader* getAirportLoader();
+   dafif::NavaidLoader* getNavaidLoader();
+   dafif::AirportLoader* getAirportLoader();
 
    // Slave our position to our ownship
    virtual bool setPosition();
@@ -41,8 +41,8 @@ protected:
 private:
    void initData();
 
-   basic::safe_ptr<Dafif::AirportLoader> apdb; // Pointer to Airport loader
-   basic::safe_ptr<Dafif::NavaidLoader> nvdb;  // Pointer to Navaid loader
+   basic::safe_ptr<dafif::AirportLoader> apdb; // Pointer to Airport loader
+   basic::safe_ptr<dafif::NavaidLoader> nvdb;  // Pointer to Navaid loader
 
    double latitude;                 // Ownship Latitude
    double longitude;                // Ownship Longitude

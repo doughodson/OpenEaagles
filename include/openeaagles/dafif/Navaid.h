@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: Navaid
 //------------------------------------------------------------------------------
-#ifndef __oe_Dafif_Navaid_H__
-#define __oe_Dafif_Navaid_H__
+#ifndef __oe_dafif_Navaid_H__
+#define __oe_dafif_Navaid_H__
 
 #include "Record.h"
 
 namespace oe {
-namespace Dafif {
+namespace dafif {
 
 //------------------------------------------------------------------------------
 // Class: Navaid
@@ -125,7 +125,7 @@ inline void Navaid::radioClass(char rc[]) const
    dsGetString( rc, makePointer(NA_RADIO_CLASS_POS), NA_RADIO_CLASS_LEN );
 }
 
-} // End Dafif namespace
+} // End dafif namespace
 } // End oe namespace
 
 #endif

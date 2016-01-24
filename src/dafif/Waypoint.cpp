@@ -2,7 +2,7 @@
 #include <iostream>
 
 namespace oe {
-namespace Dafif {
+namespace dafif {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Waypoint,"Waypoint")
 EMPTY_SERIALIZER(Waypoint)
@@ -79,5 +79,5 @@ void Waypoint::printRecord(std::ostream& sout) const
    sout.precision(old);
 }
 
-} // End Dafif namespace
+} // End dafif namespace
 } // End oe namespace

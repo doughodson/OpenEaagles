@@ -99,8 +99,8 @@
 //       Prints the records in the ICAO sorted list
 //
 //------------------------------------------------------------------------------
-#ifndef __oe_Dafif_Database_H__
-#define __oe_Dafif_Database_H__
+#ifndef __oe_dafif_Database_H__
+#define __oe_dafif_Database_H__
 
 #include "openeaagles/basic/Object.h"
 #include "dafifc.h"
@@ -110,7 +110,7 @@ namespace oe {
       class FileReader;
       class String;
    }
-namespace Dafif {
+namespace dafif {
 
 class Database : public basic::Object {
     DECLARE_SUBCLASS(Database,basic::Object)
@@ -154,7 +154,7 @@ public:
    bool setPathname(const char* path);
    bool setFilename(const char* file);
 
-   // Memory key used for quick Dafif record lookup
+   // Memory key used for quick dafif record lookup
    struct Key {
       int      idx;     // Database index
       int      size;    // Size of record
@@ -230,7 +230,7 @@ protected:
    bool dbLoaded;    // Database has been loader
 };
 
-} // End Dafif namespace
+} // End dafif namespace
 } // End oe namespace
 
 #endif

@@ -4,7 +4,7 @@
 #include <iostream>
 
 namespace oe {
-namespace Dafif {
+namespace dafif {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Navaid,"Navaid")
 EMPTY_SERIALIZER(Navaid)
@@ -167,5 +167,5 @@ void Navaid::printTrueBearingRange(std::ostream& sout, const double aclat, const
 }
 
 
-} // End Dafif namespace
+} // End dafif namespace
 } // End oe namespace

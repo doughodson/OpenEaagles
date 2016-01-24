@@ -5,7 +5,7 @@
 #include <iostream>
 
 namespace oe {
-namespace Dafif {
+namespace dafif {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Ils,"Ils")
 EMPTY_SERIALIZER(Ils)
@@ -131,5 +131,5 @@ void Ils::printGlideSlopeData(std::ostream& sout, const double aclat, const doub
    sout << "  ILS glide slope " << ilsGlideSlope << "  aircraft_glide_slope " << acGlideSlope << " delta_angle " << deltaGlideSlope;
 }
 
-} // End Dafif namespace
+} // End dafif namespace
 } // End oe namespace

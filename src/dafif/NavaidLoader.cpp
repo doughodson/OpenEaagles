@@ -5,7 +5,7 @@
 #include <cstdlib>
 
 namespace oe {
-namespace Dafif {
+namespace dafif {
 
 IMPLEMENT_SUBCLASS(NavaidLoader,"NavaidLoader")
 EMPTY_SLOTTABLE(NavaidLoader)
@@ -484,5 +484,5 @@ NavaidLoader::NavaidKey::~NavaidKey()
 {
 }
 
-} // End Dafif namespace
+} // End dafif namespace
 } // End oe namespace

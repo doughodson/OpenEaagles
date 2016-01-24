@@ -9,7 +9,7 @@
 
 namespace oe {
    namespace basic { class Distance; class EarthModel; class LatLon; class Pair; class Time; class Terrain; }
-   namespace Dafif { class AirportLoader; class NavaidLoader; class WaypointLoader; }
+   namespace dafif { class AirportLoader; class NavaidLoader; class WaypointLoader; }
 
 namespace Simulation {
    class DataRecorder;
@@ -61,9 +61,9 @@ namespace Simulation {
 //    year           <basic::Number>         ! Initial simulated year [ 1970 .. 2100 ],
 //                                           ! or zero to use current year (default: 0)
 //
-//    airportLoader  <Dafif::AirportLoader>  ! Airport database (default: 0)
-//    navaidLoader   <Dafif::NavaidLoader>   ! NAVAID database (default: 0)
-//    waypointLoader <Dafif::WaypointLoader> ! Waypoint database (default: 0)
+//    airportLoader  <dafif::AirportLoader>  ! Airport database (default: 0)
+//    navaidLoader   <dafif::NavaidLoader>   ! NAVAID database (default: 0)
+//    waypointLoader <dafif::WaypointLoader> ! Waypoint database (default: 0)
 //
 //    terrain        <basic::Terrain>        ! Terrain elevation database (default: 0)
 //    irAtmosphere   <IrAtmosphere>          ! Atmosphere database for IR algorithms (default: 0)
@@ -281,9 +281,9 @@ public:
     IrAtmosphere* getIrAtmosphere();               // Returns the atmosphere database for IR algorithms
     const IrAtmosphere* getIrAtmosphere() const;   // Returns the atmosphere database for IR algorithms (const version)
 
-    Dafif::AirportLoader* getAirports();           // Returns the airport loader
-    Dafif::NavaidLoader* getNavaids();             // Returns the NAVAID loader
-    Dafif::WaypointLoader* getWaypoints();         // Returns the waypoint loader
+    dafif::AirportLoader* getAirports();           // Returns the airport loader
+    dafif::NavaidLoader* getNavaids();             // Returns the NAVAID loader
+    dafif::WaypointLoader* getWaypoints();         // Returns the waypoint loader
 
     DataRecorder* getDataRecorder();               // Returns the data recorder
 
@@ -301,9 +301,9 @@ public:
 
     virtual bool setInitialSimulationTime(const long time);    // Sets the initial simulated time (sec; or less than zero to slave to UTC)
 
-    virtual bool setAirports(Dafif::AirportLoader* const p);   // Sets the airport loader
-    virtual bool setNavaids(Dafif::NavaidLoader* const p);     // Sets the NAVAID loader
-    virtual bool setWaypoints(Dafif::WaypointLoader* const p); // Sets the waypoint loader
+    virtual bool setAirports(dafif::AirportLoader* const p);   // Sets the airport loader
+    virtual bool setNavaids(dafif::NavaidLoader* const p);     // Sets the NAVAID loader
+    virtual bool setWaypoints(dafif::WaypointLoader* const p); // Sets the waypoint loader
 
     void updateTC(const LCreal dt = 0.0) override;
     void updateData(const LCreal dt = 0.0) override;
@@ -422,9 +422,9 @@ private:
 
    IrAtmosphere*          irAtmosphere; // Atmosphere data for IR algorithms
    basic::Terrain*        terrain;      // Terrain data
-   Dafif::AirportLoader*  airports;     // Airport loader
-   Dafif::NavaidLoader*   navaids;      // NAVAID loader
-   Dafif::WaypointLoader* waypoints;    // Waypoint loader
+   dafif::AirportLoader*  airports;     // Airport loader
+   dafif::NavaidLoader*   navaids;      // NAVAID loader
+   dafif::WaypointLoader* waypoints;    // Waypoint loader
    Station*               station;      // The Station that owns us (not ref()'d)
 
    // Time critical thread pool

@@ -109,14 +109,14 @@
 //       set this variable to their own <class>::ptable.
 //
 //------------------------------------------------------------------------------
-#ifndef __oe_Dafif_Record_H__
-#define __oe_Dafif_Record_H__
+#ifndef __oe_dafif_Record_H__
+#define __oe_dafif_Record_H__
 
 #include "openeaagles/basic/String.h"
 #include "dafifc.h"
 
 namespace oe {
-namespace Dafif {
+namespace dafif {
 
 class Record : public basic::String {
     DECLARE_SUBCLASS(Record,basic::String)
@@ -230,7 +230,7 @@ protected:
    const Ptbl* ptbl;    // Position table; one for each instance
 };
 
-} // End Dafif namespace
+} // End dafif namespace
 } // End oe namespace
 
 #endif

@@ -94,13 +94,13 @@ double NavRadio::getAltitude() const
    return altitude;
 }
 
-Dafif::NavaidLoader* NavRadio::getNavaidLoader()
+dafif::NavaidLoader* NavRadio::getNavaidLoader()
 {
    // If we don't have a NAVAID loader, try to get one from our simulation
    if (nvdb == nullptr) {
       Simulation* sim = getSimulation();
       if (sim != nullptr) {
-         Dafif::NavaidLoader* p = sim->getNavaids();
+         dafif::NavaidLoader* p = sim->getNavaids();
          if (p != nullptr && p->isDbLoader()) {
             nvdb = p;
          }
@@ -109,13 +109,13 @@ Dafif::NavaidLoader* NavRadio::getNavaidLoader()
    return nvdb;
 }
 
-Dafif::AirportLoader* NavRadio::getAirportLoader()
+dafif::AirportLoader* NavRadio::getAirportLoader()
 {
    // If we don't have an airport loader, try to get one from our simulation
    if (apdb == nullptr) {
       Simulation* sim = getSimulation();
       if (sim != nullptr) {
-         Dafif::AirportLoader* p = sim->getAirports();
+         dafif::AirportLoader* p = sim->getAirports();
          if (p != nullptr && p->isDbLoader()) {
             apdb = p;
          }
@@ -305,7 +305,7 @@ bool TacanRadio::computeRangeBearing(bool* rngIsValid, double* range, double* gr
    //      if (found > 0) {
    //         int i = 0;
 
-   //         Dafif::Navaid* nav = getNavaidLoader()->getNavaid(i);
+   //         dafif::Navaid* nav = getNavaidLoader()->getNavaid(i);
 
    //         if (nav != 0) {
                //nav->getTrueBearingRange(getLatitude(), getLongitude(), getAltitude(), bearingIsValid, bearing, rngIsValid, range, grdrange);
@@ -462,11 +462,11 @@ bool IlsRadio::findILSGlideslopeByFreq(LCreal freq)
          //Sort through the results and check the type - assume the closest ones are correct
          //"found" list is already sorted from closest to farthest away:
          for (int i = 0; i < found; i++) {
-            Dafif::Ils* p = getAirportLoader()->getIls(i);
+            dafif::Ils* p = getAirportLoader()->getIls(i);
             //Debug Prints:
             //p->printRecord(std::cout);
             //Get Glideslope data here:
-            if((!glideSlopeValid)&&(p->isIlsType(Dafif::Ils::GLIDESLOPE))){
+            if((!glideSlopeValid)&&(p->isIlsType(dafif::Ils::GLIDESLOPE))){
                //Glideslope should not affect the bearing data from the localizer
                currentMagVar = p->magVariance();
                float ilsGS(0), acGS(0), delGS(0);
@@ -507,7 +507,7 @@ bool IlsRadio::findLocalizerByFreq(LCreal freq)
    //      //std::cout << "RWY Loc Found = " << found << std::endl;
    //      //Run through the list and find the closest at the appropriate angle:
    //      for (int i = 0; i < found; i++) {
-   //            Dafif::Runway* p = getAirportLoader()->getRunway(i);
+   //            dafif::Runway* p = getAirportLoader()->getRunway(i);
    //            //Get the RWY orientation and bearing for both ends of the runway:
    //            p->getRunwayMagHeading(getLatitude(),getLongitude(),getAltitude(),&magHeading1,&magHeading2,&trueBearing1,&trueBearing2);
    //            //Just for kicks find how far away we are from the end of the runway:

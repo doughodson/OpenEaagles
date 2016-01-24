@@ -25,13 +25,13 @@
 //        Length of a DAFIF Airport record.
 //
 //------------------------------------------------------------------------------
-#ifndef __oe_Dafif_Airport_H__
-#define __oe_Dafif_Airport_H__
+#ifndef __oe_dafif_Airport_H__
+#define __oe_dafif_Airport_H__
 
 #include "Record.h"
 
 namespace oe {
-namespace Dafif {
+namespace dafif {
 
 class Airport : public Record {
 
@@ -59,7 +59,7 @@ private:
 };
 
 
-} // End Dafif namespace
+} // End dafif namespace
 } // End oe namespace
 
 #endif

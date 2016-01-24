@@ -13,7 +13,7 @@
 #include <cstring>
 
 namespace oe {
-namespace Dafif {
+namespace dafif {
 
 Factory::Factory()
 {}
@@ -35,6 +35,6 @@ basic::Object* Factory::createObj(const char* name)
     return obj;
 }
 
-}  // end namespace Dafif
+}  // end namespace dafif
 }  // end namespace oe
 

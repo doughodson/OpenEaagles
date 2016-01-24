@@ -4,7 +4,7 @@
 #include <cstdlib>
 
 namespace oe {
-namespace Dafif {
+namespace dafif {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(WaypointLoader,"WaypointLoader")
 EMPTY_SERIALIZER(WaypointLoader)
@@ -313,5 +313,5 @@ void WaypointLoader::WaypointKey::serialize(std::ostream& sout) const
    sout << std::endl;
 }
 
-} // End Dafif namespace
+} // End dafif namespace
 } // End oe namespace

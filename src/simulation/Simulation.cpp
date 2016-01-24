@@ -139,9 +139,9 @@ BEGIN_SLOT_MAP(Simulation)
     ON_SLOT( 5, setSlotDay,             basic::Number)
     ON_SLOT( 6, setSlotMonth,           basic::Number)
     ON_SLOT( 7, setSlotYear,            basic::Number)
-    ON_SLOT( 8, setAirports,            Dafif::AirportLoader)
-    ON_SLOT( 9, setNavaids,             Dafif::NavaidLoader)
-    ON_SLOT(10, setWaypoints,           Dafif::WaypointLoader)
+    ON_SLOT( 8, setAirports,            dafif::AirportLoader)
+    ON_SLOT( 9, setNavaids,             dafif::NavaidLoader)
+    ON_SLOT(10, setWaypoints,           dafif::WaypointLoader)
     ON_SLOT(11, setSlotTerrain,         basic::Terrain)
     ON_SLOT(12, setSlotIrAtmosphere,    IrAtmosphere)
     ON_SLOT(13, setSlotFirstWeaponId,   basic::Number)
@@ -280,14 +280,14 @@ void Simulation::copyData(const Simulation& org, const bool cc)
       players->unref();  // safe_ptr<> has it
    }
 
-   const Dafif::AirportLoader* apLoader = org.airports;
-   setAirports( const_cast<Dafif::AirportLoader*>(static_cast<const Dafif::AirportLoader*>(apLoader)) );
+   const dafif::AirportLoader* apLoader = org.airports;
+   setAirports( const_cast<dafif::AirportLoader*>(static_cast<const dafif::AirportLoader*>(apLoader)) );
 
-   const Dafif::NavaidLoader* naLoader = org.navaids;
-   setNavaids( const_cast<Dafif::NavaidLoader*>(static_cast<const Dafif::NavaidLoader*>(naLoader)) );
+   const dafif::NavaidLoader* naLoader = org.navaids;
+   setNavaids( const_cast<dafif::NavaidLoader*>(static_cast<const dafif::NavaidLoader*>(naLoader)) );
 
-   const Dafif::WaypointLoader* wpLoader = org.waypoints;
-   setWaypoints( const_cast<Dafif::WaypointLoader*>(static_cast<const Dafif::WaypointLoader*>(wpLoader)) );
+   const dafif::WaypointLoader* wpLoader = org.waypoints;
+   setWaypoints( const_cast<dafif::WaypointLoader*>(static_cast<const dafif::WaypointLoader*>(wpLoader)) );
 
    if (org.terrain != nullptr) {
       basic::Terrain* copy = org.terrain->clone();
@@ -1164,19 +1164,19 @@ const IrAtmosphere* Simulation::getIrAtmosphere() const
 }
 
 // Returns the airport loader
-Dafif::AirportLoader* Simulation::getAirports()
+dafif::AirportLoader* Simulation::getAirports()
 {
    return airports;
 }
 
 // Returns the NAVAID loader
-Dafif::NavaidLoader* Simulation::getNavaids()
+dafif::NavaidLoader* Simulation::getNavaids()
 {
    return navaids;
 }
 
 // Returns the waypoint loader
-Dafif::WaypointLoader* Simulation::getWaypoints()
+dafif::WaypointLoader* Simulation::getWaypoints()
 {
    return waypoints;
 }
@@ -1223,7 +1223,7 @@ Station* Simulation::getStationImp()
 //------------------------------------------------------------------------------
 // Sets the airport loader
 //------------------------------------------------------------------------------
-bool Simulation::setAirports(Dafif::AirportLoader* const p)
+bool Simulation::setAirports(dafif::AirportLoader* const p)
 {
    if (airports != nullptr) {
       airports->unref();
@@ -1238,7 +1238,7 @@ bool Simulation::setAirports(Dafif::AirportLoader* const p)
 //------------------------------------------------------------------------------
 // Sets the airport loader
 //------------------------------------------------------------------------------
-bool Simulation::setNavaids(Dafif::NavaidLoader* const p)
+bool Simulation::setNavaids(dafif::NavaidLoader* const p)
 {
    if (navaids != nullptr) {
       navaids->unref();
@@ -1253,7 +1253,7 @@ bool Simulation::setNavaids(Dafif::NavaidLoader* const p)
 //------------------------------------------------------------------------------
 // Sets the airport loader
 //------------------------------------------------------------------------------
-bool Simulation::setWaypoints(Dafif::WaypointLoader* const p)
+bool Simulation::setWaypoints(dafif::WaypointLoader* const p)
 {
    if (waypoints != nullptr) {
       waypoints->unref();

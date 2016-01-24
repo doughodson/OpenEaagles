@@ -3,7 +3,7 @@
 #include <iostream>
 
 namespace oe {
-namespace Dafif {
+namespace dafif {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Runway,"Runway")
 EMPTY_SERIALIZER(Runway)
@@ -127,5 +127,5 @@ void Runway::printRunwayMagHeading(std::ostream& sout, const double aclat, const
    sout << " Runway_Low_End_Mag_heading " << magHeading1 << " aircraft_bearing_Low_End " << trueBearing1 << "  Runway_High_End_Mag_heading " <<  magHeading2 << " aircraft_bearing_High_End " << trueBearing2;
 }
 
-} // End Dafif namespace
+} // End dafif namespace
 } // End oe namespace

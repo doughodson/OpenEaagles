@@ -3,7 +3,7 @@
 #include <iostream>
 
 namespace oe {
-namespace Dafif {
+namespace dafif {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Airport,"Airport")
 EMPTY_SERIALIZER(Airport)
@@ -120,5 +120,5 @@ void Airport::printRecord(std::ostream& sout) const
 
 }
 
-} // End Dafif namespace
+} // End dafif namespace
 } // End oe namespace

@@ -37,8 +37,8 @@
 //       Range: 0 .. numberFound()-1
 //
 //------------------------------------------------------------------------------
-#ifndef __oe_Dafif_AirportLoader_H__
-#define __oe_Dafif_AirportLoader_H__
+#ifndef __oe_dafif_AirportLoader_H__
+#define __oe_dafif_AirportLoader_H__
 
 #include "Database.h"
 #include "Airport.h"
@@ -50,7 +50,7 @@
 #endif
 
 namespace oe {
-namespace Dafif {
+namespace dafif {
 
 class AirportLoader : public Database {
     DECLARE_SUBCLASS(AirportLoader,Database)
@@ -200,7 +200,7 @@ private:
 
 };
 
-} // End Dafif namespace
+} // End dafif namespace
 } // End oe namespace
 
 #endif

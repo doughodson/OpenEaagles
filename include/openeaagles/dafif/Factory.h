@@ -3,14 +3,14 @@
 //
 // Description: Class factory
 //------------------------------------------------------------------------------
-#ifndef __oe_Dafif_Factory_H__
-#define __oe_Dafif_Factory_H__
+#ifndef __oe_dafif_Factory_H__
+#define __oe_dafif_Factory_H__
 
 namespace oe {
 
 namespace basic { class Object; }
 
-namespace Dafif {
+namespace dafif {
 
 class Factory
 {
@@ -21,7 +21,7 @@ protected:
    Factory();   // prevent object creation
 };
 
-}  // end namespace Dafif
+}  // end namespace dafif
 }  // end namespace oe
 
 #endif

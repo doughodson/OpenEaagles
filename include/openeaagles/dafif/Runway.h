@@ -40,13 +40,13 @@
 //       Length of a DAFIF Runway record pair.
 //
 //------------------------------------------------------------------------------
-#ifndef __oe_Dafif_Runway_H__
-#define __oe_Dafif_Runway_H__
+#ifndef __oe_dafif_Runway_H__
+#define __oe_dafif_Runway_H__
 
 #include "Record.h"
 
 namespace oe {
-namespace Dafif {
+namespace dafif {
 
 class Runway : public Record {
     DECLARE_SUBCLASS(Runway,Record)
@@ -188,7 +188,7 @@ inline Runway::WhichEnd Runway::whichEnd(const char rwEndId[]) const
    return we;
 }
 
-} // End Dafif namespace
+} // End dafif namespace
 } // End oe namespace
 
 #endif

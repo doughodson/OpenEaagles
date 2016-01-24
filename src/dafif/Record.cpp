@@ -8,7 +8,7 @@
 #include <cstdlib>
 
 namespace oe {
-namespace Dafif {
+namespace dafif {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Record,"Record")
 EMPTY_SERIALIZER(Record)
@@ -539,5 +539,5 @@ void Record::printTrueBearingRange(std::ostream& sout, const double aclat, const
    sout << "  range " << range << "  grdrange " << grdrange << " true_bearing " << bearing;
 }
 
-} // End Dafif namespace
+} // End dafif namespace
 } // End oe namespace
