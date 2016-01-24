@@ -17,7 +17,7 @@
 #include "openeaagles/basic/PairStream.h"
 
 namespace oe {
-namespace Network {
+namespace network {
 namespace dis {
 
 //------------------------------------------------------------------------------
@@ -153,5 +153,5 @@ void NetIO::processDetonationPDU(const DetonationPDU* const pdu)
 }
 
 } // End dis namespace
-} // End Network namespace
+} // End network namespace
 } // End oe namespace

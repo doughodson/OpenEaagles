@@ -13,7 +13,7 @@
 #include <cstring>
 
 namespace oe {
-namespace Network {
+namespace network {
 namespace dis {
 
 Factory::Factory()
@@ -37,6 +37,6 @@ basic::Object* Factory::createObj(const char* name)
 }
 
 } // End dis namespace
-} // End Network namespace
+} // End network namespace
 } // End oe namespace
 

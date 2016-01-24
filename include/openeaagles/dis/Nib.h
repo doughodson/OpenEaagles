@@ -1,14 +1,14 @@
 //------------------------------------------------------------------------------
 // Class: dis::Nib
 //------------------------------------------------------------------------------
-#ifndef __oe_Network_dis_Nib_H__
-#define __oe_Network_dis_Nib_H__
+#ifndef __oe_network_dis_Nib_H__
+#define __oe_network_dis_Nib_H__
 
 #include "openeaagles/simulation/Nib.h"
 #include "openeaagles/dis/NetIO.h"
 
 namespace oe {
-namespace Network {
+namespace network {
 namespace dis {
 class Ntm;
 
@@ -115,7 +115,7 @@ private:
 };
 
 } // End dis namespace
-} // End Network namespace
+} // End network namespace
 } // End oe namespace
 
 #endif

@@ -3,11 +3,11 @@
 // Application Protocols - Enumerations for DIS PDU's
 // Standard: 1278.1a
 //--------------------------------------------------------------
-#ifndef __oe_Network_dis_Enum_H__
-#define __oe_Network_dis_Enum_H__
+#ifndef __oe_network_dis_Enum_H__
+#define __oe_network_dis_Enum_H__
 
 namespace oe {
-namespace Network {
+namespace network {
 namespace dis {
 
 //--------------------------------------------------------------
@@ -90,7 +90,7 @@ namespace dis {
 #define DETONATION_RESULT_AIR_BURST                   25
 
 } // End dis namespace
-} // End Network namespace
+} // End network namespace
 } // End oe namespace
 
 #endif

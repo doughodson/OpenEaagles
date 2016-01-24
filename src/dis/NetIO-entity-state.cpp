@@ -28,7 +28,7 @@
 #endif
 
 namespace oe {
-namespace Network {
+namespace network {
 namespace dis {
 
 //------------------------------------------------------------------------------
@@ -126,5 +126,5 @@ void NetIO::processEntityStatePDU(const EntityStatePDU* const pdu)
 }
 
 } // End dis namespace
-} // End Network namespace
+} // End network namespace
 } // End oe namespace

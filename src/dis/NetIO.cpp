@@ -24,7 +24,7 @@
 #include <cctype>
 
 namespace oe {
-namespace Network {
+namespace network {
 namespace dis {
 
 //==============================================================================
@@ -523,7 +523,7 @@ bool NetIO::processCommentPDU(const CommentPDU* const)
 //------------------------------------------------------------------------------
 // processStartPDU() callback --
 //------------------------------------------------------------------------------
-bool NetIO::processStartPDU(const oe::Network::dis::StartPDU* const)
+bool NetIO::processStartPDU(const oe::network::dis::StartPDU* const)
 {
     return true;
 }
@@ -531,7 +531,7 @@ bool NetIO::processStartPDU(const oe::Network::dis::StartPDU* const)
 //------------------------------------------------------------------------------
 // processStopPDU() callback --
 //------------------------------------------------------------------------------
-bool NetIO::processStopPDU(const oe::Network::dis::StopPDU* const)
+bool NetIO::processStopPDU(const oe::network::dis::StopPDU* const)
 {
      return true;
 }
@@ -539,7 +539,7 @@ bool NetIO::processStopPDU(const oe::Network::dis::StopPDU* const)
 //------------------------------------------------------------------------------
 // processAcknowledgePDU() callback --
 //------------------------------------------------------------------------------
-bool NetIO::processAcknowledgePDU(const oe::Network::dis::AcknowledgePDU* const)
+bool NetIO::processAcknowledgePDU(const oe::network::dis::AcknowledgePDU* const)
 {
     return true;
 }
@@ -547,7 +547,7 @@ bool NetIO::processAcknowledgePDU(const oe::Network::dis::AcknowledgePDU* const)
 //------------------------------------------------------------------------------
 // processActionRequestPDU() callback --
 //------------------------------------------------------------------------------
-bool NetIO::processActionRequestPDU(const oe::Network::dis::ActionRequestPDU* const)
+bool NetIO::processActionRequestPDU(const oe::network::dis::ActionRequestPDU* const)
 {
     return true;
 }
@@ -555,7 +555,7 @@ bool NetIO::processActionRequestPDU(const oe::Network::dis::ActionRequestPDU* co
 //------------------------------------------------------------------------------
 // processActionRequestPDU_R() callback --
 //------------------------------------------------------------------------------
-bool NetIO::processActionRequestPDU_R(const oe::Network::dis::ActionRequestPDU_R* const)
+bool NetIO::processActionRequestPDU_R(const oe::network::dis::ActionRequestPDU_R* const)
 {
     return true;
 }
@@ -563,7 +563,7 @@ bool NetIO::processActionRequestPDU_R(const oe::Network::dis::ActionRequestPDU_R
 //------------------------------------------------------------------------------
 // processActionResponsePDU_R() callback --
 //------------------------------------------------------------------------------
-bool NetIO::processActionResponsePDU_R(const oe::Network::dis::ActionResponsePDU_R* const)
+bool NetIO::processActionResponsePDU_R(const oe::network::dis::ActionResponsePDU_R* const)
 {
     return true;
 }
@@ -2304,5 +2304,5 @@ void NtmInputNode::print(std::ostream& sout, const int icnt) const
 }
 
 } // End dis namespace
-} // End Network namespace
+} // End network namespace
 } // End oe namespace

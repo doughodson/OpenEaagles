@@ -9,7 +9,7 @@
 #include "openeaagles/basic/PairStream.h"
 
 namespace oe {
-namespace Network {
+namespace network {
 namespace dis {
 
 IMPLEMENT_SUBCLASS(Ntm,"DisNtm")

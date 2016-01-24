@@ -16,7 +16,7 @@
 #include "openeaagles/basic/PairStream.h"
 
 namespace oe {
-namespace Network {
+namespace network {
 namespace dis {
 
 //------------------------------------------------------------------------------
