@@ -29,7 +29,7 @@
 
 namespace oe {
 namespace Network {
-namespace Dis {
+namespace dis {
 
 //------------------------------------------------------------------------------
 // processEntityStatePDU() callback --
@@ -125,6 +125,6 @@ void NetIO::processEntityStatePDU(const EntityStatePDU* const pdu)
     }
 }
 
-} // End Dis namespace
+} // End dis namespace
 } // End Network namespace
 } // End oe namespace

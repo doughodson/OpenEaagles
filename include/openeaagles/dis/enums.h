@@ -3,12 +3,12 @@
 // Application Protocols - Enumerations for DIS PDU's
 // Standard: 1278.1a
 //--------------------------------------------------------------
-#ifndef __oe_Network_Dis_Enum_H__
-#define __oe_Network_Dis_Enum_H__
+#ifndef __oe_Network_dis_Enum_H__
+#define __oe_Network_dis_Enum_H__
 
 namespace oe {
 namespace Network {
-namespace Dis {
+namespace dis {
 
 //--------------------------------------------------------------
 // Beam Function 
@@ -89,7 +89,7 @@ namespace Dis {
 #define DETONATION_RESULT_WATER_IMPACT                24
 #define DETONATION_RESULT_AIR_BURST                   25
 
-} // End Dis namespace
+} // End dis namespace
 } // End Network namespace
 } // End oe namespace
 

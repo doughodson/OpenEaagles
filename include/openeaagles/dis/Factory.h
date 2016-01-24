@@ -3,15 +3,15 @@
 //
 // Description: Class factory
 //------------------------------------------------------------------------------
-#ifndef __oe_Network_Dis_Factory_H__
-#define __oe_Network_Dis_Factory_H__
+#ifndef __oe_Network_dis_Factory_H__
+#define __oe_Network_dis_Factory_H__
 
 namespace oe {
 
 namespace basic { class Object; }
 
 namespace Network {
-namespace Dis {
+namespace dis {
 
 class Factory
 {
@@ -22,7 +22,7 @@ protected:
    Factory();   // prevent object creation
 };
 
-} // End Dis namespace
+} // End dis namespace
 } // End Network namespace
 } // End oe namespace
 

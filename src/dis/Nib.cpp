@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Class: Dis::Nib
+// Class: dis::Nib
 //------------------------------------------------------------------------------
 
 #include "openeaagles/dis/Nib.h"
@@ -16,7 +16,7 @@
 
 namespace oe {
 namespace Network {
-namespace Dis {
+namespace dis {
 
 IMPLEMENT_PARTIAL_SUBCLASS(Nib,"DisNib")
 EMPTY_SLOTTABLE(Nib)
@@ -326,7 +326,7 @@ bool Nib::processElectromagneticEmissionPDU(const ElectromagneticEmissionPDU* co
             }
             else {
                // Handler wasn't found?
-               std::cerr << "Dis::Nib::processElectromagneticEmissionPDU() warning: ";
+               std::cerr << "dis::Nib::processElectromagneticEmissionPDU() warning: ";
                std::cerr << "EmissionPduHandler not found for emitterName: " << es->emitterSystem.emitterName;
                std::cerr << std::endl;
             }
@@ -482,6 +482,6 @@ bool Nib::emitterBeamsManager(const LCreal curExecTime)
    return true;
 }
 
-} // End Dis namespace
+} // End dis namespace
 } // End Network namespace
 } // End oe namespace

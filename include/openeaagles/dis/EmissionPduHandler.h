@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Classes: EmissionPduHandler
 //------------------------------------------------------------------------------
-#ifndef __oe_Network_Dis_EmissionPduHandler_H__
-#define __oe_Network_Dis_EmissionPduHandler_H__
+#ifndef __oe_Network_dis_EmissionPduHandler_H__
+#define __oe_Network_dis_EmissionPduHandler_H__
 
 #include "openeaagles/dis/NetIO.h"
 #include "openeaagles/dis/structs.h"
@@ -12,7 +12,7 @@ namespace oe {
       class Antenna;
    }
 namespace Network {
-namespace Dis {
+namespace dis {
 
 //------------------------------------------------------------------------------
 // Class: EmissionPduHandler
@@ -232,7 +232,7 @@ inline const TrackJamTargets* EmissionPduHandler::getSavedTrackJamTargetData(con
    return (ibeam < MAX_EM_BEAMS && ifield < MAX_TARGETS_IN_TJ_FIELD ? &tjTargetsN1[ibeam][ifield] : 0);
 }
 
-} // End Dis namespace
+} // End dis namespace
 } // End Network namespace
 } // End oe namespace
 

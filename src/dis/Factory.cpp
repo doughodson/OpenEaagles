@@ -14,7 +14,7 @@
 
 namespace oe {
 namespace Network {
-namespace Dis {
+namespace dis {
 
 Factory::Factory()
 {}
@@ -23,8 +23,8 @@ basic::Object* Factory::createObj(const char* name)
 {
     basic::Object* obj = nullptr;
 
-    if ( std::strcmp(name, Dis::NetIO::getFactoryName()) == 0 ) {
-        obj = new Dis::NetIO();
+    if ( std::strcmp(name, dis::NetIO::getFactoryName()) == 0 ) {
+        obj = new dis::NetIO();
     }
     else if ( std::strcmp(name, Ntm::getFactoryName()) == 0 ) {
         obj = new Ntm();
@@ -36,7 +36,7 @@ basic::Object* Factory::createObj(const char* name)
     return obj;
 }
 
-} // End Dis namespace
+} // End dis namespace
 } // End Network namespace
 } // End oe namespace
 

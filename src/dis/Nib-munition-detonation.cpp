@@ -18,7 +18,7 @@
 
 namespace oe {
 namespace Network {
-namespace Dis {
+namespace dis {
 
 //------------------------------------------------------------------------------
 // munitionDetonationMsgFactory() -- (Output) Munition detonation message factory
@@ -170,6 +170,6 @@ bool Nib::munitionDetonationMsgFactory(const LCreal)
     return ok;
 }
 
-} // End Dis namespace
+} // End dis namespace
 } // End Network namespace
 } // End oe namespace

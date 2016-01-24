@@ -23,8 +23,8 @@
 //    7.11.8   ActionResponsePDU_R
 //
 //--------------------------------------------------------------
-#ifndef __oe_Network_Dis_Pdu_H__
-#define __oe_Network_Dis_Pdu_H__
+#ifndef __oe_Network_dis_Pdu_H__
+#define __oe_Network_dis_Pdu_H__
 
 #include "openeaagles/dis/structs.h"
 #include "openeaagles/dis/enums.h"
@@ -35,7 +35,7 @@
 
 namespace oe {
 namespace Network {
-namespace Dis {
+namespace dis {
 
 //-----------------------------------------------
 // EntityStatePDU (1152 + 128*n bits)
@@ -1164,7 +1164,7 @@ struct ActionResponsePDU_R {
    };
 };
 
-} // End Dis namespace
+} // End dis namespace
 } // End Network namespace
 } // End oe namespace
 

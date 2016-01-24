@@ -18,7 +18,7 @@
 
 namespace oe {
 namespace Network {
-namespace Dis {
+namespace dis {
 
 //------------------------------------------------------------------------------
 // processDetonationPDU() callback --
@@ -152,6 +152,6 @@ void NetIO::processDetonationPDU(const DetonationPDU* const pdu)
    }
 }
 
-} // End Dis namespace
+} // End dis namespace
 } // End Network namespace
 } // End oe namespace

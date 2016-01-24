@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Class: Dis::Ntm
+// Class: dis::Ntm
 //------------------------------------------------------------------------------
 
 #include "openeaagles/dis/Ntm.h"
@@ -10,7 +10,7 @@
 
 namespace oe {
 namespace Network {
-namespace Dis {
+namespace dis {
 
 IMPLEMENT_SUBCLASS(Ntm,"DisNtm")
 
@@ -241,6 +241,6 @@ std::ostream& Ntm::serialize(std::ostream& sout, const int i, const bool slotsOn
    return sout;
 }
 
-} // End Dis namespace
+} // End dis namespace
 } // End Network namespace
 } // End oe namespace

@@ -17,7 +17,7 @@
 
 namespace oe {
 namespace Network {
-namespace Dis {
+namespace dis {
 
 //------------------------------------------------------------------------------
 // weaponFireMsgFactory() -- (Output support) Weapon fire message factory
@@ -161,6 +161,6 @@ bool Nib::weaponFireMsgFactory(const LCreal)
     return ok;
 }
 
-} // End Dis namespace
+} // End dis namespace
 } // End Network namespace
 } // End oe namespace

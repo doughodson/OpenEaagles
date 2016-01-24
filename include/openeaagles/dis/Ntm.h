@@ -1,15 +1,15 @@
 //------------------------------------------------------------------------------
 // Class: Ntm
 //------------------------------------------------------------------------------
-#ifndef __oe_Network_Dis_Ntm_H__
-#define __oe_Network_Dis_Ntm_H__
+#ifndef __oe_Network_dis_Ntm_H__
+#define __oe_Network_dis_Ntm_H__
 
 #include "openeaagles/simulation/Ntm.h"
 #include "openeaagles/dis/NetIO.h"
 
 namespace oe {
 namespace Network {
-namespace Dis {
+namespace dis {
 
 //------------------------------------------------------------------------------
 // Class: Ntm
@@ -69,7 +69,7 @@ private:
     unsigned char  disExtra;     // DIS extra code
 };
 
-} // End Dis namespace
+} // End dis namespace
 } // End Network namespace
 } // End oe namespace
 

@@ -17,7 +17,7 @@
 
 namespace oe {
 namespace Network {
-namespace Dis {
+namespace dis {
 
 //------------------------------------------------------------------------------
 // processFirePDU() callback --
@@ -76,6 +76,6 @@ void NetIO::processFirePDU(const FirePDU* const pdu)
     // --- Nothing really needs to be done.
 }
 
-} // End Dis namespace
+} // End dis namespace
 } // End Network namespace
 } // End oe namespace

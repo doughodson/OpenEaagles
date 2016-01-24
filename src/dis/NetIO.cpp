@@ -1,5 +1,5 @@
 //==============================================================================
-// Classes: Dis::NetIO and Dis::NtmInputNode
+// Classes: dis::NetIO and dis::NtmInputNode
 //==============================================================================
 
 #include "openeaagles/dis/NetIO.h"
@@ -25,10 +25,10 @@
 
 namespace oe {
 namespace Network {
-namespace Dis {
+namespace dis {
 
 //==============================================================================
-// Class: Dis::NtmInputNode
+// Class: dis::NtmInputNode
 // Description: DIS incoming NTM class
 //==============================================================================
 
@@ -66,7 +66,7 @@ private:
 
 
 //==============================================================================
-// Class: Dis::NetIO
+// Class: dis::NetIO
 //==============================================================================
 IMPLEMENT_SUBCLASS(NetIO,"DisNetIO")
 
@@ -523,7 +523,7 @@ bool NetIO::processCommentPDU(const CommentPDU* const)
 //------------------------------------------------------------------------------
 // processStartPDU() callback --
 //------------------------------------------------------------------------------
-bool NetIO::processStartPDU(const oe::Network::Dis::StartPDU* const)
+bool NetIO::processStartPDU(const oe::Network::dis::StartPDU* const)
 {
     return true;
 }
@@ -531,7 +531,7 @@ bool NetIO::processStartPDU(const oe::Network::Dis::StartPDU* const)
 //------------------------------------------------------------------------------
 // processStopPDU() callback --
 //------------------------------------------------------------------------------
-bool NetIO::processStopPDU(const oe::Network::Dis::StopPDU* const)
+bool NetIO::processStopPDU(const oe::Network::dis::StopPDU* const)
 {
      return true;
 }
@@ -539,7 +539,7 @@ bool NetIO::processStopPDU(const oe::Network::Dis::StopPDU* const)
 //------------------------------------------------------------------------------
 // processAcknowledgePDU() callback --
 //------------------------------------------------------------------------------
-bool NetIO::processAcknowledgePDU(const oe::Network::Dis::AcknowledgePDU* const)
+bool NetIO::processAcknowledgePDU(const oe::Network::dis::AcknowledgePDU* const)
 {
     return true;
 }
@@ -547,7 +547,7 @@ bool NetIO::processAcknowledgePDU(const oe::Network::Dis::AcknowledgePDU* const)
 //------------------------------------------------------------------------------
 // processActionRequestPDU() callback --
 //------------------------------------------------------------------------------
-bool NetIO::processActionRequestPDU(const oe::Network::Dis::ActionRequestPDU* const)
+bool NetIO::processActionRequestPDU(const oe::Network::dis::ActionRequestPDU* const)
 {
     return true;
 }
@@ -555,7 +555,7 @@ bool NetIO::processActionRequestPDU(const oe::Network::Dis::ActionRequestPDU* co
 //------------------------------------------------------------------------------
 // processActionRequestPDU_R() callback --
 //------------------------------------------------------------------------------
-bool NetIO::processActionRequestPDU_R(const oe::Network::Dis::ActionRequestPDU_R* const)
+bool NetIO::processActionRequestPDU_R(const oe::Network::dis::ActionRequestPDU_R* const)
 {
     return true;
 }
@@ -563,7 +563,7 @@ bool NetIO::processActionRequestPDU_R(const oe::Network::Dis::ActionRequestPDU_R
 //------------------------------------------------------------------------------
 // processActionResponsePDU_R() callback --
 //------------------------------------------------------------------------------
-bool NetIO::processActionResponsePDU_R(const oe::Network::Dis::ActionResponsePDU_R* const)
+bool NetIO::processActionResponsePDU_R(const oe::Network::dis::ActionResponsePDU_R* const)
 {
     return true;
 }
@@ -910,7 +910,7 @@ bool NetIO::parseFederationName(unsigned short* const exercise, const char* cons
 //------------------------------------------------------------------------------
 // Finds the Ntm by DIS entity type codes
 //------------------------------------------------------------------------------
-const Dis::Ntm* NetIO::findNtmByTypeCodes(
+const dis::Ntm* NetIO::findNtmByTypeCodes(
          const unsigned char  kind,
          const unsigned char  domain,
          const unsigned short countryCode,
@@ -920,9 +920,9 @@ const Dis::Ntm* NetIO::findNtmByTypeCodes(
          const unsigned char  extra
       ) const
 {
-   const Dis::Ntm* result = nullptr;
+   const dis::Ntm* result = nullptr;
 
-   const Dis::NtmInputNode* disRoot = dynamic_cast<const Dis::NtmInputNode*>( getRootNtmInputNode() );
+   const dis::NtmInputNode* disRoot = dynamic_cast<const dis::NtmInputNode*>( getRootNtmInputNode() );
    if (disRoot != nullptr) {
 
       result = disRoot->findNtmByTypeCodes(kind, domain, countryCode, category, subcategory, specific, extra);
@@ -1960,7 +1960,7 @@ void NetIO::testOutputEntityTypes(const unsigned int n)
 }
 
 //==============================================================================
-// Class: Dis::NtmInputNode
+// Class: dis::NtmInputNode
 // Description: DIS incoming NTM node
 //==============================================================================
 
@@ -1973,7 +1973,7 @@ EMPTY_SERIALIZER(NtmInputNode)
 //------------------------------------------------------------------------------
 Simulation::NetIO::NtmInputNode* NetIO::rootNtmInputNodeFactory() const
 {
-   return new Dis::NtmInputNode(Dis::NtmInputNode::ROOT_LVL,0); // root level
+   return new dis::NtmInputNode(dis::NtmInputNode::ROOT_LVL,0); // root level
 }
 
 //------------------------------------------------------------------------------
@@ -2040,7 +2040,7 @@ const Simulation::Ntm* NtmInputNode::findNetworkTypeMapper(const Simulation::Nib
 {
    const Simulation::Ntm* result = nullptr;
 
-   const Dis::Nib* disNib = dynamic_cast<const Dis::Nib*>( nib );
+   const dis::Nib* disNib = dynamic_cast<const dis::Nib*>( nib );
    if (disNib != nullptr) {
       result = findNtmByTypeCodes(
             disNib->getEntityKind(),
@@ -2121,7 +2121,7 @@ bool NtmInputNode::add2OurLists(Simulation::Ntm* const ntm)
    bool ok = false;
 
    // Make sure we have the correct kind of NTM ...
-   Dis::Ntm* disNtm = dynamic_cast<Dis::Ntm*>( ntm );
+   dis::Ntm* disNtm = dynamic_cast<dis::Ntm*>( ntm );
    if (disNtm != nullptr) {
 
       // Make sure that the NTM's code for this level matches our code
@@ -2303,6 +2303,6 @@ void NtmInputNode::print(std::ostream& sout, const int icnt) const
    sout << ")" << std::endl;
 }
 
-} // End Dis namespace
+} // End dis namespace
 } // End Network namespace
 } // End oe namespace

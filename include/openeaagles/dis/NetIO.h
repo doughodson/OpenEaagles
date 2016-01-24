@@ -1,11 +1,11 @@
 //------------------------------------------------------------------------------
 // Classes:
-//    Dis::NetIO  -- DIS Network I/O handler class
-//    Dis::Nib    -- DIS Network Interface Block class
-//    Dis::Ntm    -- DIS Type Mapper class
+//    dis::NetIO  -- DIS Network I/O handler class
+//    dis::Nib    -- DIS Network Interface Block class
+//    dis::Ntm    -- DIS Type Mapper class
 //------------------------------------------------------------------------------
-#ifndef __oe_Network_Dis_NetIO_H__
-#define __oe_Network_Dis_NetIO_H__
+#ifndef __oe_Network_dis_NetIO_H__
+#define __oe_Network_dis_NetIO_H__
 
 #include "openeaagles/simulation/NetIO.h"
 
@@ -15,7 +15,7 @@ namespace oe {
 
 namespace Network {
 
-namespace Dis {
+namespace dis {
    class Nib;
    class Ntm;
    class EmissionPduHandler;
@@ -46,7 +46,7 @@ namespace Dis {
 
 
 //==============================================================================
-// Class: Dis::NetIO
+// Class: dis::NetIO
 // Description: Distributed-Interactive-Simulation (DIS) protocol manager.
 //
 // Slots:
@@ -406,7 +406,7 @@ private:
 };
 
 
-} // End Dis namespace
+} // End dis namespace
 } // End Network namespace
 } // End oe namespace
 

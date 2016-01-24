@@ -38,15 +38,15 @@
 //    7.6.2    EmissionSystem (part of Electromagnetic Emission PDU)
 //    7.6.2    EmitterBeamData (part of Electromagnetic Emission PDU)
 //--------------------------------------------------------------
-#ifndef __oe_Network_Dis_Struct_H__
-#define __oe_Network_Dis_Struct_H__
+#ifndef __oe_Network_dis_Struct_H__
+#define __oe_Network_dis_Struct_H__
 
 #include <iostream>
 #include <cstdint>
 
 namespace oe {
 namespace Network {
-namespace Dis {
+namespace dis {
 
 //--------------------------------------------------------------
 // Byte swap functions used by this file
@@ -2105,7 +2105,7 @@ struct SimCoordinates {
 
 #endif
 
-} // End Dis namespace
+} // End dis namespace
 } // End Network namespace
 } // End oe namespace
 

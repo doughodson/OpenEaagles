@@ -14,7 +14,7 @@
 
 namespace oe {
 namespace Network {
-namespace Dis {
+namespace dis {
 
 //------------------------------------------------------------------------------
 // IFF Change/Option bits
@@ -257,6 +257,6 @@ bool Nib::isIffUpdateRequired(const LCreal curExecTime, const Simulation::Iff* c
    return (result == YES);
 }
 
-} // End Dis namespace
+} // End dis namespace
 } // End Network namespace
 } // End oe namespace

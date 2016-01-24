@@ -1,19 +1,19 @@
 //------------------------------------------------------------------------------
-// Class: Dis::Nib
+// Class: dis::Nib
 //------------------------------------------------------------------------------
-#ifndef __oe_Network_Dis_Nib_H__
-#define __oe_Network_Dis_Nib_H__
+#ifndef __oe_Network_dis_Nib_H__
+#define __oe_Network_dis_Nib_H__
 
 #include "openeaagles/simulation/Nib.h"
 #include "openeaagles/dis/NetIO.h"
 
 namespace oe {
 namespace Network {
-namespace Dis {
+namespace dis {
 class Ntm;
 
 //==============================================================================
-// Class: Dis::Nib
+// Class: dis::Nib
 // Description: Unique DIS Network Interface Block (NIB)
 //
 //    This class, which is derived from the Simulation::Nib, is used to manage
@@ -114,7 +114,7 @@ private:
    double timeOffset;
 };
 
-} // End Dis namespace
+} // End dis namespace
 } // End Network namespace
 } // End oe namespace
 
