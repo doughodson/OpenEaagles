@@ -55,7 +55,7 @@
 #include <cstring>
 
 namespace oe {
-namespace Instruments {
+namespace instruments {
 
 Factory::Factory()
 {}

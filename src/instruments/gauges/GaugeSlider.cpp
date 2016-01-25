@@ -1,7 +1,7 @@
 #include "openeaagles/instruments/gauges/GaugeSlider.h"
 
 namespace oe {
-namespace Instruments {
+namespace instruments {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(GaugeSlider, "GaugeSlider")
 EMPTY_SERIALIZER(GaugeSlider)
@@ -47,5 +47,5 @@ void GaugeSlider::draw()
     lcRestoreMatrix();
 }
 
-}  // end Instruments namespace
+}  // end instruments namespace
 }  // end oe namespace

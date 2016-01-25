@@ -4,7 +4,7 @@
 #include "openeaagles/basicGL/Display.h"
 
 namespace oe {
-namespace Instruments {
+namespace instruments {
 
 IMPLEMENT_SUBCLASS(GhostHorizon, "GhostHorizon")
 EMPTY_SERIALIZER(GhostHorizon)

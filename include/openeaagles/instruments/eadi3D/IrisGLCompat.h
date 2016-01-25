@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: IrisGLCompat
 //------------------------------------------------------------------------------
-#ifndef __oe_Instruments_IrisGLCompat_H__
-#define __oe_Instruments_IrisGLCompat_H__
+#ifndef __oe_instruments_IrisGLCompat_H__
+#define __oe_instruments_IrisGLCompat_H__
 
 #include "openeaagles/basic/Object.h"
 
 namespace oe {
-namespace Instruments {
+namespace instruments {
 
 //------------------------------------------------------------------------------
 // Class:  IrisGLCompat

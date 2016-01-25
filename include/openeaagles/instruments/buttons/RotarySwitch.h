@@ -4,13 +4,13 @@
 // Description: Generic multi-position selector switch that knows when it is left or right
 //                mouse clicked and moves to next or previous switch position.
 //------------------------------------------------------------------------------
-#ifndef __oe_Instruments_RotarySwitch_H__
-#define __oe_Instruments_RotarySwitch_H__
+#ifndef __oe_instruments_RotarySwitch_H__
+#define __oe_instruments_RotarySwitch_H__
 
 #include "openeaagles/instruments/buttons/Button.h"
 
 namespace oe {
-namespace Instruments {
+namespace instruments {
 
 class RotarySwitch : public Button
 {
@@ -40,7 +40,7 @@ private:
     SendData angleSD;       // angle to send to our rotator
 };
 
-}  // end Instruments namespace
+}  // end instruments namespace
 }  // end oe namespace
 
 #endif

@@ -4,7 +4,7 @@
 #include "openeaagles/basic/Number.h"
 
 namespace oe {
-namespace Instruments {
+namespace instruments {
 
 IMPLEMENT_SUBCLASS(RotarySwitch,"RotarySwitch")
 EMPTY_SERIALIZER(RotarySwitch)
@@ -130,5 +130,5 @@ basic::Object* RotarySwitch::getSlotByIndex(const int si)
     return BaseClass::getSlotByIndex(si);
 }
 
-}  // end Instruments namespace
+}  // end instruments namespace
 }  // end oe namespace

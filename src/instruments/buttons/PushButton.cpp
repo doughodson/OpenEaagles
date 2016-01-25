@@ -2,7 +2,7 @@
 #include "openeaagles/basic/Number.h"
 
 namespace oe {
-namespace Instruments {
+namespace instruments {
 
 IMPLEMENT_SUBCLASS(PushButton,"PushButton")
 EMPTY_SERIALIZER(PushButton)
@@ -159,5 +159,5 @@ basic::Object* PushButton::getSlotByIndex(const int si)
     return BaseClass::getSlotByIndex(si);
 }
 
-}  // end Instruments namespace
+}  // end instruments namespace
 }  // end oe namespace

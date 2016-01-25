@@ -13,13 +13,13 @@
 //      UPDATE_VALUE7 - sets bearing (radians or basic::Angle)
 //      UPDATE_VALUE8 - sets bearing (degrees)
 //------------------------------------------------------------------------------
-#ifndef __oe_Instruments_BearingPointer_H__
-#define __oe_Instruments_BearingPointer_H__
+#ifndef __oe_instruments_BearingPointer_H__
+#define __oe_instruments_BearingPointer_H__
 
 #include "openeaagles/instruments/maps/CompassRose.h"
 
 namespace oe {
-namespace Instruments {
+namespace instruments {
 
 class BearingPointer : public CompassRose
 {

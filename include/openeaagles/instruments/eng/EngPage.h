@@ -4,13 +4,13 @@
 //
 // Description: Tests the secondary pfd page
 //------------------------------------------------------------------------------
-#ifndef __oe_Instruments_EngPage_H__
-#define __oe_Instruments_EngPage_H__
+#ifndef __oe_instruments_EngPage_H__
+#define __oe_instruments_EngPage_H__
 
 #include "openeaagles/basicGL/Page.h"
 
 namespace oe {
-namespace Instruments {
+namespace instruments {
 
 class EngPage : public BasicGL::Page
 {
@@ -61,7 +61,7 @@ private:
     SendData ffROSD[NUM_ENG];
 };
 
-}  // end Instruments namespace
+}  // end instruments namespace
 }  // end oe namespace
 
 #endif

@@ -1,7 +1,7 @@
 #include "openeaagles/instruments/adi/Adi.h"
 
 namespace oe {
-namespace Instruments {
+namespace instruments {
 
 IMPLEMENT_SUBCLASS(Adi, "Adi")
 EMPTY_SERIALIZER(Adi)

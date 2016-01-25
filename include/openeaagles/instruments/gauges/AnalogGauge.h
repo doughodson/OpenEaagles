@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: AnalogGauge
 //------------------------------------------------------------------------------
-#ifndef __oe_Instruments_AnalogGuage_H__
-#define __oe_Instruments_AnalogGuage_H__
+#ifndef __oe_instruments_AnalogGuage_H__
+#define __oe_instruments_AnalogGuage_H__
 
 #include "openeaagles/instruments/Instrument.h"
 
 namespace oe {
-namespace Instruments {
+namespace instruments {
 
 //------------------------------------------------------------------------------
 // Class: AnalogGauge
@@ -62,7 +62,7 @@ private:
     bool drawMe;                    // this is for derived classes that don't want us to draw
 };
 
-}  // end Instruments namespace
+}  // end instruments namespace
 }  // end oe namespace
 
 #endif

@@ -5,7 +5,7 @@
 #include <GL/glu.h>
 
 namespace oe {
-namespace Instruments {
+namespace instruments {
 
 IMPLEMENT_SUBCLASS(Knob,"Knob")
 EMPTY_SERIALIZER(Knob)
@@ -327,5 +327,5 @@ basic::Object* Knob::getSlotByIndex(const int si)
     return BaseClass::getSlotByIndex(si);
 }
 
-}  // end Instruments namespace
+}  // end instruments namespace
 }  // end oe namespace

@@ -7,13 +7,13 @@
 //      UPDATE_INSTRUMENTS (from instruments) -> g's
 //      RESET_EVENT -> resets min and max g's
 //------------------------------------------------------------------------------
-#ifndef __oe_Instruments_GMeterDial_H__
-#define __oe_Instruments_GMeterDial_H__
+#ifndef __oe_instruments_GMeterDial_H__
+#define __oe_instruments_GMeterDial_H__
 
 #include "openeaagles/instruments/dials/AnalogDial.h"
 
 namespace oe {
-namespace Instruments {
+namespace instruments {
 
 class GMeterDial : public AnalogDial {
     DECLARE_SUBCLASS(GMeterDial,AnalogDial)
@@ -36,7 +36,7 @@ private:
     SendData maxGSD;    // max gs
 };
 
-}  // end Instruments namespace
+}  // end instruments namespace
 }  // end oe namespace
 
 #endif

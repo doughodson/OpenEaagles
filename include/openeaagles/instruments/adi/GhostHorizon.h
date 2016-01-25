@@ -4,13 +4,13 @@
 // Description: Takes a pitch and roll in and determines when and where to draw the
 // ghost horizon graphic
 //------------------------------------------------------------------------------
-#ifndef __oe_Instruments_GhostHorizon_H__
-#define __oe_Instruments_GhostHorizon_H__
+#ifndef __oe_instruments_GhostHorizon_H__
+#define __oe_instruments_GhostHorizon_H__
 
 #include "openeaagles/instruments/adi/Adi.h"
 
 namespace oe {
-namespace Instruments {
+namespace instruments {
 
 class GhostHorizon : public Adi {
     DECLARE_SUBCLASS(GhostHorizon, Adi)
@@ -41,7 +41,7 @@ private:
     LCreal height;          // height of our polygon
 };
 
-}; // end Instruments namespace
+}; // end instruments namespace
 }; // end oe namespace
 
 #endif

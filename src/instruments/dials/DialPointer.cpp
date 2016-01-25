@@ -2,7 +2,7 @@
 #include "openeaagles/basic/units/Angles.h"
 
 namespace oe {
-namespace Instruments {
+namespace instruments {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(DialPointer, "DialPointer")
 EMPTY_SERIALIZER(DialPointer)

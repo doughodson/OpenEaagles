@@ -2,7 +2,7 @@
 #include "openeaagles/basic/Number.h"
 
 namespace oe {
-namespace Instruments {
+namespace instruments {
 
 IMPLEMENT_SUBCLASS(LandingGear,"LandingGear")
 EMPTY_SERIALIZER(LandingGear)
@@ -240,5 +240,5 @@ basic::Object* LandingGear::getSlotByIndex(const int si)
     return BaseClass::getSlotByIndex(si);
 }
 
-}  // end Instruments namespace
+}  // end instruments namespace
 }  // end oe namespace

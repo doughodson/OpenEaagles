@@ -4,13 +4,13 @@
 // Description: Dynamic class that renders only the portion of the tape
 //              that is needed on the screen
 //------------------------------------------------------------------------------
-#ifndef __oe_Instruments_Tape_H__
-#define __oe_Instruments_Tape_H__
+#ifndef __oe_instruments_Tape_H__
+#define __oe_instruments_Tape_H__
 
 #include "openeaagles/instruments/Instrument.h"
 
 namespace oe {
-namespace Instruments {
+namespace instruments {
 
 class Tape : public Instrument
 {

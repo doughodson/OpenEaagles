@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: LandingGear
 //------------------------------------------------------------------------------
-#ifndef __oe_Instruments_LandingGear_H__
-#define __oe_Instruments_LandingGear_H__
+#ifndef __oe_instruments_LandingGear_H__
+#define __oe_instruments_LandingGear_H__
 
 #include "openeaagles/instruments/Instrument.h"
 
 namespace oe {
-namespace Instruments {
+namespace instruments {
 
 //------------------------------------------------------------------------------
 // Class: LandingGear
@@ -55,7 +55,7 @@ private:
     bool haveRotary;    // do we have a rotary now that is our components (we won't draw if we do)
 };
 
-}  // end Instruments namespace
+}  // end instruments namespace
 }  // end oe namespace
 
 #endif

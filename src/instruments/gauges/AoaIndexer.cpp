@@ -5,7 +5,7 @@
 #include <GL/glu.h>
 
 namespace oe {
-namespace Instruments {
+namespace instruments {
 
 IMPLEMENT_SUBCLASS(AoAIndexer,"AoAIndexer")
 EMPTY_SERIALIZER(AoAIndexer)
@@ -389,5 +389,5 @@ basic::Object* AoAIndexer::getSlotByIndex(const int si)
     return BaseClass::getSlotByIndex(si);
 }
 
-}  // end Instruments namespace
+}  // end instruments namespace
 }  // end oe namespace

@@ -3,7 +3,7 @@
 #include <GL/glu.h>
 
 namespace oe {
-namespace Instruments {
+namespace instruments {
 
 IMPLEMENT_SUBCLASS(AnalogDial, "AnalogDial")
 EMPTY_SERIALIZER(AnalogDial)
@@ -207,5 +207,5 @@ basic::Object* AnalogDial::getSlotByIndex(const int si)
     return BaseClass::getSlotByIndex(si);
 }
 
-}  // end Instruments namespace
+}  // end instruments namespace
 }  // end oe namespace

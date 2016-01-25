@@ -8,7 +8,7 @@
 #define MR2IN 0.026785714      // font was scaled by this
 
 namespace oe {
-namespace Instruments {
+namespace instruments {
 
 float WHITE[3] = { 1.0, 1.0, 1.0 };
 float BLACK[3] = { 0.0, 0.0, 0.0 };

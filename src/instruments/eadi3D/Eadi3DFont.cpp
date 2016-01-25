@@ -1,7 +1,7 @@
 #include "openeaagles/instruments/eadi3D/Eadi3DFont.h"
 
 namespace oe {
-namespace Instruments {
+namespace instruments {
 
 IMPLEMENT_SUBCLASS(Eadi3DFont,"Eadi3DFont")
 EMPTY_SLOTTABLE(Eadi3DFont)

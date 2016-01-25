@@ -4,13 +4,13 @@
 // Description: Button that can have multiple formats, up to as many as the user
 // wants.
 //------------------------------------------------------------------------------
-#ifndef __oe_Instruments_Switch_H__
-#define __oe_Instruments_Switch_H__
+#ifndef __oe_instruments_Switch_H__
+#define __oe_instruments_Switch_H__
 
 #include "openeaagles/instruments/buttons/Button.h"
 
 namespace oe {
-namespace Instruments {
+namespace instruments {
 
 class Switch : public Button {
     DECLARE_SUBCLASS(Switch,Button)
@@ -40,7 +40,7 @@ private:
     SendData currentStateSD;
 };
 
-}  // end Instruments namespace
+}  // end instruments namespace
 }  // end oe namespace
 
 #endif

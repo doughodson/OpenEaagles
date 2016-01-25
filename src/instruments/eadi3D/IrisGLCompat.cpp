@@ -6,7 +6,7 @@
 #define MAX_POINTS 64
 
 namespace oe {
-namespace Instruments {
+namespace instruments {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(IrisGLCompat,"IrisGLCompat")
 EMPTY_SLOTTABLE(IrisGLCompat)

@@ -3,13 +3,13 @@
 // Base class:  basic::Object -> basic::Component -> BasicGL::Graphic -> Button
 // Description: Generic button that knows when it is clicked
 //------------------------------------------------------------------------------
-#ifndef __oe_Instruments_Button_H__
-#define __oe_Instruments_Button_H__
+#ifndef __oe_instruments_Button_H__
+#define __oe_instruments_Button_H__
 
 #include "openeaagles/basicGL/Graphic.h"
 
 namespace oe {
-namespace Instruments {
+namespace instruments {
 
 class Button : public BasicGL::Graphic {
     DECLARE_SUBCLASS(Button,BasicGL::Graphic)
@@ -40,7 +40,7 @@ private:
     int eventId;        // holds our event number
 };
 
-}  // end Instruments namespace
+}  // end instruments namespace
 }  // end oe namespace
 
 #endif

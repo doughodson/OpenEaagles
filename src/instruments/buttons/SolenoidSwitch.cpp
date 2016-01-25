@@ -7,7 +7,7 @@
 #include "openeaagles/basic/Timers.h"
 
 namespace oe {
-namespace Instruments {
+namespace instruments {
 
 IMPLEMENT_SUBCLASS(SolenoidSwitch,"SolenoidSwitch")
 EMPTY_SERIALIZER(SolenoidSwitch)
@@ -347,5 +347,5 @@ void SolenoidButton::updateData(LCreal dt)
 
 
 
-}  // end Instruments namespace
+}  // end instruments namespace
 }  // end oe namespace

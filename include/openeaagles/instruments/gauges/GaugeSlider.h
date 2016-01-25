@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: GaugeSlider
 //------------------------------------------------------------------------------
-#ifndef __oe_Instruments_GuageSlider_H__
-#define __oe_Instruments_GuageSlider_H__
+#ifndef __oe_instruments_GuageSlider_H__
+#define __oe_instruments_GuageSlider_H__
 
 #include "openeaagles/instruments/gauges/AnalogGauge.h"
 
 namespace oe {
-namespace Instruments {
+namespace instruments {
 
 //------------------------------------------------------------------------------
 // Class: GaugeSlider
@@ -28,7 +28,7 @@ private:
     LCreal sliderPos;       // direction, in inches, to move our slider (either Y or X-axis depending on the vertical flag)
 };
 
-}  // end Instruments namespace
+}  // end instruments namespace
 }  // end oe namespace
 
 #endif

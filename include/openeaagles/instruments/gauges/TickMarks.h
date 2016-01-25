@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: TickMarks
 //------------------------------------------------------------------------------
-#ifndef __oe_Instruments_TickMarks_H__
-#define __oe_Instruments_TickMarks_H__
+#ifndef __oe_instruments_TickMarks_H__
+#define __oe_instruments_TickMarks_H__
 
 #include "openeaagles/instruments/gauges/AnalogGauge.h"
 
 namespace oe {
-namespace Instruments {
+namespace instruments {
 
 //------------------------------------------------------------------------------
 // Class: TickMarks

@@ -3,14 +3,14 @@
 //
 // Description: Class factory
 //------------------------------------------------------------------------------
-#ifndef __oe_Instruments_Factory_H__
-#define __oe_Instruments_Factory_H__
+#ifndef __oe_instruments_Factory_H__
+#define __oe_instruments_Factory_H__
 
 namespace oe {
 
 namespace basic { class Object; }
 
-namespace Instruments {
+namespace instruments {
 
 class Factory
 {

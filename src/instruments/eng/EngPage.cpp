@@ -1,7 +1,7 @@
 #include "openeaagles/instruments/eng/EngPage.h"
 
 namespace oe {
-namespace Instruments {
+namespace instruments {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(EngPage,"EngPage")
 EMPTY_SERIALIZER(EngPage)

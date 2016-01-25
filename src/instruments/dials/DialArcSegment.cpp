@@ -3,7 +3,7 @@
 #include <GL/glu.h>
 
 namespace oe {
-namespace Instruments {
+namespace instruments {
 
 IMPLEMENT_SUBCLASS(DialArcSegment, "DialArcSegment")
 EMPTY_SERIALIZER(DialArcSegment)

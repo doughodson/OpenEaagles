@@ -2,7 +2,7 @@
 #include "openeaagles/basic/Number.h"
 
 namespace oe {
-namespace Instruments {
+namespace instruments {
 
 IMPLEMENT_SUBCLASS(DialTickMarks, "DialTickMarks")
 EMPTY_SERIALIZER(DialTickMarks)
@@ -160,5 +160,5 @@ basic::Object* DialTickMarks::getSlotByIndex(const int si)
     return BaseClass::getSlotByIndex(si);
 }
 
-}  // end Instruments namespace
+}  // end instruments namespace
 }  // end oe namespace

@@ -6,7 +6,7 @@
 #include "openeaagles/basic/Pair.h"
 
 namespace oe {
-namespace Instruments {
+namespace instruments {
 
 IMPLEMENT_SUBCLASS(Instrument, "Instrument")
 EMPTY_SERIALIZER(Instrument)
@@ -195,5 +195,5 @@ basic::Object* Instrument::getSlotByIndex(const int si)
     return BaseClass::getSlotByIndex(si);
 }
 
-}  // end Instruments namespace
+}  // end instruments namespace
 }  // end oe namespace

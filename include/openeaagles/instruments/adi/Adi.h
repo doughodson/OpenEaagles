@@ -13,14 +13,14 @@
 //      UPDATE_VALUE2 = updates roll (radians)
 //      UPDATE_VALUE3 = updates max rate (degrees/second)
 //------------------------------------------------------------------------------
-#ifndef __oe_Instruments_Adi_H__
-#define __oe_Instruments_Adi_H__
+#ifndef __oe_instruments_Adi_H__
+#define __oe_instruments_Adi_H__
 
 #include "openeaagles/instruments/Instrument.h"
 #include "openeaagles/basic/units/Angles.h"
 
 namespace oe {
-namespace Instruments {
+namespace instruments {
 
 class Adi : public Instrument {
     DECLARE_SUBCLASS(Adi,Instrument)
@@ -64,7 +64,7 @@ private:
     LCreal maxRate;     // maximum mechanical rate at which the adi can move pitch or roll
 };
 
-}; // end Instruments namespace
+}; // end instruments namespace
 }; // end oe namespace
 
 #endif

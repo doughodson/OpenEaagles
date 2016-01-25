@@ -12,15 +12,15 @@
 //      it if there is a scaling table available.  The flag allowPassing will
 //      determine if we pass the token down to our component instruments or not.
 //------------------------------------------------------------------------------
-#ifndef __oe_Instruments_Instrument_H__
-#define __oe_Instruments_Instrument_H__
+#ifndef __oe_instruments_Instrument_H__
+#define __oe_instruments_Instrument_H__
 
 #include "openeaagles/basicGL/Graphic.h"
 
 namespace oe {
    namespace basic { class Table1; }
 
-namespace Instruments {
+namespace instruments {
 
 class Instrument : public BasicGL::Graphic {
     DECLARE_SUBCLASS(Instrument,BasicGL::Graphic)
@@ -58,7 +58,7 @@ private:
     bool allowPassing;              // do we pass our instrument value down to our components?
 };
 
-}  // end Instruments namespace
+}  // end instruments namespace
 }  // end oe namespace
 
 #endif

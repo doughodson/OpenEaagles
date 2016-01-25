@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: Eadi3DFont
 //------------------------------------------------------------------------------
-#ifndef __oe_Instruments_Eadi3DFont_H__
-#define __oe_Instruments_Eadi3DFont_H__
+#ifndef __oe_instruments_Eadi3DFont_H__
+#define __oe_instruments_Eadi3DFont_H__
 
 #include "openeaagles/basicGL/Font.h"
 
 namespace oe {
-namespace Instruments {
+namespace instruments {
 
 //------------------------------------------------------------------------------
 // Class:  Eadi3DFont

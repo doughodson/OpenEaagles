@@ -2,7 +2,7 @@
 #include "openeaagles/basic/Number.h"
 
 namespace oe {
-namespace Instruments {
+namespace instruments {
 
 IMPLEMENT_SUBCLASS(Switch,"Switch")
 EMPTY_SERIALIZER(Switch)
@@ -119,5 +119,5 @@ basic::Object* Switch::getSlotByIndex(const int si)
     return BaseClass::getSlotByIndex(si);
 }
 
-}  // end Instruments namespace
+}  // end instruments namespace
 }  // end oe namespace

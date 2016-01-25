@@ -6,13 +6,13 @@
 // scaled rate.
 // Input:  UPDATE_INSTRUMENTS (from instruments)
 //------------------------------------------------------------------------------
-#ifndef __oe_Instruments_DialPointer_H__
-#define __oe_Instruments_DialPointer_H__
+#ifndef __oe_instruments_DialPointer_H__
+#define __oe_instruments_DialPointer_H__
 
 #include "openeaagles/instruments/dials/AnalogDial.h"
 
 namespace oe {
-namespace Instruments {
+namespace instruments {
 
 class DialPointer : public AnalogDial {
     DECLARE_SUBCLASS(DialPointer,AnalogDial)

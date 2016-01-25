@@ -1,14 +1,14 @@
 //------------------------------------------------------------------------------
 // Class: LandingLight
 //------------------------------------------------------------------------------
-#ifndef __oe_Instruments_LandingLight_H__
-#define __oe_Instruments_LandingLight_H__
+#ifndef __oe_instruments_LandingLight_H__
+#define __oe_instruments_LandingLight_H__
 
 #include "LandingGear.h"
 
 namespace oe {
 namespace basic { class Identifier; }
-namespace Instruments {
+namespace instruments {
 
 //------------------------------------------------------------------------------
 // Class: LandingLight
@@ -45,7 +45,7 @@ private:
     SendData selSD;     // our selection
 };
 
-}  // end Instruments namespace
+}  // end instruments namespace
 }  // end oe namespace
 
 #endif

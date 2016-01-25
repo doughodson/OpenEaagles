@@ -11,7 +11,7 @@
 #define RADIUS_120      1.877                   /* 120 in view */
 
 namespace oe {
-namespace Instruments {
+namespace instruments {
 
 static LCreal GROUND[3] = { 0.588235294f, 0.294117647f, 0.0f };
 static LCreal SKY[3] =    { 0.0f, 0.5f, 1.0f };
@@ -1099,5 +1099,5 @@ void Eadi3DPage::setLocalizerValid(const bool locValid)
     localizerDevValid = locValid;
 }
 
-}; // end Instruments namespace
+}; // end instruments namespace
 }; // end oe namespace

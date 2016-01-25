@@ -2,7 +2,7 @@
 #include "openeaagles/basic/Number.h"
 
 namespace oe {
-namespace Instruments {
+namespace instruments {
 
 IMPLEMENT_SUBCLASS(AnalogGauge, "AnalogGauge")
 EMPTY_SERIALIZER(AnalogGauge)
@@ -185,5 +185,5 @@ basic::Object* AnalogGauge::getSlotByIndex(const int si)
     return BaseClass::getSlotByIndex(si);
 }
 
-}  // end Instruments namespace
+}  // end instruments namespace
 }  // end oe namespace

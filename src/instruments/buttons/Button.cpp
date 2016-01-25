@@ -3,7 +3,7 @@
 #include "openeaagles/basicGL/Display.h"
 
 namespace oe {
-namespace Instruments {
+namespace instruments {
 
 IMPLEMENT_SUBCLASS(Button,"Button")
 EMPTY_SERIALIZER(Button)
@@ -102,5 +102,5 @@ basic::Object* Button::getSlotByIndex(const int si)
     return BaseClass::getSlotByIndex(si);
 }
 
-}  // end Instruments namespace
+}  // end instruments namespace
 }  // end oe namespace

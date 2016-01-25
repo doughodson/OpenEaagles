@@ -7,15 +7,15 @@
 // center position (no holding).
 // You can retrieve the button position at any time, or
 //------------------------------------------------------------------------------
-#ifndef __oe_Instruments_SolenoidSwitch_H__
-#define __oe_Instruments_SolenoidSwitch_H__
+#ifndef __oe_instruments_SolenoidSwitch_H__
+#define __oe_instruments_SolenoidSwitch_H__
 
 #include "openeaagles/basicGL/Graphic.h"
 #include "openeaagles/instruments/buttons/Button.h"
 
 namespace oe {
 namespace basic { class UpTimer; }
-namespace Instruments {
+namespace instruments {
 
 class SolenoidSwitch : public BasicGL::Graphic
 {
@@ -94,7 +94,7 @@ private:
 };
 
 
-} // end Instruments namespace
+} // end instruments namespace
 } // end oe namespace
 
 #endif

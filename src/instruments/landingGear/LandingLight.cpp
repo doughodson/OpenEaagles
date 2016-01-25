@@ -3,7 +3,7 @@
 #include <GL/glu.h>
 
 namespace oe {
-namespace Instruments {
+namespace instruments {
 
 IMPLEMENT_SUBCLASS(LandingLight,"LandingLight")
 EMPTY_SERIALIZER(LandingLight)
@@ -145,5 +145,5 @@ basic::Object* LandingLight::getSlotByIndex(const int si)
     return BaseClass::getSlotByIndex(si);
 }
 
-}  // end Instruments namespace
+}  // end instruments namespace
 }  // end oe namespace

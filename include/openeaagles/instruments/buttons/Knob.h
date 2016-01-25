@@ -12,14 +12,14 @@
 //  )
 //  startAngle: 20      // angle from which to start rotation
 //------------------------------------------------------------------------------
-#ifndef __oe_Instruments_Knob_H__
-#define __oe_Instruments_Knob_H__
+#ifndef __oe_instruments_Knob_H__
+#define __oe_instruments_Knob_H__
 
 #include "openeaagles/instruments/buttons/Button.h"
 
 namespace oe {
 namespace basic { class Table1; }
-namespace Instruments {
+namespace instruments {
 
 class Knob : public Button{
     DECLARE_SUBCLASS(Knob,Button)
@@ -69,7 +69,7 @@ private:
     LCreal endlessLimit;        // end value of the endless knob (default to 360)
 };
 
-}  // end Instruments namespace
+}  // end instruments namespace
 }  // end oe namespace
 
 #endif

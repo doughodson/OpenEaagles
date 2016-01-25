@@ -3,7 +3,7 @@
 #include "openeaagles/basic/PairStream.h"
 
 namespace oe {
-namespace Instruments {
+namespace instruments {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(GMeterDial,"GMeterDial")
 EMPTY_SERIALIZER(GMeterDial)

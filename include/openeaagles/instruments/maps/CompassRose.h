@@ -12,14 +12,14 @@
 //      UPDATE_VALUE5 -> displacement
 //      UPDATE_VALUE6 -> centered or not
 //------------------------------------------------------------------------------
-#ifndef __oe_Instruments_CompassRose_H__
-#define __oe_Instruments_CompassRose_H__
+#ifndef __oe_instruments_CompassRose_H__
+#define __oe_instruments_CompassRose_H__
 
 #include "openeaagles/basicGL/Graphic.h"
 #include "openeaagles/basic/units/Angles.h"
 
 namespace oe {
-namespace Instruments {
+namespace instruments {
 
 class CompassRose : public BasicGL::Graphic
 {
@@ -73,7 +73,7 @@ private:
     SendData dialSD;
 };
 
-}  // end Instruments namespace
+}  // end instruments namespace
 }  // end oe namespace
 
 #endif

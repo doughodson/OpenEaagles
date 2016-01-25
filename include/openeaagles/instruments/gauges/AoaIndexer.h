@@ -12,13 +12,13 @@
 //      green -> in limit area
 //      yellow -> under limit area
 //------------------------------------------------------------------------------
-#ifndef __oe_Instruments_AoAIndexer_H__
-#define __oe_Instruments_AoAIndexer_H__
+#ifndef __oe_instruments_AoAIndexer_H__
+#define __oe_instruments_AoAIndexer_H__
 
 #include "openeaagles/instruments/Instrument.h"
 
 namespace oe {
-namespace Instruments {
+namespace instruments {
 
 class AoAIndexer : public Instrument
 {
@@ -77,7 +77,7 @@ private:
     SendData selectSD;      // which graphics are we selecting? (If we are using a rotary)
 };
 
-}  // end Instruments namespace
+}  // end instruments namespace
 }  // end oe namespace
 
 #endif
