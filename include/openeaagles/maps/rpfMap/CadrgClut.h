@@ -10,14 +10,14 @@
 //     const CadrgClut::Rgb& getColor(unsigned int index) const;
 //
 //------------------------------------------------------------------------------
-#ifndef __oe_maps_Rpf_CadrgClut_H__
-#define __oe_maps_Rpf_CadrgClut_H__
+#ifndef __oe_maps_rpf_CadrgClut_H__
+#define __oe_maps_rpf_CadrgClut_H__
 
 #include "openeaagles/basic/Object.h"
 
 namespace oe {
 namespace maps {
-namespace Rpf {
+namespace rpf {
 
 class CadrgFrameEntry;
 
@@ -55,7 +55,7 @@ private:
     Rgb colorTable[255];                    // Holds our individual colors
 };
 
-} // end Rpf namespace
+} // end rpf namespace
 } // end maps namespace
 } // end oe namespace
 

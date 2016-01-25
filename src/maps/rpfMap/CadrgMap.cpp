@@ -16,7 +16,7 @@
 
 namespace oe {
 namespace maps {
-namespace Rpf {
+namespace rpf {
 
 IMPLEMENT_SUBCLASS(CadrgMap, "CadrgMap")
 EMPTY_SERIALIZER(CadrgMap)
@@ -237,7 +237,7 @@ void CadrgMap::sortMaps(const int count)
     //        std::cout << "FILE # " << i << " : " << std::endl;
     //        int nb = mergedCadrgFiles[i]->getNumBoundaries();
     //        for (int j = 0; j < nb; j++) {
-    //            maps::Rpf::CadrgTocEntry* toc = mergedCadrgFiles[i]->entry(j);
+    //            maps::rpf::CadrgTocEntry* toc = mergedCadrgFiles[i]->entry(j);
     //            if (toc != 0) {
     //                std::cout << "Boundary # && Scale = " << j << ", " << toc->getScale() << std::endl;
     //            }
@@ -754,7 +754,7 @@ basic::Object* CadrgMap::getSlotByIndex(const int si)
     return BaseClass::getSlotByIndex(si);
 }
 
-} // End Rpf namespace
+} // End rpf namespace
 } // End maps namespace
 } // End oe namespace
 

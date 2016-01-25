@@ -39,15 +39,15 @@
 //
 //------------------------------------------------------------------------------
 
-#ifndef __oe_maps_Rpf_CadrgFile_H__
-#define __oe_maps_Rpf_CadrgFile_H__
+#ifndef __oe_maps_rpf_CadrgFile_H__
+#define __oe_maps_rpf_CadrgFile_H__
 
 #include "openeaagles/basic/Object.h"
 
 namespace oe {
 namespace basic { class String; }
 namespace maps {
-namespace Rpf {
+namespace rpf {
 
 class CadrgTocEntry;
 
@@ -88,7 +88,7 @@ private:
     basic::String* originalDir;                 // directory of the file we are associated with
 };
 
-}  // End Rpf namespace
+}  // End rpf namespace
 }  // End maps namespace
 }  // End oe namespace
 

@@ -112,8 +112,8 @@
 //      basic::Object* CadrgMap::getSlotByIndex(const int si)
 //
 // ---------------------------------------------------------------------------------
-#ifndef __oe_maps_Rpf_CadrgMap_H__
-#define __oe_maps_Rpf_CadrgMap_H__
+#ifndef __oe_maps_rpf_CadrgMap_H__
+#define __oe_maps_rpf_CadrgMap_H__
 
 #include "openeaagles/basicGL/MapPage.h"
 
@@ -121,7 +121,7 @@ namespace oe {
 namespace basic { class List; }
 namespace BasicGL { class Texture; }
 namespace maps {
-namespace Rpf {
+namespace rpf {
 
 class CadrgFile;
 class TexturePager;
@@ -205,7 +205,7 @@ private:
     bool initLevelLoaded;                       // Has our initial map level been loaded?
 };
 
-}  // End Rpf namespace
+}  // End rpf namespace
 }  // End maps namespace
 }  // End oe namespace
 

@@ -46,15 +46,15 @@
 //
 // -------------------------------------------------------------------------------
 
-#ifndef __oe_maps_Rpf_MapDrawer_H__
-#define __oe_maps_Rpf_MapDrawer_H__
+#ifndef __oe_maps_rpf_MapDrawer_H__
+#define __oe_maps_rpf_MapDrawer_H__
 
 #include "openeaagles/basicGL/MapPage.h"
 
 namespace oe {
 namespace basic { class String; }
 namespace maps {
-namespace Rpf {
+namespace rpf {
 
 class TexturePager;
 class CadrgMap;
@@ -125,7 +125,7 @@ private:
     float originCol[MAX_PAGERS];        // Pixel + texture col of the textures to draw
 };
 
-} // End Rpf namespace
+} // End rpf namespace
 } // End maps namespace
 } // End oe namespace
 

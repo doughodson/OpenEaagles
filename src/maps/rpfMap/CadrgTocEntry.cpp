@@ -9,7 +9,7 @@
 
 namespace oe {
 namespace maps {
-namespace Rpf {
+namespace rpf {
 
 // Disable all deprecation warnings for now.  Until we fix them,
 // they are quite annoying to see over and over again...+
@@ -174,7 +174,7 @@ bool CadrgTocEntry::isInZone(double lat, double lon)
     return ok;
 }
 
-} // End Rpf namespace
+} // End rpf namespace
 } // End maps namespace
 } // End oe namespace
 

@@ -7,7 +7,7 @@
 
 namespace oe {
 namespace maps  {
-namespace Rpf {
+namespace rpf {
 
 IMPLEMENT_SUBCLASS(TextureTable, "TextureTable")
 EMPTY_SLOTTABLE(TextureTable)
@@ -173,7 +173,7 @@ BasicGL::Texture* TextureTable::getTexture(int row, int col)
     return texes[row + centerTablePos][col + centerTablePos];
 }
 
-} // End Rpf namespace
+} // End rpf namespace
 } // End Maps namespace
 } // End oe namespace
 

@@ -39,8 +39,8 @@
 //
 // ------------------------------------------------------------------------------
 
-#ifndef __oe_maps_Rpf_TexturePager_H__
-#define __oe_maps_Rpf_TexturePager_H__
+#ifndef __oe_maps_rpf_TexturePager_H__
+#define __oe_maps_rpf_TexturePager_H__
 
 #include "openeaagles/basic/Object.h"
 #include "TextureTable.h"
@@ -48,7 +48,7 @@
 namespace oe {
 namespace basic { class List; }
 namespace maps {
-namespace Rpf {
+namespace rpf {
 
 class CadrgMap;
 class CadrgTocEntry;
@@ -91,7 +91,7 @@ private:
     CadrgTocEntry* toc;
 };
 
-} // End Rpf namespace
+} // End rpf namespace
 } // End maps namespace
 } // End oe namespace
 

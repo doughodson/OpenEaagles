@@ -11,7 +11,7 @@
 
 namespace oe {
 namespace maps  {
-namespace Rpf {
+namespace rpf {
 
 IMPLEMENT_SUBCLASS(TexturePager, "TexturePager")
 EMPTY_SLOTTABLE(TexturePager)
@@ -303,7 +303,7 @@ void TexturePager::flushTextures()
     }
 }
 
-} // End Rpf namespace
+} // End rpf namespace
 } // End Maps namespace
 } // End oe namespace
 

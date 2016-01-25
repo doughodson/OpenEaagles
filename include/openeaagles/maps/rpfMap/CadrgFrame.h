@@ -11,15 +11,15 @@
 //        virtual int decompressSubframe(const int x, const int y, Subframe& subFrame);
 //
 //------------------------------------------------------------------------------
-#ifndef __oe_maps_Rpf_CadrgFrame_H__
-#define __oe_maps_Rpf_CadrgFrame_H__
+#ifndef __oe_maps_rpf_CadrgFrame_H__
+#define __oe_maps_rpf_CadrgFrame_H__
 
 #include "openeaagles/basic/Object.h"
 #include "openeaagles/maps/rpfMap/Support.h"
 
 namespace oe {
 namespace maps {
-namespace Rpf {
+namespace rpf {
 
 class CadrgFrameEntry;
 
@@ -44,7 +44,7 @@ private:
     unsigned char lookupTable[4096][4][4];          // Lookup table
 };
 
-} // End Rpf namespace
+} // End rpf namespace
 } // End maps namespace
 } // End oe namespace
 

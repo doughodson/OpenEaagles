@@ -25,15 +25,15 @@
 //      bool CadrgTocEntry::isInZone(double lat, double lon)
 //------------------------------------------------------------------------------
 
-#ifndef __oe_maps_Rpf_CadrgTocEntry_H__
-#define __oe_maps_Rpf_CadrgTocEntry_H__
+#ifndef __oe_maps_rpf_CadrgTocEntry_H__
+#define __oe_maps_rpf_CadrgTocEntry_H__
 
 #include "openeaagles/maps/rpfMap/CadrgFrameEntry.h"
 #include "openeaagles/basic/Object.h"
 
 namespace oe {
 namespace maps {
-namespace Rpf {
+namespace rpf {
 
 class CadrgTocEntry : public basic::Object
 {
@@ -117,7 +117,7 @@ private:
     CadrgFrameEntry** frames;   // Our array of frames that make up this entry.
 };
 
-} // End Rpf namespace
+} // End rpf namespace
 } // End maps namespace
 } // End oe namespace
 

@@ -14,7 +14,7 @@
 
 namespace oe {
 namespace maps {
-namespace Rpf {
+namespace rpf {
 
 IMPLEMENT_SUBCLASS(MapDrawer,"MapDrawer")
 EMPTY_SERIALIZER(MapDrawer)
@@ -503,7 +503,7 @@ basic::Object* MapDrawer::getSlotByIndex(const int si)
     return BaseClass::getSlotByIndex(si);
 }
 
-} // End Rpf namespace
+} // End rpf namespace
 } // End maps namespace
 } // End oe namespace
 

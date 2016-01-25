@@ -11,7 +11,7 @@
 
 namespace oe {
 namespace maps {
-namespace Rpf {
+namespace rpf {
 
 // Disable all deprecation warnings for now.  Until we fix them,
 // they are quite annoying to see over and over again...
@@ -360,7 +360,7 @@ const CadrgClut::Rgb& CadrgClut::getColor(unsigned int index) const {
     }
 }
 
-} // end Rpf namespace
+} // end rpf namespace
 } // end maps namespace
 } // end oe namespace
 

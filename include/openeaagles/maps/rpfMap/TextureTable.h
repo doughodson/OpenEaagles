@@ -27,15 +27,15 @@
 //      BasicGL::Texture* TextureTable::getTexture(int row, int col)
 //
 // ------------------------------------------------------------------------------
-#ifndef __oe_maps_Rpf_TextureTable_H__
-#define __oe_maps_Rpf_TextureTable_H__
+#ifndef __oe_maps_rpf_TextureTable_H__
+#define __oe_maps_rpf_TextureTable_H__
 
 #include "openeaagles/basic/Object.h"
 
 namespace oe {
 namespace BasicGL { class Texture; }
 namespace maps {
-namespace Rpf {
+namespace rpf {
 
 class TextureTable : public basic::Object
 {
@@ -74,7 +74,7 @@ private:
     BasicGL::Texture* texes[MAX_TABLE_SIZE][MAX_TABLE_SIZE];    // Holds our textures.
 };
 
-} // End Rpf namespace
+} // End rpf namespace
 } // End maps namespace
 } // End oe namespace
 

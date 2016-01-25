@@ -18,8 +18,8 @@
 //
 //------------------------------------------------------------------------------
 
-#ifndef __oe_maps_Rpf_Support_H__
-#define __oe_maps_Rpf_Support_H__
+#ifndef __oe_maps_rpf_Support_H__
+#define __oe_maps_rpf_Support_H__
 
 #include <fstream>
 
@@ -29,7 +29,7 @@ typedef unsigned char uchar;
 
 namespace oe {
 namespace maps {
-namespace Rpf {
+namespace rpf {
 
 // Swap bytes.
 void swap(unsigned char *ptr, int count);
@@ -146,7 +146,7 @@ struct Image {
 void parseLocations(std::ifstream& fin, Location* locs, int count);
 
 
-} // End Rpf namespace
+} // End rpf namespace
 } // End maps namespace
 } // End oe namespace
 

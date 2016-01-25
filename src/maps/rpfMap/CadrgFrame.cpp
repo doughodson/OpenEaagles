@@ -10,7 +10,7 @@
 
 namespace oe {
 namespace maps {
-namespace Rpf {
+namespace rpf {
 
 // Disable all deprecation warnings for now.  Until we fix them,
 // they are quite annoying to see over and over again...
@@ -395,7 +395,7 @@ int CadrgFrame::decompressSubframe(int x, int y, Subframe& subFrame)
     return 1;
 }
 
-}  // End Rpf namespace
+}  // End rpf namespace
 }  // End maps namespace
 }  // End oe namespace
 
