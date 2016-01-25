@@ -4,7 +4,7 @@
 #include "openeaagles/basic/units/Frequencies.h"
 
 namespace oe {
-namespace LinearSystem {
+namespace linearSys {
 
 //==============================================================================
 // Class LowpassFilter
@@ -134,5 +134,5 @@ std::ostream& LowpassFilter::serialize(std::ostream& sout, const int i, const bo
     return sout;
 }
 
-} // End LinearSystem namespace
+} // End linearSys namespace
 } // End oe namespace

@@ -3,7 +3,7 @@
 #include "openeaagles/basic/Number.h"
 
 namespace oe {
-namespace LinearSystem {
+namespace linearSys {
 
 //==============================================================================
 // Class Limit
@@ -100,5 +100,5 @@ std::ostream& Limit::serialize(std::ostream& sout, const int i, const bool slots
     return sout;
 }
 
-} // End LinearSystem namespace
+} // End linearSys namespace
 } // End oe namespace

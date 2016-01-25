@@ -2,7 +2,7 @@
 #include "openeaagles/linearSys/LimitFunc.h"
 
 namespace oe {
-namespace LinearSystem {
+namespace linearSys {
 
 //==============================================================================
 // Class LimitFunc
@@ -142,5 +142,5 @@ bool LimitFunc::setUpperLimit(const LCreal v)
    return true;
 }
 
-} // End LinearSystem namespace
+} // End linearSys namespace
 } // End oe namespace

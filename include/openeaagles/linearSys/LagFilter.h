@@ -1,15 +1,15 @@
 //------------------------------------------------------------------------------
 // LagFilter class -- First order lag filter
 //------------------------------------------------------------------------------
-#ifndef __oe_LinearSystem_LagFilter_H__
-#define __oe_LinearSystem_LagFilter_H__
+#ifndef __oe_linearSys_LagFilter_H__
+#define __oe_linearSys_LagFilter_H__
 
 #include "openeaagles/linearSys/FirstOrderTf.h"
 
 namespace oe {
    namespace basic { class Time; }
 
-namespace LinearSystem {
+namespace linearSys {
 
 //------------------------------------------------------------------------------
 // Class:  LagFilter
@@ -50,7 +50,7 @@ private:
    LCreal tau;    // filter time constant (seconds)
 };
 
-} // End LinearSystem namespace
+} // End linearSys namespace
 } // End oe namespace
 
 #endif

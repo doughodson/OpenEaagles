@@ -3,7 +3,7 @@
 #include "openeaagles/basic/Number.h"
 
 namespace oe {
-namespace LinearSystem {
+namespace linearSys {
 
 //==============================================================================
 // Class Sz1
@@ -133,5 +133,5 @@ std::ostream& Sz1::serialize(std::ostream& sout, const int i, const bool slotsOn
     return sout;
 }
 
-} // End LinearSystem namespace
+} // End linearSys namespace
 } // End oe namespace

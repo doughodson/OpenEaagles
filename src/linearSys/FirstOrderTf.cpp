@@ -2,7 +2,7 @@
 #include "openeaagles/linearSys/FirstOrderTf.h"
 
 namespace oe {
-namespace LinearSystem {
+namespace linearSys {
 
 //==============================================================================
 // Class FirstOrderTf
@@ -162,5 +162,5 @@ bool FirstOrderTf::setD2(const LCreal v)
    return true;
 }
 
-} // End LinearSystem namespace
+} // End linearSys namespace
 } // End oe namespace

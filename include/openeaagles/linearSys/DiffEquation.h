@@ -3,13 +3,13 @@
 //
 // Description: Abstract difference equation
 //------------------------------------------------------------------------------
-#ifndef __oe_LinearSystem_DiffEquation_H__
-#define __oe_LinearSystem_DiffEquation_H__
+#ifndef __oe_linearSys_DiffEquation_H__
+#define __oe_linearSys_DiffEquation_H__
 
 #include "openeaagles/linearSys/ScalerFunc.h"
 
 namespace oe {
-namespace LinearSystem {
+namespace linearSys {
 
 //------------------------------------------------------------------------------
 // Class:  DiffEquation
@@ -41,7 +41,7 @@ private:
    void initData();  // Initialize our data
 };
 
-} // End LinearSystem namespace
+} // End linearSys namespace
 } // End oe namespace
 
 #endif

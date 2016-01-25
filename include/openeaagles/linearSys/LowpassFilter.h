@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // LowpassFilter class -- First order low pass filter
 //------------------------------------------------------------------------------
-#ifndef __oe_LinearSystem_LowpassFilter_H__
-#define __oe_LinearSystem_LowpassFilter_H__
+#ifndef __oe_linearSys_LowpassFilter_H__
+#define __oe_linearSys_LowpassFilter_H__
 
 #include "openeaagles/linearSys/FirstOrderTf.h"
 
 namespace oe {
-namespace LinearSystem {
+namespace linearSys {
 
 //------------------------------------------------------------------------------
 // Class:  LowpassFilter
@@ -46,7 +46,7 @@ private:
    LCreal wc;    // Cutoff frequency (rad/sec)
 };
 
-} // End LinearSystem namespace
+} // End linearSys namespace
 } // End oe namespace
 
 #endif

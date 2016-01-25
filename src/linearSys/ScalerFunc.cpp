@@ -4,7 +4,7 @@
 #include "openeaagles/basic/units/Frequencies.h"
 
 namespace oe {
-namespace LinearSystem {
+namespace linearSys {
 
 //==============================================================================
 // Class ScalerFunc
@@ -269,5 +269,5 @@ std::ostream& ScalerFunc::serialize(std::ostream& sout, const int i, const bool 
     return sout;
 }
 
-} // End LinearSystem namespace
+} // End linearSys namespace
 } // End oe namespace
