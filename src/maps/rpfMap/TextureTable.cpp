@@ -6,7 +6,7 @@
 #include "openeaagles/basicGL/Texture.h"
 
 namespace oe {
-namespace Maps {
+namespace maps  {
 namespace Rpf {
 
 IMPLEMENT_SUBCLASS(TextureTable, "TextureTable")

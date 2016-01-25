@@ -13,7 +13,7 @@
 #include "openeaagles/basicGL/Texture.h"
 
 namespace oe {
-namespace Maps {
+namespace maps {
 namespace Rpf {
 
 IMPLEMENT_SUBCLASS(MapDrawer,"MapDrawer")
@@ -504,6 +504,6 @@ basic::Object* MapDrawer::getSlotByIndex(const int si)
 }
 
 } // End Rpf namespace
-} // End Maps namespace
+} // End maps namespace
 } // End oe namespace
 

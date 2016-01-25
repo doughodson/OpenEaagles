@@ -17,14 +17,14 @@
 //    void CadrgFrameEntry::setFrame(CadrgFrame* newFrame)
 //
 //------------------------------------------------------------------------------
-#ifndef __oe_Maps_Rpf_CadrgFrameEntry_H__
-#define __oe_Maps_Rpf_CadrgFrameEntry_H__
+#ifndef __oe_maps_Rpf_CadrgFrameEntry_H__
+#define __oe_maps_Rpf_CadrgFrameEntry_H__
 
 #include "openeaagles/maps/rpfMap/CadrgClut.h"
 #include "openeaagles/basic/Object.h"
 
 namespace oe {
-namespace Maps {
+namespace maps {
 namespace Rpf {
 
 class CadrgFrame;
@@ -60,7 +60,7 @@ private:
 };
 
 } // End Rpf namespace
-} // End Maps namespace
+} // End maps namespace
 } // End oe namespace
 
 #endif

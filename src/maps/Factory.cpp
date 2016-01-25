@@ -11,7 +11,7 @@
 #include <cstring>
 
 namespace oe {
-namespace Maps {
+namespace maps  {
 
 Factory::Factory()
 {}
@@ -32,5 +32,5 @@ basic::Object* Factory::createObj(const char* name)
     return obj;
 }
 
-}  // end namespace Maps
+}  // end namespace maps 
 }  // end namespace oe

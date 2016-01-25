@@ -10,7 +10,7 @@
 #include "openeaagles/basic/List.h"
 
 namespace oe {
-namespace Maps {
+namespace maps  {
 namespace Rpf {
 
 IMPLEMENT_SUBCLASS(TexturePager, "TexturePager")

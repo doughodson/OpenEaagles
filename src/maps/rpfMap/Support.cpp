@@ -8,7 +8,7 @@
 #include <cstring>
 
 namespace oe {
-namespace Maps {
+namespace maps  {
 namespace Rpf {
 
 // -----------------------------------------------------------

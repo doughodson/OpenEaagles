@@ -15,7 +15,7 @@
 #include <cstring>
 
 namespace oe {
-namespace Maps {
+namespace maps {
 namespace Rpf {
 
 IMPLEMENT_SUBCLASS(CadrgMap, "CadrgMap")
@@ -237,7 +237,7 @@ void CadrgMap::sortMaps(const int count)
     //        std::cout << "FILE # " << i << " : " << std::endl;
     //        int nb = mergedCadrgFiles[i]->getNumBoundaries();
     //        for (int j = 0; j < nb; j++) {
-    //            Maps::Rpf::CadrgTocEntry* toc = mergedCadrgFiles[i]->entry(j);
+    //            maps::Rpf::CadrgTocEntry* toc = mergedCadrgFiles[i]->entry(j);
     //            if (toc != 0) {
     //                std::cout << "Boundary # && Scale = " << j << ", " << toc->getScale() << std::endl;
     //            }
@@ -755,6 +755,6 @@ basic::Object* CadrgMap::getSlotByIndex(const int si)
 }
 
 } // End Rpf namespace
-} // End Maps namespace
+} // End maps namespace
 } // End oe namespace
 

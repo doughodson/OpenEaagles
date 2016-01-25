@@ -3,14 +3,14 @@
 //
 // Description: Class factory
 //------------------------------------------------------------------------------
-#ifndef __oe_Maps_Factory_H__
-#define __oe_Maps_Factory_H__
+#ifndef __oe_maps_Factory_H__
+#define __oe_maps_Factory_H__
 
 namespace oe {
 
 namespace basic { class Object; }
 
-namespace Maps {
+namespace maps {
 
 class Factory
 {
@@ -21,7 +21,7 @@ protected:
    Factory();   // prevent object creation
 };
 
-}  // end namespace Maps
+}  // end namespace maps
 }  // end namespace oe
 
 #endif
