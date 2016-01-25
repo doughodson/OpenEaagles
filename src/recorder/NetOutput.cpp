@@ -116,7 +116,7 @@ void NetOutput::processRecordImp(const DataRecordHandle* const handle)
    if (handle != nullptr && networkInitialized && netHandler->isConnected()) {
 
       // The DataRecord to be sent
-      const Pb::DataRecord* dataRecord = handle->getRecord();
+      const pb::DataRecord* dataRecord = handle->getRecord();
 
       // Serialize the DataRecord
       std::string wireFormat;

@@ -269,7 +269,7 @@ const DataRecordHandle* FileReader::readRecordImp()
 
             // Parse the DataRecord
             std::string wireFormat(ibuf, n);
-            Pb::DataRecord* dataRecord = new Pb::DataRecord();
+            pb::DataRecord* dataRecord = new pb::DataRecord();
             bool ok = dataRecord->ParseFromString(wireFormat);
 
             // Create a handle for the DataRecord (it now has ownership)

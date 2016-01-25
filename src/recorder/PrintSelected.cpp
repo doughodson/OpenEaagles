@@ -211,7 +211,7 @@ void PrintSelected::processRecordImp(const DataRecordHandle* const handle)
 {
 
    if (handle == nullptr) return;  // cannot continue
-   const Pb::DataRecord* dataRecord = handle->getRecord();
+   const pb::DataRecord* dataRecord = handle->getRecord();
    if (dataRecord == nullptr) return;  // cannot continue
 
    // using reflection:
@@ -423,7 +423,7 @@ void PrintSelected::processRecordImp(const DataRecordHandle* const handle)
       soutVals << msgCat << "\t" << msgType << "\t";
 
       // Print the time
-  //    const Pb::Time* timeMsg  = &dataRecord->time();
+  //    const pb::Time* timeMsg  = &dataRecord->time();
   //    printMessage(soutFields, soutVals, timeMsg);  // print out the time message
 
          soutFields <<  std::left << std::setw(12)<< "exec time " << "\t";

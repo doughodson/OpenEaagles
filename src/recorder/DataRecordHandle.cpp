@@ -21,7 +21,7 @@ DataRecordHandle::DataRecordHandle()
 //------------------------------------------------------------------------------
 // Constructor
 //------------------------------------------------------------------------------
-DataRecordHandle::DataRecordHandle(Pb::DataRecord* const r) : record(r)
+DataRecordHandle::DataRecordHandle(pb::DataRecord* const r) : record(r)
 {
    STANDARD_CONSTRUCTOR()
 }
@@ -32,7 +32,7 @@ DataRecordHandle::DataRecordHandle(Pb::DataRecord* const r) : record(r)
 void DataRecordHandle::copyData(const DataRecordHandle& org, const bool cc)
 {
    BaseClass::copyData(org);
-   if (cc) record = new Pb::DataRecord();
+   if (cc) record = new pb::DataRecord();
 
    // Copy the record
    *record = *org.record;

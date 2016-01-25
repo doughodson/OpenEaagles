@@ -11,7 +11,7 @@ namespace oe {
    namespace basic { class String; }
 
 namespace recorder {
-   namespace Pb { class DataRecord; class PlayerId; class PlayerState;
+   namespace pb { class DataRecord; class PlayerId; class PlayerState;
       class TrackData; class EmissionData; }
    class DataRecordHandle;
    class OutputHandler;
@@ -93,12 +93,12 @@ protected:
    bool setSlotYear(basic::Number* const msg);
 
    // data filler functions
-   virtual void genPlayerId( Pb::PlayerId* const id, const Simulation::Player* const player );
-   virtual void genPlayerState( Pb::PlayerState* const state, const Simulation::Player* const player );
-   virtual void genTrackData( Pb::TrackData* const trkMsg, const Simulation::Track* const track );
-   virtual void genEmissionData( Pb::EmissionData* const emMsg, const Simulation::Emission* const emData);
-   virtual void sendDataRecord(Pb::DataRecord* const msg);       // Send the DataRecord to our output handler
-   virtual void timeStamp(Pb::DataRecord* const msg);            // Time stamp the DataRecord
+   virtual void genPlayerId( pb::PlayerId* const id, const Simulation::Player* const player );
+   virtual void genPlayerState( pb::PlayerState* const state, const Simulation::Player* const player );
+   virtual void genTrackData( pb::TrackData* const trkMsg, const Simulation::Track* const track );
+   virtual void genEmissionData( pb::EmissionData* const emMsg, const Simulation::Emission* const emData);
+   virtual void sendDataRecord(pb::DataRecord* const msg);       // Send the DataRecord to our output handler
+   virtual void timeStamp(pb::DataRecord* const msg);            // Time stamp the DataRecord
    virtual std::string genTrackId(const Simulation::Track* const track);
    void setFirstPass(const bool f);
 

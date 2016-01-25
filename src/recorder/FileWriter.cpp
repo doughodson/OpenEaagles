@@ -273,14 +273,14 @@ void FileWriter::closeFile()
          eodFlag = true;
 
          // write something to signify don't read any more (e.g., last message)
-         Pb::DataRecord* lastMsg = new Pb::DataRecord();
+         pb::DataRecord* lastMsg = new pb::DataRecord();
 
          // This will be the token representing the last message, but it can be
          // anything that is not one of the other event messages
          lastMsg->set_id(REID_END_OF_DATA);
 
          // Time is also required, although not used:
-         Pb::Time* time = lastMsg->mutable_time();
+         pb::Time* time = lastMsg->mutable_time();
          time->set_exec_time(0);
          time->set_sim_time(0);
          time->set_utc_time(0);
@@ -322,7 +322,7 @@ void FileWriter::processRecordImp(const DataRecordHandle* const handle)
    if ( fileOpened ) {
 
       // The DataRecord to be sent
-      const Pb::DataRecord* dataRecord = handle->getRecord();
+      const pb::DataRecord* dataRecord = handle->getRecord();
 
       // Serialize the DataRecord
       std::string wireFormat;

@@ -138,7 +138,7 @@ const DataRecordHandle* NetInput::readRecordImp()
       if (n > 0) {
          // Parse the data record
          std::string wireFormat(ibuf, n);
-         Pb::DataRecord* dataRecord = new Pb::DataRecord();
+         pb::DataRecord* dataRecord = new pb::DataRecord();
          bool ok = dataRecord->ParseFromString(wireFormat);
 
          if (ok) {

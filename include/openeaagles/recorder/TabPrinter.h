@@ -12,7 +12,7 @@
 
 namespace oe {
 namespace recorder {
-   namespace Pb {
+   namespace pb {
       class Time; class FileIdMsg; class NewPlayerEventMsg; class PlayerRemovedEventMsg; class PlayerDataMsg;
       class PlayerDamagedEventMsg; class PlayerCollisionEventMsg; class PlayerCrashEventMsg;
       class PlayerKilledEventMsg; class WeaponReleaseEventMsg; class WeaponHungEventMsg;
@@ -54,35 +54,35 @@ protected:
    // Print functions
 
    // Event Messages
-   virtual void printFileIdMsg(const Pb::Time* const timeMsg, const Pb::FileIdMsg* const msg);
-   virtual void printNewPlayerEventMsg(const Pb::Time* const timeMsg, const Pb::NewPlayerEventMsg* const msg);
-   virtual void printPlayerRemovedEventMsg(const Pb::Time* const timeMsg, const Pb::PlayerRemovedEventMsg* const msg);
-   virtual void printPlayerDataMsg(const Pb::Time* const timeMsg, const Pb::PlayerDataMsg* const msg);
-   virtual void printPlayerDamagedEventMsg(const Pb::Time* const timeMsg, const Pb::PlayerDamagedEventMsg* const msg);
-   virtual void printPlayerCollisionEventMsg(const Pb::Time* const timeMsg, const Pb::PlayerCollisionEventMsg* const msg);
-   virtual void printPlayerCrashEventMsg(const Pb::Time* const timeMsg, const Pb::PlayerCrashEventMsg* const msg);
-   virtual void printPlayerKilledEventMsg(const Pb::Time* const timeMsg, const Pb::PlayerKilledEventMsg* const msg);
-   virtual void printWeaponReleaseEventMsg(const Pb::Time* const timeMsg, const Pb::WeaponReleaseEventMsg* const msg);
-   virtual void printWeaponHungEventMsg(const Pb::Time* const timeMsg, const Pb::WeaponHungEventMsg* const msg);
-   virtual void printWeaponDetonationEventMsg(const Pb::Time* const timeMsg, const Pb::WeaponDetonationEventMsg* const msg);
-   virtual void printGunFiredEventMsg(const Pb::Time* const timeMsg, const Pb::GunFiredEventMsg* const msg);
-   virtual void printNewTrackEventMsg(const Pb::Time* const timeMsg, const Pb::NewTrackEventMsg* const msg);
-   virtual void printTrackRemovedEventMsg(const Pb::Time* const timeMsg, const Pb::TrackRemovedEventMsg* const msg);
-   virtual void printTrackDataMsg(const Pb::Time* const timeMsg, const Pb::TrackDataMsg* const msg);
-   virtual void printMarkerMsg(const Pb::Time* const timeMsg, const Pb::MarkerMsg* const msg);
-   virtual void printInputDeviceMsg(const Pb::Time* const timeMsg, const Pb::InputDeviceMsg* const msg, const  unsigned int msgId);
+   virtual void printFileIdMsg(const pb::Time* const timeMsg, const pb::FileIdMsg* const msg);
+   virtual void printNewPlayerEventMsg(const pb::Time* const timeMsg, const pb::NewPlayerEventMsg* const msg);
+   virtual void printPlayerRemovedEventMsg(const pb::Time* const timeMsg, const pb::PlayerRemovedEventMsg* const msg);
+   virtual void printPlayerDataMsg(const pb::Time* const timeMsg, const pb::PlayerDataMsg* const msg);
+   virtual void printPlayerDamagedEventMsg(const pb::Time* const timeMsg, const pb::PlayerDamagedEventMsg* const msg);
+   virtual void printPlayerCollisionEventMsg(const pb::Time* const timeMsg, const pb::PlayerCollisionEventMsg* const msg);
+   virtual void printPlayerCrashEventMsg(const pb::Time* const timeMsg, const pb::PlayerCrashEventMsg* const msg);
+   virtual void printPlayerKilledEventMsg(const pb::Time* const timeMsg, const pb::PlayerKilledEventMsg* const msg);
+   virtual void printWeaponReleaseEventMsg(const pb::Time* const timeMsg, const pb::WeaponReleaseEventMsg* const msg);
+   virtual void printWeaponHungEventMsg(const pb::Time* const timeMsg, const pb::WeaponHungEventMsg* const msg);
+   virtual void printWeaponDetonationEventMsg(const pb::Time* const timeMsg, const pb::WeaponDetonationEventMsg* const msg);
+   virtual void printGunFiredEventMsg(const pb::Time* const timeMsg, const pb::GunFiredEventMsg* const msg);
+   virtual void printNewTrackEventMsg(const pb::Time* const timeMsg, const pb::NewTrackEventMsg* const msg);
+   virtual void printTrackRemovedEventMsg(const pb::Time* const timeMsg, const pb::TrackRemovedEventMsg* const msg);
+   virtual void printTrackDataMsg(const pb::Time* const timeMsg, const pb::TrackDataMsg* const msg);
+   virtual void printMarkerMsg(const pb::Time* const timeMsg, const pb::MarkerMsg* const msg);
+   virtual void printInputDeviceMsg(const pb::Time* const timeMsg, const pb::InputDeviceMsg* const msg, const  unsigned int msgId);
 
    // Events without messages
-   virtual void printUnhandledIdToken(const Pb::Time* const timeMsg);
-   virtual void printEndOfData(const Pb::Time* const timeMsg);
-   virtual void printResetEvent(const Pb::Time* const timeMsg);
+   virtual void printUnhandledIdToken(const pb::Time* const timeMsg);
+   virtual void printEndOfData(const pb::Time* const timeMsg);
+   virtual void printResetEvent(const pb::Time* const timeMsg);
 
    // Common Data Messages
-   virtual void printTimeMsg(std::ostream& sout, const Pb::Time* const timeMsg);
-   virtual void printPlayerIdMsg(std::ostream& sout, const Pb::PlayerId* const playerIdMsg);
-   virtual void printPlayerStateMsg(std::ostream& sout, const Pb::PlayerState* const playerStateMsg);
-   virtual void printCommonTrackDataMsg(std::ostream& sout, const Pb::TrackData* const msg);
-   virtual void printEmissionDataMsg(std::ostream& sout, const Pb::EmissionData* const msg);
+   virtual void printTimeMsg(std::ostream& sout, const pb::Time* const timeMsg);
+   virtual void printPlayerIdMsg(std::ostream& sout, const pb::PlayerId* const playerIdMsg);
+   virtual void printPlayerStateMsg(std::ostream& sout, const pb::PlayerState* const playerStateMsg);
+   virtual void printCommonTrackDataMsg(std::ostream& sout, const pb::TrackData* const msg);
+   virtual void printEmissionDataMsg(std::ostream& sout, const pb::EmissionData* const msg);
 
    // Message Field Header functions
    virtual void printTimeMsgHdr(std::ostream& sout);

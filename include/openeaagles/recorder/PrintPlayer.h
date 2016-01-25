@@ -12,7 +12,7 @@
 
 namespace oe {
 namespace recorder {
-   namespace Pb {
+   namespace pb {
       class Time; class FileIdMsg; class NewPlayerEventMsg; class PlayerRemovedEventMsg; class PlayerDataMsg;
       class PlayerDamagedEventMsg; class PlayerCollisionEventMsg; class PlayerCrashEventMsg;
       class PlayerKilledEventMsg; class WeaponReleaseEventMsg; class WeaponHungEventMsg;

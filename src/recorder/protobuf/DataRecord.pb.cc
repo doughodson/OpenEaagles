@@ -18,7 +18,7 @@
 
 namespace oe {
 namespace recorder {
-namespace Pb {
+namespace pb {
 
 namespace {
 
@@ -959,25 +959,25 @@ DataRecord::DataRecord()
 }
 
 void DataRecord::InitAsDefaultInstance() {
-  time_ = const_cast< ::oe::recorder::Pb::Time*>(&::oe::recorder::Pb::Time::default_instance());
-  file_id_msg_ = const_cast< ::oe::recorder::Pb::FileIdMsg*>(&::oe::recorder::Pb::FileIdMsg::default_instance());
-  unknown_id_msg_ = const_cast< ::oe::recorder::Pb::UnknownIdMsg*>(&::oe::recorder::Pb::UnknownIdMsg::default_instance());
-  marker_msg_ = const_cast< ::oe::recorder::Pb::MarkerMsg*>(&::oe::recorder::Pb::MarkerMsg::default_instance());
-  input_device_msg_ = const_cast< ::oe::recorder::Pb::InputDeviceMsg*>(&::oe::recorder::Pb::InputDeviceMsg::default_instance());
-  new_player_event_msg_ = const_cast< ::oe::recorder::Pb::NewPlayerEventMsg*>(&::oe::recorder::Pb::NewPlayerEventMsg::default_instance());
-  player_removed_event_msg_ = const_cast< ::oe::recorder::Pb::PlayerRemovedEventMsg*>(&::oe::recorder::Pb::PlayerRemovedEventMsg::default_instance());
-  player_data_msg_ = const_cast< ::oe::recorder::Pb::PlayerDataMsg*>(&::oe::recorder::Pb::PlayerDataMsg::default_instance());
-  player_damaged_event_msg_ = const_cast< ::oe::recorder::Pb::PlayerDamagedEventMsg*>(&::oe::recorder::Pb::PlayerDamagedEventMsg::default_instance());
-  player_collision_event_msg_ = const_cast< ::oe::recorder::Pb::PlayerCollisionEventMsg*>(&::oe::recorder::Pb::PlayerCollisionEventMsg::default_instance());
-  player_crash_event_msg_ = const_cast< ::oe::recorder::Pb::PlayerCrashEventMsg*>(&::oe::recorder::Pb::PlayerCrashEventMsg::default_instance());
-  player_killed_event_msg_ = const_cast< ::oe::recorder::Pb::PlayerKilledEventMsg*>(&::oe::recorder::Pb::PlayerKilledEventMsg::default_instance());
-  weapon_release_event_msg_ = const_cast< ::oe::recorder::Pb::WeaponReleaseEventMsg*>(&::oe::recorder::Pb::WeaponReleaseEventMsg::default_instance());
-  weapon_hung_event_msg_ = const_cast< ::oe::recorder::Pb::WeaponHungEventMsg*>(&::oe::recorder::Pb::WeaponHungEventMsg::default_instance());
-  weapon_detonation_event_msg_ = const_cast< ::oe::recorder::Pb::WeaponDetonationEventMsg*>(&::oe::recorder::Pb::WeaponDetonationEventMsg::default_instance());
-  gun_fired_event_msg_ = const_cast< ::oe::recorder::Pb::GunFiredEventMsg*>(&::oe::recorder::Pb::GunFiredEventMsg::default_instance());
-  new_track_event_msg_ = const_cast< ::oe::recorder::Pb::NewTrackEventMsg*>(&::oe::recorder::Pb::NewTrackEventMsg::default_instance());
-  track_removed_event_msg_ = const_cast< ::oe::recorder::Pb::TrackRemovedEventMsg*>(&::oe::recorder::Pb::TrackRemovedEventMsg::default_instance());
-  track_data_msg_ = const_cast< ::oe::recorder::Pb::TrackDataMsg*>(&::oe::recorder::Pb::TrackDataMsg::default_instance());
+  time_ = const_cast< ::oe::recorder::pb::Time*>(&::oe::recorder::pb::Time::default_instance());
+  file_id_msg_ = const_cast< ::oe::recorder::pb::FileIdMsg*>(&::oe::recorder::pb::FileIdMsg::default_instance());
+  unknown_id_msg_ = const_cast< ::oe::recorder::pb::UnknownIdMsg*>(&::oe::recorder::pb::UnknownIdMsg::default_instance());
+  marker_msg_ = const_cast< ::oe::recorder::pb::MarkerMsg*>(&::oe::recorder::pb::MarkerMsg::default_instance());
+  input_device_msg_ = const_cast< ::oe::recorder::pb::InputDeviceMsg*>(&::oe::recorder::pb::InputDeviceMsg::default_instance());
+  new_player_event_msg_ = const_cast< ::oe::recorder::pb::NewPlayerEventMsg*>(&::oe::recorder::pb::NewPlayerEventMsg::default_instance());
+  player_removed_event_msg_ = const_cast< ::oe::recorder::pb::PlayerRemovedEventMsg*>(&::oe::recorder::pb::PlayerRemovedEventMsg::default_instance());
+  player_data_msg_ = const_cast< ::oe::recorder::pb::PlayerDataMsg*>(&::oe::recorder::pb::PlayerDataMsg::default_instance());
+  player_damaged_event_msg_ = const_cast< ::oe::recorder::pb::PlayerDamagedEventMsg*>(&::oe::recorder::pb::PlayerDamagedEventMsg::default_instance());
+  player_collision_event_msg_ = const_cast< ::oe::recorder::pb::PlayerCollisionEventMsg*>(&::oe::recorder::pb::PlayerCollisionEventMsg::default_instance());
+  player_crash_event_msg_ = const_cast< ::oe::recorder::pb::PlayerCrashEventMsg*>(&::oe::recorder::pb::PlayerCrashEventMsg::default_instance());
+  player_killed_event_msg_ = const_cast< ::oe::recorder::pb::PlayerKilledEventMsg*>(&::oe::recorder::pb::PlayerKilledEventMsg::default_instance());
+  weapon_release_event_msg_ = const_cast< ::oe::recorder::pb::WeaponReleaseEventMsg*>(&::oe::recorder::pb::WeaponReleaseEventMsg::default_instance());
+  weapon_hung_event_msg_ = const_cast< ::oe::recorder::pb::WeaponHungEventMsg*>(&::oe::recorder::pb::WeaponHungEventMsg::default_instance());
+  weapon_detonation_event_msg_ = const_cast< ::oe::recorder::pb::WeaponDetonationEventMsg*>(&::oe::recorder::pb::WeaponDetonationEventMsg::default_instance());
+  gun_fired_event_msg_ = const_cast< ::oe::recorder::pb::GunFiredEventMsg*>(&::oe::recorder::pb::GunFiredEventMsg::default_instance());
+  new_track_event_msg_ = const_cast< ::oe::recorder::pb::NewTrackEventMsg*>(&::oe::recorder::pb::NewTrackEventMsg::default_instance());
+  track_removed_event_msg_ = const_cast< ::oe::recorder::pb::TrackRemovedEventMsg*>(&::oe::recorder::pb::TrackRemovedEventMsg::default_instance());
+  track_data_msg_ = const_cast< ::oe::recorder::pb::TrackDataMsg*>(&::oe::recorder::pb::TrackDataMsg::default_instance());
 }
 
 DataRecord::DataRecord(const DataRecord& from)
@@ -1066,66 +1066,66 @@ void DataRecord::Clear() {
   _extensions_.Clear();
   if (_has_bits_[0 / 32] & 255) {
     if (has_time()) {
-      if (time_ != NULL) time_->::oe::recorder::Pb::Time::Clear();
+      if (time_ != NULL) time_->::oe::recorder::pb::Time::Clear();
     }
     id_ = 0u;
     if (has_file_id_msg()) {
-      if (file_id_msg_ != NULL) file_id_msg_->::oe::recorder::Pb::FileIdMsg::Clear();
+      if (file_id_msg_ != NULL) file_id_msg_->::oe::recorder::pb::FileIdMsg::Clear();
     }
     if (has_unknown_id_msg()) {
-      if (unknown_id_msg_ != NULL) unknown_id_msg_->::oe::recorder::Pb::UnknownIdMsg::Clear();
+      if (unknown_id_msg_ != NULL) unknown_id_msg_->::oe::recorder::pb::UnknownIdMsg::Clear();
     }
     if (has_marker_msg()) {
-      if (marker_msg_ != NULL) marker_msg_->::oe::recorder::Pb::MarkerMsg::Clear();
+      if (marker_msg_ != NULL) marker_msg_->::oe::recorder::pb::MarkerMsg::Clear();
     }
     if (has_input_device_msg()) {
-      if (input_device_msg_ != NULL) input_device_msg_->::oe::recorder::Pb::InputDeviceMsg::Clear();
+      if (input_device_msg_ != NULL) input_device_msg_->::oe::recorder::pb::InputDeviceMsg::Clear();
     }
     if (has_new_player_event_msg()) {
-      if (new_player_event_msg_ != NULL) new_player_event_msg_->::oe::recorder::Pb::NewPlayerEventMsg::Clear();
+      if (new_player_event_msg_ != NULL) new_player_event_msg_->::oe::recorder::pb::NewPlayerEventMsg::Clear();
     }
     if (has_player_removed_event_msg()) {
-      if (player_removed_event_msg_ != NULL) player_removed_event_msg_->::oe::recorder::Pb::PlayerRemovedEventMsg::Clear();
+      if (player_removed_event_msg_ != NULL) player_removed_event_msg_->::oe::recorder::pb::PlayerRemovedEventMsg::Clear();
     }
   }
   if (_has_bits_[8 / 32] & 65280) {
     if (has_player_data_msg()) {
-      if (player_data_msg_ != NULL) player_data_msg_->::oe::recorder::Pb::PlayerDataMsg::Clear();
+      if (player_data_msg_ != NULL) player_data_msg_->::oe::recorder::pb::PlayerDataMsg::Clear();
     }
     if (has_player_damaged_event_msg()) {
-      if (player_damaged_event_msg_ != NULL) player_damaged_event_msg_->::oe::recorder::Pb::PlayerDamagedEventMsg::Clear();
+      if (player_damaged_event_msg_ != NULL) player_damaged_event_msg_->::oe::recorder::pb::PlayerDamagedEventMsg::Clear();
     }
     if (has_player_collision_event_msg()) {
-      if (player_collision_event_msg_ != NULL) player_collision_event_msg_->::oe::recorder::Pb::PlayerCollisionEventMsg::Clear();
+      if (player_collision_event_msg_ != NULL) player_collision_event_msg_->::oe::recorder::pb::PlayerCollisionEventMsg::Clear();
     }
     if (has_player_crash_event_msg()) {
-      if (player_crash_event_msg_ != NULL) player_crash_event_msg_->::oe::recorder::Pb::PlayerCrashEventMsg::Clear();
+      if (player_crash_event_msg_ != NULL) player_crash_event_msg_->::oe::recorder::pb::PlayerCrashEventMsg::Clear();
     }
     if (has_player_killed_event_msg()) {
-      if (player_killed_event_msg_ != NULL) player_killed_event_msg_->::oe::recorder::Pb::PlayerKilledEventMsg::Clear();
+      if (player_killed_event_msg_ != NULL) player_killed_event_msg_->::oe::recorder::pb::PlayerKilledEventMsg::Clear();
     }
     if (has_weapon_release_event_msg()) {
-      if (weapon_release_event_msg_ != NULL) weapon_release_event_msg_->::oe::recorder::Pb::WeaponReleaseEventMsg::Clear();
+      if (weapon_release_event_msg_ != NULL) weapon_release_event_msg_->::oe::recorder::pb::WeaponReleaseEventMsg::Clear();
     }
     if (has_weapon_hung_event_msg()) {
-      if (weapon_hung_event_msg_ != NULL) weapon_hung_event_msg_->::oe::recorder::Pb::WeaponHungEventMsg::Clear();
+      if (weapon_hung_event_msg_ != NULL) weapon_hung_event_msg_->::oe::recorder::pb::WeaponHungEventMsg::Clear();
     }
     if (has_weapon_detonation_event_msg()) {
-      if (weapon_detonation_event_msg_ != NULL) weapon_detonation_event_msg_->::oe::recorder::Pb::WeaponDetonationEventMsg::Clear();
+      if (weapon_detonation_event_msg_ != NULL) weapon_detonation_event_msg_->::oe::recorder::pb::WeaponDetonationEventMsg::Clear();
     }
   }
   if (_has_bits_[16 / 32] & 983040) {
     if (has_gun_fired_event_msg()) {
-      if (gun_fired_event_msg_ != NULL) gun_fired_event_msg_->::oe::recorder::Pb::GunFiredEventMsg::Clear();
+      if (gun_fired_event_msg_ != NULL) gun_fired_event_msg_->::oe::recorder::pb::GunFiredEventMsg::Clear();
     }
     if (has_new_track_event_msg()) {
-      if (new_track_event_msg_ != NULL) new_track_event_msg_->::oe::recorder::Pb::NewTrackEventMsg::Clear();
+      if (new_track_event_msg_ != NULL) new_track_event_msg_->::oe::recorder::pb::NewTrackEventMsg::Clear();
     }
     if (has_track_removed_event_msg()) {
-      if (track_removed_event_msg_ != NULL) track_removed_event_msg_->::oe::recorder::Pb::TrackRemovedEventMsg::Clear();
+      if (track_removed_event_msg_ != NULL) track_removed_event_msg_->::oe::recorder::pb::TrackRemovedEventMsg::Clear();
     }
     if (has_track_data_msg()) {
-      if (track_data_msg_ != NULL) track_data_msg_->::oe::recorder::Pb::TrackDataMsg::Clear();
+      if (track_data_msg_ != NULL) track_data_msg_->::oe::recorder::pb::TrackDataMsg::Clear();
     }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -1903,68 +1903,68 @@ void DataRecord::MergeFrom(const DataRecord& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_time()) {
-      mutable_time()->::oe::recorder::Pb::Time::MergeFrom(from.time());
+      mutable_time()->::oe::recorder::pb::Time::MergeFrom(from.time());
     }
     if (from.has_id()) {
       set_id(from.id());
     }
     if (from.has_file_id_msg()) {
-      mutable_file_id_msg()->::oe::recorder::Pb::FileIdMsg::MergeFrom(from.file_id_msg());
+      mutable_file_id_msg()->::oe::recorder::pb::FileIdMsg::MergeFrom(from.file_id_msg());
     }
     if (from.has_unknown_id_msg()) {
-      mutable_unknown_id_msg()->::oe::recorder::Pb::UnknownIdMsg::MergeFrom(from.unknown_id_msg());
+      mutable_unknown_id_msg()->::oe::recorder::pb::UnknownIdMsg::MergeFrom(from.unknown_id_msg());
     }
     if (from.has_marker_msg()) {
-      mutable_marker_msg()->::oe::recorder::Pb::MarkerMsg::MergeFrom(from.marker_msg());
+      mutable_marker_msg()->::oe::recorder::pb::MarkerMsg::MergeFrom(from.marker_msg());
     }
     if (from.has_input_device_msg()) {
-      mutable_input_device_msg()->::oe::recorder::Pb::InputDeviceMsg::MergeFrom(from.input_device_msg());
+      mutable_input_device_msg()->::oe::recorder::pb::InputDeviceMsg::MergeFrom(from.input_device_msg());
     }
     if (from.has_new_player_event_msg()) {
-      mutable_new_player_event_msg()->::oe::recorder::Pb::NewPlayerEventMsg::MergeFrom(from.new_player_event_msg());
+      mutable_new_player_event_msg()->::oe::recorder::pb::NewPlayerEventMsg::MergeFrom(from.new_player_event_msg());
     }
     if (from.has_player_removed_event_msg()) {
-      mutable_player_removed_event_msg()->::oe::recorder::Pb::PlayerRemovedEventMsg::MergeFrom(from.player_removed_event_msg());
+      mutable_player_removed_event_msg()->::oe::recorder::pb::PlayerRemovedEventMsg::MergeFrom(from.player_removed_event_msg());
     }
   }
   if (from._has_bits_[8 / 32] & (0xffu << (8 % 32))) {
     if (from.has_player_data_msg()) {
-      mutable_player_data_msg()->::oe::recorder::Pb::PlayerDataMsg::MergeFrom(from.player_data_msg());
+      mutable_player_data_msg()->::oe::recorder::pb::PlayerDataMsg::MergeFrom(from.player_data_msg());
     }
     if (from.has_player_damaged_event_msg()) {
-      mutable_player_damaged_event_msg()->::oe::recorder::Pb::PlayerDamagedEventMsg::MergeFrom(from.player_damaged_event_msg());
+      mutable_player_damaged_event_msg()->::oe::recorder::pb::PlayerDamagedEventMsg::MergeFrom(from.player_damaged_event_msg());
     }
     if (from.has_player_collision_event_msg()) {
-      mutable_player_collision_event_msg()->::oe::recorder::Pb::PlayerCollisionEventMsg::MergeFrom(from.player_collision_event_msg());
+      mutable_player_collision_event_msg()->::oe::recorder::pb::PlayerCollisionEventMsg::MergeFrom(from.player_collision_event_msg());
     }
     if (from.has_player_crash_event_msg()) {
-      mutable_player_crash_event_msg()->::oe::recorder::Pb::PlayerCrashEventMsg::MergeFrom(from.player_crash_event_msg());
+      mutable_player_crash_event_msg()->::oe::recorder::pb::PlayerCrashEventMsg::MergeFrom(from.player_crash_event_msg());
     }
     if (from.has_player_killed_event_msg()) {
-      mutable_player_killed_event_msg()->::oe::recorder::Pb::PlayerKilledEventMsg::MergeFrom(from.player_killed_event_msg());
+      mutable_player_killed_event_msg()->::oe::recorder::pb::PlayerKilledEventMsg::MergeFrom(from.player_killed_event_msg());
     }
     if (from.has_weapon_release_event_msg()) {
-      mutable_weapon_release_event_msg()->::oe::recorder::Pb::WeaponReleaseEventMsg::MergeFrom(from.weapon_release_event_msg());
+      mutable_weapon_release_event_msg()->::oe::recorder::pb::WeaponReleaseEventMsg::MergeFrom(from.weapon_release_event_msg());
     }
     if (from.has_weapon_hung_event_msg()) {
-      mutable_weapon_hung_event_msg()->::oe::recorder::Pb::WeaponHungEventMsg::MergeFrom(from.weapon_hung_event_msg());
+      mutable_weapon_hung_event_msg()->::oe::recorder::pb::WeaponHungEventMsg::MergeFrom(from.weapon_hung_event_msg());
     }
     if (from.has_weapon_detonation_event_msg()) {
-      mutable_weapon_detonation_event_msg()->::oe::recorder::Pb::WeaponDetonationEventMsg::MergeFrom(from.weapon_detonation_event_msg());
+      mutable_weapon_detonation_event_msg()->::oe::recorder::pb::WeaponDetonationEventMsg::MergeFrom(from.weapon_detonation_event_msg());
     }
   }
   if (from._has_bits_[16 / 32] & (0xffu << (16 % 32))) {
     if (from.has_gun_fired_event_msg()) {
-      mutable_gun_fired_event_msg()->::oe::recorder::Pb::GunFiredEventMsg::MergeFrom(from.gun_fired_event_msg());
+      mutable_gun_fired_event_msg()->::oe::recorder::pb::GunFiredEventMsg::MergeFrom(from.gun_fired_event_msg());
     }
     if (from.has_new_track_event_msg()) {
-      mutable_new_track_event_msg()->::oe::recorder::Pb::NewTrackEventMsg::MergeFrom(from.new_track_event_msg());
+      mutable_new_track_event_msg()->::oe::recorder::pb::NewTrackEventMsg::MergeFrom(from.new_track_event_msg());
     }
     if (from.has_track_removed_event_msg()) {
-      mutable_track_removed_event_msg()->::oe::recorder::Pb::TrackRemovedEventMsg::MergeFrom(from.track_removed_event_msg());
+      mutable_track_removed_event_msg()->::oe::recorder::pb::TrackRemovedEventMsg::MergeFrom(from.track_removed_event_msg());
     }
     if (from.has_track_data_msg()) {
-      mutable_track_data_msg()->::oe::recorder::Pb::TrackDataMsg::MergeFrom(from.track_data_msg());
+      mutable_track_data_msg()->::oe::recorder::pb::TrackDataMsg::MergeFrom(from.track_data_msg());
     }
   }
   _extensions_.MergeFrom(from._extensions_);
@@ -3581,8 +3581,8 @@ NewPlayerEventMsg::NewPlayerEventMsg()
 }
 
 void NewPlayerEventMsg::InitAsDefaultInstance() {
-  id_ = const_cast< ::oe::recorder::Pb::PlayerId*>(&::oe::recorder::Pb::PlayerId::default_instance());
-  state_ = const_cast< ::oe::recorder::Pb::PlayerState*>(&::oe::recorder::Pb::PlayerState::default_instance());
+  id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
+  state_ = const_cast< ::oe::recorder::pb::PlayerState*>(&::oe::recorder::pb::PlayerState::default_instance());
 }
 
 NewPlayerEventMsg::NewPlayerEventMsg(const NewPlayerEventMsg& from)
@@ -3636,10 +3636,10 @@ void NewPlayerEventMsg::Clear() {
   _extensions_.Clear();
   if (_has_bits_[0 / 32] & 3) {
     if (has_id()) {
-      if (id_ != NULL) id_->::oe::recorder::Pb::PlayerId::Clear();
+      if (id_ != NULL) id_->::oe::recorder::pb::PlayerId::Clear();
     }
     if (has_state()) {
-      if (state_ != NULL) state_->::oe::recorder::Pb::PlayerState::Clear();
+      if (state_ != NULL) state_->::oe::recorder::pb::PlayerState::Clear();
     }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -3820,10 +3820,10 @@ void NewPlayerEventMsg::MergeFrom(const NewPlayerEventMsg& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_id()) {
-      mutable_id()->::oe::recorder::Pb::PlayerId::MergeFrom(from.id());
+      mutable_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.id());
     }
     if (from.has_state()) {
-      mutable_state()->::oe::recorder::Pb::PlayerState::MergeFrom(from.state());
+      mutable_state()->::oe::recorder::pb::PlayerState::MergeFrom(from.state());
     }
   }
   _extensions_.MergeFrom(from._extensions_);
@@ -3889,8 +3889,8 @@ PlayerRemovedEventMsg::PlayerRemovedEventMsg()
 }
 
 void PlayerRemovedEventMsg::InitAsDefaultInstance() {
-  id_ = const_cast< ::oe::recorder::Pb::PlayerId*>(&::oe::recorder::Pb::PlayerId::default_instance());
-  state_ = const_cast< ::oe::recorder::Pb::PlayerState*>(&::oe::recorder::Pb::PlayerState::default_instance());
+  id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
+  state_ = const_cast< ::oe::recorder::pb::PlayerState*>(&::oe::recorder::pb::PlayerState::default_instance());
 }
 
 PlayerRemovedEventMsg::PlayerRemovedEventMsg(const PlayerRemovedEventMsg& from)
@@ -3944,10 +3944,10 @@ void PlayerRemovedEventMsg::Clear() {
   _extensions_.Clear();
   if (_has_bits_[0 / 32] & 3) {
     if (has_id()) {
-      if (id_ != NULL) id_->::oe::recorder::Pb::PlayerId::Clear();
+      if (id_ != NULL) id_->::oe::recorder::pb::PlayerId::Clear();
     }
     if (has_state()) {
-      if (state_ != NULL) state_->::oe::recorder::Pb::PlayerState::Clear();
+      if (state_ != NULL) state_->::oe::recorder::pb::PlayerState::Clear();
     }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -4128,10 +4128,10 @@ void PlayerRemovedEventMsg::MergeFrom(const PlayerRemovedEventMsg& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_id()) {
-      mutable_id()->::oe::recorder::Pb::PlayerId::MergeFrom(from.id());
+      mutable_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.id());
     }
     if (from.has_state()) {
-      mutable_state()->::oe::recorder::Pb::PlayerState::MergeFrom(from.state());
+      mutable_state()->::oe::recorder::pb::PlayerState::MergeFrom(from.state());
     }
   }
   _extensions_.MergeFrom(from._extensions_);
@@ -4200,8 +4200,8 @@ PlayerDataMsg::PlayerDataMsg()
 }
 
 void PlayerDataMsg::InitAsDefaultInstance() {
-  id_ = const_cast< ::oe::recorder::Pb::PlayerId*>(&::oe::recorder::Pb::PlayerId::default_instance());
-  state_ = const_cast< ::oe::recorder::Pb::PlayerState*>(&::oe::recorder::Pb::PlayerState::default_instance());
+  id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
+  state_ = const_cast< ::oe::recorder::pb::PlayerState*>(&::oe::recorder::pb::PlayerState::default_instance());
 }
 
 PlayerDataMsg::PlayerDataMsg(const PlayerDataMsg& from)
@@ -4269,10 +4269,10 @@ void PlayerDataMsg::Clear() {
   if (_has_bits_[0 / 32] & 31) {
     ZR_(alpha_, cas_);
     if (has_id()) {
-      if (id_ != NULL) id_->::oe::recorder::Pb::PlayerId::Clear();
+      if (id_ != NULL) id_->::oe::recorder::pb::PlayerId::Clear();
     }
     if (has_state()) {
-      if (state_ != NULL) state_->::oe::recorder::Pb::PlayerState::Clear();
+      if (state_ != NULL) state_->::oe::recorder::pb::PlayerState::Clear();
     }
   }
 
@@ -4547,10 +4547,10 @@ void PlayerDataMsg::MergeFrom(const PlayerDataMsg& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_id()) {
-      mutable_id()->::oe::recorder::Pb::PlayerId::MergeFrom(from.id());
+      mutable_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.id());
     }
     if (from.has_state()) {
-      mutable_state()->::oe::recorder::Pb::PlayerState::MergeFrom(from.state());
+      mutable_state()->::oe::recorder::pb::PlayerState::MergeFrom(from.state());
     }
     if (from.has_alpha()) {
       set_alpha(from.alpha());
@@ -4628,8 +4628,8 @@ PlayerDamagedEventMsg::PlayerDamagedEventMsg()
 }
 
 void PlayerDamagedEventMsg::InitAsDefaultInstance() {
-  id_ = const_cast< ::oe::recorder::Pb::PlayerId*>(&::oe::recorder::Pb::PlayerId::default_instance());
-  state_ = const_cast< ::oe::recorder::Pb::PlayerState*>(&::oe::recorder::Pb::PlayerState::default_instance());
+  id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
+  state_ = const_cast< ::oe::recorder::pb::PlayerState*>(&::oe::recorder::pb::PlayerState::default_instance());
 }
 
 PlayerDamagedEventMsg::PlayerDamagedEventMsg(const PlayerDamagedEventMsg& from)
@@ -4683,10 +4683,10 @@ void PlayerDamagedEventMsg::Clear() {
   _extensions_.Clear();
   if (_has_bits_[0 / 32] & 3) {
     if (has_id()) {
-      if (id_ != NULL) id_->::oe::recorder::Pb::PlayerId::Clear();
+      if (id_ != NULL) id_->::oe::recorder::pb::PlayerId::Clear();
     }
     if (has_state()) {
-      if (state_ != NULL) state_->::oe::recorder::Pb::PlayerState::Clear();
+      if (state_ != NULL) state_->::oe::recorder::pb::PlayerState::Clear();
     }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -4867,10 +4867,10 @@ void PlayerDamagedEventMsg::MergeFrom(const PlayerDamagedEventMsg& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_id()) {
-      mutable_id()->::oe::recorder::Pb::PlayerId::MergeFrom(from.id());
+      mutable_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.id());
     }
     if (from.has_state()) {
-      mutable_state()->::oe::recorder::Pb::PlayerState::MergeFrom(from.state());
+      mutable_state()->::oe::recorder::pb::PlayerState::MergeFrom(from.state());
     }
   }
   _extensions_.MergeFrom(from._extensions_);
@@ -4937,9 +4937,9 @@ PlayerCollisionEventMsg::PlayerCollisionEventMsg()
 }
 
 void PlayerCollisionEventMsg::InitAsDefaultInstance() {
-  id_ = const_cast< ::oe::recorder::Pb::PlayerId*>(&::oe::recorder::Pb::PlayerId::default_instance());
-  state_ = const_cast< ::oe::recorder::Pb::PlayerState*>(&::oe::recorder::Pb::PlayerState::default_instance());
-  other_player_id_ = const_cast< ::oe::recorder::Pb::PlayerId*>(&::oe::recorder::Pb::PlayerId::default_instance());
+  id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
+  state_ = const_cast< ::oe::recorder::pb::PlayerState*>(&::oe::recorder::pb::PlayerState::default_instance());
+  other_player_id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
 }
 
 PlayerCollisionEventMsg::PlayerCollisionEventMsg(const PlayerCollisionEventMsg& from)
@@ -4995,13 +4995,13 @@ void PlayerCollisionEventMsg::Clear() {
   _extensions_.Clear();
   if (_has_bits_[0 / 32] & 7) {
     if (has_id()) {
-      if (id_ != NULL) id_->::oe::recorder::Pb::PlayerId::Clear();
+      if (id_ != NULL) id_->::oe::recorder::pb::PlayerId::Clear();
     }
     if (has_state()) {
-      if (state_ != NULL) state_->::oe::recorder::Pb::PlayerState::Clear();
+      if (state_ != NULL) state_->::oe::recorder::pb::PlayerState::Clear();
     }
     if (has_other_player_id()) {
-      if (other_player_id_ != NULL) other_player_id_->::oe::recorder::Pb::PlayerId::Clear();
+      if (other_player_id_ != NULL) other_player_id_->::oe::recorder::pb::PlayerId::Clear();
     }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -5215,13 +5215,13 @@ void PlayerCollisionEventMsg::MergeFrom(const PlayerCollisionEventMsg& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_id()) {
-      mutable_id()->::oe::recorder::Pb::PlayerId::MergeFrom(from.id());
+      mutable_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.id());
     }
     if (from.has_state()) {
-      mutable_state()->::oe::recorder::Pb::PlayerState::MergeFrom(from.state());
+      mutable_state()->::oe::recorder::pb::PlayerState::MergeFrom(from.state());
     }
     if (from.has_other_player_id()) {
-      mutable_other_player_id()->::oe::recorder::Pb::PlayerId::MergeFrom(from.other_player_id());
+      mutable_other_player_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.other_player_id());
     }
   }
   _extensions_.MergeFrom(from._extensions_);
@@ -5291,8 +5291,8 @@ PlayerCrashEventMsg::PlayerCrashEventMsg()
 }
 
 void PlayerCrashEventMsg::InitAsDefaultInstance() {
-  id_ = const_cast< ::oe::recorder::Pb::PlayerId*>(&::oe::recorder::Pb::PlayerId::default_instance());
-  state_ = const_cast< ::oe::recorder::Pb::PlayerState*>(&::oe::recorder::Pb::PlayerState::default_instance());
+  id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
+  state_ = const_cast< ::oe::recorder::pb::PlayerState*>(&::oe::recorder::pb::PlayerState::default_instance());
 }
 
 PlayerCrashEventMsg::PlayerCrashEventMsg(const PlayerCrashEventMsg& from)
@@ -5346,10 +5346,10 @@ void PlayerCrashEventMsg::Clear() {
   _extensions_.Clear();
   if (_has_bits_[0 / 32] & 3) {
     if (has_id()) {
-      if (id_ != NULL) id_->::oe::recorder::Pb::PlayerId::Clear();
+      if (id_ != NULL) id_->::oe::recorder::pb::PlayerId::Clear();
     }
     if (has_state()) {
-      if (state_ != NULL) state_->::oe::recorder::Pb::PlayerState::Clear();
+      if (state_ != NULL) state_->::oe::recorder::pb::PlayerState::Clear();
     }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -5530,10 +5530,10 @@ void PlayerCrashEventMsg::MergeFrom(const PlayerCrashEventMsg& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_id()) {
-      mutable_id()->::oe::recorder::Pb::PlayerId::MergeFrom(from.id());
+      mutable_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.id());
     }
     if (from.has_state()) {
-      mutable_state()->::oe::recorder::Pb::PlayerState::MergeFrom(from.state());
+      mutable_state()->::oe::recorder::pb::PlayerState::MergeFrom(from.state());
     }
   }
   _extensions_.MergeFrom(from._extensions_);
@@ -5600,9 +5600,9 @@ PlayerKilledEventMsg::PlayerKilledEventMsg()
 }
 
 void PlayerKilledEventMsg::InitAsDefaultInstance() {
-  id_ = const_cast< ::oe::recorder::Pb::PlayerId*>(&::oe::recorder::Pb::PlayerId::default_instance());
-  state_ = const_cast< ::oe::recorder::Pb::PlayerState*>(&::oe::recorder::Pb::PlayerState::default_instance());
-  shooter_id_ = const_cast< ::oe::recorder::Pb::PlayerId*>(&::oe::recorder::Pb::PlayerId::default_instance());
+  id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
+  state_ = const_cast< ::oe::recorder::pb::PlayerState*>(&::oe::recorder::pb::PlayerState::default_instance());
+  shooter_id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
 }
 
 PlayerKilledEventMsg::PlayerKilledEventMsg(const PlayerKilledEventMsg& from)
@@ -5658,13 +5658,13 @@ void PlayerKilledEventMsg::Clear() {
   _extensions_.Clear();
   if (_has_bits_[0 / 32] & 7) {
     if (has_id()) {
-      if (id_ != NULL) id_->::oe::recorder::Pb::PlayerId::Clear();
+      if (id_ != NULL) id_->::oe::recorder::pb::PlayerId::Clear();
     }
     if (has_state()) {
-      if (state_ != NULL) state_->::oe::recorder::Pb::PlayerState::Clear();
+      if (state_ != NULL) state_->::oe::recorder::pb::PlayerState::Clear();
     }
     if (has_shooter_id()) {
-      if (shooter_id_ != NULL) shooter_id_->::oe::recorder::Pb::PlayerId::Clear();
+      if (shooter_id_ != NULL) shooter_id_->::oe::recorder::pb::PlayerId::Clear();
     }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -5878,13 +5878,13 @@ void PlayerKilledEventMsg::MergeFrom(const PlayerKilledEventMsg& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_id()) {
-      mutable_id()->::oe::recorder::Pb::PlayerId::MergeFrom(from.id());
+      mutable_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.id());
     }
     if (from.has_state()) {
-      mutable_state()->::oe::recorder::Pb::PlayerState::MergeFrom(from.state());
+      mutable_state()->::oe::recorder::pb::PlayerState::MergeFrom(from.state());
     }
     if (from.has_shooter_id()) {
-      mutable_shooter_id()->::oe::recorder::Pb::PlayerId::MergeFrom(from.shooter_id());
+      mutable_shooter_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.shooter_id());
     }
   }
   _extensions_.MergeFrom(from._extensions_);
@@ -5956,10 +5956,10 @@ WeaponReleaseEventMsg::WeaponReleaseEventMsg()
 }
 
 void WeaponReleaseEventMsg::InitAsDefaultInstance() {
-  wpn_id_ = const_cast< ::oe::recorder::Pb::PlayerId*>(&::oe::recorder::Pb::PlayerId::default_instance());
-  wpn_state_ = const_cast< ::oe::recorder::Pb::PlayerState*>(&::oe::recorder::Pb::PlayerState::default_instance());
-  shooter_id_ = const_cast< ::oe::recorder::Pb::PlayerId*>(&::oe::recorder::Pb::PlayerId::default_instance());
-  tgt_id_ = const_cast< ::oe::recorder::Pb::PlayerId*>(&::oe::recorder::Pb::PlayerId::default_instance());
+  wpn_id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
+  wpn_state_ = const_cast< ::oe::recorder::pb::PlayerState*>(&::oe::recorder::pb::PlayerState::default_instance());
+  shooter_id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
+  tgt_id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
 }
 
 WeaponReleaseEventMsg::WeaponReleaseEventMsg(const WeaponReleaseEventMsg& from)
@@ -6017,16 +6017,16 @@ void WeaponReleaseEventMsg::Clear() {
   _extensions_.Clear();
   if (_has_bits_[0 / 32] & 15) {
     if (has_wpn_id()) {
-      if (wpn_id_ != NULL) wpn_id_->::oe::recorder::Pb::PlayerId::Clear();
+      if (wpn_id_ != NULL) wpn_id_->::oe::recorder::pb::PlayerId::Clear();
     }
     if (has_wpn_state()) {
-      if (wpn_state_ != NULL) wpn_state_->::oe::recorder::Pb::PlayerState::Clear();
+      if (wpn_state_ != NULL) wpn_state_->::oe::recorder::pb::PlayerState::Clear();
     }
     if (has_shooter_id()) {
-      if (shooter_id_ != NULL) shooter_id_->::oe::recorder::Pb::PlayerId::Clear();
+      if (shooter_id_ != NULL) shooter_id_->::oe::recorder::pb::PlayerId::Clear();
     }
     if (has_tgt_id()) {
-      if (tgt_id_ != NULL) tgt_id_->::oe::recorder::Pb::PlayerId::Clear();
+      if (tgt_id_ != NULL) tgt_id_->::oe::recorder::pb::PlayerId::Clear();
     }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -6273,16 +6273,16 @@ void WeaponReleaseEventMsg::MergeFrom(const WeaponReleaseEventMsg& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_wpn_id()) {
-      mutable_wpn_id()->::oe::recorder::Pb::PlayerId::MergeFrom(from.wpn_id());
+      mutable_wpn_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.wpn_id());
     }
     if (from.has_wpn_state()) {
-      mutable_wpn_state()->::oe::recorder::Pb::PlayerState::MergeFrom(from.wpn_state());
+      mutable_wpn_state()->::oe::recorder::pb::PlayerState::MergeFrom(from.wpn_state());
     }
     if (from.has_shooter_id()) {
-      mutable_shooter_id()->::oe::recorder::Pb::PlayerId::MergeFrom(from.shooter_id());
+      mutable_shooter_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.shooter_id());
     }
     if (from.has_tgt_id()) {
-      mutable_tgt_id()->::oe::recorder::Pb::PlayerId::MergeFrom(from.tgt_id());
+      mutable_tgt_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.tgt_id());
     }
   }
   _extensions_.MergeFrom(from._extensions_);
@@ -6358,10 +6358,10 @@ WeaponHungEventMsg::WeaponHungEventMsg()
 }
 
 void WeaponHungEventMsg::InitAsDefaultInstance() {
-  wpn_id_ = const_cast< ::oe::recorder::Pb::PlayerId*>(&::oe::recorder::Pb::PlayerId::default_instance());
-  wpn_state_ = const_cast< ::oe::recorder::Pb::PlayerState*>(&::oe::recorder::Pb::PlayerState::default_instance());
-  shooter_id_ = const_cast< ::oe::recorder::Pb::PlayerId*>(&::oe::recorder::Pb::PlayerId::default_instance());
-  tgt_id_ = const_cast< ::oe::recorder::Pb::PlayerId*>(&::oe::recorder::Pb::PlayerId::default_instance());
+  wpn_id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
+  wpn_state_ = const_cast< ::oe::recorder::pb::PlayerState*>(&::oe::recorder::pb::PlayerState::default_instance());
+  shooter_id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
+  tgt_id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
 }
 
 WeaponHungEventMsg::WeaponHungEventMsg(const WeaponHungEventMsg& from)
@@ -6419,16 +6419,16 @@ void WeaponHungEventMsg::Clear() {
   _extensions_.Clear();
   if (_has_bits_[0 / 32] & 15) {
     if (has_wpn_id()) {
-      if (wpn_id_ != NULL) wpn_id_->::oe::recorder::Pb::PlayerId::Clear();
+      if (wpn_id_ != NULL) wpn_id_->::oe::recorder::pb::PlayerId::Clear();
     }
     if (has_wpn_state()) {
-      if (wpn_state_ != NULL) wpn_state_->::oe::recorder::Pb::PlayerState::Clear();
+      if (wpn_state_ != NULL) wpn_state_->::oe::recorder::pb::PlayerState::Clear();
     }
     if (has_shooter_id()) {
-      if (shooter_id_ != NULL) shooter_id_->::oe::recorder::Pb::PlayerId::Clear();
+      if (shooter_id_ != NULL) shooter_id_->::oe::recorder::pb::PlayerId::Clear();
     }
     if (has_tgt_id()) {
-      if (tgt_id_ != NULL) tgt_id_->::oe::recorder::Pb::PlayerId::Clear();
+      if (tgt_id_ != NULL) tgt_id_->::oe::recorder::pb::PlayerId::Clear();
     }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -6675,16 +6675,16 @@ void WeaponHungEventMsg::MergeFrom(const WeaponHungEventMsg& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_wpn_id()) {
-      mutable_wpn_id()->::oe::recorder::Pb::PlayerId::MergeFrom(from.wpn_id());
+      mutable_wpn_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.wpn_id());
     }
     if (from.has_wpn_state()) {
-      mutable_wpn_state()->::oe::recorder::Pb::PlayerState::MergeFrom(from.wpn_state());
+      mutable_wpn_state()->::oe::recorder::pb::PlayerState::MergeFrom(from.wpn_state());
     }
     if (from.has_shooter_id()) {
-      mutable_shooter_id()->::oe::recorder::Pb::PlayerId::MergeFrom(from.shooter_id());
+      mutable_shooter_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.shooter_id());
     }
     if (from.has_tgt_id()) {
-      mutable_tgt_id()->::oe::recorder::Pb::PlayerId::MergeFrom(from.tgt_id());
+      mutable_tgt_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.tgt_id());
     }
   }
   _extensions_.MergeFrom(from._extensions_);
@@ -6793,10 +6793,10 @@ WeaponDetonationEventMsg::WeaponDetonationEventMsg()
 }
 
 void WeaponDetonationEventMsg::InitAsDefaultInstance() {
-  wpn_id_ = const_cast< ::oe::recorder::Pb::PlayerId*>(&::oe::recorder::Pb::PlayerId::default_instance());
-  wpn_state_ = const_cast< ::oe::recorder::Pb::PlayerState*>(&::oe::recorder::Pb::PlayerState::default_instance());
-  shooter_id_ = const_cast< ::oe::recorder::Pb::PlayerId*>(&::oe::recorder::Pb::PlayerId::default_instance());
-  tgt_id_ = const_cast< ::oe::recorder::Pb::PlayerId*>(&::oe::recorder::Pb::PlayerId::default_instance());
+  wpn_id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
+  wpn_state_ = const_cast< ::oe::recorder::pb::PlayerState*>(&::oe::recorder::pb::PlayerState::default_instance());
+  shooter_id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
+  tgt_id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
 }
 
 WeaponDetonationEventMsg::WeaponDetonationEventMsg(const WeaponDetonationEventMsg& from)
@@ -6867,16 +6867,16 @@ void WeaponDetonationEventMsg::Clear() {
   if (_has_bits_[0 / 32] & 63) {
     ZR_(miss_dist_, det_type_);
     if (has_wpn_id()) {
-      if (wpn_id_ != NULL) wpn_id_->::oe::recorder::Pb::PlayerId::Clear();
+      if (wpn_id_ != NULL) wpn_id_->::oe::recorder::pb::PlayerId::Clear();
     }
     if (has_wpn_state()) {
-      if (wpn_state_ != NULL) wpn_state_->::oe::recorder::Pb::PlayerState::Clear();
+      if (wpn_state_ != NULL) wpn_state_->::oe::recorder::pb::PlayerState::Clear();
     }
     if (has_shooter_id()) {
-      if (shooter_id_ != NULL) shooter_id_->::oe::recorder::Pb::PlayerId::Clear();
+      if (shooter_id_ != NULL) shooter_id_->::oe::recorder::pb::PlayerId::Clear();
     }
     if (has_tgt_id()) {
-      if (tgt_id_ != NULL) tgt_id_->::oe::recorder::Pb::PlayerId::Clear();
+      if (tgt_id_ != NULL) tgt_id_->::oe::recorder::pb::PlayerId::Clear();
     }
   }
 
@@ -6956,8 +6956,8 @@ bool WeaponDetonationEventMsg::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
-          if (::oe::recorder::Pb::WeaponDetonationEventMsg_DetonationType_IsValid(value)) {
-            set_det_type(static_cast< ::oe::recorder::Pb::WeaponDetonationEventMsg_DetonationType >(value));
+          if (::oe::recorder::pb::WeaponDetonationEventMsg_DetonationType_IsValid(value)) {
+            set_det_type(static_cast< ::oe::recorder::pb::WeaponDetonationEventMsg_DetonationType >(value));
           } else {
             mutable_unknown_fields()->AddVarint(5, value);
           }
@@ -7195,16 +7195,16 @@ void WeaponDetonationEventMsg::MergeFrom(const WeaponDetonationEventMsg& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_wpn_id()) {
-      mutable_wpn_id()->::oe::recorder::Pb::PlayerId::MergeFrom(from.wpn_id());
+      mutable_wpn_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.wpn_id());
     }
     if (from.has_wpn_state()) {
-      mutable_wpn_state()->::oe::recorder::Pb::PlayerState::MergeFrom(from.wpn_state());
+      mutable_wpn_state()->::oe::recorder::pb::PlayerState::MergeFrom(from.wpn_state());
     }
     if (from.has_shooter_id()) {
-      mutable_shooter_id()->::oe::recorder::Pb::PlayerId::MergeFrom(from.shooter_id());
+      mutable_shooter_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.shooter_id());
     }
     if (from.has_tgt_id()) {
-      mutable_tgt_id()->::oe::recorder::Pb::PlayerId::MergeFrom(from.tgt_id());
+      mutable_tgt_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.tgt_id());
     }
     if (from.has_det_type()) {
       set_det_type(from.det_type());
@@ -7286,7 +7286,7 @@ GunFiredEventMsg::GunFiredEventMsg()
 }
 
 void GunFiredEventMsg::InitAsDefaultInstance() {
-  shooter_id_ = const_cast< ::oe::recorder::Pb::PlayerId*>(&::oe::recorder::Pb::PlayerId::default_instance());
+  shooter_id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
 }
 
 GunFiredEventMsg::GunFiredEventMsg(const GunFiredEventMsg& from)
@@ -7339,7 +7339,7 @@ void GunFiredEventMsg::Clear() {
   _extensions_.Clear();
   if (_has_bits_[0 / 32] & 3) {
     if (has_shooter_id()) {
-      if (shooter_id_ != NULL) shooter_id_->::oe::recorder::Pb::PlayerId::Clear();
+      if (shooter_id_ != NULL) shooter_id_->::oe::recorder::pb::PlayerId::Clear();
     }
     rounds_ = 0u;
   }
@@ -7520,7 +7520,7 @@ void GunFiredEventMsg::MergeFrom(const GunFiredEventMsg& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_shooter_id()) {
-      mutable_shooter_id()->::oe::recorder::Pb::PlayerId::MergeFrom(from.shooter_id());
+      mutable_shooter_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.shooter_id());
     }
     if (from.has_rounds()) {
       set_rounds(from.rounds());
@@ -7591,12 +7591,12 @@ NewTrackEventMsg::NewTrackEventMsg()
 }
 
 void NewTrackEventMsg::InitAsDefaultInstance() {
-  player_id_ = const_cast< ::oe::recorder::Pb::PlayerId*>(&::oe::recorder::Pb::PlayerId::default_instance());
-  track_data_ = const_cast< ::oe::recorder::Pb::TrackData*>(&::oe::recorder::Pb::TrackData::default_instance());
-  player_state_ = const_cast< ::oe::recorder::Pb::PlayerState*>(&::oe::recorder::Pb::PlayerState::default_instance());
-  trk_player_id_ = const_cast< ::oe::recorder::Pb::PlayerId*>(&::oe::recorder::Pb::PlayerId::default_instance());
-  trk_player_state_ = const_cast< ::oe::recorder::Pb::PlayerState*>(&::oe::recorder::Pb::PlayerState::default_instance());
-  emission_data_ = const_cast< ::oe::recorder::Pb::EmissionData*>(&::oe::recorder::Pb::EmissionData::default_instance());
+  player_id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
+  track_data_ = const_cast< ::oe::recorder::pb::TrackData*>(&::oe::recorder::pb::TrackData::default_instance());
+  player_state_ = const_cast< ::oe::recorder::pb::PlayerState*>(&::oe::recorder::pb::PlayerState::default_instance());
+  trk_player_id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
+  trk_player_state_ = const_cast< ::oe::recorder::pb::PlayerState*>(&::oe::recorder::pb::PlayerState::default_instance());
+  emission_data_ = const_cast< ::oe::recorder::pb::EmissionData*>(&::oe::recorder::pb::EmissionData::default_instance());
 }
 
 NewTrackEventMsg::NewTrackEventMsg(const NewTrackEventMsg& from)
@@ -7663,7 +7663,7 @@ void NewTrackEventMsg::Clear() {
   _extensions_.Clear();
   if (_has_bits_[0 / 32] & 127) {
     if (has_player_id()) {
-      if (player_id_ != NULL) player_id_->::oe::recorder::Pb::PlayerId::Clear();
+      if (player_id_ != NULL) player_id_->::oe::recorder::pb::PlayerId::Clear();
     }
     if (has_track_id()) {
       if (track_id_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
@@ -7671,19 +7671,19 @@ void NewTrackEventMsg::Clear() {
       }
     }
     if (has_track_data()) {
-      if (track_data_ != NULL) track_data_->::oe::recorder::Pb::TrackData::Clear();
+      if (track_data_ != NULL) track_data_->::oe::recorder::pb::TrackData::Clear();
     }
     if (has_player_state()) {
-      if (player_state_ != NULL) player_state_->::oe::recorder::Pb::PlayerState::Clear();
+      if (player_state_ != NULL) player_state_->::oe::recorder::pb::PlayerState::Clear();
     }
     if (has_trk_player_id()) {
-      if (trk_player_id_ != NULL) trk_player_id_->::oe::recorder::Pb::PlayerId::Clear();
+      if (trk_player_id_ != NULL) trk_player_id_->::oe::recorder::pb::PlayerId::Clear();
     }
     if (has_trk_player_state()) {
-      if (trk_player_state_ != NULL) trk_player_state_->::oe::recorder::Pb::PlayerState::Clear();
+      if (trk_player_state_ != NULL) trk_player_state_->::oe::recorder::pb::PlayerState::Clear();
     }
     if (has_emission_data()) {
-      if (emission_data_ != NULL) emission_data_->::oe::recorder::Pb::EmissionData::Clear();
+      if (emission_data_ != NULL) emission_data_->::oe::recorder::pb::EmissionData::Clear();
     }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -8041,25 +8041,25 @@ void NewTrackEventMsg::MergeFrom(const NewTrackEventMsg& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_player_id()) {
-      mutable_player_id()->::oe::recorder::Pb::PlayerId::MergeFrom(from.player_id());
+      mutable_player_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.player_id());
     }
     if (from.has_track_id()) {
       set_track_id(from.track_id());
     }
     if (from.has_track_data()) {
-      mutable_track_data()->::oe::recorder::Pb::TrackData::MergeFrom(from.track_data());
+      mutable_track_data()->::oe::recorder::pb::TrackData::MergeFrom(from.track_data());
     }
     if (from.has_player_state()) {
-      mutable_player_state()->::oe::recorder::Pb::PlayerState::MergeFrom(from.player_state());
+      mutable_player_state()->::oe::recorder::pb::PlayerState::MergeFrom(from.player_state());
     }
     if (from.has_trk_player_id()) {
-      mutable_trk_player_id()->::oe::recorder::Pb::PlayerId::MergeFrom(from.trk_player_id());
+      mutable_trk_player_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.trk_player_id());
     }
     if (from.has_trk_player_state()) {
-      mutable_trk_player_state()->::oe::recorder::Pb::PlayerState::MergeFrom(from.trk_player_state());
+      mutable_trk_player_state()->::oe::recorder::pb::PlayerState::MergeFrom(from.trk_player_state());
     }
     if (from.has_emission_data()) {
-      mutable_emission_data()->::oe::recorder::Pb::EmissionData::MergeFrom(from.emission_data());
+      mutable_emission_data()->::oe::recorder::pb::EmissionData::MergeFrom(from.emission_data());
     }
   }
   _extensions_.MergeFrom(from._extensions_);
@@ -8142,7 +8142,7 @@ TrackRemovedEventMsg::TrackRemovedEventMsg()
 }
 
 void TrackRemovedEventMsg::InitAsDefaultInstance() {
-  player_id_ = const_cast< ::oe::recorder::Pb::PlayerId*>(&::oe::recorder::Pb::PlayerId::default_instance());
+  player_id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
 }
 
 TrackRemovedEventMsg::TrackRemovedEventMsg(const TrackRemovedEventMsg& from)
@@ -8199,7 +8199,7 @@ void TrackRemovedEventMsg::Clear() {
   _extensions_.Clear();
   if (_has_bits_[0 / 32] & 3) {
     if (has_player_id()) {
-      if (player_id_ != NULL) player_id_->::oe::recorder::Pb::PlayerId::Clear();
+      if (player_id_ != NULL) player_id_->::oe::recorder::pb::PlayerId::Clear();
     }
     if (has_track_id()) {
       if (track_id_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
@@ -8397,7 +8397,7 @@ void TrackRemovedEventMsg::MergeFrom(const TrackRemovedEventMsg& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_player_id()) {
-      mutable_player_id()->::oe::recorder::Pb::PlayerId::MergeFrom(from.player_id());
+      mutable_player_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.player_id());
     }
     if (from.has_track_id()) {
       set_track_id(from.track_id());
@@ -8468,12 +8468,12 @@ TrackDataMsg::TrackDataMsg()
 }
 
 void TrackDataMsg::InitAsDefaultInstance() {
-  player_id_ = const_cast< ::oe::recorder::Pb::PlayerId*>(&::oe::recorder::Pb::PlayerId::default_instance());
-  track_data_ = const_cast< ::oe::recorder::Pb::TrackData*>(&::oe::recorder::Pb::TrackData::default_instance());
-  player_state_ = const_cast< ::oe::recorder::Pb::PlayerState*>(&::oe::recorder::Pb::PlayerState::default_instance());
-  trk_player_id_ = const_cast< ::oe::recorder::Pb::PlayerId*>(&::oe::recorder::Pb::PlayerId::default_instance());
-  trk_player_state_ = const_cast< ::oe::recorder::Pb::PlayerState*>(&::oe::recorder::Pb::PlayerState::default_instance());
-  emission_data_ = const_cast< ::oe::recorder::Pb::EmissionData*>(&::oe::recorder::Pb::EmissionData::default_instance());
+  player_id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
+  track_data_ = const_cast< ::oe::recorder::pb::TrackData*>(&::oe::recorder::pb::TrackData::default_instance());
+  player_state_ = const_cast< ::oe::recorder::pb::PlayerState*>(&::oe::recorder::pb::PlayerState::default_instance());
+  trk_player_id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
+  trk_player_state_ = const_cast< ::oe::recorder::pb::PlayerState*>(&::oe::recorder::pb::PlayerState::default_instance());
+  emission_data_ = const_cast< ::oe::recorder::pb::EmissionData*>(&::oe::recorder::pb::EmissionData::default_instance());
 }
 
 TrackDataMsg::TrackDataMsg(const TrackDataMsg& from)
@@ -8540,7 +8540,7 @@ void TrackDataMsg::Clear() {
   _extensions_.Clear();
   if (_has_bits_[0 / 32] & 127) {
     if (has_player_id()) {
-      if (player_id_ != NULL) player_id_->::oe::recorder::Pb::PlayerId::Clear();
+      if (player_id_ != NULL) player_id_->::oe::recorder::pb::PlayerId::Clear();
     }
     if (has_track_id()) {
       if (track_id_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
@@ -8548,19 +8548,19 @@ void TrackDataMsg::Clear() {
       }
     }
     if (has_track_data()) {
-      if (track_data_ != NULL) track_data_->::oe::recorder::Pb::TrackData::Clear();
+      if (track_data_ != NULL) track_data_->::oe::recorder::pb::TrackData::Clear();
     }
     if (has_player_state()) {
-      if (player_state_ != NULL) player_state_->::oe::recorder::Pb::PlayerState::Clear();
+      if (player_state_ != NULL) player_state_->::oe::recorder::pb::PlayerState::Clear();
     }
     if (has_trk_player_id()) {
-      if (trk_player_id_ != NULL) trk_player_id_->::oe::recorder::Pb::PlayerId::Clear();
+      if (trk_player_id_ != NULL) trk_player_id_->::oe::recorder::pb::PlayerId::Clear();
     }
     if (has_trk_player_state()) {
-      if (trk_player_state_ != NULL) trk_player_state_->::oe::recorder::Pb::PlayerState::Clear();
+      if (trk_player_state_ != NULL) trk_player_state_->::oe::recorder::pb::PlayerState::Clear();
     }
     if (has_emission_data()) {
-      if (emission_data_ != NULL) emission_data_->::oe::recorder::Pb::EmissionData::Clear();
+      if (emission_data_ != NULL) emission_data_->::oe::recorder::pb::EmissionData::Clear();
     }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -8918,25 +8918,25 @@ void TrackDataMsg::MergeFrom(const TrackDataMsg& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_player_id()) {
-      mutable_player_id()->::oe::recorder::Pb::PlayerId::MergeFrom(from.player_id());
+      mutable_player_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.player_id());
     }
     if (from.has_track_id()) {
       set_track_id(from.track_id());
     }
     if (from.has_track_data()) {
-      mutable_track_data()->::oe::recorder::Pb::TrackData::MergeFrom(from.track_data());
+      mutable_track_data()->::oe::recorder::pb::TrackData::MergeFrom(from.track_data());
     }
     if (from.has_player_state()) {
-      mutable_player_state()->::oe::recorder::Pb::PlayerState::MergeFrom(from.player_state());
+      mutable_player_state()->::oe::recorder::pb::PlayerState::MergeFrom(from.player_state());
     }
     if (from.has_trk_player_id()) {
-      mutable_trk_player_id()->::oe::recorder::Pb::PlayerId::MergeFrom(from.trk_player_id());
+      mutable_trk_player_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.trk_player_id());
     }
     if (from.has_trk_player_state()) {
-      mutable_trk_player_state()->::oe::recorder::Pb::PlayerState::MergeFrom(from.trk_player_state());
+      mutable_trk_player_state()->::oe::recorder::pb::PlayerState::MergeFrom(from.trk_player_state());
     }
     if (from.has_emission_data()) {
-      mutable_emission_data()->::oe::recorder::Pb::EmissionData::MergeFrom(from.emission_data());
+      mutable_emission_data()->::oe::recorder::pb::EmissionData::MergeFrom(from.emission_data());
     }
   }
   _extensions_.MergeFrom(from._extensions_);
@@ -10221,9 +10221,9 @@ PlayerState::PlayerState()
 }
 
 void PlayerState::InitAsDefaultInstance() {
-  pos_ = const_cast< ::oe::recorder::Pb::Vector*>(&::oe::recorder::Pb::Vector::default_instance());
-  angles_ = const_cast< ::oe::recorder::Pb::Vector*>(&::oe::recorder::Pb::Vector::default_instance());
-  vel_ = const_cast< ::oe::recorder::Pb::Vector*>(&::oe::recorder::Pb::Vector::default_instance());
+  pos_ = const_cast< ::oe::recorder::pb::Vector*>(&::oe::recorder::pb::Vector::default_instance());
+  angles_ = const_cast< ::oe::recorder::pb::Vector*>(&::oe::recorder::pb::Vector::default_instance());
+  vel_ = const_cast< ::oe::recorder::pb::Vector*>(&::oe::recorder::pb::Vector::default_instance());
 }
 
 PlayerState::PlayerState(const PlayerState& from)
@@ -10280,13 +10280,13 @@ void PlayerState::Clear() {
   _extensions_.Clear();
   if (_has_bits_[0 / 32] & 15) {
     if (has_pos()) {
-      if (pos_ != NULL) pos_->::oe::recorder::Pb::Vector::Clear();
+      if (pos_ != NULL) pos_->::oe::recorder::pb::Vector::Clear();
     }
     if (has_angles()) {
-      if (angles_ != NULL) angles_->::oe::recorder::Pb::Vector::Clear();
+      if (angles_ != NULL) angles_->::oe::recorder::pb::Vector::Clear();
     }
     if (has_vel()) {
-      if (vel_ != NULL) vel_->::oe::recorder::Pb::Vector::Clear();
+      if (vel_ != NULL) vel_->::oe::recorder::pb::Vector::Clear();
     }
     damage_ = 0;
   }
@@ -10531,13 +10531,13 @@ void PlayerState::MergeFrom(const PlayerState& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_pos()) {
-      mutable_pos()->::oe::recorder::Pb::Vector::MergeFrom(from.pos());
+      mutable_pos()->::oe::recorder::pb::Vector::MergeFrom(from.pos());
     }
     if (from.has_angles()) {
-      mutable_angles()->::oe::recorder::Pb::Vector::MergeFrom(from.angles());
+      mutable_angles()->::oe::recorder::pb::Vector::MergeFrom(from.angles());
     }
     if (from.has_vel()) {
-      mutable_vel()->::oe::recorder::Pb::Vector::MergeFrom(from.vel());
+      mutable_vel()->::oe::recorder::pb::Vector::MergeFrom(from.vel());
     }
     if (from.has_damage()) {
       set_damage(from.damage());
@@ -10623,8 +10623,8 @@ TrackData::TrackData()
 }
 
 void TrackData::InitAsDefaultInstance() {
-  position_ = const_cast< ::oe::recorder::Pb::Vector*>(&::oe::recorder::Pb::Vector::default_instance());
-  velocity_ = const_cast< ::oe::recorder::Pb::Vector*>(&::oe::recorder::Pb::Vector::default_instance());
+  position_ = const_cast< ::oe::recorder::pb::Vector*>(&::oe::recorder::pb::Vector::default_instance());
+  velocity_ = const_cast< ::oe::recorder::pb::Vector*>(&::oe::recorder::pb::Vector::default_instance());
 }
 
 TrackData::TrackData(const TrackData& from)
@@ -10706,10 +10706,10 @@ void TrackData::Clear() {
     ZR_(avg_signal_, wpn_rel_);
     altitude_ = 0;
     if (has_position()) {
-      if (position_ != NULL) position_->::oe::recorder::Pb::Vector::Clear();
+      if (position_ != NULL) position_->::oe::recorder::pb::Vector::Clear();
     }
     if (has_velocity()) {
-      if (velocity_ != NULL) velocity_->::oe::recorder::Pb::Vector::Clear();
+      if (velocity_ != NULL) velocity_->::oe::recorder::pb::Vector::Clear();
     }
     sl_index_ = 0u;
   }
@@ -11290,10 +11290,10 @@ void TrackData::MergeFrom(const TrackData& from) {
       set_altitude(from.altitude());
     }
     if (from.has_position()) {
-      mutable_position()->::oe::recorder::Pb::Vector::MergeFrom(from.position());
+      mutable_position()->::oe::recorder::pb::Vector::MergeFrom(from.position());
     }
     if (from.has_velocity()) {
-      mutable_velocity()->::oe::recorder::Pb::Vector::MergeFrom(from.velocity());
+      mutable_velocity()->::oe::recorder::pb::Vector::MergeFrom(from.velocity());
     }
     if (from.has_avg_signal()) {
       set_avg_signal(from.avg_signal());
@@ -11417,8 +11417,8 @@ EmissionData::EmissionData()
 }
 
 void EmissionData::InitAsDefaultInstance() {
-  origin_id_ = const_cast< ::oe::recorder::Pb::PlayerId*>(&::oe::recorder::Pb::PlayerId::default_instance());
-  target_id_ = const_cast< ::oe::recorder::Pb::PlayerId*>(&::oe::recorder::Pb::PlayerId::default_instance());
+  origin_id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
+  target_id_ = const_cast< ::oe::recorder::pb::PlayerId*>(&::oe::recorder::pb::PlayerId::default_instance());
 }
 
 EmissionData::EmissionData(const EmissionData& from)
@@ -11496,10 +11496,10 @@ void EmissionData::Clear() {
   if (_has_bits_[8 / 32] & 1792) {
     elevation_aoi_ = 0;
     if (has_origin_id()) {
-      if (origin_id_ != NULL) origin_id_->::oe::recorder::Pb::PlayerId::Clear();
+      if (origin_id_ != NULL) origin_id_->::oe::recorder::pb::PlayerId::Clear();
     }
     if (has_target_id()) {
-      if (target_id_ != NULL) target_id_->::oe::recorder::Pb::PlayerId::Clear();
+      if (target_id_ != NULL) target_id_->::oe::recorder::pb::PlayerId::Clear();
     }
   }
 
@@ -11617,8 +11617,8 @@ bool EmissionData::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
-          if (::oe::recorder::Pb::EmissionData_Polarization_IsValid(value)) {
-            set_polarization(static_cast< ::oe::recorder::Pb::EmissionData_Polarization >(value));
+          if (::oe::recorder::pb::EmissionData_Polarization_IsValid(value)) {
+            set_polarization(static_cast< ::oe::recorder::pb::EmissionData_Polarization >(value));
           } else {
             mutable_unknown_fields()->AddVarint(7, value);
           }
@@ -11993,10 +11993,10 @@ void EmissionData::MergeFrom(const EmissionData& from) {
       set_elevation_aoi(from.elevation_aoi());
     }
     if (from.has_origin_id()) {
-      mutable_origin_id()->::oe::recorder::Pb::PlayerId::MergeFrom(from.origin_id());
+      mutable_origin_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.origin_id());
     }
     if (from.has_target_id()) {
-      mutable_target_id()->::oe::recorder::Pb::PlayerId::MergeFrom(from.target_id());
+      mutable_target_id()->::oe::recorder::pb::PlayerId::MergeFrom(from.target_id());
     }
   }
   _extensions_.MergeFrom(from._extensions_);
@@ -12058,7 +12058,7 @@ void EmissionData::Swap(EmissionData* other) {
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace Pb
+}  // namespace pb
 }  // namespace Recorder
 }  // namespace oe
 

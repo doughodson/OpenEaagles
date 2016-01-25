@@ -10,7 +10,7 @@ namespace oe {
 namespace recorder {
 
    // Main (protocol buffer) data record
-   namespace Pb { class DataRecord; }
+   namespace pb { class DataRecord; }
 
 //------------------------------------------------------------------------------
 // Class: DataRecordHandle
@@ -31,18 +31,18 @@ class DataRecordHandle : public basic::Object
     DECLARE_SUBCLASS(DataRecordHandle, basic::Object)
 
 public:
-   DataRecordHandle(Pb::DataRecord* const record);
+   DataRecordHandle(pb::DataRecord* const record);
 
-   const Pb::DataRecord* getRecord() const;
+   const pb::DataRecord* getRecord() const;
 
 protected:
    DataRecordHandle();  // Default Constructor
 
 private:
-   Pb::DataRecord* record;
+   pb::DataRecord* record;
 };
 
-inline const Pb::DataRecord* DataRecordHandle::getRecord() const { return record; }
+inline const pb::DataRecord* DataRecordHandle::getRecord() const { return record; }
 
 } // End recorder namespace
 } // End oe namespace
