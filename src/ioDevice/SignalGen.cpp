@@ -11,7 +11,7 @@
 #include <cmath>
 
 namespace oe {
-namespace IoDevice {
+namespace ioDevice {
 
 //==============================================================================
 // SignalGen
@@ -345,5 +345,5 @@ std::ostream& SignalGen::serialize(std::ostream& sout, const int i, const bool s
    return sout;
 }
 
-} // end IoDevice
+} // end ioDevice
 } // end oe namespace

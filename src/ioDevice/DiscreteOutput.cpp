@@ -8,7 +8,7 @@
 #include "openeaagles/basic/Number.h"
 
 namespace oe {
-namespace IoDevice {
+namespace ioDevice {
 
 //==============================================================================
 // DiscreteOutput
@@ -309,5 +309,5 @@ std::ostream& DiscreteOutput::serialize(std::ostream& sout, const int i, const b
    return sout;
 }
 
-} // end IoDevice
+} // end ioDevice
 } // end oe namespace

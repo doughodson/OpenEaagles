@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: UsbJoystickImp -- MS Windows implementation
 //------------------------------------------------------------------------------
-#ifndef __oe_IoDevice_Windows_UsbJoystickImp_H__
-#define __oe_IoDevice_Windows_UsbJoystickImp_H__
+#ifndef __oe_ioDevice_Windows_UsbJoystickImp_H__
+#define __oe_ioDevice_Windows_UsbJoystickImp_H__
 
 #include "openeaagles/ioDevice/UsbJoystick.h"
 
 namespace oe {
-namespace IoDevice {
+namespace ioDevice {
 
 //------------------------------------------------------------------------------
 // Class:  UsbJoystickImp
@@ -55,7 +55,7 @@ private:
 
 };
 
-} // end IoDevice
+} // end ioDevice
 } // end oe namespace
 
 #endif

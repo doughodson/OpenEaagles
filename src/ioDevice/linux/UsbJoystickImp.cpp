@@ -15,7 +15,7 @@
 #include "UsbJoystickImp.h"
 
 namespace oe {
-namespace IoDevice {
+namespace ioDevice {
 
 IMPLEMENT_SUBCLASS(UsbJoystickImp, "UsbJoystick")
 EMPTY_SLOTTABLE(UsbJoystickImp)
@@ -177,6 +177,6 @@ void UsbJoystickImp::processInputs(const oe::LCreal dt, basic::IoData* const pIn
    BaseClass::processInputs(dt,pInData);
 }
 
-} // IoDevice namespace
+} // ioDevice namespace
 } // end oe namespace
 

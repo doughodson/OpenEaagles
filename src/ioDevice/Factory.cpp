@@ -23,7 +23,7 @@
 #endif
 
 namespace oe {
-namespace IoDevice {
+namespace ioDevice {
 
 Factory::Factory()
 {}

@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: IoDevice
 //------------------------------------------------------------------------------
-#ifndef __oe_basic_IoDevice_H__
-#define __oe_basic_IoDevice_H__
+#ifndef __oe_basic_ioDevice_H__
+#define __oe_basic_ioDevice_H__
 
 #include "openeaagles/basic/Component.h"
 
@@ -96,7 +96,7 @@ private:
    safe_ptr<PairStream>  devices;    // Device list
 };
 
-} // end IoDevice namespace
+} // end ioDevice namespace
 } // end oe namespace
 
 #endif

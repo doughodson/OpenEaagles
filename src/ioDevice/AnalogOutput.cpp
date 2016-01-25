@@ -9,7 +9,7 @@
 #include "openeaagles/basic/functors/Tables.h"
 
 namespace oe {
-namespace IoDevice {
+namespace ioDevice {
 
 //==============================================================================
 // AnalogOutput
@@ -335,5 +335,5 @@ std::ostream& AnalogOutput::serialize(std::ostream& sout, const int i, const boo
    return sout;
 }
 
-} // end IoDevice
+} // end ioDevice
 } // end oe namespace

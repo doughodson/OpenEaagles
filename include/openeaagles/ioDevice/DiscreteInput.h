@@ -1,13 +1,13 @@
 
-#ifndef __oe_IoDevice_DiscreteInput_H__
-#define __oe_IoDevice_DiscreteInput_H__
+#ifndef __oe_ioDevice_DiscreteInput_H__
+#define __oe_ioDevice_DiscreteInput_H__
 
 #include "openeaagles/basic/IoAdapter.h"
 
 namespace oe {
    namespace basic { class Number; }
 
-namespace IoDevice {
+namespace ioDevice {
    class IoDevice;
 
 //------------------------------------------------------------------------------
@@ -72,7 +72,7 @@ private:
    int num;                // Number of DIs (neg for reverse order)
 };
 
-} // end IoDevice
+} // end ioDevice
 } // end oe namespace
 
 #endif

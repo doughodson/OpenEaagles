@@ -7,7 +7,7 @@
 #include "openeaagles/basic/Number.h"
 
 namespace oe {
-namespace IoDevice {
+namespace ioDevice {
 
 /* both the linux and windows version use the 'UsbJoystick' form name */
 IMPLEMENT_SUBCLASS(UsbJoystick,"CommonUsbJoystick")
@@ -189,6 +189,6 @@ std::ostream& UsbJoystick::serialize(std::ostream& sout, const int i, const bool
    return sout;
 }
 
-} // IoDevice namespace
+} // ioDevice namespace
 } // end oe namespace
 

@@ -1,6 +1,6 @@
 
-#ifndef __oe_IoDevice_IoData_H__
-#define __oe_IoDevice_IoData_H__
+#ifndef __oe_ioDevice_IoData_H__
+#define __oe_ioDevice_IoData_H__
 
 #include "openeaagles/basic/IoData.h"
 
@@ -8,7 +8,7 @@ namespace oe {
 
 namespace basic { class Number; }
 
-namespace IoDevice {
+namespace ioDevice {
 
 //------------------------------------------------------------------------------
 // Class:  IoData
@@ -76,7 +76,7 @@ private:
    bool*    doTable;    // DOs
 };
 
-} // end IoDevice
+} // end ioDevice
 } // end oe namespace
 
 #endif
