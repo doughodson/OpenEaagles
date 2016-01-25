@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: PrintHandler
 //------------------------------------------------------------------------------
-#ifndef __oe_Recorder_PrintHandler_H__
-#define __oe_Recorder_PrintHandler_H__
+#ifndef __oe_recorder_PrintHandler_H__
+#define __oe_recorder_PrintHandler_H__
 
 #include "openeaagles/recorder/OutputHandler.h"
 #include <string>
@@ -10,7 +10,7 @@
 #include <fstream>
 
 namespace oe {
-namespace Recorder {
+namespace recorder {
 
 //------------------------------------------------------------------------------
 // Class:   PrintHandler
@@ -75,7 +75,7 @@ private:
    bool fileEmpty;                  // Is the file opened and empty?
 };
 
-} // End Recorder namespace
+} // End recorder namespace
 } // End oe namespace
 
 #endif

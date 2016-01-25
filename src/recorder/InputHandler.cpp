@@ -4,7 +4,7 @@
 #include "openeaagles/recorder/protobuf/DataRecord.pb.h"
 
 namespace oe {
-namespace Recorder {
+namespace recorder {
 
 //==============================================================================
 // Class InputHandler
@@ -48,5 +48,5 @@ const DataRecordHandle* InputHandler::readRecord()
    return p;
 }
 
-} // End Recorder namespace
+} // End recorder namespace
 } // End oe namespace

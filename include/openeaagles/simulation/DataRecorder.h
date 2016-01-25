@@ -124,7 +124,7 @@ private:
 //    for implementing the recording 'hooks' in the simulation code.
 //
 //    2) The actual data recorder is implemented by the derived class
-//    oe::Recorder::DataRecorder (see "openeaagles/recorder/DataRecorder.h")
+//    oe::recorder::DataRecorder (see "openeaagles/recorder/DataRecorder.h")
 //
 //    3) Recorded data records are defined by their "recorder event id" tokens;
 //       (see openeaagles/simulation/dataRecorderTokens.h)

@@ -1,14 +1,14 @@
 //------------------------------------------------------------------------------
 // Class: FileWriter
 //------------------------------------------------------------------------------
-#ifndef __oe_Recorder_FileWriter_H__
-#define __oe_Recorder_FileWriter_H__
+#ifndef __oe_recorder_FileWriter_H__
+#define __oe_recorder_FileWriter_H__
 
 #include "openeaagles/recorder/OutputHandler.h"
 
 namespace oe {
    namespace basic { class String; }
-namespace Recorder {
+namespace recorder {
 
 //------------------------------------------------------------------------------
 // Class:   FileWriter
@@ -80,7 +80,7 @@ private:
    bool eodFlag;                    // REID_END_OF_DATA message has been written
 };
 
-} // End Recorder namespace
+} // End recorder namespace
 } // End oe namespace
 
 #endif

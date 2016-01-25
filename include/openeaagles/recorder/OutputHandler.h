@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: OutputHandler
 //------------------------------------------------------------------------------
-#ifndef __oe_Recorder_OutputHandler_H__
-#define __oe_Recorder_OutputHandler_H__
+#ifndef __oe_recorder_OutputHandler_H__
+#define __oe_recorder_OutputHandler_H__
 
 #include "openeaagles/simulation/DataRecorder.h"
 #include "openeaagles/basic/List.h"
@@ -10,7 +10,7 @@
 namespace oe {
    namespace basic { class List; }
 
-namespace Recorder {
+namespace recorder {
    class DataRecordHandle;
 
 //------------------------------------------------------------------------------
@@ -74,7 +74,7 @@ private:
    mutable long semaphore;
 };
 
-} // End Recorder namespace
+} // End recorder namespace
 } // End oe namespace
 
 #endif

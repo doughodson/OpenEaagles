@@ -3,7 +3,7 @@
 #include "openeaagles/recorder/protobuf/DataRecord.pb.h"
 
 namespace oe {
-namespace Recorder {
+namespace recorder {
 
 IMPLEMENT_SUBCLASS(DataRecordHandle,"DataRecordHandle")
 EMPTY_SLOTTABLE(DataRecordHandle)
@@ -44,5 +44,5 @@ void DataRecordHandle::deleteData()
    if (record != nullptr) { delete record;  record = nullptr; }
 }
 
-} // End Recorder namespace
+} // End recorder namespace
 } // End oe namespace

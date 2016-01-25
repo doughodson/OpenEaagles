@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: PrintPlayer
 //------------------------------------------------------------------------------
-#ifndef __oe_Recorder_PrintPlayer_H__
-#define __oe_Recorder_PrintPlayer_H__
+#ifndef __oe_recorder_PrintPlayer_H__
+#define __oe_recorder_PrintPlayer_H__
 
 #include "openeaagles/recorder/OutputHandler.h"
 #include "openeaagles/recorder/PrintHandler.h"
@@ -11,7 +11,7 @@
 #include <fstream>
 
 namespace oe {
-namespace Recorder {
+namespace recorder {
    namespace Pb {
       class Time; class FileIdMsg; class NewPlayerEventMsg; class PlayerRemovedEventMsg; class PlayerDataMsg;
       class PlayerDamagedEventMsg; class PlayerCollisionEventMsg; class PlayerCrashEventMsg;
@@ -49,7 +49,7 @@ private:
    const basic::String* name;    // Player name
 };
 
-} // End Recorder namespace
+} // End recorder namespace
 } // End oe namespace
 
 #endif

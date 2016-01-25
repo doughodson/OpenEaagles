@@ -15,7 +15,7 @@
 #endif
 
 namespace oe {
-namespace Recorder {
+namespace recorder {
 
 
 //==============================================================================
@@ -264,5 +264,5 @@ void PrintPlayer::processRecordImp(const DataRecordHandle* const handle)
 }
 
 
-} // End Recorder namespace
+} // End recorder namespace
 } // End oe namespace

@@ -18,7 +18,7 @@
 #include <cstring>
 
 namespace oe {
-namespace Recorder {
+namespace recorder {
 
 Factory::Factory()
 {}
@@ -48,7 +48,7 @@ basic::Object* Factory::createObj(const char* name)
     else if ( std::strcmp(name, PrintPlayer::getFactoryName()) == 0 ) {
         obj = new PrintPlayer();
     }
-    else if ( std::strcmp(name, DataRecorder::getFactoryName()) == 0 ) {
+    else if (std::strcmp(name, DataRecorder::getFactoryName()) == 0) {
         obj = new DataRecorder();
     }
     else if ( std::strcmp(name, PrintSelected::getFactoryName()) == 0 ) {

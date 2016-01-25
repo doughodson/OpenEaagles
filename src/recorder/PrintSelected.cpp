@@ -20,7 +20,7 @@
 #endif
 
 namespace oe {
-namespace Recorder {
+namespace recorder {
 
 
 //==============================================================================
@@ -800,5 +800,5 @@ std::string PrintSelected::printTimeMsg(double time)
 
 }
 
-} // End Recorder namespace
+} // End recorder namespace
 } // End oe namespace

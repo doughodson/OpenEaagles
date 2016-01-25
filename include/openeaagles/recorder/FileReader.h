@@ -1,14 +1,14 @@
 //------------------------------------------------------------------------------
 // Class: FileReader
 //------------------------------------------------------------------------------
-#ifndef __oe_Recorder_FileReader_H__
-#define __oe_Recorder_FileReader_H__
+#ifndef __oe_recorder_FileReader_H__
+#define __oe_recorder_FileReader_H__
 
 #include "openeaagles/recorder/InputHandler.h"
 
 namespace oe {
    namespace basic { class String; }
-namespace Recorder {
+namespace recorder {
 
 //------------------------------------------------------------------------------
 // Class:   FileReader
@@ -61,7 +61,7 @@ private:
    bool firstPassFlg;               // First pass flag
 };
 
-} // End Recorder namespace
+} // End recorder namespace
 } // End oe namespace
 
 #endif

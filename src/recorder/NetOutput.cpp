@@ -6,7 +6,7 @@
 #include "openeaagles/basic/Number.h"
 
 namespace oe {
-namespace Recorder {
+namespace recorder {
 
 //==============================================================================
 // Class NetOutput
@@ -177,5 +177,5 @@ oe::basic::Object* NetOutput::getSlotByIndex(const int si)
    return BaseClass::getSlotByIndex(si);
 }
 
-} // End Recorder namespace
+} // End recorder namespace
 } // End oe namespace

@@ -89,7 +89,7 @@ Station* DataRecorder::getStationImp()
    if (sta == nullptr) {
       sta = static_cast<Station*>(findContainerByType(typeid(Station)));
       if (sta == nullptr && isMessageEnabled(MSG_ERROR)) {
-         std::cerr << "DataRecorder::getStationImp(): ERROR, unable to locate the Station class!" << std::endl;
+         std::cerr << "Datarecorder::getStationImp(): ERROR, unable to locate the Station class!" << std::endl;
       }
    }
    return sta;

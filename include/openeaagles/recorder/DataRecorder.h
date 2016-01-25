@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Openoe Data Recorder
 //------------------------------------------------------------------------------
-#ifndef __oe_Recorder_DataRecorder_H__
-#define __oe_Recorder_DataRecorder_H__
+#ifndef __oe_recorder_DataRecorder_H__
+#define __oe_recorder_DataRecorder_H__
 
 #include "openeaagles/simulation/DataRecorder.h"
 
@@ -10,7 +10,7 @@ namespace oe {
    namespace Simulation { class Player; class Track; class Emission; }
    namespace basic { class String; }
 
-namespace Recorder {
+namespace recorder {
    namespace Pb { class DataRecord; class PlayerId; class PlayerState;
       class TrackData; class EmissionData; }
    class DataRecordHandle;
@@ -151,7 +151,7 @@ private:
 
 #include "openeaagles/recorder/DataRecorder.inl"
 
-} // End Recorder namespace
+} // End recorder namespace
 } // End oe namespace
 
 #endif

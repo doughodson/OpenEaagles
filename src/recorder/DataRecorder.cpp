@@ -27,7 +27,7 @@
 #endif
 
 namespace oe {
-namespace Recorder {
+namespace recorder {
 
 IMPLEMENT_SUBCLASS(DataRecorder,"DataRecorder")
 EMPTY_SERIALIZER(DataRecorder)
@@ -829,7 +829,7 @@ bool DataRecorder::recordTrackData(const basic::Object* objs[4], const double va
 //------------------------------------------------------------------------------
 // Generate the Player ID data
 //------------------------------------------------------------------------------
-void DataRecorder::genPlayerId( Pb::PlayerId* const id, const Simulation::Player* const player )
+void DataRecorder::genPlayerId(Pb::PlayerId* const id, const Simulation::Player* const player)
 {
    // Check for valid message pointer
    if (id != nullptr) {
@@ -860,7 +860,7 @@ void DataRecorder::genPlayerId( Pb::PlayerId* const id, const Simulation::Player
 //------------------------------------------------------------------------------
 // Generate the player state data
 //------------------------------------------------------------------------------
-void DataRecorder::genPlayerState( Pb::PlayerState* const state, const Simulation::Player* const player )
+void DataRecorder::genPlayerState(Pb::PlayerState* const state, const Simulation::Player* const player)
 {
    if (state != nullptr) {
       if (player != nullptr) {
@@ -900,7 +900,7 @@ void DataRecorder::genPlayerState( Pb::PlayerState* const state, const Simulatio
 //------------------------------------------------------------------------------
 // Generate the Track ID
 //------------------------------------------------------------------------------
-std::string DataRecorder::genTrackId( const Simulation::Track* const track )
+std::string DataRecorder::genTrackId(const Simulation::Track* const track)
 {
    std::string trackIdStr = "";
    if (track != nullptr) {
@@ -919,7 +919,7 @@ std::string DataRecorder::genTrackId( const Simulation::Track* const track )
 //------------------------------------------------------------------------------
 // Generate the Track data
 //------------------------------------------------------------------------------
-void DataRecorder::genTrackData( Pb::TrackData* const trkMsg, const Simulation::Track* const track )
+void DataRecorder::genTrackData(Pb::TrackData* const trkMsg, const Simulation::Track* const track)
 {
    if (trkMsg != nullptr) {
       if (track != nullptr) {
@@ -966,7 +966,7 @@ void DataRecorder::genTrackData( Pb::TrackData* const trkMsg, const Simulation::
 //------------------------------------------------------------------------------
 // Generate the Emission data
 //------------------------------------------------------------------------------
-void DataRecorder::genEmissionData( Pb::EmissionData* const emMsg, const Simulation::Emission* const emData)
+void DataRecorder::genEmissionData(Pb::EmissionData* const emMsg, const Simulation::Emission* const emData)
 {
    if (emMsg != nullptr) {
       if (emData != nullptr) {
@@ -1217,5 +1217,5 @@ basic::Object* DataRecorder::getSlotByIndex(const int si)
    return BaseClass::getSlotByIndex(si);
 }
 
-} // End Recorder namespace
+} // End recorder namespace
 } // End oe namespace

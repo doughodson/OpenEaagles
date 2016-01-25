@@ -13,7 +13,7 @@
 #endif
 
 namespace oe {
-namespace Recorder {
+namespace recorder {
 
 //==============================================================================
 // Class FileReader
@@ -352,5 +352,5 @@ std::ostream& FileReader::serialize(std::ostream& sout, const int i, const bool 
    return sout;
 }
 
-} // End Recorder namespace
+} // End recorder namespace
 } // End oe namespace

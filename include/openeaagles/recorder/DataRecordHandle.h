@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: DataRecordHandle
 //------------------------------------------------------------------------------
-#ifndef __oe_Recorder_DataRecordHandle_H__
-#define __oe_Recorder_DataRecordHandle_H__
+#ifndef __oe_recorder_DataRecordHandle_H__
+#define __oe_recorder_DataRecordHandle_H__
 
 #include "openeaagles/basic/Object.h"
 
 namespace oe {
-namespace Recorder {
+namespace recorder {
 
    // Main (protocol buffer) data record
    namespace Pb { class DataRecord; }
@@ -44,7 +44,7 @@ private:
 
 inline const Pb::DataRecord* DataRecordHandle::getRecord() const { return record; }
 
-} // End Recorder namespace
+} // End recorder namespace
 } // End oe namespace
 
 #endif

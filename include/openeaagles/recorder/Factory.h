@@ -3,14 +3,14 @@
 //
 // Description: Class factory
 //------------------------------------------------------------------------------
-#ifndef __oe_Recorder_Factory_H__
-#define __oe_Recorder_Factory_H__
+#ifndef __oe_recorder_Factory_H__
+#define __oe_recorder_Factory_H__
 
 namespace oe {
 
 namespace basic { class Object; }
 
-namespace Recorder {
+namespace recorder {
 
 class Factory
 {

@@ -7,7 +7,7 @@
 #include "openeaagles/basic/PairStream.h"
 
 namespace oe {
-namespace Recorder {
+namespace recorder {
 
 //==============================================================================
 // Class OutputHandler
@@ -177,5 +177,5 @@ void OutputHandler::processComponents(
    BaseClass::processComponents(list,typeid(OutputHandler),add,remove);
 }
 
-} // End Recorder namespace
+} // End recorder namespace
 } // End oe namespace

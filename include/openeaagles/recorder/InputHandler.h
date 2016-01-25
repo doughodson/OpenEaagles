@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: InputHandler
 //------------------------------------------------------------------------------
-#ifndef __oe_Recorder_InputHandler_H__
-#define __oe_Recorder_InputHandler_H__
+#ifndef __oe_recorder_InputHandler_H__
+#define __oe_recorder_InputHandler_H__
 
 #include "openeaagles/simulation/DataRecorder.h"
 
 namespace oe {
-namespace Recorder {
+namespace recorder {
    class DataRecordHandle;
 
 //------------------------------------------------------------------------------
@@ -30,7 +30,7 @@ protected:
    virtual const DataRecordHandle* readRecordImp() =0;
 };
 
-} // End Recorder namespace
+} // End recorder namespace
 } // End oe namespace
 
 #endif

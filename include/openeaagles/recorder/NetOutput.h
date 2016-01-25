@@ -1,15 +1,15 @@
 //------------------------------------------------------------------------------
 // Class: NetOutput
 //------------------------------------------------------------------------------
-#ifndef __oe_Recorder_NetOutput_H__
-#define __oe_Recorder_NetOutput_H__
+#ifndef __oe_recorder_NetOutput_H__
+#define __oe_recorder_NetOutput_H__
 
 #include "openeaagles/recorder/OutputHandler.h"
 
 namespace oe {
    namespace basic { class NetHandler; class Number; }
 
-namespace Recorder {
+namespace recorder {
 
 //------------------------------------------------------------------------------
 // Class:   NetOutput
@@ -47,7 +47,7 @@ private:
     bool   noWaitFlag;                             // No wait (unblocked) I/O flag
 };
 
-} // End Recorder namespace
+} // End recorder namespace
 } // End oe namespace
 
 #endif

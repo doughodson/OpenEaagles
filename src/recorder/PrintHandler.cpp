@@ -11,7 +11,7 @@
 #endif
 
 namespace oe {
-namespace Recorder {
+namespace recorder {
 
 //==============================================================================
 // Class PrintHandler
@@ -343,5 +343,5 @@ void PrintHandler::processRecordImp(const DataRecordHandle* const handle)
    // baseclass
 }
 
-} // End Recorder namespace
+} // End recorder namespace
 } // End oe namespace

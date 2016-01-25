@@ -16,7 +16,7 @@
 #endif
 
 namespace oe {
-namespace Recorder {
+namespace recorder {
 
 
 //==============================================================================
@@ -1914,5 +1914,5 @@ void TabPrinter::printSimTimeMsg(std::ostream& sout, double simTime)
     sout << cbuf;
 }
 
-} // End Recorder namespace
+} // End recorder namespace
 } // End oe namespace

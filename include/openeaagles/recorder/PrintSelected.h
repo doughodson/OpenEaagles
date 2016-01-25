@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: PrintSelected
 //------------------------------------------------------------------------------
-#ifndef __oe_Recorder_PrintSelected_H__
-#define __oe_Recorder_PrintSelected_H__
+#ifndef __oe_recorder_PrintSelected_H__
+#define __oe_recorder_PrintSelected_H__
 
 #include "openeaagles/recorder/OutputHandler.h"
 #include "openeaagles/recorder/PrintHandler.h"
@@ -16,7 +16,7 @@
 
 namespace oe {
       namespace basic { class Float; class Integer; }
-namespace Recorder {
+namespace recorder {
    namespace Pb {
       class Time; class FileIdMsg; class NewPlayerEventMsg; class PlayerRemovedEventMsg; class PlayerDataMsg;
       class PlayerDamagedEventMsg; class PlayerCollisionEventMsg; class PlayerCrashEventMsg;
@@ -121,7 +121,7 @@ inline bool PrintSelected::getCompareToBool() const
    else return true;
 }
 
-} // End Recorder namespace
+} // End recorder namespace
 } // End oe namespace
 
 #endif

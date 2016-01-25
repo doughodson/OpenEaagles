@@ -1,15 +1,15 @@
 //------------------------------------------------------------------------------
 // Class: NetInput
 //------------------------------------------------------------------------------
-#ifndef __oe_Recorder_NetInput_H__
-#define __oe_Recorder_NetInput_H__
+#ifndef __oe_recorder_NetInput_H__
+#define __oe_recorder_NetInput_H__
 
 #include "openeaagles/recorder/InputHandler.h"
 
 namespace oe {
    namespace basic { class NetHandler; class Number; }
 
-namespace Recorder {
+namespace recorder {
 
 //------------------------------------------------------------------------------
 // Class:   NetInput
@@ -54,7 +54,7 @@ private:
    char* ibuf;    // Input buffer
 };
 
-} // End Recorder namespace
+} // End recorder namespace
 } // End oe namespace
 
 #endif
