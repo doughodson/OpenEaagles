@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Classes: OtwCigiCl, CigiCl, CigiClNetwork, OtwModelCigiCl
 //------------------------------------------------------------------------------
-#ifndef __oe_Otw_OtwCigiCl_H__
-#define __oe_Otw_OtwCigiCl_H__
+#ifndef __oe_otw_OtwCigiCl_H__
+#define __oe_otw_OtwCigiCl_H__
 
 class CigiEntityCtrlV3;
 class CigiCompCtrlV3;
@@ -46,7 +46,7 @@ namespace oe {
       class Weapon;
    }
 
-namespace Otw {
+namespace otw {
 
 class CigiCl;
 class OtwModelCigiCl;
@@ -450,7 +450,7 @@ private:
    unsigned short id;
 };
 
-} // End Otw namespace
+} // End otw namespace
 } // End oe namespace
 
 #endif

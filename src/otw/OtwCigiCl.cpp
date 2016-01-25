@@ -66,7 +66,7 @@
 #include <cstdio>
 
 namespace oe {
-namespace Otw {
+namespace otw {
 
 //==============================================================================
 // OtwCigiCl class
@@ -2779,5 +2779,5 @@ void OtwModelCigiCl::clear()
    BaseClass::clear();
 }
 
-} // End Otw namespace
+} // End otw namespace
 } // End oe namespace

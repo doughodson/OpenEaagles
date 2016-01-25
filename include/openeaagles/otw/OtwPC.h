@@ -2,14 +2,16 @@
 // Class: OtwPC
 // Description: PC Visual Interface
 //------------------------------------------------------------------------------
-#ifndef __oe_Otw_OtwPC_H__
-#define __oe_Otw_OtwPC_H__
+#ifndef __oe_otw_OtwPC_H__
+#define __oe_otw_OtwPC_H__
 
 #include "openeaagles/simulation/Otw.h"
 
 namespace oe {
-   namespace basic { class NetHandler; }
-namespace Otw {
+
+namespace basic { class NetHandler; }
+
+namespace otw {
 
 class OtwPC : public Simulation::Otw
 {
@@ -44,7 +46,7 @@ private:
     int scnt;                                  // Send timer
 };
 
-} // End Otw namespace
+} // End otw namespace
 } // End oe namespace
 
 #endif

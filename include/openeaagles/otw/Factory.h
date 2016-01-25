@@ -3,14 +3,14 @@
 //
 // Description: Class factory
 //------------------------------------------------------------------------------
-#ifndef __oe_Otw_Factory_H__
-#define __oe_Otw_Factory_H__
+#ifndef __oe_otw_Factory_H__
+#define __oe_otw_Factory_H__
 
 namespace oe {
 
 namespace basic { class Object; }
 
-namespace Otw {
+namespace otw {
 
 class Factory
 {
@@ -21,7 +21,7 @@ protected:
    Factory();   // prevent object creation
 };
 
-}  // end namespace Otw
+}  // end namespace otw
 }  // end namespace oe
 
 #endif

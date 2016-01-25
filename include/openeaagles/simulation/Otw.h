@@ -4,8 +4,8 @@
 //    OtwModel -- Model class; manages player to OTW model relationships
 //    Otm      -- Type Mapper class; maps player types to OTW model types
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_Otw_H__
-#define __oe_Simulation_Otw_H__
+#ifndef __oe_Simulation_otw_H__
+#define __oe_Simulation_otw_H__
 
 #include "openeaagles/basic/Component.h"
 

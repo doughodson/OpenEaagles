@@ -19,7 +19,7 @@
 #include "openeaagles/basic/units/Angles.h"
 
 namespace oe {
-namespace Otw {
+namespace otw {
 
 IMPLEMENT_SUBCLASS(OtwPC,"OtwPC")
 EMPTY_SERIALIZER(OtwPC)
@@ -256,6 +256,6 @@ void OtwPC::sendPcData()
     }
 }
 
-} // End Otw namespace
+} // End otw namespace
 } // End oe namespace
 
