@@ -16,7 +16,7 @@
 #include <cmath>
 
 namespace oe {
-namespace Sensor {
+namespace sensor {
 
 IMPLEMENT_SUBCLASS(Gmti,"Gmti")
 
@@ -177,5 +177,5 @@ std::ostream& Gmti::serialize(std::ostream& sout, const int i, const bool slotsO
     return sout;
 }
 
-} // End Sensor namespace
+} // End sensor namespace
 } // End oe namespace

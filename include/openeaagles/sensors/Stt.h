@@ -3,13 +3,13 @@
 // Description: Simple, Single-Target-Track Mode Radar
 //
 //------------------------------------------------------------------------------
-#ifndef __oe_Sensor_Stt_H__
-#define __oe_Sensor_Stt_H__
+#ifndef __oe_sensor_Stt_H__
+#define __oe_sensor_Stt_H__
 
 #include "openeaagles/simulation/Radar.h"
 
 namespace oe {
-namespace Sensor {
+namespace sensor {
 
 class Stt : public Simulation::Radar
 {
@@ -22,7 +22,7 @@ protected:
     void dynamics(const LCreal dt) override;
 };
 
-} // End Sensor namespace
+} // End sensor namespace
 } // End oe namespace
 
 #endif

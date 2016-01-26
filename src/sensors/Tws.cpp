@@ -1,20 +1,7 @@
 #include "openeaagles/sensors/Tws.h"
 
-#include "openeaagles/simulation/Antenna.h"
-#include "openeaagles/simulation/Emission.h"
-#include "openeaagles/simulation/Player.h"
-#include "openeaagles/simulation/Simulation.h"
-#include "openeaagles/simulation/TrackManager.h"
-#include "openeaagles/basic/Integer.h"
-#include "openeaagles/basic/Pair.h"
-#include "openeaagles/basic/PairStream.h"
-#include "openeaagles/basic/units/Angles.h"
-#include "openeaagles/basic/units/Powers.h"
-#include "openeaagles/basic/units/Times.h"
-#include "openeaagles/basic/units/Frequencies.h"
-
 namespace oe {
-namespace Sensor {
+namespace sensor {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Tws,"Tws")
 
@@ -66,5 +53,5 @@ std::ostream& Tws::serialize(std::ostream& sout, const int i, const bool slotsOn
     return sout;
 }
 
-} // End Sensor namespace
+} // End sensor namespace
 } // End oe namespace

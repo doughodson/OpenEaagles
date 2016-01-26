@@ -3,14 +3,14 @@
 //
 // Description: Class factory
 //------------------------------------------------------------------------------
-#ifndef __oe_Sensor_Factory_H__
-#define __oe_Sensor_Factory_H__
+#ifndef __oe_sensor_Factory_H__
+#define __oe_sensor_Factory_H__
 
 namespace oe {
 
 namespace basic { class Object; }
 
-namespace Sensor {
+namespace sensor {
 
 class Factory
 {
@@ -21,7 +21,7 @@ protected:
    Factory();   // prevent object creation
 };
 
-}  // end namespace Sensor
+}  // end namespace sensor
 }  // end namespace oe
 
 #endif
