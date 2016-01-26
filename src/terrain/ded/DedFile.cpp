@@ -9,7 +9,7 @@
 #include "openeaagles/basic/NetHandler.h"   // for byte-swapping only
 
 namespace oe {
-namespace Terrain {
+namespace terrain {
 
 IMPLEMENT_SUBCLASS(DedFile,"DedFile")
 EMPTY_SLOTTABLE(DedFile)
@@ -560,5 +560,5 @@ void DedFile::dump(std::ostream& sout) const
    }
 }
 
-}// end Terrain namespace
+}// end terrain namespace
 }// end oe namespace

@@ -3,14 +3,14 @@
 //
 // Description: Class factory
 //------------------------------------------------------------------------------
-#ifndef __oe_Terrain_Factory_H__
-#define __oe_Terrain_Factory_H__
+#ifndef __oe_terrain_Factory_H__
+#define __oe_terrain_Factory_H__
 
 namespace oe {
 
 namespace basic { class Object; }
 
-namespace Terrain {
+namespace terrain {
 
 class Factory
 {
@@ -21,7 +21,7 @@ protected:
    Factory();   // prevent object creation
 };
 
-}  // end namespace Terrain
+}  // end namespace terrain
 }  // end namespace oe
 
 #endif

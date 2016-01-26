@@ -9,7 +9,7 @@
 #include "openeaagles/basic/units/Distances.h"
 
 namespace oe {
-namespace Terrain {
+namespace terrain {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(QuadMap,"QuadMap")
 EMPTY_SLOTTABLE(QuadMap)
@@ -285,5 +285,5 @@ void QuadMap::clearData()
    numDataFiles = 0;
 }
 
-}// end Terrain namespace
+}// end terrain namespace
 }// end oe namespace

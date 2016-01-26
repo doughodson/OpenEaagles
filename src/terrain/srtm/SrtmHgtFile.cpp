@@ -64,7 +64,7 @@
 #include <cctype>
 
 namespace oe {
-namespace Terrain {
+namespace terrain {
 
 //===========================================================================================
 // SRTM file format definition - same as DTED minus all of the headers, footer, and checksums
@@ -323,5 +323,5 @@ std::ostream& SrtmHgtFile::serialize(std::ostream& sout, const int i, const bool
     return sout;
 }
 
-} // End Terrain namespace
+} // End terrain namespace
 } // End oe namespace

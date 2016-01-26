@@ -1,14 +1,14 @@
 //------------------------------------------------------------------------------
 // Classes: DtedFile
 //------------------------------------------------------------------------------
-#ifndef __oe_Terrain_DtedFile_H__
-#define __oe_Terrain_DtedFile_H__
+#ifndef __oe_terrain_DtedFile_H__
+#define __oe_terrain_DtedFile_H__
 
 #include "../DataFile.h"
 
 namespace oe {
    namespace basic { class Number; }
-namespace Terrain {
+namespace terrain {
 
 //------------------------------------------------------------------------------
 // Class: DtedFile
@@ -45,7 +45,7 @@ private:
 };
 
 
-} // End Terrain namespace
+} // End terrain namespace
 } // End oe namespace
 
 #endif

@@ -1,25 +1,23 @@
 //------------------------------------------------------------------------------
 // Classes: SrtmHgtFile
 //------------------------------------------------------------------------------
-#ifndef __oe_Terrain_SrtmHgtFile_H__
-#define __oe_Terrain_SrtmHgtFile_H__
+#ifndef __oe_terrain_SrtmHgtFile_H__
+#define __oe_terrain_SrtmHgtFile_H__
 
 #include "../DataFile.h"
 
 namespace oe {
    namespace basic { class Number; }
-namespace Terrain {
+namespace terrain {
 
 //------------------------------------------------------------------------------
 // Class: SrtmHgtFile
-// Base classes: basic::Object -> basic::Component
-//               -> Terrain::Database -> Terrain::DataFile
 //
 // Description: SRTM data loader.
 //
-// Adapted from Terrain::DtedFile
+// Adapted from terrain::DtedFile
 //
-// Openoe version by Christopher Buell
+// OpenEaagles version by Christopher Buell
 //
 // obtain SRTM data files from ftp://e0srp01u.ecs.nasa.gov/srtm/version2
 //
@@ -68,7 +66,7 @@ private:
 };
 
 
-} // End Terrain namespace
+} // End terrain namespace
 } // End oe namespace
 
 #endif

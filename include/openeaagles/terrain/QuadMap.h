@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: QuadMap
 //------------------------------------------------------------------------------
-#ifndef __oe_Terrain_QuadMap_H__
-#define __oe_Terrain_QuadMap_H__
+#ifndef __oe_terrain_QuadMap_H__
+#define __oe_terrain_QuadMap_H__
 
 #include "openeaagles/basic/Terrain.h"
 
 namespace oe {
-namespace Terrain {
+namespace terrain {
    class DataFile;
 
 //------------------------------------------------------------------------------
@@ -70,7 +70,7 @@ private:
    bool loadData() override;
 };
 
-} // End Terrain namespace
+} // End terrain namespace
 } // End oe namespace
 
 #endif

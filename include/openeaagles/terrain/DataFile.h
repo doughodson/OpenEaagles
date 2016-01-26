@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: DataFile
 //------------------------------------------------------------------------------
-#ifndef __oe_Terrain_DataFile_H__
-#define __oe_Terrain_DataFile_H__
+#ifndef __oe_terrain_DataFile_H__
+#define __oe_terrain_DataFile_H__
 
 #include "openeaagles/basic/Terrain.h"
 
 namespace oe {
-namespace Terrain {
+namespace terrain {
 
 //------------------------------------------------------------------------------
 // Class: DataFile
@@ -94,7 +94,7 @@ protected:
    void clearData() override;
 };
 
-} // End Terrain namespace
+} // End terrain namespace
 } // End oe namespace
 
 #endif

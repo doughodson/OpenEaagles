@@ -11,7 +11,7 @@
 #include "openeaagles/basic/units/Distances.h"
 
 namespace oe {
-namespace Terrain {
+namespace terrain {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(DataFile,"DataFile")
 EMPTY_SLOTTABLE(DataFile)
@@ -458,5 +458,5 @@ void DataFile::clearData()
    setMaxElevation(0);
 }
 
-}// end Terrain namespace
+}// end terrain namespace
 }// end oe namespace

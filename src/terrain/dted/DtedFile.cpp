@@ -46,7 +46,7 @@
 #endif
 
 namespace oe {
-namespace Terrain {
+namespace terrain {
 
 //==============================================================================
 // DTED file format definition
@@ -479,5 +479,5 @@ std::ostream& DtedFile::serialize(std::ostream& sout, const int i, const bool sl
     return sout;
 }
 
-} // End Terrain namespace
+} // End terrain namespace
 } // End oe namespace

@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: Terrain
 //------------------------------------------------------------------------------
-#ifndef __oe_basic_Terrain_H__
-#define __oe_basic_Terrain_H__
+#ifndef __oe_basic_terrain_H__
+#define __oe_basic_terrain_H__
 
 #include "openeaagles/basic/Component.h"
 

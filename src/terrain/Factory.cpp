@@ -13,7 +13,7 @@
 #include <cstring>
 
 namespace oe {
-namespace Terrain {
+namespace terrain {
 
 Factory::Factory()
 {}
@@ -38,5 +38,5 @@ basic::Object* Factory::createObj(const char* name)
     return obj;
 }
 
-}  // end namespace Terrain
+}  // end namespace terrain
 }  // end namespace oe
