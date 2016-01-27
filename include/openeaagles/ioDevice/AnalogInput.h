@@ -1,6 +1,6 @@
 
-#ifndef __oe_ioDevice_AnalogInput_H__
-#define __oe_ioDevice_AnalogInput_H__
+#ifndef __oe_iodevice_AnalogInput_H__
+#define __oe_iodevice_AnalogInput_H__
 
 #include "openeaagles/basic/IoAdapter.h"
 
@@ -8,7 +8,7 @@ namespace oe {
 
 namespace basic { class Number; class Table1; }
 
-namespace ioDevice {
+namespace iodevice {
 
 class IoDevice;
 
@@ -99,7 +99,7 @@ private:
    const basic::Table1* table; // Shaping table
 };
 
-} // end ioDevice
+} // end iodevice
 } // end oe namespace
 
 #endif

@@ -1,6 +1,6 @@
 // Class: DiscreteOutput
 
-#include "openeaagles/ioDevice/DiscreteOutput.h"
+#include "openeaagles/iodevice/DiscreteOutput.h"
 
 #include "openeaagles/basic/IoData.h"
 #include "openeaagles/basic/IoDevice.h"
@@ -8,7 +8,7 @@
 #include "openeaagles/basic/Number.h"
 
 namespace oe {
-namespace ioDevice {
+namespace iodevice {
 
 //==============================================================================
 // DiscreteOutput
@@ -309,5 +309,5 @@ std::ostream& DiscreteOutput::serialize(std::ostream& sout, const int i, const b
    return sout;
 }
 
-} // end ioDevice
+} // end iodevice
 } // end oe namespace

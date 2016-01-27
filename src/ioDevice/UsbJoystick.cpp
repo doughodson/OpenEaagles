@@ -2,12 +2,12 @@
 // UsbJoystick
 //==============================================================================
 
-#include "openeaagles/ioDevice/UsbJoystick.h"
+#include "openeaagles/iodevice/UsbJoystick.h"
 
 #include "openeaagles/basic/Number.h"
 
 namespace oe {
-namespace ioDevice {
+namespace iodevice {
 
 /* both the linux and windows version use the 'UsbJoystick' form name */
 IMPLEMENT_SUBCLASS(UsbJoystick,"CommonUsbJoystick")
@@ -189,6 +189,6 @@ std::ostream& UsbJoystick::serialize(std::ostream& sout, const int i, const bool
    return sout;
 }
 
-} // ioDevice namespace
+} // iodevice namespace
 } // end oe namespace
 

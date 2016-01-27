@@ -1,6 +1,6 @@
 
-#ifndef __oe_ioDevice_DiscreteOutput_H__
-#define __oe_ioDevice_DiscreteOutput_H__
+#ifndef __oe_iodevice_DiscreteOutput_H__
+#define __oe_iodevice_DiscreteOutput_H__
 
 #include "openeaagles/basic/IoAdapter.h"
 
@@ -8,7 +8,7 @@ namespace oe {
 
 namespace basic { class NetHandler; class Number; }
 
-namespace ioDevice {
+namespace iodevice {
 
 class IoDevice;
 
@@ -74,7 +74,7 @@ private:
    int num;                // Number of DIs (neg for reverse order)
 };
 
-} // end ioDevice
+} // end iodevice
 } // end oe namespace
 
 #endif

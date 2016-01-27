@@ -1,6 +1,6 @@
 // Class: DiscreteInput
 
-#include "openeaagles/ioDevice/DiscreteInput.h"
+#include "openeaagles/iodevice/DiscreteInput.h"
 
 #include "openeaagles/basic/IoData.h"
 #include "openeaagles/basic/IoDevice.h"
@@ -8,7 +8,7 @@
 #include "openeaagles/basic/Number.h"
 
 namespace oe {
-namespace ioDevice {
+namespace iodevice {
 
 //==============================================================================
 // DiscreteInput
@@ -308,5 +308,5 @@ std::ostream& DiscreteInput::serialize(std::ostream& sout, const int i, const bo
    return sout;
 }
 
-} // end ioDevice
+} // end iodevice
 } // end oe namespace

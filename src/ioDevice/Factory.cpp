@@ -2,17 +2,17 @@
 // Class: Factory
 //------------------------------------------------------------------------------
 
-#include "openeaagles/ioDevice/Factory.h"
+#include "openeaagles/iodevice/Factory.h"
 
 #include "openeaagles/basic/Object.h"
 
-#include "openeaagles/ioDevice/Ai2DiSwitch.h"
-#include "openeaagles/ioDevice/AnalogInput.h"
-#include "openeaagles/ioDevice/AnalogOutput.h"
-#include "openeaagles/ioDevice/DiscreteInput.h"
-#include "openeaagles/ioDevice/DiscreteOutput.h"
-#include "openeaagles/ioDevice/IoData.h"
-#include "openeaagles/ioDevice/SignalGen.h"
+#include "openeaagles/iodevice/Ai2DiSwitch.h"
+#include "openeaagles/iodevice/AnalogInput.h"
+#include "openeaagles/iodevice/AnalogOutput.h"
+#include "openeaagles/iodevice/DiscreteInput.h"
+#include "openeaagles/iodevice/DiscreteOutput.h"
+#include "openeaagles/iodevice/IoData.h"
+#include "openeaagles/iodevice/SignalGen.h"
 
 #include <cstring>
 
@@ -23,7 +23,7 @@
 #endif
 
 namespace oe {
-namespace ioDevice {
+namespace iodevice {
 
 Factory::Factory()
 {}

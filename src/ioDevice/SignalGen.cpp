@@ -1,6 +1,6 @@
 // Class: SignalGen
 
-#include "openeaagles/ioDevice/SignalGen.h"
+#include "openeaagles/iodevice/SignalGen.h"
 
 #include "openeaagles/basic/IoData.h"
 #include "openeaagles/basic/IoDevice.h"
@@ -11,7 +11,7 @@
 #include <cmath>
 
 namespace oe {
-namespace ioDevice {
+namespace iodevice {
 
 //==============================================================================
 // SignalGen
@@ -345,5 +345,5 @@ std::ostream& SignalGen::serialize(std::ostream& sout, const int i, const bool s
    return sout;
 }
 
-} // end ioDevice
+} // end iodevice
 } // end oe namespace

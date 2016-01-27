@@ -1,11 +1,11 @@
 // Class: IoData
 
-#include "openeaagles/ioDevice/IoData.h"
+#include "openeaagles/iodevice/IoData.h"
 
 #include "openeaagles/basic/Number.h"
 
 namespace oe {
-namespace ioDevice {
+namespace iodevice {
 
 //==============================================================================
 // IoData
@@ -467,5 +467,5 @@ std::ostream& IoData::serialize(std::ostream& sout, const int i, const bool slot
    return sout;
 }
 
-} // end ioDevice
+} // end iodevice
 } // end oe namespace

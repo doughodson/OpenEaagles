@@ -1,6 +1,6 @@
 
-#ifndef __oe_ioDevice_Ai2DiSwitch_H__
-#define __oe_ioDevice_Ai2DiSwitch_H__
+#ifndef __oe_iodevice_Ai2DiSwitch_H__
+#define __oe_iodevice_Ai2DiSwitch_H__
 
 #include "openeaagles/basic/IoAdapter.h"
 
@@ -8,7 +8,7 @@ namespace oe {
 
 namespace basic { class Number; }
 
-namespace ioDevice {
+namespace iodevice {
 
 class IoDevice;
 
@@ -75,7 +75,7 @@ private:
    bool         invert;       // Inverted bit flag
 };
 
-} // end ioDevice namespace
+} // end iodevice namespace
 } // end oe namespace
 
 #endif

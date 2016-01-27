@@ -18,7 +18,7 @@ namespace basic {
 //    specific I/O items that are independent of the actual I/O device channels.
 //    Derived classes will handle the application specific details.
 //
-//    For a standard I/O data buffer, see "openeaagles/ioDevice/IoData.h".
+//    For a standard I/O data buffer, see "openeaagles/iodevice/IoData.h".
 //
 //    The main input and output data buffers are typically managed by an I/O
 //    handler class (see IoHander.h).

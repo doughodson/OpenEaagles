@@ -18,7 +18,7 @@
 #include "UsbJoystickImp.h"
 
 namespace oe {
-namespace ioDevice {
+namespace iodevice {
 
 IMPLEMENT_SUBCLASS(UsbJoystickImp,"UsbJoystick")
 EMPTY_SLOTTABLE(UsbJoystickImp)
@@ -199,5 +199,5 @@ bool UsbJoystickImp::setInputScaled(unsigned int cn, LCreal raw)
    return ok;
 }
 
-} // ioDevice namespace
+} // iodevice namespace
 } // end oe namespace

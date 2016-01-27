@@ -1,6 +1,6 @@
 
-#ifndef __oe_ioDevice_UsbJoystick_H__
-#define __oe_ioDevice_UsbJoystick_H__
+#ifndef __oe_iodevice_UsbJoystick_H__
+#define __oe_iodevice_UsbJoystick_H__
 
 #include "openeaagles/basic/IoDevice.h"
 
@@ -8,7 +8,7 @@ namespace oe {
 
 namespace basic { class Number; }
 
-namespace ioDevice {
+namespace iodevice {
 
 //------------------------------------------------------------------------------
 // Class:  UsbJoystick
@@ -78,7 +78,7 @@ private:
    void initData();
 };
 
-} // end ioDevice
+} // end iodevice
 } // end oe namespace
 
 #endif

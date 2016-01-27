@@ -1,6 +1,6 @@
 
-#ifndef __oe_ioDevice_SignalGen_H__
-#define __oe_ioDevice_SignalGen_H__
+#ifndef __oe_iodevice_SignalGen_H__
+#define __oe_iodevice_SignalGen_H__
 
 #include "openeaagles/basic/IoAdapter.h"
 
@@ -8,7 +8,7 @@ namespace oe {
 
 namespace basic { class Angle; class Frequency; class String; }
 
-namespace ioDevice {
+namespace iodevice {
 
 class IoDevice;
 class IoData;
@@ -98,7 +98,7 @@ private:
 };
 
 
-} // end ioDevice
+} // end iodevice
 } // end oe namespace
 
 #endif

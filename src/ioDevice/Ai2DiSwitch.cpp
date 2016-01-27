@@ -1,5 +1,5 @@
 
-#include "openeaagles/ioDevice/Ai2DiSwitch.h"
+#include "openeaagles/iodevice/Ai2DiSwitch.h"
 
 #include "openeaagles/basic/IoData.h"
 #include "openeaagles/basic/IoDevice.h"
@@ -7,7 +7,7 @@
 #include "openeaagles/basic/Number.h"
 
 namespace oe {
-namespace ioDevice {
+namespace iodevice {
 
 //==============================================================================
 // Ai2DiSwitch
@@ -247,5 +247,5 @@ std::ostream& Ai2DiSwitch::serialize(std::ostream& sout, const int i, const bool
    return sout;
 }
 
-} // end ioDevice
+} // end iodevice
 } // end oe namespace

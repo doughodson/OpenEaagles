@@ -1,6 +1,6 @@
 // Class: AnalogInput
 
-#include "openeaagles/ioDevice/AnalogInput.h"
+#include "openeaagles/iodevice/AnalogInput.h"
 
 #include "openeaagles/basic/IoData.h"
 #include "openeaagles/basic/IoDevice.h"
@@ -9,7 +9,7 @@
 #include "openeaagles/basic/functors/Tables.h"
 
 namespace oe {
-namespace ioDevice {
+namespace iodevice {
 
 //==============================================================================
 // AnalogInput
@@ -380,5 +380,5 @@ std::ostream& AnalogInput::serialize(std::ostream& sout, const int i, const bool
    return sout;
 }
 
-} // end ioDevice
+} // end iodevice
 } // end oe namespace

@@ -3,14 +3,14 @@
 //
 // Description: Class factory
 //------------------------------------------------------------------------------
-#ifndef __oe_ioDevice_Factory_H__
-#define __oe_ioDevice_Factory_H__
+#ifndef __oe_iodevice_Factory_H__
+#define __oe_iodevice_Factory_H__
 
 namespace oe {
 
 namespace basic { class Object; }
 
-namespace ioDevice {
+namespace iodevice {
 
 class Factory
 {
