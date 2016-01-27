@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // LimitFunc class -- General Limit function
 //------------------------------------------------------------------------------
-#ifndef __oe_linearSys_LimitFunc_H__
-#define __oe_linearSys_LimitFunc_H__
+#ifndef __oe_linearsystem_LimitFunc_H__
+#define __oe_linearsystem_LimitFunc_H__
 
-#include "openeaagles/linearSys/ScalerFunc.h"
+#include "openeaagles/linearsystem/ScalerFunc.h"
 
 namespace oe {
-namespace linearSys {
+namespace linearsystem {
 
 //------------------------------------------------------------------------------
 // Class: LimitFunc
@@ -44,7 +44,7 @@ private:
    LCreal       upper;      // Upper limit
 };
 
-} // End linearSys namespace
+} // End linearsystem namespace
 } // End oe namespace
 
 #endif

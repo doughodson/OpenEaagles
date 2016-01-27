@@ -1,9 +1,9 @@
 
-#include "openeaagles/linearSys/Limit.h"
+#include "openeaagles/linearsystem/Limit.h"
 #include "openeaagles/basic/Number.h"
 
 namespace oe {
-namespace linearSys {
+namespace linearsystem {
 
 //==============================================================================
 // Class Limit
@@ -100,5 +100,5 @@ std::ostream& Limit::serialize(std::ostream& sout, const int i, const bool slots
     return sout;
 }
 
-} // End linearSys namespace
+} // End linearsystem namespace
 } // End oe namespace

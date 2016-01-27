@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // FirstOrderTf class -- General first order transfer function
 //------------------------------------------------------------------------------
-#ifndef __oe_linearSys_FirstOrderTf_H__
-#define __oe_linearSys_FirstOrderTf_H__
+#ifndef __oe_linearsystem_FirstOrderTf_H__
+#define __oe_linearsystem_FirstOrderTf_H__
 
-#include "openeaagles/linearSys/DiffEquation.h"
+#include "openeaagles/linearsystem/DiffEquation.h"
 
 namespace oe {
-namespace linearSys {
+namespace linearsystem {
 
 //------------------------------------------------------------------------------
 // Class:  FirstOrderTf
@@ -58,7 +58,7 @@ private:
    LCreal d2;
 };
 
-} // End linearSys namespace
+} // End linearsystem namespace
 } // End oe namespace
 
 #endif

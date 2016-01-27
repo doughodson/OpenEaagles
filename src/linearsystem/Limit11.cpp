@@ -1,8 +1,8 @@
 
-#include "openeaagles/linearSys/Limit11.h"
+#include "openeaagles/linearsystem/Limit11.h"
 
 namespace oe {
-namespace linearSys {
+namespace linearsystem {
 
 //==============================================================================
 // Class Limit11
@@ -22,5 +22,5 @@ Limit11::Limit11() : LimitFunc(1,1)
 EMPTY_COPYDATA(Limit11)
 EMPTY_DELETEDATA(Limit11)
 
-} // End linearSys namespace
+} // End linearsystem namespace
 } // End oe namespace

@@ -2,13 +2,13 @@
 // Sz2 class -- Second order transfer function
 // ##### IN-WORK #####
 //------------------------------------------------------------------------------
-#ifndef __oe_linearSys_Sz2_H__
-#define __oe_linearSys_Sz2_H__
+#ifndef __oe_linearsystem_Sz2_H__
+#define __oe_linearsystem_Sz2_H__
 
-#include "openeaagles/linearSys/SecondOrderTf.h"
+#include "openeaagles/linearsystem/SecondOrderTf.h"
 
 namespace oe {
-namespace linearSys {
+namespace linearsystem {
 
 //------------------------------------------------------------------------------
 // Class:  Sz2
@@ -59,7 +59,7 @@ public:
    virtual bool setSlotD3(const basic::Number* const msg);
 };
 
-} // End linearSys namespace
+} // End linearsystem namespace
 } // End oe namespace
 
 #endif

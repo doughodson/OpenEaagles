@@ -1,7 +1,7 @@
 #
 include ../makedefs
 
-LIB = $(OPENEAAGLES_LIB_DIR)/liboeLinearSys.a
+LIB = $(OPENEAAGLES_LIB_DIR)/liboelinearsystem.a
 
 OBJS =  \
 	$(LIB)(DiffEquation.o) \
@@ -17,7 +17,6 @@ OBJS =  \
 	$(LIB)(SecondOrderTf.o) \
 	$(LIB)(Sz1.o) \
 	$(LIB)(Sz2.o)
-
 
 all: ${OBJS}
 

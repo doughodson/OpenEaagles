@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Sz1 class -- First order transfer function
 //------------------------------------------------------------------------------
-#ifndef __oe_linearSys_Sz1_H__
-#define __oe_linearSys_Sz1_H__
+#ifndef __oe_linearsystem_Sz1_H__
+#define __oe_linearsystem_Sz1_H__
 
-#include "openeaagles/linearSys/FirstOrderTf.h"
+#include "openeaagles/linearsystem/FirstOrderTf.h"
 
 namespace oe {
-namespace linearSys {
+namespace linearsystem {
 
 //------------------------------------------------------------------------------
 // Class:  Sz1
@@ -49,7 +49,7 @@ public:
    virtual bool setSlotD2(const basic::Number* const msg);
 };
 
-} // End linearSys namespace
+} // End linearsystem namespace
 } // End oe namespace
 
 #endif

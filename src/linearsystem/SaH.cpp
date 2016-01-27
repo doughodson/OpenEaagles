@@ -1,10 +1,10 @@
 
-#include "openeaagles/linearSys/SaH.h"
+#include "openeaagles/linearsystem/SaH.h"
 #include "openeaagles/basic/Number.h"
 #include "openeaagles/basic/units/Frequencies.h"
 
 namespace oe {
-namespace linearSys {
+namespace linearsystem {
 
 //==============================================================================
 // Class SaH
@@ -219,5 +219,5 @@ std::ostream& SaH::serialize(std::ostream& sout, const int i, const bool slotsOn
     return sout;
 }
 
-} // End linearSys namespace
+} // End linearsystem namespace
 } // End oe namespace

@@ -1,8 +1,8 @@
 
-#include "openeaagles/linearSys/DiffEquation.h"
+#include "openeaagles/linearsystem/DiffEquation.h"
 
 namespace oe {
-namespace linearSys {
+namespace linearsystem {
 
 //==============================================================================
 // Class DiffEquation
@@ -129,5 +129,5 @@ LCreal DiffEquation::g(const LCreal xn)
    }
 }
 
-} // End linearSys namespace
+} // End linearsystem namespace
 } // End oe namespace

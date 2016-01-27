@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Limit01 function
 //------------------------------------------------------------------------------
-#ifndef __oe_linearSys_Limit01_H__
-#define __oe_linearSys_Limit01_H__
+#ifndef __oe_linearsystem_Limit01_H__
+#define __oe_linearsystem_Limit01_H__
 
-#include "openeaagles/linearSys/LimitFunc.h"
+#include "openeaagles/linearsystem/LimitFunc.h"
 
 namespace oe {
-namespace linearSys {
+namespace linearsystem {
 
 //------------------------------------------------------------------------------
 // Class: Limit01
@@ -21,7 +21,7 @@ public:
    Limit01();
 };
 
-} // End linearSys namespace
+} // End linearsystem namespace
 } // End oe namespace
 
 #endif

@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // ScalerFunc class -- Abstract scaler function
 //------------------------------------------------------------------------------
-#ifndef __oe_linearSys_ScalerFunc_H__
-#define __oe_linearSys_ScalerFunc_H__
+#ifndef __oe_linearsystem_ScalerFunc_H__
+#define __oe_linearsystem_ScalerFunc_H__
 
 #include "openeaagles/basic/Object.h"
 
@@ -12,7 +12,7 @@ namespace oe {
       class Number;
    }
 
-namespace linearSys {
+namespace linearsystem {
 
 //------------------------------------------------------------------------------
 // Class:  ScalerFunc
@@ -96,7 +96,7 @@ private:
    void initData();  // Initialize our data
 };
 
-} // End linearSys namespace
+} // End linearsystem namespace
 } // End oe namespace
 
 #endif

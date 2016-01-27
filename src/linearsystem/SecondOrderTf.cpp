@@ -1,8 +1,8 @@
 
-#include "openeaagles/linearSys/SecondOrderTf.h"
+#include "openeaagles/linearsystem/SecondOrderTf.h"
 
 namespace oe {
-namespace linearSys {
+namespace linearsystem {
 
 //==============================================================================
 // Class SecondOrderTf
@@ -168,5 +168,5 @@ bool SecondOrderTf::setD3(const LCreal v)
    return true;
 }
 
-} // End linearSys namespace
+} // End linearsystem namespace
 } // End oe namespace

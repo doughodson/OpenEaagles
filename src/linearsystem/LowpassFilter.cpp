@@ -1,10 +1,10 @@
 
-#include "openeaagles/linearSys/LowpassFilter.h"
+#include "openeaagles/linearsystem/LowpassFilter.h"
 #include "openeaagles/basic/Number.h"
 #include "openeaagles/basic/units/Frequencies.h"
 
 namespace oe {
-namespace linearSys {
+namespace linearsystem {
 
 //==============================================================================
 // Class LowpassFilter
@@ -134,5 +134,5 @@ std::ostream& LowpassFilter::serialize(std::ostream& sout, const int i, const bo
     return sout;
 }
 
-} // End linearSys namespace
+} // End linearsystem namespace
 } // End oe namespace

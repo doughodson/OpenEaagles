@@ -1,9 +1,9 @@
 
-#include "openeaagles/linearSys/Sz2.h"
+#include "openeaagles/linearsystem/Sz2.h"
 #include "openeaagles/basic/Number.h"
 
 namespace oe {
-namespace linearSys {
+namespace linearsystem {
 
 //==============================================================================
 // Class Sz2
@@ -167,5 +167,5 @@ std::ostream& Sz2::serialize(std::ostream& sout, const int i, const bool slotsOn
     return sout;
 }
 
-} // End linearSys namespace
+} // End linearsystem namespace
 } // End oe namespace

@@ -12,7 +12,7 @@ include makedefs
 # hla          : HLA RTI
 # instruments  : -
 # iodevice     : -
-# linearSys    : -
+# linearsystem : -
 # maps         : -
 # otw          : CIGICL 3.x
 # recorder     : Google protocol buffers
@@ -24,7 +24,7 @@ PROJECTS = basic
 PROJECTS += basicGL instruments
 PROJECTS += dafif
 PROJECTS += iodevice
-PROJECTS += linearSys 
+PROJECTS += linearsystem 
 PROJECTS += simulation sensors terrain
 PROJECTS += dis
 PROJECTS += dynamics

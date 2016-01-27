@@ -183,12 +183,12 @@ solution "oe"
       targetname "iodevice"
 
    -- linear systems library
-   project "linearSys"
+   project "linearsystem"
       files {
-         "../../include/openeaagles/linearSys/**.h",
-         "../../src/linearSys/**.cpp"
+         "../../include/openeaagles/linearsystem/**.h",
+         "../../src/linearsystem/**.cpp"
       }
-      targetname "LinearSys"
+      targetname "linearsystem"
 
    -- maps library
    project "maps"

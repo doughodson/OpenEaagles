@@ -1,10 +1,10 @@
 
-#include "openeaagles/linearSys/LagFilter.h"
+#include "openeaagles/linearsystem/LagFilter.h"
 #include "openeaagles/basic/Number.h"
 #include "openeaagles/basic/units/Times.h"
 
 namespace oe {
-namespace linearSys {
+namespace linearsystem {
 
 //==============================================================================
 // Class LagFilter
@@ -142,5 +142,5 @@ std::ostream& LagFilter::serialize(std::ostream& sout, const int i, const bool s
     return sout;
 }
 
-} // End linearSys namespace
+} // End linearsystem namespace
 } // End oe namespace

@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // SaH class -- Sample & Hold function
 //------------------------------------------------------------------------------
-#ifndef __oe_linearSys_SaH_H__
-#define __oe_linearSys_SaH_H__
+#ifndef __oe_linearsystem_SaH_H__
+#define __oe_linearsystem_SaH_H__
 
-#include "openeaagles/linearSys/ScalerFunc.h"
+#include "openeaagles/linearsystem/ScalerFunc.h"
 
 namespace oe {
-namespace linearSys {
+namespace linearsystem {
 
 //------------------------------------------------------------------------------
 // Class: SaH
@@ -60,7 +60,7 @@ private:
    unsigned int sampleRate; // Sample rate (hz)
 };
 
-} // End linearSys namespace
+} // End linearsystem namespace
 } // End oe namespace
 
 #endif

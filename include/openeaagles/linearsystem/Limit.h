@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Limit function
 //------------------------------------------------------------------------------
-#ifndef __oe_linearSys_Limit_H__
-#define __oe_linearSys_Limit_H__
+#ifndef __oe_linearsystem_Limit_H__
+#define __oe_linearsystem_Limit_H__
 
-#include "openeaagles/linearSys/LimitFunc.h"
+#include "openeaagles/linearsystem/LimitFunc.h"
 
 namespace oe {
-namespace linearSys {
+namespace linearsystem {
 
 //------------------------------------------------------------------------------
 // Class: Limit
@@ -33,7 +33,7 @@ public:
    virtual bool setSlotUpperLimit(const basic::Number* const msg);
 };
 
-} // End linearSys namespace
+} // End linearsystem namespace
 } // End oe namespace
 
 #endif
