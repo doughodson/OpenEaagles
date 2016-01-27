@@ -11,7 +11,7 @@ include makedefs
 # gui          :
 # hla          : HLA RTI
 # instruments  : -
-# ioDevice     : -
+# iodevice     : -
 # linearSys    : -
 # maps         : -
 # otw          : CIGICL 3.x
@@ -23,7 +23,7 @@ include makedefs
 PROJECTS = basic
 PROJECTS += basicGL instruments
 PROJECTS += dafif
-PROJECTS += ioDevice
+PROJECTS += iodevice
 PROJECTS += linearSys 
 PROJECTS += simulation sensors terrain
 PROJECTS += dis

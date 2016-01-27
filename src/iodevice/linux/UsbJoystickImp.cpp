@@ -15,7 +15,7 @@
 #include "UsbJoystickImp.h"
 
 namespace oe {
-namespace ioDevice {
+namespace iodevice {
 
 IMPLEMENT_SUBCLASS(UsbJoystickImp, "UsbJoystick")
 EMPTY_SLOTTABLE(UsbJoystickImp)

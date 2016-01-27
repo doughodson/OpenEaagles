@@ -1,7 +1,7 @@
 
 include ../makedefs
 
-LIB = $(OPENEAAGLES_LIB_DIR)/liboeIoDevice.a
+LIB = $(OPENEAAGLES_LIB_DIR)/liboeiodevice.a
 
 OBJS =  \
 	$(LIB)(Ai2DiSwitch.o) \

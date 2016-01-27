@@ -4,10 +4,10 @@
 #ifndef __oe_ioDevice_Windows_UsbJoystickImp_H__
 #define __oe_ioDevice_Windows_UsbJoystickImp_H__
 
-#include "openeaagles/ioDevice/UsbJoystick.h"
+#include "openeaagles/iodevice/UsbJoystick.h"
 
 namespace oe {
-namespace ioDevice {
+namespace iodevice {
 
 //------------------------------------------------------------------------------
 // Class:  UsbJoystickImp
