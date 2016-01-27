@@ -222,13 +222,13 @@ solution "oe"
       defines { "_SCL_SECURE_NO_WARNINGS" } -- suppress protocol buffer warning
       targetname "Recorder"
 
-   -- sensors library
-   project "sensors"
+   -- sensor library
+   project "sensor"
       files {
-         "../../include/openeaagles/sensors/**.h",
-         "../../src/sensors/**.cpp"
+         "../../include/openeaagles/sensor/**.h",
+         "../../src/sensor/**.cpp"
       }
-      targetname "Sensors"
+      targetname "sensor"
 
    -- simulation library
    project "simulation"

@@ -1,4 +1,5 @@
-#include "openeaagles/sensors/Tws.h"
+
+#include "openeaagles/sensor/Tws.h"
 
 namespace oe {
 namespace sensor {
@@ -12,7 +13,6 @@ Tws::Tws()
 {
     STANDARD_CONSTRUCTOR()
 }
-
 
 //------------------------------------------------------------------------------
 // copyData(), deleteData() -- copy (delete) member data
@@ -28,7 +28,6 @@ void Tws::copyData(const Tws& org, const bool)
 void Tws::deleteData()
 {
 }
-
 
 //------------------------------------------------------------------------------
 // serialize

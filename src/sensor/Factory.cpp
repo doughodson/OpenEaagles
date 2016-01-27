@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: Factory
 //------------------------------------------------------------------------------
-#include "openeaagles/sensors/Factory.h"
+#include "openeaagles/sensor/Factory.h"
 
 #include "openeaagles/basic/Object.h"
 
-#include "openeaagles/sensors/Gmti.h"
-#include "openeaagles/sensors/Tws.h"
-#include "openeaagles/sensors/Stt.h"
+#include "openeaagles/sensor/Gmti.h"
+#include "openeaagles/sensor/Tws.h"
+#include "openeaagles/sensor/Stt.h"
 
 #include <cstring>
 

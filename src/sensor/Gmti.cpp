@@ -1,4 +1,5 @@
-#include "openeaagles/sensors/Gmti.h"
+
+#include "openeaagles/sensor/Gmti.h"
 
 #include "openeaagles/simulation/Antenna.h"
 #include "openeaagles/simulation/Emission.h"

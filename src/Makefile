@@ -16,7 +16,7 @@ include makedefs
 # maps         : -
 # otw          : CIGICL 3.x
 # recorder     : Google protocol buffers
-# sensors      : -
+# sensor       : -
 # simulation   : -
 # terrain      : -
 #
@@ -25,7 +25,7 @@ PROJECTS += basicGL instruments
 PROJECTS += dafif
 PROJECTS += iodevice
 PROJECTS += linearsystem 
-PROJECTS += simulation sensors terrain
+PROJECTS += simulation sensor terrain
 PROJECTS += dis
 PROJECTS += dynamics
 PROJECTS += maps
