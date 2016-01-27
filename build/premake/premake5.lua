@@ -170,17 +170,17 @@ solution "oe"
       targetname "Instruments"
 
    -- i/o device library
-   project "ioDevice"
+   project "iodevice"
       files {
-         "../../include/openeaagles/ioDevice/**.h",
-         "../../src/ioDevice/**.cpp"
+         "../../include/openeaagles/iodevice/**.h",
+         "../../src/iodevice/**.cpp"
       }
       if (os.is("linux")) then
-         excludes { "../../src/ioDevice/windows/*" }
+         excludes { "../../src/iodevice/windows/*" }
       else
-         excludes { "../../src/ioDevice/linux/*"   }
+         excludes { "../../src/iodevice/linux/*"   }
       end
-      targetname "IoDevice"
+      targetname "iodevice"
 
    -- linear systems library
    project "linearSys"
