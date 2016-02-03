@@ -4,7 +4,7 @@ include ../makedefs
 #CPPFLAGS += -DCIGI_LITTLE_ENDIAN
 #CPPFLAGS += -I$(CIGICL_DIR)
 
-LIB = $(OPENEAAGLES_LIB_DIR)/liboeOtw.a
+LIB = $(OPENEAAGLES_LIB_DIR)/liboeotw.a
 
 OBJS =  \
 	$(LIB)(Factory.o) \

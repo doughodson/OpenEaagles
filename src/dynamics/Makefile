@@ -1,7 +1,7 @@
 #
 include ../makedefs
 
-LIB = $(OPENEAAGLES_LIB_DIR)/liboeDynamics.a
+LIB = $(OPENEAAGLES_LIB_DIR)/liboedynamics.a
 
 CPPFLAGS += -I$(JSBSIM_INC_DIR)
 

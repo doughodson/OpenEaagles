@@ -115,7 +115,7 @@ solution "oe"
          "../../src/basic/osg/Matrix_implementation.cpp",
          "../../src/basic/linux/**.*"
       }
-      targetname "Basic"
+      targetname "basic"
 
    -- basic OpenGL library
    project "basicGL"
@@ -133,7 +133,7 @@ solution "oe"
          "../../include/openeaagles/gui/glut/**.h",
          "../../src/gui/glut/**.cpp"
       }
-      targetname "Glut"
+      targetname "glut"
 
    -- DAFIF airport loader library
    project "dafif"
@@ -141,7 +141,7 @@ solution "oe"
          "../../include/openeaagles/dafif/**.h",
          "../../src/dafif/**.cpp"
       }
-      targetname "Dafif"
+      targetname "dafif"
 
    -- IEEE DIS interface library
    project "dis"
@@ -149,7 +149,7 @@ solution "oe"
          "../../include/openeaagles/dis/**.h",
          "../../src/dis/**.cpp"
       }
-      targetname "Dis"
+      targetname "dis"
 
    -- dynamics library
    project "dynamics"
@@ -158,7 +158,7 @@ solution "oe"
          "../../src/dynamics/**.cpp"
       }
       includedirs { OE3rdPartyIncPath.."/JSBSim" }
-      targetname "Dynamics"
+      targetname "dynamics"
 
    -- graphical instruments library
    project "instruments"
@@ -167,7 +167,7 @@ solution "oe"
          "../../include/openeaagles/instruments/**.epp",
          "../../src/instruments/**.cpp"
       }
-      targetname "Instruments"
+      targetname "instruments"
 
    -- i/o device library
    project "iodevice"
@@ -196,7 +196,7 @@ solution "oe"
          "../../include/openeaagles/maps/**.h",
          "../../src/maps/**.cpp"
       }
-      targetname "Maps"
+      targetname "maps"
 
    -- otw library
    project "otw"
@@ -209,7 +209,7 @@ solution "oe"
          "../../include/openeaagles/otw/OtwCigiClV2.h",
          "../../src/otw/OtwCigiClV2.cpp"
       }
-      targetname "Otw"
+      targetname "otw"
 
    project "recorder"
       files {
@@ -220,7 +220,7 @@ solution "oe"
          "../../src/recorder/**.cc"
       }
       defines { "_SCL_SECURE_NO_WARNINGS" } -- suppress protocol buffer warning
-      targetname "Recorder"
+      targetname "recorder"
 
    -- sensor library
    project "sensor"
@@ -237,7 +237,7 @@ solution "oe"
          "../../include/openeaagles/simulation/*.inl",
          "../../src/simulation/**.cpp"
       }
-      targetname "Simulation"
+      targetname "simulation"
 
    -- terrain library
    project "terrain"
@@ -245,6 +245,6 @@ solution "oe"
          "../../include/openeaagles/terrain/**.h",
          "../../src/terrain/**.cpp"
       }
-      targetname "Terrain"
+      targetname "terrain"
 
 

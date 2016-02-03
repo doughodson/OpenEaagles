@@ -1,7 +1,7 @@
 #
 include ../makedefs
 
-LIB = $(OPENEAAGLES_LIB_DIR)/liboeDis.a
+LIB = $(OPENEAAGLES_LIB_DIR)/liboedis.a
 
 OBJS =  \
 	$(LIB)(EmissionPduHandler.o) \

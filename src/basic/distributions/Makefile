@@ -1,7 +1,7 @@
 #
 include ../../makedefs
 
-LIB = $(OPENEAAGLES_LIB_DIR)/liboeBasic.a
+LIB = $(OPENEAAGLES_LIB_DIR)/liboebasic.a
 
 OBJS =  \
 	$(LIB)(Exponential.o) \

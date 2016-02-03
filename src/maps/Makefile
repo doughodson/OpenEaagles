@@ -1,7 +1,7 @@
 #
 include ../makedefs
 
-LIB = $(OPENEAAGLES_LIB_DIR)/liboeMaps.a
+LIB = $(OPENEAAGLES_LIB_DIR)/liboemaps.a
 
 OBJS =  \
 	$(LIB)(Factory.o)

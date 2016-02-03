@@ -1,7 +1,7 @@
 #
 include ../../makedefs
 
-LIB = $(OPENEAAGLES_LIB_DIR)/liboeInstruments.a
+LIB = $(OPENEAAGLES_LIB_DIR)/liboeinstruments.a
 
 OBJS =  \
 	$(LIB)(AnalogGauge.o) \
