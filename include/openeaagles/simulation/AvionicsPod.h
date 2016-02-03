@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Classes: AvionicsPod
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_AvionicsPod_H__
-#define __oe_Simulation_AvionicsPod_H__
+#ifndef __oe_simulation_AvionicsPod_H__
+#define __oe_simulation_AvionicsPod_H__
 
 #include "openeaagles/simulation/ExternalStore.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //------------------------------------------------------------------------------
 // Class: AvionicsPod
@@ -23,7 +23,7 @@ public:
    AvionicsPod();
 };
 
-} // end Simulation namespace
+} // end simulation namespace
 } // end oe namespace
 
 #endif

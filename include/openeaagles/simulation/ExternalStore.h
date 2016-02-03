@@ -1,15 +1,15 @@
 //------------------------------------------------------------------------------
 // Class: ExternalStore
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_ExternalStore_H__
-#define __oe_Simulation_ExternalStore_H__
+#ifndef __oe_simulation_ExternalStore_H__
+#define __oe_simulation_ExternalStore_H__
 
 #include "openeaagles/simulation/System.h"
 
 namespace oe {
    namespace basic { class String; }
 
-namespace Simulation {
+namespace simulation {
 
 //------------------------------------------------------------------------------
 // Class: ExternalStore
@@ -67,7 +67,7 @@ private:
    bool        jettisoned;      // Weapon has been jettisoned.
 };
 
-} // end Simulation namespace
+} // end simulation namespace
 } // end oe namespace
 
 #endif

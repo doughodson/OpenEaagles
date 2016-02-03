@@ -10,9 +10,9 @@
 namespace oe {
 namespace sensor {
 
-class Tws : public Simulation::Radar
+class Tws : public simulation::Radar
 {
-    DECLARE_SUBCLASS(Tws,Simulation::Radar)
+    DECLARE_SUBCLASS(Tws,simulation::Radar)
 
 public:
     Tws();

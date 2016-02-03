@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Classes: AircraftIrSignature
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_AircraftIrSignature_H__
-#define __oe_Simulation_AircraftIrSignature_H__
+#ifndef __oe_simulation_AircraftIrSignature_H__
+#define __oe_simulation_AircraftIrSignature_H__
 
 #include "openeaagles/simulation/IrSignature.h"
 
@@ -17,7 +17,7 @@ namespace oe {
       class Table5;
    }
 
-namespace Simulation {
+namespace simulation {
    class AirVehicle;
    class IrQueryMsg;
    class IrShape;
@@ -143,7 +143,7 @@ private:
 };
 
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

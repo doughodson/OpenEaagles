@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: MultiActorAgent
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_MultiActorAgent_H__
-#define __oe_Simulation_MultiActorAgent_H__
+#ifndef __oe_simulation_MultiActorAgent_H__
+#define __oe_simulation_MultiActorAgent_H__
 
 #include "openeaagles/basic/Component.h"
 
@@ -11,7 +11,7 @@ namespace oe {
       namespace Ubf { class Behavior; class State; }
    }
 
-namespace Simulation {
+namespace simulation {
 
 class Simulation;
 class Station;
@@ -78,7 +78,7 @@ private:
 
 inline void MultiActorAgent::setActor(basic::Component* c) { actor=c; }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 

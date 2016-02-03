@@ -2,8 +2,8 @@
 // Class: Player
 // inline functions
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_Player_Inline__
-#define __oe_Simulation_Player_Inline__
+#ifndef __oe_simulation_Player_Inline__
+#define __oe_simulation_Player_Inline__
 
 // The player's type string (.e.g, "F-16C")
 inline const basic::String* Player::getType() const

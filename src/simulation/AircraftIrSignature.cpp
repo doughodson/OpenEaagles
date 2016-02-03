@@ -14,7 +14,7 @@
 #include "openeaagles/basic/units/Areas.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 IMPLEMENT_SUBCLASS(AircraftIrSignature,"AircraftIrSignature")
 EMPTY_SERIALIZER(AircraftIrSignature)
@@ -681,6 +681,6 @@ LCreal* AircraftIrSignature::getHeatSignature(IrQueryMsg* msg)
 }
 
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 

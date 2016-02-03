@@ -4,13 +4,13 @@
 // Description: General designator (e.g., laser)
 //
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_Designator_H__
-#define __oe_Simulation_Designator_H__
+#ifndef __oe_simulation_Designator_H__
+#define __oe_simulation_Designator_H__
 
 #include "openeaagles/basic/Object.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 class Player;
 
@@ -66,7 +66,7 @@ private:
    Data data;          // Designator data (see above)
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

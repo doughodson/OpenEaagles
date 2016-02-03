@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: Navigation
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_Navigation_H__
-#define __oe_Simulation_Navigation_H__
+#ifndef __oe_simulation_Navigation_H__
+#define __oe_simulation_Navigation_H__
 
 #include "openeaagles/simulation/System.h"
 #include "openeaagles/basic/osg/Vec2"
@@ -11,7 +11,7 @@ namespace oe {
 
 namespace basic { class Time; }
 
-namespace Simulation {
+namespace simulation {
 class Player;
 class Route;
 class Bullseye;
@@ -248,7 +248,7 @@ private:
    double  refLon;             // Ref longitude (deg)
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

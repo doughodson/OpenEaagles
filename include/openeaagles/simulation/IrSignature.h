@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: IrSignature
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_IrSignature_H__
-#define __oe_Simulation_IrSignature_H__
+#ifndef __oe_simulation_IrSignature_H__
+#define __oe_simulation_IrSignature_H__
 
 #include "openeaagles/basic/Component.h"
 
@@ -13,7 +13,7 @@ namespace oe {
       class Table1;
    }
 
-namespace Simulation {
+namespace simulation {
    class IrQueryMsg;
    class IrShape;
 
@@ -143,7 +143,7 @@ private:
    LCreal effectiveArea;                 // The effective area for heat calculations  (m^2)
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

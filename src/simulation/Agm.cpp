@@ -3,7 +3,7 @@
 #include "openeaagles/simulation/Track.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //==============================================================================
 // Agm class -- Generic Air to Ground Missile
@@ -80,5 +80,5 @@ bool Agm::calculateVectors(const Player* const tgt, const Track* const trk, osg:
    return true;
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace

@@ -20,7 +20,7 @@
 #include <cmath>
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
    // default flight control attributes associated with flying a pattern
    const double Autopilot::STD_RATE_TURN_DPS   = 3.0;       // 3.0 degrees per second
@@ -1717,5 +1717,5 @@ basic::Object* Autopilot::getSlotByIndex(const int si)
     return BaseClass::getSlotByIndex(si);
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace

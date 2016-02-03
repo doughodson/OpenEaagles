@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Classes: RfSensor, SensorMgr
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_RfSensor_H__
-#define __oe_Simulation_RfSensor_H__
+#ifndef __oe_simulation_RfSensor_H__
+#define __oe_simulation_RfSensor_H__
 
 #include "openeaagles/simulation/RfSystem.h"
 
@@ -15,7 +15,7 @@ namespace oe {
       class String;
       class Time;
    }
-namespace Simulation {
+namespace simulation {
 
 class Antenna;
 class Player;
@@ -178,7 +178,7 @@ public:
     SensorMgr();
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

@@ -17,7 +17,7 @@
 #include <cmath>
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 IMPLEMENT_SUBCLASS(IrAtmosphere,"IrAtmosphere")
 EMPTY_SERIALIZER(IrAtmosphere)
@@ -292,6 +292,6 @@ basic::Object* IrAtmosphere::getSlotByIndex(const int si)
     return BaseClass::getSlotByIndex(si);
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 

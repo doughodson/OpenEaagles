@@ -22,7 +22,7 @@ IMPLEMENT_PARTIAL_SUBCLASS(Nib,"DisNib")
 EMPTY_SLOTTABLE(Nib)
 EMPTY_SERIALIZER(Nib)
 
-Nib::Nib(const Simulation::NetIO::IoType ioType) : Simulation::Nib(ioType)
+Nib::Nib(const simulation::NetIO::IoType ioType) : simulation::Nib(ioType)
 {
    iffFunOpData = nullptr;
    iffOptions = 0;
@@ -53,7 +53,7 @@ Nib::Nib(const Simulation::NetIO::IoType ioType) : Simulation::Nib(ioType)
 }
 
 
-Nib::Nib(const Nib& org) : Simulation::Nib(org.getIoType())
+Nib::Nib(const Nib& org) : simulation::Nib(org.getIoType())
 {
     STANDARD_CONSTRUCTOR()
     copyData(org,true);
@@ -212,7 +212,7 @@ bool Nib::networkOutputManagers(const LCreal curExecTime)
 //------------------------------------------------------------------------------
 void Nib::updateTheIPlayer()
 {
-    Simulation::Player* p = getPlayer();
+    simulation::Player* p = getPlayer();
 
    // ---
    // If we haven't tried to created the IPlayer yet ...
@@ -360,9 +360,9 @@ bool Nib::emitterBeamsManager(const LCreal curExecTime)
       // Check for the single-beam RADAR
       {
          // (DPG -- #### only a simple, single-beam Radar)
-         const basic::Pair * pair = getPlayer()->getSensorByType(typeid(Simulation::Radar));
+         const basic::Pair * pair = getPlayer()->getSensorByType(typeid(simulation::Radar));
          if (pair != nullptr) {
-            Simulation::RfSensor* rs = (Simulation::RfSensor*) pair->object();
+            simulation::RfSensor* rs = (simulation::RfSensor*) pair->object();
 
             // When we have a R/F sensor, create a handler for it
             EmissionPduHandler* handler = nullptr;
@@ -389,9 +389,9 @@ bool Nib::emitterBeamsManager(const LCreal curExecTime)
 
       // Check for a Jammer
       {
-         const basic::Pair * pair = getPlayer()->getSensorByType(typeid(Simulation::Jammer));
+         const basic::Pair * pair = getPlayer()->getSensorByType(typeid(simulation::Jammer));
          if (pair != nullptr) {
-            Simulation::RfSensor* js = (Simulation::RfSensor*) pair->object();
+            simulation::RfSensor* js = (simulation::RfSensor*) pair->object();
 
             bool singleBeam = true;
             basic::PairStream* subcomponents = js->getComponents();
@@ -402,7 +402,7 @@ bool Nib::emitterBeamsManager(const LCreal curExecTime)
                while (item != nullptr && numEmissionSystems < MAX_EM_SYSTEMS) {
 
                   basic::Pair* pair = static_cast<basic::Pair*>( item->getValue() );
-                  Simulation::Jammer* jam = dynamic_cast<Simulation::Jammer*>( pair->object() );
+                  simulation::Jammer* jam = dynamic_cast<simulation::Jammer*>( pair->object() );
                   if (jam != nullptr) {
                      singleBeam = false;
 

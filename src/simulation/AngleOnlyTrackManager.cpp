@@ -18,7 +18,7 @@
 #include <cmath>
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //==============================================================================
 // Class: AngleOnlyTrackManager
@@ -1096,5 +1096,5 @@ void AirAngleOnlyTrkMgrPT::processTrackList(const LCreal dt)
     lcUnlock(trkListLock);
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace

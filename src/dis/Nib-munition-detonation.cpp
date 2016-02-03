@@ -26,7 +26,7 @@ namespace dis {
 bool Nib::munitionDetonationMsgFactory(const LCreal)
 {
    // Dummy weapon?
-   const Simulation::Weapon* ww = dynamic_cast<const Simulation::Weapon*>( getPlayer() );
+   const simulation::Weapon* ww = dynamic_cast<const simulation::Weapon*>( getPlayer() );
    if (ww != nullptr) {
       if (ww->isDummy()) return true;
    }
@@ -38,12 +38,12 @@ bool Nib::munitionDetonationMsgFactory(const LCreal)
     NetIO* disIO = static_cast<NetIO*>(getNetIO());
 
     // If our NIB's player just detonated, then it must be a weapon!
-    Simulation::Weapon* mPlayer = dynamic_cast<Simulation::Weapon*>(getPlayer());
+    simulation::Weapon* mPlayer = dynamic_cast<simulation::Weapon*>(getPlayer());
     if (mPlayer == nullptr) return false;
 
     // Ok, we have the weapon, now get the firing and target players
-    Simulation::Player* tPlayer = mPlayer->getTargetPlayer();
-    Simulation::Player* fPlayer = mPlayer->getLaunchVehicle();
+    simulation::Player* tPlayer = mPlayer->getTargetPlayer();
+    simulation::Player* fPlayer = mPlayer->getLaunchVehicle();
     if (fPlayer == nullptr) return false;
 
     // ---

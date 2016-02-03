@@ -1,15 +1,15 @@
 //------------------------------------------------------------------------------
 // Class: Message
 //----------------------------------------------------------------------------------
-#ifndef __oe_Simulation_Message_H__
-#define __oe_Simulation_Message_H__
+#ifndef __oe_simulation_Message_H__
+#define __oe_simulation_Message_H__
 
 #include "openeaagles/basic/Object.h"
 #include "openeaagles/basic/String.h"
 #include "openeaagles/basic/List.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //------------------------------------------------------------------------------
 // Class: Message

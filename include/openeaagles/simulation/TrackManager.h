@@ -1,14 +1,14 @@
 //------------------------------------------------------------------------------
 // Classes: TrackManager, AirTrkMgr, GmtiGrkMgr, RwrGrkMgr
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_TrackManager_H__
-#define __oe_Simulation_TrackManager_H__
+#ifndef __oe_simulation_TrackManager_H__
+#define __oe_simulation_TrackManager_H__
 
 #include "openeaagles/simulation/System.h"
 #include "openeaagles/basic/safe_queue.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 class Emission;
 class Player;
@@ -219,7 +219,7 @@ private:
    unsigned int* trackNumMatches;            // Number of matcher for each track
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

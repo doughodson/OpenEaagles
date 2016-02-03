@@ -82,17 +82,17 @@ void OtwPC::deleteData()
 //------------------------------------------------------------------------------
 // modelFactory() -- Create OtwModel objects unique to interface
 //------------------------------------------------------------------------------
-Simulation::OtwModel* OtwPC::modelFactory()
+simulation::OtwModel* OtwPC::modelFactory()
 {
-    return new Simulation::OtwModel();
+    return new simulation::OtwModel();
 }
 
 //------------------------------------------------------------------------------
 // hotFactory() -- Create OtwHot objects unique to interface
 //------------------------------------------------------------------------------
-Simulation::OtwModel* OtwPC::hotFactory()
+simulation::OtwModel* OtwPC::hotFactory()
 {
-    return new Simulation::OtwModel();
+    return new simulation::OtwModel();
 }
 
 //------------------------------------------------------------------------------
@@ -199,7 +199,7 @@ void OtwPC::sendPcData()
     //const LCreal DEG2MR = (PI / 180.0f * 1000.0f);
 
     // Ownship type air vehicle?
-    const Simulation::AirVehicle* av = dynamic_cast<const Simulation::AirVehicle*>(getOwnship());
+    const simulation::AirVehicle* av = dynamic_cast<const simulation::AirVehicle*>(getOwnship());
     if (av != nullptr) {
 
         dsFlightModelData fmd;

@@ -26,9 +26,9 @@ namespace dynamics {
 //    cmdHeading     <Angle>     ! Command Heading
 //    cmdSpeed       <Number>    ! Command speed           (kts)
 //------------------------------------------------------------------------------
-class RacModel : public Simulation::AerodynamicsModel
+class RacModel : public simulation::AerodynamicsModel
 {
-    DECLARE_SUBCLASS(RacModel, Simulation::AerodynamicsModel)
+    DECLARE_SUBCLASS(RacModel, simulation::AerodynamicsModel)
 
 public:
     RacModel();

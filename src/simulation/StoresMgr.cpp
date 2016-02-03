@@ -27,7 +27,7 @@
 #endif
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //==============================================================================
 // Class StoresMgr
@@ -1130,5 +1130,5 @@ bool SimpleStoresMgr::onTriggerSwEvent(const basic::Boolean* const sw)
 }
 
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace

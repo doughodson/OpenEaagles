@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: Nib
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_Nib_H__
-#define __oe_Simulation_Nib_H__
+#ifndef __oe_simulation_Nib_H__
+#define __oe_simulation_Nib_H__
 
 #include "openeaagles/simulation/NetIO.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
    class Missile;
 
 //------------------------------------------------------------------------------
@@ -337,7 +337,7 @@ private:
    unsigned int apartNumMissiles;      // Articulated Part: Number of attached missiles
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

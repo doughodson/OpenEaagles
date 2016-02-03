@@ -10,7 +10,7 @@
 #include "openeaagles/basic/units/Distances.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //==============================================================================
 // Class: NavRadio
@@ -539,5 +539,5 @@ bool IlsRadio::findLocalizerByFreq(LCreal freq)
    return localizerValid;
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace

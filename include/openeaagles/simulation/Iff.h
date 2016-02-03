@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: Iff
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_Iff_H__
-#define __oe_Simulation_Iff_H__
+#ifndef __oe_simulation_Iff_H__
+#define __oe_simulation_Iff_H__
 
 #include "openeaagles/simulation/Radio.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //------------------------------------------------------------------------------
 // Class: Iff
@@ -119,7 +119,7 @@ private:
    bool icWhichMode4;         // Initial Mode 4 mode
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

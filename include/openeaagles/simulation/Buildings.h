@@ -2,13 +2,13 @@
 // Class: Building
 // Description: Generic building
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_Building_H__
-#define __oe_Simulation_Building_H__
+#ifndef __oe_simulation_Building_H__
+#define __oe_simulation_Building_H__
 
 #include "openeaagles/simulation/Player.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //==============================================================================
 // Class: Building
@@ -25,7 +25,7 @@ public:
     unsigned int getMajorType() const override;
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

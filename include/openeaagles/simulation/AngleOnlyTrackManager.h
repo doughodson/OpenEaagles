@@ -1,14 +1,14 @@
 //----------------------------------------------------
 // Classes: AngleOnlyTrackManager, AirAngleOnlyTrkMgr
 //----------------------------------------------------
-#ifndef __oe_Simulation_AngleOnlyTrackManager_H__
-#define __oe_Simulation_AngleOnlyTrackManager_H__
+#ifndef __oe_simulation_AngleOnlyTrackManager_H__
+#define __oe_simulation_AngleOnlyTrackManager_H__
 
 #include "openeaagles/simulation/TrackManager.h"
 #include "openeaagles/basic/safe_queue.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
    class IrQueryMsg;
    class Track;
 
@@ -107,7 +107,7 @@ private:
    bool usePerceivedPosVel;
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

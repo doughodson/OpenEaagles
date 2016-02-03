@@ -18,7 +18,7 @@
 #include <cmath>
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //==============================================================================
 // Class: Gimbal
@@ -1482,5 +1482,5 @@ std::ostream& Gimbal::serialize(std::ostream& sout, const int i, const bool slot
     return sout;
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace

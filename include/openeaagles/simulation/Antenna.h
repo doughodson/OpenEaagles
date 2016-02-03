@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: Antenna
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_Antenna_H__
-#define __oe_Simulation_Antenna_H__
+#ifndef __oe_simulation_Antenna_H__
+#define __oe_simulation_Antenna_H__
 
 #include "openeaagles/simulation/ScanGimbal.h"
 #include "openeaagles/basic/safe_queue.h"
@@ -13,7 +13,7 @@ namespace oe {
       class Function;
       class Power;
    }
-namespace Simulation {
+namespace simulation {
 
 class Player;
 class RfSystem;
@@ -161,7 +161,7 @@ private:
    bool        recycle;            // Recycle emissions flag
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

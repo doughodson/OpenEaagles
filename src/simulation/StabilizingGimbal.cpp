@@ -20,7 +20,7 @@
 #include "openeaagles/basic/osg/Vec3"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 IMPLEMENT_SUBCLASS(StabilizingGimbal,"StabilizingGimbal")
 
@@ -220,5 +220,5 @@ std::ostream& StabilizingGimbal::serialize(std::ostream& sout, const int i, cons
     return sout;
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace

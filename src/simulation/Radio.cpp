@@ -15,7 +15,7 @@
 #include "openeaagles/basic/units/Powers.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //==============================================================================
 // Class: Radio
@@ -556,5 +556,5 @@ void CommRadio::receivedEmissionReport(Emission* const em)
    }
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace

@@ -32,14 +32,14 @@ bool Nib::weaponFireMsgFactory(const LCreal)
     //Simulation* sim = disIO->getSimulation();
 
     // Set the NIB mode so that we don't do this again.
-    setMode(Simulation::Player::ACTIVE);
+    setMode(simulation::Player::ACTIVE);
 
     // Our NIB's player is a weapon that just became active
-    Simulation::Weapon* mPlayer = static_cast<Simulation::Weapon*>(getPlayer());
+    simulation::Weapon* mPlayer = static_cast<simulation::Weapon*>(getPlayer());
 
     // Ok, we have the weapon, now get the firing and target players
-    Simulation::Player* tPlayer = mPlayer->getTargetPlayer();
-    Simulation::Player* fPlayer = mPlayer->getLaunchVehicle();
+    simulation::Player* tPlayer = mPlayer->getTargetPlayer();
+    simulation::Player* fPlayer = mPlayer->getLaunchVehicle();
     if (fPlayer == nullptr) return false;
 
     // ---

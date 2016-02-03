@@ -5,7 +5,7 @@
 #include "openeaagles/basic/String.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //------------------------------------------------------------
 // Dummy weapon for non-releasable, non-jettisonable stores
@@ -184,5 +184,5 @@ std::ostream& ExternalStore::serialize(std::ostream& sout, const int i, const bo
 }
 
 
-} // end Simulation namespace
+} // end simulation namespace
 } // end oe namespace

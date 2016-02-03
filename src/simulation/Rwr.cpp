@@ -10,7 +10,7 @@
 #include "openeaagles/simulation/Player.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 IMPLEMENT_PARTIAL_SUBCLASS(Rwr,"Rwr")
 EMPTY_SLOTTABLE(Rwr)
@@ -257,5 +257,5 @@ std::ostream& Rwr::serialize(std::ostream& sout, const int i, const bool slotsOn
     return sout;
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace

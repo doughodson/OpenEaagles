@@ -2,7 +2,7 @@
 #include "openeaagles/simulation/Message.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 IMPLEMENT_SUBCLASS(Message,"Message")
 EMPTY_SLOTTABLE(Message)

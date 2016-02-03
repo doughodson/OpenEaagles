@@ -1,14 +1,14 @@
 //------------------------------------------------------------------------------
 // Class: Rwr
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_Rwr_H__
-#define __oe_Simulation_Rwr_H__
+#ifndef __oe_simulation_Rwr_H__
+#define __oe_simulation_Rwr_H__
 
 #include "openeaagles/simulation/RfSensor.h"
 #include "openeaagles/basic/safe_queue.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 //------------------------------------------------------------------------------
 // Class: Rwr
 // Base class: basic::Object -> ... -> RfSystem -> RfSensor -> Rwr
@@ -64,7 +64,7 @@ private:
    LCreal rays[2][NUM_RAYS];     // Back (sensor) buffer [0][*] and front (graphics) buffer [1][*]
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

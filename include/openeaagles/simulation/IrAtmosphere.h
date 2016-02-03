@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: IrAtmosphere
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_IrAtmosphere_H__
-#define __oe_Simulation_IrAtmosphere_H__
+#ifndef __oe_simulation_IrAtmosphere_H__
+#define __oe_simulation_IrAtmosphere_H__
 
 #include "openeaagles/basic/Component.h"
 
@@ -18,12 +18,12 @@ namespace oe {
       class Number;
    }
 
-namespace Simulation {
+namespace simulation {
 
 class IrQueryMsg;
 
 //------------------------------------------------------------------------------
-// Class:   Simulation::IrAtmosphere
+// Class:   simulation::IrAtmosphere
 //
 // Description: Manages the atmospheric data to determine transmissivity
 //              and background radiation for specific infrared wavelengths
@@ -150,7 +150,7 @@ private:
    LCreal earthRadiance;    // Simple background radiance for targets on ground
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

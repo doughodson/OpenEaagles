@@ -11,8 +11,8 @@
 // Description: Very similar to SimLogger, except ASCII output is more verbose and
 //              formatted using tab characters
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_TabLogger_H__
-#define __oe_Simulation_TabLogger_H__
+#ifndef __oe_simulation_TabLogger_H__
+#define __oe_simulation_TabLogger_H__
 
 #include "openeaagles/simulation/SimLogger.h"
 
@@ -20,7 +20,7 @@ namespace oe {
 
 namespace basic { class Identifier; }
 
-namespace Simulation {
+namespace simulation {
 
 class Weapon;
 class Track;
@@ -224,7 +224,7 @@ public:
     };
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Classes: SamVehicle
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_SamVehicle_H__
-#define __oe_Simulation_SamVehicle_H__
+#ifndef __oe_simulation_SamVehicle_H__
+#define __oe_simulation_SamVehicle_H__
 
 #include "openeaagles/simulation/GroundVehicle.h"
 
@@ -12,7 +12,7 @@ namespace oe {
       class Identifier;
       class Time;
    }
-namespace Simulation {
+namespace simulation {
 
 //==============================================================================
 // Class SamVehicle
@@ -57,7 +57,7 @@ private:
    unsigned int      numMsl;           // Number of missile available
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

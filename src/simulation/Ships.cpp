@@ -5,7 +5,7 @@
 #include "openeaagles/basic/units/Angles.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //==============================================================================
 // class Ship
@@ -43,5 +43,5 @@ unsigned int Ship::getMajorType() const
     return SHIP;
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace

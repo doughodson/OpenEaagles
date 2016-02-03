@@ -16,7 +16,7 @@
 #include "openeaagles/simulation/Simulation.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 IMPLEMENT_PARTIAL_SUBCLASS(Radar,"Radar")
 
@@ -618,5 +618,5 @@ std::ostream& Radar::serialize(std::ostream& sout, const int i, const bool slots
    return sout;
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace

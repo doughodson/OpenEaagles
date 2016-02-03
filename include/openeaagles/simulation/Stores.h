@@ -1,15 +1,15 @@
 //------------------------------------------------------------------------------
 // Classes: Stores
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_Stores_H__
-#define __oe_Simulation_Stores_H__
+#ifndef __oe_simulation_Stores_H__
+#define __oe_simulation_Stores_H__
 
 #include "openeaagles/simulation/ExternalStore.h"
 
 namespace oe {
    namespace basic { class Number; class PairStream; }
 
-namespace Simulation {
+namespace simulation {
    class Weapon;
 
 //------------------------------------------------------------------------------
@@ -226,7 +226,7 @@ private:
    }
 };
 
-} // end Simulation namespace
+} // end simulation namespace
 } // end oe namespace
 
 #endif

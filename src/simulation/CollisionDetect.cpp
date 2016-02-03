@@ -14,7 +14,7 @@
 #include <cmath>
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 IMPLEMENT_SUBCLASS(CollisionDetect,"CollisionDetect")
 
@@ -696,5 +696,5 @@ std::ostream& CollisionDetect::serialize(std::ostream& sout, const int i, const 
     return sout;
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace

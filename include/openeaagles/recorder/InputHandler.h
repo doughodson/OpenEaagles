@@ -14,9 +14,9 @@ namespace recorder {
 // Class:   InputHandler
 // Description: Read and parse data records from an input source
 //------------------------------------------------------------------------------
-class InputHandler : public Simulation::RecorderComponent
+class InputHandler : public simulation::RecorderComponent
 {
-    DECLARE_SUBCLASS(InputHandler, Simulation::RecorderComponent)
+    DECLARE_SUBCLASS(InputHandler, simulation::RecorderComponent)
 
 public:
    InputHandler();

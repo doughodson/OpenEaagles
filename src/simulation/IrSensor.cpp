@@ -27,7 +27,7 @@
 #include <cmath>
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //IMPLEMENT_SUBCLASS(IrSensor,"IrSensor")
 IMPLEMENT_PARTIAL_SUBCLASS(IrSensor,"IrSensor")

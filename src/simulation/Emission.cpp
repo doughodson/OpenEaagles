@@ -7,7 +7,7 @@
 #include <cmath>
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //==============================================================================
 // Class Emission
@@ -116,5 +116,5 @@ void Emission::setTransmitter(RfSystem* const t)
    //}
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace

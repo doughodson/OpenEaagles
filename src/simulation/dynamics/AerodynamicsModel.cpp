@@ -3,7 +3,7 @@
 #include "openeaagles/basic/units/Angles.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(AerodynamicsModel, "AerodynamicsModel")
 EMPTY_SERIALIZER(AerodynamicsModel)
@@ -256,5 +256,5 @@ int AerodynamicsModel::getEngThrustAb(LCreal* const, const int) const
     return 0;
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace

@@ -16,7 +16,7 @@
 #include <cmath>
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //==============================================================================
 // Class: Nib
@@ -1236,5 +1236,5 @@ bool Nib::drComputeMatrixR2(
    return true;
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace

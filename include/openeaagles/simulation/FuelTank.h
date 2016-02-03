@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: FuelTank
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_FuelTank_H__
-#define __oe_Simulation_FuelTank_H__
+#ifndef __oe_simulation_FuelTank_H__
+#define __oe_simulation_FuelTank_H__
 
 #include "openeaagles/simulation/ExternalStore.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //------------------------------------------------------------------------------
 // Class: FuelTank
@@ -49,7 +49,7 @@ private:
    LCreal initFuelWt;    // Fuel contents at reset (lb)
 };
 
-} // end Simulation namespace
+} // end simulation namespace
 } // end oe namespace
 
 #endif

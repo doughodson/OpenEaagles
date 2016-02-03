@@ -5,7 +5,7 @@
 #include "openeaagles/basic/units/Angles.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //==============================================================================
 // class Building
@@ -43,5 +43,5 @@ unsigned int Building::getMajorType() const
     return BUILDING;
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace

@@ -16,8 +16,8 @@
 //      SimLogger::RemovedRwrTrack  -- Removed old RWR track
 //      SimLogger::DetonationEvent  -- Weapon Detonated
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_SimLogger_H__
-#define __oe_Simulation_SimLogger_H__
+#ifndef __oe_simulation_SimLogger_H__
+#define __oe_simulation_SimLogger_H__
 
 #include "openeaagles/basic/Logger.h"
 #include "openeaagles/basic/safe_queue.h"
@@ -26,7 +26,7 @@ namespace oe {
    namespace basic {
       class Identifier;
    }
-namespace Simulation {
+namespace simulation {
 
 class Emission;
 class Player;
@@ -432,7 +432,7 @@ public:
 
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

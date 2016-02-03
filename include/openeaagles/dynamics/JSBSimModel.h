@@ -22,9 +22,9 @@ namespace basic {
 
 namespace dynamics {
 
-class JSBSimModel : public Simulation::AerodynamicsModel
+class JSBSimModel : public simulation::AerodynamicsModel
 {
-    DECLARE_SUBCLASS(JSBSimModel,Simulation::AerodynamicsModel)
+    DECLARE_SUBCLASS(JSBSimModel,simulation::AerodynamicsModel)
 
 public:
     JSBSimModel();

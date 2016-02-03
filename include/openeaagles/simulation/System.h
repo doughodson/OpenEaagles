@@ -1,15 +1,15 @@
 //------------------------------------------------------------------------------
 // Class: System
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_System_H__
-#define __oe_Simulation_System_H__
+#ifndef __oe_simulation_System_H__
+#define __oe_simulation_System_H__
 
 #include "openeaagles/basic/Component.h"
 
 namespace oe {
    namespace basic { class String; }
 
-namespace Simulation {
+namespace simulation {
 
 class Player;
 class Simulation;
@@ -109,7 +109,7 @@ private:
    unsigned int pwrSw;   // System's master power switch
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

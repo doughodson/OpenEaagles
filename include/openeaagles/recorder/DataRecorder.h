@@ -7,7 +7,7 @@
 #include "openeaagles/simulation/DataRecorder.h"
 
 namespace oe {
-   namespace Simulation { class Player; class Track; class Emission; }
+   namespace simulation { class Player; class Track; class Emission; }
    namespace basic { class String; }
 
 namespace recorder {
@@ -53,9 +53,9 @@ namespace recorder {
 //    REID_TRACK_DATA         ! obj[0] => (player); obj[1] => (track)
 //
 //------------------------------------------------------------------------------
-class DataRecorder : public Simulation::DataRecorder
+class DataRecorder : public simulation::DataRecorder
 {
-   DECLARE_SUBCLASS(DataRecorder, Simulation::DataRecorder)
+   DECLARE_SUBCLASS(DataRecorder, simulation::DataRecorder)
 
 public:
    DataRecorder();
@@ -93,13 +93,13 @@ protected:
    bool setSlotYear(basic::Number* const msg);
 
    // data filler functions
-   virtual void genPlayerId( pb::PlayerId* const id, const Simulation::Player* const player );
-   virtual void genPlayerState( pb::PlayerState* const state, const Simulation::Player* const player );
-   virtual void genTrackData( pb::TrackData* const trkMsg, const Simulation::Track* const track );
-   virtual void genEmissionData( pb::EmissionData* const emMsg, const Simulation::Emission* const emData);
+   virtual void genPlayerId( pb::PlayerId* const id, const simulation::Player* const player );
+   virtual void genPlayerState( pb::PlayerState* const state, const simulation::Player* const player );
+   virtual void genTrackData( pb::TrackData* const trkMsg, const simulation::Track* const track );
+   virtual void genEmissionData( pb::EmissionData* const emMsg, const simulation::Emission* const emData);
    virtual void sendDataRecord(pb::DataRecord* const msg);       // Send the DataRecord to our output handler
    virtual void timeStamp(pb::DataRecord* const msg);            // Time stamp the DataRecord
-   virtual std::string genTrackId(const Simulation::Track* const track);
+   virtual std::string genTrackId(const simulation::Track* const track);
    void setFirstPass(const bool f);
 
    // Recorder data event handlers
@@ -121,7 +121,7 @@ protected:
    virtual bool recordTrackRemoved(const basic::Object* objs[4], const double values[4]);
    virtual bool recordTrackData(const basic::Object* objs[4], const double values[4]);
 
-   // Simulation::DataRecorder class protected interface functions
+   // simulation::DataRecorder class protected interface functions
    virtual bool recordDataImp(
       const unsigned int id,              // Recorder event Id
       const basic::Object* pObjects[4],   // Sample objects

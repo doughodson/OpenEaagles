@@ -11,9 +11,9 @@
 namespace oe {
 namespace sensor {
 
-class Stt : public Simulation::Radar
+class Stt : public simulation::Radar
 {
-    DECLARE_SUBCLASS(Stt,Simulation::Radar)
+    DECLARE_SUBCLASS(Stt,simulation::Radar)
 
 public:
     Stt();

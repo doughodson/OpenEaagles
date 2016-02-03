@@ -1,15 +1,15 @@
 //------------------------------------------------------------------------------
 // Class: RfSystem
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_RfSystem_H__
-#define __oe_Simulation_RfSystem_H__
+#ifndef __oe_simulation_RfSystem_H__
+#define __oe_simulation_RfSystem_H__
 
 #include "openeaagles/simulation/System.h"
 
 namespace oe {
    namespace basic { class Decibel; }
 
-namespace Simulation {
+namespace simulation {
    class Antenna;
    class Emission;
 
@@ -187,7 +187,7 @@ private:
    LCreal   rfLossSignalProcess; // Signal Processing loss (default: 1.0)    (no units)
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

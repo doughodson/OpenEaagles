@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: ScanGimbal
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_ScanGimbal_H__
-#define __oe_Simulation_ScanGimbal_H__
+#ifndef __oe_simulation_ScanGimbal_H__
+#define __oe_simulation_ScanGimbal_H__
 
 #include "openeaagles/simulation/Gimbal.h"
 
@@ -10,7 +10,7 @@ namespace oe {
 
 namespace basic { class Integer; }
 
-namespace Simulation {
+namespace simulation {
 
 //------------------------------------------------------------------------------
 // Class: ScanGimbal
@@ -271,7 +271,7 @@ private:
     double     maxNumRevs;       // Spiral Scan - maximum number of revolutions
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

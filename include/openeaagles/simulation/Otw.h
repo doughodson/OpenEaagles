@@ -4,8 +4,8 @@
 //    OtwModel -- Model class; manages player to OTW model relationships
 //    Otm      -- Type Mapper class; maps player types to OTW model types
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_otw_H__
-#define __oe_Simulation_otw_H__
+#ifndef __oe_simulation_otw_H__
+#define __oe_simulation_otw_H__
 
 #include "openeaagles/basic/Component.h"
 
@@ -17,7 +17,7 @@ namespace oe {
       class PairStream;
       class String;
    }
-namespace Simulation {
+namespace simulation {
 
 class Player;
 class OtwModel;
@@ -363,7 +363,7 @@ private:
     unsigned int typeId;                                 // OTW entity type ID number
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

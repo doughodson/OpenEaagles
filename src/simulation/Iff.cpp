@@ -6,7 +6,7 @@
 #include "openeaagles/basic/String.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 IMPLEMENT_SUBCLASS(Iff,"Iff")
 EMPTY_SERIALIZER(Iff)
@@ -300,5 +300,5 @@ basic::Object* Iff::getSlotByIndex(const int si)
     return BaseClass::getSlotByIndex(si);
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace

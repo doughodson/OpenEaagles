@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: Ntm
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_Ntm_H__
-#define __oe_Simulation_Ntm_H__
+#ifndef __oe_simulation_Ntm_H__
+#define __oe_simulation_Ntm_H__
 
 #include "openeaagles/simulation/NetIO.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 class Nib;
 
 //------------------------------------------------------------------------------
@@ -80,7 +80,7 @@ private:
    basic::safe_ptr<const Player>  tPlayer; // Template player
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

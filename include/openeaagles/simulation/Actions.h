@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Actions -- Things to do.
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_Action_H__
-#define __oe_Simulation_Action_H__
+#ifndef __oe_simulation_Action_H__
+#define __oe_simulation_Action_H__
 
 #include "openeaagles/basic/ubf/Action.h"
 
@@ -10,7 +10,7 @@ namespace oe {
 
    namespace basic { class Distance; class LatLon; class Number; }
 
-namespace Simulation {
+namespace simulation {
 
 class OnboardComputer;
 class Sar;
@@ -244,7 +244,7 @@ private:
    unsigned int camouflage;    // Camouflage type (0 is none)
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

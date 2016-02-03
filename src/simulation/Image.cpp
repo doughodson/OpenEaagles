@@ -3,7 +3,7 @@
 
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 IMPLEMENT_SUBCLASS(Image,"SarImage")
 EMPTY_SLOTTABLE(Image)
@@ -166,5 +166,5 @@ bool Image::testImage(const unsigned w0, const unsigned h0)
     return ok;
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace

@@ -40,7 +40,7 @@
 #include "openeaagles/simulation/SynchronizedState.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 IMPLEMENT_SUBCLASS(Player,"Player")
 
@@ -4590,5 +4590,5 @@ std::ostream& Player::serialize(std::ostream& sout, const int i, const bool slot
    return sout;
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace

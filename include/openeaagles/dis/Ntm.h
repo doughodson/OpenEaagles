@@ -16,7 +16,7 @@ namespace dis {
 //
 // Description: DIS Network Type Mapper
 //
-//    This class, which is derived from the Simulation::Ntm, maps OpenEaagles
+//    This class, which is derived from the simulation::Ntm, maps OpenEaagles
 //    player types to/from DIS entity type codes.
 //
 //
@@ -27,9 +27,9 @@ namespace dis {
 //                              !  example: [ 1 2 333 4 5 6 7 ]
 //
 //------------------------------------------------------------------------------
-class Ntm : public Simulation::Ntm
+class Ntm : public simulation::Ntm
 {
-    DECLARE_SUBCLASS(Ntm,Simulation::Ntm)
+    DECLARE_SUBCLASS(Ntm,simulation::Ntm)
 
 public:
    Ntm();
@@ -56,7 +56,7 @@ public:
    // Slot functions
    virtual bool setSlotDisEntityType(const basic::List* const);         // Sets DIS entity type enumerations
 
-   bool copyEntityType(Simulation::Nib* const targetNib) const override;
+   bool copyEntityType(simulation::Nib* const targetNib) const override;
 
 private:
     // Standard (DIS based) type codes

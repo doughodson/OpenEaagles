@@ -37,7 +37,7 @@
 #endif
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //==============================================================================
 // Class: NetIO
@@ -1885,5 +1885,5 @@ void NtmOutputNodeStd::print(std::ostream& sout, const int icnt) const
    sout << ")" << std::endl;
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace

@@ -34,7 +34,7 @@
 #include <cmath>
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //=============================================================================
 // Declare the threads
@@ -538,7 +538,7 @@ void Simulation::reset()
             tcThreads[numTcThreads]->unref();
             tcThreads[numTcThreads] = nullptr;
             if (isMessageEnabled(MSG_ERROR)) {
-               std::cerr << "Simulation::reset(): ERROR, failed to create a T/C pool thread!" << std::endl;
+               std::cerr << "simulation::reset(): ERROR, failed to create a T/C pool thread!" << std::endl;
             }
          }
       }
@@ -572,7 +572,7 @@ void Simulation::reset()
             bgThreads[numBgThreads]->unref();
             bgThreads[numBgThreads] = nullptr;
             if (isMessageEnabled(MSG_ERROR)) {
-               std::cerr << "Simulation::reset(): ERROR, failed to create a background pool thread!" << std::endl;
+               std::cerr << "simulation::reset(): ERROR, failed to create a background pool thread!" << std::endl;
             }
          }
       }
@@ -853,7 +853,7 @@ void Simulation::updateTC(const LCreal dt)
 
          }
          else if (isMessageEnabled(MSG_ERROR)) {
-            std::cerr << "Simulation::updateTC() ERROR, invalid T/C thread setup";
+            std::cerr << "simulation::updateTC() ERROR, invalid T/C thread setup";
             std::cerr << "; reqTcThreads = " << reqTcThreads;
             std::cerr << "; numTcThreads = " << numTcThreads;
             std::cerr << std::endl;
@@ -939,7 +939,7 @@ void Simulation::updateData(const LCreal dt)
 
          }
          else if (isMessageEnabled(MSG_ERROR)) {
-            std::cerr << "Simulation::updateData() ERROR, invalid background thread setup";
+            std::cerr << "simulation::updateData() ERROR, invalid background thread setup";
             std::cerr << "; reqBgThreads = " << reqBgThreads;
             std::cerr << "; numBgThreads = " << numBgThreads;
             std::cerr << std::endl;
@@ -1213,7 +1213,7 @@ Station* Simulation::getStationImp()
    if (station == nullptr) {
       station = static_cast<Station*>(findContainerByType(typeid(Station)));
       if (station == nullptr && isMessageEnabled(MSG_ERROR)) {
-         std::cerr << "Simulation::getStationImp(): ERROR, unable to locate the Station class!" << std::endl;
+         std::cerr << "simulation::getStationImp(): ERROR, unable to locate the Station class!" << std::endl;
       }
    }
    return station;
@@ -1290,7 +1290,7 @@ bool Simulation::setSlotPlayers(basic::PairStream* const pl)
          Player* ip = dynamic_cast<Player*>( pair->object() );
          if (ip == nullptr) {
             // Item is NOT a Eaagle::Player
-            std::cerr << "Simulation::setSlotPlayers: slot: " << *pair->slot() << " is NOT of a Player type!" << std::endl;
+            std::cerr << "simulation::setSlotPlayers: slot: " << *pair->slot() << " is NOT of a Player type!" << std::endl;
             ok = false;
          }
          else {
@@ -1331,12 +1331,12 @@ bool Simulation::setSlotPlayers(basic::PairStream* const pl)
             }
 
             if (ip1->getID() == ip2->getID()) {
-               std::cerr << "Simulation::setSlotPlayers: duplicate player ID: " << ip1->getID() << std::endl;
+               std::cerr << "simulation::setSlotPlayers: duplicate player ID: " << ip1->getID() << std::endl;
                ok = false;
             }
 
             if (*pair1->slot() == *pair2->slot()) {
-               std::cerr << "Simulation::setSlotPlayers: duplicate player name: " << *pair1->slot() << std::endl;
+               std::cerr << "simulation::setSlotPlayers: duplicate player name: " << *pair1->slot() << std::endl;
                ok = false;
             }
 
@@ -1820,7 +1820,7 @@ bool Simulation::setSlotSimulationTime(const basic::Time* const msg)
           ok = setInitialSimulationTime(t);
        }
        else {
-         std::cerr << "Simulation::setSlotSimulationTime(): invalid time of day: " << t << " seconds; use [ 0 .. 86400 ] seconds or -1" << std::endl;
+         std::cerr << "simulation::setSlotSimulationTime(): invalid time of day: " << t << " seconds; use [ 0 .. 86400 ] seconds or -1" << std::endl;
        }
     }
     return ok;
@@ -1836,7 +1836,7 @@ bool Simulation::setSlotDay(const basic::Number* const msg)
          ok = true;
       }
       else {
-         std::cerr << "Simulation::setSlotDay(): invalid day: " << v << "; use [ 1 .. 31 ] or zero" << std::endl;
+         std::cerr << "simulation::setSlotDay(): invalid day: " << v << "; use [ 1 .. 31 ] or zero" << std::endl;
       }
    }
    return ok;
@@ -1852,7 +1852,7 @@ bool Simulation::setSlotMonth(const basic::Number* const msg)
          ok = true;
       }
       else {
-         std::cerr << "Simulation::setSlotMonth(): invalid month: " << v << "; use [ 1 .. 12 ] or zero" << std::endl;
+         std::cerr << "simulation::setSlotMonth(): invalid month: " << v << "; use [ 1 .. 12 ] or zero" << std::endl;
       }
    }
    return ok;
@@ -1868,7 +1868,7 @@ bool Simulation::setSlotYear(const basic::Number* const msg)
          ok = true;
       }
       else {
-         std::cerr << "Simulation::setSlotYear(): invalid year: " << v << "; use [ 1970 .. 2100 ] or zero" << std::endl;
+         std::cerr << "simulation::setSlotYear(): invalid year: " << v << "; use [ 1970 .. 2100 ] or zero" << std::endl;
       }
    }
    return ok;
@@ -1900,7 +1900,7 @@ bool Simulation::setSlotFirstWeaponId(const basic::Number* const msg)
          ok = true;
       }
       else {
-         std::cerr << "Simulation::setSlotFirstWeaponId(): invalid first weapon ID " << v;
+         std::cerr << "simulation::setSlotFirstWeaponId(): invalid first weapon ID " << v;
          std::cerr << ", use [ " << MIN_WPN_ID << " ... 65535 ]." << std::endl;
       }
    }
@@ -1924,7 +1924,7 @@ bool Simulation::setSlotNumTcThreads(const basic::Number* const msg)
          ok = true;
       }
       else {
-         std::cerr << "Simulation::setSlotNumTcThreads(): invalid number of threads: " << v;
+         std::cerr << "simulation::setSlotNumTcThreads(): invalid number of threads: " << v;
          std::cerr << "; number of processors = " << np;
          std::cerr << "; use [ 1 ... " << maxT << " ];" << std::endl;
       }
@@ -1949,7 +1949,7 @@ bool Simulation::setSlotNumBgThreads(const basic::Number* const msg)
          ok = true;
       }
       else {
-         std::cerr << "Simulation::setSlotNumBgThreads(): invalid number of threads: " << v;
+         std::cerr << "simulation::setSlotNumBgThreads(): invalid number of threads: " << v;
          std::cerr << "; number of processors = " << np;
          std::cerr << "; use [ 1 ... " << maxT << " ];" << std::endl;
       }
@@ -1982,7 +1982,7 @@ bool Simulation::setSlotEarthModel(const basic::String* const msg)
       }
       else {
          // Earth model not found by name
-         std::cerr << "Simulation::setSlotEarthModel() earth model not found: " << *msg << std::endl;
+         std::cerr << "simulation::setSlotEarthModel() earth model not found: " << *msg << std::endl;
       }
    }
    else {
@@ -2160,6 +2160,6 @@ unsigned long SimBgThread::userFunc()
    return 0;
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 

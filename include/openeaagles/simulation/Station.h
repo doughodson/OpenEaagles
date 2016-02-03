@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class:  Station
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_Station_H__
-#define __oe_Simulation_Station_H__
+#ifndef __oe_simulation_Station_H__
+#define __oe_simulation_Station_H__
 
 #include "openeaagles/basic/Component.h"
 
@@ -13,7 +13,7 @@ namespace oe {
       class Thread;
       class Time;
    }
-namespace Simulation {
+namespace simulation {
    class DataRecorder;
    class Simulation;
    class Player;
@@ -313,7 +313,7 @@ private:
    const basic::Time* startupResetTimer0;  // Init value of the startup RESET timer
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

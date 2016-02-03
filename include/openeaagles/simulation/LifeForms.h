@@ -2,13 +2,13 @@
 // Classes: LifeForm
 // Description: Life form models
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_LifeForm_H__
-#define __oe_Simulation_LifeForm_H__
+#ifndef __oe_simulation_LifeForm_H__
+#define __oe_simulation_LifeForm_H__
 
 #include "openeaagles/simulation/Player.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //==============================================================================
 // Class LifeForm
@@ -100,7 +100,7 @@ public:
 */
 
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

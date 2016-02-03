@@ -1,15 +1,15 @@
 //------------------------------------------------------------------------------
 // Class: Weapon
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_Weapon_H__
-#define __oe_Simulation_Weapon_H__
+#ifndef __oe_simulation_Weapon_H__
+#define __oe_simulation_Weapon_H__
 
 #include "openeaagles/simulation/Player.h"
 
 namespace oe {
    namespace basic { class Angle; class Distance; class String; class Time; }
 
-namespace Simulation {
+namespace simulation {
    class Designator;
    class Stores;
    class Track;
@@ -401,7 +401,7 @@ private:
     LCreal maxGimbal;      // max gimbal angle         (radians)
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

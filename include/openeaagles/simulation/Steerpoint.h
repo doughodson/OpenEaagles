@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: Steerpoint
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_Steerpoint_H__
-#define __oe_Simulation_Steerpoint_H__
+#ifndef __oe_simulation_Steerpoint_H__
+#define __oe_simulation_Steerpoint_H__
 
 #include "openeaagles/basic/Component.h"
 #include "openeaagles/basic/osg/Vec3"
@@ -18,7 +18,7 @@ namespace oe {
       class Terrain;
       class Time;
    }
-namespace Simulation {
+namespace simulation {
 class Navigation;
 class Action;
 
@@ -265,7 +265,7 @@ private:
     bool        navDataValid;   // Nav data is valid
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

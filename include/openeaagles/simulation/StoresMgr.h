@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Classes: StoresMgr, SimpleStoresMgr
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_StoresMgr_H__
-#define __oe_Simulation_StoresMgr_H__
+#ifndef __oe_simulation_StoresMgr_H__
+#define __oe_simulation_StoresMgr_H__
 
 #include "openeaagles/simulation/Stores.h"
 
@@ -12,7 +12,7 @@ namespace oe {
       class PairStream;
    }
 
-namespace Simulation {
+namespace simulation {
 class Bomb;
 class Chaff;
 class Decoy;
@@ -233,7 +233,7 @@ private:
    int    nCurWpn;         // Number of weapons of the current type
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

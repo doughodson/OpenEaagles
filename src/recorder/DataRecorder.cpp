@@ -297,7 +297,7 @@ bool DataRecorder::recordDI(const basic::Object* objs[4], const double values[4]
 //------------------------------------------------------------------------------
 bool DataRecorder::recordNewPlayer(const basic::Object* objs[4], const double values[4])
 {
-   const Simulation::Player* player = dynamic_cast<const Simulation::Player*>( objs[0] );
+   const simulation::Player* player = dynamic_cast<const simulation::Player*>( objs[0] );
    if (player == nullptr) return false;
 
    pb::DataRecord* msg = new pb::DataRecord();
@@ -324,7 +324,7 @@ bool DataRecorder::recordNewPlayer(const basic::Object* objs[4], const double va
 //------------------------------------------------------------------------------
 bool DataRecorder::recordPlayerRemoved(const basic::Object* objs[4], const double values[4])
 {
-   const Simulation::Player* player = dynamic_cast<const Simulation::Player*>( objs[0] );
+   const simulation::Player* player = dynamic_cast<const simulation::Player*>( objs[0] );
    if (player == nullptr) return false;
 
    pb::DataRecord* msg = new pb::DataRecord();
@@ -351,7 +351,7 @@ bool DataRecorder::recordPlayerRemoved(const basic::Object* objs[4], const doubl
 //------------------------------------------------------------------------------
 bool DataRecorder::recordPlayerData(const basic::Object* objs[4], const double values[4])
 {
-   const Simulation::Player* player = dynamic_cast<const Simulation::Player*>( objs[0] );
+   const simulation::Player* player = dynamic_cast<const simulation::Player*>( objs[0] );
    if (player == nullptr) return false;
 
    pb::DataRecord* msg = new pb::DataRecord();
@@ -366,7 +366,7 @@ bool DataRecorder::recordPlayerData(const basic::Object* objs[4], const double v
    genPlayerId( playerDataMsg->mutable_id(), player );
    genPlayerState( playerDataMsg->mutable_state(), player );
 
-   const Simulation::AirVehicle* av = dynamic_cast<const Simulation::AirVehicle*>( player );
+   const simulation::AirVehicle* av = dynamic_cast<const simulation::AirVehicle*>( player );
    if (av != nullptr) {
       playerDataMsg->set_alpha( av->getAngleOfAttackD() );
       playerDataMsg->set_beta( av->getSideSlipD() );
@@ -385,7 +385,7 @@ bool DataRecorder::recordPlayerData(const basic::Object* objs[4], const double v
 //------------------------------------------------------------------------------
 bool DataRecorder::recordPlayerDamaged(const basic::Object* objs[4], const double values[4])
 {
-   const Simulation::Player* player = dynamic_cast<const Simulation::Player*>( objs[0] );
+   const simulation::Player* player = dynamic_cast<const simulation::Player*>( objs[0] );
    if (player == nullptr) return false;
 
    pb::DataRecord* msg = new pb::DataRecord();
@@ -412,7 +412,7 @@ bool DataRecorder::recordPlayerDamaged(const basic::Object* objs[4], const doubl
 //------------------------------------------------------------------------------
 bool DataRecorder::recordPlayerCollision(const basic::Object* objs[4], const double values[4])
 {
-   const Simulation::Player* player = dynamic_cast<const Simulation::Player*>( objs[0] );
+   const simulation::Player* player = dynamic_cast<const simulation::Player*>( objs[0] );
    if (player == nullptr) return false;
 
    pb::DataRecord* msg = new pb::DataRecord();
@@ -427,7 +427,7 @@ bool DataRecorder::recordPlayerCollision(const basic::Object* objs[4], const dou
    genPlayerId( playerCollisionMsg->mutable_id(), player );
    genPlayerState( playerCollisionMsg->mutable_state(), player );
 
-   const Simulation::Player* otherPlayer = dynamic_cast<const Simulation::Player*>( objs[1] );
+   const simulation::Player* otherPlayer = dynamic_cast<const simulation::Player*>( objs[1] );
    if (otherPlayer != nullptr) {
       genPlayerId( playerCollisionMsg->mutable_other_player_id(), otherPlayer );
    }
@@ -444,7 +444,7 @@ bool DataRecorder::recordPlayerCollision(const basic::Object* objs[4], const dou
 //------------------------------------------------------------------------------
 bool DataRecorder::recordPlayerCrash(const basic::Object* objs[4], const double values[4])
 {
-   const Simulation::Player* player = dynamic_cast<const Simulation::Player*>( objs[0] );
+   const simulation::Player* player = dynamic_cast<const simulation::Player*>( objs[0] );
    if (player == nullptr) return false;
 
    pb::DataRecord* msg = new pb::DataRecord();
@@ -471,7 +471,7 @@ bool DataRecorder::recordPlayerCrash(const basic::Object* objs[4], const double 
 //------------------------------------------------------------------------------
 bool DataRecorder::recordPlayerKilled(const basic::Object* objs[4], const double values[4])
 {
-   const Simulation::Player* player = dynamic_cast<const Simulation::Player*>( objs[0] );
+   const simulation::Player* player = dynamic_cast<const simulation::Player*>( objs[0] );
    if (player == nullptr) return false;
 
    pb::DataRecord* msg = new pb::DataRecord();
@@ -486,7 +486,7 @@ bool DataRecorder::recordPlayerKilled(const basic::Object* objs[4], const double
    genPlayerId( playerKilledMsg->mutable_id(), player );
    genPlayerState( playerKilledMsg->mutable_state(), player );
 
-   const Simulation::Player* shooter = dynamic_cast<const Simulation::Player*>( objs[1] );
+   const simulation::Player* shooter = dynamic_cast<const simulation::Player*>( objs[1] );
    if (shooter != nullptr) {
       genPlayerId( playerKilledMsg->mutable_shooter_id(), shooter );
    }
@@ -504,7 +504,7 @@ bool DataRecorder::recordPlayerKilled(const basic::Object* objs[4], const double
 //------------------------------------------------------------------------------
 bool DataRecorder::recordWeaponReleased(const basic::Object* objs[4], const double values[4])
 {
-   const Simulation::Player* wpn = dynamic_cast<const Simulation::Player*>( objs[0] );
+   const simulation::Player* wpn = dynamic_cast<const simulation::Player*>( objs[0] );
    if (wpn == nullptr) return false;
 
    pb::DataRecord* msg = new pb::DataRecord();
@@ -519,12 +519,12 @@ bool DataRecorder::recordWeaponReleased(const basic::Object* objs[4], const doub
    genPlayerId( wpnRelMsg->mutable_wpn_id(), wpn );
    genPlayerState( wpnRelMsg->mutable_wpn_state(), wpn );
 
-   const Simulation::Player* shooter = dynamic_cast<const Simulation::Player*>( objs[1] );
+   const simulation::Player* shooter = dynamic_cast<const simulation::Player*>( objs[1] );
    if (shooter != nullptr) {
       genPlayerId( wpnRelMsg->mutable_shooter_id(), shooter );
    }
 
-   const Simulation::Player* tgt = dynamic_cast<const Simulation::Player*>( objs[2] );
+   const simulation::Player* tgt = dynamic_cast<const simulation::Player*>( objs[2] );
    if (tgt != nullptr) {
       genPlayerId( wpnRelMsg->mutable_tgt_id(), tgt );
    }
@@ -543,7 +543,7 @@ bool DataRecorder::recordWeaponReleased(const basic::Object* objs[4], const doub
 //------------------------------------------------------------------------------
 bool DataRecorder::recordWeaponHung(const basic::Object* objs[4], const double values[4])
 {
-   const Simulation::Player* wpn = dynamic_cast<const Simulation::Player*>( objs[0] );
+   const simulation::Player* wpn = dynamic_cast<const simulation::Player*>( objs[0] );
    if (wpn == nullptr) return false;
 
    pb::DataRecord* msg = new pb::DataRecord();
@@ -558,12 +558,12 @@ bool DataRecorder::recordWeaponHung(const basic::Object* objs[4], const double v
    genPlayerId( wpnHungMsg->mutable_wpn_id(), wpn );
    genPlayerState( wpnHungMsg->mutable_wpn_state(), wpn );
 
-   const Simulation::Player* shooter = dynamic_cast<const Simulation::Player*>( objs[1] );
+   const simulation::Player* shooter = dynamic_cast<const simulation::Player*>( objs[1] );
    if (shooter != nullptr) {
       genPlayerId( wpnHungMsg->mutable_shooter_id(), shooter );
    }
 
-   const Simulation::Player* tgt = dynamic_cast<const Simulation::Player*>( objs[2] );
+   const simulation::Player* tgt = dynamic_cast<const simulation::Player*>( objs[2] );
    if (tgt != nullptr) {
       genPlayerId( wpnHungMsg->mutable_tgt_id(), tgt );
    }
@@ -583,7 +583,7 @@ bool DataRecorder::recordWeaponHung(const basic::Object* objs[4], const double v
 //------------------------------------------------------------------------------
 bool DataRecorder::recordWeaponDetonation(const basic::Object* objs[4], const double values[4])
 {
-   const Simulation::Player* wpn = dynamic_cast<const Simulation::Player*>( objs[0] );
+   const simulation::Player* wpn = dynamic_cast<const simulation::Player*>( objs[0] );
    if (wpn == nullptr) return false;
 
    const unsigned int detType =  static_cast<unsigned int>(values[0]);
@@ -601,43 +601,43 @@ bool DataRecorder::recordWeaponDetonation(const basic::Object* objs[4], const do
    genPlayerId( wpnDetMsg->mutable_wpn_id(), wpn );
    genPlayerState( wpnDetMsg->mutable_wpn_state(), wpn );
 
-   const Simulation::Player* shooter = dynamic_cast<const Simulation::Player*>( objs[1] );
+   const simulation::Player* shooter = dynamic_cast<const simulation::Player*>( objs[1] );
    if (shooter != nullptr) {
       genPlayerId( wpnDetMsg->mutable_shooter_id(), shooter );
    }
 
-   const Simulation::Player* tgt = dynamic_cast<const Simulation::Player*>( objs[2] );
+   const simulation::Player* tgt = dynamic_cast<const simulation::Player*>( objs[2] );
    if (tgt != nullptr) {
       genPlayerId( wpnDetMsg->mutable_tgt_id(), tgt );
    }
 
    // Get detonation type
    switch (detType) {
-      case Simulation::Weapon::DETONATE_OTHER: {
+      case simulation::Weapon::DETONATE_OTHER: {
          wpnDetMsg->set_det_type(pb::WeaponDetonationEventMsg_DetonationType_DETONATE_OTHER);
          break;
       }
-      case Simulation::Weapon::DETONATE_ENTITY_IMPACT: {
+      case simulation::Weapon::DETONATE_ENTITY_IMPACT: {
          wpnDetMsg->set_det_type(pb::WeaponDetonationEventMsg_DetonationType_DETONATE_ENTITY_IMPACT);
          break;
       }
-      case Simulation::Weapon::DETONATE_ENTITY_PROXIMATE_DETONATION: {
+      case simulation::Weapon::DETONATE_ENTITY_PROXIMATE_DETONATION: {
          wpnDetMsg->set_det_type(pb::WeaponDetonationEventMsg_DetonationType_DETONATE_ENTITY_PROXIMATE_DETONATION);
          break;
       }
-      case Simulation::Weapon::DETONATE_GROUND_IMPACT: {
+      case simulation::Weapon::DETONATE_GROUND_IMPACT: {
          wpnDetMsg->set_det_type(pb::WeaponDetonationEventMsg_DetonationType_DETONATE_GROUND_IMPACT);
          break;
       }
-      case Simulation::Weapon::DETONATE_GROUND_PROXIMATE_DETONATION: {
+      case simulation::Weapon::DETONATE_GROUND_PROXIMATE_DETONATION: {
          wpnDetMsg->set_det_type(pb::WeaponDetonationEventMsg_DetonationType_DETONATE_GROUND_PROXIMATE_DETONATION);
          break;
       }
-      case Simulation::Weapon::DETONATE_DETONATION: {
+      case simulation::Weapon::DETONATE_DETONATION: {
          wpnDetMsg->set_det_type(pb::WeaponDetonationEventMsg_DetonationType_DETONATE_DETONATION);
          break;
       }
-      case Simulation::Weapon::DETONATE_NONE: {
+      case simulation::Weapon::DETONATE_NONE: {
          wpnDetMsg->set_det_type(pb::WeaponDetonationEventMsg_DetonationType_DETONATE_NONE);
          break;
       }
@@ -662,7 +662,7 @@ bool DataRecorder::recordWeaponDetonation(const basic::Object* objs[4], const do
 //------------------------------------------------------------------------------
 bool DataRecorder::recordGunFired(const basic::Object* objs[4], const double values[4])
 {
-   const Simulation::Player* shooter = dynamic_cast<const Simulation::Player*>( objs[0] );
+   const simulation::Player* shooter = dynamic_cast<const simulation::Player*>( objs[0] );
    if (shooter == nullptr) return false;
 
    const unsigned int rounds = static_cast<unsigned int>(values[0]);
@@ -691,8 +691,8 @@ bool DataRecorder::recordGunFired(const basic::Object* objs[4], const double val
 bool DataRecorder::recordNewTrack(const basic::Object* objs[4], const double values[4])
 {
    // objects
-   const Simulation::Player* player = dynamic_cast<const Simulation::Player*>( objs[0] );
-   const Simulation::Track* newTrack = dynamic_cast<const Simulation::Track*>( objs[1] );
+   const simulation::Player* player = dynamic_cast<const simulation::Player*>( objs[0] );
+   const simulation::Track* newTrack = dynamic_cast<const simulation::Track*>( objs[1] );
    if (player == nullptr || newTrack == nullptr) return false;
 
    // message
@@ -716,17 +716,17 @@ bool DataRecorder::recordNewTrack(const basic::Object* objs[4], const double val
    genTrackData(newTrackMsg->mutable_track_data(), newTrack);
 
    // Track player
-   const Simulation::Player* trkPlayer = newTrack->getTarget();
+   const simulation::Player* trkPlayer = newTrack->getTarget();
    if (trkPlayer != nullptr) {
       genPlayerId( newTrackMsg->mutable_trk_player_id(), trkPlayer);
       genPlayerState( newTrackMsg->mutable_trk_player_state(), trkPlayer );
    }
 
    // Emission Data
-   const Simulation::RfTrack* const rfTrk = dynamic_cast<const Simulation::RfTrack*>(newTrack);
+   const simulation::RfTrack* const rfTrk = dynamic_cast<const simulation::RfTrack*>(newTrack);
    if (rfTrk != nullptr) {
 
-      const Simulation::Emission* emissionData = rfTrk->getLastEmission();
+      const simulation::Emission* emissionData = rfTrk->getLastEmission();
       if (emissionData != nullptr) {
          genEmissionData( newTrackMsg->mutable_emission_data(), emissionData);
       }
@@ -747,8 +747,8 @@ bool DataRecorder::recordNewTrack(const basic::Object* objs[4], const double val
 bool DataRecorder::recordTrackRemoved(const basic::Object* objs[4], const double values[4])
 {
    // objects
-   const Simulation::Player* player = dynamic_cast<const Simulation::Player*>( objs[0] );
-   const Simulation::Track* track = dynamic_cast<const Simulation::Track*>( objs[1] );
+   const simulation::Player* player = dynamic_cast<const simulation::Player*>( objs[0] );
+   const simulation::Track* track = dynamic_cast<const simulation::Track*>( objs[1] );
    if (player == nullptr || track == nullptr) return false;
 
    // message
@@ -780,8 +780,8 @@ bool DataRecorder::recordTrackRemoved(const basic::Object* objs[4], const double
 bool DataRecorder::recordTrackData(const basic::Object* objs[4], const double values[4])
 {
    // objects
-   const Simulation::Player* player = dynamic_cast<const Simulation::Player*>( objs[0] );
-   const Simulation::Track* trackData = dynamic_cast<const Simulation::Track*>( objs[1] );
+   const simulation::Player* player = dynamic_cast<const simulation::Player*>( objs[0] );
+   const simulation::Track* trackData = dynamic_cast<const simulation::Track*>( objs[1] );
    if (player == nullptr || trackData == nullptr) return false;
 
    // message
@@ -805,16 +805,16 @@ bool DataRecorder::recordTrackData(const basic::Object* objs[4], const double va
    genTrackData(trackDataMsg->mutable_track_data(), trackData);
 
    // track player
-   const Simulation::Player* trkPlayer = trackData->getTarget();
+   const simulation::Player* trkPlayer = trackData->getTarget();
    if (trkPlayer != nullptr) {
       genPlayerId( trackDataMsg->mutable_trk_player_id(), trkPlayer);
       genPlayerState( trackDataMsg->mutable_trk_player_state(), trkPlayer );
    }
 
    // Emission Data
-   const Simulation::RfTrack* const rfTrk = dynamic_cast<const Simulation::RfTrack*>(trackData);
+   const simulation::RfTrack* const rfTrk = dynamic_cast<const simulation::RfTrack*>(trackData);
    if (rfTrk != nullptr) {
-      const Simulation::Emission* emissionData = rfTrk->getLastEmission();
+      const simulation::Emission* emissionData = rfTrk->getLastEmission();
       if (emissionData != nullptr) {
          genEmissionData( trackDataMsg->mutable_emission_data(), emissionData);
       }
@@ -829,7 +829,7 @@ bool DataRecorder::recordTrackData(const basic::Object* objs[4], const double va
 //------------------------------------------------------------------------------
 // Generate the Player ID data
 //------------------------------------------------------------------------------
-void DataRecorder::genPlayerId(pb::PlayerId* const id, const Simulation::Player* const player)
+void DataRecorder::genPlayerId(pb::PlayerId* const id, const simulation::Player* const player)
 {
    // Check for valid message pointer
    if (id != nullptr) {
@@ -845,7 +845,7 @@ void DataRecorder::genPlayerId(pb::PlayerId* const id, const Simulation::Player*
 
          // Networked player federation name
          if ( player->isNetworkedPlayer() ) {
-            const Simulation::Nib* nib = player->getNib();
+            const simulation::Nib* nib = player->getNib();
             const basic::String* fedName = nib->getFederateName();
             if (fedName != nullptr) id->set_fed_name( *fedName );
          }
@@ -860,7 +860,7 @@ void DataRecorder::genPlayerId(pb::PlayerId* const id, const Simulation::Player*
 //------------------------------------------------------------------------------
 // Generate the player state data
 //------------------------------------------------------------------------------
-void DataRecorder::genPlayerState(pb::PlayerState* const state, const Simulation::Player* const player)
+void DataRecorder::genPlayerState(pb::PlayerState* const state, const simulation::Player* const player)
 {
    if (state != nullptr) {
       if (player != nullptr) {
@@ -900,7 +900,7 @@ void DataRecorder::genPlayerState(pb::PlayerState* const state, const Simulation
 //------------------------------------------------------------------------------
 // Generate the Track ID
 //------------------------------------------------------------------------------
-std::string DataRecorder::genTrackId(const Simulation::Track* const track)
+std::string DataRecorder::genTrackId(const simulation::Track* const track)
 {
    std::string trackIdStr = "";
    if (track != nullptr) {
@@ -919,7 +919,7 @@ std::string DataRecorder::genTrackId(const Simulation::Track* const track)
 //------------------------------------------------------------------------------
 // Generate the Track data
 //------------------------------------------------------------------------------
-void DataRecorder::genTrackData(pb::TrackData* const trkMsg, const Simulation::Track* const track)
+void DataRecorder::genTrackData(pb::TrackData* const trkMsg, const simulation::Track* const track)
 {
    if (trkMsg != nullptr) {
       if (track != nullptr) {
@@ -952,7 +952,7 @@ void DataRecorder::genTrackData(pb::TrackData* const trkMsg, const Simulation::T
          trkMsg->mutable_velocity()->set_z(vel[2]);
 
          // Avg signal for RF/IR track:
-         const Simulation::RfTrack* const rfTrk = dynamic_cast<const Simulation::RfTrack*>(track);
+         const simulation::RfTrack* const rfTrk = dynamic_cast<const simulation::RfTrack*>(track);
          if (rfTrk != nullptr) {
             trkMsg->set_avg_signal(rfTrk->getAvgSignal());
          }
@@ -966,7 +966,7 @@ void DataRecorder::genTrackData(pb::TrackData* const trkMsg, const Simulation::T
 //------------------------------------------------------------------------------
 // Generate the Emission data
 //------------------------------------------------------------------------------
-void DataRecorder::genEmissionData(pb::EmissionData* const emMsg, const Simulation::Emission* const emData)
+void DataRecorder::genEmissionData(pb::EmissionData* const emMsg, const simulation::Emission* const emData)
 {
    if (emMsg != nullptr) {
       if (emData != nullptr) {
@@ -982,7 +982,7 @@ void DataRecorder::genEmissionData(pb::EmissionData* const emMsg, const Simulati
 
          // transmitting player ID
          {
-            const Simulation::Player* p = emData->getOwnship();
+            const simulation::Player* p = emData->getOwnship();
             if (p != nullptr) {
                genPlayerId( emMsg->mutable_origin_id(), p );
             }
@@ -990,36 +990,36 @@ void DataRecorder::genEmissionData(pb::EmissionData* const emMsg, const Simulati
 
          // target player ID
          {
-            const Simulation::Player* p = emData->getTarget();
+            const simulation::Player* p = emData->getTarget();
             if (p != nullptr) {
                genPlayerId( emMsg->mutable_target_id(), p );
             }
          }
 
          // polarization
-         Simulation::Antenna::Polarization polarization = emData->getPolarization();
+         simulation::Antenna::Polarization polarization = emData->getPolarization();
          switch (polarization) {
-            case Simulation::Antenna::NONE: {
+            case simulation::Antenna::NONE: {
                emMsg->set_polarization(pb::EmissionData_Polarization_NONE);
                break;
             }
-            case Simulation::Antenna::VERTICAL: {
+            case simulation::Antenna::VERTICAL: {
                emMsg->set_polarization(pb::EmissionData_Polarization_VERTICAL);
                break;
             }
-            case Simulation::Antenna::HORIZONTAL: {
+            case simulation::Antenna::HORIZONTAL: {
                emMsg->set_polarization(pb::EmissionData_Polarization_HORIZONTAL);
                break;
             }
-            case Simulation::Antenna::SLANT: {
+            case simulation::Antenna::SLANT: {
                emMsg->set_polarization(pb::EmissionData_Polarization_SLANT);
                break;
             }
-            case Simulation::Antenna::RHC: {
+            case simulation::Antenna::RHC: {
                emMsg->set_polarization(pb::EmissionData_Polarization_RHC);
                break;
             }
-            case Simulation::Antenna::LHC: {
+            case simulation::Antenna::LHC: {
                emMsg->set_polarization(pb::EmissionData_Polarization_LHC);
                break;
             }
@@ -1084,7 +1084,7 @@ void DataRecorder::sendDataRecord(pb::DataRecord* const msg)
 void DataRecorder::timeStamp(pb::DataRecord* const msg)
 {
    if (msg != nullptr) {
-      Simulation::Simulation* sim = getSimulation();
+      simulation::Simulation* sim = getSimulation();
       if (sim != nullptr) {
          pb::Time* time = msg->mutable_time();
          time->set_exec_time( sim->getExecTimeSec() );

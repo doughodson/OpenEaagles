@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: Simulation
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_Simulation_H__
-#define __oe_Simulation_Simulation_H__
+#ifndef __oe_simulation_Simulation_H__
+#define __oe_simulation_Simulation_H__
 
 #include "openeaagles/basic/Component.h"
 #include "openeaagles/basic/safe_queue.h"
@@ -11,7 +11,7 @@ namespace oe {
    namespace basic { class Distance; class EarthModel; class LatLon; class Pair; class Time; class Terrain; }
    namespace dafif { class AirportLoader; class NavaidLoader; class WaypointLoader; }
 
-namespace Simulation {
+namespace simulation {
    class DataRecorder;
    class IrAtmosphere;
    class Player;
@@ -442,7 +442,7 @@ private:
    bool bgThreadsFailed;                   // Failed to create threads.
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

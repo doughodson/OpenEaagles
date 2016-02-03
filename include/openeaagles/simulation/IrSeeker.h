@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Classes: IrSeeker, TdbIr
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_IrSeeker_H__
-#define __oe_Simulation_IrSeeker_H__
+#ifndef __oe_simulation_IrSeeker_H__
+#define __oe_simulation_IrSeeker_H__
 
 #include "openeaagles/simulation/ScanGimbal.h"
 #include "openeaagles/simulation/Tdb.h"
@@ -14,7 +14,7 @@
 namespace oe {
    namespace basic { class PairStream; }
 
-namespace Simulation {
+namespace simulation {
 
 class Player;
 class IrSystem;
@@ -96,7 +96,7 @@ protected:
 };
 #endif
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

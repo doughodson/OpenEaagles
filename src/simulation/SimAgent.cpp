@@ -13,7 +13,7 @@
 #include "openeaagles/simulation/Station.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //------------------------------------------------------------------------------
 // Class: SimAgent
@@ -149,7 +149,7 @@ basic::Object* SimAgent::getSlotByIndex(const int si)
    return BaseClass::getSlotByIndex(si);
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 

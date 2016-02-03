@@ -20,7 +20,7 @@
 #include "openeaagles/basic/units/Times.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //==============================================================================
 // Class: RfSensor
@@ -858,5 +858,5 @@ void SensorMgr::deleteData()
 {
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace

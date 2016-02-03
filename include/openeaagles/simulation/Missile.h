@@ -1,15 +1,15 @@
 //------------------------------------------------------------------------------
 // Class: Missile
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_Missile_H__
-#define __oe_Simulation_Missile_H__
+#ifndef __oe_simulation_Missile_H__
+#define __oe_simulation_Missile_H__
 
 #include "openeaagles/simulation/Weapon.h"
 #include "openeaagles/basic/units/Angles.h"
 
 namespace oe {
    namespace basic { class Number; }
-namespace Simulation {
+namespace simulation {
 
 class Player;
 class Track;
@@ -101,7 +101,7 @@ private:
 
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

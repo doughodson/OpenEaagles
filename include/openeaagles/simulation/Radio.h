@@ -1,15 +1,15 @@
 //------------------------------------------------------------------------------
 // Classes: Radio, CommRadio
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_Radio_H__
-#define __oe_Simulation_Radio_H__
+#ifndef __oe_simulation_Radio_H__
+#define __oe_simulation_Radio_H__
 
 #include "RfSystem.h"
 
 namespace oe {
    namespace basic { class PairStream; }
 
-namespace Simulation {
+namespace simulation {
 class Datalink;
 
 //------------------------------------------------------------------------------
@@ -175,7 +175,7 @@ private:
    basic::safe_ptr<Datalink> datalink;   // Our companion datalink system
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

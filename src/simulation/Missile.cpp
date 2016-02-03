@@ -13,7 +13,7 @@
 #include "openeaagles/basic/units/Distances.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 IMPLEMENT_SUBCLASS(Missile,"Missile")
 
@@ -663,5 +663,5 @@ std::ostream& Missile::serialize(std::ostream& sout, const int i, const bool slo
    return sout;
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace

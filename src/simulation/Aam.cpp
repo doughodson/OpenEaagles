@@ -2,7 +2,7 @@
 #include "openeaagles/simulation/Aam.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //==============================================================================
 // Aam class -- Generic Air to Air Missile
@@ -43,5 +43,5 @@ Aam::Aam()
     setMaxAccel(50.0);
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace

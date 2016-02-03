@@ -17,7 +17,7 @@
 #include "openeaagles/simulation/Station.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //
 // Class: MultiActorAgent
@@ -235,7 +235,7 @@ basic::Object* MultiActorAgent::getSlotByIndex(const int si)
    return BaseClass::getSlotByIndex(si);
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 

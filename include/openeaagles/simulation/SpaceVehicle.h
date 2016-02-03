@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Classes: SpaceVehicle, BoosterSpaceVehicle, MannedSpaceVehicle, UnmannedSpaceVehicle
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_SpaceVehicle_H__
-#define __oe_Simulation_SpaceVehicle_H__
+#ifndef __oe_simulation_SpaceVehicle_H__
+#define __oe_simulation_SpaceVehicle_H__
 
 #include "openeaagles/simulation/Player.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //==============================================================================
 // Class SpaceVehicle
@@ -95,7 +95,7 @@ protected:
    void dynamics(const LCreal  dt = 0.0) override;
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

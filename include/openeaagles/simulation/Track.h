@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Classes: Track, RfTrack, IrTrack
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_Track_H__
-#define __oe_Simulation_Track_H__
+#ifndef __oe_simulation_Track_H__
+#define __oe_simulation_Track_H__
 
 #include "openeaagles/basic/Object.h"
 
@@ -12,7 +12,7 @@
 #include "openeaagles/basic/units/Distances.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 class Emission;
 class IrQueryMsg;
@@ -338,7 +338,7 @@ protected:
 
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

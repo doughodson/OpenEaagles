@@ -664,7 +664,7 @@ void JSBSimModel::setBrakes(const LCreal left, const LCreal right)
 void JSBSimModel::dynamics(const LCreal dt)
 {
     // Get our Player (must have one!)
-    Simulation::Player* p = static_cast<Simulation::Player*>( findContainerByType(typeid(Simulation::Player)) );
+    simulation::Player* p = static_cast<simulation::Player*>( findContainerByType(typeid(simulation::Player)) );
     if (p == nullptr) return;
 
     if (fdmex == nullptr) return;
@@ -827,7 +827,7 @@ void JSBSimModel::reset()
     rollTrimSw    = static_cast<LCreal>(0.0);
 
     // Get our Player (must have one!)
-    Simulation::Player* p = static_cast<Simulation::Player*>( findContainerByType(typeid(Simulation::Player)) );
+    simulation::Player* p = static_cast<simulation::Player*>( findContainerByType(typeid(simulation::Player)) );
     if (p == nullptr) return;
 
     // must have strings set

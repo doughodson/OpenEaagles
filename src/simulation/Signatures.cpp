@@ -12,7 +12,7 @@
 #include "openeaagles/basic/units/Distances.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //==============================================================================
 // Class: RfSignature
@@ -730,5 +730,5 @@ basic::Object* SigAzEl::getSlotByIndex(const int si)
 }
 
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace

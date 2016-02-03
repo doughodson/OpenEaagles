@@ -1,7 +1,7 @@
 #include "openeaagles/simulation/Ntm.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //==============================================================================
 // Ntm class
@@ -106,5 +106,5 @@ std::ostream& Ntm::serialize(std::ostream& sout, const int i, const bool slotsOn
    return sout;
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace

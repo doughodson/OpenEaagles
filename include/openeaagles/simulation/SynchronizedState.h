@@ -1,12 +1,12 @@
 
-#ifndef __oe_Simulation_SynchronizedState_H__
-#define __oe_Simulation_SynchronizedState_H__
+#ifndef __oe_simulation_SynchronizedState_H__
+#define __oe_simulation_SynchronizedState_H__
 
 #include "openeaagles/basic/Object.h"
 #include "openeaagles/basic/osg/Vec3"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //------------------------------------------------------------------------------
 // Class: SynchronizedState
@@ -53,7 +53,7 @@ private:
    bool        valid;
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

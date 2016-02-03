@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Classes: Effects, Chaff, Flare and Decoy
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_Effects_H__
-#define __oe_Simulation_Effects_H__
+#ifndef __oe_simulation_Effects_H__
+#define __oe_simulation_Effects_H__
 
 #include "openeaagles/simulation/Weapon.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //------------------------------------------------------------------------------
 // Class: Effects
@@ -101,7 +101,7 @@ public:
     int getCategory() const override;
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

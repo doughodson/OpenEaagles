@@ -1,15 +1,15 @@
 //------------------------------------------------------------------------------
 // Class: Bomb
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_Bomb_H__
-#define __oe_Simulation_Bomb_H__
+#ifndef __oe_simulation_Bomb_H__
+#define __oe_simulation_Bomb_H__
 
 #include "openeaagles/simulation/Weapon.h"
 
 namespace oe {
    namespace basic { class Identifier; }
 
-namespace Simulation {
+namespace simulation {
 
 //------------------------------------------------------------------------------
 // Class: Bomb
@@ -122,7 +122,7 @@ private:
    LCreal fuzeTime;        // Fuze Arming Time
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

@@ -68,7 +68,7 @@
     }
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //==============================================================================
 // Class SimLogger
@@ -1997,5 +1997,5 @@ void SimLogger::RemovedRwrTrack::captureData()
     }
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace

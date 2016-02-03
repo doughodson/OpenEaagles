@@ -15,7 +15,7 @@
 #include <cstring>
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(Otw,"Otw")
 EMPTY_SERIALIZER(Otw)
@@ -1156,5 +1156,5 @@ basic::Object* Otm::getSlotByIndex(const int si)
     return BaseClass::getSlotByIndex(si);
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace

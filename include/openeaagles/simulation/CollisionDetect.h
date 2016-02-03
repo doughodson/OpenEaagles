@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: CollisionDetect
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_CollisionDetect_H__
-#define __oe_Simulation_CollisionDetect_H__
+#ifndef __oe_simulation_CollisionDetect_H__
+#define __oe_simulation_CollisionDetect_H__
 
 namespace oe {
    namespace basic { class Angle; class Distance; class Number; class PairStream; }
@@ -12,7 +12,7 @@ namespace oe {
 #include "openeaagles/config.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
    class Player;
 
 //------------------------------------------------------------------------------
@@ -148,7 +148,7 @@ inline bool CollisionDetect::isUsingWorldCoordinates() const   { return useWorld
 inline bool CollisionDetect::isLocalOnly() const               { return localOnly; }
 inline bool CollisionDetect::isSendCrashEventsEnabled() const  { return sendCrashEvents; }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

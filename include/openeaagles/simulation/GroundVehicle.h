@@ -5,8 +5,8 @@
 // Description: Generic Ground Vehicles
 //
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_GroundVehicle_H__
-#define __oe_Simulation_GroundVehicle_H__
+#ifndef __oe_simulation_GroundVehicle_H__
+#define __oe_simulation_GroundVehicle_H__
 
 #include "openeaagles/simulation/Player.h"
 
@@ -16,7 +16,7 @@ namespace oe {
       class Identifier;
       class Time;
    }
-namespace Simulation {
+namespace simulation {
 
 //==============================================================================
 // Class GroundVehicle
@@ -173,7 +173,7 @@ public:
     GroundStationUav();
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

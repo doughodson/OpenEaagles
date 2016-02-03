@@ -15,7 +15,7 @@
 #include "openeaagles/basic/units/Areas.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 IMPLEMENT_SUBCLASS(IrSignature,"IrSignature")
 EMPTY_SERIALIZER(IrSignature)
@@ -268,5 +268,5 @@ const LCreal* IrSignature::getWaveBandWidths() const
    return ((waveBandTable != nullptr) ? waveBandTable->getDataTable() : nullptr);
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace

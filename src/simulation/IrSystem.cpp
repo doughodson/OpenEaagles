@@ -14,7 +14,7 @@
 #include "openeaagles/basic/PairStream.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 IMPLEMENT_SUBCLASS(IrSystem,"IrSystem")
 EMPTY_SERIALIZER(IrSystem)
@@ -264,6 +264,6 @@ basic::Object* IrSystem::getSlotByIndex(const int si)
     return BaseClass::getSlotByIndex(si);
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 

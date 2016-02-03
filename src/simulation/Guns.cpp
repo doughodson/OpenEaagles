@@ -16,7 +16,7 @@
 #include <cmath>
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //==============================================================================
 // Class: Bullet
@@ -868,5 +868,5 @@ std::ostream& Gun::serialize(std::ostream& sout, const int i, const bool slotsOn
    return sout;
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace

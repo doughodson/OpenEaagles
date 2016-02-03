@@ -24,7 +24,7 @@
 // #define NET_TIMING_TEST
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 static const unsigned int DEFAULT_FAST_FORWARD_RATE = 1;
 
@@ -1618,5 +1618,5 @@ unsigned long BgThread::userFunc(const LCreal dt)
    return 0;
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace

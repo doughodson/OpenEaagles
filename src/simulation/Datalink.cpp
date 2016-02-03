@@ -15,7 +15,7 @@
 #include "openeaagles/basic/units/Distances.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 IMPLEMENT_SUBCLASS(Datalink,"Datalink")
 
@@ -288,10 +288,10 @@ void Datalink::dynamics(const LCreal)
     //age queues
     oe::basic::Object* tempInQueue[MAX_MESSAGES];
     int numIn = 0;
-    oe::Simulation::Message* msg = nullptr;
+    oe::simulation::Message* msg = nullptr;
     while((numIn < MAX_MESSAGES) && inQueue->isNotEmpty()) {
         oe::basic::Object* tempObj = inQueue->get();
-        msg = dynamic_cast<oe::Simulation::Message*>(tempObj);
+        msg = dynamic_cast<oe::simulation::Message*>(tempObj);
         if(msg != nullptr) {
             if(getComputerTime() - msg->getTimeStamp() > msg->getLifeSpan()) {
                 //remove message by not adding to list to be put back into queue
@@ -316,7 +316,7 @@ void Datalink::dynamics(const LCreal)
     msg = nullptr;
     while((numOut < MAX_MESSAGES) && outQueue->isNotEmpty()) {
         oe::basic::Object* tempObj = outQueue->get();
-        msg = dynamic_cast<oe::Simulation::Message*>(tempObj);
+        msg = dynamic_cast<oe::simulation::Message*>(tempObj);
         if(msg != nullptr) {
             if(getComputerTime() - msg->getTimeStamp() > msg->getLifeSpan()) {
                 //remove message by not adding to list to be put back into queue
@@ -570,5 +570,5 @@ std::ostream& Datalink::serialize(std::ostream& sout, const int i, const bool sl
     return sout;
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace

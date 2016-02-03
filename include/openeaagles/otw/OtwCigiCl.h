@@ -33,7 +33,7 @@ namespace oe {
       class Thread;
    }
 
-   namespace Simulation {
+   namespace simulation {
       class AirVehicle;
       class Building;
       class Effects;
@@ -75,9 +75,9 @@ class CigiClNetworkSignalProcessing;
 // startOfFrame() callback (i.e., sync'd with the IG).
 //
 //------------------------------------------------------------------------------
-class OtwCigiCl : public Simulation::Otw
+class OtwCigiCl : public simulation::Otw
 {
-   DECLARE_SUBCLASS(OtwCigiCl, Simulation::Otw)
+   DECLARE_SUBCLASS(OtwCigiCl, simulation::Otw)
 
 public:
    static const unsigned int NUM_BUFFERS = 2;
@@ -207,19 +207,19 @@ protected:
    void sendElevationRequests() override;   // Sends terrain height requests
    void recvElevations() override;          // Receives terrain height data
    void frameSync() override;               // Send frame sync (if any)
-   Simulation::OtwModel* modelFactory() override;       // Create OtwModel objects unique to interface
-   Simulation::OtwModel* hotFactory() override;         // Create OtwHot objects unique to interface
+   simulation::OtwModel* modelFactory() override;       // Create OtwModel objects unique to interface
+   simulation::OtwModel* hotFactory() override;         // Create OtwHot objects unique to interface
 
-   virtual bool setAirVehicleData(OtwModelCigiCl* const m, const unsigned short entity, const Simulation::AirVehicle* const p);
-   virtual bool setBuildingData(OtwModelCigiCl* const m, const unsigned short entity, const Simulation::Building* const p);
-   virtual bool setEffectsData(OtwModelCigiCl* const m, const unsigned short entity, const Simulation::Effects* const p);
-   virtual bool setGndVehicleData(OtwModelCigiCl* const m, const unsigned short entity, const Simulation::GroundVehicle* const p);
-   virtual bool setLifeFormData(OtwModelCigiCl* const m, const unsigned short entity, const Simulation::LifeForm* const p);
-   virtual bool setMissileData(OtwModelCigiCl* const m, const unsigned short entity, const Simulation::Missile* const p);
-   virtual bool setShipData(OtwModelCigiCl* const m, const unsigned short entity, const Simulation::Ship* const p);
-   virtual bool setSpaceVehicleData(OtwModelCigiCl* const m, const unsigned short entity, const Simulation::SpaceVehicle* const p);
-   virtual bool setWeaponData(OtwModelCigiCl* const m, const unsigned short entity, const Simulation::Weapon* const p);
-   virtual bool setCommonModelData(CigiEntityCtrlV3* const ec, const unsigned short entity, const Simulation::Player* const p);
+   virtual bool setAirVehicleData(OtwModelCigiCl* const m, const unsigned short entity, const simulation::AirVehicle* const p);
+   virtual bool setBuildingData(OtwModelCigiCl* const m, const unsigned short entity, const simulation::Building* const p);
+   virtual bool setEffectsData(OtwModelCigiCl* const m, const unsigned short entity, const simulation::Effects* const p);
+   virtual bool setGndVehicleData(OtwModelCigiCl* const m, const unsigned short entity, const simulation::GroundVehicle* const p);
+   virtual bool setLifeFormData(OtwModelCigiCl* const m, const unsigned short entity, const simulation::LifeForm* const p);
+   virtual bool setMissileData(OtwModelCigiCl* const m, const unsigned short entity, const simulation::Missile* const p);
+   virtual bool setShipData(OtwModelCigiCl* const m, const unsigned short entity, const simulation::Ship* const p);
+   virtual bool setSpaceVehicleData(OtwModelCigiCl* const m, const unsigned short entity, const simulation::SpaceVehicle* const p);
+   virtual bool setWeaponData(OtwModelCigiCl* const m, const unsigned short entity, const simulation::Weapon* const p);
+   virtual bool setCommonModelData(CigiEntityCtrlV3* const ec, const unsigned short entity, const simulation::Player* const p);
 
 private:
    basic::safe_ptr<CigiCl> cigi;         // CIGI handler (direct, networked, ...)
@@ -407,16 +407,16 @@ private:
 // Base class: basic::Object -> OtwModel -> OtwModelCigiCl
 // Description: CIGI OTW model
 //------------------------------------------------------------------------------
-class OtwModelCigiCl : public Simulation::OtwModel
+class OtwModelCigiCl : public simulation::OtwModel
 {
-   DECLARE_SUBCLASS(OtwModelCigiCl,Simulation::OtwModel)
+   DECLARE_SUBCLASS(OtwModelCigiCl,simulation::OtwModel)
 
 public:
    OtwModelCigiCl();
 
    void clear() override;
 
-   virtual void initialize(Simulation::Player* const p);
+   virtual void initialize(simulation::Player* const p);
 
    unsigned short getID() const          { return id; }
    void setID(const unsigned short i)    { id = i; }

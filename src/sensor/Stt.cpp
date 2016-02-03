@@ -44,13 +44,13 @@ void Stt::dynamics(const LCreal dt)
     // ---
     // Update the antenna's Reference position
     // ---
-    Simulation::TrackManager* tm = getTrackManager();
+    simulation::TrackManager* tm = getTrackManager();
     if (getAntenna() != nullptr && getOwnship() != nullptr && tm != nullptr) {
 
         double az = 0.0;
         double el = 0.0;
 
-        basic::safe_ptr<Simulation::Track> trackList[2];
+        basic::safe_ptr<simulation::Track> trackList[2];
         int n = tm->getTrackList(trackList,2);
 
         if (n > 0) {
@@ -64,9 +64,9 @@ void Stt::dynamics(const LCreal dt)
             // rotate to ownship heading
             double sinHdg = getOwnship()->getSinHeading();
             double cosHdg = getOwnship()->getCosHeading();
-            double x =  dpoi[Simulation::Player::INORTH] * cosHdg + dpoi[Simulation::Player::IEAST] * sinHdg;
-            double y = -dpoi[Simulation::Player::INORTH] * sinHdg + dpoi[Simulation::Player::IEAST] * cosHdg;
-            double z = dpoi[Simulation::Player::IDOWN];
+            double x =  dpoi[simulation::Player::INORTH] * cosHdg + dpoi[simulation::Player::IEAST] * sinHdg;
+            double y = -dpoi[simulation::Player::INORTH] * sinHdg + dpoi[simulation::Player::IEAST] * cosHdg;
+            double z = dpoi[simulation::Player::IDOWN];
 
             // Compute az & el to track
             double grng = std::sqrt(x*x + y*y);
@@ -88,7 +88,7 @@ void Stt::dynamics(const LCreal dt)
             // Set the reference 'look' angles and conical scan mode
             getAntenna()->setRefAzimuth(az);
             getAntenna()->setRefElevation(el);
-            getAntenna()->setScanMode(Simulation::Antenna::CONICAL_SCAN);
+            getAntenna()->setScanMode(simulation::Antenna::CONICAL_SCAN);
         }
         else {
             // ---
@@ -96,7 +96,7 @@ void Stt::dynamics(const LCreal dt)
             // ---
             getAntenna()->setRefAzimuth(0.0);
             getAntenna()->setRefElevation(0.0);
-            getAntenna()->setScanMode(Simulation::Antenna::HORIZONTAL_BAR_SCAN);
+            getAntenna()->setScanMode(simulation::Antenna::HORIZONTAL_BAR_SCAN);
         }
     }
 }

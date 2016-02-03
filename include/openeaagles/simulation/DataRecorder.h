@@ -47,15 +47,15 @@
 //       then no data is recorded
 //
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_DataRecorder_H__
-#define __oe_Simulation_DataRecorder_H__
+#ifndef __oe_simulation_DataRecorder_H__
+#define __oe_simulation_DataRecorder_H__
 
 #include "openeaagles/basic/Component.h"
 #include "openeaagles/simulation/dataRecorderTokens.h"
 
 namespace oe {
    namespace basic { class List; }
-namespace Simulation {
+namespace simulation {
    class Simulation;
    class Station;
 
@@ -174,7 +174,7 @@ private:
 
 #include "openeaagles/simulation/DataRecorder.inl"
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

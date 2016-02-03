@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: IrAtmosphere1
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_IrAtmosphere1_H__
-#define __oe_Simulation_IrAtmosphere1_H__
+#ifndef __oe_simulation_IrAtmosphere1_H__
+#define __oe_simulation_IrAtmosphere1_H__
 
 #include "openeaagles/basic/Component.h"
 
@@ -20,7 +20,7 @@ namespace oe {
       class Number;
    }
 
-namespace Simulation {
+namespace simulation {
 
 class IrQueryMsg;
 
@@ -167,7 +167,7 @@ private:
    const basic::Table4* transmissivityTable;
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

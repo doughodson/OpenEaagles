@@ -11,7 +11,7 @@
 
 namespace oe {
    namespace basic { class NetHandler; }
-   namespace Simulation { class Iff; class RfSensor; }
+   namespace simulation { class Iff; class RfSensor; }
 
 namespace network {
 
@@ -118,9 +118,9 @@ namespace dis {
 //       is matched with the EmissionPduHandler's "emitterName" value.
 //
 //==============================================================================
-class NetIO : public Simulation::NetIO
+class NetIO : public simulation::NetIO
 {
-    DECLARE_SUBCLASS(NetIO,Simulation::NetIO)
+    DECLARE_SUBCLASS(NetIO,simulation::NetIO)
 
 public:
    // Max PDU buffer size
@@ -245,7 +245,7 @@ public:
    virtual bool setVersion(const unsigned char v);                            // Sets the operating version number
 
    // Emission PDU handler
-   const EmissionPduHandler* findEmissionPduHandler(const Simulation::RfSensor* const);
+   const EmissionPduHandler* findEmissionPduHandler(const simulation::RfSensor* const);
    const EmissionPduHandler* findEmissionPduHandler(const EmissionSystem* const);
 
    // Generate a federate name from the site and application numbers:
@@ -278,13 +278,13 @@ public:
          const unsigned char  extra = 0
       ) const;
 
-   LCreal getMaxEntityRange(const Simulation::Nib* const nib) const override;
-   LCreal getMaxEntityRangeSquared(const Simulation::Nib* const nib) const override;
-   LCreal getMaxTimeDR(const Simulation::Nib* const nib) const override;
-   LCreal getMaxPositionErr(const Simulation::Nib* const nib) const override;
-   LCreal getMaxOrientationErr(const Simulation::Nib* const nib) const override;
-   LCreal getMaxAge(const Simulation::Nib* const nib) const override;
-   Simulation::Nib* createNewOutputNib(Simulation::Player* const player) override;
+   LCreal getMaxEntityRange(const simulation::Nib* const nib) const override;
+   LCreal getMaxEntityRangeSquared(const simulation::Nib* const nib) const override;
+   LCreal getMaxTimeDR(const simulation::Nib* const nib) const override;
+   LCreal getMaxPositionErr(const simulation::Nib* const nib) const override;
+   LCreal getMaxOrientationErr(const simulation::Nib* const nib) const override;
+   LCreal getMaxAge(const simulation::Nib* const nib) const override;
+   simulation::Nib* createNewOutputNib(simulation::Player* const player) override;
 
    // DIS v7 additions
    virtual LCreal getHbtPduEe() const;
@@ -366,8 +366,8 @@ protected:
    bool initNetwork() override;                                                   // Initialize the network
    void netInputHander() override;                                                // Network input handler
    void processInputList() override;                                              // Update players/systems from the Input-list
-   Simulation::Nib* nibFactory(const Simulation::NetIO::IoType ioType) override;  // Create a new Nib
-   Simulation::NetIO::NtmInputNode* rootNtmInputNodeFactory() const override;
+   simulation::Nib* nibFactory(const simulation::NetIO::IoType ioType) override;  // Create a new Nib
+   simulation::NetIO::NtmInputNode* rootNtmInputNodeFactory() const override;
    void testOutputEntityTypes(const unsigned int) override;                       // Test quick lookup of outgoing entity types
    void testInputEntityTypes(const unsigned int) override;                        // Test quick lookup of incoming entity types
 

@@ -49,7 +49,7 @@ void NetIO::processEntityStatePDU(const EntityStatePDU* const pdu)
     if (site == getSiteID() &&  app == getApplicationID()) return;
 
     // Search test (reject PDUs from players on our output list)
-    Simulation::Nib* testNib = findDisNib(playerId, site, app, OUTPUT_NIB);
+    simulation::Nib* testNib = findDisNib(playerId, site, app, OUTPUT_NIB);
     if (testNib != nullptr) return;
 
     // ---
@@ -83,7 +83,7 @@ void NetIO::processEntityStatePDU(const EntityStatePDU* const pdu)
                fname->unref();
             }
 
-            nib->setDeadReckoning( Simulation::Nib::DeadReckoning( pdu->deadReckoningAlgorithm ) );
+            nib->setDeadReckoning( simulation::Nib::DeadReckoning( pdu->deadReckoningAlgorithm ) );
 
             nib->setEntityType(
                pdu->entityType.kind,
@@ -97,19 +97,19 @@ void NetIO::processEntityStatePDU(const EntityStatePDU* const pdu)
             // Side: When mapping Force ID to Player Side ...
             if (pdu->forceID == FRIENDLY_FORCE) {
                 // Friendly's are blue, ...
-                nib->setSide(Simulation::Player::BLUE);
+                nib->setSide(simulation::Player::BLUE);
             }
             else if (pdu->forceID == OPPOSING_FORCE) {
                 // opposing side is red, ...
-                nib->setSide(Simulation::Player::RED);
+                nib->setSide(simulation::Player::RED);
             }
             else if (pdu->forceID == NEUTRAL_FORCE) {
                 // Neutrals are white, ...
-                nib->setSide(Simulation::Player::WHITE);
+                nib->setSide(simulation::Player::WHITE);
             }
             else  {
                 // and everyone else is gray.
-                nib->setSide(Simulation::Player::GRAY);
+                nib->setSide(simulation::Player::GRAY);
             }
 
             addNib2InputList(nib);

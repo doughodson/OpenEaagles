@@ -12,9 +12,9 @@
 namespace oe {
 namespace dynamics {
 
-class LaeroModel : public Simulation::AerodynamicsModel
+class LaeroModel : public simulation::AerodynamicsModel
 {
-   DECLARE_SUBCLASS(LaeroModel, Simulation::AerodynamicsModel )
+   DECLARE_SUBCLASS(LaeroModel, simulation::AerodynamicsModel )
 
 public:
    LaeroModel();

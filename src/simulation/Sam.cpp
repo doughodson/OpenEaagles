@@ -2,7 +2,7 @@
 #include "openeaagles/simulation/Sam.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //==============================================================================
 // Sam class -- Generic Surface to Air Missile
@@ -29,5 +29,5 @@ Sam::Sam()
    setType(&gsam);
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace

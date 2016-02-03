@@ -10,7 +10,7 @@
 #include <cmath>
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //==============================================================================
 // class GroundVehicle
@@ -473,5 +473,5 @@ void GroundStationUav::deleteData()
 {
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace

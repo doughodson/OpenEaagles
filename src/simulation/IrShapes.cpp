@@ -14,7 +14,7 @@
 #include <cmath>
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //==============================================================================
 // Class: IrShape (Abstract)
@@ -342,5 +342,5 @@ LCreal IrBox::getReflectorAreaInFieldOfView(const IrQueryMsg* const msg)
 
 } // end of method
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace

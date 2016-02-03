@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: SpaceDynamicsModel
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_SpaceDynamicsModel_H__
-#define __oe_Simulation_SpaceDynamicsModel_H__
+#ifndef __oe_simulation_SpaceDynamicsModel_H__
+#define __oe_simulation_SpaceDynamicsModel_H__
 
 #include "openeaagles/simulation/DynamicsModel.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //==============================================================================
 // Class SpaceDynamicsModel
@@ -38,7 +38,7 @@ public:
    virtual bool setTranslateZInput(const LCreal transz);
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

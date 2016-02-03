@@ -27,7 +27,7 @@
 #endif
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 IMPLEMENT_SUBCLASS(Route,"Route")
 
@@ -829,5 +829,5 @@ std::ostream& Route::serialize(std::ostream& sout, const int i, const bool slots
     return sout;
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace

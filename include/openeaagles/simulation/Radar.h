@@ -1,14 +1,14 @@
 //------------------------------------------------------------------------------
 // Class: Radar
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_Radar_H__
-#define __oe_Simulation_Radar_H__
+#ifndef __oe_simulation_Radar_H__
+#define __oe_simulation_Radar_H__
 
 #include "openeaagles/simulation/RfSensor.h"
 #include "openeaagles/basic/safe_queue.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //------------------------------------------------------------------------------
 // Class: Radar
@@ -113,7 +113,7 @@ private:
    LCreal      rfIGain;                // Integrator gain (default: 1.0) (no units)
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

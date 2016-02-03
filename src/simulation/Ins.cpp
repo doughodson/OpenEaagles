@@ -5,7 +5,7 @@
 #include "openeaagles/simulation/Ins.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 
 //==============================================================================
@@ -100,5 +100,5 @@ void Ins::setQuality(const LCreal v)
 }
 
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace

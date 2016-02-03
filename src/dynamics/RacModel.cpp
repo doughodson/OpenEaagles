@@ -121,14 +121,14 @@ LCreal RacModel::getSideSlip() const
 
 LCreal RacModel::getFlightPath() const
 {
-   const Simulation::Player* pp = static_cast<const Simulation::Player*>( findContainerByType(typeid(Simulation::Player)) );
+   const simulation::Player* pp = static_cast<const simulation::Player*>( findContainerByType(typeid(simulation::Player)) );
    if (pp == nullptr) return 0;
    return static_cast<LCreal>(pp->getPitchR());
 }
 
 LCreal RacModel::getCalibratedAirspeed() const
 {
-   const Simulation::Player* pp = static_cast<const Simulation::Player*>( findContainerByType(typeid(Simulation::Player)) );
+   const simulation::Player* pp = static_cast<const simulation::Player*>( findContainerByType(typeid(simulation::Player)) );
    if (pp == nullptr) return 0;
    return pp->getTotalVelocityKts();
 }
@@ -211,7 +211,7 @@ bool RacModel::setCommandedAltitude(const double m, const double, const double)
 void RacModel::updateRAC(const LCreal dt)
 {
    // Get our Player (must have one!)
-   Simulation::Player* pp = static_cast<Simulation::Player*>( findContainerByType(typeid(Simulation::Player)) );
+   simulation::Player* pp = static_cast<simulation::Player*>( findContainerByType(typeid(simulation::Player)) );
    if (pp == nullptr) return;
 
    // Acceleration of Gravity (M/S)
@@ -268,9 +268,9 @@ void RacModel::updateRAC(const LCreal dt)
    // Get old angular values
    // ---
    const osg::Vec3 oldRates = pp->getAngularVelocities();
-   //LCreal pa1 = oldRates[Simulation::Player::IROLL];
-   LCreal qa1 = oldRates[Simulation::Player::IPITCH];
-   LCreal ra1 = oldRates[Simulation::Player::IYAW];
+   //LCreal pa1 = oldRates[simulation::Player::IROLL];
+   LCreal qa1 = oldRates[simulation::Player::IPITCH];
+   LCreal ra1 = oldRates[simulation::Player::IYAW];
 
    // ---
    // Find pitch rate and update pitch

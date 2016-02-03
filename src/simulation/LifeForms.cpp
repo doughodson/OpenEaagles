@@ -13,7 +13,7 @@
 #include <cmath>
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //==============================================================================
 // class LifeForm
@@ -326,5 +326,5 @@ Parachutist::Parachutist()
 EMPTY_COPYDATA(Parachutist)
 EMPTY_DELETEDATA(Parachutist)
 */
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace

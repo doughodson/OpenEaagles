@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Classes: NetIO
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_NetIO_H__
-#define __oe_Simulation_NetIO_H__
+#ifndef __oe_simulation_NetIO_H__
+#define __oe_simulation_NetIO_H__
 
 #include "openeaagles/basic/Component.h"
 #include "openeaagles/simulation/Player.h"
@@ -12,7 +12,7 @@ namespace oe {
                      class String; class Time;
    }
 
-namespace Simulation {
+namespace simulation {
    class Nib;
    class Ntm;
    class Simulation;
@@ -482,7 +482,7 @@ private:  // Ntm related private
 };
 
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

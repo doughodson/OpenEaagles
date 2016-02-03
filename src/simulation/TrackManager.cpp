@@ -20,7 +20,7 @@
 #include "openeaagles/simulation/Simulation.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //==============================================================================
 // Class: TrackManager
@@ -1766,5 +1766,5 @@ void RwrTrkMgr::processTrackList(const LCreal dt)
    lcUnlock(trkListLock);
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace

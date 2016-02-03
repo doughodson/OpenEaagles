@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: Ins
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_Ins_H__
-#define __oe_Simulation_Ins_H__
+#ifndef __oe_simulation_Ins_H__
+#define __oe_simulation_Ins_H__
 
 #include "openeaagles/simulation/Navigation.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //------------------------------------------------------------------------------
 // Classes: Ins
@@ -58,7 +58,7 @@ private:
     LCreal      quality;        // Quality
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

@@ -14,7 +14,7 @@
 #include "openeaagles/basic/units/Distances.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 
 // =============================================================================
@@ -1023,5 +1023,5 @@ std::ostream& ActionCamouflageType::serialize(std::ostream& sout, const int i, c
     return sout;
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace

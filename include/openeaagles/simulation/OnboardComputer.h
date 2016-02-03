@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: OnboardComputer
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_OnboardComputer_H__
-#define __oe_Simulation_OnboardComputer_H__
+#ifndef __oe_simulation_OnboardComputer_H__
+#define __oe_simulation_OnboardComputer_H__
 
 #include "openeaagles/simulation/System.h"
 
@@ -10,7 +10,7 @@ namespace oe {
    namespace basic {
       class PairStream;
    }
-namespace Simulation {
+namespace simulation {
 
 class Action;
 class Track;
@@ -77,7 +77,7 @@ private:
    Track*         nextToShoot;      // Next to shoot track
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

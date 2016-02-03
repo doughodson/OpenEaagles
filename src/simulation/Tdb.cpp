@@ -13,7 +13,7 @@
 #include <cmath>
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //==============================================================================
 //  Class: Tdb
@@ -598,5 +598,5 @@ void Tdb::setGimbal(const Gimbal* const newGimbal)
    }
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace

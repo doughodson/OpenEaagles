@@ -2,8 +2,8 @@
 // Recorder macros and 
 // DataRecorder and RecorderComponent inline functions
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_DataRecorder_Inline__
-#define __oe_Simulation_DataRecorder_Inline__
+#ifndef __oe_simulation_DataRecorder_Inline__
+#define __oe_simulation_DataRecorder_Inline__
 
 
 //==============================================================================
@@ -41,7 +41,7 @@
 
 #define BEGIN_RECORD_DATA_SAMPLE(pRecorder, token)             \
 {                                                              \
-   ::oe::Simulation::DataRecorder* _p = pRecorder;        \
+   ::oe::simulation::DataRecorder* _p = pRecorder;        \
    if (pRecorder != 0)  {                                      \
       unsigned int _token = token;                             \
       const ::oe::basic::Object* _obj[4] = { 0, 0, 0, 0 };  \

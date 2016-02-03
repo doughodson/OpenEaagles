@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: SensorMsg
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_SensorMsg_H__
-#define __oe_Simulation_SensorMsg_H__
+#ifndef __oe_simulation_SensorMsg_H__
+#define __oe_simulation_SensorMsg_H__
 
 #include "openeaagles/basic/Object.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
    class Player;
    class Gimbal;
 
@@ -179,7 +179,7 @@ private:
    bool            localOnly;      // Local players only flag
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

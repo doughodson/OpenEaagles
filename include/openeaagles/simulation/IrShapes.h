@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Classes: IrShape, IrSphere, IrBox
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_IrShape_H__
-#define __oe_Simulation_IrShape_H__
+#ifndef __oe_simulation_IrShape_H__
+#define __oe_simulation_IrShape_H__
 
 #include "openeaagles/basic/Object.h"
 
@@ -10,7 +10,7 @@ namespace oe {
 
 namespace basic { class Number; }
 
-namespace Simulation {
+namespace simulation {
 
 class IrQueryMsg;
 
@@ -87,7 +87,7 @@ private:
    LCreal x,y,z;
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

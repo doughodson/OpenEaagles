@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: Gimbal
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_Gimbal_H__
-#define __oe_Simulation_Gimbal_H__
+#ifndef __oe_simulation_Gimbal_H__
+#define __oe_simulation_Gimbal_H__
 
 #include "openeaagles/simulation/System.h"
 
@@ -13,7 +13,7 @@ namespace oe {
       class List;
       class PairStream;
    }
-namespace Simulation {
+namespace simulation {
 
 class Emission;
 class SensorMsg;
@@ -390,7 +390,7 @@ private:
    basic::safe_ptr<Tdb> tdb;  // Current Target Data Block
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

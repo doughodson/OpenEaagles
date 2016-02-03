@@ -13,7 +13,7 @@
 #include "openeaagles/basic/units/Distances.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 IMPLEMENT_SUBCLASS(Sar,"Sar")
 EMPTY_SERIALIZER(Sar)
@@ -344,5 +344,5 @@ basic::Object* Sar::getSlotByIndex(const int si)
     return BaseClass::getSlotByIndex(si);
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace

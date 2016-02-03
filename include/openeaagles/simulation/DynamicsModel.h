@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: DynamicsModel
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_DynamicsModel_H__
-#define __oe_Simulation_DynamicsModel_H__
+#ifndef __oe_simulation_DynamicsModel_H__
+#define __oe_simulation_DynamicsModel_H__
 
 #include "openeaagles/basic/Component.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //==============================================================================
 // Class DynamicsModel
@@ -106,7 +106,7 @@ public:
     virtual bool setFuelWt(const LCreal lbs);
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

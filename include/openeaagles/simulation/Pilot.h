@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: Pilot
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_Pilot_H__
-#define __oe_Simulation_Pilot_H__
+#ifndef __oe_simulation_Pilot_H__
+#define __oe_simulation_Pilot_H__
 
 #include "openeaagles/simulation/System.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //------------------------------------------------------------------------------
 // Class: Pilot
@@ -28,7 +28,7 @@ public:
     Pilot();
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

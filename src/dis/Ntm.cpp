@@ -68,7 +68,7 @@ void Ntm::deleteData()
 //------------------------------------------------------------------------------
 // This function will copy our DIS type codes to the target NIB, 'targetNib', object.
 //------------------------------------------------------------------------------
-bool Ntm::copyEntityType(Simulation::Nib* const targetNib) const
+bool Ntm::copyEntityType(simulation::Nib* const targetNib) const
 {
    bool ok = false;
    Nib* tgtNib = dynamic_cast<Nib*>(targetNib);

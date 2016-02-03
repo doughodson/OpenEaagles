@@ -12,7 +12,7 @@
 #include "openeaagles/basic/List.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //==============================================================================
 // Class DataRecorder
@@ -353,6 +353,6 @@ std::ostream& RecorderComponent::serialize(std::ostream& sout, const int i, cons
    return sout;
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 

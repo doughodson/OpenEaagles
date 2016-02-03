@@ -13,9 +13,9 @@ namespace basic { class NetHandler; }
 
 namespace otw {
 
-class OtwPC : public Simulation::Otw
+class OtwPC : public simulation::Otw
 {
-    DECLARE_SUBCLASS(OtwPC,Simulation::Otw)
+    DECLARE_SUBCLASS(OtwPC,simulation::Otw)
 
 public:
     OtwPC();
@@ -27,8 +27,8 @@ protected:
     void sendElevationRequests() override;          // Sends terrain height requests
     void recvElevations() override;                 // Receives terrain height data
     void frameSync() override;                      // Send frame sync (if any)
-    Simulation::OtwModel* modelFactory() override;  // Create OtwModel objects unique to interface
-    Simulation::OtwModel* hotFactory() override;    // Create OtwHot objects unique to interface
+    simulation::OtwModel* modelFactory() override;  // Create OtwModel objects unique to interface
+    simulation::OtwModel* hotFactory() override;    // Create OtwHot objects unique to interface
 
     bool isNetworkInitialized() const       { return netInit; }
     bool didInitializationFail() const      { return netInitFail; }

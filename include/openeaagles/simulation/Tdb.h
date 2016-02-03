@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: Tdb
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_Tdb_H__
-#define __oe_Simulation_Tdb_H__
+#ifndef __oe_simulation_Tdb_H__
+#define __oe_simulation_Tdb_H__
 
 #include "openeaagles/simulation/System.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
    class Gimbal;
    class Player;
 
@@ -166,7 +166,7 @@ protected:
    double* ra;
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

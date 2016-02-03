@@ -32,8 +32,8 @@ namespace dis {
 // Description: DIS incoming NTM class
 //==============================================================================
 
-class NtmInputNode : public Simulation::NetIO::NtmInputNode {
-   DECLARE_SUBCLASS(NtmInputNode,Simulation::NetIO::NtmInputNode)
+class NtmInputNode : public simulation::NetIO::NtmInputNode {
+   DECLARE_SUBCLASS(NtmInputNode,simulation::NetIO::NtmInputNode)
 
 public:
    enum { ROOT_LVL, KIND_LVL, DOMAIN_LVL, COUNTRYCODE_LVL,
@@ -53,8 +53,8 @@ public:
       ) const;
 
    // NetIO::NtmOutputNode class functions
-   virtual const Simulation::Ntm* findNetworkTypeMapper(const Simulation::Nib* const nib) const;
-   virtual bool add2OurLists(Simulation::Ntm* const ntm);
+   virtual const simulation::Ntm* findNetworkTypeMapper(const simulation::Nib* const nib) const;
+   virtual bool add2OurLists(simulation::Ntm* const ntm);
    virtual void print(std::ostream& sout, const int icnt) const;
 
 private:
@@ -579,7 +579,7 @@ bool NetIO::processUserPDU(const PDUHeader* const)
 //------------------------------------------------------------------------------
 // nibFactory() -- Create a new Nib
 //------------------------------------------------------------------------------
-Simulation::Nib* NetIO::nibFactory(const Simulation::NetIO::IoType ioType)
+simulation::Nib* NetIO::nibFactory(const simulation::NetIO::IoType ioType)
 {
    return new Nib(ioType);
 }
@@ -589,7 +589,7 @@ Simulation::Nib* NetIO::nibFactory(const Simulation::NetIO::IoType ioType)
 // Create a new NIBs
 //------------------------------------------------------------------------------
 
-Simulation::Nib* NetIO::createNewOutputNib(Simulation::Player* const player)
+simulation::Nib* NetIO::createNewOutputNib(simulation::Player* const player)
 {
    Nib* nib = static_cast<Nib*>(nibFactory(OUTPUT_NIB));
    if (nib != nullptr) {
@@ -606,7 +606,7 @@ Simulation::Nib* NetIO::createNewOutputNib(Simulation::Player* const player)
       unsigned short site = getSiteID();
       unsigned short app  = getApplicationID();
       if (player->isNetworkedPlayer()) {
-         Simulation::Nib* pNib = player->getNib();
+         simulation::Nib* pNib = player->getNib();
          fName = pNib->getFederateName();
          // Mapping another federate name to DIS site and application IDs.
          // Currently using parseFederateName(), but really should have a
@@ -935,7 +935,7 @@ const dis::Ntm* NetIO::findNtmByTypeCodes(
 // Data access (get) routines
 //------------------------------------------------------------------------------
 
-LCreal NetIO::getMaxEntityRange(const Simulation::Nib* const nib) const
+LCreal NetIO::getMaxEntityRange(const simulation::Nib* const nib) const
 {
    LCreal value = 0;
    if (nib != nullptr) {
@@ -952,7 +952,7 @@ LCreal NetIO::getMaxEntityRange(const Simulation::Nib* const nib) const
    return value;
 }
 
-LCreal NetIO::getMaxEntityRangeSquared(const Simulation::Nib* const nib) const
+LCreal NetIO::getMaxEntityRangeSquared(const simulation::Nib* const nib) const
 {
    LCreal value = 0;
    if (nib != nullptr) {
@@ -969,7 +969,7 @@ LCreal NetIO::getMaxEntityRangeSquared(const Simulation::Nib* const nib) const
    return value;
 }
 
-LCreal NetIO::getMaxTimeDR(const Simulation::Nib* const nib) const
+LCreal NetIO::getMaxTimeDR(const simulation::Nib* const nib) const
 {
    LCreal value = 0;
    if (nib != nullptr) {
@@ -986,7 +986,7 @@ LCreal NetIO::getMaxTimeDR(const Simulation::Nib* const nib) const
    return value;
 }
 
-LCreal NetIO::getMaxPositionErr(const Simulation::Nib* const nib) const
+LCreal NetIO::getMaxPositionErr(const simulation::Nib* const nib) const
 {
    LCreal value = 0;
    if (nib != nullptr) {
@@ -1003,7 +1003,7 @@ LCreal NetIO::getMaxPositionErr(const Simulation::Nib* const nib) const
    return value;
 }
 
-LCreal NetIO::getMaxOrientationErr(const Simulation::Nib* const nib) const
+LCreal NetIO::getMaxOrientationErr(const simulation::Nib* const nib) const
 {
    LCreal value = 0;
    if (nib != nullptr) {
@@ -1020,7 +1020,7 @@ LCreal NetIO::getMaxOrientationErr(const Simulation::Nib* const nib) const
    return value;
 }
 
-LCreal NetIO::getMaxAge(const Simulation::Nib* const nib) const
+LCreal NetIO::getMaxAge(const simulation::Nib* const nib) const
 {
    LCreal value = 0;
    if (nib != nullptr) {
@@ -1358,7 +1358,7 @@ void NetIO::clearEmissionPduHandlers()
 //------------------------------------------------------------------------------
 
 // By RfSensor data
-const EmissionPduHandler* NetIO::findEmissionPduHandler(const Simulation::RfSensor* const msg)
+const EmissionPduHandler* NetIO::findEmissionPduHandler(const simulation::RfSensor* const msg)
 {
    const EmissionPduHandler* handler = nullptr;
    if (msg != nullptr && nEmissionHandlers > 0) {
@@ -1871,7 +1871,7 @@ void NetIO::testInputEntityTypes(const unsigned int n)
 
             std::cout << "; foundNtm= " << foundNtm;
             if (foundNtm != nullptr) {
-               const Simulation::Player* foundP = origNtm->getTemplatePlayer();
+               const simulation::Player* foundP = origNtm->getTemplatePlayer();
                std::cout << "; form: " << foundP->getFactoryName();
                basic::safe_ptr<const basic::String> foundType( static_cast<const basic::String*>( foundP->getType() ) );
                if (foundType != nullptr) std::cout << "; type: " << *foundType;
@@ -1910,8 +1910,8 @@ void NetIO::testOutputEntityTypes(const unsigned int n)
          std::cout << "; origNtm= " << origNtm;
          if (origNtm != nullptr) {
 
-            const Simulation::Player* origP = origNtm->getTemplatePlayer();
-            Simulation::Player* origP1 = origP->clone();
+            const simulation::Player* origP = origNtm->getTemplatePlayer();
+            simulation::Player* origP1 = origP->clone();
 
             std::cout << "; form: " << origP->getFactoryName();
             basic::safe_ptr<basic::String> origType( (basic::String*) origP->getType() );
@@ -1971,7 +1971,7 @@ EMPTY_SERIALIZER(NtmInputNode)
 //------------------------------------------------------------------------------
 // root incoming NTM node factory
 //------------------------------------------------------------------------------
-Simulation::NetIO::NtmInputNode* NetIO::rootNtmInputNodeFactory() const
+simulation::NetIO::NtmInputNode* NetIO::rootNtmInputNodeFactory() const
 {
    return new dis::NtmInputNode(dis::NtmInputNode::ROOT_LVL,0); // root level
 }
@@ -2036,9 +2036,9 @@ void NtmInputNode::deleteData()
 //------------------------------------------------------------------------------
 // Find the NTM based on the incoming entity type codes in the NIB
 //------------------------------------------------------------------------------
-const Simulation::Ntm* NtmInputNode::findNetworkTypeMapper(const Simulation::Nib* const nib) const
+const simulation::Ntm* NtmInputNode::findNetworkTypeMapper(const simulation::Nib* const nib) const
 {
-   const Simulation::Ntm* result = nullptr;
+   const simulation::Ntm* result = nullptr;
 
    const dis::Nib* disNib = dynamic_cast<const dis::Nib*>( nib );
    if (disNib != nullptr) {
@@ -2116,7 +2116,7 @@ const Ntm* NtmInputNode::findNtmByTypeCodes(
 //------------------------------------------------------------------------------
 // Add the NTM to our sublist of nodes.
 //------------------------------------------------------------------------------
-bool NtmInputNode::add2OurLists(Simulation::Ntm* const ntm)
+bool NtmInputNode::add2OurLists(simulation::Ntm* const ntm)
 {
    bool ok = false;
 

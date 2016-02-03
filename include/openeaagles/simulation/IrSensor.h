@@ -6,8 +6,8 @@
 // In some cases (during missile launch), waiting for the background thread to perform this
 // operation may disrupt a seeker/sensor's ability to track a target.
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_IrSensor_H__
-#define __oe_Simulation_IrSensor_H__
+#ifndef __oe_simulation_IrSensor_H__
+#define __oe_simulation_IrSensor_H__
 
 #include "openeaagles/simulation/IrSystem.h"
 #include "openeaagles/basic/safe_queue.h"
@@ -16,7 +16,7 @@ namespace oe {
 
 namespace basic { class Integer; class Number; class String; }
 
-namespace Simulation {
+namespace simulation {
 
 class IrSeeker;
 class IrQueryMsg;

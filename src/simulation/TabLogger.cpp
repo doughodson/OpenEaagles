@@ -53,7 +53,7 @@
 
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //==============================================================================
 // Class: TabLogger
@@ -1289,5 +1289,5 @@ void TabLogger::LogPassiveTrack::captureData()
     }
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace

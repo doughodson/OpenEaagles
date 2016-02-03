@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: Route
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_Route_H__
-#define __oe_Simulation_Route_H__
+#ifndef __oe_simulation_Route_H__
+#define __oe_simulation_Route_H__
 
 #include "openeaagles/basic/Component.h"
 
@@ -15,7 +15,7 @@ namespace oe {
       class Pair;
       class PairStream;
    }
-namespace Simulation {
+namespace simulation {
 class Navigation;
 class Steerpoint;
 
@@ -221,7 +221,7 @@ inline const basic::Pair* Route::findSteerpoint(const unsigned int idx) const
    return findSteerpointImp(idx);
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: Datalink
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_Datalink_H__
-#define __oe_Simulation_Datalink_H__
+#ifndef __oe_simulation_Datalink_H__
+#define __oe_simulation_Datalink_H__
 
 #include "openeaagles/simulation/System.h"
 #include "openeaagles/basic/safe_queue.h"
@@ -10,7 +10,7 @@
 namespace oe {
    namespace basic { class Distance; class Number; class String; }
 
-namespace Simulation {
+namespace simulation {
    class CommRadio;
    class TrackManager;
 
@@ -119,7 +119,7 @@ private:
    const basic::String* tmName;       // Track manager name
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

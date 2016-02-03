@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: Aam
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_Aam_H__
-#define __oe_Simulation_Aam_H__
+#ifndef __oe_simulation_Aam_H__
+#define __oe_simulation_Aam_H__
 
 #include "openeaagles/simulation/Missile.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //------------------------------------------------------------------------------
 // Class: Aam
@@ -30,7 +30,7 @@ public:
     int getCategory() const override;             // Returns MISSILE or GUIDED
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

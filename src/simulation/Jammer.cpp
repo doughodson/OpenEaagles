@@ -11,7 +11,7 @@
 #include "openeaagles/basic/units/Powers.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Jammer,"Jammer")
 EMPTY_SERIALIZER(Jammer)
@@ -59,5 +59,5 @@ void Jammer::transmit(const LCreal)
     }
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace

@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: Player
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_Player_H__
-#define __oe_Simulation_Player_H__
+#ifndef __oe_simulation_Player_H__
+#define __oe_simulation_Player_H__
 
 #include "openeaagles/basic/Component.h"
 
@@ -26,7 +26,7 @@ namespace oe {
       class List;
       class Time;
    }
-namespace Simulation {
+namespace simulation {
 
 // Major component types
 class Datalink;
@@ -193,7 +193,7 @@ class Track;
 //    c) Simulation's gaming area coordinates (NED); the XY plane is tangent to
 //       and centered at the simulation's geodetic gaming area reference point;
 //       the Z or down axes is perpendicular to the tangent plane (see Simulation.h).
-//       Use Simulation::getWorldMat() to transform vectors between ECEF and
+//       Use simulation::getWorldMat() to transform vectors between ECEF and
 //       this tangent plane.
 //
 //    d) Inertial coordinates or local tangent plane (NED); the XY plane is tangent
@@ -218,7 +218,7 @@ class Track;
 //          3) NED position vector on the simulation's gaming area.
 //             -- May not be valid for all player types (e.g., SPACE_VEHICLE), so
 //                check isPositionVectorValid()
-//             -- Use Simulation::getWorldMat() to get the ECEF to NED
+//             -- Use simulation::getWorldMat() to get the ECEF to NED
 //                transformation matrix for this tangent plane.
 //
 //    b) Setting the position in any one coordinate system will set the
@@ -1216,7 +1216,7 @@ private:
 // -----------------------------------------------------------------------------
 #include "openeaagles/simulation/Player.inl"
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

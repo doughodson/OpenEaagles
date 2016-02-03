@@ -13,9 +13,9 @@ namespace basic { class List; }
 
 namespace sensor {
 
-class Gmti : public Simulation::Radar
+class Gmti : public simulation::Radar
 {
-    DECLARE_SUBCLASS(Gmti,Simulation::Radar)
+    DECLARE_SUBCLASS(Gmti,simulation::Radar)
 
 public:
     Gmti();

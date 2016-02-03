@@ -18,7 +18,7 @@
 #include <cmath>
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 IMPLEMENT_PARTIAL_SUBCLASS(Antenna,"Antenna")
 
@@ -824,5 +824,5 @@ std::ostream& Antenna::serialize(std::ostream& sout, const int i, const bool slo
     return sout;
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace

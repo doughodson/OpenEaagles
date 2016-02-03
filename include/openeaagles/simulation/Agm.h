@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: Agm
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_Agm_H__
-#define __oe_Simulation_Agm_H__
+#ifndef __oe_simulation_Agm_H__
+#define __oe_simulation_Agm_H__
 
 #include "openeaagles/simulation/Missile.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //------------------------------------------------------------------------------
 // Classes: Agm
@@ -34,7 +34,7 @@ private:
           osg::Vec3* const vel, osg::Vec3* const posx) const override;
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

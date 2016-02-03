@@ -14,7 +14,7 @@
 #include <cmath>
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 IMPLEMENT_SUBCLASS(ScanGimbal,"ScanGimbal")
 EMPTY_DELETEDATA(ScanGimbal)
@@ -1143,5 +1143,5 @@ std::ostream& ScanGimbal::serialize(std::ostream& sout, const int i, const bool 
     return sout;
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace

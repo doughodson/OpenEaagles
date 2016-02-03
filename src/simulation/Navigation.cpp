@@ -21,7 +21,7 @@
 #include "openeaagles/basic/units/Times.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //==============================================================================
 // class: Navigation
@@ -996,5 +996,5 @@ basic::Object* Navigation::getSlotByIndex(const int si)
     return BaseClass::getSlotByIndex(si);
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace

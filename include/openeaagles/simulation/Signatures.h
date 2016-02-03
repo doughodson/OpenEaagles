@@ -12,8 +12,8 @@
 //
 // Description: RF Signatures
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_Signature_H__
-#define __oe_Simulation_Signature_H__
+#ifndef __oe_simulation_Signature_H__
+#define __oe_simulation_Signature_H__
 
 #include "openeaagles/basic/Component.h"
 
@@ -22,7 +22,7 @@ namespace oe {
       class Number;
       class Table2;
    }
-namespace Simulation {
+namespace simulation {
 
 class Emission;
 
@@ -235,7 +235,7 @@ protected:
    bool dbFlg;                      // dependent data in decibels
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

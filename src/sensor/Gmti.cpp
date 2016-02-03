@@ -74,9 +74,9 @@ void Gmti::dynamics(const LCreal dt)
         // rotate to ownship heading
         double sinHdg = getOwnship()->getSinHeading();
         double cosHdg = getOwnship()->getCosHeading();
-        double x =  dpoi[Simulation::Player::INORTH] * cosHdg + dpoi[Simulation::Player::IEAST] * sinHdg;
-        double y = -dpoi[Simulation::Player::INORTH] * sinHdg + dpoi[Simulation::Player::IEAST] * cosHdg;
-        double z = dpoi[Simulation::Player::IDOWN];
+        double x =  dpoi[simulation::Player::INORTH] * cosHdg + dpoi[simulation::Player::IEAST] * sinHdg;
+        double y = -dpoi[simulation::Player::INORTH] * sinHdg + dpoi[simulation::Player::IEAST] * cosHdg;
+        double z = dpoi[simulation::Player::IDOWN];
 
         // Compute az & el to POI
         double grng = std::sqrt(x*x + y*y);

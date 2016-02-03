@@ -16,7 +16,7 @@
 #include "openeaagles/basic/units/Distances.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 IMPLEMENT_SUBCLASS(IrAtmosphere1,"IrAtmosphere1")
 EMPTY_SERIALIZER(IrAtmosphere1)
@@ -365,5 +365,5 @@ basic::Object* IrAtmosphere1::getSlotByIndex(const int si)
    return BaseClass::getSlotByIndex(si);
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace

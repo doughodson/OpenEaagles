@@ -53,7 +53,7 @@ void NetIO::processFirePDU(const FirePDU* const pdu)
     // ---
     // 1) Find the target (local) player
     // ---
-    Simulation::Player* tPlayer = nullptr;
+    simulation::Player* tPlayer = nullptr;
     if (tSiteId == getSiteID() && tApplicationId == getApplicationID()) {
         // Must be local
         basic::safe_ptr<basic::PairStream> players( getSimulation()->getPlayers() );
@@ -64,8 +64,8 @@ void NetIO::processFirePDU(const FirePDU* const pdu)
     // ---
     // 2) Find the firing player and munitions (networked) IPlayers
     // ---
-    Simulation::Nib* fNib = nullptr;
-    Simulation::Nib* mNib = nullptr;
+    simulation::Nib* fNib = nullptr;
+    simulation::Nib* mNib = nullptr;
     if (fSiteId != getSiteID() || fApplicationId != getApplicationID()) {
         // Must be networked players
         fNib = findDisNib(fPlayerId, fSiteId, fApplicationId, INPUT_NIB);

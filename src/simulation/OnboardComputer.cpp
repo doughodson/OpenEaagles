@@ -9,7 +9,7 @@
 #include "openeaagles/basic/Pair.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(OnboardComputer,"OnboardComputer")
 EMPTY_SERIALIZER(OnboardComputer)
@@ -406,6 +406,6 @@ const TrackManager* OnboardComputer::getTrackManagerByName(const char* const nam
    return p;
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 

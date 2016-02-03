@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Classes: TargetData
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_TargetData_H__
-#define __oe_Simulation_TargetData_H__
+#ifndef __oe_simulation_TargetData_H__
+#define __oe_simulation_TargetData_H__
 
 #include "openeaagles/basic/Object.h"
 
@@ -16,7 +16,7 @@ namespace oe {
       class Time;
    }
 
-namespace Simulation {
+namespace simulation {
 
 //------------------------------------------------------------------------------
 // Class:     TargetData
@@ -146,7 +146,7 @@ inline double TargetData::getAngle() const                   { return angle; }
 inline double TargetData::getAzimuth() const                 { return azimuth; }
 inline double TargetData::getVelocity() const                { return velocity; }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

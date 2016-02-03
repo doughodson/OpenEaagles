@@ -3,15 +3,15 @@
 //
 // The NAV radios are being updated and are not current fully functional!!!
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_NavRadio_H__
-#define __oe_Simulation_NavRadio_H__
+#ifndef __oe_simulation_NavRadio_H__
+#define __oe_simulation_NavRadio_H__
 
 #include "openeaagles/simulation/Radio.h"
 
 namespace oe {
 namespace dafif { class AirportLoader; class NavaidLoader; }
 
-namespace Simulation {
+namespace simulation {
 
 //------------------------------------------------------------------------------
 // Class: NavRadio
@@ -151,7 +151,7 @@ private:
    LCreal ilsLocalizerBearing;
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

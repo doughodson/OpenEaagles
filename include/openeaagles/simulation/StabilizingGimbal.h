@@ -7,13 +7,13 @@
 // Public Member functions:
 //
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_StabilizingGimbal_H__
-#define __oe_Simulation_StabilizingGimbal_H__
+#ifndef __oe_simulation_StabilizingGimbal_H__
+#define __oe_simulation_StabilizingGimbal_H__
 
 #include "openeaagles/simulation/Gimbal.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //------------------------------------------------------------------------------
 // Class: StabilizingGimbal
@@ -55,7 +55,7 @@ private:
    MountPosition    mountPosition;   // Gimbal Mount position
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

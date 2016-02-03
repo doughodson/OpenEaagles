@@ -14,8 +14,8 @@
 //       (see "openeaagles/simulation/DataRecorder.h")
 //
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_Id_Tokens_H__
-#define __oe_Simulation_Id_Tokens_H__
+#ifndef __oe_simulation_Id_Tokens_H__
+#define __oe_simulation_Id_Tokens_H__
 
 // Data recorder and handler messages <internal use only>
 #define REID_END_OF_DATA          0    // Last data record message <can not be disabled>

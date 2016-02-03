@@ -7,7 +7,7 @@
 #include <cmath>
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //==============================================================================
 // Class: Bomb
@@ -556,5 +556,5 @@ std::ostream& Bomb::serialize(std::ostream& sout, const int i, const bool slotsO
     return sout;
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace

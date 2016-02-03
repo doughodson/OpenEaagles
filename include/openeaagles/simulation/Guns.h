@@ -1,14 +1,14 @@
 //------------------------------------------------------------------------------
 // Classes: Gun, Bullet
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_Gun_H__
-#define __oe_Simulation_Gun_H__
+#ifndef __oe_simulation_Gun_H__
+#define __oe_simulation_Gun_H__
 
 #include "openeaagles/simulation/ExternalStore.h"
 #include "openeaagles/simulation/Weapon.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
    class Bullet;
 
 //==============================================================================
@@ -201,7 +201,7 @@ private:
    Burst bursts[MBT];         // Bursts
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

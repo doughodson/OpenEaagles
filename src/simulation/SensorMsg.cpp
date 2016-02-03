@@ -5,7 +5,7 @@
 #include "openeaagles/basic/units/Distances.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //==============================================================================
 // Class SensorMsg
@@ -156,5 +156,5 @@ void SensorMsg::setDataMessage(basic::Object* const msg)
    dataMsg = msg;
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace

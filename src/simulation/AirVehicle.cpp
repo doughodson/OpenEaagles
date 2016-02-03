@@ -7,7 +7,7 @@
 #include "openeaagles/basic/units/Distances.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //==============================================================================
 // class AirVehicle
@@ -686,5 +686,5 @@ void UnmannedAirVehicle::deleteData()
 {
 }
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace

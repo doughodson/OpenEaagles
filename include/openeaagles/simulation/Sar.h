@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: Sar
 //------------------------------------------------------------------------------
-#ifndef __oe_Simulation_Sar_H__
-#define __oe_Simulation_Sar_H__
+#ifndef __oe_simulation_Sar_H__
+#define __oe_simulation_Sar_H__
 
 #include "openeaagles/simulation/Radar.h"
 
@@ -11,7 +11,7 @@ namespace oe {
       class Pair;
       class PairStream;
    }
-namespace Simulation {
+namespace simulation {
 
 class Image;
 
@@ -106,7 +106,7 @@ private:
     unsigned int   height;          // Image height (pixels)
 };
 
-} // End Simulation namespace
+} // End simulation namespace
 } // End oe namespace
 
 #endif

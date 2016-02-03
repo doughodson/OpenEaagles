@@ -3,7 +3,7 @@
 #include "openeaagles/basic/Number.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 //==============================================================================
 // FuelTank class -- Generic external fuel tank
@@ -119,6 +119,6 @@ std::ostream& FuelTank::serialize(std::ostream& sout, const int i, const bool sl
     return sout;
 }
 
-} // end Simulation namespace
+} // end simulation namespace
 } // end oe namespace
 

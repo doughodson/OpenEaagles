@@ -16,7 +16,7 @@
 #include "openeaagles/basic/units/Angles.h"
 
 namespace oe {
-namespace Simulation {
+namespace simulation {
 
 IMPLEMENT_SUBCLASS(MergingIrSensor, "MergingIrSensor")
 EMPTY_SERIALIZER(MergingIrSensor)
