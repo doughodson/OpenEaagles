@@ -1,7 +1,7 @@
 
 #include "openeaagles/instruments/eadi3D/Eadi3DPage.h"
 #include "openeaagles/basic/Pair.h"
-#include "openeaagles/basicGL/Display.h"
+#include "openeaagles/graphics/Display.h"
 #include "openeaagles/basic/Number.h"
 
 // setup local variables and static variables

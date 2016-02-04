@@ -15,7 +15,7 @@
 #ifndef __oe_instruments_Instrument_H__
 #define __oe_instruments_Instrument_H__
 
-#include "openeaagles/basicGL/Graphic.h"
+#include "openeaagles/graphics/Graphic.h"
 
 namespace oe {
    namespace basic { class Table1; }

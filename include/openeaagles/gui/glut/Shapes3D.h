@@ -9,7 +9,7 @@
 #ifndef __oe_glut_Shapes3D_H__
 #define __oe_glut_Shapes3D_H__
 
-#include "openeaagles/basicGL/Shapes.h"
+#include "openeaagles/graphics/Shapes.h"
 
 namespace oe {
 namespace basic {

@@ -10,7 +10,7 @@
 #ifndef __oe_instruments_SolenoidSwitch_H__
 #define __oe_instruments_SolenoidSwitch_H__
 
-#include "openeaagles/basicGL/Graphic.h"
+#include "openeaagles/graphics/Graphic.h"
 #include "openeaagles/instruments/buttons/Button.h"
 
 namespace oe {

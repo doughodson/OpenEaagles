@@ -4,7 +4,7 @@
 
 #include "openeaagles/maps/rpfMap/TexturePager.h"
 #include "openeaagles/maps/rpfMap/CadrgTocEntry.h"
-#include "openeaagles/basicGL/Texture.h"
+#include "openeaagles/graphics/Texture.h"
 #include "openeaagles/maps/rpfMap/CadrgMap.h"
 #include "openeaagles/basic/Pair.h"
 #include "openeaagles/basic/List.h"

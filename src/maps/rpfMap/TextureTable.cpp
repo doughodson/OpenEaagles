@@ -3,7 +3,7 @@
 // ------------------------------------------------------------------------------
 
 #include "openeaagles/maps/rpfMap/TextureTable.h"
-#include "openeaagles/basicGL/Texture.h"
+#include "openeaagles/graphics/Texture.h"
 
 namespace oe {
 namespace maps  {

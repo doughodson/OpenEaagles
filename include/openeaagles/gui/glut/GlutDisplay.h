@@ -4,7 +4,7 @@
 #ifndef __oe_glut_GlutDisplay_H__
 #define __oe_glut_GlutDisplay_H__
 
-#include "openeaagles/basicGL/Display.h"
+#include "openeaagles/graphics/Display.h"
 
 namespace oe {
 namespace glut {

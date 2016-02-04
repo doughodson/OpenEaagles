@@ -5,7 +5,7 @@
 #ifndef __oe_instruments_Eadi3DPage_H__
 #define __oe_instruments_Eadi3DPage_H__
 
-#include "openeaagles/basicGL/Page.h"
+#include "openeaagles/graphics/Page.h"
 #include "openeaagles/instruments/eadi3D/Eadi3DObjects.h"
 
 namespace oe {

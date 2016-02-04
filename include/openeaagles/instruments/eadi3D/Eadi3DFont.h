@@ -4,7 +4,7 @@
 #ifndef __oe_instruments_Eadi3DFont_H__
 #define __oe_instruments_Eadi3DFont_H__
 
-#include "openeaagles/basicGL/Font.h"
+#include "openeaagles/graphics/Font.h"
 
 namespace oe {
 namespace instruments {

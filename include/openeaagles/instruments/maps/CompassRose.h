@@ -15,7 +15,7 @@
 #ifndef __oe_instruments_CompassRose_H__
 #define __oe_instruments_CompassRose_H__
 
-#include "openeaagles/basicGL/Graphic.h"
+#include "openeaagles/graphics/Graphic.h"
 #include "openeaagles/basic/units/Angles.h"
 
 namespace oe {

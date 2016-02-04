@@ -117,15 +117,15 @@ solution "oe"
       }
       targetname "basic"
 
-   -- basic OpenGL library
-   project "basicGL"
+   -- OpenGL-based graphics library
+   project "graphics"
       files {
-         "../../include/openeaagles/basicGL/**.h",
-         "../../src/basicGL/**.cpp"
+         "../../include/openeaagles/graphics/**.h",
+         "../../src/graphics/**.cpp"
       }
       includedirs { OE3rdPartyIncPath.."/freetype2" }
       defines { "FTGL_LIBRARY_STATIC" }
-      targetname "BasicGL"
+      targetname "graphics"
 
    -- GLUT OpenGL interface library
    project "gui-glut"

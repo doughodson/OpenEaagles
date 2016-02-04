@@ -6,7 +6,7 @@
 #ifndef __oe_instruments_Button_H__
 #define __oe_instruments_Button_H__
 
-#include "openeaagles/basicGL/Graphic.h"
+#include "openeaagles/graphics/Graphic.h"
 
 namespace oe {
 namespace instruments {

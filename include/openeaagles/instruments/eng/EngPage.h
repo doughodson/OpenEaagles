@@ -7,7 +7,7 @@
 #ifndef __oe_instruments_EngPage_H__
 #define __oe_instruments_EngPage_H__
 
-#include "openeaagles/basicGL/Page.h"
+#include "openeaagles/graphics/Page.h"
 
 namespace oe {
 namespace instruments {

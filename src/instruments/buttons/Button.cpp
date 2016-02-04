@@ -1,6 +1,6 @@
 #include "openeaagles/instruments/buttons/Button.h"
 #include "openeaagles/basic/Number.h"
-#include "openeaagles/basicGL/Display.h"
+#include "openeaagles/graphics/Display.h"
 
 namespace oe {
 namespace instruments {

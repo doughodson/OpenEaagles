@@ -8,9 +8,9 @@
 #include "openeaagles/maps/rpfMap/CadrgTocEntry.h"
 #include "openeaagles/basic/PairStream.h"
 #include "openeaagles/basic/Pair.h"
-#include "openeaagles/basicGL/Display.h"
+#include "openeaagles/graphics/Display.h"
 #include "openeaagles/basic/units/Angles.h"
-#include "openeaagles/basicGL/Texture.h"
+#include "openeaagles/graphics/Texture.h"
 
 namespace oe {
 namespace maps {

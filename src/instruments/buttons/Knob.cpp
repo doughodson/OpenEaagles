@@ -1,6 +1,6 @@
 #include "openeaagles/instruments/buttons/Knob.h"
 #include "openeaagles/basic/units/Angles.h"
-#include "openeaagles/basicGL/Display.h"
+#include "openeaagles/graphics/Display.h"
 #include "openeaagles/basic/functors/Tables.h"
 #include <GL/glu.h>
 

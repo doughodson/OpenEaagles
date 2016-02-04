@@ -49,7 +49,7 @@
 #ifndef __oe_maps_rpf_MapDrawer_H__
 #define __oe_maps_rpf_MapDrawer_H__
 
-#include "openeaagles/basicGL/MapPage.h"
+#include "openeaagles/graphics/MapPage.h"
 
 namespace oe {
 namespace basic { class String; }

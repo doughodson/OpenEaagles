@@ -1,6 +1,6 @@
 #include "openeaagles/instruments/Instrument.h"
 #include "openeaagles/basic/Number.h"
-#include "openeaagles/basicGL/ColorRotary.h"
+#include "openeaagles/graphics/ColorRotary.h"
 #include "openeaagles/basic/functors/Tables.h"
 #include "openeaagles/basic/PairStream.h"
 #include "openeaagles/basic/Pair.h"
