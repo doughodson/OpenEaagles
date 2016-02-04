@@ -2,8 +2,8 @@
 // Class: JSBSimModel
 // Description: JSBSim Model
 //------------------------------------------------------------------------------
-#ifndef __oe_dynamics_JSBSimModel_H__
-#define __oe_dynamics_JSBSimModel_H__
+#ifndef __oe_models_JSBSimModel_H__
+#define __oe_models_JSBSimModel_H__
 
 #include "openeaagles/simulation/dynamics/AerodynamicsModel.h"
 #include "openeaagles/basic/String.h"
@@ -20,7 +20,7 @@ namespace basic {
     class Integer;
 };
 
-namespace dynamics {
+namespace models {
 
 class JSBSimModel : public simulation::AerodynamicsModel
 {
@@ -116,7 +116,7 @@ private:
     bool        hasAltitudeHold;
 };
 
-} // End dynamics namespace
-} // End oe namespace
+}
+}
 
 #endif

@@ -1,7 +1,7 @@
 #
-include ../makedefs
+include ../../makedefs
 
-LIB = $(OPENEAAGLES_LIB_DIR)/liboesensor.a
+LIB = $(OPENEAAGLES_LIB_DIR)/liboemodels.a
 
 OBJS =  \
 	$(LIB)(Factory.o) \

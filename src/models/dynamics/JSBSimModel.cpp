@@ -1,5 +1,6 @@
 
-#include "openeaagles/dynamics/JSBSimModel.h"
+#include "openeaagles/models/dynamics/JSBSimModel.h"
+
 #include "openeaagles/basic/Number.h"
 #include "openeaagles/basic/functors/Tables.h"
 #include "openeaagles/basic/units/Angles.h"
@@ -42,7 +43,7 @@
 #include <JSBSim/models/propulsion/FGTank.h>
 
 namespace oe {
-namespace dynamics {
+namespace models {
 
 IMPLEMENT_SUBCLASS(JSBSimModel, "JSBSimModel")
 

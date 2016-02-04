@@ -1,5 +1,5 @@
 
-#include "openeaagles/sensor/Gmti.h"
+#include "openeaagles/models/sensor/Gmti.h"
 
 #include "openeaagles/simulation/Antenna.h"
 #include "openeaagles/simulation/Emission.h"
@@ -17,7 +17,7 @@
 #include <cmath>
 
 namespace oe {
-namespace sensor {
+namespace models {
 
 IMPLEMENT_SUBCLASS(Gmti,"Gmti")
 
@@ -178,5 +178,5 @@ std::ostream& Gmti::serialize(std::ostream& sout, const int i, const bool slotsO
     return sout;
 }
 
-} // End sensor namespace
-} // End oe namespace
+}
+}

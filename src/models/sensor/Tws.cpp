@@ -1,8 +1,8 @@
 
-#include "openeaagles/sensor/Tws.h"
+#include "openeaagles/models/sensor/Tws.h"
 
 namespace oe {
-namespace sensor {
+namespace models {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Tws,"Tws")
 
@@ -52,5 +52,5 @@ std::ostream& Tws::serialize(std::ostream& sout, const int i, const bool slotsOn
     return sout;
 }
 
-} // End sensor namespace
-} // End oe namespace
+}
+}

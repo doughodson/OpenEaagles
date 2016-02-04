@@ -2,7 +2,7 @@
 // Class: LaeroModel
 //------------------------------------------------------------------------------
 
-#include "openeaagles/dynamics/LaeroModel.h"
+#include "openeaagles/models/dynamics/LaeroModel.h"
 
 #include "openeaagles/simulation/Player.h"
 #include "openeaagles/simulation/AirVehicle.h"
@@ -23,7 +23,7 @@
 #include <cmath>
 
 namespace oe {
-namespace dynamics {
+namespace models {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(LaeroModel,"LaeroModel")
 EMPTY_SERIALIZER(LaeroModel)

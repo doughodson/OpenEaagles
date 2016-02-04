@@ -1,5 +1,5 @@
 
-#include "openeaagles/dynamics/RacModel.h"
+#include "openeaagles/models/dynamics/RacModel.h"
 
 #include "openeaagles/simulation/Player.h"
 #include "openeaagles/basic/String.h"
@@ -13,7 +13,7 @@
 #include <cmath>
 
 namespace oe {
-namespace dynamics {
+namespace models {
 
 IMPLEMENT_SUBCLASS(RacModel, "RacModel")
 
@@ -443,5 +443,5 @@ std::ostream& RacModel::serialize(std::ostream& sout, const int i, const bool sl
     return sout;
 }
 
-} // End dynamics namespace
-} // End oe namespace
+}
+}

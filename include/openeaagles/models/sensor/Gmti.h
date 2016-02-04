@@ -2,8 +2,8 @@
 // Class: Gmti
 // Description: Very simple, Ground-Moving-Target-Indication (GMTI) mode radar
 //------------------------------------------------------------------------------
-#ifndef __oe_sensor_Gmti_H__
-#define __oe_sensor_Gmti_H__
+#ifndef __oe_models_Gmti_H__
+#define __oe_models_Gmti_H__
 
 #include "openeaagles/simulation/Radar.h"
 
@@ -11,7 +11,7 @@ namespace oe {
 
 namespace basic { class List; }
 
-namespace sensor {
+namespace models {
 
 class Gmti : public simulation::Radar
 {
@@ -33,7 +33,7 @@ private:
     osg::Vec3 poiVec;    // Point Of Interest vector  (m) [ x, y, z ] NED
 };
 
-} // End sensor namespace
-} // End oe namespace
+}
+}
 
 #endif

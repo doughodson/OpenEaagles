@@ -1,6 +1,6 @@
 
-#ifndef __oe_dynamics_RacModel_H__
-#define __oe_dynamics_RacModel_H__
+#ifndef __oe_models_RacModel_H__
+#define __oe_models_RacModel_H__
 
 #include "openeaagles/simulation/dynamics/AerodynamicsModel.h"
 
@@ -8,7 +8,7 @@ namespace oe {
 
 namespace basic { class Angle; class Distance; class Number; }
 
-namespace dynamics {
+namespace models {
 
 //------------------------------------------------------------------------------
 // Class: RacModel
@@ -77,7 +77,7 @@ private:
     double      cmdVelocity;  // Commanded speed               (kts)
 };
 
-} // End dynamics namespace
-} // End oe namespace
+}
+}
 
 #endif

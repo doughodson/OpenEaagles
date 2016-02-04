@@ -1,5 +1,5 @@
 
-#include "openeaagles/sensor/Stt.h"
+#include "openeaagles/models/sensor/Stt.h"
 
 #include "openeaagles/simulation/Antenna.h"
 #include "openeaagles/simulation/Player.h"
@@ -7,7 +7,7 @@
 #include "openeaagles/simulation/TrackManager.h"
 
 namespace oe {
-namespace sensor {
+namespace models {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Stt,"Stt")
 
@@ -124,5 +124,5 @@ std::ostream& Stt::serialize(std::ostream& sout, const int i, const bool slotsOn
     return sout;
 }
 
-} // End sensor namespace
-} // End oe namespace
+}
+}

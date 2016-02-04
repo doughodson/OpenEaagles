@@ -151,14 +151,14 @@ solution "oe"
       }
       targetname "dis"
 
-   -- dynamics library
-   project "dynamics"
+   -- models library
+   project "models"
       files {
-         "../../include/openeaagles/dynamics/**.h",
-         "../../src/dynamics/**.cpp"
+         "../../include/openeaagles/models/**.h",
+         "../../src/models/**.cpp"
       }
       includedirs { OE3rdPartyIncPath.."/JSBSim" }
-      targetname "dynamics"
+      targetname "models"
 
    -- graphical instruments library
    project "instruments"
@@ -221,14 +221,6 @@ solution "oe"
       }
       defines { "_SCL_SECURE_NO_WARNINGS" } -- suppress protocol buffer warning
       targetname "recorder"
-
-   -- sensor library
-   project "sensor"
-      files {
-         "../../include/openeaagles/sensor/**.h",
-         "../../src/sensor/**.cpp"
-      }
-      targetname "sensor"
 
    -- simulation library
    project "simulation"
