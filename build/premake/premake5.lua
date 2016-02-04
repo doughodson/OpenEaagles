@@ -127,8 +127,8 @@ solution "oe"
       defines { "FTGL_LIBRARY_STATIC" }
       targetname "graphics"
 
-   -- GLUT OpenGL interface library
-   project "gui-glut"
+   -- OpenGL GLUT interface library
+   project "glut"
       files {
          "../../include/openeaagles/gui/glut/**.h",
          "../../src/gui/glut/**.cpp"
