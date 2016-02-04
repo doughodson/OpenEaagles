@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 // Class:       Button
-// Base class:  basic::Object -> basic::Component -> BasicGL::Graphic -> Button
+// Base class:  basic::Object -> basic::Component -> graphics::Graphic -> Button
 // Description: Generic button that knows when it is clicked
 //------------------------------------------------------------------------------
 #ifndef __oe_instruments_Button_H__
@@ -11,8 +11,8 @@
 namespace oe {
 namespace instruments {
 
-class Button : public BasicGL::Graphic {
-    DECLARE_SUBCLASS(Button,BasicGL::Graphic)
+class Button : public graphics::Graphic {
+    DECLARE_SUBCLASS(Button,graphics::Graphic)
 
 public:
     Button();

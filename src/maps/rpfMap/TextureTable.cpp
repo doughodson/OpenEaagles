@@ -147,7 +147,7 @@ bool TextureTable::setSize(const int newSize)
 //------------------------------------------------------------------------------
 // setTextureObject() - Sets the texture at the given row, column.
 //------------------------------------------------------------------------------
-bool TextureTable::setTextureObject(int row, int col, BasicGL::Texture* newObj)
+bool TextureTable::setTextureObject(int row, int col, graphics::Texture* newObj)
 {
     int x = row + centerTablePos;
     int y = col + centerTablePos;
@@ -168,7 +168,7 @@ bool TextureTable::setTextureObject(int row, int col, BasicGL::Texture* newObj)
 //------------------------------------------------------------------------------
 // getTexture() - Returns the texture object at the given row / column.
 //------------------------------------------------------------------------------
-BasicGL::Texture* TextureTable::getTexture(int row, int col)
+graphics::Texture* TextureTable::getTexture(int row, int col)
 {
     return texes[row + centerTablePos][col + centerTablePos];
 }

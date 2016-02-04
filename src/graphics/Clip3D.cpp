@@ -19,7 +19,7 @@
 #include "openeaagles/graphics/Clip3D.h"
 
 namespace oe {
-namespace BasicGL {
+namespace graphics {
 
 IMPLEMENT_SUBCLASS(Clip3D,"Clip3D")
 EMPTY_SLOTTABLE(Clip3D)
@@ -526,5 +526,5 @@ unsigned int Clip3D::polyClip2Halfspace(
 }
 
 
-} // End BasicGL namespace
+} // End graphics namespace
 } // End oe namespace

@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 // Class: DialArcSegment
-// Base class: BasicGL::Graphic -> AnalogDial -> DialArcSegment
+// Base class: graphics::Graphic -> AnalogDial -> DialArcSegment
 //
 // Description: An arc or circle that will be drawn according to the start
 // angle and sweep angle set in AnalogDial.

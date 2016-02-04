@@ -7,7 +7,7 @@
 #include <GL/glu.h>
 
 namespace oe {
-namespace BasicGL {
+namespace graphics {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Polygon,"Polygon")
 EMPTY_SERIALIZER(Polygon)
@@ -185,6 +185,6 @@ void Polygon::drawFunc()
     END_DLIST
 }
 
-} // End BasicGL namespace
+} // End graphics namespace
 } // End oe namespace
 

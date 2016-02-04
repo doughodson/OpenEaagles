@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 // Class: Instrument
-// Base class: BasicGL::Graphic -> Instrument
+// Base class: graphics::Graphic -> Instrument
 //
 // Description: Base class for all instruments, this class will receive a value
 // via an UPDATE_INSTRUMENTS command, and from there will determine (if we have a
@@ -22,8 +22,8 @@ namespace oe {
 
 namespace instruments {
 
-class Instrument : public BasicGL::Graphic {
-    DECLARE_SUBCLASS(Instrument,BasicGL::Graphic)
+class Instrument : public graphics::Graphic {
+    DECLARE_SUBCLASS(Instrument,graphics::Graphic)
 
 public:
     Instrument();

@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 // Class: BearingPointer
-// Base Class: basic::Object -> BasicGL::Graphic -> CompassRose -> BearingPointer
+// Base Class: basic::Object -> graphics::Graphic -> CompassRose -> BearingPointer
 //
 // Description: This is a bearing pointer, which works in conjunction with
 // a compass rose to determine bearing, however, it is independent of CompassRose,
@@ -30,8 +30,8 @@ public:
 
     LCreal getBearingRad() const { return bearing; } // radians
     LCreal getBearingDeg() const { return bearing * static_cast<LCreal>(basic::Angle::R2DCC); }    // degrees
-    BasicGL::Graphic* getHeadGraphic() const { return head; }
-    BasicGL::Graphic* getTailGraphic() const { return tail; }
+    graphics::Graphic* getHeadGraphic() const { return head; }
+    graphics::Graphic* getTailGraphic() const { return tail; }
 
     bool setBearingRad(const LCreal newB);             // radians
     bool setBearingDeg(const LCreal newB);             // degrees
@@ -44,8 +44,8 @@ public:
 
 protected:
     // slot functions
-    virtual bool setSlotHeadGraphic(const BasicGL::Graphic* const newH);
-    virtual bool setSlotTailGraphic(const BasicGL::Graphic* const newT);
+    virtual bool setSlotHeadGraphic(const graphics::Graphic* const newH);
+    virtual bool setSlotTailGraphic(const graphics::Graphic* const newT);
 
 private:
     // event handlers
@@ -56,8 +56,8 @@ private:
     LCreal bearing;     // used for bearing pointer, or if anyone else needs it for calculations (radians)
     LCreal myRotation;  // how much we are going to rotate the compass
     LCreal myRadius;    // our radius (comes from dial radius)
-    BasicGL::Graphic* head;    // our head graphic (if we have one)
-    BasicGL::Graphic* tail;    // our tail graphic (if we have one)
+    graphics::Graphic* head;    // our head graphic (if we have one)
+    graphics::Graphic* tail;    // our tail graphic (if we have one)
 };
 
 }  // end of Instruments namespace

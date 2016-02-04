@@ -278,7 +278,7 @@ bool CadrgMap::setPathName(const char* aGenPathName)
 // pager, and from that we will setup the texture parameters and load the
 // texture object.
 // ------------------------------------------------------------------------
-void CadrgMap::loadFrameToTexture(BasicGL::Texture* tex, void* pixels)
+void CadrgMap::loadFrameToTexture(graphics::Texture* tex, void* pixels)
 {
     if (tex != nullptr) {
         tex->setPixels((GLubyte*)pixels);

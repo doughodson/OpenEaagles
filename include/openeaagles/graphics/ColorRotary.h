@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: ColorRotary
 //------------------------------------------------------------------------------
-#ifndef __oe_BasicGL_ColorRotary_H__
-#define __oe_BasicGL_ColorRotary_H__
+#ifndef __oe_graphics_ColorRotary_H__
+#define __oe_graphics_ColorRotary_H__
 
 #include "openeaagles/basic/Color.h"
 
@@ -10,7 +10,7 @@ namespace oe {
 
 namespace basic { class PairStream; }
 
-namespace BasicGL {
+namespace graphics {
 
 
 //------------------------------------------------------------------------------
@@ -72,7 +72,7 @@ private:
     unsigned int numVals;                    // number of values
 };
 
-} // End BasicGL namespace
+} // End graphics namespace
 } // End oe namespace
 
 #endif

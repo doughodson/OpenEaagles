@@ -96,7 +96,7 @@ void TexturePager::setSize(int tableSize)
     else stack = new basic::List();
 
     for (int i = 0; i < size; i++) {
-        BasicGL::Texture* t = new BasicGL::Texture();
+        graphics::Texture* t = new graphics::Texture();
         stack->addHead(t);
      }
 }
@@ -175,7 +175,7 @@ void TexturePager::freeTextures()
                 // the stack know we have another Object open.
                 if (!ok) {
                     // Get our texture object at the no longer visible row,column
-                    BasicGL::Texture* textureIndex = table.getTexture(i, j);
+                    graphics::Texture* textureIndex = table.getTexture(i, j);
                     if (textureIndex != nullptr) {
                         // Add the object back to the stack
                         stack->addHead(textureIndex);
@@ -211,7 +211,7 @@ void TexturePager::reuseTextures()
             int c = j + diffCol;
             if (table.isInBounds(r, c)) {
                 // Table is in bounds, set the new texture object
-                BasicGL::Texture* obj = table.getTexture(r, c);
+                graphics::Texture* obj = table.getTexture(r, c);
                 table2.setTextureObject(i, j, obj);
             }
         }
@@ -252,12 +252,12 @@ void TexturePager::loadNewTextures()
                     // Do we have a valid texture at this position in our table?  If we dont we are going
                     // to add one, but only if the row and column + our center row and column position fall
                     // within our valid frames.
-                    BasicGL::Texture* texObj = table.getTexture(r, c);
+                    graphics::Texture* texObj = table.getTexture(r, c);
                     if (texObj == nullptr && map->isValidFrame(r + row, c + col, this)) {
                         if (stack != nullptr) {
                             basic::List::Item* item = stack->getFirstItem();
                             if (item != nullptr) {
-                                BasicGL::Texture* obj = dynamic_cast<BasicGL::Texture*>(item->getValue());
+                                graphics::Texture* obj = dynamic_cast<graphics::Texture*>(item->getValue());
                                 if (obj != nullptr) {
                                     // Set our new texture object there, and remove it from our stack.
                                     table.setTextureObject(r, c, obj);
@@ -292,7 +292,7 @@ void TexturePager::flushTextures()
         for (int i = lb; i <= ub; i++) {
             for (int j = lb; j <= ub; j++) {
                 // Find all of our texture objects and release them back to the stack
-                BasicGL::Texture* textureIndex = table.getTexture(i, j);
+                graphics::Texture* textureIndex = table.getTexture(i, j);
                 if (textureIndex != nullptr) {
                     stack->addHead(textureIndex);
                     table.setTextureObject(i, j, nullptr);

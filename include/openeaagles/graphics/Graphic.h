@@ -1,6 +1,6 @@
 
-#ifndef __oe_BasicGL_Graphic_H__
-#define __oe_BasicGL_Graphic_H__
+#ifndef __oe_graphics_Graphic_H__
+#define __oe_graphics_Graphic_H__
 
 #include "openeaagles/basic/Component.h"
 #include "openeaagles/basic/osg/Vec2"
@@ -17,7 +17,7 @@ namespace oe {
       class Transform;
    }
 
-namespace BasicGL {
+namespace graphics {
 
 class Display;
 class Material;
@@ -111,7 +111,7 @@ class Material;
 //          or Identifier.  The Identifier argument provides a color name that is
 //          used to lookup the Color from the color table.
 //      setColor(Number* num)
-//          Sets a color rotary object, based on the value passed in.. see basicGL/ColorRotary.h for
+//          Sets a color rotary object, based on the value passed in.. see graphics/ColorRotary.h for
 //          how to set up a list of colors and breakpoints.
 //
 //
@@ -266,10 +266,10 @@ public:
 
    // material functions
    const basic::Identifier* getMaterialName() const { return materialName; } // returns a pointer to our material name
-   BasicGL::Material* getMaterial()                 { return materialObj; }  // returns our material object!
-   const BasicGL::Material* getMaterial() const     { return materialObj; }
+   graphics::Material* getMaterial()                 { return materialObj; }  // returns our material object!
+   const graphics::Material* getMaterial() const     { return materialObj; }
    virtual bool setMaterial(const basic::Identifier* const msg);
-   virtual bool setMaterial(const BasicGL::Material* const msg);
+   virtual bool setMaterial(const graphics::Material* const msg);
 
    // Flash rate functions
    bool flashOn() const;
@@ -464,7 +464,7 @@ private:
    osg::Vec3*       norms;         // normals at each vertices
    unsigned int     nn;            // number of normal vectors
 
-   BasicGL::Display* displayPtr; // Points to our Display
+   graphics::Display* displayPtr; // Points to our Display
 
    GLuint         dlist;            // Possible Display list
    bool           noDisplayList;    // True to disable Display List
@@ -482,7 +482,7 @@ private:
    GLushort      stipplePattern;   // line stipple pattern (16-bit pattern for which fragments of line to draw)
    bool          mask;             // are we masking?
    basic::Identifier* materialName;   // our material name
-   BasicGL::Material* materialObj;   // material object, if we have one.
+   graphics::Material* materialObj;   // material object, if we have one.
 
    osg::Vec4 lightPos;             // light position relative to us (default is leave it where it was)
    bool lightMoved;                // our light is moving!
@@ -553,7 +553,7 @@ inline void Graphic::lcTranslate(const LCreal x, const LCreal y, const LCreal z)
    haveMatrix = true;
 }
 
-} // End BasicGL namespace
+} // End graphics namespace
 } // End oe namespace
 
 #endif

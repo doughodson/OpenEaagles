@@ -7,7 +7,7 @@
 #include <GL/glu.h>
 
 namespace oe {
-namespace BasicGL {
+namespace graphics {
 
 //==============================================================================
 // Class: Circle
@@ -830,5 +830,5 @@ std::ostream& Triangle::serialize(std::ostream& sout, const int i, const bool sl
 }
 
 
-} // End BasicGL namespace
+} // End graphics namespace
 } // End oe namespace

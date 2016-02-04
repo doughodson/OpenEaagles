@@ -19,7 +19,7 @@ END_SLOTTABLE(DialTickMarks)
 BEGIN_SLOT_MAP(DialTickMarks)
     ON_SLOT(1, setSlotLength, basic::Number)
     ON_SLOT(2, setSlotQuantity, basic::Number)
-    ON_SLOT(3, setTickGraphic, BasicGL::Graphic)
+    ON_SLOT(3, setTickGraphic, graphics::Graphic)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -120,7 +120,7 @@ bool DialTickMarks::setSlotQuantity(const basic::Number* const newQ)
 //------------------------------------------------------------------------------
 // setTickGraphic() -- sets our graphic for using as tick marks
 //------------------------------------------------------------------------------
-bool DialTickMarks::setTickGraphic(const BasicGL::Graphic* const newGraphic)
+bool DialTickMarks::setTickGraphic(const graphics::Graphic* const newGraphic)
 {
     bool ok = true;
     if (myGraphic != nullptr) {

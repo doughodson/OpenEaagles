@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Classes: SymbolLoader, SlSymbol
 //------------------------------------------------------------------------------
-#ifndef __oe_BasicGL_SymbolLoader_H__
-#define __oe_BasicGL_SymbolLoader_H__
+#ifndef __oe_graphics_SymbolLoader_H__
+#define __oe_graphics_SymbolLoader_H__
 
 #include "openeaagles/graphics/MapPage.h"
 
 namespace oe {
-namespace BasicGL {
+namespace graphics {
 
 class SlSymbol;
 
@@ -94,7 +94,7 @@ public:
    int getSymbolType(const int idx) const;
 
    // Returns the symbol index for 'mySymbol', or zero if not found.
-   int getSymbolIndex(const BasicGL::Graphic* const mySymbol) const;
+   int getSymbolIndex(const graphics::Graphic* const mySymbol) const;
 
    // Returns the symbol at index 'idx', or zero if not found
    SlSymbol* getSymbol(const int idx);
@@ -330,7 +330,7 @@ inline void SlSymbol::setLatLonFlag(const bool flg)      { llFlg = flg; }
 inline void SlSymbol::setACCoordFlag(const bool flg)     { acFlg = flg; }
 inline void SlSymbol::setScreenFlag(const bool flg)      { scrnFlg = flg; }
 
-}  // end of BasicGL namespace
+}  // end of graphics namespace
 }  // end of oe namespace
 
 #endif

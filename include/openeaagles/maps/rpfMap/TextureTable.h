@@ -21,10 +21,10 @@
 //      bool TextureTable::setSize(const int newSize)
 //
 // setTextureObject() - Sets the texture at the given row, column.
-//      bool TextureTable::setTextureObject(int row, int col, BasicGL::Texture* newObj)
+//      bool TextureTable::setTextureObject(int row, int col, graphics::Texture* newObj)
 //
 // getTexture() - Returns the texture object at the given row / column.
-//      BasicGL::Texture* TextureTable::getTexture(int row, int col)
+//      graphics::Texture* TextureTable::getTexture(int row, int col)
 //
 // ------------------------------------------------------------------------------
 #ifndef __oe_maps_rpf_TextureTable_H__
@@ -33,7 +33,7 @@
 #include "openeaagles/basic/Object.h"
 
 namespace oe {
-namespace BasicGL { class Texture; }
+namespace graphics { class Texture; }
 namespace maps {
 namespace rpf {
 
@@ -51,7 +51,7 @@ public:
     int centerRowTexture()      { return row; }
     int centerColumnTexture()   { return col; }
 
-    BasicGL::Texture* getTexture(int row, int col);
+    graphics::Texture* getTexture(int row, int col);
 
     bool isInBounds(const int row, const int col);
 
@@ -59,7 +59,7 @@ public:
     virtual bool setSize(const int newSize);
     virtual bool setCenterRowTexture(const int x);
     virtual bool setCenterColumnTexture(const int x);
-    virtual bool setTextureObject(int row, int col, BasicGL::Texture* newObj);
+    virtual bool setTextureObject(int row, int col, graphics::Texture* newObj);
 
 private:
     static const int MAX_TABLE_SIZE = 25;    // Maximum number of data in our tables
@@ -71,7 +71,7 @@ private:
     int row;
     int col;
     int size;
-    BasicGL::Texture* texes[MAX_TABLE_SIZE][MAX_TABLE_SIZE];    // Holds our textures.
+    graphics::Texture* texes[MAX_TABLE_SIZE][MAX_TABLE_SIZE];    // Holds our textures.
 };
 
 } // End rpf namespace

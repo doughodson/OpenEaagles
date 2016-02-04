@@ -17,9 +17,9 @@ namespace oe {
 namespace basic { class UpTimer; }
 namespace instruments {
 
-class SolenoidSwitch : public BasicGL::Graphic
+class SolenoidSwitch : public graphics::Graphic
 {
-    DECLARE_SUBCLASS(SolenoidSwitch,BasicGL::Graphic)
+    DECLARE_SUBCLASS(SolenoidSwitch,graphics::Graphic)
 
 public:
     SolenoidSwitch();

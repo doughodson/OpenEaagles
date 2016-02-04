@@ -125,7 +125,7 @@ enum {
     SHUTDOWN_EVENT        = 1001,  // Shutdown notification event
 
 // ---
-// BasicGL events
+// graphics events
 // ---
     ON_ENTRY              = 1201,      // Entry (active)
     ON_EXIT               = 1202,      // Exit  (inactive)

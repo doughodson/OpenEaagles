@@ -5,7 +5,7 @@
 #include "openeaagles/basic/Number.h"
 
 namespace oe {
-namespace BasicGL {
+namespace graphics {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Translator, "Translator")
 EMPTY_SERIALIZER(Translator)
@@ -106,5 +106,5 @@ bool Translator::setZPos(const LCreal zPos)
     return true;
 }
 
-} // End BasicGL namespace
+} // End graphics namespace
 } // End oe namespace

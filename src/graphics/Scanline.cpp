@@ -8,7 +8,7 @@
 #include "openeaagles/basic/units/Angles.h"
 
 namespace oe {
-namespace BasicGL {
+namespace graphics {
 
 IMPLEMENT_SUBCLASS(Scanline,"Scanline")
 EMPTY_SLOTTABLE(Scanline)
@@ -860,6 +860,6 @@ void Scanline::Edge::incEdgeStart()
 }
 
 
-} // End BasicGL namespace
+} // End graphics namespace
 } // End oe namespace
 

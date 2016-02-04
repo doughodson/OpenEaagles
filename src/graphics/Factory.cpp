@@ -29,7 +29,7 @@
 #include <cstring>
 
 namespace oe {
-namespace BasicGL {
+namespace graphics {
 
 Factory::Factory()
 {}
@@ -186,6 +186,6 @@ basic::Object* Factory::createObj(const char* name)
     return obj;
 }
 
-}  // end namespace BasicGL
+}  // end namespace graphics
 }  // end namespace oe
 

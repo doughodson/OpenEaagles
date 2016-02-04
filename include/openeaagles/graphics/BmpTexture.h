@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: BmpTexture
 //------------------------------------------------------------------------------
-#ifndef __oe_BasicGL_BmpTexture_H__
-#define __oe_BasicGL_BmpTexture_H__
+#ifndef __oe_graphics_BmpTexture_H__
+#define __oe_graphics_BmpTexture_H__
 
 #include "openeaagles/graphics/Texture.h"
 #include <GL/gl.h>
@@ -10,7 +10,7 @@
 namespace oe {
     namespace basic { class String; }
 
-namespace BasicGL {
+namespace graphics {
 
 //------------------------------------------------------------------------------
 // Class: BmpTexture
@@ -62,7 +62,7 @@ private:
 inline const char* BmpTexture::getTexturePath() const       { return texPath; }
 inline const char* BmpTexture::getTextureFileName() const   { return texFile; }
 
-} // End BasicGL namespace
+} // End graphics namespace
 } // End oe namespace
 
 #endif

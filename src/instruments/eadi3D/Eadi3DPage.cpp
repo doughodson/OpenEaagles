@@ -379,7 +379,7 @@ bool Eadi3DPage::onEventSetLocalizerValid(const basic::Number* const x)
 //------------------------------------------------------------------------------
 void Eadi3DPage::draw()
 {
-    BasicGL::Display* dsp = getDisplay();
+    graphics::Display* dsp = getDisplay();
     if (dsp != nullptr) {
 
         eadiObjs.makeObjects();

@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 // Class:       RotarySwitch
-// Base class:  basic::Object -> basic::Component -> BasicGL::Graphic -> Button -> RotarySwitch
+// Base class:  basic::Object -> basic::Component -> graphics::Graphic -> Button -> RotarySwitch
 // Description: Generic multi-position selector switch that knows when it is left or right
 //                mouse clicked and moves to next or previous switch position.
 //------------------------------------------------------------------------------

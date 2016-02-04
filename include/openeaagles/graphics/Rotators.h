@@ -1,14 +1,14 @@
 //------------------------------------------------------------------------------
 // Class: Rotators
 //------------------------------------------------------------------------------
-#ifndef __oe_BasicGL_Rotators_H__
-#define __oe_BasicGL_Rotators_H__
+#ifndef __oe_graphics_Rotators_H__
+#define __oe_graphics_Rotators_H__
 
 #include "Graphic.h"
 #include "openeaagles/basic/units/Angles.h"
 
 namespace oe {
-namespace BasicGL {
+namespace graphics {
 
 //------------------------------------------------------------------------------
 // Class: Rotators
@@ -76,7 +76,7 @@ private:
     LCreal zRot;  // z axis rotation
 };
 
-} // End BasicGL namespace
+} // End graphics namespace
 } // End oe namespace
 
 #endif

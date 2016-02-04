@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: MapPage
 //------------------------------------------------------------------------------
-#ifndef __oe_BasicGL_MapPage_H__
-#define __oe_BasicGL_MapPage_H__
+#ifndef __oe_graphics_MapPage_H__
+#define __oe_graphics_MapPage_H__
 
 #include "openeaagles/graphics/MfdPage.h"
 #include "openeaagles/basic/units/Angles.h"
@@ -10,7 +10,7 @@
 #include <cmath>
 
 namespace oe {
-namespace BasicGL {
+namespace graphics {
 
 // -------------------------------------------------------------------------------
 // Class: MapPage
@@ -298,7 +298,7 @@ inline bool MapPage::toggleCentered()
    return true;
 }
 
-}  // End BasicGL namespace
+}  // End graphics namespace
 }  // End oe namespace
 
 #endif

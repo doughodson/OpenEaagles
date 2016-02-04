@@ -22,7 +22,7 @@ namespace glut {
 //    function and exit (main windows only).  Override the onEscKey() event
 //    handler as required.
 //
-//    3) By default, the clear depth value (see BasicGL::Display slot 'clearDepth')
+//    3) By default, the clear depth value (see graphics::Display slot 'clearDepth')
 //    is not set, which is disables the GL_DEPTH_TEST and does the depth buffer
 //    is not enabled.  To enabled the depth buffer and the depth test, set the
 //    clear depth values using the 'clearDepth' slot.
@@ -47,8 +47,8 @@ namespace glut {
 //    ESC_KEY     -- calls onEscKey() event handler; see note #2.
 //
 //------------------------------------------------------------------------------
-class GlutDisplay : public BasicGL::Display {
-   DECLARE_SUBCLASS(GlutDisplay, BasicGL::Display)
+class GlutDisplay : public graphics::Display {
+   DECLARE_SUBCLASS(GlutDisplay, graphics::Display)
 
 public:
    GlutDisplay();

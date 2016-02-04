@@ -431,7 +431,7 @@ void Station::updateTC(const LCreal dt)
 //   1) If bgRate and netRate are greater than zero then threads are created
 //      to manage these tasks, otherwise we'll do it.
 //   2) updateData() for components of graphical displays are handled by
-//      their display managers (e.g., BasicGL::GlutDisplay).
+//      their display managers (e.g., graphics::GlutDisplay).
 //------------------------------------------------------------------------------
 void Station::updateData(const LCreal dt)
 {

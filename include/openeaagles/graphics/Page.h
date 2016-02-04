@@ -1,14 +1,14 @@
 //------------------------------------------------------------------------------
 // Class: Page
 //------------------------------------------------------------------------------
-#ifndef __oe_BasicGL_Page_H__
-#define __oe_BasicGL_Page_H__
+#ifndef __oe_graphics_Page_H__
+#define __oe_graphics_Page_H__
 
 #include "Graphic.h"
 #include "openeaagles/basic/Identifier.h"
 
 namespace oe {
-namespace BasicGL {
+namespace graphics {
 
 //------------------------------------------------------------------------------
 // Class: Page
@@ -177,7 +177,7 @@ private:
    int      subpageSP;                 // Stack pointer
 };
 
-} // End BasicGL namespace
+} // End graphics namespace
 } // End oe namespace
 
 #endif

@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: Field
 //------------------------------------------------------------------------------
-#ifndef __oe_BasicGL_Field_H__
-#define __oe_BasicGL_Field_H__
+#ifndef __oe_graphics_Field_H__
+#define __oe_graphics_Field_H__
 
 #include "Graphic.h"
 #include "openeaagles/basic/String.h"
@@ -13,7 +13,7 @@ namespace oe {
       class List;
    }
 
-namespace BasicGL {
+namespace graphics {
 
 //------------------------------------------------------------------------------
 // Class: Field
@@ -305,7 +305,7 @@ private:
    basic::String* fontName;         // name of the font we want our display to use (if overridden)
 };
 
-} // End BasicGL namespace
+} // End graphics namespace
 } // End oe namespace
 
 #endif

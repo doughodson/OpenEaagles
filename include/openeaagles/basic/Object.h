@@ -158,7 +158,7 @@ namespace basic {
 //       const char* Foo::getFactoryName()
 //          Static function that returns the factory name of class Foo.
 //
-//    (For examples of factory classes, see basic/Factory.cpp, basicGL/Factory.cpp,
+//    (For examples of factory classes, see basic/Factory.cpp, graphics/Factory.cpp,
 //     simulation/Factory.cpp, as well as the various OpenEaagles examples)
 //
 //

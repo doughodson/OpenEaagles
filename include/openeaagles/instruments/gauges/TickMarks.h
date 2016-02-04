@@ -27,7 +27,7 @@ public:
     virtual bool setQuantity(const int newQ);
     virtual bool setGaugeLength(const LCreal newL);
     virtual bool setFlip(const bool x);
-    virtual bool setTickGraphic(const BasicGL::Graphic* const newGraphic);
+    virtual bool setTickGraphic(const graphics::Graphic* const newGraphic);
 
     LCreal getTickMarkLength() const { return lengthTM; }
     int  getQuantity() const         { return quantity; }
@@ -46,7 +46,7 @@ private:
     int    quantity;       // how many tick marks will we have?
     LCreal gaugeLength;    // length we are spanning our tick marks over
     bool   flip;           // our flip variable
-    BasicGL::Graphic* myGraphic; // our graphic (if we choose to use one for a tick mark)
+    graphics::Graphic* myGraphic; // our graphic (if we choose to use one for a tick mark)
 };
 
 }  // end of Instruments namespace

@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: Font
 //------------------------------------------------------------------------------
-#ifndef __oe_BasicGL_Font_H__
-#define __oe_BasicGL_Font_H__
+#ifndef __oe_graphics_Font_H__
+#define __oe_graphics_Font_H__
 
 #include "openeaagles/basic/Object.h"
 #include <GL/gl.h>
@@ -15,7 +15,7 @@ namespace oe {
       class String;
    }
 
-namespace BasicGL {
+namespace graphics {
 
 //------------------------------------------------------------------------------
 // Class:  Font
@@ -229,7 +229,7 @@ private:
 
 };
 
-} // End BasicGL namespace
+} // End graphics namespace
 } // End oe namespace
 
 #endif

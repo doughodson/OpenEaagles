@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Class: BasicGL::Graphic -> AnalogDial -> GMeterDial
+// Class: graphics::Graphic -> AnalogDial -> GMeterDial
 //
 // Description: G meter, which simply keeps track of min and max and actual G's
 //

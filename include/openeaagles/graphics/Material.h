@@ -1,14 +1,14 @@
 //------------------------------------------------------------------------------
 // Class: Material
 //------------------------------------------------------------------------------
-#ifndef __oe_BasicGL_Material_H__
-#define __oe_BasicGL_Material_H__
+#ifndef __oe_graphics_Material_H__
+#define __oe_graphics_Material_H__
 
 #include "openeaagles/basic/Component.h"
 #include <GL/glu.h>
 
 namespace oe {
-namespace BasicGL {
+namespace graphics {
 
 //------------------------------------------------------------------------------
 // Class: Material
@@ -80,7 +80,7 @@ private:
     LCreal shininess;           // shininess value
 };
 
-} // End BasicGL namespace
+} // End graphics namespace
 } // End oe namespace
 
 #endif

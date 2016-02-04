@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: Scanline
 //------------------------------------------------------------------------------
-#ifndef __oe_BasicGL_Scanline_H__
-#define __oe_BasicGL_Scanline_H__
+#ifndef __oe_graphics_Scanline_H__
+#define __oe_graphics_Scanline_H__
 
 #include "openeaagles/basic/Object.h"
 
 namespace oe {
-namespace BasicGL {
+namespace graphics {
 
 class Clip3D;
 class Polygon;
@@ -133,7 +133,7 @@ private:
 };
 
 
-} // End BasicGL namespace
+} // End graphics namespace
 } // End oe namespace
 
 #endif

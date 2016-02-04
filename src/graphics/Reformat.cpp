@@ -328,7 +328,7 @@ int yyFlexLexer::yylex()
 	return 0;
 	}
 
-#define YY_DECL int oe::BasicGL::Reformat::yylex()
+#define YY_DECL int oe::graphics::Reformat::yylex()
 static yyconst flex_int16_t yy_nxt[][128] =
     {
     {
@@ -1741,7 +1741,7 @@ static yyconst yy_state_type yy_NUL_trans[77] =
 /* suppress inclusion of unistd.h file */
 #define YY_NO_UNISTD_H 1
 /* change the name of the scanner class - results in "rfFlexLexer" */
-/* derived 'oe::BasicGL::Reformat' is a subclass of yyFlexLexer */
+/* derived 'oe::graphics::Reformat' is a subclass of yyFlexLexer */
 #line 1746 "Reformat.cpp"
 
 #define INITIAL 0
@@ -1925,21 +1925,21 @@ case 1:
 YY_RULE_SETUP
 #line 44 "Reformat.l"
 {  // "+0#"	Integer w/sign and leading zeros
-			   return oe::BasicGL::Reformat::processInteger(yytext, yyleng);
+			   return oe::graphics::Reformat::processInteger(yytext, yyleng);
 			}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
 #line 48 "Reformat.l"
 {  // "+0#.#"	Floating w/sign and leading zeros
-			   return oe::BasicGL::Reformat::processFloat(yytext, yyleng);
+			   return oe::graphics::Reformat::processFloat(yytext, yyleng);
 			}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
 #line 52 "Reformat.l"
 {  // HH:MM:SS  Hours, minutes and seconds
-			   return oe::BasicGL::Reformat::processTime(oe::BasicGL::TimeReadout::hhmmss,
+			   return oe::graphics::Reformat::processTime(oe::graphics::TimeReadout::hhmmss,
 								yytext, yyleng);
 			}
 	YY_BREAK
@@ -1947,35 +1947,35 @@ case 4:
 YY_RULE_SETUP
 #line 57 "Reformat.l"
 {  // HH:MM		Hours and minutes
-			   return oe::BasicGL::Reformat::processTime(oe::BasicGL::TimeReadout::hhmm, yytext, yyleng);
+			   return oe::graphics::Reformat::processTime(oe::graphics::TimeReadout::hhmm, yytext, yyleng);
 			}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
 #line 61 "Reformat.l"
 {  // HH		Hours
-			   return oe::BasicGL::Reformat::processTime(oe::BasicGL::TimeReadout::hh, yytext, yyleng);
+			   return oe::graphics::Reformat::processTime(oe::graphics::TimeReadout::hh, yytext, yyleng);
 			}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
 #line 65 "Reformat.l"
 {  // MM:SS		Minutes and seconds
-			   return oe::BasicGL::Reformat::processTime(oe::BasicGL::TimeReadout::mmss, yytext, yyleng);
+			   return oe::graphics::Reformat::processTime(oe::graphics::TimeReadout::mmss, yytext, yyleng);
 			}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
 #line 69 "Reformat.l"
 {  // MM		Minutes
-			   return oe::BasicGL::Reformat::processTime(oe::BasicGL::TimeReadout::mm, yytext, yyleng);
+			   return oe::graphics::Reformat::processTime(oe::graphics::TimeReadout::mm, yytext, yyleng);
 			}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
 #line 73 "Reformat.l"
 {  // SS		Seconds
-			   return oe::BasicGL::Reformat::processTime(oe::BasicGL::TimeReadout::ss, yytext, yyleng);
+			   return oe::graphics::Reformat::processTime(oe::graphics::TimeReadout::ss, yytext, yyleng);
 			}
 	YY_BREAK
 case 9:
@@ -1983,7 +1983,7 @@ YY_RULE_SETUP
 #line 77 "Reformat.l"
 {
 			   // +DDMMSS	Degrees, minutes and seconds
-			   return oe::BasicGL::Reformat::processDirection(oe::BasicGL::DirectionReadout::ddmmss,
+			   return oe::graphics::Reformat::processDirection(oe::graphics::DirectionReadout::ddmmss,
 								yytext, yyleng);
 			}
 	YY_BREAK
@@ -1992,7 +1992,7 @@ YY_RULE_SETUP
 #line 83 "Reformat.l"
 {
 			   // +DDMM		Degrees and minutes
-			   return oe::BasicGL::Reformat::processDirection(oe::BasicGL::DirectionReadout::ddmm,
+			   return oe::graphics::Reformat::processDirection(oe::graphics::DirectionReadout::ddmm,
 								yytext, yyleng);
 			}
 	YY_BREAK
@@ -2001,7 +2001,7 @@ YY_RULE_SETUP
 #line 89 "Reformat.l"
 {
 			   // +DD		Degrees
-			   return oe::BasicGL::Reformat::processDirection(oe::BasicGL::DirectionReadout::dd,
+			   return oe::graphics::Reformat::processDirection(oe::graphics::DirectionReadout::dd,
 								yytext, yyleng);
 			}
 	YY_BREAK
@@ -2010,7 +2010,7 @@ YY_RULE_SETUP
 #line 95 "Reformat.l"
 {
 			   // +DD		Degrees
-			   return oe::BasicGL::Reformat::processDirection(oe::BasicGL::DirectionReadout::dd,
+			   return oe::graphics::Reformat::processDirection(oe::graphics::DirectionReadout::dd,
 								yytext, yyleng);
 			}
 	YY_BREAK
@@ -2920,7 +2920,7 @@ void rffree (void * ptr )
 
 
 namespace oe {
-namespace BasicGL {
+namespace graphics {
 
 //------------------------------------------------------------------------------
 // yylex()

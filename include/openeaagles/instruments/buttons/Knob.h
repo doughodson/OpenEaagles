@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 // Class:       Knob
-// Base class:  basic::Object -> basic::Component -> BasicGL::Graphic -> Rotators -> Knob
+// Base class:  basic::Object -> basic::Component -> graphics::Graphic -> Rotators -> Knob
 // Description: Basic knob that will rotate from a starting fixed angle to a
 // given finish angle, and you can specify the values returned from those angles based on
 // start and finish value (Table1)

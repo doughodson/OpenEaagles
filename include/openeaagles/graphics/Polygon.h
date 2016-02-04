@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: Polygon
 //------------------------------------------------------------------------------
-#ifndef __oe_BasicGL_Polygon_H__
-#define __oe_BasicGL_Polygon_H__
+#ifndef __oe_graphics_Polygon_H__
+#define __oe_graphics_Polygon_H__
 
 #include "Graphic.h"
 
 namespace oe {
-namespace BasicGL {
+namespace graphics {
 
 //------------------------------------------------------------------------------
 // Class: Polygon
@@ -102,7 +102,7 @@ private:
    unsigned int   layerValue; // Layer value
 };
 
-} // End BasicGL namespace
+} // End graphics namespace
 } // End oe namespace
 
 #endif

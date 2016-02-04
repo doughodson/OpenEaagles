@@ -135,8 +135,8 @@ namespace simulation {
 //
 //    6) When subclassing off of this class for your application, the
 //       convention is that the updateData() function for any graphic
-//       component (see BasicGL::Graphic) is called by their display
-//       manager (see BasicGL::GlutDisplay) and therefore from the
+//       component (see graphics::Graphic) is called by their display
+//       manager (see graphics::GlutDisplay) and therefore from the
 //       display manager's thread.
 //
 //

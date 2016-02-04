@@ -23,7 +23,7 @@ BEGIN_SLOT_MAP(TickMarks)
     ON_SLOT(2, setSlotQuantity, basic::Number)
     ON_SLOT(3, setSlotGaugeLength, basic::Number)
     ON_SLOT(4, setSlotFlip, basic::Number)
-    ON_SLOT(5, setTickGraphic, BasicGL::Graphic)
+    ON_SLOT(5, setTickGraphic, graphics::Graphic)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -163,7 +163,7 @@ bool TickMarks::setSlotFlip(const basic::Number* const x)
 //------------------------------------------------------------------------------
 // setTickGraphic() -- sets our graphic for using as tick marks
 //------------------------------------------------------------------------------
-bool TickMarks::setTickGraphic(const BasicGL::Graphic* const newGraphic)
+bool TickMarks::setTickGraphic(const graphics::Graphic* const newGraphic)
 {
     bool ok = true;
     if (myGraphic != nullptr) {

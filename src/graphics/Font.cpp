@@ -6,7 +6,7 @@
 #include <cstring>
 
 namespace oe {
-namespace BasicGL {
+namespace graphics {
 
 IMPLEMENT_PARTIAL_SUBCLASS(Font,"Font")
 
@@ -454,5 +454,5 @@ bool Font::setSlotLineSpacing(const basic::Number* const newLineSpacing)
     return true;
 }
 
-} // End BasicGL namespace
+} // End graphics namespace
 } // End oe namespace

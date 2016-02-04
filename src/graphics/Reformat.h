@@ -2,8 +2,8 @@
 // Lexical generator for the Readout reformatter
 //
 
-#ifndef __oe_BasicGL_Reformat_H__
-#define __oe_BasicGL_Reformat_H__
+#ifndef __oe_graphics_Reformat_H__
+#define __oe_graphics_Reformat_H__
 
 #ifndef __FLEX_LEXER_H
 #undef yyFlexLexer
@@ -15,7 +15,7 @@
 #include <sstream>
 
 namespace oe {
-namespace BasicGL {
+namespace graphics {
 
 // Reformat converts example strings into C/C++ format specifiers for
 // sprintf, printf, etc.  These examples will be later used as templates
@@ -56,7 +56,7 @@ private:
    bool  postSign;
 };
 
-} // End BasicGL namespace
+} // End graphics namespace
 } // End oe namespace
 
 #endif

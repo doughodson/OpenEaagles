@@ -19,7 +19,7 @@
 #endif
 
 namespace oe {
-namespace BasicGL {
+namespace graphics {
 
 //==============================================================================
 // class AsciiText
@@ -1501,7 +1501,7 @@ void Rotary::draw()
       int start = 1;
       basic::Pair* p = findByIndex(start);
       while (p != nullptr) {
-         BasicGL::Graphic* g = dynamic_cast<BasicGL::Graphic*>(p->object());
+         graphics::Graphic* g = dynamic_cast<graphics::Graphic*>(p->object());
          if (g != nullptr) g->draw();
          p = findByIndex(++start);
       }
@@ -1559,5 +1559,5 @@ bool Rotary2::onSelect(const basic::Number* const osobj)
    return true;
 }
 
-} // End BasicGL namespace
+} // End graphics namespace
 } // End oe namespace

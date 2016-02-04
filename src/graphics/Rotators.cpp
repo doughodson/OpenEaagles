@@ -2,7 +2,7 @@
 #include "openeaagles/basic/Number.h"
 
 namespace oe {
-namespace BasicGL {
+namespace graphics {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Rotators, "Rotators")
 EMPTY_SERIALIZER(Rotators)
@@ -221,7 +221,7 @@ void Rotators::draw()
     lcRestoreMatrix();
 }
 
-} // End BasicGL namespace
+} // End graphics namespace
 } // End oe namespace
 
 

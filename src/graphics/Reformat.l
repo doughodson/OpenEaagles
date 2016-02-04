@@ -36,65 +36,65 @@
 /* change the name of the scanner class - results in "rfFlexLexer" */
 %option prefix="rf" 
 
-/* derived 'oe::BasicGL::Reformat' is a subclass of yyFlexLexer */
-%option yyclass="oe::BasicGL::Reformat"
+/* derived 'oe::graphics::Reformat' is a subclass of yyFlexLexer */
+%option yyclass="oe::graphics::Reformat"
 
 %%
 
 \+?0*#+\+?		{  // "+0#"	Integer w/sign and leading zeros
-			   return oe::BasicGL::Reformat::processInteger(yytext, yyleng);
+			   return oe::graphics::Reformat::processInteger(yytext, yyleng);
 			}
 
 \+?0*#+\.#+\+?		{  // "+0#.#"	Floating w/sign and leading zeros
-			   return oe::BasicGL::Reformat::processFloat(yytext, yyleng);
+			   return oe::graphics::Reformat::processFloat(yytext, yyleng);
 			}
 
 \+?(0|H)H+:?MM:?SS(\.S+)?\+?	{  // HH:MM:SS  Hours, minutes and seconds
-			   return oe::BasicGL::Reformat::processTime(oe::BasicGL::TimeReadout::hhmmss,
+			   return oe::graphics::Reformat::processTime(oe::graphics::TimeReadout::hhmmss,
 								yytext, yyleng);
 			}
 
 \+?(0|H)H+:?MM(\.M+)?\+?	{  // HH:MM		Hours and minutes
-			   return oe::BasicGL::Reformat::processTime(oe::BasicGL::TimeReadout::hhmm, yytext, yyleng);
+			   return oe::graphics::Reformat::processTime(oe::graphics::TimeReadout::hhmm, yytext, yyleng);
 			}
 
 \+?(0|H)H+(\.H+)?\+?	{  // HH		Hours
-			   return oe::BasicGL::Reformat::processTime(oe::BasicGL::TimeReadout::hh, yytext, yyleng);
+			   return oe::graphics::Reformat::processTime(oe::graphics::TimeReadout::hh, yytext, yyleng);
 			}
 
 \+?(0|M)M+:?SS(\.S+)?\+?	{  // MM:SS		Minutes and seconds
-			   return oe::BasicGL::Reformat::processTime(oe::BasicGL::TimeReadout::mmss, yytext, yyleng);
+			   return oe::graphics::Reformat::processTime(oe::graphics::TimeReadout::mmss, yytext, yyleng);
 			}
 
 \+?(0|M)M+(\.M+)?\+?	{  // MM		Minutes
-			   return oe::BasicGL::Reformat::processTime(oe::BasicGL::TimeReadout::mm, yytext, yyleng);
+			   return oe::graphics::Reformat::processTime(oe::graphics::TimeReadout::mm, yytext, yyleng);
 			}
 
 \+?(0|S)S+(\.S+)?\+?	{  // SS		Seconds
-			   return oe::BasicGL::Reformat::processTime(oe::BasicGL::TimeReadout::ss, yytext, yyleng);
+			   return oe::graphics::Reformat::processTime(oe::graphics::TimeReadout::ss, yytext, yyleng);
 			}
 
 \+?(0|D)D{1,2}@?MM\'?SS(\.S+)?\"?\+?	{
 			   // +DDMMSS	Degrees, minutes and seconds
-			   return oe::BasicGL::Reformat::processDirection(oe::BasicGL::DirectionReadout::ddmmss,
+			   return oe::graphics::Reformat::processDirection(oe::graphics::DirectionReadout::ddmmss,
 								yytext, yyleng);
 			}
 
 \+?(0|D)D{1,2}@?MM(\.M+)?\'?\+?	{
 			   // +DDMM		Degrees and minutes
-			   return oe::BasicGL::Reformat::processDirection(oe::BasicGL::DirectionReadout::ddmm,
+			   return oe::graphics::Reformat::processDirection(oe::graphics::DirectionReadout::ddmm,
 								yytext, yyleng);
 			}
 
 \+?(0|D)D{1,2}(\.D+)?@?\+?	{
 			   // +DD		Degrees
-			   return oe::BasicGL::Reformat::processDirection(oe::BasicGL::DirectionReadout::dd,
+			   return oe::graphics::Reformat::processDirection(oe::graphics::DirectionReadout::dd,
 								yytext, yyleng);
 			}
 
 \+?D(\.D+)?@?\+?	{
 			   // +DD		Degrees
-			   return oe::BasicGL::Reformat::processDirection(oe::BasicGL::DirectionReadout::dd,
+			   return oe::graphics::Reformat::processDirection(oe::graphics::DirectionReadout::dd,
 								yytext, yyleng);
 			}
 
@@ -102,7 +102,7 @@
 
 
 namespace oe {
-namespace BasicGL {
+namespace graphics {
 
 //------------------------------------------------------------------------------
 // yylex()
@@ -712,7 +712,7 @@ DirectionReadout::DirMode Reformat::convertDirection(const char* s)
    return DirectionReadout::DirMode(yylex(dir));
 }
 
-} // End BasicGL namespace
+} // End graphics namespace
 } // End oe namespace
 
 

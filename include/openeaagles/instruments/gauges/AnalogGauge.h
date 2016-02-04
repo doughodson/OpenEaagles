@@ -11,7 +11,7 @@ namespace instruments {
 
 //------------------------------------------------------------------------------
 // Class: AnalogGauge
-// Base class: BasicGL::Graphic -> Instrument -> AnalogGauge
+// Base class: graphics::Graphic -> Instrument -> AnalogGauge
 //
 // Description: This will create a gauge that will
 // draw vertically or horizontally depending on a flag.

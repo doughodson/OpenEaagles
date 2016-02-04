@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Class:  BasicGL::Page -> Eadi3DPage
+// Class:  graphics::Page -> Eadi3DPage
 //
 //------------------------------------------------------------------------------
 #ifndef __oe_instruments_Eadi3DPage_H__
@@ -11,9 +11,9 @@
 namespace oe {
 namespace instruments {
 
-class Eadi3DPage : public BasicGL::Page{
+class Eadi3DPage : public graphics::Page{
 
-   DECLARE_SUBCLASS(Eadi3DPage,BasicGL::Page)
+   DECLARE_SUBCLASS(Eadi3DPage,graphics::Page)
 
 public:
     Eadi3DPage();

@@ -59,9 +59,9 @@ namespace rpf {
 class TexturePager;
 class CadrgMap;
 
-class MapDrawer : public BasicGL::MapPage
+class MapDrawer : public graphics::MapPage
 {
-    DECLARE_SUBCLASS(MapDrawer, BasicGL::MapPage)
+    DECLARE_SUBCLASS(MapDrawer, graphics::MapPage)
 
 public:
     MapDrawer();

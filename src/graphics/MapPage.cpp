@@ -6,7 +6,7 @@
 #include "openeaagles/basic/Number.h"
 
 namespace oe {
-namespace BasicGL {
+namespace graphics {
 
 IMPLEMENT_SUBCLASS(MapPage,"MapPage")
 EMPTY_SERIALIZER(MapPage)
@@ -560,6 +560,6 @@ basic::Object* MapPage::getSlotByIndex(const int si)
    return BaseClass::getSlotByIndex(si);
 }
 
-}  // end of BasicGL namespace
+}  // end of graphics namespace
 }  // end of oe namespace
 

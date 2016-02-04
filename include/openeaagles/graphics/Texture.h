@@ -1,15 +1,15 @@
 //------------------------------------------------------------------------------
 // Class: Texture
 //------------------------------------------------------------------------------
-#ifndef __oe_BasicGL_Texture_H__
-#define __oe_BasicGL_Texture_H__
+#ifndef __oe_graphics_Texture_H__
+#define __oe_graphics_Texture_H__
 
 #include "openeaagles/graphics/Image.h"
 
 namespace oe {
    namespace basic { class Number; class Identifier; }
 
-namespace BasicGL {
+namespace graphics {
 
 //------------------------------------------------------------------------------
 // Class: Texture
@@ -193,7 +193,7 @@ inline GLfloat Texture::getGreenBias() const       { return greenBias; }
 inline GLfloat Texture::getBlueScale() const       { return blueScale; }
 inline GLfloat Texture::getBlueBias() const        { return blueBias; }
 
-} // End BasicGL namespace
+} // End graphics namespace
 } // End oe namespace
 
 #endif

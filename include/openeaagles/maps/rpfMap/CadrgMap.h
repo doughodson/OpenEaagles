@@ -47,7 +47,7 @@
 //
 // loadFrameToTexture() - Bring in a texture object, a color array, and the texture
 // pager, and from that we will setup the texture parameters and load the texture object.
-//       void CadrgMap::loadFrameToTexture(BasicGL::Texture* tex, void* pixels)
+//       void CadrgMap::loadFrameToTexture(graphics::Texture* tex, void* pixels)
 //
 // setMaxTableSize() - Sets up our Frame array
 //       bool CadrgMap::setMaxTableSize(const int x)
@@ -119,7 +119,7 @@
 
 namespace oe {
 namespace basic { class List; }
-namespace BasicGL { class Texture; }
+namespace graphics { class Texture; }
 namespace maps {
 namespace rpf {
 
@@ -127,9 +127,9 @@ class CadrgFile;
 class TexturePager;
 class MapDrawer;
 
-class CadrgMap : public BasicGL::MapPage
+class CadrgMap : public graphics::MapPage
 {
-    DECLARE_SUBCLASS(CadrgMap, BasicGL::MapPage)
+    DECLARE_SUBCLASS(CadrgMap, graphics::MapPage)
 
 public:
     CadrgMap();
@@ -166,7 +166,7 @@ public:
 
     // Frame operations
     virtual void releaseFrame(const int row, const int column, TexturePager* tp);
-    virtual void loadFrameToTexture(BasicGL::Texture* tex, void* ptr);
+    virtual void loadFrameToTexture(graphics::Texture* tex, void* ptr);
 
     // Get pixels
     virtual void* getPixels(const int row, const int column, TexturePager* tp);

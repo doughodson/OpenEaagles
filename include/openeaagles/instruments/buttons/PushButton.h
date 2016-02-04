@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 // Class:       PushButton
-// Base class:  basic::Object -> basic::Component -> BasicGL::Graphic -> Button -> PushButton
+// Base class:  basic::Object -> basic::Component -> graphics::Graphic -> Button -> PushButton
 // Description: Button which will select one or another graphic based on being pressed or not.
 //------------------------------------------------------------------------------
 #ifndef __oe_instruments_PushButton_H__

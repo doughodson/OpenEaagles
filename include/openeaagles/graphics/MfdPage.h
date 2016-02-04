@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: MfdPage
 //------------------------------------------------------------------------------
-#ifndef __oe_BasicGL_MfdPage_H__
-#define __oe_BasicGL_MfdPage_H__
+#ifndef __oe_graphics_MfdPage_H__
+#define __oe_graphics_MfdPage_H__
 
 #include "openeaagles/graphics/Page.h"
 
 namespace oe {
-namespace BasicGL {
+namespace graphics {
 
 // -------------------------------------------------------------------------------
 // Class: MfdPage
@@ -20,9 +20,9 @@ namespace BasicGL {
 //
 // Factory name: MfdPage
 // -------------------------------------------------------------------------------
-class MfdPage : public BasicGL::Page
+class MfdPage : public graphics::Page
 {
-    DECLARE_SUBCLASS(MfdPage, BasicGL::Page)
+    DECLARE_SUBCLASS(MfdPage, graphics::Page)
 
 public:
     MfdPage();
@@ -78,7 +78,7 @@ protected:
     virtual bool onOsbL10();
 };
 
-}  // end of BasicGL namespace
+}  // end of graphics namespace
 }  // end of oe namespace
 
 #endif

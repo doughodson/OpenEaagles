@@ -196,7 +196,7 @@ bool Knob::onSingleClick()
 //------------------------------------------------------------------------------
 void Knob::computeRotation()
 {
-    BasicGL::Display* myDisplay = (BasicGL::Display*)findContainerByType(typeid(BasicGL::Display));
+    graphics::Display* myDisplay = (graphics::Display*)findContainerByType(typeid(graphics::Display));
     // compute the rotation amout based on the start X,Y and our current X,Y
     if (myDisplay != nullptr) {
 
@@ -210,7 +210,7 @@ void Knob::computeRotation()
         lastAngle = angle;
         //std::cout << "START X , Y = " << startX << ", " << startY << std::endl;
         //std::cout << "POSITION X, Y = " << posMoveX << ", " << posMoveY << std::endl;
-        if (myDisplay->getDisplayOrientation() == BasicGL::Display::CCW90) {
+        if (myDisplay->getDisplayOrientation() == graphics::Display::CCW90) {
            angle = atan2f(static_cast<float>(posMoveX), static_cast<float>(posMoveY));
         }
         else {

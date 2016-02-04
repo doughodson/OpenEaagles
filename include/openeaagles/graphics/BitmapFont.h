@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: BitmapFont
 //------------------------------------------------------------------------------
-#ifndef __oe_BasicGL_BitmapFont_H__
-#define __oe_BasicGL_BitmapFont_H__
+#ifndef __oe_graphics_BitmapFont_H__
+#define __oe_graphics_BitmapFont_H__
 
 #include "Font.h"
 
@@ -10,7 +10,7 @@ namespace oe {
 
 namespace basic { class Number; }
 
-namespace BasicGL {
+namespace graphics {
 
 //------------------------------------------------------------------------------
 // Class:  BitmapFont
@@ -66,7 +66,7 @@ private:
     static const unsigned int defaultNumFonts;
 };
 
-} // End BasicGL namespace
+} // End graphics namespace
 } // End oe namespace
 
 #endif

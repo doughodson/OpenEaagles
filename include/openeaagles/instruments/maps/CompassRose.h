@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 // Class: CompassRose
-// Base Class: basic::Object -> BasicGL::Graphic -> CompassRose
+// Base Class: basic::Object -> graphics::Graphic -> CompassRose
 //
 // Description: Generic compass used as a direction indicator.  It will
 // rotate about a heading either by someone telling it through a member function.
@@ -21,9 +21,9 @@
 namespace oe {
 namespace instruments {
 
-class CompassRose : public BasicGL::Graphic
+class CompassRose : public graphics::Graphic
 {
-    DECLARE_SUBCLASS(CompassRose, BasicGL::Graphic)
+    DECLARE_SUBCLASS(CompassRose, graphics::Graphic)
 
 public:
     CompassRose();

@@ -13,7 +13,7 @@
 
 
 namespace oe {
-namespace BasicGL {
+namespace graphics {
 
 IMPLEMENT_SUBCLASS(BmpTexture,"BitmapTexture")
 EMPTY_SERIALIZER(BmpTexture)
@@ -144,5 +144,5 @@ basic::Object* BmpTexture::getSlotByIndex(const int si)
     return BaseClass::getSlotByIndex(si);
 }
 
-} // End BasicGL namespace
+} // End graphics namespace
 } // End oe namespace

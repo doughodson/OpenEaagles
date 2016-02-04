@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Class: StrokeFont
 //------------------------------------------------------------------------------
-#ifndef __oe_BasicGL_StrokeFont_H__
-#define __oe_BasicGL_StrokeFont_H__
+#ifndef __oe_graphics_StrokeFont_H__
+#define __oe_graphics_StrokeFont_H__
 
 #include "Font.h"
 
 namespace oe {
-namespace BasicGL {
+namespace graphics {
 
 //------------------------------------------------------------------------------
 // Class:  StrokeFont
@@ -38,7 +38,7 @@ public:
 };
 
 
-} // End BasicGL namespace
+} // End graphics namespace
 } // End oe namespace
 
 #endif

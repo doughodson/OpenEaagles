@@ -111,7 +111,7 @@
 #define  EID_SHUTDOWN_EVENT         1001  /* Shutdown notification event */
 
 // ---
-// BasicGL events
+// graphics events
 // ---
 #define  EID_ON_ENTRY               1201      /* Entry (active) */
 #define  EID_ON_EXIT                1202      /* Exit  (inactive) */

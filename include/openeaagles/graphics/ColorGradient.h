@@ -4,8 +4,8 @@
 // This will be used by graphics to create a per-vertex color, which makes a
 // gradient.
 //------------------------------------------------------------------------------
-#ifndef __oe_BasicGL_ColorGradient_H__
-#define __oe_BasicGL_ColorGradient_H__
+#ifndef __oe_graphics_ColorGradient_H__
+#define __oe_graphics_ColorGradient_H__
 
 #include "openeaagles/basic/Color.h"
 
@@ -13,7 +13,7 @@ namespace oe {
 
 namespace basic { class PairStream; }
 
-namespace BasicGL {
+namespace graphics {
 
 class ColorGradient : public basic::Color {
     DECLARE_SUBCLASS(ColorGradient,basic::Color)
@@ -31,7 +31,7 @@ private:
     basic::PairStream* myColors;
 };
 
-} // End BasicGL namespace
+} // End graphics namespace
 } // End oe namespace
 
 #endif

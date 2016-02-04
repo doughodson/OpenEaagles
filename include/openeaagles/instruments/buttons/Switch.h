@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 // Class:       Switch
-// Base class:  basic::Object -> basic::Component -> BasicGL::Graphic -> Button -> Switch
+// Base class:  basic::Object -> basic::Component -> graphics::Graphic -> Button -> Switch
 // Description: Button that can have multiple formats, up to as many as the user
 // wants.
 //------------------------------------------------------------------------------

@@ -4,7 +4,7 @@
 #include "openeaagles/basic/Pair.h"
 
 namespace oe {
-namespace BasicGL {
+namespace graphics {
 
 IMPLEMENT_SUBCLASS(ColorGradient,"ColorGradient")
 EMPTY_SERIALIZER(ColorGradient)
@@ -82,10 +82,10 @@ basic::Color* ColorGradient::getColorByIdx(const int idx)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for ColorGradient
 //------------------------------------------------------------------------------
-basic::Object* BasicGL::ColorGradient::getSlotByIndex(const int si)
+basic::Object* graphics::ColorGradient::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
 
-} // End BasicGL namespace
+} // End graphics namespace
 } // End oe namespace

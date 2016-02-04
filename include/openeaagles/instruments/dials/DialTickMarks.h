@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 // Class: DialTickMarks
-// Base class: BasicGL::Graphic -> AnalogDial -> DialTickMarks
+// Base class: graphics::Graphic -> AnalogDial -> DialTickMarks
 //
 // Description: Handles tick marks for an analog dial, or any other general
 // application.
@@ -30,11 +30,11 @@ public:
 
     LCreal getLength() const                    { return length; }
     int  getQuantity() const                    { return quantity; }
-    BasicGL::Graphic* getTickGraphic() const    { return myGraphic;  }
+    graphics::Graphic* getTickGraphic() const    { return myGraphic;  }
 
     virtual bool setLength(const LCreal newLength);
     virtual bool setQuantity(const int newQ);
-    virtual bool setTickGraphic(const BasicGL::Graphic* const newGraphic);
+    virtual bool setTickGraphic(const graphics::Graphic* const newGraphic);
 
     void drawFunc() override;
 
@@ -46,7 +46,7 @@ protected:
 private:
     LCreal      length;             // tick mark length (if not a graphic)
     int         quantity;           // how many tick marks will we have?
-    BasicGL::Graphic*  myGraphic; // our graphic (if we choose to use on for a tick mark)
+    graphics::Graphic*  myGraphic; // our graphic (if we choose to use on for a tick mark)
 };
 
 }  // end instruments namespace

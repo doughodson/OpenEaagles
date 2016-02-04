@@ -228,7 +228,7 @@ void GhostHorizon::updateData(const LCreal dt)
         // scale our location value
         //location = -(location - margin);
         if (sColorName != nullptr) {
-            BasicGL::Display* d = getDisplay();
+            graphics::Display* d = getDisplay();
             if (d != nullptr) {
                 basic::Color* c = d->getColor(sColorName->getString());
                 if (c != nullptr) {
@@ -241,7 +241,7 @@ void GhostHorizon::updateData(const LCreal dt)
         setVisibility(true);
         //location = -(location + margin);
         if (gColorName != nullptr) {
-            BasicGL::Display* d = getDisplay();
+            graphics::Display* d = getDisplay();
             if (d != nullptr) {
                 basic::Color* c = d->getColor(gColorName->getString());
                 if (c != nullptr) {

@@ -18,7 +18,7 @@
 #endif
 
 namespace oe {
-namespace BasicGL {
+namespace graphics {
 
 //------------------------------------------------------------------------------
 // static class members
@@ -1313,6 +1313,6 @@ void FtglTextureFont::loadFont()
     }
 }
 
-} // End BasicGL namespace
+} // End graphics namespace
 } // End oe namespace
 

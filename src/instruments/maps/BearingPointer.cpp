@@ -13,8 +13,8 @@ END_SLOTTABLE(BearingPointer)
 
 //  Map slot table to handles for Bearing Pointer
 BEGIN_SLOT_MAP(BearingPointer)
-    ON_SLOT(1, setSlotHeadGraphic, BasicGL::Graphic)
-    ON_SLOT(2, setSlotTailGraphic, BasicGL::Graphic)
+    ON_SLOT(1, setSlotHeadGraphic, graphics::Graphic)
+    ON_SLOT(2, setSlotTailGraphic, graphics::Graphic)
 END_SLOT_MAP()
 
 // Macro event handlers for Bearing Pointer events
@@ -78,7 +78,7 @@ void BearingPointer::draw()
     lcSaveMatrix();
         if (!c) lcTranslate(0, dis);
         lcRotate(myRotation);
-        BasicGL::Graphic::draw();
+        graphics::Graphic::draw();
     lcRestoreMatrix();
 }
 
@@ -225,7 +225,7 @@ void BearingPointer::updateData(const LCreal dt)
 //------------------------------------------------------------------------------
 // setSlotHeadGraphic() - sets the head graphic for the bearing pointer
 //------------------------------------------------------------------------------
-bool BearingPointer::setSlotHeadGraphic(const BasicGL::Graphic* const newH)
+bool BearingPointer::setSlotHeadGraphic(const graphics::Graphic* const newH)
 {
     bool ok = false;
     if (head != nullptr) {
@@ -241,7 +241,7 @@ bool BearingPointer::setSlotHeadGraphic(const BasicGL::Graphic* const newH)
 //------------------------------------------------------------------------------
 // setSlotTailGraphic() - sets the tail graphic for the bearing pointer
 //------------------------------------------------------------------------------
-bool BearingPointer::setSlotTailGraphic(const BasicGL::Graphic* const newT)
+bool BearingPointer::setSlotTailGraphic(const graphics::Graphic* const newT)
 {
     bool ok = false;
     if (tail != nullptr) {

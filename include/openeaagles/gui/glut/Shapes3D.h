@@ -3,7 +3,7 @@
 // Icosahedron, Octahedron, Teapot
 //
 // Description:  3-dimensional shapes that can be drawn.  NOTE - these shapes
-// all use GLUT or GLU, so you have to call the basicGlutFF to serialize them
+// all use GLUT or GLU, so you have to call the factory to serialize them
 // from the input, and you also have to link to glut or freeglut to draw them.
 //------------------------------------------------------------------------------
 #ifndef __oe_glut_Shapes3D_H__
@@ -29,8 +29,8 @@ namespace glut {
 // Note - all sphere and derived classes are automatically normalized at
 // rendering (GLU does it)
 //------------------------------------------------------------------------------
-class Sphere : public BasicGL::Circle {
-    DECLARE_SUBCLASS(Sphere, BasicGL::Circle)
+class Sphere : public graphics::Circle {
+    DECLARE_SUBCLASS(Sphere, graphics::Circle)
 
 public:
     Sphere();
@@ -101,8 +101,8 @@ public:
 //    size    <Number>    ! Size you want the cube to be (default: 1)
 //
 //------------------------------------------------------------------------------
-class Cube : public BasicGL::Circle {
-    DECLARE_SUBCLASS(Cube, BasicGL::Circle)
+class Cube : public graphics::Circle {
+    DECLARE_SUBCLASS(Cube, graphics::Circle)
 public:
     Cube();
     void drawFunc() override;
@@ -151,8 +151,8 @@ private:
 // Factory name: Dodecahedron
 //
 //------------------------------------------------------------------------------
-class Dodecahedron : public BasicGL::Circle {
-    DECLARE_SUBCLASS(Dodecahedron, BasicGL::Circle)
+class Dodecahedron : public graphics::Circle {
+    DECLARE_SUBCLASS(Dodecahedron, graphics::Circle)
 public:
     Dodecahedron();
     void drawFunc() override;
@@ -165,8 +165,8 @@ public:
 // Factory name: Tetrahedron
 //
 //------------------------------------------------------------------------------
-class Tetrahedron : public BasicGL::Circle {
-    DECLARE_SUBCLASS(Tetrahedron, BasicGL::Circle)
+class Tetrahedron : public graphics::Circle {
+    DECLARE_SUBCLASS(Tetrahedron, graphics::Circle)
 public:
     Tetrahedron();
     void drawFunc() override;
@@ -179,8 +179,8 @@ public:
 // Factory name: Icosahedron
 //
 //------------------------------------------------------------------------------
-class Icosahedron : public BasicGL::Circle {
-    DECLARE_SUBCLASS(Icosahedron, BasicGL::Circle)
+class Icosahedron : public graphics::Circle {
+    DECLARE_SUBCLASS(Icosahedron, graphics::Circle)
 public:
     Icosahedron();
     void drawFunc() override;
@@ -193,8 +193,8 @@ public:
 // Factory name: Octahedron
 //
 //------------------------------------------------------------------------------
-class Octahedron : public BasicGL::Circle {
-    DECLARE_SUBCLASS(Octahedron, BasicGL::Circle)
+class Octahedron : public graphics::Circle {
+    DECLARE_SUBCLASS(Octahedron, graphics::Circle)
 public:
     Octahedron();
     void drawFunc() override;

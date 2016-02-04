@@ -8,7 +8,7 @@
 #include "openeaagles/basic/Pair.h"
 
 namespace oe {
-namespace BasicGL {
+namespace graphics {
 
 IMPLEMENT_SUBCLASS(Page,"Page")
 
@@ -613,5 +613,5 @@ std::ostream& Page::serialize(std::ostream& sout, const int i, const bool slotsO
     return sout;
 }
 
-} // End BasicGL namespace
+} // End graphics namespace
 } // End oe namespace

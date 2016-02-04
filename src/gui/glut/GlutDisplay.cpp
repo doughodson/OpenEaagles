@@ -444,7 +444,7 @@ void GlutDisplay::reshapeSubWindow()
 // 4) Returns zero(0) when there are no entries in the select buffer or if the
 //    Graphic for the select ID is not found.
 //-----------------------------------------------------------------------------
-BasicGL::Graphic* GlutDisplay::pick(const int item)
+graphics::Graphic* GlutDisplay::pick(const int item)
 {
    GLint viewport[4];
    glGetIntegerv(GL_VIEWPORT,viewport);
@@ -518,7 +518,7 @@ void GlutDisplay::clearSelectBuffer(GLuint sbuff[], const int size)
 // 4) Returns zero(0) when there are no entries in the select buffer or if the
 //    Graphic for the select ID is not found.
 //-----------------------------------------------------------------------------
-BasicGL::Graphic* GlutDisplay::findSelected(const GLint hits, const GLuint sbuff[], const int item)
+graphics::Graphic* GlutDisplay::findSelected(const GLint hits, const GLuint sbuff[], const int item)
 {
    Graphic* sel = nullptr;
    GLuint id = 0;

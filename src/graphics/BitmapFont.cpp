@@ -14,7 +14,7 @@
 #endif
 
 namespace oe {
-namespace BasicGL {
+namespace graphics {
 
 IMPLEMENT_SUBCLASS(BitmapFont,"BitmapFont")
 EMPTY_DELETEDATA(BitmapFont)
@@ -580,5 +580,5 @@ GLubyte* BitmapFont::loadTypeFace(const GLint index, const GLenum reverse)
    return bitmap;
 }
 
-} // End BasicGL namespace
+} // End graphics namespace
 } // End oe namespace

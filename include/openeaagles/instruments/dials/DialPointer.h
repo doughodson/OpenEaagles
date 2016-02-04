@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 // Class: DialPointer
-// Base class: BasicGL::Graphic -> AnalogDial -> DialPointer
+// Base class: graphics::Graphic -> AnalogDial -> DialPointer
 //
 // Description: Pointer that will spin around a defined arc or circle at a defined
 // scaled rate.

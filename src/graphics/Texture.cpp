@@ -3,7 +3,7 @@
 #include "openeaagles/basic/Identifier.h"
 
 namespace oe {
-namespace BasicGL {
+namespace graphics {
 
 IMPLEMENT_SUBCLASS(Texture,"Texture")
 EMPTY_SERIALIZER(Texture)
@@ -480,5 +480,5 @@ basic::Object* Texture::getSlotByIndex(const int si)
     return BaseClass::getSlotByIndex(si);
 }
 
-} // End BasicGL namespace
+} // End graphics namespace
 } // End oe namespace

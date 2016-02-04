@@ -21,9 +21,9 @@ namespace instruments {
 //          Produces the stroke font map.
 //
 //------------------------------------------------------------------------------
-class Eadi3DFont : public BasicGL::Font
+class Eadi3DFont : public graphics::Font
 {
-    DECLARE_SUBCLASS(Eadi3DFont,BasicGL::Font)
+    DECLARE_SUBCLASS(Eadi3DFont,graphics::Font)
 
 public:
     Eadi3DFont();

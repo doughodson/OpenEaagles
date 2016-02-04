@@ -11,7 +11,7 @@
 #include "openeaagles/basic/osg/Vec4"
 
 namespace oe {
-namespace BasicGL {
+namespace graphics {
 
 IMPLEMENT_SUBCLASS(ColorRotary,"ColorRotary")
 EMPTY_SERIALIZER(ColorRotary)
@@ -161,10 +161,10 @@ bool ColorRotary::determineColor(const LCreal value)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for ColorRotary
 //------------------------------------------------------------------------------
-basic::Object* BasicGL::ColorRotary::getSlotByIndex(const int si)
+basic::Object* graphics::ColorRotary::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
 
-} // End BasicGL namespace
+} // End graphics namespace
 } // End oe namespace

@@ -34,7 +34,7 @@ void DialPointer::draw()
     LCreal startAngle = getStartAngle();
     lcSaveMatrix();
         lcRotate((-pointerPos - startAngle) * static_cast<LCreal>(basic::Angle::D2RCC));
-        BasicGL::Graphic::draw();
+        graphics::Graphic::draw();
     lcRestoreMatrix();
 }
 

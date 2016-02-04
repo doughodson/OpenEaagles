@@ -14,7 +14,7 @@
 #endif
 
 namespace oe {
-namespace BasicGL {
+namespace graphics {
 
 //------------------------------------------------------------------------------
 // Define the BITMAP File for non-Windows systems
@@ -670,5 +670,5 @@ bool Image::writeFileTGA(const char* const filename)
 }
 #endif
 
-} // End BasicGL namespace
+} // End graphics namespace
 } // End oe namespace

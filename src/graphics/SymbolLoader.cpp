@@ -16,7 +16,7 @@
 #endif
 
 namespace oe {
-namespace BasicGL {
+namespace graphics {
 
 IMPLEMENT_SUBCLASS(SymbolLoader, "SymbolLoader")
 EMPTY_SERIALIZER(SymbolLoader)
@@ -131,13 +131,13 @@ int SymbolLoader::getSymbolType(const int idx) const
 // getSymbolIndex() - returns the symbol index for a particular object, if
 // it exists in our list of symbols.  If it doesn't exist, we return 0.
 //------------------------------------------------------------------------------
-int SymbolLoader::getSymbolIndex(const BasicGL::Graphic* const mySymbol) const
+int SymbolLoader::getSymbolIndex(const graphics::Graphic* const mySymbol) const
 {
    int index = 0;
    for (int i = 0; i < MAX_SYMBOLS; i++) {
       if (symbols[i] != nullptr) {
          basic::Pair* p = symbols[i]->getSymbolPair();
-         BasicGL::Graphic* graph = static_cast<BasicGL::Graphic*>(p->object());
+         graphics::Graphic* graph = static_cast<graphics::Graphic*>(p->object());
          if (mySymbol == graph) index = (i + 1);
       }
    }
@@ -213,11 +213,11 @@ int SymbolLoader::addSymbol(const int nType, const char* const id, int specName)
    if (templates != nullptr) {
 
       // Find the graphic template for this type symbol, and make
-      // sure that the template is a BasicGL::Graphic, since it
+      // sure that the template is a graphics::Graphic, since it
       // will be used as the symbol's graphical component.
       basic::Pair* tpair = templates->getPosition(nType);
       if (tpair != nullptr) {
-         BasicGL::Graphic* tg = dynamic_cast<BasicGL::Graphic*>(tpair->object());
+         graphics::Graphic* tg = dynamic_cast<graphics::Graphic*>(tpair->object());
          if (tg != nullptr) {
 
             // Find an empty symbol slot in our master symbol table
@@ -230,18 +230,18 @@ int SymbolLoader::addSymbol(const int nType, const char* const id, int specName)
                   // Clone the graphic template and set it as the
                   // symbol's graphical component.
                   basic::Pair* newPair = tpair->clone();
-                  BasicGL::Graphic* newGraph = static_cast<BasicGL::Graphic*>(newPair->object());
+                  graphics::Graphic* newGraph = static_cast<graphics::Graphic*>(newPair->object());
 
                   // Set the new graphical component's select name
                   GLuint mySelName = 0;
                   if (specName > 0) mySelName = specName;
-                  else mySelName = BasicGL::Graphic::getNewSelectName();
+                  else mySelName = graphics::Graphic::getNewSelectName();
                   newGraph->setSelectName(mySelName);
 
                   // Add the symbol's graphical component to our component list.
                   {
                      basic::PairStream* comp = getComponents();
-                     basic::Component::processComponents(comp, typeid(BasicGL::Graphic), newPair);
+                     basic::Component::processComponents(comp, typeid(graphics::Graphic), newPair);
                      if (comp != nullptr) comp->unref();
                   }
 
@@ -277,30 +277,30 @@ bool SymbolLoader::setSymbolType(const int idx, const int nType)
       if (symbols[i] != nullptr) {
 
          // Find the graphic template for this type symbol, and make
-         // sure that the template is a BasicGL::Graphic, since it
+         // sure that the template is a graphics::Graphic, since it
          // will be use as the symbol's graphical component.
          if (templates != nullptr) {
             basic::Pair* tpair = templates->getPosition(nType);
             if (tpair != nullptr) {
-               BasicGL::Graphic* tg = dynamic_cast<BasicGL::Graphic*>(tpair->object());
+               graphics::Graphic* tg = dynamic_cast<graphics::Graphic*>(tpair->object());
                if (tg != nullptr) {
 
                   // Get the symbol's old graphical component
                   basic::Pair* oldPair = static_cast<basic::Pair*>(symbols[i]->getSymbolPair());
-                  BasicGL::Graphic* oldG = static_cast<BasicGL::Graphic*>(oldPair->object());
+                  graphics::Graphic* oldG = static_cast<graphics::Graphic*>(oldPair->object());
 
                   // Clone the new graphical component from the template
                   basic::Pair* newPair = tpair->clone();
 
                   // Set the new graphical component's select name using the old's
-                  BasicGL::Graphic* newGraph = static_cast<BasicGL::Graphic*>(newPair->object());
+                  graphics::Graphic* newGraph = static_cast<graphics::Graphic*>(newPair->object());
                   GLuint mySelName = oldG->getSelectName();
                   newGraph->setSelectName(mySelName);
 
                   // Add the new and remove the old components from our subcomponent list
                   {
                      basic::PairStream* comp = getComponents();
-                     basic::Component::processComponents(comp, typeid(BasicGL::Graphic), newPair, oldG);
+                     basic::Component::processComponents(comp, typeid(graphics::Graphic), newPair, oldG);
                      if (comp != nullptr) comp->unref();
                   }
 
@@ -340,10 +340,10 @@ bool SymbolLoader::removeSymbol(const int idx)
          {
             // Get the symbol's graphical component
             basic::Pair* pair = symbols[i]->getSymbolPair();
-            BasicGL::Graphic* g = static_cast<BasicGL::Graphic*>(pair->object());
+            graphics::Graphic* g = static_cast<graphics::Graphic*>(pair->object());
 
             basic::PairStream* x = getComponents();
-            basic::Component::processComponents(x, typeid(BasicGL::Graphic), nullptr, g);
+            basic::Component::processComponents(x, typeid(graphics::Graphic), nullptr, g);
             x->unref();
          }
 
@@ -513,7 +513,7 @@ bool SymbolLoader::updateSymbolText(const int idx, const char* name, const char 
          // Get its graphical component
          basic::Pair* p = static_cast<basic::Pair*>(symbols[i]->getSymbolPair());
          if (p != nullptr) {
-            BasicGL::Graphic* g = static_cast<BasicGL::Graphic*>(p->object());
+            graphics::Graphic* g = static_cast<graphics::Graphic*>(p->object());
             if (g != nullptr) {
 
                // If we were passed a name then use it to find the subcomponent
@@ -522,7 +522,7 @@ bool SymbolLoader::updateSymbolText(const int idx, const char* name, const char 
                   basic::Pair* spair = g->findByName(name);
                   if (spair != nullptr) {
                      // subcomponent found by name
-                     g = static_cast<BasicGL::Graphic*>(spair->object());
+                     g = static_cast<graphics::Graphic*>(spair->object());
                   }
                   else {
                      // no subcomponent was found by that name
@@ -532,7 +532,7 @@ bool SymbolLoader::updateSymbolText(const int idx, const char* name, const char 
 
                if (g != nullptr) {
                   // Have a graphic, but make sure it's an AsciiText
-                  BasicGL::AsciiText* text = dynamic_cast<BasicGL::AsciiText*>(g);
+                  graphics::AsciiText* text = dynamic_cast<graphics::AsciiText*>(g);
                   if (text != nullptr) {
                      // It's an AsciiText, so change the its text string.
                      text->setText(newString);
@@ -563,7 +563,7 @@ bool SymbolLoader::updateSymbolText(const int idx, const char* name, const LCrea
          // Get its graphical component
          basic::Pair* p = static_cast<basic::Pair*>(symbols[i]->getSymbolPair());
          if (p != nullptr) {
-            BasicGL::Graphic* g = dynamic_cast<BasicGL::Graphic*>(p->object());
+            graphics::Graphic* g = dynamic_cast<graphics::Graphic*>(p->object());
             if (g != nullptr) {
 
                // If we were passed a name then use it to find the subcomponent
@@ -572,7 +572,7 @@ bool SymbolLoader::updateSymbolText(const int idx, const char* name, const LCrea
                   basic::Pair* spair = g->findByName(name);
                   if (spair != nullptr) {
                      // subcomponent found by name
-                     g = static_cast<BasicGL::Graphic*>(spair->object());
+                     g = static_cast<graphics::Graphic*>(spair->object());
                   }
                   else {
                      // no subcomponent was found by that name
@@ -582,7 +582,7 @@ bool SymbolLoader::updateSymbolText(const int idx, const char* name, const LCrea
 
                if (g != nullptr) {
                   // Have a graphic, but make sure it's a numeric readout
-                  BasicGL::NumericReadout* text = dynamic_cast<BasicGL::NumericReadout*>(g);
+                  graphics::NumericReadout* text = dynamic_cast<graphics::NumericReadout*>(g);
                   if (text != nullptr) {
                      // It's a NumericReadout type, so update its value
                      text->setValue(x);
@@ -616,7 +616,7 @@ bool SymbolLoader:: setSymbolVisible(const int idx, const char* name, bool visib
          // Get its graphical component
          basic::Pair* p = symbols[i]->getSymbolPair();
          if (p != nullptr) {
-            BasicGL::Graphic* g = static_cast<BasicGL::Graphic*>(p->object());
+            graphics::Graphic* g = static_cast<graphics::Graphic*>(p->object());
             if (g != nullptr) {
 
                // If we were passed a name then use it to find the subcomponent
@@ -625,7 +625,7 @@ bool SymbolLoader:: setSymbolVisible(const int idx, const char* name, bool visib
                   basic::Pair* spair = g->findByName(name);
                   if (spair != nullptr) {
                      // subcomponent found by name
-                     g = static_cast<BasicGL::Graphic*>(spair->object());
+                     g = static_cast<graphics::Graphic*>(spair->object());
                   }
                   else {
                      // no subcomponent was found by that name
@@ -659,7 +659,7 @@ bool SymbolLoader::setSymbolFlashRate(const int idx, const char* name, const LCr
          // Get its graphical component
          basic::Pair* p = symbols[i]->getSymbolPair();
          if (p != nullptr) {
-            BasicGL::Graphic* g = static_cast<BasicGL::Graphic*>(p->object());
+            graphics::Graphic* g = static_cast<graphics::Graphic*>(p->object());
             if (g != nullptr) {
 
                // If we were passed a name then use it to find the subcomponent
@@ -668,7 +668,7 @@ bool SymbolLoader::setSymbolFlashRate(const int idx, const char* name, const LCr
                   basic::Pair* spair = g->findByName(name);
                   if (spair != nullptr) {
                      // subcomponent found by name
-                     g = static_cast<BasicGL::Graphic*>(spair->object());
+                     g = static_cast<graphics::Graphic*>(spair->object());
                   }
                   else {
                      // no subcomponent was found by that name
@@ -702,7 +702,7 @@ bool SymbolLoader::setSymbolColor(const int idx, const char* name, const basic::
          // Get its graphical component
          basic::Pair* p = static_cast<basic::Pair*>(symbols[i]->getSymbolPair());
          if (p != nullptr) {
-            BasicGL::Graphic* g = dynamic_cast<BasicGL::Graphic*>(p->object());
+            graphics::Graphic* g = dynamic_cast<graphics::Graphic*>(p->object());
             if (g != nullptr) {
 
                // If we were passed a name then use it to find the subcomponent
@@ -711,7 +711,7 @@ bool SymbolLoader::setSymbolColor(const int idx, const char* name, const basic::
                   basic::Pair* spair = g->findByName(name);
                   if (spair != nullptr) {
                      // subcomponent found by name
-                     g = static_cast<BasicGL::Graphic*>(spair->object());
+                     g = static_cast<graphics::Graphic*>(spair->object());
                   }
                   else {
                      // no subcomponent was found by that name
@@ -745,7 +745,7 @@ bool SymbolLoader::setSymbolColor(const int idx, const char* name, const basic::
          // Get its graphical component
          basic::Pair* p = static_cast<basic::Pair*>(symbols[i]->getSymbolPair());
          if (p != nullptr) {
-            BasicGL::Graphic* g = dynamic_cast<BasicGL::Graphic*>(p->object());
+            graphics::Graphic* g = dynamic_cast<graphics::Graphic*>(p->object());
             if (g != nullptr) {
 
                // If we were passed a name then use it to find the subcomponent
@@ -754,7 +754,7 @@ bool SymbolLoader::setSymbolColor(const int idx, const char* name, const basic::
                   basic::Pair* spair = g->findByName(name);
                   if (spair != nullptr) {
                      // subcomponent found by name
-                     g = static_cast<BasicGL::Graphic*>(spair->object());
+                     g = static_cast<graphics::Graphic*>(spair->object());
                   }
                   else {
                      // no subcomponent was found by that name
@@ -784,7 +784,7 @@ bool SymbolLoader::updateSymbolSelectName(const int idx, const int newSN)
 
          basic::Pair* pair = static_cast<basic::Pair*>(symbols[i]->getSymbolPair());
          if (pair != nullptr) {
-            BasicGL::Graphic* graphic = static_cast<BasicGL::Graphic*>(pair->object());
+            graphics::Graphic* graphic = static_cast<graphics::Graphic*>(pair->object());
             if (graphic != nullptr) graphic->setSelectName(newSN);
          }
          ok = true;
@@ -866,7 +866,7 @@ void SymbolLoader::draw()
 
                // Get the pointer to the symbol's graphical component
                basic::Pair* p = symbols[i]->getSymbolPair();
-               BasicGL::Graphic* g = static_cast<BasicGL::Graphic*>(p->object());
+               graphics::Graphic* g = static_cast<graphics::Graphic*>(p->object());
 
                // We need the symbol's position in screen coordinates (inches) ...
                LCreal xScn = static_cast<LCreal>(symbols[i]->getScreenXPos());
@@ -934,7 +934,7 @@ void SymbolLoader::draw()
                   // rotate the symbol's heading subcomponent (if needed)
                   // -- sending a 'Z' rotation event to a component named 'hdg'
                   if (symbols[i]->isHeadingValid()) {
-                     BasicGL::Graphic* phdg = symbols[i]->getHdgGraphics();
+                     graphics::Graphic* phdg = symbols[i]->getHdgGraphics();
                      if (phdg == nullptr) {
                         basic::Pair* hpair = static_cast<basic::Pair*>(g->findByName("hdg"));
                         if (hpair != nullptr) {
@@ -963,7 +963,7 @@ void SymbolLoader::draw()
             // When the symbol visibility flag is false ...
             else {
                basic::Pair* p = symbols[i]->getSymbolPair();
-               BasicGL::Graphic* g = static_cast<BasicGL::Graphic*>(p->object());
+               graphics::Graphic* g = static_cast<graphics::Graphic*>(p->object());
                g->setVisibility(false);
             }
          }
@@ -980,7 +980,7 @@ void SymbolLoader::draw()
       for (int i = 0; i < MAX_SYMBOLS; i++) {
          if (symbols[i] != nullptr) {
             basic::Pair* p = symbols[i]->getSymbolPair();
-            BasicGL::Graphic* g = static_cast<BasicGL::Graphic*>(p->object());
+            graphics::Graphic* g = static_cast<graphics::Graphic*>(p->object());
             if (g->isVisible()) g->lcRestoreMatrix();
          }
       }
@@ -1186,5 +1186,5 @@ void SlSymbol::setHdgGraphics(Graphic* const v)
    phdg = v;
 }
 
-}  // end of BasicGL namespace
+}  // end of graphics namespace
 }  // end of oe namespace

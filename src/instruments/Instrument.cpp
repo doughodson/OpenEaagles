@@ -162,7 +162,7 @@ void Instrument::updateData(const LCreal dt)
    BaseClass::updateData(dt);
 
    // check for a color rotary, just in case we need one
-   BasicGL::ColorRotary* cr = dynamic_cast<BasicGL::ColorRotary*>(getColor());
+   graphics::ColorRotary* cr = dynamic_cast<graphics::ColorRotary*>(getColor());
    if (cr != 0) cr->determineColor(preScaleInstVal);
 
    // only tell the rest of our instruments our value if we want them to know it

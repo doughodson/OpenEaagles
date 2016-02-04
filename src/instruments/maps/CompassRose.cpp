@@ -226,7 +226,7 @@ void CompassRose::draw()
     lcSaveMatrix();
         if (!centered) lcTranslate(0, displacement);    
         lcRotate(rot);
-        BasicGL::Graphic::draw();
+        graphics::Graphic::draw();
     lcRestoreMatrix();
 }
 

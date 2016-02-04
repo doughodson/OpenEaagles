@@ -33,7 +33,7 @@
 #endif
 
 namespace oe {
-namespace BasicGL {
+namespace graphics {
 
 IMPLEMENT_SUBCLASS(Display,"Display")
 
@@ -422,7 +422,7 @@ void Display::setMouse(const int x, const int y, Display* const subdisplay)
         if (focus() != nullptr && focus() != subdisplay) {
             // if our previous focus was a display, exit it properly
             if (focus()->isClassType(typeid(Display))) {
-                BasicGL::Display* dis = static_cast<BasicGL::Display*>(focus());
+                graphics::Display* dis = static_cast<graphics::Display*>(focus());
                 dis->onMouseExit();
             }
             focus(subdisplay);
@@ -434,7 +434,7 @@ void Display::setMouse(const int x, const int y, Display* const subdisplay)
         // if we aren't a subdisplay, but we are a display, we
         // still need to call our entry and exit routines
         if (focus() != nullptr && focus()->isClassType(typeid(Display))) {
-            BasicGL::Display* dis = static_cast<BasicGL::Display*>(focus());
+            graphics::Display* dis = static_cast<graphics::Display*>(focus());
             dis->onMouseExit();
         }
 
@@ -2143,5 +2143,5 @@ std::ostream& Display::serialize(std::ostream& sout, const int i, const bool slo
    return sout;
 }
 
-} // End BasicGL namespace
+} // End graphics namespace
 } // End oe namespace

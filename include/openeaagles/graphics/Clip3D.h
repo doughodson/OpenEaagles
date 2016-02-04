@@ -1,14 +1,14 @@
 //------------------------------------------------------------------------------
 // Class: Clip3D
 //------------------------------------------------------------------------------
-#ifndef __oe_BasicGL_Clip3D_H__
-#define __oe_BasicGL_Clip3D_H__
+#ifndef __oe_graphics_Clip3D_H__
+#define __oe_graphics_Clip3D_H__
 
 #include "openeaagles/basic/Object.h"
 #include "Polygon.h"
 
 namespace oe {
-namespace BasicGL {
+namespace graphics {
 
 //------------------------------------------------------------------------------
 // Class: Clip3D
@@ -82,7 +82,7 @@ private:
    LCreal z0, z1;     // near and far
 };
 
-} // End BasicGL namespace
+} // End graphics namespace
 } // End oe namespace
 
 

@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: Image
 //------------------------------------------------------------------------------
-#ifndef __oe_BasicGL_Image_H__
-#define __oe_BasicGL_Image_H__
+#ifndef __oe_graphics_Image_H__
+#define __oe_graphics_Image_H__
 
 #include "openeaagles/basic/Object.h"
 #include <GL/gl.h>
@@ -10,7 +10,7 @@
 namespace oe {
    namespace basic { class Number; }
 
-namespace BasicGL {
+namespace graphics {
    struct BITMAPINFOHEADER_X;
 
 //------------------------------------------------------------------------------
@@ -91,7 +91,7 @@ inline const GLubyte* Image::getPixels() const        { return pixels; }
 inline unsigned int Image::getXResolutionPPM() const  { return xPixPerMeter; }
 inline unsigned int Image::getYResolutionPPM() const  { return yPixPerMeter; }
 
-} // End BasicGL namespace
+} // End graphics namespace
 } // End oe namespace
 
 #endif

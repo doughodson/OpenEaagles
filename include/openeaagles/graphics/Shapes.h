@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Classes: Point, Circle, Arc, LineLoop, Line
 //------------------------------------------------------------------------------
-#ifndef __oe_BasicGL_Shapes_H__
-#define __oe_BasicGL_Shapes_H__
+#ifndef __oe_graphics_Shapes_H__
+#define __oe_graphics_Shapes_H__
 
 #include "Graphic.h"
 
@@ -12,7 +12,7 @@ namespace oe {
       class Number;
    }
 
-namespace BasicGL {
+namespace graphics {
 
 //------------------------------------------------------------------------------
 // Class: Circle
@@ -301,7 +301,7 @@ private:
     bool fan;       // are we a triangle fan?
 };
 
-} // End BasicGL namespace
+} // End graphics namespace
 } // End oe namespace
 
 #endif

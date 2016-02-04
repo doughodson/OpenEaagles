@@ -1,8 +1,8 @@
 //----------------------------------------------------------------------------------------------------------------------------------
 // Class: FtglFonts, FtglBitmapFont, FtglExtrdFont, FtglOutlineFont, FtglPixmapFont, FtglPolygonFont, FtglTextureFont
 //----------------------------------------------------------------------------------------------------------------------------------
-#ifndef __oe_BasicGL_FtglFont_H__
-#define __oe_BasicGL_FtglFont_H__
+#ifndef __oe_graphics_FtglFont_H__
+#define __oe_graphics_FtglFont_H__
 
 #include "Font.h"
 
@@ -16,7 +16,7 @@ class FTGLOutlineFont;
 
 namespace oe {
 namespace basic { class Color; }
-namespace BasicGL {
+namespace graphics {
 
 //----------------------------------------------------------------------------------------------------------------------------------
 // Class: FtglFonts, FtglBitmapFont, FtglExtrdFont, FtglOutlineFont, FtglPixmapFont, FtglPolygonFont, FtglTextureFont
@@ -307,7 +307,7 @@ public:
     void loadFont() override;
 };
 
-} // End BasicGL namespace
+} // End graphics namespace
 } // End oe namespace
 
 #endif

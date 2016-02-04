@@ -164,7 +164,7 @@ void SolenoidSwitch::latch(const int buttonId)
             // send the event ID IF we are using LOGIC instead of TIMING
             if (timer == nullptr) {
                 if (eventMap[currButtonId-1] != -1) {
-                    BasicGL::Display* myDisplay = (BasicGL::Display*)findContainerByType(typeid(BasicGL::Display));
+                    graphics::Display* myDisplay = (graphics::Display*)findContainerByType(typeid(graphics::Display));
                     if (myDisplay != nullptr) {
                         myDisplay->buttonEvent(eventMap[currButtonId-1]);
                         //std::cout << "EVENT ID " << eventMap[currButtonId-1] << " sent!" << std::endl;
@@ -210,7 +210,7 @@ void SolenoidSwitch::resetButton()
     // timer logic
     if (timer != nullptr) {
         if (currButtonId != CENTER_BUTTON) {
-            BasicGL::Display* myDisplay = (BasicGL::Display*)findContainerByType(typeid(BasicGL::Display));
+            graphics::Display* myDisplay = (graphics::Display*)findContainerByType(typeid(graphics::Display));
             if (myDisplay != nullptr) {
                 //std::cout << "EVENT ID " << eventMap[CENTER_BUTTON-1] << " sent!" << std::endl;
                 myDisplay->buttonEvent(eventMap[CENTER_BUTTON-1]);
@@ -224,7 +224,7 @@ void SolenoidSwitch::resetButton()
     }
     else {
         if (currButtonId != CENTER_BUTTON) {
-            BasicGL::Display* myDisplay = (BasicGL::Display*)findContainerByType(typeid(BasicGL::Display));
+            graphics::Display* myDisplay = (graphics::Display*)findContainerByType(typeid(graphics::Display));
             if (myDisplay != nullptr) {
                 //std::cout << "EVENT ID " << eventMap[CENTER_BUTTON-1] << " sent!" << std::endl;
                 myDisplay->buttonEvent(eventMap[CENTER_BUTTON-1]);
@@ -252,7 +252,7 @@ void SolenoidSwitch::updateData(const LCreal dt)
         picked[currButtonId-1] = true;
         timer->stop();
         if (eventMap[currButtonId-1] != -1) {
-            BasicGL::Display* myDisplay = (BasicGL::Display*)findContainerByType(typeid(BasicGL::Display));
+            graphics::Display* myDisplay = (graphics::Display*)findContainerByType(typeid(graphics::Display));
             if (myDisplay != nullptr) {
                 myDisplay->buttonEvent(eventMap[currButtonId-1]);
                 //std::cout << "TIMER EVENT ID " << eventMap[currButtonId-1] << " sent!" << std::endl;

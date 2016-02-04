@@ -3,8 +3,8 @@
 //          LatitudeReadout, LongitudeReadout, DirectionReadout, Rotary, Rotary2,
 //          Cursor
 //------------------------------------------------------------------------------
-#ifndef __oe_BasicGL_Readouts_H__
-#define __oe_BasicGL_Readouts_H__
+#ifndef __oe_graphics_Readouts_H__
+#define __oe_graphics_Readouts_H__
 
 #include "Field.h"
 #include "openeaagles/basic/Number.h"
@@ -12,7 +12,7 @@
 
 namespace oe {
    namespace basic { class Float; class Integer; }
-namespace BasicGL {
+namespace graphics {
    class Reformat;
 
 //------------------------------------------------------------------------------
@@ -435,7 +435,7 @@ public:
    virtual bool onSelect(const basic::Number* const osobj);
 };
 
-} // End BasicGL namespace
+} // End graphics namespace
 } // End oe namespace
 
 #endif

@@ -3,14 +3,14 @@
 //
 // Description: Class factory
 //------------------------------------------------------------------------------
-#ifndef __oe_BasicGL_Factory_H__
-#define __oe_BasicGL_Factory_H__
+#ifndef __oe_graphics_Factory_H__
+#define __oe_graphics_Factory_H__
 
 namespace oe {
 
 namespace basic { class Object; }
 
-namespace BasicGL {
+namespace graphics {
 
 class Factory
 {
@@ -21,7 +21,7 @@ protected:
    Factory();   // prevent object creation
 };
 
-}  // end namespace BasicGL
+}  // end namespace graphics
 }  // end namespace oe
 
 #endif

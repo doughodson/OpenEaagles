@@ -4,7 +4,7 @@
 #include "openeaagles/basic/PairStream.h"
 
 namespace oe {
-namespace BasicGL {
+namespace graphics {
 
 IMPLEMENT_SUBCLASS(Material,"Material")
 EMPTY_SERIALIZER(Material)
@@ -308,6 +308,6 @@ basic::Object* Material::getSlotByIndex(const int si)
     return BaseClass::getSlotByIndex(si);
 }
 
-} // End BasicGL namespace
+} // End graphics namespace
 } // End oe namespace
 

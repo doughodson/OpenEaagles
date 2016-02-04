@@ -1,6 +1,6 @@
 
-#ifndef __oe_BasicGL_Display_H__
-#define __oe_BasicGL_Display_H__
+#ifndef __oe_graphics_Display_H__
+#define __oe_graphics_Display_H__
 
 #include "Page.h"
 
@@ -13,7 +13,7 @@ namespace oe {
       class String;
    }
 
-namespace BasicGL {
+namespace graphics {
 class Font;
 class Image;
 class Texture;
@@ -457,7 +457,7 @@ inline void Display::setSubdisplayFlag(const bool flg)      { subdisplayFlg = fl
 inline bool Display::isOkToSwap() const                     { return okToSwap; }
 inline void Display::setOkToSwap(const bool x)              { okToSwap = x; }
 
-} // End BasicGL namespace
+} // End graphics namespace
 } // End oe namespace
 
 #endif

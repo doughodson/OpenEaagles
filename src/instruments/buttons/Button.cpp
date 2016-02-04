@@ -75,7 +75,7 @@ bool Button::onSingleClick()
     // when I am clicked, I will send an event to my container, we find out what
     // event Id we have, and send that eventId
     bool ok = false;
-    BasicGL::Display* myDisplay = (BasicGL::Display*)findContainerByType(typeid(BasicGL::Display));
+    graphics::Display* myDisplay = (graphics::Display*)findContainerByType(typeid(graphics::Display));
 
     if (myDisplay != nullptr) {
         myDisplay->buttonEvent(getEventId());

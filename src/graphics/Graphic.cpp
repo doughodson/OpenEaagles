@@ -15,7 +15,7 @@
 #include "openeaagles/basic/Float.h"
 
 namespace oe {
-namespace BasicGL {
+namespace graphics {
 
 IMPLEMENT_SUBCLASS(Graphic, "Graphic")
 
@@ -77,7 +77,7 @@ BEGIN_SLOT_MAP(Graphic)
     ON_SLOT(19, setSlotVisibility, basic::Number)
     ON_SLOT(20, setSlotMask, basic::Number)
     ON_SLOT(21, setMaterial, basic::Identifier)
-    ON_SLOT(21, setMaterial, BasicGL::Material)
+    ON_SLOT(21, setMaterial, graphics::Material)
     ON_SLOT(22, setSlotTranslateLight, basic::PairStream)
 END_SLOT_MAP()
 
@@ -89,7 +89,7 @@ BEGIN_EVENT_HANDLER(Graphic)
     ON_EVENT_OBJ(SET_COLOR,setColor,basic::Identifier)  // Color given as a string (e.g., "red")
     ON_EVENT_OBJ(SET_COLOR,setColor,basic::Number)      // Color given as a value (for a color rotary, e.g., 4 is the fourth color in the rotary list)
     ON_EVENT_OBJ(SET_MATERIAL,setMaterial,basic::Identifier )
-    ON_EVENT_OBJ(SET_MATERIAL,setMaterial,BasicGL::Material)
+    ON_EVENT_OBJ(SET_MATERIAL,setMaterial,graphics::Material)
     ON_EVENT_OBJ(SET_TEXTURE,onSetTextureId,basic::Number)
     ON_EVENT_OBJ(SET_LINEWIDTH,onSetLineWidthEvent,basic::Number)
     ON_EVENT_OBJ(SET_FLASHRATE,onSetFlashRateEvent,basic::Number)
@@ -1400,7 +1400,7 @@ bool Graphic::setMaterial(const basic::Identifier* const msg)
 //------------------------------------------------------------------------------
 // setMaterial() -- sets our material (by material object)
 //------------------------------------------------------------------------------
-bool Graphic::setMaterial(const BasicGL::Material* const msg)
+bool Graphic::setMaterial(const graphics::Material* const msg)
 {
     // Unref old material
     if (materialObj != nullptr) { materialObj->unref(); materialObj = nullptr; }
@@ -1593,5 +1593,5 @@ std::ostream& Graphic::serialize(std::ostream& sout, const int i, const bool slo
     return sout;
 }
 
-} // End BasicGL namespace
+} // End graphics namespace
 } // End oe namespace

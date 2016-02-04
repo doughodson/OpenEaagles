@@ -12,7 +12,7 @@
 #include "openeaagles/basic/PairStream.h"
 
 namespace oe {
-namespace BasicGL {
+namespace graphics {
 
 IMPLEMENT_SUBCLASS(Field,"Field")
 
@@ -441,15 +441,15 @@ bool Field::cursor(int* l, int* c) const
 void Field::drawFunc()
 {
     // Get a pointer to the current display
-    BasicGL::Display* dsp = getDisplay();
+    graphics::Display* dsp = getDisplay();
     if (dsp == nullptr) return;
 
     // ---
     // When our container is also a Field, get a pointer to it.
     // ---
-    BasicGL::Field* parent = nullptr;
+    graphics::Field* parent = nullptr;
     if (container() != nullptr) {
-        BasicGL::Field* fp = dynamic_cast<BasicGL::Field*>(container());
+        graphics::Field* fp = dynamic_cast<graphics::Field*>(container());
         if (fp != nullptr) parent = fp;
     }
 
@@ -898,5 +898,5 @@ std::ostream& Field::serialize(std::ostream& sout, const int i, const bool slots
     return sout;
 }
 
-} // End BasicGL namespace
+} // End graphics namespace
 } // End oe namespace

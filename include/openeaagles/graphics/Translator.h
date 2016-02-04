@@ -1,14 +1,14 @@
 //------------------------------------------------------------------------------
 // Class: Translator
 //------------------------------------------------------------------------------
-#ifndef __oe_BasicGL_Translator_H__
-#define __oe_BasicGL_Translator_H__
+#ifndef __oe_graphics_Translator_H__
+#define __oe_graphics_Translator_H__
 
 #include "Graphic.h"
 
 namespace oe {
    namespace basic { class Number; }
-namespace BasicGL {
+namespace graphics {
 
 //------------------------------------------------------------------------------
 // Class: Translator
@@ -51,7 +51,7 @@ private:
     LCreal myZPos;
 };
 
-} // End BasicGL namespace
+} // End graphics namespace
 } // End oe namespace
 
 #endif
