@@ -10,7 +10,7 @@ OBJS =  \
 	$(LIB)(ColorGradient.o) \
 	$(LIB)(ColorRotary.o) \
 	$(LIB)(Display.o) \
-	$(LIB)(Factory.o) \
+	$(LIB)(factory.o) \
 	$(LIB)(Field.o) \
 	$(LIB)(Font.o) \
 	$(LIB)(FtglFonts.o) \

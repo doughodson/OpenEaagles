@@ -24,7 +24,7 @@ OBJS =  \
 	$(LIB)(Effects.o) \
 	$(LIB)(Emission.o) \
 	$(LIB)(ExternalStore.o) \
-	$(LIB)(Factory.o) \
+	$(LIB)(factory.o) \
 	$(LIB)(FuelTank.o) \
 	$(LIB)(Gimbal.o) \
 	$(LIB)(Gps.o) \

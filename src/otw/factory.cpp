@@ -1,7 +1,5 @@
-//------------------------------------------------------------------------------
-// Class: Factory
-//------------------------------------------------------------------------------
-#include "openeaagles/otw/Factory.h"
+
+#include "openeaagles/otw/factory.h"
 
 #include "openeaagles/basic/Object.h"
 
@@ -14,10 +12,7 @@ namespace oe {
 
 namespace otw {
 
-Factory::Factory()
-{}
-
-basic::Object* Factory::createObj(const char* name)
+basic::Object* factory(const char* name)
 {
     basic::Object* obj = nullptr;
 
@@ -37,5 +32,5 @@ basic::Object* Factory::createObj(const char* name)
     return obj;
 }
 
-}  // end namespace otw
-}  // end namespace oe
+}
+}

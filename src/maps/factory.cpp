@@ -1,7 +1,5 @@
-//------------------------------------------------------------------------------
-// Class: Factory
-//------------------------------------------------------------------------------
-#include "openeaagles/maps/Factory.h"
+
+#include "openeaagles/maps/factory.h"
 
 #include "openeaagles/basic/Object.h"
 
@@ -13,10 +11,7 @@
 namespace oe {
 namespace maps  {
 
-Factory::Factory()
-{}
-
-basic::Object* Factory::createObj(const char* name)
+basic::Object* factory(const char* name)
 {
     basic::Object* obj = nullptr;
 
@@ -32,5 +27,5 @@ basic::Object* Factory::createObj(const char* name)
     return obj;
 }
 
-}  // end namespace maps 
-}  // end namespace oe
+}
+}

@@ -9,7 +9,7 @@ OBJS =  \
 	$(LIB)(AnalogOutput.o) \
 	$(LIB)(DiscreteInput.o) \
 	$(LIB)(DiscreteOutput.o) \
-	$(LIB)(Factory.o) \
+	$(LIB)(factory.o) \
 	$(LIB)(IoData.o) \
 	$(LIB)(SignalGen.o) \
 	$(LIB)(UsbJoystick.o)

@@ -4,7 +4,7 @@ include ../makedefs
 LIB = $(OPENEAAGLES_LIB_DIR)/liboeinstruments.a
 
 OBJS =  \
-	$(LIB)(Factory.o) \
+	$(LIB)(factory.o) \
 	$(LIB)(Instrument.o) 
 
 SUBDIRS = adi buttons dials landingGear maps eng gauges eadi3D 

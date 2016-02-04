@@ -4,7 +4,7 @@ include ../../makedefs
 LIB = $(OPENEAAGLES_LIB_DIR)/liboeglut.a
 
 OBJS =  \
-	$(LIB)(Factory.o) \
+	$(LIB)(factory.o) \
 	$(LIB)(GlutDisplay.o) \
 	$(LIB)(Shapes3D.o)
 

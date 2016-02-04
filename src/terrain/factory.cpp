@@ -1,7 +1,5 @@
-//------------------------------------------------------------------------------
-// Class: Factory
-//------------------------------------------------------------------------------
-#include "openeaagles/terrain/Factory.h"
+
+#include "openeaagles/terrain/factory.h"
 
 #include "openeaagles/basic/Object.h"
 
@@ -15,10 +13,7 @@
 namespace oe {
 namespace terrain {
 
-Factory::Factory()
-{}
-
-basic::Object* Factory::createObj(const char* name)
+basic::Object* factory(const char* name)
 {
     basic::Object* obj = nullptr;
 
@@ -38,5 +33,5 @@ basic::Object* Factory::createObj(const char* name)
     return obj;
 }
 
-}  // end namespace terrain
-}  // end namespace oe
+}
+}

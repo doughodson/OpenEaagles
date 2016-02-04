@@ -13,7 +13,7 @@ OBJS =  \
 	$(LIB)(Component.o) \
 	$(LIB)(Decibel.o) \
 	$(LIB)(EarthModel.o) \
-	$(LIB)(Factory.o) \
+	$(LIB)(factory.o) \
 	$(LIB)(FileReader.o) \
 	$(LIB)(Float.o) \
 	$(LIB)(Function.o) \

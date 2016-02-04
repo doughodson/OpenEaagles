@@ -7,7 +7,7 @@ include ../makedefs
 LIB = $(OPENEAAGLES_LIB_DIR)/liboeotw.a
 
 OBJS =  \
-	$(LIB)(Factory.o) \
+	$(LIB)(factory.o) \
 	$(LIB)(OtwCigiCl.o) \
 	$(LIB)(OtwPC.o)
 

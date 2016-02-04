@@ -1,8 +1,5 @@
-//------------------------------------------------------------------------------
-// Class: Factory
-//------------------------------------------------------------------------------
 
-#include "openeaagles/dafif/Factory.h"
+#include "openeaagles/dafif/factory.h"
 
 #include "openeaagles/basic/Object.h"
 
@@ -15,10 +12,7 @@
 namespace oe {
 namespace dafif {
 
-Factory::Factory()
-{}
-
-basic::Object* Factory::createObj(const char* name)
+basic::Object* factory(const char* name)
 {
     basic::Object* obj = nullptr;
 
@@ -35,6 +29,6 @@ basic::Object* Factory::createObj(const char* name)
     return obj;
 }
 
-}  // end namespace dafif
-}  // end namespace oe
+}
+}
 

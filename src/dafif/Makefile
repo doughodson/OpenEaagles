@@ -8,7 +8,7 @@ OBJS =  \
 	$(LIB)(AirportLoader.o) \
 	$(LIB)(Record.o) \
 	$(LIB)(Database.o) \
-	$(LIB)(Factory.o) \
+	$(LIB)(factory.o) \
 	$(LIB)(Ils.o) \
 	$(LIB)(Navaid.o) \
 	$(LIB)(NavaidLoader.o) \

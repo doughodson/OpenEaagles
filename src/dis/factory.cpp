@@ -1,8 +1,5 @@
-//------------------------------------------------------------------------------
-// Class: Factory
-//------------------------------------------------------------------------------
 
-#include "openeaagles/dis/Factory.h"
+#include "openeaagles/dis/factory.h"
 
 #include "openeaagles/basic/Object.h"
 
@@ -16,10 +13,7 @@ namespace oe {
 namespace network {
 namespace dis {
 
-Factory::Factory()
-{}
-
-basic::Object* Factory::createObj(const char* name)
+basic::Object* factory(const char* name)
 {
     basic::Object* obj = nullptr;
 
@@ -36,7 +30,6 @@ basic::Object* Factory::createObj(const char* name)
     return obj;
 }
 
-} // End dis namespace
-} // End network namespace
-} // End oe namespace
-
+}
+}
+}
