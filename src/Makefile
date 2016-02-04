@@ -7,16 +7,15 @@ include makedefs
 # graphics     : freeglut, FTGL, freetype
 # dafif        : -
 # dis          : -
-# dynamics     : JSBSim
 # gui          :
 # hla          : HLA RTI
 # instruments  : -
 # iodevice     : -
 # linearsystem : -
+# models       : JSBSim
 # maps         : -
 # otw          : CIGICL 3.x
 # recorder     : Google protocol buffers
-# sensor       : -
 # simulation   : -
 # terrain      : -
 #
@@ -25,9 +24,9 @@ PROJECTS += graphics instruments
 PROJECTS += dafif
 PROJECTS += iodevice
 PROJECTS += linearsystem 
-PROJECTS += simulation sensor terrain
+PROJECTS += simulation terrain
 PROJECTS += dis
-PROJECTS += dynamics
+PROJECTS += models
 PROJECTS += maps
 PROJECTS += recorder
 

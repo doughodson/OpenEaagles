@@ -8,7 +8,6 @@ CPPFLAGS += -I$(JSBSIM_INC_DIR)
 SUBDIRS = 
 
 OBJS =  \
-	$(LIB)(Factory.o) \
 	$(LIB)(JSBSimModel.o) \
 	$(LIB)(LaeroModel.o)  \
 	$(LIB)(RacModel.o)
