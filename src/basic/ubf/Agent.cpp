@@ -12,7 +12,7 @@
 
 namespace oe {
 namespace basic {
-namespace Ubf {
+namespace ubf {
 
 //
 // Class: Agent
@@ -230,7 +230,7 @@ void AgentTC::updateData(const LCreal dt)
 {
 }
 
-} // End Ubf namespace
+} // End ubf namespace
 } // End basic namespace
 } // End oe namespace
 

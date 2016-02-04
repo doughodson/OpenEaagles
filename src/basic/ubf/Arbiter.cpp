@@ -10,7 +10,7 @@
 
 namespace oe {
 namespace basic {
-namespace Ubf {
+namespace ubf {
 
 IMPLEMENT_SUBCLASS(Arbiter, "UbfArbiter")
 EMPTY_COPYDATA(Arbiter)
@@ -174,7 +174,7 @@ basic::Object* Arbiter::getSlotByIndex(const int si)
    return BaseClass::getSlotByIndex(si);
 }
 
-} // End Ubf namespace
+} // End ubf namespace
 } // End basic namespace
 } // End oe namespace
 

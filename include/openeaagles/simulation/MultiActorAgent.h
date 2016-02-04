@@ -8,7 +8,7 @@
 
 namespace oe {
    namespace basic {
-      namespace Ubf { class Behavior; class State; }
+      namespace ubf { class Behavior; class State; }
    }
 
 namespace simulation {
@@ -42,8 +42,8 @@ protected:
    // generic controller
    virtual void controller(const LCreal dt = 0.0);
 
-   void setState(basic::Ubf::State* const);
-   basic::Ubf::State* getState() const                { return state; }
+   void setState(basic::ubf::State* const);
+   basic::ubf::State* getState() const                { return state; }
 
    void setActor(basic::Component* c);
    basic::Component*      getActor() { return actor;}
@@ -54,21 +54,21 @@ protected:
    struct AgentItem
    {
       basic::safe_ptr<basic::String> actorName;
-      basic::safe_ptr<basic::Ubf::Behavior> behavior;
+      basic::safe_ptr<basic::ubf::Behavior> behavior;
       basic::safe_ptr<basic::Component> actor;
    };
 
    static const unsigned int MAX_AGENTS = 10;
    bool clearAgentList();
-   bool addAgent( basic::String* name, basic::Ubf::Behavior* const b);
+   bool addAgent( basic::String* name, basic::ubf::Behavior* const b);
 
    // slot functions
-   bool setSlotState(basic::Ubf::State* const state);
+   bool setSlotState(basic::ubf::State* const state);
    bool setSlotAgentList(basic::PairStream* const msg);
 
 private:
    basic::Component* actor;
-   basic::Ubf::State* state;
+   basic::ubf::State* state;
    Station*     myStation;
 
    // agent/behavior list

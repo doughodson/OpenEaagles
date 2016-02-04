@@ -1,14 +1,14 @@
 //------------------------------------------------------------------------------
 // Class: Agent
 //------------------------------------------------------------------------------
-#ifndef __oe_basic_Ubf_Agent_H__
-#define __oe_basic_Ubf_Agent_H__
+#ifndef __oe_basic_ubf_Agent_H__
+#define __oe_basic_ubf_Agent_H__
 
 #include "openeaagles/basic/Component.h"
 
 namespace oe {
 namespace basic {
-namespace Ubf {
+namespace ubf {
 
 class Behavior;
 class State;
@@ -92,7 +92,7 @@ public:
    void updateData(const LCreal dt = 0.0) override;
 };
 
-} // End Ubf namespace
+} // End ubf namespace
 } // End basic namespace
 } // End oe namespace
 

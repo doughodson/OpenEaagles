@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: Action
 //------------------------------------------------------------------------------
-#ifndef __oe_basic_Ubf_Action_H__
-#define __oe_basic_Ubf_Action_H__
+#ifndef __oe_basic_ubf_Action_H__
+#define __oe_basic_ubf_Action_H__
 
 #include "openeaagles/basic/Object.h"
 
@@ -11,7 +11,7 @@ namespace oe {
 namespace basic {
    class Component;
 
-namespace Ubf {
+namespace ubf {
 
 //------------------------------------------------------------------------------
 // Class: Action
@@ -42,7 +42,7 @@ private:
 inline void Action::setVote(const unsigned int x)      { vote = x; return; }
 inline unsigned int Action::getVote() const            { return vote; }
 
-} // End Ubf namespace
+} // End ubf namespace
 } // End basic namespace
 } // End oe namespace
 

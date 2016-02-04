@@ -1,14 +1,14 @@
 //------------------------------------------------------------------------------
 // Class: State
 //------------------------------------------------------------------------------
-#ifndef __oe_basic_Ubf_State_H__
-#define __oe_basic_Ubf_State_H__
+#ifndef __oe_basic_ubf_State_H__
+#define __oe_basic_ubf_State_H__
 
 #include "openeaagles/basic/Component.h"
 
 namespace oe {
 namespace basic {
-namespace Ubf {
+namespace ubf {
 
 //------------------------------------------------------------------------------
 // Class: State
@@ -29,7 +29,7 @@ public:
    virtual const State* getUbfStateByType(const std::type_info& type) const;
 };
 
-} // End Ubf namespace
+} // End ubf namespace
 } // End basic namespace
 } // End oe namespace
 

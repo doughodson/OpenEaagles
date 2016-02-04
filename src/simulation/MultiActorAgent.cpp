@@ -41,7 +41,7 @@ END_SLOTTABLE(MultiActorAgent)
 
 //  mapping of slots to handles
 BEGIN_SLOT_MAP(MultiActorAgent)
-   ON_SLOT(1,  setSlotState, basic::Ubf::State)
+   ON_SLOT(1,  setSlotState, basic::ubf::State)
    ON_SLOT(2,  setSlotAgentList, basic::PairStream)
 END_SLOT_MAP()
 
@@ -106,13 +106,13 @@ void MultiActorAgent::controller(const LCreal dt)
          if (agentList[i].actor != nullptr) {
 
             setActor(agentList[i].actor);
-            basic::Ubf::Behavior* behavior = agentList[i].behavior;
+            basic::ubf::Behavior* behavior = agentList[i].behavior;
 
             // update ubf state
             getState()->updateState(agentList[i].actor);
 
             // generate an action
-            basic::Ubf::Action* action = behavior->genAction(getState(), dt);
+            basic::ubf::Action* action = behavior->genAction(getState(), dt);
             if (action) { // allow possibility of no action returned
                action->execute(getActor());
                action->unref();
@@ -124,7 +124,7 @@ void MultiActorAgent::controller(const LCreal dt)
 }
 
 
-void MultiActorAgent::setState(basic::Ubf::State* const x)
+void MultiActorAgent::setState(basic::ubf::State* const x)
 {
    if (x == nullptr)
       return;
@@ -173,7 +173,7 @@ bool MultiActorAgent::clearAgentList()
 }
 
 // Adds an item to the input entity type table
-bool MultiActorAgent::addAgent(basic::String* name, basic::Ubf::Behavior* const b)
+bool MultiActorAgent::addAgent(basic::String* name, basic::ubf::Behavior* const b)
 {
    bool ok = false;
    if (nAgents < MAX_AGENTS) {
@@ -192,7 +192,7 @@ bool MultiActorAgent::addAgent(basic::String* name, basic::Ubf::Behavior* const 
 //------------------------------------------------------------------------------
 
 // Sets the state object for this agent
-bool MultiActorAgent::setSlotState(basic::Ubf::State* const state)
+bool MultiActorAgent::setSlotState(basic::ubf::State* const state)
 {
    bool ok = false;
    if (state != nullptr) {
@@ -215,7 +215,7 @@ bool MultiActorAgent::setSlotAgentList(basic::PairStream* const msg)
        while (item != nullptr) {
           basic::Pair* pair = static_cast<basic::Pair*>(item->getValue());
           //std::cerr << "MultiActorAgent::setSlotagentList: slot: " << *pair->slot() << std::endl;
-          basic::Ubf::Behavior* b = dynamic_cast<basic::Ubf::Behavior*>( pair->object() );
+          basic::ubf::Behavior* b = dynamic_cast<basic::ubf::Behavior*>( pair->object() );
           if (b != nullptr) {
              // We have an  object, so put it in the table
              addAgent(pair->slot(), b);

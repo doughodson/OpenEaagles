@@ -8,7 +8,7 @@
 
 namespace oe {
 namespace basic {
-namespace Ubf {
+namespace ubf {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(Behavior, "UbfBehavior")
 EMPTY_DELETEDATA(Behavior)
@@ -63,7 +63,7 @@ basic::Object* Behavior::getSlotByIndex(const int si)
    return BaseClass::getSlotByIndex(si);
 }
 
-} // End Ubf namespace
+} // End ubf namespace
 } // End basic namespace
 } // End oe namespace
 

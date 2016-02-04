@@ -6,7 +6,7 @@
 
 namespace oe {
 namespace basic {
-namespace Ubf {
+namespace ubf {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(Action, "UbfAction")
 EMPTY_SLOTTABLE(Action)
@@ -25,7 +25,7 @@ void Action::copyData(const Action& org, const bool cc)
    vote = org.vote;
 }
 
-} // End Ubf namespace
+} // End ubf namespace
 } // End basic namespace
 } // End oe namespace
 

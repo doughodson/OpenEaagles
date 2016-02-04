@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: Arbiter
 //------------------------------------------------------------------------------
-#ifndef __oe_basic_Ubf_Arbiter_H__
-#define __oe_basic_Ubf_Arbiter_H__
+#ifndef __oe_basic_ubf_Arbiter_H__
+#define __oe_basic_ubf_Arbiter_H__
 
 #include "Behavior.h"
 
@@ -11,7 +11,7 @@ namespace oe {
 namespace basic {
    class List;
 
-namespace Ubf {
+namespace ubf {
    class State;
    class Action;
 
@@ -57,7 +57,7 @@ private:
 
 inline basic::List* Arbiter::getBehaviors()                 { return behaviors; }
 
-} // End Ubf namespace
+} // End ubf namespace
 } // End basic namespace
 } // End oe namespace
 

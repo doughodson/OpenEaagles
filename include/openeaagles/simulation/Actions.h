@@ -39,9 +39,9 @@ class Steerpoint;
 //  function will find the OnboardComputer and 'trigger()' the action.
 //
 //------------------------------------------------------------------------------
-class Action : public basic::Ubf::Action
+class Action : public basic::ubf::Action
 {
-    DECLARE_SUBCLASS(Action,basic::Ubf::Action)
+    DECLARE_SUBCLASS(Action,basic::ubf::Action)
 
 public:
    Action();

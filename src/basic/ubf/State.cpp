@@ -6,7 +6,7 @@
 
 namespace oe {
 namespace basic {
-namespace Ubf {
+namespace ubf {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(State, "UbfState")
 EMPTY_SLOTTABLE(State)
@@ -89,7 +89,7 @@ const State* State::getUbfStateByType(const std::type_info& type) const
 }
 
 
-} // End Ubf namespace
+} // End ubf namespace
 } // End basic namespace
 } // End oe namespace
 

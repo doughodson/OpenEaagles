@@ -25,9 +25,9 @@ class Station;
 //    actorPlayerName      <String>    ! The agent's actor - playerName
 //    actorComponentName   <String>    ! The agent's actor - componentName
 //------------------------------------------------------------------------------
-class SimAgent : public basic::Ubf::Agent
+class SimAgent : public basic::ubf::Agent
 {
-   DECLARE_SUBCLASS(SimAgent, basic::Ubf::Agent)
+   DECLARE_SUBCLASS(SimAgent, basic::ubf::Agent)
 public:
    SimAgent();
 

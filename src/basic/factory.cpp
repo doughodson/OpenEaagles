@@ -444,11 +444,11 @@ Object* factory(const char* name)
     }
 
     // Ubf
-    else if ( std::strcmp(name, Ubf::Agent::getFactoryName()) == 0 ) {
-        obj = new Ubf::Agent();
+    else if ( std::strcmp(name, ubf::Agent::getFactoryName()) == 0 ) {
+        obj = new ubf::Agent();
     }
-    else if ( std::strcmp(name, Ubf::Arbiter::getFactoryName()) == 0 ) {
-        obj = new Ubf::Arbiter();
+    else if ( std::strcmp(name, ubf::Arbiter::getFactoryName()) == 0 ) {
+        obj = new ubf::Arbiter();
     }
 
     return obj;

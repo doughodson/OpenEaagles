@@ -1,14 +1,14 @@
 //------------------------------------------------------------------------------
 // Class: Behavior
 //------------------------------------------------------------------------------
-#ifndef __oe_basic_Ubf_Behavior_H__
-#define __oe_basic_Ubf_Behavior_H__
+#ifndef __oe_basic_ubf_Behavior_H__
+#define __oe_basic_ubf_Behavior_H__
 
 #include "openeaagles/basic/Component.h"
 
 namespace oe {
 namespace basic {
-namespace Ubf {
+namespace ubf {
 
 class State;
 class Action;
@@ -47,7 +47,7 @@ inline void Behavior::setVote(const unsigned int x)    { vote = x; }
 inline unsigned int Behavior::getVote() const          { return vote; }
 
 
-} // End Ubf namespace
+} // End ubf namespace
 } // End basic namespace
 } // End oe namespace
 
