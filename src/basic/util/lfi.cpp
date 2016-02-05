@@ -3,7 +3,6 @@
 
 namespace oe {
 namespace basic {
-namespace lfi {
 
 //------------------------------------------------------------------------------
 // lfi - One dimensional Linear Function Interpolator
@@ -483,6 +482,5 @@ LCreal lfi_5D(
    return m * (a2 - a1) + a1;
 }
 
-}
 }
 }

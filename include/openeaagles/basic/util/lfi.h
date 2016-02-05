@@ -6,7 +6,6 @@
 
 namespace oe {
 namespace basic {
-namespace lfi {
 
 //==============================================================================
 // Linear Function Interpolators
@@ -113,7 +112,6 @@ LCreal lfi_5D(const LCreal x, const LCreal y, const LCreal z, const LCreal w, co
          unsigned int* const vbp=nullptr
       );
 
-}
 }
 }
 
