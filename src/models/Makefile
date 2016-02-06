@@ -3,7 +3,7 @@ include ../makedefs
 
 LIB = $(OPENEAAGLES_LIB_DIR)/liboemodels.a
 
-SUBDIRS = dynamics sensor
+SUBDIRS = dynamics sensors
 
 OBJS =  \
 	$(LIB)(factory.o)

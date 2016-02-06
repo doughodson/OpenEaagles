@@ -1,5 +1,5 @@
 
-#include "openeaagles/models/sensor/Stt.h"
+#include "openeaagles/models/sensors/Stt.h"
 
 #include "openeaagles/simulation/Antenna.h"
 #include "openeaagles/simulation/Player.h"

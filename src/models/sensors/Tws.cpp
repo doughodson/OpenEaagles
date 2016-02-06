@@ -1,5 +1,5 @@
 
-#include "openeaagles/models/sensor/Tws.h"
+#include "openeaagles/models/sensors/Tws.h"
 
 namespace oe {
 namespace models {

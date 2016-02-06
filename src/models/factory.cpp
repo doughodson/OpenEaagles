@@ -9,9 +9,9 @@
 #include "openeaagles/models/dynamics/LaeroModel.h"
 
 // sensor models
-#include "openeaagles/models/sensor/Gmti.h"
-#include "openeaagles/models/sensor/Tws.h"
-#include "openeaagles/models/sensor/Stt.h"
+#include "openeaagles/models/sensors/Gmti.h"
+#include "openeaagles/models/sensors/Tws.h"
+#include "openeaagles/models/sensors/Stt.h"
 
 #include <cstring>
 
