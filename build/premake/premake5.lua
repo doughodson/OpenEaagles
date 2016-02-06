@@ -151,15 +151,6 @@ solution "oe"
       }
       targetname "dis"
 
-   -- models library
-   project "models"
-      files {
-         "../../include/openeaagles/models/**.h",
-         "../../src/models/**.cpp"
-      }
-      includedirs { OE3rdPartyIncPath.."/JSBSim" }
-      targetname "models"
-
    -- graphical instruments library
    project "instruments"
       files {
@@ -197,6 +188,15 @@ solution "oe"
          "../../src/maps/**.cpp"
       }
       targetname "maps"
+
+   -- models library
+   project "models"
+      files {
+         "../../include/openeaagles/models/**.h",
+         "../../src/models/**.cpp"
+      }
+      includedirs { OE3rdPartyIncPath.."/JSBSim" }
+      targetname "models"
 
    -- otw library
    project "otw"
