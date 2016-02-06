@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Classes: NetIO
+// Class: NetIO
 //------------------------------------------------------------------------------
 #ifndef __oe_simulation_NetIO_H__
 #define __oe_simulation_NetIO_H__
@@ -147,7 +147,7 @@ namespace simulation {
 //------------------------------------------------------------------------------
 class NetIO : public basic::Component
 {
-   DECLARE_SUBCLASS(NetIO,basic::Component)
+   DECLARE_SUBCLASS(NetIO, basic::Component)
 
 public:
     // Source of the time line
@@ -411,19 +411,19 @@ protected:
 // Private data
 //------------------------------------------------------------------------------
 private:
-   void updateOutputList();                        // Update the Output-List from the simulation player list (Background thread)
-   void cleanupInputList();   // Clean-up the Input-List (remove out of date items)
+   void updateOutputList();                             // Update the Output-List from the simulation player list (Background thread)
+   void cleanupInputList();                             // Clean-up the Input-List (remove out of date items)
 
    // Network Model IDs
-   unsigned short netID;                            // Networkd ID
+   unsigned short netID;                                // Networkd ID
    basic::safe_ptr<const basic::String> federationName; // Federation name
    basic::safe_ptr<const basic::String> federateName;   // Federate name
 
-   basic::safe_ptr<Station>    station;           // Our station class
-   basic::safe_ptr<Simulation> simulation;        // Our simulation class
-   TSource          timeline;                 // Source of our timeline
-   unsigned short   iffEventID;               // IFF event ID (as needed)
-   unsigned short   emEventID;                // Emission event ID (as needed)
+   basic::safe_ptr<Station>    station;                 // Our station class
+   basic::safe_ptr<Simulation> simulation;              // Our simulation class
+   TSource          timeline;                           // Source of our timeline
+   unsigned short   iffEventID;                         // IFF event ID (as needed)
+   unsigned short   emEventID;                          // Emission event ID (as needed)
 
    // Network Model mode flags
    bool              inputFlg;         // Network input enabled
@@ -437,10 +437,10 @@ private:
    LCreal            maxEntityRange2;  // Max range squared from ownship   (meters^2)
 
    // Dead Reckoning (DR) parameters by entity kind/domain
-   LCreal            maxTimeDR;        // Maximum DR time                  (seconds)
-   LCreal            maxPositionErr;   // Maximum position error           (meters)
-   LCreal            maxOrientationErr;  // Maximum orientation error      (radians)
-   LCreal            maxAge;           // Maximum age of networked players (seconds)
+   LCreal            maxTimeDR;          // Maximum DR time                  (seconds)
+   LCreal            maxPositionErr;     // Maximum position error           (meters)
+   LCreal            maxOrientationErr;  // Maximum orientation error        (radians)
+   LCreal            maxAge;             // Maximum age of networked players (seconds)
 
 private: // Nib related private
    // input tables
@@ -458,7 +458,7 @@ private: // Nib related private
          id = playerId;
       }
       // NIB IDs  -- Comparisons in this order --
-      unsigned short id;            // Player id
+      unsigned short id;                           // Player id
       basic::safe_ptr<const basic::String> fName;  // Federate name
    };
 
@@ -482,7 +482,8 @@ private:  // Ntm related private
 };
 
 
-} // End simulation namespace
-} // End oe namespace
+}
+}
 
 #endif
+
