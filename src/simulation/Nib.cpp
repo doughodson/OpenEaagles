@@ -533,7 +533,7 @@ bool Nib::isPlayerStateUpdateRequired(const LCreal curExecTime)
          }
       }
 
-      // (4-b) Check landing gear position.  We only send out gear posiiton as
+      // (4-b) Check landing gear position.  We only send out gear position as
       // an part if the gear is not up (pos != 0) or if we've previously been
       // sending the gear position (count > 0).
       {

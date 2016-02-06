@@ -7,7 +7,6 @@
 #include "openeaagles/simulation/IrQueryMsg.h"
 #include "openeaagles/simulation/IrAtmosphere.h"
 #include "openeaagles/simulation/IrSensor.h"
-#include "openeaagles/simulation/AirVehicle.h"
 #include "openeaagles/simulation/Simulation.h"
 #include "openeaagles/basic/functors/Tables.h"
 #include "openeaagles/basic/List.h"

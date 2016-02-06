@@ -1,7 +1,6 @@
 
 #include "openeaagles/simulation/Guns.h"
 
-#include "openeaagles/simulation/AirVehicle.h"
 #include "openeaagles/simulation/Player.h"
 #include "openeaagles/simulation/Simulation.h"
 #include "openeaagles/simulation/DataRecorder.h"
