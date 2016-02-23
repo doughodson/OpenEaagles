@@ -246,7 +246,7 @@ protected:
    virtual bool modeManager();
    virtual bool headingController();
    virtual bool altitudeController();
-   virtual bool velocityContoller();
+   virtual bool velocityController();
 
    virtual bool processModeNavigation();
    virtual bool processModeLoiter();

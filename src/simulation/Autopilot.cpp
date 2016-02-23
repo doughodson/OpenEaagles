@@ -259,7 +259,7 @@ void Autopilot::process(const LCreal dt)
    modeManager();
    headingController();
    altitudeController();
-   velocityContoller();
+   velocityController();
 
    BaseClass::process(dt);
 }
@@ -1010,7 +1010,7 @@ bool Autopilot::altitudeController()
 //------------------------------------------------------------------------------
 // Velocity/throttle controller
 //------------------------------------------------------------------------------
-bool Autopilot::velocityContoller()
+bool Autopilot::velocityController()
 {
    Player* pv = getOwnship();
    if (pv != nullptr) {
