@@ -5,8 +5,8 @@
 #define __oe_simulation_Antenna_H__
 
 #include "openeaagles/simulation/ScanGimbal.h"
-#include "openeaagles/basic/safe_queue.h"
-#include "openeaagles/basic/safe_stack.h"
+#include "openeaagles/base/safe_queue.h"
+#include "openeaagles/base/safe_stack.h"
 
 namespace oe {
    namespace basic {

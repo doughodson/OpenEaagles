@@ -2,8 +2,8 @@
 // Bitmap Font
 //------------------------------------------------------------------------------
 #include "openeaagles/graphics/BitmapFont.h"
-#include "openeaagles/basic/String.h"
-#include "openeaagles/basic/Number.h"
+#include "openeaagles/base/String.h"
+#include "openeaagles/base/Number.h"
 #include <cstdio>
 #include <cmath>
 

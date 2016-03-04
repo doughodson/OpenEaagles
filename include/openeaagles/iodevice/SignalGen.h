@@ -2,7 +2,7 @@
 #ifndef __oe_iodevice_SignalGen_H__
 #define __oe_iodevice_SignalGen_H__
 
-#include "openeaagles/basic/IoAdapter.h"
+#include "openeaagles/base/IoAdapter.h"
 
 namespace oe {
 

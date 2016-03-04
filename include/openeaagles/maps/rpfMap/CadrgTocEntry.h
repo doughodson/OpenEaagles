@@ -29,7 +29,7 @@
 #define __oe_maps_rpf_CadrgTocEntry_H__
 
 #include "openeaagles/maps/rpfMap/CadrgFrameEntry.h"
-#include "openeaagles/basic/Object.h"
+#include "openeaagles/base/Object.h"
 
 namespace oe {
 namespace maps {

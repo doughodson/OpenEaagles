@@ -1,7 +1,7 @@
 
 #include "openeaagles/terrain/factory.h"
 
-#include "openeaagles/basic/Object.h"
+#include "openeaagles/base/Object.h"
 
 #include "openeaagles/terrain/QuadMap.h"
 #include "openeaagles/terrain/ded/DedFile.h"

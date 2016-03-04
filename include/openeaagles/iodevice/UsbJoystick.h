@@ -2,7 +2,7 @@
 #ifndef __oe_iodevice_UsbJoystick_H__
 #define __oe_iodevice_UsbJoystick_H__
 
-#include "openeaagles/basic/IoDevice.h"
+#include "openeaagles/base/IoDevice.h"
 
 namespace oe {
 

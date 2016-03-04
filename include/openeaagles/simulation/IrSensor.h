@@ -10,7 +10,7 @@
 #define __oe_simulation_IrSensor_H__
 
 #include "openeaagles/simulation/IrSystem.h"
-#include "openeaagles/basic/safe_queue.h"
+#include "openeaagles/base/safe_queue.h"
 
 namespace oe {
 

@@ -18,16 +18,16 @@
 #include "openeaagles/simulation/Simulation.h"
 #include "openeaagles/simulation/Station.h"
 
-#include "openeaagles/basic/Decibel.h"
-#include "openeaagles/basic/Identifier.h"
-#include "openeaagles/basic/List.h"
-#include "openeaagles/basic/Number.h"
-#include "openeaagles/basic/Pair.h"
-#include "openeaagles/basic/PairStream.h"
-#include "openeaagles/basic/String.h"
-#include "openeaagles/basic/units/Angles.h"
-#include "openeaagles/basic/units/Distances.h"
-#include "openeaagles/basic/units/Times.h"
+#include "openeaagles/base/Decibel.h"
+#include "openeaagles/base/Identifier.h"
+#include "openeaagles/base/List.h"
+#include "openeaagles/base/Number.h"
+#include "openeaagles/base/Pair.h"
+#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/String.h"
+#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/base/units/Distances.h"
+#include "openeaagles/base/units/Times.h"
 
 #include <cstring>
 #include <cmath>

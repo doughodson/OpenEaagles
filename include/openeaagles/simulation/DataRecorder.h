@@ -50,7 +50,7 @@
 #ifndef __oe_simulation_DataRecorder_H__
 #define __oe_simulation_DataRecorder_H__
 
-#include "openeaagles/basic/Component.h"
+#include "openeaagles/base/Component.h"
 #include "openeaagles/simulation/dataRecorderTokens.h"
 
 namespace oe {

@@ -9,8 +9,8 @@
 #include "openeaagles/maps/rpfMap/TexturePager.h"
 #include "openeaagles/maps/rpfMap/MapDrawer.h"
 #include "openeaagles/graphics/Texture.h"
-#include "openeaagles/basic/Pair.h"
-#include "openeaagles/basic/PairStream.h"
+#include "openeaagles/base/Pair.h"
+#include "openeaagles/base/PairStream.h"
 
 #include <cstring>
 

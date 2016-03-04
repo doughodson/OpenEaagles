@@ -1,7 +1,7 @@
 
 #include "openeaagles/recorder/factory.h"
 
-#include "openeaagles/basic/Object.h"
+#include "openeaagles/base/Object.h"
 
 #include "openeaagles/recorder/DataRecorder.h"
 #include "openeaagles/recorder/FileWriter.h"

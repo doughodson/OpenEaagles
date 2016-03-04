@@ -4,7 +4,7 @@
 #ifndef __oe_instruments_Eadi3DObjects_H__
 #define __oe_instruments_Eadi3DObjects_H__
 
-#include "openeaagles/basic/Object.h"
+#include "openeaagles/base/Object.h"
 #include "openeaagles/instruments/eadi3D/IrisGLCompat.h"
 
 namespace oe {

@@ -4,7 +4,7 @@
 #ifndef __oe_simulation_Station_H__
 #define __oe_simulation_Station_H__
 
-#include "openeaagles/basic/Component.h"
+#include "openeaagles/base/Component.h"
 
 namespace oe {
    namespace basic {

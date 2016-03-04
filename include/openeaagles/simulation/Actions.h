@@ -4,7 +4,7 @@
 #ifndef __oe_simulation_Action_H__
 #define __oe_simulation_Action_H__
 
-#include "openeaagles/basic/ubf/Action.h"
+#include "openeaagles/base/ubf/Action.h"
 
 namespace oe {
 

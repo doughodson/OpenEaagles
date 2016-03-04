@@ -4,7 +4,7 @@
 #ifndef __oe_terrain_DataFile_H__
 #define __oe_terrain_DataFile_H__
 
-#include "openeaagles/basic/Terrain.h"
+#include "openeaagles/base/Terrain.h"
 
 namespace oe {
 namespace terrain {

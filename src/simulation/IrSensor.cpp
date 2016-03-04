@@ -20,9 +20,9 @@
 #include "openeaagles/simulation/OnboardComputer.h"
 #include "openeaagles/simulation/Player.h"
 #include "openeaagles/simulation/Simulation.h"
-#include "openeaagles/basic/Integer.h"
-#include "openeaagles/basic/units/Distances.h"
-#include "openeaagles/basic/units/Angles.h"
+#include "openeaagles/base/Integer.h"
+#include "openeaagles/base/units/Distances.h"
+#include "openeaagles/base/units/Angles.h"
 
 #include <cmath>
 

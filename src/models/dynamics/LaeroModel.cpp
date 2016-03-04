@@ -7,16 +7,16 @@
 #include "openeaagles/simulation/Player.h"
 #include "openeaagles/simulation/AirVehicle.h"
 
-#include "openeaagles/basic/Nav.h"
-#include "openeaagles/basic/String.h"
-#include "openeaagles/basic/Number.h"
-#include "openeaagles/basic/units/Angles.h"
-#include "openeaagles/basic/units/Distances.h"
-#include "openeaagles/basic/units/Times.h"
-#include "openeaagles/basic/osg/Matrix"
-#include "openeaagles/basic/osg/Vec3"
-#include "openeaagles/basic/osg/Quat"
-#include "openeaagles/basic/osg/Math"
+#include "openeaagles/base/Nav.h"
+#include "openeaagles/base/String.h"
+#include "openeaagles/base/Number.h"
+#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/base/units/Distances.h"
+#include "openeaagles/base/units/Times.h"
+#include "openeaagles/base/osg/Matrix"
+#include "openeaagles/base/osg/Vec3"
+#include "openeaagles/base/osg/Quat"
+#include "openeaagles/base/osg/Math"
 
 #include <iostream>
 #include <iomanip>

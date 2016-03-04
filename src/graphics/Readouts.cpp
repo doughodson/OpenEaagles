@@ -2,10 +2,10 @@
 #include "openeaagles/graphics/Readouts.h"
 
 #include "openeaagles/graphics/Display.h"
-#include "openeaagles/basic/Float.h"
-#include "openeaagles/basic/Integer.h"
-#include "openeaagles/basic/PairStream.h"
-#include "openeaagles/basic/Pair.h"
+#include "openeaagles/base/Float.h"
+#include "openeaagles/base/Integer.h"
+#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/Pair.h"
 #include "Reformat.h"
 
 #include <cstdio>

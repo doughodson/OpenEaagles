@@ -6,10 +6,10 @@
 #include "openeaagles/maps/rpfMap/CadrgMap.h"
 #include "openeaagles/maps/rpfMap/TexturePager.h"
 #include "openeaagles/maps/rpfMap/CadrgTocEntry.h"
-#include "openeaagles/basic/PairStream.h"
-#include "openeaagles/basic/Pair.h"
+#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/Pair.h"
 #include "openeaagles/graphics/Display.h"
-#include "openeaagles/basic/units/Angles.h"
+#include "openeaagles/base/units/Angles.h"
 #include "openeaagles/graphics/Texture.h"
 
 namespace oe {

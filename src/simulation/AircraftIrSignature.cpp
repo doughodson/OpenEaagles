@@ -8,10 +8,10 @@
 #include "openeaagles/simulation/IrAtmosphere.h"
 #include "openeaagles/simulation/AirVehicle.h"
 #include "openeaagles/simulation/Simulation.h"
-#include "openeaagles/basic/functors/Tables.h"
-#include "openeaagles/basic/List.h"
-#include "openeaagles/basic/Number.h"
-#include "openeaagles/basic/units/Areas.h"
+#include "openeaagles/base/functors/Tables.h"
+#include "openeaagles/base/List.h"
+#include "openeaagles/base/Number.h"
+#include "openeaagles/base/units/Areas.h"
 
 namespace oe {
 namespace simulation {

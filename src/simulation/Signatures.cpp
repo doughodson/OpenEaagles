@@ -3,13 +3,13 @@
 #include "openeaagles/simulation/Emission.h"
 #include "openeaagles/simulation/Player.h"
 
-#include "openeaagles/basic/Decibel.h"
-#include "openeaagles/basic/Pair.h"
-#include "openeaagles/basic/PairStream.h"
-#include "openeaagles/basic/functors/Tables.h"
-#include "openeaagles/basic/units/Angles.h"
-#include "openeaagles/basic/units/Areas.h"
-#include "openeaagles/basic/units/Distances.h"
+#include "openeaagles/base/Decibel.h"
+#include "openeaagles/base/Pair.h"
+#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/functors/Tables.h"
+#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/base/units/Areas.h"
+#include "openeaagles/base/units/Distances.h"
 
 namespace oe {
 namespace simulation {

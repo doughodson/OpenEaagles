@@ -1,6 +1,6 @@
 #include "openeaagles/simulation/FuelTank.h"
 
-#include "openeaagles/basic/Number.h"
+#include "openeaagles/base/Number.h"
 
 namespace oe {
 namespace simulation {

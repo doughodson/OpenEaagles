@@ -10,11 +10,11 @@
 #include "openeaagles/simulation/Track.h"
 #include "openeaagles/simulation/Weapon.h"
 
-#include "openeaagles/basic/List.h"
-#include "openeaagles/basic/Number.h"
-#include "openeaagles/basic/Pair.h"
-#include "openeaagles/basic/PairStream.h"
-#include "openeaagles/basic/units/Times.h"
+#include "openeaagles/base/List.h"
+#include "openeaagles/base/Number.h"
+#include "openeaagles/base/Pair.h"
+#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/units/Times.h"
 
 #include "openeaagles/simulation/DataRecorder.h"
 #include "openeaagles/simulation/Simulation.h"

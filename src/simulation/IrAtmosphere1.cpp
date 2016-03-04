@@ -8,12 +8,12 @@
 #include "openeaagles/simulation/IrSensor.h"     // FAB
 #include "openeaagles/simulation/Gimbal.h"       // FAB
 #include "openeaagles/simulation/Player.h"       // FAB
-#include "openeaagles/basic/List.h"
-#include "openeaagles/basic/functors/Tables.h"
-#include "openeaagles/basic/Number.h"
+#include "openeaagles/base/List.h"
+#include "openeaagles/base/functors/Tables.h"
+#include "openeaagles/base/Number.h"
 
-#include "openeaagles/basic/Nav.h"
-#include "openeaagles/basic/units/Distances.h"
+#include "openeaagles/base/Nav.h"
+#include "openeaagles/base/units/Distances.h"
 
 namespace oe {
 namespace simulation {

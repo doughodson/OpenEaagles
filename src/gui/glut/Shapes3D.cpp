@@ -3,7 +3,7 @@
 //------------------------------------------------------------------------------
 #include "openeaagles/gui/glut/Shapes3D.h"
 
-#include "openeaagles/basic/Number.h"
+#include "openeaagles/base/Number.h"
 
 #include <GL/glut.h>
 #include <GL/glu.h>

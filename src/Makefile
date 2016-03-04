@@ -3,7 +3,7 @@ include makedefs
 
 # Library      : Requires
 # ------------------------------------------------------------------------
-# basic        : -
+# base         : -
 # graphics     : freeglut, FTGL, freetype
 # dafif        : -
 # dis          : -
@@ -19,7 +19,7 @@ include makedefs
 # simulation   : -
 # terrain      : -
 #
-PROJECTS = basic
+PROJECTS = base
 PROJECTS += graphics instruments
 PROJECTS += dafif
 PROJECTS += iodevice

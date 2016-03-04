@@ -5,11 +5,11 @@
 
 #include "openeaagles/simulation/Player.h"
 #include "openeaagles/simulation/Simulation.h"
-#include "openeaagles/basic/Number.h"
-#include "openeaagles/basic/Pair.h"
-#include "openeaagles/basic/PairStream.h"
-#include "openeaagles/basic/units/Angles.h"
-#include "openeaagles/basic/units/Distances.h"
+#include "openeaagles/base/Number.h"
+#include "openeaagles/base/Pair.h"
+#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/base/units/Distances.h"
 
 #include <cmath>
 

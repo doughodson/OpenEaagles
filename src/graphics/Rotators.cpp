@@ -1,5 +1,5 @@
 #include "openeaagles/graphics/Rotators.h"
-#include "openeaagles/basic/Number.h"
+#include "openeaagles/base/Number.h"
 
 namespace oe {
 namespace graphics {

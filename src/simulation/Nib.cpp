@@ -7,11 +7,11 @@
 #include "openeaagles/simulation/SamVehicles.h"
 #include "openeaagles/simulation/Simulation.h"
 #include "openeaagles/simulation/StoresMgr.h"
-#include "openeaagles/basic/Nav.h"
-#include "openeaagles/basic/Pair.h"
-#include "openeaagles/basic/PairStream.h"
-#include "openeaagles/basic/units/Angles.h"
-#include "openeaagles/basic/units/Distances.h"
+#include "openeaagles/base/Nav.h"
+#include "openeaagles/base/Pair.h"
+#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/base/units/Distances.h"
 
 #include <cmath>
 

@@ -2,13 +2,13 @@
 #include "openeaagles/models/dynamics/RacModel.h"
 
 #include "openeaagles/simulation/Player.h"
-#include "openeaagles/basic/String.h"
-#include "openeaagles/basic/Number.h"
-#include "openeaagles/basic/units/Angles.h"
-#include "openeaagles/basic/units/Distances.h"
-#include "openeaagles/basic/osg/Matrix"
-#include "openeaagles/basic/osg/Vec3"
-#include "openeaagles/basic/osg/Quat"
+#include "openeaagles/base/String.h"
+#include "openeaagles/base/Number.h"
+#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/base/units/Distances.h"
+#include "openeaagles/base/osg/Matrix"
+#include "openeaagles/base/osg/Vec3"
+#include "openeaagles/base/osg/Quat"
 
 #include <cmath>
 

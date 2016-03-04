@@ -4,10 +4,10 @@
 #include "openeaagles/recorder/DataRecordHandle.h"
 
 //#include "openeaagles/simulation/recorderTokens.h"
-#include "openeaagles/basic/units/Times.h"
-#include "openeaagles/basic/String.h"
-#include "openeaagles/basic/units/Angles.h"
-#include "openeaagles/basic/Nav.h"
+#include "openeaagles/base/units/Times.h"
+#include "openeaagles/base/String.h"
+#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/base/Nav.h"
 
 // Disable all deprecation warnings for now.  Until we fix them,
 // they are quite annoying to see over and over again...

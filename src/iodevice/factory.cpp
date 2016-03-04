@@ -1,7 +1,7 @@
 
 #include "openeaagles/iodevice/factory.h"
 
-#include "openeaagles/basic/Object.h"
+#include "openeaagles/base/Object.h"
 
 #include "openeaagles/iodevice/Ai2DiSwitch.h"
 #include "openeaagles/iodevice/AnalogInput.h"

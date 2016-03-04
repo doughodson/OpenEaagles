@@ -8,9 +8,9 @@
 #include "openeaagles/dis/pdu.h"
 
 #include "openeaagles/simulation/Iff.h"
-#include "openeaagles/basic/NetHandler.h"
-#include "openeaagles/basic/Pair.h"
-#include "openeaagles/basic/PairStream.h"
+#include "openeaagles/base/NetHandler.h"
+#include "openeaagles/base/Pair.h"
+#include "openeaagles/base/PairStream.h"
 
 namespace oe {
 namespace network {

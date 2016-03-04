@@ -6,8 +6,8 @@
 
 #include "openeaagles/simulation/ScanGimbal.h"
 #include "openeaagles/simulation/Tdb.h"
-#include "openeaagles/basic/safe_queue.h"
-#include "openeaagles/basic/safe_stack.h"
+#include "openeaagles/base/safe_queue.h"
+#include "openeaagles/base/safe_stack.h"
 
 //#define USE_TDBIR
 

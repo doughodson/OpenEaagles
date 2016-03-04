@@ -1,5 +1,5 @@
 #include "openeaagles/instruments/eadi3D/IrisGLCompat.h"
-#include "openeaagles/basic/units/Angles.h"
+#include "openeaagles/base/units/Angles.h"
 #include <GL/gl.h>
 #include <cmath>
 

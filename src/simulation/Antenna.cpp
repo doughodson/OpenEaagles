@@ -5,15 +5,15 @@
 #include "openeaagles/simulation/RfSystem.h"
 #include "openeaagles/simulation/Tdb.h"
 
-#include "openeaagles/basic/Decibel.h"
-#include "openeaagles/basic/functors/Functions.h"
-#include "openeaagles/basic/Integer.h"
-#include "openeaagles/basic/List.h"
-#include "openeaagles/basic/PairStream.h"
-#include "openeaagles/basic/Pair.h"
-#include "openeaagles/basic/units/Angles.h"
-#include "openeaagles/basic/units/Distances.h"
-#include "openeaagles/basic/units/Powers.h"
+#include "openeaagles/base/Decibel.h"
+#include "openeaagles/base/functors/Functions.h"
+#include "openeaagles/base/Integer.h"
+#include "openeaagles/base/List.h"
+#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/Pair.h"
+#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/base/units/Distances.h"
+#include "openeaagles/base/units/Powers.h"
 
 #include <cmath>
 

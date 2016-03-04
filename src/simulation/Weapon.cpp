@@ -14,15 +14,15 @@
 #include "openeaagles/simulation/Track.h"
 #include "openeaagles/simulation/TrackManager.h"
 
-#include "openeaagles/basic/List.h"
-#include "openeaagles/basic/Nav.h"
-#include "openeaagles/basic/PairStream.h"
-#include "openeaagles/basic/Pair.h"
-#include "openeaagles/basic/String.h"
-#include "openeaagles/basic/osg/Matrix"
-#include "openeaagles/basic/units/Angles.h"
-#include "openeaagles/basic/units/Distances.h"
-#include "openeaagles/basic/units/Times.h"
+#include "openeaagles/base/List.h"
+#include "openeaagles/base/Nav.h"
+#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/Pair.h"
+#include "openeaagles/base/String.h"
+#include "openeaagles/base/osg/Matrix"
+#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/base/units/Distances.h"
+#include "openeaagles/base/units/Times.h"
 
 // Disable all deprecation warnings for now.  Until we fix them,
 // they are quite annoying to see over and over again...

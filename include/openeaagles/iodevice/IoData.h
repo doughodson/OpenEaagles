@@ -2,7 +2,7 @@
 #ifndef __oe_iodevice_IoData_H__
 #define __oe_iodevice_IoData_H__
 
-#include "openeaagles/basic/IoData.h"
+#include "openeaagles/base/IoData.h"
 
 namespace oe {
 

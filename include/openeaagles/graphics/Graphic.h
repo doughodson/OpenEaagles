@@ -2,11 +2,11 @@
 #ifndef __oe_graphics_Graphic_H__
 #define __oe_graphics_Graphic_H__
 
-#include "openeaagles/basic/Component.h"
-#include "openeaagles/basic/osg/Vec2"
-#include "openeaagles/basic/osg/Vec3"
-#include "openeaagles/basic/osg/Vec4"
-#include "openeaagles/basic/osg/Matrix"
+#include "openeaagles/base/Component.h"
+#include "openeaagles/base/osg/Vec2"
+#include "openeaagles/base/osg/Vec3"
+#include "openeaagles/base/osg/Vec4"
+#include "openeaagles/base/osg/Matrix"
 #include <GL/gl.h>
 
 namespace oe {

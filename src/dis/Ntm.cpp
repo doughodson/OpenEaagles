@@ -5,8 +5,8 @@
 #include "openeaagles/dis/Ntm.h"
 #include "openeaagles/dis/Nib.h"
 
-#include "openeaagles/basic/Pair.h"
-#include "openeaagles/basic/PairStream.h"
+#include "openeaagles/base/Pair.h"
+#include "openeaagles/base/PairStream.h"
 
 namespace oe {
 namespace network {

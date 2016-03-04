@@ -1,6 +1,6 @@
 #include "openeaagles/instruments/adi/GhostHorizon.h"
-#include "openeaagles/basic/functors/Tables.h"
-#include "openeaagles/basic/Rgba.h"
+#include "openeaagles/base/functors/Tables.h"
+#include "openeaagles/base/Rgba.h"
 #include "openeaagles/graphics/Display.h"
 
 namespace oe {

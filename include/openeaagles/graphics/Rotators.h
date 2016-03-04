@@ -5,7 +5,7 @@
 #define __oe_graphics_Rotators_H__
 
 #include "Graphic.h"
-#include "openeaagles/basic/units/Angles.h"
+#include "openeaagles/base/units/Angles.h"
 
 namespace oe {
 namespace graphics {

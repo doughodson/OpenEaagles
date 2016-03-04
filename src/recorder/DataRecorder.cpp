@@ -16,7 +16,7 @@
 #include "openeaagles/simulation/Nib.h"
 #include "openeaagles/simulation/Player.h"
 #include "openeaagles/simulation/Simulation.h"
-#include "openeaagles/basic/String.h"
+#include "openeaagles/base/String.h"
 
 #include <cstdio>
 

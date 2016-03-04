@@ -1,10 +1,10 @@
 #include "openeaagles/instruments/buttons/SolenoidSwitch.h"
 
 #include "openeaagles/graphics/Display.h"
-#include "openeaagles/basic/Number.h"
-#include "openeaagles/basic/Pair.h"
-#include "openeaagles/basic/PairStream.h"
-#include "openeaagles/basic/Timers.h"
+#include "openeaagles/base/Number.h"
+#include "openeaagles/base/Pair.h"
+#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/Timers.h"
 
 namespace oe {
 namespace instruments {

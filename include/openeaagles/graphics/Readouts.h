@@ -7,8 +7,8 @@
 #define __oe_graphics_Readouts_H__
 
 #include "Field.h"
-#include "openeaagles/basic/Number.h"
-#include "openeaagles/basic/Integer.h"
+#include "openeaagles/base/Number.h"
+#include "openeaagles/base/Integer.h"
 
 namespace oe {
    namespace basic { class Float; class Integer; }

@@ -4,7 +4,7 @@
 #ifndef __oe_graphics_Clip3D_H__
 #define __oe_graphics_Clip3D_H__
 
-#include "openeaagles/basic/Object.h"
+#include "openeaagles/base/Object.h"
 #include "Polygon.h"
 
 namespace oe {

@@ -5,7 +5,7 @@
 #include "openeaagles/graphics/Scanline.h"
 #include "openeaagles/graphics/Clip3D.h"
 #include "openeaagles/graphics/Polygon.h"
-#include "openeaagles/basic/units/Angles.h"
+#include "openeaagles/base/units/Angles.h"
 
 namespace oe {
 namespace graphics {

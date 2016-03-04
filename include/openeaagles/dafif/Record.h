@@ -112,7 +112,7 @@
 #ifndef __oe_dafif_Record_H__
 #define __oe_dafif_Record_H__
 
-#include "openeaagles/basic/String.h"
+#include "openeaagles/base/String.h"
 #include "dafifc.h"
 
 namespace oe {

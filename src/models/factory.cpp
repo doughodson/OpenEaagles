@@ -1,7 +1,7 @@
 
 #include "openeaagles/models/factory.h"
 
-#include "openeaagles/basic/Object.h"
+#include "openeaagles/base/Object.h"
 
 // dynamics models
 #include "openeaagles/models/dynamics/JSBSimModel.h"

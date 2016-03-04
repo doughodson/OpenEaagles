@@ -5,14 +5,14 @@
 #include "openeaagles/graphics/Display.h"
 #include "openeaagles/graphics/ColorRotary.h"
 #include "openeaagles/graphics/Material.h"
-#include "openeaagles/basic/String.h"
-#include "openeaagles/basic/Transforms.h"
-#include "openeaagles/basic/Pair.h"
-#include "openeaagles/basic/Rgb.h"
-#include "openeaagles/basic/PairStream.h"
-#include "openeaagles/basic/Number.h"
-#include "openeaagles/basic/Integer.h"
-#include "openeaagles/basic/Float.h"
+#include "openeaagles/base/String.h"
+#include "openeaagles/base/Transforms.h"
+#include "openeaagles/base/Pair.h"
+#include "openeaagles/base/Rgb.h"
+#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/Number.h"
+#include "openeaagles/base/Integer.h"
+#include "openeaagles/base/Float.h"
 
 namespace oe {
 namespace graphics {

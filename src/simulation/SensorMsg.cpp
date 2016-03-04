@@ -2,7 +2,7 @@
 
 #include "openeaagles/simulation/Gimbal.h"
 #include "openeaagles/simulation/Player.h"
-#include "openeaagles/basic/units/Distances.h"
+#include "openeaagles/base/units/Distances.h"
 
 namespace oe {
 namespace simulation {

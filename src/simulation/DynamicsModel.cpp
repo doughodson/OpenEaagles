@@ -1,7 +1,7 @@
 
 #include "openeaagles/simulation/DynamicsModel.h"
 
-#include "openeaagles/basic/units/Angles.h"
+#include "openeaagles/base/units/Angles.h"
 
 namespace oe {
 namespace simulation {

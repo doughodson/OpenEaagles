@@ -1,9 +1,9 @@
 // Polygon
 
 #include "openeaagles/graphics/Polygon.h"
-#include "openeaagles/basic/Number.h"
+#include "openeaagles/base/Number.h"
 #include "openeaagles/graphics/ColorGradient.h"
-#include "openeaagles/basic/PairStream.h"
+#include "openeaagles/base/PairStream.h"
 #include <GL/glu.h>
 
 namespace oe {

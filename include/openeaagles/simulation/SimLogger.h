@@ -19,8 +19,8 @@
 #ifndef __oe_simulation_SimLogger_H__
 #define __oe_simulation_SimLogger_H__
 
-#include "openeaagles/basic/Logger.h"
-#include "openeaagles/basic/safe_queue.h"
+#include "openeaagles/base/Logger.h"
+#include "openeaagles/base/safe_queue.h"
 
 namespace oe {
    namespace basic {

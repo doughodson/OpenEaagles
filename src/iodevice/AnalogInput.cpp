@@ -2,11 +2,11 @@
 
 #include "openeaagles/iodevice/AnalogInput.h"
 
-#include "openeaagles/basic/IoData.h"
-#include "openeaagles/basic/IoDevice.h"
-#include "openeaagles/basic/IoHandler.h"
-#include "openeaagles/basic/Number.h"
-#include "openeaagles/basic/functors/Tables.h"
+#include "openeaagles/base/IoData.h"
+#include "openeaagles/base/IoDevice.h"
+#include "openeaagles/base/IoHandler.h"
+#include "openeaagles/base/Number.h"
+#include "openeaagles/base/functors/Tables.h"
 
 namespace oe {
 namespace iodevice {

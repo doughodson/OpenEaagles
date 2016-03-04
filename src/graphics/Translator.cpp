@@ -2,7 +2,7 @@
 // Class: Translator
 //------------------------------------------------------------------------------
 #include "openeaagles/graphics/Translator.h"
-#include "openeaagles/basic/Number.h"
+#include "openeaagles/base/Number.h"
 
 namespace oe {
 namespace graphics {

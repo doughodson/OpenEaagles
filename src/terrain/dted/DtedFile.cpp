@@ -34,7 +34,7 @@
 //==============================================================================
 
 #include "openeaagles/terrain/dted/DtedFile.h"
-#include "openeaagles/basic/Number.h"
+#include "openeaagles/base/Number.h"
 #include <fstream>
 #include <cstdio>
 #include <cstring>

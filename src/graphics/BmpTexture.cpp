@@ -1,9 +1,9 @@
 
 #include "openeaagles/graphics/BmpTexture.h"
 #include "openeaagles/graphics/Display.h"
-#include "openeaagles/basic/Number.h"
-#include "openeaagles/basic/Identifier.h"
-#include "openeaagles/basic/String.h"
+#include "openeaagles/base/Number.h"
+#include "openeaagles/base/Identifier.h"
+#include "openeaagles/base/String.h"
 
 #include <cstdio>
 

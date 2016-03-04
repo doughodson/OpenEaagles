@@ -2,7 +2,7 @@
 
 #include "openeaagles/iodevice/IoData.h"
 
-#include "openeaagles/basic/Number.h"
+#include "openeaagles/base/Number.h"
 
 namespace oe {
 namespace iodevice {

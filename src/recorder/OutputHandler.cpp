@@ -3,8 +3,8 @@
 #include "openeaagles/recorder/DataRecordHandle.h"
 #include "openeaagles/recorder/protobuf/DataRecord.pb.h"
 
-#include "openeaagles/basic/Pair.h"
-#include "openeaagles/basic/PairStream.h"
+#include "openeaagles/base/Pair.h"
+#include "openeaagles/base/PairStream.h"
 
 namespace oe {
 namespace recorder {

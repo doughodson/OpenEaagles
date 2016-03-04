@@ -20,8 +20,8 @@
 #include "openeaagles/simulation/TrackManager.h"
 #include "openeaagles/simulation/Weapon.h"
 
-#include "openeaagles/basic/units/Angles.h"
-#include "openeaagles/basic/units/Times.h"
+#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/base/units/Times.h"
 #include <string>
 #include <sstream>
 

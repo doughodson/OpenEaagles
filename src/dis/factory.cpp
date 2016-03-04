@@ -1,7 +1,7 @@
 
 #include "openeaagles/dis/factory.h"
 
-#include "openeaagles/basic/Object.h"
+#include "openeaagles/base/Object.h"
 
 #include "openeaagles/dis/NetIO.h"
 #include "openeaagles/dis/Ntm.h"

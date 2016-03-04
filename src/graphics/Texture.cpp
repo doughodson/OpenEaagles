@@ -1,6 +1,6 @@
 #include "openeaagles/graphics/Texture.h"
-#include "openeaagles/basic/Number.h"
-#include "openeaagles/basic/Identifier.h"
+#include "openeaagles/base/Number.h"
+#include "openeaagles/base/Identifier.h"
 
 namespace oe {
 namespace graphics {

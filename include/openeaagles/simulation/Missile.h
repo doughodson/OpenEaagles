@@ -5,7 +5,7 @@
 #define __oe_simulation_Missile_H__
 
 #include "openeaagles/simulation/Weapon.h"
-#include "openeaagles/basic/units/Angles.h"
+#include "openeaagles/base/units/Angles.h"
 
 namespace oe {
    namespace basic { class Number; }

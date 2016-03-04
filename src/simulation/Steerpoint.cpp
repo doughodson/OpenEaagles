@@ -7,17 +7,17 @@
 #include "openeaagles/simulation/Navigation.h"
 #include "openeaagles/simulation/Simulation.h"
 
-#include "openeaagles/basic/Identifier.h"
-#include "openeaagles/basic/LatLon.h"
-#include "openeaagles/basic/List.h"
-#include "openeaagles/basic/Nav.h"
-#include "openeaagles/basic/Pair.h"
-#include "openeaagles/basic/PairStream.h"
-#include "openeaagles/basic/String.h"
-#include "openeaagles/basic/Terrain.h"
-#include "openeaagles/basic/units/Angles.h"
-#include "openeaagles/basic/units/Distances.h"
-#include "openeaagles/basic/units/Times.h"
+#include "openeaagles/base/Identifier.h"
+#include "openeaagles/base/LatLon.h"
+#include "openeaagles/base/List.h"
+#include "openeaagles/base/Nav.h"
+#include "openeaagles/base/Pair.h"
+#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/String.h"
+#include "openeaagles/base/Terrain.h"
+#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/base/units/Distances.h"
+#include "openeaagles/base/units/Times.h"
 
 namespace oe {
 namespace simulation {

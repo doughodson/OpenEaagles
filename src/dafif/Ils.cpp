@@ -1,7 +1,7 @@
 #include "openeaagles/dafif/Ils.h"
-#include "openeaagles/basic/Nav.h"
-#include "openeaagles/basic/units/Angles.h"
-#include "openeaagles/basic/units/Distances.h"
+#include "openeaagles/base/Nav.h"
+#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/base/units/Distances.h"
 #include <iostream>
 
 namespace oe {

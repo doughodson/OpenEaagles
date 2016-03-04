@@ -102,20 +102,20 @@ solution "oe"
    -- libraries
    --
 
-   -- basic library
-   project "basic"
+   -- base library
+   project "base"
       files {
-         "../../include/openeaagles/basic/**.h",
-         "../../include/openeaagles/basic/**.inl",
-         "../../include/openeaagles/basic/**.epp",
-         "../../include/openeaagles/basic/osg/*",
-         "../../src/basic/**.cpp"
+         "../../include/openeaagles/base/**.h",
+         "../../include/openeaagles/base/**.inl",
+         "../../include/openeaagles/base/**.epp",
+         "../../include/openeaagles/base/osg/*",
+         "../../src/base/**.cpp"
       }
       excludes {
-         "../../src/basic/osg/Matrix_implementation.cpp",
-         "../../src/basic/linux/**.*"
+         "../../src/base/osg/Matrix_implementation.cpp",
+         "../../src/base/linux/**.*"
       }
-      targetname "basic"
+      targetname "base"
 
    -- OpenGL-based graphics library
    project "graphics"

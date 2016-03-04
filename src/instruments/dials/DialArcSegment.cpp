@@ -1,5 +1,5 @@
 #include "openeaagles/instruments/dials/DialArcSegment.h"
-#include "openeaagles/basic/Number.h"
+#include "openeaagles/base/Number.h"
 #include <GL/glu.h>
 
 namespace oe {

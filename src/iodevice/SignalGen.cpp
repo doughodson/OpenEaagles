@@ -2,11 +2,11 @@
 
 #include "openeaagles/iodevice/SignalGen.h"
 
-#include "openeaagles/basic/IoData.h"
-#include "openeaagles/basic/IoDevice.h"
-#include "openeaagles/basic/String.h"
-#include "openeaagles/basic/units/Angles.h"
-#include "openeaagles/basic/units/Frequencies.h"
+#include "openeaagles/base/IoData.h"
+#include "openeaagles/base/IoDevice.h"
+#include "openeaagles/base/String.h"
+#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/base/units/Frequencies.h"
 
 #include <cmath>
 

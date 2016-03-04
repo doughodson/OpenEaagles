@@ -10,14 +10,14 @@
 #include "openeaagles/simulation/Player.h"
 #include "openeaagles/simulation/Simulation.h"
 
-#include "openeaagles/basic/Color.h"
-#include "openeaagles/basic/IoHandler.h"
-#include "openeaagles/basic/Number.h"
-#include "openeaagles/basic/Pair.h"
-#include "openeaagles/basic/PairStream.h"
-#include "openeaagles/basic/Thread.h"
-#include "openeaagles/basic/Timers.h"
-#include "openeaagles/basic/units/Times.h"
+#include "openeaagles/base/Color.h"
+#include "openeaagles/base/IoHandler.h"
+#include "openeaagles/base/Number.h"
+#include "openeaagles/base/Pair.h"
+#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/Thread.h"
+#include "openeaagles/base/Timers.h"
+#include "openeaagles/base/units/Times.h"
 
 #include <ctime>
 

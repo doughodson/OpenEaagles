@@ -1,7 +1,7 @@
 #include "openeaagles/simulation/SpaceVehicle.h"
 #include "openeaagles/simulation/dynamics/SpaceDynamicsModel.h"
 
-#include "openeaagles/basic/units/Distances.h"
+#include "openeaagles/base/units/Distances.h"
 
 namespace oe {
 namespace simulation {

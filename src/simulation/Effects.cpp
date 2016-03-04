@@ -1,12 +1,12 @@
 
 #include "openeaagles/simulation/Effects.h"
 
-#include "openeaagles/basic/List.h"
-#include "openeaagles/basic/Identifier.h"
-#include "openeaagles/basic/osg/Vec2"
-#include "openeaagles/basic/osg/Matrix"
-#include "openeaagles/basic/units/Angles.h"
-#include "openeaagles/basic/units/Distances.h"
+#include "openeaagles/base/List.h"
+#include "openeaagles/base/Identifier.h"
+#include "openeaagles/base/osg/Vec2"
+#include "openeaagles/base/osg/Matrix"
+#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/base/units/Distances.h"
 
 namespace oe {
 namespace simulation {

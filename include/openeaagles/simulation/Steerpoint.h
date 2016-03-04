@@ -4,8 +4,8 @@
 #ifndef __oe_simulation_Steerpoint_H__
 #define __oe_simulation_Steerpoint_H__
 
-#include "openeaagles/basic/Component.h"
-#include "openeaagles/basic/osg/Vec3"
+#include "openeaagles/base/Component.h"
+#include "openeaagles/base/osg/Vec3"
 
 namespace oe {
    namespace basic {

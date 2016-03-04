@@ -7,11 +7,11 @@
 #include "openeaagles/simulation/Emission.h"
 #include "openeaagles/simulation/TrackManager.h"
 
-#include "openeaagles/basic/Integer.h"
-#include "openeaagles/basic/Pair.h"
-#include "openeaagles/basic/PairStream.h"
-#include "openeaagles/basic/units/Angles.h"
-#include "openeaagles/basic/units/Distances.h"
+#include "openeaagles/base/Integer.h"
+#include "openeaagles/base/Pair.h"
+#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/base/units/Distances.h"
 #include "openeaagles/simulation/Player.h"
 #include "openeaagles/simulation/Simulation.h"
 

@@ -1,7 +1,7 @@
 
 #include "openeaagles/otw/factory.h"
 
-#include "openeaagles/basic/Object.h"
+#include "openeaagles/base/Object.h"
 
 #include "openeaagles/otw/OtwCigiCl.h"
 #include "openeaagles/otw/OtwPC.h"

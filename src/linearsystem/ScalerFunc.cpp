@@ -1,7 +1,7 @@
 
 #include "openeaagles/linearsystem/ScalerFunc.h"
-#include "openeaagles/basic/Number.h"
-#include "openeaagles/basic/units/Frequencies.h"
+#include "openeaagles/base/Number.h"
+#include "openeaagles/base/units/Frequencies.h"
 
 namespace oe {
 namespace linearsystem {

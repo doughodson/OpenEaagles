@@ -6,8 +6,8 @@
 #include "openeaagles/simulation/Player.h"
 #include "openeaagles/simulation/Simulation.h"
 
-#include "openeaagles/basic/Number.h"
-#include "openeaagles/basic/PairStream.h"
+#include "openeaagles/base/Number.h"
+#include "openeaagles/base/PairStream.h"
 
 namespace oe {
 namespace simulation {

@@ -6,13 +6,13 @@
 #include "openeaagles/simulation/Player.h"
 #include "openeaagles/simulation/Simulation.h"
 
-#include "openeaagles/basic/PairStream.h"
-#include "openeaagles/basic/Identifier.h"
-#include "openeaagles/basic/Number.h"
-#include "openeaagles/basic/String.h"
-#include "openeaagles/basic/Decibel.h"
-#include "openeaagles/basic/units/Frequencies.h"
-#include "openeaagles/basic/units/Powers.h"
+#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/Identifier.h"
+#include "openeaagles/base/Number.h"
+#include "openeaagles/base/String.h"
+#include "openeaagles/base/Decibel.h"
+#include "openeaagles/base/units/Frequencies.h"
+#include "openeaagles/base/units/Powers.h"
 
 namespace oe {
 namespace simulation {

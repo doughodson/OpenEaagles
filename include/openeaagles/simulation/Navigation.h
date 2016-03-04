@@ -5,7 +5,7 @@
 #define __oe_simulation_Navigation_H__
 
 #include "openeaagles/simulation/System.h"
-#include "openeaagles/basic/osg/Vec2"
+#include "openeaagles/base/osg/Vec2"
 
 namespace oe {
 

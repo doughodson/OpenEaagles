@@ -1,6 +1,6 @@
 
 #include "openeaagles/instruments/eadi3D/Eadi3DObjects.h"
-#include "openeaagles/basic/units/Angles.h"
+#include "openeaagles/base/units/Angles.h"
 
 #include <cmath>
 #include <GL/gl.h>

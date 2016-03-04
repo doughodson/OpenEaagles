@@ -1,8 +1,8 @@
 // Shapes
 
 #include "openeaagles/graphics/Shapes.h"
-#include "openeaagles/basic/Number.h"
-#include "openeaagles/basic/PairStream.h"
+#include "openeaagles/base/Number.h"
+#include "openeaagles/base/PairStream.h"
 #include "openeaagles/graphics/ColorGradient.h"
 #include <GL/glu.h>
 

@@ -5,10 +5,10 @@
 #include "openeaagles/simulation/Player.h"
 #include "openeaagles/simulation/Missile.h"
 #include "openeaagles/simulation/Guns.h"
-#include "openeaagles/basic/List.h"
-#include "openeaagles/basic/PairStream.h"
-#include "openeaagles/basic/osg/Matrix"
-#include "openeaagles/basic/units/Angles.h"
+#include "openeaagles/base/List.h"
+#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/osg/Matrix"
+#include "openeaagles/base/units/Angles.h"
 
 #include <cmath>
 

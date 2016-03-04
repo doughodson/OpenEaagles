@@ -5,7 +5,7 @@
 #define __oe_graphics_Page_H__
 
 #include "Graphic.h"
-#include "openeaagles/basic/Identifier.h"
+#include "openeaagles/base/Identifier.h"
 
 namespace oe {
 namespace graphics {

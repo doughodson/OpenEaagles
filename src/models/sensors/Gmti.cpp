@@ -6,13 +6,13 @@
 #include "openeaagles/simulation/Player.h"
 #include "openeaagles/simulation/Simulation.h"
 #include "openeaagles/simulation/TrackManager.h"
-#include "openeaagles/basic/Integer.h"
-#include "openeaagles/basic/Pair.h"
-#include "openeaagles/basic/PairStream.h"
-#include "openeaagles/basic/units/Angles.h"
-#include "openeaagles/basic/units/Powers.h"
-#include "openeaagles/basic/units/Times.h"
-#include "openeaagles/basic/units/Frequencies.h"
+#include "openeaagles/base/Integer.h"
+#include "openeaagles/base/Pair.h"
+#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/base/units/Powers.h"
+#include "openeaagles/base/units/Times.h"
+#include "openeaagles/base/units/Frequencies.h"
 
 #include <cmath>
 

@@ -7,7 +7,7 @@
 #ifndef __oe_graphics_ColorGradient_H__
 #define __oe_graphics_ColorGradient_H__
 
-#include "openeaagles/basic/Color.h"
+#include "openeaagles/base/Color.h"
 
 namespace oe {
 

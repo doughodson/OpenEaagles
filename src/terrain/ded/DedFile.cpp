@@ -6,7 +6,7 @@
 #include <cstring>
 
 #include "openeaagles/terrain/ded/DedFile.h"
-#include "openeaagles/basic/NetHandler.h"   // for byte-swapping only
+#include "openeaagles/base/NetHandler.h"   // for byte-swapping only
 
 namespace oe {
 namespace terrain {

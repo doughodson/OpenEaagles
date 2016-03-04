@@ -5,8 +5,8 @@
 #include "openeaagles/simulation/Track.h"
 #include "openeaagles/simulation/TrackManager.h"
 
-#include "openeaagles/basic/PairStream.h"
-#include "openeaagles/basic/Pair.h"
+#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/Pair.h"
 
 namespace oe {
 namespace simulation {

@@ -1,7 +1,7 @@
 
 #include "openeaagles/simulation/factory.h"
 
-#include "openeaagles/basic/Object.h"
+#include "openeaagles/base/Object.h"
 
 #include "openeaagles/simulation/Aam.h"
 #include "openeaagles/simulation/Actions.h"

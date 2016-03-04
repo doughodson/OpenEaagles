@@ -11,8 +11,8 @@
 #include "openeaagles/simulation/Jammer.h"
 #include "openeaagles/simulation/Radar.h"
 #include "openeaagles/simulation/Simulation.h"
-#include "openeaagles/basic/Pair.h"
-#include "openeaagles/basic/PairStream.h"
+#include "openeaagles/base/Pair.h"
+#include "openeaagles/base/PairStream.h"
 
 namespace oe {
 namespace network {

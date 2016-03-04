@@ -1,7 +1,7 @@
 
 #include "openeaagles/recorder/PrintHandler.h"
-#include "openeaagles/basic/String.h"
-#include "openeaagles/basic/Number.h"
+#include "openeaagles/base/String.h"
+#include "openeaagles/base/Number.h"
 #include <cstring>
 
 // Disable all deprecation warnings for now.  Until we fix them,

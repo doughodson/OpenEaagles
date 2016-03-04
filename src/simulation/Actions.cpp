@@ -8,10 +8,10 @@
 #include "openeaagles/simulation/Simulation.h"
 #include "openeaagles/simulation/Steerpoint.h"
 #include "openeaagles/simulation/StoresMgr.h"
-#include "openeaagles/basic/Nav.h"
-#include "openeaagles/basic/Number.h"
-#include "openeaagles/basic/LatLon.h"
-#include "openeaagles/basic/units/Distances.h"
+#include "openeaagles/base/Nav.h"
+#include "openeaagles/base/Number.h"
+#include "openeaagles/base/LatLon.h"
+#include "openeaagles/base/units/Distances.h"
 
 namespace oe {
 namespace simulation {

@@ -3,10 +3,10 @@
 #include "openeaagles/recorder/protobuf/DataRecord.pb.h"
 #include "openeaagles/recorder/DataRecordHandle.h"
 
-#include "openeaagles/basic/units/Times.h"
-#include "openeaagles/basic/String.h"
-#include "openeaagles/basic/Float.h"
-#include "openeaagles/basic/Integer.h"
+#include "openeaagles/base/units/Times.h"
+#include "openeaagles/base/String.h"
+#include "openeaagles/base/Float.h"
+#include "openeaagles/base/Integer.h"
 
 #include "google/protobuf/descriptor.h"
 #include "google/protobuf/message.h"

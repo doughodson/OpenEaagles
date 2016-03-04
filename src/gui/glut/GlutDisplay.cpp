@@ -4,11 +4,11 @@
 
 #include "openeaagles/gui/glut/GlutDisplay.h"
 
-#include "openeaagles/basic/Color.h"
-#include "openeaagles/basic/Number.h"
-#include "openeaagles/basic/String.h"
-#include "openeaagles/basic/Pair.h"
-#include "openeaagles/basic/PairStream.h"
+#include "openeaagles/base/Color.h"
+#include "openeaagles/base/Number.h"
+#include "openeaagles/base/String.h"
+#include "openeaagles/base/Pair.h"
+#include "openeaagles/base/PairStream.h"
 
 #include <cstdlib>
 

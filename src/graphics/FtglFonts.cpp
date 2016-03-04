@@ -1,8 +1,8 @@
 #include "openeaagles/graphics/FtglFonts.h"
 #include "openeaagles/graphics/Graphic.h"
-#include "openeaagles/basic/Number.h"
-#include "openeaagles/basic/String.h"
-#include "openeaagles/basic/Color.h"
+#include "openeaagles/base/Number.h"
+#include "openeaagles/base/String.h"
+#include "openeaagles/base/Color.h"
 
 #include <cstdlib>
 

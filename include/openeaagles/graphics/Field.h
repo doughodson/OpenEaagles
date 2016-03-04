@@ -5,7 +5,7 @@
 #define __oe_graphics_Field_H__
 
 #include "Graphic.h"
-#include "openeaagles/basic/String.h"
+#include "openeaagles/base/String.h"
 
 namespace oe {
 

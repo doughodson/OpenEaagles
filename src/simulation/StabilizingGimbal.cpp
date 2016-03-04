@@ -9,15 +9,15 @@
 #include "openeaagles/simulation/Player.h"
 #include "openeaagles/simulation/Simulation.h"
 
-#include "openeaagles/basic/PairStream.h"
-#include "openeaagles/basic/Pair.h"
-#include "openeaagles/basic/List.h"
-#include "openeaagles/basic/functors/Tables.h"
-#include "openeaagles/basic/Integer.h"
-#include "openeaagles/basic/Decibel.h"
-#include "openeaagles/basic/units/Angles.h"
-#include "openeaagles/basic/units/Powers.h"
-#include "openeaagles/basic/osg/Vec3"
+#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/Pair.h"
+#include "openeaagles/base/List.h"
+#include "openeaagles/base/functors/Tables.h"
+#include "openeaagles/base/Integer.h"
+#include "openeaagles/base/Decibel.h"
+#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/base/units/Powers.h"
+#include "openeaagles/base/osg/Vec3"
 
 namespace oe {
 namespace simulation {

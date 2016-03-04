@@ -13,7 +13,7 @@
 #ifndef __oe_maps_rpf_CadrgClut_H__
 #define __oe_maps_rpf_CadrgClut_H__
 
-#include "openeaagles/basic/Object.h"
+#include "openeaagles/base/Object.h"
 
 namespace oe {
 namespace maps {

@@ -4,7 +4,7 @@
 #ifndef __oe_graphics_Image_H__
 #define __oe_graphics_Image_H__
 
-#include "openeaagles/basic/Object.h"
+#include "openeaagles/base/Object.h"
 #include <GL/gl.h>
 
 namespace oe {

@@ -1,11 +1,11 @@
 #include "openeaagles/simulation/GroundVehicle.h"
 
-#include "openeaagles/basic/List.h"
-#include "openeaagles/basic/PairStream.h"
-#include "openeaagles/basic/osg/Matrix"
-#include "openeaagles/basic/units/Angles.h"
-#include "openeaagles/basic/units/Distances.h"
-#include "openeaagles/basic/units/Times.h"
+#include "openeaagles/base/List.h"
+#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/osg/Matrix"
+#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/base/units/Distances.h"
+#include "openeaagles/base/units/Times.h"
 
 #include <cmath>
 

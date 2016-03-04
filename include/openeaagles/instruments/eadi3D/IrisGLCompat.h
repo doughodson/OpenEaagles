@@ -4,7 +4,7 @@
 #ifndef __oe_instruments_IrisGLCompat_H__
 #define __oe_instruments_IrisGLCompat_H__
 
-#include "openeaagles/basic/Object.h"
+#include "openeaagles/base/Object.h"
 
 namespace oe {
 namespace instruments {

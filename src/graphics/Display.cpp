@@ -7,13 +7,13 @@
 #include "openeaagles/graphics/Image.h"
 #include "openeaagles/graphics/Texture.h"
 #include "openeaagles/graphics/Material.h"
-#include "openeaagles/basic/Color.h"
-#include "openeaagles/basic/Rgba.h"
-#include "openeaagles/basic/Hsva.h"
-#include "openeaagles/basic/Number.h"
-#include "openeaagles/basic/Pair.h"
-#include "openeaagles/basic/Identifier.h"
-#include "openeaagles/basic/PairStream.h"
+#include "openeaagles/base/Color.h"
+#include "openeaagles/base/Rgba.h"
+#include "openeaagles/base/Hsva.h"
+#include "openeaagles/base/Number.h"
+#include "openeaagles/base/Pair.h"
+#include "openeaagles/base/Identifier.h"
+#include "openeaagles/base/PairStream.h"
 
 #include <cstdio>
 #include <cstring>

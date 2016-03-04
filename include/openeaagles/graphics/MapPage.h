@@ -5,7 +5,7 @@
 #define __oe_graphics_MapPage_H__
 
 #include "openeaagles/graphics/MfdPage.h"
-#include "openeaagles/basic/units/Angles.h"
+#include "openeaagles/base/units/Angles.h"
 
 #include <cmath>
 

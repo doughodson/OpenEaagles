@@ -1,7 +1,7 @@
 
 #include "openeaagles/graphics/factory.h"
 
-#include "openeaagles/basic/Object.h"
+#include "openeaagles/base/Object.h"
 
 #include "openeaagles/graphics/Graphic.h"
 #include "openeaagles/graphics/Display.h"

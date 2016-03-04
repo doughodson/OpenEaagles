@@ -6,11 +6,11 @@
 #include "openeaagles/simulation/Track.h"
 #include "openeaagles/simulation/TrackManager.h"
 #include "openeaagles/simulation/TabLogger.h"
-#include "openeaagles/basic/List.h"
-#include "openeaagles/basic/PairStream.h"
-#include "openeaagles/basic/osg/Matrix"
-#include "openeaagles/basic/units/Angles.h"
-#include "openeaagles/basic/units/Distances.h"
+#include "openeaagles/base/List.h"
+#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/osg/Matrix"
+#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/base/units/Distances.h"
 
 namespace oe {
 namespace simulation {

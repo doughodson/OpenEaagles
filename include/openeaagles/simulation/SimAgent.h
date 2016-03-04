@@ -4,7 +4,7 @@
 #ifndef __oe_simulation_SimAgent_H__
 #define __oe_simulation_SimAgent_H__
 
-#include "openeaagles/basic/ubf/Agent.h"
+#include "openeaagles/base/ubf/Agent.h"
 
 namespace oe {
 namespace simulation {

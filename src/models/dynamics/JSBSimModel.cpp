@@ -1,17 +1,17 @@
 
 #include "openeaagles/models/dynamics/JSBSimModel.h"
 
-#include "openeaagles/basic/Number.h"
-#include "openeaagles/basic/functors/Tables.h"
-#include "openeaagles/basic/units/Angles.h"
-#include "openeaagles/basic/units/Distances.h"
-#include "openeaagles/basic/Statistic.h"
+#include "openeaagles/base/Number.h"
+#include "openeaagles/base/functors/Tables.h"
+#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/base/units/Distances.h"
+#include "openeaagles/base/Statistic.h"
 #include "openeaagles/simulation/Player.h"
 #include "openeaagles/simulation/Simulation.h"
-#include "openeaagles/basic/List.h"
-#include "openeaagles/basic/PairStream.h"
-#include "openeaagles/basic/String.h"
-#include "openeaagles/basic/Integer.h"
+#include "openeaagles/base/List.h"
+#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/String.h"
+#include "openeaagles/base/Integer.h"
 
 // JSBSim model headers
 #include <JSBSim/FGFDMExec.h>

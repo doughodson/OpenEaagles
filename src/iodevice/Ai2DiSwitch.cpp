@@ -1,10 +1,10 @@
 
 #include "openeaagles/iodevice/Ai2DiSwitch.h"
 
-#include "openeaagles/basic/IoData.h"
-#include "openeaagles/basic/IoDevice.h"
-#include "openeaagles/basic/IoHandler.h"
-#include "openeaagles/basic/Number.h"
+#include "openeaagles/base/IoData.h"
+#include "openeaagles/base/IoDevice.h"
+#include "openeaagles/base/IoHandler.h"
+#include "openeaagles/base/Number.h"
 
 namespace oe {
 namespace iodevice {

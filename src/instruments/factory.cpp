@@ -1,7 +1,7 @@
 
 #include "openeaagles/instruments/factory.h"
 
-#include "openeaagles/basic/Object.h"
+#include "openeaagles/base/Object.h"
 
 // Top Level objects
 #include "openeaagles/instruments/Instrument.h"

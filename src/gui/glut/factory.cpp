@@ -1,7 +1,7 @@
 
 #include "openeaagles/gui/glut/factory.h"
 
-#include "openeaagles/basic/Object.h"
+#include "openeaagles/base/Object.h"
 
 #include "openeaagles/gui/glut/GlutDisplay.h"
 #include "openeaagles/gui/glut/Shapes3D.h"

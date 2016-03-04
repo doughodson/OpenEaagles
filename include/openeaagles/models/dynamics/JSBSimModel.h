@@ -6,7 +6,7 @@
 #define __oe_models_JSBSimModel_H__
 
 #include "openeaagles/simulation/dynamics/AerodynamicsModel.h"
-#include "openeaagles/basic/String.h"
+#include "openeaagles/base/String.h"
 
 namespace JSBSim {
     class FGFDMExec;

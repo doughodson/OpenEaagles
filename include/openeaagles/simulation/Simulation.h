@@ -4,8 +4,8 @@
 #ifndef __oe_simulation_Simulation_H__
 #define __oe_simulation_Simulation_H__
 
-#include "openeaagles/basic/Component.h"
-#include "openeaagles/basic/safe_queue.h"
+#include "openeaagles/base/Component.h"
+#include "openeaagles/base/safe_queue.h"
 
 namespace oe {
    namespace basic { class Distance; class EarthModel; class LatLon; class Pair; class Time; class Terrain; }

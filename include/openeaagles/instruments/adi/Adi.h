@@ -17,7 +17,7 @@
 #define __oe_instruments_Adi_H__
 
 #include "openeaagles/instruments/Instrument.h"
-#include "openeaagles/basic/units/Angles.h"
+#include "openeaagles/base/units/Angles.h"
 
 namespace oe {
 namespace instruments {

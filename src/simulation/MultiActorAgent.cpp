@@ -4,13 +4,13 @@
 
 #include "openeaagles/simulation/MultiActorAgent.h"
 
-#include "openeaagles/basic/ubf/Action.h"
-#include "openeaagles/basic/ubf/Behavior.h"
-#include "openeaagles/basic/ubf/State.h"
+#include "openeaagles/base/ubf/Action.h"
+#include "openeaagles/base/ubf/Behavior.h"
+#include "openeaagles/base/ubf/State.h"
 
-#include "openeaagles/basic/Pair.h"
-#include "openeaagles/basic/PairStream.h"
-#include "openeaagles/basic/String.h"
+#include "openeaagles/base/Pair.h"
+#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/String.h"
 
 #include "openeaagles/simulation/Player.h"
 #include "openeaagles/simulation/Simulation.h"

@@ -4,16 +4,16 @@
 #ifndef __oe_simulation_Player_H__
 #define __oe_simulation_Player_H__
 
-#include "openeaagles/basic/Component.h"
+#include "openeaagles/base/Component.h"
 
-#include "openeaagles/basic/String.h"
-#include "openeaagles/basic/Pair.h"
-#include "openeaagles/basic/osg/Vec3"
-#include "openeaagles/basic/osg/Vec4"
-#include "openeaagles/basic/osg/Matrix"
-#include "openeaagles/basic/osg/Quat"
-#include "openeaagles/basic/units/Angles.h"
-#include "openeaagles/basic/units/Distances.h"
+#include "openeaagles/base/String.h"
+#include "openeaagles/base/Pair.h"
+#include "openeaagles/base/osg/Vec3"
+#include "openeaagles/base/osg/Vec4"
+#include "openeaagles/base/osg/Matrix"
+#include "openeaagles/base/osg/Quat"
+#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/base/units/Distances.h"
 
 #include "openeaagles/simulation/SynchronizedState.h"
 

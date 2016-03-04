@@ -10,14 +10,14 @@
 
 #include "openeaagles/simulation/Radar.h"
 #include "openeaagles/simulation/Simulation.h"
-#include "openeaagles/basic/List.h"
-#include "openeaagles/basic/NetHandler.h"
-#include "openeaagles/basic/Pair.h"
-#include "openeaagles/basic/PairStream.h"
-#include "openeaagles/basic/String.h"
-#include "openeaagles/basic/units/Angles.h"
-#include "openeaagles/basic/units/Distances.h"
-#include "openeaagles/basic/units/Times.h"
+#include "openeaagles/base/List.h"
+#include "openeaagles/base/NetHandler.h"
+#include "openeaagles/base/Pair.h"
+#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/String.h"
+#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/base/units/Distances.h"
+#include "openeaagles/base/units/Times.h"
 
 #include <cstdlib>
 #include <cstring>

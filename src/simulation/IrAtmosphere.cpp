@@ -7,12 +7,12 @@
 #include "openeaagles/simulation/IrSensor.h"
 #include "openeaagles/simulation/Gimbal.h"
 #include "openeaagles/simulation/Player.h"
-#include "openeaagles/basic/List.h"
-#include "openeaagles/basic/functors/Tables.h"
-#include "openeaagles/basic/Number.h"
+#include "openeaagles/base/List.h"
+#include "openeaagles/base/functors/Tables.h"
+#include "openeaagles/base/Number.h"
 
-#include "openeaagles/basic/Nav.h"
-#include "openeaagles/basic/units/Distances.h"
+#include "openeaagles/base/Nav.h"
+#include "openeaagles/base/units/Distances.h"
 
 #include <cmath>
 

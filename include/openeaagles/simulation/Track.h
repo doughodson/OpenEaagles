@@ -4,12 +4,12 @@
 #ifndef __oe_simulation_Track_H__
 #define __oe_simulation_Track_H__
 
-#include "openeaagles/basic/Object.h"
+#include "openeaagles/base/Object.h"
 
-#include "openeaagles/basic/List.h"
-#include "openeaagles/basic/osg/Vec3"
-#include "openeaagles/basic/units/Angles.h"
-#include "openeaagles/basic/units/Distances.h"
+#include "openeaagles/base/List.h"
+#include "openeaagles/base/osg/Vec3"
+#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/base/units/Distances.h"
 
 namespace oe {
 namespace simulation {

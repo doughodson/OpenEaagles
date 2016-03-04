@@ -42,7 +42,7 @@
 #ifndef __oe_maps_rpf_TexturePager_H__
 #define __oe_maps_rpf_TexturePager_H__
 
-#include "openeaagles/basic/Object.h"
+#include "openeaagles/base/Object.h"
 #include "TextureTable.h"
 
 namespace oe {

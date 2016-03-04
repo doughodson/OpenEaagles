@@ -4,7 +4,7 @@
 #ifndef __oe_recorder_DataRecordHandle_H__
 #define __oe_recorder_DataRecordHandle_H__
 
-#include "openeaagles/basic/Object.h"
+#include "openeaagles/base/Object.h"
 
 namespace oe {
 namespace recorder {

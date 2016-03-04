@@ -4,12 +4,12 @@
 #include "openeaagles/simulation/ScanGimbal.h"
 #include "openeaagles/simulation/Emission.h"
 
-#include "openeaagles/basic/Identifier.h"
-#include "openeaagles/basic/Integer.h"
-#include "openeaagles/basic/List.h"
-#include "openeaagles/basic/PairStream.h"
-#include "openeaagles/basic/Pair.h"
-#include "openeaagles/basic/units/Angles.h"
+#include "openeaagles/base/Identifier.h"
+#include "openeaagles/base/Integer.h"
+#include "openeaagles/base/List.h"
+#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/Pair.h"
+#include "openeaagles/base/units/Angles.h"
 
 #include <cmath>
 

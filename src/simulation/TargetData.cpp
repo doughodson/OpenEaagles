@@ -1,11 +1,11 @@
 #include "openeaagles/simulation/TargetData.h"
 
-#include "openeaagles/basic/Identifier.h"
-#include "openeaagles/basic/Number.h"
-#include "openeaagles/basic/String.h"
-#include "openeaagles/basic/units/Angles.h"
-#include "openeaagles/basic/units/Distances.h"
-#include "openeaagles/basic/units/Times.h"
+#include "openeaagles/base/Identifier.h"
+#include "openeaagles/base/Number.h"
+#include "openeaagles/base/String.h"
+#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/base/units/Distances.h"
+#include "openeaagles/base/units/Times.h"
 
 namespace oe {
 namespace simulation {

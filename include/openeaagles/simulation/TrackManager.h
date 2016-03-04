@@ -5,7 +5,7 @@
 #define __oe_simulation_TrackManager_H__
 
 #include "openeaagles/simulation/System.h"
-#include "openeaagles/basic/safe_queue.h"
+#include "openeaagles/base/safe_queue.h"
 
 namespace oe {
 namespace simulation {

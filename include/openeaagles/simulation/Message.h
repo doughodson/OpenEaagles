@@ -4,9 +4,9 @@
 #ifndef __oe_simulation_Message_H__
 #define __oe_simulation_Message_H__
 
-#include "openeaagles/basic/Object.h"
-#include "openeaagles/basic/String.h"
-#include "openeaagles/basic/List.h"
+#include "openeaagles/base/Object.h"
+#include "openeaagles/base/String.h"
+#include "openeaagles/base/List.h"
 
 namespace oe {
 namespace simulation {

@@ -16,10 +16,10 @@
 #include "openeaagles/simulation/Station.h"
 #include "openeaagles/simulation/StoresMgr.h"
 #include "openeaagles/simulation/Weapon.h"
-#include "openeaagles/basic/Nav.h"
-#include "openeaagles/basic/NetHandler.h"
-#include "openeaagles/basic/Pair.h"
-#include "openeaagles/basic/PairStream.h"
+#include "openeaagles/base/Nav.h"
+#include "openeaagles/base/NetHandler.h"
+#include "openeaagles/base/Pair.h"
+#include "openeaagles/base/PairStream.h"
 
 #include <cstdio>
 #include <cmath>

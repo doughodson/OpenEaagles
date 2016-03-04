@@ -3,8 +3,8 @@
 #include "openeaagles/recorder/protobuf/DataRecord.pb.h"
 #include "openeaagles/recorder/DataRecordHandle.h"
 
-#include "openeaagles/basic/units/Times.h"
-#include "openeaagles/basic/String.h"
+#include "openeaagles/base/units/Times.h"
+#include "openeaagles/base/String.h"
 
 #include <iomanip>
 

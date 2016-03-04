@@ -1,7 +1,7 @@
 #include "openeaagles/graphics/Font.h"
-#include "openeaagles/basic/Number.h"
-#include "openeaagles/basic/List.h"
-#include "openeaagles/basic/String.h"
+#include "openeaagles/base/Number.h"
+#include "openeaagles/base/List.h"
+#include "openeaagles/base/String.h"
 
 #include <cstring>
 

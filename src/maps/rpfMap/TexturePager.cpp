@@ -6,8 +6,8 @@
 #include "openeaagles/maps/rpfMap/CadrgTocEntry.h"
 #include "openeaagles/graphics/Texture.h"
 #include "openeaagles/maps/rpfMap/CadrgMap.h"
-#include "openeaagles/basic/Pair.h"
-#include "openeaagles/basic/List.h"
+#include "openeaagles/base/Pair.h"
+#include "openeaagles/base/List.h"
 
 namespace oe {
 namespace maps  {

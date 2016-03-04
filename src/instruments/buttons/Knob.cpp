@@ -1,7 +1,7 @@
 #include "openeaagles/instruments/buttons/Knob.h"
-#include "openeaagles/basic/units/Angles.h"
+#include "openeaagles/base/units/Angles.h"
 #include "openeaagles/graphics/Display.h"
-#include "openeaagles/basic/functors/Tables.h"
+#include "openeaagles/base/functors/Tables.h"
 #include <GL/glu.h>
 
 namespace oe {

@@ -2,8 +2,8 @@
 #include "openeaagles/recorder/NetOutput.h"
 #include "openeaagles/recorder/protobuf/DataRecord.pb.h"
 #include "openeaagles/recorder/DataRecordHandle.h"
-#include "openeaagles/basic/NetHandler.h"
-#include "openeaagles/basic/Number.h"
+#include "openeaagles/base/NetHandler.h"
+#include "openeaagles/base/Number.h"
 
 namespace oe {
 namespace recorder {

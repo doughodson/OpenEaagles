@@ -3,11 +3,11 @@
 #include "openeaagles/simulation/Stores.h"
 #include "openeaagles/simulation/Weapon.h"
 
-#include "openeaagles/basic/Number.h"
-#include "openeaagles/basic/String.h"
-#include "openeaagles/basic/Identifier.h"
-#include "openeaagles/basic/Pair.h"
-#include "openeaagles/basic/PairStream.h"
+#include "openeaagles/base/Number.h"
+#include "openeaagles/base/String.h"
+#include "openeaagles/base/Identifier.h"
+#include "openeaagles/base/Pair.h"
+#include "openeaagles/base/PairStream.h"
 
 namespace oe {
 namespace simulation {

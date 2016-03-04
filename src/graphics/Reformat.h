@@ -8,7 +8,7 @@
 #ifndef __FLEX_LEXER_H
 #undef yyFlexLexer
 #define yyFlexLexer rfFlexLexer
-#include "../basic/FlexLexer.h"
+#include "../base/FlexLexer.h"
 #endif
 
 #include "openeaagles/graphics/Readouts.h"
